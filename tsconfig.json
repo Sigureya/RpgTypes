@@ -1,0 +1,31 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "ESNext",
+    "jsx": "react-jsx",
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
+    "strict": true,
+    "strictBindCallApply": true,
+    "strictPropertyInitialization": false,
+    "skipLibCheck": true,
+    "baseUrl": ".",
+    "paths": {
+      "@app/*": ["src/app/*"],
+      "@view/*": ["src/view/*"],
+      "@mzt/*": ["src/mzTypes/*"],
+      "@utils/*": ["src/utils/*"],
+      "@api/*": ["src/api/*"]
+    }
+  },
+  "include": [
+    "src",
+    "game/js/plugins/**/*.js",
+    "game/js/rmmz*.js",
+    "game/js/plugins/**/*.js"
+  ],
+  "files": ["src/mzTypes/globals.d.ts"],
+  "exclude": ["game/js/plugins/exclude/**/*.js"]
+}
