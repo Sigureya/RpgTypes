@@ -1,8 +1,54 @@
 import type { CommandParameters } from "@schema/paramaters";
 import type * as $ from "@schema/codes";
+import type { EventCommand } from "@schema/types";
+import { Game_Actor, Game_Battler } from "@niokasgami/rpg-maker-mz-typescript";
 
-// TODO: イベントコマンド以外のメソッドは、必要になったら書き足す
-export declare class Game_Interpreter {
+export declare class Game_Interpreter extends Game_EventCommandExecuter {
+  constructor(depth: number);
+  clear(): void;
+  setup(list: EventCommand[], eventId: number): void;
+  loadImages(): void;
+  eventId(): number;
+  isOnCurrentMap(): boolean;
+  setupReservedCommonEvent(): boolean;
+  isRunning(): boolean;
+  update(): void;
+  updateChild(): boolean;
+  updateWait(): boolean;
+  updateWaitCount(): boolean;
+  updateWaitMode(): boolean;
+  setWaitMode(waitMode: string): void;
+  wait(duration: number): void;
+  fadeSpeed(): number;
+  executeCommand(): boolean;
+  checkFreeze(): boolean;
+  terminate(): void;
+  skipBranch(): void;
+  currentCommand(): EventCommand | undefined;
+  nextEventCode(): keyof CommandParameters;
+
+  iterateActorId(param: number, callback: (actor: Game_Actor) => void): void;
+  iterateActorEx(
+    param1: number,
+    param2: number,
+    callback: (actor: Game_Actor) => void
+  ): void;
+  iterateActorIndex(param: number, callback: (actor: Game_Actor) => void): void;
+  iterateBattler(
+    param1: number,
+    param2: number,
+    callback: (battler: Game_Battler) => void
+  ): void;
+  character(param: number): void;
+  operateValue(operation: number, operandType: number, operand: number): number;
+
+  changeHp(target: Game_Battler, value: number, allowDeath: boolean): void;
+
+  setupChoices(params: CommandParameters[typeof $.SHOW_CHOICES]): void;
+}
+
+// イベントコマンドの定義用 直接は触れないでほしいのでexportしない
+declare class Game_EventCommandExecuter {
   command101(param: CommandParameters[typeof $.SHOW_MESSAGE]): boolean;
   command102(param: CommandParameters[typeof $.SHOW_CHOICES]): boolean;
   command103(param: CommandParameters[typeof $.INPUT_NUMBER]): boolean;
