@@ -3,14 +3,14 @@ import { Buff } from "./buff";
 import { ParamArray, ParamId } from "./param";
 import { State } from "./state";
 import { ItemUser } from "./itemUser";
-import { DataSkill } from "src/game/data/item/skill";
+import { Data_Skill } from "src/game/data/item/skill";
 
 export declare class Game_BattlerBase implements Buff, State, ItemUser {
   canInput(): boolean;
   canMove(): boolean;
   isConfused(): boolean;
   confusionLevel(): boolean;
-  isSkillWtypeOk(skill: DataSkill): boolean;
+  isSkillWtypeOk(skill: Data_Skill): boolean;
   sortStates(): number;
   restriction(): number;
   addNewState(stateId: number): void;

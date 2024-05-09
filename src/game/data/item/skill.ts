@@ -1,1 +1,1 @@
-export interface DataSkill {}
+export interface Data_Skill {}
