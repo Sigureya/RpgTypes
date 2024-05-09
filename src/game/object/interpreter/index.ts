@@ -1,8 +1,7 @@
 import type { CommandParameters } from "@schema/paramaters";
 import type * as $ from "@schema/codes";
 import type { EventCommand } from "@schema/types";
-import { Game_Actor, Game_Battler } from "@niokasgami/rpg-maker-mz-typescript";
-
+import { Game_Actor, Game_Battler } from "../battler";
 export declare class Game_Interpreter extends Game_EventCommandExecuter {
   constructor(depth: number);
   clear(): void;

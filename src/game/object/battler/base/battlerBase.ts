@@ -13,7 +13,14 @@ interface Members {
   _paramPlus: ParamArray;
 }
 
-declare class Game_BattlerBase implements Members, Buff, State {
+export declare class Game_BattlerBase implements Members, Buff, State {
+  sortStates(): number;
+  restriction(): number;
+  addNewState(stateId: number): void;
+  stateMotionIndex(): number;
+  stateOverlayIndex(): number;
+  isDead(): boolean;
+  isAlive(): boolean;
   _buffs: ParamArray;
   _buffTurns: ParamArray;
   _hp: number;

@@ -1,2 +1,3 @@
-export * from "./battlerBase";
-export * from "./battlerBaseStatic";
+import { Game_BattlerBase } from "./battlerBase";
+
+export { Game_BattlerBase };

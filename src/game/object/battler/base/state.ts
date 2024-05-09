@@ -9,5 +9,15 @@ export interface State {
   isStateExpired(stateId: number): boolean;
   updateStateTurns(): void;
 
+  sortStates(): number;
+  restriction(): number;
+  addNewState(stateId: number): void;
+
+  stateMotionIndex(): number;
+  stateOverlayIndex(): number;
+
+  isDead(): boolean;
+  isAlive(): boolean;
+
   states(): DataState[];
 }

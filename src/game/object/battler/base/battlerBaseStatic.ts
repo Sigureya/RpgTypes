@@ -1,1 +1,1 @@
-export declare namespace Game_BattlerBase {}
+declare namespace Game_BattlerBase {}
