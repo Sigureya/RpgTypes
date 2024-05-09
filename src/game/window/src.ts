@@ -15,19 +15,24 @@ import { Data_Equip } from "../object/battler/base/equip";
 import { SaveFileInfo } from "../data/saveFileInfo";
 import { Data_Skill } from "../data/item/skill";
 
+interface Selectable<T> {
+  itemAt(index: number): T;
+  item(): T;
+}
+
 //-----------------------------------------------------------------------------
 // Window_Base
 //
 // The superclass of all windows within the game.
 
 declare class Window_Base {
-  initialize(rect: Rectangle): any;
+  initialize(rect: Rectangle): void;
 
   destroy(options: any): any;
 
   lineHeight(): any;
 
-  itemWidth(): any;
+  itemWidth(): number;
 
   itemHeight(): any;
 
@@ -49,7 +54,7 @@ declare class Window_Base {
 
   destroyContents(): any;
 
-  contentsWidth(): any;
+  contentsWidth(): number;
 
   contentsHeight(): any;
 
@@ -67,9 +72,9 @@ declare class Window_Base {
 
   close(): any;
 
-  isOpening(): any;
+  isOpening(): boolean;
 
-  isClosing(): any;
+  isClosing(): boolean;
 
   show(): any;
 
@@ -89,7 +94,7 @@ declare class Window_Base {
 
   changePaintOpacity(enabled: boolean): any;
 
-  drawrect(x: number, y: number, width: number, height: number): any;
+  drawrect(x: number, y: number, width: number, height: number): void;
 
   drawText(
     text: string,
@@ -99,9 +104,9 @@ declare class Window_Base {
     align: string
   ): any;
 
-  textWidth(text: string): any;
+  textWidth(text: string): number;
 
-  drawTextEx(text: string, x: number, y: number, width: number): any;
+  drawTextEx(text: string, x: number, y: number, width: number): void;
 
   textSizeEx(text: string): any;
 
@@ -133,7 +138,7 @@ declare class Window_Base {
 
   processColorChange(colorIndex: number): any;
 
-  processDrawIcon(iconIndex: number, textState: TextState): any;
+  processDrawIcon(iconIndex: number, textState: TextState): void;
 
   makeFontBigger(): any;
 
@@ -143,7 +148,7 @@ declare class Window_Base {
 
   maxFontSizeInLine(line: number): any;
 
-  drawIcon(iconIndex: number, x: number, y: number): any;
+  drawIcon(iconIndex: number, x: number, y: number): void;
 
   drawItemName(
     item: Data_NamedItem,
@@ -184,18 +189,18 @@ declare class Window_Base {
 //
 // The window class with scroll functions.
 
-declare class Window_Scrollable {
-  initialize(rect: Rectangle): any;
+declare class Window_Scrollable extends Window_Base {
+  initialize(rect: Rectangle): void;
 
   clearScrollStatus(): any;
 
-  scrollX(): any;
+  scrollX(): number;
 
-  scrollY(): any;
+  scrollY(): number;
 
-  scrollBaseX(): any;
+  scrollBaseX(): number;
 
-  scrollBaseY(): any;
+  scrollBaseY(): number;
 
   scrollTo(x: number, y: number): any;
 
@@ -207,15 +212,15 @@ declare class Window_Scrollable {
 
   setScrollAccel(x: number, y: number): void;
 
-  overallWidth(): any;
+  overallWidth(): number;
 
   overallHeight(): any;
 
-  maxScrollX(): any;
+  maxScrollX(): number;
 
-  maxScrollY(): any;
+  maxScrollY(): number;
 
-  scrollBlockWidth(): any;
+  scrollBlockWidth(): number;
 
   scrollBlockHeight(): any;
 
@@ -229,13 +234,13 @@ declare class Window_Scrollable {
 
   processTouchScroll(): void;
 
-  isWheelScrollEnabled(): any;
+  isWheelScrollEnabled(): boolean;
 
-  isTouchScrollEnabled(): any;
+  isTouchScrollEnabled(): boolean;
 
-  isScrollEnabled(): any;
+  isScrollEnabled(): boolean;
 
-  isTouchedInsideFrame(): any;
+  isTouchedInsideFrame(): boolean;
 
   onTouchScrollStart(): any;
 
@@ -260,8 +265,8 @@ declare class Window_Scrollable {
   //
   // The window class with cursor movement functions.
 }
-declare class Window_Selectable {
-  initialize(rect: Rectangle): any;
+export declare class Window_Selectable extends Window_Scrollable {
+  initialize(rect: Rectangle): void;
 
   index(): number;
 
@@ -275,13 +280,13 @@ declare class Window_Selectable {
 
   maxCols(): any;
 
-  maxItems(): any;
+  maxItems(): number;
 
   colSpacing(): any;
 
   rowSpacing(): any;
 
-  itemWidth(): any;
+  itemWidth(): number;
 
   itemHeight(): any;
 
@@ -317,9 +322,9 @@ declare class Window_Selectable {
 
   maxPageItems(): any;
 
-  maxVisibleItems(): any;
+  maxVisibleItems(): boolean;
 
-  isHorizontal(): any;
+  isHorizontal(): boolean;
 
   topindex(): number;
 
@@ -337,13 +342,13 @@ declare class Window_Selectable {
 
   setHandler(symbol: string, method: () => void): void;
 
-  isHandled(symbol: string): any;
+  isHandled(symbol: string): boolean;
 
   callHandler(symbol: string): any;
 
-  isOpenAndActive(): any;
+  isOpenAndActive(): boolean;
 
-  isCursorMovable(): any;
+  isCursorMovable(): boolean;
 
   cursorDown(wrap: boolean): any;
 
@@ -357,7 +362,7 @@ declare class Window_Selectable {
 
   cursorPageup(): any;
 
-  isScrollEnabled(): any;
+  isScrollEnabled(): boolean;
 
   update(): any;
 
@@ -367,7 +372,7 @@ declare class Window_Selectable {
 
   processTouch(): void;
 
-  isHoverEnabled(): any;
+  isHoverEnabled(): boolean;
 
   onTouchSelect(trigger: boolean): any;
 
@@ -379,15 +384,15 @@ declare class Window_Selectable {
 
   hitTest(x: number, y: number): any;
 
-  isTouchOkEnabled(): any;
+  isTouchOkEnabled(): boolean;
 
-  isOkEnabled(): any;
+  isOkEnabled(): boolean;
 
-  isCancelEnabled(): any;
+  isCancelEnabled(): boolean;
 
-  isOkTriggered(): any;
+  isOkTriggered(): boolean;
 
-  isCancelTriggered(): any;
+  isCancelTriggered(): boolean;
 
   processOk(): void;
 
@@ -403,7 +408,7 @@ declare class Window_Selectable {
 
   updateInputData(): any;
 
-  ensureCursorVisible(smooth: boolean): any;
+  ensureCursorVisible(smooth: boolean): boolean;
 
   callUpdateHelp(): any;
 
@@ -411,23 +416,23 @@ declare class Window_Selectable {
 
   setHelpWindowItem(item: Data_NamedItem): void;
 
-  isCurrentItemEnabled(): any;
+  isCurrentItemEnabled(): boolean;
 
-  drawAllItems(): any;
+  drawAllItems(): void;
 
-  drawItem(/*index*/): any;
+  drawItem(index: number): void;
 
   clearItem(index: number): any;
 
-  drawItemBackground(index: number): any;
+  drawItemBackground(index: number): void;
 
   drawBackgroundRect(rect: Rectangle): void;
 
-  redrawItem(index: number): any;
+  redrawItem(index: number): void;
 
-  redrawCurrentItem(): any;
+  redrawCurrentItem(): void;
 
-  refresh(): any;
+  refresh(): void;
 
   paint(): any;
 
@@ -441,11 +446,11 @@ declare class Window_Selectable {
   // The superclass of windows for selecting a command.
 }
 declare class Window_Command {
-  initialize(rect: Rectangle): any;
+  initialize(rect: Rectangle): void;
 
-  maxItems(): any;
+  maxItems(): number;
 
-  clearCommandList(): any;
+  clearCommandList(): boolean;
 
   makeCommandList(): void;
 
@@ -453,11 +458,11 @@ declare class Window_Command {
 
   commandSymbol(index: number): any;
 
-  isCommandEnabled(index: number): any;
+  isCommandEnabled(index: number): boolean;
 
   currentData(): any;
 
-  isCurrentItemEnabled(): any;
+  isCurrentItemEnabled(): boolean;
 
   currentSymbol(): any;
 
@@ -471,15 +476,15 @@ declare class Window_Command {
 
   selectExt(ext: any): any;
 
-  drawItem(index: number): any;
+  drawItem(index: number): void;
 
   itemTextAlign(): any;
 
-  isOkEnabled(): any;
+  isOkEnabled(): boolean;
 
   callOkHandler(): any;
 
-  refresh(): any;
+  refresh(): void;
 
   //-----------------------------------------------------------------------------
   // Window_HorzCommand
@@ -487,7 +492,7 @@ declare class Window_Command {
   // The command window for the horizontal selection format.
 }
 declare class Window_HorzCommand {
-  initialize(rect: Rectangle): any;
+  initialize(rect: Rectangle): void;
 
   maxCols(): any;
 
@@ -499,7 +504,7 @@ declare class Window_HorzCommand {
   // The window for displaying the description of the selected item.
 }
 declare class Window_Help {
-  initialize(rect: Rectangle): any;
+  initialize(rect: Rectangle): void;
 
   setText(text: string): void;
 
@@ -507,7 +512,7 @@ declare class Window_Help {
 
   setItem(item: Data_NamedItem): void;
 
-  refresh(): any;
+  refresh(): void;
 }
 
 //-----------------------------------------------------------------------------
@@ -516,11 +521,11 @@ declare class Window_Help {
 // The window for displaying the party's gold.
 
 declare class Window_Gold {
-  initialize(rect: Rectangle): any;
+  initialize(rect: Rectangle): void;
 
   colSpacing(): any;
 
-  refresh(): any;
+  refresh(): void;
 
   value(): any;
 
@@ -535,11 +540,11 @@ declare class Window_Gold {
 // The superclass of windows for displaying actor status.
 
 declare class Window_StatusBase {
-  initialize(rect: Rectangle): any;
+  initialize(rect: Rectangle): void;
 
   loadFaceImages(): any;
 
-  refresh(): any;
+  refresh(): void;
 
   hideAdditionalSprites(): any;
 
@@ -557,11 +562,11 @@ declare class Window_StatusBase {
 
   gaugeLineHeight(): any;
 
-  drawActorCharacter(actor: Game_Actor, x: number, y: number): any;
+  drawActorCharacter(actor: Game_Actor, x: number, y: number): void;
 
   drawActorName(actor: Game_Actor, x: number, y: number, width: number): string;
 
-  drawActorClass(actor: Game_Actor, x: number, y: number, width: number): any;
+  drawActorClass(actor: Game_Actor, x: number, y: number, width: number): void;
 
   drawActorNickname(
     actor: Game_Actor,
@@ -570,11 +575,11 @@ declare class Window_StatusBase {
     width: number
   ): any;
 
-  drawActorLevel(actor: Game_Actor, x: number, y: number): any;
+  drawActorLevel(actor: Game_Actor, x: number, y: number): void;
 
-  drawActorIcons(actor: Game_Actor, x: number, y: number, width: number): any;
+  drawActorIcons(actor: Game_Actor, x: number, y: number, width: number): void;
 
-  drawActorSimpleStatus(actor: Game_Actor, x: number, y: number): any;
+  drawActorSimpleStatus(actor: Game_Actor, x: number, y: number): void;
 
   actorSlotName(actor: Game_Actor, index: number): string;
 
@@ -584,7 +589,7 @@ declare class Window_StatusBase {
   // The window for selecting a command on the menu screen.
 }
 declare class Window_MenuCommand {
-  initialize(rect: Rectangle): any;
+  initialize(rect: Rectangle): void;
 
   makeCommandList(): void;
 
@@ -604,13 +609,13 @@ declare class Window_MenuCommand {
 
   areMainCommandsEnabled(): any;
 
-  isFormationEnabled(): any;
+  isFormationEnabled(): boolean;
 
-  isOptionsEnabled(): any;
+  isOptionsEnabled(): boolean;
 
-  isSaveEnabled(): any;
+  isSaveEnabled(): boolean;
 
-  isGameEndEnabled(): any;
+  isGameEndEnabled(): boolean;
 
   processOk(): void;
 
@@ -622,27 +627,27 @@ declare class Window_MenuCommand {
   // The window for displaying party member status on the menu screen.
 }
 declare class Window_MenuStatus {
-  initialize(rect: Rectangle): any;
+  initialize(rect: Rectangle): void;
 
-  maxItems(): any;
+  maxItems(): number;
 
-  numVisibleRows(): any;
+  numVisibleRows(): boolean;
 
   itemHeight(): any;
 
   actor(index: number): any;
 
-  drawItem(index: number): any;
+  drawItem(index: number): void;
 
-  drawPendingItemBackground(index: number): any;
+  drawPendingItemBackground(index: number): void;
 
-  drawItemImage(index: number): any;
+  drawItemImage(index: number): void;
 
-  drawItemStatus(index: number): any;
+  drawItemStatus(index: number): void;
 
   processOk(): void;
 
-  isCurrentItemEnabled(): any;
+  isCurrentItemEnabled(): boolean;
 
   selectLast(): any;
 
@@ -660,7 +665,7 @@ declare class Window_MenuStatus {
   // The window for selecting a target actor on the item and skill screens.
 }
 declare class Window_MenuActor {
-  initialize(rect: Rectangle): any;
+  initialize(rect: Rectangle): void;
 
   processOk(): void;
 
@@ -674,7 +679,7 @@ declare class Window_MenuActor {
   // The window for selecting a category of items on the item and shop screens.
 }
 declare class Window_ItemCategory {
-  initialize(rect: Rectangle): any;
+  initialize(rect: Rectangle): void;
 
   maxCols(): any;
 
@@ -693,8 +698,11 @@ declare class Window_ItemCategory {
   //
   // The window for selecting an item on the item screen.
 }
-declare class Window_ItemList {
-  initialize(rect: Rectangle): any;
+declare class Window_ItemList
+  extends Window_Selectable
+  implements Selectable<Data_BaseItem>
+{
+  initialize(rect: Rectangle): void;
 
   setCategory(category: string): void;
 
@@ -702,33 +710,38 @@ declare class Window_ItemList {
 
   colSpacing(): any;
 
-  maxItems(): any;
+  maxItems(): number;
 
-  item(): any;
+  item(): Data_BaseItem;
 
-  itemAt(index: number): any;
+  itemAt(index: number): Data_BaseItem;
 
-  isCurrentItemEnabled(): any;
+  isCurrentItemEnabled(): boolean;
 
   includes(item: Data_BaseItem): any;
 
   needsNumber(): any;
 
-  isEnabled(item: Data_BaseItem): any;
+  isEnabled(item: Data_BaseItem): boolean;
 
-  makeItemList(): any;
+  makeItemList(): boolean;
 
   selectLast(): any;
 
-  drawItem(index: number): any;
+  drawItem(index: number): void;
 
-  numberWidth(): any;
+  numberWidth(): number;
 
-  drawItemNumber(item: Data_BaseItem, x: number, y: number, width: number): any;
+  drawItemNumber(
+    item: Data_BaseItem,
+    x: number,
+    y: number,
+    width: number
+  ): void;
 
   updateHelp(): any;
 
-  refresh(): any;
+  refresh(): void;
 
   //-----------------------------------------------------------------------------
   // Window_SkillType
@@ -765,8 +778,8 @@ declare class Window_SkillStatus {
   //
   // The window for selecting a skill on the skill screen.
 }
-declare class Window_SkillList {
-  initialize(rect: Rectangle): any;
+declare class Window_SkillList extends Window_Selectable {
+  initialize(rect: Rectangle): void;
 
   setActor(actor: Game_Actor): void;
 
@@ -776,31 +789,31 @@ declare class Window_SkillList {
 
   colSpacing(): any;
 
-  maxItems(): any;
+  maxItems(): number;
 
   item(): any;
 
   itemAt(index: number): any;
 
-  isCurrentItemEnabled(): any;
+  isCurrentItemEnabled(): boolean;
 
   includes(item: Data_Skill): any;
 
-  isEnabled(item: Data_Skill): any;
+  isEnabled(item: Data_Skill): boolean;
 
-  makeItemList(): any;
+  makeItemList(): boolean;
 
   selectLast(): any;
 
-  drawItem(index: number): any;
+  drawItem(index: number): void;
 
-  costWidth(): any;
+  costWidth(): number;
 
-  drawSkillCost(skill: Data_Skill, x: number, y: number, width: number): any;
+  drawSkillCost(skill: Data_Skill, x: number, y: number, width: number): void;
 
   updateHelp(): any;
 
-  refresh(): any;
+  refresh(): void;
 
   //-----------------------------------------------------------------------------
   // Window_EquipStatus
@@ -808,33 +821,33 @@ declare class Window_SkillList {
   // The window for displaying parameter changes on the equipment screen.
 }
 declare class Window_EquipStatus {
-  initialize(rect: Rectangle): any;
+  initialize(rect: Rectangle): void;
 
   setActor(actor: Game_Actor): void;
 
   colSpacing(): any;
 
-  refresh(): any;
+  refresh(): void;
 
   setTempActor(tempActor: Game_Actor): void;
 
-  drawAllParams(): any;
+  drawAllParams(): void;
 
-  drawItem(x: number, y: number, paramId: ParamId): any;
+  drawItem(x: number, y: number, paramId: ParamId): void;
 
   drawParamName(x: number, y: number, paramId: ParamId): string;
 
-  drawCurrentParam(x: number, y: number, paramId: ParamId): any;
+  drawCurrentParam(x: number, y: number, paramId: ParamId): void;
 
-  drawRightArrow(x: number, y: number): any;
+  drawRightArrow(x: number, y: number): void;
 
-  drawNewParam(x: number, y: number, paramId: ParamId): any;
+  drawNewParam(x: number, y: number, paramId: ParamId): void;
 
-  rightArrowWidth(): any;
+  rightArrowWidth(): number;
 
-  paramWidth(): any;
+  paramWidth(): number;
 
-  paramX(): any;
+  paramX(): number;
 
   paramY(index: number): any;
 
@@ -844,7 +857,7 @@ declare class Window_EquipStatus {
   // The window for selecting a command on the equipment screen.
 }
 declare class Window_EquipCommand {
-  initialize(rect: Rectangle): any;
+  initialize(rect: Rectangle): void;
 
   maxCols(): any;
 
@@ -856,25 +869,25 @@ declare class Window_EquipCommand {
   // The window for selecting an equipment slot on the equipment screen.
 }
 declare class Window_EquipSlot {
-  initialize(rect: Rectangle): any;
+  initialize(rect: Rectangle): void;
 
   setActor(actor: Game_Actor): void;
 
   update(): any;
 
-  maxItems(): any;
+  maxItems(): number;
 
   item(): any;
 
   itemAt(index: number): any;
 
-  drawItem(index: number): any;
+  drawItem(index: number): void;
 
-  slotNameWidth(): any;
+  slotNameWidth(): number;
 
-  isEnabled(index: number): any;
+  isEnabled(index: number): boolean;
 
-  isCurrentItemEnabled(): any;
+  isCurrentItemEnabled(): boolean;
 
   setStatusWindow(statusWindow: Window_Status): void;
 
@@ -888,7 +901,7 @@ declare class Window_EquipSlot {
   // The window for selecting an equipment item on the equipment screen.
 }
 declare class Window_EquipItem {
-  initialize(rect: Rectangle): any;
+  initialize(rect: Rectangle): void;
 
   maxCols(): any;
 
@@ -902,7 +915,7 @@ declare class Window_EquipItem {
 
   etypeId(): any;
 
-  isEnabled(/*item*/): any;
+  isEnabled(/*item*/): boolean;
 
   selectLast(): any;
 
@@ -918,23 +931,23 @@ declare class Window_EquipItem {
   // The window for displaying full status on the status screen.
 }
 declare class Window_Status {
-  initialize(rect: Rectangle): any;
+  initialize(rect: Rectangle): void;
 
   setActor(actor: Game_Actor): void;
 
-  refresh(): any;
+  refresh(): void;
 
-  drawBlock1(): any;
+  drawBlock1(): void;
 
-  block1Y(): any;
+  block1Y(): number;
 
-  drawBlock2(): any;
+  drawBlock2(): void;
 
-  block2Y(): any;
+  block2Y(): number;
 
-  drawBasicInfo(x: number, y: number): any;
+  drawBasicInfo(x: number, y: number): void;
 
-  drawExpInfo(x: number, y: number): any;
+  drawExpInfo(x: number, y: number): void;
 
   expTotalValue(): any;
 
@@ -946,17 +959,17 @@ declare class Window_Status {
   // The window for displaying parameters on the status screen.
 }
 declare class Window_StatusParams {
-  initialize(rect: Rectangle): any;
+  initialize(rect: Rectangle): void;
 
   setActor(actor: Game_Actor): void;
 
-  maxItems(): any;
+  maxItems(): number;
 
   itemHeight(): any;
 
-  drawItem(index: number): any;
+  drawItem(index: number): void;
 
-  drawItemBackground(/*index*/): any;
+  drawItemBackground(/*index*/): void;
 
   //-----------------------------------------------------------------------------
   // Window_StatusEquip
@@ -964,17 +977,17 @@ declare class Window_StatusParams {
   // The window for displaying equipment items on the status screen.
 }
 declare class Window_StatusEquip {
-  initialize(rect: Rectangle): any;
+  initialize(rect: Rectangle): void;
 
   setActor(actor: Game_Actor): void;
 
-  maxItems(): any;
+  maxItems(): number;
 
   itemHeight(): any;
 
-  drawItem(index: number): any;
+  drawItem(index: number): void;
 
-  drawItemBackground(/*index*/): any;
+  drawItemBackground(/*index*/): void;
 
   //-----------------------------------------------------------------------------
   // Window_Options
@@ -982,7 +995,7 @@ declare class Window_StatusEquip {
   // The window for changing various settings on the options screen.
 }
 declare class Window_Options {
-  initialize(rect: Rectangle): any;
+  initialize(rect: Rectangle): void;
 
   makeCommandList(): void;
 
@@ -990,13 +1003,13 @@ declare class Window_Options {
 
   addVolumeOptions(): any;
 
-  drawItem(index: number): any;
+  drawItem(index: number): void;
 
-  statusWidth(): any;
+  statusWidth(): number;
 
   statusText(index: number): any;
 
-  isVolumeSymbol(symbol: symbol): any;
+  isVolumeSymbol(symbol: symbol): boolean;
 
   booleanStatusText(value: boolean): any;
 
@@ -1024,35 +1037,35 @@ declare class Window_Options {
   // The window for selecting a save file on the save and load screens.
 }
 declare class Window_SavefileList {
-  initialize(rect: Rectangle): any;
+  initialize(rect: Rectangle): void;
 
   setMode(mode: string, autosave: boolean): void;
 
-  maxItems(): any;
+  maxItems(): number;
 
-  numVisibleRows(): any;
+  numVisibleRows(): boolean;
 
   itemHeight(): any;
 
-  drawItem(index: number): any;
+  drawItem(index: number): void;
 
   indexToSavefileId(index: number): any;
 
   savefileIdToIndex(savefileId: number): any;
 
-  isEnabled(savefileId: number): any;
+  isEnabled(savefileId: number): boolean;
 
   savefileId(): any;
 
   selectSavefile(savefileId: number): any;
 
-  drawTitle(savefileId: number, x: number, y: number): any;
+  drawTitle(savefileId: number, x: number, y: number): void;
 
-  drawContents(info: SaveFileInfo, rect: Rectangle): any;
+  drawContents(info: SaveFileInfo, rect: Rectangle): void;
 
-  drawPartyCharacters(info: SaveFileInfo, x: number, y: number): any;
+  drawPartyCharacters(info: SaveFileInfo, x: number, y: number): void;
 
-  drawPlaytime(info: SaveFileInfo, x: number, y: number, width: number): any;
+  drawPlaytime(info: SaveFileInfo, x: number, y: number, width: number): void;
 
   playOkSound(): any;
 
@@ -1062,7 +1075,7 @@ declare class Window_SavefileList {
   // The window for selecting buy/sell on the shop screen.
 }
 declare class Window_ShopCommand {
-  initialize(rect: Rectangle): any;
+  initialize(rect: Rectangle): void;
 
   setPurchaseOnly(purchaseOnly: boolean): void;
 
@@ -1076,11 +1089,11 @@ declare class Window_ShopCommand {
   // The window for selecting an item to buy on the shop screen.
 }
 declare class Window_ShopBuy {
-  initialize(rect: Rectangle): any;
+  initialize(rect: Rectangle): void;
 
   setupGoods(shopGoods: ShopGoods[]): void;
 
-  maxItems(): any;
+  maxItems(): number;
 
   item(): any;
 
@@ -1088,21 +1101,21 @@ declare class Window_ShopBuy {
 
   setMoney(money: number): void;
 
-  isCurrentItemEnabled(): any;
+  isCurrentItemEnabled(): boolean;
 
   price(item: Data_BaseItem): any;
 
-  isEnabled(item: Data_BaseItem): any;
+  isEnabled(item: Data_BaseItem): boolean;
 
-  refresh(): any;
+  refresh(): void;
 
-  makeItemList(): any;
+  makeItemList(): boolean;
 
   goodsToItem(goods: ShopGoods): any;
 
-  drawItem(index: number): any;
+  drawItem(index: number): void;
 
-  priceWidth(): any;
+  priceWidth(): number;
 
   setStatusWindow(statusWindow: Window_Status): void;
 
@@ -1125,9 +1138,9 @@ declare class Window_ShopSell {
   // screen.
 }
 declare class Window_ShopNumber {
-  initialize(rect: Rectangle): any;
+  initialize(rect: Rectangle): void;
 
-  isScrollEnabled(): any;
+  isScrollEnabled(): boolean;
 
   number(): any;
 
@@ -1139,35 +1152,35 @@ declare class Window_ShopNumber {
 
   placeButtons(): any;
 
-  totalButtonWidth(): any;
+  totalButtonWidth(): number;
 
   buttonSpacing(): any;
 
-  refresh(): any;
+  refresh(): void;
 
   drawCurrentItemName(): string;
 
-  drawMultiplicationSign(): any;
+  drawMultiplicationSign(): void;
 
   multiplicationSign(): any;
 
-  multiplicationSignX(): any;
+  multiplicationSignX(): number;
 
-  drawNumber(): any;
+  drawNumber(): void;
 
-  drawHorzLine(): any;
+  drawHorzLine(): void;
 
-  drawTotalPrice(): any;
+  drawTotalPrice(): void;
 
-  itemNameY(): any;
+  itemNameY(): number;
 
-  totalPriceY(): any;
+  totalPriceY(): number;
 
-  buttonY(): any;
+  buttonY(): number;
 
-  cursorWidth(): any;
+  cursorWidth(): number;
 
-  cursorX(): any;
+  cursorX(): number;
 
   maxDigits(): any;
 
@@ -1181,7 +1194,7 @@ declare class Window_ShopNumber {
 
   itemRect(): Rectangle;
 
-  isTouchOkEnabled(): any;
+  isTouchOkEnabled(): boolean;
 
   onButtonUp(): any;
 
@@ -1200,17 +1213,17 @@ declare class Window_ShopNumber {
   // equipment on the shop screen.
 }
 declare class Window_ShopStatus {
-  initialize(rect: Rectangle): any;
+  initialize(rect: Rectangle): void;
 
-  refresh(): any;
+  refresh(): void;
 
   setItem(item: Data_Equip): void;
 
-  isEquipItem(): any;
+  isEquipItem(): boolean;
 
-  drawPossession(x: number, y: number): any;
+  drawPossession(x: number, y: number): void;
 
-  drawEquipInfo(x: number, y: number): any;
+  drawEquipInfo(x: number, y: number): void;
 
   statusMembers(): any;
 
@@ -1218,7 +1231,7 @@ declare class Window_ShopStatus {
 
   maxPages(): any;
 
-  drawActorEquipInfo(x: number, y: number, actor: Game_Actor): any;
+  drawActorEquipInfo(x: number, y: number, actor: Game_Actor): void;
 
   paramId(): any;
 
@@ -1228,9 +1241,9 @@ declare class Window_ShopStatus {
 
   updatePage(): any;
 
-  isPageChangeEnabled(): any;
+  isPageChangeEnabled(): boolean;
 
-  isPageChangeRequested(): any;
+  isPageChangeRequested(): boolean;
 
   changePage(): any;
 
@@ -1240,7 +1253,7 @@ declare class Window_ShopStatus {
   // The window for editing an actor's name on the name input screen.
 }
 declare class Window_NameEdit {
-  initialize(rect: Rectangle): any;
+  initialize(rect: Rectangle): void;
 
   setup(actor: Game_Actor, maxLength: number): void;
 
@@ -1252,9 +1265,9 @@ declare class Window_NameEdit {
 
   back(): any;
 
-  faceWidth(): any;
+  faceWidth(): number;
 
-  charWidth(): any;
+  charWidth(): number;
 
   left(): any;
 
@@ -1262,15 +1275,15 @@ declare class Window_NameEdit {
 
   underlineColor(): any;
 
-  drawUnderline(index: number): any;
+  drawUnderline(index: number): void;
 
-  drawChar(index: number): any;
+  drawChar(index: number): void;
 
-  refresh(): any;
+  refresh(): void;
 }
 
 declare class Window_NameInput {
-  initialize(rect: Rectangle): any;
+  initialize(rect: Rectangle): void;
 
   setEditWindow(editWindow: Window_NameEdit): void;
 
@@ -1278,25 +1291,25 @@ declare class Window_NameInput {
 
   maxCols(): any;
 
-  maxItems(): any;
+  maxItems(): number;
 
-  itemWidth(): any;
+  itemWidth(): number;
 
   groupSpacing(): any;
 
   character(): any;
 
-  isPageChange(): any;
+  isPageChange(): boolean;
 
-  isOk(): any;
+  isOk(): boolean;
 
   itemRect(index: number): Rectangle;
 
-  drawItem(index: number): any;
+  drawItem(index: number): void;
 
   updateCursor(): any;
 
-  isCursorMovable(): any;
+  isCursorMovable(): boolean;
 
   cursorDown(wrap: boolean): any;
 
@@ -1314,7 +1327,7 @@ declare class Window_NameInput {
 
   processHandling(): void;
 
-  isCancelEnabled(): any;
+  isCancelEnabled(): boolean;
 
   processCancel(): void;
 
@@ -1348,11 +1361,11 @@ declare class Window_NameBox {
 
   updateBackground(): any;
 
-  windowWidth(): any;
+  windowWidth(): number;
 
   windowHeight(): any;
 
-  refresh(): any;
+  refresh(): void;
 
   //-----------------------------------------------------------------------------
   // Window_ChoiceList
@@ -1380,25 +1393,25 @@ declare class Window_ChoiceList {
 
   placeCancelButton(): any;
 
-  windowX(): any;
+  windowX(): number;
 
-  windowY(): any;
+  windowY(): number;
 
-  windowWidth(): any;
+  windowWidth(): number;
 
   windowHeight(): any;
 
-  numVisibleRows(): any;
+  numVisibleRows(): boolean;
 
   maxLines(): any;
 
-  maxChoiceWidth(): any;
+  maxChoiceWidth(): number;
 
   makeCommandList(): void;
 
-  drawItem(index: number): any;
+  drawItem(index: number): void;
 
-  isCancelEnabled(): any;
+  isCancelEnabled(): boolean;
 
   needsCancelButton(): any;
 
@@ -1420,31 +1433,31 @@ declare class Window_NumberInput {
 
   updatePlacement(): any;
 
-  windowWidth(): any;
+  windowWidth(): number;
 
   windowHeight(): any;
 
   maxCols(): any;
 
-  maxItems(): any;
+  maxItems(): number;
 
-  itemWidth(): any;
+  itemWidth(): number;
 
   itemRect(index: number): Rectangle;
 
-  isScrollEnabled(): any;
+  isScrollEnabled(): boolean;
 
-  isHoverEnabled(): any;
+  isHoverEnabled(): boolean;
 
   createButtons(): any;
 
   placeButtons(): any;
 
-  totalButtonWidth(): any;
+  totalButtonWidth(): number;
 
   buttonSpacing(): any;
 
-  buttonY(): any;
+  buttonY(): number;
 
   update(): any;
 
@@ -1452,15 +1465,15 @@ declare class Window_NumberInput {
 
   changeDigit(up: boolean): any;
 
-  isTouchOkEnabled(): any;
+  isTouchOkEnabled(): boolean;
 
-  isOkEnabled(): any;
+  isOkEnabled(): boolean;
 
-  isCancelEnabled(): any;
+  isCancelEnabled(): boolean;
 
   processOk(): void;
 
-  drawItem(index: number): any;
+  drawItem(index: number): void;
 
   onButtonUp(): any;
 
@@ -1474,7 +1487,7 @@ declare class Window_NumberInput {
   // The window used for the event command [Select Item].
 }
 declare class Window_EventItem {
-  initialize(rect: Rectangle): any;
+  initialize(rect: Rectangle): void;
 
   setMessageWindow(messageWindow: Window_Message): void;
 
@@ -1494,7 +1507,7 @@ declare class Window_EventItem {
 
   needsNumber(): any;
 
-  isEnabled(/*item*/): any;
+  isEnabled(/*item*/): boolean;
 
   onOk(): any;
 
@@ -1506,7 +1519,7 @@ declare class Window_EventItem {
   // The window for displaying text messages.
 }
 declare class Window_Message {
-  initialize(rect: Rectangle): any;
+  initialize(rect: Rectangle): void;
 
   initMembers(): any;
 
@@ -1546,7 +1559,7 @@ declare class Window_Message {
 
   updateInput(): any;
 
-  isAnySubWindowActive(): any;
+  isAnySubWindowActive(): boolean;
 
   updateMessage(): any;
 
@@ -1558,7 +1571,7 @@ declare class Window_Message {
 
   startInput(): any;
 
-  isTriggered(): any;
+  isTriggered(): boolean;
 
   doesContinue(): any;
 
@@ -1572,7 +1585,7 @@ declare class Window_Message {
 
   loadMessageFace(): any;
 
-  drawMessageFace(): any;
+  drawMessageFace(): void;
 
   processControlCharacter(text: TextState, c: string): any;
 
@@ -1580,7 +1593,7 @@ declare class Window_Message {
 
   processNewPage(text: TextState): any;
 
-  isEndOfText(text: TextState): any;
+  isEndOfText(text: TextState): boolean;
 
   needsNewPage(text: TextState): any;
 
@@ -1590,7 +1603,7 @@ declare class Window_Message {
 
   startPause(): any;
 
-  isWaiting(): any;
+  isWaiting(): boolean;
 
   //-----------------------------------------------------------------------------
   // Window_ScrollText
@@ -1599,13 +1612,13 @@ declare class Window_Message {
   // is handled as a window for convenience.
 }
 declare class Window_ScrollText {
-  initialize(rect: Rectangle): any;
+  initialize(rect: Rectangle): void;
 
   update(): any;
 
   startMessage(): any;
 
-  refresh(): any;
+  refresh(): void;
 
   updatePlacement(): any;
 
@@ -1615,7 +1628,7 @@ declare class Window_ScrollText {
 
   scrollSpeed(): any;
 
-  isFastForward(): any;
+  isFastForward(): boolean;
 
   fastForwardRate(): any;
 
@@ -1627,7 +1640,7 @@ declare class Window_ScrollText {
   // The window for displaying the map name on the map screen.
 }
 declare class Window_MapName {
-  initialize(rect: Rectangle): any;
+  initialize(rect: Rectangle): void;
 
   update(): any;
 
@@ -1639,9 +1652,9 @@ declare class Window_MapName {
 
   close(): any;
 
-  refresh(): any;
+  refresh(): void;
 
-  drawBackground(x: number, y: number, width: number, height: number): any;
+  drawBackground(x: number, y: number, width: number, height: number): void;
 
   //-----------------------------------------------------------------------------
   // Window_BattleLog
@@ -1650,7 +1663,7 @@ declare class Window_MapName {
   // handled as a window for convenience.
 }
 declare class Window_BattleLog {
-  initialize(rect: Rectangle): any;
+  initialize(rect: Rectangle): void;
 
   setSpriteset(spriteset: Spriteset_Battle): void;
 
@@ -1660,7 +1673,7 @@ declare class Window_BattleLog {
 
   messageSpeed(): any;
 
-  isBusy(): any;
+  isBusy(): boolean;
 
   update(): any;
 
@@ -1674,7 +1687,7 @@ declare class Window_BattleLog {
 
   callNextMethod(): any;
 
-  isFastForward(): any;
+  isFastForward(): boolean;
 
   push(methodName: string): any;
 
@@ -1704,7 +1717,7 @@ declare class Window_BattleLog {
 
   performDamage(target: Game_Battler): any;
 
-  performMiss(target: Game_Battler): any;
+  performMiss(target: Game_Battler): boolean;
 
   performRecovery(target: Game_Battler): any;
 
@@ -1722,9 +1735,9 @@ declare class Window_BattleLog {
 
   showAttackAnimation(subject: Game_Battler, targets: Game_Battler[]): any;
 
-  refresh(): any;
+  refresh(): void;
 
-  drawBackground(): any;
+  drawBackground(): void;
 
   backRect(): Rectangle;
 
@@ -1734,7 +1747,7 @@ declare class Window_BattleLog {
 
   backPaintOpacity(): any;
 
-  drawLineText(index: number): any;
+  drawLineText(index: number): void;
 
   startTurn(): any;
 
@@ -1746,51 +1759,55 @@ declare class Window_BattleLog {
 
   endAction(subject: Game_Battler): any;
 
-  displayCurrentState(subject: Game_Battler): any;
+  displayCurrentState(subject: Game_Battler): boolean;
 
-  displayRegeneration(subject: Game_Battler): any;
+  displayRegeneration(subject: Game_Battler): boolean;
 
-  displayAction(subject: Game_Battler, item: UsableItem): any;
+  displayAction(subject: Game_Battler, item: UsableItem): boolean;
 
-  displayItemMessage(fmt: string, subject: Game_Battler, item: UsableItem): any;
+  displayItemMessage(
+    fmt: string,
+    subject: Game_Battler,
+    item: UsableItem
+  ): boolean;
 
-  displayCounter(target: Game_Battler): any;
+  displayCounter(target: Game_Battler): boolean;
 
-  displayReflection(target: Game_Battler): any;
+  displayReflection(target: Game_Battler): boolean;
 
-  displaySubstitute(substitute: Game_Battler, target: Game_Battler): any;
+  displaySubstitute(substitute: Game_Battler, target: Game_Battler): boolean;
 
-  displayActionResults(subject: Game_Battler, target: Game_Battler): any;
+  displayActionResults(subject: Game_Battler, target: Game_Battler): boolean;
 
-  displayFailure(target: Game_Battler): any;
+  displayFailure(target: Game_Battler): boolean;
 
-  displayCritical(target: Game_Battler): any;
+  displayCritical(target: Game_Battler): boolean;
 
-  displayDamage(target: Game_Battler): any;
+  displayDamage(target: Game_Battler): boolean;
 
-  displayMiss(target: Game_Battler): any;
+  displayMiss(target: Game_Battler): boolean;
 
-  displayEvasion(target: Game_Battler): any;
+  displayEvasion(target: Game_Battler): boolean;
 
-  displayHpDamage(target: Game_Battler): any;
+  displayHpDamage(target: Game_Battler): boolean;
 
-  displayMpDamage(target: Game_Battler): any;
+  displayMpDamage(target: Game_Battler): boolean;
 
-  displayTpDamage(target: Game_Battler): any;
+  displayTpDamage(target: Game_Battler): boolean;
 
-  displayAffectedStatus(target: Game_Battler): any;
+  displayAffectedStatus(target: Game_Battler): boolean;
 
-  displayAutoAffectedStatus(target: Game_Battler): any;
+  displayAutoAffectedStatus(target: Game_Battler): boolean;
 
-  displayChangedStates(target: Game_Battler): any;
+  displayChangedStates(target: Game_Battler): boolean;
 
-  displayAddedStates(target: Game_Battler): any;
+  displayAddedStates(target: Game_Battler): boolean;
 
-  displayRemovedStates(target: Game_Battler): any;
+  displayRemovedStates(target: Game_Battler): boolean;
 
-  displayChangedBuffs(target: Game_Battler): any;
+  displayChangedBuffs(target: Game_Battler): boolean;
 
-  displayBuffs(target: Game_Battler, buffs: ParamId[], fmt: string): any;
+  displayBuffs(target: Game_Battler, buffs: ParamId[], fmt: string): boolean;
 
   makeHpDamageText(target: Game_Battler): any;
 
@@ -1804,7 +1821,7 @@ declare class Window_BattleLog {
   // The window for selecting whether to fight or escape on the battle screen.
 }
 declare class Window_PartyCommand {
-  initialize(rect: Rectangle): any;
+  initialize(rect: Rectangle): void;
 
   makeCommandList(): void;
 
@@ -1816,7 +1833,7 @@ declare class Window_PartyCommand {
   // The window for selecting an actor's action on the battle screen.
 }
 declare class Window_ActorCommand {
-  initialize(rect: Rectangle): any;
+  initialize(rect: Rectangle): void;
 
   makeCommandList(): void;
 
@@ -1842,7 +1859,7 @@ declare class Window_ActorCommand {
   // The window for displaying the status of party members on the battle screen.
 }
 declare class Window_BattleStatus {
-  initialize(rect: Rectangle): any;
+  initialize(rect: Rectangle): void;
 
   extraHeight(): any;
 
@@ -1850,7 +1867,7 @@ declare class Window_BattleStatus {
 
   itemHeight(): any;
 
-  maxItems(): any;
+  maxItems(): number;
 
   rowSpacing(): any;
 
@@ -1862,15 +1879,15 @@ declare class Window_BattleStatus {
 
   update(): any;
 
-  preparePartyRefresh(): any;
+  preparePartyrefresh(): void;
 
-  performPartyRefresh(): any;
+  performPartyrefresh(): void;
 
-  drawItem(index: number): any;
+  drawItem(index: number): void;
 
-  drawItemImage(index: number): any;
+  drawItemImage(index: number): void;
 
-  drawItemStatus(index: number): any;
+  drawItemStatus(index: number): void;
 
   faceRect(index: number): Rectangle;
 
@@ -1892,7 +1909,7 @@ declare class Window_BattleStatus {
   // The window for selecting a target actor on the battle screen.
 }
 declare class Window_BattleActor {
-  initialize(rect: Rectangle): any;
+  initialize(rect: Rectangle): void;
 
   show(): any;
 
@@ -1908,23 +1925,23 @@ declare class Window_BattleActor {
   // The window for selecting a target enemy on the battle screen.
 }
 declare class Window_BattleEnemy {
-  initialize(rect: Rectangle): any;
+  initialize(rect: Rectangle): void;
 
   maxCols(): any;
 
-  maxItems(): any;
+  maxItems(): number;
 
   enemy(): any;
 
   enemyindex(): number;
 
-  drawItem(index: number): any;
+  drawItem(index: number): void;
 
   show(): any;
 
   hide(): any;
 
-  refresh(): any;
+  refresh(): void;
 
   select(index: number): any;
 
@@ -1936,7 +1953,7 @@ declare class Window_BattleEnemy {
   // The window for selecting a skill to use on the battle screen.
 }
 declare class Window_BattleSkill {
-  initialize(rect: Rectangle): any;
+  initialize(rect: Rectangle): void;
 
   show(): any;
 
@@ -1948,7 +1965,7 @@ declare class Window_BattleSkill {
   // The window for selecting an item to use on the battle screen.
 }
 declare class Window_BattleItem {
-  initialize(rect: Rectangle): any;
+  initialize(rect: Rectangle): void;
 
   includes(item: UsableItem): any;
 
@@ -1962,11 +1979,11 @@ declare class Window_BattleItem {
   // The window for selecting New Game/Continue on the title screen.
 }
 declare class Window_TitleCommand {
-  initialize(rect: Rectangle): any;
+  initialize(rect: Rectangle): void;
 
   makeCommandList(): void;
 
-  isContinueEnabled(): any;
+  isContinueEnabled(): boolean;
 
   processOk(): void;
 
@@ -1978,7 +1995,7 @@ declare class Window_TitleCommand {
   // The window for selecting "Go to Title" on the game end screen.
 }
 declare class Window_GameEnd {
-  initialize(rect: Rectangle): any;
+  initialize(rect: Rectangle): void;
 
   makeCommandList(): void;
 
@@ -1988,9 +2005,9 @@ declare class Window_GameEnd {
   // The window for selecting a block of switches/variables on the debug screen.
 }
 declare class Window_DebugRange {
-  initialize(rect: Rectangle): any;
+  initialize(rect: Rectangle): void;
 
-  maxItems(): any;
+  maxItems(): number;
 
   update(): any;
 
@@ -1998,11 +2015,11 @@ declare class Window_DebugRange {
 
   topId(index: number): any;
 
-  isSwitchMode(index: number): any;
+  isSwitchMode(index: number): boolean;
 
-  drawItem(index: number): any;
+  drawItem(index: number): void;
 
-  isCancelTriggered(): any;
+  isCancelTriggered(): boolean;
 
   processCancel(): void;
 
@@ -2014,11 +2031,11 @@ declare class Window_DebugRange {
   // The window for displaying switches and variables on the debug screen.
 }
 declare class Window_DebugEdit {
-  initialize(rect: Rectangle): any;
+  initialize(rect: Rectangle): void;
 
-  maxItems(): any;
+  maxItems(): number;
 
-  drawItem(index: number): any;
+  drawItem(index: number): void;
 
   itemName(dataId: number): string;
 
