@@ -111,13 +111,13 @@ declare class Window_Base {
 
   flushTextState(text: TextState): any;
 
-  createTextBuffer(rtl): any;
+  createTextBuffer(rtl: boolean): any;
 
   convertEscapeCharacters(text: string): any;
 
-  actorName(n): any;
+  actorName(actorId: number): string;
 
-  partyMemberName(n): any;
+  partyMemberName(memberIndex: number): string;
 
   processCharacter(text: TextState): any;
 
@@ -145,7 +145,12 @@ declare class Window_Base {
 
   drawIcon(iconIndex: number, x: number, y: number): any;
 
-  drawItemName(item: Data_NamedItem, x: number, y: number, width: number): any;
+  drawItemName(
+    item: Data_NamedItem,
+    x: number,
+    y: number,
+    width: number
+  ): string;
 
   drawCurrencyValue(
     value: number,
@@ -155,7 +160,7 @@ declare class Window_Base {
     width: number
   ): any;
 
-  setBackgroundType(type): void;
+  setBackgroundType(type: number): void;
 
   showBackgroundDimmer(): any;
 
@@ -444,7 +449,7 @@ declare class Window_Command {
 
   makeCommandList(): void;
 
-  commandName(index: number): any;
+  commandName(index: number): string;
 
   commandSymbol(index: number): any;
 
@@ -538,7 +543,7 @@ declare class Window_StatusBase {
 
   hideAdditionalSprites(): any;
 
-  placeActorName(actor: Game_Actor, x: number, y: number): any;
+  placeActorName(actor: Game_Actor, x: number, y: number): string;
 
   placeStateIcon(actor: Game_Actor, x: number, y: number): any;
 
@@ -554,7 +559,7 @@ declare class Window_StatusBase {
 
   drawActorCharacter(actor: Game_Actor, x: number, y: number): any;
 
-  drawActorName(actor: Game_Actor, x: number, y: number, width: number): any;
+  drawActorName(actor: Game_Actor, x: number, y: number, width: number): string;
 
   drawActorClass(actor: Game_Actor, x: number, y: number, width: number): any;
 
@@ -571,7 +576,7 @@ declare class Window_StatusBase {
 
   drawActorSimpleStatus(actor: Game_Actor, x: number, y: number): any;
 
-  actorSlotName(actor: Game_Actor, index: number): any;
+  actorSlotName(actor: Game_Actor, index: number): string;
 
   //-----------------------------------------------------------------------------
   // Window_MenuCommand
@@ -643,7 +648,7 @@ declare class Window_MenuStatus {
 
   formationMode(): any;
 
-  setFormationMode(formationMode): void;
+  setFormationMode(formationMode: boolean): void;
 
   pendingindex(): number;
 
@@ -817,7 +822,7 @@ declare class Window_EquipStatus {
 
   drawItem(x: number, y: number, paramId: ParamId): any;
 
-  drawParamName(x: number, y: number, paramId: ParamId): any;
+  drawParamName(x: number, y: number, paramId: ParamId): string;
 
   drawCurrentParam(x: number, y: number, paramId: ParamId): any;
 
@@ -1140,7 +1145,7 @@ declare class Window_ShopNumber {
 
   refresh(): any;
 
-  drawCurrentItemName(): any;
+  drawCurrentItemName(): string;
 
   drawMultiplicationSign(): any;
 
@@ -1239,7 +1244,7 @@ declare class Window_NameEdit {
 
   setup(actor: Game_Actor, maxLength: number): void;
 
-  name(): any;
+  name(): string;
 
   restoreDefault(): any;
 
@@ -1485,7 +1490,7 @@ declare class Window_EventItem {
 
   placeCancelButton(): any;
 
-  includes(item): any;
+  includes(item: Data_BaseItem): any;
 
   needsNumber(): any;
 
@@ -1563,7 +1568,7 @@ declare class Window_Message {
 
   newPage(text: TextState): any;
 
-  updateSpeakerName(): any;
+  updateSpeakerName(): string;
 
   loadMessageFace(): any;
 
@@ -2015,7 +2020,7 @@ declare class Window_DebugEdit {
 
   drawItem(index: number): any;
 
-  itemName(dataId: number): any;
+  itemName(dataId: number): string;
 
   itemStatus(dataId: number): any;
 
