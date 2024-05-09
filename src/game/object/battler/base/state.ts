@@ -1,4 +1,4 @@
-import { DataState } from "../../data";
+import { DataState } from "../../../data";
 export interface State {
   clearStates(): void;
   eraseState(stateId: number): void;

@@ -3,7 +3,24 @@ import { Buff } from "./buff";
 import { ParamArray, ParamId } from "./param";
 import { State } from "./state";
 
-declare class Game_BattlerBase implements Buff, State {
+interface Members {
+  _buffs: ParamArray;
+  _buffTurns: ParamArray;
+  _hp: number;
+  _mp: number;
+  _tp: number;
+  _hidden: number;
+  _paramPlus: ParamArray;
+}
+
+declare class Game_BattlerBase implements Members, Buff, State {
+  _buffs: ParamArray;
+  _buffTurns: ParamArray;
+  _hp: number;
+  _mp: number;
+  _tp: number;
+  _hidden: number;
+  _paramPlus: ParamArray;
   clearStates(): void;
   eraseState(stateId: number): void;
   isStateAffected(stateId: number): boolean;
@@ -26,11 +43,4 @@ declare class Game_BattlerBase implements Buff, State {
   overwriteBuffTurns(paramId: ParamId, turns: number): boolean;
   isBuffExpired(paramId: ParamId): boolean;
   updateBuffTurns(): void;
-  _buffs: ParamArray;
-  _buffTurns: ParamArray;
-  _hp: number;
-  _mp: number;
-  _tp: number;
-  _hidden: number;
-  _paramPlus: ParamArray;
 }
