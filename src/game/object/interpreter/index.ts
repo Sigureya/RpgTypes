@@ -45,6 +45,12 @@ export declare class Game_Interpreter extends Game_EventCommandExecuter {
   changeHp(target: Game_Battler, value: number, allowDeath: boolean): void;
 
   setupChoices(params: CommandParameters[typeof $.SHOW_CHOICES]): void;
+  setupNumInput(param: CommandParameters[typeof $.INPUT_NUMBER]): void;
+  setupItemChoice(param: CommandParameters[typeof $.SELECT_ITEM]): void;
+
+  setupChild(list: EventCommand[], eventId: number): void;
+  jumpTo(index: number): void;
+  gameDataOperand(type: number, param1: number, param2: number): number;
 }
 
 // イベントコマンドの定義用 直接は触れないでほしいのでexportしない
