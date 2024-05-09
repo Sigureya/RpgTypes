@@ -2,18 +2,15 @@ import { DataState } from "src/game/data";
 import { Buff } from "./buff";
 import { ParamArray, ParamId } from "./param";
 import { State } from "./state";
+import { ItemUser } from "./itemUser";
+import { DataSkill } from "src/game/data/item/skill";
 
-interface Members {
-  _buffs: ParamArray;
-  _buffTurns: ParamArray;
-  _hp: number;
-  _mp: number;
-  _tp: number;
-  _hidden: number;
-  _paramPlus: ParamArray;
-}
-
-export declare class Game_BattlerBase implements Members, Buff, State {
+export declare class Game_BattlerBase implements Buff, State, ItemUser {
+  canInput(): boolean;
+  canMove(): boolean;
+  isConfused(): boolean;
+  confusionLevel(): boolean;
+  isSkillWtypeOk(skill: DataSkill): boolean;
   sortStates(): number;
   restriction(): number;
   addNewState(stateId: number): void;
@@ -21,13 +18,6 @@ export declare class Game_BattlerBase implements Members, Buff, State {
   stateOverlayIndex(): number;
   isDead(): boolean;
   isAlive(): boolean;
-  _buffs: ParamArray;
-  _buffTurns: ParamArray;
-  _hp: number;
-  _mp: number;
-  _tp: number;
-  _hidden: number;
-  _paramPlus: ParamArray;
   clearStates(): void;
   eraseState(stateId: number): void;
   isStateAffected(stateId: number): boolean;
