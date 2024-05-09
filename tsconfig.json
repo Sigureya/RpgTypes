@@ -26,6 +26,6 @@
     "game/js/rmmz*.js",
     "game/js/plugins/**/*.js"
   ],
-  "files": ["src/mzTypes/globals.d.ts"],
+  //  "files": [],
   "exclude": ["game/js/plugins/exclude/**/*.js"]
 }
