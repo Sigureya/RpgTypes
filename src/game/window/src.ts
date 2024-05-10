@@ -14,7 +14,7 @@ import { Data_BaseItem } from "../data/item/baseItem";
 import { Data_Equip } from "../object/battler/base/equip";
 import { SaveFileInfo } from "../data/saveFileInfo";
 import { Data_Skill } from "../data/item/skill";
-import { Align } from "./types/Align";
+import { TextAlign } from "./types/TextAlign";
 
 interface Selectable<T> {
   itemAt(index: number): T;
@@ -97,7 +97,7 @@ declare class Window_Base {
     x: number,
     y: number,
     maxWidth: number,
-    align: Align
+    align: TextAlign
   ): any;
 
   textWidth(text: string): number;
@@ -474,7 +474,7 @@ declare class Window_Command<ExtType> {
 
   drawItem(index: number): void;
 
-  itemTextAlign(): Align;
+  itemTextAlign(): TextAlign;
 
   isOkEnabled(): boolean;
 
@@ -492,7 +492,7 @@ declare class Window_HorzCommand {
 
   maxCols(): number;
 
-  itemTextAlign(): Align;
+  itemTextAlign(): TextAlign;
 
   //-----------------------------------------------------------------------------
   // Window_Help
