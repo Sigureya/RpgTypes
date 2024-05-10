@@ -9,32 +9,28 @@ import { Game_Action, Sprite } from "@niokasgami/rpg-maker-mz-typescript";
 import { UsableItem } from "../data/item/usableItem";
 import { Data_NamedItem } from "../data/item/namedItem";
 import { ParamId } from "../object/battler/base/param";
-import { ShopGoods } from "./shopBy/goods";
+import { ShopGoods } from "./types/goods";
 import { Data_BaseItem } from "../data/item/baseItem";
 import { Data_Equip } from "../object/battler/base/equip";
 import { SaveFileInfo } from "../data/saveFileInfo";
 import { Data_Skill } from "../data/item/skill";
+import { Align } from "./types/Align";
 
 interface Selectable<T> {
   itemAt(index: number): T;
   item(): T;
 }
 
-//-----------------------------------------------------------------------------
-// Window_Base
-//
-// The superclass of all windows within the game.
-
 declare class Window_Base {
   initialize(rect: Rectangle): void;
 
   destroy(options: any): any;
 
-  lineHeight(): any;
+  lineHeight(): number;
 
   itemWidth(): number;
 
-  itemHeight(): any;
+  itemHeight(): number;
 
   itemPadding(): any;
 
@@ -42,13 +38,13 @@ declare class Window_Base {
 
   loadWindowskin(): any;
 
-  updatePadding(): any;
+  updatePadding(): void;
 
-  updateBackOpacity(): any;
+  updateBackOpacity(): void;
 
   fittingHeight(numLines: number): any;
 
-  updateTone(): any;
+  updateTone(): void;
 
   createContents(): any;
 
@@ -56,17 +52,17 @@ declare class Window_Base {
 
   contentsWidth(): number;
 
-  contentsHeight(): any;
+  contentsHeight(): number;
 
   resetFontSettings(): void;
 
   resetTextColor(): void;
 
-  update(): any;
+  update(): void;
 
-  updateOpen(): any;
+  updateOpen(): void;
 
-  updateClose(): any;
+  updateClose(): void;
 
   open(): any;
 
@@ -101,7 +97,7 @@ declare class Window_Base {
     x: number,
     y: number,
     maxWidth: number,
-    align: string
+    align: Align
   ): any;
 
   textWidth(text: string): number;
@@ -112,9 +108,9 @@ declare class Window_Base {
 
   createTextState(text: string, x: number, y: number, width: number): any;
 
-  processAllText(text: TextState): any;
+  processAllText(text: TextState): void;
 
-  flushTextState(text: TextState): any;
+  flushTextState(text: TextState): void;
 
   createTextBuffer(rtl: boolean): any;
 
@@ -124,15 +120,15 @@ declare class Window_Base {
 
   partyMemberName(memberIndex: number): string;
 
-  processCharacter(text: TextState): any;
+  processCharacter(text: TextState): void;
 
   processControlCharacter(text: TextState, char: string): any;
 
-  processNewLine(text: TextState): any;
+  processNewLine(text: TextState): void;
 
-  obtainEscapeCode(text: TextState): any;
+  obtainEscapeCode(text: TextState): void;
 
-  obtainEscapeParam(text: TextState): any;
+  obtainEscapeParam(text: TextState): void;
 
   processEscapeCharacter(code: number, textState: TextState): any;
 
@@ -144,7 +140,7 @@ declare class Window_Base {
 
   makeFontSmaller(): any;
 
-  calcTextHeight(text: TextState): any;
+  calcTextHeight(text: TextState): void;
 
   maxFontSizeInLine(line: number): any;
 
@@ -173,7 +169,7 @@ declare class Window_Base {
 
   hideBackgroundDimmer(): any;
 
-  updateBackgroundDimmer(): any;
+  updateBackgroundDimmer(): void;
 
   refreshDimmerBitmap(): any;
 
@@ -214,7 +210,7 @@ declare class Window_Scrollable extends Window_Base {
 
   overallWidth(): number;
 
-  overallHeight(): any;
+  overallHeight(): number;
 
   maxScrollX(): number;
 
@@ -222,13 +218,13 @@ declare class Window_Scrollable extends Window_Base {
 
   scrollBlockWidth(): number;
 
-  scrollBlockHeight(): any;
+  scrollBlockHeight(): number;
 
   smoothScrollDown(n: number): any;
 
   smoothScrollUp(n: number): any;
 
-  update(): any;
+  update(): void;
 
   processWheelScroll(): void;
 
@@ -242,21 +238,21 @@ declare class Window_Scrollable extends Window_Base {
 
   isTouchedInsideFrame(): boolean;
 
-  onTouchScrollStart(): any;
+  onTouchScrollStart(): void;
 
-  onTouchScroll(): any;
+  onTouchScroll(): void;
 
-  onTouchScrollEnd(): any;
+  onTouchScrollEnd(): void;
 
-  updateSmoothScroll(): any;
+  updateSmoothScroll(): void;
 
-  updateScrollAccel(): any;
+  updateScrollAccel(): void;
 
-  updateArrows(): any;
+  updateArrows(): void;
 
-  updateOrigin(): any;
+  updateOrigin(): void;
 
-  updateScrollBase(baseX: number, baseY: number): any;
+  updateScrollBase(baseX: number, baseY: number): void;
 
   paint(): any;
 
@@ -278,7 +274,7 @@ export declare class Window_Selectable extends Window_Scrollable {
 
   setCursorAll(cursorAll: boolean): void;
 
-  maxCols(): any;
+  maxCols(): number;
 
   maxItems(): number;
 
@@ -288,19 +284,19 @@ export declare class Window_Selectable extends Window_Scrollable {
 
   itemWidth(): number;
 
-  itemHeight(): any;
+  itemHeight(): number;
 
-  contentsHeight(): any;
+  contentsHeight(): number;
 
   maxRows(): any;
 
-  overallHeight(): any;
+  overallHeight(): number;
 
   activate(): any;
 
   deactivate(): any;
 
-  select(index: number): any;
+  select(index: number): void;
 
   forceSelect(index: number): any;
 
@@ -364,7 +360,7 @@ export declare class Window_Selectable extends Window_Scrollable {
 
   isScrollEnabled(): boolean;
 
-  update(): any;
+  update(): void;
 
   processCursorMove(): void;
 
@@ -374,11 +370,11 @@ export declare class Window_Selectable extends Window_Scrollable {
 
   isHoverEnabled(): boolean;
 
-  onTouchSelect(trigger: boolean): any;
+  onTouchSelect(trigger: boolean): void;
 
-  onTouchOk(): any;
+  onTouchOk(): void;
 
-  onTouchCancel(): any;
+  onTouchCancel(): void;
 
   hitindex(): number;
 
@@ -406,13 +402,13 @@ export declare class Window_Selectable extends Window_Scrollable {
 
   processPagedown(): void;
 
-  updateInputData(): any;
+  updateInputData(): void;
 
   ensureCursorVisible(smooth: boolean): boolean;
 
-  callUpdateHelp(): any;
+  callUpdateHelp(): void;
 
-  updateHelp(): any;
+  updateHelp(): void;
 
   setHelpWindowItem(item: Data_NamedItem): void;
 
@@ -445,7 +441,7 @@ export declare class Window_Selectable extends Window_Scrollable {
   //
   // The superclass of windows for selecting a command.
 }
-declare class Window_Command {
+declare class Window_Command<ExtType> {
   initialize(rect: Rectangle): void;
 
   maxItems(): number;
@@ -464,21 +460,21 @@ declare class Window_Command {
 
   isCurrentItemEnabled(): boolean;
 
-  currentSymbol(): any;
+  currentSymbol(): string;
 
-  currentExt(): any;
+  currentExt(): ExtType;
 
   findSymbol(symbol: string): any;
 
   selectSymbol(symbol: string): any;
 
-  findExt(ext: any): any;
+  findExt(ext: ExtType): number;
 
   selectExt(ext: any): any;
 
   drawItem(index: number): void;
 
-  itemTextAlign(): any;
+  itemTextAlign(): Align;
 
   isOkEnabled(): boolean;
 
@@ -494,9 +490,9 @@ declare class Window_Command {
 declare class Window_HorzCommand {
   initialize(rect: Rectangle): void;
 
-  maxCols(): any;
+  maxCols(): number;
 
-  itemTextAlign(): any;
+  itemTextAlign(): Align;
 
   //-----------------------------------------------------------------------------
   // Window_Help
@@ -560,7 +556,7 @@ declare class Window_StatusBase {
 
   placeBasicGauges(actor: Game_Actor, x: number, y: number): any;
 
-  gaugeLineHeight(): any;
+  gaugeLineHeight(): number;
 
   drawActorCharacter(actor: Game_Actor, x: number, y: number): void;
 
@@ -633,7 +629,7 @@ declare class Window_MenuStatus {
 
   numVisibleRows(): boolean;
 
-  itemHeight(): any;
+  itemHeight(): number;
 
   actor(index: number): any;
 
@@ -681,9 +677,9 @@ declare class Window_MenuActor {
 declare class Window_ItemCategory {
   initialize(rect: Rectangle): void;
 
-  maxCols(): any;
+  maxCols(): number;
 
-  update(): any;
+  update(): void;
 
   makeCommandList(): void;
 
@@ -706,7 +702,7 @@ declare class Window_ItemList
 
   setCategory(category: string): void;
 
-  maxCols(): any;
+  maxCols(): number;
 
   colSpacing(): any;
 
@@ -739,7 +735,7 @@ declare class Window_ItemList
     width: number
   ): void;
 
-  updateHelp(): any;
+  updateHelp(): void;
 
   refresh(): void;
 
@@ -785,7 +781,7 @@ declare class Window_SkillList extends Window_Selectable {
 
   setStypeId(stypeId: number): void;
 
-  maxCols(): any;
+  maxCols(): number;
 
   colSpacing(): any;
 
@@ -811,7 +807,7 @@ declare class Window_SkillList extends Window_Selectable {
 
   drawSkillCost(skill: Data_Skill, x: number, y: number, width: number): void;
 
-  updateHelp(): any;
+  updateHelp(): void;
 
   refresh(): void;
 
@@ -859,7 +855,7 @@ declare class Window_EquipStatus {
 declare class Window_EquipCommand {
   initialize(rect: Rectangle): void;
 
-  maxCols(): any;
+  maxCols(): number;
 
   makeCommandList(): void;
 
@@ -873,7 +869,7 @@ declare class Window_EquipSlot {
 
   setActor(actor: Game_Actor): void;
 
-  update(): any;
+  update(): void;
 
   maxItems(): number;
 
@@ -893,7 +889,7 @@ declare class Window_EquipSlot {
 
   setItemWindow(itemWindow: Window_EquipItem): void;
 
-  updateHelp(): any;
+  updateHelp(): void;
 
   //-----------------------------------------------------------------------------
   // Window_EquipItem
@@ -903,7 +899,7 @@ declare class Window_EquipSlot {
 declare class Window_EquipItem {
   initialize(rect: Rectangle): void;
 
-  maxCols(): any;
+  maxCols(): number;
 
   colSpacing(): any;
 
@@ -921,7 +917,7 @@ declare class Window_EquipItem {
 
   setStatusWindow(statusWindow: Window_Status): void;
 
-  updateHelp(): any;
+  updateHelp(): void;
 
   playOkSound(): any;
 
@@ -965,7 +961,7 @@ declare class Window_StatusParams {
 
   maxItems(): number;
 
-  itemHeight(): any;
+  itemHeight(): number;
 
   drawItem(index: number): void;
 
@@ -983,7 +979,7 @@ declare class Window_StatusEquip {
 
   maxItems(): number;
 
-  itemHeight(): any;
+  itemHeight(): number;
 
   drawItem(index: number): void;
 
@@ -1045,7 +1041,7 @@ declare class Window_SavefileList {
 
   numVisibleRows(): boolean;
 
-  itemHeight(): any;
+  itemHeight(): number;
 
   drawItem(index: number): void;
 
@@ -1067,7 +1063,7 @@ declare class Window_SavefileList {
 
   drawPlaytime(info: SaveFileInfo, x: number, y: number, width: number): void;
 
-  playOkSound(): any;
+  playOkSound(): void;
 
   //-----------------------------------------------------------------------------
   // Window_ShopCommand
@@ -1079,7 +1075,7 @@ declare class Window_ShopCommand {
 
   setPurchaseOnly(purchaseOnly: boolean): void;
 
-  maxCols(): any;
+  maxCols(): number;
 
   makeCommandList(): void;
 
@@ -1119,7 +1115,7 @@ declare class Window_ShopBuy {
 
   setStatusWindow(statusWindow: Window_Status): void;
 
-  updateHelp(): any;
+  updateHelp(): void;
 
   //-----------------------------------------------------------------------------
   // Window_ShopSell
@@ -1184,9 +1180,9 @@ declare class Window_ShopNumber {
 
   maxDigits(): any;
 
-  update(): any;
+  update(): void;
 
-  playOkSound(): any;
+  playOkSound(): void;
 
   processNumberChange(): void;
 
@@ -1196,15 +1192,15 @@ declare class Window_ShopNumber {
 
   isTouchOkEnabled(): boolean;
 
-  onButtonUp(): any;
+  onButtonUp(): void;
 
-  onButtonUp2(): any;
+  onButtonUp2(): void;
 
-  onButtonDown(): any;
+  onButtonDown(): void;
 
-  onButtonDown2(): any;
+  onButtonDown2(): void;
 
-  onButtonOk(): any;
+  onButtonOk(): void;
 
   //-----------------------------------------------------------------------------
   // Window_ShopStatus
@@ -1227,19 +1223,19 @@ declare class Window_ShopStatus {
 
   statusMembers(): any;
 
-  pageSize(): any;
+  pageSize(): number;
 
-  maxPages(): any;
+  maxPages(): number;
 
   drawActorEquipInfo(x: number, y: number, actor: Game_Actor): void;
 
-  paramId(): any;
+  paramId(): number;
 
-  currentEquippedItem(actor: Game_Actor, etypeId: number): any;
+  currentEquippedItem(actor: Game_Actor, etypeId: number): Data_Equip | null;
 
-  update(): any;
+  update(): void;
 
-  updatePage(): any;
+  updatePage(): void;
 
   isPageChangeEnabled(): boolean;
 
@@ -1289,7 +1285,7 @@ declare class Window_NameInput {
 
   table(): any;
 
-  maxCols(): any;
+  maxCols(): number;
 
   maxItems(): number;
 
@@ -1307,7 +1303,7 @@ declare class Window_NameInput {
 
   drawItem(index: number): void;
 
-  updateCursor(): any;
+  updateCursor(): void;
 
   isCursorMovable(): boolean;
 
@@ -1337,9 +1333,9 @@ declare class Window_NameInput {
 
   processOk(): void;
 
-  onNameAdd(): any;
+  onNameAdd(): void;
 
-  onNameOk(): any;
+  onNameOk(): void;
 
   //-----------------------------------------------------------------------------
   // Window_NameBox
@@ -1357,13 +1353,13 @@ declare class Window_NameBox {
 
   start(): any;
 
-  updatePlacement(): any;
+  updatePlacement(): void;
 
-  updateBackground(): any;
+  updateBackground(): void;
 
   windowWidth(): number;
 
-  windowHeight(): any;
+  windowHeight(): number;
 
   refresh(): void;
 
@@ -1381,15 +1377,15 @@ declare class Window_ChoiceList {
 
   start(): any;
 
-  update(): any;
+  update(): void;
 
-  updateCancelButton(): any;
+  updateCancelButton(): void;
 
   selectDefault(): any;
 
-  updatePlacement(): any;
+  updatePlacement(): void;
 
-  updateBackground(): any;
+  updateBackground(): void;
 
   placeCancelButton(): any;
 
@@ -1399,7 +1395,7 @@ declare class Window_ChoiceList {
 
   windowWidth(): number;
 
-  windowHeight(): any;
+  windowHeight(): number;
 
   numVisibleRows(): boolean;
 
@@ -1431,13 +1427,13 @@ declare class Window_NumberInput {
 
   start(): any;
 
-  updatePlacement(): any;
+  updatePlacement(): void;
 
   windowWidth(): number;
 
-  windowHeight(): any;
+  windowHeight(): number;
 
-  maxCols(): any;
+  maxCols(): number;
 
   maxItems(): number;
 
@@ -1459,7 +1455,7 @@ declare class Window_NumberInput {
 
   buttonY(): number;
 
-  update(): any;
+  update(): void;
 
   processDigitChange(): void;
 
@@ -1475,11 +1471,11 @@ declare class Window_NumberInput {
 
   drawItem(index: number): void;
 
-  onButtonUp(): any;
+  onButtonUp(): void;
 
-  onButtonDown(): any;
+  onButtonDown(): void;
 
-  onButtonOk(): any;
+  onButtonOk(): void;
 
   //-----------------------------------------------------------------------------
   // Window_EventItem
@@ -1495,11 +1491,11 @@ declare class Window_EventItem {
 
   start(): any;
 
-  update(): any;
+  update(): void;
 
-  updateCancelButton(): any;
+  updateCancelButton(): void;
 
-  updatePlacement(): any;
+  updatePlacement(): void;
 
   placeCancelButton(): any;
 
@@ -1509,9 +1505,9 @@ declare class Window_EventItem {
 
   isEnabled(/*item*/): boolean;
 
-  onOk(): any;
+  onOk(): void;
 
-  onCancel(): any;
+  onCancel(): void;
 
   //-----------------------------------------------------------------------------
   // Window_Message
@@ -1533,53 +1529,53 @@ declare class Window_Message {
 
   setEventItemWindow(eventItemWindow: Window_EventItem): void;
 
-  clearFlags(): any;
+  clearFlags(): void;
 
-  update(): any;
+  update(): void;
 
-  checkToNotClose(): any;
+  checkToNotClose(): void;
 
-  synchronizeNameBox(): any;
+  synchronizeNameBox(): void;
 
-  canStart(): any;
+  canStart(): boolean;
 
-  startMessage(): any;
+  startMessage(): void;
 
-  newLineX(text: TextState): any;
+  newLineX(text: TextState): void;
 
-  updatePlacement(): any;
+  updatePlacement(): void;
 
-  updateBackground(): any;
+  updateBackground(): void;
 
-  terminateMessage(): any;
+  terminateMessage(): void;
 
-  updateWait(): any;
+  updateWait(): void;
 
-  updateLoading(): any;
+  updateLoading(): void;
 
-  updateInput(): any;
+  updateInput(): void;
 
   isAnySubWindowActive(): boolean;
 
-  updateMessage(): any;
+  updateMessage(): void;
 
-  shouldBreakHere(text: TextState): any;
+  shouldBreakHere(text: TextState): void;
 
-  canBreakHere(text: TextState): any;
+  canBreakHere(text: TextState): boolean;
 
-  onEndOfText(): any;
+  onEndOfText(): void;
 
-  startInput(): any;
+  startInput(): boolean;
 
   isTriggered(): boolean;
 
-  doesContinue(): any;
+  doesContinue(): boolean;
 
   areSettingsChanged(): void;
 
-  updateShowFast(): any;
+  updateShowFast(): void;
 
-  newPage(text: TextState): any;
+  newPage(text: TextState): void;
 
   updateSpeakerName(): string;
 
@@ -1587,17 +1583,17 @@ declare class Window_Message {
 
   drawMessageFace(): void;
 
-  processControlCharacter(text: TextState, c: string): any;
+  processControlCharacter(text: TextState, c: string): void;
 
-  processNewLine(text: TextState): any;
+  processNewLine(text: TextState): void;
 
-  processNewPage(text: TextState): any;
+  processNewPage(text: TextState): void;
 
   isEndOfText(text: TextState): boolean;
 
-  needsNewPage(text: TextState): any;
+  needsNewPage(text: TextState): void;
 
-  processEscapeCharacter(code: number, textState: TextState): any;
+  processEscapeCharacter(code: number, textState: TextState): void;
 
   startWait(count: number): any;
 
@@ -1614,17 +1610,17 @@ declare class Window_Message {
 declare class Window_ScrollText {
   initialize(rect: Rectangle): void;
 
-  update(): any;
+  update(): void;
 
-  startMessage(): any;
+  startMessage(): void;
 
   refresh(): void;
 
-  updatePlacement(): any;
+  updatePlacement(): void;
 
-  contentsHeight(): any;
+  contentsHeight(): number;
 
-  updateMessage(): any;
+  updateMessage(): void;
 
   scrollSpeed(): any;
 
@@ -1632,7 +1628,7 @@ declare class Window_ScrollText {
 
   fastForwardRate(): any;
 
-  terminateMessage(): any;
+  terminateMessage(): void;
 
   //-----------------------------------------------------------------------------
   // Window_MapName
@@ -1642,11 +1638,11 @@ declare class Window_ScrollText {
 declare class Window_MapName {
   initialize(rect: Rectangle): void;
 
-  update(): any;
+  update(): void;
 
-  updateFadeIn(): any;
+  updateFadeIn(): void;
 
-  updateFadeOut(): any;
+  updateFadeOut(): void;
 
   open(): any;
 
@@ -1675,13 +1671,13 @@ declare class Window_BattleLog {
 
   isBusy(): boolean;
 
-  update(): any;
+  update(): void;
 
-  updateWait(): any;
+  updateWait(): void;
 
-  updateWaitCount(): any;
+  updateWaitCount(): void;
 
-  updateWaitMode(): any;
+  updateWaitMode(): void;
 
   setWaitMode(waitMode: string): void;
 
@@ -1861,23 +1857,23 @@ declare class Window_ActorCommand {
 declare class Window_BattleStatus {
   initialize(rect: Rectangle): void;
 
-  extraHeight(): any;
+  extraHeight(): number;
 
-  maxCols(): any;
+  maxCols(): number;
 
-  itemHeight(): any;
+  itemHeight(): number;
 
   maxItems(): number;
 
   rowSpacing(): any;
 
-  updatePadding(): any;
+  updatePadding(): void;
 
-  actor(index: number): any;
+  actor(index: number): Game_Actor;
 
-  selectActor(actor: Game_Actor): any;
+  selectActor(actor: Game_Actor): void;
 
-  update(): any;
+  update(): void;
 
   preparePartyrefresh(): void;
 
@@ -1891,17 +1887,17 @@ declare class Window_BattleStatus {
 
   faceRect(index: number): Rectangle;
 
-  nameX(rect: Rectangle): any;
+  nameX(rect: Rectangle): number;
 
-  nameY(rect: Rectangle): any;
+  nameY(rect: Rectangle): number;
 
-  stateIconX(rect: Rectangle): any;
+  stateIconX(rect: Rectangle): number;
 
-  stateIconY(rect: Rectangle): any;
+  stateIconY(rect: Rectangle): number;
 
-  basicGaugesX(rect: Rectangle): any;
+  basicGaugesX(rect: Rectangle): number;
 
-  basicGaugesY(rect: Rectangle): any;
+  basicGaugesY(rect: Rectangle): number;
 
   //-----------------------------------------------------------------------------
   // Window_BattleActor
@@ -1915,7 +1911,7 @@ declare class Window_BattleActor {
 
   hide(): any;
 
-  select(index: number): any;
+  select(index: number): void;
 
   processTouch(): void;
 
@@ -1927,7 +1923,7 @@ declare class Window_BattleActor {
 declare class Window_BattleEnemy {
   initialize(rect: Rectangle): void;
 
-  maxCols(): any;
+  maxCols(): number;
 
   maxItems(): number;
 
@@ -1943,7 +1939,7 @@ declare class Window_BattleEnemy {
 
   refresh(): void;
 
-  select(index: number): any;
+  select(index: number): void;
 
   processTouch(): void;
 
@@ -2009,7 +2005,7 @@ declare class Window_DebugRange {
 
   maxItems(): number;
 
-  update(): any;
+  update(): void;
 
   mode(index: number): any;
 
@@ -2047,11 +2043,11 @@ declare class Window_DebugEdit {
 
   currentId(): any;
 
-  update(): any;
+  update(): void;
 
-  updateSwitch(): any;
+  updateSwitch(): void;
 
-  updateVariable(): any;
+  updateVariable(): void;
 
   deltaForVariable(): any;
 }
