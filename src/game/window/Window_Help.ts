@@ -8,7 +8,7 @@ export declare class Window_Help extends Window_Base implements IHelpListner {
 
   setText(text: string): void;
 
-  clear(): any;
+  clear(): void;
 
   setItem(item: Data_NamedItem): void;
 

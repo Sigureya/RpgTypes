@@ -1,15 +1,18 @@
 import { Rectangle } from "src/types/rectangle";
 import { TextAlign } from "./types/TextAlign";
-import { IWindow_Command } from "./types/commandItem";
+import { CommandItem, IWindow_Command } from "./types/commandItem";
 
-export declare class Window_Command<T = any> implements IWindow_Command<T> {
-  currentExt(): T | null;
-  findExt(ext: T): number;
+export declare class Window_Command<ExtType = any>
+  implements IWindow_Command<ExtType>
+{
+  currentData(): CommandItem<ExtType> | null;
+  currentExt(): ExtType | null;
+  findExt(ext: ExtType): number;
   addCommand(
     name: string,
     symbol: string,
     enabled: boolean,
-    ext: T | null
+    ext: ExtType | null
   ): void;
   addCommand(name: string, symbol: string): void;
   initialize(rect: Rectangle): void;
@@ -26,15 +29,13 @@ export declare class Window_Command<T = any> implements IWindow_Command<T> {
 
   isCommandEnabled(index: number): boolean;
 
-  currentData(): any;
-
   isCurrentItemEnabled(): boolean;
 
   currentSymbol(): string;
 
-  findSymbol(symbol: string): any;
+  findSymbol(symbol: string): number;
 
-  selectSymbol(symbol: string): any;
+  selectSymbol(symbol: string): void;
 
   drawItem(index: number): void;
 
@@ -42,7 +43,7 @@ export declare class Window_Command<T = any> implements IWindow_Command<T> {
 
   isOkEnabled(): boolean;
 
-  callOkHandler(): any;
+  callOkHandler(): void;
 
   refresh(): void;
 }

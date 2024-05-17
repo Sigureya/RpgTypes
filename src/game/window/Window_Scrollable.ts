@@ -9,7 +9,7 @@ import { Window_Base } from "./Window_Base";
 export declare class Window_Scrollable extends Window_Base {
   initialize(rect: Rectangle): void;
 
-  clearScrollStatus(): any;
+  clearScrollStatus(): void;
 
   scrollX(): number;
 
@@ -19,13 +19,13 @@ export declare class Window_Scrollable extends Window_Base {
 
   scrollBaseY(): number;
 
-  scrollTo(x: number, y: number): any;
+  scrollTo(x: number, y: number): void;
 
-  scrollBy(x: number, y: number): any;
+  scrollBy(x: number, y: number): void;
 
-  smoothScrollTo(x: number, y: number): any;
+  smoothScrollTo(x: number, y: number): void;
 
-  smoothScrollBy(x: number, y: number): any;
+  smoothScrollBy(x: number, y: number): void;
 
   setScrollAccel(x: number, y: number): void;
 
@@ -41,9 +41,9 @@ export declare class Window_Scrollable extends Window_Base {
 
   scrollBlockHeight(): number;
 
-  smoothScrollDown(n: number): any;
+  smoothScrollDown(n: number): void;
 
-  smoothScrollUp(n: number): any;
+  smoothScrollUp(n: number): void;
 
   update(): void;
 
@@ -75,5 +75,5 @@ export declare class Window_Scrollable extends Window_Base {
 
   updateScrollBase(baseX: number, baseY: number): void;
 
-  paint(): any;
+  paint(): void;
 }

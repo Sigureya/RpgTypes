@@ -12,11 +12,8 @@ import { ShopGoods } from "./types/goods";
 import { Data_BaseItem } from "../data/item/baseItem";
 import { Data_Equip } from "../object/battler/base/equip";
 import { SaveFileInfo } from "../data/saveFileInfo";
-import { CommandItem } from "./types/commandItem";
 import { Window_Selectable } from "./Window_Selectable";
 import { Window_Gold } from "./Window_Gold";
-import { Window_Command } from "./Window_Command";
-import { Window_SkillList } from "./Window_SkillList";
 
 interface Selectable<T> {
   itemAt(index: number): T;
@@ -28,7 +25,7 @@ interface Selectable<T> {
 //
 // The superclass of windows for displaying actor status.
 
-declare class Window_StatusBase {
+export declare class Window_StatusBase {
   initialize(rect: Rectangle): void;
 
   loadFaceImages(): void;
@@ -187,7 +184,7 @@ declare class Window_ItemCategory {
   //
   // The window for selecting an item on the item screen.
 }
-declare class Window_ItemList
+export declare class Window_ItemList
   extends Window_Selectable
   implements Selectable<Data_BaseItem>
 {
@@ -237,150 +234,7 @@ declare class Window_ItemList
   //
   // The window for selecting a skill type on the skill screen.
 }
-declare class Window_SkillType extends Window_Command<number> {
-  currentExt(): number | null;
-  currentData(): CommandItem<number> | null;
-  findExt(ext: number): number;
-  initialize(rect: Rectangle): void;
-
-  setActor(actor: Game_Actor): void;
-
-  makeCommandList(): void;
-
-  update(): void;
-
-  setSkillWindow(skillWindow: Window_SkillList): void;
-
-  selectLast(): void;
-
-  //-----------------------------------------------------------------------------
-  // Window_SkillStatus
-  //
-  // The window for displaying the skill user's status on the skill screen.
-}
-declare class Window_SkillStatus {
-  initialize(rect: Rectangle): void;
-
-  setActor(actor: Game_Actor): void;
-
-  refresh(): void;
-
-  //-----------------------------------------------------------------------------
-  // Window_SkillList
-  //
-  // The window for selecting a skill on the skill screen.
-}
-declare class Window_EquipStatus {
-  initialize(rect: Rectangle): void;
-
-  setActor(actor: Game_Actor): void;
-
-  colSpacing(): void;
-
-  refresh(): void;
-
-  setTempActor(tempActor: Game_Actor): void;
-
-  drawAllParams(): void;
-
-  drawItem(x: number, y: number, paramId: ParamId): void;
-
-  drawParamName(x: number, y: number, paramId: ParamId): string;
-
-  drawCurrentParam(x: number, y: number, paramId: ParamId): void;
-
-  drawRightArrow(x: number, y: number): void;
-
-  drawNewParam(x: number, y: number, paramId: ParamId): void;
-
-  rightArrowWidth(): number;
-
-  paramWidth(): number;
-
-  paramX(): number;
-
-  paramY(index: number): void;
-
-  //-----------------------------------------------------------------------------
-  // Window_EquipCommand
-  //
-  // The window for selecting a command on the equipment screen.
-}
-declare class Window_EquipCommand {
-  initialize(rect: Rectangle): void;
-
-  maxCols(): number;
-
-  makeCommandList(): void;
-
-  //-----------------------------------------------------------------------------
-  // Window_EquipSlot
-  //
-  // The window for selecting an equipment slot on the equipment screen.
-}
-declare class Window_EquipSlot {
-  initialize(rect: Rectangle): void;
-
-  setActor(actor: Game_Actor): void;
-
-  update(): void;
-
-  maxItems(): number;
-
-  item(): void;
-
-  itemAt(index: number): void;
-
-  drawItem(index: number): void;
-
-  slotNameWidth(): number;
-
-  isEnabled(index: number): boolean;
-
-  isCurrentItemEnabled(): boolean;
-
-  setStatusWindow(statusWindow: Window_Status): void;
-
-  setItemWindow(itemWindow: Window_EquipItem): void;
-
-  updateHelp(): void;
-
-  //-----------------------------------------------------------------------------
-  // Window_EquipItem
-  //
-  // The window for selecting an equipment item on the equipment screen.
-}
-declare class Window_EquipItem {
-  initialize(rect: Rectangle): void;
-
-  maxCols(): number;
-
-  colSpacing(): void;
-
-  setActor(actor: Game_Actor): void;
-
-  setSlotId(slotId: number): void;
-
-  includes(item: Data_Equip): void;
-
-  etypeId(): void;
-
-  isEnabled(/*item*/): boolean;
-
-  selectLast(): void;
-
-  setStatusWindow(statusWindow: Window_Status): void;
-
-  updateHelp(): void;
-
-  playOkSound(): void;
-
-  //-----------------------------------------------------------------------------
-  // Window_Status
-  //
-  // The window for displaying full status on the status screen.
-}
-declare class Window_Status {
+export declare class Window_Status {
   initialize(rect: Rectangle): void;
 
   setActor(actor: Game_Actor): void;
