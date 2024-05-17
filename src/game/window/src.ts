@@ -4,7 +4,7 @@
 
 import { Rectangle } from "src/types/rectangle";
 import { Game_Actor, Game_Battler } from "../object/battler";
-import { TextState } from "./textState";
+import { TextState } from "./types/textState";
 import { Game_Action, Sprite } from "@niokasgami/rpg-maker-mz-typescript";
 import { UsableItem } from "../data/item/usableItem";
 import { ParamId } from "../object/battler/base/param";
