@@ -1,6 +1,6 @@
 import { Rectangle } from "src/types/rectangle";
 import { Window_StatusBase } from "./Window_StatusBase";
-import { Game_Actor } from "@game";
+import { Game_Actor } from "@game/object";
 
 //-----------------------------------------------------------------------------
 // Window_BattleStatus

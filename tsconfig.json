@@ -13,8 +13,8 @@
     "skipLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@game/*": ["scr/game/*"],
       "@schema/*": ["src/schema/*"],
+      "@game/*": ["src/game/*"],
       "@app/*": ["src/app/*"],
       "@view/*": ["src/view/*"],
       "@mzt/*": ["src/mzTypes/*"],
