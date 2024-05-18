@@ -1,10 +1,8 @@
+import { Game_Unit } from "./Game_Unit";
 import { Game_Actor } from "./battler";
-import { IUnit } from "./unit/interface";
+import { IUnit } from "./types/interface";
 
-export declare class Game_Party
-  //extends Game_Unit
-  implements IUnit<Game_Actor>
-{
+export declare class Game_Party extends Game_Unit implements IUnit<Game_Actor> {
   members(): Game_Actor[];
   inBattle(): boolean;
   agility(): boolean;
