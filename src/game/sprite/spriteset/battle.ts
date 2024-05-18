@@ -1,1 +1,1 @@
-declare class Spriteset_Battle {}
+export declare class Spriteset_Battle {}

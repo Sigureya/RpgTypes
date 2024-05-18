@@ -10,3 +10,10 @@ export * from "./Game_CommonEvent";
 export * from "./Game_Enemy";
 export * from "./Game_Interpreter";
 export * from "./Game_Item";
+export * from "./Game_Map";
+export * from "./Game_Message";
+export * from "./Game_SelfSwitches";
+export * from "./Game_Switches";
+
+export * from "./Game_Party";
+export * from "./Game_Picture";

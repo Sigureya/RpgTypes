@@ -2,7 +2,7 @@ import { Game_Enemy } from "./Game_Enemy";
 import { Game_Unit } from "./Game_Unit";
 import { IUnit } from "./types/interface/unit";
 
-export declare class Game_Troop extends Game_Unit implements IUnit<Game_Enemy> {
+export declare class Game_Troop extends Game_Unit {
   members(): Game_Enemy[];
   inBattle(): boolean;
   agility(): boolean;
