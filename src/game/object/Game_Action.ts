@@ -1,8 +1,6 @@
-import { IUsableItem } from "./types/interface/useableItem";
 import { Game_Unit } from "./Game_Unit";
-import { IBattler } from "./types/interface/battler";
+import { IUnit, IUsableItem, IBattler } from "./types/";
 import { Data_UsableItem } from "@schema/data/usableItem";
-import { IUnit } from "./types/interface/unit";
 
 //-----------------------------------------------------------------------------
 // Game_Action

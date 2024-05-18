@@ -1,7 +1,20 @@
 import { Buff } from "./buff";
-import { Equip } from "./equip";
+import { IEquipable } from "./equipable";
 import { ItemUser } from "./itemUser";
-import { Param } from "./param";
-import { State } from "./state";
+import { IParam } from "./param";
+import { IState } from "./state";
 
-export interface IBattlerBase extends Equip, Buff, ItemUser, Param, State {}
+export {
+  Buff,
+  IEquipable as Equip,
+  ItemUser,
+  IParam as Param,
+  IState as State,
+};
+
+export interface IBattlerBase
+  extends IEquipable,
+    Buff,
+    ItemUser,
+    IParam,
+    IState {}

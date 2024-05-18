@@ -1,4 +1,4 @@
-import { Data_Skill } from "src/game/data/item/skill";
+import { Data_Skill } from "@schema/data";
 
 export interface ItemUser {
   canInput(): boolean;

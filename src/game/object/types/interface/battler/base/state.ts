@@ -1,5 +1,5 @@
 import { Data_State } from "@schema/data";
-export interface State {
+export interface IState {
   clearStates(): void;
   eraseState(stateId: number): void;
   isStateAffected(stateId: number): boolean;
