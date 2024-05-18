@@ -1,5 +1,5 @@
 import { Rectangle } from "src/types/rectangle";
-import { ShopGoods } from "./types/goods";
+import { ShopGoods } from "@schema/paramaters/shopGoods";
 import { Data_BaseItem } from "../data/item/baseItem";
 import { Window_Status } from "./Window_Status";
 import { Window_Selectable } from "./Window_Selectable";

@@ -4,6 +4,7 @@ import type * as $ from "../codes";
 import type { OPERATION, TOGGLE } from "./constants";
 import type { ControlVariables } from "./controlVariables";
 import type { ShowPicture } from "./showPicture";
+import { ShopGoods, ShopProcessing } from "./shopGoods";
 
 export type CommandParameters = {
   /**
@@ -206,6 +207,8 @@ export type CommandParameters = {
 
   [$.PLAY_BGM]: [value: RPG.Bgm];
   [$.PLAY_SE]: [value: RPG.SE];
+  [$.SHOP_PROCESSING]: ShopProcessing;
+  [$.SHOP_PROCESSING_BODY]: ShopGoods;
 
   [$.CHANGE_NAME]: [id: number, name: string];
 

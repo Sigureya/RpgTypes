@@ -14,3 +14,10 @@ export type ShopGoods = [
   isCustomPrice: 0 | 1,
   customPrice: number
 ];
+export type ShopProcessing = [
+  itemType: GOODS_TYPES,
+  id: number,
+  isCustomPrice: 0 | 1,
+  customPrice: number,
+  buyOnly: boolean
+];
