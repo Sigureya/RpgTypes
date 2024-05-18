@@ -1,4 +1,3 @@
-import type { RPG } from "@niokasgami/rpg-maker-mz-typescript";
 import type { ValueOf } from "@utils/types";
 import type * as $ from "./codes";
 import type { OPERATION, TOGGLE } from "./constants";
@@ -6,6 +5,7 @@ import type { ControlVariables } from "./paramaters/controlVariables";
 import type { ShowPicture } from "./paramaters/showPicture";
 import { ShopGoods, ShopProcessing } from "./paramaters/shopGoods";
 import { ChanageActorVariable } from "./paramaters/operateValue";
+import { AudioFileParams } from "src/types/audio";
 
 export type CommandParameters = {
   /**
@@ -177,12 +177,12 @@ export type CommandParameters = {
   /**
    * @description Change Battle BGM
    */
-  [$.CHANGE_BATTLE_BGM]: [value: RPG.Bgm];
+  [$.CHANGE_BATTLE_BGM]: [value: AudioFileParams];
 
   /**
    * @description Change Victory ME
    */
-  [$.CHANGE_VICTORY_ME]: [value: RPG.Bgm];
+  [$.CHANGE_VICTORY_ME]: [value: AudioFileParams];
 
   /**
    * @description Change Save Access
@@ -206,8 +206,8 @@ export type CommandParameters = {
 
   [$.SHOW_PICTURE]: ShowPicture;
 
-  [$.PLAY_BGM]: [value: RPG.Bgm];
-  [$.PLAY_SE]: [value: RPG.SE];
+  [$.PLAY_BGM]: [value: AudioFileParams];
+  [$.PLAY_SE]: [value: AudioFileParams];
   [$.SAVE_BGM]: [];
   [$.RESUME_BGM]: [];
   [$.SHOP_PROCESSING]: ShopProcessing;
