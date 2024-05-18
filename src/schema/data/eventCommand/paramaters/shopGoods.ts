@@ -1,4 +1,4 @@
-import { ValueOf } from "@utils/types";
+import { ValueOf } from "src/types/types";
 
 const GOODS_TYPE = {
   item: 0,

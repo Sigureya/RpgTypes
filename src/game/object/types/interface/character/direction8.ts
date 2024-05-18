@@ -1,4 +1,4 @@
-import { ValueOf } from "@utils/types";
+import { ValueOf } from "src/types/types";
 export const DIRECTION = {
   LEFT: 4 as const,
   UP: 8 as const,

@@ -1,5 +1,5 @@
 import { Pair } from "@utils/typemap";
-import { IsSame } from "@utils/types";
+import { IsSame } from "src/types/types";
 
 export interface CommandItem<T> {
   name: string;

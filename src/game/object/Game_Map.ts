@@ -5,7 +5,7 @@
 
 import { $dataTilesets } from "@niokasgami/rpg-maker-mz-typescript";
 import { Data_CommonEvent } from "../../schema";
-import { ValueOf } from "../../utils/types";
+import { ValueOf } from "../../types/types";
 import { Game_CommonEvent } from "./Game_CommonEvent";
 import { Game_Event } from "./Game_Event";
 import { Game_Interpreter } from "./Game_Interpreter";

@@ -1,4 +1,4 @@
-import { IsSame } from "./types";
+import { IsSame } from "../types/types";
 
 export type Pair<Key, Value> = { key: Key; value: Value };
 

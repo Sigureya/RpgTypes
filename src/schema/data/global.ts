@@ -1,4 +1,4 @@
-import { IdentifiedItems } from "@utils/types";
+import { IdentifiedItems } from "src/types/types";
 import {
   Data_Armor,
   Data_CommonEvent,

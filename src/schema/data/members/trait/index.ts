@@ -1,4 +1,4 @@
-import { ValueOf } from "@utils/types";
+import { ValueOf } from "src/types/types";
 import type * as $ from "./traitConstants";
 export * from "./other";
 

@@ -1,4 +1,4 @@
-import type { ValueOf } from "@utils/types";
+import type { ValueOf } from "src/types/types";
 import type {
   CHARACTER,
   GAMEDATA,
