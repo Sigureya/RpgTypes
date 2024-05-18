@@ -4,8 +4,7 @@
 
 import { Rectangle } from "src/types/rectangle";
 import { Game_Actor, Game_Battler } from "../object/battler";
-import { TextState } from "./types/textState";
-import { Game_Action, Sprite } from "@niokasgami/rpg-maker-mz-typescript";
+import { Game_Action } from "src/game/object/Game_Action";
 import { UsableItem } from "../data/item/usableItem";
 import { ParamId } from "../object/battler/base/param";
 import { ShopGoods } from "./types/goods";
@@ -13,7 +12,7 @@ import { Data_BaseItem } from "../data/item/baseItem";
 import { Equip } from "../object/battler/base/equip";
 import { SaveFileInfo } from "../data/saveFileInfo";
 import { Window_Selectable } from "./Window_Selectable";
-import { Window_Gold } from "./Window_Gold";
+import { Window_Message } from "./Window_Message";
 
 interface Selectable<T> {
   itemAt(index: number): T;
@@ -21,136 +20,10 @@ interface Selectable<T> {
 }
 
 //-----------------------------------------------------------------------------
-// Window_StatusBase
+// Window_MenuActor
 //
-// The superclass of windows for displaying actor status.
-
-export declare class Window_StatusBase {
-  initialize(rect: Rectangle): void;
-
-  loadFaceImages(): void;
-
-  refresh(): void;
-
-  hideAdditionalSprites(): void;
-
-  placeActorName(actor: Game_Actor, x: number, y: number): string;
-
-  placeStateIcon(actor: Game_Actor, x: number, y: number): void;
-
-  placeGauge(actor: Game_Actor, type: string, x: number, y: number): void;
-
-  createInnerSprite(key: string, spriteClass: typeof Sprite): void;
-
-  placeTimeGauge(actor: Game_Actor, x: number, y: number): void;
-
-  placeBasicGauges(actor: Game_Actor, x: number, y: number): void;
-
-  gaugeLineHeight(): number;
-
-  drawActorCharacter(actor: Game_Actor, x: number, y: number): void;
-
-  drawActorName(actor: Game_Actor, x: number, y: number, width: number): string;
-
-  drawActorClass(actor: Game_Actor, x: number, y: number, width: number): void;
-
-  drawActorNickname(
-    actor: Game_Actor,
-    x: number,
-    y: number,
-    width: number
-  ): void;
-
-  drawActorLevel(actor: Game_Actor, x: number, y: number): void;
-
-  drawActorIcons(actor: Game_Actor, x: number, y: number, width: number): void;
-
-  drawActorSimpleStatus(actor: Game_Actor, x: number, y: number): void;
-
-  actorSlotName(actor: Game_Actor, index: number): string;
-
-  //-----------------------------------------------------------------------------
-  // Window_MenuCommand
-  //
-  // The window for selecting a command on the menu screen.
-}
-declare class Window_MenuCommand {
-  initialize(rect: Rectangle): void;
-
-  makeCommandList(): void;
-
-  addMainCommands(): void;
-
-  addFormationCommand(): void;
-
-  addOriginalCommands(): void;
-
-  addOptionsCommand(): void;
-
-  addSaveCommand(): void;
-
-  addGameEndCommand(): void;
-
-  needsCommand(name: string): void;
-
-  areMainCommandsEnabled(): void;
-
-  isFormationEnabled(): boolean;
-
-  isOptionsEnabled(): boolean;
-
-  isSaveEnabled(): boolean;
-
-  isGameEndEnabled(): boolean;
-
-  processOk(): void;
-
-  selectLast(): void;
-
-  //-----------------------------------------------------------------------------
-  // Window_MenuStatus
-  //
-  // The window for displaying party member status on the menu screen.
-}
-declare class Window_MenuStatus {
-  initialize(rect: Rectangle): void;
-
-  maxItems(): number;
-
-  numVisibleRows(): boolean;
-
-  itemHeight(): number;
-
-  actor(index: number): void;
-
-  drawItem(index: number): void;
-
-  drawPendingItemBackground(index: number): void;
-
-  drawItemImage(index: number): void;
-
-  drawItemStatus(index: number): void;
-
-  processOk(): void;
-
-  isCurrentItemEnabled(): boolean;
-
-  selectLast(): void;
-
-  formationMode(): void;
-
-  setFormationMode(formationMode: boolean): void;
-
-  pendingindex(): number;
-
-  setPendingIndex(index: number): void;
-
-  //-----------------------------------------------------------------------------
-  // Window_MenuActor
-  //
-  // The window for selecting a target actor on the item and skill screens.
-}
-declare class Window_MenuActor {
+// The window for selecting a target actor on the item and skill screens.
+export declare class Window_MenuActor {
   initialize(rect: Rectangle): void;
 
   processOk(): void;
@@ -158,12 +31,11 @@ declare class Window_MenuActor {
   selectLast(): void;
 
   selectForItem(item: UsableItem): void;
-
-  //-----------------------------------------------------------------------------
-  // Window_ItemCategory
-  //
-  // The window for selecting a category of items on the item and shop screens.
 }
+//-----------------------------------------------------------------------------
+// Window_ItemCategory
+//
+// The window for selecting a category of items on the item and shop screens.
 declare class Window_ItemCategory {
   initialize(rect: Rectangle): void;
 
@@ -178,12 +50,11 @@ declare class Window_ItemCategory {
   setItemWindow(itemWindow: Window_ItemList): void;
 
   needsSelection(): void;
-
-  //-----------------------------------------------------------------------------
-  // Window_ItemList
-  //
-  // The window for selecting an item on the item screen.
 }
+//-----------------------------------------------------------------------------
+// Window_ItemList
+//
+// The window for selecting an item on the item screen.
 export declare class Window_ItemList
   extends Window_Selectable
   implements Selectable<Data_BaseItem>
@@ -228,11 +99,6 @@ export declare class Window_ItemList
   updateHelp(): void;
 
   refresh(): void;
-
-  //-----------------------------------------------------------------------------
-  // Window_SkillType
-  //
-  // The window for selecting a skill type on the skill screen.
 }
 export declare class Window_Status {
   initialize(rect: Rectangle): void;
@@ -256,12 +122,11 @@ export declare class Window_Status {
   expTotalValue(): void;
 
   expNextValue(): void;
-
-  //-----------------------------------------------------------------------------
-  // Window_StatusParams
-  //
-  // The window for displaying parameters on the status screen.
 }
+//-----------------------------------------------------------------------------
+// Window_StatusParams
+//
+// The window for displaying parameters on the status screen.
 declare class Window_StatusParams {
   initialize(rect: Rectangle): void;
 
@@ -274,12 +139,11 @@ declare class Window_StatusParams {
   drawItem(index: number): void;
 
   drawItemBackground(/*index*/): void;
-
-  //-----------------------------------------------------------------------------
-  // Window_StatusEquip
-  //
-  // The window for displaying equipment items on the status screen.
 }
+//-----------------------------------------------------------------------------
+// Window_StatusEquip
+//
+// The window for displaying equipment items on the status screen.
 declare class Window_StatusEquip {
   initialize(rect: Rectangle): void;
 
@@ -292,12 +156,11 @@ declare class Window_StatusEquip {
   drawItem(index: number): void;
 
   drawItemBackground(/*index*/): void;
-
-  //-----------------------------------------------------------------------------
-  // Window_Options
-  //
-  // The window for changing various settings on the options screen.
 }
+//-----------------------------------------------------------------------------
+// Window_Options
+//
+// The window for changing various settings on the options screen.
 declare class Window_Options {
   initialize(rect: Rectangle): void;
 
@@ -334,12 +197,11 @@ declare class Window_Options {
   getConfigValue(symbol: string): void;
 
   setConfigValue(symbol: string, volume: number): void;
-
-  //-----------------------------------------------------------------------------
-  // Window_SavefileList
-  //
-  // The window for selecting a save file on the save and load screens.
 }
+//-----------------------------------------------------------------------------
+// Window_SavefileList
+//
+// The window for selecting a save file on the save and load screens.
 declare class Window_SavefileList {
   initialize(rect: Rectangle): void;
 
@@ -372,12 +234,11 @@ declare class Window_SavefileList {
   drawPlaytime(info: SaveFileInfo, x: number, y: number, width: number): void;
 
   playOkSound(): void;
-
-  //-----------------------------------------------------------------------------
-  // Window_ShopCommand
-  //
-  // The window for selecting buy/sell on the shop screen.
 }
+//-----------------------------------------------------------------------------
+// Window_ShopCommand
+//
+// The window for selecting buy/sell on the shop screen.
 declare class Window_ShopCommand {
   initialize(rect: Rectangle): void;
 
@@ -386,12 +247,11 @@ declare class Window_ShopCommand {
   maxCols(): number;
 
   makeCommandList(): void;
-
-  //-----------------------------------------------------------------------------
-  // Window_ShopBuy
-  //
-  // The window for selecting an item to buy on the shop screen.
 }
+//-----------------------------------------------------------------------------
+// Window_ShopBuy
+//
+// The window for selecting an item to buy on the shop screen.
 declare class Window_ShopBuy implements Selectable<Data_BaseItem> {
   initialize(rect: Rectangle): void;
 
@@ -642,35 +502,10 @@ declare class Window_NameInput {
   onNameOk(): void;
 }
 //-----------------------------------------------------------------------------
-// Window_NameBox
-//
-// The window for displaying a speaker name above the message window.
-declare class Window_NameBox {
-  initialize(): void;
-
-  setMessageWindow(messageWindow: Window_Message): void;
-
-  setName(name: string): void;
-
-  clear(): void;
-
-  start(): void;
-
-  updatePlacement(): void;
-
-  updateBackground(): void;
-
-  windowWidth(): number;
-
-  windowHeight(): number;
-
-  refresh(): void;
-}
-//-----------------------------------------------------------------------------
 // Window_ChoiceList
 //
 // The window used for the event command [Show Choices].
-declare class Window_ChoiceList {
+export declare class Window_ChoiceList {
   initialize(): void;
 
   setMessageWindow(messageWindow: Window_Message): void;
@@ -721,7 +556,7 @@ declare class Window_ChoiceList {
 // Window_NumberInput
 //
 // The window used for the event command [Input Number].
-declare class Window_NumberInput {
+export declare class Window_NumberInput {
   initialize(): void;
 
   setMessageWindow(messageWindow: Window_Message): void;
@@ -782,7 +617,7 @@ declare class Window_NumberInput {
 // Window_EventItem
 //
 // The window used for the event command [Select Item].
-declare class Window_EventItem {
+export declare class Window_EventItem {
   initialize(rect: Rectangle): void;
 
   setMessageWindow(messageWindow: Window_Message): void;
@@ -808,97 +643,6 @@ declare class Window_EventItem {
   onOk(): void;
 
   onCancel(): void;
-}
-//-----------------------------------------------------------------------------
-// Window_Message
-//
-// The window for displaying text messages.
-declare class Window_Message {
-  initialize(rect: Rectangle): void;
-
-  initMembers(): void;
-
-  setGoldWindow(goldWindow: Window_Gold): void;
-
-  setNameBoxWindow(nameBoxWindow: Window_NameBox): void;
-
-  setChoiceListWindow(choiceListWindow: Window_ChoiceList): void;
-
-  setNumberInputWindow(numberInputWindow: Window_NumberInput): void;
-
-  setEventItemWindow(eventItemWindow: Window_EventItem): void;
-
-  clearFlags(): void;
-
-  update(): void;
-
-  checkToNotClose(): void;
-
-  synchronizeNameBox(): void;
-
-  canStart(): boolean;
-
-  startMessage(): void;
-
-  newLineX(text: TextState): void;
-
-  updatePlacement(): void;
-
-  updateBackground(): void;
-
-  terminateMessage(): void;
-
-  updateWait(): void;
-
-  updateLoading(): void;
-
-  updateInput(): void;
-
-  isvoidSubWindowActive(): boolean;
-
-  updateMessage(): void;
-
-  shouldBreakHere(text: TextState): void;
-
-  canBreakHere(text: TextState): boolean;
-
-  onEndOfText(): void;
-
-  startInput(): boolean;
-
-  isTriggered(): boolean;
-
-  doesContinue(): boolean;
-
-  areSettingsChanged(): void;
-
-  updateShowFast(): void;
-
-  newPage(text: TextState): void;
-
-  updateSpeakerName(): string;
-
-  loadMessageFace(): void;
-
-  drawMessageFace(): void;
-
-  processControlCharacter(text: TextState, c: string): void;
-
-  processNewLine(text: TextState): void;
-
-  processNewPage(text: TextState): void;
-
-  isEndOfText(text: TextState): boolean;
-
-  needsNewPage(text: TextState): void;
-
-  processEscapeCharacter(code: number, textState: TextState): void;
-
-  startWait(count: number): void;
-
-  startPause(): void;
-
-  isWaiting(): boolean;
 }
 //-----------------------------------------------------------------------------
 // Window_ScrollText

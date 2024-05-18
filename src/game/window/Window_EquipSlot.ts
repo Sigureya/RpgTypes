@@ -1,6 +1,7 @@
 import { Rectangle } from "src/types/rectangle";
 import { Game_Actor } from "../object/battler";
-import { Window_StatusBase, Window_Status } from "./src";
+import { Window_Status } from "./src";
+import { Window_StatusBase } from "./Window_StatusBase";
 import { Window_EquipItem } from "./Window_EquipItem";
 
 export declare class Window_EquipSlot extends Window_StatusBase {
