@@ -1,4 +1,4 @@
-///<reference path="./paramaters/index.ts" />
+///<reference path="./index.ts" />
 // 新規にコードを追加した場合、上記のindex.tsへ追記すること
 export const SHOW_MESSAGE = 101 as const;
 export const SHOW_MESSAGE_BODY = 401 as const;
@@ -41,6 +41,8 @@ export const PLAY_SE = 250 as const;
 export const SHOP_PROCESSING = 302 as const;
 export const SHOP_PROCESSING_BODY = 605 as const;
 export const NAME_INPUT_PROCESSING = 303 as const;
+//export const CHANGE_HP = 311 as const;
+//export const CHANGE_MP = 312 as const;
 
 export const CHANGE_NAME = 320 as const;
 export const CHANGE_NICKNAME = 324 as const;

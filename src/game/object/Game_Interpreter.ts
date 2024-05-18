@@ -1,5 +1,5 @@
 import type { CommandParameters } from "@schema/paramaters";
-import type * as $ from "@schema/codes";
+import type * as $ from "@schema/paramaters/codes";
 import type { EventCommand } from "@schema/types";
 import { Game_Actor } from "./Game_Actor";
 import { Game_Battler } from "./Game_Battler";

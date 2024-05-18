@@ -209,8 +209,9 @@ export type CommandParameters = {
   [$.PLAY_SE]: [value: RPG.SE];
   [$.SHOP_PROCESSING]: ShopProcessing;
   [$.SHOP_PROCESSING_BODY]: ShopGoods;
+  [$.NAME_INPUT_PROCESSING]: [actorId: number, name: string];
 
-  [$.CHANGE_NAME]: [id: number, name: string];
+  [$.CHANGE_NAME]: [id: number, maxLength: number];
 
   /**
    * @description Change Nickname
