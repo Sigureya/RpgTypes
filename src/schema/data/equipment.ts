@@ -1,6 +1,5 @@
-import { ParamArray } from "./members/paramArray";
+import { ParamArray, TraitContainer } from "./members";
 import { Data_NamedItem } from "./namedItem";
-import { TraitContainer } from "./members/trait";
 
 export interface Data_Equipment extends Data_NamedItem, TraitContainer {
   deescription: string;
