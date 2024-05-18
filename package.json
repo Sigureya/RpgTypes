@@ -1,4 +1,5 @@
 {
+  "name": "@sigureya/rpgtypes",
   "dependencies": {
     "@niokasgami/rpg-maker-mz-typescript": "github:niokasgami/Rpg-Maker-MZ-Typescript",
     "eslint": "^9.1.0"
