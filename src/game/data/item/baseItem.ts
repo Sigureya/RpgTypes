@@ -1,1 +1,1 @@
-export interface Data_BaseItem {}
+//export interface Data_BaseItem {}

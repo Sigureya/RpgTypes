@@ -6,6 +6,18 @@ export interface ItemEffect {
   dataId: number;
 }
 
+export interface Damage {}
+
 export interface Data_UsableItem extends Data_NamedItem {
-  effect: ItemEffect[];
+  effects: ItemEffect[];
+  damage: Damage;
+  animationId: number;
+  hitType: number;
+  occasion: number;
+  repeats: number;
+  scope: number;
+  speed: number;
+  successRate: number;
+  tpGain: number;
+  description: string;
 }
