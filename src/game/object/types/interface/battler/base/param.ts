@@ -1,4 +1,4 @@
-import { ParamID } from "src/game/data/members/paramArray";
+import { ParamID } from "@schema/data/members/paramArray";
 
 export interface Param {
   paramMin(paramId: ParamID): number;

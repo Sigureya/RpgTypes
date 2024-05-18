@@ -1,7 +1,7 @@
 import { IUsableItem } from "./types/useableItem";
 import { Game_Unit } from "./Game_Unit";
 import { IBattler } from "./types/interface/battler";
-import { Data_UsableItem } from "../data/item/usableItem";
+import { Data_UsableItem } from "../../schema/data/item/usableItem";
 import { IUnit } from "./types/interface/Iunit";
 
 //-----------------------------------------------------------------------------

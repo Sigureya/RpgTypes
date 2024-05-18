@@ -1,5 +1,5 @@
 import { Rectangle } from "src/types/rectangle";
-import { SaveFileInfo } from "../data/saveFileInfo";
+import { SaveFileInfo } from "../../schema/files/saveFileInfo";
 import { Window_Selectable } from "./Window_Selectable";
 
 //-----------------------------------------------------------------------------

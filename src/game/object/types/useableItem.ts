@@ -1,4 +1,4 @@
-import { Data_UsableItem } from "src/game/data/item/usableItem";
+import { Data_UsableItem } from "@schema/data/item/usableItem";
 
 export interface IUsableItem {
   initialize(item: Data_UsableItem): void;

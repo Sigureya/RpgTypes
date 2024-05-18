@@ -1,4 +1,4 @@
-import { Data_State } from "src/game/data";
+import { Data_State } from "@schema/data";
 export interface State {
   clearStates(): void;
   eraseState(stateId: number): void;

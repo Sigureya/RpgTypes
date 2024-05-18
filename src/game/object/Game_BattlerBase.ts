@@ -1,6 +1,10 @@
-import { Data_State } from "../data";
-import { Data_Equipment, Data_Weapon, Data_Armor } from "../data/equipment";
-import { Data_Skill } from "../data/skill";
+import { Data_State } from "../../schema/data";
+import {
+  Data_Equipment,
+  Data_Weapon,
+  Data_Armor,
+} from "../../schema/data/equipment";
+import { Data_Skill } from "../../schema/data/skill";
 import { IBattlerBase } from "./types/interface/battler/base";
 import { ParamId } from "./types/interface/battler/base/param";
 

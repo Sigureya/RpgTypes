@@ -2,7 +2,8 @@
 // Game_Picture
 //
 // The game object class for a picture.
-type ColorRGBA = [r: number, g: number, b: number, a: number];
+
+import { ColorRGBA } from "src/types/colorRGBA";
 
 export declare class Game_Picture {
   _name: string;

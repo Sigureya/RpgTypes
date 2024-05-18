@@ -1,6 +1,6 @@
 import { Rectangle } from "src/types/rectangle";
 import { ShopGoods } from "@schema/eventCommand/paramaters/shopGoods";
-import { Data_BaseItem } from "../data/item/baseItem";
+import { Data_BaseItem } from "../../schema/data/item/baseItem";
 import { Window_Status } from "./Window_Status";
 import { Window_Selectable } from "./Window_Selectable";
 import { ISelectable } from "./types/ISelctable";

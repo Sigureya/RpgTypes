@@ -1,5 +1,5 @@
 import { Rectangle } from "src/types/rectangle";
-import { Data_NamedItem } from "../data/namedItem";
+import { Data_NamedItem } from "../../schema/data/namedItem";
 import { Window_Scrollable } from "./Window_Scrollable";
 import { IHelpListner } from "./types/HelpListener";
 
