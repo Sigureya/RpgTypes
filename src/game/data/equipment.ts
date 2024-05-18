@@ -1,4 +1,4 @@
-import { ParamArray } from "./paramArray";
+import { ParamArray } from "./members/paramArray";
 import { Data_NamedItem } from "./namedItem";
 import { TraitContainer } from "./members/trait";
 

@@ -4,7 +4,7 @@
 // The game object class for a result of a battle action. For convinience, all
 // member variables in this class are public.
 
-import { ParamID } from "src/game/data/paramArray";
+import { ParamID } from "src/game/data/members/paramArray";
 
 export declare class Game_ActionResult {
   used: boolean;

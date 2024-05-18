@@ -1,5 +1,5 @@
 import { Action, DropItem, TraitContainer } from "./members";
-import { ParamArray } from "./paramArray";
+import { ParamArray } from "./members/paramArray";
 
 export interface Data_Enemy extends TraitContainer {
   id: number;
