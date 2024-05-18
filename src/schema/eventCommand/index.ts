@@ -2,10 +2,10 @@ import type { RPG } from "@niokasgami/rpg-maker-mz-typescript";
 import type { ValueOf } from "@utils/types";
 import type * as $ from "./codes";
 import type { OPERATION, TOGGLE } from "./constants";
-import type { ControlVariables } from "./controlVariables";
-import type { ShowPicture } from "./showPicture";
-import { ShopGoods, ShopProcessing } from "./shopGoods";
-import { ChanageActorVariable } from "./operateValue";
+import type { ControlVariables } from "./paramaters/controlVariables";
+import type { ShowPicture } from "./paramaters/showPicture";
+import { ShopGoods, ShopProcessing } from "./paramaters/shopGoods";
+import { ChanageActorVariable } from "./paramaters/operateValue";
 
 export type CommandParameters = {
   /**

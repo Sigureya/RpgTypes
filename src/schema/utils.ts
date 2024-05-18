@@ -1,5 +1,5 @@
-///<reference path="./paramaters/index.ts" />
-import type * as $ from "./paramaters/codes";
+///<reference path="./eventCommand/index.ts" />
+import type * as $ from "./eventCommand/codes";
 import type { ValueOf } from "@utils/types";
 import type { EventCommandTable } from "./types";
 
