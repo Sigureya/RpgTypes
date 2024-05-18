@@ -13,6 +13,7 @@ export declare class Game_Interpreter extends Game_EventCommandExecuter {
   constructor(depth: number);
   clear(): void;
   setup(list: EventCommand[], eventId: number): void;
+  setup(list: EventCommand[]): void;
   loadImages(): void;
   eventId(): number;
   isOnCurrentMap(): boolean;
@@ -107,8 +108,8 @@ declare class Game_EventCommandExecuter {
     param: CommandParameters[typeof $.CHANGE_FORMATION_ACCESS]
   ): boolean;
 
-  command231(param: CommandParameters[typeof $.CHANGE_GOLD]): boolean;
-  command241(param: CommandParameters[typeof $.CHANGE_GOLD]): boolean;
+  command231(param: CommandParameters[typeof $.SHOW_PICTURE]): boolean;
+  command241(param: CommandParameters[typeof $.PLAY_BGM]): boolean;
   command250(param: CommandParameters[typeof $.PLAY_SE]): boolean;
   command311(param: CommandParameters[typeof $.CHANGE_HP]): boolean;
   command312(param: CommandParameters[typeof $.CHANGE_MP]): boolean;
