@@ -8,3 +8,4 @@ export * from "./skill";
 export * from "./troop";
 export * from "./usableItem";
 export * from "./namedItem";
+export * from "./eventCommand";

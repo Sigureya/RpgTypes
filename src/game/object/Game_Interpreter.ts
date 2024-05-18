@@ -4,7 +4,7 @@ import type {
   CommandParameters,
   EventCommand,
 } from "../../schema";
-import type * as $ from "../../schema/eventCommand/codes";
+import type * as $ from "../../schema/data/eventCommand/codes";
 import { Game_Actor } from "./Game_Actor";
 import { Game_Battler } from "./Game_Battler";
 

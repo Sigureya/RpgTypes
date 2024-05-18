@@ -7,7 +7,7 @@ import type {
   ShopGoods,
   ShopProcessing,
   ShowPicture,
-} from "./paramaters/";
+} from "./paramaters";
 import { AudioFileParams } from "src/types/audio";
 
 export type CommandParameters = {

@@ -1,4 +1,4 @@
-import { EventCommand } from "@schema/types";
+import { EventCommand } from "./eventCommand";
 
 export interface Data_CommonEvent {
   trigger: number;

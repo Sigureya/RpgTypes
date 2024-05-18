@@ -1,4 +1,4 @@
-import type { CommandParameters } from "./eventCommand";
+import type { CommandParameters } from "./data/eventCommand";
 
 export type EventCommandTable = {
   [EveneCodeConstant in keyof CommandParameters]: {
