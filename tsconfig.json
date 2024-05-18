@@ -27,5 +27,6 @@
     "game/js/rmmz*.js",
     "game/js/plugins/**/*.js"
   ],
+  //"files": ["src/"],
   "exclude": ["game/js/plugins/exclude/**/*.js"]
 }
