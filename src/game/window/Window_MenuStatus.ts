@@ -6,7 +6,7 @@ import { Window_StatusBase } from "./Window_StatusBase";
 //
 // The window for displaying party member status on the menu screen.
 
-declare class Window_MenuStatus extends Window_StatusBase {
+export declare class Window_MenuStatus extends Window_StatusBase {
   initialize(rect: Rectangle): void;
 
   maxItems(): number;

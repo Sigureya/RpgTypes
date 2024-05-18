@@ -1,7 +1,8 @@
 import { Rectangle } from "src/types/rectangle";
 import { Game_Actor } from "../object/battler";
 import { Equip } from "../object/battler/base/equip";
-import { Window_ItemList, Window_Status } from "./src";
+import { Window_Status } from "./Window_Status";
+import { Window_ItemList } from "./Window_ItemList";
 
 export declare class Window_EquipItem extends Window_ItemList {
   initialize(rect: Rectangle): void;
