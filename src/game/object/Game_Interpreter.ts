@@ -4,7 +4,6 @@ import type { EventCommand } from "@schema/types";
 import { Game_Actor } from "./Game_Actor";
 import { Game_Battler } from "./Game_Battler";
 import {
-  CONSTANT_OR_VARIABLE,
   ConstatnOrVariable,
   OPERATION,
 } from "@schema/eventCommand/paramaters/operateValue";
