@@ -11,6 +11,7 @@ import {
   $testEvent,
 } from "@niokasgami/rpg-maker-mz-typescript";
 import { Game_Interpreter } from "./Game_Interpreter";
+import { Game_CommonEvent } from "./Game_CommonEvent";
 
 //-----------------------------------------------------------------------------
 // Game_Map
@@ -22,7 +23,7 @@ export class Game_Map {
   _mapId: number;
   _tilesetId: number;
   _events: never[];
-  _commonEvents: never[];
+  _commonEvents: Game_CommonEvent[];
   _vehicles: never[];
   _displayX: number;
   _displayY: number;
