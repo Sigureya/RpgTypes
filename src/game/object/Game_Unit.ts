@@ -1,10 +1,14 @@
 import { Game_Battler } from "./Game_Battler";
-import { IBattler } from "./types";
-import { IUnit } from "./types/interface/unit";
+import { IBattler, IUnit, IUnitTpb } from "./types";
 
 export declare class Game_Unit<Battler extends IBattler = Game_Battler>
-  implements IUnit<Battler>
+  implements IUnit<Battler>, IUnitTpb
 {
+  tpbBaseSpeed(): number;
+  tpbReferenceTime(): number;
+  updateTpb(): void;
+  substituteBattler(): Battler | null;
+  select(activeMember: Battler): void;
   randomTarget(): Battler | null;
   randomDeadTarget(): Battler | null;
   smoothTarget(): Battler | undefined;
@@ -16,4 +20,5 @@ export declare class Game_Unit<Battler extends IBattler = Game_Battler>
   inBattle(): boolean;
   agility(): boolean;
   tgrSum(): number;
+  isAllDead(): boolean;
 }

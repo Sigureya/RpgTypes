@@ -1,10 +1,13 @@
 import type { ValueOf } from "@utils/types";
 import type * as $ from "./codes";
 import type { OPERATION, TOGGLE } from "./constants";
-import type { ControlVariables } from "./paramaters/controlVariables";
-import type { ShowPicture } from "./paramaters/showPicture";
-import { ShopGoods, ShopProcessing } from "./paramaters/shopGoods";
-import { ChanageActorVariable } from "./paramaters/operateValue";
+import type {
+  ControlVariables,
+  ChanageActorVariable,
+  ShopGoods,
+  ShopProcessing,
+  ShowPicture,
+} from "./paramaters/";
 import { AudioFileParams } from "src/types/audio";
 
 export type CommandParameters = {
