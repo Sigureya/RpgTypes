@@ -1,6 +1,6 @@
-import { Game_Battler } from "../Game_Battler";
+import { IBattler } from "./battler";
 
-export interface IUnit<Battler extends Game_Battler> {
+export interface IUnit<Battler extends IBattler> {
   members(): Battler[];
   inBattle(): boolean;
   agility(): boolean;
