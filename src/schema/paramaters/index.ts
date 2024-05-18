@@ -1,6 +1,6 @@
 import type { RPG } from "@niokasgami/rpg-maker-mz-typescript";
 import type { ValueOf } from "@utils/types";
-import type * as $ from "../codes";
+import type * as $ from "./codes";
 import type { OPERATION, TOGGLE } from "./constants";
 import type { ControlVariables } from "./controlVariables";
 import type { ShowPicture } from "./showPicture";
