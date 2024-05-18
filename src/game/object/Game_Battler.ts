@@ -1,6 +1,5 @@
-import { IUnit } from "./types/Iunit";
-import { Game_BattlerBase } from "./battler/base";
-import { TimeProgressBattle } from "./battler/method/timeProgressBattle";
+import { TimeProgressBattle } from "./types/battler/method/timeProgressBattle";
+import { Game_BattlerBase } from "./Game_BattlerBase";
 
 export declare class Game_Battler
   extends Game_BattlerBase

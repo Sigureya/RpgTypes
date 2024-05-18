@@ -1,8 +1,8 @@
 import { DataState } from "src/game/data";
-import { Buff } from "./buff";
-import { ParamArray, ParamId } from "./param";
-import { State } from "./state";
-import { ItemUser } from "./itemUser";
+import { Buff } from "./types/battler/base/buff";
+import { ParamArray, ParamId } from "./types/battler/base/param";
+import { State } from "./types/battler/base/state";
+import { ItemUser } from "./types/battler/base/itemUser";
 import { Data_Skill } from "src/game/data/item/skill";
 
 export declare class Game_BattlerBase implements Buff, State, ItemUser {
