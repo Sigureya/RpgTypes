@@ -1,6 +1,6 @@
 import { Game_Unit } from "./Game_Unit";
-import { Game_Actor } from "./battler";
-import { IUnit } from "./types/interface";
+import { Game_Actor } from "./Game_Actor";
+import { IUnit } from "./types/Iunit";
 
 export declare class Game_Party extends Game_Unit implements IUnit<Game_Actor> {
   members(): Game_Actor[];

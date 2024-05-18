@@ -1,4 +1,4 @@
-import { Game_Battler } from "../battler";
+import { Game_Battler } from "../Game_Battler";
 
 export interface IUnit<Battler extends Game_Battler> {
   members(): Battler[];

@@ -1,4 +1,4 @@
-import { IUnit } from "./types/interface";
+import { IUnit } from "./types/Iunit";
 import { Game_BattlerBase } from "./battler/base";
 import { TimeProgressBattle } from "./battler/method/timeProgressBattle";
 

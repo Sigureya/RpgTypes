@@ -1,5 +1,5 @@
 import { Game_Battler } from "./battler";
-import { IUnit } from "./types/interface";
+import { IUnit } from "./types/Iunit";
 
 export declare class Game_Unit implements IUnit<Game_Battler> {
   inBattle(): boolean;
