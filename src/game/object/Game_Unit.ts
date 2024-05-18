@@ -2,6 +2,10 @@ import { Game_Battler } from "./Game_Battler";
 import { IUnit } from "./types/Iunit";
 
 export declare class Game_Unit implements IUnit<Game_Battler> {
+  deadMembers(): Game_Battler[];
+  movableMembers(): Game_Battler[];
+  aliveMembers(): Game_Battler[];
+  smoothDeadTarget(): Game_Battler | undefined;
   members(): Game_Battler[];
   inBattle(): boolean;
   agility(): boolean;
