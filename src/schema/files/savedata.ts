@@ -1,8 +1,25 @@
-import { Game_Actors, Game_Switches } from "@game/object";
-import { Game_Party } from "@game/object/Game_Party";
+import {
+  Game_Party,
+  Game_Actors,
+  Game_Switches,
+  Game_Timer,
+  Game_Variables,
+  Game_Player,
+  Game_System,
+  Game_Map,
+  Game_Screen,
+  Game_SelfSwitches,
+} from "@game/object";
 
 export interface Savedata {
-  variables: Game_Switches;
+  system: Game_System;
+  scrren: Game_Screen;
+  timer: Game_Timer;
+  switches: Game_Switches;
+  variables: Game_Variables;
+  selfSwitches: Game_SelfSwitches;
   actors: Game_Actors;
   party: Game_Party;
+  map: Game_Map;
+  player: Game_Player;
 }
