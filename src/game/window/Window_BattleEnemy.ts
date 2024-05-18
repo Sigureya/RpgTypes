@@ -1,6 +1,6 @@
 import { Rectangle } from "src/types/rectangle";
 import { Window_Selectable } from "./Window_Selectable";
-import { Game_Enemy } from "../object/battler";
+import { Game_Enemy } from "src/game/object";
 
 //-----------------------------------------------------------------------------
 // Window_BattleEnemy

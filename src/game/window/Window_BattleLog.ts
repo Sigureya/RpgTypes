@@ -4,7 +4,7 @@
 // The window for displaying battle progress. No frame is displayed, but it is
 
 import { Rectangle } from "src/types/rectangle";
-import { Data_UsableItem } from "../../schema/data/item/usableItem";
+import { Data_UsableItem } from "../../schema/data/usableItem";
 import { Window_Base } from "./Window_Base";
 import { Game_Battler } from "../object/Game_Battler";
 import { Game_Action } from "../object/Game_Action";

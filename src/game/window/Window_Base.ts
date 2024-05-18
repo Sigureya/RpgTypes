@@ -1,6 +1,5 @@
 import { Rectangle } from "src/types/rectangle";
 import { TextState } from "./types/textState";
-import { Data_NamedItem } from "src/game/data/item/namedItem";
 import { TextAlign } from "./types/TextAlign";
 
 export declare class Window_Base {
@@ -129,7 +128,7 @@ export declare class Window_Base {
   drawIcon(iconIndex: number, x: number, y: number): void;
 
   drawItemName(
-    item: Data_NamedItem,
+    item: { name: string },
     x: number,
     y: number,
     width: number

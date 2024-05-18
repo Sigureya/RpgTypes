@@ -1,4 +1,4 @@
-import { IUnit } from "./types/interface/Iunit";
+import { IUnit } from "./types/interface/unit";
 import { IBattler } from "./types/interface/battler";
 import { Game_BattlerBase } from "./Game_BattlerBase";
 

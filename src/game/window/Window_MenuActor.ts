@@ -1,5 +1,5 @@
 import { Rectangle } from "src/types/rectangle";
-import { Data_UsableItem } from "../../schema/data/item/usableItem";
+import { Data_UsableItem } from "../../schema/data/usableItem";
 import { Window_MenuStatus } from "./Window_MenuStatus";
 
 //-----------------------------------------------------------------------------

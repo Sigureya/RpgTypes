@@ -1,4 +1,4 @@
-import { IUnit } from "../Iunit";
+import { IUnit } from "../unit";
 import { IBattlerBase } from "./base";
 import { TimeProgressBattle } from "./timeProgressBattle";
 

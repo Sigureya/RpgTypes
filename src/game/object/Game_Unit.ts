@@ -1,5 +1,5 @@
 import { Game_Battler } from "./Game_Battler";
-import { IUnit } from "./types/interface/Iunit";
+import { IUnit } from "./types/interface/unit";
 
 export declare class Game_Unit implements IUnit<Game_Battler> {
   deadMembers(): Game_Battler[];

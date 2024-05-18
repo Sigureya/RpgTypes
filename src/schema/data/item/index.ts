@@ -1,1 +1,1 @@
-export * from "./usableItem";
+export * from "../usableItem";
