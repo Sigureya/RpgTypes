@@ -5,7 +5,7 @@ import type { OPERATION, TOGGLE } from "./constants";
 import type { ControlVariables } from "./controlVariables";
 import type { ShowPicture } from "./showPicture";
 import { ShopGoods, ShopProcessing } from "./shopGoods";
-import { ChanageActorVariable, OperateValueParams } from "./operateValue";
+import { ChanageActorVariable } from "./operateValue";
 
 export type CommandParameters = {
   /**
@@ -208,6 +208,8 @@ export type CommandParameters = {
 
   [$.PLAY_BGM]: [value: RPG.Bgm];
   [$.PLAY_SE]: [value: RPG.SE];
+  [$.SAVE_BGM]: [];
+  [$.RESUME_BGM]: [];
   [$.SHOP_PROCESSING]: ShopProcessing;
   [$.SHOP_PROCESSING_BODY]: ShopGoods;
   [$.NAME_INPUT_PROCESSING]: [actorId: number, name: string];
