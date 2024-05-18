@@ -2,8 +2,13 @@ import { Game_BattlerBase } from "./Game_BattlerBase";
 import { IBattler } from "./types/battler";
 import { Data_Equipment, Data_Weapon, Data_Armor } from "../data/item";
 import { ParamId } from "./types/battler/base/param";
+import { IUnit } from "./types/Iunit";
 
 export declare class Game_Battler extends Game_BattlerBase implements IBattler {
+  friendsUnit(): IUnit<IBattler>;
+  opponentsUnit(): IUnit<IBattler>;
+  attackSkillId(): number;
+  guardSkillId(): number;
   isEnemy(): boolean;
   isActor(): boolean;
   canEquip(item: Data_Equipment): boolean;

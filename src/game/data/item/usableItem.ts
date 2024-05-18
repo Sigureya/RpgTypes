@@ -1,1 +1,1 @@
-export interface UsableItem {}
+export interface Data_UsableItem {}
