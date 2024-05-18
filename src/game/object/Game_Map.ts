@@ -1,25 +1,17 @@
-import {
-  $dataSystem,
-  Graphics,
-  AudioManager,
-  $dataMap,
-  $gameSystem,
-  $gameSwitches,
-  ImageManager,
-  $dataTilesets,
-  $testEvent,
-} from "@niokasgami/rpg-maker-mz-typescript";
-import { Game_Interpreter } from "./Game_Interpreter";
-import { Game_CommonEvent } from "./Game_CommonEvent";
-import { Game_Event } from "./Game_Event";
-import { Game_Vehicle } from "./Game_Vehicle";
-import { $dataCommonEvents, Data_CommonEvent } from "@schema/data";
-import { Direction8 } from "./types/interface/character";
-import { ValueOf } from "@utils/types";
 //-----------------------------------------------------------------------------
 // Game_Map
 //
 // The game object class for a map. It contains scrolling and passage
+
+import { $dataTilesets } from "@niokasgami/rpg-maker-mz-typescript";
+import { Data_CommonEvent } from "@schema/data";
+import { ValueOf } from "@utils/types";
+import { Game_CommonEvent } from "./Game_CommonEvent";
+import { Game_Event } from "./Game_Event";
+import { Game_Interpreter } from "./Game_Interpreter";
+import { Game_Vehicle } from "./Game_Vehicle";
+import { Direction8 } from "./types/interface/character";
+
 // determination functions.
 export declare class Game_Map {
   _interpreter: Game_Interpreter;
@@ -92,12 +84,8 @@ export declare class Game_Map {
   isLoopHorizontal(): boolean;
   isLoopVertical(): boolean;
   isDashDisabled(): boolean;
-  encounterList() {
-    return $dataMap.encounterList;
-  }
-  encounterStep() {
-    return $dataMap.encounterStep;
-  }
+  encounterList(): [];
+  encounterStep(): number;
   isOverworld(): boolean;
   screenTileX(): number;
   screenTileY(): number;
