@@ -1,5 +1,6 @@
 import { ValueOf } from "@utils/types";
-import type * as $ from "../traitConstants";
+import type * as $ from "./traitConstants";
+export * from "./other";
 
 export type TraitCode = ValueOf<typeof $>;
 
