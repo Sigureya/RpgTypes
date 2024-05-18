@@ -106,6 +106,9 @@ declare class Game_EventCommandExecuter {
   command231(param: CommandParameters[typeof $.CHANGE_GOLD]): boolean;
   command241(param: CommandParameters[typeof $.CHANGE_GOLD]): boolean;
   command250(param: CommandParameters[typeof $.PLAY_SE]): boolean;
+  command311(param: CommandParameters[typeof $.CHANGE_HP]): boolean;
+  command312(param: CommandParameters[typeof $.CHANGE_MP]): boolean;
+  command313(param: CommandParameters[typeof $.CHANGE_TP]): boolean;
 
   command320(param: CommandParameters[typeof $.CHANGE_NAME]): boolean;
   command324(param: CommandParameters[typeof $.CHANGE_NICKNAME]): boolean;

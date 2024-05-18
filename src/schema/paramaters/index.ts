@@ -212,6 +212,8 @@ export type CommandParameters = {
   [$.SHOP_PROCESSING_BODY]: ShopGoods;
   [$.NAME_INPUT_PROCESSING]: [actorId: number, name: string];
   [$.CHANGE_HP]: [...ChanageActorVariable, allowDetah: boolean];
+  [$.CHANGE_MP]: ChanageActorVariable;
+  [$.CHANGE_TP]: ChanageActorVariable;
 
   [$.CHANGE_NAME]: [id: number, maxLength: number];
 

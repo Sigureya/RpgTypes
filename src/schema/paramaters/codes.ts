@@ -42,7 +42,8 @@ export const SHOP_PROCESSING = 302 as const;
 export const SHOP_PROCESSING_BODY = 605 as const;
 export const NAME_INPUT_PROCESSING = 303 as const;
 export const CHANGE_HP = 311 as const;
-//export const CHANGE_MP = 312 as const;
+export const CHANGE_MP = 312 as const;
+export const CHANGE_TP = 313 as const;
 
 export const CHANGE_NAME = 320 as const;
 export const CHANGE_NICKNAME = 324 as const;
