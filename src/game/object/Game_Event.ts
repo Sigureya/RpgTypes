@@ -1,7 +1,6 @@
-import { EventCommand } from "@schema/types";
+import { MapEventPage, EventCommand } from "../../schema";
 import { Game_Character } from "./Game_Character";
 import { IMapEvent, MoveRouteCommand } from "./types/interface/character";
-import { MapEventPage } from "@schema/map/event/page";
 
 export declare class Game_Event extends Game_Character implements IMapEvent {
   isStarting(): boolean;

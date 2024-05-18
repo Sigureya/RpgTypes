@@ -1,10 +1,8 @@
-import { Rectangle } from "src/types/rectangle";
+import { Rectangle } from "./rectangle";
 import { TextState } from "./types/textState";
 import { TextAlign } from "./types/TextAlign";
 
 export declare class Window_Base {
-  initialize(rect: Rectangle): void;
-
   destroy(options: void): void;
 
   lineHeight(): number;

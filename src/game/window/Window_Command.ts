@@ -1,4 +1,3 @@
-import { Rectangle } from "src/types/rectangle";
 import { TextAlign } from "./types/TextAlign";
 import { CommandItem } from "./types/commandItem";
 
@@ -14,8 +13,6 @@ export declare class Window_Command<ExtType = any> {
   ): void;
   addCommand(name: string, symbol: string): void;
   addCommand(name: string, symbol: string, enabled: boolean): void;
-
-  initialize(rect: Rectangle): void;
 
   maxItems(): number;
 

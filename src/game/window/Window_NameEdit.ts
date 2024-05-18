@@ -1,5 +1,5 @@
 import { Rectangle } from "src/types/rectangle";
-import { Game_Actor } from "@game/object";
+import { Game_Actor } from "../object";
 import { Window_StatusBase } from "./Window_StatusBase";
 
 //-----------------------------------------------------------------------------
@@ -7,8 +7,6 @@ import { Window_StatusBase } from "./Window_StatusBase";
 //
 // The window for editing an actor's name on the name input screen.
 export declare class Window_NameEdit extends Window_StatusBase {
-  initialize(rect: Rectangle): void;
-
   setup(actor: Game_Actor, maxLength: number): void;
 
   name(): string;

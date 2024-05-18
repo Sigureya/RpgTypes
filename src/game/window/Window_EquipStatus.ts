@@ -1,11 +1,8 @@
-import { Rectangle } from "src/types/rectangle";
-import { Game_Actor } from "../object/battler";
-import { ParamId } from "../object/battler/base/param";
+import { Game_Actor } from "../object";
+import { ParamID } from "../../schema";
 import { Window_StatusBase } from "./Window_StatusBase";
 
 export declare class Window_EquipStatus extends Window_StatusBase {
-  initialize(rect: Rectangle): void;
-
   setActor(actor: Game_Actor): void;
 
   colSpacing(): number;
@@ -16,13 +13,13 @@ export declare class Window_EquipStatus extends Window_StatusBase {
 
   drawAllParams(): void;
 
-  drawParamName(x: number, y: number, paramId: ParamId): string;
+  drawParamName(x: number, y: number, paramId: ParamID): string;
 
-  drawCurrentParam(x: number, y: number, paramId: ParamId): void;
+  drawCurrentParam(x: number, y: number, paramId: ParamID): void;
 
   drawRightArrow(x: number, y: number): void;
 
-  drawNewParam(x: number, y: number, paramId: ParamId): void;
+  drawNewParam(x: number, y: number, paramId: ParamID): void;
 
   rightArrowWidth(): number;
 

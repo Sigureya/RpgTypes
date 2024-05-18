@@ -1,4 +1,3 @@
-import { Rectangle } from "src/types/rectangle";
 import { TextState } from "./types/textState";
 import { Window_Gold } from "./Window_Gold";
 import { Window_Base } from "./Window_Base";
@@ -12,8 +11,6 @@ import { Window_NumberInput } from "./Window_NumberInput";
 //
 // The window for displaying text messages.
 export declare class Window_Message extends Window_Base {
-  initialize(rect: Rectangle): void;
-
   initMembers(): void;
 
   setGoldWindow(goldWindow: Window_Gold): void;

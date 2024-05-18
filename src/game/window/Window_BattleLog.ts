@@ -3,17 +3,13 @@
 //
 // The window for displaying battle progress. No frame is displayed, but it is
 
-import { Rectangle } from "src/types/rectangle";
-import { Data_UsableItem } from "../../schema/data/usableItem";
+import { Rectangle } from "./rectangle";
 import { Window_Base } from "./Window_Base";
-import { Game_Battler } from "../object/Game_Battler";
-import { Game_Action } from "../object/Game_Action";
-import { ParamId } from "../object/types/interface/battler/base/param";
-
+import { Game_Battler, Game_Action } from "../object/";
+import { Spriteset_Battle } from "../sprite/spriteset/battle";
+import { ParamID, Data_UsableItem } from "../../schema";
 // handled as a window for convenience.
 export declare class Window_BattleLog extends Window_Base {
-  initialize(rect: Rectangle): void;
-
   setSpriteset(spriteset: Spriteset_Battle): void;
 
   maxLines(): void;
@@ -156,7 +152,7 @@ export declare class Window_BattleLog extends Window_Base {
 
   displayChangedBuffs(target: Game_Battler): boolean;
 
-  displayBuffs(target: Game_Battler, buffs: ParamId[], fmt: string): boolean;
+  displayBuffs(target: Game_Battler, buffs: ParamID[], fmt: string): boolean;
 
   makeHpDamageText(target: Game_Battler): void;
 

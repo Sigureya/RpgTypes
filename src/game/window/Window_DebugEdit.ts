@@ -1,4 +1,4 @@
-import { Rectangle } from "src/types/rectangle";
+import { Rectangle } from "./rectangle";
 import { Window_Selectable } from "./Window_Selectable";
 
 //-----------------------------------------------------------------------------

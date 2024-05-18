@@ -7,8 +7,6 @@ import { Window_Selectable } from "./Window_Selectable";
 //
 // The window used for the event command [Input Number].
 export declare class Window_NumberInput extends Window_Selectable {
-  initialize(): void;
-
   setMessageWindow(messageWindow: Window_Message): void;
 
   start(): void;

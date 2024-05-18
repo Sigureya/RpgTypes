@@ -1,6 +1,6 @@
 import { Rectangle } from "src/types/rectangle";
-import { Data_BaseItem } from "../../schema/data/item/baseItem";
 import { Window_ItemList } from "./Window_ItemList";
+import { PricedItem } from "./types/pricedItem";
 
 //-----------------------------------------------------------------------------
 // Window_ShopSell
@@ -9,5 +9,5 @@ import { Window_ItemList } from "./Window_ItemList";
 export declare class Window_ShopSell extends Window_ItemList {
   initialize(rect: Rectangle): void;
 
-  isEnabled(item: Data_BaseItem): boolean;
+  isEnabled(item: PricedItem | null): boolean;
 }

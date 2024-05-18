@@ -1,4 +1,4 @@
-import { Rectangle } from "src/types/rectangle";
+import { Rectangle } from "./rectangle";
 import { Window_BattleStatus } from "./Window_BattleStatus";
 
 //-----------------------------------------------------------------------------
@@ -6,8 +6,6 @@ import { Window_BattleStatus } from "./Window_BattleStatus";
 //
 // The window for selecting a target actor on the battle screen.
 export declare class Window_BattleActor extends Window_BattleStatus {
-  initialize(rect: Rectangle): void;
-
   show(): void;
 
   hide(): void;

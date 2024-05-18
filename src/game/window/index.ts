@@ -1,3 +1,4 @@
+export * from "./rectangle";
 export * from "./Window_Base";
 export * from "./Window_BattleActor";
 export * from "./Window_BattleEnemy";

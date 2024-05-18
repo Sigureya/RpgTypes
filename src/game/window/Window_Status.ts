@@ -1,5 +1,5 @@
-import { Rectangle } from "src/types/rectangle";
-import { Game_Actor } from "../object/battler";
+import { Rectangle } from "./rectangle";
+import { Game_Actor } from "../../game";
 import { Window_StatusBase } from "./Window_StatusBase";
 
 export declare class Window_Status extends Window_StatusBase {

@@ -1,6 +1,6 @@
-import { Rectangle } from "src/types/rectangle";
-import { Data_BaseItem } from "../../schema/data/item/baseItem";
+import { Rectangle } from "./rectangle";
 import { Window_Selectable } from "./Window_Selectable";
+import { PricedItem } from "./types/pricedItem";
 
 //-----------------------------------------------------------------------------
 // Window_ShopNumber
@@ -14,7 +14,7 @@ export declare class Window_ShopNumber extends Window_Selectable {
 
   number(): void;
 
-  setup(item: Data_BaseItem, max: number, price: number): void;
+  setup(item: PricedItem, max: number, price: number): void;
 
   setCurrencyUnit(currencyUnit: string): void;
 

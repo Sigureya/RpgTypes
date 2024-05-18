@@ -1,4 +1,3 @@
-import { Rectangle } from "src/types/rectangle";
 import { Window_Selectable } from "./Window_Selectable";
 import { Window_NameEdit } from "./Window_NameEdit";
 
@@ -7,8 +6,6 @@ import { Window_NameEdit } from "./Window_NameEdit";
 //
 // The window for selecting a block of switches/variables on the debug screen.
 export declare class Window_DebugRange extends Window_Selectable {
-  initialize(rect: Rectangle): void;
-
   maxItems(): number;
 
   update(): void;

@@ -1,12 +1,9 @@
-import { Rectangle } from "src/types/rectangle";
-import { Game_Actor } from "../object/battler";
-import { Equip } from "../object/battler/base/equip";
+import { Game_Actor } from "../object";
+import { Data_Equipment } from "../../schema";
 import { Window_Status } from "./Window_Status";
 import { Window_ItemList } from "./Window_ItemList";
 
 export declare class Window_EquipItem extends Window_ItemList {
-  initialize(rect: Rectangle): void;
-
   maxCols(): number;
 
   colSpacing(): number;
@@ -15,11 +12,11 @@ export declare class Window_EquipItem extends Window_ItemList {
 
   setSlotId(slotId: number): void;
 
-  includes(item: Equip): void;
+  includes(item: Data_Equipment): void;
 
   etypeId(): void;
 
-  isEnabled(item: Equip): boolean;
+  isEnabled(item: Data_Equipment): boolean;
 
   selectLast(): void;
 

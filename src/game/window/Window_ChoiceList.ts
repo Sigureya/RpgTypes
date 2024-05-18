@@ -6,8 +6,6 @@ import { Window_Command } from "./Window_Command";
 //
 // The window used for the event command [Show Choices].
 export declare class Window_ChoiceList extends Window_Command {
-  initialize(): void;
-
   setMessageWindow(messageWindow: Window_Message): void;
 
   createCancelButton(): void;

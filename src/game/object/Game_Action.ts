@@ -1,7 +1,6 @@
 import { Game_Unit } from "./Game_Unit";
 import { IUnit, IUsableItem, IBattler } from "./types/";
-import { Data_UsableItem } from "@schema/data/usableItem";
-
+import { Data_UsableItem } from "../../schema";
 //-----------------------------------------------------------------------------
 // Game_Action
 //

@@ -1,5 +1,4 @@
-import { Rectangle } from "src/types/rectangle";
-import { Data_BaseItem } from "../../schema/data/item/baseItem";
+import { Data_Item, Data_Equipment } from "../../schema/";
 import { Window_Message } from "./Window_Message";
 import { Window_ItemList } from "./Window_ItemList";
 
@@ -8,8 +7,6 @@ import { Window_ItemList } from "./Window_ItemList";
 //
 // The window used for the event command [Select Item].
 export declare class Window_EventItem extends Window_ItemList {
-  initialize(rect: Rectangle): void;
-
   setMessageWindow(messageWindow: Window_Message): void;
 
   createCancelButton(): void;
@@ -24,7 +21,7 @@ export declare class Window_EventItem extends Window_ItemList {
 
   placeCancelButton(): void;
 
-  includes(item: Data_BaseItem): void;
+  includes(item: Data_Item | Data_Equipment): void;
 
   needsNumber(): void;
 

@@ -1,12 +1,12 @@
-import type { CommandParameters } from "@schema/eventCommand";
-import type * as $ from "@schema/eventCommand/codes";
-import type { EventCommand } from "@schema/types";
-import { Game_Actor } from "./Game_Actor";
-import { Game_Battler } from "./Game_Battler";
-import {
+import type {
   ConstatnOrVariable,
   OPERATION,
-} from "@schema/eventCommand/paramaters/operateValue";
+  CommandParameters,
+  EventCommand,
+} from "../../schema";
+import type * as $ from "../../schema/eventCommand/codes";
+import { Game_Actor } from "./Game_Actor";
+import { Game_Battler } from "./Game_Battler";
 
 export declare class Game_Interpreter extends Game_EventCommandExecuter {
   constructor(depth: number);

@@ -3,8 +3,6 @@ import { Window_Selectable } from "./Window_Selectable";
 import { Window_NameEdit } from "./Window_NameEdit";
 
 export declare class Window_NameInput extends Window_Selectable {
-  initialize(rect: Rectangle): void;
-
   setEditWindow(editWindow: Window_NameEdit): void;
 
   table(): void;

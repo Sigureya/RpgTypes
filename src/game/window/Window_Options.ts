@@ -1,4 +1,3 @@
-import { Rectangle } from "src/types/rectangle";
 import { Window_Command } from "./Window_Command";
 
 //-----------------------------------------------------------------------------
@@ -6,8 +5,6 @@ import { Window_Command } from "./Window_Command";
 //
 // The window for changing various settings on the options screen.
 export declare class Window_Options extends Window_Command {
-  initialize(rect: Rectangle): void;
-
   makeCommandList(): void;
 
   addGeneralOptions(): void;

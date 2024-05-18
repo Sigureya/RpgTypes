@@ -4,9 +4,9 @@ import {
   Data_Weapon,
   Data_Armor,
   Data_Skill,
-} from "@schema/data/";
+  ParamID,
+} from "../../schema";
 import { IBattlerBase } from "./types/interface/battler/base";
-import { ParamID } from "@schema/data/members";
 
 export declare class Game_BattlerBase implements IBattlerBase {
   canEquip(item: Data_Equipment): boolean;

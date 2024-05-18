@@ -1,5 +1,4 @@
-import { Rectangle } from "src/types/rectangle";
-import { Data_UsableItem } from "@schema/data";
+import { Data_UsableItem } from "../../schema";
 import { Window_MenuStatus } from "./Window_MenuStatus";
 
 //-----------------------------------------------------------------------------
@@ -8,8 +7,6 @@ import { Window_MenuStatus } from "./Window_MenuStatus";
 // The window for selecting a target actor on the item and skill screens.
 
 export declare class Window_MenuActor extends Window_MenuStatus {
-  initialize(rect: Rectangle): void;
-
   processOk(): void;
 
   selectLast(): void;

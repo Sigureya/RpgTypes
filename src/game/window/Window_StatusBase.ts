@@ -1,5 +1,5 @@
-import { Rectangle } from "src/types/rectangle";
-import { Game_Actor } from "../object/battler";
+import { Rectangle } from "./rectangle";
+import { Game_Actor } from "../object";
 import { Window_Selectable } from "./Window_Selectable";
 import { Sprite } from "../sprite/sprite";
 

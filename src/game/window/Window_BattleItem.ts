@@ -1,5 +1,4 @@
-import { Rectangle } from "src/types/rectangle";
-import { Data_UsableItem } from "@schema/data/";
+import { Data_UsableItem } from "../../schema";
 import { Window_ItemList } from "./Window_ItemList";
 
 //-----------------------------------------------------------------------------
@@ -7,8 +6,6 @@ import { Window_ItemList } from "./Window_ItemList";
 //
 // The window for selecting an item to use on the battle screen.
 export declare class Window_BattleItem extends Window_ItemList {
-  initialize(rect: Rectangle): void;
-
   includes(item: Data_UsableItem): void;
 
   show(): void;

@@ -4,8 +4,8 @@
 // The game object class for a map. It contains scrolling and passage
 
 import { $dataTilesets } from "@niokasgami/rpg-maker-mz-typescript";
-import { Data_CommonEvent } from "@schema/data";
-import { ValueOf } from "@utils/types";
+import { Data_CommonEvent } from "../../schema";
+import { ValueOf } from "../../utils/types";
 import { Game_CommonEvent } from "./Game_CommonEvent";
 import { Game_Event } from "./Game_Event";
 import { Game_Interpreter } from "./Game_Interpreter";

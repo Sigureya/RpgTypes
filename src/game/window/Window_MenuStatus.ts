@@ -1,4 +1,3 @@
-import { Rectangle } from "src/types/rectangle";
 import { Window_StatusBase } from "./Window_StatusBase";
 
 //-----------------------------------------------------------------------------
@@ -7,8 +6,6 @@ import { Window_StatusBase } from "./Window_StatusBase";
 // The window for displaying party member status on the menu screen.
 
 export declare class Window_MenuStatus extends Window_StatusBase {
-  initialize(rect: Rectangle): void;
-
   maxItems(): number;
 
   numVisibleRows(): boolean;

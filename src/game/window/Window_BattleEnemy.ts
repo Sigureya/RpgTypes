@@ -1,6 +1,5 @@
-import { Rectangle } from "src/types/rectangle";
 import { Window_Selectable } from "./Window_Selectable";
-import { Game_Enemy } from "src/game/object";
+import { Game_Enemy } from "../object";
 
 //-----------------------------------------------------------------------------
 // Window_BattleEnemy
@@ -8,8 +7,6 @@ import { Game_Enemy } from "src/game/object";
 // The window for selecting a target enemy on the battle screen.
 
 export declare class Window_BattleEnemy extends Window_Selectable {
-  initialize(rect: Rectangle): void;
-
   maxCols(): number;
 
   maxItems(): number;

@@ -1,17 +1,14 @@
-import { Rectangle } from "src/types/rectangle";
-import { Game_Actor } from "../object/battler";
+import { Game_Actor } from "../object/";
 import { Window_Status } from "./Window_Status";
 import { Window_StatusBase } from "./Window_StatusBase";
 import { Window_EquipItem } from "./Window_EquipItem";
-import { Data_Equipment } from "../../schema/data/members/trait";
+import { Data_Equipment } from "../../schema/";
 import { ISelectable } from "./types/ISelctable";
 
 export declare class Window_EquipSlot
   extends Window_StatusBase
   implements ISelectable<Data_Equipment>
 {
-  initialize(rect: Rectangle): void;
-
   setActor(actor: Game_Actor): void;
 
   update(): void;

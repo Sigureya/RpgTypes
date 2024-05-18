@@ -1,14 +1,12 @@
-import { Rectangle } from "src/types/rectangle";
+import { Rectangle } from "./rectangle";
 import { Window_StatusBase } from "./Window_StatusBase";
-import { Game_Actor } from "@game/object";
+import { Game_Actor } from "../object";
 
 //-----------------------------------------------------------------------------
 // Window_BattleStatus
 //
 // The window for displaying the status of party members on the battle screen.
 export declare class Window_BattleStatus extends Window_StatusBase {
-  initialize(rect: Rectangle): void;
-
   extraHeight(): number;
 
   maxCols(): number;
