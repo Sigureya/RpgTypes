@@ -1,10 +1,10 @@
-import { ParamId } from "./types/interface/battler/base/param";
-
 //-----------------------------------------------------------------------------
 // Game_ActionResult
 //
 // The game object class for a result of a battle action. For convinience, all
 // member variables in this class are public.
+
+import { ParamId } from "src/game/data/paramArray";
 
 export declare class Game_ActionResult {
   used: boolean;

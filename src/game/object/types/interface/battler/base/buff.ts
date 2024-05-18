@@ -1,4 +1,4 @@
-import { ParamId } from "./param";
+import { ParamId } from "src/game/data/paramArray";
 
 export interface Buff {
   clearBuffs(): void;

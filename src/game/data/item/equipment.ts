@@ -1,4 +1,4 @@
-import { ParamArray } from "src/game/object/types/interface/battler/base/param";
+import { ParamArray } from "../paramArray";
 import { Data_NamedItem } from "./namedItem";
 import { TraitContainer } from "./trait";
 
