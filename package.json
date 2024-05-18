@@ -2,5 +2,12 @@
   "dependencies": {
     "@niokasgami/rpg-maker-mz-typescript": "github:niokasgami/Rpg-Maker-MZ-Typescript",
     "eslint": "^9.1.0"
+  },
+  "files": [
+    "src"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Sigureya/RpgTypes.git"
   }
 }
