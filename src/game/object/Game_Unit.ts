@@ -1,16 +1,19 @@
 import { Game_Battler } from "./Game_Battler";
+import { IBattler } from "./types";
 import { IUnit } from "./types/interface/unit";
 
-export declare class Game_Unit implements IUnit<Game_Battler> {
-  deadMembers(): Game_Battler[];
-  movableMembers(): Game_Battler[];
-  aliveMembers(): Game_Battler[];
-  smoothDeadTarget(): Game_Battler | undefined;
-  members(): Game_Battler[];
+export declare class Game_Unit<Battler extends IBattler = Game_Battler>
+  implements IUnit<Battler>
+{
+  randomTarget(): Battler | null;
+  randomDeadTarget(): Battler | null;
+  smoothTarget(): Battler | undefined;
+  deadMembers(): Battler[];
+  movableMembers(): Battler[];
+  aliveMembers(): Battler[];
+  smoothDeadTarget(): Battler | undefined;
+  members(): Battler[];
   inBattle(): boolean;
   agility(): boolean;
   tgrSum(): number;
-  randomTarget(): Game_Battler | null;
-  randomDeadTarget(): Game_Battler | null;
-  smoothTarget(): Game_Battler | undefined;
 }
