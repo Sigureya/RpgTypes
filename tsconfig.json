@@ -13,6 +13,7 @@
     "skipLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@game/*": ["scr/game/*"],
       "@schema/*": ["src/schema/*"],
       "@app/*": ["src/app/*"],
       "@view/*": ["src/view/*"],
