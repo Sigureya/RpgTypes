@@ -1,6 +1,9 @@
 import { Direction8, IDisplayableCharacter } from "./types/interface/character";
 
 export declare class Game_CharacterBase implements IDisplayableCharacter {
+  get x(): number;
+  get y(): number;
+
   _x: number;
   _y: number;
   _realX: number;

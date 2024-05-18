@@ -1,5 +1,5 @@
 import { Condition } from "./condition";
 
-export interface Page {
+export interface MapEventPage {
   conditions: Condition;
 }

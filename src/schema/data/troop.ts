@@ -5,7 +5,7 @@ interface Conditions {
   actorId: number;
 }
 
-export interface Page {
+export interface BattleEventPage {
   conditions: Conditions;
   list: EventCommand[];
   span: number;
@@ -20,7 +20,7 @@ export interface Member {
 
 export interface Data_Troop {
   members: Member[];
-  pages: Page[];
+  pages: BattleEventPage[];
 
   id: number;
   name: string;
