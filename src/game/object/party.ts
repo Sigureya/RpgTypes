@@ -1,5 +1,5 @@
-import { Game_Actor } from "../battler";
-import { IUnit } from "./interface";
+import { Game_Actor } from "./battler";
+import { IUnit } from "./unit/interface";
 
 export declare class Game_Party
   //extends Game_Unit
