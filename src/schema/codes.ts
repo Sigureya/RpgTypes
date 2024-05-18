@@ -35,6 +35,10 @@ export const CHANGE_FORMATION_ACCESS = 137 as const;
 export const SHOW_PICTURE = 231 as const;
 export const PLAY_BGM = 241 as const;
 export const PLAY_SE = 250 as const;
+
+export const SHOP_PROCESSING = 302 as const;
+export const NAME_INPUT_PROCESSING = 303 as const;
+
 export const CHANGE_NAME = 320 as const;
 export const CHANGE_NICKNAME = 324 as const;
 export const CHANGE_PROFILE = 325 as const;

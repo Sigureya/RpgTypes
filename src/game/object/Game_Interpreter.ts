@@ -1,7 +1,8 @@
 import type { CommandParameters } from "@schema/paramaters";
 import type * as $ from "@schema/codes";
 import type { EventCommand } from "@schema/types";
-import { Game_Actor, Game_Battler } from "./battler";
+import { Game_Actor } from "./Game_Actor";
+import { Game_Battler } from "./Game_Battler";
 export declare class Game_Interpreter extends Game_EventCommandExecuter {
   constructor(depth: number);
   clear(): void;
