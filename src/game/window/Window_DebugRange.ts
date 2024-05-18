@@ -1,6 +1,6 @@
 import { Rectangle } from "src/types/rectangle";
 import { Window_Selectable } from "./Window_Selectable";
-import { Window_NameEdit } from "./src";
+import { Window_NameEdit } from "./Window_NameEdit";
 
 //-----------------------------------------------------------------------------
 // Window_DebugRange

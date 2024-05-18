@@ -3,7 +3,8 @@ import { TextState } from "./types/textState";
 import { Window_Gold } from "./Window_Gold";
 import { Window_Base } from "./Window_Base";
 import { Window_NameBox } from "./Window_NameBox";
-import { Window_ChoiceList, Window_EventItem } from "./src";
+import { Window_EventItem } from "./Window_EventItem";
+import { Window_ChoiceList } from "./Window_ChoiceList";
 import { Window_NumberInput } from "./Window_NumberInput";
 
 //-----------------------------------------------------------------------------
