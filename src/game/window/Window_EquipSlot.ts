@@ -3,8 +3,13 @@ import { Game_Actor } from "../object/battler";
 import { Window_Status } from "./Window_Status";
 import { Window_StatusBase } from "./Window_StatusBase";
 import { Window_EquipItem } from "./Window_EquipItem";
+import { Data_Equipment } from "../data/item";
+import { ISelectable } from "./types/ISelctable";
 
-export declare class Window_EquipSlot extends Window_StatusBase {
+export declare class Window_EquipSlot
+  extends Window_StatusBase
+  implements ISelectable<Data_Equipment>
+{
   initialize(rect: Rectangle): void;
 
   setActor(actor: Game_Actor): void;
@@ -13,9 +18,9 @@ export declare class Window_EquipSlot extends Window_StatusBase {
 
   maxItems(): number;
 
-  item(): void;
+  item(): Data_Equipment;
 
-  itemAt(index: number): void;
+  itemAt(index: number): Data_Equipment;
 
   drawItem(index: number): void;
 

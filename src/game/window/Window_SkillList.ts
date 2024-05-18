@@ -2,8 +2,12 @@ import { Rectangle } from "src/types/rectangle";
 import { Game_Actor } from "../object/battler";
 import { Data_Skill } from "../data/item/skill";
 import { Window_Selectable } from "./Window_Selectable";
+import { ISelectable } from "./types/ISelctable";
 
-export declare class Window_SkillList extends Window_Selectable {
+export declare class Window_SkillList
+  extends Window_Selectable
+  implements ISelectable<Data_Skill>
+{
   initialize(rect: Rectangle): void;
 
   setActor(actor: Game_Actor): void;
@@ -16,9 +20,9 @@ export declare class Window_SkillList extends Window_Selectable {
 
   maxItems(): number;
 
-  item(): void;
+  item(): Data_Skill;
 
-  itemAt(index: number): void;
+  itemAt(index: number): Data_Skill;
 
   isCurrentItemEnabled(): boolean;
 
