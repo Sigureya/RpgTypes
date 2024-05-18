@@ -1,9 +1,7 @@
-import { TraitContainer } from "./item/trait";
+import { Action, DropItem, TraitContainer } from "./members";
 import { ParamArray } from "./paramArray";
-import { Action } from "./members/enemy/action";
-import { DropItem } from "./members/enemy/dropItem";
 
-interface Data_Enemy extends TraitContainer {
+export interface Data_Enemy extends TraitContainer {
   id: number;
   actions: Action[];
   battlerHue: number;

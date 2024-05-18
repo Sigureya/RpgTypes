@@ -1,6 +1,6 @@
 import { Rectangle } from "src/types/rectangle";
 import { Game_Actor } from "../object/battler";
-import { Data_Skill } from "../data/item/skill";
+import { Data_Skill } from "../data/skill";
 import { Window_Selectable } from "./Window_Selectable";
 import { ISelectable } from "./types/ISelctable";
 

@@ -1,5 +1,5 @@
-import { Data_Armor } from "../data/item/equipment";
-import { Data_Weapon } from "../data/item/equipment";
+import { Data_Armor } from "../data/equipment";
+import { Data_Weapon } from "../data/equipment";
 
 type VariantItem = Data_Weapon | Data_Armor;
 
