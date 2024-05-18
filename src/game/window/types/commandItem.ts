@@ -1,3 +1,6 @@
+import { Pair } from "@utils/typemap";
+import { IsSame } from "@utils/types";
+
 export interface CommandItem<T> {
   name: string;
   symbol: string;
@@ -6,26 +9,27 @@ export interface CommandItem<T> {
 }
 // TODO: 引数の型に応じて構造を変化させる
 
-interface IWindow_Command_NullExt {
+declare class Virtual_Window_Command_NullExt {
   currentExt(): null;
   currentData(): CommandItem<null> | null;
   addCommand(name: string, symbol: string, enabled: boolean): void;
   addCommand(name: string, symbol: string): void;
 }
-interface IWindow_Command_AnyExt {
-  currentExt(): null;
+declare class Virtual_Window_Command_AnyExt {
+  currentExt(): any;
   currentData(): CommandItem<any> | null;
   addCommand(name: string, symbol: string, enabled: boolean, ext: any): void;
+  addCommand(name: string, symbol: string, enabled: boolean): void;
   addCommand(name: string, symbol: string): void;
 }
 
-interface IWindow_Command_HasExt<Ext> {
+declare class Virtual_Window_Command_HasExt<Ext> {
   currentExt(): Ext | null;
   currentData(): CommandItem<Ext> | null;
   addCommand(name: string, symbol: string, enabled: boolean, ext: Ext): void;
 }
 
-export interface IWindow_Command<ExtType> {
+export declare class IWindow_Command<ExtType> {
   currentExt(): ExtType | null;
   currentData(): CommandItem<ExtType> | null;
   findExt(ext: ExtType): number;
@@ -35,8 +39,6 @@ export interface IWindow_Command<ExtType> {
     enabled: boolean,
     ext: ExtType | null
   ): void;
-}
-
-function hoge(iw: IWindow_Command_NullExt, nw: IWindow_Command_HasExt<{}>) {
-  //  iw.addCommand()
+  addCommand(name: string, symbol: string, enabled: boolean): void;
+  addCommand(name: string, symbol: string): void;
 }

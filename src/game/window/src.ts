@@ -10,7 +10,7 @@ import { UsableItem } from "../data/item/usableItem";
 import { ParamId } from "../object/battler/base/param";
 import { ShopGoods } from "./types/goods";
 import { Data_BaseItem } from "../data/item/baseItem";
-import { Data_Equip } from "../object/battler/base/equip";
+import { Equip } from "../object/battler/base/equip";
 import { SaveFileInfo } from "../data/saveFileInfo";
 import { Window_Selectable } from "./Window_Selectable";
 import { Window_Gold } from "./Window_Gold";
@@ -518,7 +518,7 @@ declare class Window_ShopStatus {
 
   refresh(): void;
 
-  setItem(item: Data_Equip): void;
+  setItem(item: Equip): void;
 
   isEquipItem(): boolean;
 
@@ -536,7 +536,7 @@ declare class Window_ShopStatus {
 
   paramId(): number;
 
-  currentEquippedItem(actor: Game_Actor, etypeId: number): Data_Equip | null;
+  currentEquippedItem(actor: Game_Actor, etypeId: number): Equip | null;
 
   update(): void;
 
