@@ -11,6 +11,7 @@ import {
 
 export declare class Game_Interpreter extends Game_EventCommandExecuter {
   constructor(depth: number);
+  constructor();
   clear(): void;
   setup(list: EventCommand[], eventId: number): void;
   setup(list: EventCommand[]): void;
