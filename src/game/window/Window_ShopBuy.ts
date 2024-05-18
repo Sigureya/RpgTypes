@@ -3,7 +3,7 @@ import { ShopGoods } from "./types/goods";
 import { Data_BaseItem } from "../data/item/baseItem";
 import { Window_Status } from "./Window_Status";
 import { Window_Selectable } from "./Window_Selectable";
-import { Selectable } from "./src";
+import { ISelectable } from "./types/ISelctable";
 
 //-----------------------------------------------------------------------------
 // Window_ShopBuy
@@ -11,7 +11,7 @@ import { Selectable } from "./src";
 // The window for selecting an item to buy on the shop screen.
 export declare class Window_ShopBuy
   extends Window_Selectable
-  implements Selectable<Data_BaseItem>
+  implements ISelectable<Data_BaseItem>
 {
   initialize(rect: Rectangle): void;
 

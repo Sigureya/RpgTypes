@@ -1,7 +1,7 @@
 import { Rectangle } from "src/types/rectangle";
 import { Data_BaseItem } from "../data/item/baseItem";
 import { Window_Selectable } from "./Window_Selectable";
-import { Selectable } from "./src";
+import { ISelectable } from "./types/ISelctable";
 
 //-----------------------------------------------------------------------------
 // Window_ItemList
@@ -9,7 +9,7 @@ import { Selectable } from "./src";
 // The window for selecting an item on the item screen.
 export declare class Window_ItemList
   extends Window_Selectable
-  implements Selectable<Data_BaseItem>
+  implements ISelectable<Data_BaseItem>
 {
   initialize(rect: Rectangle): void;
 

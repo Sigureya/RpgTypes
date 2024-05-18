@@ -8,15 +8,13 @@ export declare class Window_EquipStatus extends Window_StatusBase {
 
   setActor(actor: Game_Actor): void;
 
-  colSpacing(): void;
+  colSpacing(): number;
 
   refresh(): void;
 
   setTempActor(tempActor: Game_Actor): void;
 
   drawAllParams(): void;
-
-  drawItem(x: number, y: number, paramId: ParamId): void;
 
   drawParamName(x: number, y: number, paramId: ParamId): string;
 
