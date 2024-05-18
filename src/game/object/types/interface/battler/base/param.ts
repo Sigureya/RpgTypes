@@ -1,6 +1,6 @@
-import { ParamId } from "src/game/data/paramArray";
+import { ParamID } from "src/game/data/paramArray";
 
 export interface Param {
-  paramMin(paramId: ParamId): number;
-  paramMax(paramId: ParamId): number;
+  paramMin(paramId: ParamID): number;
+  paramMax(paramId: ParamID): number;
 }

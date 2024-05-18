@@ -1,17 +1,17 @@
-import { ParamId } from "src/game/data/paramArray";
+import { ParamID } from "src/game/data/paramArray";
 
 export interface Buff {
   clearBuffs(): void;
-  eraseBuff(paramId: ParamId): void;
-  buff(paramId: ParamId): number;
-  isBuffAffected(paramId: ParamId): boolean;
-  isDebuffAffected(paramId: ParamId): boolean;
-  isBuffOrDebuffAffected(paramId: ParamId): boolean;
-  isMaxBuffAffected(paramId: ParamId): boolean;
-  isMaxDebuffAffected(paramId: ParamId): boolean;
-  increaseBuff(paramId: ParamId): boolean;
-  decreaseBuff(paramId: ParamId): boolean;
-  overwriteBuffTurns(paramId: ParamId, turns: number): boolean;
-  isBuffExpired(paramId: ParamId): boolean;
+  eraseBuff(paramId: ParamID): void;
+  buff(paramId: ParamID): number;
+  isBuffAffected(paramId: ParamID): boolean;
+  isDebuffAffected(paramId: ParamID): boolean;
+  isBuffOrDebuffAffected(paramId: ParamID): boolean;
+  isMaxBuffAffected(paramId: ParamID): boolean;
+  isMaxDebuffAffected(paramId: ParamID): boolean;
+  increaseBuff(paramId: ParamID): boolean;
+  decreaseBuff(paramId: ParamID): boolean;
+  overwriteBuffTurns(paramId: ParamID, turns: number): boolean;
+  isBuffExpired(paramId: ParamID): boolean;
   updateBuffTurns(): void;
 }

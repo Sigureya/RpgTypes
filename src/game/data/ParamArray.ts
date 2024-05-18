@@ -8,4 +8,4 @@ export type ParamArray = [
   agi: number,
   luk: number
 ];
-export type ParamId = keyof ParamArray;
+export type ParamID = keyof ParamArray;

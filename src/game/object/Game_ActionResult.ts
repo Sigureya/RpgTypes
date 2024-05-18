@@ -4,7 +4,7 @@
 // The game object class for a result of a battle action. For convinience, all
 // member variables in this class are public.
 
-import { ParamId } from "src/game/data/paramArray";
+import { ParamID } from "src/game/data/paramArray";
 
 export declare class Game_ActionResult {
   used: boolean;
@@ -20,9 +20,9 @@ export declare class Game_ActionResult {
   tpDamage: number;
   addedStates: number[];
   removedStates: number[];
-  addedBuffs: ParamId[];
-  addedDebuffs: ParamId[];
-  removedBuffs: ParamId[];
+  addedBuffs: ParamID[];
+  addedDebuffs: ParamID[];
+  removedBuffs: ParamID[];
   constructor();
   initialize(): void;
   clear(): void;
@@ -34,10 +34,10 @@ export declare class Game_ActionResult {
   pushAddedState(stateId: number): void;
   isStateRemoved(stateId: number): boolean;
   pushRemovedState(stateId: number): void;
-  isBuffAdded(paramId: ParamId): boolean;
-  pushAddedBuff(paramId: ParamId): void;
-  isDebuffAdded(paramId: ParamId): boolean;
-  pushAddedDebuff(paramId: ParamId): void;
-  isBuffRemoved(paramId: ParamId): boolean;
-  pushRemovedBuff(paramId: ParamId): void;
+  isBuffAdded(paramId: ParamID): boolean;
+  pushAddedBuff(paramId: ParamID): void;
+  isDebuffAdded(paramId: ParamID): boolean;
+  pushAddedDebuff(paramId: ParamID): void;
+  isBuffRemoved(paramId: ParamID): boolean;
+  pushRemovedBuff(paramId: ParamID): void;
 }
