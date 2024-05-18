@@ -1,11 +1,5 @@
-export const OPERATION = {
-  ADD: 0,
-  SUB: 1,
-} as const;
-export const CONSTANT_OR_VARIABLE = {
-  CONSTANT: 1 as const,
-  VARIABLE: 0 as const,
-};
+import { OPERATION, CONSTANT_OR_VARIABLE } from "./constants";
+export * from "./constants";
 /**
  * 0 : variable, 1 : constant
  */
