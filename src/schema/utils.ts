@@ -1,7 +1,7 @@
 ///<reference path="./data/eventCommand/index.ts" />
 import type * as $ from "./data/eventCommand/codes";
-import type { ValueOf } from "@utils/types";
-import type { EventCommandTable } from "./types";
+import type { ValueOf } from "../utils/types";
+import { EventCommandTable } from "./data";
 
 export const createCommand = <T extends ValueOf<typeof $>>(
   code: T,

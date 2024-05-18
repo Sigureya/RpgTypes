@@ -220,7 +220,7 @@ export type CommandParameters = {
   [$.CHANGE_MP]: ChanageActorVariable;
   [$.CHANGE_TP]: ChanageActorVariable;
 
-  [$.CHANGE_NAME]: [id: number, maxLength: number];
+  [$.CHANGE_NAME]: [actorId: number, maxLength: number];
 
   /**
    * @description Change Nickname
