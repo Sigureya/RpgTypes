@@ -1,5 +1,5 @@
 import { Rectangle } from "src/types/rectangle";
-import { UsableItem } from "../data/item/usableItem";
+import { Data_UsableItem } from "@schema/data";
 import { Window_MenuStatus } from "./Window_MenuStatus";
 
 //-----------------------------------------------------------------------------
@@ -14,5 +14,5 @@ export declare class Window_MenuActor extends Window_MenuStatus {
 
   selectLast(): void;
 
-  selectForItem(item: UsableItem): void;
+  selectForItem(item: Data_UsableItem): void;
 }

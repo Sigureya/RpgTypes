@@ -1,5 +1,5 @@
 import { Rectangle } from "src/types/rectangle";
-import { Data_BaseItem } from "../data/item/baseItem";
+import { Data_BaseItem } from "../../schema/data/item/baseItem";
 import { Window_Message } from "./Window_Message";
 import { Window_ItemList } from "./Window_ItemList";
 

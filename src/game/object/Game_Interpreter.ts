@@ -1,12 +1,19 @@
-import type { CommandParameters } from "@schema/paramaters";
-import type * as $ from "@schema/codes";
+import type { CommandParameters } from "@schema/eventCommand";
+import type * as $ from "@schema/eventCommand/codes";
 import type { EventCommand } from "@schema/types";
 import { Game_Actor } from "./Game_Actor";
 import { Game_Battler } from "./Game_Battler";
+import {
+  ConstatnOrVariable,
+  OPERATION,
+} from "@schema/eventCommand/paramaters/operateValue";
+
 export declare class Game_Interpreter extends Game_EventCommandExecuter {
   constructor(depth: number);
+  constructor();
   clear(): void;
   setup(list: EventCommand[], eventId: number): void;
+  setup(list: EventCommand[]): void;
   loadImages(): void;
   eventId(): number;
   isOnCurrentMap(): boolean;
@@ -29,7 +36,7 @@ export declare class Game_Interpreter extends Game_EventCommandExecuter {
 
   iterateActorId(param: number, callback: (actor: Game_Actor) => void): void;
   iterateActorEx(
-    param1: number,
+    param1: ConstatnOrVariable,
     param2: number,
     callback: (actor: Game_Actor) => void
   ): void;
@@ -40,7 +47,17 @@ export declare class Game_Interpreter extends Game_EventCommandExecuter {
     callback: (battler: Game_Battler) => void
   ): void;
   character(param: number): void;
-  operateValue(operation: number, operandType: number, operand: number): number;
+  /**
+   *
+   * @param operation 0 : Add , 1 : Sub
+   * @param operandType
+   * @param operand
+   */
+  operateValue(
+    operation: typeof OPERATION.ADD | typeof OPERATION.SUB,
+    operandType: ConstatnOrVariable,
+    operand: number
+  ): number;
 
   changeHp(target: Game_Battler, value: number, allowDeath: boolean): void;
 
@@ -91,9 +108,12 @@ declare class Game_EventCommandExecuter {
     param: CommandParameters[typeof $.CHANGE_FORMATION_ACCESS]
   ): boolean;
 
-  command231(param: CommandParameters[typeof $.CHANGE_GOLD]): boolean;
-  command241(param: CommandParameters[typeof $.CHANGE_GOLD]): boolean;
+  command231(param: CommandParameters[typeof $.SHOW_PICTURE]): boolean;
+  command241(param: CommandParameters[typeof $.PLAY_BGM]): boolean;
   command250(param: CommandParameters[typeof $.PLAY_SE]): boolean;
+  command311(param: CommandParameters[typeof $.CHANGE_HP]): boolean;
+  command312(param: CommandParameters[typeof $.CHANGE_MP]): boolean;
+  command313(param: CommandParameters[typeof $.CHANGE_TP]): boolean;
 
   command320(param: CommandParameters[typeof $.CHANGE_NAME]): boolean;
   command324(param: CommandParameters[typeof $.CHANGE_NICKNAME]): boolean;

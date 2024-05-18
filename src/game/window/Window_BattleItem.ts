@@ -1,5 +1,5 @@
 import { Rectangle } from "src/types/rectangle";
-import { UsableItem } from "../data/item/usableItem";
+import { Data_UsableItem } from "@schema/data/";
 import { Window_ItemList } from "./Window_ItemList";
 
 //-----------------------------------------------------------------------------
@@ -9,7 +9,7 @@ import { Window_ItemList } from "./Window_ItemList";
 export declare class Window_BattleItem extends Window_ItemList {
   initialize(rect: Rectangle): void;
 
-  includes(item: UsableItem): void;
+  includes(item: Data_UsableItem): void;
 
   show(): void;
 

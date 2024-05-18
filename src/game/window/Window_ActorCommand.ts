@@ -1,5 +1,5 @@
 import { Rectangle } from "src/types/rectangle";
-import { Game_Actor } from "../object/battler";
+import { Game_Actor } from "src/game/object";
 import { Window_Command } from "./Window_Command";
 
 //-----------------------------------------------------------------------------

@@ -1,11 +1,21 @@
-import { Data_State } from "src/game/data";
-import { Buff } from "./types/battler/base/buff";
-import { ParamArray, ParamId } from "./types/battler/base/param";
-import { State } from "./types/battler/base/state";
-import { ItemUser } from "./types/battler/base/itemUser";
-import { Data_Skill } from "src/game/data/item/skill";
+import {
+  Data_State,
+  Data_Equipment,
+  Data_Weapon,
+  Data_Armor,
+  Data_Skill,
+} from "@schema/data/";
+import { IBattlerBase } from "./types/interface/battler/base";
+import { ParamID } from "@schema/data/members";
 
-export declare class Game_BattlerBase implements Buff, State, ItemUser {
+export declare class Game_BattlerBase implements IBattlerBase {
+  canEquip(item: Data_Equipment): boolean;
+  canEquipWeapon(weapon: Data_Weapon): boolean;
+  canEquipArmor(armor: Data_Armor): boolean;
+  paramMin(paramId: ParamID): number;
+  paramMax(paramId: ParamID): number;
+  attackSkillId(): number;
+  guardSkillId(): number;
   canInput(): boolean;
   canMove(): boolean;
   isConfused(): boolean;
@@ -28,16 +38,16 @@ export declare class Game_BattlerBase implements Buff, State, ItemUser {
   updateStateTurns(): void;
   states(): Data_State[];
   clearBuffs(): void;
-  eraseBuff(paramId: ParamId): void;
-  buff(paramId: ParamId): number;
-  isBuffAffected(paramId: ParamId): boolean;
-  isDebuffAffected(paramId: ParamId): boolean;
-  isBuffOrDebuffAffected(paramId: ParamId): boolean;
-  isMaxBuffAffected(paramId: ParamId): boolean;
-  isMaxDebuffAffected(paramId: ParamId): boolean;
-  increaseBuff(paramId: ParamId): boolean;
-  decreaseBuff(paramId: ParamId): boolean;
-  overwriteBuffTurns(paramId: ParamId, turns: number): boolean;
-  isBuffExpired(paramId: ParamId): boolean;
+  eraseBuff(paramId: ParamID): void;
+  buff(paramId: ParamID): number;
+  isBuffAffected(paramId: ParamID): boolean;
+  isDebuffAffected(paramId: ParamID): boolean;
+  isBuffOrDebuffAffected(paramId: ParamID): boolean;
+  isMaxBuffAffected(paramId: ParamID): boolean;
+  isMaxDebuffAffected(paramId: ParamID): boolean;
+  increaseBuff(paramId: ParamID): boolean;
+  decreaseBuff(paramId: ParamID): boolean;
+  overwriteBuffTurns(paramId: ParamID, turns: number): boolean;
+  isBuffExpired(paramId: ParamID): boolean;
   updateBuffTurns(): void;
 }

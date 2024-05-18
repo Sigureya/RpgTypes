@@ -1,12 +1,24 @@
 import { Game_Battler } from "./Game_Battler";
-import { IUnit } from "./types/Iunit";
+import { IBattler, IUnit, IUnitTpb } from "./types";
 
-export declare class Game_Unit implements IUnit<Game_Battler> {
-  members(): Game_Battler[];
+export declare class Game_Unit<Battler extends IBattler = Game_Battler>
+  implements IUnit<Battler>, IUnitTpb
+{
+  tpbBaseSpeed(): number;
+  tpbReferenceTime(): number;
+  updateTpb(): void;
+  substituteBattler(): Battler | null;
+  select(activeMember: Battler): void;
+  randomTarget(): Battler | null;
+  randomDeadTarget(): Battler | null;
+  smoothTarget(): Battler | undefined;
+  deadMembers(): Battler[];
+  movableMembers(): Battler[];
+  aliveMembers(): Battler[];
+  smoothDeadTarget(): Battler | undefined;
+  members(): Battler[];
   inBattle(): boolean;
   agility(): boolean;
   tgrSum(): number;
-  randomTarget(): Game_Battler | null;
-  randomDeadTarget(): Game_Battler | null;
-  smoothTarget(): Game_Battler | undefined;
+  isAllDead(): boolean;
 }

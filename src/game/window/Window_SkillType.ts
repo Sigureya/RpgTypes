@@ -1,5 +1,5 @@
 import { Rectangle } from "src/types/rectangle";
-import { Game_Actor } from "../object/battler";
+import { Game_Actor } from "src/game/object/Game_Actor";
 import { CommandItem } from "./types/commandItem";
 import { Window_Command } from "./Window_Command";
 import { Window_SkillList } from "./Window_SkillList";

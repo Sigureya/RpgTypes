@@ -1,5 +1,5 @@
 import { Rectangle } from "src/types/rectangle";
-import { Game_Actor } from "../object/battler";
+import { Game_Actor } from "src/game/object/Game_Actor";
 import { Window_StatusBase } from "./Window_StatusBase";
 
 //-----------------------------------------------------------------------------
@@ -17,5 +17,5 @@ export declare class Window_StatusParams extends Window_StatusBase {
 
   drawItem(index: number): void;
 
-  drawItemBackground(/*index*/): void;
+  drawItemBackground(index: number): void;
 }
