@@ -6,4 +6,6 @@ export interface ItemUser {
   isConfused(): boolean;
   confusionLevel(): boolean;
   isSkillWtypeOk(skill: Data_Skill): boolean;
+  attackSkillId(): number;
+  guardSkillId(): number;
 }
