@@ -1,14 +1,15 @@
-import { Rectangle } from "src/types/rectangle";
-import { Game_Battler } from "../object/battler";
-import { Game_Action } from "src/game/object/Game_Action";
-import { UsableItem } from "../data/item/usableItem";
-import { ParamId } from "../object/battler/base/param";
-import { Window_Base } from "./Window_Base";
-
 //-----------------------------------------------------------------------------
 // Window_BattleLog
 //
 // The window for displaying battle progress. No frame is displayed, but it is
+
+import { Rectangle } from "src/types/rectangle";
+import { Data_UsableItem } from "../data/item/usableItem";
+import { ParamId } from "../object/types/battler/base/param";
+import { Window_Base } from "./Window_Base";
+import { Game_Battler } from "../object/Game_Battler";
+import { Game_Action } from "../object/Game_Action";
+
 // handled as a window for convenience.
 export declare class Window_BattleLog extends Window_Base {
   initialize(rect: Rectangle): void;
@@ -111,12 +112,12 @@ export declare class Window_BattleLog extends Window_Base {
 
   displayRegeneration(subject: Game_Battler): boolean;
 
-  displayAction(subject: Game_Battler, item: UsableItem): boolean;
+  displayAction(subject: Game_Battler, item: Data_UsableItem): boolean;
 
   displayItemMessage(
     fmt: string,
     subject: Game_Battler,
-    item: UsableItem
+    item: Data_UsableItem
   ): boolean;
 
   displayCounter(target: Game_Battler): boolean;
