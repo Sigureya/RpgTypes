@@ -3,6 +3,8 @@ import type * as $ from "@schema/paramaters/codes";
 import type { EventCommand } from "@schema/types";
 import { Game_Actor } from "./Game_Actor";
 import { Game_Battler } from "./Game_Battler";
+import { OPERAND_TYPE, OPERATION } from "@schema/paramaters/operateValue";
+
 export declare class Game_Interpreter extends Game_EventCommandExecuter {
   constructor(depth: number);
   clear(): void;
@@ -40,7 +42,17 @@ export declare class Game_Interpreter extends Game_EventCommandExecuter {
     callback: (battler: Game_Battler) => void
   ): void;
   character(param: number): void;
-  operateValue(operation: number, operandType: number, operand: number): number;
+  /**
+   *
+   * @param operation 0 : Add , 1 : Sub
+   * @param operandType
+   * @param operand
+   */
+  operateValue(
+    operation: typeof OPERATION.ADD | typeof OPERATION.SUB,
+    operandType: typeof OPERAND_TYPE.VARIABLE | typeof OPERAND_TYPE.CONSTANT,
+    operand: number
+  ): number;
 
   changeHp(target: Game_Battler, value: number, allowDeath: boolean): void;
 

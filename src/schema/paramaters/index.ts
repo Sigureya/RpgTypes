@@ -5,6 +5,7 @@ import type { OPERATION, TOGGLE } from "./constants";
 import type { ControlVariables } from "./controlVariables";
 import type { ShowPicture } from "./showPicture";
 import { ShopGoods, ShopProcessing } from "./shopGoods";
+import { ChanageActorVariable, OperateValueParams } from "./operateValue";
 
 export type CommandParameters = {
   /**
@@ -210,6 +211,7 @@ export type CommandParameters = {
   [$.SHOP_PROCESSING]: ShopProcessing;
   [$.SHOP_PROCESSING_BODY]: ShopGoods;
   [$.NAME_INPUT_PROCESSING]: [actorId: number, name: string];
+  [$.CHANGE_HP]: [...ChanageActorVariable, allowDetah: boolean];
 
   [$.CHANGE_NAME]: [id: number, maxLength: number];
 
