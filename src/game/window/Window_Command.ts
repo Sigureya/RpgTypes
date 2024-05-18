@@ -1,10 +1,8 @@
 import { Rectangle } from "src/types/rectangle";
 import { TextAlign } from "./types/TextAlign";
-import { CommandItem, IWindow_Command } from "./types/commandItem";
+import { CommandItem } from "./types/commandItem";
 
-export declare class Window_Command<ExtType = any>
-  implements IWindow_Command<ExtType>
-{
+export declare class Window_Command<ExtType = any> {
   currentData(): CommandItem<ExtType> | null;
   currentExt(): ExtType | null;
   findExt(ext: ExtType): number;
@@ -15,6 +13,8 @@ export declare class Window_Command<ExtType = any>
     ext: ExtType | null
   ): void;
   addCommand(name: string, symbol: string): void;
+  addCommand(name: string, symbol: string, enabled: boolean): void;
+
   initialize(rect: Rectangle): void;
 
   maxItems(): number;

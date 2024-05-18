@@ -1,6 +1,6 @@
 import { Rectangle } from "src/types/rectangle";
 import { Game_Actor } from "../object/battler";
-import { Window_StatusBase } from "./src";
+import { Window_StatusBase } from "./Window_StatusBase";
 
 export declare class Window_SkillStatus extends Window_StatusBase {
   initialize(rect: Rectangle): void;

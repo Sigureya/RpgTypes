@@ -1,5 +1,5 @@
 import { Rectangle } from "src/types/rectangle";
-import { TextState } from "./textState";
+import { TextState } from "./types/textState";
 import { Data_NamedItem } from "src/game/data/item/namedItem";
 import { TextAlign } from "./types/TextAlign";
 

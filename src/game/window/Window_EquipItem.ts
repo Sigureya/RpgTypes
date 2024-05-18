@@ -1,7 +1,8 @@
 import { Rectangle } from "src/types/rectangle";
 import { Game_Actor } from "../object/battler";
-import { Data_Equip } from "../object/battler/base/equip";
-import { Window_ItemList, Window_Status } from "./src";
+import { Equip } from "../object/battler/base/equip";
+import { Window_Status } from "./Window_Status";
+import { Window_ItemList } from "./Window_ItemList";
 
 export declare class Window_EquipItem extends Window_ItemList {
   initialize(rect: Rectangle): void;
@@ -14,11 +15,11 @@ export declare class Window_EquipItem extends Window_ItemList {
 
   setSlotId(slotId: number): void;
 
-  includes(item: Data_Equip): void;
+  includes(item: Equip): void;
 
   etypeId(): void;
 
-  isEnabled(/*item*/): boolean;
+  isEnabled(item: Equip): boolean;
 
   selectLast(): void;
 

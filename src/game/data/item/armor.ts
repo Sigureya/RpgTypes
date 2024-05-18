@@ -1,3 +1,3 @@
-import { DataEquipment } from "./equipment";
+import { Data_Equipment } from "./equipment";
 
-export interface DataArmor extends DataEquipment {}
+export interface Data_Armor extends Data_Equipment {}

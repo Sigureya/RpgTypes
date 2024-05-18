@@ -1,7 +1,7 @@
 import { Rectangle } from "src/types/rectangle";
 import { Game_Actor } from "../object/battler";
 import { ParamId } from "../object/battler/base/param";
-import { Window_StatusBase } from "./src";
+import { Window_StatusBase } from "./Window_StatusBase";
 
 export declare class Window_EquipStatus extends Window_StatusBase {
   initialize(rect: Rectangle): void;
