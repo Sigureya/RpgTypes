@@ -3,7 +3,11 @@ import type * as $ from "@schema/paramaters/codes";
 import type { EventCommand } from "@schema/types";
 import { Game_Actor } from "./Game_Actor";
 import { Game_Battler } from "./Game_Battler";
-import { OPERAND_TYPE, OPERATION } from "@schema/paramaters/operateValue";
+import {
+  CONSTANT_OR_VARIABLE,
+  ConstatnOrVariable,
+  OPERATION,
+} from "@schema/paramaters/operateValue";
 
 export declare class Game_Interpreter extends Game_EventCommandExecuter {
   constructor(depth: number);
@@ -31,7 +35,7 @@ export declare class Game_Interpreter extends Game_EventCommandExecuter {
 
   iterateActorId(param: number, callback: (actor: Game_Actor) => void): void;
   iterateActorEx(
-    param1: number,
+    param1: ConstatnOrVariable,
     param2: number,
     callback: (actor: Game_Actor) => void
   ): void;
@@ -50,7 +54,7 @@ export declare class Game_Interpreter extends Game_EventCommandExecuter {
    */
   operateValue(
     operation: typeof OPERATION.ADD | typeof OPERATION.SUB,
-    operandType: typeof OPERAND_TYPE.VARIABLE | typeof OPERAND_TYPE.CONSTANT,
+    operandType: ConstatnOrVariable,
     operand: number
   ): number;
 
