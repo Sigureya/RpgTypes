@@ -3,7 +3,7 @@ import { Game_Unit } from "./Game_Unit";
 import { Game_Battler, Game_Item } from "./src";
 import { IBattler } from "./types/battler";
 import { Data_UsableItem } from "../data/item/usableItem";
-import { IUnit } from "./types/Iunit";
+import { IUnit } from "./types/interface/Iunit";
 
 //-----------------------------------------------------------------------------
 // Game_Action

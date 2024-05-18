@@ -1,4 +1,4 @@
-import { ParamId } from "./types/battler/base/param";
+import { ParamId } from "./types/interface/battler/base/param";
 
 //-----------------------------------------------------------------------------
 // Game_ActionResult
