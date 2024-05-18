@@ -5,10 +5,10 @@
 
 import { Rectangle } from "src/types/rectangle";
 import { Data_UsableItem } from "../data/item/usableItem";
-import { ParamId } from "../object/types/battler/base/param";
 import { Window_Base } from "./Window_Base";
 import { Game_Battler } from "../object/Game_Battler";
 import { Game_Action } from "../object/Game_Action";
+import { ParamId } from "../object/types/interface/battler/base/param";
 
 // handled as a window for convenience.
 export declare class Window_BattleLog extends Window_Base {

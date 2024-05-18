@@ -1,7 +1,6 @@
 import { IUsableItem } from "./types/useableItem";
 import { Game_Unit } from "./Game_Unit";
-import { Game_Battler, Game_Item } from "./src";
-import { IBattler } from "./types/battler";
+import { IBattler } from "./types/interface/battler";
 import { Data_UsableItem } from "../data/item/usableItem";
 import { IUnit } from "./types/interface/Iunit";
 
@@ -33,8 +32,8 @@ export declare class Game_Action {
   static EFFECT_GROW: any;
   static EFFECT_COMMON_EVENT: any;
   static SPECIAL_EFFECT_ESCAPE: any;
-  constructor(subject: Game_Battler, forcing: boolean);
-  initialize(subject: Game_Battler, forcing: boolean): void;
+  constructor(subject: IBattler, forcing: boolean);
+  initialize(subject: IBattler, forcing: boolean): void;
   clear(): void;
   setSubject(subject: IBattler): void;
   subject(): IBattler;
