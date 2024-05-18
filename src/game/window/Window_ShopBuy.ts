@@ -1,6 +1,5 @@
 import { Rectangle } from "src/types/rectangle";
-import { ShopGoods } from "@schema/eventCommand/paramaters/shopGoods";
-import { Data_BaseItem } from "../../schema/data/item/baseItem";
+import { Data_Item, ShopGoods } from "../../schema";
 import { Window_Status } from "./Window_Status";
 import { Window_Selectable } from "./Window_Selectable";
 import { ISelectable } from "./types/ISelctable";
@@ -11,7 +10,7 @@ import { ISelectable } from "./types/ISelctable";
 // The window for selecting an item to buy on the shop screen.
 export declare class Window_ShopBuy
   extends Window_Selectable
-  implements ISelectable<Data_BaseItem>
+  implements ISelectable<Data_Item>
 {
   initialize(rect: Rectangle): void;
 
@@ -19,23 +18,23 @@ export declare class Window_ShopBuy
 
   maxItems(): number;
 
-  item(): Data_BaseItem;
+  item(): Data_Item;
 
-  itemAt(index: number): Data_BaseItem;
+  itemAt(index: number): Data_Item;
 
   setMoney(money: number): void;
 
   isCurrentItemEnabled(): boolean;
 
-  price(item: Data_BaseItem): number;
+  price(item: Data_Item): number;
 
-  isEnabled(item: Data_BaseItem): boolean;
+  isEnabled(item: Data_Item): boolean;
 
   refresh(): void;
 
   makeItemList(): boolean;
 
-  goodsToItem(goods: ShopGoods): Data_BaseItem;
+  goodsToItem(goods: ShopGoods): Data_Item;
 
   drawItem(index: number): void;
 

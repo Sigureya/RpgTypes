@@ -1,4 +1,3 @@
-import { Rectangle } from "./rectangle";
 import { Game_Actor } from "../object";
 import { Window_StatusBase } from "./Window_StatusBase";
 
@@ -7,8 +6,6 @@ import { Window_StatusBase } from "./Window_StatusBase";
 //
 // The window for displaying equipment items on the status screen.
 export declare class Window_StatusEquip extends Window_StatusBase {
-  initialize(rect: Rectangle): void;
-
   setActor(actor: Game_Actor): void;
 
   maxItems(): number;

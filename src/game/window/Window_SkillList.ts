@@ -1,6 +1,5 @@
-import { Rectangle } from "./rectangle";
 import { Game_Actor } from "../object";
-import { Data_Skill } from "../../schema/data/skill";
+import { Data_Skill } from "../../schema/";
 import { Window_Selectable } from "./Window_Selectable";
 import { ISelectable } from "./types/ISelctable";
 
@@ -8,8 +7,6 @@ export declare class Window_SkillList
   extends Window_Selectable
   implements ISelectable<Data_Skill>
 {
-  initialize(rect: Rectangle): void;
-
   setActor(actor: Game_Actor): void;
 
   setStypeId(stypeId: number): void;

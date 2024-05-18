@@ -1,5 +1,4 @@
-import { Rectangle } from "src/types/rectangle";
-import { Game_Actor } from "src/game/object/Game_Actor";
+import { Game_Actor } from "../object";
 import { Window_StatusBase } from "./Window_StatusBase";
 
 //-----------------------------------------------------------------------------
@@ -7,8 +6,6 @@ import { Window_StatusBase } from "./Window_StatusBase";
 //
 // The window for displaying parameters on the status screen.
 export declare class Window_StatusParams extends Window_StatusBase {
-  initialize(rect: Rectangle): void;
-
   setActor(actor: Game_Actor): void;
 
   maxItems(): number;

@@ -1,4 +1,3 @@
-import { Rectangle } from "./rectangle";
 import { Game_Actor } from "../object";
 import { Window_Selectable } from "./Window_Selectable";
 import { Sprite } from "../sprite/sprite";
@@ -9,8 +8,6 @@ import { Sprite } from "../sprite/sprite";
 // The superclass of windows for displaying actor status.
 
 export declare class Window_StatusBase extends Window_Selectable {
-  initialize(rect: Rectangle): void;
-
   loadFaceImages(): void;
 
   refresh(): void;

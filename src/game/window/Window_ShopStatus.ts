@@ -1,6 +1,5 @@
-import { Rectangle } from "src/types/rectangle";
-import { Game_Actor } from "../object/battler";
-import { Equip } from "../object/battler/base/equip";
+import { Game_Actor } from "../object";
+import { Data_Equipment } from "../../schema";
 import { Window_StatusBase } from "./Window_StatusBase";
 
 //-----------------------------------------------------------------------------
@@ -9,11 +8,9 @@ import { Window_StatusBase } from "./Window_StatusBase";
 // The window for displaying number of items in possession and the actor's
 // equipment on the shop screen.
 export declare class Window_ShopStatus extends Window_StatusBase {
-  initialize(rect: Rectangle): void;
-
   refresh(): void;
 
-  setItem(item: Equip): void;
+  setItem(item: Data_Equipment): void;
 
   isEquipItem(): boolean;
 
@@ -31,7 +28,10 @@ export declare class Window_ShopStatus extends Window_StatusBase {
 
   paramId(): number;
 
-  currentEquippedItem(actor: Game_Actor, etypeId: number): Equip | null;
+  currentEquippedItem(
+    actor: Game_Actor,
+    etypeId: number
+  ): Data_Equipment | null;
 
   update(): void;
 

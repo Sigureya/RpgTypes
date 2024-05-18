@@ -8,8 +8,6 @@ import { PricedItem } from "./types/pricedItem";
 // The window for inputting quantity of items to buy or sell on the shop
 // screen.
 export declare class Window_ShopNumber extends Window_Selectable {
-  initialize(rect: Rectangle): void;
-
   isScrollEnabled(): boolean;
 
   number(): void;

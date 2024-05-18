@@ -1,4 +1,3 @@
-import { Rectangle } from "src/types/rectangle";
 import { Window_Base } from "./Window_Base";
 
 //-----------------------------------------------------------------------------
@@ -7,8 +6,6 @@ import { Window_Base } from "./Window_Base";
 // The window for displaying scrolling text. No frame is displayed, but it
 // is handled as a window for convenience.
 export declare class Window_ScrollText extends Window_Base {
-  initialize(rect: Rectangle): void;
-
   update(): void;
 
   startMessage(): void;

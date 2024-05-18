@@ -1,4 +1,3 @@
-import { Rectangle } from "./rectangle";
 import { Game_Actor } from "../object";
 import { CommandItem } from "./types/commandItem";
 import { Window_Command } from "./Window_Command";
@@ -12,7 +11,6 @@ export declare class Window_SkillType extends Window_Command<number> {
   currentExt(): number | null;
   currentData(): CommandItem<number> | null;
   findExt(ext: number): number;
-  initialize(rect: Rectangle): void;
 
   setActor(actor: Game_Actor): void;
 

@@ -1,4 +1,3 @@
-import { Rectangle } from "src/types/rectangle";
 import { Window_Base } from "./Window_Base";
 
 //-----------------------------------------------------------------------------
@@ -7,8 +6,6 @@ import { Window_Base } from "./Window_Base";
 // The window class with scroll functions.
 
 export declare class Window_Scrollable extends Window_Base {
-  initialize(rect: Rectangle): void;
-
   clearScrollStatus(): void;
 
   scrollX(): number;

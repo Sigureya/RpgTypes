@@ -7,3 +7,4 @@ export * from "./item";
 export * from "./skill";
 export * from "./troop";
 export * from "./usableItem";
+export * from "./namedItem";

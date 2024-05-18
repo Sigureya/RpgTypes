@@ -1,5 +1,5 @@
 import { Rectangle } from "src/types/rectangle";
-import { SaveFileInfo } from "../../schema/files/saveFileInfo";
+import { SaveFileInfo } from "../../schema/";
 import { Window_Selectable } from "./Window_Selectable";
 
 //-----------------------------------------------------------------------------
@@ -8,8 +8,6 @@ import { Window_Selectable } from "./Window_Selectable";
 // The window for selecting a save file on the save and load screens.
 
 export declare class Window_SavefileList extends Window_Selectable {
-  initialize(rect: Rectangle): void;
-
   setMode(mode: string, autosave: boolean): void;
 
   maxItems(): number;

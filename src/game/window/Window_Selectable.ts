@@ -1,11 +1,9 @@
 import { Rectangle } from "src/types/rectangle";
-import { Data_NamedItem } from "../../schema/data/namedItem";
+import { Data_NamedItem } from "../../schema/data";
 import { Window_Scrollable } from "./Window_Scrollable";
 import { IHelpListner } from "./types/HelpListener";
 
 export declare class Window_Selectable extends Window_Scrollable {
-  initialize(rect: Rectangle): void;
-
   index(): number;
 
   cursorFixed(): boolean;
