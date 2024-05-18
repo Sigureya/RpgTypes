@@ -1,4 +1,4 @@
-import { DataState } from "src/game/data";
+import { Data_State } from "src/game/data";
 import { Buff } from "./types/battler/base/buff";
 import { ParamArray, ParamId } from "./types/battler/base/param";
 import { State } from "./types/battler/base/state";
@@ -26,7 +26,7 @@ export declare class Game_BattlerBase implements Buff, State, ItemUser {
   resetStateCounts(stateId: number): void;
   isStateExpired(stateId: number): boolean;
   updateStateTurns(): void;
-  states(): DataState[];
+  states(): Data_State[];
   clearBuffs(): void;
   eraseBuff(paramId: ParamId): void;
   buff(paramId: ParamId): number;

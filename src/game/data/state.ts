@@ -1,1 +1,1 @@
-export interface DataState {}
+export interface Data_State {}

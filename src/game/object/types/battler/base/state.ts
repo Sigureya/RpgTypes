@@ -1,4 +1,4 @@
-import { DataState } from "../../../data";
+import { Data_State } from "src/game/data";
 export interface State {
   clearStates(): void;
   eraseState(stateId: number): void;
@@ -19,5 +19,5 @@ export interface State {
   isDead(): boolean;
   isAlive(): boolean;
 
-  states(): DataState[];
+  states(): Data_State[];
 }
