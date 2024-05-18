@@ -3,7 +3,7 @@ import { Game_Actor } from "../object/battler";
 import { Window_Status } from "./Window_Status";
 import { Window_StatusBase } from "./Window_StatusBase";
 import { Window_EquipItem } from "./Window_EquipItem";
-import { Data_Equipment } from "../data/item";
+import { Data_Equipment } from "../data/item/trait";
 import { ISelectable } from "./types/ISelctable";
 
 export declare class Window_EquipSlot

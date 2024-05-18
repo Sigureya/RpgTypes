@@ -1,4 +1,8 @@
-import { Data_Armor, Data_Equipment, Data_Weapon } from "src/game/data/item";
+import {
+  Data_Armor,
+  Data_Equipment,
+  Data_Weapon,
+} from "src/game/data/item/equipment";
 
 export interface Equip {
   canEquip(item: Data_Equipment): boolean;

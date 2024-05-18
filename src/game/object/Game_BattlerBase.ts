@@ -1,11 +1,21 @@
-import { Data_State } from "src/game/data";
-import { Buff } from "./types/battler/base/buff";
-import { ParamArray, ParamId } from "./types/battler/base/param";
-import { State } from "./types/battler/base/state";
-import { ItemUser } from "./types/battler/base/itemUser";
-import { Data_Skill } from "src/game/data/item/skill";
+import { Data_State } from "../data";
+import {
+  Data_Equipment,
+  Data_Weapon,
+  Data_Armor,
+} from "../data/item/equipment";
+import { Data_Skill } from "../data/item/skill";
+import { IBattlerBase } from "./types/interface/battler/base";
+import { ParamId } from "./types/interface/battler/base/param";
 
-export declare class Game_BattlerBase implements Buff, State, ItemUser {
+export declare class Game_BattlerBase implements IBattlerBase {
+  canEquip(item: Data_Equipment): boolean;
+  canEquipWeapon(weapon: Data_Weapon): boolean;
+  canEquipArmor(armor: Data_Armor): boolean;
+  paramMin(paramId: ParamId): number;
+  paramMax(paramId: ParamId): number;
+  attackSkillId(): number;
+  guardSkillId(): number;
   canInput(): boolean;
   canMove(): boolean;
   isConfused(): boolean;

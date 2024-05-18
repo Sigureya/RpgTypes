@@ -1,7 +1,8 @@
 import { IdentifiedItems } from "@utils/types";
 import { Data_CommonEvent } from "./commonEvent";
 import { Data_State } from "./state";
-import { Data_Armor, Data_Weapon } from "./item";
+import { Data_Armor } from "./item/equipment";
+import { Data_Weapon } from "./item/equipment";
 import { Data_Skill } from "./item/skill";
 import { Data_Item } from "./item/item";
 
