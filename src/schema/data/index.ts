@@ -9,3 +9,4 @@ export * from "./troop";
 export * from "./usableItem";
 export * from "./namedItem";
 export * from "./eventCommand";
+export * from "./goods";
