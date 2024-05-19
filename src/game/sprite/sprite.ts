@@ -1,1 +1,1 @@
-export class Sprite {}
+export class Sprite extends PIXI.Sprite {}

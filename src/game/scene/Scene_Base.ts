@@ -1,9 +1,7 @@
-import { ColorFilter } from "@niokasgami/rpg-maker-mz-typescript";
-import { WindowLayer } from "../core/WindowLayer";
-import { Stage } from "../core/stage";
+import { ColorFilter, Stage, WindowLayer } from "../core/";
 import { DisplayObject } from "./members/displayObject";
 
-declare class Scene_Base extends Stage {
+export declare class Scene_Base extends Stage {
   _started: boolean;
   _active: boolean;
   _fadeSign: number;
