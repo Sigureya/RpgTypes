@@ -1,12 +1,15 @@
+import { Bitmap } from "../core";
+import { Scene_Base } from "../scene/Scene_Base";
+
 export interface Manager_Scene {
   reloadGame(): void;
-  backgroundBitmap(): any;
-}
+  isSceneChanging(): boolean;
 
-declare const SceneManager: Manager_Scene;
-function hoge() {
-  const old = SceneManager.reloadGame;
-  SceneManager.reloadGame = function () {
-    old.call(this);
-  };
+  isNextScene(sceneClass: typeof Scene_Base): boolean;
+  isPreviousScene(sceneClass: typeof Scene_Base): boolean;
+  goto(sceneClass: typeof Scene_Base): void;
+  push(sceneClass: typeof Scene_Base): void;
+  pop(): void;
+  snapForBackground(): void;
+  backgroundBitmap(): Bitmap;
 }
