@@ -1,4 +1,4 @@
-export interface Battle_Audio {
+export interface Audio {
   saveBgmAndBgs(): void;
   playBattleBgm(): void;
   playDefeatMe(): void;

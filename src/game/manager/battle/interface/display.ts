@@ -1,4 +1,4 @@
-export interface Battle_Display {
+export interface Display {
   displayVictoryMessage(): void;
   displayDefeatMessage(): void;
   displayEscapeSuccessMessage(): void;

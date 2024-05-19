@@ -1,4 +1,4 @@
-interface Battle_Process {
+export interface Process {
   processAbort(): void;
   rocessPartyEscape(): void;
   onEscapeFailure(): void;
