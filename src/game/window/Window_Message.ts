@@ -49,7 +49,7 @@ export declare class Window_Message extends Window_Base {
 
   updateInput(): void;
 
-  isvoidSubWindowActive(): boolean;
+  isAnySubWindowActive(): boolean;
 
   updateMessage(): void;
 
