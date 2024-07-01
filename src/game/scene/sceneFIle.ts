@@ -1,7 +1,9 @@
+import { Window_SavefileList } from "../window/Window_SavefileList";
 import { Rectangle } from "../window";
 import { Scene_MenuBase } from "./SceneMenuBase";
 
 export declare class Scene_File extends Scene_MenuBase {
+  _listWindow: Window_SavefileList;
   initialize(): void;
   create(): void;
   helpAreaHeight(): number;
