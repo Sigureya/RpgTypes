@@ -1,3 +1,5 @@
+export * from "./global";
+
 export * from "./Game_Action";
 export * from "./Game_ActionResult";
 export * from "./Game_Actor";
