@@ -1,4 +1,4 @@
-interface TextManager {
+export interface TextManager_Interface {
   basic(basicId: number): string;
   param(paramId: number): string;
   command(commandId: number): string;

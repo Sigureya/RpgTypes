@@ -1,6 +1,6 @@
 import { Game_Actor } from "../object";
 
-export interface ColorManager {
+export interface ColorManager_Interface {
   textColor(n: number): string;
   normalColor(): string;
   systemColor(): string;

@@ -1,4 +1,4 @@
-export interface SoundManager {
+export interface SoundManager_Interface {
   preloadImportantSounds(): void;
 
   playCursor(): void;

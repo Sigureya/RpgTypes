@@ -1,4 +1,4 @@
-export interface Manager_Data {
+export interface DataManager_Interface {
   removeInvalidGlobalInfo(): void;
   loadGlobalInfo(): void;
   saveGlobalInfo(): void;
