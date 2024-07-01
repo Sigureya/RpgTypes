@@ -22,11 +22,6 @@
       "@api/*": ["src/api/*"]
     }
   },
-  //"include": [
-  //    "src/",
-  //    "game/js/plugins/**/*.js",
-  //    "game/js/rmmz*.js",
-  //    "game/js/plugins/**/*.js"
-  //],
+  "include": ["src/*.ts"],
   "exclude": ["game/js/plugins/exclude/**/*.js"]
 }
