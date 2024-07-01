@@ -1,4 +1,4 @@
-import { Game_Actor } from "src/game/object";
+import { Game_Actor } from "../../game/object";
 import { Window_Command } from "./Window_Command";
 
 //-----------------------------------------------------------------------------

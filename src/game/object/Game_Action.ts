@@ -30,6 +30,7 @@ export declare class Game_Action {
   static EFFECT_COMMON_EVENT: any;
   static SPECIAL_EFFECT_ESCAPE: any;
   constructor(subject: IBattler, forcing: boolean);
+  constructor(subject: IBattler);
   initialize(subject: IBattler, forcing: boolean): void;
   clear(): void;
   setSubject(subject: IBattler): void;

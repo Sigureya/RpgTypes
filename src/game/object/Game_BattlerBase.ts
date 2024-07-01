@@ -5,6 +5,7 @@ import {
   Data_Armor,
   Data_Skill,
   ParamID,
+  Data_UsableItem,
 } from "../../schema";
 import { IBattlerBase } from "./types/interface/battler/base";
 
@@ -18,6 +19,7 @@ export declare class Game_BattlerBase implements IBattlerBase {
   guardSkillId(): number;
   canInput(): boolean;
   canMove(): boolean;
+  canUse(item: Data_UsableItem): boolean;
   isConfused(): boolean;
   confusionLevel(): boolean;
   isSkillWtypeOk(skill: Data_Skill): boolean;

@@ -1,6 +1,6 @@
 import { Rectangle } from "pixi.js";
 import { Game_Actor } from "../object";
-import { Scene_Base } from "./Scene_Base";
+import { Scene_Base } from "./sceneBase";
 import { Window_Help } from "../window";
 import { Sprite, Sprite_Button } from "../sprite";
 

@@ -3,7 +3,8 @@ import { TextState } from "./types/textState";
 import { TextAlign } from "./types/TextAlign";
 
 export declare class Window_Base {
-  destroy(options: void): void;
+  constructor(rect: Rectangle);
+  destroy(options: {}): void;
 
   lineHeight(): number;
 
