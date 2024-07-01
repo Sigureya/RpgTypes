@@ -6,6 +6,7 @@
     "eslint": "^9.1.0",
     "pixi.js": "^8.1.4"
   },
+  "main": "index.js",
   "files": [
     "src"
   ],
