@@ -1,3 +1,3 @@
-export interface DisplayObject extends PIXI.DisplayObject {
+export declare class DisplayObject extends PIXI.DisplayObject {
   update?(): void;
 }
