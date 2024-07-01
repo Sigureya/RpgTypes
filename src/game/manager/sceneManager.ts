@@ -1,5 +1,5 @@
 import { Bitmap } from "../core";
-import { Scene_Base } from "../scene/Scene_Base";
+import { Scene_Base } from "../scene/sceneBase";
 
 export interface SceneManager {
   reloadGame(): void;

@@ -1,2 +1,2 @@
-export * from "./Scene_Base";
+export * from "./sceneBase";
 export * from "./SceneMenuBase";

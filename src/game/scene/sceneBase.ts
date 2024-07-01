@@ -1,4 +1,4 @@
-import { ColorFilter, Stage, WindowLayer } from "../core/";
+import { ColorFilter, Stage, WindowLayer } from "../core";
 import { DisplayObject } from "./members/displayObject";
 
 export declare class Scene_Base extends Stage {
