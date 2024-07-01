@@ -5,7 +5,6 @@ export * from "./Game_ActionResult";
 export * from "./Game_Actor";
 export * from "./Game_Actors";
 export * from "./Game_Battler";
-
 export * from "./Game_BattlerBase";
 export * from "./Game_Character";
 export * from "./Game_CommonEvent";
@@ -18,11 +17,8 @@ export * from "./Game_SelfSwitches";
 export * from "./Game_Switches";
 export * from "./Game_System";
 export * from "./Game_Screen";
-
 export * from "./Game_Timer";
-
 export * from "./Game_Party";
 export * from "./Game_Player";
-
 export * from "./Game_Picture";
 export * from "./Game_Variables";
