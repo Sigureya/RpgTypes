@@ -10,6 +10,7 @@
   "files": [
     "src"
   ],
+  "types": "./lib/index.ts",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Sigureya/RpgTypes.git"
