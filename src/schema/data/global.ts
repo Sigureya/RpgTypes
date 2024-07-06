@@ -1,4 +1,4 @@
-import { IdentifiedItems } from "src/types/types";
+import { IdentifiedItems } from "../../types/types";
 import {
   Data_Armor,
   Data_CommonEvent,
