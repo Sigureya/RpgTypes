@@ -9,7 +9,7 @@ import {
   Game_Map,
   Game_Screen,
   Game_SelfSwitches,
-} from "@game/object";
+} from "../../game/object";
 
 export interface Savedata {
   system: Game_System;
