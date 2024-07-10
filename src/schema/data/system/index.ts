@@ -3,18 +3,22 @@ import { System_Advanced } from "./advanced";
 import { EditerParams } from "./editorParams";
 import { System_Message } from "./message";
 import { System_Sounds } from "./sound";
+export interface Data_System
+  extends EditerParams,
+    System_Params,
+    System_AudioFiles {}
 
 interface System_Vehicle {
   bgm: AudioFileParams;
 }
 
-interface AudioFiles {
+interface System_AudioFiles {
   gameoverMe: AudioFileParams;
   battleBgm: AudioFileParams;
   defeatMe: AudioFileParams;
 }
 
-interface SystemParams {
+interface System_Params {
   advanced: System_Advanced;
   airship: System_Vehicle;
   boat: System_Vehicle;
@@ -26,5 +30,3 @@ interface SystemParams {
   sounds: System_Sounds;
   messages: System_Message;
 }
-
-export interface Data_System extends EditerParams, SystemParams, AudioFiles {}

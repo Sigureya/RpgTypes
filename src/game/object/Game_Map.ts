@@ -3,9 +3,7 @@
 //
 // The game object class for a map. It contains scrolling and passage
 
-import { $dataTilesets } from "@niokasgami/rpg-maker-mz-typescript";
-import { Data_CommonEvent } from "../../schema";
-import { ValueOf } from "../../types/types";
+import { Data_CommonEvent, Data_Tileset } from "../../schema";
 import { Game_CommonEvent } from "./Game_CommonEvent";
 import { Game_Event } from "./Game_Event";
 import { Game_Interpreter } from "./Game_Interpreter";
@@ -75,7 +73,7 @@ export declare class Game_Map {
   setDisplayPos(x: number, y: number): void;
   parallaxOx(): number;
   parallaxOy(): number;
-  tileset(): ValueOf<typeof $dataTilesets>;
+  tileset(): Data_Tileset;
   tilesetFlags(): [];
   displayName(): string;
   width(): number;
