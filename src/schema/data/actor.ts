@@ -1,6 +1,6 @@
 import { Data_TraitContainer, Data_NamedItem } from "./bases";
 
-export interface Actor extends Data_TraitContainer, Data_NamedItem {
+export interface Data_Actor extends Data_TraitContainer, Data_NamedItem {
   battlerName: string;
   characterIndex: number;
   characterName: string;
