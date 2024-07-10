@@ -1,7 +1,8 @@
-import { ParamArray, TraitContainer } from "./members";
+import { ParamArray } from "./members";
 import { Data_NamedItem } from "./bases/namedItem";
+import { Data_TraitContainer } from "./bases";
 
-export interface Data_Equipment extends Data_NamedItem, TraitContainer {
+export interface Data_Equipment extends Data_NamedItem, Data_TraitContainer {
   deescription: string;
   price: number;
   params: ParamArray;
