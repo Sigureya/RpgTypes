@@ -8,7 +8,7 @@ export * from "./armor";
 export * from "./class";
 export * from "./commonEvent";
 export * from "./enemy";
-export * from "./bases/equipment";
+export * from "./bases/";
 
 export * from "./global";
 export * from "./item";
