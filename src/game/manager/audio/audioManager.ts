@@ -1,4 +1,4 @@
-import { WebAudio } from "@niokasgami/rpg-maker-mz-typescript";
+import { WebAudio } from "../../core";
 import { AudioFileParams } from "../../../types/audio";
 
 interface AudioBuffer {}
