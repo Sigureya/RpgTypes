@@ -1,10 +1,9 @@
 {
   "name": "@sigureya/rpgtypes",
   "dependencies": {
-    "@niokasgami/rpg-maker-mz-typescript": "github:niokasgami/Rpg-Maker-MZ-Typescript",
     "earcut": "^2.2.4",
     "eslint": "^9.1.0",
-    "pixi.js": "^8.1.4"
+    "pixi.js": "^8.2.3"
   },
   "main": "index.ts",
   "files": [
