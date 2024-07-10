@@ -8,7 +8,7 @@ export interface Trait {
   code: TraitCode;
 }
 
-export interface TraitContainer {
+export interface Data_TraitContainer {
   traits: Trait[];
   note: string;
 }

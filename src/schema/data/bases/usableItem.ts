@@ -20,4 +20,5 @@ export interface Data_UsableItem extends Data_NamedItem {
   successRate: number;
   tpGain: number;
   description: string;
+  note: string;
 }
