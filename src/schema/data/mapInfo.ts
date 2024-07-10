@@ -1,6 +1,6 @@
 import { Data_NamedItem } from "./bases";
 
-export interface MapInfo extends Data_NamedItem {
+export interface Data_MapInfo extends Data_NamedItem {
   expanded: boolean;
   order: number;
   parentId: number;
