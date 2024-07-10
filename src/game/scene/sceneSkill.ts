@@ -1,4 +1,4 @@
-import { Game_Actor } from "@niokasgami/rpg-maker-mz-typescript";
+import { Game_Actor } from "../object";
 import { Rectangle } from "../window";
 import { Scene_MenuBase } from "./SceneMenuBase";
 

@@ -1,1 +1,2 @@
-export interface ColorFilter extends PIXI.Filter {}
+export interface ColorFilter {}
+// extends PIXI.Filter {}
