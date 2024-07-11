@@ -1,7 +1,6 @@
 {
   "name": "@sigureya/rpgtypes",
   "dependencies": {
-    "earcut": "^2.2.4",
     "eslint": "^9.1.0",
     "pixi.js": "^8.2.3"
   },
