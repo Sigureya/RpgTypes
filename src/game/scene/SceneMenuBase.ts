@@ -6,7 +6,8 @@ import { Sprite, Sprite_Button } from "../sprite";
 
 export declare class Scene_MenuBase extends Scene_Base {
   _actor: Game_Actor;
-  _backgroundFilter: PIXI.filters.BlurFilter;
+  // TODO:こういう変数はあるけれど、書き方を思いつくまでコメントアウト
+  //  _backgroundFilter: PIXI.filters.BlurFilter;
   _backgroundSprite: Sprite;
   _helpWindow: Window_Help;
   _cancelButton: Sprite_Button;
