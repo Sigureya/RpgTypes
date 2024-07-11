@@ -1,6 +1,7 @@
 import { ColorFilter, Stage, WindowLayer } from "../core";
 import { Window_Base } from "../window";
 import { DisplayObject } from "./members/displayObject";
+import * as PIXI from "pixi.js/";
 
 export declare class Scene_Base extends Stage {
   _started: boolean;
@@ -12,7 +13,7 @@ export declare class Scene_Base extends Stage {
   _windowLayer: WindowLayer;
   _colorFilter: ColorFilter;
   filters: PIXI.Filter[];
-  children: DisplayObject[];
+  //children: DisplayObject[];
   constructor();
   initialize(): void;
   create(): void;
@@ -26,7 +27,7 @@ export declare class Scene_Base extends Stage {
   isFading(): boolean;
   terminate(): void;
   createWindowLayer(): void;
-  addWindow(window: PIXI.DisplayObject | Window_Base): void;
+  addWindow(window: DisplayObject | Window_Base): void;
   startFadeIn(duration: number, white: number): void;
   startFadeOut(duration: number, white: number | undefined): void;
   createColorFilter(): void;
