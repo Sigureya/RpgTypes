@@ -1,10 +1,10 @@
-import { Data_UsableItem } from "src/schema";
-import { Game_Action, Game_Actor } from "../object";
+import { Data_UsableItem } from "../../schema";
+import { Game_Actor } from "../object";
 import { Window_ItemList, Window_MenuActor } from "../window";
 import { Rectangle } from "../window/rectangle";
 import { Scene_MenuBase } from "./SceneMenuBase";
 
-declare class Scene_ItemBase extends Scene_MenuBase {
+export declare class Scene_ItemBase extends Scene_MenuBase {
   _actorWindow: Window_MenuActor;
   _itemWindow: Window_ItemList;
   initialize(): void;

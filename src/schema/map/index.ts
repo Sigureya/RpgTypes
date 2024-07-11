@@ -1,4 +1,4 @@
-import { AudioFileParams } from "src/types/audio";
+import { AudioFileParams } from "../../types/";
 import { MapEvent } from "./event";
 import { Parallax } from "./parallax";
 export * from "./event";

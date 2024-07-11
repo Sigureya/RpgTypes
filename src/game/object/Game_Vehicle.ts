@@ -1,4 +1,4 @@
-import { AudioFileParams } from "src/types/audio";
+import { AudioFileParams } from "../../types/";
 import { Game_Character } from "./Game_Character";
 import { Direction8 } from "./types/interface/character";
 

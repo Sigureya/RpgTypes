@@ -1,5 +1,5 @@
 import { Game_Picture } from "./Game_Picture";
-import { ColorRGBA } from "src/types/colorRGBA";
+import { ColorRGBA } from "../../types/colorRGBA";
 
 //-----------------------------------------------------------------------------
 // Game_Screen
