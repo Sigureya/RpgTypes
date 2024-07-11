@@ -1,4 +1,3 @@
-import type { ValueOf } from "src/types/types";
 import type * as $ from "./codes";
 import type { OPERATION, TOGGLE } from "./constants";
 import type {
@@ -8,7 +7,7 @@ import type {
   ShopProcessing,
   ShowPicture,
 } from "./paramaters";
-import { AudioFileParams } from "../../../types/";
+import { ValueOf, AudioFileParams } from "../../../types/";
 
 export type CommandParameters = {
   /**

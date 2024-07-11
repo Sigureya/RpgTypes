@@ -1,4 +1,4 @@
-import { Rectangle } from "src/types/rectangle";
+import { Rectangle } from "./rectangle";
 import { Data_Item, ShopGoods } from "../../schema";
 import { Window_Status } from "./Window_Status";
 import { Window_Selectable } from "./Window_Selectable";

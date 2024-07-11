@@ -1,4 +1,4 @@
-import { Rectangle } from "src/types/rectangle";
+import { Rectangle } from "./rectangle";
 import { Data_NamedItem } from "../../schema/data";
 import { Window_Scrollable } from "./Window_Scrollable";
 import { IHelpListner } from "./types/HelpListener";

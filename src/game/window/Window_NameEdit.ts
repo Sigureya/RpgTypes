@@ -1,4 +1,4 @@
-import { Rectangle } from "src/types/rectangle";
+import { Rectangle } from "./rectangle";
 import { Game_Actor } from "../object";
 import { Window_StatusBase } from "./Window_StatusBase";
 

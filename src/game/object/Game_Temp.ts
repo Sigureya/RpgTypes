@@ -3,7 +3,7 @@ import {
   AnimationRequest,
   BallonRequest,
   AnimationTarget,
-} from "src/schema";
+} from "../../schema";
 import { Game_Character } from "./Game_Character";
 import { LAST_ACTION_TYPES } from "./constant/gameTemp";
 import { Game_Battler } from "./Game_Battler";

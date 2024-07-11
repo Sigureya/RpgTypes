@@ -1,5 +1,5 @@
-import { Rectangle } from "src/types/rectangle";
-import { Data_BaseItem } from "../../schema/data/item/baseItem";
+import { Rectangle } from "./rectangle";
+import { Data_NamedItem as Data_BaseItem } from "../../schema/";
 import { Window_Selectable } from "./Window_Selectable";
 import { ISelectable } from "./types/ISelctable";
 
