@@ -219,17 +219,17 @@ export type CommandParameters = {
   [$.CHANGE_MP]: ChanageActorVariable;
   [$.CHANGE_TP]: ChanageActorVariable;
 
-  [$.CHANGE_NAME]: [actorId: number, maxLength: number];
+  [$.CHANGE_NAME]: [actorId: number, name: string];
 
   /**
    * @description Change Nickname
    */
-  [$.CHANGE_NICKNAME]: [id: number, name: string];
+  [$.CHANGE_NAME]: [actorId: number, name: string];
 
   /**
    * @description Change Profile
    */
-  [$.CHANGE_PROFILE]: [id: number, content: string];
+  [$.CHANGE_NAME]: [actorId: number, name: string];
 
   /**
    * @description  Plugin Command (MZ)
