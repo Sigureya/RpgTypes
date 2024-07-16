@@ -2,19 +2,20 @@ export interface System_Terms {
   messages: System_Message;
   commands: System_Command;
   params: System_ParamArrayTerms;
+  basic: string[];
 }
 
 type System_Command = string[];
 
 type System_ParamArrayTerms = [
-  mhp: number,
-  mmp: number,
-  atk: number,
-  def: number,
-  mat: number,
-  mdf: number,
-  agi: number,
-  luk: number
+  mhp: string,
+  mmp: string,
+  atk: string,
+  def: string,
+  mat: string,
+  mdf: string,
+  agi: string,
+  luk: string
 ];
 
 export interface System_Message {
