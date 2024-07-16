@@ -1,3 +1,22 @@
+export interface System_Terms {
+  messages: System_Message;
+  commands: System_Command;
+  params: System_ParamArrayTerms;
+}
+
+type System_Command = string[];
+
+type System_ParamArrayTerms = [
+  mhp: number,
+  mmp: number,
+  atk: number,
+  def: number,
+  mat: number,
+  mdf: number,
+  agi: number,
+  luk: number
+];
+
 export interface System_Message {
   alwaysDash: string;
   commandRemember: string;

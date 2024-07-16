@@ -1,12 +1,18 @@
 import { AudioFileParams } from "../../../types/audio";
 import { System_Advanced } from "./advanced";
 import { EditerParams } from "./editorParams";
-import { System_Message } from "./message";
+import { System_Message, System_Terms } from "./message";
 import { System_Sounds } from "./sound";
+import { System_ImageFilenames } from "./imageFilenames";
 export interface Data_System
   extends EditerParams,
     System_Params,
-    System_AudioFiles {}
+    System_AudioFiles,
+    System_ImageFilenames {
+  local: string;
+  gameTitle: string;
+  currencyUnit: string;
+}
 
 interface System_Vehicle {
   bgm: AudioFileParams;
@@ -28,5 +34,5 @@ interface System_Params {
   equipTypes: string[];
   gameTitle: string;
   sounds: System_Sounds;
-  messages: System_Message;
+  terms: System_Terms;
 }
