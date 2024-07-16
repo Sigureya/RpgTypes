@@ -1,3 +1,7 @@
+export interface System_Terms {
+  messages: System_Message;
+}
+
 export interface System_Message {
   alwaysDash: string;
   commandRemember: string;
