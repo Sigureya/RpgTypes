@@ -1,7 +1,7 @@
 import { AudioFileParams } from "../../../types/audio";
 import { System_Advanced } from "./advanced";
 import { EditerParams } from "./editorParams";
-import { System_Message, System_Terms } from "./message";
+import { System_Terms } from "./message";
 import { System_Sounds } from "./sound";
 import { System_ImageFilenames } from "./imageFilenames";
 export interface Data_System
@@ -12,6 +12,8 @@ export interface Data_System
   local: string;
   gameTitle: string;
   currencyUnit: string;
+  title1Name: string;
+  title2Name: string;
 }
 
 interface System_Vehicle {
