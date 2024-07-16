@@ -224,12 +224,12 @@ export type CommandParameters = {
   /**
    * @description Change Nickname
    */
-  [$.CHANGE_NAME]: [actorId: number, name: string];
+  [$.CHANGE_NICKNAME]: [actorId: number, name: string];
 
   /**
    * @description Change Profile
    */
-  [$.CHANGE_NAME]: [actorId: number, name: string];
+  [$.CHANGE_PROFILE]: [actorId: number, name: string];
 
   /**
    * @description  Plugin Command (MZ)
