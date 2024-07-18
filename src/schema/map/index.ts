@@ -1,7 +1,6 @@
-import { MapEvent } from "./event/event";
+import { MapEvent } from "./event";
 
-export * from "./event/page";
-export * from "./event/event";
+export * from "./event";
 
 interface Map_Filenames {
   battleback1Name: string;
