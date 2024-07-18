@@ -1,4 +1,4 @@
-import { Direction8 } from "src/game/object/types/interface/character";
+import { Direction8 } from "../../../game/object/types/";
 import { EventCommand } from "../../data";
 import { Condition } from "./condition";
 import { Event_MoveRoute } from "./moveRoute";
