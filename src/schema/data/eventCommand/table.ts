@@ -232,6 +232,20 @@ export type CommandParameters = {
   [$.CHANGE_PROFILE]: [actorId: number, name: string];
 
   /**
+   * @description  Script Eval
+   */
+  [$.SCRIPT_EVAL]: [script: string];
+  /**
+   * @description  Script Eval(body)
+   */
+  [$.SCRIPT_EVAL_BODY]: [script: string];
+
+  /**
+   * @description  Plugin Command (MZ)
+   */
+  [$.PLUGIN_COMMAND_MV]: [data: string];
+
+  /**
    * @description  Plugin Command (MZ)
    */
   [$.PLUGIN_COMMAND_MZ]: [
