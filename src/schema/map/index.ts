@@ -18,7 +18,6 @@ interface Map_Parallax {
 }
 export interface Data_Map extends Map_Filenames, Map_Parallax {
   id: number;
-  name: string;
   displayName: string;
   note: string;
   width: number;
