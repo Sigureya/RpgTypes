@@ -50,4 +50,7 @@ export const CHANGE_TP = 313 as const;
 export const CHANGE_NAME = 320 as const;
 export const CHANGE_NICKNAME = 324 as const;
 export const CHANGE_PROFILE = 325 as const;
+export const SCRIPT_EVAL = 355 as const;
+export const SCRIPT_EVAL_BODY = 655 as const;
+export const PLUGIN_COMMAND_MV = 356 as const;
 export const PLUGIN_COMMAND_MZ = 357 as const;

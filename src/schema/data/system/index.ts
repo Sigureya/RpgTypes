@@ -27,6 +27,7 @@ interface System_AudioFiles {
 }
 
 interface System_Params {
+  versionId: number;
   advanced: System_Advanced;
   airship: System_Vehicle;
   boat: System_Vehicle;
