@@ -1,4 +1,4 @@
-import {
+import type {
   Game_Party,
   Game_Actors,
   Game_Switches,
