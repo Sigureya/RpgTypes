@@ -1,6 +1,5 @@
 export * from "./code";
 export * from "./parameters";
-export * from "./data";
 import { MoveRouteParameters } from "./parameters";
 
 export type MoveRouteCommandTable = {
@@ -12,3 +11,9 @@ export type MoveRouteCommandTable = {
 
 export type MoveRouteCommand =
   MoveRouteCommandTable[keyof MoveRouteCommandTable];
+export interface MoveRouteData {
+  wait: boolean;
+  repeat: boolean;
+  skippable: boolean;
+  list: MoveRouteCommand[];
+}
