@@ -7,7 +7,8 @@ import type {
   ShopProcessing,
   ShowPicture,
 } from "./paramaters";
-import { ValueOf, AudioFileParams } from "../../../types/";
+import type { MoveRouteData } from "../moveRoute";
+import type { ValueOf, AudioFileParams } from "../../../types/";
 
 export type CommandParameters = {
   /**
@@ -205,7 +206,7 @@ export type CommandParameters = {
    * @description Change Formation Access
    */
   [$.CHANGE_FORMATION_ACCESS]: [value: ValueOf<typeof TOGGLE>];
-  [$.SET_MOVEMENT_ROUTE]: [characterId: number];
+  [$.SET_MOVEMENT_ROUTE]: [characterId: number, movement: MoveRouteData];
 
   [$.SHOW_PICTURE]: ShowPicture;
 

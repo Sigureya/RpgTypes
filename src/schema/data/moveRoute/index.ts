@@ -1,5 +1,6 @@
 export * from "./code";
 export * from "./parameters";
+export * from "./data";
 import { MoveRouteParameters } from "./parameters";
 
 export type MoveRouteCommandTable = {
