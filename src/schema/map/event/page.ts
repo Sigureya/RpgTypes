@@ -1,9 +1,9 @@
 import type { Direction8 } from "../../../game/object/types/";
 import type { EventCommand } from "../../data";
 import type { Condition } from "./condition";
-import type { Event_MoveRoute } from "./moveRoute";
+import type { MoveRouteData } from "./moveRoute";
 
-interface MapEvent_Image {
+export interface MapEvent_Image {
   characterIndex: number;
   characterName: string;
   direction: Direction8;
@@ -17,5 +17,5 @@ export interface MapEventPage {
   directionFix: boolean;
   image: MapEvent_Image;
   moveFrequency: number;
-  moveRoute: Event_MoveRoute;
+  moveRoute: MoveRouteData;
 }
