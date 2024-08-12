@@ -1,14 +1,16 @@
-import { AudioFileParams } from "../../../types/audio";
-import { System_Advanced } from "./advanced";
-import { EditerParams } from "./editorParams";
-import { System_Terms } from "./message";
-import { System_Sounds } from "./sound";
-import { System_ImageFilenames } from "./imageFilenames";
+import type { AudioFileParams } from "../../../types/audio";
+import type { System_Advanced } from "./advanced";
+import type { EditerParams } from "./editorParams";
+import type { System_Terms } from "./message";
+import type { System_Sounds } from "./sound";
+import type { System_ImageFilenames } from "./imageFilenames";
+import type { Vehicles } from "./vehicles";
 export interface Data_System
   extends EditerParams,
     System_Params,
     System_AudioFiles,
-    System_ImageFilenames {
+    System_ImageFilenames,
+    Vehicles {
   local: string;
   gameTitle: string;
   currencyUnit: string;
@@ -16,21 +18,17 @@ export interface Data_System
   title2Name: string;
 }
 
-interface System_Vehicle {
-  bgm: AudioFileParams;
-}
-
 interface System_AudioFiles {
+  titleBgm: AudioFileParams;
   gameoverMe: AudioFileParams;
   battleBgm: AudioFileParams;
   defeatMe: AudioFileParams;
+  victoryMe: AudioFileParams;
 }
 
 interface System_Params {
   versionId: number;
   advanced: System_Advanced;
-  airship: System_Vehicle;
-  boat: System_Vehicle;
   armorTypes: string[];
   elements: number[];
   variables: string[];
