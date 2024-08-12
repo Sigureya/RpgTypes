@@ -38,6 +38,7 @@ export const CHANGE_FORMATION_ACCESS = 137 as const;
 export const CHANGE_DEFEAT_ME = 139 as const;
 export const CHANGE_VEHICLE_ME = 140 as const;
 
+export const SET_MOVEMENT_ROUTE = 205 as const;
 export const SHOW_PICTURE = 231 as const;
 export const PLAY_BGM = 241 as const;
 export const FADEOUT_BGM = 242 as const;
