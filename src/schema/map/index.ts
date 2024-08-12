@@ -1,4 +1,4 @@
-import { MapEvent } from "./event";
+import type { MapEvent } from "./event";
 
 export * from "./event";
 
