@@ -205,6 +205,7 @@ export type CommandParameters = {
    * @description Change Formation Access
    */
   [$.CHANGE_FORMATION_ACCESS]: [value: ValueOf<typeof TOGGLE>];
+  [$.SET_MOVEMENT_ROUTE]: [characterId: number];
 
   [$.SHOW_PICTURE]: ShowPicture;
 
