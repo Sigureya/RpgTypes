@@ -1,5 +1,5 @@
-import { Data_NamedItem, Data_TraitContainer } from "./bases";
-import { ParamArray, Action, DropItem } from "./members";
+import type { Data_NamedItem, Data_TraitContainer } from "./bases";
+import type { ParamArray, Action, DropItem } from "./members";
 
 export interface Data_Enemy extends Data_TraitContainer, Data_NamedItem {
   actions: Action[];

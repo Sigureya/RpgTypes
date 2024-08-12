@@ -1,4 +1,4 @@
-import { Data_NamedItem } from "./namedItem";
+import type { Data_NamedItem } from "./namedItem";
 export interface ItemEffect {
   code: number;
   value1: number;

@@ -1,4 +1,4 @@
-import { Data_NamedItem, Data_TraitContainer } from "./bases";
+import type { Data_NamedItem, Data_TraitContainer } from "./bases";
 
 export interface Data_State extends Data_NamedItem, Data_TraitContainer {
   message1: string;

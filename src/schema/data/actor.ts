@@ -1,4 +1,4 @@
-import { Data_TraitContainer, Data_NamedItem } from "./bases";
+import type { Data_TraitContainer, Data_NamedItem } from "./bases";
 
 export interface Data_Actor extends Data_TraitContainer, Data_NamedItem {
   battlerName: string;
