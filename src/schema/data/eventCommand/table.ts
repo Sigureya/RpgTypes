@@ -35,7 +35,6 @@ export type CommandParameters = {
     defaultType: number,
     positionType: number,
     background: number
-    // , number
   ];
 
   /**
