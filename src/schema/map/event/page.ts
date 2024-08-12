@@ -3,7 +3,7 @@ import type { EventCommand } from "../../data";
 import type { Condition } from "./condition";
 import type { MoveRouteData } from "./moveRoute";
 
-interface MapEvent_Image {
+export interface MapEvent_Image {
   characterIndex: number;
   characterName: string;
   direction: Direction8;
