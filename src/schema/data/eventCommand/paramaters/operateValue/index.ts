@@ -1,4 +1,4 @@
-import { OPERATION, CONSTANT_OR_VARIABLE } from "./constants";
+import type { OPERATION, CONSTANT_OR_VARIABLE } from "./constants";
 export * from "./constants";
 /**
  * 0 : variable, 1 : constant

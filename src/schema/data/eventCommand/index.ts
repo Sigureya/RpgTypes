@@ -1,4 +1,4 @@
-import { CommandParameters } from "./table";
+import type { CommandParameters } from "./table";
 
 export * from "./table";
 export * from "./paramaters";

@@ -1,7 +1,7 @@
-import { Direction8 } from "../../../game/object/types/";
-import { EventCommand } from "../../data";
-import { Condition } from "./condition";
-import { Event_MoveRoute } from "./moveRoute";
+import type { Direction8 } from "../../../game/object/types/";
+import type { EventCommand } from "../../data";
+import type { Condition } from "./condition";
+import type { Event_MoveRoute } from "./moveRoute";
 
 interface MapEvent_Image {
   characterIndex: number;

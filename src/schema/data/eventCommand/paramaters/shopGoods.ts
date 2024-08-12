@@ -1,4 +1,4 @@
-import { ValueOf } from "../../../../types";
+import type { ValueOf } from "../../../../types";
 
 const GOODS_TYPE = {
   item: 0,

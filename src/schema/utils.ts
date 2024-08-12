@@ -1,9 +1,7 @@
 ///<reference path="./data/eventCommand/index.ts" />
-import type * as $ from "./data/eventCommand/codes";
-import type { ValueOf } from "../types/types";
-import { EventCommandTable } from "./data";
+import type { EventCommandTable } from "./data";
 
-export const createCommand = <T extends ValueOf<typeof $>>(
+export const createCommand = <T extends keyof EventCommandTable>(
   code: T,
   // エラー:ts(2536)が出た場合、EventCommandTableにコマンド引数の型を追記してください
   // 一番上のreferenceでリンクを貼ってあります
