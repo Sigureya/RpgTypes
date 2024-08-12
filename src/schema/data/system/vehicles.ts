@@ -2,6 +2,11 @@ import { AudioFileParams } from "../../../types/audio";
 
 export interface System_Vehicle {
   bgm: AudioFileParams;
+  characterIndex: number;
+  characterName: string;
+  startMapId: 0;
+  startX: 0;
+  startY: 0;
 }
 
 export interface Vehicles {
