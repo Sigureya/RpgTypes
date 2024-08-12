@@ -34,7 +34,6 @@ export type CommandParameters = {
     defaultType: number,
     positionType: number,
     background: number
-    // , number
   ];
 
   /**
@@ -206,6 +205,8 @@ export type CommandParameters = {
    */
   [$.CHANGE_FORMATION_ACCESS]: [value: ValueOf<typeof TOGGLE>];
 
+  [$.CHANGE_DEFEAT_ME]: [me: AudioFileParams];
+
   [$.SHOW_PICTURE]: ShowPicture;
 
   [$.PLAY_BGM]: [value: AudioFileParams];
@@ -224,6 +225,20 @@ export type CommandParameters = {
   [$.CHANGE_TP]: ChanageActorVariable;
 
   [$.CHANGE_NAME]: [actorId: number, name: string];
+
+  [$.CHANGE_ACTOR_IMAGES]: [
+    actorId: number,
+    characterImage: string,
+    characterIndex: number,
+    faceImage: string,
+    faceIndex: number,
+    battlerImage: string
+  ];
+  [$.CHANGE_VEHICLE_IMAGE]: [
+    actorId: number,
+    characterImage: string,
+    characterIndex: number
+  ];
 
   /**
    * @description Change Nickname

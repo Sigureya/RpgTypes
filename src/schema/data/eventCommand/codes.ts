@@ -34,6 +34,10 @@ export const CHANGE_SAVE_ACCESS = 134 as const;
 export const CHANGE_MENU_ACCESS = 135 as const;
 export const CHANGE_ENCOUNTER = 136 as const;
 export const CHANGE_FORMATION_ACCESS = 137 as const;
+
+export const CHANGE_DEFEAT_ME = 139 as const;
+export const CHANGE_VEHICLE_ME = 140 as const;
+
 export const SHOW_PICTURE = 231 as const;
 export const PLAY_BGM = 241 as const;
 export const FADEOUT_BGM = 242 as const;
@@ -44,6 +48,7 @@ export const PLAY_BGS = 245 as const;
 export const PLAY_ME = 249 as const;
 export const PLAY_SE = 250 as const;
 
+export const CHANGE_TILESET = 282 as const;
 export const CHANGE_BATTLE_BACKGROUND = 283 as const;
 export const CHANGE_PARALLAX = 284 as const;
 
@@ -57,6 +62,8 @@ export const CHANGE_MP = 312 as const;
 export const CHANGE_TP = 313 as const;
 
 export const CHANGE_NAME = 320 as const;
+export const CHANGE_ACTOR_IMAGES = 322 as const;
+export const CHANGE_VEHICLE_IMAGE = 323 as const;
 export const CHANGE_NICKNAME = 324 as const;
 export const CHANGE_PROFILE = 325 as const;
 export const SCRIPT_EVAL = 355 as const;
