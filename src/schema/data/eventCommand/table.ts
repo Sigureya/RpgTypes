@@ -7,7 +7,7 @@ import type {
   ShopProcessing,
   ShowPicture,
 } from "./paramaters";
-import type { MoveRouteData } from "../moveRoute";
+import type { MoveRouteData } from "../../map/event/moveRoute";
 import type { ValueOf, AudioFileParams } from "../../../types/";
 
 export type CommandParameters = {

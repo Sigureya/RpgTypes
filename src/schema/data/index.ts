@@ -21,4 +21,4 @@ export * from "./tileset";
 export * from "./unionTypes";
 export * from "./weapon";
 
-export * from "./moveRoute";
+export * from "../map/event/moveRoute";
