@@ -19,9 +19,11 @@ export interface Data_System
 }
 
 interface System_AudioFiles {
+  titleBgm: AudioFileParams;
   gameoverMe: AudioFileParams;
   battleBgm: AudioFileParams;
   defeatMe: AudioFileParams;
+  victoryMe: AudioFileParams;
 }
 
 interface System_Params {
