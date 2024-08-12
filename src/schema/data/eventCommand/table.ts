@@ -208,10 +208,16 @@ export type CommandParameters = {
   [$.CHANGE_FORMATION_ACCESS]: [value: ValueOf<typeof TOGGLE>];
   [$.SET_MOVEMENT_ROUTE]: [characterId: number, movement: MoveRouteData];
 
+  [$.CHANGE_DEFEAT_ME]: [me: AudioFileParams];
+
   [$.SHOW_PICTURE]: ShowPicture;
 
   [$.PLAY_BGM]: [value: AudioFileParams];
+  [$.FADEOUT_BGM]: [duration: number];
+  [$.PLAY_BGS]: [value: AudioFileParams];
   [$.PLAY_SE]: [value: AudioFileParams];
+  [$.PLAY_ME]: [value: AudioFileParams];
+
   [$.SAVE_BGM]: [];
   [$.RESUME_BGM]: [];
   [$.SHOP_PROCESSING]: ShopProcessing;
@@ -222,6 +228,20 @@ export type CommandParameters = {
   [$.CHANGE_TP]: ChanageActorVariable;
 
   [$.CHANGE_NAME]: [actorId: number, name: string];
+
+  [$.CHANGE_ACTOR_IMAGES]: [
+    actorId: number,
+    characterImage: string,
+    characterIndex: number,
+    faceImage: string,
+    faceIndex: number,
+    battlerImage: string
+  ];
+  [$.CHANGE_VEHICLE_IMAGE]: [
+    actorId: number,
+    characterImage: string,
+    characterIndex: number
+  ];
 
   /**
    * @description Change Nickname
