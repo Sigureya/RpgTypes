@@ -1,12 +1,13 @@
 export * from "./code";
 export * from "./parameters";
-import * as $ from "./code";
+import { MoveRouteParameters } from "./parameters";
 
-type Code = (typeof $)[keyof typeof $];
+export type MoveRouteCommandTable = {
+  [RouteCodeConstants in keyof MoveRouteParameters]: {
+    code: RouteCodeConstants;
+    parameters: MoveRouteParameters[RouteCodeConstants];
+  };
+};
 
-export type MoveRouteCommandTable = {};
-
-// export interface MoveRouteCommand {
-//   code: Code;
-//   parameters: MoveRouteParameters[Code];
-// }
+export type MoveRouteCommand =
+  MoveRouteCommandTable[keyof MoveRouteCommandTable];
