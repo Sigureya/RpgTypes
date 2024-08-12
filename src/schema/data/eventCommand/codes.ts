@@ -34,6 +34,8 @@ export const CHANGE_SAVE_ACCESS = 134 as const;
 export const CHANGE_MENU_ACCESS = 135 as const;
 export const CHANGE_ENCOUNTER = 136 as const;
 export const CHANGE_FORMATION_ACCESS = 137 as const;
+
+export const SET_MOVEMENT_ROUTE = 205 as const;
 export const SHOW_PICTURE = 231 as const;
 export const PLAY_BGM = 241 as const;
 export const SAVE_BGM = 243 as const;
