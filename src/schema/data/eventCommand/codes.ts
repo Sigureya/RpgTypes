@@ -36,9 +36,18 @@ export const CHANGE_ENCOUNTER = 136 as const;
 export const CHANGE_FORMATION_ACCESS = 137 as const;
 export const SHOW_PICTURE = 231 as const;
 export const PLAY_BGM = 241 as const;
+export const FADEOUT_BGM = 242 as const;
 export const SAVE_BGM = 243 as const;
 export const RESUME_BGM = 244 as const;
+
+export const PLAY_BGS = 245 as const;
+export const PLAY_ME = 249 as const;
 export const PLAY_SE = 250 as const;
+
+export const CHANGE_BATTLE_BACKGROUND = 283 as const;
+export const CHANGE_PARALLAX = 284 as const;
+
+export const BATTLE_PROCESSING = 301 as const;
 
 export const SHOP_PROCESSING = 302 as const;
 export const SHOP_PROCESSING_BODY = 605 as const;

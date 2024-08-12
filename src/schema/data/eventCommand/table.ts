@@ -209,7 +209,11 @@ export type CommandParameters = {
   [$.SHOW_PICTURE]: ShowPicture;
 
   [$.PLAY_BGM]: [value: AudioFileParams];
+  [$.FADEOUT_BGM]: [duration: number];
+  [$.PLAY_BGS]: [value: AudioFileParams];
   [$.PLAY_SE]: [value: AudioFileParams];
+  [$.PLAY_ME]: [value: AudioFileParams];
+
   [$.SAVE_BGM]: [];
   [$.RESUME_BGM]: [];
   [$.SHOP_PROCESSING]: ShopProcessing;
