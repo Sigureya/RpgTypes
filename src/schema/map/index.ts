@@ -1,3 +1,4 @@
+import { AudioFileParams } from "../../types";
 import type { MapEvent } from "./event";
 
 export * from "./event";
@@ -16,7 +17,12 @@ interface Map_Parallax {
   parallaxSx: number;
   parallaxSy: number;
 }
-export interface Data_Map extends Map_Filenames, Map_Parallax {
+interface Map_Audio {
+  bgm: AudioFileParams;
+  bgs: AudioFileParams;
+}
+
+export interface Data_Map extends Map_Filenames, Map_Parallax, Map_Audio {
   id: number;
   displayName: string;
   note: string;
