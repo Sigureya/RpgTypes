@@ -16,11 +16,11 @@ export type EventCommandTypes = {
 
 export type EventCommand = EventCommandTypes[keyof EventCommandTypes];
 
-export type EventCommandFind<Code extends EventCode> = Extract<
+export type EventCommandFromCode<Code extends EventCode> = Extract<
   EventCommand,
   { code: Code }
 >;
 
 export type EventCommandTable = {
-  [Key in EventCode]: EventCommandFind<Key>;
+  [Key in EventCode]: EventCommandFromCode<Key>;
 };
