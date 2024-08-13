@@ -1,5 +1,6 @@
 import { AudioFileParams } from "../../types";
 import type { MapEvent } from "./event";
+import type { Encounter } from "./encounter";
 
 export * from "./event";
 
@@ -20,6 +21,8 @@ interface Map_Parallax {
 interface Map_Audio {
   bgm: AudioFileParams;
   bgs: AudioFileParams;
+  autoplayBgm: boolean;
+  autoplayBgs: boolean;
 }
 
 export interface Data_Map extends Map_Filenames, Map_Parallax, Map_Audio {
@@ -33,4 +36,5 @@ export interface Data_Map extends Map_Filenames, Map_Parallax, Map_Audio {
   disableDashing: boolean;
   events: Array<MapEvent | null>;
   data: number[];
+  encounterList: Encounter[];
 }
