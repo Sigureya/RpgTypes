@@ -10,6 +10,7 @@ import type { MoveRouteData } from "../../map/event/moveRoute";
 import type { ValueOf, AudioFileParams } from "../../../types/";
 
 export type CommandParameters = {
+  NO_OPERATION: [];
   /**
    * @description Show Text
    */
