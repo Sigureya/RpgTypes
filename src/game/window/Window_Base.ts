@@ -1,6 +1,6 @@
 import { Rectangle } from "./rectangle";
 import { TextState } from "./types/textState";
-import { TextAlign } from "./types/TextAlign";
+import { TextAlign } from "./types/textAlign";
 
 export declare class Window_Base {
   constructor(rect: Rectangle);

@@ -1,5 +1,5 @@
 import { Window_Command } from "./Window_Command";
-import { TextAlign } from "./types/TextAlign";
+import { TextAlign } from "./types/textAlign";
 
 export declare class Window_HorzCommand<Ext = any> extends Window_Command<Ext> {
   maxCols(): number;
