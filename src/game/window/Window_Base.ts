@@ -1,6 +1,5 @@
-import { Rectangle } from "./rectangle";
-import { TextState } from "./types/textState";
-import { TextAlign } from "./types/textAlign";
+import type { Rectangle } from "./rectangle";
+import type { TextState, TextAlign } from "./types/";
 
 export declare class Window_Base {
   constructor(rect: Rectangle);
@@ -62,7 +61,7 @@ export declare class Window_Base {
 
   systemColor(): void;
 
-  translucentOpacity(): void;
+  translucentOpacity(): number;
 
   changeTextColor(color: string): void;
 
@@ -82,19 +81,19 @@ export declare class Window_Base {
 
   textWidth(text: string): number;
 
-  drawTextEx(text: string, x: number, y: number, width: number): void;
+  drawTextEx(text: string, x: number, y: number, width: number): number;
 
-  textSizeEx(text: string): void;
+  textSizeEx(text: string): { width: number; height: number };
 
-  createTextState(text: string, x: number, y: number, width: number): void;
+  createTextState(text: string, x: number, y: number, width: number): TextState;
 
   processAllText(text: TextState): void;
 
   flushTextState(text: TextState): void;
 
-  createTextBuffer(rtl: boolean): void;
+  createTextBuffer(rtl: boolean): string;
 
-  convertEscapeCharacters(text: string): void;
+  convertEscapeCharacters(text: string): string;
 
   actorName(actorId: number): string;
 
