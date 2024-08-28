@@ -1,7 +1,7 @@
 import { Bitmap } from "../core";
 import { Scene_Base } from "../scene/sceneBase";
 
-export interface SceneManager {
+export interface SceneManager_Interface {
   reloadGame(): void;
   isSceneChanging(): boolean;
 
