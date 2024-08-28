@@ -11,6 +11,16 @@ import { Window_NumberInput } from "./Window_NumberInput";
 //
 // The window for displaying text messages.
 export declare class Window_Message extends Window_Base {
+  _backGround: number;
+  _positionType: number;
+  _waitCount: number;
+  _textState: TextState | null;
+  _goldWindiw: Window_Gold;
+  _nameBoxWindow: Window_NameBox;
+  _choiceListWindow: Window_ChoiceList;
+  _numberInputWindow: Window_NumberInput;
+  _eventItemWindow: Window_EventItem;
+
   initMembers(): void;
 
   setGoldWindow(goldWindow: Window_Gold): void;
