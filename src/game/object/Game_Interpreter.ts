@@ -4,7 +4,6 @@ import type {
   CommandParameters,
   EventCommand,
 } from "../../schema";
-import type * as $ from "../../schema/data/eventCommand/codes";
 import { Game_Actor } from "./Game_Actor";
 import { Game_Battler } from "./Game_Battler";
 
@@ -61,9 +60,9 @@ export declare class Game_Interpreter extends Game_EventCommandExecuter {
 
   changeHp(target: Game_Battler, value: number, allowDeath: boolean): void;
 
-  setupChoices(params: CommandParameters[typeof $.SHOW_CHOICES]): void;
-  setupNumInput(param: CommandParameters[typeof $.INPUT_NUMBER]): void;
-  setupItemChoice(param: CommandParameters[typeof $.SELECT_ITEM]): void;
+  setupChoices(params: CommandParameters["SHOW_CHOICES"]): void;
+  setupNumInput(param: CommandParameters["INPUT_NUMBER"]): void;
+  setupItemChoice(param: CommandParameters["SELECT_ITEM"]): void;
 
   setupChild(list: EventCommand[], eventId: number): void;
   jumpTo(index: number): void;
@@ -72,52 +71,50 @@ export declare class Game_Interpreter extends Game_EventCommandExecuter {
 
 // イベントコマンドの定義用 直接は触れないでほしいのでexportしない
 declare class Game_EventCommandExecuter {
-  command101(param: CommandParameters[typeof $.SHOW_MESSAGE]): boolean;
-  command102(param: CommandParameters[typeof $.SHOW_CHOICES]): boolean;
-  command103(param: CommandParameters[typeof $.INPUT_NUMBER]): boolean;
-  command104(param: CommandParameters[typeof $.SELECT_ITEM]): boolean;
-  command105(param: CommandParameters[typeof $.SHOW_SCROLLING_TEXT]): boolean;
-  command108(param: CommandParameters[typeof $.COMMENT]): boolean;
+  command101(param: CommandParameters["SHOW_MESSAGE"]): boolean;
+  command102(param: CommandParameters["SHOW_CHOICES"]): boolean;
+  command103(param: CommandParameters["INPUT_NUMBER"]): boolean;
+  command104(param: CommandParameters["SELECT_ITEM"]): boolean;
+  command105(param: CommandParameters["SHOW_SCROLLING_TEXT"]): boolean;
+  command108(param: CommandParameters["COMMENT"]): boolean;
 
-  command109(param: CommandParameters[typeof $.SKIP]): boolean;
-  command111(param: CommandParameters[typeof $.CONDITIONAL_BRANCH]): boolean;
-  command112(param: CommandParameters[typeof $.LOOP]): boolean;
-  command113(param: CommandParameters[typeof $.LOOP_BREAK]): boolean;
-  command115(param: CommandParameters[typeof $.EXIT_EVENT_PROCESSING]): boolean;
-  command117(param: CommandParameters[typeof $.COMMON_EVENT]): boolean;
-  command118(param: CommandParameters[typeof $.LABEL]): boolean;
-  command119(param: CommandParameters[typeof $.LABEL_JUMP]): boolean;
+  command109(param: CommandParameters["SKIP"]): boolean;
+  command111(param: CommandParameters["CONDITIONAL_BRANCH"]): boolean;
+  command112(param: CommandParameters["LOOP"]): boolean;
+  command113(param: CommandParameters["LOOP_BREAK"]): boolean;
+  command115(param: CommandParameters["EXIT_EVENT_PROCESSING"]): boolean;
+  command117(param: CommandParameters["COMMON_EVENT"]): boolean;
+  command118(param: CommandParameters["LABEL"]): boolean;
+  command119(param: CommandParameters["LABEL_JUMP"]): boolean;
 
-  command121(param: CommandParameters[typeof $.CONTROL_SWITCHES]): boolean;
-  command122(param: CommandParameters[typeof $.CONTROL_VARIABLES]): boolean;
-  command123(param: CommandParameters[typeof $.CONTROL_SELF_SWITCH]): boolean;
-  command124(param: CommandParameters[typeof $.CONTROL_TIMER]): boolean;
+  command121(param: CommandParameters["CONTROL_SWITCHES"]): boolean;
+  command122(param: CommandParameters["CONTROL_VARIABLES"]): boolean;
+  command123(param: CommandParameters["CONTROL_SELF_SWITCH"]): boolean;
+  command124(param: CommandParameters["CONTROL_TIMER"]): boolean;
 
-  command125(param: CommandParameters[typeof $.CHANGE_GOLD]): boolean;
-  command126(param: CommandParameters[typeof $.CHANGE_ITEMS]): boolean;
-  command127(param: CommandParameters[typeof $.CHANGE_WEAPONS]): boolean;
-  command128(param: CommandParameters[typeof $.CHANGE_ARMORS]): boolean;
-  command129(param: CommandParameters[typeof $.CHANGE_PARTY_MEMBER]): boolean;
-  command132(param: CommandParameters[typeof $.CHANGE_GOLD]): boolean;
-  command132(param: CommandParameters[typeof $.CHANGE_BATTLE_BGM]): boolean;
-  command133(param: CommandParameters[typeof $.CHANGE_VICTORY_ME]): boolean;
-  command134(param: CommandParameters[typeof $.CHANGE_SAVE_ACCESS]): boolean;
-  command135(param: CommandParameters[typeof $.CHANGE_MENU_ACCESS]): boolean;
-  command136(param: CommandParameters[typeof $.CHANGE_ENCOUNTER]): boolean;
-  command137(
-    param: CommandParameters[typeof $.CHANGE_FORMATION_ACCESS]
-  ): boolean;
+  command125(param: CommandParameters["CHANGE_GOLD"]): boolean;
+  command126(param: CommandParameters["CHANGE_ITEMS"]): boolean;
+  command127(param: CommandParameters["CHANGE_WEAPONS"]): boolean;
+  command128(param: CommandParameters["CHANGE_ARMORS"]): boolean;
+  command129(param: CommandParameters["CHANGE_PARTY_MEMBER"]): boolean;
+  command132(param: CommandParameters["CHANGE_GOLD"]): boolean;
+  command132(param: CommandParameters["CHANGE_BATTLE_BGM"]): boolean;
+  command133(param: CommandParameters["CHANGE_VICTORY_ME"]): boolean;
+  command134(param: CommandParameters["CHANGE_SAVE_ACCESS"]): boolean;
+  command135(param: CommandParameters["CHANGE_MENU_ACCESS"]): boolean;
+  command136(param: CommandParameters["CHANGE_ENCOUNTER"]): boolean;
+  command137(param: CommandParameters["CHANGE_FORMATION_ACCESS"]): boolean;
 
-  command231(param: CommandParameters[typeof $.SHOW_PICTURE]): boolean;
-  command241(param: CommandParameters[typeof $.PLAY_BGM]): boolean;
-  command250(param: CommandParameters[typeof $.PLAY_SE]): boolean;
-  command311(param: CommandParameters[typeof $.CHANGE_HP]): boolean;
-  command312(param: CommandParameters[typeof $.CHANGE_MP]): boolean;
-  command313(param: CommandParameters[typeof $.CHANGE_TP]): boolean;
+  command231(param: CommandParameters["SHOW_PICTURE"]): boolean;
+  command241(param: CommandParameters["PLAY_BGM"]): boolean;
+  command250(param: CommandParameters["PLAY_SE"]): boolean;
+  command311(param: CommandParameters["CHANGE_HP"]): boolean;
+  command312(param: CommandParameters["CHANGE_MP"]): boolean;
+  command313(param: CommandParameters["CHANGE_TP"]): boolean;
 
-  command320(param: CommandParameters[typeof $.CHANGE_NAME]): boolean;
-  command324(param: CommandParameters[typeof $.CHANGE_NICKNAME]): boolean;
-  command325(param: CommandParameters[typeof $.CHANGE_PROFILE]): boolean;
+  command320(param: CommandParameters["CHANGE_NAME"]): boolean;
+  command324(param: CommandParameters["CHANGE_NICKNAME"]): boolean;
+  command325(param: CommandParameters["CHANGE_PROFILE"]): boolean;
 
-  command357(param: CommandParameters[typeof $.PLUGIN_COMMAND_MZ]): boolean;
+  command357(param: CommandParameters["PLUGIN_COMMAND_MZ"]): boolean;
 }
