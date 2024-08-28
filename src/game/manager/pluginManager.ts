@@ -1,6 +1,8 @@
 import { Game_Interpreter } from "../object";
 
 export interface PluginManager_Interface {
+  _commands: Record<string, (args: Record<string, string>) => void>;
+
   parameters(name: string): Record<string, string>;
   registerCommand(
     pluginName: string,
