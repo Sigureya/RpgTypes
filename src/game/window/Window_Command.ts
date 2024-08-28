@@ -1,4 +1,4 @@
-import { TextAlign } from "./types/TextAlign";
+import { TextAlign } from "./types/textAlign";
 import { CommandItem } from "./types/commandItem";
 
 export declare class Window_Command<ExtType = any> {
