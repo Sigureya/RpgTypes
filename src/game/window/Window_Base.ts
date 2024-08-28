@@ -2,6 +2,13 @@ import type { Rectangle } from "./rectangle";
 import type { TextState, TextAlign } from "./types/";
 
 export declare class Window_Base {
+  get openness(): number;
+  set openness(value: number);
+  get contentsOpacity(): number;
+  set contentsOpacity(value: number);
+  get padding(): number;
+  set padding(value: number);
+
   constructor(rect: Rectangle);
   initialize(rect: Rectangle): void;
   destroy(options: {}): void;
