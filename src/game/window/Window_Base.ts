@@ -1,7 +1,8 @@
 import type { Rectangle } from "./rectangle";
 import type { TextState, TextAlign } from "./types/";
+import type { Container } from "pixi.js";
 
-export declare class Window_Base {
+export declare class Window_Base extends Container {
   get openness(): number;
   set openness(value: number);
   get contentsOpacity(): number;
