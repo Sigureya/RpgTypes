@@ -1,7 +1,8 @@
-import { TextAlign } from "./types/textAlign";
+import { TextAlign } from "./types/";
 import { CommandItem } from "./types/commandItem";
+import { Window_Selectable } from "./Window_Selectable";
 
-export declare class Window_Command<ExtType = any> {
+export declare class Window_Command<ExtType = any> extends Window_Selectable {
   currentData(): CommandItem<ExtType> | null;
   currentExt(): ExtType | null;
   findExt(ext: ExtType): number;
