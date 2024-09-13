@@ -327,5 +327,5 @@ export type CommandParameters = {
   ];
 };
 
-// 宣言忘れの自動修正
+// 宣言忘れの自動検出
 type ExecCodeTest = CodeTest<CommandParameters>;
