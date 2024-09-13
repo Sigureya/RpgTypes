@@ -1,13 +1,15 @@
 import type { OPERATION, TOGGLE } from "./constants";
+import type { CodeTest } from "./codeTest";
 import type {
   ControlVariables,
   ChanageActorVariable,
   ShopGoods,
   ShopProcessing,
   ShowPicture,
+  MovePicture,
 } from "./paramaters";
 import type { MoveRouteData } from "../../map/event/moveRoute";
-import type { ValueOf, AudioFileParams } from "../../../types/";
+import type { ValueOf, AudioFileParams, ColorRGBA } from "../../../types/";
 
 export type CommandParameters = {
   NO_OPERATION: [];
@@ -176,11 +178,20 @@ export type CommandParameters = {
    * @description Change Battle BGM
    */
   CHANGE_BATTLE_BGM: [value: AudioFileParams];
+  /**
+   * @description Change Vheicle ME
+   */
+  CHANGE_VEHICLE_ME: [value: AudioFileParams];
 
   /**
    * @description Change Victory ME
    */
   CHANGE_VICTORY_ME: [value: AudioFileParams];
+
+  CHANGE_TILESET: [tileSetId: number];
+  CHANGE_BATTLE_BACKGROUND: [];
+
+  BATTLE_PROCESSING: [];
 
   /**
    * @description Change Save Access
@@ -201,11 +212,9 @@ export type CommandParameters = {
    * @description Change Formation Access
    */
   CHANGE_FORMATION_ACCESS: [value: ValueOf<typeof TOGGLE>];
-  SET_MOVEMENT_ROUTE: [characterId: number, movement: MoveRouteData];
 
+  CHANGE_WINDOW_COLOR: [color: ColorRGBA];
   CHANGE_DEFEAT_ME: [me: AudioFileParams];
-
-  SHOW_PICTURE: ShowPicture;
 
   PLAY_BGM: [value: AudioFileParams];
   FADEOUT_BGM: [duration: number];
@@ -224,6 +233,13 @@ export type CommandParameters = {
 
   CHANGE_NAME: [actorId: number, name: string];
 
+  CHANGE_PARALLAX: [
+    name: string,
+    loopX: boolean,
+    loopY: boolean,
+    sx: number,
+    sy: number
+  ];
   CHANGE_ACTOR_IMAGES: [
     actorId: number,
     characterImage: string,
@@ -237,6 +253,44 @@ export type CommandParameters = {
     characterImage: string,
     characterIndex: number
   ];
+
+  TRANSFER_PLAYER: [];
+
+  SET_VEHICLE_LOCATION: [];
+
+  SET_EVENT_LOCATION: [];
+  SCROLL_MAP: [];
+
+  SET_MOVEMENT_ROUTE: [characterId: number, movement: MoveRouteData];
+  GET_ONOFF_VEHICLE: [];
+
+  CHANGE_TRANSPARENCY: [];
+  SHOW_ANIMATION: [];
+
+  SHOW_BALLOON_ICON: [];
+
+  ERASE_EVENT: [];
+
+  CHANGE_PLAYER_FOLLOWERS: [];
+  GATHER_FOLLOWERS: [];
+
+  FADEOUT_SCREEN: [];
+  FADEIN_SCREEN: [];
+
+  TINT_SCREEN: [];
+
+  FLASH_SCREEN: [];
+
+  SHAKE_SCREEN: [];
+  WAIT: [duration: number];
+
+  SHOW_PICTURE: ShowPicture;
+  MOVE_PICTURE: MovePicture;
+  TINT_PICTURE: [];
+  ROTATE_PICTURE: [];
+  ERASE_PICTURE: [pictureId: number];
+
+  SET_WEATHER_EFFECT: [];
 
   /**
    * @description Change Nickname
@@ -272,3 +326,6 @@ export type CommandParameters = {
     args: Record<string, string>
   ];
 };
+
+// 宣言忘れの自動検出
+type ExecCodeTest = CodeTest<CommandParameters>;

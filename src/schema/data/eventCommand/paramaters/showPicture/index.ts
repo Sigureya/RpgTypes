@@ -1,3 +1,5 @@
+type BlendMode = 0 | 1 | 2 | 3;
+
 export type ShowPicture = [
   pictureId: number,
   filename: string,
@@ -7,5 +9,7 @@ export type ShowPicture = [
   scaleX: number,
   scaleY: number,
   opacity: number,
-  blendMode: 0 | 1 | 2 | 3
+  blendMode: BlendMode
 ];
+
+export type MovePicture = [...ShowPicture, wait: boolean, easingType: number];
