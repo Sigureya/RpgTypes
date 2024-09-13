@@ -45,7 +45,27 @@ export const SET_VEHICLE_LOCATION = 202 as const;
 export const SET_EVENT_LOCATION = 203 as const;
 
 export const SET_MOVEMENT_ROUTE = 205 as const;
+export const GET_ONOFF_VEHICLE = 206 as const;
+export const CHANGE_TRANSPARENCY = 211 as const;
+export const SHOW_ANIMATION = 212 as const;
+export const SHOW_BALLOON_ICON = 213 as const;
+export const ERASE_EVENT = 214 as const;
+export const CHANGE_PLAYER_FOLLOWERS = 216 as const;
+export const GATHER_FOLLOWERS = 217 as const;
+export const FADEOUT_SCREEN = 221 as const;
+export const FADEIN_SCREEN = 222 as const;
+export const TINT_SCREEN = 223 as const;
+export const FLASH_SCREEN = 224 as const;
+export const SHAKE_SCREEN = 225 as const;
+
+export const WAIT = 230 as const;
 export const SHOW_PICTURE = 231 as const;
+export const MOVE_PICTURE = 232 as const;
+export const ROTATE_PICTURE = 233 as const;
+export const TINT_PICTURE = 234 as const;
+export const ERASE_PICTURE = 235 as const;
+export const SET_WEATHER_EFFECT = 236 as const;
+
 export const PLAY_BGM = 241 as const;
 export const FADEOUT_BGM = 242 as const;
 export const SAVE_BGM = 243 as const;

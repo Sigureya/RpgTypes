@@ -6,6 +6,7 @@ import type {
   ShopGoods,
   ShopProcessing,
   ShowPicture,
+  MovePicture,
 } from "./paramaters";
 import type { MoveRouteData } from "../../map/event/moveRoute";
 import type { ValueOf, AudioFileParams, ColorRGBA } from "../../../types/";
@@ -264,19 +265,19 @@ export type CommandParameters = {
   GET_ONOFF_VEHICLE: [];
 
   CHANGE_TRANSPARENCY: [];
-  SHOW_ANITMATION: [];
+  SHOW_ANIMATION: [];
 
-  SHOW_BALLON_ICON: [];
+  SHOW_BALLOON_ICON: [];
 
   ERASE_EVENT: [];
 
-  CHANGE_PLAYER_FOLLWERS: [];
+  CHANGE_PLAYER_FOLLOWERS: [];
   GATHER_FOLLOWERS: [];
 
   FADEOUT_SCREEN: [];
   FADEIN_SCREEN: [];
 
-  TINE_SCREEN: [];
+  TINT_SCREEN: [];
 
   FLASH_SCREEN: [];
 
@@ -284,6 +285,12 @@ export type CommandParameters = {
   WAIT: [duration: number];
 
   SHOW_PICTURE: ShowPicture;
+  MOVE_PICTURE: MovePicture;
+  TINT_PICTURE: [];
+  ROTATE_PICTURE: [];
+  ERASE_PICTURE: [pictureId: number];
+
+  SET_WEATHER_EFFECT: [];
 
   /**
    * @description Change Nickname
