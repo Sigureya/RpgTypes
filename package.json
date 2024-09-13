@@ -1,5 +1,6 @@
 {
   "name": "@sigureya/rpgtypes",
+  "version": "1.0.0",
   "dependencies": {
     "eslint": "^9.1.0",
     "pixi.js": "^8.2.3"
