@@ -188,7 +188,7 @@ export type CommandParameters = {
    */
   CHANGE_VICTORY_ME: [value: AudioFileParams];
 
-  CHANGE_TILESET: [];
+  CHANGE_TILESET: [tileSetId: number];
   CHANGE_BATTLE_BACKGROUND: [];
 
   BATTLE_PROCESSING: [];
