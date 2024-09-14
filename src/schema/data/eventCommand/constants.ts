@@ -7,3 +7,8 @@ export const OPERATION = {
   PLUS: 0 as const,
   MINUS: 1 as const,
 };
+
+export const DESIGNATION = {
+  DIRECT: 0 as const,
+  VARIABLE: 1 as const,
+};

@@ -1,4 +1,4 @@
-import type { OPERATION, TOGGLE } from "./constants";
+import type { OPERATION, TOGGLE, DESIGNATION } from "./constants";
 import type { CodeTest } from "./codeTest";
 import type {
   ControlVariables,
@@ -10,6 +10,7 @@ import type {
 } from "./paramaters";
 import type { MoveRouteData } from "../../map/event/moveRoute";
 import type { ValueOf, AudioFileParams, ColorRGBA } from "../../../types/";
+import { Direction8 } from "../../../game/object/types";
 
 export type CommandParameters = {
   NO_OPERATION: [];
@@ -220,6 +221,12 @@ export type CommandParameters = {
 
   CHANGE_WINDOW_COLOR: [color: ColorRGBA];
   CHANGE_DEFEAT_ME: [me: AudioFileParams];
+  SET_WEATHER_EFFECT: [
+    type: string,
+    power: number,
+    duration: number,
+    needsWait: boolean
+  ];
 
   PLAY_BGM: [value: AudioFileParams];
   FADEOUT_BGM: [duration: number];
@@ -259,7 +266,14 @@ export type CommandParameters = {
     characterIndex: number
   ];
 
-  TRANSFER_PLAYER: [];
+  TRANSFER_PLAYER: [
+    designation: ValueOf<typeof DESIGNATION>,
+    mapId: number,
+    x: number,
+    y: number,
+    direction: Direction8,
+    fadeType: number
+  ];
 
   SET_VEHICLE_LOCATION: [];
 
@@ -294,8 +308,6 @@ export type CommandParameters = {
   TINT_PICTURE: [];
   ROTATE_PICTURE: [];
   ERASE_PICTURE: [pictureId: number];
-
-  SET_WEATHER_EFFECT: [];
 
   /**
    * @description Change Nickname
