@@ -189,9 +189,14 @@ export type CommandParameters = {
   CHANGE_VICTORY_ME: [value: AudioFileParams];
 
   CHANGE_TILESET: [tileSetId: number];
-  CHANGE_BATTLE_BACKGROUND: [];
+  CHANGE_BATTLE_BACKGROUND: [battleBack1Name: string, battleBack2name: string];
 
-  BATTLE_PROCESSING: [];
+  BATTLE_PROCESSING: [
+    directDesignation: 0,
+    troopId: number,
+    canEscape: boolean,
+    canLose: boolean
+  ];
 
   /**
    * @description Change Save Access
