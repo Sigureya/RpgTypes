@@ -1,26 +1,4 @@
-import type { CommandParameters } from "./table";
-import type * as $ from "./codes";
-
 export * from "./table";
 export * from "./paramaters";
 export * from "./codes";
-export type EventCode = (typeof $)[keyof typeof $];
-
-export type EventCommandTypes = {
-  [EveneCodeConstant in keyof CommandParameters]: {
-    code: (typeof $)[EveneCodeConstant];
-    indent: number;
-    parameters: CommandParameters[EveneCodeConstant];
-  };
-};
-
-export type EventCommand = EventCommandTypes[keyof EventCommandTypes];
-
-export type EventCommandFromCode<Code extends EventCode> = Extract<
-  EventCommand,
-  { code: Code }
->;
-
-export type EventCommandTable = {
-  [Key in EventCode]: EventCommandFromCode<Key>;
-};
+export * from "./eventCommand";
