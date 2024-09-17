@@ -16,6 +16,7 @@ export interface Data_System
   currencyUnit: string;
   title1Name: string;
   title2Name: string;
+  optAutosave: boolean;
 }
 
 interface System_AudioFiles {
