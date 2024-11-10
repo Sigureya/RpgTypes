@@ -2,14 +2,11 @@
   "name": "@sigureya/rpgtypes",
   "version": "1.0.0",
   "description": "A TypeScript library for RpgMakerMZ-related types.",
-  "types": "./dist/index.d.ts",
-  "files": [
-    "dist"
-  ],
-  "scripts": {
-    "build": "tsc",
-    "lint": "eslint ."
+  "types": "./src/index.d.ts",
+  "exports": {
+    "./*": "./src/*.d.ts"
   },
+  "scripts": {},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Sigureya/RpgTypes.git"
