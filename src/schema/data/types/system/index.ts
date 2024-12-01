@@ -1,4 +1,4 @@
-import type { AudioFileParams } from "../../../types/audio";
+import type { AudioFileParams } from "../../../../types/";
 import type { System_Advanced } from "./advanced";
 import type { EditerParams } from "./editorParams";
 import type { System_Terms } from "./message";
