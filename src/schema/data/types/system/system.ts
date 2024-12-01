@@ -1,9 +1,9 @@
-import type { AudioFileParams } from "../../../../types";
 import type { System_Advanced } from "./advanced";
 import type { EditerParams } from "./editorParams";
 import type { System_Terms } from "./message";
 import type { System_Sounds } from "./sound";
 import type { System_ImageFilenames } from "./imageFilenames";
+import type { System_AudioFiles } from "./audioFiles";
 import type { Vehicles } from "./vehicles";
 export interface Data_System
   extends EditerParams,
@@ -17,14 +17,6 @@ export interface Data_System
   title1Name: string;
   title2Name: string;
   optAutosave: boolean;
-}
-
-interface System_AudioFiles {
-  titleBgm: AudioFileParams;
-  gameoverMe: AudioFileParams;
-  battleBgm: AudioFileParams;
-  defeatMe: AudioFileParams;
-  victoryMe: AudioFileParams;
 }
 
 interface System_Params {
