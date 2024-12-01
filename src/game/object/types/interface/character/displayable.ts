@@ -1,4 +1,4 @@
-import { Direction8 } from "./direction8";
+import type { Direction8 } from "./direction8";
 
 export interface IDisplayableCharacter {
   isTransparent(): boolean;

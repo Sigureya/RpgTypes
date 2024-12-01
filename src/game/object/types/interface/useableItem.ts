@@ -1,4 +1,4 @@
-import { Data_UsableItem } from "@schema/data/";
+import { Data_UsableItem } from "../../../../schema";
 
 export interface IUsableItem {
   initialize(item: Data_UsableItem): void;

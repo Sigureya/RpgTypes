@@ -1,6 +1,6 @@
-import { IUnit } from "../unit";
-import { IBattlerBase } from "./base";
-import { TimeProgressBattle } from "./timeProgressBattle";
+import type { IUnit } from "../unit";
+import type { IBattlerBase } from "./base";
+import type { TimeProgressBattle } from "./timeProgressBattle";
 
 export interface IBattler extends IBattlerBase, TimeProgressBattle {
   isEnemy(): boolean;
