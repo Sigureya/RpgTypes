@@ -1,5 +1,5 @@
-import { Data_UsableItem } from "../../schema";
-import { Window_ItemList } from "./Window_ItemList";
+import type { Data_UsableItem } from "../../schema";
+import type { Window_ItemList } from "./Window_ItemList";
 
 //-----------------------------------------------------------------------------
 // Window_BattleItem

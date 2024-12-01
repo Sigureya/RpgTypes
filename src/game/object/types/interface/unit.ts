@@ -1,4 +1,4 @@
-import { IBattler } from "./battler";
+import type { IBattler } from "./battler";
 
 export interface IUnit<Battler extends IBattler> {
   members(): Battler[];

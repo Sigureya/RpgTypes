@@ -1,5 +1,5 @@
-import { Window_Selectable } from "./Window_Selectable";
-import { Game_Enemy } from "../object";
+import type { Window_Selectable } from "./Window_Selectable";
+import type { Game_Enemy } from "../object";
 
 //-----------------------------------------------------------------------------
 // Window_BattleEnemy

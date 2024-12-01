@@ -3,11 +3,11 @@
 //
 // The window for displaying battle progress. No frame is displayed, but it is
 
-import { Rectangle } from "./rectangle";
-import { Window_Base } from "./Window_Base";
-import { Game_Battler, Game_Action } from "../object/";
-import { Spriteset_Battle } from "../sprite/spriteset/battle";
-import { ParamID, Data_UsableItem } from "../../schema";
+import type { Rectangle } from "./rectangle";
+import type { Window_Base } from "./Window_Base";
+import type { Game_Battler, Game_Action } from "../object/";
+import type { Spriteset_Battle } from "../sprite/spriteset/battle";
+import type { ParamID, Data_UsableItem } from "../../schema";
 // handled as a window for convenience.
 export declare class Window_BattleLog extends Window_Base {
   setSpriteset(spriteset: Spriteset_Battle): void;
