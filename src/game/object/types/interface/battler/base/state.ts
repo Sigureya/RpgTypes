@@ -1,4 +1,5 @@
-import { Data_State } from "@schema/data";
+import type { Data_State } from "../../../../../../schema";
+
 export interface IState {
   clearStates(): void;
   eraseState(stateId: number): void;

@@ -1,6 +1,6 @@
 //移動ルートの設定とかを放り込んだインターフェース
 
-import { Direction8 } from "./direction8";
+import type { Direction8 } from "./direction8";
 
 export interface IMoveRouteExecter {
   processRouteEnd(): void;

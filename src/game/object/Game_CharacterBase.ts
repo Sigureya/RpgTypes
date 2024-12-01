@@ -1,4 +1,7 @@
-import { Direction8, IDisplayableCharacter } from "./types/interface/character";
+import type {
+  Direction8,
+  IDisplayableCharacter,
+} from "./types/interface/character";
 
 export declare class Game_CharacterBase implements IDisplayableCharacter {
   get x(): number;

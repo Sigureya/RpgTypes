@@ -1,6 +1,6 @@
-import { Game_Troop } from "./Game_Troop";
-import { Game_Party } from "./Game_Party";
-import { Game_Battler } from "./Game_Battler";
+import type { Game_Troop } from "./Game_Troop";
+import type { Game_Party } from "./Game_Party";
+import type { Game_Battler } from "./Game_Battler";
 
 export declare class Game_Actor extends Game_Battler {
   isActor(): boolean;

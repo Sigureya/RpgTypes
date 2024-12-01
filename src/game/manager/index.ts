@@ -1,9 +1,9 @@
-import { ColorManager_Interface } from "./colorManager";
-import { DataManager_Interface } from "./data";
-import { PluginManager_Interface } from "./pluginManager";
-import { SceneManager_Interface } from "./sceneManager";
-import { SoundManager_Interface } from "./soundManager";
-import { TextManager_Interface } from "./textManager";
+import type { ColorManager_Interface } from "./colorManager";
+import type { DataManager_Interface } from "./data";
+import type { PluginManager_Interface } from "./pluginManager";
+import type { SceneManager_Interface } from "./sceneManager";
+import type { SoundManager_Interface } from "./soundManager";
+import type { TextManager_Interface } from "./textManager";
 
 export declare const DataManager: DataManager_Interface;
 export declare const ColorManager: ColorManager_Interface;

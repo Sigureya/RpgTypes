@@ -1,4 +1,4 @@
-import { Game_Interpreter } from "./Game_Interpreter";
+import type { Game_Interpreter } from "./Game_Interpreter";
 
 export declare class Game_CommonEvent {
   _commonEventId: number;

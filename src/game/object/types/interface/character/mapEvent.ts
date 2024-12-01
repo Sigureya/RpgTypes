@@ -1,6 +1,6 @@
-import { EventCommand } from "@schema/types";
-import { IDisplayableCharacter } from "./displayable";
-import { MoveRouteCommand } from "./moveRouteCommand";
+import type { EventCommand } from "../../../../../schema";
+import type { IDisplayableCharacter } from "./displayable";
+import type { MoveRouteCommand } from "./moveRouteCommand";
 
 export interface IMapEvent extends IDisplayableCharacter {
   update(): void;

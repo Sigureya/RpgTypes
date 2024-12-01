@@ -1,9 +1,9 @@
-import { Game_CharacterBase } from "./Game_CharacterBase";
-import {
+import type { Game_CharacterBase } from "./Game_CharacterBase";
+import type {
   IDisplayableCharacter,
   MoveRouteCommand,
 } from "./types/interface/character";
-import { IMoveRouteExecter } from "./types/interface/character/moveRouteCharacter";
+import type { IMoveRouteExecter } from "./types/interface/character/moveRouteCharacter";
 
 export declare class Game_Character
   extends Game_CharacterBase

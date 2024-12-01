@@ -3,12 +3,12 @@
 //
 // The game object class for a map. It contains scrolling and passage
 
-import { Data_CommonEvent, Data_Tileset } from "../../schema";
-import { Game_CommonEvent } from "./Game_CommonEvent";
-import { Game_Event } from "./Game_Event";
-import { Game_Interpreter } from "./Game_Interpreter";
-import { Game_Vehicle } from "./Game_Vehicle";
-import { Direction8 } from "./types/interface/character";
+import type { Data_CommonEvent, Data_Tileset } from "../../schema";
+import type { Game_CommonEvent } from "./Game_CommonEvent";
+import type { Game_Event } from "./Game_Event";
+import type { Game_Interpreter } from "./Game_Interpreter";
+import type { Game_Vehicle } from "./Game_Vehicle";
+import type { Direction8 } from "./types/interface/character";
 
 // determination functions.
 export declare class Game_Map {
