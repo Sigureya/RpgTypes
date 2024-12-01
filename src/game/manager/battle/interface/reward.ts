@@ -1,4 +1,4 @@
-import { Data_Goods } from "../../../../schema";
+import type { Data_Goods } from "../../../../schema";
 
 export interface Battle_Reward {
   gold: number;

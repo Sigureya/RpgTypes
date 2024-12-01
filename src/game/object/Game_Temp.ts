@@ -1,12 +1,12 @@
-import {
+import type {
   Data_CommonEvent,
   AnimationRequest,
   BallonRequest,
   AnimationTarget,
 } from "../../schema";
-import { Game_Character } from "./Game_Character";
-import { LAST_ACTION_TYPES } from "./constant/gameTemp";
-import { Game_Battler } from "./Game_Battler";
+import type { Game_Character } from "./Game_Character";
+import type { LAST_ACTION_TYPES } from "./constant/gameTemp";
+import type { Game_Battler } from "./Game_Battler";
 
 export declare class Game_Temp {
   _isPlaytest: boolean;

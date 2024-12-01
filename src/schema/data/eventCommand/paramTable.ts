@@ -10,7 +10,7 @@ import type {
 } from "./paramaters";
 import type { MoveRouteData } from "../../map/event/moveRoute";
 import type { ValueOf, AudioFileParams, ColorRGBA } from "../../../types";
-import { Direction8 } from "../../../game/object/types";
+import type { Direction8 } from "../../../game/object/types";
 
 export type CommandParameters = {
   NO_OPERATION: [];

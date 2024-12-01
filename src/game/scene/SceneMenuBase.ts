@@ -1,8 +1,8 @@
-import { Rectangle } from "pixi.js";
-import { Game_Actor } from "../object";
-import { Scene_Base } from "./sceneBase";
-import { Window_Help } from "../window";
-import { Sprite, Sprite_Button } from "../sprite";
+import type { Rectangle } from "pixi.js";
+import type { Game_Actor } from "../object";
+import type { Scene_Base } from "./sceneBase";
+import type { Window_Help } from "../window";
+import type { Sprite, Sprite_Button } from "../sprite";
 
 export declare class Scene_MenuBase extends Scene_Base {
   _actor: Game_Actor;

@@ -1,5 +1,5 @@
-import { Window_HorzCommand } from "./Window_HorzCommand";
-import { Window_ItemList } from "./Window_ItemList";
+import type { Window_HorzCommand } from "./Window_HorzCommand";
+import type { Window_ItemList } from "./Window_ItemList";
 
 //-----------------------------------------------------------------------------
 // Window_ItemCategory

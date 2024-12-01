@@ -1,4 +1,4 @@
-import { ColorRGBA, AudioFileParams } from "../../types";
+import type { ColorRGBA, AudioFileParams } from "../../types";
 
 //-----------------------------------------------------------------------------
 // Game_System

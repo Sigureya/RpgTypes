@@ -1,8 +1,8 @@
-import { Data_UsableItem } from "../../schema";
-import { Game_Actor } from "../object";
-import { Window_ItemList, Window_MenuActor } from "../window";
-import { Rectangle } from "../window/rectangle";
-import { Scene_MenuBase } from "./SceneMenuBase";
+import type { Data_UsableItem } from "../../schema";
+import type { Game_Actor } from "../object";
+import type { Window_ItemList, Window_MenuActor } from "../window";
+import type { Rectangle } from "../window/rectangle";
+import type { Scene_MenuBase } from "./SceneMenuBase";
 
 export declare class Scene_ItemBase extends Scene_MenuBase {
   _actorWindow: Window_MenuActor;

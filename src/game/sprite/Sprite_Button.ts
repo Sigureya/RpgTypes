@@ -1,3 +1,3 @@
-import { Sprite } from "./sprite";
+import type { Sprite } from "./sprite";
 
-export class Sprite_Button extends Sprite {}
+export declare class Sprite_Button extends Sprite {}

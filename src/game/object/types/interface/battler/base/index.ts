@@ -1,8 +1,8 @@
-import { Buff } from "./buff";
-import { IEquipable } from "./equipable";
-import { ItemUser } from "./itemUser";
-import { IParam } from "./param";
-import { IState } from "./state";
+import type { Buff } from "./buff";
+import type { IEquipable } from "./equipable";
+import type { ItemUser } from "./itemUser";
+import type { IParam } from "./param";
+import type { IState } from "./state";
 
 export {
   Buff,

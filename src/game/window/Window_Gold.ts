@@ -1,4 +1,4 @@
-import { Window_Base } from "./Window_Base";
+import type { Window_Base } from "./Window_Base";
 
 //-----------------------------------------------------------------------------
 // Window_Gold

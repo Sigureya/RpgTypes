@@ -1,5 +1,5 @@
-import { Rectangle } from "./rectangle";
-import { Window_BattleStatus } from "./Window_BattleStatus";
+import type { Rectangle } from "./rectangle";
+import type { Window_BattleStatus } from "./Window_BattleStatus";
 
 //-----------------------------------------------------------------------------
 // Window_BattleActor

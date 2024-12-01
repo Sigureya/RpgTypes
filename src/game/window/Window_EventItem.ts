@@ -1,6 +1,6 @@
-import { Data_Item, Data_Equipment } from "../../schema/";
-import { Window_Message } from "./Window_Message";
-import { Window_ItemList } from "./Window_ItemList";
+import type { Data_Item, Data_Equipment } from "../../schema/";
+import type { Window_Message } from "./Window_Message";
+import type { Window_ItemList } from "./Window_ItemList";
 
 //-----------------------------------------------------------------------------
 // Window_EventItem

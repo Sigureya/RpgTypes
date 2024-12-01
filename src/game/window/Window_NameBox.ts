@@ -1,5 +1,5 @@
-import { Window_Base } from "./Window_Base";
-import { Window_Message } from "./Window_Message";
+import type { Window_Base } from "./Window_Base";
+import type { Window_Message } from "./Window_Message";
 
 //-----------------------------------------------------------------------------
 // Window_NameBox

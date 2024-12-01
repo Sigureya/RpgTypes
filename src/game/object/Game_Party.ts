@@ -1,6 +1,6 @@
-import { Game_Unit } from "./Game_Unit";
-import { Game_Actor } from "./Game_Actor";
-import { Data_Goods } from "../../schema";
+import type { Game_Unit } from "./Game_Unit";
+import type { Game_Actor } from "./Game_Actor";
+import type { Data_Goods } from "../../schema";
 
 export declare class Game_Party extends Game_Unit<Game_Actor> {
   canInput(): boolean;

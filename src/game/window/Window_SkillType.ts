@@ -1,7 +1,7 @@
-import { Game_Actor } from "../object";
-import { CommandItem } from "./types/commandItem";
-import { Window_Command } from "./Window_Command";
-import { Window_SkillList } from "./Window_SkillList";
+import type { Game_Actor } from "../object";
+import type { CommandItem } from "./types/commandItem";
+import type { Window_Command } from "./Window_Command";
+import type { Window_SkillList } from "./Window_SkillList";
 //-----------------------------------------------------------------------------
 // Window_SkillType
 //

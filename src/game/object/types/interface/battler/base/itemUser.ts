@@ -1,4 +1,4 @@
-import { Data_Skill } from "@schema/data";
+import type { Data_Skill } from "../../../../../../schema";
 
 export interface ItemUser {
   canInput(): boolean;

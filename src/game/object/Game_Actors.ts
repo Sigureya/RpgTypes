@@ -1,4 +1,4 @@
-import { Game_Actor } from "./Game_Actor";
+import type { Game_Actor } from "./Game_Actor";
 
 //-----------------------------------------------------------------------------
 // Game_Enemy

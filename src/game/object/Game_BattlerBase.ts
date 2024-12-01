@@ -1,4 +1,4 @@
-import {
+import type {
   Data_State,
   Data_Equipment,
   Data_Weapon,
@@ -7,7 +7,7 @@ import {
   ParamID,
   Data_UsableItem,
 } from "../../schema";
-import { IBattlerBase } from "./types/interface/battler/base";
+import type { IBattlerBase } from "./types/interface/battler/base";
 
 export declare class Game_BattlerBase implements IBattlerBase {
   canEquip(item: Data_Equipment): boolean;

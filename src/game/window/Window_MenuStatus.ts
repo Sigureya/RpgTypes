@@ -1,4 +1,4 @@
-import { Window_StatusBase } from "./Window_StatusBase";
+import type { Window_StatusBase } from "./Window_StatusBase";
 
 //-----------------------------------------------------------------------------
 // Window_MenuStatus

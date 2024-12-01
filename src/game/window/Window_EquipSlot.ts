@@ -1,9 +1,9 @@
-import { Game_Actor } from "../object/";
-import { Window_Status } from "./Window_Status";
-import { Window_StatusBase } from "./Window_StatusBase";
-import { Window_EquipItem } from "./Window_EquipItem";
-import { Data_Equipment } from "../../schema/";
-import { ISelectable } from "./types/ISelctable";
+import type { Game_Actor } from "../object/";
+import type { Window_Status } from "./Window_Status";
+import type { Window_StatusBase } from "./Window_StatusBase";
+import type { Window_EquipItem } from "./Window_EquipItem";
+import type { Data_Equipment } from "../../schema/";
+import type { ISelectable } from "./types/ISelctable";
 
 export declare class Window_EquipSlot
   extends Window_StatusBase

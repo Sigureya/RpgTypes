@@ -1,4 +1,4 @@
-import { Window_HorzCommand } from "./Window_HorzCommand";
+import type { Window_HorzCommand } from "./Window_HorzCommand";
 
 //-----------------------------------------------------------------------------
 // Window_ShopCommand

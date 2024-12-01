@@ -1,5 +1,5 @@
-import { WebAudio } from "../../core";
-import { AudioFileParams } from "../../../types/audio";
+import type { WebAudio } from "../../core";
+import type { AudioFileParams } from "../../../types/audio";
 
 interface AudioBuffer {}
 

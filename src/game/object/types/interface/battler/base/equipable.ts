@@ -1,4 +1,8 @@
-import { Data_Armor, Data_Equipment, Data_Weapon } from "@schema/data";
+import type {
+  Data_Equipment,
+  Data_Weapon,
+  Data_Armor,
+} from "../../../../../../schema";
 
 export interface IEquipable {
   canEquip(item: Data_Equipment): boolean;

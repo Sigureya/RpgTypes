@@ -1,5 +1,5 @@
-import { Game_Battler } from "./Game_Battler";
-import { IBattler, IUnit, IUnitTpb } from "./types";
+import type { Game_Battler } from "./Game_Battler";
+import type { IBattler, IUnit, IUnitTpb } from "./types";
 
 export declare class Game_Unit<Battler extends IBattler = Game_Battler>
   implements IUnit<Battler>, IUnitTpb

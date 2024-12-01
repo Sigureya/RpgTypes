@@ -3,7 +3,7 @@
 //
 // The game object class for a picture.
 
-import { ColorRGBA } from "../../types/colorRGBA";
+import type { ColorRGBA } from "../../types/colorRGBA";
 
 export declare class Game_Picture {
   _name: string;

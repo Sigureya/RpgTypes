@@ -1,7 +1,7 @@
-import { Rectangle } from "./rectangle";
-import { Data_NamedItem as Data_BaseItem } from "../../schema/";
-import { Window_Selectable } from "./Window_Selectable";
-import { ISelectable } from "./types/ISelctable";
+import type { Rectangle } from "./rectangle";
+import type { Data_NamedItem as Data_BaseItem } from "../../schema/";
+import type { Window_Selectable } from "./Window_Selectable";
+import type { ISelectable } from "./types/";
 
 //-----------------------------------------------------------------------------
 // Window_ItemList

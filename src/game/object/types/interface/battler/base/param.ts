@@ -1,4 +1,4 @@
-import { ParamID } from "@schema/data/members/paramArray";
+import type { ParamID } from "../../../../../../schema";
 
 export interface IParam {
   paramMin(paramId: ParamID): number;

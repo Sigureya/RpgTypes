@@ -1,6 +1,5 @@
-import { TextAlign } from "./types/";
-import { CommandItem } from "./types/commandItem";
-import { Window_Selectable } from "./Window_Selectable";
+import type { CommandItem, TextAlign } from "./types/";
+import type { Window_Selectable } from "./Window_Selectable";
 
 export declare class Window_Command<ExtType = any> extends Window_Selectable {
   currentData(): CommandItem<ExtType> | null;

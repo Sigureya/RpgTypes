@@ -1,5 +1,5 @@
-import { Window_ItemList } from "./Window_ItemList";
-import { PricedItem } from "./types/pricedItem";
+import type { Window_ItemList } from "./Window_ItemList";
+import type { PricedItem } from "./types/pricedItem";
 
 //-----------------------------------------------------------------------------
 // Window_ShopSell

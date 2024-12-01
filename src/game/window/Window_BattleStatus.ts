@@ -1,6 +1,6 @@
-import { Rectangle } from "./rectangle";
-import { Window_StatusBase } from "./Window_StatusBase";
-import { Game_Actor } from "../object/Game_Actor";
+import type { Rectangle } from "./rectangle";
+import type { Window_StatusBase } from "./Window_StatusBase";
+import type { Game_Actor } from "../object/Game_Actor";
 
 //-----------------------------------------------------------------------------
 // Window_BattleStatus

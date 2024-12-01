@@ -1,6 +1,6 @@
-import { Game_Actor } from "../object";
-import { Rectangle } from "../window";
-import { Scene_MenuBase } from "./SceneMenuBase";
+import type { Game_Actor } from "../object";
+import type { Rectangle } from "../window";
+import type { Scene_MenuBase } from "./SceneMenuBase";
 
 export declare class Scene_Skill extends Scene_MenuBase {
   createSkillTypeWindow(): void;

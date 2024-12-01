@@ -1,10 +1,10 @@
-import { TextState } from "./types/textState";
-import { Window_Gold } from "./Window_Gold";
-import { Window_Base } from "./Window_Base";
-import { Window_NameBox } from "./Window_NameBox";
-import { Window_EventItem } from "./Window_EventItem";
-import { Window_ChoiceList } from "./Window_ChoiceList";
-import { Window_NumberInput } from "./Window_NumberInput";
+import type { TextState } from "./types/textState";
+import type { Window_Gold } from "./Window_Gold";
+import type { Window_Base } from "./Window_Base";
+import type { Window_NameBox } from "./Window_NameBox";
+import type { Window_EventItem } from "./Window_EventItem";
+import type { Window_ChoiceList } from "./Window_ChoiceList";
+import type { Window_NumberInput } from "./Window_NumberInput";
 
 //-----------------------------------------------------------------------------
 // Window_Message

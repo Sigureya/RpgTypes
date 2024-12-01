@@ -1,5 +1,5 @@
-import { Game_Actor } from "../../game/object";
-import { Window_Command } from "./Window_Command";
+import type { Game_Actor } from "../../game/object";
+import type { Window_Command } from "./Window_Command";
 
 //-----------------------------------------------------------------------------
 // Window_ActorCommand
