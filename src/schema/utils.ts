@@ -1,4 +1,4 @@
-///<reference path="./data/eventCommand/index.ts" />
+///<reference path="./data/types/eventCommand/index.ts" />
 import type { EventCommandTable } from "./data";
 
 export const createCommand = <T extends keyof EventCommandTable>(
