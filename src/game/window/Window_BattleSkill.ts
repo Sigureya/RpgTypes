@@ -1,4 +1,4 @@
-import { Window_SkillList } from "./Window_SkillList";
+import type { Window_SkillList } from "./Window_SkillList";
 
 //-----------------------------------------------------------------------------
 // Window_BattleSkill

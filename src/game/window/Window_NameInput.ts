@@ -1,6 +1,6 @@
-import { Rectangle } from "./rectangle";
-import { Window_Selectable } from "./Window_Selectable";
-import { Window_NameEdit } from "./Window_NameEdit";
+import type { Rectangle } from "./rectangle";
+import type { Window_Selectable } from "./Window_Selectable";
+import type { Window_NameEdit } from "./Window_NameEdit";
 
 export declare class Window_NameInput extends Window_Selectable {
   setEditWindow(editWindow: Window_NameEdit): void;

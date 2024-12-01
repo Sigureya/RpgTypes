@@ -1,7 +1,7 @@
-import { Game_Actor } from "../object";
-import { Data_Skill } from "../../schema/";
-import { Window_Selectable } from "./Window_Selectable";
-import { ISelectable } from "./types/ISelctable";
+import type { Game_Actor } from "../object";
+import type { Data_Skill } from "../../schema/";
+import type { Window_Selectable } from "./Window_Selectable";
+import type { ISelectable } from "./types/ISelctable";
 
 export declare class Window_SkillList
   extends Window_Selectable

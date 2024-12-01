@@ -1,5 +1,5 @@
-import { Window_Selectable } from "./Window_Selectable";
-import { Window_NameEdit } from "./Window_NameEdit";
+import type { Window_Selectable } from "./Window_Selectable";
+import type { Window_NameEdit } from "./Window_NameEdit";
 
 //-----------------------------------------------------------------------------
 // Window_DebugRange

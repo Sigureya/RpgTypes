@@ -1,5 +1,5 @@
-import { Game_Actor } from "../../game";
-import { Window_StatusBase } from "./Window_StatusBase";
+import type { Game_Actor } from "../../game";
+import type { Window_StatusBase } from "./Window_StatusBase";
 
 export declare class Window_Status extends Window_StatusBase {
   setActor(actor: Game_Actor): void;

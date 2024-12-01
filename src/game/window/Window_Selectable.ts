@@ -1,7 +1,7 @@
-import { Rectangle } from "./rectangle";
-import { Data_NamedItem } from "../../schema/data";
-import { Window_Scrollable } from "./Window_Scrollable";
-import { IHelpListner } from "./types/HelpListener";
+import type { Rectangle } from "./rectangle";
+import type { Data_NamedItem } from "../../schema/data";
+import type { Window_Scrollable } from "./Window_Scrollable";
+import type { IHelpListner } from "./types/HelpListener";
 
 export declare class Window_Selectable extends Window_Scrollable {
   index(): number;

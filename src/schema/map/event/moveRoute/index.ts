@@ -1,6 +1,6 @@
 export * from "./code";
 export * from "./parameters";
-import { MoveRouteParameters } from "./parameters";
+import type { MoveRouteParameters } from "./parameters";
 
 export type MoveRouteCommandTable = {
   [RouteCodeConstants in keyof MoveRouteParameters]: {

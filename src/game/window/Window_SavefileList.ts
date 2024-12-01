@@ -1,6 +1,6 @@
-import { Rectangle } from "./rectangle";
-import { SaveFileInfo } from "../../schema/";
-import { Window_Selectable } from "./Window_Selectable";
+import type { Rectangle } from "./rectangle";
+import type { SaveFileInfo } from "../../schema/";
+import type { Window_Selectable } from "./Window_Selectable";
 
 //-----------------------------------------------------------------------------
 // Window_SavefileList

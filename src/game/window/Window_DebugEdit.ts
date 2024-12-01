@@ -1,5 +1,5 @@
-import { Rectangle } from "./rectangle";
-import { Window_Selectable } from "./Window_Selectable";
+import type { Rectangle } from "./rectangle";
+import type { Window_Selectable } from "./Window_Selectable";
 
 //-----------------------------------------------------------------------------
 // Window_DebugEdit

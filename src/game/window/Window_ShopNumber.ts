@@ -1,6 +1,6 @@
-import { Rectangle } from "./rectangle";
-import { Window_Selectable } from "./Window_Selectable";
-import { PricedItem } from "./types/pricedItem";
+import type { Rectangle } from "./rectangle";
+import type { Window_Selectable } from "./Window_Selectable";
+import type { PricedItem } from "./types/pricedItem";
 
 //-----------------------------------------------------------------------------
 // Window_ShopNumber

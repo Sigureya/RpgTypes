@@ -1,6 +1,6 @@
-import { Rectangle } from "./rectangle";
-import { Window_Message } from "./Window_Message";
-import { Window_Selectable } from "./Window_Selectable";
+import type { Rectangle } from "./rectangle";
+import type { Window_Message } from "./Window_Message";
+import type { Window_Selectable } from "./Window_Selectable";
 
 //-----------------------------------------------------------------------------
 // Window_NumberInput

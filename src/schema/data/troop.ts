@@ -1,4 +1,4 @@
-import { EventCommand } from "./eventCommand";
+import type { EventCommand } from "./eventCommand";
 
 interface Conditions {
   actorHp: number;

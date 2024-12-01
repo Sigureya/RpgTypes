@@ -1,5 +1,5 @@
-import { Rectangle } from "../window";
-import { Scene_MenuBase } from "./SceneMenuBase";
+import type { Rectangle } from "../window";
+import type { Scene_MenuBase } from "./SceneMenuBase";
 
 export declare class Scene_Menu extends Scene_MenuBase {
   constructor();

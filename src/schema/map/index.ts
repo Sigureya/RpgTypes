@@ -1,4 +1,4 @@
-import { AudioFileParams } from "../../types";
+import type { AudioFileParams } from "../../types";
 import type { MapEvent } from "./event";
 import type { Encounter } from "./encounter";
 

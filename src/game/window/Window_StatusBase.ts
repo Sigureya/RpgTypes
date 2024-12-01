@@ -1,6 +1,6 @@
-import { Game_Actor } from "../object";
-import { Window_Selectable } from "./Window_Selectable";
-import { Sprite } from "../sprite/sprite";
+import type { Game_Actor } from "../object";
+import type { Window_Selectable } from "./Window_Selectable";
+import type { Sprite } from "../sprite/sprite";
 
 //-----------------------------------------------------------------------------
 // Window_StatusBase
