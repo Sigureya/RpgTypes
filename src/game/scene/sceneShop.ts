@@ -1,5 +1,5 @@
-import { ShopGoods } from "../../schema";
-import { Rectangle } from "../window";
+import type { ShopGoods } from "../../schema";
+import type { Rectangle } from "../window";
 
 export declare class Scene_Shop {
   initialize(): void;

@@ -1,6 +1,6 @@
-import { ColorFilter, Stage, WindowLayer } from "../core";
-import { Window_Base } from "../window";
-import { DisplayObject } from "./members/displayObject";
+import type { ColorFilter, Stage, WindowLayer } from "../core";
+import type { Window_Base } from "../window";
+import type { DisplayObject } from "./members/displayObject";
 import * as PIXI from "pixi.js/";
 
 export declare class Scene_Base extends Stage {

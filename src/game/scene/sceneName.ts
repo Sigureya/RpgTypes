@@ -1,4 +1,4 @@
-import { Rectangle } from "../window";
+import type { Rectangle } from "../window";
 
 export declare class Scene_Name {
   initialize(): void;

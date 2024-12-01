@@ -1,7 +1,7 @@
-import { Rectangle } from "../window";
-import { Scene_MenuBase } from "./SceneMenuBase";
+import type { Rectangle } from "../window";
+import type { Scene_MenuBase } from "./SceneMenuBase";
 
-export interface Scene_Equip extends Scene_MenuBase {
+export declare class Scene_Equip extends Scene_MenuBase {
   createStatusWindow(): void;
   statusWindowRect(): Rectangle;
   createCommandWindow(): void;
