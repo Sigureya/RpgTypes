@@ -1,4 +1,4 @@
-import type { IdentifiedItems } from "../../types/types";
+import type { IdentifiedItems } from "../../../types/types";
 import type { Data_Actor } from "./actor";
 import type { Data_Armor } from "./armor";
 import type { Data_Class } from "./class";
@@ -9,7 +9,7 @@ import type { Data_MapInfo } from "./mapInfo";
 import type { Data_Animation } from "./members";
 import type { Data_Skill } from "./skill";
 import type { Data_State } from "./state";
-import type { Data_System } from "./system";
+import type { Data_System } from "./system/";
 import type { Data_Tileset } from "./tileset";
 import type { Data_Weapon } from "./weapon";
 
