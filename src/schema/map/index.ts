@@ -26,7 +26,6 @@ interface Map_Audio {
 }
 
 export interface Data_Map extends Map_Filenames, Map_Parallax, Map_Audio {
-  id: number;
   displayName: string;
   note: string;
   width: number;
