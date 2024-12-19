@@ -7,7 +7,7 @@ export type FilterByValue<T, V> = Pick<
 >;
 
 /**
- * type Example = FilterByValue<{ age: number; name: string; note: string; }>; // { name: string }
+ * type Example = StringKeysWithoutNote<{ age: number; name: string; note: string; }>; // { name: string }
  */
 export type StringKeysWithoutNote<T> = Exclude<
   keyof FilterByValue<T, string>,
