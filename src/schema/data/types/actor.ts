@@ -1,15 +1,26 @@
 import type { Data_TraitContainer, Data_NamedItem } from "./bases";
 
 export interface Data_Actor extends Data_TraitContainer, Data_NamedItem {
-  battlerName: string;
-  characterIndex: number;
-  characterName: string;
-  classId: number;
-  equips: number[];
-  faceIndex: number;
-  faceName: string;
+  name: string;
+  id: number;
+  profile: string;
+  nickname: string;
   initialLevel: number;
   maxLevel: number;
-  nickname: string;
-  profile: string;
+  classId: number;
+  /**
+   * @description SideView Battler Image FileName
+   */
+  battlerName: string;
+  characterIndex: number;
+  /**
+   * @description Filed Character Image FileName
+   */
+  characterName: string;
+  equips: number[];
+  faceIndex: number;
+  /**
+   * @description Face Image FileName
+   */
+  faceName: string;
 }
