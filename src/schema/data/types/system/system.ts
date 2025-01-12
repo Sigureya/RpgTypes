@@ -23,7 +23,7 @@ interface System_Params {
   versionId: number;
   advanced: System_Advanced;
   armorTypes: string[];
-  elements: number[];
+  elements: string[];
   variables: string[];
   equipTypes: string[];
   gameTitle: string;
