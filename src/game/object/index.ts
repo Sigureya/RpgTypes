@@ -1,4 +1,3 @@
-export * from "./global";
 
 export * from "./Game_Action";
 export * from "./Game_ActionResult";
@@ -18,6 +17,7 @@ export * from "./Game_Switches";
 export * from "./Game_System";
 export * from "./Game_Screen";
 export * from "./Game_Timer";
+export * from "./Game_Troop";
 export * from "./Game_Party";
 export * from "./Game_Player";
 export * from "./Game_Picture";
