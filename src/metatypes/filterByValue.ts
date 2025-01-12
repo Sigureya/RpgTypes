@@ -1,15 +1,21 @@
 /**
- * type Example = FilterByValue<{ age: number; name: string }, string>; // { name: string }
+ * type Example = PickByType<{ age: number; name: string }, string>; // { name: string }
  */
-export type FilterByValue<T, V> = Pick<
+export type PickByType<T, V> = Pick<
   T,
   { [K in keyof T]: T[K] extends V ? K : never }[keyof T]
 >;
 
 /**
+ * @deprecated
+ * @see PickByType
+ */
+export type FilterByValue<T, V> = PickByType<T, V>;
+
+/**
  * type Example = StringKeysWithoutNote<{ age: number; name: string; note: string; }>; // { name: string }
  */
 export type StringKeysWithoutNote<T> = Exclude<
-  keyof FilterByValue<T, string>,
+  keyof PickByType<T, string>,
   "note"
 >;
