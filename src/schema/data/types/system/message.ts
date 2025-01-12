@@ -15,7 +15,9 @@ type System_ParamArrayTerms = [
   mat: string,
   mdf: string,
   agi: string,
-  luk: string
+  luk: string,
+  hit: string,
+  eva: string
 ];
 
 export interface System_Message {

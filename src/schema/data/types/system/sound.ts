@@ -20,5 +20,8 @@ export type System_Sounds = [
   playReflection: AudioFileParams,
   shop: AudioFileParams,
   useItem: AudioFileParams,
-  useSkill: AudioFileParams
+  useSkill: AudioFileParams,
+  unknown1: AudioFileParams,
+  unknown2: AudioFileParams,
+  unknown3: AudioFileParams
 ];

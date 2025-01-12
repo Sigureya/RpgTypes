@@ -4,8 +4,9 @@ export interface System_Advanced {
   screenHeight: number;
   uiAreaWidth: number;
   uiAreaHeight: number;
-  windowOpacity: 192;
+  windowOpacity: number;
   numberFontFilename: string;
   fontSize: number;
-  screenScale: 1;
+  screenScale: number;
+  fallbackFonts: string;
 }
