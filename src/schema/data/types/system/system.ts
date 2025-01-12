@@ -5,6 +5,8 @@ import type { System_Sounds } from "./sound";
 import type { System_ImageFilenames } from "./imageFilenames";
 import type { System_AudioFiles } from "./audioFiles";
 import type { Vehicles } from "./vehicles";
+import type { AttackMotion } from "./attackMotion";
+
 export interface Data_System
   extends EditerParams,
     System_Params,
@@ -17,6 +19,7 @@ export interface Data_System
   title1Name: string;
   title2Name: string;
   optAutosave: boolean;
+  attackMotions: AttackMotion[];
 }
 
 interface System_Params {
