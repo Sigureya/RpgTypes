@@ -1,6 +1,10 @@
 import type { Damage, Data_UsableItem, ItemEffect } from "./bases/usableItem";
 
 export interface Data_Skill extends Data_UsableItem {
+  name: string;
+  id: number;
+  description: string;
+  iconIndex: number;
   message1: string;
   message2: string;
   messageType: number;
@@ -20,6 +24,5 @@ export interface Data_Skill extends Data_UsableItem {
   speed: number;
   successRate: number;
   tpGain: number;
-  description: string;
   note: string;
 }

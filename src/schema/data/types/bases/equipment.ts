@@ -11,4 +11,5 @@ export interface Data_Equipment extends Data_Goods, Data_TraitContainer {
   params: ParamArray;
   traits: Trait[];
   note: string;
+  etypeId: number;
 }

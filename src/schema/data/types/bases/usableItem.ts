@@ -15,6 +15,7 @@ export interface Damage {
 }
 
 export interface Data_UsableItem extends Data_NamedItem {
+  iconIndex: number;
   effects: ItemEffect[];
   damage: Damage;
   animationId: number;
