@@ -6,12 +6,15 @@ import type { System_ImageFilenames } from "./imageFilenames";
 import type { System_AudioFiles } from "./audioFiles";
 import type { Vehicles } from "./vehicles";
 import type { AttackMotion } from "./attackMotion";
-
+import type { System_DataTypeNames } from "./dataTypeNames";
+import type { OptionBooleans } from "./optionBooleans";
 export interface Data_System
   extends EditerParams,
     System_Params,
     System_AudioFiles,
     System_ImageFilenames,
+    System_DataTypeNames,
+    OptionBooleans,
     Vehicles {
   local: string;
   gameTitle: string;
@@ -20,6 +23,11 @@ export interface Data_System
   title2Name: string;
   optAutosave: boolean;
   attackMotions: AttackMotion[];
+  startMapId: number;
+  startX: number;
+  startY: number;
+  switches: string[];
+  windowTone: [red: number, green: number, blue: number, a: number];
 }
 
 interface System_Params {
