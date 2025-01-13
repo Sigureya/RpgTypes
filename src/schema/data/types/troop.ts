@@ -1,6 +1,6 @@
 import type { EventCommand } from "./eventCommand";
 
-interface Conditions {
+export interface Conditions {
   actorHp: number;
   actorId: number;
 }
