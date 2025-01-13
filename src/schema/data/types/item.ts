@@ -3,6 +3,7 @@ import type { Damage, Data_UsableItem, ItemEffect } from "./bases/usableItem";
 export interface Data_Item extends Data_UsableItem {
   name: string;
   id: number;
+  iconIndex: number;
 
   price: number;
   effects: ItemEffect[];
