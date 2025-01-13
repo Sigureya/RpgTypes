@@ -1,4 +1,4 @@
-import { AudioFileParams } from "../members";
+import type { AudioFileParams } from "../members";
 
 export interface System_Vehicle {
   bgm: AudioFileParams;
