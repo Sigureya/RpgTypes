@@ -20,7 +20,7 @@ export interface Data_State extends Data_NamedItem, Data_TraitContainer {
   autoRemovalTiming: number;
   minTurns: number;
   maxTurns: number;
-  removeByDamage: false;
+  removeByDamage: boolean;
   chanceByDamage: number;
   removeByWalking: boolean;
   stepsToRemove: number;
