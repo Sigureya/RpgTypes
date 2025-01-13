@@ -6,7 +6,13 @@ export interface ItemEffect {
   dataId: number;
 }
 
-export interface Damage {}
+export interface Damage {
+  type: number;
+  elementId: number;
+  formula: string;
+  variance: number;
+  critical: boolean;
+}
 
 export interface Data_UsableItem extends Data_NamedItem {
   effects: ItemEffect[];
