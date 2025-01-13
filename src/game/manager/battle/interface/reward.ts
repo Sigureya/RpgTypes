@@ -1,7 +1,7 @@
-import type { Data_Goods } from "../../../../schema";
+import type { Data_AnyGoods } from "../../../../schema";
 
 export interface Battle_Reward {
   gold: number;
   exp: number;
-  items: Data_Goods[];
+  items: Data_AnyGoods[];
 }
