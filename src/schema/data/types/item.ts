@@ -4,8 +4,8 @@ export interface Data_Item extends Data_UsableItem {
   name: string;
   id: number;
   iconIndex: number;
-
   price: number;
+  consumable: boolean;
   effects: ItemEffect[];
   damage: Damage;
   animationId: number;

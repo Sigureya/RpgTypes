@@ -10,4 +10,18 @@ export interface Data_State extends Data_NamedItem, Data_TraitContainer {
   message4: string;
   traits: Trait[];
   note: string;
+
+  restriction: number;
+  priority: number;
+  motion: number;
+  overlay: number;
+  removeAtBattleEnd: boolean;
+  removeByRestriction: boolean;
+  autoRemovalTiming: number;
+  minTurns: number;
+  maxTurns: number;
+  removeByDamage: false;
+  chanceByDamage: number;
+  removeByWalking: boolean;
+  stepsToRemove: number;
 }
