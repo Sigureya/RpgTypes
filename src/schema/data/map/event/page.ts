@@ -1,6 +1,6 @@
-import type { Direction8 } from "../../../game/object/types";
 import type { EventCommand } from "../../data";
 import type { Condition } from "./condition";
+import type { Direction8 } from "./direction8";
 import type { MoveRouteData } from "./moveRoute";
 
 export interface MapEvent_Image {

@@ -1,6 +1,6 @@
 import type { OPERATION, TOGGLE, DESIGNATION } from "./constants";
 import type { ControlVariables, ChanageActorVariable, ShopGoods, ShopProcessing, ShowPicture, MovePicture } from "./paramaters";
-import type { MoveRouteData } from "../../../map/";
+import type { MoveRouteData } from "../../map";
 import type { ValueOf, ColorRGBA } from "../../../../types";
 import type { Direction8 } from "../../../../game/object/types";
 import type { AudioFileParams } from "../members";

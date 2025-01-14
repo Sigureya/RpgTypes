@@ -8,9 +8,9 @@ import type {
   ShowPicture,
   MovePicture,
 } from "./paramaters";
-import type { MoveRouteData } from "../../../map/";
+import type { MoveRouteData } from "../../map";
 import type { ValueOf, ColorRGBA } from "../../../../types";
-import type { Direction8 } from "../../../../game/object/types";
+import type { Direction8 } from "../../map/event/direction8";
 import type { AudioFileParams } from "../members";
 
 export type CommandParameters = {
