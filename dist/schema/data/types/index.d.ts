@@ -16,3 +16,4 @@ export * from "./troop";
 export * from "./tileset";
 export * from "./unionTypes";
 export * from "./weapon";
+export * from "./animation";

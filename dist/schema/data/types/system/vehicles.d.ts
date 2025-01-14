@@ -1,4 +1,4 @@
-import type { AudioFileParams } from "../map/event/eventCommand/types/audioFileParams";
+import type { AudioFileParams } from "../map";
 export interface System_Vehicle {
     bgm: AudioFileParams;
     characterIndex: number;
