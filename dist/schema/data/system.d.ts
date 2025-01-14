@@ -1,4 +1,4 @@
-import type { TestBattlers, AttackMotion, System_Advanced } from "./systemMembers";
+import type { TestBattlers, AttackMotion, System_Advanced, System_Terms } from "./systemMembers";
 import type { AudioFileParams, ColorRGBA } from "./types";
 import type { Data_Vehicle } from "./vehicle";
 export interface Data_System {
@@ -9,6 +9,7 @@ export interface Data_System {
     title2Name: string;
     gameTitle: string;
     currencyUnit: string;
+    terms: System_Terms;
     weaponTypes: string[];
     skillTypes: string[];
     elements: string[];
