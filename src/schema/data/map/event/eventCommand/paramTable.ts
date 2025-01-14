@@ -9,9 +9,10 @@ import type {
   MovePicture,
 } from "./paramaters";
 import type { MoveRouteData } from "../../map";
-import type { ValueOf, ColorRGBA } from "../../../../types";
 import type { Direction8 } from "./direction8";
 import type { AudioFileParams } from "./audioFileParams";
+import type { ValueOf } from "./valueOf";
+import type { ColorRGBA } from "../../../../../types";
 
 export type CommandParameters = {
   NO_OPERATION: [];
