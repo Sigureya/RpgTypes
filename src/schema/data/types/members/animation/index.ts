@@ -1,4 +1,5 @@
-import type { ColorRGBA, AudioFileParams } from "../../../../types/";
+import { ColorRGBA } from "../../../../../";
+import type { AudioFileParams } from "../../../types/";
 export interface FlashTiming {
   frame: number;
   duration: number;
