@@ -1,6 +1,5 @@
 export * from "./members";
 export * from "./bases";
-export * from "./system";
 export * from "./actor";
 export * from "./armor";
 export * from "./class";
