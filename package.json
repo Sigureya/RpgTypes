@@ -1,6 +1,6 @@
 {
   "name": "@sigureya/rpgtypes",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "A TypeScript library for RpgMakerMZ-related types.",
   "main": "./dist/index.d.ts",
   "types": "./dist/index.d.ts",
