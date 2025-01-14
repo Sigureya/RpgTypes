@@ -1,11 +1,50 @@
 export interface System_Terms {
     messages: System_Message;
     commands: System_Command;
-    params: System_ParamArrayTerms;
-    basic: string[];
+    params: System_ParamNamesArray;
+    basic: BasicTerms;
 }
-type System_Command = string[];
-type System_ParamArrayTerms = [
+export type BasicTerms = [
+    level: string,
+    levelA: string,
+    hp: string,
+    hpA: string,
+    mp: string,
+    mpA: string,
+    tp: string,
+    tpA: string,
+    experience: string,
+    exp: string
+];
+export type System_Command = [
+    fight: string,
+    escape: string,
+    attack: string,
+    guard: string,
+    item: string,
+    skill: string,
+    equip: string,
+    status: string,
+    formation: string,
+    save: string,
+    gameEnd: string,
+    options: string,
+    weapon: string,
+    armor: string,
+    keyItem: string,
+    equip2: string,
+    optimize: string,
+    clear: string,
+    newGame: string,
+    continue_: string,
+    notUsed20: string,
+    toTitle: string,
+    cancel: string,
+    notUsed23: string,
+    buy: string,
+    sell: string
+];
+export type System_ParamNamesArray = [
     mhp: string,
     mmp: string,
     atk: string,
@@ -72,4 +111,3 @@ export interface System_Message {
     buffRemove: string;
     actionFailure: string;
 }
-export {};
