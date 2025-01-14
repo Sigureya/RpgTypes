@@ -72,6 +72,7 @@ export interface Data_System {
   local: string;
   versionId: number;
   advanced: System_Advanced;
+  tileSize: number;
 }
 export type System_Sounds = [
   cursor: AudioFileParams,
