@@ -1,4 +1,3 @@
-export * from "./members";
 export * from "./bases";
 export * from "./actor";
 export * from "./armor";
