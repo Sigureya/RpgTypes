@@ -1,9 +1,9 @@
 import type { Data_NamedItem, Data_TraitContainer, Trait } from "./bases";
-import type { ParamArray, Action, DropItem } from "./members";
+import type { ParamArray, Enemy_Action, DropItem } from "./members";
 export interface Data_Enemy extends Data_TraitContainer, Data_NamedItem {
     name: string;
     id: number;
-    actions: Action[];
+    actions: Enemy_Action[];
     battlerHue: number;
     battlerName: string;
     dropItems: DropItem[];
