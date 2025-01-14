@@ -1,4 +1,4 @@
-export interface Condition {
+export interface MapEvent_PageCondition {
   switch1Id: number;
   switch1Valid: boolean;
   switch2Id: number;

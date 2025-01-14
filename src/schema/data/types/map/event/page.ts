@@ -1,5 +1,5 @@
 import type { Direction8, EventCommand, MoveRouteData } from "./eventCommand";
-import type { Condition } from "./condition";
+import type { MapEvent_PageCondition } from "./condition";
 
 export interface MapEvent_Image {
   characterIndex: number;
@@ -10,7 +10,7 @@ export interface MapEvent_Image {
 }
 
 export interface MapEventPage {
-  conditions: Condition;
+  conditions: MapEvent_PageCondition;
   list: EventCommand[];
   directionFix: boolean;
   image: MapEvent_Image;
