@@ -2,6 +2,7 @@ import type {
   TestBattlers,
   AttackMotion,
   System_Advanced,
+  System_Terms,
 } from "./systemMembers";
 import type { AudioFileParams, ColorRGBA } from "./types";
 import type { Data_Vehicle } from "./vehicle";
@@ -17,6 +18,8 @@ export interface Data_System {
   // text
   gameTitle: string;
   currencyUnit: string;
+
+  terms: System_Terms;
 
   // DataTypeNames
   weaponTypes: string[];
