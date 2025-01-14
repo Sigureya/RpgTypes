@@ -2,7 +2,9 @@
   "compilerOptions": {
     "target": "ESNext",
     "module": "ESNext",
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
+    "declaration": true,
+    "declarationDir": "dist",
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true,
@@ -10,8 +12,8 @@
     "strictBindCallApply": true,
     "strictPropertyInitialization": false,
     "skipLibCheck": true,
-    "baseUrl": ".",
-    "paths": {}
+    "noEmit": false,
+    "emitDeclarationOnly": true
   },
-  "include": ["src/*.ts"]
+  "include": ["src/**/*"]
 }

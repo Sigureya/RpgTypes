@@ -2,11 +2,15 @@
   "name": "@sigureya/rpgtypes",
   "version": "1.0.0",
   "description": "A TypeScript library for RpgMakerMZ-related types.",
-  "types": "./src/index.d.ts",
+  "main": "./dist/index.d.ts",
+  "types": "./dist/index.d.ts",
   "exports": {
-    "./*": "./src/*.d.ts"
+    ".": "./dist/index.d.ts"
   },
-  "scripts": {},
+  "scripts": {
+    "build": "tsc --emitDeclarationOnly --declaration --outDir dist",
+    "lint": "eslint src --ext .ts"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Sigureya/RpgTypes.git"
@@ -24,9 +28,8 @@
     "pixi.js": "^8.2.3"
   },
   "devDependencies": {
-    "eslint": "^9.1.0",
-    "typescript": "^5.0.0",
-    "jest": "^29.0.0"
+    "eslint": "^8.57.1",
+    "typescript": "^5.0.0"
   },
   "engines": {
     "node": ">=16.0.0"
