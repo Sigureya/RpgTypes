@@ -1,5 +1,4 @@
-import type { Data_Equipment, Trait } from "./bases";
-import type { ParamArray } from "./members";
+import type { Data_Equipment, ParamArray, Trait } from "./bases";
 export interface Data_Armor extends Data_Equipment {
     name: string;
     id: number;
