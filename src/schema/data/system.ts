@@ -37,7 +37,7 @@ export interface Data_System {
   defeatMe: AudioFileParams;
   victoryMe: AudioFileParams;
   // system sounds
-  sounds: System_Sounds;
+  sounds: System_SoundsArray;
 
   // Vehicle
   boat: Data_Vehicle;
@@ -74,7 +74,7 @@ export interface Data_System {
   advanced: System_Advanced;
   tileSize: number;
 }
-export type System_Sounds = [
+export type System_SoundsArray = [
   cursor: AudioFileParams,
   ok: AudioFileParams,
   cancel: AudioFileParams,
