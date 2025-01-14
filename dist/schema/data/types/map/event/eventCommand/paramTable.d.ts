@@ -1,10 +1,6 @@
 import type { OPERATION, TOGGLE, DESIGNATION } from "./constants";
-import type { ControlVariables, ChanageActorVariable, ShopGoods, ShopProcessing, ShowPicture, MovePicture } from "./paramaters";
-import type { Direction8 } from "./types/direction8";
-import type { AudioFileParams } from "./types/audioFileParams";
-import type { ValueOf } from "./paramaters/";
-import type { MoveRouteData } from "./moveRoute";
-import type { ColorRGBA } from "./types/colorRGBA";
+import type { ControlVariables, ChanageActorVariable, ShopGoods, ShopProcessing, ShowPicture, MovePicture, ValueOf } from "./paramaters";
+import type { AudioFileParams, ColorRGBA, Direction8, MoveRouteData } from "./types/";
 export type CommandParameters = {
     NO_OPERATION: [];
     /**

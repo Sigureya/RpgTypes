@@ -1,7 +1,5 @@
-import type { EventCommand } from "./eventCommand";
+import type { Direction8, EventCommand, MoveRouteData } from "./eventCommand";
 import type { Condition } from "./condition";
-import type { Direction8 } from "./eventCommand/types/direction8";
-import type { MoveRouteData } from "./eventCommand/moveRoute";
 export interface MapEvent_Image {
     characterIndex: number;
     characterName: string;

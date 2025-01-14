@@ -1,4 +1,4 @@
-import type { AudioFileParams } from "../types/audioFileParams";
+import type { AudioFileParams } from "../audioFileParams";
 import type * as $ from "./code";
 
 export type MoveRouteParameters = {
