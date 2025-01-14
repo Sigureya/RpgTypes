@@ -1,6 +1,6 @@
-import type { AudioFileParams } from "../data";
 import type { MapEvent } from "./event";
 import type { Encounter } from "./encounter";
+import type { AudioFileParams } from "./event/eventCommand/types/audioFileParams";
 
 export * from "./event";
 

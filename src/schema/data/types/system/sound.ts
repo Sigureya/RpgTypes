@@ -1,4 +1,5 @@
-import type { AudioFileParams } from "../../../data";
+import type { AudioFileParams } from "../map/event/eventCommand/types/audioFileParams";
+
 export type System_Sounds = [
   cursor: AudioFileParams,
   ok: AudioFileParams,

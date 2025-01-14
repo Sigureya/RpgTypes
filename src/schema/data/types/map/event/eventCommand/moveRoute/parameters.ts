@@ -1,5 +1,5 @@
+import type { AudioFileParams } from "../types/audioFileParams";
 import type * as $ from "./code";
-import type { AudioFileParams } from "../../../../types";
 
 export type MoveRouteParameters = {
   [$.ROUTE_END]: [];

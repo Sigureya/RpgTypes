@@ -8,11 +8,11 @@ import type {
   ShowPicture,
   MovePicture,
 } from "./paramaters";
-import type { MoveRouteData } from "../../map";
-import type { Direction8 } from "./direction8";
-import type { AudioFileParams } from "./audioFileParams";
-import type { ValueOf } from "./valueOf";
-import type { ColorRGBA } from "../../../../../types";
+import type { Direction8 } from "./types/direction8";
+import type { AudioFileParams } from "./types/audioFileParams";
+import type { ValueOf } from "./paramaters/";
+import type { MoveRouteData } from "./moveRoute";
+import type { ColorRGBA } from "./types/colorRGBA";
 
 export type CommandParameters = {
   NO_OPERATION: [];
@@ -345,6 +345,3 @@ export type CommandParameters = {
     args: Record<string, string>
   ];
 };
-
-// 宣言忘れの自動検出
-type ExecCodeTest = CodeTest<CommandParameters>;

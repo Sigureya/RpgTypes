@@ -1,4 +1,4 @@
-///<reference path="./index.ts" />
+// / <reference path="./index.ts" />
 // 新規にコードを追加した場合、上記のindex.tsへ追記すること
 export const NO_OPERATION = 0 as const;
 export const SHOW_MESSAGE = 101 as const;

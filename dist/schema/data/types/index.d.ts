@@ -1,4 +1,3 @@
-export * from "./eventCommand";
 export * from "./members";
 export * from "./bases";
 export * from "./system";
