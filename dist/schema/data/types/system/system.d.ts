@@ -1,10 +1,10 @@
 import type { System_Advanced } from "./advanced";
-import type { EditerParams } from "./editorParams";
+import type { EditerParams } from "./testBattlers";
 import type { System_Terms } from "./message";
 import type { System_Sounds } from "./sound";
 import type { System_ImageFilenames } from "./imageFilenames";
 import type { System_AudioFiles } from "./audioFiles";
-import type { Vehicles } from "./vehicles";
+import type { Vehicles } from "./vehicle";
 import type { AttackMotion } from "./attackMotion";
 import type { System_DataTypeNames } from "./dataTypeNames";
 import type { OptionBooleans } from "./optionBooleans";
