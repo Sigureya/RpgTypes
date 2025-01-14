@@ -1,1 +1,0 @@
-interface Battle_TimeProgress {}
