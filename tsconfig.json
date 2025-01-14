@@ -7,13 +7,17 @@
     "declarationDir": "dist",
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
-    "resolveJsonModule": true,
     "strict": true,
-    "strictBindCallApply": true,
-    "strictPropertyInitialization": false,
     "skipLibCheck": true,
     "noEmit": false,
     "emitDeclarationOnly": true
   },
-  "include": ["src/**/*"]
+  "include": ["src/**/*"],
+  "exclude": [
+    "node_modules",
+    ".vscode",
+    "eslint-custom-rules",
+    "**/*.spec.ts",
+    "**/*.test.ts"
+  ]
 }
