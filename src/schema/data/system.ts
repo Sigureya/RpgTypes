@@ -86,17 +86,17 @@ export type System_Sounds = [
   escape: AudioFileParams,
   enemyAttack: AudioFileParams,
   enemyDamage: AudioFileParams,
+  enemyCollapse: AudioFileParams,
   bossCollapes1: AudioFileParams,
-  bossCollapes1: AudioFileParams,
+  bossCollapes2: AudioFileParams,
   actorDamage: AudioFileParams,
+  actorCollapse: AudioFileParams,
   playRecovery: AudioFileParams,
+  playMiss: AudioFileParams,
   playEvasion: AudioFileParams,
-  pagicEvasion: AudioFileParams,
+  playMagicEvasion: AudioFileParams,
   playReflection: AudioFileParams,
   shop: AudioFileParams,
   useItem: AudioFileParams,
-  useSkill: AudioFileParams,
-  unknown1: AudioFileParams,
-  unknown2: AudioFileParams,
-  unknown3: AudioFileParams
+  useSkill: AudioFileParams
 ];
