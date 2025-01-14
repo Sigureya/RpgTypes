@@ -22,7 +22,7 @@ export interface Data_System {
     battleBgm: AudioFileParams;
     defeatMe: AudioFileParams;
     victoryMe: AudioFileParams;
-    sounds: System_Sounds;
+    sounds: System_SoundsArray;
     boat: Data_Vehicle;
     ship: Data_Vehicle;
     airship: Data_Vehicle;
@@ -49,7 +49,7 @@ export interface Data_System {
     advanced: System_Advanced;
     tileSize: number;
 }
-export type System_Sounds = [
+export type System_SoundsArray = [
     cursor: AudioFileParams,
     ok: AudioFileParams,
     cancel: AudioFileParams,

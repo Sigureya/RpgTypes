@@ -1,10 +1,10 @@
 export interface System_Terms {
-    messages: System_Message;
-    commands: System_Command;
-    params: System_ParamNamesArray;
-    basic: BasicTerms;
+    messages: Terms_MessageArray;
+    commands: Terms_CommandArray;
+    params: Terms_ParamNamesArray;
+    basic: Terms_BasicArray;
 }
-export type BasicTerms = [
+export type Terms_BasicArray = [
     level: string,
     levelA: string,
     hp: string,
@@ -16,7 +16,7 @@ export type BasicTerms = [
     experience: string,
     exp: string
 ];
-export type System_Command = [
+export type Terms_CommandArray = [
     fight: string,
     escape: string,
     attack: string,
@@ -44,7 +44,7 @@ export type System_Command = [
     buy: string,
     sell: string
 ];
-export type System_ParamNamesArray = [
+export type Terms_ParamNamesArray = [
     mhp: string,
     mmp: string,
     atk: string,
@@ -56,7 +56,7 @@ export type System_ParamNamesArray = [
     hit: string,
     eva: string
 ];
-export interface System_Message {
+export interface Terms_MessageArray {
     alwaysDash: string;
     commandRemember: string;
     touchUI: string;
