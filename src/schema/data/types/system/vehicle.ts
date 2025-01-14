@@ -1,6 +1,6 @@
 import type { AudioFileParams } from "../map";
 
-export interface System_Vehicle {
+export interface Data_Vehicle {
   bgm: AudioFileParams;
   characterIndex: number;
   characterName: string;
@@ -10,7 +10,7 @@ export interface System_Vehicle {
 }
 
 export interface Vehicles {
-  boat: System_Vehicle;
-  ship: System_Vehicle;
-  airship: System_Vehicle;
+  boat: Data_Vehicle;
+  ship: Data_Vehicle;
+  airship: Data_Vehicle;
 }

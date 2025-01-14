@@ -1,2 +1,2 @@
 export * from "./system";
-export * from "./vehicles";
+export * from "./vehicle";
