@@ -1,4 +1,4 @@
-import type { AudioFileParams } from "../map";
+import type { AudioFileParams } from "./types";
 
 export interface Data_Vehicle {
   bgm: AudioFileParams;
