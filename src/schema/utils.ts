@@ -1,5 +1,4 @@
-///<reference path="./data/types/eventCommand/index.ts" />
-import type { EventCommandTable } from "./data";
+import type { EventCommandTable } from "./data/types/map";
 
 export const createCommand = <T extends keyof EventCommandTable>(
   code: T,

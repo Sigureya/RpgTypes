@@ -1,4 +1,4 @@
-import type { AudioFileParams } from "../../../../types";
+import type { AudioFileParams } from "../map";
 export interface System_AudioFiles {
     titleBgm: AudioFileParams;
     gameoverMe: AudioFileParams;
