@@ -9,7 +9,6 @@ export * from "./commonEvent";
 export * from "./enemy";
 export * from "./bases/";
 
-export * from "./global";
 export * from "./item";
 export * from "./mapInfo";
 export * from "./skill";
@@ -20,3 +19,5 @@ export * from "./tileset";
 export * from "./unionTypes";
 export * from "./weapon";
 export * from "./animation";
+
+export * from "./map";
