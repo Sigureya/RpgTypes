@@ -6,5 +6,5 @@ import type { PricedItem } from "./types/pricedItem";
 //
 // The window for selecting an item to sell on the shop screen.
 export declare class Window_ShopSell extends Window_ItemList {
-  isEnabled(item: PricedItem | null): boolean;
+  //  isEnabled(item: PricedItem): boolean;
 }

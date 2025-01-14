@@ -31,7 +31,7 @@ export declare class Window_ItemList
 
   needsNumber(): void;
 
-  isEnabled(item: Data_BaseItem): boolean;
+  isEnabled(item: Data_BaseItem | undefined | null): boolean;
 
   makeItemList(): boolean;
 
