@@ -1,6 +1,6 @@
 import type { PickByType } from "./filterByValue";
 
-export type CommandTableTamplate<
+export type CommandMapTamplate<
   CodeConstatns extends Record<PropertyKey, string | number>,
   T extends object,
   CodeProp extends keyof PickByType<T, ValueOf<CodeConstatns>>,

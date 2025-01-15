@@ -1,6 +1,6 @@
 import type { AudioFileParams } from "./audioFileParams";
 import type * as $ from "./moveRoute/code";
-import type { CommandTableTamplate } from "./template/commandTableTemplate";
+import type { CommandMapTamplate } from "./template/commandMapTemplate";
 
 type MoveCodeTable = typeof $;
 export type EventCode = MoveCodeTable[keyof MoveCodeTable];
@@ -11,7 +11,7 @@ interface CCCC {
   indent: number;
 }
 
-type Table = CommandTableTamplate<
+type Table = CommandMapTamplate<
   MoveCodeTable,
   CCCC,
   "code2",
