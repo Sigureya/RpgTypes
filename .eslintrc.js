@@ -8,5 +8,6 @@ module.exports = {
     "@typescript-eslint/no-explicit-any": "warn",
     "spaced-comment": "error",
     "@typescript-eslint/consistent-type-imports": "error",
+    "@typescript-eslint/ban-types": "off",
   },
 };
