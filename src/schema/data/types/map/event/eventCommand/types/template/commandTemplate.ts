@@ -10,7 +10,7 @@ import type { PickByType } from "./filterByValue";
 export type CommandTemplateSimple<
   CodeConstants extends Record<PropertyKey, string | number>,
   ParamType extends object,
-  Table extends Partial<CommandMapping<keyof CodeConstants, ParamType>>
+  Table extends CommandMapping<keyof CodeConstants, ParamType>
 > = CommandTemplate<
   CodeConstants,
   { code: ValueOf<CodeConstants>; parameters: object },
@@ -19,6 +19,7 @@ export type CommandTemplateSimple<
   Table
 >;
 
+type Test<T extends number | string> = {};
 /**
  * A template for creating a command table with specific code and parameter mappings.
  *
@@ -33,17 +34,17 @@ export type CommandTemplate<
   Command extends object,
   CodeKey extends keyof PickByType<Command, ValueOf<CodeConstants>>,
   ParamKey extends keyof PickByType<Command, object>,
-  Table extends Partial<CommandMapping<keyof CodeConstants, Command[ParamKey]>>
+  Table extends CommandMapping<keyof CodeConstants, Command[ParamKey]>
 > = ConstructTable<
   CodeConstants,
   {
-    [Key in keyof Table]: {
+    [Key in keyof Exclude<Table, undefined>]: {
       [Prop in keyof Command]: Prop extends ParamKey
-        ? Table[Key]
+        ? Exclude<Table, undefined>[Key]
         : Prop extends CodeKey
         ? CodeConstants[Key]
         : Command[Prop];
-    };
+    } & Test<CodeConstants[Key]>;
   }
 >;
 

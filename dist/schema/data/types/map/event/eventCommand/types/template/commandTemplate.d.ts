@@ -6,10 +6,11 @@ import type { PickByType } from "./filterByValue";
  * @template ParamType - The type of parameters associated with the command codes.
  * @template Table - A partial mapping of command codes to their corresponding parameter types.
  */
-export type CommandTemplateSimple<CodeConstants extends Record<PropertyKey, string | number>, ParamType extends object, Table extends Partial<CommandMapping<keyof CodeConstants, ParamType>>> = CommandTemplate<CodeConstants, {
+export type CommandTemplateSimple<CodeConstants extends Record<PropertyKey, string | number>, ParamType extends object, Table extends CommandMapping<keyof CodeConstants, ParamType>> = CommandTemplate<CodeConstants, {
     code: ValueOf<CodeConstants>;
     parameters: object;
 }, "code", "parameters", Table>;
+type Test<T extends number | string> = {};
 /**
  * A template for creating a command table with specific code and parameter mappings.
  *
@@ -19,10 +20,10 @@ export type CommandTemplateSimple<CodeConstants extends Record<PropertyKey, stri
  * @template ParamKey - The property of `Command` that holds the parameters.
  * @template Table - A partial mapping of command codes to parameter types.
  */
-export type CommandTemplate<CodeConstants extends Record<PropertyKey, string | number>, Command extends object, CodeKey extends keyof PickByType<Command, ValueOf<CodeConstants>>, ParamKey extends keyof PickByType<Command, object>, Table extends Partial<CommandMapping<keyof CodeConstants, Command[ParamKey]>>> = ConstructTable<CodeConstants, {
-    [Key in keyof Table]: {
-        [Prop in keyof Command]: Prop extends ParamKey ? Table[Key] : Prop extends CodeKey ? CodeConstants[Key] : Command[Prop];
-    };
+export type CommandTemplate<CodeConstants extends Record<PropertyKey, string | number>, Command extends object, CodeKey extends keyof PickByType<Command, ValueOf<CodeConstants>>, ParamKey extends keyof PickByType<Command, object>, Table extends CommandMapping<keyof CodeConstants, Command[ParamKey]>> = ConstructTable<CodeConstants, {
+    [Key in keyof Exclude<Table, undefined>]: {
+        [Prop in keyof Command]: Prop extends ParamKey ? Exclude<Table, undefined>[Key] : Prop extends CodeKey ? CodeConstants[Key] : Command[Prop];
+    } & Test<CodeConstants[Key]>;
 }>;
 /**
  * Constructs a command table type.
