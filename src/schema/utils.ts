@@ -1,4 +1,4 @@
-import type { EventCommandTable } from "./data/types/map";
+import type { EventCommandTable } from "./data/";
 
 export const createCommand = <T extends keyof EventCommandTable>(
   code: T,
