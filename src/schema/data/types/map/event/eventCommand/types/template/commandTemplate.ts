@@ -33,16 +33,13 @@ export type CommandTemplate<
   Command extends object,
   CodeKey extends keyof PickByType<Command, ValueOf<CodeConstants>>,
   ParamKey extends keyof PickByType<Command, object>,
-  Table extends Pick<
-    Record<PropertyKey, Command[ParamKey]>,
-    keyof CodeConstants
-  >
+  Table extends Record<keyof CodeConstants, Command[ParamKey]>
 > = ConstructTable<
   CodeConstants,
   {
     [Key in keyof CodeConstants]: {
       [Prop in keyof Command]: Prop extends ParamKey
-        ? Exclude<Table, undefined>[Key]
+        ? Table[Key]
         : Prop extends CodeKey
         ? CodeConstants[Key]
         : Command[Prop];
