@@ -1,10 +1,25 @@
 import type { CommandParameters } from "./paramTable";
-import type * as $ from "./codes";
+import type * as EventCommandCodes from "./eventCommandCodes";
+import type { CommandTemplate } from "./types/template";
+import type { ValueOf } from "./paramaters";
 
 export * from "./paramTable";
 export * from "./paramaters";
-export * from "./codes";
-type EventCodeTable = typeof $;
+export * from "./eventCommandCodes";
+
+type XXXX = CommandTemplate<
+  typeof EventCommandCodes,
+  {
+    indent: number;
+    parameters: unknown[];
+    code: ValueOf<typeof EventCommandCodes>;
+  },
+  "code",
+  "parameters",
+  CommandParameters
+>;
+
+type EventCodeTable = typeof EventCommandCodes;
 export type EventCode = EventCodeTable[keyof EventCodeTable];
 
 export type EventCommandTypes = {
