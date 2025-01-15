@@ -30,6 +30,7 @@ export type EventCommandFromCode<Code extends EventCode> = Extract<
   { code: Code }
 >;
 
+const code: EventCode = 101;
 type XXXX = CommandTemplate<
   typeof EventCommandCodes,
   {
