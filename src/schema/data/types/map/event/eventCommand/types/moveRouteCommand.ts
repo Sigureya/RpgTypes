@@ -1,14 +1,20 @@
-import type { AudioFileParams } from "../audioFileParams";
-import type * as $ from "./code";
-import type { CommandTableTamplate } from "../template/commandTableTemplate";
+import type { AudioFileParams } from "./audioFileParams";
+import type * as $ from "./moveRoute/code";
+import type { CommandTableTamplate } from "./template/commandTableTemplate";
 
 type MoveCodeTable = typeof $;
 export type EventCode = MoveCodeTable[keyof MoveCodeTable];
 
+interface CCCC {
+  p: unknown[];
+  code2: EventCode;
+  indent: number;
+}
+
 type Table = CommandTableTamplate<
   MoveCodeTable,
-  { p: unknown[]; code: MoveCodeTable },
-  "code",
+  CCCC,
+  "code2",
   "p",
   {
     ROUTE_END: [];
@@ -17,9 +23,12 @@ type Table = CommandTableTamplate<
     ROUTE_SCRIPT: [script: string];
   }
 >;
-export type MoveRouteCommand = Table["table"];
+export type MoveRouteCommand = Table["commandType"];
 export type MoveRouteCode = Table["codeType"];
-export type Command = Table["commandType"];
+export type CommandTable = Table["commandTable"];
 type CodeKeys = Table["codeKeys"];
 const a: MoveRouteCode = 0;
 const key: CodeKeys = "ROUTE_END";
+function func(aaa: CommandTable["ROUTE_JUMP"]) {
+  //  aaa.code2;
+}

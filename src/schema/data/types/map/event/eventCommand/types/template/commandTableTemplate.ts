@@ -6,22 +6,27 @@ export type CommandTableTamplate<
   CodeProp extends keyof PickByType<T, ValueOf<CodeConstatns>>,
   ParamProp extends keyof PickByType<T, object>,
   Table extends Partial<CommandTableConcept<keyof CodeConstatns, T[ParamProp]>>
-> = {
-  codeKeys: keyof Table;
-  codeType: ValueOf<Pick<CodeConstatns, keyof Table>>;
-} & CreateTable<{
-  [TableKey in keyof Table]: {
-    [key in keyof T]: key extends ParamProp
-      ? Table[TableKey]
-      : key extends CodeProp
-      ? CodeConstatns[TableKey]
-      : T[key];
-  };
-}>;
+> = CreateTable<
+  CodeConstatns,
+  {
+    [TableKey in keyof Table]: {
+      [key in keyof T]: key extends ParamProp
+        ? Table[TableKey]
+        : key extends CodeProp
+        ? CodeConstatns[TableKey]
+        : T[key];
+    };
+  }
+>;
 
-type CreateTable<T extends Record<PropertyKey, unknown>> = {
-  commandType: ValueOf<T>;
-  commandTable: T;
+type CreateTable<
+  CodeConstatns extends Record<PropertyKey, string | number>,
+  Table extends Record<PropertyKey, object>
+> = {
+  codeType: ValueOf<Pick<CodeConstatns, keyof Table>>;
+  commandType: ValueOf<Table>;
+  commandTable: Table;
+  codeKeys: keyof Table;
 };
 
 type ValueOf<T extends Record<PropertyKey, unknown>> = T[keyof T];
