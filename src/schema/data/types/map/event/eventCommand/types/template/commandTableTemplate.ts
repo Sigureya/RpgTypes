@@ -1,11 +1,10 @@
-import type * as $ from "./dummyCode";
-import type * as MoveCons from "./code";
+// Tとkeyof T(2個)でcodeとparamを確定させる
 export type CommandTableTamplate<
   Rec extends Record<PropertyKey, string | number>,
   T extends object,
-  T2 extends object,
-  Table extends Partial<CommandTableConcept<keyof Rec>>,
-  XX extends GGG = { paramKey: "parameters"; codeKey: "code" }
+  Code extends keyof T & string,
+  Param extends keyof T,
+  Table extends Partial<CommandTableConcept<keyof Rec, T[Param]>>
 > = {
   codeKeys: keyof Table;
   codeType: ValueOf<Pick<Rec, keyof Table>>;
@@ -16,9 +15,6 @@ type CreateTable<T extends Record<PropertyKey, unknown>> = {
   commandType: T[keyof T];
 };
 type ValueOf<T extends Record<PropertyKey, unknown>> = T[keyof T];
-
-type MoveCodes = typeof MoveCons;
-type Table = typeof $;
 
 type CommandConcept = {
   code: string | number;
@@ -51,6 +47,7 @@ type Command2<
 > = {
   [K in ParamKey]: ParamType;
 } & Exclude<T, ParamKey | NameGGG["codeKey"] | NameGGG["paramKey"]>;
-type CommandTableConcept<Key extends PropertyKey> = {
-  [K in Key]: unknown;
+
+type CommandTableConcept<Key extends PropertyKey, ParamType = unknown> = {
+  [K in Key]: ParamType;
 };
