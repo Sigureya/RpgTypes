@@ -1,6 +1,25 @@
 import type { PickByType } from "./filterByValue";
 
 /**
+ * A simplified template for creating a command table with specific code and parameter mappings.
+ *
+ * @template CodeConstants - A mapping of command names to unique codes.
+ * @template ParamType - The type of parameters associated with the command codes.
+ * @template Table - A partial mapping of command codes to their corresponding parameter types.
+ */
+export type CommandTemplateSimple<
+  CodeConstants extends Record<PropertyKey, string | number>,
+  ParamType extends object,
+  Table extends Partial<CommandMapping<keyof CodeConstants, ParamType>>
+> = CommandTemplate<
+  CodeConstants,
+  { code: ValueOf<CodeConstants>; parameters: object },
+  "code",
+  "parameters",
+  Table
+>;
+
+/**
  * A template for creating a command table with specific code and parameter mappings.
  *
  * @template CodeConstants - A mapping of command names to unique codes.
@@ -9,7 +28,7 @@ import type { PickByType } from "./filterByValue";
  * @template ParamKey - The property of `Command` that holds the parameters.
  * @template Table - A partial mapping of command codes to parameter types.
  */
-export type CommandMapTamplate<
+export type CommandTemplate<
   CodeConstants extends Record<PropertyKey, string | number>,
   Command extends object,
   CodeKey extends keyof PickByType<Command, ValueOf<CodeConstants>>,
@@ -38,9 +57,21 @@ type ConstructTable<
   CodeConstants extends Record<PropertyKey, string | number>,
   Table extends Record<PropertyKey, object>
 > = {
+  /**
+   * @description Type of the code values from the provided code constants.
+   */
   codeType: ValueOf<Pick<CodeConstants, keyof Table>>;
+  /**
+   * @description Union type of all parameter objects from the table.
+   **/
   commandType: ValueOf<Table>;
+  /**
+   * @description The command table mapping codes to their associated objects.
+   **/
   commandTable: Table;
+  /**
+   * @description Keys used in the command table.
+   **/
   codeKeys: keyof Table;
 };
 
