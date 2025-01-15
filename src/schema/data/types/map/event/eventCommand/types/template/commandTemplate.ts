@@ -55,7 +55,7 @@ export type CommandTemplate<
  */
 type ConstructTable<
   CodeConstants extends Record<PropertyKey, string | number>,
-  Table extends Record<PropertyKey, object>
+  Table extends Record<keyof CodeConstants, object>
 > = {
   /**
    * @description Type of the code values from the provided code constants.

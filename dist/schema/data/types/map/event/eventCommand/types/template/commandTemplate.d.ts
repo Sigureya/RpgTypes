@@ -30,7 +30,7 @@ export type CommandTemplate<CodeConstants extends Record<PropertyKey, string | n
  * @template CodeConstants - Command code mappings.
  * @template Table - A mapping of command names to their parameter types.
  */
-type ConstructTable<CodeConstants extends Record<PropertyKey, string | number>, Table extends Record<PropertyKey, object>> = {
+type ConstructTable<CodeConstants extends Record<PropertyKey, string | number>, Table extends Record<keyof CodeConstants, object>> = {
     /**
      * @description Type of the code values from the provided code constants.
      */
