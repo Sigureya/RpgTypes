@@ -30,7 +30,14 @@ export type EventCommandFromCode<Code extends EventCode> = Extract<
   { code: Code }
 >;
 
-const code: EventCode = 101;
+function hoge(code: EventCode, command: EventCommand) {
+  const n: number = code;
+  command.code;
+  if (command.code === 101) {
+    command.parameters;
+  }
+}
+
 type XXXX = CommandTemplate<
   typeof EventCommandCodes,
   {
