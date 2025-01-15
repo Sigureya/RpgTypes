@@ -1,21 +1,28 @@
 import type { PickByType } from "./filterByValue";
 
-// Tとkeyof T(2個)でcodeとparamを確定させる
 export type CommandTableTamplate<
-  Rec extends Record<PropertyKey, string | number>,
+  CodeConstatns extends Record<PropertyKey, string | number>,
   T extends object,
-  Code extends keyof PickByType<T, ValueOf<Rec>>,
-  Param extends keyof PickByType<T, object>,
-  Table extends Partial<CommandTableConcept<keyof Rec, T[Param]>>
+  CodeProp extends keyof PickByType<T, ValueOf<CodeConstatns>>,
+  ParamProp extends keyof PickByType<T, object>,
+  Table extends Partial<CommandTableConcept<keyof CodeConstatns, T[ParamProp]>>
 > = {
   codeKeys: keyof Table;
-  codeType: ValueOf<Pick<Rec, keyof Table>>;
-} & CreateTable<{ [K in keyof Table]: { code: Rec[K]; parameters: Table[K] } }>;
+  codeType: ValueOf<Pick<CodeConstatns, keyof Table>>;
+} & CreateTable<{
+  [TableKey in keyof Table]: {
+    [key in keyof T]: key extends ParamProp
+      ? Table[TableKey]
+      : key extends CodeProp
+      ? CodeConstatns[TableKey]
+      : T[key];
+  };
+}>;
 
-interface CreateTable<T extends Record<PropertyKey, unknown>> {
-  table: T;
-  commandType: T[keyof T];
-}
+type CreateTable<T extends Record<PropertyKey, unknown>> = {
+  commandType: ValueOf<T>;
+  commandTable: T;
+};
 
 type ValueOf<T extends Record<PropertyKey, unknown>> = T[keyof T];
 
