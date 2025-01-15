@@ -10,7 +10,7 @@ import type { PickByType } from "./filterByValue";
 export type CommandTemplateSimple<
   CodeConstants extends Record<PropertyKey, string | number>,
   ParamType extends object,
-  Table extends CommandMapping<keyof CodeConstants, ParamType>
+  Table extends Record<keyof CodeConstants, ParamType>
 > = CommandTemplate<
   CodeConstants,
   { code: ValueOf<CodeConstants>; parameters: object },
@@ -19,7 +19,6 @@ export type CommandTemplateSimple<
   Table
 >;
 
-type Test<T extends number | string> = {};
 /**
  * A template for creating a command table with specific code and parameter mappings.
  *
@@ -30,21 +29,24 @@ type Test<T extends number | string> = {};
  * @template Table - A partial mapping of command codes to parameter types.
  */
 export type CommandTemplate<
-  CodeConstants extends Record<PropertyKey, string | number>,
+  CodeConstants extends Record<keyof CodeConstants, string | number>,
   Command extends object,
   CodeKey extends keyof PickByType<Command, ValueOf<CodeConstants>>,
   ParamKey extends keyof PickByType<Command, object>,
-  Table extends CommandMapping<keyof CodeConstants, Command[ParamKey]>
+  Table extends Pick<
+    Record<PropertyKey, Command[ParamKey]>,
+    keyof CodeConstants
+  >
 > = ConstructTable<
   CodeConstants,
   {
-    [Key in keyof Exclude<Table, undefined>]: {
+    [Key in keyof CodeConstants]: {
       [Prop in keyof Command]: Prop extends ParamKey
         ? Exclude<Table, undefined>[Key]
         : Prop extends CodeKey
         ? CodeConstants[Key]
         : Command[Prop];
-    } & Test<CodeConstants[Key]>;
+    };
   }
 >;
 
@@ -80,6 +82,6 @@ type ConstructTable<
 type ValueOf<T extends Record<PropertyKey, unknown>> = T[keyof T];
 
 /** A mapping of command keys to parameter types. */
-type CommandMapping<Key extends PropertyKey, ParamType = unknown> = {
+type CommandMapping<Key extends PropertyKey, ParamType> = {
   [K in Key]: ParamType;
 };
