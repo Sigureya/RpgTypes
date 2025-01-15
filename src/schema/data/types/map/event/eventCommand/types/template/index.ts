@@ -1,2 +1,2 @@
-export * from "./commandMapTemplate";
+export * from "./commandTemplate";
 export * from "./filterByValue";
