@@ -12,7 +12,8 @@
   ],
   "scripts": {
     "build": "tsc --emitDeclarationOnly --declaration --outDir dist",
-    "lint": "eslint src --ext .ts"
+    "lint": "eslint src --ext .ts",
+    "test": "vitest"
   },
   "repository": {
     "type": "git",
