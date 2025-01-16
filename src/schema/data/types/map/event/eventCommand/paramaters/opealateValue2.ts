@@ -1,4 +1,4 @@
-import type { Operation, ValueOf } from "./constants";
+import type { Operation_PlusMinus, ValueOf } from "./constants";
 
 /**
  * 0 : variable, 1 : constant
@@ -8,7 +8,7 @@ export type ConstatnOrVariable =
   | typeof CONSTANT_OR_VARIABLE.CONSTANT;
 
 export type OperateValueParams = [
-  oparation: ValueOf<Operation>,
+  oparation: ValueOf<Operation_PlusMinus>,
   oprandType: ConstatnOrVariable,
   VariableIdOrValue: number
 ];
