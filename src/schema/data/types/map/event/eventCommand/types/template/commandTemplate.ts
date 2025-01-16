@@ -1,86 +1,108 @@
 import type { PickByType } from "./filterByValue";
 
 /**
- * A simplified template for creating a command table with specific code and parameter mappings.
+ * Defines a simplified command template type.
  *
- * @template CodeConstants - A mapping of command names to unique codes.
- * @template ParamType - The type of parameters associated with the command codes.
- * @template Table - A partial mapping of command codes to their corresponding parameter types.
+ * @template CommandCodeMapping - A record mapping command codes to their values (e.g., string or number).
+ * @template ParameterObject - An object type representing the keys used for command parameters.
+ * @template CommandParameterMapping - A record mapping command codes to their parameter types.
  */
 export type CommandTemplateSimple<
-  CodeConstants extends Record<PropertyKey, string | number>,
-  ParamType extends object,
-  Table extends Record<keyof CodeConstants, ParamType>
+  CommandCodeMapping extends Record<PropertyKey, string | number>,
+  ParameterObject extends object,
+  CommandParameterMapping extends Record<
+    keyof CommandCodeMapping,
+    ParameterObject
+  >
 > = CommandTemplate<
-  CodeConstants,
-  { code: ValueOf<CodeConstants>; parameters: object },
+  CommandCodeMapping,
+  { code: ValueOf<CommandCodeMapping>; parameters: object },
   "code",
   "parameters",
-  Table
+  CommandParameterMapping
 >;
 
 /**
- * A template for creating a command table with specific code and parameter mappings.
+ * Defines a command template for structured type mappings.
  *
- * @template CodeConstants - A mapping of command names to unique codes.
- * @template Command - The base command object to extend.
- * @template CodeKey - The property of `Command` that represents the command code.
- * @template ParamKey - The property of `Command` that holds the parameters.
- * @template Table - A partial mapping of command codes to parameter types.
+ * @template CommandCodeMapping - A record mapping command codes to their values.
+ * @template Command - An object type representing a command's structure.
+ * @template CodePropertyKey - A key representing the command's code property.
+ * @template ParameterPropertyKey - A key representing the command's parameter property.
+ * @template CommandParameterMapping - A record mapping command codes to their parameter types.
  */
 export type CommandTemplate<
-  CodeConstants extends Record<keyof CodeConstants, string | number>,
+  CommandCodeMapping extends Record<PropertyKey, string | number>,
   Command extends object,
-  CodeKey extends keyof PickByType<Command, ValueOf<CodeConstants>>,
-  ParamKey extends keyof PickByType<Command, object>,
-  Table extends Record<keyof CodeConstants, Command[ParamKey]>
+  CodePropertyKey extends keyof PickByType<
+    Command,
+    ValueOf<CommandCodeMapping>
+  >,
+  ParameterPropertyKey extends keyof PickByType<Command, object>,
+  CommandParameterMapping extends Record<
+    keyof CommandCodeMapping,
+    Command[ParameterPropertyKey]
+  >
 > = ConstructTable<
-  CodeConstants,
+  CommandCodeMapping,
   {
-    [Key in keyof CodeConstants]: {
-      [Prop in keyof Command]: Prop extends ParamKey
-        ? Table[Key]
-        : Prop extends CodeKey
-        ? CodeConstants[Key]
-        : Command[Prop];
-    };
+    // Using `keyof Table` enables editor-friendly navigation to parameter definitions.
+    // If `keyof CommandCodeMapping` were used, navigation would lead to constant definitions, which is less practical.
+    // Additionally, the `extends keyof CommandCodeMapping` condition removes irrelevant types.
+    [Key in keyof CommandParameterMapping]: Key extends keyof CommandCodeMapping
+      ? {
+          [Prop in keyof Command]: Prop extends ParameterPropertyKey
+            ? CommandParameterMapping[Key]
+            : Prop extends CodePropertyKey
+            ? CommandCodeMapping[Key]
+            : Command[Prop];
+        }
+      : never;
   },
-  CodeKey
+  CodePropertyKey
 >;
 
 /**
- * Constructs a command table type.
+ * Constructs a type representing a command table.
  *
- * @template CodeConstants - Command code mappings.
- * @template Table - A mapping of command names to their parameter types.
+ * @template CommandCodeMapping - A record mapping command codes to their values.
+ * @template CommandParameterMapping - A mapping of command codes to their respective parameter types.
+ * @template CodeKey - A key used to associate codes with command objects.
  */
 type ConstructTable<
-  CodeConstants extends Record<PropertyKey, string | number>,
-  Table extends Record<keyof CodeConstants, object>,
+  CommandCodeMapping extends Record<PropertyKey, string | number>,
+  CommandParameterMapping extends Record<keyof CommandCodeMapping, object>,
   CodeKey extends PropertyKey
 > = {
-  atCode: {
-    [Code in CodeConstants[keyof Table]]: Extract<
-      ValueOf<Table>,
+  /**
+   * @description A mapping of commands to their parameter types.
+   **/
+  commandTypeTable: CommandParameterMapping;
+  /**
+   * @description A mapping of command codes to their values.
+   */
+  codeTable: CommandCodeMapping;
+  /**
+   * @description A lookup table for commands by their code values.
+   **/
+  commandByCode: {
+    [Code in CommandCodeMapping[keyof CommandCodeMapping]]: Extract<
+      ValueOf<CommandParameterMapping>,
       { [Key in CodeKey]: Code }
     >;
   };
   /**
-   * @description Type of the code values from the provided code constants.
+   * @description The union type of command code values.
    */
-  codeType: ValueOf<Pick<CodeConstants, keyof Table>>;
+  codeType: ValueOf<CommandCodeMapping>;
   /**
-   * @description Union type of all parameter objects from the table.
+   * @description The union type of all parameter objects in the command table.
    **/
-  commandType: ValueOf<Table>;
+  commandType: ValueOf<CommandParameterMapping>;
   /**
-   * @description The command table mapping codes to their associated objects.
+   * @description Keys representing the commands in the table.
    **/
-  commandTable: Table;
-  /**
-   * @description Keys used in the command table.
-   **/
-  codeKeys: keyof Table;
+  codeKeys: keyof CommandParameterMapping;
 };
 
 /** Extracts the value type of a record. */
