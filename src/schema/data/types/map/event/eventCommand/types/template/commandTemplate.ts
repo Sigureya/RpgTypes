@@ -44,7 +44,8 @@ export type CommandTemplate<
         ? CodeConstants[Key]
         : Command[Prop];
     };
-  }
+  },
+  CodeKey
 >;
 
 /**
@@ -55,8 +56,15 @@ export type CommandTemplate<
  */
 type ConstructTable<
   CodeConstants extends Record<PropertyKey, string | number>,
-  Table extends Record<keyof CodeConstants, object>
+  Table extends Record<keyof CodeConstants, object>,
+  CodeKey extends PropertyKey
 > = {
+  atCode: {
+    [Code in CodeConstants[keyof Table]]: Extract<
+      ValueOf<Table>,
+      { [Key in CodeKey]: Code }
+    >;
+  };
   /**
    * @description Type of the code values from the provided code constants.
    */
@@ -77,8 +85,3 @@ type ConstructTable<
 
 /** Extracts the value type of a record. */
 type ValueOf<T extends Record<PropertyKey, unknown>> = T[keyof T];
-
-/** A mapping of command keys to parameter types. */
-type CommandMapping<Key extends PropertyKey, ParamType> = {
-  [K in Key]: ParamType;
-};

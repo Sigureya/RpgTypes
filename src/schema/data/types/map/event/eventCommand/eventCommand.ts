@@ -23,20 +23,8 @@ export * from "./paramaters";
 export * from "./eventCommandCodes";
 export type EventCode = ValueOf<typeof EventCommandCodes>;
 export type EventCommandTypes = XXXX["commandTable"];
-export type EventCommandTable = EventCommandTypes;
+export type EventCommandTable = XXXX["atCode"];
 export type EventCommand = XXXX["commandType"];
-export type EventCommandFromCode<Code extends EventCode> = Extract<
-  EventCommand,
-  { code: Code }
->;
-
-function hoge(code: EventCode, command: EventCommand) {
-  const n: number = code;
-  command.code;
-  if (command.code === 101) {
-    command.parameters;
-  }
-}
 
 type XXXX = CommandTemplate<
   typeof EventCommandCodes,
