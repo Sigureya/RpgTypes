@@ -1,4 +1,4 @@
-import type { ValueOf } from "./controlVariables";
+import type { ValueOf } from "./constants";
 export interface GoodsType {
     item: 0;
     weapon: 1;

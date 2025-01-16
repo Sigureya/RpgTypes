@@ -1,5 +1,4 @@
-import type { Operation } from "./constants/constants";
-import type { ValueOf } from "./controlVariables";
+import type { Operation, ValueOf } from "./constants";
 
 /**
  * 0 : variable, 1 : constant
