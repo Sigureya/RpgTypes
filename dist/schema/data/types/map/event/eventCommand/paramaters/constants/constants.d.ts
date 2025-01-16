@@ -2,7 +2,7 @@ export interface Toggle {
     ON: 0;
     OFF: 1;
 }
-export interface Operation {
+export interface Operation_PlusMinus {
     PLUS: 0;
     MINUS: 1;
 }
