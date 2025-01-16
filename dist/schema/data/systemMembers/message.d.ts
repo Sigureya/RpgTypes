@@ -1,5 +1,5 @@
 export interface System_Terms {
-    messages: Terms_MessageArray;
+    messages: Terms_Messages;
     commands: Terms_CommandArray;
     params: Terms_ParamNamesArray;
     basic: Terms_BasicArray;
@@ -56,7 +56,7 @@ export type Terms_ParamNamesArray = [
     hit: string,
     eva: string
 ];
-export interface Terms_MessageArray {
+export interface Terms_Messages {
     alwaysDash: string;
     commandRemember: string;
     touchUI: string;
