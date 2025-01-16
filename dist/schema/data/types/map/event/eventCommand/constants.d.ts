@@ -1,12 +1,12 @@
-export declare const TOGGLE: {
+export interface Toggle {
     ON: 0;
     OFF: 1;
-};
-export declare const OPERATION: {
+}
+export interface Operation {
     PLUS: 0;
     MINUS: 1;
-};
-export declare const DESIGNATION: {
+}
+export interface Designation {
     DIRECT: 0;
     VARIABLE: 1;
-};
+}
