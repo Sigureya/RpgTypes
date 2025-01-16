@@ -23,17 +23,17 @@ import type {
 
 export * from "./paramaters";
 export * from "./eventCommandCodes";
-export type EventCode = ValueOf<typeof EventCommandCodes>;
-export type EventCommandTypes = EventCommandsMapper["commandTable"];
-export type EventCommandTable = EventCommandsMapper["atCode"];
+export type EventCode = EventCommandsMapper["codeType"];
+export type EventCommandTypes = EventCommandsMapper["commandTypeTable"];
+export type EventCommandTable = EventCommandsMapper["commandByCode"];
 export type EventCommand = EventCommandsMapper["commandType"];
 
-type EventCommandsMapper = CommandTemplate<
+export type EventCommandsMapper = CommandTemplate<
   typeof EventCommandCodes,
   {
-    indent: number;
-    parameters: unknown[];
     code: EventCode;
+    parameters: unknown[];
+    indent: number;
   },
   "code",
   "parameters",
