@@ -1,4 +1,4 @@
-import type { Damage, Data_UsableItem, ItemEffect } from "./bases/usableItem";
+import type { Damage, Data_UsableItem, ItemEffect } from "./bases/";
 
 export interface Data_Item extends Data_UsableItem {
   name: string;
