@@ -7,3 +7,4 @@ export * from "./skill";
 export * from "./state";
 export * from "./weapon";
 export * from "./enemy";
+export * from "./anyGoods";
