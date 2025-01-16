@@ -1,6 +1,4 @@
-import type { Data_NamedItem } from "../main";
-
-export interface Data_MapInfo extends Data_NamedItem {
+export interface Data_MapInfo {
   name: string;
   id: number;
   expanded: boolean;
