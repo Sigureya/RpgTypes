@@ -3,13 +3,12 @@ import type {
   ChanageActorVariable,
   ControlVariables,
   MovePicture,
-  OPERATION,
   ShopGoods,
   ShopProcessing,
   ShowPicture,
   ValueOf,
 } from "./paramaters";
-import type { TOGGLE, DESIGNATION } from "./constants";
+import type { Designation, Toggle, Operation } from "./constants";
 import type {
   AudioFileParams,
   CommandTemplate,
@@ -18,15 +17,14 @@ import type {
   MoveRouteData,
 } from "./types";
 
-export * from "./paramTable";
 export * from "./paramaters";
 export * from "./eventCommandCodes";
 export type EventCode = ValueOf<typeof EventCommandCodes>;
-export type EventCommandTypes = XXXX["commandTable"];
-export type EventCommandTable = XXXX["atCode"];
-export type EventCommand = XXXX["commandType"];
+export type EventCommandTypes = EventCommandsMapper["commandTable"];
+export type EventCommandTable = EventCommandsMapper["atCode"];
+export type EventCommand = EventCommandsMapper["commandType"];
 
-type XXXX = CommandTemplate<
+type EventCommandsMapper = CommandTemplate<
   typeof EventCommandCodes,
   {
     indent: number;
@@ -133,7 +131,7 @@ type XXXX = CommandTemplate<
      */
     LABEL_JUMP: [name: string];
 
-    CONTROL_SWITCHES: [min: number, max: number, value: ValueOf<typeof TOGGLE>];
+    CONTROL_SWITCHES: [min: number, max: number, value: ValueOf<Toggle>];
     /**
      * @description Control Variables
      * @todo 複雑なので後回し
@@ -143,18 +141,18 @@ type XXXX = CommandTemplate<
     /**
      * @description Control Self Switch
      */
-    CONTROL_SELF_SWITCH: [key: string, value: ValueOf<typeof TOGGLE>];
+    CONTROL_SELF_SWITCH: [key: string, value: ValueOf<Toggle>];
 
     /**
      * @description Control Timer
      */
-    CONTROL_TIMER: [operation: ValueOf<typeof OPERATION>, time: number];
+    CONTROL_TIMER: [operation: ValueOf<Operation>, time: number];
 
     /**
      * @description Change Gold
      */
     CHANGE_GOLD: [
-      operation: ValueOf<typeof OPERATION>,
+      operation: ValueOf<Operation>,
       operationType: number,
       value: number
     ];
@@ -164,7 +162,7 @@ type XXXX = CommandTemplate<
      */
     CHANGE_ITEMS: [
       id: number,
-      operation: ValueOf<typeof OPERATION>,
+      operation: ValueOf<Operation>,
       operationType: number,
       value: number
     ];
@@ -174,7 +172,7 @@ type XXXX = CommandTemplate<
      */
     CHANGE_WEAPONS: [
       id: number,
-      operation: ValueOf<typeof OPERATION>,
+      operation: ValueOf<Operation>,
       operationType: number,
       value: number,
       isEquip: boolean
@@ -184,7 +182,7 @@ type XXXX = CommandTemplate<
      */
     CHANGE_ARMORS: [
       id: number,
-      operation: ValueOf<typeof OPERATION>,
+      operation: ValueOf<Operation>,
       operationType: number,
       value: number,
       isEquip: boolean
@@ -194,7 +192,7 @@ type XXXX = CommandTemplate<
      */
     CHANGE_PARTY_MEMBER: [
       id: number,
-      operation: ValueOf<typeof OPERATION>,
+      operation: ValueOf<Operation>,
       isInit: boolean
     ];
 
@@ -228,22 +226,22 @@ type XXXX = CommandTemplate<
     /**
      * @description Change Save Access
      */
-    CHANGE_SAVE_ACCESS: [value: ValueOf<typeof TOGGLE>];
+    CHANGE_SAVE_ACCESS: [value: ValueOf<Toggle>];
 
     /**
      * @description Change Menu Access
      */
-    CHANGE_MENU_ACCESS: [value: ValueOf<typeof TOGGLE>];
+    CHANGE_MENU_ACCESS: [value: ValueOf<Toggle>];
 
     /**
      * @description Change Encounter
      */
-    CHANGE_ENCOUNTER: [value: ValueOf<typeof TOGGLE>];
+    CHANGE_ENCOUNTER: [value: ValueOf<Toggle>];
 
     /**
      * @description Change Formation Access
      */
-    CHANGE_FORMATION_ACCESS: [value: ValueOf<typeof TOGGLE>];
+    CHANGE_FORMATION_ACCESS: [value: ValueOf<Toggle>];
 
     CHANGE_WINDOW_COLOR: [color: ColorRGBA];
     CHANGE_DEFEAT_ME: [me: AudioFileParams];
@@ -293,7 +291,7 @@ type XXXX = CommandTemplate<
     ];
 
     TRANSFER_PLAYER: [
-      designation: ValueOf<typeof DESIGNATION>,
+      designation: ValueOf<Designation>,
       mapId: number,
       x: number,
       y: number,
