@@ -4,14 +4,14 @@ import type { Designation, Toggle, Operation_PlusMinus } from "./paramaters/cons
 import type { AudioFileParams, CommandTemplate, ColorRGBA, Direction8, MoveRouteData } from "./types";
 export * from "./paramaters";
 export * from "./eventCommandCodes";
-export type EventCode = ValueOf<typeof EventCommandCodes>;
-export type EventCommandTypes = EventCommandsMapper["commandTable"];
-export type EventCommandTable = EventCommandsMapper["atCode"];
+export type EventCode = EventCommandsMapper["codeType"];
+export type EventCommandTypes = EventCommandsMapper["commandTypeTable"];
+export type EventCommandTable = EventCommandsMapper["commandByCode"];
 export type EventCommand = EventCommandsMapper["commandType"];
-type EventCommandsMapper = CommandTemplate<typeof EventCommandCodes, {
-    indent: number;
-    parameters: unknown[];
+export type EventCommandsMapper = CommandTemplate<typeof EventCommandCodes, {
     code: EventCode;
+    parameters: unknown[];
+    indent: number;
 }, "code", "parameters", {
     NO_OPERATION: [];
     /**
