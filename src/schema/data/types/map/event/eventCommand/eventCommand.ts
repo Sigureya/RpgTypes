@@ -8,7 +8,11 @@ import type {
   ShowPicture,
   ValueOf,
 } from "./paramaters";
-import type { Designation, Toggle, Operation } from "./constants";
+import type {
+  Designation,
+  Toggle,
+  Operation,
+} from "./paramaters/constants/constants";
 import type {
   AudioFileParams,
   CommandTemplate,

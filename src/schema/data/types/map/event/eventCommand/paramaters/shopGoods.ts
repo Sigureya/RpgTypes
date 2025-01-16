@@ -1,12 +1,12 @@
 import type { ValueOf } from "./controlVariables";
 
-const GOODS_TYPE = {
-  item: 0,
-  weapon: 1,
-  armors: 2,
-} as const;
+export interface GoodsType {
+  item: 0;
+  weapon: 1;
+  armors: 2;
+}
 
-type GOODS_TYPES = ValueOf<typeof GOODS_TYPE>;
+type GOODS_TYPES = ValueOf<GoodsType>;
 
 export type ShopGoods = [
   itemType: GOODS_TYPES,
