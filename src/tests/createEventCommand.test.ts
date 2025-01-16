@@ -1,5 +1,5 @@
-import { createEventCommand } from "./createEventCommand";
-import type { EventCode, EventCommandTypes } from "../";
+import { createEventCommand, showMessage } from "./createEventCommand";
+import type { EventCode, EventCommand, EventCommandTypes } from "../";
 import { describe, expect, it } from "vitest";
 describe("createEventCommand", () => {
   it("should create a SHOW_MESSAGE command", () => {
@@ -13,7 +13,7 @@ describe("createEventCommand", () => {
     ];
     const indent = 2;
 
-    const result = createEventCommand(code, params, indent);
+    const result = createEventCommand<101>(code, params, indent);
 
     expect(result).toEqual({
       code: 101,
@@ -173,5 +173,11 @@ describe("createEventCommand", () => {
       parameters: params,
       indent,
     });
+  });
+});
+describe("", () => {
+  it("showMessage", () => {
+    const command = createEventCommand(101, ["HeroFace", 1, 0, 2, "Hero"], 2);
+    expect(showMessage(command)).toBe(101);
   });
 });
