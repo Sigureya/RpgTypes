@@ -16,8 +16,9 @@
       "@src/*": ["src/*"]
     }
   },
-  "include": ["src/**/*", "tests/**/*"],
+  "include": ["src/**/*"],
   "exclude": [
+    "src/tests/**/*",
     "node_modules",
     ".vscode",
     "eslint-custom-rules",
