@@ -3,7 +3,7 @@ import type { EventCode, EventCommandTypes } from "../";
 import { describe, expect, it } from "vitest";
 describe("createEventCommand", () => {
   it("should create a SHOW_MESSAGE command", () => {
-    const code: EventCode = "SHOW_MESSAGE";
+    const code: EventCode = 101;
     const params: EventCommandTypes["SHOW_MESSAGE"]["parameters"] = [
       "HeroFace",
       1,
@@ -16,32 +16,30 @@ describe("createEventCommand", () => {
     const result = createEventCommand(code, params, indent);
 
     expect(result).toEqual({
-      code: "SHOW_MESSAGE",
+      code: 101,
       parameters: params,
       indent,
     });
   });
 
   it("should create a CONTROL_SWITCHES command", () => {
-    const code: EventCode = "CONTROL_SWITCHES";
+    const code: EventCommandTypes["CONTROL_SWITCHES"]["code"] = 121;
     const params: EventCommandTypes["CONTROL_SWITCHES"]["parameters"] = [
-      1,
-      10,
-      "ON",
+      1, 10, 1,
     ];
     const indent = 0;
 
     const result = createEventCommand(code, params, indent);
 
     expect(result).toEqual({
-      code: "CONTROL_SWITCHES",
+      code: 121,
       parameters: params,
       indent,
     });
   });
 
   it("should create a SHOW_SCROLLING_TEXT command", () => {
-    const code: EventCode = "SHOW_SCROLLING_TEXT";
+    const code: EventCode = 105;
     const params: EventCommandTypes["SHOW_SCROLLING_TEXT"]["parameters"] = [
       4,
       true,
@@ -51,32 +49,28 @@ describe("createEventCommand", () => {
     const result = createEventCommand(code, params, indent);
 
     expect(result).toEqual({
-      code: "SHOW_SCROLLING_TEXT",
+      code: 105,
       parameters: params,
       indent,
     });
   });
 
   it("should create a CHANGE_GOLD command", () => {
-    const code: EventCode = "CHANGE_GOLD";
-    const params: EventCommandTypes["CHANGE_GOLD"]["parameters"] = [
-      "ADD",
-      0,
-      100,
-    ];
+    const code: EventCommandTypes["CHANGE_GOLD"]["code"] = 125;
+    const params: EventCommandTypes["CHANGE_GOLD"]["parameters"] = [0, 0, 100];
     const indent = 0;
 
     const result = createEventCommand(code, params, indent);
 
     expect(result).toEqual({
-      code: "CHANGE_GOLD",
+      code: 125,
       parameters: params,
       indent,
     });
   });
 
   it("should create a PLUGIN_COMMAND_MZ command", () => {
-    const code: EventCode = "PLUGIN_COMMAND_MZ";
+    const code: EventCommandTypes["PLUGIN_COMMAND_MZ"]["code"] = 357;
     const params: EventCommandTypes["PLUGIN_COMMAND_MZ"]["parameters"] = [
       "CustomPlugin",
       "CustomCommand",
@@ -88,7 +82,7 @@ describe("createEventCommand", () => {
     const result = createEventCommand(code, params, indent);
 
     expect(result).toEqual({
-      code: "PLUGIN_COMMAND_MZ",
+      code: 357,
       parameters: params,
       indent,
     });
