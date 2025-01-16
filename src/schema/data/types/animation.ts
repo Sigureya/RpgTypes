@@ -1,4 +1,4 @@
-import type { Data_NamedItem } from "./bases";
+import type { Data_NamedItem } from "./main";
 import type { AudioFileParams, ColorRGBA } from "./map";
 
 export interface FlashTiming {

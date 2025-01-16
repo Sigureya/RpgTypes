@@ -1,4 +1,4 @@
-import type { Data_NamedItem } from "./bases";
+import type { Data_NamedItem } from "./main";
 
 export interface Data_Tileset extends Data_NamedItem {
   note: string;
