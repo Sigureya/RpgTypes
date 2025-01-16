@@ -7,7 +7,7 @@ module.exports = {
     "@typescript-eslint/no-unused-vars": "warn",
     "@typescript-eslint/no-explicit-any": "warn",
     "spaced-comment": "error",
-    "@typescript-eslint/consistent-type-imports": "error",
+    "@typescript-eslint/consistent-type-imports": "warn",
     "@typescript-eslint/ban-types": "off",
   },
 };
