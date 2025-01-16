@@ -27,10 +27,11 @@
   "author": "Max Siguren",
   "license": "MIT",
   "devDependencies": {
-    "eslint": "^8.57.1",
     "@typescript-eslint/eslint-plugin": "^7.18.0",
     "@typescript-eslint/parser": "^7.18.0",
-    "typescript": "^5.0.0"
+    "eslint": "^8.57.1",
+    "typescript": "^5.0.0",
+    "vitest": "^2.1.8"
   },
   "engines": {
     "node": ">=16.0.0"
