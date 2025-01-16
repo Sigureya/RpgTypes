@@ -1,4 +1,4 @@
-export * from "./valueOf";
+import type { ValueOf } from "../constants";
 import type {
   CHARACTER,
   GAMEDATA,
@@ -7,8 +7,6 @@ import type {
   OTHER,
   STATUS,
 } from "./constants";
-import type { ValueOf } from "./valueOf";
-
 type Header = [startId: number, endId: number, operationType: number];
 
 type OperandConstant = [operand: typeof OPERAND.CONSTANT, value: number];

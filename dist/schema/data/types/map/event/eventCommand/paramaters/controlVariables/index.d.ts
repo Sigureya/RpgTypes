@@ -1,6 +1,5 @@
-export * from "./valueOf";
+import type { ValueOf } from "../constants";
 import type { CHARACTER, GAMEDATA, LAST, OPERAND, OTHER, STATUS } from "./constants";
-import type { ValueOf } from "./valueOf";
 type Header = [startId: number, endId: number, operationType: number];
 type OperandConstant = [operand: typeof OPERAND.CONSTANT, value: number];
 type OperandVariable = [operand: typeof OPERAND.VARIABLE, variableId: number];
@@ -32,3 +31,4 @@ export type ControlVariables = [
     ...Header,
     ...(OperandConstant | OperandVariable | OperandRandom | OperandGamedata | OperandScript)
 ];
+export {};

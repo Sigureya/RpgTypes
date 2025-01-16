@@ -8,7 +8,11 @@ import type {
   ShowPicture,
   ValueOf,
 } from "./paramaters";
-import type { Designation, Toggle, Operation } from "./constants";
+import type {
+  Designation,
+  Toggle,
+  Operation_PlusMinus,
+} from "./paramaters/constants";
 import type {
   AudioFileParams,
   CommandTemplate,
@@ -146,13 +150,13 @@ type EventCommandsMapper = CommandTemplate<
     /**
      * @description Control Timer
      */
-    CONTROL_TIMER: [operation: ValueOf<Operation>, time: number];
+    CONTROL_TIMER: [operation: ValueOf<Operation_PlusMinus>, time: number];
 
     /**
      * @description Change Gold
      */
     CHANGE_GOLD: [
-      operation: ValueOf<Operation>,
+      operation: ValueOf<Operation_PlusMinus>,
       operationType: number,
       value: number
     ];
@@ -162,7 +166,7 @@ type EventCommandsMapper = CommandTemplate<
      */
     CHANGE_ITEMS: [
       id: number,
-      operation: ValueOf<Operation>,
+      operation: ValueOf<Operation_PlusMinus>,
       operationType: number,
       value: number
     ];
@@ -172,7 +176,7 @@ type EventCommandsMapper = CommandTemplate<
      */
     CHANGE_WEAPONS: [
       id: number,
-      operation: ValueOf<Operation>,
+      operation: ValueOf<Operation_PlusMinus>,
       operationType: number,
       value: number,
       isEquip: boolean
@@ -182,7 +186,7 @@ type EventCommandsMapper = CommandTemplate<
      */
     CHANGE_ARMORS: [
       id: number,
-      operation: ValueOf<Operation>,
+      operation: ValueOf<Operation_PlusMinus>,
       operationType: number,
       value: number,
       isEquip: boolean
@@ -192,7 +196,7 @@ type EventCommandsMapper = CommandTemplate<
      */
     CHANGE_PARTY_MEMBER: [
       id: number,
-      operation: ValueOf<Operation>,
+      operation: ValueOf<Operation_PlusMinus>,
       isInit: boolean
     ];
 

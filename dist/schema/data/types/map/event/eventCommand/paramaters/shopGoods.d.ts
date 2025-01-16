@@ -1,10 +1,10 @@
-import type { ValueOf } from "./controlVariables";
-declare const GOODS_TYPE: {
-    readonly item: 0;
-    readonly weapon: 1;
-    readonly armors: 2;
-};
-type GOODS_TYPES = ValueOf<typeof GOODS_TYPE>;
+import type { ValueOf } from "./constants";
+export interface GoodsType {
+    item: 0;
+    weapon: 1;
+    armors: 2;
+}
+type GOODS_TYPES = ValueOf<GoodsType>;
 export type ShopGoods = [
     itemType: GOODS_TYPES,
     id: number,
