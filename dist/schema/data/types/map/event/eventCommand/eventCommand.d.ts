@@ -1,6 +1,6 @@
 import type * as EventCommandCodes from "./eventCommandCodes";
 import type { ChanageActorVariable, ControlVariables, MovePicture, ShopGoods, ShopProcessing, ShowPicture, ValueOf } from "./paramaters";
-import type { Designation, Toggle, Operation_PlusMinus } from "./paramaters/constants/constants";
+import type { Designation, Toggle, Operation_PlusMinus } from "./paramaters/constants";
 import type { AudioFileParams, CommandTemplate, ColorRGBA, Direction8, MoveRouteData } from "./types";
 export * from "./paramaters";
 export * from "./eventCommandCodes";

@@ -12,7 +12,7 @@ import type {
   Designation,
   Toggle,
   Operation_PlusMinus,
-} from "./paramaters/constants/constants";
+} from "./paramaters/constants";
 import type {
   AudioFileParams,
   CommandTemplate,

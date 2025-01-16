@@ -10,3 +10,7 @@ export interface Designation {
     DIRECT: 0;
     VARIABLE: 1;
 }
+export interface Operation_AddSub {
+    ADD: 0;
+    SUB: 1;
+}
