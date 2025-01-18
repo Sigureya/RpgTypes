@@ -1,3 +1,4 @@
+import type { BranchByActor, BranchBySelfSwitch, BranchBySwitch, BranchByTimer, BranchByVariable } from "./branchParams";
 import type * as EventCommandCodes from "./eventCommandCodes";
 import type { ChanageActorVariable, ControlVariables, MovePicture, ShopGoods, ShopProcessing, ShowPicture, ValueOf } from "./paramaters";
 import type { Designation, Toggle, Operation_PlusMinus } from "./paramaters/constants";
@@ -70,7 +71,7 @@ export type EventCommandsMapper = CommandTemplate<typeof EventCommandCodes, {
     /**
      * @description Conditional Branch
      */
-    CONDITIONAL_BRANCH: [];
+    CONDITIONAL_BRANCH: BranchBySwitch | BranchByVariable | BranchBySelfSwitch | BranchByTimer | BranchByActor;
     /**
      * @description Else (Conditional Branch)
      */

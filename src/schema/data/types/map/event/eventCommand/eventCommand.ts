@@ -1,3 +1,10 @@
+import type {
+  BranchByActor,
+  BranchBySelfSwitch,
+  BranchBySwitch,
+  BranchByTimer,
+  BranchByVariable,
+} from "./branchParams";
 import type * as EventCommandCodes from "./eventCommandCodes";
 import type {
   ChanageActorVariable,
@@ -102,7 +109,12 @@ export type EventCommandsMapper = CommandTemplate<
     /**
      * @description Conditional Branch
      */
-    CONDITIONAL_BRANCH: [];
+    CONDITIONAL_BRANCH:
+      | BranchBySwitch
+      | BranchByVariable
+      | BranchBySelfSwitch
+      | BranchByTimer
+      | BranchByActor;
     /**
      * @description Else (Conditional Branch)
      */
