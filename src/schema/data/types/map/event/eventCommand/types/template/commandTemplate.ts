@@ -59,7 +59,8 @@ export interface CommandTemplate<
           }
         : never;
     },
-    CodePropertyKey
+    CodePropertyKey,
+    CommandParameterMapping
   > {}
 
 // テーブルの基底インターフェース
@@ -87,9 +88,10 @@ export interface C<
 interface ConstructTable<
   CommandCodeMapping extends Record<PropertyKey, string | number>,
   CommandParameterMapping extends Record<keyof CommandCodeMapping, object>,
-  CodeKey extends keyof CommandCodeMapping
+  CodeKey extends keyof CommandCodeMapping,
+  ParamTable extends Record<keyof (keyof CommandParameterMapping), object>
 > extends C<object, keyof CommandCodeMapping, ValueOf<CommandCodeMapping>> {
-  parameters: "";
+  parameters: ParamTable;
 
   /**
    * @description A mapping of commands to their parameter types.
