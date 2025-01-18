@@ -1,4 +1,4 @@
-export interface BranchCode {
+export type BranchCode = {
     SWITCH: 0;
     VARIABLE: 1;
     SELF_SWITCH: 2;
@@ -13,4 +13,4 @@ export interface BranchCode {
     BUTTON: 11;
     SCRIPT: 12;
     VEHICLE: 13;
-}
+};
