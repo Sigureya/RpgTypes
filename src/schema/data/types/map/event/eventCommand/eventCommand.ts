@@ -31,6 +31,8 @@ export type EventCodeKeys = keyof EventCodeTable;
 export type EventCommand = EventCommandsMapper["commandType"];
 export type EventCommandTable = EventCommandsMapper["commandTypeTable"];
 
+export type EventCommandParameters = EventCommandsMapper["parameters"];
+
 export type EventCommandByCode = EventCommandsMapper["commandByCode"];
 
 export type EventCommandsMapper = CommandTemplate<
