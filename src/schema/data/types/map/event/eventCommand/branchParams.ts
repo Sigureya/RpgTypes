@@ -29,7 +29,7 @@ export type BranchMapper = CommandTemplate<
     SELF_SWITCH: [
       branchCode: BranchCodeTable["SELF_SWITCH"],
       selfSwitchId: string,
-      value: boolean
+      value: ValueOf<Toggle>
     ];
     TIMER: [
       branchCode: BranchCodeTable["TIMER"],
