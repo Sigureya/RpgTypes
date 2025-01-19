@@ -6,7 +6,9 @@ import type {
 } from "./paramaters";
 import type { CommandTemplate } from "./types/";
 
-export type BranchParams = CommandTemplate<
+export type BranchParameters = BranchMapper["parameterTable"];
+
+export type BranchMapper = CommandTemplate<
   BranchCode,
   { branchBy: ValueOf<BranchCode>; params: unknown[] },
   "branchBy",
