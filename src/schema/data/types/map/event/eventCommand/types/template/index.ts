@@ -1,3 +1,3 @@
-export * from "./ct2";
+export * from "./commandTemplate";
 export * from "./pickByType";
 export * from "./mapRecord";

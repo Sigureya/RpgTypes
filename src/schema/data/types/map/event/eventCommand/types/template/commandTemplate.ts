@@ -1,5 +1,5 @@
-import type { PickByType } from "./filterByValue";
-
+import type { PickByType } from "./pickByType";
+import type { MapRecordToCode } from "./mapRecord";
 /**
  * Defines a simplified command template type.
  *
@@ -41,10 +41,11 @@ export interface CommandTemplate<
   ParameterPropertyKey extends keyof PickByType<Command, object>,
   CommandParameterMapping extends Record<
     keyof CommandCodeMapping,
-    Command[ParameterPropertyKey]
+    Command[ParameterPropertyKey] & object
   >
-> extends ConstructTable<
+> extends CommandTemplateWrapper<
     CommandCodeMapping,
+    CommandParameterMapping,
     {
       // Using `keyof Table` enables editor-friendly navigation to parameter definitions.
       // If `keyof CommandCodeMapping` were used, navigation would lead to constant definitions, which is less practical.
@@ -58,70 +59,61 @@ export interface CommandTemplate<
               : Command[Prop];
           }
         : never;
-    },
-    CodePropertyKey,
-    CommandParameterMapping
+    }
   > {}
 
-// テーブルの基底インターフェース
-// コマンドテンプレートで作成されたインターフェースを利用したいときに使う
-export interface C<
-  Command extends object,
-  MappingKey extends PropertyKey = PropertyKey,
-  Code extends string | number = string | number
+export interface CommandTemplateWrapper<
+  CommandCodeMapping extends Record<PropertyKey, string | number> = Record<
+    PropertyKey,
+    string | number
+  >,
+  CommandParameterMapping extends Record<PropertyKey, object> = Record<
+    PropertyKey,
+    object
+  >,
+  CommandObjectMapping extends Record<PropertyKey, object> = Record<
+    PropertyKey,
+    object
+  >
 > {
-  commandTypeTable: Record<MappingKey, Command>;
-  codeTable: Record<MappingKey, Code>;
-  commandByCode: Record<Code, Command>;
-  codeType: Code;
-  commandType: Command;
-  codeKeys: MappingKey;
-}
-
-/**
- * Constructs a type representing a command table.
- *
- * @template CommandCodeMapping - A record mapping command codes to their values.
- * @template CommandParameterMapping - A mapping of command codes to their respective parameter types.
- * @template CodeKey - A key used to associate codes with command objects.
- */
-interface ConstructTable<
-  CommandCodeMapping extends Record<PropertyKey, string | number>,
-  CommandParameterMapping extends Record<keyof CommandCodeMapping, object>,
-  CodeKey extends keyof CommandCodeMapping,
-  ParamTable extends Record<keyof (keyof CommandParameterMapping), object>
-> extends C<object, keyof CommandCodeMapping, ValueOf<CommandCodeMapping>> {
-  parameters: ParamTable;
+  /**
+   * @description A lookup table for commands by their code values.
+   **/
+  commandByCode: MapRecordToCode<CommandObjectMapping, CommandCodeMapping>;
 
   /**
-   * @description A mapping of commands to their parameter types.
-   **/
-  commandTypeTable: CommandParameterMapping;
+   * @description A lookup table for parameters by their code values.
+   */
+  parameterByCode: MapRecordToCode<CommandParameterMapping, CommandCodeMapping>;
+
+  /**
+   * @description A lookup table for command codes by their parameter values.
+   */
+  parameterTable: CommandParameterMapping;
+
+  /**
+   * @description A lookup table for command types by their code values.
+   */
+  commandTypeTable: CommandObjectMapping;
+
   /**
    * @description A mapping of command codes to their values.
    */
   codeTable: CommandCodeMapping;
-  /**
-   * @description A lookup table for commands by their code values.
-   **/
-  commandByCode: {
-    [Code in CommandCodeMapping[keyof CommandCodeMapping]]: Extract<
-      ValueOf<CommandParameterMapping>,
-      { [Key in CodeKey]: Code }
-    >;
-  };
+
   /**
    * @description The union type of command code values.
    */
   codeType: ValueOf<CommandCodeMapping>;
+
   /**
    * @description The union type of all parameter objects in the command table.
    **/
-  commandType: ValueOf<CommandParameterMapping>;
+  commandType: ValueOf<CommandObjectMapping>;
   /**
    * @description Keys representing the commands in the table.
    **/
-  codeKeys: keyof CommandParameterMapping;
+  codeKeys: CommandCodeMapping;
 }
 
 /** Extracts the value type of a record. */

@@ -161,7 +161,7 @@ describe("createEventCommand", () => {
 });
 describe("createEventCommand", () => {
   it("should create a PLUGIN_COMMAND_MZ command", () => {
-    const code: EventCommandTable["PLUGIN_COMMAND_MZ"]["code"] = 357;
+    const code: EventCodeTable["PLUGIN_COMMAND_MZ"] = 357;
     const params: EventCommandTable["PLUGIN_COMMAND_MZ"]["parameters"] = [
       "CustomPlugin",
       "CustomCommand",

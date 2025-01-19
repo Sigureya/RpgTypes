@@ -7,7 +7,7 @@ import type { MapRecordToCode } from "./mapRecord";
  * @template ParameterObject - An object type representing the keys used for command parameters.
  * @template CommandParameterMapping - A record mapping command codes to their parameter types.
  */
-export interface CommandTemplateSimple<CommandCodeMapping extends Record<PropertyKey, string | number>, ParameterObject extends object, CommandParameterMapping extends Record<keyof CommandCodeMapping, ParameterObject>> extends CommandTemplate<CommandCodeMapping, {
+export interface CommandTemplateSimple2<CommandCodeMapping extends Record<PropertyKey, string | number>, ParameterObject extends object, CommandParameterMapping extends Record<keyof CommandCodeMapping, ParameterObject>> extends CommandTemplate2<CommandCodeMapping, {
     code: ValueOf<CommandCodeMapping>;
     parameters: object;
 }, "code", "parameters", CommandParameterMapping> {
@@ -21,28 +21,18 @@ export interface CommandTemplateSimple<CommandCodeMapping extends Record<Propert
  * @template ParameterPropertyKey - A key representing the command's parameter property.
  * @template CommandParameterMapping - A record mapping command codes to their parameter types.
  */
-export interface CommandTemplate<CommandCodeMapping extends Record<PropertyKey, string | number>, Command extends object, CodePropertyKey extends keyof PickByType<Command, ValueOf<CommandCodeMapping>>, ParameterPropertyKey extends keyof PickByType<Command, object>, CommandParameterMapping extends Record<keyof CommandCodeMapping, Command[ParameterPropertyKey] & object>> extends CommandTemplateWrapper<CommandCodeMapping, CommandParameterMapping, {
+export interface CommandTemplate2<CommandCodeMapping extends Record<PropertyKey, string | number>, Command extends object, CodePropertyKey extends keyof PickByType<Command, ValueOf<CommandCodeMapping>>, ParameterPropertyKey extends keyof PickByType<Command, object>, CommandParameterMapping extends Record<keyof CommandCodeMapping, Command[ParameterPropertyKey] & object>> extends CommandTemplateWrapper<Command, CommandCodeMapping, CommandParameterMapping, {
     [Key in keyof CommandParameterMapping]: Key extends keyof CommandCodeMapping ? {
         [Prop in keyof Command]: Prop extends ParameterPropertyKey ? CommandParameterMapping[Key] : Prop extends CodePropertyKey ? CommandCodeMapping[Key] : Command[Prop];
     } : never;
 }> {
 }
-export interface CommandTemplateWrapper<CommandCodeMapping extends Record<PropertyKey, string | number> = Record<PropertyKey, string | number>, CommandParameterMapping extends Record<PropertyKey, object> = Record<PropertyKey, object>, CommandObjectMapping extends Record<PropertyKey, object> = Record<PropertyKey, object>> {
+export interface CommandTemplateWrapper<Command extends object = object, CommandCodeMapping extends Record<PropertyKey, string | number> = Record<PropertyKey, string | number>, CommandParameterMapping extends Record<PropertyKey, object> = Record<PropertyKey, object>, CommandObjectMapping extends Record<PropertyKey, object> = Record<PropertyKey, object>> {
     /**
      * @description A lookup table for commands by their code values.
      **/
     commandByCode: MapRecordToCode<CommandObjectMapping, CommandCodeMapping>;
-    /**
-     * @description A lookup table for parameters by their code values.
-     */
-    parameterByCode: MapRecordToCode<CommandParameterMapping, CommandCodeMapping>;
-    /**
-     * @description A lookup table for command codes by their parameter values.
-     */
-    parameterTable: CommandParameterMapping;
-    /**
-     * @description A lookup table for command types by their code values.
-     */
+    parameterTypes: CommandParameterMapping;
     commandTypeTable: CommandObjectMapping;
     /**
      * @description A mapping of command codes to their values.
@@ -55,12 +45,7 @@ export interface CommandTemplateWrapper<CommandCodeMapping extends Record<Proper
     /**
      * @description The union type of all parameter objects in the command table.
      **/
-    commandType: ValueOf<CommandObjectMapping>;
-    /**
-     * @description Keys representing the commands in the table.
-     **/
-    codeKeys: CommandCodeMapping;
+    commandType: Command;
 }
-/** Extracts the value type of a record. */
 type ValueOf<T extends Record<PropertyKey, unknown>> = T[keyof T];
 export {};
