@@ -39,6 +39,7 @@ export declare const CHANGE_VEHICLE_ME: 140;
 export declare const TRANSFER_PLAYER: 201;
 export declare const SET_VEHICLE_LOCATION: 202;
 export declare const SET_EVENT_LOCATION: 203;
+export declare const SCROLL_MAP: 204;
 export declare const SET_MOVEMENT_ROUTE: 205;
 export declare const GET_ONOFF_VEHICLE: 206;
 export declare const CHANGE_TRANSPARENCY: 211;

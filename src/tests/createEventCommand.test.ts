@@ -1,10 +1,16 @@
 import { createEventCommand, showMessage } from "./createEventCommand";
-import type { EventCode, EventCommand, EventCommandTypes } from "../";
+import type {
+  EventCode,
+  EventCodeTable,
+  EventCommand,
+  EventCommandParameters,
+  EventCommandTable,
+} from "../";
 import { describe, expect, it } from "vitest";
 describe("createEventCommand", () => {
   it("should create a SHOW_MESSAGE command", () => {
     const code: EventCode = 101;
-    const params: EventCommandTypes["SHOW_MESSAGE"]["parameters"] = [
+    const params: EventCommandTable["SHOW_MESSAGE"]["parameters"] = [
       "HeroFace",
       1,
       0,
@@ -24,9 +30,7 @@ describe("createEventCommand", () => {
 
   it("should create a CONTROL_SWITCHES command", () => {
     const code: EventCode = 121;
-    const params: EventCommandTypes["CONTROL_SWITCHES"]["parameters"] = [
-      1, 10, 1,
-    ];
+    const params: EventCommandParameters["CONTROL_SWITCHES"] = [1, 10, 1];
     const indent = 0;
 
     const result = createEventCommand(code, params, indent);
@@ -40,7 +44,7 @@ describe("createEventCommand", () => {
 
   it("should create a SHOW_SCROLLING_TEXT command", () => {
     const code: EventCode = 105;
-    const params: EventCommandTypes["SHOW_SCROLLING_TEXT"]["parameters"] = [
+    const params: EventCommandTable["SHOW_SCROLLING_TEXT"]["parameters"] = [
       4,
       true,
     ];
@@ -56,8 +60,8 @@ describe("createEventCommand", () => {
   });
 
   it("should create a CHANGE_GOLD command", () => {
-    const code: EventCommandTypes["CHANGE_GOLD"]["code"] = 125;
-    const params: EventCommandTypes["CHANGE_GOLD"]["parameters"] = [0, 0, 100];
+    const code: EventCommandTable["CHANGE_GOLD"]["code"] = 125;
+    const params: EventCommandTable["CHANGE_GOLD"]["parameters"] = [0, 0, 100];
     const indent = 0;
 
     const result = createEventCommand(code, params, indent);
@@ -70,8 +74,8 @@ describe("createEventCommand", () => {
   });
 
   it("should create a PLUGIN_COMMAND_MZ command", () => {
-    const code: EventCommandTypes["PLUGIN_COMMAND_MZ"]["code"] = 357;
-    const params: EventCommandTypes["PLUGIN_COMMAND_MZ"]["parameters"] = [
+    const code: EventCommandTable["PLUGIN_COMMAND_MZ"]["code"] = 357;
+    const params: EventCommandTable["PLUGIN_COMMAND_MZ"]["parameters"] = [
       "CustomPlugin",
       "CustomCommand",
       "CustomData",
@@ -89,8 +93,8 @@ describe("createEventCommand", () => {
   });
 
   it("should create a TRANSFER_PLAYER command", () => {
-    const code: EventCommandTypes["TRANSFER_PLAYER"]["code"] = 201;
-    const params: EventCommandTypes["TRANSFER_PLAYER"]["parameters"] = [
+    const code: EventCodeTable["TRANSFER_PLAYER"] = 201;
+    const params: EventCommandTable["TRANSFER_PLAYER"]["parameters"] = [
       0, 0, 0, 0, 2, 0,
     ];
     const indent = 0;
@@ -105,8 +109,8 @@ describe("createEventCommand", () => {
   });
 
   it("should create a BATTLE_PROCESSING command", () => {
-    const code: EventCommandTypes["BATTLE_PROCESSING"]["code"] = 301;
-    const params: EventCommandTypes["BATTLE_PROCESSING"]["parameters"] = [
+    const code: EventCommandTable["BATTLE_PROCESSING"]["code"] = 301;
+    const params: EventCommandTable["BATTLE_PROCESSING"]["parameters"] = [
       0,
       7,
       false,
@@ -124,8 +128,8 @@ describe("createEventCommand", () => {
   });
 
   it("should create a CHANGE_PARTY_MEMBER command", () => {
-    const code: EventCommandTypes["CHANGE_PARTY_MEMBER"]["code"] = 129;
-    const params: EventCommandTypes["CHANGE_PARTY_MEMBER"]["parameters"] = [
+    const code: EventCommandTable["CHANGE_PARTY_MEMBER"]["code"] = 129;
+    const params: EventCommandTable["CHANGE_PARTY_MEMBER"]["parameters"] = [
       1,
       0,
       false,
@@ -142,8 +146,8 @@ describe("createEventCommand", () => {
   });
 
   it("should create a SET_EVENT_LOCATION command", () => {
-    const code: EventCommandTypes["SET_EVENT_LOCATION"]["code"] = 203;
-    const params: EventCommandTypes["SET_EVENT_LOCATION"]["parameters"] = [];
+    const code: EventCommandTable["SET_EVENT_LOCATION"]["code"] = 203;
+    const params: EventCommandTable["SET_EVENT_LOCATION"]["parameters"] = [];
     const indent = 2;
 
     const result = createEventCommand(code, params, indent);
@@ -157,8 +161,8 @@ describe("createEventCommand", () => {
 });
 describe("createEventCommand", () => {
   it("should create a PLUGIN_COMMAND_MZ command", () => {
-    const code: EventCommandTypes["PLUGIN_COMMAND_MZ"]["code"] = 357;
-    const params: EventCommandTypes["PLUGIN_COMMAND_MZ"]["parameters"] = [
+    const code: EventCodeTable["PLUGIN_COMMAND_MZ"] = 357;
+    const params: EventCommandTable["PLUGIN_COMMAND_MZ"]["parameters"] = [
       "CustomPlugin",
       "CustomCommand",
       "CustomData",

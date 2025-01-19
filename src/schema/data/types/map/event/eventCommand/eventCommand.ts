@@ -8,12 +8,10 @@ import type {
   ShopProcessing,
   ShowPicture,
   ValueOf,
-} from "./paramaters";
-import type {
   Designation,
   Toggle,
   Operation_PlusMinus,
-} from "./paramaters/constants";
+} from "./paramaters";
 import type {
   AudioFileParams,
   CommandTemplate,
@@ -25,9 +23,15 @@ import type {
 export * from "./paramaters";
 export * from "./eventCommandCodes";
 export type EventCode = EventCommandsMapper["codeType"];
-export type EventCommandTypes = EventCommandsMapper["commandTypeTable"];
-export type EventCommandTable = EventCommandsMapper["commandByCode"];
+export type EventCodeTable = EventCommandsMapper["codeTable"];
+export type EventCodeKeys = keyof EventCodeTable;
+
 export type EventCommand = EventCommandsMapper["commandType"];
+export type EventCommandTable = EventCommandsMapper["commandTypeTable"];
+
+export type EventCommandParameters = EventCommandsMapper["parameterTable"];
+
+export type EventCommandByCode = EventCommandsMapper["commandByCode"];
 
 export type EventCommandsMapper = CommandTemplate<
   typeof EventCommandCodes,

@@ -1,2 +1,3 @@
 export * from "./commandTemplate";
-export * from "./filterByValue";
+export * from "./pickByType";
+export * from "./mapRecord";

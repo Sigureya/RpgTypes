@@ -1,5 +1,5 @@
 import type { BranchCode, Operation_PlusMinus, Toggle, ValueOf } from "./paramaters";
-import type { CommandTemplate } from "./types";
+import type { CommandTemplate } from "./types/";
 export type BranchParams = CommandTemplate<BranchCode, {
     branchBy: ValueOf<BranchCode>;
     params: unknown[];

@@ -41,7 +41,7 @@ export const CHANGE_VEHICLE_ME = 140 as const;
 export const TRANSFER_PLAYER = 201 as const;
 export const SET_VEHICLE_LOCATION = 202 as const;
 export const SET_EVENT_LOCATION = 203 as const;
-
+export const SCROLL_MAP = 204 as const;
 export const SET_MOVEMENT_ROUTE = 205 as const;
 export const GET_ONOFF_VEHICLE = 206 as const;
 export const CHANGE_TRANSPARENCY = 211 as const;

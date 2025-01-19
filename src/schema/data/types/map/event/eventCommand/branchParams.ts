@@ -4,7 +4,7 @@ import type {
   Toggle,
   ValueOf,
 } from "./paramaters";
-import type { CommandTemplate } from "./types";
+import type { CommandTemplate } from "./types/";
 
 export type BranchParams = CommandTemplate<
   BranchCode,
