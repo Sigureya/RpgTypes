@@ -1,4 +1,6 @@
-export type BranchCode = {
+import type { ValueOf } from "./valueOf";
+
+export type BranchCodeTable = {
   SWITCH: 0;
   VARIABLE: 1;
   SELF_SWITCH: 2;
@@ -14,3 +16,4 @@ export type BranchCode = {
   SCRIPT: 12;
   VEHICLE: 13;
 };
+export type BranchCode = ValueOf<BranchCodeTable>;
