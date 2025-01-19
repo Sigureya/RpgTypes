@@ -1,4 +1,4 @@
-import type { BranchParams } from "./branchParams";
+import type { BranchMapper, BranchParameters } from "./branchParams";
 import type * as EventCommandCodes from "./eventCommandCodes";
 import type {
   ChanageActorVariable,
@@ -107,7 +107,7 @@ export type EventCommandsMapper = CommandTemplate<
     /**
      * @description Conditional Branch
      */
-    CONDITIONAL_BRANCH: BranchParams["commandType"]["params"];
+    CONDITIONAL_BRANCH: BranchMapper["commandType"]["params"];
     /**
      * @description Else (Conditional Branch)
      */

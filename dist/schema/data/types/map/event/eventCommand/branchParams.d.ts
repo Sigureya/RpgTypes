@@ -1,6 +1,7 @@
 import type { BranchCode, Operation_PlusMinus, Toggle, ValueOf } from "./paramaters";
 import type { CommandTemplate } from "./types/";
-export type BranchParams = CommandTemplate<BranchCode, {
+export type BranchParameters = BranchMapper["parameterTable"];
+export type BranchMapper = CommandTemplate<BranchCode, {
     branchBy: ValueOf<BranchCode>;
     params: unknown[];
 }, "branchBy", "params", {

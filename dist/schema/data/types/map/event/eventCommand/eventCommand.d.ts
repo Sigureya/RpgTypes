@@ -1,4 +1,4 @@
-import type { BranchParams } from "./branchParams";
+import type { BranchMapper } from "./branchParams";
 import type * as EventCommandCodes from "./eventCommandCodes";
 import type { ChanageActorVariable, ControlVariables, MovePicture, ShopGoods, ShopProcessing, ShowPicture, ValueOf, Designation, Toggle, Operation_PlusMinus } from "./paramaters";
 import type { AudioFileParams, CommandTemplate, ColorRGBA, Direction8, MoveRouteData } from "./types";
@@ -73,7 +73,7 @@ export type EventCommandsMapper = CommandTemplate<typeof EventCommandCodes, {
     /**
      * @description Conditional Branch
      */
-    CONDITIONAL_BRANCH: BranchParams["commandType"]["params"];
+    CONDITIONAL_BRANCH: BranchMapper["commandType"]["params"];
     /**
      * @description Else (Conditional Branch)
      */
