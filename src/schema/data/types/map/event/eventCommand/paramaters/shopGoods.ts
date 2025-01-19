@@ -1,10 +1,10 @@
 import type { ValueOf } from "./constants";
 
-export interface GoodsType {
+export type GoodsType = {
   item: 0;
   weapon: 1;
   armors: 2;
-}
+};
 
 type GOODS_TYPES = ValueOf<GoodsType>;
 
