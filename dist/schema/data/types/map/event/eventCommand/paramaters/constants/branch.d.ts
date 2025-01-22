@@ -1,4 +1,4 @@
-import type { ValueOf } from "./valueOf";
+import { ValueOf } from './valueOf';
 export type BranchCodeTable = {
     SWITCH: 0;
     VARIABLE: 1;

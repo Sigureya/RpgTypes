@@ -1,4 +1,4 @@
-import type { EventCommand } from "./map";
+import { EventCommand } from './map';
 export interface Conditions {
     actorHp: number;
     actorId: number;

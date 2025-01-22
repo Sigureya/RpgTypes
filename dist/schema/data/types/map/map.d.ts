@@ -1,7 +1,7 @@
-import type { MapEvent } from "./event";
-import type { Encounter } from "./encounter";
-import type { AudioFileParams } from "./event/eventCommand/types/audioFileParams";
-export * from "./event";
+import { MapEvent } from './event';
+import { Encounter } from './encounter';
+import { AudioFileParams } from './event/eventCommand/types/audioFileParams';
+export * from './event';
 interface Map_Filenames {
     battleback1Name: string;
     battleback2Name: string;

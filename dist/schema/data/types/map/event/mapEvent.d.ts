@@ -1,4 +1,4 @@
-import type { MapEventPage } from "./page";
+import { MapEventPage } from './page';
 export interface MapEvent {
     id: number;
     name: string;

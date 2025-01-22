@@ -1,5 +1,5 @@
-import type { ValueOf } from "./valueOf";
-import type { CHARACTER, GAMEDATA, LAST, OPERAND, OTHER, STATUS } from "./operand";
+import { ValueOf } from './valueOf';
+import { CHARACTER, GAMEDATA, LAST, OPERAND, OTHER, STATUS } from './operand';
 type Header = [startId: number, endId: number, operationType: number];
 type OperandConstant = [operand: OPERAND["CONSTANT"], value: number];
 type OperandVariable = [operand: OPERAND["VARIABLE"], variableId: number];

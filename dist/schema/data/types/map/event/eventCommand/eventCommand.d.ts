@@ -1,9 +1,9 @@
-import type { BranchMapper } from "./branchParams";
+import { BranchMapper } from './branchParams';
+import { ChanageActorVariable, ControlVariables, MovePicture, ShopGoods, ShopProcessing, ShowPicture, ValueOf, Designation, Toggle, Operation_PlusMinus } from './paramaters';
+import { AudioFileParams, CommandTemplate, ColorRGBA, Direction8, MoveRouteData } from './types';
 import type * as EventCommandCodes from "./eventCommandCodes";
-import type { ChanageActorVariable, ControlVariables, MovePicture, ShopGoods, ShopProcessing, ShowPicture, ValueOf, Designation, Toggle, Operation_PlusMinus } from "./paramaters";
-import type { AudioFileParams, CommandTemplate, ColorRGBA, Direction8, MoveRouteData } from "./types";
-export * from "./paramaters";
-export * from "./eventCommandCodes";
+export * from './paramaters';
+export * from './eventCommandCodes';
 export type EventCode = EventCommandsMapper["codeType"];
 export type EventCodeTable = EventCommandsMapper["codeTable"];
 export type EventCodeKeys = keyof EventCodeTable;

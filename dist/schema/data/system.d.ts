@@ -1,6 +1,6 @@
-import type { TestBattlers, AttackMotion, System_Advanced, System_Terms } from "./systemMembers";
-import type { AudioFileParams, ColorRGBA } from "./types";
-import type { Data_Vehicle } from "./vehicle";
+import { TestBattlers, AttackMotion, System_Advanced, System_Terms } from './systemMembers';
+import { AudioFileParams, ColorRGBA } from './types';
+import { Data_Vehicle } from './vehicle';
 export interface Data_System {
     battleback1Name: string;
     battleback2Name: string;

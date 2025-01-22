@@ -1,4 +1,4 @@
-import type { ISprite } from "./spriteInterface";
+import { ISprite } from './spriteInterface';
 export interface AnimatinField<T> {
     findTargetSprite(target: T): ISprite;
 }

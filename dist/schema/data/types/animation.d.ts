@@ -1,5 +1,5 @@
-import type { Data_NamedItem } from "./main";
-import type { AudioFileParams, ColorRGBA } from "./map";
+import { Data_NamedItem } from './main';
+import { AudioFileParams, ColorRGBA } from './map';
 export interface FlashTiming {
     frame: number;
     duration: number;
