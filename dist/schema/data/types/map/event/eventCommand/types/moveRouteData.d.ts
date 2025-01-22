@@ -1,4 +1,4 @@
-import type { MoveRouteCommand } from "./moveRouteCommand";
+import { MoveRouteCommand } from './moveRouteCommand';
 export interface MoveRouteData {
     wait: boolean;
     repeat: boolean;

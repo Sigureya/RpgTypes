@@ -1,4 +1,4 @@
-import type { Data_NamedItem, Data_TraitContainer, Learning, ParamArray, Trait } from "./bases";
+import { Data_NamedItem, Data_TraitContainer, Learning, ParamArray, Trait } from './bases';
 export interface Data_Class extends Data_NamedItem, Data_TraitContainer {
     name: string;
     id: number;

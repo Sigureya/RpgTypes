@@ -1,4 +1,4 @@
-import type { Data_TraitContainer, Data_NamedItem, Trait } from "./bases";
+import { Data_TraitContainer, Data_NamedItem, Trait } from './bases';
 export interface Data_Actor extends Data_TraitContainer, Data_NamedItem {
     name: string;
     id: number;

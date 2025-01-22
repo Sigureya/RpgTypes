@@ -1,6 +1,6 @@
-import type { Data_TraitContainer, Trait } from "./trait";
-import type { Data_Goods } from "./goods";
-import type { ParamArray } from "./members";
+import { Data_TraitContainer, Trait } from './trait';
+import { Data_Goods } from './goods';
+import { ParamArray } from './members';
 export interface Data_Equipment extends Data_Goods, Data_TraitContainer {
     name: string;
     id: number;
