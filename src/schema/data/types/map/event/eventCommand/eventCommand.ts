@@ -271,8 +271,11 @@ export type EventCommandsMapper = CommandTemplate<
     PLAY_BGM: [value: AudioFileParams];
     FADEOUT_BGM: [duration: number];
     PLAY_BGS: [value: AudioFileParams];
+    FADEOUT_BGS: [duration: number];
     PLAY_SE: [value: AudioFileParams];
+    STOP_SE: [];
     PLAY_ME: [value: AudioFileParams];
+    PLAY_MOVIE: [filename: string];
 
     SAVE_BGM: [];
     RESUME_BGM: [];
@@ -284,6 +287,7 @@ export type EventCommandsMapper = CommandTemplate<
     CHANGE_TP: ChanageActorVariable;
 
     CHANGE_NAME: [actorId: number, name: string];
+    CHANGE_CLASS: [actorId: number, classId: number, keepExp: boolean];
 
     CHANGE_PARALLAX: [
       name: string,
@@ -359,6 +363,9 @@ export type EventCommandsMapper = CommandTemplate<
      */
     CHANGE_PROFILE: [actorId: number, name: string];
 
+    OPEN_SAVE_SCREEN: [];
+    GAME_OVER: [];
+    RETURN_TO_TITLE_SCREEN: [];
     /**
      * @description  Script Eval
      */

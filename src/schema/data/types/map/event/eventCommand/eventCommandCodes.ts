@@ -70,12 +70,17 @@ export const SAVE_BGM = 243 as const;
 export const RESUME_BGM = 244 as const;
 
 export const PLAY_BGS = 245 as const;
+export const FADEOUT_BGS = 246 as const;
 export const PLAY_ME = 249 as const;
 export const PLAY_SE = 250 as const;
+export const STOP_SE = 251 as const;
+
+export const PLAY_MOVIE = 261 as const;
 
 export const CHANGE_TILESET = 282 as const;
 export const CHANGE_BATTLE_BACKGROUND = 283 as const;
 export const CHANGE_PARALLAX = 284 as const;
+// export const GET_LOCATION_INFO = 285 as const;
 
 export const BATTLE_PROCESSING = 301 as const;
 
@@ -87,10 +92,15 @@ export const CHANGE_MP = 312 as const;
 export const CHANGE_TP = 313 as const;
 
 export const CHANGE_NAME = 320 as const;
+export const CHANGE_CLASS = 321 as const;
 export const CHANGE_ACTOR_IMAGES = 322 as const;
 export const CHANGE_VEHICLE_IMAGE = 323 as const;
 export const CHANGE_NICKNAME = 324 as const;
 export const CHANGE_PROFILE = 325 as const;
+export const OPEN_SAVE_SCREEN = 352 as const;
+export const GAME_OVER = 353 as const;
+export const RETURN_TO_TITLE_SCREEN = 354 as const;
+
 export const SCRIPT_EVAL = 355 as const;
 export const SCRIPT_EVAL_BODY = 655 as const;
 export const PLUGIN_COMMAND_MV = 356 as const;
