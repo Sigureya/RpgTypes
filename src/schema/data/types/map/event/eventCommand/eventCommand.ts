@@ -34,6 +34,11 @@ export type EventCommandParameters = EventCommandsMapper["parameterTable"];
 
 export type EventCommandByCode = EventCommandsMapper["commandByCode"];
 
+export interface EventCommandLike {
+  code: EventCode;
+  parameters: unknown[];
+  indent: number;
+}
 export type IndexOfCommandParameter<
   Command extends { parameters: unknown[] },
   T
@@ -41,11 +46,7 @@ export type IndexOfCommandParameter<
 
 export type EventCommandsMapper = CommandTemplate<
   typeof EventCommandCodes,
-  {
-    code: EventCode;
-    parameters: unknown[];
-    indent: number;
-  },
+  EventCommandLike,
   "code",
   "parameters",
   {
