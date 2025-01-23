@@ -19,3 +19,11 @@ export type StringKeysWithoutNote<T> = Exclude<
   keyof PickByType<T, string>,
   "note"
 >;
+
+/**
+ * type Example = AsRecord<[number,string]>  // { 0: number, 1: string }
+ */
+export type AsRecord<P extends unknown[], Value = unknown> = Omit<
+  PickByType<P, Value>,
+  keyof PickByType<P, undefined>
+>;
