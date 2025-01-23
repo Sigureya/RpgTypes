@@ -4,9 +4,9 @@ export type Command_ShowMessage = EventCommandTable["SHOW_MESSAGE"];
 export type Command_ShowMessageBody = EventCommandTable["SHOW_MESSAGE_BODY"];
 export type Command_ShowChoices = EventCommandTable["SHOW_CHOICES"];
 export type Command_ShowChoicesItem = EventCommandTable["SHOW_CHOICES_ITEM"];
-export type Command_showScrollingText =
+export type Command_ShowScrollingText =
   EventCommandTable["SHOW_SCROLLING_TEXT"];
-export type Command_showScrollingTextBody =
+export type Command_ShowScrollingTextBody =
   EventCommandTable["SHOW_SCROLLING_TEXT_BODY"];
 export type Command_InputNumber = EventCommandTable["INPUT_NUMBER"];
 export type Command_SelectItem = EventCommandTable["SELECT_ITEM"];
@@ -95,6 +95,17 @@ export type Command_PluginCommand = EventCommandTable["PLUGIN_COMMAND_MV"];
 export type Command_ChangeNickname = EventCommandTable["CHANGE_NICKNAME"];
 
 export type Command_ChangeProfile = EventCommandTable["CHANGE_PROFILE"];
+export type Command_ChangeNickName = EventCommandTable["CHANGE_NICKNAME"];
+export type Command_ChangeName = EventCommandTable["CHANGE_NAME"];
+
+export type Command_ChangeHP = EventCommandTable["CHANGE_HP"];
+export type Command_ChangeMP = EventCommandTable["CHANGE_MP"];
+export type Command_ChangeTP = EventCommandTable["CHANGE_TP"];
+export type Command_ChangeActorImages =
+  EventCommandTable["CHANGE_ACTOR_IMAGES"];
+export type Command_ChangeVehicleImage =
+  EventCommandTable["CHANGE_VEHICLE_IMAGE"];
+
 export type Command_ScriptEval = EventCommandTable["SCRIPT_EVAL"];
 export type Command_ScriptEvalBody = EventCommandTable["SCRIPT_EVAL_BODY"];
 export type Command_PluginCommandMZ = EventCommandTable["PLUGIN_COMMAND_MZ"];
