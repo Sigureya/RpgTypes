@@ -11,14 +11,15 @@ export type EventCommand = EventCommandsMapper["commandType"];
 export type EventCommandTable = EventCommandsMapper["commandTypeTable"];
 export type EventCommandParameters = EventCommandsMapper["parameterTable"];
 export type EventCommandByCode = EventCommandsMapper["commandByCode"];
-export type IndexOfCommandParameter<Command extends {
-    parameters: unknown[];
-}, T> = IndexOfParameter<Command["parameters"], T>;
-export type EventCommandsMapper = CommandTemplate<typeof EventCommandCodes, {
+export interface EventCommandLike {
     code: EventCode;
     parameters: unknown[];
     indent: number;
-}, "code", "parameters", {
+}
+export type IndexOfCommandParameter<Command extends {
+    parameters: unknown[];
+}, T> = IndexOfParameter<Command["parameters"], T>;
+export type EventCommandsMapper = CommandTemplate<typeof EventCommandCodes, EventCommandLike, "code", "parameters", {
     NO_OPERATION: [];
     /**
      * @description Show Text
