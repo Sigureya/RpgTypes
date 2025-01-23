@@ -1,89 +1,275 @@
-import { EventCommandTable } from './eventCommand';
-export type Command_ShowMessage = EventCommandTable["SHOW_MESSAGE"];
-export type Command_ShowMessageBody = EventCommandTable["SHOW_MESSAGE_BODY"];
-export type Command_ShowChoices = EventCommandTable["SHOW_CHOICES"];
-export type Command_ShowChoicesItem = EventCommandTable["SHOW_CHOICES_ITEM"];
-export type Command_ShowScrollingText = EventCommandTable["SHOW_SCROLLING_TEXT"];
-export type Command_ShowScrollingTextBody = EventCommandTable["SHOW_SCROLLING_TEXT_BODY"];
-export type Command_InputNumber = EventCommandTable["INPUT_NUMBER"];
-export type Command_SelectItem = EventCommandTable["SELECT_ITEM"];
-export type Command_NoOperation = EventCommandTable["NO_OPERATION"];
-export type Command_Comment = EventCommandTable["COMMENT"];
-export type Command_CommentBody = EventCommandTable["COMMENT_BODY"];
-export type Command_Skip = EventCommandTable["SKIP"];
-export type Command_ConditionalBranch = EventCommandTable["CONDITIONAL_BRANCH"];
-export type Command_ConditionalBranchElse = EventCommandTable["CONDITIONAL_BRANCH_ELSE"];
-export type Command_Loop = EventCommandTable["LOOP"];
-export type Command_LoopBreak = EventCommandTable["LOOP_BREAK"];
-export type Command_ExitEventProcessing = EventCommandTable["EXIT_EVENT_PROCESSING"];
-export type Command_CommonEvent = EventCommandTable["COMMON_EVENT"];
-export type Command_Label = EventCommandTable["LABEL"];
-export type Command_LabelJump = EventCommandTable["LABEL_JUMP"];
-export type Command_ControlSwitches = EventCommandTable["CONTROL_SWITCHES"];
-export type Command_ControlVariables = EventCommandTable["CONTROL_VARIABLES"];
-export type Command_ControlSelfSwitch = EventCommandTable["CONTROL_SELF_SWITCH"];
-export type Command_ControlTimer = EventCommandTable["CONTROL_TIMER"];
-export type Command_ChangeGold = EventCommandTable["CHANGE_GOLD"];
-export type Command_ChangeItems = EventCommandTable["CHANGE_ITEMS"];
-export type Command_ChangeWeapons = EventCommandTable["CHANGE_WEAPONS"];
-export type Command_ChangeArmors = EventCommandTable["CHANGE_ARMORS"];
-export type Command_ChangePartyMember = EventCommandTable["CHANGE_PARTY_MEMBER"];
-export type Command_ChangeBattleBGM = EventCommandTable["CHANGE_BATTLE_BGM"];
-export type Command_ChangeVictoryME = EventCommandTable["CHANGE_VICTORY_ME"];
-export type Command_ChangeSaveAccess = EventCommandTable["CHANGE_SAVE_ACCESS"];
-export type Command_ChangeMenuAccess = EventCommandTable["CHANGE_MENU_ACCESS"];
-export type Command_ChangeEncounter = EventCommandTable["CHANGE_ENCOUNTER"];
-export type Command_ChangeFormationAccess = EventCommandTable["CHANGE_FORMATION_ACCESS"];
-export type Command_ChangeWindowColor = EventCommandTable["CHANGE_WINDOW_COLOR"];
-export type Command_ChangeDefeatME = EventCommandTable["CHANGE_DEFEAT_ME"];
-export type Command_ChangeVehicleME = EventCommandTable["CHANGE_VEHICLE_ME"];
-export type Command_TransferPlayer = EventCommandTable["TRANSFER_PLAYER"];
-export type Command_SetVehicleLocation = EventCommandTable["SET_VEHICLE_LOCATION"];
-export type Command_SetEventLocation = EventCommandTable["SET_EVENT_LOCATION"];
-export type Command_ScrollMap = EventCommandTable["SCROLL_MAP"];
-export type Command_SetMovementRoute = EventCommandTable["SET_MOVEMENT_ROUTE"];
-export type Command_GetOnoffVehicle = EventCommandTable["GET_ONOFF_VEHICLE"];
-export type Command_ChangeTransparency = EventCommandTable["CHANGE_TRANSPARENCY"];
-export type Command_ShowAnimation = EventCommandTable["SHOW_ANIMATION"];
-export type Command_ShowBalloonIcon = EventCommandTable["SHOW_BALLOON_ICON"];
-export type Command_EraseEvent = EventCommandTable["ERASE_EVENT"];
-export type Command_ChangePlayerFollowers = EventCommandTable["CHANGE_PLAYER_FOLLOWERS"];
-export type Command_GatherFollowers = EventCommandTable["GATHER_FOLLOWERS"];
-export type Command_FadeoutScreen = EventCommandTable["FADEOUT_SCREEN"];
-export type Command_FadeinScreen = EventCommandTable["FADEIN_SCREEN"];
-export type Command_TintScreen = EventCommandTable["TINT_SCREEN"];
-export type Command_FlashScreen = EventCommandTable["FLASH_SCREEN"];
-export type Command_ShakeScreen = EventCommandTable["SHAKE_SCREEN"];
-export type Command_Wait = EventCommandTable["WAIT"];
-export type Command_ShowPicture = EventCommandTable["SHOW_PICTURE"];
-export type Command_MovePicture = EventCommandTable["MOVE_PICTURE"];
-export type Command_TintPicture = EventCommandTable["TINT_PICTURE"];
-export type Command_RotatePicture = EventCommandTable["ROTATE_PICTURE"];
-export type Command_ErasePicture = EventCommandTable["ERASE_PICTURE"];
-export type Command_SetWeatherEffect = EventCommandTable["SET_WEATHER_EFFECT"];
-export type Command_PlayBGM = EventCommandTable["PLAY_BGM"];
-export type Command_FadeoutBGM = EventCommandTable["FADEOUT_BGM"];
-export type Command_SaveBGM = EventCommandTable["SAVE_BGM"];
-export type Command_ResumeBGM = EventCommandTable["RESUME_BGM"];
-export type Command_PlayBGS = EventCommandTable["PLAY_BGS"];
-export type Command_PlayME = EventCommandTable["PLAY_ME"];
-export type Command_PlaySE = EventCommandTable["PLAY_SE"];
-export type Command_ChangeTileset = EventCommandTable["CHANGE_TILESET"];
-export type Command_ChangeBattleBackground = EventCommandTable["CHANGE_BATTLE_BACKGROUND"];
-export type Command_ChangeParallax = EventCommandTable["CHANGE_PARALLAX"];
-export type Command_BattleProcessing = EventCommandTable["BATTLE_PROCESSING"];
-export type Command_ShopProcessing = EventCommandTable["SHOP_PROCESSING"];
-export type Command_ShopProcessingBody = EventCommandTable["SHOP_PROCESSING_BODY"];
-export type Command_PluginCommand = EventCommandTable["PLUGIN_COMMAND_MV"];
-export type Command_ChangeNickname = EventCommandTable["CHANGE_NICKNAME"];
-export type Command_ChangeProfile = EventCommandTable["CHANGE_PROFILE"];
-export type Command_ChangeNickName = EventCommandTable["CHANGE_NICKNAME"];
-export type Command_ChangeName = EventCommandTable["CHANGE_NAME"];
-export type Command_ChangeHP = EventCommandTable["CHANGE_HP"];
-export type Command_ChangeMP = EventCommandTable["CHANGE_MP"];
-export type Command_ChangeTP = EventCommandTable["CHANGE_TP"];
-export type Command_ChangeActorImages = EventCommandTable["CHANGE_ACTOR_IMAGES"];
-export type Command_ChangeVehicleImage = EventCommandTable["CHANGE_VEHICLE_IMAGE"];
-export type Command_ScriptEval = EventCommandTable["SCRIPT_EVAL"];
-export type Command_ScriptEvalBody = EventCommandTable["SCRIPT_EVAL_BODY"];
-export type Command_PluginCommandMZ = EventCommandTable["PLUGIN_COMMAND_MZ"];
+import { EventCommandLike2 } from './eventComandLike';
+import { AudioFileParams, ColorRGBA, Direction8, MoveRouteData } from './types';
+import { ControlVariables, MovePicture, ShopGoods, ShowPicture, ValueOf, Toggle, Operation_PlusMinus } from './paramaters';
+export interface Command_ShowMessage extends EventCommandLike2<101, [
+    facename: string,
+    faceIndex: number,
+    background: number,
+    positionType: number,
+    speakerName: string
+]> {
+}
+export interface Command_ShowMessageBody extends EventCommandLike2<401, [content: string]> {
+}
+export interface Command_ShowChoices extends EventCommandLike2<102, [
+    choices: string[],
+    cancelType: number,
+    defaultType: number,
+    positionType: number,
+    background: number
+]> {
+}
+export interface Command_InputNumber extends EventCommandLike2<103, [variableId: number, digits: number]> {
+}
+export interface Command_SelectItem extends EventCommandLike2<104, [variableId: number, itemType: number]> {
+}
+export interface Command_ShowScrollingText extends EventCommandLike2<105, [speed: number, skip: boolean]> {
+}
+export interface Command_ShowScrollingTextBody extends EventCommandLike2<405, [content: string]> {
+}
+export interface Command_Comment extends EventCommandLike2<108, [content: string]> {
+}
+export interface Command_CommentBody extends EventCommandLike2<408, [content: string]> {
+}
+export interface Command_Skip extends EventCommandLike2<109, []> {
+}
+export interface Command_ConditionalBranch extends EventCommandLike2<111, [variableId: number, value: number]> {
+}
+export interface Command_ConditionalBranchElse extends EventCommandLike2<411, []> {
+}
+export interface Command_Loop extends EventCommandLike2<112, []> {
+}
+export interface Command_LoopBreak extends EventCommandLike2<113, []> {
+}
+export interface Command_ExitEventProcessing extends EventCommandLike2<115, []> {
+}
+export interface Command_CommonEvent extends EventCommandLike2<117, [eventId: number]> {
+}
+export interface Command_Label extends EventCommandLike2<118, [label: string]> {
+}
+export interface Command_LabelJump extends EventCommandLike2<119, [label: string]> {
+}
+export interface Command_ControlSwitches extends EventCommandLike2<121, [
+    min: number,
+    max: number,
+    value: ValueOf<Toggle>
+]> {
+}
+export interface Command_ControlVariables extends EventCommandLike2<122, ControlVariables> {
+}
+export interface Command_ControlSelfSwitch extends EventCommandLike2<123, [switchId: string, value: ValueOf<Toggle>]> {
+}
+export interface Command_ControlTimer extends EventCommandLike2<124, [
+    operation: ValueOf<Operation_PlusMinus>,
+    time: number
+]> {
+}
+export interface Command_ChangeGold extends EventCommandLike2<125, [
+    operation: ValueOf<Operation_PlusMinus>,
+    value: number
+]> {
+}
+export interface Command_ChangeItems extends EventCommandLike2<126, [
+    operation: ValueOf<Operation_PlusMinus>,
+    itemId: number,
+    value: number
+]> {
+}
+export interface Command_ChangeWeapons extends EventCommandLike2<127, [
+    operation: ValueOf<Operation_PlusMinus>,
+    weaponId: number,
+    value: number
+]> {
+}
+export interface Command_ChangeArmors extends EventCommandLike2<128, [
+    operation: ValueOf<Operation_PlusMinus>,
+    armorId: number,
+    value: number
+]> {
+}
+export interface Command_ChangePartyMember extends EventCommandLike2<129, [
+    operation: ValueOf<Operation_PlusMinus>,
+    actorId: number
+]> {
+}
+export interface Command_ChangeBattleBGM extends EventCommandLike2<132, [value: AudioFileParams]> {
+}
+export interface Command_ChangeVictoryME extends EventCommandLike2<133, [value: AudioFileParams]> {
+}
+export interface Command_ChangeSaveAccess extends EventCommandLike2<134, [value: ValueOf<Toggle>]> {
+}
+export interface Command_ChangeMenuAccess extends EventCommandLike2<135, []> {
+}
+export interface Command_ChangeEncounter extends EventCommandLike2<136, [value: ValueOf<Toggle>]> {
+}
+export interface Command_ChangeFormationAccess extends EventCommandLike2<137, [value: ValueOf<Toggle>]> {
+}
+export interface Command_ChangeWindowColor extends EventCommandLike2<138, [color: ColorRGBA]> {
+}
+export interface Command_ChangeDefeatME extends EventCommandLike2<139, [value: AudioFileParams]> {
+}
+export interface Command_ChangeVehicleME extends EventCommandLike2<140, [value: AudioFileParams]> {
+}
+export interface Command_TransferPlayer extends EventCommandLike2<201, [
+    mapId: number,
+    x: number,
+    y: number,
+    direction: Direction8
+]> {
+}
+export interface Command_SetVehicleLocation extends EventCommandLike2<202, [
+    vehicleId: number,
+    mapId: number,
+    x: number,
+    y: number
+]> {
+}
+export interface Command_SetEventLocation extends EventCommandLike2<203, [
+    mapId: number,
+    eventId: number,
+    x: number,
+    y: number,
+    direction: Direction8
+]> {
+}
+export interface Command_ScrollMap extends EventCommandLike2<204, [
+    direction: Direction8,
+    distance: number,
+    speed: number,
+    waiting: boolean
+]> {
+}
+export interface Command_SetMovementRoute extends EventCommandLike2<205, [
+    characterId: number,
+    movement: MoveRouteData
+]> {
+}
+export interface Command_GetOnOffVehicle extends EventCommandLike2<206, []> {
+}
+export interface Command_ChangeTransparency extends EventCommandLike2<211, [value: ValueOf<Toggle>]> {
+}
+export interface Command_ShowAnimation extends EventCommandLike2<212, [
+    characterId: number,
+    animationId: number,
+    waiting: ValueOf<Toggle>
+]> {
+}
+export interface Command_ShowBalloonIcon extends EventCommandLike2<213, [characterId: number, balloonId: number]> {
+}
+export interface Command_EraseEvent extends EventCommandLike2<214, []> {
+}
+export interface Command_ChangePlayerFollowers extends EventCommandLike2<216, [value: ValueOf<Toggle>]> {
+}
+export interface Command_GatherFollowers extends EventCommandLike2<217, []> {
+}
+export interface Command_FadeOutScreen extends EventCommandLike2<221, []> {
+}
+export interface Command_FadeInScreen extends EventCommandLike2<222, []> {
+}
+export interface Command_TintScreen extends EventCommandLike2<223, [
+    color: ColorRGBA,
+    duration: number,
+    wait: boolean
+]> {
+}
+export interface Command_FlashScreen extends EventCommandLike2<224, [
+    color: ColorRGBA,
+    duration: number,
+    wait: boolean
+]> {
+}
+export interface Command_ShakeScreen extends EventCommandLike2<225, [
+    power: number,
+    speed: number,
+    duration: number,
+    wait: boolean
+]> {
+}
+export interface Command_Wait extends EventCommandLike2<230, [duration: number]> {
+}
+export interface Command_ShowPicture extends EventCommandLike2<231, [params: ShowPicture]> {
+}
+export interface Command_MovePicture extends EventCommandLike2<232, [params: MovePicture]> {
+}
+export interface Command_RotatePicture extends EventCommandLike2<233, [pictureId: number, speed: number]> {
+}
+export interface Command_TintPicture extends EventCommandLike2<234, [unknown, unknown, unknown, wait: boolean]> {
+}
+export interface Command_ErasePicture extends EventCommandLike2<235, [pictureId: number]> {
+}
+export interface Command_SetWeatherEffect extends EventCommandLike2<236, []> {
+}
+export interface Command_PlayBGM extends EventCommandLike2<241, [value: AudioFileParams]> {
+}
+export interface Command_FadeOutBGM extends EventCommandLike2<242, [duration: number]> {
+}
+export interface Command_SaveBGM extends EventCommandLike2<243, []> {
+}
+export interface Command_RestoreBGM extends EventCommandLike2<244, []> {
+}
+export interface Command_PlayBGS extends EventCommandLike2<245, [value: AudioFileParams]> {
+}
+export interface Command_FadeOutBGS extends EventCommandLike2<246, [duration: number]> {
+}
+export interface Command_PlayME extends EventCommandLike2<249, [value: AudioFileParams]> {
+}
+export interface Command_PlaySE extends EventCommandLike2<250, [value: AudioFileParams]> {
+}
+export interface Command_StopSE extends EventCommandLike2<251, []> {
+}
+export interface Command_PlayMovie extends EventCommandLike2<261, [filename: string]> {
+}
+export interface Command_ChangeTileset extends EventCommandLike2<282, [tilesetId: number]> {
+}
+export interface Command_ChangeBattleBackground extends EventCommandLike2<283, [background1: string, background2: string]> {
+}
+export interface Command_ChangeParallax extends EventCommandLike2<284, [
+    parallaxName: string,
+    loopX: boolean,
+    loopY: boolean,
+    sx: number,
+    sy: number
+]> {
+}
+export interface Command_BattleProcessing extends EventCommandLike2<301, [
+    0 | 1 | 2,
+    troopId: number,
+    canEscape: boolean,
+    canLose: boolean
+]> {
+}
+export interface Command_ShopProcessingBody extends EventCommandLike2<605, [goods: ShopGoods]> {
+}
+export interface Command_NameInputProcessing extends EventCommandLike2<303, [actorId: number, maxLength: number]> {
+}
+export interface Command_ChangeName extends EventCommandLike2<320, [actorId: number, name: string]> {
+}
+export interface Command_ChangeClaass extends EventCommandLike2<321, [
+    actorId: number,
+    classId: number,
+    keepExp: boolean
+]> {
+}
+export interface Command_ChangeActorImages extends EventCommandLike2<322, [
+    actorId: number,
+    characterImage: string,
+    characterIndex: number,
+    faceImage: string,
+    faceIndex: number,
+    battlerImage: string
+]> {
+}
+export interface Command_ChangeVehicleImage extends EventCommandLike2<323, [
+    vehicleId: number,
+    characterImage: string,
+    characterIndex: number
+]> {
+}
+export interface Command_ChangeNickName extends EventCommandLike2<324, [actorId: number, nickname: string]> {
+}
+export interface Command_ChangeProfile extends EventCommandLike2<325, [actorId: number, profile: string]> {
+}
+export interface Command_OpenSaveScreen extends EventCommandLike2<352, []> {
+}
+export interface Command_GameOver extends EventCommandLike2<353, []> {
+}
