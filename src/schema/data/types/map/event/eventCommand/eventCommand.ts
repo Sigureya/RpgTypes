@@ -1,4 +1,4 @@
-import type { BranchMapper, BranchParameters } from "./branchParams";
+import type { BranchMapper } from "./branchParams";
 import type * as EventCommandCodes from "./eventCommandCodes";
 import type {
   ChanageActorVariable,
@@ -18,6 +18,7 @@ import type {
   ColorRGBA,
   Direction8,
   MoveRouteData,
+  IndexOfParameter,
 } from "./types";
 
 export * from "./paramaters";
@@ -32,6 +33,11 @@ export type EventCommandTable = EventCommandsMapper["commandTypeTable"];
 export type EventCommandParameters = EventCommandsMapper["parameterTable"];
 
 export type EventCommandByCode = EventCommandsMapper["commandByCode"];
+
+export type IndexOfCommandParameter<
+  Command extends { parameters: unknown[] },
+  T
+> = IndexOfParameter<Command["parameters"], T>;
 
 export type EventCommandsMapper = CommandTemplate<
   typeof EventCommandCodes,
