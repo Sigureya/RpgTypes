@@ -42,6 +42,9 @@ export interface Command_ShowChoices
     ]
   > {}
 
+export interface Command_ChoiceWhen
+  extends EventCommandLike2<402, [text: string]> {}
+
 export interface Command_InputNumber
   extends EventCommandLike2<103, [variableId: number, digits: number]> {}
 export interface Command_SelectItem
