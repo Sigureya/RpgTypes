@@ -275,3 +275,18 @@ export interface Command_OpenSaveScreen extends EventCommandLike2<352, []> {
 }
 export interface Command_GameOver extends EventCommandLike2<353, []> {
 }
+export interface Command_ReturnToTitleScreen extends EventCommandLike2<354, []> {
+}
+export interface Command_ScriptHeader extends EventCommandLike2<355, [script: string]> {
+}
+export interface Command_ScriptBody extends EventCommandLike2<655, [script: string]> {
+}
+export interface Command_PluginCommandMV extends EventCommandLike2<356, [command: string, args: string]> {
+}
+export interface Command_PluginCommandMZ extends EventCommandLike2<357, [
+    pluginName: string,
+    commandName: string,
+    infoText: string,
+    arg: Record<string, unknown>
+]> {
+}
