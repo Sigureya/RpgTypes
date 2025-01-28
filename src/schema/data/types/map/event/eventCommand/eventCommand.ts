@@ -22,8 +22,6 @@ import type {
   IndexOfParameter,
 } from "./types";
 
-export * from "./paramaters";
-export * from "./eventCommandCodes";
 export type EventCode = EventCommandsMapper["codeType"];
 export type EventCodeTable = EventCommandsMapper["codeTable"];
 export type EventCodeKeys = keyof EventCodeTable;

@@ -3,8 +3,6 @@ import { EventCommandLike } from './eventComandLike';
 import { ChanageActorVariable, ControlVariables, MovePicture, ShopGoods, ShopProcessing, ShowPicture, ValueOf, Designation, Toggle, Operation_PlusMinus } from './paramaters';
 import { AudioFileParams, CommandTemplate, ColorRGBA, Direction8, MoveRouteData, IndexOfParameter } from './types';
 import type * as EventCommandCodes from "./eventCommandCodes";
-export * from './paramaters';
-export * from './eventCommandCodes';
 export type EventCode = EventCommandsMapper["codeType"];
 export type EventCodeTable = EventCommandsMapper["codeTable"];
 export type EventCodeKeys = keyof EventCodeTable;
