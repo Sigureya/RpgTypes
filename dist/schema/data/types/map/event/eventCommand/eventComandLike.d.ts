@@ -1,6 +1,8 @@
 import type * as CodeConstants from "./eventCommandCodes";
-export interface EventCommandLike2<Code extends (typeof CodeConstants)[keyof typeof CodeConstants], Parameters extends unknown[]> {
+type EventCode = (typeof CodeConstants)[keyof typeof CodeConstants];
+export interface EventCommandLike<Code extends EventCode = EventCode, Parameters extends unknown[] = unknown[]> {
     parameters: Parameters;
     code: Code;
     indent: number;
 }
+export {};

@@ -1,9 +1,8 @@
 import { BranchMapper } from './branchParams';
+import { EventCommandLike } from './eventComandLike';
 import { ChanageActorVariable, ControlVariables, MovePicture, ShopGoods, ShopProcessing, ShowPicture, ValueOf, Designation, Toggle, Operation_PlusMinus } from './paramaters';
 import { AudioFileParams, CommandTemplate, ColorRGBA, Direction8, MoveRouteData, IndexOfParameter } from './types';
 import type * as EventCommandCodes from "./eventCommandCodes";
-export * from './paramaters';
-export * from './eventCommandCodes';
 export type EventCode = EventCommandsMapper["codeType"];
 export type EventCodeTable = EventCommandsMapper["codeTable"];
 export type EventCodeKeys = keyof EventCodeTable;
@@ -11,11 +10,6 @@ export type EventCommand = EventCommandsMapper["commandType"];
 export type EventCommandTable = EventCommandsMapper["commandTypeTable"];
 export type EventCommandParameters = EventCommandsMapper["parameterTable"];
 export type EventCommandByCode = EventCommandsMapper["commandByCode"];
-export interface EventCommandLike {
-    code: EventCode;
-    parameters: unknown[];
-    indent: number;
-}
 export type IndexOfCommandParameter<Command extends {
     parameters: unknown[];
 }, T> = IndexOfParameter<Command["parameters"], T>;

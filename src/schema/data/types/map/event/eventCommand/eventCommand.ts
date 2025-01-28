@@ -1,4 +1,5 @@
 import type { BranchMapper } from "./branchParams";
+import type { EventCommandLike } from "./eventComandLike";
 import type * as EventCommandCodes from "./eventCommandCodes";
 import type {
   ChanageActorVariable,
@@ -21,8 +22,6 @@ import type {
   IndexOfParameter,
 } from "./types";
 
-export * from "./paramaters";
-export * from "./eventCommandCodes";
 export type EventCode = EventCommandsMapper["codeType"];
 export type EventCodeTable = EventCommandsMapper["codeTable"];
 export type EventCodeKeys = keyof EventCodeTable;
@@ -34,11 +33,6 @@ export type EventCommandParameters = EventCommandsMapper["parameterTable"];
 
 export type EventCommandByCode = EventCommandsMapper["commandByCode"];
 
-export interface EventCommandLike {
-  code: EventCode;
-  parameters: unknown[];
-  indent: number;
-}
 export type IndexOfCommandParameter<
   Command extends { parameters: unknown[] },
   T
