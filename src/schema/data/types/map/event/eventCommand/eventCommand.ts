@@ -318,9 +318,20 @@ export type EventCommandsMapper = CommandTemplate<
       fadeType: number
     ];
 
-    SET_VEHICLE_LOCATION: [];
+    SET_VEHICLE_LOCATION: [
+      vehicleId: number,
+      mapId: number,
+      x: number,
+      y: number
+    ];
 
-    SET_EVENT_LOCATION: [];
+    SET_EVENT_LOCATION: [
+      mapId: number,
+      eventId: number,
+      x: number,
+      y: number,
+      direction: Direction8
+    ];
     SCROLL_MAP: [];
 
     SET_MOVEMENT_ROUTE: [characterId: number, movement: MoveRouteData];

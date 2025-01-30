@@ -1,6 +1,6 @@
 import { EventCommandLike } from './eventComandLike';
 import { AudioFileParams, ColorRGBA, Direction8, MoveRouteData } from './types';
-import { ControlVariables, MovePicture, ShopGoods, ShowPicture, ValueOf, Toggle, Operation_PlusMinus } from './paramaters';
+import { ControlVariables, MovePicture, ShopGoods, ShowPicture, ValueOf, Toggle, Operation_PlusMinus, Designation } from './paramaters';
 import { BranchParameters } from './branchParams';
 export interface Command_ShowMessage extends EventCommandLike<101, [
     facename: string,
@@ -102,7 +102,7 @@ export interface Command_ChangeVictoryME extends EventCommandLike<133, [value: A
 }
 export interface Command_ChangeSaveAccess extends EventCommandLike<134, [value: ValueOf<Toggle>]> {
 }
-export interface Command_ChangeMenuAccess extends EventCommandLike<135, []> {
+export interface Command_ChangeMenuAccess extends EventCommandLike<135, [value: ValueOf<Toggle>]> {
 }
 export interface Command_ChangeEncounter extends EventCommandLike<136, [value: ValueOf<Toggle>]> {
 }
@@ -115,10 +115,12 @@ export interface Command_ChangeDefeatME extends EventCommandLike<139, [value: Au
 export interface Command_ChangeVehicleME extends EventCommandLike<140, [value: AudioFileParams]> {
 }
 export interface Command_TransferPlayer extends EventCommandLike<201, [
+    designation: ValueOf<Designation>,
     mapId: number,
     x: number,
     y: number,
-    direction: Direction8
+    direction: Direction8,
+    fadeType: number
 ]> {
 }
 export interface Command_SetVehicleLocation extends EventCommandLike<202, [
@@ -201,7 +203,12 @@ export interface Command_TintPicture extends EventCommandLike<234, [unknown, unk
 }
 export interface Command_ErasePicture extends EventCommandLike<235, [pictureId: number]> {
 }
-export interface Command_SetWeatherEffect extends EventCommandLike<236, []> {
+export interface Command_SetWeatherEffect extends EventCommandLike<236, [
+    type: string,
+    power: number,
+    duration: number,
+    needsWait: boolean
+]> {
 }
 export interface Command_PlayBGM extends EventCommandLike<241, [value: AudioFileParams]> {
 }
@@ -209,7 +216,7 @@ export interface Command_FadeOutBGM extends EventCommandLike<242, [duration: num
 }
 export interface Command_SaveBGM extends EventCommandLike<243, []> {
 }
-export interface Command_RestoreBGM extends EventCommandLike<244, []> {
+export interface Command_ResumeBGM extends EventCommandLike<244, []> {
 }
 export interface Command_PlayBGS extends EventCommandLike<245, [value: AudioFileParams]> {
 }
