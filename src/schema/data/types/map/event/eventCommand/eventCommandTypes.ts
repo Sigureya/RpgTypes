@@ -6,14 +6,11 @@ import type {
   MoveRouteData,
 } from "./types";
 import type {
-  ChanageActorVariable,
   ControlVariables,
   MovePicture,
   ShopGoods,
-  ShopProcessing,
   ShowPicture,
   ValueOf,
-  Designation,
   Toggle,
   Operation_PlusMinus,
 } from "./paramaters";
@@ -102,7 +99,11 @@ export interface Command_ControlTimer
 export interface Command_ChangeGold
   extends EventCommandLike<
     125,
-    [operation: ValueOf<Operation_PlusMinus>, value: number]
+    [
+      operation: ValueOf<Operation_PlusMinus>,
+      operationType: number,
+      value: number
+    ]
   > {}
 
 export interface Command_ChangeItems
