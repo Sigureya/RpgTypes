@@ -1,8 +1,10 @@
 import { BranchMapper } from './branchParams';
 import { EventCommandLike } from './eventComandLike';
+import { Command_RotatePicture, Command_TintPicture } from './eventCommandTypes';
 import { ChanageActorVariable, ControlVariables, MovePicture, ShopGoods, ShopProcessing, ShowPicture, ValueOf, Designation, Toggle, Operation_PlusMinus } from './paramaters';
 import { AudioFileParams, CommandTemplate, ColorRGBA, Direction8, MoveRouteData, IndexOfParameter } from './types';
 import type * as EventCommandCodes from "./eventCommandCodes";
+import type * as Types from "./types";
 export type EventCode = EventCommandsMapper["codeType"];
 export type EventCodeTable = EventCommandsMapper["codeTable"];
 export type EventCodeKeys = keyof EventCodeTable;
@@ -162,7 +164,7 @@ export type EventCommandsMapper = CommandTemplate<typeof EventCommandCodes, Even
     /**
      * @description Change Battle BGM
      */
-    CHANGE_BATTLE_BGM: [value: AudioFileParams];
+    CHANGE_BATTLE_BGM: [value: Types.AudioFileParams];
     /**
      * @description Change Vheicle ME
      */
@@ -258,21 +260,30 @@ export type EventCommandsMapper = CommandTemplate<typeof EventCommandCodes, Even
     SET_MOVEMENT_ROUTE: [characterId: number, movement: MoveRouteData];
     GET_ONOFF_VEHICLE: [];
     CHANGE_TRANSPARENCY: [];
-    SHOW_ANIMATION: [];
+    SHOW_ANIMATION: [
+        characterId: number,
+        animationId: number,
+        waiting: ValueOf<Toggle>
+    ];
     SHOW_BALLOON_ICON: [];
     ERASE_EVENT: [];
     CHANGE_PLAYER_FOLLOWERS: [];
     GATHER_FOLLOWERS: [];
     FADEOUT_SCREEN: [];
     FADEIN_SCREEN: [];
-    TINT_SCREEN: [];
-    FLASH_SCREEN: [];
-    SHAKE_SCREEN: [];
+    TINT_SCREEN: [color: ColorRGBA, duration: number, wait: boolean];
+    FLASH_SCREEN: [olor: ColorRGBA, duration: number, wait: boolean];
+    SHAKE_SCREEN: [
+        power: number,
+        speed: number,
+        duration: number,
+        wait: boolean
+    ];
     WAIT: [duration: number];
     SHOW_PICTURE: ShowPicture;
     MOVE_PICTURE: MovePicture;
-    TINT_PICTURE: [];
-    ROTATE_PICTURE: [];
+    TINT_PICTURE: Command_TintPicture["parameters"];
+    ROTATE_PICTURE: Command_RotatePicture["parameters"];
     ERASE_PICTURE: [pictureId: number];
     /**
      * @description Change Nickname

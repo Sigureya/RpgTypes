@@ -68,6 +68,7 @@ export interface Command_ControlTimer extends EventCommandLike<124, [
 }
 export interface Command_ChangeGold extends EventCommandLike<125, [
     operation: ValueOf<Operation_PlusMinus>,
+    operationType: number,
     value: number
 ]> {
 }

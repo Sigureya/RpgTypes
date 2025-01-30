@@ -2,6 +2,10 @@ import type { BranchMapper } from "./branchParams";
 import type { EventCommandLike } from "./eventComandLike";
 import type * as EventCommandCodes from "./eventCommandCodes";
 import type {
+  Command_RotatePicture,
+  Command_TintPicture,
+} from "./eventCommandTypes";
+import type {
   ChanageActorVariable,
   ControlVariables,
   MovePicture,
@@ -21,6 +25,7 @@ import type {
   MoveRouteData,
   IndexOfParameter,
 } from "./types";
+import type * as Types from "./types";
 
 export type EventCode = EventCommandsMapper["codeType"];
 export type EventCodeTable = EventCommandsMapper["codeTable"];
@@ -209,7 +214,7 @@ export type EventCommandsMapper = CommandTemplate<
     /**
      * @description Change Battle BGM
      */
-    CHANGE_BATTLE_BGM: [value: AudioFileParams];
+    CHANGE_BATTLE_BGM: [value: Types.AudioFileParams];
     /**
      * @description Change Vheicle ME
      */
@@ -322,7 +327,11 @@ export type EventCommandsMapper = CommandTemplate<
     GET_ONOFF_VEHICLE: [];
 
     CHANGE_TRANSPARENCY: [];
-    SHOW_ANIMATION: [];
+    SHOW_ANIMATION: [
+      characterId: number,
+      animationId: number,
+      waiting: ValueOf<Toggle>
+    ];
 
     SHOW_BALLOON_ICON: [];
 
@@ -334,17 +343,22 @@ export type EventCommandsMapper = CommandTemplate<
     FADEOUT_SCREEN: [];
     FADEIN_SCREEN: [];
 
-    TINT_SCREEN: [];
+    TINT_SCREEN: [color: ColorRGBA, duration: number, wait: boolean];
 
-    FLASH_SCREEN: [];
+    FLASH_SCREEN: [olor: ColorRGBA, duration: number, wait: boolean];
 
-    SHAKE_SCREEN: [];
+    SHAKE_SCREEN: [
+      power: number,
+      speed: number,
+      duration: number,
+      wait: boolean
+    ];
     WAIT: [duration: number];
 
     SHOW_PICTURE: ShowPicture;
     MOVE_PICTURE: MovePicture;
-    TINT_PICTURE: [];
-    ROTATE_PICTURE: [];
+    TINT_PICTURE: Command_TintPicture["parameters"];
+    ROTATE_PICTURE: Command_RotatePicture["parameters"];
     ERASE_PICTURE: [pictureId: number];
 
     /**
