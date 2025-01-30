@@ -13,6 +13,7 @@ import type {
   ValueOf,
   Toggle,
   Operation_PlusMinus,
+  Designation,
 } from "./paramaters";
 import type { BranchParameters } from "./branchParams";
 export interface Command_ShowMessage
@@ -140,7 +141,8 @@ export interface Command_ChangeVictoryME
 export interface Command_ChangeSaveAccess
   extends EventCommandLike<134, [value: ValueOf<Toggle>]> {}
 
-export interface Command_ChangeMenuAccess extends EventCommandLike<135, []> {}
+export interface Command_ChangeMenuAccess
+  extends EventCommandLike<135, [value: ValueOf<Toggle>]> {}
 
 export interface Command_ChangeEncounter
   extends EventCommandLike<136, [value: ValueOf<Toggle>]> {}
@@ -160,7 +162,14 @@ export interface Command_ChangeVehicleME
 export interface Command_TransferPlayer
   extends EventCommandLike<
     201,
-    [mapId: number, x: number, y: number, direction: Direction8]
+    [
+      designation: ValueOf<Designation>,
+      mapId: number,
+      x: number,
+      y: number,
+      direction: Direction8,
+      fadeType: number
+    ]
   > {}
 
 export interface Command_SetVehicleLocation
@@ -254,7 +263,11 @@ export interface Command_TintPicture
 export interface Command_ErasePicture
   extends EventCommandLike<235, [pictureId: number]> {}
 
-export interface Command_SetWeatherEffect extends EventCommandLike<236, []> {}
+export interface Command_SetWeatherEffect
+  extends EventCommandLike<
+    236,
+    [type: string, power: number, duration: number, needsWait: boolean]
+  > {}
 
 export interface Command_PlayBGM
   extends EventCommandLike<241, [value: AudioFileParams]> {}
@@ -264,7 +277,7 @@ export interface Command_FadeOutBGM
 
 export interface Command_SaveBGM extends EventCommandLike<243, []> {}
 
-export interface Command_RestoreBGM extends EventCommandLike<244, []> {}
+export interface Command_ResumeBGM extends EventCommandLike<244, []> {}
 
 export interface Command_PlayBGS
   extends EventCommandLike<245, [value: AudioFileParams]> {}
