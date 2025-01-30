@@ -14,6 +14,7 @@ import type {
   Toggle,
   Operation_PlusMinus,
 } from "./paramaters";
+import type { BranchParameters } from "./branchParams";
 export interface Command_ShowMessage
   extends EventCommandLike<
     101,
@@ -60,7 +61,7 @@ export interface Command_CommentBody
 export interface Command_Skip extends EventCommandLike<109, []> {}
 
 export interface Command_ConditionalBranch
-  extends EventCommandLike<111, [variableId: number, value: number]> {}
+  extends EventCommandLike<111, BranchParameters> {}
 
 export interface Command_ConditionalBranchElse
   extends EventCommandLike<411, []> {}

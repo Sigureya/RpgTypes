@@ -1,6 +1,7 @@
 import { EventCommandLike } from './eventComandLike';
 import { AudioFileParams, ColorRGBA, Direction8, MoveRouteData } from './types';
 import { ControlVariables, MovePicture, ShopGoods, ShowPicture, ValueOf, Toggle, Operation_PlusMinus } from './paramaters';
+import { BranchParameters } from './branchParams';
 export interface Command_ShowMessage extends EventCommandLike<101, [
     facename: string,
     faceIndex: number,
@@ -35,7 +36,7 @@ export interface Command_CommentBody extends EventCommandLike<408, [content: str
 }
 export interface Command_Skip extends EventCommandLike<109, []> {
 }
-export interface Command_ConditionalBranch extends EventCommandLike<111, [variableId: number, value: number]> {
+export interface Command_ConditionalBranch extends EventCommandLike<111, BranchParameters> {
 }
 export interface Command_ConditionalBranchElse extends EventCommandLike<411, []> {
 }

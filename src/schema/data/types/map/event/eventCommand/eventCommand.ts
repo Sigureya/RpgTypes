@@ -1,4 +1,4 @@
-import type { BranchMapper } from "./branchParams";
+import type { BranchParameters } from "./branchParams";
 import type { EventCommandLike } from "./eventComandLike";
 import type * as EventCommandCodes from "./eventCommandCodes";
 import type {
@@ -113,7 +113,7 @@ export type EventCommandsMapper = CommandTemplate<
     /**
      * @description Conditional Branch
      */
-    CONDITIONAL_BRANCH: BranchMapper["commandType"]["params"];
+    CONDITIONAL_BRANCH: BranchParameters;
     /**
      * @description Else (Conditional Branch)
      */

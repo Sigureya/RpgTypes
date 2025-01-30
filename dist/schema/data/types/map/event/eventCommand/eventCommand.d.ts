@@ -1,4 +1,4 @@
-import { BranchMapper } from './branchParams';
+import { BranchParameters } from './branchParams';
 import { EventCommandLike } from './eventComandLike';
 import { Command_RotatePicture, Command_TintPicture } from './eventCommandTypes';
 import { ChanageActorVariable, ControlVariables, MovePicture, ShopGoods, ShopProcessing, ShowPicture, ValueOf, Designation, Toggle, Operation_PlusMinus } from './paramaters';
@@ -73,7 +73,7 @@ export type EventCommandsMapper = CommandTemplate<typeof EventCommandCodes, Even
     /**
      * @description Conditional Branch
      */
-    CONDITIONAL_BRANCH: BranchMapper["commandType"]["params"];
+    CONDITIONAL_BRANCH: BranchParameters;
     /**
      * @description Else (Conditional Branch)
      */
