@@ -232,7 +232,7 @@ export type EventCommandsMapper = CommandTemplate<
     ];
 
     BATTLE_PROCESSING: [
-      directDesignation: 0,
+      0 | 1 | 2,
       troopId: number,
       canEscape: boolean,
       canLose: boolean

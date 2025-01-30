@@ -179,7 +179,7 @@ export type EventCommandsMapper = CommandTemplate<typeof EventCommandCodes, Even
         battleBack2name: string
     ];
     BATTLE_PROCESSING: [
-        directDesignation: 0,
+        0 | 1 | 2,
         troopId: number,
         canEscape: boolean,
         canLose: boolean
