@@ -6,3 +6,11 @@ export interface MapEventContainer<Command = unknown> {
         }[];
     } | null>;
 }
+export interface ReadonlyMapEventContainer<Command = unknown> {
+    readonly events: ReadonlyArray<{
+        readonly id: number;
+        readonly pages: ReadonlyArray<{
+            readonly list: ReadonlyArray<Command>;
+        }>;
+    } | null>;
+}
