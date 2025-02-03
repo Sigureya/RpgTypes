@@ -1,31 +1,24 @@
-import type { MapEvent } from "./event";
 import type { Encounter } from "./encounter";
-import type { AudioFileParams } from "./event/eventCommand/types/audioFileParams";
+import type { AudioFileParams, MapEvent } from "./event/";
 
 export * from "./event";
 
-interface Map_Filenames {
+export interface Data_Map {
   battleback1Name: string;
   battleback2Name: string;
-  parallaxName: string;
-}
 
-interface Map_Parallax {
   parallaxLoopX: boolean;
   parallaxLoopY: boolean;
   parallaxName: string;
   parallaxShow: boolean;
   parallaxSx: number;
   parallaxSy: number;
-}
-interface Map_Audio {
+
   bgm: AudioFileParams;
   bgs: AudioFileParams;
   autoplayBgm: boolean;
   autoplayBgs: boolean;
-}
 
-export interface Data_Map extends Map_Filenames, Map_Parallax, Map_Audio {
   displayName: string;
   note: string;
   width: number;
@@ -37,3 +30,20 @@ export interface Data_Map extends Map_Filenames, Map_Parallax, Map_Audio {
   data: number[];
   encounterList: Encounter[];
 }
+
+export type Map_ImageFiles = Pick<
+  Data_Map,
+  "battleback1Name" | "battleback2Name" | "parallaxName"
+>;
+export type Map_Parallax = Pick<
+  Data_Map,
+  | "parallaxLoopX"
+  | "parallaxLoopY"
+  | "parallaxShow"
+  | "parallaxSx"
+  | "parallaxSy"
+>;
+export type Map_Audios = Pick<
+  Data_Map,
+  "bgm" | "bgs" | "autoplayBgm" | "autoplayBgs"
+>;
