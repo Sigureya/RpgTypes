@@ -1,0 +1,13 @@
+export const FOLDER_IMG_BATTLEBACK1 = "battlebacks1" as const;
+export const FOLDER_IMG_BATTLEBACK2 = "battlebacks2" as const;
+export const FOLDER_IMG_CHACTERS = "characters" as const;
+export const FOLDER_IMG_ENEMIES = "enemies" as const;
+export const FOLDER_IMG_FACES = "faces" as const;
+export const FOLDER_IMG_PARALLACES = "parallaxes" as const;
+export const FOLDER_IMG_PICTURES = "pictures" as const;
+export const FOLDER_IMG_SV_ACTORS = "sv_actors" as const;
+export const FOLDER_IMG_SV_ENEMIES = "sv_enemies" as const;
+export const FOLDER_IMG_SYSTEM = "system" as const;
+export const FOLDER_IMG_TILESETS = "tilesets" as const;
+export const FOLDER_IMG_TITLES1 = "titles1" as const;
+export const FOLDER_IMG_TITLES2 = "titles2" as const;
