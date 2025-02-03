@@ -2,8 +2,6 @@ import type { Encounter } from "./encounter";
 import type { AudioFileParams, EventCommand, MapEvent } from "./event/";
 import type { MapEventContainer } from "./mapEventContainer";
 
-export * from "./event";
-
 export interface Data_Map extends MapEventContainer<EventCommand> {
   battleback1Name: string;
   battleback2Name: string;
