@@ -1,0 +1,13 @@
+export declare const FOLDER_IMG_BATTLEBACK1: "battlebacks1";
+export declare const FOLDER_IMG_BATTLEBACK2: "battlebacks2";
+export declare const FOLDER_IMG_CHACTERS: "characters";
+export declare const FOLDER_IMG_ENEMIES: "enemies";
+export declare const FOLDER_IMG_FACES: "faces";
+export declare const FOLDER_IMG_PARALLACES: "parallaxes";
+export declare const FOLDER_IMG_PICTURES: "pictures";
+export declare const FOLDER_IMG_SV_ACTORS: "sv_actors";
+export declare const FOLDER_IMG_SV_ENEMIES: "sv_enemies";
+export declare const FOLDER_IMG_SYSTEM: "system";
+export declare const FOLDER_IMG_TILESETS: "tilesets";
+export declare const FOLDER_IMG_TITLES1: "titles1";
+export declare const FOLDER_IMG_TITLES2: "titles2";
