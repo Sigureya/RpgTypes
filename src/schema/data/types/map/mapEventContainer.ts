@@ -1,6 +1,12 @@
-export interface MapEventContainer<Command = unknown> {
-  events: Array<{
-    id: number;
-    pages: { list: Command[] }[];
-  } | null>;
+export interface MapEventContainer<
+  Command = unknown,
+  Event extends object = {}
+> {
+  events: Array<
+    | (Event & {
+        id: number;
+        pages: { list: Command[] }[];
+      })
+    | null
+  >;
 }
