@@ -54,5 +54,9 @@ export type System_DataNames = Pick<Data_System, "weaponTypes" | "skillTypes" | 
 export type System_Images = Pick<Data_System, "battleback1Name" | "battleback2Name" | "battlerName" | "title1Name" | "title2Name">;
 export type System_Text = Pick<Data_System, "gameTitle" | "currencyUnit">;
 export type System_Vehicle = Pick<Data_System, "boat" | "ship" | "airship">;
-export type System_AudioFiles = Pick<Data_System, "titleBgm" | "gameoverMe" | "battleBgm" | "defeatMe" | "victoryMe">;
+export type System_Bgm = Pick<Data_System, "titleBgm" | "battleBgm">;
+export type System_Me = Pick<Data_System, "gameoverMe" | "defeatMe" | "victoryMe">;
+export type System_AudioFiles = System_Bgm & System_Me & {
+    sounds: System_SoundsArray;
+};
 export type System_BoolanOptions = Pick<Data_System, "optAutosave" | "optDisplayTp" | "optDrawTitle" | "optExtraExp" | "optFloorDeath" | "optFollowers" | "optKeyItemsNumber" | "optSideView" | "optSlipDeath" | "optTransparent">;
