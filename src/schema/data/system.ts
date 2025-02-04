@@ -4,6 +4,7 @@ import type {
   System_Advanced,
   System_Terms,
 } from "./systemMembers";
+import type { System_SoundsArray } from "./systemSoundArray";
 import type { AudioFileParams, ColorRGBA } from "./types";
 import type { Data_Vehicle } from "./vehicle";
 
@@ -74,29 +75,44 @@ export interface Data_System {
   advanced: System_Advanced;
   tileSize: number;
 }
-export type System_SoundsArray = [
-  cursor: AudioFileParams,
-  ok: AudioFileParams,
-  cancel: AudioFileParams,
-  buzzer: AudioFileParams,
-  equip: AudioFileParams,
-  save: AudioFileParams,
-  load: AudioFileParams,
-  battleStart: AudioFileParams,
-  escape: AudioFileParams,
-  enemyAttack: AudioFileParams,
-  enemyDamage: AudioFileParams,
-  enemyCollapse: AudioFileParams,
-  bossCollapes1: AudioFileParams,
-  bossCollapes2: AudioFileParams,
-  actorDamage: AudioFileParams,
-  actorCollapse: AudioFileParams,
-  playRecovery: AudioFileParams,
-  playMiss: AudioFileParams,
-  playEvasion: AudioFileParams,
-  playMagicEvasion: AudioFileParams,
-  playReflection: AudioFileParams,
-  shop: AudioFileParams,
-  useItem: AudioFileParams,
-  useSkill: AudioFileParams
-];
+
+export type System_DataNames = Pick<
+  Data_System,
+  | "weaponTypes"
+  | "skillTypes"
+  | "elements"
+  | "variables"
+  | "equipTypes"
+  | "switches"
+  | "armorTypes"
+>;
+
+export type System_Images = Pick<
+  Data_System,
+  | "battleback1Name"
+  | "battleback2Name"
+  | "battlerName"
+  | "title1Name"
+  | "title2Name"
+>;
+
+export type System_Text = Pick<Data_System, "gameTitle" | "currencyUnit">;
+export type System_Vehicle = Pick<Data_System, "boat" | "ship" | "airship">;
+
+export type System_AudioFiles = Pick<
+  Data_System,
+  "titleBgm" | "gameoverMe" | "battleBgm" | "defeatMe" | "victoryMe"
+>;
+export type System_BoolanOptions = Pick<
+  Data_System,
+  | "optAutosave"
+  | "optDisplayTp"
+  | "optDrawTitle"
+  | "optExtraExp"
+  | "optFloorDeath"
+  | "optFollowers"
+  | "optKeyItemsNumber"
+  | "optSideView"
+  | "optSlipDeath"
+  | "optTransparent"
+>;
