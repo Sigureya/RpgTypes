@@ -193,7 +193,7 @@ export interface Command_ShakeScreen extends EventCommandLike<225, [
 }
 export interface Command_Wait extends EventCommandLike<230, [duration: number]> {
 }
-export interface Command_ShowPicture extends EventCommandLike<231, [params: ShowPicture]> {
+export interface Command_ShowPicture extends EventCommandLike<231, ShowPicture> {
 }
 export interface Command_MovePicture extends EventCommandLike<232, [params: MovePicture]> {
 }
