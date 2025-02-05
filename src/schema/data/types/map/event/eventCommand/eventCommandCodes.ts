@@ -80,7 +80,7 @@ export const PLAY_MOVIE = 261 as const;
 export const CHANGE_TILESET = 282 as const;
 export const CHANGE_BATTLE_BACKGROUND = 283 as const;
 export const CHANGE_PARALLAX = 284 as const;
-// export const GET_LOCATION_INFO = 285 as const;
+export const GET_LOCATION_INFO = 285 as const;
 
 export const BATTLE_PROCESSING = 301 as const;
 
@@ -90,6 +90,8 @@ export const NAME_INPUT_PROCESSING = 303 as const;
 export const CHANGE_HP = 311 as const;
 export const CHANGE_MP = 312 as const;
 export const CHANGE_TP = 313 as const;
+export const RECOVER_ALL = 314 as const;
+export const CHANGE_EXP = 315 as const;
 
 export const CHANGE_NAME = 320 as const;
 export const CHANGE_CLASS = 321 as const;
