@@ -249,10 +249,10 @@ export interface Command_Wait
   extends EventCommandLike<230, [duration: number]> {}
 
 export interface Command_ShowPicture
-  extends EventCommandLike<231, [params: ShowPicture]> {}
+  extends EventCommandLike<231, ShowPicture> {}
 
 export interface Command_MovePicture
-  extends EventCommandLike<232, [params: MovePicture]> {}
+  extends EventCommandLike<232, MovePicture> {}
 
 export interface Command_RotatePicture
   extends EventCommandLike<233, [pictureId: number, speed: number]> {}
