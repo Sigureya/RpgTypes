@@ -272,7 +272,7 @@ export type EventCommandsMapper = CommandTemplate<typeof EventCommandCodes, Even
     SCROLL_MAP: [];
     SET_MOVEMENT_ROUTE: [characterId: number, movement: MoveRouteData];
     GET_ONOFF_VEHICLE: [];
-    CHANGE_TRANSPARENCY: [];
+    CHANGE_TRANSPARENCY: [value: ValueOf<Toggle>];
     SHOW_ANIMATION: [
         characterId: number,
         animationId: number,

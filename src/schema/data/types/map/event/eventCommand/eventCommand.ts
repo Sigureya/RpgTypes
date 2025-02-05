@@ -338,7 +338,7 @@ export type EventCommandsMapper = CommandTemplate<
     SET_MOVEMENT_ROUTE: [characterId: number, movement: MoveRouteData];
     GET_ONOFF_VEHICLE: [];
 
-    CHANGE_TRANSPARENCY: [];
+    CHANGE_TRANSPARENCY: [value: ValueOf<Toggle>];
     SHOW_ANIMATION: [
       characterId: number,
       animationId: number,
