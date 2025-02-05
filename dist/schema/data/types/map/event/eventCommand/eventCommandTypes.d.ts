@@ -242,6 +242,14 @@ export interface Command_ChangeParallax extends EventCommandLike<284, [
     sy: number
 ]> {
 }
+export interface Command_GetLocationInfo extends EventCommandLike<285, [
+    variableId: number,
+    mode: number,
+    designation: ValueOf<Designation>,
+    x: number,
+    y: number
+]> {
+}
 export interface Command_BattleProcessing extends EventCommandLike<301, [
     0 | 1 | 2,
     troopId: number,

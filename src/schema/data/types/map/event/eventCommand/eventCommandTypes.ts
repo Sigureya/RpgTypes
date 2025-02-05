@@ -313,17 +313,17 @@ export interface Command_ChangeParallax
     ]
   > {}
 
-// export interface Command_GetLocationInfo
-//   extends EventCommandLike2<
-//     285,
-//     [
-//       variableId: number,
-//       mode: number,
-//       designation: ValueOf<Designation>,
-//       x: number,
-//       y: number
-//     ]
-//   > {}
+export interface Command_GetLocationInfo
+  extends EventCommandLike<
+    285,
+    [
+      variableId: number,
+      mode: number,
+      designation: ValueOf<Designation>,
+      x: number,
+      y: number
+    ]
+  > {}
 
 export interface Command_BattleProcessing
   extends EventCommandLike<
