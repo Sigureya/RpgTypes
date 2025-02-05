@@ -112,7 +112,7 @@ export interface Command_ChangeWindowColor extends EventCommandLike<138, [color:
 }
 export interface Command_ChangeDefeatME extends EventCommandLike<139, [value: AudioFileParams]> {
 }
-export interface Command_ChangeVehicleME extends EventCommandLike<140, [value: AudioFileParams]> {
+export interface Command_ChangeVehicleBGM extends EventCommandLike<140, [value: AudioFileParams]> {
 }
 export interface Command_TransferPlayer extends EventCommandLike<201, [
     designation: ValueOf<Designation>,

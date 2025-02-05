@@ -35,7 +35,7 @@ export declare const CHANGE_ENCOUNTER: 136;
 export declare const CHANGE_FORMATION_ACCESS: 137;
 export declare const CHANGE_WINDOW_COLOR: 138;
 export declare const CHANGE_DEFEAT_ME: 139;
-export declare const CHANGE_VEHICLE_ME: 140;
+export declare const CHANGE_VEHICLE_BGM: 140;
 export declare const TRANSFER_PLAYER: 201;
 export declare const SET_VEHICLE_LOCATION: 202;
 export declare const SET_EVENT_LOCATION: 203;

@@ -156,7 +156,7 @@ export interface Command_ChangeWindowColor
 export interface Command_ChangeDefeatME
   extends EventCommandLike<139, [value: AudioFileParams]> {}
 
-export interface Command_ChangeVehicleME
+export interface Command_ChangeVehicleBGM
   extends EventCommandLike<140, [value: AudioFileParams]> {}
 
 export interface Command_TransferPlayer
