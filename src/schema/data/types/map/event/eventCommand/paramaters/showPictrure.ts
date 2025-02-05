@@ -12,4 +12,15 @@ export type ShowPicture = [
   blendMode: PicutureBlendMode
 ];
 
-export type MovePicture = [...ShowPicture, wait: boolean, easingType: number];
+export type MovePicture = [
+  pictureId: number,
+  origin: 0 | 1,
+  x: number,
+  y: number,
+  scaleX: number,
+  scaleY: number,
+  opacity: number,
+  blendMode: PicutureBlendMode,
+  wait: boolean,
+  easingType: number
+];
