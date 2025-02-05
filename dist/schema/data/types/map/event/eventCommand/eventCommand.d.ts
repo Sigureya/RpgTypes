@@ -224,8 +224,10 @@ export type EventCommandsMapper = CommandTemplate<typeof EventCommandCodes, Even
     CHANGE_HP: [...ChanageActorVariable, allowDetah: boolean];
     CHANGE_MP: ChanageActorVariable;
     CHANGE_TP: ChanageActorVariable;
+    RECOVER_ALL: [];
     CHANGE_NAME: [actorId: number, name: string];
     CHANGE_CLASS: [actorId: number, classId: number, keepExp: boolean];
+    CHANGE_EXP: [];
     CHANGE_PARALLAX: [
         name: string,
         loopX: boolean,
@@ -300,6 +302,7 @@ export type EventCommandsMapper = CommandTemplate<typeof EventCommandCodes, Even
      * @description Change Nickname
      */
     CHANGE_NICKNAME: [actorId: number, name: string];
+    GET_LOCATION_INFO: [];
     /**
      * @description Change Profile
      */
