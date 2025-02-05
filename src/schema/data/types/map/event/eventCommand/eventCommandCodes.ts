@@ -36,7 +36,7 @@ export const CHANGE_FORMATION_ACCESS = 137 as const;
 export const CHANGE_WINDOW_COLOR = 138 as const;
 
 export const CHANGE_DEFEAT_ME = 139 as const;
-export const CHANGE_VEHICLE_ME = 140 as const;
+export const CHANGE_VEHICLE_BGM = 140 as const;
 
 export const TRANSFER_PLAYER = 201 as const;
 export const SET_VEHICLE_LOCATION = 202 as const;

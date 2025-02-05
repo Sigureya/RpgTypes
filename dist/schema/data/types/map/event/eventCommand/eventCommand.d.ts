@@ -168,7 +168,7 @@ export type EventCommandsMapper = CommandTemplate<typeof EventCommandCodes, Even
     /**
      * @description Change Vheicle ME
      */
-    CHANGE_VEHICLE_ME: [value: AudioFileParams];
+    CHANGE_VEHICLE_BGM: [value: AudioFileParams];
     /**
      * @description Change Victory ME
      */
