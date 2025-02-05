@@ -302,7 +302,13 @@ export type EventCommandsMapper = CommandTemplate<typeof EventCommandCodes, Even
      * @description Change Nickname
      */
     CHANGE_NICKNAME: [actorId: number, name: string];
-    GET_LOCATION_INFO: [];
+    GET_LOCATION_INFO: [
+        variableId: number,
+        mode: number,
+        designation: ValueOf<Designation>,
+        x: number,
+        y: number
+    ];
     /**
      * @description Change Profile
      */
