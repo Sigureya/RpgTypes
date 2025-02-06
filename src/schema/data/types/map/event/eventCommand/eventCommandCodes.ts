@@ -99,6 +99,8 @@ export const CHANGE_ACTOR_IMAGES = 322 as const;
 export const CHANGE_VEHICLE_IMAGE = 323 as const;
 export const CHANGE_NICKNAME = 324 as const;
 export const CHANGE_PROFILE = 325 as const;
+
+export const CHANGE_ENEMY_HP = 331 as const;
 export const OPEN_SAVE_SCREEN = 352 as const;
 export const GAME_OVER = 353 as const;
 export const RETURN_TO_TITLE_SCREEN = 354 as const;

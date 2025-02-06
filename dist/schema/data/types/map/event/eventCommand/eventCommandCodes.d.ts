@@ -89,6 +89,7 @@ export declare const CHANGE_ACTOR_IMAGES: 322;
 export declare const CHANGE_VEHICLE_IMAGE: 323;
 export declare const CHANGE_NICKNAME: 324;
 export declare const CHANGE_PROFILE: 325;
+export declare const CHANGE_ENEMY_HP: 331;
 export declare const OPEN_SAVE_SCREEN: 352;
 export declare const GAME_OVER: 353;
 export declare const RETURN_TO_TITLE_SCREEN: 354;

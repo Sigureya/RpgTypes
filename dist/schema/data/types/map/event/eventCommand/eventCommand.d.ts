@@ -2,6 +2,7 @@ import { BranchParameters } from './branchParams';
 import { EventCommandLike } from './eventComandLike';
 import { Command_RotatePicture, Command_TintPicture } from './eventCommandTypes';
 import { ChanageActorVariable, ControlVariables, MovePicture, ShopGoods, ShopProcessing, ShowPicture, ValueOf, Designation, Toggle, Operation_PlusMinus } from './paramaters';
+import { ChangeEnemyParameters } from './paramaters/changeBattler';
 import { AudioFileParams, CommandTemplate, ColorRGBA, Direction8, MoveRouteData, IndexOfParameter } from './types';
 import type * as EventCommandCodes from "./eventCommandCodes";
 import type * as Types from "./types";
@@ -278,6 +279,7 @@ export type EventCommandsMapper = CommandTemplate<typeof EventCommandCodes, Even
         animationId: number,
         waiting: ValueOf<Toggle>
     ];
+    CHANGE_ENEMY_HP: ChangeEnemyParameters;
     SHOW_BALLOON_ICON: [];
     ERASE_EVENT: [];
     CHANGE_PLAYER_FOLLOWERS: [];

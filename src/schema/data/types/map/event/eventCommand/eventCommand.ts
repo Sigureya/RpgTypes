@@ -17,6 +17,7 @@ import type {
   Toggle,
   Operation_PlusMinus,
 } from "./paramaters";
+import type { ChangeEnemyParameters } from "./paramaters/changeBattler";
 import type {
   AudioFileParams,
   CommandTemplate,
@@ -344,6 +345,7 @@ export type EventCommandsMapper = CommandTemplate<
       animationId: number,
       waiting: ValueOf<Toggle>
     ];
+    CHANGE_ENEMY_HP: ChangeEnemyParameters;
 
     SHOW_BALLOON_ICON: [];
 
