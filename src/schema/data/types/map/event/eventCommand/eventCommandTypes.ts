@@ -80,14 +80,15 @@ export interface Command_Label extends EventCommandLike<118, [label: string]> {}
 export interface Command_LabelJump
   extends EventCommandLike<119, [label: string]> {}
 
-export interface Command_ControlSwitches
-  extends EventCommandLike<
-    121,
-    [min: number, max: number, value: ValueOf<Toggle>]
-  > {}
+export interface Command_ControlSwitches extends EventCommandLike<121> {
+  parameters: [min: number, max: number, value: ValueOf<Toggle>];
+}
 
-export interface Command_ControlVariables
-  extends EventCommandLike<122, ControlVariables> {}
+export interface Command_ControlVariables<
+  Param extends ControlVariables = ControlVariables
+> extends EventCommandLike<122, Param> {
+  parameters: Param;
+}
 
 export interface Command_ControlSelfSwitch
   extends EventCommandLike<123, [switchId: string, value: ValueOf<Toggle>]> {}
