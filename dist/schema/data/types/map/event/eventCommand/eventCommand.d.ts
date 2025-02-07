@@ -1,6 +1,6 @@
 import { BranchParameters } from './branchParams';
 import { EventCommandLike } from './eventComandLike';
-import { Command_RotatePicture, Command_TintPicture } from './eventCommandTypes';
+import { Command_RotatePicture, Command_SetEventLocation, Command_SetVehicleLocation, Command_TintPicture } from './eventCommandTypes';
 import { ChanageActorVariable, ControlVariables, MovePicture, ShopGoods, ShopProcessing, ShowPicture, ValueOf, Designation, Toggle, Operation_PlusMinus } from './paramaters';
 import { Param_ChangeEnemyParameters, Param_EnemyIterate } from './paramaters/changeBattler';
 import { AudioFileParams, CommandTemplate, ColorRGBA, Direction8, MoveRouteData, IndexOfParameter } from './types';
@@ -265,19 +265,8 @@ export type EventCommandsMapper = CommandTemplate<typeof EventCommandCodes, Even
         direction: Direction8,
         fadeType: number
     ];
-    SET_VEHICLE_LOCATION: [
-        vehicleId: number,
-        mapId: number,
-        x: number,
-        y: number
-    ];
-    SET_EVENT_LOCATION: [
-        mapId: number,
-        eventId: number,
-        x: number,
-        y: number,
-        direction: Direction8
-    ];
+    SET_VEHICLE_LOCATION: Command_SetVehicleLocation["parameters"];
+    SET_EVENT_LOCATION: Command_SetEventLocation["parameters"];
     SCROLL_MAP: [];
     SET_MOVEMENT_ROUTE: [characterId: number, movement: MoveRouteData];
     GET_ONOFF_VEHICLE: [];
