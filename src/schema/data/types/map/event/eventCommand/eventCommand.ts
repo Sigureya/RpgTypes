@@ -17,7 +17,10 @@ import type {
   Toggle,
   Operation_PlusMinus,
 } from "./paramaters";
-import type { ChangeEnemyParameters } from "./paramaters/changeBattler";
+import type {
+  Param_ChangeEnemyParameters,
+  Param_EnemyIterate,
+} from "./paramaters/changeBattler";
 import type {
   AudioFileParams,
   CommandTemplate,
@@ -287,6 +290,16 @@ export type EventCommandsMapper = CommandTemplate<
     CHANGE_TP: ChanageActorVariable;
     RECOVER_ALL: [];
 
+    CHANGE_ENEMY_STATE: Param_ChangeEnemyParameters;
+    ENEMY_APPEAR: Param_EnemyIterate;
+    ENEMY_RECOVER_ALL: Param_EnemyIterate;
+    ENEMY_TRANSFORM: [enemyId: number, newEnemyId: number];
+    SHOW_BATTLE_ANIMATION: [characterId: number, animationId: number];
+    FORCE_ACTION: [characterId: number, action: string];
+    ABORT_BATTLE: [];
+
+    OPEN_MENU_SCREEN: [];
+
     CHANGE_NAME: [actorId: number, name: string];
     CHANGE_CLASS: [actorId: number, classId: number, keepExp: boolean];
     CHANGE_EXP: [];
@@ -345,7 +358,7 @@ export type EventCommandsMapper = CommandTemplate<
       animationId: number,
       waiting: ValueOf<Toggle>
     ];
-    CHANGE_ENEMY_HP: ChangeEnemyParameters;
+    CHANGE_ENEMY_HP: Param_ChangeEnemyParameters;
 
     SHOW_BALLOON_ICON: [];
 
@@ -374,6 +387,9 @@ export type EventCommandsMapper = CommandTemplate<
     TINT_PICTURE: Command_TintPicture["parameters"];
     ROTATE_PICTURE: Command_RotatePicture["parameters"];
     ERASE_PICTURE: [pictureId: number];
+
+    CHANGE_ENEMY_MP: Param_ChangeEnemyParameters;
+    CHANGE_ENEMY_TP: Param_ChangeEnemyParameters;
 
     /**
      * @description Change Nickname

@@ -101,10 +101,22 @@ export const CHANGE_NICKNAME = 324 as const;
 export const CHANGE_PROFILE = 325 as const;
 
 export const CHANGE_ENEMY_HP = 331 as const;
+export const CHANGE_ENEMY_MP = 332 as const;
+
+export const CHANGE_ENEMY_STATE = 333 as const;
+export const ENEMY_RECOVER_ALL = 334 as const;
+export const ENEMY_APPEAR = 335 as const;
+export const ENEMY_TRANSFORM = 336 as const;
+export const SHOW_BATTLE_ANIMATION = 337 as const;
+export const FORCE_ACTION = 339 as const;
+export const ABORT_BATTLE = 340 as const;
+export const OPEN_MENU_SCREEN = 351 as const;
+
+export const CHANGE_ENEMY_TP = 342 as const;
+
 export const OPEN_SAVE_SCREEN = 352 as const;
 export const GAME_OVER = 353 as const;
 export const RETURN_TO_TITLE_SCREEN = 354 as const;
-
 export const SCRIPT_EVAL = 355 as const;
 export const SCRIPT_EVAL_BODY = 655 as const;
 export const PLUGIN_COMMAND_MV = 356 as const;

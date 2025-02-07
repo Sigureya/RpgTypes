@@ -16,7 +16,7 @@ import type {
   Designation,
 } from "./paramaters";
 import type { BranchParameters } from "./branchParams";
-import type { ChangeEnemyParameters } from "./paramaters/changeBattler";
+import type { Param_ChangeEnemyParameters } from "./paramaters/changeBattler";
 export interface Command_ShowMessage extends EventCommandLike<101> {
   parameters: [
     facename: string,
@@ -200,7 +200,13 @@ export interface Command_TransferPlayer extends EventCommandLike<201> {
 }
 
 export interface Command_SetVehicleLocation extends EventCommandLike<202> {
-  parameters: [vehicleId: number, mapId: number, x: number, y: number];
+  parameters: [
+    vehicleId: number,
+    designation: ValueOf<Designation>,
+    mapId: number,
+    x: number,
+    y: number
+  ];
 }
 
 export interface Command_SetEventLocation extends EventCommandLike<203> {
@@ -364,11 +370,14 @@ export interface Command_GetLocationInfo extends EventCommandLike<285> {
   ];
 }
 
-export interface Command_BattleProcessing
-  extends EventCommandLike<
-    301,
-    [0 | 1 | 2, troopId: number, canEscape: boolean, canLose: boolean]
-  > {}
+export interface Command_BattleProcessing extends EventCommandLike<301> {
+  parameters: [
+    designation: ValueOf<Designation> | 2,
+    troopId: number,
+    canEscape: boolean,
+    canLose: boolean
+  ];
+}
 
 // export interface Command_ShopProcessing extends EventCommandLike2<302, []> {}
 
@@ -416,7 +425,11 @@ export interface Command_ChangeProfile extends EventCommandLike<325> {
 }
 
 export interface Command_ChangeEnemyHP extends EventCommandLike<331> {
-  parameters: ChangeEnemyParameters;
+  parameters: Param_ChangeEnemyParameters;
+}
+
+export interface Command_ChangeEnemyMP extends EventCommandLike<332> {
+  parameters: Param_ChangeEnemyParameters;
 }
 
 export interface Command_OpenSaveScreen extends EventCommandLike<352, []> {}
