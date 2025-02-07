@@ -3,6 +3,8 @@ import type { EventCommandLike } from "./eventComandLike";
 import type * as EventCommandCodes from "./eventCommandCodes";
 import type {
   Command_RotatePicture,
+  Command_SetEventLocation,
+  Command_SetVehicleLocation,
   Command_TintPicture,
 } from "./eventCommandTypes";
 import type {
@@ -333,20 +335,9 @@ export type EventCommandsMapper = CommandTemplate<
       fadeType: number
     ];
 
-    SET_VEHICLE_LOCATION: [
-      vehicleId: number,
-      mapId: number,
-      x: number,
-      y: number
-    ];
+    SET_VEHICLE_LOCATION: Command_SetVehicleLocation["parameters"];
 
-    SET_EVENT_LOCATION: [
-      mapId: number,
-      eventId: number,
-      x: number,
-      y: number,
-      direction: Direction8
-    ];
+    SET_EVENT_LOCATION: Command_SetEventLocation["parameters"];
     SCROLL_MAP: [];
 
     SET_MOVEMENT_ROUTE: [characterId: number, movement: MoveRouteData];
