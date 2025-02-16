@@ -2,6 +2,7 @@ export * from "./main";
 
 export * from "./commonEvent";
 
+export * from "./troopMembers";
 export * from "./troop";
 export * from "./animation";
 
