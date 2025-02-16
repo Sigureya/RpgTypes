@@ -1,9 +1,17 @@
-import type { EventCommand } from "./eventCommand";
+import type { EventCode, EventCommand } from "./eventCommand";
 
-export type ExtractCommandByParam<P extends unknown[]> = Extract<
-  EventCommand,
-  { parameters: P }
->;
+export type ExtractCommandByParam<
+  P extends unknown[],
+  Commands = EventCommand
+> = Extract<Commands, { parameters: P }>;
+
+export type ExtractCommandByCode<
+  C extends number,
+  Commands = EventCommand
+> = Extract<Commands, { code: C }>;
+
+export type CommandParamaterType<Code extends EventCode> =
+  ExtractCommandByCode<Code>["parameters"];
 
 /**
  * @deprecated Use `ExtractCommandByParam` instead.
