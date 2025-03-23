@@ -5,3 +5,4 @@ export * from './system';
 export * from './systemMembers';
 export * from './systemSoundArray';
 export * from './vehicle';
+export * from './dataContainer';
