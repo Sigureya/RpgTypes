@@ -76,6 +76,15 @@ export interface Data_System {
   tileSize: number;
 }
 
+export type System_Pick<
+  K1 extends keyof Data_System,
+  K2 extends keyof Data_System[K1]
+> = {
+  [key in K1]: Pick<Data_System[K1], K2>;
+};
+
+export type System_ParamNames = System_Pick<"terms", "params">;
+
 export type System_DataNames = Pick<
   Data_System,
   | "weaponTypes"
@@ -97,9 +106,11 @@ export type System_Images = Pick<
 >;
 
 export type System_Text = Pick<Data_System, "gameTitle" | "currencyUnit">;
+
 export type System_Vehicle = Pick<Data_System, "boat" | "ship" | "airship">;
 
 export type System_Bgm = Pick<Data_System, "titleBgm" | "battleBgm">;
+
 export type System_Me = Pick<
   Data_System,
   "gameoverMe" | "defeatMe" | "victoryMe"
@@ -107,6 +118,7 @@ export type System_Me = Pick<
 
 export type System_AudioFiles = System_Bgm &
   System_Me & { sounds: System_SoundsArray };
+
 export type System_BoolanOptions = Pick<
   Data_System,
   | "optAutosave"
