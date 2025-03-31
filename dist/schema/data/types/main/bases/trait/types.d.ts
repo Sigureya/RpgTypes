@@ -1,7 +1,7 @@
 import type * as $ from "./traitConstants";
 export type TraitCode = (typeof $)[keyof typeof $];
 export interface Trait {
-    code: TraitCode;
+    code: number;
     dataId: number;
     value: number;
 }
