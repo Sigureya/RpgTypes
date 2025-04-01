@@ -1,7 +1,7 @@
 /**
  * * 追加能力値のラベル
  */
-export interface XParamLabels {
+export interface ExtraParamLabels {
   hitRate: string;
   evasionRate: string;
   criticalRate: string;
