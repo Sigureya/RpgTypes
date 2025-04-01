@@ -3,9 +3,9 @@ export interface TraitTypeLabels {
   debuffRate: string;
   stateRate: string;
   stateResist: string;
-  param: string;
-  xparam: string;
-  sparam: string;
+  regularParam: string;
+  extraParam: string;
+  specialParam: string;
   attackElement: string;
   attackState: string;
   attackSpeed: string;
