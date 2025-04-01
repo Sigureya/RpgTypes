@@ -11,7 +11,3 @@ export declare const EFFECT_SPECIAL: 41;
 export declare const EFFECT_GROW: 42;
 export declare const EFFECT_LEARN_SKILL: 43;
 export declare const EFFECT_COMMON_EVENT: 44;
-export declare const SPECIAL_EFFECT_ESCAPE: 0;
-export declare const HITTYPE_CERTAIN: 0;
-export declare const HITTYPE_PHYSICAL: 1;
-export declare const HITTYPE_MAGICAL: 2;

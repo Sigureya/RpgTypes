@@ -1,4 +1,4 @@
-import type * as $ from "./traitConstants";
+import type * as $ from "./constants/traitCode";
 export type TraitCode = (typeof $)[keyof typeof $];
 export interface Trait {
     code: number;
