@@ -1,4 +1,4 @@
-export interface MainParamLabels {
+export interface RegularParamLabels {
   /**
    * * Maximum HP
    */
