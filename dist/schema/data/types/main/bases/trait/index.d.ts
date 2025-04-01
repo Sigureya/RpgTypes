@@ -1,2 +1,4 @@
 export * from './types';
-export * from './constants';
+export * from './traitCode';
+export * from './options';
+export * from './traitTypeLabels';
