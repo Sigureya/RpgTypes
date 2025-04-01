@@ -1,2 +1,2 @@
 export * from "./constants";
-export * from "./lables";
+export * from "./labels";
