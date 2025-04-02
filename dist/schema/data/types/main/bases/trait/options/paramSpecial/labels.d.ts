@@ -1,4 +1,4 @@
-export interface SpecialParams {
+export interface SpecialParamLabels {
     targetRate: string;
     guradEffectRate: string;
     recoveryEffectRate: string;

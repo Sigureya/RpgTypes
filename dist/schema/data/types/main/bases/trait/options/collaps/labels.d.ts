@@ -1,4 +1,4 @@
-export interface CollapsOptions {
+export interface CollapsOptionLabels {
     bossCollaps: string;
     instantCollaps: string;
     noneCollaps: string;
