@@ -1,4 +1,4 @@
-export interface PartyAbilityOptions {
+export interface PartyAbilityOptionLabels {
     cancelSurprise: string;
     dropItemDouble: string;
     encounterHalf: string;
