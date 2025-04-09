@@ -1,4 +1,4 @@
-import type { Data_System } from "./system";
+import type { Data_System, System_DataNames } from "./system";
 import type {
   Data_Actor,
   Data_Skill,
@@ -34,4 +34,4 @@ export type GlobalGameDataNamedItems = {
   >
     ? NamedItem<T>[]
     : never;
-};
+} & { system: System_DataNames };
