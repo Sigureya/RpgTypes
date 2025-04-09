@@ -6,3 +6,4 @@ export * from "./systemMembers";
 export * from "./systemSoundArray";
 export * from "./vehicle";
 export * from "./dataContainer";
+export * from "./globalGameData";
