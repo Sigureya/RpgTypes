@@ -1,5 +1,5 @@
 import type { ItemCodeLabels, TraitLabels } from "./data";
-import type { GlobalLabel } from "./globalLables";
+import type { GlobalLabel } from "./globalLabels";
 
 export interface EditorLabels {
   global: GlobalLabel;
