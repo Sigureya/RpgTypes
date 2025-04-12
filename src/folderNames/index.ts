@@ -1,3 +1,3 @@
-export * from "./audio";
-export * from "./images";
+export * from "./asset/";
 export * from "./types";
+export * from "./data";
