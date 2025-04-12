@@ -5,4 +5,10 @@ export interface EditorLabels {
   global: GlobalLabel;
   trait: TraitLabels;
   itemEffect: ItemCodeLabels;
+  actor: DataLabels;
+  enemy: DataLabels;
+}
+// 詳細が未定な型のためのプレースホルダ
+export interface DataLabels {
+  domainName: string;
 }
