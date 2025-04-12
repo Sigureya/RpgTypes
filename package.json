@@ -1,4 +1,5 @@
 {
+  "sideEffects": false,
   "name": "@sigureya/rpgtypes",
   "version": "1.3.1",
   "description": "A TypeScript library for RpgMakerMZ-related types.",

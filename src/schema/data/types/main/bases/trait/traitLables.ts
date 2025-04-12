@@ -9,6 +9,7 @@ import type {
 import type { TraitTypeLabels } from "./traitTypeLabels";
 
 export interface TraitLabels {
+  domainName: string;
   types: TraitTypeLabels;
   options: {
     paramSpecial: SpecialParamLabels;
