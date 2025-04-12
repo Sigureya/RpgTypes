@@ -7,8 +7,3 @@ export interface Trait {
   dataId: number;
   value: number;
 }
-
-export interface Data_TraitContainer {
-  traits: Trait[];
-  note: string;
-}
