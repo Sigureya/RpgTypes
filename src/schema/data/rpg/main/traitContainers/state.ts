@@ -1,6 +1,7 @@
-import type { Data_NamedItem, Data_TraitContainer, Trait } from "./bases";
+import type { Trait } from "./trait";
+import type { Data_TraitContainer } from "./traitContainer";
 
-export interface Data_State extends Data_NamedItem, Data_TraitContainer {
+export interface Data_State extends Data_TraitContainer {
   name: string;
   id: number;
   iconIndex: number;
