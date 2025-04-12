@@ -12,7 +12,7 @@ import type {
   Data_Tileset,
   Data_Troop,
   Data_Weapon,
-} from "./types";
+} from "./rpg";
 
 export interface DataTypesTable {
   Actors: Data_Actor;

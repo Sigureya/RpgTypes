@@ -1,4 +1,4 @@
-import type { AudioFileParams } from "./types";
+import type { AudioFileParams } from "./rpg";
 
 export type System_SoundsArray = [
   cursor: AudioFileParams,

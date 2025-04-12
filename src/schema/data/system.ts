@@ -5,7 +5,7 @@ import type {
   System_Terms,
 } from "./systemMembers";
 import type { System_SoundsArray } from "./systemSoundArray";
-import type { AudioFileParams, ColorRGBA } from "./types";
+import type { AudioFileParams, ColorRGBA } from "./rpg";
 import type { Data_Vehicle } from "./vehicle";
 
 export interface Data_System {

@@ -1,4 +1,4 @@
-import type { AudioFileParams } from "./types";
+import type { AudioFileParams } from "./rpg";
 
 export interface Data_Vehicle {
   bgm: AudioFileParams;
