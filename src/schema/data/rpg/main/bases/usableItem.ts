@@ -1,13 +1,5 @@
-import type { ItemEffect } from "./itemEffect";
+import type { ItemEffect, Damage } from "./item";
 import type { Data_NamedItem } from "./namedItem";
-
-export interface Damage {
-  type: number;
-  elementId: number;
-  formula: string;
-  variance: number;
-  critical: boolean;
-}
 
 export interface Data_UsableItem extends Data_NamedItem {
   iconIndex: number;
