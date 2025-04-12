@@ -16,8 +16,6 @@ export interface GlobalLabel {
   params: string;
   price: string;
   repeats: string;
-  requiredWeaponTypeId1: string;
-  requiredWeaponTypeId2: string;
   scope: string;
   speed: string;
   successRate: string;
