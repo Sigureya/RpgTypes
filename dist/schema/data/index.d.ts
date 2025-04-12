@@ -1,4 +1,4 @@
-export * from './types';
+export * from './rpg';
 export * from './dataTypesTable';
 export * from './dataName';
 export * from './system';

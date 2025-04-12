@@ -1,6 +1,6 @@
 import { TestBattlers, AttackMotion, System_Advanced, System_Terms } from './systemMembers';
 import { System_SoundsArray } from './systemSoundArray';
-import { AudioFileParams, ColorRGBA } from './types';
+import { AudioFileParams, ColorRGBA } from './rpg';
 import { Data_Vehicle } from './vehicle';
 export interface Data_System {
     battleback1Name: string;

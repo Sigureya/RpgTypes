@@ -12,7 +12,7 @@ import type {
   Data_Troop,
   Data_NamedItem,
   NamedItem,
-} from "./types";
+} from "./rpg";
 
 export interface GlobalGameData {
   system: Data_System;

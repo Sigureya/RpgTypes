@@ -8,7 +8,6 @@ export interface GlobalLabel {
     classId: string;
     description: string;
     dropItems: string;
-    etypeId: string;
     exp: string;
     hitType: string;
     iconIndex: string;
@@ -21,10 +20,8 @@ export interface GlobalLabel {
     requiredWeaponTypeId2: string;
     scope: string;
     speed: string;
-    stypeId: string;
     successRate: string;
     tpGain: string;
-    weaponTypeId: string;
     animationId: string;
     damage: string;
     effects: string;
@@ -39,7 +36,6 @@ export interface GlobalLabel {
     critical: string;
     effectName: string;
     formula: string;
-    equips: string;
     faceIndex: string;
     faceName: string;
     flashTimings: string;
