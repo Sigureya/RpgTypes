@@ -1,15 +1,17 @@
-import { ActorLabels, EnemyLables, ItemLabels, ItemCodeLabels, SkillLabels, WeaponLabels, ArmorLables, NamedItemLables, ClassLabels, StateLabels, TraitLabels } from './main';
+import { ActorLabels, EnemyLabels, ItemLabels, ItemCodeLabels, SkillLabels, WeaponLabels, ArmorLabels, NamedItemLables, ClassLabels, StateLabels, TraitLabels, UsableItemLabels, DamageLabels } from './main';
 export interface RpgLabels {
     actor: ActorLabels;
-    enemy: EnemyLables;
+    enemy: EnemyLabels;
     item: ItemLabels;
     itemCode: ItemCodeLabels;
     skill: SkillLabels;
     weapon: WeaponLabels;
-    armor: ArmorLables;
+    armor: ArmorLabels;
     namedItem: NamedItemLables;
     class: ClassLabels;
     state: StateLabels;
+    usableItem: UsableItemLabels;
+    damage: DamageLabels;
     trait: TraitLabels;
     itemEffect: ItemCodeLabels;
 }
