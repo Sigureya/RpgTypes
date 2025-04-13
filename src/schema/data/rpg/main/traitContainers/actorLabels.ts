@@ -7,7 +7,7 @@ export interface ActorLabels {
   svBattlerImage: string;
   nickname: string;
   profile: string;
-  class: string;
+  classId: string;
   initialLevel: string;
   maxLevel: string;
 }
