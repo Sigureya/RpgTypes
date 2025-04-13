@@ -6,7 +6,7 @@ import type {
   SkillLabels,
   WeaponLabels,
   ArmorLabels,
-  NamedItemLables,
+  NamedItemLabels,
   ClassLabels,
   StateLabels,
   TraitLabels,
@@ -22,7 +22,7 @@ export interface RpgLabels {
   skill: SkillLabels;
   weapon: WeaponLabels;
   armor: ArmorLabels;
-  namedItem: NamedItemLables;
+  namedItem: NamedItemLabels;
   class: ClassLabels;
   state: StateLabels;
   usableItem: UsableItemLabels;

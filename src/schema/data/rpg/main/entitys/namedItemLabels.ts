@@ -1,4 +1,4 @@
-export interface NamedItemLables {
+export interface NamedItemLabels {
   id: string;
   name: string;
 }

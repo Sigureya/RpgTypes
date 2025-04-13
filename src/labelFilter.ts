@@ -77,7 +77,7 @@ export const itemCodeLabels = (
 };
 export const namedItemLabels = (
   labels: RPG.LabelRegistry
-): RPG.NamedItemLables => {
+): RPG.NamedItemLabels => {
   return labels.rpg.namedItem;
 };
 export const damageLabels = (labels: RPG.LabelRegistry): RPG.DamageLabels => {

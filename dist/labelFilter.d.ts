@@ -15,5 +15,5 @@ export declare const armorLabels: (labels: RPG.LabelRegistry) => RPG.ArmorLabels
 export declare const weaponLabels: (labels: RPG.LabelRegistry) => RPG.WeaponLabels;
 export declare const usableItemLabels: (labels: RPG.LabelRegistry) => RPG.UsableItemLabels;
 export declare const itemCodeLabels: (labels: RPG.LabelRegistry) => RPG.ItemCodeLabels;
-export declare const namedItemLabels: (labels: RPG.LabelRegistry) => RPG.NamedItemLables;
+export declare const namedItemLabels: (labels: RPG.LabelRegistry) => RPG.NamedItemLabels;
 export declare const damageLabels: (labels: RPG.LabelRegistry) => RPG.DamageLabels;
