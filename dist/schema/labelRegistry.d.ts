@@ -1,12 +1,10 @@
-import { ItemCodeLabels, TraitLabels } from './data';
+import { RpgLabels } from './data';
 import { GlobalLabel } from './globalLabels';
-export interface EditorLabels {
+export interface LabelRegistry {
     global: GlobalLabel;
-    trait: TraitLabels;
-    itemEffect: ItemCodeLabels;
-    actor: DataLabels;
-    enemy: DataLabels;
+    rpg: RpgLabels;
 }
-export interface DataLabels {
-    domainName: string;
-}
+/**
+ * @deprecated
+ */
+export type EditorLabels = LabelRegistry;
