@@ -1,0 +1,13 @@
+import type * as RPG from "./schema";
+export declare const regularParamLabels: (labels: RPG.LabelRegistry) => RPG.RegularParamLabels;
+export declare const specialParamLabels: (labels: RPG.LabelRegistry) => RPG.SpecialParamLabels;
+export declare const extraParamLabels: (labels: RPG.LabelRegistry) => RPG.ExtraParamLabels;
+export declare const traitLabels: (labels: RPG.LabelRegistry) => RPG.TraitLabels;
+export declare const itemEffectLabels: (labels: RPG.LabelRegistry) => RPG.ItemCodeLabels;
+export declare const globalLabel: (labels: RPG.LabelRegistry) => RPG.GlobalLabel;
+export declare const itemLabels: (labels: RPG.LabelRegistry) => RPG.ItemLabels;
+export declare const skillLabels: (labels: RPG.LabelRegistry) => RPG.SkillLabels;
+export declare const actorLabels: (labels: RPG.LabelRegistry) => RPG.ActorLabels;
+export declare const classLabels: (labels: RPG.LabelRegistry) => RPG.ClassLabels;
+export declare const stateLabels: (labels: RPG.LabelRegistry) => RPG.StateLabels;
+export declare const enemyLabels: (labels: RPG.LabelRegistry) => RPG.EnemyLables;
