@@ -1,4 +1,4 @@
-export interface ArmorLables {
+export interface ArmorLabels {
   domainName: string;
 
   armorTypeId: string;

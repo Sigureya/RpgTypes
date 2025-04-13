@@ -52,6 +52,34 @@ export const stateLabels = (labels: RPG.LabelRegistry): RPG.StateLabels => {
   return labels.rpg.state;
 };
 
-export const enemyLabels = (labels: RPG.LabelRegistry): RPG.EnemyLables => {
+export const enemyLabels = (labels: RPG.LabelRegistry): RPG.EnemyLabels => {
   return labels.rpg.enemy;
+};
+
+export const armorLabels = (labels: RPG.LabelRegistry): RPG.ArmorLabels => {
+  return labels.rpg.armor;
+};
+
+export const weaponLabels = (labels: RPG.LabelRegistry): RPG.WeaponLabels => {
+  return labels.rpg.weapon;
+};
+
+export const usableItemLabels = (
+  labels: RPG.LabelRegistry
+): RPG.UsableItemLabels => {
+  return labels.rpg.usableItem;
+};
+
+export const itemCodeLabels = (
+  labels: RPG.LabelRegistry
+): RPG.ItemCodeLabels => {
+  return labels.rpg.itemCode;
+};
+export const namedItemLabels = (
+  labels: RPG.LabelRegistry
+): RPG.NamedItemLables => {
+  return labels.rpg.namedItem;
+};
+export const damageLabels = (labels: RPG.LabelRegistry): RPG.DamageLabels => {
+  return labels.rpg.damage;
 };
