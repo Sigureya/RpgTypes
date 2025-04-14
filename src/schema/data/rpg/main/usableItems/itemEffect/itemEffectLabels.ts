@@ -1,4 +1,4 @@
-export interface ItemCodeLabels {
+export interface ItemEffectTypeLabels {
   recoverHp: string;
   recoverMp: string;
   gainTp: string;

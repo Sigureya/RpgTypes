@@ -1,14 +1,28 @@
-import { CollapsOptionLabels, ExtraParamLabels, PartyAbilityOptionLabels, RegularParamLabels, SpecialFlagOptions, SpecialParamLabels } from './options';
-import { TraitTypeLabels } from './traitTypeLabels';
 export interface TraitLabels {
     domainName: string;
-    types: TraitTypeLabels;
-    options: {
-        paramSpecial: SpecialParamLabels;
-        paramExtra: ExtraParamLabels;
-        paramRegular: RegularParamLabels;
-        partyAbility: PartyAbilityOptionLabels;
-        collaps: CollapsOptionLabels;
-        specialFlag: SpecialFlagOptions;
-    };
+    elementRate: string;
+    debuffRate: string;
+    stateRate: string;
+    stateResist: string;
+    regularParam: string;
+    extraParam: string;
+    specialParam: string;
+    attackElement: string;
+    attackState: string;
+    attackSpeed: string;
+    attackTimes: string;
+    attackSkill: string;
+    skillTypeAdd: string;
+    skillTypeSeal: string;
+    skillAdd: string;
+    skillSeal: string;
+    equipWeaponType: string;
+    equipArmortype: string;
+    equipLock: string;
+    equipSeal: string;
+    slotType: string;
+    actionPlus: string;
+    specialFlag: string;
+    collapseType: string;
+    partyAbility: string;
 }
