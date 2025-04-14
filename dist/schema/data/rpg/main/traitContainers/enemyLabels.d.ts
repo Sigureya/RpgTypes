@@ -1,4 +1,4 @@
-export interface EnemyLables {
+export interface EnemyLabels {
     domainName: string;
     dropItems: string;
     battlerHue: string;

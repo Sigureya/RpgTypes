@@ -8,4 +8,4 @@ export * from "./animation";
 
 export * from "./map";
 export * from "./tileset";
-export * from "./rpgLables";
+export * from "./rpgLabels";
