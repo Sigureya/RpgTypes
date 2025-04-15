@@ -1,4 +1,8 @@
+/**
+ * @deprecated
+ */
 export interface TraitTypeLabels {
+    domainName: string;
     elementRate: string;
     debuffRate: string;
     stateRate: string;
