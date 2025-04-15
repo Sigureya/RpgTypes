@@ -1,5 +1,5 @@
 import type { AudioFileParams } from "./audioFileParams";
-import type * as MoveRouteConstants from "./moveRoute/code";
+import type * as MoveRouteConstants from "./domains/moveRoute/constants";
 import type { CommandTemplateSimple } from "./template/";
 
 export type MoveRouteMapper = CommandTemplateSimple<
