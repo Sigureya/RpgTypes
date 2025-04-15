@@ -12,12 +12,7 @@ export interface GlobalLabel {
     successRate: string;
     animationId: string;
     displayType: string;
-    characterIndex: string;
-    characterName: string;
-    consumable: string;
-    critical: string;
     effectName: string;
-    formula: string;
     faceIndex: string;
     faceName: string;
     flashTimings: string;
