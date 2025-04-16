@@ -18,9 +18,7 @@ export const mergeWithDefaults = <T>(
   return reulst;
 };
 
-export const mergeNestedPrimitiveRecords = <
-  T extends Record<string, PrimitiveRecord<object>>
->(
+export const mergeNestedPrimitiveRecords = <T>(
   base: T,
   override: Partial<{ [K in keyof T]: Partial<PrimitiveRecord<T[K]>> }>
 ): T => {
@@ -29,7 +27,7 @@ export const mergeNestedPrimitiveRecords = <
     const domainBase = base[domain];
     const domainOverride = override[domain] ?? {};
     result[domain] = mergeWithDefaults(
-      domainBase,
+      domainBase as Required<typeof domainOverride>,
       domainOverride
     ) as T[typeof domain];
   }
