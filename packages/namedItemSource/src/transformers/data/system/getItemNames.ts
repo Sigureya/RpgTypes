@@ -2,7 +2,7 @@ import type {
   Data_NamedItem,
   Data_System,
   System_ParamNames,
-} from "@sigureya/rpgtypes";
+} from "@RpgTypes/schema";
 
 const makeNamedItem = (name: string, index: number): Data_NamedItem => ({
   name: name,

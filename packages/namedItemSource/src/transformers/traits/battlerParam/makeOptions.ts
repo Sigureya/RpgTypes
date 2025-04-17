@@ -46,7 +46,7 @@ import {
   REGULAR_PARAM_MDEF,
   REGULAR_PARAM_AGI,
   REGULAR_PARAM_LUK,
-} from "@sigureya/rpgtypes";
+} from "@RpgTypes/schema";
 
 export const foldCollapsOptions = (
   options: CollapsOptionLabels,
