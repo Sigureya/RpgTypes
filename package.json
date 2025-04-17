@@ -11,11 +11,14 @@
       "import": "./dist/rpgtypes.es.js"
     }
   },
+  "workspaces": [
+    "packages/schema"
+  ],
   "files": [
     "dist/**/*"
   ],
   "scripts": {
-    "build": "vite build",
+    "build": "npx pnpm -r run build",
     "test": "vitest",
     "test:watch": "vitest --watch",
     "lint": "eslint src --ext .ts"
