@@ -4,15 +4,15 @@
   "description": "RPGツクールの基本型定義。エディタ関連も含む。",
   "main": "dist/schema.cjs.js",
   "module": "dist/schema.es.js",
-  "types": "dist/index.d.ts",
   "exports": {
     ".": {
+      "types": "./dist/index.d.ts",
       "import": "./dist/schema.es.js",
       "require": "./dist/schema.cjs.js"
     }
   },
   "files": [
-    "dist"
+    "./dist"
   ],
   "scripts": {
     "build": "vite build"

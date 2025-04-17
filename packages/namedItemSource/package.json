@@ -1,18 +1,16 @@
 {
-  "name": "@rpg-types/named-item-source",
-  "version": "0.1.0",
-  "description": "RPGツクールの基本型定義。エディタ関連も含む。",
+  "name": "@sigureya/rpgtypes-nameditemsource",
   "main": "dist/namedItemSource.cjs.js",
   "module": "dist/namedItemSource.es.js",
-  "types": "dist/index.d.ts",
   "exports": {
     ".": {
+      "types": "./dist/index.d.ts",
       "import": "./dist/namedItemSource.es.js",
       "require": "./dist/namedItemSource.cjs.js"
     }
   },
   "files": [
-    "dist"
+    "./dist"
   ],
   "scripts": {
     "build": "vite build"
