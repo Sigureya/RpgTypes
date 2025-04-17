@@ -6,16 +6,16 @@
   "main": "./dist/index.d.ts",
   "exports": {
     ".": {
-      "require": "./dist/rpgtypes.cjs.js",
-      "types": "./dist/index.d.ts",
-      "import": "./dist/rpgtypes.es.js"
+      "require": "./packages/schema/dist/schema.cjs.js",
+      "types": "./packages/schema/dist/index.d.ts",
+      "import": "./packages/schema/dist/rpgtypes.es.js"
     }
   },
   "files": [
     "dist/**/*"
   ],
   "scripts": {
-    "build": "vite build",
+    "build": "npx pnpm -r run build",
     "test": "vitest",
     "test:watch": "vitest --watch",
     "lint": "eslint src --ext .ts"
