@@ -17,7 +17,8 @@
     }
   },
   "files": [
-    "packages/**/dist/**/*"
+    "packages/**/dist/**/*",
+    "packages/**/package.json"
   ],
   "scripts": {
     "build": "npx pnpm -r run build",
