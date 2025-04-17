@@ -1,14 +1,19 @@
 {
-  "sideEffects": false,
   "name": "@sigureya/rpgtypes",
   "version": "2.0.0",
+  "main": "./packages/schema/dist/schema.cjs.js",
   "description": "A TypeScript library for RpgMakerMZ-related types.",
-  "main": "./dist/index.d.ts",
+  "sideEffects": false,
   "exports": {
     ".": {
-      "require": "./packages/schema/dist/schema.cjs.js",
       "types": "./packages/schema/dist/index.d.ts",
-      "import": "./packages/schema/dist/rpgtypes.es.js"
+      "import": "./packages/schema/dist/schema.es.js",
+      "require": "./packages/schema/dist/schema.cjs.js"
+    },
+    "./namedItemSource": {
+      "types": "./packages/namedItemSource/dist/index.d.ts",
+      "import": "./packages/namedItemSource/dist/namedItemSource.es.js",
+      "require": "./packages/namedItemSource/dist/namedItemSource.cjs.js"
     }
   },
   "files": [

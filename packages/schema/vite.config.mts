@@ -14,7 +14,7 @@ export default defineConfig({
   },
   plugins: [
     dts({
-      exclude: ["src/**/*.test.ts"], // 型定義生成からテストコードを除外
+      exclude: ["src/**/*.test.ts"],
     }),
   ],
 });

@@ -1,11 +1,10 @@
 {
   "compilerOptions": {
-    "rootDir": "../../",
     "target": "ESNext",
     "module": "ESNext",
     "moduleResolution": "bundler",
     "declaration": true,
-    "declarationDir": "dist",
+    "declarationDir": "./dist",
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "strict": true,
