@@ -1,8 +1,4 @@
-import type { Data_NamedItem } from "@sigureya/rpgtypes";
+import type { NamedItemSource } from "@RpgTypes/schema";
 
-export interface NamedItemSource {
-  label: string;
-  sourceKey: string;
-  items: Data_NamedItem[];
-}
+export { NamedItemSource } from "@RpgTypes/schema";
 export type NamedItemRecord<T extends {}> = Record<keyof T, NamedItemSource>;
