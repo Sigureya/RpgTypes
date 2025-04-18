@@ -1,1 +1,1 @@
-export * from "./getItemNames";
+export * from "./getSystemTypeNames";

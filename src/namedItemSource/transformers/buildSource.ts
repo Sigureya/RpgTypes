@@ -8,6 +8,7 @@ import type {
   ExtraParamLabels,
   SpecialParamLabels,
 } from "@RpgTypes/schema";
+
 import {
   SRC_TRAIT_COLLAPS,
   SRC_TRAIT_PARTY_ABILITY,
@@ -15,13 +16,14 @@ import {
   SRC_PARAMS_EXTRA,
   SRC_PARAMS_SPECIAL,
 } from "@RpgTypes/schema";
+
 import {
   foldCollapsOptions,
   foldPartyAbilityOptions,
   foldRegularParam,
   foldExtraParam,
   foldSpecialParams,
-} from "./traits";
+} from "./labels/traits";
 import { AUTHOR_RMMZ, MODULE_TRAIT } from "./constants";
 
 export const traitDomain = <T>(
