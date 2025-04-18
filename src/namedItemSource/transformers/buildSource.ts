@@ -16,14 +16,13 @@ import {
   SRC_PARAMS_SPECIAL,
 } from "@RpgTypes/schema";
 import {
-  AUTHOR_RMMZ,
-  MODULE_TRAIT,
   foldCollapsOptions,
   foldPartyAbilityOptions,
   foldRegularParam,
   foldExtraParam,
   foldSpecialParams,
 } from "./traits";
+import { AUTHOR_RMMZ, MODULE_TRAIT } from "./constants";
 
 export const traitDomain = <T>(
   sourceKey: string,

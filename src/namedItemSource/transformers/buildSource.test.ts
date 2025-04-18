@@ -15,7 +15,7 @@ import {
   buildRegularParamSource,
   buildSpecialParamSource,
 } from "./buildSource";
-import { MODULE_TRAIT } from "./traits/constants";
+import { MODULE_TRAIT } from "./constants";
 
 // Renamed test helper function for clarity
 const validateNamedItemSourceStructure = (source: NamedItemSource) => {
