@@ -8,8 +8,8 @@ import type {
   RegularParamLabels,
 } from "@RpgTypes/schema/";
 import {
-  COLLAPS_NORMAL,
   COLLAPS_BOSS,
+  COLLAPS_NORMAL,
   COLLAPS_INSTANT,
   COLLAPS_NONE,
   PARTY_ABILITY_CANCEL_SURPRISE,
