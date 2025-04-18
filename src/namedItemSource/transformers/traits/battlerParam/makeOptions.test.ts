@@ -8,7 +8,7 @@ import type {
   SpecialParamLabels,
   GlobalLabel,
   RegularParamLabels,
-} from "@sigureya/rpgtypes";
+} from "@RpgTypes/schema";
 import {
   COLLAPS_NORMAL,
   COLLAPS_BOSS,
@@ -48,7 +48,7 @@ import {
   REGULAR_PARAM_MDEF,
   REGULAR_PARAM_AGI,
   REGULAR_PARAM_LUK,
-} from "@sigureya/rpgtypes";
+} from "@RpgTypes/schema";
 import {
   foldCollapsOptions,
   foldPartyAbilityOptions,
