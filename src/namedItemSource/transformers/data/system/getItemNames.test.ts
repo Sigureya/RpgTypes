@@ -10,7 +10,7 @@ import type {
   System_ParamNames,
   Data_System,
   Data_NamedItem,
-} from "@sigureya/rpgtypes";
+} from "@RpgTypes/schema";
 
 const system: System_ParamNames &
   Pick<Data_System, "elements" | "variables" | "equipTypes" | "skillTypes"> = {
