@@ -32,7 +32,7 @@ import {
   SPECIAL_PARAM_MDR,
   SPECIAL_PARAM_PHA,
   SPECIAL_PARAM_REC,
-} from "@RpgTypes/schema";
+} from "@RpgTypes/schema/";
 
 export const regularParamName = (
   paramIndex: number,

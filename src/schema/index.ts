@@ -4,4 +4,4 @@ export * from "./other";
 export * from "./plugin";
 export * from "./namedItemSource";
 export * from "./labelRegistry";
-export * from "./globalLabels";
+export * from "./labelUtils/";
