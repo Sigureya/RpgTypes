@@ -1,27 +1,21 @@
 {
   "name": "@sigureya/rpgtypes",
   "version": "2.0.0",
-  "main": "./packages/schema/dist/schema.cjs.js",
   "description": "A TypeScript library for RpgMakerMZ-related types.",
   "sideEffects": false,
+  "main": "./packages/index.ts",
   "exports": {
     ".": {
-      "types": "./packages/schema/dist/index.d.ts",
-      "import": "./packages/schema/dist/schema.es.js",
-      "require": "./packages/schema/dist/schema.cjs.js"
-    },
-    "./namedItemSource": {
-      "types": "./packages/namedItemSource/dist/index.d.ts",
-      "import": "./packages/namedItemSource/dist/namedItemSource.es.js",
-      "require": "./packages/namedItemSource/dist/namedItemSource.cjs.js"
+      "types": "./dist/index.d.ts",
+      "import": "./dist/rpgTypes.es.js",
+      "require": "./dist/rpgTypes.cjs.js"
     }
   },
   "files": [
-    "packages/**/dist/**/*",
-    "packages/**/package.json"
+    "dist"
   ],
   "scripts": {
-    "build": "npx pnpm -r run build",
+    "build": "vite build",
     "test": "vitest",
     "test:watch": "vitest --watch",
     "lint": "eslint src --ext .ts"
