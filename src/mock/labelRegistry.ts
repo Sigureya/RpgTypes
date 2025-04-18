@@ -1,17 +1,22 @@
 import type { LabelRegistry } from "@RpgTypes/schema";
 import {
   MockActorLabels,
+  MockArmorLabels,
   MockClassLables,
+  MockCollapsLabels,
   MockEnemyLabels,
   MockGlobalLabels,
+  MockItemLabels,
   MockParamExtra,
   MockParamRegularLabels,
   MockParamSpecialLabels,
+  MockPartyAbility,
   MockSkillLabels,
+  MockSpecialFlagLabels,
   MockStateLabels,
+  MockUsableItem,
+  MockWeaponLabels,
 } from "./labels";
-import { MockArmorLabels } from "./labels/armor";
-import { MockPartyAbility } from "./labels/traits/partyAbility";
 
 export const MockLabelRegistry = {
   rpg: {
@@ -23,46 +28,18 @@ export const MockLabelRegistry = {
       domainName: "ダメージ",
       options: {},
     },
-    item: {
-      domainName: "アイテム",
-      options: {
-        consumable: "消耗品",
-      },
-    },
+    item: MockItemLabels,
     class: MockClassLables,
     enemy: MockEnemyLabels,
-    collaps: {
-      domainName: "消滅エフェクト",
-      options: {
-        bossCollaps: "ボス崩壊",
-        instantCollaps: "即時崩壊",
-        noneCollaps: "崩壊なし",
-      },
-    },
+    collaps: MockCollapsLabels,
     paramExtra: MockParamExtra,
     paramSpecial: MockParamSpecialLabels,
     paramRegular: MockParamRegularLabels,
     partyAbility: MockPartyAbility,
-    weapon: {
-      domainName: "武器",
-      options: {
-        weaponTypeId: "武器タイプID",
-      },
-    },
-    usableItem: {
-      domainName: "",
-      options: { scope: "範囲", speed: "速度補正", successRate: "成功率" },
-    },
+    weapon: MockWeaponLabels,
+    usableItem: MockUsableItem,
     state: MockStateLabels,
-    specialFlag: {
-      domainName: "特殊フラグ",
-      options: {
-        autoBattle: "自動戦闘",
-        guard: "防御",
-        substitute: "身代わり",
-        preventEscape: "逃走防止",
-      },
-    },
+    specialFlag: MockSpecialFlagLabels,
   },
   global: MockGlobalLabels,
 } as const satisfies LabelRegistry;

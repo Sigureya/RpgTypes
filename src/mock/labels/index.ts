@@ -5,3 +5,7 @@ export * from "./traits";
 export * from "./enemy";
 export * from "./global";
 export * from "./state";
+export * from "./usableItem";
+export * from "./armor";
+export * from "./weapon";
+export * from "./item";
