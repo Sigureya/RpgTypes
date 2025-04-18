@@ -15,7 +15,7 @@ export const getVariableNames = (
   return system.variables.map(makeNamedItem);
 };
 
-export const getElements = (
+export const getElementTypes = (
   system: Pick<Data_System, "elements">
 ): Data_NamedItem[] => {
   return system.elements.map(makeNamedItem);

@@ -1,6 +1,6 @@
 import { describe, test, expect } from "vitest";
 import {
-  getElements,
+  getElementTypes,
   getEquipTypes,
   getParamNames,
   getSkillTypes,
@@ -36,7 +36,7 @@ const system: System_ParamNames &
 
 describe("getElements", () => {
   test("should return elements", () => {
-    const result: Data_NamedItem[] = getElements(system);
+    const result: Data_NamedItem[] = getElementTypes(system);
     const expected: Data_NamedItem[] = [
       { id: 0, name: "none" },
       { id: 1, name: "Fire" },
