@@ -3,7 +3,6 @@ import type {
   CollapsOptionLabels,
   ExtraParamLabels,
   RegularParamLabels,
-  SpecialParamLabels,
   NamedItemSource,
   DomainLabel,
   PartyAbilityOptionLabels,
@@ -16,6 +15,13 @@ import {
   buildSpecialParamSource,
 } from "./buildSource";
 import { MODULE_TRAIT } from "./constants";
+import {
+  MockParamSpecialLabels,
+  MockParamRegularLabels,
+  MockCollapsLabels,
+  MockPartyAbility,
+  MockParamExtra,
+} from "@RpgTypes/mock";
 
 // Renamed test helper function for clarity
 const validateNamedItemSourceStructure = (source: NamedItemSource) => {
@@ -38,20 +44,14 @@ const validateLabelsMapping = <T extends {}>(
   labels: DomainLabel<T>
 ) => {
   const values = Object.values<string>(labels.options);
-  expect(new Set(source.items.map<string>((item) => item.name))).toEqual(
-    new Set(values)
-  );
+  test("", () =>
+    expect(new Set(source.items.map<string>((item) => item.name))).toEqual(
+      new Set(values)
+    ));
 };
 
 describe("Test buildCollapsSource function", () => {
-  const labels: DomainLabel<CollapsOptionLabels> = {
-    domainName: "collaps",
-    options: {
-      bossCollaps: "bossCollaps",
-      instantCollaps: "instantCollaps",
-      noneCollaps: "instantCollaps",
-    },
-  };
+  const labels: DomainLabel<CollapsOptionLabels> = MockCollapsLabels;
 
   const result = buildCollapsSource(labels, {
     normal: "normal",
@@ -62,19 +62,7 @@ describe("Test buildCollapsSource function", () => {
 });
 
 describe("Test buildRegularParamSource function", () => {
-  const labels: DomainLabel<RegularParamLabels> = {
-    domainName: "基本能力値",
-    options: {
-      maxHp: "最大HP",
-      maxMp: "最大MP",
-      atk: "攻撃力",
-      def: "防御力",
-      matk: "魔法攻撃力",
-      mdef: "魔法防御力",
-      agi: "敏捷性",
-      luk: "運",
-    },
-  };
+  const labels: DomainLabel<RegularParamLabels> = MockParamRegularLabels;
   const result = buildRegularParamSource(labels);
   validateNamedItemSourceStructure(result);
   validateLabelsMapping(result, labels);
@@ -83,60 +71,29 @@ describe("Test buildRegularParamSource function", () => {
 });
 
 describe("Test buildExtraParamSource function", () => {
-  const label: DomainLabel<ExtraParamLabels> = {
-    domainName: "追加能力値",
-    options: {
-      hitRate: "命中率",
-      evasionRate: "回避率",
-      criticalRate: "クリティカル率",
-      criticalEvasionRate: "クリティカル回避率",
-      magicEvasionRate: "魔法回避率",
-      magicReflectionRate: "魔法反射率",
-      counterAttackRate: "反撃率",
-      hpRegenerationRate: "HP再生率",
-      mpRegenerationRate: "MP再生率",
-      tpRegenerationRate: "TP再生率",
-    },
-  };
+  const label: DomainLabel<ExtraParamLabels> = MockParamExtra;
   const result = buildExtraParamSource(label);
   validateNamedItemSourceStructure(result);
   validateLabelsMapping(result, label);
 });
 
 describe("Test buildSpecialParamSource function", () => {
-  const label: DomainLabel<SpecialParamLabels> = {
-    domainName: "特殊能力値",
-    options: {
-      targetRate: "狙われ率",
-      guradEffectRate: "防御効果率",
-      recoveryEffectRate: "回復効果率",
-      pharmacology: "薬の知識",
-      mpCostRate: "MP消費率",
-      tpChargeRate: "TPチャージ率",
-      physicalDamageRate: "物理ダメージ率",
-      magicDamageRate: "魔法ダメージ率",
-      floorDamageRate: "床ダメージ率",
-      experienceRate: "経験値率",
-    },
-  };
+  const label = MockParamSpecialLabels;
   const result = buildSpecialParamSource(label);
   validateNamedItemSourceStructure(result);
   validateLabelsMapping(result, label);
 });
 
 describe("Test buildPartyAbilitySource function", () => {
-  const label: DomainLabel<PartyAbilityOptionLabels> = {
-    domainName: "パーティ能力",
-    options: {
-      cancelSurprise: "不意打ち無効",
-      dropItemDouble: "アイテムドロップ2倍",
-      encounterHalf: "エンカウント半減",
-      encounterNone: "エンカウントなし",
-      goldDouble: "ゴールド2倍",
-      raisePreemptive: "先制攻撃率アップ",
-    },
-  };
+  const label: DomainLabel<PartyAbilityOptionLabels> = MockPartyAbility;
   const result = buildPartyAbilitySource(label);
   validateNamedItemSourceStructure(result);
   validateLabelsMapping(result, label);
 });
+
+// describe("Test buildSpecialFlagSource function", () => {
+//   const label: DomainLabel<SpecialFlagOptions> = MockSpecialFlagLabels;
+//   const result = builds(label);
+//   validateNamedItemSourceStructure(result);
+//   validateLabelsMapping(result, label);
+// });
