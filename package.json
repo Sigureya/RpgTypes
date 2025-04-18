@@ -3,7 +3,7 @@
   "version": "2.0.0",
   "description": "A TypeScript library for RpgMakerMZ-related types.",
   "sideEffects": false,
-  "main": "./packages/index.ts",
+  "main": "./dist/index.ts",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
