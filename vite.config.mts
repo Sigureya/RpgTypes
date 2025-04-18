@@ -3,6 +3,19 @@ import dts from "vite-plugin-dts";
 import path from "path";
 
 declare const __dirname: string;
+interface XX {
+  libName: string;
+  outDir: string;
+  libFileName: string;
+  entry: string;
+}
+
+const modeMock: XX = {
+  libName: "lib",
+  outDir: "./dist/mock",
+  libFileName: "index",
+  entry: "./src/mock/index.ts",
+};
 
 export default defineConfig({
   build: {
