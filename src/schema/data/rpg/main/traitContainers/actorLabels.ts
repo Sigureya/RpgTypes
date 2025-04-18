@@ -1,6 +1,4 @@
 export interface ActorLabels {
-  domainName: string;
-
   initialEquipments: string;
   faceImage: string;
   characterImage: string;

@@ -1,6 +1,4 @@
 export interface StateLabels {
-  domainName: string;
-
   restriction: string;
   priority: string;
   motion: string;

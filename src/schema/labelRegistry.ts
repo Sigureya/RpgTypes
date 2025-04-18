@@ -1,5 +1,5 @@
-import type { RpgLabels } from "./data";
 import type { GlobalLabel } from "./labelUtils/";
+import type { RpgLabels } from "./rpgLabels";
 
 export interface LabelRegistry {
   global: GlobalLabel;

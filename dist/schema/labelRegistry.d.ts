@@ -1,8 +1,8 @@
-import { RpgLabels } from './data';
 import { GlobalLabel } from './labelUtils/';
+import { RpgLabels2 } from './rpgLabels';
 export interface LabelRegistry {
     global: GlobalLabel;
-    rpg: RpgLabels;
+    rpg: RpgLabels2;
 }
 /**
  * @deprecated

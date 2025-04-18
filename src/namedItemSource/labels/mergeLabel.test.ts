@@ -1,9 +1,8 @@
 import { test, expect, describe } from "vitest";
-import type { SkillLabels, EnemyLabels } from "@sigureya/rpgtypes";
+import type { SkillLabels, EnemyLabels } from "@RpgTypes/schema";
 import { mergeNestedPrimitiveRecords, mergeWithDefaults } from "./mergeLabel";
 
 const MOCK_SKILL_LABELS = {
-  domainName: "スキル",
   mpCost: "消費MP",
   tpCost: "消費TP",
   requiredWeaponTypeId1: "武器タイプ1",
@@ -13,7 +12,6 @@ const MOCK_SKILL_LABELS = {
 const MOCK_ENEMY_LABELS = {
   battlerHue: "色相",
   battlerName: "画像",
-  domainName: "エネミー",
   dropItems: "ドロップアイテム",
   gold: "所持金",
 } as const satisfies EnemyLabels;
@@ -27,11 +25,9 @@ describe("mergeWithDefaults", () => {
 
     test("overrides only valid string fields", () => {
       const result = mergeWithDefaults(MOCK_SKILL_LABELS, {
-        domainName: "skill",
         tpCost: 10, // not a string
       });
       const expected: SkillLabels = {
-        domainName: "skill",
         mpCost: MOCK_SKILL_LABELS.mpCost,
         tpCost: MOCK_SKILL_LABELS.tpCost,
         requiredWeaponTypeId1: MOCK_SKILL_LABELS.requiredWeaponTypeId1,
@@ -60,12 +56,9 @@ describe("mergeWithDefaults", () => {
     });
 
     test("overrides single field correctly", () => {
-      const result = mergeWithDefaults(MOCK_ENEMY_LABELS, {
-        domainName: "enemy",
-      });
+      const result = mergeWithDefaults(MOCK_ENEMY_LABELS, {});
       const expected: EnemyLabels = {
         ...MOCK_ENEMY_LABELS,
-        domainName: "enemy",
       };
       expect(result).toEqual(expected);
     });
