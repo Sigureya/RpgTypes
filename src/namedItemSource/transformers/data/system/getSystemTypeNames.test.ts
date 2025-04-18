@@ -5,7 +5,7 @@ import {
   getParamNames,
   getSkillTypes,
   getVariableNames,
-} from "./getItemNames";
+} from "./getSystemTypeNames";
 import type {
   System_ParamNames,
   Data_System,
