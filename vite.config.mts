@@ -42,7 +42,7 @@ export default defineConfig({
   plugins: [
     dts({
       outDir: "./dist",
-      exclude: ["./**/*.test.ts"],
+      exclude: ["./**/*.test.ts", "**/mock/**/*"],
     }),
   ],
 });
