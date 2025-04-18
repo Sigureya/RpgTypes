@@ -19,7 +19,7 @@ import type {
 
 import type { DomainLabel } from "./labelUtils";
 
-export interface RpgLabels2 {
+export interface RpgLabels {
   paramSpecial: DomainLabel<SpecialParamLabels>;
   paramExtra: DomainLabel<ExtraParamLabels>;
   paramRegular: DomainLabel<RegularParamLabels>;
