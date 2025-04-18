@@ -12,18 +12,18 @@ export default defineConfig({
     outDir: "./dist",
     lib: {
       entry: "./src/index.ts",
-      name: "rpgTypes2",
-      fileName: (format) => `rpgTypes2.${format}.js`,
+      name: "rpgTypes",
+      fileName: (format) => `rpgTypes.${format}.js`,
       formats: ["es", "cjs"],
     },
     sourcemap: true,
   },
-  // resolve: {
-  //   alias: {
-  //     "@RpgTypes/schema": path.resolve(__dirname, "./src/schema/src/"),
-  //     "@RpgType/utils/": path.resolve(__dirname, "./src/utils/"),
-  //   },
-  // },
+  resolve: {
+    alias: {
+      "@RpgTypes/schema": path.resolve(__dirname, "./src/schema/"),
+      "@RpgType/utils/": path.resolve(__dirname, "./src/utils/"),
+    },
+  },
   plugins: [
     dts({
       outDir: "./dist",
