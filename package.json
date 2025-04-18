@@ -21,7 +21,7 @@
     "packages/**/package.json"
   ],
   "scripts": {
-    "build": "npx pnpm -r run build",
+    "build": "vite build",
     "test": "vitest",
     "test:watch": "vitest --watch",
     "lint": "eslint src --ext .ts"
