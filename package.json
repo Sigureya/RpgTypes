@@ -16,6 +16,7 @@
   ],
   "scripts": {
     "build": "vite build",
+    "build:mock": "vite build --mode mock",
     "test": "vitest",
     "test:watch": "vitest --watch",
     "lint": "eslint src --ext .ts"
