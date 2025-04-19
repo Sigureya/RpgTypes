@@ -19,7 +19,7 @@ const modeMock: XX = {
   entry: "./src/mock/index.ts",
   outDir: "./dist/mock",
   libName: "rpgMocks",
- ;
+};
 
 export default defineConfig(() => {
   const setting = libBuild;
