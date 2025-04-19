@@ -1,4 +1,4 @@
-import { CollapsOptionLabels, Data_NamedItem, ExtraParamLabels, PartyAbilityOptionLabels, SpecialParamLabels, GlobalLabel, RegularParamLabels } from '../../../../schema';
+import { CollapsOptionLabels, Data_NamedItem, ExtraParamLabels, PartyAbilityOptionLabels, SpecialParamLabels, GlobalLabel, RegularParamLabels } from '../../../../../schema';
 export declare const foldCollapsOptions: (options: CollapsOptionLabels, global: Pick<GlobalLabel, "normal">) => Data_NamedItem[];
 export declare const foldPartyAbilityOptions: (options: PartyAbilityOptionLabels) => Data_NamedItem[];
 export declare const foldRegularParam: (param: RegularParamLabels) => Data_NamedItem[];

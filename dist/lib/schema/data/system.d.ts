@@ -37,6 +37,8 @@ export interface Data_System {
     optSideView: boolean;
     optSlipDeath: boolean;
     optTransparent: boolean;
+    optSplashScreen: boolean;
+    optMessageSkip: boolean;
     startMapId: number;
     startX: number;
     startY: number;
@@ -63,4 +65,4 @@ export type System_Me = Pick<Data_System, "gameoverMe" | "defeatMe" | "victoryMe
 export type System_AudioFiles = System_Bgm & System_Me & {
     sounds: System_SoundsArray;
 };
-export type System_BoolanOptions = Pick<Data_System, "optAutosave" | "optDisplayTp" | "optDrawTitle" | "optExtraExp" | "optFloorDeath" | "optFollowers" | "optKeyItemsNumber" | "optSideView" | "optSlipDeath" | "optTransparent">;
+export type System_BoolanOptions = Pick<Data_System, "optAutosave" | "optDisplayTp" | "optDrawTitle" | "optExtraExp" | "optFloorDeath" | "optFollowers" | "optKeyItemsNumber" | "optSideView" | "optSlipDeath" | "optTransparent" | "optMessageSkip" | "optSplashScreen">;
