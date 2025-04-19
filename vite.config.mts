@@ -6,14 +6,12 @@ declare const __dirname: string;
 interface XX {
   libName: string;
   outDir: string;
-  libFileName: string;
   entry: string;
 }
 
 const libBuild: XX = {
   entry: "./src/index.ts",
   outDir: "./dist/lib",
-  libFileName: "rpgTypes",
   libName: "rpgTypes",
 };
 
@@ -21,8 +19,7 @@ const modeMock: XX = {
   entry: "./src/mock/index.ts",
   outDir: "./dist/mock",
   libName: "rpgMocks",
-  libFileName: "rpgMocks",
-};
+ ;
 
 export default defineConfig(() => {
   const setting = libBuild;
