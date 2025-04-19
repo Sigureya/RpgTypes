@@ -3,19 +3,19 @@ import dts from "vite-plugin-dts";
 import path from "path";
 
 declare const __dirname: string;
-interface XX {
+interface BuildSetting {
   libName: string;
   outDir: string;
   entry: string;
 }
 
-const libBuild: XX = {
+const libBuild: BuildSetting = {
   entry: "./src/index.ts",
-  outDir: "./dist/lib",
+  outDir: "./dist/libs",
   libName: "rpgTypes",
 };
 
-const modeMock: XX = {
+const modeMock: BuildSetting = {
   entry: "./src/mock/index.ts",
   outDir: "./dist/mock",
   libName: "rpgMocks",
