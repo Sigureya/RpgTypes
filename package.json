@@ -6,9 +6,9 @@
   "main": "./dist/libs/index.ts",
   "exports": {
     ".": {
-      "types": "./dist/lib/index.d.ts",
-      "import": "./dist/lib/rpgTypes.es.js",
-      "require": "./dist/lib/rpgTypes.cjs.js"
+      "types": "./dist/libs/index.d.ts",
+      "import": "./dist/libs/rpgTypes.es.js",
+      "require": "./dist/libs/rpgTypes.cjs.js"
     }
   },
   "files": [
