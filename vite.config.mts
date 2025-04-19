@@ -10,7 +10,7 @@ interface BuildSetting {
 }
 
 const libBuild: BuildSetting = {
-  entry: "./src/index.ts",
+  entry: "./src/libs/index.ts",
   outDir: "./dist/libs",
   libName: "rpgTypes",
 };
