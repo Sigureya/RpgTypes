@@ -12,8 +12,8 @@ export default defineConfig({
   },
   resolve: {
     alias: {
-      "@RpgTypes/schema": path.resolve(__dirname, "./src/schema"),
-      "@RpgTypes/utils": path.resolve(__dirname, "./src/utils"),
+      "@RpgTypes/schema": path.resolve(__dirname, "./src/libs/schema"),
+      "@RpgTypes/utils": path.resolve(__dirname, "./src/libs/utils"),
       "@RpgTypes/mock": path.resolve(__dirname, "./src/mock"),
     },
   },
