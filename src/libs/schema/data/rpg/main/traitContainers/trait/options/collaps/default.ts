@@ -1,4 +1,5 @@
-import type { DomainLabel, CollapsOptionLabels } from "@RpgTypes/schema";
+import type { DomainLabel } from "@RpgTypes/templats";
+import type { CollapsOptionLabels } from "./labels";
 
 export const MockCollapsLabels = {
   domainName: "消滅エフェクト",
