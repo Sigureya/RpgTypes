@@ -7,22 +7,26 @@ interface BuildSetting {
   libName: string;
   outDir: string;
   entry: string;
+  exclude: string[];
 }
 
 const libBuild: BuildSetting = {
   entry: "./src/libs/index.ts",
   outDir: "./dist/libs",
   libName: "rpgTypes",
+
+  exclude: ["**/mock/**/*"],
 };
 
 const modeMock: BuildSetting = {
   entry: "./src/mock/index.ts",
   outDir: "./dist/mock",
   libName: "rpgMocks",
+  exclude: ["**/libs/**/*"],
 };
 
-export default defineConfig(() => {
-  const setting = libBuild;
+export default defineConfig(({ mode }) => {
+  const setting = mode === "mock" ? modeMock : libBuild;
   return {
     build: {
       outDir: setting.outDir,
@@ -48,7 +52,7 @@ export default defineConfig(() => {
     plugins: [
       dts({
         outDir: setting.outDir,
-        exclude: ["./**/*.test.ts", "**/mock/**/*"],
+        exclude: ["./**/*.test.ts", ...setting.exclude],
       }),
     ],
   };
