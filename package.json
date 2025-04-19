@@ -24,7 +24,8 @@
     "build:mock": "vite build --mode mock",
     "test": "vitest",
     "test:watch": "vitest --watch",
-    "lint": "eslint src --ext .ts"
+    "lint": "eslint src --ext .ts",
+    "typecheck": "tsc --noEmit"
   },
   "repository": {
     "type": "git",
