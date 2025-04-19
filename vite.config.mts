@@ -24,32 +24,35 @@ const modeMock: XX = {
   libFileName: "rpgMocks",
 };
 
-export default defineConfig({
-  build: {
-    outDir: "./dist",
+export default defineConfig(() => {
+  const setting = libBuild;
+  return {
+    build: {
+      outDir: setting.outDir,
 
-    lib: {
-      entry: "./src/index.ts",
-      name: "rpgTypes",
-      fileName: (format) => `rpgTypes.${format}.js`,
-      formats: ["es", "cjs"],
+      lib: {
+        entry: setting.entry,
+        name: setting.libName,
+        fileName: (format) => `${setting.libName}.${format}.js`,
+        formats: ["es", "cjs"],
+      },
+      sourcemap: true,
+      rollupOptions: {
+        external: (id) => id.endsWith(".test.ts"),
+      },
     },
-    sourcemap: true,
-    rollupOptions: {
-      external: (id) => id.endsWith(".test.ts"),
-    },
-  },
 
-  resolve: {
-    alias: {
-      "@RpgTypes/schema": path.resolve(__dirname, "./src/schema"),
-      "@RpgType/utils": path.resolve(__dirname, "./src/utils"),
+    resolve: {
+      alias: {
+        "@RpgTypes/schema": path.resolve(__dirname, "./src/schema"),
+        "@RpgType/utils": path.resolve(__dirname, "./src/utils"),
+      },
     },
-  },
-  plugins: [
-    dts({
-      outDir: "./dist",
-      exclude: ["./**/*.test.ts", "**/mock/**/*"],
-    }),
-  ],
+    plugins: [
+      dts({
+        outDir: setting.outDir,
+        exclude: ["./**/*.test.ts", "**/mock/**/*"],
+      }),
+    ],
+  };
 });
