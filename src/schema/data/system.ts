@@ -56,6 +56,8 @@ export interface Data_System {
   optSideView: boolean;
   optSlipDeath: boolean;
   optTransparent: boolean;
+  optSplashScreen: boolean;
+  optMessageSkip: boolean;
 
   // initial data
   startMapId: number;
@@ -131,4 +133,6 @@ export type System_BoolanOptions = Pick<
   | "optSideView"
   | "optSlipDeath"
   | "optTransparent"
+  | "optMessageSkip"
+  | "optSplashScreen"
 >;

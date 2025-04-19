@@ -10,11 +10,18 @@ interface XX {
   entry: string;
 }
 
+const libBuild: XX = {
+  entry: "./src/index.ts",
+  outDir: "./dist/lib",
+  libFileName: "rpgTypes",
+  libName: "rpgTypes",
+};
+
 const modeMock: XX = {
-  libName: "lib",
-  outDir: "./dist/mock",
-  libFileName: "index",
   entry: "./src/mock/index.ts",
+  outDir: "./dist/mock",
+  libName: "rpgMocks",
+  libFileName: "rpgMocks",
 };
 
 export default defineConfig({
