@@ -13,7 +13,8 @@
     "emitDeclarationOnly": true,
     "baseUrl": "./",
     "paths": {
-      "@RpgTypes/*": ["src/*"]
+      "@RpgTypes/*": ["src/libs/*"],
+      "@RpgTypes/mock/": ["src/mock/*"]
     }
   },
   "include": ["src/**/*"],

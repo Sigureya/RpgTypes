@@ -3,53 +3,57 @@ import dts from "vite-plugin-dts";
 import path from "path";
 
 declare const __dirname: string;
-interface XX {
+interface BuildSetting {
   libName: string;
   outDir: string;
-  libFileName: string;
   entry: string;
+  exclude: string[];
 }
 
-const libBuild: XX = {
-  entry: "./src/index.ts",
-  outDir: "./dist/lib",
-  libFileName: "rpgTypes",
+const libBuild: BuildSetting = {
+  entry: "./src/libs/index.ts",
+  outDir: "./dist/libs",
   libName: "rpgTypes",
+
+  exclude: ["**/mock/**/*"],
 };
 
-const modeMock: XX = {
+const modeMock: BuildSetting = {
   entry: "./src/mock/index.ts",
   outDir: "./dist/mock",
   libName: "rpgMocks",
-  libFileName: "rpgMocks",
+  exclude: ["**/libs/**/*"],
 };
 
-export default defineConfig({
-  build: {
-    outDir: "./dist",
+export default defineConfig(({ mode }) => {
+  const setting = mode === "mock" ? modeMock : libBuild;
+  return {
+    build: {
+      outDir: setting.outDir,
 
-    lib: {
-      entry: "./src/index.ts",
-      name: "rpgTypes",
-      fileName: (format) => `rpgTypes.${format}.js`,
-      formats: ["es", "cjs"],
+      lib: {
+        entry: setting.entry,
+        name: setting.libName,
+        fileName: (format) => `${setting.libName}.${format}.js`,
+        formats: ["es", "cjs"],
+      },
+      sourcemap: true,
+      rollupOptions: {
+        external: (id) => id.endsWith(".test.ts"),
+      },
     },
-    sourcemap: true,
-    rollupOptions: {
-      external: (id) => id.endsWith(".test.ts"),
-    },
-  },
 
-  resolve: {
-    alias: {
-      "@RpgTypes/schema": path.resolve(__dirname, "./src/schema"),
-      "@RpgType/utils": path.resolve(__dirname, "./src/utils"),
+    resolve: {
+      alias: {
+        "@RpgTypes/schema": path.resolve(__dirname, "./src/libs/schema"),
+        "@RpgType/utils": path.resolve(__dirname, "./src/libs/utils"),
+      },
     },
-  },
-  plugins: [
-    dts({
-      outDir: "./dist",
-      exclude: ["./**/*.test.ts", "**/mock/**/*"],
-    }),
-  ],
+    plugins: [
+      dts({
+        outDir: setting.outDir,
+        exclude: ["./**/*.test.ts", ...setting.exclude],
+      }),
+    ],
+  };
 });
