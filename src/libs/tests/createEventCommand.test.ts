@@ -147,7 +147,9 @@ describe("createEventCommand", () => {
 
   it("should create a SET_EVENT_LOCATION command", () => {
     const code: EventCommandTable["SET_EVENT_LOCATION"]["code"] = 203;
-    const params: EventCommandTable["SET_EVENT_LOCATION"]["parameters"] = [];
+    const params: EventCommandTable["SET_EVENT_LOCATION"]["parameters"] = [
+      0, 0, 0, 0, 2,
+    ];
     const indent = 2;
 
     const result = createEventCommand(code, params, indent);

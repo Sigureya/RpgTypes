@@ -1,4 +1,5 @@
-import type { DomainLabel, ActorLabels } from "@RpgTypes/schema";
+import type { DomainLabel } from "@RpgTypes/schema";
+import type { ActorLabels } from "./actorLabels";
 
 export const MockActorLabels = {
   domainName: "アクター",

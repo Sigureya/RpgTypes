@@ -1,4 +1,5 @@
-import type { DomainLabel, ItemLabels } from "@RpgTypes/schema";
+import type { DomainLabel } from "@RpgTypes/schema";
+import type { ItemLabels } from "./itemLabels";
 
 export const MockItemLabels = {
   domainName: "アイテム",

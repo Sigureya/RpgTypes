@@ -21,7 +21,7 @@ import {
   MockCollapsLabels,
   MockPartyAbility,
   MockParamExtra,
-} from "@RpgTypes/mock";
+} from "@RpgTypes/schema";
 
 // Renamed test helper function for clarity
 const validateNamedItemSourceStructure = (source: NamedItemSource) => {
