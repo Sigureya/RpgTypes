@@ -1,4 +1,5 @@
-import type { DomainLabel, ClassLabels } from "@RpgTypes/schema";
+import type { DomainLabel } from "@RpgTypes/schema";
+import type { ClassLabels } from "./classLabels";
 
 export const MockClassLables = {
   domainName: "職業",

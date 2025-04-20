@@ -1,5 +1,5 @@
-import type { DomainLabel, ArmorLabels } from "@RpgTypes/schema";
-
+import type { DomainLabel } from "@RpgTypes/schema";
+import type { ArmorLabels } from "./armorLabels";
 export const MockArmorLabels = {
   domainName: "防具",
   options: {
