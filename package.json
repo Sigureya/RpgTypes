@@ -9,11 +9,6 @@
       "types": "./dist/libs/index.d.ts",
       "import": "./dist/libs/rpgTypes.es.js",
       "require": "./dist/libs/rpgTypes.cjs.js"
-    },
-    "./mock": {
-      "types": "./dist/mock/mock/index.d.ts",
-      "import": "./dist/mock/rpgMocks.es.js",
-      "require": "./dist/mock/rpgMocks.cjs.js"
     }
   },
   "files": [
