@@ -1,5 +1,5 @@
+import { DomainLabel } from '../templates';
 import { ActorLabels, ArmorLabels, ClassLabels, CollapsOptionLabels, DamageLabels, EnemyLabels, ExtraParamLabels, ItemLabels, PartyAbilityOptionLabels, RegularParamLabels, SkillLabels, SpecialFlagOptions, SpecialParamLabels, StateLabels, UsableItemLabels, WeaponLabels } from './data';
-import { DomainLabel } from './labelUtils';
 export interface RpgLabels {
     paramSpecial: DomainLabel<SpecialParamLabels>;
     paramExtra: DomainLabel<ExtraParamLabels>;
