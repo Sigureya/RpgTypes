@@ -1,6 +1,6 @@
 import type { DomainLabel, SpecialParamLabels } from "@RpgTypes/schema";
 
-export const MockParamSpecialLabels = {
+export const DEFAULT_PARAMSPECIAL_LABELS = {
   domainName: "特殊能力値",
   options: {
     targetRate: "狙われ率",

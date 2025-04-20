@@ -1,7 +1,7 @@
 import type { DomainLabel } from "@RpgTypes/schema";
 import type { ActorLabels } from "./actorLabels";
 
-export const MockActorLabels = {
+export const DEFAULT_ACTOR_LABELS = {
   domainName: "アクター",
   options: {
     initialEquipments: "初期装備",

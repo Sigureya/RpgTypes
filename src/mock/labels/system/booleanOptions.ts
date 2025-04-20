@@ -1,6 +1,6 @@
 import type { SystemLabel_BoolanOptions } from "@RpgTypes/schema";
 
-export const MockSystemLabelsBoolean = {
+export const DEFAULT_SYSTEM_LABELS_BOOLEAN = {
   optDrawTitle: "ゲームタイトルの描画",
   optDisplayTp: "ウィンドウにTPを表示",
   optFloorDeath: "床ダメージで戦闘不能",

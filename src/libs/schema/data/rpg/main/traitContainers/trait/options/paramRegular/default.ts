@@ -1,6 +1,6 @@
 import type { DomainLabel, RegularParamLabels } from "@RpgTypes/schema";
 
-export const MockParamRegularLabels = {
+export const DEFAULT_PARAMREGULAR_LABELS = {
   domainName: "基本能力値",
   options: {
     maxHp: "最大HP",

@@ -1,6 +1,6 @@
 import type { DomainLabel, SkillLabels } from "@RpgTypes/schema";
 
-export const MockSkillLabels = {
+export const DEFAULT_SKILL_LABELS = {
   domainName: "スキル",
   options: {
     requiredWeaponTypeId1: "必要武器タイプ1",
