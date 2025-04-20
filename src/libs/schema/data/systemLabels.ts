@@ -7,9 +7,7 @@ import type {
   System_BoolanOptions,
 } from "./system";
 
-type AsLabel<T> = {
-  [K in keyof T]: string;
-};
+type AsLabel<T> = Record<keyof T, string>;
 
 export type SystemLabel_DataNames = AsLabel<System_DataNames>;
 export type SystemLabel_Images = AsLabel<System_Images>;
