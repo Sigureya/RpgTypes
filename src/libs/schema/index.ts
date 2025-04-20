@@ -5,4 +5,4 @@ export * from "./plugin";
 export * from "./namedItemSource";
 export * from "./labelRegistry";
 export * from "./labelUtils/";
-export { DomainLabel } from "@RpgTypes/templats";
+export { DomainLabel } from "@RpgTypes/templates";

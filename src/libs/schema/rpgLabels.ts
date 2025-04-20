@@ -1,4 +1,4 @@
-import type { DomainLabel } from "@RpgTypes/templats";
+import type { DomainLabel } from "@RpgTypes/templates";
 import type {
   ActorLabels,
   ArmorLabels,
