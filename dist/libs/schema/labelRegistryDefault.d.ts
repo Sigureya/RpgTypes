@@ -1,4 +1,4 @@
-export declare const MockLabelRegistry: {
+export declare const LABEL_REGISTRY_JP: {
     readonly rpg: {
         readonly actor: {
             readonly domainName: "アクター";
