@@ -1,3 +1,4 @@
+import type { DomainLabel } from "@RpgTypes/templats";
 import type {
   ActorLabels,
   ArmorLabels,
@@ -16,8 +17,6 @@ import type {
   UsableItemLabels,
   WeaponLabels,
 } from "./data";
-
-import type { DomainLabel } from "./labelUtils";
 
 export interface RpgLabels {
   paramSpecial: DomainLabel<SpecialParamLabels>;
