@@ -1,2 +1,2 @@
-export * from './domainLabel';
 export * from './globalLabels';
+export * from './default';

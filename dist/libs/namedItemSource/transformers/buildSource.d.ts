@@ -1,4 +1,5 @@
-import { CollapsOptionLabels, GlobalLabel, NamedItemSource, PartyAbilityOptionLabels, RegularParamLabels, DomainLabel, ExtraParamLabels, SpecialParamLabels } from '../../schema';
+import { CollapsOptionLabels, GlobalLabel, NamedItemSource, PartyAbilityOptionLabels, RegularParamLabels, ExtraParamLabels, SpecialParamLabels } from '../../schema';
+import { DomainLabel } from '../../templates';
 export declare const traitDomain: <T>(sourceKey: string, labels: DomainLabel<T>, fn: (options: T) => {
     name: string;
     id: number;

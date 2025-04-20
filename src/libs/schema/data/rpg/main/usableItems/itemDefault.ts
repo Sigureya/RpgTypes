@@ -1,4 +1,4 @@
-import type { DomainLabel } from "@RpgTypes/schema";
+import type { DomainLabel } from "@RpgTypes/templates";
 import type { ItemLabels } from "./itemLabels";
 
 export const DEFAULT_ITEM_LABELS = {

@@ -1,4 +1,5 @@
-import type { DomainLabel, StateLabels } from "@RpgTypes/schema";
+import type { DomainLabel } from "@RpgTypes/templates";
+import type { StateLabels } from "./stateLabels";
 
 export const DEFAULT_STATE_LABELS = {
   domainName: "ステート",

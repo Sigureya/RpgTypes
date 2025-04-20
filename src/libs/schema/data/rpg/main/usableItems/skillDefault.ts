@@ -1,4 +1,5 @@
-import type { DomainLabel, SkillLabels } from "@RpgTypes/schema";
+import type { DomainLabel } from "@RpgTypes/templates";
+import type { SkillLabels } from "./skillLabels";
 
 export const DEFAULT_SKILL_LABELS = {
   domainName: "スキル",

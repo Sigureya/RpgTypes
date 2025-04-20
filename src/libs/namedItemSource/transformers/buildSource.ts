@@ -4,7 +4,6 @@ import type {
   NamedItemSource,
   PartyAbilityOptionLabels,
   RegularParamLabels,
-  DomainLabel,
   ExtraParamLabels,
   SpecialParamLabels,
 } from "@RpgTypes/schema";
@@ -25,6 +24,7 @@ import {
   foldSpecialParams,
 } from "./labels/traits";
 import { AUTHOR_RMMZ, MODULE_TRAIT } from "./constants";
+import type { DomainLabel } from "@RpgTypes/templates";
 
 export const traitDomain = <T>(
   sourceKey: string,

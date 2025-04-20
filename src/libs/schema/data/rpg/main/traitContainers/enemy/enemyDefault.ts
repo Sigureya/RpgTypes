@@ -1,4 +1,5 @@
-import type { DomainLabel, EnemyLabels } from "@RpgTypes/schema";
+import type { DomainLabel } from "@RpgTypes/templates";
+import type { EnemyLabels } from "./enemyLabels";
 
 export const DEFAULT_ENEMY_LABELS = {
   domainName: "敵キャラ",
