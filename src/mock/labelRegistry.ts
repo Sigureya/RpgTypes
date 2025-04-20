@@ -1,24 +1,24 @@
 import type { LabelRegistry } from "@RpgTypes/schema";
 import {
   MockActorLabels,
+  MockArmorLabels,
   MockClassLables,
   MockCollapsLabels,
   MockEnemyLabels,
+  MockItemLabels,
   MockParamExtra,
   MockParamRegularLabels,
   MockParamSpecialLabels,
   MockPartyAbility,
   MockSkillLabels,
   MockStateLabels,
+  MockUsableItem,
 } from "@RpgTypes/schema";
 import {
   MockGlobalLabels,
   MockSpecialFlagLabels,
-  MockUsableItem,
   MockWeaponLabels,
 } from "./labels";
-import { MockArmorLabels } from "@RpgTypes/schema";
-import { MockItemLabels } from "@RpgTypes/schema/data/rpg/main/usableItems/itemDefault";
 export const MockLabelRegistry = {
   rpg: {
     actor: MockActorLabels,

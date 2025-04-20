@@ -1,2 +1,1 @@
-export * from "./paramRegular";
-export * from "./specialFlag";
+export * from "../../../libs/schema/data/rpg/main/traitContainers/trait/options/specialFlags/specialFlagDefault";

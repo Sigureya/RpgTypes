@@ -9,3 +9,4 @@ export * from "./skillDefault";
 export * from "./skillLabels";
 export * from "./usableItem";
 export * from "./usableItemLables";
+export * from "./usableItemDefault";
