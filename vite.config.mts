@@ -15,18 +15,11 @@ const libBuild: BuildSetting = {
   outDir: "./dist/libs",
   libName: "rpgTypes",
 
-  exclude: ["**/mock/**/*"],
-};
-
-const modeMock: BuildSetting = {
-  entry: "./src/mock/index.ts",
-  outDir: "./dist/mock",
-  libName: "rpgMocks",
-  exclude: ["**/libs/**/*"],
+  exclude: [],
 };
 
 export default defineConfig(({ mode }) => {
-  const setting = mode === "mock" ? modeMock : libBuild;
+  const setting = libBuild;
   return {
     build: {
       outDir: setting.outDir,
@@ -45,8 +38,7 @@ export default defineConfig(({ mode }) => {
 
     resolve: {
       alias: {
-        "@RpgTypes/schema": path.resolve(__dirname, "./src/libs/schema"),
-        "@RpgType/utils": path.resolve(__dirname, "./src/libs/utils"),
+        "@RpgTypes": path.resolve(__dirname, "./src/libs"),
       },
     },
     plugins: [
