@@ -4,9 +4,10 @@ import type {
   ExtraParamLabels,
   RegularParamLabels,
   NamedItemSource,
-  DomainLabel,
   PartyAbilityOptionLabels,
 } from "@RpgTypes/schema";
+import type { DomainLabel } from "@RpgTypes/templates";
+
 import {
   buildCollapsSource,
   buildExtraParamSource,
@@ -16,9 +17,9 @@ import {
 } from "./buildSource";
 import { MODULE_TRAIT } from "./constants";
 import {
-  MockParamSpecialLabels,
-  MockParamRegularLabels,
-  MockCollapsLabels,
+  DEFAULT_PARAMSPECIAL_LABELS as MockParamSpecialLabels,
+  DEFAULT_PARAMREGULAR_LABELS as MockParamRegularLabels,
+  DEFAULT_COLLAPS_LABELS as MockCollapsLabels,
   MockPartyAbility,
   MockParamExtra,
 } from "@RpgTypes/schema";
