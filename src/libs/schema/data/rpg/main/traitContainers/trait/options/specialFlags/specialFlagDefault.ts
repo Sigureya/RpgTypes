@@ -1,5 +1,7 @@
-import type { SpecialFlagOptions, DomainLabel } from "@RpgTypes/schema";
-export const MockSpecialFlagLabels = {
+import type { DomainLabel } from "@RpgTypes/templates";
+import type { SpecialFlagOptions } from "./specialFlag";
+
+export const DEFAULT_SPECIALFLAG_LABELS = {
   domainName: "特殊フラグ",
   options: {
     autoBattle: "自動戦闘",

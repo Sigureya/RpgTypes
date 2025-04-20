@@ -1,6 +1,6 @@
 import type { DomainLabel, EnemyLabels } from "@RpgTypes/schema";
 
-export const MockEnemyLabels = {
+export const DEFAULT_ENEMY_LABELS = {
   domainName: "敵キャラ",
   options: {
     dropItems: "ドロップアイテム",

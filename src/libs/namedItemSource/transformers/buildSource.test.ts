@@ -4,9 +4,10 @@ import type {
   ExtraParamLabels,
   RegularParamLabels,
   NamedItemSource,
-  DomainLabel,
   PartyAbilityOptionLabels,
 } from "@RpgTypes/schema";
+import type { DomainLabel } from "@RpgTypes/templates";
+
 import {
   buildCollapsSource,
   buildExtraParamSource,
@@ -16,11 +17,11 @@ import {
 } from "./buildSource";
 import { MODULE_TRAIT } from "./constants";
 import {
-  MockParamSpecialLabels,
-  MockParamRegularLabels,
-  MockCollapsLabels,
-  MockPartyAbility,
-  MockParamExtra,
+  DEFAULT_PARAMSPECIAL_LABELS,
+  DEFAULT_PARAMREGULAR_LABELS,
+  DEFAULT_COLLAPS_LABELS,
+  DEFAULT_PARTY_ABILITY_LABELS,
+  DEFUALT_EXTRA_PARAM_LABELS,
 } from "@RpgTypes/schema";
 
 // Renamed test helper function for clarity
@@ -51,7 +52,7 @@ const validateLabelsMapping = <T extends {}>(
 };
 
 describe("Test buildCollapsSource function", () => {
-  const labels: DomainLabel<CollapsOptionLabels> = MockCollapsLabels;
+  const labels: DomainLabel<CollapsOptionLabels> = DEFAULT_COLLAPS_LABELS;
 
   const result = buildCollapsSource(labels, {
     normal: "normal",
@@ -62,7 +63,7 @@ describe("Test buildCollapsSource function", () => {
 });
 
 describe("Test buildRegularParamSource function", () => {
-  const labels: DomainLabel<RegularParamLabels> = MockParamRegularLabels;
+  const labels: DomainLabel<RegularParamLabels> = DEFAULT_PARAMREGULAR_LABELS;
   const result = buildRegularParamSource(labels);
   validateNamedItemSourceStructure(result);
   validateLabelsMapping(result, labels);
@@ -71,21 +72,22 @@ describe("Test buildRegularParamSource function", () => {
 });
 
 describe("Test buildExtraParamSource function", () => {
-  const label: DomainLabel<ExtraParamLabels> = MockParamExtra;
+  const label: DomainLabel<ExtraParamLabels> = DEFUALT_EXTRA_PARAM_LABELS;
   const result = buildExtraParamSource(label);
   validateNamedItemSourceStructure(result);
   validateLabelsMapping(result, label);
 });
 
 describe("Test buildSpecialParamSource function", () => {
-  const label = MockParamSpecialLabels;
+  const label = DEFAULT_PARAMSPECIAL_LABELS;
   const result = buildSpecialParamSource(label);
   validateNamedItemSourceStructure(result);
   validateLabelsMapping(result, label);
 });
 
 describe("Test buildPartyAbilitySource function", () => {
-  const label: DomainLabel<PartyAbilityOptionLabels> = MockPartyAbility;
+  const label: DomainLabel<PartyAbilityOptionLabels> =
+    DEFAULT_PARTY_ABILITY_LABELS;
   const result = buildPartyAbilitySource(label);
   validateNamedItemSourceStructure(result);
   validateLabelsMapping(result, label);

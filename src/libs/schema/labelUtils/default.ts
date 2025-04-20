@@ -1,6 +1,6 @@
-import type { GlobalLabel } from "@RpgTypes/schema";
+import type { GlobalLabel } from "./globalLabels";
 
-export const MockGlobalLabels = {
+export const DEFAULT_GLOBAL_LABELS = {
   id: "識別子",
   name: "名前",
   note: "メモ",

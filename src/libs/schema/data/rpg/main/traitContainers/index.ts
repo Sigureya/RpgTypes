@@ -6,5 +6,6 @@ export * from "./class/";
 export * from "./state/";
 export * from "./weapon";
 export * from "./weaponLabels";
+export * from "./weaponDefault";
 export * from "./equipment";
 export * from "./enemy/";

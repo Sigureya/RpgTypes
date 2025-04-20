@@ -1,6 +1,7 @@
-import type { DomainLabel, ExtraParamLabels } from "@RpgTypes/schema";
+import type { DomainLabel } from "@RpgTypes/templates";
+import type { ExtraParamLabels } from "./xparamLabels";
 
-export const MockParamExtra = {
+export const DEFUALT_EXTRA_PARAM_LABELS = {
   domainName: "追加能力値",
   options: {
     hitRate: "命中率",

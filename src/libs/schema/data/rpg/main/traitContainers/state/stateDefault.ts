@@ -1,6 +1,6 @@
 import type { DomainLabel, StateLabels } from "@RpgTypes/schema";
 
-export const MockStateLabels = {
+export const DEFAULT_STATE_LABELS = {
   domainName: "ステート",
   options: {
     restriction: "制約",
