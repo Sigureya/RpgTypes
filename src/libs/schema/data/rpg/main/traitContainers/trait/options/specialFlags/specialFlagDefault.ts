@@ -1,4 +1,6 @@
-import type { SpecialFlagOptions, DomainLabel } from "@RpgTypes/schema";
+import type { DomainLabel } from "@RpgTypes/templates";
+import type { SpecialFlagOptions } from "./specialFlag";
+
 export const DEFAULT_SPECIALFLAG_LABELS = {
   domainName: "特殊フラグ",
   options: {

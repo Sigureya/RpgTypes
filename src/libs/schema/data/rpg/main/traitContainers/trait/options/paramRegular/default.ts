@@ -1,4 +1,5 @@
-import type { DomainLabel, RegularParamLabels } from "@RpgTypes/schema";
+import type { DomainLabel } from "@RpgTypes/templates";
+import type { RegularParamLabels } from "./labels";
 
 export const DEFAULT_PARAMREGULAR_LABELS = {
   domainName: "基本能力値",

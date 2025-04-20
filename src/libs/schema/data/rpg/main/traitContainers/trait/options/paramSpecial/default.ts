@@ -1,4 +1,5 @@
-import type { DomainLabel, SpecialParamLabels } from "@RpgTypes/schema";
+import type { DomainLabel } from "@RpgTypes/templates";
+import type { SpecialParamLabels } from "./labels";
 
 export const DEFAULT_PARAMSPECIAL_LABELS = {
   domainName: "特殊能力値",
