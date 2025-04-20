@@ -1,7 +1,7 @@
 import type { DomainLabel } from "@RpgTypes/templates";
 import type { PartyAbilityOptionLabels } from "./partyAbility";
 
-export const DEAULT_PARTY_ABILITY_LABELS = {
+export const DEFAULT_PARTY_ABILITY_LABELS = {
   domainName: "パーティ能力",
   options: {
     cancelSurprise: "不意打ち無効",

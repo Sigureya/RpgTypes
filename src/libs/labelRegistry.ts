@@ -13,10 +13,10 @@ import {
   DEFAULT_STATE_LABELS,
   DEFAULT_PARAMSPECIAL_LABELS,
   DEFAULT_SPECIALFLAG_LABELS,
-  DEAULT_PARTY_ABILITY_LABELS,
+  DEFAULT_PARTY_ABILITY_LABELS,
   DEFUALT_EXTRA_PARAM_LABELS,
   DEFAULT_CLASS_LABELS,
-  MockUsableItem,
+  DEFAULT_USABLE_ITEM_LABELS,
 } from "@RpgTypes/schema";
 
 export const MockLabelRegistry = {
@@ -35,9 +35,9 @@ export const MockLabelRegistry = {
     paramExtra: DEFUALT_EXTRA_PARAM_LABELS,
     collaps: DEFAULT_COLLAPS_LABELS,
     specialFlag: DEFAULT_SPECIALFLAG_LABELS,
-    partyAbility: DEAULT_PARTY_ABILITY_LABELS,
+    partyAbility: DEFAULT_PARTY_ABILITY_LABELS,
     class: DEFAULT_CLASS_LABELS,
-    usableItem: MockUsableItem,
+    usableItem: DEFAULT_USABLE_ITEM_LABELS,
   },
   global: DEFAULT_GLOBAL_LABELS,
 } as const satisfies LabelRegistry;

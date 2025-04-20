@@ -20,7 +20,7 @@ import {
   DEFAULT_PARAMSPECIAL_LABELS,
   DEFAULT_PARAMREGULAR_LABELS,
   DEFAULT_COLLAPS_LABELS,
-  DEAULT_PARTY_ABILITY_LABELS,
+  DEFAULT_PARTY_ABILITY_LABELS,
   DEFUALT_EXTRA_PARAM_LABELS,
 } from "@RpgTypes/schema";
 
@@ -87,7 +87,7 @@ describe("Test buildSpecialParamSource function", () => {
 
 describe("Test buildPartyAbilitySource function", () => {
   const label: DomainLabel<PartyAbilityOptionLabels> =
-    DEAULT_PARTY_ABILITY_LABELS;
+    DEFAULT_PARTY_ABILITY_LABELS;
   const result = buildPartyAbilitySource(label);
   validateNamedItemSourceStructure(result);
   validateLabelsMapping(result, label);

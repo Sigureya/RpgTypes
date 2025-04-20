@@ -1,6 +1,7 @@
-import type { DomainLabel, UsableItemLabels } from "@RpgTypes/schema";
+import type { DomainLabel } from "@RpgTypes/templates";
+import type { UsableItemLabels } from "./usableItemLables";
 
-export const MockUsableItem = {
+export const DEFAULT_USABLE_ITEM_LABELS = {
   domainName: "",
   options: {
     scope: "範囲",
