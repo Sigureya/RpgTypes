@@ -1,3 +1,4 @@
+import type { DomainLabel } from "@RpgTypes/templates";
 import type {
   System_DataNames,
   System_Images,
@@ -15,3 +16,34 @@ export type SystemLabel_Images = XX<System_Images>;
 export type SystemLabel_Text = XX<System_Text>;
 export type SystemLabel_Bgm = XX<System_Bgm>;
 export type SystemLabel_BoolanOptions = XX<System_BoolanOptions>;
+
+export const DEFAULT_SYSTEM_LABELS_BOOLEAN = {
+  domainName: "オプション",
+  options: {
+    optDrawTitle: "ゲームタイトルの描画",
+    optDisplayTp: "ウィンドウにTPを表示",
+    optFloorDeath: "床ダメージで戦闘不能",
+    optSlipDeath: "スリップダメージで戦闘不能",
+    optAutosave: "オートセーブを有効化",
+    optExtraExp: "控えメンバーも経験値を獲得",
+    optFollowers: "隊列歩行",
+    optSideView: "戦闘をサイドビューにする",
+    optKeyItemsNumber: "大事なものの個数を表示",
+    optTransparent: "透明状態で開始",
+    optMessageSkip: "メッセージスキップを有効化",
+    optSplashScreen: "スプラッシュ画面を表示",
+  },
+} as const satisfies DomainLabel<SystemLabel_BoolanOptions>;
+
+export const MockSystemLabelDataTypes = {
+  domainName: "タイプ",
+  options: {
+    armorTypes: "防具タイプ",
+    elements: "属性",
+    equipTypes: "装備タイプ",
+    skillTypes: "スキルタイプ",
+    weaponTypes: "武器タイプ",
+    switches: "スイッチ",
+    variables: "変数",
+  },
+} as const satisfies DomainLabel<SystemLabel_DataNames>;
