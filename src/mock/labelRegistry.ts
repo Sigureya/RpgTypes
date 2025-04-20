@@ -1,5 +1,6 @@
 import type { LabelRegistry } from "@RpgTypes/schema";
 import {
+  DEFAULT_DAMAGE_LABELS,
   MockActorLabels,
   MockArmorLabels,
   MockClassLables,
@@ -11,24 +12,18 @@ import {
   MockParamSpecialLabels,
   MockPartyAbility,
   MockSkillLabels,
+  MockSpecialFlagLabels,
   MockStateLabels,
   MockUsableItem,
 } from "@RpgTypes/schema";
-import {
-  MockGlobalLabels,
-  MockSpecialFlagLabels,
-  MockWeaponLabels,
-} from "./labels";
+import { MockWeaponLabels, MockGlobalLabels } from "./labels";
 export const MockLabelRegistry = {
   rpg: {
     actor: MockActorLabels,
 
     armor: MockArmorLabels,
     skill: MockSkillLabels,
-    damage: {
-      domainName: "ダメージ",
-      options: {},
-    },
+    damage: DEFAULT_DAMAGE_LABELS,
     item: MockItemLabels,
     class: MockClassLables,
     enemy: MockEnemyLabels,
