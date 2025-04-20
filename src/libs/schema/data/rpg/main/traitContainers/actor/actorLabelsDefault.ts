@@ -1,4 +1,4 @@
-import type { DomainLabel } from "@RpgTypes/schema";
+import type { DomainLabel } from "@RpgTypes/templates";
 import type { ActorLabels } from "./actorLabels";
 
 export const DEFAULT_ACTOR_LABELS = {

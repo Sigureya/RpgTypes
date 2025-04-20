@@ -1,11 +1,9 @@
-import type { DomainLabel } from "@RpgTypes/schema";
+import type { DomainLabel } from "@RpgTypes/templates";
 
-export type PrimitiveRecord<T> = {
-  [K in keyof T]: string;
-};
+export type PrimitiveRecord<T> = Record<keyof T, string>;
 
 export const mergeWithDefaults = <T>(
-  defaultLabels: PrimitiveRecord<T>,
+  defaultLabels: Record<keyof T, string>,
   labels: Partial<T>
 ): {
   [K in keyof T]: string;

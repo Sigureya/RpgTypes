@@ -1,4 +1,4 @@
-import type { DomainLabel } from "@RpgTypes/schema";
+import type { DomainLabel } from "@RpgTypes/templates";
 import type { ArmorLabels } from "./armorLabels";
 
 export const DEFAULT_ARMOR_LABELS = {
