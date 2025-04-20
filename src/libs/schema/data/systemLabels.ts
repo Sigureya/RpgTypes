@@ -7,15 +7,15 @@ import type {
   System_BoolanOptions,
 } from "./system";
 
-type XX<T> = {
+type AsLabel<T> = {
   [K in keyof T]: string;
 };
 
-export type SystemLabel_DataNames = XX<System_DataNames>;
-export type SystemLabel_Images = XX<System_Images>;
-export type SystemLabel_Text = XX<System_Text>;
-export type SystemLabel_Bgm = XX<System_Bgm>;
-export type SystemLabel_BoolanOptions = XX<System_BoolanOptions>;
+export type SystemLabel_DataNames = AsLabel<System_DataNames>;
+export type SystemLabel_Images = AsLabel<System_Images>;
+export type SystemLabel_Text = AsLabel<System_Text>;
+export type SystemLabel_Bgm = AsLabel<System_Bgm>;
+export type SystemLabel_BoolanOptions = AsLabel<System_BoolanOptions>;
 
 export const DEFAULT_SYSTEM_LABELS_BOOLEAN = {
   domainName: "オプション",
