@@ -1,4 +1,4 @@
-import type { GlobalLabel } from "@RpgTypes/schema";
+import type { GlobalLabel } from "./globalLabels";
 
 export const MockGlobalLabels = {
   id: "識別子",
