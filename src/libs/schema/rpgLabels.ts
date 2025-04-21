@@ -5,9 +5,9 @@ import type {
   ClassLabels,
   CollapsOptionLabels,
   DamageLabels,
+  EffectLabelSet,
   EnemyLabels,
   ExtraParamLabels,
-  ItemEffectTypeLabels,
   ItemLabels,
   PartyAbilityOptionLabels,
   RegularParamLabels,
@@ -36,5 +36,5 @@ export interface RpgLabels {
   item: DomainLabel<ItemLabels>;
   skill: DomainLabel<SkillLabels>;
   damage: DomainLabel<DamageLabels>;
-  itemEffect: DomainLabel<ItemEffectTypeLabels>;
+  itemEffect: DomainLabel<EffectLabelSet>;
 }
