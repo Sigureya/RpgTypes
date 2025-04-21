@@ -1,0 +1,36 @@
+import type { DomainLabel } from "@RpgTypes/templates";
+import {
+  DEFAULT_LABEL_ADD_BUFF,
+  DEFAULT_LABEL_ADD_DEBUFF,
+  DEFAULT_LABEL_ADD_STATE,
+  DEFAULT_LABEL_COMMON_EVENT,
+  DEFAULT_LABEL_GAIN_TP,
+  DEFAULT_LABEL_GROW,
+  DEFAULT_LABEL_LEARN_SKILL,
+  DEFAULT_LABEL_RECOVER_HP,
+  DEFAULT_LABEL_RECOVER_MP,
+  DEFAULT_LABEL_REMOVE_BUFF,
+  DEFAULT_LABEL_REMOVE_DEBUFF,
+  DEFAULT_LABEL_REMOVE_STATE,
+  DEFAULT_LABEL_SPECIAL,
+} from "./default";
+import type { EffectLabelSet } from "./types";
+
+export const DEFAULT_EFFECT_LABELS_SET = {
+  domainName: "使用効果",
+  options: {
+    addBuff: DEFAULT_LABEL_ADD_BUFF,
+    addDebuff: DEFAULT_LABEL_ADD_DEBUFF,
+    gainTp: DEFAULT_LABEL_GAIN_TP,
+    grow: DEFAULT_LABEL_GROW,
+    learnSkill: DEFAULT_LABEL_LEARN_SKILL,
+    recoverHp: DEFAULT_LABEL_RECOVER_HP,
+    recoverMp: DEFAULT_LABEL_RECOVER_MP,
+    removeBuff: DEFAULT_LABEL_REMOVE_BUFF,
+    removeDebuff: DEFAULT_LABEL_REMOVE_DEBUFF,
+    removeState: DEFAULT_LABEL_REMOVE_STATE,
+    special: DEFAULT_LABEL_SPECIAL,
+    addState: DEFAULT_LABEL_ADD_STATE,
+    commonEvent: DEFAULT_LABEL_COMMON_EVENT,
+  },
+} as const satisfies DomainLabel<EffectLabelSet>;
