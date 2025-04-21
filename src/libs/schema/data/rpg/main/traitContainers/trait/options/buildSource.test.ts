@@ -3,9 +3,8 @@ import type {
   CollapsOptionLabels,
   ExtraParamLabels,
   RegularParamLabels,
-  NamedItemSource,
   PartyAbilityOptionLabels,
-} from "@RpgTypes/schema";
+} from "./types";
 import type { DomainLabel } from "@RpgTypes/templates";
 
 import {
@@ -15,14 +14,15 @@ import {
   buildRegularParamSource,
   buildSpecialParamSource,
 } from "./buildSource";
-import { MODULE_TRAIT } from "./constants";
 import {
   DEFAULT_PARAMSPECIAL_LABELS,
   DEFAULT_PARAMREGULAR_LABELS,
   DEFAULT_COLLAPS_LABELS,
   DEFAULT_PARTY_ABILITY_LABELS,
   DEFUALT_EXTRA_PARAM_LABELS,
-} from "@RpgTypes/schema";
+} from "./types";
+import type { NamedItemSource } from "@RpgTypes/schema";
+import { MODULE_TRAIT } from "@RpgTypes/namedItemSource";
 
 // Renamed test helper function for clarity
 const validateNamedItemSourceStructure = (source: NamedItemSource) => {

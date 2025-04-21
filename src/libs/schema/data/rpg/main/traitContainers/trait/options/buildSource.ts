@@ -1,30 +1,28 @@
+import type { GlobalLabel, NamedItemSource } from "@RpgTypes/schema";
 import type {
   CollapsOptionLabels,
-  GlobalLabel,
-  NamedItemSource,
+  ExtraParamLabels,
   PartyAbilityOptionLabels,
   RegularParamLabels,
-  ExtraParamLabels,
   SpecialParamLabels,
-} from "@RpgTypes/schema";
-
+} from "./types";
 import {
   SRC_TRAIT_COLLAPS,
-  SRC_TRAIT_PARTY_ABILITY,
-  SRC_PARAMS_REGULAR,
   SRC_PARAMS_EXTRA,
+  SRC_PARAMS_REGULAR,
   SRC_PARAMS_SPECIAL,
+  SRC_TRAIT_PARTY_ABILITY,
 } from "@RpgTypes/schema";
 
 import {
   foldCollapsOptions,
+  foldExtraParam,
   foldPartyAbilityOptions,
   foldRegularParam,
-  foldExtraParam,
   foldSpecialParams,
-} from "./labels/traits";
-import { AUTHOR_RMMZ, MODULE_TRAIT } from "./constants";
+} from "./makeOptions";
 import type { DomainLabel } from "@RpgTypes/templates";
+import { AUTHOR_RMMZ, MODULE_TRAIT } from "@RpgTypes/namedItemSource";
 
 export const traitDomain = <T>(
   sourceKey: string,

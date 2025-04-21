@@ -1,4 +1,4 @@
 export * from "./types";
-export * from "./traitCode";
+export * from "./constants";
 export * from "./options";
 export * from "./traitLables";
