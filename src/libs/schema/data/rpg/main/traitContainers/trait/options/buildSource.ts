@@ -21,11 +21,8 @@ import {
   foldRegularParam,
   foldSpecialParams,
 } from "./makeOptions";
-import {
-  AUTHOR_RMMZ,
-  MODULE_TRAIT,
-} from "../../../../../../../namedItemSource/transformers/constants";
 import type { DomainLabel } from "@RpgTypes/templates";
+import { AUTHOR_RMMZ, MODULE_TRAIT } from "@RpgTypes/namedItemSource";
 
 export const traitDomain = <T>(
   sourceKey: string,
