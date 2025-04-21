@@ -4,7 +4,7 @@ import type {
   ExtraParamLabels,
   RegularParamLabels,
   PartyAbilityOptionLabels,
-} from "./options";
+} from "./types";
 import type { DomainLabel } from "@RpgTypes/templates";
 
 import {
@@ -20,7 +20,7 @@ import {
   DEFAULT_COLLAPS_LABELS,
   DEFAULT_PARTY_ABILITY_LABELS,
   DEFUALT_EXTRA_PARAM_LABELS,
-} from "./options";
+} from "./types";
 import type { NamedItemSource } from "@RpgTypes/schema";
 import { MODULE_TRAIT } from "@RpgTypes/namedItemSource";
 

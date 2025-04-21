@@ -5,7 +5,7 @@ import type {
   PartyAbilityOptionLabels,
   RegularParamLabels,
   SpecialParamLabels,
-} from "./options";
+} from "./types";
 import {
   COLLAPS_BOSS,
   COLLAPS_INSTANT,
@@ -45,7 +45,7 @@ import {
   SPECIAL_PARAM_REC,
   SPECIAL_PARAM_TCR,
   SPECIAL_PARAM_TGR,
-} from "./options";
+} from "./types";
 
 export const foldCollapsOptions = (
   options: CollapsOptionLabels,

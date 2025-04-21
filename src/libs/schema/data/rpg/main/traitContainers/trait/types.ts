@@ -1,4 +1,4 @@
-import type * as $ from "./traitCode";
+import type * as $ from "./constants/traitCode";
 
 export type TraitCode = (typeof $)[keyof typeof $];
 

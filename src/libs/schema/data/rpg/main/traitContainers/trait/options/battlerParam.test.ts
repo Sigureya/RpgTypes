@@ -29,7 +29,7 @@ import {
   SPECIAL_PARAM_MDR,
   SPECIAL_PARAM_PHA,
   SPECIAL_PARAM_REC,
-} from "./options";
+} from "./types";
 import {
   regularParamName,
   extraParamName,
@@ -39,7 +39,8 @@ import type {
   ExtraParamLabels,
   RegularParamLabels,
   SpecialParamLabels,
-} from "./options";
+} from "./types";
+
 describe("regularParamName", () => {
   const labels: RegularParamLabels = {
     maxHp: "Max HP",
