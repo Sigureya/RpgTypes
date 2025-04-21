@@ -1,3 +1,13 @@
+import type { SourceIdentifier } from "@RpgTypes/schema";
+
+export interface EffectDefinitionResolved {
+  codeId: number;
+  label: string;
+  format: string;
+  description: string;
+  dataSource?: SourceIdentifier;
+}
+
 export interface EffectLabelDefinition {
   desc: string;
   domainName: string;
