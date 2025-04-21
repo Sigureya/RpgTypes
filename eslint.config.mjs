@@ -20,7 +20,6 @@ export default [
     },
     rules: {
       // ESLintの推奨ルールセットを手動で適用
-      "no-unused-vars": "warn",
       "no-undef": "error",
       "no-console": "warn",
       eqeqeq: "error",
