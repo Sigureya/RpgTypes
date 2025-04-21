@@ -2,7 +2,7 @@ import type {
   RegularParamLabels,
   ExtraParamLabels,
   SpecialParamLabels,
-} from "@RpgTypes/schema";
+} from "./options";
 import {
   REGULAR_PARAM_AGI,
   REGULAR_PARAM_ATK,
@@ -32,7 +32,7 @@ import {
   SPECIAL_PARAM_MDR,
   SPECIAL_PARAM_PHA,
   SPECIAL_PARAM_REC,
-} from "@RpgTypes/schema/";
+} from "./options";
 
 export const regularParamName = (
   paramIndex: number,

@@ -14,16 +14,17 @@ import {
   SRC_PARAMS_REGULAR,
   SRC_PARAMS_EXTRA,
   SRC_PARAMS_SPECIAL,
+  foldCollapsOptions,
+  foldExtraParam,
+  foldPartyAbilityOptions,
+  foldRegularParam,
+  foldSpecialParams,
 } from "@RpgTypes/schema";
 
 import {
-  foldCollapsOptions,
-  foldPartyAbilityOptions,
-  foldRegularParam,
-  foldExtraParam,
-  foldSpecialParams,
-} from "./labels/traits";
-import { AUTHOR_RMMZ, MODULE_TRAIT } from "./constants";
+  AUTHOR_RMMZ,
+  MODULE_TRAIT,
+} from "../../../../../../namedItemSource/transformers/constants";
 import type { DomainLabel } from "@RpgTypes/templates";
 
 export const traitDomain = <T>(

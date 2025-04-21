@@ -1,10 +1,5 @@
 import { describe, expect, test } from "vitest";
 
-import type {
-  RegularParamLabels,
-  ExtraParamLabels,
-  SpecialParamLabels,
-} from "@RpgTypes/schema";
 import {
   REGULAR_PARAM_AGI,
   REGULAR_PARAM_ATK,
@@ -34,13 +29,17 @@ import {
   SPECIAL_PARAM_MDR,
   SPECIAL_PARAM_PHA,
   SPECIAL_PARAM_REC,
-} from "@RpgTypes/schema";
+} from "./options";
 import {
   regularParamName,
   extraParamName,
   specialParamName,
 } from "./battlerParam";
-
+import type {
+  ExtraParamLabels,
+  RegularParamLabels,
+  SpecialParamLabels,
+} from "./options";
 describe("regularParamName", () => {
   const labels: RegularParamLabels = {
     maxHp: "Max HP",
