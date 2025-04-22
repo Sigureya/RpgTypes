@@ -22,18 +22,18 @@ import {
 import type { ItemEffect } from "./itemEffect";
 import type { EffectDefinitionResolved, EffectLabelDefinition } from "./labels";
 import {
-  DEFAULT_LABEL_RECOVER_HP,
-  DEFAULT_LABEL_RECOVER_MP,
-  DEFAULT_LABEL_GAIN_TP,
-  DEFAULT_LABEL_ADD_STATE,
-  DEFAULT_LABEL_REMOVE_STATE,
-  DEFAULT_LABEL_ADD_BUFF,
-  DEFAULT_LABEL_ADD_DEBUFF,
-  DEFAULT_LABEL_REMOVE_BUFF,
-  DEFAULT_LABEL_REMOVE_DEBUFF,
-  DEFAULT_LABEL_GROW,
-  DEFAULT_LABEL_LEARN_SKILL,
-  DEFAULT_LABEL_COMMON_EVENT,
+  LABELS_EFFECT_RECOVER_HP,
+  LABELS_EFFECT_RECOVER_MP,
+  LABELS_EFFECT_GAIN_TP,
+  LABELS_EFFECT_ADD_STATE,
+  LABELS_EFFECT_REMOVE_STATE,
+  LABELS_EFFECT_ADD_BUFF,
+  LABELS_EFFECT_ADD_DEBUFF,
+  LABELS_EFFECT_REMOVE_BUFF,
+  LABELS_EFFECT_REMOVE_DEBUFF,
+  LABELS_EFFECT_GROW,
+  LABELS_EFFECT_LEARN_SKILL,
+  LABELS_EFFECT_COMMON_EVENT,
 } from "./labels";
 import {
   AUTHOR_RMMZ,
@@ -80,29 +80,29 @@ export const defineEffect = (
 export const defineEffectRecoverHp = (
   labels: Partial<EffectLabelDefinition>
 ): EffectDefinitionResolved =>
-  defineEffect(EFFECT_RECOVER_HP, DEFAULT_LABEL_RECOVER_HP, labels);
+  defineEffect(EFFECT_RECOVER_HP, LABELS_EFFECT_RECOVER_HP, labels);
 
 export const defineEffectRecoverMp = (
   labels: Partial<EffectLabelDefinition>
 ): EffectDefinitionResolved =>
-  defineEffect(EFFECT_RECOVER_MP, DEFAULT_LABEL_RECOVER_MP, labels);
+  defineEffect(EFFECT_RECOVER_MP, LABELS_EFFECT_RECOVER_MP, labels);
 
 export const defineEffectGainTp = (
   labels: Partial<EffectLabelDefinition>
 ): EffectDefinitionResolved =>
-  defineEffect(EFFECT_GAIN_TP, DEFAULT_LABEL_GAIN_TP, labels);
+  defineEffect(EFFECT_GAIN_TP, LABELS_EFFECT_GAIN_TP, labels);
 
 export const defineEffectGrow = (
   labels: Partial<EffectLabelDefinition>
 ): EffectDefinitionResolved =>
-  defineEffect(EFFECT_GROW, DEFAULT_LABEL_GROW, labels);
+  defineEffect(EFFECT_GROW, LABELS_EFFECT_GROW, labels);
 
 export const defineEffectAddState = (
   labels: Partial<EffectLabelDefinition>
 ): EffectDefinitionResolved =>
   defineEffect(
     EFFECT_ADD_STATE,
-    DEFAULT_LABEL_ADD_STATE,
+    LABELS_EFFECT_ADD_STATE,
     labels,
     srcData(SRC_DATA_STATE)
   );
@@ -112,7 +112,7 @@ export const defineEffectRemoveState = (
 ): EffectDefinitionResolved =>
   defineEffect(
     EFFECT_REMOVE_STATE,
-    DEFAULT_LABEL_REMOVE_STATE,
+    LABELS_EFFECT_REMOVE_STATE,
     labels,
     srcData(SRC_DATA_STATE)
   );
@@ -120,14 +120,14 @@ export const defineEffectRemoveState = (
 export const defineEffectAddBuff = (
   labels: Partial<EffectLabelDefinition>
 ): EffectDefinitionResolved =>
-  defineEffect(EFFECT_ADD_BUFF, DEFAULT_LABEL_ADD_BUFF, labels, regularParam());
+  defineEffect(EFFECT_ADD_BUFF, LABELS_EFFECT_ADD_BUFF, labels, regularParam());
 
 export const defineEffectRemoveBuff = (
   labels: Partial<EffectLabelDefinition>
 ): EffectDefinitionResolved =>
   defineEffect(
     EFFECT_REMOVE_BUFF,
-    DEFAULT_LABEL_REMOVE_BUFF,
+    LABELS_EFFECT_REMOVE_BUFF,
     labels,
     regularParam()
   );
@@ -137,7 +137,7 @@ export const defineEffectLearnSkill = (
 ): EffectDefinitionResolved =>
   defineEffect(
     EFFECT_LEARN_SKILL,
-    DEFAULT_LABEL_LEARN_SKILL,
+    LABELS_EFFECT_LEARN_SKILL,
     labels,
     srcData(SRC_DATA_SKILL)
   );
@@ -147,7 +147,7 @@ export const defineEffectAddDebuff = (
 ): EffectDefinitionResolved =>
   defineEffect(
     EFFECT_ADD_DEBUFF,
-    DEFAULT_LABEL_ADD_DEBUFF,
+    LABELS_EFFECT_ADD_DEBUFF,
     labels,
     regularParam()
   );
@@ -157,7 +157,7 @@ export const defineEffectRemoveDebuff = (
 ): EffectDefinitionResolved =>
   defineEffect(
     EFFECT_REMOVE_DEBUFF,
-    DEFAULT_LABEL_REMOVE_DEBUFF,
+    LABELS_EFFECT_REMOVE_DEBUFF,
     labels,
     regularParam()
   );
@@ -167,7 +167,7 @@ export const defineEffectCommonEvent = (
 ): EffectDefinitionResolved =>
   defineEffect(
     EFFECT_COMMON_EVENT,
-    DEFAULT_LABEL_COMMON_EVENT,
+    LABELS_EFFECT_COMMON_EVENT,
     labels,
     srcData(SRC_COMMON_EVNET)
   );

@@ -1,9 +1,9 @@
 import type { GlobalLabel } from "./labelUtils/";
-import type { RpgLabels } from "./rpgLabels";
+import type { RpgLabels, RpgLabels2 } from "./rpgLabels";
 
 export interface LabelRegistry {
   global: GlobalLabel;
-  rpg: RpgLabels;
+  rpg: RpgLabels2;
 }
 
 /**

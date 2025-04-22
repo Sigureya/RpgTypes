@@ -1,7 +1,7 @@
 import type { DomainLabel } from "@RpgTypes/templates";
 import type { StateLabels } from "./stateLabels";
 
-export const DEFAULT_STATE_LABELS = {
+export const LABELS_DATA_STATE = {
   domainName: "ステート",
   options: {
     restriction: "制約",

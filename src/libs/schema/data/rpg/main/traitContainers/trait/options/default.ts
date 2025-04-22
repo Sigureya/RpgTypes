@@ -34,7 +34,7 @@ export const LABELS_TRAIT_STATE_RESIST = {
   format: FORMAT_NAME,
 } as const satisfies TraitLabel;
 
-export const LABELS_PARAM_REGULAR = {
+export const LABELS_TRAIT_REGULAR_PARAM = {
   domainName: "基本能力値",
   format: FORMAT_PARAM_RATE_MUL,
   options: {
@@ -49,7 +49,7 @@ export const LABELS_PARAM_REGULAR = {
   },
 } as const satisfies TraitLabelWithOption<RegularParamLabels>;
 
-export const LABELS_EXTRA_PARAM = {
+export const LABELS_TRAIT_EXTRA_PARAM = {
   domainName: "追加能力値",
   format: FORMAT_PARAM_RATE_PLUS,
   options: {
@@ -66,7 +66,7 @@ export const LABELS_EXTRA_PARAM = {
   },
 } as const satisfies TraitLabelWithOption<ExtraParamLabels>;
 
-export const LABELS_PARAM_SPECIAL = {
+export const LABELS_TRAIT_SPECIAL_PARAM = {
   domainName: "特殊能力値",
   format: FORMAT_PARAM_RATE_MUL,
   options: {
@@ -113,12 +113,12 @@ export const LABELS_TRAIT_ATTACK_SKILL = {
   format: FORMAT_NAME,
 } as const satisfies TraitLabel;
 
-export const LABELS_EQUIP_WTYPE = {
+export const LABELS_TRAIT_EQUIP_WEAPON_TYPE = {
   domainName: "装備武器タイプ",
   format: FORMAT_NAME,
 } as const satisfies TraitLabel;
 
-export const LABELS_TRAIT_EQUIP_ATYPE = {
+export const LABELS_TRAIT_EQUIP_ARMOR_TYPE = {
   domainName: "装備防具タイプ",
   format: FORMAT_NAME,
 } as const satisfies TraitLabel;
@@ -169,7 +169,7 @@ export const LABELS_TRAIT_SPECIALFLAG = {
   },
 } as const satisfies TraitLabelWithOption<SpecialFlagOptions>;
 
-export const LABELS_COLLAPS = {
+export const LABELS_TRAIT_COLLAPS = {
   domainName: "消滅エフェクト",
   format: FORMAT_NAME,
   options: {
@@ -179,7 +179,7 @@ export const LABELS_COLLAPS = {
   },
 } as const satisfies TraitLabelWithOption<CollapsOptionLabels>;
 
-export const LABELS_PARTY_ABILITY = {
+export const LABELS_TRAIT_PARTY_ABILITY = {
   domainName: "パーティ能力",
   format: FORMAT_NAME,
   options: {

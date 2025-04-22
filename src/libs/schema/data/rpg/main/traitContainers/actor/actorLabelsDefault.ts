@@ -1,7 +1,7 @@
 import type { DomainLabel } from "@RpgTypes/templates";
 import type { ActorLabels } from "./actorLabels";
 
-export const DEFAULT_ACTOR_LABELS = {
+export const LABELS_DATA_ACTOR = {
   domainName: "アクター",
   options: {
     initialEquipments: "初期装備",
