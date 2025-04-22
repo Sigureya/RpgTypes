@@ -83,7 +83,7 @@ export const LABELS_PARAM_SPECIAL = {
   },
 } as const satisfies TraitLabelWithOption<SpecialParamLabels>;
 
-export const LABLES_TRAIT_ATTACK_ELEMENT = {
+export const LABELS_TRAIT_ATTACK_ELEMENT = {
   domainName: "攻撃属性",
   format: FORMAT_NAME,
 } as const satisfies TraitLabel;
