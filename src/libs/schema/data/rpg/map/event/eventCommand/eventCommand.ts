@@ -1,3 +1,4 @@
+import type { AudioFileParams, ColorRGBA } from "@RpgTypes/utils";
 import type { BranchParameters } from "./branchParams";
 import type { EventCommandLike } from "./eventComandLike";
 import type * as EventCommandCodes from "./eventCommandCodes";
@@ -24,14 +25,11 @@ import type {
   Param_EnemyIterate,
 } from "./paramaters/changeBattler";
 import type {
-  AudioFileParams,
   CommandTemplate,
-  ColorRGBA,
   Direction8,
   MoveRouteData,
   IndexOfParameter,
 } from "./types";
-import type * as Types from "./types";
 
 export type EventCode = EventCommandsMapper["codeType"];
 export type EventCodeTable = EventCommandsMapper["codeTable"];
@@ -220,7 +218,7 @@ export type EventCommandsMapper = CommandTemplate<
     /**
      * @description Change Battle BGM
      */
-    CHANGE_BATTLE_BGM: [value: Types.AudioFileParams];
+    CHANGE_BATTLE_BGM: [value: AudioFileParams];
     /**
      * @description Change Vheicle ME
      */
