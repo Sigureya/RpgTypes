@@ -1,5 +1,6 @@
 import type { SourceIdentifier } from "@RpgTypes/schema/namedItemSource";
 import {
+  SRC_ARMOR_TYPES,
   SRC_DATA_SKILL,
   SRC_DATA_STATE,
   SRC_ELEMENTS,
@@ -9,6 +10,7 @@ import {
   SRC_TRAIT_COLLAPS,
   SRC_TRAIT_PARTY_ABILITY,
   SRC_TRAIT_SPECIAL_FLAG,
+  SRC_WEAPON_TYPES,
 } from "@RpgTypes/schema/namedItemSource";
 import type { TraitLabelResolved, TraitLabel } from "./options";
 import {
@@ -28,6 +30,15 @@ import {
   LABELS_COLLAPS,
   LABELS_PARTY_ABILITY,
   LABELS_PARAM_REGULAR,
+  LABELS_EQUIP_WTYPE,
+  LABELS_TRAIT_EQUIP_ATYPE,
+  LABELS_TRAIT_EQUIP_LOCK,
+  LABELS_TRAIT_EQUIP_SEAL,
+  LABELS_TRAIT_SLOT_TYPE,
+  LABELS_TRAIT_SKILL_ADD,
+  LABELS_TRAIT_SKILL_SEAL,
+  LABELS_TRAIT_SKILL_TYPE_ADD,
+  LABELS_TRAIT_SKILL_TYPE_SEAL,
 } from "./options";
 import {
   TRAIT_ELEMENT_RATE,
@@ -46,6 +57,15 @@ import {
   TRAIT_SPECIAL_FLAG,
   TRAIT_COLLAPSE_TYPE,
   TRAIT_PARTY_ABILITY,
+  TRAIT_EQUIP_ARMOR_TYPE,
+  TRAIT_EQUIP_LOCK,
+  TRAIT_EQUIP_SEAL,
+  TRAIT_EQUIP_WEAPON_TYPE,
+  TRAIT_SKILL_ADD,
+  TRAIT_SKILL_SEAL,
+  TRAIT_SLOT_TYPE,
+  TRAIT_SKILL_TYPE_ADD,
+  TRAIT_SKILL_TYPE_SEAL,
 } from "./constants";
 import {
   AUTHOR_RMMZ,
@@ -86,6 +106,12 @@ const srcData = (key: string): SourceIdentifier => {
 const srcTrait = (src: string): SourceIdentifier => ({
   author: AUTHOR_RMMZ,
   module: MODULE_TRAIT,
+  sourceKey: src,
+});
+
+const srcSystem = (src: string): SourceIdentifier => ({
+  author: AUTHOR_RMMZ,
+  module: MODULE_SYSTEM,
   sourceKey: src,
 });
 
@@ -202,3 +228,40 @@ export const defineTraitPartyAbility = (label: Partial<TraitLabel>) =>
     label,
     srcTrait(SRC_TRAIT_PARTY_ABILITY)
   );
+
+export const defineTraitEquipWeaponType = (label: Partial<TraitLabel>) =>
+  defineTrait(
+    TRAIT_EQUIP_WEAPON_TYPE,
+    LABELS_EQUIP_WTYPE,
+    label,
+    srcSystem(SRC_WEAPON_TYPES)
+  );
+
+export const defineTraitEquipArmorType = (label: Partial<TraitLabel>) =>
+  defineTrait(
+    TRAIT_EQUIP_ARMOR_TYPE,
+    LABELS_TRAIT_EQUIP_ATYPE,
+    label,
+    srcSystem(SRC_ARMOR_TYPES)
+  );
+
+export const defineTraitEquipLock = (label: Partial<TraitLabel>) =>
+  defineTrait(TRAIT_EQUIP_LOCK, LABELS_TRAIT_EQUIP_LOCK, label);
+
+export const defineTraitEquipSeal = (label: Partial<TraitLabel>) =>
+  defineTrait(TRAIT_EQUIP_SEAL, LABELS_TRAIT_EQUIP_SEAL, label);
+
+export const defineTraitSkillAdd = (label: Partial<TraitLabel>) =>
+  defineTrait(TRAIT_SKILL_ADD, LABELS_TRAIT_SKILL_ADD, label);
+
+export const defineTraitSkillSeal = (label: Partial<TraitLabel>) =>
+  defineTrait(TRAIT_SKILL_SEAL, LABELS_TRAIT_SKILL_SEAL, label);
+
+export const defineTraitSlotType = (label: Partial<TraitLabel>) =>
+  defineTrait(TRAIT_SLOT_TYPE, LABELS_TRAIT_SLOT_TYPE, label);
+
+export const defineTraitSTypeAdd = (label: Partial<TraitLabel>) =>
+  defineTrait(TRAIT_SKILL_TYPE_ADD, LABELS_TRAIT_SKILL_TYPE_ADD, label);
+
+export const defineTraitSTypeSeal = (label: Partial<TraitLabel>) =>
+  defineTrait(TRAIT_SKILL_TYPE_SEAL, LABELS_TRAIT_SKILL_TYPE_SEAL, label);
