@@ -138,6 +138,26 @@ export const LABELS_TRAIT_SLOT_TYPE = {
   format: FORMAT_NAME,
 } as const satisfies TraitLabel;
 
+export const LABELS_TRAIT_SKILL_ADD = {
+  domainName: "スキル追加",
+  format: FORMAT_NAME,
+} as const satisfies TraitLabel;
+
+export const LABELS_TRAIT_SKILL_SEAL = {
+  domainName: "スキル封印",
+  format: FORMAT_NAME,
+} as const satisfies TraitLabel;
+
+export const LABELS_TRAIT_SKILL_TYPE_ADD = {
+  domainName: "スキルタイプ追加",
+  format: FORMAT_NAME,
+} as const satisfies TraitLabel;
+
+export const LABELS_TRAIT_SKILL_TYPE_SEAL = {
+  domainName: "スキルタイプ封印",
+  format: FORMAT_NAME,
+} as const satisfies TraitLabel;
+
 export const LABELS_TRAIT_SPECIALFLAG = {
   domainName: "特殊フラグ",
   format: FORMAT_NAME,
