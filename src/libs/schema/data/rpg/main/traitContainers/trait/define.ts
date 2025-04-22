@@ -21,17 +21,17 @@ import {
   LABELS_TRAIT_ATTACK_STATE,
   LABELS_TRAIT_ATTACK_SKILL,
   LABELS_TRAIT_ACTION_PLUS,
-  LABELS_EXTRA_PARAM,
-  LABELS_PARAM_SPECIAL,
+  LABELS_TRAIT_EXTRA_PARAM,
+  LABELS_TRAIT_SPECIAL_PARAM,
   LABELS_TRAIT_ATTACK_ELEMENT,
   LABELS_TRAIT_ATTACK_SPEED,
   LABELS_TRAIT_SPECIALFLAG,
   LABELS_TRAIT_ATTACK_TIMES,
-  LABELS_COLLAPS,
-  LABELS_PARTY_ABILITY,
-  LABELS_PARAM_REGULAR,
-  LABELS_EQUIP_WTYPE,
-  LABELS_TRAIT_EQUIP_ATYPE,
+  LABELS_TRAIT_COLLAPS,
+  LABELS_TRAIT_PARTY_ABILITY,
+  LABELS_TRAIT_REGULAR_PARAM,
+  LABELS_TRAIT_EQUIP_WEAPON_TYPE,
+  LABELS_TRAIT_EQUIP_ARMOR_TYPE,
   LABELS_TRAIT_EQUIP_LOCK,
   LABELS_TRAIT_EQUIP_SEAL,
   LABELS_TRAIT_SLOT_TYPE,
@@ -165,7 +165,7 @@ export const defineTraitStateResist = (label: Partial<TraitLabel>) =>
 export const defineTraitRegularParam = (label: Partial<TraitLabel>) =>
   defineTrait(
     TRAIT_PARAM,
-    LABELS_PARAM_REGULAR,
+    LABELS_TRAIT_REGULAR_PARAM,
     label,
     srcTrait(SRC_PARAMS_REGULAR)
   );
@@ -173,7 +173,7 @@ export const defineTraitRegularParam = (label: Partial<TraitLabel>) =>
 export const defineTraitExtraParam = (label: Partial<TraitLabel>) =>
   defineTrait(
     TRAIT_XPARAM,
-    LABELS_EXTRA_PARAM,
+    LABELS_TRAIT_EXTRA_PARAM,
     label,
     srcTrait(SRC_PARAMS_EXTRA)
   );
@@ -181,7 +181,7 @@ export const defineTraitExtraParam = (label: Partial<TraitLabel>) =>
 export const defineTraitSpecialParam = (label: Partial<TraitLabel>) =>
   defineTrait(
     TRAIT_SPARAM,
-    LABELS_PARAM_SPECIAL,
+    LABELS_TRAIT_SPECIAL_PARAM,
     label,
     srcTrait(SRC_PARAMS_SPECIAL)
   );
@@ -231,7 +231,7 @@ export const defineTraitSpecialFlag = (label: Partial<TraitLabel>) =>
 export const defineTraitCollapseType = (label: Partial<TraitLabel>) =>
   defineTrait(
     TRAIT_COLLAPSE_TYPE,
-    LABELS_COLLAPS,
+    LABELS_TRAIT_COLLAPS,
     label,
     srcTrait(SRC_TRAIT_COLLAPS)
   );
@@ -239,7 +239,7 @@ export const defineTraitCollapseType = (label: Partial<TraitLabel>) =>
 export const defineTraitPartyAbility = (label: Partial<TraitLabel>) =>
   defineTrait(
     TRAIT_PARTY_ABILITY,
-    LABELS_PARTY_ABILITY,
+    LABELS_TRAIT_PARTY_ABILITY,
     label,
     srcTrait(SRC_TRAIT_PARTY_ABILITY)
   );
@@ -247,7 +247,7 @@ export const defineTraitPartyAbility = (label: Partial<TraitLabel>) =>
 export const defineTraitEquipWeaponType = (label: Partial<TraitLabel>) =>
   defineTrait(
     TRAIT_EQUIP_WEAPON_TYPE,
-    LABELS_EQUIP_WTYPE,
+    LABELS_TRAIT_EQUIP_WEAPON_TYPE,
     label,
     srcSystem(SRC_WEAPON_TYPES)
   );
@@ -255,7 +255,7 @@ export const defineTraitEquipWeaponType = (label: Partial<TraitLabel>) =>
 export const defineTraitEquipArmorType = (label: Partial<TraitLabel>) =>
   defineTrait(
     TRAIT_EQUIP_ARMOR_TYPE,
-    LABELS_TRAIT_EQUIP_ATYPE,
+    LABELS_TRAIT_EQUIP_ARMOR_TYPE,
     label,
     srcSystem(SRC_ARMOR_TYPES)
   );

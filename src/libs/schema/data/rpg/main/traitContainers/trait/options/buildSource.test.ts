@@ -16,11 +16,11 @@ import {
 } from "./buildSource";
 
 import {
-  LABELS_COLLAPS,
-  LABELS_PARAM_REGULAR,
-  LABELS_PARAM_SPECIAL,
-  LABELS_PARTY_ABILITY,
-  LABELS_EXTRA_PARAM,
+  LABELS_TRAIT_COLLAPS,
+  LABELS_TRAIT_REGULAR_PARAM,
+  LABELS_TRAIT_SPECIAL_PARAM,
+  LABELS_TRAIT_PARTY_ABILITY,
+  LABELS_TRAIT_EXTRA_PARAM,
 } from "./default";
 
 import type { NamedItemSource } from "@RpgTypes/schema";
@@ -54,7 +54,7 @@ const validateLabelsMapping = <T extends {}>(
 };
 
 describe("Test buildCollapsSource function", () => {
-  const labels: DomainLabel<CollapsOptionLabels> = LABELS_COLLAPS;
+  const labels: DomainLabel<CollapsOptionLabels> = LABELS_TRAIT_COLLAPS;
 
   const result = buildCollapsSource(labels, {
     normal: "normal",
@@ -65,7 +65,7 @@ describe("Test buildCollapsSource function", () => {
 });
 
 describe("Test buildRegularParamSource function", () => {
-  const labels: DomainLabel<RegularParamLabels> = LABELS_PARAM_REGULAR;
+  const labels: DomainLabel<RegularParamLabels> = LABELS_TRAIT_REGULAR_PARAM;
   const result = buildRegularParamSource(labels);
   validateNamedItemSourceStructure(result);
   validateLabelsMapping(result, labels);
@@ -74,21 +74,22 @@ describe("Test buildRegularParamSource function", () => {
 });
 
 describe("Test buildExtraParamSource function", () => {
-  const label: DomainLabel<ExtraParamLabels> = LABELS_EXTRA_PARAM;
+  const label: DomainLabel<ExtraParamLabels> = LABELS_TRAIT_EXTRA_PARAM;
   const result = buildExtraParamSource(label);
   validateNamedItemSourceStructure(result);
   validateLabelsMapping(result, label);
 });
 
 describe("Test buildSpecialParamSource function", () => {
-  const label = LABELS_PARAM_SPECIAL;
+  const label = LABELS_TRAIT_SPECIAL_PARAM;
   const result = buildSpecialParamSource(label);
   validateNamedItemSourceStructure(result);
   validateLabelsMapping(result, label);
 });
 
 describe("Test buildPartyAbilitySource function", () => {
-  const label: DomainLabel<PartyAbilityOptionLabels> = LABELS_PARTY_ABILITY;
+  const label: DomainLabel<PartyAbilityOptionLabels> =
+    LABELS_TRAIT_PARTY_ABILITY;
   const result = buildPartyAbilitySource(label);
   validateNamedItemSourceStructure(result);
   validateLabelsMapping(result, label);
