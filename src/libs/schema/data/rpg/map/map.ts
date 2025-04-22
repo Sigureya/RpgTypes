@@ -1,5 +1,6 @@
+import type { AudioFileParams } from "@RpgTypes/utils";
 import type { Encounter } from "./encounter";
-import type { AudioFileParams, EventCommand, MapEvent } from "./event/";
+import type { EventCommand, MapEvent } from "./event/";
 import type { MapEventContainer } from "./mapEventContainer";
 
 export interface Data_Map extends MapEventContainer<EventCommand> {

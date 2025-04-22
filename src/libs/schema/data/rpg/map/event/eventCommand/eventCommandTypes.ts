@@ -1,10 +1,5 @@
 import type { EventCommandLike } from "./eventComandLike";
-import type {
-  AudioFileParams,
-  ColorRGBA,
-  Direction8,
-  MoveRouteData,
-} from "./types";
+import type { Direction8, MoveRouteData } from "./types";
 import type {
   ControlVariables,
   MovePicture,
@@ -17,6 +12,7 @@ import type {
 } from "./paramaters";
 import type { BranchParameters } from "./branchParams";
 import type { Param_ChangeEnemyParameters } from "./paramaters/changeBattler";
+import type { AudioFileParams, ColorRGBA } from "@RpgTypes/utils";
 export interface Command_ShowMessage extends EventCommandLike<101> {
   parameters: [
     facename: string,

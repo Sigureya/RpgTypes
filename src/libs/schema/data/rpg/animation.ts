@@ -1,6 +1,5 @@
+import type { AudioFileParams, ColorRGBA } from "@RpgTypes/utils";
 import type { Data_NamedItem } from "./main";
-import type { AudioFileParams, ColorRGBA } from "./map";
-
 export interface FlashTiming {
   frame: number;
   duration: number;
