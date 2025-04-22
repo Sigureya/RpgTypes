@@ -1,4 +1,4 @@
-export declare const DEFAULT_ENEMY_LABELS: {
+export declare const LABELS_DATA_ENEMY: {
     readonly domainName: "敵キャラ";
     readonly options: {
         readonly dropItems: "ドロップアイテム";

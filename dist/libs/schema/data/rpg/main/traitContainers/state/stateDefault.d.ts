@@ -1,4 +1,4 @@
-export declare const DEFAULT_STATE_LABELS: {
+export declare const LABELS_DATA_STATE: {
     readonly domainName: "ステート";
     readonly options: {
         readonly restriction: "制約";

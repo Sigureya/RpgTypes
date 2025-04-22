@@ -1,4 +1,4 @@
-export declare const DEFAULT_ACTOR_LABELS: {
+export declare const LABELS_DATA_ACTOR: {
     readonly domainName: "アクター";
     readonly options: {
         readonly initialEquipments: "初期装備";
