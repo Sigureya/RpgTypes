@@ -4,9 +4,9 @@ import type {
   AttackMotion,
   System_Advanced,
   System_Terms,
-} from "./systemMembers";
-import type { System_SoundsArray } from "./systemSoundArray";
-import type { Data_Vehicle } from "./vehicle";
+  System_SoundsArray,
+  Data_Vehicle,
+} from "./members";
 
 export interface Data_System {
   // images
