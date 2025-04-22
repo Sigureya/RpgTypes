@@ -23,7 +23,7 @@ import {
   LABELS_TRAIT_ACTION_PLUS,
   LABELS_EXTRA_PARAM,
   LABELS_PARAM_SPECIAL,
-  LABLES_TRAIT_ATTACK_ELEMENT,
+  LABELS_TRAIT_ATTACK_ELEMENT,
   LABELS_TRAIT_ATTACK_SPEED,
   LABELS_TRAIT_SPECIALFLAG,
   LABELS_TRAIT_ATTACK_TIMES,
@@ -73,6 +73,20 @@ import {
   MODULE_SYSTEM,
   MODULE_TRAIT,
 } from "@RpgTypes/namedItemSource";
+import type { Trait } from "./types";
+
+export const formatTraitText = (
+  traitDefine: TraitLabelResolved,
+  trait: Trait,
+  name: string
+): string => {
+  return traitDefine.format
+    .replaceAll(`{value}`, trait.value.toString())
+    .replaceAll("{name}", name);
+};
+
+const validate = (base: string, override: unknown) =>
+  typeof override === "string" ? override : base;
 
 const defineTrait = (
   code: number,
@@ -82,11 +96,12 @@ const defineTrait = (
 ): TraitLabelResolved => {
   return {
     codeId: code,
-    label: override.domainName ?? base.domainName,
-    format: override.format ?? base.format,
+    label: validate(base.domainName, override.domainName),
+    format: validate(base.format, override.format),
     dataSource,
   };
 };
+
 const srcElement = (): SourceIdentifier => {
   return {
     module: MODULE_SYSTEM,
@@ -174,7 +189,7 @@ export const defineTraitSpecialParam = (label: Partial<TraitLabel>) =>
 export const defineTraitAttackElement = (label: Partial<TraitLabel>) =>
   defineTrait(
     TRAIT_ATTACK_ELEMENT,
-    LABLES_TRAIT_ATTACK_ELEMENT,
+    LABELS_TRAIT_ATTACK_ELEMENT,
     label,
     srcElement()
   );
