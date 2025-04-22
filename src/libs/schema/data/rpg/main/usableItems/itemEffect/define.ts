@@ -41,7 +41,7 @@ import {
   MODULE_TRAIT,
 } from "@RpgTypes/namedItemSource/";
 
-export const formatEffectText = (
+export const formatItemEffectText = (
   effectDefine: EffectDefinitionResolved,
   effect: ItemEffect,
   name: string
