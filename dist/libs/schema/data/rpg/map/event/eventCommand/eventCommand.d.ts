@@ -1,11 +1,11 @@
+import { AudioFileParams, ColorRGBA } from '../../../../../../utils';
 import { BranchParameters } from './branchParams';
 import { EventCommandLike } from './eventComandLike';
 import { Command_RotatePicture, Command_SetEventLocation, Command_SetVehicleLocation, Command_TintPicture } from './eventCommandTypes';
 import { ChanageActorVariable, ControlVariables, MovePicture, ShopGoods, ShopProcessing, ShowPicture, ValueOf, Designation, Toggle, Operation_PlusMinus } from './paramaters';
 import { Param_ChangeEnemyParameters, Param_EnemyIterate } from './paramaters/changeBattler';
-import { AudioFileParams, CommandTemplate, ColorRGBA, Direction8, MoveRouteData, IndexOfParameter } from './types';
+import { CommandTemplate, Direction8, MoveRouteData, IndexOfParameter } from './types';
 import type * as EventCommandCodes from "./eventCommandCodes";
-import type * as Types from "./types";
 export type EventCode = EventCommandsMapper["codeType"];
 export type EventCodeTable = EventCommandsMapper["codeTable"];
 export type EventCodeKeys = keyof EventCodeTable;
@@ -165,7 +165,7 @@ export type EventCommandsMapper = CommandTemplate<typeof EventCommandCodes, Even
     /**
      * @description Change Battle BGM
      */
-    CHANGE_BATTLE_BGM: [value: Types.AudioFileParams];
+    CHANGE_BATTLE_BGM: [value: AudioFileParams];
     /**
      * @description Change Vheicle ME
      */
