@@ -1,3 +1,4 @@
+import type { TraitLabelSet } from "./labelSet";
 import type { TraitLabel } from "./options";
 import {
   LABELS_TRAIT_COLLAPS,
@@ -55,4 +56,4 @@ export const DEFAULT_TRAIT_LABELS = {
   skillTypeAdd: LABELS_TRAIT_SKILL_TYPE_ADD,
   skillTypeSeal: LABELS_TRAIT_SKILL_TYPE_SEAL,
   slotType: LABELS_TRAIT_SLOT_TYPE,
-} as const satisfies Record<string, TraitLabel>;
+} as const satisfies TraitLabelSet satisfies Record<string, TraitLabel>;
