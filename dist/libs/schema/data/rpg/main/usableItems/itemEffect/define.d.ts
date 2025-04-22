@@ -1,0 +1,17 @@
+import { SourceIdentifier } from '../../../../../namedItemSource';
+import { ItemEffect } from './itemEffect';
+import { EffectDefinitionResolved, EffectLabelDefinition } from './labels';
+export declare const formatEffectText: (effectDefine: EffectDefinitionResolved, effect: ItemEffect, name: string) => string;
+export declare const defineEffect: (codeId: number, baseLabel: EffectLabelDefinition, override: Partial<EffectLabelDefinition>, dataSource?: SourceIdentifier) => EffectDefinitionResolved;
+export declare const defineEffectRecoverHp: (labels: Partial<EffectLabelDefinition>) => EffectDefinitionResolved;
+export declare const defineEffectRecoverMp: (labels: Partial<EffectLabelDefinition>) => EffectDefinitionResolved;
+export declare const defineEffectGainTp: (labels: Partial<EffectLabelDefinition>) => EffectDefinitionResolved;
+export declare const defineEffectGrow: (labels: Partial<EffectLabelDefinition>) => EffectDefinitionResolved;
+export declare const defineEffectAddState: (labels: Partial<EffectLabelDefinition>) => EffectDefinitionResolved;
+export declare const defineEffectRemoveState: (labels: Partial<EffectLabelDefinition>) => EffectDefinitionResolved;
+export declare const defineEffectAddBuff: (labels: Partial<EffectLabelDefinition>) => EffectDefinitionResolved;
+export declare const defineEffectRemoveBuff: (labels: Partial<EffectLabelDefinition>) => EffectDefinitionResolved;
+export declare const defineEffectLearnSkill: (labels: Partial<EffectLabelDefinition>) => EffectDefinitionResolved;
+export declare const defineEffectAddDebuff: (labels: Partial<EffectLabelDefinition>) => EffectDefinitionResolved;
+export declare const defineEffectRemoveDebuff: (labels: Partial<EffectLabelDefinition>) => EffectDefinitionResolved;
+export declare const defineEffectCommonEvent: (labels: Partial<EffectLabelDefinition>) => EffectDefinitionResolved;
