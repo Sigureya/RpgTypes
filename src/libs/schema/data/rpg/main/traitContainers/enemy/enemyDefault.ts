@@ -1,7 +1,7 @@
 import type { DomainLabel } from "@RpgTypes/templates";
 import type { EnemyLabels } from "./enemyLabels";
 
-export const DEFAULT_ENEMY_LABELS = {
+export const LABELS_DATA_ENEMY = {
   domainName: "敵キャラ",
   options: {
     dropItems: "ドロップアイテム",

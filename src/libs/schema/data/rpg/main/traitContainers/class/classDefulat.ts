@@ -1,7 +1,7 @@
 import type { DomainLabel } from "@RpgTypes/templates";
 import type { ClassLabels } from "./classLabels";
 
-export const DEFAULT_CLASS_LABELS = {
+export const LABELS_DATA_CLASS = {
   domainName: "職業",
   options: {
     params: "パラメータ",

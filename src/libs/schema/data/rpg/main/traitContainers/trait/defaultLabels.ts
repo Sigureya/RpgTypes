@@ -1,5 +1,5 @@
+import type { DomainLabel } from "@RpgTypes/templates";
 import type { TraitLabelSet } from "./labelSet";
-import type { TraitLabel } from "./options";
 import {
   LABELS_TRAIT_COLLAPS,
   LABELS_TRAIT_REGULAR_PARAM,
@@ -28,32 +28,35 @@ import {
   LABELS_TRAIT_SLOT_TYPE,
 } from "./options";
 
-export const DEFAULT_TRAIT_LABELS = {
-  collaps: LABELS_TRAIT_COLLAPS,
+export const LABEL_SET_TRAIT = {
+  domainName: "特徴",
+  options: {
+    collaps: LABELS_TRAIT_COLLAPS,
 
-  regularParam: LABELS_TRAIT_REGULAR_PARAM,
-  specialParam: LABELS_TRAIT_SPECIAL_PARAM,
-  extraParam: LABELS_TRAIT_EXTRA_PARAM,
-  partyAbility: LABELS_TRAIT_PARTY_ABILITY,
-  specialFlag: LABELS_TRAIT_SPECIALFLAG,
+    regularParam: LABELS_TRAIT_REGULAR_PARAM,
+    specialParam: LABELS_TRAIT_SPECIAL_PARAM,
+    extraParam: LABELS_TRAIT_EXTRA_PARAM,
+    partyAbility: LABELS_TRAIT_PARTY_ABILITY,
+    specialFlag: LABELS_TRAIT_SPECIALFLAG,
 
-  actionPlus: LABELS_TRAIT_ACTION_PLUS,
-  attackElement: LABELS_TRAIT_ATTACK_ELEMENT,
-  attackSkill: LABELS_TRAIT_ATTACK_SKILL,
-  attackSpeed: LABELS_TRAIT_ATTACK_SPEED,
-  attackState: LABELS_TRAIT_ATTACK_STATE,
-  attackTimes: LABELS_TRAIT_ATTACK_TIMES,
-  debuffRate: LABELS_TRAIT_DEBUFF_RATE,
-  elementRate: LABELS_TRAIT_ELEMENT_RATE,
-  equipWeaponType: LABELS_TRAIT_EQUIP_WEAPON_TYPE,
-  equipArmorType: LABELS_TRAIT_EQUIP_ARMOR_TYPE,
-  equipLock: LABELS_TRAIT_EQUIP_LOCK,
-  equipSeal: LABELS_TRAIT_EQUIP_SEAL,
-  skillAdd: LABELS_TRAIT_SKILL_ADD,
-  skillSeal: LABELS_TRAIT_SKILL_SEAL,
-  stateRate: LABELS_TRAIT_STATE_RATE,
-  stateResist: LABELS_TRAIT_STATE_RESIST,
-  skillTypeAdd: LABELS_TRAIT_SKILL_TYPE_ADD,
-  skillTypeSeal: LABELS_TRAIT_SKILL_TYPE_SEAL,
-  slotType: LABELS_TRAIT_SLOT_TYPE,
-} as const satisfies TraitLabelSet satisfies Record<string, TraitLabel>;
+    actionPlus: LABELS_TRAIT_ACTION_PLUS,
+    attackElement: LABELS_TRAIT_ATTACK_ELEMENT,
+    attackSkill: LABELS_TRAIT_ATTACK_SKILL,
+    attackSpeed: LABELS_TRAIT_ATTACK_SPEED,
+    attackState: LABELS_TRAIT_ATTACK_STATE,
+    attackTimes: LABELS_TRAIT_ATTACK_TIMES,
+    debuffRate: LABELS_TRAIT_DEBUFF_RATE,
+    elementRate: LABELS_TRAIT_ELEMENT_RATE,
+    equipWeaponType: LABELS_TRAIT_EQUIP_WEAPON_TYPE,
+    equipArmorType: LABELS_TRAIT_EQUIP_ARMOR_TYPE,
+    equipLock: LABELS_TRAIT_EQUIP_LOCK,
+    equipSeal: LABELS_TRAIT_EQUIP_SEAL,
+    skillAdd: LABELS_TRAIT_SKILL_ADD,
+    skillSeal: LABELS_TRAIT_SKILL_SEAL,
+    stateRate: LABELS_TRAIT_STATE_RATE,
+    stateResist: LABELS_TRAIT_STATE_RESIST,
+    skillTypeAdd: LABELS_TRAIT_SKILL_TYPE_ADD,
+    skillTypeSeal: LABELS_TRAIT_SKILL_TYPE_SEAL,
+    slotType: LABELS_TRAIT_SLOT_TYPE,
+  },
+} as const satisfies DomainLabel<TraitLabelSet>;

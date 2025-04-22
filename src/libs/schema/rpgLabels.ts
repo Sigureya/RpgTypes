@@ -5,7 +5,7 @@ import type {
   ClassLabels,
   CollapsOptionLabels,
   DamageLabels,
-  EffectLabelSet,
+  ItemEffectLabelSet,
   EnemyLabels,
   ExtraParamLabels,
   ItemLabels,
@@ -15,9 +15,13 @@ import type {
   SpecialFlagOptions,
   SpecialParamLabels,
   StateLabels,
+  Trait,
+  TraitLabel,
+  TraitLabelSet,
   UsableItemLabels,
   WeaponLabels,
 } from "./data";
+import type { DataLabels } from "./data/rpg/main/dataLabels";
 
 export interface RpgLabels {
   paramSpecial: DomainLabel<SpecialParamLabels>;
@@ -36,5 +40,12 @@ export interface RpgLabels {
   item: DomainLabel<ItemLabels>;
   skill: DomainLabel<SkillLabels>;
   damage: DomainLabel<DamageLabels>;
-  itemEffect: DomainLabel<EffectLabelSet>;
+  itemEffect: DomainLabel<ItemEffectLabelSet>;
+}
+
+export interface RpgLabels2 {
+  data: DataLabels;
+  traits: DomainLabel<TraitLabelSet>;
+  itemEffect: DomainLabel<ItemEffectLabelSet>;
+  damage: DomainLabel<DamageLabels>;
 }
