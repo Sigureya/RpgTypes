@@ -14,7 +14,7 @@ export declare const LABELS_TRAIT_STATE_RESIST: {
     readonly domainName: "ステート無効";
     readonly format: "{name}";
 };
-export declare const LABELS_PARAM_REGULAR: {
+export declare const LABELS_TRAIT_REGULAR_PARAM: {
     readonly domainName: "基本能力値";
     readonly format: "{name} * {value}%";
     readonly options: {
@@ -28,7 +28,7 @@ export declare const LABELS_PARAM_REGULAR: {
         readonly luk: "運";
     };
 };
-export declare const LABELS_EXTRA_PARAM: {
+export declare const LABELS_TRAIT_EXTRA_PARAM: {
     readonly domainName: "追加能力値";
     readonly format: "{name} + {value}%";
     readonly options: {
@@ -44,7 +44,7 @@ export declare const LABELS_EXTRA_PARAM: {
         readonly tpRegenerationRate: "TP再生率";
     };
 };
-export declare const LABELS_PARAM_SPECIAL: {
+export declare const LABELS_TRAIT_SPECIAL_PARAM: {
     readonly domainName: "特殊能力値";
     readonly format: "{name} * {value}%";
     readonly options: {
@@ -84,11 +84,11 @@ export declare const LABELS_TRAIT_ATTACK_SKILL: {
     readonly domainName: "攻撃スキル";
     readonly format: "{name}";
 };
-export declare const LABELS_EQUIP_WTYPE: {
+export declare const LABELS_TRAIT_EQUIP_WEAPON_TYPE: {
     readonly domainName: "装備武器タイプ";
     readonly format: "{name}";
 };
-export declare const LABELS_TRAIT_EQUIP_ATYPE: {
+export declare const LABELS_TRAIT_EQUIP_ARMOR_TYPE: {
     readonly domainName: "装備防具タイプ";
     readonly format: "{name}";
 };
@@ -130,7 +130,7 @@ export declare const LABELS_TRAIT_SPECIALFLAG: {
         readonly preventEscape: "逃走防止";
     };
 };
-export declare const LABELS_COLLAPS: {
+export declare const LABELS_TRAIT_COLLAPS: {
     readonly domainName: "消滅エフェクト";
     readonly format: "{name}";
     readonly options: {
@@ -139,7 +139,7 @@ export declare const LABELS_COLLAPS: {
         readonly noneCollaps: "崩壊なし";
     };
 };
-export declare const LABELS_PARTY_ABILITY: {
+export declare const LABELS_TRAIT_PARTY_ABILITY: {
     readonly domainName: "パーティ能力";
     readonly format: "{name}";
     readonly options: {

@@ -1,4 +1,4 @@
-export declare const DEFAULT_CLASS_LABELS: {
+export declare const LABELS_DATA_CLASS: {
     readonly domainName: "職業";
     readonly options: {
         readonly params: "パラメータ";

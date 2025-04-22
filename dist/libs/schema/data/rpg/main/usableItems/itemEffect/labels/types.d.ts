@@ -11,7 +11,7 @@ export interface EffectLabelDefinition {
     domainName: string;
     format: string;
 }
-export interface EffectLabelSet {
+export interface ItemEffectLabelSet {
     addBuff: EffectLabelDefinition;
     addDebuff: EffectLabelDefinition;
     gainTp: EffectLabelDefinition;

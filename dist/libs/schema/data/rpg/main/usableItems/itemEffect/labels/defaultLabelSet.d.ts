@@ -1,4 +1,4 @@
-export declare const DEFAULT_EFFECT_LABELS_SET: {
+export declare const LABEL_SET_ITEM_EFFECT: {
     readonly domainName: "使用効果";
     readonly options: {
         readonly addBuff: {
