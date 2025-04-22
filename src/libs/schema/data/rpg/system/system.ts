@@ -7,6 +7,7 @@ import type {
   System_SoundsArray,
   Data_Vehicle,
 } from "./members";
+import type { EditorSettings } from "./setting";
 
 export interface Data_System {
   // images
@@ -76,6 +77,8 @@ export interface Data_System {
   versionId: number;
   advanced: System_Advanced;
   tileSize: number;
+
+  editor: EditorSettings;
 }
 
 export type System_Pick<
