@@ -1,7 +1,7 @@
 import { SourceIdentifier } from '../../../../../namedItemSource';
 import { ItemEffect } from './itemEffect';
 import { EffectDefinitionResolved, EffectLabelDefinition } from './labels';
-export declare const formatEffectText: (effectDefine: EffectDefinitionResolved, effect: ItemEffect, name: string) => string;
+export declare const formatItemEffectText: (effectDefine: EffectDefinitionResolved, effect: ItemEffect, name: string) => string;
 export declare const defineEffect: (codeId: number, baseLabel: EffectLabelDefinition, override: Partial<EffectLabelDefinition>, dataSource?: SourceIdentifier) => EffectDefinitionResolved;
 export declare const defineEffectRecoverHp: (labels: Partial<EffectLabelDefinition>) => EffectDefinitionResolved;
 export declare const defineEffectRecoverMp: (labels: Partial<EffectLabelDefinition>) => EffectDefinitionResolved;
