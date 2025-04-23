@@ -94,15 +94,6 @@ export declare const LABEL_REGISTRY_JP: {
         readonly traits: {
             readonly domainName: "特徴";
             readonly options: {
-                readonly collaps: {
-                    readonly domainName: "消滅エフェクト";
-                    readonly format: "{name}";
-                    readonly options: {
-                        readonly bossCollaps: "ボス崩壊";
-                        readonly instantCollaps: "即時崩壊";
-                        readonly noneCollaps: "崩壊なし";
-                    };
-                };
                 readonly regularParam: {
                     readonly domainName: "基本能力値";
                     readonly format: "{name} * {value}%";
@@ -115,22 +106,6 @@ export declare const LABEL_REGISTRY_JP: {
                         readonly mdef: "魔法防御力";
                         readonly agi: "敏捷性";
                         readonly luk: "運";
-                    };
-                };
-                readonly specialParam: {
-                    readonly domainName: "特殊能力値";
-                    readonly format: "{name} * {value}%";
-                    readonly options: {
-                        readonly targetRate: "狙われ率";
-                        readonly guradEffectRate: "防御効果率";
-                        readonly recoveryEffectRate: "回復効果率";
-                        readonly pharmacology: "薬の知識";
-                        readonly mpCostRate: "MP消費率";
-                        readonly tpChargeRate: "TPチャージ率";
-                        readonly physicalDamageRate: "物理ダメージ率";
-                        readonly magicDamageRate: "魔法ダメージ率";
-                        readonly floorDamageRate: "床ダメージ率";
-                        readonly experienceRate: "経験値率";
                     };
                 };
                 readonly extraParam: {
@@ -149,16 +124,20 @@ export declare const LABEL_REGISTRY_JP: {
                         readonly tpRegenerationRate: "TP再生率";
                     };
                 };
-                readonly partyAbility: {
-                    readonly domainName: "パーティ能力";
-                    readonly format: "{name}";
+                readonly specialParam: {
+                    readonly domainName: "特殊能力値";
+                    readonly format: "{name} * {value}%";
                     readonly options: {
-                        readonly cancelSurprise: "不意打ち無効";
-                        readonly dropItemDouble: "アイテムドロップ2倍";
-                        readonly encounterHalf: "エンカウント半減";
-                        readonly encounterNone: "エンカウントなし";
-                        readonly goldDouble: "ゴールド2倍";
-                        readonly raisePreemptive: "先制攻撃率アップ";
+                        readonly targetRate: "狙われ率";
+                        readonly guradEffectRate: "防御効果率";
+                        readonly recoveryEffectRate: "回復効果率";
+                        readonly pharmacology: "薬の知識";
+                        readonly mpCostRate: "MP消費率";
+                        readonly tpChargeRate: "TPチャージ率";
+                        readonly physicalDamageRate: "物理ダメージ率";
+                        readonly magicDamageRate: "魔法ダメージ率";
+                        readonly floorDamageRate: "床ダメージ率";
+                        readonly experienceRate: "経験値率";
                     };
                 };
                 readonly specialFlag: {
@@ -171,37 +150,66 @@ export declare const LABEL_REGISTRY_JP: {
                         readonly preventEscape: "逃走防止";
                     };
                 };
-                readonly actionPlus: {
-                    readonly domainName: "行動追加";
+                readonly collaps: {
+                    readonly domainName: "消滅エフェクト";
+                    readonly format: "{name}";
+                    readonly options: {
+                        readonly bossCollaps: "ボス崩壊";
+                        readonly instantCollaps: "即時崩壊";
+                        readonly noneCollaps: "崩壊なし";
+                    };
+                };
+                readonly partyAbility: {
+                    readonly domainName: "パーティ能力";
+                    readonly format: "{name}";
+                    readonly options: {
+                        readonly cancelSurprise: "不意打ち無効";
+                        readonly dropItemDouble: "アイテムドロップ2倍";
+                        readonly encounterHalf: "エンカウント半減";
+                        readonly encounterNone: "エンカウントなし";
+                        readonly goldDouble: "ゴールド2倍";
+                        readonly raisePreemptive: "先制攻撃率アップ";
+                    };
+                };
+                readonly elementRate: {
+                    readonly domainName: "属性有効度";
                     readonly format: "{name} * {value}%";
-                };
-                readonly attackElement: {
-                    readonly domainName: "攻撃属性";
-                    readonly format: "{name}";
-                };
-                readonly attackSkill: {
-                    readonly domainName: "攻撃スキル";
-                    readonly format: "{name}";
-                };
-                readonly attackSpeed: {
-                    readonly domainName: "攻撃速度補正";
-                    readonly format: "{value}";
-                };
-                readonly attackState: {
-                    readonly domainName: "攻撃ステート";
-                    readonly format: "{name} + {value}%";
-                };
-                readonly attackTimes: {
-                    readonly domainName: "攻撃追加回数";
-                    readonly format: "{value}";
                 };
                 readonly debuffRate: {
                     readonly domainName: "弱体有効度";
                     readonly format: "{name} * {value}%";
                 };
-                readonly elementRate: {
-                    readonly domainName: "属性有効度";
+                readonly stateRate: {
+                    readonly domainName: "ステート有効度";
                     readonly format: "{name} * {value}%";
+                };
+                readonly stateResist: {
+                    readonly domainName: "ステート無効";
+                    readonly format: "{name}";
+                };
+                readonly attackElement: {
+                    readonly domainName: "攻撃属性";
+                    readonly format: "{name}";
+                };
+                readonly attackState: {
+                    readonly domainName: "攻撃ステート";
+                    readonly format: "{name} + {value}%";
+                };
+                readonly attackSpeed: {
+                    readonly domainName: "攻撃速度補正";
+                    readonly format: "{value}";
+                };
+                readonly attackTimes: {
+                    readonly domainName: "攻撃追加回数";
+                    readonly format: "{value}";
+                };
+                readonly actionPlus: {
+                    readonly domainName: "行動追加";
+                    readonly format: "{name} * {value}%";
+                };
+                readonly attackSkill: {
+                    readonly domainName: "攻撃スキル";
+                    readonly format: "{name}";
                 };
                 readonly equipWeaponType: {
                     readonly domainName: "装備武器タイプ";
@@ -219,20 +227,16 @@ export declare const LABEL_REGISTRY_JP: {
                     readonly domainName: "装備封印";
                     readonly format: "{name}";
                 };
+                readonly slotType: {
+                    readonly domainName: "スロットタイプ";
+                    readonly format: "{name}";
+                };
                 readonly skillAdd: {
                     readonly domainName: "スキル追加";
                     readonly format: "{name}";
                 };
                 readonly skillSeal: {
-                    readonly domainName: "スキル封印";
-                    readonly format: "{name}";
-                };
-                readonly stateRate: {
-                    readonly domainName: "ステート有効度";
-                    readonly format: "{name} * {value}%";
-                };
-                readonly stateResist: {
-                    readonly domainName: "ステート無効";
+                    readonly domainName: "スキルタイプ封印";
                     readonly format: "{name}";
                 };
                 readonly skillTypeAdd: {
@@ -241,10 +245,6 @@ export declare const LABEL_REGISTRY_JP: {
                 };
                 readonly skillTypeSeal: {
                     readonly domainName: "スキルタイプ封印";
-                    readonly format: "{name}";
-                };
-                readonly slotType: {
-                    readonly domainName: "スロットタイプ";
                     readonly format: "{name}";
                 };
             };
@@ -298,8 +298,8 @@ export declare const LABEL_REGISTRY_JP: {
                     readonly format: "{name}";
                 };
                 readonly removeState: {
-                    readonly desc: "状態異常を解除する";
-                    readonly domainName: "ステート解除";
+                    readonly desc: "指定したステートを付加します。";
+                    readonly domainName: "ステート付加";
                     readonly format: "{name} {value1}%";
                 };
                 readonly special: {
@@ -308,8 +308,8 @@ export declare const LABEL_REGISTRY_JP: {
                     readonly format: "{name}";
                 };
                 readonly addState: {
-                    readonly desc: "指定したステートを付加します。";
-                    readonly domainName: "ステート付加";
+                    readonly desc: "状態異常を解除する";
+                    readonly domainName: "ステート解除";
                     readonly format: "{name} {value1}%";
                 };
                 readonly commonEvent: {

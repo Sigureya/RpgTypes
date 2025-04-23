@@ -24,5 +24,5 @@ export declare const defineTraitEquipSeal: (label: Partial<TraitLabel>) => Trait
 export declare const defineTraitSkillAdd: (label: Partial<TraitLabel>) => TraitLabelResolved;
 export declare const defineTraitSkillSeal: (label: Partial<TraitLabel>) => TraitLabelResolved;
 export declare const defineTraitSlotType: (label: Partial<TraitLabel>) => TraitLabelResolved;
-export declare const defineTraitSTypeAdd: (label: Partial<TraitLabel>) => TraitLabelResolved;
-export declare const defineTraitSTypeSeal: (label: Partial<TraitLabel>) => TraitLabelResolved;
+export declare const defineTraitSkillTypeAdd: (label: Partial<TraitLabel>) => TraitLabelResolved;
+export declare const defineTraitSkillTypeSeal: (label: Partial<TraitLabel>) => TraitLabelResolved;

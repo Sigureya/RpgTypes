@@ -47,8 +47,8 @@ export declare const LABEL_SET_ITEM_EFFECT: {
             readonly format: "{name}";
         };
         readonly removeState: {
-            readonly desc: "状態異常を解除する";
-            readonly domainName: "ステート解除";
+            readonly desc: "指定したステートを付加します。";
+            readonly domainName: "ステート付加";
             readonly format: "{name} {value1}%";
         };
         readonly special: {
@@ -57,8 +57,8 @@ export declare const LABEL_SET_ITEM_EFFECT: {
             readonly format: "{name}";
         };
         readonly addState: {
-            readonly desc: "指定したステートを付加します。";
-            readonly domainName: "ステート付加";
+            readonly desc: "状態異常を解除する";
+            readonly domainName: "ステート解除";
             readonly format: "{name} {value1}%";
         };
         readonly commonEvent: {
