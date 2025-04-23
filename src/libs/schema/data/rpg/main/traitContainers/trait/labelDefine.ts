@@ -13,7 +13,7 @@ import {
   SRC_WEAPON_TYPES,
 } from "@RpgTypes/schema/namedItemSource";
 import type { TraitLabelResolved, TraitLabel } from "./options";
-import { LABEL_SET_TRAIT2 } from "./options";
+import { LABEL_SET_TRAIT } from "./options";
 import {
   TRAIT_ELEMENT_RATE,
   TRAIT_DEBUFF_RATE,
@@ -104,10 +104,10 @@ const srcSystem = (src: string): SourceIdentifier => ({
   sourceKey: src,
 });
 
-export const defineTraitElementRate = (label: TraitLabel) =>
+export const defineTraitElementRate = (label: Partial<TraitLabel>) =>
   defineTrait(
     TRAIT_ELEMENT_RATE,
-    LABEL_SET_TRAIT2.options.elementRate,
+    LABEL_SET_TRAIT.options.elementRate,
     label,
     srcElement()
   );
@@ -115,7 +115,7 @@ export const defineTraitElementRate = (label: TraitLabel) =>
 export const defineTraitDebuffRate = (label: Partial<TraitLabel>) =>
   defineTrait(
     TRAIT_DEBUFF_RATE,
-    LABEL_SET_TRAIT2.options.debuffRate,
+    LABEL_SET_TRAIT.options.debuffRate,
     label,
     srcTrait(SRC_PARAMS_REGULAR)
   );
@@ -123,7 +123,7 @@ export const defineTraitDebuffRate = (label: Partial<TraitLabel>) =>
 export const defineTraitStateRate = (label: Partial<TraitLabel>) =>
   defineTrait(
     TRAIT_STATE_RATE,
-    LABEL_SET_TRAIT2.options.stateRate,
+    LABEL_SET_TRAIT.options.stateRate,
     label,
     srcTrait(SRC_PARAMS_REGULAR)
   );
@@ -131,7 +131,7 @@ export const defineTraitStateRate = (label: Partial<TraitLabel>) =>
 export const defineTraitStateResist = (label: Partial<TraitLabel>) =>
   defineTrait(
     TRAIT_STATE_RESIST,
-    LABEL_SET_TRAIT2.options.stateResist,
+    LABEL_SET_TRAIT.options.stateResist,
     label,
     srcData(SRC_DATA_STATE)
   );
@@ -139,7 +139,7 @@ export const defineTraitStateResist = (label: Partial<TraitLabel>) =>
 export const defineTraitRegularParam = (label: Partial<TraitLabel>) =>
   defineTrait(
     TRAIT_PARAM,
-    LABEL_SET_TRAIT2.options.regularParam,
+    LABEL_SET_TRAIT.options.regularParam,
     label,
     srcTrait(SRC_PARAMS_REGULAR)
   );
@@ -147,7 +147,7 @@ export const defineTraitRegularParam = (label: Partial<TraitLabel>) =>
 export const defineTraitExtraParam = (label: Partial<TraitLabel>) =>
   defineTrait(
     TRAIT_XPARAM,
-    LABEL_SET_TRAIT2.options.extraParam,
+    LABEL_SET_TRAIT.options.extraParam,
     label,
     srcTrait(SRC_PARAMS_EXTRA)
   );
@@ -155,7 +155,7 @@ export const defineTraitExtraParam = (label: Partial<TraitLabel>) =>
 export const defineTraitSpecialParam = (label: Partial<TraitLabel>) =>
   defineTrait(
     TRAIT_SPARAM,
-    LABEL_SET_TRAIT2.options.specialParam,
+    LABEL_SET_TRAIT.options.specialParam,
     label,
     srcTrait(SRC_PARAMS_SPECIAL)
   );
@@ -163,7 +163,7 @@ export const defineTraitSpecialParam = (label: Partial<TraitLabel>) =>
 export const defineTraitAttackElement = (label: Partial<TraitLabel>) =>
   defineTrait(
     TRAIT_ATTACK_ELEMENT,
-    LABEL_SET_TRAIT2.options.attackElement,
+    LABEL_SET_TRAIT.options.attackElement,
     label,
     srcElement()
   );
@@ -171,32 +171,32 @@ export const defineTraitAttackElement = (label: Partial<TraitLabel>) =>
 export const defineTraitAttackState = (label: Partial<TraitLabel>) =>
   defineTrait(
     TRAIT_ATTACK_STATE,
-    LABEL_SET_TRAIT2.options.attackState,
+    LABEL_SET_TRAIT.options.attackState,
     label,
     srcTrait(SRC_DATA_STATE)
   );
 
 export const defineTraitAttackSpeed = (label: Partial<TraitLabel>) =>
-  defineTrait(TRAIT_ATTACK_SPEED, LABEL_SET_TRAIT2.options.attackSpeed, label);
+  defineTrait(TRAIT_ATTACK_SPEED, LABEL_SET_TRAIT.options.attackSpeed, label);
 
 export const defineTraitAttackTimes = (label: Partial<TraitLabel>) =>
-  defineTrait(TRAIT_ATTACK_TIMES, LABEL_SET_TRAIT2.options.attackTimes, label);
+  defineTrait(TRAIT_ATTACK_TIMES, LABEL_SET_TRAIT.options.attackTimes, label);
 
 export const defineTraitAttackSkill = (label: Partial<TraitLabel>) =>
   defineTrait(
     TRAIT_ATTACK_SKILL,
-    LABEL_SET_TRAIT2.options.attackSkill,
+    LABEL_SET_TRAIT.options.attackSkill,
     label,
     srcData(SRC_DATA_SKILL)
   );
 
 export const defineTraitActionPlus = (label: Partial<TraitLabel>) =>
-  defineTrait(TRAIT_ACTION_PLUS, LABEL_SET_TRAIT2.options.actionPlus, label);
+  defineTrait(TRAIT_ACTION_PLUS, LABEL_SET_TRAIT.options.actionPlus, label);
 
 export const defineTraitSpecialFlag = (label: Partial<TraitLabel>) =>
   defineTrait(
     TRAIT_SPECIAL_FLAG,
-    LABEL_SET_TRAIT2.options.specialFlag,
+    LABEL_SET_TRAIT.options.specialFlag,
     label,
     srcTrait(SRC_TRAIT_SPECIAL_FLAG)
   );
@@ -204,7 +204,7 @@ export const defineTraitSpecialFlag = (label: Partial<TraitLabel>) =>
 export const defineTraitCollapseType = (label: Partial<TraitLabel>) =>
   defineTrait(
     TRAIT_COLLAPSE_TYPE,
-    LABEL_SET_TRAIT2.options.collaps,
+    LABEL_SET_TRAIT.options.collaps,
     label,
     srcTrait(SRC_TRAIT_COLLAPS)
   );
@@ -212,7 +212,7 @@ export const defineTraitCollapseType = (label: Partial<TraitLabel>) =>
 export const defineTraitPartyAbility = (label: Partial<TraitLabel>) =>
   defineTrait(
     TRAIT_PARTY_ABILITY,
-    LABEL_SET_TRAIT2.options.partyAbility,
+    LABEL_SET_TRAIT.options.partyAbility,
     label,
     srcTrait(SRC_TRAIT_PARTY_ABILITY)
   );
@@ -220,7 +220,7 @@ export const defineTraitPartyAbility = (label: Partial<TraitLabel>) =>
 export const defineTraitEquipWeaponType = (label: Partial<TraitLabel>) =>
   defineTrait(
     TRAIT_EQUIP_WEAPON_TYPE,
-    LABEL_SET_TRAIT2.options.equipWeaponType,
+    LABEL_SET_TRAIT.options.equipWeaponType,
     label,
     srcSystem(SRC_WEAPON_TYPES)
   );
@@ -228,36 +228,36 @@ export const defineTraitEquipWeaponType = (label: Partial<TraitLabel>) =>
 export const defineTraitEquipArmorType = (label: Partial<TraitLabel>) =>
   defineTrait(
     TRAIT_EQUIP_ARMOR_TYPE,
-    LABEL_SET_TRAIT2.options.equipArmorType,
+    LABEL_SET_TRAIT.options.equipArmorType,
     label,
     srcSystem(SRC_ARMOR_TYPES)
   );
 
 export const defineTraitEquipLock = (label: Partial<TraitLabel>) =>
-  defineTrait(TRAIT_EQUIP_LOCK, LABEL_SET_TRAIT2.options.equipLock, label);
+  defineTrait(TRAIT_EQUIP_LOCK, LABEL_SET_TRAIT.options.equipLock, label);
 
 export const defineTraitEquipSeal = (label: Partial<TraitLabel>) =>
-  defineTrait(TRAIT_EQUIP_SEAL, LABEL_SET_TRAIT2.options.equipSeal, label);
+  defineTrait(TRAIT_EQUIP_SEAL, LABEL_SET_TRAIT.options.equipSeal, label);
 
 export const defineTraitSkillAdd = (label: Partial<TraitLabel>) =>
-  defineTrait(TRAIT_SKILL_ADD, LABEL_SET_TRAIT2.options.skillAdd, label);
+  defineTrait(TRAIT_SKILL_ADD, LABEL_SET_TRAIT.options.skillAdd, label);
 
 export const defineTraitSkillSeal = (label: Partial<TraitLabel>) =>
-  defineTrait(TRAIT_SKILL_SEAL, LABEL_SET_TRAIT2.options.skillSeal, label);
+  defineTrait(TRAIT_SKILL_SEAL, LABEL_SET_TRAIT.options.skillSeal, label);
 
 export const defineTraitSlotType = (label: Partial<TraitLabel>) =>
-  defineTrait(TRAIT_SLOT_TYPE, LABEL_SET_TRAIT2.options.slotType, label);
+  defineTrait(TRAIT_SLOT_TYPE, LABEL_SET_TRAIT.options.slotType, label);
 
 export const defineTraitSkillTypeAdd = (label: Partial<TraitLabel>) =>
   defineTrait(
     TRAIT_SKILL_TYPE_ADD,
-    LABEL_SET_TRAIT2.options.skillTypeAdd,
+    LABEL_SET_TRAIT.options.skillTypeAdd,
     label
   );
 
 export const defineTraitSkillTypeSeal = (label: Partial<TraitLabel>) =>
   defineTrait(
     TRAIT_SKILL_TYPE_SEAL,
-    LABEL_SET_TRAIT2.options.skillTypeSeal,
+    LABEL_SET_TRAIT.options.skillTypeSeal,
     label
   );

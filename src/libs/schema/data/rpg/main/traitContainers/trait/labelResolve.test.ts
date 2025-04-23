@@ -1,13 +1,13 @@
 import { describe, test, expect } from "vitest";
 import { resolveTraitLabel } from "./labelResolve";
-import { LABEL_SET_TRAIT2, type TraitLabelResolved } from "./options";
+import { LABEL_SET_TRAIT, type TraitLabelResolved } from "./options";
 
 describe("resolveTraitLabel", () => {
   test("", () => {
-    expect(LABEL_SET_TRAIT2.options.elementRate.domainName).not.toBeDefined();
+    expect(LABEL_SET_TRAIT.options.elementRate.domainName).toBeTypeOf("string");
   });
   const result: ReadonlyArray<TraitLabelResolved> = resolveTraitLabel(
-    LABEL_SET_TRAIT2.options
+    LABEL_SET_TRAIT.options
   );
   const codeList = result.map((item) => item.code);
   test("", () => {

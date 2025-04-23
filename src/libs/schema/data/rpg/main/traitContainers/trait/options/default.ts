@@ -16,7 +16,7 @@ const FORMAT_PARAM_RATE_MUL = "{name} * {value}%" as const;
 const FORMAT_PARAM_RATE_PLUS = "{name} + {value}%" as const;
 const FORMAT_PARAM_VALUE = "{value}" as const;
 
-export const LABEL_SET_TRAIT2 = {
+export const LABEL_SET_TRAIT = {
   domainName: "特徴",
   options: {
     regularParam: {

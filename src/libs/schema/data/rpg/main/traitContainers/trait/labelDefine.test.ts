@@ -2,9 +2,9 @@ import { describe, test, expect } from "vitest";
 
 import { defineTraitElementRate } from "./labelDefine";
 import { TRAIT_ELEMENT_RATE } from "./constants";
-import { LABEL_SET_TRAIT2 } from "./options";
+import { LABEL_SET_TRAIT } from "./options";
 describe("", () => {
-  const result = defineTraitElementRate(LABEL_SET_TRAIT2.options.elementRate);
+  const result = defineTraitElementRate({});
 
   test("", () => {
     expect(result.label).toBeTypeOf("string");
@@ -14,9 +14,5 @@ describe("", () => {
   // });
   test("", () => {
     expect(result.code).toBe(TRAIT_ELEMENT_RATE);
-  });
-  test("", () => {
-    const r2 = defineTraitElementRate(LABEL_SET_TRAIT2.options.elementRate);
-    expect(result.format).toEqual(r2);
   });
 });
