@@ -4,6 +4,7 @@ import type {
   ExtraParamLabels,
   PartyAbilityOptionLabels,
   RegularParamLabels,
+  SpecialFlagOptions,
   SpecialParamLabels,
 } from "./types";
 import {
@@ -12,6 +13,7 @@ import {
   SRC_PARAMS_REGULAR,
   SRC_PARAMS_SPECIAL,
   SRC_TRAIT_PARTY_ABILITY,
+  SRC_TRAIT_SPECIAL_FLAG,
 } from "@RpgTypes/schema";
 
 import {
@@ -19,6 +21,7 @@ import {
   foldExtraParam,
   foldPartyAbilityOptions,
   foldRegularParam,
+  foldSpecialFlag,
   foldSpecialParams,
 } from "./makeOptions";
 import type { DomainLabel } from "@RpgTypes/templates";
@@ -71,4 +74,10 @@ export const buildSpecialParamSource = (
   label: DomainLabel<SpecialParamLabels>
 ): NamedItemSource => {
   return traitDomain(SRC_PARAMS_SPECIAL, label, foldSpecialParams);
+};
+
+export const buildSpecialFlagSource = (
+  label: DomainLabel<SpecialFlagOptions>
+): NamedItemSource => {
+  return traitDomain(SRC_TRAIT_SPECIAL_FLAG, label, foldSpecialFlag);
 };
