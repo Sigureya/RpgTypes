@@ -18,7 +18,7 @@ export interface PartialTraitLabel<T> {
 }
 
 export interface TraitLabelResolved {
-  codeId: number;
+  code: number;
   label: string;
   format: string;
   dataSource?: SourceIdentifier;

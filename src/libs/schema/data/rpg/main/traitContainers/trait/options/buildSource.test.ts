@@ -4,6 +4,7 @@ import type {
   ExtraParamLabels,
   RegularParamLabels,
   PartyAbilityOptionLabels,
+  SpecialParamLabels,
 } from "./types";
 import type { DomainLabel } from "@RpgTypes/templates";
 
@@ -14,14 +15,6 @@ import {
   buildRegularParamSource,
   buildSpecialParamSource,
 } from "./buildSource";
-
-import {
-  LABELS_TRAIT_COLLAPS,
-  LABELS_TRAIT_REGULAR_PARAM,
-  LABELS_TRAIT_SPECIAL_PARAM,
-  LABELS_TRAIT_PARTY_ABILITY,
-  LABELS_TRAIT_EXTRA_PARAM,
-} from "./default";
 
 import type { NamedItemSource } from "@RpgTypes/schema";
 import { MODULE_TRAIT } from "@RpgTypes/namedItemSource";
@@ -54,18 +47,38 @@ const validateLabelsMapping = <T extends {}>(
 };
 
 describe("Test buildCollapsSource function", () => {
-  const labels: DomainLabel<CollapsOptionLabels> = LABELS_TRAIT_COLLAPS;
-
-  const result = buildCollapsSource(labels, {
-    normal: "normal",
-  });
+  const result = buildCollapsSource(
+    {
+      domainName: "collaps",
+      options: {
+        bossCollaps: "",
+        instantCollaps: "",
+        noneCollaps: "",
+      },
+    },
+    {
+      normal: "normal",
+    }
+  );
   validateNamedItemSourceStructure(result);
   test("Source module should be MODULE_TRAIT", () =>
     expect(result.source.module).toBe(MODULE_TRAIT));
 });
 
 describe("Test buildRegularParamSource function", () => {
-  const labels: DomainLabel<RegularParamLabels> = LABELS_TRAIT_REGULAR_PARAM;
+  const labels: DomainLabel<RegularParamLabels> = {
+    domainName: "",
+    options: {
+      agi: "",
+      atk: "",
+      def: "",
+      luk: "",
+      matk: "",
+      maxHp: "",
+      maxMp: "",
+      mdef: "",
+    },
+  };
   const result = buildRegularParamSource(labels);
   validateNamedItemSourceStructure(result);
   validateLabelsMapping(result, labels);
@@ -74,22 +87,59 @@ describe("Test buildRegularParamSource function", () => {
 });
 
 describe("Test buildExtraParamSource function", () => {
-  const label: DomainLabel<ExtraParamLabels> = LABELS_TRAIT_EXTRA_PARAM;
+  const label: DomainLabel<ExtraParamLabels> = {
+    domainName: "",
+    options: {
+      counterAttackRate: "",
+      criticalEvasionRate: "",
+      criticalRate: "",
+      evasionRate: "",
+      hitRate: "",
+      hpRegenerationRate: "",
+      magicEvasionRate: "",
+      magicReflectionRate: "",
+      mpRegenerationRate: "",
+      tpRegenerationRate: "",
+    },
+  };
   const result = buildExtraParamSource(label);
   validateNamedItemSourceStructure(result);
   validateLabelsMapping(result, label);
 });
 
 describe("Test buildSpecialParamSource function", () => {
-  const label = LABELS_TRAIT_SPECIAL_PARAM;
+  const label: DomainLabel<SpecialParamLabels> = {
+    domainName: "",
+    options: {
+      experienceRate: "",
+      floorDamageRate: "",
+      guradEffectRate: "",
+      magicDamageRate: "",
+      mpCostRate: "",
+      pharmacology: "",
+      physicalDamageRate: "",
+      recoveryEffectRate: "",
+      targetRate: "",
+      tpChargeRate: "",
+    },
+  };
   const result = buildSpecialParamSource(label);
   validateNamedItemSourceStructure(result);
   validateLabelsMapping(result, label);
 });
 
 describe("Test buildPartyAbilitySource function", () => {
-  const label: DomainLabel<PartyAbilityOptionLabels> =
-    LABELS_TRAIT_PARTY_ABILITY;
+  const label: DomainLabel<PartyAbilityOptionLabels> = {
+    domainName: "",
+    options: {
+      cancelSurprise: "",
+      dropItemDouble: "",
+      encounterHalf: "",
+      encounterNone: "",
+      goldDouble: "",
+      raisePreemptive: "",
+    },
+  };
   const result = buildPartyAbilitySource(label);
   validateNamedItemSourceStructure(result);
   validateLabelsMapping(result, label);

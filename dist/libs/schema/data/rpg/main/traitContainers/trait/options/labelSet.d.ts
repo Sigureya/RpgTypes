@@ -1,4 +1,4 @@
-import { CollapsOptionLabels, ExtraParamLabels, PartyAbilityOptionLabels, RegularParamLabels, SpecialFlagOptions, SpecialParamLabels, TraitLabel, TraitLabelWithOption } from './options';
+import { CollapsOptionLabels, ExtraParamLabels, PartyAbilityOptionLabels, RegularParamLabels, SpecialFlagOptions, SpecialParamLabels, TraitLabel, TraitLabelWithOption } from './types';
 export interface TraitLabelSet {
     collaps: TraitLabelWithOption<CollapsOptionLabels>;
     regularParam: TraitLabelWithOption<RegularParamLabels>;
