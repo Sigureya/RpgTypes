@@ -1,5 +1,5 @@
 import * as DEF from "./labelDefine";
-import type { TraitLabelSet } from "./labelSet";
+import type { TraitLabelSet } from "./options";
 import type { TraitLabelResolved } from "./options";
 
 export const resolveTraitLabel = (

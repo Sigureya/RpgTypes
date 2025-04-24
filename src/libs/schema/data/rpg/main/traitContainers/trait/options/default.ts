@@ -1,5 +1,5 @@
 import type { DomainLabel } from "@RpgTypes/templates";
-import type { TraitLabelSet } from "../labelSet";
+import type { TraitLabelSet } from "./labelSet";
 import type {
   CollapsOptionLabels,
   ExtraParamLabels,
