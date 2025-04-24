@@ -1,7 +1,10 @@
 import * as DEF from "./labelDefine";
 import type { TraitLabelSet } from "./labelSet";
+import type { TraitLabelResolved } from "./options";
 
-export const resolveTraitLabel = (labels: TraitLabelSet) => {
+export const resolveTraitLabel = (
+  labels: TraitLabelSet
+): TraitLabelResolved[] => {
   return [
     DEF.defineTraitElementRate(labels.elementRate),
     DEF.defineTraitDebuffRate(labels.debuffRate),
