@@ -3,3 +3,4 @@ export * from './battlerParam';
 export * from './buildSource';
 export * from './makeOptions';
 export * from './default';
+export * from './labelSet';

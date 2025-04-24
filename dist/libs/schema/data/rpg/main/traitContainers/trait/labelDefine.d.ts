@@ -1,5 +1,6 @@
-import { TraitLabelResolved, TraitLabel } from './options';
+import { TraitLabelResolved, TraitLabel, TraitLabelSet } from './options';
 import { Trait } from './types';
+export declare const resolveTraitLabels: (labels: TraitLabelSet) => TraitLabelResolved[];
 export declare const formatTraitText: (traitDefine: TraitLabelResolved, trait: Trait, name: string) => string;
 export declare const defineTraitElementRate: (label: Partial<TraitLabel>) => TraitLabelResolved;
 export declare const defineTraitDebuffRate: (label: Partial<TraitLabel>) => TraitLabelResolved;
