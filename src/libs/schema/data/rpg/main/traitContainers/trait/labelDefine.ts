@@ -12,7 +12,7 @@ import {
   SRC_TRAIT_SPECIAL_FLAG,
   SRC_WEAPON_TYPES,
 } from "@RpgTypes/schema/namedItemSource";
-import type { TraitLabelResolved, TraitLabel } from "./options";
+import type { TraitLabelResolved, TraitLabel, TraitLabelSet } from "./options";
 import { LABEL_SET_TRAIT } from "./options";
 import {
   TRAIT_ELEMENT_RATE,
@@ -48,6 +48,38 @@ import {
   MODULE_TRAIT,
 } from "@RpgTypes/namedItemSource";
 import type { Trait } from "./types";
+
+export const resolveTraitLabels = (
+  labels: TraitLabelSet
+): TraitLabelResolved[] => {
+  return [
+    defineTraitElementRate(labels.elementRate),
+    defineTraitDebuffRate(labels.debuffRate),
+    defineTraitStateRate(labels.stateRate),
+    defineTraitStateResist(labels.stateResist),
+    defineTraitRegularParam(labels.regularParam),
+    defineTraitExtraParam(labels.extraParam),
+    defineTraitSpecialParam(labels.specialParam),
+    defineTraitAttackElement(labels.attackElement),
+    defineTraitAttackState(labels.attackState),
+    defineTraitAttackSpeed(labels.attackSpeed),
+    defineTraitAttackTimes(labels.attackTimes),
+    defineTraitAttackSkill(labels.attackSkill),
+    defineTraitSkillTypeAdd(labels.skillTypeAdd),
+    defineTraitSkillTypeSeal(labels.skillTypeSeal),
+    defineTraitSkillAdd(labels.skillAdd),
+    defineTraitSkillSeal(labels.skillSeal),
+    defineTraitEquipWeaponType(labels.equipWeaponType),
+    defineTraitEquipArmorType(labels.equipArmorType),
+    defineTraitEquipLock(labels.equipLock),
+    defineTraitEquipSeal(labels.equipSeal),
+    defineTraitSlotType(labels.slotType),
+    defineTraitActionPlus(labels.actionPlus),
+    defineTraitSpecialFlag(labels.specialFlag),
+    defineTraitCollapseType(labels.collaps),
+    defineTraitPartyAbility(labels.partyAbility),
+  ];
+};
 
 export const formatTraitText = (
   traitDefine: TraitLabelResolved,
