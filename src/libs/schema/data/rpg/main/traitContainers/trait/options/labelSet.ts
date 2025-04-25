@@ -5,7 +5,7 @@ import type {
   RegularParamLabels,
   SpecialFlagOptions,
   SpecialParamLabels,
-  TraitLabel,
+  RawTraitLabel,
   TraitLabelWithOption,
 } from "./types";
 
@@ -17,23 +17,23 @@ export interface TraitLabelSet {
   partyAbility: TraitLabelWithOption<PartyAbilityOptionLabels>;
   specialFlag: TraitLabelWithOption<SpecialFlagOptions>;
 
-  actionPlus: TraitLabel;
-  attackElement: TraitLabel;
-  attackSkill: TraitLabel;
-  attackSpeed: TraitLabel;
-  attackState: TraitLabel;
-  attackTimes: TraitLabel;
-  debuffRate: TraitLabel;
-  elementRate: TraitLabel;
-  equipWeaponType: TraitLabel;
-  equipArmorType: TraitLabel;
-  equipLock: TraitLabel;
-  equipSeal: TraitLabel;
-  skillAdd: TraitLabel;
-  skillSeal: TraitLabel;
-  stateRate: TraitLabel;
-  stateResist: TraitLabel;
-  skillTypeAdd: TraitLabel;
-  skillTypeSeal: TraitLabel;
-  slotType: TraitLabel;
+  actionPlus: RawTraitLabel;
+  attackElement: RawTraitLabel;
+  attackSkill: RawTraitLabel;
+  attackSpeed: RawTraitLabel;
+  attackState: RawTraitLabel;
+  attackTimes: RawTraitLabel;
+  debuffRate: RawTraitLabel;
+  elementRate: RawTraitLabel;
+  equipWeaponType: RawTraitLabel;
+  equipArmorType: RawTraitLabel;
+  equipLock: RawTraitLabel;
+  equipSeal: RawTraitLabel;
+  skillAdd: RawTraitLabel;
+  skillSeal: RawTraitLabel;
+  stateRate: RawTraitLabel;
+  stateResist: RawTraitLabel;
+  skillTypeAdd: RawTraitLabel;
+  skillTypeSeal: RawTraitLabel;
+  slotType: RawTraitLabel;
 }

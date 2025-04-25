@@ -7,7 +7,7 @@ import type {
   RegularParamLabels,
   SpecialFlagOptions,
   SpecialParamLabels,
-  TraitLabel,
+  RawTraitLabel,
   TraitLabelWithOption,
 } from "./types/";
 
@@ -99,78 +99,78 @@ export const LABEL_SET_TRAIT = {
     elementRate: {
       domainName: "属性有効度",
       format: FORMAT_PARAM_RATE_MUL,
-    } as const satisfies TraitLabel,
+    } as const satisfies RawTraitLabel,
     debuffRate: {
       domainName: "弱体有効度",
       format: FORMAT_PARAM_RATE_MUL,
-    } as const satisfies TraitLabel,
+    } as const satisfies RawTraitLabel,
     stateRate: {
       domainName: "ステート有効度",
       format: FORMAT_PARAM_RATE_MUL,
-    } as const satisfies TraitLabel,
+    } as const satisfies RawTraitLabel,
     stateResist: {
       domainName: "ステート無効",
       format: FORMAT_NAME,
-    } as const satisfies TraitLabel,
+    } as const satisfies RawTraitLabel,
     attackElement: {
       domainName: "攻撃属性",
       format: FORMAT_NAME,
-    } as const satisfies TraitLabel,
+    } as const satisfies RawTraitLabel,
     attackState: {
       domainName: "攻撃ステート",
       format: FORMAT_PARAM_RATE_PLUS,
-    } as const satisfies TraitLabel,
+    } as const satisfies RawTraitLabel,
     attackSpeed: {
       domainName: "攻撃速度補正",
       format: FORMAT_PARAM_VALUE,
-    } as const satisfies TraitLabel,
+    } as const satisfies RawTraitLabel,
     attackTimes: {
       domainName: "攻撃追加回数",
       format: FORMAT_PARAM_VALUE,
-    } as const satisfies TraitLabel,
+    } as const satisfies RawTraitLabel,
     actionPlus: {
       domainName: "行動追加",
       format: FORMAT_PARAM_RATE_MUL,
-    } as const satisfies TraitLabel,
+    } as const satisfies RawTraitLabel,
     attackSkill: {
       domainName: "攻撃スキル",
       format: FORMAT_NAME,
-    } as const satisfies TraitLabel,
+    } as const satisfies RawTraitLabel,
     equipWeaponType: {
       domainName: "装備武器タイプ",
       format: FORMAT_NAME,
-    } as const satisfies TraitLabel,
+    } as const satisfies RawTraitLabel,
     equipArmorType: {
       domainName: "装備防具タイプ",
       format: FORMAT_NAME,
-    } as const satisfies TraitLabel,
+    } as const satisfies RawTraitLabel,
     equipLock: {
       domainName: "装備固定",
       format: FORMAT_NAME,
-    } as const satisfies TraitLabel,
+    } as const satisfies RawTraitLabel,
     equipSeal: {
       domainName: "装備封印",
       format: FORMAT_NAME,
-    } as const satisfies TraitLabel,
+    } as const satisfies RawTraitLabel,
     slotType: {
       domainName: "スロットタイプ",
       format: FORMAT_NAME,
-    } as const satisfies TraitLabel,
+    } as const satisfies RawTraitLabel,
     skillAdd: {
       domainName: "スキル追加",
       format: FORMAT_NAME,
-    } as const satisfies TraitLabel,
+    } as const satisfies RawTraitLabel,
     skillSeal: {
       domainName: "スキルタイプ封印",
       format: FORMAT_NAME,
-    } as const satisfies TraitLabel,
+    } as const satisfies RawTraitLabel,
     skillTypeAdd: {
       domainName: "スキルタイプ追加",
       format: FORMAT_NAME,
-    } as const satisfies TraitLabel,
+    } as const satisfies RawTraitLabel,
     skillTypeSeal: {
       domainName: "スキルタイプ封印",
       format: FORMAT_NAME,
-    } as const satisfies TraitLabel,
+    } as const satisfies RawTraitLabel,
   },
 } as const satisfies DomainLabel<Partial<TraitLabelSet>>;
