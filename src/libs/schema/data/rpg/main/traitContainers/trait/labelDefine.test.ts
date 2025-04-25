@@ -2,6 +2,7 @@ import { describe, test, expect } from "vitest";
 import * as DEF from "./labelDefine";
 import { TRAIT_ELEMENT_RATE, TRAIT_ATTACK_ELEMENT } from "./constants";
 import { AUTHOR_RMMZ, MODULE_SYSTEM } from "@RpgTypes/namedItemSource";
+import type { SourceIdentifier } from "@RpgTypes/schema/namedItemSource";
 import { SRC_ELEMENTS } from "@RpgTypes/schema/namedItemSource";
 import type { TraitLabelResolved } from "./options";
 import { LABEL_SET_TRAIT } from "./options";
@@ -27,11 +28,20 @@ describe("defineTraitElementRate", () => {
     const result = DEF.defineTraitElementRate({});
 
     expect(result.code).toBe(TRAIT_ELEMENT_RATE);
-    expect(result.dataSource).toEqual({
+    const expected: SourceIdentifier = {
       author: AUTHOR_RMMZ,
       module: MODULE_SYSTEM,
-      sourceKey: SRC_ELEMENTS,
-    });
+      kind: SRC_ELEMENTS,
+    };
+    expect(result.dataSource).toEqual(expected);
+  });
+  test("should create a new instance with correct parameters", () => {
+    const result1 = DEF.defineTraitElementRate({});
+    const result2 = DEF.defineTraitElementRate({});
+    expect(result1).not.toBe(result2);
+    expect(result1).toEqual(result2);
+    expect(result1.dataSource).toEqual(result2.dataSource);
+    expect(result1.dataSource).not.toBe(result2.dataSource);
   });
 });
 
@@ -40,11 +50,12 @@ describe("defineTraitAttackElement", () => {
     const result = DEF.defineTraitAttackElement({});
 
     expect(result.code).toBe(TRAIT_ATTACK_ELEMENT);
-    expect(result.dataSource).toEqual({
+    const expected: SourceIdentifier = {
       author: AUTHOR_RMMZ,
       module: MODULE_SYSTEM,
-      sourceKey: SRC_ELEMENTS,
-    });
+      kind: SRC_ELEMENTS,
+    };
+    expect(result.dataSource).toEqual(expected);
   });
 });
 
