@@ -1,11 +1,11 @@
 import type { SourceIdentifier } from "@RpgTypes/schema";
 
-export interface TraitLabel {
+export interface RawTraitLabel {
   domainName: string;
   format: string;
 }
 
-export interface TraitLabelWithOption<T> extends TraitLabel {
+export interface TraitLabelWithOption<T> extends RawTraitLabel {
   domainName: string;
   format: string;
   options: T;
