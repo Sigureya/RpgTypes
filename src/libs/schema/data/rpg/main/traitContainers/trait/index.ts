@@ -1,4 +1,4 @@
 export * from "./types";
 export * from "./constants";
 export * from "./options";
-export * from "./labelDefine";
+export { resolveTraitLabels } from "./labelDefine";
