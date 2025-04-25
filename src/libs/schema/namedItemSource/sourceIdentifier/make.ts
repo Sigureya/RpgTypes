@@ -11,7 +11,7 @@ export const testUnknonwKey = (value: unknown): value is string => {
 };
 
 export const joinSourceKey = (key: SourceIdentifier): string => {
-  return [key.author, key.module, key.sourceKey].join(".");
+  return [key.author, key.module, key.kind].join(".");
 };
 
 export const isValid = (
@@ -20,7 +20,7 @@ export const isValid = (
   return (
     testUnknonwKey(source.author) &&
     testUnknonwKey(source.module) &&
-    testUnknonwKey(source.sourceKey)
+    testUnknonwKey(source.kind)
   );
 };
 // TODO:ソース選択画面のデザイン

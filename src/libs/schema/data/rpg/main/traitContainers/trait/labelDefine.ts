@@ -112,7 +112,7 @@ const srcElement = (): SourceIdentifier => {
   return {
     module: MODULE_SYSTEM,
     author: AUTHOR_RMMZ,
-    sourceKey: SRC_ELEMENTS,
+    kind: SRC_ELEMENTS,
   };
 };
 
@@ -120,20 +120,20 @@ const srcData = (key: string): SourceIdentifier => {
   return {
     module: MODULE_DATA,
     author: AUTHOR_RMMZ,
-    sourceKey: key,
+    kind: key,
   };
 };
 
 const srcTrait = (src: string): SourceIdentifier => ({
   author: AUTHOR_RMMZ,
   module: MODULE_TRAIT,
-  sourceKey: src,
+  kind: src,
 });
 
 const srcSystem = (src: string): SourceIdentifier => ({
   author: AUTHOR_RMMZ,
   module: MODULE_SYSTEM,
-  sourceKey: src,
+  kind: src,
 });
 
 export const defineTraitElementRate = (label: Partial<TraitLabel>) =>

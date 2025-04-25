@@ -42,13 +42,13 @@ export const formatItemEffectText = (
 const regularParam = (): SourceIdentifier => ({
   author: AUTHOR_RMMZ,
   module: MODULE_TRAIT,
-  sourceKey: SRC_PARAMS_REGULAR,
+  kind: SRC_PARAMS_REGULAR,
 });
 
 const srcData = (sourceKey: string): SourceIdentifier => ({
   author: AUTHOR_RMMZ,
   module: MODULE_DATA,
-  sourceKey,
+  kind: sourceKey,
 });
 
 export const defineEffect = (
