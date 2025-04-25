@@ -27,7 +27,7 @@ import { AUTHOR_RMMZ, MODULE_SYSTEM } from "./constants";
 const makeSourceIdentifier = (sourceKey: string): SourceIdentifier => ({
   author: AUTHOR_RMMZ,
   module: MODULE_SYSTEM,
-  sourceKey,
+  kind: sourceKey,
 });
 
 export const buildElementTypesSource = (

@@ -38,7 +38,7 @@ export const traitDomain = <T>(
     source: {
       author: AUTHOR_RMMZ,
       module: MODULE_TRAIT,
-      sourceKey,
+      kind: sourceKey,
     },
   };
 };
