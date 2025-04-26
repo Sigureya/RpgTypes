@@ -1,10 +1,11 @@
 import type { SourceIdentifier } from "@RpgTypes/schema";
 import type { TraitLabelResolved } from "./options";
 import type { Trait } from "./types";
-const PLACEHOLDER_VALUE = "{value}";
-const PLACEHOLDER_NAME = "{name}";
 
-export class TraitLabelDescriptor implements TraitLabelResolved {
+const PLACEHOLDER_VALUE = "{value}" as const;
+const PLACEHOLDER_NAME = "{name}" as const;
+
+export class TraitDescriptor implements TraitLabelResolved {
   constructor(
     public readonly code: number,
     public readonly label: string,

@@ -1,7 +1,7 @@
 import { SourceIdentifier } from '../../../../..';
 import { TraitLabelResolved } from './options';
 import { Trait } from './types';
-export declare class TraitLabelDescriptor implements TraitLabelResolved {
+export declare class TraitDescriptor implements TraitLabelResolved {
     readonly code: number;
     readonly label: string;
     readonly format: string;
