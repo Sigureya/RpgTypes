@@ -18,9 +18,9 @@ export class TraitLabelDescriptor implements TraitLabelResolved {
     if (this.match(trait)) {
       return;
     }
-    throw new Error(
-      `${this.label} Trait code mismatch.  this.code:${this.code} trait.code:${trait.code}`
-    );
+    // throw new Error(
+    //   `${this.label} Trait code mismatch.  this.code:${this.code} trait.code:${trait.code}`
+    // );
   }
   formatText(
     trait: Trait,

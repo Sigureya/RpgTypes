@@ -418,10 +418,7 @@ class tt {
     return this.code === e.code;
   }
   testTraitCode(e) {
-    if (!this.match(e))
-      throw new Error(
-        `${this.label} Trait code mismatch.  this.code:${this.code} trait.code:${e.code}`
-      );
+    this.match(e);
   }
   formatText(e, o) {
     this.testTraitCode(e);
