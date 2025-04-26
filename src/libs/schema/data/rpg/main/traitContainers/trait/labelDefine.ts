@@ -12,11 +12,7 @@ import {
   SRC_TRAIT_SPECIAL_FLAG,
   SRC_WEAPON_TYPES,
 } from "@RpgTypes/schema/namedItemSource";
-import type {
-  TraitLabelResolved,
-  RawTraitLabel,
-  TraitLabelSet,
-} from "./options";
+import type { RawTraitLabel, TraitLabelSet } from "./options";
 import { LABEL_SET_TRAIT } from "./options";
 import {
   TRAIT_ELEMENT_RATE,
@@ -51,7 +47,6 @@ import {
   MODULE_SYSTEM,
   MODULE_TRAIT,
 } from "@RpgTypes/namedItemSource";
-import type { Trait } from "./types";
 import { TraitDescriptor } from "./traitLabelDescriptor";
 
 export const resolveTraitLabels = (
