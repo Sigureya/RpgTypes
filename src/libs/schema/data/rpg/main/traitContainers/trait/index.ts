@@ -1,5 +1,5 @@
 export * from "./types";
 export * from "./constants";
 export * from "./options";
-export { resolveTraitLabels, formatTraitText } from "./labelDefine";
+export { resolveTraitLabels } from "./labelDefine";
 export * from "./traitLabelDescriptor";
