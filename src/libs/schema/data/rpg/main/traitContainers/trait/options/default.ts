@@ -173,4 +173,4 @@ export const LABEL_SET_TRAIT = {
       format: FORMAT_NAME,
     } as const satisfies RawTraitLabel,
   },
-} as const satisfies DomainLabel<Partial<TraitLabelSet>>;
+} as const satisfies DomainLabel<TraitLabelSet>;

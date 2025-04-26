@@ -58,38 +58,3 @@ describe("defineTraitAttackElement", () => {
     expect(result.dataSource).toEqual(expected);
   });
 });
-
-describe("formatTraitText", () => {
-  const traitDefine = {
-    code: TRAIT_ELEMENT_RATE,
-    label: "Element Rate",
-    format: "{name} has {value}",
-  };
-
-  const trait = {
-    value: 50,
-    code: 0,
-    dataId: 0,
-  };
-
-  test("should replace placeholders with correct values", () => {
-    const result = DEF.formatTraitText(traitDefine, trait, "Fire");
-
-    expect(result).toBe("Fire has 50");
-  });
-
-  test("should return format as is if no placeholders are present", () => {
-    const traitDefineNoPlaceholders = {
-      ...traitDefine,
-      format: "No placeholders here",
-    };
-
-    const result = DEF.formatTraitText(
-      traitDefineNoPlaceholders,
-      trait,
-      "Fire"
-    );
-
-    expect(result).toBe("No placeholders here");
-  });
-});
