@@ -1,27 +1,27 @@
-const Vt = "bgm", Wt = "se", Xt = "me", Kt = "bgs", ht = "battlebacks1", qt = "battlebacks2", wt = "characters", xt = "enemies", Qt = "faces", $t = "parallaxes", jt = "pictures", zt = "sv_actors", Jt = "sv_enemies", Zt = "system", bt = "tilesets", te = "titles1", ee = "titles2", oe = "System.json", D = (t, e) => {
-  const A = { ...t };
-  for (const s in t) {
-    const P = e[s];
-    typeof P == "string" && (A[s] = P);
+const Xt = "bgm", Kt = "se", qt = "me", wt = "bgs", xt = "battlebacks1", Qt = "battlebacks2", $t = "characters", jt = "enemies", zt = "faces", Jt = "parallaxes", Zt = "pictures", bt = "sv_actors", te = "sv_enemies", ee = "system", oe = "tilesets", ne = "titles1", ae = "titles2", Ae = "System.json", G = (t, e) => {
+  const o = { ...t };
+  for (const A in t) {
+    const R = e[A];
+    typeof R == "string" && (o[A] = R);
   }
-  return A;
-}, ne = (t, e) => ({
+  return o;
+}, _e = (t, e) => ({
   domainName: e.domainName ?? t.domainName,
-  options: D(t.options, e.options ?? {})
-}), Ae = (t, e) => {
-  const A = {};
-  for (const s in t) {
-    const P = t[s], X = e[s] ?? {};
-    A[s] = D(
-      P,
-      X
+  options: G(t.options, e.options ?? {})
+}), se = (t, e) => {
+  const o = {};
+  for (const A in t) {
+    const R = t[A], M = e[A] ?? {};
+    o[A] = G(
+      R,
+      M
     );
   }
-  return A;
+  return o;
 }, T = (t, e) => ({
   name: t,
   id: e
-}), _e = (t) => t.variables.map(T), ae = (t) => t.elements.map(T), Ee = (t) => t.equipTypes.map(T), se = (t) => t.skillTypes.map(T), Re = (t) => t.weaponTypes.map(T), Te = (t) => t.armorTypes.map(T), ce = (t) => t.terms.params.map(T), c = "rmmz", C = "trait", U = "data", G = "system", ie = 11, re = 12, me = 13, Se = 14, Pe = 21, Le = 22, Ie = 23, Me = 31, Oe = 32, de = 33, Ce = 34, Ne = 35, pe = 41, ue = 42, fe = 43, le = 44, De = 51, Ue = 52, Ge = 53, Fe = 54, He = 55, Be = 61, ge = 62, ye = 63, Ye = 64, ke = 0, ve = 1, Ve = 2, We = 3, Xe = 0, Ke = 1, he = 2, qe = 3, we = 4, xe = 5, Qe = 0, $e = 1, je = 2, ze = 3, Je = 0, Ze = 1, be = 2, to = 3, eo = 4, oo = 5, no = 6, Ao = 7, _o = 8, ao = 9, Eo = 0, so = 1, Ro = 2, To = 3, co = 4, io = 5, ro = 6, mo = 7, So = 0, Po = 1, Lo = 2, Io = 3, Mo = 4, Oo = 5, Co = 6, No = 7, po = 8, uo = 9, fo = (t, e) => {
+}), Ee = (t) => t.variables.map(T), ce = (t) => t.elements.map(T), Re = (t) => t.equipTypes.map(T), Te = (t) => t.skillTypes.map(T), ie = (t) => t.weaponTypes.map(T), re = (t) => t.armorTypes.map(T), me = (t) => t.terms.params.map(T), i = "rmmz", N = "trait", H = "data", g = "system", Se = 11, Pe = 12, Le = 13, Ie = 14, de = 21, Me = 22, Oe = 23, Ce = 31, Ne = 32, pe = 33, ue = 34, le = 35, fe = 41, De = 42, Ue = 43, Fe = 44, Ge = 51, He = 52, ge = 53, Be = 54, ye = 55, Ye = 61, ke = 62, ve = 63, he = 64, Ve = 0, We = 1, Xe = 2, Ke = 3, qe = 0, we = 1, xe = 2, Qe = 3, $e = 4, je = 5, ze = 0, Je = 1, Ze = 2, be = 3, to = 0, eo = 1, oo = 2, no = 3, ao = 4, Ao = 5, _o = 6, so = 7, Eo = 8, co = 9, Ro = 0, To = 1, io = 2, ro = 3, mo = 4, So = 5, Po = 6, Lo = 7, Io = 0, Mo = 1, Oo = 2, Co = 3, No = 4, po = 5, uo = 6, lo = 7, fo = 8, Do = 9, Uo = (t, e) => {
   switch (t) {
     case 0:
       return e.maxHp;
@@ -42,7 +42,7 @@ const Vt = "bgm", Wt = "se", Xt = "me", Kt = "bgs", ht = "battlebacks1", qt = "b
     default:
       return `?rparams[${t}]`;
   }
-}, lo = (t, e) => {
+}, Fo = (t, e) => {
   switch (t) {
     case 3:
       return e.criticalEvasionRate;
@@ -66,7 +66,7 @@ const Vt = "bgm", Wt = "se", Xt = "me", Kt = "bgs", ht = "battlebacks1", qt = "b
       return e.tpRegenerationRate;
   }
   return `?xparams[${t}]`;
-}, Do = (t, e) => {
+}, Go = (t, e) => {
   switch (t) {
     case 9:
       return e.experienceRate;
@@ -90,7 +90,7 @@ const Vt = "bgm", Wt = "se", Xt = "me", Kt = "bgs", ht = "battlebacks1", qt = "b
       return e.recoveryEffectRate;
   }
   return `?sparams[${t}]`;
-}, K = (t, e) => [
+}, q = (t, e) => [
   {
     id: 0,
     name: e.normal
@@ -107,7 +107,7 @@ const Vt = "bgm", Wt = "se", Xt = "me", Kt = "bgs", ht = "battlebacks1", qt = "b
     id: 3,
     name: t.noneCollaps
   }
-], h = (t) => [
+], w = (t) => [
   {
     id: 0,
     name: t.encounterHalf
@@ -132,7 +132,7 @@ const Vt = "bgm", Wt = "se", Xt = "me", Kt = "bgs", ht = "battlebacks1", qt = "b
     id: 5,
     name: t.dropItemDouble
   }
-], q = (t) => [
+], x = (t) => [
   { id: 0, name: t.maxHp },
   { id: 1, name: t.maxMp },
   { id: 2, name: t.atk },
@@ -141,7 +141,7 @@ const Vt = "bgm", Wt = "se", Xt = "me", Kt = "bgs", ht = "battlebacks1", qt = "b
   { id: 5, name: t.mdef },
   { id: 6, name: t.agi },
   { id: 7, name: t.luk }
-], w = (t) => [
+], Q = (t) => [
   {
     id: 0,
     name: t.hitRate
@@ -182,7 +182,7 @@ const Vt = "bgm", Wt = "se", Xt = "me", Kt = "bgs", ht = "battlebacks1", qt = "b
     id: 9,
     name: t.tpRegenerationRate
   }
-], x = (t) => [
+], $ = (t) => [
   {
     id: 0,
     name: t.targetRate
@@ -223,7 +223,7 @@ const Vt = "bgm", Wt = "se", Xt = "me", Kt = "bgs", ht = "battlebacks1", qt = "b
     id: 9,
     name: t.experienceRate
   }
-], Q = (t) => [
+], j = (t) => [
   {
     id: 0,
     name: t.autoBattle
@@ -240,24 +240,24 @@ const Vt = "bgm", Wt = "se", Xt = "me", Kt = "bgs", ht = "battlebacks1", qt = "b
     id: 3,
     name: t.preventEscape
   }
-], r = (t, e, A) => ({
-  items: A(e.options),
+], m = (t, e, o) => ({
+  items: o(e.options),
   label: e.domainName,
   source: {
-    author: c,
-    module: C,
+    author: i,
+    module: N,
     kind: t
   }
-}), Uo = (t, e) => r(
-  g,
+}), Ho = (t, e) => m(
+  k,
   t,
-  (A) => K(A, e)
-), Go = (t) => r(y, t, h), Fo = (t) => r(S, t, q), Ho = (t) => r(H, t, w), Bo = (t) => r(B, t, x), go = (t) => r(Y, t, Q), _ = "{name}", i = "{name} * {value}%", N = "{name} + {value}%", p = "{value}", o = {
+  (o) => q(o, e)
+), go = (t) => m(v, t, w), Bo = (t) => m(P, t, x), yo = (t) => m(y, t, Q), Yo = (t) => m(Y, t, $), ko = (t) => m(h, t, j), _ = "{name}", r = "{name} * {value}%", p = "{name} + {value}%", u = "{value}", n = {
   domainName: "特徴",
   options: {
     regularParam: {
       domainName: "基本能力値",
-      format: i,
+      format: r,
       options: {
         maxHp: "最大HP",
         maxMp: "最大MP",
@@ -271,7 +271,7 @@ const Vt = "bgm", Wt = "se", Xt = "me", Kt = "bgs", ht = "battlebacks1", qt = "b
     },
     extraParam: {
       domainName: "追加能力値",
-      format: N,
+      format: p,
       options: {
         hitRate: "命中率",
         evasionRate: "回避率",
@@ -287,7 +287,7 @@ const Vt = "bgm", Wt = "se", Xt = "me", Kt = "bgs", ht = "battlebacks1", qt = "b
     },
     specialParam: {
       domainName: "特殊能力値",
-      format: i,
+      format: r,
       options: {
         targetRate: "狙われ率",
         guradEffectRate: "防御効果率",
@@ -334,15 +334,15 @@ const Vt = "bgm", Wt = "se", Xt = "me", Kt = "bgs", ht = "battlebacks1", qt = "b
     },
     elementRate: {
       domainName: "属性有効度",
-      format: i
+      format: r
     },
     debuffRate: {
       domainName: "弱体有効度",
-      format: i
+      format: r
     },
     stateRate: {
       domainName: "ステート有効度",
-      format: i
+      format: r
     },
     stateResist: {
       domainName: "ステート無効",
@@ -354,19 +354,19 @@ const Vt = "bgm", Wt = "se", Xt = "me", Kt = "bgs", ht = "battlebacks1", qt = "b
     },
     attackState: {
       domainName: "攻撃ステート",
-      format: N
+      format: p
     },
     attackSpeed: {
       domainName: "攻撃速度補正",
-      format: p
+      format: u
     },
     attackTimes: {
       domainName: "攻撃追加回数",
-      format: p
+      format: u
     },
     actionPlus: {
       domainName: "行動追加",
-      format: i
+      format: r
     },
     attackSkill: {
       domainName: "攻撃スキル",
@@ -409,281 +409,332 @@ const Vt = "bgm", Wt = "se", Xt = "me", Kt = "bgs", ht = "battlebacks1", qt = "b
       format: _
     }
   }
-}, F = /^[a-zA-Z0-9]+$/, yo = (t) => F.test(t) ? t : void 0, O = (t) => typeof t == "string" ? F.test(t) : !1, Yo = (t) => [t.author, t.module, t.kind].join("."), ko = (t) => O(t.author) && O(t.module) && O(t.kind), S = "params", H = "xparams", B = "sparams", g = "collaps", y = "partyAbiility", Y = "sflag", vo = "actors", Vo = "variables", Wo = "map", Xo = "enemy", L = "state", k = "skill", Ko = "items", ho = "weapon", qo = "armor", wo = "class", $ = "common_event", xo = "troop", Qo = "colors", j = "weaponTypes", z = "armorTypes", $o = "equipTypes", jo = "switches", zo = "skillTypes", J = "elements", Jo = (t) => [
-  Z(t.elementRate),
-  b(t.debuffRate),
-  tt(t.stateRate),
-  et(t.stateResist),
-  ot(t.regularParam),
-  nt(t.extraParam),
-  At(t.specialParam),
-  _t(t.attackElement),
-  at(t.attackState),
-  Et(t.attackSpeed),
-  st(t.attackTimes),
-  Rt(t.attackSkill),
-  dt(t.skillTypeAdd),
-  Ct(t.skillTypeSeal),
-  It(t.skillAdd),
-  Mt(t.skillSeal),
-  mt(t.equipWeaponType),
-  St(t.equipArmorType),
-  Pt(t.equipLock),
-  Lt(t.equipSeal),
-  Ot(t.slotType),
-  Tt(t.actionPlus),
-  ct(t.specialFlag),
-  it(t.collaps),
-  rt(t.partyAbility)
-], Zo = (t, e, A) => t.format.replaceAll("{value}", e.value.toString()).replaceAll("{name}", A), u = (t, e) => typeof e == "string" ? e : t, n = (t, e, A, s) => ({
-  code: t,
-  label: u(e.domainName, A.domainName),
-  format: u(e.format, A.format),
-  dataSource: s
-}), v = () => ({
-  module: G,
-  author: c,
-  kind: J
-}), V = (t) => ({
-  module: U,
-  author: c,
+}, B = /^[a-zA-Z0-9]+$/, vo = (t) => B.test(t) ? t : void 0, O = (t) => typeof t == "string" ? B.test(t) : !1, ho = (t) => [t.author, t.module, t.kind].join("."), Vo = (t) => O(t.author) && O(t.module) && O(t.kind), P = "params", y = "xparams", Y = "sparams", k = "collaps", v = "partyAbiility", h = "sflag", Wo = "actors", Xo = "variables", Ko = "map", qo = "enemy", L = "state", V = "skill", wo = "items", xo = "weapon", Qo = "armor", $o = "class", z = "common_event", jo = "troop", zo = "colors", J = "weaponTypes", Z = "armorTypes", Jo = "equipTypes", Zo = "switches", bo = "skillTypes", b = "elements", l = "{value}", f = "{name}";
+class tt {
+  constructor(e, o, A, R) {
+    this.code = e, this.label = o, this.format = A, this.dataSource = R;
+  }
+  match(e) {
+    return this.code === e.code;
+  }
+  testTraitCode(e) {
+    if (!this.match(e))
+      throw new Error(
+        `${this.label} Trait code mismatch.  this.code:${this.code} trait.code:${e.code}`
+      );
+  }
+  formatText(e, o) {
+    this.testTraitCode(e);
+    const A = this.format.replaceAll(
+      l,
+      e.value.toString()
+    );
+    return this.dataSource ? A.replaceAll(
+      f,
+      o(this.dataSource, e.dataId)
+    ) : A;
+  }
+  requiresValue() {
+    return this.format.includes(l);
+  }
+  requiresName() {
+    return this.format.includes(f);
+  }
+  invalidPlaceHolder() {
+    const e = ["value", "name"];
+    return [
+      ...this.format.matchAll(/\{([^}]+)\}/g)
+    ].map((A) => A[1]).filter((A) => !e.includes(A));
+  }
+  isFormatValidForDataSource() {
+    return !(this.dataSource && !this.requiresName());
+  }
+  diagnose() {
+    const e = !this.isFormatValidForDataSource(), o = this.requiresName() && !this.dataSource, A = this.invalidPlaceHolder();
+    return {
+      code: this.code,
+      label: this.label,
+      format: this.format,
+      hasError: e || o || A.length > 0,
+      missingDataSourceError: e,
+      sourceMismatchError: o,
+      invalidPlaceHolders: A
+    };
+  }
+}
+const tn = (t) => [
+  et(t.elementRate),
+  ot(t.debuffRate),
+  nt(t.stateRate),
+  at(t.stateResist),
+  At(t.regularParam),
+  _t(t.extraParam),
+  st(t.specialParam),
+  Et(t.attackElement),
+  ct(t.attackState),
+  Rt(t.attackSpeed),
+  Tt(t.attackTimes),
+  it(t.attackSkill),
+  pt(t.skillTypeAdd),
+  ut(t.skillTypeSeal),
+  Ot(t.skillAdd),
+  Ct(t.skillSeal),
+  Lt(t.equipWeaponType),
+  It(t.equipArmorType),
+  dt(t.equipLock),
+  Mt(t.equipSeal),
+  Nt(t.slotType),
+  rt(t.actionPlus),
+  mt(t.specialFlag),
+  St(t.collaps),
+  Pt(t.partyAbility)
+], en = (t, e, o) => t.format.replaceAll("{value}", e.value.toString()).replaceAll("{name}", o), D = (t, e) => typeof e == "string" ? e : t, a = (t, e, o, A) => {
+  const R = D(e.domainName, o.domainName), M = D(e.format, o.format);
+  return new tt(t, R, M, A);
+}, W = () => ({
+  module: g,
+  author: i,
+  kind: b
+}), X = (t) => ({
+  module: H,
+  author: i,
   kind: t
-}), R = (t) => ({
-  author: c,
-  module: C,
+}), c = (t) => ({
+  author: i,
+  module: N,
   kind: t
-}), W = (t) => ({
-  author: c,
-  module: G,
+}), K = (t) => ({
+  author: i,
+  module: g,
   kind: t
-}), Z = (t) => n(
+}), et = (t) => a(
   11,
-  o.options.elementRate,
+  n.options.elementRate,
   t,
-  v()
-), b = (t) => n(
+  W()
+), ot = (t) => a(
   12,
-  o.options.debuffRate,
+  n.options.debuffRate,
   t,
-  R(S)
-), tt = (t) => n(
+  c(P)
+), nt = (t) => a(
   13,
-  o.options.stateRate,
+  n.options.stateRate,
   t,
-  R(S)
-), et = (t) => n(
+  c(P)
+), at = (t) => a(
   14,
-  o.options.stateResist,
+  n.options.stateResist,
   t,
-  V(L)
-), ot = (t) => n(
+  X(L)
+), At = (t) => a(
   21,
-  o.options.regularParam,
+  n.options.regularParam,
   t,
-  R(S)
-), nt = (t) => n(
+  c(P)
+), _t = (t) => a(
   22,
-  o.options.extraParam,
+  n.options.extraParam,
   t,
-  R(H)
-), At = (t) => n(
+  c(y)
+), st = (t) => a(
   23,
-  o.options.specialParam,
+  n.options.specialParam,
   t,
-  R(B)
-), _t = (t) => n(
+  c(Y)
+), Et = (t) => a(
   31,
-  o.options.attackElement,
+  n.options.attackElement,
   t,
-  v()
-), at = (t) => n(
+  W()
+), ct = (t) => a(
   32,
-  o.options.attackState,
+  n.options.attackState,
   t,
-  R(L)
-), Et = (t) => n(33, o.options.attackSpeed, t), st = (t) => n(34, o.options.attackTimes, t), Rt = (t) => n(
+  c(L)
+), Rt = (t) => a(33, n.options.attackSpeed, t), Tt = (t) => a(34, n.options.attackTimes, t), it = (t) => a(
   35,
-  o.options.attackSkill,
+  n.options.attackSkill,
   t,
-  V(k)
-), Tt = (t) => n(61, o.options.actionPlus, t), ct = (t) => n(
+  X(V)
+), rt = (t) => a(61, n.options.actionPlus, t), mt = (t) => a(
   62,
-  o.options.specialFlag,
+  n.options.specialFlag,
   t,
-  R(Y)
-), it = (t) => n(
+  c(h)
+), St = (t) => a(
   63,
-  o.options.collaps,
+  n.options.collaps,
   t,
-  R(g)
-), rt = (t) => n(
+  c(k)
+), Pt = (t) => a(
   64,
-  o.options.partyAbility,
+  n.options.partyAbility,
   t,
-  R(y)
-), mt = (t) => n(
+  c(v)
+), Lt = (t) => a(
   51,
-  o.options.equipWeaponType,
+  n.options.equipWeaponType,
   t,
-  W(j)
-), St = (t) => n(
+  K(J)
+), It = (t) => a(
   52,
-  o.options.equipArmorType,
+  n.options.equipArmorType,
   t,
-  W(z)
-), Pt = (t) => n(53, o.options.equipLock, t), Lt = (t) => n(54, o.options.equipSeal, t), It = (t) => n(43, o.options.skillAdd, t), Mt = (t) => n(44, o.options.skillSeal, t), Ot = (t) => n(55, o.options.slotType, t), dt = (t) => n(
+  K(Z)
+), dt = (t) => a(53, n.options.equipLock, t), Mt = (t) => a(54, n.options.equipSeal, t), Ot = (t) => a(43, n.options.skillAdd, t), Ct = (t) => a(44, n.options.skillSeal, t), Nt = (t) => a(55, n.options.slotType, t), pt = (t) => a(
   41,
-  o.options.skillTypeAdd,
+  n.options.skillTypeAdd,
   t
-), Ct = (t) => n(
+), ut = (t) => a(
   42,
-  o.options.skillTypeSeal,
+  n.options.skillTypeSeal,
   t
-), bo = {
+), on = {
   domainName: "武器",
   options: {
     weaponTypeId: "武器タイプID"
   }
-}, Nt = {
+}, lt = {
   domainName: "ダメージ",
   options: {}
-}, tn = 0, en = 1, on = 2, nn = {
+}, nn = 0, an = 1, An = 2, _n = {
   domainName: "アイテム",
   options: {
     consumable: "消耗品"
   }
-}, pt = "{name} + {value1}", f = "{name} {value1}%", d = "{value1}% + {value2}", l = "{name} {value1}ターン", m = "{name}", a = {
+}, ft = "{name} + {value1}", U = "{name} {value1}%", C = "{value1}% + {value2}", F = "{name} {value1}ターン", S = "{name}", s = {
   domainName: "使用効果",
   options: {
     addBuff: {
       desc: "バフを付与する",
       domainName: "バフ付与",
-      format: l
+      format: F
     },
     addDebuff: {
       desc: "デバフを付与する",
       domainName: "デバフ付与",
-      format: l
+      format: F
     },
     gainTp: {
       desc: "TPを指定した量だけ増加させます。",
       domainName: "TP増加",
-      format: d
+      format: C
     },
     grow: {
       desc: "成長効果",
       domainName: "成長効果",
-      format: pt
+      format: ft
     },
     learnSkill: {
       desc: "スキルを習得する",
       domainName: "スキル習得",
-      format: m
+      format: S
     },
     recoverHp: {
       desc: "HPを回復します。最大HPに対する割合と一定値のいずれか一方または両方を指定します。アイテムの場合は、特殊能力値[薬の知識]の倍率が適用されます。",
       domainName: "HP回復",
-      format: d
+      format: C
     },
     recoverMp: {
       desc: "MPを回復します。最大MPに対する割合と一定値のいずれか一方または両方を指定します。アイテムの場合は、特殊能力値[薬の知識]の倍率が適用されます。",
       domainName: "MP回復",
-      format: d
+      format: C
     },
     removeBuff: {
       desc: "バフを解除する",
       domainName: "バフ解除",
-      format: m
+      format: S
     },
     removeDebuff: {
       desc: "デバフを解除する",
       domainName: "デバフ解除",
-      format: m
+      format: S
     },
     removeState: {
       desc: "指定したステートを付加します。",
       domainName: "ステート付加",
-      format: f
+      format: U
     },
     special: {
       desc: "特殊効果",
       domainName: "特殊効果",
-      format: m
+      format: S
     },
     addState: {
       desc: "状態異常を解除する",
       domainName: "ステート解除",
-      format: f
+      format: U
     },
     commonEvent: {
       desc: "コモンイベントを実行する",
       domainName: "コモンイベント",
-      format: m
+      format: S
     }
   }
-}, An = 0, ut = 11, ft = 12, lt = 13, Dt = 21, Ut = 22, Gt = 31, Ft = 32, Ht = 33, Bt = 34, _n = 41, gt = 42, yt = 43, Yt = 44, an = (t, e, A) => t.format.replaceAll("{value1}", e.value1.toString()).replaceAll("{value2}", e.value2.toString()).replaceAll("{name}", A), I = () => ({
-  author: c,
-  module: C,
-  kind: S
-}), M = (t) => ({
-  author: c,
-  module: U,
+}, sn = 0, Dt = 11, Ut = 12, Ft = 13, Gt = 21, Ht = 22, gt = 31, Bt = 32, yt = 33, Yt = 34, En = 41, kt = 42, vt = 43, ht = 44, cn = (t, e, o) => t.format.replaceAll("{value1}", e.value1.toString()).replaceAll("{value2}", e.value2.toString()).replaceAll("{name}", o), I = () => ({
+  author: i,
+  module: N,
+  kind: P
+}), d = (t) => ({
+  author: i,
+  module: H,
   kind: t
-}), E = (t, e, A, s) => ({
+}), E = (t, e, o, A) => ({
   codeId: t,
-  label: A.domainName ?? e.domainName,
-  format: A.format ?? e.format,
-  description: A.desc ?? e.desc,
-  dataSource: s
-}), En = (t) => E(
-  ut,
-  a.options.recoverHp,
-  t
-), sn = (t) => E(
-  ft,
-  a.options.recoverMp,
-  t
-), Rn = (t) => E(lt, a.options.gainTp, t), Tn = (t) => E(gt, a.options.grow, t), cn = (t) => E(
+  label: o.domainName ?? e.domainName,
+  format: o.format ?? e.format,
+  description: o.desc ?? e.desc,
+  dataSource: A
+}), Rn = (t) => E(
   Dt,
-  a.options.addState,
-  t,
-  M(L)
-), rn = (t) => E(
+  s.options.recoverHp,
+  t
+), Tn = (t) => E(
   Ut,
-  a.options.removeState,
-  t,
-  M(L)
-), mn = (t) => E(
+  s.options.recoverMp,
+  t
+), rn = (t) => E(Ft, s.options.gainTp, t), mn = (t) => E(kt, s.options.grow, t), Sn = (t) => E(
   Gt,
-  a.options.addBuff,
+  s.options.addState,
   t,
-  I()
-), Sn = (t) => E(
-  Ht,
-  a.options.removeBuff,
-  t,
-  I()
+  d(L)
 ), Pn = (t) => E(
-  yt,
-  a.options.learnSkill,
+  Ht,
+  s.options.removeState,
   t,
-  M(k)
+  d(L)
 ), Ln = (t) => E(
-  Ft,
-  a.options.addBuff,
+  gt,
+  s.options.addBuff,
   t,
   I()
 ), In = (t) => E(
-  Bt,
-  a.options.removeDebuff,
+  yt,
+  s.options.removeBuff,
   t,
   I()
-), Mn = (t) => E(
-  Yt,
-  a.options.commonEvent,
+), dn = (t) => E(
+  vt,
+  s.options.learnSkill,
   t,
-  M($)
-), On = {
+  d(V)
+), Mn = (t) => E(
+  Bt,
+  s.options.addBuff,
+  t,
+  I()
+), On = (t) => E(
+  Yt,
+  s.options.removeDebuff,
+  t,
+  I()
+), Cn = (t) => E(
+  ht,
+  s.options.commonEvent,
+  t,
+  d(z)
+), Nn = {
   domainName: "スキル",
   options: {
     requiredWeaponTypeId1: "必要武器タイプ1",
@@ -691,14 +742,14 @@ const Vt = "bgm", Wt = "se", Xt = "me", Kt = "bgs", ht = "battlebacks1", qt = "b
     mpCost: "MP消費",
     tpCost: "TP消費"
   }
-}, dn = {
+}, pn = {
   domainName: "",
   options: {
     scope: "範囲",
     speed: "速度補正",
     successRate: "成功率"
   }
-}, kt = {
+}, Vt = {
   actor: {
     domainName: "アクター",
     options: {
@@ -784,7 +835,7 @@ const Vt = "bgm", Wt = "se", Xt = "me", Kt = "bgs", ht = "battlebacks1", qt = "b
       successRate: "成功率"
     }
   }
-}, Cn = 0, Nn = 101, pn = 401, un = 102, fn = 402, ln = 103, Dn = 104, Un = 105, Gn = 405, Fn = 108, Hn = 408, Bn = 109, gn = 111, yn = 411, Yn = 112, kn = 113, vn = 115, Vn = 117, Wn = 118, Xn = 119, Kn = 121, hn = 122, qn = 123, wn = 124, xn = 125, Qn = 126, $n = 127, jn = 128, zn = 129, Jn = 132, Zn = 133, bn = 134, tA = 135, eA = 136, oA = 137, nA = 138, AA = 139, _A = 140, aA = 201, EA = 202, sA = 203, RA = 204, TA = 205, cA = 206, iA = 211, rA = 212, mA = 213, SA = 214, PA = 216, LA = 217, IA = 221, MA = 222, OA = 223, dA = 224, CA = 225, NA = 230, pA = 231, uA = 232, fA = 233, lA = 234, DA = 235, UA = 236, GA = 241, FA = 242, HA = 243, BA = 244, gA = 245, yA = 246, YA = 249, kA = 250, vA = 251, VA = 261, WA = 282, XA = 283, KA = 284, hA = 285, qA = 301, wA = 302, xA = 605, QA = 303, $A = 311, jA = 312, zA = 313, JA = 314, ZA = 315, bA = 320, t_ = 321, e_ = 322, o_ = 323, n_ = 324, A_ = 325, __ = 331, a_ = 332, E_ = 333, s_ = 334, R_ = 335, T_ = 336, c_ = 337, i_ = 339, r_ = 340, m_ = 351, S_ = 342, P_ = 352, L_ = 353, I_ = 354, M_ = 355, O_ = 655, d_ = 356, C_ = 357, N_ = 0, p_ = 1, u_ = 2, f_ = 3, l_ = 4, D_ = 5, U_ = 6, G_ = 7, F_ = 8, H_ = 9, B_ = 10, g_ = 11, y_ = 12, Y_ = 13, k_ = 14, v_ = 15, V_ = 16, W_ = 17, X_ = 18, K_ = 19, h_ = 20, q_ = 21, w_ = 22, x_ = 23, Q_ = 24, $_ = 25, j_ = 26, z_ = 27, J_ = 28, Z_ = 29, b_ = 30, ta = 31, ea = 32, oa = 33, na = 34, Aa = 35, _a = 36, aa = 37, Ea = 38, sa = 39, Ra = 40, Ta = 41, ca = 42, ia = 43, ra = 44, ma = 45, Sa = {
+}, un = 0, ln = 101, fn = 401, Dn = 102, Un = 402, Fn = 103, Gn = 104, Hn = 105, gn = 405, Bn = 108, yn = 408, Yn = 109, kn = 111, vn = 411, hn = 112, Vn = 113, Wn = 115, Xn = 117, Kn = 118, qn = 119, wn = 121, xn = 122, Qn = 123, $n = 124, jn = 125, zn = 126, Jn = 127, Zn = 128, bn = 129, ta = 132, ea = 133, oa = 134, na = 135, aa = 136, Aa = 137, _a = 138, sa = 139, Ea = 140, ca = 201, Ra = 202, Ta = 203, ia = 204, ra = 205, ma = 206, Sa = 211, Pa = 212, La = 213, Ia = 214, da = 216, Ma = 217, Oa = 221, Ca = 222, Na = 223, pa = 224, ua = 225, la = 230, fa = 231, Da = 232, Ua = 233, Fa = 234, Ga = 235, Ha = 236, ga = 241, Ba = 242, ya = 243, Ya = 244, ka = 245, va = 246, ha = 249, Va = 250, Wa = 251, Xa = 261, Ka = 282, qa = 283, wa = 284, xa = 285, Qa = 301, $a = 302, ja = 605, za = 303, Ja = 311, Za = 312, ba = 313, tA = 314, eA = 315, oA = 320, nA = 321, aA = 322, AA = 323, _A = 324, sA = 325, EA = 331, cA = 332, RA = 333, TA = 334, iA = 335, rA = 336, mA = 337, SA = 339, PA = 340, LA = 351, IA = 342, dA = 352, MA = 353, OA = 354, CA = 355, NA = 655, pA = 356, uA = 357, lA = 0, fA = 1, DA = 2, UA = 3, FA = 4, GA = 5, HA = 6, gA = 7, BA = 8, yA = 9, YA = 10, kA = 11, vA = 12, hA = 13, VA = 14, WA = 15, XA = 16, KA = 17, qA = 18, wA = 19, xA = 20, QA = 21, $A = 22, jA = 23, zA = 24, JA = 25, ZA = 26, bA = 27, t_ = 28, e_ = 29, o_ = 30, n_ = 31, a_ = 32, A_ = 33, __ = 34, s_ = 35, E_ = 36, c_ = 37, R_ = 38, T_ = 39, i_ = 40, r_ = 41, m_ = 42, S_ = 43, P_ = 44, L_ = 45, I_ = {
   domainName: "オプション",
   options: {
     optDrawTitle: "ゲームタイトルの描画",
@@ -800,7 +851,7 @@ const Vt = "bgm", Wt = "se", Xt = "me", Kt = "bgs", ht = "battlebacks1", qt = "b
     optMessageSkip: "メッセージスキップを有効化",
     optSplashScreen: "スプラッシュ画面を表示"
   }
-}, Pa = {
+}, d_ = {
   domainName: "タイプ",
   options: {
     armorTypes: "防具タイプ",
@@ -811,7 +862,7 @@ const Vt = "bgm", Wt = "se", Xt = "me", Kt = "bgs", ht = "battlebacks1", qt = "b
     switches: "スイッチ",
     variables: "変数"
   }
-}, vt = {
+}, Wt = {
   id: "識別子",
   name: "名前",
   note: "メモ",
@@ -855,359 +906,360 @@ const Vt = "bgm", Wt = "se", Xt = "me", Kt = "bgs", ht = "battlebacks1", qt = "b
   instantCollaps: "即時崩壊",
   noneCollaps: "崩壊なし",
   escape: "逃走"
-}, La = {
+}, M_ = {
   rpg: {
-    damage: Nt,
-    data: kt,
-    traits: o,
-    itemEffect: a
+    damage: lt,
+    data: Vt,
+    traits: n,
+    itemEffect: s
   },
-  global: vt
+  global: Wt
 };
 export {
-  r_ as ABORT_BATTLE,
-  c as AUTHOR_RMMZ,
-  qA as BATTLE_PROCESSING,
-  e_ as CHANGE_ACTOR_IMAGES,
-  jn as CHANGE_ARMORS,
-  XA as CHANGE_BATTLE_BACKGROUND,
-  Jn as CHANGE_BATTLE_BGM,
-  t_ as CHANGE_CLASS,
-  AA as CHANGE_DEFEAT_ME,
-  eA as CHANGE_ENCOUNTER,
-  __ as CHANGE_ENEMY_HP,
-  a_ as CHANGE_ENEMY_MP,
-  E_ as CHANGE_ENEMY_STATE,
-  S_ as CHANGE_ENEMY_TP,
-  ZA as CHANGE_EXP,
-  oA as CHANGE_FORMATION_ACCESS,
-  xn as CHANGE_GOLD,
-  $A as CHANGE_HP,
-  Qn as CHANGE_ITEMS,
-  tA as CHANGE_MENU_ACCESS,
-  jA as CHANGE_MP,
-  bA as CHANGE_NAME,
-  n_ as CHANGE_NICKNAME,
-  KA as CHANGE_PARALLAX,
-  zn as CHANGE_PARTY_MEMBER,
-  PA as CHANGE_PLAYER_FOLLOWERS,
-  A_ as CHANGE_PROFILE,
-  bn as CHANGE_SAVE_ACCESS,
-  WA as CHANGE_TILESET,
-  zA as CHANGE_TP,
-  iA as CHANGE_TRANSPARENCY,
-  _A as CHANGE_VEHICLE_BGM,
-  o_ as CHANGE_VEHICLE_IMAGE,
-  Zn as CHANGE_VICTORY_ME,
-  $n as CHANGE_WEAPONS,
-  nA as CHANGE_WINDOW_COLOR,
-  ve as COLLAPS_BOSS,
-  Ve as COLLAPS_INSTANT,
-  We as COLLAPS_NONE,
-  ke as COLLAPS_NORMAL,
-  Fn as COMMENT,
-  Hn as COMMENT_BODY,
-  Vn as COMMON_EVENT,
-  gn as CONDITIONAL_BRANCH,
-  yn as CONDITIONAL_BRANCH_ELSE,
-  qn as CONTROL_SELF_SWITCH,
-  Kn as CONTROL_SWITCHES,
-  wn as CONTROL_TIMER,
-  hn as CONTROL_VARIABLES,
-  Nt as DEFAULT_DAMAGE_LABELS,
-  vt as DEFAULT_GLOBAL_LABELS,
-  nn as DEFAULT_ITEM_LABELS,
-  On as DEFAULT_SKILL_LABELS,
-  Sa as DEFAULT_SYSTEM_LABELS_BOOLEAN,
-  dn as DEFAULT_USABLE_ITEM_LABELS,
-  Gt as EFFECT_ADD_BUFF,
-  Ft as EFFECT_ADD_DEBUFF,
-  Dt as EFFECT_ADD_STATE,
-  Yt as EFFECT_COMMON_EVENT,
-  lt as EFFECT_GAIN_TP,
-  gt as EFFECT_GROW,
-  yt as EFFECT_LEARN_SKILL,
-  ut as EFFECT_RECOVER_HP,
-  ft as EFFECT_RECOVER_MP,
-  Ht as EFFECT_REMOVE_BUFF,
-  Bt as EFFECT_REMOVE_DEBUFF,
-  Ut as EFFECT_REMOVE_STATE,
-  _n as EFFECT_SPECIAL,
-  R_ as ENEMY_APPEAR,
-  s_ as ENEMY_RECOVER_ALL,
-  T_ as ENEMY_TRANSFORM,
-  SA as ERASE_EVENT,
-  DA as ERASE_PICTURE,
-  vn as EXIT_EVENT_PROCESSING,
-  to as EXTRA_PARAM_CEV,
-  no as EXTRA_PARAM_CNT,
-  be as EXTRA_PARAM_CRI,
-  Ze as EXTRA_PARAM_EVA,
-  Je as EXTRA_PARAM_HIT,
-  Ao as EXTRA_PARAM_HRG,
-  eo as EXTRA_PARAM_MEV,
-  oo as EXTRA_PARAM_MRF,
-  _o as EXTRA_PARAM_MRG,
-  ao as EXTRA_PARAM_TRG,
-  MA as FADEIN_SCREEN,
-  FA as FADEOUT_BGM,
-  yA as FADEOUT_BGS,
-  IA as FADEOUT_SCREEN,
-  oe as FILENAME_SYSTEM,
-  Qe as FLAG_ID_AUTO_BATTLE,
-  $e as FLAG_ID_GUARD,
-  ze as FLAG_ID_PRESERVE_TP,
-  je as FLAG_ID_SUBSTITUTE,
-  dA as FLASH_SCREEN,
-  Vt as FOLDER_AUDIO_BGM,
-  Kt as FOLDER_AUDIO_BGS,
-  Xt as FOLDER_AUDIO_ME,
-  Wt as FOLDER_AUDIO_SE,
-  ht as FOLDER_IMG_BATTLEBACK1,
-  qt as FOLDER_IMG_BATTLEBACK2,
-  wt as FOLDER_IMG_CHACTERS,
-  xt as FOLDER_IMG_ENEMIES,
-  Qt as FOLDER_IMG_FACES,
-  $t as FOLDER_IMG_PARALLACES,
-  jt as FOLDER_IMG_PICTURES,
-  zt as FOLDER_IMG_SV_ACTORS,
-  Jt as FOLDER_IMG_SV_ENEMIES,
-  Zt as FOLDER_IMG_SYSTEM,
-  bt as FOLDER_IMG_TILESETS,
-  te as FOLDER_IMG_TITLES1,
-  ee as FOLDER_IMG_TITLES2,
-  i_ as FORCE_ACTION,
-  L_ as GAME_OVER,
-  LA as GATHER_FOLLOWERS,
-  hA as GET_LOCATION_INFO,
-  cA as GET_ONOFF_VEHICLE,
-  tn as HITTYPE_CERTAIN,
-  on as HITTYPE_MAGICAL,
-  en as HITTYPE_PHYSICAL,
-  ln as INPUT_NUMBER,
-  Wn as LABEL,
-  bo as LABELS_DATA_WEAPON,
-  Xn as LABEL_JUMP,
-  La as LABEL_REGISTRY_JP,
-  kt as LABEL_SET_DATA,
-  a as LABEL_SET_ITEM_EFFECT,
-  o as LABEL_SET_TRAIT,
-  Yn as LOOP,
-  kn as LOOP_BREAK,
-  U as MODULE_DATA,
-  G as MODULE_SYSTEM,
-  C as MODULE_TRAIT,
-  uA as MOVE_PICTURE,
-  Pa as MockSystemLabelDataTypes,
-  QA as NAME_INPUT_PROCESSING,
-  Cn as NO_OPERATION,
-  m_ as OPEN_MENU_SCREEN,
-  P_ as OPEN_SAVE_SCREEN,
-  he as PARTY_ABILITY_CANCEL_SURPRISE,
-  xe as PARTY_ABILITY_DROP_ITEM_DOUBLE,
-  Xe as PARTY_ABILITY_ENCOUNTER_HALF,
-  Ke as PARTY_ABILITY_ENCOUNTER_NONE,
-  we as PARTY_ABILITY_GOLD_DOUBLE,
-  qe as PARTY_ABILITY_RAISE_PREEMPTIVE,
-  GA as PLAY_BGM,
-  gA as PLAY_BGS,
-  YA as PLAY_ME,
-  VA as PLAY_MOVIE,
-  kA as PLAY_SE,
-  d_ as PLUGIN_COMMAND_MV,
-  C_ as PLUGIN_COMMAND_MZ,
-  JA as RECOVER_ALL,
-  ro as REGULAR_PARAM_AGI,
-  Ro as REGULAR_PARAM_ATK,
-  To as REGULAR_PARAM_DEF,
-  mo as REGULAR_PARAM_LUK,
-  co as REGULAR_PARAM_MATK,
-  Eo as REGULAR_PARAM_MAX_HP,
-  so as REGULAR_PARAM_MAX_MP,
-  io as REGULAR_PARAM_MDEF,
-  BA as RESUME_BGM,
-  I_ as RETURN_TO_TITLE_SCREEN,
-  fA as ROTATE_PICTURE,
-  ia as ROUTE_CHANGE_BLEND_MODE,
-  b_ as ROUTE_CHANGE_FREQ,
-  Ta as ROUTE_CHANGE_IMAGE,
-  ca as ROUTE_CHANGE_OPACITY,
-  Z_ as ROUTE_CHANGE_SPEED,
-  _a as ROUTE_DIR_FIX_OFF,
-  Aa as ROUTE_DIR_FIX_ON,
-  N_ as ROUTE_END,
-  k_ as ROUTE_JUMP,
-  g_ as ROUTE_MOVE_AWAY,
-  Y_ as ROUTE_MOVE_BACKWARD,
-  p_ as ROUTE_MOVE_DOWN,
-  y_ as ROUTE_MOVE_FORWARD,
-  u_ as ROUTE_MOVE_LEFT,
-  D_ as ROUTE_MOVE_LOWER_L,
-  U_ as ROUTE_MOVE_LOWER_R,
-  H_ as ROUTE_MOVE_RANDOM,
-  f_ as ROUTE_MOVE_RIGHT,
-  B_ as ROUTE_MOVE_TOWARD,
-  l_ as ROUTE_MOVE_UP,
-  G_ as ROUTE_MOVE_UPPER_L,
-  F_ as ROUTE_MOVE_UPPER_R,
-  ra as ROUTE_PLAY_SE,
-  ma as ROUTE_SCRIPT,
-  na as ROUTE_STEP_ANIME_OFF,
-  oa as ROUTE_STEP_ANIME_ON,
-  J_ as ROUTE_SWITCH_OFF,
-  z_ as ROUTE_SWITCH_ON,
-  Ea as ROUTE_THROUGH_OFF,
-  aa as ROUTE_THROUGH_ON,
-  Ra as ROUTE_TRANSPARENT_OFF,
-  sa as ROUTE_TRANSPARENT_ON,
-  w_ as ROUTE_TURN_180D,
-  q_ as ROUTE_TURN_90D_L,
-  h_ as ROUTE_TURN_90D_R,
-  x_ as ROUTE_TURN_90D_R_L,
-  j_ as ROUTE_TURN_AWAY,
-  V_ as ROUTE_TURN_DOWN,
-  W_ as ROUTE_TURN_LEFT,
-  Q_ as ROUTE_TURN_RANDOM,
-  X_ as ROUTE_TURN_RIGHT,
-  $_ as ROUTE_TURN_TOWARD,
-  K_ as ROUTE_TURN_UP,
-  v_ as ROUTE_WAIT,
-  ea as ROUTE_WALK_ANIME_OFF,
-  ta as ROUTE_WALK_ANIME_ON,
-  HA as SAVE_BGM,
-  M_ as SCRIPT_EVAL,
-  O_ as SCRIPT_EVAL_BODY,
-  RA as SCROLL_MAP,
-  Dn as SELECT_ITEM,
-  sA as SET_EVENT_LOCATION,
-  TA as SET_MOVEMENT_ROUTE,
-  EA as SET_VEHICLE_LOCATION,
-  UA as SET_WEATHER_EFFECT,
-  CA as SHAKE_SCREEN,
-  wA as SHOP_PROCESSING,
-  xA as SHOP_PROCESSING_BODY,
-  rA as SHOW_ANIMATION,
-  mA as SHOW_BALLOON_ICON,
-  c_ as SHOW_BATTLE_ANIMATION,
-  un as SHOW_CHOICES,
-  fn as SHOW_CHOICES_ITEM,
-  Nn as SHOW_MESSAGE,
-  pn as SHOW_MESSAGE_BODY,
-  pA as SHOW_PICTURE,
-  Un as SHOW_SCROLLING_TEXT,
-  Gn as SHOW_SCROLLING_TEXT_BODY,
-  Bn as SKIP,
-  An as SPECIAL_EFFECT_ESCAPE,
-  uo as SPECIAL_PARAM_EXR,
-  po as SPECIAL_PARAM_FDR,
-  Po as SPECIAL_PARAM_GRD,
-  Mo as SPECIAL_PARAM_MCR,
-  No as SPECIAL_PARAM_MDR,
-  Co as SPECIAL_PARAM_PDR,
-  Io as SPECIAL_PARAM_PHA,
-  Lo as SPECIAL_PARAM_REC,
-  Oo as SPECIAL_PARAM_TCR,
-  So as SPECIAL_PARAM_TGR,
-  z as SRC_ARMOR_TYPES,
-  Qo as SRC_COLOR,
-  $ as SRC_COMMON_EVNET,
-  vo as SRC_DATA_ACTOR,
-  qo as SRC_DATA_ARMOR,
-  wo as SRC_DATA_CLASS,
-  Xo as SRC_DATA_ENEMY,
-  Ko as SRC_DATA_ITEMS,
-  Wo as SRC_DATA_MAP,
-  k as SRC_DATA_SKILL,
+  PA as ABORT_BATTLE,
+  i as AUTHOR_RMMZ,
+  Qa as BATTLE_PROCESSING,
+  aA as CHANGE_ACTOR_IMAGES,
+  Zn as CHANGE_ARMORS,
+  qa as CHANGE_BATTLE_BACKGROUND,
+  ta as CHANGE_BATTLE_BGM,
+  nA as CHANGE_CLASS,
+  sa as CHANGE_DEFEAT_ME,
+  aa as CHANGE_ENCOUNTER,
+  EA as CHANGE_ENEMY_HP,
+  cA as CHANGE_ENEMY_MP,
+  RA as CHANGE_ENEMY_STATE,
+  IA as CHANGE_ENEMY_TP,
+  eA as CHANGE_EXP,
+  Aa as CHANGE_FORMATION_ACCESS,
+  jn as CHANGE_GOLD,
+  Ja as CHANGE_HP,
+  zn as CHANGE_ITEMS,
+  na as CHANGE_MENU_ACCESS,
+  Za as CHANGE_MP,
+  oA as CHANGE_NAME,
+  _A as CHANGE_NICKNAME,
+  wa as CHANGE_PARALLAX,
+  bn as CHANGE_PARTY_MEMBER,
+  da as CHANGE_PLAYER_FOLLOWERS,
+  sA as CHANGE_PROFILE,
+  oa as CHANGE_SAVE_ACCESS,
+  Ka as CHANGE_TILESET,
+  ba as CHANGE_TP,
+  Sa as CHANGE_TRANSPARENCY,
+  Ea as CHANGE_VEHICLE_BGM,
+  AA as CHANGE_VEHICLE_IMAGE,
+  ea as CHANGE_VICTORY_ME,
+  Jn as CHANGE_WEAPONS,
+  _a as CHANGE_WINDOW_COLOR,
+  We as COLLAPS_BOSS,
+  Xe as COLLAPS_INSTANT,
+  Ke as COLLAPS_NONE,
+  Ve as COLLAPS_NORMAL,
+  Bn as COMMENT,
+  yn as COMMENT_BODY,
+  Xn as COMMON_EVENT,
+  kn as CONDITIONAL_BRANCH,
+  vn as CONDITIONAL_BRANCH_ELSE,
+  Qn as CONTROL_SELF_SWITCH,
+  wn as CONTROL_SWITCHES,
+  $n as CONTROL_TIMER,
+  xn as CONTROL_VARIABLES,
+  lt as DEFAULT_DAMAGE_LABELS,
+  Wt as DEFAULT_GLOBAL_LABELS,
+  _n as DEFAULT_ITEM_LABELS,
+  Nn as DEFAULT_SKILL_LABELS,
+  I_ as DEFAULT_SYSTEM_LABELS_BOOLEAN,
+  pn as DEFAULT_USABLE_ITEM_LABELS,
+  gt as EFFECT_ADD_BUFF,
+  Bt as EFFECT_ADD_DEBUFF,
+  Gt as EFFECT_ADD_STATE,
+  ht as EFFECT_COMMON_EVENT,
+  Ft as EFFECT_GAIN_TP,
+  kt as EFFECT_GROW,
+  vt as EFFECT_LEARN_SKILL,
+  Dt as EFFECT_RECOVER_HP,
+  Ut as EFFECT_RECOVER_MP,
+  yt as EFFECT_REMOVE_BUFF,
+  Yt as EFFECT_REMOVE_DEBUFF,
+  Ht as EFFECT_REMOVE_STATE,
+  En as EFFECT_SPECIAL,
+  iA as ENEMY_APPEAR,
+  TA as ENEMY_RECOVER_ALL,
+  rA as ENEMY_TRANSFORM,
+  Ia as ERASE_EVENT,
+  Ga as ERASE_PICTURE,
+  Wn as EXIT_EVENT_PROCESSING,
+  no as EXTRA_PARAM_CEV,
+  _o as EXTRA_PARAM_CNT,
+  oo as EXTRA_PARAM_CRI,
+  eo as EXTRA_PARAM_EVA,
+  to as EXTRA_PARAM_HIT,
+  so as EXTRA_PARAM_HRG,
+  ao as EXTRA_PARAM_MEV,
+  Ao as EXTRA_PARAM_MRF,
+  Eo as EXTRA_PARAM_MRG,
+  co as EXTRA_PARAM_TRG,
+  Ca as FADEIN_SCREEN,
+  Ba as FADEOUT_BGM,
+  va as FADEOUT_BGS,
+  Oa as FADEOUT_SCREEN,
+  Ae as FILENAME_SYSTEM,
+  ze as FLAG_ID_AUTO_BATTLE,
+  Je as FLAG_ID_GUARD,
+  be as FLAG_ID_PRESERVE_TP,
+  Ze as FLAG_ID_SUBSTITUTE,
+  pa as FLASH_SCREEN,
+  Xt as FOLDER_AUDIO_BGM,
+  wt as FOLDER_AUDIO_BGS,
+  qt as FOLDER_AUDIO_ME,
+  Kt as FOLDER_AUDIO_SE,
+  xt as FOLDER_IMG_BATTLEBACK1,
+  Qt as FOLDER_IMG_BATTLEBACK2,
+  $t as FOLDER_IMG_CHACTERS,
+  jt as FOLDER_IMG_ENEMIES,
+  zt as FOLDER_IMG_FACES,
+  Jt as FOLDER_IMG_PARALLACES,
+  Zt as FOLDER_IMG_PICTURES,
+  bt as FOLDER_IMG_SV_ACTORS,
+  te as FOLDER_IMG_SV_ENEMIES,
+  ee as FOLDER_IMG_SYSTEM,
+  oe as FOLDER_IMG_TILESETS,
+  ne as FOLDER_IMG_TITLES1,
+  ae as FOLDER_IMG_TITLES2,
+  SA as FORCE_ACTION,
+  MA as GAME_OVER,
+  Ma as GATHER_FOLLOWERS,
+  xa as GET_LOCATION_INFO,
+  ma as GET_ONOFF_VEHICLE,
+  nn as HITTYPE_CERTAIN,
+  An as HITTYPE_MAGICAL,
+  an as HITTYPE_PHYSICAL,
+  Fn as INPUT_NUMBER,
+  Kn as LABEL,
+  on as LABELS_DATA_WEAPON,
+  qn as LABEL_JUMP,
+  M_ as LABEL_REGISTRY_JP,
+  Vt as LABEL_SET_DATA,
+  s as LABEL_SET_ITEM_EFFECT,
+  n as LABEL_SET_TRAIT,
+  hn as LOOP,
+  Vn as LOOP_BREAK,
+  H as MODULE_DATA,
+  g as MODULE_SYSTEM,
+  N as MODULE_TRAIT,
+  Da as MOVE_PICTURE,
+  d_ as MockSystemLabelDataTypes,
+  za as NAME_INPUT_PROCESSING,
+  un as NO_OPERATION,
+  LA as OPEN_MENU_SCREEN,
+  dA as OPEN_SAVE_SCREEN,
+  xe as PARTY_ABILITY_CANCEL_SURPRISE,
+  je as PARTY_ABILITY_DROP_ITEM_DOUBLE,
+  qe as PARTY_ABILITY_ENCOUNTER_HALF,
+  we as PARTY_ABILITY_ENCOUNTER_NONE,
+  $e as PARTY_ABILITY_GOLD_DOUBLE,
+  Qe as PARTY_ABILITY_RAISE_PREEMPTIVE,
+  ga as PLAY_BGM,
+  ka as PLAY_BGS,
+  ha as PLAY_ME,
+  Xa as PLAY_MOVIE,
+  Va as PLAY_SE,
+  pA as PLUGIN_COMMAND_MV,
+  uA as PLUGIN_COMMAND_MZ,
+  tA as RECOVER_ALL,
+  Po as REGULAR_PARAM_AGI,
+  io as REGULAR_PARAM_ATK,
+  ro as REGULAR_PARAM_DEF,
+  Lo as REGULAR_PARAM_LUK,
+  mo as REGULAR_PARAM_MATK,
+  Ro as REGULAR_PARAM_MAX_HP,
+  To as REGULAR_PARAM_MAX_MP,
+  So as REGULAR_PARAM_MDEF,
+  Ya as RESUME_BGM,
+  OA as RETURN_TO_TITLE_SCREEN,
+  Ua as ROTATE_PICTURE,
+  S_ as ROUTE_CHANGE_BLEND_MODE,
+  o_ as ROUTE_CHANGE_FREQ,
+  r_ as ROUTE_CHANGE_IMAGE,
+  m_ as ROUTE_CHANGE_OPACITY,
+  e_ as ROUTE_CHANGE_SPEED,
+  E_ as ROUTE_DIR_FIX_OFF,
+  s_ as ROUTE_DIR_FIX_ON,
+  lA as ROUTE_END,
+  VA as ROUTE_JUMP,
+  kA as ROUTE_MOVE_AWAY,
+  hA as ROUTE_MOVE_BACKWARD,
+  fA as ROUTE_MOVE_DOWN,
+  vA as ROUTE_MOVE_FORWARD,
+  DA as ROUTE_MOVE_LEFT,
+  GA as ROUTE_MOVE_LOWER_L,
+  HA as ROUTE_MOVE_LOWER_R,
+  yA as ROUTE_MOVE_RANDOM,
+  UA as ROUTE_MOVE_RIGHT,
+  YA as ROUTE_MOVE_TOWARD,
+  FA as ROUTE_MOVE_UP,
+  gA as ROUTE_MOVE_UPPER_L,
+  BA as ROUTE_MOVE_UPPER_R,
+  P_ as ROUTE_PLAY_SE,
+  L_ as ROUTE_SCRIPT,
+  __ as ROUTE_STEP_ANIME_OFF,
+  A_ as ROUTE_STEP_ANIME_ON,
+  t_ as ROUTE_SWITCH_OFF,
+  bA as ROUTE_SWITCH_ON,
+  R_ as ROUTE_THROUGH_OFF,
+  c_ as ROUTE_THROUGH_ON,
+  i_ as ROUTE_TRANSPARENT_OFF,
+  T_ as ROUTE_TRANSPARENT_ON,
+  $A as ROUTE_TURN_180D,
+  QA as ROUTE_TURN_90D_L,
+  xA as ROUTE_TURN_90D_R,
+  jA as ROUTE_TURN_90D_R_L,
+  ZA as ROUTE_TURN_AWAY,
+  XA as ROUTE_TURN_DOWN,
+  KA as ROUTE_TURN_LEFT,
+  zA as ROUTE_TURN_RANDOM,
+  qA as ROUTE_TURN_RIGHT,
+  JA as ROUTE_TURN_TOWARD,
+  wA as ROUTE_TURN_UP,
+  WA as ROUTE_WAIT,
+  a_ as ROUTE_WALK_ANIME_OFF,
+  n_ as ROUTE_WALK_ANIME_ON,
+  ya as SAVE_BGM,
+  CA as SCRIPT_EVAL,
+  NA as SCRIPT_EVAL_BODY,
+  ia as SCROLL_MAP,
+  Gn as SELECT_ITEM,
+  Ta as SET_EVENT_LOCATION,
+  ra as SET_MOVEMENT_ROUTE,
+  Ra as SET_VEHICLE_LOCATION,
+  Ha as SET_WEATHER_EFFECT,
+  ua as SHAKE_SCREEN,
+  $a as SHOP_PROCESSING,
+  ja as SHOP_PROCESSING_BODY,
+  Pa as SHOW_ANIMATION,
+  La as SHOW_BALLOON_ICON,
+  mA as SHOW_BATTLE_ANIMATION,
+  Dn as SHOW_CHOICES,
+  Un as SHOW_CHOICES_ITEM,
+  ln as SHOW_MESSAGE,
+  fn as SHOW_MESSAGE_BODY,
+  fa as SHOW_PICTURE,
+  Hn as SHOW_SCROLLING_TEXT,
+  gn as SHOW_SCROLLING_TEXT_BODY,
+  Yn as SKIP,
+  sn as SPECIAL_EFFECT_ESCAPE,
+  Do as SPECIAL_PARAM_EXR,
+  fo as SPECIAL_PARAM_FDR,
+  Mo as SPECIAL_PARAM_GRD,
+  No as SPECIAL_PARAM_MCR,
+  lo as SPECIAL_PARAM_MDR,
+  uo as SPECIAL_PARAM_PDR,
+  Co as SPECIAL_PARAM_PHA,
+  Oo as SPECIAL_PARAM_REC,
+  po as SPECIAL_PARAM_TCR,
+  Io as SPECIAL_PARAM_TGR,
+  Z as SRC_ARMOR_TYPES,
+  zo as SRC_COLOR,
+  z as SRC_COMMON_EVNET,
+  Wo as SRC_DATA_ACTOR,
+  Qo as SRC_DATA_ARMOR,
+  $o as SRC_DATA_CLASS,
+  qo as SRC_DATA_ENEMY,
+  wo as SRC_DATA_ITEMS,
+  Ko as SRC_DATA_MAP,
+  V as SRC_DATA_SKILL,
   L as SRC_DATA_STATE,
-  Vo as SRC_DATA_VARIABLE,
-  ho as SRC_DATA_WEAPON,
-  J as SRC_ELEMENTS,
-  $o as SRC_EQUIP_TYPES,
-  H as SRC_PARAMS_EXTRA,
-  S as SRC_PARAMS_REGULAR,
-  B as SRC_PARAMS_SPECIAL,
-  zo as SRC_SKILL_TYPES,
-  jo as SRC_SWITCHES,
-  g as SRC_TRAIT_COLLAPS,
-  y as SRC_TRAIT_PARTY_ABILITY,
-  Y as SRC_TRAIT_SPECIAL_FLAG,
-  xo as SRC_TROOP,
-  j as SRC_WEAPON_TYPES,
-  vA as STOP_SE,
-  lA as TINT_PICTURE,
-  OA as TINT_SCREEN,
-  Be as TRAIT_ACTION_PLUS,
-  Me as TRAIT_ATTACK_ELEMENT,
-  Ne as TRAIT_ATTACK_SKILL,
-  de as TRAIT_ATTACK_SPEED,
-  Oe as TRAIT_ATTACK_STATE,
-  Ce as TRAIT_ATTACK_TIMES,
-  ye as TRAIT_COLLAPSE_TYPE,
-  re as TRAIT_DEBUFF_RATE,
-  ie as TRAIT_ELEMENT_RATE,
-  Ue as TRAIT_EQUIP_ARMOR_TYPE,
-  Ge as TRAIT_EQUIP_LOCK,
-  Fe as TRAIT_EQUIP_SEAL,
-  De as TRAIT_EQUIP_WEAPON_TYPE,
-  Pe as TRAIT_PARAM,
-  Ye as TRAIT_PARTY_ABILITY,
-  fe as TRAIT_SKILL_ADD,
-  le as TRAIT_SKILL_SEAL,
-  pe as TRAIT_SKILL_TYPE_ADD,
-  ue as TRAIT_SKILL_TYPE_SEAL,
-  He as TRAIT_SLOT_TYPE,
-  Ie as TRAIT_SPARAM,
-  ge as TRAIT_SPECIAL_FLAG,
-  me as TRAIT_STATE_RATE,
-  Se as TRAIT_STATE_RESIST,
-  Le as TRAIT_XPARAM,
-  aA as TRANSFER_PLAYER,
-  NA as WAIT,
-  Uo as buildCollapsSource,
-  Ho as buildExtraParamSource,
-  Go as buildPartyAbilitySource,
-  Fo as buildRegularParamSource,
-  go as buildSpecialFlagSource,
-  Bo as buildSpecialParamSource,
+  Xo as SRC_DATA_VARIABLE,
+  xo as SRC_DATA_WEAPON,
+  b as SRC_ELEMENTS,
+  Jo as SRC_EQUIP_TYPES,
+  y as SRC_PARAMS_EXTRA,
+  P as SRC_PARAMS_REGULAR,
+  Y as SRC_PARAMS_SPECIAL,
+  bo as SRC_SKILL_TYPES,
+  Zo as SRC_SWITCHES,
+  k as SRC_TRAIT_COLLAPS,
+  v as SRC_TRAIT_PARTY_ABILITY,
+  h as SRC_TRAIT_SPECIAL_FLAG,
+  jo as SRC_TROOP,
+  J as SRC_WEAPON_TYPES,
+  Wa as STOP_SE,
+  Fa as TINT_PICTURE,
+  Na as TINT_SCREEN,
+  Ye as TRAIT_ACTION_PLUS,
+  Ce as TRAIT_ATTACK_ELEMENT,
+  le as TRAIT_ATTACK_SKILL,
+  pe as TRAIT_ATTACK_SPEED,
+  Ne as TRAIT_ATTACK_STATE,
+  ue as TRAIT_ATTACK_TIMES,
+  ve as TRAIT_COLLAPSE_TYPE,
+  Pe as TRAIT_DEBUFF_RATE,
+  Se as TRAIT_ELEMENT_RATE,
+  He as TRAIT_EQUIP_ARMOR_TYPE,
+  ge as TRAIT_EQUIP_LOCK,
+  Be as TRAIT_EQUIP_SEAL,
+  Ge as TRAIT_EQUIP_WEAPON_TYPE,
+  de as TRAIT_PARAM,
+  he as TRAIT_PARTY_ABILITY,
+  Ue as TRAIT_SKILL_ADD,
+  Fe as TRAIT_SKILL_SEAL,
+  fe as TRAIT_SKILL_TYPE_ADD,
+  De as TRAIT_SKILL_TYPE_SEAL,
+  ye as TRAIT_SLOT_TYPE,
+  Oe as TRAIT_SPARAM,
+  ke as TRAIT_SPECIAL_FLAG,
+  Le as TRAIT_STATE_RATE,
+  Ie as TRAIT_STATE_RESIST,
+  Me as TRAIT_XPARAM,
+  ca as TRANSFER_PLAYER,
+  tt as TraitLabelDescriptor,
+  la as WAIT,
+  Ho as buildCollapsSource,
+  yo as buildExtraParamSource,
+  go as buildPartyAbilitySource,
+  Bo as buildRegularParamSource,
+  ko as buildSpecialFlagSource,
+  Yo as buildSpecialParamSource,
   E as defineEffect,
-  mn as defineEffectAddBuff,
-  Ln as defineEffectAddDebuff,
-  cn as defineEffectAddState,
-  Mn as defineEffectCommonEvent,
-  Rn as defineEffectGainTp,
-  Tn as defineEffectGrow,
-  Pn as defineEffectLearnSkill,
-  En as defineEffectRecoverHp,
-  sn as defineEffectRecoverMp,
-  Sn as defineEffectRemoveBuff,
-  In as defineEffectRemoveDebuff,
-  rn as defineEffectRemoveState,
-  lo as extraParamName,
-  K as foldCollapsOptions,
-  w as foldExtraParam,
-  h as foldPartyAbilityOptions,
-  q as foldRegularParam,
-  Q as foldSpecialFlag,
-  x as foldSpecialParams,
-  an as formatItemEffectText,
-  Zo as formatTraitText,
-  Te as getArmorTypes,
-  ae as getElementTypes,
-  Ee as getEquipTypes,
-  ce as getParamNames,
-  se as getSkillTypes,
-  _e as getVariableNames,
-  Re as getWeaponTypes,
-  ko as isValid,
-  Yo as joinSourceKey,
-  ne as mergeDomainLabel,
-  Ae as mergeNestedPrimitiveRecords,
-  D as mergeWithDefaults,
-  fo as regularParamName,
-  Jo as resolveTraitLabels,
-  yo as sanitizeKey,
-  Do as specialParamName,
+  Ln as defineEffectAddBuff,
+  Mn as defineEffectAddDebuff,
+  Sn as defineEffectAddState,
+  Cn as defineEffectCommonEvent,
+  rn as defineEffectGainTp,
+  mn as defineEffectGrow,
+  dn as defineEffectLearnSkill,
+  Rn as defineEffectRecoverHp,
+  Tn as defineEffectRecoverMp,
+  In as defineEffectRemoveBuff,
+  On as defineEffectRemoveDebuff,
+  Pn as defineEffectRemoveState,
+  Fo as extraParamName,
+  q as foldCollapsOptions,
+  Q as foldExtraParam,
+  w as foldPartyAbilityOptions,
+  x as foldRegularParam,
+  j as foldSpecialFlag,
+  $ as foldSpecialParams,
+  cn as formatItemEffectText,
+  en as formatTraitText,
+  re as getArmorTypes,
+  ce as getElementTypes,
+  Re as getEquipTypes,
+  me as getParamNames,
+  Te as getSkillTypes,
+  Ee as getVariableNames,
+  ie as getWeaponTypes,
+  Vo as isValid,
+  ho as joinSourceKey,
+  _e as mergeDomainLabel,
+  se as mergeNestedPrimitiveRecords,
+  G as mergeWithDefaults,
+  Uo as regularParamName,
+  tn as resolveTraitLabels,
+  vo as sanitizeKey,
+  Go as specialParamName,
   O as testUnknonwKey,
-  r as traitDomain
+  m as traitDomain
 };
 //# sourceMappingURL=rpgTypes.es.js.map
