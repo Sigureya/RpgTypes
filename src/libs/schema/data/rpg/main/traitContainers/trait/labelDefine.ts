@@ -52,11 +52,11 @@ import {
   MODULE_TRAIT,
 } from "@RpgTypes/namedItemSource";
 import type { Trait } from "./types";
-import { TraitLabelDescriptor } from "./traitLabelDescriptor";
+import { TraitDescriptor } from "./traitLabelDescriptor";
 
 export const resolveTraitLabels = (
   labels: TraitLabelSet
-): TraitLabelDescriptor[] => {
+): TraitDescriptor[] => {
   return [
     defineTraitElementRate(labels.elementRate),
     defineTraitDebuffRate(labels.debuffRate),
@@ -85,18 +85,6 @@ export const resolveTraitLabels = (
     defineTraitPartyAbility(labels.partyAbility),
   ];
 };
-/**
- * @deprecated
- */
-export const formatTraitText = (
-  traitDefine: TraitLabelResolved,
-  trait: Trait,
-  name: string
-): string => {
-  return traitDefine.format
-    .replaceAll(`{value}`, trait.value.toString())
-    .replaceAll("{name}", name);
-};
 
 const validate = (base: string, override: string | undefined) =>
   typeof override === "string" ? override : base;
@@ -106,10 +94,10 @@ const defineTrait = (
   base: RawTraitLabel,
   override: Partial<RawTraitLabel>,
   dataSource?: SourceIdentifier
-): TraitLabelDescriptor => {
+): TraitDescriptor => {
   const label = validate(base.domainName, override.domainName);
   const format = validate(base.format, override.format);
-  return new TraitLabelDescriptor(code, label, format, dataSource);
+  return new TraitDescriptor(code, label, format, dataSource);
 };
 
 const srcElement = (): SourceIdentifier => {
