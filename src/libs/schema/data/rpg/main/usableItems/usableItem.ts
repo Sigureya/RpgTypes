@@ -1,4 +1,5 @@
-import type { Damage } from "./damage";
+import type { Damage } from "@RpgTypes/dataMembers";
+
 import type { ItemEffect } from "./itemEffect";
 
 export interface Data_UsableItem {
