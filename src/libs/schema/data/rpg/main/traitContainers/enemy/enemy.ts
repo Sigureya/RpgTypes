@@ -1,7 +1,6 @@
 import type { Enemy_Action, DropItem } from "./enemyMembers";
 import type { ParamArray } from "../members";
-import type { Trait } from "../trait";
-import type { Data_TraitContainer } from "../traitContainer";
+import type { Data_TraitContainer, Trait } from "../trait";
 
 export interface Data_Enemy extends Data_TraitContainer {
   name: string;
