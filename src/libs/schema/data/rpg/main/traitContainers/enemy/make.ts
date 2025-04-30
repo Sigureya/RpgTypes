@@ -18,7 +18,7 @@ export const makeEnemyAction = (
   skillId: action.skillId ?? 0,
 });
 
-export const makeEnemy = (data: Partial<Data_Enemy>): Data_Enemy => ({
+export const makeEnemy = (data: Partial<Data_Enemy> = {}): Data_Enemy => ({
   name: data.name ?? "",
   id: data.id ?? 0,
   battlerName: data.battlerName ?? "",
