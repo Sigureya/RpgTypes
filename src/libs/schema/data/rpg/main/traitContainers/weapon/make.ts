@@ -1,5 +1,6 @@
+import { makeDamage } from "@RpgTypes/schema";
 import type { Data_Weapon } from "./weapon";
-import { makeDamage } from "@RpgTypes/dataMembers";
+
 export const makeWeapon = (weapon: Partial<Data_Weapon> = {}): Data_Weapon => ({
   id: weapon.id ?? 0,
   name: weapon.name ?? "",

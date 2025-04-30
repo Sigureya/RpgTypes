@@ -1,7 +1,6 @@
+import { makeDamage } from "@RpgTypes/schema";
 import type { Data_Item } from "./item";
 import type { Data_Skill } from "./skill";
-
-import { makeDamage } from "@RpgTypes/dataMembers";
 
 export const makeItem = (item: Partial<Data_Item> = {}): Data_Item => ({
   animationId: item.animationId ?? 0,

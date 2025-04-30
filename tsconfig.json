@@ -14,8 +14,7 @@
     "baseUrl": "./",
     "paths": {
       "@RpgTypes/*": ["src/libs/*"],
-      "@RpgTypes/mock/": ["src/mock/*"],
-      "@RpgTypes/dataMembers": ["src/libs/schema/data/rpg/main/members"]
+      "@RpgTypes/mock/": ["src/mock/*"]
     }
   },
   "include": ["src/**/*"],

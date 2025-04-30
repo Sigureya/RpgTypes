@@ -13,10 +13,6 @@ export default defineConfig({
   resolve: {
     alias: {
       "@RpgTypes": path.resolve(__dirname, "./src/libs"),
-      "@RpgTypes/dataMembers": path.resolve(
-        __dirname,
-        "./src/libs/schema/data/rpg/main/members"
-      ),
     },
   },
 });
