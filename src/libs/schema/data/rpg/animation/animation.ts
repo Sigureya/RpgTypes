@@ -1,5 +1,5 @@
 import type { AudioFileParams, ColorRGBA } from "@RpgTypes/utils";
-import type { Data_NamedItem } from "./main";
+
 export interface FlashTiming {
   frame: number;
   duration: number;
@@ -16,7 +16,7 @@ export interface Vector3 {
   z: number;
 }
 
-export interface Data_Animation extends Data_NamedItem {
+export interface Data_Animation {
   id: number;
   displayType: number;
   effectName: string;

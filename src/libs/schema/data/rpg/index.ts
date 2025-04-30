@@ -1,12 +1,7 @@
 export * from "./main";
 
-export * from "./commonEvent";
-
-export * from "./troopMembers";
-export * from "./troop";
+export * from "./event";
 export * from "./animation";
 
-export * from "./map";
 export * from "./tileset";
 export * from "./system";
-export * from "./makeEvent";
