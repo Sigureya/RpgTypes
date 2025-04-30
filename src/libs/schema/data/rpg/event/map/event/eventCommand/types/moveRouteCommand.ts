@@ -1,4 +1,4 @@
-import type { AudioFileParams } from "../../../../../../../utils/types/audioFileParams";
+import type { AudioFileParams } from "@RpgTypes/utils";
 import type * as MoveRouteConstants from "./domains/moveRoute/constants";
 import type { CommandTemplateSimple } from "./template/";
 
