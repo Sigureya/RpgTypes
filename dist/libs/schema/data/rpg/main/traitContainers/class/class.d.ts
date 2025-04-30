@@ -1,6 +1,6 @@
-import { ParamArray, Learning } from '../members';
-import { Trait } from '../trait';
-import { Data_TraitContainer } from '../traitContainer';
+import { ParamArray } from '../members';
+import { Data_TraitContainer, Trait } from '../trait';
+import { Learning } from './leaning';
 export interface Data_Class extends Data_TraitContainer {
     name: string;
     id: number;

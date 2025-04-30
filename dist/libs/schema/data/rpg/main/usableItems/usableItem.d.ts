@@ -1,4 +1,4 @@
-import { Damage } from './damage';
+import { Damage } from '../../../..';
 import { ItemEffect } from './itemEffect';
 export interface Data_UsableItem {
     iconIndex: number;

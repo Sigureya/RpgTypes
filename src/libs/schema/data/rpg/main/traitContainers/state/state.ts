@@ -1,5 +1,4 @@
-import type { Trait } from "../trait";
-import type { Data_TraitContainer } from "../traitContainer";
+import type { Data_TraitContainer, Trait } from "../trait";
 
 export interface Data_State extends Data_TraitContainer {
   name: string;

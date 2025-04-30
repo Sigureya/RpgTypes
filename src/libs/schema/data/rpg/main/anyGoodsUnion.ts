@@ -1,5 +1,4 @@
-import type { Data_Armor } from "./traitContainers/armor";
-import type { Data_Weapon } from "./traitContainers/weapon";
+import type { Data_Armor, Data_Weapon } from "./traitContainers";
 import type { Data_Item } from "./usableItems";
 
 /**
