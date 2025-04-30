@@ -1,4 +1,4 @@
-import { AudioFileParams, ColorRGBA } from '../../../../../../utils';
+import { AudioFileParams, ColorRGBA } from '../../../../../../../utils';
 import { BranchParameters } from './branchParams';
 import { EventCommandLike } from './eventComandLike';
 import { Command_RotatePicture, Command_SetEventLocation, Command_SetVehicleLocation, Command_TintPicture } from './eventCommandTypes';

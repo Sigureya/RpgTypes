@@ -1,5 +1,4 @@
-import { AudioFileParams, ColorRGBA } from '../../../utils';
-import { Data_NamedItem } from './main';
+import { AudioFileParams, ColorRGBA } from '../../../../utils';
 export interface FlashTiming {
     frame: number;
     duration: number;
@@ -14,7 +13,7 @@ export interface Vector3 {
     y: number;
     z: number;
 }
-export interface Data_Animation extends Data_NamedItem {
+export interface Data_Animation {
     id: number;
     displayType: number;
     effectName: string;

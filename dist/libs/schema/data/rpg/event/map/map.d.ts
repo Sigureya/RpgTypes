@@ -1,4 +1,4 @@
-import { AudioFileParams } from '../../../../utils';
+import { AudioFileParams } from '../../../../../utils';
 import { Encounter } from './encounter';
 import { EventCommand, MapEvent } from './event/';
 import { MapEventContainer } from './mapEventContainer';
