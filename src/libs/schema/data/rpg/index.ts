@@ -9,3 +9,4 @@ export * from "./animation";
 export * from "./map";
 export * from "./tileset";
 export * from "./system";
+export * from "./makeEvent";
