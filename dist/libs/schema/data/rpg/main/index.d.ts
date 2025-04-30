@@ -4,3 +4,4 @@ export * from './traitContainers';
 export * from './usableItems';
 export * from './defaultDataLabels';
 export * from './dataLabels';
+export * from './members';

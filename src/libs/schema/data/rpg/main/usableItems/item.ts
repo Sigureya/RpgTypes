@@ -1,4 +1,4 @@
-import type { Damage } from "./damage";
+import type { Damage } from "@RpgTypes/schema";
 import type { ItemEffect } from "./itemEffect";
 import type { Data_UsableItem } from "./usableItem";
 

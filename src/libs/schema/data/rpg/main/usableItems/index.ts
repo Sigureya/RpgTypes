@@ -1,4 +1,3 @@
-export * from "./damage";
 export * from "./hitType";
 export * from "./item";
 export * from "./itemDefault";
@@ -10,3 +9,4 @@ export * from "./skillLabels";
 export * from "./usableItem";
 export * from "./usableItemLables";
 export * from "./usableItemDefault";
+export * from "./make";

@@ -5,7 +5,7 @@ export interface Troop_EventConditions {
   switchValid: number;
 }
 export interface Troop_Member {
-  enemyId: null;
+  enemyId: number;
   x: number;
   y: number;
   hidden: boolean;
