@@ -1,6 +1,8 @@
 import type { Data_NamedItem } from "./main";
 
-export interface Tileset extends Data_NamedItem {
-  id: number;
-  name: string;
+export interface Data_Tileset extends Data_NamedItem {
+  note: string;
+  flags: number[];
+  mode: number;
+  tilesetNames: string[];
 }
