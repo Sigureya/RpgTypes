@@ -1,5 +1,4 @@
-import { Data_Armor } from './traitContainers/armor';
-import { Data_Weapon } from './traitContainers/weapon';
+import { Data_Armor, Data_Weapon } from './traitContainers';
 import { Data_Item } from './usableItems';
 /**
  * @deprecated

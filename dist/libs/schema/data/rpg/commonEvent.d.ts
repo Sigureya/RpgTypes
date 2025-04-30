@@ -4,4 +4,5 @@ export interface Data_CommonEvent {
     id: number;
     name: string;
     list: EventCommand[];
+    switchId: number;
 }
