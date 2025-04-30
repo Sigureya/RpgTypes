@@ -21,7 +21,7 @@ const Ae = "bgm", ce = "se", _e = "me", Ee = "bgs", ie = "battlebacks1", Re = "b
 }, T = (t, e) => ({
   name: t,
   id: e
-}), Xe = (t) => t.variables.map(T), qe = (t) => t.elements.map(T), xe = (t) => t.equipTypes.map(T), we = (t) => t.skillTypes.map(T), je = (t) => t.weaponTypes.map(T), Qe = (t) => t.armorTypes.map(T), $e = (t) => t.terms.params.map(T), r = "rmmz", O = "trait", B = "data", v = "system", Je = 11, ze = 12, Ze = 13, be = 14, to = 21, eo = 22, oo = 23, no = 31, so = 32, ao = 33, Ao = 34, co = 35, _o = 41, Eo = 42, io = 43, Ro = 44, To = 51, ro = 52, mo = 53, So = 54, Io = 55, po = 61, Lo = 62, Po = 63, Mo = 64, No = 0, Oo = 1, Co = 2, uo = 3, lo = 0, fo = 1, Do = 2, Uo = 3, Fo = 4, Go = 5, go = 0, yo = 1, Ho = 2, Bo = 3, vo = 0, ho = 1, Yo = 2, ko = 3, Vo = 4, Wo = 5, Ko = 6, Xo = 7, qo = 8, xo = 9, wo = 0, jo = 1, Qo = 2, $o = 3, Jo = 4, zo = 5, Zo = 6, bo = 7, tn = 0, en = 1, on = 2, nn = 3, sn = 4, an = 5, An = 6, cn = 7, _n = 8, En = 9, Rn = (t, e) => {
+}), Xe = (t) => t.variables.map(T), xe = (t) => t.elements.map(T), qe = (t) => t.equipTypes.map(T), we = (t) => t.skillTypes.map(T), je = (t) => t.weaponTypes.map(T), Qe = (t) => t.armorTypes.map(T), $e = (t) => t.terms.params.map(T), r = "rmmz", O = "trait", B = "data", v = "system", Je = 11, ze = 12, Ze = 13, be = 14, to = 21, eo = 22, oo = 23, no = 31, so = 32, ao = 33, Ao = 34, co = 35, _o = 41, Eo = 42, io = 43, Ro = 44, To = 51, ro = 52, mo = 53, So = 54, Io = 55, po = 61, Lo = 62, Po = 63, Mo = 64, No = 0, Oo = 1, Co = 2, uo = 3, lo = 0, fo = 1, Do = 2, Uo = 3, Fo = 4, Go = 5, go = 0, yo = 1, Ho = 2, Bo = 3, vo = 0, ho = 1, Yo = 2, ko = 3, Vo = 4, Wo = 5, Ko = 6, Xo = 7, xo = 8, qo = 9, wo = 0, jo = 1, Qo = 2, $o = 3, Jo = 4, zo = 5, Zo = 6, bo = 7, tn = 0, en = 1, on = 2, nn = 3, sn = 4, an = 5, An = 6, cn = 7, _n = 8, En = 9, Rn = (t, e) => {
   switch (t) {
     case 0:
       return e.maxHp;
@@ -488,11 +488,11 @@ const vn = (t) => [
 ], D = (t, e) => typeof e == "string" ? e : t, a = (t, e, o, n) => {
   const _ = D(e.domainName, o.domainName), R = D(e.format, o.format);
   return new at(t, _, R, n);
-}, q = () => ({
+}, x = () => ({
   module: v,
   author: r,
   kind: st
-}), x = (t) => ({
+}), q = (t) => ({
   module: B,
   author: r,
   kind: t
@@ -508,7 +508,7 @@ const vn = (t) => [
   11,
   s.options.elementRate,
   t,
-  q()
+  x()
 ), ct = (t) => a(
   12,
   s.options.debuffRate,
@@ -523,7 +523,7 @@ const vn = (t) => [
   14,
   s.options.stateResist,
   t,
-  x(p)
+  q(p)
 ), it = (t) => a(
   21,
   s.options.regularParam,
@@ -543,7 +543,7 @@ const vn = (t) => [
   31,
   s.options.attackElement,
   t,
-  q()
+  x()
 ), mt = (t) => a(
   32,
   s.options.attackState,
@@ -553,7 +553,7 @@ const vn = (t) => [
   35,
   s.options.attackSkill,
   t,
-  x(X)
+  q(X)
 ), pt = (t) => a(61, s.options.actionPlus, t), Lt = (t) => a(
   62,
   s.options.specialFlag,
@@ -587,22 +587,22 @@ const vn = (t) => [
   42,
   s.options.skillTypeSeal,
   t
-), hn = () => ({
-  name: "",
-  id: 0,
-  profile: "",
-  nickname: "",
-  initialLevel: 0,
-  maxLevel: 0,
-  classId: 0,
-  battlerName: "",
-  characterIndex: 0,
-  characterName: "",
-  equips: [],
-  faceIndex: 0,
-  faceName: "",
+), hn = (t = {}) => ({
+  name: t.name ?? "",
+  id: t.id ?? 0,
+  battlerName: t.battlerName ?? "",
+  characterName: t.characterName ?? "",
+  characterIndex: t.characterIndex ?? 0,
+  faceName: t.faceName ?? "",
+  faceIndex: t.faceIndex ?? 0,
   traits: [],
-  note: ""
+  note: t.note ?? "",
+  classId: t.classId ?? 0,
+  nickname: t.nickname ?? "",
+  profile: t.profile ?? "",
+  equips: [],
+  initialLevel: t.initialLevel ?? 0,
+  maxLevel: t.maxLevel ?? 0
 }), Yn = (t = {}) => ({
   id: t.id ?? 0,
   name: t.name ?? "",
@@ -630,7 +630,7 @@ const vn = (t) => [
   ],
   etypeId: t.etypeId ?? 0,
   price: t.price ?? 0
-}), kn = (t) => ({
+}), kn = (t = {}) => ({
   name: t.name ?? "",
   id: t.id ?? 0,
   traits: [],
@@ -687,13 +687,13 @@ const vn = (t) => [
   dataId: t.dataId ?? 0,
   denominator: t.denominator ?? 0,
   kind: t.kind ?? 0
-}), Kn = (t) => ({
+}), Kn = (t = {}) => ({
   conditionParam1: t.conditionParam1 ?? 0,
   conditionParam2: t.conditionParam2 ?? 0,
   conditionType: t.conditionType ?? 0,
   rating: t.rating ?? 0,
   skillId: t.skillId ?? 0
-}), Xn = (t) => {
+}), Xn = (t = {}) => {
   var e;
   return {
     name: t.name ?? "",
@@ -725,7 +725,7 @@ const vn = (t) => [
     ],
     actions: []
   };
-}, qn = 0, xn = 1, wn = 2, jn = {
+}, xn = 0, qn = 1, wn = 2, jn = {
   domainName: "アイテム",
   options: {
     consumable: "消耗品"
@@ -799,8 +799,8 @@ const vn = (t) => [
       format: d
     }
   }
-}, Qn = 0, yt = 11, Ht = 12, Bt = 13, vt = 21, ht = 22, Yt = 31, kt = 32, Vt = 33, Wt = 34, $n = 41, Kt = 42, Xt = 43, qt = 44, G = "{value1}", g = "{value2}", y = "{name}";
-class xt {
+}, Qn = 0, yt = 11, Ht = 12, Bt = 13, vt = 21, ht = 22, Yt = 31, kt = 32, Vt = 33, Wt = 34, $n = 41, Kt = 42, Xt = 43, xt = 44, G = "{value1}", g = "{value2}", y = "{name}";
+class qt {
   constructor(e, o, n, _, R) {
     this.codeId = e, this.label = o, this.format = n, this.description = _, this.dataSource = R;
   }
@@ -852,7 +852,7 @@ const Jn = (t, e, o) => t.format.replaceAll("{value1}", e.value1.toString()).rep
   kind: t
 }), E = (t, e, o, n) => {
   const _ = o.domainName ?? e.domainName, R = o.format ?? e.format, Q = o.desc ?? e.desc;
-  return new xt(t, _, R, Q, n);
+  return new qt(t, _, R, Q, n);
 }, wt = (t) => E(
   yt,
   c.options.recoverHp,
@@ -897,7 +897,7 @@ const Jn = (t, e, o) => t.format.replaceAll("{value1}", e.value1.toString()).rep
   t,
   L()
 ), oe = (t) => E(
-  qt,
+  xt,
   c.options.commonEvent,
   t,
   P(et)
@@ -1053,7 +1053,7 @@ const Jn = (t, e, o) => t.format.replaceAll("{value1}", e.value1.toString()).rep
   formula: t.formula ?? "",
   variance: t.variance ?? 0,
   critical: t.critical ?? !1
-}), ns = 0, ss = 101, as = 401, As = 102, cs = 402, _s = 103, Es = 104, is = 105, Rs = 405, Ts = 108, rs = 408, ms = 109, Ss = 111, ds = 411, Is = 112, ps = 113, Ls = 115, Ps = 117, Ms = 118, Ns = 119, Os = 121, Cs = 122, us = 123, ls = 124, fs = 125, Ds = 126, Us = 127, Fs = 128, Gs = 129, gs = 132, ys = 133, Hs = 134, Bs = 135, vs = 136, hs = 137, Ys = 138, ks = 139, Vs = 140, Ws = 201, Ks = 202, Xs = 203, qs = 204, xs = 205, ws = 206, js = 211, Qs = 212, $s = 213, Js = 214, zs = 216, Zs = 217, bs = 221, ta = 222, ea = 223, oa = 224, na = 225, sa = 230, aa = 231, Aa = 232, ca = 233, _a = 234, Ea = 235, ia = 236, Ra = 241, Ta = 242, ra = 243, ma = 244, Sa = 245, da = 246, Ia = 249, pa = 250, La = 251, Pa = 261, Ma = 282, Na = 283, Oa = 284, Ca = 285, ua = 301, la = 302, fa = 605, Da = 303, Ua = 311, Fa = 312, Ga = 313, ga = 314, ya = 315, Ha = 320, Ba = 321, va = 322, ha = 323, Ya = 324, ka = 325, Va = 331, Wa = 332, Ka = 333, Xa = 334, qa = 335, xa = 336, wa = 337, ja = 339, Qa = 340, $a = 351, Ja = 342, za = 352, Za = 353, ba = 354, tA = 355, eA = 655, oA = 356, nA = 357, sA = 0, aA = 1, AA = 2, cA = 3, _A = 4, EA = 5, iA = 6, RA = 7, TA = 8, rA = 9, mA = 10, SA = 11, dA = 12, IA = 13, pA = 14, LA = 15, PA = 16, MA = 17, NA = 18, OA = 19, CA = 20, uA = 21, lA = 22, fA = 23, DA = 24, UA = 25, FA = 26, GA = 27, gA = 28, yA = 29, HA = 30, BA = 31, vA = 32, hA = 33, YA = 34, kA = 35, VA = 36, WA = 37, KA = 38, XA = 39, qA = 40, xA = 41, wA = 42, jA = 43, QA = 44, $A = 45, JA = {
+}), ns = 0, ss = 101, as = 401, As = 102, cs = 402, _s = 103, Es = 104, is = 105, Rs = 405, Ts = 108, rs = 408, ms = 109, Ss = 111, ds = 411, Is = 112, ps = 113, Ls = 115, Ps = 117, Ms = 118, Ns = 119, Os = 121, Cs = 122, us = 123, ls = 124, fs = 125, Ds = 126, Us = 127, Fs = 128, Gs = 129, gs = 132, ys = 133, Hs = 134, Bs = 135, vs = 136, hs = 137, Ys = 138, ks = 139, Vs = 140, Ws = 201, Ks = 202, Xs = 203, xs = 204, qs = 205, ws = 206, js = 211, Qs = 212, $s = 213, Js = 214, zs = 216, Zs = 217, bs = 221, ta = 222, ea = 223, oa = 224, na = 225, sa = 230, aa = 231, Aa = 232, ca = 233, _a = 234, Ea = 235, ia = 236, Ra = 241, Ta = 242, ra = 243, ma = 244, Sa = 245, da = 246, Ia = 249, pa = 250, La = 251, Pa = 261, Ma = 282, Na = 283, Oa = 284, Ca = 285, ua = 301, la = 302, fa = 605, Da = 303, Ua = 311, Fa = 312, Ga = 313, ga = 314, ya = 315, Ha = 320, Ba = 321, va = 322, ha = 323, Ya = 324, ka = 325, Va = 331, Wa = 332, Ka = 333, Xa = 334, xa = 335, qa = 336, wa = 337, ja = 339, Qa = 340, $a = 351, Ja = 342, za = 352, Za = 353, ba = 354, tA = 355, eA = 655, oA = 356, nA = 357, sA = 0, aA = 1, AA = 2, cA = 3, _A = 4, EA = 5, iA = 6, RA = 7, TA = 8, rA = 9, mA = 10, SA = 11, dA = 12, IA = 13, pA = 14, LA = 15, PA = 16, MA = 17, NA = 18, OA = 19, CA = 20, uA = 21, lA = 22, fA = 23, DA = 24, UA = 25, FA = 26, GA = 27, gA = 28, yA = 29, HA = 30, BA = 31, vA = 32, hA = 33, YA = 34, kA = 35, VA = 36, WA = 37, KA = 38, XA = 39, xA = 40, qA = 41, wA = 42, jA = 43, QA = 44, $A = 45, JA = {
   domainName: "オプション",
   options: {
     optDrawTitle: "ゲームタイトルの描画",
@@ -1192,7 +1192,7 @@ export {
   Yt as EFFECT_ADD_BUFF,
   kt as EFFECT_ADD_DEBUFF,
   vt as EFFECT_ADD_STATE,
-  qt as EFFECT_COMMON_EVENT,
+  xt as EFFECT_COMMON_EVENT,
   Bt as EFFECT_GAIN_TP,
   Kt as EFFECT_GROW,
   Xt as EFFECT_LEARN_SKILL,
@@ -1202,9 +1202,9 @@ export {
   Wt as EFFECT_REMOVE_DEBUFF,
   ht as EFFECT_REMOVE_STATE,
   $n as EFFECT_SPECIAL,
-  qa as ENEMY_APPEAR,
+  xa as ENEMY_APPEAR,
   Xa as ENEMY_RECOVER_ALL,
-  xa as ENEMY_TRANSFORM,
+  qa as ENEMY_TRANSFORM,
   Js as ERASE_EVENT,
   Ea as ERASE_PICTURE,
   Ls as EXIT_EVENT_PROCESSING,
@@ -1216,8 +1216,8 @@ export {
   Xo as EXTRA_PARAM_HRG,
   Vo as EXTRA_PARAM_MEV,
   Wo as EXTRA_PARAM_MRF,
-  qo as EXTRA_PARAM_MRG,
-  xo as EXTRA_PARAM_TRG,
+  xo as EXTRA_PARAM_MRG,
+  qo as EXTRA_PARAM_TRG,
   ta as FADEIN_SCREEN,
   Ta as FADEOUT_BGM,
   da as FADEOUT_BGS,
@@ -1267,9 +1267,9 @@ export {
   Zs as GATHER_FOLLOWERS,
   Ca as GET_LOCATION_INFO,
   ws as GET_ONOFF_VEHICLE,
-  qn as HITTYPE_CERTAIN,
+  xn as HITTYPE_CERTAIN,
   wn as HITTYPE_MAGICAL,
-  xn as HITTYPE_PHYSICAL,
+  qn as HITTYPE_PHYSICAL,
   _s as INPUT_NUMBER,
   Ms as LABEL,
   Wn as LABELS_DATA_WEAPON,
@@ -1316,7 +1316,7 @@ export {
   ca as ROTATE_PICTURE,
   jA as ROUTE_CHANGE_BLEND_MODE,
   HA as ROUTE_CHANGE_FREQ,
-  xA as ROUTE_CHANGE_IMAGE,
+  qA as ROUTE_CHANGE_IMAGE,
   wA as ROUTE_CHANGE_OPACITY,
   yA as ROUTE_CHANGE_SPEED,
   VA as ROUTE_DIR_FIX_OFF,
@@ -1344,7 +1344,7 @@ export {
   GA as ROUTE_SWITCH_ON,
   KA as ROUTE_THROUGH_OFF,
   WA as ROUTE_THROUGH_ON,
-  qA as ROUTE_TRANSPARENT_OFF,
+  xA as ROUTE_TRANSPARENT_OFF,
   XA as ROUTE_TRANSPARENT_ON,
   lA as ROUTE_TURN_180D,
   uA as ROUTE_TURN_90D_L,
@@ -1363,10 +1363,10 @@ export {
   ra as SAVE_BGM,
   tA as SCRIPT_EVAL,
   eA as SCRIPT_EVAL_BODY,
-  qs as SCROLL_MAP,
+  xs as SCROLL_MAP,
   Es as SELECT_ITEM,
   Xs as SET_EVENT_LOCATION,
-  xs as SET_MOVEMENT_ROUTE,
+  qs as SET_MOVEMENT_ROUTE,
   Ks as SET_VEHICLE_LOCATION,
   ia as SET_WEATHER_EFFECT,
   na as SHAKE_SCREEN,
@@ -1477,8 +1477,8 @@ export {
   b as foldSpecialParams,
   Jn as formatItemEffectText,
   Qe as getArmorTypes,
-  qe as getElementTypes,
-  xe as getEquipTypes,
+  xe as getElementTypes,
+  qe as getEquipTypes,
   $e as getParamNames,
   we as getSkillTypes,
   Xe as getVariableNames,

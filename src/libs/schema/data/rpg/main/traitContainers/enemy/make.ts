@@ -8,7 +8,7 @@ export const makeDropItem = (dropItem: Partial<DropItem> = {}): DropItem => ({
 });
 
 export const makeEnemyAction = (
-  action: Partial<Enemy_Action>
+  action: Partial<Enemy_Action> = {}
 ): Enemy_Action => ({
   conditionParam1: action.conditionParam1 ?? 0,
   conditionParam2: action.conditionParam2 ?? 0,
