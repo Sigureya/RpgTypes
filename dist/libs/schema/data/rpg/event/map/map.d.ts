@@ -1,5 +1,5 @@
 import { AudioFileParams } from '../../../../../utils';
-import { Encounter } from './encounter';
+import { Encounter } from './members';
 import { EventCommand, MapEvent } from './event/';
 import { MapEventContainer } from './mapEventContainer';
 export interface Data_Map extends MapEventContainer<EventCommand> {
