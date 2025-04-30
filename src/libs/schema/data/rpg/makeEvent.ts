@@ -9,6 +9,7 @@ export const makeCommonEvent = (
   name: data.name ?? "",
   trigger: data.trigger ?? 0,
   list: data.list ?? [],
+  switchId: data.switchId ?? 0,
 });
 
 export const makeTroop = (data: Partial<Data_Troop>): Data_Troop => ({
