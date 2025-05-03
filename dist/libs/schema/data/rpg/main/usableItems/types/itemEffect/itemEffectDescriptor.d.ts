@@ -1,4 +1,4 @@
-import { SourceIdentifier } from '../../../../../namedItemSource';
+import { SourceIdentifier } from '../../../../../../namedItemSource';
 import { EffectDefinitionResolved } from './labels';
 import { ItemEffect } from './itemEffect';
 export declare class ItemEffectDescriptor implements EffectDefinitionResolved {

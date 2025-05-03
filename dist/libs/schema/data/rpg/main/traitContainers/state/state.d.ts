@@ -1,4 +1,4 @@
-import { Data_TraitContainer, Trait } from '../trait';
+import { Data_TraitContainer, Trait } from '../../../../../..';
 export interface Data_State extends Data_TraitContainer {
     name: string;
     id: number;
@@ -7,19 +7,19 @@ export interface Data_State extends Data_TraitContainer {
     message2: string;
     message3: string;
     message4: string;
-    traits: Trait[];
-    note: string;
     restriction: number;
     priority: number;
     motion: number;
     overlay: number;
     removeAtBattleEnd: boolean;
     removeByRestriction: boolean;
+    removeByDamage: boolean;
+    removeByWalking: boolean;
     autoRemovalTiming: number;
     minTurns: number;
     maxTurns: number;
-    removeByDamage: boolean;
     chanceByDamage: number;
-    removeByWalking: boolean;
     stepsToRemove: number;
+    note: string;
+    traits: Trait[];
 }
