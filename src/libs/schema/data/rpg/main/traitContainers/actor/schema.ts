@@ -54,3 +54,23 @@ const validater = ajv.compile(SCHEMA_DATA_ACTOR);
 export const isDataActor = (data: unknown): data is Data_Actor => {
   return validater(data);
 };
+
+export const normalizeDataActor = (data: Partial<Data_Actor>): Data_Actor => {
+  return {
+    name: data.name ?? "",
+    id: data.id ?? 0,
+    battlerName: data.battlerName ?? "",
+    characterName: data.characterName ?? "",
+    characterIndex: data.characterIndex ?? 0,
+    faceName: data.faceName ?? "",
+    faceIndex: data.faceIndex ?? 0,
+    traits: [],
+    note: data.note ?? "",
+    classId: data.classId ?? 0,
+    nickname: data.nickname ?? "",
+    profile: data.profile ?? "",
+    equips: [],
+    initialLevel: data.initialLevel ?? 0,
+    maxLevel: data.maxLevel ?? 0,
+  };
+};
