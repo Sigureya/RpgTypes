@@ -121,8 +121,7 @@ export type System_Me = Pick<
   "gameoverMe" | "defeatMe" | "victoryMe"
 >;
 
-export type System_AudioFiles = System_Bgm &
-  System_Me & { sounds: System_SoundsArray };
+export type System_AudioFiles = System_Bgm & System_Me;
 
 export type System_BoolanOptions = Pick<
   Data_System,
