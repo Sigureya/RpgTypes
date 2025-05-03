@@ -1,4 +1,4 @@
-import type { Data_Class } from "./class";
+import type { Data_Class } from "./types";
 export const makeClass = (data: Partial<Data_Class> = {}): Data_Class => ({
   name: data.name ?? "",
   id: data.id ?? 0,

@@ -1,14 +1,13 @@
-import type { ParamArray } from "../members";
-import type { Data_TraitContainer, Trait } from "../trait";
+import type { Data_TraitContainer, ParamArray, Trait } from "src/libs";
 import type { Learning } from "./leaning";
 
 export interface Data_Class extends Data_TraitContainer {
   name: string;
   id: number;
-  traits: Trait[];
   note: string;
 
+  expParams: number[];
   params: ParamArray;
   learnings: Learning[];
-  expParams: number[];
+  traits: Trait[];
 }

@@ -1,4 +1,4 @@
-import type { Data_TraitContainer, Trait } from "../trait";
+import type { Data_TraitContainer, Trait } from "src/libs";
 
 export interface Data_State extends Data_TraitContainer {
   name: string;
@@ -8,8 +8,6 @@ export interface Data_State extends Data_TraitContainer {
   message2: string;
   message3: string;
   message4: string;
-  traits: Trait[];
-  note: string;
 
   restriction: number;
   priority: number;
@@ -17,11 +15,14 @@ export interface Data_State extends Data_TraitContainer {
   overlay: number;
   removeAtBattleEnd: boolean;
   removeByRestriction: boolean;
+  removeByDamage: boolean;
+  removeByWalking: boolean;
+
   autoRemovalTiming: number;
   minTurns: number;
   maxTurns: number;
-  removeByDamage: boolean;
   chanceByDamage: number;
-  removeByWalking: boolean;
   stepsToRemove: number;
+  note: string;
+  traits: Trait[];
 }
