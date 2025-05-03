@@ -8,8 +8,8 @@ export interface Data_Armor extends Data_Equipment {
   description: string;
   iconIndex: number;
   price: number;
+  etypeId: number;
+  note: string;
   params: ParamArray;
   traits: Trait[];
-  note: string;
-  etypeId: number;
 }
