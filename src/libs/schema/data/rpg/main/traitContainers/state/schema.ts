@@ -1,4 +1,3 @@
-import type { Trait } from "../trait";
 import type { Data_State } from "./state";
 import type { JSONSchemaType } from "ajv";
 
@@ -68,6 +67,6 @@ export const SCHEMA_DATA_STATE = {
         },
         required: ["code", "dataId", "value"],
       },
-    } satisfies JSONSchemaType<Trait[]>,
+    } satisfies JSONSchemaType<Data_State["traits"]>,
   },
 } as const satisfies JSONSchemaType<Data_State>;

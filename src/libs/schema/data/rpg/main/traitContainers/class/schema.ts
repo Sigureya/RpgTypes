@@ -1,4 +1,4 @@
-import type { Data_Class, Learning } from "./types";
+import type { Data_Class } from "./types";
 import type { JSONSchemaType } from "ajv";
 
 export const SCHEMA_DATA_CLASS = {
