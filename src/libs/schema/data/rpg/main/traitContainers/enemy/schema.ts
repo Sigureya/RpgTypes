@@ -62,8 +62,8 @@ export const SCHEMA_DATA_ENEMY = {
           skillId: { type: "integer" },
           rating: { type: "integer" },
         },
-      } satisfies JSONSchemaType<Enemy_Action>,
-    },
+      },
+    } satisfies JSONSchemaType<Enemy_Action[]>,
 
     traits: {
       type: "array",
@@ -75,8 +75,8 @@ export const SCHEMA_DATA_ENEMY = {
           value: { type: "integer" },
         },
         required: ["code", "dataId", "value"],
-      } satisfies JSONSchemaType<Trait>,
-    },
+      },
+    } satisfies JSONSchemaType<Trait[]>,
 
     dropItems: {
       type: "array",
@@ -89,7 +89,7 @@ export const SCHEMA_DATA_ENEMY = {
           rate: { type: "number" },
         },
         required: ["kind", "dataId", "denominator"],
-      } satisfies JSONSchemaType<DropItem>,
-    },
+      },
+    } satisfies JSONSchemaType<DropItem[]>,
   },
 } as const satisfies JSONSchemaType<Data_Enemy>;

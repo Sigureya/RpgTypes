@@ -61,7 +61,7 @@ export const SCHEMA_DATA_WEAPON = {
           value: { type: "integer" },
         },
         required: ["code", "dataId", "value"],
-      } satisfies JSONSchemaType<Trait>,
-    },
+      },
+    } satisfies JSONSchemaType<Trait[]>,
   },
 } as const satisfies JSONSchemaType<Data_Weapon>;
