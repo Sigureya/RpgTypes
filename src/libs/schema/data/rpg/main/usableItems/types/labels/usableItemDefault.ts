@@ -1,5 +1,5 @@
 import type { DomainLabel } from "@RpgTypes/templates";
-import type { UsableItemLabels } from "./usableItemLables";
+import type { UsableItemLabels } from "./usableItemLabels";
 
 export const DEFAULT_USABLE_ITEM_LABELS = {
   domainName: "",
