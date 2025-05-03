@@ -1,4 +1,4 @@
-import type { Trait } from "./types";
+import type { Trait } from "./trait";
 
 export interface Data_TraitContainer {
   traits: Trait[];
