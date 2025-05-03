@@ -1,6 +1,5 @@
-import type { Data_Skill } from "./skill";
-import type { Data_Item } from "./item";
 import type { JSONSchemaType } from "ajv";
+import type { Data_Item, Data_Skill } from "./types";
 
 export const SCHEMA_SKILL = {
   type: "object",
