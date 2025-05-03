@@ -1,4 +1,4 @@
-import type { SourceIdentifier } from "@RpgTypes/schema/namedItemSource";
+import type { SourceIdentifier } from "src/libs";
 import {
   SRC_ARMOR_TYPES,
   SRC_DATA_SKILL,
@@ -11,7 +11,7 @@ import {
   SRC_TRAIT_PARTY_ABILITY,
   SRC_TRAIT_SPECIAL_FLAG,
   SRC_WEAPON_TYPES,
-} from "@RpgTypes/schema/namedItemSource";
+} from "src/libs";
 import type { RawTraitLabel, TraitLabelSet } from "./options";
 import { LABEL_SET_TRAIT } from "./options";
 import {
