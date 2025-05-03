@@ -38,6 +38,7 @@ export default defineConfig(({ mode }) => {
 
     resolve: {
       alias: {
+        "src/libs": path.resolve(__dirname, "./src/libs"),
         "@RpgTypes": path.resolve(__dirname, "./src/libs"),
       },
     },

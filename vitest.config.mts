@@ -1,5 +1,6 @@
 import { defineConfig } from "vitest/config";
 import path from "path";
+declare const __dirname: string;
 
 export default defineConfig({
   test: {
@@ -12,6 +13,7 @@ export default defineConfig({
   },
   resolve: {
     alias: {
+      "src/libs": path.resolve(__dirname, "./src/libs"),
       "@RpgTypes": path.resolve(__dirname, "./src/libs"),
     },
   },

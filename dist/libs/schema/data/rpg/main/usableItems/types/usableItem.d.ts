@@ -1,12 +1,7 @@
-import { Damage } from '../../../..';
+import { Damage } from '../../../../..';
 import { ItemEffect } from './itemEffect';
-import { Data_UsableItem } from './usableItem';
-export interface Data_Item extends Data_UsableItem {
-    name: string;
-    id: number;
+export interface Data_UsableItem {
     iconIndex: number;
-    price: number;
-    consumable: boolean;
     effects: ItemEffect[];
     damage: Damage;
     animationId: number;

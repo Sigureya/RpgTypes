@@ -1,9 +1,12 @@
-import { Damage } from '../../../..';
+import { Damage } from '../../../../..';
 import { ItemEffect } from './itemEffect';
-export interface Data_UsableItem {
+import { Data_UsableItem } from './usableItem';
+export interface Data_Item extends Data_UsableItem {
+    name: string;
+    id: number;
     iconIndex: number;
-    effects: ItemEffect[];
-    damage: Damage;
+    price: number;
+    consumable: boolean;
     animationId: number;
     hitType: number;
     occasion: number;
@@ -14,4 +17,6 @@ export interface Data_UsableItem {
     tpGain: number;
     description: string;
     note: string;
+    effects: ItemEffect[];
+    damage: Damage;
 }

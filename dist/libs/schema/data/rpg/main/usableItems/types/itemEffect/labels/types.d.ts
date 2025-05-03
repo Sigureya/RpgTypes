@@ -1,4 +1,4 @@
-import { SourceIdentifier } from '../../../../../..';
+import { SourceIdentifier } from '../../../../../../..';
 export interface EffectDefinitionResolved {
     codeId: number;
     label: string;

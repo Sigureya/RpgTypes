@@ -1,4 +1,4 @@
-import { Damage } from '../../../..';
+import { Damage } from '../../../../..';
 import { ItemEffect } from './itemEffect';
 import { Data_UsableItem } from './usableItem';
 export interface Data_Skill extends Data_UsableItem {
@@ -14,8 +14,6 @@ export interface Data_Skill extends Data_UsableItem {
     requiredWtypeId2: number;
     stypeId: number;
     tpCost: number;
-    effects: ItemEffect[];
-    damage: Damage;
     animationId: number;
     hitType: number;
     occasion: number;
@@ -25,4 +23,6 @@ export interface Data_Skill extends Data_UsableItem {
     successRate: number;
     tpGain: number;
     note: string;
+    effects: ItemEffect[];
+    damage: Damage;
 }

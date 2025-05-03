@@ -1,7 +1,7 @@
 import { ItemEffect } from './itemEffect';
 import { EffectDefinitionResolved, EffectLabelDefinition, ItemEffectLabelSet } from './labels';
 import { ItemEffectDescriptor } from './itemEffectDescriptor';
-import { DomainLabel } from '../../../../../../templates';
+import { DomainLabel } from '../../../../../../../templates';
 /**
  * @deprecated
  */
