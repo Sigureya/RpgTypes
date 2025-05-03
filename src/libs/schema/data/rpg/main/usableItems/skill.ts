@@ -9,6 +9,7 @@ export interface Data_Skill extends Data_UsableItem {
   iconIndex: number;
   message1: string;
   message2: string;
+
   messageType: number;
   mpCost: number;
   requiredWtypeId1: number;
@@ -16,8 +17,6 @@ export interface Data_Skill extends Data_UsableItem {
   stypeId: number;
   tpCost: number;
 
-  effects: ItemEffect[];
-  damage: Damage;
   animationId: number;
   hitType: number;
   occasion: number;
@@ -26,5 +25,9 @@ export interface Data_Skill extends Data_UsableItem {
   speed: number;
   successRate: number;
   tpGain: number;
+
   note: string;
+
+  effects: ItemEffect[];
+  damage: Damage;
 }
