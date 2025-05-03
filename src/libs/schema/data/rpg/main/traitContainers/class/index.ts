@@ -1,4 +1,2 @@
-export * from "./class";
-export * from "./classLabels";
+export * from "./types";
 export * from "./make";
-export * from "./leaning";
