@@ -15,15 +15,25 @@ import {
   SCHEMA_DATA_STATE,
   SCHEMA_DATA_WEAPON,
 } from "./traitContainers";
+import type { Data_Item, Data_Skill } from "./usableItems";
+import { SCHEMA_DATA_ITEM, SCHEMA_DATA_SKILL } from "./usableItems";
 const ajv = new Ajv();
-
+const item = ajv.compile(SCHEMA_DATA_ITEM);
+const skill = ajv.compile(SCHEMA_DATA_SKILL);
 const actor = ajv.compile(SCHEMA_DATA_ACTOR);
-
 const armor = ajv.compile(SCHEMA_DATA_ARMMOR);
 const weapon = ajv.compile(SCHEMA_DATA_WEAPON);
 const enemy = ajv.compile(SCHEMA_DATA_ENEMY);
 const state = ajv.compile(SCHEMA_DATA_STATE);
 const class_ = ajv.compile(SCHEMA_DATA_CLASS);
+
+export const isDataItem = (data: unknown): data is Data_Item => {
+  return item(data);
+};
+
+export const isDataSkill = (data: unknown): data is Data_Skill => {
+  return skill(data);
+};
 
 export const isDataActor = (data: unknown): data is Data_Actor => {
   return actor(data);
