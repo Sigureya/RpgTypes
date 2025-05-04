@@ -32,7 +32,8 @@ export default defineConfig(({ mode }) => {
       },
       sourcemap: true,
       rollupOptions: {
-        external: (id) => id.endsWith(".test.ts"),
+        external: (id) =>
+          id.endsWith(".test.ts") || ["ajv", "ajv-formats"].includes(id),
       },
     },
 
