@@ -48,13 +48,6 @@ export const SCHEMA_DATA_ACTOR = {
   },
 } as const satisfies JSONSchemaType<Data_Actor>;
 
-const ajv = new Ajv();
-const validater = ajv.compile(SCHEMA_DATA_ACTOR);
-
-export const isDataActor = (data: unknown): data is Data_Actor => {
-  return validater(data);
-};
-
 export const normalizeDataActor = (data: Partial<Data_Actor>): Data_Actor => {
   return {
     name: data.name ?? "",

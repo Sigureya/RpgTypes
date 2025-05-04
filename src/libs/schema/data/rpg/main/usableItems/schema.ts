@@ -1,7 +1,7 @@
 import type { JSONSchemaType } from "ajv";
 import type { Data_Item, Data_Skill } from "./types";
 
-export const SCHEMA_SKILL = {
+export const SCHEMA_DATA_SKILL = {
   type: "object",
   required: [
     "name",
@@ -85,7 +85,7 @@ export const SCHEMA_SKILL = {
   additionalProperties: false,
 } as const satisfies JSONSchemaType<Data_Skill>;
 
-export const SCHEMA_ITEM = {
+export const SCHEMA_DATA_ITEM = {
   type: "object",
   required: [
     "name",
