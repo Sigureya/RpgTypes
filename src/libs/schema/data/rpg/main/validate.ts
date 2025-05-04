@@ -17,6 +17,7 @@ import {
 } from "./traitContainers";
 import type { Data_Item, Data_Skill } from "./usableItems";
 import { SCHEMA_DATA_ITEM, SCHEMA_DATA_SKILL } from "./usableItems";
+
 const ajv = new Ajv();
 const item = ajv.compile(SCHEMA_DATA_ITEM);
 const skill = ajv.compile(SCHEMA_DATA_SKILL);
@@ -50,9 +51,11 @@ export const isDataWeapon = (data: unknown): data is Data_Weapon => {
 export const isDataEnemy = (data: unknown): data is Data_Enemy => {
   return enemy(data);
 };
+
 export const isDataState = (data: unknown): data is Data_State => {
   return state(data);
 };
+
 export const isDataClass = (data: unknown): data is Data_Class => {
   return class_(data);
 };
