@@ -53,7 +53,7 @@ export declare const SCHEMA_DATA_ENEMY: {
             type: "array";
             items: {
                 type: "object";
-                required: ("conditionParam1" | "conditionParam2" | "conditionType" | "skillId" | "rating")[];
+                required: ("skillId" | "conditionParam1" | "conditionParam2" | "conditionType" | "rating")[];
                 properties: {
                     conditionParam1: {
                         type: "integer";

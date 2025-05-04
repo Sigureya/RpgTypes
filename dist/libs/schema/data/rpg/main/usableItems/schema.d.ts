@@ -1,4 +1,4 @@
-export declare const SCHEMA_SKILL: {
+export declare const SCHEMA_DATA_SKILL: {
     readonly type: "object";
     readonly required: readonly ["name", "id", "description", "iconIndex", "message1", "message2", "messageType", "mpCost", "requiredWtypeId1", "requiredWtypeId2", "stypeId", "tpCost", "animationId", "hitType", "occasion", "repeats", "scope", "speed", "successRate", "tpGain", "note", "effects"];
     readonly properties: {
@@ -115,7 +115,7 @@ export declare const SCHEMA_SKILL: {
     };
     readonly additionalProperties: false;
 };
-export declare const SCHEMA_ITEM: {
+export declare const SCHEMA_DATA_ITEM: {
     readonly type: "object";
     readonly required: readonly ["name", "id", "description", "iconIndex", "note", "animationId", "hitType", "occasion", "repeats", "scope", "speed", "successRate", "tpGain", "consumable", "price", "effects"];
     readonly properties: {

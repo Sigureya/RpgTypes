@@ -73,5 +73,4 @@ export declare const SCHEMA_DATA_ACTOR: {
         };
     };
 };
-export declare const isDataActor: (data: unknown) => data is Data_Actor;
 export declare const normalizeDataActor: (data: Partial<Data_Actor>) => Data_Actor;

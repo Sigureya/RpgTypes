@@ -5,3 +5,4 @@ export * from './usableItems';
 export * from './defaultDataLabels';
 export * from './dataLabels';
 export * from './members';
+export * from './validate';

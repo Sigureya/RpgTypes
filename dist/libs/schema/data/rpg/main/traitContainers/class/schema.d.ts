@@ -55,7 +55,7 @@ export declare const SCHEMA_DATA_CLASS: {
                         type: "string";
                     };
                 };
-                required: ("skillId" | "level")[];
+                required: ("level" | "skillId")[];
                 additionalProperties: false;
             };
         };
