@@ -16,16 +16,16 @@ import type {
   Data_Weapon,
 } from "./traitContainers";
 import {
-  makeActor,
-  makeArmor,
-  makeClass,
-  makeEnemy,
-  makeState,
+  makeActorData,
+  makeArmorData,
+  makeClassData,
+  makeEnemyData,
+  makeStateData,
 } from "./traitContainers";
 
 describe("isDataActor", () => {
   test("Valid actor2", () => {
-    const actor: Data_Actor = makeActor();
+    const actor: Data_Actor = makeActorData();
     expect(isDataActor(actor)).toBe(true);
   });
   test("Valid actor", () => {
@@ -60,7 +60,7 @@ describe("isDataActor", () => {
 
 describe("isDataArmor", () => {
   test("Valid armor2", () => {
-    const armor: Data_Armor = makeArmor();
+    const armor: Data_Armor = makeArmorData();
     expect(isDataArmor(armor)).toBe(true);
   });
   test("Valid armor", () => {
@@ -121,7 +121,7 @@ describe("isDataWeapon", () => {
 
 describe("isDataEnemy", () => {
   test("Valid enemy2", () => {
-    const enemy: Data_Enemy = makeEnemy();
+    const enemy: Data_Enemy = makeEnemyData();
     expect(isDataEnemy(enemy)).toBe(true);
   });
   test("Valid enemy", () => {
@@ -171,7 +171,7 @@ describe("isDataEnemy", () => {
 
 describe("isDataState", () => {
   test("Valid state2", () => {
-    const state: Data_State = makeState();
+    const state: Data_State = makeStateData();
     expect(isDataState(state)).toBe(true);
   });
   test("Valid state", () => {
@@ -218,7 +218,7 @@ describe("isDataState", () => {
 
 describe("isDataClass", () => {
   test("Valid class2", () => {
-    const class_: Data_Class = makeClass();
+    const class_: Data_Class = makeClassData();
     expect(isDataClass(class_)).toBe(true);
   });
   test("Valid class", () => {

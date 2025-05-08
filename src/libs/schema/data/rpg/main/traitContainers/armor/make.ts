@@ -1,5 +1,5 @@
 import type { Data_Armor } from "./armor";
-export const makeArmor = (armor: Partial<Data_Armor> = {}): Data_Armor => ({
+export const makeArmorData = (armor: Partial<Data_Armor> = {}): Data_Armor => ({
   id: armor.id ?? 0,
   name: armor.name ?? "",
   iconIndex: armor.iconIndex ?? 0,

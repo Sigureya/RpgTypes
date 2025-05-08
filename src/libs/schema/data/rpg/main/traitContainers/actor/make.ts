@@ -1,6 +1,6 @@
 import type { Data_Actor } from "./actor";
 
-export const makeActor = (actor: Partial<Data_Actor> = {}): Data_Actor => ({
+export const makeActorData = (actor: Partial<Data_Actor> = {}): Data_Actor => ({
   name: actor.name ?? "",
   id: actor.id ?? 0,
   battlerName: actor.battlerName ?? "",
