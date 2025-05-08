@@ -1,6 +1,6 @@
 export const FILENAME_SYSTEM = "System.json";
 export const FILENAME_ACTORS = "Actors.json";
-export const FILANAME_CLASSES = "Classes.json";
+export const FILENAME_CLASSES = "Classes.json";
 export const FILENAME_SKILLS = "Skills.json";
 export const FILENAME_ITEMS = "Items.json";
 export const FILENAME_WEAPONS = "Weapons.json";
