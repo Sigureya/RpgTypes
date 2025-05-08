@@ -1,7 +1,7 @@
 import type { Data_Item, Data_Skill } from "@RpgTypes/schema";
 import { makeDamage } from "@RpgTypes/schema";
 
-export const makeItem = (item: Partial<Data_Item> = {}): Data_Item => ({
+export const makeItemData = (item: Partial<Data_Item> = {}): Data_Item => ({
   animationId: item.animationId ?? 0,
   id: item.id ?? 0,
   name: item.name ?? "",
@@ -22,7 +22,7 @@ export const makeItem = (item: Partial<Data_Item> = {}): Data_Item => ({
   price: 0,
 });
 
-export const makeSkill = (skill: Partial<Data_Skill> = {}): Data_Skill => ({
+export const makeSkillData = (skill: Partial<Data_Skill> = {}): Data_Skill => ({
   stypeId: skill.stypeId ?? 0,
   requiredWtypeId1: skill.requiredWtypeId1 ?? 0,
   requiredWtypeId2: skill.requiredWtypeId2 ?? 0,

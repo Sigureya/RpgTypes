@@ -1,5 +1,5 @@
 import type { Data_State } from "./state";
-export const makeState = (data: Partial<Data_State> = {}): Data_State => ({
+export const makeStateData = (data: Partial<Data_State> = {}): Data_State => ({
   name: data.name ?? "",
   id: data.id ?? 0,
   iconIndex: data.iconIndex ?? 0,
