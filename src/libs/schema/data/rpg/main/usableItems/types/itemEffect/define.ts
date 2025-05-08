@@ -1,6 +1,6 @@
 import type { SourceIdentifier } from "@RpgTypes/schema/";
 import {
-  SRC_COMMON_EVNET,
+  SRC_DATA_COMMON_EVNET,
   SRC_DATA_SKILL,
   SRC_DATA_STATE,
   SRC_PARAMS_REGULAR,
@@ -194,5 +194,5 @@ export const defineEffectCommonEvent = (
     EFFECT_COMMON_EVENT,
     LABEL_SET_ITEM_EFFECT.options.commonEvent,
     labels,
-    srcData(SRC_COMMON_EVNET)
+    srcData(SRC_DATA_COMMON_EVNET)
   );
