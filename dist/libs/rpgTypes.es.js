@@ -1420,7 +1420,7 @@ const Yo = (e) => [
       format: l
     }
   }
-}, Jt = 11, Zt = 12, en = 13, tn = 21, nn = 22, on = 31, an = 32, sn = 33, rn = 34, ia = 41, cn = 42, mn = 43, pn = 44, sa = 0, le = /^[a-zA-Z0-9]+$/, ra = (e) => le.test(e) ? e : void 0, N = (e) => typeof e == "string" ? le.test(e) : !1, ca = (e) => [e.author, e.module, e.kind].join("."), ma = (e) => N(e.author) && N(e.module) && N(e.kind), y = "params", ye = "xparams", ue = "sparams", Ie = "collaps", ge = "partyAbiility", Se = "sflag", pa = "actors", Ea = "variables", da = "map", _a = "enemy", u = "state", Ne = "skill", Aa = "items", Ta = "weapon", Ra = "armor", la = "class", En = "common_event", ya = "troop", ua = "colors", dn = "weaponTypes", _n = "armorTypes", Ia = "equipTypes", ga = "switches", Sa = "skillTypes", An = "elements", U = "{value1}", h = "{value2}", H = "{name}";
+}, Jt = 11, Zt = 12, en = 13, tn = 21, nn = 22, on = 31, an = 32, sn = 33, rn = 34, ia = 41, cn = 42, mn = 43, pn = 44, sa = 0, le = /^[a-zA-Z0-9]+$/, ra = (e) => le.test(e) ? e : void 0, N = (e) => typeof e == "string" ? le.test(e) : !1, ca = (e) => [e.author, e.module, e.kind].join("."), ma = (e) => N(e.author) && N(e.module) && N(e.kind), y = "params", ye = "xparams", ue = "sparams", Ie = "collaps", ge = "partyAbiility", Se = "sflag", pa = "actor", Ea = "variables", da = "map", _a = "enemy", u = "state", Ne = "skill", Aa = "items", Ta = "weapon", Ra = "armor", la = "class", En = "common_event", ya = "troop", ua = "colors", dn = "weaponTypes", _n = "armorTypes", Ia = "equipTypes", ga = "switches", Sa = "skillTypes", An = "elements", U = "{value1}", h = "{value2}", H = "{name}";
 class Tn {
   constructor(t, n, o, c, d) {
     this.codeId = t, this.label = n, this.format = o, this.description = c, this.dataSource = d;
@@ -2070,15 +2070,16 @@ export {
   ae as SPECIAL_PARAM_TGR,
   _n as SRC_ARMOR_TYPES,
   ua as SRC_COLOR,
-  En as SRC_COMMON_EVNET,
   pa as SRC_DATA_ACTOR,
   Ra as SRC_DATA_ARMOR,
   la as SRC_DATA_CLASS,
+  En as SRC_DATA_COMMON_EVNET,
   _a as SRC_DATA_ENEMY,
   Aa as SRC_DATA_ITEMS,
   da as SRC_DATA_MAP,
   Ne as SRC_DATA_SKILL,
   u as SRC_DATA_STATE,
+  ya as SRC_DATA_TROOP,
   Ea as SRC_DATA_VARIABLE,
   Ta as SRC_DATA_WEAPON,
   An as SRC_ELEMENTS,
@@ -2091,7 +2092,6 @@ export {
   Ie as SRC_TRAIT_COLLAPS,
   ge as SRC_TRAIT_PARTY_ABILITY,
   Se as SRC_TRAIT_SPECIAL_FLAG,
-  ya as SRC_TROOP,
   dn as SRC_WEAPON_TYPES,
   es as STOP_SE,
   qi as TINT_PICTURE,

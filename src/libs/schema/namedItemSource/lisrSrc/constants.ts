@@ -5,7 +5,7 @@ export const SRC_TRAIT_COLLAPS = "collaps" as const;
 export const SRC_TRAIT_PARTY_ABILITY = "partyAbiility" as const;
 export const SRC_TRAIT_SPECIAL_FLAG = "sflag";
 
-export const SRC_DATA_ACTOR = "actors" as const;
+export const SRC_DATA_ACTOR = "actor" as const;
 export const SRC_DATA_VARIABLE = "variables" as const;
 export const SRC_DATA_MAP = "map" as const;
 export const SRC_DATA_ENEMY = "enemy" as const;
@@ -15,8 +15,8 @@ export const SRC_DATA_ITEMS = "items" as const;
 export const SRC_DATA_WEAPON = "weapon" as const;
 export const SRC_DATA_ARMOR = "armor" as const;
 export const SRC_DATA_CLASS = "class" as const;
-export const SRC_COMMON_EVNET = "common_event" as const;
-export const SRC_TROOP = "troop" as const;
+export const SRC_DATA_COMMON_EVNET = "common_event" as const;
+export const SRC_DATA_TROOP = "troop" as const;
 export const SRC_COLOR = "colors" as const;
 
 export const SRC_WEAPON_TYPES = "weaponTypes" as const;
