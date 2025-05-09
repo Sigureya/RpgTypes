@@ -1,5 +1,4 @@
 import type { MapEvent_PageCondition } from "./condition";
-import { DIRECTION } from "./eventCommand";
 import type { MapEvent } from "./mapEvent";
 import type { MapEvent_Image, MapEventPage } from "./page";
 
@@ -18,7 +17,7 @@ export const makeMapEventIamge = (): MapEvent_Image => {
   return {
     characterIndex: 0,
     characterName: "",
-    direction: DIRECTION.DOWN,
+    direction: 2,
     pattern: 0,
     tileId: 0,
   };
