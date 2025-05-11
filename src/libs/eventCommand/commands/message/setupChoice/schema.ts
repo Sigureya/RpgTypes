@@ -12,7 +12,7 @@ export const SCHEMA_COMMAND_SHOW_CHOICE_ITEM = {
       minItems: 2,
       maxItems: 2,
       items: [
-        { type: "number" }, // index
+        { type: "integer" }, // index
         { type: "string" }, // name
       ],
     },
