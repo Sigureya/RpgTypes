@@ -13,3 +13,13 @@ export interface MapEvent_PageCondition {
   actorId: number;
   actorValid: boolean;
 }
+
+export interface PageConditionArg {
+  switch1Id: number;
+  switch2Id: number;
+  variableId: number;
+  variableValue: number;
+  selfSwitchCh: string;
+  itemId: number;
+  actorId: number;
+}
