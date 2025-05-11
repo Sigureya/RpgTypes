@@ -1,3 +1,3 @@
 export * from "./make";
-export * from "./types";
 export * from "./schema";
+export * from "./types";
