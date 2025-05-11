@@ -6,13 +6,13 @@ export const SCHEMA_COMMAND_SHOW_CHOICE_ITEM = {
   type: "object",
   properties: {
     code: { type: "number", const: 402 },
-    indent: { type: "number" },
+    indent: { type: "integer", minimum: 0 },
     parameters: {
       type: "array",
       minItems: 2,
       maxItems: 2,
       items: [
-        { type: "number" }, // index
+        { type: "integer" }, // index
         { type: "string" }, // name
       ],
     },
@@ -20,21 +20,21 @@ export const SCHEMA_COMMAND_SHOW_CHOICE_ITEM = {
   required: ["code", "indent", "parameters"],
 } as const satisfies JSONSchemaType<Command2_ShowChoiceItem>;
 
-export const SCEHEMA_COMMAND_SHOW_CHOICES = {
+export const SCHEMA_COMMAND_SHOW_CHOICES = {
   type: "object",
   properties: {
     code: { type: "number", const: 102 },
-    indent: { type: "number" },
+    indent: { type: "integer", minimum: 0 },
     parameters: {
       type: "array",
       minItems: 5,
       maxItems: 5,
       items: [
         { type: "array", items: { type: "string" } }, // choices
-        { type: "number" }, // cancelType
-        { type: "number" }, // defaultType
-        { type: "number" }, // positionType
-        { type: "number" }, // background
+        { type: "integer" }, // cancelType
+        { type: "integer" }, // defaultType
+        { type: "integer" }, // positionType
+        { type: "integer" }, // background
       ],
     },
   },

@@ -5,7 +5,7 @@ export const SCHEMA_COMMAND_INPUT_NUMBER = {
   type: "object",
   properties: {
     code: { type: "number", const: 103 },
-    indent: { type: "number" },
+    indent: { type: "integer", minimum: 0 },
     parameters: {
       type: "array",
       minItems: 2,

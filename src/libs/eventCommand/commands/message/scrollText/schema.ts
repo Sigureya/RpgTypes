@@ -5,7 +5,7 @@ export const SCHEMA_COMMAND_SCROLL_TEXT_HEAD = {
   type: "object",
   properties: {
     code: { type: "number", const: 105 },
-    indent: { type: "number" },
+    indent: { type: "integer", minimum: 0 },
     parameters: {
       type: "array",
       minItems: 2,
@@ -23,7 +23,7 @@ export const SCHEMA_COMMAND_SCROLL_TEXT_BODY = {
   type: "object",
   properties: {
     code: { type: "number", const: 405 },
-    indent: { type: "number" },
+    indent: { type: "integer", minimum: 0 },
     parameters: {
       type: "array",
       minItems: 1,
