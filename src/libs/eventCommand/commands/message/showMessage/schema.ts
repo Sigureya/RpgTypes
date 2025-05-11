@@ -12,7 +12,7 @@ export const SCHEMA_COMMAND_SHOW_MESSAGE = {
       type: "array",
       items: [
         { type: "string" }, // facename
-        { type: "integer", minimum: 0 }, // faceIndex
+        { type: "integer", minimum: 0, maximum: 7 }, // faceIndex
         { type: "integer", minimum: 0, maximum: 2 }, // background
         { type: "integer", minimum: 0, maximum: 2 }, // positionType
         { type: "string" }, // speakerName
