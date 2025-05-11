@@ -1,4 +1,4 @@
-import type { MapEvent_PageCondition } from "./condition";
+import type { MapEvent_PageCondition, PageConditionArg } from "./condition";
 import type { MapEvent } from "./mapEvent";
 import type { MapEvent_Image, MapEventPage } from "./page";
 
@@ -23,21 +23,23 @@ export const makeMapEventIamge = (): MapEvent_Image => {
   };
 };
 
-export const makeEventPageCondition = (): MapEvent_PageCondition => {
+export const makeEventPageCondition = (
+  arg: Partial<PageConditionArg> = {}
+): MapEvent_PageCondition => {
   return {
-    actorId: 1,
-    itemId: 1,
-    selfSwitchCh: "A",
-    selfSwitchValid: false,
-    switch1Id: 1,
-    switch2Id: 1,
-    variableId: 1,
-    variableValue: 0,
-    actorValid: false,
-    itemValid: false,
-    switch1Valid: false,
-    switch2Valid: false,
-    variableValid: false,
+    switch1Id: arg.switch1Id ?? 0,
+    switch1Valid: arg.switch1Id !== undefined,
+    switch2Id: arg.switch2Id ?? 0,
+    switch2Valid: arg.switch2Id !== undefined,
+    variableId: arg.variableId ?? 0,
+    variableValid: arg.variableId !== undefined,
+    variableValue: arg.variableValue ?? 0,
+    selfSwitchCh: arg.selfSwitchCh ?? "A",
+    selfSwitchValid: arg.selfSwitchCh !== undefined,
+    itemId: arg.itemId ?? 0,
+    itemValid: arg.itemId !== undefined,
+    actorId: arg.actorId ?? 0,
+    actorValid: arg.actorId !== undefined,
   };
 };
 
