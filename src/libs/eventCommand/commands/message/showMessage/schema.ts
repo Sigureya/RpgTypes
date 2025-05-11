@@ -1,8 +1,6 @@
 import type { JSONSchemaType } from "ajv";
 import type { Command2_ShowMessage } from "./types";
 
-export const SHOW_MESSAGE = 101 as const;
-
 export const SCHEMA_COMMAND_SHOW_MESSAGE = {
   type: "object",
   required: ["code", "parameters", "indent"],

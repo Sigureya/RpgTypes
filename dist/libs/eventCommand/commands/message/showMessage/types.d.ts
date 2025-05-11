@@ -1,4 +1,4 @@
-import { EventCommandLike2 } from '../frame';
+import { EventCommandLike2 } from '../../../frame';
 export type ParamArray_ShowMessage = [
     facename: string,
     faceIndex: number,

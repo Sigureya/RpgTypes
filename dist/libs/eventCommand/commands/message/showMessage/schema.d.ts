@@ -1,4 +1,3 @@
-export declare const SHOW_MESSAGE: 101;
 export declare const SCHEMA_COMMAND_SHOW_MESSAGE: {
     readonly type: "object";
     readonly required: readonly ["code", "parameters", "indent"];
@@ -7,6 +6,10 @@ export declare const SCHEMA_COMMAND_SHOW_MESSAGE: {
             readonly type: "integer";
             readonly enum: readonly [101];
         };
+        readonly indent: {
+            readonly type: "integer";
+            readonly minimum: 0;
+        };
         readonly parameters: {
             readonly type: "array";
             readonly items: readonly [{
@@ -14,6 +17,7 @@ export declare const SCHEMA_COMMAND_SHOW_MESSAGE: {
             }, {
                 readonly type: "integer";
                 readonly minimum: 0;
+                readonly maximum: 7;
             }, {
                 readonly type: "integer";
                 readonly minimum: 0;
@@ -27,11 +31,6 @@ export declare const SCHEMA_COMMAND_SHOW_MESSAGE: {
             }];
             readonly minItems: 5;
             readonly maxItems: 5;
-        };
-        readonly indent: {
-            readonly type: "integer";
-            readonly minimum: 0;
-            readonly maximum: 2;
         };
     };
 };
