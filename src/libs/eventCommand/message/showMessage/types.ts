@@ -1,4 +1,4 @@
-import type { EventCommandLike2 } from "../frame";
+import type { EventCommandLike2 } from "@RpgTypes/eventCommand/frame";
 
 export type ParamArray_ShowMessage = [
   facename: string,
