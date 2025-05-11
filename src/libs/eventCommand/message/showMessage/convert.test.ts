@@ -1,12 +1,12 @@
 import { describe, test, expect } from "vitest";
-import { ShowMssageConverter } from "./convert";
+import { CommandShowMessage } from "./convert";
 import type { ParamArray_ShowMessage, ParamObject_ShowMessage } from "./types";
 
 describe("ShowMessageConverter", () => {
   test("fromArray", () => {
     const arrayParam: ParamArray_ShowMessage = ["message", 2, 3, 4, "speaker"];
     const result: ParamObject_ShowMessage =
-      ShowMssageConverter.fromArray(arrayParam);
+      CommandShowMessage.fromArray(arrayParam);
     expect(result).toEqual({
       facename: "message",
       faceIndex: 2,
@@ -24,7 +24,7 @@ describe("ShowMessageConverter", () => {
       speakerName: "speaker",
     };
     const result: ParamArray_ShowMessage =
-      ShowMssageConverter.toArray(objectParam);
+      CommandShowMessage.toArray(objectParam);
     expect(result).toEqual(["message", 2, 3, 4, "speaker"]);
   });
 });
