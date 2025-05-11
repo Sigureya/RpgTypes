@@ -1,4 +1,4 @@
-import type { EventCommandLike2 } from "@RpgTypes/eventCommand/frame";
+import type { EventCommandLike2 } from "@RpgTypes/eventCommand";
 
 export type ParamArray_ScrollTextHead = [speed: number, skip: boolean];
 export interface ParamObject_ScrollTextHead {

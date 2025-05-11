@@ -1,4 +1,4 @@
-import type { EventCommandLike2 } from "@RpgTypes/eventCommand/frame";
+import type { EventCommandLike2 } from "@RpgTypes/eventCommand";
 
 export type ParamArray_SetupChoice = [
   choices: string[],
