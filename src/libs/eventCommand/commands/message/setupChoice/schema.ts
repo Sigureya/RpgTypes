@@ -6,7 +6,7 @@ export const SCHEMA_COMMAND_SHOW_CHOICE_ITEM = {
   type: "object",
   properties: {
     code: { type: "number", const: 402 },
-    indent: { type: "number" },
+    indent: { type: "integer", minimum: 0 },
     parameters: {
       type: "array",
       minItems: 2,

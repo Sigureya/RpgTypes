@@ -5,7 +5,7 @@ export const SCHEMA_COMMAND_CALL_COMMON_EVENT = {
   type: "object",
   properties: {
     code: { type: "number", const: 117 },
-    indent: { type: "number" },
+    indent: { type: "integer", minimum: 0 },
     parameters: {
       type: "array",
       minItems: 1,

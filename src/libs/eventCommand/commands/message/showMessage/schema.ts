@@ -8,6 +8,7 @@ export const SCHEMA_COMMAND_SHOW_MESSAGE = {
   required: ["code", "parameters", "indent"],
   properties: {
     code: { type: "integer", enum: [101] },
+    indent: { type: "integer", minimum: 0 },
     parameters: {
       type: "array",
       items: [
@@ -21,6 +22,5 @@ export const SCHEMA_COMMAND_SHOW_MESSAGE = {
       minItems: 5,
       maxItems: 5,
     },
-    indent: { type: "integer", minimum: 0, maximum: 2 },
   },
 } as const satisfies JSONSchemaType<Command2_ShowMessage>;
