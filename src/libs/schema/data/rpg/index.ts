@@ -6,3 +6,5 @@ export * from "./animation";
 export * from "./tileset";
 export * from "./system";
 export * from "./note";
+export * from "./dataToCtrlChar";
+export * from "./controlChars";
