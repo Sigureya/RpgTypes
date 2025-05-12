@@ -108,9 +108,10 @@ describe("readNote", () => {
     });
 
     describe("異常系", () => {
-      test("不完全なタグを含む文字列の場合は無視する", () => {});
-      const result = readNote("<name");
-      expect(result).toEqual([]);
+      test("不完全なタグを含む文字列の場合は無視する", () => {
+        const result = readNote("<name");
+        expect(result).toEqual([]);
+      });
     });
   });
 });
