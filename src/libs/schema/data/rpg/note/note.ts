@@ -36,10 +36,13 @@ export const replaceNote = (
   note: string,
   transformFunction: (key: string, value: string) => string
 ): string => {
-  return note.replace(makeRegex(), (_subString, key: string, value: string) => {
-    const newText = transformFunction(key, value);
-    return createNoteEntity(key, newText);
-  });
+  return note.replaceAll(
+    makeRegex(),
+    (_subString, key: string, value: string) => {
+      const newText = transformFunction(key, value);
+      return createNoteEntity(key, newText);
+    }
+  );
 };
 
 export const getNoteValue = (
@@ -60,7 +63,7 @@ export const setNoteValue = (
 ): string => {
   const regex = makeRegex();
 
-  return note.replace(regex, (match, key: string) => {
+  return note.replaceAll(regex, (match, key: string) => {
     if (key === targetKey) {
       return createNoteEntity(key, newValue); // 対象キーの場合のみ値を差し替え
     }
