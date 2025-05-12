@@ -21,9 +21,14 @@ describe("createNoteEntity", () => {
 
 describe("makeRegex", () => {
   describe("Normal cases", () => {
+    const regex = makeRegex();
     test("Generates a regular expression object", () => {
-      const regex = makeRegex();
       expect(regex).toBeInstanceOf(RegExp);
+    });
+    test("Matches the expected pattern", () => {
+      expect("<key:value>").toMatch(regex);
+      expect(exampleNoteTokyo).toMatch(regex);
+      expect(exampleNoteSaitama).toMatch(regex);
     });
   });
 });
