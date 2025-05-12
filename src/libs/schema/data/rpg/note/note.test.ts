@@ -7,13 +7,12 @@ import {
   readNoteObject,
 } from "./note";
 
-// テスト用のデータ
 const exampleNoteTokyo = "<code:13><name:tokyo>";
 const exampleNoteSaitama = "<code:11><name:saitama>";
 
 describe("createNoteEntity", () => {
-  describe("正常系", () => {
-    test("指定されたキーと値で文字列を生成する", () => {
+  describe("Normal cases", () => {
+    test("Generates a string with the specified key and value", () => {
       const result = createNoteEntity("key", "value");
       expect(result).toBe("<key:value>");
     });
@@ -21,8 +20,8 @@ describe("createNoteEntity", () => {
 });
 
 describe("makeRegex", () => {
-  describe("正常系", () => {
-    test("正規表現オブジェクトを生成する", () => {
+  describe("Normal cases", () => {
+    test("Generates a regular expression object", () => {
       const regex = makeRegex();
       expect(regex).toBeInstanceOf(RegExp);
     });
@@ -30,8 +29,8 @@ describe("makeRegex", () => {
 });
 
 describe("readNoteObject", () => {
-  describe("正常系", () => {
-    test("note文字列を解析し、キーと値のペアを取得する", () => {
+  describe("Normal cases", () => {
+    test("Parses the note string and retrieves key-value pairs", () => {
       const result = readNoteObject(
         { note: exampleNoteTokyo },
         (key, value) => [key, value]
@@ -42,7 +41,7 @@ describe("readNoteObject", () => {
       ]);
     });
 
-    test("mockのfnを使用してカスタム処理を行う", () => {
+    test("Performs custom processing using a mock function", () => {
       const mockFn = vi.fn((key: string, value: string) => {
         return { key, value };
       });
@@ -58,7 +57,7 @@ describe("readNoteObject", () => {
       expect(mockFn.mock.calls[1]).toEqual(["name", "tokyo", mockData]);
     });
 
-    test("空文字列を渡しても結果が空配列になる", () => {
+    test("Returns an empty array when an empty string is passed", () => {
       const mockFn = vi.fn((key: string, value: string) => {
         return { key, value };
       });
@@ -67,7 +66,7 @@ describe("readNoteObject", () => {
       expect(mockFn).not.toBeCalled();
     });
 
-    test("タグがない場合は空配列になる", () => {
+    test("Returns an empty array when there are no tags", () => {
       const result = readNoteObject({ note: "test" }, (key, value) => [
         key,
         value,
@@ -78,8 +77,8 @@ describe("readNoteObject", () => {
 });
 
 describe("readNote", () => {
-  describe("正常系", () => {
-    test("note文字列を解析し、キーと値のペアを取得する", () => {
+  describe("Normal cases", () => {
+    test("Parses the note string and retrieves key-value pairs", () => {
       const result = readNote(exampleNoteTokyo);
       expect(result).toEqual([
         ["code", "13"],
@@ -92,23 +91,24 @@ describe("readNote", () => {
         ["name", "saitama"],
       ]);
     });
-    test("不完全なタグが混在している場合、正常な部分だけを読み取る", () => {
+
+    test("Reads only valid parts when incomplete tags are mixed", () => {
       const result = readNote("<code:13><name:tok");
       expect(result).toEqual([["code", "13"]]);
     });
 
-    test("空文字列を渡しても結果が空配列になる", () => {
+    test("Returns an empty array when an empty string is passed", () => {
       const result = readNote("");
       expect(result).toEqual([]);
     });
 
-    test("タグがない場合は空配列になる", () => {
+    test("Returns an empty array when there are no tags", () => {
       const result = readNote("test");
       expect(result).toEqual([]);
     });
 
-    describe("異常系", () => {
-      test("不完全なタグを含む文字列の場合は無視する", () => {
+    describe("Error cases", () => {
+      test("Ignores incomplete tags in the string", () => {
         const result = readNote("<name");
         expect(result).toEqual([]);
       });
@@ -121,28 +121,29 @@ describe("replaceNote", () => {
     if (key === "name") {
       return value.toUpperCase();
     }
-    // それ以外はそのまま返す
+    // Return the value as is for other keys
     return value;
   };
 
-  describe("正常系", () => {
-    test("辞書関数を使用して値を置き換える", () => {
+  describe("Normal cases", () => {
+    test("Replaces values using a dictionary function", () => {
       const result = replaceNote(exampleNoteTokyo, mockDictionary);
       expect(result).toBe("<code:13><name:TOKYO>");
     });
 
-    test("空文字列でもエラーにならない", () => {
+    test("Does not throw an error for an empty string", () => {
       const result = replaceNote("", mockDictionary);
       expect(result).toBe("");
     });
   });
 
-  //   describe("異常系", () => {
-  //     it("辞書関数が不正でもエラーをスローしない", () => {
-  //       const result = replaceNote(exampleNoteTokyo, () => {
-  //         throw new Error("辞書関数のエラー");
-  //       });
-  //       expect(result).toBe(exampleNoteTokyo);
+  // Uncomment and modify if needed
+  // describe("Error cases", () => {
+  //   test("Does not throw an error even if the dictionary function is invalid", () => {
+  //     const result = replaceNote(exampleNoteTokyo, () => {
+  //       throw new Error("Dictionary function error");
   //     });
+  //     expect(result).toBe(exampleNoteTokyo);
   //   });
+  // });
 });
