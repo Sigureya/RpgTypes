@@ -1,7 +1,7 @@
 import type { AudioFileParams } from "./audioFileParams";
 
 export const makeAudioFileParams = (
-  audioFileParams: Partial<AudioFileParams>
+  audioFileParams: Partial<AudioFileParams> = {}
 ): AudioFileParams => {
   return {
     name: audioFileParams.name ?? "",
