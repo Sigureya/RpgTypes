@@ -1,5 +1,6 @@
 import { describe, test, expect } from "vitest";
 import {
+  isCommandAudio,
   isCommandCommonEvent,
   isCommandInputNumber,
   isCommandShowChoiceItem,
@@ -7,6 +8,7 @@ import {
   isCommandShowMessage,
 } from "./validate";
 import * as Command from "./commands";
+import type { AudioFileParams } from "@RpgTypes/utils";
 describe("isCommandCommonEvent", () => {
   test("Valid command", () => {
     const command: Command.Command2_CommonEvent =
@@ -82,5 +84,40 @@ describe("isCommandShowMessage", () => {
   test("Invalid command", () => {
     const invalidCommand = { code: "INVALID_CODE" };
     expect(isCommandShowMessage(invalidCommand)).toBe(false);
+  });
+});
+
+describe("isCommandAudio", () => {
+  const MockAudio: AudioFileParams = {
+    name: "test",
+    volume: 100,
+    pitch: 100,
+    pan: 0,
+  };
+  test("Play BGM", () => {
+    const command: Command.Command_PlayBGM =
+      Command.makeCommandPlayBGM(MockAudio);
+
+    expect(isCommandAudio(command)).toBe(true);
+  });
+  test("Play BGS", () => {
+    const command: Command.Command_PlayBGS =
+      Command.makeCommandPlayBGS(MockAudio);
+    expect(isCommandAudio(command)).toBe(true);
+  });
+  test("Play ME", () => {
+    const command: Command.Command_PlayME =
+      Command.makeCommandPlayME(MockAudio);
+    expect(isCommandAudio(command)).toBe(true);
+  });
+  test("Play SE", () => {
+    const command: Command.Command_PlaySE =
+      Command.makeCommandPlaySE(MockAudio);
+    expect(isCommandAudio(command)).toBe(true);
+  });
+  test("Change Battle BGM", () => {
+    const command: Command.Command_ChangeBattleBGM =
+      Command.makeCommandChangeBattleBGM(MockAudio);
+    expect(isCommandAudio(command)).toBe(true);
   });
 });

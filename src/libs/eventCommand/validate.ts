@@ -5,6 +5,7 @@ import type {
   Command2_ShowChoiceItem,
   Command2_InputNumber,
   Command2_ShowMessage,
+  CommandUnion_AnyAudio,
 } from "./commands";
 import {
   SCHEMA_COMMAND_CALL_COMMON_EVENT,
@@ -12,6 +13,7 @@ import {
   SCHEMA_COMMAND_SHOW_CHOICES,
   SCHEMA_COMMAND_SHOW_CHOICE_ITEM,
   SCHEMA_COMMAND_INPUT_NUMBER,
+  SCHEMA_COMMAND_ANY_AUDIO,
 } from "./commands";
 const ajv = new Ajv();
 
@@ -23,6 +25,13 @@ const showChoices = ajv.compile(SCHEMA_COMMAND_SHOW_CHOICES);
 const showChoiceItem = ajv.compile(SCHEMA_COMMAND_SHOW_CHOICE_ITEM);
 
 const inputNumber = ajv.compile(SCHEMA_COMMAND_INPUT_NUMBER);
+const audioCommand = ajv.compile(SCHEMA_COMMAND_ANY_AUDIO);
+
+export const isCommandAudio = (
+  data: unknown
+): data is CommandUnion_AnyAudio => {
+  return audioCommand(data);
+};
 
 export const isCommandCommonEvent = (
   data: unknown
