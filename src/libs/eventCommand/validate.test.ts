@@ -95,28 +95,28 @@ describe("isCommandAudio", () => {
     pan: 0,
   };
   test("Play BGM", () => {
-    const command: Command.Command_PlayBGM =
+    const command: Command.Command2_PlayBGM =
       Command.makeCommandPlayBGM(MockAudio);
 
     expect(isCommandAudio(command)).toBe(true);
   });
   test("Play BGS", () => {
-    const command: Command.Command_PlayBGS =
+    const command: Command.Command2_PlayBGS =
       Command.makeCommandPlayBGS(MockAudio);
     expect(isCommandAudio(command)).toBe(true);
   });
   test("Play ME", () => {
-    const command: Command.Command_PlayME =
+    const command: Command.Command2_PlayME =
       Command.makeCommandPlayME(MockAudio);
     expect(isCommandAudio(command)).toBe(true);
   });
   test("Play SE", () => {
-    const command: Command.Command_PlaySE =
+    const command: Command.Command2_PlaySE =
       Command.makeCommandPlaySE(MockAudio);
     expect(isCommandAudio(command)).toBe(true);
   });
   test("Change Battle BGM", () => {
-    const command: Command.Command_ChangeBattleBGM =
+    const command: Command.Command2_ChangeBattleBGM =
       Command.makeCommandChangeBattleBGM(MockAudio);
     expect(isCommandAudio(command)).toBe(true);
   });

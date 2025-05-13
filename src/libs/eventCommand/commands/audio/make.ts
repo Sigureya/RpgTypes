@@ -1,12 +1,12 @@
 import { makeAudioFileParams, type AudioFileParams } from "@RpgTypes/utils";
 import type {
-  Command_PlayBGM,
-  Command_PlayBGS,
-  Command_PlayME,
-  Command_PlaySE,
+  Command2_PlayBGM,
+  Command2_PlayBGS,
+  Command2_PlayME,
+  Command2_PlaySE,
   Command2_ChangeDefeatME,
   Command2_ChangeVictoryME,
-  Command_ChangeBattleBGM,
+  Command2_ChangeBattleBGM,
   CommandUnion_AnyAudio,
 } from "./types";
 import {
@@ -34,27 +34,27 @@ export const makeCommandAudioAny = <Code extends CommandUnion_AnyAudio["code"]>(
 export const makeCommandPlayBGM = (
   audio: AudioFileParams,
   indent: number = 0
-): Command_PlayBGM => makeCommandAudioAny(PLAY_BGM, audio, indent);
+): Command2_PlayBGM => makeCommandAudioAny(PLAY_BGM, audio, indent);
 
 export const makeCommandPlayBGS = (
   audio: AudioFileParams,
   indent: number = 0
-): Command_PlayBGS => makeCommandAudioAny(PLAY_BGS, audio, indent);
+): Command2_PlayBGS => makeCommandAudioAny(PLAY_BGS, audio, indent);
 
 export const makeCommandPlayME = (
   audio: AudioFileParams,
   indent: number = 0
-): Command_PlayME => makeCommandAudioAny(PLAY_ME, audio, indent);
+): Command2_PlayME => makeCommandAudioAny(PLAY_ME, audio, indent);
 
 export const makeCommandPlaySE = (
   audio: AudioFileParams,
   indent: number = 0
-): Command_PlaySE => makeCommandAudioAny(PLAY_SE, audio, indent);
+): Command2_PlaySE => makeCommandAudioAny(PLAY_SE, audio, indent);
 
 export const makeCommandChangeBattleBGM = (
   audio: AudioFileParams,
   indent: number = 0
-): Command_ChangeBattleBGM =>
+): Command2_ChangeBattleBGM =>
   makeCommandAudioAny(CHANGE_BATTLE_BGM, audio, indent);
 
 export const makeCommandChangeVictoryME = (
