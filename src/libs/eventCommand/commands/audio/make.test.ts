@@ -11,6 +11,8 @@ import {
 } from "./make";
 import {
   CHANGE_BATTLE_BGM,
+  CHANGE_DEFEAT_ME,
+  CHANGE_VICTORY_ME,
   PLAY_BGM,
   PLAY_BGS,
   PLAY_ME,
@@ -73,6 +75,26 @@ describe("makeCommandChangeBattleBGM", () => {
     const audio = { name: "battle_bgm_test", volume: 80, pitch: 100, pan: 0 };
     const command = makeCommandChangeBattleBGM(audio, 1);
     expect(command.code).toBe(CHANGE_BATTLE_BGM);
+    expect(command.parameters).toEqual([audio]);
+    expect(command.parameters[0]).not.toBe(audio);
+  });
+});
+
+describe("makeCommandChangeVictoryME", () => {
+  test("should create a Change Victory ME command", () => {
+    const audio = { name: "victory_me_test", volume: 80, pitch: 100, pan: 0 };
+    const command = makeCommandChangeVictoryME(audio, 1);
+    expect(command.code).toBe(CHANGE_VICTORY_ME);
+    expect(command.parameters).toEqual([audio]);
+    expect(command.parameters[0]).not.toBe(audio);
+  });
+});
+
+describe("makeCommandChangeDefeatME", () => {
+  test("should create a Change Defeat ME command", () => {
+    const audio = { name: "defeat_me_test", volume: 80, pitch: 100, pan: 0 };
+    const command = makeCommandChangeDefeatME(audio, 1);
+    expect(command.code).toBe(CHANGE_DEFEAT_ME);
     expect(command.parameters).toEqual([audio]);
     expect(command.parameters[0]).not.toBe(audio);
   });
