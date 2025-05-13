@@ -1,0 +1,65 @@
+import type { Terms_Messages } from "./types";
+
+const validate = (msg: unknown, fallback: string): string => {
+  return typeof msg === "string" ? msg : fallback;
+};
+
+export const makeTermsMessages = (
+  msg: Partial<Terms_Messages>
+): Terms_Messages => {
+  return {
+    actionFailure: validate(msg.actionFailure, "Action failed."),
+    actorDamage: validate(msg.actorDamage, "%1 took %2 damage."),
+    actorRecovery: validate(msg.actorRecovery, "%1 recovered %2 HP."),
+    actorGain: validate(msg.actorGain, "%1 gained %2."),
+    actorLoss: validate(msg.actorLoss, "%1 lost %2."),
+    actorDrain: validate(msg.actorDrain, "%1 drained %2 HP."),
+    actorNoDamage: validate(msg.actorNoDamage, "%1 was not damaged."),
+    actorNoHit: validate(msg.actorNoHit, "%1 was not hit."),
+    alwaysDash: validate(msg.alwaysDash, "Always dash."),
+    bgmVolume: validate(msg.bgmVolume, "BGM volume"),
+    bgsVolume: validate(msg.bgsVolume, "BGS volume"),
+    commandRemember: validate(msg.commandRemember, "Command remember."),
+    criticalToActor: validate(msg.criticalToActor, "%1 dealt %2 damage to %3."),
+    criticalToEnemy: validate(msg.criticalToEnemy, "%1 dealt %2 damage to %3."),
+    counterAttack: validate(msg.counterAttack, "%1 countered!"),
+    debuffAdd: validate(msg.debuffAdd, "%1's %2 was lowered."),
+    defeat: validate(msg.defeat, "Defeat."),
+    enemyDamage: validate(msg.enemyDamage, "%1 took %2 damage."),
+    enemyDrain: validate(msg.enemyDrain, "%1 drained %2 HP."),
+    enemyGain: validate(msg.enemyGain, "%1 gained %2."),
+    enemyLoss: validate(msg.enemyLoss, "%1 lost %2."),
+    enemyNoDamage: validate(msg.enemyNoDamage, "%1 was not damaged."),
+    enemyNoHit: validate(msg.enemyNoHit, "%1 was not hit."),
+    enemyRecovery: validate(msg.enemyRecovery, "%1 recovered %2 HP."),
+    evasion: validate(msg.evasion, "%1 evaded the attack!"),
+    autosave: validate(msg.autosave, "Autosave"),
+    escapeFailure: validate(msg.escapeFailure, "Escape failed."),
+    escapeStart: validate(msg.escapeStart, "%1 started to escape!"),
+    emerge: validate(msg.emerge, "%1 appeared!"),
+    expNext: validate(msg.expNext, "Next level in %1 EXP."),
+    expTotal: validate(msg.expTotal, "Total EXP: %1"),
+    file: validate(msg.file, "File"),
+    buffAdd: validate(msg.buffAdd, "%1's %2 was raised."),
+    buffRemove: validate(msg.buffRemove, "%1's %2 was lowered."),
+    obtainExp: validate(msg.obtainExp, "%1 EXP obtained."),
+    obtainGold: validate(msg.obtainGold, "%1 gold obtained."),
+    obtainItem: validate(msg.obtainItem, "%1 obtained %2."),
+    obtainSkill: validate(msg.obtainSkill, "%1 learned %2."),
+    levelUp: validate(msg.levelUp, "%1 leveled up!"),
+    partyName: validate(msg.partyName, "Party"),
+    loadMessage: validate(msg.loadMessage, "Load %1?"),
+    meVolume: validate(msg.meVolume, "ME volume"),
+    possession: validate(msg.possession, "Possession"),
+    preemptive: validate(msg.preemptive, "%1 attacked first!"),
+    saveMessage: validate(msg.saveMessage, "Save %1?"),
+    seVolume: validate(msg.seVolume, "SE volume"),
+    magicEvasion: validate(msg.magicEvasion, "%1 evaded the magic!"),
+    magicReflection: validate(msg.magicReflection, "%1 reflected the magic!"),
+    substitute: validate(msg.substitute, "%1 took the hit!"),
+    surprise: validate(msg.surprise, "%1 surprised the enemy!"),
+    touchUI: validate(msg.touchUI, "Touch UI"),
+    useItem: validate(msg.useItem, "%1 used %2."),
+    victory: validate(msg.victory, "Victory!"),
+  };
+};

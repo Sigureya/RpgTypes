@@ -2,5 +2,5 @@ export * from "./advanced";
 export * from "./attackMotion";
 export * from "./testBattlers";
 export * from "./soundArray";
-export * from "./message";
+export * from "./terms/systemTerms";
 export * from "./vehicle";
