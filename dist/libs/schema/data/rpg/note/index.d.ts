@@ -1,2 +1,2 @@
-export * from './make';
+export * from './note';
 export * from './types';

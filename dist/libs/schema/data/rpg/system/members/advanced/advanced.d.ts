@@ -11,3 +11,4 @@ export interface System_Advanced {
     fallbackFonts: string;
     fontSize: number;
 }
+export declare const makeSystemAdvanced: (advanced?: Partial<System_Advanced>) => System_Advanced;

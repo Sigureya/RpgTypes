@@ -1,0 +1,9 @@
+export declare const CTRL_CHAR_ACTOR: "N";
+export declare const CTRL_CHAR_VARIABLE: "V";
+export declare const CTRL_CHAR_POSTION_X: "PX";
+export declare const CTRL_CHAR_POSTION_Y: "PY";
+export declare const CTRL_CHAR_GOLD: "G";
+export declare const CTRL_CHAR_PARTY: "P";
+export declare const CTRL_CHAR_COLOR: "C";
+export declare const CTRL_CHAR_ICON: "I";
+export declare const CTRL_CHAR_FONT_SIZE: "FS";

@@ -1,4 +1,4 @@
-import { AudioFileParams } from '../../../../../utils';
+import { AudioFileParams } from '../../../../../../utils';
 export interface Data_Vehicle {
     bgm: AudioFileParams;
     characterIndex: number;
