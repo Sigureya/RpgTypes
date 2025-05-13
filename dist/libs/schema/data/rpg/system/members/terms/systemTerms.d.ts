@@ -1,4 +1,6 @@
-import { Terms_CommandArray, Terms_BasicArray, Terms_Messages } from './terms';
+import { Terms_BasicArray } from './basic';
+import { Terms_CommandArray } from './commands';
+import { Terms_Messages } from './messages';
 export interface System_Terms {
     messages: Terms_Messages;
     commands: Terms_CommandArray;
