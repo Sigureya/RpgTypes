@@ -6,6 +6,7 @@ import {
   OPERAND_SCRIPT,
 } from "./constants";
 import type * as Type from "./types";
+import { ENEMY_PARAM_INDEX } from "./types/paramIndex";
 
 export const toArrayOperandConstant = (
   target: Type.ParamObject_WritingTarget,
@@ -67,16 +68,30 @@ export const toArrayOperandItemData = (
   value.itemId,
 ];
 
-export const toArrayOperandStatusData = (
+export const toArrayOperandActorStatus = (
   target: Type.ParamObject_WritingTarget,
-  value: Type.ParamObject_Operand_StatusData,
+  value: Type.ParamObject_Operand_ActorStatus,
   operation: number
-): Type.Operand_StatusData => [
+): Type.Operand_ActorStatus => [
   target.startId,
   target.endId ?? target.startId,
   operation,
   OPERAND_GAMEDATA,
-  value.type,
+  3,
   value.index,
   value.param,
+];
+
+export const toArrayOperandEnemyStatus = (
+  target: Type.ParamObject_WritingTarget,
+  value: Type.ParamObject_Operand_Enemy,
+  operation: number = 0
+): Type.Operand_EnemyStatus => [
+  target.startId,
+  target.endId ?? target.startId,
+  operation,
+  OPERAND_GAMEDATA,
+  4,
+  value.index,
+  ENEMY_PARAM_INDEX[value.param],
 ];
