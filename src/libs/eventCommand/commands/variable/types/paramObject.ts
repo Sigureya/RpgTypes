@@ -16,9 +16,7 @@ export interface ParamObject_Operand_Random {
   min: number;
   max: number;
 }
-export interface ParamObject_Operand_Script {
-  code: string;
-}
+
 export interface ParamObject_Operand_ItemData {
   type: 0 | 1 | 2; // ITEM | WEAPON | ARMOR
   itemId: number;
