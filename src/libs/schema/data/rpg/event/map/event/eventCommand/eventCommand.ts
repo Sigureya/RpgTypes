@@ -10,7 +10,7 @@ import type {
 } from "./eventCommandTypes";
 import type {
   ChanageActorVariable,
-  ControlVariables,
+  ParamArray_ControlVariables,
   MovePicture,
   ShopGoods,
   ShopProcessing,
@@ -155,7 +155,7 @@ export type EventCommandsMapper = CommandTemplate<
      * @description Control Variables
      * @todo 複雑なので後回し
      */
-    CONTROL_VARIABLES: ControlVariables;
+    CONTROL_VARIABLES: ParamArray_ControlVariables;
 
     /**
      * @description Control Self Switch
