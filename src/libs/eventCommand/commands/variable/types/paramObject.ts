@@ -16,18 +16,10 @@ export interface ParamObject_Operand_Random {
   min: number;
   max: number;
 }
-export interface ParamObject_Operand_Script {
-  code: string;
-}
+
 export interface ParamObject_Operand_ItemData {
   type: 0 | 1 | 2; // ITEM | WEAPON | ARMOR
   itemId: number;
-}
-
-export interface ParamObject_Operand_CharacterData {
-  type: 5; // CHARACTER
-  id: number;
-  param: number; // ValueOf<CHARACTER>
 }
 
 export interface ParamObject_Operand_PartyData {
