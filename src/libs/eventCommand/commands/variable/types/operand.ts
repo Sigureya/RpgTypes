@@ -34,14 +34,6 @@ export type STATUS = {
   TP: 12;
 };
 
-export type CHARACTER = {
-  X: 0;
-  Y: 1;
-  DIRECTION: 2;
-  SCREEN_X: 3;
-  SCREEN_Y: 4;
-};
-
 export type LAST = {
   USED_SKILL_ID: 0;
   USED_ITEM_ID: 1;
