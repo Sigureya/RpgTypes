@@ -1,4 +1,3 @@
-import type { ParamObject_Operand_ActorStatus } from "./actor";
 import {
   OPERAND_CONSTANT,
   OPERAND_RANDOM,
@@ -7,7 +6,7 @@ import {
   OPERAND_SCRIPT,
 } from "./constants";
 import type * as Type from "./types";
-import { ENEMY_PARAM_INDEX } from "./types/paramIndex";
+import { ENEMY_PARAM_INDEX } from "./types/enemy/dataSource";
 
 export const toArrayOperandConstant = (
   target: Type.ParamObject_WritingTarget,
@@ -71,7 +70,7 @@ export const toArrayOperandItemData = (
 
 export const toArrayOperandActorStatus = (
   target: Type.ParamObject_WritingTarget,
-  value: ParamObject_Operand_ActorStatus,
+  value: Type.ParamObject_Operand_ActorStatus,
   operation: number = 0
 ): Type.Operand_ActorStatus => [
   target.startId,

@@ -5,9 +5,7 @@ import type {
   OPERAND,
   OTHER,
   STATUS,
-} from "./operand";
-import type { ValueOf } from "@RpgTypes/schema";
-import type { ENEMY_PARAM_INDEX } from "./paramIndex";
+} from "../types/operand";
 
 export interface ParamObject_WritingTarget {
   startId: number;
@@ -33,14 +31,6 @@ export interface ParamObject_Operand_Script {
 export interface ParamObject_Operand_ItemData {
   type: 0 | 1 | 2; // ITEM | WEAPON | ARMOR
   itemId: number;
-}
-export interface ParamObject_Operand_ActorStatus {
-  index: number;
-  param: ValueOf<STATUS>;
-}
-export interface ParamObject_Operand_Enemy {
-  index: number;
-  param: keyof typeof ENEMY_PARAM_INDEX;
 }
 
 export interface ParamObject_Operand_CharacterData {

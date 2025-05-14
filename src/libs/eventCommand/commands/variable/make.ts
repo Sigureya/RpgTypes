@@ -22,10 +22,10 @@ import type {
   ParamObject_Operand_Script,
   ParamObject_Operand_ItemData,
   Operand_ActorStatus,
-  ParamObject_Operand_Enemy,
   Operand_EnemyStatus,
+  ParamObject_Operand_ActorStatus,
+  ParamObject_Operand_Enemy,
 } from "./types";
-import type { ParamObject_Operand_ActorStatus } from "./actor";
 
 interface MakeOtherParam {
   indent?: number;
