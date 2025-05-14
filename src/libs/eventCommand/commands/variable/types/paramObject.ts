@@ -1,11 +1,4 @@
-import type {
-  CHARACTER,
-  GAMEDATA,
-  LAST,
-  OPERAND,
-  OTHER,
-  STATUS,
-} from "../types/operand";
+import type { GAMEDATA, LAST, OPERAND, OTHER, STATUS } from "../types/operand";
 
 export interface ParamObject_WritingTarget {
   startId: number;
@@ -46,8 +39,4 @@ export interface ParamObject_Operand_PartyData {
 export interface ParamObject_Operand_OtherData {
   type: 7; // OTHER
   param: number; // ValueOf<OTHER>
-}
-export interface ParamObject_Operand_LastData {
-  type: 8; // LAST
-  param: keyof LAST;
 }
