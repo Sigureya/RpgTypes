@@ -1,5 +1,8 @@
-import { ValueOf } from './valueOf';
-import { CHARACTER, GAMEDATA, LAST, OPERAND, OTHER, STATUS } from './operand';
+import { ValueOf } from '../../../../schema';
+import { GAMEDATA, OPERAND, OTHER } from './operand';
+import { CHARACTER } from './character/dataSource';
+import { STATUS } from './actor/dataSource';
+import { VARIABLE_SRC_LAST } from './last/dataSource';
 type Header = [startId: number, endId: number, operationType: number];
 type Operand<Code extends number, Params extends unknown[]> = [
     ...Header,
@@ -19,13 +22,17 @@ type OperandGamedata<DataType extends number, Params extends unknown[]> = Operan
 export type Operand_ItemData = OperandGamedata<GAMEDATA["ITEM"] | GAMEDATA["WEAPON"] | GAMEDATA["ARMOR"], [
     itemId: number
 ]>;
-export type Operand_StatusData = OperandGamedata<GAMEDATA["ACTOR"] | GAMEDATA["ENEMY"], [
+export type Operand_ActorStatus = OperandGamedata<GAMEDATA["ACTOR"], [
     index: number,
-    param: ValueOf<STATUS>
+    param: ValueOf<typeof STATUS>
+]>;
+export type Operand_EnemyStatus = OperandGamedata<GAMEDATA["ENEMY"], [
+    index: number,
+    param: number
 ]>;
 export type Operand_CharacterData = OperandGamedata<GAMEDATA["CHARACTER"], [
     id: number,
-    param: ValueOf<CHARACTER>
+    param: ValueOf<typeof CHARACTER>
 ]>;
 export type Operand_PartyData = OperandGamedata<GAMEDATA["PARTY"], [
     index: number
@@ -34,7 +41,7 @@ export type Operand_OtherData = OperandGamedata<GAMEDATA["OTHER"], [
     param: ValueOf<OTHER>
 ]>;
 export type Operand_LastData = OperandGamedata<GAMEDATA["LAST"], [
-    param: ValueOf<LAST>
+    param: ValueOf<typeof VARIABLE_SRC_LAST>
 ]>;
-export type ControlVariables = Operand_Constatant | Operand_Variable | Operand_Random | Operand_Script | Operand_StatusData | Operand_ItemData | Operand_CharacterData | Operand_PartyData | Operand_OtherData | Operand_LastData;
+export type ParamArray_ControlVariables = Operand_Constatant | Operand_Variable | Operand_Random | Operand_Script | Operand_ActorStatus | Operand_ItemData | Operand_CharacterData | Operand_PartyData | Operand_OtherData | Operand_LastData | Operand_EnemyStatus;
 export {};
