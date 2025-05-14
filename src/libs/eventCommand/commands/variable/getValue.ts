@@ -2,7 +2,8 @@ import type {
   Operand_EnemyStatus,
   Operand_ActorStatus,
 } from "@RpgTypes/schema";
-import type { DataOperand_Enemy, DataOperand_Actor } from "./gamteDataTypes";
+import type { DataOperand_Actor } from "./actor";
+import type { DataOperand_Enemy } from "./enemy";
 
 export const getEnemyValue = (
   enemy: DataOperand_Enemy,

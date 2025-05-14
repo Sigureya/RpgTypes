@@ -1,12 +1,12 @@
 import type { MockedObject } from "vitest";
 import { describe, test, expect, vi } from "vitest";
 import { getActorValue, getEnemyValue } from "./getValue";
-import type { DataOperand_Enemy } from "./gamteDataTypes";
 import {
   toArrayOperandActorStatus,
   toArrayOperandEnemyStatus,
 } from "./convert";
 import type { ParamArray } from "@RpgTypes/schema";
+import type { DataOperand_Enemy } from "./enemy";
 
 const MockParamArray = [
   108, // mhp

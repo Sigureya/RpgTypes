@@ -1,3 +1,4 @@
+import type { ParamObject_Operand_ActorStatus } from "./actor";
 import {
   OPERAND_CONSTANT,
   OPERAND_RANDOM,
@@ -70,7 +71,7 @@ export const toArrayOperandItemData = (
 
 export const toArrayOperandActorStatus = (
   target: Type.ParamObject_WritingTarget,
-  value: Type.ParamObject_Operand_ActorStatus,
+  value: ParamObject_Operand_ActorStatus,
   operation: number = 0
 ): Type.Operand_ActorStatus => [
   target.startId,

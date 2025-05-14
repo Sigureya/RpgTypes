@@ -21,11 +21,11 @@ import type {
   ParamObject_WritingTarget,
   ParamObject_Operand_Script,
   ParamObject_Operand_ItemData,
-  ParamObject_Operand_ActorStatus,
   Operand_ActorStatus,
   ParamObject_Operand_Enemy,
   Operand_EnemyStatus,
 } from "./types";
+import type { ParamObject_Operand_ActorStatus } from "./actor";
 
 interface MakeOtherParam {
   indent?: number;
