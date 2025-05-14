@@ -1,5 +1,3 @@
-import type { GAMEDATA, LAST, OPERAND, OTHER, STATUS } from "../types/operand";
-
 export interface ParamObject_WritingTarget {
   startId: number;
   endId?: number;

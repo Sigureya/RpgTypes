@@ -1,7 +1,9 @@
 import type { ValueOf } from "@RpgTypes/schema";
-import type { GAMEDATA, LAST, OPERAND, OTHER, STATUS } from "./operand";
+import type { GAMEDATA, OPERAND, OTHER } from "./operand";
 
 import type { CHARACTER } from "./character/dataSource";
+import type { STATUS } from "./actor/dataSource";
+import type { VARIABLE_SRC_LAST } from "./last/dataSource";
 type Header = [startId: number, endId: number, operationType: number];
 
 type Operand<Code extends number, Params extends unknown[]> = [
@@ -34,7 +36,7 @@ export type Operand_ItemData = OperandGamedata<
 
 export type Operand_ActorStatus = OperandGamedata<
   GAMEDATA["ACTOR"],
-  [index: number, param: ValueOf<STATUS>]
+  [index: number, param: ValueOf<typeof STATUS>]
 >;
 
 export type Operand_EnemyStatus = OperandGamedata<
@@ -57,7 +59,7 @@ export type Operand_OtherData = OperandGamedata<
 >;
 export type Operand_LastData = OperandGamedata<
   GAMEDATA["LAST"],
-  [param: ValueOf<LAST>]
+  [param: ValueOf<typeof VARIABLE_SRC_LAST>]
 >;
 
 export type ParamArray_ControlVariables =

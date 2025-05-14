@@ -1,0 +1,15 @@
+export const STATUS = {
+  LEVEL: 0,
+  EXP: 1,
+  HP: 2,
+  MP: 3,
+  MAX_HP: 4,
+  MAX_MP: 5,
+  ATK: 6,
+  DEF: 7,
+  MAT: 8,
+  MDF: 9,
+  AGI: 10,
+  LUK: 11,
+  TP: 12,
+} as const;
