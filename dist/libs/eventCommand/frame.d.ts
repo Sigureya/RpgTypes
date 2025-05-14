@@ -1,7 +1,7 @@
-export interface EventCommandLike2<Code extends number> {
+export interface EventCommandLike2<Code extends number, Param extends unknown[] = unknown[]> {
     code: Code;
     indent: number;
-    parameters: unknown[];
+    parameters: Param;
 }
 export interface Converter<ParamObject extends {}, ParamArray extends unknown[]> {
     fromArray: (array: ParamArray) => ParamObject;

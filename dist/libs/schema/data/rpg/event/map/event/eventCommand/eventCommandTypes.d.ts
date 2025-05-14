@@ -1,6 +1,6 @@
 import { EventCommandLike } from './eventComandLike';
 import { Direction8, MoveRouteData } from './types';
-import { ControlVariables, MovePicture, ShopGoods, ShowPicture, ValueOf, Toggle, Operation_PlusMinus, Designation } from './paramaters';
+import { MovePicture, ShopGoods, ShowPicture, ValueOf, Toggle, Operation_PlusMinus, Designation } from './paramaters';
 import { BranchParameters } from './branchParams';
 import { Param_ChangeEnemyParameters } from './paramaters/changeBattler';
 import { AudioFileParams, ColorRGBA } from '../../../../../../../utils';
@@ -74,9 +74,6 @@ export interface Command_LabelJump extends EventCommandLike<119> {
 }
 export interface Command_ControlSwitches extends EventCommandLike<121> {
     parameters: [min: number, max: number, value: ValueOf<Toggle>];
-}
-export interface Command_ControlVariables<Param extends ControlVariables = ControlVariables> extends EventCommandLike<122, Param> {
-    parameters: Param;
 }
 export interface Command_ControlSelfSwitch extends EventCommandLike<123> {
     parameters: [switchId: string, value: ValueOf<Toggle>];
