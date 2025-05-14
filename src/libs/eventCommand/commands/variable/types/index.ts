@@ -1,6 +1,9 @@
+export * from "./actor";
+export * from "./character";
+export * from "./enemy";
+export * from "./last";
+
 export * from "./command";
 export * from "./paramArray";
 export * from "./operand";
 export * from "./paramObject";
-export * from "./actor";
-export * from "./enemy";
