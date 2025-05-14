@@ -1,12 +1,9 @@
-import type { ValueOf } from "./valueOf";
-import type {
-  CHARACTER,
-  GAMEDATA,
-  LAST,
-  OPERAND,
-  OTHER,
-  STATUS,
-} from "./operand";
+import type { ValueOf } from "@RpgTypes/schema";
+import type { GAMEDATA, OPERAND, OTHER } from "./operand";
+
+import type { CHARACTER } from "./character/dataSource";
+import type { STATUS } from "./actor/dataSource";
+import type { VARIABLE_SRC_LAST } from "./last/dataSource";
 type Header = [startId: number, endId: number, operationType: number];
 
 type Operand<Code extends number, Params extends unknown[]> = [
@@ -37,13 +34,19 @@ export type Operand_ItemData = OperandGamedata<
   [itemId: number]
 >;
 
-export type Operand_StatusData = OperandGamedata<
-  GAMEDATA["ACTOR"] | GAMEDATA["ENEMY"],
-  [index: number, param: ValueOf<STATUS>]
+export type Operand_ActorStatus = OperandGamedata<
+  GAMEDATA["ACTOR"],
+  [index: number, param: ValueOf<typeof STATUS>]
 >;
+
+export type Operand_EnemyStatus = OperandGamedata<
+  GAMEDATA["ENEMY"],
+  [index: number, param: number]
+>;
+
 export type Operand_CharacterData = OperandGamedata<
   GAMEDATA["CHARACTER"],
-  [id: number, param: ValueOf<CHARACTER>]
+  [id: number, param: ValueOf<typeof CHARACTER>]
 >;
 
 export type Operand_PartyData = OperandGamedata<
@@ -56,17 +59,18 @@ export type Operand_OtherData = OperandGamedata<
 >;
 export type Operand_LastData = OperandGamedata<
   GAMEDATA["LAST"],
-  [param: ValueOf<LAST>]
+  [param: ValueOf<typeof VARIABLE_SRC_LAST>]
 >;
 
-export type ControlVariables =
+export type ParamArray_ControlVariables =
   | Operand_Constatant
   | Operand_Variable
   | Operand_Random
   | Operand_Script
-  | Operand_StatusData
+  | Operand_ActorStatus
   | Operand_ItemData
   | Operand_CharacterData
   | Operand_PartyData
   | Operand_OtherData
-  | Operand_LastData;
+  | Operand_LastData
+  | Operand_EnemyStatus;

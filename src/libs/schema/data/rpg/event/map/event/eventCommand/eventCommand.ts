@@ -10,7 +10,6 @@ import type {
 } from "./eventCommandTypes";
 import type {
   ChanageActorVariable,
-  ControlVariables,
   MovePicture,
   ShopGoods,
   ShopProcessing,
@@ -30,6 +29,7 @@ import type {
   MoveRouteData,
   IndexOfParameter,
 } from "./types";
+import type { ParamArray_ControlVariables } from "@RpgTypes/eventCommand";
 
 export type EventCode = EventCommandsMapper["codeType"];
 export type EventCodeTable = EventCommandsMapper["codeTable"];
@@ -155,7 +155,7 @@ export type EventCommandsMapper = CommandTemplate<
      * @description Control Variables
      * @todo 複雑なので後回し
      */
-    CONTROL_VARIABLES: ControlVariables;
+    CONTROL_VARIABLES: ParamArray_ControlVariables;
 
     /**
      * @description Control Self Switch
