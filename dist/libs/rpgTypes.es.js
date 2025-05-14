@@ -1647,7 +1647,11 @@ const _i = (e, t, n) => e.format.replaceAll("{value1}", t.value1.toString()).rep
     variance: { type: "integer" },
     critical: { type: "boolean" }
   }
-}, A = new L(), xn = A.compile(an), Gn = A.compile(on), Bn = A.compile(zt), bn = A.compile(Qt), Vn = A.compile(en), qn = A.compile(nn), Wn = A.compile(Zt), Yn = A.compile(Jt), gi = (e) => xn(e), Si = (e) => Gn(e), Ni = (e) => Bn(e), Ci = (e) => bn(e), fi = (e) => Vn(e), Oi = (e) => qn(e), Mi = (e) => Wn(e), Li = (e) => Yn(e), Pi = 0, wn = 101, Di = 401, jn = 102, Kn = 402, Xn = 103, hi = 104, vi = 105, Fi = 405, Hi = 108, ki = 408, Ui = 109, xi = 111, Gi = 411, Bi = 112, bi = 113, Vi = 115, $n = 117, qi = 118, Wi = 119, Yi = 121, wi = 122, ji = 123, Ki = 124, Xi = 125, $i = 126, zi = 127, Qi = 128, Ji = 129, zn = 132, Qn = 133, Zi = 134, er = 135, tr = 136, nr = 137, or = 138, Jn = 139, ar = 140, ir = 201, rr = 202, sr = 203, cr = 204, mr = 205, pr = 206, dr = 211, Er = 212, Ar = 213, _r = 214, Tr = 216, lr = 217, yr = 221, ur = 222, Rr = 223, Ir = 224, gr = 225, Sr = 230, Nr = 231, Cr = 232, fr = 233, Or = 234, Mr = 235, Lr = 236, Zn = 241, Pr = 242, Dr = 243, hr = 244, eo = 245, vr = 246, to = 249, no = 250, Fr = 251, Hr = 261, kr = 282, Ur = 283, xr = 284, Gr = 285, Br = 301, br = 302, Vr = 605, qr = 303, Wr = 311, Yr = 312, wr = 313, jr = 314, Kr = 315, Xr = 320, $r = 321, zr = 322, Qr = 323, Jr = 324, Zr = 325, es = 331, ts = 332, ns = 333, os = 334, as = 335, is = 336, rs = 337, ss = 339, cs = 340, ms = 351, ps = 342, ds = 352, Es = 353, As = 354, _s = 355, Ts = 655, ls = 356, ys = 357, us = 0, Rs = 1, Is = 2, gs = 3, Ss = 4, Ns = 5, Cs = 6, fs = 7, Os = 8, Ms = 9, Ls = 10, Ps = 11, Ds = 12, hs = 13, vs = 14, Fs = 15, Hs = 16, ks = 17, Us = 18, xs = 19, Gs = 20, Bs = 21, bs = 22, Vs = 23, qs = 24, Ws = 25, Ys = 26, ws = 27, js = 28, Ks = 29, Xs = 30, $s = 31, zs = 32, Qs = 33, Js = 34, Zs = 35, ec = 36, tc = 37, nc = 38, oc = 39, ac = 40, ic = 41, rc = 42, sc = 43, cc = 44, mc = 45, pc = () => ({
+}, A = new L(), xn = A.compile(an), Gn = A.compile(on), Bn = A.compile(zt), bn = A.compile(Qt), Vn = A.compile(en), qn = A.compile(nn), Wn = A.compile(Zt), Yn = A.compile(Jt), gi = (e) => xn(e), Si = (e) => Gn(e), Ni = (e) => Bn(e), Ci = (e) => bn(e), fi = (e) => Vn(e), Oi = (e) => qn(e), Mi = (e) => Wn(e), Li = (e) => Yn(e), Pi = 0, wn = 101, Di = 401, jn = 102, Kn = 402, Xn = 103, hi = 104, vi = 105, Fi = 405, Hi = 108, ki = 408, Ui = 109, xi = 111, Gi = 411, Bi = 112, bi = 113, Vi = 115, $n = 117, qi = 118, Wi = 119, Yi = 121, wi = 122, ji = 123, Ki = 124, Xi = 125, $i = 126, zi = 127, Qi = 128, Ji = 129, zn = 132, Qn = 133, Zi = 134, er = 135, tr = 136, nr = 137, or = 138, Jn = 139, ar = 140, ir = 201, rr = 202, sr = 203, cr = 204, mr = 205, pr = 206, dr = 211, Er = 212, Ar = 213, _r = 214, Tr = 216, lr = 217, yr = 221, ur = 222, Rr = 223, Ir = 224, gr = 225, Sr = 230, Nr = 231, Cr = 232, fr = 233, Or = 234, Mr = 235, Lr = 236, Zn = 241, Pr = 242, Dr = 243, hr = 244, eo = 245, vr = 246, to = 249, no = 250, Fr = 251, Hr = 261, kr = 282, Ur = 283, xr = 284, Gr = 285, Br = 301, br = 302, Vr = 605, qr = 303, Wr = 311, Yr = 312, wr = 313, jr = 314, Kr = 315, Xr = 320, $r = 321, zr = 322, Qr = 323, Jr = 324, Zr = 325, es = 331, ts = 332, ns = 333, os = 334, as = 335, is = 336, rs = 337, ss = 339, cs = 340, ms = 351, ps = 342, ds = 352, Es = 353, As = 354, _s = 355, Ts = 655, ls = 356, ys = 357, us = 0, Rs = 1, Is = 2, gs = 3, Ss = 4, Ns = 5, Cs = 6, fs = 7, Os = 8, Ms = 9, Ls = 10, Ps = 11, Ds = 12, hs = 13, vs = 14, Fs = 15, Hs = 16, ks = 17, Us = 18, xs = 19, Gs = 20, Bs = 21, bs = 22, Vs = 23, qs = 24, Ws = 25, Ys = 26, ws = 27, js = 28, Ks = 29, Xs = 30, $s = 31, zs = 32, Qs = 33, Js = 34, Zs = 35, ec = 36, tc = 37, nc = 38, oc = 39, ac = 40, ic = 41, rc = 42, sc = 43, cc = 44, mc = 45, pc = (e, t, n = 0) => ({
+  code: e,
+  indent: n,
+  parameters: t
+}), dc = () => ({
   id: 1,
   name: "",
   pages: [],
@@ -1674,7 +1678,7 @@ const _i = (e, t, n) => e.format.replaceAll("{value1}", t.value1.toString()).rep
   itemValid: e.itemId !== void 0,
   actorId: e.actorId ?? 0,
   actorValid: e.actorId !== void 0
-}), dc = () => ({
+}), Ec = () => ({
   conditions: ao(),
   list: [],
   directionFix: !1,
@@ -1706,7 +1710,7 @@ const _i = (e, t, n) => e.format.replaceAll("{value1}", t.value1.toString()).rep
     scrollX: { type: "integer" },
     scrollY: { type: "integer" }
   }
-}, ro = (e) => e.toString().padStart(3, "0"), Ec = (e = { id: 0 }) => ({
+}, ro = (e) => e.toString().padStart(3, "0"), Ac = (e = { id: 0 }) => ({
   name: e.name ?? ro(e.id),
   id: e.id,
   expanded: e.expanded ?? !1,
@@ -1714,7 +1718,7 @@ const _i = (e, t, n) => e.format.replaceAll("{value1}", t.value1.toString()).rep
   parentId: e.parentId ?? 0,
   scrollX: e.scrollX ?? 0,
   scrollY: e.scrollY ?? 0
-}), Ac = (e = {}) => ({
+}), _c = (e = {}) => ({
   autoplayBgm: e.autoplayBgm ?? !1,
   autoplayBgs: e.autoplayBgs ?? !1,
   battleback1Name: e.battleback1Name ?? "",
@@ -1737,28 +1741,28 @@ const _i = (e, t, n) => e.format.replaceAll("{value1}", t.value1.toString()).rep
   x: e.x ?? 0,
   y: e.y ?? 0,
   data: e.data ?? []
-}), _c = (e = {}) => ({
+}), Tc = (e = {}) => ({
   id: e.id ?? 0,
   name: e.name ?? "",
   trigger: e.trigger ?? 0,
   list: e.list ?? [],
   switchId: e.switchId ?? 0
-}), Tc = (e = {}) => ({
+}), lc = (e = {}) => ({
   id: e.id ?? 0,
   name: e.name ?? "",
   members: e.members ?? [],
   pages: e.pages ?? []
-}), lc = (e = {}) => ({
+}), yc = (e = {}) => ({
   enemyId: e.enemyId ?? 0,
   x: e.x ?? 0,
   y: e.y ?? 0,
   hidden: e.hidden ?? !1
-}), yc = (e = {}) => ({
+}), uc = (e = {}) => ({
   actorHp: e.actorHp ?? 0,
   actorId: e.actorId ?? 0,
   enemyValid: e.enemyValid ?? 0,
   switchValid: e.switchValid ?? 0
-}), so = new L(), co = so.compile(io), uc = (e) => co(e), Rc = (e = {}) => ({
+}), so = new L(), co = so.compile(io), Rc = (e) => co(e), Ic = (e = {}) => ({
   gameId: e.gameId ?? 0,
   screenWidth: e.screenWidth ?? 0,
   screenHeight: e.screenHeight ?? 0,
@@ -1770,7 +1774,7 @@ const _i = (e, t, n) => e.format.replaceAll("{value1}", t.value1.toString()).rep
   mainFontFilename: e.mainFontFilename ?? "",
   fallbackFonts: e.fallbackFonts ?? "",
   fontSize: e.fontSize ?? 28
-}), Ic = {
+}), gc = {
   type: "object",
   properties: {
     gameId: { type: "integer" },
@@ -1804,7 +1808,7 @@ const _i = (e, t, n) => e.format.replaceAll("{value1}", t.value1.toString()).rep
   volume: e.volume ?? 100,
   pitch: e.pitch ?? 100,
   pan: e.pan ?? 0
-}), gc = (e) => [
+}), Sc = (e) => [
   i(e.cursor),
   i(e.ok),
   i(e.cancel),
@@ -1829,7 +1833,7 @@ const _i = (e, t, n) => e.format.replaceAll("{value1}", t.value1.toString()).rep
   i(e.shop),
   i(e.useItem),
   i(e.useSkill)
-], Sc = {
+], Nc = {
   domainName: "オプション",
   options: {
     optDrawTitle: "ゲームタイトルの描画",
@@ -1845,7 +1849,7 @@ const _i = (e, t, n) => e.format.replaceAll("{value1}", t.value1.toString()).rep
     optMessageSkip: "メッセージスキップを有効化",
     optSplashScreen: "スプラッシュ画面を表示"
   }
-}, Nc = {
+}, Cc = {
   domainName: "タイプ",
   options: {
     armorTypes: "防具タイプ",
@@ -1856,27 +1860,27 @@ const _i = (e, t, n) => e.format.replaceAll("{value1}", t.value1.toString()).rep
     switches: "スイッチ",
     variables: "変数"
   }
-}, De = (e, t) => `<${e}:${t}>`, f = () => /<([^<>:]+):([^>]*)>/g, Cc = (e, t) => he(e.note, (n, o) => t(n, o, e)), fc = (e) => he(e, (t, n) => [t, n]), he = (e, t) => {
+}, De = (e, t) => `<${e}:${t}>`, f = () => /<([^<>:]+):([^>]*)>/g, fc = (e, t) => he(e.note, (n, o) => t(n, o, e)), Oc = (e) => he(e, (t, n) => [t, n]), he = (e, t) => {
   const n = f();
   return Array.from(e.matchAll(n), (o) => t(o[1], o[2]));
-}, Oc = (e, t) => e.replaceAll(
+}, Mc = (e, t) => e.replaceAll(
   f(),
   (n, o, s) => {
     const p = t(o, s);
     return De(o, p);
   }
-), Mc = (e, t) => {
+), Lc = (e, t) => {
   const n = f(), o = Array.from(e.matchAll(n)).find(
     (s) => s[1] === t
   );
   return o ? o[2] : void 0;
-}, Lc = (e, t, n) => {
+}, Pc = (e, t, n) => {
   const o = f();
   return e.replaceAll(o, (s, p) => p === t ? De(p, n) : s);
-}, h = (e, t) => `\\${e}[${t}]`, Pc = (e, t) => t.map((n, o) => ({
+}, h = (e, t) => `\\${e}[${t}]`, Dc = (e, t) => t.map((n, o) => ({
   text: n,
   controlChar: h(e, o)
-})), Dc = (e) => {
+})), hc = (e) => {
   const t = /\\([A-Za-z]+)\[(\d+)]/g;
   return Array.from(e.matchAll(t)).map(
     (n) => ({
@@ -1884,10 +1888,10 @@ const _i = (e, t, n) => e.format.replaceAll("{value1}", t.value1.toString()).rep
       id: parseInt(n[2], 10)
     })
   );
-}, mo = "N", po = "V", hc = (e) => e.map((t) => ({
+}, mo = "N", po = "V", vc = (e) => e.map((t) => ({
   text: t.name,
   controlChar: h(mo, t.id)
-})), vc = (e) => e.variables.map((t, n) => ({
+})), Fc = (e) => e.variables.map((t, n) => ({
   text: t || "",
   controlChar: h(po, n)
 })).filter((t) => t.text !== ""), Eo = {
@@ -1934,7 +1938,7 @@ const _i = (e, t, n) => e.format.replaceAll("{value1}", t.value1.toString()).rep
   instantCollaps: "即時崩壊",
   noneCollaps: "崩壊なし",
   escape: "逃走"
-}, Fc = {
+}, Hc = {
   rpg: {
     damage: Un,
     data: kn,
@@ -1942,11 +1946,11 @@ const _i = (e, t, n) => e.format.replaceAll("{value1}", t.value1.toString()).rep
     itemEffect: m
   },
   global: Eo
-}, Hc = (e, t = 0) => ({
+}, kc = (e, t = 0) => ({
   code: $n,
   indent: t,
   parameters: Ao(e ?? {})
-}), kc = (e) => ({
+}), Uc = (e) => ({
   eventId: e[0]
 }), Ao = (e) => [e.eventId ?? 0], _o = {
   type: "object",
@@ -1961,10 +1965,10 @@ const _i = (e, t, n) => e.format.replaceAll("{value1}", t.value1.toString()).rep
     }
   },
   required: ["code", "indent", "parameters"]
-}, To = (e) => [e.variableId ?? 0, e.digits ?? 0], Uc = (e) => ({
+}, To = (e) => [e.variableId ?? 0, e.digits ?? 0], xc = (e) => ({
   variableId: e[0],
   digits: e[1]
-}), xc = (e, t = 0) => ({
+}), Gc = (e, t = 0) => ({
   code: Xn,
   indent: t,
   parameters: To(e ?? {})
@@ -1986,7 +1990,7 @@ const _i = (e, t, n) => e.format.replaceAll("{value1}", t.value1.toString()).rep
     }
   },
   required: ["code", "indent", "parameters"]
-}, Gc = {
+}, Bc = {
   type: "object",
   properties: {
     code: { type: "number", const: 105 },
@@ -2004,7 +2008,7 @@ const _i = (e, t, n) => e.format.replaceAll("{value1}", t.value1.toString()).rep
     }
   },
   required: ["code", "indent", "parameters"]
-}, Bc = {
+}, bc = {
   type: "object",
   properties: {
     code: { type: "number", const: 405 },
@@ -2018,26 +2022,26 @@ const _i = (e, t, n) => e.format.replaceAll("{value1}", t.value1.toString()).rep
     }
   },
   required: ["code", "indent", "parameters"]
-}, bc = (e, t = 0) => ({
+}, Vc = (e, t = 0) => ({
   code: Kn,
   indent: t,
   parameters: [(e == null ? void 0 : e.index) ?? 0, (e == null ? void 0 : e.name) ?? ""]
-}), Vc = (e) => ({
+}), qc = (e) => ({
   index: e[0],
   name: e[1]
-}), qc = (e) => [e.index ?? 0, e.name ?? ""], Wc = (e) => ({
+}), Wc = (e) => [e.index ?? 0, e.name ?? ""], Yc = (e) => ({
   choices: e[0],
   cancelType: e[1],
   defaultType: e[2],
   positionType: e[3],
   background: e[4]
-}), Yc = (e) => [
+}), wc = (e) => [
   e.choices ?? [],
   e.cancelType ?? 0,
   e.defaultType ?? 0,
   e.positionType ?? 2,
   e.background ?? 0
-], wc = (e, t = 0) => ({
+], jc = (e, t = 0) => ({
   code: jn,
   indent: t,
   parameters: [
@@ -2099,7 +2103,7 @@ const _i = (e, t, n) => e.format.replaceAll("{value1}", t.value1.toString()).rep
     (e == null ? void 0 : e.positionType) ?? 2,
     (e == null ? void 0 : e.speakerName) ?? ""
   ]
-}), jc = {
+}), Kc = {
   fromArray: (e) => ({
     facename: e[0],
     faceIndex: e[1],
@@ -2187,7 +2191,7 @@ const _i = (e, t, n) => e.format.replaceAll("{value1}", t.value1.toString()).rep
   code: e,
   parameters: [i(t)],
   indent: n
-}), Kc = (e, t = 0) => l(Zn, e, t), Xc = (e, t = 0) => l(eo, e, t), $c = (e, t = 0) => l(to, e, t), zc = (e, t = 0) => l(no, e, t), Qc = (e, t = 0) => l(zn, e, t), Jc = (e, t = 0) => l(Qn, e, t), Zc = (e, t = 0) => l(Jn, e, t), So = 0, No = 1, Co = 2, v = 3, fo = 4, em = (e, t) => {
+}), Xc = (e, t = 0) => l(Zn, e, t), $c = (e, t = 0) => l(eo, e, t), zc = (e, t = 0) => l(to, e, t), Qc = (e, t = 0) => l(no, e, t), Jc = (e, t = 0) => l(zn, e, t), Zc = (e, t = 0) => l(Qn, e, t), em = (e, t = 0) => l(Jn, e, t), So = 0, No = 1, Co = 2, v = 3, fo = 4, tm = (e, t) => {
   switch (t[6]) {
     case 0:
       return e.hp;
@@ -2197,7 +2201,7 @@ const _i = (e, t, n) => e.format.replaceAll("{value1}", t.value1.toString()).rep
       return e.tp;
   }
   return t[6] >= 2 && t[6] <= 9 ? e.param(t[6] - 2) : 0;
-}, tm = (e, t) => {
+}, nm = (e, t) => {
   switch (t[6]) {
     case 0:
       return e.level;
@@ -2223,39 +2227,39 @@ const _i = (e, t, n) => e.format.replaceAll("{value1}", t.value1.toString()).rep
   AGI: 8,
   LUK: 9,
   TP: 10
-}, nm = (e, t, n = 0) => [
+}, om = (e, t, n = 0) => [
   e.startId,
   e.endId ?? e.startId,
   n,
   So,
   t.value
-], om = (e, t, n = 0) => [
+], am = (e, t, n = 0) => [
   e.startId,
   e.endId ?? e.startId,
   n,
   No,
   t.variableId
-], am = (e, t, n = 0) => [
+], im = (e, t, n = 0) => [
   e.startId,
   e.endId ?? e.startId,
   n,
   Co,
   t.min,
   t.max
-], im = (e, t, n = 0) => [
+], rm = (e, t, n = 0) => [
   e.startId,
   e.endId ?? e.startId,
   n,
   fo,
   t.code
-], rm = (e, t, n = 0) => [
+], sm = (e, t, n = 0) => [
   e.startId,
   e.endId ?? e.startId,
   n,
   v,
   t.type,
   t.itemId
-], sm = (e, t, n = 0) => [
+], cm = (e, t, n = 0) => [
   e.startId,
   e.endId ?? e.startId,
   n,
@@ -2263,7 +2267,7 @@ const _i = (e, t, n) => e.format.replaceAll("{value1}", t.value1.toString()).rep
   3,
   t.index,
   t.param
-], cm = (e, t, n = 0) => [
+], mm = (e, t, n = 0) => [
   e.startId,
   e.endId ?? e.startId,
   n,
@@ -2271,7 +2275,7 @@ const _i = (e, t, n) => e.format.replaceAll("{value1}", t.value1.toString()).rep
   4,
   t.index,
   Oo[t.param]
-], R = new L(), Mo = R.compile(_o), Lo = R.compile(Io), Po = R.compile(uo), Do = R.compile(yo), ho = R.compile(lo), vo = R.compile(go), mm = (e) => vo(e), pm = (e) => Mo(e), dm = (e) => Po(e), Em = (e) => Do(e), Am = (e) => ho(e), _m = (e) => Lo(e);
+], R = new L(), Mo = R.compile(_o), Lo = R.compile(Io), Po = R.compile(uo), Do = R.compile(yo), ho = R.compile(lo), vo = R.compile(go), pm = (e) => vo(e), dm = (e) => Mo(e), Em = (e) => Po(e), Am = (e) => Do(e), _m = (e) => ho(e), Tm = (e) => Lo(e);
 export {
   cs as ABORT_BATTLE,
   T as AUTHOR_RMMZ,
@@ -2322,12 +2326,12 @@ export {
   Yi as CONTROL_SWITCHES,
   Ki as CONTROL_TIMER,
   wi as CONTROL_VARIABLES,
-  jc as CommandShowMessage,
+  Kc as CommandShowMessage,
   Un as DEFAULT_DAMAGE_LABELS,
   Eo as DEFAULT_GLOBAL_LABELS,
   yi as DEFAULT_ITEM_LABELS,
   ui as DEFAULT_SKILL_LABELS,
-  Sc as DEFAULT_SYSTEM_LABELS_BOOLEAN,
+  Nc as DEFAULT_SYSTEM_LABELS_BOOLEAN,
   Ri as DEFAULT_USABLE_ITEM_LABELS,
   En as EFFECT_ADD_BUFF,
   An as EFFECT_ADD_DEBUFF,
@@ -2414,7 +2418,7 @@ export {
   qi as LABEL,
   Va as LABELS_DATA_WEAPON,
   Wi as LABEL_JUMP,
-  Fc as LABEL_REGISTRY_JP,
+  Hc as LABEL_REGISTRY_JP,
   kn as LABEL_SET_DATA,
   m as LABEL_SET_ITEM_EFFECT,
   a as LABEL_SET_TRAIT,
@@ -2424,7 +2428,7 @@ export {
   w as MODULE_SYSTEM,
   P as MODULE_TRAIT,
   Cr as MOVE_PICTURE,
-  Nc as MockSystemLabelDataTypes,
+  Cc as MockSystemLabelDataTypes,
   qr as NAME_INPUT_PROCESSING,
   Pi as NO_OPERATION,
   ms as OPEN_MENU_SCREEN,
@@ -2509,8 +2513,8 @@ export {
   go as SCHEMA_COMMAND_ANY_AUDIO,
   _o as SCHEMA_COMMAND_CALL_COMMON_EVENT,
   lo as SCHEMA_COMMAND_INPUT_NUMBER,
-  Bc as SCHEMA_COMMAND_SCROLL_TEXT_BODY,
-  Gc as SCHEMA_COMMAND_SCROLL_TEXT_HEAD,
+  bc as SCHEMA_COMMAND_SCROLL_TEXT_BODY,
+  Bc as SCHEMA_COMMAND_SCROLL_TEXT_HEAD,
   uo as SCHEMA_COMMAND_SHOW_CHOICES,
   yo as SCHEMA_COMMAND_SHOW_CHOICE_ITEM,
   Io as SCHEMA_COMMAND_SHOW_MESSAGE,
@@ -2524,7 +2528,7 @@ export {
   on as SCHEMA_DATA_SKILL,
   Zt as SCHEMA_DATA_STATE,
   en as SCHEMA_DATA_WEAPON,
-  Ic as SCHEMA_SYSTEM_ADVANCED,
+  gc as SCHEMA_SYSTEM_ADVANCED,
   ka as SCHEMA_TRAIT,
   _s as SCRIPT_EVAL,
   Ts as SCRIPT_EVAL_BODY,
@@ -2622,10 +2626,11 @@ export {
   Pa as buildRegularParamSource,
   va as buildSpecialFlagSource,
   ha as buildSpecialParamSource,
-  hc as createActorControlChars,
+  vc as createActorControlChars,
   h as createControlCharFormat,
+  pc as createEventCommand,
   De as createNoteEntity,
-  vc as createSystemVariableControlChars,
+  Fc as createSystemVariableControlChars,
   Pn as defineEffectAddBuff,
   vn as defineEffectAddDebuff,
   Mn as defineEffectAddState,
@@ -2646,34 +2651,34 @@ export {
   Nt as foldSpecialFlag,
   St as foldSpecialParams,
   _i as formatItemEffectText,
-  kc as fromArrayCommonEvent,
-  Uc as fromArrayInputNumber,
-  Wc as fromArraySetupChoice,
-  Vc as fromArraySetupChoiceItem,
-  Pc as fromStringArray,
-  tm as getActorValue,
+  Uc as fromArrayCommonEvent,
+  xc as fromArrayInputNumber,
+  Yc as fromArraySetupChoice,
+  qc as fromArraySetupChoiceItem,
+  Dc as fromStringArray,
+  nm as getActorValue,
   Sa as getArmorTypes,
-  Dc as getControlChars,
+  hc as getControlChars,
   ua as getElementTypes,
-  em as getEnemyValue,
+  tm as getEnemyValue,
   Ra as getEquipTypes,
-  Mc as getNoteValue,
+  Lc as getNoteValue,
   Na as getParamNames,
   Ia as getSkillTypes,
   ya as getVariableNames,
   ga as getWeaponTypes,
-  mm as isCommandAudio,
-  pm as isCommandCommonEvent,
-  Am as isCommandInputNumber,
-  Em as isCommandShowChoiceItem,
-  dm as isCommandShowChoices,
-  _m as isCommandShowMessage,
+  pm as isCommandAudio,
+  dm as isCommandCommonEvent,
+  _m as isCommandInputNumber,
+  Am as isCommandShowChoiceItem,
+  Em as isCommandShowChoices,
+  Tm as isCommandShowMessage,
   Ni as isDataActor,
   Ci as isDataArmor,
   Li as isDataClass,
   Oi as isDataEnemy,
   gi as isDataItem,
-  uc as isDataMapInfo,
+  Rc as isDataMapInfo,
   Si as isDataSkill,
   Mi as isDataState,
   fi as isDataWeapon,
@@ -2683,66 +2688,66 @@ export {
   Ga as makeArmorData,
   i as makeAudioFileParams,
   Ba as makeClassData,
-  Hc as makeCommand2_CommonEvent,
-  bc as makeCommand2_ShowChoiceItem,
+  kc as makeCommand2_CommonEvent,
+  Vc as makeCommand2_ShowChoiceItem,
   l as makeCommandAudioAny,
-  Qc as makeCommandChangeBattleBGM,
-  Zc as makeCommandChangeDefeatME,
-  Jc as makeCommandChangeVictoryME,
-  xc as makeCommandInputNumber,
-  Kc as makeCommandPlayBGM,
-  Xc as makeCommandPlayBGS,
-  $c as makeCommandPlayME,
-  zc as makeCommandPlaySE,
-  wc as makeCommandSetupChoice,
+  Jc as makeCommandChangeBattleBGM,
+  em as makeCommandChangeDefeatME,
+  Zc as makeCommandChangeVictoryME,
+  Gc as makeCommandInputNumber,
+  Xc as makeCommandPlayBGM,
+  $c as makeCommandPlayBGS,
+  zc as makeCommandPlayME,
+  Qc as makeCommandPlaySE,
+  jc as makeCommandSetupChoice,
   Ro as makeCommandShowMessage,
-  _c as makeCommonEventData,
+  Tc as makeCommonEventData,
   D as makeDamage,
   tn as makeDropItem,
   Wa as makeEnemyAction,
   Ya as makeEnemyData,
   ao as makeEventPageCondition,
   wa as makeItemData,
-  Ac as makeMapData,
-  pc as makeMapEvent,
+  _c as makeMapData,
+  dc as makeMapEvent,
   oo as makeMapEventIamge,
-  dc as makeMapEventPage,
-  Ec as makeMapInfoData,
+  Ec as makeMapEventPage,
+  Ac as makeMapInfoData,
   f as makeRegex,
   ja as makeSkillData,
-  gc as makeSoundsArray,
+  Sc as makeSoundsArray,
   ba as makeStateData,
-  Rc as makeSystemAdvanced,
-  Tc as makeTroopData,
-  yc as makeTroopEventConditions,
-  lc as makeTroopMember,
+  Ic as makeSystemAdvanced,
+  lc as makeTroopData,
+  uc as makeTroopEventConditions,
+  yc as makeTroopMember,
   qa as makeWeaponData,
   Ta as mergeDomainLabel,
   la as mergeNestedPrimitiveRecords,
   W as mergeWithDefaults,
   xa as normalizeDataActor,
-  fc as readNote,
+  Oc as readNote,
   he as readNoteEx,
-  Cc as readNoteObject,
+  fc as readNoteObject,
   Ca as regularParamName,
-  Oc as replaceNote,
+  Mc as replaceNote,
   Ti as resolveItemEffectLabels,
   Fa as resolveTraitLabels,
   Ja as sanitizeKey,
-  Lc as setNoteValue,
+  Pc as setNoteValue,
   Oa as specialParamName,
   M as testUnknonwKey,
   Ao as toArrayCommonEvent,
   To as toArrayInputNumber,
-  sm as toArrayOperandActorStatus,
-  nm as toArrayOperandConstant,
-  cm as toArrayOperandEnemyStatus,
-  rm as toArrayOperandItemData,
-  am as toArrayOperandRandom,
-  im as toArrayOperandScript,
-  om as toArrayOperandVariable,
-  Yc as toArraySetupChoice,
-  qc as toArraySetupChoiceItem,
+  cm as toArrayOperandActorStatus,
+  om as toArrayOperandConstant,
+  mm as toArrayOperandEnemyStatus,
+  sm as toArrayOperandItemData,
+  im as toArrayOperandRandom,
+  rm as toArrayOperandScript,
+  am as toArrayOperandVariable,
+  wc as toArraySetupChoice,
+  Wc as toArraySetupChoiceItem,
   u as traitDomain
 };
 //# sourceMappingURL=rpgTypes.es.js.map
