@@ -19,10 +19,10 @@ const Ho = "bgm", ko = "se", Uo = "me", xo = "bgs", Go = "battlebacks1", Bo = "b
     );
   }
   return n;
-}, _ = (e, t) => ({
+}, T = (e, t) => ({
   name: e,
   id: t
-}), ya = (e) => e.variables.map(_), ua = (e) => e.elements.map(_), Ra = (e) => e.equipTypes.map(_), Ia = (e) => e.skillTypes.map(_), ga = (e) => e.weaponTypes.map(_), Sa = (e) => e.armorTypes.map(_), Na = (e) => e.terms.params.map(_), T = "rmmz", P = "trait", Y = "data", w = "system", Fe = 11, He = 12, ke = 13, Ue = 14, xe = 21, Ge = 22, Be = 23, be = 31, Ve = 32, qe = 33, We = 34, Ye = 35, we = 41, je = 42, Ke = 43, Xe = 44, $e = 51, ze = 52, Qe = 53, Je = 54, Ze = 55, et = 61, tt = 62, nt = 63, ot = 64, at = 0, it = 1, rt = 2, st = 3, ct = 0, mt = 1, pt = 2, dt = 3, Et = 4, At = 5, _t = 0, Tt = 1, lt = 2, yt = 3, j = 0, K = 1, X = 2, $ = 3, z = 4, Q = 5, J = 6, Z = 7, ee = 8, te = 9, ne = 0, oe = 1, ae = 2, ie = 3, re = 4, se = 5, ce = 6, me = 7, pe = 0, de = 1, Ee = 2, Ae = 3, _e = 4, Te = 5, le = 6, ye = 7, ue = 8, Re = 9, Ca = (e, t) => {
+}), ya = (e) => e.variables.map(T), ua = (e) => e.elements.map(T), Ra = (e) => e.equipTypes.map(T), Ia = (e) => e.skillTypes.map(T), ga = (e) => e.weaponTypes.map(T), Sa = (e) => e.armorTypes.map(T), Na = (e) => e.terms.params.map(T), l = "rmmz", P = "trait", Y = "data", w = "system", Fe = 11, He = 12, ke = 13, Ue = 14, xe = 21, Ge = 22, Be = 23, be = 31, Ve = 32, qe = 33, We = 34, Ye = 35, we = 41, je = 42, Ke = 43, Xe = 44, $e = 51, ze = 52, Qe = 53, Je = 54, Ze = 55, et = 61, tt = 62, nt = 63, ot = 64, at = 0, it = 1, rt = 2, st = 3, ct = 0, mt = 1, pt = 2, dt = 3, Et = 4, At = 5, _t = 0, Tt = 1, lt = 2, yt = 3, j = 0, K = 1, X = 2, $ = 3, z = 4, Q = 5, J = 6, Z = 7, ee = 8, te = 9, ne = 0, oe = 1, ae = 2, ie = 3, re = 4, se = 5, ce = 6, me = 7, pe = 0, de = 1, Ee = 2, Ae = 3, _e = 4, Te = 5, le = 6, ye = 7, ue = 8, Re = 9, Ca = (e, t) => {
   switch (e) {
     case ne:
       return t.maxHp;
@@ -245,7 +245,7 @@ const Ho = "bgm", ko = "se", Uo = "me", xo = "bgs", Go = "battlebacks1", Bo = "b
   items: n(t.options),
   label: t.domainName,
   source: {
-    author: T,
+    author: l,
     module: P,
     kind: e
   }
@@ -253,7 +253,7 @@ const Ho = "bgm", ko = "se", Uo = "me", xo = "bgs", Go = "battlebacks1", Bo = "b
   Oe,
   e,
   (n) => ut(n, t)
-), La = (e) => u(Me, e, Rt), Pa = (e) => u(g, e, It), Da = (e) => u(Ce, e, gt), ha = (e) => u(fe, e, St), va = (e) => u(Le, e, Nt), c = "{name}", y = "{name} * {value}%", F = "{name} + {value}%", H = "{value}", a = {
+), La = (e) => u(Me, e, Rt), Pa = (e) => u(g, e, It), Da = (e) => u(Ce, e, gt), ha = (e) => u(fe, e, St), va = (e) => u(Le, e, Nt), c = "{name}", y = "{name} * {value}%", F = "{name} + {value}%", H = "{value}", i = {
   domainName: "特徴",
   options: {
     regularParam: {
@@ -491,102 +491,102 @@ const Fa = (e) => [
   return new Ct(e, s, p, o);
 }, Ie = () => ({
   module: w,
-  author: T,
+  author: l,
   kind: Sn
 }), ge = (e) => ({
   module: Y,
-  author: T,
+  author: l,
   kind: e
 }), E = (e) => ({
-  author: T,
+  author: l,
   module: P,
   kind: e
 }), Se = (e) => ({
-  author: T,
+  author: l,
   module: w,
   kind: e
 }), ft = (e) => r(
   Fe,
-  a.options.elementRate,
+  i.options.elementRate,
   e,
   Ie()
 ), Ot = (e) => r(
   He,
-  a.options.debuffRate,
+  i.options.debuffRate,
   e,
   E(g)
 ), Mt = (e) => r(
   ke,
-  a.options.stateRate,
+  i.options.stateRate,
   e,
   E(g)
 ), Lt = (e) => r(
   Ue,
-  a.options.stateResist,
+  i.options.stateResist,
   e,
   ge(S)
 ), Pt = (e) => r(
   xe,
-  a.options.regularParam,
+  i.options.regularParam,
   e,
   E(g)
 ), Dt = (e) => r(
   Ge,
-  a.options.extraParam,
+  i.options.extraParam,
   e,
   E(Ce)
 ), ht = (e) => r(
   Be,
-  a.options.specialParam,
+  i.options.specialParam,
   e,
   E(fe)
 ), vt = (e) => r(
   be,
-  a.options.attackElement,
+  i.options.attackElement,
   e,
   Ie()
 ), Ft = (e) => r(
   Ve,
-  a.options.attackState,
+  i.options.attackState,
   e,
   E(S)
-), Ht = (e) => r(qe, a.options.attackSpeed, e), kt = (e) => r(We, a.options.attackTimes, e), Ut = (e) => r(
+), Ht = (e) => r(qe, i.options.attackSpeed, e), kt = (e) => r(We, i.options.attackTimes, e), Ut = (e) => r(
   Ye,
-  a.options.attackSkill,
+  i.options.attackSkill,
   e,
   ge(Pe)
-), xt = (e) => r(et, a.options.actionPlus, e), Gt = (e) => r(
+), xt = (e) => r(et, i.options.actionPlus, e), Gt = (e) => r(
   tt,
-  a.options.specialFlag,
+  i.options.specialFlag,
   e,
   E(Le)
 ), Bt = (e) => r(
   nt,
-  a.options.collaps,
+  i.options.collaps,
   e,
   E(Oe)
 ), bt = (e) => r(
   ot,
-  a.options.partyAbility,
+  i.options.partyAbility,
   e,
   E(Me)
 ), Vt = (e) => r(
   $e,
-  a.options.equipWeaponType,
+  i.options.equipWeaponType,
   e,
   Se(In)
 ), qt = (e) => r(
   ze,
-  a.options.equipArmorType,
+  i.options.equipArmorType,
   e,
   Se(gn)
-), Wt = (e) => r(Qe, a.options.equipLock, e), Yt = (e) => r(Je, a.options.equipSeal, e), wt = (e) => r(Ke, a.options.skillAdd, e), jt = (e) => r(Xe, a.options.skillSeal, e), Kt = (e) => r(Ze, a.options.slotType, e), Xt = (e) => r(
+), Wt = (e) => r(Qe, i.options.equipLock, e), Yt = (e) => r(Je, i.options.equipSeal, e), wt = (e) => r(Ke, i.options.skillAdd, e), jt = (e) => r(Xe, i.options.skillSeal, e), Kt = (e) => r(Ze, i.options.slotType, e), Xt = (e) => r(
   we,
-  a.options.skillTypeAdd,
+  i.options.skillTypeAdd,
   e
 ), $t = (e) => r(
   je,
-  a.options.skillTypeSeal,
+  i.options.skillTypeSeal,
   e
 ), Ha = "Trait", ka = {
   type: "object",
@@ -1464,11 +1464,11 @@ const _i = (e, t, n) => e.format.replaceAll("{value1}", t.value1.toString()).rep
   hn(e.options.learnSkill),
   Hn(e.options.commonEvent)
 ], N = () => ({
-  author: T,
+  author: l,
   module: P,
   kind: g
 }), C = (e) => ({
-  author: T,
+  author: l,
   module: Y,
   kind: e
 }), d = (e, t, n, o) => {
@@ -1803,36 +1803,36 @@ const _i = (e, t, n) => e.format.replaceAll("{value1}", t.value1.toString()).rep
     "fontSize"
   ],
   additionalProperties: !1
-}, i = (e = {}) => ({
+}, a = (e = {}) => ({
   name: e.name ?? "",
   volume: e.volume ?? 100,
   pitch: e.pitch ?? 100,
   pan: e.pan ?? 0
 }), Sc = (e) => [
-  i(e.cursor),
-  i(e.ok),
-  i(e.cancel),
-  i(e.buzzer),
-  i(e.equip),
-  i(e.save),
-  i(e.load),
-  i(e.battleStart),
-  i(e.escape),
-  i(e.enemyAttack),
-  i(e.enemyDamage),
-  i(e.enemyCollapse),
-  i(e.bossCollapes1),
-  i(e.bossCollapes2),
-  i(e.actorDamage),
-  i(e.actorCollapse),
-  i(e.playRecovery),
-  i(e.playMiss),
-  i(e.playEvasion),
-  i(e.playMagicEvasion),
-  i(e.playReflection),
-  i(e.shop),
-  i(e.useItem),
-  i(e.useSkill)
+  a(e.cursor),
+  a(e.ok),
+  a(e.cancel),
+  a(e.buzzer),
+  a(e.equip),
+  a(e.save),
+  a(e.load),
+  a(e.battleStart),
+  a(e.escape),
+  a(e.enemyAttack),
+  a(e.enemyDamage),
+  a(e.enemyCollapse),
+  a(e.bossCollapes1),
+  a(e.bossCollapes2),
+  a(e.actorDamage),
+  a(e.actorCollapse),
+  a(e.playRecovery),
+  a(e.playMiss),
+  a(e.playEvasion),
+  a(e.playMagicEvasion),
+  a(e.playReflection),
+  a(e.shop),
+  a(e.useItem),
+  a(e.useSkill)
 ], Nc = {
   domainName: "オプション",
   options: {
@@ -1942,7 +1942,7 @@ const _i = (e, t, n) => e.format.replaceAll("{value1}", t.value1.toString()).rep
   rpg: {
     damage: Un,
     data: kn,
-    traits: a,
+    traits: i,
     itemEffect: m
   },
   global: Eo
@@ -2187,11 +2187,11 @@ const _i = (e, t, n) => e.format.replaceAll("{value1}", t.value1.toString()).rep
     }
   },
   additionalProperties: !1
-}, l = (e, t, n = 0) => ({
+}, Xc = (e, t) => _(e, a({ name: t })), _ = (e, t, n = 0) => ({
   code: e,
-  parameters: [i(t)],
+  parameters: [a(t)],
   indent: n
-}), Xc = (e, t = 0) => l(Zn, e, t), $c = (e, t = 0) => l(eo, e, t), zc = (e, t = 0) => l(to, e, t), Qc = (e, t = 0) => l(no, e, t), Jc = (e, t = 0) => l(zn, e, t), Zc = (e, t = 0) => l(Qn, e, t), em = (e, t = 0) => l(Jn, e, t), So = 0, No = 1, Co = 2, v = 3, fo = 4, tm = (e, t) => {
+}), $c = (e, t = 0) => _(Zn, e, t), zc = (e, t = 0) => _(eo, e, t), Qc = (e, t = 0) => _(to, e, t), Jc = (e, t = 0) => _(no, e, t), Zc = (e, t = 0) => _(zn, e, t), em = (e, t = 0) => _(Qn, e, t), tm = (e, t = 0) => _(Jn, e, t), So = 0, No = 1, Co = 2, v = 3, fo = 4, nm = (e, t) => {
   switch (t[6]) {
     case 0:
       return e.hp;
@@ -2201,7 +2201,7 @@ const _i = (e, t, n) => e.format.replaceAll("{value1}", t.value1.toString()).rep
       return e.tp;
   }
   return t[6] >= 2 && t[6] <= 9 ? e.param(t[6] - 2) : 0;
-}, nm = (e, t) => {
+}, om = (e, t) => {
   switch (t[6]) {
     case 0:
       return e.level;
@@ -2227,39 +2227,39 @@ const _i = (e, t, n) => e.format.replaceAll("{value1}", t.value1.toString()).rep
   AGI: 8,
   LUK: 9,
   TP: 10
-}, om = (e, t, n = 0) => [
+}, am = (e, t, n = 0) => [
   e.startId,
   e.endId ?? e.startId,
   n,
   So,
   t.value
-], am = (e, t, n = 0) => [
+], im = (e, t, n = 0) => [
   e.startId,
   e.endId ?? e.startId,
   n,
   No,
   t.variableId
-], im = (e, t, n = 0) => [
+], rm = (e, t, n = 0) => [
   e.startId,
   e.endId ?? e.startId,
   n,
   Co,
   t.min,
   t.max
-], rm = (e, t, n = 0) => [
+], sm = (e, t, n = 0) => [
   e.startId,
   e.endId ?? e.startId,
   n,
   fo,
   t.code
-], sm = (e, t, n = 0) => [
+], cm = (e, t, n = 0) => [
   e.startId,
   e.endId ?? e.startId,
   n,
   v,
   t.type,
   t.itemId
-], cm = (e, t, n = 0) => [
+], mm = (e, t, n = 0) => [
   e.startId,
   e.endId ?? e.startId,
   n,
@@ -2267,7 +2267,7 @@ const _i = (e, t, n) => e.format.replaceAll("{value1}", t.value1.toString()).rep
   3,
   t.index,
   t.param
-], mm = (e, t, n = 0) => [
+], pm = (e, t, n = 0) => [
   e.startId,
   e.endId ?? e.startId,
   n,
@@ -2275,10 +2275,10 @@ const _i = (e, t, n) => e.format.replaceAll("{value1}", t.value1.toString()).rep
   4,
   t.index,
   Oo[t.param]
-], R = new L(), Mo = R.compile(_o), Lo = R.compile(Io), Po = R.compile(uo), Do = R.compile(yo), ho = R.compile(lo), vo = R.compile(go), pm = (e) => vo(e), dm = (e) => Mo(e), Em = (e) => Po(e), Am = (e) => Do(e), _m = (e) => ho(e), Tm = (e) => Lo(e);
+], R = new L(), Mo = R.compile(_o), Lo = R.compile(Io), Po = R.compile(uo), Do = R.compile(yo), ho = R.compile(lo), vo = R.compile(go), dm = (e) => vo(e), Em = (e) => Mo(e), Am = (e) => Po(e), _m = (e) => Do(e), Tm = (e) => ho(e), lm = (e) => Lo(e);
 export {
   cs as ABORT_BATTLE,
-  T as AUTHOR_RMMZ,
+  l as AUTHOR_RMMZ,
   Br as BATTLE_PROCESSING,
   zr as CHANGE_ACTOR_IMAGES,
   Qi as CHANGE_ARMORS,
@@ -2421,7 +2421,7 @@ export {
   Hc as LABEL_REGISTRY_JP,
   kn as LABEL_SET_DATA,
   m as LABEL_SET_ITEM_EFFECT,
-  a as LABEL_SET_TRAIT,
+  i as LABEL_SET_TRAIT,
   Bi as LOOP,
   bi as LOOP_BREAK,
   Y as MODULE_DATA,
@@ -2656,23 +2656,23 @@ export {
   Yc as fromArraySetupChoice,
   qc as fromArraySetupChoiceItem,
   Dc as fromStringArray,
-  nm as getActorValue,
+  om as getActorValue,
   Sa as getArmorTypes,
   hc as getControlChars,
   ua as getElementTypes,
-  tm as getEnemyValue,
+  nm as getEnemyValue,
   Ra as getEquipTypes,
   Lc as getNoteValue,
   Na as getParamNames,
   Ia as getSkillTypes,
   ya as getVariableNames,
   ga as getWeaponTypes,
-  pm as isCommandAudio,
-  dm as isCommandCommonEvent,
-  _m as isCommandInputNumber,
-  Am as isCommandShowChoiceItem,
-  Em as isCommandShowChoices,
-  Tm as isCommandShowMessage,
+  dm as isCommandAudio,
+  Em as isCommandCommonEvent,
+  Tm as isCommandInputNumber,
+  _m as isCommandShowChoiceItem,
+  Am as isCommandShowChoices,
+  lm as isCommandShowMessage,
   Ni as isDataActor,
   Ci as isDataArmor,
   Li as isDataClass,
@@ -2686,19 +2686,20 @@ export {
   Za as joinSourceKey,
   Ua as makeActorData,
   Ga as makeArmorData,
-  i as makeAudioFileParams,
+  Xc as makeAudioCommand,
+  a as makeAudioFileParams,
   Ba as makeClassData,
   kc as makeCommand2_CommonEvent,
   Vc as makeCommand2_ShowChoiceItem,
-  l as makeCommandAudioAny,
-  Jc as makeCommandChangeBattleBGM,
-  em as makeCommandChangeDefeatME,
-  Zc as makeCommandChangeVictoryME,
+  _ as makeCommandAudioAny,
+  Zc as makeCommandChangeBattleBGM,
+  tm as makeCommandChangeDefeatME,
+  em as makeCommandChangeVictoryME,
   Gc as makeCommandInputNumber,
-  Xc as makeCommandPlayBGM,
-  $c as makeCommandPlayBGS,
-  zc as makeCommandPlayME,
-  Qc as makeCommandPlaySE,
+  $c as makeCommandPlayBGM,
+  zc as makeCommandPlayBGS,
+  Qc as makeCommandPlayME,
+  Jc as makeCommandPlaySE,
   jc as makeCommandSetupChoice,
   Ro as makeCommandShowMessage,
   Tc as makeCommonEventData,
@@ -2739,13 +2740,13 @@ export {
   M as testUnknonwKey,
   Ao as toArrayCommonEvent,
   To as toArrayInputNumber,
-  cm as toArrayOperandActorStatus,
-  om as toArrayOperandConstant,
-  mm as toArrayOperandEnemyStatus,
-  sm as toArrayOperandItemData,
-  im as toArrayOperandRandom,
-  rm as toArrayOperandScript,
-  am as toArrayOperandVariable,
+  mm as toArrayOperandActorStatus,
+  am as toArrayOperandConstant,
+  pm as toArrayOperandEnemyStatus,
+  cm as toArrayOperandItemData,
+  rm as toArrayOperandRandom,
+  sm as toArrayOperandScript,
+  im as toArrayOperandVariable,
   wc as toArraySetupChoice,
   Wc as toArraySetupChoiceItem,
   u as traitDomain

@@ -1,5 +1,10 @@
 import { AudioFileParams } from '../../../utils';
 import { Command2_PlayBGM, Command2_PlayBGS, Command2_PlayME, Command2_PlaySE, Command2_ChangeDefeatME, Command2_ChangeVictoryME, Command2_ChangeBattleBGM, CommandUnion_AnyAudio } from './types';
+export declare const makeAudioCommand: <Code extends CommandUnion_AnyAudio["code"]>(code: Code, filename: string) => {
+    code: Code;
+    parameters: [AudioFileParams];
+    indent: number;
+};
 export declare const makeCommandAudioAny: <Code extends CommandUnion_AnyAudio["code"]>(code: Code, audio: AudioFileParams, indent?: number) => {
     code: Code;
     parameters: [AudioFileParams];

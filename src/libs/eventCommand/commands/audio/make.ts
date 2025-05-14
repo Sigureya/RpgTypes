@@ -19,6 +19,13 @@ import {
   CHANGE_BATTLE_BGM,
 } from "@RpgTypes/schema";
 
+export const makeAudioCommand = <Code extends CommandUnion_AnyAudio["code"]>(
+  code: Code,
+  filename: string
+) => {
+  return makeCommandAudioAny(code, makeAudioFileParams({ name: filename }));
+};
+
 export const makeCommandAudioAny = <Code extends CommandUnion_AnyAudio["code"]>(
   code: Code,
   audio: AudioFileParams,
