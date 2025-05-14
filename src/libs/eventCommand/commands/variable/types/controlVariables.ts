@@ -1,4 +1,4 @@
-import type { ValueOf } from "./valueOf";
+import type { ValueOf } from "../../../../schema/data/rpg/event/map/event/eventCommand/paramaters/constants/valueOf";
 import type {
   CHARACTER,
   GAMEDATA,

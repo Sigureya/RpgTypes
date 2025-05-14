@@ -1,7 +1,6 @@
 import type { EventCommandLike } from "./eventComandLike";
 import type { Direction8, MoveRouteData } from "./types";
 import type {
-  ControlVariables,
   MovePicture,
   ShopGoods,
   ShowPicture,
@@ -96,12 +95,6 @@ export interface Command_LabelJump extends EventCommandLike<119> {
 
 export interface Command_ControlSwitches extends EventCommandLike<121> {
   parameters: [min: number, max: number, value: ValueOf<Toggle>];
-}
-
-export interface Command_ControlVariables<
-  Param extends ControlVariables = ControlVariables
-> extends EventCommandLike<122, Param> {
-  parameters: Param;
 }
 
 export interface Command_ControlSelfSwitch extends EventCommandLike<123> {
