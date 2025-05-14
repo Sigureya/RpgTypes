@@ -29,7 +29,7 @@ import type {
 
 interface MakeOtherParam {
   indent?: number;
-  opetation?: number;
+  operation?: number;
 }
 
 export const makeCommandVariableFromConstant = (
@@ -40,7 +40,7 @@ export const makeCommandVariableFromConstant = (
   return {
     code: CONTROL_VARIABLES,
     indent: other.indent ?? 0,
-    parameters: toArrayOperandConstant(target, value, other.opetation ?? 0),
+    parameters: toArrayOperandConstant(target, value, other.operation ?? 0),
   };
 };
 
@@ -52,7 +52,7 @@ export const makeCommandVariableFromVariable = (
   return {
     code: CONTROL_VARIABLES,
     indent: other.indent ?? 0,
-    parameters: toArrayOperandVariable(target, value, other.opetation ?? 0),
+    parameters: toArrayOperandVariable(target, value, other.operation ?? 0),
   };
 };
 export const makeCommandVariableFromRandom = (
@@ -63,7 +63,7 @@ export const makeCommandVariableFromRandom = (
   return {
     code: CONTROL_VARIABLES,
     indent: other.indent ?? 0,
-    parameters: toArrayOperandRandom(target, value, other.opetation ?? 0),
+    parameters: toArrayOperandRandom(target, value, other.operation ?? 0),
   };
 };
 
@@ -75,7 +75,7 @@ export const makeCommandVariableFromScript = (
   return {
     code: CONTROL_VARIABLES,
     indent: other.indent ?? 0,
-    parameters: toArrayOperandScript(target, value, other.opetation ?? 0),
+    parameters: toArrayOperandScript(target, value, other.operation ?? 0),
   };
 };
 
@@ -87,7 +87,7 @@ export const makeCommandVariableFromItemData = (
   return {
     code: CONTROL_VARIABLES,
     indent: other.indent ?? 0,
-    parameters: toArrayOperandItemData(target, value, other.opetation ?? 0),
+    parameters: toArrayOperandItemData(target, value, other.operation ?? 0),
   };
 };
 
@@ -99,7 +99,7 @@ export const makeCommandVariableFromStatusData = (
   return {
     code: CONTROL_VARIABLES,
     indent: other.indent ?? 0,
-    parameters: toArrayOperandActorStatus(target, value, other.opetation ?? 0),
+    parameters: toArrayOperandActorStatus(target, value, other.operation ?? 0),
   };
 };
 
@@ -111,6 +111,6 @@ export const makeCommandVariableFromEnemyData = (
   return {
     code: CONTROL_VARIABLES,
     indent: other.indent ?? 0,
-    parameters: toArrayOperandEnemyStatus(target, value, other.opetation ?? 0),
+    parameters: toArrayOperandEnemyStatus(target, value, other.operation ?? 0),
   };
 };
