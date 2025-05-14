@@ -22,12 +22,6 @@ export interface ParamObject_Operand_ItemData {
   itemId: number;
 }
 
-export interface ParamObject_Operand_CharacterData {
-  type: 5; // CHARACTER
-  id: number;
-  param: number; // ValueOf<CHARACTER>
-}
-
 export interface ParamObject_Operand_PartyData {
   type: 6; // PARTY
   index: number;
