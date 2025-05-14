@@ -10,7 +10,6 @@ import type {
 } from "./eventCommandTypes";
 import type {
   ChanageActorVariable,
-  ParamArray_ControlVariables,
   MovePicture,
   ShopGoods,
   ShopProcessing,
@@ -30,6 +29,7 @@ import type {
   MoveRouteData,
   IndexOfParameter,
 } from "./types";
+import type { ParamArray_ControlVariables } from "@RpgTypes/eventCommand";
 
 export type EventCode = EventCommandsMapper["codeType"];
 export type EventCodeTable = EventCommandsMapper["codeTable"];
