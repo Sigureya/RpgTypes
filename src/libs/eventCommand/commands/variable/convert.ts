@@ -11,7 +11,7 @@ import { ENEMY_PARAM_INDEX } from "./types/paramIndex";
 export const toArrayOperandConstant = (
   target: Type.ParamObject_WritingTarget,
   value: Type.ParamObject_Operand_Constant,
-  operation: number
+  operation: number = 0
 ): Type.Operand_Constatant => [
   target.startId,
   target.endId ?? target.startId,
@@ -23,7 +23,7 @@ export const toArrayOperandConstant = (
 export const toArrayOperandVariable = (
   target: Type.ParamObject_WritingTarget,
   value: Type.ParamObject_Operand_Variable,
-  operation: number
+  operation: number = 0
 ): Type.Operand_Variable => [
   target.startId,
   target.endId ?? target.startId,
@@ -34,7 +34,7 @@ export const toArrayOperandVariable = (
 export const toArrayOperandRandom = (
   target: Type.ParamObject_WritingTarget,
   value: Type.ParamObject_Operand_Random,
-  operation: number
+  operation: number = 0
 ): Type.Operand_Random => [
   target.startId,
   target.endId ?? target.startId,
@@ -47,7 +47,7 @@ export const toArrayOperandRandom = (
 export const toArrayOperandScript = (
   target: Type.ParamObject_WritingTarget,
   value: Type.ParamObject_Operand_Script,
-  operation: number
+  operation: number = 0
 ): Type.Operand_Script => [
   target.startId,
   target.endId ?? target.startId,
@@ -58,7 +58,7 @@ export const toArrayOperandScript = (
 export const toArrayOperandItemData = (
   target: Type.ParamObject_WritingTarget,
   value: Type.ParamObject_Operand_ItemData,
-  operation: number
+  operation: number = 0
 ): Type.Operand_ItemData => [
   target.startId,
   target.endId ?? target.startId,
@@ -71,7 +71,7 @@ export const toArrayOperandItemData = (
 export const toArrayOperandActorStatus = (
   target: Type.ParamObject_WritingTarget,
   value: Type.ParamObject_Operand_ActorStatus,
-  operation: number
+  operation: number = 0
 ): Type.Operand_ActorStatus => [
   target.startId,
   target.endId ?? target.startId,
