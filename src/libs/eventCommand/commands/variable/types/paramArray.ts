@@ -1,12 +1,7 @@
 import type { ValueOf } from "@RpgTypes/schema";
-import type {
-  CHARACTER,
-  GAMEDATA,
-  LAST,
-  OPERAND,
-  OTHER,
-  STATUS,
-} from "./operand";
+import type { GAMEDATA, LAST, OPERAND, OTHER, STATUS } from "./operand";
+
+import type { CHARACTER } from "./character/dataSource";
 type Header = [startId: number, endId: number, operationType: number];
 
 type Operand<Code extends number, Params extends unknown[]> = [
@@ -49,7 +44,7 @@ export type Operand_EnemyStatus = OperandGamedata<
 
 export type Operand_CharacterData = OperandGamedata<
   GAMEDATA["CHARACTER"],
-  [id: number, param: ValueOf<CHARACTER>]
+  [id: number, param: ValueOf<typeof CHARACTER>]
 >;
 
 export type Operand_PartyData = OperandGamedata<
