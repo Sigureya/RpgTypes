@@ -37,10 +37,16 @@ export type Operand_ItemData = OperandGamedata<
   [itemId: number]
 >;
 
-export type Operand_StatusData = OperandGamedata<
-  GAMEDATA["ACTOR"] | GAMEDATA["ENEMY"],
+export type Operand_ActorStatus = OperandGamedata<
+  GAMEDATA["ACTOR"],
   [index: number, param: ValueOf<STATUS>]
 >;
+
+export type Operand_EnemyStatus = OperandGamedata<
+  GAMEDATA["ENEMY"],
+  [index: number, param: number]
+>;
+
 export type Operand_CharacterData = OperandGamedata<
   GAMEDATA["CHARACTER"],
   [id: number, param: ValueOf<CHARACTER>]
@@ -64,9 +70,10 @@ export type ParamArray_ControlVariables =
   | Operand_Variable
   | Operand_Random
   | Operand_Script
-  | Operand_StatusData
+  | Operand_ActorStatus
   | Operand_ItemData
   | Operand_CharacterData
   | Operand_PartyData
   | Operand_OtherData
-  | Operand_LastData;
+  | Operand_LastData
+  | Operand_EnemyStatus;
