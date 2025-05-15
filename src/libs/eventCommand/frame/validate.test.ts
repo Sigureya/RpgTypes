@@ -1,13 +1,22 @@
 import { describe, test, expect } from "vitest";
 
-import type { EventCommandLike2 } from "./types";
+import type { EventCommandBase, EventCommandLike2 } from "./types";
 
 import { isCommandLike } from "./validate";
 describe("isCommandLike", () => {
-  test("returns true for valid EventCommandLike2 object", () => {
-    const validCommand: EventCommandLike2<number, unknown[]> = {
+  test("returns true for valid EventCommandBase object", () => {
+    const validCommand: EventCommandBase = {
       code: 1,
       parameters: [],
+      indent: 0,
+    };
+
+    expect(isCommandLike(validCommand)).toBe(true);
+  });
+  test("returns true for valid EventCommandBase object", () => {
+    const validCommand: EventCommandLike2<number, [number]> = {
+      code: 1,
+      parameters: [6],
       indent: 0,
     };
 
