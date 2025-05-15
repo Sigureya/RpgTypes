@@ -16,7 +16,9 @@ import type {
   Command2_InputNumber,
   Command_ShowMessageHeader,
   CommandUnion_TextBody,
+  Command2_ScrollTextHead,
 } from "./commands";
+import { SCHEMA_COMMAND_SCROLL_TEXT_HEAD } from "./commands/message/scrollText/schema";
 const ajv = new Ajv();
 // schemaはindex.ts無しで直接importすること！
 // 過去に循環参照エラーで苦しんでます
@@ -31,6 +33,13 @@ const inputNumber = ajv.compile(SCHEMA_COMMAND_INPUT_NUMBER);
 const textBody = ajv.compile(SCHEMA_COMMAND_TEXT_BODY);
 const commonVent = ajv.compile(SCHEMA_COMMAND_CALL_COMMON_EVENT);
 const audioCommand = ajv.compile(SCHEMA_COMMAND_ANY_AUDIO);
+const scrollTextHead = ajv.compile(SCHEMA_COMMAND_SCROLL_TEXT_HEAD);
+
+export const isCommandScrollTextHead = (
+  data: unknown
+): data is Command2_ScrollTextHead => {
+  return scrollTextHead(data);
+};
 
 export const isCommandTextBody = (
   command: unknown
