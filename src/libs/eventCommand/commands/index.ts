@@ -5,3 +5,4 @@ export * from "./message";
 export * from "./message";
 export * from "./unionTypes";
 export * from "./script";
+export * from "./variable";
