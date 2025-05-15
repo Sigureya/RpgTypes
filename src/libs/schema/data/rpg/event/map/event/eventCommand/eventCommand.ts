@@ -105,7 +105,7 @@ export type EventCommandsMapper = CommandTemplate<
     /**
      * @description Comment
      */
-    COMMENT: [content: string];
+    COMMENT_HEAD: [content: string];
     /**
      * @description note (Comment body)
      */
