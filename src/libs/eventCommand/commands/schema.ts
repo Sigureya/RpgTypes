@@ -8,7 +8,7 @@ export const SCHEMA_COMMAND_TEXT_BODY = {
   properties: {
     code: {
       type: "integer",
-      enum: [108, 408, 355, 401, 405],
+      enum: [108, 408, 355, 401, 405, 655],
     },
     indent: { type: "integer", minimum: 0 },
     parameters: {
@@ -24,6 +24,7 @@ export const SCHEMA_COMMAND_TEXT_BODY = {
     | 108 // comment
     | 408 // comment
     | 355 // script
+    | 655 // script
     | 401 // show message
     | 405, // show scroll
     [comment: string]
