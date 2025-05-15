@@ -1,7 +1,13 @@
-import { Command2_CommonEvent, Command2_ShowChoices, Command2_ShowChoiceItem, Command2_InputNumber, Command2_ShowMessage, CommandUnion_AnyAudio } from './commands';
+import { CommandUnion_TextBody } from './commands/schema';
+import { Command2_ShowChoices, Command2_ShowChoiceItem } from './commands/message/setupChoice';
+import { Command2_InputNumber } from './commands/message/inputNumber/types';
+import { Command_ShowMessageHeader } from './commands/message/showMessage/types';
+import { Command2_CommonEvent } from './commands/callCommonEvent/types';
+import { CommandUnion_AnyAudio } from './commands/audio';
+export declare const isCommandTextBody: (command: unknown) => command is CommandUnion_TextBody;
 export declare const isCommandAudio: (data: unknown) => data is CommandUnion_AnyAudio;
 export declare const isCommandCommonEvent: (data: unknown) => data is Command2_CommonEvent;
 export declare const isCommandShowChoices: (data: unknown) => data is Command2_ShowChoices;
 export declare const isCommandShowChoiceItem: (data: unknown) => data is Command2_ShowChoiceItem;
 export declare const isCommandInputNumber: (data: unknown) => data is Command2_InputNumber;
-export declare const isCommandShowMessage: (data: unknown) => data is Command2_ShowMessage;
+export declare const isCommandShowMessage: (data: unknown) => data is Command_ShowMessageHeader;

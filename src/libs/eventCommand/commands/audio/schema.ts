@@ -1,6 +1,6 @@
 import type { JSONSchemaType } from "ajv";
 import type { CommandUnion_AnyAudio } from "./types";
-import type { AudioFileParams } from "@RpgTypes/utils";
+import type { AudioFileParams } from "src/libs/utils";
 
 export const SCHEMA_COMMAND_ANY_AUDIO = {
   type: "object",

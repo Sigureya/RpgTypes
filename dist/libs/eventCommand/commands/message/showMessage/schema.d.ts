@@ -4,7 +4,7 @@ export declare const SCHEMA_COMMAND_SHOW_MESSAGE: {
     readonly properties: {
         readonly code: {
             readonly type: "integer";
-            readonly enum: readonly [101];
+            readonly const: 101;
         };
         readonly indent: {
             readonly type: "integer";

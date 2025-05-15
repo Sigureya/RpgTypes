@@ -5,7 +5,7 @@ import { Command_RotatePicture, Command_SetEventLocation, Command_SetVehicleLoca
 import { ChanageActorVariable, MovePicture, ShopGoods, ShopProcessing, ShowPicture, ValueOf, Designation, Toggle, Operation_PlusMinus } from './paramaters';
 import { Param_ChangeEnemyParameters, Param_EnemyIterate } from './paramaters/changeBattler';
 import { CommandTemplate, Direction8, MoveRouteData, IndexOfParameter } from './types';
-import { ParamArray_ControlVariables } from '../../../../../../../eventCommand';
+import { ParamArray_ControlVariables } from '../../../../../../../eventCommand/commands/variable';
 import type * as EventCommandCodes from "./eventCommandCodes";
 export type EventCode = EventCommandsMapper["codeType"];
 export type EventCodeTable = EventCommandsMapper["codeTable"];

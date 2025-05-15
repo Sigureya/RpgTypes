@@ -5,7 +5,7 @@ export const SCHEMA_COMMAND_SHOW_MESSAGE = {
   type: "object",
   required: ["code", "parameters", "indent"],
   properties: {
-    code: { type: "integer", enum: [101] },
+    code: { type: "integer", const: 101 }, // Assuming 101 is the code for ShowMessage
     indent: { type: "integer", minimum: 0 },
     parameters: {
       type: "array",

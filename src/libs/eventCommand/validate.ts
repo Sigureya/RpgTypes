@@ -1,25 +1,23 @@
 import Ajv from "ajv";
-import type {
-  Command2_CommonEvent,
-  Command2_ShowChoices,
-  Command2_ShowChoiceItem,
-  Command2_InputNumber,
-  Command_ShowMessageHeader,
-  CommandUnion_AnyAudio,
-  CommandUnion_TextBody,
-} from "./commands";
 import {
-  SCHEMA_COMMAND_CALL_COMMON_EVENT,
-  SCHEMA_COMMAND_SHOW_MESSAGE,
-  SCHEMA_COMMAND_SHOW_CHOICES,
-  SCHEMA_COMMAND_SHOW_CHOICE_ITEM,
-  SCHEMA_COMMAND_INPUT_NUMBER,
-  SCHEMA_COMMAND_ANY_AUDIO,
   SCHEMA_COMMAND_TEXT_BODY,
-} from "./commands";
+  type CommandUnion_TextBody,
+} from "./commands/schema";
+import {
+  type Command2_ShowChoices,
+  type Command2_ShowChoiceItem,
+  SCHEMA_COMMAND_SHOW_CHOICE_ITEM,
+  SCHEMA_COMMAND_SHOW_CHOICES,
+} from "./commands/message/setupChoice";
+import type { Command2_InputNumber } from "./commands/message/inputNumber/types";
+import { SCHEMA_COMMAND_SHOW_MESSAGE } from "./commands/message/showMessage/schema";
+import type { Command_ShowMessageHeader } from "./commands/message/showMessage/types";
+import { SCHEMA_COMMAND_INPUT_NUMBER } from "./commands/message/inputNumber/schema";
+import { SCHEMA_COMMAND_CALL_COMMON_EVENT } from "./commands/callCommonEvent/schema";
+import type { Command2_CommonEvent } from "./commands/callCommonEvent/types";
+import type { CommandUnion_AnyAudio } from "./commands/audio";
+import { SCHEMA_COMMAND_ANY_AUDIO } from "./commands/audio";
 const ajv = new Ajv();
-
-const commonVent = ajv.compile(SCHEMA_COMMAND_CALL_COMMON_EVENT);
 
 const showMessage = ajv.compile(SCHEMA_COMMAND_SHOW_MESSAGE);
 
@@ -27,9 +25,10 @@ const showChoices = ajv.compile(SCHEMA_COMMAND_SHOW_CHOICES);
 const showChoiceItem = ajv.compile(SCHEMA_COMMAND_SHOW_CHOICE_ITEM);
 
 const inputNumber = ajv.compile(SCHEMA_COMMAND_INPUT_NUMBER);
-const audioCommand = ajv.compile(SCHEMA_COMMAND_ANY_AUDIO);
 
 const textBody = ajv.compile(SCHEMA_COMMAND_TEXT_BODY);
+const commonVent = ajv.compile(SCHEMA_COMMAND_CALL_COMMON_EVENT);
+const audioCommand = ajv.compile(SCHEMA_COMMAND_ANY_AUDIO);
 
 export const isCommandTextBody = (
   command: unknown
