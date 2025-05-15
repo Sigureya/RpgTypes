@@ -17,23 +17,31 @@ import type {
   Command_ShowMessageHeader,
   CommandUnion_TextBody,
   Command2_ScrollTextHead,
+  CommandUnion_ChangeActorText,
 } from "./commands";
 import { SCHEMA_COMMAND_SCROLL_TEXT_HEAD } from "./commands/message/scrollText/schema";
+import { SCHEMA_COMMAND_CHANGE_ACTOR_TEXT } from "./commands/actor/changeText/schema";
 const ajv = new Ajv();
 // schemaはindex.ts無しで直接importすること！
 // 過去に循環参照エラーで苦しんでます
+const changeActorText = ajv.compile(SCHEMA_COMMAND_CHANGE_ACTOR_TEXT);
+const inputNumber = ajv.compile(SCHEMA_COMMAND_INPUT_NUMBER);
+const commonVent = ajv.compile(SCHEMA_COMMAND_CALL_COMMON_EVENT);
 
+const showChoiceItem = ajv.compile(SCHEMA_COMMAND_SHOW_CHOICE_ITEM);
 const showMessage = ajv.compile(SCHEMA_COMMAND_SHOW_MESSAGE);
 
 const showChoices = ajv.compile(SCHEMA_COMMAND_SHOW_CHOICES);
-const showChoiceItem = ajv.compile(SCHEMA_COMMAND_SHOW_CHOICE_ITEM);
-
-const inputNumber = ajv.compile(SCHEMA_COMMAND_INPUT_NUMBER);
 
 const textBody = ajv.compile(SCHEMA_COMMAND_TEXT_BODY);
-const commonVent = ajv.compile(SCHEMA_COMMAND_CALL_COMMON_EVENT);
 const audioCommand = ajv.compile(SCHEMA_COMMAND_ANY_AUDIO);
 const scrollTextHead = ajv.compile(SCHEMA_COMMAND_SCROLL_TEXT_HEAD);
+
+export const isCommandChangeActorText = (
+  data: unknown
+): data is CommandUnion_ChangeActorText => {
+  return changeActorText(data);
+};
 
 export const isCommandScrollTextHead = (
   data: unknown

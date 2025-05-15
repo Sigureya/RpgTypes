@@ -1,4 +1,6 @@
-import { CommandUnion_AnyAudio, Command2_CommonEvent, Command2_ShowChoices, Command2_ShowChoiceItem, Command2_InputNumber, Command_ShowMessageHeader, CommandUnion_TextBody } from './commands';
+import { CommandUnion_AnyAudio, Command2_CommonEvent, Command2_ShowChoices, Command2_ShowChoiceItem, Command2_InputNumber, Command_ShowMessageHeader, CommandUnion_TextBody, Command2_ScrollTextHead, CommandUnion_ChangeActorText } from './commands';
+export declare const isCommandChangeActorText: (data: unknown) => data is CommandUnion_ChangeActorText;
+export declare const isCommandScrollTextHead: (data: unknown) => data is Command2_ScrollTextHead;
 export declare const isCommandTextBody: (command: unknown) => command is CommandUnion_TextBody;
 export declare const isCommandAudio: (data: unknown) => data is CommandUnion_AnyAudio;
 export declare const isCommandCommonEvent: (data: unknown) => data is Command2_CommonEvent;

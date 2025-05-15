@@ -5,20 +5,20 @@ import {
   makeCommandChangeActorProfile,
 } from "./make";
 import type {
-  Command2_ChangeActorName,
-  Command2_ChangeActorNickName,
+  Command_ChangeActorName,
+  Command_ChangeActorNickName,
   ParamObject_ChangeActorName,
   ParamObject_ChangeActorNickName,
   ParamObject_ChangeActorProfile,
 } from "./types";
-import type { Command2_ChangeActorProfile } from "./types";
+import type { Command_ChangeActorProfile } from "./types";
 import { CHANGE_NAME, CHANGE_NICKNAME, CHANGE_PROFILE } from "@RpgTypes/schema";
 
 describe("makeCommandChangeActorName", () => {
   test("should create a command to change actor name", () => {
     const param: ParamObject_ChangeActorName = { actorId: 1, name: "New Name" };
     const indent = 2;
-    const expected: Command2_ChangeActorName = {
+    const expected: Command_ChangeActorName = {
       code: CHANGE_NAME,
       parameters: [param.actorId, param.name],
       indent,
@@ -34,7 +34,7 @@ describe("makeCommandChangeActorNickName", () => {
       nickname: "New Nickname",
     };
     const indent = 3;
-    const expected: Command2_ChangeActorNickName = {
+    const expected: Command_ChangeActorNickName = {
       code: CHANGE_NICKNAME,
       parameters: [param.actorId, param.nickname],
       indent,
@@ -50,7 +50,7 @@ describe("makeCommandChangeActorProfile", () => {
       profile: "New Profile",
     };
     const indent = 4;
-    const expected: Command2_ChangeActorProfile = {
+    const expected: Command_ChangeActorProfile = {
       code: CHANGE_PROFILE,
       parameters: [param.actorId, param.profile],
       indent,

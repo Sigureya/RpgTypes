@@ -1,5 +1,5 @@
 import type { JSONSchemaType } from "ajv";
-import type { Command2_ChangeActorText } from "./types";
+import type { CommandUnion_ChangeActorText } from "./types";
 
 export const SCHEMA_COMMAND_CHANGE_ACTOR_TEXT = {
   type: "object",
@@ -22,4 +22,4 @@ export const SCHEMA_COMMAND_CHANGE_ACTOR_TEXT = {
     },
   },
   additionalProperties: false,
-} as const satisfies JSONSchemaType<Command2_ChangeActorText>;
+} as const satisfies JSONSchemaType<CommandUnion_ChangeActorText>;

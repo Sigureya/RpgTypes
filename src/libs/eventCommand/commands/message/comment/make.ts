@@ -2,7 +2,7 @@ import { COMMENT_HEAD, COMMENT_BODY } from "@RpgTypes/schema";
 import type {
   ParamArray_Comment,
   ParamObject_Comment,
-  Command2_CommentHeader,
+  Command_CommentHeader,
   Command2_CommentBody,
 } from "./types";
 
@@ -19,7 +19,7 @@ export const convertCommentArrayToObject = (
 export const makeCommandCommentHeader = (
   comment: string,
   indent: number = 0
-): Command2_CommentHeader => ({
+): Command_CommentHeader => ({
   code: COMMENT_HEAD,
   indent,
   parameters: makeCommentArray(comment),
@@ -42,5 +42,5 @@ export const makeCommentCommandArray = (
     index === 0
       ? makeCommandCommentHeader(comment, indent)
       : makeCommandCommentBody(comment, indent)
-  ) as [Command2_CommentHeader, ...Command2_CommentBody[]];
+  ) as [Command_CommentHeader, ...Command2_CommentBody[]];
 };
