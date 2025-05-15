@@ -16,7 +16,7 @@ export interface ParamObject_ChangeActorProfile {
   profile: string;
 }
 
-export interface Command2_ChangeActorText
+export interface CommandUnion_ChangeActorText
   extends EventCommandLike2<320 | 324 | 325> {
   parameters: ParamArray_ChangeActorText;
 }
