@@ -7,7 +7,7 @@ export interface EventCommandBase {
 export interface EventCommandLike2<
   Code extends number,
   Param extends unknown[] = unknown[]
-> {
+> extends EventCommandBase {
   code: Code;
   indent: number;
   parameters: Param;
