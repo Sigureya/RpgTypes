@@ -1,5 +1,5 @@
 import type { JSONSchemaType } from "ajv";
-import type { Command2_ShowMessage } from "./types";
+import type { Command_ShowMessageHeader } from "./types";
 
 export const SCHEMA_COMMAND_SHOW_MESSAGE = {
   type: "object",
@@ -21,4 +21,4 @@ export const SCHEMA_COMMAND_SHOW_MESSAGE = {
       maxItems: 5,
     },
   },
-} as const satisfies JSONSchemaType<Command2_ShowMessage>;
+} as const satisfies JSONSchemaType<Command_ShowMessageHeader>;
