@@ -1,13 +1,11 @@
 import { describe, test, expect } from "vitest";
 import {
-  isCommandAudio,
   isCommandCommonEvent,
   isCommandInputNumber,
   isCommandShowChoiceItem,
   isCommandShowChoices,
   isCommandShowMessage,
 } from "./validate";
-import type { AudioFileParams } from "@RpgTypes/utils";
 import { makeCommandInputNumber } from "./commands/message/inputNumber/make";
 import {
   makeCommandSetupChoice,
@@ -16,20 +14,6 @@ import {
 import { makeCommandShowMessage } from "./commands/message/showMessage/convert";
 import { makeCommand2_CommonEvent } from "./commands/callCommonEvent/make";
 import type { Command2_CommonEvent } from "./commands/callCommonEvent/types";
-import type {
-  Command2_PlayBGM,
-  Command2_PlayBGS,
-  Command2_PlayME,
-  Command2_PlaySE,
-  Command2_ChangeBattleBGM,
-} from "./commands/audio";
-import {
-  makeCommandPlayBGM,
-  makeCommandPlayBGS,
-  makeCommandPlayME,
-  makeCommandPlaySE,
-  makeCommandChangeBattleBGM,
-} from "./commands/audio";
 
 const testInvalidPattern = (fn: (data: unknown) => boolean) => {
   test("Invalid command", () => {
@@ -98,35 +82,4 @@ describe("isCommandShowMessage", () => {
   });
 
   testInvalidPattern(isCommandShowMessage);
-});
-
-describe("isCommandAudio", () => {
-  const MockAudio: AudioFileParams = {
-    name: "test",
-    volume: 100,
-    pitch: 100,
-    pan: 0,
-  };
-  test("Play BGM", () => {
-    const command: Command2_PlayBGM = makeCommandPlayBGM(MockAudio);
-
-    expect(isCommandAudio(command)).toBe(true);
-  });
-  test("Play BGS", () => {
-    const command: Command2_PlayBGS = makeCommandPlayBGS(MockAudio);
-    expect(isCommandAudio(command)).toBe(true);
-  });
-  test("Play ME", () => {
-    const command: Command2_PlayME = makeCommandPlayME(MockAudio);
-    expect(isCommandAudio(command)).toBe(true);
-  });
-  test("Play SE", () => {
-    const command: Command2_PlaySE = makeCommandPlaySE(MockAudio);
-    expect(isCommandAudio(command)).toBe(true);
-  });
-  test("Change Battle BGM", () => {
-    const command: Command2_ChangeBattleBGM =
-      makeCommandChangeBattleBGM(MockAudio);
-    expect(isCommandAudio(command)).toBe(true);
-  });
 });
