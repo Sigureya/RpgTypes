@@ -29,23 +29,27 @@ export const isCommandShowScrollingTextBody = (
     isCommandTextBody(command) && command.code === SHOW_SCROLLING_TEXT_BODY
   );
 };
-export const isCommandCommentBody = (
-  command: unknown
-): command is Command2_CommentBody => {
-  return isCommandTextBody(command) && command.code === COMMENT_BODY;
-};
+
 export const isCommandCommentHeader = (
   command: unknown
 ): command is Command2_CommentHeader => {
   return isCommandTextBody(command) && command.code === COMMENT_HEAD;
 };
-export const isCommandScriptBody = (
+
+export const isCommandCommentBody = (
   command: unknown
-): command is Command2_ScriptBody => {
-  return isCommandTextBody(command) && command.code === SCRIPT_EVAL_BODY;
+): command is Command2_CommentBody => {
+  return isCommandTextBody(command) && command.code === COMMENT_BODY;
 };
+
 export const isCommandScriptHeader = (
   command: unknown
 ): command is Command2_ScriptHeader => {
   return isCommandTextBody(command) && command.code === SCRIPT_EVAL;
+};
+
+export const isCommandScriptBody = (
+  command: unknown
+): command is Command2_ScriptBody => {
+  return isCommandTextBody(command) && command.code === SCRIPT_EVAL_BODY;
 };
