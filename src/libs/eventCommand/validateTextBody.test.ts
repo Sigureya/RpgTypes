@@ -1,8 +1,7 @@
 import { describe, test, expect } from "vitest";
 import { isCommandTextBody } from "./validate";
-import { isCommandShowMessageBody } from "./validateEx";
+import { isCommandShowMessageBody } from "./validateTextBody";
 import { SHOW_MESSAGE_BODY } from "@RpgTypes/schema";
-import { makeCommandShowMessageBody } from "./commands/message/showMessage/convert";
 import {
   makeCommandCommentBody,
   makeCommandCommentHeader,
@@ -11,6 +10,7 @@ import {
   makeCommandScriptBody,
   makeCommandScriptHeader,
 } from "./commands/script";
+import { makeCommandShowMessageBody } from "./commands/message/showMessage/convert";
 
 describe("isCommandTextBody", () => {
   test("message body", () => {
