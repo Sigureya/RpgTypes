@@ -1,15 +1,16 @@
 import type { Converter } from "@RpgTypes/eventCommand/frame";
 import type {
-  Command2_ShowMessage,
+  Command_ShowMessageHeader,
+  Command2_ShowMessageBody,
   ParamArray_ShowMessage,
   ParamObject_ShowMessage,
 } from "./types";
-import { SHOW_MESSAGE } from "@RpgTypes/schema";
+import { SHOW_MESSAGE, SHOW_MESSAGE_BODY } from "@RpgTypes/schema";
 
 export const makeCommandShowMessage = (
   param: Partial<ParamObject_ShowMessage> | undefined,
   indent: number = 0
-): Command2_ShowMessage => ({
+): Command_ShowMessageHeader => ({
   code: SHOW_MESSAGE,
   indent,
   parameters: [
@@ -19,6 +20,15 @@ export const makeCommandShowMessage = (
     param?.positionType ?? 2,
     param?.speakerName ?? "",
   ],
+});
+
+export const makeCommandShowMessageBody = (
+  text: string,
+  indent: number = 0
+): Command2_ShowMessageBody => ({
+  code: SHOW_MESSAGE_BODY,
+  indent,
+  parameters: [text],
 });
 
 export const CommandShowMessage = {
