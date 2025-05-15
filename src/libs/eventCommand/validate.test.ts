@@ -6,9 +6,11 @@ import {
   isCommandShowChoiceItem,
   isCommandShowChoices,
   isCommandShowMessage,
+  isCommandTextBody,
 } from "./validate";
 import * as Command from "./commands";
 import type { AudioFileParams } from "@RpgTypes/utils";
+
 describe("isCommandCommonEvent", () => {
   test("Valid command", () => {
     const command: Command.Command2_CommonEvent =
@@ -119,5 +121,28 @@ describe("isCommandAudio", () => {
     const command: Command.Command2_ChangeBattleBGM =
       Command.makeCommandChangeBattleBGM(MockAudio);
     expect(isCommandAudio(command)).toBe(true);
+  });
+});
+
+describe("isCommandTextBody", () => {
+  test("message body", () => {
+    const command = Command.makeCommandShowMessageBody("aaa");
+    expect(isCommandTextBody(command)).toBe(true);
+  });
+  test("comment head", () => {
+    const command = Command.makeCommandCommentHeader("aaa");
+    expect(isCommandTextBody(command)).toBe(true);
+  });
+  test("comment body", () => {
+    const command = Command.makeCommandCommentBody("aaa");
+    expect(isCommandTextBody(command)).toBe(true);
+  });
+  test("script head", () => {
+    const command = Command.makeCommandScriptHeader("aaa");
+    expect(isCommandTextBody(command)).toBe(true);
+  });
+  test("script body", () => {
+    const command = Command.makeCommandScriptBody("aaa");
+    expect(isCommandTextBody(command)).toBe(true);
   });
 });
