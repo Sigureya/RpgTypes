@@ -1,0 +1,46 @@
+import { COMMENT, COMMENT_BODY } from "@RpgTypes/schema";
+import type {
+  ParamArray_Comment,
+  ParamObject_Comment,
+  Command2_CommentHeader,
+  Command2_CommentBody,
+} from "./types";
+
+export const makeCommentArray = (comment: string): ParamArray_Comment => {
+  return [comment];
+};
+
+export const convertCommentArrayToObject = (
+  paramArray: ParamArray_Comment
+): ParamObject_Comment => ({
+  comment: paramArray[0],
+});
+
+export const makeCommandCommentHeader = (
+  comment: string,
+  indent: number = 0
+): Command2_CommentHeader => ({
+  code: COMMENT,
+  indent,
+  parameters: makeCommentArray(comment),
+});
+
+export const makeCommandCommentBody = (
+  comment: string,
+  indent: number = 0
+): Command2_CommentBody => ({
+  code: COMMENT_BODY,
+  indent,
+  parameters: makeCommentArray(comment),
+});
+
+export const makeCommentCommandArray = (
+  comments: ReadonlyArray<string>,
+  indent: number = 0
+) => {
+  return comments.map((comment, index) =>
+    index === 0
+      ? makeCommandCommentHeader(comment, indent)
+      : makeCommandCommentBody(comment, indent)
+  ) as [Command2_CommentHeader, ...Command2_CommentBody[]];
+};
