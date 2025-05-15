@@ -1,8 +1,8 @@
-import type { EventCommandLike2 } from "./types";
+import type { EventCommandBase } from "./types";
 
 export const isCommandLike = (
   command: unknown
-): command is EventCommandLike2<number, unknown[]> => {
+): command is EventCommandBase => {
   if (!command) {
     return false;
   }
