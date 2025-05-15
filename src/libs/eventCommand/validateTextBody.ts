@@ -9,7 +9,7 @@ import {
 import type {
   Command2_ShowMessageBody,
   Command2_CommentBody,
-  Command2_CommentHeader,
+  Command_CommentHeader,
   Command2_ScrollTextBody,
   Command2_ScriptHeader,
   Command2_ScriptBody,
@@ -32,7 +32,7 @@ export const isCommandShowScrollingTextBody = (
 
 export const isCommandCommentHeader = (
   command: unknown
-): command is Command2_CommentHeader => {
+): command is Command_CommentHeader => {
   return isCommandTextBody(command) && command.code === COMMENT_HEAD;
 };
 

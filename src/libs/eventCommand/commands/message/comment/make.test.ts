@@ -9,7 +9,7 @@ import {
 } from "./make";
 import type {
   Command2_CommentBody,
-  Command2_CommentHeader,
+  Command_CommentHeader,
   ParamArray_Comment,
 } from "./types";
 
@@ -32,7 +32,7 @@ describe("makeCommandCommentHeader", () => {
   test("should create a Command2_CommentHeader with the correct structure", () => {
     const comment = "Header comment";
     const indent = 2;
-    const result: Command2_CommentHeader = makeCommandCommentHeader(
+    const result: Command_CommentHeader = makeCommandCommentHeader(
       comment,
       indent
     );
@@ -41,7 +41,7 @@ describe("makeCommandCommentHeader", () => {
       code: COMMENT,
       indent,
       parameters: [comment],
-    } satisfies Command2_CommentHeader);
+    } satisfies Command_CommentHeader);
   });
 });
 
