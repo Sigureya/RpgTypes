@@ -1,25 +1,25 @@
 import Ajv from "ajv";
-import {
-  SCHEMA_COMMAND_TEXT_BODY,
-  type CommandUnion_TextBody,
-} from "./commands/schema";
-import type {
-  Command2_ShowChoices,
-  Command2_ShowChoiceItem,
-} from "./commands/message/setupChoice";
-import type { Command2_InputNumber } from "./commands/message/inputNumber/types";
+import { SCHEMA_COMMAND_TEXT_BODY } from "./commands/schema";
 import { SCHEMA_COMMAND_SHOW_MESSAGE } from "./commands/message/showMessage/schema";
-import type { Command_ShowMessageHeader } from "./commands/message/showMessage/types";
 import { SCHEMA_COMMAND_INPUT_NUMBER } from "./commands/message/inputNumber/schema";
 import { SCHEMA_COMMAND_CALL_COMMON_EVENT } from "./commands/callCommonEvent/schema";
-import type { Command2_CommonEvent } from "./commands/callCommonEvent/types";
-import type { CommandUnion_AnyAudio } from "./commands/audio";
 import { SCHEMA_COMMAND_ANY_AUDIO } from "./commands/audio/schema";
 import {
   SCHEMA_COMMAND_SHOW_CHOICES,
   SCHEMA_COMMAND_SHOW_CHOICE_ITEM,
 } from "./commands/message/setupChoice/schema";
+import type {
+  CommandUnion_AnyAudio,
+  Command2_CommonEvent,
+  Command2_ShowChoices,
+  Command2_ShowChoiceItem,
+  Command2_InputNumber,
+  Command_ShowMessageHeader,
+  CommandUnion_TextBody,
+} from "./commands";
 const ajv = new Ajv();
+// schemaはindex.ts無しで直接importすること！
+// 過去に循環参照エラーで苦しんでます
 
 const showMessage = ajv.compile(SCHEMA_COMMAND_SHOW_MESSAGE);
 
