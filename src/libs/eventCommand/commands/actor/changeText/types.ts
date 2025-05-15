@@ -21,13 +21,13 @@ export interface CommandUnion_ChangeActorText
   parameters: ParamArray_ChangeActorText;
 }
 
-export interface Command2_ChangeActorName extends EventCommandLike2<320> {
+export interface Command_ChangeActorName extends EventCommandLike2<320> {
   parameters: [actorId: number, name: string];
 }
-export interface Command2_ChangeActorNickName extends EventCommandLike2<324> {
+export interface Command_ChangeActorNickName extends EventCommandLike2<324> {
   parameters: [actorId: number, nickname: string];
 }
 
-export interface Command2_ChangeActorProfile extends EventCommandLike2<325> {
+export interface Command_ChangeActorProfile extends EventCommandLike2<325> {
   parameters: [actorId: number, profile: string];
 }
