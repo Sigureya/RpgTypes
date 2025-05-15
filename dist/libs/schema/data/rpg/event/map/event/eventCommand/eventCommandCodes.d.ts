@@ -7,7 +7,7 @@ export declare const INPUT_NUMBER: 103;
 export declare const SELECT_ITEM: 104;
 export declare const SHOW_SCROLLING_TEXT: 105;
 export declare const SHOW_SCROLLING_TEXT_BODY: 405;
-export declare const COMMENT: 108;
+export declare const COMMENT_HEAD: 108;
 export declare const COMMENT_BODY: 408;
 export declare const SKIP: 109;
 export declare const CONDITIONAL_BRANCH: 111;
