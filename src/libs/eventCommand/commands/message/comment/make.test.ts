@@ -1,5 +1,5 @@
 import { describe, test, expect } from "vitest";
-import { COMMENT_HEAD, COMMENT_BODY } from "@RpgTypes/schema";
+import { COMMENT_HEAD as COMMENT, COMMENT_BODY } from "@RpgTypes/schema";
 import {
   makeCommentArray,
   convertCommentArrayToObject,
@@ -38,7 +38,7 @@ describe("makeCommandCommentHeader", () => {
     );
 
     expect(result).toEqual({
-      code: COMMENT_HEAD,
+      code: COMMENT,
       indent,
       parameters: [comment],
     } satisfies Command2_CommentHeader);
@@ -68,7 +68,7 @@ describe("makeCommentCommandArray", () => {
     const result = makeCommentCommandArray(comments, 2);
 
     expect(result).toHaveLength(1);
-    expect(result[0].code).toBe(COMMENT_HEAD);
+    expect(result[0].code).toBe(COMMENT);
     expect(result[0].indent).toBe(2);
     expect(result[0].parameters).toEqual(["This is a single comment"]);
   });
@@ -80,7 +80,7 @@ describe("makeCommentCommandArray", () => {
     expect(result).toHaveLength(3);
 
     // Validate the header
-    expect(result[0].code).toBe(COMMENT_HEAD);
+    expect(result[0].code).toBe(COMMENT);
     expect(result[0].indent).toBe(1);
     expect(result[0].parameters).toEqual(["Header comment"]);
 
@@ -109,7 +109,7 @@ describe("makeCommentCommandArray", () => {
     expect(result).toHaveLength(2);
 
     // Validate the header
-    expect(result[0].code).toBe(COMMENT_HEAD);
+    expect(result[0].code).toBe(COMMENT);
     expect(result[0].indent).toBe(3);
     expect(result[0].parameters).toEqual(["Indented header"]);
 
