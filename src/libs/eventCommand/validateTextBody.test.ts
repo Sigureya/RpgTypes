@@ -1,38 +1,88 @@
 import { describe, test, expect } from "vitest";
-import { isCommandTextBody } from "./validate";
-import { isCommandShowMessageBody } from "./validateTextBody";
-import { SHOW_MESSAGE_BODY } from "@RpgTypes/schema";
 import {
-  makeCommandCommentBody,
+  SHOW_MESSAGE_BODY,
+  SHOW_SCROLLING_TEXT_BODY,
+  COMMENT_BODY,
+  COMMENT_HEAD,
+  SCRIPT_EVAL_BODY,
+  SCRIPT_EVAL,
+} from "@RpgTypes/schema";
+
+import {
+  makeCommandShowMessageBody,
   makeCommandCommentHeader,
-} from "./commands/message/comment/make";
-import {
-  makeCommandScriptBody,
+  makeCommandCommentBody,
   makeCommandScriptHeader,
-} from "./commands/script";
-import { makeCommandShowMessageBody } from "./commands/message/showMessage/convert";
+  makeCommandScriptBody,
+} from "./commands";
+import { isCommandTextBody } from "./validate";
+import {
+  isCommandShowMessageBody,
+  isCommandShowScrollingTextBody,
+  isCommandCommentBody,
+  isCommandCommentHeader,
+  isCommandScriptBody,
+  isCommandScriptHeader,
+} from "./validateTextBody";
+import { makeCommandScrollingTextBody } from "./commands/message/scrollText/make";
+const testInvalidPattern = (fn: (data: unknown) => boolean) => {
+  test("Invalid command", () => {
+    expect(fn(null)).toBe(false);
+    expect(fn(undefined)).toBe(false);
+    expect(fn({})).toBe(false);
+    expect(fn({ code: "INVALID_CODE" })).toBe(false);
+  });
+};
 
 describe("isCommandTextBody", () => {
-  test("message body", () => {
+  describe("message body", () => {
     const command = makeCommandShowMessageBody("aaa");
-    expect(isCommandTextBody(command)).toBe(true);
-    expect(isCommandShowMessageBody(command)).toBe(true);
-    expect(command.code).toBe(SHOW_MESSAGE_BODY);
+    test("", () => {
+      expect(isCommandTextBody(command)).toBe(true);
+      expect(isCommandShowMessageBody(command)).toBe(true);
+      expect(command.code).toBe(SHOW_MESSAGE_BODY);
+    });
+    testInvalidPattern(isCommandShowMessageBody);
   });
-  test("comment head", () => {
-    const command = makeCommandCommentHeader("aaa");
-    expect(isCommandTextBody(command)).toBe(true);
+  describe("scrolling text body", () => {
+    const command = makeCommandScrollingTextBody("aaa");
+    test("", () => {
+      expect(isCommandTextBody(command)).toBe(true);
+      expect(isCommandShowScrollingTextBody(command)).toBe(true);
+      expect(command.code).toBe(SHOW_SCROLLING_TEXT_BODY);
+    });
+    testInvalidPattern(isCommandShowScrollingTextBody);
   });
-  test("comment body", () => {
+  describe("comment body", () => {
     const command = makeCommandCommentBody("aaa");
-    expect(isCommandTextBody(command)).toBe(true);
+    test("", () => {
+      expect(isCommandTextBody(command)).toBe(true);
+      expect(isCommandCommentBody(command)).toBe(true);
+      expect(command.code).toBe(COMMENT_BODY);
+    });
   });
-  test("script head", () => {
-    const command = makeCommandScriptHeader("aaa");
-    expect(isCommandTextBody(command)).toBe(true);
+  describe("comment header", () => {
+    const command = makeCommandCommentHeader("aaa");
+    test("", () => {
+      expect(isCommandTextBody(command)).toBe(true);
+      expect(isCommandCommentHeader(command)).toBe(true);
+      expect(command.code).toBe(COMMENT_HEAD);
+    });
   });
-  test("script body", () => {
+  describe("script body", () => {
     const command = makeCommandScriptBody("aaa");
-    expect(isCommandTextBody(command)).toBe(true);
+    test("", () => {
+      expect(isCommandTextBody(command)).toBe(true);
+      expect(isCommandScriptBody(command)).toBe(true);
+      expect(command.code).toBe(SCRIPT_EVAL_BODY);
+    });
+  });
+  describe("script header", () => {
+    const command = makeCommandScriptHeader("aaa");
+    test("", () => {
+      expect(isCommandTextBody(command)).toBe(true);
+      expect(isCommandScriptHeader(command)).toBe(true);
+      expect(command.code).toBe(SCRIPT_EVAL);
+    });
   });
 });
