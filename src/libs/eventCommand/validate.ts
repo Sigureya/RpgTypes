@@ -4,8 +4,9 @@ import type {
   Command2_ShowChoices,
   Command2_ShowChoiceItem,
   Command2_InputNumber,
-  Command2_ShowMessage,
+  Command_ShowMessageHeader,
   CommandUnion_AnyAudio,
+  CommandUnion_TextBody,
 } from "./commands";
 import {
   SCHEMA_COMMAND_CALL_COMMON_EVENT,
@@ -14,6 +15,7 @@ import {
   SCHEMA_COMMAND_SHOW_CHOICE_ITEM,
   SCHEMA_COMMAND_INPUT_NUMBER,
   SCHEMA_COMMAND_ANY_AUDIO,
+  SCHEMA_COMMAND_TEXT_BODY,
 } from "./commands";
 const ajv = new Ajv();
 
@@ -26,6 +28,14 @@ const showChoiceItem = ajv.compile(SCHEMA_COMMAND_SHOW_CHOICE_ITEM);
 
 const inputNumber = ajv.compile(SCHEMA_COMMAND_INPUT_NUMBER);
 const audioCommand = ajv.compile(SCHEMA_COMMAND_ANY_AUDIO);
+
+const textBody = ajv.compile(SCHEMA_COMMAND_TEXT_BODY);
+
+export const isCommandTextBody = (
+  command: unknown
+): command is CommandUnion_TextBody => {
+  return textBody(command);
+};
 
 export const isCommandAudio = (
   data: unknown
@@ -58,6 +68,6 @@ export const isCommandInputNumber = (
 
 export const isCommandShowMessage = (
   data: unknown
-): data is Command2_ShowMessage => {
+): data is Command_ShowMessageHeader => {
   return showMessage(data);
 };

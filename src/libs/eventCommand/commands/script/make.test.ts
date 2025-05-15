@@ -1,8 +1,8 @@
 import { describe, test, expect } from "vitest";
 import { SCRIPT_EVAL, SCRIPT_EVAL_BODY } from "@RpgTypes/schema";
 import {
-  makeCommentScriptHeader,
-  makeCommentScriptBody,
+  makeCommandScriptHeader,
+  makeCommandScriptBody,
   makeCommandScriptArray,
 } from "./make";
 
@@ -10,7 +10,7 @@ describe("makeCommentScriptHeader", () => {
   test("should create a Command2_CommentHeader with the correct structure", () => {
     const script = "Header script";
     const indent = 2;
-    const result = makeCommentScriptHeader(script, indent);
+    const result = makeCommandScriptHeader(script, indent);
 
     expect(result).toEqual({
       code: SCRIPT_EVAL,
@@ -21,7 +21,7 @@ describe("makeCommentScriptHeader", () => {
 
   test("should default indent to 0 if not provided", () => {
     const script = "Header script";
-    const result = makeCommentScriptHeader(script);
+    const result = makeCommandScriptHeader(script);
 
     expect(result.indent).toBe(0);
   });
@@ -31,7 +31,7 @@ describe("makeCommentScriptBody", () => {
   test("should create a Command2_CommentBody with the correct structure", () => {
     const script = "Body script";
     const indent = 3;
-    const result = makeCommentScriptBody(script, indent);
+    const result = makeCommandScriptBody(script, indent);
 
     expect(result).toEqual({
       code: SCRIPT_EVAL_BODY,
@@ -42,7 +42,7 @@ describe("makeCommentScriptBody", () => {
 
   test("should default indent to 0 if not provided", () => {
     const script = "Body script";
-    const result = makeCommentScriptBody(script);
+    const result = makeCommandScriptBody(script);
 
     expect(result.indent).toBe(0);
   });
