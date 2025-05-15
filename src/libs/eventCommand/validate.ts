@@ -3,11 +3,9 @@ import {
   SCHEMA_COMMAND_TEXT_BODY,
   type CommandUnion_TextBody,
 } from "./commands/schema";
-import {
-  type Command2_ShowChoices,
-  type Command2_ShowChoiceItem,
-  SCHEMA_COMMAND_SHOW_CHOICE_ITEM,
-  SCHEMA_COMMAND_SHOW_CHOICES,
+import type {
+  Command2_ShowChoices,
+  Command2_ShowChoiceItem,
 } from "./commands/message/setupChoice";
 import type { Command2_InputNumber } from "./commands/message/inputNumber/types";
 import { SCHEMA_COMMAND_SHOW_MESSAGE } from "./commands/message/showMessage/schema";
@@ -16,7 +14,11 @@ import { SCHEMA_COMMAND_INPUT_NUMBER } from "./commands/message/inputNumber/sche
 import { SCHEMA_COMMAND_CALL_COMMON_EVENT } from "./commands/callCommonEvent/schema";
 import type { Command2_CommonEvent } from "./commands/callCommonEvent/types";
 import type { CommandUnion_AnyAudio } from "./commands/audio";
-import { SCHEMA_COMMAND_ANY_AUDIO } from "./commands/audio";
+import { SCHEMA_COMMAND_ANY_AUDIO } from "./commands/audio/schema";
+import {
+  SCHEMA_COMMAND_SHOW_CHOICES,
+  SCHEMA_COMMAND_SHOW_CHOICE_ITEM,
+} from "./commands/message/setupChoice/schema";
 const ajv = new Ajv();
 
 const showMessage = ajv.compile(SCHEMA_COMMAND_SHOW_MESSAGE);

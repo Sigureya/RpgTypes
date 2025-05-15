@@ -22,6 +22,17 @@ export const makeCommandShowMessage = (
   ],
 });
 
+export const fromArrayShowMessageHeader = (
+  array: ParamArray_ShowMessage
+): ParamObject_ShowMessage => {
+  return {
+    facename: array[0],
+    faceIndex: array[1],
+    background: array[2],
+    positionType: array[3],
+    speakerName: array[4],
+  };
+};
 export const makeCommandShowMessageBody = (
   text: string,
   indent: number = 0
