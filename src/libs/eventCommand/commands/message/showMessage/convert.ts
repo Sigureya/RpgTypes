@@ -1,4 +1,3 @@
-import type { Converter } from "@RpgTypes/eventCommand/frame";
 import type {
   Command_ShowMessageHeader,
   Command2_ShowMessageBody,
@@ -22,6 +21,30 @@ export const makeCommandShowMessage = (
   ],
 });
 
+export const fromArrayShowMessageHeader = (
+  array: ParamArray_ShowMessage
+): ParamObject_ShowMessage => {
+  return {
+    facename: array[0],
+    faceIndex: array[1],
+    background: array[2],
+    positionType: array[3],
+    speakerName: array[4],
+  };
+};
+
+export const toArrayShowMessageHeader = (
+  object: ParamObject_ShowMessage
+): ParamArray_ShowMessage => {
+  return [
+    object.facename,
+    object.faceIndex,
+    object.background,
+    object.positionType,
+    object.speakerName,
+  ];
+};
+
 export const makeCommandShowMessageBody = (
   text: string,
   indent: number = 0
@@ -30,27 +53,3 @@ export const makeCommandShowMessageBody = (
   indent,
   parameters: [text],
 });
-
-export const CommandShowMessage = {
-  fromArray: (array) => {
-    return {
-      facename: array[0],
-      faceIndex: array[1],
-      background: array[2],
-      positionType: array[3],
-      speakerName: array[4],
-    };
-  },
-  toArray: (object) => {
-    return [
-      object.facename,
-      object.faceIndex,
-      object.background,
-      object.positionType,
-      object.speakerName,
-    ];
-  },
-  makeCommand: (param, indent = 0) => {
-    return makeCommandShowMessage(param, indent);
-  },
-} as const satisfies Converter<ParamObject_ShowMessage, ParamArray_ShowMessage>;

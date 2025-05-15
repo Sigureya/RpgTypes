@@ -13,7 +13,7 @@ export interface ParamObject_ShowMessage {
     positionType: number;
     speakerName: string;
 }
-export interface Command2_ShowMessage extends EventCommandLike2<101> {
+export interface Command_ShowMessageHeader extends EventCommandLike2<101> {
     parameters: [
         facename: string,
         faceIndex: number,
@@ -32,4 +32,7 @@ export interface Command2_ShowMessage_MV extends EventCommandLike2<101> {
         background: number,
         positionType: number
     ];
+}
+export interface Command2_ShowMessageBody extends EventCommandLike2<401, [string]> {
+    parameters: [text: string];
 }

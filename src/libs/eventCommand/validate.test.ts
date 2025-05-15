@@ -6,29 +6,53 @@ import {
   isCommandShowChoiceItem,
   isCommandShowChoices,
   isCommandShowMessage,
-  isCommandTextBody,
 } from "./validate";
-import * as Command from "./commands";
 import type { AudioFileParams } from "@RpgTypes/utils";
+import { makeCommandInputNumber } from "./commands/message/inputNumber/make";
+import {
+  makeCommandSetupChoice,
+  makeCommand2_ShowChoiceItem,
+} from "./commands/message/setupChoice";
+import { makeCommandShowMessage } from "./commands/message/showMessage/convert";
+import { makeCommand2_CommonEvent } from "./commands/callCommonEvent/make";
+import type { Command2_CommonEvent } from "./commands/callCommonEvent/types";
+import type {
+  Command2_PlayBGM,
+  Command2_PlayBGS,
+  Command2_PlayME,
+  Command2_PlaySE,
+  Command2_ChangeBattleBGM,
+} from "./commands/audio";
+import {
+  makeCommandPlayBGM,
+  makeCommandPlayBGS,
+  makeCommandPlayME,
+  makeCommandPlaySE,
+  makeCommandChangeBattleBGM,
+} from "./commands/audio";
+
+const testInvalidPattern = (fn: (data: unknown) => boolean) => {
+  test("Invalid command", () => {
+    expect(fn(null)).toBe(false);
+    expect(fn(undefined)).toBe(false);
+    expect(fn({})).toBe(false);
+    expect(fn({ code: "INVALID_CODE" })).toBe(false);
+  });
+};
 
 describe("isCommandCommonEvent", () => {
   test("Valid command", () => {
-    const command: Command.Command2_CommonEvent =
-      Command.makeCommand2_CommonEvent({
-        eventId: 1,
-      });
+    const command: Command2_CommonEvent = makeCommand2_CommonEvent({
+      eventId: 1,
+    });
     expect(isCommandCommonEvent(command)).toBe(true);
   });
-
-  test("Invalid command", () => {
-    const invalidCommand = { code: "INVALID_CODE" };
-    expect(isCommandCommonEvent(invalidCommand)).toBe(false);
-  });
+  testInvalidPattern(isCommandCommonEvent);
 });
 
 describe("isCommandShowChoices", () => {
   test("Valid command", () => {
-    const command = Command.makeCommandSetupChoice({
+    const command = makeCommandSetupChoice({
       choices: [],
       cancelType: 0,
       defaultType: 0,
@@ -37,45 +61,35 @@ describe("isCommandShowChoices", () => {
     });
     expect(isCommandShowChoices(command)).toBe(true);
   });
-
-  test("Invalid command", () => {
-    const invalidCommand = { code: "INVALID_CODE" };
-    expect(isCommandShowChoices(invalidCommand)).toBe(false);
-  });
+  testInvalidPattern(isCommandShowChoices);
 });
 
 describe("isCommandShowChoiceItem", () => {
   test("Valid command", () => {
-    const command = Command.makeCommand2_ShowChoiceItem({
+    const command = makeCommand2_ShowChoiceItem({
       index: 0,
       name: "Choice",
     });
     expect(isCommandShowChoiceItem(command)).toBe(true);
   });
 
-  test("Invalid command", () => {
-    const invalidCommand = { code: "INVALID_CODE" };
-    expect(isCommandShowChoiceItem(invalidCommand)).toBe(false);
-  });
+  testInvalidPattern(isCommandShowChoiceItem);
 });
 describe("isCommandInputNumber", () => {
   test("Valid command", () => {
-    const command = Command.makeCommandInputNumber({
+    const command = makeCommandInputNumber({
       variableId: 1,
       digits: 2,
     });
     expect(isCommandInputNumber(command)).toBe(true);
   });
 
-  test("Invalid command", () => {
-    const invalidCommand = { code: "INVALID_CODE" };
-    expect(isCommandInputNumber(invalidCommand)).toBe(false);
-  });
+  testInvalidPattern(isCommandInputNumber);
 });
 
 describe("isCommandShowMessage", () => {
   test("Valid command", () => {
-    const command = Command.makeCommandShowMessage({
+    const command = makeCommandShowMessage({
       positionType: 0,
       facename: "Face",
       faceIndex: 0,
@@ -83,10 +97,7 @@ describe("isCommandShowMessage", () => {
     expect(isCommandShowMessage(command)).toBe(true);
   });
 
-  test("Invalid command", () => {
-    const invalidCommand = { code: "INVALID_CODE" };
-    expect(isCommandShowMessage(invalidCommand)).toBe(false);
-  });
+  testInvalidPattern(isCommandShowMessage);
 });
 
 describe("isCommandAudio", () => {
@@ -97,52 +108,25 @@ describe("isCommandAudio", () => {
     pan: 0,
   };
   test("Play BGM", () => {
-    const command: Command.Command2_PlayBGM =
-      Command.makeCommandPlayBGM(MockAudio);
+    const command: Command2_PlayBGM = makeCommandPlayBGM(MockAudio);
 
     expect(isCommandAudio(command)).toBe(true);
   });
   test("Play BGS", () => {
-    const command: Command.Command2_PlayBGS =
-      Command.makeCommandPlayBGS(MockAudio);
+    const command: Command2_PlayBGS = makeCommandPlayBGS(MockAudio);
     expect(isCommandAudio(command)).toBe(true);
   });
   test("Play ME", () => {
-    const command: Command.Command2_PlayME =
-      Command.makeCommandPlayME(MockAudio);
+    const command: Command2_PlayME = makeCommandPlayME(MockAudio);
     expect(isCommandAudio(command)).toBe(true);
   });
   test("Play SE", () => {
-    const command: Command.Command2_PlaySE =
-      Command.makeCommandPlaySE(MockAudio);
+    const command: Command2_PlaySE = makeCommandPlaySE(MockAudio);
     expect(isCommandAudio(command)).toBe(true);
   });
   test("Change Battle BGM", () => {
-    const command: Command.Command2_ChangeBattleBGM =
-      Command.makeCommandChangeBattleBGM(MockAudio);
+    const command: Command2_ChangeBattleBGM =
+      makeCommandChangeBattleBGM(MockAudio);
     expect(isCommandAudio(command)).toBe(true);
-  });
-});
-
-describe("isCommandTextBody", () => {
-  test("message body", () => {
-    const command = Command.makeCommandShowMessageBody("aaa");
-    expect(isCommandTextBody(command)).toBe(true);
-  });
-  test("comment head", () => {
-    const command = Command.makeCommandCommentHeader("aaa");
-    expect(isCommandTextBody(command)).toBe(true);
-  });
-  test("comment body", () => {
-    const command = Command.makeCommandCommentBody("aaa");
-    expect(isCommandTextBody(command)).toBe(true);
-  });
-  test("script head", () => {
-    const command = Command.makeCommandScriptHeader("aaa");
-    expect(isCommandTextBody(command)).toBe(true);
-  });
-  test("script body", () => {
-    const command = Command.makeCommandScriptBody("aaa");
-    expect(isCommandTextBody(command)).toBe(true);
   });
 });

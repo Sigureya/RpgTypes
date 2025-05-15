@@ -1,25 +1,25 @@
 import Ajv from "ajv";
+import { SCHEMA_COMMAND_TEXT_BODY } from "./commands/schema";
+import { SCHEMA_COMMAND_SHOW_MESSAGE } from "./commands/message/showMessage/schema";
+import { SCHEMA_COMMAND_INPUT_NUMBER } from "./commands/message/inputNumber/schema";
+import { SCHEMA_COMMAND_CALL_COMMON_EVENT } from "./commands/callCommonEvent/schema";
+import { SCHEMA_COMMAND_ANY_AUDIO } from "./commands/audio/schema";
+import {
+  SCHEMA_COMMAND_SHOW_CHOICES,
+  SCHEMA_COMMAND_SHOW_CHOICE_ITEM,
+} from "./commands/message/setupChoice/schema";
 import type {
+  CommandUnion_AnyAudio,
   Command2_CommonEvent,
   Command2_ShowChoices,
   Command2_ShowChoiceItem,
   Command2_InputNumber,
   Command_ShowMessageHeader,
-  CommandUnion_AnyAudio,
   CommandUnion_TextBody,
 } from "./commands";
-import {
-  SCHEMA_COMMAND_CALL_COMMON_EVENT,
-  SCHEMA_COMMAND_SHOW_MESSAGE,
-  SCHEMA_COMMAND_SHOW_CHOICES,
-  SCHEMA_COMMAND_SHOW_CHOICE_ITEM,
-  SCHEMA_COMMAND_INPUT_NUMBER,
-  SCHEMA_COMMAND_ANY_AUDIO,
-  SCHEMA_COMMAND_TEXT_BODY,
-} from "./commands";
 const ajv = new Ajv();
-
-const commonVent = ajv.compile(SCHEMA_COMMAND_CALL_COMMON_EVENT);
+// schemaはindex.ts無しで直接importすること！
+// 過去に循環参照エラーで苦しんでます
 
 const showMessage = ajv.compile(SCHEMA_COMMAND_SHOW_MESSAGE);
 
@@ -27,9 +27,10 @@ const showChoices = ajv.compile(SCHEMA_COMMAND_SHOW_CHOICES);
 const showChoiceItem = ajv.compile(SCHEMA_COMMAND_SHOW_CHOICE_ITEM);
 
 const inputNumber = ajv.compile(SCHEMA_COMMAND_INPUT_NUMBER);
-const audioCommand = ajv.compile(SCHEMA_COMMAND_ANY_AUDIO);
 
 const textBody = ajv.compile(SCHEMA_COMMAND_TEXT_BODY);
+const commonVent = ajv.compile(SCHEMA_COMMAND_CALL_COMMON_EVENT);
+const audioCommand = ajv.compile(SCHEMA_COMMAND_ANY_AUDIO);
 
 export const isCommandTextBody = (
   command: unknown
