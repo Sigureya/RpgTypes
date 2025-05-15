@@ -1,4 +1,4 @@
-import { COMMENT, COMMENT_BODY } from "@RpgTypes/schema";
+import { COMMENT_HEAD, COMMENT_BODY } from "@RpgTypes/schema";
 import type {
   ParamArray_Comment,
   ParamObject_Comment,
@@ -20,7 +20,7 @@ export const makeCommandCommentHeader = (
   comment: string,
   indent: number = 0
 ): Command2_CommentHeader => ({
-  code: COMMENT,
+  code: COMMENT_HEAD,
   indent,
   parameters: makeCommentArray(comment),
 });
