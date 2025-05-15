@@ -31,6 +31,15 @@ import {
   makeCommandChangeBattleBGM,
 } from "./commands/audio";
 
+const testInvalidPattern = (fn: (data: unknown) => boolean) => {
+  test("Invalid command", () => {
+    expect(fn(null)).toBe(false);
+    expect(fn(undefined)).toBe(false);
+    expect(fn({})).toBe(false);
+    expect(fn({ code: "INVALID_CODE" })).toBe(false);
+  });
+};
+
 describe("isCommandCommonEvent", () => {
   test("Valid command", () => {
     const command: Command2_CommonEvent = makeCommand2_CommonEvent({
@@ -38,11 +47,7 @@ describe("isCommandCommonEvent", () => {
     });
     expect(isCommandCommonEvent(command)).toBe(true);
   });
-
-  test("Invalid command", () => {
-    const invalidCommand = { code: "INVALID_CODE" };
-    expect(isCommandCommonEvent(invalidCommand)).toBe(false);
-  });
+  testInvalidPattern(isCommandCommonEvent);
 });
 
 describe("isCommandShowChoices", () => {
@@ -56,11 +61,7 @@ describe("isCommandShowChoices", () => {
     });
     expect(isCommandShowChoices(command)).toBe(true);
   });
-
-  test("Invalid command", () => {
-    const invalidCommand = { code: "INVALID_CODE" };
-    expect(isCommandShowChoices(invalidCommand)).toBe(false);
-  });
+  testInvalidPattern(isCommandShowChoices);
 });
 
 describe("isCommandShowChoiceItem", () => {
@@ -72,10 +73,7 @@ describe("isCommandShowChoiceItem", () => {
     expect(isCommandShowChoiceItem(command)).toBe(true);
   });
 
-  test("Invalid command", () => {
-    const invalidCommand = { code: "INVALID_CODE" };
-    expect(isCommandShowChoiceItem(invalidCommand)).toBe(false);
-  });
+  testInvalidPattern(isCommandShowChoiceItem);
 });
 describe("isCommandInputNumber", () => {
   test("Valid command", () => {
@@ -86,10 +84,7 @@ describe("isCommandInputNumber", () => {
     expect(isCommandInputNumber(command)).toBe(true);
   });
 
-  test("Invalid command", () => {
-    const invalidCommand = { code: "INVALID_CODE" };
-    expect(isCommandInputNumber(invalidCommand)).toBe(false);
-  });
+  testInvalidPattern(isCommandInputNumber);
 });
 
 describe("isCommandShowMessage", () => {
@@ -102,10 +97,7 @@ describe("isCommandShowMessage", () => {
     expect(isCommandShowMessage(command)).toBe(true);
   });
 
-  test("Invalid command", () => {
-    const invalidCommand = { code: "INVALID_CODE" };
-    expect(isCommandShowMessage(invalidCommand)).toBe(false);
-  });
+  testInvalidPattern(isCommandShowMessage);
 });
 
 describe("isCommandAudio", () => {
