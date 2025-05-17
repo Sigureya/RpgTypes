@@ -10,6 +10,8 @@ export const makeStateData = (data: Partial<Data_State> = {}): Data_State => ({
   traits: [],
   note: data.note ?? "",
 
+  messageType: data.messageType ?? 0,
+  releaseByDamage: data.releaseByDamage ?? false,
   restriction: data.restriction ?? 0,
   priority: data.priority ?? 0,
   motion: data.motion ?? 0,

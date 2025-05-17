@@ -47,6 +47,9 @@ export const SCHEMA_DATA_STATE = {
 
     removeByWalking: { type: "boolean" },
     removeByRestriction: { type: "boolean" },
+
+    messageType: { type: "integer" },
+    releaseByDamage: { type: "boolean" },
     autoRemovalTiming: { type: "integer" },
 
     minTurns: { type: "integer" },
