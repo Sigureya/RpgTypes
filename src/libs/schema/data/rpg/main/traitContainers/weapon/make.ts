@@ -10,6 +10,7 @@ export const makeWeaponData = (
   description: weapon.description ?? "",
   traits: weapon.traits ?? [],
   note: weapon.note ?? "",
+  animationId: weapon.animationId ?? 0,
   params: weapon.params ?? [
     0, // maxhp
     0, // maxmp

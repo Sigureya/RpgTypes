@@ -14,6 +14,7 @@ export const SCHEMA_DATA_WEAPON = {
     "traits",
     "note",
     "etypeId",
+    "animationId",
   ],
 
   properties: {
@@ -25,6 +26,7 @@ export const SCHEMA_DATA_WEAPON = {
     note: { type: "string" },
     etypeId: { type: "integer", minimum: 0 },
     wtypeId: { type: "integer", minimum: 0 },
+    animationId: { type: "integer", minimum: 0 },
     params: {
       type: "array",
       items: [
@@ -47,7 +49,7 @@ export const SCHEMA_DATA_WEAPON = {
         elementId: { type: "integer", minimum: 0 },
         formula: { type: "string" },
         variance: { type: "integer", minimum: 0, maximum: 100 },
-        critical: { type: "boolean" },
+        critical: { type: "boolean", default: false },
       },
       required: ["type", "elementId", "formula", "variance", "critical"],
     } satisfies JSONSchemaType<Damage>,
