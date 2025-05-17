@@ -15,6 +15,7 @@ export const SCHEMA_DATA_ARMMOR = {
     "traits",
     "note",
     "etypeId",
+    "atypeId",
   ],
 
   properties: {
@@ -25,6 +26,7 @@ export const SCHEMA_DATA_ARMMOR = {
     price: { type: "integer", minimum: 0 },
     note: { type: "string" },
     etypeId: { type: "integer", minimum: 0 },
+    atypeId: { type: "integer", minimum: 0 },
 
     params: {
       type: "array",

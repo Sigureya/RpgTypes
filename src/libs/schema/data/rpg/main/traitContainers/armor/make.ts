@@ -6,6 +6,7 @@ export const makeArmorData = (armor: Partial<Data_Armor> = {}): Data_Armor => ({
   description: armor.description ?? "",
   traits: armor.traits ?? [],
   note: armor.note ?? "",
+  atypeId: armor.atypeId ?? 0,
   params: armor.params ?? [
     0, // maxhp
     0, // maxmp
