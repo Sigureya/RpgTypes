@@ -7,6 +7,7 @@ export const makeItemData = (item: Partial<Data_Item> = {}): Data_Item => ({
   name: item.name ?? "",
   iconIndex: item.iconIndex ?? 0,
   description: item.description ?? "",
+  itypeId: item.itypeId ?? 0,
 
   note: item.note ?? "",
   consumable: item.consumable ?? false,
