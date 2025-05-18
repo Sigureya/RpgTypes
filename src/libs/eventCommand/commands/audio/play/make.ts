@@ -1,6 +1,6 @@
 import { makeAudioFileParams, type AudioFileParams } from "@RpgTypes/utils";
 import type {
-  Command2_PlayBGM,
+  Command_PlayBGM,
   Command_PlayBGS,
   Command_PlayME,
   Command_PlaySE,
@@ -41,7 +41,7 @@ export const makeCommandAudioAny = <Code extends CommandUnion_AnyAudio["code"]>(
 export const makeCommandPlayBGM = (
   audio: AudioFileParams,
   indent: number = 0
-): Command2_PlayBGM => makeCommandAudioAny(PLAY_BGM, audio, indent);
+): Command_PlayBGM => makeCommandAudioAny(PLAY_BGM, audio, indent);
 
 export const makeCommandPlayBGS = (
   audio: AudioFileParams,
