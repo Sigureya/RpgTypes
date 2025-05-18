@@ -38,7 +38,7 @@ export interface Command2_ShowMessage_MV extends EventCommandLike2<101> {
   ];
 }
 
-export interface Command2_ShowMessageBody
+export interface Command_ShowMessageBody
   extends EventCommandLike2<401, [string]> {
   parameters: [text: string];
 }

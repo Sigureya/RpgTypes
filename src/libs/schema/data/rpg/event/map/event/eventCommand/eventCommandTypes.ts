@@ -12,6 +12,10 @@ import type {
 import type { BranchParameters } from "./branchParams";
 import type { Param_ChangeEnemyParameters } from "./paramaters/changeBattler";
 import type { AudioFileParams, ColorRGBA } from "@RpgTypes/utils";
+/**
+ * @deprecated
+ * Use `Command_ShowMessageHeader` instead.
+ */
 export interface Command_ShowMessage extends EventCommandLike<101> {
   parameters: [
     facename: string,
@@ -21,34 +25,12 @@ export interface Command_ShowMessage extends EventCommandLike<101> {
     speakerName: string
   ];
 }
-export interface Command_ShowMessageBody extends EventCommandLike<401> {
-  parameters: [content: string];
-}
-
-export interface Command_ChoiceWhen extends EventCommandLike<402> {
-  parameters: [index: number, text: string];
-}
 
 export interface Command_InputNumber extends EventCommandLike<103> {
   parameters: [variableId: number, digits: number];
 }
 export interface Command_SelectItem extends EventCommandLike<104> {
   parameters: [variableId: number, itemType: number];
-}
-
-export interface Command_ShowScrollingText extends EventCommandLike<105> {
-  parameters: [speed: number, skip: boolean];
-}
-export interface Command_ShowScrollingTextBody extends EventCommandLike<405> {
-  parameters: [content: string];
-}
-
-export interface Command_Comment
-  extends EventCommandLike<108, [content: string]> {
-  parameters: [content: string];
-}
-export interface Command_CommentBody extends EventCommandLike<408> {
-  parameters: [content: string];
 }
 
 export interface Command_Skip extends EventCommandLike<109> {
