@@ -2,8 +2,11 @@ import type { AudioFileParams } from "@RpgTypes/utils";
 import type { Encounter } from "./members";
 import type { EventCommand, MapEvent } from "./event/";
 import type { MapEventContainer } from "./mapEventContainer";
+import type { EventCommandUnknown } from "@RpgTypes/eventCommand";
 
-export interface Data_Map extends MapEventContainer<EventCommand> {
+export interface Data_Map<
+  CommandType extends EventCommandUnknown = EventCommand
+> extends MapEventContainer<CommandType> {
   data: number[];
   battleback1Name: string;
   battleback2Name: string;
@@ -29,7 +32,7 @@ export interface Data_Map extends MapEventContainer<EventCommand> {
   autoplayBgm: boolean;
   autoplayBgs: boolean;
 
-  events: Array<MapEvent | null>;
+  events: Array<MapEvent<CommandType> | null>;
   encounterList: Encounter[];
 }
 

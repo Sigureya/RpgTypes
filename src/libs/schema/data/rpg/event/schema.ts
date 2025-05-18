@@ -5,7 +5,7 @@ import type {
   Troop_EventConditions,
   Troop_Member,
 } from "./troop";
-import type { SomeJSONSchema } from "ajv/dist/types/json-schema";
+import type { EventCommandUnknown } from "@RpgTypes/eventCommand";
 
 export const SCHEMA_DATA_TROOP = {
   type: "object",
@@ -56,9 +56,27 @@ export const SCHEMA_DATA_TROOP = {
             },
           } satisfies JSONSchemaType<Troop_EventConditions>,
           span: { type: "number" },
-          list: { type: "array" },
+          list: {
+            type: "array",
+            items: {
+              type: "object",
+              additionalProperties: true,
+              required: [
+                "code",
+                "indent",
+                "parameters",
+              ] satisfies (keyof EventCommandUnknown)[],
+              properties: {
+                code: { type: "integer" },
+                indent: { type: "integer" },
+                parameters: {
+                  type: "array",
+                },
+              },
+            },
+          },
         },
       } satisfies JSONSchemaType<Omit<BattleEventPage, "list">>,
     },
-  } as Record<keyof Data_Troop, SomeJSONSchema>,
+  },
 } as const;
