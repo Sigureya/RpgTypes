@@ -1,8 +1,8 @@
 import type { JSONSchemaType } from "ajv";
-import type { Command2_ShowChoiceItem } from "./types/item";
-import type { Command2_ShowChoices } from "./types";
+import type { Command_ShowChoiceWhen } from "./types/item";
+import type { Command_ShowChoices } from "./types";
 
-export const SCHEMA_COMMAND_SHOW_CHOICE_ITEM = {
+export const SCHEMA_COMMAND_SHOW_CHOICE_WHEN = {
   type: "object",
   properties: {
     code: { type: "number", const: 402 },
@@ -18,7 +18,7 @@ export const SCHEMA_COMMAND_SHOW_CHOICE_ITEM = {
     },
   },
   required: ["code", "indent", "parameters"],
-} as const satisfies JSONSchemaType<Command2_ShowChoiceItem>;
+} as const satisfies JSONSchemaType<Command_ShowChoiceWhen>;
 
 export const SCHEMA_COMMAND_SHOW_CHOICES = {
   type: "object",
@@ -39,4 +39,4 @@ export const SCHEMA_COMMAND_SHOW_CHOICES = {
     },
   },
   required: ["code", "indent", "parameters"],
-} as const satisfies JSONSchemaType<Command2_ShowChoices>;
+} as const satisfies JSONSchemaType<Command_ShowChoices>;
