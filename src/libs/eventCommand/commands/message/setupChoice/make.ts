@@ -2,33 +2,33 @@ import { SHOW_CHOICES, SHOW_CHOICES_ITEM } from "@RpgTypes/schema";
 import type {
   ParamArray_SetupChoice,
   ParamObject_SetupChoice,
-  Command2_ShowChoices,
+  Command_ShowChoices,
 } from "./types/body";
 import type {
-  ParamObject_ShowChoiceItem,
-  Command2_ShowChoiceItem,
-  ParamArray_ShowChoiceItem,
+  ParamObject_ShowChoiceWhen,
+  Command_ShowChoiceWhen,
+  ParamArray_ShowChoiceWhen,
 } from "./types/item";
 
-export const makeCommand2_ShowChoiceItem = (
-  param: Partial<ParamObject_ShowChoiceItem> | undefined,
+export const makeCommandShowChoiceItem = (
+  param: Partial<ParamObject_ShowChoiceWhen> | undefined,
   indent: number = 0
-): Command2_ShowChoiceItem => ({
+): Command_ShowChoiceWhen => ({
   code: SHOW_CHOICES_ITEM,
   indent,
   parameters: [param?.index ?? 0, param?.name ?? ""],
 });
 
 export const fromArraySetupChoiceItem = (
-  array: ParamArray_ShowChoiceItem
-): ParamObject_ShowChoiceItem => ({
+  array: ParamArray_ShowChoiceWhen
+): ParamObject_ShowChoiceWhen => ({
   index: array[0],
   name: array[1],
 });
 
 export const toArraySetupChoiceItem = (
-  object: Partial<ParamObject_ShowChoiceItem>
-): ParamArray_ShowChoiceItem => [object.index ?? 0, object.name ?? ""];
+  object: Partial<ParamObject_ShowChoiceWhen>
+): ParamArray_ShowChoiceWhen => [object.index ?? 0, object.name ?? ""];
 
 export const fromArraySetupChoice = (
   array: ParamArray_SetupChoice
@@ -53,7 +53,7 @@ export const toArraySetupChoice = (
 export const makeCommandSetupChoice = (
   param: Partial<ParamObject_SetupChoice> | undefined,
   indent: number = 0
-): Command2_ShowChoices => ({
+): Command_ShowChoices => ({
   code: SHOW_CHOICES,
   indent,
   parameters: [

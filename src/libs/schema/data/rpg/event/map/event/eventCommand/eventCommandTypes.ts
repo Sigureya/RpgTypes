@@ -24,15 +24,6 @@ export interface Command_ShowMessage extends EventCommandLike<101> {
 export interface Command_ShowMessageBody extends EventCommandLike<401> {
   parameters: [content: string];
 }
-export interface Command_ShowChoices extends EventCommandLike<102> {
-  parameters: [
-    choices: string[],
-    cancelType: number,
-    defaultType: number,
-    positionType: number,
-    background: number
-  ];
-}
 
 export interface Command_ChoiceWhen extends EventCommandLike<402> {
   parameters: [index: number, text: string];
@@ -95,10 +86,6 @@ export interface Command_LabelJump extends EventCommandLike<119> {
 
 export interface Command_ControlSwitches extends EventCommandLike<121> {
   parameters: [min: number, max: number, value: ValueOf<Toggle>];
-}
-
-export interface Command_ControlSelfSwitch extends EventCommandLike<123> {
-  parameters: [switchId: string, value: ValueOf<Toggle>];
 }
 
 export interface Command_ControlTimer extends EventCommandLike<124> {
