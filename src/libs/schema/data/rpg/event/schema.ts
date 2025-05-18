@@ -9,7 +9,7 @@ import type { SomeJSONSchema } from "ajv/dist/types/json-schema";
 
 export const SCHEMA_DATA_TROOP = {
   type: "object",
-  required: ["id", "name", "members", "pages"],
+  required: ["id", "name", "members", "pages"] satisfies (keyof Data_Troop)[],
   properties: {
     id: { type: "integer", minimum: 0 },
     name: { type: "string" },
