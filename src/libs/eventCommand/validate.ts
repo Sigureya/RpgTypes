@@ -3,7 +3,7 @@ import { SCHEMA_COMMAND_TEXT_BODY } from "./commands/schema";
 import { SCHEMA_COMMAND_SHOW_MESSAGE } from "./commands/message/showMessage/schema";
 import { SCHEMA_COMMAND_INPUT_NUMBER } from "./commands/message/inputNumber/schema";
 import { SCHEMA_COMMAND_CALL_COMMON_EVENT } from "./commands/callCommonEvent/schema";
-import { SCHEMA_COMMAND_ANY_AUDIO } from "./commands/audio/schema";
+import { SCHEMA_COMMAND_ANY_AUDIO } from "./commands/audio/play/schema";
 import {
   SCHEMA_COMMAND_SHOW_CHOICES,
   SCHEMA_COMMAND_SHOW_CHOICE_WHEN,
