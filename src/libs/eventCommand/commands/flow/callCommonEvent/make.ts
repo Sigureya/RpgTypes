@@ -1,11 +1,11 @@
 import { COMMON_EVENT } from "@RpgTypes/schema";
-import type { Command2_CommonEvent, ParamObject_CommonEvent } from "./types";
+import type { Command_CommonEvent, ParamObject_CommonEvent } from "./types";
 import type { ParamArray_CommonEvent } from "./types";
 
-export const makeCommand2_CommonEvent = (
+export const makeCommandCommonEvent = (
   param: Partial<ParamObject_CommonEvent> | undefined,
   indent: number = 0
-): Command2_CommonEvent => ({
+): Command_CommonEvent => ({
   code: COMMON_EVENT,
   indent,
   parameters: toArrayCommonEvent(param ?? {}),

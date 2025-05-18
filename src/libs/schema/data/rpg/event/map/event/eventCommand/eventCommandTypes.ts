@@ -36,10 +36,6 @@ export interface Command_SelectItem extends EventCommandLike<104> {
 export interface Command_ConditionalBranch
   extends EventCommandLike<111, BranchParameters> {}
 
-export interface Command_CommonEvent extends EventCommandLike<117> {
-  parameters: [eventId: number];
-}
-
 export interface Command_Label extends EventCommandLike<118> {
   parameters: [label: string];
 }

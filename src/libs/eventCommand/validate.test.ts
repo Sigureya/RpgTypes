@@ -12,8 +12,7 @@ import {
   makeCommandShowChoiceItem,
 } from "./commands/message/setupChoice";
 import { makeCommandShowMessage } from "./commands/message/showMessage/convert";
-import { makeCommand2_CommonEvent } from "./commands/callCommonEvent/make";
-import type { Command2_CommonEvent } from "./commands/callCommonEvent/types";
+import { makeCommandCommonEvent, type Command_CommonEvent } from "./commands";
 
 const testInvalidPattern = (fn: (data: unknown) => boolean) => {
   test("Invalid command", () => {
@@ -26,7 +25,7 @@ const testInvalidPattern = (fn: (data: unknown) => boolean) => {
 
 describe("isCommandCommonEvent", () => {
   test("Valid command", () => {
-    const command: Command2_CommonEvent = makeCommand2_CommonEvent({
+    const command: Command_CommonEvent = makeCommandCommonEvent({
       eventId: 1,
     });
     expect(isCommandCommonEvent(command)).toBe(true);
