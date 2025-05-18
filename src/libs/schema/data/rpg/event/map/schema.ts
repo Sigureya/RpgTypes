@@ -10,7 +10,7 @@ import type {
 } from "./event";
 import { SCHEMA_MOVEROUTE_DATA } from "./event/eventCommand/moveRoute/schema";
 import type { MoveRouteDataUnkwnown } from "./event/eventCommand/moveRoute";
-import { SCHEMA_MAP_EVENT_PAGE_CONDITION } from "./event/schema";
+import { SCHEMA_MAP_EVENT_PAGE_CONDITION } from "./event/condition/schema";
 
 export const SCHEMA_MAP_EVENT_IMAGE = {
   type: "object",
