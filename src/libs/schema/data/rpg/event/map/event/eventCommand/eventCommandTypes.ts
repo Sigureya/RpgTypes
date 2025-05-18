@@ -33,25 +33,10 @@ export interface Command_SelectItem extends EventCommandLike<104> {
   parameters: [variableId: number, itemType: number];
 }
 
-export interface Command_Skip extends EventCommandLike<109> {
-  parameters: [];
-}
-
 export interface Command_ConditionalBranch
   extends EventCommandLike<111, BranchParameters> {}
 
 export interface Command_ConditionalBranchElse extends EventCommandLike<411> {
-  parameters: [];
-}
-
-export interface Command_Loop extends EventCommandLike<112> {
-  parameters: [];
-}
-export interface Command_LoopBreak extends EventCommandLike<113> {
-  parameters: [];
-}
-
-export interface Command_ExitEventProcessing extends EventCommandLike<115> {
   parameters: [];
 }
 
@@ -188,17 +173,9 @@ export interface Command_ShowBalloonIcon extends EventCommandLike<213> {
   parameters: [characterId: number, balloonId: number];
 }
 
-export interface Command_EraseEvent extends EventCommandLike<214, []> {}
-
 export interface Command_ChangePlayerFollowers extends EventCommandLike<216> {
   parameters: [value: ValueOf<Toggle>];
 }
-
-export interface Command_GatherFollowers extends EventCommandLike<217, []> {}
-
-export interface Command_FadeOutScreen extends EventCommandLike<221, []> {}
-
-export interface Command_FadeInScreen extends EventCommandLike<222, []> {}
 
 export interface Command_TintScreen extends EventCommandLike<223> {
   parameters: [color: ColorRGBA, duration: number, wait: boolean];
@@ -255,10 +232,6 @@ export interface Command_PlayBGM extends EventCommandLike<241> {
 export interface Command_FadeOutBGM extends EventCommandLike<242> {
   parameters: [duration: number];
 }
-
-export interface Command_SaveBGM extends EventCommandLike<243, []> {}
-
-export interface Command_ResumeBGM extends EventCommandLike<244, []> {}
 
 export interface Command_FadeOutBGS
   extends EventCommandLike<246, [duration: number]> {}
@@ -358,9 +331,6 @@ export interface Command_ChangeEnemyHP extends EventCommandLike<331> {
 export interface Command_ChangeEnemyMP extends EventCommandLike<332> {
   parameters: Param_ChangeEnemyParameters;
 }
-
-export interface Command_OpenSaveScreen extends EventCommandLike<352, []> {}
-export interface Command_GameOver extends EventCommandLike<353, []> {}
 
 export interface Command_ReturnToTitleScreen
   extends EventCommandLike<354, []> {}
