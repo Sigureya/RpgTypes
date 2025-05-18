@@ -1,6 +1,6 @@
 export declare const SCHEMA_DATA_WEAPON: {
     readonly type: "object";
-    readonly required: readonly ["name", "id", "description", "iconIndex", "price", "params", "traits", "note", "etypeId"];
+    readonly required: readonly ["name", "id", "description", "iconIndex", "price", "params", "traits", "note", "etypeId", "animationId"];
     readonly properties: {
         readonly name: {
             readonly type: "string";
@@ -28,6 +28,10 @@ export declare const SCHEMA_DATA_WEAPON: {
             readonly minimum: 0;
         };
         readonly wtypeId: {
+            readonly type: "integer";
+            readonly minimum: 0;
+        };
+        readonly animationId: {
             readonly type: "integer";
             readonly minimum: 0;
         };
@@ -74,6 +78,7 @@ export declare const SCHEMA_DATA_WEAPON: {
                 };
                 critical: {
                     type: "boolean";
+                    default: false;
                 };
             };
             required: ("type" | "variance" | "elementId" | "formula" | "critical")[];

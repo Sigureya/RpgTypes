@@ -168,6 +168,9 @@ export declare const SCHEMA_DATA_ITEM: {
             readonly type: "integer";
             readonly minimum: 0;
         };
+        readonly itypeId: {
+            readonly type: "integer";
+        };
         readonly effects: {
             type: "array";
             items: {
