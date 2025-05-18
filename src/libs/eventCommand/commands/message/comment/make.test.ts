@@ -8,7 +8,7 @@ import {
   makeCommentCommandArray,
 } from "./make";
 import type {
-  Command2_CommentBody,
+  Command_CommentBody,
   Command_CommentHeader,
   ParamArray_Comment,
 } from "./types";
@@ -49,16 +49,13 @@ describe("makeCommandCommentBody", () => {
   test("should create a Command2_CommentBody with the correct structure", () => {
     const comment = "Body comment";
     const indent = 1;
-    const result: Command2_CommentBody = makeCommandCommentBody(
-      comment,
-      indent
-    );
+    const result: Command_CommentBody = makeCommandCommentBody(comment, indent);
 
     expect(result).toEqual({
       code: COMMENT_BODY,
       indent,
       parameters: [comment],
-    } satisfies Command2_CommentBody);
+    } satisfies Command_CommentBody);
   });
 });
 

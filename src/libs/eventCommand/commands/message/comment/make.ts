@@ -3,7 +3,7 @@ import type {
   ParamArray_Comment,
   ParamObject_Comment,
   Command_CommentHeader,
-  Command2_CommentBody,
+  Command_CommentBody,
 } from "./types";
 
 export const makeCommentArray = (comment: string): ParamArray_Comment => {
@@ -28,7 +28,7 @@ export const makeCommandCommentHeader = (
 export const makeCommandCommentBody = (
   comment: string,
   indent: number = 0
-): Command2_CommentBody => ({
+): Command_CommentBody => ({
   code: COMMENT_BODY,
   indent,
   parameters: makeCommentArray(comment),
@@ -42,5 +42,5 @@ export const makeCommentCommandArray = (
     index === 0
       ? makeCommandCommentHeader(comment, indent)
       : makeCommandCommentBody(comment, indent)
-  ) as [Command_CommentHeader, ...Command2_CommentBody[]];
+  ) as [Command_CommentHeader, ...Command_CommentBody[]];
 };

@@ -1,12 +1,12 @@
-import type { Command_ShowScrollingTextBody } from "@RpgTypes/schema";
 import {
   SHOW_SCROLLING_TEXT,
   SHOW_SCROLLING_TEXT_BODY,
-  type Command_ShowScrollingText,
 } from "@RpgTypes/schema";
 import type {
-  ParamArray_ScrollTextHead,
-  ParamObject_ScrollTextHead,
+  Command_ScrollTextBody,
+  Command_ScrollTextHeader,
+  ParamArray_ScrollTextHeader,
+  ParamObject_ScrollTextHeader,
 } from "./types";
 import type {
   ParamArray_ScrollTextBody,
@@ -14,14 +14,14 @@ import type {
 } from "./types";
 
 export const toArrayScrollingTextHeader = (
-  param: Partial<ParamObject_ScrollTextHead> = {}
-): ParamArray_ScrollTextHead => {
+  param: Partial<ParamObject_ScrollTextHeader> = {}
+): ParamArray_ScrollTextHeader => {
   return [param?.speed ?? 4, param?.skip ?? false];
 };
 
 export const fromArrayScrollingTextHeader = (
-  array: ParamArray_ScrollTextHead
-): ParamObject_ScrollTextHead => {
+  array: ParamArray_ScrollTextHeader
+): ParamObject_ScrollTextHeader => {
   return {
     speed: array[0],
     skip: array[1],
@@ -29,9 +29,9 @@ export const fromArrayScrollingTextHeader = (
 };
 
 export const makeCommandScrollingTextHeader = (
-  param: Partial<ParamObject_ScrollTextHead> = {},
+  param: Partial<ParamObject_ScrollTextHeader> = {},
   indent: number = 0
-): Command_ShowScrollingText => {
+): Command_ScrollTextHeader => {
   return {
     code: SHOW_SCROLLING_TEXT,
     indent,
@@ -55,7 +55,7 @@ export const fromArrayScrollingTextBody = (
 export const makeCommandScrollingTextBody = (
   text: string = "",
   indent: number = 0
-): Command_ShowScrollingTextBody => {
+): Command_ScrollTextBody => {
   return {
     code: SHOW_SCROLLING_TEXT_BODY,
     indent: indent ?? 0,

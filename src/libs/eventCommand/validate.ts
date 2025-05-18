@@ -16,7 +16,7 @@ import type {
   Command2_InputNumber,
   Command_ShowMessageHeader,
   CommandUnion_TextBody,
-  Command2_ScrollTextHead,
+  Command_ScrollTextHeader,
   CommandUnion_ChangeActorText,
 } from "./commands";
 import { SCHEMA_COMMAND_SCROLL_TEXT_HEAD } from "./commands/message/scrollText/schema";
@@ -45,7 +45,7 @@ export const isCommandChangeActorText = (
 
 export const isCommandScrollTextHead = (
   data: unknown
-): data is Command2_ScrollTextHead => {
+): data is Command_ScrollTextHeader => {
   return scrollTextHead(data);
 };
 

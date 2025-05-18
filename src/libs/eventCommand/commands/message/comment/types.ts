@@ -9,7 +9,7 @@ export interface Command_CommentHeader
   parameters: [string];
 }
 
-export interface Command2_CommentBody
+export interface Command_CommentBody
   extends EventCommandLike2<408, ParamArray_Comment> {
   parameters: [string];
 }
