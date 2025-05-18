@@ -11,7 +11,7 @@ import type {
   CommandUnion_AnyAudio,
   Command_ShowChoices,
   Command_ShowChoiceWhen,
-  Command2_InputNumber,
+  Command_InputNumber,
   Command_ShowMessageHeader,
   CommandUnion_TextBody,
   Command_ScrollTextHeader,
@@ -81,7 +81,7 @@ export const isCommandShowChoiceItem = (
 
 export const isCommandInputNumber = (
   data: unknown
-): data is Command2_InputNumber => {
+): data is Command_InputNumber => {
   return inputNumber(data);
 };
 
