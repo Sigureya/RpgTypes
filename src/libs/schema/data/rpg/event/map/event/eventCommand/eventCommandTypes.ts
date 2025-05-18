@@ -219,10 +219,6 @@ export interface Command_SetWeatherEffect extends EventCommandLike<236> {
   ];
 }
 
-export interface Command_PlayBGM extends EventCommandLike<241> {
-  parameters: [value: AudioFileParams];
-}
-
 export interface Command_FadeOutBGM extends EventCommandLike<242> {
   parameters: [duration: number];
 }
