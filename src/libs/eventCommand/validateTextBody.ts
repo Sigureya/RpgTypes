@@ -11,8 +11,8 @@ import type {
   Command_CommentBody,
   Command_CommentHeader,
   Command_ScrollTextBody,
-  Command2_ScriptHeader,
-  Command2_ScriptBody,
+  Command_ScriptHeader,
+  Command_ScriptBody,
 } from "./commands";
 import { isCommandTextBody } from "./validate";
 
@@ -44,12 +44,12 @@ export const isCommandCommentBody = (
 
 export const isCommandScriptHeader = (
   command: unknown
-): command is Command2_ScriptHeader => {
+): command is Command_ScriptHeader => {
   return isCommandTextBody(command) && command.code === SCRIPT_EVAL;
 };
 
 export const isCommandScriptBody = (
   command: unknown
-): command is Command2_ScriptBody => {
+): command is Command_ScriptBody => {
   return isCommandTextBody(command) && command.code === SCRIPT_EVAL_BODY;
 };

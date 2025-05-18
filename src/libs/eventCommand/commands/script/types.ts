@@ -4,12 +4,12 @@ export interface ParamObject_Script {
   comment: string;
 }
 
-export interface Command2_ScriptHeader
+export interface Command_ScriptHeader
   extends EventCommandLike2<355, ParamArray_Script> {
   parameters: [string];
 }
 
-export interface Command2_ScriptBody
+export interface Command_ScriptBody
   extends EventCommandLike2<655, ParamArray_Script> {
   parameters: [string];
 }

@@ -219,10 +219,6 @@ export interface Command_SetWeatherEffect extends EventCommandLike<236> {
   ];
 }
 
-export interface Command_PlayBGM extends EventCommandLike<241> {
-  parameters: [value: AudioFileParams];
-}
-
 export interface Command_FadeOutBGM extends EventCommandLike<242> {
   parameters: [duration: number];
 }
@@ -281,10 +277,6 @@ export interface Command_NameInputProcessing extends EventCommandLike<303> {
   parameters: [actorId: number, maxLength: number];
 }
 
-export interface Command_ChangeName extends EventCommandLike<320> {
-  parameters: [actorId: number, name: string];
-}
-
 export interface Command_ChangeClaass extends EventCommandLike<321> {
   parameters: [actorId: number, classId: number, keepExp: boolean];
 }
@@ -308,14 +300,6 @@ export interface Command_ChangeVehicleImage extends EventCommandLike<323> {
   ];
 }
 
-export interface Command_ChangeNickName extends EventCommandLike<324> {
-  parameters: [actorId: number, nickname: string];
-}
-
-export interface Command_ChangeProfile extends EventCommandLike<325> {
-  parameters: [actorId: number, profile: string];
-}
-
 export interface Command_ChangeEnemyHP extends EventCommandLike<331> {
   parameters: Param_ChangeEnemyParameters;
 }
@@ -324,16 +308,6 @@ export interface Command_ChangeEnemyMP extends EventCommandLike<332> {
   parameters: Param_ChangeEnemyParameters;
 }
 
-export interface Command_ReturnToTitleScreen
-  extends EventCommandLike<354, []> {}
-
-export interface Command_ScriptHeader extends EventCommandLike<355> {
-  parameters: [script: string];
-}
-
-export interface Command_ScriptBody extends EventCommandLike<655> {
-  parameters: [script: string];
-}
 export interface Command_PluginCommandMV extends EventCommandLike<356> {
   parameters: [command: string, args: string];
 }
