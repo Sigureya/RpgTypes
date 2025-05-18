@@ -36,10 +36,6 @@ export interface Command_SelectItem extends EventCommandLike<104> {
 export interface Command_ConditionalBranch
   extends EventCommandLike<111, BranchParameters> {}
 
-export interface Command_ConditionalBranchElse extends EventCommandLike<411> {
-  parameters: [];
-}
-
 export interface Command_CommonEvent extends EventCommandLike<117> {
   parameters: [eventId: number];
 }
@@ -155,8 +151,6 @@ export interface Command_SetMovementRoute extends EventCommandLike<205> {
   parameters: [characterId: number, movement: MoveRouteData];
 }
 
-export interface Command_GetOnOffVehicle extends EventCommandLike<206, []> {}
-
 export interface Command_ChangeTransparency extends EventCommandLike<211> {
   parameters: [value: ValueOf<Toggle>];
 }
@@ -235,8 +229,6 @@ export interface Command_FadeOutBGM extends EventCommandLike<242> {
 
 export interface Command_FadeOutBGS
   extends EventCommandLike<246, [duration: number]> {}
-
-export interface Command_StopSE extends EventCommandLike<251, []> {}
 
 export interface Command_PlayMovie extends EventCommandLike<261> {
   parameters: [filename: string];
