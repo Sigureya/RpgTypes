@@ -9,7 +9,7 @@ import {
 import { makeCommandInputNumber } from "./commands/message/inputNumber/make";
 import {
   makeCommandSetupChoice,
-  makeCommand2_ShowChoiceItem,
+  makeCommandShowChoiceItem,
 } from "./commands/message/setupChoice";
 import { makeCommandShowMessage } from "./commands/message/showMessage/convert";
 import { makeCommand2_CommonEvent } from "./commands/callCommonEvent/make";
@@ -50,7 +50,7 @@ describe("isCommandShowChoices", () => {
 
 describe("isCommandShowChoiceItem", () => {
   test("Valid command", () => {
-    const command = makeCommand2_ShowChoiceItem({
+    const command = makeCommandShowChoiceItem({
       index: 0,
       name: "Choice",
     });

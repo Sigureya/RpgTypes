@@ -6,13 +6,13 @@ import { SCHEMA_COMMAND_CALL_COMMON_EVENT } from "./commands/callCommonEvent/sch
 import { SCHEMA_COMMAND_ANY_AUDIO } from "./commands/audio/schema";
 import {
   SCHEMA_COMMAND_SHOW_CHOICES,
-  SCHEMA_COMMAND_SHOW_CHOICE_ITEM,
+  SCHEMA_COMMAND_SHOW_CHOICE_WHEN,
 } from "./commands/message/setupChoice/schema";
 import type {
   CommandUnion_AnyAudio,
   Command2_CommonEvent,
-  Command2_ShowChoices,
-  Command2_ShowChoiceItem,
+  Command_ShowChoices,
+  Command_ShowChoiceWhen,
   Command2_InputNumber,
   Command_ShowMessageHeader,
   CommandUnion_TextBody,
@@ -28,7 +28,7 @@ const changeActorText = ajv.compile(SCHEMA_COMMAND_CHANGE_ACTOR_TEXT);
 const inputNumber = ajv.compile(SCHEMA_COMMAND_INPUT_NUMBER);
 const commonVent = ajv.compile(SCHEMA_COMMAND_CALL_COMMON_EVENT);
 
-const showChoiceItem = ajv.compile(SCHEMA_COMMAND_SHOW_CHOICE_ITEM);
+const showChoiceItem = ajv.compile(SCHEMA_COMMAND_SHOW_CHOICE_WHEN);
 const showMessage = ajv.compile(SCHEMA_COMMAND_SHOW_MESSAGE);
 
 const showChoices = ajv.compile(SCHEMA_COMMAND_SHOW_CHOICES);
@@ -69,12 +69,12 @@ export const isCommandCommonEvent = (
 
 export const isCommandShowChoices = (
   data: unknown
-): data is Command2_ShowChoices => {
+): data is Command_ShowChoices => {
   return showChoices(data);
 };
 export const isCommandShowChoiceItem = (
   data: unknown
-): data is Command2_ShowChoiceItem => {
+): data is Command_ShowChoiceWhen => {
   return showChoiceItem(data);
 };
 

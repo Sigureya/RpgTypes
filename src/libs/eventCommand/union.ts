@@ -5,8 +5,8 @@ import type {
   Command2_ScrollTextHead,
 } from "./commands/message/scrollText/types";
 import type {
-  Command2_ShowChoices,
-  Command2_ShowChoiceItem,
+  Command_ShowChoices,
+  Command_ShowChoiceWhen,
 } from "./commands/message/setupChoice";
 
 export type EventCommandUnion =
@@ -14,5 +14,5 @@ export type EventCommandUnion =
   | Command2_InputNumber
   | Command2_ScrollTextBody
   | Command2_ScrollTextHead
-  | Command2_ShowChoices
-  | Command2_ShowChoiceItem;
+  | Command_ShowChoices
+  | Command_ShowChoiceWhen;
