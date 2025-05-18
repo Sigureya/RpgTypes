@@ -66,10 +66,6 @@ export interface Command_LabelJump extends EventCommandLike<119> {
   parameters: [label: string];
 }
 
-export interface Command_ControlSwitches extends EventCommandLike<121> {
-  parameters: [min: number, max: number, value: ValueOf<Toggle>];
-}
-
 export interface Command_ControlTimer extends EventCommandLike<124> {
   parameters: [operation: ValueOf<Operation_PlusMinus>, time: number];
 }
@@ -110,14 +106,6 @@ export interface Command_ChangePartyMember extends EventCommandLike<129> {
   parameters: [operation: ValueOf<Operation_PlusMinus>, actorId: number];
 }
 
-export interface Command_ChangeBattleBGM extends EventCommandLike<132> {
-  parameters: [value: AudioFileParams];
-}
-
-export interface Command_ChangeVictoryME extends EventCommandLike<133> {
-  parameters: [value: AudioFileParams];
-}
-
 export interface Command_ChangeSaveAccess extends EventCommandLike<134> {
   parameters: [value: ValueOf<Toggle>];
 }
@@ -136,14 +124,6 @@ export interface Command_ChangeFormationAccess extends EventCommandLike<137> {
 
 export interface Command_ChangeWindowColor extends EventCommandLike<138> {
   parameters: [color: ColorRGBA];
-}
-
-export interface Command_ChangeDefeatME extends EventCommandLike<139> {
-  parameters: [value: AudioFileParams];
-}
-
-export interface Command_ChangeVehicleBGM extends EventCommandLike<140> {
-  parameters: [value: AudioFileParams];
 }
 
 export interface Command_TransferPlayer extends EventCommandLike<201> {
@@ -280,19 +260,8 @@ export interface Command_SaveBGM extends EventCommandLike<243, []> {}
 
 export interface Command_ResumeBGM extends EventCommandLike<244, []> {}
 
-export interface Command_PlayBGS extends EventCommandLike<245> {
-  parameters: [value: AudioFileParams];
-}
 export interface Command_FadeOutBGS
   extends EventCommandLike<246, [duration: number]> {}
-
-export interface Command_PlayME extends EventCommandLike<249> {
-  parameters: [value: AudioFileParams];
-}
-
-export interface Command_PlaySE extends EventCommandLike<250> {
-  parameters: [value: AudioFileParams];
-}
 
 export interface Command_StopSE extends EventCommandLike<251, []> {}
 
