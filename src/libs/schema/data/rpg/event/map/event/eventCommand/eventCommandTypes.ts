@@ -11,7 +11,7 @@ import type {
 } from "./paramaters";
 import type { BranchParameters } from "./branchParams";
 import type { Param_ChangeEnemyParameters } from "./paramaters/changeBattler";
-import type { AudioFileParams, ColorRGBA } from "@RpgTypes/utils";
+import type { ColorRGBA } from "@RpgTypes/utils";
 /**
  * @deprecated
  * Use `Command_ShowMessageHeader` instead.
