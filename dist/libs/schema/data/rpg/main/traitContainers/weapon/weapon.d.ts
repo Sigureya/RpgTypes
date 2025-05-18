@@ -11,4 +11,5 @@ export interface Data_Weapon extends Data_Equipment {
     wtypeId: number;
     etypeId: number;
     damage: Damage;
+    animationId: number;
 }

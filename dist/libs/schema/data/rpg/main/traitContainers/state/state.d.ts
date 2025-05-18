@@ -15,6 +15,8 @@ export interface Data_State extends Data_TraitContainer {
     removeByRestriction: boolean;
     removeByDamage: boolean;
     removeByWalking: boolean;
+    messageType: number;
+    releaseByDamage: boolean;
     autoRemovalTiming: number;
     minTurns: number;
     maxTurns: number;

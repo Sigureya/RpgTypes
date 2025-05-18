@@ -1,15 +1,15 @@
 export declare const SCHEMA_DATA_TROOP: {
-    type: string;
-    required: string[];
-    properties: {
-        id: {
-            type: string;
-            minimum: number;
+    readonly type: "object";
+    readonly required: ("id" | "name" | "members" | "pages")[];
+    readonly properties: {
+        readonly id: {
+            readonly type: "integer";
+            readonly minimum: 0;
         };
-        name: {
-            type: string;
+        readonly name: {
+            readonly type: "string";
         };
-        members: {
+        readonly members: {
             readonly type: "array";
             readonly items: {
                 readonly type: "object";
@@ -27,46 +27,62 @@ export declare const SCHEMA_DATA_TROOP: {
                         readonly type: "boolean";
                     };
                 };
-                readonly required: readonly ["enemyId", "x", "y"];
+                readonly required: readonly ["enemyId", "x", "y", "hidden"];
             };
         };
-        pages: {
-            type: string;
-            items: {
-                readonly type: "object";
-                readonly properties: {
-                    readonly conditions: {
-                        readonly type: "object";
-                        readonly properties: {
-                            readonly switch1Valid: {
-                                readonly type: "boolean";
+        readonly pages: {
+            readonly type: "array";
+            readonly items: {
+                type: "object";
+                additionalProperties: true;
+                required: ("conditions" | "span")[];
+                properties: {
+                    conditions: {
+                        type: "object";
+                        required: ("actorId" | "actorHp" | "enemyValid" | "switchValid")[];
+                        properties: {
+                            actorHp: {
+                                type: "integer";
+                                minimum: number;
                             };
-                            readonly switch2Valid: {
-                                readonly type: "boolean";
+                            actorId: {
+                                type: "integer";
+                                minimum: number;
                             };
-                            readonly variableValid: {
-                                readonly type: "boolean";
+                            enemyValid: {
+                                type: "integer";
+                                minimum: number;
                             };
-                            readonly selfSwitchValid: {
-                                readonly type: "boolean";
-                            };
-                            readonly actorValid: {
-                                readonly type: "boolean";
-                            };
-                            readonly enemyValid: {
-                                readonly type: "boolean";
-                            };
-                            readonly timerValid: {
-                                readonly type: "boolean";
+                            switchValid: {
+                                type: "integer";
+                                minimum: number;
                             };
                         };
                     };
-                    readonly span: {
-                        readonly type: "string";
+                    span: {
+                        type: "number";
+                    };
+                    list: {
+                        type: string;
+                        items: {
+                            type: string;
+                            additionalProperties: boolean;
+                            required: ("code" | "parameters" | "indent")[];
+                            properties: {
+                                code: {
+                                    type: string;
+                                };
+                                indent: {
+                                    type: string;
+                                };
+                                parameters: {
+                                    type: string;
+                                };
+                            };
+                        };
                     };
                 };
             };
-            required: string[];
         };
     };
 };

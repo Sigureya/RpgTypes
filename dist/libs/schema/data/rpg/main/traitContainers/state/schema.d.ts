@@ -49,6 +49,12 @@ export declare const SCHEMA_DATA_STATE: {
         readonly removeByRestriction: {
             readonly type: "boolean";
         };
+        readonly messageType: {
+            readonly type: "integer";
+        };
+        readonly releaseByDamage: {
+            readonly type: "boolean";
+        };
         readonly autoRemovalTiming: {
             readonly type: "integer";
         };
