@@ -32,7 +32,7 @@ export interface Data_Map<
   autoplayBgm: boolean;
   autoplayBgs: boolean;
 
-  events: Array<MapEvent | null>;
+  events: Array<MapEvent<CommandType> | null>;
   encounterList: Encounter[];
 }
 
