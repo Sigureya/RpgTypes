@@ -44,7 +44,13 @@ describe("isDataActor", () => {
       profile: "This is a test profile.",
       equips: [],
       note: "This is a test note.",
-      traits: [],
+      traits: [
+        {
+          code: 3,
+          dataId: 400,
+          value: 485,
+        },
+      ],
     };
     expect(isDataActor(actor)).toBe(true);
   });
@@ -71,7 +77,14 @@ describe("isDataArmor", () => {
       description: "A sturdy iron armor.",
       etypeId: 1,
       price: 1000,
-      traits: [],
+      traits: [
+        {
+          code: 2,
+          dataId: 7,
+          value: 189,
+        },
+      ],
+      atypeId: 1,
       params: [0, 1, 2, 3, 4, 5, 6, 7], // Example params
       note: "This is a test note.",
     };
@@ -96,8 +109,15 @@ describe("isDataWeapon", () => {
       etypeId: 1,
       params: [0, 1, 2, 3, 4, 5, 6, 7], // Example params
       price: 1000,
-      traits: [],
+      traits: [
+        {
+          code: 0,
+          dataId: 181,
+          value: 500,
+        },
+      ],
       wtypeId: 1,
+      animationId: 1,
       damage: {
         type: 1,
         elementId: 2,
@@ -190,6 +210,8 @@ describe("isDataState", () => {
       message2: "This is another test message.",
       message3: "This is a third test message.",
       message4: "This is a fourth test message.",
+      messageType: 0,
+      releaseByDamage: true,
       traits: [
         {
           code: 0,
@@ -229,7 +251,13 @@ describe("isDataClass", () => {
       params: [0, 1, 2, 3, 4, 5, 6, 7], // Example params
       traits: [{ code: 0, dataId: 1, value: 2 }],
       note: "This is a test note.",
-      learnings: [],
+      learnings: [
+        {
+          level: 1,
+          skillId: 1,
+          note: "skill note.",
+        },
+      ],
     };
     expect(isDataClass(class_)).toBe(true);
   });

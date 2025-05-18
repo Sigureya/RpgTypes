@@ -123,6 +123,7 @@ export const SCHEMA_DATA_ITEM = {
     tpGain: { type: "integer" },
     consumable: { type: "boolean" },
     price: { type: "integer", minimum: 0 },
+    itypeId: { type: "integer" },
 
     effects: {
       type: "array",
