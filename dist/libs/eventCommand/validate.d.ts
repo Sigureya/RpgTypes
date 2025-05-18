@@ -1,10 +1,10 @@
-import { CommandUnion_AnyAudio, Command2_CommonEvent, Command2_ShowChoices, Command2_ShowChoiceItem, Command2_InputNumber, Command_ShowMessageHeader, CommandUnion_TextBody, Command2_ScrollTextHead, CommandUnion_ChangeActorText } from './commands';
+import { CommandUnion_AnyAudio, Command_ShowChoices, Command_ShowChoiceWhen, Command_InputNumber, Command_ShowMessageHeader, CommandUnion_TextBody, Command_ScrollTextHeader, CommandUnion_ChangeActorText, Command_CommonEvent } from './commands';
 export declare const isCommandChangeActorText: (data: unknown) => data is CommandUnion_ChangeActorText;
-export declare const isCommandScrollTextHead: (data: unknown) => data is Command2_ScrollTextHead;
+export declare const isCommandScrollTextHead: (data: unknown) => data is Command_ScrollTextHeader;
 export declare const isCommandTextBody: (command: unknown) => command is CommandUnion_TextBody;
 export declare const isCommandAudio: (data: unknown) => data is CommandUnion_AnyAudio;
-export declare const isCommandCommonEvent: (data: unknown) => data is Command2_CommonEvent;
-export declare const isCommandShowChoices: (data: unknown) => data is Command2_ShowChoices;
-export declare const isCommandShowChoiceItem: (data: unknown) => data is Command2_ShowChoiceItem;
-export declare const isCommandInputNumber: (data: unknown) => data is Command2_InputNumber;
+export declare const isCommandCommonEvent: (data: unknown) => data is Command_CommonEvent;
+export declare const isCommandShowChoices: (data: unknown) => data is Command_ShowChoices;
+export declare const isCommandShowChoiceItem: (data: unknown) => data is Command_ShowChoiceWhen;
+export declare const isCommandInputNumber: (data: unknown) => data is Command_InputNumber;
 export declare const isCommandShowMessage: (data: unknown) => data is Command_ShowMessageHeader;

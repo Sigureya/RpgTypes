@@ -1,9 +1,9 @@
 import { EventCommandLike2 } from '../../../..';
-export interface ParamObject_ShowChoiceItem {
+export interface ParamObject_ShowChoiceWhen {
     index: number;
     name: string;
 }
-export type ParamArray_ShowChoiceItem = [index: number, name: string];
-export interface Command2_ShowChoiceItem extends EventCommandLike2<402> {
-    parameters: ParamArray_ShowChoiceItem;
+export type ParamArray_ShowChoiceWhen = [index: number, name: string];
+export interface Command_ShowChoiceWhen extends EventCommandLike2<402> {
+    parameters: ParamArray_ShowChoiceWhen;
 }
