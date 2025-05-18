@@ -4,6 +4,7 @@ import type { EventCommand, MapEvent } from "./event/";
 import type { MapEventContainer } from "./mapEventContainer";
 
 export interface Data_Map extends MapEventContainer<EventCommand> {
+  data: number[];
   battleback1Name: string;
   battleback2Name: string;
 
@@ -14,20 +15,21 @@ export interface Data_Map extends MapEventContainer<EventCommand> {
   parallaxSx: number;
   parallaxSy: number;
 
+  x: number;
+  y: number;
+  width: number;
+  height: number;
+  note: string;
+
+  displayName: string;
+  disableDashing: boolean;
+
   bgm: AudioFileParams;
   bgs: AudioFileParams;
   autoplayBgm: boolean;
   autoplayBgs: boolean;
 
-  displayName: string;
-  note: string;
-  width: number;
-  height: number;
-  x: number;
-  y: number;
-  disableDashing: boolean;
   events: Array<MapEvent | null>;
-  data: number[];
   encounterList: Encounter[];
 }
 

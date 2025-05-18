@@ -1,8 +1,15 @@
 import type { JSONSchemaType } from "ajv";
-import type { Data_Troop } from "./troop";
+import type {
+  BattleEventPage,
+  Data_Troop,
+  Troop_EventConditions,
+  Troop_Member,
+} from "./troop";
+import type { SomeJSONSchema } from "ajv/dist/types/json-schema";
+
 export const SCHEMA_DATA_TROOP = {
   type: "object",
-  required: ["id", "name", "members"],
+  required: ["id", "name", "members", "pages"] satisfies (keyof Data_Troop)[],
   properties: {
     id: { type: "integer", minimum: 0 },
     name: { type: "string" },
@@ -16,30 +23,42 @@ export const SCHEMA_DATA_TROOP = {
           y: { type: "integer" },
           hidden: { type: "boolean" },
         },
-        required: ["enemyId", "x", "y"],
-      },
-    } as const satisfies JSONSchemaType<Data_Troop["members"]>,
+        required: ["enemyId", "x", "y", "hidden"],
+      } as const satisfies JSONSchemaType<Troop_Member>,
+    },
     pages: {
       type: "array",
       items: {
         type: "object",
+        additionalProperties: true,
+        required: ["conditions", "span"],
         properties: {
           conditions: {
             type: "object",
+            required: ["actorHp", "actorId", "enemyValid", "switchValid"],
             properties: {
-              switch1Valid: { type: "boolean" },
-              switch2Valid: { type: "boolean" },
-              variableValid: { type: "boolean" },
-              selfSwitchValid: { type: "boolean" },
-              actorValid: { type: "boolean" },
-              enemyValid: { type: "boolean" },
-              timerValid: { type: "boolean" },
+              actorHp: {
+                type: "integer",
+                minimum: 0,
+              },
+              actorId: {
+                type: "integer",
+                minimum: 0,
+              },
+              enemyValid: {
+                type: "integer",
+                minimum: 0,
+              },
+              switchValid: {
+                type: "integer",
+                minimum: 0,
+              },
             },
-          },
-          span: { type: "string" },
+          } satisfies JSONSchemaType<Troop_EventConditions>,
+          span: { type: "number" },
+          list: { type: "array" },
         },
-      } as const,
-      required: ["conditions", "span"],
+      } satisfies JSONSchemaType<Omit<BattleEventPage, "list">>,
     },
-  },
-};
+  } as Record<keyof Data_Troop, SomeJSONSchema>,
+} as const;
