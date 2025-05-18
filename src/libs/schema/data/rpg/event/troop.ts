@@ -1,10 +1,4 @@
 import type { EventCommand } from "./map";
-import type { Troop_EventConditions, Troop_Member } from "./troopMembers";
-export interface BattleEventPage {
-  conditions: Troop_EventConditions;
-  list: EventCommand[];
-  span: number;
-}
 
 export interface Data_Troop {
   members: Troop_Member[];
@@ -12,4 +6,21 @@ export interface Data_Troop {
 
   id: number;
   name: string;
+}
+export interface BattleEventPage {
+  conditions: Troop_EventConditions;
+  list: EventCommand[];
+  span: number;
+}
+export interface Troop_EventConditions {
+  actorHp: number;
+  actorId: number;
+  enemyValid: number;
+  switchValid: number;
+}
+export interface Troop_Member {
+  enemyId: number;
+  x: number;
+  y: number;
+  hidden: boolean;
 }
