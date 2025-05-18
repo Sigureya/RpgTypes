@@ -5,6 +5,6 @@ export interface ParamObject_InputNumber {
   variableId: number;
   digits: number;
 }
-export interface Command2_InputNumber extends EventCommandLike2<103> {
+export interface Command_InputNumber extends EventCommandLike2<103> {
   parameters: ParamArray_InputNumber;
 }

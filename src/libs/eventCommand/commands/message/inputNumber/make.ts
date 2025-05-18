@@ -1,6 +1,6 @@
 import { INPUT_NUMBER } from "@RpgTypes/schema";
 import type {
-  Command2_InputNumber,
+  Command_InputNumber,
   ParamArray_InputNumber,
   ParamObject_InputNumber,
 } from "./types";
@@ -19,7 +19,7 @@ export const fromArrayInputNumber = (
 export const makeCommandInputNumber = (
   param: Partial<ParamObject_InputNumber> | undefined,
   indent: number = 0
-): Command2_InputNumber => ({
+): Command_InputNumber => ({
   code: INPUT_NUMBER,
   indent,
   parameters: toArrayInputNumber(param ?? {}),

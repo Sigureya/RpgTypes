@@ -26,19 +26,12 @@ export interface Command_ShowMessage extends EventCommandLike<101> {
   ];
 }
 
-export interface Command_InputNumber extends EventCommandLike<103> {
-  parameters: [variableId: number, digits: number];
-}
 export interface Command_SelectItem extends EventCommandLike<104> {
   parameters: [variableId: number, itemType: number];
 }
 
 export interface Command_ConditionalBranch
   extends EventCommandLike<111, BranchParameters> {}
-
-export interface Command_CommonEvent extends EventCommandLike<117> {
-  parameters: [eventId: number];
-}
 
 export interface Command_Label extends EventCommandLike<118> {
   parameters: [label: string];
