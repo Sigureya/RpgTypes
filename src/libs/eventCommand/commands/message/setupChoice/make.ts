@@ -64,3 +64,19 @@ export const makeCommandSetupChoice = (
     param?.background ?? 0,
   ],
 });
+
+export const cloneChoices = (
+  command: Command_ShowChoices
+): Command_ShowChoices => {
+  return {
+    code: command.code,
+    indent: command.indent,
+    parameters: [
+      [...command.parameters[0]],
+      command.parameters[1],
+      command.parameters[2],
+      command.parameters[3],
+      command.parameters[4],
+    ],
+  };
+};

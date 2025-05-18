@@ -7,5 +7,5 @@ export type ParamObject_CommonEvent = {
 };
 
 export interface Command_CommonEvent extends EventCommandLike2<117> {
-  parameters: ParamArray_CommonEvent;
+  parameters: [eventId: number];
 }
