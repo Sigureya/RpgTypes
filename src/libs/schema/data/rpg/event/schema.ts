@@ -1,9 +1,11 @@
 import type { JSONSchemaType } from "ajv";
 import type {
   BattleEventPage,
+  Data_Troop,
   Troop_EventConditions,
   Troop_Member,
 } from "./troop";
+import type { SomeJSONSchema } from "ajv/dist/types/json-schema";
 
 export const SCHEMA_DATA_TROOP = {
   type: "object",
@@ -58,5 +60,5 @@ export const SCHEMA_DATA_TROOP = {
         },
       } satisfies JSONSchemaType<Omit<BattleEventPage, "list">>,
     },
-  },
+  } as Record<keyof Data_Troop, SomeJSONSchema>,
 } as const;
