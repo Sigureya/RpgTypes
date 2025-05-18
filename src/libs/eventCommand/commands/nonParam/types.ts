@@ -9,6 +9,7 @@ export interface Command_Loop extends EventCommandLike<112> {
 export interface Command_LoopBreak extends EventCommandLike<113> {
   parameters: [];
 }
+export interface Command_GetOnOffVehicle extends EventCommandLike<206, []> {}
 
 export interface Command_ExitEventProcessing extends EventCommandLike<115> {
   parameters: [];
