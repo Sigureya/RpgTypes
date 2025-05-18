@@ -13,6 +13,6 @@ export interface ParamObject_SetupChoice {
     positionType: number;
     background: number;
 }
-export interface Command2_ShowChoices extends EventCommandLike2<102> {
+export interface Command_ShowChoices extends EventCommandLike2<102> {
     parameters: ParamArray_SetupChoice;
 }

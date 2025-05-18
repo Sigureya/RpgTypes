@@ -1,9 +1,9 @@
 import { EventCommandLike2 } from '../../../..';
-export type ParamArray_ScrollTextHead = [speed: number, skip: boolean];
-export interface ParamObject_ScrollTextHead {
+export type ParamArray_ScrollTextHeader = [speed: number, skip: boolean];
+export interface ParamObject_ScrollTextHeader {
     speed: number;
     skip: boolean;
 }
-export interface Command2_ScrollTextHead extends EventCommandLike2<105> {
-    parameters: ParamArray_ScrollTextHead;
+export interface Command_ScrollTextHeader extends EventCommandLike2<105> {
+    parameters: ParamArray_ScrollTextHeader;
 }
