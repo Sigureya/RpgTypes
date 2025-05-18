@@ -1,7 +1,7 @@
 import { describe, test, expect } from "vitest";
 import { makeEventPageCondition } from "./make";
 import Ajv from "ajv";
-import type { MapEvent_PageCondition } from "./condition";
+import type { MapEvent_PageCondition, PageConditionArg } from "./condition";
 import { SCHEMA_MAP_EVENT_PAGE_CONDITION } from "./schema";
 const ajv = new Ajv();
 const validate = ajv.compile(SCHEMA_MAP_EVENT_PAGE_CONDITION);
@@ -25,7 +25,7 @@ describe("makeEventPageCondition", () => {
     });
   });
   describe("all args", () => {
-    const result = makeEventPageCondition({
+    const arg: PageConditionArg = {
       switch1Id: 1,
       switch2Id: 2,
       variableId: 3,
@@ -33,6 +33,14 @@ describe("makeEventPageCondition", () => {
       selfSwitchCh: "C",
       itemId: 5,
       actorId: 6,
+    };
+    const result = makeEventPageCondition(arg);
+    test("input arg is not valid by schema", () => {
+      expect(isValid(arg)).toBe(false);
+    });
+
+    test("should be valid by schema", () => {
+      expect(isValid(result)).toBe(true);
     });
     test("all args set and all Valid flags true", () => {
       expect(result.switch1Id).toBe(1);
@@ -49,12 +57,9 @@ describe("makeEventPageCondition", () => {
       expect(result.actorId).toBe(6);
       expect(result.actorValid).toBe(true);
     });
-    test("should be valid by schema", () => {
-      expect(isValid(result)).toBe(true);
-    });
   });
   describe("all args undefined", () => {
-    const result = makeEventPageCondition({
+    const arg: Partial<MapEvent_PageCondition> = {
       switch1Id: undefined,
       switch2Id: undefined,
       variableId: undefined,
@@ -62,7 +67,15 @@ describe("makeEventPageCondition", () => {
       selfSwitchCh: undefined,
       itemId: undefined,
       actorId: undefined,
+    };
+    const result = makeEventPageCondition(arg);
+    test("input arg with all undefined is not valid by schema", () => {
+      expect(isValid(arg)).toBe(false);
     });
+    test("should be valid by schema", () => {
+      expect(isValid(result)).toBe(true);
+    });
+
     test("all args set to undefined and all Valid flags false", () => {
       expect(result.switch1Valid).toBe(false);
       expect(result.switch2Valid).toBe(false);
@@ -70,9 +83,6 @@ describe("makeEventPageCondition", () => {
       expect(result.selfSwitchValid).toBe(false);
       expect(result.itemValid).toBe(false);
       expect(result.actorValid).toBe(false);
-    });
-    test("should be valid by schema", () => {
-      expect(isValid(result)).toBe(true);
     });
   });
 
@@ -167,5 +177,28 @@ describe("makeEventPageCondition", () => {
     test("should be valid by schema", () => {
       expect(isValid(result)).toBe(true);
     });
+  });
+});
+describe("invalid data", () => {
+  test("empty object is not valid", () => {
+    expect(isValid({})).toBe(false);
+  });
+  test("null is not valid", () => {
+    expect(isValid(null)).toBe(false);
+  });
+  test("undefined is not valid", () => {
+    expect(isValid(undefined)).toBe(false);
+  });
+  test("object with only id is not valid", () => {
+    expect(isValid({ id: 1 })).toBe(false);
+  });
+  test("object with only name is not valid", () => {
+    expect(isValid({ name: "test" })).toBe(false);
+  });
+  test("empty array is not valid", () => {
+    expect(isValid([])).toBe(false);
+  });
+  test("string is not valid", () => {
+    expect(isValid("aaa")).toBe(false);
   });
 });
