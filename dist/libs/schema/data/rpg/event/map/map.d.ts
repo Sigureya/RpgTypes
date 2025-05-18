@@ -2,7 +2,9 @@ import { AudioFileParams } from '../../../../../utils';
 import { Encounter } from './members';
 import { EventCommand, MapEvent } from './event/';
 import { MapEventContainer } from './mapEventContainer';
-export interface Data_Map extends MapEventContainer<EventCommand> {
+import { EventCommandUnknown } from '../../../../../eventCommand';
+export interface Data_Map<CommandType extends EventCommandUnknown = EventCommand> extends MapEventContainer<CommandType> {
+    data: number[];
     battleback1Name: string;
     battleback2Name: string;
     parallaxLoopX: boolean;
@@ -11,19 +13,18 @@ export interface Data_Map extends MapEventContainer<EventCommand> {
     parallaxShow: boolean;
     parallaxSx: number;
     parallaxSy: number;
+    x: number;
+    y: number;
+    width: number;
+    height: number;
+    note: string;
+    displayName: string;
+    disableDashing: boolean;
     bgm: AudioFileParams;
     bgs: AudioFileParams;
     autoplayBgm: boolean;
     autoplayBgs: boolean;
-    displayName: string;
-    note: string;
-    width: number;
-    height: number;
-    x: number;
-    y: number;
-    disableDashing: boolean;
-    events: Array<MapEvent | null>;
-    data: number[];
+    events: Array<MapEvent<CommandType> | null>;
     encounterList: Encounter[];
 }
 export type Map_ImageFiles = Pick<Data_Map, "battleback1Name" | "battleback2Name" | "parallaxName">;

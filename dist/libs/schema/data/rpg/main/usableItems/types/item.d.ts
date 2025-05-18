@@ -7,6 +7,7 @@ export interface Data_Item extends Data_UsableItem {
     iconIndex: number;
     price: number;
     consumable: boolean;
+    itypeId: number;
     animationId: number;
     hitType: number;
     occasion: number;

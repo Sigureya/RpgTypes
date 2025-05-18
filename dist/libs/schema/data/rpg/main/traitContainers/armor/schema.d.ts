@@ -1,6 +1,6 @@
 export declare const SCHEMA_DATA_ARMMOR: {
     readonly type: "object";
-    readonly required: readonly ["name", "id", "description", "iconIndex", "price", "params", "traits", "note", "etypeId"];
+    readonly required: readonly ["name", "id", "description", "iconIndex", "price", "params", "traits", "note", "etypeId", "atypeId"];
     readonly properties: {
         readonly name: {
             readonly type: "string";
@@ -24,6 +24,10 @@ export declare const SCHEMA_DATA_ARMMOR: {
             readonly type: "string";
         };
         readonly etypeId: {
+            readonly type: "integer";
+            readonly minimum: 0;
+        };
+        readonly atypeId: {
             readonly type: "integer";
             readonly minimum: 0;
         };
