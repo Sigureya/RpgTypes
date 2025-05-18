@@ -1,11 +1,18 @@
 import { describe, test, expect } from "vitest";
+import { Ajv } from "ajv";
+import type { EventCommandUnknown, EventCommandLike2 } from "./types";
+import { SCHEMA_COMMAND_UNKNOWN } from "./schema";
 
-import type { EventCommandBase, EventCommandLike2 } from "./types";
+const ajv = new Ajv();
+const cccc = ajv.compile(SCHEMA_COMMAND_UNKNOWN);
 
-import { isCommandLike } from "./validate";
+const isCommandLike = (data: unknown): data is EventCommandUnknown => {
+  return cccc(data);
+};
+
 describe("isCommandLike", () => {
   test("returns true for valid EventCommandBase object", () => {
-    const validCommand: EventCommandBase = {
+    const validCommand: EventCommandUnknown = {
       code: 1,
       parameters: [],
       indent: 0,
