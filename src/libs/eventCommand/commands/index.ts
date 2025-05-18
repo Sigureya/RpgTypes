@@ -7,3 +7,4 @@ export * from "./unionTypes";
 export * from "./script";
 export * from "./variable";
 export * from "./flow";
+export * from "./nonParam";
