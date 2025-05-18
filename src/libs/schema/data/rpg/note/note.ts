@@ -63,7 +63,7 @@ export const setNoteValue = (
 ): string => {
   const regex = makeRegex();
 
-  return note.replaceAll(regex, (match, key: string) => {
+  return note.replace(regex, (match, key: string) => {
     if (key === targetKey) {
       return createNoteEntity(key, newValue); // 対象キーの場合のみ値を差し替え
     }
