@@ -1,5 +1,5 @@
 import type { JSONSchemaType } from "ajv";
-import type { Command2_ScrollTextHead, Command2_ScrollTextBody } from "./types";
+import type { Command_ScrollTextHeader, Command_ScrollTextBody } from "./types";
 
 export const SCHEMA_COMMAND_SCROLL_TEXT_HEAD = {
   type: "object",
@@ -17,7 +17,7 @@ export const SCHEMA_COMMAND_SCROLL_TEXT_HEAD = {
     },
   },
   required: ["code", "indent", "parameters"],
-} as const satisfies JSONSchemaType<Command2_ScrollTextHead>;
+} as const satisfies JSONSchemaType<Command_ScrollTextHeader>;
 
 export const SCHEMA_COMMAND_SCROLL_TEXT_BODY = {
   type: "object",
@@ -32,4 +32,4 @@ export const SCHEMA_COMMAND_SCROLL_TEXT_BODY = {
     },
   },
   required: ["code", "indent", "parameters"],
-} as const satisfies JSONSchemaType<Command2_ScrollTextBody>;
+} as const satisfies JSONSchemaType<Command_ScrollTextBody>;

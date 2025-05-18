@@ -1,6 +1,6 @@
 import type {
+  Command_ShowMessageBody,
   Command_ShowMessageHeader,
-  Command2_ShowMessageBody,
   ParamArray_ShowMessage,
   ParamObject_ShowMessage,
 } from "./types";
@@ -48,7 +48,7 @@ export const toArrayShowMessageHeader = (
 export const makeCommandShowMessageBody = (
   text: string,
   indent: number = 0
-): Command2_ShowMessageBody => ({
+): Command_ShowMessageBody => ({
   code: SHOW_MESSAGE_BODY,
   indent,
   parameters: [text],

@@ -7,10 +7,10 @@ import {
   SCRIPT_EVAL,
 } from "@RpgTypes/schema";
 import type {
-  Command2_ShowMessageBody,
-  Command2_CommentBody,
+  Command_ShowMessageBody,
+  Command_CommentBody,
   Command_CommentHeader,
-  Command2_ScrollTextBody,
+  Command_ScrollTextBody,
   Command2_ScriptHeader,
   Command2_ScriptBody,
 } from "./commands";
@@ -18,13 +18,13 @@ import { isCommandTextBody } from "./validate";
 
 export const isCommandShowMessageBody = (
   command: unknown
-): command is Command2_ShowMessageBody => {
+): command is Command_ShowMessageBody => {
   return isCommandTextBody(command) && command.code === SHOW_MESSAGE_BODY;
 };
 
 export const isCommandShowScrollingTextBody = (
   command: unknown
-): command is Command2_ScrollTextBody => {
+): command is Command_ScrollTextBody => {
   return (
     isCommandTextBody(command) && command.code === SHOW_SCROLLING_TEXT_BODY
   );
@@ -38,7 +38,7 @@ export const isCommandCommentHeader = (
 
 export const isCommandCommentBody = (
   command: unknown
-): command is Command2_CommentBody => {
+): command is Command_CommentBody => {
   return isCommandTextBody(command) && command.code === COMMENT_BODY;
 };
 
