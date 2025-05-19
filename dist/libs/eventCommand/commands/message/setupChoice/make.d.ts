@@ -6,3 +6,4 @@ export declare const toArraySetupChoiceItem: (object: Partial<ParamObject_ShowCh
 export declare const fromArraySetupChoice: (array: ParamArray_SetupChoice) => ParamObject_SetupChoice;
 export declare const toArraySetupChoice: (object: Partial<ParamObject_SetupChoice>) => ParamArray_SetupChoice;
 export declare const makeCommandSetupChoice: (param: Partial<ParamObject_SetupChoice> | undefined, indent?: number) => Command_ShowChoices;
+export declare const cloneChoices: (command: Command_ShowChoices) => Command_ShowChoices;
