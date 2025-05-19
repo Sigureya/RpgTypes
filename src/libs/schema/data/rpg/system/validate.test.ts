@@ -1,10 +1,10 @@
 import { describe, test, expect } from "vitest";
 import { isSystemBooleanOptions } from "./validate";
-import type { System_BoolanOptions } from "./system";
+import type { System_BooleanOptions } from "./system";
 
 describe("isSystemBooleanOptions", () => {
   test("Valid", () => {
-    const mock: System_BoolanOptions = {
+    const mock: System_BooleanOptions = {
       optAutosave: true,
       optDisplayTp: true,
       optDrawTitle: true,
@@ -21,14 +21,14 @@ describe("isSystemBooleanOptions", () => {
     expect(isSystemBooleanOptions(mock)).toBe(true);
   });
   test("invalid", () => {
-    const mock: Pick<System_BoolanOptions, "optAutosave" | "optDisplayTp"> = {
+    const mock: Pick<System_BooleanOptions, "optAutosave" | "optDisplayTp"> = {
       optAutosave: true,
       optDisplayTp: true,
     };
     expect(isSystemBooleanOptions(mock)).toBe(false);
   });
   test("invalid", () => {
-    const mock: { [K in keyof System_BoolanOptions]: number } = {
+    const mock: { [K in keyof System_BooleanOptions]: number } = {
       optAutosave: 1,
       optDisplayTp: 1,
       optDrawTitle: 1,
