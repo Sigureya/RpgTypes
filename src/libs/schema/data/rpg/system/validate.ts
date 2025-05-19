@@ -1,6 +1,6 @@
 import Ajv from "ajv";
 import { SCHEMA_SYSTEM_BOOLEAN_OPTIONS } from "./schema";
-import type { System_BooleanOptions } from "./system";
+import type { System_BooleanOptions } from "./subset";
 
 const ajv = new Ajv();
 const bb = ajv.compile(SCHEMA_SYSTEM_BOOLEAN_OPTIONS);
