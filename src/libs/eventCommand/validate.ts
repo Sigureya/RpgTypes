@@ -1,5 +1,4 @@
 import Ajv from "ajv";
-import { SCHEMA_COMMAND_TEXT_BODY } from "./commands/schema";
 import { SCHEMA_COMMAND_SHOW_MESSAGE } from "./commands/message/showMessage/schema";
 import { SCHEMA_COMMAND_INPUT_NUMBER } from "./commands/message/inputNumber/schema";
 import { SCHEMA_COMMAND_ANY_AUDIO } from "./commands/audio/play/schema";
@@ -13,7 +12,6 @@ import type {
   Command_ShowChoiceWhen,
   Command_InputNumber,
   Command_ShowMessageHeader,
-  CommandUnion_TextBody,
   Command_ScrollTextHeader,
   CommandUnion_ChangeActorText,
   Command_CommonEvent,
@@ -21,6 +19,8 @@ import type {
 import { SCHEMA_COMMAND_SCROLL_TEXT_HEAD } from "./commands/message/scrollText/schema";
 import { SCHEMA_COMMAND_CHANGE_ACTOR_TEXT } from "./commands/actor/changeText/schema";
 import { SCHEMA_COMMAND_CALL_COMMON_EVENT } from "./commands/flow/callCommonEvent/schema";
+import { SCHEMA_COMMAND_TEXT_BODY } from "./unionSchema";
+import type { CommandUnion_TextBody } from "./unionTypes";
 
 const ajv = new Ajv();
 // schemaはindex.ts無しで直接importすること！
