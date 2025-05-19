@@ -19,8 +19,14 @@ import type {
 import { SCHEMA_COMMAND_SCROLL_TEXT_HEAD } from "./commands/message/scrollText/schema";
 import { SCHEMA_COMMAND_CHANGE_ACTOR_TEXT } from "./commands/actor/changeText/schema";
 import { SCHEMA_COMMAND_CALL_COMMON_EVENT } from "./commands/flow/callCommonEvent/schema";
-import { SCHEMA_COMMAND_TEXT_BODY } from "./unionSchema";
-import type { CommandUnion_TextBody } from "./unionTypes";
+import {
+  SCHEMA_COMMAND_EMPTY_PARAM,
+  SCHEMA_COMMAND_TEXT_BODY,
+} from "./unionSchema";
+import type {
+  CommandUnion_EmptyParam,
+  CommandUnion_TextBody,
+} from "./unionTypes";
 
 const ajv = new Ajv();
 // schemaはindex.ts無しで直接importすること！
@@ -37,6 +43,14 @@ const showChoices = ajv.compile(SCHEMA_COMMAND_SHOW_CHOICES);
 const textBody = ajv.compile(SCHEMA_COMMAND_TEXT_BODY);
 const audioCommand = ajv.compile(SCHEMA_COMMAND_ANY_AUDIO);
 const scrollTextHead = ajv.compile(SCHEMA_COMMAND_SCROLL_TEXT_HEAD);
+
+const emptyParam = ajv.compile(SCHEMA_COMMAND_EMPTY_PARAM);
+
+export const isCommandNonParam = (
+  data: unknown
+): data is CommandUnion_EmptyParam => {
+  return emptyParam(data);
+};
 
 export const isCommandChangeActorText = (
   data: unknown
