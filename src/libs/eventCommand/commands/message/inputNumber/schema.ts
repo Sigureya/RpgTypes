@@ -1,5 +1,5 @@
 import type { JSONSchemaType } from "ajv";
-import type { Command2_InputNumber } from "./types";
+import type { Command_InputNumber } from "./types";
 
 export const SCHEMA_COMMAND_INPUT_NUMBER = {
   type: "object",
@@ -17,4 +17,4 @@ export const SCHEMA_COMMAND_INPUT_NUMBER = {
     },
   },
   required: ["code", "indent", "parameters"],
-} as const satisfies JSONSchemaType<Command2_InputNumber>;
+} as const satisfies JSONSchemaType<Command_InputNumber>;

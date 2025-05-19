@@ -2,25 +2,26 @@ import Ajv from "ajv";
 import { SCHEMA_COMMAND_TEXT_BODY } from "./commands/schema";
 import { SCHEMA_COMMAND_SHOW_MESSAGE } from "./commands/message/showMessage/schema";
 import { SCHEMA_COMMAND_INPUT_NUMBER } from "./commands/message/inputNumber/schema";
-import { SCHEMA_COMMAND_CALL_COMMON_EVENT } from "./commands/callCommonEvent/schema";
-import { SCHEMA_COMMAND_ANY_AUDIO } from "./commands/audio/schema";
+import { SCHEMA_COMMAND_ANY_AUDIO } from "./commands/audio/play/schema";
 import {
   SCHEMA_COMMAND_SHOW_CHOICES,
   SCHEMA_COMMAND_SHOW_CHOICE_WHEN,
 } from "./commands/message/setupChoice/schema";
 import type {
   CommandUnion_AnyAudio,
-  Command2_CommonEvent,
   Command_ShowChoices,
   Command_ShowChoiceWhen,
-  Command2_InputNumber,
+  Command_InputNumber,
   Command_ShowMessageHeader,
   CommandUnion_TextBody,
   Command_ScrollTextHeader,
   CommandUnion_ChangeActorText,
+  Command_CommonEvent,
 } from "./commands";
 import { SCHEMA_COMMAND_SCROLL_TEXT_HEAD } from "./commands/message/scrollText/schema";
 import { SCHEMA_COMMAND_CHANGE_ACTOR_TEXT } from "./commands/actor/changeText/schema";
+import { SCHEMA_COMMAND_CALL_COMMON_EVENT } from "./commands/flow/callCommonEvent/schema";
+
 const ajv = new Ajv();
 // schemaはindex.ts無しで直接importすること！
 // 過去に循環参照エラーで苦しんでます
@@ -63,7 +64,7 @@ export const isCommandAudio = (
 
 export const isCommandCommonEvent = (
   data: unknown
-): data is Command2_CommonEvent => {
+): data is Command_CommonEvent => {
   return commonVent(data);
 };
 
@@ -80,7 +81,7 @@ export const isCommandShowChoiceItem = (
 
 export const isCommandInputNumber = (
   data: unknown
-): data is Command2_InputNumber => {
+): data is Command_InputNumber => {
   return inputNumber(data);
 };
 

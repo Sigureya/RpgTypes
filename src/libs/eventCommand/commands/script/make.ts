@@ -1,10 +1,10 @@
-import type { Command2_ScriptBody, Command2_ScriptHeader } from "./types";
+import type { Command_ScriptBody, Command_ScriptHeader } from "./types";
 import { SCRIPT_EVAL, SCRIPT_EVAL_BODY } from "@RpgTypes/schema";
 
 export const makeCommandScriptHeader = (
   script: string,
   indent: number = 0
-): Command2_ScriptHeader => {
+): Command_ScriptHeader => {
   return {
     code: SCRIPT_EVAL,
     indent,
@@ -15,7 +15,7 @@ export const makeCommandScriptHeader = (
 export const makeCommandScriptBody = (
   script: string,
   indent: number = 0
-): Command2_ScriptBody => {
+): Command_ScriptBody => {
   return {
     code: SCRIPT_EVAL_BODY,
     indent,
@@ -30,5 +30,5 @@ export const makeCommandScriptArray = (
     index === 0
       ? makeCommandScriptHeader(line, indent)
       : makeCommandScriptBody(line, indent)
-  ) as [Command2_ScriptHeader, ...Command2_ScriptBody[]];
+  ) as [Command_ScriptHeader, ...Command_ScriptBody[]];
 };

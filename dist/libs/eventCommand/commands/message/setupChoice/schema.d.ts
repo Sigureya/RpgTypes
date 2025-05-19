@@ -1,4 +1,4 @@
-export declare const SCHEMA_COMMAND_SHOW_CHOICE_ITEM: {
+export declare const SCHEMA_COMMAND_SHOW_CHOICE_WHEN: {
     readonly type: "object";
     readonly properties: {
         readonly code: {

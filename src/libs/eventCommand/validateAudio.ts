@@ -8,19 +8,19 @@ import {
   CHANGE_VICTORY_ME,
 } from "@RpgTypes/schema";
 import type {
-  Command2_PlayBGM,
+  Command_PlayBGM,
   Command_PlayBGS,
   Command_ChangeBattleBGM,
   Command_ChangeVictoryME,
   Command_ChangeDefeatME,
   Command_PlayME,
   Command_PlaySE,
-} from "./commands/audio/types";
+} from "./commands/audio";
 import { isCommandAudio } from "./validate";
 
 export const isCommandPlayBgm = (
   command: unknown
-): command is Command2_PlayBGM => {
+): command is Command_PlayBGM => {
   return isCommandAudio(command) && command.code === PLAY_BGM;
 };
 

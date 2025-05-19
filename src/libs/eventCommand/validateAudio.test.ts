@@ -1,7 +1,7 @@
 import type { AudioFileParams } from "@RpgTypes/utils";
 import { describe, test, expect } from "vitest";
 import type {
-  Command2_PlayBGM,
+  Command_PlayBGM,
   Command_PlayBGS,
   Command_PlayME,
   Command_PlaySE,
@@ -17,7 +17,7 @@ import {
   makeCommandChangeBattleBGM,
   makeCommandChangeDefeatME,
   makeCommandChangeVictoryME,
-} from "./commands/audio/make";
+} from "./commands/audio/play/make";
 import { isCommandAudio } from "./validate";
 import {
   isCommandChangeBattleBgm,
@@ -37,7 +37,7 @@ describe("isCommandAudio", () => {
     pan: 0,
   };
   test("Play BGM", () => {
-    const command: Command2_PlayBGM = makeCommandPlayBGM(MockAudio);
+    const command: Command_PlayBGM = makeCommandPlayBGM(MockAudio);
 
     expect(isCommandAudio(command)).toBe(true);
     expect(isCommandPlayBgm(command)).toBe(true);

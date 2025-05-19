@@ -11,7 +11,7 @@ import type {
 } from "./paramaters";
 import type { BranchParameters } from "./branchParams";
 import type { Param_ChangeEnemyParameters } from "./paramaters/changeBattler";
-import type { AudioFileParams, ColorRGBA } from "@RpgTypes/utils";
+import type { ColorRGBA } from "@RpgTypes/utils";
 /**
  * @deprecated
  * Use `Command_ShowMessageHeader` instead.
@@ -26,23 +26,12 @@ export interface Command_ShowMessage extends EventCommandLike<101> {
   ];
 }
 
-export interface Command_InputNumber extends EventCommandLike<103> {
-  parameters: [variableId: number, digits: number];
-}
 export interface Command_SelectItem extends EventCommandLike<104> {
   parameters: [variableId: number, itemType: number];
 }
 
 export interface Command_ConditionalBranch
   extends EventCommandLike<111, BranchParameters> {}
-
-export interface Command_ConditionalBranchElse extends EventCommandLike<411> {
-  parameters: [];
-}
-
-export interface Command_CommonEvent extends EventCommandLike<117> {
-  parameters: [eventId: number];
-}
 
 export interface Command_Label extends EventCommandLike<118> {
   parameters: [label: string];
@@ -155,8 +144,6 @@ export interface Command_SetMovementRoute extends EventCommandLike<205> {
   parameters: [characterId: number, movement: MoveRouteData];
 }
 
-export interface Command_GetOnOffVehicle extends EventCommandLike<206, []> {}
-
 export interface Command_ChangeTransparency extends EventCommandLike<211> {
   parameters: [value: ValueOf<Toggle>];
 }
@@ -225,18 +212,12 @@ export interface Command_SetWeatherEffect extends EventCommandLike<236> {
   ];
 }
 
-export interface Command_PlayBGM extends EventCommandLike<241> {
-  parameters: [value: AudioFileParams];
-}
-
 export interface Command_FadeOutBGM extends EventCommandLike<242> {
   parameters: [duration: number];
 }
 
 export interface Command_FadeOutBGS
   extends EventCommandLike<246, [duration: number]> {}
-
-export interface Command_StopSE extends EventCommandLike<251, []> {}
 
 export interface Command_PlayMovie extends EventCommandLike<261> {
   parameters: [filename: string];
@@ -289,10 +270,6 @@ export interface Command_NameInputProcessing extends EventCommandLike<303> {
   parameters: [actorId: number, maxLength: number];
 }
 
-export interface Command_ChangeName extends EventCommandLike<320> {
-  parameters: [actorId: number, name: string];
-}
-
 export interface Command_ChangeClaass extends EventCommandLike<321> {
   parameters: [actorId: number, classId: number, keepExp: boolean];
 }
@@ -316,14 +293,6 @@ export interface Command_ChangeVehicleImage extends EventCommandLike<323> {
   ];
 }
 
-export interface Command_ChangeNickName extends EventCommandLike<324> {
-  parameters: [actorId: number, nickname: string];
-}
-
-export interface Command_ChangeProfile extends EventCommandLike<325> {
-  parameters: [actorId: number, profile: string];
-}
-
 export interface Command_ChangeEnemyHP extends EventCommandLike<331> {
   parameters: Param_ChangeEnemyParameters;
 }
@@ -332,16 +301,6 @@ export interface Command_ChangeEnemyMP extends EventCommandLike<332> {
   parameters: Param_ChangeEnemyParameters;
 }
 
-export interface Command_ReturnToTitleScreen
-  extends EventCommandLike<354, []> {}
-
-export interface Command_ScriptHeader extends EventCommandLike<355> {
-  parameters: [script: string];
-}
-
-export interface Command_ScriptBody extends EventCommandLike<655> {
-  parameters: [script: string];
-}
 export interface Command_PluginCommandMV extends EventCommandLike<356> {
   parameters: [command: string, args: string];
 }
