@@ -1,11 +1,6 @@
 import type { AudioFileParams } from "@RpgTypes/utils";
-import type {
-  Data_System,
-  System_BooleanOptions,
-  System_AudioFiles,
-} from "./system";
 import type { JSONSchemaType } from "ajv";
-import type { TestBattler } from "./members";
+import type { System_AudioFiles, System_BooleanOptions } from "./subset";
 
 export const SCHEMA_SYSTEM_BOOLEAN_OPTIONS = {
   type: "object",
