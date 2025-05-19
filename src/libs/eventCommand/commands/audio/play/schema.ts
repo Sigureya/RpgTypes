@@ -1,6 +1,15 @@
 import type { JSONSchemaType } from "ajv";
 import type { CommandUnion_AnyAudio } from "./types";
 import type { AudioFileParams } from "src/libs/utils";
+import {
+  CHANGE_BATTLE_BGM,
+  CHANGE_DEFEAT_ME,
+  CHANGE_VICTORY_ME,
+  PLAY_BGM,
+  PLAY_BGS,
+  PLAY_ME,
+  PLAY_SE,
+} from "@RpgTypes/schema";
 
 export const SCHEMA_COMMAND_ANY_AUDIO = {
   type: "object",
@@ -10,13 +19,13 @@ export const SCHEMA_COMMAND_ANY_AUDIO = {
     code: {
       type: "integer",
       enum: [
-        132, // ChangeBattleBGM
-        133, // ChangeVictoryME
-        139, // ChangeDefeatME
-        241, // PlayBGM
-        245, // PlayBGS
-        249, // PlayME
-        250, // PlaySE
+        CHANGE_BATTLE_BGM,
+        CHANGE_VICTORY_ME,
+        CHANGE_DEFEAT_ME,
+        PLAY_BGM,
+        PLAY_BGS,
+        PLAY_ME,
+        PLAY_SE,
       ],
     },
     indent: { type: "integer" },
