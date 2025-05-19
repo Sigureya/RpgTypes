@@ -1,7 +1,7 @@
 import type { AudioFileParams } from "@RpgTypes/utils";
 import type {
   Data_System,
-  System_BoolanOptions,
+  System_BooleanOptions,
   System_AudioFiles,
 } from "./system";
 import type { JSONSchemaType } from "ajv";
@@ -39,7 +39,7 @@ export const SCHEMA_SYSTEM_BOOLEAN_OPTIONS = {
     "optTransparent",
     "optMessageSkip",
     "optSplashScreen",
-  ] satisfies Array<keyof System_BoolanOptions>,
+  ] satisfies Array<keyof System_BooleanOptions>,
   properties: {
     optAutosave: { type: "boolean" },
     optDisplayTp: { type: "boolean" },
@@ -54,7 +54,7 @@ export const SCHEMA_SYSTEM_BOOLEAN_OPTIONS = {
     optMessageSkip: { type: "boolean" },
     optSplashScreen: { type: "boolean" },
   },
-} as const satisfies JSONSchemaType<System_BoolanOptions>;
+} as const satisfies JSONSchemaType<System_BooleanOptions>;
 
 export const SCHEMA_SYSTEM_AUDIOFILES = {
   type: "object",
