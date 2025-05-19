@@ -1,6 +1,6 @@
 import { describe, test, expect } from "vitest";
 import { isSystemBooleanOptions } from "./validate";
-import type { System_BooleanOptions } from "./system";
+import type { System_BooleanOptions } from "./subset";
 
 describe("isSystemBooleanOptions", () => {
   test("Valid", () => {
