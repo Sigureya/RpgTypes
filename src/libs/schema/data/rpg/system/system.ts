@@ -108,6 +108,7 @@ export type System_DataNames = Pick<
   | "equipTypes"
   | "switches"
   | "armorTypes"
+  | "magicSkills"
 >;
 
 export type System_Images = Pick<
@@ -150,5 +151,10 @@ export type System_BooleanOptions = Pick<
 
 export type System_Debug = Pick<
   Data_System,
-  "battlerHue" | "battlerName" | "testBattlers" | "testTroopId"
+  "battlerHue" | "battlerName" | "testBattlers" | "testTroopId" | "editMapId"
+>;
+
+export type System_GameInitial = Pick<
+  Data_System,
+  "startMapId" | "startX" | "startY" | "partyMembersArray"
 >;
