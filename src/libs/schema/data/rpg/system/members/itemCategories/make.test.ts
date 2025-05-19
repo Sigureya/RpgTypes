@@ -1,12 +1,21 @@
 import { describe, test, expect } from "vitest";
 import { makeItemCategories, makeItemCategoriesFromArray } from "./make";
 import type { ItemCategories, ItemCategoriesArray } from "./types";
+import Ajv from "ajv";
+import { SCHEMA_SYSTEM_ITEM_CATEGORIES } from "./schema";
+
+const ajv = new Ajv();
+const validate = ajv.compile(SCHEMA_SYSTEM_ITEM_CATEGORIES);
 
 const testRoundTrip = (param: ItemCategories, caseName: string) => {
+  const array: ItemCategoriesArray = makeItemCategories(param);
   test(caseName, () => {
-    const array: ItemCategoriesArray = makeItemCategories(param);
     const object: ItemCategories = makeItemCategoriesFromArray(array);
     expect(param).toEqual(object);
+  });
+  test(`${caseName} - validate`, () => {
+    const isValid = validate(array);
+    expect(isValid).toBe(true);
   });
 };
 
@@ -23,6 +32,7 @@ describe("makeItemCategories", () => {
       weapon: true,
     });
     expect(array).toEqual([true, true, true, true]);
+    expect(validate(array)).toBe(true);
   });
   test("returns all false when all values are false", () => {
     const array = makeItemCategories({
@@ -32,22 +42,27 @@ describe("makeItemCategories", () => {
       weapon: false,
     });
     expect(array).toEqual([false, false, false, false]);
+    expect(validate(array)).toBe(true);
   });
   test("returns all true when param is undefined", () => {
     const array = makeItemCategories(undefined);
     expect(array).toEqual([true, true, true, true]);
+    expect(validate(array)).toBe(true);
   });
   test("returns correct array when only one value is true (armor)", () => {
     const array = makeItemCategories({ armor: true });
     expect(array).toEqual([true, true, true, true]); // 他がundefinedなのでtrue
+    expect(validate(array)).toBe(true);
   });
   test("returns correct array when only one value is false (item)", () => {
     const array = makeItemCategories({ item: false });
     expect(array).toEqual([false, true, true, true]);
+    expect(validate(array)).toBe(true);
   });
   test("returns correct array when some values are set", () => {
     const array = makeItemCategories({ item: false, weapon: false });
     expect(array).toEqual([false, false, true, true]);
+    expect(validate(array)).toBe(true);
   });
 });
 
