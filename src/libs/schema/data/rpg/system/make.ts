@@ -1,5 +1,6 @@
 import { makeAudioFileParams } from "@RpgTypes/utils";
 import {
+  makeItemCategories,
   makeMenuCommandsEnabled,
   makeParamNamesArray,
   makeSoundsArray,
@@ -7,19 +8,18 @@ import {
   makeTermsBasic,
   makeTermsCommand,
   makeTermsMessages,
+  makeVehicleData,
 } from "./members";
-import { makeVehicleData } from "./members/vehicle/make";
-import type {
-  Data_System,
-  System_Bgm,
-  System_DataNames,
-  System_Debug,
-  System_GameInitial,
-  System_Images,
-} from "./system";
+import type { Data_System } from "./system";
 import { makeEditorSetting } from "./setting";
 import type { SystemDataFragments } from "./systemSegments";
-import { makeItemCategories } from "./members/itemCategories";
+import type {
+  System_DataNames,
+  System_Debug,
+  System_Images,
+  System_GameInitial,
+  System_Bgm,
+} from "./subset";
 
 const cloneArray = <T>(array?: T[]) => {
   return array ? [...array] : [];
