@@ -1,4 +1,5 @@
 import type { System_Advanced, System_SoundsObject } from "./members";
+import type { ItemCategories } from "./members/itemCategories";
 import type { EditorSettings } from "./setting";
 import type {
   System_BooleanOptions,
@@ -23,4 +24,5 @@ export interface SystemDataFragments {
   debug: Partial<System_Debug>;
   images: Partial<System_Images>;
   gameInit: Partial<System_GameInitial>;
+  itemCategories: Partial<ItemCategories>;
 }

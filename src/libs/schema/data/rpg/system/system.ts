@@ -9,6 +9,7 @@ import type {
 } from "./members";
 import type { EditorSettings } from "./setting";
 import type { MenuCommandsEnabledArray } from "./members/menuCommands/types";
+import type { ItemCategoriesArray } from "./members/itemCategories";
 
 export interface Data_System {
   // battle
@@ -37,7 +38,7 @@ export interface Data_System {
   switches: string[];
   armorTypes: string[];
   magicSkills: string[];
-  itemCategories: string[];
+  itemCategories: ItemCategoriesArray;
   menuCommands: MenuCommandsEnabledArray;
 
   // audioFiles
@@ -86,6 +87,8 @@ export interface Data_System {
   versionId: number;
   advanced: System_Advanced;
   tileSize: number;
+  faceSize: number;
+  iconSize: number;
 
   editor: EditorSettings;
 }
