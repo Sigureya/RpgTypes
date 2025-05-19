@@ -1,28 +1,28 @@
 import Ajv from "ajv";
-import { SCHEMA_COMMAND_SHOW_MESSAGE } from "./commands/message/showMessage/schema";
-import { SCHEMA_COMMAND_INPUT_NUMBER } from "./commands/message/inputNumber/schema";
-import { SCHEMA_COMMAND_ANY_AUDIO } from "./commands/audio/play/schema";
-import {
-  SCHEMA_COMMAND_SHOW_CHOICES,
-  SCHEMA_COMMAND_SHOW_CHOICE_WHEN,
-} from "./commands/message/setupChoice/schema";
-import type {
-  CommandUnion_AnyAudio,
-  Command_ShowChoices,
-  Command_ShowChoiceWhen,
-  Command_InputNumber,
-  Command_ShowMessageHeader,
-  Command_ScrollTextHeader,
-  CommandUnion_ChangeActorText,
-  Command_CommonEvent,
-} from "./commands";
-import { SCHEMA_COMMAND_SCROLL_TEXT_HEAD } from "./commands/message/scrollText/schema";
-import { SCHEMA_COMMAND_CHANGE_ACTOR_TEXT } from "./commands/actor/changeText/schema";
-import { SCHEMA_COMMAND_CALL_COMMON_EVENT } from "./commands/flow/callCommonEvent/schema";
 import {
   SCHEMA_COMMAND_EMPTY_PARAM,
   SCHEMA_COMMAND_TEXT_BODY,
 } from "./unionSchema";
+import type {
+  CommandUnion_ChangeActorText,
+  Command_ScrollTextHeader,
+  CommandUnion_AnyAudio,
+  Command_CommonEvent,
+  Command_ShowChoices,
+  Command_ShowChoiceWhen,
+  Command_InputNumber,
+  Command_ShowMessageHeader,
+} from "./commands";
+import { SCHEMA_COMMAND_CHANGE_ACTOR_TEXT } from "./commands/actor/changeText/schema";
+import { SCHEMA_COMMAND_ANY_AUDIO } from "./commands/audio/play/schema";
+import { SCHEMA_COMMAND_CALL_COMMON_EVENT } from "./commands/flow/callCommonEvent/schema";
+import { SCHEMA_COMMAND_INPUT_NUMBER } from "./commands/message/inputNumber/schema";
+import { SCHEMA_COMMAND_SCROLL_TEXT_HEAD } from "./commands/message/scrollText/schema";
+import {
+  SCHEMA_COMMAND_SHOW_CHOICE_WHEN,
+  SCHEMA_COMMAND_SHOW_CHOICES,
+} from "./commands/message/setupChoice/schema";
+import { SCHEMA_COMMAND_SHOW_MESSAGE } from "./commands/message/showMessage/schema";
 
 const ajv = new Ajv();
 // schemaはindex.ts無しで直接importすること！
@@ -41,8 +41,13 @@ const showMessage = ajv.compile(SCHEMA_COMMAND_SHOW_MESSAGE);
 
 const showChoices = ajv.compile(SCHEMA_COMMAND_SHOW_CHOICES);
 
-// const textBody = ajv.compile(SCHEMA_COMMAND_TEXT_BODY);
 const audioCommand = ajv.compile(SCHEMA_COMMAND_ANY_AUDIO);
+export const isCommandAudio = (
+  data: unknown
+): data is CommandUnion_AnyAudio => {
+  return audioCommand(data);
+};
+
 const scrollTextHead = ajv.compile(SCHEMA_COMMAND_SCROLL_TEXT_HEAD);
 export const isCommandScrollTextHead = (
   data: unknown
@@ -50,25 +55,19 @@ export const isCommandScrollTextHead = (
   return scrollTextHead(data);
 };
 
-const emptyParam = ajv.compile(SCHEMA_COMMAND_EMPTY_PARAM);
+// const emptyParam = ajv.compile(SCHEMA_COMMAND_EMPTY_PARAM);
 
-export const isCommandNonParam = (data: unknown) =>
-  // : data is CommandUnion_EmptyParam
-  {
-    return emptyParam(data);
-  };
-
-// export const isCommandTextBody = (command: unknown) =>
-//   // : command is CommandUnion_TextBody
+// export const isCommandNonParam = (data: unknown) =>
+//   // : data is CommandUnion_EmptyParam
 //   {
-//     return textBody(command);
+//     return emptyParam(data);
 //   };
-
-export const isCommandAudio = (
-  data: unknown
-): data is CommandUnion_AnyAudio => {
-  return audioCommand(data);
-};
+const textBody = ajv.compile(SCHEMA_COMMAND_TEXT_BODY);
+export const isCommandTextBody = (command: unknown) =>
+  // : command is CommandUnion_TextBody
+  {
+    return textBody(command);
+  };
 
 export const isCommandCommonEvent = (
   data: unknown
