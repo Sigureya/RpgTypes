@@ -1,7 +1,7 @@
 import type { ItemCategories, ItemCategoriesArray } from "./types";
 
 export const makeItemCategories = (
-  param: Partial<ItemCategories>
+  param: Partial<ItemCategories> = {}
 ): ItemCategoriesArray => {
   return [
     param.item ?? true,
