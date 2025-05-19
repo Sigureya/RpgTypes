@@ -19,6 +19,21 @@ const testRoundTrip = (param: ItemCategories, caseName: string) => {
   });
 };
 
+describe("ItemCategoriesArray length validation", () => {
+  test("invalid: array length is 3 (too short)", () => {
+    expect(validate([false, false, false])).toBe(false);
+  });
+  test("invalid: array length is 5 (too long)", () => {
+    expect(validate([false, false, false, false, false])).toBe(false);
+  });
+  test("invalid: array length is 3 with all true", () => {
+    expect(validate([true, true, true])).toBe(false);
+  });
+  test("invalid: array length is 5 with all true", () => {
+    expect(validate([true, true, true, true, true])).toBe(false);
+  });
+});
+
 describe("makeItemCategories", () => {
   test("returns all true when param is empty object", () => {
     const array = makeItemCategories({});
