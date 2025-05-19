@@ -23,15 +23,16 @@ import {
   SCHEMA_COMMAND_EMPTY_PARAM,
   SCHEMA_COMMAND_TEXT_BODY,
 } from "./unionSchema";
-import type {
-  CommandUnion_EmptyParam,
-  CommandUnion_TextBody,
-} from "./unionTypes";
 
 const ajv = new Ajv();
 // schemaはindex.ts無しで直接importすること！
 // 過去に循環参照エラーで苦しんでます
 const changeActorText = ajv.compile(SCHEMA_COMMAND_CHANGE_ACTOR_TEXT);
+export const isCommandChangeActorText = (
+  data: unknown
+): data is CommandUnion_ChangeActorText => {
+  return changeActorText(data);
+};
 const inputNumber = ajv.compile(SCHEMA_COMMAND_INPUT_NUMBER);
 const commonVent = ajv.compile(SCHEMA_COMMAND_CALL_COMMON_EVENT);
 
@@ -40,35 +41,28 @@ const showMessage = ajv.compile(SCHEMA_COMMAND_SHOW_MESSAGE);
 
 const showChoices = ajv.compile(SCHEMA_COMMAND_SHOW_CHOICES);
 
-const textBody = ajv.compile(SCHEMA_COMMAND_TEXT_BODY);
+// const textBody = ajv.compile(SCHEMA_COMMAND_TEXT_BODY);
 const audioCommand = ajv.compile(SCHEMA_COMMAND_ANY_AUDIO);
 const scrollTextHead = ajv.compile(SCHEMA_COMMAND_SCROLL_TEXT_HEAD);
-
-const emptyParam = ajv.compile(SCHEMA_COMMAND_EMPTY_PARAM);
-
-export const isCommandNonParam = (
-  data: unknown
-): data is CommandUnion_EmptyParam => {
-  return emptyParam(data);
-};
-
-export const isCommandChangeActorText = (
-  data: unknown
-): data is CommandUnion_ChangeActorText => {
-  return changeActorText(data);
-};
-
 export const isCommandScrollTextHead = (
   data: unknown
 ): data is Command_ScrollTextHeader => {
   return scrollTextHead(data);
 };
 
-export const isCommandTextBody = (
-  command: unknown
-): command is CommandUnion_TextBody => {
-  return textBody(command);
-};
+const emptyParam = ajv.compile(SCHEMA_COMMAND_EMPTY_PARAM);
+
+export const isCommandNonParam = (data: unknown) =>
+  // : data is CommandUnion_EmptyParam
+  {
+    return emptyParam(data);
+  };
+
+// export const isCommandTextBody = (command: unknown) =>
+//   // : command is CommandUnion_TextBody
+//   {
+//     return textBody(command);
+//   };
 
 export const isCommandAudio = (
   data: unknown

@@ -6,11 +6,11 @@ import {
   SHOW_MESSAGE_BODY,
   SHOW_SCROLLING_TEXT_BODY,
 } from "@RpgTypes/schema";
-import type { JSONSchemaType } from "ajv";
-import type {
-  CommandUnion_TextBody,
-  CommandUnion_EmptyParam,
-} from "./unionTypes";
+// import type { JSONSchemaType } from "ajv";
+// import type {
+//   CommandUnion_TextBody,
+//   CommandUnion_EmptyParam,
+// } from "./unionTypes";
 
 export const SCHEMA_COMMAND_TEXT_BODY = {
   type: "object",
@@ -37,7 +37,7 @@ export const SCHEMA_COMMAND_TEXT_BODY = {
     },
   },
   additionalProperties: false,
-} as const satisfies JSONSchemaType<CommandUnion_TextBody>;
+} as const; // satisfies JSONSchemaType<CommandUnion_TextBody>;
 
 export const SCHEMA_COMMAND_EMPTY_PARAM = {
   type: "object",
@@ -50,7 +50,7 @@ export const SCHEMA_COMMAND_EMPTY_PARAM = {
       enum: [
         0, 109, 112, 113, 115, 204, 206, 213, 214, 216, 217, 221, 222, 243, 244,
         251, 314, 315, 340, 351, 352, 353, 354, 411,
-      ] satisfies ReadonlyArray<CommandUnion_EmptyParam["code"]>,
+      ], // satisfies ReadonlyArray<CommandUnion_EmptyParam["code"]>,
     },
   },
   additionalProperties: false,

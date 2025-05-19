@@ -1,4 +1,4 @@
-import type { EventCode, EventCommand } from "@RpgTypes/schema";
+import type { EventCode, EventCommand } from "./eventCommand";
 
 export type ExtractCommandByParam<
   P extends unknown[],
