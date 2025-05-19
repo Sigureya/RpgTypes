@@ -1,0 +1,93 @@
+import type { EventCommandLike2, ExtractCommandByParam } from "./frame";
+import type { Command_CommonEvent } from "./commands/flow";
+import type {
+  Command_Skip,
+  Command_Loop,
+  Command_LoopBreak,
+  Command_GetOnOffVehicle,
+  Command_ExitEventProcessing,
+  Command_EraseEvent,
+  Command_GatherFollowers,
+  Command_FadeOutScreen,
+  Command_FadeInScreen,
+  Command_SaveBGM,
+  Command_ResumeBGM,
+  Command_OpenSaveScreen,
+  Command_GameOver,
+  Command_ReturnToTitleScreen,
+  Command_InputNumber,
+  Command_ScrollTextBody,
+  Command_ScrollTextHeader,
+  Command_ShowChoices,
+  Command_ShowChoiceWhen,
+  Command_ShowMessageHeader,
+  Command_CommentHeader,
+  Command_CommentBody,
+  Command_ScriptHeader,
+  Command_ScriptBody,
+  Command_ChangeActorNickName,
+  Command_ChangeActorProfile,
+  Command_ControlSwitches,
+  Command_ControlVariables,
+  Command_PlayBGM,
+  Command_PlayBGS,
+  Command_PlayME,
+  Command_PlaySE,
+  Command_ChangeBattleBGM,
+  Command_ChangeVictoryME,
+  Command_ChangeDefeatME,
+  Command_ChangeVehicleBGM,
+} from "./commands";
+import type { Command_ChangeActorName } from "./commands/actor";
+
+export type EventCommandUnion =
+  | Command_CommonEvent
+  | Command_CommentHeader
+  | Command_CommentBody
+  | Command_ScriptHeader
+  | Command_ScriptBody
+  | Command_ShowMessageHeader
+  | Command_ShowChoices
+  | Command_ShowChoiceWhen
+  | Command_InputNumber
+  | Command_ScrollTextHeader
+  | Command_ScrollTextBody
+  | Command_ChangeActorName
+  | Command_ChangeActorNickName
+  | Command_ChangeActorProfile
+  | Command_ControlSwitches
+  | Command_ControlVariables
+  | Command_PlayBGM
+  | Command_PlayBGS
+  | Command_PlayME
+  | Command_PlaySE
+  | Command_ChangeBattleBGM
+  | Command_ChangeVictoryME
+  | Command_ChangeDefeatME
+  | Command_ChangeVehicleBGM
+  | Command_Skip
+  | Command_Loop
+  | Command_LoopBreak
+  | Command_GetOnOffVehicle
+  | Command_ExitEventProcessing
+  | Command_EraseEvent
+  | Command_GatherFollowers
+  | Command_FadeOutScreen
+  | Command_FadeInScreen
+  | Command_SaveBGM
+  | Command_ResumeBGM
+  | Command_OpenSaveScreen
+  | Command_GameOver
+  | Command_ReturnToTitleScreen;
+
+export type CommandUnion_TextBody = EventCommandLike2<
+  | 108 // comment
+  | 408 // comment
+  | 355 // script
+  | 655 // script
+  | 401 // show message
+  | 405, // show scroll
+  [comment: string]
+>;
+
+export type CommandUnion_EmptyParam = ExtractCommandByParam<[]>;
