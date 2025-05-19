@@ -4,7 +4,7 @@ import type {
   System_Images,
   System_Text,
   System_Bgm,
-  System_BoolanOptions,
+  System_BooleanOptions,
 } from "./system";
 
 type AsLabel<T> = Record<keyof T, string>;
@@ -13,7 +13,7 @@ export type SystemLabel_DataNames = AsLabel<System_DataNames>;
 export type SystemLabel_Images = AsLabel<System_Images>;
 export type SystemLabel_Text = AsLabel<System_Text>;
 export type SystemLabel_Bgm = AsLabel<System_Bgm>;
-export type SystemLabel_BoolanOptions = AsLabel<System_BoolanOptions>;
+export type SystemLabel_BoolanOptions = AsLabel<System_BooleanOptions>;
 
 export const DEFAULT_SYSTEM_LABELS_BOOLEAN = {
   domainName: "オプション",

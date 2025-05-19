@@ -1,11 +1,18 @@
-import type { System_Terms } from "./systemTerms";
-import { makeTermsBasic, Terms_BasicArray } from "./basic";
-import { Terms_Command, Terms_CommandArray } from "./commands";
-import { Terms_Messages } from "./messages";
+import type { Terms_ParamNames, Terms_ParamNamesArray } from "./systemTerms";
 
-// export const makeTerms = (): System_Terms => {
-//   return {
-//     basic: makeTermsBasic({}),
-//     commands: makeTermsCommands({}),
-//   };
-// };
+export const makeParamNamesArray = (
+  param: Partial<Terms_ParamNames>
+): Terms_ParamNamesArray => {
+  return [
+    param.mhp ?? "",
+    param.mmp ?? "",
+    param.atk ?? "",
+    param.def ?? "",
+    param.mat ?? "",
+    param.mdf ?? "",
+    param.agi ?? "",
+    param.luk ?? "",
+    param.hit ?? "",
+    param.eva ?? "",
+  ];
+};

@@ -1,16 +1,9 @@
 import type { JSONSchemaType } from "ajv";
 import type { CommandUnion_AnyAudio } from "./types";
 import type { AudioFileParams } from "src/libs/utils";
-import {
-  CHANGE_BATTLE_BGM,
-  CHANGE_DEFEAT_ME,
-  CHANGE_VICTORY_ME,
-  PLAY_BGM,
-  PLAY_BGS,
-  PLAY_ME,
-  PLAY_SE,
-} from "@RpgTypes/schema";
 
+// enumは意図的に直書き。
+// 定数を使うとimport解決でエラーが起こる
 export const SCHEMA_COMMAND_ANY_AUDIO = {
   type: "object",
   required: ["code", "parameters", "indent"],
@@ -18,15 +11,7 @@ export const SCHEMA_COMMAND_ANY_AUDIO = {
   properties: {
     code: {
       type: "integer",
-      enum: [
-        CHANGE_BATTLE_BGM,
-        CHANGE_VICTORY_ME,
-        CHANGE_DEFEAT_ME,
-        PLAY_BGM,
-        PLAY_BGS,
-        PLAY_ME,
-        PLAY_SE,
-      ],
+      enum: [132, 133, 139, 241, 245, 249, 250],
     },
     indent: { type: "integer" },
     parameters: {

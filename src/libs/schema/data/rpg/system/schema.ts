@@ -1,31 +1,15 @@
 import type { AudioFileParams } from "@RpgTypes/utils";
 import type {
   Data_System,
-  System_BoolanOptions,
+  System_BooleanOptions,
   System_AudioFiles,
 } from "./system";
 import type { JSONSchemaType } from "ajv";
-
-export const SC_TESTBATTLERS = {
-  type: "array",
-  items: {
-    type: "object",
-    required: ["actorId", "equips", "level"],
-    properties: {
-      actorId: { type: "integer" },
-
-      level: { type: "integer", minimum: 1 },
-      equips: {
-        type: "array",
-        items: { type: "integer" },
-      },
-    },
-    additionalProperties: false,
-  },
-} as const satisfies JSONSchemaType<Data_System["testBattlers"]>;
+import type { TestBattler } from "./members";
 
 export const SCHEMA_SYSTEM_BOOLEAN_OPTIONS = {
   type: "object",
+  additionalProperties: true,
   required: [
     "optAutosave",
     "optDisplayTp",
@@ -39,7 +23,7 @@ export const SCHEMA_SYSTEM_BOOLEAN_OPTIONS = {
     "optTransparent",
     "optMessageSkip",
     "optSplashScreen",
-  ] satisfies Array<keyof System_BoolanOptions>,
+  ] satisfies Array<keyof System_BooleanOptions>,
   properties: {
     optAutosave: { type: "boolean" },
     optDisplayTp: { type: "boolean" },
@@ -54,7 +38,7 @@ export const SCHEMA_SYSTEM_BOOLEAN_OPTIONS = {
     optMessageSkip: { type: "boolean" },
     optSplashScreen: { type: "boolean" },
   },
-} as const satisfies JSONSchemaType<System_BoolanOptions>;
+} as const satisfies JSONSchemaType<System_BooleanOptions>;
 
 export const SCHEMA_SYSTEM_AUDIOFILES = {
   type: "object",

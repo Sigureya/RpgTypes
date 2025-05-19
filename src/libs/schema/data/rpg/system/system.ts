@@ -1,6 +1,6 @@
 import type { AudioFileParams, ColorRGBA } from "@RpgTypes/utils";
 import type {
-  TestBattlers,
+  TestBattler,
   AttackMotion,
   System_Advanced,
   System_Terms,
@@ -8,8 +8,14 @@ import type {
   Data_Vehicle,
 } from "./members";
 import type { EditorSettings } from "./setting";
+import type { MenuCommandsEnabledArray } from "./members/menuCommands/types";
+import type { ItemCategoriesArray } from "./members/itemCategories";
 
 export interface Data_System {
+  // battle
+  battleSystem: number;
+  partyMembersArray: number[];
+
   // images
   battleback1Name: string;
   battleback2Name: string;
@@ -31,6 +37,9 @@ export interface Data_System {
   equipTypes: string[];
   switches: string[];
   armorTypes: string[];
+  magicSkills: string[];
+  itemCategories: ItemCategoriesArray;
+  menuCommands: MenuCommandsEnabledArray;
 
   // audioFiles
   titleBgm: AudioFileParams;
@@ -68,15 +77,18 @@ export interface Data_System {
   // editor params
   editMapId: number;
   testTroopId: number;
-  testBattlers: TestBattlers[];
+  testBattlers: TestBattler[];
+  battlerHue: number;
 
   // other
   windowTone: ColorRGBA;
   attackMotions: AttackMotion[];
-  local: string;
+  locale: string;
   versionId: number;
   advanced: System_Advanced;
   tileSize: number;
+  faceSize: number;
+  iconSize: number;
 
   editor: EditorSettings;
 }
@@ -99,6 +111,7 @@ export type System_DataNames = Pick<
   | "equipTypes"
   | "switches"
   | "armorTypes"
+  | "magicSkills"
 >;
 
 export type System_Images = Pick<
@@ -123,7 +136,7 @@ export type System_Me = Pick<
 
 export type System_AudioFiles = System_Bgm & System_Me;
 
-export type System_BoolanOptions = Pick<
+export type System_BooleanOptions = Pick<
   Data_System,
   | "optAutosave"
   | "optDisplayTp"
@@ -137,4 +150,14 @@ export type System_BoolanOptions = Pick<
   | "optTransparent"
   | "optMessageSkip"
   | "optSplashScreen"
+>;
+
+export type System_Debug = Pick<
+  Data_System,
+  "battlerHue" | "battlerName" | "testBattlers" | "testTroopId" | "editMapId"
+>;
+
+export type System_GameInitial = Pick<
+  Data_System,
+  "startMapId" | "startX" | "startY" | "partyMembersArray"
 >;

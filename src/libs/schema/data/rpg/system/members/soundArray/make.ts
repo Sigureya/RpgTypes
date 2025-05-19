@@ -2,7 +2,7 @@ import type { System_SoundsArray, System_SoundsObject } from "./types";
 import { makeAudioFileParams } from "@RpgTypes/utils";
 
 export const makeSoundsArray = (
-  sounds: Partial<System_SoundsObject>
+  sounds: Partial<System_SoundsObject> = {}
 ): System_SoundsArray => {
   return [
     makeAudioFileParams(sounds.cursor),

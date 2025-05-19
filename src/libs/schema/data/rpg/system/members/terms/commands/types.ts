@@ -19,10 +19,10 @@ export interface Terms_Command {
   clear: string;
   newGame: string;
   continue_: string;
-  notUsed20: string;
+  // notUsed20: string;
   toTitle: string;
   cancel: string;
-  notUsed23: string;
+  // notUsed23: string;
   buy: string;
   sell: string;
 }
@@ -47,10 +47,10 @@ export type Terms_CommandArray = [
   clear: string,
   newGame: string,
   continue_: string,
-  notUsed20: string,
+  notUsed20: "",
   toTitle: string,
   cancel: string,
-  notUsed23: string,
+  notUsed23: "",
   buy: string,
   sell: string
 ];
