@@ -5,27 +5,11 @@ import type {
   System_AudioFiles,
 } from "./system";
 import type { JSONSchemaType } from "ajv";
-
-export const SC_TESTBATTLERS = {
-  type: "array",
-  items: {
-    type: "object",
-    required: ["actorId", "equips", "level"],
-    properties: {
-      actorId: { type: "integer" },
-
-      level: { type: "integer", minimum: 1 },
-      equips: {
-        type: "array",
-        items: { type: "integer" },
-      },
-    },
-    additionalProperties: false,
-  },
-} as const satisfies JSONSchemaType<Data_System["testBattlers"]>;
+import type { TestBattler } from "./members";
 
 export const SCHEMA_SYSTEM_BOOLEAN_OPTIONS = {
   type: "object",
+  additionalProperties: true,
   required: [
     "optAutosave",
     "optDisplayTp",
