@@ -1,6 +1,6 @@
+import type { CommandParamaterType } from "@RpgTypes/eventCommand";
 import type { EventCommandLike } from "./eventComandLike";
 import type { EventCode } from "./eventCommand";
-import type { CommandParamaterType } from "./metaTypes";
 
 export const createEventCommand = <
   Code extends EventCode,
