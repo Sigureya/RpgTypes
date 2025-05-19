@@ -1,6 +1,6 @@
 export * from "./advanced";
 export * from "./attackMotion";
-export * from "./testBattler/testBattlers";
+export * from "./testBattler";
 export * from "./soundArray";
 export * from "./terms";
 export * from "./vehicle";
