@@ -1,12 +1,11 @@
 import type { DomainLabel } from "@RpgTypes/templates";
 import type {
+  System_Bgm,
+  System_BooleanOptions,
   System_DataNames,
   System_Images,
   System_Text,
-  System_Bgm,
-  System_BooleanOptions,
-} from "./system";
-
+} from "./subset";
 type AsLabel<T> = Record<keyof T, string>;
 
 export type SystemLabel_DataNames = AsLabel<System_DataNames>;
@@ -33,7 +32,7 @@ export const DEFAULT_SYSTEM_LABELS_BOOLEAN = {
   },
 } as const satisfies DomainLabel<SystemLabel_BoolanOptions>;
 
-export const MockSystemLabelDataTypes = {
+export const DEFAULT_SYSTEM_LABELS_DATA_TYPES = {
   domainName: "タイプ",
   options: {
     armorTypes: "防具タイプ",
@@ -43,5 +42,6 @@ export const MockSystemLabelDataTypes = {
     weaponTypes: "武器タイプ",
     switches: "スイッチ",
     variables: "変数",
+    magicSkills: "魔法スキル",
   },
 } as const satisfies DomainLabel<SystemLabel_DataNames>;
