@@ -5,5 +5,4 @@ export * from './eventComandLike';
 export * from './types';
 export * from './branchParams';
 export * from './eventCommandTypes';
-export * from './metaTypes';
 export * from './make';
