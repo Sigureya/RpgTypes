@@ -18,6 +18,7 @@ import {
   makeVehicleData,
 } from "./members";
 import type { Data_System } from "./system";
+import type { EditorSettings } from "./setting";
 import { makeEditorSetting } from "./setting";
 import type { SystemDataFragments } from "./systemSegments";
 import type {
@@ -27,9 +28,10 @@ import type {
   System_GameInitial,
   System_Bgm,
   System_BooleanOptions,
+  System_ImageSize,
 } from "./subset";
 import { makeBooleanOptions } from "./booleanOptions";
-import { isTestBattler } from "./validate";
+import { isImageSize, isTestBattler } from "./validate";
 
 export const makeSystemData = (
   p: Partial<SystemDataFragments>
@@ -42,6 +44,8 @@ export const makeSystemData = (
   const gameInit: Partial<System_GameInitial> = p.gameInit ?? {};
   const bgm: Partial<System_Bgm> = p.bgm ?? {};
 
+  const size = cloneSize(p.size);
+
   return {
     ...(makeBooleanOptions(p.options) satisfies Record<
       string & keyof System_BooleanOptions,
@@ -50,7 +54,10 @@ export const makeSystemData = (
     currencyUnit: p.texts?.currencyUnit ?? "",
     gameTitle: p.texts?.gameTitle ?? "",
     sounds: makeSoundsArray(p.sounds) satisfies AudioFileParams[],
-    editor: makeEditorSetting(p.editing),
+    editor: makeEditorSetting(p.editing) satisfies Record<
+      keyof EditorSettings,
+      number
+    >,
     advanced: makeSystemAdvanced(p.advanced),
     title1Name: images.title1Name ?? "",
     title2Name: images.title2Name ?? "",
@@ -68,17 +75,18 @@ export const makeSystemData = (
     airship: makeVehicleData(vehicles.airship),
     boat: makeVehicleData(vehicles.boat),
     ship: makeVehicleData(vehicles.ship),
-    defeatMe: makeAudioFileParams(),
-    gameoverMe: makeAudioFileParams(),
+    defeatMe: makeAudioFileParams(p.me?.defeatMe),
+    gameoverMe: makeAudioFileParams(p.me?.gameoverMe),
     titleBgm: makeAudioFileParams(bgm.titleBgm),
-    tileSize: 48,
-    faceSize: 144,
-    iconSize: 32,
+
+    tileSize: size.tileSize,
+    faceSize: size.faceSize,
+    iconSize: size.iconSize,
     versionId: 1,
     attackMotions: [],
     testBattlers: cloneObjectArray(debug.testBattlers, cloneTestBattler),
     battleBgm: makeAudioFileParams(bgm.battleBgm),
-    victoryMe: makeAudioFileParams(),
+    victoryMe: makeAudioFileParams(p.me?.victoryMe),
     editMapId: debug.editMapId ?? 0,
     locale: "",
     startMapId: gameInit.startMapId ?? 0,
@@ -86,13 +94,13 @@ export const makeSystemData = (
     startY: gameInit.startY ?? 0,
     testTroopId: debug.testTroopId ?? 0,
     windowTone: [0, 0, 0, 0],
-    terms: makeTerms(p.terms ?? {}),
+    terms: makeTerms(p.terms ?? {}) satisfies System_Terms,
     itemCategories: makeItemCategories(p.itemCategories) satisfies boolean[],
     partyMembersArray: cloneNumberArray(gameInit.partyMembersArray),
     battleSystem: 0,
     battlerHue: 0,
     battlerName: debug.battlerName ?? "",
-    menuCommands: makeMenuCommandsEnabled({}) satisfies boolean[],
+    menuCommands: makeMenuCommandsEnabled(p.menuComamnds) satisfies boolean[],
   };
 };
 
@@ -116,6 +124,20 @@ const cloneStringArray = (array?: ReadonlyArray<string>) => {
 
 const cloneNumberArray = (array?: ReadonlyArray<number>) => {
   return array ? [...array] : [];
+};
+
+const cloneSize = (data: unknown): System_ImageSize => {
+  return isImageSize(data)
+    ? {
+        tileSize: data.tileSize,
+        faceSize: data.faceSize,
+        iconSize: data.iconSize,
+      }
+    : {
+        tileSize: 48,
+        faceSize: 144,
+        iconSize: 32,
+      };
 };
 
 const cloneObjectArray = <T>(
