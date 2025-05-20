@@ -1,9 +1,16 @@
 import type { Terms_Command } from "./types";
 import type { Terms_CommandArray } from "./types";
 
-export const makeTermsCommand = (
+export const makeTermsCommandArray = (
   param: Partial<Terms_Command>
 ): Terms_CommandArray => {
+  return makeTermsCommandArrayWithNulls(param, "");
+};
+
+export const makeTermsCommandArrayWithNulls = <T extends "" | null>(
+  param: Partial<Terms_Command>,
+  empty: T
+): Terms_CommandArray<T> => {
   return [
     param.fight ?? "Fight",
     param.escape ?? "Escape",
@@ -25,17 +32,17 @@ export const makeTermsCommand = (
     param.clear ?? "Clear",
     param.newGame ?? "New Game",
     param.continue_ ?? "Continue",
-    "",
+    empty,
     param.toTitle ?? "To Title",
     param.cancel ?? "Cancel",
-    "",
+    empty,
     param.buy ?? "Buy",
     param.sell ?? "Sell",
   ];
 };
 
-export const makeTermsCommandFromArray = (
-  param: Terms_CommandArray
+export const makeTermsCommandFromArray = <T extends "" | null = "">(
+  param: Terms_CommandArray<T>
 ): Terms_Command => {
   return {
     fight: param[0],
@@ -60,7 +67,8 @@ export const makeTermsCommandFromArray = (
     continue_: param[19],
     toTitle: param[21],
     cancel: param[22],
-    buy: param[23],
-    sell: param[24],
+
+    buy: param[24],
+    sell: param[25],
   };
 };
