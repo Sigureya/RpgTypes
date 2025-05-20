@@ -68,3 +68,8 @@ export type System_GameInitial = Pick<
   Data_System,
   "startMapId" | "startX" | "startY" | "partyMembersArray"
 >;
+
+export type System_ImageSize = Pick<
+  Data_System,
+  "tileSize" | "faceSize" | "iconSize"
+>;
