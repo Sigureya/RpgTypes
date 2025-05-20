@@ -2,9 +2,9 @@ import { describe, test, expect } from "vitest";
 import Ajv from "ajv";
 import type { TestBattler } from "./types";
 
-import { SCHEMA_SYSTEM_TEST_BATTLERS } from "./schema";
+import { SCHEMA_SYSTEM_TEST_BATTLER } from "./schema";
 const ajv = new Ajv();
-const validate = ajv.compile(SCHEMA_SYSTEM_TEST_BATTLERS);
+const validate = ajv.compile(SCHEMA_SYSTEM_TEST_BATTLER);
 
 describe("SCHEMA_SYSTEM_TEST_BATTLERS", () => {
   test("should be a valid JSON schema", () => {

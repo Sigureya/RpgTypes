@@ -22,7 +22,7 @@ import type {
 } from "./subset";
 import { makeBooleanOptions } from "./booleanOptions";
 
-const cloneArray = <T>(array?: T[]) => {
+const cloneArray = (array?: string[]) => {
   return array ? [...array] : [];
 };
 
