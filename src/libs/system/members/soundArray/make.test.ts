@@ -5,7 +5,7 @@ import type { System_SoundsArray, System_SoundsObject } from "./types";
 import { SCHEMA_SYSTEM_SOUND_ARRAY } from "./schema";
 import { makeAudioFileParams } from "@RpgTypes/utils";
 
-const ajv = new Ajv();
+const ajv = new Ajv({ strict: false });
 const validate = ajv.compile(SCHEMA_SYSTEM_SOUND_ARRAY);
 
 describe("makeAudioFileParams default values", () => {

@@ -7,7 +7,7 @@ import {
 import type { MenuCommandsEnabled, MenuCommandsEnabledArray } from "./types";
 import { SCHEMA_SYSTEM_MENU_COMMANDS_ENABLED } from "./schema";
 
-const ajv = new Ajv();
+const ajv = new Ajv({ strict: false });
 const validate = ajv.compile(SCHEMA_SYSTEM_MENU_COMMANDS_ENABLED);
 
 const testRoundTrip = (caseName: string, param: MenuCommandsEnabled) => {
