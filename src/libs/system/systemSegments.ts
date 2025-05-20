@@ -1,4 +1,11 @@
-import type { System_Advanced, System_SoundsObject } from "./members";
+import type {
+  MenuCommandsEnabled,
+  System_Advanced,
+  System_SoundsObject,
+  Terms_Basic,
+  Terms_Command,
+  Terms_Messages,
+} from "./members";
 import type { ItemCategories } from "./members";
 import type { EditorSettings } from "./setting";
 import type {
@@ -10,6 +17,7 @@ import type {
   System_Debug,
   System_Images,
   System_GameInitial,
+  System_ImageSize,
 } from "./subset";
 
 export interface SystemDataFragments {
@@ -25,4 +33,11 @@ export interface SystemDataFragments {
   images: Partial<System_Images>;
   gameInit: Partial<System_GameInitial>;
   itemCategories: Partial<ItemCategories>;
+  size: Partial<System_ImageSize>;
+  terms: {
+    basic?: Partial<Terms_Basic>;
+    command?: Partial<Terms_Command>;
+    messages?: Partial<Terms_Messages>;
+  };
+  menuComamnds: Partial<MenuCommandsEnabled>;
 }
