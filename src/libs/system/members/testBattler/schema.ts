@@ -1,5 +1,5 @@
 import type { JSONSchemaType } from "ajv";
-import type { TestBattler } from "./testBattlers";
+import type { TestBattler } from "./types";
 
 export const SCHEMA_SYSTEM_TEST_BATTLERS = {
   additionalProperties: false,
