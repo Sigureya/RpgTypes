@@ -1,4 +1,4 @@
-import type { Data_System, System_DataNames } from "./rpg/system";
+import type { Data_System, System_DataNames } from "@RpgTypes/system";
 import type {
   Data_Actor,
   Data_Skill,

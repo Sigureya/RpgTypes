@@ -1,8 +1,8 @@
+import type { Data_System } from "@RpgTypes/system";
 import type { ControlCharInfo } from "./controlChars";
 import { createControlCharFormat } from "./controlChars";
 import { CTRL_CHAR_ACTOR, CTRL_CHAR_VARIABLE } from "./controlChars/constants";
 import type { Data_Actor } from "./main";
-import type { Data_System } from "./system";
 
 export const createActorControlChars = (
   actors: ReadonlyArray<Data_Actor>

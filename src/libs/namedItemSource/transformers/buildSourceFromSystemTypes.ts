@@ -1,9 +1,4 @@
-import type {
-  Data_System,
-  NamedItemSource,
-  SourceIdentifier,
-  SystemLabel_DataNames,
-} from "@RpgTypes/schema";
+import type { NamedItemSource, SourceIdentifier } from "@RpgTypes/schema";
 
 import {
   SRC_ELEMENTS,
@@ -23,6 +18,7 @@ import {
   getWeaponTypes,
 } from "./data/system";
 import { AUTHOR_RMMZ, MODULE_SYSTEM } from "./constants";
+import type { Data_System, SystemLabel_DataNames } from "@RpgTypes/system";
 
 const makeSourceIdentifier = (sourceKey: string): SourceIdentifier => ({
   author: AUTHOR_RMMZ,
