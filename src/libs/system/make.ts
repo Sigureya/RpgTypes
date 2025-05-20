@@ -1,4 +1,11 @@
+import type { AudioFileParams } from "@RpgTypes/utils";
 import { makeAudioFileParams } from "@RpgTypes/utils";
+import type {
+  System_Terms,
+  System_TermsPartial,
+  Terms_Messages,
+  TestBattler,
+} from "./members";
 import {
   makeItemCategories,
   makeMenuCommandsEnabled,
@@ -19,12 +26,10 @@ import type {
   System_Images,
   System_GameInitial,
   System_Bgm,
+  System_BooleanOptions,
 } from "./subset";
 import { makeBooleanOptions } from "./booleanOptions";
-
-const cloneArray = (array?: string[]) => {
-  return array ? [...array] : [];
-};
+import { isTestBattler } from "./validate";
 
 export const makeSystemData = (
   p: Partial<SystemDataFragments>
@@ -36,11 +41,15 @@ export const makeSystemData = (
   const images: Partial<System_Images> = p.images ?? {};
   const gameInit: Partial<System_GameInitial> = p.gameInit ?? {};
   const bgm: Partial<System_Bgm> = p.bgm ?? {};
+
   return {
-    ...makeBooleanOptions(p.options),
+    ...(makeBooleanOptions(p.options) satisfies Record<
+      string & keyof System_BooleanOptions,
+      boolean
+    >),
     currencyUnit: p.texts?.currencyUnit ?? "",
     gameTitle: p.texts?.gameTitle ?? "",
-    sounds: makeSoundsArray(p.sounds),
+    sounds: makeSoundsArray(p.sounds) satisfies AudioFileParams[],
     editor: makeEditorSetting(p.editing),
     advanced: makeSystemAdvanced(p.advanced),
     title1Name: images.title1Name ?? "",
@@ -48,15 +57,14 @@ export const makeSystemData = (
     battleback1Name: images.battleback1Name ?? "",
     battleback2Name: images.battleback2Name ?? "",
 
-    armorTypes: cloneArray(dataNames.armorTypes),
-    elements: cloneArray(dataNames.elements),
-    equipTypes: cloneArray(dataNames.equipTypes),
-    weaponTypes: cloneArray(dataNames.weaponTypes),
-    skillTypes: cloneArray(dataNames.skillTypes),
-    switches: cloneArray(dataNames.switches),
-    variables: cloneArray(dataNames.variables),
-    magicSkills: cloneArray(dataNames.magicSkills),
-    battlerName: debug.battlerName ?? "",
+    armorTypes: cloneStringArray(dataNames.armorTypes),
+    elements: cloneStringArray(dataNames.elements),
+    equipTypes: cloneStringArray(dataNames.equipTypes),
+    weaponTypes: cloneStringArray(dataNames.weaponTypes),
+    skillTypes: cloneStringArray(dataNames.skillTypes),
+    switches: cloneStringArray(dataNames.switches),
+    variables: cloneStringArray(dataNames.variables),
+    magicSkills: cloneStringArray(dataNames.magicSkills),
     airship: makeVehicleData(vehicles.airship),
     boat: makeVehicleData(vehicles.boat),
     ship: makeVehicleData(vehicles.ship),
@@ -68,7 +76,7 @@ export const makeSystemData = (
     iconSize: 32,
     versionId: 1,
     attackMotions: [],
-    testBattlers: debug.testBattlers ?? [],
+    testBattlers: cloneObjectArray(debug.testBattlers, cloneTestBattler),
     battleBgm: makeAudioFileParams(bgm.battleBgm),
     victoryMe: makeAudioFileParams(),
     editMapId: debug.editMapId ?? 0,
@@ -78,16 +86,55 @@ export const makeSystemData = (
     startY: gameInit.startY ?? 0,
     testTroopId: debug.testTroopId ?? 0,
     windowTone: [0, 0, 0, 0],
-    terms: {
-      basic: makeTermsBasic({}),
-      messages: makeTermsMessages({}),
-      commands: makeTermsCommand({}),
-      params: makeParamNamesArray({}),
-    },
-    itemCategories: makeItemCategories(p.itemCategories),
-    partyMembersArray: [],
+    terms: makeTerms(p.terms ?? {}),
+    itemCategories: makeItemCategories(p.itemCategories) satisfies boolean[],
+    partyMembersArray: cloneNumberArray(gameInit.partyMembersArray),
     battleSystem: 0,
     battlerHue: 0,
-    menuCommands: makeMenuCommandsEnabled({}),
+    battlerName: debug.battlerName ?? "",
+    menuCommands: makeMenuCommandsEnabled({}) satisfies boolean[],
   };
+};
+
+export default makeSystemData;
+
+const makeTerms = (terms: System_TermsPartial): System_Terms => {
+  return {
+    basic: makeTermsBasic(terms.basic ?? {}) satisfies string[],
+    commands: makeTermsCommand(terms.commands ?? {}) satisfies string[],
+    params: makeParamNamesArray(terms.params ?? {}) satisfies string[],
+    messages: makeTermsMessages(terms.messages ?? {}) satisfies Record<
+      keyof Terms_Messages,
+      string
+    >,
+  };
+};
+
+const cloneStringArray = (array?: ReadonlyArray<string>) => {
+  return array ? [...array] : [];
+};
+
+const cloneNumberArray = (array?: ReadonlyArray<number>) => {
+  return array ? [...array] : [];
+};
+
+const cloneObjectArray = <T>(
+  array: ReadonlyArray<unknown> | undefined,
+  fn: (data: unknown) => T
+) => {
+  return array ? array.map(fn) : [];
+};
+
+const cloneTestBattler = (data: unknown): TestBattler => {
+  return isTestBattler(data)
+    ? {
+        actorId: data.actorId,
+        equips: cloneNumberArray(data.equips),
+        level: data.level,
+      }
+    : {
+        actorId: 0,
+        equips: [],
+        level: 1,
+      };
 };
