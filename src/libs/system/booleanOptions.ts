@@ -1,6 +1,24 @@
-import type { AudioFileParams } from "@RpgTypes/utils";
 import type { JSONSchemaType } from "ajv";
-import type { System_AudioFiles, System_BooleanOptions } from "./subset";
+import type { System_BooleanOptions } from "./subset";
+
+export const makeBooleanOptions = (
+  options: Partial<System_BooleanOptions> = {}
+): System_BooleanOptions => {
+  return {
+    optAutosave: options.optAutosave ?? true,
+    optDisplayTp: options.optDisplayTp ?? true,
+    optDrawTitle: options.optDrawTitle ?? true,
+    optExtraExp: options.optExtraExp ?? true,
+    optFloorDeath: options.optFloorDeath ?? true,
+    optFollowers: options.optFollowers ?? true,
+    optKeyItemsNumber: options.optKeyItemsNumber ?? true,
+    optSideView: options.optSideView ?? true,
+    optSlipDeath: options.optSlipDeath ?? true,
+    optTransparent: options.optTransparent ?? true,
+    optMessageSkip: options.optMessageSkip ?? true,
+    optSplashScreen: options.optSplashScreen ?? true,
+  } satisfies Record<keyof System_BooleanOptions, boolean>;
+};
 
 export const SCHEMA_SYSTEM_BOOLEAN_OPTIONS = {
   type: "object",
@@ -34,25 +52,3 @@ export const SCHEMA_SYSTEM_BOOLEAN_OPTIONS = {
     optSplashScreen: { type: "boolean" },
   },
 } as const satisfies JSONSchemaType<System_BooleanOptions>;
-
-export const SCHEMA_SYSTEM_AUDIOFILES = {
-  type: "object",
-  required: [
-    "battleBgm",
-    "victoryMe",
-    "gameoverMe",
-    "titleBgm",
-    "defeatMe",
-  ] as const satisfies Array<keyof System_AudioFiles>,
-  additionalProperties: {
-    type: "object",
-    properties: {
-      name: { type: "string" },
-      volume: { type: "integer", minimum: 0, maximum: 100 },
-      pitch: { type: "integer", minimum: 0, maximum: 100 },
-      pan: { type: "integer", minimum: -100, maximum: 100 },
-    },
-    required: ["name", "volume", "pitch", "pan"],
-    additionalProperties: false,
-  },
-} as const satisfies JSONSchemaType<Record<string, AudioFileParams>>;

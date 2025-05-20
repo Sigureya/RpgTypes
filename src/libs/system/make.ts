@@ -20,6 +20,7 @@ import type {
   System_GameInitial,
   System_Bgm,
 } from "./subset";
+import { makeBooleanOptions } from "./booleanOptions";
 
 const cloneArray = <T>(array?: T[]) => {
   return array ? [...array] : [];
@@ -28,7 +29,6 @@ const cloneArray = <T>(array?: T[]) => {
 export const makeSystemData = (
   p: Partial<SystemDataFragments>
 ): Data_System => {
-  const options = p.options ?? {};
   const vehicles = p.vehicles ?? {};
 
   const dataNames: Partial<System_DataNames> = p.dataNames ?? {};
@@ -37,6 +37,7 @@ export const makeSystemData = (
   const gameInit: Partial<System_GameInitial> = p.gameInit ?? {};
   const bgm: Partial<System_Bgm> = p.bgm ?? {};
   return {
+    ...makeBooleanOptions(p.options),
     currencyUnit: p.texts?.currencyUnit ?? "",
     gameTitle: p.texts?.gameTitle ?? "",
     sounds: makeSoundsArray(p.sounds),
@@ -61,18 +62,6 @@ export const makeSystemData = (
     ship: makeVehicleData(vehicles.ship),
     defeatMe: makeAudioFileParams(),
     gameoverMe: makeAudioFileParams(),
-    optAutosave: options.optAutosave ?? true,
-    optDisplayTp: options.optDisplayTp ?? true,
-    optDrawTitle: options.optDrawTitle ?? true,
-    optExtraExp: options.optExtraExp ?? true,
-    optFloorDeath: options.optFloorDeath ?? true,
-    optFollowers: options.optFollowers ?? true,
-    optKeyItemsNumber: options.optKeyItemsNumber ?? true,
-    optSideView: options.optSideView ?? true,
-    optSlipDeath: options.optSlipDeath ?? true,
-    optSplashScreen: options.optSplashScreen ?? true,
-    optTransparent: options.optTransparent ?? true,
-    optMessageSkip: options.optMessageSkip ?? true,
     titleBgm: makeAudioFileParams(bgm.titleBgm),
     tileSize: 48,
     faceSize: 144,
