@@ -27,7 +27,7 @@ const cloneArray = <T>(array?: T[]) => {
 
 export const makeSystemData = (
   p: Partial<SystemDataFragments>
-): Partial<Data_System> => {
+): Data_System => {
   const options = p.options ?? {};
   const vehicles = p.vehicles ?? {};
 
