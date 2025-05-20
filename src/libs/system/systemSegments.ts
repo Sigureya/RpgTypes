@@ -18,6 +18,7 @@ import type {
   System_Images,
   System_GameInitial,
   System_ImageSize,
+  System_Me,
 } from "./subset";
 
 export interface SystemDataFragments {
@@ -27,6 +28,7 @@ export interface SystemDataFragments {
   editing: Partial<EditorSettings>;
   dataNames: Partial<System_DataNames>;
   bgm: Partial<System_Bgm>;
+  me: Partial<System_Me>;
   texts: Partial<System_Text>;
   sounds: Partial<System_SoundsObject>;
   debug: Partial<System_Debug>;
