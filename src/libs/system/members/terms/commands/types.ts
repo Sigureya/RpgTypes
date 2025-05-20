@@ -26,7 +26,7 @@ export interface Terms_Command {
   buy: string;
   sell: string;
 }
-export type Terms_CommandArray = [
+export type Terms_CommandArray<Empty extends string | null = ""> = [
   fight: string,
   escape: string,
   attack: string,
@@ -47,10 +47,10 @@ export type Terms_CommandArray = [
   clear: string,
   newGame: string,
   continue_: string,
-  notUsed20: "",
+  notUsed20: Empty,
   toTitle: string,
   cancel: string,
-  notUsed23: "",
+  notUsed23: Empty,
   buy: string,
   sell: string
 ];
