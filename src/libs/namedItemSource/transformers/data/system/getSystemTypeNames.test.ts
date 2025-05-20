@@ -6,11 +6,8 @@ import {
   getSkillTypes,
   getVariableNames,
 } from "./getSystemTypeNames";
-import type {
-  System_ParamNames,
-  Data_System,
-  Data_NamedItem,
-} from "@RpgTypes/schema";
+import type { Data_NamedItem } from "@RpgTypes/schema";
+import type { System_ParamNames, Data_System } from "@RpgTypes/system";
 
 const system: System_ParamNames &
   Pick<Data_System, "elements" | "variables" | "equipTypes" | "skillTypes"> = {

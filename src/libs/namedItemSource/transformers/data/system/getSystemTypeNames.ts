@@ -1,8 +1,5 @@
-import type {
-  Data_NamedItem,
-  Data_System,
-  System_ParamNames,
-} from "@RpgTypes/schema";
+import type { Data_NamedItem } from "@RpgTypes/schema";
+import type { Data_System, System_ParamNames } from "@RpgTypes/system";
 
 const makeNamedItem = (name: string, index: number): Data_NamedItem => ({
   name: name,
