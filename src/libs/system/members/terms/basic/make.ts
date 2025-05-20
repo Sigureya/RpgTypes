@@ -1,7 +1,7 @@
 import type { Terms_Basic, Terms_BasicArray } from "./types";
 
 export const makeTermsBasic = (
-  terms: Partial<Terms_Basic>
+  terms: Partial<Terms_Basic> = {}
 ): Terms_BasicArray => {
   return [
     terms.level ?? "Level",
