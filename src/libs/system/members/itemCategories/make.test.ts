@@ -4,7 +4,7 @@ import type { ItemCategories, ItemCategoriesArray } from "./types";
 import Ajv from "ajv";
 import { SCHEMA_SYSTEM_ITEM_CATEGORIES } from "./schema";
 
-const ajv = new Ajv();
+const ajv = new Ajv({ strict: false });
 const validate = ajv.compile(SCHEMA_SYSTEM_ITEM_CATEGORIES);
 
 const testRoundTrip = (param: ItemCategories, caseName: string) => {
