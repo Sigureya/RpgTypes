@@ -6,7 +6,7 @@ const SCHEMA_STRING = {
 const SCHEMA_STRING_NULL = {
   type: "string",
   nullable: true,
-} as const satisfies JSONSchemaType<string>;
+} as const satisfies JSONSchemaType<string | null>;
 
 export const SCHEMA_SYSTEM_MEMBERS_TERMS_COMMANDS_ARRAY = {
   type: "array",
