@@ -1,7 +1,7 @@
 import type { JSONSchemaType } from "ajv";
 import type { TestBattler } from "./types";
 
-export const SCHEMA_SYSTEM_TEST_BATTLERS = {
+export const SCHEMA_SYSTEM_TEST_BATTLER = {
   additionalProperties: false,
   type: "object",
   required: ["actorId", "equips", "level"],
