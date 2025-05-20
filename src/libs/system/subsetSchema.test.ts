@@ -1,6 +1,11 @@
 import { describe, test, expect } from "vitest";
-import { isSystemBooleanOptions } from "./validate";
 import type { System_BooleanOptions } from "./subset";
+
+import Ajv from "ajv";
+import { SCHEMA_SYSTEM_BOOLEAN_OPTIONS } from "./subsetSchema";
+
+const ajv = new Ajv();
+const isSystemBooleanOptions = ajv.compile(SCHEMA_SYSTEM_BOOLEAN_OPTIONS);
 
 describe("isSystemBooleanOptions", () => {
   test("Valid", () => {

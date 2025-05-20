@@ -53,6 +53,6 @@ export const SCHEMA_SYSTEM_AUDIOFILES = {
       pan: { type: "integer", minimum: -100, maximum: 100 },
     },
     required: ["name", "volume", "pitch", "pan"],
-    additionalProperties: false,
+    additionalProperties: true,
   },
 } as const satisfies JSONSchemaType<Record<string, AudioFileParams>>;
