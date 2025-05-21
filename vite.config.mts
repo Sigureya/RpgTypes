@@ -16,7 +16,6 @@ export default defineConfig({
       entry: libBuild.entry,
       name: libBuild.libName,
       fileName: (format) => `${libBuild.libName}.${format}.js`,
-      formats: ["es", "cjs"],
     },
     sourcemap: true,
     rollupOptions: {
