@@ -6,7 +6,7 @@ import type { AttackMotion, TestBattler } from "./members";
 import { SCHEMA_SYSTEM_MEMBERS_ATTACK_MOTION } from "./members/attackMotion/schema";
 import { SCHEMA_SYSTEM_IMAGE_SIZE } from "./size";
 
-const ajv = new Ajv();
+const ajv = new Ajv({ strict: false });
 const booleanOptions = ajv.compile(SCHEMA_SYSTEM_BOOLEAN_OPTIONS);
 
 export const isSystemBooleanOptions = (
