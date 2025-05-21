@@ -1,53 +1,52 @@
 import { defineConfig } from "vite";
 import dts from "vite-plugin-dts";
 import path from "path";
-
 declare const __dirname: string;
-interface BuildSetting {
-  libName: string;
-  outDir: string;
-  entry: string;
-  exclude: string[];
-}
-
-const libBuild: BuildSetting = {
+const libBuild = {
   entry: "./src/libs/index.ts",
   outDir: "./dist/libs",
   libName: "rpgTypes",
-
   exclude: [],
 };
 
-export default defineConfig(({ mode }) => {
-  const setting = libBuild;
-  return {
-    build: {
-      outDir: setting.outDir,
-
-      lib: {
-        entry: setting.entry,
-        name: setting.libName,
-        fileName: (format) => `${setting.libName}.${format}.js`,
-        formats: ["es", "cjs"],
-      },
-      sourcemap: true,
-      rollupOptions: {
-        external: (id) =>
-          id.endsWith(".test.ts") || ["ajv", "ajv-formats"].includes(id),
-      },
+export default defineConfig({
+  build: {
+    outDir: libBuild.outDir,
+    lib: {
+      entry: libBuild.entry,
+      name: libBuild.libName,
+      fileName: (format) => `${libBuild.libName}.${format}.js`,
     },
-
-    resolve: {
-      alias: {
-        "src/libs": path.resolve(__dirname, "./src/libs"),
-        "@RpgTypes": path.resolve(__dirname, "./src/libs"),
-      },
+    sourcemap: true,
+    rollupOptions: {
+      external: (id) =>
+        id.endsWith(".test.ts") ||
+        ["ajv", "ajv-formats", "jsonschema"].includes(id),
+      output: [
+        {
+          format: "es",
+          entryFileNames: "rpgTypes.es.js",
+          exports: "named",
+        },
+        {
+          format: "cjs",
+          entryFileNames: "rpgTypes.cjs.js",
+          exports: "named",
+        },
+      ],
     },
-    plugins: [
-      dts({
-        outDir: setting.outDir,
-        exclude: ["./**/*.test.ts", ...setting.exclude],
-      }),
-    ],
-  };
+    minify: false, // デバッグしやすくするため
+  },
+  resolve: {
+    alias: {
+      "src/libs": path.resolve(__dirname, "./src/libs"),
+      "@RpgTypes": path.resolve(__dirname, "./src/libs"),
+    },
+  },
+  plugins: [
+    dts({
+      outDir: libBuild.outDir,
+      exclude: ["./**/*.test.ts", ...libBuild.exclude],
+    }),
+  ],
 });
