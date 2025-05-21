@@ -1,6 +1,6 @@
 export declare const SCHEMA_DATA_CLASS: {
     type: "object";
-    required: ("id" | "name" | "note" | "params" | "traits" | "expParams" | "learnings")[];
+    required: ("name" | "params" | "id" | "note" | "traits" | "expParams" | "learnings")[];
     properties: {
         name: {
             type: "string";

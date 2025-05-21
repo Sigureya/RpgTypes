@@ -1,4 +1,5 @@
-import { Data_NamedItem, Data_System, System_ParamNames } from '../../../../schema';
+import { Data_NamedItem } from '../../../../schema';
+import { Data_System, System_ParamNames } from '../../../../system';
 export declare const getVariableNames: (system: Pick<Data_System, "variables">) => Data_NamedItem[];
 export declare const getElementTypes: (system: Pick<Data_System, "elements">) => Data_NamedItem[];
 export declare const getEquipTypes: (system: Pick<Data_System, "equipTypes">) => Data_NamedItem[];
