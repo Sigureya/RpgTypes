@@ -8,6 +8,7 @@ import {
   makeBooleanOptions,
   SCHEMA_SYSTEM_BOOLEAN_OPTIONS,
 } from "./booleanOptions";
+import type { System_GameInitial } from "./subset";
 
 const test2 = <K extends keyof SystemDataFragments>(
   key: K,
@@ -42,4 +43,25 @@ describe("isSystemBooleanOptions", () => {
     });
     test2("options", options, isSystemBooleanOptions);
   });
+
+  describe("", () => {
+    const options = makeBooleanOptions({
+      optExtraExp: false,
+      optAutosave: true,
+    });
+    const system = makeSystemData({ options: options });
+    test("", () => {
+      expect(system).toMatchObject(options);
+      expect(system.optExtraExp).toBe(options.optExtraExp);
+      expect(system.optAutosave).toBe(options.optAutosave);
+    });
+  });
 });
+// describe("", () => {
+//   const init: System_GameInitial = {
+//     startMapId: 0,
+//     startX: 0,
+//     startY: 0,
+//     partyMembersArray: [1, 5],
+//   };
+// });
