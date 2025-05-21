@@ -1,4 +1,4 @@
-import { Data_System, System_DataNames } from './rpg/system';
+import { Data_System, System_DataNames } from '../../system';
 import { Data_Actor, Data_Skill, Data_Class, Data_Armor, Data_CommonEvent, Data_State, Data_Item, Data_Weapon, Data_Enemy, Data_Troop, Data_NamedItem, NamedItem } from './rpg';
 export interface GlobalGameData {
     system: Data_System;

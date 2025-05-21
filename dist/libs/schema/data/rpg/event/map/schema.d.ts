@@ -161,7 +161,7 @@ export declare const SCHEMA_MAP_EVENT_PAGE: {
 };
 export declare const SCHEMA_DATA_MAP: {
     readonly type: "object";
-    readonly required: ("bgm" | "bgs" | "data" | "note" | "battleback1Name" | "battleback2Name" | "parallaxName" | "parallaxLoopX" | "parallaxLoopY" | "parallaxShow" | "parallaxSx" | "parallaxSy" | "x" | "y" | "width" | "height" | "displayName" | "disableDashing" | "autoplayBgm" | "autoplayBgs")[];
+    readonly required: ("bgm" | "battleback1Name" | "battleback2Name" | "bgs" | "data" | "note" | "parallaxName" | "parallaxLoopX" | "parallaxLoopY" | "parallaxShow" | "parallaxSx" | "parallaxSy" | "x" | "y" | "width" | "height" | "displayName" | "disableDashing" | "autoplayBgm" | "autoplayBgs")[];
     readonly properties: {
         readonly data: {
             readonly type: "array";
@@ -285,7 +285,7 @@ export declare const SCHEMA_DATA_MAP: {
             readonly type: "array";
             readonly items: {
                 readonly type: "object";
-                readonly required: ("id" | "name" | "x" | "y" | "pages")[];
+                readonly required: ("name" | "id" | "x" | "y" | "pages")[];
                 readonly properties: {
                     readonly id: {
                         readonly type: "integer";
