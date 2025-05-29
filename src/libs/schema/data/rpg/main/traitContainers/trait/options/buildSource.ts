@@ -14,7 +14,7 @@ import {
   SRC_PARAMS_SPECIAL,
   SRC_TRAIT_PARTY_ABILITY,
   SRC_TRAIT_SPECIAL_FLAG,
-  foldRegularParam,
+  regularParamsToArray,
   partyAbilityToArray,
   collapsOptionsToArray,
   specialFlagToArray,
@@ -59,7 +59,7 @@ export const buildPartyAbilitySource = (
 export const buildRegularParamSource = (
   label: DomainLabel<RegularParamLabels>
 ): NamedItemSource => {
-  return traitDomain(SRC_PARAMS_REGULAR, label, foldRegularParam);
+  return traitDomain(SRC_PARAMS_REGULAR, label, regularParamsToArray);
 };
 
 export const buildExtraParamSource = (

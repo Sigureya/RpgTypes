@@ -10,7 +10,7 @@ import {
   REGULAR_PARAM_LUK,
 } from "./constants";
 import type { RegularParamLabels } from "./labels";
-import { foldRegularParam, regularParamName } from "./regularParam";
+import { regularParamsToArray, regularParamName } from "./regularParam";
 import type { Data_NamedItem2 } from "@RpgTypes/schema/namedItemSource";
 
 describe("foldRegularParam", () => {
@@ -24,7 +24,7 @@ describe("foldRegularParam", () => {
     agi: "Agility",
     luk: "Luck",
   };
-  const result = foldRegularParam(param);
+  const result = regularParamsToArray(param);
   test("should return correct regular parameter options", () => {
     const expected: Data_NamedItem2[] = [
       { id: REGULAR_PARAM_MAX_HP, name: "Max HP" },
