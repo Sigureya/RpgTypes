@@ -64,9 +64,10 @@ import {
   REGULAR_PARAM_AGI,
   REGULAR_PARAM_LUK,
 } from "./types/paramRegular";
-import { foldSpecialParams, foldSpecialFlag } from "./makeOptions";
+import { foldSpecialFlag } from "./makeOptions";
 import { foldRegularParam } from "./types/paramRegular/utils";
 import { foldCollapsOptions } from "./types/collaps/make";
+import { foldSpecialParams } from "./types/paramSpecial/make";
 
 const testSorted = (name: string, list: Data_NamedItem[]) => {
   const sortedList = [...list].sort((a, b) => a.id - b.id);

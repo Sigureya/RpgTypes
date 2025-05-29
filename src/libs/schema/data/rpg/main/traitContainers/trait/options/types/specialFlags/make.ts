@@ -1,24 +1,11 @@
-import type { Data_NamedItem } from "@RpgTypes/schema/";
+import type { Data_NamedItem } from "@RpgTypes/schema/data/rpg/main";
 import {
-  FLAG_ID_GUARD,
   FLAG_ID_AUTO_BATTLE,
+  FLAG_ID_GUARD,
   FLAG_ID_PRESERVE_TP,
   FLAG_ID_SUBSTITUTE,
-} from "./types/specialFlags";
-import type { SpecialFlagOptions, SpecialParamLabels } from "./types";
-
-import {
-  SPECIAL_PARAM_EXR,
-  SPECIAL_PARAM_FDR,
-  SPECIAL_PARAM_GRD,
-  SPECIAL_PARAM_MCR,
-  SPECIAL_PARAM_MDR,
-  SPECIAL_PARAM_PDR,
-  SPECIAL_PARAM_PHA,
-  SPECIAL_PARAM_REC,
-  SPECIAL_PARAM_TCR,
-  SPECIAL_PARAM_TGR,
-} from "./types/paramSpecial";
+} from "./constants";
+import type { SpecialFlagOptions } from "./specialFlag";
 
 export const foldSpecialFlag = (
   label: SpecialFlagOptions

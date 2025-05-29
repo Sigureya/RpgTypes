@@ -19,10 +19,11 @@ import {
   foldCollapsOptions,
 } from "@RpgTypes/schema";
 
-import { foldSpecialFlag, foldSpecialParams } from "./makeOptions";
+import { foldSpecialFlag } from "./makeOptions";
 import type { DomainLabel } from "@RpgTypes/templates";
 import { AUTHOR_RMMZ, MODULE_TRAIT } from "@RpgTypes/namedItemSource";
 import { foldExtraParam } from "./types/paramExtra/make";
+import { foldSpecialParams } from "./types/paramSpecial/make";
 
 export const traitDomain = <T>(
   sourceKey: string,
