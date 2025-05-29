@@ -1,3 +1,3 @@
-export * from "./specialFlag";
+export * from "./labels";
 export * from "./constants";
-export { foldSpecialFlag } from "./make";
+export * from "./specialFlags";

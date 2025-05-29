@@ -18,13 +18,13 @@ import type {
 import { SRC_PARAMS_SPECIAL } from "@RpgTypes/schema/namedItemSource";
 import { AUTHOR_RMMZ, MODULE_TRAIT } from "@RpgTypes/namedItemSource";
 
-export const makeSparamSourceIdentifier = (): SourceIdentifier => ({
+export const sparamSourceId = (): SourceIdentifier => ({
   author: AUTHOR_RMMZ,
   module: MODULE_TRAIT,
   kind: SRC_PARAMS_SPECIAL,
 });
 
-export const foldSpecialParams = (
+export const specialParamsToArray = (
   specialParams: SpecialParamLabels
 ): Data_NamedItem2[] => {
   return [

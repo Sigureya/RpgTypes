@@ -15,15 +15,15 @@ import {
   SRC_TRAIT_PARTY_ABILITY,
   SRC_TRAIT_SPECIAL_FLAG,
   foldRegularParam,
-  foldPartyAbilityOptions,
+  partyAbilityToArray,
   foldCollapsOptions,
-  foldSpecialFlag,
+  specialFlagToArray,
 } from "@RpgTypes/schema";
 
 import type { DomainLabel } from "@RpgTypes/templates";
 import { AUTHOR_RMMZ, MODULE_TRAIT } from "@RpgTypes/namedItemSource";
-import { foldExtraParam } from "./types/paramExtra/make";
-import { foldSpecialParams } from "./types/paramSpecial/make";
+import { extraParamsToArray } from "./types/paramExtra/extraParam";
+import { specialParamsToArray } from "./types/paramSpecial/specialParam";
 
 export const traitDomain = <T>(
   sourceKey: string,
@@ -53,7 +53,7 @@ export const buildCollapsSource = (
 export const buildPartyAbilitySource = (
   labels: DomainLabel<PartyAbilityOptionLabels>
 ): NamedItemSource => {
-  return traitDomain(SRC_TRAIT_PARTY_ABILITY, labels, foldPartyAbilityOptions);
+  return traitDomain(SRC_TRAIT_PARTY_ABILITY, labels, partyAbilityToArray);
 };
 
 export const buildRegularParamSource = (
@@ -65,17 +65,17 @@ export const buildRegularParamSource = (
 export const buildExtraParamSource = (
   label: DomainLabel<ExtraParamLabels>
 ): NamedItemSource => {
-  return traitDomain(SRC_PARAMS_EXTRA, label, foldExtraParam);
+  return traitDomain(SRC_PARAMS_EXTRA, label, extraParamsToArray);
 };
 
 export const buildSpecialParamSource = (
   label: DomainLabel<SpecialParamLabels>
 ): NamedItemSource => {
-  return traitDomain(SRC_PARAMS_SPECIAL, label, foldSpecialParams);
+  return traitDomain(SRC_PARAMS_SPECIAL, label, specialParamsToArray);
 };
 
 export const buildSpecialFlagSource = (
   label: DomainLabel<SpecialFlagOptions>
 ): NamedItemSource => {
-  return traitDomain(SRC_TRAIT_SPECIAL_FLAG, label, foldSpecialFlag);
+  return traitDomain(SRC_TRAIT_SPECIAL_FLAG, label, specialFlagToArray);
 };

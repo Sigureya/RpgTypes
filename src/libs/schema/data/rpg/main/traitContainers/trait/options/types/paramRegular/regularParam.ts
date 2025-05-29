@@ -1,4 +1,4 @@
-import type { Data_NamedItem } from "@RpgTypes/schema";
+import type { Data_NamedItem2, SourceIdentifier } from "@RpgTypes/schema";
 import {
   REGULAR_PARAM_MAX_HP,
   REGULAR_PARAM_MAX_MP,
@@ -10,6 +10,15 @@ import {
   REGULAR_PARAM_LUK,
 } from "./constants";
 import type { RegularParamLabels } from "./labels";
+import { AUTHOR_RMMZ, MODULE_TRAIT } from "@RpgTypes/namedItemSource";
+
+import { SRC_PARAMS_REGULAR } from "@RpgTypes/schema/namedItemSource";
+
+export const regularParamSourceId = (): SourceIdentifier => ({
+  author: AUTHOR_RMMZ,
+  module: MODULE_TRAIT,
+  kind: SRC_PARAMS_REGULAR,
+});
 
 export const regularParamName = (
   paramIndex: number,
@@ -36,9 +45,10 @@ export const regularParamName = (
       return `?rparams[${paramIndex}]`;
   }
 };
+
 export const foldRegularParam = (
   param: RegularParamLabels
-): Data_NamedItem[] => {
+): Data_NamedItem2[] => {
   return [
     { id: REGULAR_PARAM_MAX_HP, name: param.maxHp },
     { id: REGULAR_PARAM_MAX_MP, name: param.maxMp },

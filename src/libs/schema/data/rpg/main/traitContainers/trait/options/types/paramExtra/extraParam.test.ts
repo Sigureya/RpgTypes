@@ -11,11 +11,11 @@ import {
   EXTRA_PARAM_MRG,
   EXTRA_PARAM_TRG,
 } from "./constants";
-import { extraParamName, foldExtraParam } from "./make";
-import type { ExtraParamLabels } from "./xparamLabels";
+import { extraParamName, extraParamsToArray } from "./extraParam";
+import type { ExtraParamLabels } from "./labels";
 import type { Data_NamedItem2 } from "@RpgTypes/schema/namedItemSource";
 
-describe("foldXParam", () => {
+describe("extraParamsToArray", () => {
   const xparam: ExtraParamLabels = {
     hitRate: "Hit Rate",
     evasionRate: "Evasion Rate",
@@ -29,7 +29,7 @@ describe("foldXParam", () => {
     tpRegenerationRate: "TP Regeneration Rate",
   };
 
-  const result = foldExtraParam(xparam);
+  const result = extraParamsToArray(xparam);
   test("should return correct extra parameter options", () => {
     const expected: Data_NamedItem2[] = [
       { id: EXTRA_PARAM_HIT, name: "Hit Rate" },

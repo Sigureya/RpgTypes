@@ -6,10 +6,10 @@ import {
   FLAG_ID_SUBSTITUTE,
   FLAG_ID_PRESERVE_TP,
 } from "./constants";
-import { foldSpecialFlag } from "./make";
+import { specialFlagToArray } from "./specialFlags";
 
-describe("foldSpecialFlag", () => {
-  const result = foldSpecialFlag({
+describe("specialFlagToArray", () => {
+  const result = specialFlagToArray({
     autoBattle: "Auto Battle",
     guard: "Guard",
     substitute: "Substitute",

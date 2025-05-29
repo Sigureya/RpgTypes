@@ -1,3 +1,3 @@
 export * from "./constants";
-export * from "./xparamLabels";
-export { foldExtraParam, makeExtraParamSourceIdentifier } from "./make";
+export * from "./labels";
+export * from "./extraParam";

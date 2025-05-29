@@ -10,7 +10,7 @@ import {
   REGULAR_PARAM_LUK,
 } from "./constants";
 import type { RegularParamLabels } from "./labels";
-import { foldRegularParam, regularParamName } from "./utils";
+import { foldRegularParam, regularParamName } from "./regularParam";
 import type { Data_NamedItem2 } from "@RpgTypes/schema/namedItemSource";
 
 describe("foldRegularParam", () => {

@@ -7,11 +7,11 @@ import {
   PARTY_ABILITY_GOLD_DOUBLE,
   PARTY_ABILITY_DROP_ITEM_DOUBLE,
 } from "./constants";
-import { foldPartyAbilityOptions } from "./make";
-import type { PartyAbilityOptionLabels } from "./partyAbility";
+import { partyAbilityToArray } from "./partyAbility";
+import type { PartyAbilityOptionLabels } from "./labels";
 import type { Data_NamedItem2 } from "@RpgTypes/schema/namedItemSource";
 
-describe("foldPartyAbilityOptions", () => {
+describe("partyAbilityToArray", () => {
   const options: PartyAbilityOptionLabels = {
     encounterHalf: "Half Encounters",
     encounterNone: "No Encounters",
@@ -21,7 +21,7 @@ describe("foldPartyAbilityOptions", () => {
     dropItemDouble: "Double Item Drops",
   };
 
-  const result = foldPartyAbilityOptions(options);
+  const result = partyAbilityToArray(options);
   test("should return correct party ability options", () => {
     const expected: Data_NamedItem2[] = [
       { id: PARTY_ABILITY_ENCOUNTER_HALF, name: "Half Encounters" },

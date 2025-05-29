@@ -13,7 +13,7 @@ import type {
 import { SRC_TRAIT_COLLAPS } from "@RpgTypes/schema/namedItemSource";
 import { AUTHOR_RMMZ, MODULE_TRAIT } from "@RpgTypes/namedItemSource";
 
-export const makeCollapsOptionSourceIdentifier = (): SourceIdentifier => ({
+export const collapsSourceId = (): SourceIdentifier => ({
   author: AUTHOR_RMMZ,
   module: MODULE_TRAIT,
   kind: SRC_TRAIT_COLLAPS,

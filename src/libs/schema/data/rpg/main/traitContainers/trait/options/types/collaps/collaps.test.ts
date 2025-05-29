@@ -7,7 +7,7 @@ import {
   COLLAPS_NONE,
 } from "./constants";
 import type { CollapsOptionLabels } from "./labels";
-import { foldCollapsOptions } from "./make";
+import { foldCollapsOptions } from "./collaps";
 import type { Data_NamedItem2 } from "@RpgTypes/schema/namedItemSource";
 
 describe("foldCollapsOptions", () => {

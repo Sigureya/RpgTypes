@@ -12,10 +12,10 @@ import {
   SPECIAL_PARAM_EXR,
 } from "./constants";
 import type { SpecialParamLabels } from "./labels";
-import { foldSpecialParams, specialParamName } from "./make";
+import { specialParamsToArray, specialParamName } from "./specialParam";
 import type { Data_NamedItem2 } from "@RpgTypes/schema/namedItemSource";
 
-describe("foldSpecialParams", () => {
+describe("specialParamsToArray", () => {
   const specialParams: SpecialParamLabels = {
     targetRate: "Target Rate",
     guradEffectRate: "Guard Effect Rate",
@@ -29,7 +29,7 @@ describe("foldSpecialParams", () => {
     experienceRate: "Experience Rate",
   };
 
-  const result = foldSpecialParams(specialParams);
+  const result = specialParamsToArray(specialParams);
   test("should return correct special parameter options", () => {
     const expected: Data_NamedItem2[] = [
       { id: SPECIAL_PARAM_TGR, name: "Target Rate" },
