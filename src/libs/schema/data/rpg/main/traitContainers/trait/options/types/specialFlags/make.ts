@@ -6,6 +6,17 @@ import {
   FLAG_ID_SUBSTITUTE,
 } from "./constants";
 import type { SpecialFlagOptions } from "./specialFlag";
+import {
+  SRC_TRAIT_SPECIAL_FLAG,
+  type SourceIdentifier,
+} from "@RpgTypes/schema/namedItemSource";
+import { AUTHOR_RMMZ, MODULE_TRAIT } from "@RpgTypes/namedItemSource";
+
+export const makeSpecialFlagSourceIdentifier = (): SourceIdentifier => ({
+  author: AUTHOR_RMMZ,
+  module: MODULE_TRAIT,
+  kind: SRC_TRAIT_SPECIAL_FLAG,
+});
 
 export const foldSpecialFlag = (
   label: SpecialFlagOptions

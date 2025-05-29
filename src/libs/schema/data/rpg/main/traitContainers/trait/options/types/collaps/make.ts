@@ -6,7 +6,18 @@ import {
   COLLAPS_NONE,
 } from "./constants";
 import type { CollapsOptionLabels } from "./labels";
-import type { Data_NamedItem2 } from "@RpgTypes/schema/namedItemSource";
+import type {
+  Data_NamedItem2,
+  SourceIdentifier,
+} from "@RpgTypes/schema/namedItemSource";
+import { SRC_TRAIT_COLLAPS } from "@RpgTypes/schema/namedItemSource";
+import { AUTHOR_RMMZ, MODULE_TRAIT } from "@RpgTypes/namedItemSource";
+
+export const makeCollapsOptionSourceIdentifier = (): SourceIdentifier => ({
+  author: AUTHOR_RMMZ,
+  module: MODULE_TRAIT,
+  kind: SRC_TRAIT_COLLAPS,
+});
 
 export const foldCollapsOptions = (
   options: CollapsOptionLabels,

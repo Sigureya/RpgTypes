@@ -1,3 +1,6 @@
 export * from "./constants";
 export * from "./partyAbility";
-export { foldPartyAbilityOptions } from "./make";
+export {
+  foldPartyAbilityOptions,
+  makePartyAbilitySourceIdentifier,
+} from "./make";

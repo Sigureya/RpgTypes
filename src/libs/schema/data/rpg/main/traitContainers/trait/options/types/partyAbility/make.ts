@@ -1,3 +1,4 @@
+import { AUTHOR_RMMZ, MODULE_TRAIT } from "@RpgTypes/namedItemSource";
 import {
   PARTY_ABILITY_ENCOUNTER_HALF,
   PARTY_ABILITY_ENCOUNTER_NONE,
@@ -7,7 +8,17 @@ import {
   PARTY_ABILITY_DROP_ITEM_DOUBLE,
 } from "./constants";
 import type { PartyAbilityOptionLabels } from "./partyAbility";
-import type { Data_NamedItem2 } from "@RpgTypes/schema/namedItemSource";
+import {
+  SRC_TRAIT_PARTY_ABILITY,
+  type Data_NamedItem2,
+  type SourceIdentifier,
+} from "@RpgTypes/schema/namedItemSource";
+
+export const makePartyAbilitySourceIdentifier = (): SourceIdentifier => ({
+  author: AUTHOR_RMMZ,
+  module: MODULE_TRAIT,
+  kind: SRC_TRAIT_PARTY_ABILITY,
+});
 
 export const foldPartyAbilityOptions = (
   options: PartyAbilityOptionLabels

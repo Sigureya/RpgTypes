@@ -11,7 +11,7 @@ import {
 } from "./constants";
 import type { RegularParamLabels } from "./labels";
 
-export const regularParamName2 = (
+export const regularParamName = (
   paramIndex: number,
   labels: RegularParamLabels
 ): string => {

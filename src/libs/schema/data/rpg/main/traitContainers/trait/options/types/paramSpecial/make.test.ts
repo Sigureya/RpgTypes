@@ -12,7 +12,7 @@ import {
   SPECIAL_PARAM_EXR,
 } from "./constants";
 import type { SpecialParamLabels } from "./labels";
-import { foldSpecialParams } from "./make";
+import { foldSpecialParams, specialParamName } from "./make";
 import type { Data_NamedItem2 } from "@RpgTypes/schema/namedItemSource";
 
 describe("foldSpecialParams", () => {
@@ -49,5 +49,37 @@ describe("foldSpecialParams", () => {
   test("should be sorted by id", () => {
     const sortedResult = [...result].sort((a, b) => a.id - b.id);
     expect(result).toEqual(sortedResult);
+  });
+});
+
+describe("specialParamName", () => {
+  const labels: SpecialParamLabels = {
+    experienceRate: "EXP Rate",
+    targetRate: "Target Rate",
+    floorDamageRate: "Floor Damage",
+    guradEffectRate: "Guard Effect",
+    mpCostRate: "MP Cost",
+    tpChargeRate: "TP Charge",
+    physicalDamageRate: "Physical Damage",
+    magicDamageRate: "Magic Damage",
+    pharmacology: "Pharmacology",
+    recoveryEffectRate: "Recovery Effect",
+  };
+
+  test("should return correct label for special parameters", () => {
+    expect(specialParamName(SPECIAL_PARAM_EXR, labels)).toBe("EXP Rate");
+    expect(specialParamName(SPECIAL_PARAM_TGR, labels)).toBe("Target Rate");
+    expect(specialParamName(SPECIAL_PARAM_FDR, labels)).toBe("Floor Damage");
+    expect(specialParamName(SPECIAL_PARAM_GRD, labels)).toBe("Guard Effect");
+    expect(specialParamName(SPECIAL_PARAM_MCR, labels)).toBe("MP Cost");
+    expect(specialParamName(SPECIAL_PARAM_TCR, labels)).toBe("TP Charge");
+    expect(specialParamName(SPECIAL_PARAM_PDR, labels)).toBe("Physical Damage");
+    expect(specialParamName(SPECIAL_PARAM_MDR, labels)).toBe("Magic Damage");
+    expect(specialParamName(SPECIAL_PARAM_PHA, labels)).toBe("Pharmacology");
+    expect(specialParamName(SPECIAL_PARAM_REC, labels)).toBe("Recovery Effect");
+  });
+
+  test("should return fallback string for unknown parameter index", () => {
+    expect(specialParamName(999, labels)).toBe("?sparams[999]");
   });
 });

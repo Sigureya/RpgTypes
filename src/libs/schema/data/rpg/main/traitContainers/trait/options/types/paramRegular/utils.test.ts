@@ -10,7 +10,7 @@ import {
   REGULAR_PARAM_LUK,
 } from "./constants";
 import type { RegularParamLabels } from "./labels";
-import { foldRegularParam } from "./utils";
+import { foldRegularParam, regularParamName } from "./utils";
 import type { Data_NamedItem2 } from "@RpgTypes/schema/namedItemSource";
 
 describe("foldRegularParam", () => {
@@ -41,5 +41,33 @@ describe("foldRegularParam", () => {
   test("should sorted the result", () => {
     const sortedExpected = result.sort((a, b) => a.id - b.id);
     expect(result).toEqual(sortedExpected);
+  });
+});
+
+describe("regularParamName", () => {
+  const labels: RegularParamLabels = {
+    maxHp: "Max HP",
+    maxMp: "Max MP",
+    atk: "Attack",
+    def: "Defense",
+    matk: "Magic Attack",
+    mdef: "Magic Defense",
+    agi: "Agility",
+    luk: "Luck",
+  };
+
+  test("should return correct label for regular parameters", () => {
+    expect(regularParamName(REGULAR_PARAM_MAX_HP, labels)).toBe("Max HP");
+    expect(regularParamName(REGULAR_PARAM_MAX_MP, labels)).toBe("Max MP");
+    expect(regularParamName(REGULAR_PARAM_ATK, labels)).toBe("Attack");
+    expect(regularParamName(REGULAR_PARAM_DEF, labels)).toBe("Defense");
+    expect(regularParamName(REGULAR_PARAM_MATK, labels)).toBe("Magic Attack");
+    expect(regularParamName(REGULAR_PARAM_MDEF, labels)).toBe("Magic Defense");
+    expect(regularParamName(REGULAR_PARAM_AGI, labels)).toBe("Agility");
+    expect(regularParamName(REGULAR_PARAM_LUK, labels)).toBe("Luck");
+  });
+
+  test("should return fallback string for unknown parameter index", () => {
+    expect(regularParamName(999, labels)).toBe("?rparams[999]");
   });
 });

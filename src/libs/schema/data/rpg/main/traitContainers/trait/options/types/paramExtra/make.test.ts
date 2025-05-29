@@ -11,7 +11,7 @@ import {
   EXTRA_PARAM_MRG,
   EXTRA_PARAM_TRG,
 } from "./constants";
-import { foldExtraParam } from "./make";
+import { extraParamName, foldExtraParam } from "./make";
 import type { ExtraParamLabels } from "./xparamLabels";
 import type { Data_NamedItem2 } from "@RpgTypes/schema/namedItemSource";
 
@@ -48,5 +48,36 @@ describe("foldXParam", () => {
   test("should be sorted by id", () => {
     const sortedResult = [...result].sort((a, b) => a.id - b.id);
     expect(result).toEqual(sortedResult);
+  });
+});
+describe("extraParamName", () => {
+  const labels: ExtraParamLabels = {
+    criticalEvasionRate: "Critical Evasion",
+    evasionRate: "Evasion",
+    counterAttackRate: "Counterattack",
+    criticalRate: "Critical",
+    hitRate: "Hit",
+    hpRegenerationRate: "HP Regen",
+    magicEvasionRate: "Magic Evasion",
+    magicReflectionRate: "Magic Reflection",
+    mpRegenerationRate: "MP Regen",
+    tpRegenerationRate: "TP Regen",
+  };
+
+  test("should return correct label for extra parameters", () => {
+    expect(extraParamName(EXTRA_PARAM_CEV, labels)).toBe("Critical Evasion");
+    expect(extraParamName(EXTRA_PARAM_EVA, labels)).toBe("Evasion");
+    expect(extraParamName(EXTRA_PARAM_CNT, labels)).toBe("Counterattack");
+    expect(extraParamName(EXTRA_PARAM_CRI, labels)).toBe("Critical");
+    expect(extraParamName(EXTRA_PARAM_HIT, labels)).toBe("Hit");
+    expect(extraParamName(EXTRA_PARAM_HRG, labels)).toBe("HP Regen");
+    expect(extraParamName(EXTRA_PARAM_MEV, labels)).toBe("Magic Evasion");
+    expect(extraParamName(EXTRA_PARAM_MRF, labels)).toBe("Magic Reflection");
+    expect(extraParamName(EXTRA_PARAM_MRG, labels)).toBe("MP Regen");
+    expect(extraParamName(EXTRA_PARAM_TRG, labels)).toBe("TP Regen");
+  });
+
+  test("should return fallback string for unknown parameter index", () => {
+    expect(extraParamName(123, labels)).toBe("?xparams[123]");
   });
 });

@@ -68,3 +68,31 @@ export const foldExtraParam = (xparam: ExtraParamLabels): Data_NamedItem[] => {
     },
   ];
 };
+export const extraParamName = (
+  paramIndex: number,
+  labels: ExtraParamLabels
+): string => {
+  switch (paramIndex) {
+    case EXTRA_PARAM_CEV:
+      return labels.criticalEvasionRate;
+    case EXTRA_PARAM_EVA:
+      return labels.evasionRate;
+    case EXTRA_PARAM_CNT:
+      return labels.counterAttackRate;
+    case EXTRA_PARAM_CRI:
+      return labels.criticalRate;
+    case EXTRA_PARAM_HIT:
+      return labels.hitRate;
+    case EXTRA_PARAM_HRG:
+      return labels.hpRegenerationRate;
+    case EXTRA_PARAM_MEV:
+      return labels.magicEvasionRate;
+    case EXTRA_PARAM_MRF:
+      return labels.magicReflectionRate;
+    case EXTRA_PARAM_MRG:
+      return labels.mpRegenerationRate;
+    case EXTRA_PARAM_TRG:
+      return labels.tpRegenerationRate;
+  }
+  return `?xparams[${paramIndex}]`;
+};

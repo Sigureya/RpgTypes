@@ -70,3 +70,32 @@ export const foldSpecialParams = (
     },
   ];
 };
+
+export const specialParamName = (
+  paramIndex: number,
+  labels: SpecialParamLabels
+): string => {
+  switch (paramIndex) {
+    case SPECIAL_PARAM_EXR:
+      return labels.experienceRate;
+    case SPECIAL_PARAM_TGR:
+      return labels.targetRate;
+    case SPECIAL_PARAM_FDR:
+      return labels.floorDamageRate;
+    case SPECIAL_PARAM_GRD:
+      return labels.guradEffectRate;
+    case SPECIAL_PARAM_MCR:
+      return labels.mpCostRate;
+    case SPECIAL_PARAM_TCR:
+      return labels.tpChargeRate;
+    case SPECIAL_PARAM_PDR:
+      return labels.physicalDamageRate;
+    case SPECIAL_PARAM_MDR:
+      return labels.magicDamageRate;
+    case SPECIAL_PARAM_PHA:
+      return labels.pharmacology;
+    case SPECIAL_PARAM_REC:
+      return labels.recoveryEffectRate;
+  }
+  return `?sparams[${paramIndex}]`;
+};
