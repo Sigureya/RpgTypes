@@ -1,3 +1,3 @@
 export * from './types';
-export * from './make';
-export * from './schema';
+export { makeClassData, makeClassSourceIdentifier } from './make';
+export { SCHEMA_DATA_CLASS } from './schema';

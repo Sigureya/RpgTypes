@@ -1,5 +1,5 @@
 export * from './enemy';
 export * from './enemyLabels';
 export * from './enemyMembers';
-export * from './make';
-export * from './schema';
+export { makeDropItem, makeEnemyAction, makeEnemyData, makeEnemySourceIdentifier, } from './make';
+export { SCHEMA_DATA_ENEMY } from './schema';

@@ -661,117 +661,50 @@ const COLLAPS_NORMAL = 0;
 const COLLAPS_BOSS = 1;
 const COLLAPS_INSTANT = 2;
 const COLLAPS_NONE = 3;
-const PARTY_ABILITY_ENCOUNTER_HALF = 0;
-const PARTY_ABILITY_ENCOUNTER_NONE = 1;
-const PARTY_ABILITY_CANCEL_SURPRISE = 2;
-const PARTY_ABILITY_RAISE_PREEMPTIVE = 3;
-const PARTY_ABILITY_GOLD_DOUBLE = 4;
-const PARTY_ABILITY_DROP_ITEM_DOUBLE = 5;
-const FLAG_ID_AUTO_BATTLE = 0;
-const FLAG_ID_GUARD = 1;
-const FLAG_ID_SUBSTITUTE = 2;
-const FLAG_ID_PRESERVE_TP = 3;
-const EXTRA_PARAM_HIT = 0;
-const EXTRA_PARAM_EVA = 1;
-const EXTRA_PARAM_CRI = 2;
-const EXTRA_PARAM_CEV = 3;
-const EXTRA_PARAM_MEV = 4;
-const EXTRA_PARAM_MRF = 5;
-const EXTRA_PARAM_CNT = 6;
-const EXTRA_PARAM_HRG = 7;
-const EXTRA_PARAM_MRG = 8;
-const EXTRA_PARAM_TRG = 9;
-const REGULAR_PARAM_MAX_HP = 0;
-const REGULAR_PARAM_MAX_MP = 1;
-const REGULAR_PARAM_ATK = 2;
-const REGULAR_PARAM_DEF = 3;
-const REGULAR_PARAM_MATK = 4;
-const REGULAR_PARAM_MDEF = 5;
-const REGULAR_PARAM_AGI = 6;
-const REGULAR_PARAM_LUK = 7;
-const SPECIAL_PARAM_TGR = 0;
-const SPECIAL_PARAM_GRD = 1;
-const SPECIAL_PARAM_REC = 2;
-const SPECIAL_PARAM_PHA = 3;
-const SPECIAL_PARAM_MCR = 4;
-const SPECIAL_PARAM_TCR = 5;
-const SPECIAL_PARAM_PDR = 6;
-const SPECIAL_PARAM_MDR = 7;
-const SPECIAL_PARAM_FDR = 8;
-const SPECIAL_PARAM_EXR = 9;
-const regularParamName = (paramIndex, labels) => {
-  switch (paramIndex) {
-    case REGULAR_PARAM_MAX_HP:
-      return labels.maxHp;
-    case REGULAR_PARAM_MAX_MP:
-      return labels.maxMp;
-    case REGULAR_PARAM_ATK:
-      return labels.atk;
-    case REGULAR_PARAM_DEF:
-      return labels.def;
-    case REGULAR_PARAM_MATK:
-      return labels.matk;
-    case REGULAR_PARAM_MDEF:
-      return labels.mdef;
-    case REGULAR_PARAM_AGI:
-      return labels.agi;
-    case REGULAR_PARAM_LUK:
-      return labels.luk;
-    default:
-      return `?rparams[${paramIndex}]`;
-  }
+const validAsciiKey = /^[a-zA-Z0-9]+$/;
+const sanitizeKey = (value) => {
+  return validAsciiKey.test(value) ? value : void 0;
 };
-const extraParamName = (paramIndex, labels) => {
-  switch (paramIndex) {
-    case EXTRA_PARAM_CEV:
-      return labels.criticalEvasionRate;
-    case EXTRA_PARAM_EVA:
-      return labels.evasionRate;
-    case EXTRA_PARAM_CNT:
-      return labels.counterAttackRate;
-    case EXTRA_PARAM_CRI:
-      return labels.criticalRate;
-    case EXTRA_PARAM_HIT:
-      return labels.hitRate;
-    case EXTRA_PARAM_HRG:
-      return labels.hpRegenerationRate;
-    case EXTRA_PARAM_MEV:
-      return labels.magicEvasionRate;
-    case EXTRA_PARAM_MRF:
-      return labels.magicReflectionRate;
-    case EXTRA_PARAM_MRG:
-      return labels.mpRegenerationRate;
-    case EXTRA_PARAM_TRG:
-      return labels.tpRegenerationRate;
-  }
-  return `?xparams[${paramIndex}]`;
+const testUnknonwKey = (value) => {
+  return typeof value === "string" ? validAsciiKey.test(value) : false;
 };
-const specialParamName = (paramIndex, labels) => {
-  switch (paramIndex) {
-    case SPECIAL_PARAM_EXR:
-      return labels.experienceRate;
-    case SPECIAL_PARAM_TGR:
-      return labels.targetRate;
-    case SPECIAL_PARAM_FDR:
-      return labels.floorDamageRate;
-    case SPECIAL_PARAM_GRD:
-      return labels.guradEffectRate;
-    case SPECIAL_PARAM_MCR:
-      return labels.mpCostRate;
-    case SPECIAL_PARAM_TCR:
-      return labels.tpChargeRate;
-    case SPECIAL_PARAM_PDR:
-      return labels.physicalDamageRate;
-    case SPECIAL_PARAM_MDR:
-      return labels.magicDamageRate;
-    case SPECIAL_PARAM_PHA:
-      return labels.pharmacology;
-    case SPECIAL_PARAM_REC:
-      return labels.recoveryEffectRate;
-  }
-  return `?sparams[${paramIndex}]`;
+const joinSourceKey = (key) => {
+  return [key.author, key.module, key.kind].join(".");
 };
-const foldCollapsOptions = (options, global) => {
+const isValid = (source) => {
+  return testUnknonwKey(source.author) && testUnknonwKey(source.module) && testUnknonwKey(source.kind);
+};
+const SRC_PARAMS_REGULAR = "params";
+const SRC_PARAMS_EXTRA = "xparams";
+const SRC_PARAMS_SPECIAL = "sparams";
+const SRC_TRAIT_COLLAPS = "collaps";
+const SRC_TRAIT_PARTY_ABILITY = "partyAbiility";
+const SRC_TRAIT_SPECIAL_FLAG = "sflag";
+const SRC_DATA_ACTOR = "actor";
+const SRC_DATA_VARIABLE = "variables";
+const SRC_DATA_MAP = "map";
+const SRC_DATA_ENEMY = "enemy";
+const SRC_DATA_STATE = "state";
+const SRC_DATA_SKILL = "skill";
+const SRC_DATA_ITEMS = "items";
+const SRC_DATA_WEAPON = "weapon";
+const SRC_DATA_ARMOR = "armor";
+const SRC_DATA_CLASS = "class";
+const SRC_DATA_COMMON_EVNET = "common_event";
+const SRC_DATA_TROOP = "troop";
+const SRC_COLOR = "colors";
+const SRC_WEAPON_TYPES = "weaponTypes";
+const SRC_ARMOR_TYPES = "armorTypes";
+const SRC_EQUIP_TYPES = "equipTypes";
+const SRC_SWITCHES = "switches";
+const SRC_SKILL_TYPES = "skillTypes";
+const SRC_ELEMENTS = "elements";
+const collapsSourceId = () => ({
+  author: AUTHOR_RMMZ,
+  module: MODULE_TRAIT,
+  kind: SRC_TRAIT_COLLAPS
+});
+const collapsOptionsToArray = (options, global) => {
   return [
     {
       id: COLLAPS_NORMAL,
@@ -791,7 +724,18 @@ const foldCollapsOptions = (options, global) => {
     }
   ];
 };
-const foldPartyAbilityOptions = (options) => {
+const PARTY_ABILITY_ENCOUNTER_HALF = 0;
+const PARTY_ABILITY_ENCOUNTER_NONE = 1;
+const PARTY_ABILITY_CANCEL_SURPRISE = 2;
+const PARTY_ABILITY_RAISE_PREEMPTIVE = 3;
+const PARTY_ABILITY_GOLD_DOUBLE = 4;
+const PARTY_ABILITY_DROP_ITEM_DOUBLE = 5;
+const partyAbilitySourceId = () => ({
+  author: AUTHOR_RMMZ,
+  module: MODULE_TRAIT,
+  kind: SRC_TRAIT_PARTY_ABILITY
+});
+const partyAbilityToArray = (options) => {
   return [
     {
       id: PARTY_ABILITY_ENCOUNTER_HALF,
@@ -819,19 +763,51 @@ const foldPartyAbilityOptions = (options) => {
     }
   ];
 };
-const foldRegularParam = (param) => {
+const FLAG_ID_AUTO_BATTLE = 0;
+const FLAG_ID_GUARD = 1;
+const FLAG_ID_SUBSTITUTE = 2;
+const FLAG_ID_PRESERVE_TP = 3;
+const specialFlagSourceId = () => ({
+  author: AUTHOR_RMMZ,
+  module: MODULE_TRAIT,
+  kind: SRC_TRAIT_SPECIAL_FLAG
+});
+const specialFlagToArray = (label) => {
   return [
-    { id: REGULAR_PARAM_MAX_HP, name: param.maxHp },
-    { id: REGULAR_PARAM_MAX_MP, name: param.maxMp },
-    { id: REGULAR_PARAM_ATK, name: param.atk },
-    { id: REGULAR_PARAM_DEF, name: param.def },
-    { id: REGULAR_PARAM_MATK, name: param.matk },
-    { id: REGULAR_PARAM_MDEF, name: param.mdef },
-    { id: REGULAR_PARAM_AGI, name: param.agi },
-    { id: REGULAR_PARAM_LUK, name: param.luk }
+    {
+      id: FLAG_ID_AUTO_BATTLE,
+      name: label.autoBattle
+    },
+    {
+      id: FLAG_ID_GUARD,
+      name: label.guard
+    },
+    {
+      id: FLAG_ID_SUBSTITUTE,
+      name: label.substitute
+    },
+    {
+      id: FLAG_ID_PRESERVE_TP,
+      name: label.preventEscape
+    }
   ];
 };
-const foldExtraParam = (xparam) => {
+const EXTRA_PARAM_HIT = 0;
+const EXTRA_PARAM_EVA = 1;
+const EXTRA_PARAM_CRI = 2;
+const EXTRA_PARAM_CEV = 3;
+const EXTRA_PARAM_MEV = 4;
+const EXTRA_PARAM_MRF = 5;
+const EXTRA_PARAM_CNT = 6;
+const EXTRA_PARAM_HRG = 7;
+const EXTRA_PARAM_MRG = 8;
+const EXTRA_PARAM_TRG = 9;
+const extraParamSourceId = () => ({
+  author: AUTHOR_RMMZ,
+  module: MODULE_TRAIT,
+  kind: SRC_PARAMS_SPECIAL
+});
+const extraParamsToArray = (xparam) => {
   return [
     {
       id: EXTRA_PARAM_HIT,
@@ -875,7 +851,94 @@ const foldExtraParam = (xparam) => {
     }
   ];
 };
-const foldSpecialParams = (specialParams) => {
+const extraParamName = (paramIndex, labels) => {
+  switch (paramIndex) {
+    case EXTRA_PARAM_CEV:
+      return labels.criticalEvasionRate;
+    case EXTRA_PARAM_EVA:
+      return labels.evasionRate;
+    case EXTRA_PARAM_CNT:
+      return labels.counterAttackRate;
+    case EXTRA_PARAM_CRI:
+      return labels.criticalRate;
+    case EXTRA_PARAM_HIT:
+      return labels.hitRate;
+    case EXTRA_PARAM_HRG:
+      return labels.hpRegenerationRate;
+    case EXTRA_PARAM_MEV:
+      return labels.magicEvasionRate;
+    case EXTRA_PARAM_MRF:
+      return labels.magicReflectionRate;
+    case EXTRA_PARAM_MRG:
+      return labels.mpRegenerationRate;
+    case EXTRA_PARAM_TRG:
+      return labels.tpRegenerationRate;
+  }
+  return `?xparams[${paramIndex}]`;
+};
+const REGULAR_PARAM_MAX_HP = 0;
+const REGULAR_PARAM_MAX_MP = 1;
+const REGULAR_PARAM_ATK = 2;
+const REGULAR_PARAM_DEF = 3;
+const REGULAR_PARAM_MATK = 4;
+const REGULAR_PARAM_MDEF = 5;
+const REGULAR_PARAM_AGI = 6;
+const REGULAR_PARAM_LUK = 7;
+const regularParamSourceId = () => ({
+  author: AUTHOR_RMMZ,
+  module: MODULE_TRAIT,
+  kind: SRC_PARAMS_REGULAR
+});
+const regularParamsToArray = (param) => {
+  return [
+    { id: REGULAR_PARAM_MAX_HP, name: param.maxHp },
+    { id: REGULAR_PARAM_MAX_MP, name: param.maxMp },
+    { id: REGULAR_PARAM_ATK, name: param.atk },
+    { id: REGULAR_PARAM_DEF, name: param.def },
+    { id: REGULAR_PARAM_MATK, name: param.matk },
+    { id: REGULAR_PARAM_MDEF, name: param.mdef },
+    { id: REGULAR_PARAM_AGI, name: param.agi },
+    { id: REGULAR_PARAM_LUK, name: param.luk }
+  ];
+};
+const regularParamName = (paramIndex, labels) => {
+  switch (paramIndex) {
+    case REGULAR_PARAM_MAX_HP:
+      return labels.maxHp;
+    case REGULAR_PARAM_MAX_MP:
+      return labels.maxMp;
+    case REGULAR_PARAM_ATK:
+      return labels.atk;
+    case REGULAR_PARAM_DEF:
+      return labels.def;
+    case REGULAR_PARAM_MATK:
+      return labels.matk;
+    case REGULAR_PARAM_MDEF:
+      return labels.mdef;
+    case REGULAR_PARAM_AGI:
+      return labels.agi;
+    case REGULAR_PARAM_LUK:
+      return labels.luk;
+    default:
+      return `?rparams[${paramIndex}]`;
+  }
+};
+const SPECIAL_PARAM_TGR = 0;
+const SPECIAL_PARAM_GRD = 1;
+const SPECIAL_PARAM_REC = 2;
+const SPECIAL_PARAM_PHA = 3;
+const SPECIAL_PARAM_MCR = 4;
+const SPECIAL_PARAM_TCR = 5;
+const SPECIAL_PARAM_PDR = 6;
+const SPECIAL_PARAM_MDR = 7;
+const SPECIAL_PARAM_FDR = 8;
+const SPECIAL_PARAM_EXR = 9;
+const sparamSourceId = () => ({
+  author: AUTHOR_RMMZ,
+  module: MODULE_TRAIT,
+  kind: SRC_PARAMS_SPECIAL
+});
+const specialParamsToArray = (specialParams) => {
   return [
     {
       id: SPECIAL_PARAM_TGR,
@@ -883,7 +946,7 @@ const foldSpecialParams = (specialParams) => {
     },
     {
       id: SPECIAL_PARAM_GRD,
-      name: specialParams.guradEffectRate
+      name: specialParams.guardEffectRate
     },
     {
       id: SPECIAL_PARAM_REC,
@@ -919,25 +982,30 @@ const foldSpecialParams = (specialParams) => {
     }
   ];
 };
-const foldSpecialFlag = (label) => {
-  return [
-    {
-      id: FLAG_ID_AUTO_BATTLE,
-      name: label.autoBattle
-    },
-    {
-      id: FLAG_ID_GUARD,
-      name: label.guard
-    },
-    {
-      id: FLAG_ID_SUBSTITUTE,
-      name: label.substitute
-    },
-    {
-      id: FLAG_ID_PRESERVE_TP,
-      name: label.preventEscape
-    }
-  ];
+const specialParamName = (paramIndex, labels) => {
+  switch (paramIndex) {
+    case SPECIAL_PARAM_EXR:
+      return labels.experienceRate;
+    case SPECIAL_PARAM_TGR:
+      return labels.targetRate;
+    case SPECIAL_PARAM_FDR:
+      return labels.floorDamageRate;
+    case SPECIAL_PARAM_GRD:
+      return labels.guardEffectRate;
+    case SPECIAL_PARAM_MCR:
+      return labels.mpCostRate;
+    case SPECIAL_PARAM_TCR:
+      return labels.tpChargeRate;
+    case SPECIAL_PARAM_PDR:
+      return labels.physicalDamageRate;
+    case SPECIAL_PARAM_MDR:
+      return labels.magicDamageRate;
+    case SPECIAL_PARAM_PHA:
+      return labels.pharmacology;
+    case SPECIAL_PARAM_REC:
+      return labels.recoveryEffectRate;
+  }
+  return `?sparams[${paramIndex}]`;
 };
 const traitDomain = (sourceKey, labels, fn) => {
   return {
@@ -954,23 +1022,23 @@ const buildCollapsSource = (labels, global) => {
   return traitDomain(
     SRC_TRAIT_COLLAPS,
     labels,
-    (col) => foldCollapsOptions(col, global)
+    (col) => collapsOptionsToArray(col, global)
   );
 };
 const buildPartyAbilitySource = (labels) => {
-  return traitDomain(SRC_TRAIT_PARTY_ABILITY, labels, foldPartyAbilityOptions);
+  return traitDomain(SRC_TRAIT_PARTY_ABILITY, labels, partyAbilityToArray);
 };
 const buildRegularParamSource = (label) => {
-  return traitDomain(SRC_PARAMS_REGULAR, label, foldRegularParam);
+  return traitDomain(SRC_PARAMS_REGULAR, label, regularParamsToArray);
 };
 const buildExtraParamSource = (label) => {
-  return traitDomain(SRC_PARAMS_EXTRA, label, foldExtraParam);
+  return traitDomain(SRC_PARAMS_EXTRA, label, extraParamsToArray);
 };
 const buildSpecialParamSource = (label) => {
-  return traitDomain(SRC_PARAMS_SPECIAL, label, foldSpecialParams);
+  return traitDomain(SRC_PARAMS_SPECIAL, label, specialParamsToArray);
 };
 const buildSpecialFlagSource = (label) => {
-  return traitDomain(SRC_TRAIT_SPECIAL_FLAG, label, foldSpecialFlag);
+  return traitDomain(SRC_TRAIT_SPECIAL_FLAG, label, specialFlagToArray);
 };
 const FORMAT_NAME$1 = "{name}";
 const FORMAT_PARAM_RATE_MUL = "{name} * {value}%";
@@ -1014,7 +1082,7 @@ const LABEL_SET_TRAIT = {
       format: FORMAT_PARAM_RATE_MUL,
       options: {
         targetRate: "狙われ率",
-        guradEffectRate: "防御効果率",
+        guardEffectRate: "防御効果率",
         recoveryEffectRate: "回復効果率",
         pharmacology: "薬の知識",
         mpCostRate: "MP消費率",
@@ -1376,6 +1444,11 @@ const SCHEMA_TRAIT = {
     value: { type: "integer" }
   }
 };
+const formatTraitText = (format, trait, items) => {
+  const item2 = items[trait.dataId];
+  const itemName = item2 ? item2.name : `?data[${trait.dataId}]`;
+  return format.replaceAll(FORMAT_PARAM_VALUE, trait.value.toString()).replaceAll(FORMAT_NAME$1, itemName);
+};
 const makeActorData = (actor2 = {}) => ({
   name: actor2.name ?? "",
   id: actor2.id ?? 0,
@@ -1392,6 +1465,11 @@ const makeActorData = (actor2 = {}) => ({
   equips: [],
   initialLevel: actor2.initialLevel ?? 0,
   maxLevel: actor2.maxLevel ?? 0
+});
+const makeActorSourceIdentifier = () => ({
+  author: AUTHOR_RMMZ,
+  module: MODULE_DATA,
+  kind: SRC_DATA_ACTOR
 });
 const SCHEMA_DATA_ACTOR = {
   type: "object",
@@ -1437,25 +1515,6 @@ const SCHEMA_DATA_ACTOR = {
     }
   }
 };
-const normalizeDataActor = (data) => {
-  return {
-    name: data.name ?? "",
-    id: data.id ?? 0,
-    battlerName: data.battlerName ?? "",
-    characterName: data.characterName ?? "",
-    characterIndex: data.characterIndex ?? 0,
-    faceName: data.faceName ?? "",
-    faceIndex: data.faceIndex ?? 0,
-    traits: [],
-    note: data.note ?? "",
-    classId: data.classId ?? 0,
-    nickname: data.nickname ?? "",
-    profile: data.profile ?? "",
-    equips: [],
-    initialLevel: data.initialLevel ?? 0,
-    maxLevel: data.maxLevel ?? 0
-  };
-};
 const makeArmorData = (armor2 = {}) => ({
   id: armor2.id ?? 0,
   name: armor2.name ?? "",
@@ -1484,6 +1543,11 @@ const makeArmorData = (armor2 = {}) => ({
   ],
   etypeId: armor2.etypeId ?? 0,
   price: armor2.price ?? 0
+});
+const makeArmorSourceIdentifier = () => ({
+  author: AUTHOR_RMMZ,
+  module: MODULE_DATA,
+  kind: SRC_DATA_ARMOR
 });
 const SCHEMA_DATA_ARMMOR = {
   type: "object",
@@ -1570,6 +1634,11 @@ const makeClassData = (data = {}) => ({
   ],
   learnings: data.learnings ?? [],
   expParams: data.expParams ?? []
+});
+const makeClassSourceIdentifier = () => ({
+  author: AUTHOR_RMMZ,
+  module: MODULE_DATA,
+  kind: SRC_DATA_CLASS
 });
 const SCHEMA_DATA_CLASS = {
   type: "object",
@@ -1667,6 +1736,11 @@ const makeStateData = (data = {}) => ({
   chanceByDamage: data.chanceByDamage ?? 0,
   removeByWalking: data.removeByWalking ?? false,
   stepsToRemove: data.stepsToRemove ?? 0
+});
+const makeStateSourceIdentifier = () => ({
+  author: AUTHOR_RMMZ,
+  module: MODULE_DATA,
+  kind: SRC_DATA_ACTOR
 });
 const SCHEMA_DATA_STATE = {
   type: "object",
@@ -1885,6 +1959,11 @@ const makeEnemyData = (data = {}) => {
     actions: []
   };
 };
+const makeEnemySourceIdentifier = () => ({
+  author: AUTHOR_RMMZ,
+  module: MODULE_DATA,
+  kind: SRC_DATA_ENEMY
+});
 const SCHEMA_DATA_ENEMY = {
   type: "object",
   required: [
@@ -2257,44 +2336,6 @@ const EFFECT_GROW = 42;
 const EFFECT_LEARN_SKILL = 43;
 const EFFECT_COMMON_EVENT = 44;
 const SPECIAL_EFFECT_ESCAPE = 0;
-const validAsciiKey = /^[a-zA-Z0-9]+$/;
-const sanitizeKey = (value) => {
-  return validAsciiKey.test(value) ? value : void 0;
-};
-const testUnknonwKey = (value) => {
-  return typeof value === "string" ? validAsciiKey.test(value) : false;
-};
-const joinSourceKey = (key) => {
-  return [key.author, key.module, key.kind].join(".");
-};
-const isValid = (source) => {
-  return testUnknonwKey(source.author) && testUnknonwKey(source.module) && testUnknonwKey(source.kind);
-};
-const SRC_PARAMS_REGULAR = "params";
-const SRC_PARAMS_EXTRA = "xparams";
-const SRC_PARAMS_SPECIAL = "sparams";
-const SRC_TRAIT_COLLAPS = "collaps";
-const SRC_TRAIT_PARTY_ABILITY = "partyAbiility";
-const SRC_TRAIT_SPECIAL_FLAG = "sflag";
-const SRC_DATA_ACTOR = "actor";
-const SRC_DATA_VARIABLE = "variables";
-const SRC_DATA_MAP = "map";
-const SRC_DATA_ENEMY = "enemy";
-const SRC_DATA_STATE = "state";
-const SRC_DATA_SKILL = "skill";
-const SRC_DATA_ITEMS = "items";
-const SRC_DATA_WEAPON = "weapon";
-const SRC_DATA_ARMOR = "armor";
-const SRC_DATA_CLASS = "class";
-const SRC_DATA_COMMON_EVNET = "common_event";
-const SRC_DATA_TROOP = "troop";
-const SRC_COLOR = "colors";
-const SRC_WEAPON_TYPES = "weaponTypes";
-const SRC_ARMOR_TYPES = "armorTypes";
-const SRC_EQUIP_TYPES = "equipTypes";
-const SRC_SWITCHES = "switches";
-const SRC_SKILL_TYPES = "skillTypes";
-const SRC_ELEMENTS = "elements";
 const PLACEHOLDER_VALUE1 = "{value1}";
 const PLACEHOLDER_VALUE2 = "{value2}";
 const PLACEHOLDER_NAME = "{name}";
@@ -4244,6 +4285,8 @@ export {
   cloneChoices,
   cloneEventCommand,
   cloneParameters,
+  collapsOptionsToArray,
+  collapsSourceId,
   convertCommentArrayToObject,
   createActorControlChars,
   createControlCharFormat,
@@ -4263,13 +4306,10 @@ export {
   defineEffectRemoveDebuff,
   defineEffectRemoveState,
   extraParamName,
-  foldCollapsOptions,
-  foldExtraParam,
-  foldPartyAbilityOptions,
-  foldRegularParam,
-  foldSpecialFlag,
-  foldSpecialParams,
+  extraParamSourceId,
+  extraParamsToArray,
   formatItemEffectText,
+  formatTraitText,
   fromArrayCommonEvent,
   fromArrayControlSwitches,
   fromArrayInputNumber,
@@ -4327,10 +4367,13 @@ export {
   isValid,
   joinSourceKey,
   makeActorData,
+  makeActorSourceIdentifier,
   makeArmorData,
+  makeArmorSourceIdentifier,
   makeAudioCommand,
   makeAudioFileParams,
   makeClassData,
+  makeClassSourceIdentifier,
   makeCommandAudioAny,
   makeCommandChangeActorName,
   makeCommandChangeActorNickName,
@@ -4364,6 +4407,7 @@ export {
   makeEditorSetting,
   makeEnemyAction,
   makeEnemyData,
+  makeEnemySourceIdentifier,
   makeEventPageCondition,
   makeItemCategories,
   makeItemCategoriesFromArray,
@@ -4381,6 +4425,7 @@ export {
   makeSoundsArray,
   makeSoundsObject,
   makeStateData,
+  makeStateSourceIdentifier,
   makeSystemAdvanced,
   makeSystemData,
   makeTermsBasic,
@@ -4396,17 +4441,24 @@ export {
   mergeDomainLabel,
   mergeNestedPrimitiveRecords,
   mergeWithDefaults,
-  normalizeDataActor,
+  partyAbilitySourceId,
+  partyAbilityToArray,
   readNote,
   readNoteEx,
   readNoteObject,
   regularParamName,
+  regularParamSourceId,
+  regularParamsToArray,
   replaceNote,
   resolveItemEffectLabels,
   resolveTraitLabels,
   sanitizeKey,
   setNoteValue,
+  sparamSourceId,
+  specialFlagSourceId,
+  specialFlagToArray,
   specialParamName,
+  specialParamsToArray,
   testUnknonwKey,
   toArrayCommonEvent,
   toArrayControlSwitches,
