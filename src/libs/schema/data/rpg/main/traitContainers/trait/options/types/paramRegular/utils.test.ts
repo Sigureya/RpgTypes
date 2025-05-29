@@ -1,4 +1,3 @@
-import type { Data_NamedItem } from "@RpgTypes/schema/data/rpg/main/entitys";
 import { describe, test, expect } from "vitest";
 import {
   REGULAR_PARAM_MAX_HP,
@@ -12,6 +11,7 @@ import {
 } from "./constants";
 import type { RegularParamLabels } from "./labels";
 import { foldRegularParam } from "./utils";
+import type { Data_NamedItem2 } from "@RpgTypes/schema/namedItemSource";
 
 describe("foldRegularParam", () => {
   const param: RegularParamLabels = {
@@ -26,7 +26,7 @@ describe("foldRegularParam", () => {
   };
   const result = foldRegularParam(param);
   test("should return correct regular parameter options", () => {
-    const expected: Data_NamedItem[] = [
+    const expected: Data_NamedItem2[] = [
       { id: REGULAR_PARAM_MAX_HP, name: "Max HP" },
       { id: REGULAR_PARAM_MAX_MP, name: "Max MP" },
       { id: REGULAR_PARAM_ATK, name: "Attack" },
@@ -38,7 +38,7 @@ describe("foldRegularParam", () => {
     ];
     expect(result).toEqual(expected);
   });
-  test("", () => {
+  test("should sorted the result", () => {
     const sortedExpected = result.sort((a, b) => a.id - b.id);
     expect(result).toEqual(sortedExpected);
   });

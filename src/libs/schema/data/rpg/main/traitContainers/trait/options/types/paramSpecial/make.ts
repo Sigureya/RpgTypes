@@ -1,4 +1,3 @@
-import type { Data_NamedItem } from "@RpgTypes/schema/data/rpg/main/entitys";
 import {
   SPECIAL_PARAM_TGR,
   SPECIAL_PARAM_GRD,
@@ -12,10 +11,11 @@ import {
   SPECIAL_PARAM_EXR,
 } from "./constants";
 import type { SpecialParamLabels } from "./labels";
-import {
-  SRC_PARAMS_SPECIAL,
-  type SourceIdentifier,
+import type {
+  Data_NamedItem2,
+  SourceIdentifier,
 } from "@RpgTypes/schema/namedItemSource";
+import { SRC_PARAMS_SPECIAL } from "@RpgTypes/schema/namedItemSource";
 import { AUTHOR_RMMZ, MODULE_TRAIT } from "@RpgTypes/namedItemSource";
 
 export const makeSparamSourceIdentifier = (): SourceIdentifier => ({
@@ -26,7 +26,7 @@ export const makeSparamSourceIdentifier = (): SourceIdentifier => ({
 
 export const foldSpecialParams = (
   specialParams: SpecialParamLabels
-): Data_NamedItem[] => {
+): Data_NamedItem2[] => {
   return [
     {
       id: SPECIAL_PARAM_TGR,

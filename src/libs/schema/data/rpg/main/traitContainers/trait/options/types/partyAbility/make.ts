@@ -1,4 +1,3 @@
-import type { Data_NamedItem } from "@RpgTypes/schema/data/rpg/main/entitys";
 import {
   PARTY_ABILITY_ENCOUNTER_HALF,
   PARTY_ABILITY_ENCOUNTER_NONE,
@@ -8,10 +7,11 @@ import {
   PARTY_ABILITY_DROP_ITEM_DOUBLE,
 } from "./constants";
 import type { PartyAbilityOptionLabels } from "./partyAbility";
+import type { Data_NamedItem2 } from "@RpgTypes/schema/namedItemSource";
 
 export const foldPartyAbilityOptions = (
   options: PartyAbilityOptionLabels
-): Data_NamedItem[] => {
+): Data_NamedItem2[] => {
   return [
     {
       id: PARTY_ABILITY_ENCOUNTER_HALF,
