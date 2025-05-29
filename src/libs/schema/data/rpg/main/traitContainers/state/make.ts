@@ -34,6 +34,6 @@ export const makeStateData = (data: Partial<Data_State> = {}): Data_State => ({
 
 export const makeStateSourceIdentifier = (): SourceIdentifier => ({
   author: AUTHOR_RMMZ,
-  kind: SRC_DATA_ACTOR,
   module: MODULE_DATA,
+  kind: SRC_DATA_ACTOR,
 });
