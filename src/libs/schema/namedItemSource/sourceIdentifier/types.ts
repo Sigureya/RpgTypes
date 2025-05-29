@@ -3,3 +3,8 @@ export interface SourceIdentifier {
   module: string; // モジュール名（plugin/mod）
   kind: string; // 種別（例: weapon, item）
 }
+
+export interface Data_NamedItem2 {
+  id: number; // 一意の識別子
+  name: string; // 名前
+}
