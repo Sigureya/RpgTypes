@@ -11,6 +11,6 @@ export const formatTraitText = (
   const item = items[trait.dataId];
   const itemName: string = item ? item.name : `?data[${trait.dataId}]`;
   return format
-    .replaceAll(FORMAT_PARAM_VALUE satisfies string, trait.value.toString())
-    .replaceAll(FORMAT_NAME satisfies string, itemName);
+    .replaceAll(FORMAT_PARAM_VALUE, trait.value.toString())
+    .replaceAll(FORMAT_NAME, itemName);
 };
