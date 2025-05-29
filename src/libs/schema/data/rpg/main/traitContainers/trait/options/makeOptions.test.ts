@@ -20,6 +20,7 @@ import {
 } from "./types/collaps";
 
 import {
+  foldPartyAbilityOptions,
   PARTY_ABILITY_CANCEL_SURPRISE,
   PARTY_ABILITY_DROP_ITEM_DOUBLE,
   PARTY_ABILITY_ENCOUNTER_HALF,
@@ -39,6 +40,7 @@ import {
   EXTRA_PARAM_MEV,
   EXTRA_PARAM_MRF,
   EXTRA_PARAM_MRG,
+  foldExtraParam,
 } from "./types/paramExtra";
 import {
   SPECIAL_PARAM_EXR,
@@ -62,14 +64,9 @@ import {
   REGULAR_PARAM_AGI,
   REGULAR_PARAM_LUK,
 } from "./types/paramRegular";
-import {
-  foldCollapsOptions,
-  foldPartyAbilityOptions,
-  foldSpecialParams,
-  foldExtraParam,
-  foldSpecialFlag,
-} from "./makeOptions";
+import { foldSpecialParams, foldSpecialFlag } from "./makeOptions";
 import { foldRegularParam } from "./types/paramRegular/utils";
+import { foldCollapsOptions } from "./types/collaps/make";
 
 const testSorted = (name: string, list: Data_NamedItem[]) => {
   const sortedList = [...list].sort((a, b) => a.id - b.id);
