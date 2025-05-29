@@ -11,6 +11,7 @@ import {
   FLAG_ID_GUARD,
   FLAG_ID_SUBSTITUTE,
   FLAG_ID_PRESERVE_TP,
+  foldSpecialFlag,
 } from "./types";
 import {
   COLLAPS_NORMAL,
@@ -64,7 +65,6 @@ import {
   REGULAR_PARAM_AGI,
   REGULAR_PARAM_LUK,
 } from "./types/paramRegular";
-import { foldSpecialFlag } from "./makeOptions";
 import { foldRegularParam } from "./types/paramRegular/utils";
 import { foldCollapsOptions } from "./types/collaps/make";
 import { foldSpecialParams } from "./types/paramSpecial/make";

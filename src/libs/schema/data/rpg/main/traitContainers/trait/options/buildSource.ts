@@ -17,9 +17,9 @@ import {
   foldRegularParam,
   foldPartyAbilityOptions,
   foldCollapsOptions,
+  foldSpecialFlag,
 } from "@RpgTypes/schema";
 
-import { foldSpecialFlag } from "./makeOptions";
 import type { DomainLabel } from "@RpgTypes/templates";
 import { AUTHOR_RMMZ, MODULE_TRAIT } from "@RpgTypes/namedItemSource";
 import { foldExtraParam } from "./types/paramExtra/make";
