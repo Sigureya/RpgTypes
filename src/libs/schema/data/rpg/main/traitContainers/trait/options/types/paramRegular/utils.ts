@@ -36,7 +36,7 @@ export const regularParamName2 = (
       return `?rparams[${paramIndex}]`;
   }
 };
-export const foldRegularParam2 = (
+export const foldRegularParam = (
   param: RegularParamLabels
 ): Data_NamedItem[] => {
   return [
