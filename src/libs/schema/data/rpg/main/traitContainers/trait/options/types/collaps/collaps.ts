@@ -19,7 +19,7 @@ export const collapsSourceId = (): SourceIdentifier => ({
   kind: SRC_TRAIT_COLLAPS,
 });
 
-export const foldCollapsOptions = (
+export const collapsOptionsToArray = (
   options: CollapsOptionLabels,
   global: Pick<GlobalLabel, "normal">
 ): Data_NamedItem2[] => {

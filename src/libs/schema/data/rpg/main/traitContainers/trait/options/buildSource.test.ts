@@ -1,6 +1,5 @@
 import { test, describe, expect } from "vitest";
 import type {
-  CollapsOptionLabels,
   ExtraParamLabels,
   RegularParamLabels,
   PartyAbilityOptionLabels,

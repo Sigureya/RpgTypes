@@ -7,10 +7,10 @@ import {
   COLLAPS_NONE,
 } from "./constants";
 import type { CollapsOptionLabels } from "./labels";
-import { foldCollapsOptions } from "./collaps";
+import { collapsOptionsToArray } from "./collaps";
 import type { Data_NamedItem2 } from "@RpgTypes/schema/namedItemSource";
 
-describe("foldCollapsOptions", () => {
+describe("collapsOptionsToArray", () => {
   const options: CollapsOptionLabels = {
     bossCollaps: "Boss Collapse",
     instantCollaps: "Instant Collapse",
@@ -20,7 +20,7 @@ describe("foldCollapsOptions", () => {
     normal: "Normal Collapse",
   };
 
-  const result = foldCollapsOptions(options, global);
+  const result = collapsOptionsToArray(options, global);
   test("should return correct collaps options", () => {
     const expected: Data_NamedItem2[] = [
       { id: COLLAPS_NORMAL, name: "Normal Collapse" },

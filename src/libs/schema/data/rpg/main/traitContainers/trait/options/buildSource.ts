@@ -16,7 +16,7 @@ import {
   SRC_TRAIT_SPECIAL_FLAG,
   foldRegularParam,
   partyAbilityToArray,
-  foldCollapsOptions,
+  collapsOptionsToArray,
   specialFlagToArray,
 } from "@RpgTypes/schema";
 
@@ -46,7 +46,7 @@ export const buildCollapsSource = (
   global: Pick<GlobalLabel, "normal">
 ): NamedItemSource => {
   return traitDomain(SRC_TRAIT_COLLAPS, labels, (col) =>
-    foldCollapsOptions(col, global)
+    collapsOptionsToArray(col, global)
   );
 };
 
