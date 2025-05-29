@@ -18,7 +18,7 @@ import type { Data_NamedItem2 } from "@RpgTypes/schema/namedItemSource";
 describe("specialParamsToArray", () => {
   const specialParams: SpecialParamLabels = {
     targetRate: "Target Rate",
-    guradEffectRate: "Guard Effect Rate",
+    guardEffectRate: "Guard Effect Rate",
     recoveryEffectRate: "Recovery Effect Rate",
     pharmacology: "Pharmacology",
     mpCostRate: "MP Cost Rate",
@@ -57,7 +57,7 @@ describe("specialParamName", () => {
     experienceRate: "EXP Rate",
     targetRate: "Target Rate",
     floorDamageRate: "Floor Damage",
-    guradEffectRate: "Guard Effect",
+    guardEffectRate: "Guard Effect",
     mpCostRate: "MP Cost",
     tpChargeRate: "TP Charge",
     physicalDamageRate: "Physical Damage",
