@@ -1,4 +1,4 @@
 export * from "./actor";
 export * from "./actorLabels";
-export * from "./make";
+export { makeActorData, makeActorSourceIdentifier } from "./make";
 export * from "./schema";

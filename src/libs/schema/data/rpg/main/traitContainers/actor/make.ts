@@ -1,4 +1,9 @@
+import {
+  SRC_DATA_ACTOR,
+  type SourceIdentifier,
+} from "@RpgTypes/schema/namedItemSource";
 import type { Data_Actor } from "./actor";
+import { AUTHOR_RMMZ, MODULE_DATA } from "@RpgTypes/namedItemSource";
 
 export const makeActorData = (actor: Partial<Data_Actor> = {}): Data_Actor => ({
   name: actor.name ?? "",
@@ -16,4 +21,10 @@ export const makeActorData = (actor: Partial<Data_Actor> = {}): Data_Actor => ({
   equips: [],
   initialLevel: actor.initialLevel ?? 0,
   maxLevel: actor.maxLevel ?? 0,
+});
+
+export const makeActorSourceIdentifier = (): SourceIdentifier => ({
+  author: AUTHOR_RMMZ,
+  module: MODULE_DATA,
+  kind: SRC_DATA_ACTOR,
 });
