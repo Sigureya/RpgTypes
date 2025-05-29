@@ -4,6 +4,7 @@ import {
 } from "@RpgTypes/schema/namedItemSource";
 import type { Data_Class } from "./types";
 import { AUTHOR_RMMZ, MODULE_DATA } from "@RpgTypes/namedItemSource";
+
 export const makeClassData = (data: Partial<Data_Class> = {}): Data_Class => ({
   name: data.name ?? "",
   id: data.id ?? 0,
@@ -22,8 +23,9 @@ export const makeClassData = (data: Partial<Data_Class> = {}): Data_Class => ({
   learnings: data.learnings ?? [],
   expParams: data.expParams ?? [],
 });
+
 export const makeClassSourceIdentifier = (): SourceIdentifier => ({
   author: AUTHOR_RMMZ,
-  kind: SRC_DATA_CLASS,
   module: MODULE_DATA,
+  kind: SRC_DATA_CLASS,
 });
