@@ -14,18 +14,15 @@ import {
   SRC_PARAMS_SPECIAL,
   SRC_TRAIT_PARTY_ABILITY,
   SRC_TRAIT_SPECIAL_FLAG,
+  foldRegularParam,
+  foldPartyAbilityOptions,
+  foldCollapsOptions,
 } from "@RpgTypes/schema";
 
-import {
-  foldCollapsOptions,
-  foldExtraParam,
-  foldPartyAbilityOptions,
-  foldRegularParam,
-  foldSpecialFlag,
-  foldSpecialParams,
-} from "./makeOptions";
+import { foldSpecialFlag, foldSpecialParams } from "./makeOptions";
 import type { DomainLabel } from "@RpgTypes/templates";
 import { AUTHOR_RMMZ, MODULE_TRAIT } from "@RpgTypes/namedItemSource";
+import { foldExtraParam } from "./types/paramExtra/make";
 
 export const traitDomain = <T>(
   sourceKey: string,
