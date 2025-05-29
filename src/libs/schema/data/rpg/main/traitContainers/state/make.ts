@@ -1,4 +1,9 @@
+import {
+  SRC_DATA_ACTOR,
+  type SourceIdentifier,
+} from "@RpgTypes/schema/namedItemSource";
 import type { Data_State } from "./state";
+import { AUTHOR_RMMZ, MODULE_DATA } from "@RpgTypes/namedItemSource";
 export const makeStateData = (data: Partial<Data_State> = {}): Data_State => ({
   name: data.name ?? "",
   id: data.id ?? 0,
@@ -25,4 +30,10 @@ export const makeStateData = (data: Partial<Data_State> = {}): Data_State => ({
   chanceByDamage: data.chanceByDamage ?? 0,
   removeByWalking: data.removeByWalking ?? false,
   stepsToRemove: data.stepsToRemove ?? 0,
+});
+
+export const makeStateSourceIdentifier = (): SourceIdentifier => ({
+  author: AUTHOR_RMMZ,
+  kind: SRC_DATA_ACTOR,
+  module: MODULE_DATA,
 });
