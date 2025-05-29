@@ -34,7 +34,7 @@ export const specialParamsToArray = (
     },
     {
       id: SPECIAL_PARAM_GRD,
-      name: specialParams.guradEffectRate,
+      name: specialParams.guardEffectRate,
     },
     {
       id: SPECIAL_PARAM_REC,
@@ -83,7 +83,7 @@ export const specialParamName = (
     case SPECIAL_PARAM_FDR:
       return labels.floorDamageRate;
     case SPECIAL_PARAM_GRD:
-      return labels.guradEffectRate;
+      return labels.guardEffectRate;
     case SPECIAL_PARAM_MCR:
       return labels.mpCostRate;
     case SPECIAL_PARAM_TCR:

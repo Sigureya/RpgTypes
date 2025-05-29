@@ -54,7 +54,7 @@ export const LABEL_SET_TRAIT = {
       format: FORMAT_PARAM_RATE_MUL,
       options: {
         targetRate: "狙われ率",
-        guradEffectRate: "防御効果率",
+        guardEffectRate: "防御効果率",
         recoveryEffectRate: "回復効果率",
         pharmacology: "薬の知識",
         mpCostRate: "MP消費率",

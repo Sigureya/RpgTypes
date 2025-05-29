@@ -112,7 +112,7 @@ describe("Test buildSpecialParamSource function", () => {
     options: {
       experienceRate: "",
       floorDamageRate: "",
-      guradEffectRate: "",
+      guardEffectRate: "",
       magicDamageRate: "",
       mpCostRate: "",
       pharmacology: "",

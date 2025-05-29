@@ -1,6 +1,6 @@
 export interface SpecialParamLabels {
   targetRate: string;
-  guradEffectRate: string;
+  guardEffectRate: string;
   recoveryEffectRate: string;
   pharmacology: string;
   mpCostRate: string;
