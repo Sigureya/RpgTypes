@@ -67,9 +67,9 @@ import {
   foldPartyAbilityOptions,
   foldSpecialParams,
   foldExtraParam,
-  foldRegularParam,
   foldSpecialFlag,
 } from "./makeOptions";
+import { foldRegularParam } from "./types/paramRegular/utils";
 
 const testSorted = (name: string, list: Data_NamedItem[]) => {
   const sortedList = [...list].sort((a, b) => a.id - b.id);

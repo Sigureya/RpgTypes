@@ -119,21 +119,6 @@ export const foldPartyAbilityOptions = (
   ];
 };
 
-export const foldRegularParam = (
-  param: RegularParamLabels
-): Data_NamedItem[] => {
-  return [
-    { id: REGULAR_PARAM_MAX_HP, name: param.maxHp },
-    { id: REGULAR_PARAM_MAX_MP, name: param.maxMp },
-    { id: REGULAR_PARAM_ATK, name: param.atk },
-    { id: REGULAR_PARAM_DEF, name: param.def },
-    { id: REGULAR_PARAM_MATK, name: param.matk },
-    { id: REGULAR_PARAM_MDEF, name: param.mdef },
-    { id: REGULAR_PARAM_AGI, name: param.agi },
-    { id: REGULAR_PARAM_LUK, name: param.luk },
-  ];
-};
-
 export const foldExtraParam = (xparam: ExtraParamLabels): Data_NamedItem[] => {
   return [
     {
