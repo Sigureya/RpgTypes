@@ -12,6 +12,17 @@ import {
   EXTRA_PARAM_TRG,
 } from "./constants";
 import type { ExtraParamLabels } from "./xparamLabels";
+import {
+  SRC_PARAMS_SPECIAL,
+  type SourceIdentifier,
+} from "@RpgTypes/schema/namedItemSource";
+import { AUTHOR_RMMZ, MODULE_TRAIT } from "@RpgTypes/namedItemSource";
+
+export const makeExtraParamSourceIdentifier = (): SourceIdentifier => ({
+  author: AUTHOR_RMMZ,
+  module: MODULE_TRAIT,
+  kind: SRC_PARAMS_SPECIAL,
+});
 
 export const foldExtraParam = (xparam: ExtraParamLabels): Data_NamedItem[] => {
   return [
