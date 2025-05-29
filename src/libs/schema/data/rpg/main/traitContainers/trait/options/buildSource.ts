@@ -14,18 +14,16 @@ import {
   SRC_PARAMS_SPECIAL,
   SRC_TRAIT_PARTY_ABILITY,
   SRC_TRAIT_SPECIAL_FLAG,
+  regularParamsToArray,
+  partyAbilityToArray,
+  collapsOptionsToArray,
+  specialFlagToArray,
 } from "@RpgTypes/schema";
 
-import {
-  foldCollapsOptions,
-  foldExtraParam,
-  foldPartyAbilityOptions,
-  foldRegularParam,
-  foldSpecialFlag,
-  foldSpecialParams,
-} from "./makeOptions";
 import type { DomainLabel } from "@RpgTypes/templates";
 import { AUTHOR_RMMZ, MODULE_TRAIT } from "@RpgTypes/namedItemSource";
+import { extraParamsToArray } from "./types/paramExtra/extraParam";
+import { specialParamsToArray } from "./types/paramSpecial/specialParam";
 
 export const traitDomain = <T>(
   sourceKey: string,
@@ -48,36 +46,36 @@ export const buildCollapsSource = (
   global: Pick<GlobalLabel, "normal">
 ): NamedItemSource => {
   return traitDomain(SRC_TRAIT_COLLAPS, labels, (col) =>
-    foldCollapsOptions(col, global)
+    collapsOptionsToArray(col, global)
   );
 };
 
 export const buildPartyAbilitySource = (
   labels: DomainLabel<PartyAbilityOptionLabels>
 ): NamedItemSource => {
-  return traitDomain(SRC_TRAIT_PARTY_ABILITY, labels, foldPartyAbilityOptions);
+  return traitDomain(SRC_TRAIT_PARTY_ABILITY, labels, partyAbilityToArray);
 };
 
 export const buildRegularParamSource = (
   label: DomainLabel<RegularParamLabels>
 ): NamedItemSource => {
-  return traitDomain(SRC_PARAMS_REGULAR, label, foldRegularParam);
+  return traitDomain(SRC_PARAMS_REGULAR, label, regularParamsToArray);
 };
 
 export const buildExtraParamSource = (
   label: DomainLabel<ExtraParamLabels>
 ): NamedItemSource => {
-  return traitDomain(SRC_PARAMS_EXTRA, label, foldExtraParam);
+  return traitDomain(SRC_PARAMS_EXTRA, label, extraParamsToArray);
 };
 
 export const buildSpecialParamSource = (
   label: DomainLabel<SpecialParamLabels>
 ): NamedItemSource => {
-  return traitDomain(SRC_PARAMS_SPECIAL, label, foldSpecialParams);
+  return traitDomain(SRC_PARAMS_SPECIAL, label, specialParamsToArray);
 };
 
 export const buildSpecialFlagSource = (
   label: DomainLabel<SpecialFlagOptions>
 ): NamedItemSource => {
-  return traitDomain(SRC_TRAIT_SPECIAL_FLAG, label, foldSpecialFlag);
+  return traitDomain(SRC_TRAIT_SPECIAL_FLAG, label, specialFlagToArray);
 };

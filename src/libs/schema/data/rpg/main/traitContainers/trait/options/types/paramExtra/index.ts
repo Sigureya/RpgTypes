@@ -1,2 +1,3 @@
 export * from "./constants";
-export * from "./xparamLabels";
+export * from "./labels";
+export * from "./extraParam";
