@@ -1,3 +1,5 @@
+export declare const FORMAT_NAME: "{name}";
+export declare const FORMAT_PARAM_VALUE: "{value}";
 export declare const LABEL_SET_TRAIT: {
     readonly domainName: "特徴";
     readonly options: {
@@ -36,7 +38,7 @@ export declare const LABEL_SET_TRAIT: {
             readonly format: "{name} * {value}%";
             readonly options: {
                 readonly targetRate: "狙われ率";
-                readonly guradEffectRate: "防御効果率";
+                readonly guardEffectRate: "防御効果率";
                 readonly recoveryEffectRate: "回復効果率";
                 readonly pharmacology: "薬の知識";
                 readonly mpCostRate: "MP消費率";

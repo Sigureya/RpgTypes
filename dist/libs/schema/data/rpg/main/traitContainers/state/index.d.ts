@@ -1,4 +1,4 @@
 export * from './state';
 export * from './stateLabels';
-export * from './make';
+export { makeStateData, makeStateSourceIdentifier } from './make';
 export * from './schema';

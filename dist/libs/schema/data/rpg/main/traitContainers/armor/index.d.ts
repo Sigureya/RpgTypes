@@ -1,4 +1,4 @@
 export * from './armor';
 export * from './armorLabels';
-export * from './make';
+export { makeArmorData, makeArmorSourceIdentifier } from './make';
 export * from './schema';

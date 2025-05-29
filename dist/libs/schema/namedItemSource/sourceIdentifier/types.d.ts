@@ -3,3 +3,7 @@ export interface SourceIdentifier {
     module: string;
     kind: string;
 }
+export interface Data_NamedItem2 {
+    id: number;
+    name: string;
+}
