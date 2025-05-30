@@ -57,7 +57,7 @@ export const resolveTraitLabels = (
     defineTraitDebuffRate(labels.debuffRate),
     defineTraitStateRate(labels.stateRate),
     defineTraitStateResist(labels.stateResist),
-    defineTraitRegularParam(labels.regularParam),
+    //    defineTraitRegularParam(labels.regularParam),
     defineTraitExtraParam(labels.extraParam),
     defineTraitSpecialParam(labels.specialParam),
     defineTraitAttackElement(labels.attackElement),
@@ -153,14 +153,6 @@ export const defineTraitStateResist = (label: Partial<RawTraitLabel>) =>
     LABEL_SET_TRAIT.options.stateResist,
     label,
     srcData(SRC_DATA_STATE)
-  );
-
-export const defineTraitRegularParam = (label: Partial<RawTraitLabel>) =>
-  defineTrait(
-    TRAIT_PARAM,
-    LABEL_SET_TRAIT.options.regularParam,
-    label,
-    srcTrait(SRC_PARAMS_REGULAR)
   );
 
 export const defineTraitExtraParam = (label: Partial<RawTraitLabel>) =>

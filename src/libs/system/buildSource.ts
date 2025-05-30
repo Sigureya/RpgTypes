@@ -1,30 +1,23 @@
-import type { NamedItemSource, SourceIdentifier } from "@RpgTypes/schema";
+import type { NamedItemSource } from "@RpgTypes/schema";
 
 import {
-  SRC_ELEMENTS,
-  SRC_WEAPON_TYPES,
-  SRC_SKILL_TYPES,
-  SRC_EQUIP_TYPES,
-  SRC_ARMOR_TYPES,
-  SRC_DATA_VARIABLE,
-} from "@RpgTypes/schema";
-
-import {
-  getArmorTypes,
   getElementTypes,
   getEquipTypes,
-  getSkillTypes,
-  getVariableNames,
   getWeaponTypes,
-} from "./data/system";
-import { AUTHOR_RMMZ, MODULE_SYSTEM } from "./constants";
-import type { Data_System, SystemLabel_DataNames } from "@RpgTypes/system";
-
-const makeSourceIdentifier = (sourceKey: string): SourceIdentifier => ({
-  author: AUTHOR_RMMZ,
-  module: MODULE_SYSTEM,
-  kind: sourceKey,
-});
+  getSkillTypes,
+  getArmorTypes,
+  getVariableNames,
+} from "./getSystemTypeNames";
+import type { Data_System } from "./system";
+import type { SystemLabel_DataNames } from "./systemLabels";
+import {
+  sourceIdSystemElements,
+  sourceIdSystemEquipTypes,
+  sourceIdSystemSkillTypes,
+  sourceIdSystemWeaponTypes,
+  sourceIdSystemArmorTypes,
+  sourceIdSystemSwitches,
+} from "./sourceId";
 
 export const buildElementTypesSource = (
   system: Pick<Data_System, "elements">,
@@ -32,7 +25,7 @@ export const buildElementTypesSource = (
 ): NamedItemSource => ({
   items: getElementTypes(system),
   label: label.elements,
-  source: makeSourceIdentifier(SRC_ELEMENTS),
+  source: sourceIdSystemElements(),
 });
 
 export const buildEquipTypesSource = (
@@ -41,7 +34,7 @@ export const buildEquipTypesSource = (
 ): NamedItemSource => ({
   items: getEquipTypes(system),
   label: label.equipTypes,
-  source: makeSourceIdentifier(SRC_EQUIP_TYPES),
+  source: sourceIdSystemEquipTypes(),
 });
 
 export const buildWeaponTypesSource = (
@@ -50,7 +43,7 @@ export const buildWeaponTypesSource = (
 ): NamedItemSource => ({
   items: getWeaponTypes(system),
   label: label.weaponTypes,
-  source: makeSourceIdentifier(SRC_WEAPON_TYPES),
+  source: sourceIdSystemWeaponTypes(),
 });
 
 export const buildSkillTypesSource = (
@@ -59,7 +52,7 @@ export const buildSkillTypesSource = (
 ): NamedItemSource => ({
   items: getSkillTypes(system),
   label: label.skillTypes,
-  source: makeSourceIdentifier(SRC_SKILL_TYPES),
+  source: sourceIdSystemSkillTypes(),
 });
 export const buildArmorTypesSource = (
   system: Pick<Data_System, "armorTypes">,
@@ -67,7 +60,7 @@ export const buildArmorTypesSource = (
 ): NamedItemSource => ({
   items: getArmorTypes(system),
   label: label.armorTypes,
-  source: makeSourceIdentifier(SRC_ARMOR_TYPES),
+  source: sourceIdSystemArmorTypes(),
 });
 
 export const buildVariableNamesSource = (
@@ -76,5 +69,5 @@ export const buildVariableNamesSource = (
 ): NamedItemSource => ({
   items: getVariableNames(system),
   label: label.variables,
-  source: makeSourceIdentifier(SRC_DATA_VARIABLE),
+  source: sourceIdSystemSwitches(),
 });

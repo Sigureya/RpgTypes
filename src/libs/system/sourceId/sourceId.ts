@@ -7,6 +7,7 @@ import {
   SRC_EQUIP_TYPES,
   SRC_SKILL_TYPES,
   SRC_SWITCHES,
+  SRC_VARIABLE,
   SRC_WEAPON_TYPES,
 } from "./constants";
 
@@ -38,6 +39,12 @@ export const sourceIdSystemSwitches = (): SourceIdentifier => ({
   author: AUTHOR_RMMZ,
   module: MODULE_SYSTEM,
   kind: SRC_SWITCHES,
+});
+
+export const sourceIdSystemVariables = (): SourceIdentifier => ({
+  author: AUTHOR_RMMZ,
+  module: MODULE_SYSTEM,
+  kind: SRC_VARIABLE,
 });
 
 export const sourceIdSystemWeaponTypes = (): SourceIdentifier => ({
