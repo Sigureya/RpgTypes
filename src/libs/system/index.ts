@@ -6,3 +6,4 @@ export * from "./options";
 export * from "./subset";
 export { makeSystemData } from "./make";
 export * from "./buildSource";
+export * from "./sourceId";
