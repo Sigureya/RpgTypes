@@ -7,7 +7,8 @@ import {
   getVariableNames,
 } from "./getSystemTypeNames";
 import type { Data_NamedItem } from "@RpgTypes/schema";
-import type { System_ParamNames, Data_System } from "@RpgTypes/system";
+import type { System_ParamNames } from "./subset";
+import type { Data_System } from "./system";
 
 const system: System_ParamNames &
   Pick<Data_System, "elements" | "variables" | "equipTypes" | "skillTypes"> = {
