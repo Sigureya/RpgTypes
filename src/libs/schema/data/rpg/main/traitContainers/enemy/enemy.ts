@@ -43,7 +43,7 @@ export const makeEnemyData = (data: Partial<Data_Enemy> = {}): Data_Enemy => ({
   actions: [],
 });
 
-export const makeEnemySourceIdentifier = (): SourceIdentifier => ({
+export const enemySourceId = (): SourceIdentifier => ({
   author: AUTHOR_RMMZ,
   module: MODULE_DATA,
   kind: SRC_DATA_ENEMY,
