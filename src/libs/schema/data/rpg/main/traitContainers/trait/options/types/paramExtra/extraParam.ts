@@ -12,16 +12,26 @@ import {
   EXTRA_PARAM_TRG,
 } from "./constants";
 import type { ExtraParamLabels } from "./labels";
+import type { NamedItemSource } from "@RpgTypes/schema/namedItemSource";
 import {
   SRC_PARAMS_SPECIAL,
   type SourceIdentifier,
 } from "@RpgTypes/schema/namedItemSource";
 import { AUTHOR_RMMZ, MODULE_TRAIT } from "@RpgTypes/namedItemSource";
+import type { TraitLabelWithOption } from "../traitLabel";
 
 export const extraParamSourceId = (): SourceIdentifier => ({
   author: AUTHOR_RMMZ,
   module: MODULE_TRAIT,
   kind: SRC_PARAMS_SPECIAL,
+});
+
+export const defineTraitRegularParam = (
+  xparam: TraitLabelWithOption<ExtraParamLabels>
+): NamedItemSource => ({
+  items: extraParamsToArray(xparam.options),
+  label: xparam.domainName,
+  source: extraParamSourceId(),
 });
 
 export const extraParamsToArray = (

@@ -18,10 +18,20 @@ import type {
 import { SRC_PARAMS_SPECIAL } from "@RpgTypes/schema/namedItemSource";
 import { AUTHOR_RMMZ, MODULE_TRAIT } from "@RpgTypes/namedItemSource";
 
+import type { NamedItemSource } from "@RpgTypes/schema/namedItemSource";
+import type { TraitLabelWithOption } from "../traitLabel";
 export const sparamSourceId = (): SourceIdentifier => ({
   author: AUTHOR_RMMZ,
   module: MODULE_TRAIT,
   kind: SRC_PARAMS_SPECIAL,
+});
+
+export const defineTraitSpecialParam = (
+  specialParam: TraitLabelWithOption<SpecialParamLabels>
+): NamedItemSource => ({
+  items: specialParamsToArray(specialParam.options),
+  label: specialParam.domainName,
+  source: sparamSourceId(),
 });
 
 export const specialParamsToArray = (
