@@ -24,7 +24,7 @@ export const makeClassData = (data: Partial<Data_Class> = {}): Data_Class => ({
   expParams: data.expParams ?? [],
 });
 
-export const makeClassSourceIdentifier = (): SourceIdentifier => ({
+export const classSourceId = (): SourceIdentifier => ({
   author: AUTHOR_RMMZ,
   module: MODULE_DATA,
   kind: SRC_DATA_CLASS,
