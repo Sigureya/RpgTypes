@@ -1,3 +1,5 @@
+export const MODULE_DATA = "data" as const;
+
 export const SRC_DATA_ACTOR = "actor" as const;
 export const SRC_DATA_MAP = "map" as const;
 export const SRC_DATA_ENEMY = "enemy" as const;
