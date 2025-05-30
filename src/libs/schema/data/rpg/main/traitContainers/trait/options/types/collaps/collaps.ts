@@ -8,6 +8,7 @@ import {
 import type { CollapsOptionLabels } from "./labels";
 import type {
   Data_NamedItem2,
+  NamedItemSource,
   SourceIdentifier,
 } from "@RpgTypes/schema/namedItemSource";
 import { SRC_TRAIT_COLLAPS } from "@RpgTypes/schema/namedItemSource";
@@ -17,6 +18,15 @@ export const collapsSourceId = (): SourceIdentifier => ({
   author: AUTHOR_RMMZ,
   module: MODULE_TRAIT,
   kind: SRC_TRAIT_COLLAPS,
+});
+
+export const defineTraitCollapseType = (
+  options: CollapsOptionLabels,
+  global: Pick<GlobalLabel, "normal">
+): NamedItemSource => ({
+  items: collapsOptionsToArray(options, global),
+  label: global.normal,
+  source: collapsSourceId(),
 });
 
 export const collapsOptionsToArray = (
