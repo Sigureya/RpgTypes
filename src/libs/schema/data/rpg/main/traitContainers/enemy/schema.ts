@@ -1,7 +1,6 @@
 import type { JSONSchemaType } from "ajv";
-import type { Data_Enemy } from "./enemy";
-import type { DropItem, Enemy_Action } from "./enemyMembers";
 import type { ParamArray, Trait } from "src/libs";
+import type { Data_Enemy, DropItem, Enemy_Action } from "./types";
 
 export const SCHEMA_DATA_ENEMY = {
   type: "object",
