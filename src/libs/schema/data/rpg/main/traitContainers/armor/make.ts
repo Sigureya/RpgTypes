@@ -1,10 +1,8 @@
-import {
-  SRC_DATA_ARMOR,
-  type SourceIdentifier,
-} from "@RpgTypes/schema/namedItemSource";
+import { type SourceIdentifier } from "@RpgTypes/schema/namedItemSource";
 
-import type { Data_Armor } from "./armor";
-import { AUTHOR_RMMZ, MODULE_DATA } from "@RpgTypes/namedItemSource";
+import type { Data_Armor } from "./types";
+import { AUTHOR_RMMZ } from "@RpgTypes/namedItemSource";
+import { SRC_DATA_ARMOR, MODULE_DATA } from "../../../sourceConstants";
 export const makeArmorData = (armor: Partial<Data_Armor> = {}): Data_Armor => ({
   id: armor.id ?? 0,
   name: armor.name ?? "",
@@ -27,7 +25,7 @@ export const makeArmorData = (armor: Partial<Data_Armor> = {}): Data_Armor => ({
   price: armor.price ?? 0,
 });
 
-export const makeArmorSourceIdentifier = (): SourceIdentifier => ({
+export const sourceIdArmor = (): SourceIdentifier => ({
   author: AUTHOR_RMMZ,
   module: MODULE_DATA,
   kind: SRC_DATA_ARMOR,
