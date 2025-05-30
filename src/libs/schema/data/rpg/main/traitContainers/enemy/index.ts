@@ -1,6 +1,5 @@
-export * from "./enemy";
+export * from "./types";
 export * from "./enemyLabels";
-export * from "./enemyMembers";
 export {
   makeDropItem,
   makeEnemyAction,
