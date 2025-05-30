@@ -1,5 +1,11 @@
-import { stateSourceId } from "@RpgTypes/schema";
-import { systemElementsSourceId } from "@RpgTypes/system";
+import { skillSourceId, stateSourceId } from "@RpgTypes/schema";
+import {
+  systemArmorTypesSourceId,
+  systemElementsSourceId,
+  systemSkillTypesSourceId,
+  systemEquipTypesSourceId,
+  systemWeaponTypesSourceId,
+} from "@RpgTypes/system";
 import {
   TRAIT_ELEMENT_RATE,
   TRAIT_DEBUFF_RATE,
@@ -52,33 +58,64 @@ export const resolveTraitLabels = (
   labels: TraitLabelSet
 ): TraitLabelResolved[] => {
   return [
-    collaps(labels.collaps),
+    elementRate(labels.elementRate),
+    debuffRate(labels.debuffRate),
+    stateRate(labels.stateRate),
+    stateResist(labels.stateResist),
+
     regularParam(labels.regularParam),
     extraParam(labels.extraParam),
     specialParam(labels.specialParam),
-    partyAbility(labels.partyAbility),
-    specialFlag(labels.specialFlag),
-    debuffRate(labels.debuffRate),
-    elementRate(labels.elementRate),
-    stateRate(labels.stateRate),
-    atttackState(labels.attackState),
     attackElement(labels.attackElement),
+    atttackState(labels.attackState),
     attackSpeed(labels.attackSpeed),
     attackTimes(labels.attackTimes),
+    attackSkill(labels.attackSkill),
+
+    skillTypeAdd(labels.skillTypeAdd),
+    skillTypeSeal(labels.skillTypeSeal),
+    skillAdd(labels.skillAdd),
+    skillSeal(labels.skillAdd),
+
     equipWeaponType(labels.equipWeaponType),
     equipArmorType(labels.equipArmorType),
     equipLock(labels.equipLock),
-    stateResist(labels.stateResist),
+    equipSeal(labels.equipSeal),
+    slotType(labels.slotType),
+
+    actionPlus(labels.actionPlus),
+    specialFlag(labels.specialFlag),
+    collaps(labels.collaps),
+    partyAbility(labels.partyAbility),
   ];
 };
 
-const collaps = (
-  label: TraitLabelWithOption<CollapsOptionLabels>
-): TraitLabelResolved => ({
+const elementRate = (label: RawTraitLabel): TraitLabelResolved => ({
   format: label.format,
   label: label.domainName,
-  code: TRAIT_COLLAPSE_TYPE,
-  dataSource: collapsSourceId(),
+  code: TRAIT_ELEMENT_RATE,
+  dataSource: systemElementsSourceId(),
+});
+
+const debuffRate = (label: RawTraitLabel): TraitLabelResolved => ({
+  format: label.format,
+  label: label.domainName,
+  code: TRAIT_DEBUFF_RATE,
+  dataSource: regularParamSourceId(),
+});
+
+const stateRate = (label: RawTraitLabel): TraitLabelResolved => ({
+  format: label.format,
+  label: label.domainName,
+  code: TRAIT_STATE_RATE,
+  dataSource: stateSourceId(),
+});
+
+const stateResist = (label: RawTraitLabel): TraitLabelResolved => ({
+  format: label.format,
+  label: label.domainName,
+  code: TRAIT_STATE_RESIST,
+  dataSource: stateSourceId(),
 });
 
 const regularParam = (
@@ -99,13 +136,114 @@ const extraParam = (
   dataSource: extraParamSourceId(),
 });
 
-const partyAbility = (
-  labels: TraitLabelWithOption<PartyAbilityOptionLabels>
+const specialParam = (
+  labels: TraitLabelWithOption<SpecialParamLabels>
 ): TraitLabelResolved => ({
   format: labels.format,
   label: labels.domainName,
-  code: TRAIT_PARTY_ABILITY,
-  dataSource: partyAbilitySourceId(),
+  code: TRAIT_SPARAM,
+  dataSource: specialParamSourceId(),
+});
+
+const attackElement = (label: RawTraitLabel): TraitLabelResolved => ({
+  format: label.format,
+  label: label.domainName,
+  code: TRAIT_ATTACK_ELEMENT,
+  dataSource: systemElementsSourceId(),
+});
+
+const atttackState = (label: RawTraitLabel): TraitLabelResolved => ({
+  format: label.format,
+  label: label.domainName,
+  code: TRAIT_ATTACK_STATE,
+  dataSource: stateSourceId(),
+});
+
+const attackSpeed = (label: RawTraitLabel): TraitLabelResolved => ({
+  format: label.format,
+  label: label.domainName,
+  code: TRAIT_ATTACK_SPEED,
+});
+
+const attackTimes = (label: RawTraitLabel): TraitLabelResolved => ({
+  format: label.format,
+  label: label.domainName,
+  code: TRAIT_ATTACK_TIMES,
+});
+
+const attackSkill = (label: RawTraitLabel): TraitLabelResolved => ({
+  format: label.format,
+  label: label.domainName,
+  code: TRAIT_ATTACK_SKILL,
+});
+
+const skillTypeAdd = (label: RawTraitLabel): TraitLabelResolved => ({
+  format: label.format,
+  label: label.domainName,
+  code: TRAIT_SKILL_TYPE_ADD,
+  dataSource: systemSkillTypesSourceId(),
+});
+
+const skillTypeSeal = (label: RawTraitLabel): TraitLabelResolved => ({
+  format: label.format,
+  label: label.domainName,
+  code: TRAIT_SKILL_TYPE_SEAL,
+  dataSource: systemSkillTypesSourceId(),
+});
+
+const skillAdd = (label: RawTraitLabel): TraitLabelResolved => ({
+  format: label.format,
+  label: label.domainName,
+  code: TRAIT_SKILL_ADD,
+  dataSource: skillSourceId(),
+});
+
+const skillSeal = (label: RawTraitLabel): TraitLabelResolved => ({
+  format: label.format,
+  label: label.domainName,
+  code: TRAIT_SKILL_SEAL,
+  dataSource: skillSourceId(),
+});
+
+const equipWeaponType = (label: RawTraitLabel): TraitLabelResolved => ({
+  format: label.format,
+  label: label.domainName,
+  code: TRAIT_EQUIP_WEAPON_TYPE,
+  dataSource: systemWeaponTypesSourceId(),
+});
+
+const equipArmorType = (label: RawTraitLabel): TraitLabelResolved => ({
+  format: label.format,
+  label: label.domainName,
+  code: TRAIT_EQUIP_ARMOR_TYPE,
+  dataSource: systemArmorTypesSourceId(),
+});
+
+const equipLock = (label: RawTraitLabel): TraitLabelResolved => ({
+  format: label.format,
+  label: label.domainName,
+  code: TRAIT_EQUIP_LOCK,
+  dataSource: systemEquipTypesSourceId(),
+});
+
+const equipSeal = (label: RawTraitLabel): TraitLabelResolved => ({
+  format: label.format,
+  label: label.domainName,
+  code: TRAIT_EQUIP_SEAL,
+  dataSource: systemEquipTypesSourceId(),
+});
+
+const slotType = (label: RawTraitLabel): TraitLabelResolved => ({
+  format: label.format,
+  label: label.domainName,
+  code: TRAIT_SLOT_TYPE,
+  dataSource: systemEquipTypesSourceId(),
+});
+
+const actionPlus = (label: RawTraitLabel): TraitLabelResolved => ({
+  format: label.format,
+  label: label.domainName,
+  code: TRAIT_ACTION_PLUS,
 });
 
 const specialFlag = (
@@ -117,92 +255,20 @@ const specialFlag = (
   dataSource: sourceIdSpecialFlag(),
 });
 
-const specialParam = (
-  labels: TraitLabelWithOption<SpecialParamLabels>
+const collaps = (
+  label: TraitLabelWithOption<CollapsOptionLabels>
+): TraitLabelResolved => ({
+  format: label.format,
+  label: label.domainName,
+  code: TRAIT_COLLAPSE_TYPE,
+  dataSource: collapsSourceId(),
+});
+
+const partyAbility = (
+  labels: TraitLabelWithOption<PartyAbilityOptionLabels>
 ): TraitLabelResolved => ({
   format: labels.format,
   label: labels.domainName,
-  code: TRAIT_SPARAM,
-  dataSource: specialParamSourceId(),
-});
-
-const debuffRate = (label: RawTraitLabel): TraitLabelResolved => ({
-  format: label.format,
-  label: label.domainName,
-  code: TRAIT_DEBUFF_RATE,
-  dataSource: regularParamSourceId(),
-});
-
-const elementRate = (label: RawTraitLabel): TraitLabelResolved => ({
-  format: label.format,
-  label: label.domainName,
-  code: TRAIT_ELEMENT_RATE,
-  dataSource: systemElementsSourceId(),
-});
-
-const stateRate = (label: RawTraitLabel): TraitLabelResolved => ({
-  format: label.format,
-  label: label.domainName,
-  code: TRAIT_STATE_RATE,
-  dataSource: stateSourceId(),
-});
-
-const stateResist = (label: RawTraitLabel): TraitLabelResolved => ({
-  format: label.format,
-  label: label.domainName,
-  code: TRAIT_STATE_RESIST,
-  dataSource: stateSourceId(),
-});
-
-const equipLock = (label: RawTraitLabel): TraitLabelResolved => ({
-  format: label.format,
-  label: label.domainName,
-  code: TRAIT_EQUIP_LOCK,
-  // dataSource: equipLockSourceId(),
-});
-
-const equipArmorType = (label: RawTraitLabel): TraitLabelResolved => ({
-  format: label.format,
-  label: label.domainName,
-  code: TRAIT_EQUIP_ARMOR_TYPE,
-  // dataSource: equipArmorTypeSourceId(),
-});
-
-const equipWeaponType = (label: RawTraitLabel): TraitLabelResolved => ({
-  format: label.format,
-  label: label.domainName,
-  code: TRAIT_EQUIP_WEAPON_TYPE,
-  //  dataSource: equipWeaponTyp
-});
-
-const atttackState = (label: RawTraitLabel): TraitLabelResolved => ({
-  format: label.format,
-  label: label.domainName,
-  code: TRAIT_ATTACK_STATE,
-  dataSource: stateSourceId(),
-});
-
-const attackSkill = (label: RawTraitLabel): TraitLabelResolved => ({
-  format: label.format,
-  label: label.domainName,
-  code: TRAIT_ATTACK_SKILL,
-});
-
-const attackSpeed = (label: RawTraitLabel): TraitLabelResolved => ({
-  format: label.format,
-  label: label.domainName,
-  code: TRAIT_ATTACK_SPEED,
-});
-
-const attackElement = (label: RawTraitLabel): TraitLabelResolved => ({
-  format: label.format,
-  label: label.domainName,
-  code: TRAIT_ATTACK_ELEMENT,
-  dataSource: systemElementsSourceId(),
-});
-
-const attackTimes = (label: RawTraitLabel): TraitLabelResolved => ({
-  format: label.format,
-  label: label.domainName,
-  code: TRAIT_ATTACK_TIMES,
+  code: TRAIT_PARTY_ABILITY,
+  dataSource: partyAbilitySourceId(),
 });
