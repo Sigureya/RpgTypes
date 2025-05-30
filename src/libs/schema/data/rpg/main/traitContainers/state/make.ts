@@ -2,8 +2,8 @@ import {
   SRC_DATA_ACTOR,
   type SourceIdentifier,
 } from "@RpgTypes/schema/namedItemSource";
-import type { Data_State } from "./state";
 import { AUTHOR_RMMZ, MODULE_DATA } from "@RpgTypes/namedItemSource";
+import type { Data_State } from "./types";
 export const makeStateData = (data: Partial<Data_State> = {}): Data_State => ({
   name: data.name ?? "",
   id: data.id ?? 0,

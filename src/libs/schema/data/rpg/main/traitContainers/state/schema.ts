@@ -1,5 +1,5 @@
-import type { Data_State } from "./state";
 import type { JSONSchemaType } from "ajv";
+import type { Data_State } from "./types";
 
 export const SCHEMA_DATA_STATE = {
   type: "object",
