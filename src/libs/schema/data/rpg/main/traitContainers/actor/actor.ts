@@ -21,7 +21,7 @@ export const makeActorData = (actor: Partial<Data_Actor> = {}): Data_Actor => ({
   maxLevel: actor.maxLevel ?? 0,
 });
 
-export const makeActorSourceIdentifier = (): SourceIdentifier => ({
+export const actorSourceId = (): SourceIdentifier => ({
   author: AUTHOR_RMMZ,
   module: MODULE_DATA,
   kind: SRC_DATA_ACTOR,

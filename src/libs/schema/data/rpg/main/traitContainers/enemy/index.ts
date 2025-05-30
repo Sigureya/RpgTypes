@@ -1,9 +1,8 @@
 export * from "./types";
-export * from "./enemyLabels";
 export {
   makeDropItem,
   makeEnemyAction,
   makeEnemyData,
-  makeEnemySourceIdentifier,
-} from "./make";
+  enemySourceId,
+} from "./enemy";
 export { SCHEMA_DATA_ENEMY } from "./schema";
