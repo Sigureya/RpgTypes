@@ -12,7 +12,7 @@ import type { Data_System } from "./system";
 import type { SystemLabel_DataNames } from "./systemLabels";
 import {
   systemElementsSourceId,
-  equipTypesSourceIdSystem,
+  systemEquipTypesSourceId,
   systemSkillTypesSourceId,
   systemWeaponTypesSourceId,
   systemArmorTypesSourceId,
@@ -34,7 +34,7 @@ export const buildEquipTypesSource = (
 ): NamedItemSource => ({
   items: getEquipTypes(system),
   label: label.equipTypes,
-  source: equipTypesSourceIdSystem(),
+  source: systemEquipTypesSourceId(),
 });
 
 export const buildWeaponTypesSource = (
