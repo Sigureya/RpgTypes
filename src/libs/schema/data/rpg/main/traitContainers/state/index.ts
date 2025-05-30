@@ -1,3 +1,3 @@
 export * from "./types";
-export { makeStateData, makeStateSourceIdentifier } from "./make";
+export { makeStateData, stateSourceId } from "./state";
 export * from "./schema";

@@ -11,43 +11,43 @@ import {
   SRC_WEAPON_TYPES,
 } from "./constants";
 
-export const sourceIdSystemElements = (): SourceIdentifier => ({
+export const systemElementsSourceId = (): SourceIdentifier => ({
   author: AUTHOR_RMMZ,
   module: MODULE_SYSTEM,
   kind: SRC_ELEMENTS,
 });
 
-export const sourceIdSystemArmorTypes = (): SourceIdentifier => ({
+export const systemArmorTypesSourceId = (): SourceIdentifier => ({
   author: AUTHOR_RMMZ,
   module: MODULE_SYSTEM,
   kind: SRC_ARMOR_TYPES,
 });
 
-export const sourceIdSystemEquipTypes = (): SourceIdentifier => ({
+export const systemEquipTypesSourceId = (): SourceIdentifier => ({
   author: AUTHOR_RMMZ,
   module: MODULE_SYSTEM,
   kind: SRC_EQUIP_TYPES,
 });
 
-export const sourceIdSystemSkillTypes = (): SourceIdentifier => ({
+export const systemSkillTypesSourceId = (): SourceIdentifier => ({
   author: AUTHOR_RMMZ,
   module: MODULE_SYSTEM,
   kind: SRC_SKILL_TYPES,
 });
 
-export const sourceIdSystemSwitches = (): SourceIdentifier => ({
+export const systemSwitchesSourceId = (): SourceIdentifier => ({
   author: AUTHOR_RMMZ,
   module: MODULE_SYSTEM,
   kind: SRC_SWITCHES,
 });
 
-export const sourceIdSystemVariables = (): SourceIdentifier => ({
+export const systemVariablesSourceId = (): SourceIdentifier => ({
   author: AUTHOR_RMMZ,
   module: MODULE_SYSTEM,
   kind: SRC_VARIABLE,
 });
 
-export const sourceIdSystemWeaponTypes = (): SourceIdentifier => ({
+export const systemWeaponTypesSourceId = (): SourceIdentifier => ({
   author: AUTHOR_RMMZ,
   module: MODULE_SYSTEM,
   kind: SRC_WEAPON_TYPES,
