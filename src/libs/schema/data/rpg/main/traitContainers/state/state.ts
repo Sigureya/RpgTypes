@@ -1,9 +1,8 @@
-import {
-  SRC_DATA_ACTOR,
-  type SourceIdentifier,
-} from "@RpgTypes/schema/namedItemSource";
-import { AUTHOR_RMMZ, MODULE_DATA } from "@RpgTypes/namedItemSource";
+import type { SourceIdentifier } from "@RpgTypes/schema/namedItemSource";
+import { AUTHOR_RMMZ } from "@RpgTypes/namedItemSource";
 import type { Data_State } from "./types";
+import { SRC_DATA_STATE, MODULE_DATA } from "../../../sourceConstants";
+
 export const makeStateData = (data: Partial<Data_State> = {}): Data_State => ({
   name: data.name ?? "",
   id: data.id ?? 0,
@@ -35,5 +34,5 @@ export const makeStateData = (data: Partial<Data_State> = {}): Data_State => ({
 export const stateSourceId = (): SourceIdentifier => ({
   author: AUTHOR_RMMZ,
   module: MODULE_DATA,
-  kind: SRC_DATA_ACTOR,
+  kind: SRC_DATA_STATE,
 });
