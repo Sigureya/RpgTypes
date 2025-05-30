@@ -11,12 +11,12 @@ import {
 import type { Data_System } from "./system";
 import type { SystemLabel_DataNames } from "./systemLabels";
 import {
-  sourceIdSystemElements,
-  sourceIdSystemEquipTypes,
-  sourceIdSystemSkillTypes,
-  sourceIdSystemWeaponTypes,
-  sourceIdSystemArmorTypes,
-  sourceIdSystemSwitches,
+  systemElementsSourceId,
+  equipTypesSourceIdSystem,
+  systemSkillTypesSourceId,
+  systemWeaponTypesSourceId,
+  systemArmorTypesSourceId,
+  systemSwitchesSourceId,
 } from "./sourceId";
 
 export const buildElementTypesSource = (
@@ -25,7 +25,7 @@ export const buildElementTypesSource = (
 ): NamedItemSource => ({
   items: getElementTypes(system),
   label: label.elements,
-  source: sourceIdSystemElements(),
+  source: systemElementsSourceId(),
 });
 
 export const buildEquipTypesSource = (
@@ -34,7 +34,7 @@ export const buildEquipTypesSource = (
 ): NamedItemSource => ({
   items: getEquipTypes(system),
   label: label.equipTypes,
-  source: sourceIdSystemEquipTypes(),
+  source: equipTypesSourceIdSystem(),
 });
 
 export const buildWeaponTypesSource = (
@@ -43,7 +43,7 @@ export const buildWeaponTypesSource = (
 ): NamedItemSource => ({
   items: getWeaponTypes(system),
   label: label.weaponTypes,
-  source: sourceIdSystemWeaponTypes(),
+  source: systemWeaponTypesSourceId(),
 });
 
 export const buildSkillTypesSource = (
@@ -52,7 +52,7 @@ export const buildSkillTypesSource = (
 ): NamedItemSource => ({
   items: getSkillTypes(system),
   label: label.skillTypes,
-  source: sourceIdSystemSkillTypes(),
+  source: systemSkillTypesSourceId(),
 });
 export const buildArmorTypesSource = (
   system: Pick<Data_System, "armorTypes">,
@@ -60,7 +60,7 @@ export const buildArmorTypesSource = (
 ): NamedItemSource => ({
   items: getArmorTypes(system),
   label: label.armorTypes,
-  source: sourceIdSystemArmorTypes(),
+  source: systemArmorTypesSourceId(),
 });
 
 export const buildVariableNamesSource = (
@@ -69,5 +69,5 @@ export const buildVariableNamesSource = (
 ): NamedItemSource => ({
   items: getVariableNames(system),
   label: label.variables,
-  source: sourceIdSystemSwitches(),
+  source: systemSwitchesSourceId(),
 });
