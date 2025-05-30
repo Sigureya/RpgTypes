@@ -23,7 +23,7 @@ export const systemArmorTypesSourceId = (): SourceIdentifier => ({
   kind: SRC_ARMOR_TYPES,
 });
 
-export const equipTypesSourceIdSystem = (): SourceIdentifier => ({
+export const systemEquipTypesSourceId = (): SourceIdentifier => ({
   author: AUTHOR_RMMZ,
   module: MODULE_SYSTEM,
   kind: SRC_EQUIP_TYPES,
