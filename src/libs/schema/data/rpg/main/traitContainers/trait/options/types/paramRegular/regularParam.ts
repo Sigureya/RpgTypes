@@ -17,7 +17,7 @@ import { SRC_PARAMS_REGULAR } from "@RpgTypes/schema/namedItemSource";
 import type { NamedItemSource } from "@RpgTypes/schema/namedItemSource";
 import type { TraitLabelWithOption } from "../traitLabel";
 
-export const regularParamSourceId = (): SourceIdentifier => ({
+export const sourceIdRegularParam = (): SourceIdentifier => ({
   author: AUTHOR_RMMZ,
   module: MODULE_TRAIT,
   kind: SRC_PARAMS_REGULAR,
@@ -28,7 +28,7 @@ export const defineTraitRegularParam = (
 ): NamedItemSource => ({
   items: regularParamsToArray(param.options),
   label: param.domainName,
-  source: regularParamSourceId(),
+  source: sourceIdRegularParam(),
 });
 
 export const regularParamsToArray = (

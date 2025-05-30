@@ -14,7 +14,7 @@ import {
   type SourceIdentifier,
 } from "@RpgTypes/schema/namedItemSource";
 
-export const partyAbilitySourceId = (): SourceIdentifier => ({
+export const sourceIdPartyAbility = (): SourceIdentifier => ({
   author: AUTHOR_RMMZ,
   module: MODULE_TRAIT,
   kind: SRC_TRAIT_PARTY_ABILITY,

@@ -12,7 +12,7 @@ import {
 } from "@RpgTypes/schema/namedItemSource";
 import { AUTHOR_RMMZ, MODULE_TRAIT } from "@RpgTypes/namedItemSource";
 
-export const specialFlagSourceId = (): SourceIdentifier => ({
+export const sourceIdSpecialFlag = (): SourceIdentifier => ({
   author: AUTHOR_RMMZ,
   module: MODULE_TRAIT,
   kind: SRC_TRAIT_SPECIAL_FLAG,
