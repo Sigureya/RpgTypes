@@ -15,21 +15,21 @@ import type { SpecialParamLabels } from "./labels";
 import { specialParamsToArray, specialParamName } from "./specialParam";
 import type { Data_NamedItem2 } from "@RpgTypes/schema/namedItemSource";
 
-describe("specialParamsToArray", () => {
-  const specialParams: SpecialParamLabels = {
-    targetRate: "Target Rate",
-    guardEffectRate: "Guard Effect Rate",
-    recoveryEffectRate: "Recovery Effect Rate",
-    pharmacology: "Pharmacology",
-    mpCostRate: "MP Cost Rate",
-    tpChargeRate: "TP Charge Rate",
-    physicalDamageRate: "Physical Damage Rate",
-    magicDamageRate: "Magic Damage Rate",
-    floorDamageRate: "Floor Damage Rate",
-    experienceRate: "Experience Rate",
-  };
+const mockLabels = Object.freeze({
+  targetRate: "Target Rate",
+  guardEffectRate: "Guard Effect Rate",
+  recoveryEffectRate: "Recovery Effect Rate",
+  pharmacology: "Pharmacology",
+  mpCostRate: "MP Cost Rate",
+  tpChargeRate: "TP Charge Rate",
+  physicalDamageRate: "Physical Damage Rate",
+  magicDamageRate: "Magic Damage Rate",
+  floorDamageRate: "Floor Damage Rate",
+  experienceRate: "EXP Rate",
+} satisfies SpecialParamLabels);
 
-  const result = specialParamsToArray(specialParams);
+describe("specialParamsToArray", () => {
+  const result = specialParamsToArray(mockLabels);
   test("should return correct special parameter options", () => {
     const expected: Data_NamedItem2[] = [
       { id: SPECIAL_PARAM_TGR, name: "Target Rate" },
@@ -41,7 +41,7 @@ describe("specialParamsToArray", () => {
       { id: SPECIAL_PARAM_PDR, name: "Physical Damage Rate" },
       { id: SPECIAL_PARAM_MDR, name: "Magic Damage Rate" },
       { id: SPECIAL_PARAM_FDR, name: "Floor Damage Rate" },
-      { id: SPECIAL_PARAM_EXR, name: "Experience Rate" },
+      { id: SPECIAL_PARAM_EXR, name: "EXP Rate" },
     ];
 
     expect(result).toEqual(expected);
@@ -53,33 +53,40 @@ describe("specialParamsToArray", () => {
 });
 
 describe("specialParamName", () => {
-  const labels: SpecialParamLabels = {
-    experienceRate: "EXP Rate",
-    targetRate: "Target Rate",
-    floorDamageRate: "Floor Damage",
-    guardEffectRate: "Guard Effect",
-    mpCostRate: "MP Cost",
-    tpChargeRate: "TP Charge",
-    physicalDamageRate: "Physical Damage",
-    magicDamageRate: "Magic Damage",
-    pharmacology: "Pharmacology",
-    recoveryEffectRate: "Recovery Effect",
-  };
-
   test("should return correct label for special parameters", () => {
-    expect(specialParamName(SPECIAL_PARAM_EXR, labels)).toBe("EXP Rate");
-    expect(specialParamName(SPECIAL_PARAM_TGR, labels)).toBe("Target Rate");
-    expect(specialParamName(SPECIAL_PARAM_FDR, labels)).toBe("Floor Damage");
-    expect(specialParamName(SPECIAL_PARAM_GRD, labels)).toBe("Guard Effect");
-    expect(specialParamName(SPECIAL_PARAM_MCR, labels)).toBe("MP Cost");
-    expect(specialParamName(SPECIAL_PARAM_TCR, labels)).toBe("TP Charge");
-    expect(specialParamName(SPECIAL_PARAM_PDR, labels)).toBe("Physical Damage");
-    expect(specialParamName(SPECIAL_PARAM_MDR, labels)).toBe("Magic Damage");
-    expect(specialParamName(SPECIAL_PARAM_PHA, labels)).toBe("Pharmacology");
-    expect(specialParamName(SPECIAL_PARAM_REC, labels)).toBe("Recovery Effect");
+    expect(specialParamName(SPECIAL_PARAM_EXR, mockLabels)).toBe(
+      mockLabels.experienceRate
+    );
+    expect(specialParamName(SPECIAL_PARAM_TGR, mockLabels)).toBe(
+      mockLabels.targetRate
+    );
+    expect(specialParamName(SPECIAL_PARAM_FDR, mockLabels)).toBe(
+      mockLabels.floorDamageRate
+    );
+    expect(specialParamName(SPECIAL_PARAM_GRD, mockLabels)).toBe(
+      mockLabels.guardEffectRate
+    );
+    expect(specialParamName(SPECIAL_PARAM_MCR, mockLabels)).toBe(
+      mockLabels.mpCostRate
+    );
+    expect(specialParamName(SPECIAL_PARAM_TCR, mockLabels)).toBe(
+      mockLabels.tpChargeRate
+    );
+    expect(specialParamName(SPECIAL_PARAM_PDR, mockLabels)).toBe(
+      mockLabels.physicalDamageRate
+    );
+    expect(specialParamName(SPECIAL_PARAM_MDR, mockLabels)).toBe(
+      mockLabels.magicDamageRate
+    );
+    expect(specialParamName(SPECIAL_PARAM_PHA, mockLabels)).toBe(
+      mockLabels.pharmacology
+    );
+    expect(specialParamName(SPECIAL_PARAM_REC, mockLabels)).toBe(
+      mockLabels.recoveryEffectRate
+    );
   });
 
   test("should return fallback string for unknown parameter index", () => {
-    expect(specialParamName(999, labels)).toBe("?sparams[999]");
+    expect(specialParamName(999, mockLabels)).toBe("?sparams[999]");
   });
 });
