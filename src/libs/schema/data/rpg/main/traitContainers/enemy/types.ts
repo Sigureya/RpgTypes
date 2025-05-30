@@ -28,3 +28,9 @@ export interface DropItem {
   denominator: number;
   kind: number;
 }
+export interface EnemyLabels {
+  dropItems: string;
+  battlerHue: string;
+  battlerName: string;
+  gold: string;
+}
