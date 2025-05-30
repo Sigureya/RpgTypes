@@ -1,5 +1,5 @@
 import { SRC_DATA_ACTOR } from "@RpgTypes/schema/data/rpg/sourceConstants";
-import type { Data_Actor } from "./actor";
+import type { Data_Actor } from "./types";
 import { AUTHOR_RMMZ, MODULE_DATA } from "@RpgTypes/namedItemSource";
 import type { SourceIdentifier } from "@RpgTypes/schema/namedItemSource";
 
