@@ -20,7 +20,7 @@ import {
 import { AUTHOR_RMMZ, MODULE_TRAIT } from "@RpgTypes/namedItemSource";
 import type { TraitLabelWithOption } from "../traitLabel";
 
-export const extraParamSourceId = (): SourceIdentifier => ({
+export const sourceIdExtraParam = (): SourceIdentifier => ({
   author: AUTHOR_RMMZ,
   module: MODULE_TRAIT,
   kind: SRC_PARAMS_SPECIAL,
@@ -31,7 +31,7 @@ export const defineTraitExtraParam = (
 ): NamedItemSource => ({
   items: extraParamsToArray(xparam.options),
   label: xparam.domainName,
-  source: extraParamSourceId(),
+  source: sourceIdExtraParam(),
 });
 
 export const extraParamsToArray = (
