@@ -26,7 +26,7 @@ export const extraParamSourceId = (): SourceIdentifier => ({
   kind: SRC_PARAMS_SPECIAL,
 });
 
-export const defineTraitRegularParam = (
+export const defineTraitExtraParam = (
   xparam: TraitLabelWithOption<ExtraParamLabels>
 ): NamedItemSource => ({
   items: extraParamsToArray(xparam.options),
