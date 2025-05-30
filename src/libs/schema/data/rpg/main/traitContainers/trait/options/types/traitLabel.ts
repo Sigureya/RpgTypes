@@ -11,12 +11,6 @@ export interface TraitLabelWithOption<T> extends RawTraitLabel {
   options: T;
 }
 
-export interface PartialTraitLabel<T> {
-  domainName?: string;
-  format?: string;
-  options?: T;
-}
-
 export interface TraitLabelResolved {
   code: number;
   label: string;
