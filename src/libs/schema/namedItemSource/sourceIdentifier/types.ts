@@ -8,3 +8,9 @@ export interface Data_NamedItem2 {
   id: number; // 一意の識別子
   name: string; // 名前
 }
+
+export interface NamedItemSource {
+  items: Data_NamedItem2[];
+  source: SourceIdentifier;
+  label: string;
+}
