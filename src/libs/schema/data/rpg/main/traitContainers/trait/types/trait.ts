@@ -11,9 +11,9 @@ export interface Data_TraitContainer {
   note: string;
 }
 
-export interface TraitDescriptor {
+export interface TraitLabelResolved {
   format: string;
   code: number;
   label: string;
-  dataSource: SourceIdentifier;
+  dataSource?: SourceIdentifier;
 }
