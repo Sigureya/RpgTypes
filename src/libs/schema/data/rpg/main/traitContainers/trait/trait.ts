@@ -42,7 +42,6 @@ import type {
   SpecialFlagOptions,
   SpecialParamLabels,
   RawTraitLabel,
-  TraitLabelResolved,
   ExtraParamLabels,
 } from "./options";
 import {
@@ -53,6 +52,7 @@ import {
   specialParamSourceId,
   extraParamSourceId,
 } from "./options";
+import type { TraitLabelResolved } from "./types";
 
 export const resolveTraitLabels = (
   labels: TraitLabelSet
