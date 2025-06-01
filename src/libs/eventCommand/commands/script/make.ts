@@ -1,5 +1,5 @@
 import type { Command_ScriptBody, Command_ScriptHeader } from "./types";
-import { SCRIPT_EVAL, SCRIPT_EVAL_BODY } from "@RpgTypes/schema";
+import { SCRIPT_EVAL, SCRIPT_EVAL_BODY } from "src/rpg";
 
 export const makeCommandScriptHeader = (
   script: string,

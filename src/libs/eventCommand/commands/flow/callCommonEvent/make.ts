@@ -1,4 +1,4 @@
-import { COMMON_EVENT } from "@RpgTypes/schema";
+import { COMMON_EVENT } from "src/rpg";
 import type { Command_CommonEvent, ParamObject_CommonEvent } from "./types";
 import type { ParamArray_CommonEvent } from "./types";
 

@@ -3,7 +3,7 @@ import type {
   ParamArray_ControlSwitches,
   Paramobject_ControlSwitches,
 } from "./types";
-import { CONTROL_SWITCHES } from "@RpgTypes/schema";
+import { CONTROL_SWITCHES } from "src/rpg";
 
 export const fromArrayControlSwitches = (
   param: ParamArray_ControlSwitches

@@ -12,7 +12,7 @@ import type {
   ParamObject_ChangeActorProfile,
 } from "./types";
 import type { Command_ChangeActorProfile } from "./types";
-import { CHANGE_NAME, CHANGE_NICKNAME, CHANGE_PROFILE } from "@RpgTypes/schema";
+import { CHANGE_NAME, CHANGE_NICKNAME, CHANGE_PROFILE } from "src/rpg";
 
 describe("makeCommandChangeActorName", () => {
   test("should create a command to change actor name", () => {

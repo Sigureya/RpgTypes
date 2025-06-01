@@ -17,7 +17,7 @@ import {
   CHANGE_DEFEAT_ME,
   CHANGE_VICTORY_ME,
   CHANGE_BATTLE_BGM,
-} from "@RpgTypes/schema";
+} from "src/rpg";
 
 export const makeAudioCommand = <Code extends CommandUnion_AnyAudio["code"]>(
   code: Code,

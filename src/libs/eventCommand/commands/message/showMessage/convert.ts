@@ -4,7 +4,7 @@ import type {
   ParamArray_ShowMessage,
   ParamObject_ShowMessage,
 } from "./types";
-import { SHOW_MESSAGE, SHOW_MESSAGE_BODY } from "@RpgTypes/schema";
+import { SHOW_MESSAGE, SHOW_MESSAGE_BODY } from "src/rpg";
 
 export const makeCommandShowMessage = (
   param: Partial<ParamObject_ShowMessage> | undefined,

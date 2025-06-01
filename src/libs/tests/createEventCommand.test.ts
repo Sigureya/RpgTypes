@@ -1,11 +1,10 @@
-import { createEventCommand, showMessage } from "./createEventCommand";
 import type {
   EventCode,
   EventCodeTable,
-  EventCommand,
   EventCommandParameters,
   EventCommandTable,
-} from "../";
+} from "@RpgTypes/rpg";
+import { createEventCommand, showMessage } from "./createEventCommand";
 import { describe, expect, it } from "vitest";
 describe("createEventCommand", () => {
   it("should create a SHOW_MESSAGE command", () => {
