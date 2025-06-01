@@ -1,4 +1,4 @@
-import { EventCode, EventCommand, EventCommandByCode, EventCommandTable } from '../';
+import { EventCode, EventCommand, EventCommandByCode, EventCommandTable } from '../rpg';
 export declare const createEventCommand: <Code extends EventCode>(code: Code, params: EventCommandByCode[Code]["parameters"], indent?: number) => {
     code: Code;
     parameters: EventCommandByCode[Code]["parameters"];

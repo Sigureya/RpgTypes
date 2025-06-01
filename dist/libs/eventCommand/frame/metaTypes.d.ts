@@ -1,4 +1,4 @@
-import { EventCommand, EventCode } from '../../schema';
+import { EventCommand, EventCode } from '../../rpg';
 export type ExtractCommandByParam<P extends unknown[], Commands = EventCommand> = Extract<Commands, {
     parameters: P;
 }>;
