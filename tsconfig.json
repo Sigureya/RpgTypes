@@ -13,7 +13,8 @@
     "emitDeclarationOnly": true,
     "baseUrl": "./",
     "paths": {
-      "@RpgTypes/*": ["src/libs/*"]
+      "@RpgTypes/*": ["src/libs/*"],
+      "src/rpg": ["src/libs/schema/data/rpg"]
     }
   },
   "include": ["src/**/*"],

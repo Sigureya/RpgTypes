@@ -1,4 +1,6 @@
 import type { Data_NamedItem2, SourceIdentifier } from "@RpgTypes/schema";
+
+import { MODULE_TRAIT, SRC_PARAMS_REGULAR } from "src/rpg";
 import {
   REGULAR_PARAM_MAX_HP,
   REGULAR_PARAM_MAX_MP,
@@ -10,9 +12,7 @@ import {
   REGULAR_PARAM_LUK,
 } from "./constants";
 import type { RegularParamLabels } from "./labels";
-import { AUTHOR_RMMZ, MODULE_TRAIT } from "@RpgTypes/namedItemSource";
-
-import { SRC_PARAMS_REGULAR } from "@RpgTypes/schema/namedItemSource";
+import { AUTHOR_RMMZ } from "@RpgTypes/namedItemSource";
 
 import type { NamedItemSource } from "@RpgTypes/schema/namedItemSource";
 import type { TraitLabelWithOption } from "../traitLabel";

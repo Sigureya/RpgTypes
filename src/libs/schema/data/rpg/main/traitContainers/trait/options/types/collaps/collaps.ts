@@ -11,8 +11,8 @@ import type {
   NamedItemSource,
   SourceIdentifier,
 } from "@RpgTypes/schema/namedItemSource";
-import { SRC_TRAIT_COLLAPS } from "@RpgTypes/schema/namedItemSource";
-import { AUTHOR_RMMZ, MODULE_TRAIT } from "@RpgTypes/namedItemSource";
+import { AUTHOR_RMMZ } from "@RpgTypes/namedItemSource";
+import { MODULE_TRAIT, SRC_TRAIT_COLLAPS } from "src/rpg";
 
 export const collapsSourceId = (): SourceIdentifier => ({
   author: AUTHOR_RMMZ,

@@ -13,13 +13,13 @@ import {
 import type { SpecialParamLabels } from "./labels";
 import type {
   Data_NamedItem2,
+  NamedItemSource,
   SourceIdentifier,
 } from "@RpgTypes/schema/namedItemSource";
-import { SRC_PARAMS_SPECIAL } from "@RpgTypes/schema/namedItemSource";
-import { AUTHOR_RMMZ, MODULE_TRAIT } from "@RpgTypes/namedItemSource";
 
-import type { NamedItemSource } from "@RpgTypes/schema/namedItemSource";
+import { MODULE_TRAIT, SRC_PARAMS_SPECIAL } from "src/rpg";
 import type { TraitLabelWithOption } from "../traitLabel";
+import { AUTHOR_RMMZ } from "@RpgTypes/namedItemSource";
 
 export const specialParamSourceId = (): SourceIdentifier => ({
   author: AUTHOR_RMMZ,

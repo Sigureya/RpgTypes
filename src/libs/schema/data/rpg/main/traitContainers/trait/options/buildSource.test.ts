@@ -16,7 +16,7 @@ import {
 } from "./buildSource";
 
 import type { NamedItemSource } from "@RpgTypes/schema";
-import { MODULE_TRAIT } from "@RpgTypes/namedItemSource";
+import { MODULE_TRAIT } from "src/rpg";
 
 // Renamed test helper function for clarity
 const validateNamedItemSourceStructure = (source: NamedItemSource) => {
