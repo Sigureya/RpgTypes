@@ -1,4 +1,4 @@
-import type { GlobalLabel } from "@RpgTypes/schema/labelUtils";
+import type { GlobalLabel } from "@RpgTypes/rpg/labels";
 import { describe, expect, test } from "vitest";
 import {
   COLLAPS_NORMAL,

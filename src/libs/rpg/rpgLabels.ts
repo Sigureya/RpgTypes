@@ -1,9 +1,9 @@
 import type { DomainLabel } from "@RpgTypes/templates";
 import type {
-  DamageLabels,
   DataLabels,
-  ItemEffectLabelSet,
   TraitLabelSet,
+  ItemEffectLabelSet,
+  DamageLabels,
 } from "./data";
 
 export interface RpgLabels {

@@ -1,4 +1,4 @@
-import type { GlobalLabel } from "@RpgTypes/schema/labelUtils";
+import type { GlobalLabel } from "@RpgTypes/rpg/labels";
 import {
   COLLAPS_NORMAL,
   COLLAPS_BOSS,
