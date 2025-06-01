@@ -1,10 +1,8 @@
-import {
-  SRC_DATA_CLASS,
-  type SourceIdentifier,
-} from "@RpgTypes/schema/namedItemSource";
+import { type SourceIdentifier } from "@RpgTypes/schema/namedItemSource";
 import type { Data_Class } from "./types";
-import { AUTHOR_RMMZ, MODULE_DATA } from "@RpgTypes/namedItemSource";
 
+import { MODULE_DATA, SRC_DATA_CLASS } from "src/rpg";
+import { AUTHOR_RMMZ } from "@RpgTypes/namedItemSource";
 export const makeClassData = (data: Partial<Data_Class> = {}): Data_Class => ({
   name: data.name ?? "",
   id: data.id ?? 0,

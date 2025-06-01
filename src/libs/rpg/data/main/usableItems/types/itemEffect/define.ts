@@ -1,10 +1,12 @@
-import { MODULE_TRAIT, SRC_PARAMS_REGULAR } from "src/rpg";
 import type { SourceIdentifier } from "@RpgTypes/schema/namedItemSource";
 import {
+  MODULE_DATA,
+  MODULE_TRAIT,
   SRC_DATA_COMMON_EVNET,
   SRC_DATA_SKILL,
   SRC_DATA_STATE,
-} from "@RpgTypes/schema/namedItemSource";
+  SRC_PARAMS_REGULAR,
+} from "src/rpg";
 import {
   EFFECT_ADD_STATE,
   EFFECT_GROW,
@@ -26,7 +28,7 @@ import type {
   ItemEffectLabelSet,
 } from "./labels";
 import { LABEL_SET_ITEM_EFFECT } from "./labels";
-import { AUTHOR_RMMZ, MODULE_DATA } from "@RpgTypes/namedItemSource/";
+import { AUTHOR_RMMZ } from "@RpgTypes/namedItemSource/";
 import { ItemEffectDescriptor } from "./itemEffectDescriptor";
 import type { DomainLabel } from "@RpgTypes/templates";
 /**

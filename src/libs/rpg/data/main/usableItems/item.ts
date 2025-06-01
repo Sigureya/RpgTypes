@@ -1,6 +1,6 @@
-import { AUTHOR_RMMZ, MODULE_DATA } from "@RpgTypes/namedItemSource";
+import { AUTHOR_RMMZ } from "@RpgTypes/namedItemSource";
 import type { SourceIdentifier } from "@RpgTypes/schema";
-import { SRC_DATA_ITEMS } from "@RpgTypes/schema";
+import { SRC_DATA_ITEMS, MODULE_DATA } from "src/rpg";
 import type { Data_Item } from "./types";
 import { makeDamage } from "../members";
 
