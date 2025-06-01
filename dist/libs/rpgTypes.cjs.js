@@ -434,14 +434,14 @@ const SCHEMA_SYSTEM_IMAGE_SIZE = {
     iconSize: { type: "integer", minimum: 0 }
   }
 };
-const ajv$1 = new Ajv({ strict: false });
-ajv$1.compile(SCHEMA_SYSTEM_BOOLEAN_OPTIONS);
-const testBattler = ajv$1.compile(SCHEMA_SYSTEM_TEST_BATTLER);
+const ajv$3 = new Ajv({ strict: false });
+ajv$3.compile(SCHEMA_SYSTEM_BOOLEAN_OPTIONS);
+const testBattler = ajv$3.compile(SCHEMA_SYSTEM_TEST_BATTLER);
 const isTestBattler = (data) => {
   return testBattler(data);
 };
-ajv$1.compile(SCHEMA_SYSTEM_MEMBERS_ATTACK_MOTION);
-const imageSize = ajv$1.compile(SCHEMA_SYSTEM_IMAGE_SIZE);
+ajv$3.compile(SCHEMA_SYSTEM_MEMBERS_ATTACK_MOTION);
+const imageSize = ajv$3.compile(SCHEMA_SYSTEM_IMAGE_SIZE);
 const isImageSize = (data) => {
   return imageSize(data);
 };
@@ -593,7 +593,7 @@ const mergeNestedPrimitiveRecords = (base, override) => {
   return result;
 };
 const AUTHOR_RMMZ = "rmmz";
-const MODULE_DATA = "data";
+const MODULE_DATA$1 = "data";
 const MODULE_SYSTEM$1 = "system";
 const MODULE_SYSTEM = "system";
 const SRC_WEAPON_TYPES$1 = "weaponTypes";
@@ -716,14 +716,14 @@ const joinSourceKey = (key) => {
 const isValid = (source) => {
   return testUnknonwKey(source.author) && testUnknonwKey(source.module) && testUnknonwKey(source.kind);
 };
-const SRC_DATA_ACTOR = "actor";
+const SRC_DATA_ACTOR$1 = "actor";
 const SRC_DATA_MAP = "map";
 const SRC_DATA_ENEMY = "enemy";
-const SRC_DATA_STATE = "state";
-const SRC_DATA_SKILL = "skill";
+const SRC_DATA_STATE$1 = "state";
+const SRC_DATA_SKILL$1 = "skill";
 const SRC_DATA_ITEMS = "items";
 const SRC_DATA_WEAPON = "weapon";
-const SRC_DATA_ARMOR = "armor";
+const SRC_DATA_ARMOR$1 = "armor";
 const SRC_DATA_CLASS = "class";
 const SRC_DATA_COMMON_EVNET = "common_event";
 const SRC_DATA_TROOP = "troop";
@@ -735,6 +735,42 @@ const SRC_SKILL_TYPES = "skillTypes";
 const SRC_ELEMENTS = "elements";
 const SRC_VARIABLE = "variables";
 const SRC_SWITCHES = "switches";
+const TRAIT_ELEMENT_RATE = 11;
+const TRAIT_DEBUFF_RATE = 12;
+const TRAIT_STATE_RATE = 13;
+const TRAIT_STATE_RESIST = 14;
+const TRAIT_PARAM = 21;
+const TRAIT_XPARAM = 22;
+const TRAIT_SPARAM = 23;
+const TRAIT_ATTACK_ELEMENT = 31;
+const TRAIT_ATTACK_STATE = 32;
+const TRAIT_ATTACK_SPEED = 33;
+const TRAIT_ATTACK_TIMES = 34;
+const TRAIT_ATTACK_SKILL = 35;
+const TRAIT_SKILL_TYPE_ADD = 41;
+const TRAIT_SKILL_TYPE_SEAL = 42;
+const TRAIT_SKILL_ADD = 43;
+const TRAIT_SKILL_SEAL = 44;
+const TRAIT_EQUIP_WEAPON_TYPE = 51;
+const TRAIT_EQUIP_ARMOR_TYPE = 52;
+const TRAIT_EQUIP_LOCK = 53;
+const TRAIT_EQUIP_SEAL = 54;
+const TRAIT_SLOT_TYPE = 55;
+const TRAIT_ACTION_PLUS = 61;
+const TRAIT_SPECIAL_FLAG = 62;
+const TRAIT_COLLAPSE_TYPE = 63;
+const TRAIT_PARTY_ABILITY = 64;
+const MODULE_TRAIT = "trait";
+const SRC_PARAMS_REGULAR = "params";
+const SRC_PARAMS_EXTRA = "xparams";
+const SRC_PARAMS_SPECIAL = "sparams";
+const SRC_TRAIT_COLLAPS = "collaps";
+const SRC_TRAIT_PARTY_ABILITY = "partyAbiility";
+const SRC_TRAIT_SPECIAL_FLAG = "sflag";
+const COLLAPS_NORMAL = 0;
+const COLLAPS_BOSS = 1;
+const COLLAPS_INSTANT = 2;
+const COLLAPS_NONE = 3;
 const DEFAULT_GLOBAL_LABELS = {
   id: "識別子",
   name: "名前",
@@ -779,6 +815,367 @@ const DEFAULT_GLOBAL_LABELS = {
   instantCollaps: "即時崩壊",
   noneCollaps: "崩壊なし",
   escape: "逃走"
+};
+const collapsSourceId = () => ({
+  author: AUTHOR_RMMZ,
+  module: MODULE_TRAIT,
+  kind: SRC_TRAIT_COLLAPS
+});
+const defineTraitCollapseType = (options, global) => ({
+  items: collapsOptionsToArray(options, global),
+  label: global.normal,
+  source: collapsSourceId()
+});
+const collapsOptionsToArray = (options, global) => {
+  return [
+    {
+      id: COLLAPS_NORMAL,
+      name: global.normal
+    },
+    {
+      id: COLLAPS_BOSS,
+      name: options.bossCollaps
+    },
+    {
+      id: COLLAPS_INSTANT,
+      name: options.instantCollaps
+    },
+    {
+      id: COLLAPS_NONE,
+      name: options.noneCollaps
+    }
+  ];
+};
+const PARTY_ABILITY_ENCOUNTER_HALF = 0;
+const PARTY_ABILITY_ENCOUNTER_NONE = 1;
+const PARTY_ABILITY_CANCEL_SURPRISE = 2;
+const PARTY_ABILITY_RAISE_PREEMPTIVE = 3;
+const PARTY_ABILITY_GOLD_DOUBLE = 4;
+const PARTY_ABILITY_DROP_ITEM_DOUBLE = 5;
+const partyAbilitySourceId = () => ({
+  author: AUTHOR_RMMZ,
+  module: MODULE_TRAIT,
+  kind: SRC_TRAIT_PARTY_ABILITY
+});
+const partyAbilityToArray = (options) => {
+  return [
+    {
+      id: PARTY_ABILITY_ENCOUNTER_HALF,
+      name: options.encounterHalf
+    },
+    {
+      id: PARTY_ABILITY_ENCOUNTER_NONE,
+      name: options.encounterNone
+    },
+    {
+      id: PARTY_ABILITY_CANCEL_SURPRISE,
+      name: options.cancelSurprise
+    },
+    {
+      id: PARTY_ABILITY_RAISE_PREEMPTIVE,
+      name: options.raisePreemptive
+    },
+    {
+      id: PARTY_ABILITY_GOLD_DOUBLE,
+      name: options.goldDouble
+    },
+    {
+      id: PARTY_ABILITY_DROP_ITEM_DOUBLE,
+      name: options.dropItemDouble
+    }
+  ];
+};
+const FLAG_ID_AUTO_BATTLE = 0;
+const FLAG_ID_GUARD = 1;
+const FLAG_ID_SUBSTITUTE = 2;
+const FLAG_ID_PRESERVE_TP = 3;
+const sourceIdSpecialFlag = () => ({
+  author: AUTHOR_RMMZ,
+  module: MODULE_TRAIT,
+  kind: SRC_TRAIT_SPECIAL_FLAG
+});
+const specialFlagToArray = (label) => {
+  return [
+    {
+      id: FLAG_ID_AUTO_BATTLE,
+      name: label.autoBattle
+    },
+    {
+      id: FLAG_ID_GUARD,
+      name: label.guard
+    },
+    {
+      id: FLAG_ID_SUBSTITUTE,
+      name: label.substitute
+    },
+    {
+      id: FLAG_ID_PRESERVE_TP,
+      name: label.preventEscape
+    }
+  ];
+};
+const EXTRA_PARAM_HIT = 0;
+const EXTRA_PARAM_EVA = 1;
+const EXTRA_PARAM_CRI = 2;
+const EXTRA_PARAM_CEV = 3;
+const EXTRA_PARAM_MEV = 4;
+const EXTRA_PARAM_MRF = 5;
+const EXTRA_PARAM_CNT = 6;
+const EXTRA_PARAM_HRG = 7;
+const EXTRA_PARAM_MRG = 8;
+const EXTRA_PARAM_TRG = 9;
+const extraParamSourceId = () => ({
+  author: AUTHOR_RMMZ,
+  module: MODULE_TRAIT,
+  kind: SRC_PARAMS_SPECIAL
+});
+const defineTraitExtraParam = (xparam) => ({
+  items: extraParamsToArray(xparam.options),
+  label: xparam.domainName,
+  source: extraParamSourceId()
+});
+const extraParamsToArray = (xparam) => {
+  return [
+    {
+      id: EXTRA_PARAM_HIT,
+      name: xparam.hitRate
+    },
+    {
+      id: EXTRA_PARAM_EVA,
+      name: xparam.evasionRate
+    },
+    {
+      id: EXTRA_PARAM_CRI,
+      name: xparam.criticalRate
+    },
+    {
+      id: EXTRA_PARAM_CEV,
+      name: xparam.criticalEvasionRate
+    },
+    {
+      id: EXTRA_PARAM_MEV,
+      name: xparam.magicEvasionRate
+    },
+    {
+      id: EXTRA_PARAM_MRF,
+      name: xparam.magicReflectionRate
+    },
+    {
+      id: EXTRA_PARAM_CNT,
+      name: xparam.counterAttackRate
+    },
+    {
+      id: EXTRA_PARAM_HRG,
+      name: xparam.hpRegenerationRate
+    },
+    {
+      id: EXTRA_PARAM_MRG,
+      name: xparam.mpRegenerationRate
+    },
+    {
+      id: EXTRA_PARAM_TRG,
+      name: xparam.tpRegenerationRate
+    }
+  ];
+};
+const extraParamName = (paramIndex, labels) => {
+  switch (paramIndex) {
+    case EXTRA_PARAM_CEV:
+      return labels.criticalEvasionRate;
+    case EXTRA_PARAM_EVA:
+      return labels.evasionRate;
+    case EXTRA_PARAM_CNT:
+      return labels.counterAttackRate;
+    case EXTRA_PARAM_CRI:
+      return labels.criticalRate;
+    case EXTRA_PARAM_HIT:
+      return labels.hitRate;
+    case EXTRA_PARAM_HRG:
+      return labels.hpRegenerationRate;
+    case EXTRA_PARAM_MEV:
+      return labels.magicEvasionRate;
+    case EXTRA_PARAM_MRF:
+      return labels.magicReflectionRate;
+    case EXTRA_PARAM_MRG:
+      return labels.mpRegenerationRate;
+    case EXTRA_PARAM_TRG:
+      return labels.tpRegenerationRate;
+  }
+  return `?xparams[${paramIndex}]`;
+};
+const REGULAR_PARAM_MAX_HP = 0;
+const REGULAR_PARAM_MAX_MP = 1;
+const REGULAR_PARAM_ATK = 2;
+const REGULAR_PARAM_DEF = 3;
+const REGULAR_PARAM_MATK = 4;
+const REGULAR_PARAM_MDEF = 5;
+const REGULAR_PARAM_AGI = 6;
+const REGULAR_PARAM_LUK = 7;
+const regularParamSourceId = () => ({
+  author: AUTHOR_RMMZ,
+  module: MODULE_TRAIT,
+  kind: SRC_PARAMS_REGULAR
+});
+const defineTraitRegularParam = (param) => ({
+  items: regularParamsToArray(param.options),
+  label: param.domainName,
+  source: regularParamSourceId()
+});
+const regularParamsToArray = (param) => {
+  return [
+    { id: REGULAR_PARAM_MAX_HP, name: param.maxHp },
+    { id: REGULAR_PARAM_MAX_MP, name: param.maxMp },
+    { id: REGULAR_PARAM_ATK, name: param.atk },
+    { id: REGULAR_PARAM_DEF, name: param.def },
+    { id: REGULAR_PARAM_MATK, name: param.matk },
+    { id: REGULAR_PARAM_MDEF, name: param.mdef },
+    { id: REGULAR_PARAM_AGI, name: param.agi },
+    { id: REGULAR_PARAM_LUK, name: param.luk }
+  ];
+};
+const regularParamName = (paramIndex, labels) => {
+  switch (paramIndex) {
+    case REGULAR_PARAM_MAX_HP:
+      return labels.maxHp;
+    case REGULAR_PARAM_MAX_MP:
+      return labels.maxMp;
+    case REGULAR_PARAM_ATK:
+      return labels.atk;
+    case REGULAR_PARAM_DEF:
+      return labels.def;
+    case REGULAR_PARAM_MATK:
+      return labels.matk;
+    case REGULAR_PARAM_MDEF:
+      return labels.mdef;
+    case REGULAR_PARAM_AGI:
+      return labels.agi;
+    case REGULAR_PARAM_LUK:
+      return labels.luk;
+    default:
+      return `?rparams[${paramIndex}]`;
+  }
+};
+const SPECIAL_PARAM_TGR = 0;
+const SPECIAL_PARAM_GRD = 1;
+const SPECIAL_PARAM_REC = 2;
+const SPECIAL_PARAM_PHA = 3;
+const SPECIAL_PARAM_MCR = 4;
+const SPECIAL_PARAM_TCR = 5;
+const SPECIAL_PARAM_PDR = 6;
+const SPECIAL_PARAM_MDR = 7;
+const SPECIAL_PARAM_FDR = 8;
+const SPECIAL_PARAM_EXR = 9;
+const specialParamSourceId = () => ({
+  author: AUTHOR_RMMZ,
+  module: MODULE_TRAIT,
+  kind: SRC_PARAMS_SPECIAL
+});
+const defineTraitSpecialParam = (specialParam2) => ({
+  items: specialParamsToArray(specialParam2.options),
+  label: specialParam2.domainName,
+  source: specialParamSourceId()
+});
+const specialParamsToArray = (specialParams) => {
+  return [
+    {
+      id: SPECIAL_PARAM_TGR,
+      name: specialParams.targetRate
+    },
+    {
+      id: SPECIAL_PARAM_GRD,
+      name: specialParams.guardEffectRate
+    },
+    {
+      id: SPECIAL_PARAM_REC,
+      name: specialParams.recoveryEffectRate
+    },
+    {
+      id: SPECIAL_PARAM_PHA,
+      name: specialParams.pharmacology
+    },
+    {
+      id: SPECIAL_PARAM_MCR,
+      name: specialParams.mpCostRate
+    },
+    {
+      id: SPECIAL_PARAM_TCR,
+      name: specialParams.tpChargeRate
+    },
+    {
+      id: SPECIAL_PARAM_PDR,
+      name: specialParams.physicalDamageRate
+    },
+    {
+      id: SPECIAL_PARAM_MDR,
+      name: specialParams.magicDamageRate
+    },
+    {
+      id: SPECIAL_PARAM_FDR,
+      name: specialParams.floorDamageRate
+    },
+    {
+      id: SPECIAL_PARAM_EXR,
+      name: specialParams.experienceRate
+    }
+  ];
+};
+const specialParamName = (paramIndex, labels) => {
+  switch (paramIndex) {
+    case SPECIAL_PARAM_EXR:
+      return labels.experienceRate;
+    case SPECIAL_PARAM_TGR:
+      return labels.targetRate;
+    case SPECIAL_PARAM_FDR:
+      return labels.floorDamageRate;
+    case SPECIAL_PARAM_GRD:
+      return labels.guardEffectRate;
+    case SPECIAL_PARAM_MCR:
+      return labels.mpCostRate;
+    case SPECIAL_PARAM_TCR:
+      return labels.tpChargeRate;
+    case SPECIAL_PARAM_PDR:
+      return labels.physicalDamageRate;
+    case SPECIAL_PARAM_MDR:
+      return labels.magicDamageRate;
+    case SPECIAL_PARAM_PHA:
+      return labels.pharmacology;
+    case SPECIAL_PARAM_REC:
+      return labels.recoveryEffectRate;
+  }
+  return `?sparams[${paramIndex}]`;
+};
+const traitDomain = (sourceKey, labels, fn) => {
+  return {
+    items: fn(labels.options),
+    label: labels.domainName,
+    source: {
+      author: AUTHOR_RMMZ,
+      module: MODULE_TRAIT,
+      kind: sourceKey
+    }
+  };
+};
+const buildCollapsSource = (labels, global) => {
+  return traitDomain(
+    SRC_TRAIT_COLLAPS,
+    labels,
+    (col) => collapsOptionsToArray(col, global)
+  );
+};
+const buildPartyAbilitySource = (labels) => {
+  return traitDomain(SRC_TRAIT_PARTY_ABILITY, labels, partyAbilityToArray);
+};
+const buildRegularParamSource = (label) => {
+  return traitDomain(SRC_PARAMS_REGULAR, label, regularParamsToArray);
+};
+const buildExtraParamSource = (label) => {
+  return traitDomain(SRC_PARAMS_EXTRA, label, extraParamsToArray);
+};
+const buildSpecialParamSource = (label) => {
+  return traitDomain(SRC_PARAMS_SPECIAL, label, specialParamsToArray);
+};
+const buildSpecialFlagSource = (label) => {
+  return traitDomain(SRC_TRAIT_SPECIAL_FLAG, label, specialFlagToArray);
 };
 const FORMAT_NAME$1 = "{name}";
 const FORMAT_PARAM_RATE_MUL = "{name} * {value}%";
@@ -942,10 +1339,1031 @@ const LABEL_SET_TRAIT = {
     }
   }
 };
+const TYPENAME_TRAIT = "Trait";
+const SCHEMA_TRAIT = {
+  type: "object",
+  required: ["code", "dataId", "value"],
+  properties: {
+    code: { type: "integer" },
+    dataId: { type: "integer" },
+    value: { type: "integer" }
+  }
+};
+const formatTraitText = (descriptor, trait, items, maxNameLength = 100) => {
+  const item2 = items[trait.dataId];
+  const itemName = item2 ? item2.name.slice(0, maxNameLength) : `?data[${trait.dataId}]`;
+  return descriptor.format.replaceAll(FORMAT_PARAM_VALUE, trait.value.toString()).replaceAll(FORMAT_NAME$1, itemName);
+};
+const resolveTraitLabels = (labels) => {
+  return [
+    elementRate(labels.elementRate),
+    debuffRate(labels.debuffRate),
+    stateRate(labels.stateRate),
+    stateResist(labels.stateResist),
+    regularParam$1(labels.regularParam),
+    extraParam(labels.extraParam),
+    specialParam(labels.specialParam),
+    attackElement(labels.attackElement),
+    atttackState(labels.attackState),
+    attackSpeed(labels.attackSpeed),
+    attackTimes(labels.attackTimes),
+    attackSkill(labels.attackSkill),
+    skillTypeAdd(labels.skillTypeAdd),
+    skillTypeSeal(labels.skillTypeSeal),
+    skillAdd(labels.skillAdd),
+    skillSeal(labels.skillAdd),
+    equipWeaponType(labels.equipWeaponType),
+    equipArmorType(labels.equipArmorType),
+    equipLock(labels.equipLock),
+    equipSeal(labels.equipSeal),
+    slotType(labels.slotType),
+    actionPlus(labels.actionPlus),
+    specialFlag(labels.specialFlag),
+    collaps(labels.collaps),
+    partyAbility(labels.partyAbility)
+  ];
+};
+const elementRate = (label) => ({
+  format: label.format,
+  label: label.domainName,
+  code: TRAIT_ELEMENT_RATE,
+  dataSource: systemElementsSourceId()
+});
+const debuffRate = (label) => ({
+  format: label.format,
+  label: label.domainName,
+  code: TRAIT_DEBUFF_RATE,
+  dataSource: regularParamSourceId()
+});
+const stateRate = (label) => ({
+  format: label.format,
+  label: label.domainName,
+  code: TRAIT_STATE_RATE,
+  dataSource: stateSourceId()
+});
+const stateResist = (label) => ({
+  format: label.format,
+  label: label.domainName,
+  code: TRAIT_STATE_RESIST,
+  dataSource: stateSourceId()
+});
+const regularParam$1 = (labels) => ({
+  format: labels.format,
+  label: labels.domainName,
+  code: TRAIT_PARAM,
+  dataSource: regularParamSourceId()
+});
+const extraParam = (labels) => ({
+  format: labels.format,
+  label: labels.domainName,
+  code: TRAIT_XPARAM,
+  dataSource: extraParamSourceId()
+});
+const specialParam = (labels) => ({
+  format: labels.format,
+  label: labels.domainName,
+  code: TRAIT_SPARAM,
+  dataSource: specialParamSourceId()
+});
+const attackElement = (label) => ({
+  format: label.format,
+  label: label.domainName,
+  code: TRAIT_ATTACK_ELEMENT,
+  dataSource: systemElementsSourceId()
+});
+const atttackState = (label) => ({
+  format: label.format,
+  label: label.domainName,
+  code: TRAIT_ATTACK_STATE,
+  dataSource: stateSourceId()
+});
+const attackSpeed = (label) => ({
+  format: label.format,
+  label: label.domainName,
+  code: TRAIT_ATTACK_SPEED
+});
+const attackTimes = (label) => ({
+  format: label.format,
+  label: label.domainName,
+  code: TRAIT_ATTACK_TIMES
+});
+const attackSkill = (label) => ({
+  format: label.format,
+  label: label.domainName,
+  code: TRAIT_ATTACK_SKILL
+});
+const skillTypeAdd = (label) => ({
+  format: label.format,
+  label: label.domainName,
+  code: TRAIT_SKILL_TYPE_ADD,
+  dataSource: systemSkillTypesSourceId()
+});
+const skillTypeSeal = (label) => ({
+  format: label.format,
+  label: label.domainName,
+  code: TRAIT_SKILL_TYPE_SEAL,
+  dataSource: systemSkillTypesSourceId()
+});
+const skillAdd = (label) => ({
+  format: label.format,
+  label: label.domainName,
+  code: TRAIT_SKILL_ADD,
+  dataSource: skillSourceId()
+});
+const skillSeal = (label) => ({
+  format: label.format,
+  label: label.domainName,
+  code: TRAIT_SKILL_SEAL,
+  dataSource: skillSourceId()
+});
+const equipWeaponType = (label) => ({
+  format: label.format,
+  label: label.domainName,
+  code: TRAIT_EQUIP_WEAPON_TYPE,
+  dataSource: systemWeaponTypesSourceId()
+});
+const equipArmorType = (label) => ({
+  format: label.format,
+  label: label.domainName,
+  code: TRAIT_EQUIP_ARMOR_TYPE,
+  dataSource: systemArmorTypesSourceId()
+});
+const equipLock = (label) => ({
+  format: label.format,
+  label: label.domainName,
+  code: TRAIT_EQUIP_LOCK,
+  dataSource: systemEquipTypesSourceId()
+});
+const equipSeal = (label) => ({
+  format: label.format,
+  label: label.domainName,
+  code: TRAIT_EQUIP_SEAL,
+  dataSource: systemEquipTypesSourceId()
+});
+const slotType = (label) => ({
+  format: label.format,
+  label: label.domainName,
+  code: TRAIT_SLOT_TYPE,
+  dataSource: systemEquipTypesSourceId()
+});
+const actionPlus = (label) => ({
+  format: label.format,
+  label: label.domainName,
+  code: TRAIT_ACTION_PLUS
+});
+const specialFlag = (labels) => ({
+  format: labels.format,
+  label: labels.domainName,
+  code: TRAIT_SPECIAL_FLAG,
+  dataSource: sourceIdSpecialFlag()
+});
+const collaps = (label) => ({
+  format: label.format,
+  label: label.domainName,
+  code: TRAIT_COLLAPSE_TYPE,
+  dataSource: collapsSourceId()
+});
+const partyAbility = (labels) => ({
+  format: labels.format,
+  label: labels.domainName,
+  code: TRAIT_PARTY_ABILITY,
+  dataSource: partyAbilitySourceId()
+});
+const MODULE_DATA = "data";
+const SRC_DATA_ACTOR = "actor";
+const SRC_DATA_STATE = "state";
+const SRC_DATA_SKILL = "skill";
+const SRC_DATA_ARMOR = "armor";
+const makeActorData = (actor2 = {}) => ({
+  name: actor2.name ?? "",
+  id: actor2.id ?? 0,
+  battlerName: actor2.battlerName ?? "",
+  characterName: actor2.characterName ?? "",
+  characterIndex: actor2.characterIndex ?? 0,
+  faceName: actor2.faceName ?? "",
+  faceIndex: actor2.faceIndex ?? 0,
+  traits: [],
+  note: actor2.note ?? "",
+  classId: actor2.classId ?? 0,
+  nickname: actor2.nickname ?? "",
+  profile: actor2.profile ?? "",
+  equips: [],
+  initialLevel: actor2.initialLevel ?? 0,
+  maxLevel: actor2.maxLevel ?? 0
+});
+const actorSourceId = () => ({
+  author: AUTHOR_RMMZ,
+  module: MODULE_DATA$1,
+  kind: SRC_DATA_ACTOR
+});
+const SCHEMA_DATA_ACTOR = {
+  type: "object",
+  required: [
+    "name",
+    "id",
+    "nickname",
+    "battlerName",
+    "characterName",
+    "characterIndex",
+    "faceName",
+    "faceIndex",
+    "classId",
+    "initialLevel",
+    "maxLevel"
+  ],
+  properties: {
+    name: { type: "string" },
+    battlerName: { type: "string" },
+    characterName: { type: "string" },
+    characterIndex: { type: "integer" },
+    faceName: { type: "string" },
+    faceIndex: { type: "integer", minimum: 0, maximum: 7 },
+    id: { type: "integer", minimum: 0 },
+    nickname: { type: "string" },
+    profile: { type: "string" },
+    initialLevel: { type: "integer", minimum: 0 },
+    maxLevel: { type: "integer" },
+    classId: { type: "integer", minimum: 0 },
+    equips: { type: "array", items: { type: "integer" } },
+    note: { type: "string" },
+    traits: {
+      type: "array",
+      items: {
+        type: "object",
+        properties: {
+          code: { type: "integer" },
+          dataId: { type: "integer" },
+          value: { type: "integer" }
+        },
+        required: ["code", "dataId", "value"]
+      }
+    }
+  }
+};
+const makeArmorData = (armor2 = {}) => ({
+  id: armor2.id ?? 0,
+  name: armor2.name ?? "",
+  iconIndex: armor2.iconIndex ?? 0,
+  description: armor2.description ?? "",
+  traits: armor2.traits ?? [],
+  note: armor2.note ?? "",
+  atypeId: armor2.atypeId ?? 0,
+  params: armor2.params ?? [
+    0,
+    // maxhp
+    0,
+    // maxmp
+    0,
+    // atk
+    0,
+    // def
+    0,
+    // mat
+    0,
+    // mdf
+    0,
+    // agi
+    0
+    // luk
+  ],
+  etypeId: armor2.etypeId ?? 0,
+  price: armor2.price ?? 0
+});
+const armorSourceId = () => ({
+  author: AUTHOR_RMMZ,
+  module: MODULE_DATA,
+  kind: SRC_DATA_ARMOR
+});
+const SCHEMA_DATA_ARMMOR = {
+  type: "object",
+  required: [
+    "name",
+    "id",
+    "description",
+    "iconIndex",
+    "price",
+    "params",
+    "traits",
+    "note",
+    "etypeId",
+    "atypeId"
+  ],
+  properties: {
+    name: { type: "string" },
+    id: { type: "integer", minimum: 0 },
+    description: { type: "string" },
+    iconIndex: { type: "integer", minimum: 0 },
+    price: { type: "integer", minimum: 0 },
+    note: { type: "string" },
+    etypeId: { type: "integer", minimum: 0 },
+    atypeId: { type: "integer", minimum: 0 },
+    params: {
+      type: "array",
+      items: [
+        { type: "integer" },
+        // mhp
+        { type: "integer" },
+        // mmp
+        { type: "integer" },
+        // atk
+        { type: "integer" },
+        // def
+        { type: "integer" },
+        // mat
+        { type: "integer" },
+        // mdf
+        { type: "integer" },
+        // agi
+        { type: "integer" }
+        // luk
+      ],
+      minItems: 8,
+      maxItems: 8
+    },
+    traits: {
+      type: "array",
+      items: {
+        type: "object",
+        properties: {
+          code: { type: "integer" },
+          dataId: { type: "integer" },
+          value: { type: "integer" }
+        },
+        required: ["code", "dataId", "value"]
+      }
+    }
+  }
+};
+const makeClassData = (data = {}) => ({
+  name: data.name ?? "",
+  id: data.id ?? 0,
+  traits: [],
+  note: data.note ?? "",
+  params: [
+    0,
+    // maxhp
+    0,
+    // maxmp
+    0,
+    // atk
+    0,
+    // def
+    0,
+    // mat
+    0,
+    // mdf
+    0,
+    // agi
+    0
+    // luk
+  ],
+  learnings: data.learnings ?? [],
+  expParams: data.expParams ?? []
+});
+const classSourceId = () => ({
+  author: AUTHOR_RMMZ,
+  module: MODULE_DATA$1,
+  kind: SRC_DATA_CLASS
+});
+const SCHEMA_DATA_CLASS = {
+  type: "object",
+  required: [
+    "name",
+    "id",
+    "note",
+    "expParams",
+    "params",
+    "learnings",
+    "traits"
+  ],
+  properties: {
+    name: { type: "string" },
+    id: { type: "integer", minimum: 0 },
+    note: { type: "string" },
+    expParams: {
+      type: "array",
+      items: { type: "integer" }
+    },
+    params: {
+      type: "array",
+      items: [
+        { type: "integer" },
+        // mhp
+        { type: "integer" },
+        // mmp
+        { type: "integer" },
+        // atk
+        { type: "integer" },
+        // def
+        { type: "integer" },
+        // mat
+        { type: "integer" },
+        // mdf
+        { type: "integer" },
+        // agi
+        { type: "integer" }
+        // luk
+      ],
+      minItems: 8,
+      maxItems: 8
+    },
+    learnings: {
+      type: "array",
+      items: {
+        type: "object",
+        properties: {
+          level: { type: "integer" },
+          skillId: { type: "integer" },
+          note: { type: "string" }
+        },
+        required: ["level", "skillId"],
+        additionalProperties: false
+      }
+    },
+    traits: {
+      type: "array",
+      items: {
+        type: "object",
+        properties: {
+          code: { type: "integer" },
+          dataId: { type: "integer" },
+          value: { type: "integer" }
+        },
+        required: ["code", "dataId", "value"],
+        additionalProperties: false
+      }
+    }
+  },
+  additionalProperties: false
+};
+const makeStateData = (data = {}) => ({
+  name: data.name ?? "",
+  id: data.id ?? 0,
+  iconIndex: data.iconIndex ?? 0,
+  message1: data.message1 ?? "",
+  message2: data.message2 ?? "",
+  message3: data.message3 ?? "",
+  message4: data.message4 ?? "",
+  traits: [],
+  note: data.note ?? "",
+  messageType: data.messageType ?? 0,
+  releaseByDamage: data.releaseByDamage ?? false,
+  restriction: data.restriction ?? 0,
+  priority: data.priority ?? 0,
+  motion: data.motion ?? 0,
+  overlay: data.overlay ?? 0,
+  removeAtBattleEnd: data.removeAtBattleEnd ?? false,
+  removeByRestriction: data.removeByRestriction ?? false,
+  autoRemovalTiming: data.autoRemovalTiming ?? 0,
+  minTurns: data.minTurns ?? 0,
+  maxTurns: data.maxTurns ?? 0,
+  removeByDamage: data.removeByDamage ?? false,
+  chanceByDamage: data.chanceByDamage ?? 0,
+  removeByWalking: data.removeByWalking ?? false,
+  stepsToRemove: data.stepsToRemove ?? 0
+});
+const stateSourceId = () => ({
+  author: AUTHOR_RMMZ,
+  module: MODULE_DATA,
+  kind: SRC_DATA_STATE
+});
+const SCHEMA_DATA_STATE = {
+  type: "object",
+  required: [
+    "name",
+    "id",
+    "iconIndex",
+    "message1",
+    "message2",
+    "message3",
+    "message4",
+    "restriction",
+    "priority",
+    "motion",
+    "overlay",
+    "removeAtBattleEnd",
+    "removeByDamage",
+    "removeByWalking",
+    "removeByRestriction",
+    "autoRemovalTiming",
+    "minTurns",
+    "maxTurns",
+    "chanceByDamage",
+    "stepsToRemove",
+    "note"
+  ],
+  properties: {
+    name: { type: "string" },
+    id: { type: "integer", minimum: 0 },
+    iconIndex: { type: "integer", minimum: 0 },
+    message1: { type: "string" },
+    message2: { type: "string" },
+    message3: { type: "string" },
+    message4: { type: "string" },
+    restriction: { type: "integer" },
+    priority: { type: "integer" },
+    motion: { type: "integer" },
+    overlay: { type: "integer" },
+    removeAtBattleEnd: { type: "boolean" },
+    removeByDamage: { type: "boolean" },
+    removeByWalking: { type: "boolean" },
+    removeByRestriction: { type: "boolean" },
+    messageType: { type: "integer" },
+    releaseByDamage: { type: "boolean" },
+    autoRemovalTiming: { type: "integer" },
+    minTurns: { type: "integer" },
+    maxTurns: { type: "integer" },
+    chanceByDamage: { type: "integer" },
+    stepsToRemove: { type: "integer" },
+    note: { type: "string" },
+    traits: {
+      type: "array",
+      items: {
+        type: "object",
+        properties: {
+          code: { type: "integer" },
+          dataId: { type: "integer" },
+          value: { type: "integer" }
+        },
+        required: ["code", "dataId", "value"]
+      }
+    }
+  }
+};
+const LABELS_DATA_WEAPON = {
+  domainName: "武器",
+  options: {
+    weaponTypeId: "武器タイプID"
+  }
+};
+const makeWeaponData = (weapon2 = {}) => ({
+  id: weapon2.id ?? 0,
+  name: weapon2.name ?? "",
+  iconIndex: weapon2.iconIndex ?? 0,
+  description: weapon2.description ?? "",
+  traits: weapon2.traits ?? [],
+  note: weapon2.note ?? "",
+  animationId: weapon2.animationId ?? 0,
+  params: weapon2.params ?? [
+    0,
+    // maxhp
+    0,
+    // maxmp
+    0,
+    // atk
+    0,
+    // def
+    0,
+    // mat
+    0,
+    // mdf
+    0,
+    // agi
+    0
+    // luk
+  ],
+  etypeId: weapon2.etypeId ?? 0,
+  price: weapon2.price ?? 0,
+  damage: makeDamage(weapon2.damage ?? {}),
+  wtypeId: weapon2.wtypeId ?? 0
+});
+const SCHEMA_DATA_WEAPON = {
+  type: "object",
+  required: [
+    "name",
+    "id",
+    "description",
+    "iconIndex",
+    "price",
+    "params",
+    "traits",
+    "note",
+    "etypeId",
+    "animationId"
+  ],
+  properties: {
+    name: { type: "string" },
+    id: { type: "integer", minimum: 0 },
+    description: { type: "string" },
+    iconIndex: { type: "integer", minimum: 0 },
+    price: { type: "integer", minimum: 0 },
+    note: { type: "string" },
+    etypeId: { type: "integer", minimum: 0 },
+    wtypeId: { type: "integer", minimum: 0 },
+    animationId: { type: "integer", minimum: 0 },
+    params: {
+      type: "array",
+      items: [
+        { type: "integer" },
+        // mhp
+        { type: "integer" },
+        // mmp
+        { type: "integer" },
+        // atk
+        { type: "integer" },
+        // def
+        { type: "integer" },
+        // mat
+        { type: "integer" },
+        // mdf
+        { type: "integer" },
+        // agi
+        { type: "integer" }
+        // luk
+      ],
+      minItems: 8,
+      maxItems: 8
+    },
+    damage: {
+      type: "object",
+      properties: {
+        type: { type: "integer", minimum: 0 },
+        elementId: { type: "integer", minimum: 0 },
+        formula: { type: "string" },
+        variance: { type: "integer", minimum: 0, maximum: 100 },
+        critical: { type: "boolean", default: false }
+      },
+      required: ["type", "elementId", "formula", "variance", "critical"]
+    },
+    traits: {
+      type: "array",
+      items: {
+        type: "object",
+        properties: {
+          code: { type: "integer" },
+          dataId: { type: "integer" },
+          value: { type: "integer" }
+        },
+        required: ["code", "dataId", "value"]
+      }
+    }
+  }
+};
+const makeDropItem = (dropItem = {}) => ({
+  dataId: dropItem.dataId ?? 0,
+  denominator: dropItem.denominator ?? 0,
+  kind: dropItem.kind ?? 0
+});
+const makeEnemyAction = (action = {}) => ({
+  conditionParam1: action.conditionParam1 ?? 0,
+  conditionParam2: action.conditionParam2 ?? 0,
+  conditionType: action.conditionType ?? 0,
+  rating: action.rating ?? 0,
+  skillId: action.skillId ?? 0
+});
+const makeEnemyData = (data = {}) => {
+  var _a;
+  return {
+    name: data.name ?? "",
+    id: data.id ?? 0,
+    battlerName: data.battlerName ?? "",
+    battlerHue: data.battlerHue ?? 0,
+    dropItems: ((_a = data.dropItems) == null ? void 0 : _a.map(() => makeDropItem())) ?? [],
+    exp: data.exp ?? 0,
+    gold: data.gold ?? 0,
+    traits: [],
+    note: data.note ?? "",
+    params: [
+      0,
+      // maxhp
+      0,
+      // maxmp
+      0,
+      // atk
+      0,
+      // def
+      0,
+      // mat
+      0,
+      // mdf
+      0,
+      // agi
+      0
+      // luk
+    ],
+    actions: []
+  };
+};
+const enemySourceId = () => ({
+  author: AUTHOR_RMMZ,
+  module: MODULE_DATA$1,
+  kind: SRC_DATA_ENEMY
+});
+const SCHEMA_DATA_ENEMY = {
+  type: "object",
+  required: [
+    "name",
+    "id",
+    "battlerName",
+    "battlerHue",
+    "exp",
+    "gold",
+    "note",
+    "params",
+    "dropItems",
+    "traits",
+    "actions"
+  ],
+  properties: {
+    name: { type: "string" },
+    id: { type: "integer", minimum: 0 },
+    battlerHue: { type: "integer", minimum: 0 },
+    battlerName: { type: "string" },
+    exp: { type: "integer", minimum: 0 },
+    gold: { type: "integer", minimum: 0 },
+    note: { type: "string" },
+    params: {
+      type: "array",
+      items: [
+        { type: "integer" },
+        // mhp
+        { type: "integer" },
+        // mmp
+        { type: "integer" },
+        // atk
+        { type: "integer" },
+        // def
+        { type: "integer" },
+        // mat
+        { type: "integer" },
+        // mdf
+        { type: "integer" },
+        // agi
+        { type: "integer" }
+        // luk
+      ],
+      minItems: 8,
+      maxItems: 8
+    },
+    actions: {
+      type: "array",
+      items: {
+        type: "object",
+        required: [
+          "conditionParam1",
+          "conditionParam2",
+          "conditionType",
+          "skillId",
+          "rating"
+        ],
+        properties: {
+          conditionParam1: { type: "integer" },
+          conditionParam2: { type: "integer" },
+          conditionType: { type: "integer" },
+          skillId: { type: "integer" },
+          rating: { type: "integer" }
+        }
+      }
+    },
+    traits: {
+      type: "array",
+      items: {
+        type: "object",
+        properties: {
+          code: { type: "integer" },
+          dataId: { type: "integer" },
+          value: { type: "integer" }
+        },
+        required: ["code", "dataId", "value"]
+      }
+    },
+    dropItems: {
+      type: "array",
+      items: {
+        type: "object",
+        properties: {
+          kind: { type: "integer" },
+          dataId: { type: "integer" },
+          denominator: { type: "integer", minimum: 0 },
+          rate: { type: "number" }
+        },
+        required: ["kind", "dataId", "denominator"]
+      }
+    }
+  }
+};
 const DEFAULT_DAMAGE_LABELS = {
   domainName: "ダメージ",
   options: {}
 };
+const makeDamage = (damage = {}) => ({
+  type: damage.type ?? 0,
+  elementId: damage.elementId ?? 0,
+  formula: damage.formula ?? "",
+  variance: damage.variance ?? 0,
+  critical: damage.critical ?? false
+});
+const SCHEMA_DAMAGE = {
+  type: "object",
+  required: ["type", "elementId", "formula", "variance", "critical"],
+  properties: {
+    type: { type: "integer", minimum: 0 },
+    elementId: { type: "integer", minimum: 0 },
+    formula: { type: "string" },
+    variance: { type: "integer" },
+    critical: { type: "boolean" }
+  }
+};
+const itemSourceId = () => ({
+  author: AUTHOR_RMMZ,
+  module: MODULE_DATA$1,
+  kind: SRC_DATA_ITEMS
+});
+const makeItemData = (item2 = {}) => ({
+  animationId: item2.animationId ?? 0,
+  id: item2.id ?? 0,
+  name: item2.name ?? "",
+  iconIndex: item2.iconIndex ?? 0,
+  description: item2.description ?? "",
+  itypeId: item2.itypeId ?? 0,
+  note: item2.note ?? "",
+  consumable: item2.consumable ?? false,
+  scope: item2.scope ?? 0,
+  occasion: item2.occasion ?? 0,
+  speed: item2.speed ?? 0,
+  successRate: item2.successRate ?? 0,
+  repeats: item2.repeats ?? 0,
+  tpGain: item2.tpGain ?? 0,
+  hitType: item2.hitType ?? 0,
+  damage: makeDamage(item2.damage ?? {}),
+  effects: [],
+  price: 0
+});
+const skillSourceId = () => ({
+  author: AUTHOR_RMMZ,
+  module: MODULE_DATA$1,
+  kind: SRC_DATA_SKILL
+});
+const makeSkillData = (skill2 = {}) => ({
+  stypeId: skill2.stypeId ?? 0,
+  requiredWtypeId1: skill2.requiredWtypeId1 ?? 0,
+  requiredWtypeId2: skill2.requiredWtypeId2 ?? 0,
+  animationId: skill2.animationId ?? 0,
+  damage: makeDamage(skill2.damage ?? {}),
+  description: skill2.description ?? "",
+  effects: [],
+  hitType: skill2.hitType ?? 0,
+  iconIndex: skill2.iconIndex ?? 0,
+  id: skill2.id ?? 0,
+  message1: skill2.message1 ?? "",
+  message2: skill2.message2 ?? "",
+  messageType: skill2.messageType ?? 0,
+  name: skill2.name ?? "",
+  note: skill2.note ?? "",
+  mpCost: skill2.mpCost ?? 0,
+  occasion: skill2.occasion ?? 0,
+  repeats: skill2.repeats ?? 0,
+  scope: skill2.scope ?? 0,
+  speed: skill2.speed ?? 0,
+  successRate: skill2.successRate ?? 0,
+  tpCost: skill2.tpCost ?? 0,
+  tpGain: skill2.tpGain ?? 0
+});
+const SCHEMA_DATA_SKILL = {
+  type: "object",
+  required: [
+    "name",
+    "id",
+    "description",
+    "iconIndex",
+    "message1",
+    "message2",
+    "messageType",
+    "mpCost",
+    "requiredWtypeId1",
+    "requiredWtypeId2",
+    "stypeId",
+    "tpCost",
+    "animationId",
+    "hitType",
+    "occasion",
+    "repeats",
+    "scope",
+    "speed",
+    "successRate",
+    "tpGain",
+    "note",
+    "effects"
+  ],
+  properties: {
+    name: { type: "string" },
+    id: { type: "integer", minimum: 0 },
+    description: { type: "string" },
+    iconIndex: { type: "integer", minimum: 0 },
+    message1: { type: "string" },
+    message2: { type: "string" },
+    messageType: { type: "integer" },
+    mpCost: { type: "integer" },
+    requiredWtypeId1: { type: "integer" },
+    requiredWtypeId2: { type: "integer" },
+    stypeId: { type: "integer" },
+    tpCost: { type: "integer" },
+    animationId: { type: "integer", minimum: 0 },
+    hitType: { type: "integer" },
+    occasion: { type: "integer" },
+    repeats: { type: "integer" },
+    scope: { type: "integer" },
+    speed: { type: "integer" },
+    successRate: { type: "integer" },
+    tpGain: { type: "integer" },
+    note: { type: "string" },
+    effects: {
+      type: "array",
+      items: {
+        type: "object",
+        properties: {
+          code: { type: "integer" },
+          dataId: { type: "integer" },
+          value1: { type: "integer" },
+          value2: { type: "integer" }
+        },
+        required: ["code", "dataId", "value1", "value2"],
+        additionalProperties: false
+      }
+    },
+    damage: {
+      type: "object",
+      properties: {
+        type: { type: "integer" },
+        elementId: { type: "integer" },
+        formula: { type: "string" },
+        variance: { type: "integer" },
+        critical: { type: "boolean" }
+      },
+      required: ["type", "elementId", "formula", "variance", "critical"],
+      additionalProperties: false
+    }
+  },
+  additionalProperties: false
+};
+const SCHEMA_DATA_ITEM = {
+  type: "object",
+  required: [
+    "name",
+    "id",
+    "description",
+    "iconIndex",
+    "note",
+    "animationId",
+    "hitType",
+    "occasion",
+    "repeats",
+    "scope",
+    "speed",
+    "successRate",
+    "tpGain",
+    "consumable",
+    "price",
+    "effects"
+  ],
+  properties: {
+    name: { type: "string" },
+    id: { type: "integer", minimum: 0 },
+    description: { type: "string" },
+    iconIndex: { type: "integer", minimum: 0 },
+    note: { type: "string" },
+    animationId: { type: "integer", minimum: 0 },
+    hitType: { type: "integer" },
+    occasion: { type: "integer" },
+    repeats: { type: "integer" },
+    scope: { type: "integer" },
+    speed: { type: "integer" },
+    successRate: { type: "integer" },
+    tpGain: { type: "integer" },
+    consumable: { type: "boolean" },
+    price: { type: "integer", minimum: 0 },
+    itypeId: { type: "integer" },
+    effects: {
+      type: "array",
+      items: {
+        type: "object",
+        properties: {
+          code: { type: "integer" },
+          dataId: { type: "integer" },
+          value1: { type: "integer" },
+          value2: { type: "integer" }
+        },
+        required: ["code", "dataId", "value1", "value2"],
+        additionalProperties: false
+      }
+    },
+    damage: {
+      type: "object",
+      properties: {
+        type: { type: "integer" },
+        elementId: { type: "integer" },
+        formula: { type: "string" },
+        variance: { type: "integer" },
+        critical: { type: "boolean" }
+      },
+      required: ["type", "elementId", "formula", "variance", "critical"],
+      additionalProperties: false
+    }
+  }
+};
+const HITTYPE_CERTAIN = 0;
+const HITTYPE_PHYSICAL = 1;
+const HITTYPE_MAGICAL = 2;
 const FORMAT_GROW = "{name} + {value1}";
 const FORMAT_STATE = "{name} {value1}%";
 const FORMAT_RECOVER = "{value1}% + {value2}";
@@ -1019,6 +2437,181 @@ const LABEL_SET_ITEM_EFFECT = {
       domainName: "コモンイベント",
       format: FORMAT_NAME
     }
+  }
+};
+const EFFECT_RECOVER_HP = 11;
+const EFFECT_RECOVER_MP = 12;
+const EFFECT_GAIN_TP = 13;
+const EFFECT_ADD_STATE = 21;
+const EFFECT_REMOVE_STATE = 22;
+const EFFECT_ADD_BUFF = 31;
+const EFFECT_ADD_DEBUFF = 32;
+const EFFECT_REMOVE_BUFF = 33;
+const EFFECT_REMOVE_DEBUFF = 34;
+const EFFECT_SPECIAL = 41;
+const EFFECT_GROW = 42;
+const EFFECT_LEARN_SKILL = 43;
+const EFFECT_COMMON_EVENT = 44;
+const SPECIAL_EFFECT_ESCAPE = 0;
+const PLACEHOLDER_VALUE1 = "{value1}";
+const PLACEHOLDER_VALUE2 = "{value2}";
+const PLACEHOLDER_NAME = "{name}";
+class ItemEffectDescriptor {
+  constructor(codeId, label, format, description, dataSource) {
+    this.codeId = codeId;
+    this.label = label;
+    this.format = format;
+    this.description = description;
+    this.dataSource = dataSource;
+  }
+  formatText(effect, resolveName) {
+    const text = this.format.replaceAll(PLACEHOLDER_VALUE1, effect.value1.toString()).replaceAll(PLACEHOLDER_VALUE2, effect.value2.toString());
+    if (!this.dataSource) {
+      return text;
+    }
+    return text.replaceAll(
+      PLACEHOLDER_NAME,
+      resolveName(this.dataSource, effect.dataId)
+    );
+  }
+  requiresValue1() {
+    return this.format.includes(PLACEHOLDER_VALUE1);
+  }
+  requiresValue2() {
+    return this.format.includes(PLACEHOLDER_VALUE2);
+  }
+  requiresName() {
+    return this.format.includes(PLACEHOLDER_NAME);
+  }
+  invalidPlaceHolder() {
+    const allowed = ["value1", "value2", "name"];
+    const matches = [
+      ...this.format.matchAll(/\{([^}]+)\}/g)
+    ];
+    return matches.map((m) => m[1]).filter((key) => !allowed.includes(key));
+  }
+  isFormatValidForDataSource() {
+    if (this.dataSource && !this.requiresName()) {
+      return false;
+    }
+    return true;
+  }
+}
+const formatItemEffectText = (effectDefine, effect, name) => {
+  return effectDefine.format.replaceAll(`{value1}`, effect.value1.toString()).replaceAll(`{value2}`, effect.value2.toString()).replaceAll("{name}", name);
+};
+const resolveItemEffectLabels = (label) => {
+  return [
+    defineEffectRecoverHp(label.options.recoverHp),
+    defineEffectRecoverMp(label.options.recoverMp),
+    defineEffectGainTp(label.options.gainTp),
+    defineEffectAddState(label.options.addState),
+    defineEffectRemoveState(label.options.removeState),
+    defineEffectAddBuff(label.options.addBuff),
+    defineEffectAddDebuff(label.options.addDebuff),
+    defineEffectRemoveBuff(label.options.removeBuff),
+    defineEffectRemoveDebuff(label.options.removeDebuff),
+    defineEffectLearnSkill(label.options.learnSkill),
+    defineEffectCommonEvent(label.options.commonEvent)
+  ];
+};
+const regularParam = () => ({
+  author: AUTHOR_RMMZ,
+  module: MODULE_TRAIT,
+  kind: SRC_PARAMS_REGULAR
+});
+const srcData = (sourceKey) => ({
+  author: AUTHOR_RMMZ,
+  module: MODULE_DATA$1,
+  kind: sourceKey
+});
+const defineEffect = (code, baseLabel, override, dataSource) => {
+  const label = override.domainName ?? baseLabel.domainName;
+  const format = override.format ?? baseLabel.format;
+  const description = override.desc ?? baseLabel.desc;
+  return new ItemEffectDescriptor(code, label, format, description, dataSource);
+};
+const defineEffectRecoverHp = (labels) => defineEffect(
+  EFFECT_RECOVER_HP,
+  LABEL_SET_ITEM_EFFECT.options.recoverHp,
+  labels
+);
+const defineEffectRecoverMp = (labels) => defineEffect(
+  EFFECT_RECOVER_MP,
+  LABEL_SET_ITEM_EFFECT.options.recoverMp,
+  labels
+);
+const defineEffectGainTp = (labels) => defineEffect(EFFECT_GAIN_TP, LABEL_SET_ITEM_EFFECT.options.gainTp, labels);
+const defineEffectGrow = (labels) => defineEffect(EFFECT_GROW, LABEL_SET_ITEM_EFFECT.options.grow, labels);
+const defineEffectAddState = (labels) => defineEffect(
+  EFFECT_ADD_STATE,
+  LABEL_SET_ITEM_EFFECT.options.addState,
+  labels,
+  srcData(SRC_DATA_STATE$1)
+);
+const defineEffectRemoveState = (labels) => defineEffect(
+  EFFECT_REMOVE_STATE,
+  LABEL_SET_ITEM_EFFECT.options.removeState,
+  labels,
+  srcData(SRC_DATA_STATE$1)
+);
+const defineEffectAddBuff = (labels) => defineEffect(
+  EFFECT_ADD_BUFF,
+  LABEL_SET_ITEM_EFFECT.options.addBuff,
+  labels,
+  regularParam()
+);
+const defineEffectRemoveBuff = (labels) => defineEffect(
+  EFFECT_REMOVE_BUFF,
+  LABEL_SET_ITEM_EFFECT.options.removeBuff,
+  labels,
+  regularParam()
+);
+const defineEffectLearnSkill = (labels) => defineEffect(
+  EFFECT_LEARN_SKILL,
+  LABEL_SET_ITEM_EFFECT.options.learnSkill,
+  labels,
+  srcData(SRC_DATA_SKILL$1)
+);
+const defineEffectAddDebuff = (labels) => defineEffect(
+  EFFECT_ADD_DEBUFF,
+  LABEL_SET_ITEM_EFFECT.options.addBuff,
+  labels,
+  regularParam()
+);
+const defineEffectRemoveDebuff = (labels) => defineEffect(
+  EFFECT_REMOVE_DEBUFF,
+  LABEL_SET_ITEM_EFFECT.options.removeDebuff,
+  labels,
+  regularParam()
+);
+const defineEffectCommonEvent = (labels) => defineEffect(
+  EFFECT_COMMON_EVENT,
+  LABEL_SET_ITEM_EFFECT.options.commonEvent,
+  labels,
+  srcData(SRC_DATA_COMMON_EVNET)
+);
+const DEFAULT_ITEM_LABELS = {
+  domainName: "アイテム",
+  options: {
+    consumable: "消耗品"
+  }
+};
+const DEFAULT_SKILL_LABELS = {
+  domainName: "スキル",
+  options: {
+    requiredWeaponTypeId1: "必要武器タイプ1",
+    requiredWeaponTypeId2: "必要武器タイプ2",
+    mpCost: "MP消費",
+    tpCost: "TP消費"
+  }
+};
+const DEFAULT_USABLE_ITEM_LABELS = {
+  domainName: "",
+  options: {
+    scope: "範囲",
+    speed: "速度補正",
+    successRate: "成功率"
   }
 };
 const LABEL_SET_DATA = {
@@ -1108,29 +2701,638 @@ const LABEL_SET_DATA = {
     }
   }
 };
+const ajv$2 = new Ajv();
+const item = ajv$2.compile(SCHEMA_DATA_ITEM);
+const skill = ajv$2.compile(SCHEMA_DATA_SKILL);
+const actor = ajv$2.compile(SCHEMA_DATA_ACTOR);
+const armor = ajv$2.compile(SCHEMA_DATA_ARMMOR);
+const weapon = ajv$2.compile(SCHEMA_DATA_WEAPON);
+const enemy = ajv$2.compile(SCHEMA_DATA_ENEMY);
+const state = ajv$2.compile(SCHEMA_DATA_STATE);
+const class_ = ajv$2.compile(SCHEMA_DATA_CLASS);
+const isDataItem = (data) => {
+  return item(data);
+};
+const isDataSkill = (data) => {
+  return skill(data);
+};
+const isDataActor = (data) => {
+  return actor(data);
+};
+const isDataArmor = (data) => {
+  return armor(data);
+};
+const isDataWeapon = (data) => {
+  return weapon(data);
+};
+const isDataEnemy = (data) => {
+  return enemy(data);
+};
+const isDataState = (data) => {
+  return state(data);
+};
+const isDataClass = (data) => {
+  return class_(data);
+};
+const NO_OPERATION = 0;
 const SHOW_MESSAGE = 101;
 const SHOW_MESSAGE_BODY = 401;
 const SHOW_CHOICES = 102;
 const SHOW_CHOICES_ITEM = 402;
 const INPUT_NUMBER = 103;
+const SELECT_ITEM = 104;
 const SHOW_SCROLLING_TEXT = 105;
 const SHOW_SCROLLING_TEXT_BODY = 405;
 const COMMENT_HEAD = 108;
 const COMMENT_BODY = 408;
+const SKIP = 109;
+const CONDITIONAL_BRANCH = 111;
+const CONDITIONAL_BRANCH_ELSE = 411;
+const LOOP = 112;
+const LOOP_BREAK = 113;
+const EXIT_EVENT_PROCESSING = 115;
 const COMMON_EVENT = 117;
+const LABEL = 118;
+const LABEL_JUMP = 119;
 const CONTROL_SWITCHES = 121;
+const CONTROL_VARIABLES = 122;
+const CONTROL_SELF_SWITCH = 123;
+const CONTROL_TIMER = 124;
+const CHANGE_GOLD = 125;
+const CHANGE_ITEMS = 126;
+const CHANGE_WEAPONS = 127;
+const CHANGE_ARMORS = 128;
+const CHANGE_PARTY_MEMBER = 129;
 const CHANGE_BATTLE_BGM = 132;
 const CHANGE_VICTORY_ME = 133;
+const CHANGE_SAVE_ACCESS = 134;
+const CHANGE_MENU_ACCESS = 135;
+const CHANGE_ENCOUNTER = 136;
+const CHANGE_FORMATION_ACCESS = 137;
+const CHANGE_WINDOW_COLOR = 138;
 const CHANGE_DEFEAT_ME = 139;
+const CHANGE_VEHICLE_BGM = 140;
+const TRANSFER_PLAYER = 201;
+const SET_VEHICLE_LOCATION = 202;
+const SET_EVENT_LOCATION = 203;
+const SCROLL_MAP = 204;
+const SET_MOVEMENT_ROUTE = 205;
+const GET_ONOFF_VEHICLE = 206;
+const CHANGE_TRANSPARENCY = 211;
+const SHOW_ANIMATION = 212;
+const SHOW_BALLOON_ICON = 213;
+const ERASE_EVENT = 214;
+const CHANGE_PLAYER_FOLLOWERS = 216;
+const GATHER_FOLLOWERS = 217;
+const FADEOUT_SCREEN = 221;
+const FADEIN_SCREEN = 222;
+const TINT_SCREEN = 223;
+const FLASH_SCREEN = 224;
+const SHAKE_SCREEN = 225;
+const WAIT = 230;
+const SHOW_PICTURE = 231;
+const MOVE_PICTURE = 232;
+const ROTATE_PICTURE = 233;
+const TINT_PICTURE = 234;
+const ERASE_PICTURE = 235;
+const SET_WEATHER_EFFECT = 236;
 const PLAY_BGM = 241;
+const FADEOUT_BGM = 242;
+const SAVE_BGM = 243;
+const RESUME_BGM = 244;
 const PLAY_BGS = 245;
+const FADEOUT_BGS = 246;
 const PLAY_ME = 249;
 const PLAY_SE = 250;
+const STOP_SE = 251;
+const PLAY_MOVIE = 261;
+const CHANGE_TILESET = 282;
+const CHANGE_BATTLE_BACKGROUND = 283;
+const CHANGE_PARALLAX = 284;
+const GET_LOCATION_INFO = 285;
+const BATTLE_PROCESSING = 301;
+const SHOP_PROCESSING = 302;
+const SHOP_PROCESSING_BODY = 605;
+const NAME_INPUT_PROCESSING = 303;
+const CHANGE_HP = 311;
+const CHANGE_MP = 312;
+const CHANGE_TP = 313;
+const RECOVER_ALL = 314;
+const CHANGE_EXP = 315;
 const CHANGE_NAME = 320;
+const CHANGE_CLASS = 321;
+const CHANGE_ACTOR_IMAGES = 322;
+const CHANGE_VEHICLE_IMAGE = 323;
 const CHANGE_NICKNAME = 324;
 const CHANGE_PROFILE = 325;
+const CHANGE_ENEMY_HP = 331;
+const CHANGE_ENEMY_MP = 332;
+const CHANGE_ENEMY_STATE = 333;
+const ENEMY_RECOVER_ALL = 334;
+const ENEMY_APPEAR = 335;
+const ENEMY_TRANSFORM = 336;
+const SHOW_BATTLE_ANIMATION = 337;
+const FORCE_ACTION = 339;
+const ABORT_BATTLE = 340;
+const OPEN_MENU_SCREEN = 351;
+const CHANGE_ENEMY_TP = 342;
+const OPEN_SAVE_SCREEN = 352;
+const GAME_OVER = 353;
+const RETURN_TO_TITLE_SCREEN = 354;
 const SCRIPT_EVAL = 355;
 const SCRIPT_EVAL_BODY = 655;
+const PLUGIN_COMMAND_MV = 356;
+const PLUGIN_COMMAND_MZ = 357;
+const ROUTE_END = 0;
+const ROUTE_MOVE_DOWN = 1;
+const ROUTE_MOVE_LEFT = 2;
+const ROUTE_MOVE_RIGHT = 3;
+const ROUTE_MOVE_UP = 4;
+const ROUTE_MOVE_LOWER_L = 5;
+const ROUTE_MOVE_LOWER_R = 6;
+const ROUTE_MOVE_UPPER_L = 7;
+const ROUTE_MOVE_UPPER_R = 8;
+const ROUTE_MOVE_RANDOM = 9;
+const ROUTE_MOVE_TOWARD = 10;
+const ROUTE_MOVE_AWAY = 11;
+const ROUTE_MOVE_FORWARD = 12;
+const ROUTE_MOVE_BACKWARD = 13;
+const ROUTE_JUMP = 14;
+const ROUTE_WAIT = 15;
+const ROUTE_TURN_DOWN = 16;
+const ROUTE_TURN_LEFT = 17;
+const ROUTE_TURN_RIGHT = 18;
+const ROUTE_TURN_UP = 19;
+const ROUTE_TURN_90D_R = 20;
+const ROUTE_TURN_90D_L = 21;
+const ROUTE_TURN_180D = 22;
+const ROUTE_TURN_90D_R_L = 23;
+const ROUTE_TURN_RANDOM = 24;
+const ROUTE_TURN_TOWARD = 25;
+const ROUTE_TURN_AWAY = 26;
+const ROUTE_SWITCH_ON = 27;
+const ROUTE_SWITCH_OFF = 28;
+const ROUTE_CHANGE_SPEED = 29;
+const ROUTE_CHANGE_FREQ = 30;
+const ROUTE_WALK_ANIME_ON = 31;
+const ROUTE_WALK_ANIME_OFF = 32;
+const ROUTE_STEP_ANIME_ON = 33;
+const ROUTE_STEP_ANIME_OFF = 34;
+const ROUTE_DIR_FIX_ON = 35;
+const ROUTE_DIR_FIX_OFF = 36;
+const ROUTE_THROUGH_ON = 37;
+const ROUTE_THROUGH_OFF = 38;
+const ROUTE_TRANSPARENT_ON = 39;
+const ROUTE_TRANSPARENT_OFF = 40;
+const ROUTE_CHANGE_IMAGE = 41;
+const ROUTE_CHANGE_OPACITY = 42;
+const ROUTE_CHANGE_BLEND_MODE = 43;
+const ROUTE_PLAY_SE = 44;
+const ROUTE_SCRIPT = 45;
+const createEventCommand = (code, param, indent = 0) => {
+  return {
+    code,
+    indent,
+    parameters: param
+  };
+};
+const makeEventPageCondition = (arg = {}) => {
+  return {
+    switch1Id: arg.switch1Id ?? 0,
+    switch1Valid: arg.switch1Id !== void 0,
+    switch2Id: arg.switch2Id ?? 0,
+    switch2Valid: arg.switch2Id !== void 0,
+    variableId: arg.variableId ?? 0,
+    variableValid: arg.variableId !== void 0,
+    variableValue: arg.variableValue ?? 0,
+    selfSwitchCh: arg.selfSwitchCh ?? "A",
+    selfSwitchValid: arg.selfSwitchCh !== void 0,
+    itemId: arg.itemId ?? 0,
+    itemValid: arg.itemId !== void 0,
+    actorId: arg.actorId ?? 0,
+    actorValid: arg.actorId !== void 0
+  };
+};
+const makeMapEvent = () => {
+  return {
+    id: 1,
+    name: "",
+    pages: [],
+    note: "",
+    x: 0,
+    y: 0
+  };
+};
+const makeMapEventIamge = () => {
+  return {
+    characterIndex: 0,
+    characterName: "",
+    direction: 2,
+    pattern: 0,
+    tileId: 0
+  };
+};
+const makeMapEventPage = () => {
+  return {
+    conditions: makeEventPageCondition(),
+    list: [],
+    directionFix: false,
+    image: makeMapEventIamge(),
+    moveFrequency: 5,
+    moveRoute: {
+      list: [],
+      repeat: false,
+      skippable: false,
+      wait: false
+    }
+  };
+};
+const SCHEMA_DATA_MAP_INFO = {
+  type: "object",
+  required: [
+    "name",
+    "id",
+    "expanded",
+    "order",
+    "parentId",
+    "scrollX",
+    "scrollY"
+  ],
+  properties: {
+    name: { type: "string" },
+    id: { type: "integer", minimum: 0 },
+    expanded: { type: "boolean" },
+    order: { type: "integer" },
+    parentId: { type: "integer" },
+    scrollX: { type: "integer" },
+    scrollY: { type: "integer" }
+  }
+};
+const makeMapName = (mapId) => {
+  return mapId.toString().padStart(3, "0");
+};
+const makeMapInfoData = (info = { id: 0 }) => {
+  return {
+    name: info.name ?? makeMapName(info.id),
+    id: info.id,
+    expanded: info.expanded ?? false,
+    order: info.order ?? 0,
+    parentId: info.parentId ?? 0,
+    scrollX: info.scrollX ?? 0,
+    scrollY: info.scrollY ?? 0
+  };
+};
+const makeMapData = (map = {}) => {
+  return {
+    data: map.data ?? [],
+    battleback1Name: map.battleback1Name ?? "",
+    battleback2Name: map.battleback2Name ?? "",
+    autoplayBgm: map.autoplayBgm ?? false,
+    autoplayBgs: map.autoplayBgs ?? false,
+    parallaxLoopX: map.parallaxLoopX ?? false,
+    parallaxLoopY: map.parallaxLoopY ?? false,
+    parallaxName: map.parallaxName ?? "",
+    parallaxShow: map.parallaxShow ?? false,
+    parallaxSx: map.parallaxSx ?? 0,
+    parallaxSy: map.parallaxSy ?? 0,
+    x: map.x ?? 0,
+    y: map.y ?? 0,
+    width: map.width ?? 0,
+    height: map.height ?? 0,
+    note: map.note ?? "",
+    bgm: map.bgm ?? { name: "", pan: 0, pitch: 100, volume: 100 },
+    bgs: map.bgs ?? { name: "", pan: 0, pitch: 100, volume: 100 },
+    disableDashing: map.disableDashing ?? false,
+    displayName: map.displayName ?? "",
+    encounterList: map.encounterList ?? [],
+    events: map.events ?? []
+  };
+};
+const makeCommonEventData = (data = {}) => ({
+  id: data.id ?? 0,
+  name: data.name ?? "",
+  trigger: data.trigger ?? 0,
+  list: data.list ?? [],
+  switchId: data.switchId ?? 0
+});
+const makeTroopData = (data = {}) => ({
+  id: data.id ?? 0,
+  name: data.name ?? "",
+  members: data.members ?? [],
+  pages: data.pages ?? []
+});
+const makeTroopMember = (data = {}) => ({
+  enemyId: data.enemyId ?? 0,
+  x: data.x ?? 0,
+  y: data.y ?? 0,
+  hidden: data.hidden ?? false
+});
+const makeTroopEventConditions = (data = {}) => ({
+  actorHp: data.actorHp ?? 0,
+  actorId: data.actorId ?? 0,
+  enemyValid: data.enemyValid ?? 0,
+  switchValid: data.switchValid ?? 0
+});
+const SCHEMA_MOVEROUTE_DATA = {
+  type: "object",
+  required: ["wait", "repeat", "skippable", "list"],
+  properties: {
+    wait: { type: "boolean" },
+    repeat: { type: "boolean" },
+    skippable: { type: "boolean" },
+    list: {
+      type: "array",
+      items: {
+        type: "object",
+        required: ["code", "parameters"],
+        properties: {
+          code: { type: "integer" },
+          parameters: {
+            type: "array",
+            items: {
+              oneOf: [
+                { type: "string" },
+                { type: "number" },
+                {
+                  type: "object",
+                  required: ["name", "pan", "pitch", "volume"],
+                  properties: {
+                    name: { type: "string" },
+                    pan: { type: "integer" },
+                    pitch: { type: "integer" },
+                    volume: { type: "integer" }
+                  }
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+};
+const SCHEMA_MAP_EVENT_PAGE_CONDITION = {
+  type: "object",
+  required: [
+    "switch1Id",
+    "switch1Valid",
+    "switch2Id",
+    "switch2Valid",
+    "variableId",
+    "variableValid",
+    "selfSwitchCh",
+    "selfSwitchValid",
+    "variableValue",
+    "itemId",
+    "itemValid",
+    "actorId",
+    "actorValid"
+  ],
+  properties: {
+    switch1Id: { type: "integer", minimum: 0 },
+    switch1Valid: { type: "boolean" },
+    switch2Id: { type: "integer", minimum: 0 },
+    switch2Valid: { type: "boolean" },
+    variableId: { type: "integer", minimum: 0 },
+    variableValid: { type: "boolean" },
+    selfSwitchCh: { type: "string" },
+    selfSwitchValid: { type: "boolean" },
+    variableValue: { type: "integer" },
+    itemId: { type: "integer", minimum: 0 },
+    itemValid: { type: "boolean" },
+    actorId: { type: "integer" },
+    actorValid: { type: "boolean" }
+  }
+};
+const SCHEMA_MAP_EVENT_IMAGE = {
+  type: "object",
+  required: [
+    "characterIndex",
+    "characterName",
+    "direction",
+    "pattern",
+    "tileId"
+  ],
+  properties: {
+    characterIndex: { type: "integer", minimum: 0 },
+    characterName: { type: "string" },
+    direction: { type: "integer", enum: [2, 4, 6, 8] },
+    pattern: { type: "integer" },
+    tileId: { type: "integer" }
+  }
+};
+const SCHEMA_MAP_EVENT_PAGE = {
+  type: "object",
+  required: [
+    "image",
+    "moveRoute",
+    "conditions",
+    "directionFix",
+    "moveFrequency"
+  ],
+  properties: {
+    moveFrequency: { type: "integer" },
+    directionFix: { type: "boolean" },
+    conditions: SCHEMA_MAP_EVENT_PAGE_CONDITION,
+    image: SCHEMA_MAP_EVENT_IMAGE,
+    moveRoute: SCHEMA_MOVEROUTE_DATA
+    // list: {
+    //   type: "array",
+    //   items: {
+    //     type: "object",
+    //     required: ["code", "indent", "parameters"],
+    //     properties: {
+    //       code: { type: "integer" },
+    //       indent: { type: "integer" },
+    //       parameters: {
+    //         type: "array",
+    //         items: {},
+    //       },
+    //     },
+    //   },
+    // },
+  }
+};
+const SCHEMA_DATA_MAP = {
+  type: "object",
+  required: [
+    "battleback1Name",
+    "battleback2Name",
+    "note",
+    "width",
+    "height",
+    "x",
+    "y",
+    "parallaxSy",
+    "parallaxSx",
+    "parallaxLoopY",
+    "parallaxLoopX",
+    "disableDashing",
+    "parallaxName",
+    "parallaxShow",
+    "displayName",
+    "data",
+    "autoplayBgm",
+    "bgm",
+    "autoplayBgs",
+    "bgs"
+  ],
+  properties: {
+    data: { type: "array", items: { type: "integer" } },
+    battleback1Name: { type: "string" },
+    battleback2Name: { type: "string" },
+    parallaxLoopY: { type: "boolean" },
+    parallaxLoopX: { type: "boolean" },
+    parallaxName: { type: "string" },
+    parallaxShow: { type: "boolean" },
+    parallaxSy: { type: "integer" },
+    parallaxSx: { type: "integer" },
+    x: { type: "integer", minimum: 0 },
+    y: { type: "integer", minimum: 0 },
+    width: { type: "integer", minimum: 0 },
+    height: { type: "integer", minimum: 0 },
+    note: { type: "string" },
+    displayName: { type: "string" },
+    disableDashing: { type: "boolean" },
+    autoplayBgm: { type: "boolean" },
+    bgm: {
+      type: "object",
+      required: ["name", "pan", "pitch", "volume"],
+      properties: {
+        name: { type: "string" },
+        pan: { type: "integer" },
+        pitch: { type: "integer" },
+        volume: { type: "integer" }
+      }
+    },
+    autoplayBgs: { type: "boolean" },
+    bgs: {
+      type: "object",
+      required: ["name", "pan", "pitch", "volume"],
+      properties: {
+        name: { type: "string" },
+        pan: { type: "integer" },
+        pitch: { type: "integer" },
+        volume: { type: "integer" }
+      }
+    },
+    encounterList: {
+      type: "array",
+      items: {
+        type: "object",
+        required: ["regionSet", "troopId", "weight"],
+        properties: {
+          regionSet: { type: "array", items: { type: "integer" } },
+          troopId: { type: "integer" },
+          weight: { type: "integer" }
+        }
+      }
+    },
+    events: {
+      type: "array",
+      items: {
+        type: "object",
+        required: [
+          "id",
+          "name",
+          "x",
+          "y",
+          "pages"
+        ],
+        properties: {
+          id: { type: "integer" },
+          name: { type: "string" },
+          x: { type: "integer" },
+          y: { type: "integer" },
+          note: { type: "string" },
+          pages: {
+            type: "array",
+            items: SCHEMA_MAP_EVENT_PAGE
+          }
+        }
+      }
+    }
+  }
+  // satisfies Record<keyof Data_Map, unknown>,
+};
+const ajv$1 = new Ajv();
+const mapInfo = ajv$1.compile(SCHEMA_DATA_MAP_INFO);
+const mapData = ajv$1.compile(SCHEMA_DATA_MAP);
+const isDataMapInfo = (data) => {
+  return mapInfo(data);
+};
+const isDataMap = (data) => {
+  return mapData(data);
+};
+const createNoteEntity = (key, value) => {
+  return `<${key}:${value}>`;
+};
+const makeRegex = () => /<([^<>:]+):([^>]*)>/g;
+const readNoteObject = (data, fn) => readNoteEx(data.note, (key, value) => fn(key, value, data));
+const readNote = (note) => {
+  return readNoteEx(note, (key, value) => [key, value]);
+};
+const readNoteEx = (note, fn) => {
+  const regex = makeRegex();
+  return Array.from(note.matchAll(regex), (match) => fn(match[1], match[2]));
+};
+const replaceNote = (note, transformFunction) => {
+  return note.replaceAll(
+    makeRegex(),
+    (_subString, key, value) => {
+      const newText = transformFunction(key, value);
+      return createNoteEntity(key, newText);
+    }
+  );
+};
+const getNoteValue = (note, targetKey) => {
+  const regex = makeRegex();
+  const match = Array.from(note.matchAll(regex)).find(
+    (m) => m[1] === targetKey
+  );
+  return match ? match[2] : void 0;
+};
+const setNoteValue = (note, targetKey, newValue) => {
+  const regex = makeRegex();
+  return note.replace(regex, (match, key) => {
+    if (key === targetKey) {
+      return createNoteEntity(key, newValue);
+    }
+    return match;
+  });
+};
+const createControlCharFormat = (char, id) => {
+  return `\\${char}[${id}]`;
+};
+const fromStringArray = (char, array) => {
+  return array.map((text, index) => ({
+    text,
+    controlChar: createControlCharFormat(char, index)
+  }));
+};
+const getControlChars = (text) => {
+  const regex = /\\([A-Za-z]+)\[(\d+)]/g;
+  return Array.from(text.matchAll(regex)).map(
+    (match) => ({
+      char: match[1],
+      id: parseInt(match[2], 10)
+    })
+  );
+};
+const CTRL_CHAR_ACTOR = "N";
+const CTRL_CHAR_VARIABLE = "V";
+const createActorControlChars = (actors) => {
+  return actors.map((actor2) => ({
+    text: actor2.name,
+    controlChar: createControlCharFormat(CTRL_CHAR_ACTOR, actor2.id)
+  }));
+};
+const createSystemVariableControlChars = (system) => {
+  return system.variables.map((name, index) => ({
+    text: name || "",
+    controlChar: createControlCharFormat(CTRL_CHAR_VARIABLE, index)
+  })).filter((pair) => pair.text !== "");
+};
 const LABEL_REGISTRY_JP = {
   rpg: {
     damage: DEFAULT_DAMAGE_LABELS,
@@ -1630,35 +3832,35 @@ const OPERAND_VARIABLE = 1;
 const OPERAND_RANDOM = 2;
 const OPERAND_GAMEDATA = 3;
 const OPERAND_SCRIPT = 4;
-const getEnemyValue = (enemy, param) => {
+const getEnemyValue = (enemy2, param) => {
   switch (param[6]) {
     case 0:
-      return enemy.hp;
+      return enemy2.hp;
     case 1:
-      return enemy.mp;
+      return enemy2.mp;
     case 10:
-      return enemy.tp;
+      return enemy2.tp;
   }
   if (param[6] >= 2 && param[6] <= 9) {
-    return enemy.param(param[6] - 2);
+    return enemy2.param(param[6] - 2);
   }
   return 0;
 };
-const getActorValue = (actor, param) => {
+const getActorValue = (actor2, param) => {
   switch (param[6]) {
     case 0:
-      return actor.level;
+      return actor2.level;
     case 1:
-      return actor.currentExp();
+      return actor2.currentExp();
     case 2:
-      return actor.hp;
+      return actor2.hp;
     case 3:
-      return actor.mp;
+      return actor2.mp;
     case 12:
-      return actor.tp;
+      return actor2.tp;
   }
   if (param[6] >= 4 && param[6] <= 11) {
-    return actor.param(param[6] - 4);
+    return actor2.param(param[6] - 4);
   }
   return 0;
 };
@@ -1789,10 +3991,95 @@ const isPrimitive = (value) => typeof value === "string" || typeof value === "nu
 const isCloneableCommand = (value) => {
   return value.parameters.every(isPrimitive);
 };
+exports.ABORT_BATTLE = ABORT_BATTLE;
 exports.AUTHOR_RMMZ = AUTHOR_RMMZ;
+exports.BATTLE_PROCESSING = BATTLE_PROCESSING;
+exports.CHANGE_ACTOR_IMAGES = CHANGE_ACTOR_IMAGES;
+exports.CHANGE_ARMORS = CHANGE_ARMORS;
+exports.CHANGE_BATTLE_BACKGROUND = CHANGE_BATTLE_BACKGROUND;
+exports.CHANGE_BATTLE_BGM = CHANGE_BATTLE_BGM;
+exports.CHANGE_CLASS = CHANGE_CLASS;
+exports.CHANGE_DEFEAT_ME = CHANGE_DEFEAT_ME;
+exports.CHANGE_ENCOUNTER = CHANGE_ENCOUNTER;
+exports.CHANGE_ENEMY_HP = CHANGE_ENEMY_HP;
+exports.CHANGE_ENEMY_MP = CHANGE_ENEMY_MP;
+exports.CHANGE_ENEMY_STATE = CHANGE_ENEMY_STATE;
+exports.CHANGE_ENEMY_TP = CHANGE_ENEMY_TP;
+exports.CHANGE_EXP = CHANGE_EXP;
+exports.CHANGE_FORMATION_ACCESS = CHANGE_FORMATION_ACCESS;
+exports.CHANGE_GOLD = CHANGE_GOLD;
+exports.CHANGE_HP = CHANGE_HP;
+exports.CHANGE_ITEMS = CHANGE_ITEMS;
+exports.CHANGE_MENU_ACCESS = CHANGE_MENU_ACCESS;
+exports.CHANGE_MP = CHANGE_MP;
+exports.CHANGE_NAME = CHANGE_NAME;
+exports.CHANGE_NICKNAME = CHANGE_NICKNAME;
+exports.CHANGE_PARALLAX = CHANGE_PARALLAX;
+exports.CHANGE_PARTY_MEMBER = CHANGE_PARTY_MEMBER;
+exports.CHANGE_PLAYER_FOLLOWERS = CHANGE_PLAYER_FOLLOWERS;
+exports.CHANGE_PROFILE = CHANGE_PROFILE;
+exports.CHANGE_SAVE_ACCESS = CHANGE_SAVE_ACCESS;
+exports.CHANGE_TILESET = CHANGE_TILESET;
+exports.CHANGE_TP = CHANGE_TP;
+exports.CHANGE_TRANSPARENCY = CHANGE_TRANSPARENCY;
+exports.CHANGE_VEHICLE_BGM = CHANGE_VEHICLE_BGM;
+exports.CHANGE_VEHICLE_IMAGE = CHANGE_VEHICLE_IMAGE;
+exports.CHANGE_VICTORY_ME = CHANGE_VICTORY_ME;
+exports.CHANGE_WEAPONS = CHANGE_WEAPONS;
+exports.CHANGE_WINDOW_COLOR = CHANGE_WINDOW_COLOR;
+exports.COLLAPS_BOSS = COLLAPS_BOSS;
+exports.COLLAPS_INSTANT = COLLAPS_INSTANT;
+exports.COLLAPS_NONE = COLLAPS_NONE;
+exports.COLLAPS_NORMAL = COLLAPS_NORMAL;
+exports.COMMENT_BODY = COMMENT_BODY;
+exports.COMMENT_HEAD = COMMENT_HEAD;
+exports.COMMON_EVENT = COMMON_EVENT;
+exports.CONDITIONAL_BRANCH = CONDITIONAL_BRANCH;
+exports.CONDITIONAL_BRANCH_ELSE = CONDITIONAL_BRANCH_ELSE;
+exports.CONTROL_SELF_SWITCH = CONTROL_SELF_SWITCH;
+exports.CONTROL_SWITCHES = CONTROL_SWITCHES;
+exports.CONTROL_TIMER = CONTROL_TIMER;
+exports.CONTROL_VARIABLES = CONTROL_VARIABLES;
+exports.DEFAULT_DAMAGE_LABELS = DEFAULT_DAMAGE_LABELS;
 exports.DEFAULT_GLOBAL_LABELS = DEFAULT_GLOBAL_LABELS;
+exports.DEFAULT_ITEM_LABELS = DEFAULT_ITEM_LABELS;
+exports.DEFAULT_SKILL_LABELS = DEFAULT_SKILL_LABELS;
 exports.DEFAULT_SYSTEM_LABELS_BOOLEAN = DEFAULT_SYSTEM_LABELS_BOOLEAN;
 exports.DEFAULT_SYSTEM_LABELS_DATA_TYPES = DEFAULT_SYSTEM_LABELS_DATA_TYPES;
+exports.DEFAULT_USABLE_ITEM_LABELS = DEFAULT_USABLE_ITEM_LABELS;
+exports.EFFECT_ADD_BUFF = EFFECT_ADD_BUFF;
+exports.EFFECT_ADD_DEBUFF = EFFECT_ADD_DEBUFF;
+exports.EFFECT_ADD_STATE = EFFECT_ADD_STATE;
+exports.EFFECT_COMMON_EVENT = EFFECT_COMMON_EVENT;
+exports.EFFECT_GAIN_TP = EFFECT_GAIN_TP;
+exports.EFFECT_GROW = EFFECT_GROW;
+exports.EFFECT_LEARN_SKILL = EFFECT_LEARN_SKILL;
+exports.EFFECT_RECOVER_HP = EFFECT_RECOVER_HP;
+exports.EFFECT_RECOVER_MP = EFFECT_RECOVER_MP;
+exports.EFFECT_REMOVE_BUFF = EFFECT_REMOVE_BUFF;
+exports.EFFECT_REMOVE_DEBUFF = EFFECT_REMOVE_DEBUFF;
+exports.EFFECT_REMOVE_STATE = EFFECT_REMOVE_STATE;
+exports.EFFECT_SPECIAL = EFFECT_SPECIAL;
+exports.ENEMY_APPEAR = ENEMY_APPEAR;
+exports.ENEMY_RECOVER_ALL = ENEMY_RECOVER_ALL;
+exports.ENEMY_TRANSFORM = ENEMY_TRANSFORM;
+exports.ERASE_EVENT = ERASE_EVENT;
+exports.ERASE_PICTURE = ERASE_PICTURE;
+exports.EXIT_EVENT_PROCESSING = EXIT_EVENT_PROCESSING;
+exports.EXTRA_PARAM_CEV = EXTRA_PARAM_CEV;
+exports.EXTRA_PARAM_CNT = EXTRA_PARAM_CNT;
+exports.EXTRA_PARAM_CRI = EXTRA_PARAM_CRI;
+exports.EXTRA_PARAM_EVA = EXTRA_PARAM_EVA;
+exports.EXTRA_PARAM_HIT = EXTRA_PARAM_HIT;
+exports.EXTRA_PARAM_HRG = EXTRA_PARAM_HRG;
+exports.EXTRA_PARAM_MEV = EXTRA_PARAM_MEV;
+exports.EXTRA_PARAM_MRF = EXTRA_PARAM_MRF;
+exports.EXTRA_PARAM_MRG = EXTRA_PARAM_MRG;
+exports.EXTRA_PARAM_TRG = EXTRA_PARAM_TRG;
+exports.FADEIN_SCREEN = FADEIN_SCREEN;
+exports.FADEOUT_BGM = FADEOUT_BGM;
+exports.FADEOUT_BGS = FADEOUT_BGS;
+exports.FADEOUT_SCREEN = FADEOUT_SCREEN;
 exports.FILENAME_ACTORS = FILENAME_ACTORS;
 exports.FILENAME_ANIMATIONS = FILENAME_ANIMATIONS;
 exports.FILENAME_ARMORS = FILENAME_ARMORS;
@@ -1807,6 +4094,11 @@ exports.FILENAME_SYSTEM = FILENAME_SYSTEM;
 exports.FILENAME_TILESET = FILENAME_TILESET;
 exports.FILENAME_TROOPS = FILENAME_TROOPS;
 exports.FILENAME_WEAPONS = FILENAME_WEAPONS;
+exports.FLAG_ID_AUTO_BATTLE = FLAG_ID_AUTO_BATTLE;
+exports.FLAG_ID_GUARD = FLAG_ID_GUARD;
+exports.FLAG_ID_PRESERVE_TP = FLAG_ID_PRESERVE_TP;
+exports.FLAG_ID_SUBSTITUTE = FLAG_ID_SUBSTITUTE;
+exports.FLASH_SCREEN = FLASH_SCREEN;
 exports.FOLDER_AUDIO = FOLDER_AUDIO;
 exports.FOLDER_AUDIO_BGM = FOLDER_AUDIO_BGM;
 exports.FOLDER_AUDIO_BGS = FOLDER_AUDIO_BGS;
@@ -1828,44 +4120,257 @@ exports.FOLDER_IMG_TILESETS = FOLDER_IMG_TILESETS;
 exports.FOLDER_IMG_TITLES1 = FOLDER_IMG_TITLES1;
 exports.FOLDER_IMG_TITLES2 = FOLDER_IMG_TITLES2;
 exports.FOLDER_JS = FOLDER_JS;
+exports.FORCE_ACTION = FORCE_ACTION;
+exports.GAME_OVER = GAME_OVER;
+exports.GATHER_FOLLOWERS = GATHER_FOLLOWERS;
+exports.GET_LOCATION_INFO = GET_LOCATION_INFO;
+exports.GET_ONOFF_VEHICLE = GET_ONOFF_VEHICLE;
+exports.HITTYPE_CERTAIN = HITTYPE_CERTAIN;
+exports.HITTYPE_MAGICAL = HITTYPE_MAGICAL;
+exports.HITTYPE_PHYSICAL = HITTYPE_PHYSICAL;
+exports.INPUT_NUMBER = INPUT_NUMBER;
+exports.LABEL = LABEL;
+exports.LABELS_DATA_WEAPON = LABELS_DATA_WEAPON;
+exports.LABEL_JUMP = LABEL_JUMP;
 exports.LABEL_REGISTRY_JP = LABEL_REGISTRY_JP;
-exports.MODULE_DATA = MODULE_DATA;
+exports.LABEL_SET_DATA = LABEL_SET_DATA;
+exports.LABEL_SET_ITEM_EFFECT = LABEL_SET_ITEM_EFFECT;
+exports.LABEL_SET_TRAIT = LABEL_SET_TRAIT;
+exports.LOOP = LOOP;
+exports.LOOP_BREAK = LOOP_BREAK;
+exports.MODULE_DATA = MODULE_DATA$1;
 exports.MODULE_SYSTEM = MODULE_SYSTEM$1;
+exports.MODULE_TRAIT = MODULE_TRAIT;
+exports.MOVE_PICTURE = MOVE_PICTURE;
+exports.NAME_INPUT_PROCESSING = NAME_INPUT_PROCESSING;
+exports.NO_OPERATION = NO_OPERATION;
+exports.OPEN_MENU_SCREEN = OPEN_MENU_SCREEN;
+exports.OPEN_SAVE_SCREEN = OPEN_SAVE_SCREEN;
 exports.OPERAND_CONSTANT = OPERAND_CONSTANT;
 exports.OPERAND_GAMEDATA = OPERAND_GAMEDATA;
 exports.OPERAND_RANDOM = OPERAND_RANDOM;
 exports.OPERAND_SCRIPT = OPERAND_SCRIPT;
 exports.OPERAND_VARIABLE = OPERAND_VARIABLE;
+exports.PARTY_ABILITY_CANCEL_SURPRISE = PARTY_ABILITY_CANCEL_SURPRISE;
+exports.PARTY_ABILITY_DROP_ITEM_DOUBLE = PARTY_ABILITY_DROP_ITEM_DOUBLE;
+exports.PARTY_ABILITY_ENCOUNTER_HALF = PARTY_ABILITY_ENCOUNTER_HALF;
+exports.PARTY_ABILITY_ENCOUNTER_NONE = PARTY_ABILITY_ENCOUNTER_NONE;
+exports.PARTY_ABILITY_GOLD_DOUBLE = PARTY_ABILITY_GOLD_DOUBLE;
+exports.PARTY_ABILITY_RAISE_PREEMPTIVE = PARTY_ABILITY_RAISE_PREEMPTIVE;
+exports.PLAY_BGM = PLAY_BGM;
+exports.PLAY_BGS = PLAY_BGS;
+exports.PLAY_ME = PLAY_ME;
+exports.PLAY_MOVIE = PLAY_MOVIE;
+exports.PLAY_SE = PLAY_SE;
+exports.PLUGIN_COMMAND_MV = PLUGIN_COMMAND_MV;
+exports.PLUGIN_COMMAND_MZ = PLUGIN_COMMAND_MZ;
+exports.RECOVER_ALL = RECOVER_ALL;
+exports.REGULAR_PARAM_AGI = REGULAR_PARAM_AGI;
+exports.REGULAR_PARAM_ATK = REGULAR_PARAM_ATK;
+exports.REGULAR_PARAM_DEF = REGULAR_PARAM_DEF;
+exports.REGULAR_PARAM_LUK = REGULAR_PARAM_LUK;
+exports.REGULAR_PARAM_MATK = REGULAR_PARAM_MATK;
+exports.REGULAR_PARAM_MAX_HP = REGULAR_PARAM_MAX_HP;
+exports.REGULAR_PARAM_MAX_MP = REGULAR_PARAM_MAX_MP;
+exports.REGULAR_PARAM_MDEF = REGULAR_PARAM_MDEF;
+exports.RESUME_BGM = RESUME_BGM;
+exports.RETURN_TO_TITLE_SCREEN = RETURN_TO_TITLE_SCREEN;
+exports.ROTATE_PICTURE = ROTATE_PICTURE;
+exports.ROUTE_CHANGE_BLEND_MODE = ROUTE_CHANGE_BLEND_MODE;
+exports.ROUTE_CHANGE_FREQ = ROUTE_CHANGE_FREQ;
+exports.ROUTE_CHANGE_IMAGE = ROUTE_CHANGE_IMAGE;
+exports.ROUTE_CHANGE_OPACITY = ROUTE_CHANGE_OPACITY;
+exports.ROUTE_CHANGE_SPEED = ROUTE_CHANGE_SPEED;
+exports.ROUTE_DIR_FIX_OFF = ROUTE_DIR_FIX_OFF;
+exports.ROUTE_DIR_FIX_ON = ROUTE_DIR_FIX_ON;
+exports.ROUTE_END = ROUTE_END;
+exports.ROUTE_JUMP = ROUTE_JUMP;
+exports.ROUTE_MOVE_AWAY = ROUTE_MOVE_AWAY;
+exports.ROUTE_MOVE_BACKWARD = ROUTE_MOVE_BACKWARD;
+exports.ROUTE_MOVE_DOWN = ROUTE_MOVE_DOWN;
+exports.ROUTE_MOVE_FORWARD = ROUTE_MOVE_FORWARD;
+exports.ROUTE_MOVE_LEFT = ROUTE_MOVE_LEFT;
+exports.ROUTE_MOVE_LOWER_L = ROUTE_MOVE_LOWER_L;
+exports.ROUTE_MOVE_LOWER_R = ROUTE_MOVE_LOWER_R;
+exports.ROUTE_MOVE_RANDOM = ROUTE_MOVE_RANDOM;
+exports.ROUTE_MOVE_RIGHT = ROUTE_MOVE_RIGHT;
+exports.ROUTE_MOVE_TOWARD = ROUTE_MOVE_TOWARD;
+exports.ROUTE_MOVE_UP = ROUTE_MOVE_UP;
+exports.ROUTE_MOVE_UPPER_L = ROUTE_MOVE_UPPER_L;
+exports.ROUTE_MOVE_UPPER_R = ROUTE_MOVE_UPPER_R;
+exports.ROUTE_PLAY_SE = ROUTE_PLAY_SE;
+exports.ROUTE_SCRIPT = ROUTE_SCRIPT;
+exports.ROUTE_STEP_ANIME_OFF = ROUTE_STEP_ANIME_OFF;
+exports.ROUTE_STEP_ANIME_ON = ROUTE_STEP_ANIME_ON;
+exports.ROUTE_SWITCH_OFF = ROUTE_SWITCH_OFF;
+exports.ROUTE_SWITCH_ON = ROUTE_SWITCH_ON;
+exports.ROUTE_THROUGH_OFF = ROUTE_THROUGH_OFF;
+exports.ROUTE_THROUGH_ON = ROUTE_THROUGH_ON;
+exports.ROUTE_TRANSPARENT_OFF = ROUTE_TRANSPARENT_OFF;
+exports.ROUTE_TRANSPARENT_ON = ROUTE_TRANSPARENT_ON;
+exports.ROUTE_TURN_180D = ROUTE_TURN_180D;
+exports.ROUTE_TURN_90D_L = ROUTE_TURN_90D_L;
+exports.ROUTE_TURN_90D_R = ROUTE_TURN_90D_R;
+exports.ROUTE_TURN_90D_R_L = ROUTE_TURN_90D_R_L;
+exports.ROUTE_TURN_AWAY = ROUTE_TURN_AWAY;
+exports.ROUTE_TURN_DOWN = ROUTE_TURN_DOWN;
+exports.ROUTE_TURN_LEFT = ROUTE_TURN_LEFT;
+exports.ROUTE_TURN_RANDOM = ROUTE_TURN_RANDOM;
+exports.ROUTE_TURN_RIGHT = ROUTE_TURN_RIGHT;
+exports.ROUTE_TURN_TOWARD = ROUTE_TURN_TOWARD;
+exports.ROUTE_TURN_UP = ROUTE_TURN_UP;
+exports.ROUTE_WAIT = ROUTE_WAIT;
+exports.ROUTE_WALK_ANIME_OFF = ROUTE_WALK_ANIME_OFF;
+exports.ROUTE_WALK_ANIME_ON = ROUTE_WALK_ANIME_ON;
+exports.SAVE_BGM = SAVE_BGM;
+exports.SCHEMA_DAMAGE = SCHEMA_DAMAGE;
+exports.SCHEMA_DATA_ACTOR = SCHEMA_DATA_ACTOR;
+exports.SCHEMA_DATA_ARMMOR = SCHEMA_DATA_ARMMOR;
+exports.SCHEMA_DATA_CLASS = SCHEMA_DATA_CLASS;
+exports.SCHEMA_DATA_ENEMY = SCHEMA_DATA_ENEMY;
+exports.SCHEMA_DATA_ITEM = SCHEMA_DATA_ITEM;
+exports.SCHEMA_DATA_MAP_INFO = SCHEMA_DATA_MAP_INFO;
+exports.SCHEMA_DATA_SKILL = SCHEMA_DATA_SKILL;
+exports.SCHEMA_DATA_STATE = SCHEMA_DATA_STATE;
+exports.SCHEMA_DATA_WEAPON = SCHEMA_DATA_WEAPON;
 exports.SCHEMA_SYSTEM_ADVANCED = SCHEMA_SYSTEM_ADVANCED;
+exports.SCHEMA_TRAIT = SCHEMA_TRAIT;
+exports.SCRIPT_EVAL = SCRIPT_EVAL;
+exports.SCRIPT_EVAL_BODY = SCRIPT_EVAL_BODY;
+exports.SCROLL_MAP = SCROLL_MAP;
+exports.SELECT_ITEM = SELECT_ITEM;
+exports.SET_EVENT_LOCATION = SET_EVENT_LOCATION;
+exports.SET_MOVEMENT_ROUTE = SET_MOVEMENT_ROUTE;
+exports.SET_VEHICLE_LOCATION = SET_VEHICLE_LOCATION;
+exports.SET_WEATHER_EFFECT = SET_WEATHER_EFFECT;
+exports.SHAKE_SCREEN = SHAKE_SCREEN;
+exports.SHOP_PROCESSING = SHOP_PROCESSING;
+exports.SHOP_PROCESSING_BODY = SHOP_PROCESSING_BODY;
+exports.SHOW_ANIMATION = SHOW_ANIMATION;
+exports.SHOW_BALLOON_ICON = SHOW_BALLOON_ICON;
+exports.SHOW_BATTLE_ANIMATION = SHOW_BATTLE_ANIMATION;
+exports.SHOW_CHOICES = SHOW_CHOICES;
+exports.SHOW_CHOICES_ITEM = SHOW_CHOICES_ITEM;
+exports.SHOW_MESSAGE = SHOW_MESSAGE;
+exports.SHOW_MESSAGE_BODY = SHOW_MESSAGE_BODY;
+exports.SHOW_PICTURE = SHOW_PICTURE;
+exports.SHOW_SCROLLING_TEXT = SHOW_SCROLLING_TEXT;
+exports.SHOW_SCROLLING_TEXT_BODY = SHOW_SCROLLING_TEXT_BODY;
+exports.SKIP = SKIP;
+exports.SPECIAL_EFFECT_ESCAPE = SPECIAL_EFFECT_ESCAPE;
+exports.SPECIAL_PARAM_EXR = SPECIAL_PARAM_EXR;
+exports.SPECIAL_PARAM_FDR = SPECIAL_PARAM_FDR;
+exports.SPECIAL_PARAM_GRD = SPECIAL_PARAM_GRD;
+exports.SPECIAL_PARAM_MCR = SPECIAL_PARAM_MCR;
+exports.SPECIAL_PARAM_MDR = SPECIAL_PARAM_MDR;
+exports.SPECIAL_PARAM_PDR = SPECIAL_PARAM_PDR;
+exports.SPECIAL_PARAM_PHA = SPECIAL_PARAM_PHA;
+exports.SPECIAL_PARAM_REC = SPECIAL_PARAM_REC;
+exports.SPECIAL_PARAM_TCR = SPECIAL_PARAM_TCR;
+exports.SPECIAL_PARAM_TGR = SPECIAL_PARAM_TGR;
 exports.SRC_ARMOR_TYPES = SRC_ARMOR_TYPES;
 exports.SRC_COLOR = SRC_COLOR;
-exports.SRC_DATA_ACTOR = SRC_DATA_ACTOR;
-exports.SRC_DATA_ARMOR = SRC_DATA_ARMOR;
+exports.SRC_DATA_ACTOR = SRC_DATA_ACTOR$1;
+exports.SRC_DATA_ARMOR = SRC_DATA_ARMOR$1;
 exports.SRC_DATA_CLASS = SRC_DATA_CLASS;
 exports.SRC_DATA_COMMON_EVNET = SRC_DATA_COMMON_EVNET;
 exports.SRC_DATA_ENEMY = SRC_DATA_ENEMY;
 exports.SRC_DATA_ITEMS = SRC_DATA_ITEMS;
 exports.SRC_DATA_MAP = SRC_DATA_MAP;
-exports.SRC_DATA_SKILL = SRC_DATA_SKILL;
-exports.SRC_DATA_STATE = SRC_DATA_STATE;
+exports.SRC_DATA_SKILL = SRC_DATA_SKILL$1;
+exports.SRC_DATA_STATE = SRC_DATA_STATE$1;
 exports.SRC_DATA_TROOP = SRC_DATA_TROOP;
 exports.SRC_DATA_WEAPON = SRC_DATA_WEAPON;
 exports.SRC_ELEMENTS = SRC_ELEMENTS;
 exports.SRC_EQUIP_TYPES = SRC_EQUIP_TYPES;
+exports.SRC_PARAMS_EXTRA = SRC_PARAMS_EXTRA;
+exports.SRC_PARAMS_REGULAR = SRC_PARAMS_REGULAR;
+exports.SRC_PARAMS_SPECIAL = SRC_PARAMS_SPECIAL;
 exports.SRC_SKILL_TYPES = SRC_SKILL_TYPES;
 exports.SRC_SWITCHES = SRC_SWITCHES;
+exports.SRC_TRAIT_COLLAPS = SRC_TRAIT_COLLAPS;
+exports.SRC_TRAIT_PARTY_ABILITY = SRC_TRAIT_PARTY_ABILITY;
+exports.SRC_TRAIT_SPECIAL_FLAG = SRC_TRAIT_SPECIAL_FLAG;
 exports.SRC_VARIABLE = SRC_VARIABLE;
 exports.SRC_WEAPON_TYPES = SRC_WEAPON_TYPES;
+exports.STOP_SE = STOP_SE;
+exports.TINT_PICTURE = TINT_PICTURE;
+exports.TINT_SCREEN = TINT_SCREEN;
+exports.TRAIT_ACTION_PLUS = TRAIT_ACTION_PLUS;
+exports.TRAIT_ATTACK_ELEMENT = TRAIT_ATTACK_ELEMENT;
+exports.TRAIT_ATTACK_SKILL = TRAIT_ATTACK_SKILL;
+exports.TRAIT_ATTACK_SPEED = TRAIT_ATTACK_SPEED;
+exports.TRAIT_ATTACK_STATE = TRAIT_ATTACK_STATE;
+exports.TRAIT_ATTACK_TIMES = TRAIT_ATTACK_TIMES;
+exports.TRAIT_COLLAPSE_TYPE = TRAIT_COLLAPSE_TYPE;
+exports.TRAIT_DEBUFF_RATE = TRAIT_DEBUFF_RATE;
+exports.TRAIT_ELEMENT_RATE = TRAIT_ELEMENT_RATE;
+exports.TRAIT_EQUIP_ARMOR_TYPE = TRAIT_EQUIP_ARMOR_TYPE;
+exports.TRAIT_EQUIP_LOCK = TRAIT_EQUIP_LOCK;
+exports.TRAIT_EQUIP_SEAL = TRAIT_EQUIP_SEAL;
+exports.TRAIT_EQUIP_WEAPON_TYPE = TRAIT_EQUIP_WEAPON_TYPE;
+exports.TRAIT_PARAM = TRAIT_PARAM;
+exports.TRAIT_PARTY_ABILITY = TRAIT_PARTY_ABILITY;
+exports.TRAIT_SKILL_ADD = TRAIT_SKILL_ADD;
+exports.TRAIT_SKILL_SEAL = TRAIT_SKILL_SEAL;
+exports.TRAIT_SKILL_TYPE_ADD = TRAIT_SKILL_TYPE_ADD;
+exports.TRAIT_SKILL_TYPE_SEAL = TRAIT_SKILL_TYPE_SEAL;
+exports.TRAIT_SLOT_TYPE = TRAIT_SLOT_TYPE;
+exports.TRAIT_SPARAM = TRAIT_SPARAM;
+exports.TRAIT_SPECIAL_FLAG = TRAIT_SPECIAL_FLAG;
+exports.TRAIT_STATE_RATE = TRAIT_STATE_RATE;
+exports.TRAIT_STATE_RESIST = TRAIT_STATE_RESIST;
+exports.TRAIT_XPARAM = TRAIT_XPARAM;
+exports.TRANSFER_PLAYER = TRANSFER_PLAYER;
+exports.TYPENAME_TRAIT = TYPENAME_TRAIT;
+exports.WAIT = WAIT;
+exports.actorSourceId = actorSourceId;
+exports.armorSourceId = armorSourceId;
 exports.buildArmorTypesSource = buildArmorTypesSource;
+exports.buildCollapsSource = buildCollapsSource;
 exports.buildElementTypesSource = buildElementTypesSource;
 exports.buildEquipTypesSource = buildEquipTypesSource;
+exports.buildExtraParamSource = buildExtraParamSource;
+exports.buildPartyAbilitySource = buildPartyAbilitySource;
+exports.buildRegularParamSource = buildRegularParamSource;
 exports.buildSkillTypesSource = buildSkillTypesSource;
+exports.buildSpecialFlagSource = buildSpecialFlagSource;
+exports.buildSpecialParamSource = buildSpecialParamSource;
 exports.buildVariableNamesSource = buildVariableNamesSource;
 exports.buildWeaponTypesSource = buildWeaponTypesSource;
 exports.cloneChoices = cloneChoices;
 exports.cloneEventCommand = cloneEventCommand;
 exports.cloneParameters = cloneParameters;
+exports.collapsOptionsToArray = collapsOptionsToArray;
+exports.collapsSourceId = collapsSourceId;
 exports.convertCommentArrayToObject = convertCommentArrayToObject;
+exports.createActorControlChars = createActorControlChars;
+exports.createControlCharFormat = createControlCharFormat;
+exports.createEventCommand = createEventCommand;
+exports.createNoteEntity = createNoteEntity;
+exports.createSystemVariableControlChars = createSystemVariableControlChars;
+exports.defineEffectAddBuff = defineEffectAddBuff;
+exports.defineEffectAddDebuff = defineEffectAddDebuff;
+exports.defineEffectAddState = defineEffectAddState;
+exports.defineEffectCommonEvent = defineEffectCommonEvent;
+exports.defineEffectGainTp = defineEffectGainTp;
+exports.defineEffectGrow = defineEffectGrow;
+exports.defineEffectLearnSkill = defineEffectLearnSkill;
+exports.defineEffectRecoverHp = defineEffectRecoverHp;
+exports.defineEffectRecoverMp = defineEffectRecoverMp;
+exports.defineEffectRemoveBuff = defineEffectRemoveBuff;
+exports.defineEffectRemoveDebuff = defineEffectRemoveDebuff;
+exports.defineEffectRemoveState = defineEffectRemoveState;
+exports.defineTraitCollapseType = defineTraitCollapseType;
+exports.defineTraitExtraParam = defineTraitExtraParam;
+exports.defineTraitRegularParam = defineTraitRegularParam;
+exports.defineTraitSpecialParam = defineTraitSpecialParam;
+exports.enemySourceId = enemySourceId;
+exports.extraParamName = extraParamName;
+exports.extraParamSourceId = extraParamSourceId;
+exports.extraParamsToArray = extraParamsToArray;
+exports.formatItemEffectText = formatItemEffectText;
+exports.formatTraitText = formatTraitText;
 exports.fromArrayCommonEvent = fromArrayCommonEvent;
 exports.fromArrayControlSwitches = fromArrayControlSwitches;
 exports.fromArrayInputNumber = fromArrayInputNumber;
@@ -1874,8 +4379,11 @@ exports.fromArrayScrollingTextHeader = fromArrayScrollingTextHeader;
 exports.fromArraySetupChoice = fromArraySetupChoice;
 exports.fromArraySetupChoiceItem = fromArraySetupChoiceItem;
 exports.fromArrayShowMessageHeader = fromArrayShowMessageHeader;
+exports.fromStringArray = fromStringArray;
 exports.getActorValue = getActorValue;
+exports.getControlChars = getControlChars;
 exports.getEnemyValue = getEnemyValue;
+exports.getNoteValue = getNoteValue;
 exports.isCloneableCommand = isCloneableCommand;
 exports.isCommandAudio = isCommandAudio;
 exports.isCommandChangeActorText = isCommandChangeActorText;
@@ -1900,10 +4408,25 @@ exports.isCommandShowMessage = isCommandShowMessage;
 exports.isCommandShowMessageBody = isCommandShowMessageBody;
 exports.isCommandShowScrollingTextBody = isCommandShowScrollingTextBody;
 exports.isCommandTextBody = isCommandTextBody;
+exports.isDataActor = isDataActor;
+exports.isDataArmor = isDataArmor;
+exports.isDataClass = isDataClass;
+exports.isDataEnemy = isDataEnemy;
+exports.isDataItem = isDataItem;
+exports.isDataMap = isDataMap;
+exports.isDataMapInfo = isDataMapInfo;
+exports.isDataSkill = isDataSkill;
+exports.isDataState = isDataState;
+exports.isDataWeapon = isDataWeapon;
 exports.isValid = isValid;
+exports.itemSourceId = itemSourceId;
 exports.joinSourceKey = joinSourceKey;
+exports.makeActorData = makeActorData;
+exports.makeArmorData = makeArmorData;
 exports.makeAudioCommand = makeAudioCommand;
 exports.makeAudioFileParams = makeAudioFileParams;
+exports.makeClassData = makeClassData;
+exports.makeClassSourceIdentifier = classSourceId;
 exports.makeCommandAudioAny = makeCommandAudioAny;
 exports.makeCommandChangeActorName = makeCommandChangeActorName;
 exports.makeCommandChangeActorNickName = makeCommandChangeActorNickName;
@@ -1931,14 +4454,29 @@ exports.makeCommandShowMessage = makeCommandShowMessage;
 exports.makeCommandShowMessageBody = makeCommandShowMessageBody;
 exports.makeCommentArray = makeCommentArray;
 exports.makeCommentCommandArray = makeCommentCommandArray;
+exports.makeCommonEventData = makeCommonEventData;
+exports.makeDamage = makeDamage;
+exports.makeDropItem = makeDropItem;
 exports.makeEditorSetting = makeEditorSetting;
+exports.makeEnemyAction = makeEnemyAction;
+exports.makeEnemyData = makeEnemyData;
+exports.makeEventPageCondition = makeEventPageCondition;
 exports.makeItemCategories = makeItemCategories;
 exports.makeItemCategoriesFromArray = makeItemCategoriesFromArray;
+exports.makeItemData = makeItemData;
+exports.makeMapData = makeMapData;
+exports.makeMapEvent = makeMapEvent;
+exports.makeMapEventIamge = makeMapEventIamge;
+exports.makeMapEventPage = makeMapEventPage;
+exports.makeMapInfoData = makeMapInfoData;
 exports.makeMenuCommandsEnabled = makeMenuCommandsEnabled;
 exports.makeMenuCommandsEnabledFromArray = makeMenuCommandsEnabledFromArray;
 exports.makeParamNamesArray = makeParamNamesArray;
+exports.makeRegex = makeRegex;
+exports.makeSkillData = makeSkillData;
 exports.makeSoundsArray = makeSoundsArray;
 exports.makeSoundsObject = makeSoundsObject;
+exports.makeStateData = makeStateData;
 exports.makeSystemAdvanced = makeSystemAdvanced;
 exports.makeSystemData = makeSystemData;
 exports.makeTermsBasic = makeTermsBasic;
@@ -1946,11 +4484,34 @@ exports.makeTermsBasicFromArray = makeTermsBasicFromArray;
 exports.makeTermsCommand = makeTermsCommandArray;
 exports.makeTermsCommandFromArray = makeTermsCommandFromArray;
 exports.makeTermsMessages = makeTermsMessages;
+exports.makeTroopData = makeTroopData;
+exports.makeTroopEventConditions = makeTroopEventConditions;
+exports.makeTroopMember = makeTroopMember;
 exports.makeVehicleData = makeVehicleData;
+exports.makeWeaponData = makeWeaponData;
 exports.mergeDomainLabel = mergeDomainLabel;
 exports.mergeNestedPrimitiveRecords = mergeNestedPrimitiveRecords;
 exports.mergeWithDefaults = mergeWithDefaults;
+exports.partyAbilitySourceId = partyAbilitySourceId;
+exports.partyAbilityToArray = partyAbilityToArray;
+exports.readNote = readNote;
+exports.readNoteEx = readNoteEx;
+exports.readNoteObject = readNoteObject;
+exports.regularParamName = regularParamName;
+exports.regularParamSourceId = regularParamSourceId;
+exports.regularParamsToArray = regularParamsToArray;
+exports.replaceNote = replaceNote;
+exports.resolveItemEffectLabels = resolveItemEffectLabels;
+exports.resolveTraitLabels = resolveTraitLabels;
 exports.sanitizeKey = sanitizeKey;
+exports.setNoteValue = setNoteValue;
+exports.skillSourceId = skillSourceId;
+exports.sourceIdSpecialFlag = sourceIdSpecialFlag;
+exports.specialFlagToArray = specialFlagToArray;
+exports.specialParamName = specialParamName;
+exports.specialParamSourceId = specialParamSourceId;
+exports.specialParamsToArray = specialParamsToArray;
+exports.stateSourceId = stateSourceId;
 exports.systemArmorTypesSourceId = systemArmorTypesSourceId;
 exports.systemElementsSourceId = systemElementsSourceId;
 exports.systemEquipTypesSourceId = systemEquipTypesSourceId;
@@ -1974,4 +4535,5 @@ exports.toArrayScrollingTextHeader = toArrayScrollingTextHeader;
 exports.toArraySetupChoice = toArraySetupChoice;
 exports.toArraySetupChoiceItem = toArraySetupChoiceItem;
 exports.toArrayShowMessageHeader = toArrayShowMessageHeader;
+exports.traitDomain = traitDomain;
 //# sourceMappingURL=rpgTypes.cjs.js.map

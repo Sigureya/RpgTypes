@@ -5,3 +5,4 @@ export * from "./schema/";
 export * from "./templates";
 export * from "./utils";
 export * from "./eventCommand";
+export * from "./rpg";
