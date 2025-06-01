@@ -14,7 +14,7 @@
     "baseUrl": "./",
     "paths": {
       "@RpgTypes/*": ["src/libs/*"],
-      "src/rpg": ["src/libs/schema/data/rpg"]
+      "src/rpg": ["src/libs/rpg"]
     }
   },
   "include": ["src/**/*"],

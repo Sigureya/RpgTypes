@@ -4,9 +4,9 @@ import {
   PLAY_ME,
   PLAY_SE,
   CHANGE_BATTLE_BGM,
-  CHANGE_DEFEAT_ME,
   CHANGE_VICTORY_ME,
-} from "@RpgTypes/schema";
+  CHANGE_DEFEAT_ME,
+} from "src/rpg";
 import type {
   Command_PlayBGM,
   Command_PlayBGS,

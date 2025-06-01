@@ -1,4 +1,4 @@
-import { INPUT_NUMBER } from "@RpgTypes/schema";
+import { INPUT_NUMBER } from "src/rpg";
 import type {
   Command_InputNumber,
   ParamArray_InputNumber,

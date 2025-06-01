@@ -1,8 +1,4 @@
-import {
-  SRC_PARAMS_REGULAR,
-  type GlobalLabel,
-  type NamedItemSource,
-} from "@RpgTypes/schema";
+import type { GlobalLabel, NamedItemSource } from "@RpgTypes/schema";
 import type {
   CollapsOptionLabels,
   ExtraParamLabels,
@@ -22,6 +18,7 @@ import {
   SRC_TRAIT_COLLAPS,
   SRC_TRAIT_PARTY_ABILITY,
   SRC_TRAIT_SPECIAL_FLAG,
+  SRC_PARAMS_REGULAR,
 } from "src/rpg";
 
 import type { DomainLabel } from "@RpgTypes/templates";

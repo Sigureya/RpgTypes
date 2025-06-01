@@ -1,5 +1,5 @@
 import { describe, test, expect } from "vitest";
-import { COMMENT_HEAD as COMMENT, COMMENT_BODY } from "@RpgTypes/schema";
+import { COMMENT_HEAD as COMMENT, COMMENT_BODY } from "src/rpg";
 import {
   makeCommentArray,
   convertCommentArrayToObject,

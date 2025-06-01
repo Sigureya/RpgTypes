@@ -13,7 +13,7 @@ import {
   makeCommandCommonEvent,
 } from "@RpgTypes/eventCommand/commands";
 import type { EventCommandLike2 } from "@RpgTypes/eventCommand/frame";
-import { SHOW_MESSAGE } from "@RpgTypes/schema";
+import { SHOW_MESSAGE } from "src/rpg";
 
 const testCloneEventCommand = <P extends Array<number | boolean | string>>(
   command: EventCommandLike2<number, P>,

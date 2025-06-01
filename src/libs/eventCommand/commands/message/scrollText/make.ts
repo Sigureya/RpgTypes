@@ -1,7 +1,4 @@
-import {
-  SHOW_SCROLLING_TEXT,
-  SHOW_SCROLLING_TEXT_BODY,
-} from "@RpgTypes/schema";
+import { SHOW_SCROLLING_TEXT, SHOW_SCROLLING_TEXT_BODY } from "src/rpg";
 import type {
   Command_ScrollTextBody,
   Command_ScrollTextHeader,

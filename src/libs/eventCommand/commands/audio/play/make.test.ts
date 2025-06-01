@@ -17,7 +17,7 @@ import {
   PLAY_BGS,
   PLAY_ME,
   PLAY_SE,
-} from "@RpgTypes/schema";
+} from "src/rpg";
 
 describe("makeCommandAudioAny", () => {
   test("should create a command with the correct code and parameters", () => {

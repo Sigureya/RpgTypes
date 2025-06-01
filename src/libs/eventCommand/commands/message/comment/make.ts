@@ -1,4 +1,4 @@
-import { COMMENT_HEAD, COMMENT_BODY } from "@RpgTypes/schema";
+import { COMMENT_HEAD, COMMENT_BODY } from "src/rpg";
 import type {
   ParamArray_Comment,
   ParamObject_Comment,

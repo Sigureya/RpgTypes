@@ -1,4 +1,3 @@
-export * from "./data";
 export * from "./other";
 export * from "./plugin";
 export * from "./namedItemSource";

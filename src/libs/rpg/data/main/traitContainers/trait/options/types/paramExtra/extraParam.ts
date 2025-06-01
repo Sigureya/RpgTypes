@@ -1,4 +1,3 @@
-import type { Data_NamedItem } from "@RpgTypes/schema/data/rpg/main/entitys";
 import {
   EXTRA_PARAM_HIT,
   EXTRA_PARAM_EVA,
@@ -13,6 +12,7 @@ import {
 } from "./constants";
 import type { ExtraParamLabels } from "./labels";
 import type {
+  Data_NamedItem2,
   NamedItemSource,
   SourceIdentifier,
 } from "@RpgTypes/schema/namedItemSource";
@@ -36,7 +36,7 @@ export const defineTraitExtraParam = (
 
 export const extraParamsToArray = (
   xparam: ExtraParamLabels
-): Data_NamedItem[] => {
+): Data_NamedItem2[] => {
   return [
     {
       id: EXTRA_PARAM_HIT,

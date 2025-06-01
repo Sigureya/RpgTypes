@@ -1,6 +1,6 @@
 import { test, expect, describe } from "vitest";
-import type { SkillLabels, EnemyLabels } from "@RpgTypes/schema";
 import { mergeNestedPrimitiveRecords, mergeWithDefaults } from "./mergeLabel";
+import type { SkillLabels, EnemyLabels } from "src/rpg";
 
 const MOCK_SKILL_LABELS = {
   mpCost: "消費MP",

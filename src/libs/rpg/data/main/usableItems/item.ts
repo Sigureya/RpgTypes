@@ -1,7 +1,8 @@
 import { AUTHOR_RMMZ, MODULE_DATA } from "@RpgTypes/namedItemSource";
 import type { SourceIdentifier } from "@RpgTypes/schema";
-import { makeDamage, SRC_DATA_ITEMS } from "@RpgTypes/schema";
+import { SRC_DATA_ITEMS } from "@RpgTypes/schema";
 import type { Data_Item } from "./types";
+import { makeDamage } from "../members";
 
 export const itemSourceId = (): SourceIdentifier => ({
   author: AUTHOR_RMMZ,

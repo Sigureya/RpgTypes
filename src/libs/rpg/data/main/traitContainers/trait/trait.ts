@@ -1,4 +1,3 @@
-import { skillSourceId, stateSourceId } from "@RpgTypes/schema";
 import {
   systemArmorTypesSourceId,
   systemElementsSourceId,
@@ -53,6 +52,7 @@ import {
   extraParamSourceId,
 } from "./options";
 import type { TraitLabelResolved } from "./types";
+import { skillSourceId, stateSourceId } from "src/rpg";
 
 export const resolveTraitLabels = (
   labels: TraitLabelSet

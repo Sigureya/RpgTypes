@@ -1,4 +1,4 @@
-import type { Damage, ParamArray, Trait } from "src/libs";
+import type { Damage, ParamArray, Trait } from "src/rpg";
 import type { Data_Weapon } from "./weapon";
 import type { JSONSchemaType } from "ajv";
 

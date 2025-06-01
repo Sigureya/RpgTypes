@@ -1,4 +1,5 @@
-import type { Data_TraitContainer, ParamArray, Trait } from "src/libs";
+import type { Data_TraitContainer, Trait } from "@RpgTypes/rpg";
+import type { ParamArray } from "../members";
 
 export interface Data_Class extends Data_TraitContainer {
   name: string;

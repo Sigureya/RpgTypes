@@ -3,7 +3,7 @@ import type {
   EventCommand,
   EventCommandByCode,
   EventCommandTable,
-} from "../";
+} from "@RpgTypes/rpg";
 
 export const createEventCommand = <Code extends EventCode>(
   code: Code,

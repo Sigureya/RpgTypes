@@ -1,4 +1,4 @@
-import type { Data_NamedItem } from "@RpgTypes/schema";
+import type { Data_NamedItem2 } from "@RpgTypes/schema";
 import type { Trait, TraitLabelResolved } from "./types";
 
 import { FORMAT_PARAM_VALUE, FORMAT_NAME } from "./options/default";
@@ -6,7 +6,7 @@ import { FORMAT_PARAM_VALUE, FORMAT_NAME } from "./options/default";
 export const formatTraitText = (
   descriptor: TraitLabelResolved,
   trait: Trait,
-  items: Data_NamedItem[],
+  items: Data_NamedItem2[],
   maxNameLength: number = 100
 ): string => {
   const item = items[trait.dataId];

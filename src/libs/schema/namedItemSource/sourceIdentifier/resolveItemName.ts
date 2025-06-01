@@ -1,6 +1,5 @@
-import type { Data_NamedItem } from "@RpgTypes/schema";
 import { joinSourceKey } from "./make";
-import type { SourceIdentifier } from "./types";
+import type { Data_NamedItem2, SourceIdentifier } from "./types";
 
 const formatFallbackLabel = (
   dataSource: SourceIdentifier,
@@ -15,7 +14,7 @@ export const resolveDataName = (
   dataSource: SourceIdentifier,
   getSourceItems: (
     src: SourceIdentifier
-  ) => ReadonlyArray<Data_NamedItem> | undefined
+  ) => ReadonlyArray<Data_NamedItem2> | undefined
 ): string => {
   const list = getSourceItems(dataSource);
   if (!list) {

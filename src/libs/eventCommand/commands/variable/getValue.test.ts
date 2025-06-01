@@ -5,8 +5,8 @@ import {
   toArrayOperandActorStatus,
   toArrayOperandEnemyStatus,
 } from "./convert";
-import type { ParamArray } from "@RpgTypes/schema";
 import type { DataOperand_Enemy } from "./types";
+import type { ParamArray } from "src/rpg";
 
 const MockParamArray = [
   108, // mhp
