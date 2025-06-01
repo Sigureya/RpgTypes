@@ -12,12 +12,12 @@ import {
   EXTRA_PARAM_TRG,
 } from "./constants";
 import type { ExtraParamLabels } from "./labels";
-import type { NamedItemSource } from "@RpgTypes/schema/namedItemSource";
-import {
-  SRC_PARAMS_SPECIAL,
-  type SourceIdentifier,
+import type {
+  NamedItemSource,
+  SourceIdentifier,
 } from "@RpgTypes/schema/namedItemSource";
-import { AUTHOR_RMMZ, MODULE_TRAIT } from "@RpgTypes/namedItemSource";
+import { MODULE_TRAIT, SRC_PARAMS_SPECIAL } from "src/rpg";
+import { AUTHOR_RMMZ } from "@RpgTypes/namedItemSource";
 import type { TraitLabelWithOption } from "../traitLabel";
 
 export const extraParamSourceId = (): SourceIdentifier => ({

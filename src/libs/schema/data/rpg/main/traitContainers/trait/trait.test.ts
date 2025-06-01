@@ -1,7 +1,7 @@
 import { describe, test, expect } from "vitest";
 import { resolveTraitLabels } from "./trait";
-import type { TraitLabelResolved } from "./options";
 import { LABEL_SET_TRAIT } from "./options";
+import type { TraitLabelResolved } from "./types";
 
 describe("resolveTraitLabels", () => {
   const result: TraitLabelResolved[] = resolveTraitLabels(

@@ -1,4 +1,8 @@
-import type { GlobalLabel, NamedItemSource } from "@RpgTypes/schema";
+import {
+  SRC_PARAMS_REGULAR,
+  type GlobalLabel,
+  type NamedItemSource,
+} from "@RpgTypes/schema";
 import type {
   CollapsOptionLabels,
   ExtraParamLabels,
@@ -8,20 +12,20 @@ import type {
   SpecialParamLabels,
 } from "./types";
 import {
-  SRC_TRAIT_COLLAPS,
-  SRC_PARAMS_EXTRA,
-  SRC_PARAMS_REGULAR,
-  SRC_PARAMS_SPECIAL,
-  SRC_TRAIT_PARTY_ABILITY,
-  SRC_TRAIT_SPECIAL_FLAG,
   regularParamsToArray,
   partyAbilityToArray,
   collapsOptionsToArray,
   specialFlagToArray,
-} from "@RpgTypes/schema";
+  MODULE_TRAIT,
+  SRC_PARAMS_EXTRA,
+  SRC_PARAMS_SPECIAL,
+  SRC_TRAIT_COLLAPS,
+  SRC_TRAIT_PARTY_ABILITY,
+  SRC_TRAIT_SPECIAL_FLAG,
+} from "src/rpg";
 
 import type { DomainLabel } from "@RpgTypes/templates";
-import { AUTHOR_RMMZ, MODULE_TRAIT } from "@RpgTypes/namedItemSource";
+import { AUTHOR_RMMZ } from "@RpgTypes/namedItemSource";
 import { extraParamsToArray } from "./types/paramExtra/extraParam";
 import { specialParamsToArray } from "./types/paramSpecial/specialParam";
 

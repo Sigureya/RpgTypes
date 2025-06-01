@@ -6,11 +6,9 @@ import {
 } from "./constants";
 import type { SpecialFlagOptions } from "./labels";
 import type { Data_NamedItem2 } from "@RpgTypes/schema/namedItemSource";
-import {
-  SRC_TRAIT_SPECIAL_FLAG,
-  type SourceIdentifier,
-} from "@RpgTypes/schema/namedItemSource";
-import { AUTHOR_RMMZ, MODULE_TRAIT } from "@RpgTypes/namedItemSource";
+import { type SourceIdentifier } from "@RpgTypes/schema/namedItemSource";
+import { AUTHOR_RMMZ } from "@RpgTypes/namedItemSource";
+import { MODULE_TRAIT, SRC_TRAIT_SPECIAL_FLAG } from "src/rpg";
 
 export const sourceIdSpecialFlag = (): SourceIdentifier => ({
   author: AUTHOR_RMMZ,
