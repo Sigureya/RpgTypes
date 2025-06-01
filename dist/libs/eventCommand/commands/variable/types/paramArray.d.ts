@@ -1,4 +1,4 @@
-import { ValueOf } from '../../../../schema';
+import { ValueOf } from '../../../../rpg';
 import { GAMEDATA, OPERAND, OTHER } from './operand';
 import { CHARACTER } from './character/dataSource';
 import { STATUS } from './actor/dataSource';
