@@ -14,7 +14,7 @@ import {
   defineEffectRemoveDebuff,
   defineEffectRemoveState,
 } from "./define";
-import type { EffectLabelDefinition } from "./labels";
+import type { EffectDefinitionResolved, EffectLabelDefinition } from "./labels";
 import { LABEL_SET_ITEM_EFFECT } from "./labels";
 import type { ItemEffectDescriptor } from "./itemEffectDescriptor";
 
@@ -35,10 +35,10 @@ const test2 = (
 };
 
 describe("resolveItemEffectLabels", () => {
-  const result: ItemEffectDescriptor[] = resolveItemEffectLabels(
+  const result: EffectDefinitionResolved[] = resolveItemEffectLabels(
     LABEL_SET_ITEM_EFFECT
   );
-  const codeList = result.map((item) => item.codeId);
+  const codeList = result.map((item) => item.code);
   test("", () => {
     expect(codeList).toEqual(codeList.toSorted());
   });

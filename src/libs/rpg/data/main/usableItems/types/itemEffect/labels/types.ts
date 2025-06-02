@@ -1,7 +1,7 @@
 import type { SourceIdentifier } from "@RpgTypes/schema";
 
 export interface EffectDefinitionResolved {
-  codeId: number;
+  code: number;
   label: string;
   format: string;
   description: string;
