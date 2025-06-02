@@ -13,8 +13,9 @@
     "emitDeclarationOnly": true,
     "baseUrl": "./",
     "paths": {
-      "@RpgTypes/*": ["src/libs/*"],
-      "src/rpg": ["src/libs/rpg"]
+      "src/rpg": ["src/libs/rpg"],
+      "src/namedItemSource": ["src/libs/namedItemSource"],
+      "@RpgTypes/*": ["src/libs/*"]
     }
   },
   "include": ["src/**/*"],
