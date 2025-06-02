@@ -1,12 +1,16 @@
-import type { SourceIdentifier } from "@RpgTypes/schema/namedItemSource";
+import { AUTHOR_RMMZ } from "@RpgTypes/namedItemSource";
 import {
   MODULE_DATA,
-  MODULE_TRAIT,
+  regularParamSourceId,
+  skillSourceId,
   SRC_DATA_COMMON_EVNET,
-  SRC_DATA_SKILL,
-  SRC_DATA_STATE,
-  SRC_PARAMS_REGULAR,
+  stateSourceId,
 } from "src/rpg";
+import type {
+  EffectDefinitionResolved,
+  EffectLabelDefinition,
+  ItemEffectLabelSet,
+} from "./labels";
 import {
   EFFECT_ADD_STATE,
   EFFECT_GROW,
@@ -20,163 +24,102 @@ import {
   EFFECT_RECOVER_MP,
   EFFECT_REMOVE_DEBUFF,
   EFFECT_REMOVE_STATE,
-} from "./constants/";
-import type {
-  EffectDefinitionResolved,
-  EffectLabelDefinition,
-  ItemEffectLabelSet,
-} from "./labels";
-import { LABEL_SET_ITEM_EFFECT } from "./labels";
-import { AUTHOR_RMMZ } from "@RpgTypes/namedItemSource/";
-import { ItemEffectDescriptor } from "./itemEffectDescriptor";
-import type { DomainLabel } from "@RpgTypes/templates";
+} from "./constants";
+import type { SourceIdentifier } from "@RpgTypes/schema";
 
 export const resolveItemEffectLabels = (
-  label: DomainLabel<ItemEffectLabelSet>
+  labels: ItemEffectLabelSet
 ): EffectDefinitionResolved[] => {
   return [
-    defineEffectRecoverHp(label.options.recoverHp),
-    defineEffectRecoverMp(label.options.recoverMp),
-    defineEffectGainTp(label.options.gainTp),
-    defineEffectAddState(label.options.addState),
-    defineEffectRemoveState(label.options.removeState),
-    defineEffectAddBuff(label.options.addBuff),
-    defineEffectAddDebuff(label.options.addDebuff),
-    defineEffectRemoveBuff(label.options.removeBuff),
-    defineEffectRemoveDebuff(label.options.removeDebuff),
-    defineEffectLearnSkill(label.options.learnSkill),
-    defineEffectCommonEvent(label.options.commonEvent),
+    defineEffectRecoverHp(labels),
+    defineEffectRecoverMp(labels),
+    defineEffectGainTp(labels),
+    defineEffectAddState(labels),
+    defineEffectRemoveState(labels),
+    defineEffectAddBuff(labels),
+    defineEffectAddDebuff(labels),
+    defineEffectRemoveBuff(labels),
+    defineEffectRemoveDebuff(labels),
+    defineEffectGrow(labels),
+    defineEffectLearnSkill(labels),
+    defineEffectCommonEvent(labels),
   ];
 };
-
-const regularParam = (): SourceIdentifier => ({
-  author: AUTHOR_RMMZ,
-  module: MODULE_TRAIT,
-  kind: SRC_PARAMS_REGULAR,
-});
-
-const srcData = (sourceKey: string): SourceIdentifier => ({
-  author: AUTHOR_RMMZ,
-  module: MODULE_DATA,
-  kind: sourceKey,
-});
 
 const defineEffect = (
   code: number,
   baseLabel: EffectLabelDefinition,
-  override: Partial<EffectLabelDefinition>,
   dataSource?: SourceIdentifier
-): ItemEffectDescriptor => {
-  const label = override.domainName ?? baseLabel.domainName;
-  const format = override.format ?? baseLabel.format;
-  const description = override.desc ?? baseLabel.desc;
-  return new ItemEffectDescriptor(code, label, format, description, dataSource);
-};
+): EffectDefinitionResolved => ({
+  code,
+  label: baseLabel.domainName,
+  format: baseLabel.format,
+  description: baseLabel.desc,
+  dataSource: dataSource,
+});
+const defineEffectRecoverHp = (
+  labels: ItemEffectLabelSet
+): EffectDefinitionResolved =>
+  defineEffect(EFFECT_RECOVER_HP, labels.recoverHp);
 
-export const defineEffectRecoverHp = (
-  labels: Partial<EffectLabelDefinition>
-): ItemEffectDescriptor =>
-  defineEffect(
-    EFFECT_RECOVER_HP,
-    LABEL_SET_ITEM_EFFECT.options.recoverHp,
-    labels
-  );
+const defineEffectRecoverMp = (
+  labels: ItemEffectLabelSet
+): EffectDefinitionResolved =>
+  defineEffect(EFFECT_RECOVER_MP, labels.recoverMp);
 
-export const defineEffectRecoverMp = (
-  labels: Partial<EffectLabelDefinition>
-): ItemEffectDescriptor =>
-  defineEffect(
-    EFFECT_RECOVER_MP,
-    LABEL_SET_ITEM_EFFECT.options.recoverMp,
-    labels
-  );
+const defineEffectGainTp = (
+  labels: ItemEffectLabelSet
+): EffectDefinitionResolved => defineEffect(EFFECT_GAIN_TP, labels.gainTp);
 
-export const defineEffectGainTp = (
-  labels: Partial<EffectLabelDefinition>
-): ItemEffectDescriptor =>
-  defineEffect(EFFECT_GAIN_TP, LABEL_SET_ITEM_EFFECT.options.gainTp, labels);
+const defineEffectAddState = (
+  labels: ItemEffectLabelSet
+): EffectDefinitionResolved =>
+  defineEffect(EFFECT_ADD_STATE, labels.addState, stateSourceId());
 
-export const defineEffectGrow = (
-  labels: Partial<EffectLabelDefinition>
-): ItemEffectDescriptor =>
-  defineEffect(EFFECT_GROW, LABEL_SET_ITEM_EFFECT.options.grow, labels);
+const defineEffectRemoveState = (
+  labels: ItemEffectLabelSet
+): EffectDefinitionResolved =>
+  defineEffect(EFFECT_REMOVE_STATE, labels.removeState, stateSourceId());
 
-export const defineEffectAddState = (
-  labels: Partial<EffectLabelDefinition>
-): ItemEffectDescriptor =>
-  defineEffect(
-    EFFECT_ADD_STATE,
-    LABEL_SET_ITEM_EFFECT.options.addState,
-    labels,
-    srcData(SRC_DATA_STATE)
-  );
+const defineEffectAddBuff = (
+  labels: ItemEffectLabelSet
+): EffectDefinitionResolved =>
+  defineEffect(EFFECT_ADD_BUFF, labels.addBuff, regularParamSourceId());
 
-export const defineEffectRemoveState = (
-  labels: Partial<EffectLabelDefinition>
-): ItemEffectDescriptor =>
-  defineEffect(
-    EFFECT_REMOVE_STATE,
-    LABEL_SET_ITEM_EFFECT.options.removeState,
-    labels,
-    srcData(SRC_DATA_STATE)
-  );
+const defineEffectAddDebuff = (
+  labels: ItemEffectLabelSet
+): EffectDefinitionResolved =>
+  defineEffect(EFFECT_ADD_DEBUFF, labels.addDebuff, regularParamSourceId());
 
-export const defineEffectAddBuff = (
-  labels: Partial<EffectLabelDefinition>
-): ItemEffectDescriptor =>
-  defineEffect(
-    EFFECT_ADD_BUFF,
-    LABEL_SET_ITEM_EFFECT.options.addBuff,
-    labels,
-    regularParam()
-  );
+const defineEffectRemoveBuff = (
+  labels: ItemEffectLabelSet
+): EffectDefinitionResolved =>
+  defineEffect(EFFECT_REMOVE_BUFF, labels.removeBuff, regularParamSourceId());
 
-export const defineEffectRemoveBuff = (
-  labels: Partial<EffectLabelDefinition>
-): ItemEffectDescriptor =>
-  defineEffect(
-    EFFECT_REMOVE_BUFF,
-    LABEL_SET_ITEM_EFFECT.options.removeBuff,
-    labels,
-    regularParam()
-  );
-
-export const defineEffectLearnSkill = (
-  labels: Partial<EffectLabelDefinition>
-): ItemEffectDescriptor =>
-  defineEffect(
-    EFFECT_LEARN_SKILL,
-    LABEL_SET_ITEM_EFFECT.options.learnSkill,
-    labels,
-    srcData(SRC_DATA_SKILL)
-  );
-
-export const defineEffectAddDebuff = (
-  labels: Partial<EffectLabelDefinition>
-): ItemEffectDescriptor =>
-  defineEffect(
-    EFFECT_ADD_DEBUFF,
-    LABEL_SET_ITEM_EFFECT.options.addBuff,
-    labels,
-    regularParam()
-  );
-
-export const defineEffectRemoveDebuff = (
-  labels: Partial<EffectLabelDefinition>
-): ItemEffectDescriptor =>
+const defineEffectRemoveDebuff = (
+  labels: ItemEffectLabelSet
+): EffectDefinitionResolved =>
   defineEffect(
     EFFECT_REMOVE_DEBUFF,
-    LABEL_SET_ITEM_EFFECT.options.removeDebuff,
-    labels,
-    regularParam()
+    labels.removeDebuff,
+    regularParamSourceId()
   );
 
-export const defineEffectCommonEvent = (
-  labels: Partial<EffectLabelDefinition>
-): ItemEffectDescriptor =>
-  defineEffect(
-    EFFECT_COMMON_EVENT,
-    LABEL_SET_ITEM_EFFECT.options.commonEvent,
-    labels,
-    srcData(SRC_DATA_COMMON_EVNET)
-  );
+const defineEffectGrow = (
+  labels: ItemEffectLabelSet
+): EffectDefinitionResolved =>
+  defineEffect(EFFECT_GROW, labels.grow, regularParamSourceId());
+
+const defineEffectLearnSkill = (
+  labels: ItemEffectLabelSet
+): EffectDefinitionResolved =>
+  defineEffect(EFFECT_LEARN_SKILL, labels.learnSkill, skillSourceId());
+
+const defineEffectCommonEvent = (
+  labels: ItemEffectLabelSet
+): EffectDefinitionResolved =>
+  defineEffect(EFFECT_COMMON_EVENT, labels.commonEvent, {
+    author: AUTHOR_RMMZ,
+    module: MODULE_DATA,
+    kind: SRC_DATA_COMMON_EVNET,
+  });
