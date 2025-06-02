@@ -13,7 +13,7 @@ import {
 } from "./constants";
 import { extraParamName, extraParamsToArray } from "./extraParam";
 import type { ExtraParamLabels } from "./labels";
-import type { Data_NamedItem2 } from "@RpgTypes/schema/namedItemSource";
+import type { Data_NamedItem2 } from "src/namedItemSource";
 
 describe("extraParamsToArray", () => {
   const xparam: ExtraParamLabels = {

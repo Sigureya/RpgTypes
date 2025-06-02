@@ -1,7 +1,6 @@
 import type { Data_Actor } from "./types";
-import { AUTHOR_RMMZ } from "@RpgTypes/namedItemSource";
 import { MODULE_DATA, SRC_DATA_ACTOR } from "src/rpg";
-import type { SourceIdentifier } from "@RpgTypes/schema/namedItemSource";
+import { AUTHOR_RMMZ, type SourceIdentifier } from "src/namedItemSource";
 
 export const makeActorData = (actor: Partial<Data_Actor> = {}): Data_Actor => ({
   name: actor.name ?? "",

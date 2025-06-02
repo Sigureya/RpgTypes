@@ -1,4 +1,4 @@
-import type { NamedItemSource } from "@RpgTypes/schema";
+import type { NamedItemSource } from "src/namedItemSource";
 
 import {
   getElementTypes,

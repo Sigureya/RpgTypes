@@ -1,4 +1,5 @@
-import { AUTHOR_RMMZ } from "@RpgTypes/namedItemSource";
+import { AUTHOR_RMMZ } from "src/namedItemSource";
+import type { Data_NamedItem2, SourceIdentifier } from "src/namedItemSource";
 import {
   PARTY_ABILITY_ENCOUNTER_HALF,
   PARTY_ABILITY_ENCOUNTER_NONE,
@@ -8,10 +9,6 @@ import {
   PARTY_ABILITY_DROP_ITEM_DOUBLE,
 } from "./constants";
 import type { PartyAbilityOptionLabels } from "./labels";
-import {
-  type Data_NamedItem2,
-  type SourceIdentifier,
-} from "@RpgTypes/schema/namedItemSource";
 import { MODULE_TRAIT, SRC_TRAIT_PARTY_ABILITY } from "src/rpg";
 
 export const partyAbilitySourceId = (): SourceIdentifier => ({

@@ -1,4 +1,4 @@
-import type { GlobalLabel, NamedItemSource } from "@RpgTypes/schema";
+import type { GlobalLabel } from "@RpgTypes/schema";
 import type {
   CollapsOptionLabels,
   ExtraParamLabels,
@@ -22,6 +22,7 @@ import {
 } from "src/rpg";
 
 import type { DomainLabel } from "@RpgTypes/templates";
+import type { NamedItemSource } from "src/namedItemSource";
 import { AUTHOR_RMMZ } from "@RpgTypes/namedItemSource";
 import { extraParamsToArray } from "./types/paramExtra/extraParam";
 import { specialParamsToArray } from "./types/paramSpecial/specialParam";

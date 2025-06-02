@@ -15,7 +15,7 @@ import {
   buildSpecialParamSource,
 } from "./buildSource";
 
-import type { NamedItemSource } from "@RpgTypes/schema";
+import type { NamedItemSource } from "src/namedItemSource";
 import { MODULE_TRAIT } from "src/rpg";
 
 // Renamed test helper function for clarity

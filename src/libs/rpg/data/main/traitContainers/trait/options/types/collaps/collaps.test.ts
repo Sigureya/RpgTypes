@@ -8,7 +8,7 @@ import {
 } from "./constants";
 import type { CollapsOptionLabels } from "./labels";
 import { collapsOptionsToArray } from "./collaps";
-import type { Data_NamedItem2 } from "@RpgTypes/schema/namedItemSource";
+import type { Data_NamedItem2 } from "src/namedItemSource";
 
 describe("collapsOptionsToArray", () => {
   const options: CollapsOptionLabels = {

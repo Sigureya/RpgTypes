@@ -9,7 +9,7 @@ import {
 } from "./constants";
 import { partyAbilityToArray } from "./partyAbility";
 import type { PartyAbilityOptionLabels } from "./labels";
-import type { Data_NamedItem2 } from "@RpgTypes/schema/namedItemSource";
+import type { Data_NamedItem2 } from "src/namedItemSource";
 
 describe("partyAbilityToArray", () => {
   const options: PartyAbilityOptionLabels = {

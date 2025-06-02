@@ -1,7 +1,6 @@
-import { type SourceIdentifier } from "@RpgTypes/schema/namedItemSource";
+import { AUTHOR_RMMZ, type SourceIdentifier } from "src/namedItemSource";
 
 import type { Data_Armor } from "./types";
-import { AUTHOR_RMMZ } from "@RpgTypes/namedItemSource";
 import { SRC_DATA_ARMOR, MODULE_DATA } from "../../../sourceConstants";
 
 export const makeArmorData = (armor: Partial<Data_Armor> = {}): Data_Armor => ({
