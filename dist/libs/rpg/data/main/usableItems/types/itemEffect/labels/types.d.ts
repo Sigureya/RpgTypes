@@ -1,6 +1,6 @@
-import { SourceIdentifier } from '../../../../../../../schema';
+import { SourceIdentifier } from '../../../../../../../namedItemSource';
 export interface EffectDefinitionResolved {
-    codeId: number;
+    code: number;
     label: string;
     format: string;
     description: string;

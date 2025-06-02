@@ -562,79 +562,50 @@ const getWeaponTypes = (system) => {
 const getArmorTypes = (system) => {
   return system.armorTypes.map(makeNamedItem);
 };
-const mergeWithDefaults = (defaultLabels, labels) => {
-  const reulst = { ...defaultLabels };
-  for (const key in defaultLabels) {
-    const value = labels[key];
-    if (typeof value === "string") {
-      reulst[key] = value;
-    }
-  }
-  return reulst;
-};
-const mergeDomainLabel = (base, override) => {
-  return {
-    domainName: override.domainName ?? base.domainName,
-    options: mergeWithDefaults(base.options, override.options ?? {})
-  };
-};
-const mergeNestedPrimitiveRecords = (base, override) => {
-  const result = {};
-  for (const domain in base) {
-    const domainBase = base[domain];
-    const domainOverride = override[domain] ?? {};
-    result[domain] = mergeWithDefaults(
-      domainBase,
-      domainOverride
-    );
-  }
-  return result;
-};
 const AUTHOR_RMMZ = "rmmz";
-const MODULE_DATA$1 = "data";
-const MODULE_SYSTEM$1 = "system";
+const SRC_COLOR = "colors";
 const MODULE_SYSTEM = "system";
-const SRC_WEAPON_TYPES$1 = "weaponTypes";
-const SRC_ARMOR_TYPES$1 = "armorTypes";
-const SRC_EQUIP_TYPES$1 = "equipTypes";
-const SRC_SKILL_TYPES$1 = "skillTypes";
-const SRC_ELEMENTS$1 = "elements";
-const SRC_VARIABLE$1 = "variables";
-const SRC_SWITCHES$1 = "switches";
+const SRC_WEAPON_TYPES = "weaponTypes";
+const SRC_ARMOR_TYPES = "armorTypes";
+const SRC_EQUIP_TYPES = "equipTypes";
+const SRC_SKILL_TYPES = "skillTypes";
+const SRC_ELEMENTS = "elements";
+const SRC_VARIABLE = "variables";
+const SRC_SWITCHES = "switches";
 const systemElementsSourceId = () => ({
   author: AUTHOR_RMMZ,
   module: MODULE_SYSTEM,
-  kind: SRC_ELEMENTS$1
+  kind: SRC_ELEMENTS
 });
 const systemArmorTypesSourceId = () => ({
   author: AUTHOR_RMMZ,
   module: MODULE_SYSTEM,
-  kind: SRC_ARMOR_TYPES$1
+  kind: SRC_ARMOR_TYPES
 });
 const systemEquipTypesSourceId = () => ({
   author: AUTHOR_RMMZ,
   module: MODULE_SYSTEM,
-  kind: SRC_EQUIP_TYPES$1
+  kind: SRC_EQUIP_TYPES
 });
 const systemSkillTypesSourceId = () => ({
   author: AUTHOR_RMMZ,
   module: MODULE_SYSTEM,
-  kind: SRC_SKILL_TYPES$1
+  kind: SRC_SKILL_TYPES
 });
 const systemSwitchesSourceId = () => ({
   author: AUTHOR_RMMZ,
   module: MODULE_SYSTEM,
-  kind: SRC_SWITCHES$1
+  kind: SRC_SWITCHES
 });
 const systemVariablesSourceId = () => ({
   author: AUTHOR_RMMZ,
   module: MODULE_SYSTEM,
-  kind: SRC_VARIABLE$1
+  kind: SRC_VARIABLE
 });
 const systemWeaponTypesSourceId = () => ({
   author: AUTHOR_RMMZ,
   module: MODULE_SYSTEM,
-  kind: SRC_WEAPON_TYPES$1
+  kind: SRC_WEAPON_TYPES
 });
 const buildElementTypesSource = (system, label) => ({
   items: getElementTypes(system),
@@ -701,38 +672,6 @@ const FOLDER_DATA = "data";
 const FOLDER_IMG = "img";
 const FOLDER_AUDIO = "audio";
 const FOLDER_JS = "js";
-const validAsciiKey = /^[a-zA-Z0-9]+$/;
-const sanitizeKey = (value) => {
-  return validAsciiKey.test(value) ? value : void 0;
-};
-const testUnknonwKey = (value) => {
-  return typeof value === "string" ? validAsciiKey.test(value) : false;
-};
-const joinSourceKey = (key) => {
-  return [key.author, key.module, key.kind].join(".");
-};
-const isValid = (source) => {
-  return testUnknonwKey(source.author) && testUnknonwKey(source.module) && testUnknonwKey(source.kind);
-};
-const SRC_DATA_ACTOR$1 = "actor";
-const SRC_DATA_MAP = "map";
-const SRC_DATA_ENEMY = "enemy";
-const SRC_DATA_STATE$1 = "state";
-const SRC_DATA_SKILL$1 = "skill";
-const SRC_DATA_ITEMS = "items";
-const SRC_DATA_WEAPON = "weapon";
-const SRC_DATA_ARMOR$1 = "armor";
-const SRC_DATA_CLASS = "class";
-const SRC_DATA_COMMON_EVNET = "common_event";
-const SRC_DATA_TROOP = "troop";
-const SRC_COLOR = "colors";
-const SRC_WEAPON_TYPES = "weaponTypes";
-const SRC_ARMOR_TYPES = "armorTypes";
-const SRC_EQUIP_TYPES = "equipTypes";
-const SRC_SKILL_TYPES = "skillTypes";
-const SRC_ELEMENTS = "elements";
-const SRC_VARIABLE = "variables";
-const SRC_SWITCHES = "switches";
 const TRAIT_ELEMENT_RATE = 11;
 const TRAIT_DEBUFF_RATE = 12;
 const TRAIT_STATE_RATE = 13;
@@ -1175,7 +1114,7 @@ const buildSpecialParamSource = (label) => {
 const buildSpecialFlagSource = (label) => {
   return traitDomain(SRC_TRAIT_SPECIAL_FLAG, label, specialFlagToArray);
 };
-const FORMAT_NAME$1 = "{name}";
+const FORMAT_NAME$2 = "{name}";
 const FORMAT_PARAM_RATE_MUL = "{name} * {value}%";
 const FORMAT_PARAM_RATE_PLUS = "{name} + {value}%";
 const FORMAT_PARAM_VALUE = "{value}";
@@ -1230,7 +1169,7 @@ const LABEL_SET_TRAIT = {
     },
     specialFlag: {
       domainName: "特殊フラグ",
-      format: FORMAT_NAME$1,
+      format: FORMAT_NAME$2,
       options: {
         autoBattle: "自動戦闘",
         guard: "防御",
@@ -1240,7 +1179,7 @@ const LABEL_SET_TRAIT = {
     },
     collaps: {
       domainName: "消滅エフェクト",
-      format: FORMAT_NAME$1,
+      format: FORMAT_NAME$2,
       options: {
         bossCollaps: "ボス崩壊",
         instantCollaps: "即時崩壊",
@@ -1249,7 +1188,7 @@ const LABEL_SET_TRAIT = {
     },
     partyAbility: {
       domainName: "パーティ能力",
-      format: FORMAT_NAME$1,
+      format: FORMAT_NAME$2,
       options: {
         cancelSurprise: "不意打ち無効",
         dropItemDouble: "アイテムドロップ2倍",
@@ -1273,11 +1212,11 @@ const LABEL_SET_TRAIT = {
     },
     stateResist: {
       domainName: "ステート無効",
-      format: FORMAT_NAME$1
+      format: FORMAT_NAME$2
     },
     attackElement: {
       domainName: "攻撃属性",
-      format: FORMAT_NAME$1
+      format: FORMAT_NAME$2
     },
     attackState: {
       domainName: "攻撃ステート",
@@ -1297,43 +1236,43 @@ const LABEL_SET_TRAIT = {
     },
     attackSkill: {
       domainName: "攻撃スキル",
-      format: FORMAT_NAME$1
+      format: FORMAT_NAME$2
     },
     equipWeaponType: {
       domainName: "装備武器タイプ",
-      format: FORMAT_NAME$1
+      format: FORMAT_NAME$2
     },
     equipArmorType: {
       domainName: "装備防具タイプ",
-      format: FORMAT_NAME$1
+      format: FORMAT_NAME$2
     },
     equipLock: {
       domainName: "装備固定",
-      format: FORMAT_NAME$1
+      format: FORMAT_NAME$2
     },
     equipSeal: {
       domainName: "装備封印",
-      format: FORMAT_NAME$1
+      format: FORMAT_NAME$2
     },
     slotType: {
       domainName: "スロットタイプ",
-      format: FORMAT_NAME$1
+      format: FORMAT_NAME$2
     },
     skillAdd: {
       domainName: "スキル追加",
-      format: FORMAT_NAME$1
+      format: FORMAT_NAME$2
     },
     skillSeal: {
       domainName: "スキルタイプ封印",
-      format: FORMAT_NAME$1
+      format: FORMAT_NAME$2
     },
     skillTypeAdd: {
       domainName: "スキルタイプ追加",
-      format: FORMAT_NAME$1
+      format: FORMAT_NAME$2
     },
     skillTypeSeal: {
       domainName: "スキルタイプ封印",
-      format: FORMAT_NAME$1
+      format: FORMAT_NAME$2
     }
   }
 };
@@ -1350,7 +1289,7 @@ const SCHEMA_TRAIT = {
 const formatTraitText = (descriptor, trait, items, maxNameLength = 100) => {
   const item2 = items[trait.dataId];
   const itemName = item2 ? item2.name.slice(0, maxNameLength) : `?data[${trait.dataId}]`;
-  return descriptor.format.replaceAll(FORMAT_PARAM_VALUE, trait.value.toString()).replaceAll(FORMAT_NAME$1, itemName);
+  return descriptor.format.replaceAll(FORMAT_PARAM_VALUE, trait.value.toString()).replaceAll(FORMAT_NAME$2, itemName);
 };
 const resolveTraitLabels = (labels) => {
   return [
@@ -1358,7 +1297,7 @@ const resolveTraitLabels = (labels) => {
     debuffRate(labels.debuffRate),
     stateRate(labels.stateRate),
     stateResist(labels.stateResist),
-    regularParam$1(labels.regularParam),
+    regularParam(labels.regularParam),
     extraParam(labels.extraParam),
     specialParam(labels.specialParam),
     attackElement(labels.attackElement),
@@ -1405,7 +1344,7 @@ const stateResist = (label) => ({
   code: TRAIT_STATE_RESIST,
   dataSource: stateSourceId()
 });
-const regularParam$1 = (labels) => ({
+const regularParam = (labels) => ({
   format: labels.format,
   label: labels.domainName,
   code: TRAIT_PARAM,
@@ -1527,11 +1466,6 @@ const partyAbility = (labels) => ({
   code: TRAIT_PARTY_ABILITY,
   dataSource: partyAbilitySourceId()
 });
-const MODULE_DATA = "data";
-const SRC_DATA_ACTOR = "actor";
-const SRC_DATA_STATE = "state";
-const SRC_DATA_SKILL = "skill";
-const SRC_DATA_ARMOR = "armor";
 const makeActorData = (actor2 = {}) => ({
   name: actor2.name ?? "",
   id: actor2.id ?? 0,
@@ -1551,7 +1485,7 @@ const makeActorData = (actor2 = {}) => ({
 });
 const actorSourceId = () => ({
   author: AUTHOR_RMMZ,
-  module: MODULE_DATA$1,
+  module: MODULE_DATA,
   kind: SRC_DATA_ACTOR
 });
 const SCHEMA_DATA_ACTOR = {
@@ -1598,6 +1532,18 @@ const SCHEMA_DATA_ACTOR = {
     }
   }
 };
+const MODULE_DATA = "data";
+const SRC_DATA_ACTOR = "actor";
+const SRC_DATA_MAP = "map";
+const SRC_DATA_ENEMY = "enemy";
+const SRC_DATA_STATE = "state";
+const SRC_DATA_SKILL = "skill";
+const SRC_DATA_ITEMS = "items";
+const SRC_DATA_WEAPON = "weapon";
+const SRC_DATA_ARMOR = "armor";
+const SRC_DATA_CLASS = "class";
+const SRC_DATA_COMMON_EVNET = "common_event";
+const SRC_DATA_TROOP = "troop";
 const makeArmorData = (armor2 = {}) => ({
   id: armor2.id ?? 0,
   name: armor2.name ?? "",
@@ -1720,7 +1666,7 @@ const makeClassData = (data = {}) => ({
 });
 const classSourceId = () => ({
   author: AUTHOR_RMMZ,
-  module: MODULE_DATA$1,
+  module: MODULE_DATA,
   kind: SRC_DATA_CLASS
 });
 const SCHEMA_DATA_CLASS = {
@@ -2044,7 +1990,7 @@ const makeEnemyData = (data = {}) => {
 };
 const enemySourceId = () => ({
   author: AUTHOR_RMMZ,
-  module: MODULE_DATA$1,
+  module: MODULE_DATA,
   kind: SRC_DATA_ENEMY
 });
 const SCHEMA_DATA_ENEMY = {
@@ -2164,7 +2110,7 @@ const SCHEMA_DAMAGE = {
 };
 const itemSourceId = () => ({
   author: AUTHOR_RMMZ,
-  module: MODULE_DATA$1,
+  module: MODULE_DATA,
   kind: SRC_DATA_ITEMS
 });
 const makeItemData = (item2 = {}) => ({
@@ -2189,7 +2135,7 @@ const makeItemData = (item2 = {}) => ({
 });
 const skillSourceId = () => ({
   author: AUTHOR_RMMZ,
-  module: MODULE_DATA$1,
+  module: MODULE_DATA,
   kind: SRC_DATA_SKILL
 });
 const makeSkillData = (skill2 = {}) => ({
@@ -2366,7 +2312,7 @@ const FORMAT_GROW = "{name} + {value1}";
 const FORMAT_STATE = "{name} {value1}%";
 const FORMAT_RECOVER = "{value1}% + {value2}";
 const FORMAT_ADD_BUFF = "{name} {value1}ターン";
-const FORMAT_NAME = "{name}";
+const FORMAT_NAME$1 = "{name}";
 const LABEL_SET_ITEM_EFFECT = {
   domainName: "使用効果",
   options: {
@@ -2393,7 +2339,7 @@ const LABEL_SET_ITEM_EFFECT = {
     learnSkill: {
       desc: "スキルを習得する",
       domainName: "スキル習得",
-      format: FORMAT_NAME
+      format: FORMAT_NAME$1
     },
     recoverHp: {
       desc: "HPを回復します。最大HPに対する割合と一定値のいずれか一方または両方を指定します。アイテムの場合は、特殊能力値[薬の知識]の倍率が適用されます。",
@@ -2408,12 +2354,12 @@ const LABEL_SET_ITEM_EFFECT = {
     removeBuff: {
       desc: "バフを解除する",
       domainName: "バフ解除",
-      format: FORMAT_NAME
+      format: FORMAT_NAME$1
     },
     removeDebuff: {
       desc: "デバフを解除する",
       domainName: "デバフ解除",
-      format: FORMAT_NAME
+      format: FORMAT_NAME$1
     },
     removeState: {
       desc: "指定したステートを付加します。",
@@ -2423,7 +2369,7 @@ const LABEL_SET_ITEM_EFFECT = {
     special: {
       desc: "特殊効果",
       domainName: "特殊効果",
-      format: FORMAT_NAME
+      format: FORMAT_NAME$1
     },
     addState: {
       desc: "状態異常を解除する",
@@ -2433,7 +2379,7 @@ const LABEL_SET_ITEM_EFFECT = {
     commonEvent: {
       desc: "コモンイベントを実行する",
       domainName: "コモンイベント",
-      format: FORMAT_NAME
+      format: FORMAT_NAME$1
     }
   }
 };
@@ -2451,144 +2397,57 @@ const EFFECT_GROW = 42;
 const EFFECT_LEARN_SKILL = 43;
 const EFFECT_COMMON_EVENT = 44;
 const SPECIAL_EFFECT_ESCAPE = 0;
-const PLACEHOLDER_VALUE1 = "{value1}";
-const PLACEHOLDER_VALUE2 = "{value2}";
-const PLACEHOLDER_NAME = "{name}";
-class ItemEffectDescriptor {
-  constructor(codeId, label, format, description, dataSource) {
-    this.codeId = codeId;
-    this.label = label;
-    this.format = format;
-    this.description = description;
-    this.dataSource = dataSource;
-  }
-  formatText(effect, resolveName) {
-    const text = this.format.replaceAll(PLACEHOLDER_VALUE1, effect.value1.toString()).replaceAll(PLACEHOLDER_VALUE2, effect.value2.toString());
-    if (!this.dataSource) {
-      return text;
-    }
-    return text.replaceAll(
-      PLACEHOLDER_NAME,
-      resolveName(this.dataSource, effect.dataId)
-    );
-  }
-  requiresValue1() {
-    return this.format.includes(PLACEHOLDER_VALUE1);
-  }
-  requiresValue2() {
-    return this.format.includes(PLACEHOLDER_VALUE2);
-  }
-  requiresName() {
-    return this.format.includes(PLACEHOLDER_NAME);
-  }
-  invalidPlaceHolder() {
-    const allowed = ["value1", "value2", "name"];
-    const matches = [
-      ...this.format.matchAll(/\{([^}]+)\}/g)
-    ];
-    return matches.map((m) => m[1]).filter((key) => !allowed.includes(key));
-  }
-  isFormatValidForDataSource() {
-    if (this.dataSource && !this.requiresName()) {
-      return false;
-    }
-    return true;
-  }
-}
-const formatItemEffectText = (effectDefine, effect, name) => {
-  return effectDefine.format.replaceAll(`{value1}`, effect.value1.toString()).replaceAll(`{value2}`, effect.value2.toString()).replaceAll("{name}", name);
-};
-const resolveItemEffectLabels = (label) => {
+const resolveItemEffectLabels = (labels) => {
   return [
-    defineEffectRecoverHp(label.options.recoverHp),
-    defineEffectRecoverMp(label.options.recoverMp),
-    defineEffectGainTp(label.options.gainTp),
-    defineEffectAddState(label.options.addState),
-    defineEffectRemoveState(label.options.removeState),
-    defineEffectAddBuff(label.options.addBuff),
-    defineEffectAddDebuff(label.options.addDebuff),
-    defineEffectRemoveBuff(label.options.removeBuff),
-    defineEffectRemoveDebuff(label.options.removeDebuff),
-    defineEffectLearnSkill(label.options.learnSkill),
-    defineEffectCommonEvent(label.options.commonEvent)
+    defineEffectRecoverHp(labels),
+    defineEffectRecoverMp(labels),
+    defineEffectGainTp(labels),
+    defineEffectAddState(labels),
+    defineEffectRemoveState(labels),
+    defineEffectAddBuff(labels),
+    defineEffectAddDebuff(labels),
+    defineEffectRemoveBuff(labels),
+    defineEffectRemoveDebuff(labels),
+    defineEffectGrow(labels),
+    defineEffectLearnSkill(labels),
+    defineEffectCommonEvent(labels)
   ];
 };
-const regularParam = () => ({
-  author: AUTHOR_RMMZ,
-  module: MODULE_TRAIT,
-  kind: SRC_PARAMS_REGULAR
+const defineEffect = (code, baseLabel, dataSource) => ({
+  code,
+  label: baseLabel.domainName,
+  format: baseLabel.format,
+  description: baseLabel.desc,
+  dataSource
 });
-const srcData = (sourceKey) => ({
-  author: AUTHOR_RMMZ,
-  module: MODULE_DATA$1,
-  kind: sourceKey
-});
-const defineEffect = (code, baseLabel, override, dataSource) => {
-  const label = override.domainName ?? baseLabel.domainName;
-  const format = override.format ?? baseLabel.format;
-  const description = override.desc ?? baseLabel.desc;
-  return new ItemEffectDescriptor(code, label, format, description, dataSource);
-};
-const defineEffectRecoverHp = (labels) => defineEffect(
-  EFFECT_RECOVER_HP,
-  LABEL_SET_ITEM_EFFECT.options.recoverHp,
-  labels
-);
-const defineEffectRecoverMp = (labels) => defineEffect(
-  EFFECT_RECOVER_MP,
-  LABEL_SET_ITEM_EFFECT.options.recoverMp,
-  labels
-);
-const defineEffectGainTp = (labels) => defineEffect(EFFECT_GAIN_TP, LABEL_SET_ITEM_EFFECT.options.gainTp, labels);
-const defineEffectGrow = (labels) => defineEffect(EFFECT_GROW, LABEL_SET_ITEM_EFFECT.options.grow, labels);
-const defineEffectAddState = (labels) => defineEffect(
-  EFFECT_ADD_STATE,
-  LABEL_SET_ITEM_EFFECT.options.addState,
-  labels,
-  srcData(SRC_DATA_STATE$1)
-);
-const defineEffectRemoveState = (labels) => defineEffect(
-  EFFECT_REMOVE_STATE,
-  LABEL_SET_ITEM_EFFECT.options.removeState,
-  labels,
-  srcData(SRC_DATA_STATE$1)
-);
-const defineEffectAddBuff = (labels) => defineEffect(
-  EFFECT_ADD_BUFF,
-  LABEL_SET_ITEM_EFFECT.options.addBuff,
-  labels,
-  regularParam()
-);
-const defineEffectRemoveBuff = (labels) => defineEffect(
-  EFFECT_REMOVE_BUFF,
-  LABEL_SET_ITEM_EFFECT.options.removeBuff,
-  labels,
-  regularParam()
-);
-const defineEffectLearnSkill = (labels) => defineEffect(
-  EFFECT_LEARN_SKILL,
-  LABEL_SET_ITEM_EFFECT.options.learnSkill,
-  labels,
-  srcData(SRC_DATA_SKILL$1)
-);
-const defineEffectAddDebuff = (labels) => defineEffect(
-  EFFECT_ADD_DEBUFF,
-  LABEL_SET_ITEM_EFFECT.options.addBuff,
-  labels,
-  regularParam()
-);
+const defineEffectRecoverHp = (labels) => defineEffect(EFFECT_RECOVER_HP, labels.recoverHp);
+const defineEffectRecoverMp = (labels) => defineEffect(EFFECT_RECOVER_MP, labels.recoverMp);
+const defineEffectGainTp = (labels) => defineEffect(EFFECT_GAIN_TP, labels.gainTp);
+const defineEffectAddState = (labels) => defineEffect(EFFECT_ADD_STATE, labels.addState, stateSourceId());
+const defineEffectRemoveState = (labels) => defineEffect(EFFECT_REMOVE_STATE, labels.removeState, stateSourceId());
+const defineEffectAddBuff = (labels) => defineEffect(EFFECT_ADD_BUFF, labels.addBuff, regularParamSourceId());
+const defineEffectAddDebuff = (labels) => defineEffect(EFFECT_ADD_DEBUFF, labels.addDebuff, regularParamSourceId());
+const defineEffectRemoveBuff = (labels) => defineEffect(EFFECT_REMOVE_BUFF, labels.removeBuff, regularParamSourceId());
 const defineEffectRemoveDebuff = (labels) => defineEffect(
   EFFECT_REMOVE_DEBUFF,
-  LABEL_SET_ITEM_EFFECT.options.removeDebuff,
-  labels,
-  regularParam()
+  labels.removeDebuff,
+  regularParamSourceId()
 );
-const defineEffectCommonEvent = (labels) => defineEffect(
-  EFFECT_COMMON_EVENT,
-  LABEL_SET_ITEM_EFFECT.options.commonEvent,
-  labels,
-  srcData(SRC_DATA_COMMON_EVNET)
-);
+const defineEffectGrow = (labels) => defineEffect(EFFECT_GROW, labels.grow, regularParamSourceId());
+const defineEffectLearnSkill = (labels) => defineEffect(EFFECT_LEARN_SKILL, labels.learnSkill, skillSourceId());
+const defineEffectCommonEvent = (labels) => defineEffect(EFFECT_COMMON_EVENT, labels.commonEvent, {
+  author: AUTHOR_RMMZ,
+  module: MODULE_DATA,
+  kind: SRC_DATA_COMMON_EVNET
+});
+const FORMAT_NAME = "{name}";
+const FORMAT_VALUE1 = "{value1}";
+const FORMAT_VALUE2 = "{value2}";
+const formatItemEffectText = (effectDefine, effect, items) => {
+  const item2 = items.find((item22) => item22.id === effect.dataId);
+  const name = item2 ? item2.name : "Unknown Item";
+  return effectDefine.format.replaceAll(FORMAT_VALUE1, effect.value1.toString()).replaceAll(FORMAT_VALUE2, effect.value2.toString()).replaceAll(FORMAT_NAME, name);
+};
 const DEFAULT_ITEM_LABELS = {
   domainName: "アイテム",
   options: {
@@ -4120,6 +3979,8 @@ export {
   FOLDER_IMG_TITLES2,
   FOLDER_JS,
   FORCE_ACTION,
+  FORMAT_NAME$2 as FORMAT_NAME,
+  FORMAT_PARAM_VALUE,
   GAME_OVER,
   GATHER_FOLLOWERS,
   GET_LOCATION_INFO,
@@ -4137,8 +3998,7 @@ export {
   LABEL_SET_TRAIT,
   LOOP,
   LOOP_BREAK,
-  MODULE_DATA$1 as MODULE_DATA,
-  MODULE_SYSTEM$1 as MODULE_SYSTEM,
+  MODULE_DATA,
   MODULE_TRAIT,
   MOVE_PICTURE,
   NAME_INPUT_PROCESSING,
@@ -4267,31 +4127,24 @@ export {
   SPECIAL_PARAM_REC,
   SPECIAL_PARAM_TCR,
   SPECIAL_PARAM_TGR,
-  SRC_ARMOR_TYPES,
   SRC_COLOR,
-  SRC_DATA_ACTOR$1 as SRC_DATA_ACTOR,
-  SRC_DATA_ARMOR$1 as SRC_DATA_ARMOR,
+  SRC_DATA_ACTOR,
+  SRC_DATA_ARMOR,
   SRC_DATA_CLASS,
   SRC_DATA_COMMON_EVNET,
   SRC_DATA_ENEMY,
   SRC_DATA_ITEMS,
   SRC_DATA_MAP,
-  SRC_DATA_SKILL$1 as SRC_DATA_SKILL,
-  SRC_DATA_STATE$1 as SRC_DATA_STATE,
+  SRC_DATA_SKILL,
+  SRC_DATA_STATE,
   SRC_DATA_TROOP,
   SRC_DATA_WEAPON,
-  SRC_ELEMENTS,
-  SRC_EQUIP_TYPES,
   SRC_PARAMS_EXTRA,
   SRC_PARAMS_REGULAR,
   SRC_PARAMS_SPECIAL,
-  SRC_SKILL_TYPES,
-  SRC_SWITCHES,
   SRC_TRAIT_COLLAPS,
   SRC_TRAIT_PARTY_ABILITY,
   SRC_TRAIT_SPECIAL_FLAG,
-  SRC_VARIABLE,
-  SRC_WEAPON_TYPES,
   STOP_SE,
   TINT_PICTURE,
   TINT_SCREEN,
@@ -4348,18 +4201,6 @@ export {
   createEventCommand,
   createNoteEntity,
   createSystemVariableControlChars,
-  defineEffectAddBuff,
-  defineEffectAddDebuff,
-  defineEffectAddState,
-  defineEffectCommonEvent,
-  defineEffectGainTp,
-  defineEffectGrow,
-  defineEffectLearnSkill,
-  defineEffectRecoverHp,
-  defineEffectRecoverMp,
-  defineEffectRemoveBuff,
-  defineEffectRemoveDebuff,
-  defineEffectRemoveState,
   defineTraitCollapseType,
   defineTraitExtraParam,
   defineTraitRegularParam,
@@ -4417,9 +4258,7 @@ export {
   isDataSkill,
   isDataState,
   isDataWeapon,
-  isValid,
   itemSourceId,
-  joinSourceKey,
   makeActorData,
   makeArmorData,
   makeAudioCommand,
@@ -4488,9 +4327,6 @@ export {
   makeTroopMember,
   makeVehicleData,
   makeWeaponData,
-  mergeDomainLabel,
-  mergeNestedPrimitiveRecords,
-  mergeWithDefaults,
   partyAbilitySourceId,
   partyAbilityToArray,
   readNote,
@@ -4502,7 +4338,6 @@ export {
   replaceNote,
   resolveItemEffectLabels,
   resolveTraitLabels,
-  sanitizeKey,
   setNoteValue,
   skillSourceId,
   sourceIdSpecialFlag,
@@ -4518,7 +4353,6 @@ export {
   systemSwitchesSourceId,
   systemVariablesSourceId,
   systemWeaponTypesSourceId,
-  testUnknonwKey,
   toArrayCommonEvent,
   toArrayControlSwitches,
   toArrayInputNumber,

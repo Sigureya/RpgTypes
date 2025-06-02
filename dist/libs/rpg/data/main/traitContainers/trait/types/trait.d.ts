@@ -1,4 +1,4 @@
-import { SourceIdentifier } from '../../../../../../schema/namedItemSource';
+import { SourceIdentifier } from '../../../../../../namedItemSource';
 export interface Trait {
     code: number;
     dataId: number;
