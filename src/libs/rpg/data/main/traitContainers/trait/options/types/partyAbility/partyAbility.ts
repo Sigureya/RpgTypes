@@ -1,5 +1,5 @@
 import { AUTHOR_RMMZ } from "src/namedItemSource";
-import type { Data_NamedItem2, SourceIdentifier } from "src/namedItemSource";
+import type { Data_NamedItem, SourceIdentifier } from "src/namedItemSource";
 import {
   PARTY_ABILITY_ENCOUNTER_HALF,
   PARTY_ABILITY_ENCOUNTER_NONE,
@@ -19,7 +19,7 @@ export const partyAbilitySourceId = (): SourceIdentifier => ({
 
 export const partyAbilityToArray = (
   options: PartyAbilityOptionLabels
-): Data_NamedItem2[] => {
+): Data_NamedItem[] => {
   return [
     {
       id: PARTY_ABILITY_ENCOUNTER_HALF,

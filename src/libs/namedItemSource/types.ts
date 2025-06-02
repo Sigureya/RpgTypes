@@ -4,13 +4,13 @@ export interface SourceIdentifier {
   kind: string; // 種別（例: weapon, item）
 }
 
-export interface Data_NamedItem2 {
+export interface Data_NamedItem {
   id: number; // 一意の識別子
   name: string; // 名前
 }
 
 export interface NamedItemSource {
-  items: Data_NamedItem2[];
+  items: Data_NamedItem[];
   source: SourceIdentifier;
   label: string;
 }

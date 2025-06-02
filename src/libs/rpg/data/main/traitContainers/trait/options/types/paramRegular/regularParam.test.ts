@@ -11,7 +11,7 @@ import {
 } from "./constants";
 import type { RegularParamLabels } from "./labels";
 import { regularParamsToArray, regularParamName } from "./regularParam";
-import type { Data_NamedItem2 } from "src/namedItemSource";
+import type { Data_NamedItem } from "src/namedItemSource";
 
 describe("foldRegularParam", () => {
   const param: RegularParamLabels = {
@@ -26,7 +26,7 @@ describe("foldRegularParam", () => {
   };
   const result = regularParamsToArray(param);
   test("should return correct regular parameter options", () => {
-    const expected: Data_NamedItem2[] = [
+    const expected: Data_NamedItem[] = [
       { id: REGULAR_PARAM_MAX_HP, name: "Max HP" },
       { id: REGULAR_PARAM_MAX_MP, name: "Max MP" },
       { id: REGULAR_PARAM_ATK, name: "Attack" },

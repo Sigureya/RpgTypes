@@ -1,5 +1,5 @@
 import type {
-  Data_NamedItem2,
+  Data_NamedItem,
   NamedItemSource,
   SourceIdentifier,
 } from "src/namedItemSource";
@@ -36,7 +36,7 @@ export const defineTraitRegularParam = (
 
 export const regularParamsToArray = (
   param: RegularParamLabels
-): Data_NamedItem2[] => {
+): Data_NamedItem[] => {
   return [
     { id: REGULAR_PARAM_MAX_HP, name: param.maxHp },
     { id: REGULAR_PARAM_MAX_MP, name: param.maxMp },

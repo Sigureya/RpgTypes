@@ -2,7 +2,7 @@ import { describe, test, expect } from "vitest";
 import { detectTraitLabel, formatTraitText } from "./format";
 import type { Trait, TraitLabelResolved } from "./types";
 
-import type { Data_NamedItem2, SourceIdentifier } from "src/namedItemSource";
+import type { Data_NamedItem, SourceIdentifier } from "src/namedItemSource";
 
 const makeSource = (): SourceIdentifier => ({
   author: "test",
@@ -12,7 +12,7 @@ const makeSource = (): SourceIdentifier => ({
 const mock0 = {
   id: 956,
   name: "ALFA-X",
-} satisfies Data_NamedItem2;
+} satisfies Data_NamedItem;
 
 const mockE1 = {
   name: "max yamabiko",
@@ -21,12 +21,12 @@ const mockE1 = {
 const mockE2 = {
   name: "asama",
   id: 2,
-} satisfies Data_NamedItem2;
+} satisfies Data_NamedItem;
 
 const mockE3 = {
   name: "komachi",
   id: 3,
-} satisfies Data_NamedItem2;
+} satisfies Data_NamedItem;
 
 const mockArray = [mock0, mockE1, mockE2, mockE3];
 
@@ -35,7 +35,7 @@ interface TestCase {
   data: TraitLabelResolved;
   expectedDetection: string[];
   expectedText: string;
-  dataArray: Data_NamedItem2[];
+  dataArray: Data_NamedItem[];
   trait: Trait;
 }
 

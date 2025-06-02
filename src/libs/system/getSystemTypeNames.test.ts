@@ -6,7 +6,7 @@ import {
   getSkillTypes,
   getVariableNames,
 } from "./getSystemTypeNames";
-import type { Data_NamedItem2 as Data_NamedItem } from "@RpgTypes/namedItemSource";
+import type { Data_NamedItem as Data_NamedItem } from "@RpgTypes/namedItemSource";
 import type { System_ParamNames } from "./subset";
 import type { Data_System } from "./system";
 

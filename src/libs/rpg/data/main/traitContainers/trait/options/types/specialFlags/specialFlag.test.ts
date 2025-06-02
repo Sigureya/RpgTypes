@@ -1,4 +1,4 @@
-import type { Data_NamedItem2 } from "src/namedItemSource";
+import type { Data_NamedItem } from "src/namedItemSource";
 import { describe, expect, test } from "vitest";
 import {
   FLAG_ID_AUTO_BATTLE,
@@ -16,7 +16,7 @@ describe("specialFlagToArray", () => {
     preventEscape: "Prevent Escape",
   });
   test("should return correct special flag options", () => {
-    const expected: Data_NamedItem2[] = [
+    const expected: Data_NamedItem[] = [
       { id: FLAG_ID_AUTO_BATTLE, name: "Auto Battle" },
       { id: FLAG_ID_GUARD, name: "Guard" },
       { id: FLAG_ID_SUBSTITUTE, name: "Substitute" },
