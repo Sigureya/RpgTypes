@@ -14,3 +14,8 @@ export interface NamedItemSource {
   source: SourceIdentifier;
   label: string;
 }
+
+export interface FormatWithSource {
+  format: string;
+  dataSource?: SourceIdentifier;
+}
