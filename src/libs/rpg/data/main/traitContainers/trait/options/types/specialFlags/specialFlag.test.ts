@@ -1,4 +1,4 @@
-import type { Data_NamedItem2 } from "@RpgTypes/schema/namedItemSource";
+import type { Data_NamedItem2 } from "src/namedItemSource";
 import { describe, expect, test } from "vitest";
 import {
   FLAG_ID_AUTO_BATTLE,

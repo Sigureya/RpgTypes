@@ -1,4 +1,4 @@
-import type { SourceIdentifier } from "@RpgTypes/schema/namedItemSource";
+import type { SourceIdentifier } from "src/namedItemSource";
 import { AUTHOR_RMMZ } from "@RpgTypes/namedItemSource";
 import type { Data_State } from "./types";
 import { SRC_DATA_STATE, MODULE_DATA } from "../../../sourceConstants";

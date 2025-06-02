@@ -41,7 +41,7 @@ export default defineConfig({
     alias: {
       "src/libs": path.resolve(__dirname, "./src/libs"),
       "@RpgTypes": path.resolve(__dirname, "./src/libs"),
-      "src/rpg": path.resolve(__dirname, "./src/libs/rpg"),
+      src: path.resolve(__dirname, "./src/libs"),
     },
   },
   plugins: [

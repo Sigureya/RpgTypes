@@ -25,7 +25,7 @@ import {
   EFFECT_REMOVE_DEBUFF,
   EFFECT_REMOVE_STATE,
 } from "./constants";
-import type { SourceIdentifier } from "@RpgTypes/schema";
+import type { SourceIdentifier } from "src/namedItemSource";
 
 export const resolveItemEffectLabels = (
   labels: ItemEffectLabelSet

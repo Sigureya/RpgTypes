@@ -1,4 +1,4 @@
-import type { Data_NamedItem2 } from "@RpgTypes/schema";
+import type { Data_NamedItem2 } from "src/namedItemSource";
 import type { Trait, TraitLabelResolved } from "./types";
 
 import { FORMAT_PARAM_VALUE, FORMAT_NAME } from "./options/default";

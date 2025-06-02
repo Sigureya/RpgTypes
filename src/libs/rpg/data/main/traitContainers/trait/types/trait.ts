@@ -1,4 +1,4 @@
-import type { SourceIdentifier } from "@RpgTypes/schema/namedItemSource";
+import type { SourceIdentifier } from "src/namedItemSource";
 
 export interface Trait {
   code: number;

@@ -11,7 +11,7 @@ import {
 } from "./constants";
 import type { RegularParamLabels } from "./labels";
 import { regularParamsToArray, regularParamName } from "./regularParam";
-import type { Data_NamedItem2 } from "@RpgTypes/schema/namedItemSource";
+import type { Data_NamedItem2 } from "src/namedItemSource";
 
 describe("foldRegularParam", () => {
   const param: RegularParamLabels = {

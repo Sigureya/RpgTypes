@@ -1,4 +1,4 @@
-import type { SourceIdentifier } from "@RpgTypes/schema";
+import type { SourceIdentifier } from "src/namedItemSource";
 
 export interface EffectDefinitionResolved {
   code: number;

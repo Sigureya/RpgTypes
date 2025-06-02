@@ -1,4 +1,9 @@
-import type { Data_NamedItem2, SourceIdentifier } from "@RpgTypes/schema";
+import type {
+  Data_NamedItem2,
+  NamedItemSource,
+  SourceIdentifier,
+} from "src/namedItemSource";
+import { AUTHOR_RMMZ } from "src/namedItemSource";
 
 import { MODULE_TRAIT, SRC_PARAMS_REGULAR } from "src/rpg";
 import {
@@ -12,9 +17,7 @@ import {
   REGULAR_PARAM_LUK,
 } from "./constants";
 import type { RegularParamLabels } from "./labels";
-import { AUTHOR_RMMZ } from "@RpgTypes/namedItemSource";
 
-import type { NamedItemSource } from "@RpgTypes/schema/namedItemSource";
 import type { TraitLabelWithOption } from "../traitLabel";
 
 export const regularParamSourceId = (): SourceIdentifier => ({

@@ -13,7 +13,7 @@ import {
 } from "./constants";
 import type { SpecialParamLabels } from "./labels";
 import { specialParamsToArray, specialParamName } from "./specialParam";
-import type { Data_NamedItem2 } from "@RpgTypes/schema/namedItemSource";
+import type { Data_NamedItem2 } from "src/namedItemSource";
 
 const mockLabels = Object.freeze({
   targetRate: "Target Rate",

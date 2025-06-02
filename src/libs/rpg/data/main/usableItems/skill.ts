@@ -1,7 +1,7 @@
-import type { SourceIdentifier } from "@RpgTypes/schema/namedItemSource";
+import type { SourceIdentifier } from "src/namedItemSource";
 import { makeDamage } from "../members";
 import type { Data_Skill } from "./types";
-import { AUTHOR_RMMZ } from "@RpgTypes/namedItemSource";
+import { AUTHOR_RMMZ } from "src/namedItemSource";
 import { MODULE_DATA, SRC_DATA_SKILL } from "../../sourceConstants";
 
 export const skillSourceId = (): SourceIdentifier => ({

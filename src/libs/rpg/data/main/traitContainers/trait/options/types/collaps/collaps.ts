@@ -1,4 +1,3 @@
-import type { GlobalLabel } from "@RpgTypes/rpg/labels";
 import {
   COLLAPS_NORMAL,
   COLLAPS_BOSS,
@@ -10,9 +9,9 @@ import type {
   Data_NamedItem2,
   NamedItemSource,
   SourceIdentifier,
-} from "@RpgTypes/schema/namedItemSource";
-import { AUTHOR_RMMZ } from "@RpgTypes/namedItemSource";
-import { MODULE_TRAIT, SRC_TRAIT_COLLAPS } from "src/rpg";
+} from "src/namedItemSource";
+import { AUTHOR_RMMZ } from "src/namedItemSource";
+import { MODULE_TRAIT, SRC_TRAIT_COLLAPS, type GlobalLabel } from "src/rpg";
 
 export const collapsSourceId = (): SourceIdentifier => ({
   author: AUTHOR_RMMZ,

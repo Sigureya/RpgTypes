@@ -5,9 +5,8 @@ import {
   FLAG_ID_SUBSTITUTE,
 } from "./constants";
 import type { SpecialFlagOptions } from "./labels";
-import type { Data_NamedItem2 } from "@RpgTypes/schema/namedItemSource";
-import { type SourceIdentifier } from "@RpgTypes/schema/namedItemSource";
-import { AUTHOR_RMMZ } from "@RpgTypes/namedItemSource";
+import type { Data_NamedItem2, SourceIdentifier } from "src/namedItemSource";
+import { AUTHOR_RMMZ } from "src/namedItemSource";
 import { MODULE_TRAIT, SRC_TRAIT_SPECIAL_FLAG } from "src/rpg";
 
 export const sourceIdSpecialFlag = (): SourceIdentifier => ({

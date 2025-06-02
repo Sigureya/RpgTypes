@@ -1,4 +1,4 @@
-import type { Data_NamedItem2 } from "@RpgTypes/schema";
+import type { Data_NamedItem2 } from "src/namedItemSource";
 import type { Data_System } from "./system";
 import type { System_ParamNames } from "./subset";
 

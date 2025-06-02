@@ -1,5 +1,5 @@
 import { AUTHOR_RMMZ } from "@RpgTypes/namedItemSource";
-import type { SourceIdentifier } from "@RpgTypes/schema";
+import type { SourceIdentifier } from "src/namedItemSource";
 import {
   MODULE_SYSTEM,
   SRC_ELEMENTS,

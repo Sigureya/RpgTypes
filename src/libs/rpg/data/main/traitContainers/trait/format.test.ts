@@ -2,10 +2,7 @@ import { describe, test, expect } from "vitest";
 import { detectTraitLabel, formatTraitText } from "./format";
 import type { Trait, TraitLabelResolved } from "./types";
 
-import type {
-  Data_NamedItem2,
-  SourceIdentifier,
-} from "@RpgTypes/schema/namedItemSource";
+import type { Data_NamedItem2, SourceIdentifier } from "src/namedItemSource";
 
 const makeSource = (): SourceIdentifier => ({
   author: "test",

@@ -15,9 +15,9 @@ import type {
   Data_NamedItem2,
   NamedItemSource,
   SourceIdentifier,
-} from "@RpgTypes/schema/namedItemSource";
+} from "src/namedItemSource";
+import { AUTHOR_RMMZ } from "src/namedItemSource";
 import { MODULE_TRAIT, SRC_PARAMS_SPECIAL } from "src/rpg";
-import { AUTHOR_RMMZ } from "@RpgTypes/namedItemSource";
 import type { TraitLabelWithOption } from "../traitLabel";
 
 export const extraParamSourceId = (): SourceIdentifier => ({
