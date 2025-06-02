@@ -21,7 +21,6 @@ import {
   EFFECT_REMOVE_DEBUFF,
   EFFECT_REMOVE_STATE,
 } from "./constants/";
-import type { ItemEffect } from "./itemEffect";
 import type {
   EffectDefinitionResolved,
   EffectLabelDefinition,
@@ -31,23 +30,10 @@ import { LABEL_SET_ITEM_EFFECT } from "./labels";
 import { AUTHOR_RMMZ } from "@RpgTypes/namedItemSource/";
 import { ItemEffectDescriptor } from "./itemEffectDescriptor";
 import type { DomainLabel } from "@RpgTypes/templates";
-/**
- * @deprecated
- */
-export const formatItemEffectText = (
-  effectDefine: EffectDefinitionResolved,
-  effect: ItemEffect,
-  name: string
-) => {
-  return effectDefine.format
-    .replaceAll(`{value1}`, effect.value1.toString())
-    .replaceAll(`{value2}`, effect.value2.toString())
-    .replaceAll("{name}", name);
-};
 
 export const resolveItemEffectLabels = (
   label: DomainLabel<ItemEffectLabelSet>
-): ItemEffectDescriptor[] => {
+): EffectDefinitionResolved[] => {
   return [
     defineEffectRecoverHp(label.options.recoverHp),
     defineEffectRecoverMp(label.options.recoverMp),
