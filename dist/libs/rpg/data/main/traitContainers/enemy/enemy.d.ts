@@ -1,4 +1,4 @@
-import { SourceIdentifier } from '../../../../../schema/namedItemSource';
+import { SourceIdentifier } from '../../../../../namedItemSource';
 import { Data_Enemy, DropItem, Enemy_Action } from './types';
 export declare const makeDropItem: (dropItem?: Partial<DropItem>) => DropItem;
 export declare const makeEnemyAction: (action?: Partial<Enemy_Action>) => Enemy_Action;

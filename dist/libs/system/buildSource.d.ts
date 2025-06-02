@@ -1,4 +1,4 @@
-import { NamedItemSource } from '../schema';
+import { NamedItemSource } from '../namedItemSource';
 import { Data_System } from './system';
 import { SystemLabel_DataNames } from './systemLabels';
 export declare const buildElementTypesSource: (system: Pick<Data_System, "elements">, label: SystemLabel_DataNames) => NamedItemSource;

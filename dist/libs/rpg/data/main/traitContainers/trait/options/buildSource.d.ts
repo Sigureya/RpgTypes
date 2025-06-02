@@ -1,6 +1,7 @@
-import { GlobalLabel, NamedItemSource } from '../../../../../../schema';
+import { GlobalLabel } from '../../../../../../schema';
 import { CollapsOptionLabels, ExtraParamLabels, PartyAbilityOptionLabels, RegularParamLabels, SpecialFlagOptions, SpecialParamLabels } from './types';
 import { DomainLabel } from '../../../../../../templates';
+import { NamedItemSource } from '../../../../../../namedItemSource';
 export declare const traitDomain: <T>(sourceKey: string, labels: DomainLabel<T>, fn: (options: T) => {
     name: string;
     id: number;

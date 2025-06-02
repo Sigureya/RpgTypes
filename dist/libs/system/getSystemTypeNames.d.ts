@@ -1,10 +1,10 @@
-import { Data_NamedItem2 } from '../schema';
+import { Data_NamedItem } from '../namedItemSource';
 import { Data_System } from './system';
 import { System_ParamNames } from './subset';
-export declare const getVariableNames: (system: Pick<Data_System, "variables">) => Data_NamedItem2[];
-export declare const getElementTypes: (system: Pick<Data_System, "elements">) => Data_NamedItem2[];
-export declare const getEquipTypes: (system: Pick<Data_System, "equipTypes">) => Data_NamedItem2[];
-export declare const getSkillTypes: (system: Pick<Data_System, "skillTypes">) => Data_NamedItem2[];
-export declare const getWeaponTypes: (system: Pick<Data_System, "weaponTypes">) => Data_NamedItem2[];
-export declare const getArmorTypes: (system: Pick<Data_System, "armorTypes">) => Data_NamedItem2[];
-export declare const getParamNames: (system: System_ParamNames) => Data_NamedItem2[];
+export declare const getVariableNames: (system: Pick<Data_System, "variables">) => Data_NamedItem[];
+export declare const getElementTypes: (system: Pick<Data_System, "elements">) => Data_NamedItem[];
+export declare const getEquipTypes: (system: Pick<Data_System, "equipTypes">) => Data_NamedItem[];
+export declare const getSkillTypes: (system: Pick<Data_System, "skillTypes">) => Data_NamedItem[];
+export declare const getWeaponTypes: (system: Pick<Data_System, "weaponTypes">) => Data_NamedItem[];
+export declare const getArmorTypes: (system: Pick<Data_System, "armorTypes">) => Data_NamedItem[];
+export declare const getParamNames: (system: System_ParamNames) => Data_NamedItem[];

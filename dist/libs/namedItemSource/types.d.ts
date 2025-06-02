@@ -3,12 +3,12 @@ export interface SourceIdentifier {
     module: string;
     kind: string;
 }
-export interface Data_NamedItem2 {
+export interface Data_NamedItem {
     id: number;
     name: string;
 }
 export interface NamedItemSource {
-    items: Data_NamedItem2[];
+    items: Data_NamedItem[];
     source: SourceIdentifier;
     label: string;
 }
