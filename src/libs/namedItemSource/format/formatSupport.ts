@@ -5,9 +5,9 @@ import type {
   FormatWithSource,
 } from "./types";
 
-export const detectFormatErros = (
+export const detectFormatErros = <T extends object>(
   format: FormatWithSource,
-  formatRule: FormatRule,
+  formatRule: FormatRule<T>,
   errorTexts: FormatErrorLabels
 ): FormatError[] => {
   const dataSourceErrorResult = dataSourceError(format, formatRule, errorTexts);
@@ -21,22 +21,25 @@ export const detectFormatErros = (
     : invalidPlaceholdersResult;
 };
 
-const isInvalidKey = (key: string, rule: FormatRule): boolean => {
+const isInvalidKey = <T extends object>(
+  key: string,
+  rule: FormatRule<T>
+): boolean => {
   if (key.length === 0 || key.length >= 100) {
     return true;
   }
   if (key === rule.itemNamePlaceHolder) {
     return false;
   }
-  if (rule.placeHolders.includes(key)) {
+  if ((rule.placeHolders as string[]).includes(key)) {
     return false;
   }
   return true;
 };
 
-const invalidPlaceHolders = (
+const invalidPlaceHolders = <T extends object>(
   format: string,
-  rule: FormatRule,
+  rule: FormatRule<T>,
   errorTexts: FormatErrorLabels
 ): FormatError[] => {
   const matched = Array.from(format.matchAll(/\{([.a-zA-Z0-9]+)\}/g));
@@ -52,9 +55,9 @@ const invalidPlaceHolders = (
   }, []);
 };
 
-const dataSourceError = (
+const dataSourceError = <T extends object>(
   format: FormatWithSource,
-  formatRule: FormatRule,
+  formatRule: FormatRule<T>,
   errorTexts: FormatErrorLabels
 ): FormatError | undefined => {
   const np = formatRule.itemNamePlaceHolder ?? "name";

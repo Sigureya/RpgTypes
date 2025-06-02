@@ -20,9 +20,9 @@ export interface FormatWithSource {
   dataSource?: SourceIdentifier;
 }
 
-export interface FormatRule {
+export interface FormatRule<T extends object> {
   itemNamePlaceHolder?: string;
-  placeHolders: string[];
+  placeHolders: Extract<keyof T, string>[];
 }
 
 export interface FormatErrorLabels {
