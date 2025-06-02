@@ -1,4 +1,4 @@
-import type { Data_NamedItem } from "./namedItem";
+import type { Data_NamedItem } from "src/namedItemSource";
 
 export interface Data_Goods extends Data_NamedItem {
   name: string;

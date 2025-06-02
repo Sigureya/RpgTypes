@@ -1,4 +1,4 @@
-import type { Data_NamedItem2 } from "src/namedItemSource";
+import type { Data_NamedItem } from "src/namedItemSource";
 import type { ItemEffect } from "./itemEffect";
 import type { EffectDefinitionResolved } from "./labels";
 const FORMAT_NAME = "{name}" as const;
@@ -8,7 +8,7 @@ const FORMAT_VALUE2 = "{value2}" as const;
 export const formatItemEffectText = (
   effectDefine: EffectDefinitionResolved,
   effect: ItemEffect,
-  items: Data_NamedItem2[]
+  items: Data_NamedItem[]
 ): string => {
   const item = items.find((item) => item.id === effect.dataId);
   const name: string = item ? item.name : "Unknown Item";

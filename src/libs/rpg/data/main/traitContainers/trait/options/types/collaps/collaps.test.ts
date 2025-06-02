@@ -8,7 +8,7 @@ import {
 } from "./constants";
 import type { CollapsOptionLabels } from "./labels";
 import { collapsOptionsToArray } from "./collaps";
-import type { Data_NamedItem2 } from "src/namedItemSource";
+import type { Data_NamedItem } from "src/namedItemSource";
 
 describe("collapsOptionsToArray", () => {
   const options: CollapsOptionLabels = {
@@ -22,7 +22,7 @@ describe("collapsOptionsToArray", () => {
 
   const result = collapsOptionsToArray(options, global);
   test("should return correct collaps options", () => {
-    const expected: Data_NamedItem2[] = [
+    const expected: Data_NamedItem[] = [
       { id: COLLAPS_NORMAL, name: "Normal Collapse" },
       { id: COLLAPS_BOSS, name: "Boss Collapse" },
       { id: COLLAPS_INSTANT, name: "Instant Collapse" },

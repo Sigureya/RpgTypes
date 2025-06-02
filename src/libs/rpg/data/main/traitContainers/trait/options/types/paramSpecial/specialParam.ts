@@ -12,7 +12,7 @@ import {
 } from "./constants";
 import type { SpecialParamLabels } from "./labels";
 import type {
-  Data_NamedItem2,
+  Data_NamedItem,
   NamedItemSource,
   SourceIdentifier,
 } from "src/namedItemSource";
@@ -37,7 +37,7 @@ export const defineTraitSpecialParam = (
 
 export const specialParamsToArray = (
   specialParams: SpecialParamLabels
-): Data_NamedItem2[] => {
+): Data_NamedItem[] => {
   return [
     {
       id: SPECIAL_PARAM_TGR,

@@ -9,7 +9,7 @@ import {
 } from "./constants";
 import { partyAbilityToArray } from "./partyAbility";
 import type { PartyAbilityOptionLabels } from "./labels";
-import type { Data_NamedItem2 } from "src/namedItemSource";
+import type { Data_NamedItem } from "src/namedItemSource";
 
 describe("partyAbilityToArray", () => {
   const options: PartyAbilityOptionLabels = {
@@ -23,7 +23,7 @@ describe("partyAbilityToArray", () => {
 
   const result = partyAbilityToArray(options);
   test("should return correct party ability options", () => {
-    const expected: Data_NamedItem2[] = [
+    const expected: Data_NamedItem[] = [
       { id: PARTY_ABILITY_ENCOUNTER_HALF, name: "Half Encounters" },
       { id: PARTY_ABILITY_ENCOUNTER_NONE, name: "No Encounters" },
       { id: PARTY_ABILITY_CANCEL_SURPRISE, name: "Cancel Surprise" },

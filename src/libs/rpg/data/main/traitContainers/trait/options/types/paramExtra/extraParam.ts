@@ -12,7 +12,7 @@ import {
 } from "./constants";
 import type { ExtraParamLabels } from "./labels";
 import type {
-  Data_NamedItem2,
+  Data_NamedItem,
   NamedItemSource,
   SourceIdentifier,
 } from "src/namedItemSource";
@@ -36,7 +36,7 @@ export const defineTraitExtraParam = (
 
 export const extraParamsToArray = (
   xparam: ExtraParamLabels
-): Data_NamedItem2[] => {
+): Data_NamedItem[] => {
   return [
     {
       id: EXTRA_PARAM_HIT,

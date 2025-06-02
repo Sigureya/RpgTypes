@@ -6,7 +6,7 @@ import {
 } from "./constants";
 import type { CollapsOptionLabels } from "./labels";
 import type {
-  Data_NamedItem2,
+  Data_NamedItem,
   NamedItemSource,
   SourceIdentifier,
 } from "src/namedItemSource";
@@ -31,7 +31,7 @@ export const defineTraitCollapseType = (
 export const collapsOptionsToArray = (
   options: CollapsOptionLabels,
   global: Pick<GlobalLabel, "normal">
-): Data_NamedItem2[] => {
+): Data_NamedItem[] => {
   return [
     {
       id: COLLAPS_NORMAL,

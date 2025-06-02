@@ -5,7 +5,7 @@ import {
   FLAG_ID_SUBSTITUTE,
 } from "./constants";
 import type { SpecialFlagOptions } from "./labels";
-import type { Data_NamedItem2, SourceIdentifier } from "src/namedItemSource";
+import type { Data_NamedItem, SourceIdentifier } from "src/namedItemSource";
 import { AUTHOR_RMMZ } from "src/namedItemSource";
 import { MODULE_TRAIT, SRC_TRAIT_SPECIAL_FLAG } from "src/rpg";
 
@@ -17,7 +17,7 @@ export const sourceIdSpecialFlag = (): SourceIdentifier => ({
 
 export const specialFlagToArray = (
   label: SpecialFlagOptions
-): Data_NamedItem2[] => {
+): Data_NamedItem[] => {
   return [
     {
       id: FLAG_ID_AUTO_BATTLE,

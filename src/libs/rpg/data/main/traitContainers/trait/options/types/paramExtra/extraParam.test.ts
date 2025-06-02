@@ -13,7 +13,7 @@ import {
 } from "./constants";
 import { extraParamName, extraParamsToArray } from "./extraParam";
 import type { ExtraParamLabels } from "./labels";
-import type { Data_NamedItem2 } from "src/namedItemSource";
+import type { Data_NamedItem } from "src/namedItemSource";
 
 describe("extraParamsToArray", () => {
   const xparam: ExtraParamLabels = {
@@ -31,7 +31,7 @@ describe("extraParamsToArray", () => {
 
   const result = extraParamsToArray(xparam);
   test("should return correct extra parameter options", () => {
-    const expected: Data_NamedItem2[] = [
+    const expected: Data_NamedItem[] = [
       { id: EXTRA_PARAM_HIT, name: "Hit Rate" },
       { id: EXTRA_PARAM_EVA, name: "Evasion Rate" },
       { id: EXTRA_PARAM_CRI, name: "Critical Rate" },

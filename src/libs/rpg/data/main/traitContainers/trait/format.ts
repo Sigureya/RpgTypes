@@ -1,4 +1,4 @@
-import type { Data_NamedItem2 } from "src/namedItemSource";
+import type { Data_NamedItem } from "src/namedItemSource";
 import type { Trait, TraitLabelResolved } from "./types";
 
 import { FORMAT_PARAM_VALUE, FORMAT_NAME } from "./options/default";
@@ -6,7 +6,7 @@ import { FORMAT_PARAM_VALUE, FORMAT_NAME } from "./options/default";
 export const formatTraitText = (
   descriptor: TraitLabelResolved,
   trait: Trait,
-  items: Data_NamedItem2[],
+  items: Data_NamedItem[],
   maxNameLength: number = 100
 ): string => {
   const item = items[trait.dataId];

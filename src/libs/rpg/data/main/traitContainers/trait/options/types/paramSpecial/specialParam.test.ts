@@ -13,7 +13,7 @@ import {
 } from "./constants";
 import type { SpecialParamLabels } from "./labels";
 import { specialParamsToArray, specialParamName } from "./specialParam";
-import type { Data_NamedItem2 } from "src/namedItemSource";
+import type { Data_NamedItem } from "src/namedItemSource";
 
 const mockLabels = Object.freeze({
   targetRate: "Target Rate",
@@ -31,7 +31,7 @@ const mockLabels = Object.freeze({
 describe("specialParamsToArray", () => {
   const result = specialParamsToArray(mockLabels);
   test("should return correct special parameter options", () => {
-    const expected: Data_NamedItem2[] = [
+    const expected: Data_NamedItem[] = [
       { id: SPECIAL_PARAM_TGR, name: "Target Rate" },
       { id: SPECIAL_PARAM_GRD, name: "Guard Effect Rate" },
       { id: SPECIAL_PARAM_REC, name: "Recovery Effect Rate" },
