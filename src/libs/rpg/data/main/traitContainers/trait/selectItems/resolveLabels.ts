@@ -5,6 +5,7 @@ import {
   systemEquipTypesSourceId,
   systemWeaponTypesSourceId,
 } from "@RpgTypes/system";
+import { skillSourceId, stateSourceId } from "src/rpg";
 import {
   TRAIT_ELEMENT_RATE,
   TRAIT_DEBUFF_RATE,
@@ -31,28 +32,27 @@ import {
   TRAIT_SLOT_TYPE,
   TRAIT_SKILL_TYPE_ADD,
   TRAIT_SKILL_TYPE_SEAL,
-} from "./selectItems/constants";
+} from "./constants";
+import type { TraitLabelResolved } from "./types";
+import type { TraitLabelSet } from "./labelSet";
 import type {
   CollapsOptionLabels,
-  RegularParamLabels,
-  TraitLabelWithOption,
-  TraitLabelSet,
+  ExtraParamLabels,
   PartyAbilityOptionLabels,
+  RawTraitLabel,
+  RegularParamLabels,
   SpecialFlagOptions,
   SpecialParamLabels,
-  RawTraitLabel,
-  ExtraParamLabels,
-} from "./selectItems";
+  TraitLabelWithOption,
+} from "./items";
 import {
   collapsSourceId,
-  regularParamSourceId,
+  extraParamSourceId,
   partyAbilitySourceId,
+  regularParamSourceId,
   specialFlagSourceId,
   specialParamSourceId,
-  extraParamSourceId,
-} from "./selectItems";
-import type { TraitLabelResolved } from "./types";
-import { skillSourceId, stateSourceId } from "src/rpg";
+} from "./items";
 
 export const resolveTraitLabels = (
   labels: TraitLabelSet
