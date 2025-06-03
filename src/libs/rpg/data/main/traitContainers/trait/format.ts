@@ -1,30 +1,29 @@
-import type { Data_NamedItem } from "src/namedItemSource";
-import type { Trait, TraitLabelResolved } from "./types";
+import type {
+  FormatError,
+  FormatErrorLabels,
+  FormatRule,
+  FormatWithSource,
+  Data_NamedItem,
+} from "src/namedItemSource";
+import { detectFormatErros, applyFormatRule } from "src/namedItemSource";
+import type { Trait } from "./types";
 
-import { FORMAT_PARAM_VALUE, FORMAT_NAME } from "./options/default";
+const RULE_TRAIT = {
+  itemNamePlaceHolder: "name",
+  placeHolders: ["value"],
+} as const satisfies FormatRule<Trait>;
 
 export const formatTraitText = (
-  descriptor: TraitLabelResolved,
+  descriptor: FormatWithSource,
   trait: Trait,
-  items: Data_NamedItem[],
-  maxNameLength: number = 100
+  items: Data_NamedItem[]
 ): string => {
-  const item = items[trait.dataId];
-  const itemName: string = item
-    ? item.name.slice(0, maxNameLength)
-    : `?data[${trait.dataId}]`;
-  return descriptor.format
-    .replaceAll(FORMAT_PARAM_VALUE, trait.value.toString())
-    .replaceAll(FORMAT_NAME, itemName);
+  return applyFormatRule(trait, items, RULE_TRAIT, descriptor);
 };
 
-export const invalidPlaceholders = (format: string): string[] => {
-  const allowed: string[] = [FORMAT_PARAM_VALUE, FORMAT_NAME];
-  const matches: RegExpExecArray[] = [...format.matchAll(/\{([^}]+)\}/g)];
-  return matches.map((m) => m[1]).filter((key) => !allowed.includes(key));
-};
-
-export const detectTraitLabel = (descriptor: TraitLabelResolved): string[] => {
-  descriptor.format.includes(FORMAT_NAME);
-  return [];
+export const detectTraitFormatErrors = (
+  format: FormatWithSource,
+  errorTexts: FormatErrorLabels
+): FormatError[] => {
+  return detectFormatErros(format, RULE_TRAIT, errorTexts);
 };
