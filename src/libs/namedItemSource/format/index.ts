@@ -1,4 +1,3 @@
 export * from "./types";
-export * from "./findItem";
-export { detectFormatErrors } from "./formatSupport";
+export { detectFormatErrors } from "./detectErrors";
 export { applyFormatRule } from "./applyFormat";
