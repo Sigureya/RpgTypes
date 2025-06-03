@@ -5,7 +5,7 @@ const makePlaceHolder = (key: string) => {
 };
 
 const makeItemName = (list: ReadonlyArray<Data_NamedItem>, dataId: number) => {
-  const item = list[dataId];
+  const item = findItem(dataId, list);
   return item ? item.name : `?data[${dataId}]`;
 };
 
@@ -23,4 +23,18 @@ export const applyFormatRule = <T extends Record<keyof T, string | number>>(
       ? (acc = acc.replaceAll(makePlaceHolder(key), value.toString()))
       : acc;
   }, format.format.replaceAll(nameR, itemName));
+};
+
+const findItem = <T extends Data_NamedItem>(
+  dataId: number,
+  list: ReadonlyArray<T>
+): T | undefined => {
+  const item = list[dataId];
+  if (item) {
+    if (item.id === dataId) {
+      return item;
+    }
+  }
+
+  return list.find((i) => i.id === dataId);
 };

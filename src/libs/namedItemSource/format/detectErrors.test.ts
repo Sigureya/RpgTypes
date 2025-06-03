@@ -5,7 +5,7 @@ import type {
   FormatRule,
   FormatWithSource,
 } from "./types";
-import { detectFormatErrors } from "./formatSupport";
+import { detectFormatErrors } from "./detectErrors";
 
 const mockRule = {
   placeHolders: ["value", "message"],
