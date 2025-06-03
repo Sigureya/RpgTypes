@@ -5,7 +5,7 @@ import type {
   FormatWithSource,
   Data_NamedItem,
 } from "src/namedItemSource";
-import { detectFormatErros, applyFormatRule } from "src/namedItemSource";
+import { detectFormatErrors, applyFormatRule } from "src/namedItemSource";
 import type { Trait } from "./types";
 
 const RULE_TRAIT = {
@@ -25,5 +25,5 @@ export const detectTraitFormatErrors = (
   format: FormatWithSource,
   errorTexts: FormatErrorLabels
 ): FormatError[] => {
-  return detectFormatErros(format, RULE_TRAIT, errorTexts);
+  return detectFormatErrors(format, RULE_TRAIT, errorTexts);
 };
