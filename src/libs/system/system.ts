@@ -15,6 +15,8 @@ export interface Data_System {
   // battle
   battleSystem: number;
   partyMembersArray: number[];
+  // サイドビューの際に魔法モーションを取るスキル系統
+  magicSkills: number[];
 
   // images
   battleback1Name: string;
@@ -37,7 +39,6 @@ export interface Data_System {
   equipTypes: string[];
   switches: string[];
   armorTypes: string[];
-  magicSkills: string[];
   itemCategories: ItemCategoriesArray;
   menuCommands: MenuCommandsEnabledArray;
 

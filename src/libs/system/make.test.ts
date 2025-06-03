@@ -8,7 +8,6 @@ import {
   makeBooleanOptions,
   SCHEMA_SYSTEM_BOOLEAN_OPTIONS,
 } from "./booleanOptions";
-import type { System_GameInitial } from "./subset";
 
 const test2 = <K extends keyof SystemDataFragments>(
   key: K,

@@ -42,6 +42,5 @@ export const DEFAULT_SYSTEM_LABELS_DATA_TYPES = {
     weaponTypes: "武器タイプ",
     switches: "スイッチ",
     variables: "変数",
-    magicSkills: "魔法スキル",
   },
 } as const satisfies DomainLabel<SystemLabel_DataNames>;

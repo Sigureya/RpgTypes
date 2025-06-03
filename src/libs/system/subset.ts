@@ -18,7 +18,6 @@ export type System_DataNames = Pick<
   | "equipTypes"
   | "switches"
   | "armorTypes"
-  | "magicSkills"
 >;
 
 export type System_Images = Pick<
