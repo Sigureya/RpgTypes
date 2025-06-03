@@ -6,26 +6,28 @@ import type {
   RegularParamLabels,
   SpecialFlagOptions,
   SpecialParamLabels,
-} from "./types";
+} from "./items";
 import {
   regularParamsToArray,
   partyAbilityToArray,
   collapsOptionsToArray,
   specialFlagToArray,
-  MODULE_TRAIT,
-  SRC_PARAMS_EXTRA,
-  SRC_PARAMS_SPECIAL,
-  SRC_TRAIT_COLLAPS,
-  SRC_TRAIT_PARTY_ABILITY,
-  SRC_TRAIT_SPECIAL_FLAG,
-  SRC_PARAMS_REGULAR,
-} from "src/rpg";
+  specialParamsToArray,
+  extraParamsToArray,
+} from "./items";
 
 import type { DomainLabel } from "@RpgTypes/templates";
 import type { NamedItemSource } from "src/namedItemSource";
 import { AUTHOR_RMMZ } from "@RpgTypes/namedItemSource";
-import { extraParamsToArray } from "./types/paramExtra/extraParam";
-import { specialParamsToArray } from "./types/paramSpecial/specialParam";
+import {
+  MODULE_TRAIT,
+  SRC_PARAMS_EXTRA,
+  SRC_PARAMS_REGULAR,
+  SRC_PARAMS_SPECIAL,
+  SRC_TRAIT_COLLAPS,
+  SRC_TRAIT_PARTY_ABILITY,
+  SRC_TRAIT_SPECIAL_FLAG,
+} from "./constants";
 
 export const traitDomain = <T>(
   sourceKey: string,

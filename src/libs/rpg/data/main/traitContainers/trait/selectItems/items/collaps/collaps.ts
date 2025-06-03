@@ -11,7 +11,8 @@ import type {
   SourceIdentifier,
 } from "src/namedItemSource";
 import { AUTHOR_RMMZ } from "src/namedItemSource";
-import { MODULE_TRAIT, SRC_TRAIT_COLLAPS, type GlobalLabel } from "src/rpg";
+import { type GlobalLabel } from "src/rpg";
+import { MODULE_TRAIT, SRC_TRAIT_COLLAPS } from "src/rpg";
 
 export const collapsSourceId = (): SourceIdentifier => ({
   author: AUTHOR_RMMZ,

@@ -31,7 +31,7 @@ import {
   TRAIT_SLOT_TYPE,
   TRAIT_SKILL_TYPE_ADD,
   TRAIT_SKILL_TYPE_SEAL,
-} from "./constants";
+} from "./selectItems/constants";
 import type {
   CollapsOptionLabels,
   RegularParamLabels,
@@ -42,7 +42,7 @@ import type {
   SpecialParamLabels,
   RawTraitLabel,
   ExtraParamLabels,
-} from "./options";
+} from "./selectItems";
 import {
   collapsSourceId,
   regularParamSourceId,
@@ -50,7 +50,7 @@ import {
   sourceIdSpecialFlag,
   specialParamSourceId,
   extraParamSourceId,
-} from "./options";
+} from "./selectItems";
 import type { TraitLabelResolved } from "./types";
 import { skillSourceId, stateSourceId } from "src/rpg";
 
