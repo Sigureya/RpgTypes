@@ -8,21 +8,6 @@ import type {
 } from "./types";
 
 /**
- * 指定された ResolvedLabel からフォーマットデータを構築する
- */
-const buildFinalFormatEntry = (
-  label: FormatLabelResolved<number>,
-  sourceMap: Map<string, NamedItemSource>
-): FinalFormatEntry => {
-  const source = resolveDataSource(label.dataSource, sourceMap);
-  return {
-    format: label.format,
-    label: label.label,
-    data: source ? source.items : [],
-  };
-};
-
-/**
  * ResolvedLabel 配列と NamedItemSource 配列を統合し、
  * Trait.code によるマップを構築する
  */
@@ -36,6 +21,21 @@ export const buildFinalFormatMap = (
     acc.set(label.targetKey, entry);
     return acc;
   }, new Map());
+};
+
+/**
+ * 指定された ResolvedLabel からフォーマットデータを構築する
+ */
+const buildFinalFormatEntry = (
+  label: FormatLabelResolved<number>,
+  sourceMap: ReadonlyMap<string, NamedItemSource>
+): FinalFormatEntry => {
+  const source = resolveDataSource(label.dataSource, sourceMap);
+  return {
+    format: label.format,
+    label: label.label,
+    data: source ? source.items : [],
+  };
 };
 
 /**
