@@ -17,13 +17,13 @@ import type {
   SourceIdentifier,
 } from "src/namedItemSource";
 import { AUTHOR_RMMZ } from "src/namedItemSource";
-import { MODULE_TRAIT, SRC_PARAMS_SPECIAL } from "src/rpg";
+import { MODULE_TRAIT, SRC_PARAMS_EXTRA } from "src/rpg";
 import type { TraitLabelWithOption } from "../traitLabel";
 
 export const extraParamSourceId = (): SourceIdentifier => ({
   author: AUTHOR_RMMZ,
   module: MODULE_TRAIT,
-  kind: SRC_PARAMS_SPECIAL,
+  kind: SRC_PARAMS_EXTRA,
 });
 
 export const defineTraitExtraParam = (
