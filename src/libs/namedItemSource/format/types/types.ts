@@ -15,26 +15,20 @@ export interface NamedItemSource {
   label?: string;
 }
 
-export interface ResolvedLabel {
+// export interface FormatLabelDraft {
+//   format: string;
+//   label: string;
+//   dataSource?: SourceIdentifier;
+// }
+
+export interface FormatLabelResolved<Key = string> {
   format: string;
-  label: string;
-  dataSource?: SourceIdentifier;
-}
-export interface ResolvedLabel2 {
-  format: string;
-  targetKey: number;
+  targetKey: Key;
   label: string;
   dataSource?: SourceIdentifier;
 }
 
-export interface ResolvedLabelFinal<KeyType = number> {
-  format: string;
-  targetKey: KeyType;
-  label: string;
-  dataSource?: SourceIdentifier;
-}
-
-export interface FinalXXXX {
+export interface FinalFormatEntry {
   format: string;
   label: string;
   data: ReadonlyArray<Data_NamedItem>;
