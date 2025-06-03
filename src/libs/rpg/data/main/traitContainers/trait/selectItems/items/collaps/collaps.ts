@@ -1,3 +1,4 @@
+import type { DomainLabel } from "@RpgTypes/templates";
 import {
   COLLAPS_NORMAL,
   COLLAPS_BOSS,
@@ -21,11 +22,11 @@ export const collapsSourceId = (): SourceIdentifier => ({
 });
 
 export const defineTraitCollapseType = (
-  options: CollapsOptionLabels,
+  labels: DomainLabel<CollapsOptionLabels>,
   global: Pick<GlobalLabel, "normal">
 ): NamedItemSource => ({
-  items: collapsOptionsToArray(options, global),
-  label: global.normal,
+  items: collapsOptionsToArray(labels.options, global),
+  label: labels.domainName,
   source: collapsSourceId(),
 });
 
