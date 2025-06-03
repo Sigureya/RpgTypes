@@ -12,26 +12,30 @@ export interface Data_NamedItem {
 export interface NamedItemSource {
   items: Data_NamedItem[];
   source: SourceIdentifier;
-  label: string;
+  label?: string;
 }
 
-export interface FormatWithSource {
+export interface ResolvedLabel {
   format: string;
+  label: string;
+  dataSource?: SourceIdentifier;
+}
+export interface ResolvedLabel2 {
+  format: string;
+  targetKey: number;
+  label: string;
   dataSource?: SourceIdentifier;
 }
 
-export interface FormatRule<T extends object> {
-  itemNamePlaceHolder?: string;
-  placeHolders: Extract<keyof T, string>[];
+export interface ResolvedLabelFinal<KeyType = number> {
+  format: string;
+  targetKey: KeyType;
+  label: string;
+  dataSource?: SourceIdentifier;
 }
 
-export interface FormatErrorLabels {
-  missingName: string;
-  missingSourceId: string;
-  extraPlaceHolder: string;
-}
-
-export interface FormatError {
-  message: string;
-  reason: string;
+export interface FinalXXXX {
+  format: string;
+  label: string;
+  data: ReadonlyArray<Data_NamedItem>;
 }
