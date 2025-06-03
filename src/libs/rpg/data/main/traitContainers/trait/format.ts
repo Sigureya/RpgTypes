@@ -16,7 +16,7 @@ const RULE_TRAIT = {
 export const formatTraitText = (
   descriptor: FormatWithSource,
   trait: Trait,
-  items: Data_NamedItem[]
+  items: ReadonlyArray<Data_NamedItem>
 ): string => {
   return applyFormatRule(trait, items, RULE_TRAIT, descriptor);
 };
