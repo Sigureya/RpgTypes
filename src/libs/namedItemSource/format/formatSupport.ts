@@ -1,32 +1,9 @@
 import type {
-  Data_NamedItem,
   FormatError,
   FormatErrorLabels,
   FormatRule,
   FormatWithSource,
 } from "./types";
-
-const makePlaceHolder = (key: string) => {
-  return `{${key}}`;
-};
-
-export const applyFormatRule = <T extends Record<keyof T, string | number>>(
-  data: T & { dataId: number },
-  list: ReadonlyArray<Data_NamedItem>,
-  rule: FormatRule<T>,
-  format: FormatWithSource
-) => {
-  const item = list[data.dataId];
-  const itemName: string = item ? item.name : `?data[${data.dataId}]`;
-
-  const nameR = makePlaceHolder(rule.itemNamePlaceHolder ?? "name");
-  return rule.placeHolders.reduce<string>((acc, key: string & keyof T) => {
-    const value: string | number = data[key];
-    return value
-      ? (acc = acc.replaceAll(makePlaceHolder(key), value.toString()))
-      : acc;
-  }, format.format.replaceAll(nameR, itemName));
-};
 
 export const detectFormatErros = <T extends object>(
   format: FormatWithSource,
