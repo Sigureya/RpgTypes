@@ -84,7 +84,7 @@ const mockSystem = {
   skillTypes: ["SkillType1", "SkillType2"],
   switches: ["Switch1", "Switch2"],
   variables: ["Variable1", "Variable2"],
-  magicSkills: ["MagicSkill1", "MagicSkill2"],
+  magicSkills: [1, 4],
   attackMotions: [
     {
       type: 4,

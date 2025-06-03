@@ -71,7 +71,7 @@ export const makeSystemData = (
     skillTypes: cloneStringArray(dataNames.skillTypes),
     switches: cloneStringArray(dataNames.switches),
     variables: cloneStringArray(dataNames.variables),
-    magicSkills: cloneStringArray(dataNames.magicSkills),
+    magicSkills: cloneNumberArray([]),
     airship: makeVehicleData(vehicles.airship),
     boat: makeVehicleData(vehicles.boat),
     ship: makeVehicleData(vehicles.ship),

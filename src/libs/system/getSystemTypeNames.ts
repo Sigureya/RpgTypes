@@ -46,3 +46,9 @@ export const getArmorTypes = (
 export const getParamNames = (system: System_ParamNames): Data_NamedItem[] => {
   return system.terms.params.map(makeNamedItem);
 };
+
+export const getSwitches = (
+  system: Pick<Data_System, "switches">
+): Data_NamedItem[] => {
+  return system.switches.map(makeNamedItem);
+};
