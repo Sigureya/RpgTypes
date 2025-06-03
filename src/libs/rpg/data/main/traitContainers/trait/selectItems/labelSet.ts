@@ -7,7 +7,7 @@ import type {
   SpecialParamLabels,
   RawTraitLabel,
   TraitLabelWithOption,
-} from "./types";
+} from "./items";
 
 export interface TraitLabelSet {
   collaps: TraitLabelWithOption<CollapsOptionLabels>;

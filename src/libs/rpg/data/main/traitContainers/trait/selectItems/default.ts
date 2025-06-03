@@ -9,7 +9,7 @@ import type {
   SpecialParamLabels,
   RawTraitLabel,
   TraitLabelWithOption,
-} from "./types/";
+} from "./items";
 
 export const FORMAT_NAME = "{name}" as const;
 const FORMAT_PARAM_RATE_MUL = "{name} * {value}%" as const;

@@ -1,6 +1,6 @@
 import { describe, test, expect } from "vitest";
 import { resolveTraitLabels } from "./trait";
-import { LABEL_SET_TRAIT } from "./options";
+import { LABEL_SET_TRAIT } from "./selectItems";
 import type { TraitLabelResolved } from "./types";
 
 describe("resolveTraitLabels", () => {

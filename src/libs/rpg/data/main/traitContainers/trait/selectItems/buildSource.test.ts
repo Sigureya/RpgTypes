@@ -4,7 +4,7 @@ import type {
   RegularParamLabels,
   PartyAbilityOptionLabels,
   SpecialParamLabels,
-} from "./types";
+} from "./items";
 import type { DomainLabel } from "@RpgTypes/templates";
 
 import {
