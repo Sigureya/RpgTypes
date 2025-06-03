@@ -1,6 +1,6 @@
 import { describe, test, expect } from "vitest";
 import { LABEL_SET_TRAIT } from "./default";
-import type { RawTraitLabel } from "./types";
+import type { RawTraitLabel } from "./items";
 
 describe("LABEL_SET_TRAIT", () => {
   Object.entries<RawTraitLabel>(LABEL_SET_TRAIT.options).forEach(

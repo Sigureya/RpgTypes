@@ -47,7 +47,7 @@ import {
   collapsSourceId,
   regularParamSourceId,
   partyAbilitySourceId,
-  sourceIdSpecialFlag,
+  specialFlagSourceId,
   specialParamSourceId,
   extraParamSourceId,
 } from "./selectItems";
@@ -252,7 +252,7 @@ const specialFlag = (
   format: labels.format,
   label: labels.domainName,
   code: TRAIT_SPECIAL_FLAG,
-  dataSource: sourceIdSpecialFlag(),
+  dataSource: specialFlagSourceId(),
 });
 
 const collaps = (
