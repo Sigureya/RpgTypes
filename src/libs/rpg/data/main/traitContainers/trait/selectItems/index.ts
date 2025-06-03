@@ -4,3 +4,4 @@ export * from "./labelSet";
 export * from "./constants";
 export { defineTraitItems } from "./namedItems";
 export { resolveTraitLabels } from "./resolveLabels";
+export * from "./types";
