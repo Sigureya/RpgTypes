@@ -5,7 +5,7 @@ import type {
   FormatRule,
   FormatWithSource,
 } from "./types";
-import { detectFormatErros } from "./formatSupport";
+import { detectFormatErrors } from "./formatSupport";
 
 const mockRule = {
   placeHolders: ["value", "message"],
@@ -19,7 +19,7 @@ const mockMessages = {
 } as const satisfies FormatErrorLabels;
 
 const runDetectFormatErrors = (format: FormatWithSource) => {
-  return detectFormatErros(format, mockRule, mockMessages);
+  return detectFormatErrors(format, mockRule, mockMessages);
 };
 
 describe("detectFormatErros - normal cases", () => {

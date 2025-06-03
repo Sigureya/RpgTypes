@@ -5,7 +5,7 @@ import type {
   FormatWithSource,
 } from "./types";
 
-export const detectFormatErros = <T extends object>(
+export const detectFormatErrors = <T extends object>(
   format: FormatWithSource,
   formatRule: FormatRule<T>,
   errorTexts: FormatErrorLabels
