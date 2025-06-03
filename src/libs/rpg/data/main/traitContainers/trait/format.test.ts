@@ -1,14 +1,14 @@
 import { describe, test, expect } from "vitest";
-import { detectTraitLabel, formatTraitText } from "./format";
-import type { Trait, TraitLabelResolved } from "./types";
+import { detectTraitFormatErrors, formatTraitText } from "./format";
 
-import type { Data_NamedItem, SourceIdentifier } from "src/namedItemSource";
+import type {
+  Data_NamedItem,
+  FormatErrorLabels,
+  FormatWithSource,
+  SourceIdentifier,
+} from "src/namedItemSource";
+import type { Trait } from "./types";
 
-const makeSource = (): SourceIdentifier => ({
-  author: "test",
-  module: "mock",
-  kind: "dummy",
-});
 const mock0 = {
   id: 956,
   name: "ALFA-X",
@@ -30,75 +30,85 @@ const mockE3 = {
 
 const mockArray = [mock0, mockE1, mockE2, mockE3];
 
+const mockErrorLabels = {
+  missingName: "Missing name",
+  missingSourceId: "Missing source ID",
+  extraPlaceHolder: "Extra placeholder",
+} as const satisfies FormatErrorLabels;
+
 interface TestCase {
   caseName: string;
-  data: TraitLabelResolved;
-  expectedDetection: string[];
-  expectedText: string;
-  dataArray: Data_NamedItem[];
+  format: FormatWithSource;
   trait: Trait;
+  includeTexts: string[];
 }
 
-const testTraitLabel = ({
+const mockSourceId = {
+  author: "testAuthor",
+  module: "testModule",
+  kind: "testKind",
+} satisfies SourceIdentifier;
+
+const testFormatTraitText = ({
   caseName,
-  dataArray,
-  data,
+  format,
+  includeTexts,
   trait,
-  expectedText,
-  expectedDetection,
 }: TestCase) => {
   describe(caseName, () => {
-    test("", () => {
-      const result = formatTraitText(data, trait, dataArray);
-      expect(result).toBe(expectedText);
+    const result: string = formatTraitText(format, trait, mockArray);
+    includeTexts.forEach((text) => {
+      test(`should include "${text}"`, () => {
+        expect(result).includes(text);
+      });
     });
     test("", () => {
-      const detection = detectTraitLabel(data);
-      expect(detection).toEqual(expectedDetection);
+      expect(detectTraitFormatErrors(format, mockErrorLabels)).toEqual([]);
     });
   });
 };
 
-const testNormalCase = (caseName: string, testCases: TestCase[]) => {
-  describe(caseName, () => {
-    testCases.forEach((testCase) => {
-      testTraitLabel(testCase);
-    });
+describe("", () => {
+  testFormatTraitText({
+    caseName: "format with name and value",
+    format: { format: "{name} {value}", dataSource: mockSourceId },
+    trait: {
+      code: 0,
+      dataId: 1,
+      value: 240,
+    },
+    includeTexts: [mockE1.name, "240"],
   });
-};
-testNormalCase("Trait Label Format Tests", [
-  {
-    caseName: "Basic Format",
+
+  testFormatTraitText({
+    caseName: "format with name only",
+    format: { format: "{name}", dataSource: mockSourceId },
     trait: {
       code: 0,
       dataId: 2,
-      value: 275,
+      value: 270,
     },
-    data: {
-      code: 0,
-      label: "test",
-      format: "{name} {value}",
-      dataSource: makeSource(),
-    },
-    expectedDetection: [],
-    expectedText: "asama 275",
-    dataArray: mockArray,
-  },
-  {
-    caseName: "Format with Name Placeholder",
+    includeTexts: [mockE2.name],
+  });
+
+  testFormatTraitText({
+    caseName: "format with value only",
+    format: { format: "{value}" },
     trait: {
       code: 0,
       dataId: 3,
-      value: 0,
+      value: 1000,
     },
-    data: {
+    includeTexts: ["1000"],
+  });
+  testFormatTraitText({
+    caseName: "format with value and custom text",
+    format: { format: "{value} abc" },
+    trait: {
       code: 0,
-      label: "test",
-      format: "{name}",
-      dataSource: makeSource(),
+      dataId: 3,
+      value: 1000,
     },
-    expectedDetection: [],
-    expectedText: "komachi",
-    dataArray: mockArray,
-  },
-]);
+    includeTexts: ["1000", "abc"],
+  });
+});
