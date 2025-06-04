@@ -4,7 +4,10 @@ const makePlaceHolder = (key: string) => {
   return `{${key}}`;
 };
 
-const makeItemName = (list: ReadonlyArray<Data_NamedItem>, dataId: number) => {
+const makeItemName = (
+  list: ReadonlyArray<Data_NamedItem>,
+  dataId: number
+): string => {
   const item = findItem(dataId, list);
   return item ? item.name : `?data[${dataId}]`;
 };
@@ -14,7 +17,7 @@ export const applyFormatRule = <T extends Record<keyof T, string | number>>(
   list: ReadonlyArray<Data_NamedItem>,
   rule: FormatRule<T>,
   format: FormatWithSource
-) => {
+): string => {
   const itemName: string = makeItemName(list, data.dataId);
   const nameR = makePlaceHolder(rule.itemNamePlaceHolder ?? "name");
   return rule.placeHolders.reduce<string>((acc, key: string & keyof T) => {
