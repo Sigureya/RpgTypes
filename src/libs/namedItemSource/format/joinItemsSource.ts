@@ -1,10 +1,10 @@
-import { joinSoruceId } from "./sourceId";
+import { joinSoruceId } from "./types/sourceIdentifier/sourceId";
 import type {
   FormatLabelResolved,
   NamedItemSource,
   FinalFormatEntry,
-  SourceIdentifier,
   Data_NamedItem,
+  SourceIdentifier,
 } from "./types";
 
 /**

@@ -1,4 +1,4 @@
-import type { SourceIdentifier } from "./types";
+import type { SourceIdentifier } from "./sourceIdentifier";
 
 export interface FormatWithSource {
   format: string;
