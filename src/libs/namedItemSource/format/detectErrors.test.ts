@@ -18,7 +18,7 @@ const mockMessages = {
   extraPlaceHolder: "Extra placeholder",
 } as const satisfies FormatErrorLabels;
 
-const runDetectFormatErrors = (format: FormatWithSource) => {
+const runDetectFormatErrors = (format: FormatWithSource): FormatError[] => {
   return detectFormatErrors(format, mockRule, mockMessages);
 };
 
