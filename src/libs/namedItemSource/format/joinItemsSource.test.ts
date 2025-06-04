@@ -1,5 +1,5 @@
 import { describe, test, expect } from "vitest";
-import { buildFinalFormatMap } from "./buildFinalMap";
+import { joinItemsSoruce } from "./joinItemsSource";
 import type { FinalFormatEntry, NamedItemSource } from "./types";
 
 const mockWeapons = {
@@ -22,9 +22,9 @@ const mockEnemies = {
   ],
 } as const satisfies NamedItemSource;
 
-describe("buildFinalFormatMap", () => {
+describe("joinItemsSoruce", () => {
   describe("when label does not have dataSource", () => {
-    const map = buildFinalFormatMap(
+    const map = joinItemsSoruce(
       [
         {
           targetKey: 6,
@@ -45,7 +45,7 @@ describe("buildFinalFormatMap", () => {
   });
 
   describe("when label has dataSource", () => {
-    const map = buildFinalFormatMap(
+    const map = joinItemsSoruce(
       [
         {
           targetKey: 7,
@@ -70,7 +70,7 @@ describe("buildFinalFormatMap", () => {
 
 describe("buildFinalFormatMap with empty input", () => {
   test("returns an empty map when no labels or sources are provided", () => {
-    const map = buildFinalFormatMap([], []);
+    const map = joinItemsSoruce([], []);
     expect(map).toEqual(new Map());
   });
 });
