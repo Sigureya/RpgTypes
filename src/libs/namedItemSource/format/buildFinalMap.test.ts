@@ -1,8 +1,9 @@
 import { describe, test, expect } from "vitest";
 import { buildFinalFormatMap } from "./buildFinalMap";
-import type { NamedItemSource } from "./types";
+import type { FinalFormatEntry, NamedItemSource } from "./types";
 
 const mockWeapons = {
+  label: "weapons",
   source: { author: "rmmz", module: "data", kind: "weapon" },
   items: [
     { id: 1, name: "sword" },
@@ -12,6 +13,7 @@ const mockWeapons = {
 } as const satisfies NamedItemSource;
 
 const mockEnemies = {
+  label: "enemies",
   source: { author: "rmmz", module: "data", kind: "enemy" },
   items: [
     { id: 4, name: "goblin" },
@@ -20,8 +22,8 @@ const mockEnemies = {
   ],
 } as const satisfies NamedItemSource;
 
-describe("", () => {
-  describe("", () => {
+describe("buildFinalFormatMap", () => {
+  describe("when label does not have dataSource", () => {
     const map = buildFinalFormatMap(
       [
         {
@@ -32,16 +34,17 @@ describe("", () => {
       ],
       [mockWeapons, mockEnemies]
     );
-    test("", () => {
+    test("returns entry with empty data array", () => {
       expect(map.size).toBe(1);
       expect(map.get(6)).toEqual({
         format: "format A",
         label: "Label 6",
-        data: [],
-      });
+        data: undefined,
+      } satisfies FinalFormatEntry);
     });
   });
-  describe("", () => {
+
+  describe("when label has dataSource", () => {
     const map = buildFinalFormatMap(
       [
         {
@@ -53,20 +56,20 @@ describe("", () => {
       ],
       [mockWeapons, mockEnemies]
     );
-    test("", () => {
+    test("returns entry with data from the correct NamedItemSource", () => {
       expect(map.size).toBe(1);
 
       expect(map.get(7)).toEqual({
         format: "fmt",
         label: "label 7",
         data: mockWeapons.items,
-      });
+      } satisfies FinalFormatEntry);
     });
   });
 });
 
-describe("", () => {
-  test("", () => {
+describe("buildFinalFormatMap with empty input", () => {
+  test("returns an empty map when no labels or sources are provided", () => {
     const map = buildFinalFormatMap([], []);
     expect(map).toEqual(new Map());
   });
