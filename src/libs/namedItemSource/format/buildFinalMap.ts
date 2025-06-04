@@ -1,41 +1,41 @@
-import { mappingNamedItems } from "./namedItemMap";
 import { joinSoruceId } from "./sourceId";
 import type {
   FormatLabelResolved,
   NamedItemSource,
   FinalFormatEntry,
   SourceIdentifier,
+  Data_NamedItem,
 } from "./types";
-
-/**
- * 指定された ResolvedLabel からフォーマットデータを構築する
- */
-const buildFinalFormatEntry = (
-  label: FormatLabelResolved<number>,
-  sourceMap: Map<string, NamedItemSource>
-): FinalFormatEntry => {
-  const source = resolveDataSource(label.dataSource, sourceMap);
-  return {
-    format: label.format,
-    label: label.label,
-    data: source ? source.items : [],
-  };
-};
 
 /**
  * ResolvedLabel 配列と NamedItemSource 配列を統合し、
  * Trait.code によるマップを構築する
  */
-export const buildFinalFormatMap = (
-  labels: FormatLabelResolved<number>[],
-  namedItemSources: NamedItemSource[]
-): Map<number, FinalFormatEntry> => {
+export const buildFinalFormatMap = <Key>(
+  labels: FormatLabelResolved<Key>[],
+  namedItemSources: ReadonlyArray<NamedItemSource>
+): Map<Key, FinalFormatEntry> => {
   const sourceMap = mappingNamedItems(namedItemSources);
-  return labels.reduce<Map<number, FinalFormatEntry>>((acc, label) => {
+  return labels.reduce<Map<Key, FinalFormatEntry>>((acc, label) => {
     const entry = buildFinalFormatEntry(label, sourceMap);
     acc.set(label.targetKey, entry);
     return acc;
   }, new Map());
+};
+
+/**
+ * 指定された ResolvedLabel からフォーマットデータを構築する
+ */
+const buildFinalFormatEntry = <T>(
+  label: FormatLabelResolved<T>,
+  sourceMap: ReadonlyMap<string, NamedItemSource>
+): FinalFormatEntry => {
+  const source = resolveDataSource(label.dataSource, sourceMap);
+  return {
+    format: label.format,
+    label: label.label,
+    data: source ? source.items : undefined,
+  };
 };
 
 /**
@@ -52,30 +52,20 @@ const resolveDataSource = (
   return sourceMap.get(key);
 };
 
-// const missingFormat = (trati: Trait): FormatResult => {
-//   return {
-//     label: "",
-//     text: `Trait ${trati.code} is missing in the format map.`,
-//   };
-// };
+const mappingNamedItems = (
+  list: ReadonlyArray<NamedItemSource>
+): Map<string, NamedItemSource> => {
+  return list.reduce<Map<string, NamedItemSource>>((map, item) => {
+    const newItem: NamedItemSource = {
+      items: cloneItems(item.items), // 余計な情報の削除を兼ねてコピー
+      source: item.source,
+      label: item.label,
+    };
+    map.set(joinSoruceId(item.source), newItem);
+    return map;
+  }, new Map());
+};
 
-// const ggggggggg = (
-//   tarit: Trait,
-//   formatMap: Map<number, ResolvedLabel>,
-//   dataMap: Map<string, NamedItemSource>,
-//   formatFn: (
-//     label: ResolvedLabel,
-//     trait: Trait,
-//     list: ReadonlyArray<Data_NamedItem>
-//   ) => string
-// ): FormatResult => {
-//   const format = formatMap.get(tarit.code);
-//   if (!format) {
-//     return missingFormat(tarit);
-//   }
-//   const source = resolveDataSource(format.dataSource, dataMap);
-//   return {
-//     label: format.label,
-//     text: formatFn(format, tarit, source ? source.items : []),
-//   };
-// };
+const cloneItems = (list: ReadonlyArray<Data_NamedItem>): Data_NamedItem[] => {
+  return list.map<Data_NamedItem>((item) => ({ id: item.id, name: item.name }));
+};

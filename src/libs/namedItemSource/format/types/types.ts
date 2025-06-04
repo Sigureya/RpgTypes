@@ -12,7 +12,7 @@ export interface Data_NamedItem {
 export interface NamedItemSource {
   items: Data_NamedItem[];
   source: SourceIdentifier;
-  label?: string;
+  label: string;
 }
 
 // export interface FormatLabelDraft {
@@ -31,5 +31,5 @@ export interface FormatLabelResolved<Key = string> {
 export interface FinalFormatEntry {
   format: string;
   label: string;
-  data: ReadonlyArray<Data_NamedItem>;
+  data?: ReadonlyArray<Data_NamedItem>;
 }
