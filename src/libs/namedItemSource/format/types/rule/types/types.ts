@@ -29,6 +29,5 @@ export interface FormatRuleCompiled<
   SoruceKey extends SourceKeyConcept = SourceKeyConcept
 > {
   properties: FormatField<T>[];
-  itemMapper: FormatItemMapperCompiled<T, SoruceKey>; // { placeHolder: `{${string}}`; dataKey: "dataId" };
   itemMappers: FormatItemMapperCompiled<T, SoruceKey>[];
 }
