@@ -9,7 +9,7 @@ import type { FormatLookupKeys } from "./types/accessor";
 import { makeItemName } from "./types/namedItem/namedItem";
 import { compileFormatRule, execFormatRule } from "./types/rule/rule";
 
-export const formatUsingItemSourceMap = <Key, T extends { dataId: number }>(
+export const formatUsingItemSourceMap = <Key, T>(
   data: T,
   rule: FormatRule<T>,
   sourceMap: Map<Key, FinalFormatEntry>,
