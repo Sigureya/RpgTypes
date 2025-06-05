@@ -14,7 +14,7 @@ export interface FormatRule<
   T,
   SoruceKey extends SourceKeyConcept = SourceKeyConcept
 > {
-  itemName: { placeHolder: string };
+  itemMapper: { placeHolder: string };
   placeHolders: PrimitiveProperties<T>[];
   itemMappers: FormatItemMapper<T, SoruceKey>[];
 }
@@ -29,6 +29,6 @@ export interface FormatRuleCompiled<
   SoruceKey extends SourceKeyConcept = SourceKeyConcept
 > {
   properties: FormatField<T>[];
-  itemName: { placeHolder: `{${string}}`; dataKey: "dataId" };
+  itemMapper: { placeHolder: `{${string}}`; dataKey: "dataId" };
   itemMappers: FormatItemMapperCompiled<T, SoruceKey>[];
 }

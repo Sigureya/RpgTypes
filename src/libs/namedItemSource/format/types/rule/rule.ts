@@ -11,9 +11,9 @@ export const compileFormatRule = <T, SoruceKey extends SourceKeyConcept>(
   rule: FormatRule<T, SoruceKey>
 ): FormatRuleCompiled<T, SoruceKey> => {
   return {
-    itemName: {
+    itemMapper: {
       dataKey: "dataId",
-      placeHolder: `{${rule.itemName.placeHolder}}`,
+      placeHolder: `{${rule.itemMapper.placeHolder}}`,
     },
     properties: rule.placeHolders.map<FormatField<T>>((placeHolder) => ({
       dataKey: placeHolder,
