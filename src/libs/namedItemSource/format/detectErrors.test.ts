@@ -9,7 +9,7 @@ import { detectFormatErrors } from "./detectErrors";
 
 const mockRule = {
   placeHolders: ["value", "message"],
-  itemNamePlaceHolder: "name",
+  itemName: { placeHolder: "name" },
 } as const satisfies FormatRule<{ value: number; message: string }>;
 
 const mockMessages = {
@@ -70,7 +70,7 @@ describe("detectFormatErros - error cases", () => {
       expect(result).toEqual([
         {
           message: mockMessages.missingName,
-          reason: mockRule.itemNamePlaceHolder,
+          reason: mockRule.itemName.placeHolder,
         },
         {
           message: mockMessages.extraPlaceHolder,
@@ -120,7 +120,7 @@ describe("detectFormatErros - name", () => {
       expect(result).toEqual([
         {
           message: mockMessages.missingName,
-          reason: mockRule.itemNamePlaceHolder,
+          reason: mockRule.itemName.placeHolder,
         } satisfies FormatError,
       ]);
     });
@@ -131,7 +131,7 @@ describe("detectFormatErros - name", () => {
       expect(result).toEqual([
         {
           message: mockMessages.missingSourceId,
-          reason: mockRule.itemNamePlaceHolder,
+          reason: mockRule.itemName.placeHolder,
         } satisfies FormatError,
       ]);
     });
@@ -142,7 +142,7 @@ describe("detectFormatErros - name", () => {
       expect(result).toEqual([
         {
           message: mockMessages.missingSourceId,
-          reason: mockRule.itemNamePlaceHolder,
+          reason: mockRule.itemName.placeHolder,
         } satisfies FormatError,
       ]);
     });

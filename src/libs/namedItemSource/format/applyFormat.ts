@@ -6,18 +6,11 @@ import type {
   FormatWithSource,
 } from "./types";
 import type { FormatLookupKeys } from "./types/accessor";
+import { makeItemName } from "./types/namedItem/namedItem";
 import { compileFormatRule, execFormatRule } from "./types/rule/rule";
 
 const makePlaceHolder = (key: string) => {
   return `{${key}}`;
-};
-
-const makeItemName = (
-  list: ReadonlyArray<Data_NamedItem>,
-  dataId: number
-): string => {
-  const item = findItem(dataId, list);
-  return item ? item.name : `?data[${dataId}]`;
 };
 
 export const formatUsingItemSourceMap = <Key, T extends { dataId: number }>(
@@ -47,23 +40,9 @@ export const applyFormatRule = <T>(
 ): string => {
   const compiledRule = compileFormatRule(rule);
   const itemName: string = makeItemName(list, getDataId(data));
-  const nameR = makePlaceHolder(rule.itemNamePlaceHolder ?? "name");
+  const nameR = makePlaceHolder(rule.itemName.placeHolder ?? "name");
   return execFormatRule(format.format, data, compiledRule).replaceAll(
     nameR,
     itemName
   );
-};
-
-const findItem = <T extends Data_NamedItem>(
-  dataId: number,
-  list: ReadonlyArray<T>
-): T | undefined => {
-  const item = list[dataId];
-  if (item) {
-    if (item.id === dataId) {
-      return item;
-    }
-  }
-
-  return list.find((i) => i.id === dataId);
 };
