@@ -1,5 +1,5 @@
 import { describe, test, expect } from "vitest";
-import { complieFormatRule, execFormatRule } from "./rule";
+import { compileFormatRule, execFormatRule } from "./rule";
 import type { FormatRule } from "./types";
 
 // Test data interfaces
@@ -18,12 +18,13 @@ interface Skill {
 // Mock rule for ItemEffect
 const mockRule: FormatRule<ItemEffect> = {
   placeHolders: ["value1", "dataId", "code"],
+  itemName: { placeHolder: "name" },
 };
 
 describe("complieFormatRule", () => {
   describe("Normal cases", () => {
     test("compiles rule with string placeholders", () => {
-      const compiled = complieFormatRule(mockRule);
+      const compiled = compileFormatRule(mockRule);
       expect(compiled.properties).toEqual([
         { dataKey: "value1", placeHolder: "{value1}" },
         { dataKey: "dataId", placeHolder: "{dataId}" },
@@ -34,8 +35,9 @@ describe("complieFormatRule", () => {
     test("compiles rule with number placeholders", () => {
       const ruleWithNumbers: FormatRule<ItemEffect> = {
         placeHolders: ["value1", "dataId"],
+        itemName: {},
       };
-      const compiled = complieFormatRule(ruleWithNumbers);
+      const compiled = compileFormatRule(ruleWithNumbers);
       expect(compiled.properties).toEqual([
         { dataKey: "value1", placeHolder: "{value1}" },
         { dataKey: "dataId", placeHolder: "{dataId}" },
@@ -45,6 +47,7 @@ describe("complieFormatRule", () => {
 
   describe("Compiles rule for Skill type with valid property keys", () => {
     const rule: FormatRule<Skill> = {
+      itemName: {},
       placeHolders: [
         "id",
         "name",
@@ -52,7 +55,7 @@ describe("complieFormatRule", () => {
         // ↑ Compile error due to type checking
       ],
     };
-    const compiledRule = complieFormatRule(rule);
+    const compiledRule = compileFormatRule(rule);
     test("compiles rule for Skill type with valid property keys", () => {
       expect(compiledRule.properties).toEqual([
         { dataKey: "id", placeHolder: "{id}" },
@@ -63,7 +66,7 @@ describe("complieFormatRule", () => {
 });
 
 describe("replacePlaceholders", () => {
-  const compiledRule = complieFormatRule(mockRule);
+  const compiledRule = compileFormatRule(mockRule);
   const effect: ItemEffect = {
     value1: 42,
     value2: 1234,

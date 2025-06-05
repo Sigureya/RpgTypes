@@ -9,7 +9,7 @@ import { detectFormatErrors, applyFormatRule } from "src/namedItemSource";
 import type { Trait } from "./types";
 
 const RULE_TRAIT = {
-  itemNamePlaceHolder: "name",
+  itemName: { placeHolder: "name" },
   placeHolders: ["value"],
 } as const satisfies FormatRule<Trait>;
 

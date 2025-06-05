@@ -1,15 +1,16 @@
 import type { PickByType } from "@RpgTypes/templates";
 
 export interface FormatRule<T> {
-  itemNamePlaceHolder?: string;
+  itemName: { placeHolder?: string };
   placeHolders: Extract<keyof PickByType<T, number | string>, string>[];
 }
 
-export interface FormatPropety<T> {
-  dataKey: string & keyof T;
-  placeHolder: `{${string & keyof T}}`;
+export interface FormatField<T> {
+  dataKey: string & keyof PickByType<T, number | string>;
+  placeHolder: `{${string & keyof PickByType<T, number | string>}}`;
 }
 
 export interface FormatRuleCompiled<T> {
-  properties: FormatPropety<T>[];
+  properties: FormatField<T>[];
+  itemName: { placeHolder: `{${string}}` };
 }

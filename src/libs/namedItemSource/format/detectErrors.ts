@@ -28,7 +28,7 @@ const isInvalidKey = <T extends object>(
   if (key.length === 0 || key.length >= 100) {
     return true;
   }
-  if (key === rule.itemNamePlaceHolder) {
+  if (key === rule.itemName.placeHolder) {
     return false;
   }
   if ((rule.placeHolders as string[]).includes(key)) {
@@ -60,7 +60,7 @@ const dataSourceError = <T extends object>(
   formatRule: FormatRule<T>,
   errorTexts: FormatErrorLabels
 ): FormatError | undefined => {
-  const np = formatRule.itemNamePlaceHolder ?? "name";
+  const np = formatRule.itemName.placeHolder ?? "name";
 
   const includedName: boolean = format.format.includes(np);
   const hasSource: boolean = !!format.dataSource;
