@@ -24,10 +24,13 @@ const replacePlaceholder = <T>(
   return baseText.replaceAll(rule.placeHolder, String(value));
 };
 
-export const replacePlaceholders = <T>(
+export const execFormatRule = <T>(
   baseText: string,
   data: T,
-  rule: ReadonlyArray<FormatPropety<T>>
+  rule: FormatRuleCompiled<T>
 ): string => {
-  return rule.reduce((text, r) => replacePlaceholder(text, data, r), baseText);
+  return rule.properties.reduce(
+    (text, r) => replacePlaceholder(text, data, r),
+    baseText
+  );
 };
