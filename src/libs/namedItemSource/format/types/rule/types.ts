@@ -16,5 +16,5 @@ export interface FormatField<T> {
 
 export interface FormatRuleCompiled<T> {
   properties: FormatField<T>[];
-  itemName: { placeHolder: `{${string}}` };
+  itemName: { placeHolder: `{${string}}`; dataKey: "dataId" };
 }
