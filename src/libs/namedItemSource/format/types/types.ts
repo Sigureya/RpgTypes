@@ -1,9 +1,5 @@
+import type { Data_NamedItem } from "./namedItem";
 import type { SourceIdentifier } from "./sourceIdentifier";
-
-export interface Data_NamedItem {
-  id: number; // 一意の識別子
-  name: string; // 名前
-}
 
 export interface NamedItemSource {
   items: Data_NamedItem[];
