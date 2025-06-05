@@ -34,7 +34,9 @@ const formatItemName = <Schema, Data extends Schema>(
   getDataId: (data: Data) => number
 ): string => {
   const itemName: string = makeItemName(list, getDataId(data));
-  return text.replaceAll(rule.itemName.placeHolder satisfies string, itemName);
+  return rule.itemMappers.reduce((currentText, itemMapper) => {
+    return currentText.replaceAll(itemMapper.placeHolder, itemName);
+  }, text);
 };
 
 export const applyFormatRule = <Schema, Data extends Schema>(

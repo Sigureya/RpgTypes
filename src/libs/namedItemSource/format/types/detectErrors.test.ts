@@ -1,11 +1,11 @@
 import { describe, test, expect } from "vitest";
-import type {
-  FormatError,
-  FormatErrorLabels,
-  FormatRule,
-  FormatWithSource,
-} from "./types";
 import { detectFormatErrors } from "./detectErrors";
+import type {
+  FormatErrorLabels,
+  FormatWithSource,
+  FormatError,
+} from "./format";
+import type { FormatRule } from "./rule";
 
 interface Trait {
   code: number;
@@ -16,7 +16,12 @@ interface Trait {
 
 const mockRule = {
   placeHolders: ["value", "message"],
-  itemName: { placeHolder: "name" },
+  itemMapper: {
+    placeHolder: "name",
+    dataIdKey: "dataId",
+    kindKey: "code",
+    map: [],
+  },
   itemMappers: [],
 } as const satisfies FormatRule<Trait>;
 
@@ -78,7 +83,7 @@ describe("detectFormatErros - error cases", () => {
       expect(result).toEqual([
         {
           message: mockMessages.missingName,
-          reason: mockRule.itemName.placeHolder,
+          reason: mockRule.itemMapper.placeHolder,
         },
         {
           message: mockMessages.extraPlaceHolder,
@@ -88,7 +93,7 @@ describe("detectFormatErros - error cases", () => {
           message: mockMessages.extraPlaceHolder,
           reason: "invalid2",
         },
-      ] satisfies typeof result);
+      ] satisfies FormatError[]);
     });
   });
 });
@@ -128,7 +133,7 @@ describe("detectFormatErros - name", () => {
       expect(result).toEqual([
         {
           message: mockMessages.missingName,
-          reason: mockRule.itemName.placeHolder,
+          reason: mockRule.itemMapper.placeHolder,
         } satisfies FormatError,
       ]);
     });
@@ -139,7 +144,7 @@ describe("detectFormatErros - name", () => {
       expect(result).toEqual([
         {
           message: mockMessages.missingSourceId,
-          reason: mockRule.itemName.placeHolder,
+          reason: mockRule.itemMapper.placeHolder,
         } satisfies FormatError,
       ]);
     });
@@ -150,7 +155,7 @@ describe("detectFormatErros - name", () => {
       expect(result).toEqual([
         {
           message: mockMessages.missingSourceId,
-          reason: mockRule.itemName.placeHolder,
+          reason: mockRule.itemMapper.placeHolder,
         } satisfies FormatError,
       ]);
     });

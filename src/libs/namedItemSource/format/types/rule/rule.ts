@@ -9,31 +9,34 @@ import type {
 
 export const compileFormatRule = <T, SoruceKey extends SourceKeyConcept>(
   rule: FormatRule<T, SoruceKey>
-): FormatRuleCompiled<T, SoruceKey> => {
-  return {
-    itemName: {
-      dataKey: "dataId",
-      placeHolder: `{${rule.itemName.placeHolder}}`,
-    },
-    properties: rule.placeHolders.map<FormatField<T>>((placeHolder) => ({
-      dataKey: placeHolder,
-      placeHolder: `{${placeHolder}}`,
-    })),
-    itemMappers: rule.itemMappers.map(compileFormatItemMapper),
-  };
+): FormatRuleCompiled<T, SoruceKey> => ({
+  properties: rule.placeHolders.map<FormatField<T>>((placeHolder) => ({
+    dataKey: placeHolder,
+    placeHolder: `{${placeHolder}}`,
+  })),
+  itemMappers: getItemMappersFromRule(rule).map(compileFormatItemMapper),
+});
+
+export const getItemMappersFromRule = <T, SoruceKey extends SourceKeyConcept>(
+  rule: FormatRule<T, SoruceKey>
+): ReadonlyArray<FormatItemMapper<T, SoruceKey>> => {
+  const list = rule.itemMappers ?? [];
+  return rule.itemMapper ? [...list, rule.itemMapper] : list;
 };
 
 export const compileFormatItemMapper = <T, SoruceKey extends SourceKeyConcept>(
   itemMappers: FormatItemMapper<T, SoruceKey>
-): FormatItemMapperCompiled<T, SoruceKey> => ({
-  placeHolder: `{${itemMappers.placeHolder}}`,
-  kindKey: itemMappers.kindKey,
-  dataIdKey: itemMappers.dataIdKey,
-  map: itemMappers.map.map((pair) => ({
-    kindId: pair.kindId,
-    sourceId: pair.sourceId,
-  })),
-});
+): FormatItemMapperCompiled<T, SoruceKey> => {
+  return {
+    placeHolder: `{${itemMappers.placeHolder}}`,
+    kindKey: itemMappers.kindKey,
+    dataIdKey: itemMappers.dataIdKey,
+    map: itemMappers.map.map((pair) => ({
+      kindId: pair.kindId,
+      sourceId: pair.sourceId,
+    })),
+  };
+};
 
 export const execFormatRule = <
   Schema,
