@@ -1,8 +1,15 @@
-import type { FormatRule, FormatField, FormatRuleCompiled } from "./types";
+import type {
+  FormatRule,
+  FormatField,
+  FormatRuleCompiled,
+  SourceKeyConcept,
+  FormatItemMapper,
+  FormatItemMapperCompiled,
+} from "./types";
 
-export const compileFormatRule = <T>(
-  rule: FormatRule<T>
-): FormatRuleCompiled<T> => {
+export const compileFormatRule = <T, SoruceKey extends SourceKeyConcept>(
+  rule: FormatRule<T, SoruceKey>
+): FormatRuleCompiled<T, SoruceKey> => {
   return {
     itemName: {
       dataKey: "dataId",
@@ -12,13 +19,30 @@ export const compileFormatRule = <T>(
       dataKey: placeHolder,
       placeHolder: `{${placeHolder}}`,
     })),
+    itemMappers: rule.itemMappers.map(compileFormatItemMapper),
   };
 };
 
-export const execFormatRule = <Schema, Data extends Schema>(
+export const compileFormatItemMapper = <T, SoruceKey extends SourceKeyConcept>(
+  itemMappers: FormatItemMapper<T, SoruceKey>
+): FormatItemMapperCompiled<T, SoruceKey> => ({
+  placeHolder: `{${itemMappers.placeHolder}}`,
+  kindKey: itemMappers.kindKey,
+  dataIdKey: itemMappers.dataIdKey,
+  map: itemMappers.map.map((pair) => ({
+    kindId: pair.kindId,
+    sourceId: pair.sourceId,
+  })),
+});
+
+export const execFormatRule = <
+  Schema,
+  Data extends Schema,
+  SoruceKey extends SourceKeyConcept
+>(
   baseText: string,
   data: Data,
-  rule: FormatRuleCompiled<Schema>
+  rule: FormatRuleCompiled<Schema, SoruceKey>
 ): string => {
   return rule.properties.reduce(
     (text, r) => replacePlaceholder(text, data, r),

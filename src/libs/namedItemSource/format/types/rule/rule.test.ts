@@ -16,7 +16,7 @@ interface Skill {
 }
 
 // Mock rule for ItemEffect
-const mockRule: FormatRule<ItemEffect> = {
+const mockRule: FormatRule<ItemEffect, never> = {
   placeHolders: ["value1", "dataId", "code"],
   itemName: { placeHolder: "name" },
   itemMappers: [],
