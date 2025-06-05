@@ -15,6 +15,7 @@ import type { Trait } from "./types";
 const RULE_TRAIT = {
   itemName: { placeHolder: "name" },
   placeHolders: ["value"],
+  itemMappers: [],
 } as const satisfies FormatRule<Trait>;
 
 export const formatTraitText = (
