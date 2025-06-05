@@ -1,4 +1,10 @@
-import type { Data_NamedItem, FormatRule, FormatWithSource } from "./types";
+import type {
+  Data_NamedItem,
+  FinalFormatEntry,
+  FormatResult,
+  FormatRule,
+  FormatWithSource,
+} from "./types";
 
 const makePlaceHolder = (key: string) => {
   return `{${key}}`;
@@ -12,13 +18,33 @@ const makeItemName = (
   return item ? item.name : `?data[${dataId}]`;
 };
 
-export const applyFormatRule = <T extends Record<keyof T, string | number>>(
+export const formatUsingItemSourceMap = <
+  Key,
+  T extends Record<keyof T, string | number>
+>(
   data: T & { dataId: number },
+  rule: FormatRule<T>,
+  sourceMap: Map<Key, FinalFormatEntry>,
+  fallback: FinalFormatEntry,
+  getKey: (data: T) => Key
+): FormatResult => {
+  const key = getKey(data);
+  const entry: FinalFormatEntry = sourceMap.get(key) ?? fallback;
+
+  return {
+    label: entry.label,
+    text: applyFormatRule(data, entry.data ?? [], rule, entry, (t) => t.dataId),
+  };
+};
+
+export const applyFormatRule = <T extends Record<keyof T, string | number>>(
+  data: T,
   list: ReadonlyArray<Data_NamedItem>,
   rule: FormatRule<T>,
-  format: FormatWithSource
+  format: FormatWithSource,
+  getDataId: (data: T) => number
 ): string => {
-  const itemName: string = makeItemName(list, data.dataId);
+  const itemName: string = makeItemName(list, getDataId(data));
   const nameR = makePlaceHolder(rule.itemNamePlaceHolder ?? "name");
   return rule.placeHolders.reduce<string>((acc, key: string & keyof T) => {
     const value: string | number = data[key];
