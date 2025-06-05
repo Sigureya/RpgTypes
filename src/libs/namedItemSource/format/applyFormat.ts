@@ -2,13 +2,11 @@ import type {
   Data_NamedItem,
   FinalFormatEntry,
   FormatResult,
-  FormatRule,
   FormatRuleCompiled,
-  FormatWithSource,
 } from "./types";
 import type { FormatLookupKeys } from "./types/accessor";
 import { makeItemName } from "./types/namedItem/namedItem";
-import { compileFormatRule, execFormatRule } from "./types/rule/rule";
+import { execFormatRule } from "./types/rule/rule";
 
 export const formatUsingItemSourceMap = <Key, Schema, Data extends Schema>(
   data: Data,
@@ -22,35 +20,30 @@ export const formatUsingItemSourceMap = <Key, Schema, Data extends Schema>(
 
   return {
     label: entry.label,
-    text: applyFormatRule2(data, entry.data, rule, entry, (d) =>
+    text: applyFormatRule(data, entry.data, rule, entry.format, (d) =>
       lookup.extractDataId(d)
     ),
   };
 };
 
-export const applyFormatRule2 = <Schema, Data extends Schema>(
+const formatItemName = <Schema, Data extends Schema>(
+  text: string,
+  data: Data,
+  rule: FormatRuleCompiled<Schema>,
+  list: ReadonlyArray<Data_NamedItem>,
+  getDataId: (data: Data) => number
+): string => {
+  const itemName: string = makeItemName(list, getDataId(data));
+  return text.replaceAll(rule.itemName.placeHolder satisfies string, itemName);
+};
+
+export const applyFormatRule = <Schema, Data extends Schema>(
   data: Data,
   list: ReadonlyArray<Data_NamedItem> | undefined,
   rule: FormatRuleCompiled<Schema>,
-  format: FormatWithSource,
+  format: string,
   getDataId: (data: Data) => number
 ): string => {
-  const text: string = execFormatRule(format.format, data, rule);
-  return list
-    ? text.replaceAll(
-        rule.itemName.placeHolder satisfies string,
-        makeItemName(list, getDataId(data))
-      )
-    : text;
-};
-
-export const applyFormatRule = <T>(
-  data: T,
-  list: ReadonlyArray<Data_NamedItem> | undefined,
-  rule: FormatRule<T>,
-  format: FormatWithSource,
-  getDataId: (data: T) => number
-): string => {
-  const compiledRule = compileFormatRule(rule);
-  return applyFormatRule2(data, list, compiledRule, format, getDataId);
+  const text: string = execFormatRule(format, data, rule);
+  return list ? formatItemName(text, data, rule, list, getDataId) : text;
 };

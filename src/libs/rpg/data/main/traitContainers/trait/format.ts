@@ -5,7 +5,11 @@ import type {
   FormatWithSource,
   Data_NamedItem,
 } from "src/namedItemSource";
-import { detectFormatErrors, applyFormatRule } from "src/namedItemSource";
+import {
+  detectFormatErrors,
+  applyFormatRule,
+  compileFormatRule,
+} from "src/namedItemSource";
 import type { Trait } from "./types";
 
 const RULE_TRAIT = {
@@ -18,7 +22,14 @@ export const formatTraitText = (
   trait: Trait,
   items: ReadonlyArray<Data_NamedItem>
 ): string => {
-  return applyFormatRule(trait, items, RULE_TRAIT, descriptor, (t) => t.dataId);
+  const rule = compileFormatRule(RULE_TRAIT);
+  return applyFormatRule(
+    trait,
+    items,
+    rule,
+    descriptor.format,
+    (t) => t.dataId
+  );
 };
 
 export const detectTraitFormatErrors = (
