@@ -16,9 +16,14 @@ interface Skill {
 }
 
 // Mock rule for ItemEffect
-const mockRule: FormatRule<ItemEffect, never> = {
+const mockRule: FormatRule<ItemEffect> = {
   placeHolders: ["value1", "dataId", "code"],
-  itemMapper: { placeHolder: "name" },
+  itemMapper: {
+    placeHolder: "name",
+    dataIdKey: "dataId",
+    kindKey: "code",
+    map: [],
+  },
   itemMappers: [],
 };
 
@@ -36,7 +41,12 @@ describe("complieFormatRule", () => {
     test("compiles rule with number placeholders", () => {
       const ruleWithNumbers: FormatRule<ItemEffect> = {
         placeHolders: ["value1", "dataId"],
-        itemMapper: { placeHolder: "name" },
+        itemMapper: {
+          placeHolder: "name",
+          dataIdKey: "dataId",
+          kindKey: "code",
+          map: [],
+        },
         itemMappers: [],
       };
       const compiled = compileFormatRule(ruleWithNumbers);
@@ -49,7 +59,12 @@ describe("complieFormatRule", () => {
 
   describe("Compiles rule for Skill type with valid property keys", () => {
     const rule: FormatRule<Skill> = {
-      itemMapper: { placeHolder: "name" },
+      itemMapper: {
+        placeHolder: "name",
+        dataIdKey: "id",
+        kindKey: "id",
+        map: [],
+      },
       placeHolders: [
         "id",
         "name",

@@ -16,7 +16,12 @@ interface Trait {
 
 const mockRule = {
   placeHolders: ["value", "message"],
-  itemMapper: { placeHolder: "name" },
+  itemMapper: {
+    placeHolder: "name",
+    dataIdKey: "dataId",
+    kindKey: "code",
+    map: [],
+  },
   itemMappers: [],
 } as const satisfies FormatRule<Trait>;
 

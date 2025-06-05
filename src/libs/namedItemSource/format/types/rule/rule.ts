@@ -12,28 +12,32 @@ export const compileFormatRule = <T, SoruceKey extends SourceKeyConcept>(
 ): FormatRuleCompiled<T, SoruceKey> => {
   return {
     itemMapper: {
-      dataKey: "dataId",
+      kindKey: rule.itemMapper.kindKey,
+      dataIdKey: rule.itemMapper.dataIdKey,
+      map: [],
       placeHolder: `{${rule.itemMapper.placeHolder}}`,
     },
     properties: rule.placeHolders.map<FormatField<T>>((placeHolder) => ({
       dataKey: placeHolder,
       placeHolder: `{${placeHolder}}`,
     })),
-    itemMappers: rule.itemMappers.map(compileFormatItemMapper),
+    itemMappers: [compileFormatItemMapper(rule.itemMapper)],
   };
 };
 
 export const compileFormatItemMapper = <T, SoruceKey extends SourceKeyConcept>(
   itemMappers: FormatItemMapper<T, SoruceKey>
-): FormatItemMapperCompiled<T, SoruceKey> => ({
-  placeHolder: `{${itemMappers.placeHolder}}`,
-  kindKey: itemMappers.kindKey,
-  dataIdKey: itemMappers.dataIdKey,
-  map: itemMappers.map.map((pair) => ({
-    kindId: pair.kindId,
-    sourceId: pair.sourceId,
-  })),
-});
+): FormatItemMapperCompiled<T, SoruceKey> => {
+  return {
+    placeHolder: `{${itemMappers.placeHolder}}`,
+    kindKey: itemMappers.kindKey,
+    dataIdKey: itemMappers.dataIdKey,
+    map: itemMappers.map.map((pair) => ({
+      kindId: pair.kindId,
+      sourceId: pair.sourceId,
+    })),
+  };
+};
 
 export const execFormatRule = <
   Schema,

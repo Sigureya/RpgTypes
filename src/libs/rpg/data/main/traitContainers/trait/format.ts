@@ -13,7 +13,12 @@ import {
 import type { Trait } from "./types";
 
 const RULE_TRAIT = {
-  itemMapper: { placeHolder: "name" },
+  itemMapper: {
+    placeHolder: "name",
+    dataIdKey: "dataId",
+    kindKey: "code",
+    map: [],
+  },
   placeHolders: ["value"],
   itemMappers: [],
 } as const satisfies FormatRule<Trait>;
