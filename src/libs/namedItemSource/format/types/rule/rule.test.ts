@@ -2,6 +2,7 @@ import { describe, test, expect } from "vitest";
 import { complieFormatRule, replacePlaceholders } from "./rule";
 import type { FormatRule, FormatPropety } from "./types";
 
+// Test data interfaces
 interface ItemEffect {
   value1: number;
   value2: number;
@@ -14,12 +15,13 @@ interface Skill {
   effects: ItemEffect[];
 }
 
+// Mock rule for ItemEffect
 const mockRule: FormatRule<ItemEffect> = {
   placeHolders: ["value1", "dataId", "code"],
 };
 
 describe("complieFormatRule", () => {
-  describe("normal case", () => {
+  describe("Normal cases", () => {
     test("compiles rule with string placeholders", () => {
       const compiled = complieFormatRule(mockRule);
       expect(compiled.properties).toEqual([
@@ -40,17 +42,18 @@ describe("complieFormatRule", () => {
       ] satisfies typeof compiled.properties);
     });
   });
-  describe("", () => {
+
+  describe("Compiles rule for Skill type with valid property keys", () => {
     const rule: FormatRule<Skill> = {
       placeHolders: [
         "id",
         "name",
         // "effects"
-        // ↑ 型チェックによりコンパイルエラー
+        // ↑ Compile error due to type checking
       ],
     };
     const compiledRule = complieFormatRule(rule);
-    test("", () => {
+    test("compiles rule for Skill type with valid property keys", () => {
       expect(compiledRule.properties).toEqual([
         { dataKey: "id", placeHolder: "{id}" },
         { dataKey: "name", placeHolder: "{name}" },
@@ -67,7 +70,8 @@ describe("replacePlaceholders", () => {
     dataId: 1001,
     code: 78,
   };
-  test("shold replace placeholders with corresponding values", () => {
+
+  test("should replace placeholders with corresponding values", () => {
     const baseText = "Value1: {value1}, DataId: {dataId}, Code: {code}";
     const result: string = replacePlaceholders(
       baseText,
@@ -77,7 +81,7 @@ describe("replacePlaceholders", () => {
     expect(result).toBe("Value1: 42, DataId: 1001, Code: 78");
   });
 
-  test("returns base text if no placeholders match", () => {
+  test("should return base text if no placeholders match", () => {
     const baseText = "No placeholders here.";
     const result = replacePlaceholders(
       baseText,
