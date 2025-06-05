@@ -16,7 +16,7 @@ export interface FormatRule<
 > {
   itemMapper: FormatItemMapper<T, SoruceKey>;
   placeHolders: PrimitiveProperties<T>[];
-  itemMappers: FormatItemMapper<T, SoruceKey>[];
+  itemMappers?: FormatItemMapper<T, SoruceKey>[];
 }
 
 export interface FormatField<T> {

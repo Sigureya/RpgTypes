@@ -9,14 +9,19 @@ import type {
 
 export const compileFormatRule = <T, SoruceKey extends SourceKeyConcept>(
   rule: FormatRule<T, SoruceKey>
-): FormatRuleCompiled<T, SoruceKey> => {
-  return {
-    properties: rule.placeHolders.map<FormatField<T>>((placeHolder) => ({
-      dataKey: placeHolder,
-      placeHolder: `{${placeHolder}}`,
-    })),
-    itemMappers: [compileFormatItemMapper(rule.itemMapper)],
-  };
+): FormatRuleCompiled<T, SoruceKey> => ({
+  properties: rule.placeHolders.map<FormatField<T>>((placeHolder) => ({
+    dataKey: placeHolder,
+    placeHolder: `{${placeHolder}}`,
+  })),
+  itemMappers: getItemMappersFromRule(rule).map(compileFormatItemMapper),
+});
+
+export const getItemMappersFromRule = <T, SoruceKey extends SourceKeyConcept>(
+  rule: FormatRule<T, SoruceKey>
+): ReadonlyArray<FormatItemMapper<T, SoruceKey>> => {
+  const list = rule.itemMappers ?? [];
+  return rule.itemMapper ? [...list, rule.itemMapper] : list;
 };
 
 export const compileFormatItemMapper = <T, SoruceKey extends SourceKeyConcept>(
