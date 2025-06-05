@@ -18,14 +18,14 @@ export interface FormatLimits {
   formatMaxLength: number;
 }
 
-export interface FormatError {
+export interface FormatErrorItem {
   message: string;
   reason: string;
 }
 
 export interface FormatErrorGroup {
-  syntaxErrors: FormatError[];
-  semanticErrors: FormatError[];
+  syntaxErrors: FormatErrorItem[];
+  semanticErrors: FormatErrorItem[];
 }
 
 export interface FormatResult {

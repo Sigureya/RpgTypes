@@ -3,7 +3,7 @@ import { detectFormatErrors } from "./detectErrors";
 import type {
   FormatErrorLabels,
   FormatWithSource,
-  FormatError,
+  FormatErrorItem,
   FormatErrorGroup,
 } from "./format";
 import type { FormatRule } from "./rule";
@@ -78,7 +78,7 @@ describe("detectFormatErros - error cases", () => {
         {
           message: mockMessages.extraPlaceHolder,
           reason: "invalid",
-        } satisfies FormatError,
+        } satisfies FormatErrorItem,
       ]);
     });
 
@@ -93,7 +93,7 @@ describe("detectFormatErros - error cases", () => {
             message: mockMessages.missingName,
             reason: mockRule.itemMapper.placeHolder,
           },
-        ] satisfies FormatError[]);
+        ] satisfies FormatErrorItem[]);
       });
       test("syntaxErrors", () => {
         expect(result.syntaxErrors).toEqual([
@@ -105,7 +105,7 @@ describe("detectFormatErros - error cases", () => {
             message: mockMessages.extraPlaceHolder,
             reason: "invalid2",
           },
-        ] satisfies FormatError[]);
+        ] satisfies FormatErrorItem[]);
       });
     });
   });
@@ -160,7 +160,7 @@ describe("detectFormatErros - name", () => {
         {
           message: mockMessages.missingName,
           reason: mockRule.itemMapper.placeHolder,
-        } satisfies FormatError,
+        } satisfies FormatErrorItem,
       ]);
     });
     test("returns error when {name} is present but dataSource is missing", () => {
@@ -171,7 +171,7 @@ describe("detectFormatErros - name", () => {
         {
           message: mockMessages.missingSourceId,
           reason: mockRule.itemMapper.placeHolder,
-        } satisfies FormatError,
+        } satisfies FormatErrorItem,
       ]);
     });
     test("returns only one error when {name} is duplicated and dataSource is missing", () => {
@@ -182,7 +182,7 @@ describe("detectFormatErros - name", () => {
         {
           message: mockMessages.missingSourceId,
           reason: mockRule.itemMapper.placeHolder,
-        } satisfies FormatError,
+        } satisfies FormatErrorItem,
       ]);
     });
   });

@@ -1,7 +1,7 @@
 import type {
   FormatWithSource,
   FormatErrorLabels,
-  FormatError,
+  FormatErrorItem,
   FormatLimits,
   FormatErrorGroup,
 } from "./format";
@@ -50,10 +50,10 @@ const detectInvalidPlaceholders = <T extends object>(
   rule: FormatRule<T>,
   errorTexts: FormatErrorLabels,
   placeHolderMaxLength: number
-): FormatError[] => {
+): FormatErrorItem[] => {
   const matched = Array.from(format.matchAll(/\{([.a-zA-Z0-9]+)\}/g));
   const placeHolderKeys: ReadonlySet<string> = getPlaceHolderKeys(rule);
-  return matched.reduce<FormatError[]>((acc, item) => {
+  return matched.reduce<FormatErrorItem[]>((acc, item) => {
     const text: string = item[1];
 
     if (text.length === 0) {
@@ -80,8 +80,8 @@ const detectItemMapperErrors = <T extends object>(
   format: FormatWithSource,
   formatRule: FormatRule<T>,
   errorTexts: FormatErrorLabels
-): FormatError[] => {
-  return getItemMappersFromRule(formatRule).reduce<FormatError[]>(
+): FormatErrorItem[] => {
+  return getItemMappersFromRule(formatRule).reduce<FormatErrorItem[]>(
     (rule, item) => {
       const error = checkItemMapperSourceError(format, item, errorTexts);
       if (error) {
@@ -97,7 +97,7 @@ const checkItemMapperSourceError = <T, SourceKey extends SourceKeyConcept>(
   format: FormatWithSource,
   rule: FormatItemMapper<T, SourceKey>,
   errorTexts: FormatErrorLabels
-): FormatError | undefined => {
+): FormatErrorItem | undefined => {
   const includedName: boolean = format.format.includes(rule.placeHolder);
   const hasSource: boolean = !!format.dataSource;
   if (!includedName && hasSource) {
