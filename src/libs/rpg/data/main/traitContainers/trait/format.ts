@@ -23,7 +23,13 @@ export const formatTraitText = (
   items: ReadonlyArray<Data_NamedItem>
 ): string => {
   const rule = compileFormatRule(RULE_TRAIT);
-  return applyFormatRule(trait, items, rule, descriptor, (t) => t.dataId);
+  return applyFormatRule(
+    trait,
+    items,
+    rule,
+    descriptor.format,
+    (t) => t.dataId
+  );
 };
 
 export const detectTraitFormatErrors = (

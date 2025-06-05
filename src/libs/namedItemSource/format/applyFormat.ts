@@ -3,7 +3,6 @@ import type {
   FinalFormatEntry,
   FormatResult,
   FormatRuleCompiled,
-  FormatWithSource,
 } from "./types";
 import type { FormatLookupKeys } from "./types/accessor";
 import { makeItemName } from "./types/namedItem/namedItem";
@@ -21,24 +20,30 @@ export const formatUsingItemSourceMap = <Key, Schema, Data extends Schema>(
 
   return {
     label: entry.label,
-    text: applyFormatRule(data, entry.data, rule, entry, (d) =>
+    text: applyFormatRule(data, entry.data, rule, entry.format, (d) =>
       lookup.extractDataId(d)
     ),
   };
+};
+
+const formatItemName = <Schema, Data extends Schema>(
+  text: string,
+  data: Data,
+  rule: FormatRuleCompiled<Schema>,
+  list: ReadonlyArray<Data_NamedItem>,
+  getDataId: (data: Data) => number
+): string => {
+  const itemName: string = makeItemName(list, getDataId(data));
+  return text.replaceAll(rule.itemName.placeHolder satisfies string, itemName);
 };
 
 export const applyFormatRule = <Schema, Data extends Schema>(
   data: Data,
   list: ReadonlyArray<Data_NamedItem> | undefined,
   rule: FormatRuleCompiled<Schema>,
-  format: FormatWithSource,
+  format: string,
   getDataId: (data: Data) => number
 ): string => {
-  const text: string = execFormatRule(format.format, data, rule);
-  return list
-    ? text.replaceAll(
-        rule.itemName.placeHolder satisfies string,
-        makeItemName(list, getDataId(data))
-      )
-    : text;
+  const text: string = execFormatRule(format, data, rule);
+  return list ? formatItemName(text, data, rule, list, getDataId) : text;
 };
