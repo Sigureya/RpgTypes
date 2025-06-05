@@ -12,12 +12,12 @@ interface KindSourcePair<K, SoruceKey extends SourceKeyConcept> {
   sourceId: SoruceKey;
 }
 
-export interface FormatItemMapper<T, SoruceKey extends SourceKeyConcept> {
+export interface FormatItemMapper<T, SourceKey extends SourceKeyConcept> {
   placeHolder: string;
   // 他のパラメータはこれから用意するので、書き終わるまで任意要素にする
   kindKey: NumberProperties<T>;
   dataIdKey: NumberProperties<T>;
-  map: KindSourcePair<number, SoruceKey>[];
+  map: KindSourcePair<number, SourceKey>[];
 }
 
 export interface FormatItemMapperCompiled<
