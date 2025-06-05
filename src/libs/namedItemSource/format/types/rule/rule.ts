@@ -12,6 +12,17 @@ export const complieFormatRule = <T extends PickByType<T, string | number>>(
   };
 };
 
+export const execFormatRule = <T>(
+  baseText: string,
+  data: T,
+  rule: FormatRuleCompiled<T>
+): string => {
+  return rule.properties.reduce(
+    (text, r) => replacePlaceholder(text, data, r),
+    baseText
+  );
+};
+
 const replacePlaceholder = <T>(
   baseText: string,
   data: T,
@@ -22,15 +33,4 @@ const replacePlaceholder = <T>(
     return baseText;
   }
   return baseText.replaceAll(rule.placeHolder, String(value));
-};
-
-export const execFormatRule = <T>(
-  baseText: string,
-  data: T,
-  rule: FormatRuleCompiled<T>
-): string => {
-  return rule.properties.reduce(
-    (text, r) => replacePlaceholder(text, data, r),
-    baseText
-  );
 };
