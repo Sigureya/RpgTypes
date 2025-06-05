@@ -9,11 +9,7 @@ import type { FormatLookupKeys } from "./types/accessor";
 import { makeItemName } from "./types/namedItem/namedItem";
 import { compileFormatRule, execFormatRule } from "./types/rule/rule";
 
-const makePlaceHolder = (key: string) => {
-  return `{${key}}`;
-};
-
-export const formatUsingItemSourceMap = <Key, T extends { dataId: number }>(
+export const formatUsingItemSourceMap = <Key, T>(
   data: T,
   rule: FormatRule<T>,
   sourceMap: Map<Key, FinalFormatEntry>,
@@ -40,9 +36,8 @@ export const applyFormatRule = <T>(
 ): string => {
   const compiledRule = compileFormatRule(rule);
   const itemName: string = makeItemName(list, getDataId(data));
-  const nameR = makePlaceHolder(rule.itemName.placeHolder ?? "name");
   return execFormatRule(format.format, data, compiledRule).replaceAll(
-    nameR,
+    compiledRule.itemName.placeHolder,
     itemName
   );
 };

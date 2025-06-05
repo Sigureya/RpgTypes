@@ -5,6 +5,7 @@ export const compileFormatRule = <T>(
 ): FormatRuleCompiled<T> => {
   return {
     itemName: {
+      dataKey: "dataId",
       placeHolder: `{${rule.itemName.placeHolder ?? "name"}}`,
     },
     properties: rule.placeHolders.map<FormatField<T>>((placeHolder) => ({
