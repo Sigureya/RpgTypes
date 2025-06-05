@@ -1,6 +1,6 @@
 import type { Data_NamedItem } from "./types";
 
-export const findItem = <T extends Data_NamedItem>(
+export const findItemById = <T extends Data_NamedItem>(
   dataId: number,
   list: ReadonlyArray<T>
 ): T | undefined => {
@@ -18,6 +18,6 @@ export const makeItemName = (
   list: ReadonlyArray<Data_NamedItem>,
   dataId: number
 ): string => {
-  const item = findItem(dataId, list);
+  const item = findItemById(dataId, list);
   return item ? item.name : `?data[${dataId}]`;
 };
