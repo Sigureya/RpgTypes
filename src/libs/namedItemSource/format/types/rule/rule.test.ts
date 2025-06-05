@@ -35,7 +35,7 @@ describe("complieFormatRule", () => {
     test("compiles rule with number placeholders", () => {
       const ruleWithNumbers: FormatRule<ItemEffect> = {
         placeHolders: ["value1", "dataId"],
-        itemName: {},
+        itemName: { placeHolder: "name" },
       };
       const compiled = compileFormatRule(ruleWithNumbers);
       expect(compiled.properties).toEqual([
@@ -47,7 +47,7 @@ describe("complieFormatRule", () => {
 
   describe("Compiles rule for Skill type with valid property keys", () => {
     const rule: FormatRule<Skill> = {
-      itemName: {},
+      itemName: { placeHolder: "name" },
       placeHolders: [
         "id",
         "name",

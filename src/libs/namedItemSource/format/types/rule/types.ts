@@ -5,7 +5,7 @@ type PrimitiveProperties<T> = Extract<
   string
 >;
 export interface FormatRule<T> {
-  itemName: { placeHolder?: string };
+  itemName: { placeHolder: string };
   placeHolders: PrimitiveProperties<T>[];
 }
 
