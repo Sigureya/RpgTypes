@@ -37,12 +37,12 @@ const mockMessages = {
 const runDetectFormatErrors = (format: FormatWithSource) => {
   return detectFormatErrors(format, mockRule, mockMessages);
 };
+const expectedNonError = {
+  semanticErrors: [],
+  syntaxErrors: [],
+} as const satisfies FormatErrorGroup;
 
 describe("detectFormatErros - normal cases", () => {
-  const expectedNonError = {
-    semanticErrors: [],
-    syntaxErrors: [],
-  } as const satisfies FormatErrorGroup;
   test("returns no error for format without placeholders", () => {
     const result = runDetectFormatErrors({ format: "test data" });
     expect(result).toEqual(expectedNonError);
@@ -131,7 +131,7 @@ describe("detectFormatErros - name", () => {
         format: "{name}",
         dataSource: { author: "test", module: "test", kind: "test" },
       });
-      expect(result.semanticErrors).toEqual([]);
+      expect(result).toEqual(expectedNonError);
     });
 
     test("returns no error when {name} is present and dataSource exists", () => {
@@ -139,14 +139,14 @@ describe("detectFormatErros - name", () => {
         format: "myItem {name}",
         dataSource: { author: "test", module: "test", kind: "test" },
       });
-      expect(result.semanticErrors).toEqual([]);
+      expect(result).toEqual(expectedNonError);
     });
     test("returns no error when both {name} and valid placeholder are present and dataSource exists", () => {
       const result = runDetectFormatErrors({
         format: "myItem {name} Power {value}",
         dataSource: { author: "test", module: "test", kind: "test" },
       });
-      expect(result.semanticErrors).toEqual([]);
+      expect(result).toEqual(expectedNonError);
     });
   });
 
