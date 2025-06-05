@@ -1,8 +1,11 @@
+import { getItemMappersFromRule } from "./types";
 import type {
   FormatError,
   FormatErrorLabels,
+  FormatItemMapper,
   FormatRule,
   FormatWithSource,
+  SourceKeyConcept,
 } from "./types";
 
 export const detectFormatErrors = <T extends object>(
@@ -10,18 +13,20 @@ export const detectFormatErrors = <T extends object>(
   formatRule: FormatRule<T>,
   errorTexts: FormatErrorLabels
 ): FormatError[] => {
-  const dataSourceErrorResult = dataSourceError(format, formatRule, errorTexts);
-  const invalidPlaceholdersResult = invalidPlaceHolders(
+  const dataSourceErrorResult = detectItemMapperErrors(
+    format,
+    formatRule,
+    errorTexts
+  );
+  const invalidPlaceholdersResult = detectInvalidPlaceholders(
     format.format,
     formatRule,
     errorTexts
   );
-  return dataSourceErrorResult
-    ? [dataSourceErrorResult, ...invalidPlaceholdersResult]
-    : invalidPlaceholdersResult;
+  return [...dataSourceErrorResult, ...invalidPlaceholdersResult];
 };
 
-const isInvalidKey = <T extends object>(
+const isUnknownPlaceholderKey = <T extends object>(
   key: string,
   rule: FormatRule<T>
 ): boolean => {
@@ -37,7 +42,7 @@ const isInvalidKey = <T extends object>(
   return true;
 };
 
-const invalidPlaceHolders = <T extends object>(
+const detectInvalidPlaceholders = <T extends object>(
   format: string,
   rule: FormatRule<T>,
   errorTexts: FormatErrorLabels
@@ -45,7 +50,7 @@ const invalidPlaceHolders = <T extends object>(
   const matched = Array.from(format.matchAll(/\{([.a-zA-Z0-9]+)\}/g));
   return matched.reduce<FormatError[]>((acc, item) => {
     const text: string = item[1];
-    if (text && isInvalidKey(text, rule)) {
+    if (text && isUnknownPlaceholderKey(text, rule)) {
       acc.push({
         message: errorTexts.extraPlaceHolder,
         reason: text,
@@ -55,25 +60,40 @@ const invalidPlaceHolders = <T extends object>(
   }, []);
 };
 
-const dataSourceError = <T extends object>(
+const detectItemMapperErrors = <T extends object>(
   format: FormatWithSource,
   formatRule: FormatRule<T>,
   errorTexts: FormatErrorLabels
-): FormatError | undefined => {
-  const np = formatRule.itemMapper.placeHolder ?? "name";
+): FormatError[] => {
+  return getItemMappersFromRule(formatRule).reduce<FormatError[]>(
+    (rule, item) => {
+      const error = checkItemMapperSourceError(format, item, errorTexts);
+      if (error) {
+        rule.push(error);
+      }
+      return rule;
+    },
+    []
+  );
+};
 
-  const includedName: boolean = format.format.includes(np);
+const checkItemMapperSourceError = <T, SourceKey extends SourceKeyConcept>(
+  format: FormatWithSource,
+  rule: FormatItemMapper<T, SourceKey>,
+  errorTexts: FormatErrorLabels
+): FormatError | undefined => {
+  const includedName: boolean = format.format.includes(rule.placeHolder);
   const hasSource: boolean = !!format.dataSource;
   if (!includedName && hasSource) {
     return {
       message: errorTexts.missingName,
-      reason: np,
+      reason: rule.placeHolder,
     };
   }
   if (includedName && !hasSource) {
     return {
       message: errorTexts.missingSourceId,
-      reason: np,
+      reason: rule.placeHolder,
     };
   }
   return undefined;
