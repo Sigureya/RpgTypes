@@ -10,12 +10,12 @@ import type { FormatLookupKeys } from "./types/accessor";
 import { makeItemName } from "./types/namedItem/namedItem";
 import { compileFormatRule, execFormatRule } from "./types/rule/rule";
 
-export const formatUsingItemSourceMap = <Key, T>(
-  data: T,
-  rule: FormatRuleCompiled<T>,
+export const formatUsingItemSourceMap = <Key, Schema, Data extends Schema>(
+  data: Data,
+  rule: FormatRuleCompiled<Schema>,
   sourceMap: Map<Key, FinalFormatEntry>,
   fallback: FinalFormatEntry,
-  lookup: FormatLookupKeys<T, Key>
+  lookup: FormatLookupKeys<Data, Key>
 ): FormatResult => {
   const key: Key = lookup.extractMapKey(data);
   const entry: FinalFormatEntry = sourceMap.get(key) ?? fallback;
@@ -28,17 +28,17 @@ export const formatUsingItemSourceMap = <Key, T>(
   };
 };
 
-export const applyFormatRule2 = <T>(
-  data: T,
+export const applyFormatRule2 = <Schema, Data extends Schema>(
+  data: Data,
   list: ReadonlyArray<Data_NamedItem> | undefined,
-  rule: FormatRuleCompiled<T>,
+  rule: FormatRuleCompiled<Schema>,
   format: FormatWithSource,
-  getDataId: (data: T) => number
-) => {
+  getDataId: (data: Data) => number
+): string => {
   const text: string = execFormatRule(format.format, data, rule);
   return list
     ? text.replaceAll(
-        rule.itemName.placeHolder,
+        rule.itemName.placeHolder satisfies string,
         makeItemName(list, getDataId(data))
       )
     : text;

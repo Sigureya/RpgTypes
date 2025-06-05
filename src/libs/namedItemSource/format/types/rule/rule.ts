@@ -15,10 +15,10 @@ export const compileFormatRule = <T>(
   };
 };
 
-export const execFormatRule = <T>(
+export const execFormatRule = <Schema, Data extends Schema>(
   baseText: string,
-  data: T,
-  rule: FormatRuleCompiled<T>
+  data: Data,
+  rule: FormatRuleCompiled<Schema>
 ): string => {
   return rule.properties.reduce(
     (text, r) => replacePlaceholder(text, data, r),
@@ -26,10 +26,10 @@ export const execFormatRule = <T>(
   );
 };
 
-const replacePlaceholder = <T>(
+const replacePlaceholder = <Schema, Data extends Schema>(
   baseText: string,
-  data: T,
-  rule: FormatField<T>
+  data: Data,
+  rule: FormatField<Schema>
 ): string => {
   const value = data[rule.dataKey];
   if (value === undefined || value === null) {
