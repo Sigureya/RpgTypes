@@ -1,4 +1,4 @@
-import type { PickByType } from "src/rpg";
+import type { PickByType } from "@RpgTypes/templates";
 import type { FormatRule, FormatPropety, FormatRuleCompiled } from "./types";
 
 export const complieFormatRule = <T extends PickByType<T, string | number>>(

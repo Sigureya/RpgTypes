@@ -1,4 +1,4 @@
-import type { PickByType } from "src/rpg";
+import type { PickByType } from "@RpgTypes/templates";
 
 export interface FormatRule<T> {
   itemNamePlaceHolder?: string;
