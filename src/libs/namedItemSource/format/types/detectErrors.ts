@@ -2,15 +2,32 @@ import type {
   FormatWithSource,
   FormatErrorLabels,
   FormatError,
+  FormatLimits,
+  FormatErrorGroup,
 } from "./format";
 import type { FormatRule, SourceKeyConcept, FormatItemMapper } from "./rule";
-import { getItemMappersFromRule } from "./rule";
+import { getItemMappersFromRule, getPlaceHolderKeys } from "./rule";
 
 export const detectFormatErrors = <T extends object>(
   format: FormatWithSource,
   formatRule: FormatRule<T>,
-  errorTexts: FormatErrorLabels
-): FormatError[] => {
+  errorTexts: FormatErrorLabels,
+  limits: FormatLimits = {
+    placeHolderMaxLength: 50,
+    formatMaxLength: 200,
+  }
+): FormatErrorGroup => {
+  if (format.format.length > limits.formatMaxLength) {
+    return {
+      syntaxErrors: [
+        {
+          message: errorTexts.formatVeryLong,
+          reason: format.format.slice(0, limits.formatMaxLength),
+        },
+      ],
+      semanticErrors: [],
+    };
+  }
   const dataSourceErrorResult = detectItemMapperErrors(
     format,
     formatRule,
@@ -19,38 +36,37 @@ export const detectFormatErrors = <T extends object>(
   const invalidPlaceholdersResult = detectInvalidPlaceholders(
     format.format,
     formatRule,
-    errorTexts
+    errorTexts,
+    limits.placeHolderMaxLength
   );
-  return [...dataSourceErrorResult, ...invalidPlaceholdersResult];
-};
-
-const isUnknownPlaceholderKey = <T extends object>(
-  key: string,
-  rule: FormatRule<T>
-): boolean => {
-  if (key.length === 0 || key.length >= 100) {
-    return true;
-  }
-  if (rule.itemMapper) {
-    if (key === rule.itemMapper.placeHolder) {
-      return false;
-    }
-  }
-  if ((rule.placeHolders as string[]).includes(key)) {
-    return false;
-  }
-  return true;
+  return {
+    syntaxErrors: invalidPlaceholdersResult,
+    semanticErrors: dataSourceErrorResult,
+  };
 };
 
 const detectInvalidPlaceholders = <T extends object>(
   format: string,
   rule: FormatRule<T>,
-  errorTexts: FormatErrorLabels
+  errorTexts: FormatErrorLabels,
+  placeHolderMaxLength: number
 ): FormatError[] => {
   const matched = Array.from(format.matchAll(/\{([.a-zA-Z0-9]+)\}/g));
+  const placeHolderKeys: ReadonlySet<string> = getPlaceHolderKeys(rule);
   return matched.reduce<FormatError[]>((acc, item) => {
     const text: string = item[1];
-    if (text && isUnknownPlaceholderKey(text, rule)) {
+
+    if (text.length === 0) {
+      return acc;
+    }
+    if (text.length > placeHolderMaxLength) {
+      acc.push({
+        message: errorTexts.longPlaceHolder,
+        reason: text.slice(0, placeHolderMaxLength),
+      });
+      return acc;
+    }
+    if (!placeHolderKeys.has(text)) {
       acc.push({
         message: errorTexts.extraPlaceHolder,
         reason: text,

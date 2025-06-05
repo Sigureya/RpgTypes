@@ -34,6 +34,8 @@ const mockErrorLabels = {
   missingName: "Missing name",
   missingSourceId: "Missing source ID",
   extraPlaceHolder: "Extra placeholder",
+  longPlaceHolder: "Placeholder is too long",
+  formatVeryLong: "Format is too long",
 } as const satisfies FormatErrorLabels;
 
 interface TestCase {
@@ -63,7 +65,11 @@ const testFormatTraitText = ({
       });
     });
     test("", () => {
-      expect(detectTraitFormatErrors(format, mockErrorLabels)).toEqual([]);
+      const errors = detectTraitFormatErrors(format, mockErrorLabels);
+      expect(errors).toEqual({
+        semanticErrors: [],
+        syntaxErrors: [],
+      } satisfies typeof errors);
     });
   });
 };

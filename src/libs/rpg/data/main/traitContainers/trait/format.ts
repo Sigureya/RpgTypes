@@ -1,9 +1,9 @@
 import type {
-  FormatError,
   FormatErrorLabels,
   FormatRule,
   FormatWithSource,
   Data_NamedItem,
+  FormatErrorGroup,
 } from "src/namedItemSource";
 import {
   detectFormatErrors,
@@ -41,6 +41,6 @@ export const formatTraitText = (
 export const detectTraitFormatErrors = (
   format: FormatWithSource,
   errorTexts: FormatErrorLabels
-): FormatError[] => {
+): FormatErrorGroup => {
   return detectFormatErrors(format, RULE_TRAIT, errorTexts);
 };
