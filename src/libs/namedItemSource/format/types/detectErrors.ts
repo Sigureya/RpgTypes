@@ -31,8 +31,10 @@ const isUnknownPlaceholderKey = <T extends object>(
   if (key.length === 0 || key.length >= 100) {
     return true;
   }
-  if (key === rule.itemMapper.placeHolder) {
-    return false;
+  if (rule.itemMapper) {
+    if (key === rule.itemMapper.placeHolder) {
+      return false;
+    }
   }
   if ((rule.placeHolders as string[]).includes(key)) {
     return false;

@@ -14,7 +14,7 @@ export interface FormatRule<
   T,
   SoruceKey extends SourceKeyConcept = SourceKeyConcept
 > {
-  itemMapper: FormatItemMapper<T, SoruceKey>;
+  itemMapper?: FormatItemMapper<T, SoruceKey>;
   placeHolders: PrimitiveProperties<T>[];
   itemMappers?: FormatItemMapper<T, SoruceKey>[];
 }
