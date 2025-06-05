@@ -1,19 +1,21 @@
 import type { PickByType } from "src/rpg";
-import type { FormatRule, FormatRuleCompiled } from "./types";
+import type { FormatRule, FormatPropety, FormatRuleCompiled } from "./types";
 
 export const complieFormatRule = <T extends PickByType<T, string | number>>(
   rule: FormatRule<T>
-): FormatRuleCompiled<T>[] => {
-  return rule.placeHolders.map<FormatRuleCompiled<T>>((placeHolder) => ({
-    dataKey: placeHolder,
-    placeHolder: `{${placeHolder}}`,
-  }));
+): FormatRuleCompiled<T> => {
+  return {
+    properties: rule.placeHolders.map<FormatPropety<T>>((placeHolder) => ({
+      dataKey: placeHolder,
+      placeHolder: `{${placeHolder}}`,
+    })),
+  };
 };
 
 const replacePlaceholder = <T>(
   baseText: string,
   data: T,
-  rule: FormatRuleCompiled<T>
+  rule: FormatPropety<T>
 ): string => {
   const value = data[rule.dataKey];
   if (value === undefined || value === null) {
@@ -25,7 +27,7 @@ const replacePlaceholder = <T>(
 export const replacePlaceholders = <T>(
   baseText: string,
   data: T,
-  rule: ReadonlyArray<FormatRuleCompiled<T>>
+  rule: ReadonlyArray<FormatPropety<T>>
 ): string => {
   return rule.reduce((text, r) => replacePlaceholder(text, data, r), baseText);
 };

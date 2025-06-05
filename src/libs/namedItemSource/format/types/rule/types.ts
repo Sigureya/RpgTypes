@@ -5,7 +5,11 @@ export interface FormatRule<T> {
   placeHolders: Extract<keyof PickByType<T, number | string>, string>[];
 }
 
-export interface FormatRuleCompiled<T> {
+export interface FormatPropety<T> {
   dataKey: string & keyof T;
   placeHolder: `{${string & keyof T}}`;
+}
+
+export interface FormatRuleCompiled<T> {
+  properties: FormatPropety<T>[];
 }
