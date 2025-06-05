@@ -1,4 +1,7 @@
-import type { AsRecord, PickByType } from "./pickByType";
+import type {
+  AsRecord,
+  PickByType,
+} from "../../../../../../../../templates/pickByType";
 
 export type IndexOfParameter<T extends unknown[], V> = AsNumber<
   keyof PickByType<AsRecord<T>, V>
