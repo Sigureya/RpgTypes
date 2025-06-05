@@ -1,12 +1,10 @@
-import { getItemMappersFromRule } from "./types";
 import type {
-  FormatError,
-  FormatErrorLabels,
-  FormatItemMapper,
-  FormatRule,
   FormatWithSource,
-  SourceKeyConcept,
-} from "./types";
+  FormatErrorLabels,
+  FormatError,
+} from "./format";
+import type { FormatRule, SourceKeyConcept, FormatItemMapper } from "./rule";
+import { getItemMappersFromRule } from "./rule";
 
 export const detectFormatErrors = <T extends object>(
   format: FormatWithSource,
