@@ -5,11 +5,6 @@ export interface FormatWithSource {
   dataSource?: SourceIdentifier;
 }
 
-export interface FormatRule<T extends object> {
-  itemNamePlaceHolder?: string;
-  placeHolders: Extract<keyof T, string>[];
-}
-
 export interface FormatErrorLabels {
   missingName: string;
   missingSourceId: string;

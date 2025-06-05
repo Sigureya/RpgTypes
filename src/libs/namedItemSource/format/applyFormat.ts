@@ -5,6 +5,7 @@ import type {
   FormatRule,
   FormatWithSource,
 } from "./types";
+import { complieFormatRule, execFormatRule } from "./types/rule/rule";
 
 const makePlaceHolder = (key: string) => {
   return `{${key}}`;
@@ -33,9 +34,20 @@ export const formatUsingItemSourceMap = <
 
   return {
     label: entry.label,
-    text: applyFormatRule(data, entry.data ?? [], rule, entry, (t) => t.dataId),
+    text: applyFormatRule(
+      data,
+      entry.data ?? [],
+      rule,
+      entry,
+      (t: any) => t.dataId // 暫定処置。
+    ),
   };
 };
+
+const applyFormatRule2 = <T>(
+  data: T,
+  list: ReadonlyArray<Data_NamedItem>
+) => {};
 
 export const applyFormatRule = <T extends Record<keyof T, string | number>>(
   data: T,
@@ -44,14 +56,13 @@ export const applyFormatRule = <T extends Record<keyof T, string | number>>(
   format: FormatWithSource,
   getDataId: (data: T) => number
 ): string => {
+  const compiledRule = complieFormatRule(rule);
   const itemName: string = makeItemName(list, getDataId(data));
   const nameR = makePlaceHolder(rule.itemNamePlaceHolder ?? "name");
-  return rule.placeHolders.reduce<string>((acc, key: string & keyof T) => {
-    const value: string | number = data[key];
-    return value
-      ? (acc = acc.replaceAll(makePlaceHolder(key), value.toString()))
-      : acc;
-  }, format.format.replaceAll(nameR, itemName));
+  return execFormatRule(format.format, data, compiledRule).replaceAll(
+    nameR,
+    itemName
+  );
 };
 
 const findItem = <T extends Data_NamedItem>(
