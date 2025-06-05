@@ -7,10 +7,18 @@ import type {
 } from "./types";
 import { detectFormatErrors } from "./detectErrors";
 
+interface Trait {
+  code: number;
+  value: number;
+  dataId: number;
+  message: string;
+}
+
 const mockRule = {
   placeHolders: ["value", "message"],
   itemName: { placeHolder: "name" },
-} as const satisfies FormatRule<{ value: number; message: string }>;
+  itemMappers: [{ placeHolder: "name", dataIdKey: "value" }],
+} as const satisfies FormatRule<Trait>;
 
 const mockMessages = {
   missingName: "Missing name",

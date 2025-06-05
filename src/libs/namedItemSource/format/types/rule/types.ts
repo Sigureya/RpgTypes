@@ -4,9 +4,26 @@ type PrimitiveProperties<T> = Extract<
   keyof PickByType<T, number | string>,
   string
 >;
-export interface FormatRule<T> {
-  itemName: { placeHolder: string };
+
+type NumberProperties<T> = Extract<keyof PickByType<T, number>, string>;
+
+export type SoruceKeyConcept =
+  | string
+  | number
+  | Record<string, string | number>;
+
+export interface FormatRule<T, SoruceKey extends SoruceKeyConcept = never> {
+  itemName: FormatItemMapper<T, SoruceKey>;
   placeHolders: PrimitiveProperties<T>[];
+  itemMappers: FormatItemMapper<T, SoruceKey>[];
+}
+
+export interface FormatItemMapper<T, SoruceKey extends SoruceKeyConcept> {
+  placeHolder: string;
+  // 他のパラメータはこれから用意するので、書き終わるまで任意要素にする
+  kindKey?: NumberProperties<T>;
+  dataIdKey?: NumberProperties<T>;
+  map?: [{ kindId: number; sourceId: SoruceKey }];
 }
 
 export interface FormatField<T> {

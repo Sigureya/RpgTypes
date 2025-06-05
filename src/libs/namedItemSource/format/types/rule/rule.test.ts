@@ -19,6 +19,7 @@ interface Skill {
 const mockRule: FormatRule<ItemEffect> = {
   placeHolders: ["value1", "dataId", "code"],
   itemName: { placeHolder: "name" },
+  itemMappers: [],
 };
 
 describe("complieFormatRule", () => {
@@ -36,6 +37,7 @@ describe("complieFormatRule", () => {
       const ruleWithNumbers: FormatRule<ItemEffect> = {
         placeHolders: ["value1", "dataId"],
         itemName: { placeHolder: "name" },
+        itemMappers: [],
       };
       const compiled = compileFormatRule(ruleWithNumbers);
       expect(compiled.properties).toEqual([
@@ -54,6 +56,7 @@ describe("complieFormatRule", () => {
         // "effects"
         // ↑ Compile error due to type checking
       ],
+      itemMappers: [],
     };
     const compiledRule = compileFormatRule(rule);
     test("compiles rule for Skill type with valid property keys", () => {
