@@ -1,4 +1,3 @@
-export * from "./formatTypes";
 export * from "./formatErrorTypes";
 export * from "./types";
 export * from "./sourceIdentifier";

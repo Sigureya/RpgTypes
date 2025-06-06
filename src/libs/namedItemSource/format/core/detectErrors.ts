@@ -4,7 +4,7 @@ import type {
   FormatErrorGroup,
   FormatErrorItem,
 } from "./formatErrorTypes";
-import type { FormatWithSource } from "./formatTypes";
+import type { FormatWithSource } from "./types";
 import type { FormatRule, SourceKeyConcept, FormatItemMapper } from "./rule";
 import { getItemMappersFromRule, getPlaceHolderKeys } from "./rule";
 

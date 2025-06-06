@@ -1,11 +1,11 @@
-import { joinSoruceId } from "./types/sourceIdentifier/sourceId";
 import type {
   FormatLabelResolved,
   NamedItemSource,
   FinalFormatEntry,
-  Data_NamedItem,
   SourceIdentifier,
-} from "./types";
+  Data_NamedItem,
+} from "./core";
+import { joinSoruceId } from "./core";
 
 /**
  * ResolvedLabel 配列と NamedItemSource 配列を統合し、

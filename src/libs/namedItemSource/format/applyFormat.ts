@@ -3,12 +3,11 @@ import type {
   FinalFormatEntry,
   FormatResult,
   FormatRuleCompiled,
-} from "./types";
-import type { FormatLookupKeys } from "./types/accessor";
-import { makeItemName } from "./types/namedItem/namedItem";
-import { execFormatRule } from "./types/rule/rule";
+} from "./core";
+import { execFormatRule, makeItemName } from "./core";
+import type { FormatLookupKeys } from "./core/accessor";
 
-export const formatUsingItemSourceMap = <Key, Schema, Data extends Schema>(
+const xxxxx = <Key, Schema, Data extends Schema>(
   data: Data,
   rule: FormatRuleCompiled<Schema>,
   sourceMap: Map<Key, FinalFormatEntry>,
