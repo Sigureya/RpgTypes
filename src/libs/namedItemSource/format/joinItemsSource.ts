@@ -7,7 +7,7 @@ import type {
 } from "./core";
 import { joinSoruceId } from "./core";
 
-export const joinItemsSoruce = <Key>(
+export const joinItemsSource = <Key>(
   formatList: ReadonlyArray<FormatLabelResolved<Key>>,
   namedItemSources: ReadonlyArray<NamedItemSource>
 ): Map<Key, FormatCompiled> => {

@@ -1,5 +1,5 @@
 import { describe, test, expect } from "vitest";
-import { compileFormatRule, execFormatRule } from "./rule";
+import { compileFormatRule, applyPlaceholdersToText } from "./rule";
 import type { FormatRule } from "./types";
 
 // Test data interfaces
@@ -94,13 +94,17 @@ describe("replacePlaceholders", () => {
 
   test("should replace placeholders with corresponding values", () => {
     const baseText = "Value1: {value1}, DataId: {dataId}, Code: {code}";
-    const result: string = execFormatRule(baseText, effect, compiledRule);
+    const result: string = applyPlaceholdersToText(
+      baseText,
+      effect,
+      compiledRule
+    );
     expect(result).toBe("Value1: 42, DataId: 1001, Code: 78");
   });
 
   test("should return base text if no placeholders match", () => {
     const baseText = "No placeholders here.";
-    const result = execFormatRule(baseText, effect, compiledRule);
+    const result = applyPlaceholdersToText(baseText, effect, compiledRule);
     expect(result).toBe(baseText);
   });
 });

@@ -1,5 +1,5 @@
 import { describe, test, expect } from "vitest";
-import { joinItemsSoruce } from "./joinItemsSource";
+import { joinItemsSource } from "./joinItemsSource";
 import type { FormatCompiled, NamedItemSource } from "./core";
 
 const mockWeapons = {
@@ -24,7 +24,7 @@ const mockEnemies = {
 
 describe("joinItemsSoruce", () => {
   describe("when label does not have dataSource", () => {
-    const map = joinItemsSoruce(
+    const map = joinItemsSource(
       [
         {
           targetKey: 6,
@@ -45,7 +45,7 @@ describe("joinItemsSoruce", () => {
   });
 
   describe("when label has dataSource", () => {
-    const map = joinItemsSoruce(
+    const map = joinItemsSource(
       [
         {
           targetKey: 7,
@@ -70,7 +70,7 @@ describe("joinItemsSoruce", () => {
 
 describe("buildFinalFormatMap with empty input", () => {
   test("returns an empty map when no labels or sources are provided", () => {
-    const map = joinItemsSoruce([], []);
+    const map = joinItemsSource([], []);
     expect(map).toEqual(new Map());
   });
 });
