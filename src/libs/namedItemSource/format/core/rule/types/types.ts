@@ -17,6 +17,7 @@ export interface FormatRule<
   itemMapper?: FormatItemMapper<T, SoruceKey>;
   placeHolders: PrimitiveProperties<T>[];
   itemMappers?: FormatItemMapper<T, SoruceKey>[];
+  fallbackFormat?: string;
 }
 
 export interface FormatField<T> {
@@ -30,4 +31,10 @@ export interface FormatRuleCompiled<
 > {
   properties: FormatField<T>[];
   itemMappers: FormatItemMapperCompiled<T, SoruceKey>[];
+  fallbackFormat: string;
+}
+
+export interface FormatCompiledSimple {
+  patternCompiled: string;
+  label: string;
 }
