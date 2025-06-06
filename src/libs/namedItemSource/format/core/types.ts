@@ -7,14 +7,14 @@ export interface NamedItemSource {
   label: string;
 }
 
-export interface FormatLabelResolved<Key = string> {
-  format: string;
+export interface FormatLabelResolved<Key = string> extends FormatInput {
+  pattern: string;
   targetKey: Key;
   label: string;
   dataSource?: SourceIdentifier;
 }
 
-export interface FinalFormatEntry {
+export interface FormatCompiled {
   patternCompiled: string;
   label: string;
   data?: ReadonlyArray<Data_NamedItem>;

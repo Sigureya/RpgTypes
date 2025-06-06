@@ -1,46 +1,36 @@
 import type {
+  Data_NamedItem,
+  FormatCompiled,
   FormatLabelResolved,
   NamedItemSource,
-  FinalFormatEntry,
   SourceIdentifier,
-  Data_NamedItem,
 } from "./core";
 import { joinSoruceId } from "./core";
 
-/**
- * ResolvedLabel 配列と NamedItemSource 配列を統合し、
- * Trait.code によるマップを構築する
- */
 export const joinItemsSoruce = <Key>(
-  labels: FormatLabelResolved<Key>[],
+  formatList: FormatLabelResolved<Key>[],
   namedItemSources: ReadonlyArray<NamedItemSource>
-): Map<Key, FinalFormatEntry> => {
+): Map<Key, FormatCompiled> => {
   const sourceMap = mappingNamedItems(namedItemSources);
-  return labels.reduce<Map<Key, FinalFormatEntry>>((acc, label) => {
+  return formatList.reduce<Map<Key, FormatCompiled>>((acc, label) => {
     const entry = buildFinalFormatEntry(label, sourceMap);
     acc.set(label.targetKey, entry);
     return acc;
   }, new Map());
 };
 
-/**
- * 指定された ResolvedLabel からフォーマットデータを構築する
- */
 const buildFinalFormatEntry = <T>(
-  label: FormatLabelResolved<T>,
+  format: FormatLabelResolved<T>,
   sourceMap: ReadonlyMap<string, NamedItemSource>
-): FinalFormatEntry => {
-  const source = resolveDataSource(label.dataSource, sourceMap);
+): FormatCompiled => {
+  const source = resolveDataSource(format.dataSource, sourceMap);
   return {
-    patternCompiled: label.format,
-    label: label.label,
+    patternCompiled: format.pattern,
+    label: format.label,
     data: source ? source.items : undefined,
   };
 };
 
-/**
- * SourceIdentifier に対応する NamedItemSource を取得
- */
 const resolveDataSource = (
   source: SourceIdentifier | undefined,
   sourceMap: ReadonlyMap<string, NamedItemSource>
@@ -48,8 +38,7 @@ const resolveDataSource = (
   if (!source) {
     return undefined;
   }
-  const key = joinSoruceId(source);
-  return sourceMap.get(key);
+  return sourceMap.get(joinSoruceId(source));
 };
 
 const mappingNamedItems = (
