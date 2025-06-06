@@ -48,13 +48,13 @@ export const formatWithCompiledBundle = <
   const key: Key = lookup.extractMapKey(data);
   const entry = bundle.soruceMap.get(key);
   return entry
-    ? resolveTextFromMatchedEntry(entry, bundle.compiledRule, data, (d) =>
+    ? formatTextForMatchedEntry(entry, bundle.compiledRule, data, (d) =>
         lookup.extractDataId(d)
       )
-    : resolveTextFromUnknownKey(key, bundle.compiledRule, data, lookup);
+    : formatTextForFallback(key, bundle.compiledRule, data, lookup);
 };
 
-const resolveTextFromMatchedEntry = <
+const formatTextForMatchedEntry = <
   T extends object,
   Source extends SourceKeyConcept
 >(
@@ -75,7 +75,7 @@ const resolveTextFromMatchedEntry = <
   };
 };
 
-const resolveTextFromUnknownKey = <
+const formatTextForFallback = <
   T extends object,
   Key,
   Source extends SourceKeyConcept
@@ -101,12 +101,10 @@ export const applyFormatRule = <Schema, Data extends Schema>(
   getDataId: (data: Data) => number
 ): string => {
   const text: string = applyPlaceholdersToText(format, data, rule);
-  return list
-    ? replacePlaceholdersWithItemName(text, data, rule, list, getDataId)
-    : text;
+  return list ? foramtWithItemName(text, data, rule, list, getDataId) : text;
 };
 
-const replacePlaceholdersWithItemName = <Schema, Data extends Schema>(
+const foramtWithItemName = <Schema, Data extends Schema>(
   text: string,
   data: Data,
   rule: FormatRuleCompiled<Schema>,
