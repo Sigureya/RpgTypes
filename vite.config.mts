@@ -1,7 +1,9 @@
 import { defineConfig } from "vite";
 import dts from "vite-plugin-dts";
 import path from "path";
+import terser from "@rollup/plugin-terser";
 declare const __dirname: string;
+
 const libBuild = {
   entry: "./src/libs/index.ts",
   outDir: "./dist/libs",
@@ -18,7 +20,10 @@ export default defineConfig({
       fileName: (format) => `${libBuild.libName}.${format}.js`,
     },
     sourcemap: true,
+
+    minify: false,
     rollupOptions: {
+      plugins: [terser({ output: { comments: false } })],
       external: (id) =>
         id.endsWith(".test.ts") ||
         ["ajv", "ajv-formats", "jsonschema"].includes(id),
@@ -35,7 +40,6 @@ export default defineConfig({
         },
       ],
     },
-    minify: false, // デバッグしやすくするため
   },
   resolve: {
     alias: {
