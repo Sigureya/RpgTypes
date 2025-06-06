@@ -24,20 +24,6 @@ export const getItemMappersFromRule = <T, SoruceKey extends SourceKeyConcept>(
   return rule.itemMapper ? [...list, rule.itemMapper] : list;
 };
 
-export const getPlaceHolderKeys = <T>(rule: FormatRule<T>): Set<string> => {
-  const set = new Set<string>(rule.placeHolders);
-  if (rule.itemMapper) {
-    set.add(rule.itemMapper.placeHolder);
-  }
-  if (rule.itemMappers) {
-    rule.itemMappers.forEach((mapper) => {
-      set.add(mapper.placeHolder);
-    });
-  }
-
-  return set;
-};
-
 export const compileFormatItemMapper = <T, SoruceKey extends SourceKeyConcept>(
   itemMappers: FormatItemMapper<T, SoruceKey>
 ): FormatItemMapperCompiled<T, SoruceKey> => {
