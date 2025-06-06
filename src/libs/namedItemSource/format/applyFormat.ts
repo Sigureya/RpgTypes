@@ -13,7 +13,7 @@ import type {
 import {
   compileFormatRule,
   applyPlaceholdersToText,
-  makeItemName,
+  getItemName,
 } from "./core";
 import type { FormatLookupKeys } from "./core/accessor";
 import { detectFormatErrors } from "./core/detectErrors";
@@ -101,17 +101,19 @@ export const applyFormatRule = <Schema, Data extends Schema>(
   getDataId: (data: Data) => number
 ): string => {
   const text: string = applyPlaceholdersToText(format, data, rule);
-  return list ? formatItemName(text, data, rule, list, getDataId) : text;
+  return list
+    ? replacePlaceholdersWithItemName(text, data, rule, list, getDataId)
+    : text;
 };
 
-const formatItemName = <Schema, Data extends Schema>(
+const replacePlaceholdersWithItemName = <Schema, Data extends Schema>(
   text: string,
   data: Data,
   rule: FormatRuleCompiled<Schema>,
   list: ReadonlyArray<Data_NamedItem>,
   getDataId: (data: Data) => number
 ): string => {
-  const itemName: string = makeItemName(list, getDataId(data));
+  const itemName: string = getItemName(list, getDataId(data));
   return rule.itemMappers.reduce((currentText, itemMapper) => {
     return currentText.replaceAll(itemMapper.placeHolder, itemName);
   }, text);
