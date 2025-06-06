@@ -11,32 +11,32 @@ import type {
   FormatItemMapperCompiled,
 } from "./types";
 
-export const compileFormatRule = <T, SoruceKey extends SourceKeyConcept>(
-  rule: FormatRule<T, SoruceKey>
-): FormatRuleCompiled<T, SoruceKey> => ({
+export const compileFormatRule = <T, SourceKey extends SourceKeyConcept>(
+  rule: FormatRule<T, SourceKey>
+): FormatRuleCompiled<T, SourceKey> => ({
   properties: rule.placeHolders.map<FormatField<T>>((placeHolder) => ({
     dataKey: placeHolder satisfies keyof T,
     placeHolder: `{${placeHolder}}`,
   })),
-  itemMappers: getItemMappersFromRule(rule).map(compileFormatItemMapper),
-  fallbackFormat: fallbackFormatPattern(rule),
+  itemMappers: getItemMappersFromRule(rule).map(compileItemMapper),
+  fallbackFormat: generateFallbackFormat(rule),
 });
 
-const compileFormatItemMapper = <T, SoruceKey extends SourceKeyConcept>(
-  itemMappers: FormatItemMapper<T, SoruceKey>
-): FormatItemMapperCompiled<T, SoruceKey> => {
+const compileItemMapper = <T, SourceKey extends SourceKeyConcept>(
+  itemMappers: FormatItemMapper<T, SourceKey>
+): FormatItemMapperCompiled<T, SourceKey> => {
   return {
     placeHolder: `{${itemMappers.placeHolder}}`,
     kindKey: itemMappers.kindKey,
     dataIdKey: itemMappers.dataIdKey,
     map: itemMappers.map.map((pair) => ({
       kindId: pair.kindId,
-      sourceId: pair.sourceId satisfies SoruceKey,
+      sourceId: pair.sourceId satisfies SourceKey,
     })),
   };
 };
 
-const fallbackFormatPattern = <T>(rule: FormatRule<T>): string => {
+const generateFallbackFormat = <T>(rule: FormatRule<T>): string => {
   if (rule.fallbackFormat) {
     return rule.fallbackFormat;
   }
