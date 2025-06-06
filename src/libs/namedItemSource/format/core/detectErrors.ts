@@ -4,13 +4,25 @@ import type {
   FormatErrorGroup,
   FormatErrorItem,
 } from "./formatErrorTypes";
-import type { FormatWithSource } from "./types";
+import type { FormatInput, FormatWithSource } from "./types";
 import type { FormatRule, SourceKeyConcept, FormatItemMapper } from "./rule";
 import { getItemMappersFromRule, getPlaceHolderKeys } from "./rule";
 
-export const detectFormatErrors = <T extends object>(
-  format: FormatWithSource,
-  formatRule: FormatRule<T>,
+export const isValidFormatErrorGroup = (
+  formatError: FormatErrorGroup
+): boolean => {
+  return (
+    formatError.syntaxErrors.length === 0 &&
+    formatError.semanticErrors.length === 0
+  );
+};
+
+export const detectFormatErrors = <
+  T extends object,
+  Src extends SourceKeyConcept
+>(
+  format: FormatInput,
+  formatRule: FormatRule<T, Src>,
   errorTexts: FormatErrorLabels,
   limits: FormatLimits = {
     placeHolderMaxLength: 50,

@@ -4,6 +4,7 @@ import type {
   FormatWithSource,
   Data_NamedItem,
   FormatErrorGroup,
+  FormatInput,
 } from "src/namedItemSource";
 import {
   detectFormatErrors,
@@ -39,7 +40,7 @@ export const formatTraitText = (
 };
 
 export const detectTraitFormatErrors = (
-  format: FormatWithSource,
+  format: FormatInput,
   errorTexts: FormatErrorLabels
 ): FormatErrorGroup => {
   return detectFormatErrors(format, RULE_TRAIT, errorTexts);

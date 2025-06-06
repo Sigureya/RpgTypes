@@ -4,6 +4,7 @@ import { detectTraitFormatErrors, formatTraitText } from "./format";
 import type {
   Data_NamedItem,
   FormatErrorLabels,
+  FormatInput,
   FormatWithSource,
   SourceIdentifier,
 } from "src/namedItemSource";
@@ -65,8 +66,13 @@ const testFormatTraitText = ({
       });
     });
     test("", () => {
-      const errors = detectTraitFormatErrors(format, mockErrorLabels);
-      expect(errors).toEqual({
+      const input: FormatInput = {
+        format: format.format,
+        dataSource: format.dataSource,
+        label: "testLabel",
+      };
+      const errors = detectTraitFormatErrors(input, mockErrorLabels);
+      expect(errors).toMatchObject({
         semanticErrors: [],
         syntaxErrors: [],
       } satisfies typeof errors);
