@@ -1,6 +1,6 @@
 import { describe, test, expect } from "vitest";
 import { detectFormatErrors } from "./detectErrors";
-import type { FormatWithSource } from "./formatTypes";
+import type { FormatWithSource } from "./types";
 import type { FormatRule } from "./rule";
 import type { SourceIdentifier } from "./sourceIdentifier";
 import type {
