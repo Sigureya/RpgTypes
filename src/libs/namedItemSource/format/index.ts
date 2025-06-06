@@ -1,3 +1,5 @@
-export * from "./core";
+export type * from "./core";
 export { detectFormatErrors } from "./core/detectErrors";
+export { compileFormatRule } from "./core/rule";
+export { joinItemsSoruce } from "./joinItemsSource";
 export * from "./applyFormat";
