@@ -17,7 +17,7 @@ export const detectFormatErrors = <T extends object>(
     formatMaxLength: 200,
   }
 ): FormatErrorGroup => {
-  if (format.format.length > limits.formatMaxLength) {
+  if (format.format.length >= limits.formatMaxLength) {
     return {
       syntaxErrors: [
         {
