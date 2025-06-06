@@ -17,7 +17,7 @@ import {
 } from "./core";
 import type { FormatLookupKeys } from "./core/accessor";
 import { detectFormatErrors } from "./core/detectErrors";
-import { joinItemsSource } from "./joinItemsSource";
+import { mergeItemsSource } from "./mergeItemsSource";
 
 export const compileFormatBundle = <
   T extends object,
@@ -30,7 +30,7 @@ export const compileFormatBundle = <
   errorTexts: FormatErrorLabels
 ): CompiledFormatBundle<T, Key, Source> => {
   return {
-    soruceMap: joinItemsSource(formatList, namedItemSources),
+    soruceMap: mergeItemsSource(formatList, namedItemSources),
     errors: formatList.map((fmt) => detectFormatErrors(fmt, rule, errorTexts)),
     compiledRule: compileFormatRule(rule),
   };
