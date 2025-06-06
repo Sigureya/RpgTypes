@@ -41,26 +41,26 @@ export const formatWithCompiledBundle = <
   Key,
   Source extends SourceKeyConcept
 >(
-  bundle: CompiledFormatBundle<T, Key, Source>,
   data: T,
+  bundle: CompiledFormatBundle<T, Key, Source>,
   lookup: FormatLookupKeys<T, Key>
 ): FormatResult => {
   const key: Key = lookup.extractMapKey(data);
   const entry = bundle.soruceMap.get(key);
   return entry
-    ? formatTextForMatchedEntry(entry, bundle.compiledRule, data, (d) =>
+    ? formatTextForMatchedEntry(data, bundle.compiledRule, entry, (d) =>
         lookup.extractDataId(d)
       )
-    : formatTextForFallback(key, bundle.compiledRule, data, lookup);
+    : formatTextForFallback(data, bundle.compiledRule, key, lookup);
 };
 
 const formatTextForMatchedEntry = <
   T extends object,
   Source extends SourceKeyConcept
 >(
-  format: FormatCompiled,
-  rule: FormatRuleCompiled<T, Source>,
   data: T,
+  rule: FormatRuleCompiled<T, Source>,
+  format: FormatCompiled,
   getDataId: (data: T) => number
 ): FormatResult => {
   return {
@@ -80,9 +80,9 @@ const formatTextForFallback = <
   Key,
   Source extends SourceKeyConcept
 >(
-  key: Key,
-  rule: FormatRuleCompiled<T, Source>,
   data: T,
+  rule: FormatRuleCompiled<T, Source>,
+  key: Key,
   lookup: FormatLookupKeys<T, Key>
 ): FormatResult => {
   return {
@@ -101,10 +101,10 @@ export const applyFormatRule = <Schema, Data extends Schema>(
   getDataId: (data: Data) => number
 ): string => {
   const text: string = applyPlaceholdersToText(format, data, rule);
-  return list ? foramtWithItemName(text, data, rule, list, getDataId) : text;
+  return list ? formatWithItemName(text, data, rule, list, getDataId) : text;
 };
 
-const foramtWithItemName = <Schema, Data extends Schema>(
+const formatWithItemName = <Schema, Data extends Schema>(
   text: string,
   data: Data,
   rule: FormatRuleCompiled<Schema>,
