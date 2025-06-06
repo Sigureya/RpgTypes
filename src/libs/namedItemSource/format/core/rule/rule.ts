@@ -46,7 +46,7 @@ const generateFallbackFormat = <T>(rule: FormatRule<T>): string => {
     .join(", ");
 };
 
-export const execFormatRule = <Schema, Data extends Schema>(
+export const applyPlaceholdersToText = <Schema, Data extends Schema>(
   baseText: string,
   data: Data,
   rule: FormatRuleCompiled<Schema>
