@@ -4,6 +4,7 @@ import type {
   FormatErrorLabels,
   FormatWithSource,
   FormatErrorGroup,
+  FormatLimits,
 } from "./format";
 import type { FormatRule } from "./rule";
 import type { SourceIdentifier } from "./sourceIdentifier";
@@ -38,6 +39,12 @@ const noError = {
   semanticErrors: [],
   syntaxErrors: [],
 } as const satisfies FormatErrorGroup;
+
+const mockDataSource = {
+  author: "testAuthor",
+  module: "testModule",
+  kind: "testKind",
+} as const satisfies SourceIdentifier;
 
 interface TestCase {
   caseName: string;
@@ -104,80 +111,134 @@ describe("detectFormatErrors", () => {
       },
     },
   ]);
+  describe("name", () => {
+    testDetectFormatErrors("normal cases", [
+      {
+        caseName: "name placeholder with dataSource",
+        format: { format: "{name}", dataSource: mockDataSource },
+        expected: noError,
+      },
+      {
+        caseName: "name and another valid placeholder with dataSource",
+        format: { format: "{name} and {value}", dataSource: mockDataSource },
+        expected: noError,
+      },
+      {
+        caseName: "no name placeholder and no dataSource",
+        format: { format: "{value}", dataSource: undefined },
+        expected: noError,
+      },
+    ]);
+    testDetectFormatErrors("error cases", [
+      {
+        caseName: "no name placeholder but dataSource present",
+        format: { format: "{value}", dataSource: mockDataSource },
+        expected: {
+          semanticErrors: [
+            {
+              message: mockMessages.missingName,
+              reason: "name",
+            },
+          ],
+          syntaxErrors: [],
+        },
+      },
+      {
+        caseName: "name placeholder present but no dataSource",
+        format: {
+          format: "power {name}",
+          dataSource: undefined,
+        },
+        expected: {
+          semanticErrors: [
+            {
+              message: mockMessages.missingSourceId,
+              reason: "name",
+            },
+          ],
+          syntaxErrors: [],
+        },
+      },
+      {
+        caseName: "missing name placeholder and other errors present",
+        format: {
+          format: "power {invalid1} and {invalid2} {value}",
+          dataSource: mockDataSource,
+        },
+        expected: {
+          semanticErrors: [
+            {
+              message: mockMessages.missingName,
+              reason: "name",
+            },
+          ],
+          syntaxErrors: [
+            { message: mockMessages.extraPlaceHolder, reason: "invalid1" },
+            { message: mockMessages.extraPlaceHolder, reason: "invalid2" },
+          ],
+        },
+      },
+    ]);
+  });
 });
+interface TestCase_LongFormat {
+  caseName: string;
+  format: FormatWithSource;
+  limit: FormatLimits;
+}
 
-describe("detectFormatErrors - name", () => {
-  const mockDataSource = {
-    author: "testAuthor",
-    module: "testModule",
-    kind: "testKind",
-  } as const satisfies SourceIdentifier;
+const defaultLimit: FormatLimits = {
+  formatMaxLength: 200,
+  placeHolderMaxLength: 50,
+};
+const testDetectLongFormat = (
+  caseName: string,
+  cases: TestCase_LongFormat[]
+) => {
+  describe(caseName, () => {
+    cases.forEach(({ format, limit, caseName }) => {
+      describe(caseName, () => {
+        const result = detectFormatErrors(
+          format,
+          mockRule,
+          mockMessages,
+          limit
+        );
+        test("syntaxErrors", () => {
+          expect(result.syntaxErrors).toMatchObject([
+            { message: mockMessages.formatVeryLong },
+          ]);
+        });
+        test("semanticErrors", () => {
+          expect(result.semanticErrors).toEqual(noError.semanticErrors);
+        });
+      });
+    });
+  });
+};
 
-  testDetectFormatErrors("normal cases", [
+describe("detectFormatErrors - long format", () => {
+  testDetectLongFormat("error cases", [
     {
-      caseName: "name placeholder with dataSource",
-      format: { format: "{name}", dataSource: mockDataSource },
-      expected: noError,
+      caseName: "format with length exceeding limit",
+      format: { format: "a".repeat(260) },
+      limit: defaultLimit,
     },
     {
-      caseName: "name and another valid placeholder with dataSource",
-      format: { format: "{name} and {value}", dataSource: mockDataSource },
-      expected: noError,
-    },
-    {
-      caseName: "no name placeholder and no dataSource",
-      format: { format: "{value}", dataSource: undefined },
-      expected: noError,
-    },
-  ]);
-  testDetectFormatErrors("error cases", [
-    {
-      caseName: "no name placeholder but dataSource present",
-      format: { format: "{value}", dataSource: mockDataSource },
-      expected: {
-        semanticErrors: [
-          {
-            message: mockMessages.missingName,
-            reason: "name",
-          },
-        ],
-        syntaxErrors: [],
+      caseName: "format with length within limit",
+      format: { format: "a".repeat(100) },
+      limit: {
+        formatMaxLength: 100,
+        placeHolderMaxLength: 50,
       },
     },
     {
-      caseName: "name placeholder present but no dataSource",
+      caseName: "format with invalid placeholders and exceeding limit",
       format: {
-        format: "power {name}",
-        dataSource: undefined,
-      },
-      expected: {
-        semanticErrors: [
-          {
-            message: mockMessages.missingSourceId,
-            reason: "name",
-          },
-        ],
-        syntaxErrors: [],
-      },
-    },
-    {
-      caseName: "missing name placeholder and other errors present",
-      format: {
-        format: "power {invalid1} and {invalid2} {value}",
+        format: `power {invalid1} and {invalid2} {value}${"a".repeat(260)}`,
         dataSource: mockDataSource,
       },
-      expected: {
-        semanticErrors: [
-          {
-            message: mockMessages.missingName,
-            reason: "name",
-          },
-        ],
-        syntaxErrors: [
-          { message: mockMessages.extraPlaceHolder, reason: "invalid1" },
-          { message: mockMessages.extraPlaceHolder, reason: "invalid2" },
-        ],
-      },
+      limit: defaultLimit,
     },
   ]);
 });
