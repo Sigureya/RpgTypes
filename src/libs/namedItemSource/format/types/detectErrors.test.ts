@@ -59,39 +59,39 @@ const testDetectFormatErrors = (caseName: string, cases: TestCase[]) => {
 describe("detectFormatErrors", () => {
   testDetectFormatErrors("normal cases", [
     {
-      caseName: "文字列だけ・プレースホルダ無し",
+      caseName: "no placeholders in string",
       format: { format: "test data" },
       expected: noError,
     },
     {
-      caseName: "文字列とプレースホルダ",
+      caseName: "string with valid placeholder",
       format: { format: "power {value}" },
       expected: noError,
     },
     {
-      caseName: "重複プレースホルダ",
+      caseName: "duplicate valid placeholders",
       format: { format: "{value}{value}" },
       expected: noError,
     },
     {
-      caseName: "空のプレースホルダ",
+      caseName: "empty placeholder",
       format: { format: "{}" },
       expected: noError,
     },
     {
-      caseName: "複数の空のプレースホルダ",
+      caseName: "multiple empty placeholders",
       format: { format: "{}{}" },
       expected: noError,
     },
     {
-      caseName: "スペースを含むプレースホルダ",
+      caseName: "placeholder with spaces",
       format: { format: "{ ignore } {ig nore}" },
       expected: noError,
     },
   ]);
   testDetectFormatErrors("error cases", [
     {
-      caseName: "無効なプレースホルダ",
+      caseName: "invalid placeholders",
       format: {
         format: "power {invalid1} and {invalid2} {value}",
       },
@@ -105,6 +105,7 @@ describe("detectFormatErrors", () => {
     },
   ]);
 });
+
 describe("detectFormatErrors - name", () => {
   const mockDataSource = {
     author: "testAuthor",
@@ -114,24 +115,24 @@ describe("detectFormatErrors - name", () => {
 
   testDetectFormatErrors("normal cases", [
     {
-      caseName: "名前指定あり・データソースあり",
+      caseName: "name placeholder with dataSource",
       format: { format: "{name}", dataSource: mockDataSource },
       expected: noError,
     },
     {
-      caseName: "名前指定あり・データソースあり・別のプレースホルダあり",
+      caseName: "name and another valid placeholder with dataSource",
       format: { format: "{name} and {value}", dataSource: mockDataSource },
       expected: noError,
     },
     {
-      caseName: "名前指定なし・データソースなし",
+      caseName: "no name placeholder and no dataSource",
       format: { format: "{value}", dataSource: undefined },
       expected: noError,
     },
   ]);
   testDetectFormatErrors("error cases", [
     {
-      caseName: "プレースホルダ無し・データソースあり",
+      caseName: "no name placeholder but dataSource present",
       format: { format: "{value}", dataSource: mockDataSource },
       expected: {
         semanticErrors: [
@@ -144,7 +145,7 @@ describe("detectFormatErrors - name", () => {
       },
     },
     {
-      caseName: "プレースホルダあり・データソース無し",
+      caseName: "name placeholder present but no dataSource",
       format: {
         format: "power {name}",
         dataSource: undefined,
@@ -160,7 +161,7 @@ describe("detectFormatErrors - name", () => {
       },
     },
     {
-      caseName: "nameのプレースホルダ無し・他のエラーが同時に混入",
+      caseName: "missing name placeholder and other errors present",
       format: {
         format: "power {invalid1} and {invalid2} {value}",
         dataSource: mockDataSource,
