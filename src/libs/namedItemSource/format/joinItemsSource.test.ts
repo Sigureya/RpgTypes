@@ -37,7 +37,7 @@ describe("joinItemsSoruce", () => {
     test("returns entry with empty data array", () => {
       expect(map.size).toBe(1);
       expect(map.get(6)).toEqual({
-        format: "format A",
+        patternCompiled: "format A",
         label: "Label 6",
         data: undefined,
       } satisfies FinalFormatEntry);
@@ -60,7 +60,7 @@ describe("joinItemsSoruce", () => {
       expect(map.size).toBe(1);
 
       expect(map.get(7)).toEqual({
-        format: "fmt",
+        patternCompiled: "fmt",
         label: "label 7",
         data: mockWeapons.items,
       } satisfies FinalFormatEntry);

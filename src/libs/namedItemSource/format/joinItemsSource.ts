@@ -32,7 +32,7 @@ const buildFinalFormatEntry = <T>(
 ): FinalFormatEntry => {
   const source = resolveDataSource(label.dataSource, sourceMap);
   return {
-    format: label.format,
+    patternCompiled: label.format,
     label: label.label,
     data: source ? source.items : undefined,
   };

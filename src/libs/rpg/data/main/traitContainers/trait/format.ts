@@ -34,7 +34,7 @@ export const formatTraitText = (
     trait,
     items,
     rule,
-    descriptor.format,
+    descriptor.pattern,
     (t) => t.dataId
   );
 };

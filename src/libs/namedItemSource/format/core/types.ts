@@ -15,18 +15,18 @@ export interface FormatLabelResolved<Key = string> {
 }
 
 export interface FinalFormatEntry {
-  format: string;
+  patternCompiled: string;
   label: string;
   data?: ReadonlyArray<Data_NamedItem>;
 }
 
 export interface FormatWithSource {
-  format: string;
+  pattern: string;
   dataSource?: SourceIdentifier;
 }
 
 export interface FormatInput extends FormatWithSource {
-  format: string;
+  pattern: string;
   label: string;
   dataSource?: SourceIdentifier;
 }
