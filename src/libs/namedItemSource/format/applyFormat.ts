@@ -1,28 +1,107 @@
+import type { CompiledFormatBundle } from "./bundle";
 import type {
   Data_NamedItem,
   FormatCompiled,
+  FormatErrorLabels,
+  FormatLabelResolved,
   FormatResult,
+  FormatRule,
   FormatRuleCompiled,
+  NamedItemSource,
+  SourceKeyConcept,
 } from "./core";
-import { execFormatRule, makeItemName } from "./core";
+import {
+  compileFormatRule,
+  applyPlaceholdersToText,
+  makeItemName,
+} from "./core";
 import type { FormatLookupKeys } from "./core/accessor";
+import { detectFormatErrors } from "./core/detectErrors";
+import { joinItemsSource } from "./joinItemsSource";
 
-const xxxxx = <Key, Schema, Data extends Schema>(
-  data: Data,
-  rule: FormatRuleCompiled<Schema>,
-  sourceMap: Map<Key, FormatCompiled>,
-  fallback: FormatCompiled,
-  lookup: FormatLookupKeys<Data, Key>
+export const compileFormatBundle = <
+  T extends object,
+  Key,
+  Source extends SourceKeyConcept
+>(
+  rule: FormatRule<T, Source>,
+  formatList: ReadonlyArray<FormatLabelResolved<Key>>,
+  namedItemSources: ReadonlyArray<NamedItemSource>,
+  errorTexts: FormatErrorLabels
+): CompiledFormatBundle<T, Key, Source> => {
+  return {
+    soruceMap: joinItemsSource(formatList, namedItemSources),
+    errors: formatList.map((fmt) => detectFormatErrors(fmt, rule, errorTexts)),
+    compiledRule: compileFormatRule(rule),
+  };
+};
+
+export const formatWithCompiledBundle = <
+  T extends object,
+  Key,
+  Source extends SourceKeyConcept
+>(
+  bundle: CompiledFormatBundle<T, Key, Source>,
+  data: T,
+  lookup: FormatLookupKeys<T, Key>
 ): FormatResult => {
   const key: Key = lookup.extractMapKey(data);
-  const entry: FormatCompiled = sourceMap.get(key) ?? fallback;
+  const entry = bundle.soruceMap.get(key);
+  return entry
+    ? resolveTextFromMatchedEntry(entry, bundle.compiledRule, data, (d) =>
+        lookup.extractDataId(d)
+      )
+    : resolveTextFromUnknownKey(key, bundle.compiledRule, data, lookup);
+};
 
+const resolveTextFromMatchedEntry = <
+  T extends object,
+  Source extends SourceKeyConcept
+>(
+  format: FormatCompiled,
+  rule: FormatRuleCompiled<T, Source>,
+  data: T,
+  getDataId: (data: T) => number
+): FormatResult => {
   return {
-    label: entry.label,
-    text: applyFormatRule(data, entry.data, rule, entry.patternCompiled, (d) =>
+    label: format.label,
+    text: applyFormatRule(
+      data,
+      format.data,
+      rule,
+      format.patternCompiled,
+      getDataId
+    ),
+  };
+};
+
+const resolveTextFromUnknownKey = <
+  T extends object,
+  Key,
+  Source extends SourceKeyConcept
+>(
+  key: Key,
+  rule: FormatRuleCompiled<T, Source>,
+  data: T,
+  lookup: FormatLookupKeys<T, Key>
+): FormatResult => {
+  return {
+    label: lookup.unknownKey(key),
+    text: applyFormatRule(data, undefined, rule, rule.fallbackFormat, (d) =>
       lookup.extractDataId(d)
     ),
   };
+};
+
+export const applyFormatRule = <Schema, Data extends Schema>(
+  data: Data,
+  list: ReadonlyArray<Data_NamedItem> | undefined,
+  rule: FormatRuleCompiled<Schema>,
+  format: string,
+  getDataId: (data: Data) => number
+): string => {
+  const text: string = applyPlaceholdersToText(format, data, rule);
+  return list ? formatItemName(text, data, rule, list, getDataId) : text;
 };
 
 const formatItemName = <Schema, Data extends Schema>(
@@ -36,15 +115,4 @@ const formatItemName = <Schema, Data extends Schema>(
   return rule.itemMappers.reduce((currentText, itemMapper) => {
     return currentText.replaceAll(itemMapper.placeHolder, itemName);
   }, text);
-};
-
-export const applyFormatRule = <Schema, Data extends Schema>(
-  data: Data,
-  list: ReadonlyArray<Data_NamedItem> | undefined,
-  rule: FormatRuleCompiled<Schema>,
-  format: string,
-  getDataId: (data: Data) => number
-): string => {
-  const text: string = execFormatRule(format, data, rule);
-  return list ? formatItemName(text, data, rule, list, getDataId) : text;
 };
