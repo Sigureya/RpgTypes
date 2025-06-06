@@ -17,6 +17,27 @@ export const isValidFormatErrorGroup = (
   );
 };
 
+export const collectFormatErrors = <
+  T extends object,
+  Src extends SourceKeyConcept
+>(
+  formatList: ReadonlyArray<FormatInput>,
+  formatRule: FormatRule<T, Src>,
+  errorTexts: FormatErrorLabels,
+  limits: FormatLimits = {
+    placeHolderMaxLength: 50,
+    formatMaxLength: 200,
+  }
+): FormatErrorGroup[] => {
+  return formatList.reduce<FormatErrorGroup[]>((acc, format) => {
+    const errors = detectFormatErrors(format, formatRule, errorTexts, limits);
+    if (!isValidFormatErrorGroup(errors)) {
+      acc.push(errors);
+    }
+    return acc;
+  }, []);
+};
+
 export const detectFormatErrors = <
   T extends object,
   Src extends SourceKeyConcept
@@ -31,6 +52,7 @@ export const detectFormatErrors = <
 ): FormatErrorGroup => {
   if (format.pattern.length >= limits.formatMaxLength) {
     return {
+      formatLabel: format.label,
       syntaxErrors: [
         {
           message: errorTexts.formatVeryLong,
@@ -52,6 +74,7 @@ export const detectFormatErrors = <
     limits.placeHolderMaxLength
   );
   return {
+    formatLabel: format.label,
     syntaxErrors: invalidPlaceholdersResult,
     semanticErrors: dataSourceErrorResult,
   };
