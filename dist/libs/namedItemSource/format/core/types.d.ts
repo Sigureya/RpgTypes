@@ -1,23 +1,29 @@
 import { Data_NamedItem } from './namedItem';
+import { FormatCompiledSimple } from './rule';
 import { SourceIdentifier } from './sourceIdentifier';
 export interface NamedItemSource {
     items: Data_NamedItem[];
     source: SourceIdentifier;
     label: string;
 }
-export interface FormatLabelResolved<Key = string> {
-    format: string;
+export interface FormatLabelResolved<Key = string> extends FormatInput {
+    pattern: string;
     targetKey: Key;
     label: string;
     dataSource?: SourceIdentifier;
 }
-export interface FinalFormatEntry {
-    format: string;
+export interface FormatCompiled extends FormatCompiledSimple {
+    patternCompiled: string;
     label: string;
     data?: ReadonlyArray<Data_NamedItem>;
 }
 export interface FormatWithSource {
-    format: string;
+    pattern: string;
+    dataSource?: SourceIdentifier;
+}
+export interface FormatInput extends FormatWithSource {
+    pattern: string;
+    label: string;
     dataSource?: SourceIdentifier;
 }
 export interface FormatResult {
