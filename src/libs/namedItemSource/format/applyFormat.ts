@@ -1,6 +1,6 @@
 import type {
   Data_NamedItem,
-  FinalFormatEntry,
+  FormatCompiled,
   FormatResult,
   FormatRuleCompiled,
 } from "./core";
@@ -10,12 +10,12 @@ import type { FormatLookupKeys } from "./core/accessor";
 const xxxxx = <Key, Schema, Data extends Schema>(
   data: Data,
   rule: FormatRuleCompiled<Schema>,
-  sourceMap: Map<Key, FinalFormatEntry>,
-  fallback: FinalFormatEntry,
+  sourceMap: Map<Key, FormatCompiled>,
+  fallback: FormatCompiled,
   lookup: FormatLookupKeys<Data, Key>
 ): FormatResult => {
   const key: Key = lookup.extractMapKey(data);
-  const entry: FinalFormatEntry = sourceMap.get(key) ?? fallback;
+  const entry: FormatCompiled = sourceMap.get(key) ?? fallback;
 
   return {
     label: entry.label,

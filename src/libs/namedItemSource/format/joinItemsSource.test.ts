@@ -1,6 +1,6 @@
 import { describe, test, expect } from "vitest";
 import { joinItemsSoruce } from "./joinItemsSource";
-import type { FinalFormatEntry, NamedItemSource } from "./core";
+import type { FormatCompiled, NamedItemSource } from "./core";
 
 const mockWeapons = {
   label: "weapons",
@@ -28,7 +28,7 @@ describe("joinItemsSoruce", () => {
       [
         {
           targetKey: 6,
-          format: "format A",
+          pattern: "format A",
           label: "Label 6",
         },
       ],
@@ -40,7 +40,7 @@ describe("joinItemsSoruce", () => {
         patternCompiled: "format A",
         label: "Label 6",
         data: undefined,
-      } satisfies FinalFormatEntry);
+      } satisfies FormatCompiled);
     });
   });
 
@@ -49,7 +49,7 @@ describe("joinItemsSoruce", () => {
       [
         {
           targetKey: 7,
-          format: "fmt",
+          pattern: "fmt",
           label: "label 7",
           dataSource: { ...mockWeapons.source },
         },
@@ -63,7 +63,7 @@ describe("joinItemsSoruce", () => {
         patternCompiled: "fmt",
         label: "label 7",
         data: mockWeapons.items,
-      } satisfies FinalFormatEntry);
+      } satisfies FormatCompiled);
     });
   });
 });
