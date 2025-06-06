@@ -8,6 +8,7 @@ import type {
   FormatRule,
   FormatRuleCompiled,
   NamedItemSource,
+  SourceIdentifier,
   SourceKeyConcept,
 } from "./core";
 import {
@@ -19,16 +20,12 @@ import type { FormatLookupKeys } from "./core/accessor";
 import { detectFormatErrors } from "./core/detectErrors";
 import { mergeItemsSource } from "./mergeItemsSource";
 
-export const compileFormatBundle = <
-  T extends object,
-  Key,
-  Source extends SourceKeyConcept
->(
-  rule: FormatRule<T, Source>,
+export const compileFormatBundle = <T extends object, Key>(
+  rule: FormatRule<T, SourceIdentifier>,
   formatList: ReadonlyArray<FormatLabelResolved<Key>>,
   namedItemSources: ReadonlyArray<NamedItemSource>,
   errorTexts: FormatErrorLabels
-): CompiledFormatBundle<T, Key, Source> => {
+): CompiledFormatBundle<T, Key, SourceIdentifier> => {
   return {
     soruceMap: mergeItemsSource(formatList, namedItemSources),
     errors: formatList.map((fmt) => detectFormatErrors(fmt, rule, errorTexts)),
