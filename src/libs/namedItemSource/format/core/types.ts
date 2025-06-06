@@ -15,7 +15,7 @@ export interface FormatLabelResolved<Key = string> {
 }
 
 export interface FinalFormatEntry {
-  format: string;
+  patternCompiled: string;
   label: string;
   data?: ReadonlyArray<Data_NamedItem>;
 }

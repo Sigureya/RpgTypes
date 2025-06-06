@@ -19,7 +19,7 @@ const xxxxx = <Key, Schema, Data extends Schema>(
 
   return {
     label: entry.label,
-    text: applyFormatRule(data, entry.data, rule, entry.format, (d) =>
+    text: applyFormatRule(data, entry.data, rule, entry.patternCompiled, (d) =>
       lookup.extractDataId(d)
     ),
   };
