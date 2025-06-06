@@ -1,10 +1,3 @@
-import type { SourceIdentifier } from "./sourceIdentifier";
-
-export interface FormatWithSource {
-  format: string;
-  dataSource?: SourceIdentifier;
-}
-
 export interface FormatErrorLabels {
   missingName: string;
   missingSourceId: string;
@@ -26,9 +19,4 @@ export interface FormatErrorItem {
 export interface FormatErrorGroup {
   syntaxErrors: FormatErrorItem[];
   semanticErrors: FormatErrorItem[];
-}
-
-export interface FormatResult {
-  label: string;
-  text: string;
 }

@@ -1,10 +1,10 @@
 import type {
-  FormatWithSource,
   FormatErrorLabels,
-  FormatErrorItem,
   FormatLimits,
   FormatErrorGroup,
-} from "./format";
+  FormatErrorItem,
+} from "./formatErrorTypes";
+import type { FormatWithSource } from "./formatTypes";
 import type { FormatRule, SourceKeyConcept, FormatItemMapper } from "./rule";
 import { getItemMappersFromRule, getPlaceHolderKeys } from "./rule";
 
