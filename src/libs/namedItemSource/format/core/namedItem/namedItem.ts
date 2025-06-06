@@ -14,7 +14,7 @@ export const findItemById = <T extends Data_NamedItem>(
   return list.find((i) => i.id === dataId);
 };
 
-export const makeItemName = (
+export const getItemName = (
   list: ReadonlyArray<Data_NamedItem>,
   dataId: number
 ): string => {
