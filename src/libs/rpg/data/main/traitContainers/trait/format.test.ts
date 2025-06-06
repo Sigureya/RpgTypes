@@ -72,10 +72,8 @@ const testFormatTraitText = ({
         label: "testLabel",
       };
       const errors = detectTraitFormatErrors(input, mockErrorLabels);
-      expect(errors).toMatchObject({
-        semanticErrors: [],
-        syntaxErrors: [],
-      } satisfies typeof errors);
+      expect(errors.semanticErrors).toEqual([]);
+      expect(errors.syntaxErrors).toEqual([]);
     });
   });
 };

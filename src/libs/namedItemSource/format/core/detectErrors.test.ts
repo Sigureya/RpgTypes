@@ -38,7 +38,7 @@ const mockMessages = {
 const noError = {
   semanticErrors: [],
   syntaxErrors: [],
-} as const satisfies FormatErrorGroup;
+} as const satisfies Omit<FormatErrorGroup, "formatLabel">;
 
 const mockLableName = "testLabel" as const;
 
@@ -50,7 +50,7 @@ const mockDataSource = {
 
 interface TestCase {
   caseName: string;
-  expected: FormatErrorGroup;
+  expected: Omit<FormatErrorGroup, "formatLabel">;
   format: FormatWithSource;
 }
 
@@ -64,7 +64,7 @@ const testDetectFormatErrors = (caseName: string, cases: TestCase[]) => {
           label: mockLableName,
         };
         const result = detectFormatErrors(fmt, mockRule, mockMessages);
-        expect(result).toMatchObject(expected satisfies typeof result);
+        expect(result satisfies typeof expected).toMatchObject(expected);
       });
     });
   });
