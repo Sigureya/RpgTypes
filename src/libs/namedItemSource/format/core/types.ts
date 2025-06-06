@@ -25,6 +25,12 @@ export interface FormatWithSource {
   dataSource?: SourceIdentifier;
 }
 
+export interface FormatInput extends FormatWithSource {
+  format: string;
+  label: string;
+  dataSource?: SourceIdentifier;
+}
+
 export interface FormatResult {
   label: string;
   text: string;

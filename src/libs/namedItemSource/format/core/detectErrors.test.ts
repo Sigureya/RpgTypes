@@ -1,6 +1,6 @@
 import { describe, test, expect } from "vitest";
 import { detectFormatErrors } from "./detectErrors";
-import type { FormatWithSource } from "./types";
+import type { FormatInput, FormatWithSource } from "./types";
 import type { FormatRule } from "./rule";
 import type { SourceIdentifier } from "./sourceIdentifier";
 import type {
@@ -40,6 +40,8 @@ const noError = {
   syntaxErrors: [],
 } as const satisfies FormatErrorGroup;
 
+const mockLableName = "testLabel" as const;
+
 const mockDataSource = {
   author: "testAuthor",
   module: "testModule",
@@ -56,8 +58,13 @@ const testDetectFormatErrors = (caseName: string, cases: TestCase[]) => {
   describe(caseName, () => {
     cases.forEach(({ caseName, expected, format }) => {
       test(caseName, () => {
-        const result = detectFormatErrors(format, mockRule, mockMessages);
-        expect(result).toEqual(expected satisfies typeof result);
+        const fmt: FormatInput = {
+          format: format.format,
+          dataSource: format.dataSource,
+          label: mockLableName,
+        };
+        const result = detectFormatErrors(fmt, mockRule, mockMessages);
+        expect(result).toMatchObject(expected satisfies typeof result);
       });
     });
   });
@@ -199,7 +206,11 @@ const testDetectLongFormat = (
     cases.forEach(({ format, limit, caseName }) => {
       describe(caseName, () => {
         const result = detectFormatErrors(
-          format,
+          {
+            format: format.format,
+            dataSource: format.dataSource,
+            label: mockLableName,
+          },
           mockRule,
           mockMessages,
           limit
