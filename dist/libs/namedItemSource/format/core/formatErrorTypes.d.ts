@@ -14,6 +14,7 @@ export interface FormatErrorItem {
     reason: string;
 }
 export interface FormatErrorGroup {
+    formatLabel: string;
     syntaxErrors: FormatErrorItem[];
     semanticErrors: FormatErrorItem[];
 }
