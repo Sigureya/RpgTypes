@@ -18,10 +18,13 @@ export const readNote = (note: string): NoteReadResult[] => {
  * note文字列を解析し、キーと値のペアを取得します。
  * タグが閉じられていない場合、その要素は無視されます。
  */
-export const readNoteEx = <Result>(
+const readNoteEx = <Result>(
   note: string,
   fn: (key: string, value: string) => Result
 ): Result[] => {
+  if (note.length >= 1000) {
+    throw new Error("Note text is too long. Please shorten it.");
+  }
   const regex = makeRegex();
   return Array.from(note.matchAll(regex), (match) => fn(match[1], match[2]));
 };
@@ -36,7 +39,7 @@ export const replaceNote = (
   note: string,
   transformFunction: (key: string, value: string) => string
 ): string => {
-  if (note.length >= 1000) {
+  if (note.length >= 3000) {
     throw new Error("Note text is too long. Please shorten it.");
   }
 
