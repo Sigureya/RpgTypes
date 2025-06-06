@@ -1,4 +1,5 @@
 import type { Data_NamedItem } from "./namedItem";
+import type { FormatCompiledSimple } from "./rule";
 import type { SourceIdentifier } from "./sourceIdentifier";
 
 export interface NamedItemSource {
@@ -14,7 +15,7 @@ export interface FormatLabelResolved<Key = string> extends FormatInput {
   dataSource?: SourceIdentifier;
 }
 
-export interface FormatCompiled {
+export interface FormatCompiled extends FormatCompiledSimple {
   patternCompiled: string;
   label: string;
   data?: ReadonlyArray<Data_NamedItem>;
