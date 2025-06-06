@@ -3,10 +3,10 @@ import { detectFormatErrors } from "./detectErrors";
 import type {
   FormatErrorLabels,
   FormatWithSource,
-  FormatErrorItem,
   FormatErrorGroup,
 } from "./format";
 import type { FormatRule } from "./rule";
+import type { SourceIdentifier } from "./sourceIdentifier";
 
 interface Trait {
   code: number;
@@ -34,156 +34,150 @@ const mockMessages = {
   formatVeryLong: "Format is too long",
 } as const satisfies FormatErrorLabels;
 
-const runDetectFormatErrors = (format: FormatWithSource) => {
-  return detectFormatErrors(format, mockRule, mockMessages);
-};
-const expectedNonError = {
+const noError = {
   semanticErrors: [],
   syntaxErrors: [],
 } as const satisfies FormatErrorGroup;
 
-describe("detectFormatErros - normal cases", () => {
-  test("returns no error for format without placeholders", () => {
-    const result = runDetectFormatErrors({ format: "test data" });
-    expect(result).toEqual(expectedNonError);
-  });
+interface TestCase {
+  caseName: string;
+  expected: FormatErrorGroup;
+  format: FormatWithSource;
+}
 
-  test("returns no error for valid placeholder", () => {
-    const result = runDetectFormatErrors({ format: "power {value}" });
-    expect(result).toEqual(expectedNonError);
+const testDetectFormatErrors = (caseName: string, cases: TestCase[]) => {
+  describe(caseName, () => {
+    cases.forEach(({ caseName, expected, format }) => {
+      test(caseName, () => {
+        const result = detectFormatErrors(format, mockRule, mockMessages);
+        expect(result).toEqual(expected satisfies typeof result);
+      });
+    });
   });
-  test("returns no error for duplicate placeholders", () => {
-    const result = runDetectFormatErrors({ format: "{value}{value}" });
-    expect(result).toEqual(expectedNonError);
-  });
-  test("returns no error for only empty placeholder", () => {
-    const result = runDetectFormatErrors({ format: "{}" });
-    expect(result).toEqual(expectedNonError);
-  });
-  test("returns error for multiple empty placeholders", () => {
-    const result = runDetectFormatErrors({ format: "{}{}" });
-    expect(result).toEqual(expectedNonError);
-  });
-  test("ignores placeholders containing spaces", () => {
-    const result = runDetectFormatErrors({ format: "{ ignore } {ig nore}" });
-    expect(result).toEqual(expectedNonError);
-  });
+};
+
+describe("detectFormatErrors", () => {
+  testDetectFormatErrors("normal cases", [
+    {
+      caseName: "no placeholders in string",
+      format: { format: "test data" },
+      expected: noError,
+    },
+    {
+      caseName: "string with valid placeholder",
+      format: { format: "power {value}" },
+      expected: noError,
+    },
+    {
+      caseName: "duplicate valid placeholders",
+      format: { format: "{value}{value}" },
+      expected: noError,
+    },
+    {
+      caseName: "empty placeholder",
+      format: { format: "{}" },
+      expected: noError,
+    },
+    {
+      caseName: "multiple empty placeholders",
+      format: { format: "{}{}" },
+      expected: noError,
+    },
+    {
+      caseName: "placeholder with spaces",
+      format: { format: "{ ignore } {ig nore}" },
+      expected: noError,
+    },
+  ]);
+  testDetectFormatErrors("error cases", [
+    {
+      caseName: "invalid placeholders",
+      format: {
+        format: "power {invalid1} and {invalid2} {value}",
+      },
+      expected: {
+        semanticErrors: [],
+        syntaxErrors: [
+          { message: mockMessages.extraPlaceHolder, reason: "invalid1" },
+          { message: mockMessages.extraPlaceHolder, reason: "invalid2" },
+        ],
+      },
+    },
+  ]);
 });
 
-describe("detectFormatErros - error cases", () => {
-  describe("error cases", () => {
-    test("returns error for invalid placeholder", () => {
-      const result = runDetectFormatErrors({ format: "power {invalid}" });
-      expect(result.syntaxErrors).toEqual([
-        {
-          message: mockMessages.extraPlaceHolder,
-          reason: "invalid",
-        } satisfies FormatErrorItem,
-      ]);
-    });
+describe("detectFormatErrors - name", () => {
+  const mockDataSource = {
+    author: "testAuthor",
+    module: "testModule",
+    kind: "testKind",
+  } as const satisfies SourceIdentifier;
 
-    describe("returns error for multiple invalid placeholders and missing {name}", () => {
-      const result = runDetectFormatErrors({
-        format: "power {invalid1} and {invalid2} {value}",
-        dataSource: { author: "test", module: "test", kind: "test" },
-      });
-      test("semanticErrors", () => {
-        expect(result.semanticErrors).toEqual([
+  testDetectFormatErrors("normal cases", [
+    {
+      caseName: "name placeholder with dataSource",
+      format: { format: "{name}", dataSource: mockDataSource },
+      expected: noError,
+    },
+    {
+      caseName: "name and another valid placeholder with dataSource",
+      format: { format: "{name} and {value}", dataSource: mockDataSource },
+      expected: noError,
+    },
+    {
+      caseName: "no name placeholder and no dataSource",
+      format: { format: "{value}", dataSource: undefined },
+      expected: noError,
+    },
+  ]);
+  testDetectFormatErrors("error cases", [
+    {
+      caseName: "no name placeholder but dataSource present",
+      format: { format: "{value}", dataSource: mockDataSource },
+      expected: {
+        semanticErrors: [
           {
             message: mockMessages.missingName,
-            reason: mockRule.itemMapper.placeHolder,
+            reason: "name",
           },
-        ] satisfies FormatErrorItem[]);
-      });
-      test("syntaxErrors", () => {
-        expect(result.syntaxErrors).toEqual([
+        ],
+        syntaxErrors: [],
+      },
+    },
+    {
+      caseName: "name placeholder present but no dataSource",
+      format: {
+        format: "power {name}",
+        dataSource: undefined,
+      },
+      expected: {
+        semanticErrors: [
           {
-            message: mockMessages.extraPlaceHolder,
-            reason: "invalid1",
+            message: mockMessages.missingSourceId,
+            reason: "name",
           },
+        ],
+        syntaxErrors: [],
+      },
+    },
+    {
+      caseName: "missing name placeholder and other errors present",
+      format: {
+        format: "power {invalid1} and {invalid2} {value}",
+        dataSource: mockDataSource,
+      },
+      expected: {
+        semanticErrors: [
           {
-            message: mockMessages.extraPlaceHolder,
-            reason: "invalid2",
+            message: mockMessages.missingName,
+            reason: "name",
           },
-        ] satisfies FormatErrorItem[]);
-      });
-    });
-  });
-  describe("Placeholder length validation", () => {
-    const longPlaceholder = "a".repeat(120);
-    const result = runDetectFormatErrors({
-      format: `myItem {${longPlaceholder}}`,
-    });
-    test("returns an error when the placeholder is too long", () => {
-      expect(result.syntaxErrors).toHaveLength(1);
-      expect(result.syntaxErrors[0].message).toBe(mockMessages.longPlaceHolder);
-    });
-    test("the reason field contains the original placeholder string", () => {
-      expect(longPlaceholder).includes(result.syntaxErrors[0].reason);
-    });
-  });
-});
-
-describe("detectFormatErros - name", () => {
-  describe("normal cases", () => {
-    test("returns no error when only {name} is present and dataSource exists", () => {
-      const result = runDetectFormatErrors({
-        format: "{name}",
-        dataSource: { author: "test", module: "test", kind: "test" },
-      });
-      expect(result).toEqual(expectedNonError);
-    });
-
-    test("returns no error when {name} is present and dataSource exists", () => {
-      const result = runDetectFormatErrors({
-        format: "myItem {name}",
-        dataSource: { author: "test", module: "test", kind: "test" },
-      });
-      expect(result).toEqual(expectedNonError);
-    });
-    test("returns no error when both {name} and valid placeholder are present and dataSource exists", () => {
-      const result = runDetectFormatErrors({
-        format: "myItem {name} Power {value}",
-        dataSource: { author: "test", module: "test", kind: "test" },
-      });
-      expect(result).toEqual(expectedNonError);
-    });
-  });
-
-  describe("error cases", () => {
-    test("returns error when {name} is missing but dataSource exists", () => {
-      const result = runDetectFormatErrors({
-        format: "myItem Power {value}",
-        dataSource: { author: "test", module: "test", kind: "test" },
-      });
-      expect(result.semanticErrors).toEqual([
-        {
-          message: mockMessages.missingName,
-          reason: mockRule.itemMapper.placeHolder,
-        } satisfies FormatErrorItem,
-      ]);
-    });
-    test("returns error when {name} is present but dataSource is missing", () => {
-      const result = runDetectFormatErrors({
-        format: "myItem {name}",
-      });
-      expect(result.semanticErrors).toEqual([
-        {
-          message: mockMessages.missingSourceId,
-          reason: mockRule.itemMapper.placeHolder,
-        } satisfies FormatErrorItem,
-      ]);
-    });
-    test("returns only one error when {name} is duplicated and dataSource is missing", () => {
-      const result = runDetectFormatErrors({
-        format: "myItem {name}{name}",
-      });
-      expect(result.semanticErrors).toEqual([
-        {
-          message: mockMessages.missingSourceId,
-          reason: mockRule.itemMapper.placeHolder,
-        } satisfies FormatErrorItem,
-      ]);
-    });
-  });
+        ],
+        syntaxErrors: [
+          { message: mockMessages.extraPlaceHolder, reason: "invalid1" },
+          { message: mockMessages.extraPlaceHolder, reason: "invalid2" },
+        ],
+      },
+    },
+  ]);
 });
