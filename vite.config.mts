@@ -23,7 +23,7 @@ export default defineConfig({
 
     minify: false,
     rollupOptions: {
-      plugins: [terser({ output: { comments: false } })],
+      plugins: [terser({ output: { comments: false, max_line_len: 180 } })],
       external: (id) =>
         id.endsWith(".test.ts") ||
         ["ajv", "ajv-formats", "jsonschema"].includes(id),
