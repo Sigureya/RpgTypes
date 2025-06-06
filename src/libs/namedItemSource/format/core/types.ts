@@ -21,12 +21,12 @@ export interface FinalFormatEntry {
 }
 
 export interface FormatWithSource {
-  format: string;
+  pattern: string;
   dataSource?: SourceIdentifier;
 }
 
 export interface FormatInput extends FormatWithSource {
-  format: string;
+  pattern: string;
   label: string;
   dataSource?: SourceIdentifier;
 }

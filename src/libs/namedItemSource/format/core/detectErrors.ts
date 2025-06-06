@@ -29,12 +29,12 @@ export const detectFormatErrors = <
     formatMaxLength: 200,
   }
 ): FormatErrorGroup => {
-  if (format.format.length >= limits.formatMaxLength) {
+  if (format.pattern.length >= limits.formatMaxLength) {
     return {
       syntaxErrors: [
         {
           message: errorTexts.formatVeryLong,
-          reason: format.format.slice(0, limits.formatMaxLength),
+          reason: format.pattern.slice(0, limits.formatMaxLength),
         },
       ],
       semanticErrors: [],
@@ -46,7 +46,7 @@ export const detectFormatErrors = <
     errorTexts
   );
   const invalidPlaceholdersResult = detectInvalidPlaceholders(
-    format.format,
+    format.pattern,
     formatRule,
     errorTexts,
     limits.placeHolderMaxLength
@@ -110,7 +110,7 @@ const checkItemMapperSourceError = <T, SourceKey extends SourceKeyConcept>(
   rule: FormatItemMapper<T, SourceKey>,
   errorTexts: FormatErrorLabels
 ): FormatErrorItem | undefined => {
-  const includedName: boolean = format.format.includes(rule.placeHolder);
+  const includedName: boolean = format.pattern.includes(rule.placeHolder);
   const hasSource: boolean = !!format.dataSource;
   if (!includedName && hasSource) {
     return {

@@ -67,7 +67,7 @@ const testFormatTraitText = ({
     });
     test("", () => {
       const input: FormatInput = {
-        format: format.format,
+        pattern: format.pattern,
         dataSource: format.dataSource,
         label: "testLabel",
       };
@@ -83,7 +83,7 @@ const testFormatTraitText = ({
 describe("", () => {
   testFormatTraitText({
     caseName: "format with name and value",
-    format: { format: "{name} {value}", dataSource: mockSourceId },
+    format: { pattern: "{name} {value}", dataSource: mockSourceId },
     trait: {
       code: 0,
       dataId: 1,
@@ -94,7 +94,7 @@ describe("", () => {
 
   testFormatTraitText({
     caseName: "format with name only",
-    format: { format: "{name}", dataSource: mockSourceId },
+    format: { pattern: "{name}", dataSource: mockSourceId },
     trait: {
       code: 0,
       dataId: 2,
@@ -105,7 +105,7 @@ describe("", () => {
 
   testFormatTraitText({
     caseName: "format with value only",
-    format: { format: "{value}" },
+    format: { pattern: "{value}" },
     trait: {
       code: 0,
       dataId: 3,
@@ -115,7 +115,7 @@ describe("", () => {
   });
   testFormatTraitText({
     caseName: "format with value and custom text",
-    format: { format: "{value} abc" },
+    format: { pattern: "{value} abc" },
     trait: {
       code: 0,
       dataId: 3,

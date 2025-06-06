@@ -59,7 +59,7 @@ const testDetectFormatErrors = (caseName: string, cases: TestCase[]) => {
     cases.forEach(({ caseName, expected, format }) => {
       test(caseName, () => {
         const fmt: FormatInput = {
-          format: format.format,
+          pattern: format.pattern,
           dataSource: format.dataSource,
           label: mockLableName,
         };
@@ -74,32 +74,32 @@ describe("detectFormatErrors", () => {
   testDetectFormatErrors("normal cases", [
     {
       caseName: "no placeholders in string",
-      format: { format: "test data" },
+      format: { pattern: "test data" },
       expected: noError,
     },
     {
       caseName: "string with valid placeholder",
-      format: { format: "power {value}" },
+      format: { pattern: "power {value}" },
       expected: noError,
     },
     {
       caseName: "duplicate valid placeholders",
-      format: { format: "{value}{value}" },
+      format: { pattern: "{value}{value}" },
       expected: noError,
     },
     {
       caseName: "empty placeholder",
-      format: { format: "{}" },
+      format: { pattern: "{}" },
       expected: noError,
     },
     {
       caseName: "multiple empty placeholders",
-      format: { format: "{}{}" },
+      format: { pattern: "{}{}" },
       expected: noError,
     },
     {
       caseName: "placeholder with spaces",
-      format: { format: "{ ignore } {ig nore}" },
+      format: { pattern: "{ ignore } {ig nore}" },
       expected: noError,
     },
   ]);
@@ -107,7 +107,7 @@ describe("detectFormatErrors", () => {
     {
       caseName: "invalid placeholders",
       format: {
-        format: "power {invalid1} and {invalid2} {value}",
+        pattern: "power {invalid1} and {invalid2} {value}",
       },
       expected: {
         semanticErrors: [],
@@ -122,24 +122,24 @@ describe("detectFormatErrors", () => {
     testDetectFormatErrors("normal cases", [
       {
         caseName: "name placeholder with dataSource",
-        format: { format: "{name}", dataSource: mockDataSource },
+        format: { pattern: "{name}", dataSource: mockDataSource },
         expected: noError,
       },
       {
         caseName: "name and another valid placeholder with dataSource",
-        format: { format: "{name} and {value}", dataSource: mockDataSource },
+        format: { pattern: "{name} and {value}", dataSource: mockDataSource },
         expected: noError,
       },
       {
         caseName: "no name placeholder and no dataSource",
-        format: { format: "{value}", dataSource: undefined },
+        format: { pattern: "{value}", dataSource: undefined },
         expected: noError,
       },
     ]);
     testDetectFormatErrors("error cases", [
       {
         caseName: "no name placeholder but dataSource present",
-        format: { format: "{value}", dataSource: mockDataSource },
+        format: { pattern: "{value}", dataSource: mockDataSource },
         expected: {
           semanticErrors: [
             {
@@ -153,7 +153,7 @@ describe("detectFormatErrors", () => {
       {
         caseName: "name placeholder present but no dataSource",
         format: {
-          format: "power {name}",
+          pattern: "power {name}",
           dataSource: undefined,
         },
         expected: {
@@ -169,7 +169,7 @@ describe("detectFormatErrors", () => {
       {
         caseName: "missing name placeholder and other errors present",
         format: {
-          format: "power {invalid1} and {invalid2} {value}",
+          pattern: "power {invalid1} and {invalid2} {value}",
           dataSource: mockDataSource,
         },
         expected: {
@@ -207,7 +207,7 @@ const testDetectLongFormat = (
       describe(caseName, () => {
         const result = detectFormatErrors(
           {
-            format: format.format,
+            pattern: format.pattern,
             dataSource: format.dataSource,
             label: mockLableName,
           },
@@ -232,12 +232,12 @@ describe("detectFormatErrors - long format", () => {
   testDetectLongFormat("error cases", [
     {
       caseName: "format with length exceeding limit",
-      format: { format: "a".repeat(260) },
+      format: { pattern: "a".repeat(260) },
       limit: defaultLimit,
     },
     {
       caseName: "format with length within limit",
-      format: { format: "a".repeat(100) },
+      format: { pattern: "a".repeat(100) },
       limit: {
         formatMaxLength: 100,
         placeHolderMaxLength: 50,
@@ -246,7 +246,7 @@ describe("detectFormatErrors - long format", () => {
     {
       caseName: "format with invalid placeholders and exceeding limit",
       format: {
-        format: `power {invalid1} and {invalid2} {value}${"a".repeat(260)}`,
+        pattern: `power {invalid1} and {invalid2} {value}${"a".repeat(260)}`,
         dataSource: mockDataSource,
       },
       limit: defaultLimit,
