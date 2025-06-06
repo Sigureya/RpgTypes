@@ -8,7 +8,7 @@ import { execFormatRule } from "./core";
 import type { FormatLookupKeys } from "./core/accessor";
 import { makeItemName } from "./core/namedItem/namedItem";
 
-export const joinItemsSoruce = <Key, Schema, Data extends Schema>(
+const xxxxx = <Key, Schema, Data extends Schema>(
   data: Data,
   rule: FormatRuleCompiled<Schema>,
   sourceMap: Map<Key, FinalFormatEntry>,
