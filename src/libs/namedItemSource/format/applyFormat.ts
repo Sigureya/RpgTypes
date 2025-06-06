@@ -4,9 +4,8 @@ import type {
   FormatResult,
   FormatRuleCompiled,
 } from "./core";
-import { execFormatRule } from "./core";
+import { execFormatRule, makeItemName } from "./core";
 import type { FormatLookupKeys } from "./core/accessor";
-import { makeItemName } from "./core/namedItem/namedItem";
 
 const xxxxx = <Key, Schema, Data extends Schema>(
   data: Data,
