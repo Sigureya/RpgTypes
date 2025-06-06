@@ -1,6 +1,6 @@
 import { describe, test, expect } from "vitest";
 import { joinItemsSoruce } from "./joinItemsSource";
-import type { FinalFormatEntry, NamedItemSource } from "./types";
+import type { FinalFormatEntry, NamedItemSource } from "./core";
 
 const mockWeapons = {
   label: "weapons",

@@ -1,3 +1,3 @@
-export * from "./types";
-export { detectFormatErrors } from "./types/detectErrors";
+export * from "./core";
+export { detectFormatErrors } from "./core/detectErrors";
 export * from "./applyFormat";
