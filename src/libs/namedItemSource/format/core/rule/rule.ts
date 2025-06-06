@@ -15,7 +15,7 @@ export const compileFormatRule = <T, SoruceKey extends SourceKeyConcept>(
   rule: FormatRule<T, SoruceKey>
 ): FormatRuleCompiled<T, SoruceKey> => ({
   properties: rule.placeHolders.map<FormatField<T>>((placeHolder) => ({
-    dataKey: placeHolder,
+    dataKey: placeHolder satisfies keyof T,
     placeHolder: `{${placeHolder}}`,
   })),
   itemMappers: getItemMappersFromRule(rule).map(compileFormatItemMapper),
@@ -62,7 +62,7 @@ const replacePlaceholder = <Schema, Data extends Schema>(
   data: Data,
   rule: FormatField<Schema>
 ): string => {
-  const value = data[rule.dataKey];
+  const value = data[rule.dataKey satisfies keyof Data];
   if (value === undefined || value === null) {
     return baseText;
   }
