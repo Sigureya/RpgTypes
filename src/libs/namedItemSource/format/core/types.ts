@@ -7,12 +7,6 @@ export interface NamedItemSource {
   label: string;
 }
 
-// export interface FormatLabelDraft {
-//   format: string;
-//   label: string;
-//   dataSource?: SourceIdentifier;
-// }
-
 export interface FormatLabelResolved<Key = string> {
   format: string;
   targetKey: Key;
@@ -24,4 +18,14 @@ export interface FinalFormatEntry {
   format: string;
   label: string;
   data?: ReadonlyArray<Data_NamedItem>;
+}
+
+export interface FormatWithSource {
+  format: string;
+  dataSource?: SourceIdentifier;
+}
+
+export interface FormatResult {
+  label: string;
+  text: string;
 }
