@@ -1307,10 +1307,11 @@ const S = k.compile({ additionalProperties: false, type: "object", required: ["t
     } } }
   }
 }, kp = new e(), Tp = kp.compile(gp), Sp = kp.compile(Np), wp = (e2) => Tp(e2), Rp = (e2) => Sp(e2), qp = (e2, t2) => `<${e2}:${t2}>`, Pp = () => /<([^<>:]+):([^>]*)>/g, Ap = (e2, t2) => Ep(e2.note, (a2, i2) => t2(a2, i2, e2)), Dp = (e2) => Ep(e2, (e3, t2) => [e3, t2]), Ep = (e2, t2) => {
+  if (e2.length >= 1e3) throw new Error("Note text is too long. Please shorten it.");
   const a2 = /<([^<>:]+):([^>]*)>/g;
   return Array.from(e2.matchAll(a2), (e3) => t2(e3[1], e3[2]));
 }, Mp = (e2, t2) => {
-  if (e2.length >= 1e3) throw new Error("Note text is too long. Please shorten it.");
+  if (e2.length >= 3e3) throw new Error("Note text is too long. Please shorten it.");
   return e2.replaceAll(/<([^<>:]+):([^>]*)>/g, (e3, a2, i2) => {
     const r2 = t2(a2, i2);
     if (r2.length >= 1e3) throw new Error("Note text is too long. Please shorten it.");
@@ -1983,7 +1984,6 @@ export {
   gt as partyAbilitySourceId,
   bt as partyAbilityToArray,
   Dp as readNote,
-  Ep as readNoteEx,
   Ap as readNoteObject,
   Ot as regularParamName,
   Yt as regularParamSourceId,
