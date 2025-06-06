@@ -1,4 +1,3 @@
-import { SourceIdentifier } from '../../../../../../namedItemSource';
 export interface Trait {
     code: number;
     dataId: number;
@@ -7,10 +6,4 @@ export interface Trait {
 export interface Data_TraitContainer {
     traits: Trait[];
     note: string;
-}
-export interface TraitLabelResolved {
-    format: string;
-    code: number;
-    label: string;
-    dataSource?: SourceIdentifier;
 }

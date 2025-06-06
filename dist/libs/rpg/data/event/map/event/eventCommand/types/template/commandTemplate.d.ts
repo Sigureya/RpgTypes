@@ -1,4 +1,4 @@
-import { PickByType } from './pickByType';
+import { PickByType } from '../../../../../../../../templates';
 import { MapRecordToCode } from './mapRecord';
 /**
  * Defines a simplified command template type.

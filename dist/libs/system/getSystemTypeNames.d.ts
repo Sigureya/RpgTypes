@@ -8,3 +8,4 @@ export declare const getSkillTypes: (system: Pick<Data_System, "skillTypes">) =>
 export declare const getWeaponTypes: (system: Pick<Data_System, "weaponTypes">) => Data_NamedItem[];
 export declare const getArmorTypes: (system: Pick<Data_System, "armorTypes">) => Data_NamedItem[];
 export declare const getParamNames: (system: System_ParamNames) => Data_NamedItem[];
+export declare const getSwitches: (system: Pick<Data_System, "switches">) => Data_NamedItem[];

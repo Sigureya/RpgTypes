@@ -32,7 +32,6 @@ export declare const DEFAULT_SYSTEM_LABELS_DATA_TYPES: {
         readonly weaponTypes: "武器タイプ";
         readonly switches: "スイッチ";
         readonly variables: "変数";
-        readonly magicSkills: "魔法スキル";
     };
 };
 export {};

@@ -48,21 +48,6 @@ export const SCHEMA_MAP_EVENT_PAGE = {
     image: SCHEMA_MAP_EVENT_IMAGE satisfies JSONSchemaType<MapEvent_Image>,
     moveRoute:
       SCHEMA_MOVEROUTE_DATA satisfies JSONSchemaType<MoveRouteDataUnkwnown>,
-    // list: {
-    //   type: "array",
-    //   items: {
-    //     type: "object",
-    //     required: ["code", "indent", "parameters"],
-    //     properties: {
-    //       code: { type: "integer" },
-    //       indent: { type: "integer" },
-    //       parameters: {
-    //         type: "array",
-    //         items: {},
-    //       },
-    //     },
-    //   },
-    // },
   },
 } as const satisfies JSONSchemaType<Omit<MapEventPage, "list">>;
 

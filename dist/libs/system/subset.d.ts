@@ -3,7 +3,7 @@ export type System_Pick<K1 extends keyof Data_System, K2 extends keyof Data_Syst
     [key in K1]: Pick<Data_System[K1], K2>;
 };
 export type System_ParamNames = System_Pick<"terms", "params">;
-export type System_DataNames = Pick<Data_System, "weaponTypes" | "skillTypes" | "elements" | "variables" | "equipTypes" | "switches" | "armorTypes" | "magicSkills">;
+export type System_DataNames = Pick<Data_System, "weaponTypes" | "skillTypes" | "elements" | "variables" | "equipTypes" | "switches" | "armorTypes">;
 export type System_Images = Pick<Data_System, "battleback1Name" | "battleback2Name" | "battlerName" | "title1Name" | "title2Name">;
 export type System_Text = Pick<Data_System, "gameTitle" | "currencyUnit">;
 export type System_Vehicle = Pick<Data_System, "boat" | "ship" | "airship">;

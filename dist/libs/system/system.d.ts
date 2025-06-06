@@ -4,6 +4,7 @@ import { EditorSettings } from './setting';
 export interface Data_System {
     battleSystem: number;
     partyMembersArray: number[];
+    magicSkills: number[];
     battleback1Name: string;
     battleback2Name: string;
     battlerName: string;
@@ -19,7 +20,6 @@ export interface Data_System {
     equipTypes: string[];
     switches: string[];
     armorTypes: string[];
-    magicSkills: string[];
     itemCategories: ItemCategoriesArray;
     menuCommands: MenuCommandsEnabledArray;
     titleBgm: AudioFileParams;
