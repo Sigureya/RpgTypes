@@ -1,4 +1,7 @@
-import { getItemMappersFromRule } from "./getPlaceHolders";
+import {
+  getDataKeysFromFormatRule,
+  getItemMappersFromRule,
+} from "./getPlaceHolders";
 import type {
   FormatRule,
   FormatField,
@@ -16,6 +19,7 @@ export const compileFormatRule = <T, SoruceKey extends SourceKeyConcept>(
     placeHolder: `{${placeHolder}}`,
   })),
   itemMappers: getItemMappersFromRule(rule).map(compileFormatItemMapper),
+  fallbackFormat: fallbackFormatPattern(rule),
 });
 
 const compileFormatItemMapper = <T, SoruceKey extends SourceKeyConcept>(
@@ -27,19 +31,25 @@ const compileFormatItemMapper = <T, SoruceKey extends SourceKeyConcept>(
     dataIdKey: itemMappers.dataIdKey,
     map: itemMappers.map.map((pair) => ({
       kindId: pair.kindId,
-      sourceId: pair.sourceId,
+      sourceId: pair.sourceId satisfies SoruceKey,
     })),
   };
 };
 
-export const execFormatRule = <
-  Schema,
-  Data extends Schema,
-  SoruceKey extends SourceKeyConcept
->(
+const fallbackFormatPattern = <T>(rule: FormatRule<T>): string => {
+  if (rule.fallbackFormat) {
+    return rule.fallbackFormat;
+  }
+  const keys: ReadonlySet<string & keyof T> = getDataKeysFromFormatRule(rule);
+  return Array.from(keys)
+    .map((item) => `${item}:{${item}}`)
+    .join(", ");
+};
+
+export const execFormatRule = <Schema, Data extends Schema>(
   baseText: string,
   data: Data,
-  rule: FormatRuleCompiled<Schema, SoruceKey>
+  rule: FormatRuleCompiled<Schema>
 ): string => {
   return rule.properties.reduce(
     (text, r) => replacePlaceholder(text, data, r),
