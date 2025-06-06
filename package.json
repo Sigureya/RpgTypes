@@ -1,6 +1,6 @@
 {
   "name": "@sigureya/rpgtypes",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "description": "A TypeScript library for RpgMakerMZ-related types.",
   "sideEffects": false,
   "main": "./dist/libs/rpgTypes.cjs.js",
@@ -37,6 +37,8 @@
   "author": "Max Siguren",
   "license": "MIT",
   "devDependencies": {
+    "@rollup/plugin-terser": "^0.4.4",
+    "@types/node": "^22.15.29",
     "@typescript-eslint/eslint-plugin": "^8.31.1",
     "@typescript-eslint/parser": "^8.31.1",
     "eslint": "^9.25.0",
@@ -44,8 +46,7 @@
     "typescript": "^5.8.3",
     "vite": "^6.3.4",
     "vite-plugin-dts": "^4.5.3",
-    "vitest": "^3.1.2",
-    "@types/node": "^22.15.29"
+    "vitest": "^3.1.2"
   },
   "engines": {
     "node": ">=16.0.0"
