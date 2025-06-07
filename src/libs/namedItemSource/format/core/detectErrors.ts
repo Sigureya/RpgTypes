@@ -56,21 +56,15 @@ export const detectFormatErrors = <T extends object>(
       semanticErrors: [],
     };
   }
-  const dataSourceErrorResult = detectItemMapperErrors(
-    format,
-    formatRule,
-    errorTexts
-  );
-  const invalidPlaceholdersResult = detectInvalidPlaceholders(
-    format.pattern,
-    formatRule,
-    errorTexts,
-    limits.placeHolderMaxLength
-  );
   return {
     formatLabel: format.label,
-    syntaxErrors: invalidPlaceholdersResult,
-    semanticErrors: dataSourceErrorResult,
+    semanticErrors: detectItemMapperErrors(format, formatRule, errorTexts),
+    syntaxErrors: detectInvalidPlaceholders(
+      format.pattern,
+      formatRule,
+      errorTexts,
+      limits.placeHolderMaxLength
+    ),
   };
 };
 
