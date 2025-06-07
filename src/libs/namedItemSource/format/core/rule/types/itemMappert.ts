@@ -7,17 +7,11 @@ export type SourceKeyConcept =
 
 type NumberProperties<T> = Extract<keyof PickByType<T, number>, string>;
 
-interface KindSourcePair<K, SoruceKey extends SourceKeyConcept> {
-  kindId: K;
-  sourceId: SoruceKey;
-}
-
 export interface FormatItemMapper<T, SourceKey extends SourceKeyConcept> {
   placeHolder: string;
   // 他のパラメータはこれから用意するので、書き終わるまで任意要素にする
   kindKey: NumberProperties<T>;
   dataIdKey: NumberProperties<T>;
-  map: KindSourcePair<number, SourceKey>[];
 }
 
 export interface FormatItemMapperCompiled<

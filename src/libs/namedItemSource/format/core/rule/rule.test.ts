@@ -22,7 +22,6 @@ const mockRule: FormatRule<ItemEffect> = {
     placeHolder: "name",
     dataIdKey: "dataId",
     kindKey: "code",
-    map: [],
   },
   itemMappers: [],
 };
@@ -45,7 +44,6 @@ describe("complieFormatRule", () => {
           placeHolder: "name",
           dataIdKey: "dataId",
           kindKey: "code",
-          map: [],
         },
         itemMappers: [],
       };
@@ -63,7 +61,6 @@ describe("complieFormatRule", () => {
         placeHolder: "name",
         dataIdKey: "id",
         kindKey: "id",
-        map: [],
       },
       placeHolders: [
         "id",

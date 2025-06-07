@@ -100,10 +100,6 @@ const mockRule: FormatRule<ItemEffects, SourceIdentifier> = {
     dataIdKey: "dataId",
     kindKey: "code",
     placeHolder: "name",
-    map: [
-      //      { kindId: 4, sourceId: { ...mockElements.source } },
-      //      { kindId: 5, sourceId: { ...mockState.source } },
-    ],
   },
 };
 

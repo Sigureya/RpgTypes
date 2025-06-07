@@ -18,10 +18,8 @@ const RULE_TRAIT = {
     placeHolder: "name",
     dataIdKey: "dataId",
     kindKey: "code",
-    map: [],
   },
   placeHolders: ["value"],
-  itemMappers: [],
 } as const satisfies FormatRule<Trait>;
 
 export const formatTraitText = (
