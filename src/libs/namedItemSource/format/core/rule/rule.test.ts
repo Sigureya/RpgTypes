@@ -64,7 +64,7 @@ describe("complieFormatRule", () => {
       },
       placeHolders: [
         "id",
-        "name",
+        //        "name",
         // "effects"
         // ↑ Compile error due to type checking
       ],
@@ -74,7 +74,7 @@ describe("complieFormatRule", () => {
     test("compiles rule for Skill type with valid property keys", () => {
       expect(compiledRule.properties).toEqual([
         { dataKey: "id", placeHolder: "{id}" },
-        { dataKey: "name", placeHolder: "{name}" },
+        // { dataKey: "name", placeHolder: "{name}" },
       ] satisfies typeof compiledRule.properties);
     });
   });

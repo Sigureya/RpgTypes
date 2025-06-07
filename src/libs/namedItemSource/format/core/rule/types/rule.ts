@@ -6,10 +6,10 @@ import type {
 
 export interface FormatRule<T> {
   itemMapper?: FormatItemMapper<T>;
-  placeHolders: PickByTypeKeys<T, number | string>[];
+  placeHolders: PickByTypeKeys<T, number>[];
   itemMappers?: FormatItemMapper<T>[];
   fallbackFormat?: string;
-  placeHolder2?: {};
+  placeHolder2?: PPP<T>;
 }
 
 export interface FormatField<T, V = string | number> {
@@ -21,12 +21,16 @@ interface PPP<T> {
   numbers?: PickByTypeKeys<T, number>[];
   strings?: PickByTypeKeys<T, string>[];
 }
+interface PPPCompiled<T> {
+  numbers: FormatField<T, number>[];
+  strings: FormatField<T, string>[];
+}
 
 export interface FormatRuleCompiled<T> {
-  properties: FormatField<T>[];
+  properties: FormatField<T, number>[];
   itemMappers: FormatItemMapperCompiled<T>[];
   fallbackFormat: string;
-  properties2: PPP<T>;
+  properties2: PPPCompiled<T>;
 }
 
 export interface FormatCompiledSimple {

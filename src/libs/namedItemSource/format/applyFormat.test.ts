@@ -101,6 +101,7 @@ const mockRule: FormatRule<ItemEffects> = {
     kindKey: "code",
     placeHolder: "name",
   },
+  placeHolder2: {},
 };
 
 interface TestCase {

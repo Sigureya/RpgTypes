@@ -17,7 +17,7 @@ interface Trait {
 }
 
 const mockRule = {
-  placeHolders: ["value", "message"],
+  placeHolders: ["value"],
   itemMapper: {
     placeHolder: "name",
     dataIdKey: "dataId",
