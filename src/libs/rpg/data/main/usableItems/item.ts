@@ -1,6 +1,6 @@
 import { AUTHOR_RMMZ, type SourceIdentifier } from "src/namedItemSource";
 import { SRC_DATA_ITEMS, MODULE_DATA } from "src/rpg";
-import type { Data_Item } from "./types";
+import type { Data_Item } from "./core";
 import { makeDamage } from "../members";
 
 export const itemSourceId = (): SourceIdentifier => ({
