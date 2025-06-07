@@ -6,6 +6,8 @@ export type PickByType<T, V> = Pick<
   { [K in keyof T]: T[K] extends V ? K : never }[keyof T]
 >;
 
+export type PickByTypeKeys<T, V> = Extract<keyof PickByType<T, V>, string>;
+
 /**
  * @deprecated
  * @see PickByType
