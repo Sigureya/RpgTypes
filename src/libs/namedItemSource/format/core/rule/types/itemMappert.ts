@@ -27,5 +27,4 @@ export interface FormatItemMapperCompiled<
   placeHolder: `{${string}}`;
   kindKey: NumberProperties<T>;
   dataIdKey: NumberProperties<T>;
-  map: KindSourcePair<number, SoruceKey>[];
 }
