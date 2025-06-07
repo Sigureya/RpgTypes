@@ -17,7 +17,7 @@ import {
   getItemName,
 } from "./core";
 import type { FormatLookupKeys } from "./core/accessor";
-import { detectFormatErrors } from "./core/detectErrors";
+import { collectFormatErrors } from "./core/detectErrors";
 import { mergeItemsSource } from "./mergeItemsSource";
 
 export const compileFormatBundle = <T extends object, Key>(
@@ -28,7 +28,7 @@ export const compileFormatBundle = <T extends object, Key>(
 ): CompiledFormatBundle<T, Key, SourceIdentifier> => {
   return {
     soruceMap: mergeItemsSource(formatList, namedItemSources),
-    errors: formatList.map((fmt) => detectFormatErrors(fmt, rule, errorTexts)),
+    errors: collectFormatErrors(formatList, rule, errorTexts),
     compiledRule: compileFormatRule(rule),
   };
 };
