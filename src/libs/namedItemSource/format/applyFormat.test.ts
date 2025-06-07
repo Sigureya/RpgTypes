@@ -78,21 +78,21 @@ const mockErrorLabeles = {
 const mockElementsLable = {
   label: "element damage",
   pattern: "{name} rate {value1}% + {value2}",
-  targetKey: ELEMENT.code,
+  kindId: ELEMENT.code,
   dataSource: { ...mockElements.source },
 } as const satisfies FormatLabelResolved<number>;
 
 const mockStateLable = {
   label: "state",
   pattern: "{name} {value1}%",
-  targetKey: STATE.code,
+  kindId: STATE.code,
   dataSource: { ...mockState.source },
 } as const satisfies FormatLabelResolved<number>;
 
 const mockRecoveryLable = {
   label: "recovery",
   pattern: "{value1}% + {value2}point",
-  targetKey: RECOVER.code,
+  kindId: RECOVER.code,
 } as const satisfies FormatLabelResolved<number>;
 const mockRule: FormatRule<ItemEffects, SourceIdentifier> = {
   placeHolders: ["value1", "value2"],

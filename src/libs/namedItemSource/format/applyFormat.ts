@@ -20,12 +20,12 @@ import type { FormatLookupKeys } from "./core/accessor";
 import { collectFormatErrors } from "./core/detectErrors";
 import { mergeItemsSource } from "./mergeItemsSource";
 
-export const compileFormatBundle = <T extends object, Key>(
+export const compileFormatBundle = <T extends object, KindKey>(
   rule: FormatRule<T, SourceIdentifier>,
-  formatList: ReadonlyArray<FormatLabelResolved<Key>>,
+  formatList: ReadonlyArray<FormatLabelResolved<KindKey>>,
   namedItemSources: ReadonlyArray<NamedItemSource>,
   errorTexts: FormatErrorLabels
-): CompiledFormatBundle<T, Key, SourceIdentifier> => {
+): CompiledFormatBundle<T, KindKey, SourceIdentifier> => {
   return {
     soruceMap: mergeItemsSource(formatList, namedItemSources),
     errors: collectFormatErrors(formatList, rule, errorTexts),
@@ -35,24 +35,24 @@ export const compileFormatBundle = <T extends object, Key>(
 
 export const isValidFormatBundle = <
   T extends object,
-  Key,
+  KindKey,
   Source extends SourceKeyConcept
 >(
-  bundle: CompiledFormatBundle<T, Key, Source>
+  bundle: CompiledFormatBundle<T, KindKey, Source>
 ): boolean => {
   return bundle.errors.length === 0;
 };
 
 export const formatWithCompiledBundle = <
   T extends object,
-  Key,
+  KindKey,
   Source extends SourceKeyConcept
 >(
   data: T,
-  bundle: CompiledFormatBundle<T, Key, Source>,
-  lookup: FormatLookupKeys<T, Key>
+  bundle: CompiledFormatBundle<T, KindKey, Source>,
+  lookup: FormatLookupKeys<T, KindKey>
 ): FormatResult => {
-  const key: Key = lookup.extractMapKey(data);
+  const key: KindKey = lookup.extractMapKey(data);
   const entry = bundle.soruceMap.get(key);
   return entry
     ? formatTextForMatchedEntry(data, bundle.compiledRule, entry, (d) =>
@@ -84,13 +84,13 @@ const formatTextForMatchedEntry = <
 
 const formatTextForFallback = <
   T extends object,
-  Key,
+  KindKey,
   Source extends SourceKeyConcept
 >(
   data: T,
   rule: FormatRuleCompiled<T, Source>,
-  key: Key,
-  lookup: FormatLookupKeys<T, Key>
+  key: KindKey,
+  lookup: FormatLookupKeys<T, KindKey>
 ): FormatResult => {
   return {
     label: lookup.unknownKey(key),

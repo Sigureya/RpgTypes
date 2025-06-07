@@ -8,9 +8,9 @@ export interface NamedItemSource {
   label: string;
 }
 
-export interface FormatLabelResolved<Key = string> extends FormatInput {
+export interface FormatLabelResolved<KindKey> extends FormatInput {
   pattern: string;
-  targetKey: Key;
+  kindId: KindKey;
   label: string;
   dataSource?: SourceIdentifier;
 }
