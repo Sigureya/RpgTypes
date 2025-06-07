@@ -22,6 +22,10 @@ export const compileFormatRule = <T>(
     compileItemMapper
   ),
   fallbackFormat: generateFallbackFormat(rule),
+  properties2: {
+    numbers: [],
+    strings: [],
+  },
 });
 
 const compileItemMapper = <T>(

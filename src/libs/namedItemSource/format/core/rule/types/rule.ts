@@ -9,17 +9,24 @@ export interface FormatRule<T> {
   placeHolders: PickByTypeKeys<T, number | string>[];
   itemMappers?: FormatItemMapper<T>[];
   fallbackFormat?: string;
+  placeHolder2?: {};
 }
 
-export interface FormatField<T> {
-  dataKey: PickByTypeKeys<T, number | string>;
-  placeHolder: `{${PickByTypeKeys<T, number | string>}}`;
+export interface FormatField<T, V = string | number> {
+  dataKey: PickByTypeKeys<T, V>;
+  placeHolder: `{${PickByTypeKeys<T, V>}}`;
+}
+
+interface PPP<T> {
+  numbers?: PickByTypeKeys<T, number>[];
+  strings?: PickByTypeKeys<T, string>[];
 }
 
 export interface FormatRuleCompiled<T> {
   properties: FormatField<T>[];
   itemMappers: FormatItemMapperCompiled<T>[];
   fallbackFormat: string;
+  properties2: PPP<T>;
 }
 
 export interface FormatCompiledSimple {
