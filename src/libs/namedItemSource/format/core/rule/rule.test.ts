@@ -1,6 +1,6 @@
 import { describe, test, expect } from "vitest";
 import { compileFormatRule, applyPlaceholdersToText } from "./rule";
-import type { FormatRule } from "./types";
+import type { FormatRule, FormatRuleCompiled } from "./types";
 
 // Test data interfaces
 interface ItemEffect {
@@ -28,58 +28,130 @@ const mockRule: FormatRule<ItemEffect> = {
   itemMappers: [],
 };
 
-describe("complieFormatRule", () => {
-  describe("Normal cases", () => {
-    test("compiles rule with string placeholders", () => {
-      const compiled = compileFormatRule(mockRule);
-      expect(compiled.properties.numbers).toEqual([
-        { dataKey: "value1", placeHolder: "{value1}" },
-        { dataKey: "dataId", placeHolder: "{dataId}" },
-        { dataKey: "code", placeHolder: "{code}" },
-      ] satisfies typeof compiled.properties.numbers);
+describe("compileFormatRule", () => {
+  interface TestCase_ComplieFormatRule<T> {
+    caseName: string;
+    rule: FormatRule<T>;
+    expected: Omit<FormatRuleCompiled<T>, "fallbackFormat">;
+  }
+  const testComplieFormatRule = <T>({
+    caseName,
+    expected,
+    rule,
+  }: TestCase_ComplieFormatRule<T>) => {
+    describe(caseName, () => {
+      const compiled = compileFormatRule(rule);
+      test("compiles rule with correct properties", () => {
+        expect(compiled.properties).toEqual(
+          expected.properties satisfies typeof compiled.properties
+        );
+      });
+      test("compiles rule with correct item mappers", () => {
+        expect(compiled.itemMappers).toEqual(
+          expected.itemMappers satisfies typeof compiled.itemMappers
+        );
+      });
     });
+  };
+  const runTestComplieFormatRule = <T>(
+    caseName: string,
+    cases: TestCase_ComplieFormatRule<T>[]
+  ) => {
+    describe(caseName, () => {
+      cases.forEach((testCase) => {
+        testComplieFormatRule(testCase);
+      });
+    });
+  };
 
-    test("compiles rule with number placeholders", () => {
-      const ruleWithNumbers: FormatRule<ItemEffect> = {
+  runTestComplieFormatRule<ItemEffect>("ItemEffect", [
+    {
+      caseName: "empty rule compiles to empty properties",
+      rule: {},
+      expected: { itemMappers: [], properties: { numbers: [], strings: [] } },
+    },
+    {
+      caseName: "compiles rule with string placeholders",
+      rule: mockRule,
+      expected: {
+        itemMappers: [
+          { dataIdKey: "dataId", kindKey: "code", placeHolder: "{name}" },
+        ],
+        properties: {
+          numbers: [
+            { dataKey: "value1", placeHolder: "{value1}" },
+            { dataKey: "dataId", placeHolder: "{dataId}" },
+            { dataKey: "code", placeHolder: "{code}" },
+          ],
+          strings: [],
+        },
+      },
+    },
+    {
+      caseName: "compiles rule with number placeholders",
+      rule: {
         itemMapper: {
           placeHolder: "name",
           dataIdKey: "dataId",
           kindKey: "code",
         },
-        itemMappers: [],
         placeHolder: {
           numbers: ["value1", "dataId"],
         },
-      };
-      const compiled = compileFormatRule(ruleWithNumbers);
-      expect(compiled.properties.numbers).toEqual([
-        { dataKey: "value1", placeHolder: "{value1}" },
-        { dataKey: "dataId", placeHolder: "{dataId}" },
-      ] satisfies typeof compiled.properties.numbers);
-    });
-  });
+      },
+      expected: {
+        itemMappers: [
+          { dataIdKey: "dataId", kindKey: "code", placeHolder: "{name}" },
+        ],
+        properties: {
+          numbers: [
+            { dataKey: "value1", placeHolder: "{value1}" },
+            { dataKey: "dataId", placeHolder: "{dataId}" },
+          ],
+          strings: [],
+        },
+      },
+    },
+    {
+      caseName: "compiles rule with no placeholders",
+      rule: {
+        itemMapper: {
+          placeHolder: "name",
+          dataIdKey: "dataId",
+          kindKey: "code",
+        },
+        placeHolder: {},
+      },
+      expected: {
+        itemMappers: [
+          { dataIdKey: "dataId", kindKey: "code", placeHolder: "{name}" },
+        ],
+        properties: {
+          numbers: [],
+          strings: [],
+        },
+      },
+    },
+  ]);
 
-  describe("Compiles rule for Skill type with valid property keys", () => {
-    const rule: FormatRule<Skill> = {
-      itemMapper: {
-        placeHolder: "name",
-        dataIdKey: "id",
-        kindKey: "id",
+  runTestComplieFormatRule<Skill>("Skill", [
+    {
+      caseName: "compiles rule for Skill type with valid property keys",
+      rule: {
+        placeHolder: {
+          numbers: ["id"],
+          strings: ["name"],
+        },
       },
-      itemMappers: [],
-      placeHolder: {
-        numbers: ["id"],
-        strings: ["name"],
+      expected: {
+        itemMappers: [],
+        properties: {
+          numbers: [{ dataKey: "id", placeHolder: "{id}" }],
+          strings: [{ dataKey: "name", placeHolder: "{name}" }],
+        },
       },
-    };
-    const compiledRule = compileFormatRule(rule);
-    test("compiles rule for Skill type with valid property keys", () => {
-      expect(compiledRule.properties.numbers).toEqual([
-        { dataKey: "id", placeHolder: "{id}" },
-        // { dataKey: "name", placeHolder: "{name}" },
-      ] satisfies typeof compiledRule.properties.numbers);
-    });
-  });
+    },
+  ]);
 });
 
 describe("replacePlaceholders", () => {
