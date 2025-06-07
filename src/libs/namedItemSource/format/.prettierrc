@@ -1,7 +1,7 @@
 {
   "overrides": [
     {
-      "files": "mergeItemsSource.test.ts",
+      "files": ["mergeItemsSource.test.ts", "applyFormat.test.ts"],
       "options": {
         "printWidth": 120
       }
