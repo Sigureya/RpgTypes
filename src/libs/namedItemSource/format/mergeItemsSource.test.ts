@@ -22,6 +22,16 @@ const mockEnemies = {
   ],
 } as const satisfies NamedItemSource;
 
+const mockSkills = {
+  label: "skills",
+  source: { author: "rmmz", module: "data", kind: "skill" },
+  items: [
+    { id: 7, name: "fireball" },
+    { id: 8, name: "heal" },
+    { id: 9, name: "lightning" },
+  ],
+} as const satisfies NamedItemSource;
+
 const mockInvalidSource = {
   author: "unknown",
   module: "unknown",
@@ -35,11 +45,14 @@ interface TestCase<Key> {
   expected: Map<Key, FormatCompiled>;
 }
 
-const testCaseMrgeItemsSource = <Key>({ caseName, labels, namedItemSources }: TestCase<Key>) => {
+const testCaseMrgeItemsSource = <Key>({ caseName, labels, namedItemSources, expected }: TestCase<Key>) => {
   describe(caseName, () => {
     const map: Map<Key, FormatCompiled> = mergeItemsSource(labels, namedItemSources);
     test("returns a map with correct entries", () => {
-      expect(map.size).toBe(labels.length);
+      expect(map.size).lessThanOrEqual(labels.length);
+    });
+    test("returns a map with correct entries for each label", () => {
+      expect(map).toEqual(expected);
     });
   });
 };
@@ -65,20 +78,55 @@ describe("mergeItemsSource", () => {
       expected: new Map(),
     },
   ]);
+
   runTest("returns correct map for mixed labels", [
+    {
+      caseName: "all labels have valid dataSource",
+      labels: [
+        { label: "weapon113", pattern: "{name}", targetKey: 113, dataSource: mockWeapons.source },
+        { label: "weapon211", pattern: "{name}", targetKey: 211, dataSource: mockWeapons.source },
+        { label: "enemy404", pattern: "enemy {name}", targetKey: 404, dataSource: mockEnemies.source },
+        { label: "skill999", pattern: "999{name}", targetKey: 999, dataSource: mockSkills.source },
+      ],
+      namedItemSources: [mockEnemies, mockWeapons, mockSkills],
+      expected: new Map([
+        [113, { label: "weapon113", patternCompiled: "{name}", data: mockWeapons.items }],
+        [211, { label: "weapon211", patternCompiled: "{name}", data: mockWeapons.items }],
+        [404, { label: "enemy404", patternCompiled: "enemy {name}", data: mockEnemies.items }],
+        [999, { label: "skill999", patternCompiled: "999{name}", data: mockSkills.items }],
+      ]),
+    },
     {
       caseName: "labels with and without dataSource",
       labels: [
+        { label: "", pattern: "", targetKey: 0 },
         { label: "aaa", pattern: "format A", targetKey: 58 },
         { label: "bbb", pattern: "format B", targetKey: 66, dataSource: mockWeapons.source },
         { label: "ccc", pattern: "format C", targetKey: 75, dataSource: mockInvalidSource },
+        { label: "ddd", pattern: "format D", targetKey: 81, dataSource: mockWeapons.source },
       ],
       namedItemSources: [mockWeapons, mockEnemies],
       expected: new Map([
+        [0, { label: "", patternCompiled: "", data: undefined }],
         [58, { label: "aaa", patternCompiled: "format A", data: undefined }],
         [66, { label: "bbb", patternCompiled: "format B", data: mockWeapons.items }],
         [75, { label: "ccc", patternCompiled: "format C", data: undefined }],
+        [81, { label: "ddd", patternCompiled: "format D", data: mockWeapons.items }],
       ]),
     },
   ]);
+  describe("tergetkey is not unique", () => {
+    runTest("returns last entry for duplicate targetKey", [
+      {
+        caseName: "duplicate targetKey with different dataSource",
+        labels: [
+          { label: "skill", pattern: "{name}", targetKey: 926, dataSource: mockSkills.source },
+          { label: "enemy", pattern: "{name}", targetKey: 926, dataSource: mockEnemies.source },
+          { label: "weapon", pattern: "{name}", targetKey: 926, dataSource: mockWeapons.source },
+        ],
+        namedItemSources: [mockWeapons, mockEnemies],
+        expected: new Map([[926, { label: "weapon", patternCompiled: "{name}", data: mockWeapons.items }]]),
+      },
+    ]);
+  });
 });
