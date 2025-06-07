@@ -7,25 +7,23 @@ import type {
 } from "./direct";
 import type { FormatArrayIndex } from "./array";
 
-export const buildNumberPlaceholders = <T>(
-  keys: ReadonlyArray<PickByTypeKeys<T, number>>
-): FormatPlaceholder<T, number>[] => {
+export const compileFormatPropeties = <T>(
+  props: FormatProperties<T>
+): FormatPropertiesCompiled<T> => ({
+  numbers: props.numbers ? compilePlaceholders(props.numbers) : [],
+  strings: props.strings ? compilePlaceholders(props.strings) : [],
+});
+
+const compilePlaceholders = <T, V extends number | string>(
+  keys: ReadonlyArray<PickByTypeKeys<T, V>>
+): FormatPlaceholder<T, V>[] => {
   return keys.map((key) => ({
     dataKey: key,
     placeHolder: `{${key}}`,
   }));
 };
 
-export const buildStringPlaceholders = <T>(
-  keys: ReadonlyArray<PickByTypeKeys<T, string>>
-): FormatPlaceholder<T, string>[] => {
-  return keys.map((key) => ({
-    dataKey: key,
-    placeHolder: `{${key}}`,
-  }));
-};
-
-export const buildArrayPlaceholder = <T, Source extends string | number>(
+export const compileArrayPlaceholder = <T, Source extends string | number>(
   input: FormatArrayInput<T, Source>
 ): FormatArrayIndex<T, Source> => {
   return {
@@ -35,7 +33,7 @@ export const buildArrayPlaceholder = <T, Source extends string | number>(
   };
 };
 
-export const buildArrayPlaceholderEX = <
+export const compileArrayPlaceholderEX = <
   T,
   Source extends Record<string, string | number>
 >(
@@ -47,10 +45,3 @@ export const buildArrayPlaceholderEX = <
     sourceId: { ...input.sourceId },
   };
 };
-
-export const compileFormatPropeties = <T>(
-  props: FormatProperties<T>
-): FormatPropertiesCompiled<T> => ({
-  numbers: props.numbers ? buildNumberPlaceholders(props.numbers) : [],
-  strings: props.strings ? buildStringPlaceholders(props.strings) : [],
-});
