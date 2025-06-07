@@ -28,42 +28,42 @@ const mockEffectRule: FormatRule<ItemEffect> = {
   itemMappers: [],
 };
 
-describe("compileFormatRule", () => {
-  interface TestCase_ComplieFormatRule<T> {
-    caseName: string;
-    rule: FormatRule<T>;
-    expected: Omit<FormatRuleCompiled<T>, "fallbackFormat">;
-  }
-  const testComplieFormatRule = <T>({
-    caseName,
-    expected,
-    rule,
-  }: TestCase_ComplieFormatRule<T>) => {
-    describe(caseName, () => {
-      const compiled = compileFormatRule(rule);
-      test("compiles rule with correct properties", () => {
-        expect(compiled.properties).toEqual(
-          expected.properties satisfies typeof compiled.properties
-        );
-      });
-      test("compiles rule with correct item mappers", () => {
-        expect(compiled.itemMappers).toEqual(
-          expected.itemMappers satisfies typeof compiled.itemMappers
-        );
-      });
+interface TestCase_ComplieFormatRule<T> {
+  caseName: string;
+  rule: FormatRule<T>;
+  expected: Omit<FormatRuleCompiled<T>, "fallbackFormat">;
+}
+const testComplieFormatRule = <T>({
+  caseName,
+  expected,
+  rule,
+}: TestCase_ComplieFormatRule<T>) => {
+  describe(caseName, () => {
+    const compiled = compileFormatRule(rule);
+    test("compiles rule with correct properties", () => {
+      expect(compiled.properties).toEqual(
+        expected.properties satisfies typeof compiled.properties
+      );
     });
-  };
-  const runTestComplieFormatRule = <T>(
-    caseName: string,
-    cases: TestCase_ComplieFormatRule<T>[]
-  ) => {
-    describe(caseName, () => {
-      cases.forEach((testCase) => {
-        testComplieFormatRule(testCase);
-      });
+    test("compiles rule with correct item mappers", () => {
+      expect(compiled.itemMappers).toEqual(
+        expected.itemMappers satisfies typeof compiled.itemMappers
+      );
     });
-  };
+  });
+};
+const runTestComplieFormatRule = <T>(
+  caseName: string,
+  cases: TestCase_ComplieFormatRule<T>[]
+) => {
+  describe(caseName, () => {
+    cases.forEach((testCase) => {
+      testComplieFormatRule(testCase);
+    });
+  });
+};
 
+describe("compileFormatRule", () => {
   runTestComplieFormatRule<ItemEffect>("ItemEffect", [
     {
       caseName: "empty rule compiles to empty properties",
