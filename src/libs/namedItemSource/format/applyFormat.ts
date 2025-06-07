@@ -33,6 +33,16 @@ export const compileFormatBundle = <T extends object, Key>(
   };
 };
 
+export const isValidFormatBundle = <
+  T extends object,
+  Key,
+  Source extends SourceKeyConcept
+>(
+  bundle: CompiledFormatBundle<T, Key, Source>
+): boolean => {
+  return bundle.errors.length === 0;
+};
+
 export const formatWithCompiledBundle = <
   T extends object,
   Key,
