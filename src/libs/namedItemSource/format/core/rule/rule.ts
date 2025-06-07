@@ -14,7 +14,7 @@ export const compileFormatRule = <T>(
   rule: FormatRule<T>,
   extraItems: ReadonlyArray<FormatItemMapper<T>> = []
 ): FormatRuleCompiled<T> => ({
-  properties: rule.placeHolders.map<FormatField<T>>((placeHolder) => ({
+  properties: rule.placeHolders.map<FormatField<T, number>>((placeHolder) => ({
     dataKey: placeHolder satisfies keyof T,
     placeHolder: `{${placeHolder}}`,
   })),
@@ -22,6 +22,10 @@ export const compileFormatRule = <T>(
     compileItemMapper
   ),
   fallbackFormat: generateFallbackFormat(rule),
+  properties2: {
+    numbers: [],
+    strings: [],
+  },
 });
 
 const compileItemMapper = <T>(
@@ -58,7 +62,7 @@ export const applyPlaceholdersToText = <Schema, Data extends Schema>(
 const replacePlaceholder = <Schema, Data extends Schema>(
   baseText: string,
   data: Data,
-  field: FormatField<Schema>
+  field: FormatField<Schema, number>
 ): string => {
   const value = data[field.dataKey satisfies keyof Data];
   if (value === undefined || value === null) {
