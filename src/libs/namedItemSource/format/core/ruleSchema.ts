@@ -1,5 +1,5 @@
 import type { JSONSchemaType } from "ajv";
-import type { FormatRule } from "./rule/types";
+import type { FormatRule } from "./rule";
 
 export interface FormatRuleSchema<T> {
   schema: JSONSchemaType<T>;
