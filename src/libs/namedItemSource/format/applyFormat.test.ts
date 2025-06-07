@@ -1,19 +1,16 @@
-import { describe, test, expect } from "vitest";
+import type { MockedObject } from "vitest";
+import { describe, test, expect, vi } from "vitest";
 
-import type { CompiledFormatBundle } from "./bundle";
 import type {
-  Data_NamedItem,
-  FormatCompiled,
   FormatErrorLabels,
   FormatLabelResolved,
   FormatResult,
   FormatRule,
-  FormatRuleCompiled,
   NamedItemSource,
   SourceIdentifier,
-  SourceKeyConcept,
 } from "./core";
-import { compileFormatBundle } from "./applyFormat";
+import { compileFormatBundle, formatWithCompiledBundle, isValidFormatBundle } from "./applyFormat";
+import type { FormatLookupKeys } from "./core/accessor";
 
 interface ItemEffects {
   code: number;
@@ -22,13 +19,19 @@ interface ItemEffects {
   value2: number;
 }
 
+const ELEMENT = {
+  fire: 1,
+  ice: 2,
+  thunder: 3,
+};
+
 const mockElements: NamedItemSource = {
   source: { author: "rmmz", module: "system", kind: "elements" },
   label: "elements",
   items: [
-    { id: 1, name: "fire" },
-    { id: 2, name: "ice" },
-    { id: 3, name: "thunder" },
+    { id: ELEMENT.fire, name: "fire" },
+    { id: ELEMENT.ice, name: "ice" },
+    { id: ELEMENT.thunder, name: "thunder" },
   ],
 };
 
@@ -63,20 +66,88 @@ const mockErrorLabeles = {
   formatVeryLong: "Format is too long",
 } as const satisfies FormatErrorLabels;
 
-const bundle = compileFormatBundle(
+const CODE_ELEMENT = 1;
+const CODE_STATE = 2;
+const CODE_RECOVERY = 3;
+
+const mockElementsLable = {
+  label: "element damage",
+  pattern: "{name} rate {value1}% + {value2}",
+  targetKey: CODE_ELEMENT,
+  dataSource: { ...mockElements.source },
+} as const satisfies FormatLabelResolved<number>;
+
+const mockStateLable = {
+  label: "state",
+  pattern: "{name} {value1}%",
+  targetKey: CODE_STATE,
+  dataSource: { ...mockState.source },
+} as const satisfies FormatLabelResolved<number>;
+
+const mockRecoveryLable = {
+  label: "recovery",
+  pattern: "{value1}% + {value2}point",
+  targetKey: CODE_RECOVERY,
+} as const satisfies FormatLabelResolved<number>;
+
+const bundle = compileFormatBundle<ItemEffects, number>(
   mockRule,
-  [
-    {
-      label: "elements",
-      pattern: "{name} ee",
-      targetKey: 0,
-      dataSource: mockElements.source,
-    },
-  ],
+  [mockStateLable, mockElementsLable, mockRecoveryLable],
   [mockState, mockElements],
   mockErrorLabeles
 );
 
-test("", () => {
-  expect(bundle.errors).toEqual([]);
+describe("isValidFormatBundle", () => {
+  test("", () => {
+    expect(bundle.errors).toEqual([]);
+  });
+  test("bundle should be valid", () => {
+    expect(bundle).toSatisfy(isValidFormatBundle);
+  });
 });
+
+interface TestCase {
+  caseName: string;
+  data: ItemEffects;
+  expected: FormatResult;
+  fn: (data: ItemEffects, mock: MockedObject<FormatLookupKeys<ItemEffects, number>>) => void;
+}
+
+const testFormatWithCompiledBundle = ({ caseName, data, expected, fn }: TestCase) => {
+  const mockedLookup = {
+    extractMapKey: vi.fn((d: ItemEffects) => d.code),
+    extractDataId: vi.fn((d: ItemEffects) => d.dataId),
+    unknownKey: vi.fn((code) => `Unknown Cofr: ${code}`),
+  } satisfies MockedObject<FormatLookupKeys<ItemEffects, number>>;
+
+  const result: FormatResult = formatWithCompiledBundle(data, bundle, mockedLookup);
+  describe(caseName, () => {
+    test("should return expected result", () => {
+      expect(result).toEqual(expected);
+    });
+    test("should call lookup methods", () => {
+      fn(data, mockedLookup);
+    });
+  });
+};
+
+const runTestCases = (caseName: string, testCases: TestCase[]) => {
+  describe(caseName, () => {
+    testCases.forEach((testCase) => {
+      testFormatWithCompiledBundle(testCase);
+    });
+  });
+};
+
+runTestCases("normal case", [
+  {
+    caseName: "elements format",
+    data: { code: CODE_ELEMENT, dataId: ELEMENT.fire, value1: 10, value2: 20 },
+    expected: { label: mockElementsLable.label, text: "fire rate 10% + 20" },
+    fn: (data, lookup) => {
+      expect(lookup.extractMapKey).toHaveBeenCalledWith(data);
+      expect(lookup.extractDataId).toHaveBeenCalledWith(data);
+      expect(lookup.unknownKey).not.toHaveBeenCalled();
+    },
+  },
+]);
