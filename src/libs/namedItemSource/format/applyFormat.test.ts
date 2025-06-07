@@ -19,7 +19,7 @@ interface ItemEffects {
   value1: number;
   value2: number;
 }
-interface XXX {
+interface DataDefinetion {
   code: number;
   table: Record<string, number>;
 }
@@ -31,7 +31,7 @@ const ELEMENT = {
     ice: 2,
     thunder: 3,
   },
-} as const satisfies XXX;
+} as const satisfies DataDefinetion;
 
 const STATE = {
   code: 2,
@@ -40,7 +40,12 @@ const STATE = {
     burn: 5,
     freeze: 6,
   },
-} as const satisfies XXX;
+} as const satisfies DataDefinetion;
+
+const RECOVER = {
+  code: 3,
+  table: {},
+} as const satisfies DataDefinetion;
 
 const mockElements: NamedItemSource = {
   source: { author: "rmmz", module: "system", kind: "elements" },
@@ -83,8 +88,6 @@ const mockErrorLabeles = {
   formatVeryLong: "Format is too long",
 } as const satisfies FormatErrorLabels;
 
-const CODE_RECOVERY = 3;
-
 const mockElementsLable = {
   label: "element damage",
   pattern: "{name} rate {value1}% + {value2}",
@@ -102,7 +105,7 @@ const mockStateLable = {
 const mockRecoveryLable = {
   label: "recovery",
   pattern: "{value1}% + {value2}point",
-  targetKey: CODE_RECOVERY,
+  targetKey: RECOVER.code,
 } as const satisfies FormatLabelResolved<number>;
 
 interface TestCase {
@@ -147,7 +150,8 @@ const runTestCases = (
     });
   });
 };
-describe("", () => {
+
+describe("xxxx", () => {
   const bundle = compileFormatBundle<ItemEffects, number>(
     mockRule,
     [mockStateLable, mockElementsLable, mockRecoveryLable],
@@ -162,7 +166,7 @@ describe("", () => {
       expect(bundle).toSatisfy(isValidFormatBundle);
     });
   });
-  runTestCases("normal case", bundle, [
+  runTestCases("coverage", bundle, [
     {
       caseName: "elements format",
       data: { code: ELEMENT.code, dataId: ELEMENT.table.fire, value1: 10, value2: 20 },
@@ -183,7 +187,7 @@ describe("", () => {
     },
     {
       caseName: "recovery format",
-      data: { code: CODE_RECOVERY, dataId: 0, value1: 50, value2: 10 },
+      data: { code: RECOVER.code, dataId: 0, value1: 50, value2: 10 },
       expected: { label: mockRecoveryLable.label, text: "50% + 10point" },
       fn: ({ lookup }) => {
         expect(lookup.extractDataId).not.toHaveBeenCalled();
