@@ -31,7 +31,7 @@ export const getDataKeysFromFormatRule = <T>(
 
 export const getItemMappersFromRule = <T, SoruceKey extends SourceKeyConcept>(
   rule: FormatRule<T, SoruceKey>
-): ReadonlyArray<FormatItemMapper<T, SoruceKey>> => {
+): ReadonlyArray<FormatItemMapper<T>> => {
   const list = rule.itemMappers ?? [];
   return rule.itemMapper ? [...list, rule.itemMapper] : [...list];
 };

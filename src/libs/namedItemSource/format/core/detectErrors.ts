@@ -128,9 +128,9 @@ const detectItemMapperErrors = <T extends object>(
   );
 };
 
-const checkItemMapperSourceError = <T, SourceKey extends SourceKeyConcept>(
+const checkItemMapperSourceError = <T>(
   format: FormatWithSource,
-  rule: FormatItemMapper<T, SourceKey>,
+  rule: FormatItemMapper<T>,
   errorTexts: FormatErrorLabels
 ): FormatErrorItem | undefined => {
   const includedName: boolean = format.pattern.includes(rule.placeHolder);

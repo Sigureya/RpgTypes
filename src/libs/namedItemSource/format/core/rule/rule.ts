@@ -13,7 +13,7 @@ import type {
 
 export const compileFormatRule = <T, SourceKey extends SourceKeyConcept>(
   rule: FormatRule<T, SourceKey>,
-  extraItems: ReadonlyArray<FormatItemMapper<T, SourceKey>> = []
+  extraItems: ReadonlyArray<FormatItemMapper<T>> = []
 ): FormatRuleCompiled<T, SourceKey> => ({
   properties: rule.placeHolders.map<FormatField<T>>((placeHolder) => ({
     dataKey: placeHolder satisfies keyof T,
@@ -25,9 +25,9 @@ export const compileFormatRule = <T, SourceKey extends SourceKeyConcept>(
   fallbackFormat: generateFallbackFormat(rule),
 });
 
-const compileItemMapper = <T, SourceKey extends SourceKeyConcept>(
-  itemMappers: FormatItemMapper<T, SourceKey>
-): FormatItemMapperCompiled<T, SourceKey> => {
+const compileItemMapper = <T>(
+  itemMappers: FormatItemMapper<T>
+): FormatItemMapperCompiled<T> => {
   return {
     placeHolder: `{${itemMappers.placeHolder}}`,
     kindKey: itemMappers.kindKey,
