@@ -19,20 +19,36 @@ interface ItemEffects {
   value1: number;
   value2: number;
 }
+interface XXX {
+  code: number;
+  table: Record<string, number>;
+}
 
 const ELEMENT = {
-  fire: 1,
-  ice: 2,
-  thunder: 3,
-};
+  code: 1,
+  table: {
+    fire: 1,
+    ice: 2,
+    thunder: 3,
+  },
+} as const satisfies XXX;
+
+const STATE = {
+  code: 2,
+  table: {
+    poison: 4,
+    burn: 5,
+    freeze: 6,
+  },
+} as const satisfies XXX;
 
 const mockElements: NamedItemSource = {
   source: { author: "rmmz", module: "system", kind: "elements" },
   label: "elements",
   items: [
-    { id: ELEMENT.fire, name: "fire" },
-    { id: ELEMENT.ice, name: "ice" },
-    { id: ELEMENT.thunder, name: "thunder" },
+    { id: ELEMENT.table.fire, name: "fire" },
+    { id: ELEMENT.table.ice, name: "ice" },
+    { id: ELEMENT.table.thunder, name: "thunder" },
   ],
 };
 
@@ -40,9 +56,9 @@ const mockState: NamedItemSource = {
   source: { author: "rmmz", module: "data", kind: "state" },
   label: "state",
   items: [
-    { id: 4, name: "poison" },
-    { id: 5, name: "burn" },
-    { id: 6, name: "freeze" },
+    { id: STATE.table.poison, name: "poison" },
+    { id: STATE.table.burn, name: "burn" },
+    { id: STATE.table.freeze, name: "freeze" },
   ],
 };
 
@@ -67,21 +83,19 @@ const mockErrorLabeles = {
   formatVeryLong: "Format is too long",
 } as const satisfies FormatErrorLabels;
 
-const CODE_ELEMENT = 1;
-const CODE_STATE = 2;
 const CODE_RECOVERY = 3;
 
 const mockElementsLable = {
   label: "element damage",
   pattern: "{name} rate {value1}% + {value2}",
-  targetKey: CODE_ELEMENT,
+  targetKey: ELEMENT.code,
   dataSource: { ...mockElements.source },
 } as const satisfies FormatLabelResolved<number>;
 
 const mockStateLable = {
   label: "state",
   pattern: "{name} {value1}%",
-  targetKey: CODE_STATE,
+  targetKey: STATE.code,
   dataSource: { ...mockState.source },
 } as const satisfies FormatLabelResolved<number>;
 
@@ -95,7 +109,7 @@ interface TestCase {
   caseName: string;
   data: ItemEffects;
   expected: FormatResult;
-  fn: (data: ItemEffects, mock: MockedObject<FormatLookupKeys<ItemEffects, number>>) => void;
+  fn: (arg: { data: ItemEffects; lookup: MockedObject<FormatLookupKeys<ItemEffects, number>> }) => void;
 }
 
 const testFormatWithCompiledBundle = (
@@ -113,8 +127,11 @@ const testFormatWithCompiledBundle = (
     test("should return expected result", () => {
       expect(result).toEqual(expected);
     });
+    test("should call extractDataId", () => {
+      expect(mockedLookup.extractMapKey).toHaveBeenCalledWith(data);
+    });
     test("should call lookup methods", () => {
-      fn(data, mockedLookup);
+      fn({ data, lookup: mockedLookup });
     });
   });
 };
@@ -138,7 +155,7 @@ describe("", () => {
     mockErrorLabeles
   );
   describe("isValidFormatBundle", () => {
-    test("", () => {
+    test("should return true for valid bundle", () => {
       expect(bundle.errors).toEqual([]);
     });
     test("bundle should be valid", () => {
@@ -148,11 +165,28 @@ describe("", () => {
   runTestCases("normal case", bundle, [
     {
       caseName: "elements format",
-      data: { code: CODE_ELEMENT, dataId: ELEMENT.fire, value1: 10, value2: 20 },
+      data: { code: ELEMENT.code, dataId: ELEMENT.table.fire, value1: 10, value2: 20 },
       expected: { label: mockElementsLable.label, text: "fire rate 10% + 20" },
-      fn: (data, lookup) => {
-        expect(lookup.extractMapKey).toHaveBeenCalledWith(data);
+      fn: ({ data, lookup }) => {
         expect(lookup.extractDataId).toHaveBeenCalledWith(data);
+        expect(lookup.unknownKey).not.toHaveBeenCalled();
+      },
+    },
+    {
+      caseName: "state format",
+      data: { code: STATE.code, dataId: STATE.table.poison, value1: 30, value2: 0 },
+      expected: { label: mockStateLable.label, text: "poison 30%" },
+      fn: ({ data, lookup }) => {
+        expect(lookup.extractDataId).toHaveBeenCalledWith(data);
+        expect(lookup.unknownKey).not.toHaveBeenCalled();
+      },
+    },
+    {
+      caseName: "recovery format",
+      data: { code: CODE_RECOVERY, dataId: 0, value1: 50, value2: 10 },
+      expected: { label: mockRecoveryLable.label, text: "50% + 10point" },
+      fn: ({ lookup }) => {
+        expect(lookup.extractDataId).not.toHaveBeenCalled();
         expect(lookup.unknownKey).not.toHaveBeenCalled();
       },
     },
