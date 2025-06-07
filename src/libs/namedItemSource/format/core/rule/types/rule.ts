@@ -1,5 +1,8 @@
-import type { PickByType } from "@RpgTypes/templates";
-import type { FormatItemMapper, FormatItemMapperCompiled } from "./itemMappert";
+import type { PickByType, PickByTypeKeys } from "@RpgTypes/templates";
+import type {
+  FormatItemMapper,
+  FormatItemMapperCompiled,
+} from "./arrayWithKind";
 
 type PrimitiveProperties<T> = Extract<
   keyof PickByType<T, number | string>,
