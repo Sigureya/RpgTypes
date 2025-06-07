@@ -14,9 +14,9 @@ export interface FormatRule<
   T,
   SoruceKey extends SourceKeyConcept = SourceKeyConcept
 > {
-  itemMapper?: FormatItemMapper<T, SoruceKey>;
+  itemMapper?: FormatItemMapper<T>;
   placeHolders: PrimitiveProperties<T>[];
-  itemMappers?: FormatItemMapper<T, SoruceKey>[];
+  itemMappers?: FormatItemMapper<T>[];
   fallbackFormat?: string;
 }
 
@@ -30,7 +30,7 @@ export interface FormatRuleCompiled<
   SoruceKey extends SourceKeyConcept = SourceKeyConcept
 > {
   properties: FormatField<T>[];
-  itemMappers: FormatItemMapperCompiled<T, SoruceKey>[];
+  itemMappers: FormatItemMapperCompiled<T>[];
   fallbackFormat: string;
 }
 
