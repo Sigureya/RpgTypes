@@ -12,13 +12,16 @@ import type {
 } from "./types";
 
 export const compileFormatRule = <T, SourceKey extends SourceKeyConcept>(
-  rule: FormatRule<T, SourceKey>
+  rule: FormatRule<T, SourceKey>,
+  extraItems: ReadonlyArray<FormatItemMapper<T, SourceKey>> = []
 ): FormatRuleCompiled<T, SourceKey> => ({
   properties: rule.placeHolders.map<FormatField<T>>((placeHolder) => ({
     dataKey: placeHolder satisfies keyof T,
     placeHolder: `{${placeHolder}}`,
   })),
-  itemMappers: getItemMappersFromRule(rule).map(compileItemMapper),
+  itemMappers: [...getItemMappersFromRule(rule), ...extraItems].map(
+    compileItemMapper
+  ),
   fallbackFormat: generateFallbackFormat(rule),
 });
 
