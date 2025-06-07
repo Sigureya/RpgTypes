@@ -18,7 +18,6 @@ describe("getPlaceHolderKeys", () => {
         placeHolder: "name",
         dataIdKey: "dataId",
         kindKey: "code",
-        map: [{ kindId: 5, sourceId: 8 }],
       },
       itemMappers: [],
     };
@@ -33,14 +32,12 @@ describe("getPlaceHolderKeys", () => {
         placeHolder: "name1",
         dataIdKey: "dataId",
         kindKey: "code",
-        map: [{ kindId: 5, sourceId: "abc" }],
       },
       itemMappers: [
         {
           placeHolder: "name2",
           dataIdKey: "dataId",
           kindKey: "code",
-          map: [{ kindId: 200, sourceId: "xyz" }],
         },
       ],
     };

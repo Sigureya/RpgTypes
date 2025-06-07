@@ -22,7 +22,6 @@ const mockRule = {
     placeHolder: "name",
     dataIdKey: "dataId",
     kindKey: "code",
-    map: [],
   },
   itemMappers: [],
 } as const satisfies FormatRule<Trait>;
