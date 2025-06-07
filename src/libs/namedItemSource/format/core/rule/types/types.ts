@@ -1,9 +1,5 @@
 import type { PickByType } from "@RpgTypes/templates";
-import type {
-  SourceKeyConcept,
-  FormatItemMapper,
-  FormatItemMapperCompiled,
-} from "./itemMappert";
+import type { FormatItemMapper, FormatItemMapperCompiled } from "./itemMappert";
 
 type PrimitiveProperties<T> = Extract<
   keyof PickByType<T, number | string>,
