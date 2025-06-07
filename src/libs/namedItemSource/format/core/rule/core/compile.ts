@@ -5,7 +5,8 @@ import type {
   FormatProperties,
   FormatPropertiesCompiled,
 } from "./direct";
-import type { FormatArrayIndex } from "./array";
+import type { FormatArrayIndexCompiled } from "./array";
+import type { SourceIdentifier } from "./sourceIdentifier";
 
 export const compileFormatPropeties = <T>(
   props: FormatProperties<T>
@@ -25,7 +26,7 @@ const compilePlaceholders = <T, V extends number | string>(
 
 export const compileArrayPlaceholder = <T, Source extends string | number>(
   input: FormatArrayInput<T, Source>
-): FormatArrayIndex<T, Source> => {
+): FormatArrayIndexCompiled<T, Source> => {
   return {
     dataKey: input.dataIdKey,
     placeHolder: `{${input.dataIdKey}}`,
@@ -33,15 +34,16 @@ export const compileArrayPlaceholder = <T, Source extends string | number>(
   };
 };
 
-export const compileArrayPlaceholderEX = <
-  T,
-  Source extends Record<string, string | number>
->(
-  input: FormatArrayInput<T, Source>
-): FormatArrayIndex<T, Source> => {
+export const compileArrayPlaceholderEX = <T>(
+  input: FormatArrayInput<T, SourceIdentifier>
+): FormatArrayIndexCompiled<T, SourceIdentifier> => {
   return {
     dataKey: input.dataIdKey,
     placeHolder: `{${input.dataIdKey}}`,
-    sourceId: { ...input.sourceId },
+    sourceId: {
+      author: input.sourceId.author,
+      kind: input.sourceId.kind,
+      module: input.sourceId.module,
+    },
   };
 };
