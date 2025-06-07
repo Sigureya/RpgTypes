@@ -1,4 +1,3 @@
-import type { SourceIdentifier } from "../sourceIdentifier";
 import {
   getDataKeysFromFormatRule,
   getItemMappersFromRule,
@@ -51,7 +50,7 @@ export const applyPlaceholdersToText = <Schema, Data extends Schema>(
   rule: FormatRuleCompiled<Schema>
 ): string => {
   return rule.properties.reduce(
-    (text, r) => replacePlaceholder(text, data, r),
+    (text, field) => replacePlaceholder(text, data, field),
     baseText
   );
 };
@@ -59,11 +58,11 @@ export const applyPlaceholdersToText = <Schema, Data extends Schema>(
 const replacePlaceholder = <Schema, Data extends Schema>(
   baseText: string,
   data: Data,
-  rule: FormatField<Schema>
+  field: FormatField<Schema>
 ): string => {
-  const value = data[rule.dataKey satisfies keyof Data];
+  const value = data[field.dataKey satisfies keyof Data];
   if (value === undefined || value === null) {
     return baseText;
   }
-  return baseText.replaceAll(rule.placeHolder, String(value));
+  return baseText.replaceAll(field.placeHolder, String(value));
 };
