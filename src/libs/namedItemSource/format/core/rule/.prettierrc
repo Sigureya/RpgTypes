@@ -1,0 +1,10 @@
+{
+  "overrides": [
+    {
+      "files": ["getPlaceHolders.test.ts"],
+      "options": {
+        "printWidth": 120
+      }
+    }
+  ]
+}
