@@ -14,7 +14,7 @@ export const mergeItemsSource = <Key>(
   const sourceMap = mappingNamedItems(namedItemSources);
   return formatList.reduce<Map<Key, FormatCompiled>>((acc, label) => {
     const entry = buildFinalFormatEntry(label, sourceMap);
-    acc.set(label.targetKey, entry);
+    acc.set(label.kindId, entry);
     return acc;
   }, new Map());
 };

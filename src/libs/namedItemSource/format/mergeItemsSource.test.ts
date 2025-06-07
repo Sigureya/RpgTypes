@@ -89,11 +89,11 @@ describe("mergeItemsSource", () => {
     {
       caseName: "all labels have valid dataSource",
       labels: [
-        { label: "weapon113", pattern: "{name}", targetKey: 113, dataSource: mockWeapons.source },
-        { label: "weapon211", pattern: "{name}", targetKey: 211, dataSource: mockWeapons.source },
-        { label: "enemy404", pattern: "enemy {name}", targetKey: 404, dataSource: mockEnemies.source },
-        { label: "skill999", pattern: "999{name}", targetKey: 999, dataSource: mockSkills.source },
-        { label: "emptySource", pattern: "{name}", targetKey: 1000, dataSource: mockEmptySource.source },
+        { label: "weapon113", pattern: "{name}", kindId: 113, dataSource: mockWeapons.source },
+        { label: "weapon211", pattern: "{name}", kindId: 211, dataSource: mockWeapons.source },
+        { label: "enemy404", pattern: "enemy {name}", kindId: 404, dataSource: mockEnemies.source },
+        { label: "skill999", pattern: "999{name}", kindId: 999, dataSource: mockSkills.source },
+        { label: "emptySource", pattern: "{name}", kindId: 1000, dataSource: mockEmptySource.source },
       ],
       namedItemSources: [mockEnemies, mockWeapons, mockSkills, mockEmptySource],
       expected: new Map([
@@ -107,11 +107,11 @@ describe("mergeItemsSource", () => {
     {
       caseName: "labels with and without dataSource",
       labels: [
-        { label: "", pattern: "", targetKey: 0 },
-        { label: "aaa", pattern: "format A", targetKey: 58 },
-        { label: "bbb", pattern: "format B", targetKey: 66, dataSource: mockWeapons.source },
-        { label: "ccc", pattern: "format C", targetKey: 75, dataSource: mockInvalidSource },
-        { label: "ddd", pattern: "format D", targetKey: 81, dataSource: mockWeapons.source },
+        { label: "", pattern: "", kindId: 0 },
+        { label: "aaa", pattern: "format A", kindId: 58 },
+        { label: "bbb", pattern: "format B", kindId: 66, dataSource: mockWeapons.source },
+        { label: "ccc", pattern: "format C", kindId: 75, dataSource: mockInvalidSource },
+        { label: "ddd", pattern: "format D", kindId: 81, dataSource: mockWeapons.source },
       ],
       namedItemSources: [mockWeapons, mockEnemies],
       expected: new Map([
@@ -128,9 +128,9 @@ describe("mergeItemsSource", () => {
       {
         caseName: "duplicate targetKey with different dataSource",
         labels: [
-          { label: "skill", pattern: "{name}", targetKey: 926, dataSource: mockSkills.source },
-          { label: "enemy", pattern: "{name}", targetKey: 926, dataSource: mockEnemies.source },
-          { label: "weapon", pattern: "{name}", targetKey: 926, dataSource: mockWeapons.source },
+          { label: "skill", pattern: "{name}", kindId: 926, dataSource: mockSkills.source },
+          { label: "enemy", pattern: "{name}", kindId: 926, dataSource: mockEnemies.source },
+          { label: "weapon", pattern: "{name}", kindId: 926, dataSource: mockWeapons.source },
         ],
         namedItemSources: [mockWeapons, mockEnemies],
         expected: new Map([[926, { label: "weapon", patternCompiled: "{name}", data: mockWeapons.items }]]),
