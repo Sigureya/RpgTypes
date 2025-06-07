@@ -67,19 +67,6 @@ const mockState: NamedItemSource = {
   ],
 };
 
-const mockRule: FormatRule<ItemEffects, SourceIdentifier> = {
-  placeHolders: ["value1", "value2"],
-  itemMapper: {
-    dataIdKey: "dataId",
-    kindKey: "code",
-    placeHolder: "name",
-    map: [
-      { kindId: 4, sourceId: { ...mockElements.source } },
-      { kindId: 5, sourceId: { ...mockState.source } },
-    ],
-  },
-};
-
 const mockErrorLabeles = {
   extraPlaceHolder: "Extra placeholder error",
   longPlaceHolder: "Placeholder is too long",
@@ -107,6 +94,18 @@ const mockRecoveryLable = {
   pattern: "{value1}% + {value2}point",
   targetKey: RECOVER.code,
 } as const satisfies FormatLabelResolved<number>;
+const mockRule: FormatRule<ItemEffects, SourceIdentifier> = {
+  placeHolders: ["value1", "value2"],
+  itemMapper: {
+    dataIdKey: "dataId",
+    kindKey: "code",
+    placeHolder: "name",
+    map: [
+      //      { kindId: 4, sourceId: { ...mockElements.source } },
+      //      { kindId: 5, sourceId: { ...mockState.source } },
+    ],
+  },
+};
 
 interface TestCase {
   caseName: string;
@@ -151,7 +150,7 @@ const runTestCases = (
   });
 };
 
-describe("xxxx", () => {
+describe("formatWithCompiledBundle integration", () => {
   const bundle = compileFormatBundle<ItemEffects, number>(
     mockRule,
     [mockStateLable, mockElementsLable, mockRecoveryLable],
@@ -166,7 +165,7 @@ describe("xxxx", () => {
       expect(bundle).toSatisfy(isValidFormatBundle);
     });
   });
-  runTestCases("coverage", bundle, [
+  runTestCases("formatting patterns", bundle, [
     {
       caseName: "elements format",
       data: { code: ELEMENT.code, dataId: ELEMENT.table.fire, value1: 10, value2: 20 },
@@ -177,9 +176,18 @@ describe("xxxx", () => {
       },
     },
     {
-      caseName: "state format",
+      caseName: "state format poison",
       data: { code: STATE.code, dataId: STATE.table.poison, value1: 30, value2: 0 },
       expected: { label: mockStateLable.label, text: "poison 30%" },
+      fn: ({ data, lookup }) => {
+        expect(lookup.extractDataId).toHaveBeenCalledWith(data);
+        expect(lookup.unknownKey).not.toHaveBeenCalled();
+      },
+    },
+    {
+      caseName: "state format burn",
+      data: { code: STATE.code, dataId: STATE.table.burn, value1: 40, value2: 123 },
+      expected: { label: mockStateLable.label, text: "burn 40%" },
       fn: ({ data, lookup }) => {
         expect(lookup.extractDataId).toHaveBeenCalledWith(data);
         expect(lookup.unknownKey).not.toHaveBeenCalled();
