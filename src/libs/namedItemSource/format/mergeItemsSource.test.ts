@@ -32,6 +32,12 @@ const mockSkills = {
   ],
 } as const satisfies NamedItemSource;
 
+const mockEmptySource = {
+  label: "empty",
+  source: { author: "rmmz", module: "data", kind: "empty" },
+  items: [],
+} as const satisfies NamedItemSource;
+
 const mockInvalidSource = {
   author: "unknown",
   module: "unknown",
@@ -87,13 +93,15 @@ describe("mergeItemsSource", () => {
         { label: "weapon211", pattern: "{name}", targetKey: 211, dataSource: mockWeapons.source },
         { label: "enemy404", pattern: "enemy {name}", targetKey: 404, dataSource: mockEnemies.source },
         { label: "skill999", pattern: "999{name}", targetKey: 999, dataSource: mockSkills.source },
+        { label: "emptySource", pattern: "{name}", targetKey: 1000, dataSource: mockEmptySource.source },
       ],
-      namedItemSources: [mockEnemies, mockWeapons, mockSkills],
+      namedItemSources: [mockEnemies, mockWeapons, mockSkills, mockEmptySource],
       expected: new Map([
         [113, { label: "weapon113", patternCompiled: "{name}", data: mockWeapons.items }],
         [211, { label: "weapon211", patternCompiled: "{name}", data: mockWeapons.items }],
         [404, { label: "enemy404", patternCompiled: "enemy {name}", data: mockEnemies.items }],
         [999, { label: "skill999", patternCompiled: "999{name}", data: mockSkills.items }],
+        [1000, { label: "emptySource", patternCompiled: "{name}", data: mockEmptySource.items }],
       ]),
     },
     {
