@@ -14,7 +14,7 @@ import type {
 export const compileFormatRule = <T, SourceKey extends SourceKeyConcept>(
   rule: FormatRule<T, SourceKey>,
   extraItems: ReadonlyArray<FormatItemMapper<T>> = []
-): FormatRuleCompiled<T, SourceKey> => ({
+): FormatRuleCompiled<T> => ({
   properties: rule.placeHolders.map<FormatField<T>>((placeHolder) => ({
     dataKey: placeHolder satisfies keyof T,
     placeHolder: `{${placeHolder}}`,

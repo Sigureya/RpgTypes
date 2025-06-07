@@ -61,12 +61,9 @@ export const formatWithCompiledBundle = <
     : formatTextForFallback(data, bundle.compiledRule, key, lookup);
 };
 
-const formatTextForMatchedEntry = <
-  T extends object,
-  Source extends SourceKeyConcept
->(
+const formatTextForMatchedEntry = <T extends object>(
   data: T,
-  rule: FormatRuleCompiled<T, Source>,
+  rule: FormatRuleCompiled<T>,
   format: FormatCompiled,
   getDataId: (data: T) => number
 ): FormatResult => {
@@ -82,13 +79,9 @@ const formatTextForMatchedEntry = <
   };
 };
 
-const formatTextForFallback = <
-  T extends object,
-  KindKey,
-  Source extends SourceKeyConcept
->(
+const formatTextForFallback = <T extends object, KindKey>(
   data: T,
-  rule: FormatRuleCompiled<T, Source>,
+  rule: FormatRuleCompiled<T>,
   key: KindKey,
   lookup: FormatLookupKeys<T, KindKey>
 ): FormatResult => {

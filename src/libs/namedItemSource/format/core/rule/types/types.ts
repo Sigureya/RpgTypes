@@ -25,10 +25,7 @@ export interface FormatField<T> {
   placeHolder: `{${PrimitiveProperties<T>}}`;
 }
 
-export interface FormatRuleCompiled<
-  T,
-  SoruceKey extends SourceKeyConcept = SourceKeyConcept
-> {
+export interface FormatRuleCompiled<T> {
   properties: FormatField<T>[];
   itemMappers: FormatItemMapperCompiled<T>[];
   fallbackFormat: string;
