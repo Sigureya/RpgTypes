@@ -1,5 +1,10 @@
 import type { PickByTypeKeys } from "@RpgTypes/templates";
-import type { FormatArrayInput, FormatPlaceholder } from "./direct";
+import type {
+  FormatArrayInput,
+  FormatPlaceholder,
+  FormatProperties,
+  FormatPropertiesCompiled,
+} from "./direct";
 import type { FormatArrayIndex } from "./array";
 
 export const buildNumberPlaceholders = <T>(
@@ -42,3 +47,10 @@ export const buildArrayPlaceholderEX = <
     sourceId: { ...input.sourceId },
   };
 };
+
+export const compileFormatPropeties = <T>(
+  props: FormatProperties<T>
+): FormatPropertiesCompiled<T> => ({
+  numbers: props.numbers ? buildNumberPlaceholders(props.numbers) : [],
+  strings: props.strings ? buildStringPlaceholders(props.strings) : [],
+});
