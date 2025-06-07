@@ -1,2 +1,2 @@
-export { buildNumberPlaceholders, buildStringPlaceholders } from "./direct";
-export type { FormatPlaceholder } from "./types";
+export { buildNumberPlaceholders, buildStringPlaceholders } from "./build";
+export type { FormatPlaceholder } from "./direct";
