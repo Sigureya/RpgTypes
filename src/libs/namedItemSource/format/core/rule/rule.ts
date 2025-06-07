@@ -12,7 +12,7 @@ import type {
 } from "./types";
 
 export const compileFormatRule = <T>(
-  rule: FormatRule<T, SourceIdentifier>,
+  rule: FormatRule<T>,
   extraItems: ReadonlyArray<FormatItemMapper<T>> = []
 ): FormatRuleCompiled<T> => ({
   properties: rule.placeHolders.map<FormatField<T>>((placeHolder) => ({

@@ -10,10 +10,7 @@ type PrimitiveProperties<T> = Extract<
   string
 >;
 
-export interface FormatRule<
-  T,
-  SoruceKey extends SourceKeyConcept = SourceKeyConcept
-> {
+export interface FormatRule<T> {
   itemMapper?: FormatItemMapper<T>;
   placeHolders: PrimitiveProperties<T>[];
   itemMappers?: FormatItemMapper<T>[];

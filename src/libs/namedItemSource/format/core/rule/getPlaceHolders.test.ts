@@ -12,7 +12,7 @@ interface ItemEffect {
 describe("getPlaceHolderKeys", () => {
   test("with single item mapper and no item mappers", () => {
     const expectedKeys = new Set(["value1", "value2", "name"]);
-    const mockRule: FormatRule<ItemEffect, number> = {
+    const mockRule: FormatRule<ItemEffect> = {
       placeHolders: ["value1", "value2"],
       itemMapper: {
         placeHolder: "name",
@@ -26,7 +26,7 @@ describe("getPlaceHolderKeys", () => {
   });
   test("with multiple item mappers", () => {
     const expectedKeys = new Set(["value1", "value2", "name1", "name2"]);
-    const mockRule: FormatRule<ItemEffect, string> = {
+    const mockRule: FormatRule<ItemEffect> = {
       placeHolders: ["value1", "value2"],
       itemMapper: {
         placeHolder: "name1",

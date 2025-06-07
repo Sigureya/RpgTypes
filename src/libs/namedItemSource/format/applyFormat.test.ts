@@ -94,7 +94,7 @@ const mockRecoveryLable = {
   pattern: "{value1}% + {value2}point",
   kindId: RECOVER.code,
 } as const satisfies FormatLabelResolved<number>;
-const mockRule: FormatRule<ItemEffects, SourceIdentifier> = {
+const mockRule: FormatRule<ItemEffects> = {
   placeHolders: ["value1", "value2"],
   itemMapper: {
     dataIdKey: "dataId",
