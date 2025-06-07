@@ -11,6 +11,7 @@ import type {
 } from "./core";
 import { compileFormatBundle, formatWithCompiledBundle, isValidFormatBundle } from "./applyFormat";
 import type { FormatLookupKeys } from "./core/accessor";
+import type { CompiledFormatBundle } from "./bundle";
 
 interface ItemEffects {
   code: number;
@@ -90,22 +91,6 @@ const mockRecoveryLable = {
   targetKey: CODE_RECOVERY,
 } as const satisfies FormatLabelResolved<number>;
 
-const bundle = compileFormatBundle<ItemEffects, number>(
-  mockRule,
-  [mockStateLable, mockElementsLable, mockRecoveryLable],
-  [mockState, mockElements],
-  mockErrorLabeles
-);
-
-describe("isValidFormatBundle", () => {
-  test("", () => {
-    expect(bundle.errors).toEqual([]);
-  });
-  test("bundle should be valid", () => {
-    expect(bundle).toSatisfy(isValidFormatBundle);
-  });
-});
-
 interface TestCase {
   caseName: string;
   data: ItemEffects;
@@ -113,7 +98,10 @@ interface TestCase {
   fn: (data: ItemEffects, mock: MockedObject<FormatLookupKeys<ItemEffects, number>>) => void;
 }
 
-const testFormatWithCompiledBundle = ({ caseName, data, expected, fn }: TestCase) => {
+const testFormatWithCompiledBundle = (
+  bundle: CompiledFormatBundle<ItemEffects, number, SourceIdentifier>,
+  { caseName, data, expected, fn }: TestCase
+) => {
   const mockedLookup = {
     extractMapKey: vi.fn((d: ItemEffects) => d.code),
     extractDataId: vi.fn((d: ItemEffects) => d.dataId),
@@ -131,23 +119,42 @@ const testFormatWithCompiledBundle = ({ caseName, data, expected, fn }: TestCase
   });
 };
 
-const runTestCases = (caseName: string, testCases: TestCase[]) => {
+const runTestCases = (
+  caseName: string,
+  bundle: CompiledFormatBundle<ItemEffects, number, SourceIdentifier>,
+  testCases: TestCase[]
+) => {
   describe(caseName, () => {
     testCases.forEach((testCase) => {
-      testFormatWithCompiledBundle(testCase);
+      testFormatWithCompiledBundle(bundle, testCase);
     });
   });
 };
-
-runTestCases("normal case", [
-  {
-    caseName: "elements format",
-    data: { code: CODE_ELEMENT, dataId: ELEMENT.fire, value1: 10, value2: 20 },
-    expected: { label: mockElementsLable.label, text: "fire rate 10% + 20" },
-    fn: (data, lookup) => {
-      expect(lookup.extractMapKey).toHaveBeenCalledWith(data);
-      expect(lookup.extractDataId).toHaveBeenCalledWith(data);
-      expect(lookup.unknownKey).not.toHaveBeenCalled();
+describe("", () => {
+  const bundle = compileFormatBundle<ItemEffects, number>(
+    mockRule,
+    [mockStateLable, mockElementsLable, mockRecoveryLable],
+    [mockState, mockElements],
+    mockErrorLabeles
+  );
+  describe("isValidFormatBundle", () => {
+    test("", () => {
+      expect(bundle.errors).toEqual([]);
+    });
+    test("bundle should be valid", () => {
+      expect(bundle).toSatisfy(isValidFormatBundle);
+    });
+  });
+  runTestCases("normal case", bundle, [
+    {
+      caseName: "elements format",
+      data: { code: CODE_ELEMENT, dataId: ELEMENT.fire, value1: 10, value2: 20 },
+      expected: { label: mockElementsLable.label, text: "fire rate 10% + 20" },
+      fn: (data, lookup) => {
+        expect(lookup.extractMapKey).toHaveBeenCalledWith(data);
+        expect(lookup.extractDataId).toHaveBeenCalledWith(data);
+        expect(lookup.unknownKey).not.toHaveBeenCalled();
+      },
     },
-  },
-]);
+  ]);
+});
