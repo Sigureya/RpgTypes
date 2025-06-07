@@ -78,47 +78,55 @@ const testFormatTraitText = ({
   });
 };
 
-describe("", () => {
-  testFormatTraitText({
-    caseName: "format with name and value",
-    format: { pattern: "{name} {value}", dataSource: mockSourceId },
-    trait: {
-      code: 0,
-      dataId: 1,
-      value: 240,
-    },
-    includeTexts: [mockE1.name, "240"],
+const runTestCases = (caseName: string, cases: TestCase[]) => {
+  describe(caseName, () => {
+    cases.forEach((testCase) => {
+      testFormatTraitText(testCase);
+    });
   });
+};
 
-  testFormatTraitText({
-    caseName: "format with name only",
-    format: { pattern: "{name}", dataSource: mockSourceId },
-    trait: {
-      code: 0,
-      dataId: 2,
-      value: 270,
+describe("formatTraitText", () => {
+  runTestCases("normal cases", [
+    {
+      caseName: "format with name and value",
+      format: { pattern: "{name} {value}", dataSource: mockSourceId },
+      trait: {
+        code: 0,
+        dataId: 1,
+        value: 240,
+      },
+      includeTexts: [mockE1.name, "240"],
     },
-    includeTexts: [mockE2.name],
-  });
-
-  testFormatTraitText({
-    caseName: "format with value only",
-    format: { pattern: "{value}" },
-    trait: {
-      code: 0,
-      dataId: 3,
-      value: 1000,
+    {
+      caseName: "format with name only",
+      format: { pattern: "{name}", dataSource: mockSourceId },
+      trait: {
+        code: 0,
+        dataId: 2,
+        value: 270,
+      },
+      includeTexts: [mockE2.name],
     },
-    includeTexts: ["1000"],
-  });
-  testFormatTraitText({
-    caseName: "format with value and custom text",
-    format: { pattern: "{value} abc" },
-    trait: {
-      code: 0,
-      dataId: 3,
-      value: 1000,
+    {
+      caseName: "format with value only",
+      format: { pattern: "{value}" },
+      trait: {
+        code: 0,
+        dataId: 3,
+        value: 1000,
+      },
+      includeTexts: ["1000"],
     },
-    includeTexts: ["1000", "abc"],
-  });
+    {
+      caseName: "format with value and custom text",
+      format: { pattern: "{value} abc" },
+      trait: {
+        code: 0,
+        dataId: 3,
+        value: 1000,
+      },
+      includeTexts: ["1000", "abc"],
+    },
+  ]);
 });
