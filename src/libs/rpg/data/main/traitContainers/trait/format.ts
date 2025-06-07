@@ -19,7 +19,9 @@ const RULE_TRAIT = {
     dataIdKey: "dataId",
     kindKey: "code",
   },
-  placeHolders: ["value"],
+  placeHolder: {
+    numbers: ["value"],
+  },
 } as const satisfies FormatRule<Trait>;
 
 export const formatTraitText = (

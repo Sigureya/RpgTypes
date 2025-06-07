@@ -1,7 +1,7 @@
 import type { FormatItemMapper, FormatRule } from "./types";
 
 export const getPlaceHolderKeys = <T>(rule: FormatRule<T>): Set<string> => {
-  const set = new Set<string>(rule.placeHolders);
+  const set = new Set<string>(rule.placeHolder?.numbers ?? []);
   if (rule.itemMapper) {
     set.add(rule.itemMapper.placeHolder);
   }
@@ -17,7 +17,7 @@ export const getPlaceHolderKeys = <T>(rule: FormatRule<T>): Set<string> => {
 export const getDataKeysFromFormatRule = <T>(
   rule: FormatRule<T>
 ): Set<string & keyof T> => {
-  const set = new Set<string & keyof T>(rule.placeHolders);
+  const set = new Set<string & keyof T>(rule.placeHolder?.numbers ?? []);
   if (rule.itemMapper) {
     set.add(rule.itemMapper.kindKey);
   }
