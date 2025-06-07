@@ -1,3 +1,4 @@
+import type { SourceIdentifier } from "../sourceIdentifier";
 import {
   getDataKeysFromFormatRule,
   getItemMappersFromRule,
@@ -6,13 +7,12 @@ import type {
   FormatRule,
   FormatField,
   FormatRuleCompiled,
-  SourceKeyConcept,
   FormatItemMapper,
   FormatItemMapperCompiled,
 } from "./types";
 
-export const compileFormatRule = <T, SourceKey extends SourceKeyConcept>(
-  rule: FormatRule<T, SourceKey>,
+export const compileFormatRule = <T>(
+  rule: FormatRule<T, SourceIdentifier>,
   extraItems: ReadonlyArray<FormatItemMapper<T>> = []
 ): FormatRuleCompiled<T> => ({
   properties: rule.placeHolders.map<FormatField<T>>((placeHolder) => ({
