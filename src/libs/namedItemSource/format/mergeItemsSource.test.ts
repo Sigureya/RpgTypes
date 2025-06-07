@@ -1,6 +1,6 @@
 import { describe, test, expect } from "vitest";
 import { mergeItemsSource } from "./mergeItemsSource";
-import type { FormatCompiled, FormatLabelResolved, NamedItemSource } from "./core";
+import type { FormatCompiled, FormatLabelResolved, NamedItemSource, SourceIdentifier } from "./core";
 
 const mockWeapons = {
   label: "weapons",
@@ -21,6 +21,12 @@ const mockEnemies = {
     { id: 6, name: "dragon" },
   ],
 } as const satisfies NamedItemSource;
+
+const mockInvalidSource = {
+  author: "unknown",
+  module: "unknown",
+  kind: "unknown",
+} satisfies SourceIdentifier;
 
 interface TestCase<Key> {
   caseName: string;
@@ -64,12 +70,14 @@ describe("mergeItemsSource", () => {
       caseName: "labels with and without dataSource",
       labels: [
         { label: "aaa", pattern: "format A", targetKey: 58 },
-        { label: "bbb", pattern: "format B", targetKey: 65, dataSource: mockWeapons.source },
+        { label: "bbb", pattern: "format B", targetKey: 66, dataSource: mockWeapons.source },
+        { label: "ccc", pattern: "format C", targetKey: 75, dataSource: mockInvalidSource },
       ],
-      namedItemSources: [mockWeapons],
+      namedItemSources: [mockWeapons, mockEnemies],
       expected: new Map([
         [58, { label: "aaa", patternCompiled: "format A", data: undefined }],
-        [65, { label: "bbb", patternCompiled: "format B", data: mockWeapons.items }],
+        [66, { label: "bbb", patternCompiled: "format B", data: mockWeapons.items }],
+        [75, { label: "ccc", patternCompiled: "format C", data: undefined }],
       ]),
     },
   ]);
