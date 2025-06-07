@@ -1,4 +1,4 @@
-import type { FormatItemMapper, FormatRule } from "./types";
+import type { FormatItemMapper, FormatRule } from "./core";
 
 export const getPlaceHolderKeys = <T>(rule: FormatRule<T>): Set<string> => {
   const set = new Set<string>(rule.placeHolder?.numbers ?? []);

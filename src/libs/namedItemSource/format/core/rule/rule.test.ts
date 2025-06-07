@@ -1,6 +1,6 @@
 import { describe, test, expect } from "vitest";
 import { compileFormatRule, applyPlaceholdersToText } from "./rule";
-import type { FormatRule, FormatRuleCompiled } from "./types";
+import type { FormatRule, FormatRuleCompiled } from "./core";
 
 // Test data interfaces
 interface ItemEffect {

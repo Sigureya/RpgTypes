@@ -8,8 +8,8 @@ import type {
   FormatPlaceholder,
   FormatRule,
   FormatRuleCompiled,
-} from "./types";
-import { compileFormatPropeties } from "./types";
+} from "./core";
+import { compileFormatPropeties } from "./core";
 
 export const compileFormatRule = <T>(
   rule: FormatRule<T>,
