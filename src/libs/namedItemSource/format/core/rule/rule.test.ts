@@ -16,7 +16,7 @@ interface Skill {
 }
 
 // Mock rule for ItemEffect
-const mockRule: FormatRule<ItemEffect> = {
+const mockEffectRule: FormatRule<ItemEffect> = {
   placeHolder: {
     numbers: ["value1", "dataId", "code"],
   },
@@ -72,7 +72,7 @@ describe("compileFormatRule", () => {
     },
     {
       caseName: "compiles rule with string placeholders",
-      rule: mockRule,
+      rule: mockEffectRule,
       expected: {
         itemMappers: [
           { dataIdKey: "dataId", kindKey: "code", placeHolder: "{name}" },
@@ -155,27 +155,52 @@ describe("compileFormatRule", () => {
 });
 
 describe("replacePlaceholders", () => {
-  const compiledRule = compileFormatRule(mockRule);
-  const effect: ItemEffect = {
-    value1: 42,
-    value2: 1234,
-    dataId: 1001,
-    code: 78,
-  };
+  describe("rule effect", () => {
+    const compiledRule = compileFormatRule(mockEffectRule);
+    const effect: ItemEffect = {
+      value1: 42,
+      value2: 1234,
+      dataId: 1001,
+      code: 78,
+    };
 
-  test("should replace placeholders with corresponding values", () => {
-    const baseText = "Value1: {value1}, DataId: {dataId}, Code: {code}";
-    const result: string = applyPlaceholdersToText(
-      baseText,
-      effect,
-      compiledRule
-    );
-    expect(result).toBe("Value1: 42, DataId: 1001, Code: 78");
+    test("should replace placeholders with corresponding values", () => {
+      const baseText = "Value1: {value1}, DataId: {dataId}, Code: {code}";
+      const result: string = applyPlaceholdersToText(
+        baseText,
+        effect,
+        compiledRule
+      );
+      expect(result).toBe("Value1: 42, DataId: 1001, Code: 78");
+    });
+
+    test("should return base text if no placeholders match", () => {
+      const baseText = "No placeholders here.";
+      const result = applyPlaceholdersToText(baseText, effect, compiledRule);
+      expect(result).toBe(baseText);
+    });
   });
-
-  test("should return base text if no placeholders match", () => {
-    const baseText = "No placeholders here.";
-    const result = applyPlaceholdersToText(baseText, effect, compiledRule);
-    expect(result).toBe(baseText);
+  describe("rule skill", () => {
+    const mockSkillRule: FormatRule<Skill> = {
+      placeHolder: {
+        numbers: ["id"],
+        strings: ["name"],
+      },
+    };
+    const compiledSkillRule = compileFormatRule(mockSkillRule);
+    const skill: Skill = {
+      id: 101,
+      name: "Fireball",
+      effects: [],
+    };
+    test("should replace skill placeholders with corresponding values", () => {
+      const baseText = "Skill ID: {id}, Skill Name: {name}";
+      const result: string = applyPlaceholdersToText(
+        baseText,
+        skill,
+        compiledSkillRule
+      );
+      expect(result).toBe("Skill ID: 101, Skill Name: Fireball");
+    });
   });
 });

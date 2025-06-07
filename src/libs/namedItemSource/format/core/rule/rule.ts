@@ -47,16 +47,24 @@ export const applyPlaceholdersToText = <Schema, Data extends Schema>(
   data: Data,
   rule: FormatRuleCompiled<Schema>
 ): string => {
-  return rule.properties.numbers.reduce(
+  const numText: string = rule.properties.numbers.reduce(
     (text, field) => replacePlaceholder(text, data, field),
     baseText
   );
+  return rule.properties.strings.reduce(
+    (text, field) => replacePlaceholder(text, data, field),
+    numText
+  );
 };
 
-const replacePlaceholder = <Schema, Data extends Schema>(
+const replacePlaceholder = <
+  Schema,
+  Data extends Schema,
+  Value extends number | string
+>(
   baseText: string,
   data: Data,
-  field: FormatPlaceholder<Schema, number>
+  field: FormatPlaceholder<Schema, Value>
 ): string => {
   const value = data[field.dataKey satisfies keyof Data];
   if (value === undefined || value === null) {
