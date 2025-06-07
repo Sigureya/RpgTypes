@@ -1,24 +1,19 @@
-import type { PickByType, PickByTypeKeys } from "@RpgTypes/templates";
+import type { PickByTypeKeys } from "@RpgTypes/templates";
 import type {
   FormatItemMapper,
   FormatItemMapperCompiled,
 } from "./arrayWithKind";
 
-type PrimitiveProperties<T> = Extract<
-  keyof PickByType<T, number | string>,
-  string
->;
-
 export interface FormatRule<T> {
   itemMapper?: FormatItemMapper<T>;
-  placeHolders: PrimitiveProperties<T>[];
+  placeHolders: PickByTypeKeys<T, number | string>[];
   itemMappers?: FormatItemMapper<T>[];
   fallbackFormat?: string;
 }
 
 export interface FormatField<T> {
-  dataKey: PrimitiveProperties<T>;
-  placeHolder: `{${PrimitiveProperties<T>}}`;
+  dataKey: PickByTypeKeys<T, number | string>;
+  placeHolder: `{${PickByTypeKeys<T, number | string>}}`;
 }
 
 export interface FormatRuleCompiled<T> {
