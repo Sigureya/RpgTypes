@@ -17,12 +17,9 @@ export const isValidFormatErrorGroup = (
   );
 };
 
-export const collectFormatErrors = <
-  T extends object,
-  Src extends SourceKeyConcept
->(
+export const collectFormatErrors = <T extends object>(
   formatList: ReadonlyArray<FormatInput>,
-  formatRule: FormatRule<T, Src>,
+  formatRule: FormatRule<T>,
   errorTexts: FormatErrorLabels,
   limits: FormatLimits = {
     placeHolderMaxLength: 50,
@@ -38,12 +35,9 @@ export const collectFormatErrors = <
   }, []);
 };
 
-export const detectFormatErrors = <
-  T extends object,
-  Src extends SourceKeyConcept
->(
+export const detectFormatErrors = <T extends object>(
   format: FormatInput,
-  formatRule: FormatRule<T, Src>,
+  formatRule: FormatRule<T>,
   errorTexts: FormatErrorLabels,
   limits: FormatLimits = {
     placeHolderMaxLength: 50,

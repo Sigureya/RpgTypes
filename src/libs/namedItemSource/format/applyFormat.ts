@@ -8,7 +8,6 @@ import type {
   FormatRule,
   FormatRuleCompiled,
   NamedItemSource,
-  SourceIdentifier,
 } from "./core";
 import {
   compileFormatRule,
@@ -20,7 +19,7 @@ import { collectFormatErrors } from "./core/detectErrors";
 import { mergeItemsSource } from "./mergeItemsSource";
 
 export const compileFormatBundle = <T extends object, KindKey>(
-  rule: FormatRule<T, SourceIdentifier>,
+  rule: FormatRule<T>,
   formatList: ReadonlyArray<FormatLabelResolved<KindKey>>,
   namedItemSources: ReadonlyArray<NamedItemSource>,
   errorTexts: FormatErrorLabels
