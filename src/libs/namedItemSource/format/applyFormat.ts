@@ -9,7 +9,6 @@ import type {
   FormatRuleCompiled,
   NamedItemSource,
   SourceIdentifier,
-  SourceKeyConcept,
 } from "./core";
 import {
   compileFormatRule,
@@ -25,7 +24,7 @@ export const compileFormatBundle = <T extends object, KindKey>(
   formatList: ReadonlyArray<FormatLabelResolved<KindKey>>,
   namedItemSources: ReadonlyArray<NamedItemSource>,
   errorTexts: FormatErrorLabels
-): CompiledFormatBundle<T, KindKey, SourceIdentifier> => {
+): CompiledFormatBundle<T, KindKey> => {
   return {
     soruceMap: mergeItemsSource(formatList, namedItemSources),
     errors: collectFormatErrors(formatList, rule, errorTexts),
@@ -33,23 +32,15 @@ export const compileFormatBundle = <T extends object, KindKey>(
   };
 };
 
-export const isValidFormatBundle = <
-  T extends object,
-  KindKey,
-  Source extends SourceKeyConcept
->(
-  bundle: CompiledFormatBundle<T, KindKey, Source>
+export const isValidFormatBundle = <T extends object, KindKey>(
+  bundle: CompiledFormatBundle<T, KindKey>
 ): boolean => {
   return bundle.errors.length === 0;
 };
 
-export const formatWithCompiledBundle = <
-  T extends object,
-  KindKey,
-  Source extends SourceKeyConcept
->(
+export const formatWithCompiledBundle = <T extends object, KindKey>(
   data: T,
-  bundle: CompiledFormatBundle<T, KindKey, Source>,
+  bundle: CompiledFormatBundle<T, KindKey>,
   lookup: FormatLookupKeys<T, KindKey>
 ): FormatResult => {
   const key: KindKey = lookup.extractMapKey(data);

@@ -111,7 +111,7 @@ interface TestCase {
 }
 
 const testFormatWithCompiledBundle = (
-  bundle: CompiledFormatBundle<ItemEffects, number, SourceIdentifier>,
+  bundle: CompiledFormatBundle<ItemEffects, number>,
   { caseName, data, expected, fn }: TestCase
 ) => {
   const mockedLookup = {
@@ -134,11 +134,7 @@ const testFormatWithCompiledBundle = (
   });
 };
 
-const runTestCases = (
-  caseName: string,
-  bundle: CompiledFormatBundle<ItemEffects, number, SourceIdentifier>,
-  testCases: TestCase[]
-) => {
+const runTestCases = (caseName: string, bundle: CompiledFormatBundle<ItemEffects, number>, testCases: TestCase[]) => {
   describe(caseName, () => {
     testCases.forEach((testCase) => {
       testFormatWithCompiledBundle(bundle, testCase);
