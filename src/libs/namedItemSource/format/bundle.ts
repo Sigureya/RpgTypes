@@ -12,5 +12,5 @@ export interface CompiledFormatBundle<
 > {
   soruceMap: Map<Key, FormatCompiled>;
   errors: FormatErrorGroup[];
-  compiledRule: FormatRuleCompiled<T, SourceKey>;
+  compiledRule: FormatRuleCompiled<T>;
 }

@@ -29,8 +29,8 @@ export const getDataKeysFromFormatRule = <T>(
   return set;
 };
 
-export const getItemMappersFromRule = <T, SoruceKey extends SourceKeyConcept>(
-  rule: FormatRule<T, SoruceKey>
+export const getItemMappersFromRule = <T>(
+  rule: FormatRule<T>
 ): ReadonlyArray<FormatItemMapper<T>> => {
   const list = rule.itemMappers ?? [];
   return rule.itemMapper ? [...list, rule.itemMapper] : [...list];
