@@ -9,43 +9,65 @@ interface ItemEffect {
   code: number;
 }
 
+interface TestCase<T> {
+  caseName: string;
+  rule: FormatRule<T>;
+  expected: {
+    keys: (keyof T)[];
+    placeHolders: string[];
+  };
+}
+
+const testGetPlaceHolderKeys = <T>({ caseName, expected, rule }: TestCase<T>) => {
+  describe(caseName, () => {
+    const keys = getPlaceHolderKeys(rule);
+    test("should return correct keys", () => {
+      expect(keys).toEqual(new Set([...expected.keys, ...expected.placeHolders]));
+    });
+  });
+};
+
+const runTest = <T>(caseName: string, cases: TestCase<T>[]) => {
+  describe(caseName, () => {
+    cases.forEach((testCase) => {
+      testGetPlaceHolderKeys(testCase);
+    });
+  });
+};
+
 describe("getPlaceHolderKeys", () => {
-  test("with single item mapper and no item mappers", () => {
-    const expectedKeys = new Set(["value1", "value2", "name"]);
-    const mockRule: FormatRule<ItemEffect> = {
-      placeHolder: {
-        numbers: ["value1", "value2"],
-      },
-      itemMapper: {
-        placeHolder: "name",
-        dataIdKey: "dataId",
-        kindKey: "code",
-      },
-      itemMappers: [],
-    };
-    const keys = getPlaceHolderKeys(mockRule);
-    expect(keys).toEqual(expectedKeys);
-  });
-  test("with multiple item mappers", () => {
-    const expectedKeys = new Set(["value1", "value2", "name1", "name2"]);
-    const mockRule: FormatRule<ItemEffect> = {
-      placeHolder: {
-        numbers: ["value1", "value2"],
-      },
-      itemMapper: {
-        placeHolder: "name1",
-        dataIdKey: "dataId",
-        kindKey: "code",
-      },
-      itemMappers: [
-        {
-          placeHolder: "name2",
-          dataIdKey: "dataId",
-          kindKey: "code",
+  runTest<ItemEffect>("simple case", [
+    {
+      caseName: "empty rule",
+      rule: {},
+      expected: { keys: [], placeHolders: [] },
+    },
+    {
+      caseName: "with single item mapper and no item mappers",
+      rule: {
+        placeHolder: {
+          numbers: ["value1", "value2"],
         },
-      ],
-    };
-    const keys = getPlaceHolderKeys(mockRule);
-    expect(keys).toEqual(expectedKeys);
-  });
+        itemMapper: { placeHolder: "name", dataIdKey: "dataId", kindKey: "code" },
+      },
+      expected: {
+        keys: ["value1", "value2"],
+        placeHolders: ["name"],
+      },
+    },
+    {
+      caseName: "with multiple item mappers",
+      rule: {
+        placeHolder: {
+          numbers: ["value1", "value2"],
+        },
+        itemMapper: { placeHolder: "name1", dataIdKey: "dataId", kindKey: "code" },
+        itemMappers: [{ placeHolder: "name2", dataIdKey: "dataId", kindKey: "code" }],
+      },
+      expected: {
+        keys: ["value1", "value2"],
+        placeHolders: ["name1", "name2"],
+      },
+    },
+  ]);
 });
