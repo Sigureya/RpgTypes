@@ -4,20 +4,22 @@ import {
 } from "./getPlaceHolders";
 import type {
   FormatRule,
-  FormatField,
   FormatRuleCompiled,
   FormatItemMapper,
   FormatItemMapperCompiled,
+  FormatPlaceholder,
 } from "./types";
 
 export const compileFormatRule = <T>(
   rule: FormatRule<T>,
   extraItems: ReadonlyArray<FormatItemMapper<T>> = []
 ): FormatRuleCompiled<T> => ({
-  properties: rule.placeHolders.map<FormatField<T, number>>((placeHolder) => ({
-    dataKey: placeHolder satisfies keyof T,
-    placeHolder: `{${placeHolder}}`,
-  })),
+  properties: rule.placeHolders.map<FormatPlaceholder<T, number>>(
+    (placeHolder) => ({
+      dataKey: placeHolder satisfies keyof T,
+      placeHolder: `{${placeHolder}}`,
+    })
+  ),
   itemMappers: [...getItemMappersFromRule(rule), ...extraItems].map(
     compileItemMapper
   ),
@@ -62,7 +64,7 @@ export const applyPlaceholdersToText = <Schema, Data extends Schema>(
 const replacePlaceholder = <Schema, Data extends Schema>(
   baseText: string,
   data: Data,
-  field: FormatField<Schema, number>
+  field: FormatPlaceholder<Schema, number>
 ): string => {
   const value = data[field.dataKey satisfies keyof Data];
   if (value === undefined || value === null) {

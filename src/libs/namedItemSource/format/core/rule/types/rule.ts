@@ -3,34 +3,25 @@ import type {
   FormatItemMapper,
   FormatItemMapperCompiled,
 } from "./arrayWithKind";
+import type {
+  FormatPlaceholder,
+  FormatProperties,
+  FormatPropertiesCompiled,
+} from "./direct";
 
 export interface FormatRule<T> {
   itemMapper?: FormatItemMapper<T>;
   placeHolders: PickByTypeKeys<T, number>[];
   itemMappers?: FormatItemMapper<T>[];
   fallbackFormat?: string;
-  placeHolder2?: PPP<T>;
-}
-
-export interface FormatField<T, V = string | number> {
-  dataKey: PickByTypeKeys<T, V>;
-  placeHolder: `{${PickByTypeKeys<T, V>}}`;
-}
-
-interface PPP<T> {
-  numbers?: PickByTypeKeys<T, number>[];
-  strings?: PickByTypeKeys<T, string>[];
-}
-interface PPPCompiled<T> {
-  numbers: FormatField<T, number>[];
-  strings: FormatField<T, string>[];
+  placeHolder2?: FormatProperties<T>;
 }
 
 export interface FormatRuleCompiled<T> {
-  properties: FormatField<T, number>[];
+  properties: FormatPlaceholder<T, number>[];
   itemMappers: FormatItemMapperCompiled<T>[];
   fallbackFormat: string;
-  properties2: PPPCompiled<T>;
+  properties2: FormatPropertiesCompiled<T>;
 }
 
 export interface FormatCompiledSimple {
