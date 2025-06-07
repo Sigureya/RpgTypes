@@ -24,6 +24,9 @@ const mockRule: FormatRule<ItemEffect> = {
     kindKey: "code",
   },
   itemMappers: [],
+  placeHolder2: {
+    numbers: ["value1", "dataId", "code"],
+  },
 };
 
 describe("complieFormatRule", () => {
