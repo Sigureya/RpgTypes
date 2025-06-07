@@ -1,6 +1,6 @@
 import { describe, test, expect } from "vitest";
 import { mergeItemsSource } from "./mergeItemsSource";
-import type { FormatCompiled, NamedItemSource } from "./core";
+import type { FormatCompiled, FormatLabelResolved, NamedItemSource, SourceIdentifier } from "./core";
 
 const mockWeapons = {
   label: "weapons",
@@ -22,55 +22,63 @@ const mockEnemies = {
   ],
 } as const satisfies NamedItemSource;
 
+const mockInvalidSource = {
+  author: "unknown",
+  module: "unknown",
+  kind: "unknown",
+} satisfies SourceIdentifier;
+
+interface TestCase<Key> {
+  caseName: string;
+  namedItemSources: NamedItemSource[];
+  labels: FormatLabelResolved<Key>[];
+  expected: Map<Key, FormatCompiled>;
+}
+
+const testCaseMrgeItemsSource = <Key>({ caseName, labels, namedItemSources }: TestCase<Key>) => {
+  describe(caseName, () => {
+    const map: Map<Key, FormatCompiled> = mergeItemsSource(labels, namedItemSources);
+    test("returns a map with correct entries", () => {
+      expect(map.size).toBe(labels.length);
+    });
+  });
+};
+
+const runTest = <Key>(caseDescribe: string, caseList: TestCase<Key>[]) => {
+  describe(caseDescribe, () => {
+    caseList.forEach(testCaseMrgeItemsSource);
+  });
+};
+
 describe("mergeItemsSource", () => {
-  describe("when label does not have dataSource", () => {
-    const map = mergeItemsSource(
-      [
-        {
-          targetKey: 6,
-          pattern: "format A",
-          label: "Label 6",
-        },
+  runTest("returns empty map for empty input", [
+    {
+      caseName: "empty labels and empty sources",
+      labels: [],
+      namedItemSources: [],
+      expected: new Map(),
+    },
+    {
+      caseName: "empty labels with non-empty sources",
+      labels: [],
+      namedItemSources: [mockWeapons, mockEnemies],
+      expected: new Map(),
+    },
+  ]);
+  runTest("returns correct map for mixed labels", [
+    {
+      caseName: "labels with and without dataSource",
+      labels: [
+        { label: "aaa", pattern: "format A", targetKey: 58 },
+        { label: "bbb", pattern: "format B", targetKey: 66, dataSource: mockWeapons.source },
+        { label: "ccc", pattern: "format C", targetKey: 75, dataSource: mockInvalidSource },
       ],
-      [mockWeapons, mockEnemies]
-    );
-    test("returns entry with empty data array", () => {
-      expect(map.size).toBe(1);
-      expect(map.get(6)).toEqual({
-        patternCompiled: "format A",
-        label: "Label 6",
-        data: undefined,
-      } satisfies FormatCompiled);
-    });
-  });
-
-  describe("when label has dataSource", () => {
-    const map = mergeItemsSource(
-      [
-        {
-          targetKey: 7,
-          pattern: "fmt",
-          label: "label 7",
-          dataSource: { ...mockWeapons.source },
-        },
-      ],
-      [mockWeapons, mockEnemies]
-    );
-    test("returns entry with data from the correct NamedItemSource", () => {
-      expect(map.size).toBe(1);
-
-      expect(map.get(7)).toEqual({
-        patternCompiled: "fmt",
-        label: "label 7",
-        data: mockWeapons.items,
-      } satisfies FormatCompiled);
-    });
-  });
-});
-
-describe("buildFinalFormatMap with empty input", () => {
-  test("returns an empty map when no labels or sources are provided", () => {
-    const map = mergeItemsSource([], []);
-    expect(map).toEqual(new Map());
-  });
+      namedItemSources: [mockWeapons, mockEnemies],
+      expected: new Map([
+        [58, { label: "aaa", patternCompiled: "format A", data: undefined }],
+        [66, { label: "bbb", patternCompiled: "format B", data: mockWeapons.items }],
+        [75, { label: "ccc", patternCompiled: "format C", data: undefined }],
+      ]),
+    },
+  ]);
 });

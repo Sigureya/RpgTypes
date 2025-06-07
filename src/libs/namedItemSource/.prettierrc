@@ -1,0 +1,10 @@
+{
+  "overrides": [
+    {
+      "files": "mergeItemsSource.test.ts",
+      "options": {
+        "printWidth": 120
+      }
+    }
+  ]
+}
