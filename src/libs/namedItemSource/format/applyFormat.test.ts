@@ -1,14 +1,7 @@
 import type { MockedObject } from "vitest";
 import { describe, test, expect, vi } from "vitest";
 
-import type {
-  FormatErrorLabels,
-  FormatLabelResolved,
-  FormatResult,
-  FormatRule,
-  NamedItemSource,
-  SourceIdentifier,
-} from "./core";
+import type { FormatErrorLabels, FormatLabelResolved, FormatResult, FormatRule, NamedItemSource } from "./core";
 import { compileFormatBundle, formatWithCompiledBundle, isValidFormatBundle } from "./applyFormat";
 import type { FormatLookupKeys } from "./core/accessor";
 import type { CompiledFormatBundle } from "./bundle";
@@ -94,14 +87,16 @@ const mockRecoveryLable = {
   pattern: "{value1}% + {value2}point",
   kindId: RECOVER.code,
 } as const satisfies FormatLabelResolved<number>;
+
 const mockRule: FormatRule<ItemEffects> = {
-  placeHolders: ["value1", "value2"],
+  placeHolder: {
+    numbers: ["value1", "value2"],
+  },
   itemMapper: {
     dataIdKey: "dataId",
     kindKey: "code",
     placeHolder: "name",
   },
-  placeHolder2: {},
 };
 
 interface TestCase {

@@ -7,7 +7,6 @@ interface LearningSkill {
 }
 
 const rule: FormatRule<LearningSkill> = {
-  placeHolders: [],
   itemMappers: [
     { placeHolder: "actor", dataIdKey: "actorId", kindKey: "actorId" },
   ],

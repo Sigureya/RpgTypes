@@ -8,13 +8,13 @@ export interface FormatRule<T> {
   itemMapper?: FormatItemMapper<T>;
   itemMappers?: FormatItemMapper<T>[];
   fallbackFormat?: string;
-  placeHolder2?: FormatProperties<T>;
+  placeHolder?: FormatProperties<T>;
 }
 
 export interface FormatRuleCompiled<T> {
   itemMappers: FormatItemMapperCompiled<T>[];
   fallbackFormat: string;
-  properties2: FormatPropertiesCompiled<T>;
+  properties: FormatPropertiesCompiled<T>;
 }
 
 export interface FormatCompiledSimple {

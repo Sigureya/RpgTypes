@@ -3,31 +3,23 @@ import {
   getItemMappersFromRule,
 } from "./getPlaceHolders";
 import type {
-  FormatRule,
-  FormatRuleCompiled,
   FormatItemMapper,
   FormatItemMapperCompiled,
   FormatPlaceholder,
+  FormatRule,
+  FormatRuleCompiled,
 } from "./types";
+import { compileFormatPropeties } from "./types";
 
 export const compileFormatRule = <T>(
   rule: FormatRule<T>,
   extraItems: ReadonlyArray<FormatItemMapper<T>> = []
 ): FormatRuleCompiled<T> => ({
-  properties: rule.placeHolders.map<FormatPlaceholder<T, number>>(
-    (placeHolder) => ({
-      dataKey: placeHolder satisfies keyof T,
-      placeHolder: `{${placeHolder}}`,
-    })
-  ),
   itemMappers: [...getItemMappersFromRule(rule), ...extraItems].map(
     compileItemMapper
   ),
   fallbackFormat: generateFallbackFormat(rule),
-  properties2: {
-    numbers: [],
-    strings: [],
-  },
+  properties: compileFormatPropeties(rule.placeHolder ?? {}),
 });
 
 const compileItemMapper = <T>(
@@ -55,7 +47,7 @@ export const applyPlaceholdersToText = <Schema, Data extends Schema>(
   data: Data,
   rule: FormatRuleCompiled<Schema>
 ): string => {
-  return rule.properties.reduce(
+  return rule.properties.numbers.reduce(
     (text, field) => replacePlaceholder(text, data, field),
     baseText
   );

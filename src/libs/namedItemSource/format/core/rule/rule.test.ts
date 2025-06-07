@@ -17,44 +17,45 @@ interface Skill {
 
 // Mock rule for ItemEffect
 const mockRule: FormatRule<ItemEffect> = {
-  placeHolders: ["value1", "dataId", "code"],
+  placeHolder: {
+    numbers: ["value1", "dataId", "code"],
+  },
   itemMapper: {
     placeHolder: "name",
     dataIdKey: "dataId",
     kindKey: "code",
   },
   itemMappers: [],
-  placeHolder2: {
-    numbers: ["value1", "dataId", "code"],
-  },
 };
 
 describe("complieFormatRule", () => {
   describe("Normal cases", () => {
     test("compiles rule with string placeholders", () => {
       const compiled = compileFormatRule(mockRule);
-      expect(compiled.properties).toEqual([
+      expect(compiled.properties.numbers).toEqual([
         { dataKey: "value1", placeHolder: "{value1}" },
         { dataKey: "dataId", placeHolder: "{dataId}" },
         { dataKey: "code", placeHolder: "{code}" },
-      ] satisfies typeof compiled.properties);
+      ] satisfies typeof compiled.properties.numbers);
     });
 
     test("compiles rule with number placeholders", () => {
       const ruleWithNumbers: FormatRule<ItemEffect> = {
-        placeHolders: ["value1", "dataId"],
         itemMapper: {
           placeHolder: "name",
           dataIdKey: "dataId",
           kindKey: "code",
         },
         itemMappers: [],
+        placeHolder: {
+          numbers: ["value1", "dataId"],
+        },
       };
       const compiled = compileFormatRule(ruleWithNumbers);
-      expect(compiled.properties).toEqual([
+      expect(compiled.properties.numbers).toEqual([
         { dataKey: "value1", placeHolder: "{value1}" },
         { dataKey: "dataId", placeHolder: "{dataId}" },
-      ] satisfies typeof compiled.properties);
+      ] satisfies typeof compiled.properties.numbers);
     });
   });
 
@@ -65,20 +66,18 @@ describe("complieFormatRule", () => {
         dataIdKey: "id",
         kindKey: "id",
       },
-      placeHolders: [
-        "id",
-        //        "name",
-        // "effects"
-        // ↑ Compile error due to type checking
-      ],
       itemMappers: [],
+      placeHolder: {
+        numbers: ["id"],
+        strings: ["name"],
+      },
     };
     const compiledRule = compileFormatRule(rule);
     test("compiles rule for Skill type with valid property keys", () => {
-      expect(compiledRule.properties).toEqual([
+      expect(compiledRule.properties.numbers).toEqual([
         { dataKey: "id", placeHolder: "{id}" },
         // { dataKey: "name", placeHolder: "{name}" },
-      ] satisfies typeof compiledRule.properties);
+      ] satisfies typeof compiledRule.properties.numbers);
     });
   });
 });
