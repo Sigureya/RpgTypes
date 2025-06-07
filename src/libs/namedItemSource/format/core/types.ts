@@ -1,6 +1,6 @@
 import type { Data_NamedItem } from "./namedItem";
 import type { FormatCompiledSimple } from "./rule";
-import type { SourceIdentifier } from "./sourceIdentifier";
+import type { SourceIdentifier } from "./rule";
 
 export interface NamedItemSource {
   items: Data_NamedItem[];
