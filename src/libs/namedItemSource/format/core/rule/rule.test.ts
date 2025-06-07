@@ -9,6 +9,7 @@ interface ItemEffect {
   dataId: number;
   code: number;
 }
+
 interface Skill {
   id: number;
   name: string;
@@ -31,7 +32,7 @@ const mockEffectRule: FormatRule<ItemEffect> = {
 interface TestCase_ComplieFormatRule<T> {
   caseName: string;
   rule: FormatRule<T>;
-  expected: Omit<FormatRuleCompiled<T>, "fallbackFormat">;
+  expected: Pick<FormatRuleCompiled<T>, "itemMappers" | "properties">;
 }
 const testComplieFormatRule = <T>({
   caseName,
@@ -52,6 +53,7 @@ const testComplieFormatRule = <T>({
     });
   });
 };
+
 const runTestComplieFormatRule = <T>(
   caseName: string,
   cases: TestCase_ComplieFormatRule<T>[]

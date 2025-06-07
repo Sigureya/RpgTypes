@@ -9,7 +9,7 @@ import type {
   FormatRule,
   FormatRuleCompiled,
 } from "./core";
-import { compileFormatPropeties } from "./core";
+import { compileArrayPlaceholderEX, compileFormatPropeties } from "./core";
 
 export const compileFormatRule = <T>(
   rule: FormatRule<T>,
@@ -20,6 +20,9 @@ export const compileFormatRule = <T>(
   ),
   fallbackFormat: generateFallbackFormat(rule),
   properties: compileFormatPropeties(rule.placeHolder ?? {}),
+  arrayIndex: rule.arrayIndex
+    ? rule.arrayIndex.map(compileArrayPlaceholderEX)
+    : [],
 });
 
 const compileItemMapper = <T>(
