@@ -32,10 +32,6 @@ const compileItemMapper = <T, SourceKey extends SourceKeyConcept>(
     placeHolder: `{${itemMappers.placeHolder}}`,
     kindKey: itemMappers.kindKey,
     dataIdKey: itemMappers.dataIdKey,
-    map: itemMappers.map.map((pair) => ({
-      kindId: pair.kindId,
-      sourceId: pair.sourceId satisfies SourceKey,
-    })),
   };
 };
 
