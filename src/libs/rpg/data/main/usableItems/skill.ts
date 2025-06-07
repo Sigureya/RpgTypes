@@ -1,6 +1,6 @@
 import type { SourceIdentifier } from "src/namedItemSource";
 import { makeDamage } from "../members";
-import type { Data_Skill } from "./types";
+import type { Data_Skill } from "./core";
 import { AUTHOR_RMMZ } from "src/namedItemSource";
 import { MODULE_DATA, SRC_DATA_SKILL } from "../../sourceConstants";
 
