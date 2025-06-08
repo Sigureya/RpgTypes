@@ -1,5 +1,4 @@
 import type { NamedItemSource } from "src/namedItemSource";
-
 import {
   getElementTypes,
   getEquipTypes,
@@ -11,16 +10,16 @@ import {
 } from "./getSystemTypeNames";
 import type { Data_System } from "./system";
 import type { SystemLabel_DataNames } from "./systemLabels";
-import {
-  systemElementsSourceId,
-  systemEquipTypesSourceId,
-  systemSkillTypesSourceId,
-  systemWeaponTypesSourceId,
-  systemArmorTypesSourceId,
-  systemSwitchesSourceId,
-  systemVariablesSourceId,
-} from "./sourceId";
 import type { System_DataNames } from "./subset";
+import type {
+  SourceId_SystemArmorTypes,
+  SourceId_SystemElements,
+  SourceId_SystemEquipTypes,
+  SourceId_SystemSkillTypes,
+  SourceId_SystemSwitches,
+  SourceId_SystemVariables,
+  SourceId_SystemWeaponTypes,
+} from "./sourceIdTypes";
 
 export const defineSystemItems = (
   system: System_DataNames,
@@ -42,7 +41,11 @@ export const buildArmorTypesSource = (
 ): NamedItemSource => ({
   items: getArmorTypes(system),
   label: label.armorTypes,
-  source: systemArmorTypesSourceId(),
+  source: {
+    author: "rmmz",
+    module: "system",
+    kind: "armorTypes",
+  } satisfies SourceId_SystemArmorTypes,
 });
 
 export const buildElementTypesSource = (
@@ -51,7 +54,11 @@ export const buildElementTypesSource = (
 ): NamedItemSource => ({
   items: getElementTypes(system),
   label: label.elements,
-  source: systemElementsSourceId(),
+  source: {
+    author: "rmmz",
+    module: "system",
+    kind: "elements",
+  } satisfies SourceId_SystemElements,
 });
 
 export const buildEquipTypesSource = (
@@ -60,7 +67,11 @@ export const buildEquipTypesSource = (
 ): NamedItemSource => ({
   items: getEquipTypes(system),
   label: label.equipTypes,
-  source: systemEquipTypesSourceId(),
+  source: {
+    author: "rmmz",
+    module: "system",
+    kind: "equipTypes",
+  } satisfies SourceId_SystemEquipTypes,
 });
 
 export const buildSkillTypesSource = (
@@ -69,7 +80,11 @@ export const buildSkillTypesSource = (
 ): NamedItemSource => ({
   items: getSkillTypes(system),
   label: label.skillTypes,
-  source: systemSkillTypesSourceId(),
+  source: {
+    author: "rmmz",
+    module: "system",
+    kind: "skillTypes",
+  } satisfies SourceId_SystemSkillTypes,
 });
 
 export const buildVariableNamesSource = (
@@ -78,7 +93,11 @@ export const buildVariableNamesSource = (
 ): NamedItemSource => ({
   items: getVariableNames(system),
   label: label.variables,
-  source: systemVariablesSourceId(),
+  source: {
+    author: "rmmz",
+    module: "system",
+    kind: "variables",
+  } satisfies SourceId_SystemVariables,
 });
 
 export const buildSwitchesSource = (
@@ -87,7 +106,11 @@ export const buildSwitchesSource = (
 ): NamedItemSource => ({
   items: getSwitches(system),
   label: label.switches,
-  source: systemSwitchesSourceId(),
+  source: {
+    author: "rmmz",
+    module: "system",
+    kind: "switches",
+  } satisfies SourceId_SystemSwitches,
 });
 
 export const buildWeaponTypesSource = (
@@ -96,5 +119,9 @@ export const buildWeaponTypesSource = (
 ): NamedItemSource => ({
   items: getWeaponTypes(system),
   label: label.weaponTypes,
-  source: systemWeaponTypesSourceId(),
+  source: {
+    author: "rmmz",
+    module: "system",
+    kind: "weaponTypes",
+  } satisfies SourceId_SystemWeaponTypes,
 });

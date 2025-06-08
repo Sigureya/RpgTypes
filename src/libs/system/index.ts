@@ -6,4 +6,4 @@ export * from "./options";
 export * from "./subset";
 export { makeSystemData } from "./make";
 export * from "./namedItems";
-export * from "./sourceId";
+export * from "./sourceIdTypes";
