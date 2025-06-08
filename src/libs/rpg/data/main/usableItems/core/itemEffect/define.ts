@@ -1,7 +1,7 @@
 import { AUTHOR_RMMZ } from "@RpgTypes/namedItemSource";
+import type { SourceId_TraitRegularParam } from "src/rpg";
 import {
   MODULE_DATA,
-  regularParamSourceId,
   skillSourceId,
   SRC_DATA_COMMON_EVNET,
   stateSourceId,
@@ -45,6 +45,12 @@ export const resolveItemEffectLabels = (
     defineEffectCommonEvent(labels),
   ];
 };
+
+const regularParamSourceId = (): SourceId_TraitRegularParam => ({
+  author: "rmmz",
+  module: "trait",
+  kind: "params",
+});
 
 const defineEffect = (
   code: number,

@@ -11,27 +11,20 @@ import {
   EXTRA_PARAM_TRG,
 } from "./constants";
 import type { ExtraParamLabels } from "./labels";
-import type {
-  Data_NamedItem,
-  NamedItemSource,
-  SourceIdentifier,
-} from "src/namedItemSource";
-import { AUTHOR_RMMZ } from "src/namedItemSource";
-import { MODULE_TRAIT, SRC_PARAMS_EXTRA } from "src/rpg";
+import type { Data_NamedItem, NamedItemSource } from "src/namedItemSource";
 import type { TraitLabelWithOption } from "../traitLabel";
-
-export const extraParamSourceId = (): SourceIdentifier => ({
-  author: AUTHOR_RMMZ,
-  module: MODULE_TRAIT,
-  kind: SRC_PARAMS_EXTRA,
-});
+import type { SourceId_TraitExtraParam } from "src/rpg";
 
 export const defineTraitExtraParam = (
   xparam: TraitLabelWithOption<ExtraParamLabels>
 ): NamedItemSource => ({
   items: extraParamsToArray(xparam.options),
   label: xparam.domainName,
-  source: extraParamSourceId(),
+  source: {
+    author: "rmmz",
+    module: "trait",
+    kind: "xparams",
+  } satisfies SourceId_TraitExtraParam,
 });
 
 export const extraParamsToArray = (
