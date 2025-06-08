@@ -1,28 +1,29 @@
+import { mergeItemsSource } from "@RpgTypes/namedItemSource/format/mergeItemsSource";
 import type {
-  FormatCompiled,
-  FormatLabelResolved,
   FormatRule,
   NamedItemSource,
-} from "@RpgTypes/namedItemSource";
+  FormatCompiled,
+  FormatLabelResolved,
+} from "src/namedItemSource";
 import type {
-  TraitFormat,
-  TraitLabelSet,
   Trait,
+  Data_Skill,
   Data_State,
+  DataLabels,
+  TraitLabelSet,
   NormalLabel,
-} from "./traitContainers";
+  SourceId_DataSkill,
+  SourceId_DataState,
+  TraitFormat,
+} from "src/rpg";
 import {
-  defineTraitCollapseType,
-  defineTraitExtraParam,
   defineTraitRegularParam,
-  defineTraitSpecialFlag,
+  defineTraitExtraParam,
   defineTraitSpecialParam,
+  defineTraitCollapseType,
+  defineTraitSpecialFlag,
   resolveTraitLabels,
-} from "./traitContainers";
-import type { Data_Skill } from "./usableItems";
-import { mergeItemsSource } from "@RpgTypes/namedItemSource/format/mergeItemsSource";
-import type { DataLabels } from "./dataLabels";
-import type { SourceId_DataSkill, SourceId_DataState } from "src/rpg";
+} from "src/rpg";
 
 const RULE: FormatRule<Trait> = {
   itemMapper: {
@@ -70,7 +71,7 @@ export const defineTraitSources = (
   ];
 };
 
-const xxxx = (
+export const mergeTraitSource = (
   labels: TraitLabelSet,
   dataLabel: DataLabels,
   items: Items
@@ -78,6 +79,7 @@ const xxxx = (
   const list: FormatLabelResolved<number>[] = resolveTraitLabels(
     labels
   ) satisfies TraitFormat[];
+
   return mergeItemsSource(
     list,
     defineTraitSources(items, dataLabel, labels, { normal: "" })
