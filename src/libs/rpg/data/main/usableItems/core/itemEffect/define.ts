@@ -1,11 +1,10 @@
 import { AUTHOR_RMMZ } from "@RpgTypes/namedItemSource";
-import type { SourceId_TraitRegularParam } from "src/rpg";
-import {
-  MODULE_DATA,
-  skillSourceId,
-  SRC_DATA_COMMON_EVNET,
-  stateSourceId,
+import type {
+  SourceId_DataSkill,
+  SourceId_DataState,
+  SourceId_TraitRegularParam,
 } from "src/rpg";
+import { MODULE_DATA, SRC_DATA_COMMON_EVNET } from "src/rpg";
 import type {
   EffectDefinitionResolved,
   EffectLabelDefinition,
@@ -50,6 +49,12 @@ const regularParamSourceId = (): SourceId_TraitRegularParam => ({
   author: "rmmz",
   module: "trait",
   kind: "params",
+});
+
+const stateSourceId = (): SourceId_DataState => ({
+  author: "rmmz",
+  module: "data",
+  kind: "state",
 });
 
 const defineEffect = (
@@ -119,7 +124,11 @@ const defineEffectGrow = (
 const defineEffectLearnSkill = (
   labels: ItemEffectLabelSet
 ): EffectDefinitionResolved =>
-  defineEffect(EFFECT_LEARN_SKILL, labels.learnSkill, skillSourceId());
+  defineEffect(EFFECT_LEARN_SKILL, labels.learnSkill, {
+    author: "rmmz",
+    module: "data",
+    kind: "skill",
+  } satisfies SourceId_DataSkill);
 
 const defineEffectCommonEvent = (
   labels: ItemEffectLabelSet

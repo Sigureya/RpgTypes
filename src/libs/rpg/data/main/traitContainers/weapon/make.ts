@@ -1,4 +1,4 @@
-import { makeDamage } from "src/rpg";
+import { makeDamage } from "@RpgTypes/rpg/data/main/members/damage";
 import type { Data_Weapon } from "./weapon";
 
 export const makeWeaponData = (
