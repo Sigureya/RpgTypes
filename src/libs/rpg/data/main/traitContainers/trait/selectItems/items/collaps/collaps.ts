@@ -5,14 +5,13 @@ import {
   COLLAPS_INSTANT,
   COLLAPS_NONE,
 } from "./constants";
-import type { CollapsOptionLabels } from "./labels";
+import type { CollapsOptionLabels, NormalLabel } from "./labels";
 import type {
   Data_NamedItem,
   NamedItemSource,
   SourceIdentifier,
 } from "src/namedItemSource";
 import { AUTHOR_RMMZ } from "src/namedItemSource";
-import { type GlobalLabel } from "src/rpg";
 import { MODULE_TRAIT, SRC_TRAIT_COLLAPS } from "src/rpg";
 
 export const collapsSourceId = (): SourceIdentifier => ({
@@ -23,7 +22,7 @@ export const collapsSourceId = (): SourceIdentifier => ({
 
 export const defineTraitCollapseType = (
   labels: DomainLabel<CollapsOptionLabels>,
-  global: Pick<GlobalLabel, "normal">
+  global: NormalLabel
 ): NamedItemSource => ({
   items: collapsOptionsToArray(labels.options, global),
   label: labels.domainName,
@@ -32,7 +31,7 @@ export const defineTraitCollapseType = (
 
 export const collapsOptionsToArray = (
   options: CollapsOptionLabels,
-  global: Pick<GlobalLabel, "normal">
+  global: NormalLabel
 ): Data_NamedItem[] => {
   return [
     {

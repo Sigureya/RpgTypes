@@ -1,4 +1,3 @@
-import type { GlobalLabel } from "@RpgTypes/rpg/labels";
 import { describe, expect, test } from "vitest";
 import {
   COLLAPS_NORMAL,
@@ -6,7 +5,7 @@ import {
   COLLAPS_INSTANT,
   COLLAPS_NONE,
 } from "./constants";
-import type { CollapsOptionLabels } from "./labels";
+import type { CollapsOptionLabels, NormalLabel } from "./labels";
 import { collapsOptionsToArray } from "./collaps";
 import type { Data_NamedItem } from "src/namedItemSource";
 
@@ -16,7 +15,7 @@ describe("collapsOptionsToArray", () => {
     instantCollaps: "Instant Collapse",
     noneCollaps: "No Collapse",
   };
-  const global: Pick<GlobalLabel, "normal"> = {
+  const global: NormalLabel = {
     normal: "Normal Collapse",
   };
 
