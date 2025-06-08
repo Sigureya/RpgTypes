@@ -1,5 +1,15 @@
 import type { FormatItemMapper, FormatRule } from "./core";
 
+const getDataKeys2 = <T>(rule: FormatRule<T>): Set<string & keyof T> => {
+  return new Set<string & keyof T>([
+    ...(rule.placeHolder?.numbers ?? []),
+    ...(rule.placeHolder?.strings ?? []),
+    ...(rule.arrayIndex?.map((a) => a.dataIdKey) ?? []),
+    ...(rule.itemMappers?.map((m) => m.kindKey) ?? []),
+    ...(rule.itemMapper ? [rule.itemMapper.kindKey] : []),
+  ]);
+};
+
 export const getPlaceHolderKeys = <T>(rule: FormatRule<T>): Set<string> => {
   const set = new Set<string>(rule.placeHolder?.numbers ?? []);
   if (rule.itemMapper) {
