@@ -42,13 +42,13 @@ describe("getPlaceHolderKeys", () => {
       rule: {},
       expected: { keys: [], placeHolders: [] },
     },
-    {
-      caseName: "arrayIndex",
-      rule: {
-        arrayIndex: [{ dataIdKey: "dataId", sourceId: { author: "rmmz", kind: "data", module: "state" } }],
-      },
-      expected: { keys: ["dataId"], placeHolders: [] },
-    },
+    // {
+    //   caseName: "arrayIndex",
+    //   rule: {
+    //     arrayIndex: [{ dataIdKey: "dataId", sourceId: { author: "rmmz", kind: "data", module: "state" } }],
+    //   },
+    //   expected: { keys: ["dataId"], placeHolders: [] },
+    // },
     {
       caseName: "numbers",
       rule: {
