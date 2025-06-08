@@ -1,10 +1,3 @@
-import {
-  systemArmorTypesSourceId,
-  systemElementsSourceId,
-  systemSkillTypesSourceId,
-  systemEquipTypesSourceId,
-  systemWeaponTypesSourceId,
-} from "@RpgTypes/system";
 import { skillSourceId, stateSourceId } from "src/rpg";
 import {
   TRAIT_ELEMENT_RATE,
@@ -53,6 +46,13 @@ import {
   specialFlagSourceId,
   specialParamSourceId,
 } from "./items";
+import type {
+  SourceId_SystemArmorTypes,
+  SourceId_SystemElements,
+  SourceId_SystemEquipTypes,
+  SourceId_SystemSkillTypes,
+  SourceId_SystemWeaponTypes,
+} from "@RpgTypes/system/sourceIdTypes";
 
 export const resolveTraitLabels = (labels: TraitLabelSet): TraitFormat[] => {
   return [
@@ -269,4 +269,34 @@ const partyAbility = (
   label: labels.domainName,
   kindId: TRAIT_PARTY_ABILITY,
   dataSource: partyAbilitySourceId(),
+});
+
+const systemElementsSourceId = (): SourceId_SystemElements => ({
+  author: "rmmz",
+  module: "system",
+  kind: "elements",
+});
+
+const systemSkillTypesSourceId = (): SourceId_SystemSkillTypes => ({
+  author: "rmmz",
+  module: "system",
+  kind: "skillTypes",
+});
+
+const systemWeaponTypesSourceId = (): SourceId_SystemWeaponTypes => ({
+  author: "rmmz",
+  module: "system",
+  kind: "weaponTypes",
+});
+
+const systemArmorTypesSourceId = (): SourceId_SystemArmorTypes => ({
+  author: "rmmz",
+  module: "system",
+  kind: "armorTypes",
+});
+
+const systemEquipTypesSourceId = (): SourceId_SystemEquipTypes => ({
+  author: "rmmz",
+  module: "system",
+  kind: "equipTypes",
 });
