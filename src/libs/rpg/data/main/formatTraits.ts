@@ -9,6 +9,7 @@ import type {
   TraitLabelSet,
   Trait,
   Data_State,
+  NormalLabel,
 } from "./traitContainers";
 import {
   defineTraitCollapseType,
@@ -21,9 +22,8 @@ import {
 } from "./traitContainers";
 import type { Data_Skill } from "./usableItems";
 import { skillSourceId } from "./usableItems";
-import { mergeItemsSource } from "@RpgTypes/namedItemSource/format/mergeItemsSource";
+import { mergeItemsSource } from "@RpgTypes/namedItemSource";
 import type { DataLabels } from "./dataLabels";
-import type { GlobalLabel } from "@RpgTypes/schema";
 
 const RULE: FormatRule<Trait> = {
   itemMapper: {
@@ -38,11 +38,26 @@ interface Items {
   states: Data_State[];
 }
 
-const tttt = (
+export const mergeTraitItemSource = (
+  traitLabels: TraitLabelSet,
+  dataLabels: DataLabels,
   items: Items,
-  labels: DataLabels,
+  global: NormalLabel
+): Map<number, FormatCompiled> => {
+  const list: FormatLabelResolved<number>[] = resolveTraitLabels(
+    traitLabels
+  ) satisfies TraitFormat[];
+  return mergeItemsSource(
+    list,
+    resolveNamedItems(traitLabels, dataLabels, items, global)
+  );
+};
+
+const resolveNamedItems = (
   set: TraitLabelSet,
-  global: Pick<GlobalLabel, "normal">
+  labels: DataLabels,
+  items: Items,
+  global: NormalLabel
 ): NamedItemSource[] => {
   return [
     defineTraitRegularParam(set.regularParam),
@@ -61,17 +76,6 @@ const tttt = (
       items: items.states,
     },
   ];
-};
-
-const xxxx = (
-  labels: TraitLabelSet,
-  dataLabel: DataLabels,
-  items: Items
-): Map<number, FormatCompiled> => {
-  const list: FormatLabelResolved<number>[] = resolveTraitLabels(
-    labels
-  ) satisfies TraitFormat[];
-  return mergeItemsSource(list, tttt(items, dataLabel, labels, { normal: "" }));
 };
 
 const compileTraitRule = (rule: FormatRule<Trait>) => {};
