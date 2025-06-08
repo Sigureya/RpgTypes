@@ -1,5 +1,5 @@
 export * from "./items";
-export * from "./default";
+export { LABEL_SET_TRAIT } from "./default";
 export * from "./labelSet";
 export * from "./constants";
 export { resolveTraitLabels } from "./resolveLabels";
