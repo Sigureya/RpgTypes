@@ -2,6 +2,11 @@ import { describe, test, expect } from "vitest";
 import { resolveItemEffectLabels } from "./define";
 import type { EffectDefinitionResolved } from "./labels";
 import { LABEL_SET_ITEM_EFFECT } from "./labels";
+import type { SourceIdentifier } from "src/namedItemSource";
+
+const authorIsRmmz = (sourceId: SourceIdentifier | undefined) => {
+  return sourceId ? sourceId.author === "rmmz" : true;
+};
 
 describe("resolveItemEffectLabels", () => {
   const result: EffectDefinitionResolved[] = resolveItemEffectLabels(
@@ -23,5 +28,8 @@ describe("resolveItemEffectLabels", () => {
       .filter((source) => !!source);
     const uniqueSources = new Set(sourceList);
     expect(uniqueSources.size).toBe(sourceList.length);
+  });
+  test.each(result)("should item.$label author is rmmz", (item) => {
+    expect(item.dataSource).toSatisfy(authorIsRmmz);
   });
 });

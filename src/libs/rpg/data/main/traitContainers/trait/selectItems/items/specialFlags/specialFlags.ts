@@ -6,26 +6,19 @@ import {
   FLAG_ID_SUBSTITUTE,
 } from "./constants";
 import type { SpecialFlagOptions } from "./labels";
-import type {
-  Data_NamedItem,
-  NamedItemSource,
-  SourceIdentifier,
-} from "src/namedItemSource";
-import { AUTHOR_RMMZ } from "src/namedItemSource";
-import { MODULE_TRAIT, SRC_TRAIT_SPECIAL_FLAG } from "src/rpg";
+import type { Data_NamedItem, NamedItemSource } from "src/namedItemSource";
+import type { SourceId_TraitSpecialFlag } from "src/rpg";
 
 export const defineTraitSpecialFlag = (
   label: DomainLabel<SpecialFlagOptions>
 ): NamedItemSource => ({
   items: specialFlagToArray(label.options),
   label: label.domainName,
-  source: specialFlagSourceId(),
-});
-
-export const specialFlagSourceId = (): SourceIdentifier => ({
-  author: AUTHOR_RMMZ,
-  module: MODULE_TRAIT,
-  kind: SRC_TRAIT_SPECIAL_FLAG,
+  source: {
+    author: "rmmz",
+    module: "trait",
+    kind: "sflag",
+  } satisfies SourceId_TraitSpecialFlag,
 });
 
 export const specialFlagToArray = (

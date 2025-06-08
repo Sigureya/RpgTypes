@@ -6,19 +6,8 @@ import {
   COLLAPS_NONE,
 } from "./constants";
 import type { CollapsOptionLabels, NormalLabel } from "./labels";
-import type {
-  Data_NamedItem,
-  NamedItemSource,
-  SourceIdentifier,
-} from "src/namedItemSource";
-import { AUTHOR_RMMZ } from "src/namedItemSource";
-import { MODULE_TRAIT, SRC_TRAIT_COLLAPS } from "src/rpg";
-
-export const collapsSourceId = (): SourceIdentifier => ({
-  author: AUTHOR_RMMZ,
-  module: MODULE_TRAIT,
-  kind: SRC_TRAIT_COLLAPS,
-});
+import type { Data_NamedItem, NamedItemSource } from "src/namedItemSource";
+import type { SourceId_TraitCollaps } from "src/rpg";
 
 export const defineTraitCollapseType = (
   labels: DomainLabel<CollapsOptionLabels>,
@@ -26,7 +15,11 @@ export const defineTraitCollapseType = (
 ): NamedItemSource => ({
   items: collapsOptionsToArray(labels.options, global),
   label: labels.domainName,
-  source: collapsSourceId(),
+  source: {
+    author: "rmmz",
+    module: "trait",
+    kind: "collaps",
+  } satisfies SourceId_TraitCollaps,
 });
 
 export const collapsOptionsToArray = (

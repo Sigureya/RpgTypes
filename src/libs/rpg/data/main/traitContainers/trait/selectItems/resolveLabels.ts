@@ -1,10 +1,3 @@
-import {
-  systemArmorTypesSourceId,
-  systemElementsSourceId,
-  systemSkillTypesSourceId,
-  systemEquipTypesSourceId,
-  systemWeaponTypesSourceId,
-} from "@RpgTypes/system";
 import { skillSourceId, stateSourceId } from "src/rpg";
 import {
   TRAIT_ELEMENT_RATE,
@@ -41,18 +34,23 @@ import type {
   PartyAbilityOptionLabels,
   RawTraitLabel,
   RegularParamLabels,
+  SourceId_TraitCollaps,
+  SourceId_TraitExtraParam,
+  SourceId_TraitPartyAbility,
+  SourceId_TraitRegularParam,
+  SourceId_TraitSpecialFlag,
+  SourceId_TraitSpecialParam,
   SpecialFlagOptions,
   SpecialParamLabels,
   TraitLabelWithOption,
 } from "./items";
-import {
-  collapsSourceId,
-  extraParamSourceId,
-  partyAbilitySourceId,
-  regularParamSourceId,
-  specialFlagSourceId,
-  specialParamSourceId,
-} from "./items";
+import type {
+  SourceId_SystemArmorTypes,
+  SourceId_SystemElements,
+  SourceId_SystemEquipTypes,
+  SourceId_SystemSkillTypes,
+  SourceId_SystemWeaponTypes,
+} from "@RpgTypes/system/sourceIdTypes";
 
 export const resolveTraitLabels = (labels: TraitLabelSet): TraitFormat[] => {
   return [
@@ -87,6 +85,11 @@ export const resolveTraitLabels = (labels: TraitLabelSet): TraitFormat[] => {
     partyAbility(labels.partyAbility),
   ];
 };
+const regularParamSourceId = (): SourceId_TraitRegularParam => ({
+  author: "rmmz",
+  module: "trait",
+  kind: "params",
+});
 
 const elementRate = (label: RawTraitLabel): TraitFormat => ({
   pattern: label.format,
@@ -131,7 +134,11 @@ const extraParam = (
   pattern: labels.format,
   label: labels.domainName,
   kindId: TRAIT_XPARAM,
-  dataSource: extraParamSourceId(),
+  dataSource: {
+    author: "rmmz",
+    module: "trait",
+    kind: "xparams",
+  } satisfies SourceId_TraitExtraParam,
 });
 
 const specialParam = (
@@ -140,7 +147,11 @@ const specialParam = (
   pattern: labels.format,
   label: labels.domainName,
   kindId: TRAIT_SPARAM,
-  dataSource: specialParamSourceId(),
+  dataSource: {
+    author: "rmmz",
+    module: "trait",
+    kind: "sparams",
+  } satisfies SourceId_TraitSpecialParam,
 });
 
 const attackElement = (label: RawTraitLabel): TraitFormat => ({
@@ -250,7 +261,11 @@ const specialFlag = (
   pattern: labels.format,
   label: labels.domainName,
   kindId: TRAIT_SPECIAL_FLAG,
-  dataSource: specialFlagSourceId(),
+  dataSource: {
+    author: "rmmz",
+    module: "trait",
+    kind: "sflag",
+  } satisfies SourceId_TraitSpecialFlag,
 });
 
 const collaps = (
@@ -259,7 +274,11 @@ const collaps = (
   pattern: label.format,
   label: label.domainName,
   kindId: TRAIT_COLLAPSE_TYPE,
-  dataSource: collapsSourceId(),
+  dataSource: {
+    author: "rmmz",
+    module: "trait",
+    kind: "collaps",
+  } satisfies SourceId_TraitCollaps,
 });
 
 const partyAbility = (
@@ -268,5 +287,39 @@ const partyAbility = (
   pattern: labels.format,
   label: labels.domainName,
   kindId: TRAIT_PARTY_ABILITY,
-  dataSource: partyAbilitySourceId(),
+  dataSource: {
+    author: "rmmz",
+    module: "trait",
+    kind: "partyAbility",
+  } satisfies SourceId_TraitPartyAbility,
+});
+
+const systemElementsSourceId = (): SourceId_SystemElements => ({
+  author: "rmmz",
+  module: "system",
+  kind: "elements",
+});
+
+const systemSkillTypesSourceId = (): SourceId_SystemSkillTypes => ({
+  author: "rmmz",
+  module: "system",
+  kind: "skillTypes",
+});
+
+const systemWeaponTypesSourceId = (): SourceId_SystemWeaponTypes => ({
+  author: "rmmz",
+  module: "system",
+  kind: "weaponTypes",
+});
+
+const systemArmorTypesSourceId = (): SourceId_SystemArmorTypes => ({
+  author: "rmmz",
+  module: "system",
+  kind: "armorTypes",
+});
+
+const systemEquipTypesSourceId = (): SourceId_SystemEquipTypes => ({
+  author: "rmmz",
+  module: "system",
+  kind: "equipTypes",
 });
