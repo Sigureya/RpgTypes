@@ -13,6 +13,7 @@ import {
   compileFormatRule,
   applyPlaceholdersToText,
   getItemName,
+  resolveUnknownLabel,
 } from "./core";
 import type { FormatLookupKeys } from "./core/accessor";
 import { collectFormatErrors } from "./core/detectErrors";
@@ -76,9 +77,13 @@ const formatTextForFallback = <T extends object, KindKey>(
   lookup: FormatLookupKeys<T, KindKey>
 ): FormatResult => {
   return {
-    label: lookup.unknownKey(key),
-    text: applyFormatRule(data, undefined, rule, rule.fallbackFormat, (d) =>
-      lookup.extractDataId(d)
+    label: resolveUnknownLabel(rule, lookup.unknownKey(key)),
+    text: applyFormatRule(
+      data,
+      undefined,
+      rule,
+      rule.fallbackFormat.text,
+      (d) => lookup.extractDataId(d)
     ),
   };
 };

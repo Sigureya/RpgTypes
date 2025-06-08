@@ -10,6 +10,7 @@ import type {
   FormatRuleCompiled,
 } from "./core";
 import { compileArrayPlaceholderEX, compileFormatPropeties } from "./core";
+import { FORMAT_PLACEHOLDER_KEY, FORMAT_PLACEHOLDER_LABEL } from "./constants";
 
 export const compileFormatRule = <T>(
   rule: FormatRule<T>,
@@ -18,7 +19,10 @@ export const compileFormatRule = <T>(
   itemMappers: [...getItemMappersFromRule(rule), ...extraItems].map(
     compileItemMapper
   ),
-  fallbackFormat: generateFallbackFormat(rule),
+  fallbackFormat: {
+    text: generateFallbackFormatText(rule),
+    label: generateFallbackLabel(rule),
+  },
   properties: compileFormatPropeties(rule.placeHolder ?? {}),
   arrayIndex: rule.arrayIndex
     ? rule.arrayIndex.map(compileArrayPlaceholderEX)
@@ -35,14 +39,30 @@ const compileItemMapper = <T>(
   };
 };
 
-const generateFallbackFormat = <T>(rule: FormatRule<T>): string => {
+const generateFallbackFormatText = <T>(rule: FormatRule<T>): string => {
   if (rule.fallbackFormat) {
-    return rule.fallbackFormat;
+    if (rule.fallbackFormat.text) {
+      return rule.fallbackFormat.text;
+    }
   }
-  const keys: ReadonlySet<string & keyof T> = getDataKeysFromFormatRule(rule);
-  return Array.from(keys)
+  return Array.from(
+    getDataKeysFromFormatRule(rule) satisfies Set<string & keyof T>
+  )
     .map((item) => `${item}:{${item}}`)
     .join(", ");
+};
+const generateFallbackLabel = <T>(rule: FormatRule<T>): string => {
+  if (rule.fallbackFormat?.label) {
+    return rule.fallbackFormat.label;
+  }
+  return FORMAT_PLACEHOLDER_LABEL;
+};
+
+export const resolveUnknownLabel = <T>(
+  rule: FormatRuleCompiled<T>,
+  key: string
+): string => {
+  return rule.fallbackFormat.label.replace(FORMAT_PLACEHOLDER_KEY, key);
 };
 
 export const applyPlaceholdersToText = <Schema, Data extends Schema>(
