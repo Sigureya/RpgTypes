@@ -1,5 +1,9 @@
 import type { SourceIdentifier } from "src/namedItemSource";
 
+// This type uses `satisfies` to ensure type safety while avoiding circular dependencies.
+// Ideally, these values would be provided via constants or functions, but doing so would increase import/export dependencies
+// and make circular reference errors more likely.
+// Therefore, we use `satisfies` here to maintain type safety and avoid the risk of circular dependencies.
 export interface SourceId_System<Kind extends string> extends SourceIdentifier {
   author: "rmmz";
   module: "system";
