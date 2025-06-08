@@ -3,3 +3,7 @@ export interface CollapsOptionLabels {
   instantCollaps: string;
   noneCollaps: string;
 }
+
+export interface NormalLabel {
+  normal: string;
+}
