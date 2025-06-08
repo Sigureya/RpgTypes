@@ -1,14 +1,5 @@
-import type { SourceIdentifier } from "src/namedItemSource";
 import { makeDamage } from "../members";
 import type { Data_Skill } from "./core";
-import { AUTHOR_RMMZ } from "src/namedItemSource";
-import { MODULE_DATA, SRC_DATA_SKILL } from "../../sourceConstants";
-
-export const skillSourceId = (): SourceIdentifier => ({
-  author: AUTHOR_RMMZ,
-  module: MODULE_DATA,
-  kind: SRC_DATA_SKILL,
-});
 
 export const makeSkillData = (skill: Partial<Data_Skill> = {}): Data_Skill => ({
   stypeId: skill.stypeId ?? 0,

@@ -1,6 +1,3 @@
-import type { SourceIdentifier } from "src/namedItemSource";
-import { AUTHOR_RMMZ } from "@RpgTypes/namedItemSource";
-import { MODULE_DATA, SRC_DATA_ENEMY } from "src/rpg";
 import type { Data_Enemy, DropItem, Enemy_Action } from "./types";
 
 export const makeDropItem = (dropItem: Partial<DropItem> = {}): DropItem => ({
@@ -41,10 +38,4 @@ export const makeEnemyData = (data: Partial<Data_Enemy> = {}): Data_Enemy => ({
     0, // luk
   ],
   actions: [],
-});
-
-export const enemySourceId = (): SourceIdentifier => ({
-  author: AUTHOR_RMMZ,
-  module: MODULE_DATA,
-  kind: SRC_DATA_ENEMY,
 });
