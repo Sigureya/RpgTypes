@@ -1,5 +1,4 @@
 import type { SourceId_DataSkill, SourceId_DataState } from "src/rpg";
-import { stateSourceId } from "src/rpg";
 import {
   TRAIT_ELEMENT_RATE,
   TRAIT_DEBUFF_RATE,
