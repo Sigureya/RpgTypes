@@ -21,9 +21,9 @@ import {
   stateSourceId,
 } from "./traitContainers";
 import type { Data_Skill } from "./usableItems";
-import { skillSourceId } from "./usableItems";
 import { mergeItemsSource } from "@RpgTypes/namedItemSource/format/mergeItemsSource";
 import type { DataLabels } from "./dataLabels";
+import type { SourceId_DataSkill } from "src/rpg";
 
 const RULE: FormatRule<Trait> = {
   itemMapper: {
@@ -51,7 +51,11 @@ export const defineTraitSources = (
     defineTraitCollapseType(set.collaps, global),
     defineTraitSpecialFlag(set.specialFlag),
     {
-      source: skillSourceId(),
+      source: {
+        author: "rmmz",
+        module: "data",
+        kind: "skill",
+      } satisfies SourceId_DataSkill,
       label: labels.skill.domainName,
       items: items.skills,
     },
