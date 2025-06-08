@@ -1,7 +1,7 @@
 import { AUTHOR_RMMZ } from "@RpgTypes/namedItemSource";
+import type { TraitSourceIdRegularParam } from "src/rpg";
 import {
   MODULE_DATA,
-  regularParamSourceId,
   skillSourceId,
   SRC_DATA_COMMON_EVNET,
   stateSourceId,
@@ -80,6 +80,12 @@ const defineEffectRemoveState = (
   labels: ItemEffectLabelSet
 ): EffectDefinitionResolved =>
   defineEffect(EFFECT_REMOVE_STATE, labels.removeState, stateSourceId());
+
+const regularParamSourceId = (): TraitSourceIdRegularParam => ({
+  author: "rmmz",
+  module: "trait",
+  kind: "params",
+});
 
 const defineEffectAddBuff = (
   labels: ItemEffectLabelSet
