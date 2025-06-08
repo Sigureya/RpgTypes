@@ -92,6 +92,7 @@ const mockRule: FormatRule<ItemEffects> = {
   placeHolder: {
     numbers: ["value1", "value2"],
   },
+  fallbackFormat: "fallback",
   itemMapper: {
     dataIdKey: "dataId",
     kindKey: "code",
