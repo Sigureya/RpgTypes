@@ -7,12 +7,14 @@ import {
 } from "./data";
 import { DEFAULT_GLOBAL_LABELS } from "./labels";
 
-export const LABEL_REGISTRY_JP = {
-  rpg: {
-    damage: DEFAULT_DAMAGE_LABELS,
-    data: LABEL_SET_DATA,
-    traits: LABEL_SET_TRAIT,
-    itemEffect: LABEL_SET_ITEM_EFFECT,
-  },
-  global: DEFAULT_GLOBAL_LABELS,
-} as const satisfies LabelRegistry;
+export const labelsRegistry = () => {
+  return {
+    rpg: {
+      damage: DEFAULT_DAMAGE_LABELS,
+      data: LABEL_SET_DATA,
+      traits: LABEL_SET_TRAIT,
+      itemEffect: LABEL_SET_ITEM_EFFECT,
+    },
+    global: DEFAULT_GLOBAL_LABELS,
+  } satisfies LabelRegistry;
+};
