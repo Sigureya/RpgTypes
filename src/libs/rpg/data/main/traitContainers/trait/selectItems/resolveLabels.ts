@@ -1,4 +1,5 @@
-import { skillSourceId, stateSourceId } from "src/rpg";
+import type { SourceId_DataSkill, SourceId_DataState } from "src/rpg";
+import { stateSourceId } from "src/rpg";
 import {
   TRAIT_ELEMENT_RATE,
   TRAIT_DEBUFF_RATE,
@@ -85,6 +86,7 @@ export const resolveTraitLabels = (labels: TraitLabelSet): TraitFormat[] => {
     partyAbility(labels.partyAbility),
   ];
 };
+
 const regularParamSourceId = (): SourceId_TraitRegularParam => ({
   author: "rmmz",
   module: "trait",
@@ -292,6 +294,18 @@ const partyAbility = (
     module: "trait",
     kind: "partyAbility",
   } satisfies SourceId_TraitPartyAbility,
+});
+
+const stateSourceId = (): SourceId_DataState => ({
+  author: "rmmz",
+  module: "data",
+  kind: "state",
+});
+
+const skillSourceId = (): SourceId_DataSkill => ({
+  author: "rmmz",
+  module: "data",
+  kind: "skill",
 });
 
 const systemElementsSourceId = (): SourceId_SystemElements => ({
