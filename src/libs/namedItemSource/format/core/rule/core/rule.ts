@@ -13,14 +13,19 @@ import type { SourceIdentifier } from "./sourceIdentifier";
 export interface FormatRule<T> {
   itemMapper?: FormatItemMapper<T>;
   itemMappers?: FormatItemMapper<T>[];
-  fallbackFormat?: string;
+  fallbackFormat?: Partial<FallbackForamt>;
   placeHolder?: FormatProperties<T>;
   arrayIndex?: FormatArrayInput<T, SourceIdentifier>[];
 }
 
+export interface FallbackForamt {
+  text: string;
+  label: string;
+}
+
 export interface FormatRuleCompiled<T> {
   itemMappers: FormatItemMapperCompiled<T>[];
-  fallbackFormat: string;
+  fallbackFormat: FallbackForamt;
   properties: FormatPropertiesCompiled<T>;
   arrayIndex: FormatArrayIndexCompiled<T, SourceIdentifier>[];
 }

@@ -92,7 +92,7 @@ const mockRule: FormatRule<ItemEffects> = {
   placeHolder: {
     numbers: ["value1", "value2"],
   },
-  fallbackFormat: "fallback",
+  fallbackFormat: { text: "fallback format", label: "fallback label" },
   itemMapper: {
     dataIdKey: "dataId",
     kindKey: "code",
@@ -114,7 +114,9 @@ const testFormatWithCompiledBundle = (
   const mockedLookup = {
     extractMapKey: vi.fn((d: ItemEffects) => d.code),
     extractDataId: vi.fn((d: ItemEffects) => d.dataId),
-    unknownKey: vi.fn((code) => `Unknown Cofr: ${code}`),
+    unknownKey: vi.fn((code) => bundle.compiledRule.fallbackFormat.label),
+    //    unknownKey: vi.fn((code) => `Unknown Cofr: ${code}`),
+    // TODO:未解決データの扱い。複数の処理を扱えるようにデータ調整が必要
   } satisfies MockedObject<FormatLookupKeys<ItemEffects, number>>;
 
   const result: FormatResult = formatWithCompiledBundle(data, bundle, mockedLookup);
@@ -189,6 +191,18 @@ describe("formatWithCompiledBundle integration", () => {
       fn: ({ lookup }) => {
         expect(lookup.extractDataId).not.toHaveBeenCalled();
         expect(lookup.unknownKey).not.toHaveBeenCalled();
+      },
+    },
+    {
+      caseName: "unknown key",
+      data: { code: 999, dataId: 0, value1: 50, value2: 10 },
+      expected: {
+        label: bundle.compiledRule.fallbackFormat.label,
+        text: bundle.compiledRule.fallbackFormat.text,
+      },
+      fn: ({ lookup, data }) => {
+        expect(lookup.extractMapKey).toHaveBeenCalledWith(data);
+        expect(lookup.unknownKey).toHaveBeenCalledWith(data.code);
       },
     },
   ]);
