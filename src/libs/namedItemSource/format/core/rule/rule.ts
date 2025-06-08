@@ -10,7 +10,11 @@ import type {
   FormatRuleCompiled,
 } from "./core";
 import { compileArrayPlaceholderEX, compileFormatPropeties } from "./core";
-import { FORMAT_PLACEHOLDER_KEY, FORMAT_PLACEHOLDER_LABEL } from "./constants";
+import {
+  FORMAT_PLACEHOLDER_KEY,
+  DEFAULT_LABEL,
+  DEFAULT_TEXT,
+} from "./constants";
 
 export const compileFormatRule = <T>(
   rule: FormatRule<T>,
@@ -45,17 +49,21 @@ const generateFallbackFormatText = <T>(rule: FormatRule<T>): string => {
       return rule.fallbackFormat.text;
     }
   }
-  return Array.from(
-    getDataKeysFromFormatRule(rule) satisfies Set<string & keyof T>
-  )
+  const set: ReadonlySet<string & keyof T> = getDataKeysFromFormatRule(rule);
+  if (set.size === 0) {
+    return DEFAULT_TEXT;
+  }
+
+  return Array.from(set)
     .map((item) => `${item}:{${item}}`)
     .join(", ");
 };
+
 const generateFallbackLabel = <T>(rule: FormatRule<T>): string => {
   if (rule.fallbackFormat?.label) {
     return rule.fallbackFormat.label;
   }
-  return FORMAT_PLACEHOLDER_LABEL;
+  return DEFAULT_LABEL;
 };
 
 export const resolveUnknownLabel = <T>(
