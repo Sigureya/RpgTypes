@@ -11,10 +11,10 @@ import type {
   TraitLabelWithOption,
 } from "./items";
 
-export const FORMAT_NAME = "{name}" as const;
+const FORMAT_NAME = "{name}" as const;
 const FORMAT_PARAM_RATE_MUL = "{name} * {value}%" as const;
 const FORMAT_PARAM_RATE_PLUS = "{name} + {value}%" as const;
-export const FORMAT_PARAM_VALUE = "{value}" as const;
+const FORMAT_PARAM_VALUE = "{value}" as const;
 
 export const LABEL_SET_TRAIT = {
   domainName: "特徴",
