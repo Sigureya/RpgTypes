@@ -1,14 +1,12 @@
 import { describe, test, expect } from "vitest";
 import { resolveTraitLabels } from "./resolveLabels";
 import { LABEL_SET_TRAIT } from ".";
-import type { TraitLabelResolved } from "./types";
+import type { TraitFormat } from "./types";
 
 describe("resolveTraitLabels", () => {
-  const result: TraitLabelResolved[] = resolveTraitLabels(
-    LABEL_SET_TRAIT.options
-  );
-  const sortedCodes: TraitLabelResolved[] = result.toSorted(
-    (a, b) => a.code - b.code
+  const result: TraitFormat[] = resolveTraitLabels(LABEL_SET_TRAIT.options);
+  const sortedCodes: TraitFormat[] = result.toSorted(
+    (a, b) => a.kindId - b.kindId
   );
   test("should ensure that all codes are unique", () => {
     const set = new Set(sortedCodes);

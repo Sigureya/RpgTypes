@@ -1,8 +1,8 @@
 import type { SourceIdentifier } from "src/namedItemSource";
 
-export interface TraitLabelResolved {
-  format: string;
-  code: number;
+export interface TraitFormat {
+  pattern: string;
+  kindId: number;
   label: string;
   dataSource?: SourceIdentifier;
 }
