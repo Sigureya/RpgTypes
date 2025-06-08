@@ -2,6 +2,11 @@ import { describe, test, expect } from "vitest";
 import { resolveTraitLabels } from "./resolveLabels";
 import { LABEL_SET_TRAIT } from "./default";
 import type { TraitFormat } from "./types";
+import type { SourceIdentifier } from "src/namedItemSource";
+
+const authorIsRmmz = (sourceId: SourceIdentifier | undefined) => {
+  return sourceId ? sourceId.author === "rmmz" : true;
+};
 
 describe("resolveTraitLabels", () => {
   const result: TraitFormat[] = resolveTraitLabels(LABEL_SET_TRAIT.options);
@@ -14,5 +19,8 @@ describe("resolveTraitLabels", () => {
   });
   test("should ensure that codes are sorted in ascending order", () => {
     expect(result).toEqual(sortedCodes);
+  });
+  test.each(result)("should item.$label author is rmmz", (item) => {
+    expect(item.dataSource).toSatisfy(authorIsRmmz);
   });
 });
