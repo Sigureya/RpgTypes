@@ -18,12 +18,11 @@ import {
   defineTraitSpecialFlag,
   defineTraitSpecialParam,
   resolveTraitLabels,
-  stateSourceId,
 } from "./traitContainers";
 import type { Data_Skill } from "./usableItems";
 import { mergeItemsSource } from "@RpgTypes/namedItemSource/format/mergeItemsSource";
 import type { DataLabels } from "./dataLabels";
-import type { SourceId_DataSkill } from "src/rpg";
+import type { SourceId_DataSkill, SourceId_DataState } from "src/rpg";
 
 const RULE: FormatRule<Trait> = {
   itemMapper: {
@@ -60,7 +59,11 @@ export const defineTraitSources = (
       items: items.skills,
     },
     {
-      source: stateSourceId(),
+      source: {
+        author: "rmmz",
+        module: "data",
+        kind: "state",
+      } satisfies SourceId_DataState,
       label: labels.state.domainName,
       items: items.states,
     },
