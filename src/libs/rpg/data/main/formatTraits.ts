@@ -10,11 +10,20 @@ import type {
   Trait,
   Data_State,
 } from "./traitContainers";
-import { resolveTraitLabels, stateSourceId } from "./traitContainers";
+import {
+  defineTraitCollapseType,
+  defineTraitExtraParam,
+  defineTraitRegularParam,
+  defineTraitSpecialFlag,
+  defineTraitSpecialParam,
+  resolveTraitLabels,
+  stateSourceId,
+} from "./traitContainers";
 import type { Data_Skill } from "./usableItems";
 import { skillSourceId } from "./usableItems";
 import { mergeItemsSource } from "@RpgTypes/namedItemSource/format/mergeItemsSource";
 import type { DataLabels } from "./dataLabels";
+import type { GlobalLabel } from "@RpgTypes/schema";
 
 const RULE: FormatRule<Trait> = {
   itemMapper: {
@@ -29,8 +38,18 @@ interface Items {
   states: Data_State[];
 }
 
-const tttt = (items: Items, labels: DataLabels): NamedItemSource[] => {
+const tttt = (
+  items: Items,
+  labels: DataLabels,
+  set: TraitLabelSet,
+  global: Pick<GlobalLabel, "normal">
+): NamedItemSource[] => {
   return [
+    defineTraitRegularParam(set.regularParam),
+    defineTraitExtraParam(set.extraParam),
+    defineTraitSpecialParam(set.specialParam),
+    defineTraitCollapseType(set.collaps, global),
+    defineTraitSpecialFlag(set.specialFlag),
     {
       source: skillSourceId(),
       label: labels.skill.domainName,
@@ -52,7 +71,7 @@ const xxxx = (
   const list: FormatLabelResolved<number>[] = resolveTraitLabels(
     labels
   ) satisfies TraitFormat[];
-  return mergeItemsSource(list, tttt(items, dataLabel));
+  return mergeItemsSource(list, tttt(items, dataLabel, labels, { normal: "" }));
 };
 
 const compileTraitRule = (rule: FormatRule<Trait>) => {};
