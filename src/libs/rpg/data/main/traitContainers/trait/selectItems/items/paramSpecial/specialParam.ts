@@ -11,28 +11,20 @@ import {
   SPECIAL_PARAM_EXR,
 } from "./constants";
 import type { SpecialParamLabels } from "./labels";
-import type {
-  Data_NamedItem,
-  NamedItemSource,
-  SourceIdentifier,
-} from "src/namedItemSource";
-
-import { MODULE_TRAIT, SRC_PARAMS_SPECIAL } from "src/rpg";
+import type { Data_NamedItem, NamedItemSource } from "src/namedItemSource";
 import type { TraitLabelWithOption } from "../traitLabel";
-import { AUTHOR_RMMZ } from "src/namedItemSource";
-
-export const specialParamSourceId = (): SourceIdentifier => ({
-  author: AUTHOR_RMMZ,
-  module: MODULE_TRAIT,
-  kind: SRC_PARAMS_SPECIAL,
-});
+import type { SourceId_TraitSpecialParam } from "src/rpg";
 
 export const defineTraitSpecialParam = (
   specialParam: TraitLabelWithOption<SpecialParamLabels>
 ): NamedItemSource => ({
   items: specialParamsToArray(specialParam.options),
   label: specialParam.domainName,
-  source: specialParamSourceId(),
+  source: {
+    author: "rmmz",
+    module: "trait",
+    kind: "sparams",
+  } satisfies SourceId_TraitSpecialParam,
 });
 
 export const specialParamsToArray = (
