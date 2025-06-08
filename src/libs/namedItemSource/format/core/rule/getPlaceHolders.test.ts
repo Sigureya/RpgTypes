@@ -43,6 +43,39 @@ describe("getPlaceHolderKeys", () => {
       expected: { keys: [], placeHolders: [] },
     },
     {
+      caseName: "arrayIndex",
+      rule: {
+        arrayIndex: [{ dataIdKey: "dataId", sourceId: { author: "rmmz", kind: "data", module: "state" } }],
+      },
+      expected: { keys: ["dataId"], placeHolders: [] },
+    },
+    {
+      caseName: "numbers",
+      rule: {
+        placeHolder: {
+          numbers: ["value1", "value2"],
+          strings: [],
+        },
+      },
+      expected: { keys: ["value1", "value2"], placeHolders: [] },
+    },
+    {
+      caseName: "placeHolder with numbers",
+      rule: {
+        placeHolder: {
+          numbers: ["value1", "value2"],
+        },
+      },
+      expected: { keys: ["value1", "value2"], placeHolders: [] },
+    },
+    {
+      caseName: "placeHolder with strings",
+      rule: { itemMapper: { placeHolder: "name", dataIdKey: "dataId", kindKey: "code" } },
+      expected: { keys: [], placeHolders: ["name"] },
+    },
+  ]);
+  runTest<ItemEffect>("mix case", [
+    {
       caseName: "with single item mapper and no item mappers",
       rule: {
         placeHolder: {
