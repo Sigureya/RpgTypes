@@ -1,11 +1,16 @@
 import {
   systemArmorTypesSourceId,
-  systemElementsSourceId,
   systemSkillTypesSourceId,
   systemEquipTypesSourceId,
   systemWeaponTypesSourceId,
 } from "@RpgTypes/system";
-import { skillSourceId, stateSourceId } from "src/rpg";
+import type { TraitSourceIdRegularParam } from "./sourceIdTypes";
+import {
+  MODULE_TRAIT,
+  skillSourceId,
+  SRC_PARAMS_REGULAR,
+  stateSourceId,
+} from "src/rpg";
 import {
   TRAIT_ELEMENT_RATE,
   TRAIT_DEBUFF_RATE,
@@ -49,10 +54,15 @@ import {
   collapsSourceId,
   extraParamSourceId,
   partyAbilitySourceId,
-  regularParamSourceId,
   specialFlagSourceId,
   specialParamSourceId,
 } from "./items";
+import type { SourceIdentifier } from "src/namedItemSource";
+import { AUTHOR_RMMZ } from "src/namedItemSource";
+import {
+  MODULE_SYSTEM,
+  SRC_ELEMENTS,
+} from "@RpgTypes/system/sourceId/constants";
 
 export const resolveTraitLabels = (labels: TraitLabelSet): TraitFormat[] => {
   return [
@@ -87,6 +97,19 @@ export const resolveTraitLabels = (labels: TraitLabelSet): TraitFormat[] => {
     partyAbility(labels.partyAbility),
   ];
 };
+
+const regularParamSourceId = (): TraitSourceIdRegularParam =>
+  ({
+    author: AUTHOR_RMMZ,
+    module: MODULE_TRAIT,
+    kind: SRC_PARAMS_REGULAR,
+  } satisfies SourceIdentifier);
+// TODO: typeを使った指定に切り替え、定数を消す
+const systemElementsSourceId = (): SourceIdentifier => ({
+  author: AUTHOR_RMMZ,
+  module: MODULE_SYSTEM,
+  kind: SRC_ELEMENTS,
+});
 
 const elementRate = (label: RawTraitLabel): TraitFormat => ({
   pattern: label.format,
