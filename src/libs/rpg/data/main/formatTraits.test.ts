@@ -2,7 +2,7 @@ import { describe, test, expect } from "vitest";
 import { defineTraitSources } from "./formatTraits";
 import type { Data_NamedItem, NamedItemSource } from "src/namedItemSource";
 import { LABEL_SET_DATA } from "./defaultDataLabels";
-import { LABEL_SET_TRAIT } from "./traitContainers/trait";
+import { LABEL_SET_TRAIT } from "./traitContainers/trait/selectItems/default";
 
 test("", () => {
   expect(LABEL_SET_DATA).toBeDefined();
@@ -34,13 +34,14 @@ const mockSkills: Data_NamedItem[] = [
 //   );
 //   describe("", () => {
 //     const set = new Set<string>([
-//       LABEL_SET_DATA.skill.domainName,
-//       LABEL_SET_DATA.state.domainName,
-//       LABEL_SET_TRAIT.options.regularParam.domainName,
-//       LABEL_SET_TRAIT.options.extraParam.domainName,
-//       LABEL_SET_TRAIT.options.specialParam.domainName,
-//       LABEL_SET_TRAIT.options.collaps.domainName,
-//       LABEL_SET_TRAIT.options.specialFlag.domainName,
+//       "",
+//       //   LABEL_SET_DATA.skill.domainName,
+//       //   LABEL_SET_DATA.state.domainName,
+//       //   LABEL_SET_TRAIT.options.regularParam.domainName,
+//       //   LABEL_SET_TRAIT.options.extraParam.domainName,
+//       //   LABEL_SET_TRAIT.options.specialParam.domainName,
+//       //   LABEL_SET_TRAIT.options.collaps.domainName,
+//       //   LABEL_SET_TRAIT.options.specialFlag.domainName,
 //     ]);
 //     test.each(result)("", (item) => {
 //       expect(item).toSatisfy((i: NamedItemSource) => set.has(i.label));
