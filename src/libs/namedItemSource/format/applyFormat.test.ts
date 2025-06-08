@@ -1,7 +1,14 @@
 import type { MockedObject } from "vitest";
 import { describe, test, expect, vi } from "vitest";
 
-import type { FormatErrorLabels, FormatLabelResolved, FormatResult, FormatRule, NamedItemSource } from "./core";
+import type {
+  FormatErrorLabels,
+  FormatLabelResolved,
+  FormatResult,
+  FormatRule,
+  NamedItemSource,
+} from "./core";
+import { resolveUnknownLabel } from "./core";
 import { compileFormatBundle, formatWithCompiledBundle, isValidFormatBundle } from "./applyFormat";
 import type { FormatLookupKeys } from "./core/accessor";
 import type { CompiledFormatBundle } from "./bundle";
@@ -92,7 +99,7 @@ const mockRule: FormatRule<ItemEffects> = {
   placeHolder: {
     numbers: ["value1", "value2"],
   },
-  fallbackFormat: { text: "fallback format", label: "fallback label" },
+  fallbackFormat: { text: "fallback format" },
   itemMapper: {
     dataIdKey: "dataId",
     kindKey: "code",
@@ -104,7 +111,10 @@ interface TestCase {
   caseName: string;
   data: ItemEffects;
   expected: FormatResult;
-  fn: (arg: { data: ItemEffects; lookup: MockedObject<FormatLookupKeys<ItemEffects, number>> }) => void;
+  fn: (arg: {
+    data: ItemEffects;
+    lookup: MockedObject<FormatLookupKeys<ItemEffects, number>>;
+  }) => void;
 }
 
 const testFormatWithCompiledBundle = (
@@ -114,9 +124,7 @@ const testFormatWithCompiledBundle = (
   const mockedLookup = {
     extractMapKey: vi.fn((d: ItemEffects) => d.code),
     extractDataId: vi.fn((d: ItemEffects) => d.dataId),
-    unknownKey: vi.fn((code) => bundle.compiledRule.fallbackFormat.label),
-    //    unknownKey: vi.fn((code) => `Unknown Cofr: ${code}`),
-    // TODO:未解決データの扱い。複数の処理を扱えるようにデータ調整が必要
+    unknownKey: vi.fn((code) => code.toString()),
   } satisfies MockedObject<FormatLookupKeys<ItemEffects, number>>;
 
   const result: FormatResult = formatWithCompiledBundle(data, bundle, mockedLookup);
@@ -133,7 +141,11 @@ const testFormatWithCompiledBundle = (
   });
 };
 
-const runTestCases = (caseName: string, bundle: CompiledFormatBundle<ItemEffects, number>, testCases: TestCase[]) => {
+const runTestCases = (
+  caseName: string,
+  bundle: CompiledFormatBundle<ItemEffects, number>,
+  testCases: TestCase[]
+) => {
   describe(caseName, () => {
     testCases.forEach((testCase) => {
       testFormatWithCompiledBundle(bundle, testCase);
@@ -197,7 +209,7 @@ describe("formatWithCompiledBundle integration", () => {
       caseName: "unknown key",
       data: { code: 999, dataId: 0, value1: 50, value2: 10 },
       expected: {
-        label: bundle.compiledRule.fallbackFormat.label,
+        label: resolveUnknownLabel(bundle.compiledRule, "999"),
         text: bundle.compiledRule.fallbackFormat.text,
       },
       fn: ({ lookup, data }) => {
