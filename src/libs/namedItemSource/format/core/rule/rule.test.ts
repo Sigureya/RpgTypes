@@ -1,6 +1,7 @@
 import { describe, test, expect } from "vitest";
 import { compileFormatRule, applyPlaceholdersToText } from "./rule";
-import type { FormatRule, FormatRuleCompiled } from "./core";
+import type { FallbackForamt, FormatRule, FormatRuleCompiled } from "./core";
+import { DEFAULT_LABEL, DEFAULT_TEXT } from "./constants";
 
 // Test data interfaces
 interface ItemEffect {
@@ -203,6 +204,38 @@ describe("replacePlaceholders", () => {
         compiledSkillRule
       );
       expect(result).toBe("Skill ID: 101, Skill Name: Fireball");
+    });
+  });
+
+  describe("fallbackFormat", () => {
+    const fallbackFormat: FallbackForamt = {
+      text: "fallback text A",
+      label: "fallback label B",
+    };
+    test("assigns provided fallbackFormat when specified", () => {
+      const rule: FormatRule<ItemEffect> = {
+        fallbackFormat: fallbackFormat,
+      };
+      const compiled = compileFormatRule(rule);
+      expect(compiled.fallbackFormat).toEqual(fallbackFormat);
+      expect(compiled.fallbackFormat).not.toBe(fallbackFormat);
+    });
+    test("assigns default fallbackFormat when not specified", () => {
+      const rule: FormatRule<ItemEffect> = {};
+      const compiled = compileFormatRule(rule);
+      expect(compiled.fallbackFormat.label).toBe(DEFAULT_LABEL);
+      expect(compiled.fallbackFormat.text).toBe(DEFAULT_TEXT);
+    });
+    test("generates fallbackFormat with placeholders", () => {
+      const rule: FormatRule<ItemEffect> = {
+        placeHolder: {
+          numbers: ["value1", "dataId"],
+        },
+      };
+      const compiled = compileFormatRule(rule);
+      expect(compiled.fallbackFormat.label).toBe(DEFAULT_LABEL);
+      expect(compiled.fallbackFormat.text).not.toBe("");
+      expect(compiled.fallbackFormat.text).not.toBe(DEFAULT_TEXT);
     });
   });
 });
