@@ -6,6 +6,8 @@ export interface SourceID_Trait<Kind extends string>
     module: "trait";
   }> {
   kind: Kind;
+  author: "rmmz";
+  module: "trait";
 }
 
 export type SourceId_TraitRegularParam = SourceID_Trait<"params">;
