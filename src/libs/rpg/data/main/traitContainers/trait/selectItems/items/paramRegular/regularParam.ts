@@ -3,9 +3,8 @@ import type {
   NamedItemSource,
   SourceIdentifier,
 } from "src/namedItemSource";
-import { AUTHOR_RMMZ } from "src/namedItemSource";
 
-import { MODULE_TRAIT, SRC_PARAMS_REGULAR } from "src/rpg";
+import type { TraitSourceIdRegularParam } from "src/rpg";
 import {
   REGULAR_PARAM_MAX_HP,
   REGULAR_PARAM_MAX_MP,
@@ -20,18 +19,16 @@ import type { RegularParamLabels } from "./labels";
 
 import type { TraitLabelWithOption } from "../traitLabel";
 
-export const regularParamSourceId = (): SourceIdentifier => ({
-  author: AUTHOR_RMMZ,
-  module: MODULE_TRAIT,
-  kind: SRC_PARAMS_REGULAR,
-});
-
 export const defineTraitRegularParam = (
   param: TraitLabelWithOption<RegularParamLabels>
 ): NamedItemSource => ({
   items: regularParamsToArray(param.options),
   label: param.domainName,
-  source: regularParamSourceId(),
+  source: {
+    author: "rmmz",
+    module: "trait",
+    kind: "params",
+  } satisfies TraitSourceIdRegularParam & SourceIdentifier,
 });
 
 export const regularParamsToArray = (
