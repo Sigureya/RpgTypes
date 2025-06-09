@@ -4,10 +4,8 @@ import Ajv from "ajv";
 import { makeSystemData } from "./make";
 import type { Data_System } from "./system";
 import type { SystemDataFragments } from "./systemSegments";
-import {
-  makeBooleanOptions,
-  SCHEMA_SYSTEM_BOOLEAN_OPTIONS,
-} from "./booleanOptions";
+import { SCHEMA_SYSTEM_BOOLEAN_OPTIONS } from "./booleanOptions";
+import { makeBooleanOptions } from "./core/options/options";
 
 const test2 = <K extends keyof SystemDataFragments>(
   key: K,

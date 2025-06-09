@@ -30,8 +30,8 @@ import type {
   System_BooleanOptions,
   System_ImageSize,
 } from "./subset";
-import { makeBooleanOptions } from "./booleanOptions";
 import { isImageSize, isTestBattler } from "./validate";
+import { makeBooleanOptions } from "./core/options/options";
 
 export const makeSystemData = (
   p: Partial<SystemDataFragments>
