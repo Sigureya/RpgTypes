@@ -12,3 +12,8 @@ export interface System_BooleanOptionsRMMMZ {
   optSplashScreen: boolean;
   optMessageSkip: boolean;
 }
+
+export type SystemLable_BooleanOptionsRMMMZ = Record<
+  keyof System_BooleanOptionsRMMMZ,
+  string
+>;
