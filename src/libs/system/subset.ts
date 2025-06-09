@@ -9,17 +9,6 @@ export type System_Pick<
 
 export type System_ParamNames = System_Pick<"terms", "params">;
 
-export type System_DataNames = Pick<
-  Data_System,
-  | "weaponTypes"
-  | "skillTypes"
-  | "elements"
-  | "variables"
-  | "equipTypes"
-  | "switches"
-  | "armorTypes"
->;
-
 export type System_Images = Pick<
   Data_System,
   | "battleback1Name"

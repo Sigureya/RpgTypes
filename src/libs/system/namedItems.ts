@@ -10,7 +10,6 @@ import {
 } from "./getSystemTypeNames";
 import type { Data_System } from "./system";
 import type { SystemLabel_DataNames } from "./systemLabels";
-import type { System_DataNames } from "./subset";
 import type {
   SourceId_SystemArmorTypes,
   SourceId_SystemElements,
@@ -20,6 +19,7 @@ import type {
   SourceId_SystemVariables,
   SourceId_SystemWeaponTypes,
 } from "./sourceIdTypes";
+import type { System_DataNames } from "./core/dataTypes";
 
 export const defineSystemItems = (
   system: System_DataNames,

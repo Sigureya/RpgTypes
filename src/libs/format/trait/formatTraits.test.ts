@@ -43,9 +43,9 @@ import {
   partyAbilityToArray,
 } from "src/rpg";
 import { defineTraitSources } from "./formatTraits";
-import type { System_DataNames } from "@RpgTypes/system";
 import { makeSystemData } from "@RpgTypes/system";
 import type { DomainName } from "@RpgTypes/templates";
+import type { System_DataNames } from "@RpgTypes/system/core/dataTypes";
 
 const mockGameData: Record<keyof GameData, Data_NamedItem[]> = {
   skills: [

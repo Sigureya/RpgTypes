@@ -22,7 +22,6 @@ import type { EditorSettings } from "./setting";
 import { makeEditorSetting } from "./setting";
 import type { SystemDataFragments } from "./systemSegments";
 import type {
-  System_DataNames,
   System_Debug,
   System_Images,
   System_GameInitial,
@@ -32,6 +31,8 @@ import type {
 } from "./subset";
 import { isImageSize, isTestBattler } from "./validate";
 import { makeBooleanOptions } from "./core/options/options";
+import { makeDataNames } from "./core/dataTypes/dataTypes";
+import type { System_DataNames } from "./core/dataTypes";
 
 export const makeSystemData = (
   p: Partial<SystemDataFragments>
@@ -63,14 +64,10 @@ export const makeSystemData = (
     title2Name: images.title2Name ?? "",
     battleback1Name: images.battleback1Name ?? "",
     battleback2Name: images.battleback2Name ?? "",
-
-    armorTypes: cloneStringArray(dataNames.armorTypes),
-    elements: cloneStringArray(dataNames.elements),
-    equipTypes: cloneStringArray(dataNames.equipTypes),
-    weaponTypes: cloneStringArray(dataNames.weaponTypes),
-    skillTypes: cloneStringArray(dataNames.skillTypes),
-    switches: cloneStringArray(dataNames.switches),
-    variables: cloneStringArray(dataNames.variables),
+    ...(makeDataNames(dataNames) satisfies Record<
+      keyof System_DataNames,
+      string[]
+    >),
     magicSkills: cloneNumberArray([]),
     airship: makeVehicleData(vehicles.airship),
     boat: makeVehicleData(vehicles.boat),
