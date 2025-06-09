@@ -1,6 +1,7 @@
 import tseslint from "@typescript-eslint/eslint-plugin";
 import tsParser from "@typescript-eslint/parser";
 import fn from "eslint-plugin-functional";
+import importPlugin from "eslint-plugin-import";
 
 export default [
   {
@@ -17,6 +18,7 @@ export default [
     plugins: {
       "@typescript-eslint": tseslint,
       "@functional": fn,
+      import: importPlugin, // 追加
     },
     rules: {
       // ESLintの推奨ルールセットを手動で適用
@@ -40,6 +42,15 @@ export default [
         },
       ],
       "spaced-comment": "error",
+
+      // importルール
+      "import/order": [
+        "error",
+        {
+          alphabetize: { order: "asc", caseInsensitive: true },
+          "newlines-between": "never",
+        },
+      ],
     },
   },
 ];
