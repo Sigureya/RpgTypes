@@ -1,12 +1,14 @@
 import type {
   System_Advanced,
+  System_Bgm,
   System_BooleanOptionsRMMMZ,
   System_GameInitial,
+  System_Me,
+  System_SoundsObject,
 } from "./core";
 import type { System_DataNames } from "./core/dataTypes";
 import type {
   MenuCommandsEnabled,
-  System_SoundsObject,
   Terms_Basic,
   Terms_Command,
   Terms_Messages,
@@ -15,12 +17,10 @@ import type { ItemCategories } from "./members";
 import type { EditorSettings } from "./setting";
 import type {
   System_Vehicle,
-  System_Bgm,
   System_Text,
   System_Debug,
   System_Images,
   System_ImageSize,
-  System_Me,
 } from "./subset";
 
 export interface SystemDataFragments {
