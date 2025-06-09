@@ -1,11 +1,11 @@
 import { describe, test, expect } from "vitest";
 
 import Ajv from "ajv";
-import type { Data_System } from "./system";
-import { makeSystemData } from "./make";
-import type { SystemDataFragments } from "./systemSegments";
-import type { System_BooleanOptionsRMMMZ } from "./core";
-import { SCHEMA_SYSTEM_BOOLEAN_OPTIONS } from "./core";
+import makeSystemData from "@RpgTypes/system/make";
+import type { Data_System } from "@RpgTypes/system/system";
+import type { SystemDataFragments } from "@RpgTypes/system/systemSegments";
+import type { System_BooleanOptionsRMMMZ } from "../booleanOptions";
+import { SCHEMA_SYSTEM_BOOLEAN_OPTIONS } from "../booleanOptions";
 
 const ajv = new Ajv();
 

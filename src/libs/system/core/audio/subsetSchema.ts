@@ -1,6 +1,6 @@
 import type { AudioFileParams } from "@RpgTypes/utils";
 import type { JSONSchemaType } from "ajv";
-import type { System_AudioFiles } from "./subset";
+import type { System_AudioFiles } from "./types";
 
 export const SCHEMA_SYSTEM_AUDIOFILES = {
   type: "object",

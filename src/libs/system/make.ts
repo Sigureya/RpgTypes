@@ -10,7 +10,6 @@ import {
   makeItemCategories,
   makeMenuCommandsEnabled,
   makeParamNamesArray,
-  makeSoundsArray,
   makeTermsBasic,
   makeTermsCommand,
   makeTermsMessages,
@@ -20,18 +19,19 @@ import type { Data_System } from "./system";
 import type { EditorSettings } from "./setting";
 import { makeEditorSetting } from "./setting";
 import type { SystemDataFragments } from "./systemSegments";
-import type {
-  System_Debug,
-  System_Images,
-  System_Bgm,
-  System_ImageSize,
-} from "./subset";
+import type { System_Debug, System_Images, System_ImageSize } from "./subset";
 import { isImageSize, isTestBattler } from "./validate";
 import type {
+  System_Bgm,
   System_BooleanOptionsRMMMZ as System_BooleanOptions,
   System_GameInitial,
 } from "./core";
-import { makeBooleanOptions, makeDataNames, makeSystemAdvanced } from "./core";
+import {
+  makeBooleanOptions,
+  makeDataNames,
+  makeSoundsArray,
+  makeSystemAdvanced,
+} from "./core";
 import type { System_DataNames } from "./core/dataTypes";
 
 export const makeSystemData = (

@@ -22,15 +22,6 @@ export type System_Text = Pick<Data_System, "gameTitle" | "currencyUnit">;
 
 export type System_Vehicle = Pick<Data_System, "boat" | "ship" | "airship">;
 
-export type System_Bgm = Pick<Data_System, "titleBgm" | "battleBgm">;
-
-export type System_Me = Pick<
-  Data_System,
-  "gameoverMe" | "defeatMe" | "victoryMe"
->;
-
-export type System_AudioFiles = System_Bgm & System_Me;
-
 export type System_Debug = Pick<
   Data_System,
   "battlerHue" | "battlerName" | "testBattlers" | "testTroopId" | "editMapId"

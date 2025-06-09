@@ -3,13 +3,12 @@ import type {
   TestBattler,
   AttackMotion,
   System_Terms,
-  System_SoundsArray,
   Data_Vehicle,
   ItemCategoriesArray,
   MenuCommandsEnabledArray,
 } from "./members";
 import type { EditorSettings } from "./setting";
-import type { System_Advanced } from "./core";
+import type { System_Advanced, System_SoundsArray } from "./core";
 
 export interface Data_System {
   // battle
