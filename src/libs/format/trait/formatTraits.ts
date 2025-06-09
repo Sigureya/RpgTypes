@@ -40,7 +40,7 @@ export const defineTraitSources = (
   return [
     ...defineTraitItems(traitLabels, global),
     ...defineGameDataSources(gameData, gameDataLabels),
-    ...defineSystemItems(system, label),
+    //   ...defineSystemItems(system, label),
   ];
 };
 

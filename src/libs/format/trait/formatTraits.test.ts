@@ -25,6 +25,7 @@ import {
 import { defineTraitSources } from "./formatTraits";
 import type { System_DataNames } from "@RpgTypes/system";
 import { makeSystemData } from "@RpgTypes/system";
+import { domainNames } from "@RpgTypes/templates";
 
 const mockGameData: Record<keyof GameData, Data_NamedItem[]> = {
   skills: [
@@ -85,23 +86,12 @@ const makeSource = (): NamedItemSource[] => {
   );
 };
 
-describe.skip("defineTraitSources", () => {
+describe("defineTraitSources", () => {
   const result = makeSource();
   describe("", () => {
     const set = new Set<string>([
-      LABEL_SET_DATA.skill.domainName,
-      LABEL_SET_DATA.state.domainName,
-      LABEL_SET_DATA.actor.domainName,
-      LABEL_SET_DATA.armor.domainName,
-      LABEL_SET_DATA.weapon.domainName,
-      LABEL_SET_DATA.class.domainName,
-      LABEL_SET_DATA.enemy.domainName,
-      LABEL_SET_DATA.item.domainName,
-      LABEL_SET_TRAIT.options.regularParam.domainName,
-      LABEL_SET_TRAIT.options.extraParam.domainName,
-      LABEL_SET_TRAIT.options.specialParam.domainName,
-      LABEL_SET_TRAIT.options.collaps.domainName,
-      LABEL_SET_TRAIT.options.specialFlag.domainName,
+      ...domainNames(LABEL_SET_DATA),
+      ...domainNames(LABEL_SET_TRAIT.options),
     ]);
     test.each(result)("", (sourceItem) => {
       expect(sourceItem).toSatisfy((item: NamedItemSource) =>
