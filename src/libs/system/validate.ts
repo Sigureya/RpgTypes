@@ -1,10 +1,10 @@
 import Ajv from "ajv";
 import type { System_BooleanOptions, System_ImageSize } from "./subset";
-import { SCHEMA_SYSTEM_BOOLEAN_OPTIONS } from "./booleanOptions";
 import { SCHEMA_SYSTEM_TEST_BATTLER } from "./members/testBattler/schema";
 import type { AttackMotion, TestBattler } from "./members";
 import { SCHEMA_SYSTEM_MEMBERS_ATTACK_MOTION } from "./members/attackMotion/schema";
-import { SCHEMA_SYSTEM_IMAGE_SIZE } from "./size";
+import { SCHEMA_SYSTEM_BOOLEAN_OPTIONS } from "./core";
+import { SCHEMA_SYSTEM_IMAGE_SIZE } from "./core/imageSize/size";
 
 const ajv = new Ajv({ strict: false });
 const booleanOptions = ajv.compile(SCHEMA_SYSTEM_BOOLEAN_OPTIONS);
