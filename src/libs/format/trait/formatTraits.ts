@@ -1,7 +1,8 @@
 import { mergeItemsSource } from "@RpgTypes/namedItemSource/format/mergeItemsSource";
 import { defineGameDataSources } from "@RpgTypes/rpg/data/gameData";
 import type { GameData } from "@RpgTypes/rpg/data/gameDataTypes";
-import { type Data_System, type System_DataNames } from "@RpgTypes/system";
+import type { Data_System } from "@RpgTypes/system";
+import type { System_DataNames } from "@RpgTypes/system/core/dataTypes";
 import type {
   NamedItemSource,
   FormatCompiled,

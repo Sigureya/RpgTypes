@@ -1,3 +1,4 @@
+import type { System_DataNames } from "./core/dataTypes";
 import type {
   MenuCommandsEnabled,
   System_Advanced,
@@ -11,7 +12,6 @@ import type { EditorSettings } from "./setting";
 import type {
   System_BooleanOptions,
   System_Vehicle,
-  System_DataNames,
   System_Bgm,
   System_Text,
   System_Debug,
