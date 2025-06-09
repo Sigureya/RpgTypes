@@ -28,17 +28,10 @@ export default [
       curly: "error",
 
       // 純粋関数強制Rule
-      //      "@functional/no-return-void": "warn",
+      "@functional/no-return-void": "warn",
       "@functional/no-let": "error",
-      "@typescript-eslint/strict-boolean-expressions": [
-        "warn",
-        {
-          allowString: false,
-          allowNumber: false,
-          allowObject: true,
-          allowNullableObject: false,
-        },
-      ], // その他のルール
+      "@functional/no-loop-statements": "error",
+      // その他のルール
       "@typescript-eslint/explicit-function-return-type": "off",
       "@typescript-eslint/no-unused-vars": "warn",
       "@typescript-eslint/no-explicit-any": "warn",
@@ -48,6 +41,7 @@ export default [
           prefer: "type-imports",
         },
       ],
+      "@typescript-eslint/restrict-plus-operands": "error",
       "spaced-comment": "error",
 
       // importルール
@@ -58,6 +52,15 @@ export default [
           "newlines-between": "never",
         },
       ],
+    },
+  },
+  {
+    files: ["src/**/*.ts", "test/**/*.ts"],
+
+    rules: {
+      // テストファイルに特有のルール
+      "@typescript-eslint/no-explicit-any": "off", // テストではanyを許可
+      "@functional/no-return-void": "off",
     },
   },
 ];
