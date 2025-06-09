@@ -1,8 +1,9 @@
 import { test, expect, describe } from "vitest";
 import { domainNames } from "./domainLabel";
+import type { DomainName } from "./types";
 
 describe("domainNames", () => {
-  const mockDomain = {
+  const mockDomain: Record<string, DomainName> = {
     domain1: { domainName: "Domain One" },
     domain2: { domainName: "Domain Two" },
     domain3: { domainName: "Domain Three" },
