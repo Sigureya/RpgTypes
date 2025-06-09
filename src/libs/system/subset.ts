@@ -31,22 +31,6 @@ export type System_Me = Pick<
 
 export type System_AudioFiles = System_Bgm & System_Me;
 
-export type System_BooleanOptions = Pick<
-  Data_System,
-  | "optAutosave"
-  | "optDisplayTp"
-  | "optDrawTitle"
-  | "optExtraExp"
-  | "optFloorDeath"
-  | "optFollowers"
-  | "optKeyItemsNumber"
-  | "optSideView"
-  | "optSlipDeath"
-  | "optTransparent"
-  | "optMessageSkip"
-  | "optSplashScreen"
->;
-
 export type System_Debug = Pick<
   Data_System,
   "battlerHue" | "battlerName" | "testBattlers" | "testTroopId" | "editMapId"

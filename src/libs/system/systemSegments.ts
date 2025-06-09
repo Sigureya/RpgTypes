@@ -1,3 +1,4 @@
+import type { System_BooleanOptionsRMMMZ } from "./core";
 import type { System_DataNames } from "./core/dataTypes";
 import type {
   MenuCommandsEnabled,
@@ -10,7 +11,6 @@ import type {
 import type { ItemCategories } from "./members";
 import type { EditorSettings } from "./setting";
 import type {
-  System_BooleanOptions,
   System_Vehicle,
   System_Bgm,
   System_Text,
@@ -22,7 +22,7 @@ import type {
 } from "./subset";
 
 export interface SystemDataFragments {
-  options: Partial<System_BooleanOptions>;
+  options: Partial<System_BooleanOptionsRMMMZ>;
   advanced: Partial<System_Advanced>;
   vehicles: Partial<System_Vehicle>;
   editing: Partial<EditorSettings>;

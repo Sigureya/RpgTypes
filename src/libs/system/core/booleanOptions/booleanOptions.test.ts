@@ -2,9 +2,9 @@ import { describe, test, expect } from "vitest";
 import Ajv from "ajv";
 import { SCHEMA_SYSTEM_BOOLEAN_OPTIONS } from "./schema";
 import makeSystemData from "@RpgTypes/system/make";
-import type { System_BooleanOptions } from "@RpgTypes/system/subset";
 import type { Data_System } from "@RpgTypes/system/system";
 import { makeBooleanOptions } from "./options";
+import type { System_BooleanOptionsRMMMZ as System_BooleanOptions } from "./types";
 
 const ajv = new Ajv();
 const isSystemBooleanOptions = ajv.compile(SCHEMA_SYSTEM_BOOLEAN_OPTIONS);
