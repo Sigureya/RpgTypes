@@ -30,8 +30,7 @@ import type {
   System_ImageSize,
 } from "./subset";
 import { isImageSize, isTestBattler } from "./validate";
-import { makeBooleanOptions } from "./core/options/options";
-import { makeDataNames } from "./core/dataTypes/dataTypes";
+import { makeBooleanOptions, makeDataNames } from "./core";
 import type { System_DataNames } from "./core/dataTypes";
 
 export const makeSystemData = (
@@ -113,10 +112,6 @@ const makeTerms = (terms: System_TermsPartial): System_Terms => {
       string
     >,
   };
-};
-
-const cloneStringArray = (array?: ReadonlyArray<string>) => {
-  return array ? [...array] : [];
 };
 
 const cloneNumberArray = (array?: ReadonlyArray<number>) => {

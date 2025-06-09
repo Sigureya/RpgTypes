@@ -5,7 +5,7 @@ import Ajv from "ajv";
 import type { Data_System } from "./system";
 import { makeSystemData } from "./make";
 import type { SystemDataFragments } from "./systemSegments";
-import { SCHEMA_SYSTEM_BOOLEAN_OPTIONS } from "./booleanOptions";
+import { SCHEMA_SYSTEM_BOOLEAN_OPTIONS } from "./core";
 
 const ajv = new Ajv();
 
