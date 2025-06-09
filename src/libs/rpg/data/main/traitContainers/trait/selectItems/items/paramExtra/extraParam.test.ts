@@ -1,3 +1,4 @@
+import type { Data_NamedItem } from "src/namedItemSource";
 import { describe, test, expect } from "vitest";
 import {
   EXTRA_PARAM_HIT,
@@ -13,7 +14,6 @@ import {
 } from "./constants";
 import { extraParamName, extraParamsToArray } from "./extraParam";
 import type { ExtraParamLabels } from "./labels";
-import type { Data_NamedItem } from "src/namedItemSource";
 
 describe("extraParamsToArray", () => {
   const xparam: ExtraParamLabels = {

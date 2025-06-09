@@ -1,5 +1,4 @@
 import { describe, test, expect } from "vitest";
-import { isDataMapInfo, isDataMap } from "./validate";
 import type { Data_Map } from "./map";
 import {
   makeMapData,
@@ -8,6 +7,7 @@ import {
   type Data_MapInfo,
 } from "./map";
 import { SCHEMA_DATA_MAP } from "./map/schema";
+import { isDataMapInfo, isDataMap } from "./validate";
 
 describe("", () => {
   test("", () => {

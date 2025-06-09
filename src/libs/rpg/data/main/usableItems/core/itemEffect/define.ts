@@ -1,15 +1,11 @@
 import { AUTHOR_RMMZ } from "@RpgTypes/namedItemSource";
+import type { SourceIdentifier } from "src/namedItemSource";
 import type {
   SourceId_DataSkill,
   SourceId_DataState,
   SourceId_TraitRegularParam,
 } from "src/rpg";
 import { MODULE_DATA, SRC_DATA_COMMON_EVNET } from "src/rpg";
-import type {
-  EffectDefinitionResolved,
-  EffectLabelDefinition,
-  ItemEffectLabelSet,
-} from "./labels";
 import {
   EFFECT_ADD_STATE,
   EFFECT_GROW,
@@ -24,7 +20,11 @@ import {
   EFFECT_REMOVE_DEBUFF,
   EFFECT_REMOVE_STATE,
 } from "./constants";
-import type { SourceIdentifier } from "src/namedItemSource";
+import type {
+  EffectDefinitionResolved,
+  EffectLabelDefinition,
+  ItemEffectLabelSet,
+} from "./labels";
 
 export const resolveItemEffectLabels = (
   labels: ItemEffectLabelSet

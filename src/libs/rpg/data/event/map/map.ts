@@ -1,8 +1,8 @@
+import type { EventCommandUnknown } from "@RpgTypes/eventCommand";
 import type { AudioFileParams } from "@RpgTypes/utils";
-import type { Encounter } from "./members";
 import type { EventCommand, MapEvent } from "./event/";
 import type { MapEventContainer } from "./mapEventContainer";
-import type { EventCommandUnknown } from "@RpgTypes/eventCommand";
+import type { Encounter } from "./members";
 
 export interface Data_Map<
   CommandType extends EventCommandUnknown = EventCommand

@@ -1,4 +1,6 @@
 import type { DomainLabel } from "@RpgTypes/templates";
+import type { Data_NamedItem, NamedItemSource } from "src/namedItemSource";
+import type { SourceId_TraitSpecialFlag } from "src/rpg";
 import {
   FLAG_ID_AUTO_BATTLE,
   FLAG_ID_GUARD,
@@ -6,8 +8,6 @@ import {
   FLAG_ID_SUBSTITUTE,
 } from "./constants";
 import type { SpecialFlagOptions } from "./labels";
-import type { Data_NamedItem, NamedItemSource } from "src/namedItemSource";
-import type { SourceId_TraitSpecialFlag } from "src/rpg";
 
 export const defineTraitSpecialFlag = (
   label: DomainLabel<SpecialFlagOptions>

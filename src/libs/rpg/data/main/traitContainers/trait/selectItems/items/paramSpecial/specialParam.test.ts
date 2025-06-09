@@ -1,3 +1,4 @@
+import type { Data_NamedItem } from "src/namedItemSource";
 import { describe, expect, test } from "vitest";
 import {
   SPECIAL_PARAM_TGR,
@@ -13,7 +14,6 @@ import {
 } from "./constants";
 import type { SpecialParamLabels } from "./labels";
 import { specialParamsToArray, specialParamName } from "./specialParam";
-import type { Data_NamedItem } from "src/namedItemSource";
 
 const mockLabels = Object.freeze({
   targetRate: "Target Rate",

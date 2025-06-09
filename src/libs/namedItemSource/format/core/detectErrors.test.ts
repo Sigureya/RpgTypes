@@ -1,13 +1,13 @@
 import { describe, test, expect } from "vitest";
 import { detectFormatErrors } from "./detectErrors";
-import type { FormatInput, FormatWithSource } from "./types";
-import type { FormatRule } from "./rule";
-import type { SourceIdentifier } from "./rule";
 import type {
   FormatErrorLabels,
   FormatErrorGroup,
   FormatLimits,
 } from "./formatErrorTypes";
+import type { FormatRule } from "./rule";
+import type { SourceIdentifier } from "./rule";
+import type { FormatInput, FormatWithSource } from "./types";
 
 interface Trait {
   code: number;

@@ -1,7 +1,7 @@
-import { describe, test, expect } from "vitest";
 import { Ajv } from "ajv";
-import type { EventCommandUnknown, EventCommandLike2 } from "./types";
+import { describe, test, expect } from "vitest";
 import { SCHEMA_COMMAND_UNKNOWN } from "./schema";
+import type { EventCommandUnknown, EventCommandLike2 } from "./types";
 
 const ajv = new Ajv();
 const cccc = ajv.compile(SCHEMA_COMMAND_UNKNOWN);

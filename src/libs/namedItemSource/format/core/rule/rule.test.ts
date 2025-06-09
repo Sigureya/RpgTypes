@@ -1,7 +1,7 @@
 import { describe, test, expect } from "vitest";
-import { compileFormatRule, applyPlaceholdersToText } from "./rule";
-import type { FallbackForamt, FormatRule, FormatRuleCompiled } from "./core";
 import { DEFAULT_LABEL, DEFAULT_TEXT } from "./constants";
+import type { FallbackForamt, FormatRule, FormatRuleCompiled } from "./core";
+import { compileFormatRule, applyPlaceholdersToText } from "./rule";
 
 // Test data interfaces
 interface ItemEffect {

@@ -1,4 +1,6 @@
+import type { Data_NamedItem } from "src/namedItemSource";
 import { describe, expect, test } from "vitest";
+import { collapsOptionsToArray } from "./collaps";
 import {
   COLLAPS_NORMAL,
   COLLAPS_BOSS,
@@ -6,8 +8,6 @@ import {
   COLLAPS_NONE,
 } from "./constants";
 import type { CollapsOptionLabels, NormalLabel } from "./labels";
-import { collapsOptionsToArray } from "./collaps";
-import type { Data_NamedItem } from "src/namedItemSource";
 
 describe("collapsOptionsToArray", () => {
   const options: CollapsOptionLabels = {

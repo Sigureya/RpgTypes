@@ -1,4 +1,13 @@
 import { makeAudioFileParams, type AudioFileParams } from "@RpgTypes/utils";
+import {
+  PLAY_BGM,
+  PLAY_BGS,
+  PLAY_ME,
+  PLAY_SE,
+  CHANGE_DEFEAT_ME,
+  CHANGE_VICTORY_ME,
+  CHANGE_BATTLE_BGM,
+} from "src/rpg";
 import type {
   Command_PlayBGM,
   Command_PlayBGS,
@@ -9,15 +18,6 @@ import type {
   Command_ChangeBattleBGM,
   CommandUnion_AnyAudio,
 } from "./types";
-import {
-  PLAY_BGM,
-  PLAY_BGS,
-  PLAY_ME,
-  PLAY_SE,
-  CHANGE_DEFEAT_ME,
-  CHANGE_VICTORY_ME,
-  CHANGE_BATTLE_BGM,
-} from "src/rpg";
 
 export const makeAudioCommand = <Code extends CommandUnion_AnyAudio["code"]>(
   code: Code,

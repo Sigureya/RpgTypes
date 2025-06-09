@@ -1,9 +1,9 @@
-import { describe, test, expect } from "vitest";
-import Ajv from "ajv";
-import { makeSoundsArray, makeSoundsObject } from "./make";
-import type { System_SoundsArray, System_SoundsObject } from "./types";
-import { SCHEMA_SYSTEM_SOUND_ARRAY } from "./schema";
 import { makeAudioFileParams } from "@RpgTypes/utils";
+import Ajv from "ajv";
+import { describe, test, expect } from "vitest";
+import { makeSoundsArray, makeSoundsObject } from "./make";
+import { SCHEMA_SYSTEM_SOUND_ARRAY } from "./schema";
+import type { System_SoundsArray, System_SoundsObject } from "./types";
 
 const ajv = new Ajv({ strict: false });
 const validate = ajv.compile(SCHEMA_SYSTEM_SOUND_ARRAY);

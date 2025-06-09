@@ -1,7 +1,7 @@
 import { describe, test, expect } from "vitest";
-import { isSystemBooleanOptions } from "./validate";
-import type { Data_System } from "./system";
 import type { Terms_Messages } from "./members";
+import type { Data_System } from "./system";
+import { isSystemBooleanOptions } from "./validate";
 
 const mockSystem = {
   optAutosave: true,

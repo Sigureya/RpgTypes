@@ -1,5 +1,7 @@
-import { test, expect, describe } from "vitest";
 import { mergeItemsSource } from "@RpgTypes/namedItemSource/format/mergeItemsSource";
+import { makeSystemData } from "@RpgTypes/system";
+import type { System_DataNames } from "@RpgTypes/system/core/dataTypes";
+import type { DomainName } from "@RpgTypes/templates";
 import type {
   Data_NamedItem,
   NamedItemSource,
@@ -42,10 +44,8 @@ import {
   collapsOptionsToArray,
   partyAbilityToArray,
 } from "src/rpg";
+import { test, expect, describe } from "vitest";
 import { defineTraitSources } from "./formatTraits";
-import { makeSystemData } from "@RpgTypes/system";
-import type { DomainName } from "@RpgTypes/templates";
-import type { System_DataNames } from "@RpgTypes/system/core/dataTypes";
 
 const mockGameData: Record<keyof GameData, Data_NamedItem[]> = {
   skills: [

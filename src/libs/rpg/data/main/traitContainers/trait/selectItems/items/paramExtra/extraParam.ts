@@ -1,3 +1,6 @@
+import type { Data_NamedItem, NamedItemSource } from "src/namedItemSource";
+import type { SourceId_TraitExtraParam } from "src/rpg";
+import type { TraitLabelWithOption } from "../traitLabel";
 import {
   EXTRA_PARAM_HIT,
   EXTRA_PARAM_EVA,
@@ -11,9 +14,6 @@ import {
   EXTRA_PARAM_TRG,
 } from "./constants";
 import type { ExtraParamLabels } from "./labels";
-import type { Data_NamedItem, NamedItemSource } from "src/namedItemSource";
-import type { TraitLabelWithOption } from "../traitLabel";
-import type { SourceId_TraitExtraParam } from "src/rpg";
 
 export const defineTraitExtraParam = (
   xparam: TraitLabelWithOption<ExtraParamLabels>

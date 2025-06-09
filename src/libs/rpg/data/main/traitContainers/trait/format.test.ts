@@ -1,6 +1,3 @@
-import { describe, test, expect } from "vitest";
-import { detectTraitFormatErrors, formatTraitText } from "./format";
-
 import type {
   Data_NamedItem,
   FormatErrorLabels,
@@ -8,6 +5,8 @@ import type {
   FormatWithSource,
   SourceIdentifier,
 } from "src/namedItemSource";
+import { describe, test, expect } from "vitest";
+import { detectTraitFormatErrors, formatTraitText } from "./format";
 import type { Trait } from "./types";
 
 const mock0 = {

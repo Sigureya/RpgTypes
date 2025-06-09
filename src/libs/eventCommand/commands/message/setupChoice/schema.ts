@@ -1,6 +1,6 @@
 import type { JSONSchemaType } from "ajv";
-import type { Command_ShowChoiceWhen } from "./types/item";
 import type { Command_ShowChoices } from "./types";
+import type { Command_ShowChoiceWhen } from "./types/item";
 
 export const SCHEMA_COMMAND_SHOW_CHOICE_WHEN = {
   type: "object",

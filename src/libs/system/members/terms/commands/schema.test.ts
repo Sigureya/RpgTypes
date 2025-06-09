@@ -1,12 +1,12 @@
-import { describe, test, expect } from "vitest";
 import Ajv from "ajv";
-import type { Terms_Command, Terms_CommandArray } from "./types";
-import { SCHEMA_SYSTEM_MEMBERS_TERMS_COMMANDS_ARRAY } from "./schema";
+import { describe, test, expect } from "vitest";
 import {
   makeTermsCommandArray,
   makeTermsCommandFromArray,
   makeTermsCommandArrayWithNulls,
 } from "./make";
+import { SCHEMA_SYSTEM_MEMBERS_TERMS_COMMANDS_ARRAY } from "./schema";
+import type { Terms_Command, Terms_CommandArray } from "./types";
 
 const ajv = new Ajv();
 const validate = ajv.compile(SCHEMA_SYSTEM_MEMBERS_TERMS_COMMANDS_ARRAY);

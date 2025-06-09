@@ -1,8 +1,8 @@
-import { describe, test, expect } from "vitest";
 import Ajv from "ajv";
-import type { Terms_Messages } from "./types";
-import { SCHEMA_SYSTEM_TERMS_MESSAGES } from "./schema";
+import { describe, test, expect } from "vitest";
 import { makeTermsMessages } from "./make";
+import { SCHEMA_SYSTEM_TERMS_MESSAGES } from "./schema";
+import type { Terms_Messages } from "./types";
 
 const ajv = new Ajv();
 const validate = ajv.compile(SCHEMA_SYSTEM_TERMS_MESSAGES);

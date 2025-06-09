@@ -1,3 +1,5 @@
+import type { Data_NamedItem as Data_NamedItem } from "@RpgTypes/namedItemSource";
+import type { System_ParamNames } from "@RpgTypes/system/subset";
 import { describe, test, expect } from "vitest";
 import {
   getElementTypes,
@@ -6,9 +8,7 @@ import {
   getSkillTypes,
   getVariableNames,
 } from "./getSystemTypeNames";
-import type { Data_NamedItem as Data_NamedItem } from "@RpgTypes/namedItemSource";
 import type { System_DataNames } from "./types";
-import type { System_ParamNames } from "@RpgTypes/system/subset";
 
 const system: System_ParamNames &
   Pick<

@@ -1,6 +1,6 @@
-import type { Direction8, EventCommand } from "./eventCommand";
-import type { MapEvent_PageCondition } from "./condition";
 import type { EventCommandUnknown } from "@RpgTypes/eventCommand";
+import type { MapEvent_PageCondition } from "./condition";
+import type { Direction8, EventCommand } from "./eventCommand";
 import type { MoveRouteDataUnkwnown } from "./eventCommand/moveRoute";
 
 export interface MapEvent_Image {

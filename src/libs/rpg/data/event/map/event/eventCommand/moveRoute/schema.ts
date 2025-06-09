@@ -1,6 +1,6 @@
+import type { AudioFileParams } from "@RpgTypes/utils";
 import type { JSONSchemaType } from "ajv";
 import type { MoveRouteDataUnkwnown } from "./moveRoute";
-import type { AudioFileParams } from "@RpgTypes/utils";
 
 export const SCHEMA_MOVEROUTE_DATA = {
   type: "object",

@@ -1,9 +1,9 @@
-import { describe, test, expect } from "vitest";
-import Ajv from "ajv";
-import { SCHEMA_DATA_MAP, SCHEMA_MAP_EVENT_PAGE } from "./schema";
-import type { Data_Map } from "./map";
-import { makeMapData } from "./make";
 import type { AudioFileParams } from "@RpgTypes/utils";
+import Ajv from "ajv";
+import { describe, test, expect } from "vitest";
+import { makeMapData } from "./make";
+import type { Data_Map } from "./map";
+import { SCHEMA_DATA_MAP, SCHEMA_MAP_EVENT_PAGE } from "./schema";
 
 const ajv = new Ajv();
 const dataMap = ajv.compile(SCHEMA_DATA_MAP);

@@ -1,6 +1,18 @@
 import type { AudioFileParams } from "@RpgTypes/utils";
 import { makeAudioFileParams } from "@RpgTypes/utils";
 import type {
+  System_Bgm,
+  System_BooleanOptionsRMMMZ as System_BooleanOptions,
+  System_GameInitial,
+} from "./core";
+import {
+  makeBooleanOptions,
+  makeDataNames,
+  makeSoundsArray,
+  makeSystemAdvanced,
+} from "./core";
+import type { System_DataNames } from "./core/dataTypes";
+import type {
   System_Terms,
   System_TermsPartial,
   Terms_Messages,
@@ -15,24 +27,12 @@ import {
   makeTermsMessages,
   makeVehicleData,
 } from "./members";
-import type { Data_System } from "./system";
 import type { EditorSettings } from "./setting";
 import { makeEditorSetting } from "./setting";
-import type { SystemDataFragments } from "./systemSegments";
 import type { System_Debug, System_Images, System_ImageSize } from "./subset";
+import type { Data_System } from "./system";
+import type { SystemDataFragments } from "./systemSegments";
 import { isImageSize, isTestBattler } from "./validate";
-import type {
-  System_Bgm,
-  System_BooleanOptionsRMMMZ as System_BooleanOptions,
-  System_GameInitial,
-} from "./core";
-import {
-  makeBooleanOptions,
-  makeDataNames,
-  makeSoundsArray,
-  makeSystemAdvanced,
-} from "./core";
-import type { System_DataNames } from "./core/dataTypes";
 
 export const makeSystemData = (
   p: Partial<SystemDataFragments>

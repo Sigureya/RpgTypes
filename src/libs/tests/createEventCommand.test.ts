@@ -4,8 +4,8 @@ import type {
   EventCommandParameters,
   EventCommandTable,
 } from "@RpgTypes/rpg";
-import { createEventCommand, showMessage } from "./createEventCommand";
 import { describe, expect, it } from "vitest";
+import { createEventCommand, showMessage } from "./createEventCommand";
 describe("createEventCommand", () => {
   it("should create a SHOW_MESSAGE command", () => {
     const code: EventCode = 101;

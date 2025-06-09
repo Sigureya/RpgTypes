@@ -1,3 +1,4 @@
+import type { EventCommandUnknown } from "@RpgTypes/eventCommand";
 import type { JSONSchemaType } from "ajv";
 import type {
   BattleEventPage,
@@ -5,7 +6,6 @@ import type {
   Troop_EventConditions,
   Troop_Member,
 } from "./troop";
-import type { EventCommandUnknown } from "@RpgTypes/eventCommand";
 
 export const SCHEMA_DATA_TROOP = {
   type: "object",

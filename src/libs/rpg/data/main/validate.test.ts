@@ -1,12 +1,4 @@
 import { describe, test, expect } from "vitest";
-import {
-  isDataActor,
-  isDataArmor,
-  isDataClass,
-  isDataEnemy,
-  isDataState,
-  isDataWeapon,
-} from "./validate";
 import type {
   Data_Actor,
   Data_Armor,
@@ -22,6 +14,14 @@ import {
   makeEnemyData,
   makeStateData,
 } from "./traitContainers";
+import {
+  isDataActor,
+  isDataArmor,
+  isDataClass,
+  isDataEnemy,
+  isDataState,
+  isDataWeapon,
+} from "./validate";
 
 describe("isDataActor", () => {
   test("Valid actor2", () => {

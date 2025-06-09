@@ -1,5 +1,5 @@
-import type { Command_ScriptBody, Command_ScriptHeader } from "./types";
 import { SCRIPT_EVAL, SCRIPT_EVAL_BODY } from "src/rpg";
+import type { Command_ScriptBody, Command_ScriptHeader } from "./types";
 
 export const makeCommandScriptHeader = (
   script: string,

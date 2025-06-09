@@ -1,6 +1,6 @@
 import { describe, test, expect } from "vitest";
-import { getPlaceHolderKeys } from "./getPlaceHolders";
 import type { FormatRule } from "./core";
+import { getPlaceHolderKeys } from "./getPlaceHolders";
 
 interface ItemEffect {
   value1: number;

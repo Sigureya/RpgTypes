@@ -1,5 +1,12 @@
+import {
+  COMMENT_BODY,
+  COMMENT_HEAD,
+  SCRIPT_EVAL,
+  SCRIPT_EVAL_BODY,
+  SHOW_MESSAGE_BODY,
+  SHOW_SCROLLING_TEXT_BODY,
+} from "src/rpg";
 import { describe, test, expect } from "vitest";
-
 import {
   makeCommandShowMessageBody,
   makeCommandCommentHeader,
@@ -7,6 +14,7 @@ import {
   makeCommandScriptHeader,
   makeCommandScriptBody,
 } from "./commands";
+import { makeCommandScrollingTextBody } from "./commands/message/scrollText/make";
 import { isCommandTextBody } from "./validate";
 import {
   isCommandShowMessageBody,
@@ -16,15 +24,6 @@ import {
   isCommandScriptBody,
   isCommandScriptHeader,
 } from "./validateTextBody";
-import { makeCommandScrollingTextBody } from "./commands/message/scrollText/make";
-import {
-  COMMENT_BODY,
-  COMMENT_HEAD,
-  SCRIPT_EVAL,
-  SCRIPT_EVAL_BODY,
-  SHOW_MESSAGE_BODY,
-  SHOW_SCROLLING_TEXT_BODY,
-} from "src/rpg";
 
 const testInvalidPattern = (fn: (data: unknown) => boolean) => {
   test("Invalid command", () => {

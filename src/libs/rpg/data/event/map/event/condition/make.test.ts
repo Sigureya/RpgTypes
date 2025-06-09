@@ -1,7 +1,7 @@
-import { describe, test, expect } from "vitest";
-import { makeEventPageCondition } from "./make";
 import Ajv from "ajv";
+import { describe, test, expect } from "vitest";
 import type { MapEvent_PageCondition, PageConditionArg } from "./condition";
+import { makeEventPageCondition } from "./make";
 import { SCHEMA_MAP_EVENT_PAGE_CONDITION } from "./schema";
 const ajv = new Ajv();
 const validate = ajv.compile(SCHEMA_MAP_EVENT_PAGE_CONDITION);
