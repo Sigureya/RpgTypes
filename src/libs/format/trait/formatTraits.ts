@@ -1,4 +1,11 @@
 import { mergeItemsSource } from "@RpgTypes/namedItemSource/format/mergeItemsSource";
+import { defineGameDataSources } from "@RpgTypes/rpg/data/gameData";
+import type { GameData } from "@RpgTypes/rpg/data/gameDataTypes";
+import {
+  defineSystemItems,
+  type Data_System,
+  type System_DataNames,
+} from "@RpgTypes/system";
 import type {
   FormatRule,
   NamedItemSource,
@@ -7,23 +14,12 @@ import type {
 } from "src/namedItemSource";
 import type {
   Trait,
-  Data_Skill,
-  Data_State,
   DataLabels,
   TraitLabelSet,
   NormalLabel,
-  SourceId_DataSkill,
-  SourceId_DataState,
   TraitFormat,
 } from "src/rpg";
-import {
-  defineTraitRegularParam,
-  defineTraitExtraParam,
-  defineTraitSpecialParam,
-  defineTraitCollapseType,
-  defineTraitSpecialFlag,
-  resolveTraitLabels,
-} from "src/rpg";
+import { resolveTraitLabels, defineTraitItems } from "src/rpg";
 
 const RULE: FormatRule<Trait> = {
   itemMapper: {
@@ -33,48 +29,25 @@ const RULE: FormatRule<Trait> = {
   },
 };
 
-interface Items {
-  skills: Data_Skill[];
-  states: Data_State[];
-}
-
 export const defineTraitSources = (
-  items: Items,
-  labels: DataLabels,
-  set: TraitLabelSet,
-  global: NormalLabel
+  gameData: GameData,
+  gameDataLabels: DataLabels,
+  traitLabels: TraitLabelSet,
+  global: NormalLabel,
+  system: Data_System,
+  label: Record<keyof System_DataNames, string>
 ): NamedItemSource[] => {
   return [
-    defineTraitRegularParam(set.regularParam),
-    defineTraitExtraParam(set.extraParam),
-    defineTraitSpecialParam(set.specialParam),
-    defineTraitCollapseType(set.collaps, global),
-    defineTraitSpecialFlag(set.specialFlag),
-    {
-      source: {
-        author: "rmmz",
-        module: "data",
-        kind: "skill",
-      } satisfies SourceId_DataSkill,
-      label: labels.skill.domainName,
-      items: items.skills,
-    },
-    {
-      source: {
-        author: "rmmz",
-        module: "data",
-        kind: "state",
-      } satisfies SourceId_DataState,
-      label: labels.state.domainName,
-      items: items.states,
-    },
+    ...defineTraitItems(traitLabels, global),
+    ...defineGameDataSources(gameData, gameDataLabels),
+    ...defineSystemItems(system, label),
   ];
 };
 
 export const mergeTraitSource = (
   labels: TraitLabelSet,
   dataLabel: DataLabels,
-  items: Items
+  items: GameData
 ): Map<number, FormatCompiled> => {
   const list: FormatLabelResolved<number>[] = resolveTraitLabels(
     labels
@@ -82,7 +55,8 @@ export const mergeTraitSource = (
 
   return mergeItemsSource(
     list,
-    defineTraitSources(items, dataLabel, labels, { normal: "" })
+    []
+    // defineTraitSources(items, dataLabel, labels, { normal: "" })
   );
 };
 

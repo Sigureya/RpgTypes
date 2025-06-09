@@ -6,60 +6,82 @@ import type {
   FormatLabelResolved,
   FormatCompiled,
 } from "src/namedItemSource";
-import type { TraitFormat } from "src/rpg";
+import type { TraitFormat, GameData } from "src/rpg";
 import {
   LABEL_SET_DATA,
   LABEL_SET_TRAIT,
+  makeActorData,
+  makeArmorData,
   makeSkillData,
+  makeStateData,
+  makeClassData,
+  makeEnemyData,
+  makeItemData,
+  makeCommonEventData,
+  makeWeaponData,
   resolveTraitLabels,
   TRAIT_ELEMENT_RATE,
 } from "src/rpg";
 import { defineTraitSources } from "./formatTraits";
+import type { System_DataNames } from "@RpgTypes/system";
+import { makeSystemData } from "@RpgTypes/system";
 
-test("", () => {
-  expect(LABEL_SET_DATA).toBeDefined();
-  expect(LABEL_SET_TRAIT).toBeDefined();
+const mockGameData: Record<keyof GameData, Data_NamedItem[]> = {
+  skills: [
+    { id: 1, name: "Fireball" },
+    { id: 2, name: "Ice Spike" },
+    { id: 3, name: "Lightning Bolt" },
+  ],
+  states: [{ id: 1, name: "poison" }],
+  actors: [],
+  armors: [
+    { id: 1, name: "Leather Armor" },
+    { id: 2, name: "Iron Shield" },
+  ],
+  weapons: [],
+  classes: [],
+  enemies: [],
+  items: [],
+  commonEvents: [],
+};
+const mockDataNameLabels: Record<keyof System_DataNames, string> = {
+  armorTypes: "Armor Types",
+  weaponTypes: "Weapon Types",
+  elements: "Elements",
+  skillTypes: "Skill Types",
+  equipTypes: "Equip Types",
+  variables: "Variables",
+  switches: "Switches",
+};
+
+const makeGameDate = (
+  data: Record<keyof GameData, Data_NamedItem[]>
+): GameData => ({
+  skills: data.skills.map(makeSkillData),
+  states: data.states.map(makeStateData),
+  actors: data.actors.map(makeActorData),
+  armors: data.armors.map(makeArmorData),
+  weapons: data.weapons.map(makeWeaponData),
+  classes: data.classes.map(makeClassData),
+  enemies: data.enemies.map(makeEnemyData),
+  items: data.items.map(makeItemData),
+  commonEvents: data.commonEvents.map(makeCommonEventData),
 });
 
 const mockElements: Data_NamedItem[] = [
-  {
-    id: 1,
-    name: "Fire",
-  },
-  {
-    id: 2,
-    name: "Ice",
-  },
-  {
-    id: 3,
-    name: "Lightning",
-  },
-];
-
-const mockSkills: Data_NamedItem[] = [
-  {
-    id: 1,
-    name: "Fireball",
-  },
-  {
-    id: 2,
-    name: "Ice Spike",
-  },
-  {
-    id: 3,
-    name: "Lightning Bolt",
-  },
+  { id: 1, name: "Fire" },
+  { id: 2, name: "Ice" },
+  { id: 3, name: "Lightning" },
 ];
 
 const makeSource = (): NamedItemSource[] => {
   return defineTraitSources(
-    {
-      skills: mockSkills.map((skill) => makeSkillData(skill)),
-      states: [],
-    },
+    makeGameDate(mockGameData),
     LABEL_SET_DATA,
     LABEL_SET_TRAIT.options,
-    { normal: "Normal" }
+    { normal: "Normal" },
+    makeSystemData({}),
+    mockDataNameLabels
   );
 };
 
@@ -69,6 +91,12 @@ describe("defineTraitSources", () => {
     const set = new Set<string>([
       LABEL_SET_DATA.skill.domainName,
       LABEL_SET_DATA.state.domainName,
+      LABEL_SET_DATA.actor.domainName,
+      LABEL_SET_DATA.armor.domainName,
+      LABEL_SET_DATA.weapon.domainName,
+      LABEL_SET_DATA.class.domainName,
+      LABEL_SET_DATA.enemy.domainName,
+      LABEL_SET_DATA.item.domainName,
       LABEL_SET_TRAIT.options.regularParam.domainName,
       LABEL_SET_TRAIT.options.extraParam.domainName,
       LABEL_SET_TRAIT.options.specialParam.domainName,
