@@ -1,8 +1,11 @@
-import type { System_BooleanOptionsRMMMZ, System_GameInitial } from "./core";
+import type {
+  System_Advanced,
+  System_BooleanOptionsRMMMZ,
+  System_GameInitial,
+} from "./core";
 import type { System_DataNames } from "./core/dataTypes";
 import type {
   MenuCommandsEnabled,
-  System_Advanced,
   System_SoundsObject,
   Terms_Basic,
   Terms_Command,

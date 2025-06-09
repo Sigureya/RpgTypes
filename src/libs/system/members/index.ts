@@ -1,4 +1,3 @@
-export * from "./advanced";
 export * from "./attackMotion";
 export * from "./testBattler";
 export * from "./soundArray";
