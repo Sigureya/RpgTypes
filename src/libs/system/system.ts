@@ -42,10 +42,11 @@ export interface Data_System {
   itemCategories: ItemCategoriesArray;
   menuCommands: MenuCommandsEnabledArray;
 
-  // audioFiles
+  // audioFiles - bgm
   titleBgm: AudioFileParams;
-  gameoverMe: AudioFileParams;
   battleBgm: AudioFileParams;
+  // audioFiles - me
+  gameoverMe: AudioFileParams;
   defeatMe: AudioFileParams;
   victoryMe: AudioFileParams;
   // system sounds
