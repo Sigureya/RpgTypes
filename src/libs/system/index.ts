@@ -5,5 +5,5 @@ export * from "./systemLabels";
 export * from "./options";
 export * from "./subset";
 export { makeSystemData } from "./make";
-export * from "./namedItems";
-export * from "./sourceIdTypes";
+export * from "./core/dataTypes/namedItems";
+export * from "./core/dataTypes/sourceIdTypes";

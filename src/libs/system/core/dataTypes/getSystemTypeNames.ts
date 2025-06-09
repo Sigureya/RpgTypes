@@ -1,6 +1,6 @@
+import type { System_ParamNames } from "@RpgTypes/system/subset";
+import type { Data_System } from "@RpgTypes/system/system";
 import type { Data_NamedItem } from "src/namedItemSource";
-import type { Data_System } from "./system";
-import type { System_ParamNames } from "./subset";
 
 const makeNamedItem = (name: string, index: number): Data_NamedItem => ({
   name: name,

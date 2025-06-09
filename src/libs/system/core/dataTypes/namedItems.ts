@@ -8,8 +8,7 @@ import {
   getVariableNames,
   getSwitches,
 } from "./getSystemTypeNames";
-import type { Data_System } from "./system";
-import type { SystemLabel_DataNames } from "./systemLabels";
+
 import type {
   SourceId_SystemArmorTypes,
   SourceId_SystemElements,
@@ -19,7 +18,7 @@ import type {
   SourceId_SystemVariables,
   SourceId_SystemWeaponTypes,
 } from "./sourceIdTypes";
-import type { System_DataNames } from "./core/dataTypes";
+import type { System_DataNames, SystemLabel_DataNames } from "./types";
 
 export const defineSystemItems = (
   system: System_DataNames,
@@ -36,7 +35,7 @@ export const defineSystemItems = (
   ];
 };
 export const buildArmorTypesSource = (
-  system: Pick<Data_System, "armorTypes">,
+  system: Pick<System_DataNames, "armorTypes">,
   label: SystemLabel_DataNames
 ): NamedItemSource => ({
   items: getArmorTypes(system),
@@ -49,7 +48,7 @@ export const buildArmorTypesSource = (
 });
 
 export const buildElementTypesSource = (
-  system: Pick<Data_System, "elements">,
+  system: Pick<System_DataNames, "elements">,
   label: SystemLabel_DataNames
 ): NamedItemSource => ({
   items: getElementTypes(system),
@@ -62,7 +61,7 @@ export const buildElementTypesSource = (
 });
 
 export const buildEquipTypesSource = (
-  system: Pick<Data_System, "equipTypes">,
+  system: Pick<System_DataNames, "equipTypes">,
   label: SystemLabel_DataNames
 ): NamedItemSource => ({
   items: getEquipTypes(system),
@@ -75,7 +74,7 @@ export const buildEquipTypesSource = (
 });
 
 export const buildSkillTypesSource = (
-  system: Pick<Data_System, "skillTypes">,
+  system: Pick<System_DataNames, "skillTypes">,
   label: SystemLabel_DataNames
 ): NamedItemSource => ({
   items: getSkillTypes(system),
@@ -88,7 +87,7 @@ export const buildSkillTypesSource = (
 });
 
 export const buildVariableNamesSource = (
-  system: Pick<Data_System, "variables">,
+  system: Pick<System_DataNames, "variables">,
   label: SystemLabel_DataNames
 ): NamedItemSource => ({
   items: getVariableNames(system),
@@ -101,7 +100,7 @@ export const buildVariableNamesSource = (
 });
 
 export const buildSwitchesSource = (
-  system: Pick<Data_System, "switches">,
+  system: Pick<System_DataNames, "switches">,
   label: SystemLabel_DataNames
 ): NamedItemSource => ({
   items: getSwitches(system),
@@ -114,7 +113,7 @@ export const buildSwitchesSource = (
 });
 
 export const buildWeaponTypesSource = (
-  system: Pick<Data_System, "weaponTypes">,
+  system: Pick<System_DataNames, "weaponTypes">,
   label: SystemLabel_DataNames
 ): NamedItemSource => ({
   items: getWeaponTypes(system),
