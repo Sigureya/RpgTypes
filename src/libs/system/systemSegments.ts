@@ -1,4 +1,4 @@
-import type { System_BooleanOptionsRMMMZ } from "./core";
+import type { System_BooleanOptionsRMMMZ, System_GameInitial } from "./core";
 import type { System_DataNames } from "./core/dataTypes";
 import type {
   MenuCommandsEnabled,
@@ -16,7 +16,6 @@ import type {
   System_Text,
   System_Debug,
   System_Images,
-  System_GameInitial,
   System_ImageSize,
   System_Me,
 } from "./subset";

@@ -24,12 +24,14 @@ import type { SystemDataFragments } from "./systemSegments";
 import type {
   System_Debug,
   System_Images,
-  System_GameInitial,
   System_Bgm,
   System_ImageSize,
 } from "./subset";
 import { isImageSize, isTestBattler } from "./validate";
-import type { System_BooleanOptionsRMMMZ as System_BooleanOptions } from "./core";
+import type {
+  System_BooleanOptionsRMMMZ as System_BooleanOptions,
+  System_GameInitial,
+} from "./core";
 import { makeBooleanOptions, makeDataNames } from "./core";
 import type { System_DataNames } from "./core/dataTypes";
 
