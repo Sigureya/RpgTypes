@@ -71,7 +71,7 @@ export const resolveTraitLabels = (labels: TraitLabelSet): TraitFormat[] => {
     skillTypeAdd(labels.skillTypeAdd),
     skillTypeSeal(labels.skillTypeSeal),
     skillAdd(labels.skillAdd),
-    skillSeal(labels.skillAdd),
+    skillSeal(labels.skillSeal),
 
     equipWeaponType(labels.equipWeaponType),
     equipArmorType(labels.equipArmorType),
