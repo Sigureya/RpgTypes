@@ -185,6 +185,7 @@ const attackSkill = (label: RawTraitLabel): TraitFormat => ({
   pattern: label.format,
   label: label.domainName,
   kindId: TRAIT_ATTACK_SKILL,
+  dataSource: skillSourceId(),
 });
 
 const skillTypeAdd = (label: RawTraitLabel): TraitFormat => ({
