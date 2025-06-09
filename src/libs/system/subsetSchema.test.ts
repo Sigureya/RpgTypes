@@ -1,10 +1,10 @@
 import { describe, test, expect } from "vitest";
-import type { System_BooleanOptions } from "./subset";
 
 import Ajv from "ajv";
 import type { Data_System } from "./system";
 import { makeSystemData } from "./make";
 import type { SystemDataFragments } from "./systemSegments";
+import type { System_BooleanOptionsRMMMZ } from "./core";
 import { SCHEMA_SYSTEM_BOOLEAN_OPTIONS } from "./core";
 
 const ajv = new Ajv();
@@ -36,7 +36,7 @@ describe("isSystemBooleanOptions", () => {
     expect(isSystemBooleanOptions(mockSystem)).toBe(true);
   });
   describe("Valid", () => {
-    const mock: System_BooleanOptions = {
+    const mock: System_BooleanOptionsRMMMZ = {
       optAutosave: true,
       optDisplayTp: true,
       optDrawTitle: true,
@@ -53,14 +53,17 @@ describe("isSystemBooleanOptions", () => {
     test2("options", mock, isSystemBooleanOptions);
   });
   test("invalid", () => {
-    const mock: Pick<System_BooleanOptions, "optAutosave" | "optDisplayTp"> = {
+    const mock: Pick<
+      System_BooleanOptionsRMMMZ,
+      "optAutosave" | "optDisplayTp"
+    > = {
       optAutosave: true,
       optDisplayTp: true,
     };
     expect(isSystemBooleanOptions(mock)).toBe(false);
   });
   test("invalid", () => {
-    const mock: { [K in keyof System_BooleanOptions]: number } = {
+    const mock: { [K in keyof System_BooleanOptionsRMMMZ]: number } = {
       optAutosave: 1,
       optDisplayTp: 1,
       optDrawTitle: 1,
