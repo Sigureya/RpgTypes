@@ -1,5 +1,5 @@
 import type { JSONSchemaType } from "ajv";
-import type { System_ImageSize } from "./subset";
+import type { System_ImageSize } from "../../subset";
 
 export const SCHEMA_SYSTEM_IMAGE_SIZE = {
   additionalProperties: false,
