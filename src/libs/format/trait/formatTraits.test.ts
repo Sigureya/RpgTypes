@@ -65,9 +65,19 @@ const mockGameData: Record<keyof GameData, Data_NamedItem[]> = {
     { id: 1, name: "Leather Armor" },
     { id: 2, name: "Iron Shield" },
   ],
-  weapons: [],
-  classes: [],
-  enemies: [],
+  weapons: [
+    { id: 1, name: "Sword" },
+    { id: 2, name: "Axe" },
+  ],
+  classes: [
+    { id: 1, name: "Warrior" },
+    { id: 2, name: "Mage" },
+  ],
+  enemies: [
+    { id: 1, name: "Goblin" },
+    { id: 2, name: "Orc" },
+    { id: 3, name: "Dragon" },
+  ],
   items: [],
   commonEvents: [],
 };
