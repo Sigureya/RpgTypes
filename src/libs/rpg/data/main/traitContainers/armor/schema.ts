@@ -1,7 +1,7 @@
+import type { JSONSchemaType } from "ajv";
 import type { ParamArray } from "../members";
 import type { Trait } from "../trait";
 import type { Data_Armor } from "./types";
-import type { JSONSchemaType } from "ajv";
 
 export const SCHEMA_DATA_ARMMOR = {
   type: "object",

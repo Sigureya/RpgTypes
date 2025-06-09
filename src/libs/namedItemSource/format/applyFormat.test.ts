@@ -1,6 +1,7 @@
 import type { MockedObject } from "vitest";
 import { describe, test, expect, vi } from "vitest";
-
+import { compileFormatBundle, formatWithCompiledBundle, isValidFormatBundle } from "./applyFormat";
+import type { CompiledFormatBundle } from "./bundle";
 import type {
   FormatErrorLabels,
   FormatLabelResolved,
@@ -9,9 +10,7 @@ import type {
   NamedItemSource,
 } from "./core";
 import { resolveUnknownLabel } from "./core";
-import { compileFormatBundle, formatWithCompiledBundle, isValidFormatBundle } from "./applyFormat";
 import type { FormatLookupKeys } from "./core/accessor";
-import type { CompiledFormatBundle } from "./bundle";
 
 interface ItemEffects {
   code: number;

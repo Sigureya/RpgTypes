@@ -1,8 +1,4 @@
 import Ajv from "ajv";
-import {
-  SCHEMA_COMMAND_EMPTY_PARAM,
-  SCHEMA_COMMAND_TEXT_BODY,
-} from "./unionSchema";
 import type {
   CommandUnion_ChangeActorText,
   Command_ScrollTextHeader,
@@ -23,6 +19,10 @@ import {
   SCHEMA_COMMAND_SHOW_CHOICES,
 } from "./commands/message/setupChoice/schema";
 import { SCHEMA_COMMAND_SHOW_MESSAGE } from "./commands/message/showMessage/schema";
+import {
+  SCHEMA_COMMAND_EMPTY_PARAM,
+  SCHEMA_COMMAND_TEXT_BODY,
+} from "./unionSchema";
 import type {
   CommandUnion_EmptyParam,
   CommandUnion_TextBody,

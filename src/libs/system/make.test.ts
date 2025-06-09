@@ -1,7 +1,7 @@
 import { describe, test, expect } from "vitest";
 import { makeSystemData } from "./make";
-import type { SystemDataFragments } from "./systemSegments";
 import type { Data_System } from "./system";
+import type { SystemDataFragments } from "./systemSegments";
 
 const fullFragments = {
   options: {

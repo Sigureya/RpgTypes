@@ -1,5 +1,5 @@
-import type * as Images from "./asset/images";
 import type * as Audio from "./asset/audio";
+import type * as Images from "./asset/images";
 
 export type ImageFolders = (typeof Images)[keyof typeof Images];
 

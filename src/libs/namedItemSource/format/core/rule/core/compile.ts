@@ -1,11 +1,11 @@
 import type { PickByTypeKeys } from "@RpgTypes/templates";
+import type { FormatArrayIndexCompiled } from "./array";
 import type {
   FormatArrayInput,
   FormatPlaceholder,
   FormatProperties,
   FormatPropertiesCompiled,
 } from "./direct";
-import type { FormatArrayIndexCompiled } from "./array";
 import type { SourceIdentifier } from "./sourceIdentifier";
 
 export const compileFormatPropeties = <T>(

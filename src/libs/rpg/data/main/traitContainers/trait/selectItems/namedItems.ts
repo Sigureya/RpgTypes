@@ -1,3 +1,5 @@
+import type { NamedItemSource } from "src/namedItemSource";
+import type { GlobalLabel, TraitLabelSet } from "src/rpg";
 import {
   defineTraitRegularParam,
   defineTraitExtraParam,
@@ -6,8 +8,6 @@ import {
   defineTraitSpecialFlag,
   defineTraitPartyAbility,
 } from "./items";
-import type { NamedItemSource } from "src/namedItemSource";
-import type { GlobalLabel, TraitLabelSet } from "src/rpg";
 
 export const defineTraitItems = (
   set: TraitLabelSet,

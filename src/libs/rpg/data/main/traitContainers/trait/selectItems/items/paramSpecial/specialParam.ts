@@ -1,3 +1,6 @@
+import type { Data_NamedItem, NamedItemSource } from "src/namedItemSource";
+import type { SourceId_TraitSpecialParam } from "src/rpg";
+import type { TraitLabelWithOption } from "../traitLabel";
 import {
   SPECIAL_PARAM_TGR,
   SPECIAL_PARAM_GRD,
@@ -11,9 +14,6 @@ import {
   SPECIAL_PARAM_EXR,
 } from "./constants";
 import type { SpecialParamLabels } from "./labels";
-import type { Data_NamedItem, NamedItemSource } from "src/namedItemSource";
-import type { TraitLabelWithOption } from "../traitLabel";
-import type { SourceId_TraitSpecialParam } from "src/rpg";
 
 export const defineTraitSpecialParam = (
   specialParam: TraitLabelWithOption<SpecialParamLabels>

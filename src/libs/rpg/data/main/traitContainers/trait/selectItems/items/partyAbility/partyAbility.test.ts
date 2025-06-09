@@ -1,3 +1,4 @@
+import type { Data_NamedItem } from "src/namedItemSource";
 import { describe, expect, test } from "vitest";
 import {
   PARTY_ABILITY_ENCOUNTER_HALF,
@@ -7,9 +8,8 @@ import {
   PARTY_ABILITY_GOLD_DOUBLE,
   PARTY_ABILITY_DROP_ITEM_DOUBLE,
 } from "./constants";
-import { partyAbilityToArray } from "./partyAbility";
 import type { PartyAbilityOptionLabels } from "./labels";
-import type { Data_NamedItem } from "src/namedItemSource";
+import { partyAbilityToArray } from "./partyAbility";
 
 describe("partyAbilityToArray", () => {
   const options: PartyAbilityOptionLabels = {

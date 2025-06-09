@@ -1,4 +1,11 @@
 import { describe, test, expect } from "vitest";
+import { makeCommandCommonEvent, type Command_CommonEvent } from "./commands";
+import { makeCommandInputNumber } from "./commands/message/inputNumber/make";
+import {
+  makeCommandSetupChoice,
+  makeCommandShowChoiceItem,
+} from "./commands/message/setupChoice";
+import { makeCommandShowMessage } from "./commands/message/showMessage/convert";
 import {
   isCommandCommonEvent,
   isCommandInputNumber,
@@ -6,13 +13,6 @@ import {
   isCommandShowChoices,
   isCommandShowMessage,
 } from "./validate";
-import { makeCommandInputNumber } from "./commands/message/inputNumber/make";
-import {
-  makeCommandSetupChoice,
-  makeCommandShowChoiceItem,
-} from "./commands/message/setupChoice";
-import { makeCommandShowMessage } from "./commands/message/showMessage/convert";
-import { makeCommandCommonEvent, type Command_CommonEvent } from "./commands";
 
 const testInvalidPattern = (fn: (data: unknown) => boolean) => {
   test("Invalid command", () => {

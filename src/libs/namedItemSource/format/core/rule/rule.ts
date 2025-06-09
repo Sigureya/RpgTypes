@@ -1,7 +1,8 @@
 import {
-  getDataKeysFromFormatRule,
-  getItemMappersFromRule,
-} from "./getPlaceHolders";
+  FORMAT_PLACEHOLDER_KEY,
+  DEFAULT_LABEL,
+  DEFAULT_TEXT,
+} from "./constants";
 import type {
   FormatItemMapper,
   FormatItemMapperCompiled,
@@ -11,10 +12,9 @@ import type {
 } from "./core";
 import { compileArrayPlaceholderEX, compileFormatPropeties } from "./core";
 import {
-  FORMAT_PLACEHOLDER_KEY,
-  DEFAULT_LABEL,
-  DEFAULT_TEXT,
-} from "./constants";
+  getDataKeysFromFormatRule,
+  getItemMappersFromRule,
+} from "./getPlaceHolders";
 
 export const compileFormatRule = <T>(
   rule: FormatRule<T>,

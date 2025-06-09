@@ -1,9 +1,3 @@
-import { describe, test, expect } from "vitest";
-import {
-  cloneEventCommand,
-  cloneParameters,
-  isCloneableCommand,
-} from "./clone";
 import type {
   Command_CommonEvent,
   Command_ShowMessageHeader,
@@ -14,6 +8,12 @@ import {
 } from "@RpgTypes/eventCommand/commands";
 import type { EventCommandLike2 } from "@RpgTypes/eventCommand/frame";
 import { SHOW_MESSAGE } from "src/rpg";
+import { describe, test, expect } from "vitest";
+import {
+  cloneEventCommand,
+  cloneParameters,
+  isCloneableCommand,
+} from "./clone";
 
 const testCloneEventCommand = <P extends Array<number | boolean | string>>(
   command: EventCommandLike2<number, P>,

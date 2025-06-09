@@ -1,8 +1,8 @@
-import { describe, test, expect } from "vitest";
-import { resolveTraitLabels } from "./resolveLabels";
-import { LABEL_SET_TRAIT } from "./default";
-import type { TraitFormat } from "./types";
 import type { SourceIdentifier } from "src/namedItemSource";
+import { describe, test, expect } from "vitest";
+import { LABEL_SET_TRAIT } from "./default";
+import { resolveTraitLabels } from "./resolveLabels";
+import type { TraitFormat } from "./types";
 
 const authorIsRmmz = (sourceId: SourceIdentifier | undefined) => {
   return sourceId ? sourceId.author === "rmmz" : true;

@@ -1,3 +1,12 @@
+import {
+  CHANGE_BATTLE_BGM,
+  CHANGE_DEFEAT_ME,
+  CHANGE_VICTORY_ME,
+  PLAY_BGM,
+  PLAY_BGS,
+  PLAY_ME,
+  PLAY_SE,
+} from "src/rpg";
 import { describe, test, expect } from "vitest";
 import {
   makeCommandAudioAny,
@@ -9,15 +18,6 @@ import {
   makeCommandPlayME,
   makeCommandPlaySE,
 } from "./make";
-import {
-  CHANGE_BATTLE_BGM,
-  CHANGE_DEFEAT_ME,
-  CHANGE_VICTORY_ME,
-  PLAY_BGM,
-  PLAY_BGS,
-  PLAY_ME,
-  PLAY_SE,
-} from "src/rpg";
 
 describe("makeCommandAudioAny", () => {
   test("should create a command with the correct code and parameters", () => {

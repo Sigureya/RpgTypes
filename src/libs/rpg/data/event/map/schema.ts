@@ -1,16 +1,16 @@
-import type { JSONSchemaType } from "ajv";
-import type { Data_Map } from "./map";
-import type { Encounter } from "./members";
 import type { AudioFileParams } from "@RpgTypes/utils";
+import type { JSONSchemaType } from "ajv";
 import type {
   MapEvent,
   MapEvent_Image,
   MapEvent_PageCondition,
   MapEventPage,
 } from "./event";
-import { SCHEMA_MOVEROUTE_DATA } from "./event/eventCommand/moveRoute/schema";
-import type { MoveRouteDataUnkwnown } from "./event/eventCommand/moveRoute";
 import { SCHEMA_MAP_EVENT_PAGE_CONDITION } from "./event/condition/schema";
+import type { MoveRouteDataUnkwnown } from "./event/eventCommand/moveRoute";
+import { SCHEMA_MOVEROUTE_DATA } from "./event/eventCommand/moveRoute/schema";
+import type { Data_Map } from "./map";
+import type { Encounter } from "./members";
 
 export const SCHEMA_MAP_EVENT_IMAGE = {
   type: "object",

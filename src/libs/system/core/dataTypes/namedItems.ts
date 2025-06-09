@@ -8,7 +8,6 @@ import {
   getVariableNames,
   getSwitches,
 } from "./getSystemTypeNames";
-
 import type {
   SourceId_SystemArmorTypes,
   SourceId_SystemElements,

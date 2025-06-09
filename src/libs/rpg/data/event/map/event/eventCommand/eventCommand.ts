@@ -1,3 +1,4 @@
+import type { ParamArray_ControlVariables } from "@RpgTypes/eventCommand/commands/variable";
 import type { AudioFileParams, ColorRGBA } from "@RpgTypes/utils";
 import type { BranchParameters } from "./branchParams";
 import type { EventCommandLike } from "./eventComandLike";
@@ -29,7 +30,6 @@ import type {
   MoveRouteData,
   IndexOfParameter,
 } from "./types";
-import type { ParamArray_ControlVariables } from "@RpgTypes/eventCommand/commands/variable";
 export type EventCode = EventCommandsMapper["codeType"];
 export type EventCodeTable = EventCommandsMapper["codeTable"];
 export type EventCodeKeys = keyof EventCodeTable;

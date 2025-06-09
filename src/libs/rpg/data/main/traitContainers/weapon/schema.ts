@@ -1,6 +1,6 @@
+import type { JSONSchemaType } from "ajv";
 import type { Damage, ParamArray, Trait } from "src/rpg";
 import type { Data_Weapon } from "./weapon";
-import type { JSONSchemaType } from "ajv";
 
 export const SCHEMA_DATA_WEAPON = {
   type: "object",

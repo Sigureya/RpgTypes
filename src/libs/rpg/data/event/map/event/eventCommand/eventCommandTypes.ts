@@ -1,5 +1,6 @@
+import type { ColorRGBA } from "@RpgTypes/utils";
+import type { BranchParameters } from "./branchParams";
 import type { EventCommandLike } from "./eventComandLike";
-import type { Direction8, MoveRouteData } from "./types";
 import type {
   MovePicture,
   ShopGoods,
@@ -9,9 +10,8 @@ import type {
   Operation_PlusMinus,
   Designation,
 } from "./paramaters";
-import type { BranchParameters } from "./branchParams";
 import type { Param_ChangeEnemyParameters } from "./paramaters/changeBattler";
-import type { ColorRGBA } from "@RpgTypes/utils";
+import type { Direction8, MoveRouteData } from "./types";
 /**
  * @deprecated
  * Use `Command_ShowMessageHeader` instead.

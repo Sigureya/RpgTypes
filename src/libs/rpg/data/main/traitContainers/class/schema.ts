@@ -1,5 +1,5 @@
-import type { Data_Class } from "./types";
 import type { JSONSchemaType } from "ajv";
+import type { Data_Class } from "./types";
 
 export const SCHEMA_DATA_CLASS = {
   type: "object",

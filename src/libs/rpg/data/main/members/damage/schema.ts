@@ -1,5 +1,5 @@
-import type { Damage } from "./damage";
 import type { JSONSchemaType } from "ajv";
+import type { Damage } from "./damage";
 export const SCHEMA_DAMAGE = {
   type: "object",
   required: ["type", "elementId", "formula", "variance", "critical"],

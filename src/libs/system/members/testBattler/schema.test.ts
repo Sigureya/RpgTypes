@@ -1,8 +1,7 @@
-import { describe, test, expect } from "vitest";
 import Ajv from "ajv";
-import type { TestBattler } from "./types";
-
+import { describe, test, expect } from "vitest";
 import { SCHEMA_SYSTEM_TEST_BATTLER } from "./schema";
+import type { TestBattler } from "./types";
 const ajv = new Ajv();
 const validate = ajv.compile(SCHEMA_SYSTEM_TEST_BATTLER);
 

@@ -1,5 +1,3 @@
-import type { EventCommandLike2, ExtractCommandByParam } from "./frame";
-import type { Command_CommonEvent } from "./commands/flow";
 import type {
   Command_Skip,
   Command_Loop,
@@ -39,6 +37,8 @@ import type {
   Command_ChangeVehicleBGM,
 } from "./commands";
 import type { Command_ChangeActorName } from "./commands/actor";
+import type { Command_CommonEvent } from "./commands/flow";
+import type { EventCommandLike2, ExtractCommandByParam } from "./frame";
 
 export type EventCommandUnion =
   | Command_CommonEvent

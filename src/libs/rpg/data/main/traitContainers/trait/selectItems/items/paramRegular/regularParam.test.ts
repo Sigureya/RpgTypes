@@ -1,3 +1,4 @@
+import type { Data_NamedItem } from "src/namedItemSource";
 import { describe, test, expect } from "vitest";
 import {
   REGULAR_PARAM_MAX_HP,
@@ -11,7 +12,6 @@ import {
 } from "./constants";
 import type { RegularParamLabels } from "./labels";
 import { regularParamsToArray, regularParamName } from "./regularParam";
-import type { Data_NamedItem } from "src/namedItemSource";
 
 describe("foldRegularParam", () => {
   const param: RegularParamLabels = {

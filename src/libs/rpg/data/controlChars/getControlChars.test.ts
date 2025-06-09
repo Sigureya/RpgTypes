@@ -1,5 +1,4 @@
 import { describe, test, expect } from "vitest";
-
 import { getControlChars } from "./getContolChars";
 import type { ControlChar } from "./types";
 

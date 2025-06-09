@@ -1,7 +1,7 @@
-import { describe, test, expect } from "vitest";
 import Ajv from "ajv";
-import type { AttackMotion } from "./types";
+import { describe, test, expect } from "vitest";
 import { SCHEMA_SYSTEM_MEMBERS_ATTACK_MOTION } from "./schema";
+import type { AttackMotion } from "./types";
 const ajv = new Ajv();
 const validate = ajv.compile(SCHEMA_SYSTEM_MEMBERS_ATTACK_MOTION);
 

@@ -1,4 +1,6 @@
+import type { DomainLabel } from "@RpgTypes/templates";
 import type { Data_NamedItem, NamedItemSource } from "src/namedItemSource";
+import type { SourceId_TraitPartyAbility } from "src/rpg";
 import {
   PARTY_ABILITY_ENCOUNTER_HALF,
   PARTY_ABILITY_ENCOUNTER_NONE,
@@ -8,8 +10,6 @@ import {
   PARTY_ABILITY_DROP_ITEM_DOUBLE,
 } from "./constants";
 import type { PartyAbilityOptionLabels } from "./labels";
-import type { DomainLabel } from "@RpgTypes/templates";
-import type { SourceId_TraitPartyAbility } from "src/rpg";
 
 export const defineTraitPartyAbility = (
   options: DomainLabel<PartyAbilityOptionLabels>

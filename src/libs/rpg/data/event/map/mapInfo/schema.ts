@@ -1,5 +1,5 @@
-import type { Data_MapInfo } from "./mapInfo";
 import type { JSONSchemaType } from "ajv";
+import type { Data_MapInfo } from "./mapInfo";
 
 export const SCHEMA_DATA_MAP_INFO = {
   type: "object",

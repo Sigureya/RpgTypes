@@ -1,9 +1,8 @@
-import { describe, test, expect } from "vitest";
 import Ajv from "ajv";
-import type { Terms_Basic, Terms_BasicArray } from "./types";
-
-import { SCHEMA_SYSTEM_MEMBERS_TERMS_BASIC_ARRAY } from "./schema";
+import { describe, test, expect } from "vitest";
 import { makeTermsBasic, makeTermsBasicFromArray } from "./make";
+import { SCHEMA_SYSTEM_MEMBERS_TERMS_BASIC_ARRAY } from "./schema";
+import type { Terms_Basic, Terms_BasicArray } from "./types";
 
 const ajv = new Ajv();
 const validate = ajv.compile(SCHEMA_SYSTEM_MEMBERS_TERMS_BASIC_ARRAY);

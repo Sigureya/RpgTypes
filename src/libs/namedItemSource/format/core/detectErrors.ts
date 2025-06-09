@@ -4,9 +4,9 @@ import type {
   FormatErrorGroup,
   FormatErrorItem,
 } from "./formatErrorTypes";
-import type { FormatInput, FormatWithSource } from "./types";
-import type { FormatRule, SourceKeyConcept, FormatItemMapper } from "./rule";
+import type { FormatRule, FormatItemMapper } from "./rule";
 import { getItemMappersFromRule, getPlaceHolderKeys } from "./rule";
+import type { FormatInput, FormatWithSource } from "./types";
 
 export const isValidFormatErrorGroup = (
   formatError: FormatErrorGroup

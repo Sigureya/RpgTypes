@@ -1,3 +1,10 @@
+import type {
+  SourceId_SystemArmorTypes,
+  SourceId_SystemElements,
+  SourceId_SystemEquipTypes,
+  SourceId_SystemSkillTypes,
+  SourceId_SystemWeaponTypes,
+} from "@RpgTypes/system";
 import type { SourceId_DataSkill, SourceId_DataState } from "src/rpg";
 import {
   TRAIT_ELEMENT_RATE,
@@ -26,8 +33,6 @@ import {
   TRAIT_SKILL_TYPE_ADD,
   TRAIT_SKILL_TYPE_SEAL,
 } from "./constants";
-import type { TraitFormat } from "./types";
-import type { TraitLabelSet } from "./labelSet";
 import type {
   CollapsOptionLabels,
   ExtraParamLabels,
@@ -44,13 +49,8 @@ import type {
   SpecialParamLabels,
   TraitLabelWithOption,
 } from "./items";
-import type {
-  SourceId_SystemArmorTypes,
-  SourceId_SystemElements,
-  SourceId_SystemEquipTypes,
-  SourceId_SystemSkillTypes,
-  SourceId_SystemWeaponTypes,
-} from "@RpgTypes/system";
+import type { TraitLabelSet } from "./labelSet";
+import type { TraitFormat } from "./types";
 
 export const resolveTraitLabels = (labels: TraitLabelSet): TraitFormat[] => {
   return [

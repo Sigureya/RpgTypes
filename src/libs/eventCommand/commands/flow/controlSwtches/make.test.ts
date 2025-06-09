@@ -4,7 +4,6 @@ import {
   makeCommandControlSwitches,
   toArrayControlSwitches,
 } from "./make";
-
 import type {
   ParamArray_ControlSwitches,
   Paramobject_ControlSwitches,

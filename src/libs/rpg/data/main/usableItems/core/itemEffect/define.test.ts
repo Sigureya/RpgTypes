@@ -1,8 +1,8 @@
+import type { SourceIdentifier } from "src/namedItemSource";
 import { describe, test, expect } from "vitest";
 import { resolveItemEffectLabels } from "./define";
 import type { EffectDefinitionResolved } from "./labels";
 import { LABEL_SET_ITEM_EFFECT } from "./labels";
-import type { SourceIdentifier } from "src/namedItemSource";
 
 const authorIsRmmz = (sourceId: SourceIdentifier | undefined) => {
   return sourceId ? sourceId.author === "rmmz" : true;

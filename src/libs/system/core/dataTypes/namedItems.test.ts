@@ -1,7 +1,7 @@
-import { test, describe, expect } from "vitest";
-import { defineSystemItems } from "./namedItems";
 import type { NamedItemSource } from "src/namedItemSource";
+import { test, describe, expect } from "vitest";
 import { makeDataNames } from "./dataTypes";
+import { defineSystemItems } from "./namedItems";
 import type { SystemLabel_DataNames } from "./types";
 
 const mockLabel: SystemLabel_DataNames = {

@@ -1,5 +1,6 @@
 import type { Data_NamedItem, NamedItemSource } from "src/namedItemSource";
-
+import type { SourceId_TraitRegularParam } from "src/rpg";
+import type { TraitLabelWithOption } from "../traitLabel";
 import {
   REGULAR_PARAM_MAX_HP,
   REGULAR_PARAM_MAX_MP,
@@ -11,9 +12,6 @@ import {
   REGULAR_PARAM_LUK,
 } from "./constants";
 import type { RegularParamLabels } from "./labels";
-
-import type { TraitLabelWithOption } from "../traitLabel";
-import type { SourceId_TraitRegularParam } from "src/rpg";
 
 export const defineTraitRegularParam = (
   param: TraitLabelWithOption<RegularParamLabels>

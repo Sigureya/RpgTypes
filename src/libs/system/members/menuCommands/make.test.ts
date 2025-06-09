@@ -1,11 +1,11 @@
-import { describe, test, expect } from "vitest";
 import Ajv from "ajv";
+import { describe, test, expect } from "vitest";
 import {
   makeMenuCommandsEnabled,
   makeMenuCommandsEnabledFromArray,
 } from "./make";
-import type { MenuCommandsEnabled, MenuCommandsEnabledArray } from "./types";
 import { SCHEMA_SYSTEM_MENU_COMMANDS_ENABLED } from "./schema";
+import type { MenuCommandsEnabled, MenuCommandsEnabledArray } from "./types";
 
 const ajv = new Ajv({ strict: false });
 const validate = ajv.compile(SCHEMA_SYSTEM_MENU_COMMANDS_ENABLED);

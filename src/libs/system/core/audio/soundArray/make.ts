@@ -1,5 +1,5 @@
-import type { System_SoundsArray, System_SoundsObject } from "./types";
 import { makeAudioFileParams } from "@RpgTypes/utils";
+import type { System_SoundsArray, System_SoundsObject } from "./types";
 
 export const makeSoundsArray = (
   sounds: Partial<System_SoundsObject> = {}

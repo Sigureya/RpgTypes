@@ -1,4 +1,6 @@
 import type { DomainLabel } from "@RpgTypes/templates";
+import type { Data_NamedItem, NamedItemSource } from "src/namedItemSource";
+import type { SourceId_TraitCollaps } from "src/rpg";
 import {
   COLLAPS_NORMAL,
   COLLAPS_BOSS,
@@ -6,8 +8,6 @@ import {
   COLLAPS_NONE,
 } from "./constants";
 import type { CollapsOptionLabels, NormalLabel } from "./labels";
-import type { Data_NamedItem, NamedItemSource } from "src/namedItemSource";
-import type { SourceId_TraitCollaps } from "src/rpg";
 
 export const defineTraitCollapseType = (
   labels: DomainLabel<CollapsOptionLabels>,

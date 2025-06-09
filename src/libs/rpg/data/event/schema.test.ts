@@ -1,9 +1,9 @@
-import { describe, test, expect } from "vitest";
 import Ajv from "ajv";
-import { SCHEMA_DATA_TROOP } from "./schema";
-import type { Data_Troop } from "./troop";
+import { describe, test, expect } from "vitest";
 import { makeTroopData, makeTroopEventConditions } from "./makeEvent";
 import { COMMENT_HEAD } from "./map";
+import { SCHEMA_DATA_TROOP } from "./schema";
+import type { Data_Troop } from "./troop";
 
 const ajv = new Ajv();
 

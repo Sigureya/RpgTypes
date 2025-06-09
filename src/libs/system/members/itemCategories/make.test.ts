@@ -1,8 +1,8 @@
+import Ajv from "ajv";
 import { describe, test, expect } from "vitest";
 import { makeItemCategories, makeItemCategoriesFromArray } from "./make";
-import type { ItemCategories, ItemCategoriesArray } from "./types";
-import Ajv from "ajv";
 import { SCHEMA_SYSTEM_ITEM_CATEGORIES } from "./schema";
+import type { ItemCategories, ItemCategoriesArray } from "./types";
 
 const ajv = new Ajv({ strict: false });
 const validate = ajv.compile(SCHEMA_SYSTEM_ITEM_CATEGORIES);

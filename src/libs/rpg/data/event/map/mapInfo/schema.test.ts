@@ -1,8 +1,8 @@
-import { describe, test, expect } from "vitest";
 import Ajv from "ajv";
-import { SCHEMA_DATA_MAP_INFO } from "./schema";
-import type { Data_MapInfo } from "./mapInfo";
+import { describe, test, expect } from "vitest";
 import { makeMapInfoData } from "./make";
+import type { Data_MapInfo } from "./mapInfo";
+import { SCHEMA_DATA_MAP_INFO } from "./schema";
 
 const ajv = new Ajv();
 const validate = ajv.compile(SCHEMA_DATA_MAP_INFO);

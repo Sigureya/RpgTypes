@@ -1,5 +1,5 @@
-import type { Data_Troop, Troop_EventConditions, Troop_Member } from "./troop";
 import type { Data_CommonEvent } from "./commonEvent";
+import type { Data_Troop, Troop_EventConditions, Troop_Member } from "./troop";
 
 export const makeCommonEventData = (
   data: Partial<Data_CommonEvent> = {}

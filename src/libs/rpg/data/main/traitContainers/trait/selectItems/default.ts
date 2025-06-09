@@ -1,5 +1,4 @@
 import type { DomainLabel } from "@RpgTypes/templates";
-import type { TraitLabelSet } from "./labelSet";
 import type {
   CollapsOptionLabels,
   ExtraParamLabels,
@@ -10,6 +9,7 @@ import type {
   RawTraitLabel,
   TraitLabelWithOption,
 } from "./items";
+import type { TraitLabelSet } from "./labelSet";
 
 const FORMAT_NAME = "{name}" as const;
 const FORMAT_PARAM_RATE_MUL = "{name} * {value}%" as const;

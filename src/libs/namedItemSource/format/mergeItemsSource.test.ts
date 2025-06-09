@@ -1,6 +1,11 @@
 import { describe, test, expect } from "vitest";
+import type {
+  FormatCompiled,
+  FormatLabelResolved,
+  NamedItemSource,
+  SourceIdentifier,
+} from "./core";
 import { mergeItemsSource } from "./mergeItemsSource";
-import type { FormatCompiled, FormatLabelResolved, NamedItemSource, SourceIdentifier } from "./core";
 
 const mockWeapons = {
   label: "weapons",
@@ -51,7 +56,12 @@ interface TestCase<Key> {
   expected: Map<Key, FormatCompiled>;
 }
 
-const testCaseMrgeItemsSource = <Key>({ caseName, labels, namedItemSources, expected }: TestCase<Key>) => {
+const testCaseMrgeItemsSource = <Key>({
+  caseName,
+  labels,
+  namedItemSources,
+  expected,
+}: TestCase<Key>) => {
   describe(caseName, () => {
     const map: Map<Key, FormatCompiled> = mergeItemsSource(labels, namedItemSources);
     test("returns a map with correct entries", () => {
@@ -93,7 +103,12 @@ describe("mergeItemsSource", () => {
         { label: "weapon211", pattern: "{name}", kindId: 211, dataSource: mockWeapons.source },
         { label: "enemy404", pattern: "enemy {name}", kindId: 404, dataSource: mockEnemies.source },
         { label: "skill999", pattern: "999{name}", kindId: 999, dataSource: mockSkills.source },
-        { label: "emptySource", pattern: "{name}", kindId: 1000, dataSource: mockEmptySource.source },
+        {
+          label: "emptySource",
+          pattern: "{name}",
+          kindId: 1000,
+          dataSource: mockEmptySource.source,
+        },
       ],
       namedItemSources: [mockEnemies, mockWeapons, mockSkills, mockEmptySource],
       expected: new Map([
@@ -133,7 +148,9 @@ describe("mergeItemsSource", () => {
           { label: "weapon", pattern: "{name}", kindId: 926, dataSource: mockWeapons.source },
         ],
         namedItemSources: [mockWeapons, mockEnemies],
-        expected: new Map([[926, { label: "weapon", patternCompiled: "{name}", data: mockWeapons.items }]]),
+        expected: new Map([
+          [926, { label: "weapon", patternCompiled: "{name}", data: mockWeapons.items }],
+        ]),
       },
     ]);
   });
