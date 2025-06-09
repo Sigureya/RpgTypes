@@ -11,7 +11,6 @@ import {
   makeMenuCommandsEnabled,
   makeParamNamesArray,
   makeSoundsArray,
-  makeSystemAdvanced,
   makeTermsBasic,
   makeTermsCommand,
   makeTermsMessages,
@@ -32,7 +31,7 @@ import type {
   System_BooleanOptionsRMMMZ as System_BooleanOptions,
   System_GameInitial,
 } from "./core";
-import { makeBooleanOptions, makeDataNames } from "./core";
+import { makeBooleanOptions, makeDataNames, makeSystemAdvanced } from "./core";
 import type { System_DataNames } from "./core/dataTypes";
 
 export const makeSystemData = (

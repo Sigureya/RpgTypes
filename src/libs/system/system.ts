@@ -2,7 +2,6 @@ import type { AudioFileParams, ColorRGBA } from "@RpgTypes/utils";
 import type {
   TestBattler,
   AttackMotion,
-  System_Advanced,
   System_Terms,
   System_SoundsArray,
   Data_Vehicle,
@@ -10,6 +9,7 @@ import type {
   MenuCommandsEnabledArray,
 } from "./members";
 import type { EditorSettings } from "./setting";
+import type { System_Advanced } from "./core";
 
 export interface Data_System {
   // battle
