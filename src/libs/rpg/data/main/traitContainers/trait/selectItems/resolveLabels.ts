@@ -50,7 +50,7 @@ import type {
   SourceId_SystemEquipTypes,
   SourceId_SystemSkillTypes,
   SourceId_SystemWeaponTypes,
-} from "@RpgTypes/system/sourceIdTypes";
+} from "@RpgTypes/system";
 
 export const resolveTraitLabels = (labels: TraitLabelSet): TraitFormat[] => {
   return [

@@ -1,8 +1,8 @@
 import { test, describe, expect } from "vitest";
 import { defineSystemItems } from "./namedItems";
-import makeSystemData from "./make";
 import type { NamedItemSource } from "src/namedItemSource";
-import type { SystemLabel_DataNames } from "./core/dataTypes";
+import { makeDataNames } from "./dataTypes";
+import type { SystemLabel_DataNames } from "./types";
 
 const mockLabel: SystemLabel_DataNames = {
   elements: "elements",
@@ -16,11 +16,9 @@ const mockLabel: SystemLabel_DataNames = {
 
 describe("", () => {
   const result: NamedItemSource[] = defineSystemItems(
-    makeSystemData({
-      dataNames: {
-        armorTypes: ["mockArmor"],
-        elements: ["mockElement"],
-      },
+    makeDataNames({
+      armorTypes: ["mockArmor"],
+      elements: ["mockElement"],
     }),
     mockLabel
   );

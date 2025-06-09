@@ -7,11 +7,14 @@ import {
   getVariableNames,
 } from "./getSystemTypeNames";
 import type { Data_NamedItem as Data_NamedItem } from "@RpgTypes/namedItemSource";
-import type { System_ParamNames } from "./subset";
-import type { Data_System } from "./system";
+import type { System_DataNames } from "./types";
+import type { System_ParamNames } from "@RpgTypes/system/subset";
 
 const system: System_ParamNames &
-  Pick<Data_System, "elements" | "variables" | "equipTypes" | "skillTypes"> = {
+  Pick<
+    System_DataNames,
+    "elements" | "variables" | "equipTypes" | "skillTypes"
+  > = {
   elements: ["none", "Fire", "Ice", "Thunder"],
   variables: ["none", "aaa", "bbb", "ccc"],
   equipTypes: ["none", "weapon", "shield", "armor"],
