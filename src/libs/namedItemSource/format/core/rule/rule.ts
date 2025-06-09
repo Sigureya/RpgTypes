@@ -45,7 +45,7 @@ const compileItemMapper = <T>(
 
 const generateFallbackFormatText = <T>(rule: FormatRule<T>): string => {
   if (rule.fallbackFormat) {
-    if (rule.fallbackFormat.text) {
+    if (rule.fallbackFormat.text !== undefined) {
       return rule.fallbackFormat.text;
     }
   }
@@ -60,7 +60,7 @@ const generateFallbackFormatText = <T>(rule: FormatRule<T>): string => {
 };
 
 const generateFallbackLabel = <T>(rule: FormatRule<T>): string => {
-  if (rule.fallbackFormat?.label) {
+  if (rule.fallbackFormat?.label !== undefined) {
     return rule.fallbackFormat.label;
   }
   return DEFAULT_LABEL;

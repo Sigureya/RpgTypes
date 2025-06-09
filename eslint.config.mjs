@@ -30,8 +30,15 @@ export default [
       // 純粋関数強制Rule
       //      "@functional/no-return-void": "warn",
       "@functional/no-let": "error",
-
-      // その他のルール
+      "@typescript-eslint/strict-boolean-expressions": [
+        "warn",
+        {
+          allowString: false,
+          allowNumber: false,
+          allowObject: true,
+          allowNullableObject: false,
+        },
+      ], // その他のルール
       "@typescript-eslint/explicit-function-return-type": "off",
       "@typescript-eslint/no-unused-vars": "warn",
       "@typescript-eslint/no-explicit-any": "warn",
