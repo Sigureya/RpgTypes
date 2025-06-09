@@ -18,7 +18,13 @@ const fullFragments = {
     optMessageSkip: true,
     optSplashScreen: false,
   },
-  advanced: {},
+  advanced: {
+    gameId: 12345,
+    fontSize: 14,
+    fallbackFonts: "fallback fonts",
+    screenWidth: 1280,
+    screenHeight: 720,
+  },
   vehicles: {
     airship: {
       bgm: { name: "airship", volume: 100, pitch: 100, pan: 0 },
@@ -98,35 +104,41 @@ const fullFragments = {
 
 describe("makeSystemData", () => {
   const result: Data_System = makeSystemData(fullFragments);
-
-  describe("", () => {
-    test("", () => {
+  describe("copies and assigns main fragments", () => {
+    test("copies options", () => {
       expect(result).toMatchObject(fullFragments.options);
     });
-    test("", () => {
+    test("copies dataNames", () => {
       expect(result).toMatchObject(fullFragments.dataNames);
     });
-    test("", () => {
+    test("copies vehicles", () => {
       expect(result).toMatchObject(fullFragments.vehicles);
     });
-    test("", () => {
+    test("copies bgm", () => {
       expect(result).toMatchObject(fullFragments.bgm);
     });
-    test("", () => {
+    test("copies me", () => {
       expect(result).toMatchObject(fullFragments.me);
     });
-    test("", () => {
+    test("copies texts", () => {
       expect(result).toMatchObject(fullFragments.texts);
     });
-    test.skip("", () => {
+    test.skip("copies debug (skipped)", () => {
       expect(result).toMatchObject(fullFragments.debug);
     });
-    test("", () => {
+    test("copies images", () => {
       expect(result).toMatchObject(fullFragments.images);
+    });
+    test("copies size", () => {
+      expect(result).toMatchObject(fullFragments.size);
     });
   });
 
-  describe("dataTypes", () => {
+  test("copies advanced", () => {
+    expect(result.advanced).toMatchObject(fullFragments.advanced);
+  });
+
+  describe("deep copy for dataNames arrays", () => {
     test("armorTypes is deep copied", () => {
       expect(result.armorTypes).toEqual(fullFragments.dataNames.armorTypes);
       expect(result.armorTypes).not.toBe(fullFragments.dataNames.armorTypes);
