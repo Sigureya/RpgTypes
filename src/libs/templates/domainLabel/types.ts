@@ -1,4 +1,8 @@
-export interface DomainLabel<T> {
+export interface DomainName {
+  domainName: string;
+}
+
+export interface DomainLabel<T> extends DomainName {
   domainName: string;
   options: T;
 }
