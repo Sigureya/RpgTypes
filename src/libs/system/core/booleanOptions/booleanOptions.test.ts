@@ -1,10 +1,10 @@
 import { describe, test, expect } from "vitest";
 import Ajv from "ajv";
-import { SCHEMA_SYSTEM_BOOLEAN_OPTIONS } from "./booleanOptions";
-import type { System_BooleanOptions } from "./subset";
-import type { Data_System } from "./system";
-import { makeSystemData } from "./make";
-import { makeBooleanOptions } from "./core/options/options";
+import { SCHEMA_SYSTEM_BOOLEAN_OPTIONS } from "./schema";
+import makeSystemData from "@RpgTypes/system/make";
+import type { System_BooleanOptions } from "@RpgTypes/system/subset";
+import type { Data_System } from "@RpgTypes/system/system";
+import { makeBooleanOptions } from "./options";
 
 const ajv = new Ajv();
 const isSystemBooleanOptions = ajv.compile(SCHEMA_SYSTEM_BOOLEAN_OPTIONS);
