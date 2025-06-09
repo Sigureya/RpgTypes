@@ -4,7 +4,7 @@ export const findItemById = <T extends Data_NamedItem>(
   dataId: number,
   list: ReadonlyArray<T>
 ): T | undefined => {
-  const item = list[dataId];
+  const item: T = list[dataId];
   if (item) {
     if (item.id === dataId) {
       return item;
