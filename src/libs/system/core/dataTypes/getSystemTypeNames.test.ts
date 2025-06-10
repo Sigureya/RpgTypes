@@ -1,5 +1,5 @@
-import type { Data_NamedItem as Data_NamedItem } from "@RpgTypes/namedItemSource";
-import type { System_ParamNames } from "@RpgTypes/system/subset";
+import type { Data_NamedItem as Data_NamedItem } from "src/namedItemSource";
+import type { System_ParamNames } from "src/system/subset";
 import { describe, test, expect } from "vitest";
 import {
   getElementTypes,

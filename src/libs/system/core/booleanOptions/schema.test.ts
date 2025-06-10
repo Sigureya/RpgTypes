@@ -1,6 +1,6 @@
-import makeSystemData from "@RpgTypes/system/make";
-import type { Data_System } from "@RpgTypes/system/system";
 import Ajv from "ajv";
+import makeSystemData from "src/system/make";
+import type { Data_System } from "src/system/system";
 import { describe, test, expect } from "vitest";
 import { makeBooleanOptions } from "./options";
 import { SCHEMA_SYSTEM_BOOLEAN_OPTIONS } from "./schema";
