@@ -1,5 +1,6 @@
 import { AudioFileParams, ColorRGBA } from '../utils';
-import { TestBattler, AttackMotion, System_Advanced, System_Terms, System_SoundsArray, Data_Vehicle, ItemCategoriesArray, MenuCommandsEnabledArray } from './members';
+import { Data_Vehicle, System_Advanced, System_SoundsArray, System_Terms } from './core';
+import { TestBattler, AttackMotion, ItemCategoriesArray, MenuCommandsEnabledArray } from './members';
 import { EditorSettings } from './setting';
 export interface Data_System {
     battleSystem: number;
@@ -23,8 +24,8 @@ export interface Data_System {
     itemCategories: ItemCategoriesArray;
     menuCommands: MenuCommandsEnabledArray;
     titleBgm: AudioFileParams;
-    gameoverMe: AudioFileParams;
     battleBgm: AudioFileParams;
+    gameoverMe: AudioFileParams;
     defeatMe: AudioFileParams;
     victoryMe: AudioFileParams;
     sounds: System_SoundsArray;

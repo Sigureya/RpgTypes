@@ -1,10 +1,10 @@
-import { System_Bgm, System_BooleanOptions, System_DataNames, System_Images, System_Text } from './subset';
+import { System_Bgm, System_BooleanOptionsRMMMZ } from './core';
+import { System_Images, System_Text } from './subset';
 type AsLabel<T> = Record<keyof T, string>;
-export type SystemLabel_DataNames = AsLabel<System_DataNames>;
 export type SystemLabel_Images = AsLabel<System_Images>;
 export type SystemLabel_Text = AsLabel<System_Text>;
 export type SystemLabel_Bgm = AsLabel<System_Bgm>;
-export type SystemLabel_BoolanOptions = AsLabel<System_BooleanOptions>;
+export type SystemLabel_BoolanOptions = AsLabel<System_BooleanOptionsRMMMZ>;
 export declare const DEFAULT_SYSTEM_LABELS_BOOLEAN: {
     readonly domainName: "オプション";
     readonly options: {
@@ -24,12 +24,13 @@ export declare const DEFAULT_SYSTEM_LABELS_BOOLEAN: {
 };
 export declare const DEFAULT_SYSTEM_LABELS_DATA_TYPES: {
     readonly domainName: "タイプ";
+    readonly format: "{name}";
     readonly options: {
-        readonly armorTypes: "防具タイプ";
         readonly elements: "属性";
         readonly equipTypes: "装備タイプ";
         readonly skillTypes: "スキルタイプ";
         readonly weaponTypes: "武器タイプ";
+        readonly armorTypes: "防具タイプ";
         readonly switches: "スイッチ";
         readonly variables: "変数";
     };

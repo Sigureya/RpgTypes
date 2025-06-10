@@ -1,8 +1,8 @@
 import { ValueOf } from '../../../../rpg';
-import { GAMEDATA, OPERAND, OTHER } from './operand';
-import { CHARACTER } from './character/dataSource';
 import { STATUS } from './actor/dataSource';
+import { CHARACTER } from './character/dataSource';
 import { VARIABLE_SRC_LAST } from './last/dataSource';
+import { GAMEDATA, OPERAND, OTHER } from './operand';
 type Header = [startId: number, endId: number, operationType: number];
 type Operand<Code extends number, Params extends unknown[]> = [
     ...Header,

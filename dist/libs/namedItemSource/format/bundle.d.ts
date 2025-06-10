@@ -1,6 +1,6 @@
-import { SourceKeyConcept, FormatCompiled, FormatErrorGroup, FormatRuleCompiled } from './core';
-export interface CompiledFormatBundle<T extends object, Key, SourceKey extends SourceKeyConcept> {
+import { FormatCompiled, FormatErrorGroup, FormatRuleCompiled } from './core';
+export interface CompiledFormatBundle<T extends object, Key> {
     soruceMap: Map<Key, FormatCompiled>;
     errors: FormatErrorGroup[];
-    compiledRule: FormatRuleCompiled<T, SourceKey>;
+    compiledRule: FormatRuleCompiled<T>;
 }

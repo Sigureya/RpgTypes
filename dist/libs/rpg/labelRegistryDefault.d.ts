@@ -1,10 +1,10 @@
-export declare const LABEL_REGISTRY_JP: {
-    readonly rpg: {
-        readonly damage: {
+export declare const labelsRegistry: () => {
+    rpg: {
+        damage: {
             readonly domainName: "ダメージ";
             readonly options: {};
         };
-        readonly data: {
+        data: {
             readonly actor: {
                 readonly domainName: "アクター";
                 readonly options: {
@@ -91,7 +91,7 @@ export declare const LABEL_REGISTRY_JP: {
                 };
             };
         };
-        readonly traits: {
+        traits: {
             readonly domainName: "特徴";
             readonly options: {
                 readonly regularParam: {
@@ -249,7 +249,7 @@ export declare const LABEL_REGISTRY_JP: {
                 };
             };
         };
-        readonly itemEffect: {
+        itemEffect: {
             readonly domainName: "使用効果";
             readonly options: {
                 readonly addBuff: {
@@ -320,7 +320,7 @@ export declare const LABEL_REGISTRY_JP: {
             };
         };
     };
-    readonly global: {
+    global: {
         readonly id: "識別子";
         readonly name: "名前";
         readonly note: "メモ";

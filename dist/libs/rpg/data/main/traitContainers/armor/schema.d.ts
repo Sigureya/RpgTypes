@@ -68,7 +68,7 @@ export declare const SCHEMA_DATA_ARMMOR: {
                         type: "integer";
                     };
                 };
-                required: ("code" | "dataId" | "value")[];
+                required: ("value" | "code" | "dataId")[];
             };
         };
     };

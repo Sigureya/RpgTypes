@@ -1,6 +1,6 @@
 import { EventCommandUnknown } from '../../../../../eventCommand';
-import { MapEventPage } from './page';
 import { EventCommand } from './eventCommand';
+import { MapEventPage } from './page';
 export interface MapEvent<T extends EventCommandUnknown = EventCommand> {
     id: number;
     name: string;

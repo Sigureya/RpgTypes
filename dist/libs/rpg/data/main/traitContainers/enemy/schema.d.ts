@@ -88,7 +88,7 @@ export declare const SCHEMA_DATA_ENEMY: {
                         type: "integer";
                     };
                 };
-                required: ("code" | "dataId" | "value")[];
+                required: ("value" | "code" | "dataId")[];
             };
         };
         readonly dropItems: {
