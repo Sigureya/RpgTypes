@@ -1,5 +1,5 @@
-import Ajv from "ajv";
 import { describe, test, expect } from "vitest";
+import Ajv from "ajv";
 import { makeTermsBasic, makeTermsBasicFromArray } from "./make";
 import { SCHEMA_SYSTEM_MEMBERS_TERMS_BASIC_ARRAY } from "./schema";
 import type { Terms_Basic, Terms_BasicArray } from "./types";

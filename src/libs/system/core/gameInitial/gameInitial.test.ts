@@ -1,5 +1,5 @@
-import Ajv from "ajv";
 import { describe, test, expect } from "vitest";
+import Ajv from "ajv";
 import { makeGameInitial } from "./gameInitial";
 import { SCHEMA_SYSTEM_GAME_INITIAL } from "./schema";
 import type { System_GameInitial } from "./types";

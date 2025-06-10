@@ -1,5 +1,5 @@
-import Ajv from "ajv";
 import { describe, test, expect } from "vitest";
+import Ajv from "ajv";
 import {
   makeTermsCommandArray,
   makeTermsCommandFromArray,

@@ -1,5 +1,5 @@
-import Ajv from "ajv";
 import { describe, test, expect } from "vitest";
+import Ajv from "ajv";
 import { makeTermsMessages } from "./make";
 import { SCHEMA_SYSTEM_TERMS_MESSAGES } from "./schema";
 import type { Terms_Messages } from "./types";
