@@ -1,3 +1,4 @@
+import type { Data_CommonEvent } from "./event";
 import type {
   Data_Actor,
   Data_Item,
@@ -7,8 +8,7 @@ import type {
   Data_Class,
   Data_Skill,
   Data_State,
-  Data_CommonEvent,
-} from ".";
+} from "./main";
 
 export interface GameData {
   items: Data_Item[];
