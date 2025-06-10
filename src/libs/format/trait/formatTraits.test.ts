@@ -160,7 +160,7 @@ describe("mergeTraitSource", () => {
     makeGameDate(mockGameData),
     mockNormalLabel,
     mockSystemdata,
-    DEFAULT_SYSTEM_LABELS_DATA_TYPES.options
+    DEFAULT_SYSTEM_LABELS_DATA_TYPES
   );
 
   describe("format.dataの各要素が最小限のメンバで構成されていること", () => {
@@ -434,13 +434,13 @@ describe("defineTraitSources", () => {
     LABEL_SET_TRAIT.options,
     mockNormalLabel,
     mockSystemdata,
-    DEFAULT_SYSTEM_LABELS_DATA_TYPES.options
+    DEFAULT_SYSTEM_LABELS_DATA_TYPES
   );
   describe("各要素の検証", () => {
     const set = new Set<string>([
       ...domainNames(LABEL_SET_DATA),
       ...domainNames(LABEL_SET_TRAIT.options),
-      ...domainNames(DEFAULT_SYSTEM_LABELS_DATA_TYPES.options),
+      ...Object.values<string>(DEFAULT_SYSTEM_LABELS_DATA_TYPES.options),
     ]);
     const isItemInSet = (item: NamedItemSource) => {
       return set.has(item.label);

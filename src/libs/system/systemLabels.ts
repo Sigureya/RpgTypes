@@ -29,34 +29,16 @@ export const DEFAULT_SYSTEM_LABELS_BOOLEAN = {
 
 export const DEFAULT_SYSTEM_LABELS_DATA_TYPES = {
   domainName: "タイプ",
+
+  format: "{name}",
+
   options: {
-    armorTypes: {
-      format: "{name}",
-      domainName: "防具タイプ",
-    },
-    elements: {
-      format: "{name}",
-      domainName: "属性",
-    },
-    equipTypes: {
-      format: "{name}",
-      domainName: "装備タイプ",
-    },
-    skillTypes: {
-      format: "{name}",
-      domainName: "スキルタイプ",
-    },
-    weaponTypes: {
-      format: "{name}",
-      domainName: "武器タイプ",
-    },
-    switches: {
-      format: "{name}",
-      domainName: "スイッチ",
-    },
-    variables: {
-      format: "{name}",
-      domainName: "変数",
-    },
+    elements: "属性",
+    equipTypes: "装備タイプ",
+    skillTypes: "スキルタイプ",
+    weaponTypes: "武器タイプ",
+    armorTypes: "防具タイプ",
+    switches: "スイッチ",
+    variables: "変数",
   },
-} as const satisfies DomainLabel<SystemLabel_DataNames>;
+} as const satisfies SystemLabel_DataNames;
