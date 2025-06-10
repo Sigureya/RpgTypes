@@ -59,7 +59,7 @@ import {
   TRAIT_EQUIP_WEAPON_TYPE,
 } from "src/rpg";
 import { test, expect, describe } from "vitest";
-import { mergeTraitSource } from "./formatTraits";
+import { compileTraitDisplayData } from "./formatTraits";
 
 const mockGameData: Record<keyof GameData, Data_NamedItem[]> = {
   skills: [
@@ -148,8 +148,8 @@ const testFormat = (
   });
 };
 
-describe("mergeTraitSource", () => {
-  const source: Map<number, FormatCompiled> = mergeTraitSource(
+describe("compileTraitDisplayData", () => {
+  const source: ReadonlyMap<number, FormatCompiled> = compileTraitDisplayData(
     LABEL_SET_TRAIT.options,
     LABEL_SET_DATA,
     makeGameDate(mockGameData),

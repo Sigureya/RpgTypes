@@ -38,7 +38,7 @@ export const buildReferenceItemSources = (
   ];
 };
 
-export const mergeTraitSource = (
+export const compileTraitDisplayData = (
   traitLabels: TraitLabelSet,
   dataLabel: DataLabels,
   items: GameData,
@@ -59,7 +59,7 @@ export const mergeTraitSource = (
   );
 };
 
-export const mergeItemEffectSource = (
+export const compileItemEffectDisplayData = (
   namedItemSource: ReadonlyArray<NamedItemSource>,
   itemEffectLabels: ItemEffectLabelSet,
   additional: ReadonlyArray<EffectDefinitionResolved> = []
