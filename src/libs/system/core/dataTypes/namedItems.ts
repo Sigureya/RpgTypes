@@ -8,6 +8,15 @@ import {
   getVariableNames,
   getSwitches,
 } from "./getSystemTypeNames";
+import {
+  SRC_SYSTEM_SWITCHES,
+  SRC_SYSTEM_WEAPON_TYPES,
+  SRC_SYSTEM_ARMOR_TYPES,
+  SRC_SYSTEM_ELEMENTS,
+  SRC_SYSTEM_EQUIP_TYPES,
+  SRC_SYSTEM_SKILL_TYPES,
+  SRC_SYSTEM_VARIABLES,
+} from "./kindConstants";
 import type {
   SourceId_SystemArmorTypes,
   SourceId_SystemElements,
@@ -42,7 +51,7 @@ const buildArmorTypesSource = (
   source: {
     author: "rmmz",
     module: "system",
-    kind: "armorTypes",
+    kind: SRC_SYSTEM_ARMOR_TYPES,
   } satisfies SourceId_SystemArmorTypes,
 });
 
@@ -55,7 +64,7 @@ const buildElementTypesSource = (
   source: {
     author: "rmmz",
     module: "system",
-    kind: "elements",
+    kind: SRC_SYSTEM_ELEMENTS,
   } satisfies SourceId_SystemElements,
 });
 
@@ -68,7 +77,7 @@ const buildEquipTypesSource = (
   source: {
     author: "rmmz",
     module: "system",
-    kind: "equipTypes",
+    kind: SRC_SYSTEM_EQUIP_TYPES,
   } satisfies SourceId_SystemEquipTypes,
 });
 
@@ -81,7 +90,7 @@ const buildSkillTypesSource = (
   source: {
     author: "rmmz",
     module: "system",
-    kind: "skillTypes",
+    kind: SRC_SYSTEM_SKILL_TYPES,
   } satisfies SourceId_SystemSkillTypes,
 });
 
@@ -94,7 +103,7 @@ const buildVariableNamesSource = (
   source: {
     author: "rmmz",
     module: "system",
-    kind: "variables",
+    kind: SRC_SYSTEM_VARIABLES,
   } satisfies SourceId_SystemVariables,
 });
 
@@ -107,7 +116,7 @@ const buildSwitchesSource = (
   source: {
     author: "rmmz",
     module: "system",
-    kind: "switches",
+    kind: SRC_SYSTEM_SWITCHES,
   } satisfies SourceId_SystemSwitches,
 });
 
@@ -120,6 +129,6 @@ const buildWeaponTypesSource = (
   source: {
     author: "rmmz",
     module: "system",
-    kind: "weaponTypes",
+    kind: SRC_SYSTEM_WEAPON_TYPES,
   } satisfies SourceId_SystemWeaponTypes,
 });
