@@ -1,5 +1,5 @@
-import type { Data_NamedItem } from "src/namedItemSource";
 import { describe, expect, test } from "vitest";
+import type { Data_NamedItem } from "src/namedItemSource";
 import {
   PARTY_ABILITY_ENCOUNTER_HALF,
   PARTY_ABILITY_ENCOUNTER_NONE,

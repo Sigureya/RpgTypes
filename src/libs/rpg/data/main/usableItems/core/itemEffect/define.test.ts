@@ -1,5 +1,5 @@
-import type { SourceIdentifier } from "src/namedItemSource";
 import { describe, test, expect } from "vitest";
+import type { SourceIdentifier } from "src/namedItemSource";
 import { resolveItemEffectLabels } from "./define";
 import type { EffectDefinitionResolved } from "./labels";
 import { LABEL_SET_ITEM_EFFECT } from "./labels";
