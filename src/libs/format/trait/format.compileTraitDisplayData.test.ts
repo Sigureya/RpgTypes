@@ -395,11 +395,13 @@ describe("compileTraitDisplayData", () => {
       describe(format.label, () => {
         const set = new Set(["id", "name"] satisfies (keyof Data_NamedItem)[]);
         describe.each(list)("%j", (item) => {
-          test("idとnameだけを持つ", () => {
+          test("contains only 'id' and 'name' properties", () => {
             expect(new Set(Object.keys(item))).toEqual(set);
           });
-          test("idとnameの型チェック", () => {
+          test(`'name' is a string`, () => {
             expect(item.id).toBeTypeOf("number");
+          });
+          test(`'id' is a number`, () => {
             expect(item.name).toBeTypeOf("string");
           });
         });
