@@ -5,7 +5,11 @@ import {
   getEquipTypes,
   getWeaponTypes,
 } from "@RpgTypes/system/core";
-import type { Data_NamedItem, FormatCompiled } from "src/namedItemSource";
+import type {
+  Data_NamedItem,
+  FormatCompiled,
+  NamedItemSource,
+} from "src/namedItemSource";
 import type {
   Data_Actor,
   Data_Armor,
@@ -59,7 +63,10 @@ import {
   TRAIT_EQUIP_WEAPON_TYPE,
 } from "src/rpg";
 import { test, expect, describe } from "vitest";
-import { compileTraitDisplayData } from "./formatTraits";
+import {
+  buildReferenceItemSources,
+  compileTraitDisplayData,
+} from "./formatTraits";
 
 const mockGameData: Record<keyof GameData, Data_NamedItem[]> = {
   skills: [
@@ -149,17 +156,19 @@ const testFormat = (
 };
 
 describe("compileTraitDisplayData", () => {
-  const source: ReadonlyMap<number, FormatCompiled> = compileTraitDisplayData(
-    LABEL_SET_TRAIT.options,
-    LABEL_SET_DATA,
+  const namedItemSource: NamedItemSource[] = buildReferenceItemSources(
     makeGameDate(mockGameData),
+    LABEL_SET_DATA,
+    LABEL_SET_TRAIT.options,
     mockNormalLabel,
     mockSystemdata,
     DEFAULT_SYSTEM_LABELS_DATA_TYPES
   );
+  const displayData: ReadonlyMap<number, FormatCompiled> =
+    compileTraitDisplayData(namedItemSource, LABEL_SET_TRAIT.options);
 
   describe("format.dataの各要素が最小限のメンバで構成されていること", () => {
-    Array.from(source.values()).forEach((format: FormatCompiled) => {
+    Array.from(displayData.values()).forEach((format: FormatCompiled) => {
       if (!format.data) {
         // dataがない場合はスキップ
         return;
@@ -186,7 +195,7 @@ describe("compileTraitDisplayData", () => {
         groopName: "GameDataを参照するTrait",
         errorMessage: "defineGameDataSources()の戻り値を確認してください",
       },
-      source,
+      displayData,
       [
         {
           caseName: "stateRate",
@@ -249,7 +258,7 @@ describe("compileTraitDisplayData", () => {
         groopName: "Trait用に定義されたサブパラメータを参照するTrait",
         errorMessage: "defineTraitItems()の戻り値を確認してください",
       },
-      source,
+      displayData,
       [
         {
           code: TRAIT_SPARAM,
@@ -326,7 +335,7 @@ describe("compileTraitDisplayData", () => {
         groopName: "Systemで定義された用語を参照するTrait",
         errorMessage: "defineSystemItems()の戻り値を確認してください",
       },
-      source,
+      displayData,
       [
         {
           caseName: "element rate",
@@ -381,7 +390,7 @@ describe("compileTraitDisplayData", () => {
         groopName: "Traits that do not require data array lookup",
         errorMessage: "不要な配列データが混入してます",
       },
-      source,
+      displayData,
       [
         // Traits that do not require data array lookup (e.g., attackSpeed, attackTimes, actionPlus).
         // These traits do not reference any external data array, so their data property is

@@ -39,24 +39,10 @@ export const buildReferenceItemSources = (
 };
 
 export const compileTraitDisplayData = (
-  traitLabels: TraitLabelSet,
-  dataLabel: DataLabels,
-  items: GameData,
-  normalLabel: NormalLabel,
-  system: System_DataNames,
-  systemLabels: SystemLabel_DataNames
+  namedItemSource: ReadonlyArray<NamedItemSource>,
+  traitLabels: TraitLabelSet
 ): Map<number, FormatCompiled> => {
-  return mergeItemsSource(
-    resolveTraitLabels(traitLabels),
-    buildReferenceItemSources(
-      items,
-      dataLabel,
-      traitLabels,
-      normalLabel,
-      system,
-      systemLabels
-    )
-  );
+  return mergeItemsSource(resolveTraitLabels(traitLabels), namedItemSource);
 };
 
 export const compileItemEffectDisplayData = (
