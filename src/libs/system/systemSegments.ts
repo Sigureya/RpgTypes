@@ -5,14 +5,12 @@ import type {
   System_GameInitial,
   System_Me,
   System_SoundsObject,
-} from "./core";
-import type { System_DataNames } from "./core/dataTypes";
-import type {
-  MenuCommandsEnabled,
   Terms_Basic,
   Terms_Command,
   Terms_Messages,
-} from "./members";
+} from "./core";
+import type { System_DataNames } from "./core/dataTypes";
+import type { MenuCommandsEnabled } from "./members";
 import type { ItemCategories } from "./members";
 import type { EditorSettings } from "./setting";
 import type {
