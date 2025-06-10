@@ -135,10 +135,68 @@ interface TestCase {
   code: number;
 }
 
+const testCaseGameData = [
+  {
+    caseName: "stateRate",
+    code: TRAIT_STATE_RATE,
+    expected: {
+      label: LABEL_SET_TRAIT.options.stateRate.domainName,
+      patternCompiled: LABEL_SET_TRAIT.options.stateRate.format,
+      data: mockGameData.states satisfies Data_NamedItem[],
+    },
+  },
+  {
+    caseName: "stateResist",
+    code: TRAIT_STATE_RESIST,
+    expected: {
+      label: LABEL_SET_TRAIT.options.stateResist.domainName,
+      patternCompiled: LABEL_SET_TRAIT.options.stateResist.format,
+      data: mockGameData.states,
+    },
+  },
+  {
+    code: TRAIT_SKILL_ADD,
+    caseName: "skillAdd",
+    expected: {
+      label: LABEL_SET_TRAIT.options.skillAdd.domainName,
+      patternCompiled: LABEL_SET_TRAIT.options.skillAdd.format,
+      data: mockGameData.skills,
+    },
+  },
+  {
+    code: TRAIT_SKILL_SEAL,
+    caseName: "skillSeal",
+    expected: {
+      label: LABEL_SET_TRAIT.options.skillSeal.domainName,
+      patternCompiled: LABEL_SET_TRAIT.options.skillSeal.format,
+      data: mockGameData.skills,
+    },
+  },
+  {
+    code: TRAIT_ATTACK_STATE,
+    caseName: "attackState",
+    expected: {
+      label: LABEL_SET_TRAIT.options.attackState.domainName,
+      patternCompiled: LABEL_SET_TRAIT.options.attackState.format,
+      data: mockGameData.states,
+    },
+  },
+  {
+    code: TRAIT_ATTACK_SKILL,
+    caseName: "attackSkill",
+    expected: {
+      label: LABEL_SET_TRAIT.options.attackSkill.domainName,
+      patternCompiled: LABEL_SET_TRAIT.options.attackSkill.format,
+      data: mockGameData.skills,
+    },
+  },
+] as const satisfies TestCase[];
+
 interface TestCaseCategory {
   groopName: string;
   errorMessage: `${string}`;
 }
+
 const testFormat = (
   { groopName, errorMessage: sourceFunctionName }: TestCaseCategory,
   map: ReadonlyMap<number, FormatCompiled>,
@@ -196,62 +254,7 @@ describe("compileTraitDisplayData", () => {
         errorMessage: "defineGameDataSources()の戻り値を確認してください",
       },
       displayData,
-      [
-        {
-          caseName: "stateRate",
-          code: TRAIT_STATE_RATE,
-          expected: {
-            label: LABEL_SET_TRAIT.options.stateRate.domainName,
-            patternCompiled: LABEL_SET_TRAIT.options.stateRate.format,
-            data: mockGameData.states satisfies Data_NamedItem[],
-          },
-        },
-        {
-          caseName: "stateResist",
-          code: TRAIT_STATE_RESIST,
-          expected: {
-            label: LABEL_SET_TRAIT.options.stateResist.domainName,
-            patternCompiled: LABEL_SET_TRAIT.options.stateResist.format,
-            data: mockGameData.states,
-          },
-        },
-        {
-          code: TRAIT_SKILL_ADD,
-          caseName: "skillAdd",
-          expected: {
-            label: LABEL_SET_TRAIT.options.skillAdd.domainName,
-            patternCompiled: LABEL_SET_TRAIT.options.skillAdd.format,
-            data: mockGameData.skills,
-          },
-        },
-        {
-          code: TRAIT_SKILL_SEAL,
-          caseName: "skillSeal",
-          expected: {
-            label: LABEL_SET_TRAIT.options.skillSeal.domainName,
-            patternCompiled: LABEL_SET_TRAIT.options.skillSeal.format,
-            data: mockGameData.skills,
-          },
-        },
-        {
-          code: TRAIT_ATTACK_STATE,
-          caseName: "attackState",
-          expected: {
-            label: LABEL_SET_TRAIT.options.attackState.domainName,
-            patternCompiled: LABEL_SET_TRAIT.options.attackState.format,
-            data: mockGameData.states,
-          },
-        },
-        {
-          code: TRAIT_ATTACK_SKILL,
-          caseName: "attackSkill",
-          expected: {
-            label: LABEL_SET_TRAIT.options.attackSkill.domainName,
-            patternCompiled: LABEL_SET_TRAIT.options.attackSkill.format,
-            data: mockGameData.skills,
-          },
-        },
-      ]
+      testCaseGameData
     );
     testFormat(
       {
