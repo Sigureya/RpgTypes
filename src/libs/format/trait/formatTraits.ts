@@ -8,13 +8,7 @@ import {
   type FormatCompiled,
   mergeItemsSource,
 } from "src/namedItemSource";
-import type {
-  DataLabels,
-  GameData,
-  NormalLabel,
-  RawTraitLabel,
-  TraitLabelSet,
-} from "src/rpg";
+import type { DataLabels, GameData, NormalLabel, TraitLabelSet } from "src/rpg";
 import {
   resolveTraitLabels,
   defineTraitItems,

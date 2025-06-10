@@ -1,11 +1,9 @@
 import type {
-  BranchCode,
   BranchCodeTable,
   Operation_PlusMinus,
   Toggle,
   ValueOf,
 } from "./paramaters";
-import type { CommandTemplate } from "./types/";
 
 export type BranchParam_Switch = [
   branchCode: BranchCodeTable["SWITCH"],
