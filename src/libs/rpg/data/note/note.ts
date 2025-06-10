@@ -4,7 +4,7 @@ export const createNoteEntity = (key: string, value: string): string => {
   return `<${key}:${value}>`;
 };
 
-export const makeRegex = () => /<([^<>:]+):([^>]*)>/g;
+export const makeRegex = () => /<([^<>:]{1,100}):([^>]{1,1000})>/g;
 
 export const readNoteObject = <Result, T extends { note: string }>(
   data: T,
@@ -22,9 +22,6 @@ const readNoteEx = <Result>(
   note: string,
   fn: (key: string, value: string) => Result
 ): Result[] => {
-  if (note.length >= 1000) {
-    throw new Error("Note text is too long. Please shorten it.");
-  }
   const regex = makeRegex();
   return Array.from(note.matchAll(regex), (match) => fn(match[1], match[2]));
 };

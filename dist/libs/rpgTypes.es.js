@@ -1294,22 +1294,21 @@ const H = M.compile({ additionalProperties: false, type: "object", required: ["t
       } } }
     } } }
   }
-}, $m = new e(), Ym = $m.compile(Cm), Um = $m.compile(Xm), Om = (e2) => Ym(e2), _m = (e2) => Um(e2), Zm = (e2, t2) => `<${e2}:${t2}>`, Jm = () => /<([^<>:]+):([^>]*)>/g, Qm = (e2, t2) => tp(e2.note, (a2, r2) => t2(a2, r2, e2)), ep = (e2) => tp(e2, (e3, t2) => [e3, t2]), tp = (e2, t2) => {
-  if (e2.length >= 1e3) throw new Error("Note text is too long. Please shorten it.");
-  const a2 = /<([^<>:]+):([^>]*)>/g;
+}, $m = new e(), Ym = $m.compile(Cm), Um = $m.compile(Xm), Om = (e2) => Ym(e2), _m = (e2) => Um(e2), Zm = (e2, t2) => `<${e2}:${t2}>`, Jm = () => /<([^<>:]{1,100}):([^>]{1,1000})>/g, Qm = (e2, t2) => tp(e2.note, (a2, r2) => t2(a2, r2, e2)), ep = (e2) => tp(e2, (e3, t2) => [e3, t2]), tp = (e2, t2) => {
+  const a2 = /<([^<>:]{1,100}):([^>]{1,1000})>/g;
   return Array.from(e2.matchAll(a2), (e3) => t2(e3[1], e3[2]));
 }, ap = (e2, t2) => {
   if (e2.length >= 3e3) throw new Error("Note text is too long. Please shorten it.");
-  return e2.replaceAll(/<([^<>:]+):([^>]*)>/g, (e3, a2, r2) => {
+  return e2.replaceAll(/<([^<>:]{1,100}):([^>]{1,1000})>/g, (e3, a2, r2) => {
     const i2 = t2(a2, r2);
     if (i2.length >= 1e3) throw new Error("Note text is too long. Please shorten it.");
     return Zm(a2, i2);
   });
 }, rp = (e2, t2) => {
-  const a2 = /<([^<>:]+):([^>]*)>/g, r2 = Array.from(e2.matchAll(a2)).find((e3) => e3[1] === t2);
+  const a2 = /<([^<>:]{1,100}):([^>]{1,1000})>/g, r2 = Array.from(e2.matchAll(a2)).find((e3) => e3[1] === t2);
   return r2 ? r2[2] : void 0;
 }, ip = (e2, t2, a2) => {
-  const r2 = /<([^<>:]+):([^>]*)>/g;
+  const r2 = /<([^<>:]{1,100}):([^>]{1,1000})>/g;
   return e2.replace(r2, (e3, r3) => r3 === t2 ? Zm(r3, a2) : e3);
 }, np = (e2, t2) => `\\${e2}[${t2}]`, op = (e2, t2) => t2.map((t3, a2) => ({
   text: t3,
