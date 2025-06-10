@@ -1,4 +1,3 @@
-import type { Data_System } from "@RpgTypes/system";
 import {
   type System_DataNames,
   defineSystemItems,
@@ -41,7 +40,7 @@ export const mergeTraitSource = (
   dataLabel: DataLabels,
   items: GameData,
   normalLabel: NormalLabel,
-  system: Data_System,
+  system: System_DataNames,
   label: Record<keyof System_DataNames, RawTraitLabel>
 ): Map<number, FormatCompiled> => {
   return mergeItemsSource(
