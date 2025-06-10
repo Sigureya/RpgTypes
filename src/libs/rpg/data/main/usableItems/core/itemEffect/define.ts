@@ -19,7 +19,7 @@ import {
   EFFECT_RECOVER_MP,
   EFFECT_REMOVE_DEBUFF,
   EFFECT_REMOVE_STATE,
-} from "./constants";
+} from "./effectCode";
 import type {
   EffectDefinitionResolved,
   EffectLabelDefinition,
