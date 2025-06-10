@@ -428,15 +428,15 @@ const domainNames = (record: Record<string, DomainName>): string[] => {
 };
 
 describe("defineTraitSources", () => {
-  describe(".labelは全てdomainNameである", () => {
-    const result: NamedItemSource[] = defineTraitSources(
-      makeGameDate(mockGameData),
-      LABEL_SET_DATA,
-      LABEL_SET_TRAIT.options,
-      mockNormalLabel,
-      mockSystemdata,
-      DEFAULT_SYSTEM_LABELS_DATA_TYPES.options
-    );
+  const result: NamedItemSource[] = defineTraitSources(
+    makeGameDate(mockGameData),
+    LABEL_SET_DATA,
+    LABEL_SET_TRAIT.options,
+    mockNormalLabel,
+    mockSystemdata,
+    DEFAULT_SYSTEM_LABELS_DATA_TYPES.options
+  );
+  describe("各要素の検証", () => {
     const set = new Set<string>([
       ...domainNames(LABEL_SET_DATA),
       ...domainNames(LABEL_SET_TRAIT.options),
@@ -446,8 +446,16 @@ describe("defineTraitSources", () => {
       return set.has(item.label);
     };
 
-    test.each(result)("item.label:$label", (sourceItem) => {
-      expect(sourceItem).toSatisfy(isItemInSet);
+    describe.each(result)("item.label:$label", (sourceItem) => {
+      test(".labelは全てdomainNameである", () => {
+        expect(sourceItem).toSatisfy(isItemInSet);
+      });
+    });
+  });
+  describe(".source", () => {
+    const set = new Set(result.map((item) => JSON.stringify(item.source)));
+    test("sourceの重複がないこと", () => {
+      expect(set.size).toBe(result.length);
     });
   });
 });
