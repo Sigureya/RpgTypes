@@ -1,4 +1,3 @@
-import { Data_Actor } from './types';
 export declare const SCHEMA_DATA_ACTOR: {
     readonly type: "object";
     readonly required: readonly ["name", "id", "nickname", "battlerName", "characterName", "characterIndex", "faceName", "faceIndex", "classId", "initialLevel", "maxLevel"];
@@ -73,4 +72,3 @@ export declare const SCHEMA_DATA_ACTOR: {
         };
     };
 };
-export declare const normalizeDataActor: (data: Partial<Data_Actor>) => Data_Actor;

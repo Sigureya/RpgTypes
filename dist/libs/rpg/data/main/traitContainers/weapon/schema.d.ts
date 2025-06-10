@@ -98,7 +98,7 @@ export declare const SCHEMA_DATA_WEAPON: {
                         type: "integer";
                     };
                 };
-                required: ("code" | "dataId" | "value")[];
+                required: ("value" | "code" | "dataId")[];
             };
         };
     };

@@ -1,6 +1,6 @@
 export declare const SCHEMA_DATA_CLASS: {
     type: "object";
-    required: ("name" | "note" | "params" | "id" | "traits" | "expParams" | "learnings")[];
+    required: ("note" | "name" | "params" | "id" | "traits" | "expParams" | "learnings")[];
     properties: {
         name: {
             type: "string";
@@ -74,7 +74,7 @@ export declare const SCHEMA_DATA_CLASS: {
                         type: "integer";
                     };
                 };
-                required: ("code" | "dataId" | "value")[];
+                required: ("value" | "code" | "dataId")[];
                 additionalProperties: false;
             };
         };

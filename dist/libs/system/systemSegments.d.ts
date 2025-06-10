@@ -1,8 +1,10 @@
-import { MenuCommandsEnabled, System_Advanced, System_SoundsObject, Terms_Basic, Terms_Command, Terms_Messages, ItemCategories } from './members';
+import { System_Advanced, System_Bgm, System_BooleanOptionsRMMMZ, System_GameInitial, System_Me, System_SoundsObject, Terms_Basic, Terms_Command, Terms_Messages } from './core';
+import { System_DataNames } from './core/dataTypes';
+import { MenuCommandsEnabled, ItemCategories } from './members';
 import { EditorSettings } from './setting';
-import { System_BooleanOptions, System_Vehicle, System_DataNames, System_Bgm, System_Text, System_Debug, System_Images, System_GameInitial, System_ImageSize, System_Me } from './subset';
+import { System_Vehicle, System_Text, System_Debug, System_Images, System_ImageSize } from './subset';
 export interface SystemDataFragments {
-    options: Partial<System_BooleanOptions>;
+    options: Partial<System_BooleanOptionsRMMMZ>;
     advanced: Partial<System_Advanced>;
     vehicles: Partial<System_Vehicle>;
     editing: Partial<EditorSettings>;

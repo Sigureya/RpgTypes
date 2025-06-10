@@ -1,9 +1,9 @@
-import { EventCommandLike } from './eventComandLike';
-import { Direction8, MoveRouteData } from './types';
-import { MovePicture, ShopGoods, ShowPicture, ValueOf, Toggle, Operation_PlusMinus, Designation } from './paramaters';
-import { BranchParameters } from './branchParams';
-import { Param_ChangeEnemyParameters } from './paramaters/changeBattler';
 import { ColorRGBA } from '../../../../../../utils';
+import { BranchParameters } from './branchParams';
+import { EventCommandLike } from './eventComandLike';
+import { MovePicture, ShopGoods, ShowPicture, ValueOf, Toggle, Operation_PlusMinus, Designation } from './paramaters';
+import { Param_ChangeEnemyParameters } from './paramaters/changeBattler';
+import { Direction8, MoveRouteData } from './types';
 /**
  * @deprecated
  * Use `Command_ShowMessageHeader` instead.
