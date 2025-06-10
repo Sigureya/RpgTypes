@@ -9,7 +9,6 @@ const mockLabel: SystemLabel_DataNames = {
   format: "{name}",
   options: {
     armorTypes: "Armor Types",
-
     elements: "Elements",
     equipTypes: "Equip Types",
     skillTypes: "Skill Types",
@@ -19,7 +18,7 @@ const mockLabel: SystemLabel_DataNames = {
   },
 };
 
-describe("", () => {
+describe("defineSystemItems", () => {
   const result: NamedItemSource[] = defineSystemItems(
     makeDataNames({
       armorTypes: ["mockArmor"],
@@ -27,13 +26,13 @@ describe("", () => {
     }),
     mockLabel
   );
-  test("", () => {
+  test("sourceId are unique", () => {
     const set = new Set(
       result.map<string>((item) => JSON.stringify(item.source))
     );
     expect(set.size).toBe(result.length);
   });
-  test("", () => {
+  test("all kinds in result match label options", () => {
     const labelKeys = new Set(Object.keys(mockLabel.options));
     const dataKinds = new Set(result.map<string>((item) => item.source.kind));
     expect(labelKeys).toEqual(dataKinds);
