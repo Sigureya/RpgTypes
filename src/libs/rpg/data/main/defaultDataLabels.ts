@@ -96,4 +96,14 @@ export const LABEL_SET_DATA = {
       successRate: "成功率",
     },
   } as const satisfies DomainLabel<UsableItemLabels>,
+  commonEvent: {
+    domainName: "コモンイベント",
+    options: {
+      trigger: "トリガー",
+      switchId: "スイッチID",
+      name: "名前",
+      id: "ID",
+      list: "コマンドリスト",
+    },
+  },
 } as const satisfies DataLabels;
