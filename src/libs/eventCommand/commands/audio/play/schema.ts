@@ -1,5 +1,5 @@
 import type { JSONSchemaType } from "ajv";
-import type { AudioFileParams } from "src/libs/utils";
+import type { AudioFileParams } from "src/utils";
 import type { CommandUnion_AnyAudio } from "./types";
 
 // enumは意図的に直書き。
