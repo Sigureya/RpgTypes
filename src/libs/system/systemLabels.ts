@@ -1,10 +1,9 @@
 import type { DomainLabel } from "@RpgTypes/templates";
 import type { System_Bgm, System_BooleanOptionsRMMMZ } from "./core";
-import type { System_DataNames } from "./core/dataTypes";
+import type { SystemLabel_DataNames } from "./core/dataTypes";
 import type { System_Images, System_Text } from "./subset";
 type AsLabel<T> = Record<keyof T, string>;
 
-export type SystemLabel_DataNames = AsLabel<System_DataNames>;
 export type SystemLabel_Images = AsLabel<System_Images>;
 export type SystemLabel_Text = AsLabel<System_Text>;
 export type SystemLabel_Bgm = AsLabel<System_Bgm>;
@@ -31,12 +30,33 @@ export const DEFAULT_SYSTEM_LABELS_BOOLEAN = {
 export const DEFAULT_SYSTEM_LABELS_DATA_TYPES = {
   domainName: "タイプ",
   options: {
-    armorTypes: "防具タイプ",
-    elements: "属性",
-    equipTypes: "装備タイプ",
-    skillTypes: "スキルタイプ",
-    weaponTypes: "武器タイプ",
-    switches: "スイッチ",
-    variables: "変数",
+    armorTypes: {
+      format: "{name}",
+      domainName: "防具タイプ",
+    },
+    elements: {
+      format: "{name}",
+      domainName: "属性",
+    },
+    equipTypes: {
+      format: "{name}",
+      domainName: "装備タイプ",
+    },
+    skillTypes: {
+      format: "{name}",
+      domainName: "スキルタイプ",
+    },
+    weaponTypes: {
+      format: "{name}",
+      domainName: "武器タイプ",
+    },
+    switches: {
+      format: "{name}",
+      domainName: "スイッチ",
+    },
+    variables: {
+      format: "{name}",
+      domainName: "変数",
+    },
   },
 } as const satisfies DomainLabel<SystemLabel_DataNames>;

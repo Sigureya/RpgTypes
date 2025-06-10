@@ -21,7 +21,7 @@ import type { System_DataNames, SystemLabel_DataNames } from "./types";
 
 export const defineSystemItems = (
   system: System_DataNames,
-  label: Record<keyof System_DataNames, string>
+  label: SystemLabel_DataNames
 ): NamedItemSource[] => {
   return [
     buildElementTypesSource(system, label),
@@ -33,12 +33,12 @@ export const defineSystemItems = (
     buildSwitchesSource(system, label),
   ];
 };
-export const buildArmorTypesSource = (
+const buildArmorTypesSource = (
   system: Pick<System_DataNames, "armorTypes">,
   label: SystemLabel_DataNames
 ): NamedItemSource => ({
   items: getArmorTypes(system),
-  label: label.armorTypes,
+  label: label.armorTypes.domainName,
   source: {
     author: "rmmz",
     module: "system",
@@ -46,12 +46,12 @@ export const buildArmorTypesSource = (
   } satisfies SourceId_SystemArmorTypes,
 });
 
-export const buildElementTypesSource = (
+const buildElementTypesSource = (
   system: Pick<System_DataNames, "elements">,
   label: SystemLabel_DataNames
 ): NamedItemSource => ({
   items: getElementTypes(system),
-  label: label.elements,
+  label: label.elements.domainName,
   source: {
     author: "rmmz",
     module: "system",
@@ -59,12 +59,12 @@ export const buildElementTypesSource = (
   } satisfies SourceId_SystemElements,
 });
 
-export const buildEquipTypesSource = (
+const buildEquipTypesSource = (
   system: Pick<System_DataNames, "equipTypes">,
   label: SystemLabel_DataNames
 ): NamedItemSource => ({
   items: getEquipTypes(system),
-  label: label.equipTypes,
+  label: label.equipTypes.domainName,
   source: {
     author: "rmmz",
     module: "system",
@@ -72,12 +72,12 @@ export const buildEquipTypesSource = (
   } satisfies SourceId_SystemEquipTypes,
 });
 
-export const buildSkillTypesSource = (
+const buildSkillTypesSource = (
   system: Pick<System_DataNames, "skillTypes">,
   label: SystemLabel_DataNames
 ): NamedItemSource => ({
   items: getSkillTypes(system),
-  label: label.skillTypes,
+  label: label.skillTypes.domainName,
   source: {
     author: "rmmz",
     module: "system",
@@ -85,12 +85,12 @@ export const buildSkillTypesSource = (
   } satisfies SourceId_SystemSkillTypes,
 });
 
-export const buildVariableNamesSource = (
+const buildVariableNamesSource = (
   system: Pick<System_DataNames, "variables">,
   label: SystemLabel_DataNames
 ): NamedItemSource => ({
   items: getVariableNames(system),
-  label: label.variables,
+  label: label.variables.domainName,
   source: {
     author: "rmmz",
     module: "system",
@@ -98,12 +98,12 @@ export const buildVariableNamesSource = (
   } satisfies SourceId_SystemVariables,
 });
 
-export const buildSwitchesSource = (
+const buildSwitchesSource = (
   system: Pick<System_DataNames, "switches">,
   label: SystemLabel_DataNames
 ): NamedItemSource => ({
   items: getSwitches(system),
-  label: label.switches,
+  label: label.switches.domainName,
   source: {
     author: "rmmz",
     module: "system",
@@ -111,12 +111,12 @@ export const buildSwitchesSource = (
   } satisfies SourceId_SystemSwitches,
 });
 
-export const buildWeaponTypesSource = (
+const buildWeaponTypesSource = (
   system: Pick<System_DataNames, "weaponTypes">,
   label: SystemLabel_DataNames
 ): NamedItemSource => ({
   items: getWeaponTypes(system),
-  label: label.weaponTypes,
+  label: label.weaponTypes.domainName,
   source: {
     author: "rmmz",
     module: "system",

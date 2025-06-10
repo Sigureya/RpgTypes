@@ -8,4 +8,7 @@ export interface System_DataNames {
   armorTypes: string[];
 }
 
-export type SystemLabel_DataNames = Record<keyof System_DataNames, string>;
+export type SystemLabel_DataNames = Record<
+  keyof System_DataNames,
+  { format: string; domainName: string }
+>;
