@@ -62,10 +62,11 @@ export const compileTraitDisplayData = (
 export const compileItemEffectDisplayData = (
   namedItemSource: ReadonlyArray<NamedItemSource>,
   itemEffectLabels: ItemEffectLabelSet,
-  additional: ReadonlyArray<EffectDefinitionResolved> = []
+  additional?: ReadonlyArray<EffectDefinitionResolved>
 ): Map<number, FormatCompiled> => {
+  const list = resolveItemEffectLabels(itemEffectLabels);
   return mergeItemsSource(
-    [...resolveItemEffectLabels(itemEffectLabels), ...additional],
+    additional ? [...list, ...additional] : list,
     namedItemSource
   );
 };
