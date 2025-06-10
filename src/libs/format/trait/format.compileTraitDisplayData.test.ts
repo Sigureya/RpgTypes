@@ -111,7 +111,15 @@ const mockGameData: Record<keyof GameData, Data_NamedItem[]> = {
   items: [],
   commonEvents: [],
 };
-const makeGameDate = (
+// This mock data is intentionally defined in a flat and simplified format (id and name only).
+// We pass it through make***Data() functions to transform it into a proper GameData structure,
+// allowing us to:
+// 1. Validate that each transformed item conforms to the expected typed structure.
+// 2. Simplify the initial mock definition for readability and maintainability.
+// 3. Ensure compatibility with buildReferenceItemSources(), which accepts strictly typed GameData.
+// Note: Adding explicit `satisfies` assertions here helps TypeScript infer and validate types
+// within a single file, which improves static analysis accuracy and readability.
+const makeGameData = (
   data: Record<keyof GameData, Data_NamedItem[]>
 ): GameData => ({
   skills: data.skills.map(makeSkillData) satisfies Data_Skill[],
@@ -126,6 +134,7 @@ const makeGameDate = (
     makeCommonEventData
   ) satisfies Data_CommonEvent[],
 });
+
 const mockNormalLabel: NormalLabel = { normal: "Normal" };
 
 const mockSystemdata: System_DataNames = {
@@ -150,7 +159,7 @@ interface TestCaseGroup {
 }
 
 const testCaseGameData: TestCaseGroup = {
-  groupName: "raits that reference GameData",
+  groupName: "Traits that reference GameData",
   errorMessage: "Check the return value of defineGameDataSources()",
 
   cases: [
@@ -160,7 +169,7 @@ const testCaseGameData: TestCaseGroup = {
       expected: {
         label: LABEL_SET_TRAIT.options.stateRate.domainName,
         patternCompiled: LABEL_SET_TRAIT.options.stateRate.format,
-        data: mockGameData.states satisfies Data_NamedItem[],
+        data: mockGameData.states,
       },
     },
     {
@@ -378,7 +387,7 @@ const testCaseSystem: TestCaseGroup = {
 
 // Traits that do not require data array lookup (e.g., attackSpeed, attackTimes, actionPlus).
 // These traits do not reference any external data array, so their data property is
-const testCaseNonData = {
+const testCaseNonData: TestCaseGroup = {
   groupName: "Traits that do not require data array lookup",
   errorMessage: "Unexpected array data is included",
   cases: [
@@ -389,7 +398,7 @@ const testCaseNonData = {
         label: LABEL_SET_TRAIT.options.attackSpeed.domainName,
         patternCompiled: LABEL_SET_TRAIT.options.attackSpeed.format,
         data: undefined,
-      } satisfies FormatCompiled,
+      },
     },
     {
       code: TRAIT_ATTACK_TIMES,
@@ -410,17 +419,28 @@ const testCaseNonData = {
       },
     },
   ],
-} satisfies TestCaseGroup;
+};
 
 const testFormat = (
   map: ReadonlyMap<number, FormatCompiled>,
-  { groupName, errorMessage: sourceFunctionName, cases }: TestCaseGroup
+  { groupName, errorMessage, cases }: TestCaseGroup
 ) => {
   describe(groupName, () => {
     cases.forEach(({ caseName, expected, code }) => {
-      describe(caseName, () => {
-        test("should match expected format", () => {
-          expect(map.get(code), sourceFunctionName).toEqual(expected);
+      describe(`${caseName} (code:${code})`, () => {
+        test("result is not undefined", () => {
+          expect(map.get(code)).toBeDefined();
+        });
+        test("label matches the expected value", () => {
+          expect(map.get(code)?.label).toEqual(expected.label);
+        });
+        test("patternCompiled matches the expected value", () => {
+          expect(map.get(code)?.patternCompiled).toEqual(
+            expected.patternCompiled
+          );
+        });
+        test("data matches the expected value", () => {
+          expect(map.get(code)?.data, errorMessage).toEqual(expected.data);
         });
       });
     });
@@ -428,26 +448,30 @@ const testFormat = (
 };
 
 describe("compileTraitDisplayData", () => {
+  // Tests for buildReferenceItemSources() are separated into another file.
+  // See: format.buildReferenceItemSources.test.ts
   const namedItemSource: NamedItemSource[] = buildReferenceItemSources(
-    makeGameDate(mockGameData),
+    makeGameData(mockGameData),
     LABEL_SET_DATA,
     LABEL_SET_TRAIT.options,
     mockNormalLabel,
     mockSystemdata,
     DEFAULT_SYSTEM_LABELS_DATA_TYPES
   );
-  const displayData: ReadonlyMap<number, FormatCompiled> =
-    compileTraitDisplayData(namedItemSource, LABEL_SET_TRAIT.options);
+  const map: ReadonlyMap<number, FormatCompiled> = compileTraitDisplayData(
+    namedItemSource,
+    LABEL_SET_TRAIT.options
+  );
 
   describe("Each element in format.data contains only 'id' and 'name' properties", () => {
-    Array.from(displayData.values()).forEach((format: FormatCompiled) => {
+    Array.from(map.values()).forEach((format: FormatCompiled) => {
       if (!format.data) {
         // Skip if there is no data property
         return;
       }
       const list = format.data;
       describe(format.label, () => {
-        const set = new Set(["id", "name"] satisfies (keyof Data_NamedItem)[]);
+        const set = new Set<keyof Data_NamedItem>(["id", "name"]);
         describe.each(list)("%j", (item) => {
           test("contains only 'id' and 'name' properties", () => {
             expect(new Set(Object.keys(item))).toEqual(set);
@@ -464,10 +488,10 @@ describe("compileTraitDisplayData", () => {
   });
 
   describe("Trait code mapping: data array, label, and pattern are correct", () => {
-    testFormat(displayData, testCaseGameData);
-    testFormat(displayData, testCaseTrait);
-    testFormat(displayData, testCaseSystem);
-    testFormat(displayData, testCaseNonData);
+    testFormat(map, testCaseGameData);
+    testFormat(map, testCaseTrait);
+    testFormat(map, testCaseSystem);
+    testFormat(map, testCaseNonData);
   });
   describe("All Trait codes are covered by test cases", () => {
     const traits = resolveTraitLabels(LABEL_SET_TRAIT.options);
@@ -482,9 +506,16 @@ describe("compileTraitDisplayData", () => {
     });
     test("Detailed check: missing test cases are reported", () => {
       const testCaseCodes = new Set(
-        allCase.map(({ code }) => code satisfies number)
+        allCase.map(
+          // The satisfies keyword is used here to help detect issues when codes are modified.
+          ({ code }) => code satisfies number
+        )
       );
       expect(traits.filter((t) => !testCaseCodes.has(t.kindId))).toEqual([]);
     });
   });
 });
+// Abnormal (edge/error) case tests are omitted for the following reasons:
+// 1. The set of normal (expected) test cases is very large.
+// 2. Most abnormal cases are prevented by TypeScript's type checking.
+// 3. Handling of invalid values is delegated to the caller by design.
