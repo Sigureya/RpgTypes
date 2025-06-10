@@ -1,4 +1,7 @@
-import { DEFAULT_SYSTEM_LABELS_DATA_TYPES } from "@RpgTypes/system";
+import {
+  DEFAULT_SYSTEM_LABELS_DATA_TYPES,
+  defineSystemItems,
+} from "@RpgTypes/system";
 import type { System_DataNames } from "@RpgTypes/system/core";
 import type { DomainName } from "@RpgTypes/templates";
 import type { Data_NamedItem, NamedItemSource } from "src/namedItemSource";
@@ -27,6 +30,8 @@ import {
   makeCommonEventData,
   LABEL_SET_DATA,
   LABEL_SET_TRAIT,
+  defineTraitItems,
+  defineGameDataSources,
 } from "src/rpg";
 import { describe, test, expect } from "vitest";
 import { buildReferenceItemSources } from "./formatTraits";
@@ -101,35 +106,65 @@ const domainNames = (record: Record<string, DomainName>): string[] => {
   );
 };
 
-describe("defineTraitSources", () => {
-  const result: NamedItemSource[] = buildReferenceItemSources(
-    makeGameDate(mockGameData),
-    LABEL_SET_DATA,
-    LABEL_SET_TRAIT.options,
-    mockNormalLabel,
-    mockSystemdata,
-    DEFAULT_SYSTEM_LABELS_DATA_TYPES
-  );
-  describe("各要素の検証", () => {
-    const set = new Set<string>([
-      ...domainNames(LABEL_SET_DATA),
-      ...domainNames(LABEL_SET_TRAIT.options),
-      ...Object.values<string>(DEFAULT_SYSTEM_LABELS_DATA_TYPES.options),
-    ]);
-    const isItemInSet = (item: NamedItemSource) => {
-      return set.has(item.label);
-    };
+interface TestCase {
+  caseName: string;
+  result: NamedItemSource[];
+  labels: string[];
+}
 
-    describe.each(result)("item.label:$label", (sourceItem) => {
-      test(".labelは全てdomainNameである", () => {
-        expect(sourceItem).toSatisfy(isItemInSet);
-      });
-    });
-  });
-  describe(".source", () => {
-    const set = new Set(result.map((item) => JSON.stringify(item.source)));
-    test("sourceの重複がないこと", () => {
+const runTestCases = ({ caseName, labels, result }: TestCase) => {
+  describe(caseName, () => {
+    const labelsSet: ReadonlySet<string> = new Set(labels);
+    const itemIsInSet = (label: string) => {
+      return labelsSet.has(label);
+    };
+    const resultLabels = result.map((item) => item.label);
+    test.each(resultLabels)(
+      `label "%s" is included in the expected set`,
+      (label) => {
+        expect(label).toSatisfy(itemIsInSet);
+      }
+    );
+
+    test(`sources are unique`, () => {
+      const set = new Set(result.map((item) => JSON.stringify(item.source)));
       expect(set.size).toBe(result.length);
     });
   });
-});
+};
+
+const testCases: TestCase[] = [
+  {
+    caseName: "buildReferenceItemSources",
+    labels: [
+      ...domainNames(LABEL_SET_DATA),
+      ...domainNames(LABEL_SET_TRAIT.options),
+      ...Object.values<string>(DEFAULT_SYSTEM_LABELS_DATA_TYPES.options),
+    ],
+    result: buildReferenceItemSources(
+      makeGameDate(mockGameData),
+      LABEL_SET_DATA,
+      LABEL_SET_TRAIT.options,
+      mockNormalLabel,
+      mockSystemdata,
+      DEFAULT_SYSTEM_LABELS_DATA_TYPES
+    ),
+  },
+  {
+    caseName: "defineGameDataSources",
+    labels: domainNames(LABEL_SET_DATA),
+    result: defineGameDataSources(makeGameDate(mockGameData), LABEL_SET_DATA),
+  },
+  {
+    caseName: "defineTraitItems",
+    labels: domainNames(LABEL_SET_TRAIT.options),
+    result: defineTraitItems(LABEL_SET_TRAIT.options, mockNormalLabel),
+  },
+  {
+    caseName: "defineSystemItems",
+    labels: Object.values<string>(DEFAULT_SYSTEM_LABELS_DATA_TYPES.options),
+    result: defineSystemItems(mockSystemdata, DEFAULT_SYSTEM_LABELS_DATA_TYPES),
+  },
+];
+
+testCases.forEach(runTestCases);
