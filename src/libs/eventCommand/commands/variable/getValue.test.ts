@@ -1,6 +1,6 @@
-import type { ParamArray } from "src/rpg";
 import type { MockedObject } from "vitest";
 import { describe, test, expect, vi } from "vitest";
+import type { ParamArray } from "src/rpg";
 import {
   toArrayOperandActorStatus,
   toArrayOperandEnemyStatus,

@@ -1,5 +1,5 @@
-import type { Data_NamedItem } from "src/namedItemSource";
 import { describe, test, expect } from "vitest";
+import type { Data_NamedItem } from "src/namedItemSource";
 import {
   EXTRA_PARAM_HIT,
   EXTRA_PARAM_EVA,

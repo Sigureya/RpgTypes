@@ -1,5 +1,5 @@
-import type { SourceIdentifier } from "src/namedItemSource";
 import { describe, test, expect } from "vitest";
+import type { SourceIdentifier } from "src/namedItemSource";
 import { LABEL_SET_TRAIT } from "./default";
 import { resolveTraitLabels } from "./resolveLabels";
 import type { TraitFormat } from "./types";

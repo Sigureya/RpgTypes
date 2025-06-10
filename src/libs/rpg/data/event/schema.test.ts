@@ -1,5 +1,5 @@
-import Ajv from "ajv";
 import { describe, test, expect } from "vitest";
+import Ajv from "ajv";
 import { makeTroopData, makeTroopEventConditions } from "./makeEvent";
 import { COMMENT_HEAD } from "./map";
 import { SCHEMA_DATA_TROOP } from "./schema";

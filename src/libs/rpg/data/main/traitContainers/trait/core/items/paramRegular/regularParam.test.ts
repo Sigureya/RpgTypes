@@ -1,5 +1,5 @@
-import type { Data_NamedItem } from "src/namedItemSource";
 import { describe, test, expect } from "vitest";
+import type { Data_NamedItem } from "src/namedItemSource";
 import {
   REGULAR_PARAM_MAX_HP,
   REGULAR_PARAM_MAX_MP,

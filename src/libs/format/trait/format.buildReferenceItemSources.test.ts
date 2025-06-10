@@ -1,9 +1,4 @@
-import {
-  DEFAULT_SYSTEM_LABELS_DATA_TYPES,
-  defineSystemItems,
-} from "@RpgTypes/system";
-import type { System_DataNames } from "@RpgTypes/system/core";
-import type { DomainName } from "@RpgTypes/templates";
+import { describe, test, expect } from "vitest";
 import type { Data_NamedItem, NamedItemSource } from "src/namedItemSource";
 import type {
   GameData,
@@ -33,7 +28,12 @@ import {
   defineTraitItems,
   defineGameDataSources,
 } from "src/rpg";
-import { describe, test, expect } from "vitest";
+import {
+  DEFAULT_SYSTEM_LABELS_DATA_TYPES,
+  defineSystemItems,
+} from "src/system";
+import type { System_DataNames } from "src/system/core";
+import type { DomainName } from "src/templates";
 import { buildReferenceItemSources } from "./formatTraits";
 
 const mockNormalLabel: NormalLabel = { normal: "Normal" };

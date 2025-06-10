@@ -1,12 +1,4 @@
-import { DEFAULT_SYSTEM_LABELS_DATA_TYPES } from "@RpgTypes/system";
-import type { System_DataNames } from "@RpgTypes/system/core";
-import {
-  getArmorTypes,
-  getElementTypes,
-  getEquipTypes,
-  getSkillTypes,
-  getWeaponTypes,
-} from "@RpgTypes/system/core";
+import { test, expect, describe } from "vitest";
 import type {
   Data_NamedItem,
   FormatCompiled,
@@ -71,7 +63,15 @@ import {
   TRAIT_SKILL_TYPE_SEAL,
   TRAIT_DEBUFF_RATE,
 } from "src/rpg";
-import { test, expect, describe } from "vitest";
+import { DEFAULT_SYSTEM_LABELS_DATA_TYPES } from "src/system";
+import {
+  getArmorTypes,
+  getElementTypes,
+  getEquipTypes,
+  getSkillTypes,
+  getWeaponTypes,
+} from "src/system/core";
+import type { System_DataNames } from "src/system/core";
 import {
   buildReferenceItemSources,
   compileTraitDisplayData,

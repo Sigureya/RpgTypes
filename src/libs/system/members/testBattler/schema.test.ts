@@ -1,5 +1,5 @@
-import Ajv from "ajv";
 import { describe, test, expect } from "vitest";
+import Ajv from "ajv";
 import { SCHEMA_SYSTEM_TEST_BATTLER } from "./schema";
 import type { TestBattler } from "./types";
 const ajv = new Ajv();

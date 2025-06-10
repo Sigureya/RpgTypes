@@ -1,14 +1,14 @@
+import { describe, test, expect } from "vitest";
 import type {
   Command_CommonEvent,
   Command_ShowMessageHeader,
-} from "@RpgTypes/eventCommand/commands";
+} from "src/eventCommand/commands";
 import {
   makeCommandShowMessage,
   makeCommandCommonEvent,
-} from "@RpgTypes/eventCommand/commands";
-import type { EventCommandLike2 } from "@RpgTypes/eventCommand/frame";
+} from "src/eventCommand/commands";
+import type { EventCommandLike2 } from "src/eventCommand/frame";
 import { SHOW_MESSAGE } from "src/rpg";
-import { describe, test, expect } from "vitest";
 import {
   cloneEventCommand,
   cloneParameters,

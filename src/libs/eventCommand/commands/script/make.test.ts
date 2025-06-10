@@ -1,5 +1,5 @@
-import { SCRIPT_EVAL, SCRIPT_EVAL_BODY } from "src/rpg";
 import { describe, test, expect } from "vitest";
+import { SCRIPT_EVAL, SCRIPT_EVAL_BODY } from "src/rpg";
 import {
   makeCommandScriptHeader,
   makeCommandScriptBody,

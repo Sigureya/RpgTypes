@@ -1,3 +1,4 @@
+import { describe, test, expect } from "vitest";
 import {
   COMMENT_BODY,
   COMMENT_HEAD,
@@ -6,7 +7,6 @@ import {
   SHOW_MESSAGE_BODY,
   SHOW_SCROLLING_TEXT_BODY,
 } from "src/rpg";
-import { describe, test, expect } from "vitest";
 import {
   makeCommandShowMessageBody,
   makeCommandCommentHeader,
