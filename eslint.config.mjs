@@ -58,7 +58,6 @@ export default [
             "sibling",
             "index",
             "object",
-            "type",
           ],
           pathGroups: [
             {
