@@ -1,11 +1,10 @@
-import { AUTHOR_RMMZ } from "@RpgTypes/namedItemSource";
 import type { SourceIdentifier } from "src/namedItemSource";
 import type {
+  SourceId_DataCommonEvent,
   SourceId_DataSkill,
   SourceId_DataState,
   SourceId_TraitRegularParam,
 } from "src/rpg";
-import { MODULE_DATA, SRC_DATA_COMMON_EVNET } from "src/rpg";
 import {
   EFFECT_ADD_STATE,
   EFFECT_GROW,
@@ -134,7 +133,7 @@ const defineEffectCommonEvent = (
   labels: ItemEffectLabelSet
 ): EffectDefinitionResolved =>
   defineEffect(EFFECT_COMMON_EVENT, labels.commonEvent, {
-    author: AUTHOR_RMMZ,
-    module: MODULE_DATA,
-    kind: SRC_DATA_COMMON_EVNET,
-  });
+    author: "rmmz",
+    module: "data",
+    kind: "common_event",
+  } satisfies SourceId_DataCommonEvent);
