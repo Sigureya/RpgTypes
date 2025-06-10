@@ -1,5 +1,5 @@
 import { describe, test, expect } from "vitest";
-import type { Terms_Messages } from "./members";
+import type { Terms_Messages } from "./core";
 import type { Data_System } from "./system";
 import { isSystemBooleanOptions } from "./validate";
 
