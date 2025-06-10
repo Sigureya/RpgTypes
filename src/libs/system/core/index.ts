@@ -5,3 +5,4 @@ export * from "./gameInitial";
 export * from "./imageSize";
 export * from "./audio";
 export * from "./vehicle";
+export * from "./terms";

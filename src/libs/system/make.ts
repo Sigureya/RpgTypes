@@ -4,29 +4,24 @@ import type {
   System_Bgm,
   System_BooleanOptionsRMMMZ as System_BooleanOptions,
   System_GameInitial,
+  System_Terms,
+  System_TermsPartial,
+  Terms_Messages,
 } from "./core";
 import {
   makeBooleanOptions,
   makeDataNames,
+  makeParamNamesArray,
   makeSoundsArray,
   makeSystemAdvanced,
-  makeVehicleData,
-} from "./core";
-import type { System_DataNames } from "./core/dataTypes";
-import type {
-  System_Terms,
-  System_TermsPartial,
-  Terms_Messages,
-  TestBattler,
-} from "./members";
-import {
-  makeItemCategories,
-  makeMenuCommandsEnabled,
-  makeParamNamesArray,
   makeTermsBasic,
   makeTermsCommand,
   makeTermsMessages,
-} from "./members";
+  makeVehicleData,
+} from "./core";
+import type { System_DataNames } from "./core/dataTypes";
+import type { TestBattler } from "./members";
+import { makeItemCategories, makeMenuCommandsEnabled } from "./members";
 import type { EditorSettings } from "./setting";
 import { makeEditorSetting } from "./setting";
 import type { System_Debug, System_Images, System_ImageSize } from "./subset";
