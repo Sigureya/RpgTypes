@@ -12,7 +12,7 @@ export const formatItemEffectText = (
 ): string => {
   const item = items.find((item) => item.id === effect.dataId);
   const name: string = item ? item.name : "Unknown Item";
-  return effectDefine.format
+  return effectDefine.pattern
     .replaceAll(FORMAT_VALUE1, effect.value1.toString())
     .replaceAll(FORMAT_VALUE2, effect.value2.toString())
     .replaceAll(FORMAT_NAME, name);
