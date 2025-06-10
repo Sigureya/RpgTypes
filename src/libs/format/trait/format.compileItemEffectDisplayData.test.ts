@@ -192,6 +192,31 @@ const testCaseNonData: TestCaseGroup = {
     },
   ],
 };
+const testFormat = (
+  map: ReadonlyMap<number, FormatCompiled>,
+  { groupName, errorMessage, cases }: TestCaseGroup
+) => {
+  describe(groupName, () => {
+    cases.forEach(({ caseName, expected, code }) => {
+      describe(`${caseName} (code:${code})`, () => {
+        test("result is not undefined", () => {
+          expect(map.get(code)).toBeDefined();
+        });
+        test("label matches the expected value", () => {
+          expect(map.get(code)?.label).toEqual(expected.label);
+        });
+        test("patternCompiled matches the expected value", () => {
+          expect(map.get(code)?.patternCompiled).toEqual(
+            expected.patternCompiled
+          );
+        });
+        test("data matches the expected value", () => {
+          expect(map.get(code)?.data, errorMessage).toEqual(expected.data);
+        });
+      });
+    });
+  });
+};
 
 const makeMap = (): ReadonlyMap<number, FormatCompiled> => {
   const source = buildReferenceItemSources(
@@ -212,4 +237,5 @@ const makeMap = (): ReadonlyMap<number, FormatCompiled> => {
 
 describe("compileItemEffectDisplayData", () => {
   const map = makeMap();
+  testFormat(map, testCaseGameData);
 });
