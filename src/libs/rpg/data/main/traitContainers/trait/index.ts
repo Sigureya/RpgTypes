@@ -1,4 +1,4 @@
-export * from "./selectItems";
+export * from "./core";
 export * from "./types";
 export { formatTraitText } from "./format";
-export { resolveTraitLabels } from "./selectItems/resolveLabels";
+export { resolveTraitLabels } from "./core/resolveLabels";
