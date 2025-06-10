@@ -64,7 +64,7 @@ const e = require("ajv"), t = (e2 = {}) => [e2.item ?? true, e2.skill ?? true, e
   startMapId: e2.startMapId ?? 0,
   startX: e2.startX ?? 0,
   startY: e2.startY ?? 0
-}), b = (e2) => [e2.level ?? "Level", e2.levelA ?? "Level", e2.hp ?? "HP", e2.hpA ?? "HP", e2.mp ?? "MP", e2.mpA ?? "MP", e2.tp ?? "TP", e2.tpA ?? "TP", e2.experience ?? "EXP", e2.exp ?? "EXP"], C = (e2, t2) => [e2.fight ?? "Fight", e2.escape ?? "Escape", e2.attack ?? "Attack", e2.guard ?? "Guard", e2.item ?? "Item", e2.skill ?? "Skill", e2.equip ?? "Equip", e2.status ?? "Status", e2.formation ?? "Formation", e2.save ?? "Save", e2.gameEnd ?? "Game End", e2.options ?? "Options", e2.weapon ?? "Weapon", e2.armor ?? "Armor", e2.keyItem ?? "Key Item", e2.equip2 ?? "Equip2", e2.optimize ?? "Optimize", e2.clear ?? "Clear", e2.newGame ?? "New Game", e2.continue_ ?? "Continue", t2, e2.toTitle ?? "To Title", e2.cancel ?? "Cancel", t2, e2.buy ?? "Buy", e2.sell ?? "Sell"], h = (e2, t2) => "string" == typeof e2 ? e2 : t2, M = (e2) => [e2.mhp ?? "", e2.mmp ?? "", e2.atk ?? "", e2.def ?? "", e2.mat ?? "", e2.mdf ?? "", e2.agi ?? "", e2.luk ?? "", e2.hit ?? "", e2.eva ?? ""], f = new e({
+}), b = (e2) => [e2.level ?? "Level", e2.levelA ?? "Level", e2.hp ?? "HP", e2.hpA ?? "HP", e2.mp ?? "MP", e2.mpA ?? "MP", e2.tp ?? "TP", e2.tpA ?? "TP", e2.experience ?? "EXP", e2.exp ?? "EXP"], C = (e2, t2) => [e2.fight ?? "Fight", e2.escape ?? "Escape", e2.attack ?? "Attack", e2.guard ?? "Guard", e2.item ?? "Item", e2.skill ?? "Skill", e2.equip ?? "Equip", e2.status ?? "Status", e2.formation ?? "Formation", e2.save ?? "Save", e2.gameEnd ?? "Game End", e2.options ?? "Options", e2.weapon ?? "Weapon", e2.armor ?? "Armor", e2.keyItem ?? "Key Item", e2.equip2 ?? "Equip2", e2.optimize ?? "Optimize", e2.clear ?? "Clear", e2.newGame ?? "New Game", e2.continue_ ?? "Continue", t2, e2.toTitle ?? "To Title", e2.cancel ?? "Cancel", t2, e2.buy ?? "Buy", e2.sell ?? "Sell"], M = (e2, t2) => "string" == typeof e2 ? e2 : t2, h = (e2) => [e2.mhp ?? "", e2.mmp ?? "", e2.atk ?? "", e2.def ?? "", e2.mat ?? "", e2.mdf ?? "", e2.agi ?? "", e2.luk ?? "", e2.hit ?? "", e2.eva ?? ""], f = new e({
   strict: false
 });
 f.compile({
@@ -102,61 +102,61 @@ const L = f.compile({ additionalProperties: false, type: "object", required: ["t
   return {
     basic: b(e2.basic ?? {}),
     commands: (a2 = e2.commands ?? {}, C(a2, "")),
-    params: M(e2.params ?? {}),
+    params: h(e2.params ?? {}),
     messages: (t2 = e2.messages ?? {}, {
-      actionFailure: h(t2.actionFailure, "Action failed."),
-      actorDamage: h(t2.actorDamage, "%1 took %2 damage."),
-      actorRecovery: h(t2.actorRecovery, "%1 recovered %2 HP."),
-      actorGain: h(t2.actorGain, "%1 gained %2."),
-      actorLoss: h(t2.actorLoss, "%1 lost %2."),
-      actorDrain: h(t2.actorDrain, "%1 drained %2 HP."),
-      actorNoDamage: h(t2.actorNoDamage, "%1 was not damaged."),
-      actorNoHit: h(t2.actorNoHit, "%1 was not hit."),
-      alwaysDash: h(t2.alwaysDash, "Always dash."),
-      bgmVolume: h(t2.bgmVolume, "BGM volume"),
-      bgsVolume: h(t2.bgsVolume, "BGS volume"),
-      commandRemember: h(t2.commandRemember, "Command remember."),
-      criticalToActor: h(t2.criticalToActor, "%1 dealt %2 damage to %3."),
-      criticalToEnemy: h(t2.criticalToEnemy, "%1 dealt %2 damage to %3."),
-      counterAttack: h(t2.counterAttack, "%1 countered!"),
-      debuffAdd: h(t2.debuffAdd, "%1's %2 was lowered."),
-      defeat: h(t2.defeat, "Defeat."),
-      enemyDamage: h(t2.enemyDamage, "%1 took %2 damage."),
-      enemyDrain: h(t2.enemyDrain, "%1 drained %2 HP."),
-      enemyGain: h(t2.enemyGain, "%1 gained %2."),
-      enemyLoss: h(t2.enemyLoss, "%1 lost %2."),
-      enemyNoDamage: h(t2.enemyNoDamage, "%1 was not damaged."),
-      enemyNoHit: h(t2.enemyNoHit, "%1 was not hit."),
-      enemyRecovery: h(t2.enemyRecovery, "%1 recovered %2 HP."),
-      evasion: h(t2.evasion, "%1 evaded the attack!"),
-      autosave: h(t2.autosave, "Autosave"),
-      escapeFailure: h(t2.escapeFailure, "Escape failed."),
-      escapeStart: h(t2.escapeStart, "%1 started to escape!"),
-      emerge: h(t2.emerge, "%1 appeared!"),
-      expNext: h(t2.expNext, "Next level in %1 EXP."),
-      expTotal: h(t2.expTotal, "Total EXP: %1"),
-      file: h(t2.file, "File"),
-      buffAdd: h(t2.buffAdd, "%1's %2 was raised."),
-      buffRemove: h(t2.buffRemove, "%1's %2 was lowered."),
-      obtainExp: h(t2.obtainExp, "%1 EXP obtained."),
-      obtainGold: h(t2.obtainGold, "%1 gold obtained."),
-      obtainItem: h(t2.obtainItem, "%1 obtained %2."),
-      obtainSkill: h(t2.obtainSkill, "%1 learned %2."),
-      levelUp: h(t2.levelUp, "%1 leveled up!"),
-      partyName: h(t2.partyName, "Party"),
-      loadMessage: h(t2.loadMessage, "Load %1?"),
-      meVolume: h(t2.meVolume, "ME volume"),
-      possession: h(t2.possession, "Possession"),
-      preemptive: h(t2.preemptive, "%1 attacked first!"),
-      saveMessage: h(t2.saveMessage, "Save %1?"),
-      seVolume: h(t2.seVolume, "SE volume"),
-      magicEvasion: h(t2.magicEvasion, "%1 evaded the magic!"),
-      magicReflection: h(t2.magicReflection, "%1 reflected the magic!"),
-      substitute: h(t2.substitute, "%1 took the hit!"),
-      surprise: h(t2.surprise, "%1 surprised the enemy!"),
-      touchUI: h(t2.touchUI, "Touch UI"),
-      useItem: h(t2.useItem, "%1 used %2."),
-      victory: h(t2.victory, "Victory!")
+      actionFailure: M(t2.actionFailure, "Action failed."),
+      actorDamage: M(t2.actorDamage, "%1 took %2 damage."),
+      actorRecovery: M(t2.actorRecovery, "%1 recovered %2 HP."),
+      actorGain: M(t2.actorGain, "%1 gained %2."),
+      actorLoss: M(t2.actorLoss, "%1 lost %2."),
+      actorDrain: M(t2.actorDrain, "%1 drained %2 HP."),
+      actorNoDamage: M(t2.actorNoDamage, "%1 was not damaged."),
+      actorNoHit: M(t2.actorNoHit, "%1 was not hit."),
+      alwaysDash: M(t2.alwaysDash, "Always dash."),
+      bgmVolume: M(t2.bgmVolume, "BGM volume"),
+      bgsVolume: M(t2.bgsVolume, "BGS volume"),
+      commandRemember: M(t2.commandRemember, "Command remember."),
+      criticalToActor: M(t2.criticalToActor, "%1 dealt %2 damage to %3."),
+      criticalToEnemy: M(t2.criticalToEnemy, "%1 dealt %2 damage to %3."),
+      counterAttack: M(t2.counterAttack, "%1 countered!"),
+      debuffAdd: M(t2.debuffAdd, "%1's %2 was lowered."),
+      defeat: M(t2.defeat, "Defeat."),
+      enemyDamage: M(t2.enemyDamage, "%1 took %2 damage."),
+      enemyDrain: M(t2.enemyDrain, "%1 drained %2 HP."),
+      enemyGain: M(t2.enemyGain, "%1 gained %2."),
+      enemyLoss: M(t2.enemyLoss, "%1 lost %2."),
+      enemyNoDamage: M(t2.enemyNoDamage, "%1 was not damaged."),
+      enemyNoHit: M(t2.enemyNoHit, "%1 was not hit."),
+      enemyRecovery: M(t2.enemyRecovery, "%1 recovered %2 HP."),
+      evasion: M(t2.evasion, "%1 evaded the attack!"),
+      autosave: M(t2.autosave, "Autosave"),
+      escapeFailure: M(t2.escapeFailure, "Escape failed."),
+      escapeStart: M(t2.escapeStart, "%1 started to escape!"),
+      emerge: M(t2.emerge, "%1 appeared!"),
+      expNext: M(t2.expNext, "Next level in %1 EXP."),
+      expTotal: M(t2.expTotal, "Total EXP: %1"),
+      file: M(t2.file, "File"),
+      buffAdd: M(t2.buffAdd, "%1's %2 was raised."),
+      buffRemove: M(t2.buffRemove, "%1's %2 was lowered."),
+      obtainExp: M(t2.obtainExp, "%1 EXP obtained."),
+      obtainGold: M(t2.obtainGold, "%1 gold obtained."),
+      obtainItem: M(t2.obtainItem, "%1 obtained %2."),
+      obtainSkill: M(t2.obtainSkill, "%1 learned %2."),
+      levelUp: M(t2.levelUp, "%1 leveled up!"),
+      partyName: M(t2.partyName, "Party"),
+      loadMessage: M(t2.loadMessage, "Load %1?"),
+      meVolume: M(t2.meVolume, "ME volume"),
+      possession: M(t2.possession, "Possession"),
+      preemptive: M(t2.preemptive, "%1 attacked first!"),
+      saveMessage: M(t2.saveMessage, "Save %1?"),
+      seVolume: M(t2.seVolume, "SE volume"),
+      magicEvasion: M(t2.magicEvasion, "%1 evaded the magic!"),
+      magicReflection: M(t2.magicReflection, "%1 reflected the magic!"),
+      substitute: M(t2.substitute, "%1 took the hit!"),
+      surprise: M(t2.surprise, "%1 surprised the enemy!"),
+      touchUI: M(t2.touchUI, "Touch UI"),
+      useItem: M(t2.useItem, "%1 used %2."),
+      victory: M(t2.victory, "Victory!")
     })
   };
   var t2, a2;
@@ -168,7 +168,7 @@ const L = f.compile({ additionalProperties: false, type: "object", required: ["t
   actorId: 0,
   equips: [],
   level: 1
-}, H = "rmmz", w = (e2) => e2.map((e3) => ({ dataKey: e3, placeHolder: `{${e3}}` })), B = (e2) => ({ dataKey: e2.dataIdKey, placeHolder: `{${e2.dataIdKey}}`, sourceId: {
+}, H = "rmmz", B = (e2) => e2.map((e3) => ({ dataKey: e3, placeHolder: `{${e3}}` })), w = (e2) => ({ dataKey: e2.dataIdKey, placeHolder: `{${e2.dataIdKey}}`, sourceId: {
   author: e2.sourceId.author,
   kind: e2.sourceId.kind,
   module: e2.sourceId.module
@@ -177,9 +177,9 @@ const L = f.compile({ additionalProperties: false, type: "object", required: ["t
   return e2.itemMapper ? [...t2, e2.itemMapper] : [...t2];
 }, V = (e2, t2 = []) => {
   return { itemMappers: [...U(e2), ...t2].map(q), fallbackFormat: { text: z(e2), label: j(e2) }, properties: (a2 = e2.placeHolder ?? {}, {
-    numbers: a2.numbers ? w(a2.numbers) : [],
-    strings: a2.strings ? w(a2.strings) : []
-  }), arrayIndex: e2.arrayIndex ? e2.arrayIndex.map(B) : [] };
+    numbers: a2.numbers ? B(a2.numbers) : [],
+    strings: a2.strings ? B(a2.strings) : []
+  }), arrayIndex: e2.arrayIndex ? e2.arrayIndex.map(w) : [] };
   var a2;
 }, q = (e2) => ({
   placeHolder: `{${e2.placeHolder}}`,
@@ -371,12 +371,12 @@ const L = f.compile({ additionalProperties: false, type: "object", required: ["t
   label: e2.domainName,
   kindId: 23,
   dataSource: { author: "rmmz", module: "trait", kind: "sparams" }
-}), Ce = (e2) => ({ pattern: e2.format, label: e2.domainName, kindId: 31, dataSource: We() }), he = (e2) => ({
+}), Ce = (e2) => ({ pattern: e2.format, label: e2.domainName, kindId: 31, dataSource: We() }), Me = (e2) => ({
   pattern: e2.format,
   label: e2.domainName,
   kindId: 32,
   dataSource: ze()
-}), Me = (e2) => ({ pattern: e2.format, label: e2.domainName, kindId: 33 }), fe = (e2) => ({ pattern: e2.format, label: e2.domainName, kindId: 34 }), Oe = (e2) => ({
+}), he = (e2) => ({ pattern: e2.format, label: e2.domainName, kindId: 33 }), fe = (e2) => ({ pattern: e2.format, label: e2.domainName, kindId: 34 }), Oe = (e2) => ({
   pattern: e2.format,
   label: e2.domainName,
   kindId: 35,
@@ -396,7 +396,7 @@ const L = f.compile({ additionalProperties: false, type: "object", required: ["t
   label: e2.domainName,
   kindId: 53,
   dataSource: $e()
-}), we = (e2) => ({ pattern: e2.format, label: e2.domainName, kindId: 54, dataSource: $e() }), Be = (e2) => ({ pattern: e2.format, label: e2.domainName, kindId: 55, dataSource: $e() }), Ge = (e2) => ({
+}), Be = (e2) => ({ pattern: e2.format, label: e2.domainName, kindId: 54, dataSource: $e() }), we = (e2) => ({ pattern: e2.format, label: e2.domainName, kindId: 55, dataSource: $e() }), Ge = (e2) => ({
   pattern: e2.format,
   label: e2.domainName,
   kindId: 61
@@ -718,11 +718,11 @@ const L = f.compile({ additionalProperties: false, type: "object", required: ["t
   author: "rmmz",
   module: "trait",
   kind: "params"
-}), bt = (e2) => xt(42, e2.grow, { author: "rmmz", module: "trait", kind: "params" }), Ct = (e2) => xt(43, e2.learnSkill, { author: "rmmz", module: "data", kind: "skill" }), ht = (e2) => xt(44, e2.commonEvent, {
+}), bt = (e2) => xt(42, e2.grow, { author: "rmmz", module: "trait", kind: "params" }), Ct = (e2) => xt(43, e2.learnSkill, { author: "rmmz", module: "data", kind: "skill" }), Mt = (e2) => xt(44, e2.commonEvent, {
   author: H,
   module: Xt,
   kind: Qt
-}), Mt = {
+}), ht = {
   actor: { domainName: "アクター", options: {
     initialEquipments: "初期装備",
     faceImage: "顔画像",
@@ -767,7 +767,7 @@ const L = f.compile({ additionalProperties: false, type: "object", required: ["t
   } },
   weapon: { domainName: "武器", options: { weaponTypeId: "武器タイプID" } },
   usableItem: { domainName: "", options: { scope: "範囲", speed: "速度補正", successRate: "成功率" } }
-}, ft = new e(), Ot = ft.compile(mt), Lt = ft.compile(nt), kt = ft.compile(Ze), Pt = ft.compile(Je), vt = ft.compile(ot), Dt = ft.compile(pt), Ft = ft.compile(tt), Ht = ft.compile(et), wt = (e2 = {}) => ({
+}, ft = new e(), Ot = ft.compile(mt), Lt = ft.compile(nt), kt = ft.compile(Ze), Pt = ft.compile(Je), vt = ft.compile(ot), Dt = ft.compile(pt), Ft = ft.compile(tt), Ht = ft.compile(et), Bt = (e2 = {}) => ({
   switch1Id: e2.switch1Id ?? 0,
   switch1Valid: void 0 !== e2.switch1Id,
   switch2Id: e2.switch2Id ?? 0,
@@ -781,7 +781,7 @@ const L = f.compile({ additionalProperties: false, type: "object", required: ["t
   itemValid: void 0 !== e2.itemId,
   actorId: e2.actorId ?? 0,
   actorValid: void 0 !== e2.actorId
-}), Bt = () => ({ characterIndex: 0, characterName: "", direction: 2, pattern: 0, tileId: 0 }), Gt = {
+}), wt = () => ({ characterIndex: 0, characterName: "", direction: 2, pattern: 0, tileId: 0 }), Gt = {
   type: "object",
   required: ["name", "id", "expanded", "order", "parentId", "scrollX", "scrollY"],
   properties: { name: { type: "string" }, id: { type: "integer", minimum: 0 }, expanded: { type: "boolean" }, order: {
@@ -862,108 +862,91 @@ const L = f.compile({ additionalProperties: false, type: "object", required: ["t
       } } }
     } } }
   }
-}, Vt = new e(), qt = Vt.compile(Gt), zt = Vt.compile(Ut), jt = (e2, t2) => `<${e2}:${t2}>`, Wt = () => /<([^<>:]+):([^>]*)>/g, Yt = (e2, t2) => {
-  if (e2.length >= 1e3) throw new Error("Note text is too long. Please shorten it.");
-  const a2 = /<([^<>:]+):([^>]*)>/g;
+}, Vt = new e(), qt = Vt.compile(Gt), zt = Vt.compile(Ut), jt = (e2, t2) => `<${e2}:${t2}>`, Wt = () => /<([^<>:]{1,100}):([^>]{1,1000})>/g, Yt = (e2, t2) => {
+  const a2 = /<([^<>:]{1,100}):([^>]{1,1000})>/g;
   return Array.from(e2.matchAll(a2), (e3) => t2(e3[1], e3[2]));
-}, Kt = (e2, t2) => `\\${e2}[${t2}]`, Xt = "data", $t = "item", Qt = "common_event", Zt = (e2, t2) => ({ label: t2.skill.domainName, items: e2, source: { author: "rmmz", module: "data", kind: "skill" } }), Jt = (e2, t2) => ({
-  items: e2,
-  label: t2.actor.domainName,
-  source: { author: "rmmz", module: "data", kind: "actor" }
-}), ea = (e2, t2) => ({
+}, Kt = (e2, t2) => `\\${e2}[${t2}]`, Xt = "data", $t = "item", Qt = "common_event", Zt = (e2, t2) => ({ label: t2.skill.domainName, items: e2, source: {
+  author: "rmmz",
+  module: "data",
+  kind: "skill"
+} }), Jt = (e2, t2) => ({ items: e2, label: t2.actor.domainName, source: { author: "rmmz", module: "data", kind: "actor" } }), ea = (e2, t2) => ({
   items: e2,
   label: t2.state.domainName,
   source: { author: "rmmz", module: "data", kind: "state" }
-}), ta = (e2, t2) => ({ items: e2, label: t2.armor.domainName, source: { author: "rmmz", kind: "armor", module: "data" } }), aa = (e2, t2) => ({ items: e2, label: t2.class.domainName, source: {
+}), ta = (e2, t2) => ({
+  items: e2,
+  label: t2.armor.domainName,
+  source: { author: "rmmz", kind: "armor", module: "data" }
+}), aa = (e2, t2) => ({ items: e2, label: t2.class.domainName, source: { author: "rmmz", module: "data", kind: "class" } }), ra = (e2, t2) => ({ items: e2, label: t2.enemy.domainName, source: {
   author: "rmmz",
   module: "data",
-  kind: "class"
-} }), ra = (e2, t2) => ({ items: e2, label: t2.enemy.domainName, source: { author: "rmmz", module: "data", kind: "enemy" } }), oa = (e2, t2) => ({ items: e2, label: t2.item.domainName, source: {
+  kind: "enemy"
+} }), oa = (e2, t2) => ({ items: e2, label: t2.item.domainName, source: { author: "rmmz", module: "data", kind: "item" } }), ia = (e2, t2) => ({ items: e2, label: t2.weapon.domainName, source: {
   author: "rmmz",
   module: "data",
-  kind: "item"
-} }), ia = (e2, t2) => ({ items: e2, label: t2.weapon.domainName, source: { author: "rmmz", module: "data", kind: "weapon" } }), pa = new e(), sa = pa.compile({
+  kind: "weapon"
+} }), pa = new e(), sa = pa.compile({ type: "object", required: ["code", "parameters", "indent"], properties: {
+  code: { type: "integer", enum: [320, 324, 325] },
+  indent: { type: "integer" },
+  parameters: { type: "array", minItems: 2, maxItems: 2, items: [{ type: "integer", minimum: 0 }, { type: "string" }] }
+}, additionalProperties: false }), na = pa.compile({
+  type: "object",
+  properties: { code: { type: "number", const: 105 }, indent: { type: "integer", minimum: 0 }, parameters: { type: "array", minItems: 2, maxItems: 2, items: [{ type: "number" }, { type: "boolean" }] } },
+  required: ["code", "indent", "parameters"]
+}), ma = pa.compile({ type: "object", required: ["code", "parameters", "indent"], properties: {
+  code: { type: "integer", enum: [132, 133, 139, 241, 245, 249, 250] },
+  indent: { type: "integer" },
+  parameters: { type: "array", minItems: 1, maxItems: 1, items: [{ type: "object", properties: { name: { type: "string" }, volume: { type: "integer" }, pitch: { type: "integer" }, pan: {
+    type: "integer"
+  } }, required: ["name", "volume", "pitch", "pan"], additionalProperties: false }] }
+}, additionalProperties: false }), da = (e2) => ma(e2), la = pa.compile({
   type: "object",
   required: ["code", "parameters", "indent"],
-  properties: { code: { type: "integer", enum: [320, 324, 325] }, indent: { type: "integer" }, parameters: { type: "array", minItems: 2, maxItems: 2, items: [{
+  properties: { indent: { type: "integer", minimum: 0 }, parameters: { type: "array", minItems: 0, maxItems: 0 }, code: {
     type: "integer",
-    minimum: 0
-  }, { type: "string" }] } },
+    enum: [0, 109, 112, 113, 115, 204, 206, 213, 214, 216, 217, 221, 222, 243, 244, 251, 314, 315, 340, 351, 352, 353, 354, 411]
+  } },
   additionalProperties: false
-}), na = pa.compile({ type: "object", properties: {
-  code: { type: "number", const: 105 },
-  indent: { type: "integer", minimum: 0 },
-  parameters: { type: "array", minItems: 2, maxItems: 2, items: [{ type: "number" }, { type: "boolean" }] }
-}, required: ["code", "indent", "parameters"] }), ma = pa.compile({
+}), ca = pa.compile({
   type: "object",
   required: ["code", "parameters", "indent"],
-  properties: { code: { type: "integer", enum: [132, 133, 139, 241, 245, 249, 250] }, indent: { type: "integer" }, parameters: {
+  properties: { code: { type: "integer", enum: [108, 355, 401, 405, 408, 655] }, indent: { type: "integer", minimum: 0 }, parameters: {
     type: "array",
     minItems: 1,
     maxItems: 1,
-    items: [{
-      type: "object",
-      properties: { name: { type: "string" }, volume: { type: "integer" }, pitch: { type: "integer" }, pan: { type: "integer" } },
-      required: ["name", "volume", "pitch", "pan"],
-      additionalProperties: false
-    }]
+    items: [{ type: "string" }]
   } },
   additionalProperties: false
-}), da = (e2) => ma(e2), la = pa.compile({
-  type: "object",
-  required: ["code", "parameters", "indent"],
-  properties: { indent: {
-    type: "integer",
-    minimum: 0
-  }, parameters: { type: "array", minItems: 0, maxItems: 0 }, code: { type: "integer", enum: [0, 109, 112, 113, 115, 204, 206, 213, 214, 216, 217, 221, 222, 243, 244, 251, 314, 315, 340, 351, 352, 353, 354, 411] } },
-  additionalProperties: false
-}), ca = pa.compile({ type: "object", required: ["code", "parameters", "indent"], properties: { code: { type: "integer", enum: [108, 355, 401, 405, 408, 655] }, indent: {
+}), ya = (e2) => ca(e2), ua = pa.compile({ type: "object", properties: { code: { type: "number", const: 117 }, indent: {
   type: "integer",
   minimum: 0
-}, parameters: { type: "array", minItems: 1, maxItems: 1, items: [{ type: "string" }] } }, additionalProperties: false }), ya = (e2) => ca(e2), ua = pa.compile({
-  type: "object",
-  properties: {
-    code: { type: "number", const: 117 },
-    indent: { type: "integer", minimum: 0 },
-    parameters: { type: "array", minItems: 1, maxItems: 1, items: [{ type: "number", minimum: 0, default: 0 }] }
-  },
-  required: ["code", "indent", "parameters"]
-}), xa = pa.compile({
-  type: "object",
-  properties: { code: { type: "number", const: 102 }, indent: { type: "integer", minimum: 0 }, parameters: {
-    type: "array",
-    minItems: 5,
-    maxItems: 5,
-    items: [{ type: "array", items: { type: "string" } }, { type: "integer" }, { type: "integer" }, { type: "integer" }, { type: "integer" }]
-  } },
-  required: ["code", "indent", "parameters"]
-}), Ea = pa.compile({ type: "object", properties: { code: { type: "number", const: 402 }, indent: { type: "integer", minimum: 0 }, parameters: { type: "array", minItems: 2, maxItems: 2, items: [{
-  type: "integer"
-}, { type: "string" }] } }, required: ["code", "indent", "parameters"] }), ga = pa.compile({ type: "object", properties: {
-  code: { type: "number", const: 103 },
+}, parameters: { type: "array", minItems: 1, maxItems: 1, items: [{ type: "number", minimum: 0, default: 0 }] } }, required: ["code", "indent", "parameters"] }), xa = pa.compile({ type: "object", properties: {
+  code: { type: "number", const: 102 },
   indent: { type: "integer", minimum: 0 },
-  parameters: { type: "array", minItems: 2, maxItems: 2, items: [{ type: "number" }, { type: "number" }] }
-}, required: ["code", "indent", "parameters"] }), Aa = pa.compile({
+  parameters: { type: "array", minItems: 5, maxItems: 5, items: [{ type: "array", items: { type: "string" } }, { type: "integer" }, {
+    type: "integer"
+  }, { type: "integer" }, { type: "integer" }] }
+}, required: ["code", "indent", "parameters"] }), Ea = pa.compile({ type: "object", properties: { code: { type: "number", const: 402 }, indent: {
+  type: "integer",
+  minimum: 0
+}, parameters: { type: "array", minItems: 2, maxItems: 2, items: [{ type: "integer" }, { type: "string" }] } }, required: ["code", "indent", "parameters"] }), ga = pa.compile({
   type: "object",
-  required: ["code", "parameters", "indent"],
-  properties: { code: { type: "integer", const: 101 }, indent: { type: "integer", minimum: 0 }, parameters: { type: "array", items: [{ type: "string" }, {
-    type: "integer",
-    minimum: 0,
-    maximum: 7
-  }, { type: "integer", minimum: 0, maximum: 2 }, { type: "integer", minimum: 0, maximum: 2 }, { type: "string" }], minItems: 5, maxItems: 5 } }
-}), Ta = (e2, t2, a2 = 0) => ({
-  code: e2,
-  parameters: [o(t2)],
-  indent: a2
-}), Ia = (e2) => [e2], _a = (e2, t2 = 0) => ({ code: 108, indent: t2, parameters: Ia(e2) }), Ra = (e2, t2 = 0) => ({
+  properties: { code: { type: "number", const: 103 }, indent: { type: "integer", minimum: 0 }, parameters: { type: "array", minItems: 2, maxItems: 2, items: [{ type: "number" }, { type: "number" }] } },
+  required: ["code", "indent", "parameters"]
+}), Aa = pa.compile({ type: "object", required: ["code", "parameters", "indent"], properties: { code: { type: "integer", const: 101 }, indent: {
+  type: "integer",
+  minimum: 0
+}, parameters: { type: "array", items: [{ type: "string" }, { type: "integer", minimum: 0, maximum: 7 }, { type: "integer", minimum: 0, maximum: 2 }, { type: "integer", minimum: 0, maximum: 2 }, {
+  type: "string"
+}], minItems: 5, maxItems: 5 } } }), Ta = (e2, t2, a2 = 0) => ({ code: e2, parameters: [o(t2)], indent: a2 }), Ia = (e2) => [e2], _a = (e2, t2 = 0) => ({ code: 108, indent: t2, parameters: Ia(e2) }), Ra = (e2, t2 = 0) => ({
   code: 408,
   indent: t2,
   parameters: Ia(e2)
-}), Sa = (e2) => [e2.variableId ?? 0, e2.digits ?? 0], Na = (e2 = {}) => [(e2 == null ? void 0 : e2.speed) ?? 4, (e2 == null ? void 0 : e2.skip) ?? false], ba = (e2 = "") => [e2], Ca = (e2, t2 = 0) => ({ code: 355, indent: t2, parameters: [e2] }), ha = (e2, t2 = 0) => ({
+}), Sa = (e2) => [e2.variableId ?? 0, e2.digits ?? 0], Na = (e2 = {}) => [(e2 == null ? void 0 : e2.speed) ?? 4, (e2 == null ? void 0 : e2.skip) ?? false], ba = (e2 = "") => [e2], Ca = (e2, t2 = 0) => ({ code: 355, indent: t2, parameters: [e2] }), Ma = (e2, t2 = 0) => ({
   code: 655,
   indent: t2,
   parameters: [e2]
-}), Ma = {
+}), ha = {
   HP: 0,
   MP: 1,
   MHP: 2,
@@ -1003,7 +986,7 @@ exports.ABORT_BATTLE = 340, exports.AUTHOR_RMMZ = H, exports.BATTLE_PROCESSING =
   armorTypes: "防具タイプ",
   switches: "スイッチ",
   variables: "変数"
-} }, exports.DEFAULT_USABLE_ITEM_LABELS = { domainName: "", options: { scope: "範囲", speed: "速度補正", successRate: "成功率" } }, exports.EFFECT_ADD_BUFF = 31, exports.EFFECT_ADD_DEBUFF = 32, exports.EFFECT_ADD_STATE = 21, exports.EFFECT_COMMON_EVENT = 44, exports.EFFECT_GAIN_TP = 13, exports.EFFECT_GROW = 42, exports.EFFECT_LEARN_SKILL = 43, exports.EFFECT_RECOVER_HP = 11, exports.EFFECT_RECOVER_MP = 12, exports.EFFECT_REMOVE_BUFF = 33, exports.EFFECT_REMOVE_DEBUFF = 34, exports.EFFECT_REMOVE_STATE = 22, exports.EFFECT_SPECIAL = 41, exports.ENEMY_APPEAR = 335, exports.ENEMY_RECOVER_ALL = 334, exports.ENEMY_TRANSFORM = 336, exports.ERASE_EVENT = 214, exports.ERASE_PICTURE = 235, exports.EXIT_EVENT_PROCESSING = 115, exports.EXTRA_PARAM_CEV = 3, exports.EXTRA_PARAM_CNT = 6, exports.EXTRA_PARAM_CRI = 2, exports.EXTRA_PARAM_EVA = 1, exports.EXTRA_PARAM_HIT = 0, exports.EXTRA_PARAM_HRG = 7, exports.EXTRA_PARAM_MEV = 4, exports.EXTRA_PARAM_MRF = 5, exports.EXTRA_PARAM_MRG = 8, exports.EXTRA_PARAM_TRG = 9, exports.FADEIN_SCREEN = 222, exports.FADEOUT_BGM = 242, exports.FADEOUT_BGS = 246, exports.FADEOUT_SCREEN = 221, exports.FILENAME_ACTORS = "Actors.json", exports.FILENAME_ANIMATIONS = "Animations.json", exports.FILENAME_ARMORS = "Armors.json", exports.FILENAME_CLASSES = "Classes.json", exports.FILENAME_COMMON_EVENTS = "CommonEvents.json", exports.FILENAME_ENEMIES = "Enemies.json", exports.FILENAME_ITEMS = "Items.json", exports.FILENAME_MAP_INFOS = "MapInfos.json", exports.FILENAME_SKILLS = "Skills.json", exports.FILENAME_STATES = "States.json", exports.FILENAME_SYSTEM = "System.json", exports.FILENAME_TILESET = "Tilesets.json", exports.FILENAME_TROOPS = "Troops.json", exports.FILENAME_WEAPONS = "Weapons.json", exports.FLAG_ID_AUTO_BATTLE = 0, exports.FLAG_ID_GUARD = 1, exports.FLAG_ID_PRESERVE_TP = 3, exports.FLAG_ID_SUBSTITUTE = 2, exports.FLASH_SCREEN = 224, exports.FOLDER_AUDIO = "audio", exports.FOLDER_AUDIO_BGM = "bgm", exports.FOLDER_AUDIO_BGS = "bgs", exports.FOLDER_AUDIO_ME = "me", exports.FOLDER_AUDIO_SE = "se", exports.FOLDER_DATA = "data", exports.FOLDER_IMG = "img", exports.FOLDER_IMG_BATTLEBACK1 = "battlebacks1", exports.FOLDER_IMG_BATTLEBACK2 = "battlebacks2", exports.FOLDER_IMG_CHACTERS = "characters", exports.FOLDER_IMG_ENEMIES = "enemies", exports.FOLDER_IMG_FACES = "faces", exports.FOLDER_IMG_PARALLACES = "parallaxes", exports.FOLDER_IMG_PICTURES = "pictures", exports.FOLDER_IMG_SV_ACTORS = "sv_actors", exports.FOLDER_IMG_SV_ENEMIES = "sv_enemies", exports.FOLDER_IMG_SYSTEM = "system", exports.FOLDER_IMG_TILESETS = "tilesets", exports.FOLDER_IMG_TITLES1 = "titles1", exports.FOLDER_IMG_TITLES2 = "titles2", exports.FOLDER_JS = "js", exports.FORCE_ACTION = 339, exports.GAME_OVER = 353, exports.GATHER_FOLLOWERS = 217, exports.GET_LOCATION_INFO = 285, exports.GET_ONOFF_VEHICLE = 206, exports.HITTYPE_CERTAIN = 0, exports.HITTYPE_MAGICAL = 2, exports.HITTYPE_PHYSICAL = 1, exports.INPUT_NUMBER = 103, exports.LABEL = 118, exports.LABELS_DATA_WEAPON = { domainName: "武器", options: { weaponTypeId: "武器タイプID" } }, exports.LABEL_JUMP = 119, exports.LABEL_SET_DATA = Mt, exports.LABEL_SET_ITEM_EFFECT = ut, exports.LABEL_SET_TRAIT = Ae, exports.LOOP = 112, exports.LOOP_BREAK = 113, exports.MODULE_DATA = Xt, exports.MOVE_PICTURE = 232, exports.NAME_INPUT_PROCESSING = 303, exports.NO_OPERATION = 0, exports.OPEN_MENU_SCREEN = 351, exports.OPEN_SAVE_SCREEN = 352, exports.OPERAND_CONSTANT = 0, exports.OPERAND_GAMEDATA = 3, exports.OPERAND_RANDOM = 2, exports.OPERAND_SCRIPT = 4, exports.OPERAND_VARIABLE = 1, exports.PARTY_ABILITY_CANCEL_SURPRISE = 2, exports.PARTY_ABILITY_DROP_ITEM_DOUBLE = 5, exports.PARTY_ABILITY_ENCOUNTER_HALF = 0, exports.PARTY_ABILITY_ENCOUNTER_NONE = 1, exports.PARTY_ABILITY_GOLD_DOUBLE = 4, exports.PARTY_ABILITY_RAISE_PREEMPTIVE = 3, exports.PLAY_BGM = 241, exports.PLAY_BGS = 245, exports.PLAY_ME = 249, exports.PLAY_MOVIE = 261, exports.PLAY_SE = 250, exports.PLUGIN_COMMAND_MV = 356, exports.PLUGIN_COMMAND_MZ = 357, exports.RECOVER_ALL = 314, exports.REGULAR_PARAM_AGI = 6, exports.REGULAR_PARAM_ATK = 2, exports.REGULAR_PARAM_DEF = 3, exports.REGULAR_PARAM_LUK = 7, exports.REGULAR_PARAM_MATK = 4, exports.REGULAR_PARAM_MAX_HP = 0, exports.REGULAR_PARAM_MAX_MP = 1, exports.REGULAR_PARAM_MDEF = 5, exports.RESUME_BGM = 244, exports.RETURN_TO_TITLE_SCREEN = 354, exports.ROTATE_PICTURE = 233, exports.ROUTE_CHANGE_BLEND_MODE = 43, exports.ROUTE_CHANGE_FREQ = 30, exports.ROUTE_CHANGE_IMAGE = 41, exports.ROUTE_CHANGE_OPACITY = 42, exports.ROUTE_CHANGE_SPEED = 29, exports.ROUTE_DIR_FIX_OFF = 36, exports.ROUTE_DIR_FIX_ON = 35, exports.ROUTE_END = 0, exports.ROUTE_JUMP = 14, exports.ROUTE_MOVE_AWAY = 11, exports.ROUTE_MOVE_BACKWARD = 13, exports.ROUTE_MOVE_DOWN = 1, exports.ROUTE_MOVE_FORWARD = 12, exports.ROUTE_MOVE_LEFT = 2, exports.ROUTE_MOVE_LOWER_L = 5, exports.ROUTE_MOVE_LOWER_R = 6, exports.ROUTE_MOVE_RANDOM = 9, exports.ROUTE_MOVE_RIGHT = 3, exports.ROUTE_MOVE_TOWARD = 10, exports.ROUTE_MOVE_UP = 4, exports.ROUTE_MOVE_UPPER_L = 7, exports.ROUTE_MOVE_UPPER_R = 8, exports.ROUTE_PLAY_SE = 44, exports.ROUTE_SCRIPT = 45, exports.ROUTE_STEP_ANIME_OFF = 34, exports.ROUTE_STEP_ANIME_ON = 33, exports.ROUTE_SWITCH_OFF = 28, exports.ROUTE_SWITCH_ON = 27, exports.ROUTE_THROUGH_OFF = 38, exports.ROUTE_THROUGH_ON = 37, exports.ROUTE_TRANSPARENT_OFF = 40, exports.ROUTE_TRANSPARENT_ON = 39, exports.ROUTE_TURN_180D = 22, exports.ROUTE_TURN_90D_L = 21, exports.ROUTE_TURN_90D_R = 20, exports.ROUTE_TURN_90D_R_L = 23, exports.ROUTE_TURN_AWAY = 26, exports.ROUTE_TURN_DOWN = 16, exports.ROUTE_TURN_LEFT = 17, exports.ROUTE_TURN_RANDOM = 24, exports.ROUTE_TURN_RIGHT = 18, exports.ROUTE_TURN_TOWARD = 25, exports.ROUTE_TURN_UP = 19, exports.ROUTE_WAIT = 15, exports.ROUTE_WALK_ANIME_OFF = 32, exports.ROUTE_WALK_ANIME_ON = 31, exports.SAVE_BGM = 243, exports.SCHEMA_DAMAGE = { type: "object", required: ["type", "elementId", "formula", "variance", "critical"], properties: { type: { type: "integer", minimum: 0 }, elementId: {
+} }, exports.DEFAULT_USABLE_ITEM_LABELS = { domainName: "", options: { scope: "範囲", speed: "速度補正", successRate: "成功率" } }, exports.EFFECT_ADD_BUFF = 31, exports.EFFECT_ADD_DEBUFF = 32, exports.EFFECT_ADD_STATE = 21, exports.EFFECT_COMMON_EVENT = 44, exports.EFFECT_GAIN_TP = 13, exports.EFFECT_GROW = 42, exports.EFFECT_LEARN_SKILL = 43, exports.EFFECT_RECOVER_HP = 11, exports.EFFECT_RECOVER_MP = 12, exports.EFFECT_REMOVE_BUFF = 33, exports.EFFECT_REMOVE_DEBUFF = 34, exports.EFFECT_REMOVE_STATE = 22, exports.EFFECT_SPECIAL = 41, exports.ENEMY_APPEAR = 335, exports.ENEMY_RECOVER_ALL = 334, exports.ENEMY_TRANSFORM = 336, exports.ERASE_EVENT = 214, exports.ERASE_PICTURE = 235, exports.EXIT_EVENT_PROCESSING = 115, exports.EXTRA_PARAM_CEV = 3, exports.EXTRA_PARAM_CNT = 6, exports.EXTRA_PARAM_CRI = 2, exports.EXTRA_PARAM_EVA = 1, exports.EXTRA_PARAM_HIT = 0, exports.EXTRA_PARAM_HRG = 7, exports.EXTRA_PARAM_MEV = 4, exports.EXTRA_PARAM_MRF = 5, exports.EXTRA_PARAM_MRG = 8, exports.EXTRA_PARAM_TRG = 9, exports.FADEIN_SCREEN = 222, exports.FADEOUT_BGM = 242, exports.FADEOUT_BGS = 246, exports.FADEOUT_SCREEN = 221, exports.FILENAME_ACTORS = "Actors.json", exports.FILENAME_ANIMATIONS = "Animations.json", exports.FILENAME_ARMORS = "Armors.json", exports.FILENAME_CLASSES = "Classes.json", exports.FILENAME_COMMON_EVENTS = "CommonEvents.json", exports.FILENAME_ENEMIES = "Enemies.json", exports.FILENAME_ITEMS = "Items.json", exports.FILENAME_MAP_INFOS = "MapInfos.json", exports.FILENAME_SKILLS = "Skills.json", exports.FILENAME_STATES = "States.json", exports.FILENAME_SYSTEM = "System.json", exports.FILENAME_TILESET = "Tilesets.json", exports.FILENAME_TROOPS = "Troops.json", exports.FILENAME_WEAPONS = "Weapons.json", exports.FLAG_ID_AUTO_BATTLE = 0, exports.FLAG_ID_GUARD = 1, exports.FLAG_ID_PRESERVE_TP = 3, exports.FLAG_ID_SUBSTITUTE = 2, exports.FLASH_SCREEN = 224, exports.FOLDER_AUDIO = "audio", exports.FOLDER_AUDIO_BGM = "bgm", exports.FOLDER_AUDIO_BGS = "bgs", exports.FOLDER_AUDIO_ME = "me", exports.FOLDER_AUDIO_SE = "se", exports.FOLDER_DATA = "data", exports.FOLDER_IMG = "img", exports.FOLDER_IMG_BATTLEBACK1 = "battlebacks1", exports.FOLDER_IMG_BATTLEBACK2 = "battlebacks2", exports.FOLDER_IMG_CHACTERS = "characters", exports.FOLDER_IMG_ENEMIES = "enemies", exports.FOLDER_IMG_FACES = "faces", exports.FOLDER_IMG_PARALLACES = "parallaxes", exports.FOLDER_IMG_PICTURES = "pictures", exports.FOLDER_IMG_SV_ACTORS = "sv_actors", exports.FOLDER_IMG_SV_ENEMIES = "sv_enemies", exports.FOLDER_IMG_SYSTEM = "system", exports.FOLDER_IMG_TILESETS = "tilesets", exports.FOLDER_IMG_TITLES1 = "titles1", exports.FOLDER_IMG_TITLES2 = "titles2", exports.FOLDER_JS = "js", exports.FORCE_ACTION = 339, exports.GAME_OVER = 353, exports.GATHER_FOLLOWERS = 217, exports.GET_LOCATION_INFO = 285, exports.GET_ONOFF_VEHICLE = 206, exports.HITTYPE_CERTAIN = 0, exports.HITTYPE_MAGICAL = 2, exports.HITTYPE_PHYSICAL = 1, exports.INPUT_NUMBER = 103, exports.LABEL = 118, exports.LABELS_DATA_WEAPON = { domainName: "武器", options: { weaponTypeId: "武器タイプID" } }, exports.LABEL_JUMP = 119, exports.LABEL_SET_DATA = ht, exports.LABEL_SET_ITEM_EFFECT = ut, exports.LABEL_SET_TRAIT = Ae, exports.LOOP = 112, exports.LOOP_BREAK = 113, exports.MODULE_DATA = Xt, exports.MOVE_PICTURE = 232, exports.NAME_INPUT_PROCESSING = 303, exports.NO_OPERATION = 0, exports.OPEN_MENU_SCREEN = 351, exports.OPEN_SAVE_SCREEN = 352, exports.OPERAND_CONSTANT = 0, exports.OPERAND_GAMEDATA = 3, exports.OPERAND_RANDOM = 2, exports.OPERAND_SCRIPT = 4, exports.OPERAND_VARIABLE = 1, exports.PARTY_ABILITY_CANCEL_SURPRISE = 2, exports.PARTY_ABILITY_DROP_ITEM_DOUBLE = 5, exports.PARTY_ABILITY_ENCOUNTER_HALF = 0, exports.PARTY_ABILITY_ENCOUNTER_NONE = 1, exports.PARTY_ABILITY_GOLD_DOUBLE = 4, exports.PARTY_ABILITY_RAISE_PREEMPTIVE = 3, exports.PLAY_BGM = 241, exports.PLAY_BGS = 245, exports.PLAY_ME = 249, exports.PLAY_MOVIE = 261, exports.PLAY_SE = 250, exports.PLUGIN_COMMAND_MV = 356, exports.PLUGIN_COMMAND_MZ = 357, exports.RECOVER_ALL = 314, exports.REGULAR_PARAM_AGI = 6, exports.REGULAR_PARAM_ATK = 2, exports.REGULAR_PARAM_DEF = 3, exports.REGULAR_PARAM_LUK = 7, exports.REGULAR_PARAM_MATK = 4, exports.REGULAR_PARAM_MAX_HP = 0, exports.REGULAR_PARAM_MAX_MP = 1, exports.REGULAR_PARAM_MDEF = 5, exports.RESUME_BGM = 244, exports.RETURN_TO_TITLE_SCREEN = 354, exports.ROTATE_PICTURE = 233, exports.ROUTE_CHANGE_BLEND_MODE = 43, exports.ROUTE_CHANGE_FREQ = 30, exports.ROUTE_CHANGE_IMAGE = 41, exports.ROUTE_CHANGE_OPACITY = 42, exports.ROUTE_CHANGE_SPEED = 29, exports.ROUTE_DIR_FIX_OFF = 36, exports.ROUTE_DIR_FIX_ON = 35, exports.ROUTE_END = 0, exports.ROUTE_JUMP = 14, exports.ROUTE_MOVE_AWAY = 11, exports.ROUTE_MOVE_BACKWARD = 13, exports.ROUTE_MOVE_DOWN = 1, exports.ROUTE_MOVE_FORWARD = 12, exports.ROUTE_MOVE_LEFT = 2, exports.ROUTE_MOVE_LOWER_L = 5, exports.ROUTE_MOVE_LOWER_R = 6, exports.ROUTE_MOVE_RANDOM = 9, exports.ROUTE_MOVE_RIGHT = 3, exports.ROUTE_MOVE_TOWARD = 10, exports.ROUTE_MOVE_UP = 4, exports.ROUTE_MOVE_UPPER_L = 7, exports.ROUTE_MOVE_UPPER_R = 8, exports.ROUTE_PLAY_SE = 44, exports.ROUTE_SCRIPT = 45, exports.ROUTE_STEP_ANIME_OFF = 34, exports.ROUTE_STEP_ANIME_ON = 33, exports.ROUTE_SWITCH_OFF = 28, exports.ROUTE_SWITCH_ON = 27, exports.ROUTE_THROUGH_OFF = 38, exports.ROUTE_THROUGH_ON = 37, exports.ROUTE_TRANSPARENT_OFF = 40, exports.ROUTE_TRANSPARENT_ON = 39, exports.ROUTE_TURN_180D = 22, exports.ROUTE_TURN_90D_L = 21, exports.ROUTE_TURN_90D_R = 20, exports.ROUTE_TURN_90D_R_L = 23, exports.ROUTE_TURN_AWAY = 26, exports.ROUTE_TURN_DOWN = 16, exports.ROUTE_TURN_LEFT = 17, exports.ROUTE_TURN_RANDOM = 24, exports.ROUTE_TURN_RIGHT = 18, exports.ROUTE_TURN_TOWARD = 25, exports.ROUTE_TURN_UP = 19, exports.ROUTE_WAIT = 15, exports.ROUTE_WALK_ANIME_OFF = 32, exports.ROUTE_WALK_ANIME_ON = 31, exports.SAVE_BGM = 243, exports.SCHEMA_DAMAGE = { type: "object", required: ["type", "elementId", "formula", "variance", "critical"], properties: { type: { type: "integer", minimum: 0 }, elementId: {
   type: "integer",
   minimum: 0
 }, formula: { type: "string" }, variance: { type: "integer" }, critical: { type: "boolean" } } }, exports.SCHEMA_DATA_ACTOR = Ze, exports.SCHEMA_DATA_ARMMOR = Je, exports.SCHEMA_DATA_CLASS = et, exports.SCHEMA_DATA_ENEMY = pt, exports.SCHEMA_DATA_ITEM = mt, exports.SCHEMA_DATA_MAP_INFO = Gt, exports.SCHEMA_DATA_SKILL = nt, exports.SCHEMA_DATA_STATE = tt, exports.SCHEMA_DATA_WEAPON = ot, exports.SCHEMA_TRAIT = { type: "object", required: ["code", "dataId", "value"], properties: { code: { type: "integer" }, dataId: { type: "integer" }, value: {
@@ -1083,9 +1066,9 @@ exports.ABORT_BATTLE = 340, exports.AUTHOR_RMMZ = H, exports.BATTLE_PROCESSING =
   }
   return t2[6] >= 2 && t2[6] <= 9 ? e2.param(t2[6] - 2) : 0;
 }, exports.getNoteValue = (e2, t2) => {
-  const a2 = /<([^<>:]+):([^>]*)>/g, r2 = Array.from(e2.matchAll(a2)).find((e3) => e3[1] === t2);
+  const a2 = /<([^<>:]{1,100}):([^>]{1,1000})>/g, r2 = Array.from(e2.matchAll(a2)).find((e3) => e3[1] === t2);
   return r2 ? r2[2] : void 0;
-}, exports.isCloneableCommand = (e2) => e2.parameters.every(ka), exports.isCommandAudio = da, exports.isCommandChangeActorText = (e2) => sa(e2), exports.isCommandChangeBattleBgm = (e2) => da(e2) && 132 === e2.code, exports.isCommandChangeDefeatMe = (e2) => da(e2) && 139 === e2.code, exports.isCommandChangeVictoryMe = (e2) => da(e2) && 133 === e2.code, exports.isCommandCommentBody = (e2) => ya(e2) && 408 === e2.code, exports.isCommandCommentHeader = (e2) => ya(e2) && 108 === e2.code, exports.isCommandCommonEvent = (e2) => ua(e2), exports.isCommandInputNumber = (e2) => ga(e2), exports.isCommandNonParam = (e2) => la(e2), exports.isCommandPlayBgm = (e2) => da(e2) && 241 === e2.code, exports.isCommandPlayBgs = (e2) => da(e2) && 245 === e2.code, exports.isCommandPlayMe = (e2) => da(e2) && 249 === e2.code, exports.isCommandPlaySe = (e2) => da(e2) && 250 === e2.code, exports.isCommandScriptBody = (e2) => ya(e2) && 655 === e2.code, exports.isCommandScriptHeader = (e2) => ya(e2) && 355 === e2.code, exports.isCommandScrollTextHead = (e2) => na(e2), exports.isCommandShowChoiceItem = (e2) => Ea(e2), exports.isCommandShowChoices = (e2) => xa(e2), exports.isCommandShowMessage = (e2) => Aa(e2), exports.isCommandShowMessageBody = (e2) => ya(e2) && 401 === e2.code, exports.isCommandShowScrollingTextBody = (e2) => ya(e2) && 405 === e2.code, exports.isCommandTextBody = ya, exports.isDataActor = (e2) => kt(e2), exports.isDataArmor = (e2) => Pt(e2), exports.isDataClass = (e2) => Ht(e2), exports.isDataEnemy = (e2) => Dt(e2), exports.isDataItem = (e2) => Ot(e2), exports.isDataMap = (e2) => zt(e2), exports.isDataMapInfo = (e2) => qt(e2), exports.isDataSkill = (e2) => Lt(e2), exports.isDataState = (e2) => Ft(e2), exports.isDataWeapon = (e2) => vt(e2), exports.itemSourceId = () => ({ author: H, module: Xt, kind: $t }), exports.labelsRegistry = () => ({ rpg: { damage: at, data: Mt, traits: Ae, itemEffect: ut }, global: st }), exports.makeActorData = (e2 = {}) => ({
+}, exports.isCloneableCommand = (e2) => e2.parameters.every(ka), exports.isCommandAudio = da, exports.isCommandChangeActorText = (e2) => sa(e2), exports.isCommandChangeBattleBgm = (e2) => da(e2) && 132 === e2.code, exports.isCommandChangeDefeatMe = (e2) => da(e2) && 139 === e2.code, exports.isCommandChangeVictoryMe = (e2) => da(e2) && 133 === e2.code, exports.isCommandCommentBody = (e2) => ya(e2) && 408 === e2.code, exports.isCommandCommentHeader = (e2) => ya(e2) && 108 === e2.code, exports.isCommandCommonEvent = (e2) => ua(e2), exports.isCommandInputNumber = (e2) => ga(e2), exports.isCommandNonParam = (e2) => la(e2), exports.isCommandPlayBgm = (e2) => da(e2) && 241 === e2.code, exports.isCommandPlayBgs = (e2) => da(e2) && 245 === e2.code, exports.isCommandPlayMe = (e2) => da(e2) && 249 === e2.code, exports.isCommandPlaySe = (e2) => da(e2) && 250 === e2.code, exports.isCommandScriptBody = (e2) => ya(e2) && 655 === e2.code, exports.isCommandScriptHeader = (e2) => ya(e2) && 355 === e2.code, exports.isCommandScrollTextHead = (e2) => na(e2), exports.isCommandShowChoiceItem = (e2) => Ea(e2), exports.isCommandShowChoices = (e2) => xa(e2), exports.isCommandShowMessage = (e2) => Aa(e2), exports.isCommandShowMessageBody = (e2) => ya(e2) && 401 === e2.code, exports.isCommandShowScrollingTextBody = (e2) => ya(e2) && 405 === e2.code, exports.isCommandTextBody = ya, exports.isDataActor = (e2) => kt(e2), exports.isDataArmor = (e2) => Pt(e2), exports.isDataClass = (e2) => Ht(e2), exports.isDataEnemy = (e2) => Dt(e2), exports.isDataItem = (e2) => Ot(e2), exports.isDataMap = (e2) => zt(e2), exports.isDataMapInfo = (e2) => qt(e2), exports.isDataSkill = (e2) => Lt(e2), exports.isDataState = (e2) => Ft(e2), exports.isDataWeapon = (e2) => vt(e2), exports.itemSourceId = () => ({ author: H, module: Xt, kind: $t }), exports.labelsRegistry = () => ({ rpg: { damage: at, data: ht, traits: Ae, itemEffect: ut }, global: st }), exports.makeActorData = (e2 = {}) => ({
   name: e2.name ?? "",
   id: e2.id ?? 0,
   battlerName: e2.battlerName ?? "",
@@ -1134,7 +1117,7 @@ exports.ABORT_BATTLE = 340, exports.AUTHOR_RMMZ = H, exports.BATTLE_PROCESSING =
   code: 103,
   indent: t2,
   parameters: Sa(e2 ?? {})
-}), exports.makeCommandPlayBGM = (e2, t2 = 0) => Ta(241, e2, t2), exports.makeCommandPlayBGS = (e2, t2 = 0) => Ta(245, e2, t2), exports.makeCommandPlayME = (e2, t2 = 0) => Ta(249, e2, t2), exports.makeCommandPlaySE = (e2, t2 = 0) => Ta(250, e2, t2), exports.makeCommandScriptArray = (e2, t2 = 0) => e2.map((e3, a2) => 0 === a2 ? Ca(e3, t2) : ha(e3, t2)), exports.makeCommandScriptBody = ha, exports.makeCommandScriptHeader = Ca, exports.makeCommandScrollingTextBody = (e2 = "", t2 = 0) => ({ code: 405, indent: t2 ?? 0, parameters: ba(e2) }), exports.makeCommandScrollingTextHeader = (e2 = {}, t2 = 0) => ({
+}), exports.makeCommandPlayBGM = (e2, t2 = 0) => Ta(241, e2, t2), exports.makeCommandPlayBGS = (e2, t2 = 0) => Ta(245, e2, t2), exports.makeCommandPlayME = (e2, t2 = 0) => Ta(249, e2, t2), exports.makeCommandPlaySE = (e2, t2 = 0) => Ta(250, e2, t2), exports.makeCommandScriptArray = (e2, t2 = 0) => e2.map((e3, a2) => 0 === a2 ? Ca(e3, t2) : Ma(e3, t2)), exports.makeCommandScriptBody = Ma, exports.makeCommandScriptHeader = Ca, exports.makeCommandScrollingTextBody = (e2 = "", t2 = 0) => ({ code: 405, indent: t2 ?? 0, parameters: ba(e2) }), exports.makeCommandScrollingTextHeader = (e2 = {}, t2 = 0) => ({
   code: 105,
   indent: t2,
   parameters: Na(e2)
@@ -1181,7 +1164,7 @@ exports.ABORT_BATTLE = 340, exports.AUTHOR_RMMZ = H, exports.BATTLE_PROCESSING =
     params: [0, 0, 0, 0, 0, 0, 0, 0],
     actions: []
   };
-}, exports.makeEventPageCondition = wt, exports.makeItemCategories = a, exports.makeItemCategoriesFromArray = (e2) => ({ item: e2[0], weapon: e2[1], armor: e2[2], keyItem: e2[3] }), exports.makeItemData = (e2 = {}) => ({
+}, exports.makeEventPageCondition = Bt, exports.makeItemCategories = a, exports.makeItemCategoriesFromArray = (e2) => ({ item: e2[0], weapon: e2[1], armor: e2[2], keyItem: e2[3] }), exports.makeItemData = (e2 = {}) => ({
   animationId: e2.animationId ?? 0,
   id: e2.id ?? 0,
   name: e2.name ?? "",
@@ -1235,7 +1218,7 @@ exports.ABORT_BATTLE = 340, exports.AUTHOR_RMMZ = H, exports.BATTLE_PROCESSING =
   note: "",
   x: 0,
   y: 0
-}), exports.makeMapEventIamge = Bt, exports.makeMapEventPage = () => ({ conditions: wt(), list: [], directionFix: false, image: {
+}), exports.makeMapEventIamge = wt, exports.makeMapEventPage = () => ({ conditions: Bt(), list: [], directionFix: false, image: {
   characterIndex: 0,
   characterName: "",
   direction: 2,
@@ -1410,13 +1393,13 @@ exports.ABORT_BATTLE = 340, exports.AUTHOR_RMMZ = H, exports.BATTLE_PROCESSING =
   }
 }, exports.regularParamsToArray = le, exports.replaceNote = (e2, t2) => {
   if (e2.length >= 3e3) throw new Error("Note text is too long. Please shorten it.");
-  return e2.replaceAll(/<([^<>:]+):([^>]*)>/g, (e3, a2, r2) => {
+  return e2.replaceAll(/<([^<>:]{1,100}):([^>]{1,1000})>/g, (e3, a2, r2) => {
     const o2 = t2(a2, r2);
     if (o2.length >= 1e3) throw new Error("Note text is too long. Please shorten it.");
     return jt(a2, o2);
   });
-}, exports.resolveItemEffectLabels = (e2) => [Et(e2), gt(e2), At(e2), Tt(e2), It(e2), _t(e2), Rt(e2), St(e2), Nt(e2), bt(e2), Ct(e2), ht(e2)], exports.resolveTraitLabels = (e2) => [Te(e2.elementRate), Ie(e2.debuffRate), _e(e2.stateRate), Re(e2.stateResist), Se(e2.regularParam), Ne(e2.extraParam), be(e2.specialParam), Ce(e2.attackElement), he(e2.attackState), Me(e2.attackSpeed), fe(e2.attackTimes), Oe(e2.attackSkill), Le(e2.skillTypeAdd), ke(e2.skillTypeSeal), Pe(e2.skillAdd), ve(e2.skillSeal), De(e2.equipWeaponType), Fe(e2.equipArmorType), He(e2.equipLock), we(e2.equipSeal), Be(e2.slotType), Ge(e2.actionPlus), Ue(e2.specialFlag), Ve(e2.collaps), qe(e2.partyAbility)], exports.setNoteValue = (e2, t2, a2) => {
-  const r2 = /<([^<>:]+):([^>]*)>/g;
+}, exports.resolveItemEffectLabels = (e2) => [Et(e2), gt(e2), At(e2), Tt(e2), It(e2), _t(e2), Rt(e2), St(e2), Nt(e2), bt(e2), Ct(e2), Mt(e2)], exports.resolveTraitLabels = (e2) => [Te(e2.elementRate), Ie(e2.debuffRate), _e(e2.stateRate), Re(e2.stateResist), Se(e2.regularParam), Ne(e2.extraParam), be(e2.specialParam), Ce(e2.attackElement), Me(e2.attackState), he(e2.attackSpeed), fe(e2.attackTimes), Oe(e2.attackSkill), Le(e2.skillTypeAdd), ke(e2.skillTypeSeal), Pe(e2.skillAdd), ve(e2.skillSeal), De(e2.equipWeaponType), Fe(e2.equipArmorType), He(e2.equipLock), Be(e2.equipSeal), we(e2.slotType), Ge(e2.actionPlus), Ue(e2.specialFlag), Ve(e2.collaps), qe(e2.partyAbility)], exports.setNoteValue = (e2, t2, a2) => {
+  const r2 = /<([^<>:]{1,100}):([^>]{1,1000})>/g;
   return e2.replace(r2, (e3, r3) => r3 === t2 ? jt(r3, a2) : e3);
 }, exports.specialFlagToArray = se, exports.specialParamName = (e2, t2) => {
   switch (e2) {
@@ -1442,5 +1425,5 @@ exports.ABORT_BATTLE = 340, exports.AUTHOR_RMMZ = H, exports.BATTLE_PROCESSING =
       return t2.recoveryEffectRate;
   }
   return `?sparams[${e2}]`;
-}, exports.specialParamsToArray = ye, exports.toArrayCommonEvent = Oa, exports.toArrayControlSwitches = fa, exports.toArrayInputNumber = Sa, exports.toArrayOperandActorStatus = (e2, t2, a2 = 0) => [e2.startId, e2.endId ?? e2.startId, a2, 3, 3, t2.index, t2.param], exports.toArrayOperandConstant = (e2, t2, a2 = 0) => [e2.startId, e2.endId ?? e2.startId, a2, 0, t2.value], exports.toArrayOperandEnemyStatus = (e2, t2, a2 = 0) => [e2.startId, e2.endId ?? e2.startId, a2, 3, 4, t2.index, Ma[t2.param]], exports.toArrayOperandItemData = (e2, t2, a2 = 0) => [e2.startId, e2.endId ?? e2.startId, a2, 3, t2.type, t2.itemId], exports.toArrayOperandRandom = (e2, t2, a2 = 0) => [e2.startId, e2.endId ?? e2.startId, a2, 2, t2.min, t2.max], exports.toArrayOperandScript = (e2, t2, a2 = 0) => [e2.startId, e2.endId ?? e2.startId, a2, 4, t2.code], exports.toArrayOperandVariable = (e2, t2, a2 = 0) => [e2.startId, e2.endId ?? e2.startId, a2, 1, t2.variableId], exports.toArrayScrollingTextBody = ba, exports.toArrayScrollingTextHeader = Na, exports.toArraySetupChoice = (e2) => [e2.choices ?? [], e2.cancelType ?? 0, e2.defaultType ?? 0, e2.positionType ?? 2, e2.background ?? 0], exports.toArraySetupChoiceItem = (e2) => [e2.index ?? 0, e2.name ?? ""], exports.toArrayShowMessageHeader = (e2) => [e2.facename, e2.faceIndex, e2.background, e2.positionType, e2.speakerName];
+}, exports.specialParamsToArray = ye, exports.toArrayCommonEvent = Oa, exports.toArrayControlSwitches = fa, exports.toArrayInputNumber = Sa, exports.toArrayOperandActorStatus = (e2, t2, a2 = 0) => [e2.startId, e2.endId ?? e2.startId, a2, 3, 3, t2.index, t2.param], exports.toArrayOperandConstant = (e2, t2, a2 = 0) => [e2.startId, e2.endId ?? e2.startId, a2, 0, t2.value], exports.toArrayOperandEnemyStatus = (e2, t2, a2 = 0) => [e2.startId, e2.endId ?? e2.startId, a2, 3, 4, t2.index, ha[t2.param]], exports.toArrayOperandItemData = (e2, t2, a2 = 0) => [e2.startId, e2.endId ?? e2.startId, a2, 3, t2.type, t2.itemId], exports.toArrayOperandRandom = (e2, t2, a2 = 0) => [e2.startId, e2.endId ?? e2.startId, a2, 2, t2.min, t2.max], exports.toArrayOperandScript = (e2, t2, a2 = 0) => [e2.startId, e2.endId ?? e2.startId, a2, 4, t2.code], exports.toArrayOperandVariable = (e2, t2, a2 = 0) => [e2.startId, e2.endId ?? e2.startId, a2, 1, t2.variableId], exports.toArrayScrollingTextBody = ba, exports.toArrayScrollingTextHeader = Na, exports.toArraySetupChoice = (e2) => [e2.choices ?? [], e2.cancelType ?? 0, e2.defaultType ?? 0, e2.positionType ?? 2, e2.background ?? 0], exports.toArraySetupChoiceItem = (e2) => [e2.index ?? 0, e2.name ?? ""], exports.toArrayShowMessageHeader = (e2) => [e2.facename, e2.faceIndex, e2.background, e2.positionType, e2.speakerName];
 //# sourceMappingURL=rpgTypes.cjs.js.map
