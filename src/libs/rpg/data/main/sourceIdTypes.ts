@@ -1,6 +1,6 @@
 import type { SourceIdentifierBase } from "src/namedItemSource";
 
-interface SourceId_Data<Kind extends string>
+export interface SourceId_Data<Kind extends string>
   extends SourceIdentifierBase<{
     author: "rmmz";
     module: "data";
