@@ -5,13 +5,18 @@ import { defineSystemItems } from "./namedItems";
 import type { SystemLabel_DataNames } from "./types";
 
 const mockLabel: SystemLabel_DataNames = {
-  elements: { domainName: "Elements", format: "{name}" },
-  armorTypes: { domainName: "Armor Types", format: "{name}" },
-  equipTypes: { domainName: "Equip Types", format: "{name}" },
-  skillTypes: { domainName: "Skill Types", format: "{name}" },
-  weaponTypes: { domainName: "Weapon Types", format: "{name}" },
-  variables: { domainName: "Variables", format: "{name}" },
-  switches: { domainName: "Switches", format: "{name}" },
+  domainName: "System Data Names",
+  format: "{name}",
+  options: {
+    armorTypes: "Armor Types",
+
+    elements: "Elements",
+    equipTypes: "Equip Types",
+    skillTypes: "Skill Types",
+    variables: "Variables",
+    switches: "Switches",
+    weaponTypes: "Weapon Types",
+  },
 };
 
 describe("", () => {
@@ -29,7 +34,7 @@ describe("", () => {
     expect(set.size).toBe(result.length);
   });
   test("", () => {
-    const labelKeys = new Set(Object.keys(mockLabel));
+    const labelKeys = new Set(Object.keys(mockLabel.options));
     const dataKinds = new Set(result.map<string>((item) => item.source.kind));
     expect(labelKeys).toEqual(dataKinds);
   });

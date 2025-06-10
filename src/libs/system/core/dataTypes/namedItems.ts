@@ -38,7 +38,7 @@ const buildArmorTypesSource = (
   label: SystemLabel_DataNames
 ): NamedItemSource => ({
   items: getArmorTypes(system),
-  label: label.armorTypes.domainName,
+  label: label.options.armorTypes,
   source: {
     author: "rmmz",
     module: "system",
@@ -51,7 +51,7 @@ const buildElementTypesSource = (
   label: SystemLabel_DataNames
 ): NamedItemSource => ({
   items: getElementTypes(system),
-  label: label.elements.domainName,
+  label: label.options.elements,
   source: {
     author: "rmmz",
     module: "system",
@@ -64,7 +64,7 @@ const buildEquipTypesSource = (
   label: SystemLabel_DataNames
 ): NamedItemSource => ({
   items: getEquipTypes(system),
-  label: label.equipTypes.domainName,
+  label: label.options.equipTypes,
   source: {
     author: "rmmz",
     module: "system",
@@ -77,7 +77,7 @@ const buildSkillTypesSource = (
   label: SystemLabel_DataNames
 ): NamedItemSource => ({
   items: getSkillTypes(system),
-  label: label.skillTypes.domainName,
+  label: label.options.skillTypes,
   source: {
     author: "rmmz",
     module: "system",
@@ -90,7 +90,7 @@ const buildVariableNamesSource = (
   label: SystemLabel_DataNames
 ): NamedItemSource => ({
   items: getVariableNames(system),
-  label: label.variables.domainName,
+  label: label.options.variables,
   source: {
     author: "rmmz",
     module: "system",
@@ -103,7 +103,7 @@ const buildSwitchesSource = (
   label: SystemLabel_DataNames
 ): NamedItemSource => ({
   items: getSwitches(system),
-  label: label.switches.domainName,
+  label: label.options.switches,
   source: {
     author: "rmmz",
     module: "system",
@@ -116,7 +116,7 @@ const buildWeaponTypesSource = (
   label: SystemLabel_DataNames
 ): NamedItemSource => ({
   items: getWeaponTypes(system),
-  label: label.weaponTypes.domainName,
+  label: label.options.weaponTypes,
   source: {
     author: "rmmz",
     module: "system",
