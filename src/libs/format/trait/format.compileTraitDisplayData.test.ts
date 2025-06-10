@@ -1,8 +1,10 @@
 import { DEFAULT_SYSTEM_LABELS_DATA_TYPES } from "@RpgTypes/system";
 import type { System_DataNames } from "@RpgTypes/system/core";
 import {
+  getArmorTypes,
   getElementTypes,
   getEquipTypes,
+  getSkillTypes,
   getWeaponTypes,
 } from "@RpgTypes/system/core";
 import type {
@@ -63,6 +65,11 @@ import {
   TRAIT_ATTACK_ELEMENT,
   TRAIT_EQUIP_WEAPON_TYPE,
   resolveTraitLabels,
+  TRAIT_SLOT_TYPE,
+  TRAIT_EQUIP_ARMOR_TYPE,
+  TRAIT_SKILL_TYPE_ADD,
+  TRAIT_SKILL_TYPE_SEAL,
+  TRAIT_DEBUFF_RATE,
 } from "src/rpg";
 import { test, expect, describe } from "vitest";
 import {
@@ -239,6 +246,17 @@ const testCaseTrait: TestCaseGroup = {
       },
     },
     {
+      code: TRAIT_DEBUFF_RATE,
+      caseName: "debuffRate",
+      expected: {
+        label: LABEL_SET_TRAIT.options.debuffRate.domainName,
+        patternCompiled: LABEL_SET_TRAIT.options.debuffRate.format,
+        data: regularParamsToArray(
+          LABEL_SET_TRAIT.options.regularParam.options
+        ),
+      },
+    },
+    {
       code: TRAIT_COLLAPSE_TYPE,
       caseName: "collapseType",
       expected: {
@@ -311,12 +329,48 @@ const testCaseSystem: TestCaseGroup = {
       },
     },
     {
-      caseName: "equip type",
+      caseName: "weapon type",
       code: TRAIT_EQUIP_WEAPON_TYPE,
       expected: {
         label: LABEL_SET_TRAIT.options.equipWeaponType.domainName,
         patternCompiled: LABEL_SET_TRAIT.options.equipWeaponType.format,
         data: getWeaponTypes(mockSystemdata),
+      },
+    },
+    {
+      caseName: "armor type",
+      code: TRAIT_EQUIP_ARMOR_TYPE,
+      expected: {
+        label: LABEL_SET_TRAIT.options.equipArmorType.domainName,
+        patternCompiled: LABEL_SET_TRAIT.options.equipArmorType.format,
+        data: getArmorTypes(mockSystemdata),
+      },
+    },
+    {
+      caseName: "slot type",
+      code: TRAIT_SLOT_TYPE,
+      expected: {
+        label: LABEL_SET_TRAIT.options.slotType.domainName,
+        patternCompiled: LABEL_SET_TRAIT.options.slotType.format,
+        data: getEquipTypes(mockSystemdata),
+      },
+    },
+    {
+      caseName: "skill type seal",
+      code: TRAIT_SKILL_TYPE_SEAL,
+      expected: {
+        label: LABEL_SET_TRAIT.options.skillTypeSeal.domainName,
+        patternCompiled: LABEL_SET_TRAIT.options.skillTypeSeal.format,
+        data: getSkillTypes(mockSystemdata),
+      },
+    },
+    {
+      caseName: "skill type add",
+      code: TRAIT_SKILL_TYPE_ADD,
+      expected: {
+        label: LABEL_SET_TRAIT.options.skillTypeAdd.domainName,
+        patternCompiled: LABEL_SET_TRAIT.options.skillTypeAdd.format,
+        data: getSkillTypes(mockSystemdata),
       },
     },
   ],
