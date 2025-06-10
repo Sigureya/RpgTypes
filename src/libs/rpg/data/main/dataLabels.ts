@@ -1,4 +1,5 @@
 import type { DomainLabel } from "@RpgTypes/templates";
+import type { Data_CommonEvent } from "src/rpg";
 import type {
   WeaponLabels,
   ArmorLabels,
@@ -20,4 +21,5 @@ export interface DataLabels {
   skill: DomainLabel<SkillLabels>;
   //  equipItem: EquipItemLabels;
   usableItem: DomainLabel<UsableItemLabels>;
+  commonEvent: DomainLabel<Record<keyof Data_CommonEvent, string>>;
 }

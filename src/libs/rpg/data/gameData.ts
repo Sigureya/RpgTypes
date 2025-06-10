@@ -1,4 +1,5 @@
 import type { NamedItemSource } from "src/namedItemSource";
+import type { Data_CommonEventLike } from "./event";
 import type { GameData } from "./gameDataTypes";
 import type {
   DataLabels,
@@ -20,6 +21,7 @@ import type {
   SourceId_DataEnemy,
   SourceId_DataItem,
   SourceId_DataWeapon,
+  SourceId_DataCommonEvent,
 } from "./main/sourceIdTypes";
 
 export const defineGameDataSources = (
@@ -35,6 +37,7 @@ export const defineGameDataSources = (
     defineEnemy(data.enemies, dataLabels),
     defineItem(data.items, dataLabels),
     defineWeapon(data.weapons, dataLabels),
+    defineCommonEvent(data.commonEvents, dataLabels),
   ];
 };
 
@@ -151,4 +154,17 @@ const defineWeapon = (
     module: "data",
     kind: "weapon",
   } satisfies SourceId_DataWeapon,
+});
+
+const defineCommonEvent = (
+  commonEvents: Data_CommonEventLike[],
+  labels: DataLabels
+): NamedItemSource => ({
+  items: commonEvents,
+  label: labels.commonEvent.domainName,
+  source: {
+    author: "rmmz",
+    module: "data",
+    kind: "common_event",
+  } satisfies SourceId_DataCommonEvent,
 });
