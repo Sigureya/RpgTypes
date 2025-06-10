@@ -1,6 +1,7 @@
 import { mergeItemsSource } from "@RpgTypes/namedItemSource/format/mergeItemsSource";
-import { makeSystemData } from "@RpgTypes/system";
-import type { System_DataNames } from "@RpgTypes/system/core/dataTypes";
+import { DEFAULT_SYSTEM_LABELS_DATA_TYPES } from "@RpgTypes/system";
+import type { System_DataNames } from "@RpgTypes/system/core";
+import { getElementTypes, getEquipTypes } from "@RpgTypes/system/core";
 import type { DomainName } from "@RpgTypes/templates";
 import type {
   Data_NamedItem,
@@ -8,7 +9,7 @@ import type {
   FormatLabelResolved,
   FormatCompiled,
 } from "src/namedItemSource";
-import type { TraitFormat, GameData, NormalLabel } from "src/rpg";
+import type { GameData, NormalLabel } from "src/rpg";
 import {
   TRAIT_STATE_RATE,
   TRAIT_STATE_RESIST,
@@ -34,7 +35,6 @@ import {
   makeItemData,
   makeCommonEventData,
   makeWeaponData,
-  resolveTraitLabels,
   LABEL_SET_DATA,
   LABEL_SET_TRAIT,
   specialParamsToArray,
@@ -43,6 +43,11 @@ import {
   specialFlagToArray,
   collapsOptionsToArray,
   partyAbilityToArray,
+  TRAIT_ELEMENT_RATE,
+  resolveTraitLabels,
+  TRAIT_EQUIP_LOCK,
+  TRAIT_EQUIP_SEAL,
+  TRAIT_ATTACK_ELEMENT,
 } from "src/rpg";
 import { test, expect, describe } from "vitest";
 import { defineTraitSources } from "./formatTraits";
@@ -81,16 +86,6 @@ const mockGameData: Record<keyof GameData, Data_NamedItem[]> = {
   items: [],
   commonEvents: [],
 };
-const mockDataNameLabels: Record<keyof System_DataNames, string> = {
-  armorTypes: "Armor Types",
-  weaponTypes: "Weapon Types",
-  elements: "Elements",
-  skillTypes: "Skill Types",
-  equipTypes: "Equip Types",
-  variables: "Variables",
-  switches: "Switches",
-};
-
 const makeGameDate = (
   data: Record<keyof GameData, Data_NamedItem[]>
 ): GameData => ({
@@ -106,11 +101,15 @@ const makeGameDate = (
 });
 const mockNormalLabel: NormalLabel = { normal: "Normal" };
 
-const mockSystemdata = makeSystemData({
-  dataNames: {
-    elements: ["Fire", "Ice", "Lightning"],
-  },
-});
+const mockSystemdata: System_DataNames = {
+  elements: ["Fire", "Ice", "Lightning"],
+  armorTypes: ["Light Armor", "Heavy Armor"],
+  weaponTypes: ["Sword", "Axe"],
+  skillTypes: ["Offensive", "Defensive"],
+  equipTypes: ["Main Hand", "Off Hand"],
+  variables: ["Player Health", "Player Mana"],
+  switches: ["Game Start", "Game Over"],
+};
 
 const makeSource = (): NamedItemSource[] => {
   return defineTraitSources(
@@ -119,29 +118,9 @@ const makeSource = (): NamedItemSource[] => {
     LABEL_SET_TRAIT.options,
     mockNormalLabel,
     mockSystemdata,
-    mockDataNameLabels
+    DEFAULT_SYSTEM_LABELS_DATA_TYPES.options
   );
 };
-const domainNames = (record: Record<string, DomainName>): string[] => {
-  return Object.entries<DomainName>(record).map(
-    ([, value]) => value.domainName
-  );
-};
-
-describe("defineTraitSources", () => {
-  const result = makeSource();
-  describe("", () => {
-    const set = new Set<string>([
-      ...domainNames(LABEL_SET_DATA),
-      ...domainNames(LABEL_SET_TRAIT.options),
-    ]);
-    test.each(result)("", (sourceItem) => {
-      expect(sourceItem).toSatisfy((item: NamedItemSource) =>
-        set.has(item.label)
-      );
-    });
-  });
-});
 
 interface TestCase {
   caseName: string;
@@ -183,7 +162,7 @@ const testFormat = (
 describe("format", () => {
   const list: FormatLabelResolved<number>[] = resolveTraitLabels(
     LABEL_SET_TRAIT.options
-  ) satisfies TraitFormat[];
+  );
   const source: Map<number, FormatCompiled> = mergeItemsSource(
     list,
     makeSource()
@@ -310,6 +289,46 @@ describe("format", () => {
       },
     },
   ]);
+
+  testFormat("source from system", source, [
+    {
+      caseName: "element rate",
+      code: TRAIT_ELEMENT_RATE,
+      expected: {
+        label: LABEL_SET_TRAIT.options.elementRate.domainName,
+        patternCompiled: LABEL_SET_TRAIT.options.elementRate.format,
+        data: getElementTypes(mockSystemdata),
+      },
+    },
+    {
+      caseName: "attack element",
+      code: TRAIT_ATTACK_ELEMENT,
+      expected: {
+        label: LABEL_SET_TRAIT.options.attackElement.domainName,
+        patternCompiled: LABEL_SET_TRAIT.options.attackElement.format,
+        data: getElementTypes(mockSystemdata),
+      },
+    },
+    {
+      caseName: "equip lock",
+      code: TRAIT_EQUIP_LOCK,
+      expected: {
+        label: LABEL_SET_TRAIT.options.equipLock.domainName,
+        patternCompiled: LABEL_SET_TRAIT.options.equipLock.format,
+        data: getEquipTypes(mockSystemdata),
+      },
+    },
+    {
+      caseName: "equip seal",
+      code: TRAIT_EQUIP_SEAL,
+      expected: {
+        label: LABEL_SET_TRAIT.options.equipSeal.domainName,
+        patternCompiled: LABEL_SET_TRAIT.options.equipSeal.format,
+        data: getEquipTypes(mockSystemdata),
+      },
+    },
+  ]);
+
   testFormat("no data", source, [
     {
       code: TRAIT_ATTACK_SPEED,
@@ -336,4 +355,29 @@ describe("format", () => {
       },
     },
   ]);
+});
+
+const domainNames = (record: Record<string, DomainName>): string[] => {
+  return Object.entries<DomainName>(record).map(
+    ([, value]) => value.domainName
+  );
+};
+
+describe("should have valid source item", () => {
+  const result = makeSource();
+  const set = new Set<string>([
+    ...domainNames(LABEL_SET_DATA),
+    ...domainNames(LABEL_SET_TRAIT.options),
+    ...domainNames(DEFAULT_SYSTEM_LABELS_DATA_TYPES.options),
+  ]);
+  const isItemInSet = (item: NamedItemSource) => {
+    return set.has(item.label);
+  };
+
+  test.each(result)(
+    "should have valid source item.label:$label",
+    (sourceItem) => {
+      expect(sourceItem).toSatisfy(isItemInSet);
+    }
+  );
 });
