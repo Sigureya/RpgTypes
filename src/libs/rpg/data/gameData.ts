@@ -1,14 +1,16 @@
 import type { NamedItemSource } from "src/namedItemSource";
 import type { GameData } from "./gameDataTypes";
 import type {
+  DataLabels,
   Data_Skill,
   Data_Actor,
+  Data_State,
   Data_Armor,
   Data_Class,
   Data_Enemy,
   Data_Item,
-  Data_State,
-  DataLabels,
+} from "./main";
+import type {
   SourceId_DataSkill,
   SourceId_DataState,
   SourceId_DataActor,
@@ -16,7 +18,7 @@ import type {
   SourceId_DataClass,
   SourceId_DataEnemy,
   SourceId_DataItem,
-} from "./main";
+} from "./main/sourceIdTypes";
 
 export const defineGameDataSources = (
   data: GameData,
