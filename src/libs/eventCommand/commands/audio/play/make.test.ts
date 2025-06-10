@@ -1,3 +1,4 @@
+import { describe, test, expect } from "vitest";
 import {
   CHANGE_BATTLE_BGM,
   CHANGE_DEFEAT_ME,
@@ -7,7 +8,6 @@ import {
   PLAY_ME,
   PLAY_SE,
 } from "src/rpg";
-import { describe, test, expect } from "vitest";
 import {
   makeCommandAudioAny,
   makeCommandChangeBattleBGM,

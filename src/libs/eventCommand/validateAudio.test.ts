@@ -1,5 +1,5 @@
-import type { AudioFileParams } from "@RpgTypes/utils";
 import { describe, test, expect } from "vitest";
+import type { AudioFileParams } from "src/utils";
 import type {
   Command_PlayBGM,
   Command_PlayBGS,
