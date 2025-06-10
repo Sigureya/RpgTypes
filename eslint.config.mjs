@@ -50,6 +50,24 @@ export default [
         {
           alphabetize: { order: "asc", caseInsensitive: true },
           "newlines-between": "never",
+          groups: [
+            "builtin",
+            "external",
+            "internal",
+            "parent",
+            "sibling",
+            "index",
+            "object",
+            "type",
+          ],
+          pathGroups: [
+            {
+              pattern: "vitest",
+              group: "external",
+              position: "before",
+            },
+          ],
+          pathGroupsExcludedImportTypes: ["vitest"],
         },
       ],
     },
