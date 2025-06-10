@@ -1,0 +1,135 @@
+import { DEFAULT_SYSTEM_LABELS_DATA_TYPES } from "@RpgTypes/system";
+import type { System_DataNames } from "@RpgTypes/system/core";
+import type { DomainName } from "@RpgTypes/templates";
+import type { Data_NamedItem, NamedItemSource } from "src/namedItemSource";
+import type {
+  GameData,
+  Data_Skill,
+  Data_State,
+  Data_Actor,
+  Data_Armor,
+  Data_Weapon,
+  Data_Class,
+  Data_Enemy,
+  Data_Item,
+  Data_CommonEvent,
+  NormalLabel,
+} from "src/rpg";
+import {
+  makeSkillData,
+  makeStateData,
+  makeActorData,
+  makeArmorData,
+  makeWeaponData,
+  makeClassData,
+  makeEnemyData,
+  makeItemData,
+  makeCommonEventData,
+  LABEL_SET_DATA,
+  LABEL_SET_TRAIT,
+} from "src/rpg";
+import { describe, test, expect } from "vitest";
+import { buildReferenceItemSources } from "./formatTraits";
+
+const mockNormalLabel: NormalLabel = { normal: "Normal" };
+const mockSystemdata: System_DataNames = {
+  elements: ["Fire", "Ice", "Lightning"],
+  armorTypes: ["Light Armor", "Heavy Armor"],
+  weaponTypes: ["Sword", "Axe"],
+  skillTypes: ["Offensive", "Defensive"],
+  equipTypes: ["Main Hand", "Off Hand"],
+  variables: ["Player Health", "Player Mana"],
+  switches: ["Game Start", "Game Over"],
+};
+const mockGameData: Record<keyof GameData, Data_NamedItem[]> = {
+  skills: [
+    { id: 1, name: "Fireball" },
+    { id: 2, name: "Ice Spike" },
+    { id: 3, name: "Lightning Bolt" },
+  ],
+  states: [
+    { id: 1, name: "poison" },
+    { id: 2, name: "silence" },
+  ],
+  actors: [
+    { id: 1, name: "alice" },
+    { id: 2, name: "bob" },
+  ],
+  armors: [
+    { id: 1, name: "Leather Armor" },
+    { id: 2, name: "Iron Shield" },
+  ],
+  weapons: [
+    { id: 1, name: "Sword" },
+    { id: 2, name: "Axe" },
+  ],
+  classes: [
+    { id: 1, name: "Warrior" },
+    { id: 2, name: "Mage" },
+  ],
+  enemies: [
+    { id: 1, name: "Goblin" },
+    { id: 2, name: "Orc" },
+    { id: 3, name: "Dragon" },
+  ],
+  items: [
+    { id: 1, name: "Health Potion" },
+    { id: 2, name: "Mana Potion" },
+  ],
+  commonEvents: [],
+};
+
+const makeGameDate = (
+  data: Record<keyof GameData, Data_NamedItem[]>
+): GameData => ({
+  skills: data.skills.map(makeSkillData) satisfies Data_Skill[],
+  states: data.states.map(makeStateData) satisfies Data_State[],
+  actors: data.actors.map(makeActorData) satisfies Data_Actor[],
+  armors: data.armors.map(makeArmorData) satisfies Data_Armor[],
+  weapons: data.weapons.map(makeWeaponData) satisfies Data_Weapon[],
+  classes: data.classes.map(makeClassData) satisfies Data_Class[],
+  enemies: data.enemies.map(makeEnemyData) satisfies Data_Enemy[],
+  items: data.items.map(makeItemData) satisfies Data_Item[],
+  commonEvents: data.commonEvents.map(
+    makeCommonEventData
+  ) satisfies Data_CommonEvent[],
+});
+
+const domainNames = (record: Record<string, DomainName>): string[] => {
+  return Object.entries<DomainName>(record).map(
+    ([, value]) => value.domainName
+  );
+};
+
+describe("defineTraitSources", () => {
+  const result: NamedItemSource[] = buildReferenceItemSources(
+    makeGameDate(mockGameData),
+    LABEL_SET_DATA,
+    LABEL_SET_TRAIT.options,
+    mockNormalLabel,
+    mockSystemdata,
+    DEFAULT_SYSTEM_LABELS_DATA_TYPES
+  );
+  describe("各要素の検証", () => {
+    const set = new Set<string>([
+      ...domainNames(LABEL_SET_DATA),
+      ...domainNames(LABEL_SET_TRAIT.options),
+      ...Object.values<string>(DEFAULT_SYSTEM_LABELS_DATA_TYPES.options),
+    ]);
+    const isItemInSet = (item: NamedItemSource) => {
+      return set.has(item.label);
+    };
+
+    describe.each(result)("item.label:$label", (sourceItem) => {
+      test(".labelは全てdomainNameである", () => {
+        expect(sourceItem).toSatisfy(isItemInSet);
+      });
+    });
+  });
+  describe(".source", () => {
+    const set = new Set(result.map((item) => JSON.stringify(item.source)));
+    test("sourceの重複がないこと", () => {
+      expect(set.size).toBe(result.length);
+    });
+  });
+});
