@@ -9,6 +9,7 @@ import type {
   Data_Class,
   Data_Enemy,
   Data_Item,
+  Data_Weapon,
 } from "./main";
 import type {
   SourceId_DataSkill,
@@ -18,6 +19,7 @@ import type {
   SourceId_DataClass,
   SourceId_DataEnemy,
   SourceId_DataItem,
+  SourceId_DataWeapon,
 } from "./main/sourceIdTypes";
 
 export const defineGameDataSources = (
@@ -32,6 +34,7 @@ export const defineGameDataSources = (
     defineClass(data.classes, dataLabels),
     defineEnemy(data.enemies, dataLabels),
     defineItem(data.items, dataLabels),
+    defineWeapon(data.weapons, dataLabels),
   ];
 };
 
@@ -128,14 +131,24 @@ const defineEnemy = (
 const defineItem = (
   items: Data_Item[],
   labels: DataLabels
-): NamedItemSource => {
-  return {
-    items: items,
-    label: labels.item.domainName,
-    source: {
-      author: "rmmz",
-      module: "data",
-      kind: "item",
-    } satisfies SourceId_DataItem,
-  };
-};
+): NamedItemSource => ({
+  items: items,
+  label: labels.item.domainName,
+  source: {
+    author: "rmmz",
+    module: "data",
+    kind: "item",
+  } satisfies SourceId_DataItem,
+});
+const defineWeapon = (
+  weapons: Data_Weapon[],
+  labels: DataLabels
+): NamedItemSource => ({
+  items: weapons,
+  label: labels.weapon.domainName,
+  source: {
+    author: "rmmz",
+    module: "data",
+    kind: "weapon",
+  } satisfies SourceId_DataWeapon,
+});
