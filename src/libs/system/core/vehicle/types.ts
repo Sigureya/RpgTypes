@@ -8,3 +8,9 @@ export interface Data_Vehicle {
   startX: number;
   startY: number;
 }
+
+export interface System_Vehicles {
+  boat: Data_Vehicle;
+  ship: Data_Vehicle;
+  airship: Data_Vehicle;
+}

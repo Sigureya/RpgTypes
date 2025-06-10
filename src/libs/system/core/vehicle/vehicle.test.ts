@@ -1,5 +1,5 @@
 import { describe, test, expect } from "vitest";
-import { makeVehicleData } from "./make";
+import { makeVehicleData } from "./vehicle";
 
 describe("makeVehicleData", () => {
   test("", () => {
