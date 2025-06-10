@@ -1,5 +1,5 @@
-import Ajv from "ajv";
 import { describe, test, expect } from "vitest";
+import Ajv from "ajv";
 import { makeMapInfoData } from "./make";
 import type { Data_MapInfo } from "./mapInfo";
 import { SCHEMA_DATA_MAP_INFO } from "./schema";

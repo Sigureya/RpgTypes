@@ -1,5 +1,5 @@
-import Ajv from "ajv";
 import { describe, test, expect } from "vitest";
+import Ajv from "ajv";
 import type { MapEvent_PageCondition, PageConditionArg } from "./condition";
 import { makeEventPageCondition } from "./make";
 import { SCHEMA_MAP_EVENT_PAGE_CONDITION } from "./schema";
