@@ -5,13 +5,13 @@ import { defineSystemItems } from "./namedItems";
 import type { SystemLabel_DataNames } from "./types";
 
 const mockLabel: SystemLabel_DataNames = {
-  elements: "elements",
-  equipTypes: "equipTypes",
-  weaponTypes: "weaponTypes",
-  skillTypes: "skillTypes",
-  armorTypes: "armorTypes",
-  variables: "variableNames",
-  switches: "switches",
+  elements: { domainName: "Elements", format: "{name}" },
+  armorTypes: { domainName: "Armor Types", format: "{name}" },
+  equipTypes: { domainName: "Equip Types", format: "{name}" },
+  skillTypes: { domainName: "Skill Types", format: "{name}" },
+  weaponTypes: { domainName: "Weapon Types", format: "{name}" },
+  variables: { domainName: "Variables", format: "{name}" },
+  switches: { domainName: "Switches", format: "{name}" },
 };
 
 describe("", () => {
