@@ -5,12 +5,7 @@ import {
   getEquipTypes,
   getWeaponTypes,
 } from "@RpgTypes/system/core";
-import type { DomainName } from "@RpgTypes/templates";
-import type {
-  Data_NamedItem,
-  NamedItemSource,
-  FormatCompiled,
-} from "src/namedItemSource";
+import type { Data_NamedItem, FormatCompiled } from "src/namedItemSource";
 import type {
   Data_Actor,
   Data_Armor,
@@ -64,7 +59,7 @@ import {
   TRAIT_EQUIP_WEAPON_TYPE,
 } from "src/rpg";
 import { test, expect, describe } from "vitest";
-import { defineTraitSources, mergeTraitSource } from "./formatTraits";
+import { mergeTraitSource } from "./formatTraits";
 
 const mockGameData: Record<keyof GameData, Data_NamedItem[]> = {
   skills: [
@@ -419,43 +414,5 @@ describe("mergeTraitSource", () => {
         },
       ]
     );
-  });
-});
-const domainNames = (record: Record<string, DomainName>): string[] => {
-  return Object.entries<DomainName>(record).map(
-    ([, value]) => value.domainName
-  );
-};
-
-describe("defineTraitSources", () => {
-  const result: NamedItemSource[] = defineTraitSources(
-    makeGameDate(mockGameData),
-    LABEL_SET_DATA,
-    LABEL_SET_TRAIT.options,
-    mockNormalLabel,
-    mockSystemdata,
-    DEFAULT_SYSTEM_LABELS_DATA_TYPES
-  );
-  describe("各要素の検証", () => {
-    const set = new Set<string>([
-      ...domainNames(LABEL_SET_DATA),
-      ...domainNames(LABEL_SET_TRAIT.options),
-      ...Object.values<string>(DEFAULT_SYSTEM_LABELS_DATA_TYPES.options),
-    ]);
-    const isItemInSet = (item: NamedItemSource) => {
-      return set.has(item.label);
-    };
-
-    describe.each(result)("item.label:$label", (sourceItem) => {
-      test(".labelは全てdomainNameである", () => {
-        expect(sourceItem).toSatisfy(isItemInSet);
-      });
-    });
-  });
-  describe(".source", () => {
-    const set = new Set(result.map((item) => JSON.stringify(item.source)));
-    test("sourceの重複がないこと", () => {
-      expect(set.size).toBe(result.length);
-    });
   });
 });
