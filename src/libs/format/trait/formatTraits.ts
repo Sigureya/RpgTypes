@@ -10,6 +10,7 @@ import {
 } from "src/namedItemSource";
 import type {
   DataLabels,
+  EffectDefinitionResolved,
   GameData,
   ItemEffectLabelSet,
   NormalLabel,
@@ -22,7 +23,7 @@ import {
   resolveItemEffectLabels,
 } from "src/rpg";
 
-export const defineTraitSources = (
+export const buildReferenceItemSources = (
   gameData: GameData,
   gameDataLabels: DataLabels,
   traitLabels: TraitLabelSet,
@@ -47,7 +48,7 @@ export const mergeTraitSource = (
 ): Map<number, FormatCompiled> => {
   return mergeItemsSource(
     resolveTraitLabels(traitLabels),
-    defineTraitSources(
+    buildReferenceItemSources(
       items,
       dataLabel,
       traitLabels,
@@ -59,11 +60,12 @@ export const mergeTraitSource = (
 };
 
 export const mergeItemEffectSource = (
+  namedItemSource: ReadonlyArray<NamedItemSource>,
   itemEffectLabels: ItemEffectLabelSet,
-  namedItemSource: ReadonlyArray<NamedItemSource>
+  additional: ReadonlyArray<EffectDefinitionResolved> = []
 ): Map<number, FormatCompiled> => {
   return mergeItemsSource(
-    resolveItemEffectLabels(itemEffectLabels),
+    [...resolveItemEffectLabels(itemEffectLabels), ...additional],
     namedItemSource
   );
 };
