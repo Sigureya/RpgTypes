@@ -135,7 +135,8 @@ const mockGameData: GameData = {
 };
 
 const testCases: TestCase[] = [
-  { caseName: "", data: mockGameData, dataLabels: LABEL_SET_DATA },
+  { caseName: "basic", data: mockGameData, dataLabels: LABEL_SET_DATA },
 ];
-
-testCases.forEach(runTestCases);
+describe("defineGameDataSources", () => {
+  testCases.forEach(runTestCases);
+});
