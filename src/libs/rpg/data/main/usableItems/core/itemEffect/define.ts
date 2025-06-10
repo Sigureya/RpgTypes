@@ -62,9 +62,9 @@ const defineEffect = (
   baseLabel: EffectLabelDefinition,
   dataSource?: SourceIdentifier
 ): EffectDefinitionResolved => ({
-  code,
+  kindId: code,
   label: baseLabel.domainName,
-  format: baseLabel.format,
+  pattern: baseLabel.format,
   description: baseLabel.desc,
   dataSource: dataSource,
 });

@@ -13,7 +13,7 @@ describe("resolveItemEffectLabels", () => {
     LABEL_SET_ITEM_EFFECT.options
   );
   describe("should return an array of EffectDefinitionResolved objects", () => {
-    const codeList = result.map((item) => item.code);
+    const codeList = result.map((item) => item.kindId);
     test("", () => {
       expect(codeList).toEqual(codeList.toSorted());
     });

@@ -1,9 +1,9 @@
 import type { SourceIdentifier } from "src/namedItemSource";
 
 export interface EffectDefinitionResolved {
-  code: number;
+  kindId: number;
   label: string;
-  format: string;
+  pattern: string;
   description: string;
   dataSource?: SourceIdentifier;
 }
