@@ -10,6 +10,7 @@ import {
   makeDataNames,
   makeSoundsArray,
   makeSystemAdvanced,
+  makeVehicleData,
 } from "./core";
 import type { System_DataNames } from "./core/dataTypes";
 import type {
@@ -25,7 +26,6 @@ import {
   makeTermsBasic,
   makeTermsCommand,
   makeTermsMessages,
-  makeVehicleData,
 } from "./members";
 import type { EditorSettings } from "./setting";
 import { makeEditorSetting } from "./setting";

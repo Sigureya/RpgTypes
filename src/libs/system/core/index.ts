@@ -4,3 +4,4 @@ export * from "./dataTypes";
 export * from "./gameInitial";
 export * from "./imageSize";
 export * from "./audio";
+export * from "./vehicle";
