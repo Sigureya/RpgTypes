@@ -135,7 +135,7 @@ interface TestCase {
   code: number;
 }
 
-const testCaseGameData = [
+const testCaseGameData: TestCase[] = [
   {
     caseName: "stateRate",
     code: TRAIT_STATE_RATE,
@@ -190,7 +190,145 @@ const testCaseGameData = [
       data: mockGameData.skills,
     },
   },
-] as const satisfies TestCase[];
+];
+
+const testCaseTrait: TestCase[] = [
+  {
+    code: TRAIT_SPARAM,
+    caseName: "specialParam",
+    expected: {
+      label: LABEL_SET_TRAIT.options.specialParam.domainName,
+      patternCompiled: LABEL_SET_TRAIT.options.specialParam.format,
+      data: specialParamsToArray(LABEL_SET_TRAIT.options.specialParam.options),
+    },
+  },
+  {
+    code: TRAIT_XPARAM,
+    caseName: "extraParam",
+    expected: {
+      label: LABEL_SET_TRAIT.options.extraParam.domainName,
+      patternCompiled: LABEL_SET_TRAIT.options.extraParam.format,
+      data: extraParamsToArray(LABEL_SET_TRAIT.options.extraParam.options),
+    },
+  },
+  {
+    code: TRAIT_PARAM,
+    caseName: "regularParam",
+    expected: {
+      label: LABEL_SET_TRAIT.options.regularParam.domainName,
+      patternCompiled: LABEL_SET_TRAIT.options.regularParam.format,
+      data: regularParamsToArray(LABEL_SET_TRAIT.options.regularParam.options),
+    },
+  },
+  {
+    code: TRAIT_COLLAPSE_TYPE,
+    caseName: "collapseType",
+    expected: {
+      label: LABEL_SET_TRAIT.options.collaps.domainName,
+      patternCompiled: LABEL_SET_TRAIT.options.collaps.format,
+      data: collapsOptionsToArray(
+        LABEL_SET_TRAIT.options.collaps.options,
+        mockNormalLabel
+      ),
+    },
+  },
+  {
+    code: TRAIT_SPECIAL_FLAG,
+    caseName: "specialFlag",
+    expected: {
+      label: LABEL_SET_TRAIT.options.specialFlag.domainName,
+      patternCompiled: LABEL_SET_TRAIT.options.specialFlag.format,
+      data: specialFlagToArray(LABEL_SET_TRAIT.options.specialFlag.options),
+    },
+  },
+  {
+    code: TRAIT_PARTY_ABILITY,
+    caseName: "partyAbility",
+    expected: {
+      label: LABEL_SET_TRAIT.options.partyAbility.domainName,
+      patternCompiled: LABEL_SET_TRAIT.options.partyAbility.format,
+      data: partyAbilityToArray(LABEL_SET_TRAIT.options.partyAbility.options),
+    },
+  },
+];
+
+const testCaseSystem: TestCase[] = [
+  {
+    caseName: "element rate",
+    code: TRAIT_ELEMENT_RATE,
+    expected: {
+      label: LABEL_SET_TRAIT.options.elementRate.domainName,
+      patternCompiled: LABEL_SET_TRAIT.options.elementRate.format,
+      data: getElementTypes(mockSystemdata),
+    },
+  },
+  {
+    caseName: "attack element",
+    code: TRAIT_ATTACK_ELEMENT,
+    expected: {
+      label: LABEL_SET_TRAIT.options.attackElement.domainName,
+      patternCompiled: LABEL_SET_TRAIT.options.attackElement.format,
+      data: getElementTypes(mockSystemdata),
+    },
+  },
+  {
+    caseName: "equip lock",
+    code: TRAIT_EQUIP_LOCK,
+    expected: {
+      label: LABEL_SET_TRAIT.options.equipLock.domainName,
+      patternCompiled: LABEL_SET_TRAIT.options.equipLock.format,
+      data: getEquipTypes(mockSystemdata),
+    },
+  },
+  {
+    caseName: "equip seal",
+    code: TRAIT_EQUIP_SEAL,
+    expected: {
+      label: LABEL_SET_TRAIT.options.equipSeal.domainName,
+      patternCompiled: LABEL_SET_TRAIT.options.equipSeal.format,
+      data: getEquipTypes(mockSystemdata),
+    },
+  },
+  {
+    caseName: "equip type",
+    code: TRAIT_EQUIP_WEAPON_TYPE,
+    expected: {
+      label: LABEL_SET_TRAIT.options.equipWeaponType.domainName,
+      patternCompiled: LABEL_SET_TRAIT.options.equipWeaponType.format,
+      data: getWeaponTypes(mockSystemdata),
+    },
+  },
+];
+
+const testCaseNonData: TestCase[] = [
+  {
+    code: TRAIT_ATTACK_SPEED,
+    caseName: "attackSpeed",
+    expected: {
+      label: LABEL_SET_TRAIT.options.attackSpeed.domainName,
+      patternCompiled: LABEL_SET_TRAIT.options.attackSpeed.format,
+      data: undefined,
+    } satisfies FormatCompiled,
+  },
+  {
+    code: TRAIT_ATTACK_TIMES,
+    caseName: "attackTimes",
+    expected: {
+      label: LABEL_SET_TRAIT.options.attackTimes.domainName,
+      patternCompiled: LABEL_SET_TRAIT.options.attackTimes.format,
+      data: undefined,
+    },
+  },
+  {
+    code: TRAIT_ACTION_PLUS,
+    caseName: "actionPlus",
+    expected: {
+      label: LABEL_SET_TRAIT.options.actionPlus.domainName,
+      patternCompiled: LABEL_SET_TRAIT.options.actionPlus.format,
+      data: undefined,
+    },
+  },
+];
 
 interface TestCaseCategory {
   groopName: string;
@@ -262,75 +400,7 @@ describe("compileTraitDisplayData", () => {
         errorMessage: "defineTraitItems()の戻り値を確認してください",
       },
       displayData,
-      [
-        {
-          code: TRAIT_SPARAM,
-          caseName: "specialParam",
-          expected: {
-            label: LABEL_SET_TRAIT.options.specialParam.domainName,
-            patternCompiled: LABEL_SET_TRAIT.options.specialParam.format,
-            data: specialParamsToArray(
-              LABEL_SET_TRAIT.options.specialParam.options
-            ),
-          },
-        },
-        {
-          code: TRAIT_XPARAM,
-          caseName: "extraParam",
-          expected: {
-            label: LABEL_SET_TRAIT.options.extraParam.domainName,
-            patternCompiled: LABEL_SET_TRAIT.options.extraParam.format,
-            data: extraParamsToArray(
-              LABEL_SET_TRAIT.options.extraParam.options
-            ),
-          },
-        },
-        {
-          code: TRAIT_PARAM,
-          caseName: "regularParam",
-          expected: {
-            label: LABEL_SET_TRAIT.options.regularParam.domainName,
-            patternCompiled: LABEL_SET_TRAIT.options.regularParam.format,
-            data: regularParamsToArray(
-              LABEL_SET_TRAIT.options.regularParam.options
-            ),
-          },
-        },
-        {
-          code: TRAIT_COLLAPSE_TYPE,
-          caseName: "collapseType",
-          expected: {
-            label: LABEL_SET_TRAIT.options.collaps.domainName,
-            patternCompiled: LABEL_SET_TRAIT.options.collaps.format,
-            data: collapsOptionsToArray(
-              LABEL_SET_TRAIT.options.collaps.options,
-              mockNormalLabel
-            ),
-          },
-        },
-        {
-          code: TRAIT_SPECIAL_FLAG,
-          caseName: "specialFlag",
-          expected: {
-            label: LABEL_SET_TRAIT.options.specialFlag.domainName,
-            patternCompiled: LABEL_SET_TRAIT.options.specialFlag.format,
-            data: specialFlagToArray(
-              LABEL_SET_TRAIT.options.specialFlag.options
-            ),
-          },
-        },
-        {
-          code: TRAIT_PARTY_ABILITY,
-          caseName: "partyAbility",
-          expected: {
-            label: LABEL_SET_TRAIT.options.partyAbility.domainName,
-            patternCompiled: LABEL_SET_TRAIT.options.partyAbility.format,
-            data: partyAbilityToArray(
-              LABEL_SET_TRAIT.options.partyAbility.options
-            ),
-          },
-        },
-      ]
+      testCaseTrait
     );
 
     testFormat(
@@ -339,53 +409,7 @@ describe("compileTraitDisplayData", () => {
         errorMessage: "defineSystemItems()の戻り値を確認してください",
       },
       displayData,
-      [
-        {
-          caseName: "element rate",
-          code: TRAIT_ELEMENT_RATE,
-          expected: {
-            label: LABEL_SET_TRAIT.options.elementRate.domainName,
-            patternCompiled: LABEL_SET_TRAIT.options.elementRate.format,
-            data: getElementTypes(mockSystemdata),
-          },
-        },
-        {
-          caseName: "attack element",
-          code: TRAIT_ATTACK_ELEMENT,
-          expected: {
-            label: LABEL_SET_TRAIT.options.attackElement.domainName,
-            patternCompiled: LABEL_SET_TRAIT.options.attackElement.format,
-            data: getElementTypes(mockSystemdata),
-          },
-        },
-        {
-          caseName: "equip lock",
-          code: TRAIT_EQUIP_LOCK,
-          expected: {
-            label: LABEL_SET_TRAIT.options.equipLock.domainName,
-            patternCompiled: LABEL_SET_TRAIT.options.equipLock.format,
-            data: getEquipTypes(mockSystemdata),
-          },
-        },
-        {
-          caseName: "equip seal",
-          code: TRAIT_EQUIP_SEAL,
-          expected: {
-            label: LABEL_SET_TRAIT.options.equipSeal.domainName,
-            patternCompiled: LABEL_SET_TRAIT.options.equipSeal.format,
-            data: getEquipTypes(mockSystemdata),
-          },
-        },
-        {
-          caseName: "equip type",
-          code: TRAIT_EQUIP_WEAPON_TYPE,
-          expected: {
-            label: LABEL_SET_TRAIT.options.equipWeaponType.domainName,
-            patternCompiled: LABEL_SET_TRAIT.options.equipWeaponType.format,
-            data: getWeaponTypes(mockSystemdata),
-          },
-        },
-      ]
+      testCaseSystem
     );
 
     testFormat(
@@ -394,37 +418,9 @@ describe("compileTraitDisplayData", () => {
         errorMessage: "不要な配列データが混入してます",
       },
       displayData,
-      [
-        // Traits that do not require data array lookup (e.g., attackSpeed, attackTimes, actionPlus).
-        // These traits do not reference any external data array, so their data property is
-        {
-          code: TRAIT_ATTACK_SPEED,
-          caseName: "attackSpeed",
-          expected: {
-            label: LABEL_SET_TRAIT.options.attackSpeed.domainName,
-            patternCompiled: LABEL_SET_TRAIT.options.attackSpeed.format,
-            data: undefined,
-          } satisfies FormatCompiled,
-        },
-        {
-          code: TRAIT_ATTACK_TIMES,
-          caseName: "attackTimes",
-          expected: {
-            label: LABEL_SET_TRAIT.options.attackTimes.domainName,
-            patternCompiled: LABEL_SET_TRAIT.options.attackTimes.format,
-            data: undefined,
-          },
-        },
-        {
-          code: TRAIT_ACTION_PLUS,
-          caseName: "actionPlus",
-          expected: {
-            label: LABEL_SET_TRAIT.options.actionPlus.domainName,
-            patternCompiled: LABEL_SET_TRAIT.options.actionPlus.format,
-            data: undefined,
-          },
-        },
-      ]
+      // Traits that do not require data array lookup (e.g., attackSpeed, attackTimes, actionPlus).
+      // These traits do not reference any external data array, so their data property is
+      testCaseNonData
     );
   });
 });
