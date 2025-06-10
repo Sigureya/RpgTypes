@@ -5,4 +5,3 @@ export * from "./constants";
 export { resolveTraitLabels } from "./resolveLabels";
 export * from "./types";
 export { defineTraitItems } from "./namedItems";
-export * from "./systemLabels";
