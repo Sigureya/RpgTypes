@@ -1,2 +1,2 @@
-export * from './trait';
 export * from './schema';
+export * from './trait';

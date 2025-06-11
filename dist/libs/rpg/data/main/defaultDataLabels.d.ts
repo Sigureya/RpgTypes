@@ -84,4 +84,14 @@ export declare const LABEL_SET_DATA: {
             readonly successRate: "成功率";
         };
     };
+    readonly commonEvent: {
+        readonly domainName: "コモンイベント";
+        readonly options: {
+            readonly trigger: "トリガー";
+            readonly switchId: "スイッチID";
+            readonly name: "名前";
+            readonly id: "ID";
+            readonly list: "コマンドリスト";
+        };
+    };
 };

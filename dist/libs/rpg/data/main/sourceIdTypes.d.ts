@@ -15,4 +15,4 @@ export type SourceId_DataItem = SourceId_Data<"item">;
 export type SourceId_DataSkill = SourceId_Data<"skill">;
 export type SourceId_DataState = SourceId_Data<"state">;
 export type SourceId_DataWeapon = SourceId_Data<"weapon">;
-export type SourceId_CommonEvent = SourceId_Data<"common_event">;
+export type SourceId_DataCommonEvent = SourceId_Data<"common_event">;
