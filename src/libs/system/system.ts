@@ -6,8 +6,9 @@ import type {
   System_Advanced,
   System_SoundsArray,
   System_Terms,
+  TestBattler,
 } from "./core";
-import type { TestBattler, ItemCategoriesArray } from "./members";
+import type { ItemCategoriesArray } from "./members";
 import type { EditorSettings } from "./setting";
 
 export interface Data_System {
