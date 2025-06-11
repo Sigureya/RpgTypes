@@ -6,7 +6,7 @@ import {
   makeTermsCommandArrayWithNulls,
 } from "./make";
 import { SCHEMA_SYSTEM_MEMBERS_TERMS_COMMANDS_ARRAY } from "./schema";
-import type { Terms_Command, Terms_CommandArray } from "./types";
+import type { Terms_GameCommands, Terms_CommandArray } from "./types";
 
 const ajv = new Ajv();
 const validate = ajv.compile(SCHEMA_SYSTEM_MEMBERS_TERMS_COMMANDS_ARRAY);
@@ -39,12 +39,15 @@ describe("SCHEMA_SYSTEM_MEMBERS_TERMS_COMMANDS_ARRAY", () => {
   });
 });
 
-const testTermsCommandProperty = (key: keyof Terms_Command, text: string) => {
-  const terms: Partial<Terms_Command> = {
+const testTermsCommandProperty = (
+  key: keyof Terms_GameCommands,
+  text: string
+) => {
+  const terms: Partial<Terms_GameCommands> = {
     [key]: text,
   };
   const termsArray: Terms_CommandArray = makeTermsCommandArray(terms);
-  const termsObject: Terms_Command = makeTermsCommandFromArray(termsArray);
+  const termsObject: Terms_GameCommands = makeTermsCommandFromArray(termsArray);
   test(`makeTermsCommandFromArray reconstructs ${key} = ${text}`, () => {
     expect(termsObject[key]).toBe(text);
   });

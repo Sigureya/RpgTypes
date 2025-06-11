@@ -1,5 +1,5 @@
 import type { Terms_Basic, Terms_BasicArray } from "./basic";
-import type { Terms_Command, Terms_CommandArray } from "./commands";
+import type { Terms_GameCommands, Terms_CommandArray } from "./commands";
 import type { Terms_Messages } from "./messages";
 
 export interface System_Terms {
@@ -11,7 +11,7 @@ export interface System_Terms {
 
 export interface System_TermsPartial {
   messages?: Partial<Terms_Messages>;
-  commands?: Partial<Terms_Command>;
+  commands?: Partial<Terms_GameCommands>;
   params?: Partial<Terms_ParamNames>;
   basic?: Partial<Terms_Basic>;
 }
