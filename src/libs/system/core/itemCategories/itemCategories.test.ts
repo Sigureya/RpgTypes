@@ -1,6 +1,9 @@
 import { describe, test, expect } from "vitest";
 import Ajv from "ajv";
-import { makeItemCategories, makeItemCategoriesFromArray } from "./make";
+import {
+  makeItemCategories,
+  makeItemCategoriesFromArray,
+} from "./itemCategories";
 import { SCHEMA_SYSTEM_ITEM_CATEGORIES } from "./schema";
 import type { ItemCategories, ItemCategoriesArray } from "./types";
 

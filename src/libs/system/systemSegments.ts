@@ -1,4 +1,5 @@
 import type {
+  ItemCategories,
   MenuCommandsEnabled,
   System_Advanced,
   System_Bgm,
@@ -11,7 +12,6 @@ import type {
   Terms_Messages,
 } from "./core";
 import type { System_DataNames } from "./core/dataTypes";
-import type { ItemCategories } from "./members";
 import type { EditorSettings } from "./setting";
 import type {
   System_Vehicle,

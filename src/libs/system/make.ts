@@ -22,7 +22,7 @@ import {
   makeVehicleData,
 } from "./core";
 import type { System_DataNames } from "./core/dataTypes";
-import { makeItemCategories } from "./members";
+import { makeItemCategories } from "./core/itemCategories";
 import type { EditorSettings } from "./setting";
 import { makeEditorSetting } from "./setting";
 import type { System_Debug, System_Images, System_ImageSize } from "./subset";

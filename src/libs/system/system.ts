@@ -2,13 +2,13 @@ import type { AudioFileParams, ColorRGBA } from "@RpgTypes/utils";
 import type {
   AttackMotion,
   Data_Vehicle,
+  ItemCategoriesArray,
   MenuCommandsEnabledArray,
   System_Advanced,
   System_SoundsArray,
   System_Terms,
   TestBattler,
 } from "./core";
-import type { ItemCategoriesArray } from "./members";
 import type { EditorSettings } from "./setting";
 
 export interface Data_System {
