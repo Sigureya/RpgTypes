@@ -1,4 +1,4 @@
-import { Data_CommonEvent } from './event';
+import { Data_CommonEventLike } from './event';
 import { Data_Actor, Data_Item, Data_Enemy, Data_Armor, Data_Weapon, Data_Class, Data_Skill, Data_State } from './main';
 export interface GameData {
     items: Data_Item[];
@@ -9,5 +9,5 @@ export interface GameData {
     classes: Data_Class[];
     skills: Data_Skill[];
     states: Data_State[];
-    commonEvents: Data_CommonEvent[];
+    commonEvents: Data_CommonEventLike[];
 }
