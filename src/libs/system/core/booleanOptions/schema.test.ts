@@ -12,19 +12,20 @@ const keys: ReadonlySet<keyof System_BooleanOptions> = new Set(
   SCHEMA_SYSTEM_BOOLEAN_OPTIONS.required
 );
 
-describe("", () => {
-  test("", () => {
+describe("SCHEMA_SYSTEM_BOOLEAN_OPTIONS structure", () => {
+  test("required keys length matches unique key set size", () => {
     expect(SCHEMA_SYSTEM_BOOLEAN_OPTIONS.required.length).toBe(keys.size);
   });
 });
-describe("", () => {
+
+describe("Validation with Data_System", () => {
   const system: Data_System = makeSystemData({});
-  test("", () => {
+  test("Data_System passes boolean options schema", () => {
     expect(isSystemBooleanOptions(system)).toBe(true);
   });
 });
 
-describe("", () => {
+describe("Direct System_BooleanOptions validation", () => {
   const mock: System_BooleanOptions = {
     optAutosave: true,
     optDisplayTp: true,
@@ -39,18 +40,18 @@ describe("", () => {
     optMessageSkip: true,
     optSplashScreen: false,
   };
-  test("", () => {
+  test("valid System_BooleanOptions passes schema", () => {
     expect(isSystemBooleanOptions(mock)).toBe(true);
   });
-  test("", () => {
+  test("invalid type in options fails schema", () => {
     const options: Record<keyof System_BooleanOptions, boolean | number> = {
       ...mock,
       optSplashScreen: 0, // invalid type
     };
     expect(isSystemBooleanOptions(options)).toBe(false);
   });
-  test("", () => {
-    const mock: Omit<System_BooleanOptions, "optExtraExp"> = {
+  test("missing required property fails schema", () => {
+    const mockMissing: Omit<System_BooleanOptions, "optExtraExp"> = {
       optAutosave: true,
       optDisplayTp: true,
       optDrawTitle: true,
@@ -63,16 +64,16 @@ describe("", () => {
       optMessageSkip: true,
       optSplashScreen: false,
     };
-    expect(isSystemBooleanOptions(mock)).toBe(false);
+    expect(isSystemBooleanOptions(mockMissing)).toBe(false);
   });
 });
 
-describe("", () => {
-  test("", () => {
+describe("makeBooleanOptions utility", () => {
+  test("makeBooleanOptions returns valid options", () => {
     const mock = makeBooleanOptions();
     expect(isSystemBooleanOptions(mock)).toBe(true);
   });
-  test("", () => {
+  test("partial input fails, but makeBooleanOptions fills defaults", () => {
     const param: Partial<System_BooleanOptions> = { optAutosave: true };
     expect(isSystemBooleanOptions(param)).toBe(false);
     const options = makeBooleanOptions(param);
