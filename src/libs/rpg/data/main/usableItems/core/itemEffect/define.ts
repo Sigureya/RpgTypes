@@ -1,9 +1,10 @@
-import type { SourceIdentifier } from "src/namedItemSource";
-import type {
-  SourceId_DataCommonEvent,
-  SourceId_DataSkill,
-  SourceId_DataState,
-  SourceId_TraitRegularParam,
+import type { NamedItemSource, SourceIdentifier } from "src/namedItemSource";
+import {
+  SPECIAL_EFFECT_ESCAPE,
+  type SourceId_DataCommonEvent,
+  type SourceId_DataSkill,
+  type SourceId_DataState,
+  type SourceId_TraitRegularParam,
 } from "src/rpg";
 import {
   EFFECT_ADD_STATE,
@@ -24,6 +25,27 @@ import type {
   EffectLabelDefinition,
   ItemEffectLabelSet,
 } from "./labels";
+import type {
+  SourceId_ItemEffectSpecial,
+  SpecialEffectLabels,
+} from "./specialEffect";
+
+export const definetItemEffectEntries = (
+  labelSet: ItemEffectLabelSet,
+
+  special: SpecialEffectLabels
+): NamedItemSource[] => [
+  {
+    items: [
+      {
+        id: SPECIAL_EFFECT_ESCAPE,
+        name: special.escape,
+      },
+    ],
+    label: labelSet.special.domainName,
+    source: specialSourceId(),
+  },
+];
 
 export const resolveItemEffectLabels = (
   labels: ItemEffectLabelSet
@@ -41,6 +63,7 @@ export const resolveItemEffectLabels = (
     defineEffectGrow(labels),
     defineEffectLearnSkill(labels),
     defineEffectCommonEvent(labels),
+    defineEffectSpecial(labels),
   ];
 };
 
@@ -56,6 +79,12 @@ const stateSourceId = (): SourceId_DataState => ({
   kind: "state",
 });
 
+const specialSourceId = (): SourceId_ItemEffectSpecial => ({
+  author: "rmmz",
+  module: "effect",
+  kind: "special",
+});
+
 const defineEffect = (
   code: number,
   baseLabel: EffectLabelDefinition,
@@ -67,6 +96,12 @@ const defineEffect = (
   description: baseLabel.desc,
   dataSource: dataSource,
 });
+
+const defineEffectSpecial = (
+  labels: ItemEffectLabelSet
+): EffectDefinitionResolved =>
+  defineEffect(SPECIAL_EFFECT_ESCAPE, labels.special, specialSourceId());
+
 const defineEffectRecoverHp = (
   labels: ItemEffectLabelSet
 ): EffectDefinitionResolved =>
