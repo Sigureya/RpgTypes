@@ -1,4 +1,5 @@
 export * from "./advanced";
+export * from "./attackMotion";
 export * from "./booleanOptions";
 export * from "./dataTypes";
 export * from "./gameInitial";

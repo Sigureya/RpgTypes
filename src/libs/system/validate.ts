@@ -1,9 +1,9 @@
 import Ajv from "ajv";
-import type { System_BooleanOptionsRMMMZ } from "./core";
+import type { AttackMotion, System_BooleanOptionsRMMMZ } from "./core";
 import { SCHEMA_SYSTEM_BOOLEAN_OPTIONS } from "./core";
+import { SCHEMA_SYSTEM_MEMBERS_ATTACK_MOTION } from "./core/attackMotion/schema";
 import { SCHEMA_SYSTEM_IMAGE_SIZE } from "./core/imageSize/size";
-import type { AttackMotion, TestBattler } from "./members";
-import { SCHEMA_SYSTEM_MEMBERS_ATTACK_MOTION } from "./members/attackMotion/schema";
+import type { TestBattler } from "./members";
 import { SCHEMA_SYSTEM_TEST_BATTLER } from "./members/testBattler/schema";
 import type { System_ImageSize } from "./subset";
 
