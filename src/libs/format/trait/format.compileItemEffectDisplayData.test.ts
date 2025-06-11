@@ -27,6 +27,7 @@ import {
   LABEL_SET_ITEM_EFFECT,
   LABEL_SET_TRAIT,
   LABEL_SET_DATA,
+  regularParamsToArray,
 } from "src/rpg";
 import {
   EFFECT_ADD_BUFF,
@@ -45,7 +46,6 @@ import {
 } from "src/rpg/data/main/usableItems/core/itemEffect/effectCode";
 import { DEFAULT_SYSTEM_LABELS_DATA_TYPES } from "src/system";
 import type { System_DataNames } from "src/system/core";
-import { build } from "vite";
 import {
   buildReferenceItemSources,
   compileItemEffectDisplayData,
@@ -123,6 +123,7 @@ interface TestCaseGroup {
   errorMessage: `${string}`;
   cases: TestCaseItem[];
 }
+
 const testCaseGameData: TestCaseGroup = {
   groupName: "Item Effect that reference GameData",
   errorMessage: "Expected item effect to be defined in game data",
@@ -133,6 +134,15 @@ const testCaseGameData: TestCaseGroup = {
       expected: {
         label: LABEL_SET_ITEM_EFFECT.options.addState.domainName,
         patternCompiled: LABEL_SET_ITEM_EFFECT.options.addState.format,
+        data: mockGameData.states,
+      },
+    },
+    {
+      code: EFFECT_REMOVE_STATE,
+      caseName: "Remove State",
+      expected: {
+        label: LABEL_SET_ITEM_EFFECT.options.removeState.domainName,
+        patternCompiled: LABEL_SET_ITEM_EFFECT.options.removeState.format,
         data: mockGameData.states,
       },
     },
@@ -156,7 +166,76 @@ const testCaseGameData: TestCaseGroup = {
     },
   ],
 };
-
+const testCaseTrait: TestCaseGroup = {
+  groupName: "Item Effect that reference Trait",
+  errorMessage: "Expected item effect to be defined in trait data",
+  cases: [
+    {
+      code: EFFECT_ADD_BUFF,
+      caseName: "Add Buff",
+      expected: {
+        label: LABEL_SET_ITEM_EFFECT.options.addBuff.domainName,
+        patternCompiled: LABEL_SET_ITEM_EFFECT.options.addBuff.format,
+        data: regularParamsToArray(
+          LABEL_SET_TRAIT.options.regularParam.options
+        ),
+      },
+    },
+    {
+      code: EFFECT_REMOVE_BUFF,
+      caseName: "Remove Buff",
+      expected: {
+        label: LABEL_SET_ITEM_EFFECT.options.removeBuff.domainName,
+        patternCompiled: LABEL_SET_ITEM_EFFECT.options.removeBuff.format,
+        data: regularParamsToArray(
+          LABEL_SET_TRAIT.options.regularParam.options
+        ),
+      },
+    },
+    {
+      code: EFFECT_ADD_DEBUFF,
+      caseName: "Add Debuff",
+      expected: {
+        label: LABEL_SET_ITEM_EFFECT.options.addDebuff.domainName,
+        patternCompiled: LABEL_SET_ITEM_EFFECT.options.addDebuff.format,
+        data: regularParamsToArray(
+          LABEL_SET_TRAIT.options.regularParam.options
+        ),
+      },
+    },
+    {
+      code: EFFECT_REMOVE_DEBUFF,
+      caseName: "Remove Debuff",
+      expected: {
+        label: LABEL_SET_ITEM_EFFECT.options.removeDebuff.domainName,
+        patternCompiled: LABEL_SET_ITEM_EFFECT.options.removeDebuff.format,
+        data: regularParamsToArray(
+          LABEL_SET_TRAIT.options.regularParam.options
+        ),
+      },
+    },
+    {
+      code: EFFECT_GROW,
+      caseName: "Grow",
+      expected: {
+        label: LABEL_SET_ITEM_EFFECT.options.grow.domainName,
+        patternCompiled: LABEL_SET_ITEM_EFFECT.options.grow.format,
+        data: regularParamsToArray(
+          LABEL_SET_TRAIT.options.regularParam.options
+        ),
+      },
+    },
+    {
+      code: EFFECT_SPECIAL,
+      caseName: "Special Effect",
+      expected: {
+        label: LABEL_SET_ITEM_EFFECT.options.special.domainName,
+        patternCompiled: LABEL_SET_ITEM_EFFECT.options.special.format,
+        data: undefined, // Special effects do not have associated data
+      },
+    },
+  ],
+};
 // ItemEffect that do not require data array lookup (e.g., recover HP/MP, gain TP, etc.)
 // These effect do not reference any external data array, so their data property is
 const testCaseNonData: TestCaseGroup = {
@@ -192,6 +271,7 @@ const testCaseNonData: TestCaseGroup = {
     },
   ],
 };
+
 const testFormat = (
   map: ReadonlyMap<number, FormatCompiled>,
   { groupName, errorMessage, cases }: TestCaseGroup
@@ -238,4 +318,6 @@ const makeMap = (): ReadonlyMap<number, FormatCompiled> => {
 describe("compileItemEffectDisplayData", () => {
   const map = makeMap();
   testFormat(map, testCaseGameData);
+  testFormat(map, testCaseNonData);
+  testFormat(map, testCaseTrait);
 });
