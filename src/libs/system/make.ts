@@ -11,6 +11,7 @@ import type {
 import {
   makeBooleanOptions,
   makeDataNames,
+  makeMenuCommandsEnabled,
   makeParamNamesArray,
   makeSoundsArray,
   makeSystemAdvanced,
@@ -21,7 +22,7 @@ import {
 } from "./core";
 import type { System_DataNames } from "./core/dataTypes";
 import type { TestBattler } from "./members";
-import { makeItemCategories, makeMenuCommandsEnabled } from "./members";
+import { makeItemCategories } from "./members";
 import type { EditorSettings } from "./setting";
 import { makeEditorSetting } from "./setting";
 import type { System_Debug, System_Images, System_ImageSize } from "./subset";

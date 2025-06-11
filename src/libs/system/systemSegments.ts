@@ -1,4 +1,5 @@
 import type {
+  MenuCommandsEnabled,
   System_Advanced,
   System_Bgm,
   System_BooleanOptionsRMMMZ,
@@ -10,7 +11,6 @@ import type {
   Terms_Messages,
 } from "./core";
 import type { System_DataNames } from "./core/dataTypes";
-import type { MenuCommandsEnabled } from "./members";
 import type { ItemCategories } from "./members";
 import type { EditorSettings } from "./setting";
 import type {
