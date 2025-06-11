@@ -1,6 +1,6 @@
-export type * from './core';
 export type * from './bundle';
-export { detectFormatErrors } from './core/detectErrors';
-export { compileFormatRule } from './core/rule';
+export type * from './core';
 export { applyFormatRule } from './applyFormat';
+export { compileFormatRule } from './core/rule';
+export { detectFormatErrors } from './core/detectErrors';
 export { mergeItemsSource } from './mergeItemsSource';

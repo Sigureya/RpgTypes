@@ -1,3 +1,3 @@
 export * from './core';
 export * from './rule';
-export { getPlaceHolderKeys, getItemMappersFromRule } from './getPlaceHolders';
+export { getItemMappersFromRule, getPlaceHolderKeys } from './getPlaceHolders';
