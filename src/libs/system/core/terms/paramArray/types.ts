@@ -11,7 +11,7 @@ export type Terms_ParamNamesArray = [
   eva: string
 ];
 
-export interface Terms_ParamNames {
+export interface SystemLabels_TermsParamNames {
   mhp: string;
   mmp: string;
   atk: string;

@@ -1,7 +1,10 @@
-import type { Terms_ParamNames, Terms_ParamNamesArray } from "./paramArray";
+import type {
+  SystemLabels_TermsParamNames,
+  Terms_ParamNamesArray,
+} from "./paramArray";
 
 export const makeParamNamesArray = (
-  param: Partial<Terms_ParamNames>
+  param: Partial<SystemLabels_TermsParamNames>
 ): Terms_ParamNamesArray => {
   return [
     param.mhp ?? "",

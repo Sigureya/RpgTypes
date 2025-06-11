@@ -1,7 +1,10 @@
 import type { Terms_Basic, Terms_BasicArray } from "./basic";
 import type { Terms_GameCommands, Terms_CommandArray } from "./commands";
 import type { Terms_Messages } from "./messages";
-import type { Terms_ParamNames, Terms_ParamNamesArray } from "./paramArray";
+import type {
+  SystemLabels_TermsParamNames,
+  Terms_ParamNamesArray,
+} from "./paramArray";
 
 export interface System_Terms {
   messages: Terms_Messages;
@@ -13,6 +16,6 @@ export interface System_Terms {
 export interface System_TermsPartial {
   messages?: Partial<Terms_Messages>;
   commands?: Partial<Terms_GameCommands>;
-  params?: Partial<Terms_ParamNames>;
+  params?: Partial<SystemLabels_TermsParamNames>;
   basic?: Partial<Terms_Basic>;
 }
