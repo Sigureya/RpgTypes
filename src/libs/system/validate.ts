@@ -2,13 +2,13 @@ import Ajv from "ajv";
 import type {
   AttackMotion,
   System_BooleanOptionsRMMMZ,
+  System_ImageSize,
   TestBattler,
 } from "./core";
 import { SCHEMA_SYSTEM_BOOLEAN_OPTIONS } from "./core";
 import { SCHEMA_SYSTEM_MEMBERS_ATTACK_MOTION } from "./core/attackMotion/schema";
 import { SCHEMA_SYSTEM_IMAGE_SIZE } from "./core/imageSize/size";
 import { SCHEMA_SYSTEM_TEST_BATTLER } from "./core/testBattler/schema";
-import type { System_ImageSize } from "./subset";
 
 const ajv = new Ajv({ strict: false });
 const booleanOptions = ajv.compile(SCHEMA_SYSTEM_BOOLEAN_OPTIONS);
