@@ -1,2 +1,2 @@
-export * from './types';
 export * from './domainLabel';
+export * from './types';
