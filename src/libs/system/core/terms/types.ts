@@ -1,6 +1,7 @@
 import type { Terms_Basic, Terms_BasicArray } from "./basic";
 import type { Terms_GameCommands, Terms_CommandArray } from "./commands";
 import type { Terms_Messages } from "./messages";
+import type { Terms_ParamNames, Terms_ParamNamesArray } from "./paramArray";
 
 export interface System_Terms {
   messages: Terms_Messages;
@@ -14,30 +15,4 @@ export interface System_TermsPartial {
   commands?: Partial<Terms_GameCommands>;
   params?: Partial<Terms_ParamNames>;
   basic?: Partial<Terms_Basic>;
-}
-
-export type Terms_ParamNamesArray = [
-  mhp: string,
-  mmp: string,
-  atk: string,
-  def: string,
-  mat: string,
-  mdf: string,
-  agi: string,
-  luk: string,
-  hit: string,
-  eva: string
-];
-
-export interface Terms_ParamNames {
-  mhp: string;
-  mmp: string;
-  atk: string;
-  def: string;
-  mat: string;
-  mdf: string;
-  agi: string;
-  luk: string;
-  hit: string;
-  eva: string;
 }

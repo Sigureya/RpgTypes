@@ -1,4 +1,4 @@
-import type { Terms_ParamNames, Terms_ParamNamesArray } from "./types";
+import type { Terms_ParamNames, Terms_ParamNamesArray } from "./paramArray";
 
 export const makeParamNamesArray = (
   param: Partial<Terms_ParamNames>

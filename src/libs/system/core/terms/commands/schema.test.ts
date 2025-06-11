@@ -4,7 +4,7 @@ import {
   makeTermsCommandArray,
   makeTermsCommandFromArray,
   makeTermsCommandArrayWithNulls,
-} from "./make";
+} from "./commands";
 import { SCHEMA_SYSTEM_MEMBERS_TERMS_COMMANDS_ARRAY } from "./schema";
 import type { Terms_GameCommands, Terms_CommandArray } from "./types";
 
