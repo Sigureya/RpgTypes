@@ -316,8 +316,27 @@ const makeMap = (): ReadonlyMap<number, FormatCompiled> => {
 };
 
 describe("compileItemEffectDisplayData", () => {
-  const map = makeMap();
-  testFormat(map, testCaseGameData);
-  testFormat(map, testCaseNonData);
-  testFormat(map, testCaseTrait);
+  describe("should compile item effect display data correctly", () => {
+    const map = makeMap();
+    testFormat(map, testCaseGameData);
+    testFormat(map, testCaseNonData);
+    testFormat(map, testCaseTrait);
+  });
+  describe("All Effect codes are covered by test cases", () => {
+    const labels = resolveItemEffectLabels(LABEL_SET_ITEM_EFFECT.options);
+    const allCases = [
+      ...testCaseGameData.cases,
+      ...testCaseNonData.cases,
+      ...testCaseTrait.cases,
+    ];
+    test("Simple check: only length is compared", () => {
+      expect(labels.length).toEqual(allCases.length);
+    });
+    test("Detailed check: missing test cases are reported", () => {
+      const testCaseCodes = new Set(allCases.map((c) => c.code));
+      expect(
+        labels.filter((effect) => !testCaseCodes.has(effect.kindId))
+      ).toEqual([]);
+    });
+  });
 });
