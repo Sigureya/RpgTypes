@@ -57,10 +57,10 @@ export const resolveItemEffectLabels = (
     defineEffectAddDebuff(labels),
     defineEffectRemoveBuff(labels),
     defineEffectRemoveDebuff(labels),
+    defineEffectSpecial(labels),
     defineEffectGrow(labels),
     defineEffectLearnSkill(labels),
     defineEffectCommonEvent(labels),
-    defineEffectSpecial(labels),
   ];
 };
 
