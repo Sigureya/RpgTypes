@@ -20,14 +20,7 @@ export type System_Images = Pick<
 
 export type System_Text = Pick<Data_System, "gameTitle" | "currencyUnit">;
 
-export type System_Vehicle = Pick<Data_System, "boat" | "ship" | "airship">;
-
 export type System_Debug = Pick<
   Data_System,
   "battlerHue" | "battlerName" | "testBattlers" | "testTroopId" | "editMapId"
->;
-
-export type System_ImageSize = Pick<
-  Data_System,
-  "tileSize" | "faceSize" | "iconSize"
 >;

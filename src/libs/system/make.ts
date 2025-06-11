@@ -4,6 +4,7 @@ import type {
   System_Bgm,
   System_BooleanOptionsRMMMZ as System_BooleanOptions,
   System_GameInitial,
+  System_ImageSize,
   System_Terms,
   System_TermsPartial,
   Terms_Messages,
@@ -25,7 +26,7 @@ import type { System_DataNames } from "./core/dataTypes";
 import { makeItemCategories } from "./core/itemCategories";
 import type { EditorSettings } from "./setting";
 import { makeEditorSetting } from "./setting";
-import type { System_Debug, System_Images, System_ImageSize } from "./subset";
+import type { System_Debug, System_Images } from "./subset";
 import type { Data_System } from "./system";
 import type { SystemDataFragments } from "./systemSegments";
 import { isImageSize, isTestBattler } from "./validate";

@@ -5,26 +5,22 @@ import type {
   System_Bgm,
   System_BooleanOptionsRMMMZ,
   System_GameInitial,
+  System_ImageSize,
   System_Me,
   System_SoundsObject,
+  System_Vehicles,
   Terms_Basic,
   Terms_GameCommands,
   Terms_Messages,
 } from "./core";
 import type { System_DataNames } from "./core/dataTypes";
 import type { EditorSettings } from "./setting";
-import type {
-  System_Vehicle,
-  System_Text,
-  System_Debug,
-  System_Images,
-  System_ImageSize,
-} from "./subset";
+import type { System_Text, System_Debug, System_Images } from "./subset";
 
 export interface SystemDataFragments {
   options: Partial<System_BooleanOptionsRMMMZ>;
   advanced: Partial<System_Advanced>;
-  vehicles: Partial<System_Vehicle>;
+  vehicles: Partial<System_Vehicles>;
   editing: Partial<EditorSettings>;
   dataNames: Partial<System_DataNames>;
   bgm: Partial<System_Bgm>;
