@@ -1,7 +1,8 @@
 import tseslint from "@typescript-eslint/eslint-plugin";
 import tsParser from "@typescript-eslint/parser";
 import fn from "eslint-plugin-functional";
-import importPlugin from "eslint-plugin-import";
+import importPlugin, { rules } from "eslint-plugin-import";
+import sortExports from "eslint-plugin-sort-exports";
 
 export default [
   {
@@ -19,6 +20,7 @@ export default [
       "@typescript-eslint": tseslint,
       "@functional": fn,
       import: importPlugin, // 追加
+      "sort-exports": sortExports, // 追加
     },
     rules: {
       // ESLintの推奨ルールセットを手動で適用
@@ -79,5 +81,9 @@ export default [
       "@typescript-eslint/no-explicit-any": "off", // テストではanyを許可
       "@functional/no-return-void": "off",
     },
+  },
+  {
+    files: ["src/**/*index.ts"],
+    rules: { "sort-exports/sort-exports": ["error", { sortDir: "asc" }] },
   },
 ];
