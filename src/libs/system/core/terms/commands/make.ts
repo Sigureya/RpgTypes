@@ -1,14 +1,14 @@
-import type { Terms_Command } from "./types";
+import type { Terms_GameCommands } from "./types";
 import type { Terms_CommandArray } from "./types";
 
 export const makeTermsCommandArray = (
-  param: Partial<Terms_Command>
+  param: Partial<Terms_GameCommands>
 ): Terms_CommandArray => {
   return makeTermsCommandArrayWithNulls(param, "");
 };
 
 export const makeTermsCommandArrayWithNulls = <T extends "" | null>(
-  param: Partial<Terms_Command>,
+  param: Partial<Terms_GameCommands>,
   empty: T
 ): Terms_CommandArray<T> => {
   return [
@@ -43,7 +43,7 @@ export const makeTermsCommandArrayWithNulls = <T extends "" | null>(
 
 export const makeTermsCommandFromArray = <T extends "" | null = "">(
   param: Terms_CommandArray<T>
-): Terms_Command => {
+): Terms_GameCommands => {
   return {
     fight: param[0],
     escape: param[1],

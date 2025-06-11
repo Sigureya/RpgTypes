@@ -6,7 +6,7 @@ import type {
   System_Me,
   System_SoundsObject,
   Terms_Basic,
-  Terms_Command,
+  Terms_GameCommands,
   Terms_Messages,
 } from "./core";
 import type { System_DataNames } from "./core/dataTypes";
@@ -38,7 +38,7 @@ export interface SystemDataFragments {
   size: Partial<System_ImageSize>;
   terms: {
     basic?: Partial<Terms_Basic>;
-    command?: Partial<Terms_Command>;
+    command?: Partial<Terms_GameCommands>;
     messages?: Partial<Terms_Messages>;
   };
   menuComamnds: Partial<MenuCommandsEnabled>;
