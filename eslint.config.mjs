@@ -19,11 +19,10 @@ export default [
     plugins: {
       "@typescript-eslint": tseslint,
       "@functional": fn,
-      import: importPlugin, // 追加
-      "sort-exports": sortExports, // 追加
+      import: importPlugin,
+      "sort-exports": sortExports,
     },
     rules: {
-      // ESLintの推奨ルールセットを手動で適用
       "no-undef": "error",
       "no-console": "warn",
       eqeqeq: "error",
@@ -74,7 +73,7 @@ export default [
     },
   },
   {
-    files: ["src/**/*.ts", "test/**/*.ts"],
+    files: ["src/**/*.test.ts"],
 
     rules: {
       // テストファイルに特有のルール
