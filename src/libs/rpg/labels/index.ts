@@ -1,2 +1,2 @@
-export * from "./globalLabels";
 export * from "./default";
+export * from "./globalLabels";
