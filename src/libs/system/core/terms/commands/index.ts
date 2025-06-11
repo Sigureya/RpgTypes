@@ -1,5 +1,5 @@
 export {
   makeTermsCommandArray as makeTermsCommand,
   makeTermsCommandFromArray,
-} from "./make";
+} from "./commands";
 export * from "./types";

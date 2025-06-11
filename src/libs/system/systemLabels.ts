@@ -42,3 +42,8 @@ export const DEFAULT_SYSTEM_LABELS_DATA_TYPES = {
     variables: "変数",
   },
 } as const satisfies SystemLabel_DataNames;
+
+const LABELS_SYSTEM_BATTLER_PARAMS = {
+  domainName: "能力値",
+  options: {},
+};
