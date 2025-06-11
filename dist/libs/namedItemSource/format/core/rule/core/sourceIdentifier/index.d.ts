@@ -1,2 +1,2 @@
-export * from './types';
 export * from './sourceId';
+export * from './types';
