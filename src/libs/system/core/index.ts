@@ -10,3 +10,4 @@ export * from "./terms";
 export * from "./menuCommands";
 export * from "./testBattler";
 export * from "./itemCategories";
+export * from "./titleCommandWindow";
