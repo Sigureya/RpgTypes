@@ -1,6 +1,6 @@
 import type { SourceIdentifier } from "src/namedItemSource";
 
-export interface SpecialEffectLabels {
+export interface EscapeLabel {
   escape: string;
 }
 

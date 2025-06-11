@@ -1,5 +1,6 @@
 import type { NamedItemSource, SourceIdentifier } from "src/namedItemSource";
 import {
+  EFFECT_SPECIAL,
   SPECIAL_EFFECT_ESCAPE,
   type SourceId_DataCommonEvent,
   type SourceId_DataSkill,
@@ -25,21 +26,17 @@ import type {
   EffectLabelDefinition,
   ItemEffectLabelSet,
 } from "./labels";
-import type {
-  SourceId_ItemEffectSpecial,
-  SpecialEffectLabels,
-} from "./specialEffect";
+import type { SourceId_ItemEffectSpecial, EscapeLabel } from "./specialEffect";
 
 export const definetItemEffectEntries = (
   labelSet: ItemEffectLabelSet,
-
-  special: SpecialEffectLabels
+  escapeLabels: EscapeLabel
 ): NamedItemSource[] => [
   {
     items: [
       {
         id: SPECIAL_EFFECT_ESCAPE,
-        name: special.escape,
+        name: escapeLabels.escape,
       },
     ],
     label: labelSet.special.domainName,
@@ -100,7 +97,7 @@ const defineEffect = (
 const defineEffectSpecial = (
   labels: ItemEffectLabelSet
 ): EffectDefinitionResolved =>
-  defineEffect(SPECIAL_EFFECT_ESCAPE, labels.special, specialSourceId());
+  defineEffect(EFFECT_SPECIAL, labels.special, specialSourceId());
 
 const defineEffectRecoverHp = (
   labels: ItemEffectLabelSet
