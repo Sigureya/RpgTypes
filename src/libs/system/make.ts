@@ -7,6 +7,7 @@ import type {
   System_Terms,
   System_TermsPartial,
   Terms_Messages,
+  TestBattler,
 } from "./core";
 import {
   makeBooleanOptions,
@@ -21,7 +22,6 @@ import {
   makeVehicleData,
 } from "./core";
 import type { System_DataNames } from "./core/dataTypes";
-import type { TestBattler } from "./members";
 import { makeItemCategories } from "./members";
 import type { EditorSettings } from "./setting";
 import { makeEditorSetting } from "./setting";
