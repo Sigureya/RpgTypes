@@ -1,7 +1,7 @@
 import tseslint from "@typescript-eslint/eslint-plugin";
 import tsParser from "@typescript-eslint/parser";
 import fn from "eslint-plugin-functional";
-import importPlugin, { rules } from "eslint-plugin-import";
+import importPlugin from "eslint-plugin-import";
 import sortExports from "eslint-plugin-sort-exports";
 
 export default [
@@ -16,6 +16,7 @@ export default [
         project: "./tsconfig.json", // 型情報を提供するためにプロジェクトを指定
       },
     },
+
     plugins: {
       "@typescript-eslint": tseslint,
       "@functional": fn,
@@ -27,7 +28,8 @@ export default [
       "no-console": "warn",
       eqeqeq: "error",
       curly: "error",
-
+      "no-dupe-else-if": "error",
+      "no-duplicate-case": "error",
       // 純粋関数強制Rule
       "@functional/no-return-void": "warn",
       "@functional/no-let": "error",
@@ -46,6 +48,7 @@ export default [
       "spaced-comment": "error",
 
       // importルール
+      "import/no-cycle": "error",
       "import/order": [
         "error",
         {
