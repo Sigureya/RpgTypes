@@ -1,6 +1,4 @@
-import { System_BooleanOptionsRMMMZ } from './core';
-import { AttackMotion, TestBattler } from './members';
-import { System_ImageSize } from './subset';
+import { AttackMotion, System_BooleanOptionsRMMMZ, System_ImageSize, TestBattler } from './core';
 export declare const isSystemBooleanOptions: (data: object) => data is System_BooleanOptionsRMMMZ;
 export declare const isTestBattler: (data: unknown) => data is TestBattler;
 export declare const isAttackMotion: (data: unknown) => data is AttackMotion;

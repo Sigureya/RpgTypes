@@ -1,4 +1,4 @@
-export interface Terms_Command {
+export interface Terms_GameCommands {
     fight: string;
     escape: string;
     attack: string;
@@ -24,6 +24,7 @@ export interface Terms_Command {
     buy: string;
     sell: string;
 }
+export type SystemLabels_GameCommands = Record<keyof Terms_GameCommands, string>;
 export type Terms_CommandArray<Empty extends string | null = ""> = [
     fight: string,
     escape: string,

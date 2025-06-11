@@ -1,6 +1,5 @@
 import { AudioFileParams, ColorRGBA } from '../utils';
-import { Data_Vehicle, System_Advanced, System_SoundsArray, System_Terms } from './core';
-import { TestBattler, AttackMotion, ItemCategoriesArray, MenuCommandsEnabledArray } from './members';
+import { AttackMotion, Data_Vehicle, ItemCategoriesArray, MenuCommandsEnabledArray, System_Advanced, System_SoundsArray, System_Terms, TestBattler } from './core';
 import { EditorSettings } from './setting';
 export interface Data_System {
     battleSystem: number;

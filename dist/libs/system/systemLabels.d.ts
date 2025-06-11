@@ -35,4 +35,48 @@ export declare const DEFAULT_SYSTEM_LABELS_DATA_TYPES: {
         readonly variables: "変数";
     };
 };
+export declare const LABELS_SYSTEM_BATTLER_PARAMS: {
+    readonly domainName: "能力値";
+    readonly options: {
+        readonly agi: "敏捷";
+        readonly atk: "攻撃力";
+        readonly def: "防御力";
+        readonly eva: "回避";
+        readonly hit: "命中";
+        readonly luk: "運";
+        readonly mat: "魔法攻撃力";
+        readonly mdf: "魔法防御力";
+        readonly mhp: "最大HP";
+        readonly mmp: "最大MP";
+    };
+};
+export declare const LABELS_SYSTEM_GAME_COMMANDS: {
+    domainName: string;
+    options: {
+        item: string;
+        skill: string;
+        equip: string;
+        status: string;
+        formation: string;
+        options: string;
+        save: string;
+        gameEnd: string;
+        armor: string;
+        weapon: string;
+        newGame: string;
+        attack: string;
+        guard: string;
+        escape: string;
+        fight: string;
+        buy: string;
+        sell: string;
+        cancel: string;
+        clear: string;
+        continue_: string;
+        equip2: string;
+        keyItem: string;
+        optimize: string;
+        toTitle: string;
+    };
+};
 export {};
