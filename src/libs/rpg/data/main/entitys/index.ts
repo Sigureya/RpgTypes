@@ -1,2 +1,2 @@
-export * from "./namedItemLabels";
 export * from "./goods";
+export * from "./namedItemLabels";
