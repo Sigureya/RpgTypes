@@ -6,6 +6,12 @@ import type {
   Terms_ParamNamesArray,
 } from "./paramArray";
 
+export interface System_TextBundle {
+  terms: System_Terms;
+  gameTitle: string;
+  currencyUnit: string;
+}
+
 export interface System_Terms {
   messages: Terms_Messages;
   commands: Terms_CommandArray;
