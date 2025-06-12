@@ -26,23 +26,6 @@ import type {
   EffectLabelDefinition,
   ItemEffectLabelSet,
 } from "./labels";
-import type { SourceId_ItemEffectSpecial, EscapeLabel } from "./specialEffect";
-
-export const definetItemEffectEntries = (
-  labelSet: ItemEffectLabelSet,
-  escapeLabels: EscapeLabel
-): NamedItemSource[] => [
-  {
-    items: [
-      {
-        id: SPECIAL_EFFECT_ESCAPE,
-        name: escapeLabels.escape,
-      },
-    ],
-    label: labelSet.special.domainName,
-    source: specialSourceId(),
-  },
-];
 
 export const resolveItemEffectLabels = (
   labels: ItemEffectLabelSet
@@ -76,12 +59,6 @@ const stateSourceId = (): SourceId_DataState => ({
   kind: "state",
 });
 
-const specialSourceId = (): SourceId_ItemEffectSpecial => ({
-  author: "rmmz",
-  module: "effect",
-  kind: "special",
-});
-
 const defineEffect = (
   code: number,
   baseLabel: EffectLabelDefinition,
@@ -96,8 +73,7 @@ const defineEffect = (
 
 const defineEffectSpecial = (
   labels: ItemEffectLabelSet
-): EffectDefinitionResolved =>
-  defineEffect(EFFECT_SPECIAL, labels.special, specialSourceId());
+): EffectDefinitionResolved => defineEffect(EFFECT_SPECIAL, labels.special);
 
 const defineEffectRecoverHp = (
   labels: ItemEffectLabelSet
