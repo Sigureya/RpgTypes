@@ -22,9 +22,8 @@ import type {
   System_Terms,
   System_TermsPartial,
   Terms_Messages,
-  TestBattler,
 } from "./core";
-import type { EditorSettings } from "./gameEdit";
+import type { EditorSettings, TestBattler } from "./gameEdit";
 import { makeEditorSetting } from "./gameEdit";
 import type { System_Debug, System_Images } from "./subset";
 import type { Data_System } from "./system";
