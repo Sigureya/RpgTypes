@@ -4,6 +4,7 @@ import type {
   System_Advanced,
   System_Bgm,
   System_BooleanOptionsRMMMZ,
+  System_DataNames,
   System_GameInitial,
   System_ImageSize,
   System_Me,
@@ -13,8 +14,7 @@ import type {
   Terms_GameCommands,
   Terms_Messages,
 } from "./core";
-import type { System_DataNames } from "./core/dataTypes";
-import type { EditorSettings } from "./setting";
+import type { EditorSettings } from "./gameEdit";
 import type { System_Text, System_Debug, System_Images } from "./subset";
 
 export interface SystemDataFragments {
