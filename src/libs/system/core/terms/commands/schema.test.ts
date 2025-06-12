@@ -23,7 +23,7 @@ describe("SCHEMA_SYSTEM_MEMBERS_TERMS_COMMANDS_ARRAY", () => {
   });
   test("invalid: array length is 25 (too short)", () => {
     const array = Array.from({ length: 25 }, () => "");
-    expect(validate(array)).toBe(false);
+    expect(array).not.toSatisfy(validate);
   });
   test("valid: array length is 26 (just right)", () => {
     const array = Array.from({ length: 26 }, () => "");
@@ -31,11 +31,11 @@ describe("SCHEMA_SYSTEM_MEMBERS_TERMS_COMMANDS_ARRAY", () => {
   });
   test("invalid: array length is 27 (too long)", () => {
     const array = Array.from({ length: 27 }, () => "");
-    expect(validate(array)).toBe(false);
+    expect(array).not.toSatisfy(validate);
   });
   test("", () => {
     const array = makeTermsCommandArrayWithNulls({}, null);
-    expect(validate(array)).toBe(true);
+    expect(array).toSatisfy(validate);
   });
 });
 
