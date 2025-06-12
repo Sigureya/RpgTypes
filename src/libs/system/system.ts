@@ -18,9 +18,6 @@ export interface Data_System {
   magicSkills: number[];
 
   // images
-  battleback1Name: string;
-  battleback2Name: string;
-  battlerName: string;
   title1Name: string;
   title2Name: string;
 
@@ -77,9 +74,13 @@ export interface Data_System {
 
   // editor params
   editMapId: number;
+  battlerHue: number;
+  battlerName: string;
+  // battle test
   testTroopId: number;
   testBattlers: TestBattler[];
-  battlerHue: number;
+  battleback1Name: string;
+  battleback2Name: string;
 
   // other
   windowTone: ColorRGBA;
