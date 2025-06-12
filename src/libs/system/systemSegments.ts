@@ -15,7 +15,7 @@ import type {
   Terms_GameCommands,
   Terms_Messages,
 } from "./core";
-import type { EditorSettings } from "./gameEdit";
+import type { EditorSettings, System_TestBattle } from "./gameEdit";
 import type { System_Text, System_Debug } from "./subset";
 
 export interface SystemDataFragments {
@@ -29,6 +29,7 @@ export interface SystemDataFragments {
   texts: Partial<System_Text>;
   sounds: Partial<System_SoundsObject>;
   debug: Partial<System_Debug>;
+  battlerTest: Partial<System_TestBattle>;
   images: Partial<System_Images>;
   gameInit: Partial<System_GameInitial>;
   itemCategories: Partial<ItemCategories>;

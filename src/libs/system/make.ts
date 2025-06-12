@@ -43,6 +43,7 @@ export const makeSystemData = (
   const bgm: Partial<System_Bgm> = p.bgm ?? {};
 
   const size = cloneSize(p.size);
+  const testBattle = p.battlerTest ?? {};
 
   return {
     ...(makeBooleanOptions(p.options) satisfies Record<
@@ -59,8 +60,6 @@ export const makeSystemData = (
     advanced: makeSystemAdvanced(p.advanced),
     title1Name: images.title1Name ?? "",
     title2Name: images.title2Name ?? "",
-    battleback1Name: images.battleback1Name ?? "",
-    battleback2Name: images.battleback2Name ?? "",
     ...(makeDataNames(dataNames) satisfies Record<
       keyof System_DataNames,
       string[]
@@ -78,7 +77,10 @@ export const makeSystemData = (
     iconSize: size.iconSize,
     versionId: 1,
     attackMotions: [],
-    testBattlers: cloneObjectArray(debug.testBattlers, cloneTestBattler),
+    battleback1Name: testBattle.battleback1Name ?? "",
+    battleback2Name: testBattle.battleback2Name ?? "",
+    testTroopId: testBattle.testTroopId ?? 0,
+    testBattlers: cloneObjectArray(testBattle.testBattlers, cloneTestBattler),
     battleBgm: makeAudioFileParams(bgm.battleBgm),
     victoryMe: makeAudioFileParams(p.me?.victoryMe),
     editMapId: debug.editMapId ?? 0,
@@ -86,7 +88,6 @@ export const makeSystemData = (
     startMapId: gameInit.startMapId ?? 0,
     startX: gameInit.startX ?? 0,
     startY: gameInit.startY ?? 0,
-    testTroopId: debug.testTroopId ?? 0,
     windowTone: [0, 0, 0, 0],
     terms: makeTerms(p.terms ?? {}) satisfies System_Terms,
     itemCategories: makeItemCategories(p.itemCategories) satisfies boolean[],
