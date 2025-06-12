@@ -1,13 +1,10 @@
 import { AudioFileParams, ColorRGBA } from '../utils';
-import { AttackMotion, Data_Vehicle, ItemCategoriesArray, MenuCommandsEnabledArray, System_Advanced, System_SoundsArray, System_Terms, TestBattler } from './core';
-import { EditorSettings } from './setting';
+import { AttackMotion, Data_Vehicle, ItemCategoriesArray, MenuCommandsEnabledArray, System_Advanced, System_SoundsArray, System_Terms } from './core';
+import { EditorSettings, TestBattler } from './gameEdit';
 export interface Data_System {
     battleSystem: number;
     partyMembersArray: number[];
     magicSkills: number[];
-    battleback1Name: string;
-    battleback2Name: string;
-    battlerName: string;
     title1Name: string;
     title2Name: string;
     gameTitle: string;
@@ -47,9 +44,12 @@ export interface Data_System {
     startX: number;
     startY: number;
     editMapId: number;
+    battlerHue: number;
+    battlerName: string;
     testTroopId: number;
     testBattlers: TestBattler[];
-    battlerHue: number;
+    battleback1Name: string;
+    battleback2Name: string;
     windowTone: ColorRGBA;
     attackMotions: AttackMotion[];
     locale: string;

@@ -1,10 +1,10 @@
-import { System_Bgm, System_BooleanOptionsRMMMZ } from './core';
-import { System_Images, System_Text } from './subset';
+import { System_Bgm, System_BooleanGameOptions, System_TitleImages } from './core';
+import { System_Text } from './subset';
 type AsLabel<T> = Record<keyof T, string>;
-export type SystemLabel_Images = AsLabel<System_Images>;
+export type SystemLabel_Images = AsLabel<System_TitleImages>;
 export type SystemLabel_Text = AsLabel<System_Text>;
 export type SystemLabel_Bgm = AsLabel<System_Bgm>;
-export type SystemLabel_BoolanOptions = AsLabel<System_BooleanOptionsRMMMZ>;
+export type SystemLabel_BoolanOptions = AsLabel<System_BooleanGameOptions>;
 export declare const DEFAULT_SYSTEM_LABELS_BOOLEAN: {
     readonly domainName: "オプション";
     readonly options: {

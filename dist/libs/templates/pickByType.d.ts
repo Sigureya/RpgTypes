@@ -10,6 +10,9 @@ export type PickByTypeKeys<T, V> = Extract<keyof PickByType<T, V>, string>;
  * @see PickByType
  */
 export type FilterByValue<T, V> = PickByType<T, V>;
+export type OmitByType<T, V> = Omit<T, {
+    [K in keyof T]: T[K] extends V ? K : never;
+}[keyof T]>;
 /**
  * type Example = StringKeysWithoutNote<{ age: number; name: string; note: string; }>; // { name: string }
  */

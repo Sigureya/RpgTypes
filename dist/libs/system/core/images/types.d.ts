@@ -3,3 +3,7 @@ export interface System_ImageSize {
     faceSize: number;
     iconSize: number;
 }
+export interface System_TitleImages {
+    title1Name: string;
+    title2Name: string;
+}
