@@ -6,7 +6,7 @@ import type {
 } from "./core";
 import { SCHEMA_SYSTEM_BOOLEAN_OPTIONS } from "./core";
 import { SCHEMA_SYSTEM_MEMBERS_ATTACK_MOTION } from "./core/attackMotion/schema";
-import { SCHEMA_SYSTEM_IMAGE_SIZE } from "./core/images/size";
+import { SCHEMA_SYSTEM_IMAGE_SIZE } from "./core/images/schema";
 import type { TestBattler } from "./gameEdit";
 import { SCHEMA_SYSTEM_TEST_BATTLER } from "./gameEdit/testPlay/schema";
 
