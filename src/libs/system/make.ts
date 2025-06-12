@@ -1,15 +1,5 @@
-import type { AudioFileParams } from "@RpgTypes/utils";
-import { makeAudioFileParams } from "@RpgTypes/utils";
-import type {
-  System_Bgm,
-  System_BooleanOptionsRMMMZ as System_BooleanOptions,
-  System_GameInitial,
-  System_ImageSize,
-  System_Terms,
-  System_TermsPartial,
-  Terms_Messages,
-  TestBattler,
-} from "./core";
+import type { AudioFileParams } from "src/utils";
+import { makeAudioFileParams } from "src/utils";
 import {
   makeBooleanOptions,
   makeDataNames,
@@ -22,10 +12,20 @@ import {
   makeTermsMessages,
   makeVehicleData,
 } from "./core";
-import type { System_DataNames } from "./core/dataTypes";
-import { makeItemCategories } from "./core/itemCategories";
-import type { EditorSettings } from "./setting";
-import { makeEditorSetting } from "./setting";
+import { makeItemCategories } from "./core";
+import type {
+  System_Bgm,
+  System_BooleanOptionsRMMMZ as System_BooleanOptions,
+  System_DataNames,
+  System_GameInitial,
+  System_ImageSize,
+  System_Terms,
+  System_TermsPartial,
+  Terms_Messages,
+  TestBattler,
+} from "./core";
+import type { EditorSettings } from "./gameEdit";
+import { makeEditorSetting } from "./gameEdit";
 import type { System_Debug, System_Images } from "./subset";
 import type { Data_System } from "./system";
 import type { SystemDataFragments } from "./systemSegments";

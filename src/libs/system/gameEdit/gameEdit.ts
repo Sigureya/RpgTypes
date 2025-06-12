@@ -1,4 +1,4 @@
-import type { EditorSettings } from "./types";
+import type { EditorSettings } from "./editor/types";
 
 export const makeEditorSetting = (
   param: Partial<EditorSettings> = {}

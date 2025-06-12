@@ -9,7 +9,7 @@ import type {
   System_Terms,
   TestBattler,
 } from "./core";
-import type { EditorSettings } from "./setting";
+import type { EditorSettings } from "./gameEdit";
 
 export interface Data_System {
   // battle
