@@ -1,5 +1,5 @@
 import type { JSONSchemaType } from "ajv";
-import type { System_ImageSize } from "./types";
+import type { System_ImageSize, System_TitleImages } from "./types";
 
 export const SCHEMA_SYSTEM_IMAGE_SIZE = {
   additionalProperties: false,
@@ -11,3 +11,13 @@ export const SCHEMA_SYSTEM_IMAGE_SIZE = {
     iconSize: { type: "integer", minimum: 0 },
   },
 } as const satisfies JSONSchemaType<System_ImageSize>;
+
+export const SCHEMA_SYSTEM_TITLE_IMAGES: JSONSchemaType<System_TitleImages> = {
+  additionalProperties: false,
+  type: "object",
+  required: ["title1Name", "title2Name"],
+  properties: {
+    title1Name: { type: "string" },
+    title2Name: { type: "string" },
+  },
+} as const satisfies JSONSchemaType<System_TitleImages>;

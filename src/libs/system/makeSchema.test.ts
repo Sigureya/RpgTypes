@@ -2,12 +2,21 @@ import { describe, test, expect } from "vitest";
 import type { SchemaObject } from "ajv";
 import Ajv from "ajv";
 import type { Terms_Messages } from "./core";
-import { SCHEMA_SYSTEM_BOOLEAN_OPTIONS } from "./core";
+import {
+  SCHEMA_SYSTEM_BOOLEAN_OPTIONS,
+  SCHEMA_SYSTEM_GAME_INITIAL,
+} from "./core";
 import { SCHEMA_SYSTEM_AUDIOFILES } from "./core/audio/schema";
+import {
+  SCHEMA_SYSTEM_IMAGE_SIZE,
+  SCHEMA_SYSTEM_TITLE_IMAGES,
+} from "./core/images/schema";
 import { SCHEMA_SYSTEM_RPG_DATA_NAMES } from "./core/rpgDataTypes/schema";
-import { SCHEMA_SYSTEM_GAME_EDITOR_RMMZ } from "./gameEdit/schema";
 import { SCHEMA_SYSTEM_TEST_PLAY } from "./gameEdit/testPlay/schema";
-import { SCHEMA_SYSTEM_PARTIAL_BUNDLE } from "./makeSchema";
+import {
+  SCHEMA_SYSTEM_PARTIAL_BUNDLE,
+  SCHEMA_SYSTEM_TERMS_BUNDLE,
+} from "./makeSchema";
 import type { Data_System } from "./system";
 
 const mockSystem = {
@@ -272,8 +281,20 @@ const allSchema = [
     schema: SCHEMA_SYSTEM_RPG_DATA_NAMES,
   },
   {
-    caseName: "editor",
-    schema: SCHEMA_SYSTEM_GAME_EDITOR_RMMZ,
+    caseName: "image size",
+    schema: SCHEMA_SYSTEM_IMAGE_SIZE,
+  },
+  {
+    caseName: "title image",
+    schema: SCHEMA_SYSTEM_TITLE_IMAGES,
+  },
+  {
+    caseName: "SCHEMA_SYSTEM_VEHICLE",
+    schema: SCHEMA_SYSTEM_TERMS_BUNDLE,
+  },
+  {
+    caseName: "gameInit",
+    schema: SCHEMA_SYSTEM_GAME_INITIAL,
   },
 ] as const satisfies SchemaCase[];
 
@@ -296,8 +317,16 @@ describe("全てのSchemaを実装してあるか？", () => {
   const schemaKeys: string[] = allSchema.flatMap<string>(({ schema }) => {
     return schema.required;
   });
+  const schemaSet: ReadonlySet<string> = new Set(schemaKeys);
+  describe("schemaのkeyは重複してない", () => {
+    test("簡易チェック", () => {
+      expect(schemaKeys.length).toBe(schemaSet.size);
+    });
+    test("厳密チェック", () => {
+      expect(schemaKeys.toSorted()).toEqual(Array.from(schemaSet).toSorted());
+    });
+  });
   test("", () => {
-    const schemaSet = new Set(schemaKeys);
     expect(dataKeys.filter((k) => !schemaSet.has(k))).toEqual([]);
   });
 });

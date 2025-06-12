@@ -4,7 +4,7 @@ export interface System_ImageSize {
   iconSize: number;
 }
 
-export interface System_Images {
+export interface System_TitleImages {
   title1Name: string;
   title2Name: string;
 }

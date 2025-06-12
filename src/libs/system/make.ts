@@ -18,7 +18,7 @@ import type {
   System_BooleanOptionsRMMMZ as System_BooleanOptions,
   System_DataNames,
   System_GameInitial,
-  System_Images,
+  System_TitleImages,
   System_ImageSize,
   System_Terms,
   System_TermsPartial,
@@ -38,7 +38,7 @@ export const makeSystemData = (
 
   const dataNames: Partial<System_DataNames> = p.dataNames ?? {};
   const debug: Partial<System_Debug> = p.debug ?? {};
-  const images: Partial<System_Images> = p.images ?? {};
+  const images: Partial<System_TitleImages> = p.images ?? {};
   const gameInit: Partial<System_GameInitial> = p.gameInit ?? {};
   const bgm: Partial<System_Bgm> = p.bgm ?? {};
 
