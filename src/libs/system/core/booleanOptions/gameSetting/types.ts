@@ -1,4 +1,4 @@
-export interface System_BooleanOptionsRMMMZ {
+export interface System_BooleanGameOptions {
   optAutosave: boolean;
   optDisplayTp: boolean;
   optDrawTitle: boolean;
@@ -14,6 +14,6 @@ export interface System_BooleanOptionsRMMMZ {
 }
 
 export type SystemLable_BooleanOptionsRMMMZ = Record<
-  keyof System_BooleanOptionsRMMMZ,
+  keyof System_BooleanGameOptions,
   string
 >;

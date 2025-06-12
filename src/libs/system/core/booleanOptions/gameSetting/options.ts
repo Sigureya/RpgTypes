@@ -1,8 +1,8 @@
-import type { System_BooleanOptionsRMMMZ } from "./types";
+import type { System_BooleanGameOptions } from "./types";
 
 export const makeBooleanOptions = (
-  options: Partial<System_BooleanOptionsRMMMZ> = {}
-): System_BooleanOptionsRMMMZ => {
+  options: Partial<System_BooleanGameOptions> = {}
+): System_BooleanGameOptions => {
   return {
     optAutosave: options.optAutosave ?? true,
     optDisplayTp: options.optDisplayTp ?? true,
@@ -16,5 +16,5 @@ export const makeBooleanOptions = (
     optTransparent: options.optTransparent ?? true,
     optMessageSkip: options.optMessageSkip ?? true,
     optSplashScreen: options.optSplashScreen ?? true,
-  } satisfies Record<keyof System_BooleanOptionsRMMMZ, boolean>;
+  } satisfies Record<keyof System_BooleanGameOptions, boolean>;
 };

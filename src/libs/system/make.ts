@@ -15,7 +15,7 @@ import {
 } from "./core";
 import type {
   System_Bgm,
-  System_BooleanOptionsRMMMZ as System_BooleanOptions,
+  System_BooleanGameOptions,
   System_DataNames,
   System_GameInitial,
   System_TitleImages,
@@ -47,7 +47,7 @@ export const makeSystemData = (
 
   return {
     ...(makeBooleanOptions(p.options) satisfies Record<
-      string & keyof System_BooleanOptions,
+      string & keyof System_BooleanGameOptions,
       boolean
     >),
     currencyUnit: p.texts?.currencyUnit ?? "",

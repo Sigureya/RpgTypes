@@ -1,7 +1,7 @@
 import type { DomainLabel } from "@RpgTypes/templates";
 import type {
   System_Bgm,
-  System_BooleanOptionsRMMMZ,
+  System_BooleanGameOptions,
   System_TitleImages,
   SystemLabel_DataNames,
   SystemLabels_GameCommands,
@@ -13,7 +13,7 @@ type AsLabel<T> = Record<keyof T, string>;
 export type SystemLabel_Images = AsLabel<System_TitleImages>;
 export type SystemLabel_Text = AsLabel<System_Text>;
 export type SystemLabel_Bgm = AsLabel<System_Bgm>;
-export type SystemLabel_BoolanOptions = AsLabel<System_BooleanOptionsRMMMZ>;
+export type SystemLabel_BoolanOptions = AsLabel<System_BooleanGameOptions>;
 
 export const DEFAULT_SYSTEM_LABELS_BOOLEAN = {
   domainName: "オプション",

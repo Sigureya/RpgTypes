@@ -6,7 +6,7 @@ import type {
   Data_Vehicle,
   System_Advanced,
   System_AudioFiles,
-  System_BooleanOptionsRMMMZ,
+  System_BooleanGameOptions,
   System_Terms,
 } from "./core";
 import { SCHEMA_SYSTEM_ADVANCED, SCHEMA_SYSTEM_BOOLEAN_OPTIONS } from "./core";
@@ -53,8 +53,5 @@ const makeSystemSchema = () =>
     required: [],
     allOf: [SCHEMA_SYSTEM_AUDIOFILES, SCHEMA_SYSTEM_BOOLEAN_OPTIONS],
   } as const satisfies JSONSchemaType<
-    Pick<
-      Data_System,
-      keyof System_BooleanOptionsRMMMZ | keyof System_AudioFiles
-    >
+    Pick<Data_System, keyof System_BooleanGameOptions | keyof System_AudioFiles>
   >);

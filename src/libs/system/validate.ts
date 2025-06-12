@@ -1,7 +1,7 @@
 import Ajv from "ajv";
 import type {
   AttackMotion,
-  System_BooleanOptionsRMMMZ,
+  System_BooleanGameOptions,
   System_ImageSize,
 } from "./core";
 import { SCHEMA_SYSTEM_BOOLEAN_OPTIONS } from "./core";
@@ -15,7 +15,7 @@ const booleanOptions = ajv.compile(SCHEMA_SYSTEM_BOOLEAN_OPTIONS);
 
 export const isSystemBooleanOptions = (
   data: object
-): data is System_BooleanOptionsRMMMZ => {
+): data is System_BooleanGameOptions => {
   return booleanOptions(data);
 };
 

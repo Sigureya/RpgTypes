@@ -1,5 +1,5 @@
 import type { JSONSchemaType } from "ajv";
-import type { System_BooleanOptionsRMMMZ } from "./types";
+import type { System_BooleanGameOptions } from "./types";
 
 export const SCHEMA_SYSTEM_BOOLEAN_OPTIONS = {
   type: "object",
@@ -17,7 +17,7 @@ export const SCHEMA_SYSTEM_BOOLEAN_OPTIONS = {
     "optTransparent",
     "optMessageSkip",
     "optSplashScreen",
-  ] satisfies Array<keyof System_BooleanOptionsRMMMZ>,
+  ] satisfies Array<keyof System_BooleanGameOptions>,
   properties: {
     optAutosave: { type: "boolean" },
     optDisplayTp: { type: "boolean" },
@@ -32,4 +32,4 @@ export const SCHEMA_SYSTEM_BOOLEAN_OPTIONS = {
     optMessageSkip: { type: "boolean" },
     optSplashScreen: { type: "boolean" },
   },
-} as const satisfies JSONSchemaType<System_BooleanOptionsRMMMZ>;
+} as const satisfies JSONSchemaType<System_BooleanGameOptions>;
