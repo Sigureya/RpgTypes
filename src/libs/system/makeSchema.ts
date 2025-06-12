@@ -5,19 +5,17 @@ import type {
   AttackMotion,
   Data_Vehicle,
   System_Advanced,
-  System_AudioFiles,
   System_Terms,
 } from "./core";
-import { SCHEMA_SYSTEM_ADVANCED, SCHEMA_SYSTEM_BOOLEAN_OPTIONS } from "./core";
+import { SCHEMA_SYSTEM_ADVANCED } from "./core";
 import { SCHEMA_SYSTEM_MEMBERS_ATTACK_MOTION } from "./core/attackMotion/schema";
 import { SCHEMA_SYSTEM_VEHICLE } from "./core/vehicle/schema";
 import type { EditorSettings, TestBattler } from "./gameEdit";
 import type { Data_System } from "./system";
 
-const xxxSchema: JSONSchemaType<
+export const SCHEMA_SYSTEM_PARTIAL_BUNDLE: JSONSchemaType<
   OmitByType<
     Data_System,
-    // | AttackMotion[]
     | number[]
     | string[]
     | string
