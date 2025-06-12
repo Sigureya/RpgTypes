@@ -1,9 +1,8 @@
-import { ItemCategories, MenuCommandsEnabled, System_Advanced, System_Bgm, System_BooleanOptionsRMMMZ, System_GameInitial, System_ImageSize, System_Me, System_SoundsObject, System_Vehicles, Terms_Basic, Terms_GameCommands, Terms_Messages } from './core';
-import { System_DataNames } from './core/dataTypes';
-import { EditorSettings } from './setting';
-import { System_Text, System_Debug, System_Images } from './subset';
+import { ItemCategories, MenuCommandsEnabled, System_Advanced, System_Bgm, System_BooleanGameOptions, System_DataNames, System_GameInitial, System_TitleImages, System_ImageSize, System_Me, System_SoundsObject, System_Vehicles, Terms_Basic, Terms_GameCommands, Terms_Messages } from './core';
+import { EditorSettings, System_TestBattle } from './gameEdit';
+import { System_Text, System_Debug } from './subset';
 export interface SystemDataFragments {
-    options: Partial<System_BooleanOptionsRMMMZ>;
+    options: Partial<System_BooleanGameOptions>;
     advanced: Partial<System_Advanced>;
     vehicles: Partial<System_Vehicles>;
     editing: Partial<EditorSettings>;
@@ -13,7 +12,8 @@ export interface SystemDataFragments {
     texts: Partial<System_Text>;
     sounds: Partial<System_SoundsObject>;
     debug: Partial<System_Debug>;
-    images: Partial<System_Images>;
+    battlerTest: Partial<System_TestBattle>;
+    images: Partial<System_TitleImages>;
     gameInit: Partial<System_GameInitial>;
     itemCategories: Partial<ItemCategories>;
     size: Partial<System_ImageSize>;

@@ -1,3 +1,5 @@
+import { JSONSchemaType } from 'ajv';
+import { System_TitleImages } from './types';
 export declare const SCHEMA_SYSTEM_IMAGE_SIZE: {
     readonly additionalProperties: false;
     readonly type: "object";
@@ -17,3 +19,4 @@ export declare const SCHEMA_SYSTEM_IMAGE_SIZE: {
         };
     };
 };
+export declare const SCHEMA_SYSTEM_TITLE_IMAGES: JSONSchemaType<System_TitleImages>;
