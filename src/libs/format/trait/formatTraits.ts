@@ -1,8 +1,3 @@
-import type {
-  SystemLabel_DataNames,
-  System_DataNames,
-} from "@RpgTypes/system/core/dataTypes";
-import { defineSystemItems } from "@RpgTypes/system/core/dataTypes";
 import {
   type NamedItemSource,
   type FormatCompiled,
@@ -22,6 +17,8 @@ import {
   defineGameDataSources,
   resolveItemEffectLabels,
 } from "src/rpg";
+import type { System_DataNames, SystemLabel_DataNames } from "src/system";
+import { defineSystemItems } from "src/system";
 
 export const buildReferenceItemSources = (
   gameData: GameData,
