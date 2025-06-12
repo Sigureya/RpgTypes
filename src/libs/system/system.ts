@@ -7,9 +7,8 @@ import type {
   System_Advanced,
   System_SoundsArray,
   System_Terms,
-  TestBattler,
 } from "./core";
-import type { EditorSettings } from "./gameEdit";
+import type { EditorSettings, TestBattler } from "./gameEdit";
 
 export interface Data_System {
   // battle

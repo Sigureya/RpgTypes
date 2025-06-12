@@ -8,6 +8,5 @@ export * from "./imageSize";
 export * from "./itemCategories";
 export * from "./menuCommands";
 export * from "./terms";
-export * from "./testBattler";
 export * from "./titleCommandWindow";
 export * from "./vehicle";
