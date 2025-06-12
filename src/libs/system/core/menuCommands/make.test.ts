@@ -24,18 +24,18 @@ const testRoundTrip = (caseName: string, param: MenuCommandsEnabled) => {
 
 describe("MenuCommandsEnabledArray length validation", () => {
   test("invalid: array length is 5 (too short)", () => {
-    expect(validate([false, false, false, false, false])).toBe(false);
+    expect([false, false, false, false, false]).not.toSatisfy(validate);
   });
   test("invalid: array length is 7 (too long)", () => {
-    expect(validate([false, false, false, false, false, false, false])).toBe(
-      false
+    expect([false, false, false, false, false, false, false]).not.toSatisfy(
+      validate
     );
   });
   test("invalid: array length is 5 with all true", () => {
-    expect(validate([true, true, true, true, true])).toBe(false);
+    expect([true, true, true, true, true]).not.toSatisfy(validate);
   });
   test("invalid: array length is 7 with all true", () => {
-    expect(validate([true, true, true, true, true, true, true])).toBe(false);
+    expect([true, true, true, true, true, true, true]).not.toSatisfy(validate);
   });
 });
 
@@ -43,7 +43,7 @@ describe("makeMenuCommandsEnabled", () => {
   test("returns all true when param is empty object", () => {
     const array = makeMenuCommandsEnabled({});
     expect(array).toEqual([true, true, true, true, true, true]);
-    expect(validate(array)).toBe(true);
+    expect(array).toSatisfy(validate);
   });
   test("returns all true when all values are true", () => {
     const array = makeMenuCommandsEnabled({
@@ -55,7 +55,7 @@ describe("makeMenuCommandsEnabled", () => {
       save: true,
     });
     expect(array).toEqual([true, true, true, true, true, true]);
-    expect(validate(array)).toBe(true);
+    expect(array).toSatisfy(validate);
   });
   test("returns all false when all values are false", () => {
     const array = makeMenuCommandsEnabled({
@@ -67,27 +67,27 @@ describe("makeMenuCommandsEnabled", () => {
       save: false,
     });
     expect(array).toEqual([false, false, false, false, false, false]);
-    expect(validate(array)).toBe(true);
+    expect(array).toSatisfy(validate);
   });
   test("returns all true when param is undefined", () => {
     const array = makeMenuCommandsEnabled(undefined);
     expect(array).toEqual([true, true, true, true, true, true]);
-    expect(validate(array)).toBe(true);
+    expect(array).toSatisfy(validate);
   });
   test("returns correct array when only one value is true (equip)", () => {
     const array = makeMenuCommandsEnabled({ equip: true });
     expect(array).toEqual([true, true, true, true, true, true]);
-    expect(validate(array)).toBe(true);
+    expect(array).toSatisfy(validate);
   });
   test("returns correct array when only one value is false (item)", () => {
     const array = makeMenuCommandsEnabled({ item: false });
     expect(array).toEqual([false, true, true, true, true, true]);
-    expect(validate(array)).toBe(true);
+    expect(array).toSatisfy(validate);
   });
   test("returns correct array when some values are set", () => {
     const array = makeMenuCommandsEnabled({ item: false, save: false });
     expect(array).toEqual([false, true, true, true, true, false]);
-    expect(validate(array)).toBe(true);
+    expect(array).toSatisfy(validate);
   });
 });
 
