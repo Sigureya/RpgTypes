@@ -10,33 +10,37 @@ describe("SCHEMA_SYSTEM_MEMBERS_ATTACK_MOTION", () => {
     expect(validate).toBeTypeOf("function");
   });
 
-  test("should validate a valid AttackMotion object", () => {
-    const validAttackMotion: AttackMotion = {
-      type: 1,
-      weaponImageId: 2,
-    };
-    expect(validate(validAttackMotion)).toBe(true);
+  describe("normal case", () => {
+    test("should validate a valid AttackMotion object", () => {
+      const validAttackMotion: AttackMotion = {
+        type: 1,
+        weaponImageId: 2,
+      };
+      expect(validAttackMotion).toSatisfy(validate);
+    });
   });
-  test("should invalidate an AttackMotion object with missing properties", () => {
-    const invalidAttackMotion = {
-      type: 1,
-    };
-    expect(validate(invalidAttackMotion)).toBe(false);
-  });
-  test("should invalidate an AttackMotion object with additional properties", () => {
-    const invalidAttackMotion = {
-      type: 1,
-      weaponImageId: 2,
-      extraProperty: "invalid",
-    };
-    expect(validate(invalidAttackMotion)).toBe(false);
-  });
+  describe("error cases", () => {
+    test("should invalidate an AttackMotion object with missing properties", () => {
+      const invalidAttackMotion = {
+        type: 1,
+      };
+      expect(invalidAttackMotion).not.toSatisfy(validate);
+    });
+    test("should invalidate an AttackMotion object with additional properties", () => {
+      const invalidAttackMotion = {
+        type: 1,
+        weaponImageId: 2,
+        extraProperty: "invalid",
+      };
+      expect(invalidAttackMotion).not.toSatisfy(validate);
+    });
 
-  test("should invalidate an invalid AttackMotion object", () => {
-    const invalidAttackMotion = {
-      type: "invalid",
-      weaponImageId: "invalid",
-    };
-    expect(validate(invalidAttackMotion)).toBe(false);
+    test("should invalidate an invalid AttackMotion object", () => {
+      const invalidAttackMotion = {
+        type: "invalid",
+        weaponImageId: "invalid",
+      };
+      expect(invalidAttackMotion).not.toSatisfy(validate);
+    });
   });
 });
