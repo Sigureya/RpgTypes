@@ -3,6 +3,7 @@ import { makeAudioFileParams } from "src/utils";
 import {
   makeBooleanOptions,
   makeDataNames,
+  makeItemCategories,
   makeMenuCommandsEnabled,
   makeParamNamesArray,
   makeSoundsArray,
@@ -12,7 +13,6 @@ import {
   makeTermsMessages,
   makeVehicleData,
 } from "./core";
-import { makeItemCategories } from "./core";
 import type {
   System_Bgm,
   System_BooleanOptionsRMMMZ as System_BooleanOptions,

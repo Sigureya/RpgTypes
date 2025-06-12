@@ -12,10 +12,6 @@ import type {
 import { SCHEMA_SYSTEM_ADVANCED, SCHEMA_SYSTEM_BOOLEAN_OPTIONS } from "./core";
 import { SCHEMA_SYSTEM_MEMBERS_ATTACK_MOTION } from "./core/attackMotion/schema";
 import { SCHEMA_SYSTEM_AUDIOFILES } from "./core/audio/schema";
-import { SCHEMA_SYSTEM_MEMBERS_TERMS_BASIC_ARRAY } from "./core/terms/basic/schema";
-import { SCHEMA_SYSTEM_MEMBERS_TERMS_COMMANDS_ARRAY } from "./core/terms/commands/schema";
-import { SCHEMA_SYSTEM_TERMS_MESSAGES } from "./core/terms/messages/schema";
-import { SCHEMA_SYSTEM_PARAM_NAMS_ARRAY } from "./core/terms/paramArray/schema";
 import { SCHEMA_SYSTEM_VEHICLE } from "./core/vehicle/schema";
 import type { EditorSettings, TestBattler } from "./gameEdit";
 import type { Data_System } from "./system";
