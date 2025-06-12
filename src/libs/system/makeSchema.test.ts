@@ -1,9 +1,11 @@
 import { describe, test, expect } from "vitest";
 import type { SchemaObject } from "ajv";
 import Ajv from "ajv";
-import type { System_AudioFiles, Terms_Messages } from "./core";
+import type { Terms_Messages } from "./core";
 import { SCHEMA_SYSTEM_BOOLEAN_OPTIONS } from "./core";
 import { SCHEMA_SYSTEM_AUDIOFILES } from "./core/audio/schema";
+import { SCHEMA_SYSTEM_RPG_DATA_NAMES } from "./core/rpgDataTypes/schema";
+import { SCHEMA_SYSTEM_GAME_EDITOR_RMMZ } from "./gameEdit/schema";
 import { SCHEMA_SYSTEM_TEST_PLAY } from "./gameEdit/testPlay/schema";
 import { SCHEMA_SYSTEM_PARTIAL_BUNDLE } from "./makeSchema";
 import type { Data_System } from "./system";
@@ -264,6 +266,14 @@ const allSchema = [
   {
     caseName: "TestPlay",
     schema: SCHEMA_SYSTEM_TEST_PLAY,
+  },
+  {
+    caseName: "rpgDataTypes",
+    schema: SCHEMA_SYSTEM_RPG_DATA_NAMES,
+  },
+  {
+    caseName: "editor",
+    schema: SCHEMA_SYSTEM_GAME_EDITOR_RMMZ,
   },
 ] as const satisfies SchemaCase[];
 
