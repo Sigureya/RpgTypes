@@ -13,19 +13,19 @@ describe("SCHEMA_SYSTEM_MEMBERS_TERMS_BASIC", () => {
   });
   test("makeTermsBasic returns valid Terms_BasicArray with default values", () => {
     const validTermsBasicArray: Terms_BasicArray = makeTermsBasic({});
-    expect(validate(validTermsBasicArray)).toBe(true);
+    expect(validTermsBasicArray).toSatisfy(validate);
   });
   test("invalid: array length is 9 (too short)", () => {
     const array = Array.from({ length: 9 }, () => "");
-    expect(validate(array)).toBe(false);
+    expect(array).not.toSatisfy(validate);
   });
   test("valid: array length is 10 (just right)", () => {
     const array = Array.from({ length: 10 }, () => "");
-    expect(validate(array)).toBe(true);
+    expect(array).toSatisfy(validate);
   });
   test("invalid: array length is 11 (too long)", () => {
     const array = Array.from({ length: 11 }, () => "");
-    expect(validate(array)).toBe(false);
+    expect(array).not.toSatisfy(validate);
   });
 });
 
@@ -39,7 +39,7 @@ const testTermsBasicProperty = (key: keyof Terms_Basic, text: string) => {
     expect(termsObject[key]).toBe(text);
   });
   test(`makeTermsBasic returns valid Terms_BasicArray when only ${key} is set`, () =>
-    expect(validate(termsArray)).toBe(true));
+    expect(termsArray).toSatisfy(validate));
 };
 
 describe("makeTermsBasic individual property assignment", () => {
@@ -68,8 +68,9 @@ describe("makeTermsBasic with all properties set", () => {
     experience: "G8",
     exp: "S9",
   });
-  test("makeTermsBasic returns valid Terms_BasicArray when all properties are set", () =>
-    expect(validate(termsArray)).toBe(true));
+  test("makeTermsBasic returns valid Terms_BasicArray when all properties are set", () => {
+    expect(termsArray).toSatisfy(validate);
+  });
   test("termsArray[0] is level", () => expect(termsArray[0]).toBe("A0"));
   test("termsArray[1] is levelA", () => expect(termsArray[1]).toBe("M1"));
   test("termsArray[2] is hp", () => expect(termsArray[2]).toBe("J2"));
