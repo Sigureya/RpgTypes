@@ -6,7 +6,7 @@ import type {
   System_BooleanOptionsRMMMZ,
   System_DataNames,
   System_GameInitial,
-  System_Images,
+  System_TitleImages,
   System_ImageSize,
   System_Me,
   System_SoundsObject,
@@ -30,7 +30,7 @@ export interface SystemDataFragments {
   sounds: Partial<System_SoundsObject>;
   debug: Partial<System_Debug>;
   battlerTest: Partial<System_TestBattle>;
-  images: Partial<System_Images>;
+  images: Partial<System_TitleImages>;
   gameInit: Partial<System_GameInitial>;
   itemCategories: Partial<ItemCategories>;
   size: Partial<System_ImageSize>;

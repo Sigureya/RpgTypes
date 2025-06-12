@@ -1,7 +1,7 @@
 import type { JSONSchemaType } from "ajv";
 import type { Terms_Messages } from "./types";
 
-export const SCHEMA_SYSTEM_TERMS_MESSAGES: JSONSchemaType<Terms_Messages> = {
+export const SCHEMA_SYSTEM_TERMS_MESSAGES = {
   type: "object",
   additionalProperties: false,
   required: [

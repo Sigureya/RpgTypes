@@ -2,7 +2,7 @@ import type { DomainLabel } from "@RpgTypes/templates";
 import type {
   System_Bgm,
   System_BooleanOptionsRMMMZ,
-  System_Images,
+  System_TitleImages,
   SystemLabel_DataNames,
   SystemLabels_GameCommands,
 } from "./core";
@@ -10,7 +10,7 @@ import type { SystemLabels_TermsParamNames } from "./core/terms/paramArray";
 import type { System_Text } from "./subset";
 type AsLabel<T> = Record<keyof T, string>;
 
-export type SystemLabel_Images = AsLabel<System_Images>;
+export type SystemLabel_Images = AsLabel<System_TitleImages>;
 export type SystemLabel_Text = AsLabel<System_Text>;
 export type SystemLabel_Bgm = AsLabel<System_Bgm>;
 export type SystemLabel_BoolanOptions = AsLabel<System_BooleanOptionsRMMMZ>;
