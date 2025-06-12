@@ -1,6 +1,7 @@
 export * from "./advanced";
 export * from "./attackMotion";
 export * from "./audio";
+export * from "./battle";
 export * from "./booleanOptions";
 export * from "./gameInitial";
 export * from "./images";

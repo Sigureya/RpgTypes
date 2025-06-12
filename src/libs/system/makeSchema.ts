@@ -51,25 +51,6 @@ export const SCHEMA_SYSTEM_PARTIAL_BUNDLE: JSONSchemaType<
   },
 };
 
-export const SCHEMA_SYSTEM_TERMS_BUNDLE = {
-  required: ["terms"],
-  additionalProperties: false,
-  type: "object",
-  properties: {
-    terms: {
-      additionalProperties: false,
-      type: "object",
-      required: ["messages", "commands", "basic", "params"],
-      properties: {
-        messages: SCHEMA_SYSTEM_TERMS_MESSAGES,
-        commands: SCHEMA_SYSTEM_MEMBERS_TERMS_COMMANDS_ARRAY,
-        basic: SCHEMA_SYSTEM_MEMBERS_TERMS_BASIC_ARRAY,
-        params: SCHEMA_SYSTEM_PARAM_NAMS_ARRAY,
-      },
-    },
-  },
-} as const;
-
 const makeSystemSchema = () =>
   ({
     type: "object",

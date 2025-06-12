@@ -7,17 +7,15 @@ import {
   SCHEMA_SYSTEM_GAME_INITIAL,
 } from "./core";
 import { SCHEMA_SYSTEM_AUDIOFILES } from "./core/audio/schema";
+import { SCHEMA_SYSTEM_BATTLE_RULE_RMMZ } from "./core/battle/schema";
 import {
   SCHEMA_SYSTEM_IMAGE_SIZE,
   SCHEMA_SYSTEM_TITLE_IMAGES,
 } from "./core/images/schema";
 import { SCHEMA_SYSTEM_RPG_DATA_NAMES } from "./core/rpgDataTypes/schema";
+import { SCHEMA_SYSTEM_TERMS_BUNDLE } from "./core/terms/schema";
 import { SCHEMA_SYSTEM_GAME_EDITOR_BUNDLE } from "./gameEdit/schema";
-import { SCHEMA_SYSTEM_TEST_PLAY } from "./gameEdit/testPlay/schema";
-import {
-  SCHEMA_SYSTEM_PARTIAL_BUNDLE,
-  SCHEMA_SYSTEM_TERMS_BUNDLE,
-} from "./makeSchema";
+import { SCHEMA_SYSTEM_PARTIAL_BUNDLE } from "./makeSchema";
 import type { Data_System } from "./system";
 
 const mockSystem = {
@@ -280,6 +278,10 @@ const allSchema = [
   {
     caseName: "rpgDataTypes",
     schema: SCHEMA_SYSTEM_RPG_DATA_NAMES,
+  },
+  {
+    caseName: "battleRuleRMMZ",
+    schema: SCHEMA_SYSTEM_BATTLE_RULE_RMMZ,
   },
   {
     caseName: "image size",
