@@ -9,15 +9,6 @@ export type System_Pick<
 
 export type System_ParamNames = System_Pick<"terms", "params">;
 
-export type System_Images = Pick<
-  Data_System,
-  | "battleback1Name"
-  | "battleback2Name"
-  | "battlerName"
-  | "title1Name"
-  | "title2Name"
->;
-
 export type System_Text = Pick<Data_System, "gameTitle" | "currencyUnit">;
 
 export type System_Debug = Pick<

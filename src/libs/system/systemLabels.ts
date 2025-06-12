@@ -2,11 +2,12 @@ import type { DomainLabel } from "@RpgTypes/templates";
 import type {
   System_Bgm,
   System_BooleanOptionsRMMMZ,
+  System_Images,
+  SystemLabel_DataNames,
   SystemLabels_GameCommands,
 } from "./core";
-import type { SystemLabel_DataNames } from "./core/dataTypes";
 import type { SystemLabels_TermsParamNames } from "./core/terms/paramArray";
-import type { System_Images, System_Text } from "./subset";
+import type { System_Text } from "./subset";
 type AsLabel<T> = Record<keyof T, string>;
 
 export type SystemLabel_Images = AsLabel<System_Images>;
