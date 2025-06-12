@@ -3,7 +3,7 @@ import type {
   MenuCommandsEnabled,
   System_Advanced,
   System_Bgm,
-  System_BooleanOptionsRMMMZ,
+  System_BooleanGameOptions,
   System_DataNames,
   System_GameInitial,
   System_TitleImages,
@@ -19,7 +19,7 @@ import type { EditorSettings, System_TestBattle } from "./gameEdit";
 import type { System_Text, System_Debug } from "./subset";
 
 export interface SystemDataFragments {
-  options: Partial<System_BooleanOptionsRMMMZ>;
+  options: Partial<System_BooleanGameOptions>;
   advanced: Partial<System_Advanced>;
   vehicles: Partial<System_Vehicles>;
   editing: Partial<EditorSettings>;

@@ -2,11 +2,11 @@ import { describe, test, expect } from "vitest";
 import Ajv from "ajv";
 import { makeBooleanOptions } from "./options";
 import { SCHEMA_SYSTEM_BOOLEAN_OPTIONS } from "./schema";
-import type { System_BooleanOptionsRMMMZ as System_BooleanOptions } from "./types";
+import type { System_BooleanGameOptions } from "./types";
 
 const ajv = new Ajv();
 const isSystemBooleanOptions = ajv.compile(SCHEMA_SYSTEM_BOOLEAN_OPTIONS);
-const keys: ReadonlySet<keyof System_BooleanOptions> = new Set(
+const keys: ReadonlySet<keyof System_BooleanGameOptions> = new Set(
   SCHEMA_SYSTEM_BOOLEAN_OPTIONS.required
 );
 
@@ -17,7 +17,7 @@ describe("SCHEMA_SYSTEM_BOOLEAN_OPTIONS structure", () => {
 });
 
 describe("Direct System_BooleanOptions validation", () => {
-  const mock: System_BooleanOptions = {
+  const mock: System_BooleanGameOptions = {
     optAutosave: true,
     optDisplayTp: true,
     optDrawTitle: true,
@@ -35,14 +35,14 @@ describe("Direct System_BooleanOptions validation", () => {
     expect(mock).toSatisfy(isSystemBooleanOptions);
   });
   test("invalid type in options fails schema", () => {
-    const options: Record<keyof System_BooleanOptions, boolean | number> = {
+    const options: Record<keyof System_BooleanGameOptions, boolean | number> = {
       ...mock,
       optSplashScreen: 0, // invalid type
     };
     expect(options).not.toSatisfy(isSystemBooleanOptions);
   });
   test("missing required property fails schema", () => {
-    const mockMissing: Omit<System_BooleanOptions, "optExtraExp"> = {
+    const mockMissing: Omit<System_BooleanGameOptions, "optExtraExp"> = {
       optAutosave: true,
       optDisplayTp: true,
       optDrawTitle: true,
@@ -65,12 +65,12 @@ describe("makeBooleanOptions utility", () => {
     expect(mock).toSatisfy(isSystemBooleanOptions);
   });
   describe("", () => {
-    const param: Partial<System_BooleanOptions> = { optAutosave: true };
+    const param: Partial<System_BooleanGameOptions> = { optAutosave: true };
     test("partial input fails, but makeBooleanOptions fills defaults", () => {
       expect(param).not.toSatisfy(isSystemBooleanOptions);
     });
     test("", () => {
-      const options: System_BooleanOptions = makeBooleanOptions(param);
+      const options: System_BooleanGameOptions = makeBooleanOptions(param);
       expect(options).toSatisfy(isSystemBooleanOptions);
     });
   });
