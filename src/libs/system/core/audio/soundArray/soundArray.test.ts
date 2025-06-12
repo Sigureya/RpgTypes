@@ -1,8 +1,8 @@
 import { describe, test, expect } from "vitest";
 import Ajv from "ajv";
 import { makeAudioFileParams } from "src/utils";
-import { makeSoundsArray, makeSoundsObject } from "./make";
 import { SCHEMA_SYSTEM_SOUND_ARRAY } from "./schema";
+import { makeSoundsArray, makeSoundsObject } from "./soundArray";
 import type { System_SoundsArray, System_SoundsObject } from "./types";
 
 const ajv = new Ajv({ strict: false });

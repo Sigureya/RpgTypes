@@ -1,2 +1,2 @@
-export * from "./make";
+export * from "./soundArray";
 export * from "./types";
