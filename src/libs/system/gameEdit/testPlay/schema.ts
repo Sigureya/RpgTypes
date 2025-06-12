@@ -25,6 +25,6 @@ export const SCHEMA_SYSTEM_TEST_PLAY = {
       type: "array",
       items: SCHEMA_SYSTEM_TEST_BATTLER,
     },
-    testTroopId: { type: "integer", minimum: 1 },
+    testTroopId: { type: "integer", minimum: 0 },
   },
 } as const satisfies JSONSchemaType<System_TestPlay>;
