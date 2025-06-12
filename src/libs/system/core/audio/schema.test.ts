@@ -1,8 +1,7 @@
 import { describe, test, expect } from "vitest";
 import Ajv from "ajv";
+import type { Data_System, SystemDataFragments } from "src/system";
 import makeSystemData from "src/system/make";
-import type { Data_System } from "src/system/system";
-import type { SystemDataFragments } from "src/system/systemSegments";
 import type { System_BooleanOptionsRMMMZ } from "../booleanOptions";
 import { SCHEMA_SYSTEM_BOOLEAN_OPTIONS } from "../booleanOptions";
 
