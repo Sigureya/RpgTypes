@@ -6,6 +6,7 @@ import type {
   System_BooleanOptionsRMMMZ,
   System_DataNames,
   System_GameInitial,
+  System_Images,
   System_ImageSize,
   System_Me,
   System_SoundsObject,
@@ -15,7 +16,7 @@ import type {
   Terms_Messages,
 } from "./core";
 import type { EditorSettings } from "./gameEdit";
-import type { System_Text, System_Debug, System_Images } from "./subset";
+import type { System_Text, System_Debug } from "./subset";
 
 export interface SystemDataFragments {
   options: Partial<System_BooleanOptionsRMMMZ>;

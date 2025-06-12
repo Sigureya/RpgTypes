@@ -4,7 +4,7 @@ export * from "./audio";
 export * from "./booleanOptions";
 export * from "./dataTypes";
 export * from "./gameInitial";
-export * from "./imageSize";
+export * from "./images";
 export * from "./itemCategories";
 export * from "./menuCommands";
 export * from "./terms";

@@ -18,6 +18,7 @@ import type {
   System_BooleanOptionsRMMMZ as System_BooleanOptions,
   System_DataNames,
   System_GameInitial,
+  System_Images,
   System_ImageSize,
   System_Terms,
   System_TermsPartial,
@@ -25,7 +26,7 @@ import type {
 } from "./core";
 import type { EditorSettings, TestBattler } from "./gameEdit";
 import { makeEditorSetting } from "./gameEdit";
-import type { System_Debug, System_Images } from "./subset";
+import type { System_Debug } from "./subset";
 import type { Data_System } from "./system";
 import type { SystemDataFragments } from "./systemSegments";
 import { isImageSize, isTestBattler } from "./validate";
