@@ -4,7 +4,9 @@ export interface TestBattler {
   equips: number[];
 }
 
-export interface System_TestPlay {
+export interface System_TestBattle {
   testBattlers: TestBattler[];
   testTroopId: number;
+  battleback1Name: string;
+  battleback2Name: string;
 }

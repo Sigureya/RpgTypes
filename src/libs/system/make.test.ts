@@ -76,16 +76,18 @@ const fullFragments = {
   debug: {
     battlerHue: 10,
     battlerName: "debugBattler",
+    editMapId: 200,
+  },
+  battlerTest: {
+    battleback1Name: "bb1",
+    battleback2Name: "bb2",
+    testTroopId: 100,
     testBattlers: [
       { actorId: 1, equips: [1, 2], level: 5 },
       { actorId: 2, equips: [3, 4], level: 6 },
     ],
-    testTroopId: 100,
-    editMapId: 200,
   },
   images: {
-    battleback1Name: "bb1",
-    battleback2Name: "bb2",
     title1Name: "title1",
     title2Name: "title2",
   },
