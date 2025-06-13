@@ -2,7 +2,7 @@ import type { JSONSchemaType } from "ajv";
 import type { System_GameInitial } from "./types";
 
 export const SCHEMA_SYSTEM_GAME_INITIAL = {
-  additionalProperties: true,
+  additionalProperties: false,
   type: "object",
   required: ["startMapId", "startX", "startY", "partyMembersArray"],
   properties: {

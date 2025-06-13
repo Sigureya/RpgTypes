@@ -15,6 +15,7 @@ const audioFileParamsSchema = {
 } as const satisfies JSONSchemaType<AudioFileParams>;
 
 export const SCHEMA_SYSTEM_AUDIOFILES = {
+  additionalProperties: false,
   type: "object",
   required: [
     "battleBgm",
