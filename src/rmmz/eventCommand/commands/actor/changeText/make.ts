@@ -1,4 +1,4 @@
-import { CHANGE_NAME, CHANGE_NICKNAME, CHANGE_PROFILE } from "src/rpg";
+import { CHANGE_NAME, CHANGE_NICKNAME, CHANGE_PROFILE } from "@RpgTypes/rpg";
 import type {
   ParamObject_ChangeActorName,
   Command_ChangeActorName as Command_ChangeActorName,

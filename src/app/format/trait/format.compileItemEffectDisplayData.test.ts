@@ -1,7 +1,4 @@
 import { test, expect, describe } from "vitest";
-import type { System_RPG_DataNames } from "@RpgTypes/system";
-import { DEFAULT_SYSTEM_LABELS_DATA_TYPES } from "@RpgTypes/system";
-import type { Data_NamedItem, FormatCompiled } from "src/namedItemSource";
 import type {
   Data_Actor,
   Data_Armor,
@@ -14,7 +11,7 @@ import type {
   Data_Weapon,
   GameData,
   NormalLabel,
-} from "src/rpg";
+} from "@RpgTypes/rpg";
 import {
   makeActorData,
   makeArmorData,
@@ -30,22 +27,23 @@ import {
   LABEL_SET_TRAIT,
   LABEL_SET_DATA,
   regularParamsToArray,
-} from "src/rpg";
-import {
+  EFFECT_LEARN_SKILL,
   EFFECT_ADD_BUFF,
   EFFECT_ADD_DEBUFF,
   EFFECT_ADD_STATE,
-  EFFECT_REMOVE_BUFF,
-  EFFECT_REMOVE_DEBUFF,
-  EFFECT_REMOVE_STATE,
   EFFECT_COMMON_EVENT,
   EFFECT_GAIN_TP,
   EFFECT_GROW,
-  EFFECT_LEARN_SKILL,
   EFFECT_RECOVER_HP,
   EFFECT_RECOVER_MP,
+  EFFECT_REMOVE_BUFF,
+  EFFECT_REMOVE_DEBUFF,
+  EFFECT_REMOVE_STATE,
   EFFECT_SPECIAL,
-} from "src/rpg/data/main/usableItems/core/itemEffect/effectCode";
+} from "@RpgTypes/rpg";
+import type { System_RPG_DataNames } from "@RpgTypes/system";
+import { DEFAULT_SYSTEM_LABELS_DATA_TYPES } from "@RpgTypes/system";
+import type { Data_NamedItem, FormatCompiled } from "src/namedItemSource";
 import {
   buildReferenceItemSources,
   compileItemEffectDisplayData,

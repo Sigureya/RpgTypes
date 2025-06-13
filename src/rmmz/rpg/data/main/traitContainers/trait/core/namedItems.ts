@@ -1,5 +1,5 @@
+import type { GlobalLabel, TraitLabelSet } from "@RpgTypes/rpg";
 import type { NamedItemSource } from "src/namedItemSource";
-import type { GlobalLabel, TraitLabelSet } from "src/rpg";
 import {
   defineTraitRegularParam,
   defineTraitExtraParam,
