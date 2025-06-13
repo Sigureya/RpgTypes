@@ -13,9 +13,12 @@ export default defineConfig({
   },
   resolve: {
     alias: {
-      "@RpgTypes/system": path.resolve(__dirname, "./src/rmmz/system"),
+      "@RpgTypes/eventCommand": path.resolve(
+        __dirname,
+        "src/rmmz/eventCommand"
+      ),
 
-      //      "src/libs": path.resolve(__dirname, "./src/libs"),
+      "@RpgTypes/system": path.resolve(__dirname, "./src/rmmz/system"),
       "@RpgTypes": path.resolve(__dirname, "./src/libs"),
       src: path.resolve(__dirname, "./src/libs"),
     },
