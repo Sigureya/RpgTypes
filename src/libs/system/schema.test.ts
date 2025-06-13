@@ -14,10 +14,10 @@ import {
 } from "./core/images/schema";
 import { SCHEMA_SYSTEM_OTHER_DATA } from "./core/other";
 import { SCHEMA_SYSTEM_RPG_DATA_NAMES } from "./core/rpgDataTypes/schema";
+import { SCHEMA_SYSTEM_PARTIAL_BUNDLE } from "./core/schemaBundle";
 import { SCHEMA_SYSTEM_TERMS_BUNDLE } from "./core/terms/schema";
 import { SCHEMA_SYSTEM_GAME_EDITOR_BUNDLE } from "./gameEdit/schema";
-import { mergeSystemSchema } from "./mergeSchema";
-import { SCHEMA_SYSTEM_PARTIAL_BUNDLE } from "./schemaBundle";
+import { mergeSystemSchema } from "./schemaMerge";
 import type { Data_System } from "./system";
 
 const mockSystem = {
@@ -318,10 +318,10 @@ const allSchema = [
   },
 ] as const satisfies SchemaCase[];
 
-describe("部分的なSchemaの検証", () => {
+describe("Each schema validates systemData", () => {
   const ajv = new Ajv({ strict: false });
   allSchema.forEach(({ schema, caseName }) => {
-    test(`Schema: ${caseName}`, () => {
+    test(`Schema: ${caseName} validates mockSystem`, () => {
       expect(schema).toBeDefined();
       const validate = ajv.compile({
         ...schema,
@@ -332,27 +332,27 @@ describe("部分的なSchemaの検証", () => {
   });
 });
 
-describe("全てのSchemaを実装してあるか？", () => {
+describe("Schema coverage and consistency checks", () => {
   const dataKeys: string[] = Object.keys(mockSystem);
   const schemaKeys: string[] = allSchema.flatMap<string>(({ schema }) => {
     return schema.required;
   });
   const schemaSet: ReadonlySet<string> = new Set(schemaKeys);
-  describe("schemaのkeyは重複してない", () => {
-    test("簡易チェック", () => {
+  describe("schema keys are not duplicated", () => {
+    test("Simple check", () => {
       expect(schemaKeys.length).toBe(schemaSet.size);
     });
-    test("厳密チェック", () => {
+    test("Strict check", () => {
       expect(schemaKeys.toSorted()).toEqual(Array.from(schemaSet).toSorted());
     });
   });
-  test("必要なSchemaが揃っているか？", () => {
+  test("All required schema keys are present", () => {
     expect(dataKeys.filter((k) => !schemaSet.has(k))).toEqual([]);
   });
-  test("dataSystemの判定は正しく機能するか？", () => {
-    const systemSchema = mergeSystemSchema(
+  test("Merged system schema validates mockSystem correctly", () => {
+    const systemSchema: PartialSystemSchema = mergeSystemSchema(
       allSchema.map(({ schema }) => schema)
-    ) satisfies PartialSystemSchema;
+    );
     const ajv = new Ajv({ strict: true });
     const validate = ajv.compile(systemSchema);
     expect(mockSystem).toSatisfy(validate);
