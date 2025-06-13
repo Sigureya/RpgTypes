@@ -1,5 +1,5 @@
 import type { Data_NamedItem, NamedItemSource } from "src/namedItemSource";
-import type { SourceId_TraitRegularParam } from "src/rpg";
+import type { SourceId_TraitRegularParam } from "../sourceIdTypes";
 import type { TraitLabelWithOption } from "../traitLabel";
 import {
   REGULAR_PARAM_MAX_HP,
