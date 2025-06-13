@@ -1,10 +1,4 @@
 import { describe, test, expect } from "vitest";
-import type { System_RPG_DataNames } from "@RpgTypes/system";
-import {
-  DEFAULT_SYSTEM_LABELS_DATA_TYPES,
-  defineSystemItems,
-} from "@RpgTypes/system";
-import type { Data_NamedItem, NamedItemSource } from "src/namedItemSource";
 import type {
   GameData,
   Data_Skill,
@@ -17,7 +11,7 @@ import type {
   Data_Item,
   Data_CommonEvent,
   NormalLabel,
-} from "src/rpg";
+} from "@RpgTypes/rpg";
 import {
   makeSkillData,
   makeStateData,
@@ -32,7 +26,13 @@ import {
   LABEL_SET_TRAIT,
   defineTraitItems,
   defineGameDataSources,
-} from "src/rpg";
+} from "@RpgTypes/rpg";
+import type { System_RPG_DataNames } from "@RpgTypes/system";
+import {
+  DEFAULT_SYSTEM_LABELS_DATA_TYPES,
+  defineSystemItems,
+} from "@RpgTypes/system";
+import type { Data_NamedItem, NamedItemSource } from "src/namedItemSource";
 import type { DomainName } from "src/templates";
 import { buildReferenceItemSources } from "./formatTraits";
 

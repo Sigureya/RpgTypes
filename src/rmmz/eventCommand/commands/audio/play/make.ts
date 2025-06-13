@@ -1,13 +1,13 @@
-import { makeAudioFileParams, type AudioFileParams } from "@RpgTypes/utils";
 import {
   PLAY_BGM,
   PLAY_BGS,
   PLAY_ME,
   PLAY_SE,
-  CHANGE_DEFEAT_ME,
-  CHANGE_VICTORY_ME,
   CHANGE_BATTLE_BGM,
-} from "src/rpg";
+  CHANGE_VICTORY_ME,
+  CHANGE_DEFEAT_ME,
+} from "@RpgTypes/rpg";
+import { makeAudioFileParams, type AudioFileParams } from "@RpgTypes/utils";
 import type {
   Command_PlayBGM,
   Command_PlayBGS,

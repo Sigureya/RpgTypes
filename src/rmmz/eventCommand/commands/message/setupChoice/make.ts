@@ -1,4 +1,4 @@
-import { SHOW_CHOICES, SHOW_CHOICES_ITEM } from "src/rpg";
+import { SHOW_CHOICES, SHOW_CHOICES_ITEM } from "@RpgTypes/rpg";
 import type {
   ParamArray_SetupChoice,
   ParamObject_SetupChoice,

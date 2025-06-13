@@ -6,7 +6,7 @@ import {
   CHANGE_BATTLE_BGM,
   CHANGE_VICTORY_ME,
   CHANGE_DEFEAT_ME,
-} from "src/rpg";
+} from "@RpgTypes/rpg";
 import type {
   Command_PlayBGM,
   Command_PlayBGS,

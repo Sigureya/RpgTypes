@@ -1,4 +1,18 @@
 import type {
+  GameData,
+  DataLabels,
+  TraitLabelSet,
+  NormalLabel,
+  ItemEffectLabelSet,
+  EffectDefinitionResolved,
+} from "@RpgTypes/rpg";
+import {
+  defineTraitItems,
+  defineGameDataSources,
+  resolveTraitLabels,
+  resolveItemEffectLabels,
+} from "@RpgTypes/rpg";
+import type {
   System_RPG_DataNames,
   SystemLabel_DataNames,
 } from "@RpgTypes/system";
@@ -8,20 +22,6 @@ import {
   type FormatCompiled,
   mergeItemsSource,
 } from "src/namedItemSource";
-import type {
-  DataLabels,
-  EffectDefinitionResolved,
-  GameData,
-  ItemEffectLabelSet,
-  NormalLabel,
-  TraitLabelSet,
-} from "src/rpg";
-import {
-  resolveTraitLabels,
-  defineTraitItems,
-  defineGameDataSources,
-  resolveItemEffectLabels,
-} from "src/rpg";
 
 export const buildReferenceItemSources = (
   gameData: GameData,

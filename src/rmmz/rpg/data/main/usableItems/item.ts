@@ -1,13 +1,5 @@
-import { AUTHOR_RMMZ, type SourceIdentifier } from "src/namedItemSource";
-import { SRC_DATA_ITEMS, MODULE_DATA } from "src/rpg";
 import { makeDamage } from "../members";
 import type { Data_Item } from "./core";
-
-export const itemSourceId = (): SourceIdentifier => ({
-  author: AUTHOR_RMMZ,
-  module: MODULE_DATA,
-  kind: SRC_DATA_ITEMS,
-});
 
 export const makeItemData = (item: Partial<Data_Item> = {}): Data_Item => ({
   animationId: item.animationId ?? 0,

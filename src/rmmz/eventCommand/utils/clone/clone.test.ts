@@ -8,7 +8,7 @@ import {
   makeCommandShowMessage,
   type EventCommandLike2,
 } from "@RpgTypes/eventCommand";
-import { SHOW_MESSAGE } from "src/rpg";
+import { SHOW_MESSAGE } from "@RpgTypes/rpg";
 import {
   cloneEventCommand,
   cloneParameters,

@@ -1,4 +1,4 @@
-import type { EventCommandLike } from "src/rpg";
+import type { EventCommandLike } from "@RpgTypes/rpg";
 
 export interface Command_Skip extends EventCommandLike<109> {
   parameters: [];

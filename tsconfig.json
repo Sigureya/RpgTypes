@@ -15,6 +15,7 @@
     "paths": {
       "src/*": ["src/libs/*"],
       "src/namedItemSource": ["src/libs/namedItemSource"],
+      "@RpgTypes/rpg": ["src/rmmz/rpg"],
       "@RpgTypes/system": ["src/rmmz/system"],
       "@RpgTypes/eventCommand": ["src/rmmz/eventCommand"],
       "@RpgTypes/eventCommand/frame": ["src/rmmz/eventCommand/frame"],

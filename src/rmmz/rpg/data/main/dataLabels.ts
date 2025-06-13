@@ -1,5 +1,5 @@
 import type { DomainLabel } from "@RpgTypes/templates";
-import type { Data_CommonEvent } from "src/rpg";
+import type { Data_CommonEvent } from "../event";
 import type {
   WeaponLabels,
   ArmorLabels,

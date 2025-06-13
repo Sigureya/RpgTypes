@@ -1,4 +1,4 @@
-import type { ValueOf } from "../../../../../../../../templates/valueOf";
+import type { ValueOf } from "src/templates/valueOf";
 
 export type BranchCodeTable = {
   SWITCH: 0;

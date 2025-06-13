@@ -6,7 +6,7 @@ import {
   SCRIPT_EVAL_BODY,
   SHOW_MESSAGE_BODY,
   SHOW_SCROLLING_TEXT_BODY,
-} from "src/rpg";
+} from "@RpgTypes/rpg";
 import {
   makeCommandShowMessageBody,
   makeCommandCommentHeader,
