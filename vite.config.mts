@@ -47,6 +47,7 @@ export default defineConfig({
         __dirname,
         "src/rmmz/eventCommand"
       ),
+      "@RpgTypes/rpg": path.resolve(__dirname, "./src/rmmz/rpg"),
 
       "@RpgTypes/system": path.resolve(__dirname, "./src/rmmz/system"),
       "@RpgTypes": path.resolve(__dirname, "./src/libs"),
