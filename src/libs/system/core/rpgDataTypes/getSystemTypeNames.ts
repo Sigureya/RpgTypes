@@ -1,4 +1,3 @@
-import type { System_ParamNames } from "@RpgTypes/system/subset";
 import type { Data_NamedItem } from "src/namedItemSource";
 import type { System_RPG_DataNames } from "./types";
 
@@ -41,10 +40,6 @@ export const getArmorTypes = (
   system: Pick<System_RPG_DataNames, "armorTypes">
 ): Data_NamedItem[] => {
   return system.armorTypes.map(makeNamedItem);
-};
-
-export const getParamNames = (system: System_ParamNames): Data_NamedItem[] => {
-  return system.terms.params.map(makeNamedItem);
 };
 
 export const getSwitches = (

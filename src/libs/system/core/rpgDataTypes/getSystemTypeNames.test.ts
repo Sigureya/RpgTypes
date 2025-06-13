@@ -1,38 +1,24 @@
 import { describe, test, expect } from "vitest";
 import type { Data_NamedItem } from "src/namedItemSource";
-import type { System_ParamNames } from "src/system/subset";
 import {
   getElementTypes,
   getEquipTypes,
-  getParamNames,
   getSkillTypes,
   getVariableNames,
+  getArmorTypes,
+  getWeaponTypes,
+  getSwitches,
 } from "./getSystemTypeNames";
 import type { System_RPG_DataNames } from "./types";
 
-const system: System_ParamNames &
-  Pick<
-    System_RPG_DataNames,
-    "elements" | "variables" | "equipTypes" | "skillTypes"
-  > = {
+const system: System_RPG_DataNames = {
   elements: ["none", "Fire", "Ice", "Thunder"],
   variables: ["none", "aaa", "bbb", "ccc"],
   equipTypes: ["none", "weapon", "shield", "armor"],
   skillTypes: ["none", "attack", "magic"],
-  terms: {
-    params: [
-      "mhp",
-      "mmp",
-      "atk",
-      "def",
-      "mat",
-      "mdf",
-      "agi",
-      "luk",
-      "hit",
-      "eva",
-    ],
-  },
+  weaponTypes: ["none", "sword", "axe", "bow"],
+  armorTypes: ["none", "helmet", "shield"],
+  switches: ["none", "switch1", "switch2", "switch3"],
 };
 
 describe("getElements", () => {
@@ -43,25 +29,6 @@ describe("getElements", () => {
       { id: 1, name: "Fire" },
       { id: 2, name: "Ice" },
       { id: 3, name: "Thunder" },
-    ];
-    expect(result).toEqual(expected);
-  });
-});
-
-describe("getParamNames", () => {
-  test("should return param names", () => {
-    const result: Data_NamedItem[] = getParamNames(system);
-    const expected: Data_NamedItem[] = [
-      { id: 0, name: "mhp" },
-      { id: 1, name: "mmp" },
-      { id: 2, name: "atk" },
-      { id: 3, name: "def" },
-      { id: 4, name: "mat" },
-      { id: 5, name: "mdf" },
-      { id: 6, name: "agi" },
-      { id: 7, name: "luk" },
-      { id: 8, name: "hit" },
-      { id: 9, name: "eva" },
     ];
     expect(result).toEqual(expected);
   });
@@ -100,6 +67,43 @@ describe("getSkillTypes", () => {
       { id: 0, name: "none" },
       { id: 1, name: "attack" },
       { id: 2, name: "magic" },
+    ];
+    expect(result).toEqual(expected);
+  });
+});
+
+describe("getWeaponTypes", () => {
+  test("should return weapon types", () => {
+    const result: Data_NamedItem[] = getWeaponTypes(system);
+    const expected: Data_NamedItem[] = [
+      { id: 0, name: "none" },
+      { id: 1, name: "sword" },
+      { id: 2, name: "axe" },
+      { id: 3, name: "bow" },
+    ];
+    expect(result).toEqual(expected);
+  });
+});
+describe("getArmorTypes", () => {
+  test("should return armor types", () => {
+    const result: Data_NamedItem[] = getArmorTypes(system);
+    const expected: Data_NamedItem[] = [
+      { id: 0, name: "none" },
+      { id: 1, name: "helmet" },
+      { id: 2, name: "shield" },
+    ];
+    expect(result).toEqual(expected);
+  });
+});
+
+describe("getSwitches", () => {
+  test("should return switches", () => {
+    const result: Data_NamedItem[] = getSwitches(system);
+    const expected: Data_NamedItem[] = [
+      { id: 0, name: "none" },
+      { id: 1, name: "switch1" },
+      { id: 2, name: "switch2" },
+      { id: 3, name: "switch3" },
     ];
     expect(result).toEqual(expected);
   });

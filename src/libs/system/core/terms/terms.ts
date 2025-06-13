@@ -1,3 +1,5 @@
+import type { Data_NamedItem } from "src/namedItemSource";
+import type { System_ParamNames } from "src/system/subset";
 import type {
   SystemLabels_TermsParamNames,
   Terms_ParamNamesArray,
@@ -18,4 +20,11 @@ export const makeParamNamesArray = (
     param.hit ?? "",
     param.eva ?? "",
   ];
+};
+
+export const getParamNames = (system: System_ParamNames): Data_NamedItem[] => {
+  return system.terms.params.map((name, index) => ({
+    name: name,
+    id: index,
+  }));
 };
