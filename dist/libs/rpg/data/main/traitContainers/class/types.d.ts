@@ -1,5 +1,5 @@
-import { Data_TraitContainer, Trait } from '../../../..';
 import { ParamArray } from '../members';
+import { Data_TraitContainer, Trait } from '../trait';
 export interface Data_Class extends Data_TraitContainer {
     name: string;
     id: number;

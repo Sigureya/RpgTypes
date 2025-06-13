@@ -36,7 +36,7 @@ export declare const SCHEMA_COMMAND_EMPTY_PARAM: {
         };
         readonly code: {
             readonly type: "integer";
-            readonly enum: (0 | 109 | 411 | 112 | 113 | 115 | 204 | 206 | 213 | 214 | 216 | 217 | 221 | 222 | 243 | 244 | 251 | 314 | 315 | 340 | 351 | 352 | 353 | 354)[];
+            readonly enum: (0 | 109 | 411 | 112 | 113 | 115 | 251 | 243 | 244 | 314 | 340 | 351 | 315 | 204 | 206 | 213 | 214 | 216 | 217 | 221 | 222 | 352 | 353 | 354)[];
         };
     };
     readonly additionalProperties: false;
