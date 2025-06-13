@@ -17,6 +17,7 @@ import { SCHEMA_SYSTEM_GAME_EDITOR_BUNDLE } from "./gameEdit";
 import { SCHEMA_SYSTEM_PARTIAL_BUNDLE } from "./schemaBundle";
 import { allSystemSchema, mergeSystemSchema } from "./schemaMerge";
 import type { Data_System } from "./system";
+import { isDataSystem } from "./validate";
 
 const mockSystem = {
   optAutosave: true,
@@ -362,6 +363,9 @@ describe("Schema coverage and consistency checks", () => {
       const ajv = new Ajv({ strict: true });
       const validate = ajv.compile(systemSchema);
       expect(mockSystem).toSatisfy(validate);
+    });
+    test("isDataSystem", () => {
+      expect(isDataSystem(mockSystem)).toBe(true);
     });
     // This file only tests normal cases.
     // Abnormal cases will be tested in validate.test.ts.
