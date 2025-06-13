@@ -1,4 +1,5 @@
-import type { Designation, Operation_AddSub, ValueOf } from "./constants";
+import type { ValueOf } from "src/templates/valueOf";
+import type { Designation, Operation_AddSub } from "./constants";
 
 export type Param_ChangeEnemyParameters = [
   enemyId: number,

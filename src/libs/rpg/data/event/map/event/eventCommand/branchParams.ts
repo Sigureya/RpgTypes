@@ -1,8 +1,8 @@
+import type { ValueOf } from "src/templates/valueOf";
 import type {
   BranchCodeTable,
   Operation_PlusMinus,
   Toggle,
-  ValueOf,
 } from "./paramaters";
 
 export type BranchParam_Switch = [
