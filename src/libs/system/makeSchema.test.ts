@@ -269,52 +269,52 @@ interface SchemaCase {
 
 const allSchema = [
   {
+    caseName: "PartialBundle",
+    schema: SCHEMA_SYSTEM_PARTIAL_BUNDLE,
+  },
+  {
+    caseName: "TermsBundle",
+    schema: SCHEMA_SYSTEM_TERMS_BUNDLE,
+  },
+  {
+    caseName: "RPG DataNames",
+    schema: SCHEMA_SYSTEM_RPG_DATA_NAMES,
+  },
+  {
     caseName: "BooleanOptions",
     schema: SCHEMA_SYSTEM_BOOLEAN_OPTIONS,
+  },
+  {
+    caseName: "BooleanGameMenuOptions",
+    schema: SCHEMA_SYSTEM_BOOLEAN_GAMEMENU_OPTIONS,
   },
   {
     caseName: "AudioFiles",
     schema: SCHEMA_SYSTEM_AUDIOFILES,
   },
   {
-    caseName: "SCHEMA_SYSTEM_PARTIAL_BUNDLE",
-    schema: SCHEMA_SYSTEM_PARTIAL_BUNDLE,
-  },
-  {
-    caseName: "Game Editor Bundle",
-    schema: SCHEMA_SYSTEM_GAME_EDITOR_BUNDLE,
-  },
-  {
-    caseName: "rpgDataTypes",
-    schema: SCHEMA_SYSTEM_RPG_DATA_NAMES,
-  },
-  {
-    caseName: "battleRuleRMMZ",
+    caseName: "BattleRuleRMMZ",
     schema: SCHEMA_SYSTEM_BATTLE_RULE_RMMZ,
   },
   {
-    caseName: "image size",
+    caseName: "ImageSize",
     schema: SCHEMA_SYSTEM_IMAGE_SIZE,
   },
   {
-    caseName: "title image",
+    caseName: "TitleImages",
     schema: SCHEMA_SYSTEM_TITLE_IMAGES,
   },
   {
-    caseName: "SCHEMA_SYSTEM_VEHICLE",
-    schema: SCHEMA_SYSTEM_TERMS_BUNDLE,
-  },
-  {
-    caseName: "gameInit",
+    caseName: "GameInitial",
     schema: SCHEMA_SYSTEM_GAME_INITIAL,
   },
   {
-    caseName: "otehr",
+    caseName: "OtherData",
     schema: SCHEMA_SYSTEM_OTHER_DATA,
   },
   {
-    caseName: "b",
-    schema: SCHEMA_SYSTEM_BOOLEAN_GAMEMENU_OPTIONS,
+    caseName: "GameEditorBundle",
+    schema: SCHEMA_SYSTEM_GAME_EDITOR_BUNDLE,
   },
 ] as const satisfies SchemaCase[];
 
@@ -352,7 +352,7 @@ describe("全てのSchemaを実装してあるか？", () => {
   test("dataSystemの判定は正しく機能するか？", () => {
     const systemSchema = mergeSystemSchema(
       allSchema.map(({ schema }) => schema)
-    );
+    ) satisfies PartialSystemSchema;
     const ajv = new Ajv({ strict: true });
     const validate = ajv.compile(systemSchema);
     expect(mockSystem).toSatisfy(validate);
