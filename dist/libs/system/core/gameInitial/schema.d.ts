@@ -1,5 +1,5 @@
 export declare const SCHEMA_SYSTEM_GAME_INITIAL: {
-    readonly additionalProperties: true;
+    readonly additionalProperties: false;
     readonly type: "object";
     readonly required: readonly ["startMapId", "startX", "startY", "partyMembersArray"];
     readonly properties: {
