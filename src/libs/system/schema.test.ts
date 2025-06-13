@@ -2,22 +2,20 @@ import { describe, test, expect } from "vitest";
 import Ajv from "ajv";
 import type { Terms_Messages } from "./core";
 import {
+  SCHEMA_SYSTEM_AUDIOFILES,
+  SCHEMA_SYSTEM_BATTLE_RULE_RMMZ,
+  SCHEMA_SYSTEM_BOOLEAN_GAMEMENU_OPTIONS,
   SCHEMA_SYSTEM_BOOLEAN_OPTIONS,
   SCHEMA_SYSTEM_GAME_INITIAL,
-} from "./core";
-import { SCHEMA_SYSTEM_AUDIOFILES } from "./core/audio/schema";
-import { SCHEMA_SYSTEM_BATTLE_RULE_RMMZ } from "./core/battle/schema";
-import { SCHEMA_SYSTEM_BOOLEAN_GAMEMENU_OPTIONS } from "./core/booleanOptions/gameMenu/schema";
-import {
   SCHEMA_SYSTEM_IMAGE_SIZE,
+  SCHEMA_SYSTEM_OTHER_DATA,
+  SCHEMA_SYSTEM_RPG_DATA_NAMES,
+  SCHEMA_SYSTEM_TERMS_BUNDLE,
   SCHEMA_SYSTEM_TITLE_IMAGES,
-} from "./core/images/schema";
-import { SCHEMA_SYSTEM_OTHER_DATA } from "./core/other";
-import { SCHEMA_SYSTEM_RPG_DATA_NAMES } from "./core/rpgDataTypes/schema";
-import { SCHEMA_SYSTEM_PARTIAL_BUNDLE } from "./core/schemaBundle";
-import { SCHEMA_SYSTEM_TERMS_BUNDLE } from "./core/terms/schema";
-import { SCHEMA_SYSTEM_GAME_EDITOR_BUNDLE } from "./gameEdit/schema";
-import { mergeSystemSchema } from "./schemaMerge";
+} from "./core";
+import { SCHEMA_SYSTEM_GAME_EDITOR_BUNDLE } from "./gameEdit";
+import { SCHEMA_SYSTEM_PARTIAL_BUNDLE } from "./schemaBundle";
+import { allSystemSchema, mergeSystemSchema } from "./schemaMerge";
 import type { Data_System } from "./system";
 
 const mockSystem = {
@@ -346,15 +344,26 @@ describe("Schema coverage and consistency checks", () => {
       expect(schemaKeys.toSorted()).toEqual(Array.from(schemaSet).toSorted());
     });
   });
-  test("All required schema keys are present", () => {
-    expect(dataKeys.filter((k) => !schemaSet.has(k))).toEqual([]);
+  describe("schema keys are not missing", () => {
+    test("All required schema keys are present", () => {
+      expect(dataKeys.filter((k) => !schemaSet.has(k))).toEqual([]);
+    });
   });
-  test("Merged system schema validates mockSystem correctly", () => {
-    const systemSchema: PartialSystemSchema = mergeSystemSchema(
-      allSchema.map(({ schema }) => schema)
-    );
-    const ajv = new Ajv({ strict: true });
-    const validate = ajv.compile(systemSchema);
-    expect(mockSystem).toSatisfy(validate);
+  describe("functions", () => {
+    test("allSystemSchema", () => {
+      const all = new Set<PartialSystemSchema>(allSystemSchema());
+      const mocks = new Set(allSchema.map(({ schema }) => schema));
+      expect(all).toEqual(mocks);
+    });
+    test("mergeSystemSchema", () => {
+      const systemSchema: PartialSystemSchema = mergeSystemSchema(
+        allSystemSchema()
+      );
+      const ajv = new Ajv({ strict: true });
+      const validate = ajv.compile(systemSchema);
+      expect(mockSystem).toSatisfy(validate);
+    });
+    // This file only tests normal cases.
+    // Abnormal cases will be tested in validate.test.ts.
   });
 });
