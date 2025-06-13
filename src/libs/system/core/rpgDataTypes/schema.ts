@@ -2,9 +2,8 @@ import type { JSONSchemaType } from "ajv";
 import type { System_DataNames } from "./types";
 
 const stringArraySchema = {
-  additionalProperties: false,
   type: "array",
-  items: { type: "string", additionalProperties: false },
+  items: { type: "string" },
 } as const satisfies JSONSchemaType<string[]>;
 
 export const SCHEMA_SYSTEM_RPG_DATA_NAMES = {
