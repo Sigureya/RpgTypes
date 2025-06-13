@@ -102,10 +102,8 @@ const mockSystem = {
   variables: ["Variable1", "Variable2"],
   magicSkills: [1, 4],
   attackMotions: [
-    {
-      type: 4,
-      weaponImageId: 3,
-    },
+    { type: 4, weaponImageId: 3 },
+    { type: 5, weaponImageId: 6 },
   ],
   testBattlers: [{ actorId: 1, equips: [12, 45], level: 85 }],
   advanced: {
