@@ -5,7 +5,7 @@ import type {
   SourceId_SystemSkillTypes,
   SourceId_SystemWeaponTypes,
 } from "@RpgTypes/system";
-import type { SourceId_DataSkill, SourceId_DataState } from "src/rpg";
+import type { SourceId_DataState, SourceId_DataSkill } from "./main";
 import {
   TRAIT_ELEMENT_RATE,
   TRAIT_DEBUFF_RATE,
@@ -32,7 +32,7 @@ import {
   TRAIT_SLOT_TYPE,
   TRAIT_SKILL_TYPE_ADD,
   TRAIT_SKILL_TYPE_SEAL,
-} from "./constants";
+} from "./main/traitContainers/trait/core/constants";
 import type {
   CollapsOptionLabels,
   ExtraParamLabels,
@@ -48,9 +48,9 @@ import type {
   SpecialFlagOptions,
   SpecialParamLabels,
   TraitLabelWithOption,
-} from "./items";
-import type { TraitLabelSet } from "./labelSet";
-import type { TraitFormat } from "./types";
+} from "./main/traitContainers/trait/core/items";
+import type { TraitLabelSet } from "./main/traitContainers/trait/core/labelSet";
+import type { TraitFormat } from "./main/traitContainers/trait/core/types";
 
 export const resolveTraitLabels = (labels: TraitLabelSet): TraitFormat[] => {
   return [
