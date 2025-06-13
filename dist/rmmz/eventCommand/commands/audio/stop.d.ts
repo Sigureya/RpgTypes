@@ -1,3 +1,3 @@
-import { EventCommandLike } from '../../../../libs/rpg';
-export interface Command_StopSE extends EventCommandLike<251, []> {
+import { EventCommandLike2 } from '../../frame';
+export interface Command_StopSE extends EventCommandLike2<251, []> {
 }

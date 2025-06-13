@@ -1,4 +1,4 @@
-import { EventCommandLike } from '../../../../libs/rpg';
+import { EventCommandLike } from '../../../rpg';
 export interface Command_Skip extends EventCommandLike<109> {
     parameters: [];
 }

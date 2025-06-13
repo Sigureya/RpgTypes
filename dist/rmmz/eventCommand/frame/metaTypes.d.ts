@@ -1,4 +1,4 @@
-import { EventCommand, EventCode } from '../../../libs/rpg';
+import { EventCode, EventCommand } from '../../rpg';
 export type ExtractCommandByParam<P extends unknown[], Commands = EventCommand> = Extract<Commands, {
     parameters: P;
 }>;
