@@ -11,6 +11,6 @@ export const SCHEMA_SYSTEM_BOOLEAN_GAMEMENU_OPTIONS = {
     itemCategories: SCHEMA_SYSTEM_ITEM_CATEGORIES,
     menuCommands: SCHEMA_SYSTEM_MENU_COMMANDS_ENABLED,
   },
-} satisfies JSONSchemaType<
+} as const satisfies JSONSchemaType<
   Record<keyof System_BooleanGameMenuOptions, boolean[]>
 >;
