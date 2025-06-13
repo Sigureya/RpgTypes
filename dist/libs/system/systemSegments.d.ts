@@ -1,4 +1,4 @@
-import { ItemCategories, MenuCommandsEnabled, System_Advanced, System_Bgm, System_BooleanGameOptions, System_DataNames, System_GameInitial, System_TitleImages, System_ImageSize, System_Me, System_SoundsObject, System_Vehicles, Terms_Basic, Terms_GameCommands, Terms_Messages } from './core';
+import { ItemCategories, MenuCommandsEnabled, System_Advanced, System_Bgm, System_BooleanGameOptions, System_RPG_DataNames, System_GameInitial, System_TitleImages, System_ImageSize, System_Me, System_SoundsObject, System_Vehicles, Terms_Basic, Terms_GameCommands, Terms_Messages } from './core';
 import { EditorSettings, System_TestBattle } from './gameEdit';
 import { System_Text, System_Debug } from './subset';
 export interface SystemDataFragments {
@@ -6,7 +6,7 @@ export interface SystemDataFragments {
     advanced: Partial<System_Advanced>;
     vehicles: Partial<System_Vehicles>;
     editing: Partial<EditorSettings>;
-    dataNames: Partial<System_DataNames>;
+    dataNames: Partial<System_RPG_DataNames>;
     bgm: Partial<System_Bgm>;
     me: Partial<System_Me>;
     texts: Partial<System_Text>;

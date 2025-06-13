@@ -1408,48 +1408,48 @@ const t = (e2, t2) => `\\${e2}[${t2}]`, a = (e2, a2) => a2.map((a3, i2) => ({ te
 } } }, nd = (e2, t2) => ({
   name: e2,
   id: t2
-}), md = (e2) => e2.variables.map(nd), od = (e2) => e2.elements.map(nd), pd = (e2) => e2.equipTypes.map(nd), sd = (e2) => e2.skillTypes.map(nd), dd = (e2) => e2.weaponTypes.map(nd), ld = (e2) => e2.armorTypes.map(nd), cd = (e2) => e2.terms.params.map(nd), yd = (e2) => e2.switches.map(nd), ud = (e2, t2) => [bd(e2, t2), Id(e2, t2), kd(e2, t2), hd(e2, t2), gd(e2, t2), fd(e2, t2), vd(e2, t2)], gd = (e2, t2) => ({
+}), md = (e2) => e2.variables.map(nd), od = (e2) => e2.elements.map(nd), pd = (e2) => e2.equipTypes.map(nd), sd = (e2) => e2.skillTypes.map(nd), dd = (e2) => e2.weaponTypes.map(nd), ld = (e2) => e2.armorTypes.map(nd), cd = (e2) => e2.switches.map(nd), yd = (e2, t2) => [gd(e2, t2), bd(e2, t2), vd(e2, t2), Id(e2, t2), ud(e2, t2), hd(e2, t2), fd(e2, t2)], ud = (e2, t2) => ({
   items: ld(e2),
   label: t2.options.armorTypes,
   source: { author: "rmmz", module: "system", kind: "armorTypes" }
-}), bd = (e2, t2) => ({ items: od(e2), label: t2.options.elements, source: {
+}), gd = (e2, t2) => ({ items: od(e2), label: t2.options.elements, source: {
   author: "rmmz",
   module: "system",
   kind: "elements"
-} }), Id = (e2, t2) => ({ items: pd(e2), label: t2.options.equipTypes, source: { author: "rmmz", module: "system", kind: "equipTypes" } }), hd = (e2, t2) => ({
+} }), bd = (e2, t2) => ({ items: pd(e2), label: t2.options.equipTypes, source: { author: "rmmz", module: "system", kind: "equipTypes" } }), Id = (e2, t2) => ({
   items: sd(e2),
   label: t2.options.skillTypes,
   source: { author: "rmmz", module: "system", kind: "skillTypes" }
-}), fd = (e2, t2) => ({ items: md(e2), label: t2.options.variables, source: {
+}), hd = (e2, t2) => ({ items: md(e2), label: t2.options.variables, source: {
   author: "rmmz",
   module: "system",
   kind: "variables"
-} }), vd = (e2, t2) => ({ items: yd(e2), label: t2.options.switches, source: { author: "rmmz", module: "system", kind: "switches" } }), kd = (e2, t2) => ({
+} }), fd = (e2, t2) => ({ items: cd(e2), label: t2.options.switches, source: { author: "rmmz", module: "system", kind: "switches" } }), vd = (e2, t2) => ({
   items: dd(e2),
   label: t2.options.weaponTypes,
   source: { author: "rmmz", module: "system", kind: "weaponTypes" }
-}), xd = { type: "array", items: { type: "string" } }, Nd = {
+}), kd = { type: "array", items: { type: "string" } }, xd = {
   additionalProperties: false,
   type: "object",
   required: ["weaponTypes", "skillTypes", "elements", "variables", "equipTypes", "switches", "armorTypes"],
   properties: {
-    weaponTypes: xd,
-    skillTypes: xd,
-    elements: xd,
-    variables: xd,
-    equipTypes: xd,
-    switches: xd,
-    armorTypes: xd
+    weaponTypes: kd,
+    skillTypes: kd,
+    elements: kd,
+    variables: kd,
+    equipTypes: kd,
+    switches: kd,
+    armorTypes: kd
   }
-}, Td = (e2) => ({
-  armorTypes: Sd(e2.armorTypes),
-  elements: Sd(e2.elements),
-  equipTypes: Sd(e2.equipTypes),
-  weaponTypes: Sd(e2.weaponTypes),
-  skillTypes: Sd(e2.skillTypes),
-  variables: Sd(e2.variables),
-  switches: Sd(e2.switches)
-}), Sd = (e2) => e2 ? [...e2] : [], wd = (e2) => [e2.level ?? "Level", e2.levelA ?? "Level", e2.hp ?? "HP", e2.hpA ?? "HP", e2.mp ?? "MP", e2.mpA ?? "MP", e2.tp ?? "TP", e2.tpA ?? "TP", e2.experience ?? "EXP", e2.exp ?? "EXP"], qd = (e2) => ({
+}, Nd = (e2) => ({
+  armorTypes: Td(e2.armorTypes),
+  elements: Td(e2.elements),
+  equipTypes: Td(e2.equipTypes),
+  weaponTypes: Td(e2.weaponTypes),
+  skillTypes: Td(e2.skillTypes),
+  variables: Td(e2.variables),
+  switches: Td(e2.switches)
+}), Td = (e2) => e2 ? [...e2] : [], Sd = (e2) => [e2.level ?? "Level", e2.levelA ?? "Level", e2.hp ?? "HP", e2.hpA ?? "HP", e2.mp ?? "MP", e2.mpA ?? "MP", e2.tp ?? "TP", e2.tpA ?? "TP", e2.experience ?? "EXP", e2.exp ?? "EXP"], wd = (e2) => ({
   level: e2[0],
   levelA: e2[1],
   hp: e2[2],
@@ -1460,7 +1460,7 @@ const t = (e2, t2) => `\\${e2}[${t2}]`, a = (e2, a2) => a2.map((a3, i2) => ({ te
   tpA: e2[7],
   experience: e2[8],
   exp: e2[9]
-}), Rd = (e2) => Pd(e2, ""), Pd = (e2, t2) => [e2.fight ?? "Fight", e2.escape ?? "Escape", e2.attack ?? "Attack", e2.guard ?? "Guard", e2.item ?? "Item", e2.skill ?? "Skill", e2.equip ?? "Equip", e2.status ?? "Status", e2.formation ?? "Formation", e2.save ?? "Save", e2.gameEnd ?? "Game End", e2.options ?? "Options", e2.weapon ?? "Weapon", e2.armor ?? "Armor", e2.keyItem ?? "Key Item", e2.equip2 ?? "Equip2", e2.optimize ?? "Optimize", e2.clear ?? "Clear", e2.newGame ?? "New Game", e2.continue_ ?? "Continue", t2, e2.toTitle ?? "To Title", e2.cancel ?? "Cancel", t2, e2.buy ?? "Buy", e2.sell ?? "Sell"], Md = (e2) => ({
+}), qd = (e2) => Rd(e2, ""), Rd = (e2, t2) => [e2.fight ?? "Fight", e2.escape ?? "Escape", e2.attack ?? "Attack", e2.guard ?? "Guard", e2.item ?? "Item", e2.skill ?? "Skill", e2.equip ?? "Equip", e2.status ?? "Status", e2.formation ?? "Formation", e2.save ?? "Save", e2.gameEnd ?? "Game End", e2.options ?? "Options", e2.weapon ?? "Weapon", e2.armor ?? "Armor", e2.keyItem ?? "Key Item", e2.equip2 ?? "Equip2", e2.optimize ?? "Optimize", e2.clear ?? "Clear", e2.newGame ?? "New Game", e2.continue_ ?? "Continue", t2, e2.toTitle ?? "To Title", e2.cancel ?? "Cancel", t2, e2.buy ?? "Buy", e2.sell ?? "Sell"], Pd = (e2) => ({
   fight: e2[0],
   escape: e2[1],
   attack: e2[2],
@@ -1485,141 +1485,141 @@ const t = (e2, t2) => `\\${e2}[${t2}]`, a = (e2, a2) => a2.map((a3, i2) => ({ te
   cancel: e2[22],
   buy: e2[24],
   sell: e2[25]
-}), Dd = (e2, t2) => "string" == typeof e2 ? e2 : t2, Ad = (e2) => ({
-  actionFailure: Dd(e2.actionFailure, "Action failed."),
-  actorDamage: Dd(e2.actorDamage, "%1 took %2 damage."),
-  actorRecovery: Dd(e2.actorRecovery, "%1 recovered %2 HP."),
-  actorGain: Dd(e2.actorGain, "%1 gained %2."),
-  actorLoss: Dd(e2.actorLoss, "%1 lost %2."),
-  actorDrain: Dd(e2.actorDrain, "%1 drained %2 HP."),
-  actorNoDamage: Dd(e2.actorNoDamage, "%1 was not damaged."),
-  actorNoHit: Dd(e2.actorNoHit, "%1 was not hit."),
-  alwaysDash: Dd(e2.alwaysDash, "Always dash."),
-  bgmVolume: Dd(e2.bgmVolume, "BGM volume"),
-  bgsVolume: Dd(e2.bgsVolume, "BGS volume"),
-  commandRemember: Dd(e2.commandRemember, "Command remember."),
-  criticalToActor: Dd(e2.criticalToActor, "%1 dealt %2 damage to %3."),
-  criticalToEnemy: Dd(e2.criticalToEnemy, "%1 dealt %2 damage to %3."),
-  counterAttack: Dd(e2.counterAttack, "%1 countered!"),
-  debuffAdd: Dd(e2.debuffAdd, "%1's %2 was lowered."),
-  defeat: Dd(e2.defeat, "Defeat."),
-  enemyDamage: Dd(e2.enemyDamage, "%1 took %2 damage."),
-  enemyDrain: Dd(e2.enemyDrain, "%1 drained %2 HP."),
-  enemyGain: Dd(e2.enemyGain, "%1 gained %2."),
-  enemyLoss: Dd(e2.enemyLoss, "%1 lost %2."),
-  enemyNoDamage: Dd(e2.enemyNoDamage, "%1 was not damaged."),
-  enemyNoHit: Dd(e2.enemyNoHit, "%1 was not hit."),
-  enemyRecovery: Dd(e2.enemyRecovery, "%1 recovered %2 HP."),
-  evasion: Dd(e2.evasion, "%1 evaded the attack!"),
-  autosave: Dd(e2.autosave, "Autosave"),
-  escapeFailure: Dd(e2.escapeFailure, "Escape failed."),
-  escapeStart: Dd(e2.escapeStart, "%1 started to escape!"),
-  emerge: Dd(e2.emerge, "%1 appeared!"),
-  expNext: Dd(e2.expNext, "Next level in %1 EXP."),
-  expTotal: Dd(e2.expTotal, "Total EXP: %1"),
-  file: Dd(e2.file, "File"),
-  buffAdd: Dd(e2.buffAdd, "%1's %2 was raised."),
-  buffRemove: Dd(e2.buffRemove, "%1's %2 was lowered."),
-  obtainExp: Dd(e2.obtainExp, "%1 EXP obtained."),
-  obtainGold: Dd(e2.obtainGold, "%1 gold obtained."),
-  obtainItem: Dd(e2.obtainItem, "%1 obtained %2."),
-  obtainSkill: Dd(e2.obtainSkill, "%1 learned %2."),
-  levelUp: Dd(e2.levelUp, "%1 leveled up!"),
-  partyName: Dd(e2.partyName, "Party"),
-  loadMessage: Dd(e2.loadMessage, "Load %1?"),
-  meVolume: Dd(e2.meVolume, "ME volume"),
-  possession: Dd(e2.possession, "Possession"),
-  preemptive: Dd(e2.preemptive, "%1 attacked first!"),
-  saveMessage: Dd(e2.saveMessage, "Save %1?"),
-  seVolume: Dd(e2.seVolume, "SE volume"),
-  magicEvasion: Dd(e2.magicEvasion, "%1 evaded the magic!"),
-  magicReflection: Dd(e2.magicReflection, "%1 reflected the magic!"),
-  substitute: Dd(e2.substitute, "%1 took the hit!"),
-  surprise: Dd(e2.surprise, "%1 surprised the enemy!"),
-  touchUI: Dd(e2.touchUI, "Touch UI"),
-  useItem: Dd(e2.useItem, "%1 used %2."),
-  victory: Dd(e2.victory, "Victory!")
-}), jd = (e2) => [e2.mhp ?? "", e2.mmp ?? "", e2.atk ?? "", e2.def ?? "", e2.mat ?? "", e2.mdf ?? "", e2.agi ?? "", e2.luk ?? "", e2.hit ?? "", e2.eva ?? ""], zd = { type: "string" }, Ed = { type: "string", nullable: true }, Hd = {
+}), Md = (e2, t2) => "string" == typeof e2 ? e2 : t2, Dd = (e2) => ({
+  actionFailure: Md(e2.actionFailure, "Action failed."),
+  actorDamage: Md(e2.actorDamage, "%1 took %2 damage."),
+  actorRecovery: Md(e2.actorRecovery, "%1 recovered %2 HP."),
+  actorGain: Md(e2.actorGain, "%1 gained %2."),
+  actorLoss: Md(e2.actorLoss, "%1 lost %2."),
+  actorDrain: Md(e2.actorDrain, "%1 drained %2 HP."),
+  actorNoDamage: Md(e2.actorNoDamage, "%1 was not damaged."),
+  actorNoHit: Md(e2.actorNoHit, "%1 was not hit."),
+  alwaysDash: Md(e2.alwaysDash, "Always dash."),
+  bgmVolume: Md(e2.bgmVolume, "BGM volume"),
+  bgsVolume: Md(e2.bgsVolume, "BGS volume"),
+  commandRemember: Md(e2.commandRemember, "Command remember."),
+  criticalToActor: Md(e2.criticalToActor, "%1 dealt %2 damage to %3."),
+  criticalToEnemy: Md(e2.criticalToEnemy, "%1 dealt %2 damage to %3."),
+  counterAttack: Md(e2.counterAttack, "%1 countered!"),
+  debuffAdd: Md(e2.debuffAdd, "%1's %2 was lowered."),
+  defeat: Md(e2.defeat, "Defeat."),
+  enemyDamage: Md(e2.enemyDamage, "%1 took %2 damage."),
+  enemyDrain: Md(e2.enemyDrain, "%1 drained %2 HP."),
+  enemyGain: Md(e2.enemyGain, "%1 gained %2."),
+  enemyLoss: Md(e2.enemyLoss, "%1 lost %2."),
+  enemyNoDamage: Md(e2.enemyNoDamage, "%1 was not damaged."),
+  enemyNoHit: Md(e2.enemyNoHit, "%1 was not hit."),
+  enemyRecovery: Md(e2.enemyRecovery, "%1 recovered %2 HP."),
+  evasion: Md(e2.evasion, "%1 evaded the attack!"),
+  autosave: Md(e2.autosave, "Autosave"),
+  escapeFailure: Md(e2.escapeFailure, "Escape failed."),
+  escapeStart: Md(e2.escapeStart, "%1 started to escape!"),
+  emerge: Md(e2.emerge, "%1 appeared!"),
+  expNext: Md(e2.expNext, "Next level in %1 EXP."),
+  expTotal: Md(e2.expTotal, "Total EXP: %1"),
+  file: Md(e2.file, "File"),
+  buffAdd: Md(e2.buffAdd, "%1's %2 was raised."),
+  buffRemove: Md(e2.buffRemove, "%1's %2 was lowered."),
+  obtainExp: Md(e2.obtainExp, "%1 EXP obtained."),
+  obtainGold: Md(e2.obtainGold, "%1 gold obtained."),
+  obtainItem: Md(e2.obtainItem, "%1 obtained %2."),
+  obtainSkill: Md(e2.obtainSkill, "%1 learned %2."),
+  levelUp: Md(e2.levelUp, "%1 leveled up!"),
+  partyName: Md(e2.partyName, "Party"),
+  loadMessage: Md(e2.loadMessage, "Load %1?"),
+  meVolume: Md(e2.meVolume, "ME volume"),
+  possession: Md(e2.possession, "Possession"),
+  preemptive: Md(e2.preemptive, "%1 attacked first!"),
+  saveMessage: Md(e2.saveMessage, "Save %1?"),
+  seVolume: Md(e2.seVolume, "SE volume"),
+  magicEvasion: Md(e2.magicEvasion, "%1 evaded the magic!"),
+  magicReflection: Md(e2.magicReflection, "%1 reflected the magic!"),
+  substitute: Md(e2.substitute, "%1 took the hit!"),
+  surprise: Md(e2.surprise, "%1 surprised the enemy!"),
+  touchUI: Md(e2.touchUI, "Touch UI"),
+  useItem: Md(e2.useItem, "%1 used %2."),
+  victory: Md(e2.victory, "Victory!")
+}), Ad = { type: "string" }, jd = {
+  type: "string",
+  nullable: true
+}, zd = {
   required: ["terms", "currencyUnit", "gameTitle"],
   additionalProperties: false,
   type: "object",
-  properties: { currencyUnit: { type: "string" }, gameTitle: { type: "string" }, terms: {
-    additionalProperties: false,
+  properties: { currencyUnit: { type: "string" }, gameTitle: {
+    type: "string"
+  }, terms: { additionalProperties: false, type: "object", required: ["messages", "commands", "basic", "params"], properties: { messages: {
     type: "object",
-    required: ["messages", "commands", "basic", "params"],
-    properties: { messages: {
-      type: "object",
-      additionalProperties: false,
-      required: ["actionFailure", "actorDamage", "actorNoDamage", "actorRecovery", "actorGain", "actorLoss", "actorDrain", "alwaysDash", "bgmVolume", "bgsVolume", "commandRemember", "criticalToActor", "criticalToEnemy", "counterAttack", "debuffAdd", "defeat", "enemyDamage", "enemyNoDamage", "enemyRecovery", "enemyGain", "enemyLoss", "enemyDrain", "evasion", "expNext", "expTotal", "escapeFailure", "escapeStart", "file", "loadMessage", "meVolume", "magicEvasion", "magicReflection", "obtainExp", "obtainGold", "obtainItem", "obtainSkill", "partyName", "preemptive", "saveMessage", "seVolume", "substitute", "touchUI", "victory", "useItem"],
-      properties: {
-        actionFailure: { type: "string" },
-        actorDamage: { type: "string" },
-        actorNoDamage: { type: "string" },
-        actorRecovery: { type: "string" },
-        actorGain: { type: "string" },
-        actorLoss: {
-          type: "string"
-        },
-        actorDrain: { type: "string" },
-        alwaysDash: { type: "string" },
-        bgmVolume: { type: "string" },
-        bgsVolume: { type: "string" },
-        commandRemember: { type: "string" },
-        criticalToActor: { type: "string" },
-        criticalToEnemy: { type: "string" },
-        counterAttack: { type: "string" },
-        debuffAdd: { type: "string" },
-        defeat: { type: "string" },
-        enemyDamage: { type: "string" },
-        enemyNoDamage: { type: "string" },
-        enemyRecovery: { type: "string" },
-        enemyGain: { type: "string" },
-        enemyLoss: { type: "string" },
-        enemyDrain: { type: "string" },
-        evasion: { type: "string" },
-        expNext: { type: "string" },
-        expTotal: {
-          type: "string"
-        },
-        escapeFailure: { type: "string" },
-        escapeStart: { type: "string" },
-        file: { type: "string" },
-        loadMessage: { type: "string" },
-        meVolume: { type: "string" },
-        magicEvasion: { type: "string" },
-        magicReflection: {
-          type: "string"
-        },
-        obtainExp: { type: "string" },
-        obtainGold: { type: "string" },
-        obtainItem: { type: "string" },
-        obtainSkill: { type: "string" },
-        partyName: { type: "string" },
-        preemptive: { type: "string" },
-        saveMessage: { type: "string" },
-        seVolume: { type: "string" },
-        substitute: { type: "string" },
-        touchUI: { type: "string" },
-        victory: { type: "string" },
-        useItem: { type: "string" },
-        buffAdd: { type: "string" },
-        buffRemove: { type: "string" },
-        actorNoHit: { type: "string" },
-        enemyNoHit: { type: "string" },
-        autosave: { type: "string" },
-        emerge: { type: "string" },
-        levelUp: { type: "string" },
-        possession: { type: "string" },
-        surprise: { type: "string" }
-      }
-    }, commands: { type: "array", items: [zd, zd, zd, zd, zd, zd, zd, zd, zd, zd, zd, zd, zd, zd, zd, zd, zd, zd, zd, zd, Ed, zd, zd, Ed, zd, zd], minItems: 26, maxItems: 26 }, basic: {
-      type: "array",
-      items: { type: "string" },
-      minItems: 10,
-      maxItems: 10
-    }, params: { type: "array", items: { type: "string", minLength: 1 }, minItems: 10, maxItems: 10, uniqueItems: true } }
-  } }
-}, Fd = (e2) => ({
+    additionalProperties: false,
+    required: ["actionFailure", "actorDamage", "actorNoDamage", "actorRecovery", "actorGain", "actorLoss", "actorDrain", "alwaysDash", "bgmVolume", "bgsVolume", "commandRemember", "criticalToActor", "criticalToEnemy", "counterAttack", "debuffAdd", "defeat", "enemyDamage", "enemyNoDamage", "enemyRecovery", "enemyGain", "enemyLoss", "enemyDrain", "evasion", "expNext", "expTotal", "escapeFailure", "escapeStart", "file", "loadMessage", "meVolume", "magicEvasion", "magicReflection", "obtainExp", "obtainGold", "obtainItem", "obtainSkill", "partyName", "preemptive", "saveMessage", "seVolume", "substitute", "touchUI", "victory", "useItem"],
+    properties: {
+      actionFailure: { type: "string" },
+      actorDamage: { type: "string" },
+      actorNoDamage: { type: "string" },
+      actorRecovery: { type: "string" },
+      actorGain: { type: "string" },
+      actorLoss: {
+        type: "string"
+      },
+      actorDrain: { type: "string" },
+      alwaysDash: { type: "string" },
+      bgmVolume: { type: "string" },
+      bgsVolume: { type: "string" },
+      commandRemember: { type: "string" },
+      criticalToActor: { type: "string" },
+      criticalToEnemy: { type: "string" },
+      counterAttack: { type: "string" },
+      debuffAdd: { type: "string" },
+      defeat: { type: "string" },
+      enemyDamage: { type: "string" },
+      enemyNoDamage: { type: "string" },
+      enemyRecovery: { type: "string" },
+      enemyGain: { type: "string" },
+      enemyLoss: { type: "string" },
+      enemyDrain: { type: "string" },
+      evasion: { type: "string" },
+      expNext: { type: "string" },
+      expTotal: {
+        type: "string"
+      },
+      escapeFailure: { type: "string" },
+      escapeStart: { type: "string" },
+      file: { type: "string" },
+      loadMessage: { type: "string" },
+      meVolume: { type: "string" },
+      magicEvasion: { type: "string" },
+      magicReflection: {
+        type: "string"
+      },
+      obtainExp: { type: "string" },
+      obtainGold: { type: "string" },
+      obtainItem: { type: "string" },
+      obtainSkill: { type: "string" },
+      partyName: { type: "string" },
+      preemptive: { type: "string" },
+      saveMessage: { type: "string" },
+      seVolume: { type: "string" },
+      substitute: { type: "string" },
+      touchUI: { type: "string" },
+      victory: { type: "string" },
+      useItem: { type: "string" },
+      buffAdd: { type: "string" },
+      buffRemove: { type: "string" },
+      actorNoHit: { type: "string" },
+      enemyNoHit: { type: "string" },
+      autosave: { type: "string" },
+      emerge: { type: "string" },
+      levelUp: { type: "string" },
+      possession: { type: "string" },
+      surprise: { type: "string" }
+    }
+  }, commands: { type: "array", items: [Ad, Ad, Ad, Ad, Ad, Ad, Ad, Ad, Ad, Ad, Ad, Ad, Ad, Ad, Ad, Ad, Ad, Ad, Ad, Ad, jd, Ad, Ad, jd, Ad, Ad], minItems: 26, maxItems: 26 }, basic: {
+    type: "array",
+    items: { type: "string" },
+    minItems: 10,
+    maxItems: 10
+  }, params: { type: "array", items: { type: "string", minLength: 1 }, minItems: 10, maxItems: 10, uniqueItems: true } } } }
+}, Ed = (e2) => [e2.mhp ?? "", e2.mmp ?? "", e2.atk ?? "", e2.def ?? "", e2.mat ?? "", e2.mdf ?? "", e2.agi ?? "", e2.luk ?? "", e2.hit ?? "", e2.eva ?? ""], Hd = (e2) => e2.terms.params.map((e3, t2) => ({ name: e3, id: t2 })), Fd = (e2) => ({
   background: e2.background ?? 0,
   offsetX: e2.offsetX ?? 0,
   offsetY: e2.offsetY ?? 0
@@ -1729,7 +1729,7 @@ const t = (e2, t2) => `\\${e2}[${t2}]`, a = (e2, a2) => a2.map((a3, i2) => ({ te
 }, Od = (e2) => e2.reduce((e3, t2) => ({ required: [...e3.required, ...t2.required], properties: { ...e3.properties, ...t2.properties } }), { required: [], properties: {} }), _d = new e({ strict: true }), Zd = ((e2) => {
   const t2 = Od(e2);
   return { additionalProperties: false, type: "object", required: Array.from(new Set(t2.required)), properties: t2.properties };
-})([Ud, Ys, Ks, Zs, Qs, td, ad, rd, Nd, Hd, id, Gd]), Jd = _d.compile(Zd), Qd = (e2) => Jd(e2), el = _d.compile(Wd);
+})([Ud, Ys, Ks, Zs, Qs, td, ad, rd, xd, zd, id, Gd]), Jd = _d.compile(Zd), Qd = (e2) => Jd(e2), el = _d.compile(Wd);
 _d.compile(Vs);
 const tl = _d.compile(ad), al = (e2) => {
   var _a2, _b, _c, _d2, _e2;
@@ -1743,7 +1743,7 @@ const tl = _d.compile(ad), al = (e2) => {
     advanced: Bs(e2.advanced),
     title1Name: r2.title1Name ?? "",
     title2Name: r2.title2Name ?? "",
-    ...Td(a2),
+    ...Nd(a2),
     magicSkills: rl([]),
     airship: Bd(t2.airship),
     boat: Bd(t2.boat),
@@ -1777,10 +1777,10 @@ const tl = _d.compile(ad), al = (e2) => {
     menuCommands: Os(e2.menuComamnds)
   };
 }, il = (e2) => ({
-  basic: wd(e2.basic ?? {}),
-  commands: Rd(e2.commands ?? {}),
-  params: jd(e2.params ?? {}),
-  messages: Ad(e2.messages ?? {})
+  basic: Sd(e2.basic ?? {}),
+  commands: qd(e2.commands ?? {}),
+  params: Ed(e2.params ?? {}),
+  messages: Dd(e2.messages ?? {})
 }), rl = (e2) => e2 ? [...e2] : [], nl = (e2) => ((e3) => tl(e3))(e2) ? {
   tileSize: e2.tileSize,
   faceSize: e2.faceSize,
@@ -2042,8 +2042,8 @@ export {
   ad as SCHEMA_SYSTEM_IMAGE_SIZE,
   Vs as SCHEMA_SYSTEM_MEMBERS_ATTACK_MOTION,
   rd as SCHEMA_SYSTEM_OTHER_DATA,
-  Nd as SCHEMA_SYSTEM_RPG_DATA_NAMES,
-  Hd as SCHEMA_SYSTEM_TERMS_BUNDLE,
+  xd as SCHEMA_SYSTEM_RPG_DATA_NAMES,
+  zd as SCHEMA_SYSTEM_TERMS_BUNDLE,
   Cd as SCHEMA_SYSTEM_TITLE_COMMAND_WINDOW,
   id as SCHEMA_SYSTEM_TITLE_IMAGES,
   Ld as SCHEMA_SYSTEM_VEHICLE,
@@ -2137,7 +2137,7 @@ export {
   Gm as createNoteEntity,
   n as createSystemVariableControlChars,
   ha as defineGameDataSources,
-  ud as defineSystemItems,
+  yd as defineSystemItems,
   vi as defineTraitCollapseType,
   Ai as defineTraitExtraParam,
   Tr as defineTraitItems,
@@ -2167,9 +2167,9 @@ export {
   hp as getEnemyValue,
   pd as getEquipTypes,
   Om as getNoteValue,
-  cd as getParamNames,
+  Hd as getParamNames,
   sd as getSkillTypes,
-  yd as getSwitches,
+  cd as getSwitches,
   md as getVariableNames,
   dd as getWeaponTypes,
   Np as isCloneableCommand,
@@ -2244,7 +2244,7 @@ export {
   Eo as makeCommentCommandArray,
   m as makeCommonEventData,
   Ma as makeDamage,
-  Td as makeDataNames,
+  Nd as makeDataNames,
   La as makeDropItem,
   Vd as makeEditorSetting,
   Va as makeEnemyAction,
@@ -2261,7 +2261,7 @@ export {
   sa as makeMapInfoData,
   Os as makeMenuCommandsEnabled,
   _s as makeMenuCommandsEnabledFromArray,
-  jd as makeParamNamesArray,
+  Ed as makeParamNamesArray,
   Xm as makeRegex,
   Sm as makeSkillData,
   Ws as makeSoundsArray,
@@ -2269,11 +2269,11 @@ export {
   Xa as makeStateData,
   Bs as makeSystemAdvanced,
   al as makeSystemData,
-  wd as makeTermsBasic,
-  qd as makeTermsBasicFromArray,
-  Rd as makeTermsCommand,
-  Md as makeTermsCommandFromArray,
-  Ad as makeTermsMessages,
+  Sd as makeTermsBasic,
+  wd as makeTermsBasicFromArray,
+  qd as makeTermsCommand,
+  Pd as makeTermsCommandFromArray,
+  Dd as makeTermsMessages,
   Fd as makeTitleCommandWindow,
   o as makeTroopData,
   s as makeTroopEventConditions,
