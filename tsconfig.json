@@ -15,7 +15,7 @@
     "paths": {
       "src/*": ["src/libs/*"],
       "src/namedItemSource": ["src/libs/namedItemSource"],
-      "@RpgTypes/system/*": ["src/libs/system/*"],
+      "@RpgTypes/system": ["src/rmmz/system"],
       "@RpgTypes/*": ["src/libs/*"]
     }
   },

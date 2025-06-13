@@ -1,4 +1,6 @@
 import { test, expect, describe } from "vitest";
+import type { System_RPG_DataNames } from "@RpgTypes/system";
+import { DEFAULT_SYSTEM_LABELS_DATA_TYPES } from "@RpgTypes/system";
 import type { Data_NamedItem, FormatCompiled } from "src/namedItemSource";
 import type {
   Data_Actor,
@@ -44,8 +46,6 @@ import {
   EFFECT_RECOVER_MP,
   EFFECT_SPECIAL,
 } from "src/rpg/data/main/usableItems/core/itemEffect/effectCode";
-import { DEFAULT_SYSTEM_LABELS_DATA_TYPES } from "src/system";
-import type { System_RPG_DataNames } from "src/system/core";
 import {
   buildReferenceItemSources,
   compileItemEffectDisplayData,
