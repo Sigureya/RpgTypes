@@ -1,4 +1,5 @@
 export declare const SCHEMA_SYSTEM_AUDIOFILES: {
+    readonly additionalProperties: false;
     readonly type: "object";
     readonly required: readonly ["battleBgm", "victoryMe", "gameoverMe", "titleBgm", "defeatMe", "sounds"];
     readonly properties: {

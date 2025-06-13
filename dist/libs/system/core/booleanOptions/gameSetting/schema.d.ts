@@ -1,6 +1,6 @@
 export declare const SCHEMA_SYSTEM_BOOLEAN_OPTIONS: {
     readonly type: "object";
-    readonly additionalProperties: true;
+    readonly additionalProperties: false;
     readonly required: ("optAutosave" | "optDisplayTp" | "optDrawTitle" | "optExtraExp" | "optFloorDeath" | "optFollowers" | "optKeyItemsNumber" | "optSideView" | "optSlipDeath" | "optTransparent" | "optSplashScreen" | "optMessageSkip")[];
     readonly properties: {
         readonly optAutosave: {

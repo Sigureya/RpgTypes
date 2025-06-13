@@ -5,6 +5,7 @@ export * from './battle';
 export * from './booleanOptions';
 export * from './gameInitial';
 export * from './images';
+export * from './other';
 export * from './rpgDataTypes';
 export * from './terms';
 export * from './titleCommandWindow';
