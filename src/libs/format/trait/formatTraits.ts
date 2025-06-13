@@ -17,7 +17,7 @@ import {
   defineGameDataSources,
   resolveItemEffectLabels,
 } from "src/rpg";
-import type { System_DataNames, SystemLabel_DataNames } from "src/system";
+import type { System_RPG_DataNames, SystemLabel_DataNames } from "src/system";
 import { defineSystemItems } from "src/system";
 
 export const buildReferenceItemSources = (
@@ -25,7 +25,7 @@ export const buildReferenceItemSources = (
   gameDataLabels: DataLabels,
   traitLabels: TraitLabelSet,
   global: NormalLabel,
-  system: System_DataNames,
+  system: System_RPG_DataNames,
   label: SystemLabel_DataNames
 ): NamedItemSource[] => {
   return [

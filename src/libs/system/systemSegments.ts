@@ -4,7 +4,7 @@ import type {
   System_Advanced,
   System_Bgm,
   System_BooleanGameOptions,
-  System_DataNames,
+  System_RPG_DataNames,
   System_GameInitial,
   System_TitleImages,
   System_ImageSize,
@@ -23,7 +23,7 @@ export interface SystemDataFragments {
   advanced: Partial<System_Advanced>;
   vehicles: Partial<System_Vehicles>;
   editing: Partial<EditorSettings>;
-  dataNames: Partial<System_DataNames>;
+  dataNames: Partial<System_RPG_DataNames>;
   bgm: Partial<System_Bgm>;
   me: Partial<System_Me>;
   texts: Partial<System_Text>;

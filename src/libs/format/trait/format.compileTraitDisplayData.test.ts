@@ -71,7 +71,7 @@ import {
   getSkillTypes,
   getWeaponTypes,
 } from "src/system/core";
-import type { System_DataNames } from "src/system/core";
+import type { System_RPG_DataNames } from "src/system/core";
 import {
   buildReferenceItemSources,
   compileTraitDisplayData,
@@ -137,7 +137,7 @@ const makeGameData = (
 
 const mockNormalLabel: NormalLabel = { normal: "Normal" };
 
-const mockSystemdata: System_DataNames = {
+const mockSystemdata: System_RPG_DataNames = {
   elements: ["Fire", "Ice", "Lightning"],
   armorTypes: ["Light Armor", "Heavy Armor"],
   weaponTypes: ["Sword", "Axe"],

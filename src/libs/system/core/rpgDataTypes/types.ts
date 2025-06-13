@@ -1,6 +1,6 @@
 import type { DomainName } from "@RpgTypes/templates";
 
-export interface System_DataNames {
+export interface System_RPG_DataNames {
   weaponTypes: string[];
   skillTypes: string[];
   elements: string[];
@@ -13,5 +13,5 @@ export interface System_DataNames {
 export interface SystemLabel_DataNames extends DomainName {
   domainName: string;
   format: string;
-  options: Record<keyof System_DataNames, string>;
+  options: Record<keyof System_RPG_DataNames, string>;
 }

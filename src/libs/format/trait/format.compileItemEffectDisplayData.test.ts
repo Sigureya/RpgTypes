@@ -45,7 +45,7 @@ import {
   EFFECT_SPECIAL,
 } from "src/rpg/data/main/usableItems/core/itemEffect/effectCode";
 import { DEFAULT_SYSTEM_LABELS_DATA_TYPES } from "src/system";
-import type { System_DataNames } from "src/system/core";
+import type { System_RPG_DataNames } from "src/system/core";
 import {
   buildReferenceItemSources,
   compileItemEffectDisplayData,
@@ -103,7 +103,7 @@ const makeGameData = (
 
 const mockNormalLabel: NormalLabel = { normal: "Normal" };
 
-const mockSystemdata: System_DataNames = {
+const mockSystemdata: System_RPG_DataNames = {
   elements: ["Fire", "Ice", "Lightning"],
   armorTypes: ["Light Armor", "Heavy Armor"],
   weaponTypes: ["Sword", "Axe"],

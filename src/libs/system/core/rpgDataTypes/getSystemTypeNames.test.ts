@@ -1,5 +1,5 @@
 import { describe, test, expect } from "vitest";
-import type { Data_NamedItem as Data_NamedItem } from "src/namedItemSource";
+import type { Data_NamedItem } from "src/namedItemSource";
 import type { System_ParamNames } from "src/system/subset";
 import {
   getElementTypes,
@@ -8,11 +8,11 @@ import {
   getSkillTypes,
   getVariableNames,
 } from "./getSystemTypeNames";
-import type { System_DataNames } from "./types";
+import type { System_RPG_DataNames } from "./types";
 
 const system: System_ParamNames &
   Pick<
-    System_DataNames,
+    System_RPG_DataNames,
     "elements" | "variables" | "equipTypes" | "skillTypes"
   > = {
   elements: ["none", "Fire", "Ice", "Thunder"],

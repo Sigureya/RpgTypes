@@ -26,10 +26,10 @@ import type {
   SourceId_SystemVariables,
   SourceId_SystemWeaponTypes,
 } from "./sourceIdTypes";
-import type { System_DataNames, SystemLabel_DataNames } from "./types";
+import type { System_RPG_DataNames, SystemLabel_DataNames } from "./types";
 
 export const defineSystemItems = (
-  system: System_DataNames,
+  system: System_RPG_DataNames,
   label: SystemLabel_DataNames
 ): NamedItemSource[] => {
   return [
@@ -43,7 +43,7 @@ export const defineSystemItems = (
   ];
 };
 const buildArmorTypesSource = (
-  system: Pick<System_DataNames, "armorTypes">,
+  system: Pick<System_RPG_DataNames, "armorTypes">,
   label: SystemLabel_DataNames
 ): NamedItemSource => ({
   items: getArmorTypes(system),
@@ -56,7 +56,7 @@ const buildArmorTypesSource = (
 });
 
 const buildElementTypesSource = (
-  system: Pick<System_DataNames, "elements">,
+  system: Pick<System_RPG_DataNames, "elements">,
   label: SystemLabel_DataNames
 ): NamedItemSource => ({
   items: getElementTypes(system),
@@ -69,7 +69,7 @@ const buildElementTypesSource = (
 });
 
 const buildEquipTypesSource = (
-  system: Pick<System_DataNames, "equipTypes">,
+  system: Pick<System_RPG_DataNames, "equipTypes">,
   label: SystemLabel_DataNames
 ): NamedItemSource => ({
   items: getEquipTypes(system),
@@ -82,7 +82,7 @@ const buildEquipTypesSource = (
 });
 
 const buildSkillTypesSource = (
-  system: Pick<System_DataNames, "skillTypes">,
+  system: Pick<System_RPG_DataNames, "skillTypes">,
   label: SystemLabel_DataNames
 ): NamedItemSource => ({
   items: getSkillTypes(system),
@@ -95,7 +95,7 @@ const buildSkillTypesSource = (
 });
 
 const buildVariableNamesSource = (
-  system: Pick<System_DataNames, "variables">,
+  system: Pick<System_RPG_DataNames, "variables">,
   label: SystemLabel_DataNames
 ): NamedItemSource => ({
   items: getVariableNames(system),
@@ -108,7 +108,7 @@ const buildVariableNamesSource = (
 });
 
 const buildSwitchesSource = (
-  system: Pick<System_DataNames, "switches">,
+  system: Pick<System_RPG_DataNames, "switches">,
   label: SystemLabel_DataNames
 ): NamedItemSource => ({
   items: getSwitches(system),
@@ -121,7 +121,7 @@ const buildSwitchesSource = (
 });
 
 const buildWeaponTypesSource = (
-  system: Pick<System_DataNames, "weaponTypes">,
+  system: Pick<System_RPG_DataNames, "weaponTypes">,
   label: SystemLabel_DataNames
 ): NamedItemSource => ({
   items: getWeaponTypes(system),

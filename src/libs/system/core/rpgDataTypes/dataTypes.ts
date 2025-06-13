@@ -1,8 +1,8 @@
-import type { System_DataNames } from "./types";
+import type { System_RPG_DataNames } from "./types";
 
 export const makeDataNames = (
-  data: Partial<System_DataNames>
-): System_DataNames => ({
+  data: Partial<System_RPG_DataNames>
+): System_RPG_DataNames => ({
   armorTypes: cloneStringArray(data.armorTypes),
   elements: cloneStringArray(data.elements),
   equipTypes: cloneStringArray(data.equipTypes),

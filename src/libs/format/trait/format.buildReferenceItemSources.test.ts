@@ -32,12 +32,12 @@ import {
   DEFAULT_SYSTEM_LABELS_DATA_TYPES,
   defineSystemItems,
 } from "src/system";
-import type { System_DataNames } from "src/system/core";
+import type { System_RPG_DataNames } from "src/system/core";
 import type { DomainName } from "src/templates";
 import { buildReferenceItemSources } from "./formatTraits";
 
 const mockNormalLabel: NormalLabel = { normal: "Normal" };
-const mockSystemdata: System_DataNames = {
+const mockSystemdata: System_RPG_DataNames = {
   elements: ["Fire", "Ice", "Lightning"],
   armorTypes: ["Light Armor", "Heavy Armor"],
   weaponTypes: ["Sword", "Axe"],

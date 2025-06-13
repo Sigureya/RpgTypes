@@ -1,5 +1,5 @@
 import type { JSONSchemaType } from "ajv";
-import type { System_DataNames } from "./types";
+import type { System_RPG_DataNames } from "./types";
 
 const stringArraySchema = {
   type: "array",
@@ -27,4 +27,4 @@ export const SCHEMA_SYSTEM_RPG_DATA_NAMES = {
     switches: stringArraySchema,
     armorTypes: stringArraySchema,
   },
-} as const satisfies JSONSchemaType<System_DataNames>;
+} as const satisfies JSONSchemaType<System_RPG_DataNames>;

@@ -16,7 +16,7 @@ import {
 import type {
   System_Bgm,
   System_BooleanGameOptions,
-  System_DataNames,
+  System_RPG_DataNames,
   System_GameInitial,
   System_TitleImages,
   System_ImageSize,
@@ -36,7 +36,7 @@ export const makeSystemData = (
 ): Data_System => {
   const vehicles = p.vehicles ?? {};
 
-  const dataNames: Partial<System_DataNames> = p.dataNames ?? {};
+  const dataNames: Partial<System_RPG_DataNames> = p.dataNames ?? {};
   const debug: Partial<System_Debug> = p.debug ?? {};
   const images: Partial<System_TitleImages> = p.images ?? {};
   const gameInit: Partial<System_GameInitial> = p.gameInit ?? {};
@@ -61,7 +61,7 @@ export const makeSystemData = (
     title1Name: images.title1Name ?? "",
     title2Name: images.title2Name ?? "",
     ...(makeDataNames(dataNames) satisfies Record<
-      keyof System_DataNames,
+      keyof System_RPG_DataNames,
       string[]
     >),
     magicSkills: cloneNumberArray([]),
