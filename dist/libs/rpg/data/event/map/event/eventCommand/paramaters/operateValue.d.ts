@@ -1,4 +1,5 @@
-import { Designation, Operation_PlusMinus, ValueOf } from './constants';
+import { ValueOf } from '../../../../../../../templates/valueOf';
+import { Designation, Operation_PlusMinus } from './constants';
 export type OperateValueParams = [
     oparation: ValueOf<Operation_PlusMinus>,
     oprandType: ValueOf<Designation>,

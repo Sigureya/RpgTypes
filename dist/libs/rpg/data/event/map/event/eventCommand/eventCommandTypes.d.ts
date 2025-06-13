@@ -1,7 +1,8 @@
 import { ColorRGBA } from '../../../../../../utils';
+import { ValueOf } from '../../../../../../templates/valueOf';
 import { BranchParameters } from './branchParams';
 import { EventCommandLike } from './eventComandLike';
-import { MovePicture, ShopGoods, ShowPicture, ValueOf, Toggle, Operation_PlusMinus, Designation } from './paramaters';
+import { MovePicture, ShopGoods, ShowPicture, Toggle, Operation_PlusMinus, Designation } from './paramaters';
 import { Param_ChangeEnemyParameters } from './paramaters/changeBattler';
 import { Direction8, MoveRouteData } from './types';
 /**

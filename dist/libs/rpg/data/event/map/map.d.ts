@@ -1,4 +1,4 @@
-import { EventCommandUnknown } from '../../../../eventCommand';
+import { EventCommandUnknown } from '../../../../../rmmz/eventCommand';
 import { AudioFileParams } from '../../../../utils';
 import { EventCommand, MapEvent } from './event/';
 import { MapEventContainer } from './mapEventContainer';

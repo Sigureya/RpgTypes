@@ -1,4 +1,4 @@
-import { Damage } from '../../../..';
+import { Damage } from '../../members';
 import { ItemEffect } from './itemEffect';
 import { Data_UsableItem } from './usableItem';
 export interface Data_Skill extends Data_UsableItem {

@@ -1,9 +1,10 @@
-import { ParamArray_ControlVariables } from '../../../../../../eventCommand/commands/variable';
+import { ParamArray_ControlVariables } from '../../../../../../../rmmz/eventCommand';
 import { AudioFileParams, ColorRGBA } from '../../../../../../utils';
+import { ValueOf } from '../../../../../../templates/valueOf';
 import { BranchParameters } from './branchParams';
 import { EventCommandLike } from './eventComandLike';
 import { Command_RotatePicture, Command_SetEventLocation, Command_SetVehicleLocation, Command_TintPicture } from './eventCommandTypes';
-import { ChanageActorVariable, MovePicture, ShopGoods, ShopProcessing, ShowPicture, ValueOf, Designation, Toggle, Operation_PlusMinus } from './paramaters';
+import { ChanageActorVariable, MovePicture, ShopGoods, ShopProcessing, ShowPicture, Designation, Toggle, Operation_PlusMinus } from './paramaters';
 import { Param_ChangeEnemyParameters, Param_EnemyIterate } from './paramaters/changeBattler';
 import { CommandTemplate, Direction8, MoveRouteData, IndexOfParameter } from './types';
 import type * as EventCommandCodes from "./eventCommandCodes";
