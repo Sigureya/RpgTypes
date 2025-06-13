@@ -4,10 +4,10 @@ import type { System_DataNames } from "./types";
 const stringArraySchema = {
   additionalProperties: false,
   type: "array",
-  items: { type: "string" },
+  items: { type: "string", additionalProperties: false },
 } as const satisfies JSONSchemaType<string[]>;
 
-export const SCHEMA_SYSTEM_RPG_DATA_NAMES: JSONSchemaType<System_DataNames> = {
+export const SCHEMA_SYSTEM_RPG_DATA_NAMES = {
   additionalProperties: false,
   type: "object",
   required: [

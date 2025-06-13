@@ -12,8 +12,9 @@ export const SCHEMA_SYSTEM_IMAGE_SIZE = {
   },
 } as const satisfies JSONSchemaType<System_ImageSize>;
 
-export const SCHEMA_SYSTEM_TITLE_IMAGES: JSONSchemaType<System_TitleImages> = {
+export const SCHEMA_SYSTEM_TITLE_IMAGES = {
   additionalProperties: false,
+
   type: "object",
   required: ["title1Name", "title2Name"],
   properties: {
