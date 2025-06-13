@@ -8,3 +8,4 @@ export * from './main';
 export * from './note';
 export * from './sourceKindConstants';
 export * from './tileset';
+export { resolveTraitLabels } from './resolveTraitLabels';

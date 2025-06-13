@@ -36,69 +36,69 @@ export declare const SCHEMA_DATA_WEAPON: {
             readonly minimum: 0;
         };
         readonly params: {
-            type: "array";
-            items: [{
-                type: "integer";
+            readonly type: "array";
+            readonly items: readonly [{
+                readonly type: "integer";
             }, {
-                type: "integer";
+                readonly type: "integer";
             }, {
-                type: "integer";
+                readonly type: "integer";
             }, {
-                type: "integer";
+                readonly type: "integer";
             }, {
-                type: "integer";
+                readonly type: "integer";
             }, {
-                type: "integer";
+                readonly type: "integer";
             }, {
-                type: "integer";
+                readonly type: "integer";
             }, {
-                type: "integer";
+                readonly type: "integer";
             }];
-            minItems: 8;
-            maxItems: 8;
+            readonly minItems: 8;
+            readonly maxItems: 8;
         };
         readonly damage: {
-            type: "object";
-            properties: {
-                type: {
-                    type: "integer";
-                    minimum: number;
+            readonly type: "object";
+            readonly properties: {
+                readonly type: {
+                    readonly type: "integer";
+                    readonly minimum: 0;
                 };
-                elementId: {
-                    type: "integer";
-                    minimum: number;
+                readonly elementId: {
+                    readonly type: "integer";
+                    readonly minimum: 0;
                 };
-                formula: {
-                    type: "string";
+                readonly formula: {
+                    readonly type: "string";
                 };
-                variance: {
-                    type: "integer";
-                    minimum: number;
-                    maximum: number;
+                readonly variance: {
+                    readonly type: "integer";
+                    readonly minimum: 0;
+                    readonly maximum: 100;
                 };
-                critical: {
-                    type: "boolean";
-                    default: false;
+                readonly critical: {
+                    readonly type: "boolean";
+                    readonly default: false;
                 };
             };
-            required: ("type" | "variance" | "elementId" | "formula" | "critical")[];
+            readonly required: readonly ["type", "elementId", "formula", "variance", "critical"];
         };
         readonly traits: {
-            type: "array";
-            items: {
-                type: "object";
-                properties: {
-                    code: {
-                        type: "integer";
+            readonly type: "array";
+            readonly items: {
+                readonly type: "object";
+                readonly properties: {
+                    readonly code: {
+                        readonly type: "integer";
                     };
-                    dataId: {
-                        type: "integer";
+                    readonly dataId: {
+                        readonly type: "integer";
                     };
-                    value: {
-                        type: "integer";
+                    readonly value: {
+                        readonly type: "integer";
                     };
                 };
-                required: ("value" | "code" | "dataId")[];
+                readonly required: readonly ["code", "dataId", "value"];
             };
         };
     };

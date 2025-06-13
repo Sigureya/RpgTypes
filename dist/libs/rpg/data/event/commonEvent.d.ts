@@ -1,4 +1,4 @@
-import { EventCommandUnknown } from '../../../eventCommand';
+import { EventCommandUnknown } from '../../../../rmmz/eventCommand/frame';
 import { EventCommand } from './map';
 export interface Data_CommonEvent extends Data_CommonEventLike {
     trigger: number;

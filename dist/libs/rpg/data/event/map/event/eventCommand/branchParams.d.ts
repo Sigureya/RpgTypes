@@ -1,4 +1,5 @@
-import { BranchCodeTable, Operation_PlusMinus, Toggle, ValueOf } from './paramaters';
+import { ValueOf } from '../../../../../../templates/valueOf';
+import { BranchCodeTable, Operation_PlusMinus, Toggle } from './paramaters';
 export type BranchParam_Switch = [
     branchCode: BranchCodeTable["SWITCH"],
     switchId: number,

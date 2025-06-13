@@ -1,4 +1,4 @@
-import { EventCommandUnknown } from '../../../../../eventCommand';
+import { EventCommandUnknown } from '../../../../../../rmmz/eventCommand';
 import { MapEvent_PageCondition } from './condition';
 import { Direction8, EventCommand } from './eventCommand';
 import { MoveRouteDataUnkwnown } from './eventCommand/moveRoute';

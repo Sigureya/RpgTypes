@@ -1,4 +1,4 @@
-import { ValueOf } from './constants';
+import { ValueOf } from '../../../../../../../templates/valueOf';
 export type GoodsType = {
     item: 0;
     weapon: 1;
