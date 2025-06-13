@@ -102,6 +102,11 @@ const fullFragments = {
     faceSize: 144,
     iconSize: 32,
   },
+  editing: {
+    jsonFormatLevel: 1,
+    messageWidth1: 600,
+    messageWidth2: 400,
+  },
 } as const satisfies Partial<SystemDataFragments>;
 
 describe("makeSystemData", () => {
@@ -125,9 +130,7 @@ describe("makeSystemData", () => {
     test("copies texts", () => {
       expect(result).toMatchObject(fullFragments.texts);
     });
-    test.skip("copies debug (skipped)", () => {
-      expect(result).toMatchObject(fullFragments.debug);
-    });
+
     test("copies images", () => {
       expect(result).toMatchObject(fullFragments.images);
     });
@@ -135,9 +138,16 @@ describe("makeSystemData", () => {
       expect(result).toMatchObject(fullFragments.size);
     });
   });
+  describe("copies and assigns optional fragments", () => {
+    test("copies editing", () => {
+      expect(result.editor).toEqual(fullFragments.editing);
+      expect(result.editor).not.toBe(fullFragments.editing);
+    });
 
-  test("copies advanced", () => {
-    expect(result.advanced).toMatchObject(fullFragments.advanced);
+    test("copies advanced", () => {
+      expect(result.advanced).toMatchObject(fullFragments.advanced);
+      expect(result.advanced).not.toBe(fullFragments.advanced);
+    });
   });
 
   describe("deep copy for dataNames arrays", () => {
