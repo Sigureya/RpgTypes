@@ -1,7 +1,7 @@
 import { describe, test, expect } from "vitest";
-import type { Terms_Messages } from "./core";
+import type { AttackMotion, Terms_Messages } from "./core";
 import type { Data_System } from "./system";
-import { isSystemBooleanOptions } from "./validate";
+import { isAttackMotion, isDataSystem } from "./validate";
 
 const mockSystem = {
   optAutosave: true,
@@ -238,12 +238,39 @@ const mockSystem = {
   },
 } as const satisfies Data_System;
 
-describe.skip("", () => {
-  test("isSystemBooleanOptions", () => {
-    expect(isSystemBooleanOptions(mockSystem)).toBe(true);
+describe("Data_System", () => {
+  test("", () => {
+    expect(isDataSystem(mockSystem)).toBe(true);
   });
-  test("isSystemBooleanOptions with invalid data", () => {
-    const invalidData = { ...mockSystem, optAutosave: "invalid" };
-    expect(isSystemBooleanOptions(invalidData)).toBe(false);
+});
+
+describe("isAttackMotion", () => {
+  test("normal case", () => {
+    const mockMotion: AttackMotion = {
+      type: 4,
+      weaponImageId: 3,
+    };
+    expect(mockMotion).toSatisfy(isAttackMotion);
+  });
+  describe("error case", () => {
+    test("missing type", () => {
+      const mockMotion: Omit<AttackMotion, "type"> = {
+        weaponImageId: 3,
+      };
+      expect(mockMotion).not.toSatisfy(isAttackMotion);
+    });
+    test("missing weaponImageId", () => {
+      const mockMotion: Omit<AttackMotion, "weaponImageId"> = {
+        type: 4,
+      };
+      expect(mockMotion).not.toSatisfy(isAttackMotion);
+    });
+    test("error case", () => {
+      const mockMotion: Record<keyof AttackMotion, string> = {
+        type: "4",
+        weaponImageId: "3",
+      };
+      expect(mockMotion).not.toSatisfy(isAttackMotion);
+    });
   });
 });

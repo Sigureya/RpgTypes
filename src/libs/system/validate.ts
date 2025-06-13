@@ -1,22 +1,21 @@
 import Ajv from "ajv";
-import type {
-  AttackMotion,
-  System_BooleanGameOptions,
-  System_ImageSize,
+import type { AttackMotion, System_ImageSize } from "./core";
+import {
+  SCHEMA_SYSTEM_MEMBERS_ATTACK_MOTION,
+  SCHEMA_SYSTEM_IMAGE_SIZE,
 } from "./core";
-import { SCHEMA_SYSTEM_BOOLEAN_OPTIONS } from "./core";
-import { SCHEMA_SYSTEM_MEMBERS_ATTACK_MOTION } from "./core/attackMotion/schema";
-import { SCHEMA_SYSTEM_IMAGE_SIZE } from "./core/images/schema";
 import type { TestBattler } from "./gameEdit";
 import { SCHEMA_SYSTEM_TEST_BATTLER } from "./gameEdit/testPlay/schema";
+import { mergeSystemSchema, allSystemSchema } from "./schemaMerge";
+import type { Data_System } from "./system";
 
-const ajv = new Ajv({ strict: false });
-const booleanOptions = ajv.compile(SCHEMA_SYSTEM_BOOLEAN_OPTIONS);
+const ajv = new Ajv({ strict: true });
 
-export const isSystemBooleanOptions = (
-  data: object
-): data is System_BooleanGameOptions => {
-  return booleanOptions(data);
+const schema = mergeSystemSchema(allSystemSchema());
+const systemValidate = ajv.compile(schema);
+
+export const isDataSystem = (data: unknown): data is Data_System => {
+  return systemValidate(data);
 };
 
 const testBattler = ajv.compile(SCHEMA_SYSTEM_TEST_BATTLER);
@@ -29,6 +28,7 @@ const attackMotion = ajv.compile(SCHEMA_SYSTEM_MEMBERS_ATTACK_MOTION);
 export const isAttackMotion = (data: unknown): data is AttackMotion => {
   return attackMotion(data);
 };
+
 const imageSize = ajv.compile(SCHEMA_SYSTEM_IMAGE_SIZE);
 export const isImageSize = (data: unknown): data is System_ImageSize => {
   return imageSize(data);
