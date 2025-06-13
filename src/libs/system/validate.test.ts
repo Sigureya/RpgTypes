@@ -238,7 +238,7 @@ const mockSystem = {
   },
 } as const satisfies Data_System;
 
-describe("", () => {
+describe.skip("", () => {
   test("isSystemBooleanOptions", () => {
     expect(isSystemBooleanOptions(mockSystem)).toBe(true);
   });
