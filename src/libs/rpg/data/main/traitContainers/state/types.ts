@@ -1,4 +1,4 @@
-import type { Data_TraitContainer, Trait } from "src/rpg";
+import type { Data_TraitContainer, Trait } from "../trait";
 
 export interface Data_State extends Data_TraitContainer {
   name: string;
