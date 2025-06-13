@@ -1,5 +1,5 @@
 export declare const SCHEMA_SYSTEM_TERMS_BUNDLE: {
-    readonly required: ("gameTitle" | "currencyUnit" | "terms")[];
+    readonly required: ("terms" | "gameTitle" | "currencyUnit")[];
     readonly additionalProperties: false;
     readonly type: "object";
     readonly properties: {
@@ -12,7 +12,7 @@ export declare const SCHEMA_SYSTEM_TERMS_BUNDLE: {
         readonly terms: {
             readonly additionalProperties: false;
             readonly type: "object";
-            readonly required: ("params" | "messages" | "commands" | "basic")[];
+            readonly required: ("messages" | "commands" | "params" | "basic")[];
             readonly properties: {
                 messages: {
                     readonly type: "object";

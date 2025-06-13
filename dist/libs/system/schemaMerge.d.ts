@@ -325,57 +325,6 @@ export declare const allSystemSchema: () => ({
 } | {
     readonly additionalProperties: false;
     readonly type: "object";
-    readonly required: readonly ["battleback1Name", "battleback2Name", "battlerHue", "battlerName", "editMapId", "editor", "testBattlers", "testTroopId"];
-    readonly properties: {
-        readonly testBattlers: {
-            readonly type: "array";
-            readonly items: {
-                readonly additionalProperties: false;
-                readonly type: "object";
-                readonly required: readonly ["actorId", "equips", "level"];
-                readonly properties: {
-                    readonly actorId: {
-                        readonly type: "integer";
-                    };
-                    readonly level: {
-                        readonly type: "integer";
-                        readonly minimum: 1;
-                    };
-                    readonly equips: {
-                        readonly type: "array";
-                        readonly items: {
-                            readonly type: "integer";
-                        };
-                    };
-                };
-            };
-        };
-        readonly testTroopId: {
-            readonly type: "integer";
-            readonly minimum: 0;
-        };
-        readonly battleback1Name: {
-            readonly type: "string";
-        };
-        readonly battleback2Name: {
-            readonly type: "string";
-        };
-        readonly editMapId: {
-            readonly type: "integer";
-            readonly minimum: 0;
-        };
-        readonly battlerHue: {
-            readonly type: "integer";
-            readonly minimum: 0;
-        };
-        readonly battlerName: {
-            readonly type: "string";
-        };
-        readonly editor: import('ajv').JSONSchemaType<import('./gameEdit').EditorSettings>;
-    };
-} | {
-    readonly additionalProperties: false;
-    readonly type: "object";
     readonly required: readonly ["weaponTypes", "skillTypes", "elements", "variables", "equipTypes", "switches", "armorTypes"];
     readonly properties: {
         readonly weaponTypes: {
@@ -422,7 +371,7 @@ export declare const allSystemSchema: () => ({
         };
     };
 } | {
-    readonly required: ("gameTitle" | "currencyUnit" | "terms")[];
+    readonly required: ("terms" | "gameTitle" | "currencyUnit")[];
     readonly additionalProperties: false;
     readonly type: "object";
     readonly properties: {
@@ -435,7 +384,7 @@ export declare const allSystemSchema: () => ({
         readonly terms: {
             readonly additionalProperties: false;
             readonly type: "object";
-            readonly required: ("params" | "messages" | "commands" | "basic")[];
+            readonly required: ("messages" | "commands" | "params" | "basic")[];
             readonly properties: {
                 messages: {
                     readonly type: "object";
@@ -683,6 +632,57 @@ export declare const allSystemSchema: () => ({
                 };
             };
         };
+    };
+} | {
+    readonly additionalProperties: false;
+    readonly type: "object";
+    readonly required: readonly ["battleback1Name", "battleback2Name", "battlerHue", "battlerName", "editMapId", "editor", "testBattlers", "testTroopId"];
+    readonly properties: {
+        readonly testBattlers: {
+            readonly type: "array";
+            readonly items: {
+                readonly additionalProperties: false;
+                readonly type: "object";
+                readonly required: readonly ["actorId", "equips", "level"];
+                readonly properties: {
+                    readonly actorId: {
+                        readonly type: "integer";
+                    };
+                    readonly level: {
+                        readonly type: "integer";
+                        readonly minimum: 1;
+                    };
+                    readonly equips: {
+                        readonly type: "array";
+                        readonly items: {
+                            readonly type: "integer";
+                        };
+                    };
+                };
+            };
+        };
+        readonly testTroopId: {
+            readonly type: "integer";
+            readonly minimum: 0;
+        };
+        readonly battleback1Name: {
+            readonly type: "string";
+        };
+        readonly battleback2Name: {
+            readonly type: "string";
+        };
+        readonly editMapId: {
+            readonly type: "integer";
+            readonly minimum: 0;
+        };
+        readonly battlerHue: {
+            readonly type: "integer";
+            readonly minimum: 0;
+        };
+        readonly battlerName: {
+            readonly type: "string";
+        };
+        readonly editor: import('ajv').JSONSchemaType<import('./gameEdit').EditorSettings>;
     };
 } | {
     readonly additionalProperties: false;
