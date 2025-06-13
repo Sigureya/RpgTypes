@@ -1,4 +1,4 @@
-import { AudioFileParams } from '../../../utils';
+import { AudioFileParams } from '../../../../libs/utils';
 import { System_SoundsArray } from './soundArray';
 export interface System_Me {
     gameoverMe: AudioFileParams;

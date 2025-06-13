@@ -1,4 +1,4 @@
-import { Data_NamedItem } from '../../../namedItemSource';
+import { Data_NamedItem } from '../../../../libs/namedItemSource';
 import { System_RPG_DataNames } from './types';
 export declare const getVariableNames: (system: Pick<System_RPG_DataNames, "variables">) => Data_NamedItem[];
 export declare const getElementTypes: (system: Pick<System_RPG_DataNames, "elements">) => Data_NamedItem[];
