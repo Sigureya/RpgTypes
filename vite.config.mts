@@ -6,7 +6,7 @@ declare const __dirname: string;
 
 const libBuild = {
   entry: "./src/libs/index.ts",
-  outDir: "./dist/libs",
+  outDir: "./dist",
   libName: "rpgTypes",
   exclude: [],
 };
