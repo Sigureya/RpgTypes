@@ -2,12 +2,12 @@ import { describe, test, expect } from "vitest";
 import type {
   Command_CommonEvent,
   Command_ShowMessageHeader,
-} from "src/eventCommand/commands";
+} from "@RpgTypes/eventCommand";
 import {
-  makeCommandShowMessage,
   makeCommandCommonEvent,
-} from "src/eventCommand/commands";
-import type { EventCommandLike2 } from "src/eventCommand/frame";
+  makeCommandShowMessage,
+  type EventCommandLike2,
+} from "@RpgTypes/eventCommand";
 import { SHOW_MESSAGE } from "src/rpg";
 import {
   cloneEventCommand,

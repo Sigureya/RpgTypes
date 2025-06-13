@@ -1,4 +1,4 @@
-import type { EventCommandLike2 } from "@RpgTypes/eventCommand";
+import type { EventCommandLike2 } from "@RpgTypes/eventCommand/frame";
 
 export interface ParamObject_ShowChoiceWhen {
   index: number;

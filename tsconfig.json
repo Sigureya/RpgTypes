@@ -16,6 +16,8 @@
       "src/*": ["src/libs/*"],
       "src/namedItemSource": ["src/libs/namedItemSource"],
       "@RpgTypes/system": ["src/rmmz/system"],
+      "@RpgTypes/eventCommand": ["src/rmmz/eventCommand"],
+      "@RpgTypes/eventCommand/frame": ["src/rmmz/eventCommand/frame"],
       "@RpgTypes/*": ["src/libs/*"]
     }
   },
