@@ -93,7 +93,7 @@ const e = require("ajv"), t = (e2, t2) => `\\${e2}[${t2}]`, a = (e2 = {}) => ({
       pages: { type: "array", items: i }
     } } }
   }
-}, p = new e(), m = p.compile(o), n = p.compile(s), d = (e2, t2) => ({ label: t2.skill.domainName, items: e2, source: {
+}, m = new e(), p = m.compile(o), n = m.compile(s), d = (e2, t2) => ({ label: t2.skill.domainName, items: e2, source: {
   author: "rmmz",
   module: "data",
   kind: "skill"
@@ -387,11 +387,11 @@ const e = require("ajv"), t = (e2, t2) => `\\${e2}[${t2}]`, a = (e2 = {}) => ({
 }, skillAdd: { domainName: "スキル追加", format: G }, skillSeal: { domainName: "スキルタイプ封印", format: G }, skillTypeAdd: { domainName: "スキルタイプ追加", format: G }, skillTypeSeal: {
   domainName: "スキルタイプ封印",
   format: G
-} } }, j = (e2) => ({ pattern: e2.format, label: e2.domainName, kindId: 11, dataSource: Ae() }), z = (e2) => ({ pattern: e2.format, label: e2.domainName, kindId: 12, dataSource: {
+} } }, j = (e2) => ({ pattern: e2.format, label: e2.domainName, kindId: 11, dataSource: Ae() }), W = (e2) => ({ pattern: e2.format, label: e2.domainName, kindId: 12, dataSource: {
   author: "rmmz",
   module: "trait",
   kind: "params"
-} }), W = (e2) => ({ pattern: e2.format, label: e2.domainName, kindId: 13, dataSource: xe() }), K = (e2) => ({
+} }), z = (e2) => ({ pattern: e2.format, label: e2.domainName, kindId: 13, dataSource: xe() }), K = (e2) => ({
   pattern: e2.format,
   label: e2.domainName,
   kindId: 14,
@@ -420,7 +420,7 @@ const e = require("ajv"), t = (e2, t2) => `\\${e2}[${t2}]`, a = (e2 = {}) => ({
   label: e2.domainName,
   kindId: 43,
   dataSource: Ee()
-}), se = (e2) => ({ pattern: e2.format, label: e2.domainName, kindId: 44, dataSource: Ee() }), pe = (e2) => ({ pattern: e2.format, label: e2.domainName, kindId: 51, dataSource: Ie() }), me = (e2) => ({
+}), se = (e2) => ({ pattern: e2.format, label: e2.domainName, kindId: 44, dataSource: Ee() }), me = (e2) => ({ pattern: e2.format, label: e2.domainName, kindId: 51, dataSource: Ie() }), pe = (e2) => ({
   pattern: e2.format,
   label: e2.domainName,
   kindId: 52,
@@ -571,7 +571,7 @@ const e = require("ajv"), t = (e2, t2) => `\\${e2}[${t2}]`, a = (e2 = {}) => ({
   pattern: t2.format,
   description: t2.desc,
   dataSource: a2
-}), je = (e2) => Ye(41, e2.special), ze = (e2) => Ye(11, e2.recoverHp), We = (e2) => Ye(12, e2.recoverMp), Ke = (e2) => Ye(13, e2.gainTp), Xe = (e2) => Ye(21, e2.addState, {
+}), je = (e2) => Ye(41, e2.special), We = (e2) => Ye(11, e2.recoverHp), ze = (e2) => Ye(12, e2.recoverMp), Ke = (e2) => Ye(13, e2.gainTp), Xe = (e2) => Ye(21, e2.addState, {
   author: "rmmz",
   module: "data",
   kind: "state"
@@ -587,7 +587,7 @@ const e = require("ajv"), t = (e2, t2) => `\\${e2}[${t2}]`, a = (e2 = {}) => ({
   author: "rmmz",
   module: "data",
   kind: "common_event"
-}), ot = "{name} {value1}%", it = "{value1}% + {value2}", st = "{name} {value1}ターン", pt = "{name}", mt = { domainName: "使用効果", options: { addBuff: {
+}), ot = "{name} {value1}%", it = "{value1}% + {value2}", st = "{name} {value1}ターン", mt = "{name}", pt = { domainName: "使用効果", options: { addBuff: {
   desc: "バフを付与する",
   domainName: "バフ付与",
   format: st
@@ -595,7 +595,7 @@ const e = require("ajv"), t = (e2, t2) => `\\${e2}[${t2}]`, a = (e2 = {}) => ({
   desc: "成長効果",
   domainName: "成長効果",
   format: "{name} + {value1}"
-}, learnSkill: { desc: "スキルを習得する", domainName: "スキル習得", format: pt }, recoverHp: {
+}, learnSkill: { desc: "スキルを習得する", domainName: "スキル習得", format: mt }, recoverHp: {
   desc: "HPを回復します。最大HPに対する割合と一定値のいずれか一方または両方を指定します。アイテムの場合は、特殊能力値[薬の知識]の倍率が適用されます。",
   domainName: "HP回復",
   format: it
@@ -603,15 +603,15 @@ const e = require("ajv"), t = (e2, t2) => `\\${e2}[${t2}]`, a = (e2 = {}) => ({
   desc: "MPを回復します。最大MPに対する割合と一定値のいずれか一方または両方を指定します。アイテムの場合は、特殊能力値[薬の知識]の倍率が適用されます。",
   domainName: "MP回復",
   format: it
-}, removeBuff: { desc: "バフを解除する", domainName: "バフ解除", format: pt }, removeDebuff: {
+}, removeBuff: { desc: "バフを解除する", domainName: "バフ解除", format: mt }, removeDebuff: {
   desc: "デバフを解除する",
   domainName: "デバフ解除",
-  format: pt
-}, removeState: { desc: "指定したステートを付加します。", domainName: "ステート付加", format: ot }, special: { desc: "特殊効果", domainName: "特殊効果", format: pt }, addState: {
+  format: mt
+}, removeState: { desc: "指定したステートを付加します。", domainName: "ステート付加", format: ot }, special: { desc: "特殊効果", domainName: "特殊効果", format: mt }, addState: {
   desc: "状態異常を解除する",
   domainName: "ステート解除",
   format: ot
-}, commonEvent: { desc: "コモンイベントを実行する", domainName: "コモンイベント", format: pt } } }, nt = {
+}, commonEvent: { desc: "コモンイベントを実行する", domainName: "コモンイベント", format: mt } } }, nt = {
   type: "object",
   required: ["name", "id", "description", "iconIndex", "message1", "message2", "messageType", "mpCost", "requiredWtypeId1", "requiredWtypeId2", "stypeId", "tpCost", "animationId", "hitType", "occasion", "repeats", "scope", "speed", "successRate", "tpGain", "note", "effects"],
   properties: {
@@ -768,11 +768,11 @@ const e = require("ajv"), t = (e2, t2) => `\\${e2}[${t2}]`, a = (e2 = {}) => ({
     pan: { type: "integer" }
   }, required: ["name", "volume", "pitch", "pan"], additionalProperties: false }] } },
   additionalProperties: false
-}), jt = (e2) => Yt(e2), zt = Ut.compile({ type: "object", required: ["code", "parameters", "indent"], properties: {
+}), jt = (e2) => Yt(e2), Wt = Ut.compile({ type: "object", required: ["code", "parameters", "indent"], properties: {
   indent: { type: "integer", minimum: 0 },
   parameters: { type: "array", minItems: 0, maxItems: 0 },
   code: { type: "integer", enum: [0, 109, 112, 113, 115, 204, 206, 213, 214, 216, 217, 221, 222, 243, 244, 251, 314, 315, 340, 351, 352, 353, 354, 411] }
-}, additionalProperties: false }), Wt = Ut.compile({
+}, additionalProperties: false }), zt = Ut.compile({
   type: "object",
   required: ["code", "parameters", "indent"],
   properties: { code: { type: "integer", enum: [108, 355, 401, 405, 408, 655] }, indent: { type: "integer", minimum: 0 }, parameters: {
@@ -782,7 +782,7 @@ const e = require("ajv"), t = (e2, t2) => `\\${e2}[${t2}]`, a = (e2 = {}) => ({
     items: [{ type: "string" }]
   } },
   additionalProperties: false
-}), Kt = (e2) => Wt(e2), Xt = Ut.compile({ type: "object", properties: { code: { type: "number", const: 117 }, indent: {
+}), Kt = (e2) => zt(e2), Xt = Ut.compile({ type: "object", properties: { code: { type: "number", const: 117 }, indent: {
   type: "integer",
   minimum: 0
 }, parameters: { type: "array", minItems: 1, maxItems: 1, items: [{ type: "number", minimum: 0, default: 0 }] } }, required: ["code", "indent", "parameters"] }), $t = Ut.compile({ type: "object", properties: {
@@ -868,7 +868,7 @@ const e = require("ajv"), t = (e2, t2) => `\\${e2}[${t2}]`, a = (e2 = {}) => ({
     minItems: 0,
     uniqueItems: true
   }, battleSystem: { type: "number" } }
-}, pa = (e2 = {}) => [e2.item ?? true, e2.weapon ?? true, e2.armor ?? true, e2.keyItem ?? true], ma = (e2 = {}) => [e2.item ?? true, e2.skill ?? true, e2.equip ?? true, e2.status ?? true, e2.formation ?? true, e2.save ?? true], na = {
+}, ma = (e2 = {}) => [e2.item ?? true, e2.weapon ?? true, e2.armor ?? true, e2.keyItem ?? true], pa = (e2 = {}) => [e2.item ?? true, e2.skill ?? true, e2.equip ?? true, e2.status ?? true, e2.formation ?? true, e2.save ?? true], na = {
   required: ["itemCategories", "menuCommands"],
   additionalProperties: false,
   type: "object",
@@ -890,229 +890,226 @@ const e = require("ajv"), t = (e2, t2) => `\\${e2}[${t2}]`, a = (e2 = {}) => ({
   optMessageSkip: e2.optMessageSkip ?? true,
   optSplashScreen: e2.optSplashScreen ?? true
 }), la = {
+  type: "boolean"
+}, ca = {
   type: "object",
   additionalProperties: false,
   required: ["optAutosave", "optDisplayTp", "optDrawTitle", "optExtraExp", "optFloorDeath", "optFollowers", "optKeyItemsNumber", "optSideView", "optSlipDeath", "optTransparent", "optMessageSkip", "optSplashScreen"],
   properties: {
-    optAutosave: { type: "boolean" },
-    optDisplayTp: { type: "boolean" },
-    optDrawTitle: { type: "boolean" },
-    optExtraExp: { type: "boolean" },
-    optFloorDeath: { type: "boolean" },
-    optFollowers: {
-      type: "boolean"
-    },
-    optKeyItemsNumber: { type: "boolean" },
-    optSideView: { type: "boolean" },
-    optSlipDeath: { type: "boolean" },
-    optTransparent: { type: "boolean" },
-    optMessageSkip: { type: "boolean" },
-    optSplashScreen: { type: "boolean" }
+    optAutosave: la,
+    optDisplayTp: la,
+    optDrawTitle: la,
+    optExtraExp: la,
+    optFloorDeath: la,
+    optFollowers: la,
+    optKeyItemsNumber: la,
+    optSideView: la,
+    optSlipDeath: la,
+    optTransparent: la,
+    optMessageSkip: la,
+    optSplashScreen: la
   }
-}, ca = { additionalProperties: false, type: "object", required: ["startMapId", "startX", "startY", "partyMembersArray"], properties: { startMapId: {
+}, ya = { additionalProperties: false, type: "object", required: ["startMapId", "startX", "startY", "partyMembersArray"], properties: { startMapId: {
   type: "integer",
   minimum: 0
-}, startX: { type: "integer", minimum: 0 }, startY: { type: "integer", minimum: 0 }, partyMembersArray: { type: "array", items: { type: "integer", minimum: 0 } } } }, ya = {
+}, startX: { type: "integer", minimum: 0 }, startY: { type: "integer", minimum: 0 }, partyMembersArray: { type: "array", items: { type: "integer", minimum: 0 } } } }, ua = {
   additionalProperties: false,
   type: "object",
   required: ["tileSize", "faceSize", "iconSize"],
-  properties: { tileSize: { type: "integer", minimum: 0 }, faceSize: { type: "integer", minimum: 0 }, iconSize: { type: "integer", minimum: 0 } }
-}, ua = { additionalProperties: false, type: "object", required: ["title1Name", "title2Name"], properties: { title1Name: { type: "string" }, title2Name: { type: "string" } } }, ga = {
+  properties: { tileSize: { type: "integer", minimum: 0 }, faceSize: { type: "integer", minimum: 0 }, iconSize: {
+    type: "integer",
+    minimum: 0
+  } }
+}, ga = { additionalProperties: false, type: "object", required: ["title1Name", "title2Name"], properties: { title1Name: { type: "string" }, title2Name: { type: "string" } } }, xa = {
   type: "object",
   additionalProperties: false,
   required: ["locale", "versionId", "windowTone"],
-  properties: { locale: { type: "string" }, versionId: { type: "number" }, windowTone: {
-    type: "array",
-    items: { type: "number" },
-    minItems: 4,
-    maxItems: 4
-  } }
-}, xa = (e2, t2) => ({
+  properties: { locale: { type: "string" }, versionId: { type: "number" }, windowTone: { type: "array", items: {
+    type: "number"
+  }, minItems: 4, maxItems: 4 } }
+}, Ea = (e2, t2) => ({
   name: e2,
   id: t2
-}), Ea = (e2) => e2.variables.map(xa), Aa = (e2) => e2.elements.map(xa), Ta = (e2) => e2.equipTypes.map(xa), Ia = (e2) => e2.skillTypes.map(xa), _a = (e2) => e2.weaponTypes.map(xa), Sa = (e2) => e2.armorTypes.map(xa), Ra = (e2) => e2.switches.map(xa), ba = (e2, t2) => ({
-  items: Sa(e2),
+}), Aa = (e2) => e2.variables.map(Ea), Ta = (e2) => e2.elements.map(Ea), Ia = (e2) => e2.equipTypes.map(Ea), _a = (e2) => e2.skillTypes.map(Ea), Sa = (e2) => e2.weaponTypes.map(Ea), Ra = (e2) => e2.armorTypes.map(Ea), ba = (e2) => e2.switches.map(Ea), Na = (e2, t2) => ({
+  items: Ra(e2),
   label: t2.options.armorTypes,
   source: { author: "rmmz", module: "system", kind: "armorTypes" }
-}), Na = (e2, t2) => ({ items: Aa(e2), label: t2.options.elements, source: {
+}), Ca = (e2, t2) => ({ items: Ta(e2), label: t2.options.elements, source: {
   author: "rmmz",
   module: "system",
   kind: "elements"
-} }), Ca = (e2, t2) => ({ items: Ta(e2), label: t2.options.equipTypes, source: { author: "rmmz", module: "system", kind: "equipTypes" } }), Ma = (e2, t2) => ({
-  items: Ia(e2),
+} }), Ma = (e2, t2) => ({ items: Ia(e2), label: t2.options.equipTypes, source: { author: "rmmz", module: "system", kind: "equipTypes" } }), ha = (e2, t2) => ({
+  items: _a(e2),
   label: t2.options.skillTypes,
   source: { author: "rmmz", module: "system", kind: "skillTypes" }
-}), ha = (e2, t2) => ({ items: Ea(e2), label: t2.options.variables, source: {
+}), fa = (e2, t2) => ({ items: Aa(e2), label: t2.options.variables, source: {
   author: "rmmz",
   module: "system",
   kind: "variables"
-} }), fa = (e2, t2) => ({ items: Ra(e2), label: t2.options.switches, source: { author: "rmmz", module: "system", kind: "switches" } }), ka = (e2, t2) => ({
-  items: _a(e2),
+} }), ka = (e2, t2) => ({ items: ba(e2), label: t2.options.switches, source: { author: "rmmz", module: "system", kind: "switches" } }), va = (e2, t2) => ({
+  items: Sa(e2),
   label: t2.options.weaponTypes,
   source: { author: "rmmz", module: "system", kind: "weaponTypes" }
-}), va = { type: "array", items: { type: "string" } }, Oa = {
+}), Oa = { type: "array", items: { type: "string" } }, La = {
   additionalProperties: false,
   type: "object",
   required: ["weaponTypes", "skillTypes", "elements", "variables", "equipTypes", "switches", "armorTypes"],
   properties: {
-    weaponTypes: va,
-    skillTypes: va,
-    elements: va,
-    variables: va,
-    equipTypes: va,
-    switches: va,
-    armorTypes: va
+    weaponTypes: Oa,
+    skillTypes: Oa,
+    elements: Oa,
+    variables: Oa,
+    equipTypes: Oa,
+    switches: Oa,
+    armorTypes: Oa
   }
-}, La = (e2) => ({
-  armorTypes: Pa(e2.armorTypes),
-  elements: Pa(e2.elements),
-  equipTypes: Pa(e2.equipTypes),
-  weaponTypes: Pa(e2.weaponTypes),
-  skillTypes: Pa(e2.skillTypes),
-  variables: Pa(e2.variables),
-  switches: Pa(e2.switches)
-}), Pa = (e2) => e2 ? [...e2] : [], Da = (e2) => [e2.level ?? "Level", e2.levelA ?? "Level", e2.hp ?? "HP", e2.hpA ?? "HP", e2.mp ?? "MP", e2.mpA ?? "MP", e2.tp ?? "TP", e2.tpA ?? "TP", e2.experience ?? "EXP", e2.exp ?? "EXP"], Fa = (e2) => Ha(e2, ""), Ha = (e2, t2) => [e2.fight ?? "Fight", e2.escape ?? "Escape", e2.attack ?? "Attack", e2.guard ?? "Guard", e2.item ?? "Item", e2.skill ?? "Skill", e2.equip ?? "Equip", e2.status ?? "Status", e2.formation ?? "Formation", e2.save ?? "Save", e2.gameEnd ?? "Game End", e2.options ?? "Options", e2.weapon ?? "Weapon", e2.armor ?? "Armor", e2.keyItem ?? "Key Item", e2.equip2 ?? "Equip2", e2.optimize ?? "Optimize", e2.clear ?? "Clear", e2.newGame ?? "New Game", e2.continue_ ?? "Continue", t2, e2.toTitle ?? "To Title", e2.cancel ?? "Cancel", t2, e2.buy ?? "Buy", e2.sell ?? "Sell"], wa = (e2, t2) => "string" == typeof e2 ? e2 : t2, Ba = (e2) => ({
-  actionFailure: wa(e2.actionFailure, "Action failed."),
-  actorDamage: wa(e2.actorDamage, "%1 took %2 damage."),
-  actorRecovery: wa(e2.actorRecovery, "%1 recovered %2 HP."),
-  actorGain: wa(e2.actorGain, "%1 gained %2."),
-  actorLoss: wa(e2.actorLoss, "%1 lost %2."),
-  actorDrain: wa(e2.actorDrain, "%1 drained %2 HP."),
-  actorNoDamage: wa(e2.actorNoDamage, "%1 was not damaged."),
-  actorNoHit: wa(e2.actorNoHit, "%1 was not hit."),
-  alwaysDash: wa(e2.alwaysDash, "Always dash."),
-  bgmVolume: wa(e2.bgmVolume, "BGM volume"),
-  bgsVolume: wa(e2.bgsVolume, "BGS volume"),
-  commandRemember: wa(e2.commandRemember, "Command remember."),
-  criticalToActor: wa(e2.criticalToActor, "%1 dealt %2 damage to %3."),
-  criticalToEnemy: wa(e2.criticalToEnemy, "%1 dealt %2 damage to %3."),
-  counterAttack: wa(e2.counterAttack, "%1 countered!"),
-  debuffAdd: wa(e2.debuffAdd, "%1's %2 was lowered."),
-  defeat: wa(e2.defeat, "Defeat."),
-  enemyDamage: wa(e2.enemyDamage, "%1 took %2 damage."),
-  enemyDrain: wa(e2.enemyDrain, "%1 drained %2 HP."),
-  enemyGain: wa(e2.enemyGain, "%1 gained %2."),
-  enemyLoss: wa(e2.enemyLoss, "%1 lost %2."),
-  enemyNoDamage: wa(e2.enemyNoDamage, "%1 was not damaged."),
-  enemyNoHit: wa(e2.enemyNoHit, "%1 was not hit."),
-  enemyRecovery: wa(e2.enemyRecovery, "%1 recovered %2 HP."),
-  evasion: wa(e2.evasion, "%1 evaded the attack!"),
-  autosave: wa(e2.autosave, "Autosave"),
-  escapeFailure: wa(e2.escapeFailure, "Escape failed."),
-  escapeStart: wa(e2.escapeStart, "%1 started to escape!"),
-  emerge: wa(e2.emerge, "%1 appeared!"),
-  expNext: wa(e2.expNext, "Next level in %1 EXP."),
-  expTotal: wa(e2.expTotal, "Total EXP: %1"),
-  file: wa(e2.file, "File"),
-  buffAdd: wa(e2.buffAdd, "%1's %2 was raised."),
-  buffRemove: wa(e2.buffRemove, "%1's %2 was lowered."),
-  obtainExp: wa(e2.obtainExp, "%1 EXP obtained."),
-  obtainGold: wa(e2.obtainGold, "%1 gold obtained."),
-  obtainItem: wa(e2.obtainItem, "%1 obtained %2."),
-  obtainSkill: wa(e2.obtainSkill, "%1 learned %2."),
-  levelUp: wa(e2.levelUp, "%1 leveled up!"),
-  partyName: wa(e2.partyName, "Party"),
-  loadMessage: wa(e2.loadMessage, "Load %1?"),
-  meVolume: wa(e2.meVolume, "ME volume"),
-  possession: wa(e2.possession, "Possession"),
-  preemptive: wa(e2.preemptive, "%1 attacked first!"),
-  saveMessage: wa(e2.saveMessage, "Save %1?"),
-  seVolume: wa(e2.seVolume, "SE volume"),
-  magicEvasion: wa(e2.magicEvasion, "%1 evaded the magic!"),
-  magicReflection: wa(e2.magicReflection, "%1 reflected the magic!"),
-  substitute: wa(e2.substitute, "%1 took the hit!"),
-  surprise: wa(e2.surprise, "%1 surprised the enemy!"),
-  touchUI: wa(e2.touchUI, "Touch UI"),
-  useItem: wa(e2.useItem, "%1 used %2."),
-  victory: wa(e2.victory, "Victory!")
-}), Ga = { type: "string" }, Ua = {
+}, Pa = (e2) => ({
+  armorTypes: Da(e2.armorTypes),
+  elements: Da(e2.elements),
+  equipTypes: Da(e2.equipTypes),
+  weaponTypes: Da(e2.weaponTypes),
+  skillTypes: Da(e2.skillTypes),
+  variables: Da(e2.variables),
+  switches: Da(e2.switches)
+}), Da = (e2) => e2 ? [...e2] : [], Fa = (e2) => [e2.level ?? "Level", e2.levelA ?? "Level", e2.hp ?? "HP", e2.hpA ?? "HP", e2.mp ?? "MP", e2.mpA ?? "MP", e2.tp ?? "TP", e2.tpA ?? "TP", e2.experience ?? "EXP", e2.exp ?? "EXP"], Ha = (e2) => wa(e2, ""), wa = (e2, t2) => [e2.fight ?? "Fight", e2.escape ?? "Escape", e2.attack ?? "Attack", e2.guard ?? "Guard", e2.item ?? "Item", e2.skill ?? "Skill", e2.equip ?? "Equip", e2.status ?? "Status", e2.formation ?? "Formation", e2.save ?? "Save", e2.gameEnd ?? "Game End", e2.options ?? "Options", e2.weapon ?? "Weapon", e2.armor ?? "Armor", e2.keyItem ?? "Key Item", e2.equip2 ?? "Equip2", e2.optimize ?? "Optimize", e2.clear ?? "Clear", e2.newGame ?? "New Game", e2.continue_ ?? "Continue", t2, e2.toTitle ?? "To Title", e2.cancel ?? "Cancel", t2, e2.buy ?? "Buy", e2.sell ?? "Sell"], Ba = (e2, t2) => "string" == typeof e2 ? e2 : t2, Ga = (e2) => ({
+  actionFailure: Ba(e2.actionFailure, "Action failed."),
+  actorDamage: Ba(e2.actorDamage, "%1 took %2 damage."),
+  actorRecovery: Ba(e2.actorRecovery, "%1 recovered %2 HP."),
+  actorGain: Ba(e2.actorGain, "%1 gained %2."),
+  actorLoss: Ba(e2.actorLoss, "%1 lost %2."),
+  actorDrain: Ba(e2.actorDrain, "%1 drained %2 HP."),
+  actorNoDamage: Ba(e2.actorNoDamage, "%1 was not damaged."),
+  actorNoHit: Ba(e2.actorNoHit, "%1 was not hit."),
+  alwaysDash: Ba(e2.alwaysDash, "Always dash."),
+  bgmVolume: Ba(e2.bgmVolume, "BGM volume"),
+  bgsVolume: Ba(e2.bgsVolume, "BGS volume"),
+  commandRemember: Ba(e2.commandRemember, "Command remember."),
+  criticalToActor: Ba(e2.criticalToActor, "%1 dealt %2 damage to %3."),
+  criticalToEnemy: Ba(e2.criticalToEnemy, "%1 dealt %2 damage to %3."),
+  counterAttack: Ba(e2.counterAttack, "%1 countered!"),
+  debuffAdd: Ba(e2.debuffAdd, "%1's %2 was lowered."),
+  defeat: Ba(e2.defeat, "Defeat."),
+  enemyDamage: Ba(e2.enemyDamage, "%1 took %2 damage."),
+  enemyDrain: Ba(e2.enemyDrain, "%1 drained %2 HP."),
+  enemyGain: Ba(e2.enemyGain, "%1 gained %2."),
+  enemyLoss: Ba(e2.enemyLoss, "%1 lost %2."),
+  enemyNoDamage: Ba(e2.enemyNoDamage, "%1 was not damaged."),
+  enemyNoHit: Ba(e2.enemyNoHit, "%1 was not hit."),
+  enemyRecovery: Ba(e2.enemyRecovery, "%1 recovered %2 HP."),
+  evasion: Ba(e2.evasion, "%1 evaded the attack!"),
+  autosave: Ba(e2.autosave, "Autosave"),
+  escapeFailure: Ba(e2.escapeFailure, "Escape failed."),
+  escapeStart: Ba(e2.escapeStart, "%1 started to escape!"),
+  emerge: Ba(e2.emerge, "%1 appeared!"),
+  expNext: Ba(e2.expNext, "Next level in %1 EXP."),
+  expTotal: Ba(e2.expTotal, "Total EXP: %1"),
+  file: Ba(e2.file, "File"),
+  buffAdd: Ba(e2.buffAdd, "%1's %2 was raised."),
+  buffRemove: Ba(e2.buffRemove, "%1's %2 was lowered."),
+  obtainExp: Ba(e2.obtainExp, "%1 EXP obtained."),
+  obtainGold: Ba(e2.obtainGold, "%1 gold obtained."),
+  obtainItem: Ba(e2.obtainItem, "%1 obtained %2."),
+  obtainSkill: Ba(e2.obtainSkill, "%1 learned %2."),
+  levelUp: Ba(e2.levelUp, "%1 leveled up!"),
+  partyName: Ba(e2.partyName, "Party"),
+  loadMessage: Ba(e2.loadMessage, "Load %1?"),
+  meVolume: Ba(e2.meVolume, "ME volume"),
+  possession: Ba(e2.possession, "Possession"),
+  preemptive: Ba(e2.preemptive, "%1 attacked first!"),
+  saveMessage: Ba(e2.saveMessage, "Save %1?"),
+  seVolume: Ba(e2.seVolume, "SE volume"),
+  magicEvasion: Ba(e2.magicEvasion, "%1 evaded the magic!"),
+  magicReflection: Ba(e2.magicReflection, "%1 reflected the magic!"),
+  substitute: Ba(e2.substitute, "%1 took the hit!"),
+  surprise: Ba(e2.surprise, "%1 surprised the enemy!"),
+  touchUI: Ba(e2.touchUI, "Touch UI"),
+  useItem: Ba(e2.useItem, "%1 used %2."),
+  victory: Ba(e2.victory, "Victory!")
+}), Ua = { type: "string" }, qa = {
   type: "string",
   nullable: true
-}, qa = {
-  required: ["terms", "currencyUnit", "gameTitle"],
-  additionalProperties: false,
-  type: "object",
-  properties: { currencyUnit: { type: "string" }, gameTitle: {
-    type: "string"
-  }, terms: { additionalProperties: false, type: "object", required: ["messages", "commands", "basic", "params"], properties: { messages: {
+}, Va = { type: "string" }, Ya = { required: ["terms", "currencyUnit", "gameTitle"], additionalProperties: false, type: "object", properties: {
+  currencyUnit: { type: "string" },
+  gameTitle: { type: "string" },
+  terms: { additionalProperties: false, type: "object", required: ["messages", "commands", "basic", "params"], properties: { messages: {
     type: "object",
     additionalProperties: false,
     required: ["actionFailure", "actorDamage", "actorNoDamage", "actorRecovery", "actorGain", "actorLoss", "actorDrain", "alwaysDash", "bgmVolume", "bgsVolume", "commandRemember", "criticalToActor", "criticalToEnemy", "counterAttack", "debuffAdd", "defeat", "enemyDamage", "enemyNoDamage", "enemyRecovery", "enemyGain", "enemyLoss", "enemyDrain", "evasion", "expNext", "expTotal", "escapeFailure", "escapeStart", "file", "loadMessage", "meVolume", "magicEvasion", "magicReflection", "obtainExp", "obtainGold", "obtainItem", "obtainSkill", "partyName", "preemptive", "saveMessage", "seVolume", "substitute", "touchUI", "victory", "useItem"],
     properties: {
-      actionFailure: { type: "string" },
-      actorDamage: { type: "string" },
-      actorNoDamage: { type: "string" },
-      actorRecovery: { type: "string" },
-      actorGain: { type: "string" },
-      actorLoss: {
-        type: "string"
-      },
-      actorDrain: { type: "string" },
-      alwaysDash: { type: "string" },
-      bgmVolume: { type: "string" },
-      bgsVolume: { type: "string" },
-      commandRemember: { type: "string" },
-      criticalToActor: { type: "string" },
-      criticalToEnemy: { type: "string" },
-      counterAttack: { type: "string" },
-      debuffAdd: { type: "string" },
-      defeat: { type: "string" },
-      enemyDamage: { type: "string" },
-      enemyNoDamage: { type: "string" },
-      enemyRecovery: { type: "string" },
-      enemyGain: { type: "string" },
-      enemyLoss: { type: "string" },
-      enemyDrain: { type: "string" },
-      evasion: { type: "string" },
-      expNext: { type: "string" },
-      expTotal: {
-        type: "string"
-      },
-      escapeFailure: { type: "string" },
-      escapeStart: { type: "string" },
-      file: { type: "string" },
-      loadMessage: { type: "string" },
-      meVolume: { type: "string" },
-      magicEvasion: { type: "string" },
-      magicReflection: {
-        type: "string"
-      },
-      obtainExp: { type: "string" },
-      obtainGold: { type: "string" },
-      obtainItem: { type: "string" },
-      obtainSkill: { type: "string" },
-      partyName: { type: "string" },
-      preemptive: { type: "string" },
-      saveMessage: { type: "string" },
-      seVolume: { type: "string" },
-      substitute: { type: "string" },
-      touchUI: { type: "string" },
-      victory: { type: "string" },
-      useItem: { type: "string" },
-      buffAdd: { type: "string" },
-      buffRemove: { type: "string" },
-      actorNoHit: { type: "string" },
-      enemyNoHit: { type: "string" },
-      autosave: { type: "string" },
-      emerge: { type: "string" },
-      levelUp: { type: "string" },
-      possession: { type: "string" },
-      surprise: { type: "string" }
+      actionFailure: Va,
+      actorDamage: Va,
+      actorNoDamage: Va,
+      actorRecovery: Va,
+      actorGain: Va,
+      actorLoss: Va,
+      actorDrain: Va,
+      alwaysDash: Va,
+      bgmVolume: Va,
+      bgsVolume: Va,
+      commandRemember: Va,
+      criticalToActor: Va,
+      criticalToEnemy: Va,
+      counterAttack: Va,
+      debuffAdd: Va,
+      defeat: Va,
+      enemyDamage: Va,
+      enemyNoDamage: Va,
+      enemyRecovery: Va,
+      enemyGain: Va,
+      enemyLoss: Va,
+      enemyDrain: Va,
+      evasion: Va,
+      expNext: Va,
+      expTotal: Va,
+      escapeFailure: Va,
+      escapeStart: Va,
+      file: Va,
+      loadMessage: Va,
+      meVolume: Va,
+      magicEvasion: Va,
+      magicReflection: Va,
+      obtainExp: Va,
+      obtainGold: Va,
+      obtainItem: Va,
+      obtainSkill: Va,
+      partyName: Va,
+      preemptive: Va,
+      saveMessage: Va,
+      seVolume: Va,
+      substitute: Va,
+      touchUI: Va,
+      victory: Va,
+      useItem: Va,
+      buffAdd: Va,
+      buffRemove: Va,
+      actorNoHit: Va,
+      enemyNoHit: Va,
+      autosave: Va,
+      emerge: Va,
+      levelUp: Va,
+      possession: Va,
+      surprise: Va
     }
-  }, commands: { type: "array", items: [Ga, Ga, Ga, Ga, Ga, Ga, Ga, Ga, Ga, Ga, Ga, Ga, Ga, Ga, Ga, Ga, Ga, Ga, Ga, Ga, Ua, Ga, Ga, Ua, Ga, Ga], minItems: 26, maxItems: 26 }, basic: {
+  }, commands: {
     type: "array",
-    items: { type: "string" },
+    items: [Ua, Ua, Ua, Ua, Ua, Ua, Ua, Ua, Ua, Ua, Ua, Ua, Ua, Ua, Ua, Ua, Ua, Ua, Ua, Ua, qa, Ua, Ua, qa, Ua, Ua],
+    minItems: 26,
+    maxItems: 26
+  }, basic: { type: "array", items: { type: "string" }, minItems: 10, maxItems: 10 }, params: {
+    type: "array",
+    items: { type: "string", minLength: 1 },
     minItems: 10,
-    maxItems: 10
-  }, params: { type: "array", items: { type: "string", minLength: 1 }, minItems: 10, maxItems: 10, uniqueItems: true } } } }
-}, Va = (e2) => [e2.mhp ?? "", e2.mmp ?? "", e2.atk ?? "", e2.def ?? "", e2.mat ?? "", e2.mdf ?? "", e2.agi ?? "", e2.luk ?? "", e2.hit ?? "", e2.eva ?? ""], Ya = (e2 = {}) => ({
+    maxItems: 10,
+    uniqueItems: true
+  } } }
+} }, ja = (e2) => [e2.mhp ?? "", e2.mmp ?? "", e2.atk ?? "", e2.def ?? "", e2.mat ?? "", e2.mdf ?? "", e2.agi ?? "", e2.luk ?? "", e2.hit ?? "", e2.eva ?? ""], Wa = (e2 = {}) => ({
   characterIndex: e2.characterIndex ?? 0,
   characterName: e2.characterName ?? "",
   bgm: Ct(e2.bgm ?? {}),
   startMapId: e2.startMapId ?? 0,
   startX: e2.startX ?? 0,
   startY: e2.startY ?? 0
-}), ja = {
+}), za = {
   additionalProperties: false,
   type: "object",
   required: ["characterIndex", "characterName", "bgm", "startMapId", "startX", "startY"],
@@ -1132,19 +1129,19 @@ const e = require("ajv"), t = (e2, t2) => `\\${e2}[${t2}]`, a = (e2 = {}) => ({
     startX: { type: "integer", minimum: 0, maximum: 5e3 },
     startY: { type: "integer", minimum: 0, maximum: 5e3 }
   }
-}, za = (e2 = {}) => ({ jsonFormatLevel: e2.jsonFormatLevel ?? 0, messageWidth1: e2.messageWidth1 ?? 816, messageWidth2: e2.messageWidth2 ?? 816 }), Wa = {
+}, Ka = (e2 = {}) => ({ jsonFormatLevel: e2.jsonFormatLevel ?? 0, messageWidth1: e2.messageWidth1 ?? 816, messageWidth2: e2.messageWidth2 ?? 816 }), Xa = {
   additionalProperties: false,
   type: "object",
   required: ["actorId", "equips", "level"],
   properties: { actorId: { type: "integer" }, level: { type: "integer", minimum: 1 }, equips: { type: "array", items: {
     type: "integer"
   } } }
-}, Ka = {
+}, $a = {
   additionalProperties: false,
   type: "object",
   required: ["battleback1Name", "battleback2Name", "battlerHue", "battlerName", "editMapId", "editor", "testBattlers", "testTroopId"],
   properties: {
-    testBattlers: { type: "array", items: Wa },
+    testBattlers: { type: "array", items: Xa },
     testTroopId: { type: "integer", minimum: 0 },
     battleback1Name: { type: "string" },
     battleback2Name: { type: "string" },
@@ -1157,26 +1154,26 @@ const e = require("ajv"), t = (e2, t2) => `\\${e2}[${t2}]`, a = (e2 = {}) => ({
       maximum: 1e3
     }, messageWidth2: { type: "integer", minimum: 0, maximum: 1e3 }, jsonFormatLevel: { type: "integer", minimum: 0, maximum: 4 } } }
   }
-}, Xa = {
+}, Za = {
   additionalProperties: false,
   required: ["airship", "boat", "ship", "advanced", "attackMotions"],
   type: "object",
-  properties: { airship: ja, boat: ja, ship: ja, advanced: ta, attackMotions: { type: "array", items: aa } }
-}, $a = (e2) => e2.reduce((e3, t2) => ({ required: [...e3.required, ...t2.required], properties: { ...e3.properties, ...t2.properties } }), { required: [], properties: {} }), Za = new e({ strict: true }), Qa = ((e2) => {
-  const t2 = $a(e2);
+  properties: { airship: za, boat: za, ship: za, advanced: ta, attackMotions: { type: "array", items: aa } }
+}, Qa = (e2) => e2.reduce((e3, t2) => ({ required: [...e3.required, ...t2.required], properties: { ...e3.properties, ...t2.properties } }), { required: [], properties: {} }), Ja = new e({ strict: true }), er = ((e2) => {
+  const t2 = Qa(e2);
   return { additionalProperties: false, type: "object", required: Array.from(new Set(t2.required)), properties: t2.properties };
-})([Xa, ia, sa, na, la, ca, ya, ga, Oa, qa, ua, Ka]), Ja = Za.compile(Qa), er = Za.compile(Wa);
-Za.compile(aa);
-const tr = Za.compile(ya), ar = (e2) => ({
-  basic: Da(e2.basic ?? {}),
-  commands: Fa(e2.commands ?? {}),
-  params: Va(e2.params ?? {}),
-  messages: Ba(e2.messages ?? {})
-}), rr = (e2) => e2 ? [...e2] : [], or = (e2) => ((e3) => tr(e3))(e2) ? { tileSize: e2.tileSize, faceSize: e2.faceSize, iconSize: e2.iconSize } : {
+})([Za, ia, sa, na, ca, ya, ua, xa, La, Ya, ga, $a]), tr = Ja.compile(er), ar = Ja.compile(Xa);
+Ja.compile(aa);
+const rr = Ja.compile(ua), or = (e2) => ({
+  basic: Fa(e2.basic ?? {}),
+  commands: Ha(e2.commands ?? {}),
+  params: ja(e2.params ?? {}),
+  messages: Ga(e2.messages ?? {})
+}), ir = (e2) => e2 ? [...e2] : [], sr = (e2) => ((e3) => rr(e3))(e2) ? { tileSize: e2.tileSize, faceSize: e2.faceSize, iconSize: e2.iconSize } : {
   tileSize: 48,
   faceSize: 144,
   iconSize: 32
-}, ir = (e2, t2) => e2 ? e2.map(t2) : [], sr = (e2) => ((e3) => er(e3))(e2) ? { actorId: e2.actorId, equips: rr(e2.equips), level: e2.level } : { actorId: 0, equips: [], level: 1 };
+}, mr = (e2, t2) => e2 ? e2.map(t2) : [], pr = (e2) => ((e3) => ar(e3))(e2) ? { actorId: e2.actorId, equips: ir(e2.equips), level: e2.level } : { actorId: 0, equips: [], level: 1 };
 exports.ABORT_BATTLE = 340, exports.AUTHOR_RMMZ = Re, exports.BATTLE_PROCESSING = 301, exports.CHANGE_ACTOR_IMAGES = 322, exports.CHANGE_ARMORS = 128, exports.CHANGE_BATTLE_BACKGROUND = 283, exports.CHANGE_BATTLE_BGM = 132, exports.CHANGE_CLASS = 321, exports.CHANGE_DEFEAT_ME = 139, exports.CHANGE_ENCOUNTER = 136, exports.CHANGE_ENEMY_HP = 331, exports.CHANGE_ENEMY_MP = 332, exports.CHANGE_ENEMY_STATE = 333, exports.CHANGE_ENEMY_TP = 342, exports.CHANGE_EXP = 315, exports.CHANGE_FORMATION_ACCESS = 137, exports.CHANGE_GOLD = 125, exports.CHANGE_HP = 311, exports.CHANGE_ITEMS = 126, exports.CHANGE_MENU_ACCESS = 135, exports.CHANGE_MP = 312, exports.CHANGE_NAME = 320, exports.CHANGE_NICKNAME = 324, exports.CHANGE_PARALLAX = 284, exports.CHANGE_PARTY_MEMBER = 129, exports.CHANGE_PLAYER_FOLLOWERS = 216, exports.CHANGE_PROFILE = 325, exports.CHANGE_SAVE_ACCESS = 134, exports.CHANGE_TILESET = 282, exports.CHANGE_TP = 313, exports.CHANGE_TRANSPARENCY = 211, exports.CHANGE_VEHICLE_BGM = 140, exports.CHANGE_VEHICLE_IMAGE = 323, exports.CHANGE_VICTORY_ME = 133, exports.CHANGE_WEAPONS = 127, exports.CHANGE_WINDOW_COLOR = 138, exports.COLLAPS_BOSS = 1, exports.COLLAPS_INSTANT = 2, exports.COLLAPS_NONE = 3, exports.COLLAPS_NORMAL = 0, exports.COMMENT_BODY = 408, exports.COMMENT_HEAD = 108, exports.COMMON_EVENT = 117, exports.CONDITIONAL_BRANCH = 111, exports.CONDITIONAL_BRANCH_ELSE = 411, exports.CONTROL_SELF_SWITCH = 123, exports.CONTROL_SWITCHES = 121, exports.CONTROL_TIMER = 124, exports.CONTROL_VARIABLES = 122, exports.DEFAULT_DAMAGE_LABELS = I, exports.DEFAULT_GLOBAL_LABELS = Nt, exports.DEFAULT_ITEM_LABELS = { domainName: "アイテム", options: { consumable: "消耗品" } }, exports.DEFAULT_SKILL_LABELS = {
   domainName: "スキル",
   options: { requiredWeaponTypeId1: "必要武器タイプ1", requiredWeaponTypeId2: "必要武器タイプ2", mpCost: "MP消費", tpCost: "TP消費" }
@@ -1229,14 +1226,14 @@ exports.ABORT_BATTLE = 340, exports.AUTHOR_RMMZ = Re, exports.BATTLE_PROCESSING 
   keyItem: "大事なもの",
   optimize: "最強装備",
   toTitle: "タイトルへ戻る"
-} }, exports.LABEL_JUMP = 119, exports.LABEL_SET_DATA = T, exports.LABEL_SET_ITEM_EFFECT = mt, exports.LABEL_SET_TRAIT = Y, exports.LOOP = 112, exports.LOOP_BREAK = 113, exports.MODULE_DATA = Rt, exports.MOVE_PICTURE = 232, exports.NAME_INPUT_PROCESSING = 303, exports.NO_OPERATION = 0, exports.OPEN_MENU_SCREEN = 351, exports.OPEN_SAVE_SCREEN = 352, exports.OPERAND_CONSTANT = 0, exports.OPERAND_GAMEDATA = 3, exports.OPERAND_RANDOM = 2, exports.OPERAND_SCRIPT = 4, exports.OPERAND_VARIABLE = 1, exports.PARTY_ABILITY_CANCEL_SURPRISE = 2, exports.PARTY_ABILITY_DROP_ITEM_DOUBLE = 5, exports.PARTY_ABILITY_ENCOUNTER_HALF = 0, exports.PARTY_ABILITY_ENCOUNTER_NONE = 1, exports.PARTY_ABILITY_GOLD_DOUBLE = 4, exports.PARTY_ABILITY_RAISE_PREEMPTIVE = 3, exports.PLAY_BGM = 241, exports.PLAY_BGS = 245, exports.PLAY_ME = 249, exports.PLAY_MOVIE = 261, exports.PLAY_SE = 250, exports.PLUGIN_COMMAND_MV = 356, exports.PLUGIN_COMMAND_MZ = 357, exports.RECOVER_ALL = 314, exports.REGULAR_PARAM_AGI = 6, exports.REGULAR_PARAM_ATK = 2, exports.REGULAR_PARAM_DEF = 3, exports.REGULAR_PARAM_LUK = 7, exports.REGULAR_PARAM_MATK = 4, exports.REGULAR_PARAM_MAX_HP = 0, exports.REGULAR_PARAM_MAX_MP = 1, exports.REGULAR_PARAM_MDEF = 5, exports.RESUME_BGM = 244, exports.RETURN_TO_TITLE_SCREEN = 354, exports.ROTATE_PICTURE = 233, exports.ROUTE_CHANGE_BLEND_MODE = 43, exports.ROUTE_CHANGE_FREQ = 30, exports.ROUTE_CHANGE_IMAGE = 41, exports.ROUTE_CHANGE_OPACITY = 42, exports.ROUTE_CHANGE_SPEED = 29, exports.ROUTE_DIR_FIX_OFF = 36, exports.ROUTE_DIR_FIX_ON = 35, exports.ROUTE_END = 0, exports.ROUTE_JUMP = 14, exports.ROUTE_MOVE_AWAY = 11, exports.ROUTE_MOVE_BACKWARD = 13, exports.ROUTE_MOVE_DOWN = 1, exports.ROUTE_MOVE_FORWARD = 12, exports.ROUTE_MOVE_LEFT = 2, exports.ROUTE_MOVE_LOWER_L = 5, exports.ROUTE_MOVE_LOWER_R = 6, exports.ROUTE_MOVE_RANDOM = 9, exports.ROUTE_MOVE_RIGHT = 3, exports.ROUTE_MOVE_TOWARD = 10, exports.ROUTE_MOVE_UP = 4, exports.ROUTE_MOVE_UPPER_L = 7, exports.ROUTE_MOVE_UPPER_R = 8, exports.ROUTE_PLAY_SE = 44, exports.ROUTE_SCRIPT = 45, exports.ROUTE_STEP_ANIME_OFF = 34, exports.ROUTE_STEP_ANIME_ON = 33, exports.ROUTE_SWITCH_OFF = 28, exports.ROUTE_SWITCH_ON = 27, exports.ROUTE_THROUGH_OFF = 38, exports.ROUTE_THROUGH_ON = 37, exports.ROUTE_TRANSPARENT_OFF = 40, exports.ROUTE_TRANSPARENT_ON = 39, exports.ROUTE_TURN_180D = 22, exports.ROUTE_TURN_90D_L = 21, exports.ROUTE_TURN_90D_R = 20, exports.ROUTE_TURN_90D_R_L = 23, exports.ROUTE_TURN_AWAY = 26, exports.ROUTE_TURN_DOWN = 16, exports.ROUTE_TURN_LEFT = 17, exports.ROUTE_TURN_RANDOM = 24, exports.ROUTE_TURN_RIGHT = 18, exports.ROUTE_TURN_TOWARD = 25, exports.ROUTE_TURN_UP = 19, exports.ROUTE_WAIT = 15, exports.ROUTE_WALK_ANIME_OFF = 32, exports.ROUTE_WALK_ANIME_ON = 31, exports.SAVE_BGM = 243, exports.SCHEMA_DAMAGE = { type: "object", required: ["type", "elementId", "formula", "variance", "critical"], properties: { type: {
+} }, exports.LABEL_JUMP = 119, exports.LABEL_SET_DATA = T, exports.LABEL_SET_ITEM_EFFECT = pt, exports.LABEL_SET_TRAIT = Y, exports.LOOP = 112, exports.LOOP_BREAK = 113, exports.MODULE_DATA = Rt, exports.MOVE_PICTURE = 232, exports.NAME_INPUT_PROCESSING = 303, exports.NO_OPERATION = 0, exports.OPEN_MENU_SCREEN = 351, exports.OPEN_SAVE_SCREEN = 352, exports.OPERAND_CONSTANT = 0, exports.OPERAND_GAMEDATA = 3, exports.OPERAND_RANDOM = 2, exports.OPERAND_SCRIPT = 4, exports.OPERAND_VARIABLE = 1, exports.PARTY_ABILITY_CANCEL_SURPRISE = 2, exports.PARTY_ABILITY_DROP_ITEM_DOUBLE = 5, exports.PARTY_ABILITY_ENCOUNTER_HALF = 0, exports.PARTY_ABILITY_ENCOUNTER_NONE = 1, exports.PARTY_ABILITY_GOLD_DOUBLE = 4, exports.PARTY_ABILITY_RAISE_PREEMPTIVE = 3, exports.PLAY_BGM = 241, exports.PLAY_BGS = 245, exports.PLAY_ME = 249, exports.PLAY_MOVIE = 261, exports.PLAY_SE = 250, exports.PLUGIN_COMMAND_MV = 356, exports.PLUGIN_COMMAND_MZ = 357, exports.RECOVER_ALL = 314, exports.REGULAR_PARAM_AGI = 6, exports.REGULAR_PARAM_ATK = 2, exports.REGULAR_PARAM_DEF = 3, exports.REGULAR_PARAM_LUK = 7, exports.REGULAR_PARAM_MATK = 4, exports.REGULAR_PARAM_MAX_HP = 0, exports.REGULAR_PARAM_MAX_MP = 1, exports.REGULAR_PARAM_MDEF = 5, exports.RESUME_BGM = 244, exports.RETURN_TO_TITLE_SCREEN = 354, exports.ROTATE_PICTURE = 233, exports.ROUTE_CHANGE_BLEND_MODE = 43, exports.ROUTE_CHANGE_FREQ = 30, exports.ROUTE_CHANGE_IMAGE = 41, exports.ROUTE_CHANGE_OPACITY = 42, exports.ROUTE_CHANGE_SPEED = 29, exports.ROUTE_DIR_FIX_OFF = 36, exports.ROUTE_DIR_FIX_ON = 35, exports.ROUTE_END = 0, exports.ROUTE_JUMP = 14, exports.ROUTE_MOVE_AWAY = 11, exports.ROUTE_MOVE_BACKWARD = 13, exports.ROUTE_MOVE_DOWN = 1, exports.ROUTE_MOVE_FORWARD = 12, exports.ROUTE_MOVE_LEFT = 2, exports.ROUTE_MOVE_LOWER_L = 5, exports.ROUTE_MOVE_LOWER_R = 6, exports.ROUTE_MOVE_RANDOM = 9, exports.ROUTE_MOVE_RIGHT = 3, exports.ROUTE_MOVE_TOWARD = 10, exports.ROUTE_MOVE_UP = 4, exports.ROUTE_MOVE_UPPER_L = 7, exports.ROUTE_MOVE_UPPER_R = 8, exports.ROUTE_PLAY_SE = 44, exports.ROUTE_SCRIPT = 45, exports.ROUTE_STEP_ANIME_OFF = 34, exports.ROUTE_STEP_ANIME_ON = 33, exports.ROUTE_SWITCH_OFF = 28, exports.ROUTE_SWITCH_ON = 27, exports.ROUTE_THROUGH_OFF = 38, exports.ROUTE_THROUGH_ON = 37, exports.ROUTE_TRANSPARENT_OFF = 40, exports.ROUTE_TRANSPARENT_ON = 39, exports.ROUTE_TURN_180D = 22, exports.ROUTE_TURN_90D_L = 21, exports.ROUTE_TURN_90D_R = 20, exports.ROUTE_TURN_90D_R_L = 23, exports.ROUTE_TURN_AWAY = 26, exports.ROUTE_TURN_DOWN = 16, exports.ROUTE_TURN_LEFT = 17, exports.ROUTE_TURN_RANDOM = 24, exports.ROUTE_TURN_RIGHT = 18, exports.ROUTE_TURN_TOWARD = 25, exports.ROUTE_TURN_UP = 19, exports.ROUTE_WAIT = 15, exports.ROUTE_WALK_ANIME_OFF = 32, exports.ROUTE_WALK_ANIME_ON = 31, exports.SAVE_BGM = 243, exports.SCHEMA_DAMAGE = { type: "object", required: ["type", "elementId", "formula", "variance", "critical"], properties: { type: {
   type: "integer",
   minimum: 0
-}, elementId: { type: "integer", minimum: 0 }, formula: { type: "string" }, variance: { type: "integer" }, critical: { type: "boolean" } } }, exports.SCHEMA_DATA_ACTOR = S, exports.SCHEMA_DATA_ARMMOR = R, exports.SCHEMA_DATA_CLASS = b, exports.SCHEMA_DATA_ENEMY = N, exports.SCHEMA_DATA_ITEM = dt, exports.SCHEMA_DATA_MAP_INFO = o, exports.SCHEMA_DATA_SKILL = nt, exports.SCHEMA_DATA_STATE = M, exports.SCHEMA_DATA_WEAPON = Ve, exports.SCHEMA_SYSTEM_ADVANCED = ta, exports.SCHEMA_SYSTEM_AUDIOFILES = ia, exports.SCHEMA_SYSTEM_BATTLE_RULE_RMMZ = sa, exports.SCHEMA_SYSTEM_BOOLEAN_GAMEMENU_OPTIONS = na, exports.SCHEMA_SYSTEM_BOOLEAN_OPTIONS = la, exports.SCHEMA_SYSTEM_GAME_EDITOR_BUNDLE = Ka, exports.SCHEMA_SYSTEM_GAME_INITIAL = ca, exports.SCHEMA_SYSTEM_IMAGE_SIZE = ya, exports.SCHEMA_SYSTEM_MEMBERS_ATTACK_MOTION = aa, exports.SCHEMA_SYSTEM_OTHER_DATA = ga, exports.SCHEMA_SYSTEM_RPG_DATA_NAMES = Oa, exports.SCHEMA_SYSTEM_TERMS_BUNDLE = qa, exports.SCHEMA_SYSTEM_TITLE_COMMAND_WINDOW = { additionalProperties: false, type: "object", required: ["background", "offsetX", "offsetY"], properties: {
+}, elementId: { type: "integer", minimum: 0 }, formula: { type: "string" }, variance: { type: "integer" }, critical: { type: "boolean" } } }, exports.SCHEMA_DATA_ACTOR = S, exports.SCHEMA_DATA_ARMMOR = R, exports.SCHEMA_DATA_CLASS = b, exports.SCHEMA_DATA_ENEMY = N, exports.SCHEMA_DATA_ITEM = dt, exports.SCHEMA_DATA_MAP_INFO = o, exports.SCHEMA_DATA_SKILL = nt, exports.SCHEMA_DATA_STATE = M, exports.SCHEMA_DATA_WEAPON = Ve, exports.SCHEMA_SYSTEM_ADVANCED = ta, exports.SCHEMA_SYSTEM_AUDIOFILES = ia, exports.SCHEMA_SYSTEM_BATTLE_RULE_RMMZ = sa, exports.SCHEMA_SYSTEM_BOOLEAN_GAMEMENU_OPTIONS = na, exports.SCHEMA_SYSTEM_BOOLEAN_OPTIONS = ca, exports.SCHEMA_SYSTEM_GAME_EDITOR_BUNDLE = $a, exports.SCHEMA_SYSTEM_GAME_INITIAL = ya, exports.SCHEMA_SYSTEM_IMAGE_SIZE = ua, exports.SCHEMA_SYSTEM_MEMBERS_ATTACK_MOTION = aa, exports.SCHEMA_SYSTEM_OTHER_DATA = xa, exports.SCHEMA_SYSTEM_RPG_DATA_NAMES = La, exports.SCHEMA_SYSTEM_TERMS_BUNDLE = Ya, exports.SCHEMA_SYSTEM_TITLE_COMMAND_WINDOW = { additionalProperties: false, type: "object", required: ["background", "offsetX", "offsetY"], properties: {
   background: { type: "integer", minimum: 0, maximum: 1e3 },
   offsetX: { type: "integer", minimum: -1e3, maximum: 1e3 },
   offsetY: { type: "integer", minimum: -1e3, maximum: 1e3 }
-} }, exports.SCHEMA_SYSTEM_TITLE_IMAGES = ua, exports.SCHEMA_SYSTEM_VEHICLE = ja, exports.SCHEMA_TRAIT = { type: "object", required: ["code", "dataId", "value"], properties: {
+} }, exports.SCHEMA_SYSTEM_TITLE_IMAGES = ga, exports.SCHEMA_SYSTEM_VEHICLE = za, exports.SCHEMA_TRAIT = { type: "object", required: ["code", "dataId", "value"], properties: {
   code: { type: "integer" },
   dataId: { type: "integer" },
   value: { type: "integer" }
@@ -1252,7 +1249,7 @@ exports.ABORT_BATTLE = 340, exports.AUTHOR_RMMZ = Re, exports.BATTLE_PROCESSING 
   code: e2,
   indent: a2,
   parameters: t2
-}), exports.createNoteEntity = It, exports.createSystemVariableControlChars = (e2) => e2.variables.map((e3, a2) => ({ text: e3 || "", controlChar: t("V", a2) })).filter((e3) => "" !== e3.text), exports.defineGameDataSources = (e2, t2) => [d(e2.skills, t2), l(e2.actors, t2), c(e2.states, t2), y(e2.armors, t2), u(e2.classes, t2), g(e2.enemies, t2), x(e2.items, t2), E(e2.weapons, t2), A(e2.commonEvents, t2)], exports.defineSystemItems = (e2, t2) => [Na(e2, t2), Ca(e2, t2), ka(e2, t2), Ma(e2, t2), ba(e2, t2), ha(e2, t2), fa(e2, t2)], exports.defineTraitCollapseType = h, exports.defineTraitExtraParam = k, exports.defineTraitItems = (e2, t2) => [O(e2.regularParam), k(e2.extraParam), P(e2.specialParam), h(e2.collaps, t2), w(e2.specialFlag), F(e2.partyAbility)], exports.defineTraitPartyAbility = F, exports.defineTraitRegularParam = O, exports.defineTraitSpecialFlag = w, exports.defineTraitSpecialParam = P, exports.detectFormatErrors = (e2, t2, a2, r2 = {
+}), exports.createNoteEntity = It, exports.createSystemVariableControlChars = (e2) => e2.variables.map((e3, a2) => ({ text: e3 || "", controlChar: t("V", a2) })).filter((e3) => "" !== e3.text), exports.defineGameDataSources = (e2, t2) => [d(e2.skills, t2), l(e2.actors, t2), c(e2.states, t2), y(e2.armors, t2), u(e2.classes, t2), g(e2.enemies, t2), x(e2.items, t2), E(e2.weapons, t2), A(e2.commonEvents, t2)], exports.defineSystemItems = (e2, t2) => [Ca(e2, t2), Ma(e2, t2), va(e2, t2), ha(e2, t2), Na(e2, t2), fa(e2, t2), ka(e2, t2)], exports.defineTraitCollapseType = h, exports.defineTraitExtraParam = k, exports.defineTraitItems = (e2, t2) => [O(e2.regularParam), k(e2.extraParam), P(e2.specialParam), h(e2.collaps, t2), w(e2.specialFlag), F(e2.partyAbility)], exports.defineTraitPartyAbility = F, exports.defineTraitRegularParam = O, exports.defineTraitSpecialFlag = w, exports.defineTraitSpecialParam = P, exports.detectFormatErrors = (e2, t2, a2, r2 = {
   placeHolderMaxLength: 50,
   formatMaxLength: 200
 }) => e2.pattern.length >= r2.formatMaxLength ? {
@@ -1309,7 +1306,7 @@ exports.ABORT_BATTLE = 340, exports.AUTHOR_RMMZ = Re, exports.BATTLE_PROCESSING 
       return e2.tp;
   }
   return t2[6] >= 4 && t2[6] <= 11 ? e2.param(t2[6] - 4) : 0;
-}, exports.getArmorTypes = Sa, exports.getControlChars = (e2) => Array.from(e2.matchAll(/\\([A-Za-z]+)\[(\d+)]/g)).map((e3) => ({ char: e3[1], id: parseInt(e3[2], 10) })), exports.getElementTypes = Aa, exports.getEnemyValue = (e2, t2) => {
+}, exports.getArmorCategoryEnabled = (e2) => e2.itemCategories[2], exports.getArmorTypes = Ra, exports.getControlChars = (e2) => Array.from(e2.matchAll(/\\([A-Za-z]+)\[(\d+)]/g)).map((e3) => ({ char: e3[1], id: parseInt(e3[2], 10) })), exports.getElementTypes = Ta, exports.getEnemyValue = (e2, t2) => {
   switch (t2[6]) {
     case 0:
       return e2.hp;
@@ -1319,18 +1316,13 @@ exports.ABORT_BATTLE = 340, exports.AUTHOR_RMMZ = Re, exports.BATTLE_PROCESSING 
       return e2.tp;
   }
   return t2[6] >= 2 && t2[6] <= 9 ? e2.param(t2[6] - 2) : 0;
-}, exports.getEquipTypes = Ta, exports.getNoteValue = (e2, t2) => {
+}, exports.getEquipCommandEnabled = (e2) => e2.menuCommands[2], exports.getEquipTypes = Ia, exports.getFormationCommandEnabled = (e2) => e2.menuCommands[4], exports.getItemCategoryEnabled = (e2) => e2.itemCategories[0], exports.getItemCommandEnabled = (e2) => e2.menuCommands[0], exports.getKeyItemCategoryEnabled = (e2) => e2.itemCategories[3], exports.getNoteValue = (e2, t2) => {
   const a2 = /<([^<>:]{1,100}):([^>]{1,1000})>/g, r2 = Array.from(e2.matchAll(a2)).find((e3) => e3[1] === t2);
   return r2 ? r2[2] : void 0;
 }, exports.getParamNames = (e2) => e2.terms.params.map((e3, t2) => ({
   name: e3,
   id: t2
-})), exports.getSkillTypes = Ia, exports.getSwitches = Ra, exports.getVariableNames = Ea, exports.getWeaponTypes = _a, exports.isCloneableCommand = (e2) => e2.parameters.every(Gt), exports.isCommandAudio = jt, exports.isCommandChangeActorText = (e2) => qt(e2), exports.isCommandChangeBattleBgm = (e2) => jt(e2) && 132 === e2.code, exports.isCommandChangeDefeatMe = (e2) => jt(e2) && 139 === e2.code, exports.isCommandChangeVictoryMe = (e2) => jt(e2) && 133 === e2.code, exports.isCommandCommentBody = (e2) => Kt(e2) && 408 === e2.code, exports.isCommandCommentHeader = (e2) => Kt(e2) && 108 === e2.code, exports.isCommandCommonEvent = (e2) => Xt(e2), exports.isCommandInputNumber = (e2) => Qt(e2), exports.isCommandNonParam = (e2) => zt(e2), exports.isCommandPlayBgm = (e2) => jt(e2) && 241 === e2.code, exports.isCommandPlayBgs = (e2) => jt(e2) && 245 === e2.code, exports.isCommandPlayMe = (e2) => jt(e2) && 249 === e2.code, exports.isCommandPlaySe = (e2) => jt(e2) && 250 === e2.code, exports.isCommandScriptBody = (e2) => Kt(e2) && 655 === e2.code, exports.isCommandScriptHeader = (e2) => Kt(e2) && 355 === e2.code, exports.isCommandScrollTextHead = (e2) => Vt(e2), exports.isCommandShowChoiceItem = (e2) => Zt(e2), exports.isCommandShowChoices = (e2) => $t(e2), exports.isCommandShowMessage = (e2) => Jt(e2), exports.isCommandShowMessageBody = (e2) => Kt(e2) && 401 === e2.code, exports.isCommandShowScrollingTextBody = (e2) => Kt(e2) && 405 === e2.code, exports.isCommandTextBody = Kt, exports.isDataActor = (e2) => ut(e2), exports.isDataArmor = (e2) => gt(e2), exports.isDataClass = (e2) => Tt(e2), exports.isDataEnemy = (e2) => Et(e2), exports.isDataItem = (e2) => ct(e2), exports.isDataMap = (e2) => n(e2), exports.isDataMapInfo = (e2) => m(e2), exports.isDataSkill = (e2) => yt(e2), exports.isDataState = (e2) => At(e2), exports.isDataSystem = (e2) => Ja(e2), exports.isDataWeapon = (e2) => xt(e2), exports.itemSourceId = () => ({ author: Re, module: Rt, kind: bt }), exports.labelsRegistry = () => ({ rpg: {
-  damage: I,
-  data: T,
-  traits: Y,
-  itemEffect: mt
-}, global: Nt }), exports.makeActorData = (e2 = {}) => ({
+})), exports.getSaveCommandEnabled = (e2) => e2.menuCommands[5], exports.getSkillCommandEnabled = (e2) => e2.menuCommands[1], exports.getSkillTypes = _a, exports.getStatusCommandEnabled = (e2) => e2.menuCommands[3], exports.getSwitches = ba, exports.getVariableNames = Aa, exports.getWeaponCategoryEnabled = (e2) => e2.itemCategories[1], exports.getWeaponTypes = Sa, exports.isCloneableCommand = (e2) => e2.parameters.every(Gt), exports.isCommandAudio = jt, exports.isCommandChangeActorText = (e2) => qt(e2), exports.isCommandChangeBattleBgm = (e2) => jt(e2) && 132 === e2.code, exports.isCommandChangeDefeatMe = (e2) => jt(e2) && 139 === e2.code, exports.isCommandChangeVictoryMe = (e2) => jt(e2) && 133 === e2.code, exports.isCommandCommentBody = (e2) => Kt(e2) && 408 === e2.code, exports.isCommandCommentHeader = (e2) => Kt(e2) && 108 === e2.code, exports.isCommandCommonEvent = (e2) => Xt(e2), exports.isCommandInputNumber = (e2) => Qt(e2), exports.isCommandNonParam = (e2) => Wt(e2), exports.isCommandPlayBgm = (e2) => jt(e2) && 241 === e2.code, exports.isCommandPlayBgs = (e2) => jt(e2) && 245 === e2.code, exports.isCommandPlayMe = (e2) => jt(e2) && 249 === e2.code, exports.isCommandPlaySe = (e2) => jt(e2) && 250 === e2.code, exports.isCommandScriptBody = (e2) => Kt(e2) && 655 === e2.code, exports.isCommandScriptHeader = (e2) => Kt(e2) && 355 === e2.code, exports.isCommandScrollTextHead = (e2) => Vt(e2), exports.isCommandShowChoiceItem = (e2) => Zt(e2), exports.isCommandShowChoices = (e2) => $t(e2), exports.isCommandShowMessage = (e2) => Jt(e2), exports.isCommandShowMessageBody = (e2) => Kt(e2) && 401 === e2.code, exports.isCommandShowScrollingTextBody = (e2) => Kt(e2) && 405 === e2.code, exports.isCommandTextBody = Kt, exports.isDataActor = (e2) => ut(e2), exports.isDataArmor = (e2) => gt(e2), exports.isDataClass = (e2) => Tt(e2), exports.isDataEnemy = (e2) => Et(e2), exports.isDataItem = (e2) => ct(e2), exports.isDataMap = (e2) => n(e2), exports.isDataMapInfo = (e2) => p(e2), exports.isDataSkill = (e2) => yt(e2), exports.isDataState = (e2) => At(e2), exports.isDataSystem = (e2) => tr(e2), exports.isDataWeapon = (e2) => xt(e2), exports.itemSourceId = () => ({ author: Re, module: Rt, kind: bt }), exports.labelsRegistry = () => ({ rpg: { damage: I, data: T, traits: Y, itemEffect: pt }, global: Nt }), exports.makeActorData = (e2 = {}) => ({
   name: e2.name ?? "",
   id: e2.id ?? 0,
   battlerName: e2.battlerName ?? "",
@@ -1357,9 +1349,7 @@ exports.ABORT_BATTLE = 340, exports.AUTHOR_RMMZ = Re, exports.BATTLE_PROCESSING 
   params: e2.params ?? [0, 0, 0, 0, 0, 0, 0, 0],
   etypeId: e2.etypeId ?? 0,
   price: e2.price ?? 0
-}), exports.makeAudioCommand = (e2, t2) => Mt(e2, Ct({
-  name: t2
-})), exports.makeAudioFileParams = Ct, exports.makeBooleanOptions = da, exports.makeClassData = (e2 = {}) => ({
+}), exports.makeAudioCommand = (e2, t2) => Mt(e2, Ct({ name: t2 })), exports.makeAudioFileParams = Ct, exports.makeBooleanOptions = da, exports.makeClassData = (e2 = {}) => ({
   name: e2.name ?? "",
   id: e2.id ?? 0,
   traits: [],
@@ -1367,11 +1357,7 @@ exports.ABORT_BATTLE = 340, exports.AUTHOR_RMMZ = Re, exports.BATTLE_PROCESSING 
   params: [0, 0, 0, 0, 0, 0, 0, 0],
   learnings: e2.learnings ?? [],
   expParams: e2.expParams ?? []
-}), exports.makeCommandAudioAny = Mt, exports.makeCommandChangeActorName = (e2, t2 = 0) => ({
-  code: 320,
-  parameters: [e2.actorId, e2.name],
-  indent: t2
-}), exports.makeCommandChangeActorNickName = (e2, t2 = 0) => ({ code: 324, parameters: [e2.actorId, e2.nickname], indent: t2 }), exports.makeCommandChangeActorProfile = (e2, t2 = 0) => ({
+}), exports.makeCommandAudioAny = Mt, exports.makeCommandChangeActorName = (e2, t2 = 0) => ({ code: 320, parameters: [e2.actorId, e2.name], indent: t2 }), exports.makeCommandChangeActorNickName = (e2, t2 = 0) => ({ code: 324, parameters: [e2.actorId, e2.nickname], indent: t2 }), exports.makeCommandChangeActorProfile = (e2, t2 = 0) => ({
   code: 325,
   parameters: [e2.actorId, e2.profile],
   indent: t2
@@ -1409,7 +1395,7 @@ exports.ABORT_BATTLE = 340, exports.AUTHOR_RMMZ = Re, exports.BATTLE_PROCESSING 
   trigger: e2.trigger ?? 0,
   list: e2.list ?? [],
   switchId: e2.switchId ?? 0
-}), exports.makeDamage = _, exports.makeDataNames = La, exports.makeDropItem = C, exports.makeEditorSetting = za, exports.makeEnemyAction = (e2 = {}) => ({
+}), exports.makeDamage = _, exports.makeDataNames = Pa, exports.makeDropItem = C, exports.makeEditorSetting = Ka, exports.makeEnemyAction = (e2 = {}) => ({
   conditionParam1: e2.conditionParam1 ?? 0,
   conditionParam2: e2.conditionParam2 ?? 0,
   conditionType: e2.conditionType ?? 0,
@@ -1435,7 +1421,7 @@ exports.ABORT_BATTLE = 340, exports.AUTHOR_RMMZ = Re, exports.BATTLE_PROCESSING 
   startX: e2.startX ?? 0,
   startY: e2.startY ?? 0,
   partyMembersArray: e2.partyMembersArray ? Array.from(e2.partyMembersArray) : [1]
-}), exports.makeItemCategories = pa, exports.makeItemCategoriesFromArray = (e2) => ({ item: e2[0], weapon: e2[1], armor: e2[2], keyItem: e2[3] }), exports.makeItemData = (e2 = {}) => ({
+}), exports.makeItemCategories = ma, exports.makeItemCategoriesFromArray = (e2) => ({ item: e2[0], weapon: e2[1], armor: e2[2], keyItem: e2[3] }), exports.makeItemData = (e2 = {}) => ({
   animationId: e2.animationId ?? 0,
   id: e2.id ?? 0,
   name: e2.name ?? "",
@@ -1501,7 +1487,7 @@ exports.ABORT_BATTLE = 340, exports.AUTHOR_RMMZ = Re, exports.BATTLE_PROCESSING 
     scrollY: e2.scrollY ?? 0
   };
   var t2;
-}, exports.makeMenuCommandsEnabled = ma, exports.makeMenuCommandsEnabledFromArray = (e2) => ({ item: e2[0], skill: e2[1], equip: e2[2], status: e2[3], formation: e2[4], save: e2[5] }), exports.makeParamNamesArray = Va, exports.makeRegex = _t, exports.makeSkillData = (e2 = {}) => ({
+}, exports.makeMenuCommandsEnabled = pa, exports.makeMenuCommandsEnabledFromArray = (e2) => ({ item: e2[0], skill: e2[1], equip: e2[2], status: e2[3], formation: e2[4], save: e2[5] }), exports.makeParamNamesArray = ja, exports.makeRegex = _t, exports.makeSkillData = (e2 = {}) => ({
   stypeId: e2.stypeId ?? 0,
   requiredWtypeId1: e2.requiredWtypeId1 ?? 0,
   requiredWtypeId2: e2.requiredWtypeId2 ?? 0,
@@ -1576,51 +1562,62 @@ exports.ABORT_BATTLE = 340, exports.AUTHOR_RMMZ = Re, exports.BATTLE_PROCESSING 
   removeByWalking: e2.removeByWalking ?? false,
   stepsToRemove: e2.stepsToRemove ?? 0
 }), exports.makeSystemAdvanced = ea, exports.makeSystemData = (e2) => {
-  var _a2, _b, _c, _d, _e2;
-  const t2 = e2.vehicles ?? {}, a2 = e2.dataNames ?? {}, r2 = e2.debug ?? {}, o2 = e2.images ?? {}, i2 = e2.gameInit ?? {}, s2 = e2.bgm ?? {}, p2 = or(e2.size), m2 = e2.battlerTest ?? {};
+  var _a2, _b, _c, _d, _e2, _f, _g, _h, _i, _j, _k, _l, _m, _n, _o, _p, _q, _r, _s, _t2, _u, _v;
+  const t2 = sr(e2.size);
   return {
     ...da(e2.options),
     currencyUnit: ((_a2 = e2.texts) == null ? void 0 : _a2.currencyUnit) ?? "",
     gameTitle: ((_b = e2.texts) == null ? void 0 : _b.gameTitle) ?? "",
     sounds: ra(e2.sounds),
-    editor: za(e2.editing),
+    editor: Ka(e2.editing),
     advanced: ea(e2.advanced),
-    title1Name: o2.title1Name ?? "",
-    title2Name: o2.title2Name ?? "",
-    ...La(a2),
-    magicSkills: rr([]),
-    airship: Ya(t2.airship),
-    boat: Ya(t2.boat),
-    ship: Ya(t2.ship),
-    defeatMe: Ct((_c = e2.me) == null ? void 0 : _c.defeatMe),
-    gameoverMe: Ct((_d = e2.me) == null ? void 0 : _d.gameoverMe),
-    titleBgm: Ct(s2.titleBgm),
-    tileSize: p2.tileSize,
-    faceSize: p2.faceSize,
-    iconSize: p2.iconSize,
+    title1Name: ((_c = e2.images) == null ? void 0 : _c.title1Name) ?? "",
+    title2Name: ((_d = e2.images) == null ? void 0 : _d.title2Name) ?? "",
+    ...Pa(e2.dataNames ?? {}),
+    magicSkills: ir([]),
+    airship: Wa((_e2 = e2.vehicles) == null ? void 0 : _e2.airship),
+    boat: Wa((_f = e2.vehicles) == null ? void 0 : _f.boat),
+    ship: Wa((_g = e2.vehicles) == null ? void 0 : _g.ship),
+    defeatMe: Ct((_h = e2.me) == null ? void 0 : _h.defeatMe),
+    gameoverMe: Ct((_i = e2.me) == null ? void 0 : _i.gameoverMe),
+    titleBgm: Ct((_j = e2.bgm) == null ? void 0 : _j.titleBgm),
+    tileSize: t2.tileSize,
+    faceSize: t2.faceSize,
+    iconSize: t2.iconSize,
     versionId: 1,
     attackMotions: [],
-    battleback1Name: m2.battleback1Name ?? "",
-    battleback2Name: m2.battleback2Name ?? "",
-    testTroopId: m2.testTroopId ?? 0,
-    testBattlers: ir(m2.testBattlers, sr),
-    battleBgm: Ct(s2.battleBgm),
-    victoryMe: Ct((_e2 = e2.me) == null ? void 0 : _e2.victoryMe),
-    editMapId: r2.editMapId ?? 0,
+    battleback1Name: ((_k = e2.battleTest) == null ? void 0 : _k.battleback1Name) ?? "",
+    battleback2Name: ((_l = e2.battleTest) == null ? void 0 : _l.battleback2Name) ?? "",
+    testTroopId: ((_m = e2.battleTest) == null ? void 0 : _m.testTroopId) ?? 0,
+    testBattlers: mr((_n = e2.battleTest) == null ? void 0 : _n.testBattlers, pr),
+    battleBgm: Ct((_o = e2.bgm) == null ? void 0 : _o.battleBgm),
+    victoryMe: Ct((_p = e2.me) == null ? void 0 : _p.victoryMe),
+    editMapId: ((_q = e2.editorTemporary) == null ? void 0 : _q.editMapId) ?? 0,
+    battlerName: ((_r = e2.editorTemporary) == null ? void 0 : _r.battlerName) ?? "",
     locale: "",
-    startMapId: i2.startMapId ?? 0,
-    startX: i2.startX ?? 0,
-    startY: i2.startY ?? 0,
+    startMapId: ((_s = e2.gameInit) == null ? void 0 : _s.startMapId) ?? 0,
+    startX: ((_t2 = e2.gameInit) == null ? void 0 : _t2.startX) ?? 0,
+    startY: ((_u = e2.gameInit) == null ? void 0 : _u.startY) ?? 0,
     windowTone: [0, 0, 0, 0],
-    terms: ar(e2.terms ?? {}),
-    itemCategories: pa(e2.itemCategories),
-    partyMembersArray: rr(i2.partyMembersArray),
+    terms: or(e2.terms ?? {}),
+    itemCategories: ma(e2.itemCategories),
+    partyMembersArray: ir((_v = e2.gameInit) == null ? void 0 : _v.partyMembersArray),
     battleSystem: 0,
     battlerHue: 0,
-    battlerName: r2.battlerName ?? "",
-    menuCommands: ma(e2.menuComamnds)
+    menuCommands: pa(e2.menuComamnds)
   };
-}, exports.makeTermsBasic = Da, exports.makeTermsBasicFromArray = (e2) => ({ level: e2[0], levelA: e2[1], hp: e2[2], hpA: e2[3], mp: e2[4], mpA: e2[5], tp: e2[6], tpA: e2[7], experience: e2[8], exp: e2[9] }), exports.makeTermsCommand = Fa, exports.makeTermsCommandFromArray = (e2) => ({
+}, exports.makeTermsBasic = Fa, exports.makeTermsBasicFromArray = (e2) => ({
+  level: e2[0],
+  levelA: e2[1],
+  hp: e2[2],
+  hpA: e2[3],
+  mp: e2[4],
+  mpA: e2[5],
+  tp: e2[6],
+  tpA: e2[7],
+  experience: e2[8],
+  exp: e2[9]
+}), exports.makeTermsCommand = Ha, exports.makeTermsCommandFromArray = (e2) => ({
   fight: e2[0],
   escape: e2[1],
   attack: e2[2],
@@ -1645,7 +1642,7 @@ exports.ABORT_BATTLE = 340, exports.AUTHOR_RMMZ = Re, exports.BATTLE_PROCESSING 
   cancel: e2[22],
   buy: e2[24],
   sell: e2[25]
-}), exports.makeTermsMessages = Ba, exports.makeTitleCommandWindow = (e2) => ({ background: e2.background ?? 0, offsetX: e2.offsetX ?? 0, offsetY: e2.offsetY ?? 0 }), exports.makeTroopData = (e2 = {}) => ({
+}), exports.makeTermsMessages = Ga, exports.makeTitleCommandWindow = (e2) => ({ background: e2.background ?? 0, offsetX: e2.offsetX ?? 0, offsetY: e2.offsetY ?? 0 }), exports.makeTroopData = (e2 = {}) => ({
   id: e2.id ?? 0,
   name: e2.name ?? "",
   members: e2.members ?? [],
@@ -1655,7 +1652,7 @@ exports.ABORT_BATTLE = 340, exports.AUTHOR_RMMZ = Re, exports.BATTLE_PROCESSING 
   actorId: e2.actorId ?? 0,
   enemyValid: e2.enemyValid ?? 0,
   switchValid: e2.switchValid ?? 0
-}), exports.makeTroopMember = (e2 = {}) => ({ enemyId: e2.enemyId ?? 0, x: e2.x ?? 0, y: e2.y ?? 0, hidden: e2.hidden ?? false }), exports.makeVehicleData = Ya, exports.makeWeaponData = (e2 = {}) => ({
+}), exports.makeTroopMember = (e2 = {}) => ({ enemyId: e2.enemyId ?? 0, x: e2.x ?? 0, y: e2.y ?? 0, hidden: e2.hidden ?? false }), exports.makeVehicleData = Wa, exports.makeWeaponData = (e2 = {}) => ({
   id: e2.id ?? 0,
   name: e2.name ?? "",
   iconIndex: e2.iconIndex ?? 0,
@@ -1718,7 +1715,7 @@ exports.ABORT_BATTLE = 340, exports.AUTHOR_RMMZ = Re, exports.BATTLE_PROCESSING 
     if (o2.length >= 1e3) throw new Error("Note text is too long. Please shorten it.");
     return It(a2, o2);
   });
-}, exports.resolveItemEffectLabels = (e2) => [ze(e2), We(e2), Ke(e2), Xe(e2), $e(e2), Ze(e2), Qe(e2), Je(e2), et(e2), je(e2), tt(e2), at(e2), rt(e2)], exports.resolveTraitLabels = (e2) => [j(e2.elementRate), z(e2.debuffRate), W(e2.stateRate), K(e2.stateResist), X(e2.regularParam), $(e2.extraParam), Z(e2.specialParam), Q(e2.attackElement), J(e2.attackState), ee(e2.attackSpeed), te(e2.attackTimes), ae(e2.attackSkill), re(e2.skillTypeAdd), oe(e2.skillTypeSeal), ie(e2.skillAdd), se(e2.skillSeal), pe(e2.equipWeaponType), me(e2.equipArmorType), ne(e2.equipLock), de(e2.equipSeal), le(e2.slotType), ce(e2.actionPlus), ye(e2.specialFlag), ue(e2.collaps), ge(e2.partyAbility)], exports.setNoteValue = (e2, t2, a2) => {
+}, exports.resolveItemEffectLabels = (e2) => [We(e2), ze(e2), Ke(e2), Xe(e2), $e(e2), Ze(e2), Qe(e2), Je(e2), et(e2), je(e2), tt(e2), at(e2), rt(e2)], exports.resolveTraitLabels = (e2) => [j(e2.elementRate), W(e2.debuffRate), z(e2.stateRate), K(e2.stateResist), X(e2.regularParam), $(e2.extraParam), Z(e2.specialParam), Q(e2.attackElement), J(e2.attackState), ee(e2.attackSpeed), te(e2.attackTimes), ae(e2.attackSkill), re(e2.skillTypeAdd), oe(e2.skillTypeSeal), ie(e2.skillAdd), se(e2.skillSeal), me(e2.equipWeaponType), pe(e2.equipArmorType), ne(e2.equipLock), de(e2.equipSeal), le(e2.slotType), ce(e2.actionPlus), ye(e2.specialFlag), ue(e2.collaps), ge(e2.partyAbility)], exports.setNoteValue = (e2, t2, a2) => {
   const r2 = /<([^<>:]{1,100}):([^>]{1,1000})>/g;
   return e2.replace(r2, (e3, r3) => r3 === t2 ? It(r3, a2) : e3);
 }, exports.specialFlagToArray = B, exports.specialParamName = (e2, t2) => {

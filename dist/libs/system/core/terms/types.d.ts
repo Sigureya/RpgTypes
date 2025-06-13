@@ -2,10 +2,15 @@ import { Terms_Basic, Terms_BasicArray } from './basic';
 import { Terms_GameCommands, Terms_CommandArray } from './commands';
 import { Terms_Messages } from './messages';
 import { SystemLabels_TermsParamNames, Terms_ParamNamesArray } from './paramArray';
-export interface System_TextBundle {
+export interface System_TextBundle extends SystemLabels_TermsParamNames {
     terms: System_Terms;
     gameTitle: string;
     currencyUnit: string;
+}
+export interface System_Terms_Params {
+    terms: {
+        params: Terms_ParamNamesArray;
+    };
 }
 export interface System_Terms {
     messages: Terms_Messages;

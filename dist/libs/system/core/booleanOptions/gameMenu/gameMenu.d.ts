@@ -1,0 +1,11 @@
+import { System_BooleanGameMenuOptions } from './types';
+export declare const getItemCommandEnabled: (system: System_BooleanGameMenuOptions) => boolean;
+export declare const getSkillCommandEnabled: (system: System_BooleanGameMenuOptions) => boolean;
+export declare const getEquipCommandEnabled: (system: System_BooleanGameMenuOptions) => boolean;
+export declare const getStatusCommandEnabled: (system: System_BooleanGameMenuOptions) => boolean;
+export declare const getFormationCommandEnabled: (system: System_BooleanGameMenuOptions) => boolean;
+export declare const getSaveCommandEnabled: (system: System_BooleanGameMenuOptions) => boolean;
+export declare const getItemCategoryEnabled: (system: System_BooleanGameMenuOptions) => boolean;
+export declare const getWeaponCategoryEnabled: (system: System_BooleanGameMenuOptions) => boolean;
+export declare const getArmorCategoryEnabled: (system: System_BooleanGameMenuOptions) => boolean;
+export declare const getKeyItemCategoryEnabled: (system: System_BooleanGameMenuOptions) => boolean;
