@@ -1,2 +1,2 @@
 export * from "./advanced";
-export * from "./schema";
+export {SCHEMA_SYSTEM_ADVANCED} from "./schema";
