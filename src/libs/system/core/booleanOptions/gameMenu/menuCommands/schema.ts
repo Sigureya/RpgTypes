@@ -1,7 +1,6 @@
 import type { JSONSchemaType } from "ajv";
 
 export const SCHEMA_SYSTEM_MENU_COMMANDS_ENABLED = {
-  additionalProperties: false,
   type: "array",
   maxItems: 6,
   minItems: 6,

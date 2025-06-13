@@ -1,7 +1,6 @@
 import type { JSONSchemaType } from "ajv";
 
 export const SCHEMA_SYSTEM_ITEM_CATEGORIES = {
-  additionalProperties: false,
   type: "array",
   maxItems: 4,
   minItems: 4,
