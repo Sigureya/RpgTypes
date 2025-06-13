@@ -1,4 +1,7 @@
-import type { Data_Equipment, Damage, Trait, ParamArray } from "src/rpg";
+import type { Damage } from "../../members";
+import type { Data_Equipment } from "../equipment";
+import type { ParamArray } from "../members";
+import type { Trait } from "../trait";
 
 export interface Data_Weapon extends Data_Equipment {
   name: string;
