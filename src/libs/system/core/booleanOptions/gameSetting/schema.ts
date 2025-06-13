@@ -3,7 +3,7 @@ import type { System_BooleanGameOptions } from "./types";
 
 export const SCHEMA_SYSTEM_BOOLEAN_OPTIONS = {
   type: "object",
-  additionalProperties: true,
+  additionalProperties: false,
   required: [
     "optAutosave",
     "optDisplayTp",
