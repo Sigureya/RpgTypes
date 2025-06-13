@@ -1,4 +1,4 @@
-import { DomainName } from '../../../templates';
+import { DomainName } from '../../../../libs/templates';
 export interface System_RPG_DataNames {
     weaponTypes: string[];
     skillTypes: string[];

@@ -5,7 +5,7 @@ import terser from "@rollup/plugin-terser";
 declare const __dirname: string;
 
 const libBuild = {
-  entry: "./src/libs/index.ts",
+  entry: "./src/index.ts",
   outDir: "./dist",
   libName: "rpgTypes",
   exclude: [],

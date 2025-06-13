@@ -1,4 +1,4 @@
-import { AudioFileParams, ColorRGBA } from '../utils';
+import { AudioFileParams, ColorRGBA } from '../../libs/utils';
 import { AttackMotion, Data_Vehicle, ItemCategoriesArray, MenuCommandsEnabledArray, System_Advanced, System_SoundsArray, System_Terms } from './core';
 import { EditorSettings, TestBattler } from './gameEdit';
 export interface Data_System {
