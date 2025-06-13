@@ -1,4 +1,7 @@
-import { Data_Equipment, Damage, Trait, ParamArray } from '../../../..';
+import { Damage } from '../../members';
+import { Data_Equipment } from '../equipment';
+import { ParamArray } from '../members';
+import { Trait } from '../trait';
 export interface Data_Weapon extends Data_Equipment {
     name: string;
     id: number;
