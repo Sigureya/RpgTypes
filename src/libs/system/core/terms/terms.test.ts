@@ -1,9 +1,9 @@
 import { describe, expect, test } from "vitest";
 import type { Data_NamedItem } from "src/namedItemSource";
-import type { System_ParamNames } from "src/system/subset";
 import { getParamNames } from "./terms";
+import type { System_Terms_Params } from "./types";
 
-const system: System_ParamNames = {
+const system = {
   terms: {
     params: [
       "mhp",
@@ -18,7 +18,7 @@ const system: System_ParamNames = {
       "eva",
     ],
   },
-};
+} as const satisfies System_Terms_Params;
 
 describe("getParamNames", () => {
   test("should return param names", () => {

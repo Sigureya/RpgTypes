@@ -1,14 +1,5 @@
 import type { Data_System } from "./system";
 
-export type System_Pick<
-  K1 extends keyof Data_System,
-  K2 extends keyof Data_System[K1]
-> = {
-  [key in K1]: Pick<Data_System[K1], K2>;
-};
-
-export type System_ParamNames = System_Pick<"terms", "params">;
-
 export type System_Text = Pick<Data_System, "gameTitle" | "currencyUnit">;
 
 export type System_Debug = Pick<
