@@ -1,5 +1,4 @@
 import { describe, test, expect } from "vitest";
-import type { SchemaObject } from "ajv";
 import Ajv from "ajv";
 import type { Terms_Messages } from "./core";
 import {
@@ -18,8 +17,7 @@ import { SCHEMA_SYSTEM_RPG_DATA_NAMES } from "./core/rpgDataTypes/schema";
 import { SCHEMA_SYSTEM_TERMS_BUNDLE } from "./core/terms/schema";
 import { SCHEMA_SYSTEM_GAME_EDITOR_BUNDLE } from "./gameEdit/schema";
 import { SCHEMA_SYSTEM_PARTIAL_BUNDLE } from "./makeSchema";
-import type { PartialSystemSchema } from "./mergeSchema";
-import { mergeSchema } from "./mergeSchema";
+import { mergeSystemSchema } from "./mergeSchema";
 import type { Data_System } from "./system";
 
 const mockSystem = {
@@ -257,18 +255,25 @@ const mockSystem = {
   },
 } as const satisfies Data_System;
 
+interface PartialSystemSchema {
+  required: ReadonlyArray<keyof Data_System>;
+  properties: Record<string, object>;
+  additionalProperties: false;
+  type: "object";
+}
+
 interface SchemaCase {
-  schema: SchemaObject;
+  schema: PartialSystemSchema;
   caseName: string;
 }
 
 const allSchema = [
   {
-    caseName: "SCHEMA_SYSTEM_BOOLEAN_OPTIONS",
+    caseName: "BooleanOptions",
     schema: SCHEMA_SYSTEM_BOOLEAN_OPTIONS,
   },
   {
-    caseName: "SCHEMA_SYSTEM_AUDIOFILES",
+    caseName: "AudioFiles",
     schema: SCHEMA_SYSTEM_AUDIOFILES,
   },
   {
@@ -300,10 +305,6 @@ const allSchema = [
     schema: SCHEMA_SYSTEM_TERMS_BUNDLE,
   },
   {
-    caseName: "b",
-    schema: SCHEMA_SYSTEM_BOOLEAN_GAMEMENU_OPTIONS,
-  },
-  {
     caseName: "gameInit",
     schema: SCHEMA_SYSTEM_GAME_INITIAL,
   },
@@ -311,12 +312,16 @@ const allSchema = [
     caseName: "otehr",
     schema: SCHEMA_SYSTEM_OTHER_DATA,
   },
+  {
+    caseName: "b",
+    schema: SCHEMA_SYSTEM_BOOLEAN_GAMEMENU_OPTIONS,
+  },
 ] as const satisfies SchemaCase[];
 
 describe("部分的なSchemaの検証", () => {
   const ajv = new Ajv({ strict: false });
   allSchema.forEach(({ schema, caseName }) => {
-    test(caseName, () => {
+    test(`Schema: ${caseName}`, () => {
       expect(schema).toBeDefined();
       const validate = ajv.compile({
         ...schema,
@@ -341,18 +346,15 @@ describe("全てのSchemaを実装してあるか？", () => {
       expect(schemaKeys.toSorted()).toEqual(Array.from(schemaSet).toSorted());
     });
   });
-  test("", () => {
+  test("必要なSchemaが揃っているか？", () => {
     expect(dataKeys.filter((k) => !schemaSet.has(k))).toEqual([]);
   });
-  test("", () => {
-    const xxx = mergeSchema(
-      allSchema.map<PartialSystemSchema>(
-        ({ schema }) => schema as PartialSystemSchema
-      )
+  test("dataSystemの判定は正しく機能するか？", () => {
+    const systemSchema = mergeSystemSchema(
+      allSchema.map(({ schema }) => schema)
     );
     const ajv = new Ajv({ strict: true });
-
-    const validate = ajv.compile(xxx);
+    const validate = ajv.compile(systemSchema);
     expect(mockSystem).toSatisfy(validate);
   });
 });
