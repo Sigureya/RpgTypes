@@ -1,11 +1,11 @@
 import type { ColorRGBA } from "@RpgTypes/utils";
+import type { ValueOf } from "src/templates/valueOf";
 import type { BranchParameters } from "./branchParams";
 import type { EventCommandLike } from "./eventComandLike";
 import type {
   MovePicture,
   ShopGoods,
   ShowPicture,
-  ValueOf,
   Toggle,
   Operation_PlusMinus,
   Designation,
