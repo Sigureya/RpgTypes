@@ -15,8 +15,12 @@ import type {
   Terms_GameCommands,
   Terms_Messages,
 } from "./core";
-import type { EditorSettings, System_TestBattle } from "./gameEdit";
-import type { System_Text, System_Debug } from "./subset";
+import type {
+  EditorSettings,
+  System_TestBattle,
+  System_EditorTemporary,
+} from "./gameEdit";
+import type { System_Text } from "./subset";
 
 export interface SystemDataFragments {
   options: Partial<System_BooleanGameOptions>;
@@ -28,7 +32,6 @@ export interface SystemDataFragments {
   me: Partial<System_Me>;
   texts: Partial<System_Text>;
   sounds: Partial<System_SoundsObject>;
-  debug: Partial<System_Debug>;
   battlerTest: Partial<System_TestBattle>;
   images: Partial<System_TitleImages>;
   gameInit: Partial<System_GameInitial>;
@@ -40,4 +43,5 @@ export interface SystemDataFragments {
     messages?: Partial<Terms_Messages>;
   };
   menuComamnds: Partial<MenuCommandsEnabled>;
+  editorTemporary?: Partial<System_EditorTemporary>;
 }

@@ -73,11 +73,6 @@ const fullFragments = {
     gameTitle: "Test Game",
     currencyUnit: "G",
   },
-  debug: {
-    battlerHue: 10,
-    battlerName: "debugBattler",
-    editMapId: 200,
-  },
   battlerTest: {
     battleback1Name: "bb1",
     battleback2Name: "bb2",
