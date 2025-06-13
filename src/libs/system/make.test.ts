@@ -73,7 +73,7 @@ const fullFragments = {
     gameTitle: "Test Game",
     currencyUnit: "G",
   },
-  battlerTest: {
+  battleTest: {
     battleback1Name: "bb1",
     battleback2Name: "bb2",
     testTroopId: 100,
