@@ -1,7 +1,6 @@
-import type { NamedItemSource, SourceIdentifier } from "src/namedItemSource";
+import type { SourceIdentifier } from "src/namedItemSource";
 import {
   EFFECT_SPECIAL,
-  SPECIAL_EFFECT_ESCAPE,
   type SourceId_DataCommonEvent,
   type SourceId_DataSkill,
   type SourceId_DataState,

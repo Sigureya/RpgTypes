@@ -1,5 +1,4 @@
 import type { JSONSchemaType } from "ajv";
-import type { Damage, ParamArray, Trait } from "src/rpg";
 import type { Data_Weapon } from "./weapon";
 
 export const SCHEMA_DATA_WEAPON = {
@@ -41,7 +40,7 @@ export const SCHEMA_DATA_WEAPON = {
       ],
       minItems: 8,
       maxItems: 8,
-    } satisfies JSONSchemaType<ParamArray>,
+    },
     damage: {
       type: "object",
       properties: {
@@ -52,7 +51,7 @@ export const SCHEMA_DATA_WEAPON = {
         critical: { type: "boolean", default: false },
       },
       required: ["type", "elementId", "formula", "variance", "critical"],
-    } satisfies JSONSchemaType<Damage>,
+    },
     traits: {
       type: "array",
       items: {
@@ -64,6 +63,6 @@ export const SCHEMA_DATA_WEAPON = {
         },
         required: ["code", "dataId", "value"],
       },
-    } satisfies JSONSchemaType<Trait[]>,
+    },
   },
 } as const satisfies JSONSchemaType<Data_Weapon>;
