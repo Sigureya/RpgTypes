@@ -1,6 +1,10 @@
 import type { JSONSchemaType } from "ajv";
 import type { System_BooleanGameOptions } from "./types";
 
+const SCHEMA_BOOLEAN = {
+  type: "boolean",
+} as const satisfies JSONSchemaType<boolean>;
+
 export const SCHEMA_SYSTEM_BOOLEAN_OPTIONS = {
   type: "object",
   additionalProperties: false,
@@ -19,17 +23,17 @@ export const SCHEMA_SYSTEM_BOOLEAN_OPTIONS = {
     "optSplashScreen",
   ] satisfies Array<keyof System_BooleanGameOptions>,
   properties: {
-    optAutosave: { type: "boolean" },
-    optDisplayTp: { type: "boolean" },
-    optDrawTitle: { type: "boolean" },
-    optExtraExp: { type: "boolean" },
-    optFloorDeath: { type: "boolean" },
-    optFollowers: { type: "boolean" },
-    optKeyItemsNumber: { type: "boolean" },
-    optSideView: { type: "boolean" },
-    optSlipDeath: { type: "boolean" },
-    optTransparent: { type: "boolean" },
-    optMessageSkip: { type: "boolean" },
-    optSplashScreen: { type: "boolean" },
+    optAutosave: SCHEMA_BOOLEAN,
+    optDisplayTp: SCHEMA_BOOLEAN,
+    optDrawTitle: SCHEMA_BOOLEAN,
+    optExtraExp: SCHEMA_BOOLEAN,
+    optFloorDeath: SCHEMA_BOOLEAN,
+    optFollowers: SCHEMA_BOOLEAN,
+    optKeyItemsNumber: SCHEMA_BOOLEAN,
+    optSideView: SCHEMA_BOOLEAN,
+    optSlipDeath: SCHEMA_BOOLEAN,
+    optTransparent: SCHEMA_BOOLEAN,
+    optMessageSkip: SCHEMA_BOOLEAN,
+    optSplashScreen: SCHEMA_BOOLEAN,
   },
 } as const satisfies JSONSchemaType<System_BooleanGameOptions>;
