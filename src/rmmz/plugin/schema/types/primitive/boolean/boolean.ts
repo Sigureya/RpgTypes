@@ -2,7 +2,7 @@ import type { JSONSchemaType } from "ajv";
 import type { Schema } from "jsonschema";
 import type { BooleanArg, X_MetaParam_Boolean } from "./types";
 
-export const rmmzParamToSchema = (bool: BooleanArg) => {
+export const rmmzParamToSchemaBoolean = (bool: BooleanArg) => {
   return {
     title: bool.text,
     description: bool.desc,
