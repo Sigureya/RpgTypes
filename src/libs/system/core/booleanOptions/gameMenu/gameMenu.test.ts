@@ -6,19 +6,21 @@ import {
   getSaveCommandEnabled,
   getSkillCommandEnabled,
   getStatusCommandEnabled,
+  getArmorCategoryEnabled,
+  getItemCategoryEnabled,
+  getKeyItemCategoryEnabled,
+  getWeaponCategoryEnabled,
 } from "./gameMenu";
 import type { ItemCategories } from "./itemCategories";
 import { makeItemCategories } from "./itemCategories";
-import {
-  makeMenuCommandsEnabled,
-  type MenuCommandsEnabled,
-} from "./menuCommands";
+import type { MenuCommandsEnabled } from "./menuCommands";
+import { makeMenuCommandsEnabled } from "./menuCommands";
 import type { System_BooleanGameMenuOptions } from "./types";
 
 interface TestCase {
   caseName: string;
   menu?: Partial<MenuCommandsEnabled>;
-  itemCategories?: Partial<ItemCategories>;
+  items?: Partial<ItemCategories>;
   expected: boolean;
 }
 
@@ -29,7 +31,7 @@ const testAreEnabledCommand = (
 ) => {
   describe(descName, () => {
     cases.forEach(
-      ({ caseName, expected, menu: menuCommands, itemCategories }) => {
+      ({ caseName, expected, menu: menuCommands, items: itemCategories }) => {
         const options: System_BooleanGameMenuOptions = {
           menuCommands: makeMenuCommandsEnabled(menuCommands),
           itemCategories: makeItemCategories(itemCategories),
@@ -84,4 +86,30 @@ testAreEnabledCommand("getSaveCommandEnabled", getSaveCommandEnabled, [
   { caseName: "false", menu: { save: false }, expected: false },
   { caseName: "undefined", menu: { save: undefined }, expected: true },
   { caseName: "empty", menu: {}, expected: true },
+]);
+
+testAreEnabledCommand("getItemCategoryEnabled", getItemCategoryEnabled, [
+  { caseName: "true", items: { item: true }, expected: true },
+  { caseName: "false", items: { item: false }, expected: false },
+  { caseName: "undefined", items: { item: undefined }, expected: true },
+  { caseName: "empty", items: {}, expected: true },
+]);
+testAreEnabledCommand("getWeaponCategoryEnabled", getWeaponCategoryEnabled, [
+  { caseName: "true", items: { weapon: true }, expected: true },
+  { caseName: "false", items: { weapon: false }, expected: false },
+  { caseName: "undefined", items: { weapon: undefined }, expected: true },
+  { caseName: "empty", items: {}, expected: true },
+]);
+
+testAreEnabledCommand("getArmorCategoryEnabled", getArmorCategoryEnabled, [
+  { caseName: "true", items: { armor: true }, expected: true },
+  { caseName: "false", items: { armor: false }, expected: false },
+  { caseName: "undefined", items: { armor: undefined }, expected: true },
+  { caseName: "empty", items: {}, expected: true },
+]);
+testAreEnabledCommand("getKeyItemCategoryEnabled", getKeyItemCategoryEnabled, [
+  { caseName: "true", items: { keyItem: true }, expected: true },
+  { caseName: "false", items: { keyItem: false }, expected: false },
+  { caseName: "undefined", items: { keyItem: undefined }, expected: true },
+  { caseName: "empty", items: {}, expected: true },
 ]);

@@ -5,6 +5,7 @@ export const getItemCommandEnabled = (
 ): boolean => {
   return system.menuCommands[0];
 };
+
 export const getSkillCommandEnabled = (
   system: System_BooleanGameMenuOptions
 ): boolean => {
@@ -33,4 +34,28 @@ export const getSaveCommandEnabled = (
   system: System_BooleanGameMenuOptions
 ): boolean => {
   return system.menuCommands[5];
+};
+
+export const getItemCategoryEnabled = (
+  system: System_BooleanGameMenuOptions
+): boolean => {
+  return system.itemCategories[0];
+};
+
+export const getWeaponCategoryEnabled = (
+  system: System_BooleanGameMenuOptions
+): boolean => {
+  return system.itemCategories[1];
+};
+
+export const getArmorCategoryEnabled = (
+  system: System_BooleanGameMenuOptions
+): boolean => {
+  return system.itemCategories[2];
+};
+
+export const getKeyItemCategoryEnabled = (
+  system: System_BooleanGameMenuOptions
+): boolean => {
+  return system.itemCategories[3];
 };
