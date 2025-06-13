@@ -1,6 +1,6 @@
 import type { Data_NamedItem, NamedItemSource } from "src/namedItemSource";
-import type { SourceId_TraitSpecialFlag } from "src/rpg";
 import type { DomainLabel } from "src/templates";
+import type { SourceId_TraitSpecialFlag } from "../sourceIdTypes";
 import {
   FLAG_ID_AUTO_BATTLE,
   FLAG_ID_GUARD,

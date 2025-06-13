@@ -1,4 +1,4 @@
-import type { Damage } from "src/rpg";
+import type { Damage } from "../../members";
 import type { ItemEffect } from "./itemEffect";
 import type { Data_UsableItem } from "./usableItem";
 
