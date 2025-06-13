@@ -8,14 +8,18 @@ import {
 } from "./core";
 import { SCHEMA_SYSTEM_AUDIOFILES } from "./core/audio/schema";
 import { SCHEMA_SYSTEM_BATTLE_RULE_RMMZ } from "./core/battle/schema";
+import { SCHEMA_SYSTEM_BOOLEAN_GAMEMENU_OPTIONS } from "./core/booleanOptions/gameMenu/schema";
 import {
   SCHEMA_SYSTEM_IMAGE_SIZE,
   SCHEMA_SYSTEM_TITLE_IMAGES,
 } from "./core/images/schema";
+import { SCHEMA_SYSTEM_OTHER_DATA } from "./core/other";
 import { SCHEMA_SYSTEM_RPG_DATA_NAMES } from "./core/rpgDataTypes/schema";
 import { SCHEMA_SYSTEM_TERMS_BUNDLE } from "./core/terms/schema";
 import { SCHEMA_SYSTEM_GAME_EDITOR_BUNDLE } from "./gameEdit/schema";
 import { SCHEMA_SYSTEM_PARTIAL_BUNDLE } from "./makeSchema";
+import type { PartialSystemSchema } from "./mergeSchema";
+import { mergeSchema } from "./mergeSchema";
 import type { Data_System } from "./system";
 
 const mockSystem = {
@@ -296,8 +300,16 @@ const allSchema = [
     schema: SCHEMA_SYSTEM_TERMS_BUNDLE,
   },
   {
+    caseName: "b",
+    schema: SCHEMA_SYSTEM_BOOLEAN_GAMEMENU_OPTIONS,
+  },
+  {
     caseName: "gameInit",
     schema: SCHEMA_SYSTEM_GAME_INITIAL,
+  },
+  {
+    caseName: "otehr",
+    schema: SCHEMA_SYSTEM_OTHER_DATA,
   },
 ] as const satisfies SchemaCase[];
 
@@ -331,5 +343,16 @@ describe("全てのSchemaを実装してあるか？", () => {
   });
   test("", () => {
     expect(dataKeys.filter((k) => !schemaSet.has(k))).toEqual([]);
+  });
+  test("", () => {
+    const xxx = mergeSchema(
+      allSchema.map<PartialSystemSchema>(
+        ({ schema }) => schema as PartialSystemSchema
+      )
+    );
+    const ajv = new Ajv({ strict: true });
+
+    const validate = ajv.compile(xxx);
+    expect(mockSystem).toSatisfy(validate);
   });
 });
