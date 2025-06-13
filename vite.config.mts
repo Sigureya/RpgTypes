@@ -43,6 +43,7 @@ export default defineConfig({
   },
   resolve: {
     alias: {
+      "@RpgTypes/system": path.resolve(__dirname, "./src/rmmz/system"),
       "src/libs": path.resolve(__dirname, "./src/libs"),
       "@RpgTypes": path.resolve(__dirname, "./src/libs"),
       src: path.resolve(__dirname, "./src/libs"),
