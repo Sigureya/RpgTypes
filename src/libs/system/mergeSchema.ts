@@ -7,7 +7,9 @@ export interface PartialSystemSchema {
   type: "object";
 }
 
-export const mergeSystemSchema = (list: ReadonlyArray<PartialSystemSchema>) => {
+export const mergeSystemSchema = (
+  list: ReadonlyArray<PartialSystemSchema>
+): PartialSystemSchema => {
   const reducedList = reduce(list);
   return {
     additionalProperties: false,
