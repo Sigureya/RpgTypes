@@ -1,16 +1,10 @@
 import type { JSONSchemaType } from "ajv";
-import type { OmitByType } from "src/templates";
-import type { AudioFileParams } from "src/utils";
-import type {
-  AttackMotion,
-  Data_Vehicle,
-  System_Advanced,
-  System_Terms,
+import type { AttackMotion, Data_Vehicle, System_Advanced } from "./core";
+import {
+  SCHEMA_SYSTEM_ADVANCED,
+  SCHEMA_SYSTEM_MEMBERS_ATTACK_MOTION,
+  SCHEMA_SYSTEM_VEHICLE,
 } from "./core";
-import { SCHEMA_SYSTEM_ADVANCED } from "./core";
-import { SCHEMA_SYSTEM_MEMBERS_ATTACK_MOTION } from "./core/attackMotion/schema";
-import { SCHEMA_SYSTEM_VEHICLE } from "./core/vehicle/schema";
-import type { EditorSettings, TestBattler } from "./gameEdit";
 import type { Data_System } from "./system";
 
 export const SCHEMA_SYSTEM_PARTIAL_BUNDLE = {
@@ -28,18 +22,5 @@ export const SCHEMA_SYSTEM_PARTIAL_BUNDLE = {
     } satisfies JSONSchemaType<AttackMotion[]>,
   },
 } as const satisfies JSONSchemaType<
-  OmitByType<
-    Data_System,
-    | number[]
-    | string[]
-    | string
-    | number
-    | boolean
-    | AudioFileParams
-    | EditorSettings
-    | System_Terms
-    | AudioFileParams[]
-    | boolean[]
-    | TestBattler[]
-  >
+  Pick<Data_System, "airship" | "boat" | "ship" | "advanced" | "attackMotions">
 >;
