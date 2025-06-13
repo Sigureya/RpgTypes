@@ -14,10 +14,8 @@ import {
   makeVehicleData,
 } from "./core";
 import type {
-  System_Bgm,
   System_BooleanGameOptions,
   System_RPG_DataNames,
-  System_GameInitial,
   System_ImageSize,
   System_Terms,
   System_TermsPartial,
@@ -30,68 +28,68 @@ import type { SystemDataFragments } from "./systemSegments";
 import { isImageSize, isTestBattler } from "./validate";
 
 export const makeSystemData = (
-  p: Partial<SystemDataFragments>
+  fragments: Partial<SystemDataFragments>
 ): Data_System => {
-  const vehicles = p.vehicles ?? {};
-
-  const dataNames: Partial<System_RPG_DataNames> = p.dataNames ?? {};
-  const gameInit: Partial<System_GameInitial> = p.gameInit ?? {};
-  const bgm: Partial<System_Bgm> = p.bgm ?? {};
-
-  const size = cloneSize(p.size);
-  const battleTest = p.battlerTest ?? {};
+  const size = cloneSize(fragments.size);
 
   return {
-    ...(makeBooleanOptions(p.options) satisfies Record<
+    ...(makeBooleanOptions(fragments.options) satisfies Record<
       string & keyof System_BooleanGameOptions,
       boolean
     >),
-    currencyUnit: p.texts?.currencyUnit ?? "",
-    gameTitle: p.texts?.gameTitle ?? "",
-    sounds: makeSoundsArray(p.sounds) satisfies AudioFileParams[],
-    editor: makeEditorSetting(p.editing) satisfies Record<
+    currencyUnit: fragments.texts?.currencyUnit ?? "",
+    gameTitle: fragments.texts?.gameTitle ?? "",
+    sounds: makeSoundsArray(fragments.sounds) satisfies AudioFileParams[],
+    editor: makeEditorSetting(fragments.editing) satisfies Record<
       keyof EditorSettings,
       number
     >,
-    advanced: makeSystemAdvanced(p.advanced),
-    title1Name: p.images?.title1Name ?? "",
-    title2Name: p.images?.title2Name ?? "",
-    ...(makeDataNames(dataNames) satisfies Record<
+    advanced: makeSystemAdvanced(fragments.advanced),
+    title1Name: fragments.images?.title1Name ?? "",
+    title2Name: fragments.images?.title2Name ?? "",
+    ...(makeDataNames(fragments.dataNames ?? {}) satisfies Record<
       keyof System_RPG_DataNames,
       string[]
     >),
     magicSkills: cloneNumberArray([]),
-    airship: makeVehicleData(vehicles.airship),
-    boat: makeVehicleData(vehicles.boat),
-    ship: makeVehicleData(vehicles.ship),
-    defeatMe: makeAudioFileParams(p.me?.defeatMe),
-    gameoverMe: makeAudioFileParams(p.me?.gameoverMe),
-    titleBgm: makeAudioFileParams(bgm.titleBgm),
+    airship: makeVehicleData(fragments.vehicles?.airship),
+    boat: makeVehicleData(fragments.vehicles?.boat),
+    ship: makeVehicleData(fragments.vehicles?.ship),
+    defeatMe: makeAudioFileParams(fragments.me?.defeatMe),
+    gameoverMe: makeAudioFileParams(fragments.me?.gameoverMe),
+    titleBgm: makeAudioFileParams(fragments.bgm?.titleBgm),
 
     tileSize: size.tileSize,
     faceSize: size.faceSize,
     iconSize: size.iconSize,
     versionId: 1,
     attackMotions: [],
-    battleback1Name: battleTest.battleback1Name ?? "",
-    battleback2Name: battleTest.battleback2Name ?? "",
-    testTroopId: battleTest.testTroopId ?? 0,
-    testBattlers: cloneObjectArray(battleTest.testBattlers, cloneTestBattler),
-    battleBgm: makeAudioFileParams(bgm.battleBgm),
-    victoryMe: makeAudioFileParams(p.me?.victoryMe),
-    editMapId: p.editorTemporary?.editMapId ?? 0,
-    battlerName: p.editorTemporary?.battlerName ?? "",
+    battleback1Name: fragments.battleTest?.battleback1Name ?? "",
+    battleback2Name: fragments.battleTest?.battleback2Name ?? "",
+    testTroopId: fragments.battleTest?.testTroopId ?? 0,
+    testBattlers: cloneObjectArray(
+      fragments.battleTest?.testBattlers,
+      cloneTestBattler
+    ),
+    battleBgm: makeAudioFileParams(fragments.bgm?.battleBgm),
+    victoryMe: makeAudioFileParams(fragments.me?.victoryMe),
+    editMapId: fragments.editorTemporary?.editMapId ?? 0,
+    battlerName: fragments.editorTemporary?.battlerName ?? "",
     locale: "",
-    startMapId: gameInit.startMapId ?? 0,
-    startX: gameInit.startX ?? 0,
-    startY: gameInit.startY ?? 0,
+    startMapId: fragments.gameInit?.startMapId ?? 0,
+    startX: fragments.gameInit?.startX ?? 0,
+    startY: fragments.gameInit?.startY ?? 0,
     windowTone: [0, 0, 0, 0],
-    terms: makeTerms(p.terms ?? {}) satisfies System_Terms,
-    itemCategories: makeItemCategories(p.itemCategories) satisfies boolean[],
-    partyMembersArray: cloneNumberArray(gameInit.partyMembersArray),
+    terms: makeTerms(fragments.terms ?? {}) satisfies System_Terms,
+    itemCategories: makeItemCategories(
+      fragments.itemCategories
+    ) satisfies boolean[],
+    partyMembersArray: cloneNumberArray(fragments.gameInit?.partyMembersArray),
     battleSystem: 0,
     battlerHue: 0,
-    menuCommands: makeMenuCommandsEnabled(p.menuComamnds) satisfies boolean[],
+    menuCommands: makeMenuCommandsEnabled(
+      fragments.menuComamnds
+    ) satisfies boolean[],
   };
 };
 

@@ -32,7 +32,7 @@ export interface SystemDataFragments {
   me: Partial<System_Me>;
   texts: Partial<System_Text>;
   sounds: Partial<System_SoundsObject>;
-  battlerTest: Partial<System_TestBattle>;
+  battleTest: Partial<System_TestBattle>;
   images: Partial<System_TitleImages>;
   gameInit: Partial<System_GameInitial>;
   itemCategories: Partial<ItemCategories>;
