@@ -18,7 +18,6 @@ import type {
   System_BooleanGameOptions,
   System_RPG_DataNames,
   System_GameInitial,
-  System_TitleImages,
   System_ImageSize,
   System_Terms,
   System_TermsPartial,
@@ -26,7 +25,6 @@ import type {
 } from "./core";
 import type { EditorSettings, TestBattler } from "./gameEdit";
 import { makeEditorSetting } from "./gameEdit";
-import type { System_Debug } from "./subset";
 import type { Data_System } from "./system";
 import type { SystemDataFragments } from "./systemSegments";
 import { isImageSize, isTestBattler } from "./validate";
@@ -37,13 +35,11 @@ export const makeSystemData = (
   const vehicles = p.vehicles ?? {};
 
   const dataNames: Partial<System_RPG_DataNames> = p.dataNames ?? {};
-  const debug: Partial<System_Debug> = p.debug ?? {};
-  const images: Partial<System_TitleImages> = p.images ?? {};
   const gameInit: Partial<System_GameInitial> = p.gameInit ?? {};
   const bgm: Partial<System_Bgm> = p.bgm ?? {};
 
   const size = cloneSize(p.size);
-  const testBattle = p.battlerTest ?? {};
+  const battleTest = p.battlerTest ?? {};
 
   return {
     ...(makeBooleanOptions(p.options) satisfies Record<
@@ -58,8 +54,8 @@ export const makeSystemData = (
       number
     >,
     advanced: makeSystemAdvanced(p.advanced),
-    title1Name: images.title1Name ?? "",
-    title2Name: images.title2Name ?? "",
+    title1Name: p.images?.title1Name ?? "",
+    title2Name: p.images?.title2Name ?? "",
     ...(makeDataNames(dataNames) satisfies Record<
       keyof System_RPG_DataNames,
       string[]
@@ -77,13 +73,14 @@ export const makeSystemData = (
     iconSize: size.iconSize,
     versionId: 1,
     attackMotions: [],
-    battleback1Name: testBattle.battleback1Name ?? "",
-    battleback2Name: testBattle.battleback2Name ?? "",
-    testTroopId: testBattle.testTroopId ?? 0,
-    testBattlers: cloneObjectArray(testBattle.testBattlers, cloneTestBattler),
+    battleback1Name: battleTest.battleback1Name ?? "",
+    battleback2Name: battleTest.battleback2Name ?? "",
+    testTroopId: battleTest.testTroopId ?? 0,
+    testBattlers: cloneObjectArray(battleTest.testBattlers, cloneTestBattler),
     battleBgm: makeAudioFileParams(bgm.battleBgm),
     victoryMe: makeAudioFileParams(p.me?.victoryMe),
-    editMapId: debug.editMapId ?? 0,
+    editMapId: p.editorTemporary?.editMapId ?? 0,
+    battlerName: p.editorTemporary?.battlerName ?? "",
     locale: "",
     startMapId: gameInit.startMapId ?? 0,
     startX: gameInit.startX ?? 0,
@@ -94,7 +91,6 @@ export const makeSystemData = (
     partyMembersArray: cloneNumberArray(gameInit.partyMembersArray),
     battleSystem: 0,
     battlerHue: 0,
-    battlerName: debug.battlerName ?? "",
     menuCommands: makeMenuCommandsEnabled(p.menuComamnds) satisfies boolean[],
   };
 };
