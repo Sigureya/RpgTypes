@@ -6,5 +6,5 @@ export interface RmmzParamTextFields {
 
 export interface X_MetaParam_Shread {
   kind: string;
-  parent: string;
+  parent?: string;
 }

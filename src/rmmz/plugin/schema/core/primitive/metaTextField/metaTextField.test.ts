@@ -1,7 +1,10 @@
 import { describe, test, expect } from "vitest";
 import Ajv from "ajv";
-import { makeRmmzParamTextSchema } from "./metaTextField";
-import type { RmmzParamTextFields } from "./types";
+import {
+  makeRmmzParamTextSchema,
+  metaSchemaSharedParam,
+} from "./metaTextField";
+import type { RmmzParamTextFields, X_MetaParam_Shread } from "./types";
 
 describe("makeRmmzParamTextSchema", () => {
   const ajv = new Ajv({ strict: true });
@@ -34,6 +37,27 @@ describe("makeRmmzParamTextSchema", () => {
     });
     test("validates text parameter with multiline text", () => {
       expect({}).toSatisfy(validate);
+    });
+  });
+});
+
+describe("metaSchemaSharedParam", () => {
+  const ajv = new Ajv({ strict: true });
+  const validate = ajv.compile(metaSchemaSharedParam());
+
+  describe("valid cases", () => {
+    test("validates shared parameter with kind and parent", () => {
+      const mock: X_MetaParam_Shread = {
+        kind: "exampleKind",
+        parent: "parentField",
+      };
+      expect(mock).toSatisfy(validate);
+    });
+    test("validates shared parameter with only kind", () => {
+      const mock: X_MetaParam_Shread = {
+        kind: "anotherKind",
+      };
+      expect(mock).toSatisfy(validate);
     });
   });
 });
