@@ -4,7 +4,7 @@ import type { JSONSchemaType } from "ajv";
 import type { AddedKeywordDefinition } from "ajv/dist/types";
 import { createAjv } from "./createAjv";
 import { X_RMMZ_PARAM_SHARED } from "./keyConstants";
-import type { X_MetaParam_Shread } from "./metaTextField";
+import type { X_MetaParam_Shared } from "./metaTextField";
 import { metaSchemaSharedParam } from "./metaTextField";
 
 interface TestCase<T> {
@@ -34,7 +34,7 @@ const runTest = <T>(
   });
 };
 
-const testCases: TestCase<X_MetaParam_Shread> = {
+const testCases: TestCase<X_MetaParam_Shared> = {
   key: X_RMMZ_PARAM_SHARED,
   jsonSchema: metaSchemaSharedParam(),
   validSchema: [

@@ -4,7 +4,7 @@ export interface RmmzParamTextFields {
   parent: string;
 }
 
-export interface X_MetaParam_Shread {
+export interface X_MetaParam_Shared {
   kind: string;
   parent?: string;
 }
