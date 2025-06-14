@@ -1,4 +1,8 @@
 import type { SourceIdUnion_RpgData } from "@RpgTypes/rpg";
+import type {
+  SourceId_SystemSwitches,
+  SourceId_SystemVariables,
+} from "@RpgTypes/system";
 import type { AnnotationBase } from "../annotationBase";
 import type { DataKindUnion } from "./rpgDataTypesNames";
 
@@ -8,7 +12,10 @@ export interface RmmzParamCore_DataId<Name extends DataKindUnion> {
 }
 
 export interface X_RmmzParamCore_DataId {
-  sourceId: SourceIdUnion_RpgData;
+  sourceId?:
+    | SourceIdUnion_RpgData
+    | SourceId_SystemSwitches
+    | SourceId_SystemVariables;
 }
 
 export type RmmzParamCore_Actor = RmmzParamCore_DataId<"actor">;
