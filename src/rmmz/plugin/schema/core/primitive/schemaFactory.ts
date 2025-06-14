@@ -2,10 +2,14 @@ import { Ajv, type JSONSchemaType } from "ajv";
 import type { Schema } from "jsonschema";
 import type { BooleanArg } from "./boolean";
 import { booleanMetaParam } from "./boolean";
-import { X_RMMZ_PARAM_NUMBER } from "./keyConstants";
-import { metaSchemaNumberRmmzParam } from "./numbers/numbers";
+import { X_RMMZ_PARAM_BOOLEAN, X_RMMZ_PARAM_NUMBER } from "./keyConstants";
+import type { RmmzParamCore_Number } from "./numbers";
+import {
+  metaSchemaNumberRmmzParam,
+  x_metaParamNumber,
+} from "./numbers/numbers";
 
-const makeAjv = () => {
+export const makeAjv = () => {
   return new Ajv({
     strict: true,
     keywords: [
@@ -23,6 +27,16 @@ export const rmmzParamToSchemaBoolean = (boolArg: BooleanArg) => {
     description: boolArg.desc,
     default: boolArg.default,
     type: "boolean",
-    "x-rmmzParam": booleanMetaParam(boolArg),
+    [X_RMMZ_PARAM_BOOLEAN]: booleanMetaParam(boolArg),
   } satisfies JSONSchemaType<boolean> & Schema;
+};
+export const paramToNumberSchema = (num: RmmzParamCore_Number) => {
+  const digit = num.digit ?? 0;
+  return {
+    default: num.default ?? 0,
+    type: digit === 0 ? "integer" : "number",
+    maximum: num.max,
+    minimum: num.min,
+    [X_RMMZ_PARAM_NUMBER]: x_metaParamNumber(num),
+  } satisfies JSONSchemaType<number> & Schema;
 };
