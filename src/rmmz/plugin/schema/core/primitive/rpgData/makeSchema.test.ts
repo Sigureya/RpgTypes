@@ -66,9 +66,9 @@ describe("", () => {
     expect(0).toSatisfy(validate);
   });
   test("", () => {
-    expect(3.14).toSatisfy(validate);
+    expect(3.14).not.toSatisfy(validate);
   });
   test("", () => {
-    expect(-1).toSatisfy(validate);
+    expect(-1).not.toSatisfy(validate);
   });
 });
