@@ -7,8 +7,8 @@ describe("RmmzParam_Select JSON Schema Validation", () => {
   const ajv = new Ajv({ strict: true });
   const schema = makeSelectSchema();
   const validate = ajv.compile(schema);
-  describe("valid cases", () => {
-    test("validates select parameter with string options", () => {
+  describe("validates select parameter", () => {
+    test("with string options", () => {
       const mock: RmmzParamCore_Select<string> = {
         type: "select",
         default: "option1",
@@ -20,7 +20,7 @@ describe("RmmzParam_Select JSON Schema Validation", () => {
       expect(mock).toSatisfy(validate);
     });
 
-    test("validates select parameter with number options", () => {
+    test("with number options", () => {
       const mock: RmmzParamCore_Select<number> = {
         type: "select",
         default: 1,
@@ -31,7 +31,7 @@ describe("RmmzParam_Select JSON Schema Validation", () => {
       };
       expect(mock).toSatisfy(validate);
     });
-    test("validates select parameter with empty number options", () => {
+    test("with empty number options", () => {
       const mock: RmmzParamCore_Select<number> = {
         type: "select",
         default: 1,
@@ -39,7 +39,7 @@ describe("RmmzParam_Select JSON Schema Validation", () => {
       };
       expect(mock).toSatisfy(validate);
     });
-    test("validates select parameter with empty string options", () => {
+    test("with empty string options", () => {
       const mock: RmmzParamCore_Select<string> = {
         type: "select",
         default: "text",
@@ -47,14 +47,46 @@ describe("RmmzParam_Select JSON Schema Validation", () => {
       };
       expect(mock).toSatisfy(validate);
     });
+    describe("error case - property missing", () => {
+      test(".options", () => {
+        const mock: Omit<RmmzParamCore_Select<string>, "options"> = {
+          type: "select",
+          default: "text",
+        };
+        expect(mock).not.toSatisfy(validate);
+      });
+      test(".default", () => {
+        const mock: Omit<RmmzParamCore_Select<string>, "default"> = {
+          type: "select",
+          options: [
+            { value: "a", option: "option1" },
+            { value: "b", option: "option2" },
+          ],
+        };
+        expect(mock).not.toSatisfy(validate);
+      });
+      test(".type", () => {
+        const mock: Omit<RmmzParamCore_Select<string>, "type"> = {
+          default: "text",
+          options: [
+            { value: "a", option: "option1" },
+            { value: "b", option: "option2" },
+          ],
+        };
+        expect(mock).not.toSatisfy(validate);
+      });
+    });
     describe("invalid cases", () => {
+      // このテストケースではstringとnumberが混在したパターンをテストする
+      // これらのデータは全て不正である
       test("rejects mixed string and number option values (default is string)", () => {
         const mock: RmmzParamCore_Select<string | number> = {
           type: "select",
-          default: "text",
+          default: "a",
           options: [
-            { value: 123, option: "number" },
-            { value: "text", option: "string" },
+            { value: "a", option: "A" },
+            { value: 1, option: "1" },
+            { value: "b", option: "B" },
           ],
         };
         expect(mock).not.toSatisfy(validate);
@@ -62,10 +94,11 @@ describe("RmmzParam_Select JSON Schema Validation", () => {
       test("rejects mixed string and number option values (default is number)", () => {
         const mock: RmmzParamCore_Select<string | number> = {
           type: "select",
-          default: 123,
+          default: 1,
           options: [
-            { value: 123, option: "number" },
-            { value: "text", option: "string" },
+            { value: 1, option: "1" },
+            { value: "a", option: "A" },
+            { value: 2, option: "2" },
           ],
         };
         expect(mock).not.toSatisfy(validate);
