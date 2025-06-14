@@ -1,6 +1,7 @@
 import { describe, test, expect } from "vitest";
 import Ajv from "ajv";
-import type { DataIndexArg } from "../numbers";
+import type { DataIndexArg, Weapon } from "../numbers";
+import type { ToArrayAnnotation } from "../primitiveArray";
 import {
   rmmzDataTypes,
   dataIndexSchema,
@@ -51,7 +52,7 @@ describe("", () => {
 });
 
 describe("", () => {
-  const mock: DataIndexArg<"weapon"> = {
+  const mock: Weapon = {
     type: "weapon",
     default: 15,
   };
@@ -59,15 +60,15 @@ describe("", () => {
   const ajv = new Ajv({ strict: false });
   const validate = ajv.compile(schema);
   test("", () => {
-    expect(validate(4)).toBe(true);
+    expect(4).toSatisfy(validate);
   });
   test("", () => {
-    expect(validate(0)).toBe(true);
+    expect(0).toSatisfy(validate);
   });
   test("", () => {
-    expect(validate(3.14)).toBe(false);
+    expect(3.14).toSatisfy(validate);
   });
   test("", () => {
-    expect(validate(-1)).toBe(false);
+    expect(-1).toSatisfy(validate);
   });
 });
