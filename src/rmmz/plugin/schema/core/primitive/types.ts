@@ -1,3 +1,4 @@
+import type { AnnotationBase } from "./annotationBase";
 import type { NumberArg } from "./numbers";
 import type {
   Actor,
@@ -13,7 +14,7 @@ import type {
   Weapon,
 } from "./paramTypes";
 import type { ToArrayAnnotation } from "./primitiveArray";
-import type { Select } from "./select";
+import type { RmmzParamCore_Select } from "./select/types";
 type List = [
   NumberArg,
   Actor,
@@ -29,7 +30,7 @@ type List = [
   NumberSelect
 ];
 
-export type NumberSelect = Select<number>;
+export type NumberSelect = RmmzParamCore_Select<number> & AnnotationBase;
 export type Primitive_Numbers = List[number];
 export type Primitive_NumbersArray = ToArrayAnnotation<Primitive_Numbers>;
 export type Primitive_StringsArray = ToArrayAnnotation<Primitive_Strings>;
