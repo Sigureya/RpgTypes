@@ -17,3 +17,10 @@ export interface X_MetaParam_Boolean {
   kind: "boolean";
   parent?: string;
 }
+
+export interface RmmzParamCore_Boolean {
+  default: boolean;
+  type: "boolean";
+  on?: string;
+  off?: string;
+}
