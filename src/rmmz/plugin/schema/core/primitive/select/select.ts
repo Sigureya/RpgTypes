@@ -1,11 +1,20 @@
-import type { JSONSchemaType, JSONType } from "ajv";
 import type { Schema } from "jsonschema";
 import type { RmmzParamCore_Option, RmmzParamCore_Select } from "./types";
 
 export const makeSelectSchema = () =>
   ({
+    additionalProperties: false,
     type: "object",
-    required: ["type", "default", "options"],
+    required: [
+      "type",
+      "default",
+      "options",
+    ] satisfies (keyof RmmzParamCore_Select<number | string>)[],
+    properties: {
+      type: { type: "string", const: "select" },
+      default: {},
+      options: {},
+    },
     allOf: [
       {
         if: {
@@ -15,6 +24,7 @@ export const makeSelectSchema = () =>
         },
         then: {
           properties: {
+            type: { type: "string", const: "select" },
             default: { type: "string" },
             options: makeOptionSchema("string"),
           },
@@ -34,21 +44,20 @@ export const makeSelectSchema = () =>
         },
       },
     ],
-  } as Schema & JSONSchemaType<RmmzParamCore_Select<string | number>>);
+  } as Schema);
 
-const makeOptionSchema = <T extends JSONType>(valueType: T) =>
+const makeOptionSchema = (valueType: "string" | "number") =>
   ({
     type: "array",
     items: {
       additionalProperties: false,
       type: "object",
-      required: ["value", "option"],
+      required: ["value", "option"] satisfies (keyof RmmzParamCore_Option<
+        number | string
+      >)[],
       properties: {
         option: { type: "string" },
         value: { type: valueType },
       },
     },
-  } as Schema &
-    JSONSchemaType<
-      RmmzParamCore_Option<number>[] | RmmzParamCore_Option<number>[]
-    >);
+  } satisfies Schema);
