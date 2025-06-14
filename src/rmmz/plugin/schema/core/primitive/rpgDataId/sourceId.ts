@@ -1,4 +1,4 @@
-import type { DataTypeUnion } from "./rpgDataTypesNames";
+import type { DataKindUnion } from "./rpgDataTypesNames";
 
 export const rmmzDataTypes = () =>
   [
@@ -13,9 +13,9 @@ export const rmmzDataTypes = () =>
     "state",
     //    "variable",
     "common_event",
-  ] satisfies DataTypeUnion[];
+  ] satisfies DataKindUnion[];
 
-export const rmmzDataTypeArrays = (): `${DataTypeUnion}[]`[] => [
+export const rmmzDataTypeArrays = (): `${DataKindUnion}[]`[] => [
   "actor[]",
   // "switch[]",
   "weapon[]",

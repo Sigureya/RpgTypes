@@ -1,26 +1,26 @@
-export type DataTypeActor = "actor";
-export type DataTypeEnemy = "enemy";
-export type DataTypeClass = "class";
-export type DataTypeSkill = "skill";
-export type DataTypeItem = "item";
-export type DataTypeWeapon = "weapon";
-export type DataTypeArmor = "armor";
-export type DataTypeState = "state";
-export type DataTypeTroop = "troop";
-export type DataTypeCommonEvent = "common_event";
-export type DataTypeSwitch = "switch";
-export type DataTypeVariable = "variable";
+export type DataKindActor = "actor";
+export type DataKindEnemy = "enemy";
+export type DataKindClass = "class";
+export type DataKindSkill = "skill";
+export type DataKindItem = "item";
+export type DataKindWeapon = "weapon";
+export type DataKindArmor = "armor";
+export type DataKindState = "state";
+export type DataKindTroop = "troop";
+export type DataKindCommonEvent = "common_event";
+export type DataKindSwitch = "switch";
+export type DataKindVariable = "variable";
 
-export type DataTypeUnion =
-  | DataTypeActor
-  | DataTypeEnemy
-  | DataTypeClass
-  | DataTypeSkill
-  | DataTypeItem
-  | DataTypeWeapon
-  | DataTypeArmor
-  | DataTypeState
-  | DataTypeTroop
-  | DataTypeCommonEvent
-  | DataTypeSwitch
-  | DataTypeVariable;
+export type DataKindUnion =
+  | DataKindActor
+  | DataKindEnemy
+  | DataKindClass
+  | DataKindSkill
+  | DataKindItem
+  | DataKindWeapon
+  | DataKindArmor
+  | DataKindState
+  | DataKindTroop
+  | DataKindCommonEvent
+  | DataKindSwitch
+  | DataKindVariable;
