@@ -1,14 +1,7 @@
 import { describe, test, expect } from "vitest";
 import Ajv from "ajv";
-import type { DataIndexArg, Weapon } from "../numbers";
-import type { ToArrayAnnotation } from "../primitiveArray";
-import {
-  rmmzDataTypes,
-  dataIndexSchema,
-  dataIndexArraySchema,
-  rmmzDataTypeArrays,
-  makeDataIndexValueSchema,
-} from "./makeSchema";
+import { dataIndexSchema, makeDataIndexValueSchema } from "./makeSchema";
+import type { Actor, Weapon } from "./types";
 
 describe("", () => {
   const ajv = new Ajv({ strict: true });
@@ -16,7 +9,7 @@ describe("", () => {
   const variable = ajv.compile(schema);
   describe("normal case", () => {
     test("", () => {
-      const mock: DataIndexArg<"actor"> = {
+      const mock: Actor = {
         type: "actor",
         default: 3,
         desc: "desc",
@@ -26,7 +19,7 @@ describe("", () => {
       expect(mock).toSatisfy(variable);
     });
     test("", () => {
-      const mock: DataIndexArg<"weapon"> = {
+      const mock: Weapon = {
         type: "weapon",
         default: 15,
       };
@@ -35,14 +28,14 @@ describe("", () => {
   });
   describe("error case", () => {
     test("", () => {
-      const mock: DataIndexArg<"weapon"> = {
+      const mock: Weapon = {
         type: "weapon",
         default: -1,
       };
       expect(mock).not.toSatisfy(variable);
     });
     test("", () => {
-      const mock: DataIndexArg<"weapon"> = {
+      const mock: Weapon = {
         type: "weapon",
         default: 3.14,
       };
