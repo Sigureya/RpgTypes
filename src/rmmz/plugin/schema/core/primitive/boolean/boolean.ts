@@ -1,18 +1,37 @@
 import type { JSONSchemaType } from "ajv";
 import type { Schema } from "jsonschema";
-import type { BooleanArg, X_MetaParam_Boolean } from "./types";
+import type {
+  BooleanArg,
+  RmmzParamCore_Boolean,
+  X_MetaParam_Boolean,
+} from "./types";
 
-export const rmmzParamToSchemaBoolean = (bool: BooleanArg) => {
+export const rmmzParamToSchemaBoolean = (boolArg: BooleanArg) => {
   return {
-    title: bool.text,
-    description: bool.desc,
-    default: bool.default,
+    title: boolArg.text,
+    description: boolArg.desc,
+    default: boolArg.default,
     type: "boolean",
-    "x-rmmzParam": {
-      kind: "boolean",
-      on: bool.on,
-      off: bool.off,
-      parent: bool.parent,
-    } satisfies X_MetaParam_Boolean,
+    "x-rmmzParam": booleanMetaParam(boolArg),
   } satisfies JSONSchemaType<boolean> & Schema;
 };
+
+export const booleanMetaParam = (bool: BooleanArg): X_MetaParam_Boolean => ({
+  on: bool.on,
+  off: bool.off,
+  kind: "boolean",
+  parent: bool.parent,
+});
+
+export const makeSchemaBooleanParam = () =>
+  ({
+    additionalProperties: false,
+    type: "object",
+    required: ["type", "default"],
+    properties: {
+      type: { type: "string", const: "boolean" },
+      default: { type: "boolean" },
+      on: { type: "string", nullable: true },
+      off: { type: "string", nullable: true },
+    },
+  } satisfies Schema & JSONSchemaType<RmmzParamCore_Boolean>);
