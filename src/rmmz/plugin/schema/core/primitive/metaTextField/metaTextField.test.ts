@@ -4,7 +4,7 @@ import {
   makeRmmzParamTextSchema,
   metaSchemaSharedParam,
 } from "./metaTextField";
-import type { RmmzParamTextFields, X_MetaParam_Shread } from "./types";
+import type { RmmzParamTextFields, X_MetaParam_Shared } from "./types";
 
 describe("makeRmmzParamTextSchema", () => {
   const ajv = new Ajv({ strict: true });
@@ -47,14 +47,14 @@ describe("metaSchemaSharedParam", () => {
 
   describe("valid cases", () => {
     test("validates shared parameter with kind and parent", () => {
-      const mock: X_MetaParam_Shread = {
+      const mock: X_MetaParam_Shared = {
         kind: "exampleKind",
         parent: "parentField",
       };
       expect(mock).toSatisfy(validate);
     });
     test("validates shared parameter with only kind", () => {
-      const mock: X_MetaParam_Shread = {
+      const mock: X_MetaParam_Shared = {
         kind: "anotherKind",
       };
       expect(mock).toSatisfy(validate);

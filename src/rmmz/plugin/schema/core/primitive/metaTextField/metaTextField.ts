@@ -1,6 +1,6 @@
 import type { JSONSchemaType } from "ajv";
 import type { Schema } from "jsonschema";
-import type { RmmzParamTextFields, X_MetaParam_Shread } from "./types";
+import type { RmmzParamTextFields, X_MetaParam_Shared } from "./types";
 
 export const makeRmmzParamTextSchemaOld = () =>
   ({
@@ -44,4 +44,4 @@ export const metaSchemaSharedParam = () =>
       parent: { type: "string", nullable: true },
     },
     required: ["kind"],
-  } satisfies Schema & JSONSchemaType<X_MetaParam_Shread>);
+  } satisfies Schema & JSONSchemaType<X_MetaParam_Shared>);
