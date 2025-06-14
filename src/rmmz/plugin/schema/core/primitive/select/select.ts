@@ -48,4 +48,7 @@ const makeOptionSchema = <T extends JSONType>(valueType: T) =>
         value: { type: valueType },
       },
     },
-  } as JSONSchemaType<RmmzParamCore_Option<string | number>[]> & Schema);
+  } as Schema &
+    JSONSchemaType<
+      RmmzParamCore_Option<number>[] | RmmzParamCore_Option<number>[]
+    >);
