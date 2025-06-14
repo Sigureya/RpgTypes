@@ -31,5 +31,3 @@ export type Primitive_Strings =
   | FilePathAnnotation
   | ComboAnnotation
   | StringSelect;
-
-export type Primitive_StringsArray = ToArrayAnnotation<Primitive_Strings>;

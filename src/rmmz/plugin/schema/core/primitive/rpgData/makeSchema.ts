@@ -1,7 +1,9 @@
-import type { JSONSchemaType, Schema } from "ajv";
+import type { JSONSchemaType } from "ajv";
+import type { Schema } from "jsonschema";
 import { makeRmmzParamTextSchema } from "../makeTextField";
 import type { DataIndexArg } from "../numbers";
-import type { DataTypeUnion } from "./rpgDataTypes";
+import type { DataTypeUnion } from "./rpgDataTypesNames";
+import type { RmmzParam_DataIndex, RmmzParam_DataIndexArray } from "./types";
 
 export const rmmzDataTypes = () =>
   [
@@ -44,12 +46,13 @@ export const dataIndexSchema = () =>
         enum: rmmzDataTypes(),
       },
     },
-  } satisfies JSONSchemaType<DataIndexArg<DataTypeUnion>>);
+  } satisfies Schema & JSONSchemaType<RmmzParam_DataIndex<DataTypeUnion>>);
 
 export const dataIndexArraySchema = () =>
   ({
     type: "object",
     required: ["type", "default"],
+
     properties: {
       ...makeRmmzParamTextSchema(),
       default: {
@@ -62,7 +65,7 @@ export const dataIndexArraySchema = () =>
         enum: rmmzDataTypeArrays(),
       },
     },
-  } satisfies Schema);
+  } satisfies Schema & JSONSchemaType<RmmzParam_DataIndexArray<DataTypeUnion>>);
 
 export const makeDataIndexValueSchema = <Name extends DataTypeUnion>(
   index: DataIndexArg<Name>

@@ -5,3 +5,4 @@ export * from "./primitive";
 export * from "./primitiveArray";
 export * from "./select";
 export * from "./strings";
+export * from "./types";
