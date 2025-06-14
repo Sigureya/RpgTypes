@@ -1,7 +1,7 @@
 import type { JSONSchemaType } from "ajv";
-import type { RmmzParamTextFields } from "./annotationBase";
+import type { RmmzParamTextFields } from "../annotationBase";
 
-export const makeRmmzParamTextSchema = () =>
+export const makeRmmzParamTextSchemaOld = () =>
   ({
     desc: {
       type: "string",
@@ -22,3 +22,4 @@ export const makeRmmzParamTextSchema = () =>
     keyof RmmzParamTextFields,
     JSONSchemaType<string | undefined>
   >);
+const makeRmmzParamTextSchema = () => {};
