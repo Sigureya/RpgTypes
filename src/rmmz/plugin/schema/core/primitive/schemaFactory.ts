@@ -9,7 +9,7 @@ import {
   x_metaParamNumber,
 } from "./numbers/numbers";
 
-export const makeAjv = () => {
+export const createAjv = () => {
   return new Ajv({
     strict: true,
     keywords: [
@@ -30,6 +30,7 @@ export const rmmzParamToSchemaBoolean = (boolArg: BooleanArg) => {
     [X_RMMZ_PARAM_BOOLEAN]: booleanMetaParam(boolArg),
   } satisfies JSONSchemaType<boolean> & Schema;
 };
+
 export const paramToNumberSchema = (num: RmmzParamCore_Number) => {
   const digit = num.digit ?? 0;
   return {
