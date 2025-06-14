@@ -24,6 +24,8 @@ export default [
       "sort-exports": sortExports,
     },
     rules: {
+      ...tseslint.configs.recommended.rules,
+      "@typescript-eslint/no-empty-object-type": "off",
       "no-undef": "error",
       "no-console": "warn",
       eqeqeq: "error",
