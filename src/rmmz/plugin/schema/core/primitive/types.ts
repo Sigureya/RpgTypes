@@ -5,6 +5,7 @@ import type {
   Class,
   CommonEvent,
   Item,
+  Primitive_Strings,
   Skill,
   State,
   Switch,
@@ -13,8 +14,6 @@ import type {
 } from "./paramTypes";
 import type { ToArrayAnnotation } from "./primitiveArray";
 import type { Select } from "./select";
-import type { Primitive_Strings } from "./strings";
-
 type List = [
   NumberArg,
   Actor,
