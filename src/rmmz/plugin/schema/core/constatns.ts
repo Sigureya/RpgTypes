@@ -7,16 +7,16 @@ import type {
 } from "./primitive";
 import type {
   Actor,
-  Switch,
   Armor,
-  Skill,
-  Item,
-  Weapon,
-  Troop,
   Class,
-  State,
   CommonEvent,
-} from "./primitive/rpgData";
+  Item,
+  Skill,
+  State,
+  Switch,
+  Troop,
+  Weapon,
+} from "./primitive/paramTypes";
 
 export const ANNOTATION_STRING = {
   type: "string",

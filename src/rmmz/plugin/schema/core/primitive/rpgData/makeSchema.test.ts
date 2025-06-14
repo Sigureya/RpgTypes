@@ -1,11 +1,7 @@
 import { describe, test, expect } from "vitest";
 import Ajv from "ajv";
 import { dataIndexSchema, makeDataIndexValueSchema } from "./makeSchema";
-import type {
-  RmmzParamCore_Skill,
-  RmmzParamCore_Weapon,
-  Weapon,
-} from "./types";
+import type { RmmzParamCore_Skill, RmmzParamCore_Weapon } from "./types";
 
 describe("", () => {
   const ajv = new Ajv({ strict: true });
@@ -46,7 +42,7 @@ describe("", () => {
 });
 
 describe("", () => {
-  const mock: Weapon = {
+  const mock: RmmzParamCore_Weapon = {
     type: "weapon",
     default: 15,
   };

@@ -1,17 +1,17 @@
 import type { NumberArg } from "./numbers";
-import type { ToArrayAnnotation } from "./primitiveArray";
 import type {
   Actor,
-  Switch,
   Armor,
-  Skill,
-  Item,
-  Weapon,
-  Troop,
   Class,
-  State,
   CommonEvent,
-} from "./rpgData";
+  Item,
+  Skill,
+  State,
+  Switch,
+  Troop,
+  Weapon,
+} from "./paramTypes";
+import type { ToArrayAnnotation } from "./primitiveArray";
 import type { Select } from "./select";
 import type { Primitive_Strings } from "./strings";
 
