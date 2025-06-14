@@ -1,8 +1,14 @@
+import type { SourceIdUnion_RpgData } from "@RpgTypes/rpg";
 import type { AnnotationBase } from "../annotationBase";
+import type { DataTypeUnion } from "./rpgDataTypesNames";
 
-export interface RmmzParamCore_DataId<Name extends string> {
+export interface RmmzParamCore_DataId<Name extends DataTypeUnion> {
   type: Name;
   default: number;
+}
+
+export interface X_RmmzParamCore_DataId {
+  sourceId: SourceIdUnion_RpgData;
 }
 
 export type RmmzParamCore_Actor = RmmzParamCore_DataId<"actor">;
