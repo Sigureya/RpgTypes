@@ -71,6 +71,7 @@ export const makeDataIndexValueSchema = <Name extends DataTypeUnion>(
     title: index.text,
     default: index.default satisfies number,
     type: "integer",
+    minimum: 0,
     "x-rmmzParam": {
       kind: index.type,
       parent: index.parent,

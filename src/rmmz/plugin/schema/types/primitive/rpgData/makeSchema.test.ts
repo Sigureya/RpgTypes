@@ -55,11 +55,19 @@ describe("", () => {
     type: "weapon",
     default: 15,
   };
+  const schema = makeDataIndexValueSchema(mock);
+  const ajv = new Ajv({ strict: false });
+  const validate = ajv.compile(schema);
   test("", () => {
-    const schema = makeDataIndexValueSchema(mock);
-    const ajv = new Ajv({ strict: false });
-    const variable = ajv.compile(schema);
-    expect(variable(4)).toBe(true);
-    expect(variable(3.14)).toBe(false);
+    expect(validate(4)).toBe(true);
+  });
+  test("", () => {
+    expect(validate(0)).toBe(true);
+  });
+  test("", () => {
+    expect(validate(3.14)).toBe(false);
+  });
+  test("", () => {
+    expect(validate(-1)).toBe(false);
   });
 });
