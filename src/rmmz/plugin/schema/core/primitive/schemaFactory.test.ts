@@ -1,8 +1,9 @@
 import { describe, test, expect } from "vitest";
 import type Ajv from "ajv";
 import type { JSONSchemaType } from "ajv";
+import { createAjv } from "./createAjv";
 import type { RmmzParamCore_Number } from "./numbers";
-import { createAjv, paramToNumberSchema } from "./schemaFactory";
+import { paramToNumberSchema } from "./schemaFactory";
 
 describe("paramToNumberSchema", () => {
   describe("valid cases", () => {
