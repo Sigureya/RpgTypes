@@ -1,7 +1,7 @@
 import { describe, test, expect } from "vitest";
 import Ajv from "ajv";
-import { rmmzParamToSchemaBoolean, makeSchemaBooleanParam } from "./boolean";
-import type { BooleanArg, RmmzParamCore_Boolean } from "./types";
+import { makeSchemaBooleanParam } from "./boolean";
+import type { RmmzParamCore_Boolean } from "./types";
 
 describe("RmmzParam_Boolean JSON Schema Validation", () => {
   const ajv = new Ajv({ strict: true });
@@ -40,24 +40,6 @@ describe("RmmzParam_Boolean JSON Schema Validation", () => {
     test("rejects boolean parameter without required properties", () => {
       const mock: Omit<RmmzParamCore_Boolean, "default"> = { type: "boolean" }; // Missing 'default'
       expect(mock).not.toSatisfy(validate);
-    });
-  });
-
-  describe("rmmzParamToSchemaBoolean function", () => {
-    test("converts BooleanArg to JSON Schema", () => {
-      const boolArg: BooleanArg = {
-        type: "boolean",
-        default: true,
-        text: "Test Boolean",
-        desc: "A test boolean parameter",
-        on: "Yes",
-        off: "No",
-      };
-      const schemaResult = rmmzParamToSchemaBoolean(boolArg);
-      expect(schemaResult).toHaveProperty("type", "boolean");
-      expect(schemaResult).toHaveProperty("default", true);
-      expect(schemaResult["x-rmmzParam"]).toHaveProperty("on", "Yes");
-      expect(schemaResult["x-rmmzParam"]).toHaveProperty("off", "No");
     });
   });
 });

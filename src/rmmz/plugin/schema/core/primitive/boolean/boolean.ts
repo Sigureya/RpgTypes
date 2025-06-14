@@ -6,21 +6,21 @@ import type {
   X_MetaParam_Boolean,
 } from "./types";
 
-export const rmmzParamToSchemaBoolean = (boolArg: BooleanArg) => {
-  return {
-    title: boolArg.text,
-    description: boolArg.desc,
-    default: boolArg.default,
-    type: "boolean",
-    "x-rmmzParam": booleanMetaParam(boolArg),
-  } satisfies JSONSchemaType<boolean> & Schema;
-};
+export const metaSchemaBooleanRmmzParam = () =>
+  ({
+    type: "object",
+    additionalProperties: false,
+    properties: {
+      on: { type: "string", nullable: true },
+      off: { type: "string", nullable: true },
+    },
+  } satisfies Schema & JSONSchemaType<Partial<X_MetaParam_Boolean>>);
 
-export const booleanMetaParam = (bool: BooleanArg): X_MetaParam_Boolean => ({
+export const booleanMetaParam = (
+  bool: BooleanArg
+): Partial<X_MetaParam_Boolean> => ({
   on: bool.on,
   off: bool.off,
-  kind: "boolean",
-  parent: bool.parent,
 });
 
 export const makeSchemaBooleanParam = () =>
