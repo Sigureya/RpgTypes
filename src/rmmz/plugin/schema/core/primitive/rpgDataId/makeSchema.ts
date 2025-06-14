@@ -2,36 +2,19 @@ import type { JSONSchemaType } from "ajv";
 import type { Schema } from "jsonschema";
 import type { DataIndexArg } from "../numbers";
 import type { DataTypeUnion } from "./rpgDataTypesNames";
-import type { RmmzParamCore_DataId } from "./types";
+import { rmmzDataTypes } from "./sourceId";
+import type { RmmzParamCore_DataId, X_RmmzParamCore_DataId } from "./types";
 
-export const rmmzDataTypes = () =>
-  [
-    "actor",
-    "switch",
-    "armor",
-    "skill",
-    "item",
-    "weapon",
-    "troop",
-    "class",
-    "state",
-    "variable",
-    "common_event",
-  ] satisfies DataTypeUnion[];
+const srcSys = (x: DataTypeUnion): x is "variable" | "switch" =>
+  ["variable", "switch"].includes(x);
 
-export const rmmzDataTypeArrays = (): `${DataTypeUnion}[]`[] => [
-  "actor[]",
-  "switch[]",
-  "weapon[]",
-  "item[]",
-  "armor[]",
-  "skill[]",
-  "state[]",
-  "troop[]",
-  "class[]",
-  "variable[]",
-  "common_event[]",
-];
+const xxx = <T extends DataTypeUnion>(
+  data: RmmzParamCore_DataId<T>
+): X_RmmzParamCore_DataId => {
+  return data.type === "variable" || data.type === "switch"
+    ? { sourceId: { author: "rmmz", module: "data", kind: "actor" } }
+    : { sourceId: { author: "rmmz", module: "data", kind: data.type } };
+};
 
 export const dataIndexSchema = () =>
   ({
