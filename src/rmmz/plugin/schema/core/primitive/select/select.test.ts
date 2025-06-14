@@ -4,7 +4,7 @@ import { makeSelectSchema } from "./select";
 import type { RmmzParamCore_Select } from "./types";
 
 describe("RmmzParam_Select JSON Schema Validation", () => {
-  const ajv = new Ajv({ strict: false });
+  const ajv = new Ajv({ strict: true });
   const schema = makeSelectSchema();
   const validate = ajv.compile(schema);
   describe("valid cases", () => {
