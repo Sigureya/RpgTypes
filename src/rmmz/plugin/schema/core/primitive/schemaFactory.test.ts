@@ -1,7 +1,8 @@
 import { describe, test, expect } from "vitest";
 import type Ajv from "ajv";
+import type { JSONSchemaType } from "ajv";
 import type { RmmzParamCore_Number } from "./numbers";
-import { makeAjv, paramToNumberSchema } from "./schemaFactory";
+import { createAjv, paramToNumberSchema } from "./schemaFactory";
 
 describe("paramToNumberSchema", () => {
   describe("valid cases", () => {
@@ -10,8 +11,8 @@ describe("paramToNumberSchema", () => {
       default: 0,
       digit: 2,
     };
-    const schema = paramToNumberSchema(mock);
-    const ajv: Ajv = makeAjv();
+    const schema = paramToNumberSchema(mock) satisfies JSONSchemaType<number>;
+    const ajv: Ajv = createAjv();
     const validate = ajv.compile(schema);
     test("validates integer value", () => {
       expect(4).toSatisfy(validate);
