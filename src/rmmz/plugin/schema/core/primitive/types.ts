@@ -12,7 +12,7 @@ import type {
   Switch,
   Troop,
   Weapon,
-} from "./paramTypes";
+} from "./paramTypesOld";
 import type { ToArrayAnnotation } from "./primitiveArray";
 import type { RmmzParamCore_Select } from "./select/types";
 type List = [

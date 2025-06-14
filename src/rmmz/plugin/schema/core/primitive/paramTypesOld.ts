@@ -1,6 +1,6 @@
 import type { AnnotationBase } from "./annotationBase";
 import type { RmmzParamCore_DataIndex } from "./rpgData";
-import type { RmmzParamCore_Select } from "./select/types";
+import type { RmmzParamCore_Select } from "./select";
 import type {
   RmmzParamCore_String,
   RmmzParamCore_FilePath,
