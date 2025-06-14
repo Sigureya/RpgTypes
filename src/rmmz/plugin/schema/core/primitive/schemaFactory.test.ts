@@ -1,0 +1,26 @@
+import { describe, test, expect } from "vitest";
+import type Ajv from "ajv";
+import type { RmmzParamCore_Number } from "./numbers";
+import { makeAjv, paramToNumberSchema } from "./schemaFactory";
+
+describe("paramToNumberSchema", () => {
+  describe("valid cases", () => {
+    const mock: RmmzParamCore_Number = {
+      type: "number",
+      default: 0,
+      digit: 2,
+    };
+    const schema = paramToNumberSchema(mock);
+    const ajv: Ajv = makeAjv();
+    const validate = ajv.compile(schema);
+    test("validates integer value", () => {
+      expect(4).toSatisfy(validate);
+    });
+    test("validates float value with digit", () => {
+      expect(3.14).toSatisfy(validate);
+    });
+    test("validates float value with digit", () => {
+      expect(0.123).toSatisfy(validate);
+    });
+  });
+});
