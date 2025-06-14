@@ -1,11 +1,17 @@
 import { describe, test, expect } from "vitest";
 import Ajv from "ajv";
 import type { DataIndexArg } from "../numbers";
-import { dataXXX, indexIndex, indexIndex2, dataArrayXXX } from "./makeSchema";
+import {
+  rmmzDataTypes,
+  dataIndexSchema,
+  dataIndexArraySchema,
+  rmmzDataTypeArrays,
+  makeDataIndexValueSchema,
+} from "./makeSchema";
 
 describe("", () => {
   const ajv = new Ajv({ strict: true });
-  const schema = indexIndex();
+  const schema = dataIndexSchema();
   const variable = ajv.compile(schema);
   describe("normal case", () => {
     test("", () => {
@@ -41,5 +47,19 @@ describe("", () => {
       };
       expect(mock).not.toSatisfy(variable);
     });
+  });
+});
+
+describe("", () => {
+  const mock: DataIndexArg<"weapon"> = {
+    type: "weapon",
+    default: 15,
+  };
+  test("", () => {
+    const schema = makeDataIndexValueSchema(mock);
+    const ajv = new Ajv({ strict: false });
+    const variable = ajv.compile(schema);
+    expect(variable(4)).toBe(true);
+    expect(variable(3.14)).toBe(false);
   });
 });

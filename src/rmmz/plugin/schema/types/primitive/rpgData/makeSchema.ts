@@ -1,9 +1,9 @@
 import type { JSONSchemaType, Schema } from "ajv";
-import { makeXXXSchema } from "../makeXXX";
+import { makeRmmzParamTextSchema } from "../makeTextField";
 import type { DataIndexArg } from "../numbers";
 import type { DataTypeUnion } from "../rpgDataTypes";
 
-export const dataXXX = () =>
+export const rmmzDataTypes = () =>
   [
     "actor",
     "switch",
@@ -14,11 +14,13 @@ export const dataXXX = () =>
     "troop",
     "class",
     "state",
+    "variable",
     "common_event",
   ] satisfies DataTypeUnion[];
 
-export const dataArrayXXX = (): `${DataTypeUnion}[]`[] => [
+export const rmmzDataTypeArrays = (): `${DataTypeUnion}[]`[] => [
   "actor[]",
+  "switch[]",
   "weapon[]",
   "item[]",
   "armor[]",
@@ -26,29 +28,30 @@ export const dataArrayXXX = (): `${DataTypeUnion}[]`[] => [
   "state[]",
   "troop[]",
   "class[]",
+  "variable[]",
   "common_event[]",
 ];
 
-export const indexIndex = () =>
+export const dataIndexSchema = () =>
   ({
     type: "object",
     required: ["type", "default"],
     properties: {
-      ...makeXXXSchema(),
+      ...makeRmmzParamTextSchema(),
       default: { type: "integer", default: 0, minimum: 0 },
       type: {
         type: "string",
-        enum: dataXXX(),
+        enum: rmmzDataTypes(),
       },
     },
   } satisfies JSONSchemaType<DataIndexArg<DataTypeUnion>>);
 
-export const indexIndex2 = () =>
+export const dataIndexArraySchema = () =>
   ({
     type: "object",
     required: ["type", "default"],
     properties: {
-      ...makeXXXSchema(),
+      ...makeRmmzParamTextSchema(),
       default: {
         type: "array",
         default: [] as number[],
@@ -56,7 +59,21 @@ export const indexIndex2 = () =>
       },
       type: {
         type: "string",
-        enum: dataArrayXXX(),
+        enum: rmmzDataTypeArrays(),
       },
     },
   } satisfies Schema);
+
+export const makeDataIndexValueSchema = <Name extends DataTypeUnion>(
+  index: DataIndexArg<Name>
+) => {
+  return {
+    title: index.text,
+    default: index.default satisfies number,
+    type: "integer",
+    "x-rmmzParam": {
+      kind: index.type,
+      parent: index.parent,
+    },
+  } satisfies JSONSchemaType<number> & Schema;
+};
