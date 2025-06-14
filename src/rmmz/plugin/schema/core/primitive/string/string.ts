@@ -1,10 +1,14 @@
 import type { JSONSchemaType } from "ajv";
 import type { Schema } from "jsonschema";
 import type {
+  ParamKinds_String,
   RmmzParamCore_Combo,
   RmmzParamCore_FilePath,
   RmmzParamCore_String,
 } from "./types";
+
+export const paramKindsString = () =>
+  ["string", "multiline_string", "combo", "file"] satisfies ParamKinds_String[];
 
 export const rmmzSchemaStringParam = () =>
   ({
