@@ -14,3 +14,9 @@ export interface RmmzParamCore_FilePath {
   default: string;
   dir: string;
 }
+
+export type ParamKinds_String =
+  | "string"
+  | "multiline_string"
+  | "combo"
+  | "file";
