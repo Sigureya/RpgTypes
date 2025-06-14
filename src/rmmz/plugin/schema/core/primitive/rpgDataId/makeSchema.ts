@@ -2,7 +2,7 @@ import type { JSONSchemaType } from "ajv";
 import type { Schema } from "jsonschema";
 import type { DataIndexArg } from "../numbers";
 import type { DataTypeUnion } from "./rpgDataTypesNames";
-import type { RmmzParamCore_DataIndex } from "./types";
+import type { RmmzParamCore_DataId } from "./types";
 
 export const rmmzDataTypes = () =>
   [
@@ -44,7 +44,7 @@ export const dataIndexSchema = () =>
         enum: rmmzDataTypes(),
       },
     },
-  } satisfies Schema & JSONSchemaType<RmmzParamCore_DataIndex<DataTypeUnion>>);
+  } satisfies Schema & JSONSchemaType<RmmzParamCore_DataId<DataTypeUnion>>);
 
 export const makeDataIndexValueSchema = <Name extends DataTypeUnion>(
   index: DataIndexArg<Name>
