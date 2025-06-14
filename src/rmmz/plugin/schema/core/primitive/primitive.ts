@@ -1,5 +1,5 @@
 import type { BooleanArg } from "./boolean";
-import type { Primitive_Strings } from "./paramTypes";
+import type { Primitive_Strings } from "./paramTypesOld";
 import type {
   Primitive_Numbers,
   Primitive_NumbersArray,

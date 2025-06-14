@@ -16,7 +16,7 @@ import type {
   Switch,
   Troop,
   Weapon,
-} from "./primitive/paramTypes";
+} from "./primitive";
 
 export const ANNOTATION_STRING = {
   type: "string",
