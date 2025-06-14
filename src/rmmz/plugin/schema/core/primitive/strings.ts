@@ -1,5 +1,4 @@
 import type { AnnotationBase } from "./annotationBase";
-import type { ToArrayAnnotation } from "./primitiveArray";
 import type { Select } from "./select";
 
 export interface StringArg extends AnnotationBase {

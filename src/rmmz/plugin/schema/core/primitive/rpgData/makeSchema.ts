@@ -1,6 +1,6 @@
 import type { JSONSchemaType } from "ajv";
 import type { Schema } from "jsonschema";
-import { makeRmmzParamTextSchema } from "../makeTextField";
+import { makeRmmzParamTextSchemaOld } from "../metaTextField/metaTextField";
 import type { DataIndexArg } from "../numbers";
 import type { DataTypeUnion } from "./rpgDataTypesNames";
 import type { RmmzParam_DataIndex, RmmzParam_DataIndexArray } from "./types";
@@ -39,7 +39,7 @@ export const dataIndexSchema = () =>
     type: "object",
     required: ["type", "default"],
     properties: {
-      ...makeRmmzParamTextSchema(),
+      ...makeRmmzParamTextSchemaOld(),
       default: { type: "integer", default: 0, minimum: 0 },
       type: {
         type: "string",
@@ -54,7 +54,7 @@ export const dataIndexArraySchema = () =>
     required: ["type", "default"],
 
     properties: {
-      ...makeRmmzParamTextSchema(),
+      ...makeRmmzParamTextSchemaOld(),
       default: {
         type: "array",
         default: [] as number[],
