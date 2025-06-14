@@ -28,6 +28,6 @@ export const rmmzSchemaNumberParam = (): JSONSchemaType<NumberArg> => ({
     min: { type: "number", default: Number.MIN_SAFE_INTEGER, nullable: true },
     max: { type: "number", default: Number.MAX_SAFE_INTEGER, nullable: true },
     default: { type: "number", default: 0 },
-    type: { type: "string", enum: ["number"] },
+    type: { type: "string", const: "number" },
   },
 });
