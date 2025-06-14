@@ -12,10 +12,8 @@ export interface MetaParam_Boolean {
 }
 
 export interface X_MetaParam_Boolean {
-  on?: string;
-  off?: string;
-  kind: "boolean";
-  parent?: string;
+  on: string;
+  off: string;
 }
 
 export interface RmmzParamCore_Boolean {

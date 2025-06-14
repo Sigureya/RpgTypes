@@ -1,6 +1,10 @@
 import { describe, test, expect } from "vitest";
 import Ajv from "ajv";
-import { paramToNumberSchema, rmmzSchemaNumberParam } from "./numbers";
+import {
+  metaSchemaNumberRmmzParam,
+  paramToNumberSchema,
+  rmmzSchemaNumberParam,
+} from "./numbers";
 import type { RmmzParamCore_Number } from "./types";
 describe("", () => {
   const ajv = new Ajv({ strict: true });
@@ -45,7 +49,16 @@ describe("paramToNumberSchema", () => {
       digit: 2,
     };
     const schema = paramToNumberSchema(mock);
-    const ajv = new Ajv({ strict: false });
+    const ajv = new Ajv({
+      strict: true,
+      // Add custom keyword for RMMZ parameters
+      keywords: [
+        {
+          keyword: "x-rmmzParam",
+          metaSchema: metaSchemaNumberRmmzParam(),
+        },
+      ],
+    });
     const validate = ajv.compile(schema);
     test("validates integer value", () => {
       expect(4).toSatisfy(validate);

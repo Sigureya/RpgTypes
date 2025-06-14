@@ -8,3 +8,7 @@ export interface RmmzParamCore_Select<T extends number | string> {
   default: T;
   options: RmmzParamCore_Option<T>[];
 }
+
+export interface X_MetaParam_Select<T extends number | string> {
+  options: RmmzParamCore_Option<T>[];
+}
