@@ -3,7 +3,10 @@ import type { Schema } from "jsonschema";
 import { makeRmmzParamTextSchemaOld } from "../metaTextField/metaTextField";
 import type { DataIndexArg } from "../numbers";
 import type { DataTypeUnion } from "./rpgDataTypesNames";
-import type { RmmzParam_DataIndex, RmmzParam_DataIndexArray } from "./types";
+import type {
+  RmmzParam_DataIndexArray,
+  RmmzParamCore_DataIndex,
+} from "./types";
 
 export const rmmzDataTypes = () =>
   [
@@ -39,14 +42,13 @@ export const dataIndexSchema = () =>
     type: "object",
     required: ["type", "default"],
     properties: {
-      ...makeRmmzParamTextSchemaOld(),
       default: { type: "integer", default: 0, minimum: 0 },
       type: {
         type: "string",
         enum: rmmzDataTypes(),
       },
     },
-  } satisfies Schema & JSONSchemaType<RmmzParam_DataIndex<DataTypeUnion>>);
+  } satisfies Schema & JSONSchemaType<RmmzParamCore_DataIndex<DataTypeUnion>>);
 
 export const dataIndexArraySchema = () =>
   ({
@@ -69,8 +71,8 @@ export const dataIndexArraySchema = () =>
 
 export const makeDataIndexValueSchema = <Name extends DataTypeUnion>(
   index: DataIndexArg<Name>
-) => {
-  return {
+) =>
+  ({
     title: index.text,
     default: index.default satisfies number,
     type: "integer",
@@ -79,5 +81,4 @@ export const makeDataIndexValueSchema = <Name extends DataTypeUnion>(
       kind: index.type,
       parent: index.parent,
     },
-  } satisfies JSONSchemaType<number> & Schema;
-};
+  } satisfies JSONSchemaType<number> & Schema);
