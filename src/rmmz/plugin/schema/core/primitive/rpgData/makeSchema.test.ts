@@ -1,7 +1,7 @@
 import { describe, test, expect } from "vitest";
 import Ajv from "ajv";
 import { dataIndexSchema, makeDataIndexValueSchema } from "./makeSchema";
-import type { Actor, Weapon } from "./types";
+import type { RmmzParamCore_Skill, RmmzParamCore_Weapon } from "./types";
 
 describe("", () => {
   const ajv = new Ajv({ strict: true });
@@ -9,17 +9,14 @@ describe("", () => {
   const variable = ajv.compile(schema);
   describe("normal case", () => {
     test("", () => {
-      const mock: Actor = {
-        type: "actor",
+      const mock: RmmzParamCore_Skill = {
+        type: "skill",
         default: 3,
-        desc: "desc",
-        text: "text",
-        parent: "parent",
       };
       expect(mock).toSatisfy(variable);
     });
     test("", () => {
-      const mock: Weapon = {
+      const mock: RmmzParamCore_Weapon = {
         type: "weapon",
         default: 15,
       };
@@ -28,14 +25,14 @@ describe("", () => {
   });
   describe("error case", () => {
     test("", () => {
-      const mock: Weapon = {
+      const mock: RmmzParamCore_Weapon = {
         type: "weapon",
         default: -1,
       };
       expect(mock).not.toSatisfy(variable);
     });
     test("", () => {
-      const mock: Weapon = {
+      const mock: RmmzParamCore_Weapon = {
         type: "weapon",
         default: 3.14,
       };
@@ -45,7 +42,7 @@ describe("", () => {
 });
 
 describe("", () => {
-  const mock: Weapon = {
+  const mock: RmmzParamCore_Weapon = {
     type: "weapon",
     default: 15,
   };
