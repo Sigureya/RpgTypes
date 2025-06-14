@@ -46,7 +46,6 @@ const testCases: TestCase[] = [
     arg: "weapon",
     expected: { author: "rmmz", module: "data", kind: "weapon" },
   },
-
   {
     arg: "armor",
     expected: { author: "rmmz", module: "data", kind: "armor" },
