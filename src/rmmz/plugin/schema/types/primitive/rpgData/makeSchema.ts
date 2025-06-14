@@ -1,7 +1,7 @@
 import type { JSONSchemaType, Schema } from "ajv";
 import { makeRmmzParamTextSchema } from "../makeTextField";
 import type { DataIndexArg } from "../numbers";
-import type { DataTypeUnion } from "../rpgDataTypes";
+import type { DataTypeUnion } from "./rpgDataTypes";
 
 export const rmmzDataTypes = () =>
   [
