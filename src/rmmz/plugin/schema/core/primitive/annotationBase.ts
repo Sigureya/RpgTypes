@@ -1,9 +1,3 @@
-export interface RmmzParamTextFields {
-  desc?: string;
-  text?: string;
-  parent?: string;
-}
-
 export interface AnnotationBaseTexts {
   type: string;
   desc?: string;
