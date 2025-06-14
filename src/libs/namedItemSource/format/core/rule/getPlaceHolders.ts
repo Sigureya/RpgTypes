@@ -11,17 +11,11 @@ const getDataKeys2 = <T>(rule: FormatRule<T>): Set<string & keyof T> => {
 };
 
 export const getPlaceHolderKeys = <T>(rule: FormatRule<T>): Set<string> => {
-  const set = new Set<string>(rule.placeHolder?.numbers ?? []);
-  if (rule.itemMapper) {
-    set.add(rule.itemMapper.placeHolder);
-  }
-  if (rule.itemMappers) {
-    rule.itemMappers.forEach((mapper) => {
-      set.add(mapper.placeHolder);
-    });
-  }
-
-  return set;
+  return new Set<string>([
+    ...(rule.placeHolder?.numbers ?? []),
+    ...(rule.itemMapper ? [rule.itemMapper.placeHolder] : []),
+    ...(rule.itemMappers?.map((mapper) => mapper.placeHolder) ?? []),
+  ]);
 };
 
 export const getDataKeysFromFormatRule = <T>(
