@@ -16,8 +16,8 @@ export const paramToNumberSchema = (num: RmmzParamCore_Number) => {
   } satisfies JSONSchemaType<number> & Schema;
 };
 
-export const rmmzSchemaNumberParam =
-  (): JSONSchemaType<RmmzParamCore_Number> => ({
+export const rmmzSchemaNumberParam = () =>
+  ({
     type: "object",
     required: ["type", "default"],
     properties: {
@@ -27,4 +27,4 @@ export const rmmzSchemaNumberParam =
       default: { type: "number", default: 0 },
       type: { type: "string", const: "number" },
     },
-  });
+  } satisfies Schema & JSONSchemaType<RmmzParamCore_Number>);
