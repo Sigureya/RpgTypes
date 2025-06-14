@@ -17,7 +17,7 @@ export const rmmzDataTypes = () =>
 
 export const rmmzDataTypeArrays = (): `${DataTypeUnion}[]`[] => [
   "actor[]",
-  "switch[]",
+  // "switch[]",
   "weapon[]",
   "item[]",
   "armor[]",
@@ -25,6 +25,6 @@ export const rmmzDataTypeArrays = (): `${DataTypeUnion}[]`[] => [
   "state[]",
   "troop[]",
   "class[]",
-  "variable[]",
+  //  "variable[]",
   "common_event[]",
 ];
