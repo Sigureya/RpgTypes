@@ -1,20 +1,22 @@
 import type {
-  Actor,
-  Armor,
   ComboAnnotation,
   MultilineString,
   StringArg,
-  Class,
-  CommonEvent,
-  Item,
   NumberArg,
   NumberSelect,
-  Skill,
-  State,
-  Switch,
-  Troop,
-  Weapon,
 } from "./primitive";
+import type {
+  Actor,
+  Switch,
+  Armor,
+  Skill,
+  Item,
+  Weapon,
+  Troop,
+  Class,
+  State,
+  CommonEvent,
+} from "./primitive/rpgData";
 
 export const ANNOTATION_STRING = {
   type: "string",

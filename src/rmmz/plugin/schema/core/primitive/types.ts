@@ -1,5 +1,6 @@
+import type { NumberArg } from "./numbers";
+import type { ToArrayAnnotation } from "./primitiveArray";
 import type {
-  NumberArg,
   Actor,
   Switch,
   Armor,
@@ -10,9 +11,8 @@ import type {
   Class,
   State,
   CommonEvent,
-  NumberSelect,
-} from "./numbers";
-import type { ToArrayAnnotation } from "./primitiveArray";
+} from "./rpgData";
+import type { Select } from "./select";
 import type { Primitive_Strings } from "./strings";
 
 type List = [
@@ -30,6 +30,7 @@ type List = [
   NumberSelect
 ];
 
+export type NumberSelect = Select<number>;
 export type Primitive_Numbers = List[number];
 export type Primitive_NumbersArray = ToArrayAnnotation<Primitive_Numbers>;
 export type Primitive_StringsArray = ToArrayAnnotation<Primitive_Strings>;
