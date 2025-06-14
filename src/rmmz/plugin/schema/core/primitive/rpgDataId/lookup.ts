@@ -37,7 +37,11 @@ export const lookupKind = (
   if (index === undefined) {
     return undefined;
   }
-  const kindTable = [kind, "variables", "switches"] as const;
+  const kindTable = [kind, "variables", "switches"] as const satisfies [
+    string,
+    SourceId_SystemVariables["kind"],
+    SourceId_SystemSwitches["kind"]
+  ];
   return {
     author: "rmmz",
     module: MODULE_TABLE[index],
