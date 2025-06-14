@@ -49,12 +49,16 @@ describe("paramToNumberSchema", () => {
       digit: 2,
     };
     const schema = paramToNumberSchema(mock);
-    const ajv = new Ajv({ strict: true });
-    ajv.addKeyword({
-      keyword: "x-rmmzParam",
-      metaSchema: metaSchemaNumberRmmzParam(),
-    }); // Add custom keyword for RMMZ parameters
-
+    const ajv = new Ajv({
+      strict: true,
+      // Add custom keyword for RMMZ parameters
+      keywords: [
+        {
+          keyword: "x-rmmzParam",
+          metaSchema: metaSchemaNumberRmmzParam(),
+        },
+      ],
+    });
     const validate = ajv.compile(schema);
     test("validates integer value", () => {
       expect(4).toSatisfy(validate);
