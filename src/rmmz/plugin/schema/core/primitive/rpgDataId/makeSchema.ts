@@ -1,14 +1,14 @@
 import type { JSONSchemaType } from "ajv";
 import type { Schema } from "jsonschema";
 import type { DataIndexArg } from "../numbers";
-import type { DataTypeUnion } from "./rpgDataTypesNames";
+import type { DataKindUnion } from "./rpgDataTypesNames";
 import { rmmzDataTypes } from "./sourceId";
 import type { RmmzParamCore_DataId, X_RmmzParamCore_DataId } from "./types";
 
-const srcSys = (x: DataTypeUnion): x is "variable" | "switch" =>
+const srcSys = (x: DataKindUnion): x is "variable" | "switch" =>
   ["variable", "switch"].includes(x);
 
-const xxx = <T extends DataTypeUnion>(
+const xxx = <T extends DataKindUnion>(
   data: RmmzParamCore_DataId<T>
 ): X_RmmzParamCore_DataId => {
   return data.type === "variable" || data.type === "switch"
@@ -27,9 +27,9 @@ export const dataIndexSchema = () =>
         enum: rmmzDataTypes(),
       },
     },
-  } satisfies Schema & JSONSchemaType<RmmzParamCore_DataId<DataTypeUnion>>);
+  } satisfies Schema & JSONSchemaType<RmmzParamCore_DataId<DataKindUnion>>);
 
-export const makeDataIndexValueSchema = <Name extends DataTypeUnion>(
+export const makeDataIndexValueSchema = <Name extends DataKindUnion>(
   index: DataIndexArg<Name>
 ) =>
   ({
