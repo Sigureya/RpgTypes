@@ -11,7 +11,7 @@ export interface RmmzParamCore_DataId<Name extends DataKindUnion> {
   default: number;
 }
 
-export interface X_RmmzParamCore_DataId {
+export interface X_MetaParam_DataId {
   sourceId?:
     | SourceIdUnion_RpgData
     | SourceId_SystemSwitches
