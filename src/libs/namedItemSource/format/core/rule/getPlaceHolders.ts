@@ -7,15 +7,16 @@ export const getDataKeysFromFormatRule = <T>(
     ...(rule.placeHolder?.numbers ?? []),
     ...(rule.placeHolder?.strings ?? []),
     ...(rule.arrayIndex?.map((a) => a.dataIdKey) ?? []),
-    ...(rule.itemMappers?.map((m) => m.kindKey) ?? []),
-    ...(rule.itemMapper ? [rule.itemMapper.kindKey] : []),
   ]);
 };
+
 export const getPlaceHolderKeys = <T>(rule: FormatRule<T>): Set<string> => {
   return new Set<string>([
     ...(rule.placeHolder?.numbers ?? []),
     ...(rule.itemMapper ? [rule.itemMapper.placeHolder] : []),
     ...(rule.itemMappers?.map((mapper) => mapper.placeHolder) ?? []),
+    ...(rule.placeHolder?.strings ?? []),
+    ...(rule.arrayIndex?.map((a) => a.dataIdKey) ?? []),
   ]);
 };
 
