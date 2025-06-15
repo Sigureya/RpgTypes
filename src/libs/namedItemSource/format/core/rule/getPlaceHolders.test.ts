@@ -1,12 +1,19 @@
 import { describe, test, expect } from "vitest";
 import type { FormatRule } from "./core";
-import { getPlaceHolderKeys } from "./getPlaceHolders";
+import { getDataKeysFromFormatRule, getPlaceHolderKeys } from "./getPlaceHolders";
 
 interface ItemEffect {
   value1: number;
   value2: number;
   dataId: number;
   code: number;
+}
+
+interface LearningSkill {
+  actor: number;
+
+  skill: number;
+  conditionLevel: number;
 }
 
 interface TestCase<T> {
@@ -20,9 +27,13 @@ interface TestCase<T> {
 
 const testGetPlaceHolderKeys = <T>({ caseName, expected, rule }: TestCase<T>) => {
   describe(caseName, () => {
-    const keys = getPlaceHolderKeys(rule);
     test("should return correct keys", () => {
+      const keys: ReadonlySet<string> = getPlaceHolderKeys(rule);
       expect(keys).toEqual(new Set([...expected.keys, ...expected.placeHolders]));
+    });
+    test("", () => {
+      const orderedKeys: ReadonlySet<string & keyof T> = getDataKeysFromFormatRule(rule);
+      expect(orderedKeys).toEqual(new Set(expected.keys));
     });
   });
 };
@@ -42,13 +53,13 @@ describe("getPlaceHolderKeys", () => {
       rule: {},
       expected: { keys: [], placeHolders: [] },
     },
-    // {
-    //   caseName: "arrayIndex",
-    //   rule: {
-    //     arrayIndex: [{ dataIdKey: "dataId", sourceId: { author: "rmmz", kind: "data", module: "state" } }],
-    //   },
-    //   expected: { keys: ["dataId"], placeHolders: [] },
-    // },
+    {
+      caseName: "arrayIndex",
+      rule: {
+        arrayIndex: [{ dataIdKey: "dataId", sourceId: { author: "rmmz", kind: "data", module: "state" } }],
+      },
+      expected: { keys: ["dataId"], placeHolders: [] },
+    },
     {
       caseName: "numbers",
       rule: {
@@ -100,6 +111,38 @@ describe("getPlaceHolderKeys", () => {
       expected: {
         keys: ["value1", "value2"],
         placeHolders: ["name1", "name2"],
+      },
+    },
+  ]);
+  runTest<LearningSkill>("複数の配列を同時に参照する場合", [
+    {
+      caseName: "with arrayIndex and itemMapper",
+      rule: {
+        placeHolder: {
+          numbers: ["conditionLevel"],
+        },
+        arrayIndex: [
+          { dataIdKey: "actor", sourceId: { author: "rmmz", kind: "data", module: "actorList" } },
+          { dataIdKey: "skill", sourceId: { author: "rmmz", kind: "data", module: "skillList" } },
+        ],
+      },
+      expected: {
+        keys: ["actor", "skill", "conditionLevel"],
+        placeHolders: [],
+      },
+    },
+    {
+      caseName: "with arrayIndex and itemMapper",
+      rule: {
+        placeHolder: { numbers: [] },
+        arrayIndex: [
+          { dataIdKey: "actor", sourceId: { author: "rmmz", kind: "data", module: "actorList" } },
+          { dataIdKey: "skill", sourceId: { author: "rmmz", kind: "data", module: "skillList" } },
+        ],
+      },
+      expected: {
+        keys: ["actor", "skill"],
+        placeHolders: [],
       },
     },
   ]);
