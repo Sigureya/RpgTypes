@@ -1,6 +1,5 @@
 import type { JSONSchemaType, SchemaObject } from "ajv";
 import type { Schema } from "jsonschema";
-import { K } from "vitest/dist/chunks/reporters.d.79o4mouw.js";
 import {
   metaSchemaBooleanRmmzParamCore,
   type X_MetaParamCore_Boolean,
