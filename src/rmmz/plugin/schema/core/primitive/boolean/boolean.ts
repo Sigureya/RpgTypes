@@ -1,10 +1,6 @@
 import type { JSONSchemaType } from "ajv";
 import type { Schema } from "jsonschema";
-import type {
-  BooleanArg,
-  RmmzParamCore_Boolean,
-  X_MetaParam_Boolean,
-} from "./types";
+import type { RmmzParamCore_Boolean, X_MetaParam_Boolean } from "./types";
 
 export const metaSchemaBooleanRmmzParam = () =>
   ({
@@ -17,11 +13,12 @@ export const metaSchemaBooleanRmmzParam = () =>
   } satisfies Schema & JSONSchemaType<Partial<X_MetaParam_Boolean>>);
 
 export const booleanMetaParam = (
-  bool: BooleanArg
-): Partial<X_MetaParam_Boolean> => ({
-  on: bool.on,
-  off: bool.off,
-});
+  bool: RmmzParamCore_Boolean
+): Partial<X_MetaParam_Boolean> =>
+  ({
+    on: bool.on,
+    off: bool.off,
+  } satisfies Record<keyof X_MetaParam_Boolean, string | undefined>);
 
 export const makeSchemaBooleanParam = () =>
   ({
