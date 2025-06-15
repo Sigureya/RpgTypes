@@ -3,6 +3,38 @@ import tsParser from "@typescript-eslint/parser";
 import fn from "eslint-plugin-functional";
 import importPlugin from "eslint-plugin-import";
 import sortExports from "eslint-plugin-sort-exports";
+// import禁止のグループ。長いので定数としておくことで分離した
+const noimportGroups = [
+  "node:*",
+  "fs",
+  "path",
+  "os",
+  "child_process",
+  "cluster",
+  "crypto",
+  "dgram",
+  "dns",
+  "domain",
+  "events",
+  "http",
+  "https",
+  "net",
+  "perf_hooks",
+  "process",
+  "querystring",
+  "readline",
+  "repl",
+  "stream",
+  "string_decoder",
+  "timers",
+  "tls",
+  "tty",
+  "url",
+  "util",
+  "v8",
+  "vm",
+  "zlib",
+];
 
 export default [
   {
@@ -40,63 +72,15 @@ export default [
       "@typescript-eslint/explicit-function-return-type": "off",
       "@typescript-eslint/no-unused-vars": "warn",
       "@typescript-eslint/no-explicit-any": "warn",
-      "@typescript-eslint/consistent-type-imports": [
-        "warn",
-        {
-          prefer: "type-imports",
-        },
-      ],
       "@typescript-eslint/restrict-plus-operands": "error",
       "spaced-comment": "error",
 
       // importルール
       "import/no-cycle": "error",
-      "no-restricted-imports": [
-        "error",
+      "@typescript-eslint/consistent-type-imports": [
+        "warn",
         {
-          patterns: [
-            // vitest関連のimportを.test.ts以外で禁止
-            {
-              group: ["vitest", "vitest/*", "vitest/dist*", "vitest/**"],
-              message: "テスト以外でvitestのimportは禁止です",
-            },
-            // node.js関連のimportを禁止
-            {
-              group: [
-                "node:*",
-                "fs",
-                "path",
-                "os",
-                "child_process",
-                "cluster",
-                "crypto",
-                "dgram",
-                "dns",
-                "domain",
-                "events",
-                "http",
-                "https",
-                "net",
-                "perf_hooks",
-                "process",
-                "querystring",
-                "readline",
-                "repl",
-                "stream",
-                "string_decoder",
-                "timers",
-                "tls",
-                "tty",
-                "url",
-                "util",
-                "v8",
-                "vm",
-                "zlib",
-              ],
-              message:
-                "Node.js組み込みモジュールのimportは禁止です（型importはOK）",
-            },
-          ],
+          prefer: "type-imports",
         },
       ],
       "import/order": [
@@ -121,6 +105,24 @@ export default [
             },
           ],
           pathGroupsExcludedImportTypes: ["vitest"],
+        },
+      ],
+      "no-restricted-imports": [
+        "error",
+        {
+          patterns: [
+            // vitest関連のimportを.test.ts以外で禁止
+            {
+              group: ["vitest", "vitest/*", "vitest/dist*", "vitest/**"],
+              message: "テスト以外でvitestのimportは禁止です",
+            },
+            // node.js関連のimportを禁止
+            {
+              group: noimportGroups,
+              message:
+                "Node.js組み込みモジュールのimportは禁止です（型importはOK）",
+            },
+          ],
         },
       ],
     },
