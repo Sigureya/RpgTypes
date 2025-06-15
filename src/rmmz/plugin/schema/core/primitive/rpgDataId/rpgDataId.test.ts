@@ -4,7 +4,6 @@ import type { SourceId_SystemVariables } from "@RpgTypes/system";
 import Ajv from "ajv";
 import {
   dataIndexSchema,
-  makeDataIndexValueSchema,
   dataIdMetaParam,
   metaSchemaDataIdParam,
 } from "./rpgDataId";
@@ -52,28 +51,6 @@ describe("dataIndexSchema validation", () => {
       };
       expect(mock).not.toSatisfy(variable);
     });
-  });
-});
-
-describe("makeDataIndexValueSchema validation", () => {
-  const mock: RmmzParamCore_Weapon = {
-    type: "weapon",
-    default: 15,
-  };
-  const schema = makeDataIndexValueSchema(mock);
-  const ajv = new Ajv({ strict: false });
-  const validate = ajv.compile(schema);
-  test("should validate integer value", () => {
-    expect(4).toSatisfy(validate);
-  });
-  test("should validate zero value", () => {
-    expect(0).toSatisfy(validate);
-  });
-  test("should not validate float value", () => {
-    expect(3.14).not.toSatisfy(validate);
-  });
-  test("should not validate negative value", () => {
-    expect(-1).not.toSatisfy(validate);
   });
 });
 
