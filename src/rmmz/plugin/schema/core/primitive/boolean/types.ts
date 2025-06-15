@@ -4,8 +4,8 @@ export interface MetaParam_Boolean {
 }
 
 export interface X_MetaParamCore_Boolean {
-  on: string;
-  off: string;
+  on?: string;
+  off?: string;
 }
 
 export interface RmmzParamCore_Boolean {
