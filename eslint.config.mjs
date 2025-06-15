@@ -51,6 +51,54 @@ export default [
 
       // importルール
       "import/no-cycle": "error",
+      "no-restricted-imports": [
+        "error",
+        {
+          patterns: [
+            // vitest関連のimportを.test.ts以外で禁止
+            {
+              group: ["vitest", "vitest/*", "vitest/dist*", "vitest/**"],
+              message: "テスト以外でvitestのimportは禁止です",
+            },
+            // node.js関連のimportを禁止
+            {
+              group: [
+                "node:*",
+                "fs",
+                "path",
+                "os",
+                "child_process",
+                "cluster",
+                "crypto",
+                "dgram",
+                "dns",
+                "domain",
+                "events",
+                "http",
+                "https",
+                "net",
+                "perf_hooks",
+                "process",
+                "querystring",
+                "readline",
+                "repl",
+                "stream",
+                "string_decoder",
+                "timers",
+                "tls",
+                "tty",
+                "url",
+                "util",
+                "v8",
+                "vm",
+                "zlib",
+              ],
+              message:
+                "Node.js組み込みモジュールのimportは禁止です（型importはOK）",
+            },
+          ],
+        },
+      ],
       "import/order": [
         "error",
         {
@@ -84,6 +132,7 @@ export default [
       // テストファイルに特有のルール
       "@typescript-eslint/no-explicit-any": "off", // テストではanyを許可
       "@functional/no-return-void": "off",
+      "no-restricted-imports": "off",
     },
   },
   {
