@@ -1,13 +1,21 @@
 import { describe, test, expect } from "vitest";
 import type { SourceId_DataSkill, SourceId_DataWeapon } from "@RpgTypes/rpg";
-import { SourceId_Data } from "@RpgTypes/rpg";
+import type { SourceId_SystemVariables } from "@RpgTypes/system";
 import Ajv from "ajv";
 import {
   dataIndexSchema,
   makeDataIndexValueSchema,
   dataIdMetaParam,
+  metaSchemaDataIdParam,
 } from "./rpgDataId";
-import type { RmmzParamCore_Skill, RmmzParamCore_Weapon } from "./types";
+import type { DataKindUnion } from "./rpgDataTypesNames";
+import type {
+  RmmzParamCore_Skill,
+  RmmzParamCore_Weapon,
+  RmmzParamCore_Variable,
+  RmmzParamCore_DataId,
+  X_MetaParam_DataId,
+} from "./types";
 
 describe("", () => {
   const ajv = new Ajv({ strict: true });
@@ -69,30 +77,83 @@ describe("", () => {
   });
 });
 
-describe("dataIdMetaParam", () => {
-  test("should return correct sourceId for skill type", () => {
-    const mock: RmmzParamCore_Skill = {
-      type: "skill",
-      default: 1,
-    };
-    const result = dataIdMetaParam(mock);
-    expect(result.sourceId).toEqual({
-      author: "rmmz",
-      module: "data",
-      kind: "skill",
-    } satisfies SourceId_DataSkill);
-  });
+interface TestCase {
+  caseName: string;
+  data: RmmzParamCore_DataId<DataKindUnion>;
+  expected: X_MetaParam_DataId;
+}
 
-  test("should return correct sourceId for weapon type", () => {
-    const mock: RmmzParamCore_Weapon = {
-      type: "weapon",
-      default: 2,
-    };
-    const result = dataIdMetaParam(mock);
-    expect(result.sourceId).toEqual({
-      author: "rmmz",
-      module: "data",
-      kind: "weapon",
-    } satisfies SourceId_DataWeapon);
+const runTestCases = (testCases: TestCase[]) => {
+  const ajv = new Ajv({ strict: true });
+  const metaSchema = metaSchemaDataIdParam();
+  const validateMetaParam = ajv.compile(metaSchema);
+
+  testCases.forEach(({ caseName, data, expected }) => {
+    describe(caseName, () => {
+      const result: X_MetaParam_DataId = dataIdMetaParam(data);
+      test("", () => {
+        expect(result).toEqual(expected);
+      });
+      test("", () => {
+        expect(result).toSatisfy(validateMetaParam);
+      });
+    });
   });
+};
+
+describe("dataIdMetaParam", () => {
+  runTestCases([
+    {
+      caseName: "should return correct sourceId for skill type",
+      data: {
+        type: "skill",
+        default: 1,
+      } satisfies RmmzParamCore_Skill,
+      expected: {
+        sourceId: {
+          author: "rmmz",
+          module: "data",
+          kind: "skill",
+        } satisfies SourceId_DataSkill,
+      },
+    },
+    {
+      caseName: "should return correct sourceId for weapon type",
+      data: {
+        type: "weapon",
+        default: 2,
+      } satisfies RmmzParamCore_Weapon,
+      expected: {
+        sourceId: {
+          author: "rmmz",
+          module: "data",
+          kind: "weapon",
+        } satisfies SourceId_DataWeapon,
+      },
+    },
+    {
+      caseName: "should return correct sourceId for variable type",
+      data: {
+        type: "variable",
+        default: 3,
+      } satisfies RmmzParamCore_Variable,
+      expected: {
+        sourceId: {
+          author: "rmmz",
+          module: "system",
+          kind: "variables",
+        } satisfies SourceId_SystemVariables,
+      },
+    },
+    {
+      caseName: "should return undefined for unknown type",
+      data: {
+        type: "unknown" as DataKindUnion,
+        default: 0,
+      } satisfies RmmzParamCore_DataId<DataKindUnion>,
+      expected: {
+        sourceId: undefined,
+      },
+    },
+  ]);
 });
