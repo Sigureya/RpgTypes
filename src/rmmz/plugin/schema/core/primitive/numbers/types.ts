@@ -12,8 +12,8 @@ export interface DataIndexArg<Name extends string> extends AnnotationBase {
   default: number;
 }
 
-export interface X_MetaParam_Number {
-  digit: number;
+export interface X_MetaParamCore_Number {
+  digit?: number;
 }
 
 export interface RmmzParamCore_Number {

@@ -12,7 +12,7 @@ export const dataIdMetaParam = (
   sourceId: lookupKind(data.type),
 });
 
-export const metaSchemaDataIdParam = () =>
+export const metaSchemaDataIdParamCore = () =>
   ({
     type: "object",
     additionalProperties: false,

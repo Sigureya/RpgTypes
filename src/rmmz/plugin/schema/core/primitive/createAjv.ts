@@ -1,6 +1,6 @@
 import type { Options, Vocabulary } from "ajv";
 import Ajv from "ajv";
-import { metaSchemaBooleanRmmzParam } from "./boolean";
+import { metaSchemaBooleanRmmzParamCore } from "./boolean";
 import {
   X_RMMZ_PARAM_SHARED,
   X_RMMZ_PARAM_NUMBER,
@@ -8,8 +8,8 @@ import {
   X_RMMZ_PARAM_DATA_INDEX,
 } from "./keyConstants";
 import { metaSchemaSharedParam } from "./metaTextField";
-import { metaSchemaNumberRmmzParam } from "./numbers";
-import { metaSchemaDataIdParam } from "./rpgDataId";
+import { metaSchemaNumberRmmzParamCore } from "./numbers";
+import { metaSchemaDataIdParamCore } from "./rpgDataId";
 
 export const createAjv = (options?: Options) => {
   return new Ajv({
@@ -26,14 +26,14 @@ const keywords = (): Vocabulary => [
   },
   {
     keyword: X_RMMZ_PARAM_NUMBER,
-    metaSchema: metaSchemaNumberRmmzParam(),
+    metaSchema: metaSchemaNumberRmmzParamCore(),
   },
   {
     keyword: X_RMMZ_PARAM_BOOLEAN,
-    metaSchema: metaSchemaBooleanRmmzParam(),
+    metaSchema: metaSchemaBooleanRmmzParamCore(),
   },
   {
     keyword: X_RMMZ_PARAM_DATA_INDEX,
-    metaSchema: metaSchemaDataIdParam(),
+    metaSchema: metaSchemaDataIdParamCore(),
   },
 ];

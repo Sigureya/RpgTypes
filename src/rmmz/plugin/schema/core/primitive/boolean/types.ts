@@ -11,7 +11,7 @@ export interface MetaParam_Boolean {
   off: string;
 }
 
-export interface X_MetaParam_Boolean {
+export interface X_MetaParamCore_Boolean {
   on: string;
   off: string;
 }

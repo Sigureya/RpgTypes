@@ -1,21 +1,21 @@
 import type { JSONSchemaType } from "ajv";
 import type { Schema } from "jsonschema";
-import type { RmmzParamCore_Number, X_MetaParam_Number } from "./types";
+import type { RmmzParamCore_Number, X_MetaParamCore_Number } from "./types";
 
 export const x_metaParamNumber = (
   num: RmmzParamCore_Number
-): X_MetaParam_Number => ({
+): X_MetaParamCore_Number => ({
   digit: num.digit ?? 0,
 });
 
-export const metaSchemaNumberRmmzParam = () =>
+export const metaSchemaNumberRmmzParamCore = () =>
   ({
     type: "object",
     additionalProperties: false,
     properties: {
       digit: { type: "integer", minimum: 0, nullable: true },
     },
-  } satisfies Schema & JSONSchemaType<Partial<X_MetaParam_Number>>);
+  } satisfies Schema & JSONSchemaType<X_MetaParamCore_Number>);
 
 export const rmmzSchemaNumberParam = () =>
   ({
