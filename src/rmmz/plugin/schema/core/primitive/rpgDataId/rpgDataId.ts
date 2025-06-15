@@ -1,5 +1,6 @@
 import type { JSONSchemaType } from "ajv";
 import type { Schema } from "jsonschema";
+import type { SourceIdentifier } from "src/namedItemSource";
 import type { DataIndexArg } from "../numbers";
 import { lookupKind } from "./lookup";
 import type { DataKindUnion } from "./rpgDataTypesNames";
@@ -11,6 +12,25 @@ export const dataIdMetaParam = (
 ): X_MetaParam_DataId => ({
   sourceId: lookupKind(data.type),
 });
+
+export const metaSchemaDataIdParam = () =>
+  ({
+    type: "object",
+    additionalProperties: false,
+    properties: {
+      sourceId: {
+        nullable: true as const,
+        type: "object",
+        additionalProperties: false,
+        required: ["author", "module", "kind"],
+        properties: {
+          author: { type: "string" },
+          module: { type: "string" },
+          kind: { type: "string" },
+        },
+      } satisfies JSONSchemaType<SourceIdentifier | undefined>,
+    },
+  } satisfies Schema & JSONSchemaType<X_MetaParam_DataId>);
 
 export const dataIndexSchema = () =>
   ({

@@ -1,27 +1,35 @@
 import { describe, test, expect } from "vitest";
 import type { SourceId_DataSkill, SourceId_DataWeapon } from "@RpgTypes/rpg";
-import { SourceId_Data } from "@RpgTypes/rpg";
+import type { SourceId_SystemVariables } from "@RpgTypes/system";
 import Ajv from "ajv";
 import {
   dataIndexSchema,
   makeDataIndexValueSchema,
   dataIdMetaParam,
+  metaSchemaDataIdParam,
 } from "./rpgDataId";
-import type { RmmzParamCore_Skill, RmmzParamCore_Weapon } from "./types";
+import type { DataKindUnion } from "./rpgDataTypesNames";
+import type {
+  RmmzParamCore_Skill,
+  RmmzParamCore_Weapon,
+  RmmzParamCore_Variable,
+  RmmzParamCore_DataId,
+  X_MetaParam_DataId,
+} from "./types";
 
-describe("", () => {
+describe("dataIndexSchema validation", () => {
   const ajv = new Ajv({ strict: true });
   const schema = dataIndexSchema();
   const variable = ajv.compile(schema);
-  describe("normal case", () => {
-    test("", () => {
+  describe("valid cases", () => {
+    test("should validate skill type with integer default", () => {
       const mock: RmmzParamCore_Skill = {
         type: "skill",
         default: 3,
       };
       expect(mock).toSatisfy(variable);
     });
-    test("", () => {
+    test("should validate weapon type with integer default", () => {
       const mock: RmmzParamCore_Weapon = {
         type: "weapon",
         default: 15,
@@ -29,15 +37,15 @@ describe("", () => {
       expect(mock).toSatisfy(variable);
     });
   });
-  describe("error case", () => {
-    test("", () => {
+  describe("invalid cases", () => {
+    test("should not validate weapon type with negative default", () => {
       const mock: RmmzParamCore_Weapon = {
         type: "weapon",
         default: -1,
       };
       expect(mock).not.toSatisfy(variable);
     });
-    test("", () => {
+    test("should not validate weapon type with float default", () => {
       const mock: RmmzParamCore_Weapon = {
         type: "weapon",
         default: 3.14,
@@ -47,7 +55,7 @@ describe("", () => {
   });
 });
 
-describe("", () => {
+describe("makeDataIndexValueSchema validation", () => {
   const mock: RmmzParamCore_Weapon = {
     type: "weapon",
     default: 15,
@@ -55,44 +63,97 @@ describe("", () => {
   const schema = makeDataIndexValueSchema(mock);
   const ajv = new Ajv({ strict: false });
   const validate = ajv.compile(schema);
-  test("", () => {
+  test("should validate integer value", () => {
     expect(4).toSatisfy(validate);
   });
-  test("", () => {
+  test("should validate zero value", () => {
     expect(0).toSatisfy(validate);
   });
-  test("", () => {
+  test("should not validate float value", () => {
     expect(3.14).not.toSatisfy(validate);
   });
-  test("", () => {
+  test("should not validate negative value", () => {
     expect(-1).not.toSatisfy(validate);
   });
 });
 
-describe("dataIdMetaParam", () => {
-  test("should return correct sourceId for skill type", () => {
-    const mock: RmmzParamCore_Skill = {
-      type: "skill",
-      default: 1,
-    };
-    const result = dataIdMetaParam(mock);
-    expect(result.sourceId).toEqual({
-      author: "rmmz",
-      module: "data",
-      kind: "skill",
-    } satisfies SourceId_DataSkill);
-  });
+interface TestCase {
+  caseName: string;
+  data: RmmzParamCore_DataId<DataKindUnion>;
+  expected: X_MetaParam_DataId;
+}
 
-  test("should return correct sourceId for weapon type", () => {
-    const mock: RmmzParamCore_Weapon = {
-      type: "weapon",
-      default: 2,
-    };
-    const result = dataIdMetaParam(mock);
-    expect(result.sourceId).toEqual({
-      author: "rmmz",
-      module: "data",
-      kind: "weapon",
-    } satisfies SourceId_DataWeapon);
+const runTestCases = (testCases: TestCase[]) => {
+  const ajv = new Ajv({ strict: true });
+  const metaSchema = metaSchemaDataIdParam();
+  const validateMetaParam = ajv.compile(metaSchema);
+
+  testCases.forEach(({ caseName, data, expected }) => {
+    describe(caseName, () => {
+      const result: X_MetaParam_DataId = dataIdMetaParam(data);
+      test("should return the expected meta parameter", () => {
+        expect(result).toEqual(expected);
+      });
+      test("should satisfy the meta schema", () => {
+        expect(result).toSatisfy(validateMetaParam);
+      });
+    });
   });
+};
+
+describe("dataIdMetaParam meta parameter extraction", () => {
+  runTestCases([
+    {
+      caseName: "returns correct sourceId for skill type",
+      data: {
+        type: "skill",
+        default: 1,
+      } satisfies RmmzParamCore_Skill,
+      expected: {
+        sourceId: {
+          author: "rmmz",
+          module: "data",
+          kind: "skill",
+        } satisfies SourceId_DataSkill,
+      },
+    },
+    {
+      caseName: "returns correct sourceId for weapon type",
+      data: {
+        type: "weapon",
+        default: 2,
+      } satisfies RmmzParamCore_Weapon,
+      expected: {
+        sourceId: {
+          author: "rmmz",
+          module: "data",
+          kind: "weapon",
+        } satisfies SourceId_DataWeapon,
+      },
+    },
+    {
+      caseName: "returns correct sourceId for variable type",
+      data: {
+        type: "variable",
+        default: 3,
+      } satisfies RmmzParamCore_Variable,
+      expected: {
+        sourceId: {
+          author: "rmmz",
+          module: "system",
+          kind: "variables",
+        } satisfies SourceId_SystemVariables,
+      },
+    },
+    {
+      caseName: "returns undefined sourceId for unknown type",
+      data: {
+        type: "unknown" as DataKindUnion,
+        default: 0,
+      } satisfies RmmzParamCore_DataId<DataKindUnion>,
+      expected: {
+        sourceId: undefined,
+      },
+    },
+  ]);
 });
