@@ -5,7 +5,7 @@ import Ajv from "ajv";
 import {
   dataIndexSchema,
   dataIdMetaParam,
-  metaSchemaDataIdParam,
+  metaSchemaDataIdParamCore,
 } from "./rpgDataId";
 import type { DataKindUnion } from "./rpgDataTypesNames";
 import type {
@@ -62,7 +62,7 @@ interface TestCase {
 
 const runTestCases = (testCases: TestCase[]) => {
   const ajv = new Ajv({ strict: true });
-  const metaSchema = metaSchemaDataIdParam();
+  const metaSchema = metaSchemaDataIdParamCore();
   const validateMetaParam = ajv.compile(metaSchema);
 
   testCases.forEach(({ caseName, data, expected }) => {

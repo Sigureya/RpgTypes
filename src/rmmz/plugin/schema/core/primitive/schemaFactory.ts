@@ -1,6 +1,5 @@
 import type { JSONSchemaType } from "ajv";
 import type { Schema } from "jsonschema";
-import type { BooleanArg } from "./boolean";
 import { booleanMetaParam } from "./boolean";
 import {
   X_RMMZ_PARAM_BOOLEAN,
@@ -9,6 +8,7 @@ import {
 } from "./keyConstants";
 import type { DataIndexArg, RmmzParamCore_Number } from "./numbers";
 import { x_metaParamNumber } from "./numbers";
+import type { BooleanArg } from "./paramTypesOld";
 import type { DataKindUnion } from "./rpgDataId";
 
 export const rmmzParamToSchemaBoolean = (boolArg: BooleanArg) => {

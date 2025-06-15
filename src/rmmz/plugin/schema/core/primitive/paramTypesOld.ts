@@ -32,3 +32,10 @@ export type Primitive_Strings =
   | FilePathAnnotation
   | ComboAnnotation
   | StringSelect;
+
+export interface BooleanArg extends AnnotationBase {
+  default: boolean;
+  type: "boolean";
+  on?: string;
+  off?: string;
+}
