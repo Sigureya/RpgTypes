@@ -16,37 +16,31 @@ export const makeSelectSchema = () =>
       options: {},
     },
     allOf: [
-      {
-        if: {
-          properties: {
-            default: { type: "string" },
-          },
-        },
-        then: {
-          properties: {
-            type: { type: "string", const: "select" },
-            default: { type: "string" },
-            options: makeOptionSchema("string"),
-          },
-        },
-      },
-      {
-        if: {
-          properties: {
-            default: { type: "number" },
-          },
-        },
-        then: {
-          properties: {
-            default: { type: "number" },
-            options: makeOptionSchema("number"),
-          },
-        },
-      },
+      makeSelectTypeBranchSchema("number"),
+      makeSelectTypeBranchSchema("string"),
     ],
-  } as Schema);
+  } as const satisfies Schema);
 
-const makeOptionSchema = (valueType: "string" | "number") =>
+const makeSelectTypeBranchSchema = <T extends "string" | "number">(
+  valueType: T
+) =>
+  ({
+    if: {
+      properties: {
+        default: { type: valueType },
+      },
+    },
+    then: {
+      properties: {
+        default: { type: valueType },
+        options: makeSelectOptionsArraySchema(valueType),
+      },
+    },
+  } as const satisfies Schema);
+
+const makeSelectOptionsArraySchema = <T extends "string" | "number">(
+  valueType: T
+) =>
   ({
     type: "array",
     items: {
@@ -60,4 +54,4 @@ const makeOptionSchema = (valueType: "string" | "number") =>
         value: { type: valueType },
       },
     },
-  } satisfies Schema);
+  } as const satisfies Schema);
