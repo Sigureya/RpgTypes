@@ -17,19 +17,19 @@ import type {
   X_MetaParam_DataId,
 } from "./types";
 
-describe("", () => {
+describe("dataIndexSchema validation", () => {
   const ajv = new Ajv({ strict: true });
   const schema = dataIndexSchema();
   const variable = ajv.compile(schema);
-  describe("normal case", () => {
-    test("", () => {
+  describe("valid cases", () => {
+    test("should validate skill type with integer default", () => {
       const mock: RmmzParamCore_Skill = {
         type: "skill",
         default: 3,
       };
       expect(mock).toSatisfy(variable);
     });
-    test("", () => {
+    test("should validate weapon type with integer default", () => {
       const mock: RmmzParamCore_Weapon = {
         type: "weapon",
         default: 15,
@@ -37,15 +37,15 @@ describe("", () => {
       expect(mock).toSatisfy(variable);
     });
   });
-  describe("error case", () => {
-    test("", () => {
+  describe("invalid cases", () => {
+    test("should not validate weapon type with negative default", () => {
       const mock: RmmzParamCore_Weapon = {
         type: "weapon",
         default: -1,
       };
       expect(mock).not.toSatisfy(variable);
     });
-    test("", () => {
+    test("should not validate weapon type with float default", () => {
       const mock: RmmzParamCore_Weapon = {
         type: "weapon",
         default: 3.14,
@@ -55,7 +55,7 @@ describe("", () => {
   });
 });
 
-describe("", () => {
+describe("makeDataIndexValueSchema validation", () => {
   const mock: RmmzParamCore_Weapon = {
     type: "weapon",
     default: 15,
@@ -63,16 +63,16 @@ describe("", () => {
   const schema = makeDataIndexValueSchema(mock);
   const ajv = new Ajv({ strict: false });
   const validate = ajv.compile(schema);
-  test("", () => {
+  test("should validate integer value", () => {
     expect(4).toSatisfy(validate);
   });
-  test("", () => {
+  test("should validate zero value", () => {
     expect(0).toSatisfy(validate);
   });
-  test("", () => {
+  test("should not validate float value", () => {
     expect(3.14).not.toSatisfy(validate);
   });
-  test("", () => {
+  test("should not validate negative value", () => {
     expect(-1).not.toSatisfy(validate);
   });
 });
@@ -91,20 +91,20 @@ const runTestCases = (testCases: TestCase[]) => {
   testCases.forEach(({ caseName, data, expected }) => {
     describe(caseName, () => {
       const result: X_MetaParam_DataId = dataIdMetaParam(data);
-      test("", () => {
+      test("should return the expected meta parameter", () => {
         expect(result).toEqual(expected);
       });
-      test("", () => {
+      test("should satisfy the meta schema", () => {
         expect(result).toSatisfy(validateMetaParam);
       });
     });
   });
 };
 
-describe("dataIdMetaParam", () => {
+describe("dataIdMetaParam meta parameter extraction", () => {
   runTestCases([
     {
-      caseName: "should return correct sourceId for skill type",
+      caseName: "returns correct sourceId for skill type",
       data: {
         type: "skill",
         default: 1,
@@ -118,7 +118,7 @@ describe("dataIdMetaParam", () => {
       },
     },
     {
-      caseName: "should return correct sourceId for weapon type",
+      caseName: "returns correct sourceId for weapon type",
       data: {
         type: "weapon",
         default: 2,
@@ -132,7 +132,7 @@ describe("dataIdMetaParam", () => {
       },
     },
     {
-      caseName: "should return correct sourceId for variable type",
+      caseName: "returns correct sourceId for variable type",
       data: {
         type: "variable",
         default: 3,
@@ -146,7 +146,7 @@ describe("dataIdMetaParam", () => {
       },
     },
     {
-      caseName: "should return undefined for unknown type",
+      caseName: "returns undefined sourceId for unknown type",
       data: {
         type: "unknown" as DataKindUnion,
         default: 0,
