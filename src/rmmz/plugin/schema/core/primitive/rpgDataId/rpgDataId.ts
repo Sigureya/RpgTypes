@@ -4,14 +4,11 @@ import type { DataIndexArg } from "../numbers";
 import { lookupKind } from "./lookup";
 import type { DataKindUnion } from "./rpgDataTypesNames";
 import { rmmzDataTypes } from "./sourceId";
-import type { RmmzParamCore_DataId, X_RmmzParamCore_DataId } from "./types";
+import type { RmmzParamCore_DataId, X_MetaParam_DataId } from "./types";
 
-const srcSys = (x: DataKindUnion): x is "variable" | "switch" =>
-  ["variable", "switch"].includes(x);
-
-const xxx = <T extends DataKindUnion>(
-  data: RmmzParamCore_DataId<T>
-): X_RmmzParamCore_DataId => ({
+export const dataIdMetaParam = (
+  data: RmmzParamCore_DataId<DataKindUnion>
+): X_MetaParam_DataId => ({
   sourceId: lookupKind(data.type),
 });
 

@@ -1,6 +1,12 @@
 import { describe, test, expect } from "vitest";
+import type { SourceId_DataSkill, SourceId_DataWeapon } from "@RpgTypes/rpg";
+import { SourceId_Data } from "@RpgTypes/rpg";
 import Ajv from "ajv";
-import { dataIndexSchema, makeDataIndexValueSchema } from "./makeSchema";
+import {
+  dataIndexSchema,
+  makeDataIndexValueSchema,
+  dataIdMetaParam,
+} from "./rpgDataId";
 import type { RmmzParamCore_Skill, RmmzParamCore_Weapon } from "./types";
 
 describe("", () => {
@@ -60,5 +66,33 @@ describe("", () => {
   });
   test("", () => {
     expect(-1).not.toSatisfy(validate);
+  });
+});
+
+describe("dataIdMetaParam", () => {
+  test("should return correct sourceId for skill type", () => {
+    const mock: RmmzParamCore_Skill = {
+      type: "skill",
+      default: 1,
+    };
+    const result = dataIdMetaParam(mock);
+    expect(result.sourceId).toEqual({
+      author: "rmmz",
+      module: "data",
+      kind: "skill",
+    } satisfies SourceId_DataSkill);
+  });
+
+  test("should return correct sourceId for weapon type", () => {
+    const mock: RmmzParamCore_Weapon = {
+      type: "weapon",
+      default: 2,
+    };
+    const result = dataIdMetaParam(mock);
+    expect(result.sourceId).toEqual({
+      author: "rmmz",
+      module: "data",
+      kind: "weapon",
+    } satisfies SourceId_DataWeapon);
   });
 });
