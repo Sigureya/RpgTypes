@@ -10,24 +10,6 @@ export const dataIdMetaParam = (
   data: RmmzParamCore_DataId<DataKindUnion>
 ): SourceIdentifier => lookupKind(data.type);
 
-export const metaSchemaDataIdParamCore = () => ({
-  type: "object",
-  additionalProperties: false,
-  properties: {
-    sourceId: {
-      nullable: true as const,
-      type: "object",
-      additionalProperties: false,
-      required: ["author", "module", "kind"],
-      properties: {
-        author: { type: "string" },
-        module: { type: "string" },
-        kind: { type: "string" },
-      },
-    } satisfies JSONSchemaType<SourceIdentifier | undefined>,
-  },
-});
-
 export const dataIndexSchema = () =>
   ({
     type: "object",
