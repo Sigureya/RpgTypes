@@ -1,7 +1,13 @@
 import type { JSONSchemaType } from "ajv";
+import type { SourceIdentifier } from "src/namedItemSource";
 import type { MetaParam_Boolean } from "./boolean";
 import type { RmmzParamTextFields } from "./metaTextField";
-import type { NewRmmzParam_Boolean, NewRmmzParam_Number } from "./newParamType";
+import type {
+  NewRmmzParam_Boolean,
+  NewRmmzParam_DataId,
+  NewRmmzParam_Number,
+} from "./newParamType";
+import { lookupKind } from "./rpgDataId/lookup";
 
 export type ParamSchema<Value, X> = JSONSchemaType<Value> & {
   "x-rpg-param": X_RmmzParam<X>;
@@ -19,13 +25,14 @@ const schemaFromRmmzParam = <
   X,
   TypeName extends "boolean" | "number" | "integer" | "string"
 >(
+  default_: V,
   param: P,
   type: TypeName,
   data: X
 ) => ({
   ...{
     type: type,
-    default: param.default,
+    default: default_,
     title: param.text,
     description: param.desc,
     "x-rpg-param": {
@@ -37,12 +44,7 @@ const schemaFromRmmzParam = <
 });
 
 export const schemaFromBooleanParam = (bool: NewRmmzParam_Boolean) => {
-  return schemaFromRmmzParam<
-    boolean,
-    NewRmmzParam_Boolean,
-    MetaParam_Boolean,
-    "boolean"
-  >(bool, "boolean", {
+  return schemaFromRmmzParam(bool.default, bool, "boolean", {
     on: bool.on ?? "{on}",
     off: bool.off ?? "{off}",
   }) satisfies ParamSchema<boolean, MetaParam_Boolean>;
@@ -66,4 +68,13 @@ export const schemaFromNumberParam = (num: NewRmmzParam_Number) => {
       },
     },
   } satisfies ParamSchema<number, { digit: number }>;
+};
+
+export const schemaFromDataId = (dataId: NewRmmzParam_DataId) => {
+  return schemaFromRmmzParam(
+    dataId.default,
+    dataId,
+    "number",
+    lookupKind(dataId.type)
+  ) satisfies ParamSchema<number, SourceIdentifier>;
 };
