@@ -15,7 +15,7 @@ describe("", () => {
   test("", () => {
     const validData: X_Param_DataId = {
       kind: "dataId",
-      parent: null,
+      parent: "",
       data: { author: "a", module: "m", kind: "k" },
     };
     expect(validData).toSatisfy(validator);
@@ -24,6 +24,7 @@ describe("", () => {
     const invalidData: X_Param_DataId = {
       kind: "dataId",
       data: { author: "a", module: "m", kind: "k" },
+      parent: "",
     };
     expect(invalidData).toSatisfy(validator);
   });
