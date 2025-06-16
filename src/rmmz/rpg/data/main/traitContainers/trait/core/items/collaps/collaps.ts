@@ -14,7 +14,7 @@ export const defineTraitCollapseType = (
   global: NormalLabel
 ): NamedItemSource => ({
   items: collapsOptionsToArray(labels.options, global),
-  label: labels.domainName,
+  label: labels.title,
   source: {
     author: "rmmz",
     module: "trait",

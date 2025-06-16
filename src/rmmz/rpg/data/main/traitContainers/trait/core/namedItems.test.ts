@@ -13,9 +13,7 @@ interface TestCase {
 const mockNormalLabel: NormalLabel = { normal: "Normal" };
 
 const getDomainNames = (r: Record<keyof TraitLabelSet, RawTraitLabel>) => {
-  return new Set(
-    Object.values<RawTraitLabel>(r).map((item) => item.domainName)
-  );
+  return new Set(Object.values<RawTraitLabel>(r).map((item) => item.title));
 };
 
 const runTestCases = ({ caseName, labels: labelSet }: TestCase) => {
@@ -27,12 +25,9 @@ const runTestCases = ({ caseName, labels: labelSet }: TestCase) => {
         return domainNamesSet.has(label);
       };
       const resultLabels = result.map((item) => item.label);
-      test.each(resultLabels)(
-        `label "%s" is valid`,
-        (label) => {
-          expect(label).toSatisfy(itemIsInSet);
-        }
-      );
+      test.each(resultLabels)(`label "%s" is valid`, (label) => {
+        expect(label).toSatisfy(itemIsInSet);
+      });
     });
     test(`sources are unique`, () => {
       const set = new Set(result.map((item) => JSON.stringify(item.source)));

@@ -17,7 +17,7 @@ export const defineTraitRegularParam = (
   param: TraitLabelWithOption<RegularParamLabels>
 ): NamedItemSource => ({
   items: regularParamsToArray(param.options),
-  label: param.domainName,
+  label: param.title,
   source: {
     author: "rmmz",
     module: "trait",

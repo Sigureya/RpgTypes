@@ -13,7 +13,7 @@ export const defineTraitSpecialFlag = (
   label: DomainLabel<SpecialFlagOptions>
 ): NamedItemSource => ({
   items: specialFlagToArray(label.options),
-  label: label.domainName,
+  label: label.title,
   source: {
     author: "rmmz",
     module: "trait",

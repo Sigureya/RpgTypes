@@ -94,28 +94,28 @@ const regularParamSourceId = (): SourceId_TraitRegularParam => ({
 
 const elementRate = (label: RawTraitLabel): TraitFormat => ({
   pattern: label.format,
-  label: label.domainName,
+  label: label.title,
   kindId: TRAIT_ELEMENT_RATE,
   dataSource: systemElementsSourceId(),
 });
 
 const debuffRate = (label: RawTraitLabel): TraitFormat => ({
   pattern: label.format,
-  label: label.domainName,
+  label: label.title,
   kindId: TRAIT_DEBUFF_RATE,
   dataSource: regularParamSourceId(),
 });
 
 const stateRate = (label: RawTraitLabel): TraitFormat => ({
   pattern: label.format,
-  label: label.domainName,
+  label: label.title,
   kindId: TRAIT_STATE_RATE,
   dataSource: stateSourceId(),
 });
 
 const stateResist = (label: RawTraitLabel): TraitFormat => ({
   pattern: label.format,
-  label: label.domainName,
+  label: label.title,
   kindId: TRAIT_STATE_RESIST,
   dataSource: stateSourceId(),
 });
@@ -124,7 +124,7 @@ const regularParam = (
   labels: TraitLabelWithOption<RegularParamLabels>
 ): TraitFormat => ({
   pattern: labels.format,
-  label: labels.domainName,
+  label: labels.title,
   kindId: TRAIT_PARAM,
   dataSource: regularParamSourceId(),
 });
@@ -133,7 +133,7 @@ const extraParam = (
   labels: TraitLabelWithOption<ExtraParamLabels>
 ): TraitFormat => ({
   pattern: labels.format,
-  label: labels.domainName,
+  label: labels.title,
   kindId: TRAIT_XPARAM,
   dataSource: {
     author: "rmmz",
@@ -146,7 +146,7 @@ const specialParam = (
   labels: TraitLabelWithOption<SpecialParamLabels>
 ): TraitFormat => ({
   pattern: labels.format,
-  label: labels.domainName,
+  label: labels.title,
   kindId: TRAIT_SPARAM,
   dataSource: {
     author: "rmmz",
@@ -157,103 +157,103 @@ const specialParam = (
 
 const attackElement = (label: RawTraitLabel): TraitFormat => ({
   pattern: label.format,
-  label: label.domainName,
+  label: label.title,
   kindId: TRAIT_ATTACK_ELEMENT,
   dataSource: systemElementsSourceId(),
 });
 
 const atttackState = (label: RawTraitLabel): TraitFormat => ({
   pattern: label.format,
-  label: label.domainName,
+  label: label.title,
   kindId: TRAIT_ATTACK_STATE,
   dataSource: stateSourceId(),
 });
 
 const attackSpeed = (label: RawTraitLabel): TraitFormat => ({
   pattern: label.format,
-  label: label.domainName,
+  label: label.title,
   kindId: TRAIT_ATTACK_SPEED,
 });
 
 const attackTimes = (label: RawTraitLabel): TraitFormat => ({
   pattern: label.format,
-  label: label.domainName,
+  label: label.title,
   kindId: TRAIT_ATTACK_TIMES,
 });
 
 const attackSkill = (label: RawTraitLabel): TraitFormat => ({
   pattern: label.format,
-  label: label.domainName,
+  label: label.title,
   kindId: TRAIT_ATTACK_SKILL,
   dataSource: skillSourceId(),
 });
 
 const skillTypeAdd = (label: RawTraitLabel): TraitFormat => ({
   pattern: label.format,
-  label: label.domainName,
+  label: label.title,
   kindId: TRAIT_SKILL_TYPE_ADD,
   dataSource: systemSkillTypesSourceId(),
 });
 
 const skillTypeSeal = (label: RawTraitLabel): TraitFormat => ({
   pattern: label.format,
-  label: label.domainName,
+  label: label.title,
   kindId: TRAIT_SKILL_TYPE_SEAL,
   dataSource: systemSkillTypesSourceId(),
 });
 
 const skillAdd = (label: RawTraitLabel): TraitFormat => ({
   pattern: label.format,
-  label: label.domainName,
+  label: label.title,
   kindId: TRAIT_SKILL_ADD,
   dataSource: skillSourceId(),
 });
 
 const skillSeal = (label: RawTraitLabel): TraitFormat => ({
   pattern: label.format,
-  label: label.domainName,
+  label: label.title,
   kindId: TRAIT_SKILL_SEAL,
   dataSource: skillSourceId(),
 });
 
 const equipWeaponType = (label: RawTraitLabel): TraitFormat => ({
   pattern: label.format,
-  label: label.domainName,
+  label: label.title,
   kindId: TRAIT_EQUIP_WEAPON_TYPE,
   dataSource: systemWeaponTypesSourceId(),
 });
 
 const equipArmorType = (label: RawTraitLabel): TraitFormat => ({
   pattern: label.format,
-  label: label.domainName,
+  label: label.title,
   kindId: TRAIT_EQUIP_ARMOR_TYPE,
   dataSource: systemArmorTypesSourceId(),
 });
 
 const equipLock = (label: RawTraitLabel): TraitFormat => ({
   pattern: label.format,
-  label: label.domainName,
+  label: label.title,
   kindId: TRAIT_EQUIP_LOCK,
   dataSource: systemEquipTypesSourceId(),
 });
 
 const equipSeal = (label: RawTraitLabel): TraitFormat => ({
   pattern: label.format,
-  label: label.domainName,
+  label: label.title,
   kindId: TRAIT_EQUIP_SEAL,
   dataSource: systemEquipTypesSourceId(),
 });
 
 const slotType = (label: RawTraitLabel): TraitFormat => ({
   pattern: label.format,
-  label: label.domainName,
+  label: label.title,
   kindId: TRAIT_SLOT_TYPE,
   dataSource: systemEquipTypesSourceId(),
 });
 
 const actionPlus = (label: RawTraitLabel): TraitFormat => ({
   pattern: label.format,
-  label: label.domainName,
+  label: label.title,
   kindId: TRAIT_ACTION_PLUS,
 });
 
@@ -261,7 +261,7 @@ const specialFlag = (
   labels: TraitLabelWithOption<SpecialFlagOptions>
 ): TraitFormat => ({
   pattern: labels.format,
-  label: labels.domainName,
+  label: labels.title,
   kindId: TRAIT_SPECIAL_FLAG,
   dataSource: {
     author: "rmmz",
@@ -274,7 +274,7 @@ const collaps = (
   label: TraitLabelWithOption<CollapsOptionLabels>
 ): TraitFormat => ({
   pattern: label.format,
-  label: label.domainName,
+  label: label.title,
   kindId: TRAIT_COLLAPSE_TYPE,
   dataSource: {
     author: "rmmz",
@@ -287,7 +287,7 @@ const partyAbility = (
   labels: TraitLabelWithOption<PartyAbilityOptionLabels>
 ): TraitFormat => ({
   pattern: labels.format,
-  label: labels.domainName,
+  label: labels.title,
   kindId: TRAIT_PARTY_ABILITY,
   dataSource: {
     author: "rmmz",

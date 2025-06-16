@@ -165,7 +165,7 @@ const testCaseGameData: TestCaseGroup = {
       caseName: "stateRate",
       code: TRAIT_STATE_RATE,
       expected: {
-        label: LABEL_SET_TRAIT.options.stateRate.domainName,
+        label: LABEL_SET_TRAIT.options.stateRate.title,
         patternCompiled: LABEL_SET_TRAIT.options.stateRate.format,
         data: mockGameData.states,
       },
@@ -174,7 +174,7 @@ const testCaseGameData: TestCaseGroup = {
       caseName: "stateResist",
       code: TRAIT_STATE_RESIST,
       expected: {
-        label: LABEL_SET_TRAIT.options.stateResist.domainName,
+        label: LABEL_SET_TRAIT.options.stateResist.title,
         patternCompiled: LABEL_SET_TRAIT.options.stateResist.format,
         data: mockGameData.states,
       },
@@ -183,7 +183,7 @@ const testCaseGameData: TestCaseGroup = {
       code: TRAIT_SKILL_ADD,
       caseName: "skillAdd",
       expected: {
-        label: LABEL_SET_TRAIT.options.skillAdd.domainName,
+        label: LABEL_SET_TRAIT.options.skillAdd.title,
         patternCompiled: LABEL_SET_TRAIT.options.skillAdd.format,
         data: mockGameData.skills,
       },
@@ -192,7 +192,7 @@ const testCaseGameData: TestCaseGroup = {
       code: TRAIT_SKILL_SEAL,
       caseName: "skillSeal",
       expected: {
-        label: LABEL_SET_TRAIT.options.skillSeal.domainName,
+        label: LABEL_SET_TRAIT.options.skillSeal.title,
         patternCompiled: LABEL_SET_TRAIT.options.skillSeal.format,
         data: mockGameData.skills,
       },
@@ -201,7 +201,7 @@ const testCaseGameData: TestCaseGroup = {
       code: TRAIT_ATTACK_STATE,
       caseName: "attackState",
       expected: {
-        label: LABEL_SET_TRAIT.options.attackState.domainName,
+        label: LABEL_SET_TRAIT.options.attackState.title,
         patternCompiled: LABEL_SET_TRAIT.options.attackState.format,
         data: mockGameData.states,
       },
@@ -210,7 +210,7 @@ const testCaseGameData: TestCaseGroup = {
       code: TRAIT_ATTACK_SKILL,
       caseName: "attackSkill",
       expected: {
-        label: LABEL_SET_TRAIT.options.attackSkill.domainName,
+        label: LABEL_SET_TRAIT.options.attackSkill.title,
         patternCompiled: LABEL_SET_TRAIT.options.attackSkill.format,
         data: mockGameData.skills,
       },
@@ -225,7 +225,7 @@ const testCaseTrait: TestCaseGroup = {
       code: TRAIT_SPARAM,
       caseName: "specialParam",
       expected: {
-        label: LABEL_SET_TRAIT.options.specialParam.domainName,
+        label: LABEL_SET_TRAIT.options.specialParam.title,
         patternCompiled: LABEL_SET_TRAIT.options.specialParam.format,
         data: specialParamsToArray(
           LABEL_SET_TRAIT.options.specialParam.options
@@ -236,7 +236,7 @@ const testCaseTrait: TestCaseGroup = {
       code: TRAIT_XPARAM,
       caseName: "extraParam",
       expected: {
-        label: LABEL_SET_TRAIT.options.extraParam.domainName,
+        label: LABEL_SET_TRAIT.options.extraParam.title,
         patternCompiled: LABEL_SET_TRAIT.options.extraParam.format,
         data: extraParamsToArray(LABEL_SET_TRAIT.options.extraParam.options),
       },
@@ -245,7 +245,7 @@ const testCaseTrait: TestCaseGroup = {
       code: TRAIT_PARAM,
       caseName: "regularParam",
       expected: {
-        label: LABEL_SET_TRAIT.options.regularParam.domainName,
+        label: LABEL_SET_TRAIT.options.regularParam.title,
         patternCompiled: LABEL_SET_TRAIT.options.regularParam.format,
         data: regularParamsToArray(
           LABEL_SET_TRAIT.options.regularParam.options
@@ -256,7 +256,7 @@ const testCaseTrait: TestCaseGroup = {
       code: TRAIT_DEBUFF_RATE,
       caseName: "debuffRate",
       expected: {
-        label: LABEL_SET_TRAIT.options.debuffRate.domainName,
+        label: LABEL_SET_TRAIT.options.debuffRate.title,
         patternCompiled: LABEL_SET_TRAIT.options.debuffRate.format,
         data: regularParamsToArray(
           LABEL_SET_TRAIT.options.regularParam.options
@@ -267,7 +267,7 @@ const testCaseTrait: TestCaseGroup = {
       code: TRAIT_COLLAPSE_TYPE,
       caseName: "collapseType",
       expected: {
-        label: LABEL_SET_TRAIT.options.collaps.domainName,
+        label: LABEL_SET_TRAIT.options.collaps.title,
         patternCompiled: LABEL_SET_TRAIT.options.collaps.format,
         data: collapsOptionsToArray(
           LABEL_SET_TRAIT.options.collaps.options,
@@ -279,7 +279,7 @@ const testCaseTrait: TestCaseGroup = {
       code: TRAIT_SPECIAL_FLAG,
       caseName: "specialFlag",
       expected: {
-        label: LABEL_SET_TRAIT.options.specialFlag.domainName,
+        label: LABEL_SET_TRAIT.options.specialFlag.title,
         patternCompiled: LABEL_SET_TRAIT.options.specialFlag.format,
         data: specialFlagToArray(LABEL_SET_TRAIT.options.specialFlag.options),
       },
@@ -288,7 +288,7 @@ const testCaseTrait: TestCaseGroup = {
       code: TRAIT_PARTY_ABILITY,
       caseName: "partyAbility",
       expected: {
-        label: LABEL_SET_TRAIT.options.partyAbility.domainName,
+        label: LABEL_SET_TRAIT.options.partyAbility.title,
         patternCompiled: LABEL_SET_TRAIT.options.partyAbility.format,
         data: partyAbilityToArray(LABEL_SET_TRAIT.options.partyAbility.options),
       },
@@ -303,7 +303,7 @@ const testCaseSystem: TestCaseGroup = {
       caseName: "element rate",
       code: TRAIT_ELEMENT_RATE,
       expected: {
-        label: LABEL_SET_TRAIT.options.elementRate.domainName,
+        label: LABEL_SET_TRAIT.options.elementRate.title,
         patternCompiled: LABEL_SET_TRAIT.options.elementRate.format,
         data: getElementTypes(mockSystemdata),
       },
@@ -312,7 +312,7 @@ const testCaseSystem: TestCaseGroup = {
       caseName: "attack element",
       code: TRAIT_ATTACK_ELEMENT,
       expected: {
-        label: LABEL_SET_TRAIT.options.attackElement.domainName,
+        label: LABEL_SET_TRAIT.options.attackElement.title,
         patternCompiled: LABEL_SET_TRAIT.options.attackElement.format,
         data: getElementTypes(mockSystemdata),
       },
@@ -321,7 +321,7 @@ const testCaseSystem: TestCaseGroup = {
       caseName: "equip lock",
       code: TRAIT_EQUIP_LOCK,
       expected: {
-        label: LABEL_SET_TRAIT.options.equipLock.domainName,
+        label: LABEL_SET_TRAIT.options.equipLock.title,
         patternCompiled: LABEL_SET_TRAIT.options.equipLock.format,
         data: getEquipTypes(mockSystemdata),
       },
@@ -330,7 +330,7 @@ const testCaseSystem: TestCaseGroup = {
       caseName: "equip seal",
       code: TRAIT_EQUIP_SEAL,
       expected: {
-        label: LABEL_SET_TRAIT.options.equipSeal.domainName,
+        label: LABEL_SET_TRAIT.options.equipSeal.title,
         patternCompiled: LABEL_SET_TRAIT.options.equipSeal.format,
         data: getEquipTypes(mockSystemdata),
       },
@@ -339,7 +339,7 @@ const testCaseSystem: TestCaseGroup = {
       caseName: "weapon type",
       code: TRAIT_EQUIP_WEAPON_TYPE,
       expected: {
-        label: LABEL_SET_TRAIT.options.equipWeaponType.domainName,
+        label: LABEL_SET_TRAIT.options.equipWeaponType.title,
         patternCompiled: LABEL_SET_TRAIT.options.equipWeaponType.format,
         data: getWeaponTypes(mockSystemdata),
       },
@@ -348,7 +348,7 @@ const testCaseSystem: TestCaseGroup = {
       caseName: "armor type",
       code: TRAIT_EQUIP_ARMOR_TYPE,
       expected: {
-        label: LABEL_SET_TRAIT.options.equipArmorType.domainName,
+        label: LABEL_SET_TRAIT.options.equipArmorType.title,
         patternCompiled: LABEL_SET_TRAIT.options.equipArmorType.format,
         data: getArmorTypes(mockSystemdata),
       },
@@ -357,7 +357,7 @@ const testCaseSystem: TestCaseGroup = {
       caseName: "slot type",
       code: TRAIT_SLOT_TYPE,
       expected: {
-        label: LABEL_SET_TRAIT.options.slotType.domainName,
+        label: LABEL_SET_TRAIT.options.slotType.title,
         patternCompiled: LABEL_SET_TRAIT.options.slotType.format,
         data: getEquipTypes(mockSystemdata),
       },
@@ -366,7 +366,7 @@ const testCaseSystem: TestCaseGroup = {
       caseName: "skill type seal",
       code: TRAIT_SKILL_TYPE_SEAL,
       expected: {
-        label: LABEL_SET_TRAIT.options.skillTypeSeal.domainName,
+        label: LABEL_SET_TRAIT.options.skillTypeSeal.title,
         patternCompiled: LABEL_SET_TRAIT.options.skillTypeSeal.format,
         data: getSkillTypes(mockSystemdata),
       },
@@ -375,7 +375,7 @@ const testCaseSystem: TestCaseGroup = {
       caseName: "skill type add",
       code: TRAIT_SKILL_TYPE_ADD,
       expected: {
-        label: LABEL_SET_TRAIT.options.skillTypeAdd.domainName,
+        label: LABEL_SET_TRAIT.options.skillTypeAdd.title,
         patternCompiled: LABEL_SET_TRAIT.options.skillTypeAdd.format,
         data: getSkillTypes(mockSystemdata),
       },
@@ -393,7 +393,7 @@ const testCaseNonData: TestCaseGroup = {
       code: TRAIT_ATTACK_SPEED,
       caseName: "attackSpeed",
       expected: {
-        label: LABEL_SET_TRAIT.options.attackSpeed.domainName,
+        label: LABEL_SET_TRAIT.options.attackSpeed.title,
         patternCompiled: LABEL_SET_TRAIT.options.attackSpeed.format,
         data: undefined,
       },
@@ -402,7 +402,7 @@ const testCaseNonData: TestCaseGroup = {
       code: TRAIT_ATTACK_TIMES,
       caseName: "attackTimes",
       expected: {
-        label: LABEL_SET_TRAIT.options.attackTimes.domainName,
+        label: LABEL_SET_TRAIT.options.attackTimes.title,
         patternCompiled: LABEL_SET_TRAIT.options.attackTimes.format,
         data: undefined,
       },
@@ -411,7 +411,7 @@ const testCaseNonData: TestCaseGroup = {
       code: TRAIT_ACTION_PLUS,
       caseName: "actionPlus",
       expected: {
-        label: LABEL_SET_TRAIT.options.actionPlus.domainName,
+        label: LABEL_SET_TRAIT.options.actionPlus.title,
         patternCompiled: LABEL_SET_TRAIT.options.actionPlus.format,
         data: undefined,
       },

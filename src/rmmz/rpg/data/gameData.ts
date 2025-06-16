@@ -46,7 +46,7 @@ const defineSkill = (
   labels: DataLabels
 ): NamedItemSource => {
   return {
-    label: labels.skill.domainName,
+    label: labels.skill.title,
     items: skills,
     source: {
       author: "rmmz",
@@ -62,7 +62,7 @@ const defineActor = (
 ): NamedItemSource => {
   return {
     items: actors,
-    label: labels.actor.domainName,
+    label: labels.actor.title,
     source: {
       author: "rmmz",
       module: "data",
@@ -77,7 +77,7 @@ const defineState = (
 ): NamedItemSource => {
   return {
     items: states,
-    label: labels.state.domainName,
+    label: labels.state.title,
     source: {
       author: "rmmz",
       module: "data",
@@ -92,7 +92,7 @@ const defineArmor = (
 ): NamedItemSource => {
   return {
     items: armors,
-    label: labels.armor.domainName,
+    label: labels.armor.title,
     source: {
       author: "rmmz",
       kind: "armor",
@@ -107,7 +107,7 @@ const defineClass = (
 ): NamedItemSource => {
   return {
     items: classes,
-    label: labels.class.domainName,
+    label: labels.class.title,
     source: {
       author: "rmmz",
       module: "data",
@@ -122,7 +122,7 @@ const defineEnemy = (
 ): NamedItemSource => {
   return {
     items: enemies,
-    label: labels.enemy.domainName,
+    label: labels.enemy.title,
     source: {
       author: "rmmz",
       module: "data",
@@ -136,7 +136,7 @@ const defineItem = (
   labels: DataLabels
 ): NamedItemSource => ({
   items: items,
-  label: labels.item.domainName,
+  label: labels.item.title,
   source: {
     author: "rmmz",
     module: "data",
@@ -148,7 +148,7 @@ const defineWeapon = (
   labels: DataLabels
 ): NamedItemSource => ({
   items: weapons,
-  label: labels.weapon.domainName,
+  label: labels.weapon.title,
   source: {
     author: "rmmz",
     module: "data",
@@ -161,7 +161,7 @@ const defineCommonEvent = (
   labels: DataLabels
 ): NamedItemSource => ({
   items: commonEvents,
-  label: labels.commonEvent.domainName,
+  label: labels.commonEvent.title,
   source: {
     author: "rmmz",
     module: "data",

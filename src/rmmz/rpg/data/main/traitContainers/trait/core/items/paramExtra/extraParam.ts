@@ -19,7 +19,7 @@ export const defineTraitExtraParam = (
   xparam: TraitLabelWithOption<ExtraParamLabels>
 ): NamedItemSource => ({
   items: extraParamsToArray(xparam.options),
-  label: xparam.domainName,
+  label: xparam.title,
   source: {
     author: "rmmz",
     module: "trait",

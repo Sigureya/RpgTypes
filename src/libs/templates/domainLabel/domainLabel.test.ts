@@ -4,17 +4,17 @@ import type { DomainName } from "./types";
 
 describe("domainNames", () => {
   const mockDomain: Record<string, DomainName> = {
-    domain1: { domainName: "Domain One" },
-    domain2: { domainName: "Domain Two" },
-    domain3: { domainName: "Domain Three" },
+    domain1: { title: "Domain One" },
+    domain2: { title: "Domain Two" },
+    domain3: { title: "Domain Three" },
   };
 
   test("should return an array of domain names", () => {
     const result = domainNames(mockDomain);
     expect(result).toEqual([
-      mockDomain.domain1.domainName,
-      mockDomain.domain2.domainName,
-      mockDomain.domain3.domainName,
+      mockDomain.domain1.title,
+      mockDomain.domain2.title,
+      mockDomain.domain3.title,
     ]);
   });
 
@@ -24,7 +24,9 @@ describe("domainNames", () => {
   });
 
   test("should handle single entry objects", () => {
-    const singleDomain = { domain1: { domainName: "Single Domain" } };
+    const singleDomain = {
+      domain1: { title: "Single Domain" } satisfies DomainName,
+    };
     const result = domainNames(singleDomain);
     expect(result).toEqual(["Single Domain"]);
   });

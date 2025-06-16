@@ -19,7 +19,7 @@ export const defineTraitSpecialParam = (
   specialParam: TraitLabelWithOption<SpecialParamLabels>
 ): NamedItemSource => ({
   items: specialParamsToArray(specialParam.options),
-  label: specialParam.domainName,
+  label: specialParam.title,
   source: {
     author: "rmmz",
     module: "trait",

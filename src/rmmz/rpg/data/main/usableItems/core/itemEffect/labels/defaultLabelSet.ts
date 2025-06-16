@@ -8,7 +8,7 @@ const FORMAT_ADD_BUFF = "{name} {value1}ターン" as const;
 const FORMAT_NAME = "{name}" as const;
 
 export const LABEL_SET_ITEM_EFFECT = {
-  domainName: "使用効果",
+  title: "使用効果",
   options: {
     addBuff: {
       desc: "バフを付与する",

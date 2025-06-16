@@ -16,7 +16,7 @@ export type SystemLabel_Bgm = AsLabel<System_Bgm>;
 export type SystemLabel_BoolanOptions = AsLabel<System_BooleanGameOptions>;
 
 export const DEFAULT_SYSTEM_LABELS_BOOLEAN = {
-  domainName: "オプション",
+  title: "オプション",
   options: {
     optDrawTitle: "ゲームタイトルの描画",
     optDisplayTp: "ウィンドウにTPを表示",
@@ -34,7 +34,7 @@ export const DEFAULT_SYSTEM_LABELS_BOOLEAN = {
 } as const satisfies DomainLabel<SystemLabel_BoolanOptions>;
 
 export const DEFAULT_SYSTEM_LABELS_DATA_TYPES = {
-  domainName: "タイプ",
+  title: "タイプ",
 
   format: "{name}",
 
@@ -50,7 +50,7 @@ export const DEFAULT_SYSTEM_LABELS_DATA_TYPES = {
 } as const satisfies SystemLabel_DataNames;
 
 export const LABELS_SYSTEM_BATTLER_PARAMS = {
-  domainName: "能力値",
+  title: "能力値",
   options: {
     agi: "敏捷",
     atk: "攻撃力",
@@ -66,7 +66,7 @@ export const LABELS_SYSTEM_BATTLER_PARAMS = {
 } as const satisfies DomainLabel<SystemLabels_TermsParamNames>;
 
 export const LABELS_SYSTEM_GAME_COMMANDS = {
-  domainName: "コマンド",
+  title: "コマンド",
   options: {
     item: "アイテム",
     skill: "スキル",
