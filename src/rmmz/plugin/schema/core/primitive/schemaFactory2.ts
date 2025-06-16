@@ -1,0 +1,69 @@
+import type { JSONSchemaType } from "ajv";
+import type { MetaParam_Boolean } from "./boolean";
+import type { RmmzParamTextFields } from "./metaTextField";
+import type { NewRmmzParam_Boolean, NewRmmzParam_Number } from "./newParamType";
+
+export type ParamSchema<Value, X> = JSONSchemaType<Value> & {
+  "x-rpg-param": X_RmmzParam<X>;
+};
+
+interface X_RmmzParam<T> {
+  parent?: string;
+  kind: string;
+  data: T;
+}
+
+const schemaFromRmmzParam = <
+  V,
+  P extends Partial<RmmzParamTextFields> & { type: string; default: V },
+  X,
+  TypeName extends "boolean" | "number" | "integer" | "string"
+>(
+  param: P,
+  type: TypeName,
+  data: X
+) => ({
+  ...{
+    type: type,
+    default: param.default,
+    title: param.text,
+    description: param.desc,
+    "x-rpg-param": {
+      parent: param.parent,
+      kind: param.type,
+      data: data,
+    } satisfies X_RmmzParam<X>,
+  },
+});
+
+export const schemaFromBooleanParam = (bool: NewRmmzParam_Boolean) => {
+  return schemaFromRmmzParam<
+    boolean,
+    NewRmmzParam_Boolean,
+    MetaParam_Boolean,
+    "boolean"
+  >(bool, "boolean", {
+    on: bool.on ?? "{on}",
+    off: bool.off ?? "{off}",
+  }) satisfies ParamSchema<boolean, MetaParam_Boolean>;
+};
+
+export const schemaFromNumberParam = (num: NewRmmzParam_Number) => {
+  const digit = num.digit ?? 0;
+  return {
+    ...{
+      default: num.default ?? 0,
+      type: digit === 0 ? "integer" : "number",
+      // 整数型に限定。小数型の最大・最少は読みづらい
+      maximum: num.max ?? Number.MAX_SAFE_INTEGER,
+      minimum: num.min ?? Number.MIN_SAFE_INTEGER,
+      ["x-rpg-param"]: {
+        ...{
+          parent: num.parent,
+          kind: num.type,
+          data: { digit },
+        },
+      },
+    },
+  } satisfies ParamSchema<number, { digit: number }>;
+};
