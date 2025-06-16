@@ -30,8 +30,8 @@ const schemaFromRmmzParam = <
   param: P,
   type: TypeName,
   data: X
-) => ({
-  ...{
+) => {
+  const xxx = {
     type: type,
     default: default_,
     title: param.text,
@@ -41,8 +41,11 @@ const schemaFromRmmzParam = <
       kind: param.type,
       data: data,
     } satisfies X_RmmzParam<X>,
-  },
-});
+  };
+  // undefinedを除去するためにスプレッド構文を使う。
+  // [key]:undefinedが混ざると問題になる
+  return { ...xxx };
+};
 
 export const schemaFromBooleanParam = (bool: NewRmmzParam_Boolean) => {
   return schemaFromRmmzParam(bool.default, bool, "boolean", {
@@ -56,7 +59,7 @@ export const schemaFromDataId = (dataId: NewRmmzParam_DataId) => {
     dataId.default,
     dataId,
     "number",
-    lookupKind(dataId.type)
+    lookupKind(dataId.type) satisfies NonNullable<SourceIdentifier>
   ) satisfies ParamSchema<number, SourceIdentifier>;
 };
 
@@ -73,21 +76,20 @@ export const schemaFromNumberParam = (num: NewRmmzParam_Number) => {
         ...{
           parent: num.parent,
           kind: num.type,
-          data: { digit },
+          data: { digit: Math.max(digit, 0) },
         },
       },
     },
   } satisfies ParamSchema<number, { digit: number }>;
 };
 
+const toOptions = <T extends number | string>(
+  options: RmmzParamCore_Option<T>[]
+) => options.map(({ value, option }) => ({ value, option }));
+
 export const schemaFromSelectParam = (select: RmmzParamCore_Select<number>) => {
   return schemaFromRmmzParam(select.default, select, "number", {
-    options: select.options.map(
-      (option): RmmzParamCore_Option<number> => ({
-        value: option.value,
-        option: option.option,
-      })
-    ),
+    options: toOptions(select.options),
   }) satisfies ParamSchema<number, { options: RmmzParamCore_Option<number>[] }>;
 };
 
@@ -95,11 +97,6 @@ export const schemaFromStringSelectParam = (
   select: RmmzParamCore_Select<string>
 ) => {
   return schemaFromRmmzParam(select.default, select, "string", {
-    options: select.options.map(
-      (option): RmmzParamCore_Option<string> => ({
-        value: option.value,
-        option: option.option,
-      })
-    ),
+    options: toOptions(select.options),
   }) satisfies ParamSchema<string, { options: RmmzParamCore_Option<string>[] }>;
 };
