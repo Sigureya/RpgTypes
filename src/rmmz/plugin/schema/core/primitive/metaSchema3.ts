@@ -1,12 +1,18 @@
 import type { JSONSchemaType } from "ajv";
 import type { SourceIdentifier } from "src/namedItemSource";
 import type { DiscriminatedUnionSchemaType3 } from "src/templates/discriminator/discriminator3";
+import { optionsSchema } from "./select/select";
 
 type UnionSchema = DiscriminatedUnionSchemaType3<
   BaseKind,
   string,
   "kind",
-  BooleanKind | DataIdKind | NumberKind | StringKind
+  | BooleanKind
+  | DataIdKind
+  | NumberKind
+  | StringKind
+  | SelectKind<string>
+  | SelectKind<number>
 >;
 
 interface BaseKind {
@@ -42,6 +48,14 @@ interface DataIdKind {
   data: SourceIdentifier;
 }
 
+interface SelectKind<T> {
+  kind: "select";
+  parent?: string | null;
+  data: {
+    options: { value: T; option: string }[];
+  };
+}
+
 interface NullableString {
   type: "string";
   nullable: true;
@@ -64,6 +78,12 @@ export const makeSchema3 = () => {
       stringKind(nullablString),
       numberKind(nullablString),
       dataIdKind(nullablString),
+      selectKind(optionsSchema({ type: "string" })) satisfies JSONSchemaType<
+        SelectKind<string>
+      >,
+      selectKind(optionsSchema({ type: "number" })) satisfies JSONSchemaType<
+        SelectKind<number>
+      >,
     ],
   } satisfies UnionSchema;
 };
@@ -143,4 +163,23 @@ const dataIdKind = (nullablString: NullableString) => {
       } satisfies JSONSchemaType<SourceIdentifier>,
     },
   } satisfies JSONSchemaType<DataIdKind>;
+};
+
+const selectKind = <T>(opt: JSONSchemaType<{ value: T; option: string }[]>) => {
+  return {
+    type: "object",
+    required: ["kind", "data"],
+    additionalProperties: false,
+    properties: {
+      kind: { type: "string", const: "select" },
+      parent: { type: "string", nullable: true, maxLength: 100 },
+      data: {
+        type: "object",
+        required: ["options"],
+        properties: {
+          options: opt,
+        },
+      },
+    },
+  } satisfies JSONSchemaType<SelectKind<T>>;
 };
