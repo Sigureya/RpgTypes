@@ -1,3 +1,4 @@
+import type { Schema } from "jsonschema";
 import type { SourceIdentifier } from "src/namedItemSource";
 import type { MetaParam_Boolean } from "./boolean";
 import type { RmmzParamTextFields } from "./metaTextField";
@@ -8,7 +9,7 @@ import type {
 } from "./newParamType";
 import { lookupKind } from "./rpgDataId/lookup";
 import type { RmmzParamCore_Option, RmmzParamCore_Select } from "./select";
-import type { ParamSchema } from "./x-rpg-param";
+import type { NumberParamSchema, ParamSchema } from "./x-rpg-param";
 import { X_RPG_PARM, type X_RmmzParam } from "./x-rpg-param";
 
 const schemaFromRmmzParam = <
@@ -27,15 +28,23 @@ const schemaFromRmmzParam = <
     default: default_,
     title: param.text,
     description: param.desc,
-    [X_RPG_PARM]: {
-      parent: param.parent,
-      kind: param.type,
-      data: data,
-    } satisfies X_RmmzParam<X>,
+    [X_RPG_PARM]: makeData(param.parent, param.type, data),
   };
   // undefinedを除去するためにスプレッド構文を使う。
   // [key]:undefinedが混ざると問題になる
   return { ...xxx };
+};
+
+const makeData = <T>(
+  parent: string | null | undefined,
+  kind: string,
+  data: T
+) => {
+  return {
+    parent: parent ?? "",
+    kind: kind,
+    data: data,
+  } satisfies X_RmmzParam<T>;
 };
 
 export const schemaFromBooleanParam = (bool: NewRmmzParam_Boolean) => {
@@ -56,22 +65,19 @@ export const schemaFromDataId = (dataId: NewRmmzParam_DataId) => {
 
 export const schemaFromNumberParam = (num: NewRmmzParam_Number) => {
   const digit = num.digit ?? 0;
+
   return {
-    ...{
-      default: num.default ?? 0,
-      type: digit === 0 ? "integer" : "number",
-      // 整数型に限定。小数型の最大・最少は読みづらい
-      maximum: num.max,
-      minimum: num.min,
-      [X_RPG_PARM]: {
-        ...{
-          parent: num.parent,
-          kind: num.type,
-          data: { digit: Math.max(digit, 0) },
-        },
-      },
-    },
-  } satisfies ParamSchema<number, { digit: number }>;
+    title: num.text ?? "",
+    description: num.desc ?? "",
+    default: num.default ?? 0,
+    type: digit === 0 ? "integer" : "number",
+    // 整数型に限定。小数型の最大・最少は読みづらい
+    maximum: num.max ?? Number.MAX_SAFE_INTEGER,
+    minimum: num?.min ?? Number.MIN_SAFE_INTEGER,
+    [X_RPG_PARM]: makeData(num.parent, num.type, {
+      digit: Math.max(digit, 0),
+    }),
+  } satisfies NumberParamSchema;
 };
 
 const toOptions = <T extends number | string>(
