@@ -3,11 +3,7 @@ import type { SourceId_DataSkill, SourceId_DataWeapon } from "@RpgTypes/rpg";
 import type { SourceId_SystemVariables } from "@RpgTypes/system";
 import Ajv from "ajv";
 import type { SourceIdentifier } from "src/namedItemSource";
-import {
-  dataIndexSchema,
-  dataIdMetaParam,
-  metaSchemaDataIdParamCore,
-} from "./rpgDataId";
+import { dataIndexSchema, dataIdMetaParam } from "./rpgDataId";
 import type { DataKindUnion } from "./rpgDataTypesNames";
 import type {
   RmmzParamCore_Skill,
@@ -61,18 +57,11 @@ interface TestCase {
 }
 
 const runTestCases = (testCases: TestCase[]) => {
-  const ajv = new Ajv({ strict: true });
-  const metaSchema = metaSchemaDataIdParamCore();
-  const validateMetaParam = ajv.compile(metaSchema);
-
   testCases.forEach(({ caseName, data, expected }) => {
     describe(caseName, () => {
       const result = dataIdMetaParam(data);
       test("should return the expected meta parameter", () => {
         expect(result).toEqual(expected);
-      });
-      test.skip("should satisfy the meta schema", () => {
-        expect(result).toSatisfy(validateMetaParam);
       });
     });
   });
