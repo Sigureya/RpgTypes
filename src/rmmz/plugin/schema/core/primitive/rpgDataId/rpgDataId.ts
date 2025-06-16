@@ -8,7 +8,7 @@ import type { RmmzParamCore_DataId } from "./types";
 
 export const dataIdMetaParam = (
   data: RmmzParamCore_DataId<DataKindUnion>
-): SourceIdentifier | undefined => lookupKind(data.type);
+): SourceIdentifier => lookupKind(data.type);
 
 export const metaSchemaDataIdParamCore = () => ({
   type: "object",

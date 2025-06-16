@@ -3,6 +3,7 @@ import type {
   SourceId_SystemSwitches,
   SourceId_SystemVariables,
 } from "@RpgTypes/system";
+import type { SourceIdentifier } from "src/namedItemSource";
 import type { DataKindUnion } from "./rpgDataTypesNames";
 
 const DATA = 0 as const;
@@ -26,16 +27,26 @@ const KIND_TABLE = {
 
 const MODULE_TABLE = ["data", "system", "system"] as const;
 
+export interface SourceId_RmmzUnknown extends SourceIdentifier {
+  author: "rmmz";
+  module: "unknown";
+  kind: string;
+}
+
 export const lookupKind = (
   kind: string
 ):
   | SourceIdUnion_RpgData
   | SourceId_SystemSwitches
   | SourceId_SystemVariables
-  | undefined => {
+  | SourceId_RmmzUnknown => {
   const index = KIND_TABLE[kind as DataKindUnion];
   if (index === undefined) {
-    return undefined;
+    return {
+      author: "rmmz",
+      module: "unknown",
+      kind: kind,
+    };
   }
   const kindTable = [
     kind,

@@ -4,6 +4,7 @@ import type {
   SourceId_SystemSwitches,
   SourceId_SystemVariables,
 } from "@RpgTypes/system";
+import type { SourceId_RmmzUnknown } from "./lookup";
 import { lookupKind } from "./lookup";
 import type { DataKindUnion } from "./rpgDataTypesNames";
 
@@ -13,7 +14,7 @@ interface TestCase {
     | SourceIdUnion_RpgData
     | SourceId_SystemSwitches
     | SourceId_SystemVariables
-    | undefined;
+    | SourceId_RmmzUnknown;
 }
 
 const testLookupKind = ({ arg, expected }: TestCase) => {
@@ -75,8 +76,12 @@ const testCases: TestCase[] = [
     expected: { author: "rmmz", module: "data", kind: "common_event" },
   },
   {
-    arg: "unknown" as DataKindUnion,
-    expected: undefined,
+    arg: "unknownKind" as DataKindUnion,
+    expected: { author: "rmmz", module: "unknown", kind: "unknownKind" },
+  },
+  {
+    arg: "xyz" as DataKindUnion,
+    expected: { author: "rmmz", module: "unknown", kind: "xyz" },
   },
 ];
 testCases.forEach(testLookupKind);
