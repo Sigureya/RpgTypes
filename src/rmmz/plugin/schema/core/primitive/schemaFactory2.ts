@@ -8,6 +8,7 @@ import type {
   NewRmmzParam_Number,
 } from "./newParamType";
 import { lookupKind } from "./rpgDataId/lookup";
+import type { RmmzParamCore_Option, RmmzParamCore_Select } from "./select";
 
 export type ParamSchema<Value, X> = JSONSchemaType<Value> & {
   "x-rpg-param": X_RmmzParam<X>;
@@ -50,6 +51,15 @@ export const schemaFromBooleanParam = (bool: NewRmmzParam_Boolean) => {
   }) satisfies ParamSchema<boolean, MetaParam_Boolean>;
 };
 
+export const schemaFromDataId = (dataId: NewRmmzParam_DataId) => {
+  return schemaFromRmmzParam(
+    dataId.default,
+    dataId,
+    "number",
+    lookupKind(dataId.type)
+  ) satisfies ParamSchema<number, SourceIdentifier>;
+};
+
 export const schemaFromNumberParam = (num: NewRmmzParam_Number) => {
   const digit = num.digit ?? 0;
   return {
@@ -70,11 +80,26 @@ export const schemaFromNumberParam = (num: NewRmmzParam_Number) => {
   } satisfies ParamSchema<number, { digit: number }>;
 };
 
-export const schemaFromDataId = (dataId: NewRmmzParam_DataId) => {
-  return schemaFromRmmzParam(
-    dataId.default,
-    dataId,
-    "number",
-    lookupKind(dataId.type)
-  ) satisfies ParamSchema<number, SourceIdentifier>;
+export const schemaFromSelectParam = (select: RmmzParamCore_Select<number>) => {
+  return schemaFromRmmzParam(select.default, select, "number", {
+    options: select.options.map(
+      (option): RmmzParamCore_Option<number> => ({
+        value: option.value,
+        option: option.option,
+      })
+    ),
+  }) satisfies ParamSchema<number, { options: RmmzParamCore_Option<number>[] }>;
+};
+
+export const schemaFromStringSelectParam = (
+  select: RmmzParamCore_Select<string>
+) => {
+  return schemaFromRmmzParam(select.default, select, "string", {
+    options: select.options.map(
+      (option): RmmzParamCore_Option<string> => ({
+        value: option.value,
+        option: option.option,
+      })
+    ),
+  }) satisfies ParamSchema<string, { options: RmmzParamCore_Option<string>[] }>;
 };
