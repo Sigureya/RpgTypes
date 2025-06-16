@@ -1,37 +1,30 @@
 import type { JSONSchemaType } from "ajv";
 import type { Schema } from "jsonschema";
 
-export type DiscriminatorCore<
+type DiscriminatorCore<
   Base extends object,
-  Kind extends string,
+  Kind extends string | number,
   PropName extends keyof Base,
-  AllTypes extends Base
+  AllTypes
 > = {
-  [K in Kind]:
-    | Schema & JSONSchemaType<Extract<AllTypes, { [P in PropName]: K }>>;
+  [K in Kind]: JSONSchemaType<Extract<AllTypes, { [P in PropName]: K }>>;
 };
 
-export type UnionJSONSchemaType<
+export type DiscriminatedUnionSchemaType<
   Base extends object,
-  Kind extends string,
+  Kind extends string | number,
   PropName extends keyof Base,
-  AllTypes extends Base
+  AllTypes,
+  BaseName extends string = "base"
 > = {
-  type: "object";
-  discriminator: {
-    propertyName: PropName;
+  oneOf: {
+    allOf: [
+      Omit<Schema, "properties"> &
+        DiscriminatorCore<Base, Kind, PropName, AllTypes>[Kind],
+      { $ref: `#/definitions/${BaseName}` }
+    ];
+  }[];
+  definitions: {
+    [K in BaseName]: JSONSchemaType<Base> & Schema;
   };
-  oneOf: Array<DiscriminatorCore<Base, Kind, PropName, AllTypes>[Kind]>;
-};
-export type UnionJSONSchemaType2<
-  Base extends object,
-  Kind extends string,
-  PropName extends keyof Base,
-  AllTypes extends Base
-> = {
-  type: "object";
-  discriminator: {
-    propertyName: PropName;
-  };
-  oneOf: Array<DiscriminatorCore<Base, Kind, PropName, AllTypes>[Kind]>;
-};
+} & Omit<Schema, "definitions" | "oneOf">;
