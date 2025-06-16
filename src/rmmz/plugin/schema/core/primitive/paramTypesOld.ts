@@ -1,5 +1,7 @@
 import type { AnnotationBase } from "./annotationBase";
 import type { NewRmmzParam_Boolean } from "./newParamType";
+import type { NumberArg } from "./numbers";
+import type { ToArrayAnnotation } from "./primitiveArray";
 import type { RmmzParamCore_DataId } from "./rpgDataId";
 import type { RmmzParamCore_Select } from "./select";
 import type {
@@ -7,7 +9,6 @@ import type {
   RmmzParamCore_FilePath,
   RmmzParamCore_Combo,
 } from "./string";
-
 export type Actor = RmmzParamCore_DataId<"actor"> & AnnotationBase;
 export type Armor = RmmzParamCore_DataId<"armor"> & AnnotationBase;
 export type Skill = RmmzParamCore_DataId<"skill"> & AnnotationBase;
@@ -35,3 +36,34 @@ export type Primitive_Strings =
   | StringSelect;
 
 export type BooleanArg = NewRmmzParam_Boolean;
+export type AnnotationSigleTypes =
+  | BooleanArg
+  | Primitive_Numbers
+  | Primitive_Strings;
+
+export type AnnotationArrayTypes =
+  | Primitive_NumbersArray
+  | Primitive_StringsArray;
+
+export type AnnotationPrimitiveTypes =
+  | AnnotationSigleTypes
+  | AnnotationArrayTypes;
+type List = [
+  NumberArg,
+  Actor,
+  Switch,
+  Armor,
+  Skill,
+  Item,
+  Weapon,
+  Troop,
+  Class,
+  State,
+  CommonEvent,
+  NumberSelect
+];
+
+export type NumberSelect = RmmzParamCore_Select<number> & AnnotationBase;
+export type Primitive_Numbers = List[number];
+export type Primitive_NumbersArray = ToArrayAnnotation<Primitive_Numbers>;
+export type Primitive_StringsArray = ToArrayAnnotation<Primitive_Strings>;
