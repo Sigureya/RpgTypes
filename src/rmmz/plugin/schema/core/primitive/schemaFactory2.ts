@@ -1,4 +1,3 @@
-import type { JSONSchemaType } from "ajv";
 import type { SourceIdentifier } from "src/namedItemSource";
 import type { MetaParam_Boolean } from "./boolean";
 import type { RmmzParamTextFields } from "./metaTextField";
@@ -9,17 +8,8 @@ import type {
 } from "./newParamType";
 import { lookupKind } from "./rpgDataId/lookup";
 import type { RmmzParamCore_Option, RmmzParamCore_Select } from "./select";
-
-export type ParamSchema<Value, X> = JSONSchemaType<Value> & {
-  "x-rpg-param": X_RmmzParam<X>;
-};
-interface X_RmmzParam<T> {
-  parent?: string;
-  kind: string;
-  data: T;
-}
-
-export const X_RPG_PARM = "x-rpg-param" as const;
+import type { ParamSchema } from "./x-rpg-param";
+import { X_RPG_PARM, type X_RmmzParam } from "./x-rpg-param";
 
 const schemaFromRmmzParam = <
   V,
