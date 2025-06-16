@@ -6,12 +6,12 @@ import {
   X_RMMZ_PARAM_DATA_INDEX,
   X_RMMZ_PARAM_NUMBER,
 } from "./keyConstants";
+import type { NewRmmzParam_Boolean } from "./newParamType";
 import type { DataIndexArg, RmmzParamCore_Number } from "./numbers";
 import { x_metaParamNumber } from "./numbers";
-import type { BooleanArg } from "./paramTypesOld";
 import type { DataKindUnion } from "./rpgDataId";
 
-export const rmmzParamToSchemaBoolean = (boolArg: BooleanArg) => {
+export const rmmzParamToSchemaBoolean = (boolArg: NewRmmzParam_Boolean) => {
   return {
     title: boolArg.text,
     description: boolArg.desc,

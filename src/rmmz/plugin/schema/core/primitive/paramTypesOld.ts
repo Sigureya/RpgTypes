@@ -1,4 +1,5 @@
 import type { AnnotationBase } from "./annotationBase";
+import type { NewRmmzParam_Boolean } from "./newParamType";
 import type { RmmzParamCore_DataId } from "./rpgDataId";
 import type { RmmzParamCore_Select } from "./select";
 import type {
@@ -33,9 +34,4 @@ export type Primitive_Strings =
   | ComboAnnotation
   | StringSelect;
 
-export interface BooleanArg extends AnnotationBase {
-  default: boolean;
-  type: "boolean";
-  on?: string;
-  off?: string;
-}
+export type BooleanArg = NewRmmzParam_Boolean;
