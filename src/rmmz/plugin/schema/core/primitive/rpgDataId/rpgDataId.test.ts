@@ -119,10 +119,26 @@ describe("dataIdMetaParam meta parameter extraction", () => {
     {
       caseName: "returns undefined sourceId for unknown type",
       data: {
-        type: "unknown" as DataKindUnion,
+        type: "unknownKind" as DataKindUnion,
         default: 0,
       } satisfies RmmzParamCore_DataId<DataKindUnion>,
-      expected: undefined,
+      expected: {
+        author: "rmmz",
+        module: "unknown",
+        kind: "unknownKind",
+      },
+    },
+    {
+      caseName: "returns undefined sourceId for unknown type",
+      data: {
+        type: "xyz" as DataKindUnion,
+        default: 0,
+      } satisfies RmmzParamCore_DataId<DataKindUnion>,
+      expected: {
+        author: "rmmz",
+        module: "unknown",
+        kind: "xyz",
+      },
     },
   ]);
 });
