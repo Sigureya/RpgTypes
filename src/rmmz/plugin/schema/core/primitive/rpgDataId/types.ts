@@ -1,14 +1,9 @@
-import type { SourceIdentifier } from "src/namedItemSource";
 import type { AnnotationBase } from "../annotationBase";
 import type { DataKindUnion } from "./rpgDataTypesNames";
 
 export interface RmmzParamCore_DataId<Name extends DataKindUnion> {
   type: Name;
   default: number;
-}
-
-export interface X_MetaParam_DataId {
-  sourceId?: SourceIdentifier;
 }
 
 export type RmmzParamCore_Actor = RmmzParamCore_DataId<"actor">;

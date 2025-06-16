@@ -4,32 +4,29 @@ import type { SourceIdentifier } from "src/namedItemSource";
 import { lookupKind } from "./lookup";
 import type { DataKindUnion } from "./rpgDataTypesNames";
 import { rmmzDataTypes } from "./sourceId";
-import type { RmmzParamCore_DataId, X_MetaParam_DataId } from "./types";
+import type { RmmzParamCore_DataId } from "./types";
 
 export const dataIdMetaParam = (
   data: RmmzParamCore_DataId<DataKindUnion>
-): X_MetaParam_DataId => ({
-  sourceId: lookupKind(data.type),
-});
+): SourceIdentifier | undefined => lookupKind(data.type);
 
-export const metaSchemaDataIdParamCore = () =>
-  ({
-    type: "object",
-    additionalProperties: false,
-    properties: {
-      sourceId: {
-        nullable: true as const,
-        type: "object",
-        additionalProperties: false,
-        required: ["author", "module", "kind"],
-        properties: {
-          author: { type: "string" },
-          module: { type: "string" },
-          kind: { type: "string" },
-        },
-      } satisfies JSONSchemaType<SourceIdentifier | undefined>,
-    },
-  } satisfies Schema & JSONSchemaType<X_MetaParam_DataId>);
+export const metaSchemaDataIdParamCore = () => ({
+  type: "object",
+  additionalProperties: false,
+  properties: {
+    sourceId: {
+      nullable: true as const,
+      type: "object",
+      additionalProperties: false,
+      required: ["author", "module", "kind"],
+      properties: {
+        author: { type: "string" },
+        module: { type: "string" },
+        kind: { type: "string" },
+      },
+    } satisfies JSONSchemaType<SourceIdentifier | undefined>,
+  },
+});
 
 export const dataIndexSchema = () =>
   ({
