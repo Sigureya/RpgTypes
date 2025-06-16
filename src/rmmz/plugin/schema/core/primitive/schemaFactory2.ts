@@ -55,8 +55,8 @@ export const schemaFromNumberParam = (num: NewRmmzParam_Number) => {
       default: num.default ?? 0,
       type: digit === 0 ? "integer" : "number",
       // 整数型に限定。小数型の最大・最少は読みづらい
-      maximum: num.max ?? Number.MAX_SAFE_INTEGER,
-      minimum: num.min ?? Number.MIN_SAFE_INTEGER,
+      maximum: num.max,
+      minimum: num.min,
       ["x-rpg-param"]: {
         ...{
           parent: num.parent,
