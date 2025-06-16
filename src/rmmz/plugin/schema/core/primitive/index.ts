@@ -2,8 +2,6 @@ export * from "./annotationBase";
 export * from "./boolean";
 export * from "./numbers";
 export * from "./paramTypesOld";
-export * from "./primitive";
 export * from "./primitiveArray";
 export * from "./select";
 export * from "./string";
-export * from "./types";
