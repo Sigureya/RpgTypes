@@ -13,12 +13,13 @@ import type { RmmzParamCore_Option, RmmzParamCore_Select } from "./select";
 export type ParamSchema<Value, X> = JSONSchemaType<Value> & {
   "x-rpg-param": X_RmmzParam<X>;
 };
-
 interface X_RmmzParam<T> {
   parent?: string;
   kind: string;
   data: T;
 }
+
+export const X_RPG_PARM = "x-rpg-param" as const;
 
 const schemaFromRmmzParam = <
   V,
@@ -36,7 +37,7 @@ const schemaFromRmmzParam = <
     default: default_,
     title: param.text,
     description: param.desc,
-    "x-rpg-param": {
+    [X_RPG_PARM]: {
       parent: param.parent,
       kind: param.type,
       data: data,
@@ -72,7 +73,7 @@ export const schemaFromNumberParam = (num: NewRmmzParam_Number) => {
       // 整数型に限定。小数型の最大・最少は読みづらい
       maximum: num.max,
       minimum: num.min,
-      ["x-rpg-param"]: {
+      [X_RPG_PARM]: {
         ...{
           parent: num.parent,
           kind: num.type,
