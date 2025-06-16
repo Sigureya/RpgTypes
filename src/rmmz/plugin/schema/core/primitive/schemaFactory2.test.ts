@@ -1,7 +1,7 @@
 import { describe, test, expect } from "vitest";
 import type { NewRmmzParam_Number } from "./newParamType";
 import { schemaFromNumberParam } from "./schemaFactory2";
-import type { NumberParamSchema, ParamSchema } from "./x-rpg-param";
+import type { NumberParamSchema } from "./x-rpg-param";
 describe("schemaFromNumberParam", () => {
   test("should create a schema with default value and type", () => {
     const param: NewRmmzParam_Number = {
