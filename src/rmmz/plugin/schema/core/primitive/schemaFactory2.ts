@@ -1,4 +1,3 @@
-import type { Schema } from "jsonschema";
 import type { SourceIdentifier } from "src/namedItemSource";
 import type { MetaParam_Boolean } from "./boolean";
 import type { RmmzParamTextFields } from "./metaTextField";
@@ -22,18 +21,13 @@ const schemaFromRmmzParam = <
   param: P,
   type: TypeName,
   data: X
-) => {
-  const xxx = {
-    type: type,
-    default: default_,
-    title: param.text,
-    description: param.desc,
-    [X_RPG_PARM]: makeData(param.parent, param.type, data),
-  };
-  // undefinedを除去するためにスプレッド構文を使う。
-  // [key]:undefinedが混ざると問題になる
-  return { ...xxx };
-};
+) => ({
+  type: type,
+  default: default_,
+  title: param.text ?? "",
+  description: param.desc ?? "",
+  [X_RPG_PARM]: makeData(param.parent, param.type, data),
+});
 
 const makeData = <T>(
   parent: string | null | undefined,
