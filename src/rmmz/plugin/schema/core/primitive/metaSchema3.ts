@@ -2,6 +2,7 @@ import type { JSONSchemaType } from "ajv";
 import type { SourceIdentifier } from "src/namedItemSource";
 import type { DiscriminatedUnionSchemaType3 } from "src/templates/discriminator/discriminator3";
 import { optionsSchema } from "./select/select";
+import type { X_Param_DataId } from "./x-rpg-param";
 
 type UnionSchema = DiscriminatedUnionSchemaType3<
   BaseKind,
@@ -81,9 +82,9 @@ export const makeSchema3 = () => {
       selectKind(optionsSchema({ type: "string" })) satisfies JSONSchemaType<
         SelectKind<string>
       >,
-      selectKind(optionsSchema({ type: "number" })) satisfies JSONSchemaType<
-        SelectKind<number>
-      >,
+      // selectKind(optionsSchema({ type: "number" })) satisfies JSONSchemaType<
+      //   SelectKind<number>
+      // >,
     ],
   } satisfies UnionSchema;
 };
@@ -162,7 +163,7 @@ const dataIdKind = (nullablString: NullableString) => {
         },
       } satisfies JSONSchemaType<SourceIdentifier>,
     },
-  } satisfies JSONSchemaType<DataIdKind>;
+  } satisfies JSONSchemaType<X_Param_DataId>;
 };
 
 const selectKind = <T>(opt: JSONSchemaType<{ value: T; option: string }[]>) => {
