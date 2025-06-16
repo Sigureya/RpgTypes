@@ -101,9 +101,7 @@ const makeGameDate = (
 });
 
 const domainNames = (record: Record<string, DomainName>): string[] => {
-  return Object.entries<DomainName>(record).map(
-    ([, value]) => value.domainName
-  );
+  return Object.entries<DomainName>(record).map(([, value]) => value.title);
 };
 
 interface TestCase {

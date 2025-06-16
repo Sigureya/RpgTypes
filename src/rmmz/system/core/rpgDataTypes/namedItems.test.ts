@@ -5,7 +5,7 @@ import { defineSystemItems } from "./namedItems";
 import type { SystemLabel_DataNames } from "./types";
 
 const mockLabel: SystemLabel_DataNames = {
-  domainName: "System Data Names",
+  title: "System Data Names",
   format: "{name}",
   options: {
     armorTypes: "Armor Types",

@@ -15,7 +15,7 @@ export const defineTraitPartyAbility = (
   options: DomainLabel<PartyAbilityOptionLabels>
 ): NamedItemSource => ({
   items: partyAbilityToArray(options.options),
-  label: options.domainName,
+  label: options.title,
   source: {
     author: "rmmz",
     module: "trait",

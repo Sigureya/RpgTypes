@@ -51,7 +51,7 @@ const runTestCases = ({ caseName, data, dataLabels }: TestCase) => {
   const result: NamedItemSource[] = defineGameDataSources(data, dataLabels);
   describe(caseName, () => {
     const labelsSet: ReadonlySet<string> = new Set(
-      Object.values<DomainName>(LABEL_SET_DATA).map((item) => item.domainName)
+      Object.values<DomainName>(LABEL_SET_DATA).map((item) => item.title)
     );
     const itemIsInSet = (label: string) => {
       return labelsSet.has(label);

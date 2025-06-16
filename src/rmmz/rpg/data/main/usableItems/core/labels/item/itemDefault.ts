@@ -2,7 +2,7 @@ import type { DomainLabel } from "@RpgTypes/templates";
 import type { ItemLabels } from "./itemLabels";
 
 export const DEFAULT_ITEM_LABELS = {
-  domainName: "アイテム",
+  title: "アイテム",
   options: {
     consumable: "消耗品",
   },

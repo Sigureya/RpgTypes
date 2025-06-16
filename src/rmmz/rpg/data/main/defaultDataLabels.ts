@@ -12,7 +12,7 @@ import type { ItemLabels, SkillLabels, UsableItemLabels } from "./usableItems";
 
 export const LABEL_SET_DATA = {
   actor: {
-    domainName: "アクター",
+    title: "アクター",
     options: {
       initialEquipments: "初期装備",
       faceImage: "顔画像",
@@ -26,7 +26,7 @@ export const LABEL_SET_DATA = {
     },
   } as const satisfies DomainLabel<ActorLabels>,
   class: {
-    domainName: "職業",
+    title: "職業",
     options: {
       params: "パラメータ",
       learnings: "習得スキル",
@@ -34,14 +34,14 @@ export const LABEL_SET_DATA = {
     },
   } as const satisfies DomainLabel<ClassLabels>,
   armor: {
-    domainName: "防具",
+    title: "防具",
     options: {
       armorTypeId: "防具タイプID",
       slotTypeId: "スロットタイプID",
     },
   } as const satisfies DomainLabel<ArmorLabels>,
   enemy: {
-    domainName: "敵キャラ",
+    title: "敵キャラ",
     options: {
       dropItems: "ドロップアイテム",
       battlerHue: "バトラーヒュー",
@@ -50,13 +50,13 @@ export const LABEL_SET_DATA = {
     },
   } as const satisfies DomainLabel<EnemyLabels>,
   item: {
-    domainName: "アイテム",
+    title: "アイテム",
     options: {
       consumable: "消耗品",
     },
   } as const satisfies DomainLabel<ItemLabels>,
   skill: {
-    domainName: "スキル",
+    title: "スキル",
     options: {
       requiredWeaponTypeId1: "必要武器タイプ1",
       requiredWeaponTypeId2: "必要武器タイプ2",
@@ -65,7 +65,7 @@ export const LABEL_SET_DATA = {
     },
   } as const satisfies DomainLabel<SkillLabels>,
   state: {
-    domainName: "ステート",
+    title: "ステート",
     options: {
       restriction: "制約",
       priority: "優先度",
@@ -83,13 +83,13 @@ export const LABEL_SET_DATA = {
     },
   } as const satisfies DomainLabel<StateLabels>,
   weapon: {
-    domainName: "武器",
+    title: "武器",
     options: {
       weaponTypeId: "武器タイプID",
     },
   } as const satisfies DomainLabel<WeaponLabels>,
   usableItem: {
-    domainName: "",
+    title: "",
     options: {
       scope: "範囲",
       speed: "速度補正",
@@ -97,7 +97,7 @@ export const LABEL_SET_DATA = {
     },
   } as const satisfies DomainLabel<UsableItemLabels>,
   commonEvent: {
-    domainName: "コモンイベント",
+    title: "コモンイベント",
     options: {
       trigger: "トリガー",
       switchId: "スイッチID",

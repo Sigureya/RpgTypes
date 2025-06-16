@@ -6,7 +6,7 @@ describe("LABEL_SET_TRAIT", () => {
   Object.entries<RawTraitLabel>(LABEL_SET_TRAIT.options).forEach(
     ([key, value]) => {
       test(`${key} should have a domainName of type string`, () => {
-        expect(value.domainName).toBeTypeOf("string");
+        expect(value.title).toBeTypeOf("string");
       });
       test(`${key} should have a format of type string`, () => {
         expect(value.format).toBeTypeOf("string");
