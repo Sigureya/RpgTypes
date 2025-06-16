@@ -9,7 +9,7 @@ type UnionSchema = DiscriminatedUnionSchemaType3<
   string,
   "kind",
   | BooleanKind
-  | DataIdKind
+  | X_Param_DataId
   | NumberKind
   | StringKind
   | SelectKind<string>
@@ -43,12 +43,6 @@ interface NumberKind {
   };
 }
 
-interface DataIdKind {
-  kind: "dataId";
-  parent?: string | null;
-  data: SourceIdentifier;
-}
-
 interface SelectKind<T> {
   kind: "select";
   parent?: string | null;
@@ -78,7 +72,7 @@ export const makeSchema3 = () => {
       booleanKind(nullablString),
       stringKind(nullablString),
       numberKind(nullablString),
-      dataIdKind(nullablString),
+      dataIdKind(),
       selectKind(optionsSchema({ type: "string" })) satisfies JSONSchemaType<
         SelectKind<string>
       >,
@@ -143,7 +137,7 @@ const booleanKind = (nullablString: NullableString) =>
     },
   } satisfies JSONSchemaType<BooleanKind>);
 
-const dataIdKind = (nullablString: NullableString) => {
+const dataIdKind = () => {
   const dataIdtext = { type: "string", maxLength: 100 } as const;
   return {
     type: "object",
@@ -151,7 +145,7 @@ const dataIdKind = (nullablString: NullableString) => {
     additionalProperties: false,
     properties: {
       kind: { type: "string", const: "dataId" },
-      parent: nullablString,
+      parent: { type: "string", maxLength: 100, default: "" },
       data: {
         additionalProperties: false,
         type: "object",
