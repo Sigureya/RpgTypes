@@ -1,5 +1,5 @@
 export declare const LABEL_SET_ITEM_EFFECT: {
-    readonly domainName: "使用効果";
+    readonly title: "使用効果";
     readonly options: {
         readonly addBuff: {
             readonly desc: "バフを付与する";

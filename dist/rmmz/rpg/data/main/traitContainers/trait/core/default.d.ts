@@ -1,8 +1,8 @@
 export declare const LABEL_SET_TRAIT: {
-    readonly domainName: "特徴";
+    readonly title: "特徴";
     readonly options: {
         readonly regularParam: {
-            readonly domainName: "基本能力値";
+            readonly title: "基本能力値";
             readonly format: "{name} * {value}%";
             readonly options: {
                 readonly maxHp: "最大HP";
@@ -16,7 +16,7 @@ export declare const LABEL_SET_TRAIT: {
             };
         };
         readonly extraParam: {
-            readonly domainName: "追加能力値";
+            readonly title: "追加能力値";
             readonly format: "{name} + {value}%";
             readonly options: {
                 readonly hitRate: "命中率";
@@ -32,7 +32,7 @@ export declare const LABEL_SET_TRAIT: {
             };
         };
         readonly specialParam: {
-            readonly domainName: "特殊能力値";
+            readonly title: "特殊能力値";
             readonly format: "{name} * {value}%";
             readonly options: {
                 readonly targetRate: "狙われ率";
@@ -48,7 +48,7 @@ export declare const LABEL_SET_TRAIT: {
             };
         };
         readonly specialFlag: {
-            readonly domainName: "特殊フラグ";
+            readonly title: "特殊フラグ";
             readonly format: "{name}";
             readonly options: {
                 readonly autoBattle: "自動戦闘";
@@ -58,7 +58,7 @@ export declare const LABEL_SET_TRAIT: {
             };
         };
         readonly collaps: {
-            readonly domainName: "消滅エフェクト";
+            readonly title: "消滅エフェクト";
             readonly format: "{name}";
             readonly options: {
                 readonly bossCollaps: "ボス崩壊";
@@ -67,7 +67,7 @@ export declare const LABEL_SET_TRAIT: {
             };
         };
         readonly partyAbility: {
-            readonly domainName: "パーティ能力";
+            readonly title: "パーティ能力";
             readonly format: "{name}";
             readonly options: {
                 readonly cancelSurprise: "不意打ち無効";
@@ -79,79 +79,79 @@ export declare const LABEL_SET_TRAIT: {
             };
         };
         readonly elementRate: {
-            readonly domainName: "属性有効度";
+            readonly title: "属性有効度";
             readonly format: "{name} * {value}%";
         };
         readonly debuffRate: {
-            readonly domainName: "弱体有効度";
+            readonly title: "弱体有効度";
             readonly format: "{name} * {value}%";
         };
         readonly stateRate: {
-            readonly domainName: "ステート有効度";
+            readonly title: "ステート有効度";
             readonly format: "{name} * {value}%";
         };
         readonly stateResist: {
-            readonly domainName: "ステート無効";
+            readonly title: "ステート無効";
             readonly format: "{name}";
         };
         readonly attackElement: {
-            readonly domainName: "攻撃属性";
+            readonly title: "攻撃属性";
             readonly format: "{name}";
         };
         readonly attackState: {
-            readonly domainName: "攻撃ステート";
+            readonly title: "攻撃ステート";
             readonly format: "{name} + {value}%";
         };
         readonly attackSpeed: {
-            readonly domainName: "攻撃速度補正";
+            readonly title: "攻撃速度補正";
             readonly format: "{value}";
         };
         readonly attackTimes: {
-            readonly domainName: "攻撃追加回数";
+            readonly title: "攻撃追加回数";
             readonly format: "{value}";
         };
         readonly actionPlus: {
-            readonly domainName: "行動追加";
+            readonly title: "行動追加";
             readonly format: "{name} * {value}%";
         };
         readonly attackSkill: {
-            readonly domainName: "攻撃スキル";
+            readonly title: "攻撃スキル";
             readonly format: "{name}";
         };
         readonly equipWeaponType: {
-            readonly domainName: "装備武器タイプ";
+            readonly title: "装備武器タイプ";
             readonly format: "{name}";
         };
         readonly equipArmorType: {
-            readonly domainName: "装備防具タイプ";
+            readonly title: "装備防具タイプ";
             readonly format: "{name}";
         };
         readonly equipLock: {
-            readonly domainName: "装備固定";
+            readonly title: "装備固定";
             readonly format: "{name}";
         };
         readonly equipSeal: {
-            readonly domainName: "装備封印";
+            readonly title: "装備封印";
             readonly format: "{name}";
         };
         readonly slotType: {
-            readonly domainName: "スロットタイプ";
+            readonly title: "スロットタイプ";
             readonly format: "{name}";
         };
         readonly skillAdd: {
-            readonly domainName: "スキル追加";
+            readonly title: "スキル追加";
             readonly format: "{name}";
         };
         readonly skillSeal: {
-            readonly domainName: "スキルタイプ封印";
+            readonly title: "スキルタイプ封印";
             readonly format: "{name}";
         };
         readonly skillTypeAdd: {
-            readonly domainName: "スキルタイプ追加";
+            readonly title: "スキルタイプ追加";
             readonly format: "{name}";
         };
         readonly skillTypeSeal: {
-            readonly domainName: "スキルタイプ封印";
+            readonly title: "スキルタイプ封印";
             readonly format: "{name}";
         };
     };

@@ -1,6 +1,6 @@
 export declare const LABEL_SET_DATA: {
     readonly actor: {
-        readonly domainName: "アクター";
+        readonly title: "アクター";
         readonly options: {
             readonly initialEquipments: "初期装備";
             readonly faceImage: "顔画像";
@@ -14,7 +14,7 @@ export declare const LABEL_SET_DATA: {
         };
     };
     readonly class: {
-        readonly domainName: "職業";
+        readonly title: "職業";
         readonly options: {
             readonly params: "パラメータ";
             readonly learnings: "習得スキル";
@@ -22,14 +22,14 @@ export declare const LABEL_SET_DATA: {
         };
     };
     readonly armor: {
-        readonly domainName: "防具";
+        readonly title: "防具";
         readonly options: {
             readonly armorTypeId: "防具タイプID";
             readonly slotTypeId: "スロットタイプID";
         };
     };
     readonly enemy: {
-        readonly domainName: "敵キャラ";
+        readonly title: "敵キャラ";
         readonly options: {
             readonly dropItems: "ドロップアイテム";
             readonly battlerHue: "バトラーヒュー";
@@ -38,13 +38,13 @@ export declare const LABEL_SET_DATA: {
         };
     };
     readonly item: {
-        readonly domainName: "アイテム";
+        readonly title: "アイテム";
         readonly options: {
             readonly consumable: "消耗品";
         };
     };
     readonly skill: {
-        readonly domainName: "スキル";
+        readonly title: "スキル";
         readonly options: {
             readonly requiredWeaponTypeId1: "必要武器タイプ1";
             readonly requiredWeaponTypeId2: "必要武器タイプ2";
@@ -53,7 +53,7 @@ export declare const LABEL_SET_DATA: {
         };
     };
     readonly state: {
-        readonly domainName: "ステート";
+        readonly title: "ステート";
         readonly options: {
             readonly restriction: "制約";
             readonly priority: "優先度";
@@ -71,13 +71,13 @@ export declare const LABEL_SET_DATA: {
         };
     };
     readonly weapon: {
-        readonly domainName: "武器";
+        readonly title: "武器";
         readonly options: {
             readonly weaponTypeId: "武器タイプID";
         };
     };
     readonly usableItem: {
-        readonly domainName: "";
+        readonly title: "";
         readonly options: {
             readonly scope: "範囲";
             readonly speed: "速度補正";
@@ -85,7 +85,7 @@ export declare const LABEL_SET_DATA: {
         };
     };
     readonly commonEvent: {
-        readonly domainName: "コモンイベント";
+        readonly title: "コモンイベント";
         readonly options: {
             readonly trigger: "トリガー";
             readonly switchId: "スイッチID";
