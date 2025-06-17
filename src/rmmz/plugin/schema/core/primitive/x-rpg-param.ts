@@ -26,7 +26,13 @@ export type X_Param_BooleanInput = X_RmmzParamInput<
   X_MetaParamCore_Boolean,
   "boolean"
 >;
-export type X_Param_String = X_RmmzParam<{}, "string" | "multiline_string">;
+
+export interface X_Param_StringInput {
+  parent?: string;
+  kind: "string" | "multiline_string";
+}
+
+export type X_Param_String = Required<X_Param_StringInput>;
 
 export type NumberParamSchema = ParamSchemaCompiled<
   number,

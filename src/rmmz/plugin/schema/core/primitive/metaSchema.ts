@@ -4,24 +4,20 @@ import type { DiscriminatedUnionSchemaType3 } from "src/templates/discriminator/
 import type { X_MetaParamCore_Boolean } from "./boolean";
 import type { X_MetaParamCore_Number } from "./numbers";
 import { optionsSchema } from "./select/select";
-import type { X_Param_DataId } from "./x-rpg-param";
+import type { X_Param_DataId, X_Param_StringInput } from "./x-rpg-param";
 import type { X_RmmzParamInput } from "./x-rpg-param2";
 
 type UnionSchema = DiscriminatedUnionSchemaType3<
   BaseKind,
   string,
   "kind",
-  BooelanKind | X_Param_DataId | NumberKind | StringKind | SelectKind
+  BooelanKind | X_Param_DataId | NumberKind | X_Param_StringInput | SelectKind
 >;
 
 interface BaseKind {
   kind: string;
   parent?: string | null;
-}
-
-interface StringKind {
-  kind: "string" | "multiline_string";
-  parent?: string | null;
+  data?: unknown;
 }
 
 interface NullableString {
@@ -29,6 +25,14 @@ interface NullableString {
   nullable: true;
   maxLength: 100;
 }
+
+const parentSchema = () =>
+  ({
+    type: "string",
+    nullable: true,
+    maxLength: 100,
+    defaylt: "",
+  } as const satisfies JSONSchemaType<string | null>);
 
 export const makeSchema3 = () => {
   const nullablString = {
@@ -44,21 +48,21 @@ export const makeSchema3 = () => {
     oneOf: [
       booleanKind(nullablString),
       stringKind(nullablString),
-      numberKind(nullablString),
+      numberKind(),
       dataIdKind(),
       selectKind(),
     ],
   } satisfies UnionSchema;
 };
 
-const numberKind = (nullablString: NullableString) =>
+const numberKind = () =>
   ({
     type: "object",
     required: ["kind", "data"],
     additionalProperties: false,
     properties: {
       kind: { type: "string", const: "number" },
-      parent: nullablString,
+      parent: parentSchema(),
       data: {
         type: "object",
         properties: {
@@ -86,7 +90,7 @@ const stringKind = (nullablString: NullableString) =>
       },
       parent: nullablString,
     },
-  } satisfies JSONSchemaType<StringKind>);
+  } satisfies JSONSchemaType<X_Param_StringInput>);
 
 const booleanKind = (nullablString: NullableString) =>
   ({
@@ -95,7 +99,7 @@ const booleanKind = (nullablString: NullableString) =>
     additionalProperties: false,
     properties: {
       kind: { type: "string", const: "boolean" },
-      parent: nullablString,
+      parent: parentSchema(),
       data: {
         type: "object",
         properties: {
