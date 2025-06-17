@@ -4,7 +4,8 @@ import type { DiscriminatedUnionSchemaType3 } from "src/templates/discriminator/
 import type { X_MetaParamCore_Boolean } from "./boolean";
 import type { X_MetaParamCore_Number } from "./numbers";
 import { optionsSchema } from "./select/select";
-import type { X_Param_DataId, X_RmmzParamInput } from "./x-rpg-param";
+import type { X_Param_DataId } from "./x-rpg-param";
+import type { X_RmmzParamInput } from "./x-rpg-param2";
 
 type UnionSchema = DiscriminatedUnionSchemaType3<
   BaseKind,

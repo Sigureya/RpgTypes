@@ -73,6 +73,6 @@ interface NumberSelectOption {
 
 export interface NumberSelect extends AnnotationBase {
   type: "select";
-  default: string;
+  default: number;
   options: NumberSelectOption[];
 }
