@@ -1,5 +1,5 @@
 import type { JSONSchemaType } from "ajv";
-import type { StringSelect } from "./primitive";
+import type { StringArg, StringSelect, ToArrayAnnotation } from "./primitive";
 import type { StructAnnotation } from "./struct";
 
 type AnyObject = Record<string, any>;
@@ -10,12 +10,10 @@ const makeNumberArray = (
   type: "array",
   items: { type: "number" },
   ...(param.desc && { title: param.desc }),
-  ...{ default: param.default ?? [] },
+  ...(param.default !== undefined && { default: param.default }),
 });
 
-const makeStringArray = (
-  param: { desc?: string; default?: any } & Record<string, unknown>
-) => ({
+const makeStringArray = (param: ToArrayAnnotation<StringArg>) => ({
   type: "array",
   items: { type: "string" },
   ...(param.desc && { title: param.desc }),

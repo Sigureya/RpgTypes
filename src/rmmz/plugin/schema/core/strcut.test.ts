@@ -11,6 +11,7 @@ interface Person {
 interface MockType {
   option: string;
   actorData: number;
+  numberArray: number[];
   weaponsData: number[];
   bool: boolean;
   imageFile: string;
@@ -25,6 +26,12 @@ const paramAnt: StructAnnotation<MockType> = {
   struct: {
     structName: "PPP",
     params: {
+      numberArray: {
+        type: "number[]",
+        default: [1, 2],
+        desc: "数値の配列",
+        digit: 4,
+      },
       option: {
         type: "select",
         default: "A",
@@ -78,25 +85,33 @@ const paramAnt: StructAnnotation<MockType> = {
       },
     },
   },
-  default: {
-    option: "A",
-    actorData: 0,
-    weaponsData: [],
-    bool: false,
-    imageFile: "",
-    audioFile: "",
-    textData: "",
-    person: {
-      name: "",
-      age: 0,
-    },
-    personArray: [],
-  } satisfies MockType,
+  // default: {
+  //   numberArray: [1, 2],
+  //   option: "A",
+  //   actorData: 0,
+  //   weaponsData: [],
+  //   bool: false,
+  //   imageFile: "",
+  //   audioFile: "",
+  //   textData: "",
+  //   person: {
+  //     name: "",
+  //     age: 0,
+  //   },
+  //   personArray: [],
+  // } satisfies MockType,
 };
 
 const personSchemaJson = {
   type: "object",
   properties: {
+    numberArray: {
+      type: "array",
+      items: { type: "number", minimum: 0, maximum: 9999 },
+      default: [1, 2],
+      title: "数値の配列",
+      description: "数値の配列",
+    },
     option: { type: "string", default: "A", enum: ["A", "B"] },
     actorData: {
       type: "number",
@@ -138,6 +153,7 @@ const personSchemaJson = {
     },
   },
   required: [
+    "numberArray",
     "option",
     "actorData",
     "weaponsData",
