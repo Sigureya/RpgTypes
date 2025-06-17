@@ -2,15 +2,14 @@ import type {
   AnnotationBase,
   BooleanArg,
   ComboAnnotation,
-  DataIndexArg,
   FilePathAnnotation,
   MultilineString,
-  NumberArg,
   NumberSelect,
   StringArg,
   StringSelect,
   ToArrayAnnotation,
 } from "./primitive";
+import type { DataIndexArg, NumberArg } from "./primitive/numbers";
 // import type { HasStruct } from "./struct";
 import type {
   StructAnnotationBase_Completed,

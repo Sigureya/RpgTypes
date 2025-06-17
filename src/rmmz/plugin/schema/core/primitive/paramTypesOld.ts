@@ -1,6 +1,6 @@
-import type { AnnotationBase } from "./annotationBase";
 import type { NewRmmzParam_Boolean } from "./newParamType";
 import type { NumberArg } from "./numbers";
+import type { AnnotationBase } from "./oldTypes/annotationBase";
 import type { ToArrayAnnotation } from "./primitiveArray";
 import type { RmmzParamCore_DataId } from "./rpgDataId";
 import type { RmmzParamCore_Select } from "./select";

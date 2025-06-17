@@ -1,6 +1,4 @@
-export * from "./annotationBase";
-export * from "./boolean";
-export * from "./numbers";
+export * from "./oldTypes/annotationBase";
 export * from "./paramTypesOld";
 export * from "./primitiveArray";
 export * from "./select";

@@ -1,4 +1,4 @@
-import type { AnnotationBase } from "../annotationBase";
+import type { AnnotationBase } from "../oldTypes/annotationBase";
 
 export interface NumberArg extends AnnotationBase {
   min?: number;

@@ -1,4 +1,4 @@
-import type { AnnotationBase } from "../annotationBase";
+import type { AnnotationBase } from "../oldTypes/annotationBase";
 import type { DataKindUnion } from "./rpgDataTypesNames";
 
 export interface RmmzParamCore_DataId<Name extends DataKindUnion> {
