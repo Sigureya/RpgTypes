@@ -1,6 +1,8 @@
 import { describe, test, expect } from "vitest";
 import { Ajv, type JSONSchemaType } from "ajv";
+import type { Schema } from "jsonschema";
 import type { StructAnnotation } from "./struct";
+import { fnXX } from "./structFn";
 interface Person {
   name: string;
   age: number;
@@ -26,6 +28,7 @@ const paramAnt: StructAnnotation<MockType> = {
       option: {
         type: "select",
         default: "A",
+
         options: [
           { option: "a", value: "A" },
           { option: "b", value: "B" },
@@ -35,8 +38,13 @@ const paramAnt: StructAnnotation<MockType> = {
         type: "number",
         default: 0,
         text: "対象アクター",
+        desc: "効果対象のアクターを決めます",
       },
-      weaponsData: { type: "number[]", default: [], desc: "武器データの配列" },
+      weaponsData: {
+        type: "number[]",
+        default: [1, 2],
+        desc: "武器データの配列",
+      },
       bool: {
         type: "boolean",
         default: false,
@@ -44,7 +52,7 @@ const paramAnt: StructAnnotation<MockType> = {
         off: "無効",
         parent: "weaponData",
       },
-      imageFile: { type: "string", default: "" },
+      imageFile: { type: "string", default: "", parent: "actorData" },
       audioFile: { type: "string", default: "" },
       textData: { type: "string", default: "" },
       person: {
@@ -59,10 +67,7 @@ const paramAnt: StructAnnotation<MockType> = {
       },
       personArray: {
         type: "struct[]",
-        default: [
-          { age: 0, name: "alice" },
-          { age: 1, name: "bob" },
-        ],
+        default: [],
         struct: {
           structName: "Person",
           params: {
@@ -74,7 +79,7 @@ const paramAnt: StructAnnotation<MockType> = {
     },
   },
   default: {
-    option: "",
+    option: "A",
     actorData: 0,
     weaponsData: [],
     bool: false,
@@ -89,12 +94,22 @@ const paramAnt: StructAnnotation<MockType> = {
   } satisfies MockType,
 };
 
-const personSchemaJson: JSONSchemaType<MockType> = {
+const personSchemaJson = {
   type: "object",
   properties: {
-    option: { type: "string", default: "" },
-    actorData: { type: "number", default: 0 },
-    weaponsData: { type: "array", items: { type: "number" }, default: [] },
+    option: { type: "string", default: "A", enum: ["A", "B"] },
+    actorData: {
+      type: "number",
+      default: 0,
+      title: "対象アクター",
+      description: "効果対象のアクターを決めます",
+    },
+    weaponsData: {
+      type: "array",
+      title: "武器データの配列",
+      items: { type: "number" },
+      default: [1, 2],
+    },
     bool: { type: "boolean", default: false },
     imageFile: { type: "string", default: "" },
     audioFile: { type: "string", default: "" },
@@ -134,11 +149,16 @@ const personSchemaJson: JSONSchemaType<MockType> = {
     "personArray",
   ],
   additionalProperties: false,
-};
+} satisfies JSONSchemaType<MockType> & Schema;
+
 describe("", () => {
-  const ajv = new Ajv({ strict: true });
-  const validate = ajv.compile(personSchemaJson);
+  const schema = fnXX(paramAnt);
+  test("", () => {
+    expect(schema).toEqual(personSchemaJson);
+  });
   test("StructAnnotation JSON Schema Validation", () => {
+    const ajv = new Ajv({ strict: true });
+    const validate = ajv.compile(schema);
     const valid = validate(paramAnt.default);
     expect(valid).toBe(true);
   });
