@@ -4,7 +4,8 @@ import type {
   StructAnnotation,
   StructAnnotationBase_Array,
   StructAnnotationBase_Completed,
-} from "../core";
+  StructBase,
+} from "./types";
 
 // --- 型定義 ---
 interface SchemaContext {
@@ -22,13 +23,13 @@ export const fnXX = <T extends object>(
 
 // --- ヘルパー関数群 ---
 const buildSchemaFromStruct = (
-  struct: StructAnnotation<any>["struct"],
+  struct: StructBase,
   ctx: SchemaContext
 ): Record<string, unknown> => {
   return {
     type: "object",
     properties: Object.entries(struct.params).reduce((acc, [key, val]) => {
-      const schema = convertParamToSchema(val, ctx);
+      const schema = convertParamToSchema(val as any, ctx);
       return { ...acc, [key]: schema };
     }, {}),
     required: Object.keys(struct.params),
@@ -46,8 +47,9 @@ const convertParamToSchema = (
     | AnnotationPrimitiveTypes
     | StructAnnotationBase_Completed
     | StructAnnotationBase_Array,
+
   ctx: SchemaContext
-): unknown => {
+): object => {
   if (param.type === "number[]") {
     return {
       type: "array",
@@ -96,7 +98,7 @@ const convertParamToSchema = (
       title: param.struct.structName,
       properties: Object.entries(param.struct.params).reduce(
         (acc, [key, val]) => {
-          const schema = convertParamToSchema(val, ctx);
+          const schema = convertParamToSchema(val as any, ctx);
           return { ...acc, [key]: schema };
         },
         {}
@@ -114,7 +116,7 @@ const convertParamToSchema = (
         title: param.struct.structName,
         properties: Object.entries(param.struct.params).reduce(
           (acc, [key, val]) => {
-            const schema = convertParamToSchema(val, ctx);
+            const schema = convertParamToSchema(val as any, ctx);
             return { ...acc, [key]: schema };
           },
           {}
