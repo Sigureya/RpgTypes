@@ -4,12 +4,15 @@ import type { DiscriminatedUnionSchemaType } from "src/templates";
 import type { X_MetaParamCore_Boolean } from "./boolean";
 import type { X_MetaParamCore_Number } from "./numbers";
 import type { ParamKinds_String } from "./string";
-import type { X_MetaParam_Shared } from "./x-rpg-param2";
 
 type KindOf<Kind extends string, T> = {
   kind: Kind;
   data: T;
 };
+export interface X_MetaParam_Shared {
+  kind: string;
+  parent?: string | null;
+}
 
 type kindsOfBoolean = KindOf<"boolean", X_MetaParamCore_Boolean>;
 type kindsOfNumber = KindOf<"number", X_MetaParamCore_Number>;
