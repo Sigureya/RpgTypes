@@ -33,13 +33,14 @@ export interface SourceId_RmmzUnknown extends SourceIdentifier {
   kind: string;
 }
 
-export const lookupKind = (
-  kind: string
-):
+export type SourceId_ValidRmmzData =
   | SourceIdUnion_RpgData
   | SourceId_SystemSwitches
-  | SourceId_SystemVariables
-  | SourceId_RmmzUnknown => {
+  | SourceId_SystemVariables;
+
+export const lookupKind = (
+  kind: string
+): SourceId_ValidRmmzData | SourceId_RmmzUnknown => {
   const index = KIND_TABLE[kind as DataKindUnion];
   if (index === undefined) {
     return {
@@ -65,10 +66,7 @@ export const lookupKind = (
 
 export const isRmmzDataKind = (
   sourceId: SourceIdentifier
-): sourceId is
-  | SourceIdUnion_RpgData
-  | SourceId_SystemSwitches
-  | SourceId_SystemVariables => {
+): sourceId is SourceId_ValidRmmzData => {
   const xxx = lookupKind(sourceId.kind);
   return (
     xxx.author === sourceId.author &&
