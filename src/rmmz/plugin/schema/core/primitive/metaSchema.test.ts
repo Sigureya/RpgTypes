@@ -1,8 +1,12 @@
 import { describe, test, expect } from "vitest";
 import Ajv from "ajv";
-import type { X_MetaParam_Shared, X_MetaParamUnion } from "./metaSchema";
+import type { X_MetaParam_Shared } from "./metaSchema";
 import { makeSchema3 } from "./metaSchema3";
-import type { X_Param_DataId, X_Param_Number } from "./x-rpg-param";
+import type {
+  X_Param_DataId,
+  X_Param_Number,
+  X_ParamInput_Union,
+} from "./x-rpg-param";
 
 const makeValidator = () => {
   const schema = makeSchema3();
@@ -49,17 +53,6 @@ describe("Number Schema Tests", () => {
     };
     expect(num).toSatisfy(validate);
   });
-  test("", () => {
-    const validate = makeValidator();
-    const num: X_MetaParamUnion = {
-      kind: "number",
-      data: {
-        digit: 2,
-      },
-      parent: "parentId",
-    };
-    expect(num).toSatisfy(validate);
-  });
 });
 
 describe("DataId Schema Tests", () => {
@@ -75,11 +68,15 @@ describe("DataId Schema Tests", () => {
     };
     expect(dataId).toSatisfy(validate);
   });
-  test.skip("", () => {
+  test("", () => {
     const validate = makeValidator();
-    const dataId: X_MetaParamUnion = {
+    const dataId: X_ParamInput_Union = {
       kind: "dataId",
-      data: undefined,
+      data: {
+        author: "author",
+        module: "module",
+        kind: "kind",
+      },
     };
     expect(dataId).toSatisfy(validate);
   });
