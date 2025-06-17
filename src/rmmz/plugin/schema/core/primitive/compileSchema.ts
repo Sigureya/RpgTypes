@@ -8,12 +8,9 @@ import type {
 } from "./newParamType";
 import { lookupKind } from "./rpgDataId/lookup";
 import type { RmmzParamCore_Option, RmmzParamCore_Select } from "./select";
-import type {
-  NumberParamSchema,
-  ParamSchemaCompiled,
-  X_RmmzParam,
-} from "./x-rpg-param";
-import { X_RPG_PARM } from "./x-rpg-param";
+import type { NumberParamSchema } from "./x-rpg-param";
+import type { ParamSchemaCompiled, X_RmmzParam } from "./x-rpg-param2";
+import { X_RPG_PARM } from "./x-rpg-param2";
 
 const compileSchema = <
   V,
