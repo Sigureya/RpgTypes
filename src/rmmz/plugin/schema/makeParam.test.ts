@@ -5,7 +5,6 @@ import type {
   NumberArg,
   NumberSelect,
   ParamTexts,
-  StringSelect,
   StringArg,
   ToArrayAnnotation,
 } from "./core";
