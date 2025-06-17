@@ -47,16 +47,14 @@ export const typeAnnotation = (type: Pick<Primitve.AnnotationBase, "type">) => {
 };
 
 export const baseAnnotions = (
-  ant: Pick<Primitve.AnnotationBase, "text" | "desc" | "parent">,
+  ant: Partial<Pick<Primitve.AnnotationBase, "text" | "desc" | "parent">>,
   dic: Dictionary = {}
 ) => {
-  return (
-    [
-      formatTextAnnotation(ant, "text", dic),
-      formatTextAnnotation(ant, "desc", dic),
-      simpleAnntation(ant, "parent"),
-    ] as const
-  ).filter((s) => s !== undefined);
+  return [
+    formatTextAnnotation(ant, "text", dic),
+    formatTextAnnotation(ant, "desc", dic),
+    simpleAnntation(ant, "parent"),
+  ].filter((s) => !!s);
 };
 
 export const numberAnnotations = (num: OmitBaseParams<Primitve.NumberArg>) => {
