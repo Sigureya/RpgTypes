@@ -102,7 +102,7 @@ describe("dataIdMetaParam meta parameter extraction", () => {
       expected: {
         author: "rmmz",
         module: "system",
-        kind: "variables",
+        kind: "variable",
       } satisfies SourceId_SystemVariables,
     },
     {

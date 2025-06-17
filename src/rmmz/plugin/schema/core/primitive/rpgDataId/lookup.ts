@@ -50,8 +50,8 @@ export const lookupKind = (
   }
   const kindTable = [
     kind,
-    "variables" satisfies SourceId_SystemVariables["kind"],
-    "switches" satisfies SourceId_SystemSwitches["kind"],
+    "variable" satisfies SourceId_SystemVariables["kind"],
+    "switch" satisfies SourceId_SystemSwitches["kind"],
   ] as const;
   return {
     author: "rmmz",
@@ -61,4 +61,18 @@ export const lookupKind = (
     | SourceIdUnion_RpgData
     | SourceId_SystemSwitches
     | SourceId_SystemVariables;
+};
+
+export const isRmmzDataKind = (
+  sourceId: SourceIdentifier
+): sourceId is
+  | SourceIdUnion_RpgData
+  | SourceId_SystemSwitches
+  | SourceId_SystemVariables => {
+  const xxx = lookupKind(sourceId.kind);
+  return (
+    xxx.author === sourceId.author &&
+    xxx.module === sourceId.module &&
+    xxx.kind === sourceId.kind
+  );
 };
