@@ -9,7 +9,7 @@ export interface System_RPG_DataNames {
     armorTypes: string[];
 }
 export interface SystemLabel_DataNames extends DomainName {
-    domainName: string;
+    title: string;
     format: string;
     options: Record<keyof System_RPG_DataNames, string>;
 }

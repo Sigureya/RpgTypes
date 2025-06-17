@@ -1,9 +1,9 @@
 export interface RawTraitLabel {
-    domainName: string;
+    title: string;
     format: string;
 }
 export interface TraitLabelWithOption<T> extends RawTraitLabel {
-    domainName: string;
+    title: string;
     format: string;
     options: T;
 }

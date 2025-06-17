@@ -1,5 +1,5 @@
 export declare const DEFAULT_USABLE_ITEM_LABELS: {
-    readonly domainName: "";
+    readonly title: "";
     readonly options: {
         readonly scope: "範囲";
         readonly speed: "速度補正";

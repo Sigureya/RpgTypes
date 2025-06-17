@@ -1,8 +1,8 @@
 export interface DomainName {
-    domainName: string;
+    title: string;
 }
 export interface DomainLabel<T> extends DomainName {
-    domainName: string;
+    title: string;
     options: T;
 }
 export type DefineLable<T> = {

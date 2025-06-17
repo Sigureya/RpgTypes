@@ -6,7 +6,7 @@ export type SystemLabel_Text = AsLabel<System_Text>;
 export type SystemLabel_Bgm = AsLabel<System_Bgm>;
 export type SystemLabel_BoolanOptions = AsLabel<System_BooleanGameOptions>;
 export declare const DEFAULT_SYSTEM_LABELS_BOOLEAN: {
-    readonly domainName: "オプション";
+    readonly title: "オプション";
     readonly options: {
         readonly optDrawTitle: "ゲームタイトルの描画";
         readonly optDisplayTp: "ウィンドウにTPを表示";
@@ -23,7 +23,7 @@ export declare const DEFAULT_SYSTEM_LABELS_BOOLEAN: {
     };
 };
 export declare const DEFAULT_SYSTEM_LABELS_DATA_TYPES: {
-    readonly domainName: "タイプ";
+    readonly title: "タイプ";
     readonly format: "{name}";
     readonly options: {
         readonly elements: "属性";
@@ -36,7 +36,7 @@ export declare const DEFAULT_SYSTEM_LABELS_DATA_TYPES: {
     };
 };
 export declare const LABELS_SYSTEM_BATTLER_PARAMS: {
-    readonly domainName: "能力値";
+    readonly title: "能力値";
     readonly options: {
         readonly agi: "敏捷";
         readonly atk: "攻撃力";
@@ -51,7 +51,7 @@ export declare const LABELS_SYSTEM_BATTLER_PARAMS: {
     };
 };
 export declare const LABELS_SYSTEM_GAME_COMMANDS: {
-    domainName: string;
+    title: string;
     options: {
         item: string;
         skill: string;
