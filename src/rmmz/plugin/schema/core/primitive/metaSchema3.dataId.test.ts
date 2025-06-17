@@ -2,7 +2,11 @@ import { describe, test, expect } from "vitest";
 import Ajv from "ajv";
 import type { SourceIdentifier } from "src/namedItemSource";
 import { makeSchema3 } from "./metaSchema3";
-import type { X_Param_DataId, X_Param_DataIdInput } from "./x-rpg-param";
+import type {
+  X_Param_DataId,
+  X_Param_DataIdInput,
+  X_ParamInput_Union,
+} from "./x-rpg-param";
 import type { X_RmmzParam } from "./x-rpg-param2/types";
 
 const makeValidator = () => {
@@ -62,5 +66,32 @@ describe("", () => {
       data: "a.m.k", // should be SourceIdentifier
     };
     expect(invalidData).not.toSatisfy(validator);
+  });
+});
+
+describe("DataId Schema Tests", () => {
+  test("", () => {
+    const validate = makeValidator();
+    const dataId: Partial<X_Param_DataId> = {
+      kind: "dataId",
+      data: {
+        author: "author",
+        module: "module",
+        kind: "kind",
+      },
+    };
+    expect(dataId).toSatisfy(validate);
+  });
+  test("", () => {
+    const validate = makeValidator();
+    const dataId: X_ParamInput_Union = {
+      kind: "dataId",
+      data: {
+        author: "author",
+        module: "module",
+        kind: "kind",
+      },
+    };
+    expect(dataId).toSatisfy(validate);
   });
 });
