@@ -11,3 +11,9 @@ export type NewRmmzParam_Number = NewRmmzParam<RmmzParamCore_Number>;
 export type NewRmmzParam_DataId = NewRmmzParam<
   RmmzParamCore_DataId<DataKindUnion>
 >;
+
+export type NewRmmzParam_Unknown<T extends number | string | boolean = number> =
+  NewRmmzParam<{
+    type: "";
+    default: T;
+  }>;
