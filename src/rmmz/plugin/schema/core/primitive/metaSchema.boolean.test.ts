@@ -9,8 +9,8 @@ const makeValidator = () => {
   return ajv.compile(schema);
 };
 
-describe("Union Schema Tests", () => {
-  test("", () => {
+describe("metaSchema - boolean", () => {
+  test("valid boolean param without parent", () => {
     const validate = makeValidator();
     const bool: X_Param_BooleanInput = {
       kind: "boolean",
@@ -21,7 +21,7 @@ describe("Union Schema Tests", () => {
     };
     expect(bool).toSatisfy(validate);
   });
-  test("", () => {
+  test("valid boolean param with parent", () => {
     const validate = makeValidator();
     const bool: X_Param_BooleanInput = {
       kind: "boolean",
@@ -33,9 +33,10 @@ describe("Union Schema Tests", () => {
     };
     expect(bool).toSatisfy(validate);
   });
+
   describe("Invalid case", () => {
     const validate = makeValidator();
-    test("", () => {
+    test("invalid: off is not a string", () => {
       const invalidBool: Record<keyof X_Param_Boolean, unknown> = {
         kind: "boolean",
         data: {
@@ -46,7 +47,7 @@ describe("Union Schema Tests", () => {
       };
       expect(invalidBool).not.toSatisfy(validate);
     });
-    test("", () => {
+    test("invalid: off is not a string and parent omitted", () => {
       const validate = makeValidator();
 
       const invalidBool: Partial<Record<keyof X_Param_Boolean, unknown>> = {
@@ -55,6 +56,17 @@ describe("Union Schema Tests", () => {
           on: "on",
           off: 0,
         },
+      };
+      expect(invalidBool).not.toSatisfy(validate);
+    });
+    test("invalid: missing on kind", () => {
+      const validate = makeValidator();
+      const invalidBool: Partial<X_Param_BooleanInput> = {
+        data: {
+          on: "on",
+          off: "off",
+        },
+        parent: "parentId",
       };
       expect(invalidBool).not.toSatisfy(validate);
     });
