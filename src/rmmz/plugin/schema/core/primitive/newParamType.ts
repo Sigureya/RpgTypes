@@ -1,7 +1,7 @@
 import type { RmmzParamCore_Boolean } from "./boolean";
-import type { RmmzParamTextFields } from "./metaTextField";
 import type { RmmzParamCore_Number } from "./numbers";
 import type { DataKindUnion, RmmzParamCore_DataId } from "./rpgDataId";
+import type { RmmzParamTextFields } from "./x-rpg-param2";
 type NewRmmzParam<
   T extends { type: string; default: number | string | boolean }
 > = T & Partial<RmmzParamTextFields>;

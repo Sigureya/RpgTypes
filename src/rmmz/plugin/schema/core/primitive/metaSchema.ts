@@ -2,9 +2,9 @@ import type { JSONSchemaType } from "ajv";
 import type { SourceIdentifier } from "src/namedItemSource";
 import type { DiscriminatedUnionSchemaType } from "src/templates";
 import type { X_MetaParamCore_Boolean } from "./boolean";
-import type { X_MetaParam_Shared } from "./metaTextField";
 import type { X_MetaParamCore_Number } from "./numbers";
 import type { ParamKinds_String } from "./string";
+import type { X_MetaParam_Shared } from "./x-rpg-param2";
 
 type KindOf<Kind extends string, T> = {
   kind: Kind;

@@ -1,6 +1,5 @@
 import type { SourceIdentifier } from "src/namedItemSource";
 import type { MetaParam_Boolean } from "./boolean";
-import type { RmmzParamTextFields } from "./metaTextField";
 import type {
   NewRmmzParam_Boolean,
   NewRmmzParam_DataId,
@@ -9,7 +8,11 @@ import type {
 import { lookupKind } from "./rpgDataId/lookup";
 import type { RmmzParamCore_Option, RmmzParamCore_Select } from "./select";
 import type { NumberParamSchema } from "./x-rpg-param";
-import type { ParamSchemaCompiled, X_RmmzParam } from "./x-rpg-param2";
+import type {
+  ParamSchemaCompiled,
+  RmmzParamTextFields,
+  X_RmmzParam,
+} from "./x-rpg-param2";
 import { X_RPG_PARM } from "./x-rpg-param2";
 
 const compileSchema = <
