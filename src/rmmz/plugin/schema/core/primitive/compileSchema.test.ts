@@ -1,6 +1,6 @@
 import { describe, test, expect } from "vitest";
+import { compileSchemaFromNumberParam } from "./compileSchema";
 import type { NewRmmzParam_Number } from "./newParamType";
-import { schemaFromNumberParam } from "./schemaFactory2";
 import type { NumberParamSchema } from "./x-rpg-param";
 describe("schemaFromNumberParam", () => {
   test("should create a schema with default value and type", () => {
@@ -11,7 +11,7 @@ describe("schemaFromNumberParam", () => {
       text: "Test Number",
       desc: "A test number parameter",
     };
-    const schema = schemaFromNumberParam(param);
+    const schema = compileSchemaFromNumberParam(param);
     expect(schema).toEqual({
       type: "integer",
       default: 42,
@@ -35,7 +35,7 @@ describe("schemaFromNumberParam", () => {
       text: "Pi",
       desc: "The value of Pi",
     };
-    const schema = schemaFromNumberParam(param);
+    const schema = compileSchemaFromNumberParam(param);
     //    schema["x-rpg-param"].
 
     expect(schema).toEqual({

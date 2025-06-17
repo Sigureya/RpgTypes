@@ -15,7 +15,7 @@ import type {
 } from "./x-rpg-param";
 import { X_RPG_PARM } from "./x-rpg-param";
 
-const schemaFromRmmzParam = <
+const compileSchema = <
   V,
   P extends Partial<RmmzParamTextFields> & { type: string; default: V },
   X,
@@ -45,15 +45,15 @@ const makeData = <T>(
   } satisfies X_RmmzParam<T>;
 };
 
-export const schemaFromBooleanParam = (bool: NewRmmzParam_Boolean) => {
-  return schemaFromRmmzParam(bool.default, bool, "boolean", {
+export const compileSchemaFromBooleanParam = (bool: NewRmmzParam_Boolean) => {
+  return compileSchema(bool.default, bool, "boolean", {
     on: bool.on ?? "{on}",
     off: bool.off ?? "{off}",
   }) satisfies ParamSchemaCompiled<boolean, MetaParam_Boolean>;
 };
 
-export const schemaFromDataId = (dataId: NewRmmzParam_DataId) => {
-  return schemaFromRmmzParam(
+export const compileSchemaFromDataId = (dataId: NewRmmzParam_DataId) => {
+  return compileSchema(
     dataId.default,
     dataId,
     "number",
@@ -61,7 +61,7 @@ export const schemaFromDataId = (dataId: NewRmmzParam_DataId) => {
   ) satisfies ParamSchemaCompiled<number, SourceIdentifier>;
 };
 
-export const schemaFromNumberParam = (num: NewRmmzParam_Number) => {
+export const compileSchemaFromNumberParam = (num: NewRmmzParam_Number) => {
   const digit = num.digit ?? 0;
 
   return {
@@ -83,7 +83,7 @@ const toOptions = <T extends number | string>(
 ) => options.map(({ value, option }) => ({ value, option }));
 
 export const schemaFromSelectParam = (select: RmmzParamCore_Select<number>) => {
-  return schemaFromRmmzParam(select.default, select, "number", {
+  return compileSchema(select.default, select, "number", {
     options: toOptions(select.options),
   }) satisfies ParamSchemaCompiled<
     number,
@@ -94,7 +94,7 @@ export const schemaFromSelectParam = (select: RmmzParamCore_Select<number>) => {
 export const schemaFromStringSelectParam = (
   select: RmmzParamCore_Select<string>
 ) => {
-  return schemaFromRmmzParam(select.default, select, "string", {
+  return compileSchema(select.default, select, "string", {
     options: toOptions(select.options),
   }) satisfies ParamSchemaCompiled<
     string,
