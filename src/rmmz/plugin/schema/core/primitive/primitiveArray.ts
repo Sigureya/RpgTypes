@@ -1,4 +1,4 @@
-import type { AnnotationBase } from "./annotationBase";
+import type { AnnotationBase } from "./oldTypes/annotationBase";
 
 type ValueType<
   T extends AnnotationBase,

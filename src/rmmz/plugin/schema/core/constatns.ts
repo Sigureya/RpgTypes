@@ -2,7 +2,6 @@ import type {
   ComboAnnotation,
   MultilineString,
   StringArg,
-  NumberArg,
   NumberSelect,
 } from "./primitive";
 import type {
@@ -17,6 +16,7 @@ import type {
   Troop,
   Weapon,
 } from "./primitive";
+import type { NumberArg } from "./primitive/numbers";
 
 export const ANNOTATION_STRING = {
   type: "string",
