@@ -1,9 +1,8 @@
 import type { JSONSchemaType } from "ajv";
-import type { Schema } from "jsonschema";
-import type { RmmzParamCore_Option, RmmzParamCore_Select } from "./types";
+import type { RmmzParamCore_Option } from "./types";
 
 //　このSchemaは頻出するので用意した。書くにしても複雑
-export const optionsSchema = <T>(v: JSONSchemaType<T>) =>
+export const optionsSchema = () =>
   ({
     type: "array",
     maxItems: 50,
@@ -13,7 +12,7 @@ export const optionsSchema = <T>(v: JSONSchemaType<T>) =>
       required: ["value", "option"],
       properties: {
         option: { type: "string" },
-        value: v,
+        value: { type: "string" },
       },
     },
-  } as JSONSchemaType<{ value: T; option: string }[]>);
+  } as JSONSchemaType<RmmzParamCore_Option[]>);

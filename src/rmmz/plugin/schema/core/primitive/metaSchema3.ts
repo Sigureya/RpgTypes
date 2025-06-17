@@ -23,14 +23,6 @@ interface StringKind {
   parent?: string | null;
 }
 
-interface SelectKind {
-  kind: "select";
-  parent?: string | null;
-  data: {
-    options: { value: string; option: string }[];
-  };
-}
-
 interface NullableString {
   type: "string";
   nullable: true;
@@ -53,12 +45,7 @@ export const makeSchema3 = () => {
       stringKind(nullablString),
       numberKind(nullablString),
       dataIdKind(),
-      selectKind(
-        optionsSchema({ type: "string" })
-      ) satisfies JSONSchemaType<SelectKind>,
-      // selectKind(optionsSchema({ type: "number" })) satisfies JSONSchemaType<
-      //   SelectKind<number>
-      // >,
+      selectKind(),
     ],
   } satisfies UnionSchema;
 };
@@ -142,9 +129,7 @@ const dataIdKind = () => {
   } satisfies JSONSchemaType<X_Param_DataId>;
 };
 
-const selectKind = (
-  opt: JSONSchemaType<{ value: string; option: string }[]>
-) => {
+const selectKind = () => {
   return {
     type: "object",
     required: ["kind", "data"],
@@ -156,9 +141,19 @@ const selectKind = (
         type: "object",
         required: ["options"],
         properties: {
-          options: opt,
+          options: optionsSchema() satisfies JSONSchemaType<
+            { value: string; option: string }[]
+          >,
         },
       },
     },
   } satisfies JSONSchemaType<SelectKind>;
 };
+
+interface SelectKind {
+  kind: "select";
+  parent?: string | null;
+  data: {
+    options: { value: string; option: string }[];
+  };
+}
