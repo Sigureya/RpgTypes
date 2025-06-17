@@ -136,12 +136,10 @@ const personSchemaJson: JSONSchemaType<MockType> = {
   additionalProperties: false,
 };
 describe("", () => {
-  test("", () => {
-    const ajv = new Ajv();
-    const validate = ajv.compile(personSchemaJson);
-    test("StructAnnotation JSON Schema Validation", () => {
-      const valid = validate(paramAnt.default);
-      expect(valid).toBe(true);
-    });
+  const ajv = new Ajv({ strict: true });
+  const validate = ajv.compile(personSchemaJson);
+  test("StructAnnotation JSON Schema Validation", () => {
+    const valid = validate(paramAnt.default);
+    expect(valid).toBe(true);
   });
 });
