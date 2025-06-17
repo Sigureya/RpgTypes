@@ -8,8 +8,12 @@ import type {
 } from "./newParamType";
 import { lookupKind } from "./rpgDataId/lookup";
 import type { RmmzParamCore_Option, RmmzParamCore_Select } from "./select";
-import type { NumberParamSchema, ParamSchema } from "./x-rpg-param";
-import { X_RPG_PARM, type X_RmmzParam } from "./x-rpg-param";
+import type {
+  NumberParamSchema,
+  ParamSchemaCompiled,
+  X_RmmzParam,
+} from "./x-rpg-param";
+import { X_RPG_PARM } from "./x-rpg-param";
 
 const schemaFromRmmzParam = <
   V,
@@ -45,7 +49,7 @@ export const schemaFromBooleanParam = (bool: NewRmmzParam_Boolean) => {
   return schemaFromRmmzParam(bool.default, bool, "boolean", {
     on: bool.on ?? "{on}",
     off: bool.off ?? "{off}",
-  }) satisfies ParamSchema<boolean, MetaParam_Boolean>;
+  }) satisfies ParamSchemaCompiled<boolean, MetaParam_Boolean>;
 };
 
 export const schemaFromDataId = (dataId: NewRmmzParam_DataId) => {
@@ -54,7 +58,7 @@ export const schemaFromDataId = (dataId: NewRmmzParam_DataId) => {
     dataId,
     "number",
     lookupKind(dataId.type) satisfies NonNullable<SourceIdentifier>
-  ) satisfies ParamSchema<number, SourceIdentifier>;
+  ) satisfies ParamSchemaCompiled<number, SourceIdentifier>;
 };
 
 export const schemaFromNumberParam = (num: NewRmmzParam_Number) => {
@@ -81,7 +85,10 @@ const toOptions = <T extends number | string>(
 export const schemaFromSelectParam = (select: RmmzParamCore_Select<number>) => {
   return schemaFromRmmzParam(select.default, select, "number", {
     options: toOptions(select.options),
-  }) satisfies ParamSchema<number, { options: RmmzParamCore_Option<number>[] }>;
+  }) satisfies ParamSchemaCompiled<
+    number,
+    { options: RmmzParamCore_Option<number>[] }
+  >;
 };
 
 export const schemaFromStringSelectParam = (
@@ -89,5 +96,8 @@ export const schemaFromStringSelectParam = (
 ) => {
   return schemaFromRmmzParam(select.default, select, "string", {
     options: toOptions(select.options),
-  }) satisfies ParamSchema<string, { options: RmmzParamCore_Option<string>[] }>;
+  }) satisfies ParamSchemaCompiled<
+    string,
+    { options: RmmzParamCore_Option<string>[] }
+  >;
 };
