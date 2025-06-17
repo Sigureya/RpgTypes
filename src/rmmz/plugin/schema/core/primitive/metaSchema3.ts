@@ -1,19 +1,16 @@
 import type { JSONSchemaType } from "ajv";
 import type { SourceIdentifier } from "src/namedItemSource";
 import type { DiscriminatedUnionSchemaType3 } from "src/templates/discriminator/discriminator3";
+import type { X_MetaParamCore_Boolean } from "./boolean";
+import type { X_MetaParamCore_Number } from "./numbers";
 import { optionsSchema } from "./select/select";
-import type { X_Param_DataId } from "./x-rpg-param";
+import type { X_Param_DataId, X_RmmzParamInput } from "./x-rpg-param";
 
 type UnionSchema = DiscriminatedUnionSchemaType3<
   BaseKind,
   string,
   "kind",
-  | BooleanKind
-  | X_Param_DataId
-  | NumberKind
-  | StringKind
-  | SelectKind<string>
-  | SelectKind<number>
+  BooelanKind | X_Param_DataId | NumberKind | StringKind | SelectKind
 >;
 
 interface BaseKind {
@@ -21,33 +18,16 @@ interface BaseKind {
   parent?: string | null;
 }
 
-interface BooleanKind {
-  kind: "boolean";
-  parent?: string | null;
-  data: {
-    on?: string | null;
-    off?: string | null;
-  };
-}
-
 interface StringKind {
   kind: "string" | "multiline_string";
   parent?: string | null;
 }
 
-interface NumberKind {
-  kind: "number";
-  parent?: string | null;
-  data: {
-    digit?: number | null;
-  };
-}
-
-interface SelectKind<T> {
+interface SelectKind {
   kind: "select";
   parent?: string | null;
   data: {
-    options: { value: T; option: string }[];
+    options: { value: string; option: string }[];
   };
 }
 
@@ -73,9 +53,9 @@ export const makeSchema3 = () => {
       stringKind(nullablString),
       numberKind(nullablString),
       dataIdKind(),
-      selectKind(optionsSchema({ type: "string" })) satisfies JSONSchemaType<
-        SelectKind<string>
-      >,
+      selectKind(
+        optionsSchema({ type: "string" })
+      ) satisfies JSONSchemaType<SelectKind>,
       // selectKind(optionsSchema({ type: "number" })) satisfies JSONSchemaType<
       //   SelectKind<number>
       // >,
@@ -104,6 +84,7 @@ const numberKind = (nullablString: NullableString) =>
       },
     },
   } satisfies JSONSchemaType<NumberKind>);
+type NumberKind = X_RmmzParamInput<X_MetaParamCore_Number, "number">;
 
 const stringKind = (nullablString: NullableString) =>
   ({
@@ -135,7 +116,8 @@ const booleanKind = (nullablString: NullableString) =>
         },
       },
     },
-  } satisfies JSONSchemaType<BooleanKind>);
+  } satisfies JSONSchemaType<BooelanKind>);
+type BooelanKind = X_RmmzParamInput<X_MetaParamCore_Boolean, "boolean">;
 
 const dataIdKind = () => {
   const dataIdtext = { type: "string", maxLength: 100 } as const;
@@ -160,7 +142,9 @@ const dataIdKind = () => {
   } satisfies JSONSchemaType<X_Param_DataId>;
 };
 
-const selectKind = <T>(opt: JSONSchemaType<{ value: T; option: string }[]>) => {
+const selectKind = (
+  opt: JSONSchemaType<{ value: string; option: string }[]>
+) => {
   return {
     type: "object",
     required: ["kind", "data"],
@@ -176,5 +160,5 @@ const selectKind = <T>(opt: JSONSchemaType<{ value: T; option: string }[]>) => {
         },
       },
     },
-  } satisfies JSONSchemaType<SelectKind<T>>;
+  } satisfies JSONSchemaType<SelectKind>;
 };
