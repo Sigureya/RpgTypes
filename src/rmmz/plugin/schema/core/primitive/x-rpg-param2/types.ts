@@ -17,6 +17,12 @@ export interface X_RmmzParam<T, Kind extends string = string> {
   data: T;
 }
 
+export interface RmmzParamFields<T> {
+  default: T;
+  text?: string;
+  desc?: string;
+}
+
 export interface SchemaDescriptionFields<T> {
   description: string;
   title: string;
