@@ -1,12 +1,16 @@
 import { describe, test, expect } from "vitest";
 import Ajv from "ajv";
-import type { X_MetaParam_Shared } from "./metaSchema";
 import { makeSchema3 } from "./metaSchema3";
 import type {
   X_Param_DataId,
   X_Param_Number,
   X_ParamInput_Union,
 } from "./x-rpg-param";
+
+interface X_MetaParam_Shared {
+  kind: string;
+  parent?: string | null;
+}
 
 const makeValidator = () => {
   const schema = makeSchema3();
