@@ -31,7 +31,7 @@ const parentSchema = () =>
     type: "string",
     nullable: true,
     maxLength: 100,
-    defaylt: "",
+    default: "",
   } as const satisfies JSONSchemaType<string | null>);
 
 export const makeSchema3 = () => {
