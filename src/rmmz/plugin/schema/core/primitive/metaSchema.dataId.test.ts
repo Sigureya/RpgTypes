@@ -1,7 +1,7 @@
 import { describe, test, expect } from "vitest";
 import Ajv from "ajv";
 import type { SourceIdentifier } from "src/namedItemSource";
-import { makeSchema3 } from "./metaSchema3";
+import { makeSchema3 } from "./metaSchema";
 import type {
   X_Param_DataId,
   X_Param_DataIdInput,
