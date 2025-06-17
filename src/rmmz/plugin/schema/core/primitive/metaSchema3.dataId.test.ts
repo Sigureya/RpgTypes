@@ -2,7 +2,7 @@ import { describe, test, expect } from "vitest";
 import Ajv from "ajv";
 import type { SourceIdentifier } from "src/namedItemSource";
 import { makeSchema3 } from "./metaSchema3";
-import type { X_Param_DataId } from "./x-rpg-param";
+import type { X_Param_DataId, X_Param_DataIdInput } from "./x-rpg-param";
 import type { X_RmmzParam } from "./x-rpg-param2/types";
 
 const makeValidator = () => {
@@ -22,10 +22,9 @@ describe("", () => {
     expect(validData).toSatisfy(validator);
   });
   test("", () => {
-    const invalidData: X_Param_DataId = {
+    const invalidData: X_Param_DataIdInput = {
       kind: "dataId",
       data: { author: "a", module: "m", kind: "k" },
-      parent: "",
     };
     expect(invalidData).toSatisfy(validator);
   });
