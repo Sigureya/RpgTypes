@@ -6,10 +6,17 @@ export const isArrayAnnotation = (
   return ant.type.endsWith("[]");
 };
 
-export const isTextAnnotation = (ant: AnnotationTypes) => {
+export const isTextAnnotation = (
+  ant: AnnotationTypes
+): ant is Extract<AnnotationTypes, { type: "string" | "multiline_string" }> => {
   return ant.type === "string" || ant.type === "multiline_string";
 };
 
-export const isTextArrayAnnotation = (ant: AnnotationTypes) => {
+export const isTextArrayAnnotation = (
+  ant: AnnotationTypes
+): ant is Extract<
+  AnnotationTypes,
+  { type: "string[]" | "multiline_string[]" }
+> => {
   return ant.type === "string[]" || ant.type === "multiline_string[]";
 };
