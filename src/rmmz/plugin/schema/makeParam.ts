@@ -1,7 +1,6 @@
 import type {
   AnnotationPrimitiveTypes,
   Dictionary,
-  ParamTexts,
   StructAnnotationBase_Completed,
 } from "./core";
 import {
@@ -15,6 +14,7 @@ import {
 } from "./makeAnnotation";
 import { makeDefaultValueJSONLike } from "./makeDefault";
 import { mapping } from "./mapping";
+import type { ParamTexts } from "./paramTexts";
 
 export const uniqueAnnotations = (
   ant: AnnotationPrimitiveTypes | StructAnnotationBase_Completed,
