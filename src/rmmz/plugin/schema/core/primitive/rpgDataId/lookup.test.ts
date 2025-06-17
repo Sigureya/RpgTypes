@@ -5,7 +5,7 @@ import type {
   SourceId_SystemVariables,
 } from "@RpgTypes/system";
 import type { SourceId_RmmzUnknown } from "./lookup";
-import { lookupKind } from "./lookup";
+import { lookupKind, isRmmzDataKind } from "./lookup";
 import type { DataKindUnion } from "./rpgDataTypesNames";
 
 interface TestCase {
@@ -18,22 +18,20 @@ interface TestCase {
 }
 
 const testLookupKind = ({ arg, expected }: TestCase) => {
-  describe(`lookupKind(${arg})`, () => {
+  test(`${arg} - should return correct sourceId`, () => {
     const result = lookupKind(arg);
-    test("should return correct sourceId", () => {
-      expect(result).toEqual(expected);
-    });
+    expect(result).toEqual(expected);
   });
 };
 
 const testCases: TestCase[] = [
   {
     arg: "variable",
-    expected: { author: "rmmz", module: "system", kind: "variables" },
+    expected: { author: "rmmz", module: "system", kind: "variable" },
   },
   {
     arg: "switch",
-    expected: { author: "rmmz", module: "system", kind: "switches" },
+    expected: { author: "rmmz", module: "system", kind: "switch" },
   },
   {
     arg: "actor",
@@ -75,6 +73,9 @@ const testCases: TestCase[] = [
     arg: "common_event",
     expected: { author: "rmmz", module: "data", kind: "common_event" },
   },
+];
+
+const testErrorCases: TestCase[] = [
   {
     arg: "unknownKind" as DataKindUnion,
     expected: { author: "rmmz", module: "unknown", kind: "unknownKind" },
@@ -84,4 +85,13 @@ const testCases: TestCase[] = [
     expected: { author: "rmmz", module: "unknown", kind: "xyz" },
   },
 ];
-testCases.forEach(testLookupKind);
+
+describe("lookupKind Tests", () => {
+  testCases.forEach((case_) => {
+    testLookupKind(case_);
+    test(`${case_.arg}`, () => {
+      expect(case_.expected).toSatisfy(isRmmzDataKind);
+    });
+  });
+});
+testErrorCases.forEach(testLookupKind);

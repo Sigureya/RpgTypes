@@ -32,6 +32,22 @@ describe("", () => {
     };
     expect(invalidData).toSatisfy(validator);
   });
+  test.skip("", () => {
+    const invalidData: X_Param_DataIdInput = {
+      kind: "dataId",
+      data: { author: "a", module: "m", kind: "k" },
+      parent: null,
+    };
+    expect(invalidData).toSatisfy(validator);
+  });
+  test.skip("", () => {
+    const invalidData: X_Param_DataIdInput = {
+      kind: "dataId",
+      data: { author: "a", module: "m", kind: "k" },
+      parent: undefined,
+    };
+    expect(invalidData).toSatisfy(validator);
+  });
   test("", () => {
     const invalidData: X_Param_DataId = {
       kind: "dataId",
@@ -40,32 +56,34 @@ describe("", () => {
     };
     expect(invalidData).toSatisfy(validator);
   });
-  test("", () => {
-    const invalidData: X_RmmzParam<
-      Pick<SourceIdentifier, "author" | "module">,
-      "dataId"
-    > = {
-      kind: "dataId",
-      parent: "p",
-      data: { author: "a", module: "m" }, // missing 'kind'
-    };
-    expect(invalidData).not.toSatisfy(validator);
-  });
-  test("", () => {
-    const invalidData: X_RmmzParam<undefined, "dataId"> = {
-      kind: "dataId",
-      parent: "p",
-      data: undefined,
-    };
-    expect(invalidData).not.toSatisfy(validator);
-  });
-  test("", () => {
-    const invalidData: X_RmmzParam<string, "dataId"> = {
-      kind: "dataId",
-      parent: "p",
-      data: "a.m.k", // should be SourceIdentifier
-    };
-    expect(invalidData).not.toSatisfy(validator);
+  describe("Invalid DataId Tests", () => {
+    test("", () => {
+      const invalidData: X_RmmzParam<
+        Pick<SourceIdentifier, "author" | "module">,
+        "dataId"
+      > = {
+        kind: "dataId",
+        parent: "p",
+        data: { author: "a", module: "m" }, // missing 'kind'
+      };
+      expect(invalidData).not.toSatisfy(validator);
+    });
+    test("", () => {
+      const invalidData: X_RmmzParam<undefined, "dataId"> = {
+        kind: "dataId",
+        parent: "p",
+        data: undefined,
+      };
+      expect(invalidData).not.toSatisfy(validator);
+    });
+    test("", () => {
+      const invalidData: X_RmmzParam<string, "dataId"> = {
+        kind: "dataId",
+        parent: "p",
+        data: "a.m.k", // should be SourceIdentifier
+      };
+      expect(invalidData).not.toSatisfy(validator);
+    });
   });
 });
 

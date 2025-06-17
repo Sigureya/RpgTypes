@@ -16,5 +16,5 @@ export type SourceId_SystemEquipTypes = SourceId_System<"equipTypes">;
 export type SourceId_SystemSkillTypes = SourceId_System<"skillTypes">;
 export type SourceId_SystemWeaponTypes = SourceId_System<"weaponTypes">;
 
-export type SourceId_SystemSwitches = SourceId_System<"switches">;
-export type SourceId_SystemVariables = SourceId_System<"variables">;
+export type SourceId_SystemSwitches = SourceId_System<"switch">;
+export type SourceId_SystemVariables = SourceId_System<"variable">;
