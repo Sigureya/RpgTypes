@@ -32,9 +32,4 @@ describe("defineSystemItems", () => {
     );
     expect(set.size).toBe(result.length);
   });
-  // test("all kinds in result match label options", () => {
-  //   const labelKeys = new Set(Object.keys(mockLabel.options));
-  //   const dataKinds = new Set(result.map<string>((item) => item.source.kind));
-  //   expect(labelKeys).toEqual(dataKinds);
-  // });
 });
