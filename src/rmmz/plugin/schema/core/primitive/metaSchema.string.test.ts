@@ -1,6 +1,6 @@
 import { describe, test, expect } from "vitest";
 import Ajv from "ajv";
-import { makeSchema3 } from "./metaSchema3";
+import { makeSchema3 } from "./metaSchema";
 
 interface X_MetaParam_Shared {
   kind: string;
