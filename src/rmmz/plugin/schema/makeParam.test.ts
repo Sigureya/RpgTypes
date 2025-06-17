@@ -4,12 +4,12 @@ import type {
   FilePathAnnotation,
   NumberArg,
   NumberSelect,
-  ParamTexts,
   StringArg,
   ToArrayAnnotation,
 } from "./core";
 import * as Make from "./makeAnnotation";
 import { makeParam, uniqueAnnotations, joinAnntations } from "./makeParam";
+import type { ParamTexts } from "./paramTexts";
 
 describe("joinAnntations", () => {
   test("", () => {
