@@ -1,5 +1,5 @@
 import { describe, test, expect } from "vitest";
-import type { JSONSchemaType } from "ajv";
+import { Ajv, type JSONSchemaType } from "ajv";
 import type { StructAnnotation } from "./struct";
 interface Person {
   name: string;
@@ -135,4 +135,11 @@ const personSchemaJson: JSONSchemaType<MockType> = {
   ],
   additionalProperties: false,
 };
-test.skip("", () => {});
+describe("", () => {
+  const ajv = new Ajv({ strict: true });
+  const validate = ajv.compile(personSchemaJson);
+  test("StructAnnotation JSON Schema Validation", () => {
+    const valid = validate(paramAnt.default);
+    expect(valid).toBe(true);
+  });
+});

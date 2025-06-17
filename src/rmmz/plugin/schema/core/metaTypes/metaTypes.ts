@@ -41,18 +41,6 @@ type Example = {
   list: number[];
 };
 
-// Example usage (This code is verified through test cases)
-const e: DefaultValueType<Example> = {
-  list: [], // `list` remains required
-  name: "John", // `name` remains required
-  age: 30, // `age` remains required
-  // `settings` is optional
-  // settings: {
-  //   theme: "dark",
-  //   notifications: true,
-  // },
-};
-
 /**
  * 【Note】
  * - For more details on type behavior, refer to the corresponding test cases.
