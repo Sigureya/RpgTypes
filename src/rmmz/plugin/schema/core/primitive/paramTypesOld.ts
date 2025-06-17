@@ -26,7 +26,7 @@ export type MultilineString = RmmzParamCore_String & AnnotationBase;
 export type FilePathAnnotation = RmmzParamCore_FilePath & AnnotationBase;
 export type ComboAnnotation = RmmzParamCore_Combo & AnnotationBase;
 
-export interface StringSelect extends RmmzParamCore_Select<string> {}
+export interface StringSelect extends RmmzParamCore_Select {}
 
 export type Primitive_Strings =
   | StringArg
@@ -63,7 +63,16 @@ type List = [
   NumberSelect
 ];
 
-export type NumberSelect = RmmzParamCore_Select<number> & AnnotationBase;
 export type Primitive_Numbers = List[number];
 export type Primitive_NumbersArray = ToArrayAnnotation<Primitive_Numbers>;
 export type Primitive_StringsArray = ToArrayAnnotation<Primitive_Strings>;
+interface NumberSelectOption {
+  value: number;
+  option: string;
+}
+
+export interface NumberSelect extends AnnotationBase {
+  type: "select";
+  default: string;
+  options: NumberSelectOption[];
+}

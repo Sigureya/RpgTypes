@@ -1,14 +1,14 @@
-export interface RmmzParamCore_Option<T extends number | string> {
-  value: T;
+export interface RmmzParamCore_Option {
+  value: string;
   option: string;
 }
 
-export interface RmmzParamCore_Select<T extends number | string> {
+export interface RmmzParamCore_Select {
   type: "select";
-  default: T;
-  options: RmmzParamCore_Option<T>[];
+  default: string;
+  options: RmmzParamCore_Option[];
 }
 
-export interface X_MetaParamCore_Select<T extends number | string> {
-  options: RmmzParamCore_Option<T>[];
+export interface X_MetaParamCore_Select {
+  options: RmmzParamCore_Option[];
 }

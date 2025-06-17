@@ -78,26 +78,8 @@ export const compileSchemaFromNumberParam = (num: NewRmmzParam_Number) => {
   } satisfies NumberParamSchema;
 };
 
-const toOptions = <T extends number | string>(
-  options: RmmzParamCore_Option<T>[]
-) => options.map(({ value, option }) => ({ value, option }));
-
-export const schemaFromSelectParam = (select: RmmzParamCore_Select<number>) => {
-  return compileSchema(select.default, select, "number", {
-    options: toOptions(select.options),
-  }) satisfies ParamSchemaCompiled<
-    number,
-    { options: RmmzParamCore_Option<number>[] }
-  >;
-};
-
-export const schemaFromStringSelectParam = (
-  select: RmmzParamCore_Select<string>
-) => {
+export const schemaFromStringSelectParam = (select: RmmzParamCore_Select) => {
   return compileSchema(select.default, select, "string", {
-    options: toOptions(select.options),
-  }) satisfies ParamSchemaCompiled<
-    string,
-    { options: RmmzParamCore_Option<string>[] }
-  >;
+    options: select.options.map(({ value, option }) => ({ value, option })),
+  }) satisfies ParamSchemaCompiled<string, { options: RmmzParamCore_Option[] }>;
 };
