@@ -1,7 +1,7 @@
 import { describe, test, expect } from "vitest";
 import type { JSONSchemaType } from "ajv";
 import { compile } from "./compile";
-import type { StructAnnotation } from "./kinds";
+import type { PluginStruct } from "./kinds";
 interface BB {
   bool: boolean;
 }
@@ -22,7 +22,7 @@ describe("bool", () => {
         },
       },
     },
-  } as const satisfies StructAnnotation<BB>;
+  } as const satisfies PluginStruct<BB>;
   const expectedBoolSchema: JSONSchemaType<BB> = {
     title: "Bool",
     type: "object",

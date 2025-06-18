@@ -14,15 +14,11 @@ import type {
   KindBase,
 } from "./kinds";
 import type { CompileLogItem, CompileResult } from "./kinds/compileLog";
-import type {
-  StructAnnotation,
-  StructParam,
-  StructType,
-} from "./kinds/struct2";
+import type { PluginStruct, StructParam, StructType } from "./kinds/struct2";
 
 type CompileContext = {
   moduleName: string;
-  typeDefs: Record<string, StructAnnotation<object>>;
+  typeDefs: Record<string, PluginStruct<object>>;
 };
 type AnySchema =
   | JSONSchemaType<number>
@@ -35,8 +31,8 @@ type AnySchema =
 
 export const compile = <T extends object>(
   moduleName: string,
-  struct: StructAnnotation<object>,
-  typeDefs: Record<string, StructAnnotation<object>>
+  struct: PluginStruct<object>,
+  typeDefs: Record<string, PluginStruct<object>>
 ): CompileResult<T> => {
   const ctx: CompileContext = { moduleName, typeDefs };
   const [schema, logs] = compileStruct(
@@ -50,7 +46,7 @@ export const compile = <T extends object>(
 // --- メイン処理 ---
 const compileStruct = <T extends object>(
   path: string,
-  annotation: StructAnnotation<T>,
+  annotation: PluginStruct<T>,
   ctx: CompileContext
 ): [JSONSchemaType<T>, CompileLogItem[]] => {
   const props = annotation.struct.params;
@@ -149,7 +145,7 @@ const compileField = (
 
 const resolveStruct = <T extends object>(
   data: StructType<T>
-): StructAnnotation<T> => {
+): PluginStruct<T> => {
   return { kind: "struct", struct: data };
 };
 

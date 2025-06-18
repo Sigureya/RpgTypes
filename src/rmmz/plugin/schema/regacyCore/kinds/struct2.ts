@@ -28,7 +28,7 @@ export type StructParam =
   | KindOfSystemDataId
   | KindOfFile
   | KindOfFileArray
-  | StructAnnotation<object> // ネスト構造体対応
+  | PluginStruct<object> // ネスト構造体対応
   | CoreStruct
   | CoreStructArray
   | KindOfStructRef;
@@ -53,7 +53,7 @@ export interface StructType<T extends object> {
 }
 
 // 構造体アノテーション
-export interface StructAnnotation<T extends object> {
+export interface PluginStruct<T extends object> {
   kind: "struct";
   struct: StructType<T>;
 }

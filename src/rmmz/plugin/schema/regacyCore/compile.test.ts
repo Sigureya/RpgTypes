@@ -2,8 +2,8 @@ import { describe, test, expect } from "vitest";
 import type { JSONSchemaType } from "ajv";
 import { compile } from "./compile";
 import type { CompileLogItem } from "./kinds/compileLog";
-import type { StructAnnotation as Struct2 } from "./kinds/struct2";
-import type { StructAnnotation } from "./kinds/struct2";
+import type { PluginStruct as Struct2 } from "./kinds/struct2";
+import type { PluginStruct } from "./kinds/struct2";
 import type { Family, Person, School } from "./mockType";
 
 describe("person", () => {
@@ -16,7 +16,7 @@ describe("person", () => {
         age: { kind: "number", default: 0 },
       },
     },
-  } as const satisfies StructAnnotation<Person>;
+  } as const satisfies PluginStruct<Person>;
   const expected: JSONSchemaType<Person> = {
     title: "Person",
     type: "object",
@@ -79,7 +79,7 @@ describe("family", () => {
             age: { kind: "number", default: 0 },
           },
         },
-      } satisfies StructAnnotation<Person>,
+      } satisfies PluginStruct<Person>,
     } as const);
     expect(resultFamily.logs).toContainEqual({
       path: "moduleName.Family.father",
@@ -113,7 +113,7 @@ describe("school", () => {
         },
       },
     },
-  } as const satisfies StructAnnotation<School>;
+  } as const satisfies PluginStruct<School>;
   const mockSchoolSchema: JSONSchemaType<School> = {
     type: "object",
     title: "School",
@@ -168,7 +168,7 @@ describe("alldataArray", () => {
         state: { kind: "state[]", default: [1, 2, 3] },
       },
     },
-  } as const satisfies StructAnnotation<AllDataArray>;
+  } as const satisfies PluginStruct<AllDataArray>;
   const expectedAllDataArraySchema: JSONSchemaType<AllDataArray> = {
     title: "AllDataArray",
     type: "object",
