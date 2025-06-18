@@ -36,7 +36,7 @@ export interface KindOfBoolean extends KindBase {
 
 export interface KindOfSelect extends KindBase {
   kind: "select";
-  options: { value: string; text: string }[];
+  options: { value: string; option: string }[];
   default: string;
 }
 
@@ -76,7 +76,17 @@ export interface KindOfSystemDataId extends KindBase {
 }
 
 export interface KindOfFile extends KindBase {
-  kind: "file" | "file[]";
+  kind: "file";
   default: string;
   dir: string;
+}
+export interface KindOfFileArray extends KindBase {
+  kind: "file[]";
+  default: string[];
+  dir: string;
+}
+
+export interface KindOfStructRef extends KindBase {
+  kind: "struct_ref";
+  structName: string;
 }
