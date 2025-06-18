@@ -1,10 +1,44 @@
 import type { JSONSchemaType } from "ajv";
 import type { CompileLogItem, CompileResult } from "./mockType";
-import type { StructAnnotation } from "./types";
+import type { StructAnnotation } from "./structAnt2";
 
 type CompileContext = {
   moduleName: string;
   typeDefs: Record<string, StructAnnotation<any>>;
+};
+
+const isIntegerKind = (kind: string, digit?: number) => {
+  // RPGツクールのactor/weapon/armor/skill/item/enemy/stateは整数
+  if (
+    [
+      "actor",
+      "weapon",
+      "armor",
+      "skill",
+      "item",
+      "enemy",
+      "state",
+      "actor[]",
+      "weapon[]",
+      "armor[]",
+      "skill[]",
+      "item[]",
+      "enemy[]",
+      "state[]",
+    ].includes(kind)
+  ) {
+    return true;
+  }
+  if (digit === undefined) {
+    return true;
+  }
+  if (kind === "number" && digit === 0) {
+    return true;
+  }
+  if (kind === "number[]" && digit === 0) {
+    return true;
+  }
+  return false;
 };
 
 const compileStruct = <T extends object>(
@@ -45,7 +79,7 @@ const compileField = (
   data: any,
   ctx: CompileContext
 ): [any, CompileLogItem[]] => {
-  switch (data.kind as StructKind) {
+  switch (data.kind) {
     case "string":
       return [
         {
@@ -54,33 +88,121 @@ const compileField = (
         },
         [],
       ];
-
-    case "number":
-    case "actor":
-    case "weapon":
-    case "armor":
+    case "multiline_string":
       return [
         {
-          type: "number",
+          type: "string",
           ...(data.default !== undefined ? { default: data.default } : {}),
-          ...(data.text ? { title: data.text } : {}),
-          ...(data.desc ? { description: data.desc } : {}),
         },
         [],
       ];
-
+    case "file":
+      return [
+        {
+          type: "string",
+          ...(data.default !== undefined ? { default: data.default } : {}),
+        },
+        [],
+      ];
+    case "combo":
+      return [
+        {
+          type: "string",
+          ...(data.default !== undefined ? { default: data.default } : {}),
+        },
+        [],
+      ];
+    case "select":
+      return [
+        {
+          type: "string",
+          ...(data.default !== undefined ? { default: data.default } : {}),
+          ...(data.options
+            ? { enum: data.options.map((o: any) => o.value) }
+            : {}),
+        },
+        [],
+      ];
+    case "file[]":
+      return [
+        {
+          type: "array",
+          items: { type: "string" },
+          ...(data.default !== undefined ? { default: data.default } : {}),
+        },
+        [],
+      ];
+    case "string[]":
+      return [
+        {
+          type: "array",
+          items: { type: "string" },
+          ...(data.default !== undefined ? { default: data.default } : {}),
+        },
+        [],
+      ];
+    case "number[]":
+      return [
+        {
+          type: "array",
+          items: {
+            type: data.digit === 0 ? "integer" : "number",
+          },
+          ...(data.default !== undefined ? { default: data.default } : {}),
+        },
+        [],
+      ];
+    case "actor[]":
+    case "weapon[]":
+    case "armor[]":
+    case "skill[]":
+    case "item[]":
+    case "enemy[]":
+    case "state[]":
+      return [
+        {
+          type: "array",
+          items: { type: "integer" },
+          ...(data.default !== undefined ? { default: data.default } : {}),
+        },
+        [],
+      ];
+    case "number":
+      return [
+        {
+          type: data.digit === 0 ? "integer" : "number",
+          ...(data.default !== undefined ? { default: data.default } : {}),
+        },
+        [],
+      ];
+    case "actor":
+    case "weapon":
+    case "armor":
+    case "skill":
+    case "item":
+    case "enemy":
+    case "state":
+      return [
+        {
+          type: "integer",
+          ...(data.default !== undefined ? { default: data.default } : {}),
+          ...(data.text !== undefined ? { title: data.text } : {}),
+          ...(data.desc !== undefined ? { description: data.desc } : {}),
+        },
+        [],
+      ];
     case "boolean":
       return [
         {
           type: "boolean",
           ...(data.default !== undefined ? { default: data.default } : {}),
+          ...(data.text !== undefined ? { title: data.text } : {}),
+          ...(data.desc !== undefined ? { description: data.desc } : {}),
         },
         [],
       ];
-
     case "struct":
       return compileStruct(path, resolveStruct(data.struct, ctx), ctx);
-
     case "struct[]":
       const [itemSchema, itemLogs] = compileStruct(
         `${path}[]`,
@@ -95,13 +217,12 @@ const compileField = (
         },
         itemLogs,
       ];
-
     default:
       return [{}, []];
   }
 };
 
-const resolveStruct = <T>(
+const resolveStruct = <T extends object>(
   data: { structName: string; params?: any },
   ctx: CompileContext
 ): StructAnnotation<T> => {
@@ -110,7 +231,7 @@ const resolveStruct = <T>(
     : (ctx.typeDefs[data.structName] as StructAnnotation<T>);
 };
 
-export const compile = <T>(
+export const compile = <T extends object>(
   moduleName: string,
   struct: StructAnnotation<T>,
   typeDefs: Record<string, StructAnnotation<any>>
