@@ -1,7 +1,7 @@
 import { describe, test, expect } from "vitest";
 import type { JSONSchemaType } from "ajv";
-import { compile } from "./compile";
-import type { KindOfStruct } from "./kinds";
+import { compilePluginStruct } from "./compile";
+import type { PluginStruct } from "./kinds";
 import type { PluginTitles } from "./kinds/compileOption";
 
 interface StringTypes {
@@ -19,40 +19,37 @@ const titles: PluginTitles = {
 
 describe("stringTypes", () => {
   const stringTypesStruct = {
-    kind: "struct",
-    struct: {
-      structName: "StringTypes",
-      params: {
-        select: {
-          kind: "select",
-          default: "option1",
-          options: [
-            { value: "val1", option: "Option 1" },
-            { value: "val2", option: "Option 2" },
-          ],
-        },
-        file: { kind: "file", dir: "img/pictures", default: "filename" },
-        combo: {
-          kind: "combo",
-          default: "combo1",
-          options: ["aaa", "bbb", "ccc"],
-        },
-        multiLIne: {
-          kind: "multiline_string",
-          default: "multiline\nstring",
-        },
-        strList: {
-          kind: "string[]",
-          default: ["str1", "str2", "str3"],
-        },
-        fileList: {
-          kind: "file[]",
-          dir: "img/pictures",
-          default: ["file1.png", "file2.png"],
-        },
+    structName: "StringTypes",
+    params: {
+      select: {
+        kind: "select",
+        default: "option1",
+        options: [
+          { value: "val1", option: "Option 1" },
+          { value: "val2", option: "Option 2" },
+        ],
+      },
+      file: { kind: "file", dir: "img/pictures", default: "filename" },
+      combo: {
+        kind: "combo",
+        default: "combo1",
+        options: ["aaa", "bbb", "ccc"],
+      },
+      multiLIne: {
+        kind: "multiline_string",
+        default: "multiline\nstring",
+      },
+      strList: {
+        kind: "string[]",
+        default: ["str1", "str2", "str3"],
+      },
+      fileList: {
+        kind: "file[]",
+        dir: "img/pictures",
+        default: ["file1.png", "file2.png"],
       },
     },
-  } satisfies KindOfStruct<StringTypes>;
+  } satisfies PluginStruct<StringTypes>;
   const expectedStringTypesSchema: JSONSchemaType<StringTypes> = {
     title: "StringTypes",
     type: "object",
@@ -87,7 +84,11 @@ describe("stringTypes", () => {
     additionalProperties: false,
   };
   test("schema", () => {
-    const resultStringTypes = compile(titles, stringTypesStruct, {});
+    const resultStringTypes = compilePluginStruct(
+      titles,
+      stringTypesStruct,
+      {}
+    );
     expect(resultStringTypes.schema).toEqual(expectedStringTypesSchema);
   });
 });
