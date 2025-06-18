@@ -64,7 +64,12 @@ const makeSelectField = (data: KindOfSelect) => ({
   ...(data.options ? { enum: data.options.map((o): string => o.value) } : {}),
 });
 
-const makeArrayField = (data: any, itemType: string) => ({
+interface KindOfArray {
+  kind: `${string}[]`;
+  default?: unknown[];
+}
+
+const makeArrayField = (data: KindOfArray, itemType: string) => ({
   type: "array",
   items: { type: itemType },
   ...(data.default !== undefined ? { default: data.default } : {}),
@@ -194,11 +199,11 @@ const compileField = (
     case "struct_ref":
       return [makeStructRef(data), []];
     case "struct":
-      return compileStruct(path, resolveStruct(data.struct, ctx), ctx);
+      return compileStruct(path, resolveStruct(data.struct), ctx);
     case "struct[]":
       const [itemSchema, itemLogs] = compileStruct(
         `${path}[]`,
-        resolveStruct(data.struct, ctx), // 修正
+        resolveStruct(data.struct),
         ctx
       );
       return [
@@ -215,10 +220,7 @@ const compileField = (
 };
 
 const resolveStruct = <T extends object>(
-  data: StructType<T>,
-  ctx: CompileContext
+  data: StructType<T>
 ): StructAnnotation<T> => {
-  return data.params !== undefined
-    ? { kind: "struct", struct: data }
-    : (ctx.typeDefs[data.structName] as StructAnnotation<T>);
+  return { kind: "struct", struct: data };
 };
