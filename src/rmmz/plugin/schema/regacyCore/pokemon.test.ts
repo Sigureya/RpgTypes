@@ -1,5 +1,6 @@
 import { describe, test, expect } from "vitest";
 import type { JSONSchemaType } from "ajv";
+import type { StructAnnotation as Struct2 } from "./kinds/struct2";
 import type {
   CompileLogItem,
   CompileResult,
@@ -14,7 +15,7 @@ interface BB {
 }
 
 describe("bool", () => {
-  const boolStruct: StructAnnotation<BB> = {
+  const boolStruct = {
     kind: "struct",
     struct: {
       structName: "Bool",
@@ -24,10 +25,12 @@ describe("bool", () => {
           default: false,
           desc: "bool desc", // descは全てのkindにある。省略されているだけ
           text: "bool text", // textも全てのkindにある。
+          off: "off",
+          on: "on",
         },
       },
     },
-  };
+  } as const satisfies StructAnnotation<BB>;
   const expectedBoolSchema: JSONSchemaType<BB> = {
     title: "Bool",
     type: "object",
@@ -53,7 +56,7 @@ describe("bool", () => {
 });
 
 describe("person", () => {
-  const personStruct: StructAnnotation<Person> = {
+  const personStruct = {
     kind: "struct",
     struct: {
       structName: "Person",
@@ -62,7 +65,7 @@ describe("person", () => {
         age: { kind: "number", default: 0 },
       },
     },
-  };
+  } as const satisfies StructAnnotation<Person>;
   const expected: JSONSchemaType<Person> = {
     title: "Person",
     type: "object",
@@ -90,16 +93,16 @@ describe("person", () => {
 });
 
 describe("family", () => {
-  const familyStruct: StructAnnotation<Family> = {
+  const familyStruct = {
     kind: "struct",
     struct: {
       structName: "Family",
       params: {
-        father: { kind: "struct", struct: { structName: "Person" } },
-        mother: { kind: "struct", struct: { structName: "Person" } },
+        father: { kind: "struct_ref", structName: "Person" },
+        mother: { kind: "struct_ref", structName: "Person" },
       },
     },
-  };
+  } as const satisfies Struct2<Family>;
   const expectedFamilySchema: JSONSchemaType<Family> = {
     type: "object",
     title: "Family",
@@ -129,41 +132,33 @@ describe("family", () => {
     additionalProperties: false,
   };
   test("", () => {
-    const resultFamily: CompileResult<Family> = compile(
-      "moduleName",
-      familyStruct,
-      {
-        Person: {
-          kind: "struct",
-          struct: {
-            structName: "Person",
-            params: {
-              name: { kind: "string", default: "bob" },
-              age: { kind: "number", default: 0 },
-            },
+    const resultFamily = compile("moduleName", familyStruct, {
+      Person: {
+        kind: "struct",
+        struct: {
+          structName: "Person",
+          params: {
+            name: { kind: "string", default: "bob" },
+            age: { kind: "number", default: 0 },
           },
-        } satisfies StructAnnotation<Person>,
-      }
-    );
+        },
+      } satisfies StructAnnotation<Person>,
+    });
     expect(resultFamily.schema).toEqual(expectedFamilySchema);
   });
   test("", () => {
-    const resultFamily: CompileResult<Family> = compile(
-      "moduleName",
-      familyStruct,
-      {
-        Person: {
-          kind: "struct",
-          struct: {
-            structName: "Person",
-            params: {
-              name: { kind: "string", default: "bob" },
-              age: { kind: "number", default: 0 },
-            },
+    const resultFamily = compile("moduleName", familyStruct, {
+      Person: {
+        kind: "struct",
+        struct: {
+          structName: "Person",
+          params: {
+            name: { kind: "string", default: "bob" },
+            age: { kind: "number", default: 0 },
           },
-        } satisfies StructAnnotation<Person>,
-      }
-    );
+        },
+      } satisfies StructAnnotation<Person>,
+    } as const);
     expect(resultFamily.logs).toContainEqual({
       path: "moduleName.Family.father",
       data: { kind: "struct", struct: { structName: "Person" } },
@@ -176,7 +171,7 @@ describe("family", () => {
 });
 
 describe("school", () => {
-  const mockSchoolStruct: StructAnnotation<School> = {
+  const mockSchoolStruct = {
     kind: "struct",
     struct: {
       structName: "School",
@@ -196,7 +191,7 @@ describe("school", () => {
         },
       },
     },
-  };
+  } as const satisfies StructAnnotation<School>;
   const mockSchoolSchema: JSONSchemaType<School> = {
     type: "object",
     title: "School",
@@ -238,7 +233,7 @@ interface AllData {
 }
 
 describe("alldata", () => {
-  const allDataStruct: StructAnnotation<AllData> = {
+  const allDataStruct = {
     kind: "struct",
     struct: {
       structName: "AllData",
@@ -257,7 +252,7 @@ describe("alldata", () => {
         state: { kind: "state", default: 0, text: "", desc: "" },
       },
     },
-  };
+  } as const satisfies StructAnnotation<AllData>;
   const expectedAllDataSchema: JSONSchemaType<AllData> = {
     title: "AllData",
     type: "object",
@@ -317,7 +312,7 @@ describe("alldata", () => {
   });
 });
 describe("alldataArray", () => {
-  const allDataStruct: StructAnnotation<AllData> = {
+  const allDataStruct = {
     kind: "struct",
     struct: {
       structName: "AllData",
@@ -334,8 +329,8 @@ describe("alldataArray", () => {
         state: { kind: "state", default: 0 },
       },
     },
-  };
-  const expectedAllDataSchema: JSONSchemaType<AllData> = {
+  } as const satisfies StructAnnotation<AllData>;
+  const expectedAllDataSchema = {
     title: "AllData",
     type: "object",
     properties: {
@@ -358,7 +353,7 @@ describe("alldataArray", () => {
     },
     required: ["actor", "weapons", "armor", "skill", "item", "enemy", "state"],
     additionalProperties: false,
-  };
+  } as const satisfies JSONSchemaType<AllData>;
   test("schema", () => {
     const resultAllData = compile("moduleName", allDataStruct, {});
     expect(resultAllData.schema).toEqual(expectedAllDataSchema);
@@ -376,7 +371,7 @@ interface AllDataArray {
 }
 
 describe("alldataArray", () => {
-  const allDataArrayStruct: StructAnnotation<AllDataArray> = {
+  const allDataArrayStruct = {
     kind: "struct",
     struct: {
       structName: "AllDataArray",
@@ -390,7 +385,7 @@ describe("alldataArray", () => {
         state: { kind: "state[]", default: [1, 2, 3] },
       },
     },
-  };
+  } as const satisfies StructAnnotation<AllDataArray>;
   const expectedAllDataArraySchema: JSONSchemaType<AllDataArray> = {
     title: "AllDataArray",
     type: "object",
@@ -449,7 +444,7 @@ interface Numbers {
 }
 
 describe("numbers", () => {
-  const numbersStruct: StructAnnotation<Numbers> = {
+  const numbersStruct = {
     kind: "struct",
     struct: {
       structName: "Numbers",
@@ -461,7 +456,7 @@ describe("numbers", () => {
         floatArray: { kind: "number[]", default: [1.1, 2.2, 3.3], digit: 2 },
       },
     },
-  };
+  } as const satisfies StructAnnotation<Numbers>;
   const expectedNumbersSchema: JSONSchemaType<Numbers> = {
     title: "Numbers",
     type: "object",
@@ -504,7 +499,7 @@ interface StringTypes {
 }
 
 describe("stringTypes", () => {
-  const stringTypesStruct: StructAnnotation<StringTypes> = {
+  const stringTypesStruct = {
     kind: "struct",
     struct: {
       structName: "StringTypes",
@@ -538,7 +533,7 @@ describe("stringTypes", () => {
         },
       },
     },
-  };
+  } satisfies Struct2<StringTypes>;
   const expectedStringTypesSchema: JSONSchemaType<StringTypes> = {
     title: "StringTypes",
     type: "object",
@@ -564,6 +559,7 @@ describe("stringTypes", () => {
       },
       fileList: {
         type: "array",
+
         items: { type: "string" },
         default: ["file1.png", "file2.png"],
       },
