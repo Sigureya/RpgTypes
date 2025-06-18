@@ -31,8 +31,7 @@ type AnySchema =
   | JSONSchemaType<object[]>
   | { $ref: string };
 
-type ResultType = [AnySchema | undefined, CompileLogItem[]];
-interface ResultType2 {
+interface ResultType {
   schema?: AnySchema;
   logs: CompileLogItem[];
 }
@@ -115,7 +114,7 @@ const compileField = (
   path: string,
   data: StructParam,
   ctx: CompileContext
-): ResultType2 => {
+): ResultType => {
   if (data.kind === "struct") {
     const { schema, logs } = makeStructKind(path, data, ctx);
     return {
@@ -183,7 +182,7 @@ const makeStructKind = <T extends object>(
   path: string,
   annotation: KindOfStruct<T>,
   ctx: CompileContext
-): ResultType2 => {
+): ResultType => {
   return compileStructDetail(
     path,
     annotation.struct.structName,
@@ -196,7 +195,7 @@ const makeStructArrayKind = (
   path: string,
   annotation: KindOfStructArray,
   ctx: CompileContext
-): ResultType2 => {
+): ResultType => {
   const item = makeStructKind(
     `${path}[]`,
     { kind: "struct", struct: annotation.struct },
