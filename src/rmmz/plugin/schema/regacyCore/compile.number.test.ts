@@ -2,6 +2,7 @@ import { describe, test, expect } from "vitest";
 import type { JSONSchemaType } from "ajv";
 import { compile } from "./compile";
 import type { KindOfStruct } from "./kinds";
+import type { PluginTitles } from "./kinds/compileOption";
 
 interface Numbers {
   floating: number;
@@ -10,6 +11,10 @@ interface Numbers {
   numberArray: number[];
   floatArray: number[];
 }
+const titles: PluginTitles = {
+  moduleName: "moduleName",
+  author: "author",
+};
 
 describe("numbers", () => {
   const numbersStruct = {
@@ -47,7 +52,7 @@ describe("numbers", () => {
     additionalProperties: false,
   };
   describe("compile", () => {
-    const resultNumbers = compile("moduleName", numbersStruct, {});
+    const resultNumbers = compile(titles, numbersStruct, {});
     test("logs", () => {
       expect(resultNumbers.logs.length).toBe(5);
     });

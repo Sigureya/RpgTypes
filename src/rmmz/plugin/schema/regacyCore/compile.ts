@@ -14,6 +14,7 @@ import type {
   KindBase,
 } from "./kinds";
 import type { CompileLogItem, CompileResult } from "./kinds/compileLog";
+import type { PluginTitles } from "./kinds/compileOption";
 import type { KindOfStruct, StructParam, PluginStruct } from "./kinds/struct2";
 
 type CompileContext = {
@@ -30,7 +31,7 @@ type AnySchema =
   | JSONSchemaType<object[]>;
 
 export const compile = <T extends object>(
-  moduleName: string,
+  { moduleName }: PluginTitles,
   struct: KindOfStruct<object>,
   typeDefs: Record<string, KindOfStruct<object>>
 ): CompileResult<T> => {

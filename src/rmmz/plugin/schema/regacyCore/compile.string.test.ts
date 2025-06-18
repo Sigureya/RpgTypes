@@ -2,6 +2,7 @@ import { describe, test, expect } from "vitest";
 import type { JSONSchemaType } from "ajv";
 import { compile } from "./compile";
 import type { KindOfStruct } from "./kinds";
+import type { PluginTitles } from "./kinds/compileOption";
 
 interface StringTypes {
   select: string;
@@ -11,6 +12,10 @@ interface StringTypes {
   strList: string[];
   fileList: string[];
 }
+const titles: PluginTitles = {
+  moduleName: "moduleName",
+  author: "author",
+};
 
 describe("stringTypes", () => {
   const stringTypesStruct = {
@@ -82,7 +87,7 @@ describe("stringTypes", () => {
     additionalProperties: false,
   };
   test("schema", () => {
-    const resultStringTypes = compile("moduleName", stringTypesStruct, {});
+    const resultStringTypes = compile(titles, stringTypesStruct, {});
     expect(resultStringTypes.schema).toEqual(expectedStringTypesSchema);
   });
 });

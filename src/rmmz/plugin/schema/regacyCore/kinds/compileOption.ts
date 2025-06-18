@@ -1,9 +1,9 @@
-export interface PluginCompileOption {
+export interface PluginTitles {
   author: string;
-  pluginName: string;
+  moduleName: string;
 }
 
 export interface RmmzPluigin {
-  compileOption: PluginCompileOption;
+  compileOption: PluginTitles;
   structs: Record<string, object>;
 }
