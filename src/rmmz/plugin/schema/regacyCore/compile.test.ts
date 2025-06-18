@@ -1,5 +1,6 @@
 import { describe, test, expect } from "vitest";
 import type { JSONSchemaType } from "ajv";
+import { compile } from "./compile";
 import type { StructAnnotation as Struct2 } from "./kinds/struct2";
 import type {
   CompileLogItem,
@@ -8,7 +9,6 @@ import type {
   Person,
   School,
 } from "./mockType";
-import { compile } from "./pokemon";
 import type { StructAnnotation } from "./types";
 
 describe("person", () => {
