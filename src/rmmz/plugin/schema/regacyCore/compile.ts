@@ -24,6 +24,13 @@ type CompileContext = {
   moduleName: string;
   typeDefs: Record<string, StructAnnotation<object>>;
 };
+type AnySchema =
+  | JSONSchemaType<number>
+  | JSONSchemaType<string>
+  | JSONSchemaType<boolean>
+  | JSONSchemaType<number[]>
+  | JSONSchemaType<string[]>
+  | JSONSchemaType<object>;
 
 export const compile = <T extends object>(
   moduleName: string,
@@ -39,84 +46,90 @@ export const compile = <T extends object>(
   return { schema, logs };
 };
 
-const isIntegerKind = (kind: string, digit?: number) => {
-  if (kind === "number" || kind === "number[]") {
-    return digit === undefined || digit === 0;
-  }
-
-  return false;
+const isIntegerKind = (digit: number | undefined) => {
+  return digit === undefined || digit === 0;
 };
 
-const cloneTexts = (kind: KindBase) => ({
+const withTexts = (kind: KindBase) => ({
   ...(typeof kind.text === "string" ? { title: kind.text } : {}),
   ...(typeof kind.desc === "string" ? { description: kind.desc } : {}),
 });
 
+const withDefault = <T>(value: T | undefined) =>
+  value !== undefined ? { default: value } : {};
 // --- 各型ごとの生成関数 ---
-const makeStringField = (data: KindOfString) => ({
-  type: "string",
-  ...(data.default !== undefined ? { default: data.default } : {}),
-});
+const makeStringField = (data: KindOfString) =>
+  ({
+    type: "string",
+    ...(data.default !== undefined ? { default: data.default } : {}),
+  } satisfies JSONSchemaType<string>);
 
-const makeSelectField = (data: KindOfSelect) => ({
-  type: "string",
-  ...(data.default !== undefined ? { default: data.default } : {}),
-  ...(data.options ? { enum: data.options.map((o): string => o.value) } : {}),
-});
+const makeSelectField = (data: KindOfSelect) =>
+  ({
+    type: "string",
+    ...withDefault(data.default),
+    ...(data.options ? { enum: data.options.map((o): string => o.value) } : {}),
+  } satisfies JSONSchemaType<string>);
 
-interface KindOfArray {
+interface KindOfArray<T> {
   kind: `${string}[]`;
-  default?: unknown[];
+  default?: T[];
 }
 
-const makeArrayField = (data: KindOfArray, itemType: string) => ({
+const makeArrayField = <T>(data: KindOfArray<T>, itemType: string) => ({
   type: "array",
   items: { type: itemType },
-  ...(data.default !== undefined ? { default: data.default } : {}),
+  ...withDefault(data.default),
 });
 
-const makeNumberArrayField = (data: KindOfNumberArray) => ({
-  type: "array",
-  items: {
-    type: isIntegerKind("number[]", data.digit) ? "integer" : "number",
-  },
-  ...(data.default !== undefined ? { default: data.default } : {}),
-  ...cloneTexts(data),
-});
+const makeNumberArrayField = (data: KindOfNumberArray) =>
+  ({
+    type: "array",
+    items: {
+      type: isIntegerKind(data.digit) ? "integer" : "number",
+    },
+    ...withDefault(data.default),
+    ...withTexts(data),
+  } satisfies JSONSchemaType<number[]>);
 
-const makeNumberField = (data: KindOfNumber) => ({
-  type: isIntegerKind("number", data.digit) ? "integer" : "number",
-  ...(data.default !== undefined ? { default: data.default } : {}),
-});
+const makeNumberField = (data: KindOfNumber) =>
+  ({
+    type: isIntegerKind(data.digit) ? "integer" : "number",
+    ...withDefault(data.default),
+  } satisfies JSONSchemaType<number>);
 
-const makeIdField = (data: KindOfRpgDataId | KindOfSystemDataId) => ({
-  type: "integer",
-  ...(data.default !== undefined ? { default: data.default } : {}),
-  ...cloneTexts(data),
-});
+const makeIdField = (data: KindOfRpgDataId | KindOfSystemDataId) =>
+  ({
+    type: "integer",
+    ...withDefault(data.default),
+    ...withTexts(data),
+  } satisfies JSONSchemaType<number>);
 
-const makeBooleanField = (data: KindOfBoolean) => ({
-  type: "boolean",
-  ...(data.default !== undefined ? { default: data.default } : {}),
-  ...cloneTexts(data),
-});
+const makeBooleanField = (data: KindOfBoolean) =>
+  ({
+    type: "boolean",
+    ...withDefault(data.default),
+    ...withTexts(data),
+  } satisfies JSONSchemaType<boolean>);
 
-const makeComboField = (data: KindOFCombo) => ({
-  type: "string",
-  ...(data.default !== undefined ? { default: data.default } : {}),
-  ...cloneTexts(data),
-});
+const makeComboField = (data: KindOFCombo) =>
+  ({
+    type: "string",
+    ...withDefault(data.default),
+    ...withTexts(data),
+  } satisfies JSONSchemaType<string>);
 
-const makeFileField = (data: KindOfFile) => ({
-  type: "string",
-  ...(data.default !== undefined ? { default: data.default } : {}),
-  ...cloneTexts(data),
-});
+const makeFileField = (data: KindOfFile) =>
+  ({
+    type: "string",
+    ...withDefault(data.default),
+    ...withTexts(data),
+  } satisfies JSONSchemaType<string>);
 
 const makeStructRef = (ref: KindOfStructRef) =>
   ({
     $ref: `#/definitions/${ref.structName}`,
-    ...cloneTexts(ref),
+    ...withTexts(ref),
   } satisfies Schema);
 
 // --- メイン処理 ---
@@ -150,7 +163,7 @@ const compileStruct = <T extends object>(
       properties,
       required: keys,
       additionalProperties: false,
-    } as JSONSchemaType<T>,
+    } satisfies JSONSchemaType<T>,
     logs,
   ];
 };
