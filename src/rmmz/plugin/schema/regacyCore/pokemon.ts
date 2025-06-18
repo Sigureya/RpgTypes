@@ -1,6 +1,7 @@
 import type { JSONSchemaType } from "ajv";
 import type { CompileLogItem, CompileResult } from "./mockType";
 import type { StructAnnotation } from "./structAnt2";
+import type { StringSelect } from "./types";
 
 type CompileContext = {
   moduleName: string;
@@ -8,29 +9,10 @@ type CompileContext = {
 };
 
 const isIntegerKind = (kind: string, digit?: number) => {
-  if (
-    [
-      "actor",
-      "weapon",
-      "armor",
-      "skill",
-      "item",
-      "enemy",
-      "state",
-      "actor[]",
-      "weapon[]",
-      "armor[]",
-      "skill[]",
-      "item[]",
-      "enemy[]",
-      "state[]",
-    ].includes(kind)
-  ) {
-    return true;
-  }
   if (kind === "number" || kind === "number[]") {
     return digit === undefined || digit === 0;
   }
+
   return false;
 };
 
@@ -40,10 +22,10 @@ const makeStringField = (data: any) => ({
   ...(data.default !== undefined ? { default: data.default } : {}),
 });
 
-const makeSelectField = (data: any) => ({
+const makeSelectField = (data: StringSelect) => ({
   type: "string",
   ...(data.default !== undefined ? { default: data.default } : {}),
-  ...(data.options ? { enum: data.options.map((o: any) => o.value) } : {}),
+  ...(data.options ? { enum: data.options.map((o): string => o.value) } : {}),
 });
 
 const makeArrayField = (data: any, itemType: string) => ({
@@ -157,7 +139,7 @@ const compileField = (
     case "struct[]":
       const [itemSchema, itemLogs] = compileStruct(
         `${path}[]`,
-        data.struct,
+        resolveStruct(data.struct, ctx), // 修正
         ctx
       );
       return [
