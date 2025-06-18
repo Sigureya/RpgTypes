@@ -22,6 +22,7 @@ type CompileContext = {
   typeDefs: Record<string, KindOfStruct<object>>;
 };
 type AnySchema =
+  | true
   | JSONSchemaType<number>
   | JSONSchemaType<string>
   | JSONSchemaType<boolean>
@@ -32,7 +33,7 @@ type AnySchema =
   | { $ref: string };
 
 interface ResultType {
-  schema?: AnySchema;
+  schema: AnySchema;
   logs: CompileLogItem[];
 }
 export const compile = <T extends object>(
@@ -87,9 +88,10 @@ const compileStructDetail = <T>(
 };
 
 interface PropsAccumulated {
-  properties: Record<string, AnySchema | object>;
+  properties: Record<string, AnySchema>;
   logs: CompileLogItem[];
 }
+
 const reduceProps = (
   props: Record<string, StructParam>,
   path: string,
@@ -174,7 +176,7 @@ const compilePrimitive = (
     case "struct_ref":
       return makeStructRef(data);
     default:
-      return undefined;
+      return true;
   }
 };
 
@@ -188,7 +190,8 @@ const makeStructKind = <T extends object>(
     annotation.struct.structName,
     annotation.struct.params,
     ctx
-  );
+  ) as unknown as ResultType;
+  // 再帰構造のためasが唯一の解となる
 };
 
 const makeStructArrayKind = (
@@ -206,7 +209,7 @@ const makeStructArrayKind = (
       type: "array",
       ...(item.schema ? { items: item.schema } : {}),
       ...withDefault(annotation.default),
-    },
+    } as JSONSchemaType<object[]>,
     logs: item.logs,
   };
 };
