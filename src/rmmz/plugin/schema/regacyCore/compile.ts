@@ -1,5 +1,4 @@
 import type { JSONSchemaType } from "ajv";
-import type { Schema } from "jsonschema";
 import type {
   KindOfBoolean,
   KindOfNumber,
@@ -29,7 +28,11 @@ type AnySchema =
   | JSONSchemaType<number[]>
   | JSONSchemaType<string[]>
   | JSONSchemaType<object>
-  | JSONSchemaType<object[]>;
+  | JSONSchemaType<object[]>
+  | { $ref: string }
+  | {};
+
+type ResultType = [AnySchema, CompileLogItem[]];
 
 export const compile = <T extends object>(
   { moduleName }: PluginTitles,
@@ -66,7 +69,7 @@ const compileStructDetail = <T>(
   title: string,
   props: Record<string, StructParam>,
   ctx: CompileContext
-): [JSONSchemaType<T>, CompileLogItem[]] => {
+) => {
   const { properties, logs } = reduceProps(props, path, ctx);
 
   const keys = Object.keys(props);
@@ -79,7 +82,7 @@ const compileStructDetail = <T>(
       additionalProperties: false,
     } satisfies JSONSchemaType<T>,
     logs,
-  ];
+  ] as [JSONSchemaType<T>, CompileLogItem[]];
 };
 
 interface PropsAccumulated {
@@ -108,23 +111,35 @@ const compileField = (
   path: string,
   data: StructParam,
   ctx: CompileContext
-): [AnySchema | object, CompileLogItem[]] => {
+): ResultType => {
+  if (data.kind === "struct") {
+    return makeStructKind(path, data, ctx);
+  }
+  if (data.kind === "struct[]") {
+    return makeStructArrayKind(path, data, ctx);
+  }
+  return [compilePrimitive(data), []];
+};
+
+const compilePrimitive = (
+  data: Exclude<StructParam, { kind: "struct" | "struct[]" }>
+) => {
   switch (data.kind) {
     case "string":
     case "multiline_string":
-      return [makeStringField(data), []];
+      return makeStringField(data);
     case "file":
-      return [makeFileField(data), []];
+      return makeFileField(data);
     case "combo":
-      return [makeComboField(data), []];
+      return makeComboField(data);
     case "select":
-      return [makeSelectField(data), []];
+      return makeSelectField(data);
     case "file[]":
-      return [makeArrayField(data, "string"), []];
+      return makeArrayField(data, "string");
     case "string[]":
-      return [makeArrayField(data, "string"), []];
+      return makeArrayField(data, "string");
     case "number[]":
-      return [makeNumberArrayField(data), []];
+      return makeNumberArrayField(data);
     case "actor[]":
     case "weapon[]":
     case "armor[]":
@@ -132,9 +147,9 @@ const compileField = (
     case "item[]":
     case "enemy[]":
     case "state[]":
-      return [makeArrayField(data, "integer"), []];
+      return makeArrayField(data, "integer");
     case "number":
-      return [makeNumberField(data), []];
+      return makeNumberField(data);
     case "actor":
     case "weapon":
     case "armor":
@@ -142,17 +157,13 @@ const compileField = (
     case "item":
     case "enemy":
     case "state":
-      return [makeIdField(data), []];
+      return makeIdField(data);
     case "boolean":
-      return [makeBooleanField(data), []];
+      return makeBooleanField(data);
     case "struct_ref":
-      return [makeStructRef(data), []];
-    case "struct":
-      return makeStructKind(path, data, ctx);
-    case "struct[]":
-      return makeStructArrayKind(path, data, ctx);
+      return makeStructRef(data);
     default:
-      return [{}, []];
+      return {};
   }
 };
 
@@ -160,7 +171,7 @@ const makeStructKind = <T extends object>(
   path: string,
   annotation: KindOfStruct<T>,
   ctx: CompileContext
-): [JSONSchemaType<T>, CompileLogItem[]] => {
+) => {
   return compileStructDetail(
     path,
     annotation.struct.structName,
@@ -216,11 +227,12 @@ interface KindOfArray<T> {
   default?: T[];
 }
 
-const makeArrayField = <T>(data: KindOfArray<T>, itemType: string) => ({
-  type: "array",
-  items: { type: itemType },
-  ...withDefault(data.default),
-});
+const makeArrayField = <T>(data: KindOfArray<T>, itemType: string) =>
+  ({
+    type: "array",
+    items: { type: itemType },
+    ...withDefault(data.default),
+  } as JSONSchemaType<T[]>);
 
 const isIntegerKind = (digit: number | undefined) => {
   return digit === undefined || digit === 0;
@@ -270,8 +282,7 @@ const makeFileField = (data: KindOfFile) =>
     ...withTexts(data),
   } satisfies JSONSchemaType<string>);
 
-const makeStructRef = (ref: KindOfStructRef) =>
-  ({
-    $ref: `#/definitions/${ref.structName}`,
-    ...withTexts(ref),
-  } satisfies Schema);
+const makeStructRef = (ref: KindOfStructRef) => ({
+  $ref: `#/definitions/${ref.structName}`,
+  ...withTexts(ref),
+});
