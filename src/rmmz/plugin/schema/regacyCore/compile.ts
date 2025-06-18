@@ -32,24 +32,60 @@ type AnySchema =
 
 export const compile = <T extends object>(
   { moduleName }: PluginTitles,
-  struct: KindOfStruct<object>,
+  struct: KindOfStruct<Record<string, StructParam>>,
   typeDefs: Record<string, KindOfStruct<object>>
 ): CompileResult<T> => {
   const ctx: CompileContext = { moduleName, typeDefs };
-  const [schema, logs] = compileStruct(
+  const [schema, logs] = compileStructDetail(
     `${moduleName}.${struct.struct.structName}`,
-    struct,
+    struct.struct.structName,
+    struct.struct.params,
     ctx
   );
   return { schema, logs };
+};
+
+export const compilePluginStruct = <T extends object>(
+  { moduleName }: PluginTitles,
+  struct: PluginStruct<T>,
+  typeDefs: Record<string, KindOfStruct<object>>
+): CompileResult<T> => {
+  const [schema, logs] = compileStructDetail(
+    `${moduleName}.${struct.structName}`,
+    struct.structName,
+    struct.params,
+    { moduleName, typeDefs }
+  );
+  return { schema, logs };
+};
+
+// --- メイン処理 ---
+const compileStructDetail = <T>(
+  path: string,
+  title: string,
+  props: Record<string, StructParam>,
+  ctx: CompileContext
+): [JSONSchemaType<T>, CompileLogItem[]] => {
+  const { properties, logs } = reduceProps(props, path, ctx);
+
+  const keys = Object.keys(props);
+  return [
+    {
+      type: "object",
+      title: title,
+      properties,
+      required: keys,
+      additionalProperties: false,
+    } satisfies JSONSchemaType<T>,
+    logs,
+  ];
 };
 
 interface PropsAccumulated {
   properties: Record<string, AnySchema | object>;
   logs: CompileLogItem[];
 }
-
-const compileProps = (
+const reduceProps = (
   props: Record<string, StructParam>,
   path: string,
   ctx: CompileContext
@@ -65,29 +101,6 @@ const compileProps = (
     },
     { properties: {}, logs: [] } satisfies PropsAccumulated
   );
-};
-
-// --- メイン処理 ---
-const compileStruct = <T extends object>(
-  path: string,
-  annotation: KindOfStruct<T>,
-  ctx: CompileContext
-): [JSONSchemaType<T>, CompileLogItem[]] => {
-  const props = annotation.struct.params;
-
-  const { properties, logs } = compileProps(props, path, ctx);
-
-  const keys = Object.keys(props);
-  return [
-    {
-      type: "object",
-      title: annotation.struct.structName,
-      properties,
-      required: keys,
-      additionalProperties: false,
-    } satisfies JSONSchemaType<T>,
-    logs,
-  ];
 };
 
 const compileField = (
@@ -134,9 +147,9 @@ const compileField = (
     case "struct_ref":
       return [makeStructRef(data), []];
     case "struct":
-      return compileStruct(path, resolveStruct(data.struct), ctx);
+      return makeStructKind(path, resolveStruct(data.struct), ctx);
     case "struct[]":
-      const [itemSchema, itemLogs] = compileStruct(
+      const [itemSchema, itemLogs] = makeStructKind(
         `${path}[]`,
         resolveStruct(data.struct),
         ctx
@@ -154,6 +167,18 @@ const compileField = (
   }
 };
 
+const makeStructKind = <T extends object>(
+  path: string,
+  annotation: KindOfStruct<T>,
+  ctx: CompileContext
+): [JSONSchemaType<T>, CompileLogItem[]] => {
+  return compileStructDetail(
+    path,
+    annotation.struct.structName,
+    annotation.struct.params,
+    ctx
+  );
+};
 const resolveStruct = <T extends object>(
   data: PluginStruct<T>
 ): KindOfStruct<T> => {
