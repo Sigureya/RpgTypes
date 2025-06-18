@@ -5,6 +5,8 @@ export interface AnnotationBaseTexts {
   parent?: string;
 }
 
+export type TypeKey = "type";
+
 export interface AnnotationBase<T = unknown> extends AnnotationBaseTexts {
   type: string;
   desc?: string;

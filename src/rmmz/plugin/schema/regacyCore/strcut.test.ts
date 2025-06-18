@@ -1,8 +1,8 @@
 import { describe, test, expect } from "vitest";
 import { Ajv, type JSONSchemaType } from "ajv";
 import type { Schema } from "jsonschema";
-import type { StructAnnotation } from "../core/struct";
 import { fnXX } from "./structFn";
+import type { StructAnnotation } from "./types";
 interface Person {
   name: string;
   age: number;
@@ -72,6 +72,10 @@ const paramAnt: StructAnnotation<MockType> = {
             age: { type: "number", default: 0 },
           },
         },
+        default: {
+          name: "",
+          age: 0,
+        },
       },
       personArray: {
         type: "struct[]",
@@ -86,21 +90,21 @@ const paramAnt: StructAnnotation<MockType> = {
       },
     },
   },
-  // default: {
-  //   numberArray: [1, 2],
-  //   option: "A",
-  //   actorData: 0,
-  //   weaponsData: [],
-  //   bool: false,
-  //   imageFile: "",
-  //   audioFile: "",
-  //   textData: "",
-  //   person: {
-  //     name: "",
-  //     age: 0,
-  //   },
-  //   personArray: [],
-  // } satisfies MockType,
+  default: {
+    numberArray: [1, 2],
+    option: "A",
+    actorData: 0,
+    weaponsData: [],
+    bool: false,
+    imageFile: "",
+    audioFile: "",
+    textData: "",
+    person: {
+      name: "",
+      age: 0,
+    },
+    personArray: [],
+  } satisfies MockType,
 };
 
 const personSchemaJson = {
@@ -171,14 +175,20 @@ const personSchemaJson = {
 } satisfies JSONSchemaType<MockType> & Schema;
 
 describe("", () => {
-  const schema = fnXX(paramAnt);
+  const result = fnXX(paramAnt);
   test("", () => {
-    expect(schema).toEqual(personSchemaJson);
+    expect(result.schema).toEqual(personSchemaJson);
   });
-  // test("StructAnnotation JSON Schema Validation", () => {
-  //   const ajv = new Ajv({ strict: true });
-  //   const validate = ajv.compile(schema);
-  //   const valid = validate(paramAnt.default);
-  //   expect(valid).toBe(true);
-  // });
+  test("StructAnnotation JSON Schema Validation", () => {
+    const ajv = new Ajv({ strict: true });
+    const validate = ajv.compile(result.schema);
+    const valid = validate(paramAnt.default);
+    expect(valid).toBe(true);
+  });
+  test("", () => {
+    const ajv = new Ajv({ strict: true });
+    const validate = ajv.compile(personSchemaJson);
+    const valid = validate(paramAnt.default);
+    expect(valid).toBe(true);
+  });
 });
