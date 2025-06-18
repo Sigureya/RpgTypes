@@ -209,7 +209,7 @@ describe("school", () => {
           title: "Person",
           properties: {
             name: { type: "string", default: "bob" },
-            age: { type: "number", default: 0 },
+            age: { type: "integer", default: 0 },
           },
           required: ["name", "age"],
           additionalProperties: false,
