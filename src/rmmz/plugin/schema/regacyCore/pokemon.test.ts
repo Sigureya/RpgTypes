@@ -107,43 +107,14 @@ describe("family", () => {
     type: "object",
     title: "Family",
     properties: {
-      father: {
-        type: "object",
-        title: "Person",
-        properties: {
-          name: { type: "string", default: "bob" },
-          age: { type: "integer", default: 0 },
-        },
-        required: ["name", "age"],
-        additionalProperties: false,
-      },
-      mother: {
-        type: "object",
-        title: "Person",
-        properties: {
-          name: { type: "string", default: "bob" },
-          age: { type: "integer", default: 0 },
-        },
-        required: ["name", "age"],
-        additionalProperties: false,
-      },
+      father: { $ref: "#/definitions/Person" },
+      mother: { $ref: "#/definitions/Person" },
     },
     required: ["father", "mother"],
     additionalProperties: false,
   };
   test("", () => {
-    const resultFamily = compile("moduleName", familyStruct, {
-      Person: {
-        kind: "struct",
-        struct: {
-          structName: "Person",
-          params: {
-            name: { kind: "string", default: "bob" },
-            age: { kind: "number", default: 0 },
-          },
-        },
-      } satisfies StructAnnotation<Person>,
-    });
+    const resultFamily = compile("moduleName", familyStruct, {});
     expect(resultFamily.schema).toEqual(expectedFamilySchema);
   });
   test("", () => {
@@ -161,11 +132,11 @@ describe("family", () => {
     } as const);
     expect(resultFamily.logs).toContainEqual({
       path: "moduleName.Family.father",
-      data: { kind: "struct", struct: { structName: "Person" } },
+      data: familyStruct.struct.params.father,
     } satisfies CompileLogItem);
     expect(resultFamily.logs).toContainEqual({
       path: "moduleName.Family.mother",
-      data: { kind: "struct", struct: { structName: "Person" } },
+      data: familyStruct.struct.params.mother,
     } satisfies CompileLogItem);
   });
 });
