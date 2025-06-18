@@ -44,18 +44,18 @@ export const compile = <T extends object>(
   return { schema, logs };
 };
 
-// --- メイン処理 ---
-const compileStruct = <T extends object>(
-  path: string,
-  annotation: KindOfStruct<T>,
-  ctx: CompileContext
-): [JSONSchemaType<T>, CompileLogItem[]] => {
-  const props = annotation.struct.params;
-  type ResultLike = [Record<string, AnySchema | object>, CompileLogItem[]];
+interface RR {
+  props: Record<string, AnySchema | object>;
+  logs: CompileLogItem[];
+}
 
-  const [properties, logs]: ResultLike = Object.entries<StructParam>(
-    props
-  ).reduce<ResultLike>(
+const compileProps = (
+  props: Record<string, StructParam>,
+  path: string,
+  ctx: CompileContext
+): [Record<string, AnySchema | object>, CompileLogItem[]] => {
+  type ResultLike = [Record<string, AnySchema | object>, CompileLogItem[]];
+  return Object.entries<StructParam>(props).reduce<ResultLike>(
     ([accSchema, accLogs], [key, value]) => {
       const currentPath = `${path}.${key}`;
       const [fieldSchema, fieldLogs] = compileField(currentPath, value, ctx);
@@ -66,6 +66,18 @@ const compileStruct = <T extends object>(
     },
     [{}, []] satisfies ResultLike
   );
+};
+
+// --- メイン処理 ---
+const compileStruct = <T extends object>(
+  path: string,
+  annotation: KindOfStruct<T>,
+  ctx: CompileContext
+): [JSONSchemaType<T>, CompileLogItem[]] => {
+  const props = annotation.struct.params;
+  type ResultLike = [Record<string, AnySchema | object>, CompileLogItem[]];
+
+  const [properties, logs]: ResultLike = compileProps(props, path, ctx);
 
   const keys = Object.keys(props);
   return [
