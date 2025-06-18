@@ -43,6 +43,11 @@ interface CoreStructArray {
   struct: PluginStruct<object>;
   default: object[];
 }
+// 構造体アノテーション
+export interface KindOfStruct<T extends object> {
+  kind: "struct";
+  struct: PluginStruct<T>;
+}
 
 // 構造体本体
 export interface PluginStruct<T extends object> {
@@ -52,8 +57,9 @@ export interface PluginStruct<T extends object> {
   };
 }
 
-// 構造体アノテーション
-export interface KindOfStruct<T extends object> {
-  kind: "struct";
-  struct: PluginStruct<T>;
+export interface PluginCommand<T extends object> {
+  commandName: string;
+  args: {
+    [K in keyof T]: StructParam;
+  };
 }
