@@ -1,7 +1,7 @@
 import { describe, test, expect } from "vitest";
 import { Ajv, type JSONSchemaType } from "ajv";
 import type { Schema } from "jsonschema";
-import { fnXX } from "./structFn";
+import { fnXX } from "./structFn2";
 import type { StructAnnotation } from "./types";
 interface Person {
   name: string;
@@ -22,19 +22,19 @@ interface MockType {
 }
 
 const paramAnt: StructAnnotation<MockType> = {
-  type: "struct",
+  kind: "struct",
   struct: {
     structName: "PPP",
     params: {
       numberArray: {
-        type: "number[]",
+        kind: "number[]",
         default: [1, 2],
         text: "数値の配列",
         desc: "数値の配列です",
         digit: 4,
       },
       option: {
-        type: "select",
+        kind: "select",
         default: "A",
 
         options: [
@@ -43,33 +43,33 @@ const paramAnt: StructAnnotation<MockType> = {
         ],
       },
       actorData: {
-        type: "number",
+        kind: "number",
         default: 0,
         text: "対象アクター",
         desc: "効果対象のアクターを決めます",
       },
       weaponsData: {
-        type: "number[]",
+        kind: "number[]",
         default: [1, 2],
         text: "武器データの配列",
       },
       bool: {
-        type: "boolean",
+        kind: "boolean",
         default: false,
         on: "有効",
         off: "無効",
         parent: "weaponData",
       },
-      imageFile: { type: "string", default: "", parent: "actorData" },
-      audioFile: { type: "string", default: "" },
-      textData: { type: "string", default: "" },
+      imageFile: { kind: "string", default: "", parent: "actorData" },
+      audioFile: { kind: "string", default: "" },
+      textData: { kind: "string", default: "" },
       person: {
-        type: "struct",
+        kind: "struct",
         struct: {
           structName: "Person",
           params: {
-            name: { type: "string", default: "" },
-            age: { type: "number", default: 0 },
+            name: { kind: "string", default: "" },
+            age: { kind: "number", default: 0 },
           },
         },
         default: {
@@ -78,13 +78,13 @@ const paramAnt: StructAnnotation<MockType> = {
         },
       },
       personArray: {
-        type: "struct[]",
+        kind: "struct[]",
         default: [],
         struct: {
           structName: "Person",
           params: {
-            name: { type: "string", default: "" },
-            age: { type: "number", default: 0 },
+            name: { kind: "string", default: "" },
+            age: { kind: "number", default: 0 },
           },
         },
       },

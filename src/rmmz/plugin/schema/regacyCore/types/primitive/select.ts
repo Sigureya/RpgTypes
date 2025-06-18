@@ -6,7 +6,7 @@ interface ValuePair<T> {
 }
 
 export interface Select<T extends number | string> extends AnnotationBase {
-  type: "select";
+  kind: "select";
   default: T;
   options: ValuePair<T>[];
 }

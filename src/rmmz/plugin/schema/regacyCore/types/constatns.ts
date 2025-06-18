@@ -17,78 +17,78 @@ import type {
 } from "./primitive";
 
 export const ANNOTATION_STRING: StringArg = {
-  type: "string",
+  kind: "string",
   default: "",
 } as const;
 
 export const ANNOTATION_MULTILINE_STRING: MultilineString = {
-  type: "multiline_string",
+  kind: "multiline_string",
   default: "",
 } as const;
 
 export const ANNOTATION_NUMBER: NumberArg = {
-  type: "number",
+  kind: "number",
   default: 0,
 } as const;
 
 export const ANNOTATION_ACTOR: Actor = {
-  type: "actor",
+  kind: "actor",
   default: 0,
 } as const;
 
 export const ANNOTATION_SWITCH: Switch = {
-  type: "switch",
+  kind: "switch",
   default: 0,
 } as const;
 
 export const ANNOTATION_ARMOR: Armor = {
-  type: "armor",
+  kind: "armor",
   default: 0,
 } as const;
 
 export const ANNOTATION_SKILL: Skill = {
-  type: "skill",
+  kind: "skill",
   default: 0,
 } as const;
 
 export const ANNOTATION_ITEM: Item = {
-  type: "item",
+  kind: "item",
   default: 0,
 } as const;
 
 export const ANNOTATION_WEAPON: Weapon = {
-  type: "weapon",
+  kind: "weapon",
   default: 0,
 } as const;
 
 export const ANNOTATION_TROOP: Troop = {
-  type: "troop",
+  kind: "troop",
   default: 0,
 } as const;
 
 export const ANNOTATION_CLASS: Class = {
-  type: "class",
+  kind: "class",
   default: 0,
 } as const;
 
 export const ANNOTATION_STATE: State = {
-  type: "state",
+  kind: "state",
   default: 0,
 } as const;
 
 export const ANNOTATION_COMMON_EVENT: CommonEvent = {
-  type: "common_event",
+  kind: "common_event",
   default: 0,
 } as const;
 
 export const ANNOTATION_COMBO: ComboAnnotation = {
-  type: "combo",
+  kind: "combo",
   default: "",
   options: [],
 } as const;
 
 export const ANNOTATION_SELECT_NUMBER: NumberSelect = {
-  type: "select",
+  kind: "select",
   default: 0,
   options: [],
 } as const;

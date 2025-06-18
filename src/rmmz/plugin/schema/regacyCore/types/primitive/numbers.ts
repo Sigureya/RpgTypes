@@ -7,10 +7,10 @@ export interface NumberArg extends AnnotationBase {
   max?: number;
   digit?: number;
   default: number;
-  type: "number";
+  kind: "number";
 }
 export interface DataIndexArg<Name extends string> extends AnnotationBase {
-  type: Name;
+  kind: Name;
   default: number;
 }
 

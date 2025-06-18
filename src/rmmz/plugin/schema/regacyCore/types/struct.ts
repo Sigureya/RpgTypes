@@ -99,7 +99,7 @@ export type StructAnnotationBase_Union =
   StructAnnotationBase_Completed;
 
 export interface StructAnnotationBase_Partial extends AnnotationBaseTexts {
-  type: "struct";
+  kind: "struct";
   struct?: {
     structName?: string;
     params?: ParameterBase;
@@ -110,7 +110,7 @@ export interface StructAnnotationBase_Partial extends AnnotationBaseTexts {
 export interface StructAnnotationBase_Completed
   extends StructAnnotationBase_Partial,
     HasStruct {
-  type: "struct";
+  kind: "struct";
   struct: StructBase;
   default: object;
 }
@@ -154,7 +154,7 @@ export interface StructAnnotationBase_WithDefault
 export interface StructAnnotationBase_Array
   extends HasStruct,
     AnnotationBaseTexts {
-  type: "struct[]";
+  kind: "struct[]";
   struct: StructBase;
   default: object[];
 }
@@ -200,7 +200,7 @@ interface NodeChild_Array<
   KnowTypes extends object,
   Path extends string
 > extends StructAnnotationBase_Array {
-  type: "struct[]";
+  kind: "struct[]";
   default: Array;
   struct: {
     structName: string;
@@ -227,7 +227,7 @@ interface NodeChild_StructWithType<
   Path extends string,
   KnowTypes extends object
 > extends StructAnnotationBase_WithType {
-  type: "struct";
+  kind: "struct";
   struct: {
     structName: string;
     params: NodeParent_StructParameters<T, Path, KnowTypes>;
@@ -240,7 +240,7 @@ interface NodeChild_StructWithName<
   Path extends string,
   KnowTypes extends object
 > extends StructAnnotationBase_WithName {
-  type: "struct";
+  kind: "struct";
   struct: {
     structName: string;
     params?: NodeParent_StructParameters<T, Path, KnowTypes>;
@@ -253,7 +253,7 @@ interface NodeChild_StructWithParams<
   Path extends string,
   KnowTypes extends object
 > extends StructAnnotationBase_WithParams {
-  type: "struct";
+  kind: "struct";
   struct: {
     structName?: string;
     params: NodeParent_StructParameters<T, Path, KnowTypes>;
@@ -266,7 +266,7 @@ interface NodeChild_StructWithDefault<
   Path extends string,
   KnowTypes extends object
 > extends StructAnnotationBase_WithDefault {
-  type: "struct";
+  kind: "struct";
   default: T;
   struct?: {
     structName?: string;
@@ -279,7 +279,7 @@ interface NodeChild_StructCompleted<
   Path extends string,
   KnowTypes extends object
 > extends StructAnnotationBase_Completed {
-  type: "struct";
+  kind: "struct";
   struct: {
     structName: string;
     params: NodeParent_StructParameters<T, Path, KnowTypes>;
