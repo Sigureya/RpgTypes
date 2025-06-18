@@ -18,8 +18,8 @@ const titles: PluginTitles = {
   author: "author",
 };
 
-describe("numbers", () => {
-  const numbersStruct = {
+describe("compilePluginStruct -numbers", () => {
+  const mockNumbersStruct = {
     structName: "Numbers",
     params: {
       floating: { kind: "number", default: 0.5, digit: 2 },
@@ -59,13 +59,18 @@ describe("numbers", () => {
     ],
     additionalProperties: false,
   };
-  describe("compile", () => {
-    const resultNumbers = compilePluginStruct(titles, numbersStruct, {});
-    test("logs", () => {
-      expect(resultNumbers.logs.length).toBe(5);
+  const resultNumbers = compilePluginStruct(titles, mockNumbersStruct, {});
+  describe("logs", () => {
+    test("path", () => {
+      const logs = new Set(resultNumbers.logs.map((log) => log.path));
+      const expected = new Set(
+        expectedNumbersSchema.required.map((key) => `moduleName.Numbers.${key}`)
+      );
+      expect(logs).toEqual(expected);
     });
-    test("schema", () => {
-      expect(resultNumbers.schema).toEqual(expectedNumbersSchema);
-    });
+  });
+
+  test("schema", () => {
+    expect(resultNumbers.schema).toEqual(expectedNumbersSchema);
   });
 });

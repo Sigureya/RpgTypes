@@ -13,39 +13,43 @@ const titles: PluginTitles = {
 };
 
 describe("compilePluginStruct - boolean", () => {
-  const boolStruct = {
-    structName: "Bool",
-    params: {
-      bool: {
-        kind: "boolean",
-        default: false,
-        desc: "bool desc",
-        text: "bool text",
-        off: "off",
-        on: "on",
+  describe("fullset", () => {
+    const mockBoolStructFullset = {
+      structName: "Bool",
+      params: {
+        bool: {
+          kind: "boolean",
+          default: false,
+          desc: "bool desc",
+          text: "bool text",
+          off: "off",
+          on: "on",
+        },
       },
-    },
-  } as const satisfies PluginStruct<MockBoolean>;
-  const expectedBoolSchema: JSONSchemaType<MockBoolean> = {
-    title: "Bool",
-    type: "object",
-    properties: {
-      bool: {
-        type: "boolean",
-        default: false,
-        title: "bool text",
-        description: "bool desc",
+    } as const satisfies PluginStruct<MockBoolean>;
+    const expectedBoolSchema = {
+      title: "Bool",
+      type: "object",
+      properties: {
+        bool: {
+          type: "boolean",
+          default: false,
+          title: "bool text",
+          description: "bool desc",
+        },
       },
-    },
-    required: ["bool"],
-    additionalProperties: false,
-  };
-  test("schema", () => {
-    const resultBool = compilePluginStruct(titles, boolStruct, {});
-    expect(resultBool.schema).toEqual(expectedBoolSchema);
-  });
-  test("schema", () => {
-    const resultBool = compilePluginStruct(titles, boolStruct, {});
-    expect(resultBool.logs[0].data).toBe(boolStruct.params.bool);
+      required: ["bool"],
+      additionalProperties: false,
+    } satisfies JSONSchemaType<MockBoolean>;
+    const resultBool = compilePluginStruct(titles, mockBoolStructFullset, {});
+    test("schema", () => {
+      expect(resultBool.schema).toEqual(expectedBoolSchema);
+    });
+    test("log data", () => {
+      expect(resultBool.logs[0].data).toBe(mockBoolStructFullset.params.bool);
+    });
+    test("log path", () => {
+      expect(resultBool.logs[0].path).toBe("moduleName.Bool.bool");
+    });
   });
 });

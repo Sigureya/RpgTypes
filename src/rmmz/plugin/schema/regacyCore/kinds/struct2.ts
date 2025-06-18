@@ -30,7 +30,7 @@ export type StructParam =
   | KindOfFileArray
   | KindOfStruct<object> // ネスト構造体対応
   | CoreStruct
-  | CoreStructArray
+  | KindOfStructArray
   | KindOfStructRef;
 
 interface CoreStruct {
@@ -38,7 +38,7 @@ interface CoreStruct {
   struct: PluginStruct<object>;
 }
 
-interface CoreStructArray {
+export interface KindOfStructArray {
   kind: "struct[]";
   struct: PluginStruct<object>;
   default: object[];
