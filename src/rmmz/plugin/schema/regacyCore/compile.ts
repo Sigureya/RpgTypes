@@ -148,7 +148,7 @@ const compileField = (
     case "struct_ref":
       return [makeStructRef(data), []];
     case "struct":
-      return makeStructKind(path, resolveStruct(data.struct), ctx);
+      return makeStructKind(path, data, ctx);
     case "struct[]":
       return makeStructArrayKind(path, data, ctx);
     default:
