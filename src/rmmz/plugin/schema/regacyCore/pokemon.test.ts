@@ -46,6 +46,10 @@ describe("bool", () => {
     const resultBool: CompileResult<BB> = compile("moduleName", boolStruct, {});
     expect(resultBool.schema).toEqual(expectedBoolSchema);
   });
+  test("schema", () => {
+    const resultBool: CompileResult<BB> = compile("moduleName", boolStruct, {});
+    expect(resultBool.logs[0].data).toBe(boolStruct.struct.params.bool);
+  });
 });
 
 describe("person", () => {
@@ -64,7 +68,7 @@ describe("person", () => {
     type: "object",
     properties: {
       name: { type: "string", default: "bob" },
-      age: { type: "number", default: 0 },
+      age: { type: "integer", default: 0 },
     },
     required: ["name", "age"],
     additionalProperties: false,
@@ -105,7 +109,7 @@ describe("family", () => {
         title: "Person",
         properties: {
           name: { type: "string", default: "bob" },
-          age: { type: "number", default: 0 },
+          age: { type: "integer", default: 0 },
         },
         required: ["name", "age"],
         additionalProperties: false,
@@ -115,7 +119,7 @@ describe("family", () => {
         title: "Person",
         properties: {
           name: { type: "string", default: "bob" },
-          age: { type: "number", default: 0 },
+          age: { type: "integer", default: 0 },
         },
         required: ["name", "age"],
         additionalProperties: false,
@@ -178,6 +182,7 @@ describe("school", () => {
       structName: "School",
       params: {
         name: { kind: "string", default: "My School" },
+
         students: {
           default: [],
           kind: "struct[]",
@@ -295,7 +300,7 @@ describe("alldata", () => {
     );
     expect(resultAllData.schema).toEqual(expectedAllDataSchema);
   });
-  test("log", () => {
+  describe("log", () => {
     const resultAllData: CompileResult<AllData> = compile(
       "moduleName",
       allDataStruct,
@@ -306,20 +311,23 @@ describe("alldata", () => {
         return [log.path, log.data] as const;
       })
     );
-    expect(map.get("moduleName.AllData.actor")).toEqual({
-      data: {
-        kind: "actor",
-        default: 0,
-        desc: "actor desc",
-        text: "actor text",
-      } satisfies CompileLogItem["data"],
+    test("log actor", () =>
+      expect(map.get("moduleName.AllData.actor")).toEqual({
+        data: {
+          kind: "actor",
+          default: 0,
+          desc: "actor desc",
+          text: "actor text",
+        } satisfies CompileLogItem["data"],
+      }));
+    test("log weapons", () => {
+      expect(map.get("moduleName.AllData.armor")).toEqual({
+        data: { kind: "armor", default: 0, desc: "armor desc", text: "" },
+      } satisfies CompileLogItem["data"]);
     });
-    expect(map.get("moduleName.AllData.armor")).toEqual({
-      data: { kind: "armor", default: 0, desc: "armor desc", text: "" },
-    } satisfies CompileLogItem["data"]);
   });
 });
-describe("alldata", () => {
+describe("alldataArray", () => {
   const allDataStruct: StructAnnotation<AllData> = {
     kind: "struct",
     struct: {
@@ -494,13 +502,18 @@ describe("numbers", () => {
     required: ["floating", "integer1", "integer2", "numberArray", "floatArray"],
     additionalProperties: false,
   };
-  test("schema", () => {
+  describe("compile", () => {
     const resultNumbers: CompileResult<Numbers> = compile(
       "moduleName",
       numbersStruct,
       {}
     );
-    expect(resultNumbers.schema).toEqual(expectedNumbersSchema);
+    test("logs", () => {
+      expect(resultNumbers.logs.length).toBe(5);
+    });
+    test("schema", () => {
+      expect(resultNumbers.schema).toEqual(expectedNumbersSchema);
+    });
   });
 });
 
