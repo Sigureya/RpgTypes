@@ -1,7 +1,7 @@
 import { describe, test, expect } from "vitest";
 import type { JSONSchemaType } from "ajv";
 import { compile } from "./compile";
-import type { PluginStruct } from "./kinds";
+import type { KindOfStruct } from "./kinds";
 
 // kind:"number"とは異なる処理が必要。別々に作ること
 interface AllData {
@@ -34,7 +34,7 @@ describe("alldata - with text", () => {
         state: { kind: "state", default: 0, text: "", desc: "" },
       },
     },
-  } as const satisfies PluginStruct<AllData>;
+  } as const satisfies KindOfStruct<AllData>;
   const expectedAllDataSchema: JSONSchemaType<AllData> = {
     title: "AllData",
     type: "object",
@@ -111,7 +111,7 @@ describe("allData - no text", () => {
         state: { kind: "state", default: 0 },
       },
     },
-  } as const satisfies PluginStruct<AllData>;
+  } as const satisfies KindOfStruct<AllData>;
   const expectedAllDataSchema = {
     title: "AllData",
     type: "object",

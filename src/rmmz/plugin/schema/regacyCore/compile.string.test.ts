@@ -1,7 +1,7 @@
 import { describe, test, expect } from "vitest";
 import type { JSONSchemaType } from "ajv";
 import { compile } from "./compile";
-import type { PluginStruct } from "./kinds";
+import type { KindOfStruct } from "./kinds";
 
 interface StringTypes {
   select: string;
@@ -47,7 +47,7 @@ describe("stringTypes", () => {
         },
       },
     },
-  } satisfies PluginStruct<StringTypes>;
+  } satisfies KindOfStruct<StringTypes>;
   const expectedStringTypesSchema: JSONSchemaType<StringTypes> = {
     title: "StringTypes",
     type: "object",
