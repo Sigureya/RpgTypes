@@ -1,7 +1,7 @@
 import { describe, test, expect } from "vitest";
 import type { JSONSchemaType } from "ajv";
 import { compile } from "./compile";
-import type { StructAnnotation } from "./kinds/struct2";
+import type { StructAnnotation } from "./kinds";
 interface BB {
   bool: boolean;
 }
