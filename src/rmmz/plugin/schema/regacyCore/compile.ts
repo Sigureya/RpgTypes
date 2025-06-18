@@ -189,10 +189,6 @@ const makeStructArrayKind = (
   ];
 };
 
-const isIntegerKind = (digit: number | undefined) => {
-  return digit === undefined || digit === 0;
-};
-
 const withTexts = (kind: KindBase) => ({
   ...(typeof kind.text === "string" ? { title: kind.text } : {}),
   ...(typeof kind.desc === "string" ? { description: kind.desc } : {}),
@@ -200,6 +196,7 @@ const withTexts = (kind: KindBase) => ({
 
 const withDefault = <T>(value: T | undefined) =>
   value !== undefined ? { default: value } : {};
+
 // --- 各型ごとの生成関数 ---
 const makeStringField = (data: KindOfString) =>
   ({
@@ -224,6 +221,11 @@ const makeArrayField = <T>(data: KindOfArray<T>, itemType: string) => ({
   items: { type: itemType },
   ...withDefault(data.default),
 });
+
+const isIntegerKind = (digit: number | undefined) => {
+  return digit === undefined || digit === 0;
+};
+
 const makeNumberArrayField = (data: KindOfNumberArray) =>
   ({
     type: "array",
