@@ -13,16 +13,30 @@ import type {
   KindOfStructRef,
   KindBase,
 } from "./kinds";
+import type { CompileLogItem, CompileResult } from "./kinds/compileLog";
 import type {
   StructAnnotation,
   StructParam,
   StructType,
 } from "./kinds/struct2";
-import type { CompileLogItem, CompileResult } from "./mockType";
 
 type CompileContext = {
   moduleName: string;
   typeDefs: Record<string, StructAnnotation<object>>;
+};
+
+export const compile = <T extends object>(
+  moduleName: string,
+  struct: StructAnnotation<object>,
+  typeDefs: Record<string, StructAnnotation<object>>
+): CompileResult<T> => {
+  const ctx: CompileContext = { moduleName, typeDefs };
+  const [schema, logs] = compileStruct(
+    `${moduleName}.${struct.struct.structName}`,
+    struct,
+    ctx
+  );
+  return { schema, logs };
 };
 
 const isIntegerKind = (kind: string, digit?: number) => {
@@ -207,18 +221,4 @@ const resolveStruct = <T extends object>(
   return data.params !== undefined
     ? { kind: "struct", struct: data }
     : (ctx.typeDefs[data.structName] as StructAnnotation<T>);
-};
-
-export const compile = <T extends object>(
-  moduleName: string,
-  struct: StructAnnotation<T>,
-  typeDefs: Record<string, StructAnnotation<any>>
-): CompileResult<T> => {
-  const ctx: CompileContext = { moduleName, typeDefs };
-  const [schema, logs] = compileStruct(
-    `${moduleName}.${struct.struct.structName}`,
-    struct,
-    ctx
-  );
-  return { schema, logs };
 };
