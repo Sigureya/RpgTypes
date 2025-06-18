@@ -43,11 +43,11 @@ describe("bool", () => {
     additionalProperties: false,
   };
   test("schema", () => {
-    const resultBool: CompileResult<BB> = compile("moduleName", boolStruct, {});
+    const resultBool = compile("moduleName", boolStruct, {});
     expect(resultBool.schema).toEqual(expectedBoolSchema);
   });
   test("schema", () => {
-    const resultBool: CompileResult<BB> = compile("moduleName", boolStruct, {});
+    const resultBool = compile("moduleName", boolStruct, {});
     expect(resultBool.logs[0].data).toBe(boolStruct.struct.params.bool);
   });
 });
@@ -73,7 +73,7 @@ describe("person", () => {
     required: ["name", "age"],
     additionalProperties: false,
   };
-  const result: CompileResult<Person> = compile("moduleName", personStruct, {});
+  const result = compile("moduleName", personStruct, {});
   test("schema", () => {
     expect(result.schema).toEqual(expected);
   });
@@ -221,11 +221,7 @@ describe("school", () => {
     additionalProperties: false,
   };
   test("schema", () => {
-    const resultSchool: CompileResult<School> = compile(
-      "moduleName",
-      mockSchoolStruct,
-      {}
-    );
+    const resultSchool = compile("moduleName", mockSchoolStruct, {});
     expect(resultSchool.schema).toEqual(mockSchoolSchema);
   });
 });
@@ -293,19 +289,11 @@ describe("alldata", () => {
     additionalProperties: false,
   };
   test("schema", () => {
-    const resultAllData: CompileResult<AllData> = compile(
-      "moduleName",
-      allDataStruct,
-      {}
-    );
+    const resultAllData = compile("moduleName", allDataStruct, {});
     expect(resultAllData.schema).toEqual(expectedAllDataSchema);
   });
   describe("log", () => {
-    const resultAllData: CompileResult<AllData> = compile(
-      "moduleName",
-      allDataStruct,
-      {}
-    );
+    const resultAllData = compile("moduleName", allDataStruct, {});
     const map = new Map(
       resultAllData.logs.map((log) => {
         return [log.path, log.data] as const;
@@ -372,11 +360,7 @@ describe("alldataArray", () => {
     additionalProperties: false,
   };
   test("schema", () => {
-    const resultAllData: CompileResult<AllData> = compile(
-      "moduleName",
-      allDataStruct,
-      {}
-    );
+    const resultAllData = compile("moduleName", allDataStruct, {});
     expect(resultAllData.schema).toEqual(expectedAllDataSchema);
   });
 });
@@ -451,11 +435,7 @@ describe("alldataArray", () => {
     additionalProperties: false,
   };
   test("schema", () => {
-    const resultAllDataArray: CompileResult<AllDataArray> = compile(
-      "moduleName",
-      allDataArrayStruct,
-      {}
-    );
+    const resultAllDataArray = compile("moduleName", allDataArrayStruct, {});
     expect(resultAllDataArray.schema).toEqual(expectedAllDataArraySchema);
   });
 });
@@ -504,11 +484,7 @@ describe("numbers", () => {
     additionalProperties: false,
   };
   describe("compile", () => {
-    const resultNumbers: CompileResult<Numbers> = compile(
-      "moduleName",
-      numbersStruct,
-      {}
-    );
+    const resultNumbers = compile("moduleName", numbersStruct, {});
     test("logs", () => {
       expect(resultNumbers.logs.length).toBe(5);
     });
@@ -596,11 +572,7 @@ describe("stringTypes", () => {
     additionalProperties: false,
   };
   test("schema", () => {
-    const resultStringTypes: CompileResult<StringTypes> = compile(
-      "moduleName",
-      stringTypesStruct,
-      {}
-    );
+    const resultStringTypes = compile("moduleName", stringTypesStruct, {});
     expect(resultStringTypes.schema).toEqual(expectedStringTypesSchema);
   });
 });
