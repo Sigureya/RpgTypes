@@ -1,4 +1,5 @@
 import type { JSONSchemaType } from "ajv";
+import type { Schema } from "jsonschema";
 import type {
   KindOfBoolean,
   KindOfNumber,
@@ -78,7 +79,6 @@ const makeBooleanField = (data: KindOfBoolean) => ({
 
 const makeComboField = (data: KindOFCombo) => ({
   type: "string",
-  enum: data.options,
   ...(data.default !== undefined ? { default: data.default } : {}),
   ...(data.text !== undefined ? { title: data.text } : {}),
   ...(data.desc !== undefined ? { description: data.desc } : {}),
@@ -90,6 +90,11 @@ const makeFileField = (data: KindOfFile) => ({
   ...(data.text !== undefined ? { title: data.text } : {}),
   ...(data.desc !== undefined ? { description: data.desc } : {}),
 });
+
+const makeStructRef = (ref: KindOfStructRef) =>
+  ({
+    $ref: `#/definitions/${ref.structName}`,
+  } satisfies Schema);
 
 // --- メイン処理 ---
 const compileStruct = <T extends object>(
@@ -129,7 +134,7 @@ const compileField = (
   path: string,
   data: StructParam,
   ctx: CompileContext
-): [any, CompileLogItem[]] => {
+): [object, CompileLogItem[]] => {
   switch (data.kind) {
     case "string":
     case "multiline_string":
@@ -166,6 +171,8 @@ const compileField = (
       return [makeIdField(data), []];
     case "boolean":
       return [makeBooleanField(data), []];
+    case "struct_ref":
+      return [makeStructRef(data), []];
     case "struct":
       return compileStruct(path, resolveStruct(data.struct, ctx), ctx);
     case "struct[]":
