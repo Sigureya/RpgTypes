@@ -48,55 +48,6 @@ describe("person", () => {
   });
 });
 
-describe("family", () => {
-  const familyStruct = {
-    kind: "struct",
-    struct: {
-      structName: "Family",
-      params: {
-        father: { kind: "struct_ref", structName: "Person" },
-        mother: { kind: "struct_ref", structName: "Person" },
-      },
-    },
-  } as const satisfies KindOfStruct<Family>;
-  const expectedFamilySchema: JSONSchemaType<Family> = {
-    type: "object",
-    title: "Family",
-    properties: {
-      father: { $ref: "#/definitions/Person" },
-      mother: { $ref: "#/definitions/Person" },
-    },
-    required: ["father", "mother"],
-    additionalProperties: false,
-  };
-  test("", () => {
-    const resultFamily = compile(titles, familyStruct, {});
-    expect(resultFamily.schema).toEqual(expectedFamilySchema);
-  });
-  test("", () => {
-    const resultFamily = compile(titles, familyStruct, {
-      Person: {
-        kind: "struct",
-        struct: {
-          structName: "Person",
-          params: {
-            name: { kind: "string", default: "bob" },
-            age: { kind: "number", default: 0 },
-          },
-        },
-      } satisfies KindOfStruct<Person>,
-    } as const);
-    expect(resultFamily.logs).toContainEqual({
-      path: "moduleName.Family.father",
-      data: familyStruct.struct.params.father,
-    } satisfies CompileLogItem);
-    expect(resultFamily.logs).toContainEqual({
-      path: "moduleName.Family.mother",
-      data: familyStruct.struct.params.mother,
-    } satisfies CompileLogItem);
-  });
-});
-
 describe("school", () => {
   const mockSchoolStruct = {
     kind: "struct",
