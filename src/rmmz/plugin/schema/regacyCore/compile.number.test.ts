@@ -60,11 +60,16 @@ describe("compilePluginStruct -numbers", () => {
     additionalProperties: false,
   };
   const resultNumbers = compilePluginStruct(titles, mockNumbersStruct, {});
-  test("logs", () => {
-    expect(resultNumbers.logs.length).toBe(
-      Object.keys(mockNumbersStruct.params).length
-    );
+  describe("logs", () => {
+    test("path", () => {
+      const logs = new Set(resultNumbers.logs.map((log) => log.path));
+      const expected = new Set(
+        expectedNumbersSchema.required.map((key) => `moduleName.Numbers.${key}`)
+      );
+      expect(logs).toEqual(expected);
+    });
   });
+
   test("schema", () => {
     expect(resultNumbers.schema).toEqual(expectedNumbersSchema);
   });
