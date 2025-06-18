@@ -313,17 +313,18 @@ describe("alldata", () => {
     );
     test("log actor", () =>
       expect(map.get("moduleName.AllData.actor")).toEqual({
-        data: {
-          kind: "actor",
-          default: 0,
-          desc: "actor desc",
-          text: "actor text",
-        } satisfies CompileLogItem["data"],
+        kind: "actor",
+        default: 0,
+        desc: "actor desc",
+        text: "actor text",
       }));
     test("log weapons", () => {
       expect(map.get("moduleName.AllData.armor")).toEqual({
-        data: { kind: "armor", default: 0, desc: "armor desc", text: "" },
-      } satisfies CompileLogItem["data"]);
+        kind: "armor",
+        default: 0,
+        desc: "armor desc",
+        text: "",
+      });
     });
   });
 });
