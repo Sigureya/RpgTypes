@@ -1,7 +1,7 @@
 import { describe, test, expect } from "vitest";
 import type { JSONSchemaType } from "ajv";
-import { compile } from "./compile";
-import type { KindOfStruct } from "./kinds";
+import { compilePluginStruct } from "./compile";
+import type { PluginStruct } from "./kinds";
 import type { PluginTitles } from "./kinds/compileOption";
 
 // kind:"number"とは異なる処理が必要。別々に作ること
@@ -21,25 +21,22 @@ const titles: PluginTitles = {
 
 describe("alldata - with text", () => {
   const allDataStruct = {
-    kind: "struct",
-    struct: {
-      structName: "AllData",
-      params: {
-        actor: {
-          kind: "actor",
-          default: 0,
-          desc: "actor desc",
-          text: "actor text",
-        },
-        weapons: { kind: "weapon", default: 0, text: "weapon text", desc: "" },
-        armor: { kind: "armor", default: 0, desc: "armor desc", text: "" },
-        skill: { kind: "skill", default: 0, text: "", desc: "" },
-        item: { kind: "item", default: 0, text: "", desc: "" },
-        enemy: { kind: "enemy", default: 0, text: "", desc: "" },
-        state: { kind: "state", default: 0, text: "", desc: "" },
+    structName: "AllData",
+    params: {
+      actor: {
+        kind: "actor",
+        default: 0,
+        desc: "actor desc",
+        text: "actor text",
       },
+      weapons: { kind: "weapon", default: 0, text: "weapon text", desc: "" },
+      armor: { kind: "armor", default: 0, desc: "armor desc", text: "" },
+      skill: { kind: "skill", default: 0, text: "", desc: "" },
+      item: { kind: "item", default: 0, text: "", desc: "" },
+      enemy: { kind: "enemy", default: 0, text: "", desc: "" },
+      state: { kind: "state", default: 0, text: "", desc: "" },
     },
-  } as const satisfies KindOfStruct<AllData>;
+  } as const satisfies PluginStruct<AllData>;
   const expectedAllDataSchema: JSONSchemaType<AllData> = {
     title: "AllData",
     type: "object",
@@ -71,11 +68,11 @@ describe("alldata - with text", () => {
     additionalProperties: false,
   };
   test("schema", () => {
-    const resultAllData = compile(titles, allDataStruct, {});
+    const resultAllData = compilePluginStruct(titles, allDataStruct, {});
     expect(resultAllData.schema).toEqual(expectedAllDataSchema);
   });
   describe("log", () => {
-    const resultAllData = compile(titles, allDataStruct, {});
+    const resultAllData = compilePluginStruct(titles, allDataStruct, {});
     const map = new Map(
       resultAllData.logs.map((log) => {
         return [log.path, log.data] as const;
@@ -100,23 +97,20 @@ describe("alldata - with text", () => {
 });
 describe("allData - no text", () => {
   const allDataStruct = {
-    kind: "struct",
-    struct: {
-      structName: "AllData",
-      params: {
-        actor: {
-          kind: "actor",
-          default: 0,
-        },
-        weapons: { kind: "weapon", default: 0 },
-        armor: { kind: "armor", default: 0 },
-        skill: { kind: "skill", default: 0 },
-        item: { kind: "item", default: 0 },
-        enemy: { kind: "enemy", default: 0 },
-        state: { kind: "state", default: 0 },
+    structName: "AllData",
+    params: {
+      actor: {
+        kind: "actor",
+        default: 0,
       },
+      weapons: { kind: "weapon", default: 0 },
+      armor: { kind: "armor", default: 0 },
+      skill: { kind: "skill", default: 0 },
+      item: { kind: "item", default: 0 },
+      enemy: { kind: "enemy", default: 0 },
+      state: { kind: "state", default: 0 },
     },
-  } as const satisfies KindOfStruct<AllData>;
+  } as const satisfies PluginStruct<AllData>;
   const expectedAllDataSchema = {
     title: "AllData",
     type: "object",
@@ -142,7 +136,7 @@ describe("allData - no text", () => {
     additionalProperties: false,
   } as const satisfies JSONSchemaType<AllData>;
   test("schema", () => {
-    const resultAllData = compile(titles, allDataStruct, {});
+    const resultAllData = compilePluginStruct(titles, allDataStruct, {});
     expect(resultAllData.schema).toEqual(expectedAllDataSchema);
   });
 });
