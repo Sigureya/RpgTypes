@@ -46,92 +46,6 @@ export const compile = <T extends object>(
   return { schema, logs };
 };
 
-const isIntegerKind = (digit: number | undefined) => {
-  return digit === undefined || digit === 0;
-};
-
-const withTexts = (kind: KindBase) => ({
-  ...(typeof kind.text === "string" ? { title: kind.text } : {}),
-  ...(typeof kind.desc === "string" ? { description: kind.desc } : {}),
-});
-
-const withDefault = <T>(value: T | undefined) =>
-  value !== undefined ? { default: value } : {};
-// --- 各型ごとの生成関数 ---
-const makeStringField = (data: KindOfString) =>
-  ({
-    type: "string",
-    ...(data.default !== undefined ? { default: data.default } : {}),
-  } satisfies JSONSchemaType<string>);
-
-const makeSelectField = (data: KindOfSelect) =>
-  ({
-    type: "string",
-    ...withDefault(data.default),
-    ...(data.options ? { enum: data.options.map((o): string => o.value) } : {}),
-  } satisfies JSONSchemaType<string>);
-
-interface KindOfArray<T> {
-  kind: `${string}[]`;
-  default?: T[];
-}
-
-const makeArrayField = <T>(data: KindOfArray<T>, itemType: string) => ({
-  type: "array",
-  items: { type: itemType },
-  ...withDefault(data.default),
-});
-
-const makeNumberArrayField = (data: KindOfNumberArray) =>
-  ({
-    type: "array",
-    items: {
-      type: isIntegerKind(data.digit) ? "integer" : "number",
-    },
-    ...withDefault(data.default),
-    ...withTexts(data),
-  } satisfies JSONSchemaType<number[]>);
-
-const makeNumberField = (data: KindOfNumber) =>
-  ({
-    type: isIntegerKind(data.digit) ? "integer" : "number",
-    ...withDefault(data.default),
-  } satisfies JSONSchemaType<number>);
-
-const makeIdField = (data: KindOfRpgDataId | KindOfSystemDataId) =>
-  ({
-    type: "integer",
-    ...withDefault(data.default),
-    ...withTexts(data),
-  } satisfies JSONSchemaType<number>);
-
-const makeBooleanField = (data: KindOfBoolean) =>
-  ({
-    type: "boolean",
-    ...withDefault(data.default),
-    ...withTexts(data),
-  } satisfies JSONSchemaType<boolean>);
-
-const makeComboField = (data: KindOFCombo) =>
-  ({
-    type: "string",
-    ...withDefault(data.default),
-    ...withTexts(data),
-  } satisfies JSONSchemaType<string>);
-
-const makeFileField = (data: KindOfFile) =>
-  ({
-    type: "string",
-    ...withDefault(data.default),
-    ...withTexts(data),
-  } satisfies JSONSchemaType<string>);
-
-const makeStructRef = (ref: KindOfStructRef) =>
-  ({
-    $ref: `#/definitions/${ref.structName}`,
-    ...withTexts(ref),
-  } satisfies Schema);
-
 // --- メイン処理 ---
 const compileStruct = <T extends object>(
   path: string,
@@ -237,3 +151,89 @@ const resolveStruct = <T extends object>(
 ): StructAnnotation<T> => {
   return { kind: "struct", struct: data };
 };
+
+const isIntegerKind = (digit: number | undefined) => {
+  return digit === undefined || digit === 0;
+};
+
+const withTexts = (kind: KindBase) => ({
+  ...(typeof kind.text === "string" ? { title: kind.text } : {}),
+  ...(typeof kind.desc === "string" ? { description: kind.desc } : {}),
+});
+
+const withDefault = <T>(value: T | undefined) =>
+  value !== undefined ? { default: value } : {};
+// --- 各型ごとの生成関数 ---
+const makeStringField = (data: KindOfString) =>
+  ({
+    type: "string",
+    ...(data.default !== undefined ? { default: data.default } : {}),
+  } satisfies JSONSchemaType<string>);
+
+const makeSelectField = (data: KindOfSelect) =>
+  ({
+    type: "string",
+    ...withDefault(data.default),
+    ...(data.options ? { enum: data.options.map((o): string => o.value) } : {}),
+  } satisfies JSONSchemaType<string>);
+
+interface KindOfArray<T> {
+  kind: `${string}[]`;
+  default?: T[];
+}
+
+const makeArrayField = <T>(data: KindOfArray<T>, itemType: string) => ({
+  type: "array",
+  items: { type: itemType },
+  ...withDefault(data.default),
+});
+
+const makeNumberArrayField = (data: KindOfNumberArray) =>
+  ({
+    type: "array",
+    items: {
+      type: isIntegerKind(data.digit) ? "integer" : "number",
+    },
+    ...withDefault(data.default),
+    ...withTexts(data),
+  } satisfies JSONSchemaType<number[]>);
+
+const makeNumberField = (data: KindOfNumber) =>
+  ({
+    type: isIntegerKind(data.digit) ? "integer" : "number",
+    ...withDefault(data.default),
+  } satisfies JSONSchemaType<number>);
+
+const makeIdField = (data: KindOfRpgDataId | KindOfSystemDataId) =>
+  ({
+    type: "integer",
+    ...withDefault(data.default),
+    ...withTexts(data),
+  } satisfies JSONSchemaType<number>);
+
+const makeBooleanField = (data: KindOfBoolean) =>
+  ({
+    type: "boolean",
+    ...withDefault(data.default),
+    ...withTexts(data),
+  } satisfies JSONSchemaType<boolean>);
+
+const makeComboField = (data: KindOFCombo) =>
+  ({
+    type: "string",
+    ...withDefault(data.default),
+    ...withTexts(data),
+  } satisfies JSONSchemaType<string>);
+
+const makeFileField = (data: KindOfFile) =>
+  ({
+    type: "string",
+    ...withDefault(data.default),
+    ...withTexts(data),
+  } satisfies JSONSchemaType<string>);
+
+const makeStructRef = (ref: KindOfStructRef) =>
+  ({
+    $ref: `#/definitions/${ref.structName}`,
+    ...withTexts(ref),
+  } satisfies Schema);
