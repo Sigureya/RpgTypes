@@ -3,7 +3,12 @@ export interface PluginTitles {
   moduleName: string;
 }
 
-export interface RmmzPluigin {
-  compileOption: PluginTitles;
+export interface PluginCompileOptions {
+  // x-rpg-paramを付与する
+  kindData: boolean;
+}
+
+export interface RmmzPluiginInput {
+  xxx: PluginTitles;
   structs: Record<string, object>;
 }
