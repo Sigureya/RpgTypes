@@ -12,6 +12,7 @@ import type {
   KindOfFile,
   KindOfStructRef,
   KindBase,
+  KindOfStructArray,
 } from "./kinds";
 import type { CompileLogItem, CompileResult } from "./kinds/compileLog";
 import type { PluginTitles } from "./kinds/compileOption";
@@ -47,13 +48,13 @@ export const compile = <T extends object>(
 
 export const compilePluginStruct = <T extends object>(
   { moduleName }: PluginTitles,
-  struct: PluginStruct<T>,
+  { params, structName }: PluginStruct<T>,
   typeDefs: Record<string, KindOfStruct<object>>
 ): CompileResult<T> => {
   const [schema, logs] = compileStructDetail(
-    `${moduleName}.${struct.structName}`,
-    struct.structName,
-    struct.params,
+    `${moduleName}.${structName}`,
+    structName,
+    params,
     { moduleName, typeDefs }
   );
   return { schema, logs };
@@ -147,21 +148,9 @@ const compileField = (
     case "struct_ref":
       return [makeStructRef(data), []];
     case "struct":
-      return makeStructKind(path, resolveStruct(data.struct), ctx);
+      return makeStructKind(path, data, ctx);
     case "struct[]":
-      const [itemSchema, itemLogs] = makeStructKind(
-        `${path}[]`,
-        resolveStruct(data.struct),
-        ctx
-      );
-      return [
-        {
-          type: "array",
-          items: itemSchema,
-          ...withDefault(data.default),
-        },
-        itemLogs,
-      ];
+      return makeStructArrayKind(path, data, ctx);
     default:
       return [{}, []];
   }
@@ -179,10 +168,25 @@ const makeStructKind = <T extends object>(
     ctx
   );
 };
-const resolveStruct = <T extends object>(
-  data: PluginStruct<T>
-): KindOfStruct<T> => {
-  return { kind: "struct", struct: data };
+
+const makeStructArrayKind = (
+  path: string,
+  annotation: KindOfStructArray,
+  ctx: CompileContext
+): [JSONSchemaType<object[]>, CompileLogItem[]] => {
+  const [itemSchema, itemLogs] = makeStructKind(
+    `${path}[]`,
+    { kind: "struct", struct: annotation.struct },
+    ctx
+  );
+  return [
+    {
+      type: "array",
+      items: itemSchema,
+      ...withDefault(annotation.default),
+    } satisfies JSONSchemaType<object[]>,
+    itemLogs,
+  ];
 };
 
 const isIntegerKind = (digit: number | undefined) => {
