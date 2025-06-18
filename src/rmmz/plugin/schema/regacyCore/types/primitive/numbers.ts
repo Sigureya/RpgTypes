@@ -23,9 +23,11 @@ export interface Weapon extends DataIndexArg<"weapon"> {}
 export interface Troop extends DataIndexArg<"troop"> {}
 export interface Class extends DataIndexArg<"class"> {}
 export interface State extends DataIndexArg<"state"> {}
+export interface Enemy extends DataIndexArg<"enemy"> {}
 export interface CommonEvent extends DataIndexArg<"common_event"> {}
 export interface NumberSelect extends Select<number> {}
 type List = [
+  Enemy,
   NumberArg,
   Actor,
   Switch,
