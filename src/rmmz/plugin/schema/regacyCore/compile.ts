@@ -44,6 +44,29 @@ export const compile = <T extends object>(
   return { schema, logs };
 };
 
+interface PropsAccumulated {
+  properties: Record<string, AnySchema | object>;
+  logs: CompileLogItem[];
+}
+
+const compileProps = (
+  props: Record<string, StructParam>,
+  path: string,
+  ctx: CompileContext
+): PropsAccumulated => {
+  return Object.entries<StructParam>(props).reduce<PropsAccumulated>(
+    ({ properties: accSchema, logs: accLogs }, [key, value]) => {
+      const currentPath: string = `${path}.${key}`;
+      const [fieldSchema, fieldLogs] = compileField(currentPath, value, ctx);
+      return {
+        properties: { ...accSchema, [key]: fieldSchema },
+        logs: [...accLogs, ...fieldLogs, { path: currentPath, data: value }],
+      };
+    },
+    { properties: {}, logs: [] } satisfies PropsAccumulated
+  );
+};
+
 // --- メイン処理 ---
 const compileStruct = <T extends object>(
   path: string,
@@ -51,21 +74,8 @@ const compileStruct = <T extends object>(
   ctx: CompileContext
 ): [JSONSchemaType<T>, CompileLogItem[]] => {
   const props = annotation.struct.params;
-  type ResultLike = [Record<string, AnySchema | object>, CompileLogItem[]];
 
-  const [properties, logs]: ResultLike = Object.entries<StructParam>(
-    props
-  ).reduce<ResultLike>(
-    ([accSchema, accLogs], [key, value]) => {
-      const currentPath = `${path}.${key}`;
-      const [fieldSchema, fieldLogs] = compileField(currentPath, value, ctx);
-      return [
-        { ...accSchema, [key]: fieldSchema },
-        [...accLogs, ...fieldLogs, { path: currentPath, data: value }],
-      ];
-    },
-    [{}, []] satisfies ResultLike
-  );
+  const { properties, logs } = compileProps(props, path, ctx);
 
   const keys = Object.keys(props);
   return [
