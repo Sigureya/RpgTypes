@@ -11,6 +11,7 @@ import type {
   KindOFCombo,
   KindOfFile,
   KindOfStructRef,
+  KindBase,
 } from "./kinds";
 import type {
   StructAnnotation,
@@ -31,6 +32,11 @@ const isIntegerKind = (kind: string, digit?: number) => {
 
   return false;
 };
+
+const cloneTexts = (kind: KindBase) => ({
+  ...(typeof kind.text === "string" ? { title: kind.text } : {}),
+  ...(typeof kind.desc === "string" ? { description: kind.desc } : {}),
+});
 
 // --- 各型ごとの生成関数 ---
 const makeStringField = (data: KindOfString) => ({
@@ -56,6 +62,7 @@ const makeNumberArrayField = (data: KindOfNumberArray) => ({
     type: isIntegerKind("number[]", data.digit) ? "integer" : "number",
   },
   ...(data.default !== undefined ? { default: data.default } : {}),
+  ...cloneTexts(data),
 });
 
 const makeNumberField = (data: KindOfNumber) => ({
@@ -66,34 +73,31 @@ const makeNumberField = (data: KindOfNumber) => ({
 const makeIdField = (data: KindOfRpgDataId | KindOfSystemDataId) => ({
   type: "integer",
   ...(data.default !== undefined ? { default: data.default } : {}),
-  ...(data.text !== undefined ? { title: data.text } : {}),
-  ...(data.desc !== undefined ? { description: data.desc } : {}),
+  ...cloneTexts(data),
 });
 
 const makeBooleanField = (data: KindOfBoolean) => ({
   type: "boolean",
   ...(data.default !== undefined ? { default: data.default } : {}),
-  ...(data.text !== undefined ? { title: data.text } : {}),
-  ...(data.desc !== undefined ? { description: data.desc } : {}),
+  ...cloneTexts(data),
 });
 
 const makeComboField = (data: KindOFCombo) => ({
   type: "string",
   ...(data.default !== undefined ? { default: data.default } : {}),
-  ...(data.text !== undefined ? { title: data.text } : {}),
-  ...(data.desc !== undefined ? { description: data.desc } : {}),
+  ...cloneTexts(data),
 });
 
 const makeFileField = (data: KindOfFile) => ({
   type: "string",
   ...(data.default !== undefined ? { default: data.default } : {}),
-  ...(data.text !== undefined ? { title: data.text } : {}),
-  ...(data.desc !== undefined ? { description: data.desc } : {}),
+  ...cloneTexts(data),
 });
 
 const makeStructRef = (ref: KindOfStructRef) =>
   ({
     $ref: `#/definitions/${ref.structName}`,
+    ...cloneTexts(ref),
   } satisfies Schema);
 
 // --- メイン処理 ---
@@ -103,9 +107,11 @@ const compileStruct = <T extends object>(
   ctx: CompileContext
 ): [JSONSchemaType<T>, CompileLogItem[]] => {
   const props = annotation.struct.params;
-  type X = [Record<string, unknown>, CompileLogItem[]];
+  type ResultLike = [Record<string, unknown>, CompileLogItem[]];
 
-  const [properties, logs]: X = Object.entries<StructParam>(props).reduce<X>(
+  const [properties, logs]: ResultLike = Object.entries<StructParam>(
+    props
+  ).reduce<ResultLike>(
     ([accSchema, accLogs], [key, value]) => {
       const currentPath = `${path}.${key}`;
       const [fieldSchema, fieldLogs] = compileField(currentPath, value, ctx);
@@ -114,7 +120,7 @@ const compileStruct = <T extends object>(
         [...accLogs, ...fieldLogs, { path: currentPath, data: value }],
       ];
     },
-    [{}, []] satisfies X
+    [{}, []] satisfies ResultLike
   );
 
   const keys = Object.keys(props);
