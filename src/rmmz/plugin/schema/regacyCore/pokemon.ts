@@ -1,11 +1,26 @@
 import type { JSONSchemaType } from "ajv";
+import type {
+  KindOfBoolean,
+  KindOfNumber,
+  KindOfNumberArray,
+  KindOfRpgDataId,
+  KindOfSelect,
+  KindOfString,
+  KindOfSystemDataId,
+  KindOFCombo,
+  KindOfFile,
+  KindOfStructRef,
+} from "./kinds";
+import type {
+  StructAnnotation,
+  StructParam,
+  StructType,
+} from "./kinds/struct2";
 import type { CompileLogItem, CompileResult } from "./mockType";
-import type { StructAnnotation } from "./structAnt2";
-import type { StringSelect } from "./types";
 
 type CompileContext = {
   moduleName: string;
-  typeDefs: Record<string, StructAnnotation<any>>;
+  typeDefs: Record<string, StructAnnotation<object>>;
 };
 
 const isIntegerKind = (kind: string, digit?: number) => {
@@ -17,12 +32,12 @@ const isIntegerKind = (kind: string, digit?: number) => {
 };
 
 // --- 各型ごとの生成関数 ---
-const makeStringField = (data: any) => ({
+const makeStringField = (data: KindOfString) => ({
   type: "string",
   ...(data.default !== undefined ? { default: data.default } : {}),
 });
 
-const makeSelectField = (data: StringSelect) => ({
+const makeSelectField = (data: KindOfSelect) => ({
   type: "string",
   ...(data.default !== undefined ? { default: data.default } : {}),
   ...(data.options ? { enum: data.options.map((o): string => o.value) } : {}),
@@ -34,7 +49,7 @@ const makeArrayField = (data: any, itemType: string) => ({
   ...(data.default !== undefined ? { default: data.default } : {}),
 });
 
-const makeNumberArrayField = (data: any) => ({
+const makeNumberArrayField = (data: KindOfNumberArray) => ({
   type: "array",
   items: {
     type: isIntegerKind("number[]", data.digit) ? "integer" : "number",
@@ -42,20 +57,35 @@ const makeNumberArrayField = (data: any) => ({
   ...(data.default !== undefined ? { default: data.default } : {}),
 });
 
-const makeNumberField = (data: any) => ({
+const makeNumberField = (data: KindOfNumber) => ({
   type: isIntegerKind("number", data.digit) ? "integer" : "number",
   ...(data.default !== undefined ? { default: data.default } : {}),
 });
 
-const makeIdField = (data: any) => ({
+const makeIdField = (data: KindOfRpgDataId | KindOfSystemDataId) => ({
   type: "integer",
   ...(data.default !== undefined ? { default: data.default } : {}),
   ...(data.text !== undefined ? { title: data.text } : {}),
   ...(data.desc !== undefined ? { description: data.desc } : {}),
 });
 
-const makeBooleanField = (data: any) => ({
+const makeBooleanField = (data: KindOfBoolean) => ({
   type: "boolean",
+  ...(data.default !== undefined ? { default: data.default } : {}),
+  ...(data.text !== undefined ? { title: data.text } : {}),
+  ...(data.desc !== undefined ? { description: data.desc } : {}),
+});
+
+const makeComboField = (data: KindOFCombo) => ({
+  type: "string",
+  enum: data.options,
+  ...(data.default !== undefined ? { default: data.default } : {}),
+  ...(data.text !== undefined ? { title: data.text } : {}),
+  ...(data.desc !== undefined ? { description: data.desc } : {}),
+});
+
+const makeFileField = (data: KindOfFile) => ({
+  type: "string",
   ...(data.default !== undefined ? { default: data.default } : {}),
   ...(data.text !== undefined ? { title: data.text } : {}),
   ...(data.desc !== undefined ? { description: data.desc } : {}),
@@ -68,19 +98,19 @@ const compileStruct = <T extends object>(
   ctx: CompileContext
 ): [JSONSchemaType<T>, CompileLogItem[]] => {
   const props = annotation.struct.params;
+  type X = [Record<string, unknown>, CompileLogItem[]];
 
-  const [properties, logs]: [Record<string, any>, CompileLogItem[]] =
-    Object.entries(props).reduce(
-      ([accSchema, accLogs], [key, value]) => {
-        const currentPath = `${path}.${key}`;
-        const [fieldSchema, fieldLogs] = compileField(currentPath, value, ctx);
-        return [
-          { ...accSchema, [key]: fieldSchema },
-          [...accLogs, ...fieldLogs, { path: currentPath, data: value }],
-        ];
-      },
-      [{}, []]
-    );
+  const [properties, logs]: X = Object.entries<StructParam>(props).reduce<X>(
+    ([accSchema, accLogs], [key, value]) => {
+      const currentPath = `${path}.${key}`;
+      const [fieldSchema, fieldLogs] = compileField(currentPath, value, ctx);
+      return [
+        { ...accSchema, [key]: fieldSchema },
+        [...accLogs, ...fieldLogs, { path: currentPath, data: value }],
+      ];
+    },
+    [{}, []] satisfies X
+  );
 
   const keys = Object.keys(props);
   return [
@@ -97,15 +127,17 @@ const compileStruct = <T extends object>(
 
 const compileField = (
   path: string,
-  data: any,
+  data: StructParam,
   ctx: CompileContext
 ): [any, CompileLogItem[]] => {
   switch (data.kind) {
     case "string":
     case "multiline_string":
-    case "file":
-    case "combo":
       return [makeStringField(data), []];
+    case "file":
+      return [makeFileField(data), []];
+    case "combo":
+      return [makeComboField(data), []];
     case "select":
       return [makeSelectField(data), []];
     case "file[]":
@@ -156,7 +188,7 @@ const compileField = (
 };
 
 const resolveStruct = <T extends object>(
-  data: { structName: string; params?: any },
+  data: StructType<T>,
   ctx: CompileContext
 ): StructAnnotation<T> => {
   return data.params !== undefined
