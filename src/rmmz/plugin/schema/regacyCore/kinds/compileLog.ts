@@ -1,4 +1,5 @@
 import type { JSONSchemaType } from "ajv";
+import type { StructParam } from "./struct2";
 
 export interface CompileResult<T extends object> {
   schema: JSONSchemaType<T>;
@@ -7,5 +8,5 @@ export interface CompileResult<T extends object> {
 
 export interface CompileLogItem {
   path: string;
-  data: unknown;
+  data: StructParam;
 }

@@ -30,7 +30,8 @@ type AnySchema =
   | JSONSchemaType<boolean>
   | JSONSchemaType<number[]>
   | JSONSchemaType<string[]>
-  | JSONSchemaType<object>;
+  | JSONSchemaType<object>
+  | JSONSchemaType<object[]>;
 
 export const compile = <T extends object>(
   moduleName: string,
@@ -53,7 +54,7 @@ const compileStruct = <T extends object>(
   ctx: CompileContext
 ): [JSONSchemaType<T>, CompileLogItem[]] => {
   const props = annotation.struct.params;
-  type ResultLike = [Record<string, unknown>, CompileLogItem[]];
+  type ResultLike = [Record<string, AnySchema | object>, CompileLogItem[]];
 
   const [properties, logs]: ResultLike = Object.entries<StructParam>(
     props
@@ -86,7 +87,7 @@ const compileField = (
   path: string,
   data: StructParam,
   ctx: CompileContext
-): [object, CompileLogItem[]] => {
+): [AnySchema | object, CompileLogItem[]] => {
   switch (data.kind) {
     case "string":
     case "multiline_string":
@@ -137,7 +138,7 @@ const compileField = (
         {
           type: "array",
           items: itemSchema,
-          ...(data.default !== undefined ? { default: data.default } : {}),
+          ...withDefault(data.default),
         },
         itemLogs,
       ];
@@ -187,7 +188,6 @@ const makeArrayField = <T>(data: KindOfArray<T>, itemType: string) => ({
   items: { type: itemType },
   ...withDefault(data.default),
 });
-
 const makeNumberArrayField = (data: KindOfNumberArray) =>
   ({
     type: "array",
