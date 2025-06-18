@@ -155,11 +155,6 @@ const compileField = (
       return [{}, []];
   }
 };
-const resolveStruct = <T extends object>(
-  data: PluginStruct<T>
-): KindOfStruct<T> => {
-  return { kind: "struct", struct: data };
-};
 
 const makeStructKind = <T extends object>(
   path: string,
@@ -181,7 +176,7 @@ const makeStructArrayKind = (
 ): [JSONSchemaType<object[]>, CompileLogItem[]] => {
   const [itemSchema, itemLogs] = makeStructKind(
     `${path}[]`,
-    resolveStruct(annotation.struct),
+    { kind: "struct", struct: annotation.struct },
     ctx
   );
   return [
