@@ -2,6 +2,29 @@ export interface KindBase {
   kind: string;
   desc?: string;
   text?: string;
+  parent?: string;
+}
+
+export type DataKind_Rpg =
+  | "actor"
+  | "weapon"
+  | "armor"
+  | "skill"
+  | "item"
+  | "enemy"
+  | "troop"
+  | "state"
+  | "class";
+
+export type DataKind_System = "switch" | "variable";
+
+export interface KindOfRpgDataId extends KindBase {
+  kind: DataKind_Rpg;
+  default: number;
+}
+export interface KindOfRpgDataIdArray extends KindBase {
+  kind: `${DataKind_Rpg}[]`;
+  default: number[];
 }
 
 export interface KindOfBoolean extends KindBase {
@@ -26,6 +49,12 @@ export interface KindOfStringArray extends KindBase {
   default: string[];
 }
 
+export interface KindOFCombo extends KindBase {
+  kind: "combo";
+  options: string[];
+  default: string;
+}
+
 export interface KindOfNumber extends KindBase {
   kind: "number";
   default: number;
@@ -41,22 +70,8 @@ export interface KindOfId extends KindBase {
   default: number;
 }
 
-export type DataKind_Rpg =
-  | "actor"
-  | "weapon"
-  | "armor"
-  | "skill"
-  | "item"
-  | "enemy"
-  | "state";
-
-export interface KindOfRpgDataId extends KindBase {
-  kind: DataKind_Rpg;
-  default: number;
-}
-
 export interface KindOfSystemDataId extends KindBase {
-  kind: "switch" | "variable";
+  kind: DataKind_System;
   default: number;
 }
 
