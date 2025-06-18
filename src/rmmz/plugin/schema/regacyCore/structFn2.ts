@@ -1,11 +1,5 @@
 import type { JSONSchemaType } from "ajv";
-import type {
-  AnnotationPrimitiveTypes,
-  StructAnnotation,
-  StructAnnotationBase_Array,
-  StructAnnotationBase_Completed,
-  StructBase,
-} from "./types";
+import type { AnnotationTypes, StructAnnotation, StructBase } from "./types";
 
 // --- 型定義 ---
 interface SchemaContext {
@@ -15,11 +9,12 @@ interface SchemaContext {
 // --- メイン関数 ---
 export const fnXX = <T extends object>(
   annotation: StructAnnotation<T>
-): JSONSchemaType<T> => {
-  return buildSchemaFromStruct(annotation.struct, {
+): { schema: JSONSchemaType<T>; errors: unknown[] } => ({
+  errors: [],
+  schema: buildSchemaFromStruct(annotation.struct, {
     required: [],
-  }) as JSONSchemaType<T>;
-};
+  }) as JSONSchemaType<T>,
+});
 
 // --- ヘルパー関数群 ---
 const buildSchemaFromStruct = (
@@ -43,14 +38,11 @@ const copyTitleAndDescription = (a: { text?: string; desc?: string }) => ({
 });
 
 const convertParamToSchema = (
-  param:
-    | AnnotationPrimitiveTypes
-    | StructAnnotationBase_Completed
-    | StructAnnotationBase_Array,
+  param: AnnotationTypes,
 
   ctx: SchemaContext
 ): object => {
-  if (param.type === "number[]") {
+  if (param.kind === "number[]") {
     return {
       type: "array",
       items: { type: "number" },
@@ -59,7 +51,7 @@ const convertParamToSchema = (
     };
   }
 
-  if (param.type === "number") {
+  if (param.kind === "number") {
     return {
       type: "number",
       default: param.default,
@@ -67,7 +59,7 @@ const convertParamToSchema = (
     };
   }
 
-  if (param.type === "string") {
+  if (param.kind === "string") {
     return {
       type: "string",
       default: param.default,
@@ -75,7 +67,7 @@ const convertParamToSchema = (
     };
   }
 
-  if (param.type === "boolean") {
+  if (param.kind === "boolean") {
     return {
       type: "boolean",
       default: param.default,
@@ -83,7 +75,7 @@ const convertParamToSchema = (
     };
   }
 
-  if (param.type === "select") {
+  if (param.kind === "select") {
     return {
       type: "string",
       default: param.default,
@@ -92,7 +84,7 @@ const convertParamToSchema = (
     };
   }
 
-  if (param.type === "struct") {
+  if (param.kind === "struct") {
     return {
       type: "object",
       title: param.struct.structName,
@@ -108,7 +100,7 @@ const convertParamToSchema = (
     };
   }
 
-  if (param.type === "struct[]") {
+  if (param.kind === "struct[]") {
     return {
       type: "array",
       items: {

@@ -1,12 +1,14 @@
 export interface AnnotationBaseTexts {
-  type: string;
+  kind: string;
   desc?: string;
   text?: string;
   parent?: string;
 }
 
+export type TypeKey = "kind";
+
 export interface AnnotationBase<T = unknown> extends AnnotationBaseTexts {
-  type: string;
+  kind: string;
   desc?: string;
   text?: string;
   parent?: string;

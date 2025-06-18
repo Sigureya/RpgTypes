@@ -1,8 +1,8 @@
 import { describe, test, expect } from "vitest";
 import { Ajv, type JSONSchemaType } from "ajv";
 import type { Schema } from "jsonschema";
-import type { StructAnnotation } from "../core/struct";
-import { fnXX } from "./structFn";
+import { fnXX } from "./structFn2";
+import type { StructAnnotation } from "./types";
 interface Person {
   name: string;
   age: number;
@@ -22,19 +22,19 @@ interface MockType {
 }
 
 const paramAnt: StructAnnotation<MockType> = {
-  type: "struct",
+  kind: "struct",
   struct: {
     structName: "PPP",
     params: {
       numberArray: {
-        type: "number[]",
+        kind: "number[]",
         default: [1, 2],
         text: "数値の配列",
         desc: "数値の配列です",
         digit: 4,
       },
       option: {
-        type: "select",
+        kind: "select",
         default: "A",
 
         options: [
@@ -43,64 +43,68 @@ const paramAnt: StructAnnotation<MockType> = {
         ],
       },
       actorData: {
-        type: "number",
+        kind: "number",
         default: 0,
         text: "対象アクター",
         desc: "効果対象のアクターを決めます",
       },
       weaponsData: {
-        type: "number[]",
+        kind: "number[]",
         default: [1, 2],
         text: "武器データの配列",
       },
       bool: {
-        type: "boolean",
+        kind: "boolean",
         default: false,
         on: "有効",
         off: "無効",
         parent: "weaponData",
       },
-      imageFile: { type: "string", default: "", parent: "actorData" },
-      audioFile: { type: "string", default: "" },
-      textData: { type: "string", default: "" },
+      imageFile: { kind: "string", default: "", parent: "actorData" },
+      audioFile: { kind: "string", default: "" },
+      textData: { kind: "string", default: "" },
       person: {
-        type: "struct",
+        kind: "struct",
         struct: {
           structName: "Person",
           params: {
-            name: { type: "string", default: "" },
-            age: { type: "number", default: 0 },
+            name: { kind: "string", default: "" },
+            age: { kind: "number", default: 0 },
           },
+        },
+        default: {
+          name: "",
+          age: 0,
         },
       },
       personArray: {
-        type: "struct[]",
+        kind: "struct[]",
         default: [],
         struct: {
           structName: "Person",
           params: {
-            name: { type: "string", default: "" },
-            age: { type: "number", default: 0 },
+            name: { kind: "string", default: "" },
+            age: { kind: "number", default: 0 },
           },
         },
       },
     },
   },
-  // default: {
-  //   numberArray: [1, 2],
-  //   option: "A",
-  //   actorData: 0,
-  //   weaponsData: [],
-  //   bool: false,
-  //   imageFile: "",
-  //   audioFile: "",
-  //   textData: "",
-  //   person: {
-  //     name: "",
-  //     age: 0,
-  //   },
-  //   personArray: [],
-  // } satisfies MockType,
+  default: {
+    numberArray: [1, 2],
+    option: "A",
+    actorData: 0,
+    weaponsData: [],
+    bool: false,
+    imageFile: "",
+    audioFile: "",
+    textData: "",
+    person: {
+      name: "",
+      age: 0,
+    },
+    personArray: [],
+  } satisfies MockType,
 };
 
 const personSchemaJson = {
@@ -171,14 +175,20 @@ const personSchemaJson = {
 } satisfies JSONSchemaType<MockType> & Schema;
 
 describe("", () => {
-  const schema = fnXX(paramAnt);
+  const result = fnXX(paramAnt);
   test("", () => {
-    expect(schema).toEqual(personSchemaJson);
+    expect(result.schema).toEqual(personSchemaJson);
   });
-  // test("StructAnnotation JSON Schema Validation", () => {
-  //   const ajv = new Ajv({ strict: true });
-  //   const validate = ajv.compile(schema);
-  //   const valid = validate(paramAnt.default);
-  //   expect(valid).toBe(true);
-  // });
+  test("StructAnnotation JSON Schema Validation", () => {
+    const ajv = new Ajv({ strict: true });
+    const validate = ajv.compile(result.schema);
+    const valid = validate(paramAnt.default);
+    expect(valid).toBe(true);
+  });
+  test("", () => {
+    const ajv = new Ajv({ strict: true });
+    const validate = ajv.compile(personSchemaJson);
+    const valid = validate(paramAnt.default);
+    expect(valid).toBe(true);
+  });
 });

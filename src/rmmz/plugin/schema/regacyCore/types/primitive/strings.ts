@@ -3,23 +3,23 @@ import type { ToArrayAnnotation } from "./primitiveArray";
 import type { Select } from "./select";
 
 export interface StringArg extends AnnotationBase {
-  type: "string";
+  kind: "string";
   default: string;
 }
 
 export interface MultilineString extends AnnotationBase {
-  type: "multiline_string";
+  kind: "multiline_string";
   default: string;
 }
 
 export interface FilePathAnnotation extends AnnotationBase {
-  type: "file";
+  kind: "file";
   default: string;
   dir: string;
 }
 export interface ComboAnnotation extends AnnotationBase {
   default: string;
-  type: "combo";
+  kind: "combo";
   options: string[];
 }
 

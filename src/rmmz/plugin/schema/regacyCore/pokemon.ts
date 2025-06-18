@@ -1,0 +1,218 @@
+import type { JSONSchemaType } from "ajv";
+import type { Schema } from "jsonschema";
+import type {
+  KindOfBoolean,
+  KindOfNumber,
+  KindOfNumberArray,
+  KindOfRpgDataId,
+  KindOfSelect,
+  KindOfString,
+  KindOfSystemDataId,
+  KindOFCombo,
+  KindOfFile,
+  KindOfStructRef,
+} from "./kinds";
+import type {
+  StructAnnotation,
+  StructParam,
+  StructType,
+} from "./kinds/struct2";
+import type { CompileLogItem, CompileResult } from "./mockType";
+
+type CompileContext = {
+  moduleName: string;
+  typeDefs: Record<string, StructAnnotation<object>>;
+};
+
+const isIntegerKind = (kind: string, digit?: number) => {
+  if (kind === "number" || kind === "number[]") {
+    return digit === undefined || digit === 0;
+  }
+
+  return false;
+};
+
+// --- 各型ごとの生成関数 ---
+const makeStringField = (data: KindOfString) => ({
+  type: "string",
+  ...(data.default !== undefined ? { default: data.default } : {}),
+});
+
+const makeSelectField = (data: KindOfSelect) => ({
+  type: "string",
+  ...(data.default !== undefined ? { default: data.default } : {}),
+  ...(data.options ? { enum: data.options.map((o): string => o.value) } : {}),
+});
+
+const makeArrayField = (data: any, itemType: string) => ({
+  type: "array",
+  items: { type: itemType },
+  ...(data.default !== undefined ? { default: data.default } : {}),
+});
+
+const makeNumberArrayField = (data: KindOfNumberArray) => ({
+  type: "array",
+  items: {
+    type: isIntegerKind("number[]", data.digit) ? "integer" : "number",
+  },
+  ...(data.default !== undefined ? { default: data.default } : {}),
+});
+
+const makeNumberField = (data: KindOfNumber) => ({
+  type: isIntegerKind("number", data.digit) ? "integer" : "number",
+  ...(data.default !== undefined ? { default: data.default } : {}),
+});
+
+const makeIdField = (data: KindOfRpgDataId | KindOfSystemDataId) => ({
+  type: "integer",
+  ...(data.default !== undefined ? { default: data.default } : {}),
+  ...(data.text !== undefined ? { title: data.text } : {}),
+  ...(data.desc !== undefined ? { description: data.desc } : {}),
+});
+
+const makeBooleanField = (data: KindOfBoolean) => ({
+  type: "boolean",
+  ...(data.default !== undefined ? { default: data.default } : {}),
+  ...(data.text !== undefined ? { title: data.text } : {}),
+  ...(data.desc !== undefined ? { description: data.desc } : {}),
+});
+
+const makeComboField = (data: KindOFCombo) => ({
+  type: "string",
+  ...(data.default !== undefined ? { default: data.default } : {}),
+  ...(data.text !== undefined ? { title: data.text } : {}),
+  ...(data.desc !== undefined ? { description: data.desc } : {}),
+});
+
+const makeFileField = (data: KindOfFile) => ({
+  type: "string",
+  ...(data.default !== undefined ? { default: data.default } : {}),
+  ...(data.text !== undefined ? { title: data.text } : {}),
+  ...(data.desc !== undefined ? { description: data.desc } : {}),
+});
+
+const makeStructRef = (ref: KindOfStructRef) =>
+  ({
+    $ref: `#/definitions/${ref.structName}`,
+  } satisfies Schema);
+
+// --- メイン処理 ---
+const compileStruct = <T extends object>(
+  path: string,
+  annotation: StructAnnotation<T>,
+  ctx: CompileContext
+): [JSONSchemaType<T>, CompileLogItem[]] => {
+  const props = annotation.struct.params;
+  type X = [Record<string, unknown>, CompileLogItem[]];
+
+  const [properties, logs]: X = Object.entries<StructParam>(props).reduce<X>(
+    ([accSchema, accLogs], [key, value]) => {
+      const currentPath = `${path}.${key}`;
+      const [fieldSchema, fieldLogs] = compileField(currentPath, value, ctx);
+      return [
+        { ...accSchema, [key]: fieldSchema },
+        [...accLogs, ...fieldLogs, { path: currentPath, data: value }],
+      ];
+    },
+    [{}, []] satisfies X
+  );
+
+  const keys = Object.keys(props);
+  return [
+    {
+      type: "object",
+      title: annotation.struct.structName,
+      properties,
+      required: keys,
+      additionalProperties: false,
+    } as JSONSchemaType<T>,
+    logs,
+  ];
+};
+
+const compileField = (
+  path: string,
+  data: StructParam,
+  ctx: CompileContext
+): [object, CompileLogItem[]] => {
+  switch (data.kind) {
+    case "string":
+    case "multiline_string":
+      return [makeStringField(data), []];
+    case "file":
+      return [makeFileField(data), []];
+    case "combo":
+      return [makeComboField(data), []];
+    case "select":
+      return [makeSelectField(data), []];
+    case "file[]":
+      return [makeArrayField(data, "string"), []];
+    case "string[]":
+      return [makeArrayField(data, "string"), []];
+    case "number[]":
+      return [makeNumberArrayField(data), []];
+    case "actor[]":
+    case "weapon[]":
+    case "armor[]":
+    case "skill[]":
+    case "item[]":
+    case "enemy[]":
+    case "state[]":
+      return [makeArrayField(data, "integer"), []];
+    case "number":
+      return [makeNumberField(data), []];
+    case "actor":
+    case "weapon":
+    case "armor":
+    case "skill":
+    case "item":
+    case "enemy":
+    case "state":
+      return [makeIdField(data), []];
+    case "boolean":
+      return [makeBooleanField(data), []];
+    case "struct_ref":
+      return [makeStructRef(data), []];
+    case "struct":
+      return compileStruct(path, resolveStruct(data.struct, ctx), ctx);
+    case "struct[]":
+      const [itemSchema, itemLogs] = compileStruct(
+        `${path}[]`,
+        resolveStruct(data.struct, ctx), // 修正
+        ctx
+      );
+      return [
+        {
+          type: "array",
+          items: itemSchema,
+          ...(data.default !== undefined ? { default: data.default } : {}),
+        },
+        itemLogs,
+      ];
+    default:
+      return [{}, []];
+  }
+};
+
+const resolveStruct = <T extends object>(
+  data: StructType<T>,
+  ctx: CompileContext
+): StructAnnotation<T> => {
+  return data.params !== undefined
+    ? { kind: "struct", struct: data }
+    : (ctx.typeDefs[data.structName] as StructAnnotation<T>);
+};
+
+export const compile = <T extends object>(
+  moduleName: string,
+  struct: StructAnnotation<T>,
+  typeDefs: Record<string, StructAnnotation<any>>
+): CompileResult<T> => {
+  const ctx: CompileContext = { moduleName, typeDefs };
+  const [schema, logs] = compileStruct(
+    `${moduleName}.${struct.struct.structName}`,
+    struct,
+    ctx
+  );
+  return { schema, logs };
+};

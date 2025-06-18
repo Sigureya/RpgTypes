@@ -1,10 +1,10 @@
-import type { AnnotationBase } from "./annotationBase";
+import type { AnnotationBase, TypeKey } from "./annotationBase";
 
 type ValueType<
   T extends AnnotationBase,
   Key extends keyof T
-> = Key extends "type"
-  ? `${T["type"]}[]`
+> = Key extends TypeKey
+  ? `${T[TypeKey]}[]`
   : Key extends "default"
   ? Array<T["default"]>
   : T[Key];
