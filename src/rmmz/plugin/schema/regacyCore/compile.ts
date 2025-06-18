@@ -22,6 +22,7 @@ type CompileContext = {
   typeDefs: Record<string, KindOfStruct<object>>;
 };
 type AnySchema =
+  | true
   | JSONSchemaType<number>
   | JSONSchemaType<string>
   | JSONSchemaType<boolean>
@@ -29,18 +30,19 @@ type AnySchema =
   | JSONSchemaType<string[]>
   | JSONSchemaType<object>
   | JSONSchemaType<object[]>
-  | { $ref: string }
-  | {};
+  | { $ref: string };
 
-type ResultType = [AnySchema, CompileLogItem[]];
-
+interface ResultType {
+  schema: AnySchema;
+  logs: CompileLogItem[];
+}
 export const compile = <T extends object>(
   { moduleName }: PluginTitles,
   struct: KindOfStruct<Record<string, StructParam>>,
   typeDefs: Record<string, KindOfStruct<object>>
 ): CompileResult<T> => {
   const ctx: CompileContext = { moduleName, typeDefs };
-  const [schema, logs] = compileStructDetail(
+  const { schema, logs } = compileStructDetail(
     `${moduleName}.${struct.struct.structName}`,
     struct.struct.structName,
     struct.struct.params,
@@ -54,7 +56,7 @@ export const compilePluginStruct = <T extends object>(
   { params, structName }: PluginStruct<T>,
   typeDefs: Record<string, KindOfStruct<object>>
 ): CompileResult<T> => {
-  const [schema, logs] = compileStructDetail(
+  const { schema, logs } = compileStructDetail(
     `${moduleName}.${structName}`,
     structName,
     params,
@@ -73,8 +75,8 @@ const compileStructDetail = <T>(
   const { properties, logs } = reduceProps(props, path, ctx);
 
   const keys = Object.keys(props);
-  return [
-    {
+  return {
+    schema: {
       type: "object",
       title: title,
       properties,
@@ -82,13 +84,14 @@ const compileStructDetail = <T>(
       additionalProperties: false,
     } satisfies JSONSchemaType<T>,
     logs,
-  ] as [JSONSchemaType<T>, CompileLogItem[]];
+  };
 };
 
 interface PropsAccumulated {
-  properties: Record<string, AnySchema | object>;
+  properties: Record<string, AnySchema>;
   logs: CompileLogItem[];
 }
+
 const reduceProps = (
   props: Record<string, StructParam>,
   path: string,
@@ -97,10 +100,12 @@ const reduceProps = (
   return Object.entries<StructParam>(props).reduce<PropsAccumulated>(
     ({ properties: accSchema, logs: accLogs }, [key, value]) => {
       const currentPath: string = `${path}.${key}`;
-      const [fieldSchema, fieldLogs] = compileField(currentPath, value, ctx);
+      const field = compileField(currentPath, value, ctx);
       return {
-        properties: { ...accSchema, [key]: fieldSchema },
-        logs: [...accLogs, ...fieldLogs, { path: currentPath, data: value }],
+        properties: field.schema
+          ? { ...accSchema, [key]: field.schema }
+          : { ...accSchema },
+        logs: [...accLogs, ...field.logs, { path: currentPath, data: value }],
       };
     },
     { properties: {}, logs: [] } satisfies PropsAccumulated
@@ -113,12 +118,20 @@ const compileField = (
   ctx: CompileContext
 ): ResultType => {
   if (data.kind === "struct") {
-    return makeStructKind(path, data, ctx);
+    const { schema, logs } = makeStructKind(path, data, ctx);
+    return {
+      schema,
+      logs,
+    };
   }
   if (data.kind === "struct[]") {
-    return makeStructArrayKind(path, data, ctx);
+    const { schema, logs } = makeStructArrayKind(path, data, ctx);
+    return {
+      schema,
+      logs,
+    };
   }
-  return [compilePrimitive(data), []];
+  return { schema: compilePrimitive(data), logs: [] };
 };
 
 const compilePrimitive = (
@@ -163,7 +176,7 @@ const compilePrimitive = (
     case "struct_ref":
       return makeStructRef(data);
     default:
-      return {};
+      return true;
   }
 };
 
@@ -171,33 +184,34 @@ const makeStructKind = <T extends object>(
   path: string,
   annotation: KindOfStruct<T>,
   ctx: CompileContext
-) => {
+): ResultType => {
   return compileStructDetail(
     path,
     annotation.struct.structName,
     annotation.struct.params,
     ctx
-  );
+  ) as unknown as ResultType;
+  // 再帰構造のためasが唯一の解となる
 };
 
 const makeStructArrayKind = (
   path: string,
   annotation: KindOfStructArray,
   ctx: CompileContext
-): [JSONSchemaType<object[]>, CompileLogItem[]] => {
-  const [itemSchema, itemLogs] = makeStructKind(
+): ResultType => {
+  const item = makeStructKind(
     `${path}[]`,
     { kind: "struct", struct: annotation.struct },
     ctx
   );
-  return [
-    {
+  return {
+    schema: {
       type: "array",
-      items: itemSchema,
+      ...(item.schema ? { items: item.schema } : {}),
       ...withDefault(annotation.default),
-    } satisfies JSONSchemaType<object[]>,
-    itemLogs,
-  ];
+    } as JSONSchemaType<object[]>,
+    logs: item.logs,
+  };
 };
 
 const withTexts = (kind: KindBase) => ({
