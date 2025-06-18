@@ -8,7 +8,6 @@ type CompileContext = {
 };
 
 const isIntegerKind = (kind: string, digit?: number) => {
-  // RPGツクールのactor/weapon/armor/skill/item/enemy/stateは整数
   if (
     [
       "actor",
@@ -29,18 +28,58 @@ const isIntegerKind = (kind: string, digit?: number) => {
   ) {
     return true;
   }
-  if (digit === undefined) {
-    return true;
-  }
-  if (kind === "number" && digit === 0) {
-    return true;
-  }
-  if (kind === "number[]" && digit === 0) {
-    return true;
+  if (kind === "number" || kind === "number[]") {
+    return digit === undefined || digit === 0;
   }
   return false;
 };
 
+// --- 各型ごとの生成関数 ---
+const makeStringField = (data: any) => ({
+  type: "string",
+  ...(data.default !== undefined ? { default: data.default } : {}),
+});
+
+const makeSelectField = (data: any) => ({
+  type: "string",
+  ...(data.default !== undefined ? { default: data.default } : {}),
+  ...(data.options ? { enum: data.options.map((o: any) => o.value) } : {}),
+});
+
+const makeArrayField = (data: any, itemType: string) => ({
+  type: "array",
+  items: { type: itemType },
+  ...(data.default !== undefined ? { default: data.default } : {}),
+});
+
+const makeNumberArrayField = (data: any) => ({
+  type: "array",
+  items: {
+    type: isIntegerKind("number[]", data.digit) ? "integer" : "number",
+  },
+  ...(data.default !== undefined ? { default: data.default } : {}),
+});
+
+const makeNumberField = (data: any) => ({
+  type: isIntegerKind("number", data.digit) ? "integer" : "number",
+  ...(data.default !== undefined ? { default: data.default } : {}),
+});
+
+const makeIdField = (data: any) => ({
+  type: "integer",
+  ...(data.default !== undefined ? { default: data.default } : {}),
+  ...(data.text !== undefined ? { title: data.text } : {}),
+  ...(data.desc !== undefined ? { description: data.desc } : {}),
+});
+
+const makeBooleanField = (data: any) => ({
+  type: "boolean",
+  ...(data.default !== undefined ? { default: data.default } : {}),
+  ...(data.text !== undefined ? { title: data.text } : {}),
+  ...(data.desc !== undefined ? { description: data.desc } : {}),
+});
+
+// --- メイン処理 ---
 const compileStruct = <T extends object>(
   path: string,
   annotation: StructAnnotation<T>,
@@ -81,77 +120,18 @@ const compileField = (
 ): [any, CompileLogItem[]] => {
   switch (data.kind) {
     case "string":
-      return [
-        {
-          type: "string",
-          ...(data.default !== undefined ? { default: data.default } : {}),
-        },
-        [],
-      ];
     case "multiline_string":
-      return [
-        {
-          type: "string",
-          ...(data.default !== undefined ? { default: data.default } : {}),
-        },
-        [],
-      ];
     case "file":
-      return [
-        {
-          type: "string",
-          ...(data.default !== undefined ? { default: data.default } : {}),
-        },
-        [],
-      ];
     case "combo":
-      return [
-        {
-          type: "string",
-          ...(data.default !== undefined ? { default: data.default } : {}),
-        },
-        [],
-      ];
+      return [makeStringField(data), []];
     case "select":
-      return [
-        {
-          type: "string",
-          ...(data.default !== undefined ? { default: data.default } : {}),
-          ...(data.options
-            ? { enum: data.options.map((o: any) => o.value) }
-            : {}),
-        },
-        [],
-      ];
+      return [makeSelectField(data), []];
     case "file[]":
-      return [
-        {
-          type: "array",
-          items: { type: "string" },
-          ...(data.default !== undefined ? { default: data.default } : {}),
-        },
-        [],
-      ];
+      return [makeArrayField(data, "string"), []];
     case "string[]":
-      return [
-        {
-          type: "array",
-          items: { type: "string" },
-          ...(data.default !== undefined ? { default: data.default } : {}),
-        },
-        [],
-      ];
+      return [makeArrayField(data, "string"), []];
     case "number[]":
-      return [
-        {
-          type: "array",
-          items: {
-            type: data.digit === 0 ? "integer" : "number",
-          },
-          ...(data.default !== undefined ? { default: data.default } : {}),
-        },
-        [],
-      ];
+      return [makeNumberArrayField(data), []];
     case "actor[]":
     case "weapon[]":
     case "armor[]":
@@ -159,22 +139,9 @@ const compileField = (
     case "item[]":
     case "enemy[]":
     case "state[]":
-      return [
-        {
-          type: "array",
-          items: { type: "integer" },
-          ...(data.default !== undefined ? { default: data.default } : {}),
-        },
-        [],
-      ];
+      return [makeArrayField(data, "integer"), []];
     case "number":
-      return [
-        {
-          type: data.digit === 0 ? "integer" : "number",
-          ...(data.default !== undefined ? { default: data.default } : {}),
-        },
-        [],
-      ];
+      return [makeNumberField(data), []];
     case "actor":
     case "weapon":
     case "armor":
@@ -182,25 +149,9 @@ const compileField = (
     case "item":
     case "enemy":
     case "state":
-      return [
-        {
-          type: "integer",
-          ...(data.default !== undefined ? { default: data.default } : {}),
-          ...(data.text !== undefined ? { title: data.text } : {}),
-          ...(data.desc !== undefined ? { description: data.desc } : {}),
-        },
-        [],
-      ];
+      return [makeIdField(data), []];
     case "boolean":
-      return [
-        {
-          type: "boolean",
-          ...(data.default !== undefined ? { default: data.default } : {}),
-          ...(data.text !== undefined ? { title: data.text } : {}),
-          ...(data.desc !== undefined ? { description: data.desc } : {}),
-        },
-        [],
-      ];
+      return [makeBooleanField(data), []];
     case "struct":
       return compileStruct(path, resolveStruct(data.struct, ctx), ctx);
     case "struct[]":
