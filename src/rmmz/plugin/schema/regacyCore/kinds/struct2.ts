@@ -10,7 +10,9 @@ import type {
   KindOfFile,
   KindOfRpgDataIdArray,
   KindOFCombo,
-} from "../kinds";
+  KindOfStructRef,
+  KindOfFileArray,
+} from "./kinds";
 
 // 各パラメータ型のユニオン
 export type StructParam =
@@ -25,9 +27,11 @@ export type StructParam =
   | KindOfStringArray
   | KindOfSystemDataId
   | KindOfFile
+  | KindOfFileArray
   | StructAnnotation<object> // ネスト構造体対応
   | CoreStruct
-  | CoreStructArray;
+  | CoreStructArray
+  | KindOfStructRef;
 
 interface CoreStruct {
   kind: "struct";

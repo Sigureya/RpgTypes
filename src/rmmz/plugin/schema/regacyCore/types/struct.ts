@@ -92,11 +92,11 @@ export type StructParameters<T extends object> = NodeParent_StructParameters<
 >;
 
 export type StructAnnotationBase_Union =
-  // | StructAnnotationBase_WithName
-  // | StructAnnotationBase_WithParams
-  // | StructAnnotationBase_WithDefault
-  // | StructAnnotationBase_WithType
-  StructAnnotationBase_Completed;
+  | StructAnnotationBase_WithName
+  | StructAnnotationBase_WithParams
+  | StructAnnotationBase_WithDefault
+  | StructAnnotationBase_WithType
+  | StructAnnotationBase_Completed;
 
 export interface StructAnnotationBase_Partial extends AnnotationBaseTexts {
   kind: "struct";
@@ -192,7 +192,7 @@ type NodeChild_ParamType<
   : T extends object[]
   ? NodeChild_Array<T, KnowTypes, Path>
   : T extends object
-  ? NodeChild_StructCompleted<T, Path, KnowTypes>
+  ? NodeChild_Union<T, Path, KnowTypes>
   : StructNode_Error<`never:${Path}`>;
 
 interface NodeChild_Array<
