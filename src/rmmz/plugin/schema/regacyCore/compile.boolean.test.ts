@@ -1,9 +1,10 @@
 import { describe, test, expect } from "vitest";
 import type { JSONSchemaType } from "ajv";
-import { compile } from "./compile";
-import type { KindOfStruct } from "./kinds";
+import { compilePluginStruct } from "./compile";
+import type { PluginStruct } from "./kinds";
 import type { PluginTitles } from "./kinds/compileOption";
-interface BB {
+
+interface MockBoolean {
   bool: boolean;
 }
 const titles: PluginTitles = {
@@ -11,24 +12,21 @@ const titles: PluginTitles = {
   author: "author",
 };
 
-describe("bool", () => {
+describe("compilePluginStruct - boolean", () => {
   const boolStruct = {
-    kind: "struct",
-    struct: {
-      structName: "Bool",
-      params: {
-        bool: {
-          kind: "boolean",
-          default: false,
-          desc: "bool desc", // descは全てのkindにある。省略されているだけ
-          text: "bool text", // textも全てのkindにある。
-          off: "off",
-          on: "on",
-        },
+    structName: "Bool",
+    params: {
+      bool: {
+        kind: "boolean",
+        default: false,
+        desc: "bool desc",
+        text: "bool text",
+        off: "off",
+        on: "on",
       },
     },
-  } as const satisfies KindOfStruct<BB>;
-  const expectedBoolSchema: JSONSchemaType<BB> = {
+  } as const satisfies PluginStruct<MockBoolean>;
+  const expectedBoolSchema: JSONSchemaType<MockBoolean> = {
     title: "Bool",
     type: "object",
     properties: {
@@ -43,11 +41,11 @@ describe("bool", () => {
     additionalProperties: false,
   };
   test("schema", () => {
-    const resultBool = compile(titles, boolStruct, {});
+    const resultBool = compilePluginStruct(titles, boolStruct, {});
     expect(resultBool.schema).toEqual(expectedBoolSchema);
   });
   test("schema", () => {
-    const resultBool = compile(titles, boolStruct, {});
-    expect(resultBool.logs[0].data).toBe(boolStruct.struct.params.bool);
+    const resultBool = compilePluginStruct(titles, boolStruct, {});
+    expect(resultBool.logs[0].data).toBe(boolStruct.params.bool);
   });
 });
