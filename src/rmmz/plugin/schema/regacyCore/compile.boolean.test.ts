@@ -1,10 +1,15 @@
 import { describe, test, expect } from "vitest";
 import type { JSONSchemaType } from "ajv";
 import { compile } from "./compile";
-import type { PluginStruct } from "./kinds";
+import type { KindOfStruct } from "./kinds";
+import type { PluginTitles } from "./kinds/compileOption";
 interface BB {
   bool: boolean;
 }
+const titles: PluginTitles = {
+  moduleName: "moduleName",
+  author: "author",
+};
 
 describe("bool", () => {
   const boolStruct = {
@@ -22,7 +27,7 @@ describe("bool", () => {
         },
       },
     },
-  } as const satisfies PluginStruct<BB>;
+  } as const satisfies KindOfStruct<BB>;
   const expectedBoolSchema: JSONSchemaType<BB> = {
     title: "Bool",
     type: "object",
@@ -38,11 +43,11 @@ describe("bool", () => {
     additionalProperties: false,
   };
   test("schema", () => {
-    const resultBool = compile("moduleName", boolStruct, {});
+    const resultBool = compile(titles, boolStruct, {});
     expect(resultBool.schema).toEqual(expectedBoolSchema);
   });
   test("schema", () => {
-    const resultBool = compile("moduleName", boolStruct, {});
+    const resultBool = compile(titles, boolStruct, {});
     expect(resultBool.logs[0].data).toBe(boolStruct.struct.params.bool);
   });
 });

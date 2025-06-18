@@ -14,11 +14,12 @@ import type {
   KindBase,
 } from "./kinds";
 import type { CompileLogItem, CompileResult } from "./kinds/compileLog";
-import type { PluginStruct, StructParam, StructType } from "./kinds/struct2";
+import type { PluginTitles } from "./kinds/compileOption";
+import type { KindOfStruct, StructParam, PluginStruct } from "./kinds/struct2";
 
 type CompileContext = {
   moduleName: string;
-  typeDefs: Record<string, PluginStruct<object>>;
+  typeDefs: Record<string, KindOfStruct<object>>;
 };
 type AnySchema =
   | JSONSchemaType<number>
@@ -30,9 +31,9 @@ type AnySchema =
   | JSONSchemaType<object[]>;
 
 export const compile = <T extends object>(
-  moduleName: string,
-  struct: PluginStruct<object>,
-  typeDefs: Record<string, PluginStruct<object>>
+  { moduleName }: PluginTitles,
+  struct: KindOfStruct<object>,
+  typeDefs: Record<string, KindOfStruct<object>>
 ): CompileResult<T> => {
   const ctx: CompileContext = { moduleName, typeDefs };
   const [schema, logs] = compileStruct(
@@ -46,7 +47,7 @@ export const compile = <T extends object>(
 // --- メイン処理 ---
 const compileStruct = <T extends object>(
   path: string,
-  annotation: PluginStruct<T>,
+  annotation: KindOfStruct<T>,
   ctx: CompileContext
 ): [JSONSchemaType<T>, CompileLogItem[]] => {
   const props = annotation.struct.params;
@@ -144,8 +145,8 @@ const compileField = (
 };
 
 const resolveStruct = <T extends object>(
-  data: StructType<T>
-): PluginStruct<T> => {
+  data: PluginStruct<T>
+): KindOfStruct<T> => {
   return { kind: "struct", struct: data };
 };
 

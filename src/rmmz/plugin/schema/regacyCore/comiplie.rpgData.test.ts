@@ -1,7 +1,8 @@
 import { describe, test, expect } from "vitest";
 import type { JSONSchemaType } from "ajv";
 import { compile } from "./compile";
-import type { PluginStruct } from "./kinds";
+import type { KindOfStruct } from "./kinds";
+import type { PluginTitles } from "./kinds/compileOption";
 
 // kind:"number"とは異なる処理が必要。別々に作ること
 interface AllData {
@@ -13,6 +14,10 @@ interface AllData {
   enemy: number;
   state: number;
 }
+const titles: PluginTitles = {
+  moduleName: "moduleName",
+  author: "author",
+};
 
 describe("alldata - with text", () => {
   const allDataStruct = {
@@ -34,7 +39,7 @@ describe("alldata - with text", () => {
         state: { kind: "state", default: 0, text: "", desc: "" },
       },
     },
-  } as const satisfies PluginStruct<AllData>;
+  } as const satisfies KindOfStruct<AllData>;
   const expectedAllDataSchema: JSONSchemaType<AllData> = {
     title: "AllData",
     type: "object",
@@ -66,11 +71,11 @@ describe("alldata - with text", () => {
     additionalProperties: false,
   };
   test("schema", () => {
-    const resultAllData = compile("moduleName", allDataStruct, {});
+    const resultAllData = compile(titles, allDataStruct, {});
     expect(resultAllData.schema).toEqual(expectedAllDataSchema);
   });
   describe("log", () => {
-    const resultAllData = compile("moduleName", allDataStruct, {});
+    const resultAllData = compile(titles, allDataStruct, {});
     const map = new Map(
       resultAllData.logs.map((log) => {
         return [log.path, log.data] as const;
@@ -111,7 +116,7 @@ describe("allData - no text", () => {
         state: { kind: "state", default: 0 },
       },
     },
-  } as const satisfies PluginStruct<AllData>;
+  } as const satisfies KindOfStruct<AllData>;
   const expectedAllDataSchema = {
     title: "AllData",
     type: "object",
@@ -137,7 +142,7 @@ describe("allData - no text", () => {
     additionalProperties: false,
   } as const satisfies JSONSchemaType<AllData>;
   test("schema", () => {
-    const resultAllData = compile("moduleName", allDataStruct, {});
+    const resultAllData = compile(titles, allDataStruct, {});
     expect(resultAllData.schema).toEqual(expectedAllDataSchema);
   });
 });

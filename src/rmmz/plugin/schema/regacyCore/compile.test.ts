@@ -2,9 +2,14 @@ import { describe, test, expect } from "vitest";
 import type { JSONSchemaType } from "ajv";
 import { compile } from "./compile";
 import type { CompileLogItem } from "./kinds/compileLog";
-import type { PluginStruct as Struct2 } from "./kinds/struct2";
-import type { PluginStruct } from "./kinds/struct2";
+import type { PluginTitles } from "./kinds/compileOption";
+import type { KindOfStruct } from "./kinds/struct2";
 import type { Family, Person, School } from "./mockType";
+
+const titles: PluginTitles = {
+  moduleName: "moduleName",
+  author: "author",
+};
 
 describe("person", () => {
   const personStruct = {
@@ -16,7 +21,7 @@ describe("person", () => {
         age: { kind: "number", default: 0 },
       },
     },
-  } as const satisfies PluginStruct<Person>;
+  } as const satisfies KindOfStruct<Person>;
   const expected: JSONSchemaType<Person> = {
     title: "Person",
     type: "object",
@@ -27,7 +32,7 @@ describe("person", () => {
     required: ["name", "age"],
     additionalProperties: false,
   };
-  const result = compile("moduleName", personStruct, {});
+  const result = compile(titles, personStruct, {});
   test("schema", () => {
     expect(result.schema).toEqual(expected);
   });
@@ -53,7 +58,7 @@ describe("family", () => {
         mother: { kind: "struct_ref", structName: "Person" },
       },
     },
-  } as const satisfies Struct2<Family>;
+  } as const satisfies KindOfStruct<Family>;
   const expectedFamilySchema: JSONSchemaType<Family> = {
     type: "object",
     title: "Family",
@@ -65,11 +70,11 @@ describe("family", () => {
     additionalProperties: false,
   };
   test("", () => {
-    const resultFamily = compile("moduleName", familyStruct, {});
+    const resultFamily = compile(titles, familyStruct, {});
     expect(resultFamily.schema).toEqual(expectedFamilySchema);
   });
   test("", () => {
-    const resultFamily = compile("moduleName", familyStruct, {
+    const resultFamily = compile(titles, familyStruct, {
       Person: {
         kind: "struct",
         struct: {
@@ -79,7 +84,7 @@ describe("family", () => {
             age: { kind: "number", default: 0 },
           },
         },
-      } satisfies PluginStruct<Person>,
+      } satisfies KindOfStruct<Person>,
     } as const);
     expect(resultFamily.logs).toContainEqual({
       path: "moduleName.Family.father",
@@ -113,7 +118,7 @@ describe("school", () => {
         },
       },
     },
-  } as const satisfies PluginStruct<School>;
+  } as const satisfies KindOfStruct<School>;
   const mockSchoolSchema: JSONSchemaType<School> = {
     type: "object",
     title: "School",
@@ -138,7 +143,7 @@ describe("school", () => {
     additionalProperties: false,
   };
   test("schema", () => {
-    const resultSchool = compile("moduleName", mockSchoolStruct, {});
+    const resultSchool = compile(titles, mockSchoolStruct, {});
     expect(resultSchool.schema).toEqual(mockSchoolSchema);
   });
 });
@@ -168,7 +173,7 @@ describe("alldataArray", () => {
         state: { kind: "state[]", default: [1, 2, 3] },
       },
     },
-  } as const satisfies PluginStruct<AllDataArray>;
+  } as const satisfies KindOfStruct<AllDataArray>;
   const expectedAllDataArraySchema: JSONSchemaType<AllDataArray> = {
     title: "AllDataArray",
     type: "object",
@@ -213,7 +218,7 @@ describe("alldataArray", () => {
     additionalProperties: false,
   };
   test("schema", () => {
-    const resultAllDataArray = compile("moduleName", allDataArrayStruct, {});
+    const resultAllDataArray = compile(titles, allDataArrayStruct, {});
     expect(resultAllDataArray.schema).toEqual(expectedAllDataArraySchema);
   });
 });
