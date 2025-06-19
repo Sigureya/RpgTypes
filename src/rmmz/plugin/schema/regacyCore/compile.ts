@@ -19,12 +19,12 @@ import type {
   CompileResult,
   PluginCommand,
 } from "./kinds";
-import type { PluginTitles } from "./kinds/compileOption";
+import type { PluginCompileOptions, PluginTitles } from "./kinds/compileOption";
 import { PLUGIN_COMMAND } from "./kinds/constants";
 
 type CompileContext = {
   moduleName: string;
-  typeDefs: Record<string, KindOfStruct<object>>;
+  options: Partial<PluginCompileOptions>;
 };
 type AnySchema =
   | true
@@ -45,26 +45,26 @@ interface ResultType {
 export const compilePluginCommand = <T extends object>(
   { moduleName }: PluginTitles,
   { args, commandName }: PluginCommand<T>,
-  typeDefs: Record<string, KindOfStruct<object>>
+  options: Partial<PluginCompileOptions>
 ): CompileResult<T> => {
   return compileStructDetail(
     `${moduleName}.${PLUGIN_COMMAND}.${commandName}`,
     commandName,
     args,
-    { moduleName, typeDefs }
+    { moduleName, options }
   );
 };
 
 export const compilePluginStruct = <T extends object>(
   { moduleName }: PluginTitles,
   { params, structName }: PluginStruct<T>,
-  typeDefs: Record<string, KindOfStruct<object>>
+  options: Partial<PluginCompileOptions>
 ): CompileResult<T> => {
   return compileStructDetail(
     `${moduleName}.${structName}`,
     structName,
     params,
-    { moduleName, typeDefs }
+    { moduleName, options }
   );
 };
 
@@ -126,11 +126,12 @@ const compileField = (
   if (data.kind === "struct[]") {
     return makeStructArrayKind(path, data, ctx);
   }
-  return { schema: compilePrimitive(data), logs: [] };
+  return { schema: compilePrimitive(data, ctx), logs: [] };
 };
 
 const compilePrimitive = (
-  data: Exclude<StructParam, { kind: "struct" | "struct[]" }>
+  data: Exclude<StructParam, { kind: "struct" | "struct[]" }>,
+  ctx: CompileContext
 ) => {
   switch (data.kind) {
     case "string":
