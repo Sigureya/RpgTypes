@@ -95,8 +95,6 @@ interface PropsAccumulated {
   logs: CompileLogItem[];
 }
 
-// ...existing code...
-
 const accumulateProp = (
   acc: PropsAccumulated,
   [key, value]: [string, StructParam],
@@ -104,7 +102,7 @@ const accumulateProp = (
   ctx: CompileContext
 ): PropsAccumulated => {
   const currentPath: string = `${path}.${key}`;
-  const field = compileField(currentPath, value, ctx);
+  const field: SchemaAndLog = compileField(currentPath, value, ctx);
   return {
     properties: { ...acc.properties, [key]: field.schema },
     logs: [
@@ -130,7 +128,6 @@ const reduceProps = (
   );
 };
 
-// ...existing code...
 const compileField = (
   path: string,
   data: StructParam,
