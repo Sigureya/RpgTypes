@@ -49,7 +49,7 @@ interface ResultType {
 
 export const compilePluginCommand = <T extends object>(
   { moduleName }: PluginTitles,
-  { args, commandName }: PluginCommand<T>,
+  { args, command: commandName }: PluginCommand<T>,
   options: Partial<PluginCompileOptions>
 ): CompileResult<T> => {
   return compileStructDetail(
@@ -204,7 +204,7 @@ const makeStructArrayKind = (
   annotation: KindOfStructArray,
   ctx: CompileContext
 ): ResultType => {
-  const item = makeStructKind(
+  const item: ResultType = makeStructKind(
     `${path}[]`,
     { kind: "struct", struct: annotation.struct },
     ctx
