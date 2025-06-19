@@ -22,7 +22,7 @@ export declare const compileSchemaFromDataId: (dataId: NewRmmzParam_DataId) => {
     "x-rpg-param": {
         parent: string;
         kind: string;
-        data: import('../../../..').SourceId_SystemSwitches | import('../../../..').SourceId_SystemVariables | import('../../../..').SourceIdUnion_RpgData | import('./rpgDataId/lookup').SourceId_RmmzUnknown;
+        data: import('./rpgDataId/lookup').SourceId_RmmzUnknown | import('./rpgDataId/lookup').SourceId_ValidRmmzData;
     };
 };
 export declare const compileSchemaFromNumberParam: (num: NewRmmzParam_Number) => {

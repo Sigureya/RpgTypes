@@ -20,8 +20,7 @@ export type StringArg = RmmzParamCore_String & AnnotationBase;
 export type MultilineString = RmmzParamCore_String & AnnotationBase;
 export type FilePathAnnotation = RmmzParamCore_FilePath & AnnotationBase;
 export type ComboAnnotation = RmmzParamCore_Combo & AnnotationBase;
-export interface StringSelect extends RmmzParamCore_Select {
-}
+export type StringSelect = RmmzParamCore_Select & AnnotationBase;
 export type Primitive_Strings = StringArg | MultilineString | FilePathAnnotation | ComboAnnotation | StringSelect;
 export type BooleanArg = NewRmmzParam_Boolean;
 export type AnnotationSigleTypes = BooleanArg | Primitive_Numbers | Primitive_Strings;

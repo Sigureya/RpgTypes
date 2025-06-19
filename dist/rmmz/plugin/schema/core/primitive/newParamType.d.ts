@@ -1,6 +1,7 @@
 import { RmmzParamCore_Boolean } from './boolean';
 import { RmmzParamCore_Number } from './numbers';
 import { DataKindUnion, RmmzParamCore_DataId } from './rpgDataId';
+import { RmmzParamCore_String } from './string';
 import { RmmzParamTextFields } from './x-rpg-param2';
 type NewRmmzParam<T extends {
     type: string;
@@ -8,5 +9,10 @@ type NewRmmzParam<T extends {
 }> = T & Partial<RmmzParamTextFields>;
 export type NewRmmzParam_Boolean = NewRmmzParam<RmmzParamCore_Boolean>;
 export type NewRmmzParam_Number = NewRmmzParam<RmmzParamCore_Number>;
+export type NewRmmzParam_String = NewRmmzParam<RmmzParamCore_String>;
 export type NewRmmzParam_DataId = NewRmmzParam<RmmzParamCore_DataId<DataKindUnion>>;
+export type NewRmmzParam_Unknown<T extends number | string | boolean = number> = NewRmmzParam<{
+    type: "";
+    default: T;
+}>;
 export {};
