@@ -80,5 +80,5 @@ export interface KindOfFileArray extends KindBase {
 
 export interface KindOfStructRef extends KindBase {
   kind: "struct_ref";
-  structName: string;
+  ref: string;
 }
