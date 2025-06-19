@@ -4,7 +4,10 @@ import type {
   SourceId_SystemVariables,
 } from "@RpgTypes/system";
 import type { SourceIdentifier } from "src/namedItemSource";
-import type { DataKindUnion } from "./rpgDataTypesNames";
+import type {
+  DataKind_SystemUnion,
+  DataKind_RpgUnion,
+} from "./rpgDataTypesNames";
 
 const DATA = 0 as const;
 const SYSTEM_V = 1 as const;
@@ -23,7 +26,7 @@ const KIND_TABLE = {
   troop: DATA,
   enemy: DATA,
   common_event: DATA,
-} as const satisfies Record<DataKindUnion, number>;
+} as const satisfies Record<DataKind_RpgUnion | DataKind_SystemUnion, number>;
 
 const MODULE_TABLE = ["data", "system", "system"] as const;
 
@@ -41,7 +44,7 @@ export type SourceId_ValidRmmzData =
 export const lookupKind = (
   kind: string
 ): SourceId_ValidRmmzData | SourceId_RmmzUnknown => {
-  const index = KIND_TABLE[kind as DataKindUnion];
+  const index = KIND_TABLE[kind as DataKind_RpgUnion];
   if (index === undefined) {
     return {
       author: "rmmz",
@@ -67,10 +70,10 @@ export const lookupKind = (
 export const isRmmzDataKind = (
   sourceId: SourceIdentifier
 ): sourceId is SourceId_ValidRmmzData => {
-  const xxx = lookupKind(sourceId.kind);
+  const lookuped = lookupKind(sourceId.kind);
   return (
-    xxx.author === sourceId.author &&
-    xxx.module === sourceId.module &&
-    xxx.kind === sourceId.kind
+    lookuped.author === sourceId.author &&
+    lookuped.module === sourceId.module &&
+    lookuped.kind === sourceId.kind
   );
 };

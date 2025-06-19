@@ -1,3 +1,8 @@
+import type {
+  DataKind_RpgUnion,
+  DataKind_SystemUnion,
+} from "./rpgData/rpgDataTypesNames";
+
 export interface KindBase {
   kind: string;
   desc?: string;
@@ -5,25 +10,12 @@ export interface KindBase {
   parent?: string;
 }
 
-export type DataKind_Rpg =
-  | "actor"
-  | "weapon"
-  | "armor"
-  | "skill"
-  | "item"
-  | "enemy"
-  | "troop"
-  | "state"
-  | "class";
-
-export type DataKind_System = "switch" | "variable";
-
 export interface KindOfRpgDataId extends KindBase {
-  kind: DataKind_Rpg;
+  kind: DataKind_RpgUnion;
   default: number;
 }
 export interface KindOfRpgDataIdArray extends KindBase {
-  kind: `${DataKind_Rpg}[]`;
+  kind: `${DataKind_RpgUnion}[]`;
   default: number[];
 }
 
@@ -71,7 +63,7 @@ export interface KindOfId extends KindBase {
 }
 
 export interface KindOfSystemDataId extends KindBase {
-  kind: DataKind_System;
+  kind: DataKind_SystemUnion;
   default: number;
 }
 
