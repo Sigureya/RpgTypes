@@ -4,12 +4,20 @@ import { compile } from "./compile";
 import type { CompileLogItem } from "./kinds/compileLog";
 import type { PluginTitles } from "./kinds/compileOption";
 import type { KindOfStruct } from "./kinds/struct2";
-import type { Person, School } from "./mockType";
 
 const titles: PluginTitles = {
   moduleName: "moduleName",
   author: "author",
 };
+interface Person {
+  name: string;
+  age: number;
+}
+
+interface School {
+  name: string;
+  students: Person[];
+}
 
 describe("person", () => {
   const personStruct = {
