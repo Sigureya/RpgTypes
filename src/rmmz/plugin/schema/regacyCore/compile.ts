@@ -36,20 +36,6 @@ interface ResultType {
   schema: AnySchema;
   logs: CompileLogItem[];
 }
-export const compile = <T extends object>(
-  { moduleName }: PluginTitles,
-  struct: KindOfStruct<Record<string, StructParam>>,
-  typeDefs: Record<string, KindOfStruct<object>>
-): CompileResult<T> => {
-  const ctx: CompileContext = { moduleName, typeDefs };
-  const { schema, logs } = compileStructDetail(
-    `${moduleName}.${struct.struct.structName}`,
-    struct.struct.structName,
-    struct.struct.params,
-    ctx
-  );
-  return { schema, logs };
-};
 
 export const compilePluginStruct = <T extends object>(
   { moduleName }: PluginTitles,
