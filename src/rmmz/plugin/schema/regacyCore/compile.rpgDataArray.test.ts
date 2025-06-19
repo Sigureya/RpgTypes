@@ -1,7 +1,7 @@
 import { describe, test, expect } from "vitest";
 import type { JSONSchemaType } from "ajv";
-import { compile, compilePluginStruct } from "./compile";
-import type { KindOfStruct, PluginStruct } from "./kinds";
+import { compilePluginStruct } from "./compile";
+import type { PluginStruct } from "./kinds";
 import type { PluginTitles } from "./kinds/compileOption";
 
 interface AllDataArray {
