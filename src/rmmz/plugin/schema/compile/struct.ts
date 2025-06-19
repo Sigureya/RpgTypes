@@ -57,15 +57,15 @@ export const compilePluginCommand = <T extends object>(
 };
 
 export const compilePluginStruct = <T extends object>(
-  { moduleName }: PluginTitles,
+  tiles: PluginTitles,
   { params, struct: structName }: PluginStruct<T>,
   options: Partial<PluginCompileOptions>
 ): CompileResult<T> => {
   return compileStructDetail(
-    `${moduleName}.${structName}`,
+    `${tiles.moduleName}.${structName}`,
     structName,
     params,
-    { moduleName, options }
+    { moduleName: tiles.moduleName, options }
   );
 };
 
@@ -116,7 +116,7 @@ const reduceProps = (
   );
 };
 
-const compileField = <T extends object>(
+const compileField = (
   path: string,
   data: StructParam,
   ctx: CompileContext
