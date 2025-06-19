@@ -5,9 +5,14 @@ export type PluginSchemaType<
   T,
   path extends string = "",
   KnowTypes = never
-> = T extends null | undefined
+> = T extends null
   ? {
-      kind: "null or undefined is Forbidden";
+      kind: "null is Forbidden";
+      default?: null;
+    }
+  : T extends undefined
+  ? {
+      kind: "undefined is Forbidden";
     }
   : T extends boolean
   ? KindOfBoolean & { bool: true }
@@ -65,10 +70,11 @@ const boolArray: PluginSchemaType<boolean[]> = {
 };
 
 const nullT: PluginSchemaType<null> = {
-  kind: "null or undefined is Forbidden",
+  kind: "null is Forbidden",
+  default: null,
 };
 const undefinedT: PluginSchemaType<undefined> = {
-  kind: "null or undefined is Forbidden",
+  kind: "undefined is Forbidden",
 };
 
 interface Person {
