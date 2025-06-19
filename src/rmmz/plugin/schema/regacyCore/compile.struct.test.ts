@@ -1,9 +1,9 @@
 import { describe, test, expect } from "vitest";
 import type { JSONSchemaType } from "ajv";
-import { compile } from "./compile";
+import { compilePluginStruct } from "./compile";
 import type { CompileLogItem } from "./kinds/compileLog";
 import type { PluginTitles } from "./kinds/compileOption";
-import type { KindOfStruct } from "./kinds/struct2";
+import type { PluginStruct } from "./kinds/struct2";
 
 const titles: PluginTitles = {
   moduleName: "moduleName",
@@ -21,15 +21,12 @@ interface School {
 
 describe("person", () => {
   const personStruct = {
-    kind: "struct",
-    struct: {
-      structName: "Person",
-      params: {
-        name: { kind: "string", default: "bob" },
-        age: { kind: "number", default: 0 },
-      },
+    structName: "Person",
+    params: {
+      name: { kind: "string", default: "bob" },
+      age: { kind: "number", default: 0 },
     },
-  } as const satisfies KindOfStruct<Person>;
+  } as const satisfies PluginStruct<Person>;
   const expected: JSONSchemaType<Person> = {
     title: "Person",
     type: "object",
@@ -40,7 +37,7 @@ describe("person", () => {
     required: ["name", "age"],
     additionalProperties: false,
   };
-  const result = compile(titles, personStruct, {});
+  const result = compilePluginStruct(titles, personStruct, {});
   test("schema", () => {
     expect(result.schema).toEqual(expected);
   });
@@ -58,26 +55,23 @@ describe("person", () => {
 
 describe("school", () => {
   const mockSchoolStruct = {
-    kind: "struct",
-    struct: {
-      structName: "School",
-      params: {
-        name: { kind: "string", default: "My School" },
+    structName: "School",
+    params: {
+      name: { kind: "string", default: "My School" },
 
-        students: {
-          default: [],
-          kind: "struct[]",
-          struct: {
-            structName: "Person",
-            params: {
-              name: { kind: "string", default: "bob" },
-              age: { kind: "number", default: 0 },
-            },
+      students: {
+        default: [],
+        kind: "struct[]",
+        struct: {
+          structName: "Person",
+          params: {
+            name: { kind: "string", default: "bob" },
+            age: { kind: "number", default: 0 },
           },
         },
       },
     },
-  } as const satisfies KindOfStruct<School>;
+  } as const satisfies PluginStruct<School>;
   const mockSchoolSchema: JSONSchemaType<School> = {
     type: "object",
     title: "School",
@@ -102,7 +96,7 @@ describe("school", () => {
     additionalProperties: false,
   };
   test("schema", () => {
-    const resultSchool = compile(titles, mockSchoolStruct, {});
+    const resultSchool = compilePluginStruct(titles, mockSchoolStruct, {});
     expect(resultSchool.schema).toEqual(mockSchoolSchema);
   });
 });
