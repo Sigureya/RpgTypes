@@ -1,12 +1,18 @@
+import { describe, test, expect } from "vitest";
 import type { JSONSchemaType } from "ajv";
-import type { KindOfNumber } from "./core/kinds/kinds";
-import type { PluginCommand } from "./core/kinds/plugin";
+import type {
+  PluginCommand,
+  PluginStruct,
+  StructParam,
+} from "./core/kinds/plugin";
 import { compilePlugin } from "./plugin";
-
-interface Food {
-  name: string;
-  price: number;
+import { compilePluginStruct } from "./struct";
+interface PluginXX {
+  commands: PluginCommand<object>[];
+  structs: PluginStruct<object>[];
+  params: Record<string, StructParam>;
 }
+
 interface Drink {
   name: string;
   id: number;
@@ -24,39 +30,49 @@ interface Command_CheckDrinkStock {
   variable: number;
 }
 
-const openTrade: PluginCommand<Comamnd_OpenTrade> = {
-  command: "OpenTrade",
-  args: {
-    items: {
-      kind: "struct[]",
-      struct: {
-        structName: "Drink",
-        params: {
-          name: { kind: "string" },
-          price: { kind: "number" },
-          alcohol: { kind: "boolean" },
-          id: { kind: "number" },
+const mockPlugin = {
+  commands: [
+    {
+      command: "OpenTrade",
+      args: {
+        items: {
+          kind: "struct[]",
+          struct: {
+            structName: "Drink",
+            params: {
+              id: { kind: "number" },
+              name: { kind: "string" },
+              alcohol: { kind: "boolean" },
+              price: { kind: "number" },
+            },
+          },
+          default: [],
+        },
+        message: {
+          kind: "string",
+          default: "Welcome to the trade!",
         },
       },
-      default: [],
-    },
-    message: {
+    } satisfies PluginCommand<Comamnd_OpenTrade>,
+    {
+      command: "CheckDrinkStock",
+      args: {
+        drinkId: { kind: "item", default: 0 },
+        amount: { kind: "number", default: 1 },
+        variable: { kind: "variable", default: 0 },
+      },
+    } satisfies PluginCommand<Command_CheckDrinkStock>,
+  ],
+  structs: [],
+  params: {
+    checkStockText: {
       kind: "string",
-      default: "Welcome to the trade!",
+      text: "Check Drink Stock",
+      default: "Check the stock of a drink",
+      desc: "Check the stock of a drink",
     },
   },
-};
-
-const checkStock: PluginCommand<Command_CheckDrinkStock> = {
-  command: "CheckDrinkStock",
-  args: {
-    drinkId: { kind: "item", default: 0 },
-    amount: { kind: "number", default: 1 },
-    variable: { kind: "variable", default: 0 },
-  },
-};
-
-const params = {};
+} satisfies PluginXX;
 
 const mockSchema = {
   //  $schema: "https://json-schema.org/draft/2020-12/schema",
@@ -66,17 +82,17 @@ const mockSchema = {
         Drink: {
           type: "object",
           properties: {
-            id: { type: "number" },
+            id: { type: "integer" },
             name: { type: "string" },
             alcohol: { type: "boolean" },
-            price: { type: "number" },
+            price: { type: "integer" },
           },
           required: ["id", "name", "alcohol", "price"],
           additionalProperties: false,
         } satisfies JSONSchemaType<Drink>,
       },
       commands: {
-        openTrade: {
+        OpenTrade: {
           type: "object",
           properties: {
             items: {
@@ -92,70 +108,53 @@ const mockSchema = {
         } as const,
       },
       params: {
-        checkStock: {
+        checkStockText: {
           type: "string",
-          description: "Check the stock of a drink",
-          title: "Check Drink Stock",
-          default: "CheckDrinkStock",
+          description: mockPlugin.params.checkStockText.desc,
+          title: mockPlugin.params.checkStockText.text,
+          default: mockPlugin.params.checkStockText,
         } satisfies JSONSchemaType<string>,
-        alcohol: {
-          Sake: {
-            type: "object",
-            properties: {
-              type: { const: "sake" },
-              percent: { type: "number" },
-            },
-            required: ["type", "percent"],
-            additionalProperties: false,
-          },
-        },
-        juice: {
-          OrangeJuice: {
-            type: "object",
-            properties: {
-              type: { const: "orange_juice" },
-              sugarFree: { type: "boolean" },
-            },
-            required: ["type", "sugarFree"],
-            additionalProperties: false,
-          },
-        },
-        tea: {
-          GreenTea: {
-            type: "object",
-            properties: {
-              type: { const: "green_tea" },
-              temperature: { type: "number" },
-            },
-            required: ["type", "temperature"],
-            additionalProperties: false,
-          },
-        },
       },
     },
   },
-  type: "object",
-  properties: {
-    item: {
-      oneOf: [
-        { $ref: "#/$defs/plugin/vegetable/Carrot" },
-        { $ref: "#/$defs/plugin/grain/Rice" },
-        { $ref: "#/$defs/plugin/drink/alcohol/Sake" },
-        { $ref: "#/$defs/plugin/drink/juice/OrangeJuice" },
-        { $ref: "#/$defs/plugin/drink/tea/GreenTea" },
-      ],
-    },
-  },
-  required: ["item"],
 } as const;
 
-compilePlugin({
-  commands: [openTrade, checkStock] satisfies PluginCommand<object>[],
-  params: {
-    aa: {
-      kind: "number",
-      default: 0,
-    } satisfies KindOfNumber,
-  },
-  structs: [],
+// describe("Plugin Schema Compilation", () => {
+//   const result = compilePlugin(mockPlugin);
+//   test("should compile plugin schema correctly", () => {
+//     expect(result.schema).toEqual(mockSchema);
+//   });
+// });
+
+describe("", () => {
+  const result = compilePluginStruct<Drink>(
+    {
+      moduleName: "plugin",
+      author: "Author",
+    },
+    {
+      structName: "Drink",
+      params: {
+        name: { kind: "string", default: "Default Drink" },
+        price: { kind: "number", default: 100 },
+        alcohol: { kind: "boolean", default: false },
+        id: { kind: "number", default: 0 },
+      },
+    },
+    {}
+  );
+  test("", () => {
+    expect(result.schema).toEqual({
+      type: "object",
+      title: "Drink",
+      properties: {
+        name: { type: "string", default: "Default Drink" },
+        price: { type: "integer", default: 100 },
+        alcohol: { type: "boolean", default: false },
+        id: { type: "integer", default: 0 },
+      },
+      required: ["name", "price", "alcohol", "id"],
+      additionalProperties: false,
+    } satisfies JSONSchemaType<Drink>);
+  });
 });
