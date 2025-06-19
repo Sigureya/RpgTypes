@@ -10,7 +10,6 @@ import type {
   PluginCommand,
   PluginStruct,
   StructParam,
-  KindOfStruct,
   KindOfStructArray,
 } from "./core/kinds/plugin";
 import {
@@ -28,7 +27,7 @@ import {
 } from "./primitive";
 
 type AnySchema =
-  | true
+  | {}
   | JSONSchemaType<number>
   | JSONSchemaType<string>
   | JSONSchemaType<boolean>
@@ -38,7 +37,7 @@ type AnySchema =
   | JSONSchemaType<object[]>
   | { $ref: string };
 
-interface ResultType {
+interface SchemaAndLog {
   schema: AnySchema;
   logs: CompileLogItem[];
 }
@@ -96,22 +95,35 @@ interface PropsAccumulated {
   logs: CompileLogItem[];
 }
 
+const accumulateProp = (
+  acc: PropsAccumulated,
+  [key, value]: [string, StructParam],
+  path: string,
+  ctx: CompileContext
+): PropsAccumulated => {
+  const currentPath: string = `${path}.${key}`;
+  const field: SchemaAndLog = compileField(currentPath, value, ctx);
+  return {
+    properties: { ...acc.properties, [key]: field.schema },
+    logs: [
+      ...acc.logs,
+      ...field.logs,
+      {
+        path: currentPath,
+        data: value,
+        schema: field.schema,
+      } satisfies CompileLogItem,
+    ],
+  };
+};
+
 const reduceProps = (
   props: Record<string, StructParam>,
   path: string,
   ctx: CompileContext
 ): PropsAccumulated => {
   return Object.entries<StructParam>(props).reduce<PropsAccumulated>(
-    ({ properties: accSchema, logs: accLogs }, [key, value]) => {
-      const currentPath: string = `${path}.${key}`;
-      const field = compileField(currentPath, value, ctx);
-      return {
-        properties: field.schema
-          ? { ...accSchema, [key]: field.schema }
-          : { ...accSchema },
-        logs: [...accLogs, ...field.logs, { path: currentPath, data: value }],
-      };
-    },
+    (acc, entry) => accumulateProp(acc, entry, path, ctx),
     { properties: {}, logs: [] } satisfies PropsAccumulated
   );
 };
@@ -120,7 +132,7 @@ const compileField = (
   path: string,
   data: StructParam,
   ctx: CompileContext
-): ResultType => {
+): SchemaAndLog => {
   if (data.kind === "struct") {
     return makeStructKind(path, data, ctx);
   }
@@ -132,15 +144,15 @@ const compileField = (
 
 const makeStructKind = <T extends object>(
   path: string,
-  annotation: KindOfStruct<T>,
+  annotation: PluginStruct<T>,
   ctx: CompileContext
-): ResultType => {
+): SchemaAndLog => {
   return compileStructDetail(
     path,
     annotation.struct,
     annotation.params,
     ctx
-  ) as unknown as ResultType;
+  ) as unknown as SchemaAndLog;
   // 再帰構造のためasが唯一の解となる
 };
 
@@ -148,11 +160,10 @@ const makeStructArrayKind = <T extends object>(
   path: string,
   annotation: KindOfStructArray<T>,
   ctx: CompileContext
-): ResultType => {
-  const item: ResultType = makeStructKind(
+): SchemaAndLog => {
+  const item: SchemaAndLog = makeStructKind(
     `${path}[]`,
     {
-      kind: "struct",
       params: annotation.params,
       struct: annotation.struct,
     },
@@ -215,6 +226,6 @@ const compilePrimitive = (
     case "struct_ref":
       return makeStructRef(data);
     default:
-      return true;
+      return {};
   }
 };

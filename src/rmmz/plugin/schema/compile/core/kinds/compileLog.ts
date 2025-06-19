@@ -7,10 +7,10 @@ export interface CompileResult<T extends object> {
   logs: CompileLogItem[];
 }
 
-export interface CompileLogItem {
+export interface CompileLogItem<Data extends StructParam = StructParam> {
   path: string;
-  data: StructParam;
-  schema?: Schema;
+  data: Data;
+  schema: Schema | {};
 }
 
 // const mapCompileLogs =(list : CompileLogItem[]): Map<string, StructParam> => {
