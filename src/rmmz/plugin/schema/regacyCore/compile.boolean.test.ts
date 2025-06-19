@@ -1,5 +1,5 @@
 import { describe, test, expect } from "vitest";
-import type { JSONSchemaType } from "ajv";
+import { Ajv, type JSONSchemaType } from "ajv";
 import { compilePluginStruct } from "./compile";
 import type { PluginStruct } from "./kinds";
 import type { PluginTitles } from "./kinds/compileOption";
@@ -45,11 +45,29 @@ describe("compilePluginStruct - boolean", () => {
     test("schema", () => {
       expect(resultBool.schema).toEqual(expectedBoolSchema);
     });
-    test("log data", () => {
-      expect(resultBool.logs[0].data).toBe(mockBoolStructFullset.params.bool);
+    describe("logs", () => {
+      test("log data", () => {
+        expect(resultBool.logs[0].data).toBe(mockBoolStructFullset.params.bool);
+      });
+      test("log path", () => {
+        expect(resultBool.logs[0].path).toBe("moduleName.Bool.bool");
+      });
     });
-    test("log path", () => {
-      expect(resultBool.logs[0].path).toBe("moduleName.Bool.bool");
+    describe("ajv validation", () => {
+      const ajv = new Ajv({ strict: true });
+      const validate = ajv.compile(resultBool.schema);
+      test("", () => {
+        expect({ bool: true } satisfies MockBoolean).toSatisfy(validate);
+      });
+      test("", () => {
+        expect({ bool: false } satisfies MockBoolean).toSatisfy(validate);
+      });
+      test("invalid value", () => {
+        expect({ bool: "true" }).not.toSatisfy(validate);
+      });
+      test("invalid type", () => {
+        expect({ bool: 1 }).not.toSatisfy(validate);
+      });
     });
   });
 });
