@@ -161,6 +161,8 @@ const compilePrimitive = (
     case "item[]":
     case "enemy[]":
     case "state[]":
+    case "class[]":
+    case "troop[]":
       return makeArrayField(data, "integer");
     case "number":
       return makeNumberField(data, ctx);
@@ -171,6 +173,8 @@ const compilePrimitive = (
     case "item":
     case "enemy":
     case "state":
+    case "class":
+    case "troop":
       return makeIdField(data);
     case "boolean":
       return makeBooleanField(data);
