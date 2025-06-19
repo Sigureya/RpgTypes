@@ -37,14 +37,12 @@ const mockPlugin = {
       args: {
         items: {
           kind: "struct[]",
-          struct: {
-            structName: "Drink",
-            params: {
-              id: { kind: "number" },
-              name: { kind: "string" },
-              alcohol: { kind: "boolean" },
-              price: { kind: "number" },
-            },
+          structName: "Drink",
+          params: {
+            id: { kind: "number" },
+            name: { kind: "string" },
+            alcohol: { kind: "boolean" },
+            price: { kind: "number" },
           },
           default: [],
         },

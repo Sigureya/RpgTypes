@@ -88,17 +88,15 @@ const structRef: PluginSchemaType<Person> = {
 
 const struct: PluginSchemaType<Person> = {
   kind: "struct",
-  struct: {
-    structName: "StructName",
-    params: {
-      age: {
-        kind: "number",
-        default: 0,
-      },
-      name: {
-        kind: "string",
-        default: "",
-      },
+  structName: "StructName",
+  params: {
+    age: {
+      kind: "number",
+      default: 0,
+    },
+    name: {
+      kind: "string",
+      default: "",
     },
   },
 };

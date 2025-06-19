@@ -62,12 +62,10 @@ describe("school", () => {
       students: {
         default: [],
         kind: "struct[]",
-        struct: {
-          structName: "Person",
-          params: {
-            name: { kind: "string", default: "bob" },
-            age: { kind: "number", default: 0 },
-          },
+        structName: "Person",
+        params: {
+          name: { kind: "string", default: "bob" },
+          age: { kind: "number", default: 0 },
         },
       },
     },
