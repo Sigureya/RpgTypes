@@ -20,7 +20,7 @@ const titles: PluginTitles = {
 
 describe("alldataArray", () => {
   const allDataArrayStruct = {
-    structName: "AllDataArray",
+    struct: "AllDataArray",
     params: {
       actor: { kind: "actor[]", default: [1, 2, 3] },
       weapons: { kind: "weapon[]", default: [1, 2, 3] },

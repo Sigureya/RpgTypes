@@ -19,7 +19,7 @@ const titles: PluginTitles = {
 
 describe("compilePluginStruct -numbers", () => {
   const mockNumbersStruct = {
-    structName: "Numbers",
+    struct: "Numbers",
     params: {
       floating: { kind: "number", default: 0.5, digit: 2 },
       integer1: { kind: "number", default: 42 },

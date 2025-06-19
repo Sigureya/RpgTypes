@@ -19,7 +19,7 @@ const titles: PluginTitles = {
 
 describe("stringTypes", () => {
   const stringTypesStruct = {
-    structName: "StringTypes",
+    struct: "StringTypes",
     params: {
       select: {
         kind: "select",

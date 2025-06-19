@@ -21,7 +21,7 @@ interface School {
 
 describe("person", () => {
   const personStruct = {
-    structName: "Person",
+    struct: "Person",
     params: {
       name: { kind: "string", default: "bob" },
       age: { kind: "number", default: 0 },
@@ -55,14 +55,14 @@ describe("person", () => {
 
 describe("school", () => {
   const mockSchoolStruct = {
-    structName: "School",
+    struct: "School",
     params: {
       name: { kind: "string", default: "My School" },
 
       students: {
         default: [],
         kind: "struct[]",
-        structName: "Person",
+        struct: "Person",
         params: {
           name: { kind: "string", default: "bob" },
           age: { kind: "number", default: 0 },

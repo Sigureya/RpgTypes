@@ -21,7 +21,7 @@ const titles: PluginTitles = {
 
 describe("alldata - with text", () => {
   const allDataStruct = {
-    structName: "AllData",
+    struct: "AllData",
     params: {
       actor: {
         kind: "actor",
@@ -97,7 +97,7 @@ describe("alldata - with text", () => {
 });
 describe("allData - no text", () => {
   const allDataStruct = {
-    structName: "AllData",
+    struct: "AllData",
     params: {
       actor: {
         kind: "actor",

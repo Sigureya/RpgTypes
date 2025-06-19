@@ -15,7 +15,7 @@ const titles: PluginTitles = {
 describe("compilePluginStruct - boolean", () => {
   describe("fullset", () => {
     const mockBoolStructFullset = {
-      structName: "Bool",
+      struct: "Bool",
       params: {
         bool: {
           kind: "boolean",
