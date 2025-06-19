@@ -35,7 +35,7 @@ export type StructParam =
 export interface KindOfStructArray<T extends object> extends PluginStruct<T> {
   kind: "struct[]";
   default: object[];
-  structName: string;
+  struct: string;
   params: {
     [K in keyof T]: StructParam;
   };
@@ -44,7 +44,7 @@ export interface KindOfStructArray<T extends object> extends PluginStruct<T> {
 // 構造体アノテーション
 export interface KindOfStruct<T extends object> extends PluginStruct<T> {
   kind: "struct";
-  structName: string;
+  struct: string;
   params: {
     [K in keyof T]: StructParam;
   };
@@ -52,7 +52,7 @@ export interface KindOfStruct<T extends object> extends PluginStruct<T> {
 
 // 構造体本体
 export interface PluginStruct<T extends object> {
-  structName: string;
+  struct: string;
   params: {
     [K in keyof T]: StructParam;
   };

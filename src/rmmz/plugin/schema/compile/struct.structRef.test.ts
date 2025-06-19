@@ -20,7 +20,7 @@ const titles: PluginTitles = {
 
 describe("family", () => {
   const familyStruct = {
-    structName: "Family",
+    struct: "Family",
     params: {
       father: { kind: "struct_ref", ref: "Person" },
       mother: { kind: "struct_ref", ref: "Person" },

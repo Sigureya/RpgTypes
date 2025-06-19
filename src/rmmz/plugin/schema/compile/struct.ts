@@ -58,7 +58,7 @@ export const compilePluginCommand = <T extends object>(
 
 export const compilePluginStruct = <T extends object>(
   { moduleName }: PluginTitles,
-  { params, structName }: PluginStruct<T>,
+  { params, struct: structName }: PluginStruct<T>,
   options: Partial<PluginCompileOptions>
 ): CompileResult<T> => {
   return compileStructDetail(
@@ -137,7 +137,7 @@ const makeStructKind = <T extends object>(
 ): ResultType => {
   return compileStructDetail(
     path,
-    annotation.structName,
+    annotation.struct,
     annotation.params,
     ctx
   ) as unknown as ResultType;
@@ -154,7 +154,7 @@ const makeStructArrayKind = <T extends object>(
     {
       kind: "struct",
       params: annotation.params,
-      structName: annotation.structName,
+      struct: annotation.struct,
     },
     ctx
   );

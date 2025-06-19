@@ -37,7 +37,7 @@ const mockPlugin = {
       args: {
         items: {
           kind: "struct[]",
-          structName: "Drink",
+          struct: "Drink",
           params: {
             id: { kind: "number" },
             name: { kind: "string" },
@@ -131,7 +131,7 @@ describe("", () => {
       author: "Author",
     },
     {
-      structName: "Drink",
+      struct: "Drink",
       params: {
         name: { kind: "string", default: "Default Drink" },
         price: { kind: "number", default: 100 },
