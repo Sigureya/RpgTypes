@@ -59,6 +59,8 @@ export interface PluginStruct<T extends object> {
 
 export interface PluginCommand<T extends object> {
   command: string;
+  desc?: string;
+  text?: string;
   args: {
     [K in keyof T]: StructParam;
   };
