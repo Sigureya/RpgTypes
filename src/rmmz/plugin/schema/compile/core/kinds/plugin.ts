@@ -32,7 +32,7 @@ export type StructParam =
   | KindOfStructArray<object>
   | KindOfStructRef;
 
-export interface KindOfStructArray<T extends object> {
+export interface KindOfStructArray<T extends object> extends PluginStruct<T> {
   kind: "struct[]";
   default: object[];
   structName: string;
@@ -42,7 +42,7 @@ export interface KindOfStructArray<T extends object> {
 }
 
 // 構造体アノテーション
-export interface KindOfStruct<T extends object> {
+export interface KindOfStruct<T extends object> extends PluginStruct<T> {
   kind: "struct";
   structName: string;
   params: {
