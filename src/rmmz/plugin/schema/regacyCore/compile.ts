@@ -104,18 +104,10 @@ const compileField = (
   ctx: CompileContext
 ): ResultType => {
   if (data.kind === "struct") {
-    const { schema, logs } = makeStructKind(path, data, ctx);
-    return {
-      schema,
-      logs,
-    };
+    return makeStructKind(path, data, ctx);
   }
   if (data.kind === "struct[]") {
-    const { schema, logs } = makeStructArrayKind(path, data, ctx);
-    return {
-      schema,
-      logs,
-    };
+    return makeStructArrayKind(path, data, ctx);
   }
   return { schema: compilePrimitive(data), logs: [] };
 };
