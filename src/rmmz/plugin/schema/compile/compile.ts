@@ -1,26 +1,30 @@
 import type { JSONSchemaType } from "ajv";
+import type { CompileLogItem, CompileResult } from "./core/kinds/compileLog";
 import type {
-  KindOfBoolean,
-  KindOfNumber,
-  KindOfNumberArray,
-  KindOfRpgDataId,
-  KindOfSelect,
+  PluginCompileOptions,
+  PluginTitles,
+} from "./core/kinds/compileOption";
+import { PLUGIN_COMMAND } from "./core/kinds/constants";
+import type {
+  KindBase,
   KindOfString,
+  KindOfSelect,
+  KindOfNumberArray,
+  KindOfNumber,
+  KindOfRpgDataId,
   KindOfSystemDataId,
+  KindOfBoolean,
   KindOFCombo,
   KindOfFile,
   KindOfStructRef,
-  KindBase,
-  KindOfStructArray,
-  KindOfStruct,
+} from "./core/kinds/kinds";
+import type {
+  PluginCommand,
   PluginStruct,
   StructParam,
-  CompileLogItem,
-  CompileResult,
-  PluginCommand,
-} from "./kinds";
-import type { PluginCompileOptions, PluginTitles } from "./kinds/compileOption";
-import { PLUGIN_COMMAND } from "./kinds/constants";
+  KindOfStruct,
+  KindOfStructArray,
+} from "./core/kinds/plugin";
 
 type CompileContext = {
   moduleName: string;
