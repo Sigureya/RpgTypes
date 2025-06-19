@@ -58,12 +58,12 @@ interface X_Param {
 
 export const compilePluginCommand = <T extends object>(
   { moduleName }: PluginTitles,
-  { args, command: commandName }: PluginCommand<T>,
+  { args, command }: PluginCommand<T>,
   options: Partial<PluginCompileOptions>
 ): CompileResult<T> => {
   return compileStructDetail(
-    `${moduleName}.${PLUGIN_COMMAND}.${commandName}`,
-    commandName,
+    `${moduleName}.${PLUGIN_COMMAND}.${command}`,
+    command,
     args,
     { moduleName, options }
   );
