@@ -29,24 +29,25 @@ export type StructParam =
   | KindOfFile
   | KindOfFileArray
   | KindOfStruct<object> // ネスト構造体対応
-  | CoreStruct
-  | KindOfStructArray
+  | KindOfStructArray<object>
   | KindOfStructRef;
 
-interface CoreStruct {
-  kind: "struct";
-  struct: PluginStruct<object>;
+export interface KindOfStructArray<T extends object> extends PluginStruct<T> {
+  kind: "struct[]";
+  default: object[];
+  structName: string;
+  params: {
+    [K in keyof T]: StructParam;
+  };
 }
 
-export interface KindOfStructArray {
-  kind: "struct[]";
-  struct: PluginStruct<object>;
-  default: object[];
-}
 // 構造体アノテーション
-export interface KindOfStruct<T extends object> {
+export interface KindOfStruct<T extends object> extends PluginStruct<T> {
   kind: "struct";
-  struct: PluginStruct<T>;
+  structName: string;
+  params: {
+    [K in keyof T]: StructParam;
+  };
 }
 
 // 構造体本体

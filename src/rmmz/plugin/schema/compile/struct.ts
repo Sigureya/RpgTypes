@@ -116,7 +116,7 @@ const reduceProps = (
   );
 };
 
-const compileField = (
+const compileField = <T extends object>(
   path: string,
   data: StructParam,
   ctx: CompileContext
@@ -137,21 +137,25 @@ const makeStructKind = <T extends object>(
 ): ResultType => {
   return compileStructDetail(
     path,
-    annotation.struct.structName,
-    annotation.struct.params,
+    annotation.structName,
+    annotation.params,
     ctx
   ) as unknown as ResultType;
   // 再帰構造のためasが唯一の解となる
 };
 
-const makeStructArrayKind = (
+const makeStructArrayKind = <T extends object>(
   path: string,
-  annotation: KindOfStructArray,
+  annotation: KindOfStructArray<T>,
   ctx: CompileContext
 ): ResultType => {
   const item: ResultType = makeStructKind(
     `${path}[]`,
-    { kind: "struct", struct: annotation.struct },
+    {
+      kind: "struct",
+      params: annotation.params,
+      structName: annotation.structName,
+    },
     ctx
   );
   return {
