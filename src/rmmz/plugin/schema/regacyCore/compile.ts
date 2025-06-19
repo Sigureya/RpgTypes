@@ -12,10 +12,13 @@ import type {
   KindOfStructRef,
   KindBase,
   KindOfStructArray,
+  KindOfStruct,
+  PluginStruct,
+  StructParam,
+  CompileLogItem,
+  CompileResult,
 } from "./kinds";
-import type { CompileLogItem, CompileResult } from "./kinds/compileLog";
 import type { PluginTitles } from "./kinds/compileOption";
-import type { KindOfStruct, StructParam, PluginStruct } from "./kinds/struct2";
 
 type CompileContext = {
   moduleName: string;
@@ -42,13 +45,12 @@ export const compilePluginStruct = <T extends object>(
   { params, structName }: PluginStruct<T>,
   typeDefs: Record<string, KindOfStruct<object>>
 ): CompileResult<T> => {
-  const { schema, logs } = compileStructDetail(
+  return compileStructDetail(
     `${moduleName}.${structName}`,
     structName,
     params,
     { moduleName, typeDefs }
   );
-  return { schema, logs };
 };
 
 // --- メイン処理 ---
