@@ -43,13 +43,15 @@ interface SchemaAndLog {
   logs: CompileLogItem[];
 }
 
+const SEPARATOR = "." as const;
+
 export const compilePluginCommand = <T extends object>(
   titles: PluginMeta,
   { args, command }: PluginCommand<T>,
   options: Partial<PluginCompileOptions>
 ): CompileResult<T> => {
   return compileStructDetail(
-    `${titles.moduleName}.${PLUGIN_COMMAND}.${command}`,
+    `${titles.moduleName}${SEPARATOR}${PLUGIN_COMMAND}.${command}`,
     command,
     args,
     { x: titles, options }
@@ -62,7 +64,7 @@ export const compilePluginStruct = <T extends object>(
   options: Partial<PluginCompileOptions>
 ): CompileResult<T> => {
   return compileStructDetail(
-    `${tiles.moduleName}.${structName}`,
+    `${tiles.moduleName}${SEPARATOR}${structName}`,
     structName,
     params,
     { x: tiles, options }
@@ -96,10 +98,12 @@ interface PropsAccumulated {
   logs: CompileLogItem[];
 }
 
-const sturctName = (param: StructParam): string | undefined => {
+const sturctName = (param: StructParam): string => {
   if (param.kind !== "struct" && param.kind !== "struct[]") {
     return "";
   }
+
+  return param.struct;
 };
 
 const accumulateProp = (
@@ -116,7 +120,7 @@ const accumulateProp = (
       ...acc.logs,
       ...field.logs,
       {
-        structName: value.text ?? "",
+        structName: sturctName(value),
         path: currentPath,
         data: value,
         schema: field.schema,
