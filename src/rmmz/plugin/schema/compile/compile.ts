@@ -25,7 +25,12 @@ import type {
   KindOfStruct,
   KindOfStructArray,
 } from "./core/kinds/plugin";
-import { xparamNumber } from "./core/kinds/x-rpg-param";
+import type { X_RmmzParamBaee } from "./core/kinds/x-rpg-param";
+import {
+  xparamBoolean,
+  xparamDataId,
+  xparamNumber,
+} from "./core/kinds/x-rpg-param";
 
 type CompileContext = {
   moduleName: string;
@@ -45,6 +50,10 @@ type AnySchema =
 interface ResultType {
   schema: AnySchema;
   logs: CompileLogItem[];
+}
+
+interface X_Param {
+  "x-rpg-param": X_RmmzParamBaee;
 }
 
 export const compilePluginCommand = <T extends object>(
@@ -175,9 +184,9 @@ const compilePrimitive = (
     case "state":
     case "class":
     case "troop":
-      return makeIdField(data);
+      return makeIdField(data, ctx);
     case "boolean":
-      return makeBooleanField(data);
+      return makeBooleanField(data, ctx);
     case "struct_ref":
       return makeStructRef(data);
     default:
@@ -262,15 +271,7 @@ const makeNumberField = (data: KindOfNumber, ctx: CompileContext) =>
     type: isIntegerKind(data.digit) ? "integer" : "number",
     ...withDefault(data.default),
     ...withTexts(data),
-    ...(ctx.options.kindData
-      ? (xparamNumber(data) satisfies {
-          "x-rpg-param": {
-            parent?: string;
-            kind: string;
-            data: { digit?: number };
-          };
-        })
-      : {}),
+    ...(ctx.options.kindData ? (xparamNumber(data) satisfies X_Param) : {}),
   } satisfies JSONSchemaType<number>);
 
 const makeNumberArrayField = (data: KindOfNumberArray, ctx: CompileContext) =>
@@ -284,18 +285,24 @@ const makeNumberArrayField = (data: KindOfNumberArray, ctx: CompileContext) =>
     ...(ctx.options.kindData ? xparamNumber(data) : {}),
   } satisfies JSONSchemaType<number[]>);
 
-const makeIdField = (data: KindOfRpgDataId | KindOfSystemDataId) =>
+const makeIdField = (
+  data: KindOfRpgDataId | KindOfSystemDataId,
+
+  ctx: CompileContext
+) =>
   ({
     type: "integer",
     ...withDefault(data.default),
     ...withTexts(data),
+    ...(ctx.options.kindData ? (xparamDataId(data) satisfies X_Param) : {}),
   } satisfies JSONSchemaType<number>);
 
-const makeBooleanField = (data: KindOfBoolean) =>
+const makeBooleanField = (data: KindOfBoolean, ctx: CompileContext) =>
   ({
     type: "boolean",
     ...withDefault(data.default),
     ...withTexts(data),
+    ...(ctx.options.kindData ? (xparamBoolean(data) satisfies X_Param) : {}),
   } satisfies JSONSchemaType<boolean>);
 
 const makeComboField = (data: KindOFCombo) =>
