@@ -95,34 +95,42 @@ interface PropsAccumulated {
   logs: CompileLogItem[];
 }
 
+// ...existing code...
+
+const accumulateProp = (
+  acc: PropsAccumulated,
+  [key, value]: [string, StructParam],
+  path: string,
+  ctx: CompileContext
+): PropsAccumulated => {
+  const currentPath: string = `${path}.${key}`;
+  const field = compileField(currentPath, value, ctx);
+  return {
+    properties: { ...acc.properties, [key]: field.schema },
+    logs: [
+      ...acc.logs,
+      ...field.logs,
+      {
+        path: currentPath,
+        data: value,
+        schema: field.schema,
+      } satisfies CompileLogItem,
+    ],
+  };
+};
+
 const reduceProps = (
   props: Record<string, StructParam>,
   path: string,
   ctx: CompileContext
 ): PropsAccumulated => {
   return Object.entries<StructParam>(props).reduce<PropsAccumulated>(
-    ({ properties: accSchema, logs: accLogs }, [key, value]) => {
-      const currentPath: string = `${path}.${key}`;
-      const field = compileField(currentPath, value, ctx);
-      return {
-        properties: field.schema
-          ? { ...accSchema, [key]: field.schema }
-          : { ...accSchema },
-        logs: [
-          ...accLogs,
-          ...field.logs,
-          {
-            path: currentPath,
-            data: value,
-            schema: field.schema,
-          } satisfies CompileLogItem,
-        ],
-      };
-    },
+    (acc, entry) => accumulateProp(acc, entry, path, ctx),
     { properties: {}, logs: [] } satisfies PropsAccumulated
   );
 };
 
+// ...existing code...
 const compileField = (
   path: string,
   data: StructParam,
