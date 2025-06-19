@@ -1,13 +1,13 @@
 import { describe, test, expect } from "vitest";
 import { Ajv, type JSONSchemaType } from "ajv";
-import type { PluginTitles } from "./core/kinds/compileOption";
+import type { PluginMeta } from "./core/kinds/compileOption";
 import type { PluginStruct } from "./core/kinds/plugin";
 import { compilePluginStruct } from "./struct";
 
 interface MockBoolean {
   bool: boolean;
 }
-const titles: PluginTitles = {
+const titles: PluginMeta = {
   moduleName: "moduleName",
   author: "author",
 };
