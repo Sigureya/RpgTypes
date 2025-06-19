@@ -1,17 +1,4 @@
 import type { JSONSchemaType } from "ajv";
-import {
-  makeArrayField,
-  makeBooleanField,
-  makeComboField,
-  makeFileField,
-  makeIdField,
-  makeNumberArrayField,
-  makeNumberField,
-  makeSelectField,
-  makeStringField,
-  makeStructRef,
-  withDefault,
-} from "./compilePrimitive";
 import type { CompileContext } from "./context";
 import type { CompileLogItem, CompileResult } from "./core/kinds/compileLog";
 import type {
@@ -26,6 +13,19 @@ import type {
   KindOfStruct,
   KindOfStructArray,
 } from "./core/kinds/plugin";
+import {
+  makeArrayField,
+  makeBooleanField,
+  makeComboField,
+  makeFileField,
+  makeIdField,
+  makeNumberArrayField,
+  makeNumberField,
+  makeSelectField,
+  makeStringField,
+  makeStructRef,
+  withDefault,
+} from "./primitive";
 
 type AnySchema =
   | true

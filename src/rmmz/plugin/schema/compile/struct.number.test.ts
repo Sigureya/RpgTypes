@@ -1,8 +1,8 @@
 import { describe, test, expect } from "vitest";
 import type { JSONSchemaType } from "ajv";
-import { compilePluginStruct } from "./compile";
 import type { PluginTitles } from "./core/kinds/compileOption";
 import type { PluginStruct } from "./core/kinds/plugin";
+import { compilePluginStruct } from "./struct";
 interface Numbers {
   floating: number;
   integer1: number;
