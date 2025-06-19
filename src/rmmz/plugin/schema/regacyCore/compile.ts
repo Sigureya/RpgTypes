@@ -17,8 +17,10 @@ import type {
   StructParam,
   CompileLogItem,
   CompileResult,
+  PluginCommand,
 } from "./kinds";
 import type { PluginTitles } from "./kinds/compileOption";
+import { PLUGIN_COMMAND } from "./kinds/constants";
 
 type CompileContext = {
   moduleName: string;
@@ -39,6 +41,19 @@ interface ResultType {
   schema: AnySchema;
   logs: CompileLogItem[];
 }
+
+export const compilePluginCommand = <T extends object>(
+  { moduleName }: PluginTitles,
+  { args, commandName }: PluginCommand<T>,
+  typeDefs: Record<string, KindOfStruct<object>>
+): CompileResult<T> => {
+  return compileStructDetail(
+    `${moduleName}.${PLUGIN_COMMAND}.${commandName}`,
+    commandName,
+    args,
+    { moduleName, typeDefs }
+  );
+};
 
 export const compilePluginStruct = <T extends object>(
   { moduleName }: PluginTitles,
