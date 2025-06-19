@@ -119,6 +119,6 @@ export const makeFileField = (data: KindOfFile) =>
   } satisfies JSONSchemaType<string>);
 
 export const makeStructRef = (ref: KindOfStructRef) => ({
-  $ref: `#/definitions/${ref.structName}`,
+  $ref: `#/definitions/${ref.ref}`,
   ...withTexts(ref),
 });
