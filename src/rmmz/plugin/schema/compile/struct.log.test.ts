@@ -152,7 +152,13 @@ const foodStruct: PluginStruct<Food> = {
     },
   },
 };
-
+const expectedStructs = {
+  Drink: foodSchema.properties.drink,
+  OrangeJuice: foodSchema.properties.drink.properties.juice,
+  GreenTea: foodSchema.properties.drink.properties.tea,
+  Rice: foodSchema.properties.grain,
+  Skae: foodSchema.properties.drink.properties.alocohol,
+};
 describe("", () => {
   const result = compilePluginStruct(
     {
