@@ -41,13 +41,15 @@ describe("family", () => {
     expect(resultFamily.schema).toEqual(expectedFamilySchema);
   });
   test("", () => {
-    expect(resultFamily.logs).toContainEqual({
-      path: "moduleName.Family.father",
-      data: familyStruct.params.father,
-    } satisfies CompileLogItem);
-    expect(resultFamily.logs).toContainEqual({
-      path: "moduleName.Family.mother",
-      data: familyStruct.params.mother,
-    } satisfies CompileLogItem);
+    expect(
+      resultFamily.logs.find((log) => log.path === "moduleName.Family.father")
+        ?.data
+    ).toEqual(familyStruct.params.father);
+  });
+  test("", () => {
+    expect(
+      resultFamily.logs.find((log) => log.path === "moduleName.Family.mother")
+        ?.data
+    ).toEqual(familyStruct.params.mother);
   });
 });

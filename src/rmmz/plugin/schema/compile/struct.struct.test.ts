@@ -42,14 +42,12 @@ describe("person", () => {
     expect(result.schema).toEqual(expected);
   });
   test("", () => {
-    expect(result.logs).toContainEqual({
-      path: "moduleName.Person.name",
-      data: { kind: "string", default: "bob" },
-    } satisfies CompileLogItem);
-    expect(result.logs).toContainEqual({
-      path: "moduleName.Person.age",
-      data: { kind: "number", default: 0 },
-    } satisfies CompileLogItem);
+    const xxx = result.logs.find(
+      (log) => log.path === "moduleName.Person.name"
+    );
+    expect(xxx?.data).toEqual({ kind: "string", default: "bob" });
+    const yyy = result.logs.find((log) => log.path === "moduleName.Person.age");
+    expect(yyy?.data).toEqual({ kind: "number", default: 0 });
   });
 });
 
