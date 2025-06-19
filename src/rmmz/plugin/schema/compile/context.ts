@@ -1,6 +1,10 @@
-import type { PluginCompileOptions } from "./core/kinds/compileOption";
+import type {
+  PluginCompileOptions,
+  PluginMeta,
+} from "./core/kinds/compileOption";
 
 export interface CompileContext {
-  moduleName: string;
+  x: PluginMeta;
+
   options: Partial<PluginCompileOptions>;
 }

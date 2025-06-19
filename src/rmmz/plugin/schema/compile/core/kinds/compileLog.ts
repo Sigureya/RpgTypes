@@ -11,6 +11,7 @@ export interface CompileLogItem<Data extends StructParam = StructParam> {
   path: string;
   data: Data;
   schema: Schema | {};
+  structName?: string;
 }
 
 // const mapCompileLogs =(list : CompileLogItem[]): Map<string, StructParam> => {

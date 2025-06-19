@@ -3,7 +3,7 @@ import type { CompileContext } from "./context";
 import type { CompileLogItem, CompileResult } from "./core/kinds/compileLog";
 import type {
   PluginCompileOptions,
-  PluginTitles,
+  PluginMeta,
 } from "./core/kinds/compileOption";
 import { PLUGIN_COMMAND } from "./core/kinds/constants";
 import type {
@@ -11,6 +11,7 @@ import type {
   PluginStruct,
   StructParam,
   KindOfStructArray,
+  KindOfStruct,
 } from "./core/kinds/plugin";
 import {
   makeArrayField,
@@ -43,20 +44,20 @@ interface SchemaAndLog {
 }
 
 export const compilePluginCommand = <T extends object>(
-  { moduleName }: PluginTitles,
+  titles: PluginMeta,
   { args, command }: PluginCommand<T>,
   options: Partial<PluginCompileOptions>
 ): CompileResult<T> => {
   return compileStructDetail(
-    `${moduleName}.${PLUGIN_COMMAND}.${command}`,
+    `${titles.moduleName}.${PLUGIN_COMMAND}.${command}`,
     command,
     args,
-    { moduleName, options }
+    { x: titles, options }
   );
 };
 
 export const compilePluginStruct = <T extends object>(
-  tiles: PluginTitles,
+  tiles: PluginMeta,
   { params, struct: structName }: PluginStruct<T>,
   options: Partial<PluginCompileOptions>
 ): CompileResult<T> => {
@@ -64,7 +65,7 @@ export const compilePluginStruct = <T extends object>(
     `${tiles.moduleName}.${structName}`,
     structName,
     params,
-    { moduleName: tiles.moduleName, options }
+    { x: tiles, options }
   );
 };
 
@@ -95,6 +96,12 @@ interface PropsAccumulated {
   logs: CompileLogItem[];
 }
 
+const sturctName = (param: StructParam): string | undefined => {
+  if (param.kind !== "struct" && param.kind !== "struct[]") {
+    return "";
+  }
+};
+
 const accumulateProp = (
   acc: PropsAccumulated,
   [key, value]: [string, StructParam],
@@ -109,6 +116,7 @@ const accumulateProp = (
       ...acc.logs,
       ...field.logs,
       {
+        structName: value.text ?? "",
         path: currentPath,
         data: value,
         schema: field.schema,

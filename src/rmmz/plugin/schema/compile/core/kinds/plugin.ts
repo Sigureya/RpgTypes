@@ -12,6 +12,7 @@ import type {
   KindOFCombo,
   KindOfStructRef,
   KindOfFileArray,
+  KindBase,
 } from "./kinds";
 
 // 各パラメータ型のユニオン
@@ -32,7 +33,9 @@ export type StructParam =
   | KindOfStructArray<object>
   | KindOfStructRef;
 
-export interface KindOfStructArray<T extends object> extends PluginStruct<T> {
+export interface KindOfStructArray<T extends object>
+  extends PluginStruct<T>,
+    KindBase {
   kind: "struct[]";
   default: object[];
   struct: string;
@@ -42,7 +45,9 @@ export interface KindOfStructArray<T extends object> extends PluginStruct<T> {
 }
 
 // 構造体アノテーション
-export interface KindOfStruct<T extends object> extends PluginStruct<T> {
+export interface KindOfStruct<T extends object>
+  extends PluginStruct<T>,
+    KindBase {
   kind: "struct";
   struct: string;
   params: {

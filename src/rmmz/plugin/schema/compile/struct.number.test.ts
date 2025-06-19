@@ -1,6 +1,6 @@
 import { describe, test, expect } from "vitest";
 import type { JSONSchemaType } from "ajv";
-import type { PluginTitles } from "./core/kinds/compileOption";
+import type { PluginMeta } from "./core/kinds/compileOption";
 import type { PluginStruct } from "./core/kinds/plugin";
 import { compilePluginStruct } from "./struct";
 interface Numbers {
@@ -12,7 +12,7 @@ interface Numbers {
   floatArray: number[];
 }
 
-const titles: PluginTitles = {
+const titles: PluginMeta = {
   moduleName: "moduleName",
   author: "author",
 };
