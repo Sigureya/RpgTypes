@@ -1,8 +1,9 @@
 import { describe, test, expect } from "vitest";
 import type { JSONSchemaType } from "ajv";
 import { compilePluginStruct } from "./compile";
-import type { CompileLogItem, PluginStruct } from "./kinds";
-import type { PluginTitles } from "./kinds/compileOption";
+import type { CompileLogItem } from "./core/kinds/compileLog";
+import type { PluginTitles } from "./core/kinds/compileOption";
+import type { PluginStruct } from "./core/kinds/plugin";
 
 const titles: PluginTitles = {
   moduleName: "moduleName",
