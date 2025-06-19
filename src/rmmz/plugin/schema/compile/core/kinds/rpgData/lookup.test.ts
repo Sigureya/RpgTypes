@@ -8,11 +8,11 @@ import type { SourceId_RmmzUnknown } from "./lookup";
 import { lookupKind, isRmmzDataKind } from "./lookup";
 import type {
   DataKind_SystemUnion,
-  DataKindRpgUnion,
+  DataKind_RpgUnion,
 } from "./rpgDataTypesNames";
 
 interface TestCase {
-  arg: DataKindRpgUnion | DataKind_SystemUnion;
+  arg: DataKind_RpgUnion | DataKind_SystemUnion;
   expected:
     | SourceIdUnion_RpgData
     | SourceId_SystemSwitches
@@ -80,11 +80,11 @@ const testCases: TestCase[] = [
 
 const testErrorCases: TestCase[] = [
   {
-    arg: "unknownKind" as DataKindRpgUnion,
+    arg: "unknownKind" as DataKind_RpgUnion,
     expected: { author: "rmmz", module: "unknown", kind: "unknownKind" },
   },
   {
-    arg: "xyz" as DataKindRpgUnion,
+    arg: "xyz" as DataKind_RpgUnion,
     expected: { author: "rmmz", module: "unknown", kind: "xyz" },
   },
 ];

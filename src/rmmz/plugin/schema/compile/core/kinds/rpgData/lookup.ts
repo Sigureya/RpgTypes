@@ -6,7 +6,7 @@ import type {
 import type { SourceIdentifier } from "src/namedItemSource";
 import type {
   DataKind_SystemUnion,
-  DataKindRpgUnion,
+  DataKind_RpgUnion,
 } from "./rpgDataTypesNames";
 
 const DATA = 0 as const;
@@ -26,7 +26,7 @@ const KIND_TABLE = {
   troop: DATA,
   enemy: DATA,
   common_event: DATA,
-} as const satisfies Record<DataKindRpgUnion | DataKind_SystemUnion, number>;
+} as const satisfies Record<DataKind_RpgUnion | DataKind_SystemUnion, number>;
 
 const MODULE_TABLE = ["data", "system", "system"] as const;
 
@@ -44,7 +44,7 @@ export type SourceId_ValidRmmzData =
 export const lookupKind = (
   kind: string
 ): SourceId_ValidRmmzData | SourceId_RmmzUnknown => {
-  const index = KIND_TABLE[kind as DataKindRpgUnion];
+  const index = KIND_TABLE[kind as DataKind_RpgUnion];
   if (index === undefined) {
     return {
       author: "rmmz",

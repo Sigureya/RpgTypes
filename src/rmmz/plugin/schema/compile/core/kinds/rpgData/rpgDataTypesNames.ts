@@ -11,7 +11,7 @@ export type DataKindCommonEvent = "common_event";
 export type DataKindSwitch = "switch";
 export type DataKindVariable = "variable";
 
-export type DataKindRpgUnion =
+export type DataKind_RpgUnion =
   | DataKindActor
   | DataKindEnemy
   | DataKindClass
