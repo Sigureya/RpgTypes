@@ -25,6 +25,7 @@ import type {
   KindOfStruct,
   KindOfStructArray,
 } from "./core/kinds/plugin";
+import { xparamNumber } from "./core/kinds/x-rpg-param";
 
 type CompileContext = {
   moduleName: string;
@@ -152,7 +153,7 @@ const compilePrimitive = (
     case "string[]":
       return makeArrayField(data, "string");
     case "number[]":
-      return makeNumberArrayField(data);
+      return makeNumberArrayField(data, ctx);
     case "actor[]":
     case "weapon[]":
     case "armor[]":
@@ -162,7 +163,7 @@ const compilePrimitive = (
     case "state[]":
       return makeArrayField(data, "integer");
     case "number":
-      return makeNumberField(data);
+      return makeNumberField(data, ctx);
     case "actor":
     case "weapon":
     case "armor":
@@ -252,7 +253,23 @@ const isIntegerKind = (digit: number | undefined) => {
   return digit === undefined || digit === 0;
 };
 
-const makeNumberArrayField = (data: KindOfNumberArray) =>
+const makeNumberField = (data: KindOfNumber, ctx: CompileContext) =>
+  ({
+    type: isIntegerKind(data.digit) ? "integer" : "number",
+    ...withDefault(data.default),
+    ...withTexts(data),
+    ...(ctx.options.kindData
+      ? (xparamNumber(data) satisfies {
+          "x-rpg-param": {
+            parent?: string;
+            kind: string;
+            data: { digit?: number };
+          };
+        })
+      : {}),
+  } satisfies JSONSchemaType<number>);
+
+const makeNumberArrayField = (data: KindOfNumberArray, ctx: CompileContext) =>
   ({
     type: "array",
     items: {
@@ -260,13 +277,8 @@ const makeNumberArrayField = (data: KindOfNumberArray) =>
     },
     ...withDefault(data.default),
     ...withTexts(data),
+    ...(ctx.options.kindData ? xparamNumber(data) : {}),
   } satisfies JSONSchemaType<number[]>);
-
-const makeNumberField = (data: KindOfNumber) =>
-  ({
-    type: isIntegerKind(data.digit) ? "integer" : "number",
-    ...withDefault(data.default),
-  } satisfies JSONSchemaType<number>);
 
 const makeIdField = (data: KindOfRpgDataId | KindOfSystemDataId) =>
   ({
