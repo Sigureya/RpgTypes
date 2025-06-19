@@ -130,10 +130,44 @@ const compileField = (
   return { schema: compilePrimitive(data, ctx), logs: [] };
 };
 
+const makeStructKind = <T extends object>(
+  path: string,
+  annotation: KindOfStruct<T>,
+  ctx: CompileContext
+): ResultType => {
+  return compileStructDetail(
+    path,
+    annotation.struct.structName,
+    annotation.struct.params,
+    ctx
+  ) as unknown as ResultType;
+  // 再帰構造のためasが唯一の解となる
+};
+
+const makeStructArrayKind = (
+  path: string,
+  annotation: KindOfStructArray,
+  ctx: CompileContext
+): ResultType => {
+  const item: ResultType = makeStructKind(
+    `${path}[]`,
+    { kind: "struct", struct: annotation.struct },
+    ctx
+  );
+  return {
+    schema: {
+      type: "array",
+      ...(item.schema ? { items: item.schema } : {}),
+      ...withDefault(annotation.default),
+    } as JSONSchemaType<object[]>,
+    logs: item.logs,
+  };
+};
+
 const compilePrimitive = (
   data: Exclude<StructParam, { kind: "struct" | "struct[]" }>,
   ctx: CompileContext
-) => {
+): AnySchema => {
   switch (data.kind) {
     case "string":
     case "multiline_string":
@@ -179,38 +213,4 @@ const compilePrimitive = (
     default:
       return true;
   }
-};
-
-const makeStructKind = <T extends object>(
-  path: string,
-  annotation: KindOfStruct<T>,
-  ctx: CompileContext
-): ResultType => {
-  return compileStructDetail(
-    path,
-    annotation.struct.structName,
-    annotation.struct.params,
-    ctx
-  ) as unknown as ResultType;
-  // 再帰構造のためasが唯一の解となる
-};
-
-const makeStructArrayKind = (
-  path: string,
-  annotation: KindOfStructArray,
-  ctx: CompileContext
-): ResultType => {
-  const item: ResultType = makeStructKind(
-    `${path}[]`,
-    { kind: "struct", struct: annotation.struct },
-    ctx
-  );
-  return {
-    schema: {
-      type: "array",
-      ...(item.schema ? { items: item.schema } : {}),
-      ...withDefault(annotation.default),
-    } as JSONSchemaType<object[]>,
-    logs: item.logs,
-  };
 };
