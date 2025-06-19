@@ -6,4 +6,6 @@ export interface SourceId_RmmzUnknown extends SourceIdentifier {
     module: "unknown";
     kind: string;
 }
-export declare const lookupKind: (kind: string) => SourceIdUnion_RpgData | SourceId_SystemSwitches | SourceId_SystemVariables | SourceId_RmmzUnknown;
+export type SourceId_ValidRmmzData = SourceIdUnion_RpgData | SourceId_SystemSwitches | SourceId_SystemVariables;
+export declare const lookupKind: (kind: string) => SourceId_ValidRmmzData | SourceId_RmmzUnknown;
+export declare const isRmmzDataKind: (sourceId: SourceIdentifier) => sourceId is SourceId_ValidRmmzData;
