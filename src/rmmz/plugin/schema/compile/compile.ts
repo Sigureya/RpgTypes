@@ -1,4 +1,18 @@
 import type { JSONSchemaType } from "ajv";
+import {
+  makeArrayField,
+  makeBooleanField,
+  makeComboField,
+  makeFileField,
+  makeIdField,
+  makeNumberArrayField,
+  makeNumberField,
+  makeSelectField,
+  makeStringField,
+  makeStructRef,
+  withDefault,
+} from "./compilePrimitive";
+import type { CompileContext } from "./context";
 import type { CompileLogItem, CompileResult } from "./core/kinds/compileLog";
 import type {
   PluginCompileOptions,
@@ -6,36 +20,13 @@ import type {
 } from "./core/kinds/compileOption";
 import { PLUGIN_COMMAND } from "./core/kinds/constants";
 import type {
-  KindBase,
-  KindOfString,
-  KindOfSelect,
-  KindOfNumberArray,
-  KindOfNumber,
-  KindOfRpgDataId,
-  KindOfSystemDataId,
-  KindOfBoolean,
-  KindOFCombo,
-  KindOfFile,
-  KindOfStructRef,
-} from "./core/kinds/kinds";
-import type {
   PluginCommand,
   PluginStruct,
   StructParam,
   KindOfStruct,
   KindOfStructArray,
 } from "./core/kinds/plugin";
-import type { X_RmmzParamBaee } from "./core/kinds/x-rpg-param";
-import {
-  xparamBoolean,
-  xparamDataId,
-  xparamNumber,
-} from "./core/kinds/x-rpg-param";
 
-type CompileContext = {
-  moduleName: string;
-  options: Partial<PluginCompileOptions>;
-};
 type AnySchema =
   | true
   | JSONSchemaType<number>
@@ -50,10 +41,6 @@ type AnySchema =
 interface ResultType {
   schema: AnySchema;
   logs: CompileLogItem[];
-}
-
-interface X_Param {
-  "x-rpg-param": X_RmmzParamBaee;
 }
 
 export const compilePluginCommand = <T extends object>(
@@ -227,99 +214,3 @@ const makeStructArrayKind = (
     logs: item.logs,
   };
 };
-
-const withTexts = (kind: KindBase) => ({
-  ...(typeof kind.text === "string" ? { title: kind.text } : {}),
-  ...(typeof kind.desc === "string" ? { description: kind.desc } : {}),
-});
-
-const withDefault = <T>(value: T | undefined) =>
-  value !== undefined ? { default: value } : {};
-
-// --- 各型ごとの生成関数 ---
-const makeStringField = (data: KindOfString) =>
-  ({
-    type: "string",
-    ...(data.default !== undefined ? { default: data.default } : {}),
-  } satisfies JSONSchemaType<string>);
-
-const makeSelectField = (data: KindOfSelect) =>
-  ({
-    type: "string",
-    ...withDefault(data.default),
-    ...(data.options ? { enum: data.options.map((o): string => o.value) } : {}),
-  } satisfies JSONSchemaType<string>);
-
-interface KindOfArray<T> {
-  kind: `${string}[]`;
-  default?: T[];
-}
-
-const makeArrayField = <T>(data: KindOfArray<T>, itemType: string) =>
-  ({
-    type: "array",
-    items: { type: itemType },
-    ...withDefault(data.default),
-  } as JSONSchemaType<T[]>);
-
-const isIntegerKind = (digit: number | undefined) => {
-  return digit === undefined || digit === 0;
-};
-
-const makeNumberField = (data: KindOfNumber, ctx: CompileContext) =>
-  ({
-    type: isIntegerKind(data.digit) ? "integer" : "number",
-    ...withDefault(data.default),
-    ...withTexts(data),
-    ...(ctx.options.kindData ? (xparamNumber(data) satisfies X_Param) : {}),
-  } satisfies JSONSchemaType<number>);
-
-const makeNumberArrayField = (data: KindOfNumberArray, ctx: CompileContext) =>
-  ({
-    type: "array",
-    items: {
-      type: isIntegerKind(data.digit) ? "integer" : "number",
-    },
-    ...withDefault(data.default),
-    ...withTexts(data),
-    ...(ctx.options.kindData ? xparamNumber(data) : {}),
-  } satisfies JSONSchemaType<number[]>);
-
-const makeIdField = (
-  data: KindOfRpgDataId | KindOfSystemDataId,
-
-  ctx: CompileContext
-) =>
-  ({
-    type: "integer",
-    ...withDefault(data.default),
-    ...withTexts(data),
-    ...(ctx.options.kindData ? (xparamDataId(data) satisfies X_Param) : {}),
-  } satisfies JSONSchemaType<number>);
-
-const makeBooleanField = (data: KindOfBoolean, ctx: CompileContext) =>
-  ({
-    type: "boolean",
-    ...withDefault(data.default),
-    ...withTexts(data),
-    ...(ctx.options.kindData ? (xparamBoolean(data) satisfies X_Param) : {}),
-  } satisfies JSONSchemaType<boolean>);
-
-const makeComboField = (data: KindOFCombo) =>
-  ({
-    type: "string",
-    ...withDefault(data.default),
-    ...withTexts(data),
-  } satisfies JSONSchemaType<string>);
-
-const makeFileField = (data: KindOfFile) =>
-  ({
-    type: "string",
-    ...withDefault(data.default),
-    ...withTexts(data),
-  } satisfies JSONSchemaType<string>);
-
-const makeStructRef = (ref: KindOfStructRef) => ({
-  $ref: `#/definitions/${ref.structName}`,
-  ...withTexts(ref),
-});
