@@ -4,6 +4,7 @@ import type {
   DataKind_SystemUnion,
 } from "./rpgData/rpgDataTypesNames";
 
+export const X_RPG_PARM = "x-rpg-param" as const;
 export interface X_RmmzParamInput<T, Kind extends string = string> {
   parent?: string | null;
   kind: Kind;
@@ -18,9 +19,10 @@ interface KindOfAnyData<Kind extends DataKind_RpgUnion | DataKind_SystemUnion>
   parent?: string;
 }
 
-export const xparamBaseData = <T extends KindBase>(param: T) => ({
+export const xparamBaseData = <T, P extends KindBase>(param: P, data: T) => ({
   kind: param.kind,
   ...(param.parent ? { parent: param.parent } : {}),
+  data: data,
 });
 
 export const xparamDataId = <
@@ -30,6 +32,10 @@ export const xparamDataId = <
 ) => ({});
 
 export const xparamNumber = (data: KindOfNumber | KindOfNumberArray) => ({
-  ...xparamBaseData(data),
-  ...(typeof data.digit === "number" ? { digit: data.digit } : {}),
+  [X_RPG_PARM]: {
+    ...xparamBaseData(
+      data,
+      typeof data.digit === "number" ? { digit: data.digit } : {}
+    ),
+  } satisfies X_RmmzParamInput<{ digit?: number }>,
 });
