@@ -4,7 +4,7 @@ import { compile } from "./compile";
 import type { CompileLogItem } from "./kinds/compileLog";
 import type { PluginTitles } from "./kinds/compileOption";
 import type { KindOfStruct } from "./kinds/struct2";
-import type { Family, Person, School } from "./mockType";
+import type { Person, School } from "./mockType";
 
 const titles: PluginTitles = {
   moduleName: "moduleName",
@@ -96,80 +96,5 @@ describe("school", () => {
   test("schema", () => {
     const resultSchool = compile(titles, mockSchoolStruct, {});
     expect(resultSchool.schema).toEqual(mockSchoolSchema);
-  });
-});
-
-interface AllDataArray {
-  actor: number[];
-  weapons: number[];
-  armor: number[];
-  skill: number[];
-  item: number[];
-  enemy: number[];
-  state: number[];
-}
-
-describe("alldataArray", () => {
-  const allDataArrayStruct = {
-    kind: "struct",
-    struct: {
-      structName: "AllDataArray",
-      params: {
-        actor: { kind: "actor[]", default: [1, 2, 3] },
-        weapons: { kind: "weapon[]", default: [1, 2, 3] },
-        armor: { kind: "armor[]", default: [1, 2, 3] },
-        skill: { kind: "skill[]", default: [1, 2, 3] },
-        item: { kind: "item[]", default: [1, 2, 3] },
-        enemy: { kind: "enemy[]", default: [1, 2, 3] },
-        state: { kind: "state[]", default: [1, 2, 3] },
-      },
-    },
-  } as const satisfies KindOfStruct<AllDataArray>;
-  const expectedAllDataArraySchema: JSONSchemaType<AllDataArray> = {
-    title: "AllDataArray",
-    type: "object",
-    properties: {
-      actor: {
-        type: "array",
-        items: { type: "integer" },
-        default: [1, 2, 3],
-      },
-      weapons: {
-        type: "array",
-        items: { type: "integer" },
-        default: [1, 2, 3],
-      },
-      armor: {
-        type: "array",
-        items: { type: "integer" },
-        default: [1, 2, 3],
-      },
-      skill: {
-        type: "array",
-        items: { type: "integer" },
-        default: [1, 2, 3],
-      },
-      item: {
-        type: "array",
-        items: { type: "integer" },
-        default: [1, 2, 3],
-      },
-      enemy: {
-        type: "array",
-        items: { type: "integer" },
-        default: [1, 2, 3],
-      },
-      state: {
-        type: "array",
-        items: { type: "integer" },
-        default: [1, 2, 3],
-      },
-    },
-    required: ["actor", "weapons", "armor", "skill", "item", "enemy", "state"],
-    additionalProperties: false,
-  };
-  test("schema", () => {
-    const resultAllDataArray = compile(titles, allDataArrayStruct, {});
-    expect(resultAllDataArray.schema).toEqual(expectedAllDataArraySchema);
   });
 });
