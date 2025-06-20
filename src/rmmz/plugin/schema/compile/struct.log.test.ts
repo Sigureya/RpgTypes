@@ -1,5 +1,6 @@
 import { describe, test, expect } from "vitest";
 import type { JSONSchemaType } from "ajv";
+import { defineStructs } from "./core/kinds/compileLog";
 import type { PluginStruct } from "./core/kinds/plugin";
 import { compilePluginStruct } from "./struct";
 
@@ -153,6 +154,14 @@ const foodStruct: PluginStruct<Food> = {
   },
 };
 
+const expectedStructs = {
+  Drink: foodSchema.properties.drink,
+  OrangeJuice: foodSchema.properties.drink.properties.juice,
+  GreenTea: foodSchema.properties.drink.properties.tea,
+  Rice: foodSchema.properties.grain,
+  Sake: foodSchema.properties.drink.properties.alocohol,
+  Carrot: foodSchema.properties.vegetable,
+};
 describe("", () => {
   const result = compilePluginStruct(
     {
@@ -164,5 +173,9 @@ describe("", () => {
   );
   test("", () => {
     expect(result.schema).toEqual(foodSchema);
+  });
+  test("", () => {
+    const table = defineStructs(result.logs);
+    expect(table).toEqual(expectedStructs);
   });
 });

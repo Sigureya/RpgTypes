@@ -4,7 +4,7 @@ import type {
 } from "./core/kinds/compileOption";
 
 export interface CompileContext {
-  x: PluginMeta;
+  meta: PluginMeta;
 
   options: Partial<PluginCompileOptions>;
 }
