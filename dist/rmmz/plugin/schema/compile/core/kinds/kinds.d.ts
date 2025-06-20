@@ -1,17 +1,16 @@
+import { DataKind_RpgUnion, DataKind_SystemUnion } from './rpgData/rpgDataTypesNames';
 export interface KindBase {
     kind: string;
     desc?: string;
     text?: string;
     parent?: string;
 }
-export type DataKind_Rpg = "actor" | "weapon" | "armor" | "skill" | "item" | "enemy" | "troop" | "state" | "class";
-export type DataKind_System = "switch" | "variable";
 export interface KindOfRpgDataId extends KindBase {
-    kind: DataKind_Rpg;
+    kind: DataKind_RpgUnion;
     default: number;
 }
 export interface KindOfRpgDataIdArray extends KindBase {
-    kind: `${DataKind_Rpg}[]`;
+    kind: `${DataKind_RpgUnion}[]`;
     default: number[];
 }
 export interface KindOfBoolean extends KindBase {
@@ -56,7 +55,7 @@ export interface KindOfId extends KindBase {
     default: number;
 }
 export interface KindOfSystemDataId extends KindBase {
-    kind: DataKind_System;
+    kind: DataKind_SystemUnion;
     default: number;
 }
 export interface KindOfFile extends KindBase {
@@ -71,5 +70,5 @@ export interface KindOfFileArray extends KindBase {
 }
 export interface KindOfStructRef extends KindBase {
     kind: "struct_ref";
-    structName: string;
+    ref: string;
 }
