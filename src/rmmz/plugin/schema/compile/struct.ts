@@ -1,11 +1,16 @@
 import type { JSONSchemaType } from "ajv";
 import type { CompileContext } from "./context";
+import {
+  makeBooleanField,
+  makeBooleanFieldWithXParam,
+} from "./core/kinds/boolean";
 import type { StructCompileLog, CompileResult } from "./core/kinds/compileLog";
 import type {
   PluginCompileOptions,
   PluginMeta,
 } from "./core/kinds/compileOption";
 import { PLUGIN_COMMAND } from "./core/kinds/constants";
+import { makeNumberArrayField, makeNumberField } from "./core/kinds/numbers";
 import type {
   PluginCommand,
   PluginStruct,
@@ -14,17 +19,16 @@ import type {
 } from "./core/kinds/plugin";
 import {
   withDefault,
+  makeArrayField,
+  makeStructRef,
+} from "./core/kinds/primitive";
+import { makeIdField, makeIdFieldWithXParam } from "./core/kinds/rpgDataKind";
+import {
   makeStringField,
   makeFileField,
   makeComboField,
   makeSelectField,
-  makeArrayField,
-  makeNumberArrayField,
-  makeNumberField,
-  makeBooleanField,
-  makeStructRef,
-} from "./core/kinds/primitive";
-import { makeIdField, makeIdFieldWithXParam } from "./core/kinds/rpgDataKind";
+} from "./core/kinds/string";
 import { isStructDef, isStructDefArray } from "./core/kinds/structDef";
 
 type AnySchema =
@@ -210,7 +214,7 @@ const compilePrimitive = (
     case "string[]":
       return makeArrayField(data, "string");
     case "number[]":
-      return makeNumberArrayField(data, ctx);
+      return makeNumberArrayField(data);
     case "actor[]":
     case "weapon[]":
     case "armor[]":
@@ -222,7 +226,7 @@ const compilePrimitive = (
     case "troop[]":
       return makeArrayField(data, "integer");
     case "number":
-      return makeNumberField(data, ctx);
+      return makeNumberField(data);
     case "actor":
     case "weapon":
     case "armor":
@@ -236,7 +240,9 @@ const compilePrimitive = (
         ? makeIdFieldWithXParam(data)
         : makeIdField(data);
     case "boolean":
-      return makeBooleanField(data, ctx);
+      return ctx.options.kindData
+        ? makeBooleanField(data)
+        : makeBooleanFieldWithXParam(data);
     case "struct":
       return makeStructRef(data);
     default:
