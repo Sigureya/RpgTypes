@@ -18,6 +18,11 @@ export type StructParamPrimitive =
   | KindOfFileArray
   | KindOfStructRef;
 
+export type PrimitiveStruct<K extends string = string> = Record<
+  K,
+  StructParamPrimitive
+>;
+
 export interface KindBase {
   kind: string;
   desc?: string;

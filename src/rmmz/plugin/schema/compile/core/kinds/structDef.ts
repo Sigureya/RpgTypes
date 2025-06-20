@@ -5,6 +5,7 @@ export const isStructDef = (
 ): value is KindOfStruct<object> => {
   return value.kind === "struct_def";
 };
+
 export const isStructDefArray = (
   value: StructParam
 ): value is KindOfStructArray<object> => {

@@ -21,17 +21,6 @@ export interface StructCompileLogObjectEntry<T extends object> {
   structName: string;
 }
 
-const isStructParam = (
-  log: StructCompileLog<StructParam>
-): log is StructCompileLog<
-  KindOfStruct<object> | KindOfStructArray<object>
-> => {
-  return (
-    (log.data.kind === "struct_def" || log.data.kind === "struct_def[]") &&
-    !!log.data.struct
-  );
-};
-
 export const defineStructs = (
   logList: ReadonlyArray<StructCompileLog>
 ): Record<string, JSONSchemaType<object>> => {
@@ -43,4 +32,15 @@ export const defineStructs = (
         [logItem.structName]: logItem.schema,
       };
     }, {});
+};
+
+const isStructParam = (
+  log: StructCompileLog<StructParam>
+): log is StructCompileLog<
+  KindOfStruct<object> | KindOfStructArray<object>
+> => {
+  return (
+    (log.data.kind === "struct_def" || log.data.kind === "struct_def[]") &&
+    !!log.data.struct
+  );
 };
