@@ -1,6 +1,6 @@
 import { describe, test, expect } from "vitest";
 import type { JSONSchemaType } from "ajv";
-import type { PluginMeta } from "./kinds/compileOption";
+import type { PluginMeta } from "./kinds";
 import type { PluginStruct } from "./kinds/plugin";
 import { compilePluginStruct } from "./struct";
 

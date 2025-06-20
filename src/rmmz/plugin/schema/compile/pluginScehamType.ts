@@ -1,7 +1,4 @@
-import type {
-  KindOfBoolean,
-  KindOfStructRef,
-} from "./kinds/core/primitiveParams";
+import type { KindOfBoolean, KindOfStructRef } from "./kinds";
 import type { KindOfStruct, StructParam } from "./kinds/plugin";
 
 export type PluginSchemaType<

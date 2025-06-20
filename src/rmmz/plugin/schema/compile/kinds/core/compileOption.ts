@@ -1,4 +1,4 @@
-import type { PrimitiveStruct } from "./core/primitiveParams";
+import type { PrimitiveStruct } from "./primitiveParams";
 
 export interface PluginMeta {
   author: string;

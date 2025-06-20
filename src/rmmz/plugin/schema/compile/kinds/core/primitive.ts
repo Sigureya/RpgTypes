@@ -1,5 +1,5 @@
 import type { JSONSchemaType } from "ajv";
-import type { KindBase, KindOfStructRef } from "./primitiveParams";
+import type { KindBase } from "./primitiveParams";
 
 export const withTexts = (kind: KindBase) => ({
   ...(typeof kind.text === "string" ? { title: kind.text } : {}),
@@ -19,8 +19,3 @@ interface KindOfArray<T> {
   kind: `${string}[]`;
   default?: T[];
 }
-
-export const makeStructRef = (ref: KindOfStructRef) => ({
-  $ref: `#/definitions/${ref.struct}`,
-  ...withTexts(ref),
-});
