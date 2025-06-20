@@ -4,7 +4,6 @@ import type {
   JSONSchemaTypeWithRpgParam,
   X_RmmzParamBaee,
   X_Param,
-  X_RmmzParamInput,
 } from "./x-rpg-param";
 import { X_RPG_PARM, xparamBaseData } from "./x-rpg-param";
 
@@ -39,18 +38,7 @@ describe("X_RPG_PARM", () => {
     } satisfies X_RmmzParamBaee);
   });
 });
-describe("X_RmmzParamInput", () => {
-  test("should create input with correct structure", () => {
-    const input: X_RmmzParamInput<X_RpgParamTest> = {
-      parent: "test-parent",
-      kind: "x-rpg-param-test",
-      data: { param: 42, data: "test" },
-    };
-    expect(input.parent).toBe("test-parent");
-    expect(input.kind).toBe("x-rpg-param-test");
-    expect(input.data).toEqual({ param: 42, data: "test" });
-  });
-});
+
 describe("JSONSchemaTypeWithRpgParam", () => {
   test("should have x-rpg-param metadata", () => {
     const schema: JSONSchemaTypeWithRpgParam<X_RpgParamTest> = {
