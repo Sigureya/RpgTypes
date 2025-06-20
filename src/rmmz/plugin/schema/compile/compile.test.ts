@@ -36,7 +36,7 @@ const mockPlugin = {
       command: "OpenTrade",
       args: {
         items: {
-          kind: "struct[]",
+          kind: "struct_def[]",
           struct: "Drink",
           params: {
             id: { kind: "number" },

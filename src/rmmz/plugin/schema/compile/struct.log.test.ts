@@ -106,7 +106,7 @@ const foodStruct: PluginStruct<Food> = {
   struct: "Food",
   params: {
     vegetable: {
-      kind: "struct",
+      kind: "struct_def",
       struct: "Carrot",
       params: {
         kind: { kind: "string", default: "carrot" },
@@ -114,7 +114,7 @@ const foodStruct: PluginStruct<Food> = {
       },
     },
     grain: {
-      kind: "struct",
+      kind: "struct_def",
       struct: "Rice",
       params: {
         kind: { kind: "string", default: "rice" },
@@ -122,7 +122,7 @@ const foodStruct: PluginStruct<Food> = {
       },
     },
     drink: {
-      kind: "struct",
+      kind: "struct_def",
       struct: "Drink",
       params: {
         alocohol: {

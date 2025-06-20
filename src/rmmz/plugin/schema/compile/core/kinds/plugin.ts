@@ -15,8 +15,7 @@ import type {
   KindBase,
 } from "./kinds";
 
-// 各パラメータ型のユニオン
-export type StructParam =
+export type StructParamPrimitive =
   | KindOfBoolean
   | KindOfNumber
   | KindOfNumberArray
@@ -29,14 +28,18 @@ export type StructParam =
   | KindOfSystemDataId
   | KindOfFile
   | KindOfFileArray
-  | KindOfStruct<object> // ネスト構造体対応
-  | KindOfStructArray<object>
   | KindOfStructRef;
+
+// 各パラメータ型のユニオン
+export type StructParam =
+  | StructParamPrimitive
+  | KindOfStruct<object> // ネスト構造体対応
+  | KindOfStructArray<object>;
 
 export interface KindOfStructArray<T extends object>
   extends PluginStruct<T>,
     KindBase {
-  kind: "struct[]";
+  kind: "struct_def[]";
   default: object[];
   struct: string;
   params: {
@@ -48,7 +51,7 @@ export interface KindOfStructArray<T extends object>
 export interface KindOfStruct<T extends object>
   extends PluginStruct<T>,
     KindBase {
-  kind: "struct";
+  kind: "struct_def";
   struct: string;
   params: {
     [K in keyof T]: StructParam;

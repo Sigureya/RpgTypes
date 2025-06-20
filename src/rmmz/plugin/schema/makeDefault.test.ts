@@ -63,7 +63,7 @@ const createMockHome = (
         default: home.address,
       },
       family: {
-        type: "struct[]",
+        type: "struct_def[]",
         struct: createMockPerson().struct,
         default: home.family,
       },

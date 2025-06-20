@@ -27,7 +27,7 @@ const isStructParam = (
   KindOfStruct<object> | KindOfStructArray<object>
 > => {
   return (
-    (log.data.kind === "struct" || log.data.kind === "struct[]") &&
+    (log.data.kind === "struct_def" || log.data.kind === "struct_def[]") &&
     !!log.data.struct
   );
 };
