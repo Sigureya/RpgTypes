@@ -1,6 +1,5 @@
 import { describe, test, expect } from "vitest";
 import type { JSONSchemaType } from "ajv";
-import type { CompileLogItem } from "./core/kinds/compileLog";
 import type { PluginMeta } from "./core/kinds/compileOption";
 import type { PluginStruct } from "./core/kinds/plugin";
 import { compilePluginStruct } from "./struct";
@@ -19,7 +18,7 @@ interface School {
   students: Person[];
 }
 
-describe("person", () => {
+describe("compilePluginStruct - person struct", () => {
   const personStruct = {
     struct: "Person",
     params: {
@@ -38,10 +37,10 @@ describe("person", () => {
     additionalProperties: false,
   };
   const result = compilePluginStruct(titles, personStruct, {});
-  test("schema", () => {
+  test("generates correct JSONSchema for Person struct", () => {
     expect(result.schema).toEqual(expected);
   });
-  test("", () => {
+  test("logs correct data for each Person property", () => {
     const xxx = result.logs.find(
       (log) => log.path === "moduleName.Person.name"
     );
@@ -51,7 +50,7 @@ describe("person", () => {
   });
 });
 
-describe("school", () => {
+describe("compilePluginStruct - nested struct", () => {
   const mockSchoolStruct = {
     struct: "School",
     params: {
@@ -91,7 +90,7 @@ describe("school", () => {
     required: ["name", "students"],
     additionalProperties: false,
   };
-  test("schema", () => {
+  test("resolves nested struct correctly", () => {
     const resultSchool = compilePluginStruct(titles, mockSchoolStruct, {});
     expect(resultSchool.schema).toEqual(mockSchoolSchema);
   });

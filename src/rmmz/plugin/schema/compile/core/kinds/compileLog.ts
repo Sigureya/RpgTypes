@@ -4,17 +4,17 @@ import type { KindOfStruct, KindOfStructArray, StructParam } from "./plugin";
 
 export interface CompileResult<T extends object> {
   schema: JSONSchemaType<T>;
-  logs: CompileLogItem[];
+  logs: StructCompileLog[];
 }
 
-export interface CompileLogItem<Data extends StructParam = StructParam> {
+export interface StructCompileLog<Data extends StructParam = StructParam> {
   path: string;
   data: Data;
   schema: Schema | {};
   structName: string;
 }
 
-export interface CompileLogSturct<T extends object> {
+export interface StructCompileLogObjectEntry<T extends object> {
   path: string;
   data: KindOfStruct<T>;
   schema: JSONSchemaType<T>;
@@ -22,20 +22,25 @@ export interface CompileLogSturct<T extends object> {
 }
 
 const isStructParam = (
-  log: CompileLogItem<StructParam>
-): log is CompileLogItem<KindOfStruct<object> | KindOfStructArray<object>> => {
-  return log.data.kind === "struct" || log.data.kind === "struct[]";
+  log: StructCompileLog<StructParam>
+): log is StructCompileLog<
+  KindOfStruct<object> | KindOfStructArray<object>
+> => {
+  return (
+    (log.data.kind === "struct" || log.data.kind === "struct[]") &&
+    !!log.data.struct
+  );
 };
 
 export const defineStructs = (
-  log: ReadonlyArray<CompileLogItem>
+  logList: ReadonlyArray<StructCompileLog>
 ): Record<string, JSONSchemaType<object>> => {
-  return log
-    .filter((x) => isStructParam(x))
-    .reduce((acc, item) => {
+  return logList
+    .filter((logItem) => isStructParam(logItem))
+    .reduce((acc, logItem) => {
       return {
         ...acc,
-        [item.structName]: item.schema,
+        [logItem.structName]: logItem.schema,
       };
     }, {});
 };

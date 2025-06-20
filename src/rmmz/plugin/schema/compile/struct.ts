@@ -1,6 +1,6 @@
 import type { JSONSchemaType } from "ajv";
 import type { CompileContext } from "./context";
-import type { CompileLogItem, CompileResult } from "./core/kinds/compileLog";
+import type { StructCompileLog, CompileResult } from "./core/kinds/compileLog";
 import type {
   PluginCompileOptions,
   PluginMeta,
@@ -11,7 +11,6 @@ import type {
   PluginStruct,
   StructParam,
   KindOfStructArray,
-  KindOfStruct,
 } from "./core/kinds/plugin";
 import {
   makeArrayField,
@@ -40,7 +39,7 @@ type AnySchema =
 
 interface SchemaAndLog {
   schema: AnySchema;
-  logs: CompileLogItem[];
+  logs: StructCompileLog[];
 }
 
 const SEPARATOR = "." as const;
@@ -95,7 +94,7 @@ const compileStructDetail = <T>(
 
 interface PropsAccumulated {
   properties: Record<string, AnySchema>;
-  logs: CompileLogItem[];
+  logs: StructCompileLog[];
 }
 
 const sturctName = (param: StructParam): string => {
@@ -124,7 +123,7 @@ const accumulateProp = (
         path: currentPath,
         data: value,
         schema: field.schema,
-      } satisfies CompileLogItem,
+      } satisfies StructCompileLog,
     ],
   };
 };

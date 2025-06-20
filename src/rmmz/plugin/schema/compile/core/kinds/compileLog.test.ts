@@ -1,6 +1,6 @@
 import { describe, test, expect } from "vitest";
 import type { JSONSchemaType } from "ajv";
-import type { CompileLogSturct } from "./compileLog";
+import type { StructCompileLogObjectEntry } from "./compileLog";
 import { defineStructs } from "./compileLog";
 import type { KindOfStruct } from "./plugin";
 
@@ -55,7 +55,7 @@ const mockPerson = {
     required: ["name", "age"],
     additionalProperties: false,
   } satisfies JSONSchemaType<Person>,
-} as const satisfies CompileLogSturct<Person>;
+} as const satisfies StructCompileLogObjectEntry<Person>;
 
 const mockAnimal = {
   path: "moduleName.MockAnimal",
@@ -99,7 +99,7 @@ const mockAnimal = {
     required: ["species", "habitat"],
     additionalProperties: false,
   } satisfies JSONSchemaType<Animal>,
-} as const satisfies CompileLogSturct<Animal>;
+} as const satisfies StructCompileLogObjectEntry<Animal>;
 
 describe("defineStructs", () => {
   test("should return an object with struct names as keys and schemas as values", () => {

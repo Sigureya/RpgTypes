@@ -60,16 +60,16 @@ describe("compilePluginStruct -numbers", () => {
   };
   const resultNumbers = compilePluginStruct(titles, mockNumbersStruct, {});
   describe("logs", () => {
-    test("path", () => {
+    test("logs correct schema path for each property", () => {
       const logs = new Set(resultNumbers.logs.map((log) => log.path));
-      const expected = new Set(
+      const expected = new Set<string>(
         expectedNumbersSchema.required.map((key) => `moduleName.Numbers.${key}`)
       );
       expect(logs).toEqual(expected);
     });
   });
 
-  test("schema", () => {
+  test("generates correct JSONSchema for various number types", () => {
     expect(resultNumbers.schema).toEqual(expectedNumbersSchema);
   });
 });
