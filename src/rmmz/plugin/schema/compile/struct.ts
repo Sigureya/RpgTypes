@@ -241,8 +241,8 @@ const compilePrimitive = (
         : makeIdField(data);
     case "boolean":
       return ctx.options.kindData
-        ? makeBooleanField(data)
-        : makeBooleanFieldWithXParam(data);
+        ? makeBooleanFieldWithXParam(data)
+        : makeBooleanField(data);
     case "struct":
       return makeStructRef(data);
     default:
