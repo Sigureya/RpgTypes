@@ -51,7 +51,7 @@ const mockHome: StructAnnotation_WithType<Home> = {
         default: "123",
       },
       family: {
-        type: "struct[]",
+        type: "struct_def[]",
         struct: mockParson.struct,
         default: [],
       },

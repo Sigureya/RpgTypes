@@ -12,6 +12,7 @@ import type {
   StructParam,
   KindOfStructArray,
 } from "./core/kinds/plugin";
+import { isStructDef, isStructDefArray } from "./core/kinds/structDef";
 import {
   makeArrayField,
   makeBooleanField,
@@ -98,7 +99,7 @@ interface PropsAccumulated {
 }
 
 const sturctName = (param: StructParam): string => {
-  if (param.kind !== "struct" && param.kind !== "struct[]") {
+  if (param.kind !== "struct_def" && param.kind !== "struct_def[]") {
     return "";
   }
 
@@ -144,10 +145,10 @@ const compileField = (
   data: StructParam,
   ctx: CompileContext
 ): SchemaAndLog => {
-  if (data.kind === "struct") {
+  if (isStructDef(data)) {
     return makeStructKind(path, data, ctx);
   }
-  if (data.kind === "struct[]") {
+  if (isStructDefArray(data)) {
     return makeStructArrayKind(path, data, ctx);
   }
   return { schema: compilePrimitive(data, ctx), logs: [] };
@@ -191,7 +192,7 @@ const makeStructArrayKind = <T extends object>(
 };
 
 const compilePrimitive = (
-  data: Exclude<StructParam, { kind: "struct" | "struct[]" }>,
+  data: Exclude<StructParam, { kind: "struct_def" | "struct[]" }>,
   ctx: CompileContext
 ): AnySchema => {
   switch (data.kind) {

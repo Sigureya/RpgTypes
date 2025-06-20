@@ -17,7 +17,7 @@ interface Animal {
 const mockPerson = {
   structName: "Person",
   data: {
-    kind: "struct",
+    kind: "struct_def",
     struct: "Person",
     params: {
       name: {
@@ -61,7 +61,7 @@ const mockAnimal = {
   path: "moduleName.MockAnimal",
   structName: "Animal",
   data: {
-    kind: "struct",
+    kind: "struct_def",
     struct: "dummy",
     params: {
       species: {

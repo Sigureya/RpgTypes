@@ -58,7 +58,7 @@ describe("compilePluginStruct - nested struct", () => {
 
       students: {
         default: [],
-        kind: "struct[]",
+        kind: "struct_def[]",
         struct: "Person",
         params: {
           name: { kind: "string", default: "bob" },

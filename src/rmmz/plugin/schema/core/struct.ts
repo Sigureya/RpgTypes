@@ -154,7 +154,7 @@ export interface StructAnnotationBase_WithDefault
 export interface StructAnnotationBase_Array
   extends HasStruct,
     AnnotationBaseTexts {
-  type: "struct[]";
+  type: "struct_def[]";
   struct: StructBase;
   default: object[];
 }
@@ -200,7 +200,7 @@ interface NodeChild_Array<
   KnowTypes extends object,
   Path extends string
 > extends StructAnnotationBase_Array {
-  type: "struct[]";
+  type: "struct_def[]";
   default: Array;
   struct: {
     structName: string;
