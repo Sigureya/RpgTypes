@@ -1,7 +1,10 @@
 import type { JSONSchemaType } from "ajv";
 import type { CompileContext } from "./context";
 import type { PluginMeta, PluginCompileOptions } from "./kinds";
-import { compilePrimitive, compilePrimitiveWithXParam } from "./kinds/compie";
+import {
+  compilePrimitiveFiled,
+  compilePrimitiveFiledWithXParam,
+} from "./kinds/compie";
 import type { StructCompileLog, CompileResult } from "./kinds/compileLog";
 import { PLUGIN_COMMAND } from "./kinds/constants";
 import type {
@@ -139,8 +142,8 @@ const compileField = (
   }
   return {
     schema: ctx.options.kindData
-      ? compilePrimitiveWithXParam(data)
-      : compilePrimitive(data),
+      ? compilePrimitiveFiledWithXParam(data)
+      : compilePrimitiveFiled(data),
     logs: [],
   };
 };
