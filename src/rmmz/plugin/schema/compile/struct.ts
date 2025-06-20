@@ -51,7 +51,7 @@ export const compilePluginCommand = <T extends object>(
   options: Partial<PluginCompileOptions>
 ): CompileResult<T> => {
   return compileStructDetail(
-    `${titles.moduleName}${SEPARATOR}${PLUGIN_COMMAND}.${command}`,
+    `${titles.moduleName}${SEPARATOR}${PLUGIN_COMMAND}${SEPARATOR}${command}`,
     command,
     args,
     { meta: titles, options }
