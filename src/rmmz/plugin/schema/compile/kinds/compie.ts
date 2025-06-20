@@ -16,6 +16,7 @@ import {
   compileFileFieldWithXparam,
   compileComboFieldWithXparam,
   compileSelectFieldWithXparam,
+  compileStringFieldWithXparam,
 } from "./string";
 import { makeStructRef } from "./structDef";
 import { makeArrayField } from "./utils";
@@ -96,7 +97,7 @@ export const compilePrimitiveFiledWithXParam = (
   switch (data.kind) {
     case "string":
     case "multiline_string":
-      return compileStringField(data);
+      return compileStringFieldWithXparam(data);
     case "file":
       return compileFileFieldWithXparam(data);
     case "combo":
