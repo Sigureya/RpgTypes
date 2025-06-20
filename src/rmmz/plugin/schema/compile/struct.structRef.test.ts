@@ -22,8 +22,8 @@ describe("compilePluginStruct - struct_ref", () => {
   const familyStruct = {
     struct: "Family",
     params: {
-      father: { kind: "struct_ref", ref: "Person" },
-      mother: { kind: "struct_ref", ref: "Person" },
+      father: { kind: "struct", struct: "Person" },
+      mother: { kind: "struct", struct: "Person" },
     },
   } as const satisfies PluginStruct<Family>;
   const expectedFamilySchema: JSONSchemaType<Family> = {

@@ -1,5 +1,5 @@
-import type { KindOfBoolean, KindOfStructRef } from "./kinds/kinds";
 import type { KindOfStruct, StructParam } from "./kinds/plugin";
+import type { KindOfBoolean, KindOfStructRef } from "./kinds/primitiveParams";
 
 export type PluginSchemaType<
   T,
@@ -82,8 +82,8 @@ interface Person {
   name: string;
 }
 const structRef: PluginSchemaType<Person> = {
-  kind: "struct_ref",
-  ref: "Person",
+  kind: "struct",
+  struct: "Person",
 };
 
 const struct: PluginSchemaType<Person> = {

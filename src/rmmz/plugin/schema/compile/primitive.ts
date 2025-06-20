@@ -12,7 +12,7 @@ import type {
   KindOfString,
   KindOfStructRef,
   KindOfSystemDataId,
-} from "./core/kinds/kinds";
+} from "./core/kinds/primitiveParams";
 import type { X_RmmzParamBaee } from "./core/kinds/x-rpg-param";
 import {
   xparamNumber,
@@ -119,6 +119,6 @@ export const makeFileField = (data: KindOfFile) =>
   } satisfies JSONSchemaType<string>);
 
 export const makeStructRef = (ref: KindOfStructRef) => ({
-  $ref: `#/definitions/${ref.ref}`,
+  $ref: `#/definitions/${ref.struct}`,
   ...withTexts(ref),
 });

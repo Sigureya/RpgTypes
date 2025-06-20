@@ -1,34 +1,4 @@
-import type {
-  KindOfBoolean,
-  KindOfNumber,
-  KindOfNumberArray,
-  KindOfRpgDataId,
-  KindOfSelect,
-  KindOfString,
-  KindOfStringArray,
-  KindOfSystemDataId,
-  KindOfFile,
-  KindOfRpgDataIdArray,
-  KindOFCombo,
-  KindOfStructRef,
-  KindOfFileArray,
-  KindBase,
-} from "./kinds";
-
-export type StructParamPrimitive =
-  | KindOfBoolean
-  | KindOfNumber
-  | KindOfNumberArray
-  | KindOfRpgDataId
-  | KindOfRpgDataIdArray
-  | KindOFCombo
-  | KindOfSelect
-  | KindOfString
-  | KindOfStringArray
-  | KindOfSystemDataId
-  | KindOfFile
-  | KindOfFileArray
-  | KindOfStructRef;
+import type { KindBase, StructParamPrimitive } from "./primitiveParams";
 
 // 各パラメータ型のユニオン
 export type StructParam =

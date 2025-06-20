@@ -3,6 +3,21 @@ import type {
   DataKind_SystemUnion,
 } from "./rpgData/rpgDataTypesNames";
 
+export type StructParamPrimitive =
+  | KindOfBoolean
+  | KindOfNumber
+  | KindOfNumberArray
+  | KindOfRpgDataId
+  | KindOfRpgDataIdArray
+  | KindOFCombo
+  | KindOfSelect
+  | KindOfString
+  | KindOfStringArray
+  | KindOfSystemDataId
+  | KindOfFile
+  | KindOfFileArray
+  | KindOfStructRef;
+
 export interface KindBase {
   kind: string;
   desc?: string;
@@ -79,6 +94,11 @@ export interface KindOfFileArray extends KindBase {
 }
 
 export interface KindOfStructRef extends KindBase {
-  kind: "struct_ref";
-  ref: string;
+  kind: "struct";
+  struct: string;
+}
+
+export interface KindOfStructArrayRef extends KindBase {
+  kind: "struct[]";
+  struct: string;
 }
