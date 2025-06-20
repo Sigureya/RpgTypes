@@ -89,7 +89,7 @@ export interface StructAnnotationBase_WithDefault extends StructAnnotationBase_P
     };
 }
 export interface StructAnnotationBase_Array extends HasStruct, AnnotationBaseTexts {
-    type: "struct[]";
+    type: "struct_def[]";
     struct: StructBase;
     default: object[];
 }
@@ -98,7 +98,7 @@ type NodeParent_StructParameters<T extends object, Path extends string, KnowType
 };
 type NodeChild_ParamType<T, Path extends string, KnowTypes extends object> = T extends boolean ? BooleanArg : T extends number ? Primitive_Numbers : T extends string ? Primitive_Strings : T extends string[] ? Primitive_StringsArray : T extends number[] ? Primitive_NumbersArray : T extends KnowTypes ? StructNode_Error<Path> : T extends KnowTypes[] ? StructNode_Error<`${Path}[]`> : T extends object[] ? NodeChild_Array<T, KnowTypes, Path> : T extends object ? NodeChild_Union<T, Path, KnowTypes> : StructNode_Error<`never:${Path}`>;
 interface NodeChild_Array<Array extends object[], KnowTypes extends object, Path extends string> extends StructAnnotationBase_Array {
-    type: "struct[]";
+    type: "struct_def[]";
     default: Array;
     struct: {
         structName: string;
