@@ -1,9 +1,14 @@
+import type { JSONSchemaType } from "ajv";
 import type { KindBase } from "./primitiveParams";
 
 export const X_RPG_PARM = "x-rpg-param" as const;
 export interface X_Param {
-  "x-rpg-param": X_RmmzParamBaee;
+  [X_RPG_PARM]: X_RmmzParamBaee;
 }
+
+export type JSONSchemaTypeWithRpgParam<V, X = object> = JSONSchemaType<V> & {
+  [X_RPG_PARM]: X_RmmzParamInput<X>;
+};
 
 export interface X_RmmzParamBaee {
   parent?: string | null;
