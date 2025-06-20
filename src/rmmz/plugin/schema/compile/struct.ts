@@ -54,7 +54,7 @@ export const compilePluginCommand = <T extends object>(
     `${titles.moduleName}${SEPARATOR}${PLUGIN_COMMAND}.${command}`,
     command,
     args,
-    { x: titles, options }
+    { meta: titles, options }
   );
 };
 
@@ -67,7 +67,7 @@ export const compilePluginStruct = <T extends object>(
     `${tiles.moduleName}${SEPARATOR}${structName}`,
     structName,
     params,
-    { x: tiles, options }
+    { meta: tiles, options }
   );
 };
 
