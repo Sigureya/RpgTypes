@@ -3,6 +3,7 @@ import { makeBooleanFieldWithXParam, makeBooleanField } from "./boolean";
 import type { StructParamPrimitive } from "./core/primitiveParams";
 import {
   makeNumberArrayField,
+  makeNumberArrayFieldWithXParam,
   makeNumberField,
   makeNumberFieldWithXparam,
 } from "./numbers";
@@ -95,7 +96,7 @@ export const compilePrimitiveWithXParam = (
     case "multiline_string[]":
       return makeStringArrayField(data);
     case "number[]":
-      return makeNumberArrayField(data);
+      return makeNumberArrayFieldWithXParam(data);
     case "actor[]":
     case "weapon[]":
     case "armor[]":
