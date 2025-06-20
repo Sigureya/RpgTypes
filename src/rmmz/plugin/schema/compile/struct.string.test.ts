@@ -17,7 +17,7 @@ const titles: PluginMeta = {
   author: "author",
 };
 
-describe("stringTypes", () => {
+describe("compilePluginStruct - string types", () => {
   const stringTypesStruct = {
     struct: "StringTypes",
     params: {
@@ -83,7 +83,7 @@ describe("stringTypes", () => {
     required: ["select", "file", "combo", "multiLIne", "strList", "fileList"],
     additionalProperties: false,
   };
-  test("schema", () => {
+  test("generates expected schema for all string-related fields", () => {
     const resultStringTypes = compilePluginStruct(
       titles,
       stringTypesStruct,
