@@ -42,30 +42,30 @@ describe("compilePluginStruct - boolean", () => {
       additionalProperties: false,
     } satisfies JSONSchemaType<MockBoolean>;
     const resultBool = compilePluginStruct(titles, mockBoolStructFullset, {});
-    test("schema", () => {
+    test("generates correct schema for boolean field", () => {
       expect(resultBool.schema).toEqual(expectedBoolSchema);
     });
     describe("logs", () => {
-      test("log data", () => {
+      test("logs correct data for boolean field", () => {
         expect(resultBool.logs[0].data).toBe(mockBoolStructFullset.params.bool);
       });
-      test("log path", () => {
+      test("logs correct path for boolean field", () => {
         expect(resultBool.logs[0].path).toBe("moduleName.Bool.bool");
       });
     });
     describe("ajv validation", () => {
       const ajv = new Ajv({ strict: true });
       const validate = ajv.compile(resultBool.schema);
-      test("", () => {
+      test("validates true value", () => {
         expect({ bool: true } satisfies MockBoolean).toSatisfy(validate);
       });
-      test("", () => {
+      test("validates false value", () => {
         expect({ bool: false } satisfies MockBoolean).toSatisfy(validate);
       });
-      test("invalid value", () => {
+      test("rejects invalid string value", () => {
         expect({ bool: "true" }).not.toSatisfy(validate);
       });
-      test("invalid type", () => {
+      test("rejects invalid number value", () => {
         expect({ bool: 1 }).not.toSatisfy(validate);
       });
     });

@@ -1,6 +1,6 @@
 import { describe, test, expect } from "vitest";
 import type { JSONSchemaType } from "ajv";
-import type { CompileLogItem } from "./core/kinds/compileLog";
+import type { StructCompileLog } from "./core/kinds/compileLog";
 import type { PluginMeta } from "./core/kinds/compileOption";
 import type { PluginStruct } from "./core/kinds/plugin";
 import { compilePluginStruct } from "./struct";
@@ -18,7 +18,7 @@ const titles: PluginMeta = {
   author: "author",
 };
 
-describe("family", () => {
+describe("compilePluginStruct - struct_ref", () => {
   const familyStruct = {
     struct: "Family",
     params: {

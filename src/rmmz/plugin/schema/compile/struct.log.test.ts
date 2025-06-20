@@ -162,7 +162,7 @@ const expectedStructs = {
   Sake: foodSchema.properties.drink.properties.alocohol,
   Carrot: foodSchema.properties.vegetable,
 };
-describe("", () => {
+describe("compilePluginStruct - complex nested struct and log extraction", () => {
   const result = compilePluginStruct(
     {
       moduleName: "FoodModule",
@@ -171,10 +171,10 @@ describe("", () => {
     foodStruct,
     {}
   );
-  test("", () => {
+  test("generates correct JSONSchema for nested Food struct", () => {
     expect(result.schema).toEqual(foodSchema);
   });
-  test("", () => {
+  test("extracts each nested struct schema correctly with defineStructs", () => {
     const table = defineStructs(result.logs);
     expect(table).toEqual(expectedStructs);
   });
