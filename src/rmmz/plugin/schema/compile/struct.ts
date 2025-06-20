@@ -1,14 +1,10 @@
 import type { JSONSchemaType } from "ajv";
 import type { CompileContext } from "./context";
+import type { PluginMeta, PluginCompileOptions } from "./kinds";
 import { makeBooleanFieldWithXParam, makeBooleanField } from "./kinds/boolean";
 import type { StructCompileLog, CompileResult } from "./kinds/compileLog";
-import type { PluginMeta, PluginCompileOptions } from "./kinds/compileOption";
 import { PLUGIN_COMMAND } from "./kinds/constants";
-import {
-  withDefault,
-  makeArrayField,
-  makeStructRef,
-} from "./kinds/core/primitive";
+import { withDefault, makeArrayField } from "./kinds/core/primitive";
 import { makeNumberArrayField, makeNumberField } from "./kinds/numbers";
 import type {
   PluginCommand,
@@ -23,7 +19,11 @@ import {
   makeComboField,
   makeSelectField,
 } from "./kinds/string";
-import { isStructDef, isStructDefArray } from "./kinds/structDef";
+import {
+  isStructDef,
+  isStructDefArray,
+  makeStructRef,
+} from "./kinds/structDef";
 
 type AnySchema =
   | {}
