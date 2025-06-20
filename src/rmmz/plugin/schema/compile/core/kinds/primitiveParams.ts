@@ -9,7 +9,7 @@ export type StructParamPrimitive =
   | KindOfNumberArray
   | KindOfRpgDataId
   | KindOfRpgDataIdArray
-  | KindOFCombo
+  | KindOfCombo
   | KindOfSelect
   | KindOfString
   | KindOfStringArray
@@ -61,7 +61,7 @@ export interface KindOfStringArray extends KindBase {
   default: string[];
 }
 
-export interface KindOFCombo extends KindBase {
+export interface KindOfCombo extends KindBase {
   kind: "combo";
   options: string[];
   default: string;
