@@ -235,7 +235,7 @@ const compilePrimitive = (
       return makeIdField(data, ctx);
     case "boolean":
       return makeBooleanField(data, ctx);
-    case "struct_ref":
+    case "struct":
       return makeStructRef(data);
     default:
       return {};
