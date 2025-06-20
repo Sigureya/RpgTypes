@@ -3,7 +3,7 @@ import type {
   KindOfBoolean,
   KindOfNumber,
   KindOfNumberArray,
-} from "./kinds";
+} from "./primitiveParams";
 import { lookupKind } from "./rpgData/lookup";
 import type {
   DataKind_RpgUnion,
