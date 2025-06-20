@@ -1,7 +1,7 @@
 import { describe, test, expect } from "vitest";
 import type { JSONSchemaType } from "ajv";
 import { defineStructs } from "./core/kinds/compileLog";
-import type { PluginStruct } from "./core/kinds/plugin";
+import type { KindOfStruct, PluginStruct } from "./core/kinds/plugin";
 import { compilePluginStruct } from "./struct";
 
 interface Carrot {
@@ -112,7 +112,7 @@ const foodStruct: PluginStruct<Food> = {
         kind: { kind: "string", default: "carrot" },
         color: { kind: "string", default: "orange" },
       },
-    },
+    } satisfies KindOfStruct<Carrot>,
     grain: {
       kind: "struct_def",
       struct: "Rice",
@@ -120,35 +120,35 @@ const foodStruct: PluginStruct<Food> = {
         kind: { kind: "string", default: "rice" },
         origin: { kind: "string", default: "Japan" },
       },
-    },
+    } satisfies KindOfStruct<Rice>,
     drink: {
       kind: "struct_def",
       struct: "Drink",
       params: {
         alocohol: {
-          kind: "struct",
+          kind: "struct_def",
           struct: "Sake",
           params: {
             type: { kind: "string", default: "sake" },
             percent: { kind: "number", default: 15 },
           },
-        },
+        } satisfies KindOfStruct<Sake>,
         juice: {
-          kind: "struct",
+          kind: "struct_def",
           struct: "OrangeJuice",
           params: {
             type: { kind: "string", default: "orange_juice" },
             sugarFree: { kind: "boolean", default: true },
           },
-        },
+        } satisfies KindOfStruct<OrangeJuice>,
         tea: {
-          kind: "struct",
+          kind: "struct_def",
           struct: "GreenTea",
           params: {
             type: { kind: "string", default: "green_tea" },
             temperature: { kind: "number", default: 80 },
           },
-        },
+        } satisfies KindOfStruct<GreenTea>,
       },
     },
   },
