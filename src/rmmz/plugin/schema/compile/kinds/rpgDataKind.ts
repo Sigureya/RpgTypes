@@ -1,9 +1,12 @@
 import type { JSONSchemaType } from "ajv";
-import { withDefault, withTexts } from "./primitive";
-import type { KindOfRpgDataId, KindOfSystemDataId } from "./primitiveParams";
-import { lookupKind } from "./rpgData/lookup";
-import type { X_Param } from "./x-rpg-param";
-import { xparamBaseData } from "./x-rpg-param";
+import { withDefault, withTexts } from "./core/primitive";
+import type {
+  KindOfRpgDataId,
+  KindOfSystemDataId,
+} from "./core/primitiveParams";
+import { lookupKind } from "./core/rpgData/lookup";
+import type { X_Param } from "./core/x-rpg-param";
+import { xparamBaseData } from "./core/x-rpg-param";
 
 export const makeIdField = (data: KindOfRpgDataId | KindOfSystemDataId) =>
   ({

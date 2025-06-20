@@ -1,13 +1,13 @@
 import { describe, test, expect } from "vitest";
 import type { JSONSchemaType } from "ajv";
+import type { KindOfNumber, KindOfNumberArray } from "./core/primitiveParams";
+import type { JSONSchemaTypeWithRpgParam } from "./core/x-rpg-param";
 import {
   makeNumberArrayField,
   makeNumberArrayFieldWithXParam,
   makeNumberField,
   makeNumberFieldWithXparam,
 } from "./numbers";
-import type { KindOfNumber, KindOfNumberArray } from "./primitiveParams";
-import type { JSONSchemaTypeWithRpgParam } from "./x-rpg-param";
 
 describe("makeNumberField", () => {
   test("should create a number field schema", () => {

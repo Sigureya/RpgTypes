@@ -1,13 +1,13 @@
 import type { JSONSchemaType } from "ajv";
-import { withDefault, withTexts } from "./primitive";
+import { withDefault, withTexts } from "./core/primitive";
 import type {
   KindOfString,
   KindOfSelect,
   KindOfCombo,
   KindOfFile,
-} from "./primitiveParams";
-import type { JSONSchemaTypeWithRpgParam } from "./x-rpg-param";
-import { xparamBaseData } from "./x-rpg-param";
+} from "./core/primitiveParams";
+import type { JSONSchemaTypeWithRpgParam } from "./core/x-rpg-param";
+import { xparamBaseData } from "./core/x-rpg-param";
 
 export const makeStringField = (data: KindOfString) =>
   ({
