@@ -1,35 +1,29 @@
 import type { JSONSchemaType } from "ajv";
 import type { CompileContext } from "./context";
+import { makeBooleanFieldWithXParam, makeBooleanField } from "./kinds/boolean";
+import type { StructCompileLog, CompileResult } from "./kinds/compileLog";
+import type { PluginMeta, PluginCompileOptions } from "./kinds/compileOption";
+import { PLUGIN_COMMAND } from "./kinds/constants";
 import {
-  makeBooleanField,
-  makeBooleanFieldWithXParam,
-} from "./core/kinds/boolean";
-import type { StructCompileLog, CompileResult } from "./core/kinds/compileLog";
-import type {
-  PluginCompileOptions,
-  PluginMeta,
-} from "./core/kinds/compileOption";
-import { PLUGIN_COMMAND } from "./core/kinds/constants";
-import { makeNumberArrayField, makeNumberField } from "./core/kinds/numbers";
+  withDefault,
+  makeArrayField,
+  makeStructRef,
+} from "./kinds/core/primitive";
+import { makeNumberArrayField, makeNumberField } from "./kinds/numbers";
 import type {
   PluginCommand,
   PluginStruct,
   StructParam,
   KindOfStructArray,
-} from "./core/kinds/plugin";
-import {
-  withDefault,
-  makeArrayField,
-  makeStructRef,
-} from "./core/kinds/core/primitive";
-import { makeIdField, makeIdFieldWithXParam } from "./core/kinds/rpgDataKind";
+} from "./kinds/plugin";
+import { makeIdFieldWithXParam, makeIdField } from "./kinds/rpgDataKind";
 import {
   makeStringField,
   makeFileField,
   makeComboField,
   makeSelectField,
-} from "./core/kinds/string";
-import { isStructDef, isStructDefArray } from "./core/kinds/structDef";
+} from "./kinds/string";
+import { isStructDef, isStructDefArray } from "./kinds/structDef";
 
 type AnySchema =
   | {}

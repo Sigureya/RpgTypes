@@ -1,8 +1,4 @@
-import type {
-  PluginCommand,
-  PluginStruct,
-  StructParam,
-} from "./core/kinds/plugin";
+import type { PluginCommand, PluginStruct, StructParam } from "./kinds/plugin";
 
 export interface PluginXX {
   commands: PluginCommand<object>[];
