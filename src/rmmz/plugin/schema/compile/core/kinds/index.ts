@@ -1,2 +1,2 @@
-export type * from "./primitiveParams";
-export type * from "./rpgData/rpgDataTypesNames";
+export type * from "./core/primitiveParams";
+export type * from "./core/rpgData/rpgDataTypesNames";

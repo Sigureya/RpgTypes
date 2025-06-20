@@ -21,7 +21,7 @@ import {
   withDefault,
   makeArrayField,
   makeStructRef,
-} from "./core/kinds/primitive";
+} from "./core/kinds/core/primitive";
 import { makeIdField, makeIdFieldWithXParam } from "./core/kinds/rpgDataKind";
 import {
   makeStringField,

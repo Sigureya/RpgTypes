@@ -5,7 +5,8 @@ import type {
   KindOfSelect,
   KindOfString,
   KindOfCombo,
-} from "./primitiveParams";
+} from "./core/primitiveParams";
+import type { JSONSchemaTypeWithRpgParam } from "./core/x-rpg-param";
 import {
   makeComboField,
   makeFileField,
@@ -16,7 +17,6 @@ import {
   makeSelectFieldWithXparam,
   makeStringFieldWithXparam,
 } from "./string";
-import type { JSONSchemaTypeWithRpgParam } from "./x-rpg-param";
 
 describe("makeStringField", () => {
   test("should create a string field schema", () => {

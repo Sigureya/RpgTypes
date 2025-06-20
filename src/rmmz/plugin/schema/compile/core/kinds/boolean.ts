@@ -1,8 +1,8 @@
 import type { JSONSchemaType } from "ajv";
-import { withDefault, withTexts } from "./primitive";
-import type { KindOfBoolean } from "./primitiveParams";
-import type { X_Param } from "./x-rpg-param";
-import { xparamBaseData } from "./x-rpg-param";
+import { withDefault, withTexts } from "./core/primitive";
+import type { KindOfBoolean } from "./core/primitiveParams";
+import type { X_Param } from "./core/x-rpg-param";
+import { xparamBaseData } from "./core/x-rpg-param";
 
 export const makeBooleanField = (data: KindOfBoolean) =>
   ({

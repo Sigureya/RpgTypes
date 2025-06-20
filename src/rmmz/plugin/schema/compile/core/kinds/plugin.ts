@@ -1,4 +1,4 @@
-import type { KindBase, StructParamPrimitive } from "./primitiveParams";
+import type { KindBase, StructParamPrimitive } from "./core/primitiveParams";
 
 // 各パラメータ型のユニオン
 export type StructParam =
