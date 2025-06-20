@@ -1,5 +1,5 @@
 import type { JSONSchemaType } from "ajv";
-import type { CompileContext } from "./context";
+import type { CompileContext } from "../../context";
 import type {
   KindBase,
   KindOfBoolean,
@@ -12,17 +12,9 @@ import type {
   KindOfString,
   KindOfStructRef,
   KindOfSystemDataId,
-} from "./core/kinds/primitiveParams";
-import type { X_RmmzParamBaee } from "./core/kinds/x-rpg-param";
-import {
-  xparamNumber,
-  xparamDataId,
-  xparamBoolean,
-} from "./core/kinds/x-rpg-param";
-
-interface X_Param {
-  "x-rpg-param": X_RmmzParamBaee;
-}
+} from "./primitiveParams";
+import type { X_Param, X_RmmzParamBaee } from "./x-rpg-param";
+import { xparamNumber, xparamBoolean } from "./x-rpg-param";
 
 export const withTexts = (kind: KindBase) => ({
   ...(typeof kind.text === "string" ? { title: kind.text } : {}),
@@ -83,18 +75,6 @@ export const makeNumberArrayField = (
     ...withTexts(data),
     ...(ctx.options.kindData ? xparamNumber(data) : {}),
   } satisfies JSONSchemaType<number[]>);
-
-export const makeIdField = (
-  data: KindOfRpgDataId | KindOfSystemDataId,
-
-  ctx: CompileContext
-) =>
-  ({
-    type: "integer",
-    ...withDefault(data.default),
-    ...withTexts(data),
-    ...(ctx.options.kindData ? (xparamDataId(data) satisfies X_Param) : {}),
-  } satisfies JSONSchemaType<number>);
 
 export const makeBooleanField = (data: KindOfBoolean, ctx: CompileContext) =>
   ({

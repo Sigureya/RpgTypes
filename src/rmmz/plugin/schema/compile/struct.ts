@@ -12,20 +12,20 @@ import type {
   StructParam,
   KindOfStructArray,
 } from "./core/kinds/plugin";
-import { isStructDef, isStructDefArray } from "./core/kinds/structDef";
 import {
-  makeArrayField,
-  makeBooleanField,
-  makeComboField,
+  withDefault,
+  makeStringField,
   makeFileField,
-  makeIdField,
+  makeComboField,
+  makeSelectField,
+  makeArrayField,
   makeNumberArrayField,
   makeNumberField,
-  makeSelectField,
-  makeStringField,
+  makeBooleanField,
   makeStructRef,
-  withDefault,
-} from "./primitive";
+} from "./core/kinds/primitive";
+import { makeIdField, makeIdFieldWithXParam } from "./core/kinds/rpgDataKind";
+import { isStructDef, isStructDefArray } from "./core/kinds/structDef";
 
 type AnySchema =
   | {}
@@ -232,7 +232,9 @@ const compilePrimitive = (
     case "state":
     case "class":
     case "troop":
-      return makeIdField(data, ctx);
+      return ctx.options.kindData
+        ? makeIdFieldWithXParam(data)
+        : makeIdField(data);
     case "boolean":
       return makeBooleanField(data, ctx);
     case "struct":
