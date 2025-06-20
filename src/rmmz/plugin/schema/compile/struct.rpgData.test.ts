@@ -19,7 +19,7 @@ const titles: PluginMeta = {
   author: "author",
 };
 
-describe("alldata - with text", () => {
+describe("compilePluginStruct - RPG data fields with text", () => {
   const allDataStruct = {
     struct: "AllData",
     params: {
@@ -67,7 +67,7 @@ describe("alldata - with text", () => {
     required: ["actor", "weapons", "armor", "skill", "item", "enemy", "state"],
     additionalProperties: false,
   };
-  test("schema", () => {
+  test("generates correct JSONSchema for RPG data fields with text", () => {
     const resultAllData = compilePluginStruct(titles, allDataStruct, {});
     expect(resultAllData.schema).toEqual(expectedAllDataSchema);
   });
@@ -78,14 +78,14 @@ describe("alldata - with text", () => {
         return [log.path, log.data] as const;
       })
     );
-    test("log actor", () =>
+    test("logs correct data for actor field", () =>
       expect(map.get("moduleName.AllData.actor")).toEqual({
         kind: "actor",
         default: 0,
         desc: "actor desc",
         text: "actor text",
       }));
-    test("log weapons", () => {
+    test("logs correct data for armor field", () => {
       expect(map.get("moduleName.AllData.armor")).toEqual({
         kind: "armor",
         default: 0,
@@ -95,7 +95,8 @@ describe("alldata - with text", () => {
     });
   });
 });
-describe("allData - no text", () => {
+
+describe("compilePluginStruct - RPG data fields without text", () => {
   const allDataStruct = {
     struct: "AllData",
     params: {
@@ -135,7 +136,7 @@ describe("allData - no text", () => {
     required: ["actor", "weapons", "armor", "skill", "item", "enemy", "state"],
     additionalProperties: false,
   } as const satisfies JSONSchemaType<AllData>;
-  test("schema", () => {
+  test("generates correct JSONSchema for RPG data fields without text", () => {
     const resultAllData = compilePluginStruct(titles, allDataStruct, {});
     expect(resultAllData.schema).toEqual(expectedAllDataSchema);
   });
