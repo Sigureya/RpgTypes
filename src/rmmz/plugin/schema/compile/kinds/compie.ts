@@ -1,11 +1,11 @@
-import type { AnySchema } from "ajv";
+import type { JSONSchemaType } from "ajv";
 import { makeBooleanFieldWithXParam, makeBooleanField } from "./boolean";
 import type { StructParamPrimitive } from "./core/primitiveParams";
 import {
-  makeNumberArrayField,
-  makeNumberArrayFieldWithXParam,
-  makeNumberField,
-  makeNumberFieldWithXparam,
+  compileNumberArrayField,
+  compileNumberArrayFieldWithXParam,
+  compileNumberField,
+  compileNumberFieldWithXparam,
 } from "./numbers";
 import { makeIdFieldWithXParam, makeIdField } from "./rpgDataKind";
 import {
@@ -20,6 +20,17 @@ import {
 import { makeStructRef } from "./structDef";
 import { makeArrayField } from "./utils";
 
+export type AnyParamSchema =
+  | {}
+  | JSONSchemaType<number>
+  | JSONSchemaType<string>
+  | JSONSchemaType<boolean>
+  | JSONSchemaType<number[]>
+  | JSONSchemaType<string[]>
+  | JSONSchemaType<object>
+  | JSONSchemaType<object[]>
+  | { $ref: string };
+
 const makeStringArrayField = (
   data: Extract<StructParamPrimitive, { default: string[] }>
 ) => makeArrayField<string>(data, "string");
@@ -28,7 +39,9 @@ const makeDataIdArrayField = (
   data: Extract<StructParamPrimitive, { default: number[] }>
 ) => makeArrayField<number>(data, "integer");
 
-export const compilePrimitive = (data: StructParamPrimitive): AnySchema => {
+export const compilePrimitiveFiled = (
+  data: StructParamPrimitive
+): AnyParamSchema => {
   switch (data.kind) {
     case "string":
     case "multiline_string":
@@ -45,7 +58,7 @@ export const compilePrimitive = (data: StructParamPrimitive): AnySchema => {
     case "multiline_string[]":
       return makeStringArrayField(data);
     case "number[]":
-      return makeNumberArrayField(data);
+      return compileNumberArrayField(data);
     case "actor[]":
     case "weapon[]":
     case "armor[]":
@@ -57,7 +70,7 @@ export const compilePrimitive = (data: StructParamPrimitive): AnySchema => {
     case "troop[]":
       return makeDataIdArrayField(data);
     case "number":
-      return makeNumberField(data);
+      return compileNumberField(data);
     case "actor":
     case "weapon":
     case "armor":
@@ -77,9 +90,9 @@ export const compilePrimitive = (data: StructParamPrimitive): AnySchema => {
   }
 };
 
-export const compilePrimitiveWithXParam = (
+export const compilePrimitiveFiledWithXParam = (
   data: StructParamPrimitive
-): AnySchema => {
+): AnyParamSchema => {
   switch (data.kind) {
     case "string":
     case "multiline_string":
@@ -96,7 +109,7 @@ export const compilePrimitiveWithXParam = (
     case "multiline_string[]":
       return makeStringArrayField(data);
     case "number[]":
-      return makeNumberArrayFieldWithXParam(data);
+      return compileNumberArrayFieldWithXParam(data);
     case "actor[]":
     case "weapon[]":
     case "armor[]":
@@ -108,7 +121,7 @@ export const compilePrimitiveWithXParam = (
     case "troop[]":
       return makeDataIdArrayField(data);
     case "number":
-      return makeNumberFieldWithXparam(data);
+      return compileNumberFieldWithXparam(data);
     case "actor":
     case "weapon":
     case "armor":
