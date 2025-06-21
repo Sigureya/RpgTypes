@@ -1,10 +1,6 @@
 import type { JSONSchemaType } from "ajv";
 import { withDefault, withTexts } from "./core/primitive";
-import type {
-  KindOfString,
-  KindOfSelect,
-  KindOfCombo,
-} from "./core/primitiveParams";
+import type { KindOfString } from "./core/primitiveParams";
 import type { JSONSchemaTypeWithRpgParam } from "./core/x-rpg-param";
 import { xparamBaseData } from "./core/x-rpg-param";
 
@@ -22,45 +18,4 @@ export const compileStringFieldWithXparam = (
   ...withTexts(data),
   ...withDefault(data.default),
   ...xparamBaseData(data, {}),
-});
-
-export const compileSelectField = (data: KindOfSelect) =>
-  ({
-    type: "string",
-    ...withDefault(data.default),
-    ...withTexts(data),
-    ...(data.options ? { enum: data.options.map((o): string => o.value) } : {}),
-  } satisfies JSONSchemaType<string>);
-
-export const compileSelectFieldWithXparam = (
-  data: KindOfSelect
-): JSONSchemaTypeWithRpgParam<string> => ({
-  type: "string",
-  ...withDefault(data.default),
-  ...withTexts(data),
-  ...{ enum: data.options.map((o): string => o.value) },
-  ...xparamBaseData(data, {
-    options: data.options.map((o) => ({
-      value: o.value,
-      option: o.option,
-    })),
-  }),
-});
-
-export const compileComboField = (data: KindOfCombo) =>
-  ({
-    type: "string",
-    ...withDefault(data.default),
-    ...withTexts(data),
-  } satisfies JSONSchemaType<string>);
-
-export const compileComboFieldWithXparam = (
-  data: KindOfCombo
-): JSONSchemaTypeWithRpgParam<string> => ({
-  type: "string",
-  ...withDefault(data.default),
-  ...withTexts(data),
-  ...xparamBaseData(data, {
-    options: [...data.options],
-  }),
 });

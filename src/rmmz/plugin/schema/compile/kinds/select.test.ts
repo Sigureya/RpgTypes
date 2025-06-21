@@ -7,7 +7,7 @@ import {
 } from "./compie";
 import type { KindOfSelect } from "./core/primitiveParams";
 import type { JSONSchemaTypeWithRpgParam } from "./core/x-rpg-param";
-import { compileSelectField, compileSelectFieldWithXparam } from "./string";
+import { compileSelectField, compileSelectFieldWithXparam } from "./select";
 
 const data = {
   kind: "select",
