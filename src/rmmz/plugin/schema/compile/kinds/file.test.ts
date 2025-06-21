@@ -7,7 +7,7 @@ import {
 } from "./compie";
 import type { KindOfFile } from "./core/primitiveParams";
 import type { JSONSchemaTypeWithRpgParam } from "./core/x-rpg-param";
-import { compileFileField, compileFileFieldWithXparam } from "./string";
+import { compileFileField, compileFileFieldWithXparam } from "./file";
 
 const mockData: KindOfFile = {
   kind: "file",
