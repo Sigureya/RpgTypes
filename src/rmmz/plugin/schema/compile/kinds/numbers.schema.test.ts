@@ -1,7 +1,7 @@
 import { describe, test, expect } from "vitest";
 import Ajv from "ajv";
+import type { KindOfNumber } from "./core/primitiveParams";
 import { rmmzSchemaNumberParam } from "./numbers";
-import type { RmmzParamCore_Number } from "./types";
 
 describe("", () => {
   const ajv = new Ajv({ strict: true });
@@ -9,8 +9,8 @@ describe("", () => {
   const validate = ajv.compile(xxx);
   describe("valid cases", () => {
     test("validates number parameter with default 0", () => {
-      const mock: RmmzParamCore_Number = {
-        type: "number",
+      const mock: KindOfNumber = {
+        kind: "number",
         default: 0,
         digit: 0,
       };
@@ -18,8 +18,8 @@ describe("", () => {
     });
 
     test("validates number parameter with digit 2", () => {
-      const mock: RmmzParamCore_Number = {
-        type: "number",
+      const mock: KindOfNumber = {
+        kind: "number",
         default: 0.01,
         digit: 2,
       };
@@ -27,8 +27,8 @@ describe("", () => {
     });
 
     test("validates number parameter with min and max", () => {
-      const mock: RmmzParamCore_Number = {
-        type: "number",
+      const mock: KindOfNumber = {
+        kind: "number",
         default: 5,
         min: 0,
         max: 10,
