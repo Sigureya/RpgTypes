@@ -1,5 +1,5 @@
 import type { JSONSchemaType } from "ajv";
-import { makeBooleanFieldWithXParam, makeBooleanField } from "./boolean";
+import { compileBooleanFieldWithXParam, compileBooleanField } from "./boolean";
 import type { StructParamPrimitive } from "./core/primitiveParams";
 import {
   compileNumberArrayField,
@@ -83,7 +83,7 @@ export const compilePrimitiveFiled = (
     case "troop":
       return makeIdField(data);
     case "boolean":
-      return makeBooleanField(data);
+      return compileBooleanField(data);
     case "struct":
       return makeStructRef(data);
     default:
@@ -134,7 +134,7 @@ export const compilePrimitiveFiledWithXParam = (
     case "troop":
       return makeIdFieldWithXParam(data);
     case "boolean":
-      return makeBooleanFieldWithXParam(data);
+      return compileBooleanFieldWithXParam(data);
     case "struct":
       return makeStructRef(data);
     default:

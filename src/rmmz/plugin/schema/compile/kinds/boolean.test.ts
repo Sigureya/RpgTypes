@@ -1,0 +1,64 @@
+import { describe, test, expect } from "vitest";
+import type { JSONSchemaType } from "ajv";
+import { compileBooleanField, compileBooleanFieldWithXParam } from "./boolean";
+import type { AnyParamSchema } from "./compie";
+import {
+  compilePrimitiveFiled,
+  compilePrimitiveFiledWithXParam,
+} from "./compie";
+import type { KindOfBoolean } from "./core/primitiveParams";
+import type { JSONSchemaTypeWithRpgParam } from "./core/x-rpg-param";
+
+const mockData: KindOfBoolean = {
+  kind: "boolean",
+  default: true,
+  desc: "A boolean field",
+  text: "Boolean Field",
+  off: "disabled",
+  on: "enabled",
+};
+
+describe("Boolean field schema generation - Basic", () => {
+  const expectedSchema: JSONSchemaType<boolean> = {
+    type: "boolean",
+    default: mockData.default,
+    title: mockData.text,
+    description: mockData.desc,
+  };
+  describe("generates schema for KindOfBoolean", () => {
+    test("compileBooleanField", () => {
+      const schema: AnyParamSchema = compileBooleanField(mockData);
+      expect(schema).toEqual(expectedSchema);
+    });
+    test("via union dispatcher (compilePrimitiveFiled)", () => {
+      const schema: AnyParamSchema = compilePrimitiveFiled(mockData);
+      expect(schema).toEqual(expectedSchema);
+    });
+  });
+});
+
+describe("Boolean field schema generation - with x-rpg-param", () => {
+  const expectedSchema: JSONSchemaTypeWithRpgParam<boolean> = {
+    type: "boolean",
+    default: mockData.default,
+    title: mockData.text,
+    description: mockData.desc,
+    "x-rpg-param": {
+      kind: "boolean",
+      data: {
+        off: mockData.off,
+        on: mockData.on,
+      },
+    },
+  };
+  describe("generates schema for KindOfBoolean with x-rpg-param", () => {
+    test("compileBooleanFieldWithXparam", () => {
+      const schema: AnyParamSchema = compileBooleanFieldWithXParam(mockData);
+      expect(schema).toEqual(expectedSchema);
+    });
+    test("via union dispatcher (compilePrimitiveFiledWithXParam)", () => {
+      const schema: AnyParamSchema = compilePrimitiveFiledWithXParam(mockData);
+      expect(schema).toEqual(expectedSchema);
+    });
+  });
+});
