@@ -9,14 +9,14 @@ import type {
 import type { JSONSchemaTypeWithRpgParam } from "./core/x-rpg-param";
 import { xparamBaseData } from "./core/x-rpg-param";
 
-export const makeStringField = (data: KindOfString) =>
+export const compileStringField = (data: KindOfString) =>
   ({
     type: "string",
     ...withTexts(data),
     ...withDefault(data.default),
   } satisfies JSONSchemaType<string>);
 
-export const makeStringFieldWithXparam = (
+export const compileStringFieldWithXparam = (
   data: KindOfString
 ): JSONSchemaTypeWithRpgParam<string> => ({
   type: "string",
@@ -25,7 +25,7 @@ export const makeStringFieldWithXparam = (
   ...xparamBaseData(data, {}),
 });
 
-export const makeSelectField = (data: KindOfSelect) =>
+export const compileSelectField = (data: KindOfSelect) =>
   ({
     type: "string",
     ...withDefault(data.default),
@@ -33,7 +33,7 @@ export const makeSelectField = (data: KindOfSelect) =>
     ...(data.options ? { enum: data.options.map((o): string => o.value) } : {}),
   } satisfies JSONSchemaType<string>);
 
-export const makeSelectFieldWithXparam = (
+export const compileSelectFieldWithXparam = (
   data: KindOfSelect
 ): JSONSchemaTypeWithRpgParam<string> => ({
   type: "string",
@@ -43,14 +43,14 @@ export const makeSelectFieldWithXparam = (
   ...xparamBaseData(data, {}),
 });
 
-export const makeComboField = (data: KindOfCombo) =>
+export const compileComboField = (data: KindOfCombo) =>
   ({
     type: "string",
     ...withDefault(data.default),
     ...withTexts(data),
   } satisfies JSONSchemaType<string>);
 
-export const makeComboFieldWithXparam = (
+export const compileComboFieldWithXparam = (
   data: KindOfCombo
 ): JSONSchemaTypeWithRpgParam<string> => ({
   type: "string",
@@ -59,14 +59,14 @@ export const makeComboFieldWithXparam = (
   ...xparamBaseData(data, {}),
 });
 
-export const makeFileField = (data: KindOfFile) =>
+export const compileFileField = (data: KindOfFile) =>
   ({
     type: "string",
     ...withDefault(data.default),
     ...withTexts(data),
   } satisfies JSONSchemaType<string>);
 
-export const makeFileFieldWithXparam = (
+export const compileFileFieldWithXparam = (
   data: KindOfFile
 ): JSONSchemaTypeWithRpgParam<string> => ({
   type: "string",

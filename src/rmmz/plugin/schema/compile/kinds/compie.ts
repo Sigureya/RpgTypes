@@ -9,13 +9,14 @@ import {
 } from "./numbers";
 import { makeIdFieldWithXParam, makeIdField } from "./rpgDataKind";
 import {
-  makeStringField,
-  makeFileField,
-  makeComboField,
-  makeSelectField,
-  makeFileFieldWithXparam,
-  makeComboFieldWithXparam,
-  makeSelectFieldWithXparam,
+  compileStringField,
+  compileFileField,
+  compileComboField,
+  compileSelectField,
+  compileFileFieldWithXparam,
+  compileComboFieldWithXparam,
+  compileSelectFieldWithXparam,
+  compileStringFieldWithXparam,
 } from "./string";
 import { makeStructRef } from "./structDef";
 import { makeArrayField } from "./utils";
@@ -45,13 +46,13 @@ export const compilePrimitiveFiled = (
   switch (data.kind) {
     case "string":
     case "multiline_string":
-      return makeStringField(data);
+      return compileStringField(data);
     case "file":
-      return makeFileField(data);
+      return compileFileField(data);
     case "combo":
-      return makeComboField(data);
+      return compileComboField(data);
     case "select":
-      return makeSelectField(data);
+      return compileSelectField(data);
     case "file[]":
       return makeStringArrayField(data);
     case "string[]":
@@ -96,13 +97,13 @@ export const compilePrimitiveFiledWithXParam = (
   switch (data.kind) {
     case "string":
     case "multiline_string":
-      return makeStringField(data);
+      return compileStringFieldWithXparam(data);
     case "file":
-      return makeFileFieldWithXparam(data);
+      return compileFileFieldWithXparam(data);
     case "combo":
-      return makeComboFieldWithXparam(data);
+      return compileComboFieldWithXparam(data);
     case "select":
-      return makeSelectFieldWithXparam(data);
+      return compileSelectFieldWithXparam(data);
     case "file[]":
       return makeStringArrayField(data);
     case "string[]":

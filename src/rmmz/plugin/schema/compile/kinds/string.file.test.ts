@@ -5,27 +5,28 @@ import {
   compilePrimitiveFiled,
   compilePrimitiveFiledWithXParam,
 } from "./compie";
-import type { KindOfString } from "./core/primitiveParams";
+import type { KindOfFile } from "./core/primitiveParams";
 import type { JSONSchemaTypeWithRpgParam } from "./core/x-rpg-param";
-import { compileStringField, compileStringFieldWithXparam } from "./string";
+import { compileFileField, compileFileFieldWithXparam } from "./string";
 
-const mockData: KindOfString = {
-  kind: "string",
-  default: "defaultString",
-  desc: "A string field",
-  text: "String Field",
+const mockData: KindOfFile = {
+  kind: "file",
+  default: "defaultFile",
+  desc: "A file field",
+  text: "File Field",
+  dir: "img/faces",
 };
 
-describe("String field schema generation - Basic", () => {
+describe("File field schema generation - Basic", () => {
   const expectedSchema: JSONSchemaType<string> = {
     type: "string",
-    default: mockData.default,
-    title: mockData.text,
-    description: mockData.desc,
+    default: "defaultFile",
+    title: "File Field",
+    description: "A file field",
   };
-  describe("generates schema for KindOfString", () => {
-    test("compileStringField", () => {
-      const schema: AnyParamSchema = compileStringField(mockData);
+  describe("generates schema for KindOfFile", () => {
+    test("compileFileField", () => {
+      const schema: AnyParamSchema = compileFileField(mockData);
       expect(schema).toEqual(expectedSchema);
     });
     test("via union dispatcher (compilePrimitiveFiled)", () => {
@@ -34,24 +35,25 @@ describe("String field schema generation - Basic", () => {
     });
   });
 });
-describe("String field schema generation - with x-rpg-param", () => {
+
+describe("File field schema generation with x-rpg-param", () => {
   const expectedSchema: JSONSchemaTypeWithRpgParam<string> = {
     type: "string",
     default: mockData.default,
     title: mockData.text,
     description: mockData.desc,
     "x-rpg-param": {
-      kind: "string",
+      kind: "file",
       data: {},
     },
   };
-  describe("generates schema for KindOfString with x-rpg-param", () => {
-    test("compileStringFieldWithXparam", () => {
-      const schema = compileStringFieldWithXparam(mockData);
+  describe("generates schema for KindOfFile - with x-rpg-param", () => {
+    test("compileFileFieldWithXparam", () => {
+      const schema: AnyParamSchema = compileFileFieldWithXparam(mockData);
       expect(schema).toEqual(expectedSchema);
     });
     test("via union dispatcher (compilePrimitiveFiledWithXParam)", () => {
-      const schema = compilePrimitiveFiledWithXParam(mockData);
+      const schema: AnyParamSchema = compilePrimitiveFiledWithXParam(mockData);
       expect(schema).toEqual(expectedSchema);
     });
   });
