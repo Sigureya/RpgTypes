@@ -24,3 +24,19 @@ const xparamBoolean = (data: KindOfBoolean) =>
     ...(typeof data.on === "string" ? { on: data.on } : {}),
     ...(typeof data.off === "string" ? { off: data.off } : {}),
   });
+
+export const makeSchemaBooleanParam = () =>
+  ({
+    additionalProperties: false,
+    type: "object",
+    required: ["kind", "default"],
+    properties: {
+      kind: { type: "string", const: "boolean" },
+      default: { type: "boolean" },
+      on: { type: "string", nullable: true },
+      off: { type: "string", nullable: true },
+      desc: { type: "string", nullable: true },
+      text: { type: "string", nullable: true },
+      parent: { type: "string", nullable: true },
+    },
+  } satisfies JSONSchemaType<KindOfBoolean>);
