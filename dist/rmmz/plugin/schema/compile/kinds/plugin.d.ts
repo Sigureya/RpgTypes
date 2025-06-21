@@ -1,5 +1,4 @@
-import { KindOfBoolean, KindOfNumber, KindOfNumberArray, KindOfRpgDataId, KindOfSelect, KindOfString, KindOfStringArray, KindOfSystemDataId, KindOfFile, KindOfRpgDataIdArray, KindOFCombo, KindOfStructRef, KindOfFileArray, KindBase } from './kinds';
-export type StructParamPrimitive = KindOfBoolean | KindOfNumber | KindOfNumberArray | KindOfRpgDataId | KindOfRpgDataIdArray | KindOFCombo | KindOfSelect | KindOfString | KindOfStringArray | KindOfSystemDataId | KindOfFile | KindOfFileArray | KindOfStructRef;
+import { KindBase, StructParamPrimitive } from './core/primitiveParams';
 export type StructParam = StructParamPrimitive | KindOfStruct<object> | KindOfStructArray<object>;
 export interface KindOfStructArray<T extends object> extends PluginStruct<T>, KindBase {
     kind: "struct_def[]";
