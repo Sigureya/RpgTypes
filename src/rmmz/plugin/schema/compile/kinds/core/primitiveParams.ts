@@ -71,6 +71,8 @@ export interface KindOfNumber extends KindBase {
   kind: "number";
   default: number;
   digit?: number;
+  min?: number;
+  max?: number;
 }
 export interface KindOfNumberArray extends KindBase {
   kind: "number[]";
