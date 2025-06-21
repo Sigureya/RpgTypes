@@ -44,7 +44,9 @@ describe("File field schema generation with x-rpg-param", () => {
     description: mockData.desc,
     "x-rpg-param": {
       kind: "file",
-      data: {},
+      data: {
+        dir: mockData.dir,
+      },
     },
   };
   describe("generates schema for KindOfFile - with x-rpg-param", () => {
