@@ -2,7 +2,6 @@ import type { JSONSchemaType } from "ajv";
 import type { Schema } from "jsonschema";
 import type {
   ParamKinds_String,
-  RmmzParamCore_Combo,
   RmmzParamCore_FilePath,
   RmmzParamCore_String,
 } from "./types";
@@ -20,22 +19,6 @@ export const rmmzSchemaStringParam = () =>
       default: { type: "string", default: "" },
     },
   } satisfies Schema & JSONSchemaType<RmmzParamCore_String>);
-
-export const rmmzSchemaComboParam = () =>
-  ({
-    additionalProperties: false,
-    type: "object",
-    required: ["type", "default", "options"],
-    properties: {
-      type: { type: "string", const: "combo" },
-      default: { type: "string", default: "" },
-      options: {
-        type: "array",
-        items: { type: "string" },
-        default: [],
-      },
-    },
-  } satisfies Schema & JSONSchemaType<RmmzParamCore_Combo>);
 
 export const rmmzSchemaFilePathParam = () =>
   ({
