@@ -98,12 +98,16 @@ export interface KindOfFileArray extends KindBase {
   dir: string;
 }
 
-export interface KindOfStructRef extends KindBase {
+export interface KidnOfStructBase extends KindBase {
+  struct: string;
+}
+
+export interface KindOfStructRef extends KidnOfStructBase {
   kind: "struct";
   struct: string;
 }
 
-export interface KindOfStructArrayRef extends KindBase {
+export interface KindOfStructArrayRef extends KidnOfStructBase {
   kind: "struct[]";
   struct: string;
 }

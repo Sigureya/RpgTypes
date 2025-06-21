@@ -1,6 +1,7 @@
 import type { JSONSchemaType } from "ajv";
 import type { CompileContext } from "./context";
 import type { PluginMeta, PluginCompileOptions } from "./kinds";
+import type { AnyParamSchema } from "./kinds/compie";
 import {
   compilePrimitiveFiled,
   compilePrimitiveFiledWithXParam,
@@ -16,19 +17,8 @@ import type {
 import { isStructDef, isStructDefArray } from "./kinds/structDef";
 import { withDefault } from "./kinds/utils";
 
-type AnySchema =
-  | {}
-  | JSONSchemaType<number>
-  | JSONSchemaType<string>
-  | JSONSchemaType<boolean>
-  | JSONSchemaType<number[]>
-  | JSONSchemaType<string[]>
-  | JSONSchemaType<object>
-  | JSONSchemaType<object[]>
-  | { $ref: string };
-
 interface SchemaAndLog {
-  schema: AnySchema;
+  schema: AnyParamSchema;
   logs: StructCompileLog[];
 }
 
@@ -83,7 +73,7 @@ const compileStructDetail = <T>(
 };
 
 interface PropsAccumulated {
-  properties: Record<string, AnySchema>;
+  properties: Record<string, AnyParamSchema>;
   logs: StructCompileLog[];
 }
 
