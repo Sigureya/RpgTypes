@@ -9,12 +9,11 @@ import {
   compileNumberFieldWithXparam,
 } from "./numbers";
 import { makeIdFieldWithXParam, makeIdField } from "./rpgDataKind";
+import { compileSelectField, compileSelectFieldWithXparam } from "./select";
 import {
   compileStringField,
   compileComboField,
-  compileSelectField,
   compileComboFieldWithXparam,
-  compileSelectFieldWithXparam,
   compileStringFieldWithXparam,
 } from "./string";
 import { makeStructRef } from "./structDef";
