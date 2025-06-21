@@ -4,7 +4,6 @@ import type {
   KindOfString,
   KindOfSelect,
   KindOfCombo,
-  KindOfFile,
 } from "./core/primitiveParams";
 import type { JSONSchemaTypeWithRpgParam } from "./core/x-rpg-param";
 import { xparamBaseData } from "./core/x-rpg-param";
@@ -63,23 +62,5 @@ export const compileComboFieldWithXparam = (
   ...withTexts(data),
   ...xparamBaseData(data, {
     options: [...data.options],
-  }),
-});
-
-export const compileFileField = (data: KindOfFile) =>
-  ({
-    type: "string",
-    ...withDefault(data.default),
-    ...withTexts(data),
-  } satisfies JSONSchemaType<string>);
-
-export const compileFileFieldWithXparam = (
-  data: KindOfFile
-): JSONSchemaTypeWithRpgParam<string> => ({
-  type: "string",
-  ...withDefault(data.default),
-  ...withTexts(data),
-  ...xparamBaseData(data, {
-    dir: data.dir,
   }),
 });
