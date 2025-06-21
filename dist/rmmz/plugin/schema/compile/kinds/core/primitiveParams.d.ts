@@ -1,4 +1,6 @@
 import { DataKind_RpgUnion, DataKind_SystemUnion } from './rpgData/rpgDataTypesNames';
+export type StructParamPrimitive = KindOfBoolean | KindOfNumber | KindOfNumberArray | KindOfRpgDataId | KindOfRpgDataIdArray | KindOfCombo | KindOfSelect | KindOfString | KindOfStringArray | KindOfSystemDataId | KindOfFile | KindOfFileArray | KindOfStructRef;
+export type PrimitiveStruct<K extends string = string> = Record<K, StructParamPrimitive>;
 export interface KindBase {
     kind: string;
     desc?: string;
@@ -35,7 +37,7 @@ export interface KindOfStringArray extends KindBase {
     kind: "string[]" | "multiline_string[]";
     default: string[];
 }
-export interface KindOFCombo extends KindBase {
+export interface KindOfCombo extends KindBase {
     kind: "combo";
     options: string[];
     default: string;
@@ -68,7 +70,14 @@ export interface KindOfFileArray extends KindBase {
     default: string[];
     dir: string;
 }
-export interface KindOfStructRef extends KindBase {
-    kind: "struct_ref";
-    ref: string;
+export interface KidnOfStructBase extends KindBase {
+    struct: string;
+}
+export interface KindOfStructRef extends KidnOfStructBase {
+    kind: "struct";
+    struct: string;
+}
+export interface KindOfStructArrayRef extends KidnOfStructBase {
+    kind: "struct[]";
+    struct: string;
 }
