@@ -19,7 +19,7 @@ import {
   compileStringFieldWithXparam,
 } from "./string";
 import { makeStructRef } from "./structDef";
-import { makeArrayField } from "./utils";
+import { compileArrayField } from "./utils";
 
 export type AnyParamSchema =
   | {}
@@ -34,11 +34,11 @@ export type AnyParamSchema =
 
 const makeStringArrayField = (
   data: Extract<StructParamPrimitive, { default: string[] }>
-) => makeArrayField<string>(data, "string");
+) => compileArrayField(data, { type: "string" });
 
 const makeDataIdArrayField = (
   data: Extract<StructParamPrimitive, { default: number[] }>
-) => makeArrayField<number>(data, "integer");
+) => compileArrayField(data, { type: "integer" });
 
 export const compilePrimitiveFiled = (
   data: StructParamPrimitive

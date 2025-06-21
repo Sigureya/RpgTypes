@@ -1,1 +1,1 @@
-export { withDefault, makeArrayField } from "./core/primitive";
+export { withDefault, compileArrayField } from "./core/primitive";
