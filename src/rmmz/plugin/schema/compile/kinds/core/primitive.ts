@@ -1,13 +1,12 @@
 import type { JSONSchemaType } from "ajv";
-import type { Schema } from "jsonschema";
 import type { KindBase } from "./primitiveParams";
 
-interface KindOfArray<T> {
+export interface KindOfArray<T> extends KindBase {
   kind: `${string}[]`;
   default?: T[];
 }
 
-export const compileArrayField = <T, S extends JSONSchemaType<T> & Schema>(
+export const compileArrayField = <T, S extends JSONSchemaType<T>>(
   data: KindOfArray<T>,
   itemSchema: S
 ) =>
