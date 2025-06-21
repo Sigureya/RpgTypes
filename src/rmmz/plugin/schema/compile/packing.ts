@@ -1,0 +1,38 @@
+import type { JSONSchemaType } from "ajv";
+import type { StructParamPrimitive } from "./kinds";
+import type { PrimitiveStructType } from "./pluginScehamType";
+import { compileStruct2 } from "./pluginScehamType";
+
+type StructPackage = {
+  structs: Record<string, PrimitiveStructType<object>>;
+};
+
+export type TypePackage<T extends Record<string, object>> = {
+  [K in keyof T]: PrimitiveStructType<T[K]>;
+};
+
+export const compileFromStructPackage = <T extends StructPackage>(
+  plugin: T
+) => {
+  return Object.entries(plugin.structs).map(([key, struct]) => {
+    return {
+      [key]: compileStruct2(struct),
+    };
+  });
+};
+
+export interface Struct3<K extends string = string> {
+  struct: string;
+  params: Record<K, StructParamPrimitive>;
+}
+export const compileFromStrucArray = (
+  list: Struct3[]
+): Record<string, JSONSchemaType<object>> => {
+  return list.reduce((acc, s) => {
+    const p = compileStruct2(s);
+    return {
+      ...acc,
+      [s.struct]: p,
+    };
+  }, {});
+};
