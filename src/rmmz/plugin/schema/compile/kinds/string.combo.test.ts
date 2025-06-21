@@ -44,7 +44,9 @@ describe("Combo field schema generation - with x-rpg-param", () => {
     description: data.desc,
     "x-rpg-param": {
       kind: "combo",
-      data: {},
+      data: {
+        options: data.options,
+      },
     },
   };
   describe("generates schema for KindOfCombo with x-rpg-param", () => {

@@ -40,7 +40,12 @@ export const compileSelectFieldWithXparam = (
   ...withDefault(data.default),
   ...withTexts(data),
   ...{ enum: data.options.map((o): string => o.value) },
-  ...xparamBaseData(data, {}),
+  ...xparamBaseData(data, {
+    options: data.options.map((o) => ({
+      value: o.value,
+      option: o.option,
+    })),
+  }),
 });
 
 export const compileComboField = (data: KindOfCombo) =>
@@ -56,7 +61,9 @@ export const compileComboFieldWithXparam = (
   type: "string",
   ...withDefault(data.default),
   ...withTexts(data),
-  ...xparamBaseData(data, {}),
+  ...xparamBaseData(data, {
+    options: [...data.options],
+  }),
 });
 
 export const compileFileField = (data: KindOfFile) =>
@@ -72,5 +79,7 @@ export const compileFileFieldWithXparam = (
   type: "string",
   ...withDefault(data.default),
   ...withTexts(data),
-  ...xparamBaseData(data, {}),
+  ...xparamBaseData(data, {
+    dir: data.dir,
+  }),
 });

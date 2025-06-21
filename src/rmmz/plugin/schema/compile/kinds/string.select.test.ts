@@ -9,16 +9,16 @@ import type { KindOfSelect } from "./core/primitiveParams";
 import type { JSONSchemaTypeWithRpgParam } from "./core/x-rpg-param";
 import { compileSelectField, compileSelectFieldWithXparam } from "./string";
 
-const data: KindOfSelect = {
+const data = {
   kind: "select",
   default: "option1",
   desc: "A select field",
   text: "Select Field",
   options: [
-    { value: "option1", option: "Option 1" },
-    { value: "option2", option: "Option 2" },
+    { value: "value1", option: "Option 1" },
+    { value: "value2", option: "Option 2" },
   ],
-};
+} as const satisfies KindOfSelect;
 
 describe("Select field schema generation - Basic", () => {
   const expectedSchema: JSONSchemaType<string> = {
@@ -26,7 +26,7 @@ describe("Select field schema generation - Basic", () => {
     default: data.default,
     title: data.text,
     description: data.desc,
-    enum: ["option1", "option2"],
+    enum: ["value1", "value2"],
   };
   describe("generates schema for KindOfSelect", () => {
     test("compileSelectField", () => {
@@ -46,10 +46,12 @@ describe("Select field schema generation -  with x-rpg-param", () => {
     default: data.default,
     title: data.text,
     description: data.desc,
-    enum: ["option1", "option2"],
+    enum: ["value1", "value2"],
     "x-rpg-param": {
       kind: "select",
-      data: {},
+      data: {
+        options: data.options,
+      },
     },
   };
   describe("generates schema for KindOfSelect with x-rpg-param", () => {
