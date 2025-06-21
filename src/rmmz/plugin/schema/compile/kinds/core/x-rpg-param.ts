@@ -22,9 +22,9 @@ export interface X_RmmzParamInput<T, Kind extends string = string> {
   data: T;
 }
 
-export const xparamBaseData = <T extends object, P extends KindBase>(
+export const xparamBaseData = <P extends KindBase>(
   param: P,
-  data: T
+  data: Omit<P, "default" | keyof KindBase>
 ) =>
   ({
     [X_RPG_PARM]: {
