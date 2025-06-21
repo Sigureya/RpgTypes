@@ -3,7 +3,7 @@ import type {
   DataKind_SystemUnion,
 } from "./rpgData/rpgDataTypesNames";
 
-export type StructParamPrimitive =
+export type StructParamPrimitive<StructName extends string = string> =
   | KindOfBoolean
   | KindOfNumber
   | KindOfNumberArray
@@ -16,7 +16,7 @@ export type StructParamPrimitive =
   | KindOfSystemDataId
   | KindOfFile
   | KindOfFileArray
-  | KindOfStructRef
+  | KindOfStructRef<StructName>
   | KindOfStructArrayRef;
 
 export type PrimitiveStruct<K extends string = string> = Record<
@@ -105,9 +105,10 @@ export interface KidnOfStructBase extends KindBase {
   struct: string;
 }
 
-export interface KindOfStructRef extends KidnOfStructBase {
+export interface KindOfStructRef<Name extends string = string>
+  extends KidnOfStructBase {
   kind: "struct";
-  struct: string;
+  struct: Name;
 }
 
 export interface KindOfStructArrayRef extends KidnOfStructBase {
