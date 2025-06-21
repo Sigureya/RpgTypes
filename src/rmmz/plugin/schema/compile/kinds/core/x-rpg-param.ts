@@ -24,9 +24,9 @@ export interface X_RmmzParamInput<T, Kind extends string = string> {
   data: T;
 }
 
-export const xparamBaseData = <P extends KindBase>(
-  param: P,
-  data: ExtractXParam<P>
+export const xparamBaseData = <T extends KindBase, D extends ExtractXParam<T>>(
+  param: T,
+  data: D
 ) =>
   ({
     [X_RPG_PARM]: {
