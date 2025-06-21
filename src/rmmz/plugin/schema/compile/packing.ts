@@ -21,9 +21,9 @@ export const compileFromStructPackage = <T extends StructPackage>(
   });
 };
 
-export interface Struct3<K extends string = string> {
+export interface Struct3 {
   struct: string;
-  params: Record<K, StructParamPrimitive>;
+  params: Record<string, StructParamPrimitive>;
 }
 export const compileFromStrucArray = (
   list: Struct3[]
