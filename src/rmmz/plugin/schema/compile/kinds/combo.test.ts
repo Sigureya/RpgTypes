@@ -1,5 +1,6 @@
 import { describe, test, expect } from "vitest";
 import type { JSONSchemaType } from "ajv";
+import { compileComboField, compileComboFieldWithXparam } from "./combo";
 import type { AnyParamSchema } from "./compie";
 import {
   compilePrimitiveFiled,
@@ -7,7 +8,6 @@ import {
 } from "./compie";
 import type { KindOfCombo } from "./core/primitiveParams";
 import type { JSONSchemaTypeWithRpgParam } from "./core/x-rpg-param";
-import { compileComboField, compileComboFieldWithXparam } from "./string";
 
 const data: KindOfCombo = {
   kind: "combo",

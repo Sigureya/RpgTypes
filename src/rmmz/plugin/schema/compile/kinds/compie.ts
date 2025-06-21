@@ -1,5 +1,6 @@
 import type { JSONSchemaType } from "ajv";
 import { compileBooleanFieldWithXParam, compileBooleanField } from "./boolean";
+import { compileComboField, compileComboFieldWithXparam } from "./combo";
 import type { StructParamPrimitive } from "./core/primitiveParams";
 import { compileFileField, compileFileFieldWithXparam } from "./file";
 import {
@@ -10,12 +11,7 @@ import {
 } from "./numbers";
 import { makeIdFieldWithXParam, makeIdField } from "./rpgDataKind";
 import { compileSelectField, compileSelectFieldWithXparam } from "./select";
-import {
-  compileStringField,
-  compileComboField,
-  compileComboFieldWithXparam,
-  compileStringFieldWithXparam,
-} from "./string";
+import { compileStringField, compileStringFieldWithXparam } from "./string";
 import { makeStructRef } from "./structDef";
 import { compileArrayField } from "./utils";
 
