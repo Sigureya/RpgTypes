@@ -14,25 +14,26 @@ export type TypePackage<T extends Record<string, object>> = {
 export const compileFromStructPackage = <T extends StructPackage>(
   plugin: T
 ) => {
-  return Object.entries(plugin.structs).map(([key, struct]) => {
+  return Object.entries(plugin.structs).reduce((acc, [key, struct]) => {
     return {
+      ...acc,
       [key]: compileStruct2(struct),
     };
-  });
+  }, {});
 };
 
 export interface Struct3 {
   struct: string;
   params: Record<string, StructParamPrimitive>;
 }
+
 export const compileFromStrucArray = (
   list: Struct3[]
 ): Record<string, JSONSchemaType<object>> => {
-  return list.reduce((acc, s) => {
-    const p = compileStruct2(s);
+  return list.reduce((acc, struct3) => {
     return {
       ...acc,
-      [s.struct]: p,
+      [struct3.struct]: compileStruct2(struct3),
     };
   }, {});
 };
