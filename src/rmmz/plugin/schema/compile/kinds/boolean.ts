@@ -4,14 +4,14 @@ import type { KindOfBoolean } from "./core/primitiveParams";
 import type { X_Param } from "./core/x-rpg-param";
 import { xparamBaseData } from "./core/x-rpg-param";
 
-export const makeBooleanField = (data: KindOfBoolean) =>
+export const compileBooleanField = (data: KindOfBoolean) =>
   ({
     type: "boolean",
     ...withDefault(data.default),
     ...withTexts(data),
   } satisfies JSONSchemaType<boolean>);
 
-export const makeBooleanFieldWithXParam = (data: KindOfBoolean) =>
+export const compileBooleanFieldWithXParam = (data: KindOfBoolean) =>
   ({
     type: "boolean",
     ...withDefault(data.default),
