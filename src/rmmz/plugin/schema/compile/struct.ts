@@ -1,7 +1,6 @@
 import type { JSONSchemaType } from "ajv";
 import type { CompileContext } from "./context";
 import type { PluginMeta, PluginCompileOptions } from "./kinds";
-import type { AnyParamSchema } from "./kinds/compie";
 import {
   compilePrimitiveFiled,
   compilePrimitiveFiledWithXParam,
@@ -14,6 +13,7 @@ import type {
   StructParam,
   KindOfStructArray,
 } from "./kinds/plugin";
+import type { AnyParamSchema } from "./kinds/pluginScehamType";
 import { isStructDef, isStructDefArray } from "./kinds/structDef";
 import { withDefault } from "./kinds/utils";
 

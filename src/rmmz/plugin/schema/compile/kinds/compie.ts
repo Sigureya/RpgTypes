@@ -1,4 +1,3 @@
-import type { JSONSchemaType } from "ajv";
 import { compileBooleanFieldWithXParam, compileBooleanField } from "./boolean";
 import { compileComboField, compileComboFieldWithXparam } from "./combo";
 import type { StructParamPrimitive } from "./core/primitiveParams";
@@ -9,22 +8,12 @@ import {
   compileNumberField,
   compileNumberFieldWithXparam,
 } from "./numbers";
+import type { AnyParamSchema } from "./pluginScehamType";
 import { makeIdFieldWithXParam, makeIdField } from "./rpgDataKind";
 import { compileSelectField, compileSelectFieldWithXparam } from "./select";
 import { compileStringField, compileStringFieldWithXparam } from "./string";
 import { makeStructRef } from "./structDef";
 import { compileArrayField } from "./utils";
-
-export type AnyParamSchema =
-  | {}
-  | JSONSchemaType<number>
-  | JSONSchemaType<string>
-  | JSONSchemaType<boolean>
-  | JSONSchemaType<number[]>
-  | JSONSchemaType<string[]>
-  | JSONSchemaType<object>
-  | JSONSchemaType<object[]>
-  | { $ref: string };
 
 const makeStringArrayField = (
   data: Extract<StructParamPrimitive, { default: string[] }>
