@@ -7,13 +7,13 @@ import {
 } from "./kinds/compie";
 import type { StructCompileLog, CompileResult } from "./kinds/compileLog";
 import { PLUGIN_COMMAND } from "./kinds/constants";
+import type { AnyParamSchema } from "./kinds/core/anyPluginSchema";
 import type {
   PluginCommand,
   PluginStruct,
   StructParam,
   KindOfStructArray,
 } from "./kinds/plugin";
-import type { AnyParamSchema } from "./kinds/pluginScehamType";
 import { isStructDef, isStructDefArray } from "./kinds/structDef";
 import { withDefault } from "./kinds/utils";
 
