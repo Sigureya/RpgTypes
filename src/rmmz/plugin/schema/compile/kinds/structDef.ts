@@ -1,5 +1,5 @@
 import { withTexts } from "./core/primitive";
-import type { KidnOfStructBase } from "./core/primitiveParams";
+import type { KindOfStructBase } from "./core/primitiveParams";
 import type { KindOfStruct, KindOfStructArray, StructParam } from "./plugin";
 
 export const isStructDef = (
@@ -14,7 +14,13 @@ export const isStructDefArray = (
   return value.kind === "struct_def[]";
 };
 
-export const makeStructRef = (ref: KidnOfStructBase) => ({
+interface JSONSchemaSttructRef {
+  $ref: string;
+  description?: string;
+  title?: string;
+}
+
+export const makeStructRef = (ref: KindOfStructBase): JSONSchemaSttructRef => ({
   $ref: `#/definitions/${ref.struct}`,
   ...withTexts(ref),
 });
