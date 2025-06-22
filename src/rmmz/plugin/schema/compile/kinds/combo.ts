@@ -22,21 +22,3 @@ export const compileComboFieldWithXparam = (
     options: [...data.options],
   }),
 });
-export const rmmzSchemaComboParam = () =>
-  ({
-    additionalProperties: false,
-    type: "object",
-    required: ["kind", "default", "options"],
-    properties: {
-      kind: { type: "string", const: "combo" },
-      default: { type: "string", default: "" },
-      options: {
-        type: "array",
-        items: { type: "string" },
-        default: [],
-      },
-      desc: { type: "string", nullable: true },
-      text: { type: "string", nullable: true },
-      parent: { type: "string", nullable: true },
-    },
-  } satisfies JSONSchemaType<KindOfCombo>);
