@@ -7,7 +7,7 @@ import type {
 } from "./core/primitiveParams";
 import { lookupKind } from "./core/rpgData/lookup";
 import type { X_RmmzParamInput } from "./core/x-rpg-param";
-import { makeIdField, makeIdFieldWithXParam } from "./rpgDataKind";
+import { makeRpgIdField, makeRpgIdFieldWithXParam } from "./rpgDataKind";
 
 interface TestCase {
   caseName: string;
@@ -19,11 +19,11 @@ interface TestCase {
 const testFn = ({ input, expected, caseName }: TestCase) => {
   describe(caseName, () => {
     test("makeIdField", () => {
-      const result = makeIdField(input);
+      const result = makeRpgIdField(input);
       expect(result).toEqual(expected);
     });
     test("makeIdFieldWithXParam", () => {
-      const result = makeIdFieldWithXParam(input);
+      const result = makeRpgIdFieldWithXParam(input);
       expect(result).toMatchObject(expected);
     });
   });
