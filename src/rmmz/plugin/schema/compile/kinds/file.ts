@@ -22,3 +22,18 @@ export const compileFileFieldWithXparam = (
     dir: data.dir,
   }),
 });
+
+export const rmmzSchemaFilePathParam = () =>
+  ({
+    additionalProperties: false,
+    type: "object",
+    required: ["kind", "default", "dir"],
+    properties: {
+      kind: { type: "string", const: "file" },
+      default: { type: "string", default: "" },
+      dir: { type: "string", default: "" },
+      desc: { type: "string", nullable: true },
+      text: { type: "string", nullable: true },
+      parent: { type: "string", nullable: true },
+    },
+  } satisfies JSONSchemaType<KindOfFile>);
