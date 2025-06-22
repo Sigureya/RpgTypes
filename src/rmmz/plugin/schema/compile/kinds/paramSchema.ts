@@ -13,6 +13,7 @@ import type {
   KindOfStringArray,
   KindOfStructArrayRef,
   KindOfStructRef,
+  KindOfRpgDataId,
 } from "./core/primitiveParams";
 
 const BASIC_TEXT = {
@@ -21,52 +22,56 @@ const BASIC_TEXT = {
   maxLength: 100,
 } as const satisfies JSONSchemaType<string | null>;
 
-export const makeParamSchema = (): DiscriminatedUnionSchemaType3<
-  KindBase,
-  string,
-  "kind",
-  | KindOfBoolean
-  | KindOfNumber
-  | KindOfCombo
-  | KindOfFile
-  | KindOfFileArray
-  | KindOfNumberArray
-  | KindOfSelect
-  | KindOfString
-  | KindOfStringArray
-  | KindOfStructRef
-  | KindOfStructArrayRef
-> => ({
-  type: "object",
-  discriminator: {
-    propertyName: "kind",
-  },
-  oneOf: [
-    makeSchemaBooleanParam() satisfies JSONSchemaType<KindOfBoolean>,
-    rmmzSchemaNumberParam() satisfies JSONSchemaType<KindOfNumber>,
-    rmmzSchemaComboParam() satisfies JSONSchemaType<KindOfCombo>,
-    rmmzSchemaFilePathParam() satisfies JSONSchemaType<KindOfFile>,
-    rmmzSchemaFileArrayParam() satisfies JSONSchemaType<KindOfFileArray>,
-    rmmzSchemaNumberArrayParam() satisfies JSONSchemaType<KindOfNumberArray>,
-    rmmzSchemaStringParam() satisfies JSONSchemaType<KindOfString>,
-    rmmzSchemaStringArrayParam() satisfies JSONSchemaType<KindOfStringArray>,
-  ],
-});
+export const makeParamSchema = () =>
+  ({
+    type: "object",
+    discriminator: {
+      propertyName: "kind",
+    },
+    oneOf: [
+      makeSchemaBooleanParam(),
+      rmmzSchemaNumberParam(),
+      rmmzSchemaComboParam(),
+      rmmzSchemaFilePathParam(),
+      rmmzSchemaFileArrayParam(),
+      rmmzSchemaNumberArrayParam(),
+      rmmzSchemaStringParam(),
+      rmmzSchemaStringArrayParam(),
+      rmmzSchemaDataIdParam(),
+    ],
+  } satisfies DiscriminatedUnionSchemaType3<
+    KindBase,
+    string,
+    "kind",
+    | KindOfBoolean
+    | KindOfNumber
+    | KindOfCombo
+    | KindOfFile
+    | KindOfFileArray
+    | KindOfNumberArray
+    | KindOfSelect
+    | KindOfString
+    | KindOfStringArray
+    | KindOfStructRef
+    | KindOfStructArrayRef
+    | KindOfRpgDataId
+  >);
 
-const rmmzSchemaNumberParam = (): JSONSchemaType<KindOfNumber> => ({
-  type: "object",
-  required: ["kind", "default"],
-  properties: {
-    digit: { type: "integer", minimum: 0, default: 0, nullable: true },
-    min: { type: "number", nullable: true },
-    max: { type: "number", nullable: true },
-    default: { type: "number", default: 0 },
-    kind: { type: "string", const: "number" },
-    desc: BASIC_TEXT,
-    text: BASIC_TEXT,
-    parent: BASIC_TEXT,
-  },
-});
+const rmmzSchemaNumberParam = () =>
+  ({
+    type: "object",
+    required: ["kind", "default"],
+    properties: {
+      digit: { type: "integer", minimum: 0, default: 0, nullable: true },
+      min: { type: "number", nullable: true },
+      max: { type: "number", nullable: true },
+      default: { type: "number", default: 0 },
+      kind: { type: "string", const: "number" },
+      desc: BASIC_TEXT,
+      text: BASIC_TEXT,
+      parent: BASIC_TEXT,
+    },
+  } as const satisfies JSONSchemaType<KindOfNumber>);
 
 const makeSchemaBooleanParam = () =>
   ({
@@ -82,7 +87,7 @@ const makeSchemaBooleanParam = () =>
       text: BASIC_TEXT,
       parent: BASIC_TEXT,
     },
-  } satisfies JSONSchemaType<KindOfBoolean>);
+  } as const satisfies JSONSchemaType<KindOfBoolean>);
 
 const rmmzSchemaComboParam = () =>
   ({
@@ -101,7 +106,7 @@ const rmmzSchemaComboParam = () =>
       text: BASIC_TEXT,
       parent: BASIC_TEXT,
     },
-  } satisfies JSONSchemaType<KindOfCombo>);
+  } as const satisfies JSONSchemaType<KindOfCombo>);
 
 const rmmzSchemaFilePathParam = () =>
   ({
@@ -116,7 +121,8 @@ const rmmzSchemaFilePathParam = () =>
       text: BASIC_TEXT,
       parent: BASIC_TEXT,
     },
-  } satisfies JSONSchemaType<KindOfFile>);
+  } as const satisfies JSONSchemaType<KindOfFile>);
+
 const rmmzSchemaFileArrayParam = () =>
   ({
     additionalProperties: false,
@@ -130,7 +136,7 @@ const rmmzSchemaFileArrayParam = () =>
       text: BASIC_TEXT,
       parent: BASIC_TEXT,
     },
-  } satisfies JSONSchemaType<KindOfFileArray>);
+  } as const satisfies JSONSchemaType<KindOfFileArray>);
 
 const rmmzSchemaNumberArrayParam = () =>
   ({
@@ -151,7 +157,7 @@ const rmmzSchemaNumberArrayParam = () =>
       text: BASIC_TEXT,
       parent: BASIC_TEXT,
     },
-  } satisfies JSONSchemaType<KindOfNumberArray>);
+  } as const satisfies JSONSchemaType<KindOfNumberArray>);
 
 const rmmzSchemaStringParam = () =>
   ({
@@ -165,7 +171,7 @@ const rmmzSchemaStringParam = () =>
       text: BASIC_TEXT,
       parent: BASIC_TEXT,
     },
-  } satisfies JSONSchemaType<KindOfString>);
+  } as const satisfies JSONSchemaType<KindOfString>);
 
 const rmmzSchemaStringArrayParam = () =>
   ({
@@ -183,4 +189,31 @@ const rmmzSchemaStringArrayParam = () =>
       text: BASIC_TEXT,
       parent: BASIC_TEXT,
     },
-  } satisfies JSONSchemaType<KindOfStringArray>);
+  } as const satisfies JSONSchemaType<KindOfStringArray>);
+
+const rmmzSchemaDataIdParam = () =>
+  ({
+    additionalProperties: false,
+    type: "object",
+    required: ["kind", "default"],
+    properties: {
+      kind: {
+        type: "string",
+        enum: [
+          "actor",
+          "class",
+          "skill",
+          "item",
+          "weapon",
+          "armor",
+          "enemy",
+          "state",
+          "common_event",
+        ],
+      },
+      default: { type: "integer", default: 0 },
+      desc: BASIC_TEXT,
+      text: BASIC_TEXT,
+      parent: BASIC_TEXT,
+    },
+  } as const satisfies JSONSchemaType<KindOfRpgDataId>);
