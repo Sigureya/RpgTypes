@@ -219,6 +219,12 @@ const rmmzSchemaFileArrayParam = () =>
       parent: BASIC_TEXT,
     },
   } as const satisfies JSONSchemaType<KindOfFileArray>);
+const STRUCT_NAME = {
+  type: "string",
+  pattern: "^[a-zA-Z][a-zA-Z0-9_]*$",
+  minLength: 1,
+  maxLength: 48,
+} as const satisfies JSONSchemaType<string>;
 
 const rmmzSchemaStructRefParam = () =>
   ({
@@ -231,7 +237,7 @@ const rmmzSchemaStructRefParam = () =>
       desc: BASIC_TEXT,
       text: BASIC_TEXT,
       parent: BASIC_TEXT,
-      struct: { type: "string", default: "", minLength: 1 },
+      struct: STRUCT_NAME,
     },
   } as const satisfies JSONSchemaType<KindOfStructRef>);
 
@@ -242,7 +248,7 @@ const rmmzSchemaStructArrayRefParam = () =>
     required: ["kind", "struct"],
     properties: {
       kind: { type: "string", const: "struct[]" },
-      struct: { type: "string", default: "", minLength: 1 },
+      struct: STRUCT_NAME,
       default: {
         type: "array",
         items: { type: "object" },
