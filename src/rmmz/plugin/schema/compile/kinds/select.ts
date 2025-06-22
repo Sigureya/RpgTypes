@@ -5,13 +5,14 @@ import type { JSONSchemaTypeWithRpgParam } from "./core/x-rpg-param";
 import { xparamBaseData } from "./core/x-rpg-param";
 import { withDefault } from "./utils";
 
-export const compileSelectField = (data: KindOfSelect) =>
-  ({
-    type: "string",
-    ...withDefault(data.default),
-    ...withTexts(data),
-    ...(data.options ? { enum: data.options.map((o): string => o.value) } : {}),
-  } satisfies JSONSchemaType<string>);
+export const compileSelectField = (
+  data: KindOfSelect
+): JSONSchemaType<string> => ({
+  type: "string",
+  ...withDefault(data.default),
+  ...withTexts(data),
+  ...(data.options ? { enum: data.options.map((o): string => o.value) } : {}),
+});
 
 export const compileSelectFieldWithXparam = (
   data: KindOfSelect
