@@ -30,49 +30,35 @@ export const makeParamSchema = () =>
     },
     oneOf: [
       makeSchemaBooleanParam(),
-      rmmzSchemaNumberParam(),
       rmmzSchemaComboParam(),
+      rmmzSchemaDataIdParam(),
       rmmzSchemaFilePathParam(),
       rmmzSchemaFileArrayParam(),
+      rmmzSchemaNumberParam(),
       rmmzSchemaNumberArrayParam(),
+      rmmzSchemaSelectParam(),
+      rmmzSchemaStructRefParam(),
+      rmmzSchemaStructArrayRefParam(),
       rmmzSchemaStringParam(),
       rmmzSchemaStringArrayParam(),
-      rmmzSchemaDataIdParam(),
     ],
   } satisfies DiscriminatedUnionSchemaType3<
     KindBase,
     string,
     "kind",
     | KindOfBoolean
-    | KindOfNumber
     | KindOfCombo
+    | KindOfRpgDataId
     | KindOfFile
     | KindOfFileArray
+    | KindOfNumber
     | KindOfNumberArray
+    | KindOfStructRef
+    | KindOfStructArrayRef
     | KindOfSelect
     | KindOfString
     | KindOfStringArray
-    | KindOfStructRef
-    | KindOfStructArrayRef
-    | KindOfRpgDataId
   >);
-
-const rmmzSchemaNumberParam = () =>
-  ({
-    type: "object",
-    required: ["kind", "default"],
-    properties: {
-      digit: { type: "integer", minimum: 0, default: 0, nullable: true },
-      min: { type: "number", nullable: true },
-      max: { type: "number", nullable: true },
-      default: { type: "number", default: 0 },
-      kind: { type: "string", const: "number" },
-      desc: BASIC_TEXT,
-      text: BASIC_TEXT,
-      parent: BASIC_TEXT,
-    },
-  } as const satisfies JSONSchemaType<KindOfNumber>);
-
 const makeSchemaBooleanParam = () =>
   ({
     additionalProperties: false,
@@ -89,54 +75,21 @@ const makeSchemaBooleanParam = () =>
     },
   } as const satisfies JSONSchemaType<KindOfBoolean>);
 
-const rmmzSchemaComboParam = () =>
+const rmmzSchemaNumberParam = () =>
   ({
-    additionalProperties: false,
     type: "object",
-    required: ["kind", "default", "options"],
+    required: ["kind", "default"],
     properties: {
-      kind: { type: "string", const: "combo" },
-      default: { type: "string", default: "" },
-      options: {
-        type: "array",
-        items: { type: "string" },
-        default: [],
-      },
+      digit: { type: "integer", minimum: 0, default: 0, nullable: true },
+      min: { type: "number", nullable: true },
+      max: { type: "number", nullable: true },
+      default: { type: "number", default: 0 },
+      kind: { type: "string", const: "number" },
       desc: BASIC_TEXT,
       text: BASIC_TEXT,
       parent: BASIC_TEXT,
     },
-  } as const satisfies JSONSchemaType<KindOfCombo>);
-
-const rmmzSchemaFilePathParam = () =>
-  ({
-    additionalProperties: false,
-    type: "object",
-    required: ["kind", "default", "dir"],
-    properties: {
-      kind: { type: "string", const: "file" },
-      default: { type: "string", default: "" },
-      dir: { type: "string", default: "" },
-      desc: BASIC_TEXT,
-      text: BASIC_TEXT,
-      parent: BASIC_TEXT,
-    },
-  } as const satisfies JSONSchemaType<KindOfFile>);
-
-const rmmzSchemaFileArrayParam = () =>
-  ({
-    additionalProperties: false,
-    type: "object",
-    required: ["kind", "default", "dir"],
-    properties: {
-      kind: { type: "string", const: "file[]" },
-      default: { type: "array", items: { type: "string" }, default: [] },
-      dir: { type: "string", default: "" },
-      desc: BASIC_TEXT,
-      text: BASIC_TEXT,
-      parent: BASIC_TEXT,
-    },
-  } as const satisfies JSONSchemaType<KindOfFileArray>);
+  } as const satisfies JSONSchemaType<KindOfNumber>);
 
 const rmmzSchemaNumberArrayParam = () =>
   ({
@@ -217,3 +170,116 @@ const rmmzSchemaDataIdParam = () =>
       parent: BASIC_TEXT,
     },
   } as const satisfies JSONSchemaType<KindOfRpgDataId>);
+
+const rmmzSchemaComboParam = () =>
+  ({
+    additionalProperties: false,
+    type: "object",
+    required: ["kind", "default", "options"],
+    properties: {
+      kind: { type: "string", const: "combo" },
+      default: { type: "string", default: "" },
+      options: {
+        type: "array",
+        items: { type: "string" },
+        default: [],
+      },
+      desc: BASIC_TEXT,
+      text: BASIC_TEXT,
+      parent: BASIC_TEXT,
+    },
+  } as const satisfies JSONSchemaType<KindOfCombo>);
+
+const rmmzSchemaFilePathParam = () =>
+  ({
+    additionalProperties: false,
+    type: "object",
+    required: ["kind", "default", "dir"],
+    properties: {
+      kind: { type: "string", const: "file" },
+      default: { type: "string", default: "" },
+      dir: { type: "string", default: "" },
+      desc: BASIC_TEXT,
+      text: BASIC_TEXT,
+      parent: BASIC_TEXT,
+    },
+  } as const satisfies JSONSchemaType<KindOfFile>);
+
+const rmmzSchemaFileArrayParam = () =>
+  ({
+    additionalProperties: false,
+    type: "object",
+    required: ["kind", "default", "dir"],
+    properties: {
+      kind: { type: "string", const: "file[]" },
+      default: { type: "array", items: { type: "string" }, default: [] },
+      dir: { type: "string", default: "" },
+      desc: BASIC_TEXT,
+      text: BASIC_TEXT,
+      parent: BASIC_TEXT,
+    },
+  } as const satisfies JSONSchemaType<KindOfFileArray>);
+const STRUCT_NAME = {
+  type: "string",
+  pattern: "^[a-zA-Z][a-zA-Z0-9]*$",
+  minLength: 1,
+  maxLength: 48,
+} as const satisfies JSONSchemaType<string>;
+
+const rmmzSchemaStructRefParam = () =>
+  ({
+    additionalProperties: false,
+    type: "object",
+    required: ["kind", "struct"],
+    properties: {
+      kind: { type: "string", const: "struct" },
+      default: { type: "object", default: {}, nullable: true },
+      desc: BASIC_TEXT,
+      text: BASIC_TEXT,
+      parent: BASIC_TEXT,
+      struct: STRUCT_NAME,
+    },
+  } as const satisfies JSONSchemaType<KindOfStructRef>);
+
+const rmmzSchemaStructArrayRefParam = () =>
+  ({
+    additionalProperties: false,
+    type: "object",
+    required: ["kind", "struct"],
+    properties: {
+      kind: { type: "string", const: "struct[]" },
+      struct: STRUCT_NAME,
+      default: {
+        type: "array",
+        items: { type: "object" },
+        default: [],
+        nullable: true,
+      },
+      desc: BASIC_TEXT,
+      text: BASIC_TEXT,
+      parent: BASIC_TEXT,
+    },
+  } as const satisfies JSONSchemaType<KindOfStructArrayRef>);
+
+const rmmzSchemaSelectParam = () =>
+  ({
+    additionalProperties: false,
+    type: "object",
+    required: ["kind", "default", "options"],
+    properties: {
+      kind: { type: "string", const: "select" },
+      default: { type: "string", default: "" },
+      options: {
+        type: "array",
+        items: {
+          type: "object",
+          properties: { value: { type: "string" }, option: { type: "string" } },
+          required: ["value", "option"],
+        },
+        default: [],
+      },
+      desc: BASIC_TEXT,
+      text: BASIC_TEXT,
+      parent: BASIC_TEXT,
+    },
+  } as const satisfies JSONSchemaType<KindOfSelect>);
