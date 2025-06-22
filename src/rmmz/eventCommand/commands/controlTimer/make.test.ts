@@ -1,10 +1,6 @@
 import { describe, test, expect } from "vitest";
 import { makeCommandControlTimer } from "./make";
-import type {
-  Command_ControlTimer,
-  Operation_PlusMinus,
-  Paramobject_ControlTimer,
-} from "./types";
+import type { Command_ControlTimer, Paramobject_ControlTimer } from "./types";
 
 describe("makeCommandControlTimer", () => {
   test("should create a command with default values", () => {
