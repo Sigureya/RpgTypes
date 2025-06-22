@@ -1,13 +1,13 @@
 import { describe, test, expect } from "vitest";
 import { Ajv, type JSONSchemaType } from "ajv";
-import { compilePrimitiveFiled } from "./compie";
-import type { PrimitiveParams, PrimitiveStruct } from "./pluginScehamType";
-import {
-  compileProperties,
-  compileParams,
-  compileStruct2,
-  compileStruct3,
+import { compilePrimitiveFiled } from "./kinds/compie";
+import { compileParams } from "./packing";
+import type {
+  ParamToObject,
+  PrimitiveParams,
+  PrimitiveStructType,
 } from "./pluginScehamType";
+import { compileProperties } from "./pluginScehamType";
 
 interface Person {
   age: number;
@@ -32,7 +32,7 @@ interface MockKnightSchool {
   students: Person[];
 }
 
-const mockPersonStruct: PrimitiveStruct<Person> = {
+const mockPersonStruct: PrimitiveStructType<Person> = {
   struct: "Person",
   params: {
     age: { kind: "number", default: 0 },
@@ -50,7 +50,7 @@ const mockPersonSchema: JSONSchemaType<Person> = {
   required: ["age", "name"],
 };
 
-const mockFoodStruct: PrimitiveStruct<Food> = {
+const mockFoodStruct: PrimitiveStructType<Food> = {
   struct: "Food",
   params: {
     name: { kind: "string", default: "" },
@@ -77,8 +77,8 @@ const mockSchoolStruct: PrimitiveParams<MockKnightSchool> = {
   strArray: { kind: "string[]", default: [] },
   number: { kind: "number", default: 0 },
   numberArray: { kind: "number[]", default: [] },
-  person: { kind: "struct", struct: "Person" },
-  students: { kind: "struct[]", struct: "Person" },
+  person: { kind: "struct", struct: "Person", default: { age: 0, name: "" } },
+  students: { kind: "struct[]", struct: "Person", default: [] },
 };
 
 const mockSchoolSchema = {
@@ -164,7 +164,15 @@ describe("schema", () => {
     const result = compileProperties(mockPersonStruct, compilePrimitiveFiled);
     expect(result).toEqual(mockPersonSchema);
   });
+  test("", () => {
+    const xx: ParamToObject<typeof mockPersonStruct.params> = {
+      age: 0,
+      name: "",
+    };
+    expect(xx).toEqual({ age: 0, name: "" });
+  });
 });
+
 describe("compileParams", () => {
   test("compileParams", () => {
     const result = compileParams(
@@ -177,22 +185,13 @@ describe("compileParams", () => {
     const result = compileParams(
       {
         f: { kind: "string", default: "test" },
-        g: { kind: "struct", struct: "Person" },
+        g: { kind: "struct", struct: "Person", default: { age: 0, name: "" } },
       },
       compilePrimitiveFiled
     );
     expect(result).toEqual({
       f: { type: "string", default: "test" },
       g: { $ref: "#/definitions/Person" },
-    });
-  });
-});
-describe("", () => {
-  const result = compileStruct3([mockFoodStruct, mockPersonStruct]);
-  test("compileStruct3", () => {
-    expect(result).toEqual({
-      Person: mockPersonSchema,
-      Food: mockFoodSchema,
     });
   });
 });

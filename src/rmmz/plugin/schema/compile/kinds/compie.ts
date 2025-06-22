@@ -1,5 +1,6 @@
 import { compileBooleanFieldWithXParam, compileBooleanField } from "./boolean";
 import { compileComboField, compileComboFieldWithXparam } from "./combo";
+import type { AnyParamSchema } from "./core/anyPluginSchema";
 import type { StructParamPrimitive } from "./core/primitiveParams";
 import { compileFileField, compileFileFieldWithXparam } from "./file";
 import {
@@ -8,7 +9,6 @@ import {
   compileNumberField,
   compileNumberFieldWithXparam,
 } from "./numbers";
-import type { AnyParamSchema } from "./pluginScehamType";
 import { makeIdFieldWithXParam, makeIdField } from "./rpgDataKind";
 import { compileSelectField, compileSelectFieldWithXparam } from "./select";
 import { compileStringField, compileStringFieldWithXparam } from "./string";
