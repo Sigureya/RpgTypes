@@ -61,29 +61,29 @@ describe("number", () => {
   const ajv = new Ajv({ strict: true, discriminator: true });
   const schema = makeParamSchema();
   const validate = ajv.compile(schema);
-  describe("valid cases", () => {
-    test("フルセットのデータ", () => {
+  describe("accepts valid KindOfNumber values", () => {
+    test("fullset KindOfNumber data", () => {
       const mock: KindOfNumber = fullsetData("number", 0);
       expect(mock).toSatisfy(validate);
     });
-    test("最小メンバのデータ", () => {
+    test("minimal KindOfNumber data", () => {
       const mock: KindOfNumber = {
         kind: "number",
         default: 0,
       };
       expect(mock).toSatisfy(validate);
     });
-    test("undefined optional fields", () => {
+    test("with undefined optional fields", () => {
       const mock: KindOfNumber = undefinedData("number", 0);
       expect(mock).toSatisfy(validate);
     });
 
-    test("null", () => {
+    test("with null optional fields", () => {
       const mock: KindOfNumber = nullData("number", 0);
       expect(mock).toSatisfy(validate);
     });
 
-    test("桁情報付き", () => {
+    test("with digit property", () => {
       const mock: KindOfNumber = {
         kind: "number",
         default: 0,
@@ -92,7 +92,7 @@ describe("number", () => {
       expect(mock).toSatisfy(validate);
     });
 
-    test("validates number parameter with digit 2", () => {
+    test("with digit 2 and decimal default", () => {
       const mock: KindOfNumber = {
         kind: "number",
         default: 0.01,
@@ -100,7 +100,7 @@ describe("number", () => {
       };
       expect(mock).toSatisfy(validate);
     });
-    test("桁指定無し＆初期値が小数。データに問題があるけどバリデーションは通す", () => {
+    test("with digit 0 and decimal default", () => {
       const mock: KindOfNumber = {
         kind: "number",
         default: 0.01,
@@ -109,7 +109,7 @@ describe("number", () => {
       expect(mock).toSatisfy(validate);
     });
 
-    test("最大値・最小値が指定されている", () => {
+    test("with min and max properties", () => {
       const mock: KindOfNumber = {
         kind: "number",
         default: 5,
@@ -119,15 +119,15 @@ describe("number", () => {
       expect(mock).toSatisfy(validate);
     });
   });
-  describe("invalid cases", () => {
-    test("rejects number parameter without default value", () => {
+  describe("rejects invalid KindOfNumber values", () => {
+    test("with non-number default value", () => {
       const mock: Omit<KindOfNumber, "default"> = {
         kind: "number",
       };
       expect(mock).not.toSatisfy(validate);
     });
 
-    test("rejects number parameter with non-number default", () => {
+    test("with non-number default value", () => {
       const mock: KindOfNumber = {
         kind: "number",
         default: "123" as any, // Invalid type
@@ -135,7 +135,7 @@ describe("number", () => {
       expect(mock).not.toSatisfy(validate);
     });
 
-    test("rejects number parameter with invalid digit -1", () => {
+    test("with negative digit", () => {
       const mock: KindOfNumber = {
         kind: "number",
         default: 0,
@@ -143,7 +143,7 @@ describe("number", () => {
       };
       expect(mock).not.toSatisfy(validate);
     });
-    test("rejects number parameter with invalid digit 1.4", () => {
+    test("with non-integer digit", () => {
       const mock: KindOfNumber = {
         kind: "number",
         default: 0,
@@ -154,12 +154,12 @@ describe("number", () => {
   });
 });
 
-describe("number[]", () => {
+describe("KindOfNumberArray parameter validation", () => {
   const ajv = new Ajv({ strict: true, discriminator: true });
   const schema = makeParamSchema();
   const validate = ajv.compile(schema);
-  describe("valid cases", () => {
-    test("validates number array parameter with default empty array", () => {
+  describe("accepts valid KindOfNumberArray values", () => {
+    test("with empty default array", () => {
       const mock: KindOfNumberArray = {
         kind: "number[]",
         default: [],
@@ -168,7 +168,7 @@ describe("number[]", () => {
       expect(mock).toSatisfy(validate);
     });
 
-    test("validates number array parameter with default values", () => {
+    test("with default values", () => {
       const mock: KindOfNumberArray = {
         kind: "number[]",
         default: [1, 2, 3],
@@ -184,15 +184,15 @@ describe("number[]", () => {
       };
       expect(mock).toSatisfy(validate);
     });
-    test("fullset data", () => {
+    test("fullset KindOfNumberArray data", () => {
       const mock: KindOfNumberArray = fullsetData("number[]", [1, 2, 3]);
       expect(mock).toSatisfy(validate);
     });
-    test("null", () => {
+    test("with null optional fields", () => {
       const mock: KindOfNumberArray = nullData("number[]", []);
       expect(mock).toSatisfy(validate);
     });
-    test("undefined", () => {
+    test("with undefined optional fields", () => {
       const mock: KindOfNumberArray = undefinedData("number[]", []);
       expect(mock).toSatisfy(validate);
     });
