@@ -10,7 +10,10 @@ export type JSONSchemaTypeWithRpgParam<V, X = object> = JSONSchemaType<V> & {
   [X_RPG_PARM]: X_RmmzParamInput<X>;
 };
 
-type ExtractXParam<T extends KindBase> = Omit<T, "default" | keyof KindBase>;
+export type ExtractXParam<T extends KindBase> = Omit<
+  T,
+  "default" | keyof KindBase
+>;
 
 export interface X_RmmzParamBaee {
   parent?: string | null;
