@@ -1,12 +1,12 @@
 import { describe, test, expect } from "vitest";
 import Ajv from "ajv";
 import type { KindOfNumber } from "./core/primitiveParams";
-import { rmmzSchemaNumberParam } from "./numbers";
+import { makeParamSchema } from "./paramSchema";
 
 describe("", () => {
-  const ajv = new Ajv({ strict: true });
-  const xxx = rmmzSchemaNumberParam();
-  const validate = ajv.compile(xxx);
+  const ajv = new Ajv({ strict: true, discriminator: true });
+  const schema = makeParamSchema();
+  const validate = ajv.compile(schema);
   describe("valid cases", () => {
     test("validates number parameter with default 0", () => {
       const mock: KindOfNumber = {

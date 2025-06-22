@@ -1,11 +1,11 @@
 import { describe, test, expect } from "vitest";
 import Ajv from "ajv";
-import { rmmzSchemaComboParam } from "./combo";
 import type { KindOfCombo } from "./core/primitiveParams";
+import { makeParamSchema } from "./paramSchema";
 
 describe("rmmzSchemaComboParam", () => {
-  const ajv = new Ajv({ strict: true });
-  const validate = ajv.compile(rmmzSchemaComboParam());
+  const ajv = new Ajv({ strict: true, discriminator: true });
+  const validate = ajv.compile(makeParamSchema());
 
   describe("valid cases", () => {
     test("validates combo parameter with options", () => {
