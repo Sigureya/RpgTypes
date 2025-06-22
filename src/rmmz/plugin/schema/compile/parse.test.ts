@@ -32,10 +32,10 @@ const mock = {
     @default [1, 2, 3]
     @min 0  
     @max 1000` as const,
-  string: `* @param str *
-   * @type string *
-   * @desc This is a string parameter *
-   * @default Hello *
+  string: `* @param str
+   * @type string
+   * @desc This is a string parameter
+   * @default Hello
  ` as const,
   weapon: `
   @param weapon

@@ -1,6 +1,6 @@
 import type { StructParamPrimitive } from "./kinds";
 
-interface PluginParam {
+export interface PluginParam {
   param: string;
   data: StructParamPrimitive;
 }
