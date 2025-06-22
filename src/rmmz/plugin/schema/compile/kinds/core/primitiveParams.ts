@@ -26,9 +26,9 @@ export type PrimitiveStruct<K extends string = string> = Record<
 
 export interface KindBase {
   kind: string;
-  desc?: string;
-  text?: string;
-  parent?: string;
+  desc?: string | null;
+  text?: string | null;
+  parent?: string | null;
 }
 
 export interface KindOfRpgDataId extends KindBase {
@@ -43,8 +43,8 @@ export interface KindOfRpgDataIdArray extends KindBase {
 export interface KindOfBoolean extends KindBase {
   kind: "boolean";
   default: boolean;
-  on?: string;
-  off?: string;
+  on?: string | null;
+  off?: string | null;
 }
 
 export interface KindOfSelect extends KindBase {
@@ -71,14 +71,16 @@ export interface KindOfCombo extends KindBase {
 export interface KindOfNumber extends KindBase {
   kind: "number";
   default: number;
-  digit?: number;
-  min?: number;
-  max?: number;
+  digit?: number | null;
+  min?: number | null;
+  max?: number | null;
 }
 export interface KindOfNumberArray extends KindBase {
   kind: "number[]";
   default: number[];
-  digit?: number;
+  digit?: number | null;
+  min?: number | null;
+  max?: number | null;
 }
 export interface KindOfId extends KindBase {
   kind: "id";
