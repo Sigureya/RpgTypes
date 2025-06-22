@@ -9,7 +9,7 @@ import {
   compileNumberField,
   compileNumberFieldWithXparam,
 } from "./numbers";
-import { makeIdFieldWithXParam, makeIdField } from "./rpgDataKind";
+import { makeRpgIdFieldWithXParam, makeRpgIdField } from "./rpgDataKind";
 import { compileSelectField, compileSelectFieldWithXparam } from "./select";
 import { compileStringField, compileStringFieldWithXparam } from "./string";
 import { makeStructRef } from "./structDef";
@@ -64,7 +64,7 @@ export const compilePrimitiveFiled = (
     case "state":
     case "class":
     case "troop":
-      return makeIdField(data);
+      return makeRpgIdField(data);
     case "boolean":
       return compileBooleanField(data);
     case "struct":
@@ -115,7 +115,7 @@ export const compilePrimitiveFiledWithXParam = (
     case "state":
     case "class":
     case "troop":
-      return makeIdFieldWithXParam(data);
+      return makeRpgIdFieldWithXParam(data);
     case "boolean":
       return compileBooleanFieldWithXParam(data);
     case "struct":
