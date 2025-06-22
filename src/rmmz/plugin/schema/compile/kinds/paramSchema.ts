@@ -36,6 +36,9 @@ export const makeParamSchema = () =>
       rmmzSchemaFileArrayParam(),
       rmmzSchemaNumberParam(),
       rmmzSchemaNumberArrayParam(),
+      rmmzSchemaSelectParam(),
+      rmmzSchemaStructRefParam(),
+      rmmzSchemaStructArrayRefParam(),
       rmmzSchemaStringParam(),
       rmmzSchemaStringArrayParam(),
     ],
@@ -44,17 +47,17 @@ export const makeParamSchema = () =>
     string,
     "kind",
     | KindOfBoolean
-    | KindOfNumber
     | KindOfCombo
+    | KindOfRpgDataId
     | KindOfFile
     | KindOfFileArray
+    | KindOfNumber
     | KindOfNumberArray
+    | KindOfStructRef
+    | KindOfStructArrayRef
     | KindOfSelect
     | KindOfString
     | KindOfStringArray
-    | KindOfStructRef
-    | KindOfStructArrayRef
-    | KindOfRpgDataId
   >);
 const makeSchemaBooleanParam = () =>
   ({
@@ -216,3 +219,61 @@ const rmmzSchemaFileArrayParam = () =>
       parent: BASIC_TEXT,
     },
   } as const satisfies JSONSchemaType<KindOfFileArray>);
+
+const rmmzSchemaStructRefParam = () =>
+  ({
+    additionalProperties: false,
+    type: "object",
+    required: ["kind", "struct"],
+    properties: {
+      kind: { type: "string", const: "struct" },
+      default: { type: "object", default: {}, nullable: true },
+      desc: BASIC_TEXT,
+      text: BASIC_TEXT,
+      parent: BASIC_TEXT,
+      struct: { type: "string", default: "", minLength: 1 },
+    },
+  } as const satisfies JSONSchemaType<KindOfStructRef>);
+
+const rmmzSchemaStructArrayRefParam = () =>
+  ({
+    additionalProperties: false,
+    type: "object",
+    required: ["kind", "struct"],
+    properties: {
+      kind: { type: "string", const: "struct[]" },
+      struct: { type: "string", default: "", minLength: 1 },
+      default: {
+        type: "array",
+        items: { type: "object" },
+        default: [],
+        nullable: true,
+      },
+      desc: BASIC_TEXT,
+      text: BASIC_TEXT,
+      parent: BASIC_TEXT,
+    },
+  } as const satisfies JSONSchemaType<KindOfStructArrayRef>);
+
+const rmmzSchemaSelectParam = () =>
+  ({
+    additionalProperties: false,
+    type: "object",
+    required: ["kind", "default", "options"],
+    properties: {
+      kind: { type: "string", const: "select" },
+      default: { type: "string", default: "" },
+      options: {
+        type: "array",
+        items: {
+          type: "object",
+          properties: { value: { type: "string" }, option: { type: "string" } },
+          required: ["value", "option"],
+        },
+        default: [],
+      },
+      desc: BASIC_TEXT,
+      text: BASIC_TEXT,
+      parent: BASIC_TEXT,
+    },
+  } as const satisfies JSONSchemaType<KindOfSelect>);
