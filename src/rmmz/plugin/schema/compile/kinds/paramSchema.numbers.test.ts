@@ -119,6 +119,39 @@ describe("number", () => {
       expect(mock).toSatisfy(validate);
     });
   });
+  describe("invalid cases", () => {
+    test("rejects number parameter without default value", () => {
+      const mock: Omit<KindOfNumber, "default"> = {
+        kind: "number",
+      };
+      expect(mock).not.toSatisfy(validate);
+    });
+
+    test("rejects number parameter with non-number default", () => {
+      const mock: KindOfNumber = {
+        kind: "number",
+        default: "123" as any, // Invalid type
+      };
+      expect(mock).not.toSatisfy(validate);
+    });
+
+    test("rejects number parameter with invalid digit -1", () => {
+      const mock: KindOfNumber = {
+        kind: "number",
+        default: 0,
+        digit: -1, // Invalid digit
+      };
+      expect(mock).not.toSatisfy(validate);
+    });
+    test("rejects number parameter with invalid digit 1.4", () => {
+      const mock: KindOfNumber = {
+        kind: "number",
+        default: 0,
+        digit: 1.4, // Invalid digit
+      };
+      expect(mock).not.toSatisfy(validate);
+    });
+  });
 });
 
 describe("number[]", () => {
