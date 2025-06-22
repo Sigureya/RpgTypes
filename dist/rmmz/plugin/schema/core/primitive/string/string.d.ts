@@ -14,28 +14,6 @@ export declare const rmmzSchemaStringParam: () => {
         };
     };
 };
-export declare const rmmzSchemaComboParam: () => {
-    additionalProperties: false;
-    type: "object";
-    required: ("type" | "default" | "options")[];
-    properties: {
-        type: {
-            type: "string";
-            const: "combo";
-        };
-        default: {
-            type: "string";
-            default: string;
-        };
-        options: {
-            type: "array";
-            items: {
-                type: "string";
-            };
-            default: never[];
-        };
-    };
-};
 export declare const rmmzSchemaFilePathParam: () => {
     additionalProperties: false;
     type: "object";
