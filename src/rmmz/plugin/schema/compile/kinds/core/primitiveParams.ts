@@ -103,17 +103,17 @@ export interface KindOfFileArray extends KindBase {
   dir: string;
 }
 
-export interface KidnOfStructBase extends KindBase {
+export interface KindOfStructBase extends KindBase {
   struct: string;
 }
 
-export interface KindOfStructRef extends KidnOfStructBase {
+export interface KindOfStructRef extends KindOfStructBase {
   kind: "struct";
   struct: string;
   default?: object;
 }
 
-export interface KindOfStructArrayRef extends KidnOfStructBase {
+export interface KindOfStructArrayRef extends KindOfStructBase {
   kind: "struct[]";
   struct: string;
   default?: object[];
