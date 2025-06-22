@@ -13,6 +13,7 @@ import type {
   KindOfStringArray,
   KindOfStructArrayRef,
   KindOfStructRef,
+  KindOfRpgDataId,
 } from "./core/primitiveParams";
 
 const BASIC_TEXT = {
@@ -36,6 +37,7 @@ export const makeParamSchema = () =>
       rmmzSchemaNumberArrayParam(),
       rmmzSchemaStringParam(),
       rmmzSchemaStringArrayParam(),
+      rmmzSchemaDataIdParam(),
     ],
   } satisfies DiscriminatedUnionSchemaType3<
     KindBase,
@@ -52,6 +54,7 @@ export const makeParamSchema = () =>
     | KindOfStringArray
     | KindOfStructRef
     | KindOfStructArrayRef
+    | KindOfRpgDataId
   >);
 
 const rmmzSchemaNumberParam = () =>
@@ -187,3 +190,30 @@ const rmmzSchemaStringArrayParam = () =>
       parent: BASIC_TEXT,
     },
   } as const satisfies JSONSchemaType<KindOfStringArray>);
+
+const rmmzSchemaDataIdParam = () =>
+  ({
+    additionalProperties: false,
+    type: "object",
+    required: ["kind", "default"],
+    properties: {
+      kind: {
+        type: "string",
+        enum: [
+          "actor",
+          "class",
+          "skill",
+          "item",
+          "weapon",
+          "armor",
+          "enemy",
+          "state",
+          "common_event",
+        ],
+      },
+      default: { type: "integer", default: 0 },
+      desc: BASIC_TEXT,
+      text: BASIC_TEXT,
+      parent: BASIC_TEXT,
+    },
+  } as const satisfies JSONSchemaType<KindOfRpgDataId>);
