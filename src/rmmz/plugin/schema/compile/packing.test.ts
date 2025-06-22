@@ -1,6 +1,6 @@
 import { describe, expect, test } from "vitest";
-import type { JSONSchemaType } from "ajv";
-import type { TypePackage as mockTypePackage } from "./packing";
+import { Ajv, type JSONSchemaType } from "ajv";
+import type { TypePackage } from "./packing";
 import { compileFromStructPackage, compileFromStrucArray } from "./packing";
 import type { PrimitiveStructType } from "./pluginScehamType";
 
@@ -48,41 +48,43 @@ const mockTypePackage = {
       price: { kind: "number", default: 0 },
     },
   } satisfies PrimitiveStructType<SetMenu>,
-} satisfies mockTypePackage<Pack>;
+} satisfies TypePackage<Pack>;
 
 const mockSchema = {
-  Food: {
-    type: "object",
-    title: "Food",
-    properties: {
-      name: { type: "string", default: "" },
-      calories: { type: "integer", default: 0 },
-    },
-    required: ["name", "calories"],
-  } satisfies JSONSchemaType<Food>,
-  Drink: {
-    type: "object",
-    title: "Drink",
-    properties: {
-      name: { type: "string", default: "" },
-      volume: { type: "integer", default: 0 },
-    },
-    required: ["name", "volume"],
-  } satisfies JSONSchemaType<Drink>,
-  SetMenu: {
-    type: "object",
-    title: "SetMenu",
-    properties: {
-      food: { $ref: "#/definitions/Food" },
-      drink: { $ref: "#/definitions/Drink" },
-      price: { type: "integer", default: 0 },
-    },
-    required: ["food", "drink", "price"],
-  } satisfies JSONSchemaType<SetMenu>,
+  structs: {
+    Food: {
+      $id: "#/definitions/Food",
+      type: "object",
+      properties: {
+        name: { type: "string", default: "" },
+        calories: { type: "integer", default: 0 },
+      },
+      required: ["name", "calories"],
+    } satisfies JSONSchemaType<Food>,
+    Drink: {
+      $id: "#/definitions/Drink",
+      type: "object",
+      properties: {
+        name: { type: "string", default: "" },
+        volume: { type: "integer", default: 0 },
+      },
+      required: ["name", "volume"],
+    } satisfies JSONSchemaType<Drink>,
+    SetMenu: {
+      type: "object",
+      $id: "#/definitions/SetMenu",
+      properties: {
+        food: { $ref: "#/definitions/Food" },
+        drink: { $ref: "#/definitions/Drink" },
+        price: { type: "integer", default: 0 },
+      },
+      required: ["food", "drink", "price"],
+    } satisfies JSONSchemaType<SetMenu>,
+  },
 };
 test("", () => {
   const result = compileFromStructPackage({ structs: mockTypePackage });
-  expect(result).toEqual(mockSchema);
+  expect(result).toEqual(mockSchema.structs);
 });
 describe("", () => {
   const result = compileFromStrucArray([
@@ -91,8 +93,10 @@ describe("", () => {
   ]);
   test("compileStruct3", () => {
     expect(result).toEqual({
-      Food: mockSchema.Food,
-      Drink: mockSchema.Drink,
+      Food: mockSchema.structs.Food,
+      Drink: mockSchema.structs.Drink,
     });
   });
+  const ajv = new Ajv({ schemas: [] });
+  ajv.addSchema([]);
 });

@@ -1,7 +1,7 @@
 import type { JSONSchemaType } from "ajv";
 import type { StructParamPrimitive } from "./kinds";
+import { compilePrimitiveFiled } from "./kinds/compie";
 import type { PrimitiveStructType } from "./pluginScehamType";
-import { compileStruct2 } from "./pluginScehamType";
 
 type StructPackage = {
   structs: Record<string, PrimitiveStructType<object>>;
@@ -17,23 +17,50 @@ export const compileFromStructPackage = <T extends StructPackage>(
   return Object.entries(plugin.structs).reduce((acc, [key, struct]) => {
     return {
       ...acc,
-      [key]: compileStruct2(struct),
+      [key]: compilePirmiteveStruct(struct),
     };
   }, {});
 };
 
-export interface Struct3 {
+export interface StructPrimitve3 {
   struct: string;
   params: Record<string, StructParamPrimitive>;
 }
 
 export const compileFromStrucArray = (
-  list: Struct3[]
+  list: StructPrimitve3[]
 ): Record<string, JSONSchemaType<object>> => {
   return list.reduce((acc, struct3) => {
     return {
       ...acc,
-      [struct3.struct]: compileStruct2(struct3),
+      [struct3.struct]: compilePirmiteveStruct(struct3),
     };
   }, {});
+};
+
+export const compilePirmiteveStruct = (struct: StructPrimitve3) => {
+  return {
+    $id: `#/definitions/${struct.struct}`,
+    type: "object" as const,
+    //  title: struct.struct,
+    properties: compileParams(struct.params, compilePrimitiveFiled),
+    required: Object.keys(struct.params),
+  };
+};
+
+export const compileParams = <
+  K extends string,
+  P extends StructParamPrimitive,
+  R
+>(
+  params: Record<K, P>,
+  fn: (value: P, key: string) => R
+): Record<K, R> => {
+  const entries = Object.entries<P>(params).map(([key, value]) => ({
+    [key]: fn(value, key),
+  }));
+  return entries.reduce<Record<K, R>>(
+    (acc, curr) => ({ ...acc, ...curr }),
+    {} as Record<K, R>
+  );
 };
