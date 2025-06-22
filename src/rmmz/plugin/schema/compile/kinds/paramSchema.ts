@@ -221,7 +221,7 @@ const rmmzSchemaFileArrayParam = () =>
   } as const satisfies JSONSchemaType<KindOfFileArray>);
 const STRUCT_NAME = {
   type: "string",
-  pattern: "^[a-zA-Z][a-zA-Z0-9_]*$",
+  pattern: "^[a-zA-Z][a-zA-Z0-9]*$",
   minLength: 1,
   maxLength: 48,
 } as const satisfies JSONSchemaType<string>;
