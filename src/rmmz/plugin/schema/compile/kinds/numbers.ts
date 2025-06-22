@@ -4,7 +4,7 @@ import type { KindOfNumber, KindOfNumberArray } from "./core/primitiveParams";
 import type { JSONSchemaTypeWithRpgParam, X_Param } from "./core/x-rpg-param";
 import { xparamBaseData } from "./core/x-rpg-param";
 
-const isIntegerKind = (digit: number | undefined) => {
+const isIntegerKind = (digit: number | undefined | null) => {
   return digit === undefined || digit === 0;
 };
 export const compileNumberField = (
