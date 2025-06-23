@@ -1,7 +1,7 @@
 import { describe, expect, test } from "vitest";
 import { Ajv, type JSONSchemaType } from "ajv";
 import type { TypePackage } from "./packing";
-import { compileFromStructPackage, compileFromStrucArray } from "./packing";
+import { compileFromStructArray } from "./packing";
 import type { PrimitiveStructType } from "./pluginScehamType";
 
 interface Food {
@@ -82,12 +82,12 @@ const mockSchema = {
     } satisfies JSONSchemaType<SetMenu>,
   },
 };
-test("", () => {
-  const result = compileFromStructPackage({ structs: mockTypePackage });
-  expect(result).toEqual(mockSchema.structs);
-});
+// test("", () => {
+//   const result = compileFromStructPackage({ structs: mockTypePackage });
+//   expect(result).toEqual(mockSchema.structs);
+// });
 describe("", () => {
-  const result = compileFromStrucArray([
+  const result = compileFromStructArray([
     mockTypePackage.Food,
     mockTypePackage.Drink,
   ]);

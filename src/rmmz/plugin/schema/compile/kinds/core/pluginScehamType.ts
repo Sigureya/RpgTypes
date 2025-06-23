@@ -6,6 +6,11 @@ import type {
   StructParamPrimitive,
 } from "./primitiveParams";
 
+export interface PrimitiveStructBase {
+  struct: string;
+  params: Record<string, StructParamPrimitive>;
+}
+
 export type PrimitiveStructType<T extends object> = {
   struct: string;
   params: PrimitiveParams<T>;
