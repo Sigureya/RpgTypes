@@ -1,11 +1,12 @@
 import type { JSONSchemaType } from "ajv";
-import { withDefault, withTexts } from "./core/kindBase/basciMetaField";
+import { withTexts } from "./core/paramBase/basicMetaField";
 import type {
   JSONSchemaTypeWithRpgParam,
   X_Param,
-} from "./core/kindBase/x-rpg-param";
-import { xparamBaseData } from "./core/kindBase/x-rpg-param";
+} from "./core/paramBase/x-rpg-param";
+import { xparamBaseData } from "./core/paramBase/x-rpg-param";
 import type { NumberParam, NumberArrayParam } from "./core/primitiveParams";
+import { withDefault } from "./utils";
 
 const isIntegerKind = (digit: number | undefined | null) => {
   return digit === undefined || digit === 0;

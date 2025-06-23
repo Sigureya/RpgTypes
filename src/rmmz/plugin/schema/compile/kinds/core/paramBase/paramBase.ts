@@ -4,3 +4,8 @@ export interface ParamBase {
   text?: string;
   parent?: string;
 }
+
+export interface ArrayParamBase<T> extends ParamBase {
+  kind: `${string}[]`;
+  default?: T[];
+}

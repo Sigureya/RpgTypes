@@ -1,7 +1,7 @@
 import type { JSONSchemaType } from "ajv";
-import { withTexts } from "./core/kindBase/basciMetaField";
-import type { JSONSchemaTypeWithRpgParam } from "./core/kindBase/x-rpg-param";
-import { xparamBaseData } from "./core/kindBase/x-rpg-param";
+import { withTexts } from "./core/paramBase/basicMetaField";
+import type { JSONSchemaTypeWithRpgParam } from "./core/paramBase/x-rpg-param";
+import { xparamBaseData } from "./core/paramBase/x-rpg-param";
 import type { FileParam } from "./core/primitiveParams";
 import { withDefault } from "./utils";
 

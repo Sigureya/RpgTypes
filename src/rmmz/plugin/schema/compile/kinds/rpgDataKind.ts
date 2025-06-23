@@ -1,9 +1,10 @@
 import type { JSONSchemaType } from "ajv";
-import { withDefault, withTexts } from "./core/kindBase/basciMetaField";
-import type { X_Param } from "./core/kindBase/x-rpg-param";
-import { xparamBaseData } from "./core/kindBase/x-rpg-param";
+import { withTexts } from "./core/paramBase/basicMetaField";
+import type { X_Param } from "./core/paramBase/x-rpg-param";
+import { xparamBaseData } from "./core/paramBase/x-rpg-param";
 import type { RpgDataIdParam, SystemDataIdParam } from "./core/primitiveParams";
 import { lookupKind } from "./core/rpgData/lookup";
+import { withDefault } from "./utils";
 
 export const makeRpgIdField = (data: RpgDataIdParam | SystemDataIdParam) =>
   ({

@@ -6,7 +6,7 @@ import {
   compilePrimitiveFiledWithXParam,
 } from "./compieFiled";
 import type { AnyParamSchema } from "./core/anyPluginSchema";
-import type { JSONSchemaTypeWithRpgParam } from "./core/kindBase/x-rpg-param";
+import type { JSONSchemaTypeWithRpgParam } from "./core/paramBase/x-rpg-param";
 import type { ComboParam } from "./core/primitiveParams";
 
 const data: ComboParam = {

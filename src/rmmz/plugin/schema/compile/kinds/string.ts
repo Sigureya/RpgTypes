@@ -1,8 +1,9 @@
 import type { JSONSchemaType } from "ajv";
-import { withDefault, withTexts } from "./core/kindBase/basciMetaField";
-import type { JSONSchemaTypeWithRpgParam } from "./core/kindBase/x-rpg-param";
-import { xparamBaseData } from "./core/kindBase/x-rpg-param";
+import { withTexts } from "./core/paramBase/basicMetaField";
+import type { JSONSchemaTypeWithRpgParam } from "./core/paramBase/x-rpg-param";
+import { xparamBaseData } from "./core/paramBase/x-rpg-param";
 import type { StringParam } from "./core/primitiveParams";
+import { withDefault } from "./utils";
 
 export const compileStringField = (
   data: StringParam

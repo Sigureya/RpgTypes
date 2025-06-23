@@ -1,5 +1,5 @@
 import type { JSONSchemaType } from "ajv";
-import type { ParamBase } from "./kindBase";
+import type { ParamBase } from "./paramBase";
 
 export const X_RPG_PARM = "x-rpg-param" as const;
 export interface X_Param {

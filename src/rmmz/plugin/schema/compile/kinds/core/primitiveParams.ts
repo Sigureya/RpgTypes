@@ -1,4 +1,4 @@
-import type { ParamBase } from "./kindBase/kindBase";
+import type { ParamBase } from "./paramBase";
 import type {
   DataKind_RpgUnion,
   DataKind_SystemUnion,
