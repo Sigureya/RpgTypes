@@ -1,6 +1,6 @@
 import { describe, test, expect } from "vitest";
 import { Ajv, type JSONSchemaType } from "ajv";
-import { compilePrimitiveFiled } from "../compie";
+import { compilePrimitiveFiled } from "../compieFiled";
 import { compileParams } from "./packing";
 import type {
   ParamToObject,

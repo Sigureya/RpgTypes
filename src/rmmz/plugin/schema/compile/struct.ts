@@ -4,7 +4,7 @@ import type { PluginMeta, PluginCompileOptions } from "./kinds";
 import {
   compilePrimitiveFiled,
   compilePrimitiveFiledWithXParam,
-} from "./kinds/compie";
+} from "./kinds/compieFiled";
 import type { StructCompileLog, CompileResult } from "./kinds/compileLog";
 import { PLUGIN_COMMAND } from "./kinds/constants";
 import type { AnyParamSchema } from "./kinds/core/anyPluginSchema";
