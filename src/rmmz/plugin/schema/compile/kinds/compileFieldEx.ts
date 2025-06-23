@@ -28,13 +28,12 @@ export const compileStructDetail = <T>(
 ) => {
   const { properties, logs } = reduceProps(props, path, ctx);
 
-  const keys = Object.keys(props);
   return {
     schema: {
       type: "object",
       title: title,
       properties,
-      required: keys,
+      required: Object.keys(props),
       additionalProperties: false,
     } satisfies JSONSchemaType<T>,
     logs,
