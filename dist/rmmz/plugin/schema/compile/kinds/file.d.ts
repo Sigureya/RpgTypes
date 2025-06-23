@@ -1,14 +1,9 @@
-import { KindOfFile } from './core/primitiveParams';
-import { JSONSchemaTypeWithRpgParam } from './core/x-rpg-param';
-export declare const compileFileField: (data: KindOfFile) => {
-    description?: string | undefined;
-    title?: string | undefined;
-    default: string;
-    type: "string";
-} | {
-    description?: string | undefined;
-    title?: string | undefined;
-    default?: undefined;
+import { JSONSchemaTypeWithRpgParam } from './core/paramBase/x-rpg-param';
+import { FileParam } from './core/primitiveParams';
+export declare const compileFileField: (data: FileParam) => {
+    title?: string;
+    description?: string;
+    default?: string | undefined;
     type: "string";
 };
-export declare const compileFileFieldWithXparam: (data: KindOfFile) => JSONSchemaTypeWithRpgParam<string>;
+export declare const compileFileFieldWithXparam: (data: FileParam) => JSONSchemaTypeWithRpgParam<string>;

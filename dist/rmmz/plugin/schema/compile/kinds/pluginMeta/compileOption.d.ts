@@ -1,4 +1,3 @@
-import { PrimitiveStruct } from './primitiveParams';
 export interface PluginMeta {
     author: string;
     moduleName: string;
@@ -6,7 +5,7 @@ export interface PluginMeta {
 export interface PluginCompileOptions {
     kindData: boolean;
 }
-export interface RmmzPluiginInput {
+export interface CompileContext {
     meta: PluginMeta;
-    structs: Record<string, PrimitiveStruct>;
+    options: Partial<PluginCompileOptions>;
 }

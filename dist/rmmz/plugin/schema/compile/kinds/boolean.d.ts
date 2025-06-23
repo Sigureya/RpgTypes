@@ -1,8 +1,8 @@
 import { JSONSchemaType } from 'ajv';
-import { KindOfBoolean } from './core/primitiveParams';
-import { JSONSchemaTypeWithRpgParam } from './core/x-rpg-param';
-export declare const compileBooleanField: (data: KindOfBoolean) => JSONSchemaType<boolean>;
-export declare const compileBooleanFieldWithXParam: (data: KindOfBoolean) => JSONSchemaTypeWithRpgParam<boolean, {
+import { JSONSchemaTypeWithRpgParam } from './core/paramBase/x-rpg-param';
+import { BooleanParam } from './core/primitiveParams';
+export declare const compileBooleanField: (data: BooleanParam) => JSONSchemaType<boolean>;
+export declare const compileBooleanFieldWithXParam: (data: BooleanParam) => JSONSchemaTypeWithRpgParam<boolean, {
     on?: string;
     off?: string;
 }>;
