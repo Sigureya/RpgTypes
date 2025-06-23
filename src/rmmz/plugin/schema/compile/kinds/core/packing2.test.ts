@@ -18,7 +18,7 @@ const mockPersonStruct: PrimitiveStructType<Person> = {
 const getKind = ({ kind }: { kind: string }) => kind;
 
 describe("compileProperties", () => {
-  test("", () => {
+  test("should compile params to their respective types", () => {
     const result: Record<keyof Person, string> = compileParams(
       mockPersonStruct.params,
       getKind
@@ -29,12 +29,25 @@ describe("compileProperties", () => {
     };
     expect(result).toEqual(expected);
   });
-  test("", () => {
-    const result: Person = paramToObject(mockPersonStruct.params);
+});
+
+describe("paramToObject", () => {
+  test("should convert struct params to object with default values", () => {
+    const result = paramToObject(mockPersonStruct.params);
     const expected: Person = {
       name: "bob",
       age: 0,
     };
+    expect(result).toEqual(expected);
+  });
+
+  test("should handle empty params", () => {
+    const emptyStruct: PrimitiveStructType<{}> = {
+      struct: "Empty",
+      params: {},
+    };
+    const result = paramToObject(emptyStruct.params);
+    const expected: {} = {};
     expect(result).toEqual(expected);
   });
 });
