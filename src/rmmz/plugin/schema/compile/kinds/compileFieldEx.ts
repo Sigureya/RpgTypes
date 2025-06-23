@@ -9,7 +9,7 @@ import type {
   PluginStructEx,
   StructArrayDefParam,
   StructDefParam,
-} from "./core/structTypeEx";
+} from "./core/pluginEntriesEx";
 import type { AnyParamSchema } from "./pluginMeta/anyParamSchema";
 import type { CompileContext } from "./pluginMeta/compileOption";
 import { withDefault } from "./utils";
@@ -28,13 +28,12 @@ export const compileStructDetail = <T>(
 ) => {
   const { properties, logs } = reduceProps(props, path, ctx);
 
-  const keys = Object.keys(props);
   return {
     schema: {
       type: "object",
       title: title,
       properties,
-      required: keys,
+      required: Object.keys(props),
       additionalProperties: false,
     } satisfies JSONSchemaType<T>,
     logs,
@@ -123,13 +122,12 @@ const makeStructKind = <T extends object>(
   annotation: PluginStructEx<T>,
   ctx: CompileContext
 ): SchemaAndLog => {
-  return compileStructDetail(
+  return compileStructDetail<T>(
     path,
     annotation.struct,
     annotation.params,
     ctx
-  ) as unknown as SchemaAndLog;
-  // 再帰構造のためasが唯一の解となる
+  );
 };
 
 const makeStructArrayKind = <T extends object>(
@@ -150,7 +148,7 @@ const makeStructArrayKind = <T extends object>(
       type: "array",
       ...(item.schema ? { items: item.schema } : {}),
       ...withDefault(annotation.default),
-    } as JSONSchemaType<object[]>,
+    },
     logs: item.logs,
   };
 };

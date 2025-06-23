@@ -2,7 +2,7 @@ import { describe, test, expect } from "vitest";
 import type { JSONSchemaType } from "ajv";
 import type { StructCompileLogObjectEntry } from "./compileLog";
 import { defineStructs } from "./compileLog";
-import type { StructDefParam } from "./core/structTypeEx";
+import type { StructDefParam } from "./core/pluginEntriesEx";
 
 interface Person {
   name: string;

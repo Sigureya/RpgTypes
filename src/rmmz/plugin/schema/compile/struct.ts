@@ -1,7 +1,10 @@
 import { compileStructDetail } from "./kinds/compileFieldEx";
 import type { CompileResult } from "./kinds/compileLog";
 import { PLUGIN_COMMAND } from "./kinds/constants";
-import type { PluginCommand, PluginStructEx } from "./kinds/core/structTypeEx";
+import type {
+  PluginCommand,
+  PluginStructEx,
+} from "./kinds/core/pluginEntriesEx";
 import type {
   PluginMeta,
   PluginCompileOptions,
@@ -14,7 +17,7 @@ export const compilePluginCommand = <T extends object>(
   { args, command }: PluginCommand<T>,
   options: Partial<PluginCompileOptions>
 ): CompileResult<T> => {
-  return compileStructDetail(
+  return compileStructDetail<T>(
     `${titles.moduleName}${SEPARATOR}${PLUGIN_COMMAND}${SEPARATOR}${command}`,
     command,
     args,
@@ -27,7 +30,7 @@ export const compilePluginStruct = <T extends object>(
   { params, struct: structName }: PluginStructEx<T>,
   options: Partial<PluginCompileOptions>
 ): CompileResult<T> => {
-  return compileStructDetail(
+  return compileStructDetail<T>(
     `${tiles.moduleName}${SEPARATOR}${structName}`,
     structName,
     params,

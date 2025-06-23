@@ -4,7 +4,7 @@ import type {
   StructDefParam,
   StructArrayDefParam,
   StructParam,
-} from "./core/structTypeEx";
+} from "./core/pluginEntriesEx";
 
 export interface CompileResult<T extends object> {
   schema: JSONSchemaType<T>;
