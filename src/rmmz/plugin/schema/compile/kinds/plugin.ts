@@ -1,4 +1,4 @@
-import type { KindBase } from "./core/kindBase/kindBase";
+import type { ParamBase } from "./core/kindBase/kindBase";
 import type { StructParamPrimitive } from "./core/primitiveParams";
 
 // 各パラメータ型のユニオン
@@ -9,7 +9,7 @@ export type StructParam =
 
 export interface KindOfStructArray<T extends object>
   extends PluginStruct<T>,
-    KindBase {
+    ParamBase {
   kind: "struct_def[]";
   default: object[];
   struct: string;
@@ -21,7 +21,7 @@ export interface KindOfStructArray<T extends object>
 // 構造体アノテーション
 export interface KindOfStruct<T extends object>
   extends PluginStruct<T>,
-    KindBase {
+    ParamBase {
   kind: "struct_def";
   struct: string;
   params: {

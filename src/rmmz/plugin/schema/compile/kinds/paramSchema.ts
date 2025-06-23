@@ -1,6 +1,6 @@
 import type { JSONSchemaType } from "ajv";
 import type { DiscriminatedUnionSchemaType3 } from "src/templates/discriminator/discriminator3";
-import type { KindBase } from "./core/kindBase/kindBase";
+import type { ParamBase } from "./core/kindBase/kindBase";
 import type {
   BooleanParam,
   ComboParam,
@@ -43,7 +43,7 @@ export const makeParamSchema = () =>
       rmmzSchemaStringArrayParam(),
     ],
   } satisfies DiscriminatedUnionSchemaType3<
-    KindBase,
+    ParamBase,
     string,
     "kind",
     | BooleanParam
