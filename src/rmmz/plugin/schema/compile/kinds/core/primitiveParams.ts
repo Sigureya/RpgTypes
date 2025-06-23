@@ -26,9 +26,9 @@ export type PrimitiveStruct<K extends string = string> = Record<
 
 export interface KindBase {
   kind: string;
-  desc?: string | null;
-  text?: string | null;
-  parent?: string | null;
+  desc?: string;
+  text?: string;
+  parent?: string;
 }
 
 export interface KindOfRpgDataId extends KindBase {

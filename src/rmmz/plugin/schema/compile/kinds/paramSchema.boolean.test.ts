@@ -39,7 +39,7 @@ describe("RmmzParam_Boolean JSON Schema Validation", () => {
       expect(mock).toSatisfy(validate);
     });
     test("accepts boolean with null optional fields", () => {
-      const mock: KindOfBoolean = {
+      const mock: Record<keyof KindOfBoolean, unknown> = {
         kind: "boolean",
         default: false,
         desc: null,

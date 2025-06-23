@@ -79,7 +79,7 @@ describe("number", () => {
     });
 
     test("with null optional fields", () => {
-      const mock: KindOfNumber = nullData("number", 0);
+      const mock = nullData("number", 0);
       expect(mock).toSatisfy(validate);
     });
 
@@ -189,7 +189,7 @@ describe("KindOfNumberArray parameter validation", () => {
       expect(mock).toSatisfy(validate);
     });
     test("with null optional fields", () => {
-      const mock: KindOfNumberArray = nullData("number[]", []);
+      const mock = nullData("number[]", []);
       expect(mock).toSatisfy(validate);
     });
     test("with undefined optional fields", () => {
