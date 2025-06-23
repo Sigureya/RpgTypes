@@ -1,5 +1,7 @@
 import { withTexts } from "./core/primitive";
-import type { KindOfStructBase } from "./core/primitiveParams";
+import type { KindOfStructRef } from "./core/primitiveParams";
+import type { X_RmmzParamInput, X_RPG_PARM } from "./core/x-rpg-param";
+import { xparamBaseData } from "./core/x-rpg-param";
 import type { KindOfStruct, KindOfStructArray, StructParam } from "./plugin";
 
 export const isStructDef = (
@@ -14,13 +16,26 @@ export const isStructDefArray = (
   return value.kind === "struct_def[]";
 };
 
-interface JSONSchemaSttructRef {
+export interface JSONSchemaStructRef {
   $ref: string;
   description?: string;
   title?: string;
 }
 
-export const makeStructRef = (ref: KindOfStructBase): JSONSchemaSttructRef => ({
+export const makeStructRef = (ref: KindOfStructRef): JSONSchemaStructRef => ({
   $ref: `#/definitions/${ref.struct}`,
   ...withTexts(ref),
 });
+
+type SchemaType = JSONSchemaStructRef & {
+  [X_RPG_PARM]: X_RmmzParamInput<{ struct: string }>;
+};
+
+export const makeStructRefWithXParam = (ref: KindOfStructRef) =>
+  ({
+    $ref: `#/definitions/${ref.struct}`,
+    ...withTexts(ref),
+    ...xparamBaseData(ref, {
+      struct: ref.struct,
+    }),
+  } satisfies SchemaType);
