@@ -1,4 +1,3 @@
-import type { AnyParamSchema } from "./anyPluginSchema";
 import type {
   BooleanParam,
   StructArrayRefParam,
@@ -46,21 +45,3 @@ export type PluginSchemaType<T> = T extends boolean
   : T extends object
   ? StructRefParam
   : never;
-
-export const compileProperties = <T extends object>(
-  struct: PrimitiveStructType<T>,
-  fn: (value: StructParamPrimitive, key: string) => AnyParamSchema
-) => {
-  const entries = Object.entries(struct.params).map(([key, value]) => ({
-    [key]: fn(value as StructParamPrimitive, key),
-  }));
-  return {
-    title: struct.struct satisfies string,
-    type: "object" as const,
-    properties: entries.reduce<Record<string, AnyParamSchema>>(
-      (acc, curr) => ({ ...acc, ...curr }),
-      {}
-    ),
-    required: Object.keys(struct.params),
-  };
-};
