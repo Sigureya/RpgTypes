@@ -64,14 +64,3 @@ export const compileProperties = <T extends object>(
     required: Object.keys(struct.params),
   };
 };
-
-export type ParamToObject<
-  T extends Record<
-    string,
-    {
-      default: unknown;
-    }
-  >
-> = {
-  [K in keyof T]: T[K] extends { default: infer D } ? D : never;
-};

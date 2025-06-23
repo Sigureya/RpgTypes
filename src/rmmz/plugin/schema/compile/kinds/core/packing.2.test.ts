@@ -1,5 +1,5 @@
 import { describe, test, expect } from "vitest";
-import { compileParams } from "./packing";
+import { compileParams, paramToObject } from "./packing2";
 import type { PrimitiveStructType } from "./pluginScehamType";
 
 interface Person {
@@ -16,7 +16,6 @@ const mockPersonStruct: PrimitiveStructType<Person> = {
 };
 
 const getKind = ({ kind }: { kind: string }) => kind;
-const getDefault = <T>({ default: def }: { default: T }) => def;
 
 describe("compileProperties", () => {
   test("", () => {
@@ -31,10 +30,7 @@ describe("compileProperties", () => {
     expect(result).toEqual(expected);
   });
   test("", () => {
-    const result = compileParams(
-      mockPersonStruct.params,
-      getDefault<number | string>
-    );
+    const result: Person = paramToObject(mockPersonStruct.params);
     const expected: Person = {
       name: "bob",
       age: 0,

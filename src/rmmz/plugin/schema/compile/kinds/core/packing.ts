@@ -1,5 +1,6 @@
 import type { JSONSchemaType } from "ajv";
 import { compilePrimitiveFiled } from "../compieFiled";
+import { compileParams } from "./packing2";
 import type {
   PrimitiveStructBase,
   PrimitiveStructType,
@@ -44,21 +45,4 @@ export const compilePrimitiveStruct = (struct: PrimitiveStructBase) => {
     properties: compileParams(struct.params, compilePrimitiveFiled),
     required: Object.keys(struct.params),
   };
-};
-
-export const compileParams = <
-  K extends string,
-  P extends StructParamPrimitive,
-  R
->(
-  params: Record<K, P>,
-  fn: (value: P, key: string) => R
-): Record<K, R> => {
-  const entries = Object.entries<P>(params).map(([key, value]) => ({
-    [key]: fn(value, key),
-  }));
-  return entries.reduce<Record<K, R>>(
-    (acc, curr) => ({ ...acc, ...curr }),
-    {} as Record<K, R>
-  );
 };

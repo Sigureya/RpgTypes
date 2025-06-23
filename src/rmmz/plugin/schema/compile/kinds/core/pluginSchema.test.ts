@@ -1,12 +1,9 @@
 import { describe, test, expect } from "vitest";
 import { Ajv, type JSONSchemaType } from "ajv";
 import { compilePrimitiveFiled } from "../compieFiled";
-import { compileParams } from "./packing";
-import type {
-  ParamToObject,
-  PrimitiveParams,
-  PrimitiveStructType,
-} from "./pluginScehamType";
+import { compileParams } from "./packing2";
+import type { ParamToObject } from "./paramsToobject";
+import type { PrimitiveParams, PrimitiveStructType } from "./pluginScehamType";
 import { compileProperties } from "./pluginScehamType";
 
 interface Person {
