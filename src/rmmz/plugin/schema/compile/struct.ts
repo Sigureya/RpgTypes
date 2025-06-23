@@ -1,8 +1,11 @@
-import type { PluginMeta, PluginCompileOptions } from "./kinds";
 import { compileStructDetail } from "./kinds/compileFieldEx";
 import type { CompileResult } from "./kinds/compileLog";
 import { PLUGIN_COMMAND } from "./kinds/constants";
 import type { PluginCommand, PluginStruct } from "./kinds/plugin";
+import type {
+  PluginMeta,
+  PluginCompileOptions,
+} from "./kinds/pluginMeta/compileOption";
 
 const SEPARATOR = "." as const;
 

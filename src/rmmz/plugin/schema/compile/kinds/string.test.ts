@@ -5,8 +5,8 @@ import {
   compilePrimitiveFiledWithXParam,
 } from "./compileFiled";
 import type { JSONSchemaTypeWithRpgParam } from "./core/paramBase/x-rpg-param";
-import type { AnyParamSchema } from "./core/pluginMeta/anyParamSchema";
 import type { StringParam } from "./core/primitiveParams";
+import type { AnyParamSchema } from "./pluginMeta/anyParamSchema";
 import { compileStringField, compileStringFieldWithXparam } from "./string";
 
 const mockData: StringParam = {

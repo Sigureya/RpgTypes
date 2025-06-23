@@ -5,9 +5,9 @@ import {
   compilePrimitiveFiledWithXParam,
 } from "./compileFiled";
 import type { JSONSchemaTypeWithRpgParam } from "./core/paramBase/x-rpg-param";
-import type { AnyParamSchema } from "./core/pluginMeta/anyParamSchema";
 import type { FileParam } from "./core/primitiveParams";
 import { compileFileField, compileFileFieldWithXparam } from "./file";
+import type { AnyParamSchema } from "./pluginMeta/anyParamSchema";
 
 const mockData: FileParam = {
   kind: "file",
