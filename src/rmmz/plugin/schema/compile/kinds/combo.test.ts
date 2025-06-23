@@ -6,8 +6,8 @@ import {
   compilePrimitiveFiledWithXParam,
 } from "./compieFiled";
 import type { AnyParamSchema } from "./core/anyPluginSchema";
+import type { JSONSchemaTypeWithRpgParam } from "./core/kindBase/x-rpg-param";
 import type { KindOfCombo } from "./core/primitiveParams";
-import type { JSONSchemaTypeWithRpgParam } from "./core/x-rpg-param";
 
 const data: KindOfCombo = {
   kind: "combo",

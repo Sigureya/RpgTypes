@@ -1,7 +1,7 @@
-import { withTexts } from "./core/basciMetaField";
+import { withTexts } from "./core/kindBase/basciMetaField";
+import type { X_RmmzParamInput, X_RPG_PARM } from "./core/kindBase/x-rpg-param";
+import { xparamBaseData } from "./core/kindBase/x-rpg-param";
 import type { KindOfStructRef } from "./core/primitiveParams";
-import type { X_RmmzParamInput, X_RPG_PARM } from "./core/x-rpg-param";
-import { xparamBaseData } from "./core/x-rpg-param";
 import type { KindOfStruct, KindOfStructArray, StructParam } from "./plugin";
 
 export const isStructDef = (

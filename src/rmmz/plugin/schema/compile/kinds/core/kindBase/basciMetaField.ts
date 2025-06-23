@@ -1,5 +1,5 @@
 import type { JSONSchemaType } from "ajv";
-import type { KindBase } from "./primitiveParams";
+import type { KindBase } from "./kindBase";
 
 export interface KindOfArray<T> extends KindBase {
   kind: `${string}[]`;

@@ -1,1 +1,1 @@
-export { withDefault, compileArrayField } from "./core/basciMetaField";
+export { withDefault, compileArrayField } from "./core/kindBase/basciMetaField";

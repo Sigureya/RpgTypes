@@ -5,8 +5,8 @@ import {
   compilePrimitiveFiledWithXParam,
 } from "./compieFiled";
 import type { AnyParamSchema } from "./core/anyPluginSchema";
+import type { JSONSchemaTypeWithRpgParam } from "./core/kindBase/x-rpg-param";
 import type { KindOfSelect } from "./core/primitiveParams";
-import type { JSONSchemaTypeWithRpgParam } from "./core/x-rpg-param";
 import { compileSelectField, compileSelectFieldWithXparam } from "./select";
 
 const data = {
