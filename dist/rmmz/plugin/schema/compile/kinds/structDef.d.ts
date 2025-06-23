@@ -1,9 +1,19 @@
-import { KidnOfStructBase } from './core/primitiveParams';
-import { KindOfStruct, KindOfStructArray, StructParam } from './plugin';
-export declare const isStructDef: (value: StructParam) => value is KindOfStruct<object>;
-export declare const isStructDefArray: (value: StructParam) => value is KindOfStructArray<object>;
-export declare const makeStructRef: (ref: KidnOfStructBase) => {
-    description?: string | undefined;
-    title?: string | undefined;
+import { StructRefParam } from './core/primitiveParams';
+export interface JSONSchemaStructRef {
+    $ref: string;
+    description?: string;
+    title?: string;
+}
+export declare const makeStructRef: (ref: StructRefParam) => JSONSchemaStructRef;
+export declare const makeStructRefWithXParam: (ref: StructRefParam) => {
+    "x-rpg-param": {
+        data: {
+            struct: string;
+        };
+        parent?: string | undefined;
+        kind: string;
+    };
+    title?: string;
+    description?: string;
     $ref: string;
 };

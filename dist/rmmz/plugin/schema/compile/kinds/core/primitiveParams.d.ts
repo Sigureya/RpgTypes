@@ -1,27 +1,22 @@
+import { ParamBase } from './paramBase';
 import { DataKind_RpgUnion, DataKind_SystemUnion } from './rpgData/rpgDataTypesNames';
-export type StructParamPrimitive = KindOfBoolean | KindOfNumber | KindOfNumberArray | KindOfRpgDataId | KindOfRpgDataIdArray | KindOfCombo | KindOfSelect | KindOfString | KindOfStringArray | KindOfSystemDataId | KindOfFile | KindOfFileArray | KindOfStructRef | KindOfStructArrayRef;
-export type PrimitiveStruct<K extends string = string> = Record<K, StructParamPrimitive>;
-export interface KindBase {
-    kind: string;
-    desc?: string | null;
-    text?: string | null;
-    parent?: string | null;
-}
-export interface KindOfRpgDataId extends KindBase {
+export type StructParamPrimitive = BooleanParam | NumberParam | NumberArrayParam | RpgDataIdParam | RpgDataIdArrayParam | ComboParam | SelectParam | StringParam | StringArrayParam | SystemDataIdParam | FileParam | FileArrayParam | StructRefParam | StructArrayRefParam;
+export type PrimitiveParams<K extends string = string> = Record<K, StructParamPrimitive>;
+export interface RpgDataIdParam extends ParamBase {
     kind: DataKind_RpgUnion;
     default: number;
 }
-export interface KindOfRpgDataIdArray extends KindBase {
+export interface RpgDataIdArrayParam extends ParamBase {
     kind: `${DataKind_RpgUnion}[]`;
     default: number[];
 }
-export interface KindOfBoolean extends KindBase {
+export interface BooleanParam extends ParamBase {
     kind: "boolean";
     default: boolean;
     on?: string | null;
     off?: string | null;
 }
-export interface KindOfSelect extends KindBase {
+export interface SelectParam extends ParamBase {
     kind: "select";
     options: {
         value: string;
@@ -29,60 +24,60 @@ export interface KindOfSelect extends KindBase {
     }[];
     default: string;
 }
-export interface KindOfString extends KindBase {
+export interface StringParam extends ParamBase {
     kind: "string" | "multiline_string";
     default: string;
 }
-export interface KindOfStringArray extends KindBase {
+export interface StringArrayParam extends ParamBase {
     kind: "string[]" | "multiline_string[]";
     default: string[];
 }
-export interface KindOfCombo extends KindBase {
+export interface ComboParam extends ParamBase {
     kind: "combo";
     options: string[];
     default: string;
 }
-export interface KindOfNumber extends KindBase {
+export interface NumberParam extends ParamBase {
     kind: "number";
     default: number;
     digit?: number | null;
     min?: number | null;
     max?: number | null;
 }
-export interface KindOfNumberArray extends KindBase {
+export interface NumberArrayParam extends ParamBase {
     kind: "number[]";
     default: number[];
     digit?: number | null;
     min?: number | null;
     max?: number | null;
 }
-export interface KindOfId extends KindBase {
+export interface GenericIdParam extends ParamBase {
     kind: "id";
     default: number;
 }
-export interface KindOfSystemDataId extends KindBase {
+export interface SystemDataIdParam extends ParamBase {
     kind: DataKind_SystemUnion;
     default: number;
 }
-export interface KindOfFile extends KindBase {
+export interface FileParam extends ParamBase {
     kind: "file";
     default: string;
     dir: string;
 }
-export interface KindOfFileArray extends KindBase {
+export interface FileArrayParam extends ParamBase {
     kind: "file[]";
     default: string[];
     dir: string;
 }
-export interface KidnOfStructBase extends KindBase {
+export interface KindOfStructBase extends ParamBase {
     struct: string;
 }
-export interface KindOfStructRef extends KidnOfStructBase {
+export interface StructRefParam extends KindOfStructBase {
     kind: "struct";
     struct: string;
     default?: object;
 }
-export interface KindOfStructArrayRef extends KidnOfStructBase {
+export interface StructArrayRefParam extends KindOfStructBase {
     kind: "struct[]";
     struct: string;
     default?: object[];

@@ -1,5 +1,5 @@
 import { JSONSchemaType } from 'ajv';
-import { KindOfSelect } from './core/primitiveParams';
-import { JSONSchemaTypeWithRpgParam } from './core/x-rpg-param';
-export declare const compileSelectField: (data: KindOfSelect) => JSONSchemaType<string>;
-export declare const compileSelectFieldWithXparam: (data: KindOfSelect) => JSONSchemaTypeWithRpgParam<string>;
+import { JSONSchemaTypeWithRpgParam } from './core/paramBase/x-rpg-param';
+import { SelectParam } from './core/primitiveParams';
+export declare const compileSelectField: (data: SelectParam) => JSONSchemaType<string>;
+export declare const compileSelectFieldWithXparam: (data: SelectParam) => JSONSchemaTypeWithRpgParam<string>;

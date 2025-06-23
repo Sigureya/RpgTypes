@@ -1,7 +1,7 @@
 import { JSONSchemaType } from 'ajv';
-import { KindOfCombo } from './core/primitiveParams';
-import { JSONSchemaTypeWithRpgParam } from './core/x-rpg-param';
-export declare const compileComboField: (data: KindOfCombo) => JSONSchemaType<string>;
-export declare const compileComboFieldWithXparam: (data: KindOfCombo) => JSONSchemaTypeWithRpgParam<string, {
+import { JSONSchemaTypeWithRpgParam } from './core/paramBase/x-rpg-param';
+import { ComboParam } from './core/primitiveParams';
+export declare const compileComboField: (data: ComboParam) => JSONSchemaType<string>;
+export declare const compileComboFieldWithXparam: (data: ComboParam) => JSONSchemaTypeWithRpgParam<string, {
     options: string[];
 }>;
