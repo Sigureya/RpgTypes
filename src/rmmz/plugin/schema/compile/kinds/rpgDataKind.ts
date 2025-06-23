@@ -1,5 +1,5 @@
 import type { JSONSchemaType } from "ajv";
-import { withDefault, withTexts } from "./core/primitive";
+import { withDefault, withTexts } from "./core/basciMetaField";
 import type {
   KindOfRpgDataId,
   KindOfSystemDataId,
