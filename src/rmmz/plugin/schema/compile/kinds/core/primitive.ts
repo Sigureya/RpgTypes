@@ -17,10 +17,20 @@ export const compileArrayField = <T, S extends JSONSchemaType<T>>(
     ...withDefault(data.default),
   } satisfies JSONSchemaType<T[]>);
 
-export const withTexts = (kind: KindBase) => ({
+export const withTexts = (
+  kind: KindBase
+): {
+  title?: string;
+  description?: string;
+} => ({
   ...(typeof kind.text === "string" ? { title: kind.text } : {}),
   ...(typeof kind.desc === "string" ? { description: kind.desc } : {}),
 });
 
-export const withDefault = <T>(value: T | undefined) =>
-  value !== undefined ? { default: value } : {};
+export const withDefault = <T>(
+  value: T | undefined
+):
+  | {}
+  | {
+      default: T;
+    } => (value !== undefined ? { default: value } : {});
