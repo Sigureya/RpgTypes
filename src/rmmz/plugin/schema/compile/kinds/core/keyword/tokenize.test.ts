@@ -4,7 +4,7 @@ import { tokenize } from "./toknize";
 interface TestCase {
   name: string;
   input: string;
-  tokenList: Token[];
+  expected: Token[];
 }
 
 const testCases: TestCase[] = [
@@ -16,7 +16,7 @@ const testCases: TestCase[] = [
     @default false
     @on enabled
     @off disabled` as const,
-    tokenList: [
+    expected: [
       { keyword: "param", value: "bool" },
       { keyword: "type", value: "boolean" },
       { keyword: "text", value: "autoBattle" },
@@ -33,7 +33,7 @@ const testCases: TestCase[] = [
     @digit 3
     @type number
     @default 123` as const,
-    tokenList: [
+    expected: [
       { keyword: "param", value: "num" },
       { keyword: "min", value: "0" },
       { keyword: "max", value: "1000" },
@@ -49,7 +49,7 @@ const testCases: TestCase[] = [
     @default [1, 2, 3]
     @min 0  
     @max 1000` as const,
-    tokenList: [
+    expected: [
       { keyword: "param", value: "numArray" },
       { keyword: "type", value: "number[]" },
       { keyword: "default", value: "[1, 2, 3]" },
@@ -63,7 +63,7 @@ const testCases: TestCase[] = [
     * @type string
     * @desc This is a string parameter
     *  @default Hello` as const,
-    tokenList: [
+    expected: [
       { keyword: "param", value: "str" },
       { keyword: "type", value: "string" },
       { keyword: "desc", value: "This is a string parameter" },
@@ -74,7 +74,7 @@ const testCases: TestCase[] = [
     name: "weapon",
     input:
       "@param weapon\n@type weapon\n@default 0\n@desc This is a weapon parameter",
-    tokenList: [
+    expected: [
       { keyword: "param", value: "weapon" },
       { keyword: "type", value: "weapon" },
       { keyword: "default", value: "0" },
@@ -84,7 +84,7 @@ const testCases: TestCase[] = [
   {
     input: [" * @param p   ", " * @text t "].join("\n"),
     name: "simple param and text",
-    tokenList: [
+    expected: [
       { keyword: "param", value: "p" },
       { keyword: "text", value: "t" },
     ],
@@ -92,7 +92,7 @@ const testCases: TestCase[] = [
 ];
 
 const runTestCases = (cases: TestCase[]) => {
-  cases.forEach(({ name, input, tokenList: expected }) => {
+  cases.forEach(({ name, input, expected: expected }) => {
     test(name, () => {
       const result = tokenize(input);
       expect(result).toEqual(expected);
