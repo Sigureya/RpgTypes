@@ -5,7 +5,7 @@ import {
   compilePrimitiveFiledWithXParam,
 } from "./compieFiled";
 import type { AnyParamSchema } from "./core/anyPluginSchema";
-import type { JSONSchemaTypeWithRpgParam } from "./core/kindBase/x-rpg-param";
+import type { JSONSchemaTypeWithRpgParam } from "./core/paramBase/x-rpg-param";
 import type { StringParam } from "./core/primitiveParams";
 import { compileStringField, compileStringFieldWithXparam } from "./string";
 

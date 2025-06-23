@@ -1,4 +1,4 @@
-import type { ParamBase } from "./core/kindBase/kindBase";
+import type { ParamBase } from "./core/paramBase";
 import type { StructParamPrimitive } from "./core/primitiveParams";
 
 // 各パラメータ型のユニオン

@@ -1,8 +1,7 @@
 import { describe, test, expect } from "vitest";
 import type { JSONSchemaType } from "ajv";
-import type { KindOfArray } from "./basciMetaField";
-import { withDefault, withTexts, compileArrayField } from "./basciMetaField";
-import type { ParamBase } from "./kindBase";
+import { withDefault, withTexts, compileArrayField } from "./basicMetaField";
+import type { ArrayParamBase, ParamBase } from "./paramBase";
 
 describe("withTexts", () => {
   test("should return an object with title and description if provided", () => {
@@ -51,7 +50,7 @@ describe("withDefault", () => {
 });
 
 describe("compileArrayField", () => {
-  const mockData: KindOfArray<string> = {
+  const mockData: ArrayParamBase<string> = {
     kind: "string[]",
     default: ["item1", "item2"],
     text: "String Array Field",
@@ -75,7 +74,7 @@ describe("compileArrayField", () => {
   });
 
   test("should compile array field schema without default", () => {
-    const dataWithoutDefault: KindOfArray<string> = {
+    const dataWithoutDefault: ArrayParamBase<string> = {
       kind: "string[]",
     };
     const expectedSchema: JSONSchemaType<string[]> = {

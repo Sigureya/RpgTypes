@@ -1,6 +1,6 @@
 import type { JSONSchemaType } from "ajv";
 import type { DiscriminatedUnionSchemaType3 } from "src/templates/discriminator/discriminator3";
-import type { ParamBase } from "./core/kindBase/kindBase";
+import type { ParamBase } from "./core/paramBase";
 import type {
   BooleanParam,
   ComboParam,

@@ -1,1 +1,4 @@
-export { withDefault, compileArrayField } from "./core/kindBase/basciMetaField";
+export {
+  withDefault,
+  compileArrayField,
+} from "./core/paramBase/basicMetaField";

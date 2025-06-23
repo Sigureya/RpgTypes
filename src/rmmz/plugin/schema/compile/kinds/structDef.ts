@@ -1,6 +1,9 @@
-import { withTexts } from "./core/kindBase/basciMetaField";
-import type { X_RmmzParamInput, X_RPG_PARM } from "./core/kindBase/x-rpg-param";
-import { xparamBaseData } from "./core/kindBase/x-rpg-param";
+import { withTexts } from "./core/paramBase/basicMetaField";
+import type {
+  X_RPG_PARM,
+  X_RmmzParamInput,
+} from "./core/paramBase/x-rpg-param";
+import { xparamBaseData } from "./core/paramBase/x-rpg-param";
 import type { StructRefParam } from "./core/primitiveParams";
 import type { KindOfStruct, KindOfStructArray, StructParam } from "./plugin";
 
