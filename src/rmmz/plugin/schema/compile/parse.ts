@@ -122,7 +122,8 @@ export const parsePluginParam = (text: string): PluginParam => {
         desc,
       },
     };
-  } else if (
+  }
+  if (
     [
       "actor[]",
       "enemy[]",
@@ -201,15 +202,14 @@ export const parsePluginParam = (text: string): PluginParam => {
       },
     };
   }
-  {
-    // fallback: string
-    return {
-      param,
-      data: {
-        kind: "string",
-        default: defaultRaw ?? "",
-        desc,
-      },
-    };
-  }
+
+  // fallback: string
+  return {
+    param,
+    data: {
+      kind: "string",
+      default: defaultRaw ?? "",
+      desc,
+    },
+  };
 };
