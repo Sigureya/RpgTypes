@@ -20,11 +20,6 @@ export type StructParamPrimitive =
   | StructRefParam
   | StructArrayRefParam;
 
-export type PrimitiveParams<K extends string = string> = Record<
-  K,
-  StructParamPrimitive
->;
-
 export interface RpgDataIdParam extends ParamBase {
   kind: DataKind_RpgUnion;
   default: number;

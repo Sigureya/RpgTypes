@@ -1,6 +1,10 @@
 import type { JSONSchemaType } from "ajv";
 import type { Schema } from "jsonschema";
-import type { KindOfStruct, KindOfStructArray, StructParam } from "./plugin";
+import type {
+  StructDefParam,
+  StructArrayDefParam,
+  StructParam,
+} from "./core/structTypeEx";
 
 export interface CompileResult<T extends object> {
   schema: JSONSchemaType<T>;
@@ -16,7 +20,7 @@ export interface StructCompileLog<Data extends StructParam = StructParam> {
 
 export interface StructCompileLogObjectEntry<T extends object> {
   path: string;
-  data: KindOfStruct<T>;
+  data: StructDefParam<T>;
   schema: JSONSchemaType<T>;
   structName: string;
 }
@@ -37,7 +41,7 @@ export const defineStructs = (
 const isStructParam = (
   log: StructCompileLog<StructParam>
 ): log is StructCompileLog<
-  KindOfStruct<object> | KindOfStructArray<object>
+  StructDefParam<object> | StructArrayDefParam<object>
 > => {
   return (
     (log.data.kind === "struct_def" || log.data.kind === "struct_def[]") &&

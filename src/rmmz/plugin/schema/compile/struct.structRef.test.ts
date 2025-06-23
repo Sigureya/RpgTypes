@@ -1,7 +1,7 @@
 import { describe, test, expect } from "vitest";
 import type { JSONSchemaType } from "ajv";
 import type { StructCompileLog } from "./kinds/compileLog";
-import type { PluginStruct } from "./kinds/plugin";
+import type { PluginStructType } from "./kinds/core/pluginEnties";
 import type { PluginMeta } from "./kinds/pluginMeta/compileOption";
 import { compilePluginStruct } from "./struct";
 
@@ -25,7 +25,7 @@ describe("compilePluginStruct - struct_ref", () => {
       father: { kind: "struct", struct: "Person" },
       mother: { kind: "struct", struct: "Person" },
     },
-  } as const satisfies PluginStruct<Family>;
+  } as const satisfies PluginStructType<Family>;
   const expectedFamilySchema: JSONSchemaType<Family> = {
     type: "object",
     title: "Family",

@@ -1,6 +1,7 @@
 import { describe, test, expect } from "vitest";
 import type { JSONSchemaType } from "ajv";
-import type { PluginStruct } from "./kinds/plugin";
+import type { PluginStructType } from "./kinds/core/pluginEnties";
+import type { PluginStructEx } from "./kinds/core/structTypeEx";
 import type { PluginMeta } from "./kinds/pluginMeta/compileOption";
 import { compilePluginStruct } from "./struct";
 
@@ -25,7 +26,7 @@ describe("compilePluginStruct - person struct", () => {
       name: { kind: "string", default: "bob" },
       age: { kind: "number", default: 0 },
     },
-  } as const satisfies PluginStruct<Person>;
+  } as const satisfies PluginStructType<Person>;
   const expected: JSONSchemaType<Person> = {
     title: "Person",
     type: "object",
@@ -66,7 +67,7 @@ describe("compilePluginStruct - nested struct", () => {
         },
       },
     },
-  } as const satisfies PluginStruct<School>;
+  } as const satisfies PluginStructEx<School>;
   const mockSchoolSchema: JSONSchemaType<School> = {
     type: "object",
     title: "School",

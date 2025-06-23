@@ -2,7 +2,7 @@ import { describe, expect, test } from "vitest";
 import { Ajv, type JSONSchemaType } from "ajv";
 import type { TypePackage } from "./packing";
 import { compileFromStructArray } from "./packing";
-import type { PrimitiveStructType } from "./pluginSchemaType";
+import type { PluginStructType } from "./pluginEnties";
 
 interface Food {
   name: string;
@@ -32,14 +32,14 @@ const mockTypePackage = {
       name: { kind: "string", default: "" },
       calories: { kind: "number", default: 0 },
     },
-  } satisfies PrimitiveStructType<Food>,
+  } satisfies PluginStructType<Food>,
   Drink: {
     struct: "Drink",
     params: {
       name: { kind: "string", default: "" },
       volume: { kind: "number", default: 0 },
     },
-  } satisfies PrimitiveStructType<Drink>,
+  } satisfies PluginStructType<Drink>,
   SetMenu: {
     struct: "SetMenu",
     params: {
@@ -47,7 +47,7 @@ const mockTypePackage = {
       drink: { kind: "struct", struct: "Drink", default: {} },
       price: { kind: "number", default: 0 },
     },
-  } satisfies PrimitiveStructType<SetMenu>,
+  } satisfies PluginStructType<SetMenu>,
 } satisfies TypePackage<Pack>;
 
 const mockSchema = {

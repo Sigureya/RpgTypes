@@ -1,6 +1,6 @@
 import { describe, test, expect } from "vitest";
 import type { JSONSchemaType } from "ajv";
-import type { PluginStruct } from "./kinds/plugin";
+import type { PluginStructType } from "./kinds/core/pluginEnties";
 import type { PluginMeta } from "./kinds/pluginMeta/compileOption";
 import { compilePluginStruct } from "./struct";
 interface Numbers {
@@ -28,7 +28,7 @@ describe("compilePluginStruct -numbers", () => {
       numberArray: { kind: "number[]", default: [1, 2, 3], digit: 0 },
       floatArray: { kind: "number[]", default: [1.1, 2.2, 3.3], digit: 2 },
     },
-  } as const satisfies PluginStruct<Numbers>;
+  } as const satisfies PluginStructType<Numbers>;
   const expectedNumbersSchema: JSONSchemaType<Numbers> = {
     title: "Numbers",
     type: "object",

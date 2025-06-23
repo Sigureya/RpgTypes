@@ -1,14 +1,14 @@
-import type { ParamBase } from "./core/paramBase";
-import type { StructParamPrimitive } from "./core/primitiveParams";
+import type { ParamBase } from "./paramBase";
+import type { StructParamPrimitive } from "./primitiveParams";
 
 // 各パラメータ型のユニオン
 export type StructParam =
   | StructParamPrimitive
-  | KindOfStruct<object> // ネスト構造体対応
-  | KindOfStructArray<object>;
+  | StructDefParam<object> // ネスト構造体対応
+  | StructArrayDefParam<object>;
 
-export interface KindOfStructArray<T extends object>
-  extends PluginStruct<T>,
+export interface StructArrayDefParam<T extends object>
+  extends PluginStructEx<T>,
     ParamBase {
   kind: "struct_def[]";
   default: object[];
@@ -19,8 +19,8 @@ export interface KindOfStructArray<T extends object>
 }
 
 // 構造体アノテーション
-export interface KindOfStruct<T extends object>
-  extends PluginStruct<T>,
+export interface StructDefParam<T extends object>
+  extends PluginStructEx<T>,
     ParamBase {
   kind: "struct_def";
   struct: string;
@@ -30,7 +30,7 @@ export interface KindOfStruct<T extends object>
 }
 
 // 構造体本体
-export interface PluginStruct<T extends object> {
+export interface PluginStructEx<T extends object> {
   struct: string;
   params: {
     [K in keyof T]: StructParam;
