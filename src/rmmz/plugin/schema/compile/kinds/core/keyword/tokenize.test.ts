@@ -89,6 +89,23 @@ const testCases: TestCase[] = [
       { keyword: "text", value: "t" },
     ],
   },
+  {
+    name: "multiple params",
+    input: `@param weapon
+    @type weapon
+    @default 0
+    @param item
+    @type item
+    @default 1`,
+    expected: [
+      { keyword: "param", value: "weapon" },
+      { keyword: "type", value: "weapon" },
+      { keyword: "default", value: "0" },
+      { keyword: "param", value: "item" },
+      { keyword: "type", value: "item" },
+      { keyword: "default", value: "1" },
+    ],
+  },
 ];
 
 const runTestCases = (cases: TestCase[]) => {
