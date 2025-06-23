@@ -1,12 +1,12 @@
 import { describe, expect, test } from "vitest";
 import type { JSONSchemaType } from "ajv";
 import type { SourceIdentifier } from "src/namedItemSource";
+import type { X_RmmzParamInput } from "./core/kindBase/x-rpg-param";
 import type {
   KindOfRpgDataId,
   KindOfSystemDataId,
 } from "./core/primitiveParams";
 import { lookupKind } from "./core/rpgData/lookup";
-import type { X_RmmzParamInput } from "./core/kindBase/x-rpg-param";
 import { makeRpgIdField, makeRpgIdFieldWithXParam } from "./rpgDataKind";
 
 interface TestCase {
