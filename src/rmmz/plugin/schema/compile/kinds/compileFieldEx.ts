@@ -1,11 +1,11 @@
 import type { JSONSchemaType } from "ajv";
-import type { CompileContext } from "../context";
 import {
   compilePrimitiveFiledWithXParam,
   compilePrimitiveFiled,
 } from "./compieFiled";
 import type { StructCompileLog } from "./compileLog";
 import type { AnyParamSchema } from "./core/anyPluginSchema";
+import type { CompileContext } from "./core/context";
 import type { StructParam, PluginStruct, KindOfStructArray } from "./plugin";
 import { isStructDef, isStructDefArray } from "./structDef";
 import { withDefault } from "./utils";
