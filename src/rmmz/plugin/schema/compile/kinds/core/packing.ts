@@ -6,24 +6,24 @@ import type {
 } from "./pluginScehamType";
 import type { StructParamPrimitive } from "./primitiveParams";
 
-type StructPackage = {
-  structs: Record<string, PrimitiveStructType<object>>;
-};
+// type StructPackage = {
+//   structs: Record<string, PrimitiveStructType<object>>;
+// };
 
 export type TypePackage<T extends Record<string, object>> = {
   [K in keyof T]: PrimitiveStructType<T[K]>;
 };
 
-export const compileFromStructPackage = <T extends StructPackage>(
-  plugin: T
-): Record<string, JSONSchemaType<object>> => {
-  return Object.entries(plugin.structs).reduce((acc, [key, struct]) => {
-    return {
-      ...acc,
-      [key]: compilePrimitiveStruct(struct),
-    };
-  }, {});
-};
+// export const compileFromStructPackage = <T extends StructPackage>(
+//   plugin: T
+// ): Record<string, JSONSchemaType<object>> => {
+//   return Object.entries(plugin.structs).reduce((acc, [key, struct]) => {
+//     return {
+//       ...acc,
+//       [key]: compilePrimitiveStruct(struct),
+//     };
+//   }, {});
+// };
 
 export const compileFromStructArray = (
   list: PrimitiveStructBase[]
