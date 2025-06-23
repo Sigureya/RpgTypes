@@ -26,7 +26,7 @@ const tokenizeLine = (line: string): Token | null => {
     return null;
   }
   const match = trimmedLine.match(
-    /^@([a-zA-Z][a-zA-Z0-9_]{1,10})\s+(.{0,10000})$/
+    /^@([a-zA-Z][a-zA-Z0-9_]{2,11})\s+(.{0,10000})$/
   );
   return match ? { keyword: match[1], value: match[2].trim() } : null;
 };
