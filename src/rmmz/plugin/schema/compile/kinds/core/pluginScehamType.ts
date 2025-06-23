@@ -1,12 +1,10 @@
-import { compilePrimitiveFiled } from "./kinds/compie";
-import type { AnyParamSchema } from "./kinds/core/anyPluginSchema";
+import type { AnyParamSchema } from "./anyPluginSchema";
 import type {
   KindOfBoolean,
   KindOfStructArrayRef,
   KindOfStructRef,
   StructParamPrimitive,
-} from "./kinds/core/primitiveParams";
-import type { StructPrimitve3 } from "./packing";
+} from "./primitiveParams";
 
 export type PrimitiveStructType<T extends object> = {
   struct: string;
