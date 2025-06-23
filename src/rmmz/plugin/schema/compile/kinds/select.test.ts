@@ -3,7 +3,7 @@ import type { JSONSchemaType } from "ajv";
 import {
   compilePrimitiveFiled,
   compilePrimitiveFiledWithXParam,
-} from "./compieFiled";
+} from "./compileFiled";
 import type { AnyParamSchema } from "./core/anyPluginSchema";
 import type { JSONSchemaTypeWithRpgParam } from "./core/paramBase/x-rpg-param";
 import type { SelectParam } from "./core/primitiveParams";
