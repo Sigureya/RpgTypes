@@ -26,9 +26,9 @@ export type PrimitiveStruct<K extends string = string> = Record<
 
 export interface KindBase {
   kind: string;
-  desc?: string | null;
-  text?: string | null;
-  parent?: string | null;
+  desc?: string;
+  text?: string;
+  parent?: string;
 }
 
 export interface KindOfRpgDataId extends KindBase {
@@ -103,17 +103,17 @@ export interface KindOfFileArray extends KindBase {
   dir: string;
 }
 
-export interface KidnOfStructBase extends KindBase {
+export interface KindOfStructBase extends KindBase {
   struct: string;
 }
 
-export interface KindOfStructRef extends KidnOfStructBase {
+export interface KindOfStructRef extends KindOfStructBase {
   kind: "struct";
   struct: string;
   default?: object;
 }
 
-export interface KindOfStructArrayRef extends KidnOfStructBase {
+export interface KindOfStructArrayRef extends KindOfStructBase {
   kind: "struct[]";
   struct: string;
   default?: object[];
