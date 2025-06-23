@@ -1,8 +1,8 @@
 import { describe, test, expect } from "vitest";
 import type { Schema } from "jsonschema";
 import type { KindOfStructRef } from "./core/primitiveParams";
-import type { X_RmmzParamInput } from "./core/x-rpg-param";
-import { X_RPG_PARM } from "./core/x-rpg-param";
+import type { X_RmmzParamInput } from "./core/kindBase/x-rpg-param";
+import { X_RPG_PARM } from "./core/kindBase/x-rpg-param";
 import { makeStructRef, makeStructRefWithXParam } from "./structDef";
 
 describe("StructDef schema generation", () => {

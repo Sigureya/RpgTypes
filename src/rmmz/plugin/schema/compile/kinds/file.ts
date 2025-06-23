@@ -1,8 +1,8 @@
 import type { JSONSchemaType } from "ajv";
-import { withTexts } from "./core/basciMetaField";
+import { withTexts } from "./core/kindBase/basciMetaField";
+import type { JSONSchemaTypeWithRpgParam } from "./core/kindBase/x-rpg-param";
+import { xparamBaseData } from "./core/kindBase/x-rpg-param";
 import type { KindOfFile } from "./core/primitiveParams";
-import type { JSONSchemaTypeWithRpgParam } from "./core/x-rpg-param";
-import { xparamBaseData } from "./core/x-rpg-param";
 import { withDefault } from "./utils";
 
 export const compileFileField = (data: KindOfFile) =>

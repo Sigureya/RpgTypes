@@ -2,7 +2,7 @@ import { describe, test, expect } from "vitest";
 import type { JSONSchemaType } from "ajv";
 import type { KindOfArray } from "./basciMetaField";
 import { withDefault, withTexts, compileArrayField } from "./basciMetaField";
-import type { KindBase } from "./primitiveParams";
+import type { KindBase } from "./kindBase";
 
 describe("withTexts", () => {
   test("should return an object with title and description if provided", () => {

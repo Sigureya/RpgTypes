@@ -1,3 +1,4 @@
+import type { KindBase } from "./kindBase/kindBase";
 import type {
   DataKind_RpgUnion,
   DataKind_SystemUnion,
@@ -23,13 +24,6 @@ export type PrimitiveParams<K extends string = string> = Record<
   K,
   StructParamPrimitive
 >;
-
-export interface KindBase {
-  kind: string;
-  desc?: string;
-  text?: string;
-  parent?: string;
-}
 
 export interface KindOfRpgDataId extends KindBase {
   kind: DataKind_RpgUnion;

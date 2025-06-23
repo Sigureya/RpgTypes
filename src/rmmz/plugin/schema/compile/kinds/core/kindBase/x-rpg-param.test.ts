@@ -1,5 +1,5 @@
 import { describe, test, expect } from "vitest";
-import type { KindBase } from "./primitiveParams";
+import type { KindBase } from "./kindBase";
 import type {
   JSONSchemaTypeWithRpgParam,
   X_RmmzParamBaee,

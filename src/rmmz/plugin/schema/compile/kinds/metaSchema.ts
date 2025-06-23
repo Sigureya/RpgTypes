@@ -8,8 +8,8 @@ import type {
   X_Param_DataId,
   X_Param_StringInput,
 } from "../../core/primitive/x-rpg-param";
+import type { X_RmmzParamInput } from "./core/kindBase/x-rpg-param";
 import type { KindOfBoolean } from "./core/primitiveParams";
-import type { X_RmmzParamInput } from "./core/x-rpg-param";
 
 type UnionSchema = DiscriminatedUnionSchemaType3<
   BaseKind,

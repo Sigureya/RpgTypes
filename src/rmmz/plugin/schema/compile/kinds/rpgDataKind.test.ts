@@ -6,7 +6,7 @@ import type {
   KindOfSystemDataId,
 } from "./core/primitiveParams";
 import { lookupKind } from "./core/rpgData/lookup";
-import type { X_RmmzParamInput } from "./core/x-rpg-param";
+import type { X_RmmzParamInput } from "./core/kindBase/x-rpg-param";
 import { makeRpgIdField, makeRpgIdFieldWithXParam } from "./rpgDataKind";
 
 interface TestCase {
