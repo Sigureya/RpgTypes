@@ -1,4 +1,4 @@
-import { withTexts } from "./core/primitive";
+import { withTexts } from "./core/basciMetaField";
 import type { KindOfStructRef } from "./core/primitiveParams";
 import type { X_RmmzParamInput, X_RPG_PARM } from "./core/x-rpg-param";
 import { xparamBaseData } from "./core/x-rpg-param";

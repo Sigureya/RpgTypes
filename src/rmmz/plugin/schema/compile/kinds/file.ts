@@ -1,5 +1,5 @@
 import type { JSONSchemaType } from "ajv";
-import { withTexts } from "./core/primitive";
+import { withTexts } from "./core/basciMetaField";
 import type { KindOfFile } from "./core/primitiveParams";
 import type { JSONSchemaTypeWithRpgParam } from "./core/x-rpg-param";
 import { xparamBaseData } from "./core/x-rpg-param";

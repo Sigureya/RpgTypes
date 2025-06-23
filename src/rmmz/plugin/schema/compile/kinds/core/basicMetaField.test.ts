@@ -1,7 +1,7 @@
 import { describe, test, expect } from "vitest";
 import type { JSONSchemaType } from "ajv";
-import type { KindOfArray } from "./primitive";
-import { withDefault, withTexts, compileArrayField } from "./primitive";
+import type { KindOfArray } from "./basciMetaField";
+import { withDefault, withTexts, compileArrayField } from "./basciMetaField";
 import type { KindBase } from "./primitiveParams";
 
 describe("withTexts", () => {
