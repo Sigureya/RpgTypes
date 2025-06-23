@@ -1,4 +1,4 @@
-import type { PrimitiveStruct } from "./primitiveParams";
+import type { PrimitiveParams } from "./primitiveParams";
 
 export interface PluginMeta {
   author: string;
@@ -12,5 +12,5 @@ export interface PluginCompileOptions {
 
 export interface RmmzPluiginInput {
   meta: PluginMeta;
-  structs: Record<string, PrimitiveStruct>;
+  structs: Record<string, PrimitiveParams>;
 }

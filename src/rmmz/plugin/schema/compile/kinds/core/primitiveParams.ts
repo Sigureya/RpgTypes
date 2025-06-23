@@ -19,7 +19,7 @@ export type StructParamPrimitive =
   | KindOfStructRef
   | KindOfStructArrayRef;
 
-export type PrimitiveStruct<K extends string = string> = Record<
+export type PrimitiveParams<K extends string = string> = Record<
   K,
   StructParamPrimitive
 >;
