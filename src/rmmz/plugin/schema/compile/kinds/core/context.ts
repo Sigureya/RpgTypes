@@ -1,7 +1,4 @@
-import type {
-  PluginMeta,
-  PluginCompileOptions,
-} from "./kinds/core/compileOption";
+import type { PluginMeta, PluginCompileOptions } from "./compileOption";
 
 export interface CompileContext {
   meta: PluginMeta;
