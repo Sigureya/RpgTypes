@@ -1,6 +1,9 @@
 import type { JSONSchemaType } from "ajv";
 import { compilePrimitiveFiled } from "../compieFiled";
-import type { PrimitiveStructType } from "./pluginScehamType";
+import type {
+  PrimitiveStructBase,
+  PrimitiveStructType,
+} from "./pluginScehamType";
 import type { StructParamPrimitive } from "./primitiveParams";
 
 type StructPackage = {
@@ -17,28 +20,23 @@ export const compileFromStructPackage = <T extends StructPackage>(
   return Object.entries(plugin.structs).reduce((acc, [key, struct]) => {
     return {
       ...acc,
-      [key]: compilePirmiteveStruct(struct),
+      [key]: compilePrimitiveStruct(struct),
     };
   }, {});
 };
 
-export interface StructPrimitve3 {
-  struct: string;
-  params: Record<string, StructParamPrimitive>;
-}
-
-export const compileFromStrucArray = (
-  list: StructPrimitve3[]
+export const compileFromStructArray = (
+  list: PrimitiveStructBase[]
 ): Record<string, JSONSchemaType<object>> => {
   return list.reduce((acc, struct3) => {
     return {
       ...acc,
-      [struct3.struct]: compilePirmiteveStruct(struct3),
+      [struct3.struct]: compilePrimitiveStruct(struct3),
     };
   }, {});
 };
 
-export const compilePirmiteveStruct = (struct: StructPrimitve3) => {
+export const compilePrimitiveStruct = (struct: PrimitiveStructBase) => {
   return {
     $id: `#/definitions/${struct.struct}`,
     type: "object" as const,
