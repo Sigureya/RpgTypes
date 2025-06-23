@@ -78,6 +78,7 @@ describe("compile syntax", () => {
     };
     expect(parsePluginParam(mock.boolean)).toEqual(expected);
   });
+  // 未実装につきskip。将来的に新しい実装で置き換えるため、このテストコードなどは消える予定
   test.skip("number", () => {
     const expected: PluginParam = {
       param: "num",
