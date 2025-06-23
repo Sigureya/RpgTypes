@@ -1,8 +1,8 @@
 import { describe, test, expect } from "vitest";
 import { Ajv, type JSONSchemaType } from "ajv";
 import { compilePrimitiveFiled } from "../compieFiled";
+import type { ParamToObject } from "./paramsReduce";
 import { reduceParams } from "./paramsReduce";
-import type { ParamToObject } from "./paramsToobject";
 import type { PrimitiveParams, PrimitiveStructType } from "./pluginScehamType";
 import { compileProperties } from "./pluginScehamType";
 
