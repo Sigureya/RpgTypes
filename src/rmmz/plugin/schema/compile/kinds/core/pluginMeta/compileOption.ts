@@ -1,5 +1,3 @@
-import type { PrimitiveParams } from "./primitiveParams";
-
 export interface PluginMeta {
   author: string;
   moduleName: string;
@@ -9,8 +7,8 @@ export interface PluginCompileOptions {
   // x-rpg-paramを付与する
   kindData: boolean;
 }
-
-export interface RmmzPluiginInput {
+export interface CompileContext {
   meta: PluginMeta;
-  structs: Record<string, PrimitiveParams>;
+
+  options: Partial<PluginCompileOptions>;
 }

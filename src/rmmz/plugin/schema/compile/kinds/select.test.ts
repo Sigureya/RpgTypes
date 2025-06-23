@@ -4,8 +4,8 @@ import {
   compilePrimitiveFiled,
   compilePrimitiveFiledWithXParam,
 } from "./compileFiled";
-import type { AnyParamSchema } from "./core/anyPluginSchema";
 import type { JSONSchemaTypeWithRpgParam } from "./core/paramBase/x-rpg-param";
+import type { AnyParamSchema } from "./core/pluginMeta/anyParamSchema";
 import type { SelectParam } from "./core/primitiveParams";
 import { compileSelectField, compileSelectFieldWithXparam } from "./select";
 

@@ -1,6 +1,6 @@
 import { compileBooleanFieldWithXParam, compileBooleanField } from "./boolean";
 import { compileComboField, compileComboFieldWithXparam } from "./combo";
-import type { AnyParamSchema } from "./core/anyPluginSchema";
+import type { AnyParamSchema } from "./core/pluginMeta/anyParamSchema";
 import type { StructParamPrimitive } from "./core/primitiveParams";
 import { compileFileField, compileFileFieldWithXparam } from "./file";
 import {
