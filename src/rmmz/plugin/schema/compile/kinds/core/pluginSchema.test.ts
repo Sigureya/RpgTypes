@@ -1,12 +1,9 @@
 import { describe, test, expect } from "vitest";
 import { Ajv, type JSONSchemaType } from "ajv";
 import { compilePrimitiveFiled } from "../compieFiled";
-import { compileParams } from "./packing";
-import type {
-  ParamToObject,
-  PrimitiveParams,
-  PrimitiveStructType,
-} from "./pluginScehamType";
+import { reduceParams } from "./paramsReduce";
+import type { ParamToObject } from "./paramsToobject";
+import type { PrimitiveParams, PrimitiveStructType } from "./pluginScehamType";
 import { compileProperties } from "./pluginScehamType";
 
 interface Person {
@@ -175,14 +172,11 @@ describe("schema", () => {
 
 describe("compileParams", () => {
   test("compileParams", () => {
-    const result = compileParams(
-      mockPersonStruct.params,
-      compilePrimitiveFiled
-    );
+    const result = reduceParams(mockPersonStruct.params, compilePrimitiveFiled);
     expect(result).toEqual(mockPersonSchema.properties);
   });
   test("", () => {
-    const result = compileParams(
+    const result = reduceParams(
       {
         f: { kind: "string", default: "test" },
         g: { kind: "struct", struct: "Person", default: { age: 0, name: "" } },
