@@ -6,8 +6,8 @@ import {
   compilePrimitiveFiledWithXParam,
 } from "./compileFiled";
 import type { JSONSchemaTypeWithRpgParam } from "./core/paramBase/x-rpg-param";
-import type { AnyParamSchema } from "./core/pluginMeta/anyParamSchema";
 import type { BooleanParam } from "./core/primitiveParams";
+import type { AnyParamSchema } from "./pluginMeta/anyParamSchema";
 
 const mockData: BooleanParam = {
   kind: "boolean",

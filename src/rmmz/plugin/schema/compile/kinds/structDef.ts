@@ -5,7 +5,6 @@ import type {
 } from "./core/paramBase/x-rpg-param";
 import { xparamBaseData } from "./core/paramBase/x-rpg-param";
 import type { StructRefParam } from "./core/primitiveParams";
-import type { KindOfStruct, KindOfStructArray, StructParam } from "./plugin";
 
 export interface JSONSchemaStructRef {
   $ref: string;
