@@ -1,10 +1,10 @@
 import { describe, test, expect } from "vitest";
 import type { JSONSchemaType } from "ajv";
-import type { AnyParamSchema } from "./compie";
 import {
   compilePrimitiveFiled,
   compilePrimitiveFiledWithXParam,
 } from "./compie";
+import type { AnyParamSchema } from "./core/anyPluginSchema";
 import type { KindOfFile } from "./core/primitiveParams";
 import type { JSONSchemaTypeWithRpgParam } from "./core/x-rpg-param";
 import { compileFileField, compileFileFieldWithXparam } from "./file";

@@ -1,0 +1,81 @@
+import { describe, test, expect } from "vitest";
+import Ajv from "ajv";
+import type {
+  KindOfStructRef,
+  KindOfStructArrayRef,
+} from "./core/primitiveParams";
+import { makeParamSchema } from "./paramSchema";
+const ajv = new Ajv({
+  strict: true,
+  discriminator: true,
+});
+const schema = makeParamSchema();
+const validate = ajv.compile(schema);
+
+interface Person {
+  name: string;
+  value: number;
+}
+
+const invalidStructNames = [
+  "struct<Person>",
+  ".person",
+  "Person.",
+  "Person[]",
+  "@person",
+  "Person@",
+];
+
+describe("KindOfStructRef schema validation", () => {
+  test("accepts valid KindOfStructRef", () => {
+    const validStruct: KindOfStructRef = {
+      kind: "struct",
+      default: {
+        name: "Alice",
+        value: 100,
+      } satisfies Person,
+      struct: "Person",
+    };
+    expect(validStruct).toSatisfy(validate);
+  });
+  test("accepts valid KindOfStructRef", () => {
+    const validStruct: KindOfStructRef = {
+      kind: "struct",
+      struct: "Person",
+    };
+    expect(validStruct).toSatisfy(validate);
+  });
+  describe("", () => {
+    test("rejects KindOfStructRef without struct", () => {
+      const invalidStruct: Omit<KindOfStructRef, "struct"> = {
+        kind: "struct",
+        default: {
+          name: "Alice",
+          value: 100,
+        } satisfies Person,
+      };
+      expect(invalidStruct).not.toSatisfy(validate);
+    });
+    test.each(invalidStructNames)("rejects invalid struct name %s", (name) => {
+      const invalidStruct: KindOfStructRef = {
+        kind: "struct",
+        struct: name,
+      };
+      expect(invalidStruct).not.toSatisfy(validate);
+    });
+  });
+});
+
+describe("KindOfStructArrayRef schema validation", () => {
+  test("accepts valid KindOfStructArrayRef", () => {
+    const validArray: KindOfStructArrayRef = {
+      kind: "struct[]",
+      default: [
+        { name: "Alice", value: 1 },
+        { name: "Bob", value: 2 },
+      ] satisfies Person[],
+      struct: "Person",
+    };
+    expect(validArray).toSatisfy(validate);
+  });
+});

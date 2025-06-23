@@ -8,14 +8,14 @@ import { lookupKind } from "./core/rpgData/lookup";
 import type { X_Param } from "./core/x-rpg-param";
 import { xparamBaseData } from "./core/x-rpg-param";
 
-export const makeIdField = (data: KindOfRpgDataId | KindOfSystemDataId) =>
+export const makeRpgIdField = (data: KindOfRpgDataId | KindOfSystemDataId) =>
   ({
     type: "integer",
     ...withDefault(data.default),
     ...withTexts(data),
   } satisfies JSONSchemaType<number>);
 
-export const makeIdFieldWithXParam = (
+export const makeRpgIdFieldWithXParam = (
   data: KindOfRpgDataId | KindOfSystemDataId
 ) => {
   return {

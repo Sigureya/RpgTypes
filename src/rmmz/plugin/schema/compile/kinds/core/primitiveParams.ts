@@ -43,8 +43,8 @@ export interface KindOfRpgDataIdArray extends KindBase {
 export interface KindOfBoolean extends KindBase {
   kind: "boolean";
   default: boolean;
-  on?: string;
-  off?: string;
+  on?: string | null;
+  off?: string | null;
 }
 
 export interface KindOfSelect extends KindBase {
@@ -71,14 +71,16 @@ export interface KindOfCombo extends KindBase {
 export interface KindOfNumber extends KindBase {
   kind: "number";
   default: number;
-  digit?: number;
-  min?: number;
-  max?: number;
+  digit?: number | null;
+  min?: number | null;
+  max?: number | null;
 }
 export interface KindOfNumberArray extends KindBase {
   kind: "number[]";
   default: number[];
-  digit?: number;
+  digit?: number | null;
+  min?: number | null;
+  max?: number | null;
 }
 export interface KindOfId extends KindBase {
   kind: "id";
@@ -101,17 +103,17 @@ export interface KindOfFileArray extends KindBase {
   dir: string;
 }
 
-export interface KidnOfStructBase extends KindBase {
+export interface KindOfStructBase extends KindBase {
   struct: string;
 }
 
-export interface KindOfStructRef extends KidnOfStructBase {
+export interface KindOfStructRef extends KindOfStructBase {
   kind: "struct";
   struct: string;
   default?: object;
 }
 
-export interface KindOfStructArrayRef extends KidnOfStructBase {
+export interface KindOfStructArrayRef extends KindOfStructBase {
   kind: "struct[]";
   struct: string;
   default?: object[];

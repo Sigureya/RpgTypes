@@ -1,11 +1,11 @@
 import { describe, test, expect } from "vitest";
 import type { JSONSchemaType } from "ajv";
 import { compileBooleanField, compileBooleanFieldWithXParam } from "./boolean";
-import type { AnyParamSchema } from "./compie";
 import {
   compilePrimitiveFiled,
   compilePrimitiveFiledWithXParam,
 } from "./compie";
+import type { AnyParamSchema } from "./core/anyPluginSchema";
 import type { KindOfBoolean } from "./core/primitiveParams";
 import type { JSONSchemaTypeWithRpgParam } from "./core/x-rpg-param";
 
@@ -58,6 +58,26 @@ describe("Boolean field schema generation - with x-rpg-param", () => {
     });
     test("via union dispatcher (compilePrimitiveFiledWithXParam)", () => {
       const schema: AnyParamSchema = compilePrimitiveFiledWithXParam(mockData);
+      expect(schema).toEqual(expectedSchema);
+    });
+    test("", () => {
+      const data: KindOfBoolean = {
+        kind: "boolean",
+        default: true,
+        desc: undefined,
+        text: undefined,
+        off: undefined,
+        on: undefined,
+      };
+      const expectedSchema: JSONSchemaTypeWithRpgParam<boolean> = {
+        type: "boolean",
+        default: data.default,
+        "x-rpg-param": {
+          kind: "boolean",
+          data: {},
+        },
+      };
+      const schema: AnyParamSchema = compileBooleanFieldWithXParam(data);
       expect(schema).toEqual(expectedSchema);
     });
   });

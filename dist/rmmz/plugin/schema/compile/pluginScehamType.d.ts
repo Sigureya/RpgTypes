@@ -1,32 +1,38 @@
-import { KindOfBoolean, KindOfStructRef } from './kinds';
-import { KindOfStruct, StructParam } from './kinds/plugin';
-export type PluginSchemaType<T, path extends string = "", KnowTypes = never> = T extends boolean ? KindOfBoolean & {
-    bool: true;
-} : T extends number ? Extract<StructParam, {
+import { AnyParamSchema } from './kinds/core/anyPluginSchema';
+import { KindOfBoolean, KindOfStructArrayRef, KindOfStructRef, StructParamPrimitive } from './kinds/core/primitiveParams';
+export type PrimitiveStructType<T extends object> = {
+    struct: string;
+    params: PrimitiveParams<T>;
+};
+export type PrimitiveParams<T extends object> = {
+    [K in Extract<keyof T, string>]: PluginSchemaType<T[K]>;
+};
+export type PluginSchemaType<T> = T extends boolean ? KindOfBoolean : T extends number ? Extract<StructParamPrimitive, {
     default: number;
-}> & {
-    num: true;
-} : T extends string ? Extract<StructParam, {
+}> : T extends string ? Extract<StructParamPrimitive, {
     default: string;
-}> & {
-    str: true;
-} : T extends number[] ? Extract<StructParam, {
+}> : T extends number[] ? Extract<StructParamPrimitive, {
     default: number[];
-}> & {
-    numArray: true;
-} : T extends string[] ? Extract<StructParam, {
+}> : T extends string[] ? Extract<StructParamPrimitive, {
     default: string[];
-}> & {
-    strArray: true;
-} : T extends null ? {
+}> : T extends null ? {
     kind: "null is Forbidden";
     default?: null;
 } : T extends undefined ? {
     kind: "undefined is Forbidden";
 } : T extends boolean[] ? {
     kind: "boolean[] is Forbidden";
-} & {
-    boolArray: true;
-} : T extends KnowTypes ? KindOfStructRef : T extends object ? KindOfStructRef | KindOfStruct<T> : {
-    kind: `never:${path}`;
+} : T extends object[] ? KindOfStructArrayRef : T extends object ? KindOfStructRef : never;
+export declare const compileProperties: <T extends object>(struct: PrimitiveStructType<T>, fn: (value: StructParamPrimitive, key: string) => AnyParamSchema) => {
+    title: string;
+    type: "object";
+    properties: Record<string, AnyParamSchema>;
+    required: string[];
+};
+export type ParamToObject<T extends Record<string, {
+    default: unknown;
+}>> = {
+    [K in keyof T]: T[K] extends {
+        default: infer D;
+    } ? D : never;
 };

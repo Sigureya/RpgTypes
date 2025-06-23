@@ -1,5 +1,5 @@
 import { KindOfRpgDataId, KindOfSystemDataId } from './core/primitiveParams';
-export declare const makeIdField: (data: KindOfRpgDataId | KindOfSystemDataId) => {
+export declare const makeRpgIdField: (data: KindOfRpgDataId | KindOfSystemDataId) => {
     description?: string | undefined;
     title?: string | undefined;
     default: number;
@@ -10,7 +10,7 @@ export declare const makeIdField: (data: KindOfRpgDataId | KindOfSystemDataId) =
     default?: undefined;
     type: "integer";
 };
-export declare const makeIdFieldWithXParam: (data: KindOfRpgDataId | KindOfSystemDataId) => {
+export declare const makeRpgIdFieldWithXParam: (data: KindOfRpgDataId | KindOfSystemDataId) => {
     "x-rpg-param": {
         data: import('./core/rpgData/lookup').SourceId_RmmzUnknown | import('./core/rpgData/lookup').SourceId_ValidRmmzData;
         parent?: string | undefined;
