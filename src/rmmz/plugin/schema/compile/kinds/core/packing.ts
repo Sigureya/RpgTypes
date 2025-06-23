@@ -16,7 +16,7 @@ export type TypePackage<T extends Record<string, object>> = {
 
 export const compileFromStructPackage = <T extends StructPackage>(
   plugin: T
-) => {
+): Record<string, JSONSchemaType<object>> => {
   return Object.entries(plugin.structs).reduce((acc, [key, struct]) => {
     return {
       ...acc,
