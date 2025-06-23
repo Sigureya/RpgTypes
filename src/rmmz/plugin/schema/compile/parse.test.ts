@@ -1,15 +1,15 @@
 import { describe, test, expect } from "vitest";
 import type {
-  KindOfBoolean,
-  KindOfNumber,
-  KindOfNumberArray,
-  KindOfString,
-  KindOfRpgDataId,
-  KindOfRpgDataIdArray,
-  KindOfSelect,
+  BooleanParam,
+  NumberParam,
+  NumberArrayParam,
+  StringParam,
+  RpgDataIdParam,
+  RpgDataIdArrayParam,
+  SelectParam,
   StructParamPrimitive,
-  KindOfCombo,
-  KindOfStructRef,
+  ComboParam,
+  StructRefParam,
 } from "./kinds";
 import type { PluginParam } from "./parse";
 import { parsePluginParam } from "./parse";
@@ -74,7 +74,7 @@ describe("compile syntax", () => {
         desc: "autoBattle",
         on: "enabled",
         off: "disabled",
-      } satisfies KindOfBoolean,
+      } satisfies BooleanParam,
     };
     expect(parsePluginParam(mock.boolean)).toEqual(expected);
   });
@@ -87,7 +87,7 @@ describe("compile syntax", () => {
         default: 123,
         min: 0,
         max: 1000,
-      } satisfies KindOfNumber,
+      } satisfies NumberParam,
     };
     expect(parsePluginParam(mock.number)).toEqual(expected);
   });
@@ -97,7 +97,7 @@ describe("compile syntax", () => {
       data: {
         kind: "number[]",
         default: [1, 2, 3],
-      } satisfies KindOfNumberArray,
+      } satisfies NumberArrayParam,
     };
     expect(parsePluginParam(mock["number[]"])).toEqual(expected);
   });
@@ -108,7 +108,7 @@ describe("compile syntax", () => {
         kind: "string",
         default: "Hello",
         desc: "This is a string parameter",
-      } satisfies KindOfString,
+      } satisfies StringParam,
     };
     expect(parsePluginParam(mock.string)).toEqual(expected);
   });
@@ -119,7 +119,7 @@ describe("compile syntax", () => {
         kind: "weapon",
         default: 0,
         desc: "This is a weapon parameter",
-      } satisfies KindOfRpgDataId,
+      } satisfies RpgDataIdParam,
     };
     expect(parsePluginParam(mock.weapon)).toEqual(expected);
   });
@@ -130,7 +130,7 @@ describe("compile syntax", () => {
         kind: "skill[]",
         default: [],
         desc: "This is a skills parameter",
-      } satisfies KindOfRpgDataIdArray,
+      } satisfies RpgDataIdArrayParam,
     };
     expect(parsePluginParam(mock["skill[]"])).toEqual(expected);
   });
@@ -145,7 +145,7 @@ describe("compile syntax", () => {
           { value: "A", option: "modeA" },
           { value: "B", option: "modeB" },
         ],
-      } satisfies KindOfSelect,
+      } satisfies SelectParam,
     };
     expect(parsePluginParam(mock.select)).toEqual(expected);
   });
@@ -156,7 +156,7 @@ describe("compile syntax", () => {
         kind: "combo",
         default: "option1",
         options: ["option1", "option2"],
-      } satisfies KindOfCombo,
+      } satisfies ComboParam,
     };
     expect(parsePluginParam(mock.combo)).toEqual(expected);
   });
@@ -166,7 +166,7 @@ describe("compile syntax", () => {
       data: {
         kind: "struct",
         struct: "Person",
-      } satisfies KindOfStructRef,
+      } satisfies StructRefParam,
     };
     expect(parsePluginParam(mock.struct)).toEqual(expected);
   });

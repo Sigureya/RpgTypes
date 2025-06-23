@@ -2,11 +2,11 @@ import type { JSONSchemaType } from "ajv";
 import { withTexts } from "./core/kindBase/basciMetaField";
 import type { JSONSchemaTypeWithRpgParam } from "./core/kindBase/x-rpg-param";
 import { xparamBaseData } from "./core/kindBase/x-rpg-param";
-import type { KindOfCombo } from "./core/primitiveParams";
+import type { ComboParam } from "./core/primitiveParams";
 import { withDefault } from "./utils";
 
 export const compileComboField = (
-  data: KindOfCombo
+  data: ComboParam
 ): JSONSchemaType<string> => ({
   type: "string",
   ...withDefault(data.default),
@@ -14,7 +14,7 @@ export const compileComboField = (
 });
 
 export const compileComboFieldWithXparam = (
-  data: KindOfCombo
+  data: ComboParam
 ): JSONSchemaTypeWithRpgParam<
   string,
   {

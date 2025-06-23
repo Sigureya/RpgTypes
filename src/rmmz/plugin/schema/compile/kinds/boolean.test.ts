@@ -7,9 +7,9 @@ import {
 } from "./compieFiled";
 import type { AnyParamSchema } from "./core/anyPluginSchema";
 import type { JSONSchemaTypeWithRpgParam } from "./core/kindBase/x-rpg-param";
-import type { KindOfBoolean } from "./core/primitiveParams";
+import type { BooleanParam } from "./core/primitiveParams";
 
-const mockData: KindOfBoolean = {
+const mockData: BooleanParam = {
   kind: "boolean",
   default: true,
   desc: "A boolean field",
@@ -61,7 +61,7 @@ describe("Boolean field schema generation - with x-rpg-param", () => {
       expect(schema).toEqual(expectedSchema);
     });
     test("", () => {
-      const data: KindOfBoolean = {
+      const data: BooleanParam = {
         kind: "boolean",
         default: true,
         desc: undefined,

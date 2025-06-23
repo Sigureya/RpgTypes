@@ -1,6 +1,6 @@
 import { describe, test, expect } from "vitest";
 import Ajv from "ajv";
-import type { KindOfBoolean } from "./core/primitiveParams";
+import type { BooleanParam } from "./core/primitiveParams";
 import { makeParamSchema } from "./paramSchema";
 
 describe("RmmzParam_Boolean JSON Schema Validation", () => {
@@ -10,7 +10,7 @@ describe("RmmzParam_Boolean JSON Schema Validation", () => {
 
   describe("accepts valid KindOfBoolean values", () => {
     test("a", () => {
-      const mock: KindOfBoolean = {
+      const mock: BooleanParam = {
         kind: "boolean",
         default: true,
         on: "Enabled",
@@ -20,14 +20,14 @@ describe("RmmzParam_Boolean JSON Schema Validation", () => {
     });
 
     test("accepts boolean with default true and on/off labels", () => {
-      const mock: KindOfBoolean = {
+      const mock: BooleanParam = {
         kind: "boolean",
         default: false,
       };
       expect(mock).toSatisfy(validate);
     });
     test("accepts boolean with undefined optional fields", () => {
-      const mock: KindOfBoolean = {
+      const mock: BooleanParam = {
         kind: "boolean",
         default: true,
         on: undefined,
@@ -39,7 +39,7 @@ describe("RmmzParam_Boolean JSON Schema Validation", () => {
       expect(mock).toSatisfy(validate);
     });
     test("accepts boolean with null optional fields", () => {
-      const mock: Record<keyof KindOfBoolean, unknown> = {
+      const mock: Record<keyof BooleanParam, unknown> = {
         kind: "boolean",
         default: false,
         desc: null,
@@ -55,14 +55,14 @@ describe("RmmzParam_Boolean JSON Schema Validation", () => {
   describe("invalid cases", () => {
     describe("rejects boolean parameter with non-boolean default", () => {
       test("rejects string 'true' as default value", () => {
-        const mock: KindOfBoolean = {
+        const mock: BooleanParam = {
           kind: "boolean",
           default: "true" as any, // Invalid type
         };
         expect(mock).not.toSatisfy(validate);
       });
       test("rejects string 'false' as default value", () => {
-        const mock: KindOfBoolean = {
+        const mock: BooleanParam = {
           kind: "boolean",
           default: "false" as any, // Invalid type
         };
@@ -70,7 +70,7 @@ describe("RmmzParam_Boolean JSON Schema Validation", () => {
       });
     });
     test("rejects boolean parameter missing required default property", () => {
-      const mock: Omit<KindOfBoolean, "default"> = { kind: "boolean" }; // Missing 'default'
+      const mock: Omit<BooleanParam, "default"> = { kind: "boolean" }; // Missing 'default'
       expect(mock).not.toSatisfy(validate);
     });
   });

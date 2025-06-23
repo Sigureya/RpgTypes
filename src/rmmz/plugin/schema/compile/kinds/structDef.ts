@@ -1,7 +1,7 @@
 import { withTexts } from "./core/kindBase/basciMetaField";
 import type { X_RmmzParamInput, X_RPG_PARM } from "./core/kindBase/x-rpg-param";
 import { xparamBaseData } from "./core/kindBase/x-rpg-param";
-import type { KindOfStructRef } from "./core/primitiveParams";
+import type { StructRefParam } from "./core/primitiveParams";
 import type { KindOfStruct, KindOfStructArray, StructParam } from "./plugin";
 
 export const isStructDef = (
@@ -22,7 +22,7 @@ export interface JSONSchemaStructRef {
   title?: string;
 }
 
-export const makeStructRef = (ref: KindOfStructRef): JSONSchemaStructRef => ({
+export const makeStructRef = (ref: StructRefParam): JSONSchemaStructRef => ({
   $ref: `#/definitions/${ref.struct}`,
   ...withTexts(ref),
 });
@@ -31,7 +31,7 @@ type SchemaType = JSONSchemaStructRef & {
   [X_RPG_PARM]: X_RmmzParamInput<{ struct: string }>;
 };
 
-export const makeStructRefWithXParam = (ref: KindOfStructRef) =>
+export const makeStructRefWithXParam = (ref: StructRefParam) =>
   ({
     $ref: `#/definitions/${ref.struct}`,
     ...withTexts(ref),

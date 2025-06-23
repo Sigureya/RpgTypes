@@ -1,6 +1,6 @@
 import { describe, test, expect } from "vitest";
 import Ajv from "ajv";
-import type { KindOfSelect } from "./core/primitiveParams";
+import type { SelectParam } from "./core/primitiveParams";
 import { makeParamSchema } from "./paramSchema";
 
 describe("select", () => {
@@ -9,7 +9,7 @@ describe("select", () => {
   const validate = ajv.compile(schema);
   describe("accepts valid KindOfSelect values", () => {
     test("valid full set data", () => {
-      const fullsetData: KindOfSelect = {
+      const fullsetData: SelectParam = {
         kind: "select",
         default: "value1",
         desc: "This is a select parameter",
@@ -29,7 +29,7 @@ describe("select", () => {
       expect(fullsetData).toSatisfy(validate);
     });
     test("valid minimal set data", () => {
-      const minimalData: KindOfSelect = {
+      const minimalData: SelectParam = {
         kind: "select",
         default: "",
         options: [],
@@ -39,21 +39,21 @@ describe("select", () => {
   });
   describe("rejects invalid KindOfSelect values", () => {
     test("missing kind", () => {
-      const invalidData: Omit<KindOfSelect, "kind"> = {
+      const invalidData: Omit<SelectParam, "kind"> = {
         default: "value1",
         options: [],
       };
       expect(invalidData).not.toSatisfy(validate);
     });
     test("missing default", () => {
-      const invalidData: Omit<KindOfSelect, "default"> = {
+      const invalidData: Omit<SelectParam, "default"> = {
         kind: "select",
         options: [],
       };
       expect(invalidData).not.toSatisfy(validate);
     });
     test("invalid options structure", () => {
-      const invalidData: Omit<KindOfSelect, "options"> = {
+      const invalidData: Omit<SelectParam, "options"> = {
         kind: "select",
         default: "value1",
       };

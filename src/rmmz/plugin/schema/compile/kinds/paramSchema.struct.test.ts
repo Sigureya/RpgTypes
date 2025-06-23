@@ -1,8 +1,8 @@
 import { describe, test, expect } from "vitest";
 import Ajv from "ajv";
 import type {
-  KindOfStructRef,
-  KindOfStructArrayRef,
+  StructRefParam,
+  StructArrayRefParam,
 } from "./core/primitiveParams";
 import { makeParamSchema } from "./paramSchema";
 const ajv = new Ajv({
@@ -28,7 +28,7 @@ const invalidStructNames = [
 
 describe("KindOfStructRef schema validation", () => {
   test("accepts valid KindOfStructRef", () => {
-    const validStruct: KindOfStructRef = {
+    const validStruct: StructRefParam = {
       kind: "struct",
       default: {
         name: "Alice",
@@ -39,7 +39,7 @@ describe("KindOfStructRef schema validation", () => {
     expect(validStruct).toSatisfy(validate);
   });
   test("accepts valid KindOfStructRef", () => {
-    const validStruct: KindOfStructRef = {
+    const validStruct: StructRefParam = {
       kind: "struct",
       struct: "Person",
     };
@@ -47,7 +47,7 @@ describe("KindOfStructRef schema validation", () => {
   });
   describe("", () => {
     test("rejects KindOfStructRef without struct", () => {
-      const invalidStruct: Omit<KindOfStructRef, "struct"> = {
+      const invalidStruct: Omit<StructRefParam, "struct"> = {
         kind: "struct",
         default: {
           name: "Alice",
@@ -57,7 +57,7 @@ describe("KindOfStructRef schema validation", () => {
       expect(invalidStruct).not.toSatisfy(validate);
     });
     test.each(invalidStructNames)("rejects invalid struct name %s", (name) => {
-      const invalidStruct: KindOfStructRef = {
+      const invalidStruct: StructRefParam = {
         kind: "struct",
         struct: name,
       };
@@ -68,7 +68,7 @@ describe("KindOfStructRef schema validation", () => {
 
 describe("KindOfStructArrayRef schema validation", () => {
   test("accepts valid KindOfStructArrayRef", () => {
-    const validArray: KindOfStructArrayRef = {
+    const validArray: StructArrayRefParam = {
       kind: "struct[]",
       default: [
         { name: "Alice", value: 1 },

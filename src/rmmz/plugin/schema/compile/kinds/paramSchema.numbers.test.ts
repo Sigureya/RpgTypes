@@ -1,6 +1,6 @@
 import { describe, test, expect } from "vitest";
 import Ajv from "ajv";
-import type { KindOfNumber, KindOfNumberArray } from "./core/primitiveParams";
+import type { NumberParam, NumberArrayParam } from "./core/primitiveParams";
 import { makeParamSchema } from "./paramSchema";
 
 const fullsetData = <
@@ -63,18 +63,18 @@ describe("number", () => {
   const validate = ajv.compile(schema);
   describe("accepts valid KindOfNumber values", () => {
     test("fullset KindOfNumber data", () => {
-      const mock: KindOfNumber = fullsetData("number", 0);
+      const mock: NumberParam = fullsetData("number", 0);
       expect(mock).toSatisfy(validate);
     });
     test("minimal KindOfNumber data", () => {
-      const mock: KindOfNumber = {
+      const mock: NumberParam = {
         kind: "number",
         default: 0,
       };
       expect(mock).toSatisfy(validate);
     });
     test("with undefined optional fields", () => {
-      const mock: KindOfNumber = undefinedData("number", 0);
+      const mock: NumberParam = undefinedData("number", 0);
       expect(mock).toSatisfy(validate);
     });
 
@@ -84,7 +84,7 @@ describe("number", () => {
     });
 
     test("with digit property", () => {
-      const mock: KindOfNumber = {
+      const mock: NumberParam = {
         kind: "number",
         default: 0,
         digit: 0,
@@ -93,7 +93,7 @@ describe("number", () => {
     });
 
     test("with digit 2 and decimal default", () => {
-      const mock: KindOfNumber = {
+      const mock: NumberParam = {
         kind: "number",
         default: 0.01,
         digit: 2,
@@ -101,7 +101,7 @@ describe("number", () => {
       expect(mock).toSatisfy(validate);
     });
     test("with digit 0 and decimal default", () => {
-      const mock: KindOfNumber = {
+      const mock: NumberParam = {
         kind: "number",
         default: 0.01,
         digit: 0,
@@ -110,7 +110,7 @@ describe("number", () => {
     });
 
     test("with min and max properties", () => {
-      const mock: KindOfNumber = {
+      const mock: NumberParam = {
         kind: "number",
         default: 5,
         min: 0,
@@ -121,14 +121,14 @@ describe("number", () => {
   });
   describe("rejects invalid KindOfNumber values", () => {
     test("with non-number default value", () => {
-      const mock: Omit<KindOfNumber, "default"> = {
+      const mock: Omit<NumberParam, "default"> = {
         kind: "number",
       };
       expect(mock).not.toSatisfy(validate);
     });
 
     test("with non-number default value", () => {
-      const mock: KindOfNumber = {
+      const mock: NumberParam = {
         kind: "number",
         default: "123" as any, // Invalid type
       };
@@ -136,7 +136,7 @@ describe("number", () => {
     });
 
     test("with negative digit", () => {
-      const mock: KindOfNumber = {
+      const mock: NumberParam = {
         kind: "number",
         default: 0,
         digit: -1, // Invalid digit
@@ -144,7 +144,7 @@ describe("number", () => {
       expect(mock).not.toSatisfy(validate);
     });
     test("with non-integer digit", () => {
-      const mock: KindOfNumber = {
+      const mock: NumberParam = {
         kind: "number",
         default: 0,
         digit: 1.4, // Invalid digit
@@ -160,7 +160,7 @@ describe("KindOfNumberArray parameter validation", () => {
   const validate = ajv.compile(schema);
   describe("accepts valid KindOfNumberArray values", () => {
     test("with empty default array", () => {
-      const mock: KindOfNumberArray = {
+      const mock: NumberArrayParam = {
         kind: "number[]",
         default: [],
         digit: 0,
@@ -169,7 +169,7 @@ describe("KindOfNumberArray parameter validation", () => {
     });
 
     test("with default values", () => {
-      const mock: KindOfNumberArray = {
+      const mock: NumberArrayParam = {
         kind: "number[]",
         default: [1, 2, 3],
         digit: 2,
@@ -177,7 +177,7 @@ describe("KindOfNumberArray parameter validation", () => {
       expect(mock).toSatisfy(validate);
     });
     test("validates number array parameter with digit 2", () => {
-      const mock: KindOfNumberArray = {
+      const mock: NumberArrayParam = {
         kind: "number[]",
         default: [1.23, 4.56],
         digit: 2,
@@ -185,7 +185,7 @@ describe("KindOfNumberArray parameter validation", () => {
       expect(mock).toSatisfy(validate);
     });
     test("fullset KindOfNumberArray data", () => {
-      const mock: KindOfNumberArray = fullsetData("number[]", [1, 2, 3]);
+      const mock: NumberArrayParam = fullsetData("number[]", [1, 2, 3]);
       expect(mock).toSatisfy(validate);
     });
     test("with null optional fields", () => {
@@ -193,7 +193,7 @@ describe("KindOfNumberArray parameter validation", () => {
       expect(mock).toSatisfy(validate);
     });
     test("with undefined optional fields", () => {
-      const mock: KindOfNumberArray = undefinedData("number[]", []);
+      const mock: NumberArrayParam = undefinedData("number[]", []);
       expect(mock).toSatisfy(validate);
     });
   });
