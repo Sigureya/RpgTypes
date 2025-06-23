@@ -1,5 +1,5 @@
 import type { JSONSchemaType } from "ajv";
-import type { KindBase } from "./kindBase";
+import type { ParamBase } from "./kindBase";
 
 export const X_RPG_PARM = "x-rpg-param" as const;
 export interface X_Param {
@@ -10,9 +10,9 @@ export type JSONSchemaTypeWithRpgParam<V, X = object> = JSONSchemaType<V> & {
   [X_RPG_PARM]: X_RmmzParamInput<X>;
 };
 
-export type ExtractXParam<T extends KindBase> = Omit<
+export type ExtractXParam<T extends ParamBase> = Omit<
   T,
-  "default" | keyof KindBase
+  "default" | keyof ParamBase
 >;
 
 export interface X_RmmzParamBaee {
@@ -27,7 +27,7 @@ export interface X_RmmzParamInput<T, Kind extends string = string> {
   data: T;
 }
 
-export const xparamBaseData = <T extends KindBase, D extends ExtractXParam<T>>(
+export const xparamBaseData = <T extends ParamBase, D extends ExtractXParam<T>>(
   param: T,
   data: D
 ) =>

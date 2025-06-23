@@ -1,4 +1,4 @@
-export interface KindBase {
+export interface ParamBase {
   kind: string;
   desc?: string;
   text?: string;

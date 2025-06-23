@@ -2,11 +2,11 @@ import { describe, test, expect } from "vitest";
 import type { JSONSchemaType } from "ajv";
 import type { KindOfArray } from "./basciMetaField";
 import { withDefault, withTexts, compileArrayField } from "./basciMetaField";
-import type { KindBase } from "./kindBase";
+import type { ParamBase } from "./kindBase";
 
 describe("withTexts", () => {
   test("should return an object with title and description if provided", () => {
-    const kind: KindBase = {
+    const kind: ParamBase = {
       kind: "mock",
       text: "Title",
       desc: "Description",
@@ -20,14 +20,14 @@ describe("withTexts", () => {
   });
 
   test("should return an empty object if no text or desc is provided", () => {
-    const kind: KindBase = {
+    const kind: ParamBase = {
       kind: "mock",
     };
     const result = withTexts(kind);
     expect(result).toEqual({});
   });
   test("should return only title if desc is not provided", () => {
-    const kind: KindBase = {
+    const kind: ParamBase = {
       kind: "mock",
       text: undefined,
       desc: undefined,

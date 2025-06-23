@@ -1,5 +1,5 @@
 import { describe, test, expect } from "vitest";
-import type { KindBase } from "./kindBase";
+import type { ParamBase } from "./kindBase";
 import type {
   JSONSchemaTypeWithRpgParam,
   X_RmmzParamBaee,
@@ -28,7 +28,7 @@ describe("X_RPG_PARM", () => {
   });
 
   test("should create xparamBaseData with correct structure", () => {
-    const param: KindBase = { kind: "test-kind", parent: "test-parent" };
+    const param: ParamBase = { kind: "test-kind", parent: "test-parent" };
     const data = { key: "value" };
     const result = xparamBaseData(param, data);
     expect(result[X_RPG_PARM]).toEqual({
