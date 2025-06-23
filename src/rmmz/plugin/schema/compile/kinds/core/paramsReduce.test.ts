@@ -1,5 +1,5 @@
 import { describe, test, expect } from "vitest";
-import { compileParams, paramToObject } from "./packing2";
+import { reduceParams, paramsToObject } from "./paramsReduce";
 import type { PrimitiveStructType } from "./pluginScehamType";
 
 interface Person {
@@ -17,9 +17,9 @@ const mockPersonStruct: PrimitiveStructType<Person> = {
 
 const getKind = ({ kind }: { kind: string }) => kind;
 
-describe("compileProperties", () => {
+describe("paramsReduce", () => {
   test("should compile params to their respective types", () => {
-    const result: Record<keyof Person, string> = compileParams(
+    const result: Record<keyof Person, string> = reduceParams(
       mockPersonStruct.params,
       getKind
     );
@@ -31,9 +31,9 @@ describe("compileProperties", () => {
   });
 });
 
-describe("paramToObject", () => {
+describe("paramsToObject", () => {
   test("should convert struct params to object with default values", () => {
-    const result = paramToObject(mockPersonStruct.params);
+    const result = paramsToObject(mockPersonStruct.params);
     const expected: Person = {
       name: "bob",
       age: 0,
@@ -46,7 +46,7 @@ describe("paramToObject", () => {
       struct: "Empty",
       params: {},
     };
-    const result = paramToObject(emptyStruct.params);
+    const result = paramsToObject(emptyStruct.params);
     const expected: {} = {};
     expect(result).toEqual(expected);
   });

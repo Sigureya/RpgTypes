@@ -1,6 +1,6 @@
 import type { JSONSchemaType } from "ajv";
 import { compilePrimitiveFiled } from "../compieFiled";
-import { compileParams } from "./packing2";
+import { reduceParams } from "./paramsReduce";
 import type {
   PrimitiveStructBase,
   PrimitiveStructType,
@@ -42,7 +42,7 @@ export const compilePrimitiveStruct = (struct: PrimitiveStructBase) => {
     $id: `#/definitions/${struct.struct}`,
     type: "object" as const,
     //  title: struct.struct,
-    properties: compileParams(struct.params, compilePrimitiveFiled),
+    properties: reduceParams(struct.params, compilePrimitiveFiled),
     required: Object.keys(struct.params),
   };
 };
