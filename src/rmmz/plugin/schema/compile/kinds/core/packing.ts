@@ -1,7 +1,7 @@
 import type { JSONSchemaType } from "ajv";
-import type { StructParamPrimitive } from "./kinds";
-import { compilePrimitiveFiled } from "./kinds/compie";
+import { compilePrimitiveFiled } from "../compie";
 import type { PrimitiveStructType } from "./pluginScehamType";
+import type { StructParamPrimitive } from "./primitiveParams";
 
 type StructPackage = {
   structs: Record<string, PrimitiveStructType<object>>;
