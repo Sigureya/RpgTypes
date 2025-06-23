@@ -4,7 +4,7 @@ import type {
   PluginCommand,
   PluginStructEx,
   StructParam,
-} from "./kinds/core/structTypeEx";
+} from "./kinds/core/pluginEntriesEx";
 import { compilePluginStruct } from "./struct";
 interface PluginXX {
   commands: PluginCommand<object>[];

@@ -1,7 +1,10 @@
 import { describe, test, expect } from "vitest";
 import type { JSONSchemaType } from "ajv";
 import { defineStructs } from "./kinds/compileLog";
-import type { PluginStructEx, StructDefParam } from "./kinds/core/structTypeEx";
+import type {
+  PluginStructEx,
+  StructDefParam,
+} from "./kinds/core/pluginEntriesEx";
 import { compilePluginStruct } from "./struct";
 
 interface Carrot {

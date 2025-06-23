@@ -2,7 +2,7 @@ import type {
   PluginCommand,
   PluginStructEx,
   StructParam,
-} from "./kinds/core/structTypeEx";
+} from "./kinds/core/pluginEntriesEx";
 
 export interface PluginXX {
   commands: PluginCommand<object>[];
