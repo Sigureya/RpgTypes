@@ -6,8 +6,12 @@ import {
 import type { StructCompileLog } from "./compileLog";
 import type { AnyParamSchema } from "./core/pluginMeta/anyParamSchema";
 import type { CompileContext } from "./core/pluginMeta/compileOption";
-import type { StructParam, PluginStruct, KindOfStructArray } from "./plugin";
-import { isStructDef, isStructDefArray } from "./structDef";
+import type {
+  StructParam,
+  PluginStruct,
+  KindOfStructArray,
+  KindOfStruct,
+} from "./plugin";
 import { withDefault } from "./utils";
 
 interface SchemaAndLog {
@@ -43,11 +47,22 @@ interface PropsAccumulated {
 }
 
 const sturctName = (param: StructParam): string => {
-  if (param.kind !== "struct_def" && param.kind !== "struct_def[]") {
-    return "";
+  if (isStructDefArray(param)) {
+    return param.struct;
   }
+  if (isStructDef(param)) {
+    return param.struct;
+  }
+  return "";
+};
 
-  return param.struct;
+const isStructDef = (value: StructParam): value is KindOfStruct<object> => {
+  return value.kind === "struct_def";
+};
+const isStructDefArray = (
+  value: StructParam
+): value is KindOfStructArray<object> => {
+  return value.kind === "struct_def[]";
 };
 
 const accumulateProp = (
