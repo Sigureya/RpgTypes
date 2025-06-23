@@ -6,10 +6,10 @@ import {
 } from "./compieFiled";
 import type { AnyParamSchema } from "./core/anyPluginSchema";
 import type { JSONSchemaTypeWithRpgParam } from "./core/kindBase/x-rpg-param";
-import type { KindOfString } from "./core/primitiveParams";
+import type { StringParam } from "./core/primitiveParams";
 import { compileStringField, compileStringFieldWithXparam } from "./string";
 
-const mockData: KindOfString = {
+const mockData: StringParam = {
   kind: "string",
   default: "defaultString",
   desc: "A string field",

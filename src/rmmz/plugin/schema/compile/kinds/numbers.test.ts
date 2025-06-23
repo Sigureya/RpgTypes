@@ -6,7 +6,7 @@ import {
 } from "./compieFiled";
 import type { AnyParamSchema } from "./core/anyPluginSchema";
 import type { JSONSchemaTypeWithRpgParam } from "./core/kindBase/x-rpg-param";
-import type { KindOfNumber, KindOfNumberArray } from "./core/primitiveParams";
+import type { NumberParam, NumberArrayParam } from "./core/primitiveParams";
 import {
   compileNumberArrayField,
   compileNumberArrayFieldWithXParam,
@@ -16,7 +16,7 @@ import {
 
 describe("Number field schema generation", () => {
   describe("Basic number field", () => {
-    const data: KindOfNumber = {
+    const data: NumberParam = {
       kind: "number",
       default: 42,
       desc: "A number field",
@@ -43,7 +43,7 @@ describe("Number field schema generation", () => {
   });
 
   describe("Number array field", () => {
-    const data: KindOfNumberArray = {
+    const data: NumberArrayParam = {
       kind: "number[]",
       default: [1, 2, 3],
       parent: "parentStruct",
@@ -71,7 +71,7 @@ describe("Number field schema generation", () => {
   });
 
   describe("Number field with x-rpg-param extension", () => {
-    const data: KindOfNumber = {
+    const data: NumberParam = {
       kind: "number",
       default: 42,
       desc: "A number field with x-rpg-param",
@@ -101,7 +101,7 @@ describe("Number field schema generation", () => {
   });
 
   describe("Number array field with x-rpg-param extension", () => {
-    const data: KindOfNumberArray = {
+    const data: NumberArrayParam = {
       kind: "number[]",
       parent: "parentStruct",
       default: [1, 2, 3],

@@ -1,8 +1,8 @@
 import type { AnyParamSchema } from "./anyPluginSchema";
 import type {
-  KindOfBoolean,
-  KindOfStructArrayRef,
-  KindOfStructRef,
+  BooleanParam,
+  StructArrayRefParam,
+  StructRefParam,
   StructParamPrimitive,
 } from "./primitiveParams";
 
@@ -21,7 +21,7 @@ export type PrimitiveParams<T extends object> = {
 };
 
 export type PluginSchemaType<T> = T extends boolean
-  ? KindOfBoolean
+  ? BooleanParam
   : T extends number
   ? Extract<StructParamPrimitive, { default: number }>
   : T extends string
@@ -42,9 +42,9 @@ export type PluginSchemaType<T> = T extends boolean
   : T extends boolean[]
   ? { kind: "boolean[] is Forbidden" }
   : T extends object[]
-  ? KindOfStructArrayRef
+  ? StructArrayRefParam
   : T extends object
-  ? KindOfStructRef
+  ? StructRefParam
   : never;
 
 export const compileProperties = <T extends object>(

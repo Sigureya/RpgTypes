@@ -5,49 +5,49 @@ import type {
 } from "./rpgData/rpgDataTypesNames";
 
 export type StructParamPrimitive =
-  | KindOfBoolean
-  | KindOfNumber
-  | KindOfNumberArray
-  | KindOfRpgDataId
-  | KindOfRpgDataIdArray
-  | KindOfCombo
-  | KindOfSelect
-  | KindOfString
+  | BooleanParam
+  | NumberParam
+  | NumberArrayParam
+  | RpgDataIdParam
+  | RpgDataIdArrayParam
+  | ComboParam
+  | SelectParam
+  | StringParam
   | KindOfStringArray
-  | KindOfSystemDataId
-  | KindOfFile
-  | KindOfFileArray
-  | KindOfStructRef
-  | KindOfStructArrayRef;
+  | SystemDataIdParam
+  | FileParam
+  | FileArrayParam
+  | StructRefParam
+  | StructArrayRefParam;
 
 export type PrimitiveParams<K extends string = string> = Record<
   K,
   StructParamPrimitive
 >;
 
-export interface KindOfRpgDataId extends KindBase {
+export interface RpgDataIdParam extends KindBase {
   kind: DataKind_RpgUnion;
   default: number;
 }
-export interface KindOfRpgDataIdArray extends KindBase {
+export interface RpgDataIdArrayParam extends KindBase {
   kind: `${DataKind_RpgUnion}[]`;
   default: number[];
 }
 
-export interface KindOfBoolean extends KindBase {
+export interface BooleanParam extends KindBase {
   kind: "boolean";
   default: boolean;
   on?: string | null;
   off?: string | null;
 }
 
-export interface KindOfSelect extends KindBase {
+export interface SelectParam extends KindBase {
   kind: "select";
   options: { value: string; option: string }[];
   default: string;
 }
 
-export interface KindOfString extends KindBase {
+export interface StringParam extends KindBase {
   kind: "string" | "multiline_string";
   default: string;
 }
@@ -56,42 +56,43 @@ export interface KindOfStringArray extends KindBase {
   default: string[];
 }
 
-export interface KindOfCombo extends KindBase {
+export interface ComboParam extends KindBase {
   kind: "combo";
   options: string[];
   default: string;
 }
 
-export interface KindOfNumber extends KindBase {
+export interface NumberParam extends KindBase {
   kind: "number";
   default: number;
   digit?: number | null;
   min?: number | null;
   max?: number | null;
 }
-export interface KindOfNumberArray extends KindBase {
+export interface NumberArrayParam extends KindBase {
   kind: "number[]";
   default: number[];
   digit?: number | null;
   min?: number | null;
   max?: number | null;
 }
-export interface KindOfId extends KindBase {
+
+export interface GenericIdParam extends KindBase {
   kind: "id";
   default: number;
 }
 
-export interface KindOfSystemDataId extends KindBase {
+export interface SystemDataIdParam extends KindBase {
   kind: DataKind_SystemUnion;
   default: number;
 }
 
-export interface KindOfFile extends KindBase {
+export interface FileParam extends KindBase {
   kind: "file";
   default: string;
   dir: string;
 }
-export interface KindOfFileArray extends KindBase {
+export interface FileArrayParam extends KindBase {
   kind: "file[]";
   default: string[];
   dir: string;
@@ -101,13 +102,14 @@ export interface KindOfStructBase extends KindBase {
   struct: string;
 }
 
-export interface KindOfStructRef extends KindOfStructBase {
+// 型を参照するだけのパラメータ。別の箇所に型定義があることを前提としている。
+export interface StructRefParam extends KindOfStructBase {
   kind: "struct";
   struct: string;
   default?: object;
 }
 
-export interface KindOfStructArrayRef extends KindOfStructBase {
+export interface StructArrayRefParam extends KindOfStructBase {
   kind: "struct[]";
   struct: string;
   default?: object[];

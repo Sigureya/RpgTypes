@@ -1,6 +1,6 @@
 import { describe, test, expect } from "vitest";
 import Ajv from "ajv";
-import type { KindOfCombo } from "./core/primitiveParams";
+import type { ComboParam } from "./core/primitiveParams";
 import { makeParamSchema } from "./paramSchema";
 
 describe("rmmzSchemaComboParam", () => {
@@ -9,7 +9,7 @@ describe("rmmzSchemaComboParam", () => {
 
   describe("valid cases", () => {
     test("validates combo parameter with options", () => {
-      const mock: KindOfCombo = {
+      const mock: ComboParam = {
         kind: "combo",
         default: "option1",
         options: ["option1", "option2", "option3"],
@@ -20,7 +20,7 @@ describe("rmmzSchemaComboParam", () => {
 
   describe("invalid cases", () => {
     test("rejects combo parameter without options", () => {
-      const mock: Omit<KindOfCombo, "options"> = {
+      const mock: Omit<ComboParam, "options"> = {
         kind: "combo",
         default: "option1",
       };

@@ -9,13 +9,13 @@ import type {
   X_Param_StringInput,
 } from "../../core/primitive/x-rpg-param";
 import type { X_RmmzParamInput } from "./core/kindBase/x-rpg-param";
-import type { KindOfBoolean } from "./core/primitiveParams";
+import type { BooleanParam } from "./core/primitiveParams";
 
 type UnionSchema = DiscriminatedUnionSchemaType3<
   BaseKind,
   string,
   "kind",
-  KindOfBoolean | X_Param_DataId | NumberKind | X_Param_StringInput | SelectKind
+  BooleanParam | X_Param_DataId | NumberKind | X_Param_StringInput | SelectKind
 >;
 
 interface BaseKind {

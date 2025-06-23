@@ -5,10 +5,10 @@ import type {
   X_Param,
 } from "./core/kindBase/x-rpg-param";
 import { xparamBaseData } from "./core/kindBase/x-rpg-param";
-import type { KindOfBoolean } from "./core/primitiveParams";
+import type { BooleanParam } from "./core/primitiveParams";
 
 export const compileBooleanField = (
-  data: KindOfBoolean
+  data: BooleanParam
 ): JSONSchemaType<boolean> => ({
   type: "boolean",
   ...withDefault(data.default),
@@ -16,7 +16,7 @@ export const compileBooleanField = (
 });
 
 export const compileBooleanFieldWithXParam = (
-  data: KindOfBoolean
+  data: BooleanParam
 ): JSONSchemaTypeWithRpgParam<
   boolean,
   {
@@ -30,7 +30,7 @@ export const compileBooleanFieldWithXParam = (
   ...(xparamBoolean(data) satisfies X_Param),
 });
 
-const xparamBoolean = (data: KindOfBoolean) =>
+const xparamBoolean = (data: BooleanParam) =>
   xparamBaseData(data, {
     ...(typeof data.on === "string" ? { on: data.on } : {}),
     ...(typeof data.off === "string" ? { off: data.off } : {}),

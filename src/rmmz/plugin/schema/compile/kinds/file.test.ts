@@ -6,10 +6,10 @@ import {
 } from "./compieFiled";
 import type { AnyParamSchema } from "./core/anyPluginSchema";
 import type { JSONSchemaTypeWithRpgParam } from "./core/kindBase/x-rpg-param";
-import type { KindOfFile } from "./core/primitiveParams";
+import type { FileParam } from "./core/primitiveParams";
 import { compileFileField, compileFileFieldWithXparam } from "./file";
 
-const mockData: KindOfFile = {
+const mockData: FileParam = {
   kind: "file",
   default: "defaultFile",
   desc: "A file field",

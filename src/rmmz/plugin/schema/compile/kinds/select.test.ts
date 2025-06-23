@@ -6,7 +6,7 @@ import {
 } from "./compieFiled";
 import type { AnyParamSchema } from "./core/anyPluginSchema";
 import type { JSONSchemaTypeWithRpgParam } from "./core/kindBase/x-rpg-param";
-import type { KindOfSelect } from "./core/primitiveParams";
+import type { SelectParam } from "./core/primitiveParams";
 import { compileSelectField, compileSelectFieldWithXparam } from "./select";
 
 const data = {
@@ -18,7 +18,7 @@ const data = {
     { value: "value1", option: "Option 1" },
     { value: "value2", option: "Option 2" },
   ],
-} as const satisfies KindOfSelect;
+} as const satisfies SelectParam;
 
 describe("Select field schema generation - Basic", () => {
   const expectedSchema: JSONSchemaType<string> = {

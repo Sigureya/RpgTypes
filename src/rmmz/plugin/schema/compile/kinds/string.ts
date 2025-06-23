@@ -2,10 +2,10 @@ import type { JSONSchemaType } from "ajv";
 import { withDefault, withTexts } from "./core/kindBase/basciMetaField";
 import type { JSONSchemaTypeWithRpgParam } from "./core/kindBase/x-rpg-param";
 import { xparamBaseData } from "./core/kindBase/x-rpg-param";
-import type { KindOfString } from "./core/primitiveParams";
+import type { StringParam } from "./core/primitiveParams";
 
 export const compileStringField = (
-  data: KindOfString
+  data: StringParam
 ): JSONSchemaType<string> => ({
   type: "string",
   ...withTexts(data),
@@ -13,7 +13,7 @@ export const compileStringField = (
 });
 
 export const compileStringFieldWithXparam = (
-  data: KindOfString
+  data: StringParam
 ): JSONSchemaTypeWithRpgParam<string> => ({
   type: "string",
   ...withTexts(data),

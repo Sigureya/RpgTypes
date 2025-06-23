@@ -7,9 +7,9 @@ import {
 } from "./compieFiled";
 import type { AnyParamSchema } from "./core/anyPluginSchema";
 import type { JSONSchemaTypeWithRpgParam } from "./core/kindBase/x-rpg-param";
-import type { KindOfCombo } from "./core/primitiveParams";
+import type { ComboParam } from "./core/primitiveParams";
 
-const data: KindOfCombo = {
+const data: ComboParam = {
   kind: "combo",
   default: "defaultCombo",
   desc: "A combo field",

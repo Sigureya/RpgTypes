@@ -1,19 +1,19 @@
 import type { JSONSchemaType } from "ajv";
 import type { DiscriminatedUnionSchemaType3 } from "src/templates/discriminator/discriminator3";
+import type { KindBase } from "./core/kindBase/kindBase";
 import type {
-  KindBase,
-  KindOfBoolean,
-  KindOfCombo,
-  KindOfFile,
-  KindOfFileArray,
-  KindOfNumber,
-  KindOfNumberArray,
-  KindOfSelect,
-  KindOfString,
+  BooleanParam,
+  ComboParam,
+  FileParam,
+  FileArrayParam,
+  NumberParam,
+  NumberArrayParam,
+  SelectParam,
+  StringParam,
   KindOfStringArray,
-  KindOfStructArrayRef,
-  KindOfStructRef,
-  KindOfRpgDataId,
+  StructArrayRefParam,
+  StructRefParam,
+  RpgDataIdParam,
 } from "./core/primitiveParams";
 
 const BASIC_TEXT = {
@@ -46,17 +46,17 @@ export const makeParamSchema = () =>
     KindBase,
     string,
     "kind",
-    | KindOfBoolean
-    | KindOfCombo
-    | KindOfRpgDataId
-    | KindOfFile
-    | KindOfFileArray
-    | KindOfNumber
-    | KindOfNumberArray
-    | KindOfStructRef
-    | KindOfStructArrayRef
-    | KindOfSelect
-    | KindOfString
+    | BooleanParam
+    | ComboParam
+    | RpgDataIdParam
+    | FileParam
+    | FileArrayParam
+    | NumberParam
+    | NumberArrayParam
+    | StructRefParam
+    | StructArrayRefParam
+    | SelectParam
+    | StringParam
     | KindOfStringArray
   >);
 const makeSchemaBooleanParam = () =>
@@ -73,7 +73,7 @@ const makeSchemaBooleanParam = () =>
       text: BASIC_TEXT,
       parent: BASIC_TEXT,
     },
-  } as const satisfies JSONSchemaType<KindOfBoolean>);
+  } as const satisfies JSONSchemaType<BooleanParam>);
 
 const rmmzSchemaNumberParam = () =>
   ({
@@ -89,7 +89,7 @@ const rmmzSchemaNumberParam = () =>
       text: BASIC_TEXT,
       parent: BASIC_TEXT,
     },
-  } as const satisfies JSONSchemaType<KindOfNumber>);
+  } as const satisfies JSONSchemaType<NumberParam>);
 
 const rmmzSchemaNumberArrayParam = () =>
   ({
@@ -110,7 +110,7 @@ const rmmzSchemaNumberArrayParam = () =>
       text: BASIC_TEXT,
       parent: BASIC_TEXT,
     },
-  } as const satisfies JSONSchemaType<KindOfNumberArray>);
+  } as const satisfies JSONSchemaType<NumberArrayParam>);
 
 const rmmzSchemaStringParam = () =>
   ({
@@ -124,7 +124,7 @@ const rmmzSchemaStringParam = () =>
       text: BASIC_TEXT,
       parent: BASIC_TEXT,
     },
-  } as const satisfies JSONSchemaType<KindOfString>);
+  } as const satisfies JSONSchemaType<StringParam>);
 
 const rmmzSchemaStringArrayParam = () =>
   ({
@@ -169,7 +169,7 @@ const rmmzSchemaDataIdParam = () =>
       text: BASIC_TEXT,
       parent: BASIC_TEXT,
     },
-  } as const satisfies JSONSchemaType<KindOfRpgDataId>);
+  } as const satisfies JSONSchemaType<RpgDataIdParam>);
 
 const rmmzSchemaComboParam = () =>
   ({
@@ -188,7 +188,7 @@ const rmmzSchemaComboParam = () =>
       text: BASIC_TEXT,
       parent: BASIC_TEXT,
     },
-  } as const satisfies JSONSchemaType<KindOfCombo>);
+  } as const satisfies JSONSchemaType<ComboParam>);
 
 const rmmzSchemaFilePathParam = () =>
   ({
@@ -203,7 +203,7 @@ const rmmzSchemaFilePathParam = () =>
       text: BASIC_TEXT,
       parent: BASIC_TEXT,
     },
-  } as const satisfies JSONSchemaType<KindOfFile>);
+  } as const satisfies JSONSchemaType<FileParam>);
 
 const rmmzSchemaFileArrayParam = () =>
   ({
@@ -218,7 +218,7 @@ const rmmzSchemaFileArrayParam = () =>
       text: BASIC_TEXT,
       parent: BASIC_TEXT,
     },
-  } as const satisfies JSONSchemaType<KindOfFileArray>);
+  } as const satisfies JSONSchemaType<FileArrayParam>);
 const STRUCT_NAME = {
   type: "string",
   pattern: "^[a-zA-Z][a-zA-Z0-9]*$",
@@ -239,7 +239,7 @@ const rmmzSchemaStructRefParam = () =>
       parent: BASIC_TEXT,
       struct: STRUCT_NAME,
     },
-  } as const satisfies JSONSchemaType<KindOfStructRef>);
+  } as const satisfies JSONSchemaType<StructRefParam>);
 
 const rmmzSchemaStructArrayRefParam = () =>
   ({
@@ -259,7 +259,7 @@ const rmmzSchemaStructArrayRefParam = () =>
       text: BASIC_TEXT,
       parent: BASIC_TEXT,
     },
-  } as const satisfies JSONSchemaType<KindOfStructArrayRef>);
+  } as const satisfies JSONSchemaType<StructArrayRefParam>);
 
 const rmmzSchemaSelectParam = () =>
   ({
@@ -282,4 +282,4 @@ const rmmzSchemaSelectParam = () =>
       text: BASIC_TEXT,
       parent: BASIC_TEXT,
     },
-  } as const satisfies JSONSchemaType<KindOfSelect>);
+  } as const satisfies JSONSchemaType<SelectParam>);

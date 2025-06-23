@@ -1,10 +1,10 @@
 import { describe, test, expect } from "vitest";
 import Ajv from "ajv";
-import type { KindOfRpgDataId } from "./core/primitiveParams";
+import type { RpgDataIdParam } from "./core/primitiveParams";
 import type { DataKind_RpgUnion } from "./core/rpgData/rpgDataTypesNames";
 import { makeParamSchema } from "./paramSchema";
 
-const makeDataParam = (param: Partial<KindOfRpgDataId>): KindOfRpgDataId => {
+const makeDataParam = (param: Partial<RpgDataIdParam>): RpgDataIdParam => {
   return {
     kind: param.kind ?? "actor",
     default: param.default ?? 0,
@@ -24,7 +24,7 @@ const testFn = ({ dataKind }: TestCase) => {
     const schema = makeParamSchema();
     const validate = ajv.compile(schema);
     test(`valid case`, () => {
-      const mock: KindOfRpgDataId = makeDataParam({
+      const mock: RpgDataIdParam = makeDataParam({
         kind: dataKind,
         default: 1,
         text: `${dataKind} Field`,
@@ -34,14 +34,14 @@ const testFn = ({ dataKind }: TestCase) => {
       expect(mock).toSatisfy(validate);
     });
     test("", () => {
-      const mock: KindOfRpgDataId = {
+      const mock: RpgDataIdParam = {
         kind: dataKind,
         default: 1,
       };
       expect(mock).toSatisfy(validate);
     });
     test("", () => {
-      const mock: KindOfRpgDataId = {
+      const mock: RpgDataIdParam = {
         kind: dataKind,
         default: 1,
         desc: undefined,
@@ -51,7 +51,7 @@ const testFn = ({ dataKind }: TestCase) => {
       expect(mock).toSatisfy(validate);
     });
     test("", () => {
-      const mock: Record<keyof KindOfRpgDataId, unknown> = {
+      const mock: Record<keyof RpgDataIdParam, unknown> = {
         kind: dataKind,
         default: 1,
         desc: null,

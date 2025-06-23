@@ -1,6 +1,6 @@
 import { describe, test, expect } from "vitest";
 import Ajv from "ajv";
-import type { KindOfString } from "./core/primitiveParams";
+import type { StringParam } from "./core/primitiveParams";
 import { makeParamSchema } from "./paramSchema";
 
 describe("rmmzSchemaStringParam", () => {
@@ -9,7 +9,7 @@ describe("rmmzSchemaStringParam", () => {
 
   describe("valid cases", () => {
     test("validates string parameter with default value", () => {
-      const mock: KindOfString = {
+      const mock: StringParam = {
         kind: "string",
         default: "defaultString",
         text: "String Field",
@@ -21,7 +21,7 @@ describe("rmmzSchemaStringParam", () => {
 
   describe("invalid cases", () => {
     test("rejects string parameter without default value", () => {
-      const mock: Omit<KindOfString, "default"> = {
+      const mock: Omit<StringParam, "default"> = {
         kind: "string",
         text: "String Field",
         desc: "A string field",

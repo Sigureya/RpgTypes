@@ -1,6 +1,6 @@
 import { describe, test, expect } from "vitest";
 import Ajv from "ajv";
-import type { KindOfFile, KindOfFileArray } from "./core/primitiveParams";
+import type { FileParam, FileArrayParam } from "./core/primitiveParams";
 import { makeParamSchema } from "./paramSchema";
 
 describe("RmmzParam_File JSON Schema Validation", () => {
@@ -10,7 +10,7 @@ describe("RmmzParam_File JSON Schema Validation", () => {
 
   describe("valid cases", () => {
     test("validates file parameter with default value", () => {
-      const mock: KindOfFile = {
+      const mock: FileParam = {
         kind: "file",
         default: "defaultFile.txt",
         text: "File Field",
@@ -21,7 +21,7 @@ describe("RmmzParam_File JSON Schema Validation", () => {
     });
 
     test("validates file array parameter with default value", () => {
-      const mock: KindOfFileArray = {
+      const mock: FileArrayParam = {
         kind: "file[]",
         default: ["file1.txt", "file2.txt"],
         text: "File Array Field",
@@ -34,7 +34,7 @@ describe("RmmzParam_File JSON Schema Validation", () => {
 
   describe("invalid cases", () => {
     test("rejects file parameter without default value", () => {
-      const mock: Omit<KindOfFile, "default"> = {
+      const mock: Omit<FileParam, "default"> = {
         kind: "file",
         text: "File Field",
         desc: "A file field",
@@ -44,7 +44,7 @@ describe("RmmzParam_File JSON Schema Validation", () => {
     });
 
     test("rejects file array parameter without default value", () => {
-      const mock: Omit<KindOfFileArray, "default"> = {
+      const mock: Omit<FileArrayParam, "default"> = {
         kind: "file[]",
         text: "File Array Field",
         desc: "A file array field",
