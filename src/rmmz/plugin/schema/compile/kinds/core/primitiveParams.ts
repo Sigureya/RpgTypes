@@ -13,7 +13,7 @@ export type StructParamPrimitive =
   | ComboParam
   | SelectParam
   | StringParam
-  | KindOfStringArray
+  | StringArrayParam
   | SystemDataIdParam
   | FileParam
   | FileArrayParam
@@ -51,7 +51,7 @@ export interface StringParam extends KindBase {
   kind: "string" | "multiline_string";
   default: string;
 }
-export interface KindOfStringArray extends KindBase {
+export interface StringArrayParam extends KindBase {
   kind: "string[]" | "multiline_string[]";
   default: string[];
 }

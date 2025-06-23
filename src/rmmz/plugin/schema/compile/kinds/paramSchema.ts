@@ -10,7 +10,7 @@ import type {
   NumberArrayParam,
   SelectParam,
   StringParam,
-  KindOfStringArray,
+  StringArrayParam,
   StructArrayRefParam,
   StructRefParam,
   RpgDataIdParam,
@@ -57,7 +57,7 @@ export const makeParamSchema = () =>
     | StructArrayRefParam
     | SelectParam
     | StringParam
-    | KindOfStringArray
+    | StringArrayParam
   >);
 const makeSchemaBooleanParam = () =>
   ({
@@ -142,7 +142,7 @@ const rmmzSchemaStringArrayParam = () =>
       text: BASIC_TEXT,
       parent: BASIC_TEXT,
     },
-  } as const satisfies JSONSchemaType<KindOfStringArray>);
+  } as const satisfies JSONSchemaType<StringArrayParam>);
 
 const rmmzSchemaDataIdParam = () =>
   ({
