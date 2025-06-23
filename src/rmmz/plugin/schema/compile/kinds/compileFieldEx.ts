@@ -4,14 +4,14 @@ import {
   compilePrimitiveFiled,
 } from "./compileFiled";
 import type { StructCompileLog } from "./compileLog";
-import type { AnyParamSchema } from "./pluginMeta/anyParamSchema";
-import type { CompileContext } from "./pluginMeta/compileOption";
 import type {
   StructParam,
   PluginStructEx,
   StructArrayDefParam,
   StructDefParam,
 } from "./core/structTypeEx";
+import type { AnyParamSchema } from "./pluginMeta/anyParamSchema";
+import type { CompileContext } from "./pluginMeta/compileOption";
 import { withDefault } from "./utils";
 
 interface SchemaAndLog {
