@@ -2,7 +2,7 @@ import { describe, expect, test } from "vitest";
 import { Ajv, type JSONSchemaType } from "ajv";
 import type { TypePackage } from "./packing";
 import { compileFromStructArray } from "./packing";
-import type { PrimitiveStructType } from "./pluginScehamType";
+import type { PrimitiveStructType } from "./pluginSchemaType";
 
 interface Food {
   name: string;

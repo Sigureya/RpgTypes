@@ -4,8 +4,7 @@ import { reduceParams } from "./paramsReduce";
 import type {
   PrimitiveStructBase,
   PrimitiveStructType,
-} from "./pluginScehamType";
-import type { StructParamPrimitive } from "./primitiveParams";
+} from "./pluginSchemaType";
 
 // type StructPackage = {
 //   structs: Record<string, PrimitiveStructType<object>>;

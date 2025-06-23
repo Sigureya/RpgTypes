@@ -1,6 +1,6 @@
 import { describe, test, expect } from "vitest";
 import { reduceParams, paramsToObject } from "./paramsReduce";
-import type { PrimitiveStructType } from "./pluginScehamType";
+import type { PrimitiveStructType } from "./pluginSchemaType";
 
 interface Person {
   name: string;
