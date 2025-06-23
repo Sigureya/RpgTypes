@@ -1,13 +1,13 @@
 import { describe, test, expect } from "vitest";
 import { reduceParams, paramsToObject } from "./paramsReduce";
-import type { PrimitiveStructType } from "./pluginSchemaType";
+import type { PluginStructType } from "./pluginEnties";
 
 interface Person {
   name: string;
   age: number;
 }
 
-const mockPersonStruct: PrimitiveStructType<Person> = {
+const mockPersonStruct: PluginStructType<Person> = {
   struct: "Person",
   params: {
     name: { kind: "string", default: "bob" },
@@ -42,7 +42,7 @@ describe("paramsToObject", () => {
   });
 
   test("should handle empty params", () => {
-    const emptyStruct: PrimitiveStructType<{}> = {
+    const emptyStruct: PluginStructType<{}> = {
       struct: "Empty",
       params: {},
     };

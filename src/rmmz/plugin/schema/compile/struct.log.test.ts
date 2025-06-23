@@ -1,7 +1,7 @@
 import { describe, test, expect } from "vitest";
 import type { JSONSchemaType } from "ajv";
 import { defineStructs } from "./kinds/compileLog";
-import type { PluginStruct, KindOfStruct } from "./kinds/plugin";
+import type { PluginStructEx, StructDefParam } from "./kinds/core/structTypeEx";
 import { compilePluginStruct } from "./struct";
 
 interface Carrot {
@@ -102,7 +102,7 @@ const foodSchema = {
   additionalProperties: false,
 } as const satisfies JSONSchemaType<Food>;
 
-const foodStruct: PluginStruct<Food> = {
+const foodStruct: PluginStructEx<Food> = {
   struct: "Food",
   params: {
     vegetable: {
@@ -112,7 +112,7 @@ const foodStruct: PluginStruct<Food> = {
         kind: { kind: "string", default: "carrot" },
         color: { kind: "string", default: "orange" },
       },
-    } satisfies KindOfStruct<Carrot>,
+    } satisfies StructDefParam<Carrot>,
     grain: {
       kind: "struct_def",
       struct: "Rice",
@@ -120,7 +120,7 @@ const foodStruct: PluginStruct<Food> = {
         kind: { kind: "string", default: "rice" },
         origin: { kind: "string", default: "Japan" },
       },
-    } satisfies KindOfStruct<Rice>,
+    } satisfies StructDefParam<Rice>,
     drink: {
       kind: "struct_def",
       struct: "Drink",
@@ -132,7 +132,7 @@ const foodStruct: PluginStruct<Food> = {
             type: { kind: "string", default: "sake" },
             percent: { kind: "number", default: 15 },
           },
-        } satisfies KindOfStruct<Sake>,
+        } satisfies StructDefParam<Sake>,
         juice: {
           kind: "struct_def",
           struct: "OrangeJuice",
@@ -140,7 +140,7 @@ const foodStruct: PluginStruct<Food> = {
             type: { kind: "string", default: "orange_juice" },
             sugarFree: { kind: "boolean", default: true },
           },
-        } satisfies KindOfStruct<OrangeJuice>,
+        } satisfies StructDefParam<OrangeJuice>,
         tea: {
           kind: "struct_def",
           struct: "GreenTea",
@@ -148,7 +148,7 @@ const foodStruct: PluginStruct<Food> = {
             type: { kind: "string", default: "green_tea" },
             temperature: { kind: "number", default: 80 },
           },
-        } satisfies KindOfStruct<GreenTea>,
+        } satisfies StructDefParam<GreenTea>,
       },
     },
   },

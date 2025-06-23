@@ -1,10 +1,14 @@
 import { describe, test, expect } from "vitest";
 import type { JSONSchemaType } from "ajv";
-import type { PluginCommand, PluginStruct, StructParam } from "./kinds/plugin";
+import type {
+  PluginCommand,
+  PluginStructEx,
+  StructParam,
+} from "./kinds/core/structTypeEx";
 import { compilePluginStruct } from "./struct";
 interface PluginXX {
   commands: PluginCommand<object>[];
-  structs: PluginStruct<object>[];
+  structs: PluginStructEx<object>[];
   params: Record<string, StructParam>;
 }
 

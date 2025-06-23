@@ -1,7 +1,7 @@
 import { compileStructDetail } from "./kinds/compileFieldEx";
 import type { CompileResult } from "./kinds/compileLog";
 import { PLUGIN_COMMAND } from "./kinds/constants";
-import type { PluginCommand, PluginStruct } from "./kinds/plugin";
+import type { PluginCommand, PluginStructEx } from "./kinds/core/structTypeEx";
 import type {
   PluginMeta,
   PluginCompileOptions,
@@ -24,7 +24,7 @@ export const compilePluginCommand = <T extends object>(
 
 export const compilePluginStruct = <T extends object>(
   tiles: PluginMeta,
-  { params, struct: structName }: PluginStruct<T>,
+  { params, struct: structName }: PluginStructEx<T>,
   options: Partial<PluginCompileOptions>
 ): CompileResult<T> => {
   return compileStructDetail(

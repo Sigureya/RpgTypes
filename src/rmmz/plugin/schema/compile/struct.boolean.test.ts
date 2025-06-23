@@ -1,6 +1,6 @@
 import { describe, test, expect } from "vitest";
 import { Ajv, type JSONSchemaType } from "ajv";
-import type { PluginStruct } from "./kinds/plugin";
+import type { PluginStructType } from "./kinds/core/pluginEnties";
 import type { PluginMeta } from "./kinds/pluginMeta/compileOption";
 import { compilePluginStruct } from "./struct";
 
@@ -26,7 +26,7 @@ describe("compilePluginStruct - boolean", () => {
           on: "on",
         },
       },
-    } as const satisfies PluginStruct<MockBoolean>;
+    } as const satisfies PluginStructType<MockBoolean>;
     const expectedBoolSchema = {
       title: "Bool",
       type: "object",

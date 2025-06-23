@@ -1,8 +1,12 @@
-import type { PluginCommand, PluginStruct, StructParam } from "./kinds/plugin";
+import type {
+  PluginCommand,
+  PluginStructEx,
+  StructParam,
+} from "./kinds/core/structTypeEx";
 
 export interface PluginXX {
   commands: PluginCommand<object>[];
-  structs: PluginStruct<object>[];
+  structs: PluginStructEx<object>[];
   params: Record<string, StructParam>;
 }
 

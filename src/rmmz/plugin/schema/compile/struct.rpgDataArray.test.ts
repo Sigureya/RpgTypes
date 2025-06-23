@@ -1,6 +1,7 @@
 import { describe, test, expect } from "vitest";
 import type { JSONSchemaType } from "ajv";
-import type { PluginStruct } from "./kinds/plugin";
+import type { PluginStructType } from "./kinds/core/pluginEnties";
+import type { PluginStructEx } from "./kinds/core/structTypeEx";
 import type { PluginMeta } from "./kinds/pluginMeta/compileOption";
 import { compilePluginStruct } from "./struct";
 
@@ -30,7 +31,7 @@ describe("alldataArray", () => {
       enemy: { kind: "enemy[]", default: [1, 2, 3] },
       state: { kind: "state[]", default: [1, 2, 3] },
     },
-  } as const satisfies PluginStruct<AllDataArray>;
+  } as const satisfies PluginStructType<AllDataArray>;
   const expectedAllDataArraySchema: JSONSchemaType<AllDataArray> = {
     title: "AllDataArray",
     type: "object",

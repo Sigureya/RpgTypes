@@ -1,6 +1,7 @@
 import { describe, test, expect } from "vitest";
 import type { JSONSchemaType } from "ajv";
-import type { PluginStruct } from "./kinds/plugin";
+import type { PluginStructType } from "./kinds/core/pluginEnties";
+import type { PluginStructEx } from "./kinds/core/structTypeEx";
 import type { PluginMeta } from "./kinds/pluginMeta/compileOption";
 import { compilePluginStruct } from "./struct";
 
@@ -36,7 +37,7 @@ describe("compilePluginStruct - RPG data fields with text", () => {
       enemy: { kind: "enemy", default: 0, text: "", desc: "" },
       state: { kind: "state", default: 0, text: "", desc: "" },
     },
-  } as const satisfies PluginStruct<AllData>;
+  } as const satisfies PluginStructType<AllData>;
   const expectedAllDataSchema: JSONSchemaType<AllData> = {
     title: "AllData",
     type: "object",
@@ -111,7 +112,7 @@ describe("compilePluginStruct - RPG data fields without text", () => {
       enemy: { kind: "enemy", default: 0 },
       state: { kind: "state", default: 0 },
     },
-  } as const satisfies PluginStruct<AllData>;
+  } as const satisfies PluginStructEx<AllData>;
   const expectedAllDataSchema = {
     title: "AllData",
     type: "object",

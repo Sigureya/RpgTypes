@@ -2,7 +2,7 @@ import { describe, test, expect } from "vitest";
 import type { JSONSchemaType } from "ajv";
 import type { StructCompileLogObjectEntry } from "./compileLog";
 import { defineStructs } from "./compileLog";
-import type { KindOfStruct } from "./plugin";
+import type { StructDefParam } from "./core/structTypeEx";
 
 interface Person {
   name: string;
@@ -33,7 +33,7 @@ const mockPerson = {
         text: "Person Age",
       },
     },
-  } satisfies KindOfStruct<Person>,
+  } satisfies StructDefParam<Person>,
   path: "moduleName.MockStruct",
   schema: {
     type: "object",
@@ -77,7 +77,7 @@ const mockAnimal = {
         text: "Animal Habitat",
       },
     },
-  } satisfies KindOfStruct<Animal>,
+  } satisfies StructDefParam<Animal>,
 
   schema: {
     type: "object",

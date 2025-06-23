@@ -4,14 +4,14 @@ import {
   compilePrimitiveFiled,
 } from "./compileFiled";
 import type { StructCompileLog } from "./compileLog";
-import type {
-  StructParam,
-  PluginStruct,
-  KindOfStructArray,
-  KindOfStruct,
-} from "./plugin";
 import type { AnyParamSchema } from "./pluginMeta/anyParamSchema";
 import type { CompileContext } from "./pluginMeta/compileOption";
+import type {
+  StructParam,
+  PluginStructEx,
+  StructArrayDefParam,
+  StructDefParam,
+} from "./core/structTypeEx";
 import { withDefault } from "./utils";
 
 interface SchemaAndLog {
@@ -56,12 +56,12 @@ const sturctName = (param: StructParam): string => {
   return "";
 };
 
-const isStructDef = (value: StructParam): value is KindOfStruct<object> => {
+const isStructDef = (value: StructParam): value is StructDefParam<object> => {
   return value.kind === "struct_def";
 };
 const isStructDefArray = (
   value: StructParam
-): value is KindOfStructArray<object> => {
+): value is StructArrayDefParam<object> => {
   return value.kind === "struct_def[]";
 };
 
@@ -120,7 +120,7 @@ const compileField = (
 
 const makeStructKind = <T extends object>(
   path: string,
-  annotation: PluginStruct<T>,
+  annotation: PluginStructEx<T>,
   ctx: CompileContext
 ): SchemaAndLog => {
   return compileStructDetail(
@@ -134,7 +134,7 @@ const makeStructKind = <T extends object>(
 
 const makeStructArrayKind = <T extends object>(
   path: string,
-  annotation: KindOfStructArray<T>,
+  annotation: StructArrayDefParam<T>,
   ctx: CompileContext
 ): SchemaAndLog => {
   const item: SchemaAndLog = makeStructKind(

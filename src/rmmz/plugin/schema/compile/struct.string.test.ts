@@ -1,6 +1,6 @@
 import { describe, test, expect } from "vitest";
 import type { JSONSchemaType } from "ajv";
-import type { PluginStruct } from "./kinds/plugin";
+import type { PluginStructType } from "./kinds/core/pluginEnties";
 import type { PluginMeta } from "./kinds/pluginMeta/compileOption";
 import { compilePluginStruct } from "./struct";
 
@@ -49,7 +49,8 @@ describe("compilePluginStruct - string types", () => {
         default: ["file1.png", "file2.png"],
       },
     },
-  } satisfies PluginStruct<StringTypes>;
+  } satisfies PluginStructType<StringTypes>;
+
   const expectedStringTypesSchema: JSONSchemaType<StringTypes> = {
     title: "StringTypes",
     type: "object",
