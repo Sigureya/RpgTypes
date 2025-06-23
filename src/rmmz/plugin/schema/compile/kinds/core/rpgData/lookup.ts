@@ -41,8 +41,10 @@ export type SourceId_ValidRmmzData =
   | SourceId_SystemSwitches
   | SourceId_SystemVariables;
 
-export const lookupKind = (
-  kind: string
+export const lookupKind = <
+  Source extends string = DataKind_RpgUnion | DataKind_SystemUnion
+>(
+  kind: Source
 ): SourceId_ValidRmmzData | SourceId_RmmzUnknown => {
   const index = KIND_TABLE[kind as DataKind_RpgUnion];
   if (index === undefined) {
