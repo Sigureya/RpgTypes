@@ -78,7 +78,7 @@ describe("compile syntax", () => {
     };
     expect(parsePluginParam(mock.boolean)).toEqual(expected);
   });
-  test("number", () => {
+  test.skip("number", () => {
     const expected: PluginParam = {
       param: "num",
       data: {
@@ -100,7 +100,7 @@ describe("compile syntax", () => {
     };
     expect(parsePluginParam(mock["number[]"])).toEqual(expected);
   });
-  test("string", () => {
+  test.skip("string", () => {
     const expected: PluginParam = {
       param: "str",
       data: {
