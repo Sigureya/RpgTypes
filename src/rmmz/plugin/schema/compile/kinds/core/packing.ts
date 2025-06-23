@@ -1,5 +1,5 @@
 import type { JSONSchemaType } from "ajv";
-import { compilePrimitiveFiled } from "../compieFiled";
+import { compilePrimitiveFiled } from "../compileFiled";
 import { reduceParams } from "./paramsReduce";
 import type {
   PrimitiveStructBase,
