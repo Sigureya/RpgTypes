@@ -18,11 +18,10 @@ type ExtractParamData<T extends ParamBase> = Omit<
   "default" | keyof ParamBase
 >;
 
-export interface X_ParamData<T extends ParamBase> {
-  kind: T extends { kind: infer K } ? K : string;
-  parent?: string | null;
-  data: ExtractParamData<T>;
-}
+export type X_ParamData<T extends ParamBase> = X_RmmzParam<
+  ExtractParamData<T>,
+  T extends { kind: infer K } ? K : string
+>;
 
 export interface X_RmmzParamBase {
   kind: string;

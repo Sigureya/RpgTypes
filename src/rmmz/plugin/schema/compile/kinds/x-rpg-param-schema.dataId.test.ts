@@ -1,13 +1,13 @@
 import { describe, test, expect } from "vitest";
 import Ajv from "ajv";
 import type { SourceIdentifier } from "src/namedItemSource";
-import { makeSchema3 } from "./metaSchema";
 import type {
   X_Param_DataId,
   X_Param_DataIdInput,
   X_ParamInput_Union,
-} from "./x-rpg-param";
-import type { X_RmmzParam } from "./x-rpg-param2/types";
+} from "../../core/primitive/x-rpg-param";
+import type { X_RmmzParam } from "./core/paramBase/x-rpg-param";
+import { makeSchema3 } from "./x-rpg-param-schema";
 
 const makeValidator = () => {
   const schema = makeSchema3();
