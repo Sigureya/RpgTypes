@@ -1,5 +1,4 @@
-import type { Context2 } from "../parseContext";
-import type { Token } from "./types";
+import type { Context2, Token } from "./types";
 // トークン列をContext2[]に変換
 export const sliceToken = (tokens: ReadonlyArray<Token>): Context2[] => {
   const groups = tokens.reduce<Context2[]>(
