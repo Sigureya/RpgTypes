@@ -25,8 +25,8 @@ type UnionSchema = DiscriminatedUnionSchemaType3<
   | X_ParamData<SelectParam>
   | X_ParamData<ComboParam>
 >;
-type X_ParamDataId = X_RmmzParam<SourceIdentifier, "dataId">;
-type X_ParamNumber = X_ParamData<Omit<NumberParam, "min" | "max">>;
+export type X_ParamDataId = X_RmmzParam<SourceIdentifier, "dataId">;
+export type X_ParamNumber = X_ParamData<Omit<NumberParam, "min" | "max">>;
 
 interface NullableString {
   type: "string";
@@ -59,6 +59,7 @@ export const makeSchema3 = () => {
       dataIdKind(),
       selectKind(),
       booleanKind(nullablString),
+      comboKind(),
     ],
   } as const satisfies UnionSchema;
 };
@@ -169,3 +170,26 @@ const selectKind = () =>
       },
     },
   } as const satisfies JSONSchemaType<X_ParamData<SelectParam>>);
+
+const comboKind = () =>
+  ({
+    type: "object",
+    required: ["kind", "data"],
+    additionalProperties: false,
+    properties: {
+      kind: { type: "string", const: "combo" },
+      parent: { type: "string", nullable: true, maxLength: 100 },
+      data: {
+        type: "object",
+        required: ["options"],
+        properties: {
+          options: {
+            type: "array",
+            items: {
+              type: "string",
+            },
+          },
+        },
+      },
+    },
+  } as const satisfies JSONSchemaType<X_ParamData<ComboParam>>);
