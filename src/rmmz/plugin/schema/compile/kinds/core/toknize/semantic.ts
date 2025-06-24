@@ -1,6 +1,5 @@
-import type { Context2 } from "./parseContext";
-import type { Token } from "./toknize/toknize";
-export const semanticAnalysis = (x: unknown) => ({});
+import type { Context2 } from "../parseContext";
+import type { Token } from "./types";
 // トークン列をContext2[]に変換
 export const sliceToken = (tokens: ReadonlyArray<Token>): Context2[] => {
   const groups = tokens.reduce<Context2[]>(
@@ -9,6 +8,7 @@ export const sliceToken = (tokens: ReadonlyArray<Token>): Context2[] => {
   );
   return groups;
 };
+
 const sliceTokenStep = (acc: Context2[], token: Token): Context2[] => {
   if (isHead(token)) {
     return [...acc, { head: token, tokens: [] }];
