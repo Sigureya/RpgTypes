@@ -5,12 +5,8 @@ import type {
   X_ParamData,
   X_RmmzParamBase,
   X_RmmzParam,
-} from "./core/paramBase/x-rpg-param";
-import type {
-  BooleanParam,
-  SelectParam,
-  StringParam,
-} from "./core/primitiveParams";
+} from "./paramBase/x-rpg-param";
+import type { BooleanParam, SelectParam, StringParam } from "./primitiveParams";
 
 type UnionSchema = DiscriminatedUnionSchemaType3<
   X_RmmzParamBase,
