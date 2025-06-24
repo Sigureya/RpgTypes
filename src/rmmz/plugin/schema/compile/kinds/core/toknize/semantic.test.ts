@@ -1,7 +1,7 @@
 import { describe, test, expect } from "vitest";
-import type { Context2 } from "../parseContext";
 import { sliceToken } from "./semantic";
-import type { Token } from "./types";
+import type { Context2, Token } from "./types";
+
 describe("sliceToken", () => {
   test("", () => {
     const expected: Context2[] = [
