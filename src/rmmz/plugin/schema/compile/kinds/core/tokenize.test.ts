@@ -1,10 +1,13 @@
 import { describe, test, expect } from "vitest";
-import type { Token } from "./toknize";
-import { tokenize } from "./toknize";
+import type { StructParamPrimitive } from "./primitiveParams";
+import type { Token } from "./toknize/toknize";
+import { tokenize } from "./toknize/toknize";
+
 interface TestCase {
   name: string;
   input: string;
-  expected: Token[];
+  token: Token[];
+  params?: StructParamPrimitive[];
 }
 
 const testCases: TestCase[] = [
@@ -16,13 +19,22 @@ const testCases: TestCase[] = [
     @default false
     @on enabled
     @off disabled` as const,
-    expected: [
+    token: [
       { keyword: "param", value: "bool" },
       { keyword: "type", value: "boolean" },
       { keyword: "text", value: "autoBattle" },
       { keyword: "default", value: "false" },
       { keyword: "on", value: "enabled" },
       { keyword: "off", value: "disabled" },
+    ],
+    params: [
+      {
+        kind: "boolean",
+        default: false,
+        on: "enabled",
+        off: "disabled",
+        text: "autoBattle",
+      },
     ],
   },
   {
@@ -33,7 +45,7 @@ const testCases: TestCase[] = [
     @digit 3
     @type number
     @default 123` as const,
-    expected: [
+    token: [
       { keyword: "param", value: "num" },
       { keyword: "min", value: "0" },
       { keyword: "max", value: "1000" },
@@ -49,7 +61,7 @@ const testCases: TestCase[] = [
     @default [1, 2, 3]
     @min 0  
     @max 1000` as const,
-    expected: [
+    token: [
       { keyword: "param", value: "numArray" },
       { keyword: "type", value: "number[]" },
       { keyword: "default", value: "[1, 2, 3]" },
@@ -63,7 +75,7 @@ const testCases: TestCase[] = [
     * @type string
     * @desc This is a string parameter
     *  @default Hello` as const,
-    expected: [
+    token: [
       { keyword: "param", value: "str" },
       { keyword: "type", value: "string" },
       { keyword: "desc", value: "This is a string parameter" },
@@ -74,7 +86,7 @@ const testCases: TestCase[] = [
     name: "weapon",
     input:
       "@param weapon\n@type weapon\n@default 0\n@desc This is a weapon parameter",
-    expected: [
+    token: [
       { keyword: "param", value: "weapon" },
       { keyword: "type", value: "weapon" },
       { keyword: "default", value: "0" },
@@ -84,7 +96,7 @@ const testCases: TestCase[] = [
   {
     input: [" * @param p   ", " * @text t "].join("\n"),
     name: "simple param and text",
-    expected: [
+    token: [
       { keyword: "param", value: "p" },
       { keyword: "text", value: "t" },
     ],
@@ -97,7 +109,7 @@ const testCases: TestCase[] = [
     @param item
     @type item
     @default 1`,
-    expected: [
+    token: [
       { keyword: "param", value: "weapon" },
       { keyword: "type", value: "weapon" },
       { keyword: "default", value: "0" },
@@ -109,7 +121,7 @@ const testCases: TestCase[] = [
 ];
 
 const runTestCases = (cases: TestCase[]) => {
-  cases.forEach(({ name, input, expected: expected }) => {
+  cases.forEach(({ name, input, token: expected }) => {
     test(name, () => {
       const result = tokenize(input);
       expect(result).toEqual(expected);
