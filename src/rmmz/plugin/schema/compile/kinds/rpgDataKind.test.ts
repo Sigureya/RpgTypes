@@ -1,7 +1,7 @@
 import { describe, expect, test } from "vitest";
 import type { JSONSchemaType } from "ajv";
 import type { SourceIdentifier } from "src/namedItemSource";
-import type { X_RmmzParamInput } from "./core/paramBase/x-rpg-param";
+import type { X_RmmzParam } from "./core/paramBase/x-rpg-param";
 import type { RpgDataIdParam, SystemDataIdParam } from "./core/primitiveParams";
 import { lookupKind } from "./core/rpgData/lookup";
 import { makeRpgIdField, makeRpgIdFieldWithXParam } from "./rpgDataKind";
@@ -10,7 +10,7 @@ interface TestCase {
   caseName: string;
   input: RpgDataIdParam | SystemDataIdParam;
   expected: JSONSchemaType<number>;
-  expectedXParam: X_RmmzParamInput<SourceIdentifier>;
+  expectedXParam: X_RmmzParam<SourceIdentifier>;
 }
 
 const testFn = ({ input, expected, caseName }: TestCase) => {

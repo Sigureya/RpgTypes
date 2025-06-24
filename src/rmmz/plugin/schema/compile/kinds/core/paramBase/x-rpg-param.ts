@@ -1,36 +1,45 @@
 import type { JSONSchemaType } from "ajv";
 import type { ParamBase } from "./paramBase";
 
+// JSONSchemaの拡張データ型。
+// 拡張プロパティはx-**なので、型名も同様にX_**とする
+
 export const X_RPG_PARM = "x-rpg-param" as const;
 export interface X_Param {
   [X_RPG_PARM]: X_RmmzParamBase;
 }
 
 export type JSONSchemaTypeWithRpgParam<V, X = object> = JSONSchemaType<V> & {
-  [X_RPG_PARM]: X_RmmzParamInput<X>;
+  [X_RPG_PARM]: X_RmmzParam<X>;
 };
 
-type ExtractXParam<T extends ParamBase> = Omit<T, "default" | keyof ParamBase>;
+type ExtractParamData<T extends ParamBase> = Omit<
+  T,
+  "default" | keyof ParamBase
+>;
 
-export interface X_ParamGGG<T extends ParamBase> {
+export interface X_ParamData<T extends ParamBase> {
   kind: T extends { kind: infer K } ? K : string;
   parent?: string | null;
-  data: ExtractXParam<T>;
+  data: ExtractParamData<T>;
 }
 
 export interface X_RmmzParamBase {
-  parent?: string | null;
   kind: string;
+  parent?: string | null;
   data: object;
 }
 
-export interface X_RmmzParamInput<T, Kind extends string = string> {
-  parent?: string | null;
+export interface X_RmmzParam<T, Kind extends string = string> {
   kind: Kind;
+  parent?: string | null;
   data: T;
 }
 
-export const xparamBaseData = <T extends ParamBase, D extends ExtractXParam<T>>(
+export const xparamBaseData = <
+  T extends ParamBase,
+  D extends ExtractParamData<T>
+>(
   param: T,
   data: D
 ) =>

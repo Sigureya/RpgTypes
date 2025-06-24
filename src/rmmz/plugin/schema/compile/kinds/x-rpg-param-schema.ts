@@ -2,9 +2,9 @@ import type { JSONSchemaType } from "ajv";
 import type { SourceIdentifier } from "src/namedItemSource";
 import type { DiscriminatedUnionSchemaType3 } from "src/templates/discriminator/discriminator3";
 import type {
-  X_ParamGGG,
+  X_ParamData,
   X_RmmzParamBase,
-  X_RmmzParamInput,
+  X_RmmzParam,
 } from "./core/paramBase/x-rpg-param";
 import type {
   BooleanParam,
@@ -16,13 +16,13 @@ type UnionSchema = DiscriminatedUnionSchemaType3<
   X_RmmzParamBase,
   string,
   "kind",
-  | X_ParamGGG<BooleanParam>
+  | X_ParamData<BooleanParam>
   | NumberKind2
-  | X_ParamGGG<StringParam>
-  | X_ParamGGG<SelectParam>
+  | X_ParamData<StringParam>
+  | X_ParamData<SelectParam>
   | DataXX
 >;
-type DataXX = X_RmmzParamInput<SourceIdentifier, "dataId">;
+type DataXX = X_RmmzParam<SourceIdentifier, "dataId">;
 type NumberKind2 = {
   parent?: string | null;
   kind: "number";
@@ -99,7 +99,7 @@ const stringKind = (nullablString: NullableString) =>
       parent: nullablString,
       data: { type: "object", properties: {} },
     },
-  } as const satisfies JSONSchemaType<X_ParamGGG<StringParam>>);
+  } as const satisfies JSONSchemaType<X_ParamData<StringParam>>);
 
 const booleanKind = (nullablString: NullableString) =>
   ({
@@ -117,7 +117,7 @@ const booleanKind = (nullablString: NullableString) =>
         },
       },
     },
-  } as const satisfies JSONSchemaType<X_ParamGGG<BooleanParam>>);
+  } as const satisfies JSONSchemaType<X_ParamData<BooleanParam>>);
 
 const dataIdKind = () => {
   const dataIdtext = { type: "string", maxLength: 100 } as const;
@@ -169,4 +169,4 @@ const selectKind = () =>
         },
       },
     },
-  } as const satisfies JSONSchemaType<X_ParamGGG<SelectParam>>);
+  } as const satisfies JSONSchemaType<X_ParamData<SelectParam>>);
