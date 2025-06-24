@@ -1,34 +1,33 @@
 import type { JSONSchemaType } from "ajv";
 import type { SourceIdentifier } from "src/namedItemSource";
 import type { DiscriminatedUnionSchemaType3 } from "src/templates/discriminator/discriminator3";
-import type { X_MetaParamCore_Number } from "../../core/primitive/numbers";
-import { optionsSchema } from "../../core/primitive/select";
-import type {
-  X_Param_DataId,
-  X_Param_StringInput,
-} from "../../core/primitive/x-rpg-param";
 import type {
   X_ParamGGG,
+  X_RmmzParamBase,
   X_RmmzParamInput,
 } from "./core/paramBase/x-rpg-param";
-import type { BooleanParam, SelectParam } from "./core/primitiveParams";
+import type {
+  BooleanParam,
+  SelectParam,
+  StringParam,
+} from "./core/primitiveParams";
 
 type UnionSchema = DiscriminatedUnionSchemaType3<
-  BaseKind,
+  X_RmmzParamBase,
   string,
   "kind",
   | X_ParamGGG<BooleanParam>
-  | X_Param_DataId
-  | NumberKind
-  | X_Param_StringInput
-  | SelectKind
+  | NumberKind2
+  | X_ParamGGG<StringParam>
+  | X_ParamGGG<SelectParam>
+  | DataXX
 >;
-
-interface BaseKind {
-  kind: string;
+type DataXX = X_RmmzParamInput<SourceIdentifier, "dataId">;
+type NumberKind2 = {
   parent?: string | null;
-  data?: unknown;
-}
+  kind: "number";
+  data: { digit?: number };
+};
 
 interface NullableString {
   type: "string";
@@ -62,7 +61,7 @@ export const makeSchema3 = () => {
       selectKind(),
       booleanKind(nullablString),
     ],
-  } satisfies UnionSchema;
+  } as const satisfies UnionSchema;
 };
 
 const numberKind = () =>
@@ -85,12 +84,7 @@ const numberKind = () =>
         },
       },
     },
-  } satisfies JSONSchemaType<{
-    parent?: string | null;
-    kind: "number";
-    data: { digit?: number };
-  }>);
-type NumberKind = X_RmmzParamInput<X_MetaParamCore_Number, "number">;
+  } satisfies JSONSchemaType<NumberKind2>);
 
 const stringKind = (nullablString: NullableString) =>
   ({
@@ -103,8 +97,9 @@ const stringKind = (nullablString: NullableString) =>
         enum: ["string", "multiline_string"],
       },
       parent: nullablString,
+      data: { type: "object", properties: {} },
     },
-  } satisfies JSONSchemaType<X_Param_StringInput>);
+  } as const satisfies JSONSchemaType<X_ParamGGG<StringParam>>);
 
 const booleanKind = (nullablString: NullableString) =>
   ({
@@ -122,7 +117,7 @@ const booleanKind = (nullablString: NullableString) =>
         },
       },
     },
-  } satisfies JSONSchemaType<X_ParamGGG<BooleanParam>>);
+  } as const satisfies JSONSchemaType<X_ParamGGG<BooleanParam>>);
 
 const dataIdKind = () => {
   const dataIdtext = { type: "string", maxLength: 100 } as const;
@@ -132,7 +127,7 @@ const dataIdKind = () => {
     additionalProperties: false,
     properties: {
       kind: { type: "string", const: "dataId" },
-      parent: { type: "string", maxLength: 100, default: "" },
+      parent: { type: "string", maxLength: 100, default: "", nullable: true },
       data: {
         additionalProperties: false,
         type: "object",
@@ -144,11 +139,11 @@ const dataIdKind = () => {
         },
       } satisfies JSONSchemaType<SourceIdentifier>,
     },
-  } satisfies JSONSchemaType<X_Param_DataId>;
+  } as const satisfies JSONSchemaType<DataXX>;
 };
 
-const selectKind = () => {
-  return {
+const selectKind = () =>
+  ({
     type: "object",
     required: ["kind", "data"],
     additionalProperties: false,
@@ -159,18 +154,19 @@ const selectKind = () => {
         type: "object",
         required: ["options"],
         properties: {
-          options: optionsSchema() satisfies JSONSchemaType<
-            { value: string; option: string }[]
-          >,
+          options: {
+            type: "array",
+            items: {
+              type: "object",
+              properties: {
+                value: { type: "string", maxLength: 100 },
+                option: { type: "string", maxLength: 100 },
+              },
+              required: ["value", "option"],
+              additionalProperties: false,
+            },
+          },
         },
       },
     },
-  } satisfies JSONSchemaType<X_ParamGGG<SelectParam>>;
-};
-interface SelectKind {
-  kind: "select";
-  parent?: string | null;
-  data: {
-    options: { value: string; option: string }[];
-  };
-}
+  } as const satisfies JSONSchemaType<X_ParamGGG<SelectParam>>);
