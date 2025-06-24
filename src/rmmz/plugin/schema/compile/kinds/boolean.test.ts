@@ -4,7 +4,7 @@ import { compileBooleanField, compileBooleanFieldWithXParam } from "./boolean";
 import {
   compilePrimitiveFiled,
   compilePrimitiveFiledWithXParam,
-} from "./compileFiled";
+} from "./compileField";
 import type { JSONSchemaTypeWithRpgParam } from "./core/paramBase/x-rpg-param";
 import type { BooleanParam } from "./core/primitiveParams";
 import type { AnyParamSchema } from "./pluginMeta/anyParamSchema";

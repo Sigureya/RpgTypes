@@ -1,5 +1,5 @@
 import type { JSONSchemaType } from "ajv";
-import { compilePrimitiveFiled } from "../compileFiled";
+import { compilePrimitiveFiled } from "../compileField";
 import { reduceParams } from "./paramsReduce";
 import type { PluginStructType } from "./pluginEnties";
 import type { PrimitiveStructBase } from "./pluginSchemaType";
