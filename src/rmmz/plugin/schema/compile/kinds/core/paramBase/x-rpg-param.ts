@@ -3,19 +3,22 @@ import type { ParamBase } from "./paramBase";
 
 export const X_RPG_PARM = "x-rpg-param" as const;
 export interface X_Param {
-  [X_RPG_PARM]: X_RmmzParamBaee;
+  [X_RPG_PARM]: X_RmmzParamBase;
 }
 
 export type JSONSchemaTypeWithRpgParam<V, X = object> = JSONSchemaType<V> & {
   [X_RPG_PARM]: X_RmmzParamInput<X>;
 };
 
-export type ExtractXParam<T extends ParamBase> = Omit<
-  T,
-  "default" | keyof ParamBase
->;
+type ExtractXParam<T extends ParamBase> = Omit<T, "default" | keyof ParamBase>;
 
-export interface X_RmmzParamBaee {
+export interface X_ParamGGG<T extends ParamBase> {
+  kind: T extends { kind: infer K } ? K : string;
+  parent?: string | null;
+  data: ExtractXParam<T>;
+}
+
+export interface X_RmmzParamBase {
   parent?: string | null;
   kind: string;
   data: object;
