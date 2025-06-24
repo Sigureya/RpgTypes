@@ -30,3 +30,21 @@ const tokenizeLine = (line: string): Token | null => {
   );
   return match ? { keyword: match[1], value: match[2].trim() } : null;
 };
+const isHead = (text: string): boolean => {
+  return text.startsWith("@command") || text.startsWith("@param");
+};
+export const splitByContext = (text: string): string[] => {
+  const lines = text.split(/\r?\n/);
+  return lines
+    .reduce<string[]>((acc, line) => {
+      // 区切りとなる行（@command で始まる）
+      if (isHead(line.trim())) {
+        acc.push(line);
+      } else if (acc.length > 0) {
+        acc[acc.length - 1] += "\n" + line;
+      }
+      return acc;
+    }, [])
+    .map((s) => s.trim())
+    .filter(Boolean);
+};
