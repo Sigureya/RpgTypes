@@ -1,8 +1,5 @@
 import { withTexts } from "./core/paramBase/basicMetaField";
-import type {
-  X_RPG_PARM,
-  X_RmmzParamInput,
-} from "./core/paramBase/x-rpg-param";
+import type { X_RPG_PARM, X_RmmzParam } from "./core/paramBase/x-rpg-param";
 import { xparamBaseData } from "./core/paramBase/x-rpg-param";
 import type { StructRefParam } from "./core/primitiveParams";
 
@@ -18,7 +15,7 @@ export const makeStructRef = (ref: StructRefParam): JSONSchemaStructRef => ({
 });
 
 type SchemaType = JSONSchemaStructRef & {
-  [X_RPG_PARM]: X_RmmzParamInput<{ struct: string }>;
+  [X_RPG_PARM]: X_RmmzParam<{ struct: string }>;
 };
 
 export const makeStructRefWithXParam = (ref: StructRefParam) =>

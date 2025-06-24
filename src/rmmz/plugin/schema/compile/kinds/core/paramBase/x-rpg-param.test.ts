@@ -2,7 +2,7 @@ import { describe, test, expect } from "vitest";
 import type { ParamBase } from "./paramBase";
 import type {
   JSONSchemaTypeWithRpgParam,
-  X_RmmzParamBaee,
+  X_RmmzParamBase,
   X_Param,
 } from "./x-rpg-param";
 import { X_RPG_PARM, xparamBaseData } from "./x-rpg-param";
@@ -35,7 +35,7 @@ describe("X_RPG_PARM", () => {
       kind: "test-kind",
       parent: "test-parent",
       data: data,
-    } satisfies X_RmmzParamBaee);
+    } satisfies X_RmmzParamBase);
   });
 });
 
@@ -52,7 +52,7 @@ describe("JSONSchemaTypeWithRpgParam", () => {
       [X_RPG_PARM]: {
         kind: "x-rpg-param-test",
         data: {},
-      } satisfies X_RmmzParamBaee,
+      } satisfies X_RmmzParamBase,
     };
     expect(schema[X_RPG_PARM].kind).toBe("x-rpg-param-test");
   });
