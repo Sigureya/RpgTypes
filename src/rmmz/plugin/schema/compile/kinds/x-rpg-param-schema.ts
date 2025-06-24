@@ -5,14 +5,14 @@ import type {
   X_ParamData,
   X_RmmzParamBase,
   X_RmmzParam,
-} from "./paramBase/x-rpg-param";
+} from "./core/paramBase/x-rpg-param";
 import type {
   BooleanParam,
   ComboParam,
   NumberParam,
   SelectParam,
   StringParam,
-} from "./primitiveParams";
+} from "./core/primitiveParams";
 
 type UnionSchema = DiscriminatedUnionSchemaType3<
   X_RmmzParamBase,
