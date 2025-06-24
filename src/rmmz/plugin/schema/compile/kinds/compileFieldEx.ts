@@ -2,7 +2,7 @@ import type { JSONSchemaType } from "ajv";
 import {
   compilePrimitiveFiledWithXParam,
   compilePrimitiveFiled,
-} from "./compileFiled";
+} from "./compileField";
 import type { StructCompileLog } from "./compileLog";
 import type {
   StructParam,

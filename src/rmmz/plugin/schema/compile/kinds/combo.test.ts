@@ -4,7 +4,7 @@ import { compileComboField, compileComboFieldWithXparam } from "./combo";
 import {
   compilePrimitiveFiled,
   compilePrimitiveFiledWithXParam,
-} from "./compileFiled";
+} from "./compileField";
 import type { JSONSchemaTypeWithRpgParam } from "./core/paramBase/x-rpg-param";
 import type { ComboParam } from "./core/primitiveParams";
 import type { AnyParamSchema } from "./pluginMeta/anyParamSchema";
