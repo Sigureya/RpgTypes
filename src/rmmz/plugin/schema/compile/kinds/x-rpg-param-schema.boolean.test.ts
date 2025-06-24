@@ -1,10 +1,6 @@
 import { describe, test, expect } from "vitest";
 import Ajv from "ajv";
-import type {
-  X_Param_BooleanInput,
-  X_Param_Boolean,
-} from "../../core/primitive/x-rpg-param";
-import type { X_ParamData, X_RmmzParam } from "./core/paramBase/x-rpg-param";
+import type { X_ParamData } from "./core/paramBase/x-rpg-param";
 import type { BooleanParam } from "./core/primitiveParams";
 import { makeSchema3 } from "./x-rpg-param-schema";
 const makeValidator = () => {
@@ -12,6 +8,8 @@ const makeValidator = () => {
   const ajv = new Ajv({ discriminator: true, strict: true });
   return ajv.compile(schema);
 };
+
+type X_Param_Boolean = X_ParamData<BooleanParam>;
 
 describe("metaSchema - boolean", () => {
   test("valid boolean param without parent", () => {
@@ -27,7 +25,7 @@ describe("metaSchema - boolean", () => {
   });
   test("valid boolean param with parent", () => {
     const validate = makeValidator();
-    const bool: X_Param_BooleanInput = {
+    const bool: X_ParamData<BooleanParam> = {
       kind: "boolean",
       data: {
         on: "on",
@@ -41,7 +39,7 @@ describe("metaSchema - boolean", () => {
   describe("Invalid case", () => {
     const validate = makeValidator();
     test("invalid: off is not a string", () => {
-      const invalidBool: Record<keyof X_Param_Boolean, unknown> = {
+      const invalidBool: Record<keyof X_ParamData<BooleanParam>, unknown> = {
         kind: "boolean",
         data: {
           on: "on",
@@ -65,7 +63,7 @@ describe("metaSchema - boolean", () => {
     });
     test("invalid: missing on kind", () => {
       const validate = makeValidator();
-      const invalidBool: Partial<X_Param_BooleanInput> = {
+      const invalidBool: Partial<X_Param_Boolean> = {
         data: {
           on: "on",
           off: "off",
