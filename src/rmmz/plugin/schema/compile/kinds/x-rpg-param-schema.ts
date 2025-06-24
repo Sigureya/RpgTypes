@@ -1,21 +1,27 @@
 import type { JSONSchemaType } from "ajv";
 import type { SourceIdentifier } from "src/namedItemSource";
 import type { DiscriminatedUnionSchemaType3 } from "src/templates/discriminator/discriminator3";
-import type { X_MetaParamCore_Boolean } from "../../core/primitive/boolean";
 import type { X_MetaParamCore_Number } from "../../core/primitive/numbers";
 import { optionsSchema } from "../../core/primitive/select";
 import type {
   X_Param_DataId,
   X_Param_StringInput,
 } from "../../core/primitive/x-rpg-param";
-import type { X_RmmzParamInput } from "./core/paramBase/x-rpg-param";
-import type { BooleanParam } from "./core/primitiveParams";
+import type {
+  X_ParamGGG,
+  X_RmmzParamInput,
+} from "./core/paramBase/x-rpg-param";
+import type { BooleanParam, SelectParam } from "./core/primitiveParams";
 
 type UnionSchema = DiscriminatedUnionSchemaType3<
   BaseKind,
   string,
   "kind",
-  BooleanParam | X_Param_DataId | NumberKind | X_Param_StringInput | SelectKind
+  | X_ParamGGG<BooleanParam>
+  | X_Param_DataId
+  | NumberKind
+  | X_Param_StringInput
+  | SelectKind
 >;
 
 interface BaseKind {
@@ -54,6 +60,7 @@ export const makeSchema3 = () => {
       numberKind(),
       dataIdKind(),
       selectKind(),
+      booleanKind(nullablString),
     ],
   } satisfies UnionSchema;
 };
@@ -78,7 +85,11 @@ const numberKind = () =>
         },
       },
     },
-  } satisfies JSONSchemaType<NumberKind>);
+  } satisfies JSONSchemaType<{
+    parent?: string | null;
+    kind: "number";
+    data: { digit?: number };
+  }>);
 type NumberKind = X_RmmzParamInput<X_MetaParamCore_Number, "number">;
 
 const stringKind = (nullablString: NullableString) =>
@@ -111,8 +122,7 @@ const booleanKind = (nullablString: NullableString) =>
         },
       },
     },
-  } satisfies JSONSchemaType<BooelanKind>);
-type BooelanKind = X_RmmzParamInput<X_MetaParamCore_Boolean, "boolean">;
+  } satisfies JSONSchemaType<X_ParamGGG<BooleanParam>>);
 
 const dataIdKind = () => {
   const dataIdtext = { type: "string", maxLength: 100 } as const;
@@ -155,9 +165,8 @@ const selectKind = () => {
         },
       },
     },
-  } satisfies JSONSchemaType<SelectKind>;
+  } satisfies JSONSchemaType<X_ParamGGG<SelectParam>>;
 };
-
 interface SelectKind {
   kind: "select";
   parent?: string | null;
