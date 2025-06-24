@@ -1,5 +1,5 @@
 import { StructCompileLog } from './compileLog';
-import { StructParam } from './plugin';
+import { StructParam } from './core/pluginEntriesEx';
 import { AnyParamSchema } from './pluginMeta/anyParamSchema';
 import { CompileContext } from './pluginMeta/compileOption';
 export declare const compileStructDetail: <T>(path: string, title: string, props: Record<string, StructParam>, ctx: CompileContext) => {

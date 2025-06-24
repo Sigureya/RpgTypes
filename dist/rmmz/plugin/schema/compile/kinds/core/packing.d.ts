@@ -1,7 +1,8 @@
 import { JSONSchemaType } from 'ajv';
-import { PrimitiveStructBase, PrimitiveStructType } from './pluginSchemaType';
+import { PluginStructType } from './pluginEnties';
+import { PrimitiveStructBase } from './pluginSchemaType';
 export type TypePackage<T extends Record<string, object>> = {
-    [K in keyof T]: PrimitiveStructType<T[K]>;
+    [K in keyof T]: PluginStructType<T[K]>;
 };
 export declare const compileFromStructArray: (list: PrimitiveStructBase[]) => Record<string, JSONSchemaType<object>>;
 export declare const compilePrimitiveStruct: (struct: PrimitiveStructBase) => {

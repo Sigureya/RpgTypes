@@ -1,7 +1,7 @@
-import { ParamBase } from './core/paramBase';
-import { StructParamPrimitive } from './core/primitiveParams';
-export type StructParam = StructParamPrimitive | KindOfStruct<object> | KindOfStructArray<object>;
-export interface KindOfStructArray<T extends object> extends PluginStruct<T>, ParamBase {
+import { ParamBase } from './paramBase';
+import { StructParamPrimitive } from './primitiveParams';
+export type StructParam = StructParamPrimitive | StructDefParam<object> | StructArrayDefParam<object>;
+export interface StructArrayDefParam<T extends object> extends PluginStructEx<T>, ParamBase {
     kind: "struct_def[]";
     default: object[];
     struct: string;
@@ -9,14 +9,14 @@ export interface KindOfStructArray<T extends object> extends PluginStruct<T>, Pa
         [K in keyof T]: StructParam;
     };
 }
-export interface KindOfStruct<T extends object> extends PluginStruct<T>, ParamBase {
+export interface StructDefParam<T extends object> extends PluginStructEx<T>, ParamBase {
     kind: "struct_def";
     struct: string;
     params: {
         [K in keyof T]: StructParam;
     };
 }
-export interface PluginStruct<T extends object> {
+export interface PluginStructEx<T extends object> {
     struct: string;
     params: {
         [K in keyof T]: StructParam;

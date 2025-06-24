@@ -1,6 +1,6 @@
 import { JSONSchemaType } from 'ajv';
 import { Schema } from 'jsonschema';
-import { KindOfStruct, StructParam } from './plugin';
+import { StructDefParam, StructParam } from './core/pluginEntriesEx';
 export interface CompileResult<T extends object> {
     schema: JSONSchemaType<T>;
     logs: StructCompileLog[];
@@ -13,7 +13,7 @@ export interface StructCompileLog<Data extends StructParam = StructParam> {
 }
 export interface StructCompileLogObjectEntry<T extends object> {
     path: string;
-    data: KindOfStruct<T>;
+    data: StructDefParam<T>;
     schema: JSONSchemaType<T>;
     structName: string;
 }
