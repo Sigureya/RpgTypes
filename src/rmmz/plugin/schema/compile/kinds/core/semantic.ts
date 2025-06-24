@@ -1,29 +1,22 @@
-import type { ContextUnion, Context_PluginParam } from "./parseContext";
+import type { Context2 } from "./parseContext";
 import type { Token } from "./toknize/toknize";
-
-export const semanticAnalysis = (tokens: Token[]): ContextUnion[] => {
-  // Perform semantic analysis on the tokens
-  // This is a placeholder implementation
-  return [];
+export const semanticAnalysis = (x: unknown) => ({});
+// トークン列をContext2[]に変換
+export const sliceToken = (tokens: ReadonlyArray<Token>): Context2[] => {
+  const groups = tokens.reduce<Context2[]>(
+    (acc, token) => sliceTokenStep(acc, token),
+    []
+  );
+  return groups;
 };
-
-export const sliceToken = (tokens: ReadonlyArray<Token>): Token[][] => {
-  return tokens.reduce<Token[][]>(sliceTokenReducer, []);
-};
-
-// @param, @command, @struct などの区切りでトークンを分割
-// sliceToken用: reduceの1ステップを関数化
-const sliceTokenReducer = (acc: Token[][], token: Token): Token[][] => {
-  if (isHead(token) && acc.length > 0 && acc[acc.length - 1].length > 0) {
-    // 新しいグループを開始
-    return [...acc, [token]];
+const sliceTokenStep = (acc: Context2[], token: Token): Context2[] => {
+  if (isHead(token)) {
+    return [...acc, { head: token, tokens: [] }];
   }
-  // 既存グループに追加
-  if (acc.length === 0) {
-    return [[token]];
+  if (acc.length > 0) {
+    acc[acc.length - 1].tokens.push(token);
   }
-  const last = acc[acc.length - 1];
-  return [...acc.slice(0, -1), [...last, token]];
+  return acc;
 };
 
 const isHead = (token: Token) =>

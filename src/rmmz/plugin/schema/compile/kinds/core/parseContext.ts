@@ -1,5 +1,6 @@
 import type { PluginCommandType, PluginStructType } from "./pluginEnties";
 import type { PrimitiveParams } from "./pluginSchemaType";
+import type { Token } from "./toknize/toknize";
 
 export type ContextUnion =
   | Context_PluginCommand
@@ -17,4 +18,9 @@ export interface Context_PluginParam {
 
 export interface Context_PluginStruct extends PluginStructType<object> {
   context: "struct";
+}
+
+export interface Context2 {
+  head: Token;
+  tokens: Token[];
 }
