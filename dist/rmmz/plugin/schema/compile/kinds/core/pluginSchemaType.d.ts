@@ -3,10 +3,6 @@ export interface PrimitiveStructBase {
     struct: string;
     params: Record<string, StructParamPrimitive>;
 }
-export type PrimitiveStructType<T extends object> = {
-    struct: string;
-    params: PrimitiveParams<T>;
-};
 export type PrimitiveParams<T extends object> = {
     [K in Extract<keyof T, string>]: PluginSchemaType<T[K]>;
 };

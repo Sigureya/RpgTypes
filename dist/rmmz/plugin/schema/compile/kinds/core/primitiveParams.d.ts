@@ -1,7 +1,6 @@
 import { ParamBase } from './paramBase';
 import { DataKind_RpgUnion, DataKind_SystemUnion } from './rpgData/rpgDataTypesNames';
 export type StructParamPrimitive = BooleanParam | NumberParam | NumberArrayParam | RpgDataIdParam | RpgDataIdArrayParam | ComboParam | SelectParam | StringParam | StringArrayParam | SystemDataIdParam | FileParam | FileArrayParam | StructRefParam | StructArrayRefParam;
-export type PrimitiveParams<K extends string = string> = Record<K, StructParamPrimitive>;
 export interface RpgDataIdParam extends ParamBase {
     kind: DataKind_RpgUnion;
     default: number;
