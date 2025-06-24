@@ -6,24 +6,27 @@ import type {
   X_RmmzParamBase,
   X_RmmzParam,
 } from "./paramBase/x-rpg-param";
-import type { BooleanParam, SelectParam, StringParam } from "./primitiveParams";
+import type {
+  BooleanParam,
+  ComboParam,
+  NumberParam,
+  SelectParam,
+  StringParam,
+} from "./primitiveParams";
 
 type UnionSchema = DiscriminatedUnionSchemaType3<
   X_RmmzParamBase,
   string,
   "kind",
+  | X_ParamNumber
+  | X_ParamDataId
   | X_ParamData<BooleanParam>
-  | NumberKind2
   | X_ParamData<StringParam>
   | X_ParamData<SelectParam>
-  | DataXX
+  | X_ParamData<ComboParam>
 >;
-type DataXX = X_RmmzParam<SourceIdentifier, "dataId">;
-type NumberKind2 = {
-  parent?: string | null;
-  kind: "number";
-  data: { digit?: number };
-};
+type X_ParamDataId = X_RmmzParam<SourceIdentifier, "dataId">;
+type X_ParamNumber = X_ParamData<Omit<NumberParam, "min" | "max">>;
 
 interface NullableString {
   type: "string";
@@ -80,7 +83,7 @@ const numberKind = () =>
         },
       },
     },
-  } satisfies JSONSchemaType<NumberKind2>);
+  } satisfies JSONSchemaType<X_ParamNumber>);
 
 const stringKind = (nullablString: NullableString) =>
   ({
@@ -135,7 +138,7 @@ const dataIdKind = () => {
         },
       } satisfies JSONSchemaType<SourceIdentifier>,
     },
-  } as const satisfies JSONSchemaType<DataXX>;
+  } as const satisfies JSONSchemaType<X_ParamDataId>;
 };
 
 const selectKind = () =>
