@@ -25,13 +25,15 @@ describe("sliceToken", () => {
           { keyword: "default", value: "123" },
         ],
       },
+      {
+        head: { keyword: "command", value: "cmd" },
+        tokens: [
+          { keyword: "text", value: "name" },
+          { keyword: "arg", value: "arg1" },
+        ],
+      },
     ];
-    const src: Token[] = [
-      expected[0].head,
-      ...expected[0].tokens,
-      expected[1].head,
-      ...expected[1].tokens,
-    ];
+    const src: Token[] = expected.flatMap((e) => [e.head, ...e.tokens]);
 
     const result: Context2[] = sliceToken(src);
     expect(result).toEqual(expected);
