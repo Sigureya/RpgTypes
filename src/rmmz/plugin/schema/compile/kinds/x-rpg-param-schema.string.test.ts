@@ -1,7 +1,6 @@
 import { describe, test, expect } from "vitest";
 import Ajv from "ajv";
-import { makeSchema3 } from "./metaSchema";
-
+import { makeSchema3 } from "./x-rpg-param-schema";
 interface X_MetaParam_Shared {
   kind: string;
   parent?: string | null;
