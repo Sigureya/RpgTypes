@@ -1,6 +1,6 @@
 import { describe, test, expect } from "vitest";
 import Ajv from "ajv";
-import type { X_Param_Number } from "../../core/primitive/x-rpg-param";
+import type { X_ParamNumber } from "./x-rpg-param-schema";
 import { makeSchema3 } from "./x-rpg-param-schema";
 
 const makeValidator = () => {
@@ -10,9 +10,9 @@ const makeValidator = () => {
 };
 
 describe("Number Schema Tests", () => {
-  test("", () => {
+  test("valid number param", () => {
     const validate = makeValidator();
-    const num: X_Param_Number = {
+    const num: X_ParamNumber = {
       kind: "number",
       parent: "parentId",
       data: {

@@ -1,12 +1,8 @@
 import { describe, test, expect } from "vitest";
 import Ajv from "ajv";
 import type { SourceIdentifier } from "src/namedItemSource";
-import type {
-  X_Param_DataId,
-  X_Param_DataIdInput,
-  X_ParamInput_Union,
-} from "../../core/primitive/x-rpg-param";
 import type { X_RmmzParam } from "./core/paramBase/x-rpg-param";
+import type { X_ParamDataId } from "./x-rpg-param-schema";
 import { makeSchema3 } from "./x-rpg-param-schema";
 
 const makeValidator = () => {
@@ -17,39 +13,39 @@ const makeValidator = () => {
 
 describe("", () => {
   const validator = makeValidator();
-  test("", () => {
-    const validData: X_Param_DataId = {
+  test("valid dataId param", () => {
+    const validData: X_ParamDataId = {
       kind: "dataId",
       parent: "",
       data: { author: "a", module: "m", kind: "k" },
     };
     expect(validData).toSatisfy(validator);
   });
-  test("", () => {
-    const invalidData: X_Param_DataIdInput = {
+  test("valid dataId param", () => {
+    const validData: X_ParamDataId = {
       kind: "dataId",
       data: { author: "a", module: "m", kind: "k" },
     };
-    expect(invalidData).toSatisfy(validator);
+    expect(validData).toSatisfy(validator);
   });
-  test.skip("", () => {
-    const invalidData: X_Param_DataIdInput = {
+  test("", () => {
+    const validData: X_ParamDataId = {
       kind: "dataId",
       data: { author: "a", module: "m", kind: "k" },
       parent: null,
     };
-    expect(invalidData).toSatisfy(validator);
+    expect(validData).toSatisfy(validator);
   });
-  test.skip("", () => {
-    const invalidData: X_Param_DataIdInput = {
+  test("", () => {
+    const validData: X_ParamDataId = {
       kind: "dataId",
       data: { author: "a", module: "m", kind: "k" },
       parent: undefined,
     };
-    expect(invalidData).toSatisfy(validator);
+    expect(validData).toSatisfy(validator);
   });
   test("", () => {
-    const invalidData: X_Param_DataId = {
+    const invalidData: X_ParamDataId = {
       kind: "dataId",
       parent: "p",
       data: { author: "a", module: "m", kind: "k" },
@@ -90,7 +86,7 @@ describe("", () => {
 describe("DataId Schema Tests", () => {
   test("", () => {
     const validate = makeValidator();
-    const dataId: Partial<X_Param_DataId> = {
+    const dataId: Partial<X_ParamDataId> = {
       kind: "dataId",
       data: {
         author: "author",
@@ -102,7 +98,7 @@ describe("DataId Schema Tests", () => {
   });
   test("", () => {
     const validate = makeValidator();
-    const dataId: X_ParamInput_Union = {
+    const dataId: X_ParamDataId = {
       kind: "dataId",
       data: {
         author: "author",
