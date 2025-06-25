@@ -28,6 +28,11 @@ export interface PluginCommandArgContext {
   args: Token[];
 }
 
+export interface ParamToken {
+  param: string;
+  attributes: Token[];
+}
+
 export interface ArgToken {
   arg: string;
   attributes: Token[];
