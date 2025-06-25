@@ -26,6 +26,7 @@ const isHead = (token: Token) =>
   token.keyword === "param" ||
   token.keyword === "command" ||
   token.keyword === "struct";
+// args抽出ロジックを独立関数化
 
 export const pluginCommandContext = (
   context: Context2
@@ -33,29 +34,7 @@ export const pluginCommandContext = (
   const desc = context.tokens.find((t) => t.keyword === "desc")?.value;
   const text = context.tokens.find((t) => t.keyword === "text")?.value;
 
-  // argsを抽出
-  const args: ArgToken[] = [];
-  let i = 0;
-  while (i < context.tokens.length) {
-    const t = context.tokens[i];
-    if (t.keyword === "arg") {
-      const argName = t.value;
-      // 次の"arg"または終端までをこのargのtokenとする
-      const tokenGroup: Token[] = [];
-      let j = i + 1;
-      while (j < context.tokens.length && context.tokens[j].keyword !== "arg") {
-        tokenGroup.push(context.tokens[j]);
-        j++;
-      }
-      args.push({
-        arg: argName,
-        token: tokenGroup,
-      });
-      i = j;
-    } else {
-      i++;
-    }
-  }
+  const args: ArgToken[] = extractArgs(context.tokens);
 
   return {
     command: context.head.value,
@@ -63,4 +42,38 @@ export const pluginCommandContext = (
     ...(text ? { text } : {}),
     ...(desc ? { desc } : {}),
   };
+};
+
+const extractArgs = (tokens: ReadonlyArray<Token>): ArgToken[] => {
+  type State = { args: ArgToken[]; current: ArgToken | null };
+  const result = tokens.reduce<State>(extractArgsReducer, {
+    args: [],
+    current: null,
+  });
+
+  // 最後のargを追加
+  if (result.current) {
+    result.args.push(result.current);
+  }
+  return result.args;
+};
+
+const extractArgsReducer = (
+  state: { args: ArgToken[]; current: ArgToken | null },
+  t: Token
+): { args: ArgToken[]; current: ArgToken | null } => {
+  if (t.keyword === "arg") {
+    if (state.current) {
+      state.args.push(state.current);
+    }
+    return {
+      args: state.args,
+      current: { arg: t.value, token: [] },
+    };
+  }
+  if (state.current) {
+    // 現在のargにトークン追加
+    state.current.token.push(t);
+  }
+  return state;
 };
