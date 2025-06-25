@@ -26,5 +26,5 @@ export interface PluginCommandArgContext {
 
 export interface ArgToken {
   arg: string;
-  token: Token[];
+  attributes: Token[];
 }

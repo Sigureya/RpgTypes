@@ -58,14 +58,14 @@ test("pluginCommandContext", () => {
     args: [
       {
         arg: "arg1",
-        token: [
+        attributes: [
           { keyword: "type", value: "number" },
           { keyword: "default", value: "123" },
         ],
       },
       {
         arg: "arg2",
-        token: [
+        attributes: [
           { keyword: "type", value: "string" },
           { keyword: "default", value: "abc" },
         ],
