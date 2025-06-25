@@ -1,4 +1,4 @@
-import { test, expect } from "vitest";
+import { test, expect, describe } from "vitest";
 import { sliceToken, pluginCommandContext } from "./semantic";
 import type { ParsingContext, PluginCommandTokens, Token } from "./types/token";
 
@@ -49,9 +49,8 @@ test("sliceToken", () => {
   const result: ParsingContext[] = sliceToken(src);
   expect(result).toEqual(expected);
 });
-
-test("pluginCommandContext", () => {
-  const expected: PluginCommandTokens = {
+describe("pluginCommandContext", () => {
+  const expectedCommand: PluginCommandTokens = {
     command: "save",
     desc: "write Save File",
     text: "writeSave",
@@ -72,6 +71,8 @@ test("pluginCommandContext", () => {
       },
     ],
   };
-  const result: PluginCommandTokens = pluginCommandContext(mockCommandSave);
-  expect(result).toEqual(expected);
+  test("valid context", () => {
+    const result: PluginCommandTokens = pluginCommandContext(mockCommandSave);
+    expect(result).toEqual(expectedCommand);
+  });
 });
