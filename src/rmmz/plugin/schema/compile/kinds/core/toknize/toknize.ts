@@ -1,12 +1,4 @@
-export interface Token {
-  keyword: string;
-  value: string;
-}
-
-export interface OptionItem {
-  option: string;
-  value: string;
-}
+import type { Token } from "./types";
 
 export const tokenize = (text: string): Token[] => {
   const lines = text.split(/\r?\n/);
@@ -30,3 +22,5 @@ const tokenizeLine = (line: string): Token | null => {
   );
   return match ? { keyword: match[1], value: match[2].trim() } : null;
 };
+// グループにまとめるが、具体的なparamの情報無しで構築する。
+// headのcontextと未整理のグループとして処理する
