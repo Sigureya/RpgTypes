@@ -21,10 +21,11 @@ describe("mapKeywords", () => {
       age: (value): number => parseInt(value, 10),
       isActive: (value): boolean => value === "true",
     });
-    expect(result).toEqual({
+    const expected: Person = {
       name: "bob",
       age: 30,
       isActive: true,
-    });
+    };
+    expect(result).toEqual(expected);
   });
 });
