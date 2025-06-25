@@ -11,6 +11,10 @@ describe("tokenize", () => {
       "@default false",
       "@on enabled",
       "@off disabled",
+
+      "@param num",
+      "@type number",
+      "@default 0",
     ];
     const expected: Token[] = [
       { keyword: "param", value: "bool" },
@@ -19,6 +23,10 @@ describe("tokenize", () => {
       { keyword: "default", value: "false" },
       { keyword: "on", value: "enabled" },
       { keyword: "off", value: "disabled" },
+
+      { keyword: "param", value: "num" },
+      { keyword: "type", value: "number" },
+      { keyword: "default", value: "0" },
     ];
     const result: Token[] = tokenize(src.join("\n"));
     expect(result).toEqual(expected);
