@@ -7,8 +7,10 @@ import type {
   HeadToken,
 } from "./types/token";
 
+type XToken = HeadToken<"param" | "command">;
+
 export const sliceToken = (tokens: ReadonlyArray<Token>) => {
-  return sliceToken2<HeadToken<"param" | "command">>(tokens, isHead);
+  return sliceToken2<XToken>(tokens, isParamOrCommand);
 };
 
 // 暫定処置。
@@ -32,7 +34,7 @@ const sliceTokenStep = <HeadTokenType extends Token>(
 ): ParsingContext<HeadTokenType>[] => {
   if (headFn(token)) {
     // 新しいグループを開始
-    return [...acc, { head: token, tokens: [] }];
+    return acc.concat({ head: token, tokens: [] });
   }
   if (acc.length === 0) {
     // まだグループが無い場合は無視（または必要に応じて新規作成）
@@ -42,22 +44,30 @@ const sliceTokenStep = <HeadTokenType extends Token>(
   const last = acc[acc.length - 1];
   const updatedLast: ParsingContext<HeadTokenType> = {
     head: last.head,
-    tokens: [...last.tokens, token],
+    tokens: last.tokens.concat(token),
   };
   return [...acc.slice(0, -1), updatedLast];
 };
 
-const isHead = (token: Token): token is HeadToken<"param" | "command"> =>
+const isParamOrCommand = (token: Token): token is XToken =>
   token.keyword === "param" || token.keyword === "command";
 
 export const pluginCommandContext = (
-  context: ParsingContext<HeadToken<"param" | "command">>
+  context: ParsingContext<XToken>
 ): PluginCommandTokens => {
-  const desc = context.tokens.find((t) => t.keyword === "desc")?.value;
-  const text = context.tokens.find((t) => t.keyword === "text")?.value;
+  const firstArgIndex = context.tokens.findIndex(
+    (t) => t.keyword === KEYWORD_ARG
+  );
+  const headAttr = context.tokens.slice(
+    0,
+    firstArgIndex < 0 ? undefined : firstArgIndex
+  );
+  const desc = headAttr.find((t) => t.keyword === "desc")?.value;
+  const text = headAttr.find((t) => t.keyword === "text")?.value;
+
   return {
     command: context.head.value,
-    args: extractArgs(context.tokens),
+    args: extractArgs(context.tokens.slice(firstArgIndex)),
     ...(text ? { text } : {}),
     ...(desc ? { desc } : {}),
   };
@@ -96,7 +106,7 @@ const extractArgsReducer = (
       args: state.args,
       current: {
         arg: state.current.arg,
-        attributes: [...state.current.attributes, token],
+        attributes: state.current.attributes.concat(token),
       },
     };
   }
