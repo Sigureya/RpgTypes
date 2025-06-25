@@ -1,8 +1,18 @@
 import { describe, test, expect } from "vitest";
 import { tokenize } from "./toknize";
-import type { Token } from "./types";
+import type { Token } from "./types/token";
 
 describe("tokenize", () => {
+  test("empty", () => {
+    const result: Token[] = tokenize("");
+    expect(result).toEqual([]);
+  });
+  test("non token", () => {
+    const src: string = "quick brown fox jumps over the lazy dog";
+    const result: Token[] = tokenize(src);
+    expect(result).toEqual([]);
+  });
+
   test("tokenize", () => {
     const src: string[] = [
       "@param bool",

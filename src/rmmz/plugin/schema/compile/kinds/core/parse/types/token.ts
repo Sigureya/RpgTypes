@@ -1,7 +1,3 @@
-export interface ParsingResult {
-  commands: PluginCommandTokens[];
-}
-
 export interface Token {
   keyword: string;
   value: string;
@@ -30,5 +26,5 @@ export interface PluginCommandArgContext {
 
 export interface ArgToken {
   arg: string;
-  token: Token[];
+  attributes: Token[];
 }
