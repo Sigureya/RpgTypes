@@ -7,7 +7,7 @@ export interface OptionItem {
   option: string;
   value: string;
 }
-export interface Context2 {
+export interface ParsingContext {
   head: Token;
   tokens: Token[];
 }
