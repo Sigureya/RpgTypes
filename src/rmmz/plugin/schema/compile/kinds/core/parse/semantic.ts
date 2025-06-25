@@ -4,10 +4,19 @@ import type {
   Token,
   ArgToken,
   ParsingContext,
+  HeadToken,
 } from "./types/token";
 
-export const sliceToken = (tokens: ReadonlyArray<Token>): ParsingContext[] => {
-  return tokens.reduce<ParsingContext[]>(
+export const sliceToken = (tokens: ReadonlyArray<Token>) => {
+  return sliceToken2<HeadToken<"param" | "command">>(tokens, isHead);
+};
+
+// 暫定処置。
+const sliceToken2 = <HeadToken extends Token>(
+  tokens: ReadonlyArray<Token>,
+  isHead: (token: Token) => token is HeadToken
+): ParsingContext<HeadToken>[] => {
+  return tokens.reduce<ParsingContext<HeadToken>[]>(
     (acc, token) => sliceTokenStep(acc, token, isHead),
     []
   );
@@ -16,11 +25,11 @@ export const sliceToken = (tokens: ReadonlyArray<Token>): ParsingContext[] => {
 /**
  * - sliceTokenのreducer関数。かなり複雑だったので分割してある。
  */
-const sliceTokenStep = (
-  acc: ParsingContext[],
+const sliceTokenStep = <HeadTokenType extends Token>(
+  acc: ParsingContext<HeadTokenType>[],
   token: Token,
-  headFn: (token: Token) => boolean
-): ParsingContext[] => {
+  headFn: (token: Token) => token is HeadTokenType
+): ParsingContext<HeadTokenType>[] => {
   if (headFn(token)) {
     // 新しいグループを開始
     return [...acc, { head: token, tokens: [] }];
@@ -31,18 +40,18 @@ const sliceTokenStep = (
   }
   // 既存グループのtokensに非破壊的に追加
   const last = acc[acc.length - 1];
-  const updatedLast: ParsingContext = {
+  const updatedLast: ParsingContext<HeadTokenType> = {
     head: last.head,
     tokens: [...last.tokens, token],
   };
   return [...acc.slice(0, -1), updatedLast];
 };
 
-const isHead = (token: Token) =>
+const isHead = (token: Token): token is HeadToken<"param" | "command"> =>
   token.keyword === "param" || token.keyword === "command";
 
 export const pluginCommandContext = (
-  context: ParsingContext
+  context: ParsingContext<HeadToken<"param" | "command">>
 ): PluginCommandTokens => {
   const desc = context.tokens.find((t) => t.keyword === "desc")?.value;
   const text = context.tokens.find((t) => t.keyword === "text")?.value;
