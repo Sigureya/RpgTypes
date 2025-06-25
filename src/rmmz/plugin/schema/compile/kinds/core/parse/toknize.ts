@@ -22,5 +22,3 @@ const tokenizeLine = (line: string): Token | null => {
   );
   return match ? { keyword: match[1], value: match[2].trim() } : null;
 };
-// グループにまとめるが、具体的なparamの情報無しで構築する。
-// headのcontextと未整理のグループとして処理する
