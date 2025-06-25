@@ -1,7 +1,13 @@
-import type { Context2, PluginCommandTokens, Token, ArgToken } from "./types";
-// トークン列をContext2[]に変換
-export const sliceToken = (tokens: ReadonlyArray<Token>): Context2[] => {
-  const groups = tokens.reduce<Context2[]>(
+import { KEYWORD_ARG } from "./keyword";
+import type {
+  PluginCommandTokens,
+  Token,
+  ArgToken,
+  ParsingContext,
+} from "./types";
+
+export const sliceToken = (tokens: ReadonlyArray<Token>): ParsingContext[] => {
+  const groups = tokens.reduce<ParsingContext[]>(
     (acc, token) => sliceTokenStep(acc, token, isHead),
     []
   );
@@ -9,10 +15,10 @@ export const sliceToken = (tokens: ReadonlyArray<Token>): Context2[] => {
 };
 
 const sliceTokenStep = (
-  acc: Context2[],
+  acc: ParsingContext[],
   token: Token,
   headFn: (token: Token) => boolean
-): Context2[] => {
+): ParsingContext[] => {
   if (headFn(token)) {
     return [...acc, { head: token, tokens: [] }];
   }
@@ -23,33 +29,34 @@ const sliceTokenStep = (
 };
 
 const isHead = (token: Token) =>
-  token.keyword === "param" ||
-  token.keyword === "command" ||
-  token.keyword === "struct";
-// args抽出ロジックを独立関数化
-
+  token.keyword === "param" || token.keyword === "command";
 export const pluginCommandContext = (
-  context: Context2
+  context: ParsingContext
 ): PluginCommandTokens => {
   const desc = context.tokens.find((t) => t.keyword === "desc")?.value;
   const text = context.tokens.find((t) => t.keyword === "text")?.value;
 
-  const args: ArgToken[] = extractArgs(context.tokens);
-
   return {
     command: context.head.value,
-    args,
+    args: extractArgs(context.tokens),
     ...(text ? { text } : {}),
     ...(desc ? { desc } : {}),
   };
 };
 
+interface State {
+  args: ArgToken[];
+  current: ArgToken | null;
+}
+
 const extractArgs = (tokens: ReadonlyArray<Token>): ArgToken[] => {
-  type State = { args: ArgToken[]; current: ArgToken | null };
-  const result = tokens.reduce<State>(extractArgsReducer, {
-    args: [],
-    current: null,
-  });
+  const result = tokens.reduce<State>(
+    (state, token) => extractArgsReducer(state, token, KEYWORD_ARG),
+    {
+      args: [],
+      current: null,
+    }
+  );
 
   // 最後のargを追加
   if (result.current) {
@@ -59,21 +66,22 @@ const extractArgs = (tokens: ReadonlyArray<Token>): ArgToken[] => {
 };
 
 const extractArgsReducer = (
-  state: { args: ArgToken[]; current: ArgToken | null },
-  t: Token
-): { args: ArgToken[]; current: ArgToken | null } => {
-  if (t.keyword === "arg") {
+  state: State,
+  token: Token,
+  paramKeyword: string
+): State => {
+  if (token.keyword === paramKeyword) {
     if (state.current) {
       state.args.push(state.current);
     }
     return {
       args: state.args,
-      current: { arg: t.value, token: [] },
+      current: { arg: token.value, token: [] },
     };
   }
   if (state.current) {
     // 現在のargにトークン追加
-    state.current.token.push(t);
+    state.current.token.push(token);
   }
   return state;
 };
