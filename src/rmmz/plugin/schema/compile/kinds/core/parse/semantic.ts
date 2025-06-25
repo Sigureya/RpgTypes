@@ -4,10 +4,21 @@ import type {
   Token,
   ArgToken,
   ParsingContext,
+  HeadToken,
 } from "./types/token";
 
-export const sliceToken = (tokens: ReadonlyArray<Token>): ParsingContext[] => {
-  return tokens.reduce<ParsingContext[]>(
+type XToken = HeadToken<"param" | "command">;
+
+export const sliceToken = (tokens: ReadonlyArray<Token>) => {
+  return sliceToken2<XToken>(tokens, isParamOrCommand);
+};
+
+// 暫定処置。
+const sliceToken2 = <HeadToken extends Token>(
+  tokens: ReadonlyArray<Token>,
+  isHead: (token: Token) => token is HeadToken
+): ParsingContext<HeadToken>[] => {
+  return tokens.reduce<ParsingContext<HeadToken>[]>(
     (acc, token) => sliceTokenStep(acc, token, isHead),
     []
   );
@@ -16,14 +27,14 @@ export const sliceToken = (tokens: ReadonlyArray<Token>): ParsingContext[] => {
 /**
  * - sliceTokenのreducer関数。かなり複雑だったので分割してある。
  */
-const sliceTokenStep = (
-  acc: ParsingContext[],
+const sliceTokenStep = <HeadTokenType extends Token>(
+  acc: ParsingContext<HeadTokenType>[],
   token: Token,
-  headFn: (token: Token) => boolean
-): ParsingContext[] => {
+  headFn: (token: Token) => token is HeadTokenType
+): ParsingContext<HeadTokenType>[] => {
   if (headFn(token)) {
     // 新しいグループを開始
-    return [...acc, { head: token, tokens: [] }];
+    return acc.concat({ head: token, tokens: [] });
   }
   if (acc.length === 0) {
     // まだグループが無い場合は無視（または必要に応じて新規作成）
@@ -31,24 +42,32 @@ const sliceTokenStep = (
   }
   // 既存グループのtokensに非破壊的に追加
   const last = acc[acc.length - 1];
-  const updatedLast: ParsingContext = {
+  const updatedLast: ParsingContext<HeadTokenType> = {
     head: last.head,
-    tokens: [...last.tokens, token],
+    tokens: last.tokens.concat(token),
   };
   return [...acc.slice(0, -1), updatedLast];
 };
 
-const isHead = (token: Token) =>
+const isParamOrCommand = (token: Token): token is XToken =>
   token.keyword === "param" || token.keyword === "command";
 
 export const pluginCommandContext = (
-  context: ParsingContext
+  context: ParsingContext<XToken>
 ): PluginCommandTokens => {
-  const desc = context.tokens.find((t) => t.keyword === "desc")?.value;
-  const text = context.tokens.find((t) => t.keyword === "text")?.value;
+  const firstArgIndex = context.tokens.findIndex(
+    (t) => t.keyword === KEYWORD_ARG
+  );
+  const headAttr = context.tokens.slice(
+    0,
+    firstArgIndex < 0 ? undefined : firstArgIndex
+  );
+  const desc = headAttr.find((t) => t.keyword === "desc")?.value;
+  const text = headAttr.find((t) => t.keyword === "text")?.value;
+
   return {
     command: context.head.value,
-    args: extractArgs(context.tokens),
+    args: extractArgs(context.tokens.slice(firstArgIndex)),
     ...(text ? { text } : {}),
     ...(desc ? { desc } : {}),
   };
@@ -87,7 +106,7 @@ const extractArgsReducer = (
       args: state.args,
       current: {
         arg: state.current.arg,
-        attributes: [...state.current.attributes, token],
+        attributes: state.current.attributes.concat(token),
       },
     };
   }
