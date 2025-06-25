@@ -1,6 +1,6 @@
 import { describe, test, expect } from "vitest";
 import { tokenize } from "./toknize";
-import type { Token } from "./types";
+import type { Token } from "./types/token";
 
 describe("tokenize", () => {
   test("tokenize", () => {

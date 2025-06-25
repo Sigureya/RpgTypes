@@ -1,6 +1,6 @@
 import { test, expect } from "vitest";
 import { sliceToken, pluginCommandContext } from "./semantic";
-import type { ParsingContext, PluginCommandTokens, Token } from "./types";
+import type { ParsingContext, PluginCommandTokens, Token } from "./types/token";
 
 const mockParamBool: ParsingContext = {
   head: { keyword: "param", value: "bool" },
@@ -32,6 +32,9 @@ const mockCommandSave = {
     { keyword: "arg", value: "arg1" },
     { keyword: "type", value: "number" },
     { keyword: "default", value: "123" },
+    { keyword: "arg", value: "arg2" },
+    { keyword: "type", value: "string" },
+    { keyword: "default", value: "abc" },
   ],
 } as const satisfies ParsingContext;
 
@@ -56,14 +59,15 @@ test("pluginCommandContext", () => {
       {
         arg: "arg1",
         token: [
-          {
-            keyword: "type",
-            value: "number",
-          },
-          {
-            keyword: "default",
-            value: "123",
-          },
+          { keyword: "type", value: "number" },
+          { keyword: "default", value: "123" },
+        ],
+      },
+      {
+        arg: "arg2",
+        token: [
+          { keyword: "type", value: "string" },
+          { keyword: "default", value: "abc" },
         ],
       },
     ],

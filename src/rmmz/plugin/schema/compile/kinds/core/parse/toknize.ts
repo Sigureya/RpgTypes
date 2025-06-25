@@ -1,4 +1,4 @@
-import type { Token } from "./types";
+import type { Token } from "./types/token";
 
 export const tokenize = (text: string): Token[] => {
   const lines = text.split(/\r?\n/);

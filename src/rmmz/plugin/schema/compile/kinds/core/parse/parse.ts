@@ -1,6 +1,7 @@
 import { sliceToken, pluginCommandContext } from "./semantic";
 import { tokenize } from "./toknize";
-import type { ParsingContext, ParsingResult, Token } from "./types";
+import type { ParsingResult } from "./types/result";
+import type { ParsingContext, Token } from "./types/token";
 
 export const parsePlugin = (pluginAnnotations: string): ParsingResult => {
   const tokens: Token[] = tokenize(pluginAnnotations);

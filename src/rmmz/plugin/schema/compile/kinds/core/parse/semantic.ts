@@ -4,7 +4,7 @@ import type {
   Token,
   ArgToken,
   ParsingContext,
-} from "./types";
+} from "./types/token";
 
 export const sliceToken = (tokens: ReadonlyArray<Token>): ParsingContext[] => {
   const groups = tokens.reduce<ParsingContext[]>(
