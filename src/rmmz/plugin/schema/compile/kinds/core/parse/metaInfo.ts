@@ -1,4 +1,8 @@
-import { KEYWORD_AUTHOR, KEYWORD_TARGET, KEYWORD_PLUGINDESC } from "./keyword";
+import {
+  KEYWORD_AUTHOR,
+  KEYWORD_TARGET,
+  KEYWORD_PLUGINDESC,
+} from "./constants/keyword";
 import type { PluginMeta } from "./types/result";
 import type { Token } from "./types/token";
 
