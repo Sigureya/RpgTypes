@@ -1,10 +1,21 @@
-import type { ParsingContext, Token, HeadToken } from "./types/token";
+import { pluginCommandContext } from "./semantic";
+import type {
+  ParsingContext,
+  Token,
+  HeadToken,
+  ParamToken,
+  PluginCommandTokens,
+} from "./types/token";
 
 export interface SliceResult {
-  params: ParsingContext[];
-  commands: ParsingContext[];
+  params: ParamToken[];
+  commands: PluginCommandTokens[];
   current?: ParsingContext | null;
 }
+const pluginParamContext = (context: ParsingContext): ParamToken => ({
+  param: context.head.value,
+  attributes: context.tokens,
+});
 
 export const sliceToken3 = (tokens: Token[]): SliceResult => {
   const acc = tokens.reduce<SliceResult>(tokenReducer, {
@@ -16,9 +27,9 @@ export const sliceToken3 = (tokens: Token[]): SliceResult => {
   // ★ ここで最後のcurrentを追加
   if (acc.current) {
     if (isCommandToken(acc.current.head)) {
-      acc.commands = [...acc.commands, acc.current];
+      acc.commands = [...acc.commands, pluginCommandContext(acc.current)];
     } else if (isParamToken(acc.current.head)) {
-      acc.params = [...acc.params, acc.current];
+      acc.params = [...acc.params, pluginParamContext(acc.current)];
     }
     acc.current = null;
   }
@@ -75,7 +86,7 @@ const updateCurrent = (
   }
   if (isCommandToken(acc.current.head)) {
     return {
-      commands: [...acc.commands, acc.current],
+      commands: [...acc.commands, pluginCommandContext(acc.current)],
       params: acc.params,
       current: {
         head: token,
@@ -86,7 +97,7 @@ const updateCurrent = (
   if (isParamToken(acc.current.head)) {
     return {
       commands: acc.commands,
-      params: [...acc.params, acc.current],
+      params: [...acc.params, pluginParamContext(acc.current)],
       current: {
         head: token,
         tokens: [],
