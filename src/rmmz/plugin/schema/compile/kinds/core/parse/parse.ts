@@ -1,5 +1,6 @@
 import { createMetaInfo } from "./metaInfo";
-import { parseTokenBlocks } from "./semantic";
+import { parsePluginCommand } from "./pluginCommand";
+import { parsePluginParam, parseTokenBlocks } from "./semantic";
 import { tokenize } from "./toknize";
 import type { ParsingResult } from "./types/result";
 import type { Token } from "./types/token";
@@ -10,8 +11,8 @@ export const parsePlugin = (pluginAnnotations: string): ParsingResult => {
   const cc = parseTokenBlocks(tokens);
 
   return {
-    commands: cc.commands,
+    commands: cc.commands.map(parsePluginCommand),
     meta: createMetaInfo(tokens),
-    params: cc.params,
+    params: cc.params.map(parsePluginParam),
   };
 };

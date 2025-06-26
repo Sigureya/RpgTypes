@@ -1,15 +1,13 @@
-import { parsePluginCommand } from "./pluginCommand";
 import type {
   ParsingContext,
   Token,
   HeadToken,
   ParamToken,
-  PluginCommandTokens,
 } from "./types/token";
 
 interface SlicingState {
-  params: ParamToken[];
-  commands: PluginCommandTokens[];
+  params: ParsingContext[];
+  commands: ParsingContext[];
   current: ParsingContext | null;
 }
 
@@ -27,8 +25,8 @@ const isCommandToken = (token: Token) => keywordIs(token, "command");
 const isParamToken = (token: Token) => keywordIs(token, "param");
 
 export interface SliceResult {
-  params: ParamToken[];
-  commands: PluginCommandTokens[];
+  params: ParsingContext[];
+  commands: ParsingContext[];
 }
 
 export const parsePluginParam = (context: ParsingContext): ParamToken => ({
@@ -47,12 +45,12 @@ export const parseTokenBlocks = (tokens: Token[]): SliceResult => {
   if (isCommandToken(acc.current.head)) {
     return {
       params: acc.params,
-      commands: [...acc.commands, parsePluginCommand(acc.current)],
+      commands: [...acc.commands, acc.current],
     };
   }
   if (isParamToken(acc.current.head)) {
     return {
-      params: [...acc.params, parsePluginParam(acc.current)],
+      params: [...acc.params, acc.current],
       commands: acc.commands,
     };
   }
@@ -104,7 +102,7 @@ const updateCurrent = (
   }
   if (isCommandToken(acc.current.head)) {
     return {
-      commands: [...acc.commands, parsePluginCommand(acc.current)],
+      commands: [...acc.commands, acc.current],
       params: acc.params,
       current: {
         head: token,
@@ -115,7 +113,7 @@ const updateCurrent = (
   if (isParamToken(acc.current.head)) {
     return {
       commands: acc.commands,
-      params: [...acc.params, parsePluginParam(acc.current)],
+      params: [...acc.params, acc.current],
       current: {
         head: token,
         tokens: [],

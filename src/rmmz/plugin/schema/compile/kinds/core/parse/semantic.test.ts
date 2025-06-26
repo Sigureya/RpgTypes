@@ -65,10 +65,7 @@ describe("parseTokenBlocks", () => {
       ...mockCommandLoad.tokens,
     ];
     const result: SliceResult = parseTokenBlocks(src);
-    expect(result.commands).toEqual([
-      parsePluginCommand(mockCommandSave),
-      parsePluginCommand(mockCommandLoad),
-    ]);
+    expect(result.commands).toEqual([mockCommandSave, mockCommandLoad]);
   });
   test("valid param parsing", () => {
     const src: Token[] = [
@@ -78,10 +75,8 @@ describe("parseTokenBlocks", () => {
       ...mockParamNum.tokens,
     ];
     const result: SliceResult = parseTokenBlocks(src);
-    expect(result.params).toEqual([
-      parsePluginParam(mockParamBool),
-      parsePluginParam(mockParamNum),
-    ]);
+    const expected = [mockParamBool, mockParamNum];
+    expect(result.params).toEqual(expected satisfies typeof result.params);
   });
   test("mixed command and param parsing", () => {
     const src: Token[] = [
@@ -95,14 +90,15 @@ describe("parseTokenBlocks", () => {
       ...mockParamNum.tokens,
     ];
     const result: SliceResult = parseTokenBlocks(src);
+
     expect(result.commands).toEqual([
-      parsePluginCommand(mockCommandSave),
-      parsePluginCommand(mockCommandLoad),
-    ]);
+      mockCommandSave,
+      mockCommandLoad,
+    ] satisfies typeof result.commands);
     expect(result.params).toEqual([
-      parsePluginParam(mockParamBool),
-      parsePluginParam(mockParamNum),
-    ]);
+      mockParamBool,
+      mockParamNum,
+    ] satisfies typeof result.params);
   });
 });
 
