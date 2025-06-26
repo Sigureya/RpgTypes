@@ -1,5 +1,5 @@
 import { describe, expect, test } from "vitest";
-import { stringifyDeepJSON } from "./nestedJSONfromObject";
+import { stringifyDeepJSON } from "./stringifyDeepJSON";
 interface Person {
   name: string;
   age: number;
