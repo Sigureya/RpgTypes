@@ -1,5 +1,5 @@
 import { describe, expect, test } from "vitest";
-import { fnEx } from "./nestedJSON";
+import { stringifyDeepJSON } from "./nestedJSONfromObject";
 interface Person {
   name: string;
   age: number;
@@ -21,21 +21,23 @@ interface Family {
   members: Person[];
 }
 
-describe("", () => {
-  test("", () => {
-    const person: Person = {
+describe("stringifyDeepJSON", () => {
+  describe("simple object", () => {
+    const data: Person = {
       name: "bob",
       age: 30,
     };
 
-    const expected = JSON.stringify({
+    const json = JSON.stringify({
       name: "bob",
       age: "30",
     } satisfies XXJSONType<Person>);
-    const result: string = fnEx(person);
-    expect(result).toEqual(expected);
+    test("", () => {
+      const result: string = stringifyDeepJSON(data);
+      expect(result).toEqual(json);
+    });
   });
-  test("nested object", () => {
+  describe("nested object", () => {
     const nestedPerson = {
       person: {
         name: "bob",
@@ -51,29 +53,31 @@ describe("", () => {
       person: JSON.stringify(nestedPerson.person),
       address: JSON.stringify(nestedPerson.address),
     };
-    const result = fnEx(nestedPerson);
-    expect(result).toEqual(JSON.stringify(expected));
-  });
-  describe("", () => {
-    test("", () => {
-      const numArray: number[] = [1, 2, 3];
-      const expected: string = JSON.stringify(["1", "2", "3"]);
-      const result = fnEx(numArray);
-      expect(result).toEqual(expected);
+    test("nested object", () => {
+      const result = stringifyDeepJSON(nestedPerson);
+      expect(result).toEqual(JSON.stringify(expected));
     });
   });
-});
-describe("fnEx", () => {
-  test("", () => {
+  describe("array", () => {
+    const data: number[] = [1, 2, 3];
+    const json: string = JSON.stringify(["1", "2", "3"]);
+    test("number array", () => {
+      const result = stringifyDeepJSON(data);
+      expect(result).toEqual(json);
+    });
+  });
+  describe("", () => {
     const baseData = [{ name: "bob", age: 30 }] as const satisfies Person[];
     const jsonLikeData = [
       { name: "bob", age: "30" } satisfies Record<keyof Person, string>,
     ];
     const expected = JSON.stringify(jsonLikeData.map((v) => JSON.stringify(v)));
-    const result: string = fnEx(baseData);
-    expect(result).toEqual(expected);
+    test("", () => {
+      const result: string = stringifyDeepJSON(baseData);
+      expect(result).toEqual(expected);
+    });
   });
-  test("nested array", () => {
+  describe("", () => {
     const family: Family = {
       members: [
         { name: "bob", age: 30 },
@@ -88,8 +92,9 @@ describe("fnEx", () => {
         ].map((v) => JSON.stringify(v))
       ),
     });
-
-    const result = fnEx(family);
-    expect(result).toEqual(expected2);
+    test("nested array", () => {
+      const result = stringifyDeepJSON(family);
+      expect(result).toEqual(expected2);
+    });
   });
 });
