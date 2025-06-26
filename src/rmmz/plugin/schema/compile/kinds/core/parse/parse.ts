@@ -9,6 +9,19 @@ import type {
   PluginCommandTokens,
 } from "./types/token";
 
+interface CC {
+  params: ParsingContext[];
+  commands: ParsingContext[];
+}
+
+const sliceToken2 = (tokens: Token[]): CC => {
+  const tt = sliceToken(tokens);
+  return {
+    params: tt.filter((t) => t.head.keyword === "param"),
+    commands: tt.filter((t) => t.head.keyword === "command"),
+  };
+};
+
 // Token列をParsingContext[]に分割
 const sliceToken = (tokens: Token[]): ParsingContext[] => {
   return tokens.reduce<ParsingContext[]>((acc, token) => {
@@ -26,17 +39,13 @@ const sliceToken = (tokens: Token[]): ParsingContext[] => {
 };
 
 // パラメータブロックからParamTokenを生成
-const pluginParamContext = (
-  context: ParsingContext<{ keyword: "param"; value: string }>
-): ParamToken => ({
+const pluginParamContext = (context: ParsingContext): ParamToken => ({
   param: context.head.value,
   attributes: context.tokens,
 });
 
 // コマンドブロックからPluginCommandTokensを生成
-const pluginCommandContext = (
-  context: ParsingContext<{ keyword: "command"; value: string }>
-): PluginCommandTokens => {
+const pluginCommandContext = (context: ParsingContext): PluginCommandTokens => {
   const tokens = context.tokens;
   const args = extractArgs(tokens);
 
@@ -57,21 +66,9 @@ const pluginCommandContext = (
 // ...parsePlugin等はそのまま...
 export const parsePlugin = (pluginAnnotations: string): ParsingResult => {
   const tokens: Token[] = tokenize(pluginAnnotations);
-  const contexts = sliceToken(tokens);
-
-  const params: ParamToken[] = contexts
-    .filter(
-      (ctx): ctx is ParsingContext<{ keyword: "param"; value: string }> =>
-        ctx.head.keyword === "param"
-    )
-    .map(pluginParamContext);
-
-  const commands: PluginCommandTokens[] = contexts
-    .filter(
-      (ctx): ctx is ParsingContext<{ keyword: "command"; value: string }> =>
-        ctx.head.keyword === "command"
-    )
-    .map(pluginCommandContext);
+  const cc = sliceToken2(tokens);
+  const commands = cc.commands.map(pluginCommandContext);
+  const params = cc.params.map(pluginParamContext);
 
   return {
     commands,
