@@ -1,6 +1,6 @@
 import { test, expect, describe } from "vitest";
+import { parsePluginCommand } from "./pluginCommand";
 import {
-  parsePluginCommand,
   parseTokenBlocks,
   parsePluginParam,
   type SliceResult,
