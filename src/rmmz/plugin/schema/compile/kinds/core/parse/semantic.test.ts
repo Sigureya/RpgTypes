@@ -1,5 +1,6 @@
 import { test, expect, describe } from "vitest";
-import { sliceToken, pluginCommandContext } from "./semantic";
+import { sliceToken } from "./semantic";
+import { pluginCommandContext } from "./semantic2";
 import type { ParsingContext, PluginCommandTokens, Token } from "./types/token";
 
 const mockParamBool: ParsingContext = {
