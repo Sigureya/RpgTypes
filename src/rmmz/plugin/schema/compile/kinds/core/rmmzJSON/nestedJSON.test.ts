@@ -1,4 +1,5 @@
 import { describe, expect, test } from "vitest";
+import { parseDeepJSON } from "./parseDeepJSON";
 import { stringifyDeepJSON } from "./stringifyDeepJSON";
 interface Person {
   name: string;
@@ -36,26 +37,39 @@ describe("stringifyDeepJSON", () => {
       const result: string = stringifyDeepJSON(data);
       expect(result).toEqual(json);
     });
+    test("parseDeepJSON", () => {
+      const parsed = parseDeepJSON(json);
+      expect(parsed).toEqual(data);
+    });
   });
   describe("nested object", () => {
-    const nestedPerson = {
+    const data: NestedPerson = {
       person: {
         name: "bob",
-        age: "30",
-      } satisfies XXJSONType<Person>,
+        age: 30,
+      },
       address: {
         city: "New York",
         country: "USA",
       },
     };
-
-    const expected: Record<keyof NestedPerson, string> = {
-      person: JSON.stringify(nestedPerson.person),
-      address: JSON.stringify(nestedPerson.address),
-    };
+    const expected: string = JSON.stringify({
+      person: JSON.stringify({
+        name: "bob",
+        age: "30",
+      } satisfies XXJSONType<Person>),
+      address: JSON.stringify({
+        city: "New York",
+        country: "USA",
+      } satisfies XXJSONType<Address>),
+    } satisfies Record<keyof NestedPerson, string>);
     test("nested object", () => {
-      const result = stringifyDeepJSON(nestedPerson);
-      expect(result).toEqual(JSON.stringify(expected));
+      const result = stringifyDeepJSON(data);
+      expect(result).toEqual(expected);
+    });
+    test("parseDeepJSON", () => {
+      const parsed = parseDeepJSON(expected);
+      expect(parsed).toEqual(data);
     });
   });
   describe("array", () => {
@@ -64,6 +78,10 @@ describe("stringifyDeepJSON", () => {
     test("number array", () => {
       const result = stringifyDeepJSON(data);
       expect(result).toEqual(json);
+    });
+    test("parseDeepJSON", () => {
+      const parsed = parseDeepJSON(json);
+      expect(parsed).toEqual(data);
     });
   });
   describe("", () => {
@@ -75,6 +93,10 @@ describe("stringifyDeepJSON", () => {
     test("", () => {
       const result: string = stringifyDeepJSON(baseData);
       expect(result).toEqual(expected);
+    });
+    test("parseDeepJSON", () => {
+      const parsed = parseDeepJSON(expected);
+      expect(parsed).toEqual(baseData);
     });
   });
   describe("", () => {
@@ -95,6 +117,10 @@ describe("stringifyDeepJSON", () => {
     test("nested array", () => {
       const result = stringifyDeepJSON(family);
       expect(result).toEqual(expected2);
+    });
+    test("parseDeepJSON", () => {
+      const parsed = parseDeepJSON(expected2);
+      expect(parsed).toEqual(family);
     });
   });
 });
