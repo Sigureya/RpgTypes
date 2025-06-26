@@ -3,10 +3,11 @@ export const KEYWORD_PLUGINDESC = "plugindesc" as const;
 export const KEYWORD_AUTHOR = "author" as const;
 export const KEYWORD_HELP = "help" as const;
 
+export const KEYWORD_PARAM = "param" as const;
 export const KEYWORD_DESC = "desc" as const;
 export const KEYWORD_TEXT = "text" as const;
 export const KEYWORD_PARENT = "parent" as const;
-export const KEYWORD_PARAM = "type" as const;
+export const KEYWORD_TYPE = "type" as const;
 export const KEYWORD_DEFAULT = "default" as const;
 
 export const KEYWORD_ON = "on" as const;
