@@ -41,10 +41,9 @@ const mockTexts: string[] = [
 describe("parsePlugin", () => {
   const result: ParsingResult = parsePlugin(mockTexts.join("\n"));
   test("should parse plugin annotations correctly", () => {
-    //    expect(result.commands).toHaveLength(2);
     expect(result.meta).toBeDefined();
   });
-  test("", () => {
+  test("should parse parameters correctly", () => {
     const expected: ParamToken[] = [
       {
         param: "bool",
