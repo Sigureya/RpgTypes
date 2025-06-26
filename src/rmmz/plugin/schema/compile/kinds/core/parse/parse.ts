@@ -14,18 +14,31 @@ interface CC {
   commands: ParsingContext[];
 }
 
+const keywordIs = <S extends string>(
+  token: Token,
+  keyword: S
+): token is {
+  keyword: S;
+  value: string;
+} => {
+  return token.keyword === keyword;
+};
+
+const isCommandToken = (token: Token) => keywordIs(token, "command");
+const isParamToken = (token: Token) => keywordIs(token, "param");
+
 const sliceToken2 = (tokens: Token[]): CC => {
   const tt = sliceToken(tokens);
   return {
-    params: tt.filter((t) => t.head.keyword === "param"),
-    commands: tt.filter((t) => t.head.keyword === "command"),
+    params: tt.filter((t) => isParamToken(t.head)),
+    commands: tt.filter((t) => isCommandToken(t.head)),
   };
 };
 
 // Token列をParsingContext[]に分割
 const sliceToken = (tokens: Token[]): ParsingContext[] => {
   return tokens.reduce<ParsingContext[]>((acc, token) => {
-    if (token.keyword === "param" || token.keyword === "command") {
+    if (isParamToken(token) || isCommandToken(token)) {
       acc.push({ head: token, tokens: [] });
     } else if (acc.length > 0) {
       const last = acc[acc.length - 1];
