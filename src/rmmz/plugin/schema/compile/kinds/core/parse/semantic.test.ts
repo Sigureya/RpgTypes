@@ -56,6 +56,7 @@ test("sliceToken", () => {
     mockParamBool,
     mockParamNum,
     mockCommandSave,
+    mockCommandLoad,
   ];
   const src: Token[] = expected.flatMap((e) => [e.head, ...e.tokens]);
 
