@@ -10,16 +10,13 @@ import type {
 type XToken = HeadToken<"param" | "command">;
 
 export const sliceToken = (tokens: ReadonlyArray<Token>) => {
-  return sliceToken2<XToken>(tokens, isParamOrCommand);
+  return sliceToken2(tokens);
 };
 
 // 暫定処置。
-const sliceToken2 = <HeadToken extends Token>(
-  tokens: ReadonlyArray<Token>,
-  isHead: (token: Token) => token is HeadToken
-): ParsingContext<HeadToken>[] => {
-  return tokens.reduce<ParsingContext<HeadToken>[]>(
-    (acc, token) => sliceTokenStep(acc, token, isHead),
+export const sliceToken2 = (tokens: ReadonlyArray<Token>) => {
+  return tokens.reduce<ParsingContext[]>(
+    (acc, token) => sliceTokenStep(acc, token),
     []
   );
 };
@@ -27,12 +24,12 @@ const sliceToken2 = <HeadToken extends Token>(
 /**
  * - sliceTokenのreducer関数。かなり複雑だったので分割してある。
  */
-const sliceTokenStep = <HeadTokenType extends Token>(
-  acc: ParsingContext<HeadTokenType>[],
-  token: Token,
-  headFn: (token: Token) => token is HeadTokenType
-): ParsingContext<HeadTokenType>[] => {
-  if (headFn(token)) {
+export const sliceTokenStep = (
+  acc: ParsingContext[],
+  token: Token
+  //  headFn: (token: Token) => token is HeadTokenType
+) => {
+  if (isCommandToken(token) || isParamToken(token)) {
     // 新しいグループを開始
     return acc.concat({ head: token, tokens: [] });
   }
@@ -42,18 +39,24 @@ const sliceTokenStep = <HeadTokenType extends Token>(
   }
   // 既存グループのtokensに非破壊的に追加
   const last = acc[acc.length - 1];
-  const updatedLast: ParsingContext<HeadTokenType> = {
+  const updatedLast: ParsingContext = {
     head: last.head,
     tokens: last.tokens.concat(token),
   };
   return [...acc.slice(0, -1), updatedLast];
 };
 
-const isParamOrCommand = (token: Token): token is XToken =>
+const isCommandToken = (token: Token): token is HeadToken<"command"> =>
+  token.keyword === "command";
+
+const isParamToken = (token: Token): token is HeadToken<"param"> =>
+  token.keyword === "param";
+
+export const isParamOrCommand = (token: Token): token is XToken =>
   token.keyword === "param" || token.keyword === "command";
 
 export const pluginCommandContext = (
-  context: ParsingContext<XToken>
+  context: ParsingContext
 ): PluginCommandTokens => {
   const firstArgIndex = context.tokens.findIndex(
     (t) => t.keyword === KEYWORD_ARG
@@ -78,7 +81,7 @@ interface State {
   current: ArgToken | null;
 }
 
-const extractArgs = (tokens: ReadonlyArray<Token>): ArgToken[] => {
+export const extractArgs = (tokens: ReadonlyArray<Token>): ArgToken[] => {
   const result = tokens.reduce<State>(
     (state, token) => extractArgsReducer(state, token, KEYWORD_ARG),
     {
@@ -90,7 +93,7 @@ const extractArgs = (tokens: ReadonlyArray<Token>): ArgToken[] => {
   return result.current ? [...result.args, result.current] : result.args;
 };
 
-const extractArgsReducer = (
+export const extractArgsReducer = (
   state: State,
   token: Token,
   paramKeyword: string
