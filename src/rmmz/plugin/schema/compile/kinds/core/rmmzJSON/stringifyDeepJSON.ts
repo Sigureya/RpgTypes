@@ -4,6 +4,7 @@ export const stringifyDeepJSON = (obj: unknown): string => {
 
 const isPlainObject = (v: unknown): v is Record<string, unknown> =>
   typeof v === "object" && v !== null && !Array.isArray(v);
+
 const fn = (obj: unknown): Record<string, string> | string[] => {
   if (Array.isArray(obj)) {
     return toStringArray(obj);
