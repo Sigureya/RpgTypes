@@ -1,12 +1,37 @@
 import { KEYWORD_ARG } from "./constants/keyword";
-import type { ArgToken, Token } from "./types/token";
+import type {
+  ParsingContext,
+  PluginCommandTokens,
+  ArgToken,
+  Token,
+} from "./types/token";
+
+export const parsePluginCommand = (
+  context: ParsingContext
+): PluginCommandTokens => {
+  const tokens = context.tokens;
+  const args = extractArgs(tokens);
+
+  // コマンド属性（desc, text）は最初のargまで
+  const firstArgIdx = tokens.findIndex((t) => t.keyword === "arg");
+  const headAttrs = firstArgIdx === -1 ? tokens : tokens.slice(0, firstArgIdx);
+  const desc = headAttrs.find((t) => t.keyword === "desc")?.value;
+  const text = headAttrs.find((t) => t.keyword === "text")?.value;
+
+  return {
+    command: context.head.value,
+    ...(text ? { text } : {}),
+    ...(desc ? { desc } : {}),
+    args,
+  };
+};
 
 interface State {
   args: ArgToken[];
   current: ArgToken | null;
 }
 
-export const extractArgs = (tokens: ReadonlyArray<Token>): ArgToken[] => {
+const extractArgs = (tokens: ReadonlyArray<Token>): ArgToken[] => {
   const result = tokens.reduce<State>(
     (state, token) => extractArgsReducer(state, token, KEYWORD_ARG),
     {
