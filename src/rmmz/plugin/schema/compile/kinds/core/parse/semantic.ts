@@ -1,11 +1,4 @@
-import { KEYWORD_ARG } from "./constants/keyword";
-import type {
-  PluginCommandTokens,
-  Token,
-  ArgToken,
-  ParsingContext,
-  HeadToken,
-} from "./types/token";
+import type { Token, ParsingContext, HeadToken } from "./types/token";
 
 type XToken = HeadToken<"param" | "command">;
 
@@ -24,7 +17,7 @@ export const sliceToken2 = (tokens: ReadonlyArray<Token>) => {
 /**
  * - sliceTokenのreducer関数。かなり複雑だったので分割してある。
  */
-export const sliceTokenStep = (
+const sliceTokenStep = (
   acc: ParsingContext[],
   token: Token
   //  headFn: (token: Token) => token is HeadTokenType
@@ -54,44 +47,3 @@ const isParamToken = (token: Token): token is HeadToken<"param"> =>
 
 export const isParamOrCommand = (token: Token): token is XToken =>
   token.keyword === "param" || token.keyword === "command";
-
-interface State {
-  args: ArgToken[];
-  current: ArgToken | null;
-}
-
-export const extractArgs = (tokens: ReadonlyArray<Token>): ArgToken[] => {
-  const result = tokens.reduce<State>(
-    (state, token) => extractArgsReducer(state, token, KEYWORD_ARG),
-    {
-      args: [],
-      current: null,
-    }
-  );
-
-  return result.current ? [...result.args, result.current] : result.args;
-};
-
-export const extractArgsReducer = (
-  state: State,
-  token: Token,
-  paramKeyword: string
-): State => {
-  if (token.keyword === paramKeyword) {
-    return {
-      args: state.current ? [...state.args, state.current] : state.args,
-      current: { arg: token.value, attributes: [] },
-    };
-  }
-  if (state.current) {
-    return {
-      args: state.args,
-      current: {
-        arg: state.current.arg,
-        attributes: state.current.attributes.concat(token),
-      },
-    };
-  }
-
-  return state;
-};
