@@ -1,4 +1,4 @@
-import { extractArgs } from "./semantic";
+import { extractArgs } from "./extratArgs";
 import type {
   ParsingContext,
   Token,
@@ -28,17 +28,24 @@ export const sliceToken3 = (tokens: Token[]): SliceResult => {
     commands: [],
     current: null,
   });
-
-  // ★ ここで最後のcurrentを追加
-  if (acc.current) {
-    if (isCommandToken(acc.current.head)) {
-      acc.commands = [...acc.commands, pluginCommandContext(acc.current)];
-    } else if (isParamToken(acc.current.head)) {
-      acc.params = [...acc.params, pluginParamContext(acc.current)];
-    }
-    acc.current = null;
+  if (!acc.current) {
+    return {
+      params: acc.params,
+      commands: acc.commands,
+    };
   }
-
+  if (isCommandToken(acc.current.head)) {
+    return {
+      params: acc.params,
+      commands: [...acc.commands, pluginCommandContext(acc.current)],
+    };
+  }
+  if (isParamToken(acc.current.head)) {
+    return {
+      params: [...acc.params, pluginParamContext(acc.current)],
+      commands: acc.commands,
+    };
+  }
   return acc;
 };
 
@@ -112,6 +119,7 @@ const updateCurrent = (
 
   return acc;
 };
+
 export const pluginCommandContext = (
   context: ParsingContext
 ): PluginCommandTokens => {
