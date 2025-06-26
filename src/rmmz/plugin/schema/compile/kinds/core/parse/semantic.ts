@@ -34,7 +34,7 @@ export const parsePluginParam = (context: ParsingContext): ParamToken => ({
   attributes: context.tokens,
 });
 
-export const parseTokenBlocks = (tokens: Token[]): SliceResult => {
+export const groupTokensByContext = (tokens: Token[]): SliceResult => {
   const acc = reduceTokens(tokens);
   if (!acc.current) {
     return {

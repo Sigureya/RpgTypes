@@ -1,5 +1,5 @@
 import { test, expect, describe } from "vitest";
-import { parseTokenBlocks, type SliceResult } from "./semantic";
+import { groupTokensByContext, type SliceResult } from "./semantic";
 import type { ParsingContext, Token } from "./types/token";
 
 const mockParamBool: ParsingContext = {
@@ -59,7 +59,7 @@ describe("parseTokenBlocks", () => {
       mockCommandLoad.head,
       ...mockCommandLoad.tokens,
     ];
-    const result: SliceResult = parseTokenBlocks(src);
+    const result: SliceResult = groupTokensByContext(src);
     expect(result.commands).toEqual([mockCommandSave, mockCommandLoad]);
   });
   test("valid param parsing", () => {
@@ -69,7 +69,7 @@ describe("parseTokenBlocks", () => {
       mockParamNum.head,
       ...mockParamNum.tokens,
     ];
-    const result: SliceResult = parseTokenBlocks(src);
+    const result: SliceResult = groupTokensByContext(src);
     const expected = [mockParamBool, mockParamNum];
     expect(result.params).toEqual(expected satisfies typeof result.params);
   });
@@ -84,7 +84,7 @@ describe("parseTokenBlocks", () => {
       mockParamNum.head,
       ...mockParamNum.tokens,
     ];
-    const result: SliceResult = parseTokenBlocks(src);
+    const result: SliceResult = groupTokensByContext(src);
 
     expect(result.commands).toEqual([
       mockCommandSave,
