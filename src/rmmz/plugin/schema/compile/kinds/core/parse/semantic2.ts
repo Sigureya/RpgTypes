@@ -7,10 +7,15 @@ import type {
   PluginCommandTokens,
 } from "./types/token";
 
+interface SlicingState {
+  params: ParamToken[];
+  commands: PluginCommandTokens[];
+  current: ParsingContext | null;
+}
+
 export interface SliceResult {
   params: ParamToken[];
   commands: PluginCommandTokens[];
-  current?: ParsingContext | null;
 }
 const pluginParamContext = (context: ParsingContext): ParamToken => ({
   param: context.head.value,
@@ -18,7 +23,7 @@ const pluginParamContext = (context: ParsingContext): ParamToken => ({
 });
 
 export const sliceToken3 = (tokens: Token[]): SliceResult => {
-  const acc = tokens.reduce<SliceResult>(tokenReducer, {
+  const acc = tokens.reduce<SlicingState>(tokenReducer, {
     params: [],
     commands: [],
     current: null,
@@ -50,7 +55,7 @@ const keywordIs = <S extends string>(
 const isCommandToken = (token: Token) => keywordIs(token, "command");
 const isParamToken = (token: Token) => keywordIs(token, "param");
 
-const tokenReducer = (acc: SliceResult, token: Token): SliceResult => {
+const tokenReducer = (acc: SlicingState, token: Token): SlicingState => {
   if (isParamToken(token)) {
     return updateCurrent(acc, token);
   }
@@ -71,9 +76,9 @@ const tokenReducer = (acc: SliceResult, token: Token): SliceResult => {
 };
 
 const updateCurrent = (
-  acc: SliceResult,
+  acc: SlicingState,
   token: HeadToken<"command" | "param">
-): SliceResult => {
+): SlicingState => {
   if (!acc.current) {
     return {
       commands: acc.commands,
