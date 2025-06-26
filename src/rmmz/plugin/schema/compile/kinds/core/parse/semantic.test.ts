@@ -1,11 +1,6 @@
 import { test, expect, describe } from "vitest";
-import { parsePluginCommand } from "./pluginCommand";
-import {
-  parseTokenBlocks,
-  parsePluginParam,
-  type SliceResult,
-} from "./semantic";
-import type { ParsingContext, PluginCommandTokens, Token } from "./types/token";
+import { parseTokenBlocks, type SliceResult } from "./semantic";
+import type { ParsingContext, Token } from "./types/token";
 
 const mockParamBool: ParsingContext = {
   head: { keyword: "param", value: "bool" },
@@ -99,58 +94,5 @@ describe("parseTokenBlocks", () => {
       mockParamBool,
       mockParamNum,
     ] satisfies typeof result.params);
-  });
-});
-
-describe("parsePluginCommand", () => {
-  test("valid context", () => {
-    const expectedCommand: PluginCommandTokens = {
-      command: "save",
-      desc: "write Save File",
-      text: "writeSave",
-      args: [
-        {
-          arg: "arg1",
-          attributes: [
-            { keyword: "type", value: "number" },
-            { keyword: "default", value: "123" },
-          ],
-        },
-        {
-          arg: "arg2",
-          attributes: [
-            { keyword: "type", value: "string" },
-            { keyword: "default", value: "abc" },
-          ],
-        },
-      ],
-    };
-    const result: PluginCommandTokens = parsePluginCommand(mockCommandSave);
-    expect(result).toEqual(expectedCommand);
-  });
-  test("valid context without desc and text", () => {
-    const expectedCommand: PluginCommandTokens = {
-      command: "load",
-      args: [
-        {
-          arg: "arg1",
-          attributes: [
-            { keyword: "text", value: "arg1 text" },
-            { keyword: "desc", value: "load Save File" },
-            { keyword: "type", value: "number" },
-            { keyword: "default", value: "123" },
-          ],
-        },
-        {
-          arg: "arg2",
-          attributes: [
-            { keyword: "type", value: "string" },
-            { keyword: "default", value: "abc" },
-          ],
-        },
-      ],
-    };
-    const result: PluginCommandTokens = parsePluginCommand(mockCommandLoad);
-    expect(result).toEqual(expectedCommand);
   });
 });
