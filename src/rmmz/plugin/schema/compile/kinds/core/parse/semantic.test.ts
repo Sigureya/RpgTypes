@@ -1,5 +1,10 @@
 import { test, expect, describe } from "vitest";
-import { sliceToken, pluginCommandContext } from "./semantic";
+import {
+  pluginCommandContext,
+  sliceToken3,
+  pluginParamContext,
+  type SliceResult,
+} from "./semantic2";
 import type { ParsingContext, PluginCommandTokens, Token } from "./types/token";
 
 const mockParamBool: ParsingContext = {
@@ -51,18 +56,56 @@ const mockCommandLoad = {
   ],
 } as const satisfies ParsingContext;
 
-test("sliceToken", () => {
-  const expected: ParsingContext[] = [
-    mockParamBool,
-    mockParamNum,
-    mockCommandSave,
-    mockCommandLoad,
-  ];
-  const src: Token[] = expected.flatMap((e) => [e.head, ...e.tokens]);
-
-  const result: ParsingContext[] = sliceToken(src);
-  expect(result).toEqual(expected);
+describe("sliceToken3", () => {
+  test("valid token slicing", () => {
+    const src: Token[] = [
+      mockCommandSave.head,
+      ...mockCommandSave.tokens,
+      mockCommandLoad.head,
+      ...mockCommandLoad.tokens,
+    ];
+    const result: SliceResult = sliceToken3(src);
+    expect(result.commands).toEqual([
+      pluginCommandContext(mockCommandSave),
+      pluginCommandContext(mockCommandLoad),
+    ]);
+  });
+  test("valid param slicing", () => {
+    const src: Token[] = [
+      mockParamBool.head,
+      ...mockParamBool.tokens,
+      mockParamNum.head,
+      ...mockParamNum.tokens,
+    ];
+    const result: SliceResult = sliceToken3(src);
+    expect(result.params).toEqual([
+      pluginParamContext(mockParamBool),
+      pluginParamContext(mockParamNum),
+    ]);
+  });
+  test("mixed command and param slicing", () => {
+    const src: Token[] = [
+      mockCommandSave.head,
+      ...mockCommandSave.tokens,
+      mockParamBool.head,
+      ...mockParamBool.tokens,
+      mockCommandLoad.head,
+      ...mockCommandLoad.tokens,
+      mockParamNum.head,
+      ...mockParamNum.tokens,
+    ];
+    const result: SliceResult = sliceToken3(src);
+    expect(result.commands).toEqual([
+      pluginCommandContext(mockCommandSave),
+      pluginCommandContext(mockCommandLoad),
+    ]);
+    expect(result.params).toEqual([
+      pluginParamContext(mockParamBool),
+      pluginParamContext(mockParamNum),
+    ]);
+  });
 });
+
 describe("pluginCommandContext", () => {
   test("valid context", () => {
     const expectedCommand: PluginCommandTokens = {

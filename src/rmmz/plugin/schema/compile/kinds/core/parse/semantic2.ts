@@ -1,4 +1,4 @@
-import { pluginCommandContext } from "./semantic";
+import { extractArgs } from "./extratArgs";
 import type {
   ParsingContext,
   Token,
@@ -7,33 +7,66 @@ import type {
   PluginCommandTokens,
 } from "./types/token";
 
+interface SlicingState {
+  params: ParamToken[];
+  commands: PluginCommandTokens[];
+  current: ParsingContext | null;
+}
+
 export interface SliceResult {
   params: ParamToken[];
   commands: PluginCommandTokens[];
-  current?: ParsingContext | null;
 }
-const pluginParamContext = (context: ParsingContext): ParamToken => ({
+
+export const pluginCommandContext = (
+  context: ParsingContext
+): PluginCommandTokens => {
+  const tokens = context.tokens;
+  const args = extractArgs(tokens);
+
+  // コマンド属性（desc, text）は最初のargまで
+  const firstArgIdx = tokens.findIndex((t) => t.keyword === "arg");
+  const headAttrs = firstArgIdx === -1 ? tokens : tokens.slice(0, firstArgIdx);
+  const desc = headAttrs.find((t) => t.keyword === "desc")?.value;
+  const text = headAttrs.find((t) => t.keyword === "text")?.value;
+
+  return {
+    command: context.head.value,
+    ...(text ? { text } : {}),
+    ...(desc ? { desc } : {}),
+    args,
+  };
+};
+
+export const pluginParamContext = (context: ParsingContext): ParamToken => ({
   param: context.head.value,
   attributes: context.tokens,
 });
 
 export const sliceToken3 = (tokens: Token[]): SliceResult => {
-  const acc = tokens.reduce<SliceResult>(tokenReducer, {
+  const acc = tokens.reduce<SlicingState>(tokenReducer, {
     params: [],
     commands: [],
     current: null,
   });
-
-  // ★ ここで最後のcurrentを追加
-  if (acc.current) {
-    if (isCommandToken(acc.current.head)) {
-      acc.commands = [...acc.commands, pluginCommandContext(acc.current)];
-    } else if (isParamToken(acc.current.head)) {
-      acc.params = [...acc.params, pluginParamContext(acc.current)];
-    }
-    acc.current = null;
+  if (!acc.current) {
+    return {
+      params: acc.params,
+      commands: acc.commands,
+    };
   }
-
+  if (isCommandToken(acc.current.head)) {
+    return {
+      params: acc.params,
+      commands: [...acc.commands, pluginCommandContext(acc.current)],
+    };
+  }
+  if (isParamToken(acc.current.head)) {
+    return {
+      params: [...acc.params, pluginParamContext(acc.current)],
+      commands: acc.commands,
+    };
+  }
   return acc;
 };
 
@@ -50,7 +83,7 @@ const keywordIs = <S extends string>(
 const isCommandToken = (token: Token) => keywordIs(token, "command");
 const isParamToken = (token: Token) => keywordIs(token, "param");
 
-const tokenReducer = (acc: SliceResult, token: Token): SliceResult => {
+const tokenReducer = (acc: SlicingState, token: Token): SlicingState => {
   if (isParamToken(token)) {
     return updateCurrent(acc, token);
   }
@@ -71,9 +104,9 @@ const tokenReducer = (acc: SliceResult, token: Token): SliceResult => {
 };
 
 const updateCurrent = (
-  acc: SliceResult,
+  acc: SlicingState,
   token: HeadToken<"command" | "param">
-): SliceResult => {
+): SlicingState => {
   if (!acc.current) {
     return {
       commands: acc.commands,
