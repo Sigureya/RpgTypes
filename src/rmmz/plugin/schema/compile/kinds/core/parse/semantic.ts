@@ -18,7 +18,7 @@ export interface SliceResult {
   commands: PluginCommandTokens[];
 }
 
-export const pluginCommandContext = (
+export const parsePluginCommand = (
   context: ParsingContext
 ): PluginCommandTokens => {
   const tokens = context.tokens;
@@ -38,13 +38,13 @@ export const pluginCommandContext = (
   };
 };
 
-export const pluginParamContext = (context: ParsingContext): ParamToken => ({
+export const parsePluginParam = (context: ParsingContext): ParamToken => ({
   param: context.head.value,
   attributes: context.tokens,
 });
 
-export const sliceToken3 = (tokens: Token[]): SliceResult => {
-  const acc = tokens.reduce<SlicingState>(tokenReducer, {
+export const parseTokenBlocks = (tokens: Token[]): SliceResult => {
+  const acc = tokens.reduce<SlicingState>(tokenGroupingReducer, {
     params: [],
     commands: [],
     current: null,
@@ -58,12 +58,12 @@ export const sliceToken3 = (tokens: Token[]): SliceResult => {
   if (isCommandToken(acc.current.head)) {
     return {
       params: acc.params,
-      commands: [...acc.commands, pluginCommandContext(acc.current)],
+      commands: [...acc.commands, parsePluginCommand(acc.current)],
     };
   }
   if (isParamToken(acc.current.head)) {
     return {
-      params: [...acc.params, pluginParamContext(acc.current)],
+      params: [...acc.params, parsePluginParam(acc.current)],
       commands: acc.commands,
     };
   }
@@ -83,7 +83,10 @@ const keywordIs = <S extends string>(
 const isCommandToken = (token: Token) => keywordIs(token, "command");
 const isParamToken = (token: Token) => keywordIs(token, "param");
 
-const tokenReducer = (acc: SlicingState, token: Token): SlicingState => {
+const tokenGroupingReducer = (
+  acc: SlicingState,
+  token: Token
+): SlicingState => {
   if (isParamToken(token)) {
     return updateCurrent(acc, token);
   }
@@ -119,7 +122,7 @@ const updateCurrent = (
   }
   if (isCommandToken(acc.current.head)) {
     return {
-      commands: [...acc.commands, pluginCommandContext(acc.current)],
+      commands: [...acc.commands, parsePluginCommand(acc.current)],
       params: acc.params,
       current: {
         head: token,
@@ -130,7 +133,7 @@ const updateCurrent = (
   if (isParamToken(acc.current.head)) {
     return {
       commands: acc.commands,
-      params: [...acc.params, pluginParamContext(acc.current)],
+      params: [...acc.params, parsePluginParam(acc.current)],
       current: {
         head: token,
         tokens: [],

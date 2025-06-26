@@ -1,5 +1,5 @@
 import { createMetaInfo } from "./metaInfo";
-import { sliceToken3 } from "./semantic2";
+import { parseTokenBlocks } from "./semantic";
 import { tokenize } from "./toknize";
 import type { ParsingResult } from "./types/result";
 import type { Token } from "./types/token";
@@ -7,7 +7,7 @@ import type { Token } from "./types/token";
 // ...parsePlugin等はそのまま...
 export const parsePlugin = (pluginAnnotations: string): ParsingResult => {
   const tokens: Token[] = tokenize(pluginAnnotations);
-  const cc = sliceToken3(tokens);
+  const cc = parseTokenBlocks(tokens);
 
   return {
     commands: cc.commands,
