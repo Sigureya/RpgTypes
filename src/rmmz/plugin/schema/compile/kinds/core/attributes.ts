@@ -4,6 +4,15 @@ import { mapKeywords } from "./parse/keyword";
 import type { Token } from "./parse/types/token";
 import type { BooleanParam, StructParamPrimitive } from "./primitiveParams";
 
+export const compileAttributes = (tokens: ReadonlyArray<Token>) => {
+  const type = getType(tokens) ?? "string";
+  const fn = table[type as keyof typeof table] ?? table.string;
+  return {
+    ...mapKeywords(tokens, fn),
+    kind: type,
+  };
+};
+
 const getType = (tokens: ReadonlyArray<Token>): string | undefined => {
   const typeToken = tokens.find((t) => t.keyword === KEYWORD_TYPE);
   return typeToken ? typeToken.value : undefined;
@@ -23,6 +32,12 @@ const DATA_ID = {
 } as const;
 
 const table = {
+  string: {
+    default: attrString,
+    text: attrString,
+    desc: attrString,
+    parent: attrString,
+  },
   boolean: {
     default: (value: string) => value === "true",
     text: attrString,
@@ -59,7 +74,3 @@ const table = {
     dir: attrString,
   },
 } satisfies Partial<TableType>;
-
-const bb = (tokens: ReadonlyArray<Token>) => {
-  return mapKeywords<Omit<BooleanParam, "kind">>(tokens, table.boolean);
-};
