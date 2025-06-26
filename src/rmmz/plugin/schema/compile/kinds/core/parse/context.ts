@@ -1,15 +1,5 @@
 import { extractArgs } from "./extratArgs";
-import type {
-  ParsingContext,
-  ParamToken,
-  PluginCommandTokens,
-} from "./types/token";
-
-// パラメータブロックからParamTokenを生成
-export const pluginParamContext = (context: ParsingContext): ParamToken => ({
-  param: context.head.value,
-  attributes: context.tokens,
-});
+import type { ParsingContext, PluginCommandTokens } from "./types/token";
 
 // コマンドブロックからPluginCommandTokensを生成
 export const pluginCommandContext = (
