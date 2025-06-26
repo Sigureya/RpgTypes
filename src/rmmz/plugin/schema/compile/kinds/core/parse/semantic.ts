@@ -55,27 +55,6 @@ const isParamToken = (token: Token): token is HeadToken<"param"> =>
 export const isParamOrCommand = (token: Token): token is XToken =>
   token.keyword === "param" || token.keyword === "command";
 
-export const pluginCommandContext = (
-  context: ParsingContext
-): PluginCommandTokens => {
-  const firstArgIndex = context.tokens.findIndex(
-    (t) => t.keyword === KEYWORD_ARG
-  );
-  const headAttr = context.tokens.slice(
-    0,
-    firstArgIndex < 0 ? undefined : firstArgIndex
-  );
-  const desc = headAttr.find((t) => t.keyword === "desc")?.value;
-  const text = headAttr.find((t) => t.keyword === "text")?.value;
-
-  return {
-    command: context.head.value,
-    args: extractArgs(context.tokens.slice(firstArgIndex)),
-    ...(text ? { text } : {}),
-    ...(desc ? { desc } : {}),
-  };
-};
-
 interface State {
   args: ArgToken[];
   current: ArgToken | null;
