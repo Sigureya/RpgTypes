@@ -6,6 +6,12 @@ import type {
   BooleanParam,
   NumberParam,
   StructParamPrimitive,
+  ComboParam,
+  FileArrayParam,
+  FileParam,
+  GenericIdParam,
+  KindOfStructBase,
+  NumberArrayParam,
 } from "./primitiveParams";
 
 export const compileAttributes = (tokens: ReadonlyArray<Token>) => {
@@ -21,19 +27,29 @@ const getType = (tokens: ReadonlyArray<Token>): string | undefined => {
   const typeToken = tokens.find((t) => t.keyword === KEYWORD_TYPE);
   return typeToken ? typeToken.value : undefined;
 };
+
 const attrString = (value: string): string => value;
+
+const comboFunc = (tokens: ReadonlyArray<Token>) => {
+  const options: string[] = tokens
+    .filter((t) => t.keyword === KEYWORD_OPTION)
+    .map((t) => t.value);
+
+  return {
+    ...mapKeywords(tokens, STRING),
+    kind: "combo",
+    options,
+  };
+};
 
 type XX<T> = MappingTable<Omit<T, "kind">>;
 
-type TableType = {
-  [K in StructParamPrimitive["kind"]]: XX<StructParamPrimitive & { kind: K }>;
-};
 const DATA_ID = {
   default: (value: string) => parseInt(value, 10),
   text: attrString,
   desc: attrString,
   parent: attrString,
-} as const;
+} as const satisfies XX<GenericIdParam>;
 
 const NUMBER = {
   default: (value: string) => parseFloat(value),
@@ -54,22 +70,25 @@ const BOOLEAN = {
   parent: attrString,
 } as const satisfies XX<BooleanParam>;
 
-const comboFunc = (tokens: ReadonlyArray<Token>) => {
-  const options: string[] = tokens
-    .filter((t) => t.keyword === KEYWORD_OPTION)
-    .map((t) => t.value);
+const STRING = {
+  default: attrString,
+  text: attrString,
+  desc: attrString,
+  parent: attrString,
+} as const satisfies XX<StructParamPrimitive & { kind: "string" }>;
 
-  return {
-    ...mapKeywords(tokens, table.string),
-    kind: "combo",
-    options,
-  };
-};
+const FILE = {
+  default: attrString,
+  text: attrString,
+  desc: attrString,
+  parent: attrString,
+  dir: attrString,
+} as const satisfies XX<FileParam>;
 
 const table2 = {
   combo: (tokens) => comboFunc(tokens),
   boolean: (tokens) => mapKeywords(tokens, BOOLEAN),
-  string: (tokens) => mapKeywords(tokens, table.string),
+  string: (tokens) => mapKeywords(tokens, STRING),
   number: (tokens) => mapKeywords(tokens, NUMBER),
   enemy: (tokens) => mapKeywords(tokens, DATA_ID),
   item: (tokens) => mapKeywords(tokens, DATA_ID),
@@ -82,23 +101,7 @@ const table2 = {
   troop: (tokens) => mapKeywords(tokens, DATA_ID),
   variable: (tokens) => mapKeywords(tokens, DATA_ID),
   switch: (tokens) => mapKeywords(tokens, DATA_ID),
-  file: (tokens) => mapKeywords(tokens, table.file),
+  file: (tokens) => mapKeywords(tokens, FILE),
 } as const satisfies Partial<
   Record<StructParamPrimitive["kind"], (tokens: ReadonlyArray<Token>) => object>
 >;
-
-const table = {
-  string: {
-    default: attrString,
-    text: attrString,
-    desc: attrString,
-    parent: attrString,
-  },
-  file: {
-    default: attrString,
-    text: attrString,
-    desc: attrString,
-    parent: attrString,
-    dir: attrString,
-  },
-} satisfies Partial<TableType>;
