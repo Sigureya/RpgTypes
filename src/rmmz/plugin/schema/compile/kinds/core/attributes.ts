@@ -1,6 +1,6 @@
 import { KEYWORD_OPTION, KEYWORD_TYPE } from "./parse/constants/keyword";
 import type { MappingTable } from "./parse/keyword";
-import { mapKeywords } from "./parse/keyword";
+import { mapKeywords, mapKeywords2 } from "./parse/keyword";
 import type { Token } from "./parse/types/token";
 import type {
   BooleanParam,
@@ -114,10 +114,7 @@ const FILE = {
 } as const satisfies MappingTableEx<FileParam>;
 
 const makeDataIdArray = (tokens: ReadonlyArray<Token>) => {
-  return {
-    default: [],
-    ...mapKeywords(tokens, DATA_ID_ARRAY),
-  };
+  return mapKeywords2(tokens, [], DATA_ID_ARRAY);
 };
 
 const table2 = {
