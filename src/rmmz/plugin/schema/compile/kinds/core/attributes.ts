@@ -113,8 +113,12 @@ const FILE = {
   dir: attrString,
 } as const satisfies MappingTableEx<FileParam>;
 
-const makeDataIdArray = (tokens: ReadonlyArray<Token>) =>
-  mapKeywords(tokens, DATA_ID_ARRAY);
+const makeDataIdArray = (tokens: ReadonlyArray<Token>) => {
+  return {
+    default: [],
+    ...mapKeywords(tokens, DATA_ID_ARRAY),
+  };
+};
 
 const table2 = {
   "number[]": (tokens) => mapKeywords(tokens, NUMBER_ARRAY),
