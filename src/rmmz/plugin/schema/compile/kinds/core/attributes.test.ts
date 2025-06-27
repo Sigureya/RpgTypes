@@ -7,7 +7,6 @@ import type {
   ComboParam,
   FileArrayParam,
   FileParam,
-  GenericIdParam,
   StructParamPrimitive,
 } from "./primitiveParams";
 
@@ -127,6 +126,56 @@ runTestCases<ComboParam>("combo", [
       options: [],
       text: "a combo",
       desc: "this is a combo",
+      parent: "parentId",
+    },
+  },
+  {
+    caseName: "最小セット",
+    input: [
+      { keyword: "type", value: "combo" },
+      { keyword: "default", value: "option1" },
+      { keyword: "option", value: "a" },
+      { keyword: "option", value: "b" },
+      { keyword: "option", value: "c" },
+    ],
+    expected: {
+      kind: "combo",
+      default: "option1",
+      options: ["a", "b", "c"],
+    },
+  },
+]);
+
+runTestCases<FileParam>("file", [
+  {
+    caseName: "最小セット",
+    input: [
+      { keyword: "type", value: "file" },
+      { keyword: "default", value: "file.txt" },
+      { keyword: "dir", value: "img" },
+    ],
+    expected: {
+      kind: "file",
+      default: "file.txt",
+      dir: "img",
+    },
+  },
+  {
+    caseName: "フルセット",
+    input: [
+      { keyword: "type", value: "file" },
+      { keyword: "default", value: "file.txt" },
+      { keyword: "text", value: "a file" },
+      { keyword: "desc", value: "this is a file" },
+      { keyword: "dir", value: "img" },
+      { keyword: "parent", value: "parentId" },
+    ],
+    expected: {
+      kind: "file",
+      default: "file.txt",
+      text: "a file",
+      desc: "this is a file",
+      dir: "img",
       parent: "parentId",
     },
   },
