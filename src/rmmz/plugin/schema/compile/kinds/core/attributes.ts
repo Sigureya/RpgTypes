@@ -126,6 +126,8 @@ const table2 = {
   "weapon[]": makeDataIdArray,
   "armor[]": makeDataIdArray,
   "state[]": makeDataIdArray,
+  "troop[]": makeDataIdArray,
+
   combo: (tokens) => comboFunc(tokens),
   boolean: (tokens) => mapKeywords(tokens, BOOLEAN),
   string: (tokens) => mapKeywords(tokens, STRING),
