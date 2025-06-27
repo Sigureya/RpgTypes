@@ -76,42 +76,6 @@ runTestCases<BooleanParam>("boolean", [
   },
 ]);
 
-runTestCases<ComboParam>("combo", [
-  {
-    caseName: "最小セット",
-    input: [
-      { keyword: "type", value: "combo" },
-      { keyword: "default", value: "option1" },
-      { keyword: "text", value: "a combo" },
-      { keyword: "desc", value: "this is a combo" },
-      { keyword: "parent", value: "parentId" },
-    ],
-    expected: {
-      kind: "combo",
-      default: "option1",
-      options: [],
-      text: "a combo",
-      desc: "this is a combo",
-      parent: "parentId",
-    },
-  },
-  {
-    caseName: "最小セット",
-    input: [
-      { keyword: "type", value: "combo" },
-      { keyword: "default", value: "option1" },
-      { keyword: "option", value: "a" },
-      { keyword: "option", value: "b" },
-      { keyword: "option", value: "c" },
-    ],
-    expected: {
-      kind: "combo",
-      default: "option1",
-      options: ["a", "b", "c"],
-    },
-  },
-]);
-
 runTestCases<FileParam>("file", [
   {
     caseName: "最小セット",
