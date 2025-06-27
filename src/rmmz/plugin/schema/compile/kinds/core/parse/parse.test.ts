@@ -1,7 +1,8 @@
 import { test, expect, describe } from "vitest";
 import { parsePlugin } from "./parse";
+import type { PluginCommandTokens } from "./types/pluginCommand";
 import type { ParsingResult } from "./types/result";
-import type { ParamToken, PluginCommandTokens } from "./types/token";
+import type { ParamToken } from "./types/token";
 
 const mockTexts: string[] = [
   "@param bool",

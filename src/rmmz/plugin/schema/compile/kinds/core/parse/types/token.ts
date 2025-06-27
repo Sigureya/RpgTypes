@@ -16,19 +16,7 @@ export interface ParsingContext<HeadToken extends Token = Token> {
   tokens: Token[];
 }
 
-export interface PluginCommandTokens {
-  command: string;
-  desc?: string;
-  text?: string;
-  args: ArgToken[];
-}
-
 export interface ParamToken {
   param: string;
-  attributes: Token[];
-}
-
-export interface ArgToken {
-  arg: string;
   attributes: Token[];
 }

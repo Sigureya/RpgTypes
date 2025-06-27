@@ -1,4 +1,5 @@
-import type { ParamToken, PluginCommandTokens } from "./token";
+import type { PluginCommandTokens } from "./pluginCommand";
+import type { ParamToken } from "./token";
 
 export interface ParsingResult {
   commands: PluginCommandTokens[];
