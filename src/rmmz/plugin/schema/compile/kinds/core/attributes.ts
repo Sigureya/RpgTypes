@@ -40,12 +40,13 @@ const numberArray = (value: string): number[] => {
   return numbers.filter((n) => !isNaN(n));
 };
 
-const comboFunc = (tokens: ReadonlyArray<Token>) => {
+const comboFunc = (tokens: ReadonlyArray<Token>): ComboParam => {
   const options: string[] = tokens
     .filter((t) => t.keyword === KEYWORD_OPTION)
     .map((t) => t.value);
 
   return {
+    default: options[0] ?? "",
     ...mapKeywords(tokens, STRING),
     kind: "combo",
     options,
