@@ -1,6 +1,7 @@
 import { describe, test, expect } from "vitest";
 import { parsePluginCommand } from "./pluginCommand";
-import type { ParsingContext, PluginCommandTokens } from "./types/token";
+import type { PluginCommandTokens } from "./types/pluginCommand";
+import type { ParsingContext } from "./types/token";
 
 const mockCommandSave = {
   head: { keyword: "command", value: "save" },
