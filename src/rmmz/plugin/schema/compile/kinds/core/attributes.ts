@@ -8,6 +8,7 @@ import type {
   StructParamPrimitive,
   ComboParam,
   FileArrayParam,
+  RpgDataIdArrayParam,
   FileParam,
   GenericIdParam,
   KindOfStructBase,
@@ -30,6 +31,15 @@ const getType = (tokens: ReadonlyArray<Token>): string | undefined => {
 
 const attrString = (value: string): string => value;
 
+const numberArray = (value: string): number[] => {
+  const numbers = value
+    .replace("[", "")
+    .replace("]", "")
+    .split(",")
+    .map((v) => parseFloat(v.replaceAll(`"`, "").trim()));
+  return numbers.filter((n) => !isNaN(n));
+};
+
 const comboFunc = (tokens: ReadonlyArray<Token>) => {
   const options: string[] = tokens
     .filter((t) => t.keyword === KEYWORD_OPTION)
@@ -51,6 +61,13 @@ const DATA_ID = {
   parent: attrString,
 } as const satisfies XX<GenericIdParam>;
 
+const DATA_ID_ARRAY = {
+  default: numberArray,
+  text: attrString,
+  desc: attrString,
+  parent: attrString,
+} as const;
+
 const NUMBER = {
   default: (value: string) => parseFloat(value),
   text: attrString,
@@ -59,7 +76,17 @@ const NUMBER = {
   min: (value: string) => parseFloat(value),
   max: (value: string) => parseFloat(value),
   parent: attrString,
-} satisfies XX<NumberParam>;
+} as const satisfies XX<NumberParam>;
+
+const NUMBER_ARRAY = {
+  default: numberArray,
+  text: attrString,
+  desc: attrString,
+  digit: (value: string) => parseInt(value, 10),
+  min: (value: string) => parseFloat(value),
+  max: (value: string) => parseFloat(value),
+  parent: attrString,
+} as const satisfies XX<NumberArrayParam>;
 
 const BOOLEAN = {
   default: (value: string) => value === "true",
@@ -85,7 +112,19 @@ const FILE = {
   dir: attrString,
 } as const satisfies XX<FileParam>;
 
+const makeDataIdArray = (tokens: ReadonlyArray<Token>) =>
+  mapKeywords(tokens, DATA_ID_ARRAY);
+
 const table2 = {
+  "number[]": (tokens) => mapKeywords(tokens, NUMBER_ARRAY),
+  "actor[]": makeDataIdArray,
+  "enemy[]": makeDataIdArray,
+  "item[]": makeDataIdArray,
+  "skill[]": makeDataIdArray,
+  "class[]": makeDataIdArray,
+  "weapon[]": makeDataIdArray,
+  "armor[]": makeDataIdArray,
+  "state[]": makeDataIdArray,
   combo: (tokens) => comboFunc(tokens),
   boolean: (tokens) => mapKeywords(tokens, BOOLEAN),
   string: (tokens) => mapKeywords(tokens, STRING),
