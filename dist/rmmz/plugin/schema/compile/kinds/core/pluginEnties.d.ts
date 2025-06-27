@@ -9,6 +9,10 @@ export interface PluginCommandType<T extends object> {
     text?: string;
     args: PrimitiveParams<T>;
 }
+export interface PluginParamType {
+    plugin: "param";
+    params: PrimitiveParams<object>;
+}
 export interface PluginType {
     plugindesc: string;
     commands: PluginCommandType<object>[];

@@ -1,6 +1,6 @@
 import { ParamBase } from './paramBase';
 import { DataKind_RpgUnion, DataKind_SystemUnion } from './rpgData/rpgDataTypesNames';
-export type StructParamPrimitive = BooleanParam | NumberParam | NumberArrayParam | RpgDataIdParam | RpgDataIdArrayParam | ComboParam | SelectParam | StringParam | StringArrayParam | SystemDataIdParam | FileParam | FileArrayParam | StructRefParam | StructArrayRefParam;
+export type StructParamPrimitive = BooleanParam | NumberParam | NumberArrayParam | RpgDataIdParam | RpgDataIdArrayParam | ComboParam | SelectParam | StringParam | StringArrayParam | SystemDataIdParam | SystemDataIdArrayParam | FileParam | FileArrayParam | StructRefParam | StructArrayRefParam;
 export interface RpgDataIdParam extends ParamBase {
     kind: DataKind_RpgUnion;
     default: number;
@@ -58,6 +58,10 @@ export interface SystemDataIdParam extends ParamBase {
     kind: DataKind_SystemUnion;
     default: number;
 }
+export interface SystemDataIdArrayParam extends ParamBase {
+    kind: `${DataKind_SystemUnion}[]`;
+    default: number[];
+}
 export interface FileParam extends ParamBase {
     kind: "file";
     default: string;
@@ -71,6 +75,9 @@ export interface FileArrayParam extends ParamBase {
 export interface KindOfStructBase extends ParamBase {
     struct: string;
 }
+/**
+ * - 型を参照するだけのパラメータ。別の箇所に型定義があることを前提としている。
+ */
 export interface StructRefParam extends KindOfStructBase {
     kind: "struct";
     struct: string;

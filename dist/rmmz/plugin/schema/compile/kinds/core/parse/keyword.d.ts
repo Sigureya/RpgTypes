@@ -1,22 +1,14 @@
-export declare const KEYWORD_TARGET: "target";
-export declare const KEYWORD_PLUGINDESC: "plugindesc";
-export declare const KEYWORD_AUTHOR: "author";
-export declare const KEYWORD_HELP: "help";
-export declare const KEYWORD_DESC: "desc";
-export declare const KEYWORD_TEXT: "text";
-export declare const KEYWORD_PARENT: "parent";
-export declare const KEYWORD_PARAM: "type";
-export declare const KEYWORD_DEFAULT: "default";
-export declare const KEYWORD_ON: "on";
-export declare const KEYWORD_OFF: "off";
-export declare const KEYWORD_MAX: "max";
-export declare const KEYWORD_MIN: "min";
-export declare const KEYWORD_DIGIT: "digit";
-export declare const KEYWORD_DIR: "dir";
-export declare const KEYWORD_OPTION: "option";
-export declare const KEYWORD_VALUE: "value";
-export declare const KEYWORD_COMMAND: "command";
-export declare const KEYWORD_ARG: "arg";
-export declare const KEYWORD_BASE: "base";
-export declare const KEYWORD_ORDERAFTER: "orderAfter";
-export declare const KEYWORD_ORDERBEFORE: "orderBefore";
+import { Token } from './types/token';
+export type MappingTable<T> = {
+    [K in Extract<keyof T, string>]: (value: string) => T[K];
+};
+type TableConcept = {
+    [key: string]: (tokens: string) => unknown;
+};
+export declare const mapKeywords2: <T extends TableConcept & {
+    default: (s: string) => unknown;
+}>(tokens: ReadonlyArray<Token>, defaultValue: ReturnType<T["default"]>, fnTable: T) => {
+    default: ReturnType<T["default"]>;
+} & { [K in keyof T]?: ReturnType<T[K]> | undefined; };
+export declare const mapKeywords: <T extends TableConcept>(tokens: ReadonlyArray<Token>, fnTable: T) => { [K in keyof T]?: ReturnType<T[K]>; };
+export {};
