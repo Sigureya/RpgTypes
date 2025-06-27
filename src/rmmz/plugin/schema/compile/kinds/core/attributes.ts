@@ -1,14 +1,18 @@
-import { KEYWORD_TYPE } from "./parse/constants/keyword";
+import { KEYWORD_OPTION, KEYWORD_TYPE } from "./parse/constants/keyword";
 import type { MappingTable } from "./parse/keyword";
 import { mapKeywords } from "./parse/keyword";
 import type { Token } from "./parse/types/token";
-import type { BooleanParam, StructParamPrimitive } from "./primitiveParams";
+import type {
+  BooleanParam,
+  NumberParam,
+  StructParamPrimitive,
+} from "./primitiveParams";
 
 export const compileAttributes = (tokens: ReadonlyArray<Token>) => {
   const type = getType(tokens) ?? "string";
-  const fn = table[type as keyof typeof table] ?? table.string;
+  const fn = table2[type as keyof typeof table2] ?? table2.string;
   return {
-    ...mapKeywords(tokens, fn),
+    ...fn(tokens),
     kind: type,
   };
 };
@@ -31,6 +35,58 @@ const DATA_ID = {
   parent: attrString,
 } as const;
 
+const NUMBER = {
+  default: (value: string) => parseFloat(value),
+  text: attrString,
+  desc: attrString,
+  digit: (value: string) => parseInt(value, 10),
+  min: (value: string) => parseFloat(value),
+  max: (value: string) => parseFloat(value),
+  parent: attrString,
+} satisfies XX<NumberParam>;
+
+const BOOLEAN = {
+  default: (value: string) => value === "true",
+  text: attrString,
+  desc: attrString,
+  on: attrString,
+  off: attrString,
+  parent: attrString,
+} as const satisfies XX<BooleanParam>;
+
+const comboFunc = (tokens: ReadonlyArray<Token>) => {
+  const options: string[] = tokens
+    .filter((t) => t.keyword === KEYWORD_OPTION)
+    .map((t) => t.value);
+
+  return {
+    ...mapKeywords(tokens, table.string),
+    kind: "combo",
+    options,
+  };
+};
+
+const table2 = {
+  combo: (tokens) => comboFunc(tokens),
+  boolean: (tokens) => mapKeywords(tokens, BOOLEAN),
+  string: (tokens) => mapKeywords(tokens, table.string),
+  number: (tokens) => mapKeywords(tokens, NUMBER),
+  enemy: (tokens) => mapKeywords(tokens, DATA_ID),
+  item: (tokens) => mapKeywords(tokens, DATA_ID),
+  skill: (tokens) => mapKeywords(tokens, DATA_ID),
+  actor: (tokens) => mapKeywords(tokens, DATA_ID),
+  class: (tokens) => mapKeywords(tokens, DATA_ID),
+  weapon: (tokens) => mapKeywords(tokens, DATA_ID),
+  armor: (tokens) => mapKeywords(tokens, DATA_ID),
+  state: (tokens) => mapKeywords(tokens, DATA_ID),
+  troop: (tokens) => mapKeywords(tokens, DATA_ID),
+  variable: (tokens) => mapKeywords(tokens, DATA_ID),
+  switch: (tokens) => mapKeywords(tokens, DATA_ID),
+  file: (tokens) => mapKeywords(tokens, table.file),
+} as const satisfies Partial<
+  Record<StructParamPrimitive["kind"], (tokens: ReadonlyArray<Token>) => object>
+>;
+
 const table = {
   string: {
     default: attrString,
@@ -38,34 +94,6 @@ const table = {
     desc: attrString,
     parent: attrString,
   },
-  boolean: {
-    default: (value: string) => value === "true",
-    text: attrString,
-    desc: attrString,
-    on: attrString,
-    off: attrString,
-    parent: attrString,
-  } satisfies XX<BooleanParam>,
-  number: {
-    default: (value: string) => parseFloat(value),
-    text: attrString,
-    desc: attrString,
-    digit: (value: string) => parseInt(value, 10),
-    min: (value: string) => parseFloat(value),
-    max: (value: string) => parseFloat(value),
-    parent: attrString,
-  } satisfies XX<Extract<StructParamPrimitive, { kind: "number" }>>,
-  enemy: DATA_ID,
-  item: DATA_ID,
-  skill: DATA_ID,
-  actor: DATA_ID,
-  class: DATA_ID,
-  weapon: DATA_ID,
-  armor: DATA_ID,
-  state: DATA_ID,
-  troop: DATA_ID,
-  variable: DATA_ID,
-  switch: DATA_ID,
   file: {
     default: attrString,
     text: attrString,
