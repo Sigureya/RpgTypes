@@ -25,7 +25,8 @@ describe("compileAttributes - number", () => {
       { keyword: "digit", value: "123" },
       { keyword: "min", value: "-1000.5" },
       { keyword: "max", value: "1000.5" },
-    ];
+    ] satisfies { keyword: "type" | keyof NumberParam; value: string }[];
+
     const expected: NumberParam = {
       kind: "number",
       default: 123.45,
