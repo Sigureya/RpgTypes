@@ -52,14 +52,14 @@ const comboFunc = (tokens: ReadonlyArray<Token>) => {
   };
 };
 
-type XX<T> = MappingTable<Omit<T, "kind">>;
+type MappingTableEx<T> = MappingTable<Omit<T, "kind">>;
 
 const DATA_ID = {
   default: (value: string) => parseInt(value, 10),
   text: attrString,
   desc: attrString,
   parent: attrString,
-} as const satisfies XX<GenericIdParam>;
+} as const satisfies MappingTableEx<GenericIdParam>;
 
 const DATA_ID_ARRAY = {
   default: numberArray,
@@ -76,7 +76,7 @@ const NUMBER = {
   min: (value: string) => parseFloat(value),
   max: (value: string) => parseFloat(value),
   parent: attrString,
-} as const satisfies XX<NumberParam>;
+} as const satisfies MappingTableEx<NumberParam>;
 
 const NUMBER_ARRAY = {
   default: numberArray,
@@ -86,7 +86,7 @@ const NUMBER_ARRAY = {
   min: (value: string) => parseFloat(value),
   max: (value: string) => parseFloat(value),
   parent: attrString,
-} as const satisfies XX<NumberArrayParam>;
+} as const satisfies MappingTableEx<NumberArrayParam>;
 
 const BOOLEAN = {
   default: (value: string) => value === "true",
@@ -95,14 +95,14 @@ const BOOLEAN = {
   on: attrString,
   off: attrString,
   parent: attrString,
-} as const satisfies XX<BooleanParam>;
+} as const satisfies MappingTableEx<BooleanParam>;
 
 const STRING = {
   default: attrString,
   text: attrString,
   desc: attrString,
   parent: attrString,
-} as const satisfies XX<StructParamPrimitive & { kind: "string" }>;
+} as const satisfies MappingTableEx<StructParamPrimitive & { kind: "string" }>;
 
 const FILE = {
   default: attrString,
@@ -110,7 +110,7 @@ const FILE = {
   desc: attrString,
   parent: attrString,
   dir: attrString,
-} as const satisfies XX<FileParam>;
+} as const satisfies MappingTableEx<FileParam>;
 
 const makeDataIdArray = (tokens: ReadonlyArray<Token>) =>
   mapKeywords(tokens, DATA_ID_ARRAY);
