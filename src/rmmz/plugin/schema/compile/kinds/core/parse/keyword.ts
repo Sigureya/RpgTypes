@@ -8,16 +8,23 @@ type TableConcept = {
   [key: string]: (tokens: string) => unknown;
 };
 
-export const mapKeywords2 = <
-  T extends TableConcept & { default: (s: string) => unknown }
+export const compileArrayParam = <
+  T extends TableConcept & { default: (s: string) => unknown[] },
+  Kind extends string
 >(
   tokens: ReadonlyArray<Token>,
-  defaultValue: ReturnType<T["default"]>,
+  kind: Kind,
   fnTable: T
-) => {
+): {
+  default: ReturnType<T["default"]>;
+  kind: Kind;
+} & {
+  [K in keyof T]?: ReturnType<T[K]>;
+} => {
   return {
-    default: defaultValue,
+    default: [],
     ...mapKeywords(tokens, fnTable),
+    kind: kind,
   };
 };
 
