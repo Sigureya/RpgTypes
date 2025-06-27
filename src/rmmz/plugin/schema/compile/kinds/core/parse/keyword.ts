@@ -8,6 +8,19 @@ type TableConcept = {
   [key: string]: (tokens: string) => unknown;
 };
 
+export const mapKeywords2 = <
+  T extends TableConcept & { default: (s: string) => unknown }
+>(
+  tokens: ReadonlyArray<Token>,
+  defaultValue: ReturnType<T["default"]>,
+  fnTable: T
+) => {
+  return {
+    default: defaultValue,
+    ...mapKeywords(tokens, fnTable),
+  };
+};
+
 export const mapKeywords = <T extends TableConcept>(
   tokens: ReadonlyArray<Token>,
   fnTable: T
