@@ -15,6 +15,7 @@ export type StructParamPrimitive =
   | StringParam
   | StringArrayParam
   | SystemDataIdParam
+  | SystemDataIdArrayParam
   | FileParam
   | FileArrayParam
   | StructRefParam
@@ -24,6 +25,7 @@ export interface RpgDataIdParam extends ParamBase {
   kind: DataKind_RpgUnion;
   default: number;
 }
+
 export interface RpgDataIdArrayParam extends ParamBase {
   kind: `${DataKind_RpgUnion}[]`;
   default: number[];
@@ -82,11 +84,17 @@ export interface SystemDataIdParam extends ParamBase {
   default: number;
 }
 
+export interface SystemDataIdArrayParam extends ParamBase {
+  kind: `${DataKind_SystemUnion}[]`;
+  default: number[];
+}
+
 export interface FileParam extends ParamBase {
   kind: "file";
   default: string;
   dir: string;
 }
+
 export interface FileArrayParam extends ParamBase {
   kind: "file[]";
   default: string[];
@@ -97,7 +105,9 @@ export interface KindOfStructBase extends ParamBase {
   struct: string;
 }
 
-// 型を参照するだけのパラメータ。別の箇所に型定義があることを前提としている。
+/**
+ * - 型を参照するだけのパラメータ。別の箇所に型定義があることを前提としている。
+ */
 export interface StructRefParam extends KindOfStructBase {
   kind: "struct";
   struct: string;
