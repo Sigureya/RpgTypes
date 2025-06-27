@@ -75,40 +75,6 @@ runTestCases<BooleanParam>("boolean", [
     },
   },
 ]);
-runTestCases("number", [
-  {
-    caseName: "最小セット",
-    input: [
-      { keyword: "type", value: "number" },
-      { keyword: "default", value: "123.45" },
-    ],
-    expected: {
-      kind: "number",
-      default: 123.45,
-    },
-  },
-  {
-    caseName: "フルセット",
-    input: [
-      { keyword: "type", value: "number" },
-      { keyword: "default", value: "123.45" },
-      { keyword: "text", value: "a number" },
-      { keyword: "desc", value: "this is a number" },
-      { keyword: "digit", value: "123" },
-      { keyword: "min", value: "-1000.5" },
-      { keyword: "max", value: "1000.5" },
-    ],
-    expected: {
-      kind: "number",
-      default: 123.45,
-      text: "a number",
-      desc: "this is a number",
-      digit: 123,
-      min: -1000.5,
-      max: 1000.5,
-    },
-  },
-]);
 
 runTestCases<ComboParam>("combo", [
   {

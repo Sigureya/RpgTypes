@@ -1,10 +1,6 @@
 import { KEYWORD_ARG } from "./constants/keyword";
-import type {
-  ParsingContext,
-  PluginCommandTokens,
-  ArgToken,
-  Token,
-} from "./types/token";
+import type { PluginCommandTokens, ArgToken } from "./types/pluginCommand";
+import type { ParsingContext, Token } from "./types/token";
 
 export const parsePluginCommand = (
   context: ParsingContext
