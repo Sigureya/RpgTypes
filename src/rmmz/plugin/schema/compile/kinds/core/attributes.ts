@@ -19,13 +19,12 @@ import type {
   DataKind_SystemUnion,
 } from "./rpgData/rpgDataTypesNames";
 
-export const compileAttributes = (tokens: ReadonlyArray<Token>) => {
+export const compileAttributes = (
+  tokens: ReadonlyArray<Token>
+): StructParamPrimitive => {
   const type = getType(tokens) ?? "string";
   const fn = table2[type as keyof typeof table2] ?? table2.string;
-  return {
-    ...fn(tokens),
-    kind: type,
-  };
+  return fn(tokens);
 };
 
 const getType = (tokens: ReadonlyArray<Token>): string | undefined => {
@@ -141,9 +140,11 @@ const compileFileParam = (tokens: ReadonlyArray<Token>): FileParam => {
   };
 };
 
-const compileDataIdArray = (
+const compileDataIdArray = <
+  Kind extends DataKind_RpgUnion | DataKind_SystemUnion
+>(
   tokens: ReadonlyArray<Token>,
-  kind: `${DataKind_RpgUnion | DataKind_SystemUnion}[]`
+  kind: `${Kind}[]`
 ) => {
   const DATA_ID_ARRAY = {
     default: numberArray,
@@ -200,5 +201,7 @@ const table2 = {
   switch: (tokens) => compileDataId(tokens, "switch"),
   file: compileFileParam,
 } as const satisfies Partial<{
-  [K in StructParamPrimitive["kind"]]: (tokens: ReadonlyArray<Token>) => object;
+  [K in StructParamPrimitive["kind"]]: (
+    tokens: ReadonlyArray<Token>
+  ) => StructParamPrimitive;
 }>;
