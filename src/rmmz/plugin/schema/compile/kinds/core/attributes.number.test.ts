@@ -1,14 +1,15 @@
 import { describe, test, expect } from "vitest";
 import { compileAttributes } from "./attributes";
-import type { Token } from "./parse/types/token";
+import type { TokenOf } from "./parse/types/tokenOf";
 import type { NumberParam } from "./primitiveParams";
 
 describe("compileAttributes - number", () => {
   test("最小セット", () => {
-    const token: Token[] = [
+    const token: TokenOf<NumberParam>[] = [
       { keyword: "type", value: "number" },
       { keyword: "default", value: "123.45" },
     ];
+
     const expected: NumberParam = {
       kind: "number",
       default: 123.45,
@@ -17,7 +18,7 @@ describe("compileAttributes - number", () => {
     expect(result).toEqual(expected);
   });
   test("フルセット", () => {
-    const token: Token[] = [
+    const token: TokenOf<NumberParam>[] = [
       { keyword: "type", value: "number" },
       { keyword: "default", value: "123.45" },
       { keyword: "text", value: "a number" },
@@ -25,7 +26,7 @@ describe("compileAttributes - number", () => {
       { keyword: "digit", value: "123" },
       { keyword: "min", value: "-1000.5" },
       { keyword: "max", value: "1000.5" },
-    ] satisfies { keyword: "type" | keyof NumberParam; value: string }[];
+    ];
 
     const expected: NumberParam = {
       kind: "number",
