@@ -1,8 +1,7 @@
 import { test, expect, describe } from "vitest";
+import type { PP } from "./parse";
 import { parsePlugin } from "./parse";
-import type { PluginCommandTokens } from "./types/pluginCommand";
-import type { ParsingResult } from "./types/result";
-import type { ParamToken } from "./types/token";
+import type { PluginCommandTokens } from "./parse/types/pluginCommand";
 
 const mockTexts: string[] = [
   "@param bool",
@@ -40,30 +39,30 @@ const mockTexts: string[] = [
 ];
 
 describe("parsePlugin", () => {
-  const result: ParsingResult = parsePlugin(mockTexts.join("\n"));
+  const result = parsePlugin(mockTexts.join("\n"));
   test("should parse plugin annotations correctly", () => {
     expect(result.meta).toBeDefined();
   });
   test("should parse parameters correctly", () => {
-    const expected: ParamToken[] = [
+    const expected: PP[] = [
       {
-        param: "bool",
-        attributes: [
-          { keyword: "type", value: "boolean" },
-          { keyword: "text", value: "autoBattle" },
-          { keyword: "default", value: "false" },
-          { keyword: "on", value: "enabled" },
-          { keyword: "off", value: "disabled" },
-        ],
+        name: "bool",
+        attr: {
+          kind: "boolean",
+          text: "autoBattle",
+          default: false,
+          on: "enabled",
+          off: "disabled",
+        },
       },
       {
-        param: "num",
-        attributes: [
-          { keyword: "type", value: "number" },
-          { keyword: "default", value: "0" },
-          { keyword: "min", value: "0" },
-          { keyword: "max", value: "100" },
-        ],
+        name: "num",
+        attr: {
+          kind: "number",
+          default: 0,
+          min: 0,
+          max: 100,
+        },
       },
     ];
     expect(result.params).toEqual(expected);
