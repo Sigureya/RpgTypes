@@ -41,7 +41,7 @@ describe("Select field schema generation - Basic", () => {
 });
 
 describe("Select field schema generation -  with x-rpg-param", () => {
-  const expectedSchema: JSONSchemaTypeWithRpgParam<string> = {
+  const expectedSchema: JSONSchemaTypeWithRpgParam<SelectParam> = {
     type: "string",
     default: data.default,
     title: data.text,

@@ -15,12 +15,7 @@ export const compileComboField = (
 
 export const compileComboFieldWithXparam = (
   data: ComboParam
-): JSONSchemaTypeWithRpgParam<
-  string,
-  {
-    options: string[];
-  }
-> => ({
+): JSONSchemaTypeWithRpgParam<ComboParam> => ({
   type: "string",
   ...withDefault(data.default),
   ...withTexts(data),

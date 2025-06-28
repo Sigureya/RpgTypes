@@ -37,7 +37,7 @@ describe("Combo field schema generation - Basic", () => {
 });
 
 describe("Combo field schema generation - with x-rpg-param", () => {
-  const expectedSchema: JSONSchemaTypeWithRpgParam<string> = {
+  const expectedSchema: JSONSchemaTypeWithRpgParam<ComboParam> = {
     type: "string",
     default: data.default,
     title: data.text,

@@ -14,7 +14,7 @@ export const compileFileField = (data: FileParam) =>
 
 export const compileFileFieldWithXparam = (
   data: FileParam
-): JSONSchemaTypeWithRpgParam<string> => ({
+): JSONSchemaTypeWithRpgParam<FileParam> => ({
   type: "string",
   ...withDefault(data.default),
   ...withTexts(data),

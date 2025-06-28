@@ -18,13 +18,7 @@ export const compileBooleanField = (
 
 export const compileBooleanFieldWithXParam = (
   data: BooleanParam
-): JSONSchemaTypeWithRpgParam<
-  boolean,
-  {
-    on?: string;
-    off?: string;
-  }
-> => ({
+): JSONSchemaTypeWithRpgParam<BooleanParam> => ({
   type: "boolean",
   ...withDefault(data.default),
   ...withTexts(data),

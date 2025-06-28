@@ -37,7 +37,7 @@ describe("File field schema generation - Basic", () => {
 });
 
 describe("File field schema generation with x-rpg-param", () => {
-  const expectedSchema: JSONSchemaTypeWithRpgParam<string> = {
+  const expectedSchema: JSONSchemaTypeWithRpgParam<FileParam> = {
     type: "string",
     default: mockData.default,
     title: mockData.text,
