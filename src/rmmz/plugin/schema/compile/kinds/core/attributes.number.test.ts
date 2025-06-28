@@ -4,7 +4,20 @@ import type { TokenOf } from "./parse/types/tokenOf";
 import type { NumberParam, NumberArrayParam } from "./primitiveParams";
 
 describe("compileAttributes - number", () => {
-  test("最小セット", () => {
+  test("type only", () => {
+    const token: TokenOf<NumberParam>[] = [
+      { keyword: "type", value: "number" },
+    ];
+
+    const expected: NumberParam = {
+      kind: "number",
+      default: 0,
+    };
+    const result = compileAttributes(token);
+    expect(result).toEqual(expected);
+  });
+
+  test("with default", () => {
     const token: TokenOf<NumberParam>[] = [
       { keyword: "type", value: "number" },
       { keyword: "default", value: "123.45" },
@@ -17,7 +30,7 @@ describe("compileAttributes - number", () => {
     const result = compileAttributes(token);
     expect(result).toEqual(expected);
   });
-  test("フルセット", () => {
+  test("with all properties", () => {
     const token: TokenOf<NumberParam>[] = [
       { keyword: "type", value: "number" },
       { keyword: "default", value: "123.45" },
@@ -43,7 +56,19 @@ describe("compileAttributes - number", () => {
 });
 
 describe("compileAttributes - number[]", () => {
-  test("最小セット", () => {
+  test("type only", () => {
+    const token: TokenOf<NumberArrayParam>[] = [
+      { keyword: "type", value: "number[]" },
+    ];
+
+    const expected: NumberArrayParam = {
+      kind: "number[]",
+      default: [],
+    };
+    const result = compileAttributes(token);
+    expect(result).toEqual(expected);
+  });
+  test("with default", () => {
     const token: TokenOf<NumberArrayParam>[] = [
       { keyword: "type", value: "number[]" },
       { keyword: "default", value: `["1", "2", "3"]` },
@@ -57,7 +82,7 @@ describe("compileAttributes - number[]", () => {
     expect(result).toEqual(expected);
   });
 
-  test("空の配列", () => {
+  test("with empty array", () => {
     const token: TokenOf<NumberArrayParam>[] = [
       { keyword: "type", value: "number[]" },
       { keyword: "default", value: `[]` },
@@ -70,7 +95,7 @@ describe("compileAttributes - number[]", () => {
     const result = compileAttributes(token);
     expect(result).toEqual(expected);
   });
-  test("フルセット", () => {
+  test("with all properties", () => {
     const token: TokenOf<NumberArrayParam>[] = [
       { keyword: "type", value: "number[]" },
       { keyword: "default", value: `["4", "5", "6"]` },
