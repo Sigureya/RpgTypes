@@ -1,20 +1,43 @@
 import { test, expect, describe } from "vitest";
 import type { PluginCommand, PluginParam } from "./parsePlugin";
-import { parsePlugin } from "./parsePlugin";
+import { parsePlugin } from "./parseV2";
 
 const mockTexts: string[] = [
   "@param bool",
   "@type boolean",
   "@text autoBattle",
+  "@text dummyText",
   "@default false",
   "@on enabled",
   "@off disabled",
+  "@on dummyOn",
+  "@off dummyOff",
+
+  "@param bool",
+  "@text duplicate",
+  "@desc this item ignores the previous",
+  "@type number",
+  "@default 0",
 
   "@param num",
   "@type number",
   "@default 0",
   "@min 0",
   "@max 100",
+
+  "@param numArray",
+  "@type number[]",
+  `@default ["1", "2", "3"]`,
+  "",
+
+  "@param enemy",
+  "@type enemy",
+  "@default 1",
+
+  "@param troop",
+  "@text first troop",
+  "@type troop",
+  "@default 1",
 
   "@command save",
   "@text writeSave",
@@ -35,6 +58,16 @@ const mockTexts: string[] = [
   "* @arg arg2",
   "* @type string",
   "* @default abc",
+
+  "@command randomItem",
+  "@text randomItem",
+  "@desc random Item",
+  "@arg items",
+  "@type item[]",
+  "@default []",
+  "@arg message",
+  "@type string",
+  "@default getItem",
 ];
 
 describe("parsePlugin", () => {
@@ -61,6 +94,28 @@ describe("parsePlugin", () => {
           default: 0,
           min: 0,
           max: 100,
+        },
+      },
+      {
+        name: "numArray",
+        attr: {
+          kind: "number[]",
+          default: [1, 2, 3],
+        },
+      },
+      {
+        name: "enemy",
+        attr: {
+          kind: "enemy",
+          default: 1,
+        },
+      },
+      {
+        name: "troop",
+        attr: {
+          kind: "troop",
+          text: "first troop",
+          default: 1,
         },
       },
     ];
@@ -106,6 +161,27 @@ describe("parsePlugin", () => {
             attr: {
               kind: "string",
               default: "abc",
+            },
+          },
+        ],
+      },
+      {
+        command: "randomItem",
+        text: "randomItem",
+        desc: "random Item",
+        args: [
+          {
+            name: "items",
+            attr: {
+              kind: "item[]",
+              default: [],
+            },
+          },
+          {
+            name: "message",
+            attr: {
+              kind: "string",
+              default: "getItem",
             },
           },
         ],
