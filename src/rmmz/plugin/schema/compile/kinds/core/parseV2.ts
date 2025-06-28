@@ -32,7 +32,6 @@ type ParseState = {
   commands: PluginCommand[];
   currentParam: PluginParam | null;
   currentCommand: PluginCommand | null;
-  //  currentArg: PluginCommandArg | null;
 };
 
 const withTexts = (command: { desc?: string; text?: string }) => {
@@ -70,25 +69,6 @@ const flashV2 = (state: ParseState): ParseState => {
 
   return state;
 };
-const flashParamOrArg = (state: ParseState): ParseState => {
-  if (state.currentCommand && state.currentParam) {
-    const newCommand: PluginCommand = {
-      ...withTexts(state.currentCommand),
-      command: state.currentCommand.command,
-      args: state.currentCommand.args.concat(state.currentParam),
-    };
-    return {
-      ...state,
-      commands: state.commands,
-      currentParam: null,
-      currentCommand: newCommand,
-    };
-  }
-  return state;
-};
-// flash3を考える
-// typeを使って抽出対象を特定
-// commandはtype:"command"という架空のtypeとして扱う
 
 const handleParam = (oldstate: ParseState, value: string): ParseState => {
   const state = flashV2(oldstate);
@@ -103,20 +83,9 @@ const handleParam = (oldstate: ParseState, value: string): ParseState => {
     ...state,
     params,
     currentParam: { name: value, attr: {} },
-    // currentArg: null,
   };
 };
 const handleType = (state: ParseState, value: string): ParseState => {
-  // if (state.currentArg) {
-  //   return {
-  //     ...state,
-  //     // currentArg: {
-  //     //   ...state.currentArg,
-  //     //   attr: { ...state.currentArg.attr, kind: value },
-  //     // },
-  //     currentParam: state.currentParam,
-  //   };
-  // }
   if (state.currentParam) {
     return {
       ...state,
@@ -131,21 +100,12 @@ const handleType = (state: ParseState, value: string): ParseState => {
 
 const handleDefault = (state: ParseState, value: string): ParseState => {
   const parsedDefault = safeParseJSON(value);
-  // if (state.currentArg) {
-  //   return {
-  //     ...state,
-  //     currentArg: {
-  //       ...state.currentArg,
-  //       attr: { ...state.currentArg.attr, default: parsedDefault },
-  //     },
-  //     currentParam: state.currentParam,
-  //   };
-  // }
+
   if (state.currentParam) {
     return {
       ...state,
       currentParam: {
-        ...state.currentParam,
+        name: state.currentParam.name,
         attr: { ...state.currentParam.attr, default: parsedDefault },
       },
     };
@@ -168,16 +128,6 @@ const addText = <T extends Record<string, unknown> | PluginCommand>(
 };
 
 const handleText = (state: ParseState, value: string): ParseState => {
-  // if (state.currentArg) {
-  //   return {
-  //     ...state,
-  //     currentArg: {
-  //       ...state.currentArg,
-  //       attr: addText(state.currentArg.attr, value),
-  //     },
-  //     currentParam: state.currentParam,
-  //   };
-  // }
   if (state.currentParam) {
     return {
       ...state,
@@ -197,16 +147,6 @@ const handleText = (state: ParseState, value: string): ParseState => {
 };
 
 const handleDesc = (state: ParseState, value: string): ParseState => {
-  // if (state.currentArg) {
-  //   return {
-  //     ...state,
-  //     currentArg: {
-  //       ...state.currentArg,
-  //       attr: { ...state.currentArg.attr, desc: value },
-  //     },
-  //     currentParam: state.currentParam,
-  //   };
-  // }
   if (state.currentParam) {
     return {
       ...state,
@@ -215,7 +155,8 @@ const handleDesc = (state: ParseState, value: string): ParseState => {
         attr: { ...state.currentParam.attr, desc: value },
       },
     };
-  } else if (state.currentCommand) {
+  }
+  if (state.currentCommand) {
     return {
       ...state,
       currentCommand: {
@@ -271,10 +212,27 @@ const handleCommand = (oldstate: ParseState, value: string): ParseState => {
 };
 
 const handleArg = (state: ParseState, value: string): ParseState => {
-  const newState = flashParamOrArg(state);
-
+  if (!state.currentCommand) {
+    return state;
+  }
+  if (state.currentParam) {
+    const argAddedCommand: PluginCommand = {
+      ...withTexts(state.currentCommand),
+      command: state.currentCommand.command,
+      args: state.currentCommand.args.concat(state.currentParam),
+    };
+    return {
+      ...state,
+      commands: state.commands,
+      currentCommand: argAddedCommand,
+      currentParam: {
+        name: value,
+        attr: {},
+      },
+    };
+  }
   return {
-    ...newState,
+    ...state,
     currentParam: {
       name: value,
       attr: {},
@@ -284,16 +242,6 @@ const handleArg = (state: ParseState, value: string): ParseState => {
 
 const handleMin = (state: ParseState, value: string): ParseState => {
   const parsedMin = safeParseJSON(value);
-  // if (state.currentArg) {
-  //   return {
-  //     ...state,
-  //     currentArg: {
-  //       ...state.currentArg,
-  //       attr: { ...state.currentArg.attr, min: parsedMin },
-  //     },
-  //     currentParam: state.currentParam,
-  //   };
-  // }
 
   if (state.currentParam) {
     return {
@@ -309,16 +257,6 @@ const handleMin = (state: ParseState, value: string): ParseState => {
 
 const handleMax = (state: ParseState, value: string): ParseState => {
   const parsedMax = safeParseJSON(value);
-  // if (state.currentArg) {
-  //   return {
-  //     ...state,
-  //     currentArg: {
-  //       ...state.currentArg,
-  //       attr: { ...state.currentArg.attr, max: parsedMax },
-  //     },
-  //     currentParam: state.currentParam,
-  //   };
-  // }
   if (state.currentParam) {
     return {
       ...state,
@@ -332,17 +270,6 @@ const handleMax = (state: ParseState, value: string): ParseState => {
 };
 
 const handleDefaultCase = (state: ParseState): ParseState => state;
-
-// コマンド確定時にcurrentArgを必ずargsにpushする
-const flushCommand = (
-  cmd: PluginCommand,
-  currentArg: PluginCommandArg | null
-): PluginCommand => {
-  if (currentArg) {
-    return { ...cmd, args: [...cmd.args, currentArg] };
-  }
-  return cmd;
-};
 
 export const parsePlugin = (text: string): ParsedPlugin => {
   const lines = text.split(/\r?\n/);
