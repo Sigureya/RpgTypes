@@ -9,16 +9,11 @@ export interface PluginParam {
   attr: Record<string, any>;
 }
 
-export interface PluginCommandArg {
-  name: string;
-  attr: Record<string, any>;
-}
-
 export interface PluginCommand {
   command: string;
   text?: string;
   desc?: string;
-  args: PluginCommandArg[];
+  args: PluginParam[];
 }
 
 export interface ParsedPlugin {
@@ -41,9 +36,9 @@ const withTexts = (command: { desc?: string; text?: string }) => {
   };
 };
 
-const flashV2 = (state: ParseState): ParseState => {
+const flashCurrentItem = (state: ParseState): ParseState => {
   if (state.currentCommand) {
-    const newArgs: PluginCommandArg[] = state.currentParam
+    const newArgs: PluginParam[] = state.currentParam
       ? state.currentCommand.args.concat(state.currentParam)
       : state.currentCommand.args;
     const newCommand: PluginCommand = {
@@ -71,7 +66,7 @@ const flashV2 = (state: ParseState): ParseState => {
 };
 
 const handleParam = (oldstate: ParseState, value: string): ParseState => {
-  const state = flashV2(oldstate);
+  const state = flashCurrentItem(oldstate);
   // すでに同名のparamが存在する場合は新しいparamを作らない
   if (state.params.some((p) => p.name === value)) {
     return state;
@@ -199,14 +194,13 @@ const handleOff = (state: ParseState, value: string): ParseState => {
 };
 
 const handleCommand = (oldstate: ParseState, value: string): ParseState => {
-  const state = flashV2(oldstate);
+  const state = flashCurrentItem(oldstate);
 
   const commands = state.currentCommand ? [...state.commands] : state.commands;
   return {
     ...state,
     commands,
     currentCommand: { command: value, args: [] },
-    //    currentArg: null,
     currentParam: null,
   };
 };
@@ -319,7 +313,7 @@ export const parsePlugin = (text: string): ParsedPlugin => {
     }
   );
 
-  const finalState = flashV2(state);
+  const finalState = flashCurrentItem(state);
   return {
     params: finalState.params,
     commands: finalState.commands,
