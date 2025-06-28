@@ -15,14 +15,15 @@ export const compileArrayField = <T, S extends JSONSchemaType<T>>(
 /**
  * - ParamBaseの派生型からメタ情報を抽出。値が無効な場合はフィールドを生成しない。
  */
-export const withTexts = (
-  kind: ParamBase
-): {
+export const withTexts = (param: {
+  text?: string;
+  desc?: string;
+}): {
   title?: string;
   description?: string;
 } => ({
-  ...(typeof kind.text === "string" ? { title: kind.text } : {}),
-  ...(typeof kind.desc === "string" ? { description: kind.desc } : {}),
+  ...(typeof param.text === "string" ? { title: param.text } : {}),
+  ...(typeof param.desc === "string" ? { description: param.desc } : {}),
 });
 
 /**
