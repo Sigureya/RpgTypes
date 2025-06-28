@@ -15,6 +15,7 @@ import type {
   SystemDataIdParam,
   StringParam,
   SelectParam,
+  StringArrayParam,
 } from "./primitiveParams";
 import type {
   DataKind_RpgUnion,
@@ -137,6 +138,19 @@ const compileStringParam = (tokens: ReadonlyArray<Token>): StringParam => {
   };
 };
 
+const compileStringArrayParam = (
+  tokens: ReadonlyArray<Token>
+): StringArrayParam => {
+  const STRING_ARRAY = {
+    default: (value: string): string[] => value.split(",").map((v) => v.trim()),
+    text: attrString,
+    desc: attrString,
+    parent: attrString,
+  } as const satisfies MappingTableEx<StringArrayParam>;
+
+  return compileArrayParam(tokens, "string[]", STRING_ARRAY);
+};
+
 const compileFileParam = (tokens: ReadonlyArray<Token>): FileParam => {
   const FILE = {
     default: attrString,
@@ -189,8 +203,9 @@ const parameterCompilerDispatch = {
   combo: compileComboParam,
   boolean: compileBooleanParam,
   string: compileStringParam,
-  "string[]": compileStringParam,
+  "string[]": compileStringArrayParam,
   multiline_string: compileStringParam,
+  "multiline_string[]": compileStringArrayParam,
   number: compileNumberParam,
   "number[]": compileNumberArrayParam,
   select: compileSelectParam,
