@@ -1,9 +1,4 @@
-import type {
-  ParsingContext,
-  Token,
-  HeadToken,
-  ParamTokens,
-} from "./types/token";
+import type { ParsingContext, Token, HeadToken } from "./types/token";
 
 interface SlicingState {
   params: ParsingContext[];
@@ -28,11 +23,6 @@ export interface SliceResult {
   params: ParsingContext[];
   commands: ParsingContext[];
 }
-
-export const parsePluginParam = (context: ParsingContext): ParamTokens => ({
-  param: context.head.value,
-  attributes: context.tokens,
-});
 
 export const groupTokensByContext = (tokens: Token[]): SliceResult => {
   const acc = reduceTokens(tokens);
