@@ -19,11 +19,15 @@ import type {
   DataKind_SystemUnion,
 } from "./rpgData/rpgDataTypesNames";
 
+type MappingTableEx<T> = MappingTable<Omit<T, "kind">>;
+
 export const compileAttributes = (
   tokens: ReadonlyArray<Token>
 ): StructParamPrimitive => {
   const type = getType(tokens) ?? "string";
-  const fn = table2[type as keyof typeof table2] ?? table2.string;
+  const fn =
+    parameterCompilerDispatch[type as keyof typeof parameterCompilerDispatch] ??
+    parameterCompilerDispatch.string;
   return fn(tokens);
 };
 
@@ -107,8 +111,6 @@ const compileNumberArrayParam = (
   return compileArrayParam(tokens, "number[]", NUMBER_ARRAY);
 };
 
-type MappingTableEx<T> = MappingTable<Omit<T, "kind">>;
-
 const STRING = {
   default: attrString,
   text: attrString,
@@ -172,7 +174,7 @@ const compileDataId = <Kind extends DataKind_RpgUnion | DataKind_SystemUnion>(
   } satisfies SystemDataIdParam | RpgDataIdParam;
 };
 
-const table2 = {
+const parameterCompilerDispatch = {
   "number[]": compileNumberArrayParam,
   "actor[]": (tokens) => compileDataIdArray(tokens, "actor[]"),
   "enemy[]": (tokens) => compileDataIdArray(tokens, "enemy[]"),
@@ -197,6 +199,7 @@ const table2 = {
   armor: (tokens) => compileDataId(tokens, "armor"),
   state: (tokens) => compileDataId(tokens, "state"),
   troop: (tokens) => compileDataId(tokens, "troop"),
+  common_event: (tokens) => compileDataId(tokens, "common_event"),
   variable: (tokens) => compileDataId(tokens, "variable"),
   switch: (tokens) => compileDataId(tokens, "switch"),
   file: compileFileParam,
