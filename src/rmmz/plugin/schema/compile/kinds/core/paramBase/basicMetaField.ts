@@ -13,16 +13,16 @@ export const compileArrayField = <T, S extends JSONSchemaType<T>>(
   } satisfies JSONSchemaType<T[]>);
 
 /**
- * - ParamBaseの派生型からメタ情報を抽出。値が無効な場合はフィールドを生成しない。
+ * - ParamBaseの派生型からメタ情報を抽出しJSONSchema形式に変換。値が無効な場合はフィールドを生成しない。
  */
 export const withTexts = (
-  kind: ParamBase
+  param: ParamBase
 ): {
   title?: string;
   description?: string;
 } => ({
-  ...(typeof kind.text === "string" ? { title: kind.text } : {}),
-  ...(typeof kind.desc === "string" ? { description: kind.desc } : {}),
+  ...(typeof param.text === "string" ? { title: param.text } : {}),
+  ...(typeof param.desc === "string" ? { description: param.desc } : {}),
 });
 
 /**

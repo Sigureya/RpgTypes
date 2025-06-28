@@ -6,7 +6,7 @@ import {
 import type { PluginMeta } from "./types/result";
 import type { Token } from "./types/token";
 
-export const createMetaInfo = (tokens: Token[]): PluginMeta => {
+export const createMetaInfo = (tokens: ReadonlyArray<Token>): PluginMeta => {
   return {
     ...find(tokens, KEYWORD_AUTHOR),
     ...find(tokens, KEYWORD_TARGET),
@@ -15,7 +15,7 @@ export const createMetaInfo = (tokens: Token[]): PluginMeta => {
 };
 
 const find = <K extends string>(
-  tokens: Token[],
+  tokens: ReadonlyArray<Token>,
   key: K
 ): {} | { [P in K]: string } => {
   const value = tokens.find((token) => token.keyword === key)?.value;

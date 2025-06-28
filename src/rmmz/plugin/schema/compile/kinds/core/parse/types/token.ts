@@ -16,7 +16,7 @@ export interface ParsingContext<HeadToken extends Token = Token> {
   tokens: Token[];
 }
 
-export interface ParamToken {
+export interface ParamTokens {
   param: string;
   attributes: Token[];
 }
