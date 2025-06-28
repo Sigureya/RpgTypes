@@ -1,6 +1,7 @@
 import { KEYWORD_OPTION, KEYWORD_TYPE } from "./parse/constants/keyword";
 import type { MappingTable } from "./parse/keyword";
 import { compileArrayParam, mapKeywords } from "./parse/keyword";
+import { compileOptionItems } from "./parse/selectOption";
 import type { Token } from "./parse/types/token";
 import type {
   BooleanParam,
@@ -13,6 +14,7 @@ import type {
   RpgDataIdParam,
   SystemDataIdParam,
   StringParam,
+  SelectParam,
 } from "./primitiveParams";
 import type {
   DataKind_RpgUnion,
@@ -56,6 +58,15 @@ const compileComboParam = (tokens: ReadonlyArray<Token>): ComboParam => {
     default: options[0] ?? "",
     ...mapKeywords(tokens, STRING),
     kind: "combo",
+    options,
+  };
+};
+const compileSelectParam = (tokens: ReadonlyArray<Token>): SelectParam => {
+  const options = compileOptionItems(tokens);
+  return {
+    default: options[0]?.value ?? "",
+    ...mapKeywords(tokens, STRING),
+    kind: "select",
     options,
   };
 };
@@ -190,6 +201,7 @@ const parameterCompilerDispatch = {
   boolean: compileBooleanParam,
   string: compileStringParam,
   number: compileNumberParam,
+  select: compileSelectParam,
   enemy: (tokens) => compileDataId(tokens, "enemy"),
   item: (tokens) => compileDataId(tokens, "item"),
   skill: (tokens) => compileDataId(tokens, "skill"),
