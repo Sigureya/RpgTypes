@@ -24,7 +24,9 @@ export interface SliceResult {
   commands: ParsingContext[];
 }
 
-export const groupTokensByContext = (tokens: Token[]): SliceResult => {
+export const groupTokensByContext = (
+  tokens: ReadonlyArray<Token>
+): SliceResult => {
   const acc = reduceTokens(tokens);
   if (!acc.current) {
     return {
@@ -47,7 +49,7 @@ export const groupTokensByContext = (tokens: Token[]): SliceResult => {
   return acc;
 };
 
-const reduceTokens = (tokens: Token[]) => {
+const reduceTokens = (tokens: ReadonlyArray<Token>) => {
   return tokens.reduce<SlicingState>(
     (acc: SlicingState, token: Token): SlicingState => {
       if (isParamToken(token)) {
