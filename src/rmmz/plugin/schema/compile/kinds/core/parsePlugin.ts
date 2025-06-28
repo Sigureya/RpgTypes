@@ -4,6 +4,7 @@ import { parsePluginCommand } from "./parse/pluginCommand";
 import { groupTokensByContext } from "./parse/semantic";
 import { tokenize } from "./parse/toknize";
 import type { PluginCommandTokens } from "./parse/types/pluginCommand";
+import type { PluginMeta } from "./parse/types/result";
 import type { ParsingContext, Token } from "./parse/types/token";
 import type { StructParamPrimitive } from "./primitiveParams";
 
@@ -19,14 +20,20 @@ export interface PluginCommand {
   args: PluginParam[];
 }
 
-export const parsePlugin = (pluginAnnotations: string) => {
-  const tokens: Token[] = tokenize(pluginAnnotations);
-  const cc = groupTokensByContext(tokens);
+export interface PluginBundle {
+  commands: PluginCommand[];
+  meta: PluginMeta;
+  params: PluginParam[];
+}
+
+export const parsePlugin = (pluginAnnotations: string): PluginBundle => {
+  const tokens: ReadonlyArray<Token> = tokenize(pluginAnnotations);
+  const context = groupTokensByContext(tokens);
 
   return {
-    commands: cc.commands.map(buildCommand),
+    commands: context.commands.map(buildCommand),
     meta: createMetaInfo(tokens),
-    params: cc.params.map(buildParam),
+    params: context.params.map(buildParam),
   };
 };
 
