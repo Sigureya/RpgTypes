@@ -1,10 +1,9 @@
-import type { PluginCommandTokens } from "./pluginCommand";
-import type { ParamToken } from "./token";
+import type { ParsingContext } from "./token";
 
 export interface ParsingResult {
-  commands: PluginCommandTokens[];
+  commands: ParsingContext[];
   meta: PluginMeta;
-  params: ParamToken[];
+  params: ParsingContext[];
 }
 
 export interface PluginMetaXX {
