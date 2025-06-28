@@ -9,17 +9,11 @@ export interface X_Param {
   [X_RPG_PARM]: X_RmmzParamBase;
 }
 
-export type JSONSchemaTypeWithRpgParam<
-  V,
-  X extends object = object
-> = JSONSchemaType<V> & {
-  [X_RPG_PARM]: X_RmmzParam<X>;
+export type JSONSchemaTypeWithRpgParam<V, X = ParamBase> = JSONSchemaType<V> & {
+  [X_RPG_PARM]: X_RmmzParam<ExtractParamData<X>>;
 };
 
-type ExtractParamData<T extends ParamBase> = Omit<
-  T,
-  "default" | keyof ParamBase
->;
+type ExtractParamData<T> = Omit<T, "default" | keyof ParamBase>;
 
 export type X_ParamData<T extends ParamBase> = X_RmmzParam<
   ExtractParamData<T>,

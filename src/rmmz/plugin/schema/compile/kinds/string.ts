@@ -15,7 +15,7 @@ export const compileStringField = (
 
 export const compileStringFieldWithXparam = (
   data: StringParam
-): JSONSchemaTypeWithRpgParam<string> => ({
+): JSONSchemaTypeWithRpgParam<string, StringParam> => ({
   type: "string",
   ...withTexts(data),
   ...withDefault(data.default),
