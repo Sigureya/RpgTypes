@@ -17,6 +17,7 @@ import type {
   SelectParam,
   StringArrayParam,
 } from "./primitiveParams";
+import { parseDeepJSON } from "./rmmzJSON";
 import type {
   DataKind_RpgUnion,
   DataKind_SystemUnion,
@@ -142,7 +143,7 @@ const compileStringArrayParam = (
   tokens: ReadonlyArray<Token>
 ): StringArrayParam => {
   const STRING_ARRAY = {
-    default: (value: string): string[] => value.split(",").map((v) => v.trim()),
+    default: (value: string): string[] => parseDeepJSON(value) as string[],
     text: attrString,
     desc: attrString,
     parent: attrString,
