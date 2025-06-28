@@ -5,7 +5,9 @@ interface State {
   current: OptionItem | null;
 }
 
-export const compileOptionItems = (tokens: Token[]): OptionItem[] => {
+export const compileOptionItems = (
+  tokens: ReadonlyArray<Token>
+): OptionItem[] => {
   const { current, result } = tokens.reduce<State>(
     (acc, token) => {
       if (acc.current && token.keyword === "value") {
