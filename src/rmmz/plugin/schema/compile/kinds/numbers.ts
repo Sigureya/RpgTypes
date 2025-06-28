@@ -38,7 +38,7 @@ const xparamNumber = (data: NumberParam | NumberArrayParam) =>
   );
 export const compileNumberFieldWithXparam = (
   data: NumberParam
-): JSONSchemaTypeWithRpgParam<number, NumberParam> => ({
+): JSONSchemaTypeWithRpgParam<NumberParam> => ({
   type: isIntegerKind(data.decimals) ? "integer" : "number",
   ...withDefault(data.default),
   ...withTexts(data),
@@ -47,7 +47,7 @@ export const compileNumberFieldWithXparam = (
 
 export const compileNumberArrayFieldWithXParam = (
   data: NumberArrayParam
-): JSONSchemaTypeWithRpgParam<number[], NumberArrayParam> => ({
+): JSONSchemaTypeWithRpgParam<NumberArrayParam> => ({
   type: "array",
   items: {
     type: isIntegerKind(data.decimals) ? "integer" : "number",

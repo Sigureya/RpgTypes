@@ -9,7 +9,9 @@ export interface X_Param {
   [X_RPG_PARM]: X_RmmzParamBase;
 }
 
-export type JSONSchemaTypeWithRpgParam<V, X = ParamBase> = JSONSchemaType<V> & {
+export type JSONSchemaTypeWithRpgParam<
+  X extends ParamBase & { default: unknown }
+> = JSONSchemaType<X["default"]> & {
   [X_RPG_PARM]: X_RmmzParam<ExtractParamData<X>>;
 };
 

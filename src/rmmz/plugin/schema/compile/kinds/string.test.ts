@@ -35,7 +35,7 @@ describe("String field schema generation - Basic", () => {
   });
 });
 describe("String field schema generation - with x-rpg-param", () => {
-  const expectedSchema: JSONSchemaTypeWithRpgParam<string> = {
+  const expectedSchema: JSONSchemaTypeWithRpgParam<typeof mockData> = {
     type: "string",
     default: mockData.default,
     title: mockData.text,

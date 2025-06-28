@@ -1,16 +1,7 @@
 import { describe, test, expect } from "vitest";
 import type { ParamBase } from "./paramBase";
-import type {
-  JSONSchemaTypeWithRpgParam,
-  X_RmmzParamBase,
-  X_Param,
-} from "./x-rpg-param";
+import type { X_RmmzParamBase, X_Param } from "./x-rpg-param";
 import { X_RPG_PARM, xparamBaseData } from "./x-rpg-param";
-
-interface X_RpgParamTest {
-  param: number;
-  data: string;
-}
 
 describe("X_RPG_PARM", () => {
   test("should be defined", () => {
@@ -31,29 +22,14 @@ describe("X_RPG_PARM", () => {
     const param: ParamBase = { kind: "test-kind", parent: "test-parent" };
     const data = { key: "value" };
     const result = xparamBaseData(param, data);
-    expect(result[X_RPG_PARM]).toEqual({
+    const expected: X_RmmzParamBase = {
       kind: "test-kind",
       parent: "test-parent",
-      data: data,
-    } satisfies X_RmmzParamBase);
-  });
-});
-
-describe("JSONSchemaTypeWithRpgParam", () => {
-  test("should have x-rpg-param metadata", () => {
-    const schema: JSONSchemaTypeWithRpgParam<X_RpgParamTest> = {
-      type: "object",
-      properties: {
-        param: { type: "integer" },
-        data: { type: "string" },
+      data: {
+        key: "value",
       },
-      required: ["param", "data"],
-      additionalProperties: false,
-      [X_RPG_PARM]: {
-        kind: "x-rpg-param-test",
-        data: {},
-      } satisfies X_RmmzParamBase,
     };
-    expect(schema[X_RPG_PARM].kind).toBe("x-rpg-param-test");
+    expect(result[X_RPG_PARM]).toEqual(expected);
+    expect(result[X_RPG_PARM].data).toBe(data);
   });
 });

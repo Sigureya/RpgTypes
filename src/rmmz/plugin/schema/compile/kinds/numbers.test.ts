@@ -78,7 +78,7 @@ describe("Number field schema generation", () => {
       text: "Number Field with Xparam",
       decimals: 0,
     };
-    const expectedXParam: JSONSchemaTypeWithRpgParam<number> = {
+    const expectedXParam: JSONSchemaTypeWithRpgParam<NumberParam> = {
       type: "integer",
       default: 42,
       title: "Number Field with Xparam",
@@ -109,7 +109,7 @@ describe("Number field schema generation", () => {
       text: "Number Array Field with Xparam",
       decimals: 0,
     };
-    const expectedXParam: JSONSchemaTypeWithRpgParam<number[]> = {
+    const expectedXParam: JSONSchemaTypeWithRpgParam<NumberArrayParam> = {
       type: "array",
       items: { type: "integer" },
       default: [1, 2, 3],

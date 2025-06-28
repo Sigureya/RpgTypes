@@ -38,7 +38,7 @@ describe("Boolean field schema generation - Basic", () => {
 });
 
 describe("Boolean field schema generation - with x-rpg-param", () => {
-  const expectedSchema: JSONSchemaTypeWithRpgParam<boolean> = {
+  const expectedSchema: JSONSchemaTypeWithRpgParam<BooleanParam> = {
     type: "boolean",
     default: mockData.default,
     title: mockData.text,
@@ -69,7 +69,7 @@ describe("Boolean field schema generation - with x-rpg-param", () => {
         off: undefined,
         on: undefined,
       };
-      const expectedSchema: JSONSchemaTypeWithRpgParam<boolean> = {
+      const expectedSchema: JSONSchemaTypeWithRpgParam<BooleanParam> = {
         type: "boolean",
         default: data.default,
         "x-rpg-param": {

@@ -16,7 +16,7 @@ export const compileSelectField = (
 
 export const compileSelectFieldWithXparam = (
   data: SelectParam
-): JSONSchemaTypeWithRpgParam<string, SelectParam> => ({
+): JSONSchemaTypeWithRpgParam<SelectParam> => ({
   type: "string",
   ...withDefault(data.default),
   ...withTexts(data),
