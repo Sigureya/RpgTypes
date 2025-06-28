@@ -1,8 +1,8 @@
 import { describe, test, expect } from "vitest";
 import type { JSONSchemaType } from "ajv";
 import {
-  compilePrimitiveFiled,
-  compilePrimitiveFiledWithXParam,
+  compilePrimitiveField,
+  compilePrimitiveFieldWithXParam,
 } from "./compileField";
 import type { JSONSchemaTypeWithRpgParam } from "./core/paramBase/x-rpg-param";
 import type { SelectParam } from "./core/primitiveParams";
@@ -34,7 +34,7 @@ describe("Select field schema generation - Basic", () => {
       expect(schema).toEqual(expectedSchema);
     });
     test("via union dispatcher (compilePrimitiveFiled)", () => {
-      const schema: AnyParamSchema = compilePrimitiveFiled(data);
+      const schema: AnyParamSchema = compilePrimitiveField(data);
       expect(schema).toEqual(expectedSchema);
     });
   });
@@ -60,7 +60,7 @@ describe("Select field schema generation -  with x-rpg-param", () => {
       expect(schema).toEqual(expectedSchema);
     });
     test("via union dispatcher (compilePrimitiveFiledWithXParam)", () => {
-      const schema: AnyParamSchema = compilePrimitiveFiledWithXParam(data);
+      const schema: AnyParamSchema = compilePrimitiveFieldWithXParam(data);
       expect(schema).toEqual(expectedSchema);
     });
   });

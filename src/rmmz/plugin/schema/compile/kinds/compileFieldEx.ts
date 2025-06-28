@@ -1,7 +1,7 @@
 import type { JSONSchemaType } from "ajv";
 import {
-  compilePrimitiveFiledWithXParam,
-  compilePrimitiveFiled,
+  compilePrimitiveFieldWithXParam,
+  compilePrimitiveField,
 } from "./compileField";
 import type { StructCompileLog } from "./compileLog";
 import type {
@@ -111,8 +111,8 @@ const compileField = (
   }
   return {
     schema: ctx.options.kindData
-      ? compilePrimitiveFiledWithXParam(data)
-      : compilePrimitiveFiled(data),
+      ? compilePrimitiveFieldWithXParam(data)
+      : compilePrimitiveField(data),
     logs: [],
   };
 };

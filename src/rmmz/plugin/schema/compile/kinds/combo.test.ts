@@ -2,8 +2,8 @@ import { describe, test, expect } from "vitest";
 import type { JSONSchemaType } from "ajv";
 import { compileComboField, compileComboFieldWithXparam } from "./combo";
 import {
-  compilePrimitiveFiled,
-  compilePrimitiveFiledWithXParam,
+  compilePrimitiveField,
+  compilePrimitiveFieldWithXParam,
 } from "./compileField";
 import type { JSONSchemaTypeWithRpgParam } from "./core/paramBase/x-rpg-param";
 import type { ComboParam } from "./core/primitiveParams";
@@ -30,7 +30,7 @@ describe("Combo field schema generation - Basic", () => {
       expect(schema).toEqual(expectedSchema);
     });
     test("via union dispatcher (compilePrimitiveFiled)", () => {
-      const schema: AnyParamSchema = compilePrimitiveFiled(data);
+      const schema: AnyParamSchema = compilePrimitiveField(data);
       expect(schema).toEqual(expectedSchema);
     });
   });
@@ -55,7 +55,7 @@ describe("Combo field schema generation - with x-rpg-param", () => {
       expect(schema).toEqual(expectedSchema);
     });
     test("via union dispatcher (compilePrimitiveFiledWithXParam)", () => {
-      const schema: AnyParamSchema = compilePrimitiveFiledWithXParam(data);
+      const schema: AnyParamSchema = compilePrimitiveFieldWithXParam(data);
       expect(schema).toEqual(expectedSchema);
     });
   });

@@ -1,8 +1,8 @@
 import { describe, test, expect } from "vitest";
 import type { JSONSchemaType } from "ajv";
 import {
-  compilePrimitiveFiled,
-  compilePrimitiveFiledWithXParam,
+  compilePrimitiveField,
+  compilePrimitiveFieldWithXParam,
 } from "./compileField";
 import type { JSONSchemaTypeWithRpgParam } from "./core/paramBase/x-rpg-param";
 import type { NumberParam, NumberArrayParam } from "./core/primitiveParams";
@@ -36,7 +36,7 @@ describe("Number field schema generation", () => {
         expect(schema).toEqual(expectedSchema);
       });
       test("via union dispatcher (compilePrimitiveFiled)", () => {
-        const schema: AnyParamSchema = compilePrimitiveFiled(data);
+        const schema: AnyParamSchema = compilePrimitiveField(data);
         expect(schema).toEqual(expectedSchema);
       });
     });
@@ -64,7 +64,7 @@ describe("Number field schema generation", () => {
         expect(schema).toEqual(expectedSchema);
       });
       test("via union dispatcher (compilePrimitiveFiled)", () => {
-        const schema: AnyParamSchema = compilePrimitiveFiled(data);
+        const schema: AnyParamSchema = compilePrimitiveField(data);
         expect(schema).toEqual(expectedSchema);
       });
     });
@@ -94,7 +94,7 @@ describe("Number field schema generation", () => {
         expect(schema).toEqual(expectedXParam);
       });
       test("via union dispatcher (compilePrimitiveFiledWithXParam)", () => {
-        const schema: AnyParamSchema = compilePrimitiveFiledWithXParam(data);
+        const schema: AnyParamSchema = compilePrimitiveFieldWithXParam(data);
         expect(schema).toEqual(expectedXParam);
       });
     });
@@ -127,7 +127,7 @@ describe("Number field schema generation", () => {
         expect(schema).toEqual(expectedXParam);
       });
       test("via union dispatcher (compilePrimitiveFiledWithXParam)", () => {
-        const schema: AnyParamSchema = compilePrimitiveFiledWithXParam(data);
+        const schema: AnyParamSchema = compilePrimitiveFieldWithXParam(data);
         expect(schema).toEqual(expectedXParam);
       });
     });
