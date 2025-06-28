@@ -2,7 +2,7 @@ import type {
   ParsingContext,
   Token,
   HeadToken,
-  ParamToken,
+  ParamTokens,
 } from "./types/token";
 
 interface SlicingState {
@@ -29,7 +29,7 @@ export interface SliceResult {
   commands: ParsingContext[];
 }
 
-export const parsePluginParam = (context: ParsingContext): ParamToken => ({
+export const parsePluginParam = (context: ParsingContext): ParamTokens => ({
   param: context.head.value,
   attributes: context.tokens,
 });
