@@ -1,6 +1,5 @@
 import { test, expect, describe } from "vitest";
-import type { PluginCommandTokens } from "./parse/types/pluginCommand";
-import type { PP } from "./parsePlugin";
+import type { PluginCommand, PluginParam } from "./parsePlugin";
 import { parsePlugin } from "./parsePlugin";
 
 const mockTexts: string[] = [
@@ -32,10 +31,10 @@ const mockTexts: string[] = [
   "@text arg1 text",
   "@desc load Save File",
   "@type number",
-  "@default 456",
-  "@arg arg2",
-  "@type string",
-  "@default abc",
+  "* @default 456",
+  "* @arg arg2",
+  "* @type string",
+  "* @default abc",
 ];
 
 describe("parsePlugin", () => {
@@ -44,7 +43,7 @@ describe("parsePlugin", () => {
     expect(result.meta).toBeDefined();
   });
   test("should parse parameters correctly", () => {
-    const expected: PP[] = [
+    const expected: PluginParam[] = [
       {
         name: "bool",
         attr: {
@@ -68,25 +67,25 @@ describe("parsePlugin", () => {
     expect(result.params).toEqual(expected);
   });
   test("should parse commands correctly", () => {
-    const expected: PluginCommandTokens[] = [
+    const expected: PluginCommand[] = [
       {
         command: "save",
         text: "writeSave",
         desc: "write Save File",
         args: [
           {
-            arg: "arg1",
-            attributes: [
-              { keyword: "type", value: "number" },
-              { keyword: "default", value: "123" },
-            ],
+            name: "arg1",
+            attr: {
+              kind: "number",
+              default: 123,
+            },
           },
           {
-            arg: "arg2",
-            attributes: [
-              { keyword: "type", value: "string" },
-              { keyword: "default", value: "abc" },
-            ],
+            name: "arg2",
+            attr: {
+              kind: "string",
+              default: "abc",
+            },
           },
         ],
       },
@@ -94,20 +93,20 @@ describe("parsePlugin", () => {
         command: "load",
         args: [
           {
-            arg: "arg1",
-            attributes: [
-              { keyword: "text", value: "arg1 text" },
-              { keyword: "desc", value: "load Save File" },
-              { keyword: "type", value: "number" },
-              { keyword: "default", value: "456" },
-            ],
+            name: "arg1",
+            attr: {
+              text: "arg1 text",
+              desc: "load Save File",
+              kind: "number",
+              default: 456,
+            },
           },
           {
-            arg: "arg2",
-            attributes: [
-              { keyword: "type", value: "string" },
-              { keyword: "default", value: "abc" },
-            ],
+            name: "arg2",
+            attr: {
+              kind: "string",
+              default: "abc",
+            },
           },
         ],
       },

@@ -1,14 +1,22 @@
 import { compileAttributes } from "./attributes";
 import { createMetaInfo } from "./parse/metaInfo";
 import { parsePluginCommand } from "./parse/pluginCommand";
-import { parsePluginParam, groupTokensByContext } from "./parse/semantic";
+import { groupTokensByContext } from "./parse/semantic";
 import { tokenize } from "./parse/toknize";
+import type { PluginCommandTokens } from "./parse/types/pluginCommand";
 import type { ParsingContext, Token } from "./parse/types/token";
 import type { StructParamPrimitive } from "./primitiveParams";
 
-export interface PP {
+export interface PluginParam {
   name: string;
   attr: StructParamPrimitive;
+}
+
+export interface PluginCommand {
+  command: string;
+  desc?: string;
+  text?: string;
+  args: PluginParam[];
 }
 
 export const parsePlugin = (pluginAnnotations: string) => {
@@ -16,17 +24,34 @@ export const parsePlugin = (pluginAnnotations: string) => {
   const cc = groupTokensByContext(tokens);
 
   return {
-    commands: cc.commands.map(parsePluginCommand),
+    commands: cc.commands.map(buildCommand),
     meta: createMetaInfo(tokens),
-    params: cc.params.map(xxx),
+    params: cc.params.map(buildParam),
   };
 };
 
-const xxx = (context: ParsingContext): PP => {
-  const paramTokens = parsePluginParam(context);
-  const attr: StructParamPrimitive = compileAttributes(paramTokens.attributes);
+const buildParam = (context: ParsingContext): PluginParam => {
   return {
-    name: paramTokens.param,
-    attr: attr,
+    name: context.head.value,
+    attr: compileAttributes(context.tokens),
+  };
+};
+
+const buildCommand = (context: ParsingContext): PluginCommand => {
+  const commandTokens = parsePluginCommand(context);
+  return {
+    ...withTexts(commandTokens),
+    command: commandTokens.command,
+    args: commandTokens.args.map<PluginParam>((arg) => ({
+      name: arg.arg,
+      attr: compileAttributes(arg.attributes),
+    })),
+  };
+};
+
+const withTexts = (command: PluginCommandTokens) => {
+  return {
+    ...(typeof command.desc === "string" ? { desc: command.desc } : {}),
+    ...(typeof command.text === "string" ? { text: command.text } : {}),
   };
 };
