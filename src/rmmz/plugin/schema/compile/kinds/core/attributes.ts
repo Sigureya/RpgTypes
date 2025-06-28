@@ -15,7 +15,9 @@ import type {
   SystemDataIdParam,
   StringParam,
   SelectParam,
+  StringArrayParam,
 } from "./primitiveParams";
+import { parseDeepJSON } from "./rmmzJSON";
 import type {
   DataKind_RpgUnion,
   DataKind_SystemUnion,
@@ -137,6 +139,19 @@ const compileStringParam = (tokens: ReadonlyArray<Token>): StringParam => {
   };
 };
 
+const compileStringArrayParam = (
+  tokens: ReadonlyArray<Token>
+): StringArrayParam => {
+  const STRING_ARRAY = {
+    default: (value: string): string[] => parseDeepJSON(value) as string[],
+    text: attrString,
+    desc: attrString,
+    parent: attrString,
+  } as const satisfies MappingTableEx<StringArrayParam>;
+
+  return compileArrayParam(tokens, "string[]", STRING_ARRAY);
+};
+
 const compileFileParam = (tokens: ReadonlyArray<Token>): FileParam => {
   const FILE = {
     default: attrString,
@@ -186,34 +201,39 @@ const compileDataId = <Kind extends DataKind_RpgUnion | DataKind_SystemUnion>(
 };
 
 const parameterCompilerDispatch = {
-  "number[]": compileNumberArrayParam,
-  "actor[]": (tokens) => compileDataIdArray(tokens, "actor[]"),
-  "enemy[]": (tokens) => compileDataIdArray(tokens, "enemy[]"),
-  "item[]": (tokens) => compileDataIdArray(tokens, "item[]"),
-  "skill[]": (tokens) => compileDataIdArray(tokens, "skill[]"),
-  "class[]": (tokens) => compileDataIdArray(tokens, "class[]"),
-  "weapon[]": (tokens) => compileDataIdArray(tokens, "weapon[]"),
-  "armor[]": (tokens) => compileDataIdArray(tokens, "armor[]"),
-  "state[]": (tokens) => compileDataIdArray(tokens, "state[]"),
-  "troop[]": (tokens) => compileDataIdArray(tokens, "troop[]"),
-  "common_event[]": (tokens) => compileDataIdArray(tokens, "common_event[]"),
   combo: compileComboParam,
   boolean: compileBooleanParam,
   string: compileStringParam,
+  "string[]": compileStringArrayParam,
+  multiline_string: compileStringParam,
+  "multiline_string[]": compileStringArrayParam,
   number: compileNumberParam,
+  "number[]": compileNumberArrayParam,
   select: compileSelectParam,
   enemy: (tokens) => compileDataId(tokens, "enemy"),
+  "enemy[]": (tokens) => compileDataIdArray(tokens, "enemy[]"),
   item: (tokens) => compileDataId(tokens, "item"),
+  "item[]": (tokens) => compileDataIdArray(tokens, "item[]"),
   skill: (tokens) => compileDataId(tokens, "skill"),
+  "skill[]": (tokens) => compileDataIdArray(tokens, "skill[]"),
   actor: (tokens) => compileDataId(tokens, "actor"),
+  "actor[]": (tokens) => compileDataIdArray(tokens, "actor[]"),
   class: (tokens) => compileDataId(tokens, "class"),
+  "class[]": (tokens) => compileDataIdArray(tokens, "class[]"),
   weapon: (tokens) => compileDataId(tokens, "weapon"),
+  "weapon[]": (tokens) => compileDataIdArray(tokens, "weapon[]"),
   armor: (tokens) => compileDataId(tokens, "armor"),
+  "armor[]": (tokens) => compileDataIdArray(tokens, "armor[]"),
   state: (tokens) => compileDataId(tokens, "state"),
+  "state[]": (tokens) => compileDataIdArray(tokens, "state[]"),
   troop: (tokens) => compileDataId(tokens, "troop"),
+  "troop[]": (tokens) => compileDataIdArray(tokens, "troop[]"),
   common_event: (tokens) => compileDataId(tokens, "common_event"),
+  "common_event[]": (tokens) => compileDataIdArray(tokens, "common_event[]"),
   variable: (tokens) => compileDataId(tokens, "variable"),
+  "variable[]": (tokens) => compileDataIdArray(tokens, "variable[]"),
   switch: (tokens) => compileDataId(tokens, "switch"),
+  "switch[]": (tokens) => compileDataIdArray(tokens, "switch[]"),
   file: compileFileParam,
 } as const satisfies Partial<{
   [K in StructParamPrimitive["kind"]]: (

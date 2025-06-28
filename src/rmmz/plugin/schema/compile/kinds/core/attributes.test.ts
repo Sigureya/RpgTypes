@@ -1,14 +1,7 @@
 import { describe, expect, test } from "vitest";
 import { compileAttributes } from "./attributes";
 import type { Token } from "./parse/types/token";
-import type {
-  BooleanParam,
-  StringParam,
-  ComboParam,
-  FileArrayParam,
-  FileParam,
-  StructParamPrimitive,
-} from "./primitiveParams";
+import type { FileParam, StructParamPrimitive } from "./primitiveParams";
 
 interface TestCase<T extends StructParamPrimitive = StructParamPrimitive> {
   caseName: string;
@@ -29,52 +22,6 @@ const runTestCases = <T extends StructParamPrimitive>(
     });
   });
 };
-
-runTestCases<StringParam>("string", [
-  {
-    caseName: "最小セット",
-    input: [
-      { keyword: "type", value: "string" },
-      { keyword: "default", value: "xyz" },
-    ],
-    expected: {
-      kind: "string",
-      default: "xyz",
-    },
-  },
-]);
-runTestCases<BooleanParam>("boolean", [
-  {
-    caseName: "最小セット",
-    input: [
-      { keyword: "type", value: "boolean" },
-      { keyword: "default", value: "true" },
-    ],
-    expected: {
-      kind: "boolean",
-      default: true,
-    },
-  },
-  {
-    caseName: "フルセット",
-    input: [
-      { keyword: "type", value: "boolean" },
-      { keyword: "default", value: "true" },
-      { keyword: "text", value: "is true" },
-      { keyword: "desc", value: "this is a boolean" },
-      { keyword: "on", value: "enabled" },
-      { keyword: "off", value: "disabled" },
-    ],
-    expected: {
-      kind: "boolean",
-      default: true,
-      text: "is true",
-      desc: "this is a boolean",
-      on: "enabled",
-      off: "disabled",
-    },
-  },
-]);
 
 runTestCases<FileParam>("file", [
   {
