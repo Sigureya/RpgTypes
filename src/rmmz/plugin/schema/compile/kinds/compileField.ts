@@ -23,7 +23,7 @@ const makeDataIdArrayField = (
   data: Extract<StructParamPrimitive, { default: number[] }>
 ) => compileArrayField(data, { type: "integer" });
 
-export const compilePrimitiveFiled = (
+export const compilePrimitiveField = (
   data: StructParamPrimitive
 ): AnyParamSchema => {
   switch (data.kind) {
@@ -74,7 +74,7 @@ export const compilePrimitiveFiled = (
   }
 };
 
-export const compilePrimitiveFiledWithXParam = (
+export const compilePrimitiveFieldWithXParam = (
   data: StructParamPrimitive
 ): AnyParamSchema => {
   switch (data.kind) {

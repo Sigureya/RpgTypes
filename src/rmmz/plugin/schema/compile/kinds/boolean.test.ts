@@ -2,8 +2,8 @@ import { describe, test, expect } from "vitest";
 import type { JSONSchemaType } from "ajv";
 import { compileBooleanField, compileBooleanFieldWithXParam } from "./boolean";
 import {
-  compilePrimitiveFiled,
-  compilePrimitiveFiledWithXParam,
+  compilePrimitiveField,
+  compilePrimitiveFieldWithXParam,
 } from "./compileField";
 import type { JSONSchemaTypeWithRpgParam } from "./core/paramBase/x-rpg-param";
 import type { BooleanParam } from "./core/primitiveParams";
@@ -31,7 +31,7 @@ describe("Boolean field schema generation - Basic", () => {
       expect(schema).toEqual(expectedSchema);
     });
     test("via union dispatcher (compilePrimitiveFiled)", () => {
-      const schema: AnyParamSchema = compilePrimitiveFiled(mockData);
+      const schema: AnyParamSchema = compilePrimitiveField(mockData);
       expect(schema).toEqual(expectedSchema);
     });
   });
@@ -57,7 +57,7 @@ describe("Boolean field schema generation - with x-rpg-param", () => {
       expect(schema).toEqual(expectedSchema);
     });
     test("via union dispatcher (compilePrimitiveFiledWithXParam)", () => {
-      const schema: AnyParamSchema = compilePrimitiveFiledWithXParam(mockData);
+      const schema: AnyParamSchema = compilePrimitiveFieldWithXParam(mockData);
       expect(schema).toEqual(expectedSchema);
     });
     test("", () => {
