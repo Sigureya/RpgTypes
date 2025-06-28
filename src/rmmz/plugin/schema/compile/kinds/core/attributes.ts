@@ -16,6 +16,7 @@ import type {
   StringParam,
   SelectParam,
   StringArrayParam,
+  FileArrayParam,
 } from "./primitiveParams";
 import { parseDeepJSON } from "./rmmzJSON";
 import type {
@@ -29,10 +30,8 @@ export const compileAttributes = (
   tokens: ReadonlyArray<Token>
 ): StructParamPrimitive => {
   const type = getType(tokens) ?? "string";
-  const fn =
-    parameterCompilerDispatch[type as keyof typeof parameterCompilerDispatch] ??
-    parameterCompilerDispatch.string;
-  return fn(tokens);
+  const func = TABLE[type as keyof typeof TABLE] ?? TABLE.string;
+  return func(tokens);
 };
 
 const getType = (tokens: ReadonlyArray<Token>): string | undefined => {
@@ -63,6 +62,7 @@ const compileComboParam = (tokens: ReadonlyArray<Token>): ComboParam => {
     options,
   };
 };
+
 const compileSelectParam = (tokens: ReadonlyArray<Token>): SelectParam => {
   const options = compileOptionItems(tokens);
   return {
@@ -168,6 +168,23 @@ const compileFileParam = (tokens: ReadonlyArray<Token>): FileParam => {
   };
 };
 
+const compileFileArrayParam = (
+  tokens: ReadonlyArray<Token>
+): FileArrayParam => {
+  const FILE_ARRAY = {
+    default: (value: string): string[] => parseDeepJSON(value) as string[],
+    text: attrString,
+    desc: attrString,
+    parent: attrString,
+    dir: attrString,
+  } as const satisfies MappingTableEx<FileArrayParam>;
+  return {
+    default: [],
+    dir: "",
+    ...mapKeywords(tokens, FILE_ARRAY),
+    kind: "file[]",
+  } satisfies FileArrayParam;
+};
 const compileDataIdArray = <
   Kind extends DataKind_RpgUnion | DataKind_SystemUnion
 >(
@@ -200,7 +217,7 @@ const compileDataId = <Kind extends DataKind_RpgUnion | DataKind_SystemUnion>(
   } satisfies SystemDataIdParam | RpgDataIdParam;
 };
 
-const parameterCompilerDispatch = {
+const TABLE = {
   combo: compileComboParam,
   boolean: compileBooleanParam,
   string: compileStringParam,
@@ -235,6 +252,7 @@ const parameterCompilerDispatch = {
   switch: (tokens) => compileDataId(tokens, "switch"),
   "switch[]": (tokens) => compileDataIdArray(tokens, "switch[]"),
   file: compileFileParam,
+  "file[]": compileFileArrayParam,
 } as const satisfies Partial<{
   [K in StructParamPrimitive["kind"]]: (
     tokens: ReadonlyArray<Token>
