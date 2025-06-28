@@ -62,14 +62,14 @@ export interface ComboParam extends ParamBase {
 export interface NumberParam extends ParamBase {
   kind: "number";
   default: number;
-  digit?: number | null;
+  decimals?: number | null;
   min?: number | null;
   max?: number | null;
 }
 export interface NumberArrayParam extends ParamBase {
   kind: "number[]";
   default: number[];
-  digit?: number | null;
+  decimals?: number | null;
   min?: number | null;
   max?: number | null;
 }

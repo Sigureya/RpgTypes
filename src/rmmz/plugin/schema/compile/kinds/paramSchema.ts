@@ -80,7 +80,7 @@ const rmmzSchemaNumberParam = () =>
     type: "object",
     required: ["kind", "default"],
     properties: {
-      digit: { type: "integer", minimum: 0, default: 0, nullable: true },
+      decimals: { type: "integer", minimum: 0, default: 0, nullable: true },
       min: { type: "number", nullable: true },
       max: { type: "number", nullable: true },
       default: { type: "number", default: 0 },
@@ -103,7 +103,7 @@ const rmmzSchemaNumberArrayParam = () =>
         items: { type: "number", default: 0 },
         default: [],
       },
-      digit: { type: "integer", minimum: 0, default: 0, nullable: true },
+      decimals: { type: "integer", minimum: 0, default: 0, nullable: true },
       min: { type: "number", nullable: true },
       max: { type: "number", nullable: true },
       desc: BASIC_TEXT,
