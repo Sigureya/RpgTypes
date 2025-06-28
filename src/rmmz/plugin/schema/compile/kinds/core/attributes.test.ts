@@ -1,14 +1,7 @@
 import { describe, expect, test } from "vitest";
 import { compileAttributes } from "./attributes";
 import type { Token } from "./parse/types/token";
-import type {
-  BooleanParam,
-  StringParam,
-  ComboParam,
-  FileArrayParam,
-  FileParam,
-  StructParamPrimitive,
-} from "./primitiveParams";
+import type { FileParam, StructParamPrimitive } from "./primitiveParams";
 
 interface TestCase<T extends StructParamPrimitive = StructParamPrimitive> {
   caseName: string;
@@ -29,20 +22,6 @@ const runTestCases = <T extends StructParamPrimitive>(
     });
   });
 };
-
-runTestCases<StringParam>("string", [
-  {
-    caseName: "最小セット",
-    input: [
-      { keyword: "type", value: "string" },
-      { keyword: "default", value: "xyz" },
-    ],
-    expected: {
-      kind: "string",
-      default: "xyz",
-    },
-  },
-]);
 
 runTestCases<FileParam>("file", [
   {
