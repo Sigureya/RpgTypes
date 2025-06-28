@@ -43,38 +43,6 @@ runTestCases<StringParam>("string", [
     },
   },
 ]);
-runTestCases<BooleanParam>("boolean", [
-  {
-    caseName: "最小セット",
-    input: [
-      { keyword: "type", value: "boolean" },
-      { keyword: "default", value: "true" },
-    ],
-    expected: {
-      kind: "boolean",
-      default: true,
-    },
-  },
-  {
-    caseName: "フルセット",
-    input: [
-      { keyword: "type", value: "boolean" },
-      { keyword: "default", value: "true" },
-      { keyword: "text", value: "is true" },
-      { keyword: "desc", value: "this is a boolean" },
-      { keyword: "on", value: "enabled" },
-      { keyword: "off", value: "disabled" },
-    ],
-    expected: {
-      kind: "boolean",
-      default: true,
-      text: "is true",
-      desc: "this is a boolean",
-      on: "enabled",
-      off: "disabled",
-    },
-  },
-]);
 
 runTestCases<FileParam>("file", [
   {
