@@ -75,7 +75,7 @@ const numberKind = () =>
       data: {
         type: "object",
         properties: {
-          digit: {
+          decimals: {
             type: "number",
             nullable: true,
             minimum: 0,

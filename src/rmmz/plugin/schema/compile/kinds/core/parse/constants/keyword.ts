@@ -15,7 +15,7 @@ export const KEYWORD_OFF = "off" as const;
 
 export const KEYWORD_MAX = "max" as const;
 export const KEYWORD_MIN = "min" as const;
-export const KEYWORD_DIGIT = "digit" as const;
+export const KEYWORD_DECIMALS = "decimals" as const;
 
 export const KEYWORD_DIR = "dir" as const;
 

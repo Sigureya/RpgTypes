@@ -22,7 +22,7 @@ describe("Number field schema generation", () => {
       desc: "A number field",
       text: "Number Field",
       parent: "parentStruct",
-      digit: 0,
+      decimals: 0,
     };
     const expectedSchema: JSONSchemaType<number> = {
       type: "integer",
@@ -49,7 +49,7 @@ describe("Number field schema generation", () => {
       parent: "parentStruct",
       desc: "An array of numbers",
       text: "Number Array Field",
-      digit: 0,
+      decimals: 0,
     };
     const expectedSchema: JSONSchemaType<number[]> = {
       type: "array",
@@ -76,7 +76,7 @@ describe("Number field schema generation", () => {
       default: 42,
       desc: "A number field with x-rpg-param",
       text: "Number Field with Xparam",
-      digit: 0,
+      decimals: 0,
     };
     const expectedXParam: JSONSchemaTypeWithRpgParam<number> = {
       type: "integer",
@@ -85,7 +85,7 @@ describe("Number field schema generation", () => {
       description: "A number field with x-rpg-param",
       "x-rpg-param": {
         kind: "number",
-        data: { digit: 0 },
+        data: { decimals: 0 } satisfies Partial<NumberParam>,
       },
     };
     describe("generates schema with x-rpg-param for KindOfNumber", () => {
@@ -107,7 +107,7 @@ describe("Number field schema generation", () => {
       default: [1, 2, 3],
       desc: "An array of numbers with x-rpg-param",
       text: "Number Array Field with Xparam",
-      digit: 0,
+      decimals: 0,
     };
     const expectedXParam: JSONSchemaTypeWithRpgParam<number[]> = {
       type: "array",
@@ -118,7 +118,7 @@ describe("Number field schema generation", () => {
       "x-rpg-param": {
         kind: "number[]",
         parent: "parentStruct",
-        data: { digit: 0 },
+        data: { decimals: 0 } satisfies Partial<NumberArrayParam>,
       },
     };
     describe("generates schema with x-rpg-param for KindOfNumberArray", () => {

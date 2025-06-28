@@ -16,7 +16,7 @@ describe("Number Schema Tests", () => {
       kind: "number",
       parent: "parentId",
       data: {
-        digit: 2,
+        decimals: 2,
       },
     };
     expect(num).toSatisfy(validate);

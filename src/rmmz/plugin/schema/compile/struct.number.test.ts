@@ -21,12 +21,12 @@ describe("compilePluginStruct -numbers", () => {
   const mockNumbersStruct = {
     struct: "Numbers",
     params: {
-      floating: { kind: "number", default: 0.5, digit: 2 },
+      floating: { kind: "number", default: 0.5, decimals: 2 },
       integer1: { kind: "number", default: 42 },
-      integer2: { kind: "number", default: 42, digit: 0 },
+      integer2: { kind: "number", default: 42, decimals: 0 },
       integer3: { kind: "number", default: 42 },
-      numberArray: { kind: "number[]", default: [1, 2, 3], digit: 0 },
-      floatArray: { kind: "number[]", default: [1.1, 2.2, 3.3], digit: 2 },
+      numberArray: { kind: "number[]", default: [1, 2, 3], decimals: 0 },
+      floatArray: { kind: "number[]", default: [1.1, 2.2, 3.3], decimals: 2 },
     },
   } as const satisfies PluginStructType<Numbers>;
   const expectedNumbersSchema: JSONSchemaType<Numbers> = {

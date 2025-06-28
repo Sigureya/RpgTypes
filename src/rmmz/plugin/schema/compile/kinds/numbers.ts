@@ -14,7 +14,7 @@ const isIntegerKind = (digit: number | undefined | null) => {
 export const compileNumberField = (
   data: NumberParam
 ): JSONSchemaType<number> => ({
-  type: isIntegerKind(data.digit) ? "integer" : "number",
+  type: isIntegerKind(data.decimals) ? "integer" : "number",
   ...withDefault(data.default),
   ...withTexts(data),
 });
@@ -23,7 +23,7 @@ export const compileNumberArrayField = (
 ): JSONSchemaType<number[]> => ({
   type: "array",
   items: {
-    type: isIntegerKind(data.digit) ? "integer" : "number",
+    type: isIntegerKind(data.decimals) ? "integer" : "number",
   },
   ...withDefault(data.default),
   ...withTexts(data),
@@ -32,12 +32,14 @@ export const compileNumberArrayField = (
 const xparamNumber = (data: NumberParam | NumberArrayParam) =>
   xparamBaseData(
     data,
-    typeof data.digit === "number" ? { digit: data.digit } : {}
+    typeof data.decimals === "number"
+      ? ({ decimals: data.decimals } satisfies Partial<NumberParam>)
+      : {}
   );
 export const compileNumberFieldWithXparam = (
   data: NumberParam
 ): JSONSchemaTypeWithRpgParam<number> => ({
-  type: isIntegerKind(data.digit) ? "integer" : "number",
+  type: isIntegerKind(data.decimals) ? "integer" : "number",
   ...withDefault(data.default),
   ...withTexts(data),
   ...(xparamNumber(data) satisfies X_Param),
@@ -48,7 +50,7 @@ export const compileNumberArrayFieldWithXParam = (
 ): JSONSchemaTypeWithRpgParam<number[]> => ({
   type: "array",
   items: {
-    type: isIntegerKind(data.digit) ? "integer" : "number",
+    type: isIntegerKind(data.decimals) ? "integer" : "number",
   },
   ...withDefault(data.default),
   ...withTexts(data),

@@ -23,7 +23,7 @@ describe("compileAttributes - number", () => {
       { keyword: "default", value: "123.45" },
       { keyword: "text", value: "a number" },
       { keyword: "desc", value: "this is a number" },
-      { keyword: "digit", value: "123" },
+      { keyword: "decimals", value: "2" },
       { keyword: "min", value: "-1000.5" },
       { keyword: "max", value: "1000.5" },
     ];
@@ -33,7 +33,7 @@ describe("compileAttributes - number", () => {
       default: 123.45,
       text: "a number",
       desc: "this is a number",
-      digit: 123,
+      decimals: 2,
       min: -1000.5,
       max: 1000.5,
     };

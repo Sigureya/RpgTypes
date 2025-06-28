@@ -59,7 +59,7 @@ export const parsePluginParam = (text: string): PluginParam => {
         kind: "number",
         default: defaultRaw ? Number(defaultRaw) : 0,
         desc,
-        digit: getTag(lines, "digit")
+        decimals: getTag(lines, "digit")
           ? Number(getTag(lines, "digit"))
           : undefined,
         min: getTag(lines, "min") ? Number(getTag(lines, "min")) : undefined,
@@ -74,7 +74,7 @@ export const parsePluginParam = (text: string): PluginParam => {
         kind: "number[]",
         default: defaultRaw ? JSON.parse(defaultRaw.replace(/'/g, '"')) : [],
         desc,
-        digit: getTag(lines, "digit")
+        decimals: getTag(lines, "digit")
           ? Number(getTag(lines, "digit"))
           : undefined,
       },

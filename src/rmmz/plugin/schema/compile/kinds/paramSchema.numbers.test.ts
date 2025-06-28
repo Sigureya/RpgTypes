@@ -3,6 +3,8 @@ import Ajv from "ajv";
 import type { NumberParam, NumberArrayParam } from "./core/primitiveParams";
 import { makeParamSchema } from "./paramSchema";
 
+type NumberParamBase = Omit<NumberParam, "kind" | "default">;
+
 const fullsetData = <
   K extends "number" | "number[]",
   V extends number | number[]
@@ -11,15 +13,19 @@ const fullsetData = <
   defaultValue: V
 ) => {
   return {
-    kind: kind,
-    default: defaultValue,
-    digit: 0,
-    min: 0,
-    max: 100,
-    desc: "This is a number parameter",
-    text: "Number Parameter",
-    parent: "parentId",
-  };
+    ...{
+      kind: kind,
+      default: defaultValue,
+    },
+    ...{
+      decimals: 0,
+      min: 0,
+      max: 100,
+      desc: "This is a number parameter",
+      text: "Number Parameter",
+      parent: "parentId",
+    },
+  } satisfies NumberParamBase;
 };
 
 const nullData = <K extends "number" | "number[]", V extends number | number[]>(
@@ -27,14 +33,18 @@ const nullData = <K extends "number" | "number[]", V extends number | number[]>(
   defaultValue: V
 ) => {
   return {
-    kind: kind,
-    default: defaultValue,
-    digit: null,
-    min: null,
-    max: null,
-    desc: null,
-    text: null,
-    parent: null,
+    ...{
+      kind: kind,
+      default: defaultValue,
+    },
+    ...({
+      decimals: null,
+      min: null,
+      max: null,
+      desc: null,
+      text: null,
+      parent: null,
+    } satisfies Record<keyof NumberParamBase, null>),
   };
 };
 
@@ -46,14 +56,18 @@ const undefinedData = <
   defaultValue: V
 ) => {
   return {
-    kind: kind,
-    default: defaultValue,
-    digit: undefined,
-    min: undefined,
-    max: undefined,
-    desc: undefined,
-    text: undefined,
-    parent: undefined,
+    ...{
+      kind: kind,
+      default: defaultValue,
+    },
+    ...({
+      decimals: undefined,
+      min: undefined,
+      max: undefined,
+      desc: undefined,
+      text: undefined,
+      parent: undefined,
+    } satisfies NumberParamBase),
   };
 };
 
@@ -87,7 +101,7 @@ describe("number", () => {
       const mock: NumberParam = {
         kind: "number",
         default: 0,
-        digit: 0,
+        decimals: 0,
       };
       expect(mock).toSatisfy(validate);
     });
@@ -96,7 +110,7 @@ describe("number", () => {
       const mock: NumberParam = {
         kind: "number",
         default: 0.01,
-        digit: 2,
+        decimals: 2,
       };
       expect(mock).toSatisfy(validate);
     });
@@ -104,7 +118,7 @@ describe("number", () => {
       const mock: NumberParam = {
         kind: "number",
         default: 0.01,
-        digit: 0,
+        decimals: 0,
       };
       expect(mock).toSatisfy(validate);
     });
@@ -139,7 +153,7 @@ describe("number", () => {
       const mock: NumberParam = {
         kind: "number",
         default: 0,
-        digit: -1, // Invalid digit
+        decimals: -1, // Invalid digit
       };
       expect(mock).not.toSatisfy(validate);
     });
@@ -147,7 +161,7 @@ describe("number", () => {
       const mock: NumberParam = {
         kind: "number",
         default: 0,
-        digit: 1.4, // Invalid digit
+        decimals: 1.4, // Invalid digit
       };
       expect(mock).not.toSatisfy(validate);
     });
@@ -163,7 +177,7 @@ describe("KindOfNumberArray parameter validation", () => {
       const mock: NumberArrayParam = {
         kind: "number[]",
         default: [],
-        digit: 0,
+        decimals: 0,
       };
       expect(mock).toSatisfy(validate);
     });
@@ -172,7 +186,7 @@ describe("KindOfNumberArray parameter validation", () => {
       const mock: NumberArrayParam = {
         kind: "number[]",
         default: [1, 2, 3],
-        digit: 2,
+        decimals: 2,
       };
       expect(mock).toSatisfy(validate);
     });
@@ -180,7 +194,7 @@ describe("KindOfNumberArray parameter validation", () => {
       const mock: NumberArrayParam = {
         kind: "number[]",
         default: [1.23, 4.56],
-        digit: 2,
+        decimals: 2,
       };
       expect(mock).toSatisfy(validate);
     });
