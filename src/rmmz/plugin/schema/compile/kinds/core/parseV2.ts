@@ -43,6 +43,40 @@ interface ParseState {
   currentCommand: PluginCommand | null;
 }
 
+export const parsePlugin = (text: string): ParsedPlugin => {
+  const lines = text.split(/\r?\n/);
+
+  const state = lines.reduce<ParseState>(
+    (acc, line) => {
+      const trimmed = line.trim().replace(/^\*\s?/, "");
+      if (!trimmed.startsWith("@")) {
+        return acc;
+      }
+      const [tag, ...rest] = trimmed.slice(1).split(" ");
+      const value = rest.join(" ").trim();
+      const fn = KEYWORD_FUNC_TABLE[tag as keyof typeof KEYWORD_FUNC_TABLE];
+
+      if (fn) {
+        return fn(acc, value);
+      }
+      return handleDefaultCase(acc);
+    },
+    {
+      params: [],
+      commands: [],
+      currentParam: null,
+      currentCommand: null,
+    }
+  );
+
+  const finalState = flashCurrentItem(state);
+  return {
+    params: finalState.params,
+    commands: finalState.commands,
+    meta: {},
+  };
+};
+
 const withTexts = (command: { desc?: string; text?: string }) => {
   return {
     ...(typeof command.desc === "string" ? { desc: command.desc } : {}),
@@ -192,30 +226,6 @@ const addField = (
   return state;
 };
 
-const handleType = (state: ParseState, value: string): ParseState => {
-  return addField(state, "kind", value);
-};
-
-const handleDefault = (state: ParseState, value: string): ParseState => {
-  return addField(state, KEYWORD_DEFAULT, value);
-};
-
-const handleOn = (state: ParseState, value: string): ParseState => {
-  return addField(state, KEYWORD_ON, value);
-};
-
-const handleOff = (state: ParseState, value: string): ParseState => {
-  return addField(state, KEYWORD_OFF, value);
-};
-
-const handleMin = (state: ParseState, value: string): ParseState => {
-  return addField(state, KEYWORD_MIN, value);
-};
-
-const handleMax = (state: ParseState, value: string): ParseState => {
-  return addField(state, KEYWORD_MAX, value);
-};
-
 const handleDefaultCase = (state: ParseState): ParseState => state;
 
 const KEYWORD_FUNC_TABLE = {
@@ -224,46 +234,12 @@ const KEYWORD_FUNC_TABLE = {
   [KEYWORD_DESC]: handleDesc,
   [KEYWORD_COMMAND]: handleCommand,
   [KEYWORD_ARG]: handleArg,
-  [KEYWORD_TYPE]: handleType,
-  [KEYWORD_DEFAULT]: handleDefault,
-  [KEYWORD_ON]: handleOn,
-  [KEYWORD_OFF]: handleOff,
-  [KEYWORD_MIN]: handleMin,
-  [KEYWORD_MAX]: handleMax,
+  [KEYWORD_TYPE]: (state, value) => addField(state, "kind", value),
+  [KEYWORD_DEFAULT]: (state, value) => addField(state, KEYWORD_DEFAULT, value),
+  [KEYWORD_ON]: (state, value) => addField(state, KEYWORD_ON, value),
+  [KEYWORD_OFF]: (state, value) => addField(state, KEYWORD_OFF, value),
+  [KEYWORD_MIN]: (state, value) => addField(state, KEYWORD_MIN, value),
+  [KEYWORD_MAX]: (state, value) => addField(state, KEYWORD_MAX, value),
 } as const satisfies {
   [K in KeywordEnum]?: (state: ParseState, value: string) => ParseState;
-};
-
-export const parsePlugin = (text: string): ParsedPlugin => {
-  const lines = text.split(/\r?\n/);
-
-  const state = lines.reduce<ParseState>(
-    (acc, line) => {
-      const trimmed = line.trim().replace(/^\*\s?/, "");
-      if (!trimmed.startsWith("@")) {
-        return acc;
-      }
-      const [tag, ...rest] = trimmed.slice(1).split(" ");
-      const value = rest.join(" ").trim();
-      const fn = KEYWORD_FUNC_TABLE[tag as keyof typeof KEYWORD_FUNC_TABLE];
-
-      if (fn) {
-        return fn(acc, value);
-      }
-      return handleDefaultCase(acc);
-    },
-    {
-      params: [],
-      commands: [],
-      currentParam: null,
-      currentCommand: null,
-    }
-  );
-
-  const finalState = flashCurrentItem(state);
-  return {
-    params: finalState.params,
-    commands: finalState.commands,
-    meta: {},
-  };
 };
