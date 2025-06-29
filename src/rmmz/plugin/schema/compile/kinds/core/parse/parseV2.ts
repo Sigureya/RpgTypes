@@ -57,14 +57,15 @@ export const parsePluginCore = (
   const state = lines.reduce<ParseState>(
     (acc, line) => {
       const trimmed = line.trim().replace(/^\*\s?/, "");
-      if (!trimmed.startsWith("@") && acc.currentContext === KEYWORD_HELP) {
-        // キーワードが来ない場合はヘルプ行として追加
-        return { ...acc, helpLines: acc.helpLines.concat(trimmed) };
-      }
-
       if (!trimmed.startsWith("@")) {
+        if (acc.currentContext === KEYWORD_HELP) {
+          // キーワードが来ない場合はヘルプ行として追加
+          return { ...acc, helpLines: acc.helpLines.concat(trimmed) };
+        }
+        // コメントモード以外 & キーワードが来ない場合は無視
         return acc;
       }
+
       const [tag, ...rest] = trimmed.slice(1).split(" ");
       const value = rest.join(" ").trim();
       const fn = table[tag as keyof typeof table];
