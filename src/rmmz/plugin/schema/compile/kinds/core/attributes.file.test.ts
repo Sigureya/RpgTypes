@@ -1,6 +1,6 @@
 import { describe, expect, test } from "vitest";
 import type { ParamSoruceRecord } from "./attributes";
-import { compileAttributes2 } from "./attributes";
+import { compileAttributes } from "./attributes";
 import type { FileParam, FileArrayParam } from "./primitiveParams";
 
 describe("compileAttributes - file", () => {
@@ -9,7 +9,7 @@ describe("compileAttributes - file", () => {
       kind: "file",
       default: "path/to/file.txt",
     };
-    const result = compileAttributes2(tokens);
+    const result = compileAttributes(tokens);
     const expected: FileParam = {
       kind: "file",
       default: "path/to/file.txt",
@@ -27,7 +27,7 @@ describe("compileAttributes - file", () => {
       parent: "Parent File",
       dir: "img",
     };
-    const result = compileAttributes2(tokens);
+    const result = compileAttributes(tokens);
     const expected: FileParam = {
       kind: "file",
       default: "path/to/file.txt",
@@ -46,7 +46,7 @@ describe("compileAttributes - file[]", () => {
       kind: "file[]",
       default: `["path/to/file1.txt", "path/to/file2.txt"]`,
     };
-    const result = compileAttributes2(tokens);
+    const result = compileAttributes(tokens);
     const expected: FileArrayParam = {
       kind: "file[]",
       default: ["path/to/file1.txt", "path/to/file2.txt"],
@@ -60,7 +60,7 @@ describe("compileAttributes - file[]", () => {
       kind: "file[]",
       default: `[]`,
     };
-    const result = compileAttributes2(tokens);
+    const result = compileAttributes(tokens);
     const expected: FileArrayParam = {
       kind: "file[]",
       default: [],

@@ -1,4 +1,4 @@
-import { compileAttributes2 } from "./attributes";
+import { compileAttributes } from "./attributes";
 import {
   KEYWORD_DEFAULT,
   KEYWORD_MAX,
@@ -46,7 +46,7 @@ const withTexts = (command: { desc?: string; text?: string }) => {
 
 const compileParam = (param: PluginParamTemp): PluginParam2 => ({
   name: param.name,
-  attr: compileAttributes2(param.attr),
+  attr: compileAttributes(param.attr),
 });
 
 const flashCurrentItem = (state: ParseState): ParseState => {
@@ -117,19 +117,15 @@ const addText = <T extends Record<string, unknown> | PluginCommand>(
 
 const handleText = (state: ParseState, value: string): ParseState => {
   if (state.currentParam) {
-    return {
-      ...state,
-      currentParam: {
-        ...state.currentParam,
-        attr: addText(state.currentParam.attr, value),
-      },
-    };
+    return addField(state, KEYWORD_TEXT, value);
   }
   if (state.currentCommand) {
-    return {
-      ...state,
-      currentCommand: addText(state.currentCommand, value),
-    };
+    if (!(KEYWORD_TEXT in state.currentCommand)) {
+      return {
+        ...state,
+        currentCommand: addText(state.currentCommand, value),
+      };
+    }
   }
   return state;
 };
@@ -139,7 +135,7 @@ const handleDesc = (state: ParseState, value: string): ParseState => {
     return {
       ...state,
       currentParam: {
-        ...state.currentParam,
+        name: state.currentParam.name,
         attr: { ...state.currentParam.attr, desc: value },
       },
     };

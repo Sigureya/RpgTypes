@@ -1,6 +1,6 @@
 import { describe, expect, test } from "vitest";
 import type { ParamSoruceRecord } from "./attributes";
-import { compileAttributes2 } from "./attributes";
+import { compileAttributes } from "./attributes";
 import type { StringArrayParam, StringParam } from "./primitiveParams";
 
 describe("compileAttributes - string", () => {
@@ -13,7 +13,7 @@ describe("compileAttributes - string", () => {
       kind: "string",
       default: "abc",
     };
-    const result = compileAttributes2(tokens);
+    const result = compileAttributes(tokens);
     expect(result).toEqual(expected);
   });
 
@@ -32,7 +32,7 @@ describe("compileAttributes - string", () => {
       desc: "String Description",
       parent: "Parent String",
     };
-    const result = compileAttributes2(tokens);
+    const result = compileAttributes(tokens);
     expect(result).toEqual(expected);
   });
 });
@@ -47,7 +47,7 @@ describe("compileAttributes - string[]", () => {
       kind: "string[]",
       default: ["a", "b", "c"],
     };
-    const result = compileAttributes2(tokens);
+    const result = compileAttributes(tokens);
     expect(result).toEqual(expected);
   });
 
@@ -60,7 +60,7 @@ describe("compileAttributes - string[]", () => {
       kind: "string[]",
       default: [],
     };
-    const result = compileAttributes2(tokens);
+    const result = compileAttributes(tokens);
     expect(result).toEqual(expected);
   });
 });
