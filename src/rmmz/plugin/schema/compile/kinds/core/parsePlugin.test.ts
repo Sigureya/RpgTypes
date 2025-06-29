@@ -1,6 +1,6 @@
 import { test, expect, describe } from "vitest";
-import type { PluginCommand, PluginParam } from "./parseV2";
-import { parsePlugin } from "./parseV2";
+import type { PluginParam } from "./parsePlugin";
+import { parsePlugin } from "./parsePlugin";
 
 const mockTexts: string[] = [
   "@param bool",
@@ -67,7 +67,7 @@ describe("parsePlugin", () => {
     expect(result.params).toEqual(expected);
   });
   test("should parse commands correctly", () => {
-    const expected: PluginCommand[] = [
+    const expected = [
       {
         command: "save",
         text: "writeSave",
