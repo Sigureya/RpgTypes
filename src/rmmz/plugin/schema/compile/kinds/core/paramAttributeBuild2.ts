@@ -24,11 +24,11 @@ import type {
 
 type MappingTableEx<T> = MappingTable<Omit<T, "kind">>;
 
-export const compileAttributes = (
+export const compileAttributes2 = (
   tokens: Record<string, string>
 ): StructParamPrimitive => {
-  if ("type" in tokens) {
-    const func = TABLE2[tokens.type as keyof typeof TABLE2];
+  if ("kind" in tokens) {
+    const func = TABLE2[tokens.kind as keyof typeof TABLE2];
     if (func) {
       return func(tokens);
     }
