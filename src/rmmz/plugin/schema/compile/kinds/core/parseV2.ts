@@ -1,31 +1,39 @@
+import { compileAttributes2 } from "./attributes";
 import {
+  KEYWORD_DEFAULT,
+  KEYWORD_MAX,
+  KEYWORD_MIN,
   KEYWORD_OFF,
   KEYWORD_ON,
   KEYWORD_TEXT,
 } from "./parse/constants/keyword";
-
-export interface PluginParam {
+import type { StructParamPrimitive } from "./primitiveParams";
+export interface PluginParamTemp {
   name: string;
-  attr: Record<string, any>;
+  attr: Record<string, string>;
+}
+export interface PluginParam2 {
+  name: string;
+  attr: StructParamPrimitive;
 }
 
 export interface PluginCommand {
   command: string;
   text?: string;
   desc?: string;
-  args: PluginParam[];
+  args: PluginParam2[];
 }
 
 export interface ParsedPlugin {
   meta: Record<string, string>;
-  params: PluginParam[];
+  params: PluginParam2[];
   commands: PluginCommand[];
 }
 
 type ParseState = {
-  params: PluginParam[];
+  params: PluginParamTemp[];
   commands: PluginCommand[];
-  currentParam: PluginParam | null;
+  currentParam: PluginParamTemp | null;
   currentCommand: PluginCommand | null;
 };
 
@@ -36,10 +44,15 @@ const withTexts = (command: { desc?: string; text?: string }) => {
   };
 };
 
+const compileParam = (param: PluginParamTemp): PluginParam2 => ({
+  name: param.name,
+  attr: compileAttributes2(param.attr),
+});
+
 const flashCurrentItem = (state: ParseState): ParseState => {
   if (state.currentCommand) {
-    const newArgs: PluginParam[] = state.currentParam
-      ? state.currentCommand.args.concat(state.currentParam)
+    const newArgs: PluginParam2[] = state.currentParam
+      ? state.currentCommand.args.concat(compileParam(state.currentParam))
       : state.currentCommand.args;
     const newCommand: PluginCommand = {
       ...withTexts(state.currentCommand),
@@ -81,31 +94,11 @@ const handleParam = (oldstate: ParseState, value: string): ParseState => {
   };
 };
 const handleType = (state: ParseState, value: string): ParseState => {
-  if (state.currentParam) {
-    return {
-      ...state,
-      currentParam: {
-        ...state.currentParam,
-        attr: { ...state.currentParam.attr, kind: value },
-      },
-    };
-  }
-  return state;
+  return addField(state, "kind", value);
 };
 
 const handleDefault = (state: ParseState, value: string): ParseState => {
-  const parsedDefault = safeParseJSON(value);
-
-  if (state.currentParam) {
-    return {
-      ...state,
-      currentParam: {
-        name: state.currentParam.name,
-        attr: { ...state.currentParam.attr, default: parsedDefault },
-      },
-    };
-  }
-  return state;
+  return addField(state, KEYWORD_DEFAULT, value);
 };
 
 const addText = <T extends Record<string, unknown> | PluginCommand>(
@@ -163,14 +156,18 @@ const handleDesc = (state: ParseState, value: string): ParseState => {
   return state;
 };
 
-const handleOn = (state: ParseState, value: string): ParseState => {
+const addField = (
+  state: ParseState,
+  key: string,
+  value: string
+): ParseState => {
   if (state.currentParam) {
-    if (!(KEYWORD_ON in state.currentParam.attr)) {
+    if (!(key in state.currentParam.attr)) {
       return {
         ...state,
         currentParam: {
           ...state.currentParam,
-          attr: { ...state.currentParam.attr, [KEYWORD_ON]: value },
+          attr: { ...state.currentParam.attr, [key]: value },
         },
       };
     }
@@ -178,19 +175,12 @@ const handleOn = (state: ParseState, value: string): ParseState => {
   return state;
 };
 
+const handleOn = (state: ParseState, value: string): ParseState => {
+  return addField(state, KEYWORD_ON, value);
+};
+
 const handleOff = (state: ParseState, value: string): ParseState => {
-  if (state.currentParam) {
-    if (!(KEYWORD_OFF in state.currentParam.attr)) {
-      return {
-        ...state,
-        currentParam: {
-          ...state.currentParam,
-          attr: { ...state.currentParam.attr, [KEYWORD_OFF]: value },
-        },
-      };
-    }
-  }
-  return state;
+  return addField(state, KEYWORD_OFF, value);
 };
 
 const handleCommand = (oldstate: ParseState, value: string): ParseState => {
@@ -198,7 +188,7 @@ const handleCommand = (oldstate: ParseState, value: string): ParseState => {
 
   const commands = state.currentCommand ? [...state.commands] : state.commands;
   return {
-    ...state,
+    params: state.params,
     commands,
     currentCommand: { command: value, args: [] },
     currentParam: null,
@@ -213,7 +203,7 @@ const handleArg = (state: ParseState, value: string): ParseState => {
     const argAddedCommand: PluginCommand = {
       ...withTexts(state.currentCommand),
       command: state.currentCommand.command,
-      args: state.currentCommand.args.concat(state.currentParam),
+      args: state.currentCommand.args.concat(compileParam(state.currentParam)),
     };
     return {
       ...state,
@@ -235,32 +225,11 @@ const handleArg = (state: ParseState, value: string): ParseState => {
 };
 
 const handleMin = (state: ParseState, value: string): ParseState => {
-  const parsedMin = safeParseJSON(value);
-
-  if (state.currentParam) {
-    return {
-      ...state,
-      currentParam: {
-        ...state.currentParam,
-        attr: { ...state.currentParam.attr, min: parsedMin },
-      },
-    };
-  }
-  return state;
+  return addField(state, KEYWORD_MIN, value);
 };
 
 const handleMax = (state: ParseState, value: string): ParseState => {
-  const parsedMax = safeParseJSON(value);
-  if (state.currentParam) {
-    return {
-      ...state,
-      currentParam: {
-        ...state.currentParam,
-        attr: { ...state.currentParam.attr, max: parsedMax },
-      },
-    };
-  }
-  return state;
+  return addField(state, KEYWORD_MAX, value);
 };
 
 const handleDefaultCase = (state: ParseState): ParseState => state;
@@ -309,39 +278,13 @@ export const parsePlugin = (text: string): ParsedPlugin => {
       commands: [],
       currentParam: null,
       currentCommand: null,
-      //      currentArg: null,
     }
   );
 
   const finalState = flashCurrentItem(state);
   return {
-    params: finalState.params,
+    params: finalState.params.map(compileParam),
     commands: finalState.commands,
     meta: {},
   };
-};
-
-const safeParseJSON = (value: string): any => {
-  try {
-    const parsed = JSON.parse(value);
-    if (Array.isArray(parsed)) {
-      return parsed.map((v) => {
-        const num = Number(v);
-        return isNaN(num) ? v : num;
-      });
-    }
-    return parsed;
-  } catch {
-    const num = Number(value);
-    if (!isNaN(num)) {
-      return num;
-    }
-    if (value === "true") {
-      return true;
-    }
-    if (value === "false") {
-      return false;
-    }
-    return value;
-  }
 };

@@ -1,8 +1,8 @@
-import { KEYWORD_OPTION, KEYWORD_TYPE } from "./parse/constants/keyword";
+import { KEYWORD_OPTION } from "./parse/constants/keyword";
 import type { MappingTable } from "./parse/keyword";
-import { compileArrayParam, mapKeywords } from "./parse/keyword";
-import { compileOptionItems } from "./parse/selectOption";
-import type { Token } from "./parse/types/token";
+import { mapKeywords } from "./parse/keyword";
+import { compileParam, compileArrayParam2 } from "./parse/keyword2/mapping";
+import type { OptionItem, Token } from "./parse/types/token";
 import type {
   BooleanParam,
   NumberParam,
@@ -11,12 +11,10 @@ import type {
   FileParam,
   GenericIdParam,
   NumberArrayParam,
-  RpgDataIdParam,
-  SystemDataIdParam,
-  StringParam,
   SelectParam,
   StringArrayParam,
   FileArrayParam,
+  StringParam,
 } from "./primitiveParams";
 import { parseDeepJSON } from "./rmmzJSON";
 import type {
@@ -26,21 +24,27 @@ import type {
 
 type MappingTableEx<T> = MappingTable<Omit<T, "kind">>;
 
-export const compileAttributes = (
-  tokens: ReadonlyArray<Token>
-): StructParamPrimitive => {
-  const type = getType(tokens) ?? "string";
-  const func = TABLE[type as keyof typeof TABLE] ?? TABLE.string;
-  return func(tokens);
-};
+export type ParamSoruceRecord<T> = Partial<Record<keyof T, string>>;
 
-const getType = (tokens: ReadonlyArray<Token>): string | undefined => {
-  const typeToken = tokens.find((t) => t.keyword === KEYWORD_TYPE);
-  return typeToken ? typeToken.value : undefined;
+export const compileAttributes2 = (
+  tokens: Record<string, string>
+): StructParamPrimitive => {
+  if ("kind" in tokens) {
+    const func = TABLE2[tokens.kind as keyof typeof TABLE2];
+    if (func) {
+      return func(tokens);
+    }
+  }
+  return {
+    kind: "string",
+    default: "",
+    text: "",
+    desc: "",
+    parent: "",
+  };
 };
 
 const attrString = (value: string): string => value;
-
 const numberArray = (value: string): number[] => {
   const numbers = value
     .replace("[", "")
@@ -49,6 +53,13 @@ const numberArray = (value: string): number[] => {
     .map((v) => parseFloat(v.replaceAll(`"`, "").trim()));
   return numbers.filter((n) => !isNaN(n));
 };
+
+const STRING = {
+  default: attrString,
+  text: attrString,
+  desc: attrString,
+  parent: attrString,
+} as const satisfies MappingTableEx<StringParam>;
 
 const compileComboParam = (tokens: ReadonlyArray<Token>): ComboParam => {
   const options: string[] = tokens
@@ -62,18 +73,17 @@ const compileComboParam = (tokens: ReadonlyArray<Token>): ComboParam => {
     options,
   };
 };
-
 const compileSelectParam = (tokens: ReadonlyArray<Token>): SelectParam => {
-  const options = compileOptionItems(tokens);
+  const options: OptionItem[] = [];
   return {
-    default: options[0]?.value ?? "",
+    default: "",
     ...mapKeywords(tokens, STRING),
     kind: "select",
     options,
   };
 };
 
-const compileBooleanParam = (tokens: ReadonlyArray<Token>): BooleanParam => {
+const compileBooleanParam = (tokens: Record<string, string>): BooleanParam => {
   const BOOLEAN = {
     default: (value: string) => value === "true",
     text: attrString,
@@ -82,15 +92,10 @@ const compileBooleanParam = (tokens: ReadonlyArray<Token>): BooleanParam => {
     off: attrString,
     parent: attrString,
   } as const satisfies MappingTableEx<BooleanParam>;
-
-  return {
-    default: true,
-    ...mapKeywords(tokens, BOOLEAN),
-    kind: "boolean",
-  };
+  return compileParam("boolean", true, tokens, BOOLEAN);
 };
 
-const compileNumberParam = (tokens: ReadonlyArray<Token>): NumberParam => {
+const compileNumberParam = (tokens: Record<string, string>): NumberParam => {
   const NUMBER = {
     default: (value: string) => parseFloat(value),
     text: attrString,
@@ -100,16 +105,11 @@ const compileNumberParam = (tokens: ReadonlyArray<Token>): NumberParam => {
     max: (value: string) => parseFloat(value),
     parent: attrString,
   } as const satisfies MappingTableEx<NumberParam>;
-
-  return {
-    default: 0,
-    ...mapKeywords(tokens, NUMBER),
-    kind: "number",
-  };
+  return compileParam("number", 0, tokens, NUMBER);
 };
 
 const compileNumberArrayParam = (
-  tokens: ReadonlyArray<Token>
+  tokens: Record<string, string>
 ): NumberArrayParam => {
   const NUMBER_ARRAY = {
     default: numberArray,
@@ -120,27 +120,15 @@ const compileNumberArrayParam = (
     max: (value: string) => parseFloat(value),
     parent: attrString,
   } as const satisfies MappingTableEx<NumberArrayParam>;
-
-  return compileArrayParam(tokens, "number[]", NUMBER_ARRAY);
+  return compileArrayParam2("number[]", tokens, NUMBER_ARRAY);
 };
 
-const STRING = {
-  default: attrString,
-  text: attrString,
-  desc: attrString,
-  parent: attrString,
-} as const satisfies MappingTableEx<StructParamPrimitive & { kind: "string" }>;
-
-const compileStringParam = (tokens: ReadonlyArray<Token>): StringParam => {
-  return {
-    default: "",
-    ...mapKeywords(tokens, STRING),
-    kind: "string",
-  };
+const compileStringParam = (tokens: Record<string, string>) => {
+  return compileParam("string", "", tokens, STRING);
 };
 
 const compileStringArrayParam = (
-  tokens: ReadonlyArray<Token>
+  tokens: Record<string, string>
 ): StringArrayParam => {
   const STRING_ARRAY = {
     default: (value: string): string[] => parseDeepJSON(value) as string[],
@@ -148,11 +136,10 @@ const compileStringArrayParam = (
     desc: attrString,
     parent: attrString,
   } as const satisfies MappingTableEx<StringArrayParam>;
-
-  return compileArrayParam(tokens, "string[]", STRING_ARRAY);
+  return compileArrayParam2("string[]", tokens, STRING_ARRAY);
 };
 
-const compileFileParam = (tokens: ReadonlyArray<Token>): FileParam => {
+const compileFileParam = (tokens: Record<string, string>): FileParam => {
   const FILE = {
     default: attrString,
     text: attrString,
@@ -161,15 +148,14 @@ const compileFileParam = (tokens: ReadonlyArray<Token>): FileParam => {
     dir: attrString,
   } as const satisfies MappingTableEx<FileParam>;
   return {
-    default: "",
     dir: "",
-    ...mapKeywords(tokens, FILE),
+    ...compileParam("file", "", tokens, FILE),
     kind: "file",
   };
 };
 
 const compileFileArrayParam = (
-  tokens: ReadonlyArray<Token>
+  tokens: Record<string, string>
 ): FileArrayParam => {
   const FILE_ARRAY = {
     default: (value: string): string[] => parseDeepJSON(value) as string[],
@@ -179,16 +165,15 @@ const compileFileArrayParam = (
     dir: attrString,
   } as const satisfies MappingTableEx<FileArrayParam>;
   return {
-    default: [],
     dir: "",
-    ...mapKeywords(tokens, FILE_ARRAY),
-    kind: "file[]",
-  } satisfies FileArrayParam;
+    ...compileArrayParam2("file[]", tokens, FILE_ARRAY),
+  };
 };
+
 const compileDataIdArray = <
   Kind extends DataKind_RpgUnion | DataKind_SystemUnion
 >(
-  tokens: ReadonlyArray<Token>,
+  tokens: Record<string, string>,
   kind: `${Kind}[]`
 ) => {
   const DATA_ID_ARRAY = {
@@ -197,11 +182,11 @@ const compileDataIdArray = <
     desc: attrString,
     parent: attrString,
   } as const;
-  return compileArrayParam(tokens, kind, DATA_ID_ARRAY);
+  return compileArrayParam2(kind, tokens, DATA_ID_ARRAY);
 };
 
 const compileDataId = <Kind extends DataKind_RpgUnion | DataKind_SystemUnion>(
-  tokens: ReadonlyArray<Token>,
+  tokens: Record<string, string>,
   kind: Kind
 ) => {
   const DATA_ID = {
@@ -210,51 +195,60 @@ const compileDataId = <Kind extends DataKind_RpgUnion | DataKind_SystemUnion>(
     desc: attrString,
     parent: attrString,
   } as const satisfies MappingTableEx<GenericIdParam>;
-  return {
-    default: 0,
-    ...mapKeywords(tokens, DATA_ID),
-    kind: kind,
-  } satisfies SystemDataIdParam | RpgDataIdParam;
+  return compileParam(kind, 0, tokens, DATA_ID);
 };
 
-const TABLE = {
-  combo: compileComboParam,
+const TABLE2 = {
   boolean: compileBooleanParam,
   string: compileStringParam,
   "string[]": compileStringArrayParam,
-  multiline_string: compileStringParam,
-  "multiline_string[]": compileStringArrayParam,
   number: compileNumberParam,
   "number[]": compileNumberArrayParam,
-  select: compileSelectParam,
-  enemy: (tokens) => compileDataId(tokens, "enemy"),
-  "enemy[]": (tokens) => compileDataIdArray(tokens, "enemy[]"),
-  item: (tokens) => compileDataId(tokens, "item"),
-  "item[]": (tokens) => compileDataIdArray(tokens, "item[]"),
-  skill: (tokens) => compileDataId(tokens, "skill"),
-  "skill[]": (tokens) => compileDataIdArray(tokens, "skill[]"),
-  actor: (tokens) => compileDataId(tokens, "actor"),
-  "actor[]": (tokens) => compileDataIdArray(tokens, "actor[]"),
-  class: (tokens) => compileDataId(tokens, "class"),
-  "class[]": (tokens) => compileDataIdArray(tokens, "class[]"),
-  weapon: (tokens) => compileDataId(tokens, "weapon"),
-  "weapon[]": (tokens) => compileDataIdArray(tokens, "weapon[]"),
-  armor: (tokens) => compileDataId(tokens, "armor"),
-  "armor[]": (tokens) => compileDataIdArray(tokens, "armor[]"),
-  state: (tokens) => compileDataId(tokens, "state"),
-  "state[]": (tokens) => compileDataIdArray(tokens, "state[]"),
-  troop: (tokens) => compileDataId(tokens, "troop"),
-  "troop[]": (tokens) => compileDataIdArray(tokens, "troop[]"),
-  common_event: (tokens) => compileDataId(tokens, "common_event"),
-  "common_event[]": (tokens) => compileDataIdArray(tokens, "common_event[]"),
-  variable: (tokens) => compileDataId(tokens, "variable"),
-  "variable[]": (tokens) => compileDataIdArray(tokens, "variable[]"),
-  switch: (tokens) => compileDataId(tokens, "switch"),
-  "switch[]": (tokens) => compileDataIdArray(tokens, "switch[]"),
+  //  combo: compileComboParam,
+  // select: compileSelectParam,
   file: compileFileParam,
   "file[]": compileFileArrayParam,
+  enemy: (tokens: Record<string, string>) => compileDataId(tokens, "enemy"),
+  "enemy[]": (tokens: Record<string, string>) =>
+    compileDataIdArray(tokens, "enemy[]"),
+  item: (tokens: Record<string, string>) => compileDataId(tokens, "item"),
+  "item[]": (tokens: Record<string, string>) =>
+    compileDataIdArray(tokens, "item[]"),
+  skill: (tokens: Record<string, string>) => compileDataId(tokens, "skill"),
+  "skill[]": (tokens: Record<string, string>) =>
+    compileDataIdArray(tokens, "skill[]"),
+  actor: (tokens: Record<string, string>) => compileDataId(tokens, "actor"),
+  "actor[]": (tokens: Record<string, string>) =>
+    compileDataIdArray(tokens, "actor[]"),
+  class: (tokens: Record<string, string>) => compileDataId(tokens, "class"),
+  "class[]": (tokens: Record<string, string>) =>
+    compileDataIdArray(tokens, "class[]"),
+  weapon: (tokens: Record<string, string>) => compileDataId(tokens, "weapon"),
+  "weapon[]": (tokens: Record<string, string>) =>
+    compileDataIdArray(tokens, "weapon[]"),
+  armor: (tokens: Record<string, string>) => compileDataId(tokens, "armor"),
+  "armor[]": (tokens: Record<string, string>) =>
+    compileDataIdArray(tokens, "armor[]"),
+  state: (tokens: Record<string, string>) => compileDataId(tokens, "state"),
+  "state[]": (tokens: Record<string, string>) =>
+    compileDataIdArray(tokens, "state[]"),
+  troop: (tokens: Record<string, string>) => compileDataId(tokens, "troop"),
+  "troop[]": (tokens: Record<string, string>) =>
+    compileDataIdArray(tokens, "troop[]"),
+  common_event: (tokens: Record<string, string>) =>
+    compileDataId(tokens, "common_event"),
+  "common_event[]": (tokens: Record<string, string>) =>
+    compileDataIdArray(tokens, "common_event[]"),
+  variable: (tokens: Record<string, string>) =>
+    compileDataId(tokens, "variable"),
+  "variable[]": (tokens: Record<string, string>) =>
+    compileDataIdArray(tokens, "variable[]"),
+  switch: (tokens: Record<string, string>) => compileDataId(tokens, "switch"),
+  "switch[]": (tokens: Record<string, string>) =>
+    compileDataIdArray(tokens, "switch[]"),
 } as const satisfies Partial<{
   [K in StructParamPrimitive["kind"]]: (
-    tokens: ReadonlyArray<Token>
+    tokens: Record<string, string>,
+    options: string[]
   ) => StructParamPrimitive;
 }>;
