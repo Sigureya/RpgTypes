@@ -1,4 +1,4 @@
-import { compileAttributes2 } from "./paramAttributeBuild2";
+import { compileAttributes2 } from "./attributes";
 import {
   KEYWORD_DEFAULT,
   KEYWORD_MAX,
