@@ -1,4 +1,3 @@
-import { compileAttributes } from "./attributes";
 import {
   KEYWORD_TEXT,
   KEYWORD_DESC,
@@ -11,34 +10,29 @@ import {
   KEYWORD_COMMAND,
   KEYWORD_ARG,
   KEYWORD_TYPE,
-} from "./parse/keyword/constants";
-import type { KeywordEnum } from "./parse/keyword/types";
-import type { StructParamPrimitive } from "./primitiveParams";
+} from "./keyword/constants";
+import type { KeywordEnum } from "./keyword/types";
 
 export interface PluginParamTokens {
   name: string;
   attr: { [key in KeywordEnum]?: string };
-}
-export interface PluginParam {
-  name: string;
-  attr: StructParamPrimitive;
 }
 
 export interface PluginCommand {
   command: string;
   text?: string;
   desc?: string;
-  args: PluginParam[];
+  args: PluginParamTokens[];
 }
 
 export interface ParsedPlugin {
   meta: Record<string, string>;
-  params: PluginParam[];
+  params: PluginParamTokens[];
   commands: PluginCommand[];
 }
 
 export interface ParseState {
-  params: PluginParam[];
+  params: PluginParamTokens[];
   commands: PluginCommand[];
   currentParam: PluginParamTokens | null;
   currentCommand: PluginCommand | null;
@@ -92,15 +86,10 @@ const withTexts = (command: { desc?: string; text?: string }) => {
   };
 };
 
-const compileParam = (param: PluginParamTokens): PluginParam => ({
-  name: param.name,
-  attr: compileAttributes(param.attr),
-});
-
 const flashCurrentItem = (state: ParseState): ParseState => {
   if (state.currentCommand) {
-    const newArgs: PluginParam[] = state.currentParam
-      ? state.currentCommand.args.concat(compileParam(state.currentParam))
+    const newArgs = state.currentParam
+      ? state.currentCommand.args.concat(state.currentParam)
       : state.currentCommand.args;
     const newCommand: PluginCommand = {
       ...withTexts(state.currentCommand),
@@ -117,7 +106,7 @@ const flashCurrentItem = (state: ParseState): ParseState => {
   if (state.currentParam) {
     return {
       commands: state.commands,
-      params: state.params.concat(compileParam(state.currentParam)),
+      params: state.params.concat(state.currentParam),
       currentParam: null,
       currentCommand: null,
     };
@@ -193,7 +182,7 @@ const handleArg = (state: ParseState, value: string): ParseState => {
     const argAddedCommand: PluginCommand = {
       ...withTexts(state.currentCommand),
       command: state.currentCommand.command,
-      args: state.currentCommand.args.concat(compileParam(state.currentParam)),
+      args: state.currentCommand.args.concat(state.currentParam),
     };
     return {
       ...state,
