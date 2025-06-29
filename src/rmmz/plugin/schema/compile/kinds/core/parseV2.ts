@@ -14,11 +14,12 @@ import {
 } from "./parse/keyword/constants";
 import type { KeywordEnum } from "./parse/keyword/types";
 import type { StructParamPrimitive } from "./primitiveParams";
-export interface PluginParamTemp {
+
+export interface PluginParamTokens {
   name: string;
   attr: { [key in KeywordEnum]?: string };
 }
-export interface PluginParam2 {
+export interface PluginParam {
   name: string;
   attr: StructParamPrimitive;
 }
@@ -27,23 +28,30 @@ export interface PluginCommand {
   command: string;
   text?: string;
   desc?: string;
-  args: PluginParam2[];
+  args: PluginParam[];
 }
 
 export interface ParsedPlugin {
   meta: Record<string, string>;
-  params: PluginParam2[];
+  params: PluginParam[];
   commands: PluginCommand[];
 }
 
-interface ParseState {
-  params: PluginParam2[];
+export interface ParseState {
+  params: PluginParam[];
   commands: PluginCommand[];
-  currentParam: PluginParamTemp | null;
+  currentParam: PluginParamTokens | null;
   currentCommand: PluginCommand | null;
 }
 
-export const parsePlugin = (text: string): ParsedPlugin => {
+export const parsePlugin = (text: string) => {
+  return parsePluginCore(text, KEYWORD_FUNC_TABLE);
+};
+
+export const parsePluginCore = (
+  text: string,
+  table: Record<string, (state: ParseState, value: string) => ParseState>
+): ParsedPlugin => {
   const lines = text.split(/\r?\n/);
 
   const state = lines.reduce<ParseState>(
@@ -54,7 +62,7 @@ export const parsePlugin = (text: string): ParsedPlugin => {
       }
       const [tag, ...rest] = trimmed.slice(1).split(" ");
       const value = rest.join(" ").trim();
-      const fn = KEYWORD_FUNC_TABLE[tag as keyof typeof KEYWORD_FUNC_TABLE];
+      const fn = table[tag as keyof typeof table];
 
       if (fn) {
         return fn(acc, value);
@@ -84,14 +92,14 @@ const withTexts = (command: { desc?: string; text?: string }) => {
   };
 };
 
-const compileParam = (param: PluginParamTemp): PluginParam2 => ({
+const compileParam = (param: PluginParamTokens): PluginParam => ({
   name: param.name,
   attr: compileAttributes(param.attr),
 });
 
 const flashCurrentItem = (state: ParseState): ParseState => {
   if (state.currentCommand) {
-    const newArgs: PluginParam2[] = state.currentParam
+    const newArgs: PluginParam[] = state.currentParam
       ? state.currentCommand.args.concat(compileParam(state.currentParam))
       : state.currentCommand.args;
     const newCommand: PluginCommand = {
@@ -126,7 +134,6 @@ const handleParam = (oldstate: ParseState, value: string): ParseState => {
   }
   return {
     ...state,
-    params: state.params,
     currentParam: { name: value, attr: {} },
   };
 };

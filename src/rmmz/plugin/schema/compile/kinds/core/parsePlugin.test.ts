@@ -1,5 +1,5 @@
 import { test, expect, describe } from "vitest";
-import type { PluginCommand, PluginParam2 } from "./parseV2";
+import type { PluginCommand, PluginParam } from "./parseV2";
 import { parsePlugin } from "./parseV2";
 
 const mockTexts: string[] = [
@@ -43,7 +43,7 @@ describe("parsePlugin", () => {
     expect(result.meta).toBeDefined();
   });
   test("should parse parameters correctly", () => {
-    const expected: PluginParam2[] = [
+    const expected: PluginParam[] = [
       {
         name: "bool",
         attr: {
