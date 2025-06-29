@@ -3,16 +3,14 @@ import {
   compileParam,
   type MappingTable,
 } from "./parse/keyword/mapping";
-import type { OptionItem, Token } from "./parse/types/token";
+import type { PluginTokens } from "./parse/parseV2";
 import type {
   BooleanParam,
   NumberParam,
   StructParamPrimitive,
-  ComboParam,
   FileParam,
   GenericIdParam,
   NumberArrayParam,
-  SelectParam,
   StringArrayParam,
   FileArrayParam,
   StringParam,
@@ -28,7 +26,7 @@ type MappingTableEx<T> = MappingTable<Omit<T, "kind">>;
 export type ParamSoruceRecord<T> = Partial<Record<keyof T, string>>;
 
 export const compileAttributes = (
-  tokens: Record<string, string>
+  tokens: PluginTokens
 ): StructParamPrimitive => {
   if ("kind" in tokens) {
     const func = TABLE2[tokens.kind as keyof typeof TABLE2];
@@ -249,7 +247,7 @@ const TABLE2 = {
     compileDataIdArray(tokens, "switch[]"),
 } as const satisfies Partial<{
   [K in StructParamPrimitive["kind"]]: (
-    tokens: Record<string, string>,
+    tokens: PluginTokens,
     options: string[]
   ) => StructParamPrimitive;
 }>;
