@@ -6,7 +6,7 @@ type TableConcept = {
   [key: string]: (tokens: string) => unknown;
 };
 
-export const mapKeyword = <T extends TableConcept>(
+export const applyMappingTable = <T extends TableConcept>(
   tokens: Record<string, string>,
   fnTable: T
 ): {
@@ -39,7 +39,7 @@ export const compileParam = <Kind extends string, T>(
 } => {
   return {
     default: defaultValue,
-    ...mapKeyword(tokens, fnTable),
+    ...applyMappingTable(tokens, fnTable),
     kind,
   };
 };
@@ -59,7 +59,7 @@ export const compileArrayParam = <
 } => {
   return {
     default: [],
-    ...mapKeyword(tokens, fnTable),
+    ...applyMappingTable(tokens, fnTable),
     kind,
   };
 };

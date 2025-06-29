@@ -1,7 +1,7 @@
 import type { MockedObject } from "vitest";
 import { test, expect, describe, vi } from "vitest";
 import type { MappingTable } from "./mapping";
-import { mapKeyword } from "./mapping";
+import { applyMappingTable } from "./mapping";
 
 interface Person {
   name: string;
@@ -29,7 +29,7 @@ describe("mapKeywords", () => {
     age: "30",
     isActive: "true",
   };
-  const result = mapKeyword(src, mcokFn);
+  const result = applyMappingTable(src, mcokFn);
   test("should map keywords to their respective functions", () => {
     const expected: Person = {
       name: "John Doe",
