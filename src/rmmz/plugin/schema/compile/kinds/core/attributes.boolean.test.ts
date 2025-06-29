@@ -1,5 +1,6 @@
 import { describe, expect, test } from "vitest";
 import { compileAttributes } from "./attributes";
+import { compileAttributes2 } from "./paramAttributeBuild2";
 import type { Token } from "./parse/types/token";
 import type { TokenOf } from "./parse/types/tokenOf";
 import type { BooleanParam } from "./primitiveParams";
@@ -41,6 +42,31 @@ describe("compileAttributes - boolean", () => {
       { keyword: "parent", value: "Parent Feature" },
     ];
     const result = compileAttributes(tokens);
+    const expected: BooleanParam = {
+      default: false,
+      text: "Enabled?",
+      desc: "Is this feature enabled?",
+      on: "Yes",
+      off: "No",
+      parent: "Parent Feature",
+      kind: "boolean",
+    };
+    expect(result).toEqual(expected);
+  });
+});
+
+describe("compileAttributes - boolean", () => {
+  test("full set", () => {
+    const tokens: Record<keyof BooleanParam, string> = {
+      kind: "boolean",
+      default: "false",
+      text: "Enabled?",
+      desc: "Is this feature enabled?",
+      on: "Yes",
+      off: "No",
+      parent: "Parent Feature",
+    };
+    const result = compileAttributes2(tokens);
     const expected: BooleanParam = {
       default: false,
       text: "Enabled?",
