@@ -11,6 +11,7 @@ import {
   KEYWORD_ARG,
   KEYWORD_TYPE,
   KEYWORD_HELP,
+  KEYWORD_KIND,
 } from "./keyword/constants";
 import type { KeywordEnum } from "./keyword/types";
 
@@ -19,7 +20,7 @@ export interface PluginParamTokens {
   attr: PluginTokens;
 }
 
-export type PluginTokens = { [key in "kind" | KeywordEnum]?: string };
+export type PluginTokens = { [key in KeywordEnum]?: string };
 
 export interface PluginCommand {
   command: string;
@@ -259,7 +260,7 @@ const KEYWORD_FUNC_TABLE = {
   [KEYWORD_COMMAND]: handleCommandContext,
   [KEYWORD_ARG]: handleArgContext,
   [KEYWORD_HELP]: handleHelpContext,
-  [KEYWORD_TYPE]: (state, value) => addField(state, "kind", value),
+  [KEYWORD_TYPE]: (state, value) => addField(state, KEYWORD_KIND, value),
   [KEYWORD_DEFAULT]: (state, value) => addField(state, KEYWORD_DEFAULT, value),
   [KEYWORD_ON]: (state, value) => addField(state, KEYWORD_ON, value),
   [KEYWORD_OFF]: (state, value) => addField(state, KEYWORD_OFF, value),
