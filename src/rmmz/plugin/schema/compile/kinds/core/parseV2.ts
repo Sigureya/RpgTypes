@@ -1,12 +1,16 @@
 import { compileAttributes } from "./attributes";
 import {
+  KEYWORD_ARG,
+  KEYWORD_COMMAND,
   KEYWORD_DEFAULT,
   KEYWORD_DESC,
   KEYWORD_MAX,
   KEYWORD_MIN,
   KEYWORD_OFF,
   KEYWORD_ON,
+  KEYWORD_PARAM,
   KEYWORD_TEXT,
+  KEYWORD_TYPE,
 } from "./parse/constants/keyword";
 import type { StructParamPrimitive } from "./primitiveParams";
 export interface PluginParamTemp {
@@ -213,6 +217,23 @@ const handleMax = (state: ParseState, value: string): ParseState => {
 
 const handleDefaultCase = (state: ParseState): ParseState => state;
 
+const KEYWORD_FUNC_TABLE = {
+  [KEYWORD_PARAM]: handleParam,
+  [KEYWORD_COMMAND]: handleCommand,
+  [KEYWORD_ARG]: handleArg,
+  [KEYWORD_TYPE]: handleType,
+  [KEYWORD_DEFAULT]: handleDefault,
+  [KEYWORD_TEXT]: handleText,
+  [KEYWORD_DESC]: handleDesc,
+  [KEYWORD_ON]: handleOn,
+  [KEYWORD_OFF]: handleOff,
+  [KEYWORD_MIN]: handleMin,
+  [KEYWORD_MAX]: handleMax,
+} as const satisfies Record<
+  string,
+  (state: ParseState, value: string) => ParseState
+>;
+
 export const parsePlugin = (text: string): ParsedPlugin => {
   const lines = text.split(/\r?\n/);
 
@@ -224,33 +245,12 @@ export const parsePlugin = (text: string): ParsedPlugin => {
       }
       const [tag, ...rest] = trimmed.slice(1).split(" ");
       const value = rest.join(" ").trim();
+      const fn = KEYWORD_FUNC_TABLE[tag as keyof typeof KEYWORD_FUNC_TABLE];
 
-      switch (tag) {
-        case "param":
-          return handleParam(acc, value);
-        case "type":
-          return handleType(acc, value);
-        case "default":
-          return handleDefault(acc, value);
-        case "text":
-          return handleText(acc, value);
-        case "desc":
-          return handleDesc(acc, value);
-        case "on":
-          return handleOn(acc, value);
-        case "off":
-          return handleOff(acc, value);
-        case "command":
-          return handleCommand(acc, value);
-        case "arg":
-          return handleArg(acc, value);
-        case "min":
-          return handleMin(acc, value);
-        case "max":
-          return handleMax(acc, value);
-        default:
-          return handleDefaultCase(acc);
+      if (fn) {
+        return fn(acc, value);
       }
+      return handleDefaultCase(acc);
     },
     {
       params: [],
