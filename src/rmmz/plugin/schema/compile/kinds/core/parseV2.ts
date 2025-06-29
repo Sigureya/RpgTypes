@@ -1,6 +1,7 @@
 import { compileAttributes } from "./attributes";
 import {
   KEYWORD_DEFAULT,
+  KEYWORD_DESC,
   KEYWORD_MAX,
   KEYWORD_MIN,
   KEYWORD_OFF,
@@ -30,12 +31,12 @@ export interface ParsedPlugin {
   commands: PluginCommand[];
 }
 
-type ParseState = {
-  params: PluginParamTemp[];
+interface ParseState {
+  params: PluginParam2[];
   commands: PluginCommand[];
   currentParam: PluginParamTemp | null;
   currentCommand: PluginCommand | null;
-};
+}
 
 const withTexts = (command: { desc?: string; text?: string }) => {
   return {
@@ -69,7 +70,7 @@ const flashCurrentItem = (state: ParseState): ParseState => {
   if (state.currentParam) {
     return {
       commands: state.commands,
-      params: state.params.concat(state.currentParam),
+      params: state.params.concat(compileParam(state.currentParam)),
       currentParam: null,
       currentCommand: null,
     };
@@ -84,34 +85,10 @@ const handleParam = (oldstate: ParseState, value: string): ParseState => {
   if (state.params.some((p) => p.name === value)) {
     return state;
   }
-  const params = state.currentParam
-    ? [...state.params, state.currentParam]
-    : state.params;
   return {
     ...state,
-    params,
+    params: state.params,
     currentParam: { name: value, attr: {} },
-  };
-};
-const handleType = (state: ParseState, value: string): ParseState => {
-  return addField(state, "kind", value);
-};
-
-const handleDefault = (state: ParseState, value: string): ParseState => {
-  return addField(state, KEYWORD_DEFAULT, value);
-};
-
-const addText = <T extends Record<string, unknown> | PluginCommand>(
-  obj: T,
-  value: string
-) => {
-  if (KEYWORD_TEXT in obj) {
-    // すでにtextが存在する場合は上書きしない
-    return obj;
-  }
-  return {
-    ...obj,
-    [KEYWORD_TEXT]: value,
   };
 };
 
@@ -123,7 +100,12 @@ const handleText = (state: ParseState, value: string): ParseState => {
     if (!(KEYWORD_TEXT in state.currentCommand)) {
       return {
         ...state,
-        currentCommand: addText(state.currentCommand, value),
+        currentCommand: {
+          ...withTexts(state.currentCommand),
+          command: state.currentCommand.command,
+          args: state.currentCommand.args,
+          [KEYWORD_TEXT]: value,
+        },
       };
     }
   }
@@ -132,13 +114,7 @@ const handleText = (state: ParseState, value: string): ParseState => {
 
 const handleDesc = (state: ParseState, value: string): ParseState => {
   if (state.currentParam) {
-    return {
-      ...state,
-      currentParam: {
-        name: state.currentParam.name,
-        attr: { ...state.currentParam.attr, desc: value },
-      },
-    };
+    return addField(state, KEYWORD_DESC, value);
   }
   if (state.currentCommand) {
     return {
@@ -152,36 +128,8 @@ const handleDesc = (state: ParseState, value: string): ParseState => {
   return state;
 };
 
-const addField = (
-  state: ParseState,
-  key: string,
-  value: string
-): ParseState => {
-  if (state.currentParam) {
-    if (!(key in state.currentParam.attr)) {
-      return {
-        ...state,
-        currentParam: {
-          ...state.currentParam,
-          attr: { ...state.currentParam.attr, [key]: value },
-        },
-      };
-    }
-  }
-  return state;
-};
-
-const handleOn = (state: ParseState, value: string): ParseState => {
-  return addField(state, KEYWORD_ON, value);
-};
-
-const handleOff = (state: ParseState, value: string): ParseState => {
-  return addField(state, KEYWORD_OFF, value);
-};
-
 const handleCommand = (oldstate: ParseState, value: string): ParseState => {
   const state = flashCurrentItem(oldstate);
-
   const commands = state.currentCommand ? [...state.commands] : state.commands;
   return {
     params: state.params,
@@ -218,6 +166,41 @@ const handleArg = (state: ParseState, value: string): ParseState => {
       attr: {},
     },
   };
+};
+
+const addField = (
+  state: ParseState,
+  key: string,
+  value: string
+): ParseState => {
+  if (state.currentParam) {
+    if (!(key in state.currentParam.attr)) {
+      return {
+        ...state,
+        currentParam: {
+          ...state.currentParam,
+          attr: { ...state.currentParam.attr, [key]: value },
+        },
+      };
+    }
+  }
+  return state;
+};
+
+const handleType = (state: ParseState, value: string): ParseState => {
+  return addField(state, "kind", value);
+};
+
+const handleDefault = (state: ParseState, value: string): ParseState => {
+  return addField(state, KEYWORD_DEFAULT, value);
+};
+
+const handleOn = (state: ParseState, value: string): ParseState => {
+  return addField(state, KEYWORD_ON, value);
+};
+
+const handleOff = (state: ParseState, value: string): ParseState => {
+  return addField(state, KEYWORD_OFF, value);
 };
 
 const handleMin = (state: ParseState, value: string): ParseState => {
@@ -279,7 +262,7 @@ export const parsePlugin = (text: string): ParsedPlugin => {
 
   const finalState = flashCurrentItem(state);
   return {
-    params: finalState.params.map(compileParam),
+    params: finalState.params,
     commands: finalState.commands,
     meta: {},
   };
