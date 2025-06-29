@@ -1,8 +1,5 @@
-import {
-  compileArrayParam,
-  compileParam,
-  type MappingTable,
-} from "./parse/keyword/mapping";
+import type { MappingTable } from "./mapping/mapping";
+import { compileParam, compileArrayParam } from "./mapping/mapping";
 import type { PluginTokens } from "./parse/parseV2";
 import type {
   BooleanParam,
