@@ -1,6 +1,6 @@
 import { describe, expect, test } from "vitest";
-import type { ParamSoruceRecord } from "./paramAttributeBuild2";
-import { compileAttributes2 } from "./paramAttributeBuild2";
+import type { ParamSoruceRecord } from "./attributes";
+import { compileAttributes2 } from "./attributes";
 import type { StringArrayParam, StringParam } from "./primitiveParams";
 
 describe("compileAttributes - string", () => {
