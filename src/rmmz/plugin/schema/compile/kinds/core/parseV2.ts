@@ -278,7 +278,6 @@ export const parsePlugin = (text: string): ParsedPlugin => {
       commands: [],
       currentParam: null,
       currentCommand: null,
-      //      currentArg: null,
     }
   );
 
