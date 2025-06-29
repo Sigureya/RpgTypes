@@ -1,10 +1,8 @@
-import { KEYWORD_OPTION } from "./parse/keyword2/constants";
-import type { MappingTable } from "./parse/keyword2/mapping";
 import {
-  compileParam,
   compileArrayParam,
-  mapKeyword,
-} from "./parse/keyword2/mapping";
+  compileParam,
+  type MappingTable,
+} from "./parse/keyword/mapping";
 import type { OptionItem, Token } from "./parse/types/token";
 import type {
   BooleanParam,

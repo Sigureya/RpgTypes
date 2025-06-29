@@ -1,4 +1,4 @@
-import { KEYWORD_ARG } from "./constants/keyword";
+import { KEYWORD_ARG } from "./keyword/constants";
 import type { PluginCommandTokens, ArgToken } from "./types/pluginCommand";
 import type { ParsingContext, Token } from "./types/token";
 
