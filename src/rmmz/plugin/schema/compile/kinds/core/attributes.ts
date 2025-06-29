@@ -26,7 +26,7 @@ type MappingTableEx<T> = MappingTable<Omit<T, "kind">>;
 
 export type ParamSoruceRecord<T> = Partial<Record<keyof T, string>>;
 
-export const compileAttributes2 = (
+export const compileAttributes = (
   tokens: Record<string, string>
 ): StructParamPrimitive => {
   if ("kind" in tokens) {

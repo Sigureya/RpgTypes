@@ -1,6 +1,6 @@
 import { describe, expect, test } from "vitest";
 import type { ParamSoruceRecord } from "./attributes";
-import { compileAttributes2 } from "./attributes";
+import { compileAttributes } from "./attributes";
 import type { BooleanParam } from "./primitiveParams";
 
 describe("compileAttributes - boolean", () => {
@@ -9,7 +9,7 @@ describe("compileAttributes - boolean", () => {
       kind: "boolean",
       default: "true",
     };
-    const result = compileAttributes2(tokens);
+    const result = compileAttributes(tokens);
     const expected: BooleanParam = {
       default: true,
       kind: "boolean",
@@ -27,7 +27,7 @@ describe("compileAttributes - boolean", () => {
       off: "No",
       parent: "Parent Feature",
     };
-    const result = compileAttributes2(tokens);
+    const result = compileAttributes(tokens);
     const expected: BooleanParam = {
       default: false,
       text: "Enabled?",

@@ -1,5 +1,5 @@
 import { describe, expect, test } from "vitest";
-import { compileAttributes2 } from "./attributes";
+import { compileAttributes } from "./attributes";
 import type { StructParamPrimitive } from "./primitiveParams";
 
 describe("", () => {
@@ -12,6 +12,6 @@ describe("", () => {
       kind: "enemy",
       default: 0,
     };
-    expect(compileAttributes2(mock)).toEqual(expected);
+    expect(compileAttributes(mock)).toEqual(expected);
   });
 });
