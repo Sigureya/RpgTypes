@@ -15,8 +15,10 @@ import type { KeywordEnum } from "./keyword/types";
 
 export interface PluginParamTokens {
   name: string;
-  attr: { [key in KeywordEnum]?: string };
+  attr: PluginTokens;
 }
+
+export type PluginTokens = { [key in "kind" | KeywordEnum]?: string };
 
 export interface PluginCommand {
   command: string;
@@ -32,6 +34,7 @@ export interface ParsedPlugin {
 }
 
 export interface ParseState {
+  helpLines: string[];
   params: PluginParamTokens[];
   commands: PluginCommand[];
   currentParam: PluginParamTokens | null;
@@ -61,9 +64,10 @@ export const parsePluginCore = (
       if (fn) {
         return fn(acc, value);
       }
-      return handleDefaultCase(acc);
+      return acc;
     },
     {
+      helpLines: [],
       params: [],
       commands: [],
       currentParam: null,
@@ -97,7 +101,7 @@ const flashCurrentItem = (state: ParseState): ParseState => {
       args: newArgs,
     };
     return {
-      params: state.params,
+      ...state,
       commands: state.commands.concat(newCommand),
       currentParam: null,
       currentCommand: null,
@@ -105,7 +109,7 @@ const flashCurrentItem = (state: ParseState): ParseState => {
   }
   if (state.currentParam) {
     return {
-      commands: state.commands,
+      ...state,
       params: state.params.concat(state.currentParam),
       currentParam: null,
       currentCommand: null,
@@ -165,10 +169,8 @@ const handleDesc = (state: ParseState, value: string): ParseState => {
 
 const handleCommand = (oldstate: ParseState, value: string): ParseState => {
   const state = flashCurrentItem(oldstate);
-  const commands = state.currentCommand ? [...state.commands] : state.commands;
   return {
-    params: state.params,
-    commands,
+    ...state,
     currentCommand: { command: value, args: [] },
     currentParam: null,
   };
@@ -221,8 +223,6 @@ const addField = (
   }
   return state;
 };
-
-const handleDefaultCase = (state: ParseState): ParseState => state;
 
 const KEYWORD_FUNC_TABLE = {
   [KEYWORD_PARAM]: handleParam,
