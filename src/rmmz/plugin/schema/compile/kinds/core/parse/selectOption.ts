@@ -1,3 +1,5 @@
+import { KEYWORD_OPTION, KEYWORD_VALUE } from "./keyword/constants";
+
 export interface Token {
   keyword: string;
   value: string;
@@ -18,7 +20,7 @@ export const compileOptionItems = (
 ): OptionItem[] => {
   const { current, result } = tokens.reduce<State>(
     (acc, token) => {
-      if (acc.current && token.keyword === "value") {
+      if (acc.current && token.keyword === KEYWORD_VALUE) {
         return {
           result: [
             ...acc.result,
@@ -30,7 +32,7 @@ export const compileOptionItems = (
           current: null,
         };
       }
-      if (token.keyword === "option") {
+      if (token.keyword === KEYWORD_OPTION) {
         return {
           result: acc.result,
           current: {
