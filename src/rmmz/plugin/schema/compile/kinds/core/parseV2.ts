@@ -1,5 +1,8 @@
 import { compileAttributes2 } from "./paramAttributeBuild2";
 import {
+  KEYWORD_DEFAULT,
+  KEYWORD_MAX,
+  KEYWORD_MIN,
   KEYWORD_OFF,
   KEYWORD_ON,
   KEYWORD_TEXT,
@@ -91,29 +94,11 @@ const handleParam = (oldstate: ParseState, value: string): ParseState => {
   };
 };
 const handleType = (state: ParseState, value: string): ParseState => {
-  if (state.currentParam) {
-    return {
-      ...state,
-      currentParam: {
-        ...state.currentParam,
-        attr: { ...state.currentParam.attr, kind: value },
-      },
-    };
-  }
-  return state;
+  return addField(state, "kind", value);
 };
 
 const handleDefault = (state: ParseState, value: string): ParseState => {
-  if (state.currentParam) {
-    return {
-      ...state,
-      currentParam: {
-        name: state.currentParam.name,
-        attr: { ...state.currentParam.attr, default: value },
-      },
-    };
-  }
-  return state;
+  return addField(state, KEYWORD_DEFAULT, value);
 };
 
 const addText = <T extends Record<string, unknown> | PluginCommand>(
@@ -171,14 +156,18 @@ const handleDesc = (state: ParseState, value: string): ParseState => {
   return state;
 };
 
-const handleOn = (state: ParseState, value: string): ParseState => {
+const addField = (
+  state: ParseState,
+  key: string,
+  value: string
+): ParseState => {
   if (state.currentParam) {
-    if (!(KEYWORD_ON in state.currentParam.attr)) {
+    if (!(key in state.currentParam.attr)) {
       return {
         ...state,
         currentParam: {
           ...state.currentParam,
-          attr: { ...state.currentParam.attr, [KEYWORD_ON]: value },
+          attr: { ...state.currentParam.attr, [key]: value },
         },
       };
     }
@@ -186,19 +175,12 @@ const handleOn = (state: ParseState, value: string): ParseState => {
   return state;
 };
 
+const handleOn = (state: ParseState, value: string): ParseState => {
+  return addField(state, KEYWORD_ON, value);
+};
+
 const handleOff = (state: ParseState, value: string): ParseState => {
-  if (state.currentParam) {
-    if (!(KEYWORD_OFF in state.currentParam.attr)) {
-      return {
-        ...state,
-        currentParam: {
-          ...state.currentParam,
-          attr: { ...state.currentParam.attr, [KEYWORD_OFF]: value },
-        },
-      };
-    }
-  }
-  return state;
+  return addField(state, KEYWORD_OFF, value);
 };
 
 const handleCommand = (oldstate: ParseState, value: string): ParseState => {
@@ -206,7 +188,7 @@ const handleCommand = (oldstate: ParseState, value: string): ParseState => {
 
   const commands = state.currentCommand ? [...state.commands] : state.commands;
   return {
-    ...state,
+    params: state.params,
     commands,
     currentCommand: { command: value, args: [] },
     currentParam: null,
@@ -243,29 +225,11 @@ const handleArg = (state: ParseState, value: string): ParseState => {
 };
 
 const handleMin = (state: ParseState, value: string): ParseState => {
-  if (state.currentParam) {
-    return {
-      ...state,
-      currentParam: {
-        ...state.currentParam,
-        attr: { ...state.currentParam.attr, min: value },
-      },
-    };
-  }
-  return state;
+  return addField(state, KEYWORD_MIN, value);
 };
 
 const handleMax = (state: ParseState, value: string): ParseState => {
-  if (state.currentParam) {
-    return {
-      ...state,
-      currentParam: {
-        ...state.currentParam,
-        attr: { ...state.currentParam.attr, max: value },
-      },
-    };
-  }
-  return state;
+  return addField(state, KEYWORD_MAX, value);
 };
 
 const handleDefaultCase = (state: ParseState): ParseState => state;
