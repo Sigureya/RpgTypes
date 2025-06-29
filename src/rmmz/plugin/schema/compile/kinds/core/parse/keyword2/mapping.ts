@@ -17,7 +17,6 @@ export const mapKeyword2 = <T extends TableConcept>(
           [key]: fn(value),
         };
       }
-      return acc;
     }
     return acc;
   }, {});
@@ -35,6 +34,7 @@ export const compileParam = <Kind extends string, T>(
     kind,
   };
 };
+
 export const compileArrayParam2 = <
   T extends TableConcept & { default: (s: string) => unknown[] },
   Kind extends string
