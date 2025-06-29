@@ -10,6 +10,7 @@ import {
   KEYWORD_COMMAND,
   KEYWORD_ARG,
   KEYWORD_TYPE,
+  KEYWORD_HELP,
 } from "./keyword/constants";
 import type { KeywordEnum } from "./keyword/types";
 
@@ -31,6 +32,7 @@ export interface ParsedPlugin {
   meta: Record<string, string>;
   params: PluginParamTokens[];
   commands: PluginCommand[];
+  helpLines: string[];
 }
 
 export interface ParseState {
@@ -39,11 +41,14 @@ export interface ParseState {
   commands: PluginCommand[];
   currentParam: PluginParamTokens | null;
   currentCommand: PluginCommand | null;
+  currentContext: KeywordEnum | null;
 }
 
 export const parsePlugin = (text: string) => {
   return parsePluginCore(text, KEYWORD_FUNC_TABLE);
 };
+
+// ...既存のimportや型定義...
 
 export const parsePluginCore = (
   text: string,
@@ -54,6 +59,15 @@ export const parsePluginCore = (
   const state = lines.reduce<ParseState>(
     (acc, line) => {
       const trimmed = line.trim().replace(/^\*\s?/, "");
+      if (acc.currentContext === KEYWORD_HELP) {
+        // @paramや@commandなどの新しいタグが来たらhelp終了
+        if (!trimmed.startsWith("@")) {
+          return { ...acc, helpLines: acc.helpLines.concat(trimmed) };
+        }
+      }
+      if (trimmed.startsWith("@help")) {
+        return { ...acc, currentContext: KEYWORD_HELP, helpLines: [] };
+      }
       if (!trimmed.startsWith("@")) {
         return acc;
       }
@@ -72,6 +86,7 @@ export const parsePluginCore = (
       commands: [],
       currentParam: null,
       currentCommand: null,
+      currentContext: null,
     }
   );
 
@@ -80,9 +95,9 @@ export const parsePluginCore = (
     params: finalState.params,
     commands: finalState.commands,
     meta: {},
+    helpLines: finalState.helpLines,
   };
 };
-
 const withTexts = (command: { desc?: string; text?: string }) => {
   return {
     ...(typeof command.desc === "string" ? { desc: command.desc } : {}),
