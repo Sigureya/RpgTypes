@@ -22,7 +22,7 @@ import {
   KEYWORD_TEXT,
   KEYWORD_TARGET,
   KEYWORD_VALUE,
-} from "./keyword";
+} from "./constants";
 const keywords = [
   KEYWORD_ARG,
   KEYWORD_AUTHOR,

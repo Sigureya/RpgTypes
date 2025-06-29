@@ -1,7 +1,8 @@
-import { KEYWORD_OPTION } from "./parse/constants/keyword";
-import type { MappingTable } from "./parse/keyword";
-import { mapKeywords } from "./parse/keyword";
-import { compileParam, compileArrayParam2 } from "./parse/keyword2/mapping";
+import {
+  compileArrayParam,
+  compileParam,
+  type MappingTable,
+} from "./parse/keyword/mapping";
 import type { OptionItem, Token } from "./parse/types/token";
 import type {
   BooleanParam,
@@ -61,27 +62,27 @@ const STRING = {
   parent: attrString,
 } as const satisfies MappingTableEx<StringParam>;
 
-const compileComboParam = (tokens: ReadonlyArray<Token>): ComboParam => {
-  const options: string[] = tokens
-    .filter((t) => t.keyword === KEYWORD_OPTION)
-    .map((t) => t.value);
+// const compileComboParam = (tokens: ReadonlyArray<Token>): ComboParam => {
+//   const options: string[] = tokens
+//     .filter((t) => t.keyword === KEYWORD_OPTION)
+//     .map((t) => t.value);
 
-  return {
-    default: options[0] ?? "",
-    ...mapKeywords(tokens, STRING),
-    kind: "combo",
-    options,
-  };
-};
-const compileSelectParam = (tokens: ReadonlyArray<Token>): SelectParam => {
-  const options: OptionItem[] = [];
-  return {
-    default: "",
-    ...mapKeywords(tokens, STRING),
-    kind: "select",
-    options,
-  };
-};
+//   return {
+//     default: options[0] ?? "",
+//     ...mapKeyword(tokens, STRING),
+//     kind: "combo",
+//     options,
+//   };
+// };
+// const compileSelectParam = (tokens: ReadonlyArray<Token>): SelectParam => {
+//   const options: OptionItem[] = [];
+//   return {
+//     default: "",
+//     ...mapKeywords(tokens, STRING),
+//     kind: "select",
+//     options,
+//   };
+// };
 
 const compileBooleanParam = (tokens: Record<string, string>): BooleanParam => {
   const BOOLEAN = {
@@ -120,7 +121,7 @@ const compileNumberArrayParam = (
     max: (value: string) => parseFloat(value),
     parent: attrString,
   } as const satisfies MappingTableEx<NumberArrayParam>;
-  return compileArrayParam2("number[]", tokens, NUMBER_ARRAY);
+  return compileArrayParam("number[]", tokens, NUMBER_ARRAY);
 };
 
 const compileStringParam = (tokens: Record<string, string>) => {
@@ -136,7 +137,7 @@ const compileStringArrayParam = (
     desc: attrString,
     parent: attrString,
   } as const satisfies MappingTableEx<StringArrayParam>;
-  return compileArrayParam2("string[]", tokens, STRING_ARRAY);
+  return compileArrayParam("string[]", tokens, STRING_ARRAY);
 };
 
 const compileFileParam = (tokens: Record<string, string>): FileParam => {
@@ -166,7 +167,7 @@ const compileFileArrayParam = (
   } as const satisfies MappingTableEx<FileArrayParam>;
   return {
     dir: "",
-    ...compileArrayParam2("file[]", tokens, FILE_ARRAY),
+    ...compileArrayParam("file[]", tokens, FILE_ARRAY),
   };
 };
 
@@ -182,7 +183,7 @@ const compileDataIdArray = <
     desc: attrString,
     parent: attrString,
   } as const;
-  return compileArrayParam2(kind, tokens, DATA_ID_ARRAY);
+  return compileArrayParam(kind, tokens, DATA_ID_ARRAY);
 };
 
 const compileDataId = <Kind extends DataKind_RpgUnion | DataKind_SystemUnion>(
