@@ -1,3 +1,7 @@
+export type MappingTable<T> = {
+  [K in Extract<keyof T, string>]: (value: string) => T[K];
+};
+
 type TableConcept = {
   [key: string]: (tokens: string) => unknown;
 };
