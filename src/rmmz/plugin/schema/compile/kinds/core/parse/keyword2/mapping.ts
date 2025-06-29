@@ -1,7 +1,3 @@
-import type * as C from "./constants";
-
-type KeywordEnum = (typeof C)[keyof typeof C];
-
 type TableConcept = {
   [key: string]: (tokens: string) => unknown;
 };
@@ -14,7 +10,7 @@ export const mapKeyword2 = <T extends TableConcept>(
 } => {
   return Object.entries(fnTable).reduce((acc, [key, fn]) => {
     if (key in tokens) {
-      const value = tokens[key as KeywordEnum];
+      const value = tokens[key as string];
       if (typeof value === "string") {
         return {
           ...acc,
@@ -44,7 +40,7 @@ export const compileArrayParam2 = <
   Kind extends string
 >(
   kind: Kind,
-  tokens: Record<KeywordEnum, string>,
+  tokens: Record<string, string>,
   fnTable: T
 ): {
   kind: Kind;
