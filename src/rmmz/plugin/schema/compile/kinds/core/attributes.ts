@@ -149,7 +149,6 @@ const compileFileParam = (tokens: Record<string, string>): FileParam => {
   return {
     dir: "",
     ...compileParam("file", "", tokens, FILE),
-    kind: "file",
   };
 };
 

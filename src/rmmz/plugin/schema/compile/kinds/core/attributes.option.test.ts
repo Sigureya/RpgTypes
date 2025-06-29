@@ -1,5 +1,5 @@
 import { describe, test, expect } from "vitest";
-import type { Token } from "./parse/types/token";
+import type { Token } from "./parse/selectOption";
 import type { ComboParam, SelectParam } from "./primitiveParams";
 
 describe.skip("compileAttributes - combo", () => {
