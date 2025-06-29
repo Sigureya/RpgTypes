@@ -31,7 +31,12 @@ export const compileParam = <Kind extends string, T>(
   defaultValue: T,
   tokens: Record<string, string>,
   fnTable: TableConcept
-) => {
+): {
+  kind: Kind;
+  default: T;
+} & {
+  [K in keyof TableConcept]?: ReturnType<TableConcept[K]>;
+} => {
   return {
     default: defaultValue,
     ...mapKeyword(tokens, fnTable),
