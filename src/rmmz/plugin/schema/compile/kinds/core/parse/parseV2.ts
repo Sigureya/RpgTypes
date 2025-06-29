@@ -48,8 +48,6 @@ export const parsePlugin = (text: string) => {
   return parsePluginCore(text, KEYWORD_FUNC_TABLE);
 };
 
-// ...既存のimportや型定義...
-
 export const parsePluginCore = (
   text: string,
   table: Record<string, (state: ParseState, value: string) => ParseState>
@@ -59,15 +57,11 @@ export const parsePluginCore = (
   const state = lines.reduce<ParseState>(
     (acc, line) => {
       const trimmed = line.trim().replace(/^\*\s?/, "");
-      if (acc.currentContext === KEYWORD_HELP) {
-        // @paramや@commandなどの新しいタグが来たらhelp終了
-        if (!trimmed.startsWith("@")) {
-          return { ...acc, helpLines: acc.helpLines.concat(trimmed) };
-        }
+      if (!trimmed.startsWith("@") && acc.currentContext === KEYWORD_HELP) {
+        // キーワードが来ない場合はヘルプ行として追加
+        return { ...acc, helpLines: acc.helpLines.concat(trimmed) };
       }
-      if (trimmed.startsWith("@help")) {
-        return { ...acc, currentContext: KEYWORD_HELP, helpLines: [] };
-      }
+
       if (!trimmed.startsWith("@")) {
         return acc;
       }
@@ -98,6 +92,7 @@ export const parsePluginCore = (
     helpLines: finalState.helpLines,
   };
 };
+
 const withTexts = (command: { desc?: string; text?: string }) => {
   return {
     ...(typeof command.desc === "string" ? { desc: command.desc } : {}),
@@ -120,6 +115,7 @@ const flashCurrentItem = (state: ParseState): ParseState => {
       commands: state.commands.concat(newCommand),
       currentParam: null,
       currentCommand: null,
+      currentContext: null,
     };
   }
   if (state.currentParam) {
@@ -128,13 +124,24 @@ const flashCurrentItem = (state: ParseState): ParseState => {
       params: state.params.concat(state.currentParam),
       currentParam: null,
       currentCommand: null,
+      currentContext: null,
     };
   }
 
   return state;
 };
+const handleHelpContext = (oldstate: ParseState): ParseState => {
+  const state = flashCurrentItem(oldstate);
+  return {
+    ...state,
+    currentContext: KEYWORD_HELP,
+  };
+};
 
-const handleParam = (oldstate: ParseState, value: string): ParseState => {
+const handleParamContext = (
+  oldstate: ParseState,
+  value: string
+): ParseState => {
   const state = flashCurrentItem(oldstate);
   // すでに同名のparamが存在する場合は新しいparamを作らない
   if (state.params.some((p) => p.name === value)) {
@@ -142,6 +149,7 @@ const handleParam = (oldstate: ParseState, value: string): ParseState => {
   }
   return {
     ...state,
+    currentContext: KEYWORD_PARAM,
     currentParam: { name: value, attr: {} },
   };
 };
@@ -182,7 +190,10 @@ const handleDesc = (state: ParseState, value: string): ParseState => {
   return state;
 };
 
-const handleCommand = (oldstate: ParseState, value: string): ParseState => {
+const handleCommandContext = (
+  oldstate: ParseState,
+  value: string
+): ParseState => {
   const state = flashCurrentItem(oldstate);
   return {
     ...state,
@@ -191,7 +202,7 @@ const handleCommand = (oldstate: ParseState, value: string): ParseState => {
   };
 };
 
-const handleArg = (state: ParseState, value: string): ParseState => {
+const handleArgContext = (state: ParseState, value: string): ParseState => {
   if (!state.currentCommand) {
     return state;
   }
@@ -205,6 +216,7 @@ const handleArg = (state: ParseState, value: string): ParseState => {
       ...state,
       commands: state.commands,
       currentCommand: argAddedCommand,
+      currentContext: KEYWORD_ARG,
       currentParam: {
         name: value,
         attr: {},
@@ -240,11 +252,12 @@ const addField = (
 };
 
 const KEYWORD_FUNC_TABLE = {
-  [KEYWORD_PARAM]: handleParam,
+  [KEYWORD_PARAM]: handleParamContext,
   [KEYWORD_TEXT]: handleText,
   [KEYWORD_DESC]: handleDesc,
-  [KEYWORD_COMMAND]: handleCommand,
-  [KEYWORD_ARG]: handleArg,
+  [KEYWORD_COMMAND]: handleCommandContext,
+  [KEYWORD_ARG]: handleArgContext,
+  [KEYWORD_HELP]: handleHelpContext,
   [KEYWORD_TYPE]: (state, value) => addField(state, "kind", value),
   [KEYWORD_DEFAULT]: (state, value) => addField(state, KEYWORD_DEFAULT, value),
   [KEYWORD_ON]: (state, value) => addField(state, KEYWORD_ON, value),
