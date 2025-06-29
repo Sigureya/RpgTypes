@@ -64,7 +64,7 @@ export const parsePluginCore = (
       if (fn) {
         return fn(acc, value);
       }
-      return handleDefaultCase(acc);
+      return acc;
     },
     {
       helpLines: [],
@@ -223,8 +223,6 @@ const addField = (
   }
   return state;
 };
-
-const handleDefaultCase = (state: ParseState): ParseState => state;
 
 const KEYWORD_FUNC_TABLE = {
   [KEYWORD_PARAM]: handleParam,
