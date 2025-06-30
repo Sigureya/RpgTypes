@@ -1,20 +1,20 @@
 import type { OptionItem } from "./selectOption";
 
 export interface OptionsState {
-  options: OptionItem[];
+  items: OptionItem[];
   currentOption?: string;
 }
 
 export const addValue = (state: OptionsState, value: string): OptionsState => {
   return state.currentOption
     ? {
-        options: state.options.concat({
+        items: state.items.concat({
           option: state.currentOption,
           value: value,
         }),
       }
     : {
-        options: state.options,
+        items: state.items,
       };
 };
 
@@ -24,14 +24,14 @@ export const addOption = (
 ): OptionsState => {
   return state.currentOption
     ? {
-        options: state.options.concat({
+        items: state.items.concat({
           option: state.currentOption,
           value: state.currentOption,
         }),
         currentOption: option,
       }
     : {
-        options: state.options,
+        items: state.items,
         currentOption: option,
       };
 };
