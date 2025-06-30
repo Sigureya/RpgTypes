@@ -56,10 +56,10 @@ export const parsePluginCore = (
       helpLines: [],
       params: [],
       commands: [],
-      context: {},
       currentParam: null,
       currentCommand: null,
       currentContext: null,
+      currentOption: null,
     }
   );
 
@@ -199,30 +199,24 @@ const handleOption = (state: ParseState, value: string): ParseState => {
   }
 
   const newOption: OptionsState = addOption(
-    state.context?.option ?? { items: [] },
+    state.currentOption ?? { items: [] },
     value
   );
 
   return {
     ...state,
-    context: {
-      ...state.context,
-      option: newOption,
-    },
+    currentOption: newOption,
   };
 };
 
 const handleValue = (state: ParseState, value: string): ParseState => {
-  if (!state.context?.option) {
+  if (!state.currentOption) {
     return state;
   }
-  const newOption: OptionsState = addValue(state.context.option, value);
+  const newOption: OptionsState = addValue(state.currentOption, value);
   return {
     ...state,
-    context: {
-      ...state.context,
-      option: newOption,
-    },
+    currentOption: newOption,
   };
 };
 

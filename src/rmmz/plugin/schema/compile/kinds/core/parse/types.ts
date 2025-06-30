@@ -31,8 +31,5 @@ export interface ParseState {
   currentParam: PluginParamTokens | null;
   currentCommand: PluginCommandTokens | null;
   currentContext: KeywordEnum | null;
-  context: Context;
-}
-interface Context {
-  option?: OptionsState;
+  currentOption: OptionsState | null;
 }
