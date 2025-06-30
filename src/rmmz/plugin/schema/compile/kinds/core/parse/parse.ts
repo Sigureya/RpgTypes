@@ -69,6 +69,7 @@ export const parsePluginCore = (
     commands: finalState.commands,
     meta: {},
     helpLines: finalState.helpLines,
+    base: [],
   };
 };
 
