@@ -24,5 +24,5 @@ export const parsePlugin = (text: string) => {
 
 const compileParam = (param: PluginParamTokens): PluginParam => ({
   name: param.name,
-  attr: compileAttributes(param.attr),
+  attr: compileAttributes(param),
 });

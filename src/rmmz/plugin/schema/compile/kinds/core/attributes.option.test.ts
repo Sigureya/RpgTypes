@@ -69,16 +69,16 @@ describe.skip("compileAttributes - select", () => {
     // expect(result).toEqual(expected);
   });
   test("with options", () => {
-    const token: Token[] = [
-      { keyword: "type", value: "select" },
-      { keyword: "default", value: "option1" },
-      { keyword: "text", value: "a select" },
-      { keyword: "desc", value: "this is a select" },
-      { keyword: "parent", value: "parentId" },
-      { keyword: "option", value: "hayate" },
-      { keyword: "value", value: "E2" },
-      { keyword: "option", value: "komachi" },
-      { keyword: "value", value: "E3" },
+    const token: string[] = [
+      "@type select",
+      "@default option1",
+      "@text a select",
+      "@desc this is a select",
+      "@parent parentId",
+      "@option hayate",
+      "@value E2",
+      "@option komachi",
+      "@value E3",
     ];
 
     const expected: SelectParam = {
