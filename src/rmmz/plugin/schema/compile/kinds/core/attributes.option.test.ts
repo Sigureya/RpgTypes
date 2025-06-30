@@ -1,17 +1,21 @@
 import { describe, test, expect } from "vitest";
+import { compileAttributes, type ParamSoruceRecord } from "./attributes";
 import type { Token } from "./parse/selectOption";
+import type { PluginParamTokens } from "./parse/types";
 import type { ComboParam, SelectParam } from "./primitiveParams";
 
-describe.skip("compileAttributes - combo", () => {
+describe("compileAttributes - combo", () => {
   test("empty options", () => {
-    const token: Token[] = [
-      { keyword: "type", value: "combo" },
-      { keyword: "default", value: "option1" },
-      { keyword: "text", value: "a combo" },
-      { keyword: "desc", value: "this is a combo" },
-      { keyword: "parent", value: "parentId" },
-    ];
-
+    const token: PluginParamTokens = {
+      name: "attr",
+      attr: {
+        kind: "combo",
+        default: "option1",
+        text: "a combo",
+        desc: "this is a combo",
+        parent: "parentId",
+      } satisfies ParamSoruceRecord<ComboParam>,
+    };
     const expected: ComboParam = {
       kind: "combo",
       default: "option1",
@@ -20,20 +24,24 @@ describe.skip("compileAttributes - combo", () => {
       desc: "this is a combo",
       parent: "parentId",
     };
-    //    const result = compileAttributes(token);
-    //    expect(result).toEqual(expected);
+    const result = compileAttributes(token);
+    expect(result).toEqual(expected);
   });
   test("with options", () => {
-    const token: Token[] = [
-      { keyword: "type", value: "combo" },
-      { keyword: "default", value: "option1" },
-      { keyword: "text", value: "a combo" },
-      { keyword: "desc", value: "this is a combo" },
-      { keyword: "parent", value: "parentId" },
-      { keyword: "option", value: "a" },
-      { keyword: "option", value: "b" },
-    ];
-
+    const token: PluginParamTokens = {
+      name: "attr",
+      attr: {
+        kind: "combo",
+        default: "option1",
+        text: "a combo",
+        desc: "this is a combo",
+        parent: "parentId",
+      } satisfies ParamSoruceRecord<ComboParam>,
+      options: [
+        { option: "a", value: "option1" },
+        { option: "b", value: "option2" },
+      ],
+    };
     const expected: ComboParam = {
       kind: "combo",
       default: "option1",
@@ -42,20 +50,23 @@ describe.skip("compileAttributes - combo", () => {
       desc: "this is a combo",
       parent: "parentId",
     };
-    // const result = compileAttributes(token);
-    // expect(result).toEqual(expected);
+    const result = compileAttributes(token);
+    expect(result).toEqual(expected);
   });
 });
 
 describe.skip("compileAttributes - select", () => {
   test("empty options", () => {
-    const token: Token[] = [
-      { keyword: "type", value: "select" },
-      { keyword: "default", value: "option1" },
-      { keyword: "text", value: "a select" },
-      { keyword: "desc", value: "this is a select" },
-      { keyword: "parent", value: "parentId" },
-    ];
+    const token: PluginParamTokens = {
+      name: "attr",
+      attr: {
+        kind: "select",
+        default: "option1",
+        text: "a select",
+        desc: "this is a select",
+        parent: "parentId",
+      } satisfies ParamSoruceRecord<SelectParam>,
+    };
 
     const expected: SelectParam = {
       kind: "select",
@@ -65,21 +76,24 @@ describe.skip("compileAttributes - select", () => {
       desc: "this is a select",
       parent: "parentId",
     };
-    //    const result = compileAttributes(token);
-    // expect(result).toEqual(expected);
+    const result = compileAttributes(token);
+    expect(result).toEqual(expected);
   });
   test("with options", () => {
-    const token: string[] = [
-      "@type select",
-      "@default option1",
-      "@text a select",
-      "@desc this is a select",
-      "@parent parentId",
-      "@option hayate",
-      "@value E2",
-      "@option komachi",
-      "@value E3",
-    ];
+    const token: PluginParamTokens = {
+      name: "attr",
+      attr: {
+        kind: "select",
+        default: "option1",
+        text: "a select",
+        desc: "this is a select",
+        parent: "parentId",
+      } satisfies ParamSoruceRecord<SelectParam>,
+      options: [
+        { option: "hayate", value: "E2" },
+        { option: "komachi", value: "E3" },
+      ],
+    };
 
     const expected: SelectParam = {
       kind: "select",
@@ -92,7 +106,7 @@ describe.skip("compileAttributes - select", () => {
       desc: "this is a select",
       parent: "parentId",
     };
-    //    const result = compileAttributes(token);
-    //    expect(result).toEqual(expected);
+    const result = compileAttributes(token);
+    expect(result).toEqual(expected);
   });
 });
