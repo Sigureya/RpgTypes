@@ -1,6 +1,5 @@
 import { describe, test, expect } from "vitest";
 import { compileAttributes, type ParamSoruceRecord } from "./attributes";
-import type { Token } from "./parse/selectOption";
 import type { PluginParamTokens } from "./parse/types";
 import type { ComboParam, SelectParam } from "./primitiveParams";
 
