@@ -14,10 +14,12 @@ import {
   KEYWORD_KIND,
 } from "./keyword/constants";
 import type { KeywordEnum } from "./keyword/types";
+import type { OptionItem } from "./selectOption";
 
 export interface PluginParamTokens {
   name: string;
   attr: PluginTokens;
+  options?: OptionItem[];
 }
 
 export type PluginTokens = { [key in KeywordEnum]?: string };
