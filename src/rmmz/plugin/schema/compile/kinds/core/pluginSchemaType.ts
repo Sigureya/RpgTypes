@@ -11,7 +11,7 @@ export interface PrimitiveStructBase {
   params: Record<string, PrimitiveParam>;
 }
 
-export type PrimitiveParams<T extends object> = {
+export type PrimitiveStructParams<T extends object> = {
   [K in Extract<keyof T, string>]: PluginSchemaType<T[K]>;
 };
 

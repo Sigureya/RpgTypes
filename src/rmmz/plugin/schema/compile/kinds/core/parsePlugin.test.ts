@@ -1,7 +1,7 @@
 import { test, expect, describe } from "vitest";
-import type { PluginParam } from "./parsePlugin";
 import { parsePlugin } from "./parsePlugin";
 import type { PluginCommandBody } from "./pluginEntriesEx";
+import type { PrimitiveParam } from "./primitiveParams";
 
 const mockTexts: string[] = [
   "@param bool",
@@ -44,27 +44,21 @@ describe("parsePlugin", () => {
     expect(result.meta).toBeDefined();
   });
   test("should parse parameters correctly", () => {
-    const expected: PluginParam[] = [
-      {
-        name: "bool",
-        attr: {
-          kind: "boolean",
-          text: "autoBattle",
-          default: false,
-          on: "enabled",
-          off: "disabled",
-        },
+    const expected: Record<string, PrimitiveParam> = {
+      bool: {
+        kind: "boolean",
+        text: "autoBattle",
+        default: false,
+        on: "enabled",
+        off: "disabled",
       },
-      {
-        name: "num",
-        attr: {
-          kind: "number",
-          default: 0,
-          min: 0,
-          max: 100,
-        },
+      num: {
+        kind: "number",
+        default: 0,
+        min: 0,
+        max: 100,
       },
-    ];
+    };
     expect(result.params).toEqual(expected);
   });
   test("should parse commands correctly", () => {
