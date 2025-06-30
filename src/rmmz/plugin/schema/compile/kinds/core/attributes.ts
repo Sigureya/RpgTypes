@@ -1,5 +1,6 @@
 import type { MappingTable } from "./mapping/mapping";
 import { compileParam, compileArrayParam } from "./mapping/mapping";
+import type { OptionItem } from "./parse/selectOption";
 import type { PluginParamTokens } from "./parse/types";
 import type {
   BooleanParam,
@@ -11,6 +12,8 @@ import type {
   StringArrayParam,
   FileArrayParam,
   StringParam,
+  ComboParam,
+  SelectParam,
 } from "./primitiveParams";
 import { parseDeepJSON } from "./rmmzJSON";
 import type {
@@ -57,27 +60,26 @@ const STRING = {
   parent: attrString,
 } as const satisfies MappingTableEx<StringParam>;
 
-// const compileComboParam = (tokens: ReadonlyArray<Token>): ComboParam => {
-//   const options: string[] = tokens
-//     .filter((t) => t.keyword === KEYWORD_OPTION)
-//     .map((t) => t.value);
+const compileComboParam = (tokens: PluginParamTokens): ComboParam => {
+  const option: string[] = tokens.options?.map((o) => o.option) ?? [];
 
-//   return {
-//     default: options[0] ?? "",
-//     ...mapKeyword(tokens, STRING),
-//     kind: "combo",
-//     options,
-//   };
-// };
-// const compileSelectParam = (tokens: ReadonlyArray<Token>): SelectParam => {
-//   const options: OptionItem[] = [];
-//   return {
-//     default: "",
-//     ...mapKeywords(tokens, STRING),
-//     kind: "select",
-//     options,
-//   };
-// };
+  return {
+    ...compileParam("combo", "", tokens.attr, STRING),
+    options: option,
+  };
+};
+const compileSelectParam = (tokens: PluginParamTokens): SelectParam => {
+  const options: OptionItem[] =
+    tokens.options?.map((o) => ({
+      option: o.option,
+      value: o.value,
+    })) ?? [];
+
+  return {
+    ...compileParam("select", "", tokens.attr, STRING),
+    options,
+  };
+};
 
 const compileBooleanParam = (tokens: PluginParamTokens): BooleanParam => {
   const BOOLEAN = {
@@ -198,8 +200,8 @@ const TABLE2 = {
   "string[]": compileStringArrayParam,
   multiline_string: compileStringParam,
   "multiline_string[]": compileStringArrayParam,
-  //  combo: compileComboParam,
-  // select: compileSelectParam,\
+  combo: compileComboParam,
+  select: compileSelectParam,
   actor: (tokens) => compileDataId(tokens, "actor"),
   "actor[]": (tokens) => compileDataIdArray(tokens, "actor[]"),
   class: (tokens) => compileDataId(tokens, "class"),
