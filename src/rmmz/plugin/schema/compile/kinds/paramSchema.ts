@@ -22,6 +22,17 @@ const BASIC_TEXT = {
   maxLength: 100,
 } as const satisfies JSONSchemaType<string | null>;
 
+const DEFAULT_STRING = {
+  type: "string",
+  default: "",
+  nullable: false,
+} as const satisfies JSONSchemaType<string>;
+
+const NUMBER_OPTIONAl = {
+  type: "number",
+  nullable: true,
+} as const satisfies JSONSchemaType<number | null>;
+
 export const makeParamSchema = () =>
   ({
     type: "object",
@@ -81,8 +92,8 @@ const rmmzSchemaNumberParam = () =>
     required: ["kind", "default"],
     properties: {
       decimals: { type: "integer", minimum: 0, default: 0, nullable: true },
-      min: { type: "number", nullable: true },
-      max: { type: "number", nullable: true },
+      min: NUMBER_OPTIONAl,
+      max: NUMBER_OPTIONAl,
       default: { type: "number", default: 0 },
       kind: { type: "string", const: "number" },
       desc: BASIC_TEXT,
@@ -119,7 +130,7 @@ const rmmzSchemaStringParam = () =>
     required: ["kind", "default"],
     properties: {
       kind: { type: "string", const: "string" },
-      default: { type: "string", default: "" },
+      default: DEFAULT_STRING,
       desc: BASIC_TEXT,
       text: BASIC_TEXT,
       parent: BASIC_TEXT,
@@ -135,7 +146,7 @@ const rmmzSchemaStringArrayParam = () =>
       kind: { type: "string", const: "string[]" },
       default: {
         type: "array",
-        items: { type: "string", default: "" },
+        items: DEFAULT_STRING,
         default: [],
       },
       desc: BASIC_TEXT,
@@ -178,7 +189,7 @@ const rmmzSchemaComboParam = () =>
     required: ["kind", "default", "options"],
     properties: {
       kind: { type: "string", const: "combo" },
-      default: { type: "string", default: "" },
+      default: DEFAULT_STRING,
       options: {
         type: "array",
         items: { type: "string" },
@@ -197,8 +208,8 @@ const rmmzSchemaFilePathParam = () =>
     required: ["kind", "default", "dir"],
     properties: {
       kind: { type: "string", const: "file" },
-      default: { type: "string", default: "" },
-      dir: { type: "string", default: "" },
+      default: DEFAULT_STRING,
+      dir: DEFAULT_STRING,
       desc: BASIC_TEXT,
       text: BASIC_TEXT,
       parent: BASIC_TEXT,
@@ -213,7 +224,7 @@ const rmmzSchemaFileArrayParam = () =>
     properties: {
       kind: { type: "string", const: "file[]" },
       default: { type: "array", items: { type: "string" }, default: [] },
-      dir: { type: "string", default: "" },
+      dir: DEFAULT_STRING,
       desc: BASIC_TEXT,
       text: BASIC_TEXT,
       parent: BASIC_TEXT,
@@ -268,12 +279,12 @@ const rmmzSchemaSelectParam = () =>
     required: ["kind", "default", "options"],
     properties: {
       kind: { type: "string", const: "select" },
-      default: { type: "string", default: "" },
+      default: DEFAULT_STRING,
       options: {
         type: "array",
         items: {
           type: "object",
-          properties: { value: { type: "string" }, option: { type: "string" } },
+          properties: { value: DEFAULT_STRING, option: DEFAULT_STRING },
           required: ["value", "option"],
         },
         default: [],
