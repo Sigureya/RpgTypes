@@ -31,37 +31,26 @@ export const parsePluginCore = (
 ): ParsedPlugin => {
   const lines = text.split(/\r?\n/);
 
-  const state = lines.reduce<ParseState>(
-    (acc, line) => {
-      const trimmed = line.trim().replace(/^\*\s?/, "");
-      if (!trimmed.startsWith("@")) {
-        if (acc.currentContext === KEYWORD_HELP) {
-          // キーワードが来ない場合はヘルプ行として追加
-          return { ...acc, helpLines: acc.helpLines.concat(trimmed) };
-        }
-        // コメントモード以外 & キーワードが来ない場合は無視
-        return acc;
+  const state = lines.reduce<ParseState>((acc, line) => {
+    const trimmed = line.trim().replace(/^\*\s?/, "");
+    if (!trimmed.startsWith("@")) {
+      if (acc.currentContext === KEYWORD_HELP) {
+        // キーワードが来ない場合はヘルプ行として追加
+        return { ...acc, helpLines: acc.helpLines.concat(trimmed) };
       }
-
-      const [tag, ...rest] = trimmed.slice(1).split(" ");
-      const value = rest.join(" ").trim();
-      const fn = table[tag as keyof typeof table];
-
-      if (fn) {
-        return fn(acc, value);
-      }
+      // コメントモード以外 & キーワードが来ない場合は無視
       return acc;
-    },
-    {
-      helpLines: [],
-      params: [],
-      commands: [],
-      currentParam: null,
-      currentCommand: null,
-      currentContext: null,
-      currentOption: null,
     }
-  );
+
+    const [tag, ...rest] = trimmed.slice(1).split(" ");
+    const value = rest.join(" ").trim();
+    const fn = table[tag as keyof typeof table];
+
+    if (fn) {
+      return fn(acc, value);
+    }
+    return acc;
+  }, makeParseState());
 
   const finalState: ParseState = flashCurrentItem(state);
   return {
@@ -71,6 +60,21 @@ export const parsePluginCore = (
     helpLines: finalState.helpLines,
   };
 };
+
+const makeParseState = (): ParseState => ({
+  helpLines: [],
+  params: [],
+  commands: [],
+  currentParam: null,
+  currentCommand: null,
+  currentContext: null,
+  currentOption: null,
+  dependencies: {
+    bases: [],
+    orderBefore: [],
+    orderAfter: [],
+  },
+});
 
 const handleHelpContext = (oldstate: ParseState): ParseState => {
   const state = flashCurrentItem(oldstate);
