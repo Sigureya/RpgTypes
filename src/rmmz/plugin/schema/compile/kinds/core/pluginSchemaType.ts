@@ -3,6 +3,7 @@ import type {
   StructArrayRefParam,
   StructRefParam,
   PrimitiveParam,
+  AnyStringParam,
 } from "./primitiveParams";
 
 export interface PrimitiveStructBase {
@@ -19,7 +20,7 @@ export type PluginSchemaType<T> = T extends boolean
   : T extends number
   ? Extract<PrimitiveParam, { default: number }>
   : T extends string
-  ? Extract<PrimitiveParam, { default: string }>
+  ? Extract<Exclude<PrimitiveParam, AnyStringParam>, { default: string }>
   : T extends number[]
   ? Extract<PrimitiveParam, { default: number[] }>
   : T extends string[]
