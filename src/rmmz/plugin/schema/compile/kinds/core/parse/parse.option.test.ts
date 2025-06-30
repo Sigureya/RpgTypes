@@ -32,7 +32,6 @@ describe("parsePlugin", () => {
         },
       ],
       commands: [],
-      base: [],
     };
     const result: ParsedPlugin = parsePlugin(tokens.join("\n"));
     expect(result).toEqual(expected);
@@ -70,7 +69,6 @@ describe("parsePlugin", () => {
         },
       ],
       commands: [],
-      base: [],
     };
     const result: ParsedPlugin = parsePlugin(tokens.join("\n"));
     expect(result).toEqual(expected);
@@ -102,7 +100,6 @@ describe("parsePlugin", () => {
         },
       ],
       commands: [],
-      base: [],
     };
     const result: ParsedPlugin = parsePlugin(tokens.join("\n"));
     expect(result).toEqual(expected);

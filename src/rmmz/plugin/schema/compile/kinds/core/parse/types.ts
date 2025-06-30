@@ -22,6 +22,10 @@ export interface ParsedPlugin {
   params: PluginParamTokens[];
   commands: PluginCommandTokens[];
   helpLines: string[];
+  dependencies?: PluginDependencies;
+}
+
+export interface PluginDependencies {
   base: string[];
 }
 
