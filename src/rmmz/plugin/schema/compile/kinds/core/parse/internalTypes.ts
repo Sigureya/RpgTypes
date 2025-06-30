@@ -1,4 +1,4 @@
-import type { PluginDependencies } from "../pluginEntryTypes";
+import type { PluginDependencies } from "./dependencies";
 import type { KeywordEnum } from "./keyword/types";
 import type { OptionItem } from "./selectOption";
 import type { PluginParamTokens, PluginCommandTokens } from "./types";
