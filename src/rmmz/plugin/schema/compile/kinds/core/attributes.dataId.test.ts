@@ -2,7 +2,7 @@ import { describe, expect, test } from "vitest";
 import type { ParamSoruceRecord } from "./attributes";
 import { compileAttributes } from "./attributes";
 import type { PluginParamTokens } from "./parse/types";
-import type { RpgDataIdParam, StructParamPrimitive } from "./primitiveParams";
+import type { RpgDataIdParam, PrimitiveParam } from "./primitiveParams";
 
 describe("", () => {
   test("", () => {
@@ -13,7 +13,7 @@ describe("", () => {
         default: "0",
       } satisfies ParamSoruceRecord<RpgDataIdParam>,
     };
-    const expected: StructParamPrimitive = {
+    const expected: PrimitiveParam = {
       kind: "enemy",
       default: 0,
     };

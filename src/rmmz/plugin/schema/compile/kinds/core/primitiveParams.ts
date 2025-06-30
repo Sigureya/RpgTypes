@@ -4,7 +4,7 @@ import type {
   DataKind_SystemUnion,
 } from "./rpgData/rpgDataTypesNames";
 
-export type StructParamPrimitive =
+export type PrimitiveParam =
   | BooleanParam
   | NumberParam
   | NumberArrayParam

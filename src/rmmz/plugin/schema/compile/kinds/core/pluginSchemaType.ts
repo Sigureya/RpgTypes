@@ -2,12 +2,12 @@ import type {
   BooleanParam,
   StructArrayRefParam,
   StructRefParam,
-  StructParamPrimitive,
+  PrimitiveParam,
 } from "./primitiveParams";
 
 export interface PrimitiveStructBase {
   struct: string;
-  params: Record<string, StructParamPrimitive>;
+  params: Record<string, PrimitiveParam>;
 }
 
 export type PrimitiveParams<T extends object> = {
@@ -17,13 +17,13 @@ export type PrimitiveParams<T extends object> = {
 export type PluginSchemaType<T> = T extends boolean
   ? BooleanParam
   : T extends number
-  ? Extract<StructParamPrimitive, { default: number }>
+  ? Extract<PrimitiveParam, { default: number }>
   : T extends string
-  ? Extract<StructParamPrimitive, { default: string }>
+  ? Extract<PrimitiveParam, { default: string }>
   : T extends number[]
-  ? Extract<StructParamPrimitive, { default: number[] }>
+  ? Extract<PrimitiveParam, { default: number[] }>
   : T extends string[]
-  ? Extract<StructParamPrimitive, { default: string[] }>
+  ? Extract<PrimitiveParam, { default: string[] }>
   : T extends null
   ? {
       kind: "null is Forbidden";

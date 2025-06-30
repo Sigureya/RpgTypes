@@ -1,10 +1,6 @@
-import type { StructParamPrimitive } from "./primitiveParams";
+import type { PrimitiveParam } from "./primitiveParams";
 
-export const reduceParams = <
-  K extends string,
-  P extends StructParamPrimitive,
-  R
->(
+export const reduceParams = <K extends string, P extends PrimitiveParam, R>(
   params: Record<K, P>,
   fn: (value: P, key: string) => R
 ): Record<K, R> => {
@@ -18,7 +14,7 @@ export const reduceParams = <
 };
 
 export const paramsToObject = <
-  T extends Record<string, StructParamPrimitive & { default: unknown }>
+  T extends Record<string, PrimitiveParam & { default: unknown }>
 >(
   data: T
 ): ParamToObject<T> =>
