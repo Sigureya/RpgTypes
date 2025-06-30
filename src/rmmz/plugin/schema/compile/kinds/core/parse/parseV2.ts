@@ -48,13 +48,10 @@ export interface ParseState {
   currentParam: PluginParamTokens | null;
   currentCommand: PluginCommand | null;
   currentContext: KeywordEnum | null;
-  currentOption: OptionsState | null;
+  context?: Context;
 }
 interface Context {
-  param: PluginParamTokens | null;
-  command: PluginCommand | null;
-  keyword: KeywordEnum | null;
-  option: OptionsState | null;
+  option?: OptionsState;
 }
 
 export const parsePlugin = (text: string) => {
@@ -95,7 +92,6 @@ export const parsePluginCore = (
       currentParam: null,
       currentCommand: null,
       currentContext: null,
-      currentOption: null,
     }
   );
 
