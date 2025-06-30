@@ -19,7 +19,8 @@ export type PrimitiveParam =
   | FileParam
   | FileArrayParam
   | StructRefParam
-  | StructArrayRefParam;
+  | StructArrayRefParam
+  | AnyStringParam;
 
 export interface RpgDataIdParam extends ParamBase {
   kind: DataKind_RpgUnion;
@@ -99,6 +100,11 @@ export interface FileArrayParam extends ParamBase {
   kind: "file[]";
   default: string[];
   dir: string;
+}
+
+export interface AnyStringParam extends ParamBase {
+  kind: "any";
+  default: string;
 }
 
 export interface KindOfStructBase extends ParamBase {
