@@ -1,4 +1,4 @@
-import { StructParamPrimitive } from './core/primitiveParams';
+import { PrimitiveParam } from './core/primitiveParams';
 import { AnyParamSchema } from './pluginMeta/anyParamSchema';
-export declare const compilePrimitiveFiled: (data: StructParamPrimitive) => AnyParamSchema;
-export declare const compilePrimitiveFiledWithXParam: (data: StructParamPrimitive) => AnyParamSchema;
+export declare const compilePrimitiveField: (data: PrimitiveParam) => AnyParamSchema;
+export declare const compilePrimitiveFieldWithXParam: (data: PrimitiveParam) => AnyParamSchema;

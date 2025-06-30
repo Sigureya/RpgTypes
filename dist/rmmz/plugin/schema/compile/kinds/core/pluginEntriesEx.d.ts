@@ -1,6 +1,6 @@
 import { ParamBase } from './paramBase';
-import { StructParamPrimitive } from './primitiveParams';
-export type StructParam = StructParamPrimitive | StructDefParam<object> | StructArrayDefParam<object>;
+import { PrimitiveParam } from './primitiveParams';
+export type StructParam = PrimitiveParam | StructDefParam<object> | StructArrayDefParam<object>;
 export interface StructArrayDefParam<T extends object> extends PluginStructEx<T>, ParamBase {
     kind: "struct_def[]";
     default: object[];
@@ -20,6 +20,13 @@ export interface PluginStructEx<T extends object> {
     struct: string;
     params: {
         [K in keyof T]: StructParam;
+    };
+}
+export interface PluginCommandBody {
+    desc?: string;
+    text?: string;
+    args: {
+        [key: string]: PrimitiveParam;
     };
 }
 export interface PluginCommand<T extends object> {

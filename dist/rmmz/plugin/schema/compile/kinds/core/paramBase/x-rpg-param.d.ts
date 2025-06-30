@@ -4,10 +4,12 @@ export declare const X_RPG_PARM: "x-rpg-param";
 export interface X_Param {
     [X_RPG_PARM]: X_RmmzParamBase;
 }
-export type JSONSchemaTypeWithRpgParam<V, X = object> = JSONSchemaType<V> & {
-    [X_RPG_PARM]: X_RmmzParam<X>;
+export type JSONSchemaTypeWithRpgParam<X extends ParamBase & {
+    default: unknown;
+}> = JSONSchemaType<X["default"]> & {
+    [X_RPG_PARM]: X_RmmzParam<ExtractParamData<X>>;
 };
-type ExtractParamData<T extends ParamBase> = Omit<T, "default" | keyof ParamBase>;
+type ExtractParamData<T> = Omit<T, "default" | keyof ParamBase>;
 export type X_ParamData<T extends ParamBase> = X_RmmzParam<ExtractParamData<T>, T extends {
     kind: infer K;
 } ? K : string>;

@@ -1,6 +1,6 @@
 import { ParamBase } from './paramBase';
 import { DataKind_RpgUnion, DataKind_SystemUnion } from './rpgData/rpgDataTypesNames';
-export type StructParamPrimitive = BooleanParam | NumberParam | NumberArrayParam | RpgDataIdParam | RpgDataIdArrayParam | ComboParam | SelectParam | StringParam | StringArrayParam | SystemDataIdParam | SystemDataIdArrayParam | FileParam | FileArrayParam | StructRefParam | StructArrayRefParam;
+export type PrimitiveParam = BooleanParam | NumberParam | NumberArrayParam | RpgDataIdParam | RpgDataIdArrayParam | ComboParam | SelectParam | StringParam | StringArrayParam | SystemDataIdParam | SystemDataIdArrayParam | FileParam | FileArrayParam | StructRefParam | StructArrayRefParam | AnyStringParam;
 export interface RpgDataIdParam extends ParamBase {
     kind: DataKind_RpgUnion;
     default: number;
@@ -39,14 +39,14 @@ export interface ComboParam extends ParamBase {
 export interface NumberParam extends ParamBase {
     kind: "number";
     default: number;
-    digit?: number | null;
+    decimals?: number | null;
     min?: number | null;
     max?: number | null;
 }
 export interface NumberArrayParam extends ParamBase {
     kind: "number[]";
     default: number[];
-    digit?: number | null;
+    decimals?: number | null;
     min?: number | null;
     max?: number | null;
 }
@@ -71,6 +71,10 @@ export interface FileArrayParam extends ParamBase {
     kind: "file[]";
     default: string[];
     dir: string;
+}
+export interface AnyStringParam extends ParamBase {
+    kind: "any";
+    default: string;
 }
 export interface KindOfStructBase extends ParamBase {
     struct: string;
