@@ -1,3 +1,4 @@
+import { flashCurrentItem, withTexts } from "./flashState";
 import {
   KEYWORD_TEXT,
   KEYWORD_DESC,
@@ -17,43 +18,8 @@ import {
 } from "./keyword/constants";
 import type { KeywordEnum } from "./keyword/types";
 import type { OptionsState } from "./optionV2";
-import { addOption, addValue, finalizeOptions } from "./optionV2";
-import type { OptionItem } from "./selectOption";
-
-export interface PluginParamTokens {
-  name: string;
-  attr: PluginTokens;
-  options?: OptionItem[];
-}
-
-export type PluginTokens = { [key in KeywordEnum]?: string };
-
-export interface PluginCommand {
-  command: string;
-  text?: string;
-  desc?: string;
-  args: PluginParamTokens[];
-}
-
-export interface ParsedPlugin {
-  meta: Record<string, string>;
-  params: PluginParamTokens[];
-  commands: PluginCommand[];
-  helpLines: string[];
-}
-
-export interface ParseState {
-  helpLines: string[];
-  params: PluginParamTokens[];
-  commands: PluginCommand[];
-  currentParam: PluginParamTokens | null;
-  currentCommand: PluginCommand | null;
-  currentContext: KeywordEnum | null;
-  context: Context;
-}
-interface Context {
-  option?: OptionsState;
-}
+import { addOption, addValue } from "./optionV2";
+import type { ParseState, ParsedPlugin, PluginCommandTokens } from "./types";
 
 export const parsePlugin = (text: string) => {
   return parsePluginCore(text, KEYWORD_FUNC_TABLE);
@@ -106,65 +72,6 @@ export const parsePluginCore = (
   };
 };
 
-const withTexts = (command: { desc?: string; text?: string }) => {
-  return {
-    ...(typeof command.desc === "string" ? { desc: command.desc } : {}),
-    ...(typeof command.text === "string" ? { text: command.text } : {}),
-  };
-};
-const flashOptions = (state: ParseState) => {
-  if (!state.currentParam) {
-    return state;
-  }
-
-  if (state.context.option) {
-    const option = finalizeOptions(state.context.option);
-    return {
-      ...state,
-      currentParam: {
-        ...state.currentParam,
-        options: option.items,
-      },
-    };
-  }
-
-  return state;
-};
-
-const flashCurrentItem = (oldstate: ParseState): ParseState => {
-  const state = flashOptions(oldstate);
-
-  if (state.currentCommand) {
-    const newArgs = state.currentParam
-      ? state.currentCommand.args.concat(state.currentParam)
-      : state.currentCommand.args;
-    const newCommand: PluginCommand = {
-      ...withTexts(state.currentCommand),
-      command: state.currentCommand.command,
-      args: newArgs,
-    };
-    return {
-      ...state,
-      commands: state.commands.concat(newCommand),
-      currentParam: null,
-      currentCommand: null,
-      currentContext: null,
-      context: {}, // contextもリセット
-    };
-  }
-  if (state.currentParam) {
-    return {
-      ...state,
-      params: state.params.concat(state.currentParam),
-      currentParam: null,
-      currentCommand: null,
-      currentContext: null,
-      context: {}, // contextもリセット
-    };
-  }
-
-  return { ...state, context: {} };
-};
 const handleHelpContext = (oldstate: ParseState): ParseState => {
   const state = flashCurrentItem(oldstate);
   return {
@@ -242,7 +149,7 @@ const handleArgContext = (state: ParseState, value: string): ParseState => {
     return state;
   }
   if (state.currentParam) {
-    const argAddedCommand: PluginCommand = {
+    const argAddedCommand: PluginCommandTokens = {
       ...withTexts(state.currentCommand),
       command: state.currentCommand.command,
       args: state.currentCommand.args.concat(state.currentParam),
