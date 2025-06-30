@@ -12,12 +12,18 @@ import {
   KEYWORD_TYPE,
   KEYWORD_HELP,
   KEYWORD_KIND,
+  KEYWORD_OPTION,
+  KEYWORD_VALUE,
 } from "./keyword/constants";
 import type { KeywordEnum } from "./keyword/types";
+import type { OptionsState } from "./optionV2";
+import { addOption, addValue, finalizeOptions } from "./optionV2";
+import type { OptionItem } from "./selectOption";
 
 export interface PluginParamTokens {
   name: string;
   attr: PluginTokens;
+  options?: OptionItem[];
 }
 
 export type PluginTokens = { [key in KeywordEnum]?: string };
@@ -43,6 +49,10 @@ export interface ParseState {
   currentParam: PluginParamTokens | null;
   currentCommand: PluginCommand | null;
   currentContext: KeywordEnum | null;
+  context: Context;
+}
+interface Context {
+  option?: OptionsState;
 }
 
 export const parsePlugin = (text: string) => {
@@ -80,6 +90,7 @@ export const parsePluginCore = (
       helpLines: [],
       params: [],
       commands: [],
+      context: {},
       currentParam: null,
       currentCommand: null,
       currentContext: null,
@@ -101,8 +112,28 @@ const withTexts = (command: { desc?: string; text?: string }) => {
     ...(typeof command.text === "string" ? { text: command.text } : {}),
   };
 };
+const flashOptions = (state: ParseState) => {
+  if (!state.currentParam) {
+    return state;
+  }
 
-const flashCurrentItem = (state: ParseState): ParseState => {
+  if (state.context.option) {
+    const option = finalizeOptions(state.context.option);
+    return {
+      ...state,
+      currentParam: {
+        ...state.currentParam,
+        options: option.items,
+      },
+    };
+  }
+
+  return state;
+};
+
+const flashCurrentItem = (oldstate: ParseState): ParseState => {
+  const state = flashOptions(oldstate);
+
   if (state.currentCommand) {
     const newArgs = state.currentParam
       ? state.currentCommand.args.concat(state.currentParam)
@@ -118,6 +149,7 @@ const flashCurrentItem = (state: ParseState): ParseState => {
       currentParam: null,
       currentCommand: null,
       currentContext: null,
+      context: {}, // contextもリセット
     };
   }
   if (state.currentParam) {
@@ -127,10 +159,11 @@ const flashCurrentItem = (state: ParseState): ParseState => {
       currentParam: null,
       currentCommand: null,
       currentContext: null,
+      context: {}, // contextもリセット
     };
   }
 
-  return state;
+  return { ...state, context: {} };
 };
 const handleHelpContext = (oldstate: ParseState): ParseState => {
   const state = flashCurrentItem(oldstate);
@@ -253,6 +286,39 @@ const addField = (
   return state;
 };
 
+const handleOption = (state: ParseState, value: string): ParseState => {
+  if (!state.currentParam) {
+    return state;
+  }
+
+  const newOption: OptionsState = addOption(
+    state.context?.option ?? { items: [] },
+    value
+  );
+
+  return {
+    ...state,
+    context: {
+      ...state.context,
+      option: newOption,
+    },
+  };
+};
+
+const handleValue = (state: ParseState, value: string): ParseState => {
+  if (!state.context?.option) {
+    return state;
+  }
+  const newOption: OptionsState = addValue(state.context.option, value);
+  return {
+    ...state,
+    context: {
+      ...state.context,
+      option: newOption,
+    },
+  };
+};
+
 const KEYWORD_FUNC_TABLE = {
   [KEYWORD_PARAM]: handleParamContext,
   [KEYWORD_TEXT]: handleText,
@@ -260,6 +326,8 @@ const KEYWORD_FUNC_TABLE = {
   [KEYWORD_COMMAND]: handleCommandContext,
   [KEYWORD_ARG]: handleArgContext,
   [KEYWORD_HELP]: handleHelpContext,
+  [KEYWORD_OPTION]: handleOption,
+  [KEYWORD_VALUE]: handleValue,
   [KEYWORD_TYPE]: (state, value) => addField(state, KEYWORD_KIND, value),
   [KEYWORD_DEFAULT]: (state, value) => addField(state, KEYWORD_DEFAULT, value),
   [KEYWORD_ON]: (state, value) => addField(state, KEYWORD_ON, value),
