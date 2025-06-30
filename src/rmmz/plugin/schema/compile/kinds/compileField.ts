@@ -1,6 +1,6 @@
 import { compileBooleanFieldWithXParam, compileBooleanField } from "./boolean";
 import { compileComboField, compileComboFieldWithXparam } from "./combo";
-import type { StructParamPrimitive } from "./core/primitiveParams";
+import type { PrimitiveParam } from "./core/primitiveParams";
 import { compileFileField, compileFileFieldWithXparam } from "./file";
 import {
   compileNumberArrayField,
@@ -16,16 +16,14 @@ import { makeStructRef } from "./structDef";
 import { compileArrayField } from "./utils";
 
 const makeStringArrayField = (
-  data: Extract<StructParamPrimitive, { default: string[] }>
+  data: Extract<PrimitiveParam, { default: string[] }>
 ) => compileArrayField(data, { type: "string" });
 
 const makeDataIdArrayField = (
-  data: Extract<StructParamPrimitive, { default: number[] }>
+  data: Extract<PrimitiveParam, { default: number[] }>
 ) => compileArrayField(data, { type: "integer" });
 
-export const compilePrimitiveField = (
-  data: StructParamPrimitive
-): AnyParamSchema => {
+export const compilePrimitiveField = (data: PrimitiveParam): AnyParamSchema => {
   switch (data.kind) {
     case "string":
     case "multiline_string":
@@ -75,7 +73,7 @@ export const compilePrimitiveField = (
 };
 
 export const compilePrimitiveFieldWithXParam = (
-  data: StructParamPrimitive
+  data: PrimitiveParam
 ): AnyParamSchema => {
   switch (data.kind) {
     case "string":

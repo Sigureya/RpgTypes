@@ -1,9 +1,9 @@
 import type { ParamBase } from "./paramBase";
-import type { StructParamPrimitive } from "./primitiveParams";
+import type { PrimitiveParam } from "./primitiveParams";
 
 // 各パラメータ型のユニオン
 export type StructParam =
-  | StructParamPrimitive
+  | PrimitiveParam
   | StructDefParam<object> // ネスト構造体対応
   | StructArrayDefParam<object>;
 

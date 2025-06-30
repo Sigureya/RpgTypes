@@ -1,10 +1,10 @@
 import type { MappingTable } from "./mapping/mapping";
 import { compileParam, compileArrayParam } from "./mapping/mapping";
-import type { PluginParamTokens, PluginTokens } from "./parse/types";
+import type { PluginParamTokens } from "./parse/types";
 import type {
   BooleanParam,
   NumberParam,
-  StructParamPrimitive,
+  PrimitiveParam,
   FileParam,
   GenericIdParam,
   NumberArrayParam,
@@ -24,7 +24,7 @@ export type ParamSoruceRecord<T> = Partial<Record<keyof T, string>>;
 
 export const compileAttributes = (
   tokens: PluginParamTokens
-): StructParamPrimitive => {
+): PrimitiveParam => {
   if ("kind" in tokens.attr) {
     const func = TABLE2[tokens.attr.kind as keyof typeof TABLE2];
     if (func) {
@@ -228,7 +228,5 @@ const TABLE2 = {
   file: compileFileParam,
   "file[]": compileFileArrayParam,
 } as const satisfies Partial<{
-  [K in StructParamPrimitive["kind"]]: (
-    tokens: PluginParamTokens
-  ) => StructParamPrimitive;
+  [K in PrimitiveParam["kind"]]: (tokens: PluginParamTokens) => PrimitiveParam;
 }>;
