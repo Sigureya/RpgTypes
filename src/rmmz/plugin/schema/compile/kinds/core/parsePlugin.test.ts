@@ -36,6 +36,8 @@ const mockTexts: string[] = [
   "* @arg arg2",
   "* @type string",
   "* @default abc",
+  "@help",
+  "This is a mock plugin for testing.",
 ];
 
 describe("parsePlugin", () => {
