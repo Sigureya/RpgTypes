@@ -1,4 +1,4 @@
-import { finalizeOptions } from "./optionV2";
+import { finalizeOptions } from "./option";
 import type { ParseState, PluginCommandTokens } from "./types";
 
 export const withTexts = (command: { desc?: string; text?: string }) => {

@@ -1,5 +1,5 @@
 import { compileAttributes } from "./attributes";
-import { parsePlugin as parse } from "./parse/parseV2";
+import { parsePlugin as parse } from "./parse/parse";
 import type { PluginParamTokens } from "./parse/types";
 import type { PrimitiveParam } from "./primitiveParams";
 export interface PluginParam {

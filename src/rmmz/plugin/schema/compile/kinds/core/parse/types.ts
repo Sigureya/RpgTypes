@@ -1,5 +1,5 @@
 import type { KeywordEnum } from "./keyword/types";
-import type { OptionsState } from "./optionV2";
+import type { OptionsState } from "./option";
 import type { OptionItem } from "./selectOption";
 
 export interface PluginParamTokens {
