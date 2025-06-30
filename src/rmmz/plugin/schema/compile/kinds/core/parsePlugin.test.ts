@@ -1,6 +1,7 @@
 import { test, expect, describe } from "vitest";
 import type { PluginParam } from "./parsePlugin";
 import { parsePlugin } from "./parsePlugin";
+import type { PluginCommandBody } from "./pluginEntriesEx";
 
 const mockTexts: string[] = [
   "@param bool",
@@ -67,50 +68,33 @@ describe("parsePlugin", () => {
     expect(result.params).toEqual(expected);
   });
   test("should parse commands correctly", () => {
-    const expected = [
-      {
-        command: "save",
+    const expected: Record<string, PluginCommandBody> = {
+      save: {
         text: "writeSave",
         desc: "write Save File",
-        args: [
-          {
-            name: "arg1",
-            attr: {
-              kind: "number",
-              default: 123,
-            },
+        args: {
+          arg1: {
+            kind: "number",
+            default: 123,
           },
-          {
-            name: "arg2",
-            attr: {
-              kind: "string",
-              default: "abc",
-            },
+          arg2: {
+            kind: "string",
+            default: "abc",
           },
-        ],
-      },
-      {
-        command: "load",
-        args: [
-          {
-            name: "arg1",
-            attr: {
-              text: "arg1 text",
-              desc: "load Save File",
-              kind: "number",
-              default: 456,
-            },
+        },
+      } satisfies PluginCommandBody,
+      load: {
+        args: {
+          arg1: {
+            text: "arg1 text",
+            desc: "load Save File",
+            kind: "number",
+            default: 456,
           },
-          {
-            name: "arg2",
-            attr: {
-              kind: "string",
-              default: "abc",
-            },
-          },
-        ],
-      },
-    ];
+          arg2: { kind: "string", default: "abc" },
+        },
+      } satisfies PluginCommandBody,
+    };
     expect(result.commands).toEqual(expected);
   });
 });
