@@ -1,4 +1,5 @@
 import { flashCurrentItem, withTexts } from "./flashState";
+import type { OptionsState, ParseState } from "./internalTypes";
 import {
   KEYWORD_TEXT,
   KEYWORD_DESC,
@@ -17,9 +18,8 @@ import {
   KEYWORD_VALUE,
 } from "./keyword/constants";
 import type { KeywordEnum } from "./keyword/types";
-import type { OptionsState } from "./option";
 import { addOption, addValue } from "./option";
-import type { ParseState, ParsedPlugin, PluginCommandTokens } from "./types";
+import type { ParsedPlugin, PluginCommandTokens } from "./types";
 
 export const parsePlugin = (text: string) => {
   return parsePluginCore(text, KEYWORD_FUNC_TABLE);

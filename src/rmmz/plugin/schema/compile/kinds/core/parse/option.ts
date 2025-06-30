@@ -1,9 +1,4 @@
-import type { OptionItem } from "./selectOption";
-
-export interface OptionsState {
-  items: OptionItem[];
-  currentOption?: string;
-}
+import type { OptionsState } from "./internalTypes";
 
 export const addValue = (state: OptionsState, value: string): OptionsState => {
   return state.currentOption

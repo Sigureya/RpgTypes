@@ -1,5 +1,6 @@
+import type { ParseState } from "./internalTypes";
 import { finalizeOptions } from "./option";
-import type { ParseState, PluginCommandTokens } from "./types";
+import type { PluginCommandTokens } from "./types";
 
 export const withTexts = (command: { desc?: string; text?: string }) => {
   return {
