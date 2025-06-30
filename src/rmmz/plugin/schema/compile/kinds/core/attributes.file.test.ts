@@ -1,13 +1,17 @@
 import { describe, expect, test } from "vitest";
 import type { ParamSoruceRecord } from "./attributes";
 import { compileAttributes } from "./attributes";
+import type { PluginParamTokens } from "./parse/types";
 import type { FileParam, FileArrayParam } from "./primitiveParams";
 
 describe("compileAttributes - file", () => {
   test("minimum set", () => {
-    const tokens: ParamSoruceRecord<FileParam> = {
-      kind: "file",
-      default: "path/to/file.txt",
+    const tokens: PluginParamTokens = {
+      name: "attr",
+      attr: {
+        kind: "file",
+        default: "path/to/file.txt",
+      } satisfies ParamSoruceRecord<FileParam>,
     };
     const result = compileAttributes(tokens);
     const expected: FileParam = {
@@ -19,14 +23,18 @@ describe("compileAttributes - file", () => {
   });
 
   test("full set", () => {
-    const tokens: ParamSoruceRecord<FileParam> = {
-      kind: "file",
-      default: "path/to/file.txt",
-      text: "File Path",
-      desc: "Description of the file path",
-      parent: "Parent File",
-      dir: "img",
+    const tokens: PluginParamTokens = {
+      name: "attr",
+      attr: {
+        kind: "file",
+        default: "path/to/file.txt",
+        text: "File Path",
+        desc: "Description of the file path",
+        parent: "Parent File",
+        dir: "img",
+      } satisfies ParamSoruceRecord<FileParam>,
     };
+
     const result = compileAttributes(tokens);
     const expected: FileParam = {
       kind: "file",
@@ -42,10 +50,14 @@ describe("compileAttributes - file", () => {
 
 describe("compileAttributes - file[]", () => {
   test("minimum set", () => {
-    const tokens: ParamSoruceRecord<FileArrayParam> = {
-      kind: "file[]",
-      default: `["path/to/file1.txt", "path/to/file2.txt"]`,
+    const tokens: PluginParamTokens = {
+      name: "attr",
+      attr: {
+        kind: "file[]",
+        default: `["path/to/file1.txt", "path/to/file2.txt"]`,
+      } satisfies ParamSoruceRecord<FileArrayParam>,
     };
+
     const result = compileAttributes(tokens);
     const expected: FileArrayParam = {
       kind: "file[]",
@@ -56,10 +68,14 @@ describe("compileAttributes - file[]", () => {
   });
 
   test("empty array", () => {
-    const tokens: ParamSoruceRecord<FileArrayParam> = {
-      kind: "file[]",
-      default: `[]`,
+    const tokens: PluginParamTokens = {
+      name: "attr",
+      attr: {
+        kind: "file[]",
+        default: `[]`,
+      } satisfies ParamSoruceRecord<FileArrayParam>,
     };
+
     const result = compileAttributes(tokens);
     const expected: FileArrayParam = {
       kind: "file[]",
