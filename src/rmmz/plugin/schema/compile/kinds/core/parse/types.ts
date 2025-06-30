@@ -10,7 +10,7 @@ export interface PluginParamTokens {
 
 export type PluginTokens = { [key in KeywordEnum]?: string };
 
-export interface PluginCommand {
+export interface PluginCommandTokens {
   command: string;
   text?: string;
   desc?: string;
@@ -20,16 +20,16 @@ export interface PluginCommand {
 export interface ParsedPlugin {
   meta: Record<string, string>;
   params: PluginParamTokens[];
-  commands: PluginCommand[];
+  commands: PluginCommandTokens[];
   helpLines: string[];
 }
 
 export interface ParseState {
   helpLines: string[];
   params: PluginParamTokens[];
-  commands: PluginCommand[];
+  commands: PluginCommandTokens[];
   currentParam: PluginParamTokens | null;
-  currentCommand: PluginCommand | null;
+  currentCommand: PluginCommandTokens | null;
   currentContext: KeywordEnum | null;
   context: Context;
 }
