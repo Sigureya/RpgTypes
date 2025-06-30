@@ -58,6 +58,7 @@ export default defineConfig({
     dts({
       outDir: libBuild.outDir,
       exclude: ["./**/*.test.ts", ...libBuild.exclude],
+      rollupTypes: true,
     }),
   ],
 });
