@@ -137,6 +137,10 @@ const handleCommandContext = (
   value: string
 ): ParseState => {
   const state: ParseState = flashCurrentItem(oldstate);
+  if (state.commands.some((c) => c.command === value)) {
+    // すでに同名のcommandが存在する場合は新しいcommandを作らない
+    return state;
+  }
   return {
     ...state,
     currentCommand: { command: value, args: [] },
