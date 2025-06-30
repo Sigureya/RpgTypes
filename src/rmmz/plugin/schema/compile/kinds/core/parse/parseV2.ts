@@ -12,8 +12,11 @@ import {
   KEYWORD_TYPE,
   KEYWORD_HELP,
   KEYWORD_KIND,
+  KEYWORD_OPTION,
 } from "./keyword/constants";
 import type { KeywordEnum } from "./keyword/types";
+import type { OptionsState } from "./optionV2";
+import { addOption } from "./optionV2";
 import type { OptionItem } from "./selectOption";
 
 export interface PluginParamTokens {
@@ -45,6 +48,13 @@ export interface ParseState {
   currentParam: PluginParamTokens | null;
   currentCommand: PluginCommand | null;
   currentContext: KeywordEnum | null;
+  currentOption: OptionsState | null;
+}
+interface Context {
+  param: PluginParamTokens | null;
+  command: PluginCommand | null;
+  keyword: KeywordEnum | null;
+  option: OptionsState | null;
 }
 
 export const parsePlugin = (text: string) => {
@@ -85,6 +95,7 @@ export const parsePluginCore = (
       currentParam: null,
       currentCommand: null,
       currentContext: null,
+      currentOption: null,
     }
   );
 
@@ -254,6 +265,19 @@ const addField = (
   }
   return state;
 };
+
+// const handleOption = (state: ParseState, value: string): ParseState => {
+//   if (!state.currentParam) {
+//     return state;
+//   }
+//   return {
+//     ...state,
+//     currentParam: {
+//       ...state.currentParam,
+//       options: addOption(state.currentParam.options),
+//     },
+//   };
+// };
 
 const KEYWORD_FUNC_TABLE = {
   [KEYWORD_PARAM]: handleParamContext,
