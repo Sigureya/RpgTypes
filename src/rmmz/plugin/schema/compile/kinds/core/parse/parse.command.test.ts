@@ -91,4 +91,39 @@ describe("parsePlugin", () => {
     ];
     expect(result.commands).toEqual(expected);
   });
+  test("command name duplicate", () => {
+    const mockTexts: string[] = [
+      "@command save",
+      "@text writeSave",
+      "@desc write Save File",
+      "@arg arg1",
+      "@type number",
+      "@default 123",
+
+      "@command save",
+      "@text readSave",
+      "@desc read Save File",
+      "@arg arg2",
+      "@type string",
+      "@default abc",
+    ];
+    const result: ParsedPlugin = parsePlugin(mockTexts.join("\n"));
+    const expected: PluginCommandTokens[] = [
+      {
+        command: "save",
+        text: "writeSave",
+        desc: "write Save File",
+        args: [
+          {
+            name: "arg1",
+            attr: {
+              kind: "number",
+              default: "123",
+            },
+          },
+        ],
+      },
+    ];
+    expect(result.commands).toEqual(expected);
+  });
 });
