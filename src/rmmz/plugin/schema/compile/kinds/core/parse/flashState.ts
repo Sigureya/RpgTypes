@@ -8,32 +8,40 @@ export const withTexts = (command: { desc?: string; text?: string }) => {
   };
 };
 
+export const flashCurrentItem = (state: ParseState): ParseState => {
+  // 1. optionをflush
+  const p = flushOptionsToParam(state);
+  // 2. commandをflush
+  const c = flushCurrentCommand(p);
+  // 3. paramをflush
+  return flushCurrentParam(c);
+};
+
 const flushOptionsToParam = (state: ParseState): ParseState => {
-  if (
-    state.currentParam &&
-    state.context.option &&
-    (state.currentParam.attr.kind === "select" ||
-      state.currentParam.attr.kind === "combo")
-  ) {
-    return {
-      ...state,
-      currentParam: {
-        ...state.currentParam,
-        options: finalizeOptions(state.context.option).items,
-      },
-      context: {}, // option flush後はcontextリセット
-    };
+  if (state.currentParam && state.context.option) {
+    const kind = state.currentParam.attr.kind;
+    if (kind === "select" || kind === "combo") {
+      return {
+        ...state,
+        currentParam: {
+          ...state.currentParam,
+          options: finalizeOptions(state.context.option).items,
+        },
+        context: {}, // option flush後はcontextリセット
+      };
+    }
   }
-  return { ...state, context: {} };
+  return state;
 };
 
 const flushCurrentParam = (state: ParseState): ParseState => {
   if (state.currentParam) {
     return {
       ...state,
-      params: state.params.concat(state.currentParam),
+      params: [...state.params, state.currentParam],
       currentParam: null,
       currentContext: null,
+      context: {},
     };
   }
   return state;
@@ -42,7 +50,7 @@ const flushCurrentParam = (state: ParseState): ParseState => {
 const flushCurrentCommand = (state: ParseState): ParseState => {
   if (state.currentCommand) {
     const newArgs = state.currentParam
-      ? state.currentCommand.args.concat(state.currentParam)
+      ? [...state.currentCommand.args, state.currentParam]
       : state.currentCommand.args;
     const newCommand: PluginCommandTokens = {
       ...withTexts(state.currentCommand),
@@ -51,20 +59,12 @@ const flushCurrentCommand = (state: ParseState): ParseState => {
     };
     return {
       ...state,
-      commands: state.commands.concat(newCommand),
+      commands: [...state.commands, newCommand],
       currentCommand: null,
       currentParam: null,
       currentContext: null,
+      context: {},
     };
   }
   return state;
-};
-
-export const flashCurrentItem = (state: ParseState): ParseState => {
-  // 1. optionをflush
-  const p = flushOptionsToParam(state);
-  // 2. commandをflush
-  const c = flushCurrentCommand(p);
-  // 3. paramをflush
-  return flushCurrentParam(c);
 };

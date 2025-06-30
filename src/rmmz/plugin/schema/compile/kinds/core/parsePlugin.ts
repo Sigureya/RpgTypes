@@ -1,6 +1,6 @@
 import { compileAttributes } from "./attributes";
-import type { PluginParamTokens } from "./parse/parseV2";
 import { parsePlugin as parse } from "./parse/parseV2";
+import type { PluginParamTokens } from "./parse/types";
 import type { StructParamPrimitive } from "./primitiveParams";
 export interface PluginParam {
   name: string;
@@ -21,6 +21,7 @@ export const parsePlugin = (text: string) => {
     })),
   };
 };
+
 const compileParam = (param: PluginParamTokens): PluginParam => ({
   name: param.name,
   attr: compileAttributes(param.attr),

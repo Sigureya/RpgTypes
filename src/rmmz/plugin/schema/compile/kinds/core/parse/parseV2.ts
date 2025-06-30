@@ -63,7 +63,7 @@ export const parsePluginCore = (
     }
   );
 
-  const finalState = flashCurrentItem(state);
+  const finalState: ParseState = flashCurrentItem(state);
   return {
     params: finalState.params,
     commands: finalState.commands,
@@ -136,7 +136,7 @@ const handleCommandContext = (
   oldstate: ParseState,
   value: string
 ): ParseState => {
-  const state = flashCurrentItem(oldstate);
+  const state: ParseState = flashCurrentItem(oldstate);
   return {
     ...state,
     currentCommand: { command: value, args: [] },

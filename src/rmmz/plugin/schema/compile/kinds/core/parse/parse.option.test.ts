@@ -1,6 +1,6 @@
 import { describe, test, expect } from "vitest";
-import type { ParsedPlugin } from "./parseV2";
 import { parsePlugin } from "./parseV2";
+import type { ParsedPlugin } from "./types";
 
 describe("parsePlugin", () => {
   test("", () => {
