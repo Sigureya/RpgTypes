@@ -17,7 +17,7 @@ import {
 } from "./keyword/constants";
 import type { KeywordEnum } from "./keyword/types";
 import type { OptionsState } from "./optionV2";
-import { addOption, addValue } from "./optionV2";
+import { addOption, addValue, finalizeOptions } from "./optionV2";
 import type { OptionItem } from "./selectOption";
 
 export interface PluginParamTokens {
@@ -49,7 +49,7 @@ export interface ParseState {
   currentParam: PluginParamTokens | null;
   currentCommand: PluginCommand | null;
   currentContext: KeywordEnum | null;
-  context?: Context;
+  context: Context;
 }
 interface Context {
   option?: OptionsState;
@@ -90,6 +90,7 @@ export const parsePluginCore = (
       helpLines: [],
       params: [],
       commands: [],
+      context: {},
       currentParam: null,
       currentCommand: null,
       currentContext: null,
@@ -111,8 +112,28 @@ const withTexts = (command: { desc?: string; text?: string }) => {
     ...(typeof command.text === "string" ? { text: command.text } : {}),
   };
 };
+const flashOptions = (state: ParseState) => {
+  if (!state.currentParam) {
+    return state;
+  }
 
-const flashCurrentItem = (state: ParseState): ParseState => {
+  if (state.context.option) {
+    const option = finalizeOptions(state.context.option);
+    return {
+      ...state,
+      currentParam: {
+        ...state.currentParam,
+        options: option.items,
+      },
+    };
+  }
+
+  return state;
+};
+
+const flashCurrentItem = (oldstate: ParseState): ParseState => {
+  const state = flashOptions(oldstate);
+
   if (state.currentCommand) {
     const newArgs = state.currentParam
       ? state.currentCommand.args.concat(state.currentParam)
@@ -128,6 +149,7 @@ const flashCurrentItem = (state: ParseState): ParseState => {
       currentParam: null,
       currentCommand: null,
       currentContext: null,
+      context: {}, // contextもリセット
     };
   }
   if (state.currentParam) {
@@ -137,10 +159,11 @@ const flashCurrentItem = (state: ParseState): ParseState => {
       currentParam: null,
       currentCommand: null,
       currentContext: null,
+      context: {}, // contextもリセット
     };
   }
 
-  return state;
+  return { ...state, context: {} };
 };
 const handleHelpContext = (oldstate: ParseState): ParseState => {
   const state = flashCurrentItem(oldstate);

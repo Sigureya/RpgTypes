@@ -35,3 +35,15 @@ export const addOption = (
         currentOption: option,
       };
 };
+
+export const finalizeOptions = (state: OptionsState) => {
+  if (state.currentOption) {
+    return {
+      items: state.items.concat({
+        option: state.currentOption,
+        value: state.currentOption,
+      }),
+    };
+  }
+  return state;
+};
