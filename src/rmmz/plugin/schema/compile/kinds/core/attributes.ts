@@ -1,5 +1,6 @@
 import type { MappingTable } from "./mapping/mapping";
 import { compileParam, compileArrayParam } from "./mapping/mapping";
+import { KEYWORD_KIND } from "./parse/keyword/constants";
 import type { OptionItem } from "./parse/selectOption";
 import type { PluginParamTokens } from "./parse/types";
 import type {
@@ -28,19 +29,13 @@ export type ParamSoruceRecord<T> = Partial<Record<keyof T, string>>;
 export const compileAttributes = (
   tokens: PluginParamTokens
 ): PrimitiveParam => {
-  if ("kind" in tokens.attr) {
+  if (KEYWORD_KIND in tokens.attr) {
     const func = TABLE2[tokens.attr.kind as keyof typeof TABLE2];
     if (func) {
       return func(tokens);
     }
   }
-  return {
-    kind: "string",
-    default: "",
-    text: "",
-    desc: "",
-    parent: "",
-  };
+  return compileParam("any", "", tokens.attr, STRING);
 };
 
 const attrString = (value: string): string => value;
