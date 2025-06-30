@@ -1,5 +1,4 @@
 import type { KeywordEnum } from "./keyword/types";
-import type { OptionsState } from "./option";
 import type { OptionItem } from "./selectOption";
 
 export interface PluginParamTokens {
@@ -27,14 +26,4 @@ export interface ParsedPlugin {
 
 export interface PluginDependencies {
   base: string[];
-}
-
-export interface ParseState {
-  helpLines: string[];
-  params: PluginParamTokens[];
-  commands: PluginCommandTokens[];
-  currentParam: PluginParamTokens | null;
-  currentCommand: PluginCommandTokens | null;
-  currentContext: KeywordEnum | null;
-  currentOption: OptionsState | null;
 }
