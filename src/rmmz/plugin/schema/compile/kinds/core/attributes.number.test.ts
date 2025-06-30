@@ -1,12 +1,16 @@
 import { describe, test, expect } from "vitest";
 import { compileAttributes } from "./attributes";
 import type { ParamSoruceRecord } from "./attributes";
+import type { PluginParamTokens } from "./parse/types";
 import type { NumberParam, NumberArrayParam } from "./primitiveParams";
 
 describe("compileAttributes - number", () => {
   test("type only", () => {
-    const token: ParamSoruceRecord<NumberParam> = {
-      kind: "number",
+    const token: PluginParamTokens = {
+      name: "attr",
+      attr: {
+        kind: "number",
+      } satisfies ParamSoruceRecord<NumberParam>,
     };
 
     const expected: NumberParam = {
@@ -18,11 +22,13 @@ describe("compileAttributes - number", () => {
   });
 
   test("with default", () => {
-    const token: ParamSoruceRecord<NumberParam> = {
-      kind: "number",
-      default: "123.45",
+    const token: PluginParamTokens = {
+      name: "attr",
+      attr: {
+        kind: "number",
+        default: "123.45",
+      } satisfies ParamSoruceRecord<NumberParam>,
     };
-
     const expected: NumberParam = {
       kind: "number",
       default: 123.45,
@@ -31,14 +37,17 @@ describe("compileAttributes - number", () => {
     expect(result).toEqual(expected);
   });
   test("with all properties", () => {
-    const token: ParamSoruceRecord<NumberParam> = {
-      kind: "number",
-      default: "123.45",
-      text: "a number",
-      desc: "this is a number",
-      decimals: "2",
-      min: "-1000.5",
-      max: "1000.5",
+    const token: PluginParamTokens = {
+      name: "attr",
+      attr: {
+        kind: "number",
+        default: "123.45",
+        text: "a number",
+        desc: "this is a number",
+        min: "-1000.5",
+        max: "1000.5",
+        decimals: "2",
+      } satisfies ParamSoruceRecord<NumberParam>,
     };
 
     const expected: NumberParam = {
@@ -57,8 +66,11 @@ describe("compileAttributes - number", () => {
 
 describe("compileAttributes - number[]", () => {
   test("type only", () => {
-    const token: ParamSoruceRecord<NumberArrayParam> = {
-      kind: "number[]",
+    const token: PluginParamTokens = {
+      name: "attr",
+      attr: {
+        kind: "number[]",
+      } satisfies ParamSoruceRecord<NumberArrayParam>,
     };
 
     const expected: NumberArrayParam = {
@@ -69,9 +81,12 @@ describe("compileAttributes - number[]", () => {
     expect(result).toEqual(expected);
   });
   test("with default", () => {
-    const token: ParamSoruceRecord<NumberArrayParam> = {
-      kind: "number[]",
-      default: `["1", "2", "3"]`,
+    const token: PluginParamTokens = {
+      name: "attr",
+      attr: {
+        kind: "number[]",
+        default: `[1, 2, 3]`,
+      } satisfies ParamSoruceRecord<NumberArrayParam>,
     };
     const expected: NumberArrayParam = {
       kind: "number[]",
@@ -82,9 +97,12 @@ describe("compileAttributes - number[]", () => {
   });
 
   test("with empty array", () => {
-    const token: ParamSoruceRecord<NumberArrayParam> = {
-      kind: "number[]",
-      default: `[]`,
+    const token: PluginParamTokens = {
+      name: "attr",
+      attr: {
+        kind: "number[]",
+        default: `[]`,
+      } satisfies ParamSoruceRecord<NumberArrayParam>,
     };
     const expected: NumberArrayParam = {
       kind: "number[]",
@@ -94,14 +112,17 @@ describe("compileAttributes - number[]", () => {
     expect(result).toEqual(expected);
   });
   test("with all properties", () => {
-    const token: ParamSoruceRecord<NumberArrayParam> = {
-      kind: "number[]",
-      default: `[4, 5, 6]`,
-      text: "a number array",
-      desc: "this is a number array",
-      min: "-1000.5",
-      max: "1000.5",
-      decimals: "2",
+    const token: PluginParamTokens = {
+      name: "attr",
+      attr: {
+        kind: "number[]",
+        default: `[4, 5, 6]`,
+        text: "a number array",
+        desc: "this is a number array",
+        min: "-1000.5",
+        max: "1000.5",
+        decimals: "2",
+      } satisfies ParamSoruceRecord<NumberArrayParam>,
     };
 
     const expected: NumberArrayParam = {
