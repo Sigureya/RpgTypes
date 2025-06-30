@@ -1,43 +1,42 @@
 import { compileAttributes } from "./attributes";
 import { parsePlugin as parse } from "./parse/parse";
-import type { PluginCommandTokens, PluginParamTokens } from "./parse/types";
+import type {
+  ParsedPlugin,
+  PluginCommandTokens,
+  PluginParamTokens,
+} from "./parse/types";
 import type { PluginCommandBody } from "./pluginEntriesEx";
 import type { PrimitiveParam } from "./primitiveParams";
+
 export interface PluginParam {
   name: string;
   attr: PrimitiveParam;
 }
 
-export interface PluginRmmz {}
-
 export const parsePlugin = (text: string) => {
-  const pp = parse(text);
-
-  return {
-    meta: pp.meta,
-    params: pp.params.map(compileParam),
-    commands: rrr(pp.commands),
-  };
+  return compilePlugin(parse(text));
 };
 
-const compileParam = (param: PluginParamTokens): PluginParam => ({
-  name: param.name,
-  attr: compileAttributes(param),
-});
+const compilePlugin = (parsedPlugin: ParsedPlugin) => {
+  return {
+    meta: parsedPlugin.meta,
+    params: reduceParams(parsedPlugin.params),
+    commands: reduceCommands(parsedPlugin.commands),
+  };
+};
 
 const reduceParams = (
   params: ReadonlyArray<PluginParamTokens>
 ): { [key: string]: PrimitiveParam } => {
   return params.reduce<{ [key: string]: PrimitiveParam }>((acc, param) => {
-    const compiled: PluginParam = compileParam(param);
     return {
-      [compiled.name]: compiled.attr,
+      [param.name]: compileAttributes(param),
       ...acc,
     };
   }, {});
 };
 
-const rrr = (
+const reduceCommands = (
   tokens: ReadonlyArray<PluginCommandTokens>
 ): Record<string, PluginCommandBody> => {
   return tokens.reduce((acc, token) => {
