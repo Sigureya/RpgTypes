@@ -13,10 +13,11 @@ import {
   KEYWORD_HELP,
   KEYWORD_KIND,
   KEYWORD_OPTION,
+  KEYWORD_VALUE,
 } from "./keyword/constants";
 import type { KeywordEnum } from "./keyword/types";
 import type { OptionsState } from "./optionV2";
-import { addOption } from "./optionV2";
+import { addOption, addValue } from "./optionV2";
 import type { OptionItem } from "./selectOption";
 
 export interface PluginParamTokens {
@@ -262,18 +263,38 @@ const addField = (
   return state;
 };
 
-// const handleOption = (state: ParseState, value: string): ParseState => {
-//   if (!state.currentParam) {
-//     return state;
-//   }
-//   return {
-//     ...state,
-//     currentParam: {
-//       ...state.currentParam,
-//       options: addOption(state.currentParam.options),
-//     },
-//   };
-// };
+const handleOption = (state: ParseState, value: string): ParseState => {
+  if (!state.currentParam) {
+    return state;
+  }
+
+  const newOption: OptionsState = addOption(
+    state.context?.option ?? { items: [] },
+    value
+  );
+
+  return {
+    ...state,
+    context: {
+      ...state.context,
+      option: newOption,
+    },
+  };
+};
+
+const handleValue = (state: ParseState, value: string): ParseState => {
+  if (!state.context?.option) {
+    return state;
+  }
+  const newOption: OptionsState = addValue(state.context.option, value);
+  return {
+    ...state,
+    context: {
+      ...state.context,
+      option: newOption,
+    },
+  };
+};
 
 const KEYWORD_FUNC_TABLE = {
   [KEYWORD_PARAM]: handleParamContext,
@@ -282,6 +303,8 @@ const KEYWORD_FUNC_TABLE = {
   [KEYWORD_COMMAND]: handleCommandContext,
   [KEYWORD_ARG]: handleArgContext,
   [KEYWORD_HELP]: handleHelpContext,
+  [KEYWORD_OPTION]: handleOption,
+  [KEYWORD_VALUE]: handleValue,
   [KEYWORD_TYPE]: (state, value) => addField(state, KEYWORD_KIND, value),
   [KEYWORD_DEFAULT]: (state, value) => addField(state, KEYWORD_DEFAULT, value),
   [KEYWORD_ON]: (state, value) => addField(state, KEYWORD_ON, value),
