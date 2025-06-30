@@ -1,6 +1,6 @@
 import { describe, test, expect } from "vitest";
-import type { ParsedPlugin, PluginCommand } from "./parseV2";
 import { parsePlugin } from "./parseV2";
+import type { ParsedPlugin, PluginCommandTokens } from "./types";
 
 describe("parsePlugin", () => {
   test("", () => {
@@ -18,7 +18,7 @@ describe("parsePlugin", () => {
       "@default abc",
     ];
     const result: ParsedPlugin = parsePlugin(mockTexts.join("\n"));
-    const expected: PluginCommand = {
+    const expected: PluginCommandTokens = {
       command: "save",
       text: "writeSave",
       desc: "write Save File",
@@ -59,7 +59,7 @@ describe("parsePlugin", () => {
       "@default abc",
     ];
     const result: ParsedPlugin = parsePlugin(mockTexts.join("\n"));
-    const expected: PluginCommand[] = [
+    const expected: PluginCommandTokens[] = [
       {
         command: "save",
         text: "writeSave",
