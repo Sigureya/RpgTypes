@@ -17,8 +17,8 @@ import {
   KEYWORD_VALUE,
 } from "./keyword/constants";
 import type { KeywordEnum } from "./keyword/types";
-import type { OptionsState } from "./optionV2";
-import { addOption, addValue } from "./optionV2";
+import type { OptionsState } from "./option";
+import { addOption, addValue } from "./option";
 import type { ParseState, ParsedPlugin, PluginCommandTokens } from "./types";
 
 export const parsePlugin = (text: string) => {
