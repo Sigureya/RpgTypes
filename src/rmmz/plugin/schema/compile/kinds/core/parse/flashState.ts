@@ -18,16 +18,15 @@ export const flashCurrentItem = (state: ParseState): ParseState => {
 };
 
 const flushOptionsToParam = (state: ParseState): ParseState => {
-  if (state.currentParam && state.context.option) {
+  if (state.currentParam && state.currentOption) {
     const kind = state.currentParam.attr.kind;
     if (kind === "select" || kind === "combo") {
       return {
         ...state,
         currentParam: {
           ...state.currentParam,
-          options: finalizeOptions(state.context.option).items,
+          options: finalizeOptions(state.currentOption).items,
         },
-        context: {}, // option flush後はcontextリセット
       };
     }
   }
@@ -41,7 +40,6 @@ const flushCurrentParam = (state: ParseState): ParseState => {
       params: [...state.params, state.currentParam],
       currentParam: null,
       currentContext: null,
-      context: {},
     };
   }
   return state;
@@ -63,7 +61,7 @@ const flushCurrentCommand = (state: ParseState): ParseState => {
       currentCommand: null,
       currentParam: null,
       currentContext: null,
-      context: {},
+      currentOption: null,
     };
   }
   return state;
