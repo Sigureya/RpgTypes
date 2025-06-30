@@ -1,3 +1,4 @@
+import type { PluginDependencies } from "./dependencies";
 import type { KeywordEnum } from "./keyword/types";
 import type { OptionItem } from "./selectOption";
 import type { PluginParamTokens, PluginCommandTokens } from "./types";
@@ -15,4 +16,5 @@ export interface ParseState {
   currentCommand: PluginCommandTokens | null;
   currentContext: KeywordEnum | null;
   currentOption: OptionsState | null;
+  dependencies: PluginDependencies;
 }

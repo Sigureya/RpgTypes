@@ -23,9 +23,3 @@ export interface PluginType {
   structs: PluginStructType<object>[];
   params: PrimitiveStructParams<object>;
 }
-
-export interface PluginDependencies {
-  bases: string[];
-  orderBefore: string[];
-  orderAfter: string[];
-}

@@ -1,3 +1,4 @@
+import { addBasePlugin, addOrderAfter, addOrderBefore } from "./dependencies";
 import { flashCurrentItem, withTexts } from "./flashState";
 import type { OptionsState, ParseState } from "./internalTypes";
 import {
@@ -16,6 +17,9 @@ import {
   KEYWORD_KIND,
   KEYWORD_OPTION,
   KEYWORD_VALUE,
+  KEYWORD_BASE,
+  KEYWORD_ORDERAFTER,
+  KEYWORD_ORDERBEFORE,
 } from "./keyword/constants";
 import type { KeywordEnum } from "./keyword/types";
 import { addOption, addValue } from "./option";
@@ -31,37 +35,26 @@ export const parsePluginCore = (
 ): ParsedPlugin => {
   const lines = text.split(/\r?\n/);
 
-  const state = lines.reduce<ParseState>(
-    (acc, line) => {
-      const trimmed = line.trim().replace(/^\*\s?/, "");
-      if (!trimmed.startsWith("@")) {
-        if (acc.currentContext === KEYWORD_HELP) {
-          // キーワードが来ない場合はヘルプ行として追加
-          return { ...acc, helpLines: acc.helpLines.concat(trimmed) };
-        }
-        // コメントモード以外 & キーワードが来ない場合は無視
-        return acc;
+  const state = lines.reduce<ParseState>((acc, line) => {
+    const trimmed = line.trim().replace(/^\*\s?/, "");
+    if (!trimmed.startsWith("@")) {
+      if (acc.currentContext === KEYWORD_HELP) {
+        // キーワードが来ない場合はヘルプ行として追加
+        return { ...acc, helpLines: acc.helpLines.concat(trimmed) };
       }
-
-      const [tag, ...rest] = trimmed.slice(1).split(" ");
-      const value = rest.join(" ").trim();
-      const fn = table[tag as keyof typeof table];
-
-      if (fn) {
-        return fn(acc, value);
-      }
+      // コメントモード以外 & キーワードが来ない場合は無視
       return acc;
-    },
-    {
-      helpLines: [],
-      params: [],
-      commands: [],
-      currentParam: null,
-      currentCommand: null,
-      currentContext: null,
-      currentOption: null,
     }
-  );
+
+    const [tag, ...rest] = trimmed.slice(1).split(" ");
+    const value = rest.join(" ").trim();
+    const fn = table[tag as keyof typeof table];
+
+    if (fn) {
+      return fn(acc, value);
+    }
+    return acc;
+  }, makeParseState());
 
   const finalState: ParseState = flashCurrentItem(state);
   return {
@@ -71,6 +64,21 @@ export const parsePluginCore = (
     helpLines: finalState.helpLines,
   };
 };
+
+const makeParseState = (): ParseState => ({
+  helpLines: [],
+  params: [],
+  commands: [],
+  currentParam: null,
+  currentCommand: null,
+  currentContext: null,
+  currentOption: null,
+  dependencies: {
+    base: [],
+    orderBefore: [],
+    orderAfter: [],
+  },
+});
 
 const handleHelpContext = (oldstate: ParseState): ParseState => {
   const state = flashCurrentItem(oldstate);
@@ -224,6 +232,24 @@ const handleValue = (state: ParseState, value: string): ParseState => {
   };
 };
 
+const handleBase = (state: ParseState, value: string): ParseState => {
+  return { ...state, dependencies: addBasePlugin(state.dependencies, value) };
+};
+
+const handleOrderAfter = (state: ParseState, value: string): ParseState => {
+  return {
+    ...state,
+    dependencies: addOrderAfter(state.dependencies, value),
+  };
+};
+
+const handleOrderBefore = (state: ParseState, value: string): ParseState => {
+  return {
+    ...state,
+    dependencies: addOrderBefore(state.dependencies, value),
+  };
+};
+
 const KEYWORD_FUNC_TABLE = {
   [KEYWORD_PARAM]: handleParamContext,
   [KEYWORD_TEXT]: handleText,
@@ -239,6 +265,9 @@ const KEYWORD_FUNC_TABLE = {
   [KEYWORD_OFF]: (state, value) => addField(state, KEYWORD_OFF, value),
   [KEYWORD_MIN]: (state, value) => addField(state, KEYWORD_MIN, value),
   [KEYWORD_MAX]: (state, value) => addField(state, KEYWORD_MAX, value),
+  [KEYWORD_BASE]: handleBase,
+  [KEYWORD_ORDERAFTER]: handleOrderAfter,
+  [KEYWORD_ORDERBEFORE]: handleOrderBefore,
 } as const satisfies {
   [K in KeywordEnum]?: (state: ParseState, value: string) => ParseState;
 };
