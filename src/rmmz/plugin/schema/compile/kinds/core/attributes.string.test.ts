@@ -1,14 +1,18 @@
 import { describe, expect, test } from "vitest";
 import type { ParamSoruceRecord } from "./attributes";
 import { compileAttributes } from "./attributes";
+import type { PluginParamTokens } from "./parse/types";
 import type { StringArrayParam, StringParam } from "./primitiveParams";
 
 describe("compileAttributes - string", () => {
   test("minimum set", () => {
-    const tokens = {
-      kind: "string",
-      default: "abc",
-    } satisfies ParamSoruceRecord<StringParam>;
+    const tokens: PluginParamTokens = {
+      name: "attr",
+      attr: {
+        kind: "string",
+        default: "abc",
+      } satisfies ParamSoruceRecord<StringParam>,
+    };
     const expected: StringParam = {
       kind: "string",
       default: "abc",
@@ -18,13 +22,16 @@ describe("compileAttributes - string", () => {
   });
 
   test("full set", () => {
-    const tokens = {
-      kind: "string",
-      default: "abc",
-      text: "String Text",
-      desc: "String Description",
-      parent: "Parent String",
-    } as const satisfies ParamSoruceRecord<StringParam>;
+    const tokens: PluginParamTokens = {
+      name: "attr",
+      attr: {
+        kind: "string",
+        default: "abc",
+        text: "String Text",
+        desc: "String Description",
+        parent: "Parent String",
+      } satisfies ParamSoruceRecord<StringParam>,
+    };
     const expected: StringParam = {
       kind: "string",
       default: "abc",
@@ -39,10 +46,13 @@ describe("compileAttributes - string", () => {
 
 describe("compileAttributes - string[]", () => {
   test("minimum set", () => {
-    const tokens = {
-      kind: "string[]",
-      default: `["a", "b", "c"]`,
-    } satisfies ParamSoruceRecord<StringArrayParam>;
+    const tokens: PluginParamTokens = {
+      name: "attr",
+      attr: {
+        kind: "string[]",
+        default: `["a", "b", "c"]`,
+      } satisfies ParamSoruceRecord<StringArrayParam>,
+    };
     const expected: StringArrayParam = {
       kind: "string[]",
       default: ["a", "b", "c"],
@@ -52,10 +62,13 @@ describe("compileAttributes - string[]", () => {
   });
 
   test("empty array", () => {
-    const tokens = {
-      kind: "string[]",
-      default: `[]`,
-    } satisfies ParamSoruceRecord<StringArrayParam>;
+    const tokens: PluginParamTokens = {
+      name: "attr",
+      attr: {
+        kind: "string[]",
+        default: `[]`,
+      } satisfies ParamSoruceRecord<StringArrayParam>,
+    };
     const expected: StringArrayParam = {
       kind: "string[]",
       default: [],
