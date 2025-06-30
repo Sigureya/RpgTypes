@@ -6,4 +6,4 @@ export declare const compileFileField: (data: FileParam) => {
     default?: string | undefined;
     type: "string";
 };
-export declare const compileFileFieldWithXparam: (data: FileParam) => JSONSchemaTypeWithRpgParam<string>;
+export declare const compileFileFieldWithXparam: (data: FileParam) => JSONSchemaTypeWithRpgParam<FileParam>;

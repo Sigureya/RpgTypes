@@ -46,7 +46,7 @@ export declare const makeSchema3: () => {
             data: {
                 type: "object";
                 properties: {
-                    digit: {
+                    decimals: {
                         type: "number";
                         nullable: true;
                         minimum: number;

@@ -54,6 +54,7 @@ export declare const makeParamSchema: () => {
             readonly default: {
                 readonly type: "string";
                 readonly default: "";
+                readonly nullable: false;
             };
             readonly options: {
                 readonly type: "array";
@@ -119,10 +120,12 @@ export declare const makeParamSchema: () => {
             readonly default: {
                 readonly type: "string";
                 readonly default: "";
+                readonly nullable: false;
             };
             readonly dir: {
                 readonly type: "string";
                 readonly default: "";
+                readonly nullable: false;
             };
             readonly desc: {
                 readonly type: "string";
@@ -159,6 +162,7 @@ export declare const makeParamSchema: () => {
             readonly dir: {
                 readonly type: "string";
                 readonly default: "";
+                readonly nullable: false;
             };
             readonly desc: {
                 readonly type: "string";
@@ -180,7 +184,7 @@ export declare const makeParamSchema: () => {
         readonly type: "object";
         readonly required: readonly ["kind", "default"];
         readonly properties: {
-            readonly digit: {
+            readonly decimals: {
                 readonly type: "integer";
                 readonly minimum: 0;
                 readonly default: 0;
@@ -235,7 +239,7 @@ export declare const makeParamSchema: () => {
                 };
                 readonly default: [];
             };
-            readonly digit: {
+            readonly decimals: {
                 readonly type: "integer";
                 readonly minimum: 0;
                 readonly default: 0;
@@ -277,6 +281,7 @@ export declare const makeParamSchema: () => {
             readonly default: {
                 readonly type: "string";
                 readonly default: "";
+                readonly nullable: false;
             };
             readonly options: {
                 readonly type: "array";
@@ -285,9 +290,13 @@ export declare const makeParamSchema: () => {
                     readonly properties: {
                         readonly value: {
                             readonly type: "string";
+                            readonly default: "";
+                            readonly nullable: false;
                         };
                         readonly option: {
                             readonly type: "string";
+                            readonly default: "";
+                            readonly nullable: false;
                         };
                     };
                     readonly required: readonly ["value", "option"];
@@ -397,6 +406,7 @@ export declare const makeParamSchema: () => {
             readonly default: {
                 readonly type: "string";
                 readonly default: "";
+                readonly nullable: false;
             };
             readonly desc: {
                 readonly type: "string";
@@ -428,6 +438,7 @@ export declare const makeParamSchema: () => {
                 readonly items: {
                     readonly type: "string";
                     readonly default: "";
+                    readonly nullable: false;
                 };
                 readonly default: [];
             };
