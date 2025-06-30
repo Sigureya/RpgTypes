@@ -1,3 +1,4 @@
+import { addBasePlugin, addOrderAfter, addOrderBefore } from "./dependencies";
 import { flashCurrentItem, withTexts } from "./flashState";
 import type { OptionsState, ParseState } from "./internalTypes";
 import {
@@ -16,6 +17,9 @@ import {
   KEYWORD_KIND,
   KEYWORD_OPTION,
   KEYWORD_VALUE,
+  KEYWORD_BASE,
+  KEYWORD_ORDERAFTER,
+  KEYWORD_ORDERBEFORE,
 } from "./keyword/constants";
 import type { KeywordEnum } from "./keyword/types";
 import { addOption, addValue } from "./option";
@@ -70,7 +74,7 @@ const makeParseState = (): ParseState => ({
   currentContext: null,
   currentOption: null,
   dependencies: {
-    bases: [],
+    base: [],
     orderBefore: [],
     orderAfter: [],
   },
@@ -228,6 +232,24 @@ const handleValue = (state: ParseState, value: string): ParseState => {
   };
 };
 
+const handleBase = (state: ParseState, value: string): ParseState => {
+  return { ...state, dependencies: addBasePlugin(state.dependencies, value) };
+};
+
+const handleOrderAfter = (state: ParseState, value: string): ParseState => {
+  return {
+    ...state,
+    dependencies: addOrderAfter(state.dependencies, value),
+  };
+};
+
+const handleOrderBefore = (state: ParseState, value: string): ParseState => {
+  return {
+    ...state,
+    dependencies: addOrderBefore(state.dependencies, value),
+  };
+};
+
 const KEYWORD_FUNC_TABLE = {
   [KEYWORD_PARAM]: handleParamContext,
   [KEYWORD_TEXT]: handleText,
@@ -243,6 +265,9 @@ const KEYWORD_FUNC_TABLE = {
   [KEYWORD_OFF]: (state, value) => addField(state, KEYWORD_OFF, value),
   [KEYWORD_MIN]: (state, value) => addField(state, KEYWORD_MIN, value),
   [KEYWORD_MAX]: (state, value) => addField(state, KEYWORD_MAX, value),
+  [KEYWORD_BASE]: handleBase,
+  [KEYWORD_ORDERAFTER]: handleOrderAfter,
+  [KEYWORD_ORDERBEFORE]: handleOrderBefore,
 } as const satisfies {
   [K in KeywordEnum]?: (state: ParseState, value: string) => ParseState;
 };
