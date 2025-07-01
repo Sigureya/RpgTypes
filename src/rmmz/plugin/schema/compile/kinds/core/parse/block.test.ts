@@ -1,4 +1,4 @@
-import { describe, test, expect } from "vitest";
+import { describe, test, expect, it } from "vitest";
 import type { Block } from "./block";
 import { splitBlock } from "./block";
 
@@ -48,6 +48,32 @@ describe("splitBlock", () => {
     });
     test("should split block into structs", () => {
       expect(result.structs).toEqual(expected.structs);
+    });
+  });
+  describe("noname struct", () => {
+    it("is not allowed", () => {
+      const lines: string[] = [
+        "/*:",
+        "@plugindesc mock",
+        "*/",
+
+        "/*~struct~:ja",
+        "@param x",
+        "@type number",
+        "@default 0",
+        "@param y",
+        "@type number",
+        "@default 0",
+        "*/",
+      ];
+      const block: string = lines.join("\n");
+      const result: Block = splitBlock(block);
+      expect(result.structs).toEqual([]);
+      expect(result.bodies).toEqual([
+        {
+          lines: ["@plugindesc mock"],
+        },
+      ]);
     });
   });
 });
