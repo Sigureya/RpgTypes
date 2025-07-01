@@ -8,7 +8,14 @@ export interface OptionsState {
   currentOption?: string;
 }
 
+export interface PluginMeta {
+  author: string;
+  plugindesc: string;
+  url: string;
+}
+
 export interface ParseState {
+  meta: Partial<PluginMeta>;
   helpLines: string[];
   params: PluginParamTokens[];
   commands: PluginCommandTokens[];
