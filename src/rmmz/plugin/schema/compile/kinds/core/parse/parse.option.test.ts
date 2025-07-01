@@ -5,6 +5,8 @@ import type { ParsedPlugin } from "./types";
 describe("parsePlugin", () => {
   test("", () => {
     const tokens: string[] = [
+      "/*:",
+
       "@param list",
       "@type select",
       "@default L",
@@ -13,6 +15,7 @@ describe("parsePlugin", () => {
       "@option komachi",
       "@value Z",
       "@option east-i",
+      "*/",
     ];
     const expected: Pick<ParsedPlugin, "params"> = {
       params: [
@@ -36,6 +39,7 @@ describe("parsePlugin", () => {
 
   test("", () => {
     const tokens: string[] = [
+      "/*:",
       "@param list",
       "@type select",
       "@default 300",
@@ -46,6 +50,7 @@ describe("parsePlugin", () => {
       "@value 100",
       "@option kodama",
       "@value 0",
+      "*/",
     ];
     const expected: Pick<ParsedPlugin, "params"> = {
       params: [
@@ -69,12 +74,14 @@ describe("parsePlugin", () => {
   });
   test("", () => {
     const tokens: string[] = [
+      "/*:",
       "@param list",
       "@type combo",
       "@option hayabusa",
       "@option komachi",
       "@option kagayaki",
       "@default ",
+      "*/",
     ];
     const expected: Pick<ParsedPlugin, "params"> = {
       params: [
