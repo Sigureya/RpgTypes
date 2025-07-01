@@ -18,4 +18,9 @@ describe("parsePlugin", () => {
     expect(result.meta.plugindesc).toBe("This is a test plugin");
     expect(result.meta.url).toBe("dummy-url");
   });
+  test("", () => {
+    const text: string = ["@author alice", "@author bob"].join("\n");
+    const result = parsePlugin(text);
+    expect(result.meta.author).toBe("alice");
+  });
 });
