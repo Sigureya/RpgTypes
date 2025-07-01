@@ -1,6 +1,6 @@
 import { addBasePlugin, addOrderAfter, addOrderBefore } from "./dependencies";
 import { flashCurrentItem, withTexts } from "./flashState";
-import type { OptionsState, ParseState, PluginMeta } from "./internalTypes";
+import type { OptionsState, ParseState } from "./internalTypes";
 import {
   KEYWORD_TEXT,
   KEYWORD_DESC,
@@ -26,7 +26,7 @@ import {
 } from "./keyword/constants";
 import type { KeywordEnum } from "./keyword/types";
 import { addOption, addValue } from "./option";
-import type { ParsedPlugin, PluginCommandTokens } from "./types";
+import type { ParsedPlugin, PluginCommandTokens, PluginMeta } from "./types";
 
 export const parsePlugin = (text: string) => {
   return parsePluginCore(text, KEYWORD_FUNC_TABLE);
@@ -65,6 +65,7 @@ export const parsePluginCore = (
     commands: finalState.commands,
     meta: finalState.meta,
     helpLines: finalState.helpLines,
+    structs: [],
   };
 };
 
@@ -82,6 +83,7 @@ const makeParseState = (): ParseState => ({
     orderAfter: [],
   },
   meta: {},
+  structs: [],
 });
 
 const handleHelpContext = (oldstate: ParseState): ParseState => {

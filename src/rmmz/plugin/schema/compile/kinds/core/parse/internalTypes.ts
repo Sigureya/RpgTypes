@@ -1,17 +1,16 @@
 import type { PluginDependencies } from "./dependencies";
 import type { KeywordEnum } from "./keyword/types";
 import type { OptionItem } from "./selectOption";
-import type { PluginParamTokens, PluginCommandTokens } from "./types";
+import type {
+  PluginParamTokens,
+  PluginCommandTokens,
+  PluginMeta,
+  StructParseState,
+} from "./types";
 
 export interface OptionsState {
   items: OptionItem[];
   currentOption?: string;
-}
-
-export interface PluginMeta {
-  author: string;
-  plugindesc: string;
-  url: string;
 }
 
 export interface ParseState {
@@ -24,4 +23,5 @@ export interface ParseState {
   currentContext: KeywordEnum | null;
   currentOption: OptionsState | null;
   dependencies: PluginDependencies;
+  structs: StructParseState[];
 }

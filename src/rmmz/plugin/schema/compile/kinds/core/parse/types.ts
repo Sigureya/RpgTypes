@@ -1,5 +1,4 @@
 import type { PluginDependencies } from "./dependencies";
-import type { PluginMeta } from "./internalTypes";
 import type { KeywordEnum } from "./keyword/types";
 import type { OptionItem } from "./selectOption";
 
@@ -24,4 +23,15 @@ export interface ParsedPlugin {
   commands: PluginCommandTokens[];
   helpLines: string[];
   dependencies?: PluginDependencies;
+  structs: StructParseState[];
+}
+export interface PluginMeta {
+  author: string;
+  plugindesc: string;
+  url: string;
+}
+
+export interface StructParseState {
+  name: string;
+  params: PluginParamTokens[];
 }
