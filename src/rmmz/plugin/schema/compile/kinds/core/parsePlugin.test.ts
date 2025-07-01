@@ -1,6 +1,6 @@
 import { test, expect, describe } from "vitest";
 import { parsePlugin } from "./parsePlugin";
-import type { PluginCommandBody } from "./pluginEntriesEx";
+import type { PluginCommandBody } from "./pluginJSONTypes";
 import type { PrimitiveParam } from "./primitiveParams";
 
 const mockTexts: string[] = [

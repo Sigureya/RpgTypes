@@ -36,13 +36,6 @@ export interface PluginStructEx<T extends object> {
     [K in keyof T]: StructParam;
   };
 }
-export interface PluginCommandBody {
-  desc?: string;
-  text?: string;
-  args: {
-    [key: string]: PrimitiveParam;
-  };
-}
 
 export interface PluginCommand<T extends object> {
   command: string;
