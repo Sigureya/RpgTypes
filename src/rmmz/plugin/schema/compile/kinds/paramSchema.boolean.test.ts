@@ -1,11 +1,11 @@
 import { describe, test, expect } from "vitest";
 import Ajv from "ajv";
 import type { BooleanParam } from "./core/primitiveParams";
-import { makeParamSchema } from "./paramSchema";
+import { makePluginParamSchema } from "./paramSchema";
 
 describe("RmmzParam_Boolean JSON Schema Validation", () => {
   const ajv = new Ajv({ strict: true, discriminator: true });
-  const schema = makeParamSchema();
+  const schema = makePluginParamSchema();
   const validate = ajv.compile(schema);
 
   describe("accepts valid KindOfBoolean values", () => {

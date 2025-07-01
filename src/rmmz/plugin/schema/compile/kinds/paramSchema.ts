@@ -33,7 +33,7 @@ const NUMBER_OPTIONAl = {
   nullable: true,
 } as const satisfies JSONSchemaType<number | null>;
 
-export const makeParamSchema = () =>
+export const makePluginParamSchema = () =>
   ({
     type: "object",
     discriminator: {
@@ -115,8 +115,8 @@ const rmmzSchemaNumberArrayParam = () =>
         default: [],
       },
       decimals: { type: "integer", minimum: 0, default: 0, nullable: true },
-      min: { type: "number", nullable: true },
-      max: { type: "number", nullable: true },
+      min: NUMBER_OPTIONAl,
+      max: NUMBER_OPTIONAl,
       desc: BASIC_TEXT,
       text: BASIC_TEXT,
       parent: BASIC_TEXT,

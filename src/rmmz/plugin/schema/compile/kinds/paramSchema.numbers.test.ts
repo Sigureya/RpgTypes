@@ -1,7 +1,7 @@
 import { describe, test, expect } from "vitest";
 import Ajv from "ajv";
 import type { NumberParam, NumberArrayParam } from "./core/primitiveParams";
-import { makeParamSchema } from "./paramSchema";
+import { makePluginParamSchema } from "./paramSchema";
 
 type NumberParamBase = Omit<NumberParam, "kind" | "default">;
 
@@ -73,7 +73,7 @@ const undefinedData = <
 
 describe("number", () => {
   const ajv = new Ajv({ strict: true, discriminator: true });
-  const schema = makeParamSchema();
+  const schema = makePluginParamSchema();
   const validate = ajv.compile(schema);
   describe("accepts valid KindOfNumber values", () => {
     test("fullset KindOfNumber data", () => {
@@ -170,7 +170,7 @@ describe("number", () => {
 
 describe("KindOfNumberArray parameter validation", () => {
   const ajv = new Ajv({ strict: true, discriminator: true });
-  const schema = makeParamSchema();
+  const schema = makePluginParamSchema();
   const validate = ajv.compile(schema);
   describe("accepts valid KindOfNumberArray values", () => {
     test("with empty default array", () => {

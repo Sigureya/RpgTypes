@@ -1,11 +1,11 @@
 import { describe, test, expect } from "vitest";
 import Ajv from "ajv";
 import type { StringParam } from "./core/primitiveParams";
-import { makeParamSchema } from "./paramSchema";
+import { makePluginParamSchema } from "./paramSchema";
 
 describe("rmmzSchemaStringParam", () => {
   const ajv = new Ajv({ strict: true, discriminator: true });
-  const validate = ajv.compile(makeParamSchema());
+  const validate = ajv.compile(makePluginParamSchema());
 
   describe("valid cases", () => {
     test("validates string parameter with default value", () => {

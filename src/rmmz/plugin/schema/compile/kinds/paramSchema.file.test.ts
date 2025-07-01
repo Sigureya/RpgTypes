@@ -1,11 +1,11 @@
 import { describe, test, expect } from "vitest";
 import Ajv from "ajv";
 import type { FileParam, FileArrayParam } from "./core/primitiveParams";
-import { makeParamSchema } from "./paramSchema";
+import { makePluginParamSchema } from "./paramSchema";
 
 describe("RmmzParam_File JSON Schema Validation", () => {
   const ajv = new Ajv({ strict: true, discriminator: true });
-  const schema = makeParamSchema();
+  const schema = makePluginParamSchema();
   const validate = ajv.compile(schema);
 
   describe("valid cases", () => {

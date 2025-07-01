@@ -28,37 +28,24 @@ type UnionSchema = DiscriminatedUnionSchemaType3<
 export type X_ParamDataId = X_RmmzParam<SourceIdentifier, "dataId">;
 export type X_ParamNumber = X_ParamData<Omit<NumberParam, "min" | "max">>;
 
-interface NullableString {
-  type: "string";
-  nullable: true;
-  maxLength: 100;
-}
+const nullablString = {
+  type: "string",
+  nullable: true,
+  maxLength: 100,
+} as const satisfies JSONSchemaType<string | null>;
 
-const parentSchema = () =>
-  ({
-    type: "string",
-    nullable: true,
-    maxLength: 100,
-    default: "",
-  } as const satisfies JSONSchemaType<string | null>);
-
-export const makeSchema3 = () => {
-  const nullablString = {
-    type: "string",
-    nullable: true,
-    maxLength: 100,
-  } as const satisfies JSONSchemaType<string | null>;
+export const makeRpgParamMetaSchema = () => {
   return {
     type: "object",
     discriminator: {
       propertyName: "kind",
     },
     oneOf: [
-      stringKind(nullablString),
+      stringKind(),
       numberKind(),
       dataIdKind(),
       selectKind(),
-      booleanKind(nullablString),
+      booleanKind(),
       comboKind(),
     ],
   } as const satisfies UnionSchema;
@@ -71,7 +58,7 @@ const numberKind = () =>
     additionalProperties: false,
     properties: {
       kind: { type: "string", const: "number" },
-      parent: parentSchema(),
+      parent: nullablString,
       data: {
         type: "object",
         properties: {
@@ -86,7 +73,7 @@ const numberKind = () =>
     },
   } satisfies JSONSchemaType<X_ParamNumber>);
 
-const stringKind = (nullablString: NullableString) =>
+const stringKind = () =>
   ({
     type: "object",
     required: ["kind"],
@@ -101,14 +88,14 @@ const stringKind = (nullablString: NullableString) =>
     },
   } as const satisfies JSONSchemaType<X_ParamData<StringParam>>);
 
-const booleanKind = (nullablString: NullableString) =>
+const booleanKind = () =>
   ({
     type: "object",
     required: ["kind", "data"],
     additionalProperties: false,
     properties: {
       kind: { type: "string", const: "boolean" },
-      parent: parentSchema(),
+      parent: nullablString,
       data: {
         type: "object",
         properties: {
@@ -127,7 +114,7 @@ const dataIdKind = () => {
     additionalProperties: false,
     properties: {
       kind: { type: "string", const: "dataId" },
-      parent: { type: "string", maxLength: 100, default: "", nullable: true },
+      parent: nullablString,
       data: {
         additionalProperties: false,
         type: "object",
@@ -149,7 +136,7 @@ const selectKind = () =>
     additionalProperties: false,
     properties: {
       kind: { type: "string", const: "select" },
-      parent: { type: "string", nullable: true, maxLength: 100 },
+      parent: nullablString,
       data: {
         type: "object",
         required: ["options"],
@@ -178,7 +165,7 @@ const comboKind = () =>
     additionalProperties: false,
     properties: {
       kind: { type: "string", const: "combo" },
-      parent: { type: "string", nullable: true, maxLength: 100 },
+      parent: nullablString,
       data: {
         type: "object",
         required: ["options"],
