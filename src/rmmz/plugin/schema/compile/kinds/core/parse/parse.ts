@@ -1,5 +1,5 @@
 import { flashCurrentItem, withTexts } from "./flashState";
-import type { OptionsState, ParseState } from "./internalTypes";
+import type { ParseState } from "./internalTypes";
 import {
   KEYWORD_TEXT,
   KEYWORD_DESC,
@@ -24,8 +24,13 @@ import {
   KEYWORD_URL,
 } from "./keyword/constants";
 import type { KeywordEnum } from "./keyword/types";
-import { addOption, addValue } from "./option";
-import { handleBase, handleOrderAfter, handleOrderBefore } from "./state";
+import {
+  handleBase,
+  handleOption,
+  handleOrderAfter,
+  handleOrderBefore,
+  handleValue,
+} from "./state";
 import type { ParsedPlugin, PluginCommandTokens, PluginMeta } from "./types";
 
 export const parsePlugin = (text: string) => {
@@ -209,33 +214,6 @@ const addField = (
     }
   }
   return state;
-};
-
-const handleOption = (state: ParseState, value: string): ParseState => {
-  if (!state.currentParam) {
-    return state;
-  }
-
-  const newOption: OptionsState = addOption(
-    state.currentOption ?? { items: [] },
-    value
-  );
-
-  return {
-    ...state,
-    currentOption: newOption,
-  };
-};
-
-const handleValue = (state: ParseState, value: string): ParseState => {
-  if (!state.currentOption) {
-    return state;
-  }
-  const newOption: OptionsState = addValue(state.currentOption, value);
-  return {
-    ...state,
-    currentOption: newOption,
-  };
 };
 
 const addMetaField = (
