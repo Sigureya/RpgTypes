@@ -16,7 +16,6 @@ export type JSONSchemaTypeWithRpgParam<
 };
 
 type ExtractParamData<T> = Omit<T, "default" | keyof ParamBase>;
-
 export type X_ParamData<T extends ParamBase> = X_RmmzParam<
   ExtractParamData<T>,
   T extends { kind: infer K } ? K : string
@@ -28,7 +27,8 @@ export interface X_RmmzParamBase {
   data: object;
 }
 
-export interface X_RmmzParam<T, Kind extends string = string> {
+export interface X_RmmzParam<T extends object, Kind extends string = string>
+  extends X_RmmzParamBase {
   kind: Kind;
   parent?: string | null;
   data: T;
