@@ -1,7 +1,10 @@
 import { describe, test, expect } from "vitest";
 import Ajv from "ajv";
 import type { SourceIdentifier } from "src/namedItemSource";
-import type { X_RmmzParam } from "./core/paramBase/x-rpg-param";
+import type {
+  X_RmmzParam,
+  X_RmmzParamBase,
+} from "./core/paramBase/x-rpg-param";
 import type { X_ParamDataId } from "./x-rpg-param-schema";
 import { makeRpgParamMetaSchema } from "./x-rpg-param-schema";
 
@@ -65,7 +68,7 @@ describe("", () => {
       expect(invalidData).not.toSatisfy(validator);
     });
     test("", () => {
-      const invalidData: X_RmmzParam<undefined, "dataId"> = {
+      const invalidData: Record<keyof X_RmmzParamBase, unknown> = {
         kind: "dataId",
         parent: "p",
         data: undefined,
@@ -73,7 +76,7 @@ describe("", () => {
       expect(invalidData).not.toSatisfy(validator);
     });
     test("", () => {
-      const invalidData: X_RmmzParam<string, "dataId"> = {
+      const invalidData: Record<keyof X_RmmzParamBase, unknown> = {
         kind: "dataId",
         parent: "p",
         data: "a.m.k", // should be SourceIdentifier
