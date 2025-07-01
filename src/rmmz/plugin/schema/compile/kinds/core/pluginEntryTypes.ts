@@ -1,6 +1,4 @@
-import type { PluginCommandBody } from "./pluginEntriesEx";
 import type { PrimitiveStructParams } from "./pluginSchemaType";
-import type { PrimitiveParam } from "./primitiveParams";
 
 export interface PluginStructType<T extends object> {
   struct: string;
@@ -24,13 +22,4 @@ export interface PluginType {
   commands: PluginCommandType<object>[];
   structs: PluginStructType<object>[];
   params: PrimitiveStructParams<object>;
-}
-export interface PluginJSON {
-  target: string;
-  meta: Record<string, string>;
-  commands: Record<string, PluginCommandBody>;
-  params: Record<string, PrimitiveParam>;
-  dependencies?: {
-    [key: string]: string;
-  };
 }

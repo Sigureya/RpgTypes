@@ -5,8 +5,7 @@ import type {
   PluginCommandTokens,
   PluginParamTokens,
 } from "./parse/types";
-import type { PluginCommandBody } from "./pluginEntriesEx";
-import type { PluginJSON } from "./pluginEntryTypes";
+import type { PluginCommandBody, PluginJSON } from "./pluginJSONTypes";
 import type { PrimitiveParam } from "./primitiveParams";
 
 export interface PluginParam {
