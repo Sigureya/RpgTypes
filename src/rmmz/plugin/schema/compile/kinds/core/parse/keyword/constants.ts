@@ -31,3 +31,5 @@ export const KEYWORD_ARG = "arg" as const;
 export const KEYWORD_BASE = "base" as const;
 export const KEYWORD_ORDERAFTER = "orderAfter" as const;
 export const KEYWORD_ORDERBEFORE = "orderBefore" as const;
+
+export const KEYWORD_STRUCT = "struct" as const;
