@@ -261,7 +261,7 @@ const addMetaField = (
 ): ParseState => {
   return {
     ...state,
-    meta: { ...state.meta, [key]: value },
+    meta: { [key]: value, ...state.meta },
   };
 };
 
