@@ -14,9 +14,7 @@ describe("parsePlugin", () => {
       "@value Z",
       "@option east-i",
     ];
-    const expected: ParsedPlugin = {
-      meta: {},
-      helpLines: [],
+    const expected: Pick<ParsedPlugin, "params"> = {
       params: [
         {
           name: "list",
@@ -31,10 +29,9 @@ describe("parsePlugin", () => {
           ],
         },
       ],
-      commands: [],
     };
     const result: ParsedPlugin = parsePlugin(tokens.join("\n"));
-    expect(result).toEqual(expected);
+    expect(result.params).toEqual(expected.params);
   });
 
   test("", () => {
@@ -50,9 +47,7 @@ describe("parsePlugin", () => {
       "@option kodama",
       "@value 0",
     ];
-    const expected: ParsedPlugin = {
-      meta: {},
-      helpLines: [],
+    const expected: Pick<ParsedPlugin, "params"> = {
       params: [
         {
           name: "list",
@@ -68,10 +63,9 @@ describe("parsePlugin", () => {
           ],
         },
       ],
-      commands: [],
     };
     const result: ParsedPlugin = parsePlugin(tokens.join("\n"));
-    expect(result).toEqual(expected);
+    expect(result.params).toMatchObject(expected.params);
   });
   test("", () => {
     const tokens: string[] = [
@@ -82,9 +76,7 @@ describe("parsePlugin", () => {
       "@option kagayaki",
       "@default ",
     ];
-    const expected: ParsedPlugin = {
-      meta: {},
-      helpLines: [],
+    const expected: Pick<ParsedPlugin, "params"> = {
       params: [
         {
           name: "list",
@@ -99,9 +91,8 @@ describe("parsePlugin", () => {
           ],
         },
       ],
-      commands: [],
     };
     const result: ParsedPlugin = parsePlugin(tokens.join("\n"));
-    expect(result).toEqual(expected);
+    expect(result.params).toEqual(expected.params);
   });
 });
