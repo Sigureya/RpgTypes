@@ -4,3 +4,6 @@ export const structName = (value: string): string => {
   }
   return "";
 };
+export const typeIsStruct = (value: string): value is `struct<${string}>` => {
+  return value.endsWith(">") && value.startsWith("struct<");
+};
