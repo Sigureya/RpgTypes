@@ -32,13 +32,14 @@ import {
   handleOrderBefore,
   handleValue,
 } from "./state";
+import { typeIsStruct } from "./struct";
 import type { ParsedPlugin, PluginCommandTokens, PluginMeta } from "./types";
 
 export const parsePlugin = (text: string) => {
   return parsePluginCore(text, KEYWORD_FUNC_TABLE);
 };
 
-export const parsePluginCore = (
+const parsePluginCore = (
   text: string,
   table: Record<string, (state: ParseState, value: string) => ParseState>
 ): ParsedPlugin => {
@@ -198,7 +199,7 @@ const handleArgContext = (state: ParseState, value: string): ParseState => {
   };
 };
 const handlerType = (state: ParseState, value: string): ParseState => {
-  if (value.endsWith(">") && value.startsWith("struct<")) {
+  if (typeIsStruct(value)) {
     const structName = value.slice(7, -1);
     const addSturct = addField(state, KEYWORD_STRUCT, structName);
     return addField(addSturct, KEYWORD_KIND, KEYWORD_STRUCT);
