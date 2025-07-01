@@ -22,6 +22,7 @@ import {
   KEYWORD_AUTHOR,
   KEYWORD_PLUGINDESC,
   KEYWORD_URL,
+  KEYWORD_STRUCT,
 } from "./keyword/constants";
 import type { KeywordEnum } from "./keyword/types";
 import {
@@ -31,13 +32,14 @@ import {
   handleOrderBefore,
   handleValue,
 } from "./state";
+import { typeIsStruct } from "./struct";
 import type { ParsedPlugin, PluginCommandTokens, PluginMeta } from "./types";
 
 export const parsePlugin = (text: string) => {
   return parsePluginCore(text, KEYWORD_FUNC_TABLE);
 };
 
-export const parsePluginCore = (
+const parsePluginCore = (
   text: string,
   table: Record<string, (state: ParseState, value: string) => ParseState>
 ): ParsedPlugin => {
@@ -196,6 +198,17 @@ const handleArgContext = (state: ParseState, value: string): ParseState => {
     },
   };
 };
+const handlerType = (state: ParseState, value: string): ParseState => {
+  if (typeIsStruct(value)) {
+    const structName = value.slice(7, -1);
+    const addSturct = addField(state, KEYWORD_STRUCT, structName);
+    return addField(addSturct, KEYWORD_KIND, KEYWORD_STRUCT);
+  }
+  if (state.currentParam) {
+    return addField(state, KEYWORD_KIND, value);
+  }
+  return state;
+};
 
 const addField = (
   state: ParseState,
@@ -236,7 +249,7 @@ const KEYWORD_FUNC_TABLE = {
   [KEYWORD_HELP]: handleHelpContext,
   [KEYWORD_OPTION]: handleOption,
   [KEYWORD_VALUE]: handleValue,
-  [KEYWORD_TYPE]: (state, value) => addField(state, KEYWORD_KIND, value),
+  [KEYWORD_TYPE]: handlerType,
   [KEYWORD_DEFAULT]: (state, value) => addField(state, KEYWORD_DEFAULT, value),
   [KEYWORD_ON]: (state, value) => addField(state, KEYWORD_ON, value),
   [KEYWORD_OFF]: (state, value) => addField(state, KEYWORD_OFF, value),
