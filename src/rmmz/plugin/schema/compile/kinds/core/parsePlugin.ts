@@ -6,6 +6,7 @@ import type {
   PluginParamTokens,
 } from "./parse/types";
 import type { PluginCommandBody } from "./pluginEntriesEx";
+import type { PluginJSON } from "./pluginEntryTypes";
 import type { PrimitiveParam } from "./primitiveParams";
 
 export interface PluginParam {
@@ -17,11 +18,12 @@ export const parsePlugin = (text: string) => {
   return compilePlugin(parse(text));
 };
 
-const compilePlugin = (parsedPlugin: ParsedPlugin) => {
+const compilePlugin = (parsedPlugin: ParsedPlugin): PluginJSON => {
   return {
+    target: "MZ",
     meta: parsedPlugin.meta,
-    params: reduceParams(parsedPlugin.params),
     commands: reduceCommands(parsedPlugin.commands),
+    params: reduceParams(parsedPlugin.params),
   };
 };
 
