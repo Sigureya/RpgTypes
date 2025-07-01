@@ -1,6 +1,6 @@
 import { addBasePlugin, addOrderAfter, addOrderBefore } from "./dependencies";
 import { flashCurrentItem, withTexts } from "./flashState";
-import type { OptionsState, ParseState } from "./internalTypes";
+import type { OptionsState, ParseState, PluginMeta } from "./internalTypes";
 import {
   KEYWORD_TEXT,
   KEYWORD_DESC,
@@ -20,6 +20,9 @@ import {
   KEYWORD_BASE,
   KEYWORD_ORDERAFTER,
   KEYWORD_ORDERBEFORE,
+  KEYWORD_AUTHOR,
+  KEYWORD_PLUGINDESC,
+  KEYWORD_URL,
 } from "./keyword/constants";
 import type { KeywordEnum } from "./keyword/types";
 import { addOption, addValue } from "./option";
@@ -60,7 +63,7 @@ export const parsePluginCore = (
   return {
     params: finalState.params,
     commands: finalState.commands,
-    meta: {},
+    meta: finalState.meta,
     helpLines: finalState.helpLines,
   };
 };
@@ -78,6 +81,7 @@ const makeParseState = (): ParseState => ({
     orderBefore: [],
     orderAfter: [],
   },
+  meta: {},
 });
 
 const handleHelpContext = (oldstate: ParseState): ParseState => {
@@ -250,6 +254,17 @@ const handleOrderBefore = (state: ParseState, value: string): ParseState => {
   };
 };
 
+const addMetaField = (
+  state: ParseState,
+  key: keyof PluginMeta,
+  value: string
+): ParseState => {
+  return {
+    ...state,
+    meta: { ...state.meta, [key]: value },
+  };
+};
+
 const KEYWORD_FUNC_TABLE = {
   [KEYWORD_PARAM]: handleParamContext,
   [KEYWORD_TEXT]: handleText,
@@ -268,6 +283,9 @@ const KEYWORD_FUNC_TABLE = {
   [KEYWORD_BASE]: handleBase,
   [KEYWORD_ORDERAFTER]: handleOrderAfter,
   [KEYWORD_ORDERBEFORE]: handleOrderBefore,
+  [KEYWORD_AUTHOR]: (state, val) => addMetaField(state, KEYWORD_AUTHOR, val),
+  [KEYWORD_PLUGINDESC]: (s, val) => addMetaField(s, KEYWORD_PLUGINDESC, val),
+  [KEYWORD_URL]: (state, val) => addMetaField(state, KEYWORD_URL, val),
 } as const satisfies {
   [K in KeywordEnum]?: (state: ParseState, value: string) => ParseState;
 };

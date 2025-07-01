@@ -1,4 +1,5 @@
 import type { PluginDependencies } from "./dependencies";
+import type { PluginMeta } from "./internalTypes";
 import type { KeywordEnum } from "./keyword/types";
 import type { OptionItem } from "./selectOption";
 
@@ -18,7 +19,7 @@ export interface PluginCommandTokens {
 }
 
 export interface ParsedPlugin {
-  meta: Record<string, string>;
+  meta: Partial<PluginMeta>;
   params: PluginParamTokens[];
   commands: PluginCommandTokens[];
   helpLines: string[];

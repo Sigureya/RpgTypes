@@ -2,6 +2,7 @@ export const KEYWORD_TARGET = "target" as const;
 export const KEYWORD_PLUGINDESC = "plugindesc" as const;
 export const KEYWORD_AUTHOR = "author" as const;
 export const KEYWORD_HELP = "help" as const;
+export const KEYWORD_URL = "url" as const;
 
 export const KEYWORD_KIND = "kind" as const;
 export const KEYWORD_TYPE = "type" as const;
