@@ -5,11 +5,13 @@ import type { ParsedPlugin, PluginParamTokens } from "./types";
 describe("parsePlugin", () => {
   test("should parse parameters correctly", () => {
     const mockTexts: string[] = [
+      "/*:",
       "@param data",
       "@type number",
       "@min 0",
       "@max 200",
       "@default 123",
+      "*/",
     ];
     const result: ParsedPlugin = parsePlugin(mockTexts.join("\n"));
 
@@ -27,7 +29,13 @@ describe("parsePlugin", () => {
     expect(result.params).toEqual(expected);
   });
   test("should parse parameters correctly", () => {
-    const mockTexts: string[] = ["@param data", "@type string", "@default "];
+    const mockTexts: string[] = [
+      "/*:",
+      "@param data",
+      "@type string",
+      "@default ",
+      "*/",
+    ];
     const result: ParsedPlugin = parsePlugin(mockTexts.join("\n"));
 
     const expected: PluginParamTokens[] = [

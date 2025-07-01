@@ -5,6 +5,7 @@ import type { ParsedPlugin, PluginCommandTokens } from "./types";
 describe("parsePlugin", () => {
   test("", () => {
     const mockTexts: string[] = [
+      "/*:",
       "@command save",
       "@text writeSave",
       "@desc write Save File",
@@ -16,6 +17,7 @@ describe("parsePlugin", () => {
       "@arg arg2",
       "@type string",
       "@default abc",
+      "*/",
     ];
     const result: ParsedPlugin = parsePlugin(mockTexts.join("\n"));
     const expected: PluginCommandTokens = {
@@ -44,6 +46,7 @@ describe("parsePlugin", () => {
   });
   test("should parse multiple commands correctly", () => {
     const mockTexts: string[] = [
+      "/*:",
       "@command save",
       "@text writeSave",
       "@desc write Save File",
@@ -57,6 +60,7 @@ describe("parsePlugin", () => {
       "@arg arg2",
       "@type string",
       "@default abc",
+      "*/",
     ];
     const result: ParsedPlugin = parsePlugin(mockTexts.join("\n"));
     const expected: PluginCommandTokens[] = [
@@ -93,6 +97,7 @@ describe("parsePlugin", () => {
   });
   test("command name duplicate", () => {
     const mockTexts: string[] = [
+      "/*:",
       "@command save",
       "@text writeSave",
       "@desc write Save File",
@@ -106,6 +111,7 @@ describe("parsePlugin", () => {
       "@arg arg2",
       "@type string",
       "@default abc",
+      "*/",
     ];
     const result: ParsedPlugin = parsePlugin(mockTexts.join("\n"));
     const expected: PluginCommandTokens[] = [

@@ -7,6 +7,7 @@ import type {
 } from "./types";
 
 const mockTexts: string[] = [
+  "/*:",
   "@command save",
   "@arg arg1",
   "@type number",
@@ -24,6 +25,7 @@ const mockTexts: string[] = [
   "@param data",
   "@type number",
   "@default 123",
+  "*/",
 ];
 
 describe("parsePlugin", () => {

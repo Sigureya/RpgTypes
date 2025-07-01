@@ -1,3 +1,5 @@
+import type { Block, PlguinBodyBlock } from "./block";
+import { splitBlock } from "./block";
 import { flashCurrentItem, withTexts } from "./flashState";
 import type { ParseState } from "./internalTypes";
 import {
@@ -36,16 +38,21 @@ import { typeIsStruct } from "./struct";
 import type { ParsedPlugin, PluginCommandTokens, PluginMeta } from "./types";
 
 export const parsePlugin = (text: string) => {
-  return parsePluginCore(text, KEYWORD_FUNC_TABLE);
+  return parsePluginCore2(text, KEYWORD_FUNC_TABLE);
 };
 
-const parsePluginCore = (
-  text: string,
-  table: Record<string, (state: ParseState, value: string) => ParseState>
-): ParsedPlugin => {
-  const lines = text.split(/\r?\n/);
+const getBody = (block: Block): PlguinBodyBlock | undefined => {
+  if (block.bodies.length === 0) {
+    return undefined;
+  }
+  return block.bodies[0];
+};
 
-  const state = lines.reduce<ParseState>((acc, line) => {
+const xxxBody = (
+  body: PlguinBodyBlock,
+  table: Record<string, (state: ParseState, value: string) => ParseState>
+): ParseState => {
+  const state = body.lines.reduce<ParseState>((acc, line) => {
     const trimmed = line.trim().replace(/^\*\s?/, "");
     if (!trimmed.startsWith("@")) {
       if (acc.currentContext === KEYWORD_HELP) {
@@ -65,8 +72,26 @@ const parsePluginCore = (
     }
     return acc;
   }, makeParseState());
+  return flashCurrentItem(state);
+};
 
-  const finalState: ParseState = flashCurrentItem(state);
+const parsePluginCore2 = (
+  text: string,
+  table: Record<string, (state: ParseState, value: string) => ParseState>
+): ParsedPlugin => {
+  const blocks: Block = splitBlock(text);
+  const body = getBody(blocks);
+  if (!body) {
+    return {
+      params: [],
+      commands: [],
+      meta: {},
+      helpLines: [],
+      structs: [],
+    };
+  }
+
+  const finalState = xxxBody(body, table);
   return {
     params: finalState.params,
     commands: finalState.commands,

@@ -4,6 +4,8 @@ import type { PluginCommandBody } from "./pluginJSONTypes";
 import type { PrimitiveParam } from "./primitiveParams";
 
 const mockTexts: string[] = [
+  "/*:",
+
   "@param bool",
   "@type boolean",
   "@text autoBattle",
@@ -38,6 +40,7 @@ const mockTexts: string[] = [
   "* @default abc",
   "@help",
   "This is a mock plugin for testing.",
+  "*/",
 ];
 
 describe("parsePlugin", () => {
