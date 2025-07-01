@@ -1,11 +1,11 @@
 import { describe, test, expect } from "vitest";
 import Ajv from "ajv";
 import type { SelectParam } from "./core/primitiveParams";
-import { makeParamSchema } from "./paramSchema";
+import { makePluginParamSchema } from "./paramSchema";
 
 describe("select", () => {
   const ajv = new Ajv({ strict: false, discriminator: true });
-  const schema = makeParamSchema();
+  const schema = makePluginParamSchema();
   const validate = ajv.compile(schema);
   describe("accepts valid KindOfSelect values", () => {
     test("valid full set data", () => {

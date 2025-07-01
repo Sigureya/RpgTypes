@@ -4,12 +4,12 @@ import type {
   StructRefParam,
   StructArrayRefParam,
 } from "./core/primitiveParams";
-import { makeParamSchema } from "./paramSchema";
+import { makePluginParamSchema } from "./paramSchema";
 const ajv = new Ajv({
   strict: true,
   discriminator: true,
 });
-const schema = makeParamSchema();
+const schema = makePluginParamSchema();
 const validate = ajv.compile(schema);
 
 interface Person {

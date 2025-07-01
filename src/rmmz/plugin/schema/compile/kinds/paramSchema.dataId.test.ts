@@ -2,7 +2,7 @@ import { describe, test, expect } from "vitest";
 import Ajv from "ajv";
 import type { RpgDataIdParam } from "./core/primitiveParams";
 import type { DataKind_RpgUnion } from "./core/rpgData/rpgDataTypesNames";
-import { makeParamSchema } from "./paramSchema";
+import { makePluginParamSchema } from "./paramSchema";
 
 const makeDataParam = (param: Partial<RpgDataIdParam>): RpgDataIdParam => {
   return {
@@ -21,7 +21,7 @@ interface TestCase {
 const testFn = ({ dataKind }: TestCase) => {
   describe(`${dataKind} JSON Schema Validation`, () => {
     const ajv = new Ajv({ strict: true, discriminator: true });
-    const schema = makeParamSchema();
+    const schema = makePluginParamSchema();
     const validate = ajv.compile(schema);
     test(`valid case`, () => {
       const mock: RpgDataIdParam = makeDataParam({
