@@ -1,4 +1,3 @@
-import { addBasePlugin, addOrderAfter, addOrderBefore } from "./dependencies";
 import { flashCurrentItem, withTexts } from "./flashState";
 import type { OptionsState, ParseState } from "./internalTypes";
 import {
@@ -26,6 +25,7 @@ import {
 } from "./keyword/constants";
 import type { KeywordEnum } from "./keyword/types";
 import { addOption, addValue } from "./option";
+import { handleBase, handleOrderAfter, handleOrderBefore } from "./state";
 import type { ParsedPlugin, PluginCommandTokens, PluginMeta } from "./types";
 
 export const parsePlugin = (text: string) => {
@@ -235,24 +235,6 @@ const handleValue = (state: ParseState, value: string): ParseState => {
   return {
     ...state,
     currentOption: newOption,
-  };
-};
-
-const handleBase = (state: ParseState, value: string): ParseState => {
-  return { ...state, dependencies: addBasePlugin(state.dependencies, value) };
-};
-
-const handleOrderAfter = (state: ParseState, value: string): ParseState => {
-  return {
-    ...state,
-    dependencies: addOrderAfter(state.dependencies, value),
-  };
-};
-
-const handleOrderBefore = (state: ParseState, value: string): ParseState => {
-  return {
-    ...state,
-    dependencies: addOrderBefore(state.dependencies, value),
   };
 };
 
