@@ -1,6 +1,6 @@
 import { describe, test, expect } from "vitest";
 import { parsePlugin } from "./parse";
-import type { PluginParamTokens } from "./types";
+import type { PluginParamTokens, StructParseState } from "./types";
 
 describe("parsePlugin", () => {
   describe("structs", () => {
@@ -27,6 +27,9 @@ describe("parsePlugin", () => {
     ];
     const result = parsePlugin(tokens.join("\n"));
     test("commands is empty", () => {
+      expect(result.commands).toEqual([]);
+    });
+    test("params is empty", () => {
       const expected: PluginParamTokens[] = [
         {
           name: "num",
@@ -41,10 +44,23 @@ describe("parsePlugin", () => {
           },
         },
       ];
-      expect(result.commands).toEqual(expected);
+      expect(result.params).toEqual(expected);
     });
-    test("params is empty", () => {
-      expect(result.params).toEqual([]);
+    test("structs is defined", () => {
+      const struct: StructParseState = {
+        name: "Person",
+        params: [
+          {
+            name: "name",
+            attr: { kind: "string", default: "bob", desc: "This is the name" },
+          },
+          {
+            name: "age",
+            attr: { kind: "number", default: "20" },
+          },
+        ],
+      };
+      expect(result.structs).toEqual([struct]);
     });
   });
 });
