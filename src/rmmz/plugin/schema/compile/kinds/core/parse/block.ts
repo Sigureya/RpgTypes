@@ -5,7 +5,7 @@ export interface Block {
 
 export interface PlguinStructBlock {
   locale?: string;
-  struct?: string;
+  struct: string;
   lines: string[];
 }
 
@@ -17,41 +17,20 @@ export interface PlguinBodyBlock {
 interface BlockState {
   structs: PlguinStructBlock[];
   bodies: PlguinBodyBlock[];
-  inStruct: boolean;
   structName?: string;
   locale?: string;
-  structLines: string[];
-  inBody: boolean;
-  bodyLines: string[];
+  lines: string[];
+  blockType?:
+    | typeof BLCOK_BODY
+    | typeof BLCOK_STRUCT
+    | typeof BLOCK_INVALID
+    | typeof BLOCK_NONE;
 }
 
-const handleBlockEnd = (state: BlockState): BlockState => {
-  if (state.inStruct) {
-    return {
-      ...state,
-      structs: state.structs.concat([
-        {
-          struct: state.structName,
-          locale: state.locale,
-          lines: [...state.structLines],
-        },
-      ]),
-      inStruct: false,
-      structName: undefined,
-      locale: undefined,
-      structLines: [],
-    };
-  }
-  if (state.inBody) {
-    return {
-      ...state,
-      bodies: state.bodies.concat([{ lines: [...state.bodyLines] }]),
-      inBody: false,
-      bodyLines: [],
-    };
-  }
-  return state;
-};
+const BLCOK_BODY = "BODY" as const;
+const BLCOK_STRUCT = "STRUCT" as const;
+const BLOCK_INVALID = "INVALID" as const;
+const BLOCK_NONE = "NONE" as const;
 
 export const splitBlock = (block: string): Block => {
   const lines = block.split("\n");
@@ -59,12 +38,11 @@ export const splitBlock = (block: string): Block => {
   const initialState: BlockState = {
     structs: [],
     bodies: [],
-    inStruct: false,
     structName: undefined,
     locale: undefined,
-    structLines: [],
-    inBody: false,
-    bodyLines: [],
+    lines: [],
+
+    blockType: BLOCK_NONE,
   };
 
   const finalState = lines.reduce<BlockState>((state, line) => {
@@ -74,55 +52,74 @@ export const splitBlock = (block: string): Block => {
     );
 
     if (structMatch) {
-      // flush body if needed
-      const bodies =
-        state.inBody && state.bodyLines.length > 0
-          ? state.bodies.concat([{ lines: [...state.bodyLines] }])
-          : state.bodies;
+      // flush previous block
+      const flushed = state.lines.length > 0 ? handleBlockEnd(state) : state;
+      // struct名が空文字の場合はstructNameをundefinedにする
+      const structName = structMatch[1] || undefined;
       return {
-        ...state,
-        bodies,
-        inStruct: true,
-        structName: structMatch[1],
+        ...flushed,
+        structName,
+        blockType: structName ? BLCOK_STRUCT : BLOCK_INVALID,
         locale: structMatch[2],
-        structLines: [],
-        inBody: false,
-        bodyLines: [],
+        lines: [],
       };
     }
     if (trimmed === "/*:") {
-      // flush body if needed
-      const bodies =
-        state.inBody && state.bodyLines.length > 0
-          ? state.bodies.concat([{ lines: [...state.bodyLines] }])
-          : state.bodies;
+      // flush previous block
+      const flushed = state.lines.length > 0 ? handleBlockEnd(state) : state;
       return {
-        ...state,
-        bodies,
-        inBody: true,
-        bodyLines: [],
+        ...flushed,
+        blockType: BLCOK_BODY,
+        structName: undefined,
+        locale: undefined,
+        lines: [],
       };
     }
     if (trimmed === "*/") {
-      return handleBlockEnd(state);
+      return state.lines.length > 0 ? handleBlockEnd(state) : state;
     }
-    if (state.inStruct) {
-      return {
-        ...state,
-        structLines: state.structLines.concat([trimmed]),
-      };
-    }
-    if (state.inBody) {
-      return {
-        ...state,
-        bodyLines: state.bodyLines.concat([trimmed]),
-      };
-    }
-    return state;
+    return {
+      ...state,
+      lines: state.lines.concat([trimmed]),
+    };
   }, initialState);
 
   return {
     structs: finalState.structs,
     bodies: finalState.bodies,
+  };
+};
+const handleBlockEnd = (state: BlockState): BlockState => {
+  if (state.blockType === BLCOK_BODY) {
+    return {
+      ...state,
+      bodies: state.bodies.concat([{ lines: [...state.lines] }]),
+      lines: [],
+      blockType: BLOCK_NONE,
+    };
+  }
+
+  if (state.structName && state.blockType === BLCOK_STRUCT) {
+    return {
+      ...state,
+      structs: state.structs.concat([
+        {
+          struct: state.structName,
+          locale: state.locale,
+          lines: [...state.lines],
+        },
+      ]),
+      blockType: BLOCK_NONE,
+      structName: undefined,
+      locale: undefined,
+      lines: [],
+    };
+  }
+
+  return {
+    ...state,
+    blockType: BLOCK_NONE,
+    structName: undefined,
+    lines: [],
   };
 };
