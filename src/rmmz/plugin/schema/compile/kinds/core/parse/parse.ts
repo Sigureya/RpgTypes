@@ -1,4 +1,4 @@
-import type { Block, PlguinBodyBlock } from "./block";
+import type { Block, PlguinBodyBlock, PlguinStructBlock } from "./block";
 import { splitBlock } from "./block";
 import { flashCurrentItem, withTexts } from "./flashState";
 import type { ParseState } from "./internalTypes";
@@ -35,7 +35,12 @@ import {
   handleValue,
 } from "./state";
 import { typeIsStruct } from "./struct";
-import type { ParsedPlugin, PluginCommandTokens, PluginMeta } from "./types";
+import type {
+  ParsedPlugin,
+  PluginCommandTokens,
+  PluginMeta,
+  StructParseState,
+} from "./types";
 
 export const parsePlugin = (text: string) => {
   return parsePluginCore2(text, KEYWORD_FUNC_TABLE);
@@ -75,11 +80,20 @@ const xxxBody = (
   return flashCurrentItem(state);
 };
 
+const makeStruct = (body: PlguinStructBlock): StructParseState => {
+  const state = xxxBody(body, KEYWORD_FUNC_TABLE);
+  return {
+    name: body.struct,
+    params: state.params,
+  };
+};
+
 const parsePluginCore2 = (
   text: string,
   table: Record<string, (state: ParseState, value: string) => ParseState>
 ): ParsedPlugin => {
   const blocks: Block = splitBlock(text);
+  const structs = blocks.structs.map((s) => makeStruct(s));
   const body = getBody(blocks);
   if (!body) {
     return {
@@ -87,7 +101,7 @@ const parsePluginCore2 = (
       commands: [],
       meta: {},
       helpLines: [],
-      structs: [],
+      structs: structs,
     };
   }
 
@@ -97,7 +111,7 @@ const parsePluginCore2 = (
     commands: finalState.commands,
     meta: finalState.meta,
     helpLines: finalState.helpLines,
-    structs: [],
+    structs: structs,
   };
 };
 
@@ -115,7 +129,6 @@ const makeParseState = (): ParseState => ({
     orderAfter: [],
   },
   meta: {},
-  structs: [],
 });
 
 const handleHelpContext = (oldstate: ParseState): ParseState => {
