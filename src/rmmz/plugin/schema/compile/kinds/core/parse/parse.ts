@@ -1,4 +1,4 @@
-import type { Block, PlguinBodyBlock } from "./block";
+import type { Block, PlguinBodyBlock, PlguinStructBlock } from "./block";
 import { splitBlock } from "./block";
 import { flashCurrentItem, withTexts } from "./flashState";
 import type { ParseState } from "./internalTypes";
@@ -11,16 +11,9 @@ import {
   KEYWORD_MIN,
   KEYWORD_MAX,
   KEYWORD_PARAM,
-  KEYWORD_COMMAND,
   KEYWORD_ARG,
-  KEYWORD_TYPE,
   KEYWORD_HELP,
   KEYWORD_KIND,
-  KEYWORD_OPTION,
-  KEYWORD_VALUE,
-  KEYWORD_BASE,
-  KEYWORD_ORDERAFTER,
-  KEYWORD_ORDERBEFORE,
   KEYWORD_AUTHOR,
   KEYWORD_PLUGINDESC,
   KEYWORD_URL,
@@ -35,10 +28,15 @@ import {
   handleValue,
 } from "./state";
 import { typeIsStruct } from "./struct";
-import type { ParsedPlugin, PluginCommandTokens, PluginMeta } from "./types";
+import type {
+  ParsedPlugin,
+  PluginCommandTokens,
+  PluginMeta,
+  StructParseState,
+} from "./types";
 
 export const parsePlugin = (text: string) => {
-  return parsePluginCore2(text, KEYWORD_FUNC_TABLE);
+  return parsePluginCore(text, KEYWORD_FUNC_TABLE);
 };
 
 const getBody = (block: Block): PlguinBodyBlock | undefined => {
@@ -48,7 +46,7 @@ const getBody = (block: Block): PlguinBodyBlock | undefined => {
   return block.bodies[0];
 };
 
-const xxxBody = (
+const parseBodyBlock = (
   body: PlguinBodyBlock,
   table: Record<string, (state: ParseState, value: string) => ParseState>
 ): ParseState => {
@@ -75,11 +73,20 @@ const xxxBody = (
   return flashCurrentItem(state);
 };
 
-const parsePluginCore2 = (
+const parseStructBlock = (body: PlguinStructBlock): StructParseState => {
+  const state = parseBodyBlock(body, KEYWORD_FUNC_TABLE);
+  return {
+    name: body.struct,
+    params: state.params,
+  };
+};
+
+const parsePluginCore = (
   text: string,
   table: Record<string, (state: ParseState, value: string) => ParseState>
 ): ParsedPlugin => {
   const blocks: Block = splitBlock(text);
+  const structs = blocks.structs.map((s) => parseStructBlock(s));
   const body = getBody(blocks);
   if (!body) {
     return {
@@ -87,17 +94,17 @@ const parsePluginCore2 = (
       commands: [],
       meta: {},
       helpLines: [],
-      structs: [],
+      structs: structs,
     };
   }
 
-  const finalState = xxxBody(body, table);
+  const finalState = parseBodyBlock(body, table);
   return {
     params: finalState.params,
     commands: finalState.commands,
     meta: finalState.meta,
     helpLines: finalState.helpLines,
-    structs: [],
+    structs: structs,
   };
 };
 
@@ -115,7 +122,6 @@ const makeParseState = (): ParseState => ({
     orderAfter: [],
   },
   meta: {},
-  structs: [],
 });
 
 const handleHelpContext = (oldstate: ParseState): ParseState => {
@@ -144,7 +150,7 @@ const handleParamContext = (
 
 const handleText = (state: ParseState, value: string): ParseState => {
   if (state.currentParam) {
-    return addField(state, KEYWORD_TEXT, value);
+    return addParamField(state, KEYWORD_TEXT, value);
   }
   if (state.currentCommand) {
     if (!(KEYWORD_TEXT in state.currentCommand)) {
@@ -164,7 +170,7 @@ const handleText = (state: ParseState, value: string): ParseState => {
 
 const handleDesc = (state: ParseState, value: string): ParseState => {
   if (state.currentParam) {
-    return addField(state, KEYWORD_DESC, value);
+    return addParamField(state, KEYWORD_DESC, value);
   }
   if (state.currentCommand) {
     return {
@@ -226,16 +232,16 @@ const handleArgContext = (state: ParseState, value: string): ParseState => {
 const handlerType = (state: ParseState, value: string): ParseState => {
   if (typeIsStruct(value)) {
     const structName = value.slice(7, -1);
-    const addSturct = addField(state, KEYWORD_STRUCT, structName);
-    return addField(addSturct, KEYWORD_KIND, KEYWORD_STRUCT);
+    const addSturct = addParamField(state, KEYWORD_STRUCT, structName);
+    return addParamField(addSturct, KEYWORD_KIND, KEYWORD_STRUCT);
   }
   if (state.currentParam) {
-    return addField(state, KEYWORD_KIND, value);
+    return addParamField(state, KEYWORD_KIND, value);
   }
   return state;
 };
 
-const addField = (
+const addParamField = (
   state: ParseState,
   key: string,
   value: string
@@ -266,26 +272,26 @@ const addMetaField = (
 };
 
 const KEYWORD_FUNC_TABLE = {
-  [KEYWORD_PARAM]: handleParamContext,
-  [KEYWORD_TEXT]: handleText,
-  [KEYWORD_DESC]: handleDesc,
-  [KEYWORD_COMMAND]: handleCommandContext,
-  [KEYWORD_ARG]: handleArgContext,
-  [KEYWORD_HELP]: handleHelpContext,
-  [KEYWORD_OPTION]: handleOption,
-  [KEYWORD_VALUE]: handleValue,
-  [KEYWORD_TYPE]: handlerType,
-  [KEYWORD_DEFAULT]: (state, value) => addField(state, KEYWORD_DEFAULT, value),
-  [KEYWORD_ON]: (state, value) => addField(state, KEYWORD_ON, value),
-  [KEYWORD_OFF]: (state, value) => addField(state, KEYWORD_OFF, value),
-  [KEYWORD_MIN]: (state, value) => addField(state, KEYWORD_MIN, value),
-  [KEYWORD_MAX]: (state, value) => addField(state, KEYWORD_MAX, value),
-  [KEYWORD_BASE]: handleBase,
-  [KEYWORD_ORDERAFTER]: handleOrderAfter,
-  [KEYWORD_ORDERBEFORE]: handleOrderBefore,
-  [KEYWORD_AUTHOR]: (state, val) => addMetaField(state, KEYWORD_AUTHOR, val),
-  [KEYWORD_PLUGINDESC]: (s, val) => addMetaField(s, KEYWORD_PLUGINDESC, val),
-  [KEYWORD_URL]: (state, val) => addMetaField(state, KEYWORD_URL, val),
+  param: handleParamContext,
+  text: handleText,
+  desc: handleDesc,
+  command: handleCommandContext,
+  arg: handleArgContext,
+  help: handleHelpContext,
+  option: handleOption,
+  value: handleValue,
+  type: handlerType,
+  default: (state, value) => addParamField(state, KEYWORD_DEFAULT, value),
+  on: (state, value) => addParamField(state, KEYWORD_ON, value),
+  off: (state, value) => addParamField(state, KEYWORD_OFF, value),
+  min: (state, value) => addParamField(state, KEYWORD_MIN, value),
+  max: (state, value) => addParamField(state, KEYWORD_MAX, value),
+  base: handleBase,
+  orderAfter: handleOrderAfter,
+  orderBefore: handleOrderBefore,
+  author: (state, val) => addMetaField(state, KEYWORD_AUTHOR, val),
+  plugindesc: (s, val) => addMetaField(s, KEYWORD_PLUGINDESC, val),
+  url: (state, val) => addMetaField(state, KEYWORD_URL, val),
 } as const satisfies {
   [K in KeywordEnum]?: (state: ParseState, value: string) => ParseState;
 };
