@@ -41,7 +41,6 @@ export const splitBlock = (block: string): Block => {
     structName: undefined,
     locale: undefined,
     lines: [],
-
     blockType: BLOCK_NONE,
   };
 
@@ -52,28 +51,10 @@ export const splitBlock = (block: string): Block => {
     );
 
     if (structMatch) {
-      // flush previous block
-      const flushed = state.lines.length > 0 ? handleBlockEnd(state) : state;
-      // struct名が空文字の場合はstructNameをundefinedにする
-      const structName = structMatch[1] || undefined;
-      return {
-        ...flushed,
-        structName,
-        blockType: structName ? BLCOK_STRUCT : BLOCK_INVALID,
-        locale: structMatch[2],
-        lines: [],
-      };
+      return handleStructMatch(state, structMatch);
     }
     if (trimmed === "/*:") {
-      // flush previous block
-      const flushed = state.lines.length > 0 ? handleBlockEnd(state) : state;
-      return {
-        ...flushed,
-        blockType: BLCOK_BODY,
-        structName: undefined,
-        locale: undefined,
-        lines: [],
-      };
+      return handleBlockStart(state);
     }
     if (trimmed === "*/") {
       return state.lines.length > 0 ? handleBlockEnd(state) : state;
@@ -87,6 +68,33 @@ export const splitBlock = (block: string): Block => {
   return {
     structs: finalState.structs,
     bodies: finalState.bodies,
+  };
+};
+
+const handleStructMatch = (
+  state: BlockState,
+  structMatch: RegExpMatchArray
+): BlockState => {
+  const flushed = state.lines.length > 0 ? handleBlockEnd(state) : state;
+  // struct名が空文字の場合はstructNameをundefinedにする
+  const structName = structMatch[1] || undefined;
+  return {
+    ...flushed,
+    structName,
+    blockType: structName ? BLCOK_STRUCT : BLOCK_INVALID,
+    locale: structMatch[2],
+    lines: [],
+  };
+};
+
+const handleBlockStart = (state: BlockState): BlockState => {
+  const flushed = state.lines.length > 0 ? handleBlockEnd(state) : state;
+  return {
+    ...flushed,
+    blockType: BLCOK_BODY,
+    structName: undefined,
+    locale: undefined,
+    lines: [],
   };
 };
 const handleBlockEnd = (state: BlockState): BlockState => {
