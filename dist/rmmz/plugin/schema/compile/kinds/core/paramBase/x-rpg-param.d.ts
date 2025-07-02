@@ -18,7 +18,7 @@ export interface X_RmmzParamBase {
     parent?: string | null;
     data: object;
 }
-export interface X_RmmzParam<T, Kind extends string = string> {
+export interface X_RmmzParam<T extends object, Kind extends string = string> extends X_RmmzParamBase {
     kind: Kind;
     parent?: string | null;
     data: T;

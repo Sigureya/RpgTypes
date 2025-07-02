@@ -1,9 +1,9 @@
-export declare const makeParamSchema: () => {
-    type: "object";
-    discriminator: {
-        propertyName: "kind";
+export declare const makePluginParamSchema: () => {
+    readonly type: "object";
+    readonly discriminator: {
+        readonly propertyName: "kind";
     };
-    oneOf: ({
+    readonly oneOf: [{
         readonly additionalProperties: false;
         readonly type: "object";
         readonly required: readonly ["kind", "default"];
@@ -42,7 +42,7 @@ export declare const makeParamSchema: () => {
                 readonly maxLength: 100;
             };
         };
-    } | {
+    }, {
         readonly additionalProperties: false;
         readonly type: "object";
         readonly required: readonly ["kind", "default", "options"];
@@ -79,7 +79,7 @@ export declare const makeParamSchema: () => {
                 readonly maxLength: 100;
             };
         };
-    } | {
+    }, {
         readonly additionalProperties: false;
         readonly type: "object";
         readonly required: readonly ["kind", "default"];
@@ -108,7 +108,7 @@ export declare const makeParamSchema: () => {
                 readonly maxLength: 100;
             };
         };
-    } | {
+    }, {
         readonly additionalProperties: false;
         readonly type: "object";
         readonly required: readonly ["kind", "default", "dir"];
@@ -143,7 +143,7 @@ export declare const makeParamSchema: () => {
                 readonly maxLength: 100;
             };
         };
-    } | {
+    }, {
         readonly additionalProperties: false;
         readonly type: "object";
         readonly required: readonly ["kind", "default", "dir"];
@@ -180,7 +180,7 @@ export declare const makeParamSchema: () => {
                 readonly maxLength: 100;
             };
         };
-    } | {
+    }, {
         readonly type: "object";
         readonly required: readonly ["kind", "default"];
         readonly properties: {
@@ -222,7 +222,7 @@ export declare const makeParamSchema: () => {
                 readonly maxLength: 100;
             };
         };
-    } | {
+    }, {
         readonly additionalProperties: false;
         readonly type: "object";
         readonly required: readonly ["kind", "default"];
@@ -269,7 +269,7 @@ export declare const makeParamSchema: () => {
                 readonly maxLength: 100;
             };
         };
-    } | {
+    }, {
         readonly additionalProperties: false;
         readonly type: "object";
         readonly required: readonly ["kind", "default", "options"];
@@ -319,7 +319,7 @@ export declare const makeParamSchema: () => {
                 readonly maxLength: 100;
             };
         };
-    } | {
+    }, {
         readonly additionalProperties: false;
         readonly type: "object";
         readonly required: readonly ["kind", "struct"];
@@ -355,7 +355,7 @@ export declare const makeParamSchema: () => {
                 readonly maxLength: 48;
             };
         };
-    } | {
+    }, {
         readonly additionalProperties: false;
         readonly type: "object";
         readonly required: readonly ["kind", "struct"];
@@ -394,7 +394,7 @@ export declare const makeParamSchema: () => {
                 readonly maxLength: 100;
             };
         };
-    } | {
+    }, {
         readonly additionalProperties: false;
         readonly type: "object";
         readonly required: readonly ["kind", "default"];
@@ -424,7 +424,7 @@ export declare const makeParamSchema: () => {
                 readonly maxLength: 100;
             };
         };
-    } | {
+    }, {
         readonly additionalProperties: false;
         readonly type: "object";
         readonly required: readonly ["kind", "default"];
@@ -458,5 +458,5 @@ export declare const makeParamSchema: () => {
                 readonly maxLength: 100;
             };
         };
-    })[];
+    }];
 };

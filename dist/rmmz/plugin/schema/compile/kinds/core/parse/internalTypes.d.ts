@@ -1,12 +1,13 @@
 import { PluginDependencies } from './dependencies';
 import { KeywordEnum } from './keyword/types';
 import { OptionItem } from './selectOption';
-import { PluginParamTokens, PluginCommandTokens } from './types';
+import { PluginParamTokens, PluginCommandTokens, PluginMeta } from './types';
 export interface OptionsState {
     items: OptionItem[];
     currentOption?: string;
 }
 export interface ParseState {
+    meta: Partial<PluginMeta>;
     helpLines: string[];
     params: PluginParamTokens[];
     commands: PluginCommandTokens[];
