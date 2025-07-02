@@ -16,9 +16,19 @@ export interface PluginCommandTokens {
     args: PluginParamTokens[];
 }
 export interface ParsedPlugin {
-    meta: Record<string, string>;
+    meta: Partial<PluginMeta>;
     params: PluginParamTokens[];
     commands: PluginCommandTokens[];
     helpLines: string[];
     dependencies?: PluginDependencies;
+    structs: StructParseState[];
+}
+export interface PluginMeta {
+    author: string;
+    plugindesc: string;
+    url: string;
+}
+export interface StructParseState {
+    name: string;
+    params: PluginParamTokens[];
 }
