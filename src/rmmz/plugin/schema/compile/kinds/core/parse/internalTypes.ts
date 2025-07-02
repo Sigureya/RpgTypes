@@ -5,7 +5,6 @@ import type {
   PluginParamTokens,
   PluginCommandTokens,
   PluginMeta,
-  StructParseState,
 } from "./types";
 
 export interface OptionsState {
@@ -23,5 +22,4 @@ export interface ParseState {
   currentContext: KeywordEnum | null;
   currentOption: OptionsState | null;
   dependencies: PluginDependencies;
-  structs: StructParseState[];
 }
