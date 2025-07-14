@@ -1,20 +1,13 @@
 import type { JSONSchemaType } from "ajv";
 import type { Damage } from "./members";
+import {
+  SCHEMA_POSITIVE_INTEGER,
+  SCHEMA_STRING,
+  SCHEMA_INTEGER,
+} from "./primitiveSchema/primitiveSchema";
 import type { Data_Item, Data_Skill, ItemEffect } from "./usableItems";
 
-const SCHEMA_STRING = {
-  type: "string",
-} as const satisfies JSONSchemaType<string>;
-
-const SCHEMA_INTEGER = {
-  type: "integer",
-} as const satisfies JSONSchemaType<number>;
-const SCHEMA_POSITIVE_INTEGER = {
-  type: "integer",
-  minimum: 0,
-} as const satisfies JSONSchemaType<number>;
-
-const SCHEMA_DAMATE = {
+export const SCHEMA_DAMATE = {
   type: "object",
   properties: {
     type: { type: "integer" },
@@ -27,7 +20,7 @@ const SCHEMA_DAMATE = {
   additionalProperties: false,
 } as const satisfies JSONSchemaType<Damage>;
 
-const SCHEMA_EFFECT = {
+export const SCHEMA_EFFECT = {
   type: "object",
   properties: {
     code: SCHEMA_INTEGER,

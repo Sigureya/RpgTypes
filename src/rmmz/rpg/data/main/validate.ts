@@ -1,5 +1,5 @@
 import Ajv from "ajv";
-import { SCHEMA_DATA_ITEM, SCHEMA_DATA_SKILL } from "./schema";
+import { SCHEMA_DATA_ITEM, SCHEMA_DATA_SKILL } from "./schema.usableItem";
 import type {
   Data_Actor,
   Data_Armor,
