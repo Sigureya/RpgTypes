@@ -77,7 +77,7 @@ const t = (e2, t2) => `\\${e2}[${t2}]`, a = (e2, a2) => a2.map((a3, r2) => ({ te
   required: ["name", "id", "expanded", "order", "parentId", "scrollX", "scrollY"],
   properties: { name: { type: "string" }, id: { type: "integer", minimum: 0 }, expanded: { type: "boolean" }, order: {
     type: "integer"
-  }, parentId: { type: "integer" }, scrollX: { type: "integer" }, scrollY: { type: "integer" } }
+  }, parentId: { type: "integer" }, scrollX: { type: "number" }, scrollY: { type: "number" } }
 }, da = {
   type: "object",
   required: ["image", "moveRoute", "conditions", "directionFix", "moveFrequency"],
