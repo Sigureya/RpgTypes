@@ -23,14 +23,14 @@ describe("Data_MapInfo", () => {
       expanded: true,
       order: 0,
       parentId: 0,
-      scrollX: 0,
-      scrollY: 0,
+      scrollX: 3.14,
+      scrollY: 33.4,
     };
-    expect(isValid(data)).toBe(true);
+    expect(data).toSatisfy(isValid);
   });
   test("", () => {
     const data: Data_MapInfo = makeMapInfoData();
-    expect(isValid(data)).toBe(true);
+    expect(data).toSatisfy(isValid);
   });
 
   test("should be invalid if required properties are missing", () => {
@@ -38,7 +38,7 @@ describe("Data_MapInfo", () => {
       name: "test",
       id: 1,
     };
-    expect(isValid(data)).toBe(false);
+    expect(data).not.toSatisfy(isValid);
   });
 });
 
@@ -53,20 +53,20 @@ describe("isDataMapInfo", () => {
       scrollY: 0,
       expanded: true,
     };
-    expect(isValid({ ...mapInfo, id: false })).toBe(false);
-    expect(isValid({ ...mapInfo, name: 123 })).toBe(false);
-    expect(isValid({ ...mapInfo, parentId: "0" })).toBe(false);
-    expect(isValid({ ...mapInfo, order: "0" })).toBe(false);
-    expect(isValid({ ...mapInfo, scrollX: "0" })).toBe(false);
-    expect(isValid({ ...mapInfo, scrollY: "0" })).toBe(false);
-    expect(isValid({ ...mapInfo, expanded: "true" })).toBe(false);
+    expect({ ...mapInfo, id: false }).not.toSatisfy(isValid);
+    expect({ ...mapInfo, name: 123 }).not.toSatisfy(isValid);
+    expect({ ...mapInfo, parentId: "0" }).not.toSatisfy(isValid);
+    expect({ ...mapInfo, order: "0" }).not.toSatisfy(isValid);
+    expect({ ...mapInfo, scrollX: "0" }).not.toSatisfy(isValid);
+    expect({ ...mapInfo, scrollY: "0" }).not.toSatisfy(isValid);
+    expect({ ...mapInfo, expanded: "true" }).not.toSatisfy(isValid);
   });
 
   test("should return false for invalid or incomplete objects", () => {
     const invalidMapInfo = { id: "invalid" }; // Invalid id
-    expect(isValid(invalidMapInfo)).toBe(false);
-    expect(isValid({})).toBe(false);
-    expect(isValid(null)).toBe(false);
-    expect(isValid(undefined)).toBe(false);
+    expect(invalidMapInfo).not.toSatisfy(isValid);
+    expect({}).not.toSatisfy(isValid);
+    expect(null).not.toSatisfy(isValid);
+    expect(undefined).not.toSatisfy(isValid);
   });
 });

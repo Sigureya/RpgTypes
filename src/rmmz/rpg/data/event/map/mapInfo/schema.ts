@@ -18,7 +18,7 @@ export const SCHEMA_DATA_MAP_INFO = {
     expanded: { type: "boolean" },
     order: { type: "integer" },
     parentId: { type: "integer" },
-    scrollX: { type: "integer" },
-    scrollY: { type: "integer" },
+    scrollX: { type: "number" },
+    scrollY: { type: "number" },
   },
 } as const satisfies JSONSchemaType<Data_MapInfo>;

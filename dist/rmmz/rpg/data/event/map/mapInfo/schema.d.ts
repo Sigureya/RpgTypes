@@ -19,10 +19,10 @@ export declare const SCHEMA_DATA_MAP_INFO: {
             readonly type: "integer";
         };
         readonly scrollX: {
-            readonly type: "integer";
+            readonly type: "number";
         };
         readonly scrollY: {
-            readonly type: "integer";
+            readonly type: "number";
         };
     };
 };
