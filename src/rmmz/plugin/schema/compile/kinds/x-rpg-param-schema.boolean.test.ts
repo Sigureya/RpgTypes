@@ -5,7 +5,11 @@ import type { BooleanParam } from "./core/primitiveParams";
 import { makeRpgParamMetaSchema } from "./x-rpg-param-schema";
 const makeValidator = () => {
   const schema = makeRpgParamMetaSchema();
-  const ajv = new Ajv({ discriminator: true, strict: true });
+  const ajv = new Ajv({
+    discriminator: true,
+    strict: true,
+    code: { source: true },
+  });
   return ajv.compile(schema);
 };
 

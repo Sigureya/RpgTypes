@@ -4,7 +4,11 @@ import type { FileParam, FileArrayParam } from "./core/primitiveParams";
 import { makePluginParamSchema } from "./paramSchema";
 
 describe("RmmzParam_File JSON Schema Validation", () => {
-  const ajv = new Ajv({ strict: true, discriminator: true });
+  const ajv = new Ajv({
+    strict: true,
+    discriminator: true,
+    code: { source: true },
+  });
   const schema = makePluginParamSchema();
   const validate = ajv.compile(schema);
 

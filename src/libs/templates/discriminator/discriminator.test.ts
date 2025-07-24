@@ -85,7 +85,7 @@ const mockSchema: DiscriminatedUnionSchemaType<
 };
 
 describe("DiscriminatedUnionSchemaType", () => {
-  const ajv = new Ajv({ strict: true });
+  const ajv = new Ajv({ strict: true, code: { source: true } });
   const validate = ajv.compile(mockSchema);
 
   test("valid Cat object (basic case)", () => {

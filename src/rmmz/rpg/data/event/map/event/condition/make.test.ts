@@ -3,7 +3,11 @@ import Ajv from "ajv";
 import type { MapEvent_PageCondition, PageConditionArg } from "./condition";
 import { makeEventPageCondition } from "./make";
 import { SCHEMA_MAP_EVENT_PAGE_CONDITION } from "./schema";
-const ajv = new Ajv();
+const ajv = new Ajv({
+  code: { source: true },
+  strict: true,
+  discriminator: true,
+});
 const validate = ajv.compile(SCHEMA_MAP_EVENT_PAGE_CONDITION);
 const isValid = (data: unknown): data is MapEvent_PageCondition => {
   return validate(data);

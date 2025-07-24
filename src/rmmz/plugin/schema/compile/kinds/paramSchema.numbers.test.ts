@@ -72,7 +72,11 @@ const undefinedData = <
 };
 
 describe("number", () => {
-  const ajv = new Ajv({ strict: true, discriminator: true });
+  const ajv = new Ajv({
+    strict: true,
+    discriminator: true,
+    code: { source: true },
+  });
   const schema = makePluginParamSchema();
   const validate = ajv.compile(schema);
   describe("accepts valid KindOfNumber values", () => {
@@ -169,7 +173,11 @@ describe("number", () => {
 });
 
 describe("KindOfNumberArray parameter validation", () => {
-  const ajv = new Ajv({ strict: true, discriminator: true });
+  const ajv = new Ajv({
+    strict: true,
+    discriminator: true,
+    code: { source: true },
+  });
   const schema = makePluginParamSchema();
   const validate = ajv.compile(schema);
   describe("accepts valid KindOfNumberArray values", () => {

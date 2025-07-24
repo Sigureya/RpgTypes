@@ -8,7 +8,11 @@ interface X_MetaParam_Shared {
 
 const makeValidator = () => {
   const schema = makeRpgParamMetaSchema();
-  const ajv = new Ajv({ discriminator: true, strict: true });
+  const ajv = new Ajv({
+    discriminator: true,
+    strict: true,
+    code: { source: true },
+  });
   return ajv.compile(schema);
 };
 
