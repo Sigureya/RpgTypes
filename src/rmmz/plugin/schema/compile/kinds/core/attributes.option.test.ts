@@ -54,7 +54,7 @@ describe("compileAttributes - combo", () => {
   });
 });
 
-describe.skip("compileAttributes - select", () => {
+describe("compileAttributes - select", () => {
   test("empty options", () => {
     const token: PluginParamTokens = {
       name: "attr",
