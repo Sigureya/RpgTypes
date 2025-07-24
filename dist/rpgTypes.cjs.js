@@ -94,7 +94,7 @@ const e = require("ajv"), t = (e2, t2) => `\\${e2}[${t2}]`, a = (e2 = {}) => ({
     } } }
   }
 }, n = new e({
-  code: { source: true },
+  code: { source: false },
   strict: true
 }), m = n.compile(o), p = n.compile(s), d = (e2, t2) => [l(e2.skills, t2), c(e2.actors, t2), u(e2.states, t2), y(e2.armors, t2), x(e2.classes, t2), g(e2.enemies, t2), E(e2.items, t2), A(e2.weapons, t2), T(e2.commonEvents, t2)], l = (e2, t2) => ({
   label: t2.skill.title,
@@ -626,7 +626,7 @@ const e = require("ajv"), t = (e2, t2) => `\\${e2}[${t2}]`, a = (e2 = {}) => ({
     type: "boolean"
   }, price: Fe, itypeId: Fe, effects: { type: "array", items: we }, damage: He }
 }, Ue = new e({
-  code: { source: true },
+  code: { source: false },
   strict: true
 }), qe = Ue.compile(Ge), Ve = Ue.compile(Be), je = Ue.compile(S), Ye = Ue.compile(R), We = Ue.compile(ue), ze = Ue.compile(f), Ke = Ue.compile(M), Xe = Ue.compile(C), $e = (e2, t2) => `<${e2}:${t2}>`, Ze = () => /<([^<>:]{1,100}):([^>]{1,1000})>/g, Je = (e2, t2) => {
   const a2 = /<([^<>:]{1,100}):([^>]{1,1000})>/g;
@@ -1096,7 +1096,7 @@ const e = require("ajv"), t = (e2, t2) => `\\${e2}[${t2}]`, a = (e2 = {}) => ({
   properties: { airship: Ma, boat: Ma, ship: Ma, advanced: Lt, attackMotions: { type: "array", items: Dt } }
 }, Pa = (e2) => e2.reduce((e3, t2) => ({ required: [...e3.required, ...t2.required], properties: { ...e3.properties, ...t2.properties } }), { required: [], properties: {} }), La = new e({
   strict: true,
-  code: { source: true }
+  code: { source: false }
 }), Da = ((e2) => {
   const t2 = Pa(e2);
   return { additionalProperties: false, type: "object", required: Array.from(new Set(t2.required)), properties: t2.properties };
@@ -1135,7 +1135,7 @@ const wa = La.compile(Kt), Ba = (e2) => ({
   AGI: 8,
   LUK: 9,
   TP: 10
-}, ar = (e2) => [...e2], rr = (e2) => "string" == typeof e2 || "number" == typeof e2 || "boolean" == typeof e2, or = new e({ code: { source: true }, strict: true }), ir = or.compile({
+}, ar = (e2) => [...e2], rr = (e2) => "string" == typeof e2 || "number" == typeof e2 || "boolean" == typeof e2, or = new e({ code: { source: false }, strict: true }), ir = or.compile({
   type: "object",
   required: ["code", "parameters", "indent"],
   properties: { code: { type: "integer", enum: [320, 324, 325] }, indent: { type: "integer" }, parameters: { type: "array", minItems: 2, maxItems: 2, items: [{
