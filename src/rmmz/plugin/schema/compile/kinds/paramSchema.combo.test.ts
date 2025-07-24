@@ -7,7 +7,7 @@ describe("rmmzSchemaComboParam", () => {
   const ajv = new Ajv({
     strict: true,
     discriminator: true,
-    code: { source: true },
+    code: { source: false },
   });
   const validate = ajv.compile(makePluginParamSchema());
 

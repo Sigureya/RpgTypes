@@ -4,7 +4,7 @@ import { makeMapInfoData } from "./make";
 import type { Data_MapInfo } from "./mapInfo";
 import { SCHEMA_DATA_MAP_INFO } from "./schema";
 
-const ajv = new Ajv({ code: { source: true }, strict: true });
+const ajv = new Ajv({ code: { source: false }, strict: true });
 const validate = ajv.compile(SCHEMA_DATA_MAP_INFO);
 const isValid = (data: unknown): data is Data_MapInfo => {
   return validate(data);

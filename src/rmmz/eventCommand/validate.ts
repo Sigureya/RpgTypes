@@ -28,7 +28,7 @@ import type {
   CommandUnion_TextBody,
 } from "./unionTypes";
 
-const ajv = new Ajv({ code: { source: true }, strict: true });
+const ajv = new Ajv({ code: { source: false }, strict: true });
 // schemaはindex.ts無しで直接importすること！
 // 過去に循環参照エラーで苦しんでます
 

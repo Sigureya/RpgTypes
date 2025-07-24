@@ -75,7 +75,7 @@ describe("number", () => {
   const ajv = new Ajv({
     strict: true,
     discriminator: true,
-    code: { source: true },
+    code: { source: false },
   });
   const schema = makePluginParamSchema();
   const validate = ajv.compile(schema);
@@ -176,7 +176,7 @@ describe("KindOfNumberArray parameter validation", () => {
   const ajv = new Ajv({
     strict: true,
     discriminator: true,
-    code: { source: true },
+    code: { source: false },
   });
   const schema = makePluginParamSchema();
   const validate = ajv.compile(schema);

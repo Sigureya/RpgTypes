@@ -6,7 +6,7 @@ import { SCHEMA_DATA_TROOP } from "./schema";
 import type { Data_Troop } from "./troop";
 
 const ajv = new Ajv({
-  code: { source: true },
+  code: { source: false },
   strict: true,
   discriminator: true,
 });

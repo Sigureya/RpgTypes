@@ -7,7 +7,7 @@ describe("select", () => {
   const ajv = new Ajv({
     strict: false,
     discriminator: true,
-    code: { source: true },
+    code: { source: false },
   });
   const schema = makePluginParamSchema();
   const validate = ajv.compile(schema);

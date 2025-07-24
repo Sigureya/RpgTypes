@@ -3,7 +3,7 @@ import { Ajv } from "ajv";
 import { SCHEMA_COMMAND_UNKNOWN } from "./schema";
 import type { EventCommandUnknown, EventCommandLike2 } from "./types";
 
-const ajv = new Ajv({ strict: true, code: { source: true } });
+const ajv = new Ajv({ strict: true, code: { source: false } });
 const cccc = ajv.compile(SCHEMA_COMMAND_UNKNOWN);
 
 const isCommandLike = (data: unknown): data is EventCommandUnknown => {
