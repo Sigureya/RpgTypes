@@ -3,7 +3,7 @@ import Ajv from "ajv";
 import { SCHEMA_SYSTEM_IMAGE_SIZE } from "./schema";
 import type { System_ImageSize } from "./types";
 
-const ajv = new Ajv({ code: { source: true }, strict: true });
+const ajv = new Ajv({ code: { source: false }, strict: true });
 const validate = ajv.compile(SCHEMA_SYSTEM_IMAGE_SIZE);
 describe("SCHEMA_SYSTEM_IMAGE_SIZE", () => {
   test("valid System_ImageSize passes validation", () => {

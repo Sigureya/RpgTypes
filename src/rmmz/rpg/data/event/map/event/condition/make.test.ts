@@ -4,7 +4,7 @@ import type { MapEvent_PageCondition, PageConditionArg } from "./condition";
 import { makeEventPageCondition } from "./make";
 import { SCHEMA_MAP_EVENT_PAGE_CONDITION } from "./schema";
 const ajv = new Ajv({
-  code: { source: true },
+  code: { source: false },
   strict: true,
   discriminator: true,
 });

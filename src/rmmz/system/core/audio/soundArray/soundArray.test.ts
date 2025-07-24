@@ -5,7 +5,7 @@ import { SCHEMA_SYSTEM_SOUND_ARRAY } from "./schema";
 import { makeSoundsArray, makeSoundsObject } from "./soundArray";
 import type { System_SoundsArray, System_SoundsObject } from "./types";
 
-const ajv = new Ajv({ code: { source: true } });
+const ajv = new Ajv({ code: { source: false } });
 const validate = ajv.compile(SCHEMA_SYSTEM_SOUND_ARRAY);
 
 describe("makeAudioFileParams default values", () => {

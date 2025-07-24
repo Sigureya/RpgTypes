@@ -19,7 +19,7 @@ import {
 import type { Data_Item, Data_Skill } from "./usableItems";
 
 const ajv = new Ajv({
-  code: { source: true },
+  code: { source: false },
   strict: true,
 });
 const item = ajv.compile(SCHEMA_DATA_ITEM);

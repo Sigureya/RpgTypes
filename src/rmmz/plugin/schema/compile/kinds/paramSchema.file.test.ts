@@ -7,7 +7,7 @@ describe("RmmzParam_File JSON Schema Validation", () => {
   const ajv = new Ajv({
     strict: true,
     discriminator: true,
-    code: { source: true },
+    code: { source: false },
   });
   const schema = makePluginParamSchema();
   const validate = ajv.compile(schema);

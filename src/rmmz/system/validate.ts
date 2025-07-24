@@ -9,7 +9,7 @@ import { SCHEMA_SYSTEM_TEST_BATTLER } from "./gameEdit/testPlay/schema";
 import { mergeSystemSchema, allSystemSchema } from "./schemaMerge";
 import type { Data_System } from "./system";
 
-const ajv = new Ajv({ strict: true, code: { source: true } });
+const ajv = new Ajv({ strict: true, code: { source: false } });
 
 const schema = mergeSystemSchema(allSystemSchema());
 const systemValidate = ajv.compile(schema);

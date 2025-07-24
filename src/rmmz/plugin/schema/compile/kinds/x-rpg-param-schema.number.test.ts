@@ -8,7 +8,7 @@ const makeValidator = () => {
   const ajv = new Ajv({
     discriminator: true,
     strict: true,
-    code: { source: true },
+    code: { source: false },
   });
   return ajv.compile(schema);
 };
