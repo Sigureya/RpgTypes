@@ -4,7 +4,10 @@ import { makeBooleanOptions } from "./options";
 import { SCHEMA_SYSTEM_BOOLEAN_OPTIONS } from "./schema";
 import type { System_BooleanGameOptions } from "./types";
 
-const ajv = new Ajv();
+const ajv = new Ajv({
+  code: { source: true },
+  strict: true,
+});
 const isSystemBooleanOptions = ajv.compile(SCHEMA_SYSTEM_BOOLEAN_OPTIONS);
 const keys: ReadonlySet<keyof System_BooleanGameOptions> = new Set(
   SCHEMA_SYSTEM_BOOLEAN_OPTIONS.required
