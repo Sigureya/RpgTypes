@@ -5,7 +5,7 @@ import { SCHEMA_SYSTEM_SOUND_ARRAY } from "./schema";
 import { makeSoundsArray, makeSoundsObject } from "./soundArray";
 import type { System_SoundsArray, System_SoundsObject } from "./types";
 
-const ajv = new Ajv();
+const ajv = new Ajv({ code: { source: true } });
 const validate = ajv.compile(SCHEMA_SYSTEM_SOUND_ARRAY);
 
 describe("makeAudioFileParams default values", () => {
@@ -70,22 +70,22 @@ describe("makeSoundsArray and makeSoundsObject for each key", () => {
 describe("System_SoundsArray schema validation (length)", () => {
   test("invalid: array length is 1 (too short)", () => {
     const array = [makeAudioFileParams()];
-    expect(validate(array)).toBe(false);
+    expect(array).not.toSatisfy(validate);
   });
   test("invalid: array length is 0 (empty array)", () => {
-    expect(validate([])).toBe(false);
+    expect([]).not.toSatisfy(validate);
   });
   test("invalid: array length is 23 (too short)", () => {
     const arr = Array.from({ length: 23 }, () => makeAudioFileParams());
-    expect(validate(arr)).toBe(false);
+    expect(arr).not.toSatisfy(validate);
   });
   test("invalid: array length is 25 (too long)", () => {
     const arr = Array.from({ length: 25 }, () => makeAudioFileParams());
-    expect(validate(arr)).toBe(false);
+    expect(arr).not.toSatisfy(validate);
   });
   test("valid: array length is 24 (all default)", () => {
     const arr = Array.from({ length: 24 }, () => makeAudioFileParams());
-    expect(validate(arr)).toBe(true);
+    expect(arr).toSatisfy(validate);
   });
 });
 
@@ -96,19 +96,19 @@ describe("System_SoundsArray schema validation (property requirements)", () => {
       pitch: 100,
       pan: 0,
     }));
-    expect(validate(arr)).toBe(false);
+    expect(arr).not.toSatisfy(validate);
   });
   test("valid: only 'name' property present", () => {
     const arr = Array.from({ length: 24 }, () => ({
       name: "test",
     }));
-    expect(validate(arr)).toBe(true);
+    expect(arr).toSatisfy(validate);
   });
   test("invalid: additional property present", () => {
     const arr = Array.from({ length: 24 }, () => ({
       name: "test",
       foo: "bar",
     }));
-    expect(validate(arr)).toBe(false);
+    expect(arr).not.toSatisfy(validate);
   });
 });

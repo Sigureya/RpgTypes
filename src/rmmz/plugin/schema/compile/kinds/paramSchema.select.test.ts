@@ -4,7 +4,11 @@ import type { SelectParam } from "./core/primitiveParams";
 import { makePluginParamSchema } from "./paramSchema";
 
 describe("select", () => {
-  const ajv = new Ajv({ strict: false, discriminator: true });
+  const ajv = new Ajv({
+    strict: false,
+    discriminator: true,
+    code: { source: true },
+  });
   const schema = makePluginParamSchema();
   const validate = ajv.compile(schema);
   describe("accepts valid KindOfSelect values", () => {

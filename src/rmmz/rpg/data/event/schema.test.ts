@@ -5,7 +5,11 @@ import { COMMENT_HEAD } from "./map";
 import { SCHEMA_DATA_TROOP } from "./schema";
 import type { Data_Troop } from "./troop";
 
-const ajv = new Ajv();
+const ajv = new Ajv({
+  code: { source: true },
+  strict: true,
+  discriminator: true,
+});
 
 const troopSchema = ajv.compile(SCHEMA_DATA_TROOP);
 
@@ -16,7 +20,7 @@ const isDataTroop = (data: unknown): data is Data_Troop => {
 describe("", () => {
   test("", () => {
     const troop: Data_Troop = makeTroopData();
-    expect(isDataTroop(troop)).toBe(true);
+    expect(troop).toSatisfy(isDataTroop);
   });
   test("", () => {
     const troop = makeTroopData({
@@ -28,6 +32,6 @@ describe("", () => {
         },
       ],
     });
-    expect(isDataTroop(troop)).toBe(true);
+    expect(troop).toSatisfy(isDataTroop);
   });
 });

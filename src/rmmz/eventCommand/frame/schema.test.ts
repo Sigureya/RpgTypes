@@ -3,7 +3,7 @@ import { Ajv } from "ajv";
 import { SCHEMA_COMMAND_UNKNOWN } from "./schema";
 import type { EventCommandUnknown, EventCommandLike2 } from "./types";
 
-const ajv = new Ajv();
+const ajv = new Ajv({ strict: true, code: { source: true } });
 const cccc = ajv.compile(SCHEMA_COMMAND_UNKNOWN);
 
 const isCommandLike = (data: unknown): data is EventCommandUnknown => {
@@ -18,7 +18,7 @@ describe("isCommandLike", () => {
       indent: 0,
     };
 
-    expect(isCommandLike(validCommand)).toBe(true);
+    expect(validCommand).toSatisfy(isCommandLike);
   });
   test("returns true for valid EventCommandBase object", () => {
     const validCommand: EventCommandLike2<number, [number]> = {
@@ -27,17 +27,17 @@ describe("isCommandLike", () => {
       indent: 0,
     };
 
-    expect(isCommandLike(validCommand)).toBe(true);
+    expect(validCommand).toSatisfy(isCommandLike);
   });
 
   test("returns false for null input", () => {
-    expect(isCommandLike(null)).toBe(false);
+    expect(null).not.toSatisfy(isCommandLike);
   });
 
   test("returns false for non-object input", () => {
-    expect(isCommandLike(42)).toBe(false);
-    expect(isCommandLike("string")).toBe(false);
-    expect(isCommandLike(true)).toBe(false);
+    expect(42).not.toSatisfy(isCommandLike);
+    expect("string").not.toSatisfy(isCommandLike);
+    expect(true).not.toSatisfy(isCommandLike);
   });
 
   test("returns false for object with missing properties", () => {
@@ -79,8 +79,8 @@ describe("isCommandLike", () => {
       indent: "0",
     };
 
-    expect(isCommandLike(invalidCommand1)).toBe(false);
-    expect(isCommandLike(invalidCommand2)).toBe(false);
-    expect(isCommandLike(invalidCommand3)).toBe(false);
+    expect(invalidCommand1).not.toSatisfy(isCommandLike);
+    expect(invalidCommand2).not.toSatisfy(isCommandLike);
+    expect(invalidCommand3).not.toSatisfy(isCommandLike);
   });
 });

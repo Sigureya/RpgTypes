@@ -16,10 +16,10 @@ import {
 
 const testInvalidPattern = (fn: (data: unknown) => boolean) => {
   test("Invalid command", () => {
-    expect(fn(null)).toBe(false);
-    expect(fn(undefined)).toBe(false);
-    expect(fn({})).toBe(false);
-    expect(fn({ code: "INVALID_CODE" })).toBe(false);
+    expect(null).not.toSatisfy(fn);
+    expect(undefined).not.toSatisfy(fn);
+    expect({}).not.toSatisfy(fn);
+    expect({ code: "INVALID_CODE" }).not.toSatisfy(fn);
   });
 };
 
@@ -28,7 +28,7 @@ describe("isCommandCommonEvent", () => {
     const command: Command_CommonEvent = makeCommandCommonEvent({
       eventId: 1,
     });
-    expect(isCommandCommonEvent(command)).toBe(true);
+    expect(command).toSatisfy(isCommandCommonEvent);
   });
   testInvalidPattern(isCommandCommonEvent);
 });
@@ -42,7 +42,7 @@ describe("isCommandShowChoices", () => {
       positionType: 2,
       background: 0,
     });
-    expect(isCommandShowChoices(command)).toBe(true);
+    expect(command).toSatisfy(isCommandShowChoices);
   });
   testInvalidPattern(isCommandShowChoices);
 });
@@ -53,7 +53,7 @@ describe("isCommandShowChoiceItem", () => {
       index: 0,
       name: "Choice",
     });
-    expect(isCommandShowChoiceItem(command)).toBe(true);
+    expect(command).toSatisfy(isCommandShowChoiceItem);
   });
 
   testInvalidPattern(isCommandShowChoiceItem);
@@ -64,7 +64,7 @@ describe("isCommandInputNumber", () => {
       variableId: 1,
       digits: 2,
     });
-    expect(isCommandInputNumber(command)).toBe(true);
+    expect(command).toSatisfy(isCommandInputNumber);
   });
 
   testInvalidPattern(isCommandInputNumber);
@@ -77,7 +77,7 @@ describe("isCommandShowMessage", () => {
       facename: "Face",
       faceIndex: 0,
     });
-    expect(isCommandShowMessage(command)).toBe(true);
+    expect(command).toSatisfy(isCommandShowMessage);
   });
 
   testInvalidPattern(isCommandShowMessage);

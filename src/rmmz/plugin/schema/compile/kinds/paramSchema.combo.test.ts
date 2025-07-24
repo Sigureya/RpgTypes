@@ -4,7 +4,11 @@ import type { ComboParam } from "./core/primitiveParams";
 import { makePluginParamSchema } from "./paramSchema";
 
 describe("rmmzSchemaComboParam", () => {
-  const ajv = new Ajv({ strict: true, discriminator: true });
+  const ajv = new Ajv({
+    strict: true,
+    discriminator: true,
+    code: { source: true },
+  });
   const validate = ajv.compile(makePluginParamSchema());
 
   describe("valid cases", () => {

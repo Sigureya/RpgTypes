@@ -54,7 +54,7 @@ describe("compilePluginStruct - boolean", () => {
       });
     });
     describe("ajv validation", () => {
-      const ajv = new Ajv({ strict: true });
+      const ajv = new Ajv({ strict: true, code: { source: true } });
       const validate = ajv.compile(resultBool.schema);
       test("validates true value", () => {
         expect({ bool: true } satisfies MockBoolean).toSatisfy(validate);

@@ -3,7 +3,10 @@ import type { Data_MapInfo } from "./map";
 import { SCHEMA_DATA_MAP_INFO } from "./map";
 import { SCHEMA_DATA_MAP } from "./map/schema";
 
-const ajv = new Ajv();
+const ajv = new Ajv({
+  code: { source: true },
+  strict: true,
+});
 
 const mapInfo = ajv.compile(SCHEMA_DATA_MAP_INFO);
 
