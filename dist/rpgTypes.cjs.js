@@ -93,7 +93,10 @@ const e = require("ajv"), t = (e2, t2) => `\\${e2}[${t2}]`, a = (e2 = {}) => ({
       pages: { type: "array", items: i }
     } } }
   }
-}, n = new e(), m = n.compile(o), p = n.compile(s), d = (e2, t2) => [l(e2.skills, t2), c(e2.actors, t2), u(e2.states, t2), y(e2.armors, t2), x(e2.classes, t2), g(e2.enemies, t2), E(e2.items, t2), A(e2.weapons, t2), T(e2.commonEvents, t2)], l = (e2, t2) => ({
+}, n = new e({
+  code: { source: true },
+  strict: true
+}), m = n.compile(o), p = n.compile(s), d = (e2, t2) => [l(e2.skills, t2), c(e2.actors, t2), u(e2.states, t2), y(e2.armors, t2), x(e2.classes, t2), g(e2.enemies, t2), E(e2.items, t2), A(e2.weapons, t2), T(e2.commonEvents, t2)], l = (e2, t2) => ({
   label: t2.skill.title,
   items: e2,
   source: { author: "rmmz", module: "data", kind: "skill" }
@@ -622,7 +625,10 @@ const e = require("ajv"), t = (e2, t2) => `\\${e2}[${t2}]`, a = (e2 = {}) => ({
   properties: { name: Le, id: Fe, description: Le, iconIndex: Fe, note: Le, animationId: Fe, hitType: De, occasion: De, repeats: De, scope: De, speed: De, successRate: De, tpGain: De, consumable: {
     type: "boolean"
   }, price: Fe, itypeId: Fe, effects: { type: "array", items: we }, damage: He }
-}, Ue = new e(), qe = Ue.compile(Ge), Ve = Ue.compile(Be), je = Ue.compile(S), Ye = Ue.compile(R), We = Ue.compile(ue), ze = Ue.compile(f), Ke = Ue.compile(M), Xe = Ue.compile(C), $e = (e2, t2) => `<${e2}:${t2}>`, Ze = () => /<([^<>:]{1,100}):([^>]{1,1000})>/g, Je = (e2, t2) => {
+}, Ue = new e({
+  code: { source: true },
+  strict: true
+}), qe = Ue.compile(Ge), Ve = Ue.compile(Be), je = Ue.compile(S), Ye = Ue.compile(R), We = Ue.compile(ue), ze = Ue.compile(f), Ke = Ue.compile(M), Xe = Ue.compile(C), $e = (e2, t2) => `<${e2}:${t2}>`, Ze = () => /<([^<>:]{1,100}):([^>]{1,1000})>/g, Je = (e2, t2) => {
   const a2 = /<([^<>:]{1,100}):([^>]{1,1000})>/g;
   return Array.from(e2.matchAll(a2), (e3) => t2(e3[1], e3[2]));
 }, Qe = (e2) => [et(e2.elementRate), tt(e2.debuffRate), at(e2.stateRate), rt(e2.stateResist), ot(e2.regularParam), it(e2.extraParam), st(e2.specialParam), nt(e2.attackElement), mt(e2.attackState), pt(e2.attackSpeed), dt(e2.attackTimes), lt(e2.attackSkill), ct(e2.skillTypeAdd), ut(e2.skillTypeSeal), yt(e2.skillAdd), xt(e2.skillSeal), gt(e2.equipWeaponType), Et(e2.equipArmorType), At(e2.equipLock), Tt(e2.equipSeal), It(e2.slotType), _t(e2.actionPlus), bt(e2.specialFlag), St(e2.collaps), Rt(e2.partyAbility)], et = (e2) => ({
@@ -1088,7 +1094,10 @@ const e = require("ajv"), t = (e2, t2) => `\\${e2}[${t2}]`, a = (e2 = {}) => ({
   required: ["airship", "boat", "ship", "advanced", "attackMotions"],
   type: "object",
   properties: { airship: Ma, boat: Ma, ship: Ma, advanced: Lt, attackMotions: { type: "array", items: Dt } }
-}, Pa = (e2) => e2.reduce((e3, t2) => ({ required: [...e3.required, ...t2.required], properties: { ...e3.properties, ...t2.properties } }), { required: [], properties: {} }), La = new e({ strict: true }), Da = ((e2) => {
+}, Pa = (e2) => e2.reduce((e3, t2) => ({ required: [...e3.required, ...t2.required], properties: { ...e3.properties, ...t2.properties } }), { required: [], properties: {} }), La = new e({
+  strict: true,
+  code: { source: true }
+}), Da = ((e2) => {
   const t2 = Pa(e2);
   return { additionalProperties: false, type: "object", required: Array.from(new Set(t2.required)), properties: t2.properties };
 })([Oa, Bt, Gt, Vt, Wt, zt, Kt, $t, ya, Ca, Xt, ka]), Fa = La.compile(Da), Ha = La.compile(va);
@@ -1126,71 +1135,83 @@ const wa = La.compile(Kt), Ba = (e2) => ({
   AGI: 8,
   LUK: 9,
   TP: 10
-}, ar = (e2) => [...e2], rr = (e2) => "string" == typeof e2 || "number" == typeof e2 || "boolean" == typeof e2, or = new e(), ir = or.compile({
+}, ar = (e2) => [...e2], rr = (e2) => "string" == typeof e2 || "number" == typeof e2 || "boolean" == typeof e2, or = new e({ code: { source: true }, strict: true }), ir = or.compile({
   type: "object",
   required: ["code", "parameters", "indent"],
-  properties: { code: {
+  properties: { code: { type: "integer", enum: [320, 324, 325] }, indent: { type: "integer" }, parameters: { type: "array", minItems: 2, maxItems: 2, items: [{
     type: "integer",
-    enum: [320, 324, 325]
-  }, indent: { type: "integer" }, parameters: { type: "array", minItems: 2, maxItems: 2, items: [{ type: "integer", minimum: 0 }, { type: "string" }] } },
+    minimum: 0
+  }, { type: "string" }] } },
   additionalProperties: false
-}), sr = or.compile({ type: "object", properties: { code: { type: "number", const: 105 }, indent: { type: "integer", minimum: 0 }, parameters: {
-  type: "array",
-  minItems: 2,
-  maxItems: 2,
-  items: [{ type: "number" }, { type: "boolean" }]
-} }, required: ["code", "indent", "parameters"] }), nr = or.compile({
-  type: "object",
-  required: ["code", "parameters", "indent"],
-  properties: { code: {
-    type: "integer",
-    enum: [132, 133, 139, 241, 245, 249, 250]
-  }, indent: { type: "integer" }, parameters: { type: "array", minItems: 1, maxItems: 1, items: [{ type: "object", properties: {
-    name: { type: "string" },
-    volume: { type: "integer" },
-    pitch: { type: "integer" },
-    pan: { type: "integer" }
-  }, required: ["name", "volume", "pitch", "pan"], additionalProperties: false }] } },
-  additionalProperties: false
-}), mr = (e2) => nr(e2), pr = or.compile({ type: "object", required: ["code", "parameters", "indent"], properties: {
+}), sr = or.compile({ type: "object", properties: {
+  code: { type: "number", const: 105 },
   indent: { type: "integer", minimum: 0 },
-  parameters: { type: "array", minItems: 0, maxItems: 0 },
-  code: { type: "integer", enum: [0, 109, 112, 113, 115, 204, 206, 213, 214, 216, 217, 221, 222, 243, 244, 251, 314, 315, 340, 351, 352, 353, 354, 411] }
-}, additionalProperties: false }), dr = or.compile({
+  parameters: { type: "array", minItems: 2, maxItems: 2, items: [{ type: "number" }, { type: "boolean" }] }
+}, required: ["code", "indent", "parameters"] }), nr = or.compile({
   type: "object",
   required: ["code", "parameters", "indent"],
-  properties: { code: { type: "integer", enum: [108, 355, 401, 405, 408, 655] }, indent: { type: "integer", minimum: 0 }, parameters: {
+  properties: { code: { type: "integer", enum: [132, 133, 139, 241, 245, 249, 250] }, indent: { type: "integer" }, parameters: {
     type: "array",
     minItems: 1,
     maxItems: 1,
-    items: [{ type: "string" }]
+    items: [{
+      type: "object",
+      properties: { name: { type: "string" }, volume: { type: "integer" }, pitch: { type: "integer" }, pan: { type: "integer" } },
+      required: ["name", "volume", "pitch", "pan"],
+      additionalProperties: false
+    }]
   } },
   additionalProperties: false
-}), lr = (e2) => dr(e2), cr = or.compile({ type: "object", properties: { code: { type: "number", const: 117 }, indent: {
-  type: "integer",
-  minimum: 0
-}, parameters: { type: "array", minItems: 1, maxItems: 1, items: [{ type: "number", minimum: 0, default: 0 }] } }, required: ["code", "indent", "parameters"] }), ur = or.compile({ type: "object", properties: {
-  code: { type: "number", const: 102 },
-  indent: { type: "integer", minimum: 0 },
-  parameters: { type: "array", minItems: 5, maxItems: 5, items: [{ type: "array", items: { type: "string" } }, { type: "integer" }, {
-    type: "integer"
-  }, { type: "integer" }, { type: "integer" }] }
-}, required: ["code", "indent", "parameters"] }), yr = or.compile({ type: "object", properties: { code: { type: "number", const: 402 }, indent: {
-  type: "integer",
-  minimum: 0
-}, parameters: { type: "array", minItems: 2, maxItems: 2, items: [{ type: "integer" }, { type: "string" }] } }, required: ["code", "indent", "parameters"] }), xr = or.compile({
+}), mr = (e2) => nr(e2), pr = or.compile({
   type: "object",
-  properties: { code: { type: "number", const: 103 }, indent: { type: "integer", minimum: 0 }, parameters: { type: "array", minItems: 2, maxItems: 2, items: [{ type: "number" }, { type: "number" }] } },
-  required: ["code", "indent", "parameters"]
-}), gr = or.compile({ type: "object", required: ["code", "parameters", "indent"], properties: { code: { type: "integer", const: 101 }, indent: {
+  required: ["code", "parameters", "indent"],
+  properties: { indent: {
+    type: "integer",
+    minimum: 0
+  }, parameters: { type: "array", minItems: 0, maxItems: 0 }, code: { type: "integer", enum: [0, 109, 112, 113, 115, 204, 206, 213, 214, 216, 217, 221, 222, 243, 244, 251, 314, 315, 340, 351, 352, 353, 354, 411] } },
+  additionalProperties: false
+}), dr = or.compile({ type: "object", required: ["code", "parameters", "indent"], properties: { code: { type: "integer", enum: [108, 355, 401, 405, 408, 655] }, indent: {
   type: "integer",
   minimum: 0
-}, parameters: { type: "array", items: [{ type: "string" }, { type: "integer", minimum: 0, maximum: 7 }, { type: "integer", minimum: 0, maximum: 2 }, { type: "integer", minimum: 0, maximum: 2 }, {
-  type: "string"
-}], minItems: 5, maxItems: 5 } } }), Er = (e2, t2) => ({ type: "array", items: t2, ...Ar(e2), ...Tr(e2.default) }), Ar = (e2) => ({
-  ..."string" == typeof e2.text ? { title: e2.text } : {},
-  ..."string" == typeof e2.desc ? { description: e2.desc } : {}
-}), Tr = (e2) => void 0 !== e2 ? { default: e2 } : {}, Ir = (e2) => void 0 === e2 || 0 === e2, _r = (e2) => Er(e2, { type: "string" }), br = (e2) => {
+}, parameters: { type: "array", minItems: 1, maxItems: 1, items: [{ type: "string" }] } }, additionalProperties: false }), lr = (e2) => dr(e2), cr = or.compile({
+  type: "object",
+  properties: {
+    code: { type: "number", const: 117 },
+    indent: { type: "integer", minimum: 0 },
+    parameters: { type: "array", minItems: 1, maxItems: 1, items: [{ type: "number", minimum: 0, default: 0 }] }
+  },
+  required: ["code", "indent", "parameters"]
+}), ur = or.compile({
+  type: "object",
+  properties: { code: { type: "number", const: 102 }, indent: { type: "integer", minimum: 0 }, parameters: {
+    type: "array",
+    minItems: 5,
+    maxItems: 5,
+    items: [{ type: "array", items: { type: "string" } }, { type: "integer" }, { type: "integer" }, { type: "integer" }, { type: "integer" }]
+  } },
+  required: ["code", "indent", "parameters"]
+}), yr = or.compile({ type: "object", properties: { code: { type: "number", const: 402 }, indent: { type: "integer", minimum: 0 }, parameters: { type: "array", minItems: 2, maxItems: 2, items: [{
+  type: "integer"
+}, { type: "string" }] } }, required: ["code", "indent", "parameters"] }), xr = or.compile({ type: "object", properties: {
+  code: { type: "number", const: 103 },
+  indent: { type: "integer", minimum: 0 },
+  parameters: { type: "array", minItems: 2, maxItems: 2, items: [{ type: "number" }, { type: "number" }] }
+}, required: ["code", "indent", "parameters"] }), gr = or.compile({
+  type: "object",
+  required: ["code", "parameters", "indent"],
+  properties: { code: { type: "integer", const: 101 }, indent: { type: "integer", minimum: 0 }, parameters: { type: "array", items: [{ type: "string" }, {
+    type: "integer",
+    minimum: 0,
+    maximum: 7
+  }, { type: "integer", minimum: 0, maximum: 2 }, { type: "integer", minimum: 0, maximum: 2 }, { type: "string" }], minItems: 5, maxItems: 5 } }
+}), Er = (e2, t2) => ({
+  type: "array",
+  items: t2,
+  ...Ar(e2),
+  ...Tr(e2.default)
+}), Ar = (e2) => ({ ..."string" == typeof e2.text ? { title: e2.text } : {}, ..."string" == typeof e2.desc ? { description: e2.desc } : {} }), Tr = (e2) => void 0 !== e2 ? {
+  default: e2
+} : {}, Ir = (e2) => void 0 === e2 || 0 === e2, _r = (e2) => Er(e2, { type: "string" }), br = (e2) => {
   switch (e2.kind) {
     case "string":
     case "multiline_string":
@@ -1199,13 +1220,17 @@ const wa = La.compile(Kt), Ba = (e2) => ({
     case "combo":
       return ((e3) => ({ type: "string", ...Tr(e3.default), ...Ar(e3) }))(e2);
     case "select":
-      return ((e3) => ({ type: "string", ...Tr(e3.default), ...Ar(e3), ...e3.options ? { enum: e3.options.map((e4) => e4.value) } : {} }))(e2);
+      return ((e3) => ({ type: "string", ...Tr(e3.default), ...Ar(e3), ...e3.options ? {
+        enum: e3.options.map((e4) => e4.value)
+      } : {} }))(e2);
     case "file[]":
     case "string[]":
     case "multiline_string[]":
       return _r(e2);
     case "number[]":
-      return ((e3) => ({ type: "array", items: { type: Ir(e3.decimals) ? "integer" : "number" }, ...Tr(e3.default), ...Ar(e3) }))(e2);
+      return ((e3) => ({ type: "array", items: {
+        type: Ir(e3.decimals) ? "integer" : "number"
+      }, ...Tr(e3.default), ...Ar(e3) }))(e2);
     case "actor[]":
     case "weapon[]":
     case "armor[]":
@@ -1217,11 +1242,7 @@ const wa = La.compile(Kt), Ba = (e2) => ({
     case "troop[]":
       return ((e3) => Er(e3, { type: "integer" }))(e2);
     case "number":
-      return ((e3) => ({
-        type: Ir(e3.decimals) ? "integer" : "number",
-        ...Tr(e3.default),
-        ...Ar(e3)
-      }))(e2);
+      return ((e3) => ({ type: Ir(e3.decimals) ? "integer" : "number", ...Tr(e3.default), ...Ar(e3) }))(e2);
     case "actor":
     case "weapon":
     case "armor":
@@ -1231,11 +1252,7 @@ const wa = La.compile(Kt), Ba = (e2) => ({
     case "state":
     case "class":
     case "troop":
-      return ((e3) => ({
-        type: "integer",
-        ...Tr(e3.default),
-        ...Ar(e3)
-      }))(e2);
+      return ((e3) => ({ type: "integer", ...Tr(e3.default), ...Ar(e3) }))(e2);
     case "boolean":
       return ((e3) => ({ type: "boolean", ...Tr(e3.default), ...Ar(e3) }))(e2);
     case "struct":
