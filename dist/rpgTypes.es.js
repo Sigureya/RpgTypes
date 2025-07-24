@@ -151,7 +151,10 @@ const t = (e2, t2) => `\\${e2}[${t2}]`, a = (e2, a2) => a2.map((a3, r2) => ({ te
       pages: { type: "array", items: da }
     } } }
   }
-}, ua = new e(), ya = ua.compile(la), ga = ua.compile(ca), ba = (e2) => ya(e2), Ia = (e2) => ga(e2), fa = (e2, t2) => [ha(e2.skills, t2), va(e2.actors, t2), ka(e2.states, t2), xa(e2.armors, t2), Ta(e2.classes, t2), Sa(e2.enemies, t2), wa(e2.items, t2), Na(e2.weapons, t2), Pa(e2.commonEvents, t2)], ha = (e2, t2) => ({
+}, ua = new e({
+  code: { source: true },
+  strict: true
+}), ya = ua.compile(la), ga = ua.compile(ca), ba = (e2) => ya(e2), Ia = (e2) => ga(e2), fa = (e2, t2) => [ha(e2.skills, t2), va(e2.actors, t2), ka(e2.states, t2), xa(e2.armors, t2), Ta(e2.classes, t2), Sa(e2.enemies, t2), wa(e2.items, t2), Na(e2.weapons, t2), Pa(e2.commonEvents, t2)], ha = (e2, t2) => ({
   label: t2.skill.title,
   items: e2,
   source: { author: "rmmz", module: "data", kind: "skill" }
@@ -933,7 +936,10 @@ const t = (e2, t2) => `\\${e2}[${t2}]`, a = (e2, a2) => a2.map((a3, r2) => ({ te
   properties: { name: Gn, id: Yn, description: Gn, iconIndex: Yn, note: Gn, animationId: Yn, hitType: Xn, occasion: Xn, repeats: Xn, scope: Xn, speed: Xn, successRate: Xn, tpGain: Xn, consumable: {
     type: "boolean"
   }, price: Yn, itypeId: Yn, effects: { type: "array", items: $n }, damage: Kn }
-}, Zn = new e(), Jn = Zn.compile(Un), Qn = (e2) => Jn(e2), eo = Zn.compile(_n), to = (e2) => eo(e2), ao = Zn.compile(Ma), ro = (e2) => ao(e2), io = Zn.compile(Ea), no = (e2) => io(e2), oo = Zn.compile(Ji), mo = (e2) => oo(e2), so = Zn.compile(Ha), po = (e2) => so(e2), lo = Zn.compile(Oa), co = (e2) => lo(e2), uo = Zn.compile(Fa), yo = (e2) => uo(e2), go = (e2, t2) => `<${e2}:${t2}>`, bo = () => /<([^<>:]{1,100}):([^>]{1,1000})>/g, Io = (e2, t2) => ho(e2.note, (a2, r2) => t2(a2, r2, e2)), fo = (e2) => ho(e2, (e3, t2) => [e3, t2]), ho = (e2, t2) => {
+}, Zn = new e({
+  code: { source: true },
+  strict: true
+}), Jn = Zn.compile(Un), Qn = (e2) => Jn(e2), eo = Zn.compile(_n), to = (e2) => eo(e2), ao = Zn.compile(Ma), ro = (e2) => ao(e2), io = Zn.compile(Ea), no = (e2) => io(e2), oo = Zn.compile(Ji), mo = (e2) => oo(e2), so = Zn.compile(Ha), po = (e2) => so(e2), lo = Zn.compile(Oa), co = (e2) => lo(e2), uo = Zn.compile(Fa), yo = (e2) => uo(e2), go = (e2, t2) => `<${e2}:${t2}>`, bo = () => /<([^<>:]{1,100}):([^>]{1,1000})>/g, Io = (e2, t2) => ho(e2.note, (a2, r2) => t2(a2, r2, e2)), fo = (e2) => ho(e2, (e3, t2) => [e3, t2]), ho = (e2, t2) => {
   const a2 = /<([^<>:]{1,100}):([^>]{1,1000})>/g;
   return Array.from(e2.matchAll(a2), (e3) => t2(e3[1], e3[2]));
 }, vo = (e2, t2) => {
@@ -1537,7 +1543,10 @@ const t = (e2, t2) => `\\${e2}[${t2}]`, a = (e2, a2) => a2.map((a3, r2) => ({ te
   required: ["airship", "boat", "ship", "advanced", "attackMotions"],
   type: "object",
   properties: { airship: js, boat: js, ship: js, advanced: Im, attackMotions: { type: "array", items: fm } }
-}, Ls = (e2) => e2.reduce((e3, t2) => ({ required: [...e3.required, ...t2.required], properties: { ...e3.properties, ...t2.properties } }), { required: [], properties: {} }), Vs = new e({ strict: true }), Ws = ((e2) => {
+}, Ls = (e2) => e2.reduce((e3, t2) => ({ required: [...e3.required, ...t2.required], properties: { ...e3.properties, ...t2.properties } }), { required: [], properties: {} }), Vs = new e({
+  strict: true,
+  code: { source: true }
+}), Ws = ((e2) => {
   const t2 = Ls(e2);
   return { additionalProperties: false, type: "object", required: Array.from(new Set(t2.required)), properties: t2.properties };
 })([Hs, Sm, wm, Lm, Om, Xm, Ym, $m, cs, ws, Km, Ms]), Os = Vs.compile(Ws), Gs = (e2) => Os(e2), Xs = Vs.compile(Ds);
@@ -1699,33 +1708,33 @@ const Ys = Vs.compile(Ym), Ks = (e2) => {
   code: e2.code,
   indent: e2.indent,
   parameters: ll(e2.parameters)
-}), cl = (e2) => "string" == typeof e2 || "number" == typeof e2 || "boolean" == typeof e2, ul = (e2) => e2.parameters.every(cl), yl = new e(), gl = yl.compile({
+}), cl = (e2) => "string" == typeof e2 || "number" == typeof e2 || "boolean" == typeof e2, ul = (e2) => e2.parameters.every(cl), yl = new e({ code: { source: true }, strict: true }), gl = yl.compile({
   type: "object",
   required: ["code", "parameters", "indent"],
-  properties: { code: { type: "integer", enum: [320, 324, 325] }, indent: { type: "integer" }, parameters: { type: "array", minItems: 2, maxItems: 2, items: [{
-    type: "integer",
-    minimum: 0
-  }, { type: "string" }] } },
-  additionalProperties: false
-}), bl = (e2) => gl(e2), Il = yl.compile({ type: "object", properties: { code: { type: "number", const: 105 }, indent: {
-  type: "integer",
-  minimum: 0
-}, parameters: { type: "array", minItems: 2, maxItems: 2, items: [{ type: "number" }, { type: "boolean" }] } }, required: ["code", "indent", "parameters"] }), fl = (e2) => Il(e2), hl = yl.compile({
-  type: "object",
-  required: ["code", "parameters", "indent"],
-  properties: { code: { type: "integer", enum: [132, 133, 139, 241, 245, 249, 250] }, indent: { type: "integer" }, parameters: {
+  properties: { code: { type: "integer", enum: [320, 324, 325] }, indent: { type: "integer" }, parameters: {
     type: "array",
-    minItems: 1,
-    maxItems: 1,
-    items: [{
-      type: "object",
-      properties: { name: { type: "string" }, volume: { type: "integer" }, pitch: { type: "integer" }, pan: { type: "integer" } },
-      required: ["name", "volume", "pitch", "pan"],
-      additionalProperties: false
-    }]
+    minItems: 2,
+    maxItems: 2,
+    items: [{ type: "integer", minimum: 0 }, { type: "string" }]
   } },
   additionalProperties: false
-}), vl = (e2) => hl(e2), kl = yl.compile({
+}), bl = (e2) => gl(e2), Il = yl.compile({
+  type: "object",
+  properties: { code: { type: "number", const: 105 }, indent: {
+    type: "integer",
+    minimum: 0
+  }, parameters: { type: "array", minItems: 2, maxItems: 2, items: [{ type: "number" }, { type: "boolean" }] } },
+  required: ["code", "indent", "parameters"]
+}), fl = (e2) => Il(e2), hl = yl.compile({ type: "object", required: ["code", "parameters", "indent"], properties: {
+  code: { type: "integer", enum: [132, 133, 139, 241, 245, 249, 250] },
+  indent: { type: "integer" },
+  parameters: { type: "array", minItems: 1, maxItems: 1, items: [{
+    type: "object",
+    properties: { name: { type: "string" }, volume: { type: "integer" }, pitch: { type: "integer" }, pan: { type: "integer" } },
+    required: ["name", "volume", "pitch", "pan"],
+    additionalProperties: false
+  }] }
+}, additionalProperties: false }), vl = (e2) => hl(e2), kl = yl.compile({
   type: "object",
   required: ["code", "parameters", "indent"],
   properties: { indent: { type: "integer", minimum: 0 }, parameters: { type: "array", minItems: 0, maxItems: 0 }, code: {
