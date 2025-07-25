@@ -1,4 +1,5 @@
 import Ajv from "ajv";
+import SCHEMA_COMMAND_EMPTY_PARAM from "./commandEmptyParam.schema";
 import type {
   CommandUnion_ChangeActorText,
   Command_ScrollTextHeader,
@@ -17,16 +18,13 @@ import SCHEMA_COMMAND_SCROLL_TEXT_HEAD from "./commands/message/scrollText/head/
 import SCHEMA_COMMAND_SHOW_CHOICE_WHEN from "./commands/message/setupChoice/item/schema";
 import SCHEMA_COMMAND_SHOW_CHOICES from "./commands/message/setupChoice/schema";
 import SCHEMA_COMMAND_SHOW_MESSAGE from "./commands/message/showMessage/schema";
-import {
-  SCHEMA_COMMAND_EMPTY_PARAM,
-  SCHEMA_COMMAND_TEXT_BODY,
-} from "./unionSchema";
+import SCHEMA_COMMAND_TEXT_BODY from "./commandTextParam.schema";
 import type {
   CommandUnion_EmptyParam,
   CommandUnion_TextBody,
 } from "./unionTypes";
 
-const ajv = new Ajv({ code: { source: false }, strict: true });
+const ajv = new Ajv({ strict: true });
 // schemaはindex.ts無しで直接importすること！
 // 過去に循環参照エラーで苦しんでます
 
