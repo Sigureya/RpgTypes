@@ -1,4 +1,4 @@
-import type { EventCommand } from "./map";
+import type { EventCommand } from "./map/event/page";
 
 export interface Data_Troop {
   members: Troop_Member[];
