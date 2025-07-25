@@ -8,7 +8,7 @@ import type {
 } from "./event";
 import SCHEMA_MAP_EVENT_PAGE_CONDITION from "./event/condition/schema";
 import type { MoveRouteDataUnkwnown } from "./event/eventCommand/moveRoute";
-import { SCHEMA_MOVEROUTE_DATA } from "./event/eventCommand/moveRoute/schema";
+import SCHEMA_MOVEROUTE_DATA from "./event/eventCommand/moveRoute/schema";
 import type { Data_Map } from "./map";
 import type { Encounter } from "./members";
 

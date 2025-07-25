@@ -16,7 +16,7 @@ import SCHEMA_COMMAND_INPUT_NUMBER from "./commands/message/inputNumber/schema";
 import SCHEMA_COMMAND_SCROLL_TEXT_HEAD from "./commands/message/scrollText/head/schema";
 import SCHEMA_COMMAND_SHOW_CHOICE_WHEN from "./commands/message/setupChoice/item/schema";
 import SCHEMA_COMMAND_SHOW_CHOICES from "./commands/message/setupChoice/schema";
-import { SCHEMA_COMMAND_SHOW_MESSAGE } from "./commands/message/showMessage/schema";
+import SCHEMA_COMMAND_SHOW_MESSAGE from "./commands/message/showMessage/schema";
 import {
   SCHEMA_COMMAND_EMPTY_PARAM,
   SCHEMA_COMMAND_TEXT_BODY,
