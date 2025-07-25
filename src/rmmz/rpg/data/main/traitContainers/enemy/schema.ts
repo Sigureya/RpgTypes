@@ -3,7 +3,7 @@ import type { ParamArray } from "../members";
 import type { Trait } from "../trait";
 import type { Data_Enemy, DropItem, Enemy_Action } from "./types";
 
-export const SCHEMA_DATA_ENEMY = {
+const SCHEMA_DATA_ENEMY = {
   type: "object",
   required: [
     "name",
@@ -93,3 +93,5 @@ export const SCHEMA_DATA_ENEMY = {
     } satisfies JSONSchemaType<DropItem[]>,
   },
 } as const satisfies JSONSchemaType<Data_Enemy>;
+
+export default SCHEMA_DATA_ENEMY;

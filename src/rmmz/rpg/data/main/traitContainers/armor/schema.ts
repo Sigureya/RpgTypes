@@ -3,7 +3,7 @@ import type { ParamArray } from "../members";
 import type { Trait } from "../trait";
 import type { Data_Armor } from "./types";
 
-export const SCHEMA_DATA_ARMMOR = {
+const SCHEMA_DATA_ARMMOR = {
   type: "object",
   required: [
     "name",
@@ -58,3 +58,5 @@ export const SCHEMA_DATA_ARMMOR = {
     } satisfies JSONSchemaType<Trait[]>,
   },
 } as const satisfies JSONSchemaType<Data_Armor>;
+
+export default SCHEMA_DATA_ARMMOR;

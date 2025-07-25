@@ -8,18 +8,15 @@ import type {
   Data_State,
   Data_Weapon,
 } from "./traitContainers";
-import {
-  SCHEMA_DATA_ACTOR,
-  SCHEMA_DATA_ARMMOR,
-  SCHEMA_DATA_CLASS,
-  SCHEMA_DATA_ENEMY,
-  SCHEMA_DATA_STATE,
-  SCHEMA_DATA_WEAPON,
-} from "./traitContainers";
+import SCHEMA_DATA_ACTOR from "./traitContainers/actor/schema";
+import SCHEMA_DATA_ARMMOR from "./traitContainers/armor/schema";
+import SCHEMA_DATA_CLASS from "./traitContainers/class/schema";
+import SCHEMA_DATA_ENEMY from "./traitContainers/enemy/schema";
+import SCHEMA_DATA_STATE from "./traitContainers/state/schema";
+import SCHEMA_DATA_WEAPON from "./traitContainers/weapon/schema";
 import type { Data_Item, Data_Skill } from "./usableItems";
 
 const ajv = new Ajv({
-  code: { source: false },
   strict: true,
 });
 const item = ajv.compile(SCHEMA_DATA_ITEM);
