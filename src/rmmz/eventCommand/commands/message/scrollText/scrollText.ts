@@ -1,14 +1,14 @@
 import { SHOW_SCROLLING_TEXT, SHOW_SCROLLING_TEXT_BODY } from "@RpgTypes/rpg";
 import type {
-  Command_ScrollTextBody,
-  Command_ScrollTextHeader,
-  ParamArray_ScrollTextHeader,
-  ParamObject_ScrollTextHeader,
-} from "./types";
-import type {
   ParamArray_ScrollTextBody,
   ParamObject_ScrollTextBody,
-} from "./types";
+  Command_ScrollTextBody,
+} from "./body/types";
+import type {
+  ParamObject_ScrollTextHeader,
+  ParamArray_ScrollTextHeader,
+  Command_ScrollTextHeader,
+} from "./head/types";
 
 export const toArrayScrollingTextHeader = (
   param: Partial<ParamObject_ScrollTextHeader> = {}

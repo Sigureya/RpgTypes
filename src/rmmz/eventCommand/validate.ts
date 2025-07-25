@@ -13,7 +13,7 @@ import SCHEMA_COMMAND_CHANGE_ACTOR_TEXT from "./commands/actor/changeText/schema
 import SCHEMA_COMMAND_ANY_AUDIO from "./commands/audio/play/schema";
 import { SCHEMA_COMMAND_CALL_COMMON_EVENT } from "./commands/flow/callCommonEvent/schema";
 import { SCHEMA_COMMAND_INPUT_NUMBER } from "./commands/message/inputNumber/schema";
-import { SCHEMA_COMMAND_SCROLL_TEXT_HEAD } from "./commands/message/scrollText/schema";
+import SCHEMA_COMMAND_SCROLL_TEXT_HEAD from "./commands/message/scrollText/head/schema";
 import SCHEMA_COMMAND_SHOW_CHOICE_WHEN from "./commands/message/setupChoice/item/schema";
 import SCHEMA_COMMAND_SHOW_CHOICES from "./commands/message/setupChoice/schema";
 import { SCHEMA_COMMAND_SHOW_MESSAGE } from "./commands/message/showMessage/schema";
