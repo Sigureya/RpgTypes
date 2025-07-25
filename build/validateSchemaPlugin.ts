@@ -6,12 +6,6 @@ import Ajv from "ajv";
 import standaloneCode from "ajv/dist/standalone";
 import { PluginOption } from "vite";
 
-const makeDTS = (filename: string): string => {
-  return `declare const validate(data: unknown): boolean;
-  export = validate;
-  `;
-};
-
 const build = async (schemaPath: string): Promise<void> => {
   const fullPath = path.resolve(schemaPath);
 
@@ -37,7 +31,9 @@ const build = async (schemaPath: string): Promise<void> => {
     },
     async () => {
       const dtsFilename = path.join(parsed.dir, `${filename}.d.ts`);
-      const dtsContent = makeDTS(filename);
+      const dtsContent: string = `declare const validate(data: unknown): boolean;
+        export = validate;
+        `;
       await fs.writeFile(dtsFilename, dtsContent, "utf-8");
     },
   ]);
