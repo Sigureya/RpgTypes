@@ -1,4 +1,4 @@
-declare const SCHEMA_DATA_ARMMOR: {
+export declare const SCHEMA_DATA_ARMMOR: {
     readonly type: "object";
     readonly required: readonly ["name", "id", "description", "iconIndex", "price", "params", "traits", "note", "etypeId", "atypeId"];
     readonly properties: {
@@ -54,21 +54,21 @@ declare const SCHEMA_DATA_ARMMOR: {
             maxItems: 8;
         };
         readonly traits: {
-            type: "array";
-            items: {
-                type: "object";
-                properties: {
-                    code: {
-                        type: "integer";
+            readonly type: "array";
+            readonly items: {
+                readonly type: "object";
+                readonly properties: {
+                    readonly code: {
+                        readonly type: "integer";
                     };
-                    dataId: {
-                        type: "integer";
+                    readonly dataId: {
+                        readonly type: "integer";
                     };
-                    value: {
-                        type: "integer";
+                    readonly value: {
+                        readonly type: "integer";
                     };
                 };
-                required: ("value" | "code" | "dataId")[];
+                readonly required: readonly ["code", "dataId", "value"];
             };
         };
     };
