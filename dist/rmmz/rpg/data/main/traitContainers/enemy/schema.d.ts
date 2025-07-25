@@ -1,4 +1,4 @@
-export declare const SCHEMA_DATA_ENEMY: {
+declare const SCHEMA_DATA_ENEMY: {
     readonly type: "object";
     readonly required: readonly ["name", "id", "battlerName", "battlerHue", "exp", "gold", "note", "params", "dropItems", "traits", "actions"];
     readonly properties: {
@@ -53,7 +53,7 @@ export declare const SCHEMA_DATA_ENEMY: {
             type: "array";
             items: {
                 type: "object";
-                required: ("skillId" | "conditionParam1" | "conditionParam2" | "conditionType" | "rating")[];
+                required: ("conditionParam1" | "conditionParam2" | "conditionType" | "skillId" | "rating")[];
                 properties: {
                     conditionParam1: {
                         type: "integer";
@@ -115,3 +115,4 @@ export declare const SCHEMA_DATA_ENEMY: {
         };
     };
 };
+export default SCHEMA_DATA_ENEMY;

@@ -1,4 +1,4 @@
-export declare const SCHEMA_COMMAND_CHANGE_ACTOR_TEXT: {
+declare const SCHEMA_COMMAND_CHANGE_ACTOR_TEXT: {
     readonly type: "object";
     readonly required: readonly ["code", "parameters", "indent"];
     readonly properties: {
@@ -23,3 +23,4 @@ export declare const SCHEMA_COMMAND_CHANGE_ACTOR_TEXT: {
     };
     readonly additionalProperties: false;
 };
+export default SCHEMA_COMMAND_CHANGE_ACTOR_TEXT;

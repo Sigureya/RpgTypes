@@ -1,4 +1,4 @@
-export declare const SCHEMA_DATA_ARMMOR: {
+declare const SCHEMA_DATA_ARMMOR: {
     readonly type: "object";
     readonly required: readonly ["name", "id", "description", "iconIndex", "price", "params", "traits", "note", "etypeId", "atypeId"];
     readonly properties: {
@@ -73,3 +73,4 @@ export declare const SCHEMA_DATA_ARMMOR: {
         };
     };
 };
+export default SCHEMA_DATA_ARMMOR;

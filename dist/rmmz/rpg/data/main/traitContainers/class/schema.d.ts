@@ -1,4 +1,4 @@
-export declare const SCHEMA_DATA_CLASS: {
+declare const SCHEMA_DATA_CLASS: {
     type: "object";
     required: ("name" | "id" | "note" | "params" | "traits" | "expParams" | "learnings")[];
     properties: {
@@ -81,3 +81,4 @@ export declare const SCHEMA_DATA_CLASS: {
     };
     additionalProperties: false;
 };
+export default SCHEMA_DATA_CLASS;

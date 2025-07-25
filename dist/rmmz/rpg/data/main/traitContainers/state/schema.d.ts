@@ -1,4 +1,4 @@
-export declare const SCHEMA_DATA_STATE: {
+declare const SCHEMA_DATA_STATE: {
     readonly type: "object";
     readonly required: readonly ["name", "id", "iconIndex", "message1", "message2", "message3", "message4", "restriction", "priority", "motion", "overlay", "removeAtBattleEnd", "removeByDamage", "removeByWalking", "removeByRestriction", "autoRemovalTiming", "minTurns", "maxTurns", "chanceByDamage", "stepsToRemove", "note"];
     readonly properties: {
@@ -93,3 +93,4 @@ export declare const SCHEMA_DATA_STATE: {
         };
     };
 };
+export default SCHEMA_DATA_STATE;

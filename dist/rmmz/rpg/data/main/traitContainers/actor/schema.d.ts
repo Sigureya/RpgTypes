@@ -1,4 +1,4 @@
-export declare const SCHEMA_DATA_ACTOR: {
+declare const SCHEMA_DATA_ACTOR: {
     readonly type: "object";
     readonly required: readonly ["name", "id", "nickname", "battlerName", "characterName", "characterIndex", "faceName", "faceIndex", "classId", "initialLevel", "maxLevel"];
     readonly properties: {
@@ -72,3 +72,4 @@ export declare const SCHEMA_DATA_ACTOR: {
         };
     };
 };
+export default SCHEMA_DATA_ACTOR;
