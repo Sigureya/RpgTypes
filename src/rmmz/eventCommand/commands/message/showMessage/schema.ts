@@ -1,7 +1,7 @@
 import type { JSONSchemaType } from "ajv";
 import type { Command_ShowMessageHeader } from "./types";
 
-export const SCHEMA_COMMAND_SHOW_MESSAGE = {
+const SCHEMA_COMMAND_SHOW_MESSAGE = {
   type: "object",
   required: ["code", "parameters", "indent"],
   properties: {
@@ -22,3 +22,5 @@ export const SCHEMA_COMMAND_SHOW_MESSAGE = {
     },
   },
 } as const satisfies JSONSchemaType<Command_ShowMessageHeader>;
+
+export default SCHEMA_COMMAND_SHOW_MESSAGE;
