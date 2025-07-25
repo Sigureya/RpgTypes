@@ -8,7 +8,7 @@ import type {
   Data_State,
   Data_Weapon,
 } from "./traitContainers";
-import SCHEMA_DATA_ACTOR from "./traitContainers/actor/schema";
+import { SCHEMA_DATA_ACTOR } from "./traitContainers/actor/schema";
 import SCHEMA_DATA_ARMMOR from "./traitContainers/armor/schema";
 import SCHEMA_DATA_CLASS from "./traitContainers/class/schema";
 import SCHEMA_DATA_ENEMY from "./traitContainers/enemy/schema";
