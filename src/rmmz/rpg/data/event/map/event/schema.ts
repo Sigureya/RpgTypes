@@ -1,7 +1,7 @@
 import type { JSONSchemaType } from "ajv";
 import type { MapEvent_Image } from "./page";
 
-export const SCHEMA_MAP_EVENT_IMAGE = {
+const SCHEMA_MAP_EVENT_IMAGE = {
   type: "object",
   required: [
     "characterIndex",
@@ -18,3 +18,5 @@ export const SCHEMA_MAP_EVENT_IMAGE = {
     tileId: { type: "integer" },
   },
 } as const satisfies JSONSchemaType<MapEvent_Image>;
+
+export default SCHEMA_MAP_EVENT_IMAGE;

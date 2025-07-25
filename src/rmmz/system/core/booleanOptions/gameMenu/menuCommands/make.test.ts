@@ -4,7 +4,7 @@ import {
   makeMenuCommandsEnabled,
   makeMenuCommandsEnabledFromArray,
 } from "./make";
-import { SCHEMA_SYSTEM_MENU_COMMANDS_ENABLED } from "./schema";
+import SCHEMA_SYSTEM_MENU_COMMANDS_ENABLED from "./schema";
 import type { MenuCommandsEnabled, MenuCommandsEnabledArray } from "./types";
 
 const ajv = new Ajv({ strict: false });

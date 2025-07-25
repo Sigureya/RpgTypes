@@ -2,11 +2,10 @@ import { describe, test, expect } from "vitest";
 import Ajv from "ajv";
 import { makeTroopData, makeTroopEventConditions } from "./makeEvent";
 import { COMMENT_HEAD } from "./map";
-import { SCHEMA_DATA_TROOP } from "./schema";
+import SCHEMA_DATA_TROOP from "./schema";
 import type { Data_Troop } from "./troop";
 
 const ajv = new Ajv({
-  code: { source: false },
   strict: true,
   discriminator: true,
 });

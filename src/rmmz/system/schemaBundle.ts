@@ -1,10 +1,8 @@
 import type { JSONSchemaType } from "ajv";
 import type { AttackMotion, Data_Vehicle, System_Advanced } from "./core";
-import {
-  SCHEMA_SYSTEM_ADVANCED,
-  SCHEMA_SYSTEM_MEMBERS_ATTACK_MOTION,
-  SCHEMA_SYSTEM_VEHICLE,
-} from "./core";
+import SCHEMA_SYSTEM_ADVANCED from "./core/advanced/schema";
+import SCHEMA_SYSTEM_MEMBERS_ATTACK_MOTION from "./core/attackMotion/schema";
+import SCHEMA_SYSTEM_VEHICLE from "./core/vehicle/schema";
 import type { Data_System } from "./system";
 
 export const SCHEMA_SYSTEM_PARTIAL_BUNDLE = {

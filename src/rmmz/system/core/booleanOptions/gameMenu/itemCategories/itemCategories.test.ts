@@ -4,7 +4,7 @@ import {
   makeItemCategories,
   makeItemCategoriesFromArray,
 } from "./itemCategories";
-import { SCHEMA_SYSTEM_ITEM_CATEGORIES } from "./schema";
+import SCHEMA_SYSTEM_ITEM_CATEGORIES from "./schema";
 import type { ItemCategories, ItemCategoriesArray } from "./types";
 
 const ajv = new Ajv({ strict: false });

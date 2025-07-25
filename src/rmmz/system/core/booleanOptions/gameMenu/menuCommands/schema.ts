@@ -1,6 +1,6 @@
 import type { JSONSchemaType } from "ajv";
 
-export const SCHEMA_SYSTEM_MENU_COMMANDS_ENABLED = {
+const SCHEMA_SYSTEM_MENU_COMMANDS_ENABLED = {
   type: "array",
   maxItems: 6,
   minItems: 6,
@@ -8,3 +8,5 @@ export const SCHEMA_SYSTEM_MENU_COMMANDS_ENABLED = {
     type: "boolean",
   },
 } as const satisfies JSONSchemaType<boolean[]>;
+
+export default SCHEMA_SYSTEM_MENU_COMMANDS_ENABLED;

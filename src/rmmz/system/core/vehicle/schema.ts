@@ -1,7 +1,7 @@
 import type { JSONSchemaType } from "ajv";
 import type { Data_Vehicle } from "./types";
 
-export const SCHEMA_SYSTEM_VEHICLE = {
+const SCHEMA_SYSTEM_VEHICLE = {
   additionalProperties: false,
   type: "object",
   required: [
@@ -31,3 +31,5 @@ export const SCHEMA_SYSTEM_VEHICLE = {
     startY: { type: "integer", minimum: 0, maximum: 5000 },
   },
 } as const satisfies JSONSchemaType<Data_Vehicle>;
+
+export default SCHEMA_SYSTEM_VEHICLE;

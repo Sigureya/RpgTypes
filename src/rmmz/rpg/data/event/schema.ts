@@ -7,7 +7,7 @@ import type {
   Troop_Member,
 } from "./troop";
 
-export const SCHEMA_DATA_TROOP = {
+const SCHEMA_DATA_TROOP = {
   type: "object",
   required: ["id", "name", "members", "pages"] satisfies (keyof Data_Troop)[],
   properties: {
@@ -80,3 +80,5 @@ export const SCHEMA_DATA_TROOP = {
     },
   },
 } as const;
+
+export default SCHEMA_DATA_TROOP;

@@ -1,11 +1,7 @@
 import { describe, test, expect } from "vitest";
-import {
-  makeMapData,
-  makeMapInfoData,
-  SCHEMA_DATA_MAP_INFO,
-  type Data_MapInfo,
-} from "./map";
+import { makeMapData, makeMapInfoData, type Data_MapInfo } from "./map";
 import type { Data_Map } from "./map";
+import SCHEMA_DATA_MAP_INFO from "./map/mapInfo/schema";
 import { SCHEMA_DATA_MAP } from "./map/schema";
 import { isDataMapInfo, isDataMap } from "./validate";
 

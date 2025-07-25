@@ -1,7 +1,7 @@
 import type { JSONSchemaType } from "ajv";
 import type { System_Advanced } from "./advanced";
 
-export const SCHEMA_SYSTEM_ADVANCED = {
+const SCHEMA_SYSTEM_ADVANCED = {
   type: "object",
   properties: {
     gameId: { type: "integer" },
@@ -32,3 +32,5 @@ export const SCHEMA_SYSTEM_ADVANCED = {
   ],
   additionalProperties: false,
 } as const satisfies JSONSchemaType<System_Advanced>;
+
+export default SCHEMA_SYSTEM_ADVANCED;

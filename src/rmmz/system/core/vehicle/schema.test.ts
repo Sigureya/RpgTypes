@@ -1,6 +1,6 @@
 import { describe, test, expect } from "vitest";
 import Ajv from "ajv";
-import { SCHEMA_SYSTEM_VEHICLE } from "./schema";
+import SCHEMA_SYSTEM_VEHICLE from "./schema";
 import type { Data_Vehicle } from "./types";
 
 const ajv = new Ajv();

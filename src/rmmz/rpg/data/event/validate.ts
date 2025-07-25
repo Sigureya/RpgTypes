@@ -1,10 +1,9 @@
 import Ajv from "ajv";
 import type { Data_MapInfo } from "./map";
-import { SCHEMA_DATA_MAP_INFO } from "./map";
+import SCHEMA_DATA_MAP_INFO from "./map/mapInfo/schema";
 import { SCHEMA_DATA_MAP } from "./map/schema";
 
 const ajv = new Ajv({
-  code: { source: false },
   strict: true,
 });
 
