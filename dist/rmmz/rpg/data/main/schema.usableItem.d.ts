@@ -1,4 +1,4 @@
-export declare const SCHEMA_DAMATE: {
+declare const SCHEMA_DAMATE: {
     readonly type: "object";
     readonly properties: {
         readonly type: {
@@ -21,7 +21,7 @@ export declare const SCHEMA_DAMATE: {
     readonly required: readonly ["type", "elementId", "formula", "variance", "critical"];
     readonly additionalProperties: false;
 };
-export declare const SCHEMA_EFFECT: {
+declare const SCHEMA_EFFECT: {
     readonly type: "object";
     readonly properties: {
         readonly code: {
@@ -41,7 +41,7 @@ export declare const SCHEMA_EFFECT: {
     readonly required: readonly ["code", "dataId", "value1", "value2"];
     readonly additionalProperties: false;
 };
-export declare const SCHEMA_DATA_SKILL: {
+declare const SCHEMA_DATA_SKILL: {
     readonly type: "object";
     readonly required: readonly ["name", "id", "description", "iconIndex", "message1", "message2", "messageType", "mpCost", "requiredWtypeId1", "requiredWtypeId2", "stypeId", "tpCost", "animationId", "hitType", "occasion", "repeats", "scope", "speed", "successRate", "tpGain", "note", "effects"];
     readonly properties: {
@@ -166,7 +166,7 @@ export declare const SCHEMA_DATA_SKILL: {
     };
     readonly additionalProperties: false;
 };
-export declare const SCHEMA_DATA_ITEM: {
+declare const SCHEMA_DATA_ITEM: {
     readonly type: "object";
     readonly required: readonly ["name", "id", "description", "iconIndex", "note", "animationId", "hitType", "occasion", "repeats", "scope", "speed", "successRate", "tpGain", "consumable", "price", "effects"];
     readonly properties: {
@@ -271,3 +271,4 @@ export declare const SCHEMA_DATA_ITEM: {
         };
     };
 };
+export { SCHEMA_DATA_ITEM, SCHEMA_DATA_SKILL, SCHEMA_EFFECT, SCHEMA_DAMATE };

@@ -1,4 +1,4 @@
-export declare const SCHEMA_SYSTEM_MENU_COMMANDS_ENABLED: {
+declare const SCHEMA_SYSTEM_MENU_COMMANDS_ENABLED: {
     readonly type: "array";
     readonly maxItems: 6;
     readonly minItems: 6;
@@ -6,3 +6,4 @@ export declare const SCHEMA_SYSTEM_MENU_COMMANDS_ENABLED: {
         readonly type: "boolean";
     };
 };
+export default SCHEMA_SYSTEM_MENU_COMMANDS_ENABLED;

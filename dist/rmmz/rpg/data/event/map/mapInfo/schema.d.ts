@@ -1,4 +1,4 @@
-export declare const SCHEMA_DATA_MAP_INFO: {
+declare const SCHEMA_DATA_MAP_INFO: {
     readonly type: "object";
     readonly required: readonly ["name", "id", "expanded", "order", "parentId", "scrollX", "scrollY"];
     readonly properties: {
@@ -26,3 +26,4 @@ export declare const SCHEMA_DATA_MAP_INFO: {
         };
     };
 };
+export default SCHEMA_DATA_MAP_INFO;

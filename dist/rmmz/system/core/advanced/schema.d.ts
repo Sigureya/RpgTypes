@@ -1,4 +1,4 @@
-export declare const SCHEMA_SYSTEM_ADVANCED: {
+declare const SCHEMA_SYSTEM_ADVANCED: {
     readonly type: "object";
     readonly properties: {
         readonly gameId: {
@@ -38,3 +38,4 @@ export declare const SCHEMA_SYSTEM_ADVANCED: {
     readonly required: readonly ["gameId", "screenWidth", "screenHeight", "uiAreaWidth", "uiAreaHeight", "windowOpacity", "screenScale", "numberFontFilename", "mainFontFilename", "fallbackFonts", "fontSize"];
     readonly additionalProperties: false;
 };
+export default SCHEMA_SYSTEM_ADVANCED;

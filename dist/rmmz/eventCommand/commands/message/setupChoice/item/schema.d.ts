@@ -1,9 +1,9 @@
-declare const SCHEMA_COMMAND_SHOW_CHOICES: {
+declare const SCHEMA_COMMAND_SHOW_CHOICE_WHEN: {
     readonly type: "object";
     readonly properties: {
         readonly code: {
             readonly type: "number";
-            readonly const: 102;
+            readonly const: 402;
         };
         readonly indent: {
             readonly type: "integer";
@@ -11,24 +11,15 @@ declare const SCHEMA_COMMAND_SHOW_CHOICES: {
         };
         readonly parameters: {
             readonly type: "array";
-            readonly minItems: 5;
-            readonly maxItems: 5;
+            readonly minItems: 2;
+            readonly maxItems: 2;
             readonly items: readonly [{
-                readonly type: "array";
-                readonly items: {
-                    readonly type: "string";
-                };
-            }, {
                 readonly type: "integer";
             }, {
-                readonly type: "integer";
-            }, {
-                readonly type: "integer";
-            }, {
-                readonly type: "integer";
+                readonly type: "string";
             }];
         };
     };
     readonly required: readonly ["code", "indent", "parameters"];
 };
-export default SCHEMA_COMMAND_SHOW_CHOICES;
+export default SCHEMA_COMMAND_SHOW_CHOICE_WHEN;

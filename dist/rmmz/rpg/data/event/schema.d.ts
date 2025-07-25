@@ -1,4 +1,4 @@
-export declare const SCHEMA_DATA_TROOP: {
+declare const SCHEMA_DATA_TROOP: {
     readonly type: "object";
     readonly required: ("name" | "id" | "members" | "pages")[];
     readonly properties: {
@@ -86,3 +86,4 @@ export declare const SCHEMA_DATA_TROOP: {
         };
     };
 };
+export default SCHEMA_DATA_TROOP;

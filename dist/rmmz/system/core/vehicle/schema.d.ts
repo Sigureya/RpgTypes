@@ -1,4 +1,4 @@
-export declare const SCHEMA_SYSTEM_VEHICLE: {
+declare const SCHEMA_SYSTEM_VEHICLE: {
     readonly additionalProperties: false;
     readonly type: "object";
     readonly required: readonly ["characterIndex", "characterName", "bgm", "startMapId", "startX", "startY"];
@@ -53,3 +53,4 @@ export declare const SCHEMA_SYSTEM_VEHICLE: {
         };
     };
 };
+export default SCHEMA_SYSTEM_VEHICLE;

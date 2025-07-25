@@ -1,4 +1,4 @@
-export declare const SCHEMA_DAMAGE: {
+declare const SCHEMA_DAMAGE: {
     readonly type: "object";
     readonly required: readonly ["type", "elementId", "formula", "variance", "critical"];
     readonly properties: {
@@ -21,3 +21,4 @@ export declare const SCHEMA_DAMAGE: {
         };
     };
 };
+export default SCHEMA_DAMAGE;
