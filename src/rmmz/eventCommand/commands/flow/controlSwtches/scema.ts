@@ -1,7 +1,7 @@
 import type { JSONSchemaType } from "ajv";
 import type { Command_ControlSwitches } from "./types";
 
-export const SCHEMA_COMMAND_CONTROL_SWITCHES = {
+const SCHEMA_COMMAND_CONTROL_SWITCHES = {
   type: "object",
   required: ["code", "parameters", "indent"],
   properties: {
@@ -20,3 +20,5 @@ export const SCHEMA_COMMAND_CONTROL_SWITCHES = {
     },
   },
 } as const satisfies JSONSchemaType<Command_ControlSwitches>;
+
+export default SCHEMA_COMMAND_CONTROL_SWITCHES;
