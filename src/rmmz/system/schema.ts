@@ -8,10 +8,6 @@ import SCHEMA_SYSTEM_BOOLEAN_OPTIONS from "./core/booleanOptions/gameSetting/sch
 import SCHEMA_SYSTEM_VEHICLE from "./core/vehicle/schema";
 import type { Data_System } from "./system";
 
-const SCHEMA_BOOLEAN = {
-  type: "boolean",
-} as const satisfies JSONSchemaType<boolean>;
-
 const SCHEMA_SYSTEM_V2 = {
   type: "object",
   required: [
