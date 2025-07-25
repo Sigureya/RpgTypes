@@ -1,6 +1,6 @@
 import type { EventCommandUnknown } from "@RpgTypes/eventCommand";
 import type { AudioFileParams } from "@RpgTypes/utils";
-import type { EventCommand, MapEvent } from "./event/";
+import type { EventCommand, MapEvent } from "./event/page";
 import type { MapEventContainer } from "./mapEventContainer";
 import type { Encounter } from "./members";
 

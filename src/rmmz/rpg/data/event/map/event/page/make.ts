@@ -1,6 +1,7 @@
 import { makeEventPageCondition } from "./condition";
+import type { MapEvent_Image } from "./image/types";
 import type { MapEvent } from "./mapEvent";
-import type { MapEvent_Image, MapEventPage } from "./page";
+import type { MapEventPage } from "./page";
 
 export const makeMapEvent = (): MapEvent => {
   return {
