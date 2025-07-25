@@ -5,7 +5,7 @@ const SCHEMA_BOOLEAN = {
   type: "boolean",
 } as const satisfies JSONSchemaType<boolean>;
 
-export const SCHEMA_SYSTEM_BOOLEAN_OPTIONS = {
+const SCHEMA_SYSTEM_BOOLEAN_OPTIONS = {
   type: "object",
   additionalProperties: false,
   required: [
@@ -37,3 +37,5 @@ export const SCHEMA_SYSTEM_BOOLEAN_OPTIONS = {
     optSplashScreen: SCHEMA_BOOLEAN,
   },
 } as const satisfies JSONSchemaType<System_BooleanGameOptions>;
+
+export default SCHEMA_SYSTEM_BOOLEAN_OPTIONS;

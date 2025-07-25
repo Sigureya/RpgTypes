@@ -4,8 +4,13 @@ import SCHEMA_SYSTEM_MEMBERS_ATTACK_MOTION from "./core/attackMotion/schema";
 import SCHEMA_AUDIO_FILE_PARAMS_SYSTEM from "./core/audio/soundArray/audio/schema";
 import SCHEMA_SYSTEM_SOUND_ARRAY from "./core/audio/soundArray/schema";
 import SCHEMA_SYSTEM_BATTLE_RULE from "./core/battle/battleSystem/schema";
+import SCHEMA_SYSTEM_BOOLEAN_OPTIONS from "./core/booleanOptions/gameSetting/schema";
 import SCHEMA_SYSTEM_VEHICLE from "./core/vehicle/schema";
 import type { Data_System } from "./system";
+
+const SCHEMA_BOOLEAN = {
+  type: "boolean",
+} as const satisfies JSONSchemaType<boolean>;
 
 const SCHEMA_SYSTEM_V2 = {
   type: "object",
@@ -59,6 +64,7 @@ const SCHEMA_SYSTEM_V2 = {
     "battlerName",
   ],
   properties: {
+    ...SCHEMA_SYSTEM_BOOLEAN_OPTIONS.properties,
     advanced: SCHEMA_SYSTEM_ADVANCED,
     airship: SCHEMA_SYSTEM_VEHICLE,
     boat: SCHEMA_SYSTEM_VEHICLE,
@@ -74,5 +80,6 @@ const SCHEMA_SYSTEM_V2 = {
     victoryMe: SCHEMA_AUDIO_FILE_PARAMS_SYSTEM,
     titleBgm: SCHEMA_AUDIO_FILE_PARAMS_SYSTEM,
     battleSystem: SCHEMA_SYSTEM_BATTLE_RULE,
+    currencyUnit: { type: "string" },
   } as const satisfies Partial<Record<keyof Data_System, object>>,
 }; // satisfies JSONSchemaType<Data_System>;
