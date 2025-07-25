@@ -1,4 +1,4 @@
-import { describe, test, expect } from "vitest";
+import { test, expect } from "vitest";
 import json from "./armor.schema.json";
 import { SCHEMA_DATA_ARMMOR } from "./schema";
 
