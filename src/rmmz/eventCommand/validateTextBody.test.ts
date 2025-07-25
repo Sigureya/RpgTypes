@@ -1,12 +1,12 @@
 import { describe, test, expect } from "vitest";
 import {
-  COMMENT_BODY,
-  COMMENT_HEAD,
-  SCRIPT_EVAL,
-  SCRIPT_EVAL_BODY,
   SHOW_MESSAGE_BODY,
   SHOW_SCROLLING_TEXT_BODY,
-} from "@RpgTypes/rpg";
+  COMMENT_BODY,
+  COMMENT_HEAD,
+  SCRIPT_EVAL_BODY,
+  SCRIPT_EVAL,
+} from "../rpg/data/event/map/event/page";
 import {
   makeCommandShowMessageBody,
   makeCommandCommentHeader,

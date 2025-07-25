@@ -1,11 +1,15 @@
 import type { AudioFileParams } from "@RpgTypes/utils";
 import type { JSONSchemaType } from "ajv";
-import type { MapEvent, MapEvent_PageCondition, MapEventPage } from "./event";
-import SCHEMA_MAP_EVENT_PAGE_CONDITION from "./event/condition/schema";
-import type { MoveRouteDataUnkwnown } from "./event/eventCommand/moveRoute";
-import SCHEMA_MOVEROUTE_DATA from "./event/eventCommand/moveRoute/schema";
-import SCHEMA_MAP_EVENT_IMAGE from "./event/image/schema";
-import type { MapEvent_Image } from "./event/image/types";
+import type {
+  MapEventPage,
+  MapEvent_PageCondition,
+  MapEvent,
+} from "./event/page";
+import SCHEMA_MAP_EVENT_PAGE_CONDITION from "./event/page/condition/schema";
+import type { MoveRouteDataUnkwnown } from "./event/page/eventCommand/moveRoute";
+import SCHEMA_MOVEROUTE_DATA from "./event/page/eventCommand/moveRoute/schema";
+import SCHEMA_MAP_EVENT_IMAGE from "./event/page/image/schema";
+import type { MapEvent_Image } from "./event/page/image/types";
 import type { Data_Map } from "./map";
 import type { Encounter } from "./members";
 
