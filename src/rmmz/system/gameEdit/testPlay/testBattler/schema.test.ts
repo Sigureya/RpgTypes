@@ -1,8 +1,8 @@
 import { describe, test, expect } from "vitest";
 import Ajv from "ajv";
-import { SCHEMA_SYSTEM_TEST_BATTLER } from "./schema";
+import SCHEMA_SYSTEM_TEST_BATTLER from "./schema";
 import type { TestBattler } from "./types";
-const ajv = new Ajv();
+const ajv = new Ajv({ strict: true });
 const validate = ajv.compile(SCHEMA_SYSTEM_TEST_BATTLER);
 
 describe("SCHEMA_SYSTEM_TEST_BATTLERS", () => {
