@@ -2,7 +2,6 @@ import { describe, test, expect } from "vitest";
 import { makeActorData } from "./actor";
 import type { Data_Actor } from "./types";
 const validate = require("./actorValidate.cjs"); // Adjust the import based on your setup
-// import { isDataActor2 } from "./validate";
 
 test("validate actor data", () => {
   const actor: Data_Actor = makeActorData();
