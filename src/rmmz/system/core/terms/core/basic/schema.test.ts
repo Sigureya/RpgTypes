@@ -1,10 +1,10 @@
 import { describe, test, expect } from "vitest";
 import Ajv from "ajv";
 import { makeTermsBasic, makeTermsBasicFromArray } from "./make";
-import { SCHEMA_SYSTEM_MEMBERS_TERMS_BASIC_ARRAY } from "./schema";
+import SCHEMA_SYSTEM_MEMBERS_TERMS_BASIC_ARRAY from "./schema";
 import type { Terms_Basic, Terms_BasicArray } from "./types";
 
-const ajv = new Ajv();
+const ajv = new Ajv({ strict: true });
 const validate = ajv.compile(SCHEMA_SYSTEM_MEMBERS_TERMS_BASIC_ARRAY);
 
 describe("SCHEMA_SYSTEM_MEMBERS_TERMS_BASIC", () => {

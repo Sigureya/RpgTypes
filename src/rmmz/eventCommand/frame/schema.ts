@@ -1,6 +1,6 @@
 import type { EventCommandUnknown } from "./types";
 
-export const SCHEMA_COMMAND_UNKNOWN = {
+const SCHEMA_COMMAND_UNKNOWN = {
   type: "object",
   additionalProperties: false,
   required: [
@@ -17,3 +17,5 @@ export const SCHEMA_COMMAND_UNKNOWN = {
     },
   },
 } as const;
+
+export default SCHEMA_COMMAND_UNKNOWN;

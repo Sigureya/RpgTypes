@@ -1,8 +1,8 @@
 import type { SchemaObject } from "ajv";
-import { SCHEMA_SYSTEM_MEMBERS_TERMS_BASIC_ARRAY } from "./basic/schema";
-import { SCHEMA_SYSTEM_MEMBERS_TERMS_COMMANDS_ARRAY } from "./commands/schema";
-import { SCHEMA_SYSTEM_TERMS_MESSAGES } from "./messages/schema";
-import { SCHEMA_SYSTEM_PARAM_NAMS_ARRAY } from "./paramArray/schema";
+import SCHEMA_SYSTEM_MEMBERS_TERMS_BASIC_ARRAY from "./basic/schema";
+import SCHEMA_SYSTEM_MEMBERS_TERMS_COMMANDS_ARRAY from "./commands/schema";
+import SCHEMA_SYSTEM_TERMS_MESSAGES from "./messages/schema";
+import SCHEMA_SYSTEM_PARAM_NAMS_ARRAY from "./paramArray/schema";
 import type { System_Terms } from "./types";
 
 const SCHEMA_SYSTEM_TERMS_CORE = {

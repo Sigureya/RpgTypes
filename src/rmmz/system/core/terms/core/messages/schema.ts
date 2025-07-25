@@ -5,7 +5,7 @@ const SCHEMA_STRING = {
   type: "string",
 } as const satisfies JSONSchemaType<string>;
 
-export const SCHEMA_SYSTEM_TERMS_MESSAGES = {
+const SCHEMA_SYSTEM_TERMS_MESSAGES = {
   type: "object",
   additionalProperties: false,
   required: [
@@ -110,3 +110,4 @@ export const SCHEMA_SYSTEM_TERMS_MESSAGES = {
     surprise: SCHEMA_STRING,
   },
 } as const satisfies JSONSchemaType<Terms_Messages>;
+export default SCHEMA_SYSTEM_TERMS_MESSAGES;
