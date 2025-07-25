@@ -40,22 +40,24 @@ const build = async (schemaPath: string): Promise<void> => {
     await fs.writeFile(dtsFilename, dtsContent, "utf-8");
   }
 
-  [writeCjsFile(), writeDtsFile()];
+  writeCjsFile();
+  writeDtsFile();
 };
 
 export function validateSchemaPlugin(): PluginOption {
-  console.log("バリデーション関数の生成を開始...");
   return {
     name: "vite-plugin-validate-schema",
     apply: "build",
     enforce: "pre",
 
     async buildStart() {
+      console.log("バリデーション関数の生成を開始...");
       const schemaPaths = await fg("src/**/!(*.d).schema.json");
 
       for (const schemaPath of schemaPaths) {
         build(schemaPath);
       }
+      console.log("バリデーション関数の生成が完了しました。");
     },
   };
 }
