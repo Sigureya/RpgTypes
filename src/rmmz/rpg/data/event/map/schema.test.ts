@@ -1,11 +1,11 @@
 import { describe, test, expect } from "vitest";
 import Ajv from "ajv";
 import type { AudioFileParams } from "src/utils";
+import SCHEMA_MAP_EVENT_PAGE from "./event/page/schema";
 import { makeMapData } from "./make";
 import type { Data_Map } from "./map";
-import { SCHEMA_DATA_MAP, SCHEMA_MAP_EVENT_PAGE } from "./schema";
-
-const ajv = new Ajv();
+import SCHEMA_DATA_MAP from "./schema";
+const ajv = new Ajv({ strict: true });
 const dataMap = ajv.compile(SCHEMA_DATA_MAP);
 
 const isMapData = (data: unknown): data is Data_Map => {

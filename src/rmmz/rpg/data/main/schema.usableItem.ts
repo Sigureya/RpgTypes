@@ -1,10 +1,8 @@
 import type { JSONSchemaType } from "ajv";
 import type { Damage } from "./members";
-import {
-  SCHEMA_POSITIVE_INTEGER,
-  SCHEMA_STRING,
-  SCHEMA_INTEGER,
-} from "./primitiveSchema/primitiveSchema";
+import SCHEMA_INTEGER from "./primitiveSchema/integer.schema";
+import SCHEMA_POSITIVE_INTEGER from "./primitiveSchema/positiveInteger.schema";
+import SCHEMA_STRING from "./primitiveSchema/string.schema";
 import type { Data_Item, Data_Skill, ItemEffect } from "./usableItems";
 
 const SCHEMA_DAMATE = {
