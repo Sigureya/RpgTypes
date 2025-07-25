@@ -1,7 +1,7 @@
 import type { JSONSchemaType } from "ajv";
 import type { Data_Class } from "./types";
 
-const SCHEMA_DATA_CLASS = {
+export const SCHEMA_DATA_CLASS = {
   type: "object",
   required: [
     "name",
