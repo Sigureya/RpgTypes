@@ -7,7 +7,7 @@ import {
 } from "./primitiveSchema/primitiveSchema";
 import type { Data_Item, Data_Skill, ItemEffect } from "./usableItems";
 
-export const SCHEMA_DAMATE = {
+const SCHEMA_DAMATE = {
   type: "object",
   properties: {
     type: { type: "integer" },
@@ -20,7 +20,7 @@ export const SCHEMA_DAMATE = {
   additionalProperties: false,
 } as const satisfies JSONSchemaType<Damage>;
 
-export const SCHEMA_EFFECT = {
+const SCHEMA_EFFECT = {
   type: "object",
   properties: {
     code: SCHEMA_INTEGER,
@@ -32,7 +32,7 @@ export const SCHEMA_EFFECT = {
   additionalProperties: false,
 } as const satisfies JSONSchemaType<ItemEffect>;
 
-export const SCHEMA_DATA_SKILL = {
+const SCHEMA_DATA_SKILL = {
   type: "object",
   required: [
     "name",
@@ -95,7 +95,7 @@ export const SCHEMA_DATA_SKILL = {
   additionalProperties: false,
 } as const satisfies JSONSchemaType<Data_Skill>;
 
-export const SCHEMA_DATA_ITEM = {
+const SCHEMA_DATA_ITEM = {
   type: "object",
   required: [
     "name",
@@ -140,3 +140,5 @@ export const SCHEMA_DATA_ITEM = {
     damage: SCHEMA_DAMATE,
   },
 } as const satisfies JSONSchemaType<Data_Item>;
+
+export { SCHEMA_DATA_ITEM, SCHEMA_DATA_SKILL, SCHEMA_EFFECT, SCHEMA_DAMATE };

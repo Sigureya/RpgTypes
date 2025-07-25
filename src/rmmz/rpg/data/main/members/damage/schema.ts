@@ -1,6 +1,6 @@
 import type { JSONSchemaType } from "ajv";
 import type { Damage } from "./damage";
-export const SCHEMA_DAMAGE = {
+const SCHEMA_DAMAGE = {
   type: "object",
   required: ["type", "elementId", "formula", "variance", "critical"],
   properties: {
@@ -11,3 +11,5 @@ export const SCHEMA_DAMAGE = {
     critical: { type: "boolean" },
   },
 } as const satisfies JSONSchemaType<Damage>;
+
+export default SCHEMA_DAMAGE;

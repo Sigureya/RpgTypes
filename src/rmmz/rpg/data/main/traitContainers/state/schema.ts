@@ -1,7 +1,7 @@
 import type { JSONSchemaType } from "ajv";
 import type { Data_State } from "./types";
 
-export const SCHEMA_DATA_STATE = {
+const SCHEMA_DATA_STATE = {
   type: "object",
   required: [
     "name",
@@ -73,3 +73,5 @@ export const SCHEMA_DATA_STATE = {
     } satisfies JSONSchemaType<Data_State["traits"]>,
   },
 } as const satisfies JSONSchemaType<Data_State>;
+
+export default SCHEMA_DATA_STATE;
