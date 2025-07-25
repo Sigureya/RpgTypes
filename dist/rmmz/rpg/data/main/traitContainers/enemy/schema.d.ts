@@ -1,4 +1,4 @@
-declare const SCHEMA_DATA_ENEMY: {
+export declare const SCHEMA_DATA_ENEMY: {
     readonly type: "object";
     readonly required: readonly ["name", "id", "battlerName", "battlerHue", "exp", "gold", "note", "params", "dropItems", "traits", "actions"];
     readonly properties: {
