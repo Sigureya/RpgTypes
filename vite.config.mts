@@ -1,4 +1,4 @@
-import { defineConfig } from "vite";
+import { defineConfig, UserConfig } from "vite";
 import dts from "vite-plugin-dts";
 import path from "path";
 import terser from "@rollup/plugin-terser";
@@ -12,7 +12,7 @@ const libBuild = {
   exclude: [],
 };
 
-export default defineConfig({
+const normalBuild: UserConfig = {
   build: {
     outDir: libBuild.outDir,
     lib: {
@@ -63,4 +63,6 @@ export default defineConfig({
       //rollupTypes: true,
     }),
   ],
-});
+};
+
+export default defineConfig(normalBuild);

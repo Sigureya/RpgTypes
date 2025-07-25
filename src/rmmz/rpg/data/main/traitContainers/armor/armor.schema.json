@@ -1,0 +1,55 @@
+{
+  "type": "object",
+  "required": [
+    "name",
+    "id",
+    "description",
+    "iconIndex",
+    "price",
+    "params",
+    "traits",
+    "note",
+    "etypeId",
+    "atypeId"
+  ],
+
+  "properties": {
+    "name": { "type": "string" },
+    "id": { "type": "integer", "minimum": 0 },
+    "description": { "type": "string" },
+    "iconIndex": { "type": "integer", "minimum": 0 },
+    "price": { "type": "integer", "minimum": 0 },
+    "note": { "type": "string" },
+    "etypeId": { "type": "integer", "minimum": 0 },
+    "atypeId": { "type": "integer", "minimum": 0 },
+
+    "params": {
+      "type": "array",
+      "items": [
+        { "type": "integer" },
+        { "type": "integer" },
+        { "type": "integer" },
+        { "type": "integer" },
+        { "type": "integer" },
+        { "type": "integer" },
+        { "type": "integer" },
+        { "type": "integer" }
+      ],
+      "minItems": 8,
+      "maxItems": 8
+    },
+
+    "traits": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "code": { "type": "integer" },
+          "dataId": { "type": "integer" },
+          "value": { "type": "integer" }
+        },
+        "required": ["code", "dataId", "value"]
+      }
+    }
+  }
+}

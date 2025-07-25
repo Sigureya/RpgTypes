@@ -1,9 +1,8 @@
 import type { JSONSchemaType } from "ajv";
 import type { ParamArray } from "../members";
-import type { Trait } from "../trait";
 import type { Data_Armor } from "./types";
 
-const SCHEMA_DATA_ARMMOR = {
+export const SCHEMA_DATA_ARMMOR = {
   type: "object",
   required: [
     "name",
@@ -55,7 +54,7 @@ const SCHEMA_DATA_ARMMOR = {
         },
         required: ["code", "dataId", "value"],
       },
-    } satisfies JSONSchemaType<Trait[]>,
+    },
   },
 } as const satisfies JSONSchemaType<Data_Armor>;
 
