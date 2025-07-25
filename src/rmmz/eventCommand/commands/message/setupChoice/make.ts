@@ -1,14 +1,14 @@
 import { SHOW_CHOICES, SHOW_CHOICES_ITEM } from "@RpgTypes/rpg";
 import type {
+  ParamObject_ShowChoiceWhen,
+  Command_ShowChoiceWhen,
+  ParamArray_ShowChoiceWhen,
+} from "./item/types";
+import type {
   ParamArray_SetupChoice,
   ParamObject_SetupChoice,
   Command_ShowChoices,
 } from "./types/body";
-import type {
-  ParamObject_ShowChoiceWhen,
-  Command_ShowChoiceWhen,
-  ParamArray_ShowChoiceWhen,
-} from "./types/item";
 
 export const makeCommandShowChoiceItem = (
   param: Partial<ParamObject_ShowChoiceWhen> | undefined,

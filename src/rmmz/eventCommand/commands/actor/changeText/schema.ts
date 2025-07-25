@@ -1,7 +1,7 @@
 import type { JSONSchemaType } from "ajv";
 import type { CommandUnion_ChangeActorText } from "./types";
 
-export const SCHEMA_COMMAND_CHANGE_ACTOR_TEXT = {
+const SCHEMA_COMMAND_CHANGE_ACTOR_TEXT = {
   type: "object",
   required: ["code", "parameters", "indent"],
 
@@ -23,3 +23,5 @@ export const SCHEMA_COMMAND_CHANGE_ACTOR_TEXT = {
   },
   additionalProperties: false,
 } as const satisfies JSONSchemaType<CommandUnion_ChangeActorText>;
+
+export default SCHEMA_COMMAND_CHANGE_ACTOR_TEXT;
