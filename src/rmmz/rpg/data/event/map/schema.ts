@@ -1,40 +1,11 @@
-import type { AudioFileParams } from "@RpgTypes/utils";
 import type { JSONSchemaType } from "ajv";
-import type {
-  MapEventPage,
-  MapEvent_PageCondition,
-  MapEvent,
-} from "./event/page";
-import SCHEMA_MAP_EVENT_PAGE_CONDITION from "./event/page/condition/schema";
-import type { MoveRouteDataUnkwnown } from "./event/page/eventCommand/moveRoute";
-import SCHEMA_MOVEROUTE_DATA from "./event/page/eventCommand/moveRoute/schema";
-import SCHEMA_MAP_EVENT_IMAGE from "./event/page/image/schema";
-import type { MapEvent_Image } from "./event/page/image/types";
+import type { AudioFileParams } from "src/utils";
+import type { MapEvent } from "./event";
+import SCHEMA_MAP_EVENT_PAGE from "./event/page/schema";
 import type { Data_Map } from "./map";
 import type { Encounter } from "./members";
 
-export const SCHEMA_MAP_EVENT_PAGE = {
-  type: "object",
-  required: [
-    "image",
-    "moveRoute",
-    "conditions",
-    "directionFix",
-    "moveFrequency",
-  ] satisfies (keyof MapEventPage)[],
-  properties: {
-    moveFrequency: { type: "integer" },
-    directionFix: { type: "boolean" },
-    conditions:
-      SCHEMA_MAP_EVENT_PAGE_CONDITION satisfies JSONSchemaType<MapEvent_PageCondition>,
-
-    image: SCHEMA_MAP_EVENT_IMAGE satisfies JSONSchemaType<MapEvent_Image>,
-    moveRoute:
-      SCHEMA_MOVEROUTE_DATA satisfies JSONSchemaType<MoveRouteDataUnkwnown>,
-  },
-} as const satisfies JSONSchemaType<Omit<MapEventPage, "list">>;
-
-export const SCHEMA_DATA_MAP = {
+const SCHEMA_DATA_MAP = {
   type: "object",
 
   required: [
@@ -143,3 +114,5 @@ export const SCHEMA_DATA_MAP = {
   }, // satisfies Record<keyof Data_Map, unknown>,
 } as const satisfies JSONSchemaType<Omit<Data_Map, "events">>;
 // evetntsはコモンイベントが入ってて複雑。簡略化して対応する
+
+export default SCHEMA_DATA_MAP;
