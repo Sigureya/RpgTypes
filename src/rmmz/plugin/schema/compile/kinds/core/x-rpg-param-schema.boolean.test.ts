@@ -1,10 +1,10 @@
 import { describe, test, expect } from "vitest";
 import Ajv from "ajv";
-import type { X_ParamData } from "./core/paramBase/x-rpg-param";
-import type { BooleanParam } from "./core/primitiveParams";
-import { makeRpgParamMetaSchema } from "./x-rpg-param-schema";
+import type { X_ParamData } from "./paramBase/x-rpg-param";
+import type { BooleanParam } from "./primitiveParams";
+import SCHEMA_RPG_PARAM_META_SCHEMA from "./x-rpg-param.schema";
 const makeValidator = () => {
-  const schema = makeRpgParamMetaSchema();
+  const schema = SCHEMA_RPG_PARAM_META_SCHEMA;
   const ajv = new Ajv({
     discriminator: true,
     strict: true,

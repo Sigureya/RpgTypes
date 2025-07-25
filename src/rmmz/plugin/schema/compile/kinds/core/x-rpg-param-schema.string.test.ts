@@ -1,13 +1,14 @@
 import { describe, test, expect } from "vitest";
 import Ajv from "ajv";
-import { makeRpgParamMetaSchema } from "./x-rpg-param-schema";
+import SCHEMA_RPG_PARAM_META_SCHEMA from "./x-rpg-param.schema";
+
 interface X_MetaParam_Shared {
   kind: string;
   parent?: string | null;
 }
 
 const makeValidator = () => {
-  const schema = makeRpgParamMetaSchema();
+  const schema = SCHEMA_RPG_PARAM_META_SCHEMA;
   const ajv = new Ajv({
     discriminator: true,
     strict: true,
