@@ -3,7 +3,7 @@ import type { ParamArray } from "../members";
 import type { Trait } from "../trait";
 import type { Data_Enemy, DropItem, Enemy_Action } from "./types";
 
-const SCHEMA_DATA_ENEMY = {
+export const SCHEMA_DATA_ENEMY = {
   type: "object",
   required: [
     "name",
@@ -31,14 +31,14 @@ const SCHEMA_DATA_ENEMY = {
     params: {
       type: "array",
       items: [
-        { type: "integer" }, // mhp
-        { type: "integer" }, // mmp
-        { type: "integer" }, // atk
-        { type: "integer" }, // def
-        { type: "integer" }, // mat
-        { type: "integer" }, // mdf
-        { type: "integer" }, // agi
-        { type: "integer" }, // luk
+        { type: "integer" },
+        { type: "integer" },
+        { type: "integer" },
+        { type: "integer" },
+        { type: "integer" },
+        { type: "integer" },
+        { type: "integer" },
+        { type: "integer" },
       ],
       minItems: 8,
       maxItems: 8,

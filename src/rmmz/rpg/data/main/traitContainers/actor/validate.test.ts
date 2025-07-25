@@ -3,15 +3,11 @@ import { makeActorData } from "./actor";
 import type { Data_Actor } from "./types";
 const validate = require("./actorValidate.cjs"); // Adjust the import based on your setup
 
+const isDataActor = (data: unknown): data is Data_Actor => {
+  return validate(data);
+};
+
 test("validate actor data", () => {
   const actor: Data_Actor = makeActorData();
-  expect(validate(actor)).toBe(true);
+  expect(actor).toSatisfy(isDataActor);
 });
-
-// test("isDataActor2", () => {
-//   const actor: Data_Actor = makeActorData();
-//   expect(actor).toSatisfy(isDataActor2);
-// });
-// test("isDataActor2", () => {
-//   expect({}).not.toSatisfy(isDataActor2);
-// });
