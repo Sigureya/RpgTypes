@@ -1,20 +1,20 @@
 import { describe, test, expect } from "vitest";
 import Ajv from "ajv";
 import {
-  SCHEMA_SYSTEM_BATTLE_RULE_RMMZ,
-  SCHEMA_SYSTEM_BOOLEAN_GAMEMENU_OPTIONS,
-  SCHEMA_SYSTEM_GAME_INITIAL,
-  SCHEMA_SYSTEM_OTHER_DATA,
-  SCHEMA_SYSTEM_RPG_DATA_NAMES,
   SCHEMA_SYSTEM_TERMS_BUNDLE,
+  SCHEMA_SYSTEM_RPG_DATA_NAMES,
+  SCHEMA_SYSTEM_BOOLEAN_GAMEMENU_OPTIONS,
 } from "./core";
 import SCHEMA_SYSTEM_AUDIOFILES from "./core/audio/schema";
+import SCHEMA_SYSTEM_BATTLE_RULE_RMMZ from "./core/battle/schema";
 import SCHEMA_SYSTEM_BOOLEAN_OPTIONS from "./core/booleanOptions/gameSetting/schema";
+import SCHEMA_SYSTEM_GAME_INITIAL from "./core/gameInitial/schema";
 import SCHEMA_SYSTEM_IMAGE_SIZE from "./core/images/size/schema";
 import SCHEMA_SYSTEM_TITLE_IMAGES from "./core/images/title/schema";
+import SCHEMA_SYSTEM_OTHER_DATA from "./core/other/schema";
 import type { Terms_Messages } from "./core/terms/core/messages";
 import SCHEMA_SYSTEM_GAME_EDITOR_BUNDLE from "./gameEdit/schema";
-import { SCHEMA_SYSTEM_PARTIAL_BUNDLE } from "./schemaBundle";
+import SCHEMA_SYSTEM_PARTIAL_BUNDLE from "./schemaBundle";
 import { allSystemSchema, mergeSystemSchema } from "./schemaMerge";
 import type { Data_System } from "./system";
 import { isDataSystem } from "./validate";
