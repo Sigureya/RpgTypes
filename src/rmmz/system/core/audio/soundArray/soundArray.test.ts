@@ -1,11 +1,11 @@
 import { describe, test, expect } from "vitest";
 import Ajv from "ajv";
 import { makeAudioFileParams } from "src/utils";
-import { SCHEMA_SYSTEM_SOUND_ARRAY } from "./schema";
+import SCHEMA_SYSTEM_SOUND_ARRAY from "./schema";
 import { makeSoundsArray, makeSoundsObject } from "./soundArray";
 import type { System_SoundsArray, System_SoundsObject } from "./types";
 
-const ajv = new Ajv({ code: { source: false } });
+const ajv = new Ajv({ strict: true });
 const validate = ajv.compile(SCHEMA_SYSTEM_SOUND_ARRAY);
 
 describe("makeAudioFileParams default values", () => {
@@ -102,7 +102,7 @@ describe("System_SoundsArray schema validation (property requirements)", () => {
     const arr = Array.from({ length: 24 }, () => ({
       name: "test",
     }));
-    expect(arr).toSatisfy(validate);
+    expect(arr).not.toSatisfy(validate);
   });
   test("invalid: additional property present", () => {
     const arr = Array.from({ length: 24 }, () => ({
