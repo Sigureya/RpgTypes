@@ -1,12 +1,10 @@
 import { describe, test, expect } from "vitest";
 import Ajv from "ajv";
-import {
-  SCHEMA_SYSTEM_EDITOR_SETTINGS,
-  SCHEMA_SYSTEM_EDITOR_SETTINGS_LABELS,
-} from "./schema";
+import SCHEMA_SYSTEM_EDITOR_SETTINGS_LABELS from "./labels.schema";
+import SCHEMA_SYSTEM_EDITOR_SETTINGS from "./schema";
 import type { EditorSettings, EditorSettingLables } from "./types";
 
-const ajv = new Ajv();
+const ajv = new Ajv({ strict: true });
 const validateSettings = ajv.compile(SCHEMA_SYSTEM_EDITOR_SETTINGS);
 const validateLabels = ajv.compile(SCHEMA_SYSTEM_EDITOR_SETTINGS_LABELS);
 

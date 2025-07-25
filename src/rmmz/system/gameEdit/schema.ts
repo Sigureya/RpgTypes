@@ -1,5 +1,5 @@
 import type { JSONSchemaType } from "ajv";
-import { SCHEMA_SYSTEM_EDITOR_SETTINGS } from "./editor/schema";
+import SCHEMA_SYSTEM_EDITOR_SETTINGS from "./editor/schema";
 import SCHEMA_SYSTEM_TEST_BATTLER from "./testPlay/testBattler/schema";
 import type { System_GameEditorBundleRMMZ } from "./types";
 
