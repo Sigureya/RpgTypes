@@ -1,15 +1,8 @@
 import type { EventCommandUnknown } from "@RpgTypes/eventCommand";
 import type { MapEvent_PageCondition } from "./condition";
-import type { Direction8, EventCommand } from "./eventCommand";
+import type { EventCommand } from "./eventCommand";
 import type { MoveRouteDataUnkwnown } from "./eventCommand/moveRoute";
-
-export interface MapEvent_Image {
-  characterIndex: number;
-  characterName: string;
-  direction: Direction8;
-  pattern: number;
-  tileId: number;
-}
+import type { MapEvent_Image } from "./image/types";
 
 export interface MapEventPage<T extends EventCommandUnknown = EventCommand> {
   conditions: MapEvent_PageCondition;

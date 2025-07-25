@@ -1,34 +1,13 @@
 import type { AudioFileParams } from "@RpgTypes/utils";
 import type { JSONSchemaType } from "ajv";
-import type {
-  MapEvent,
-  MapEvent_Image,
-  MapEvent_PageCondition,
-  MapEventPage,
-} from "./event";
+import type { MapEvent, MapEvent_PageCondition, MapEventPage } from "./event";
 import SCHEMA_MAP_EVENT_PAGE_CONDITION from "./event/condition/schema";
 import type { MoveRouteDataUnkwnown } from "./event/eventCommand/moveRoute";
 import SCHEMA_MOVEROUTE_DATA from "./event/eventCommand/moveRoute/schema";
+import SCHEMA_MAP_EVENT_IMAGE from "./event/image/schema";
+import type { MapEvent_Image } from "./event/image/types";
 import type { Data_Map } from "./map";
 import type { Encounter } from "./members";
-
-export const SCHEMA_MAP_EVENT_IMAGE = {
-  type: "object",
-  required: [
-    "characterIndex",
-    "characterName",
-    "direction",
-    "pattern",
-    "tileId",
-  ],
-  properties: {
-    characterIndex: { type: "integer", minimum: 0 },
-    characterName: { type: "string" },
-    direction: { type: "integer", enum: [2, 4, 6, 8] },
-    pattern: { type: "integer" },
-    tileId: { type: "integer" },
-  },
-} as const satisfies JSONSchemaType<MapEvent_Image>;
 
 export const SCHEMA_MAP_EVENT_PAGE = {
   type: "object",

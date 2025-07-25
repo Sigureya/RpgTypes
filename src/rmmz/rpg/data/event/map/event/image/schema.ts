@@ -1,5 +1,5 @@
 import type { JSONSchemaType } from "ajv";
-import type { MapEvent_Image } from "./page";
+import type { MapEvent_Image } from "./types";
 
 const SCHEMA_MAP_EVENT_IMAGE = {
   type: "object",
