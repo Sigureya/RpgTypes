@@ -1,15 +1,13 @@
 import Ajv from "ajv";
 import type { AttackMotion, System_ImageSize } from "./core";
-import {
-  SCHEMA_SYSTEM_MEMBERS_ATTACK_MOTION,
-  SCHEMA_SYSTEM_IMAGE_SIZE,
-} from "./core";
+import { SCHEMA_SYSTEM_IMAGE_SIZE } from "./core";
+import SCHEMA_SYSTEM_MEMBERS_ATTACK_MOTION from "./core/attackMotion/schema";
 import type { TestBattler } from "./gameEdit";
 import { SCHEMA_SYSTEM_TEST_BATTLER } from "./gameEdit/testPlay/schema";
 import { mergeSystemSchema, allSystemSchema } from "./schemaMerge";
 import type { Data_System } from "./system";
 
-const ajv = new Ajv({ strict: true, code: { source: false } });
+const ajv = new Ajv({ strict: true });
 
 const schema = mergeSystemSchema(allSystemSchema());
 const systemValidate = ajv.compile(schema);

@@ -1,7 +1,7 @@
 import type { JSONSchemaType } from "ajv";
 import type { Data_MapInfo } from "./mapInfo";
 
-export const SCHEMA_DATA_MAP_INFO = {
+const SCHEMA_DATA_MAP_INFO = {
   type: "object",
   required: [
     "name",
@@ -22,3 +22,5 @@ export const SCHEMA_DATA_MAP_INFO = {
     scrollY: { type: "number" },
   },
 } as const satisfies JSONSchemaType<Data_MapInfo>;
+
+export default SCHEMA_DATA_MAP_INFO;

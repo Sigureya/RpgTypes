@@ -1,6 +1,6 @@
 import type { JSONSchemaType } from "ajv";
-import { SCHEMA_SYSTEM_ITEM_CATEGORIES } from "./itemCategories/schema";
-import { SCHEMA_SYSTEM_MENU_COMMANDS_ENABLED } from "./menuCommands/schema";
+import SCHEMA_SYSTEM_ITEM_CATEGORIES from "./itemCategories/schema";
+import SCHEMA_SYSTEM_MENU_COMMANDS_ENABLED from "./menuCommands/schema";
 import type { System_BooleanGameMenuOptions } from "./types";
 
 export const SCHEMA_SYSTEM_BOOLEAN_GAMEMENU_OPTIONS = {

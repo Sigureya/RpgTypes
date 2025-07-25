@@ -1,7 +1,7 @@
 import type { JSONSchemaType } from "ajv";
 import type { AttackMotion } from "./types";
 
-export const SCHEMA_SYSTEM_MEMBERS_ATTACK_MOTION = {
+const SCHEMA_SYSTEM_MEMBERS_ATTACK_MOTION = {
   type: "object",
   additionalProperties: false,
   required: ["type", "weaponImageId"],
@@ -10,3 +10,5 @@ export const SCHEMA_SYSTEM_MEMBERS_ATTACK_MOTION = {
     weaponImageId: { type: "number" },
   },
 } as const satisfies JSONSchemaType<AttackMotion>;
+
+export default SCHEMA_SYSTEM_MEMBERS_ATTACK_MOTION;
