@@ -1,4 +1,4 @@
-export declare const SCHEMA_COMMAND_UNKNOWN: {
+declare const SCHEMA_COMMAND_UNKNOWN: {
     readonly type: "object";
     readonly additionalProperties: false;
     readonly required: ("code" | "parameters" | "indent")[];
@@ -15,3 +15,4 @@ export declare const SCHEMA_COMMAND_UNKNOWN: {
         };
     };
 };
+export default SCHEMA_COMMAND_UNKNOWN;

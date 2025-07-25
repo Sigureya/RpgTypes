@@ -1,4 +1,4 @@
-export declare const SCHEMA_COMMAND_CONTROL_SWITCHES: {
+declare const SCHEMA_COMMAND_CONTROL_SWITCHES: {
     readonly type: "object";
     readonly required: readonly ["code", "parameters", "indent"];
     readonly properties: {
@@ -27,3 +27,4 @@ export declare const SCHEMA_COMMAND_CONTROL_SWITCHES: {
         };
     };
 };
+export default SCHEMA_COMMAND_CONTROL_SWITCHES;

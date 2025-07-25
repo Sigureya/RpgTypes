@@ -1,4 +1,4 @@
-export declare const SCHEMA_SYSTEM_OTHER_DATA: {
+declare const SCHEMA_SYSTEM_OTHER_DATA: {
     readonly type: "object";
     readonly additionalProperties: false;
     readonly required: readonly ["locale", "versionId", "windowTone"];
@@ -19,3 +19,4 @@ export declare const SCHEMA_SYSTEM_OTHER_DATA: {
         };
     };
 };
+export default SCHEMA_SYSTEM_OTHER_DATA;

@@ -1,5 +1,4 @@
-export declare const TYPENAME_TRAIT: "Trait";
-export declare const SCHEMA_TRAIT: {
+declare const SCHEMA_TRAIT: {
     readonly type: "object";
     readonly required: readonly ["code", "dataId", "value"];
     readonly properties: {
@@ -14,3 +13,4 @@ export declare const SCHEMA_TRAIT: {
         };
     };
 };
+export default SCHEMA_TRAIT;

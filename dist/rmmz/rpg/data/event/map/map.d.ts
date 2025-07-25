@@ -1,6 +1,6 @@
 import { EventCommandUnknown } from '../../../../eventCommand';
 import { AudioFileParams } from '../../../../../libs/utils';
-import { EventCommand, MapEvent } from './event/';
+import { EventCommand, MapEvent } from './event/page';
 import { MapEventContainer } from './mapEventContainer';
 import { Encounter } from './members';
 export interface Data_Map<CommandType extends EventCommandUnknown = EventCommand> extends MapEventContainer<CommandType> {

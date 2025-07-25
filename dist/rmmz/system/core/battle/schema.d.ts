@@ -1,4 +1,4 @@
-export declare const SCHEMA_SYSTEM_BATTLE_RULE_RMMZ: {
+declare const SCHEMA_SYSTEM_BATTLE_RULE_RMMZ: {
     readonly type: "object";
     readonly additionalProperties: false;
     readonly required: readonly ["magicSkills", "battleSystem"];
@@ -16,3 +16,4 @@ export declare const SCHEMA_SYSTEM_BATTLE_RULE_RMMZ: {
         };
     };
 };
+export default SCHEMA_SYSTEM_BATTLE_RULE_RMMZ;

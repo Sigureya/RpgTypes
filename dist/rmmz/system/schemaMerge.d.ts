@@ -6,184 +6,6 @@ export interface PartialSystemSchema {
     type: "object";
 }
 export declare const allSystemSchema: () => ({
-    readonly additionalProperties: false;
-    readonly type: "object";
-    readonly required: readonly ["battleBgm", "victoryMe", "gameoverMe", "titleBgm", "defeatMe", "sounds"];
-    readonly properties: {
-        readonly battleBgm: {
-            readonly type: "object";
-            readonly properties: {
-                readonly name: {
-                    readonly type: "string";
-                };
-                readonly volume: {
-                    readonly type: "integer";
-                    readonly minimum: 0;
-                    readonly maximum: 100;
-                };
-                readonly pitch: {
-                    readonly type: "integer";
-                    readonly minimum: 0;
-                    readonly maximum: 100;
-                };
-                readonly pan: {
-                    readonly type: "integer";
-                    readonly minimum: -100;
-                    readonly maximum: 100;
-                };
-            };
-            readonly required: readonly ["name", "volume", "pitch", "pan"];
-            readonly additionalProperties: false;
-        };
-        readonly victoryMe: {
-            readonly type: "object";
-            readonly properties: {
-                readonly name: {
-                    readonly type: "string";
-                };
-                readonly volume: {
-                    readonly type: "integer";
-                    readonly minimum: 0;
-                    readonly maximum: 100;
-                };
-                readonly pitch: {
-                    readonly type: "integer";
-                    readonly minimum: 0;
-                    readonly maximum: 100;
-                };
-                readonly pan: {
-                    readonly type: "integer";
-                    readonly minimum: -100;
-                    readonly maximum: 100;
-                };
-            };
-            readonly required: readonly ["name", "volume", "pitch", "pan"];
-            readonly additionalProperties: false;
-        };
-        readonly gameoverMe: {
-            readonly type: "object";
-            readonly properties: {
-                readonly name: {
-                    readonly type: "string";
-                };
-                readonly volume: {
-                    readonly type: "integer";
-                    readonly minimum: 0;
-                    readonly maximum: 100;
-                };
-                readonly pitch: {
-                    readonly type: "integer";
-                    readonly minimum: 0;
-                    readonly maximum: 100;
-                };
-                readonly pan: {
-                    readonly type: "integer";
-                    readonly minimum: -100;
-                    readonly maximum: 100;
-                };
-            };
-            readonly required: readonly ["name", "volume", "pitch", "pan"];
-            readonly additionalProperties: false;
-        };
-        readonly titleBgm: {
-            readonly type: "object";
-            readonly properties: {
-                readonly name: {
-                    readonly type: "string";
-                };
-                readonly volume: {
-                    readonly type: "integer";
-                    readonly minimum: 0;
-                    readonly maximum: 100;
-                };
-                readonly pitch: {
-                    readonly type: "integer";
-                    readonly minimum: 0;
-                    readonly maximum: 100;
-                };
-                readonly pan: {
-                    readonly type: "integer";
-                    readonly minimum: -100;
-                    readonly maximum: 100;
-                };
-            };
-            readonly required: readonly ["name", "volume", "pitch", "pan"];
-            readonly additionalProperties: false;
-        };
-        readonly defeatMe: {
-            readonly type: "object";
-            readonly properties: {
-                readonly name: {
-                    readonly type: "string";
-                };
-                readonly volume: {
-                    readonly type: "integer";
-                    readonly minimum: 0;
-                    readonly maximum: 100;
-                };
-                readonly pitch: {
-                    readonly type: "integer";
-                    readonly minimum: 0;
-                    readonly maximum: 100;
-                };
-                readonly pan: {
-                    readonly type: "integer";
-                    readonly minimum: -100;
-                    readonly maximum: 100;
-                };
-            };
-            readonly required: readonly ["name", "volume", "pitch", "pan"];
-            readonly additionalProperties: false;
-        };
-        readonly sounds: {
-            readonly type: "array";
-            readonly items: {
-                readonly type: "object";
-                readonly properties: {
-                    readonly name: {
-                        readonly type: "string";
-                    };
-                    readonly volume: {
-                        readonly type: "integer";
-                        readonly minimum: 0;
-                        readonly maximum: 100;
-                    };
-                    readonly pitch: {
-                        readonly type: "integer";
-                        readonly minimum: 0;
-                        readonly maximum: 100;
-                    };
-                    readonly pan: {
-                        readonly type: "integer";
-                        readonly minimum: -100;
-                        readonly maximum: 100;
-                    };
-                };
-                readonly required: readonly ["name", "volume", "pitch", "pan"];
-                readonly additionalProperties: false;
-            };
-            readonly minItems: 24;
-            readonly maxItems: 24;
-        };
-    };
-} | {
-    readonly type: "object";
-    readonly additionalProperties: false;
-    readonly required: readonly ["magicSkills", "battleSystem"];
-    readonly properties: {
-        readonly magicSkills: {
-            readonly type: "array";
-            readonly items: {
-                readonly type: "number";
-            };
-            readonly minItems: 0;
-            readonly uniqueItems: true;
-        };
-        readonly battleSystem: {
-            readonly type: "number";
-        };
-    };
-} | {
     readonly required: readonly ["itemCategories", "menuCommands"];
     readonly additionalProperties: false;
     readonly type: "object";
@@ -250,6 +72,202 @@ export declare const allSystemSchema: () => ({
 } | {
     readonly additionalProperties: false;
     readonly type: "object";
+    readonly required: readonly ["tileSize", "faceSize", "iconSize"];
+    readonly properties: {
+        readonly tileSize: {
+            readonly type: "integer";
+            readonly minimum: 0;
+        };
+        readonly faceSize: {
+            readonly type: "integer";
+            readonly minimum: 0;
+        };
+        readonly iconSize: {
+            readonly type: "integer";
+            readonly minimum: 0;
+        };
+    };
+} | {
+    readonly additionalProperties: false;
+    readonly type: "object";
+    readonly required: readonly ["battleBgm", "victoryMe", "gameoverMe", "titleBgm", "defeatMe", "sounds"];
+    readonly properties: {
+        readonly battleBgm: {
+            readonly type: "object";
+            readonly properties: {
+                readonly name: {
+                    readonly type: "string";
+                };
+                readonly volume: {
+                    readonly type: "integer";
+                    readonly minimum: 0;
+                    readonly maximum: 100;
+                };
+                readonly pitch: {
+                    readonly type: "integer";
+                    readonly minimum: 0;
+                    readonly maximum: 100;
+                };
+                readonly pan: {
+                    readonly type: "integer";
+                    readonly minimum: -100;
+                    readonly maximum: 100;
+                };
+            };
+            readonly required: ["name", "volume", "pitch", "pan"];
+            readonly additionalProperties: false;
+        };
+        readonly victoryMe: {
+            readonly type: "object";
+            readonly properties: {
+                readonly name: {
+                    readonly type: "string";
+                };
+                readonly volume: {
+                    readonly type: "integer";
+                    readonly minimum: 0;
+                    readonly maximum: 100;
+                };
+                readonly pitch: {
+                    readonly type: "integer";
+                    readonly minimum: 0;
+                    readonly maximum: 100;
+                };
+                readonly pan: {
+                    readonly type: "integer";
+                    readonly minimum: -100;
+                    readonly maximum: 100;
+                };
+            };
+            readonly required: ["name", "volume", "pitch", "pan"];
+            readonly additionalProperties: false;
+        };
+        readonly gameoverMe: {
+            readonly type: "object";
+            readonly properties: {
+                readonly name: {
+                    readonly type: "string";
+                };
+                readonly volume: {
+                    readonly type: "integer";
+                    readonly minimum: 0;
+                    readonly maximum: 100;
+                };
+                readonly pitch: {
+                    readonly type: "integer";
+                    readonly minimum: 0;
+                    readonly maximum: 100;
+                };
+                readonly pan: {
+                    readonly type: "integer";
+                    readonly minimum: -100;
+                    readonly maximum: 100;
+                };
+            };
+            readonly required: ["name", "volume", "pitch", "pan"];
+            readonly additionalProperties: false;
+        };
+        readonly titleBgm: {
+            readonly type: "object";
+            readonly properties: {
+                readonly name: {
+                    readonly type: "string";
+                };
+                readonly volume: {
+                    readonly type: "integer";
+                    readonly minimum: 0;
+                    readonly maximum: 100;
+                };
+                readonly pitch: {
+                    readonly type: "integer";
+                    readonly minimum: 0;
+                    readonly maximum: 100;
+                };
+                readonly pan: {
+                    readonly type: "integer";
+                    readonly minimum: -100;
+                    readonly maximum: 100;
+                };
+            };
+            readonly required: ["name", "volume", "pitch", "pan"];
+            readonly additionalProperties: false;
+        };
+        readonly defeatMe: {
+            readonly type: "object";
+            readonly properties: {
+                readonly name: {
+                    readonly type: "string";
+                };
+                readonly volume: {
+                    readonly type: "integer";
+                    readonly minimum: 0;
+                    readonly maximum: 100;
+                };
+                readonly pitch: {
+                    readonly type: "integer";
+                    readonly minimum: 0;
+                    readonly maximum: 100;
+                };
+                readonly pan: {
+                    readonly type: "integer";
+                    readonly minimum: -100;
+                    readonly maximum: 100;
+                };
+            };
+            readonly required: ["name", "volume", "pitch", "pan"];
+            readonly additionalProperties: false;
+        };
+        readonly sounds: {
+            readonly type: "array";
+            readonly items: {
+                readonly type: "object";
+                readonly properties: {
+                    readonly name: {
+                        readonly type: "string";
+                    };
+                    readonly volume: {
+                        readonly type: "integer";
+                        readonly minimum: 0;
+                        readonly maximum: 100;
+                    };
+                    readonly pitch: {
+                        readonly type: "integer";
+                        readonly minimum: 0;
+                        readonly maximum: 100;
+                    };
+                    readonly pan: {
+                        readonly type: "integer";
+                        readonly minimum: -100;
+                        readonly maximum: 100;
+                    };
+                };
+                readonly required: ["name", "volume", "pitch", "pan"];
+                readonly additionalProperties: false;
+            };
+            readonly minItems: 24;
+            readonly maxItems: 24;
+        };
+    };
+} | {
+    readonly type: "object";
+    readonly additionalProperties: false;
+    readonly required: readonly ["magicSkills", "battleSystem"];
+    readonly properties: {
+        readonly magicSkills: {
+            readonly type: "array";
+            readonly items: {
+                readonly type: "number";
+            };
+            readonly minItems: 0;
+            readonly uniqueItems: true;
+        };
+        readonly battleSystem: {
+            readonly type: "number";
+        };
+    };
+} | {
+    readonly additionalProperties: false;
+    readonly type: "object";
     readonly required: readonly ["startMapId", "startX", "startY", "partyMembersArray"];
     readonly properties: {
         readonly startMapId: {
@@ -270,24 +288,6 @@ export declare const allSystemSchema: () => ({
                 readonly type: "integer";
                 readonly minimum: 0;
             };
-        };
-    };
-} | {
-    readonly additionalProperties: false;
-    readonly type: "object";
-    readonly required: readonly ["tileSize", "faceSize", "iconSize"];
-    readonly properties: {
-        readonly tileSize: {
-            readonly type: "integer";
-            readonly minimum: 0;
-        };
-        readonly faceSize: {
-            readonly type: "integer";
-            readonly minimum: 0;
-        };
-        readonly iconSize: {
-            readonly type: "integer";
-            readonly minimum: 0;
         };
     };
 } | {
@@ -371,7 +371,7 @@ export declare const allSystemSchema: () => ({
         };
     };
 } | {
-    readonly required: ("terms" | "gameTitle" | "currencyUnit")[];
+    readonly required: ("gameTitle" | "currencyUnit" | "terms")[];
     readonly additionalProperties: false;
     readonly type: "object";
     readonly properties: {

@@ -1,5 +1,5 @@
 import { JSONSchemaType } from 'ajv';
-export declare const SCHEMA_SYSTEM_GAME_EDITOR_BUNDLE: {
+declare const SCHEMA_SYSTEM_GAME_EDITOR_BUNDLE: {
     readonly additionalProperties: false;
     readonly type: "object";
     readonly required: readonly ["battleback1Name", "battleback2Name", "battlerHue", "battlerName", "editMapId", "editor", "testBattlers", "testTroopId"];
@@ -51,3 +51,4 @@ export declare const SCHEMA_SYSTEM_GAME_EDITOR_BUNDLE: {
         readonly editor: JSONSchemaType<import('./editor').EditorSettings>;
     };
 };
+export default SCHEMA_SYSTEM_GAME_EDITOR_BUNDLE;

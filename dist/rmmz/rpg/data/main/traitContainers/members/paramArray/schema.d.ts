@@ -1,4 +1,4 @@
-export declare const SCHEMA_PARAM_ARRAY: {
+declare const SCHEMA_PARAM_ARRAY: {
     readonly type: "array";
     readonly items: readonly [{
         readonly type: "integer";
@@ -20,3 +20,4 @@ export declare const SCHEMA_PARAM_ARRAY: {
     readonly minItems: 8;
     readonly maxItems: 8;
 };
+export default SCHEMA_PARAM_ARRAY;

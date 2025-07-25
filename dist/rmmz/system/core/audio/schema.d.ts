@@ -1,4 +1,4 @@
-export declare const SCHEMA_SYSTEM_AUDIOFILES: {
+declare const SCHEMA_SYSTEM_AUDIOFILES: {
     readonly additionalProperties: false;
     readonly type: "object";
     readonly required: readonly ["battleBgm", "victoryMe", "gameoverMe", "titleBgm", "defeatMe", "sounds"];
@@ -25,7 +25,7 @@ export declare const SCHEMA_SYSTEM_AUDIOFILES: {
                     readonly maximum: 100;
                 };
             };
-            readonly required: readonly ["name", "volume", "pitch", "pan"];
+            readonly required: ["name", "volume", "pitch", "pan"];
             readonly additionalProperties: false;
         };
         readonly victoryMe: {
@@ -50,7 +50,7 @@ export declare const SCHEMA_SYSTEM_AUDIOFILES: {
                     readonly maximum: 100;
                 };
             };
-            readonly required: readonly ["name", "volume", "pitch", "pan"];
+            readonly required: ["name", "volume", "pitch", "pan"];
             readonly additionalProperties: false;
         };
         readonly gameoverMe: {
@@ -75,7 +75,7 @@ export declare const SCHEMA_SYSTEM_AUDIOFILES: {
                     readonly maximum: 100;
                 };
             };
-            readonly required: readonly ["name", "volume", "pitch", "pan"];
+            readonly required: ["name", "volume", "pitch", "pan"];
             readonly additionalProperties: false;
         };
         readonly titleBgm: {
@@ -100,7 +100,7 @@ export declare const SCHEMA_SYSTEM_AUDIOFILES: {
                     readonly maximum: 100;
                 };
             };
-            readonly required: readonly ["name", "volume", "pitch", "pan"];
+            readonly required: ["name", "volume", "pitch", "pan"];
             readonly additionalProperties: false;
         };
         readonly defeatMe: {
@@ -125,7 +125,7 @@ export declare const SCHEMA_SYSTEM_AUDIOFILES: {
                     readonly maximum: 100;
                 };
             };
-            readonly required: readonly ["name", "volume", "pitch", "pan"];
+            readonly required: ["name", "volume", "pitch", "pan"];
             readonly additionalProperties: false;
         };
         readonly sounds: {
@@ -152,7 +152,7 @@ export declare const SCHEMA_SYSTEM_AUDIOFILES: {
                         readonly maximum: 100;
                     };
                 };
-                readonly required: readonly ["name", "volume", "pitch", "pan"];
+                readonly required: ["name", "volume", "pitch", "pan"];
                 readonly additionalProperties: false;
             };
             readonly minItems: 24;
@@ -160,3 +160,4 @@ export declare const SCHEMA_SYSTEM_AUDIOFILES: {
         };
     };
 };
+export default SCHEMA_SYSTEM_AUDIOFILES;

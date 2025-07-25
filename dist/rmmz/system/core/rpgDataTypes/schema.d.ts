@@ -1,4 +1,4 @@
-export declare const SCHEMA_SYSTEM_RPG_DATA_NAMES: {
+declare const SCHEMA_SYSTEM_RPG_DATA_NAMES: {
     readonly additionalProperties: false;
     readonly type: "object";
     readonly required: readonly ["weaponTypes", "skillTypes", "elements", "variables", "equipTypes", "switches", "armorTypes"];
@@ -47,3 +47,4 @@ export declare const SCHEMA_SYSTEM_RPG_DATA_NAMES: {
         };
     };
 };
+export default SCHEMA_SYSTEM_RPG_DATA_NAMES;

@@ -1,4 +1,4 @@
-export declare const SCHEMA_SYSTEM_BOOLEAN_GAMEMENU_OPTIONS: {
+declare const SCHEMA_SYSTEM_BOOLEAN_GAMEMENU_OPTIONS: {
     readonly required: readonly ["itemCategories", "menuCommands"];
     readonly additionalProperties: false;
     readonly type: "object";
@@ -21,3 +21,4 @@ export declare const SCHEMA_SYSTEM_BOOLEAN_GAMEMENU_OPTIONS: {
         };
     };
 };
+export default SCHEMA_SYSTEM_BOOLEAN_GAMEMENU_OPTIONS;

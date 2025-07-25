@@ -1,4 +1,4 @@
-export declare const SCHEMA_COMMAND_CONTROL_TIMER: {
+declare const SCHEMA_COMMAND_CONTROL_TIMER: {
     required: ("code" | "parameters" | "indent")[];
     type: "object";
     properties: {
@@ -24,3 +24,4 @@ export declare const SCHEMA_COMMAND_CONTROL_TIMER: {
         };
     };
 };
+export default SCHEMA_COMMAND_CONTROL_TIMER;
