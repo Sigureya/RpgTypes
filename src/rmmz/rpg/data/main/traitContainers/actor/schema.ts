@@ -1,7 +1,7 @@
 import type { JSONSchemaType } from "ajv";
 import type { Data_Actor } from "./types";
 
-const SCHEMA_DATA_ACTOR = {
+export const SCHEMA_DATA_ACTOR = {
   type: "object",
   required: [
     "name",
@@ -46,4 +46,3 @@ const SCHEMA_DATA_ACTOR = {
     },
   },
 } as const satisfies JSONSchemaType<Data_Actor>;
-export default SCHEMA_DATA_ACTOR;

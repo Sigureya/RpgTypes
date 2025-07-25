@@ -1,9 +1,4 @@
-import { SourceIdentifier } from '../../../../../libs/namedItemSource';
-import { X_ParamData, X_RmmzParam } from './core/paramBase/x-rpg-param';
-import { NumberParam } from './core/primitiveParams';
-export type X_ParamDataId = X_RmmzParam<SourceIdentifier, "dataId">;
-export type X_ParamNumber = X_ParamData<Omit<NumberParam, "min" | "max">>;
-export declare const makeRpgParamMetaSchema: () => {
+declare const SCHEMA_RPG_PARAM_META_SCHEMA: {
     readonly type: "object";
     readonly discriminator: {
         readonly propertyName: "kind";
@@ -185,3 +180,4 @@ export declare const makeRpgParamMetaSchema: () => {
         };
     }];
 };
+export default SCHEMA_RPG_PARAM_META_SCHEMA;
