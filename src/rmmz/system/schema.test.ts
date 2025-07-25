@@ -1,8 +1,8 @@
 import { describe, test, expect } from "vitest";
 import Ajv from "ajv";
-import { SCHEMA_SYSTEM_BOOLEAN_GAMEMENU_OPTIONS } from "./core";
 import SCHEMA_SYSTEM_AUDIOFILES from "./core/audio/schema";
 import SCHEMA_SYSTEM_BATTLE_RULE_RMMZ from "./core/battle/schema";
+import SCHEMA_SYSTEM_BOOLEAN_GAMEMENU_OPTIONS from "./core/booleanOptions/gameMenu/schema";
 import SCHEMA_SYSTEM_BOOLEAN_OPTIONS from "./core/booleanOptions/gameSetting/schema";
 import SCHEMA_SYSTEM_GAME_INITIAL from "./core/gameInitial/schema";
 import SCHEMA_SYSTEM_IMAGE_SIZE from "./core/images/size/schema";
