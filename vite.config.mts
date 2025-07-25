@@ -1,4 +1,4 @@
-import { defineConfig, UserConfig } from "vite";
+import { BuildEnvironmentOptions, defineConfig, UserConfig } from "vite";
 import dts from "vite-plugin-dts";
 import path from "path";
 import terser from "@rollup/plugin-terser";
@@ -64,5 +64,22 @@ const normalBuild: UserConfig = {
     }),
   ],
 };
+const dummyBuiild = (): BuildEnvironmentOptions => ({
+  outDir: "./dummy",
+  lib: {
+    entry: "./src/dummy.ts",
+    formats: ["es"],
+  },
+  emptyOutDir: false,
+});
 
-export default defineConfig(normalBuild);
+export default defineConfig(({ mode }): UserConfig => {
+  if (mode === "validate") {
+    return {
+      plugins: [validateSchemaPlugin()],
+
+      build: dummyBuiild(),
+    };
+  }
+  return normalBuild;
+});
