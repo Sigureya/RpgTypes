@@ -316,7 +316,7 @@ const allSchema = [
 ] as const satisfies SchemaCase[];
 
 describe("Each schema validates systemData", () => {
-  const ajv = new Ajv({ strict: false });
+  const ajv = new Ajv({ strict: true });
   allSchema.forEach(({ schema, caseName }) => {
     test(`Schema: ${caseName} validates mockSystem`, () => {
       expect(schema).toBeDefined();
