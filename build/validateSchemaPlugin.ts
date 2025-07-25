@@ -18,10 +18,9 @@ const build = async (schemaPath: string) => {
   // e.g. person/person.schema.json → person/validatePerson.ts
   const parsed = path.parse(fullPath);
   const fileBase = parsed.name.replace(/\.schema$/, ""); // e.g. "person"
-  const validateName = fileBase + ".validate";
 
-  const targetFile = path.join(parsed.dir, `${validateName}.ts`);
-  const codeWithExport = `${standalone}\n export default validate;`;
+  const targetFile = path.join(parsed.dir, `${fileBase}Validate.cjs`);
+  const codeWithExport = standalone;
 
   await fs.writeFile(targetFile, codeWithExport, "utf-8");
   console.log(`✅ バリデーション関数を生成: ${targetFile}`);
