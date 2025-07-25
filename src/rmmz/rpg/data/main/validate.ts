@@ -45,17 +45,7 @@ export const isDataWeapon = (data: unknown): data is Data_Weapon => {
   return weapon(data);
 };
 
-const enemy = ajv.compile(SCHEMA_DATA_ENEMY);
-export const isDataEnemy = (data: unknown): data is Data_Enemy => {
-  return enemy(data);
-};
-
-const state = ajv.compile(SCHEMA_DATA_STATE);
 export const isDataState = (data: unknown): data is Data_State => {
+  const state = ajv.compile(SCHEMA_DATA_STATE);
   return state(data);
-};
-
-const class_ = ajv.compile(SCHEMA_DATA_CLASS);
-export const isDataClass = (data: unknown): data is Data_Class => {
-  return class_(data);
 };
