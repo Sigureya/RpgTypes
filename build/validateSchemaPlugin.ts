@@ -30,6 +30,7 @@ export function validateSchemaPlugin(): PluginOption {
   return {
     name: "vite-plugin-validate-schema",
     apply: "build",
+    enforce: "pre",
 
     async buildStart() {
       const schemaPaths = await fg("src/**/!(*.d).schema.json");
