@@ -22,7 +22,10 @@ const build = async (schemaPath: string): Promise<void> => {
       const schemaText = await fs.readFile(fullPath, "utf-8");
       const schemaJson = JSON.parse(schemaText);
 
-      const ajv = new Ajv({ code: { source: true }, strict: true });
+      const ajv = new Ajv({
+        code: { source: true, esm: false },
+        strict: true,
+      });
       const validate = ajv.compile(schemaJson);
       const standalone: string = standaloneCode(ajv, validate);
 
