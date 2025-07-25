@@ -1,4 +1,4 @@
-export type JSONSchemaAudioFileParams = {
+export interface JSONSchemaAudioFileParams {
   type: "object";
   additionalProperties: false;
   required: ["name", "volume", "pitch", "pan"];
@@ -8,4 +8,4 @@ export type JSONSchemaAudioFileParams = {
     pitch: { type: "integer" };
     pan: { type: "integer" };
   };
-};
+}

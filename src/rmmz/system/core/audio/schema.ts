@@ -1,5 +1,6 @@
 import type { AudioFileParams } from "@RpgTypes/utils";
 import type { JSONSchemaType } from "ajv";
+import type { JSONSchemaAudioFileParams } from "src/utils/types/audioFileParams/schemaType";
 import type { System_AudioFiles } from "./types";
 
 const audioFileParamsSchema = {
@@ -12,7 +13,8 @@ const audioFileParamsSchema = {
   },
   required: ["name", "volume", "pitch", "pan"],
   additionalProperties: false,
-} as const satisfies JSONSchemaType<AudioFileParams>;
+} as const satisfies JSONSchemaType<AudioFileParams> &
+  JSONSchemaAudioFileParams;
 
 const SCHEMA_SYSTEM_AUDIOFILES = {
   additionalProperties: false,

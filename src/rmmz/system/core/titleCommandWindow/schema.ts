@@ -1,7 +1,7 @@
 import type { JSONSchemaType } from "ajv";
 import type { TitleCommandWindow } from "./types";
 
-export const SCHEMA_SYSTEM_TITLE_COMMAND_WINDOW = {
+const SCHEMA_SYSTEM_TITLE_COMMAND_WINDOW = {
   additionalProperties: false,
   type: "object",
   required: ["background", "offsetX", "offsetY"],
@@ -11,3 +11,5 @@ export const SCHEMA_SYSTEM_TITLE_COMMAND_WINDOW = {
     offsetY: { type: "integer", minimum: -1000, maximum: 1000 },
   },
 } as const satisfies JSONSchemaType<TitleCommandWindow>;
+
+export default SCHEMA_SYSTEM_TITLE_COMMAND_WINDOW;

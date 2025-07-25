@@ -1,8 +1,8 @@
 import { describe, test, expect } from "vitest";
 import Ajv from "ajv";
-import { SCHEMA_SYSTEM_TITLE_COMMAND_WINDOW } from "./schema";
+import SCHEMA_SYSTEM_TITLE_COMMAND_WINDOW from "./schema";
 import type { TitleCommandWindow } from "./types";
-const ajv = new Ajv();
+const ajv = new Ajv({ strict: true });
 const validate = ajv.compile(SCHEMA_SYSTEM_TITLE_COMMAND_WINDOW);
 
 describe("SCHEMA_SYSTEM_TITLE_COMMAND_WINDOW", () => {
