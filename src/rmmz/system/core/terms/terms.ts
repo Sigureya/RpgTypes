@@ -2,7 +2,7 @@ import type { Data_NamedItem } from "src/namedItemSource";
 import type {
   SystemLabels_TermsParamNames,
   Terms_ParamNamesArray,
-} from "./paramArray";
+} from "./core/paramArray/types";
 import type { System_Terms_Params } from "./types";
 
 export const makeParamNamesArray = (

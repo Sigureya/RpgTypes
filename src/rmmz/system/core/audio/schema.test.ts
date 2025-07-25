@@ -1,9 +1,9 @@
 import { describe, test, expect } from "vitest";
 import Ajv from "ajv";
-import { SCHEMA_SYSTEM_AUDIOFILES } from "./schema";
+import SCHEMA_SYSTEM_AUDIOFILES from "./schema";
 import { makeSoundsArray } from "./soundArray";
 import type { System_AudioFiles } from "./types";
-const ajv = new Ajv();
+const ajv = new Ajv({ strict: true });
 
 const mockAudioFIles: System_AudioFiles = {
   battleBgm: { name: "battle.mp3", volume: 80, pitch: 100, pan: 0 },

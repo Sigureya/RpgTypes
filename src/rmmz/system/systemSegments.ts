@@ -11,10 +11,10 @@ import type {
   System_Me,
   System_SoundsObject,
   System_Vehicles,
-  Terms_Basic,
-  Terms_GameCommands,
-  Terms_Messages,
 } from "./core";
+import type { Terms_Basic } from "./core/terms/core/basic";
+import type { Terms_GameCommands } from "./core/terms/core/commands";
+import type { Terms_Messages } from "./core/terms/core/messages";
 import type {
   EditorSettings,
   System_TestBattle,

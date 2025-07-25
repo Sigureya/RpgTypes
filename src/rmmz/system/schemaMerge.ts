@@ -1,8 +1,6 @@
 import {
-  SCHEMA_SYSTEM_AUDIOFILES,
   SCHEMA_SYSTEM_BATTLE_RULE_RMMZ,
   SCHEMA_SYSTEM_BOOLEAN_GAMEMENU_OPTIONS,
-  SCHEMA_SYSTEM_BOOLEAN_OPTIONS,
   SCHEMA_SYSTEM_GAME_INITIAL,
   SCHEMA_SYSTEM_IMAGE_SIZE,
   SCHEMA_SYSTEM_OTHER_DATA,
@@ -10,6 +8,8 @@ import {
   SCHEMA_SYSTEM_TERMS_BUNDLE,
   SCHEMA_SYSTEM_TITLE_IMAGES,
 } from "./core";
+import SCHEMA_SYSTEM_AUDIOFILES from "./core/audio/schema";
+import SCHEMA_SYSTEM_BOOLEAN_OPTIONS from "./core/booleanOptions/gameSetting/schema";
 import { SCHEMA_SYSTEM_GAME_EDITOR_BUNDLE } from "./gameEdit";
 import { SCHEMA_SYSTEM_PARTIAL_BUNDLE } from "./schemaBundle";
 import type { Data_System } from "./system";
