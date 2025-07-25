@@ -135,6 +135,8 @@ export default [
       "@typescript-eslint/no-explicit-any": "off", // テストではanyを許可
       "@functional/no-return-void": "off",
       "no-restricted-imports": "off",
+      "no-undef": "off",
+      "@typescript-eslint/no-require-imports": "off",
     },
   },
   {
