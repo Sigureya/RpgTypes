@@ -4,7 +4,7 @@ import type { CommandUnion_AnyAudio } from "./types";
 
 // enumは意図的に直書き。
 // 定数を使うとimport解決でエラーが起こる
-export const SCHEMA_COMMAND_ANY_AUDIO = {
+const SCHEMA_COMMAND_ANY_AUDIO = {
   type: "object",
   required: ["code", "parameters", "indent"],
 
@@ -35,3 +35,5 @@ export const SCHEMA_COMMAND_ANY_AUDIO = {
   },
   additionalProperties: false,
 } as const satisfies JSONSchemaType<CommandUnion_AnyAudio>;
+
+export default SCHEMA_COMMAND_ANY_AUDIO;
