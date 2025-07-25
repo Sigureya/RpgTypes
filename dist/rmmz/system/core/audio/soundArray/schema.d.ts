@@ -1,5 +1,4 @@
-export declare const SCHEMA_SYSTEM_SOUND_ARRAY: {
-    readonly additionalProperties: false;
+declare const SCHEMA_SYSTEM_SOUND_ARRAY: {
     readonly type: "array";
     readonly maxItems: 24;
     readonly minItems: 24;
@@ -19,7 +18,8 @@ export declare const SCHEMA_SYSTEM_SOUND_ARRAY: {
                 readonly type: "integer";
             };
         };
-        readonly required: readonly ["name"];
+        readonly required: readonly ["name", "volume", "pitch", "pan"];
         readonly additionalProperties: false;
     };
 };
+export default SCHEMA_SYSTEM_SOUND_ARRAY;

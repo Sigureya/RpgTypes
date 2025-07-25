@@ -1,4 +1,4 @@
-export declare const SCHEMA_SYSTEM_TITLE_COMMAND_WINDOW: {
+declare const SCHEMA_SYSTEM_TITLE_COMMAND_WINDOW: {
     readonly additionalProperties: false;
     readonly type: "object";
     readonly required: readonly ["background", "offsetX", "offsetY"];
@@ -20,3 +20,4 @@ export declare const SCHEMA_SYSTEM_TITLE_COMMAND_WINDOW: {
         };
     };
 };
+export default SCHEMA_SYSTEM_TITLE_COMMAND_WINDOW;

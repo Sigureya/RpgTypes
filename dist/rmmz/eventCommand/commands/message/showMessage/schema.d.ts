@@ -1,4 +1,4 @@
-export declare const SCHEMA_COMMAND_SHOW_MESSAGE: {
+declare const SCHEMA_COMMAND_SHOW_MESSAGE: {
     readonly type: "object";
     readonly required: readonly ["code", "parameters", "indent"];
     readonly properties: {
@@ -34,3 +34,4 @@ export declare const SCHEMA_COMMAND_SHOW_MESSAGE: {
         };
     };
 };
+export default SCHEMA_COMMAND_SHOW_MESSAGE;

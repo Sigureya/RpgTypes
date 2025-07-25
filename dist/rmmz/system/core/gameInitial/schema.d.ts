@@ -1,4 +1,4 @@
-export declare const SCHEMA_SYSTEM_GAME_INITIAL: {
+declare const SCHEMA_SYSTEM_GAME_INITIAL: {
     readonly additionalProperties: false;
     readonly type: "object";
     readonly required: readonly ["startMapId", "startX", "startY", "partyMembersArray"];
@@ -24,3 +24,4 @@ export declare const SCHEMA_SYSTEM_GAME_INITIAL: {
         };
     };
 };
+export default SCHEMA_SYSTEM_GAME_INITIAL;

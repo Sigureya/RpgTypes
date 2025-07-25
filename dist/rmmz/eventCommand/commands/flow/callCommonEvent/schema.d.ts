@@ -1,4 +1,4 @@
-export declare const SCHEMA_COMMAND_CALL_COMMON_EVENT: {
+declare const SCHEMA_COMMAND_CALL_COMMON_EVENT: {
     readonly type: "object";
     readonly properties: {
         readonly code: {
@@ -22,3 +22,4 @@ export declare const SCHEMA_COMMAND_CALL_COMMON_EVENT: {
     };
     readonly required: readonly ["code", "indent", "parameters"];
 };
+export default SCHEMA_COMMAND_CALL_COMMON_EVENT;

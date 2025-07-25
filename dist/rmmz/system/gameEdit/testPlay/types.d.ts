@@ -1,8 +1,4 @@
-export interface TestBattler {
-    actorId: number;
-    level: number;
-    equips: number[];
-}
+import { TestBattler } from './testBattler/types';
 export interface System_TestBattle {
     testBattlers: TestBattler[];
     testTroopId: number;

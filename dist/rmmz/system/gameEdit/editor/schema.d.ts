@@ -1,4 +1,4 @@
 import { JSONSchemaType } from 'ajv';
-import { EditorSettings, EditorSettingLables } from './types';
-export declare const SCHEMA_SYSTEM_EDITOR_SETTINGS: JSONSchemaType<EditorSettings>;
-export declare const SCHEMA_SYSTEM_EDITOR_SETTINGS_LABELS: JSONSchemaType<EditorSettingLables>;
+import { EditorSettings } from './types';
+declare const SCHEMA_SYSTEM_EDITOR_SETTINGS: JSONSchemaType<EditorSettings>;
+export default SCHEMA_SYSTEM_EDITOR_SETTINGS;

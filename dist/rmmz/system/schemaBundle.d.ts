@@ -1,4 +1,4 @@
-export declare const SCHEMA_SYSTEM_PARTIAL_BUNDLE: {
+declare const SCHEMA_SYSTEM_PARTIAL_BUNDLE: {
     readonly additionalProperties: false;
     readonly required: readonly ["airship", "boat", "ship", "advanced", "attackMotions"];
     readonly type: "object";
@@ -226,3 +226,4 @@ export declare const SCHEMA_SYSTEM_PARTIAL_BUNDLE: {
         };
     };
 };
+export default SCHEMA_SYSTEM_PARTIAL_BUNDLE;

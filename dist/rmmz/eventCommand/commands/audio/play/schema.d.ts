@@ -29,7 +29,7 @@ declare const SCHEMA_COMMAND_ANY_AUDIO: {
                         type: "integer";
                     };
                 };
-                required: ("name" | "volume" | "pitch" | "pan")[];
+                required: ["name", "volume", "pitch", "pan"];
                 additionalProperties: false;
             }];
         };
