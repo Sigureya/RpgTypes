@@ -1,5 +1,6 @@
 import type { JSONSchemaType } from "ajv";
 import type { AudioFileParams } from "src/utils";
+import type { JSONSchemaAudioFileParams } from "src/utils/types/audioFileParams/schemaType";
 import type { CommandUnion_AnyAudio } from "./types";
 
 // enumは意図的に直書き。
@@ -29,7 +30,7 @@ const SCHEMA_COMMAND_ANY_AUDIO = {
           },
           required: ["name", "volume", "pitch", "pan"],
           additionalProperties: false,
-        } satisfies JSONSchemaType<AudioFileParams>,
+        } satisfies JSONSchemaType<AudioFileParams> & JSONSchemaAudioFileParams,
       ],
     },
   },
