@@ -6,7 +6,7 @@ const stringArraySchema = {
   items: { type: "string" },
 } as const satisfies JSONSchemaType<string[]>;
 
-export const SCHEMA_SYSTEM_RPG_DATA_NAMES = {
+const SCHEMA_SYSTEM_RPG_DATA_NAMES = {
   additionalProperties: false,
   type: "object",
   required: [
@@ -28,3 +28,5 @@ export const SCHEMA_SYSTEM_RPG_DATA_NAMES = {
     armorTypes: stringArraySchema,
   },
 } as const satisfies JSONSchemaType<System_RPG_DataNames>;
+
+export default SCHEMA_SYSTEM_RPG_DATA_NAMES;

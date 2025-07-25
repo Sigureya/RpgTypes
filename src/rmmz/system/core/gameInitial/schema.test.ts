@@ -1,9 +1,9 @@
 import { describe, test, expect } from "vitest";
 import Ajv from "ajv";
-import { SCHEMA_SYSTEM_GAME_INITIAL } from "./schema";
+import SCHEMA_SYSTEM_GAME_INITIAL from "./schema";
 import type { System_GameInitial } from "./types";
 
-const ajv = new Ajv();
+const ajv = new Ajv({ strict: true });
 const isSystemGameInitial = ajv.compile(SCHEMA_SYSTEM_GAME_INITIAL);
 
 describe("SCHEMA_SYSTEM_GAME_INITIAL", () => {

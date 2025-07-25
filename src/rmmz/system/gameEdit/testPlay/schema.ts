@@ -2,7 +2,7 @@ import type { JSONSchemaType } from "ajv";
 import SCHEMA_SYSTEM_TEST_BATTLER from "./testBattler/schema";
 import type { System_TestBattle } from "./types";
 
-export const SCHEMA_SYSTEM_TEST_PLAY = {
+const SCHEMA_SYSTEM_TEST_PLAY = {
   additionalProperties: false,
   type: "object",
   required: [
@@ -21,3 +21,5 @@ export const SCHEMA_SYSTEM_TEST_PLAY = {
     battleback2Name: { type: "string" },
   },
 } as const satisfies JSONSchemaType<System_TestBattle>;
+
+export default SCHEMA_SYSTEM_TEST_PLAY;

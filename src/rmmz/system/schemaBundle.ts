@@ -5,7 +5,7 @@ import SCHEMA_SYSTEM_MEMBERS_ATTACK_MOTION from "./core/attackMotion/schema";
 import SCHEMA_SYSTEM_VEHICLE from "./core/vehicle/schema";
 import type { Data_System } from "./system";
 
-export const SCHEMA_SYSTEM_PARTIAL_BUNDLE = {
+const SCHEMA_SYSTEM_PARTIAL_BUNDLE = {
   additionalProperties: false,
   required: ["airship", "boat", "ship", "advanced", "attackMotions"],
   type: "object",
@@ -22,3 +22,5 @@ export const SCHEMA_SYSTEM_PARTIAL_BUNDLE = {
 } as const satisfies JSONSchemaType<
   Pick<Data_System, "airship" | "boat" | "ship" | "advanced" | "attackMotions">
 >;
+
+export default SCHEMA_SYSTEM_PARTIAL_BUNDLE;
