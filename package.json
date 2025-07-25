@@ -17,6 +17,7 @@
     "dist"
   ],
   "scripts": {
+    "build:schema": "vite build --mode validate",
     "build": "vite build",
     "test": "vitest",
     "test:watch": "vitest --watch",
