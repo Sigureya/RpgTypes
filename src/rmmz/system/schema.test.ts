@@ -1,8 +1,6 @@
 import { describe, test, expect } from "vitest";
 import Ajv from "ajv";
-import type { Terms_Messages } from "./core";
 import {
-  SCHEMA_SYSTEM_AUDIOFILES,
   SCHEMA_SYSTEM_BATTLE_RULE_RMMZ,
   SCHEMA_SYSTEM_BOOLEAN_GAMEMENU_OPTIONS,
   SCHEMA_SYSTEM_GAME_INITIAL,
@@ -12,7 +10,9 @@ import {
   SCHEMA_SYSTEM_TERMS_BUNDLE,
   SCHEMA_SYSTEM_TITLE_IMAGES,
 } from "./core";
+import SCHEMA_SYSTEM_AUDIOFILES from "./core/audio/schema";
 import SCHEMA_SYSTEM_BOOLEAN_OPTIONS from "./core/booleanOptions/gameSetting/schema";
+import type { Terms_Messages } from "./core/terms/core/messages";
 import { SCHEMA_SYSTEM_GAME_EDITOR_BUNDLE } from "./gameEdit";
 import { SCHEMA_SYSTEM_PARTIAL_BUNDLE } from "./schemaBundle";
 import { allSystemSchema, mergeSystemSchema } from "./schemaMerge";

@@ -8,9 +8,6 @@ import {
   makeParamNamesArray,
   makeSoundsArray,
   makeSystemAdvanced,
-  makeTermsBasic,
-  makeTermsCommand,
-  makeTermsMessages,
   makeVehicleData,
 } from "./core";
 import type {
@@ -19,8 +16,11 @@ import type {
   System_ImageSize,
   System_Terms,
   System_TermsPartial,
-  Terms_Messages,
 } from "./core";
+import { makeTermsBasic } from "./core/terms/core/basic";
+import { makeTermsCommand } from "./core/terms/core/commands";
+import type { Terms_Messages } from "./core/terms/core/messages";
+import { makeTermsMessages } from "./core/terms/core/messages";
 import type { EditorSettings, TestBattler } from "./gameEdit";
 import { makeEditorSetting } from "./gameEdit";
 import type { Data_System } from "./system";

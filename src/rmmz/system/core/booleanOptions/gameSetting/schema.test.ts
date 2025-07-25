@@ -1,7 +1,7 @@
 import { describe, test, expect } from "vitest";
 import Ajv from "ajv";
 import { makeBooleanOptions } from "./options";
-import { SCHEMA_SYSTEM_BOOLEAN_OPTIONS } from "./schema";
+import SCHEMA_SYSTEM_BOOLEAN_OPTIONS from "./schema";
 import type { System_BooleanGameOptions } from "./types";
 const ajv = new Ajv({
   strict: true,

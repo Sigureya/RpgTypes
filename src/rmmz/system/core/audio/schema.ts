@@ -14,7 +14,7 @@ const audioFileParamsSchema = {
   additionalProperties: false,
 } as const satisfies JSONSchemaType<AudioFileParams>;
 
-export const SCHEMA_SYSTEM_AUDIOFILES = {
+const SCHEMA_SYSTEM_AUDIOFILES = {
   additionalProperties: false,
   type: "object",
   required: [
@@ -39,3 +39,5 @@ export const SCHEMA_SYSTEM_AUDIOFILES = {
     },
   },
 } as const satisfies JSONSchemaType<System_AudioFiles>;
+
+export default SCHEMA_SYSTEM_AUDIOFILES;
