@@ -10,7 +10,7 @@ import {
 } from "./core";
 import SCHEMA_SYSTEM_AUDIOFILES from "./core/audio/schema";
 import SCHEMA_SYSTEM_BOOLEAN_OPTIONS from "./core/booleanOptions/gameSetting/schema";
-import { SCHEMA_SYSTEM_GAME_EDITOR_BUNDLE } from "./gameEdit";
+import SCHEMA_SYSTEM_GAME_EDITOR_BUNDLE from "./gameEdit/schema";
 import { SCHEMA_SYSTEM_PARTIAL_BUNDLE } from "./schemaBundle";
 import type { Data_System } from "./system";
 

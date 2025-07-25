@@ -3,7 +3,7 @@ import { SCHEMA_SYSTEM_EDITOR_SETTINGS } from "./editor/schema";
 import { SCHEMA_SYSTEM_TEST_BATTLER } from "./testPlay/schema";
 import type { System_GameEditorBundleRMMZ } from "./types";
 
-export const SCHEMA_SYSTEM_GAME_EDITOR_BUNDLE = {
+const SCHEMA_SYSTEM_GAME_EDITOR_BUNDLE = {
   additionalProperties: false,
   type: "object",
   required: [
@@ -30,3 +30,5 @@ export const SCHEMA_SYSTEM_GAME_EDITOR_BUNDLE = {
     editor: SCHEMA_SYSTEM_EDITOR_SETTINGS,
   },
 } as const satisfies JSONSchemaType<System_GameEditorBundleRMMZ>;
+
+export default SCHEMA_SYSTEM_GAME_EDITOR_BUNDLE;
