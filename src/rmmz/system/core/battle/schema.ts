@@ -1,7 +1,7 @@
 import type { JSONSchemaType } from "ajv";
 import type { BattleRuleRMMZ } from "./types";
 
-export const SCHEMA_SYSTEM_BATTLE_RULE_RMMZ = {
+const SCHEMA_SYSTEM_BATTLE_RULE_RMMZ = {
   type: "object",
   additionalProperties: false,
   required: ["magicSkills", "battleSystem"],
@@ -15,3 +15,5 @@ export const SCHEMA_SYSTEM_BATTLE_RULE_RMMZ = {
     battleSystem: { type: "number" },
   },
 } as const satisfies JSONSchemaType<BattleRuleRMMZ>;
+
+export default SCHEMA_SYSTEM_BATTLE_RULE_RMMZ;

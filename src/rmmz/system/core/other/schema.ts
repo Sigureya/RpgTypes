@@ -1,7 +1,7 @@
 import type { JSONSchemaType } from "ajv";
 import type { System_OtherData } from "./types";
 
-export const SCHEMA_SYSTEM_OTHER_DATA = {
+const SCHEMA_SYSTEM_OTHER_DATA = {
   type: "object",
   additionalProperties: false,
   required: ["locale", "versionId", "windowTone"],
@@ -16,3 +16,5 @@ export const SCHEMA_SYSTEM_OTHER_DATA = {
     },
   },
 } as const satisfies JSONSchemaType<System_OtherData>;
+
+export default SCHEMA_SYSTEM_OTHER_DATA;

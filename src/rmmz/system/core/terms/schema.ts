@@ -2,7 +2,7 @@ import type { JSONSchemaType, SchemaObject } from "ajv";
 import SCHEMA_SYSTEM_TERMS_CORE from "./core/schema";
 import type { System_TextBundle } from "./types";
 
-export const SCHEMA_SYSTEM_TERMS_BUNDLE = {
+const SCHEMA_SYSTEM_TERMS_BUNDLE = {
   required: [
     "terms",
     "currencyUnit",
@@ -16,3 +16,5 @@ export const SCHEMA_SYSTEM_TERMS_BUNDLE = {
     terms: SCHEMA_SYSTEM_TERMS_CORE,
   },
 } as const satisfies SchemaObject;
+
+export default SCHEMA_SYSTEM_TERMS_BUNDLE;
