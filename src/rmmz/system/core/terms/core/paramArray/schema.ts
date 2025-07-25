@@ -1,6 +1,6 @@
 import type { JSONSchemaType } from "ajv";
 
-export const SCHEMA_SYSTEM_PARAM_NAMS_ARRAY = {
+const SCHEMA_SYSTEM_PARAM_NAMS_ARRAY = {
   type: "array",
   items: {
     type: "string",
@@ -10,3 +10,5 @@ export const SCHEMA_SYSTEM_PARAM_NAMS_ARRAY = {
   maxItems: 10,
   uniqueItems: true,
 } as const satisfies JSONSchemaType<string[]>;
+
+export default SCHEMA_SYSTEM_PARAM_NAMS_ARRAY;

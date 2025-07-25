@@ -8,7 +8,7 @@ const SCHEMA_STRING_NULL = {
   nullable: true,
 } as const satisfies JSONSchemaType<string | null>;
 
-export const SCHEMA_SYSTEM_MEMBERS_TERMS_COMMANDS_ARRAY = {
+const SCHEMA_SYSTEM_MEMBERS_TERMS_COMMANDS_ARRAY = {
   type: "array",
   items: [
     SCHEMA_STRING,
@@ -41,3 +41,5 @@ export const SCHEMA_SYSTEM_MEMBERS_TERMS_COMMANDS_ARRAY = {
   minItems: 26,
   maxItems: 26,
 } as const;
+
+export default SCHEMA_SYSTEM_MEMBERS_TERMS_COMMANDS_ARRAY;
