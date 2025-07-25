@@ -1,7 +1,11 @@
 import { describe, test, expect } from "vitest";
-import type { Data_State } from "./traitContainers";
-import { makeStateData } from "./traitContainers";
-import { isDataState } from "./validate";
+import { makeStateData } from "./state";
+import type { Data_State } from "./types";
+const validate = require("./stateValidate.cjs"); // Adjust the import based on your setup
+
+const isDataState = (data: unknown): data is Data_State => {
+  return validate(data);
+};
 
 describe("isDataState", () => {
   test("Valid state2", () => {

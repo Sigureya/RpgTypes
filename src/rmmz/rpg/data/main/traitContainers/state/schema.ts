@@ -1,7 +1,7 @@
 import type { JSONSchemaType } from "ajv";
 import type { Data_State } from "./types";
 
-const SCHEMA_DATA_STATE = {
+export const SCHEMA_DATA_STATE = {
   type: "object",
   required: [
     "name",

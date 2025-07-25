@@ -1,7 +1,11 @@
 import { describe, test, expect } from "vitest";
-import type { Data_Class } from "./traitContainers";
-import { makeClassData } from "./traitContainers";
-import { isDataClass } from "./validate";
+import type { Data_Class } from "..";
+import { makeClassData } from "..";
+const validate = require("./classValidate.cjs");
+
+const isDataClass = (data: unknown): data is Data_Class => {
+  return validate(data);
+};
 
 describe("isDataClass", () => {
   test("Valid class2", () => {

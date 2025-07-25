@@ -1,7 +1,11 @@
 import { describe, test, expect } from "vitest";
-import type { Data_Enemy } from "./traitContainers";
-import { makeEnemyData } from "./traitContainers";
-import { isDataEnemy } from "./validate";
+import { makeEnemyData } from "./enemy";
+import type { Data_Enemy } from "./types";
+const validate = require("./enemyValidate.cjs");
+
+const isDataEnemy = (data: unknown): data is Data_Enemy => {
+  return validate(data);
+};
 
 describe("isDataEnemy", () => {
   test("Valid enemy2", () => {
