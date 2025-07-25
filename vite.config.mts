@@ -2,6 +2,7 @@ import { defineConfig } from "vite";
 import dts from "vite-plugin-dts";
 import path from "path";
 import terser from "@rollup/plugin-terser";
+import { validateSchemaPlugin } from "./build/validateSchemaPlugin";
 declare const __dirname: string;
 
 const libBuild = {
@@ -55,6 +56,7 @@ export default defineConfig({
     },
   },
   plugins: [
+    validateSchemaPlugin(),
     dts({
       outDir: libBuild.outDir,
       exclude: ["./**/*.test.ts", ...libBuild.exclude],
