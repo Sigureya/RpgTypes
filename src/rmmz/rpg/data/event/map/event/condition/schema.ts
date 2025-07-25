@@ -1,7 +1,7 @@
 import type { JSONSchemaType } from "ajv";
 import type { MapEvent_PageCondition } from "./condition";
 
-export const SCHEMA_MAP_EVENT_PAGE_CONDITION = {
+const SCHEMA_MAP_EVENT_PAGE_CONDITION = {
   type: "object",
   required: [
     "switch1Id",
@@ -34,3 +34,5 @@ export const SCHEMA_MAP_EVENT_PAGE_CONDITION = {
     actorValid: { type: "boolean" },
   },
 } as const satisfies JSONSchemaType<MapEvent_PageCondition>;
+
+export default SCHEMA_MAP_EVENT_PAGE_CONDITION;

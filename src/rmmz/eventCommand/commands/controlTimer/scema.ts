@@ -1,7 +1,7 @@
 import type { JSONSchemaType } from "ajv";
 import type { Command_ControlTimer } from "./types";
 
-export const SCHEMA_COMMAND_CONTROL_TIMER = {
+const SCHEMA_COMMAND_CONTROL_TIMER = {
   required: ["code", "indent", "parameters"],
   type: "object",
   properties: {
@@ -18,3 +18,5 @@ export const SCHEMA_COMMAND_CONTROL_TIMER = {
     },
   },
 } satisfies JSONSchemaType<Command_ControlTimer>;
+
+export default SCHEMA_COMMAND_CONTROL_TIMER;

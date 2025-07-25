@@ -1,7 +1,7 @@
 import type { JSONSchemaType } from "ajv";
 import type { ParamArray } from "./paramArray";
 
-export const SCHEMA_PARAM_ARRAY = {
+const SCHEMA_PARAM_ARRAY = {
   type: "array",
   items: [
     { type: "integer" }, // mhp
@@ -16,3 +16,5 @@ export const SCHEMA_PARAM_ARRAY = {
   minItems: 8,
   maxItems: 8,
 } as const satisfies JSONSchemaType<ParamArray>;
+
+export default SCHEMA_PARAM_ARRAY;

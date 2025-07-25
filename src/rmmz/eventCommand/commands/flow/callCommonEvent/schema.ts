@@ -1,7 +1,7 @@
 import type { JSONSchemaType } from "ajv";
 import type { Command_CommonEvent } from "./types";
 
-export const SCHEMA_COMMAND_CALL_COMMON_EVENT = {
+const SCHEMA_COMMAND_CALL_COMMON_EVENT = {
   type: "object",
   properties: {
     code: { type: "number", const: 117 },
@@ -15,3 +15,5 @@ export const SCHEMA_COMMAND_CALL_COMMON_EVENT = {
   },
   required: ["code", "indent", "parameters"],
 } as const satisfies JSONSchemaType<Command_CommonEvent>;
+
+export default SCHEMA_COMMAND_CALL_COMMON_EVENT;

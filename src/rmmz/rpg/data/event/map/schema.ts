@@ -6,7 +6,7 @@ import type {
   MapEvent_PageCondition,
   MapEventPage,
 } from "./event";
-import { SCHEMA_MAP_EVENT_PAGE_CONDITION } from "./event/condition/schema";
+import SCHEMA_MAP_EVENT_PAGE_CONDITION from "./event/condition/schema";
 import type { MoveRouteDataUnkwnown } from "./event/eventCommand/moveRoute";
 import { SCHEMA_MOVEROUTE_DATA } from "./event/eventCommand/moveRoute/schema";
 import type { Data_Map } from "./map";
