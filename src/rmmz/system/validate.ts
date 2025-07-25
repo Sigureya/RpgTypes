@@ -1,9 +1,9 @@
 import Ajv from "ajv";
 import type { AttackMotion, System_ImageSize } from "./core";
-import { SCHEMA_SYSTEM_IMAGE_SIZE } from "./core";
 import SCHEMA_SYSTEM_MEMBERS_ATTACK_MOTION from "./core/attackMotion/schema";
+import SCHEMA_SYSTEM_IMAGE_SIZE from "./core/images/size/schema";
 import type { TestBattler } from "./gameEdit";
-import { SCHEMA_SYSTEM_TEST_BATTLER } from "./gameEdit/testPlay/schema";
+import SCHEMA_SYSTEM_TEST_BATTLER from "./gameEdit/testPlay/testBattler/schema";
 import { mergeSystemSchema, allSystemSchema } from "./schemaMerge";
 import type { Data_System } from "./system";
 
