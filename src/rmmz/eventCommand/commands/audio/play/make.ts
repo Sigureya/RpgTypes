@@ -7,7 +7,8 @@ import {
   CHANGE_VICTORY_ME,
   CHANGE_DEFEAT_ME,
 } from "@RpgTypes/rpg";
-import { makeAudioFileParams, type AudioFileParams } from "@RpgTypes/utils";
+import type { AudioFileParams } from "src/libs";
+import { makeAudioFileParams } from "src/libs";
 import type {
   Command_PlayBGM,
   Command_PlayBGS,

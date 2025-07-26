@@ -1,4 +1,4 @@
-import type { AsRecord, PickByType } from "@RpgTypes/templates";
+import type { AsRecord, PickByType } from "src/libs/templates";
 
 export type IndexOfParameter<T extends unknown[], V> = AsNumber<
   keyof PickByType<AsRecord<T>, V>

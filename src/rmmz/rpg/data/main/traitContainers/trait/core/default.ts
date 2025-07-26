@@ -1,4 +1,4 @@
-import type { DomainLabel } from "@RpgTypes/templates";
+import type { DomainLabel } from "src/libs/templates";
 import type {
   CollapsOptionLabels,
   ExtraParamLabels,

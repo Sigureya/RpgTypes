@@ -1,4 +1,4 @@
-import type { PickByTypeKeys } from "@RpgTypes/templates";
+import type { PickByTypeKeys } from "src/libs/templates";
 
 export interface FormatPlaceholder<T, V> {
   dataKey: PickByTypeKeys<T, V>;

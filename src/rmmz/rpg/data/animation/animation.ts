@@ -1,4 +1,4 @@
-import type { AudioFileParams, ColorRGBA } from "@RpgTypes/utils";
+import type { AudioFileParams, ColorRGBA } from "src/libs/utils";
 
 export interface FlashTiming {
   frame: number;

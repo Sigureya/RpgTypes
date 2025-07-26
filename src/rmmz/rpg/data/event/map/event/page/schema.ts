@@ -2,7 +2,7 @@ import type { JSONSchemaType } from "ajv";
 import type { MapEvent_PageCondition } from "./condition";
 import SCHEMA_MAP_EVENT_PAGE_CONDITION from "./condition/schema";
 import type { MoveRouteDataUnkwnown } from "./eventCommand/moveRoute";
-import SCHEMA_MOVEROUTE_DATA from "./eventCommand/moveRoute/schema";
+import { SCHEMA_MOVEROUTE_DATA } from "./eventCommand/moveRoute/schema";
 import SCHEMA_MAP_EVENT_IMAGE from "./image/schema";
 import type { MapEvent_Image } from "./image/types";
 import type { MapEventPage } from "./page";

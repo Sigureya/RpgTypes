@@ -1,5 +1,5 @@
 import { describe, test, expect } from "vitest";
-import type { DomainName } from "@RpgTypes/templates";
+import type { DomainName } from "src/libs/templates";
 import type { NamedItemSource } from "src/namedItemSource";
 import { defineGameDataSources } from "./gameData";
 import type { GameData } from "./gameDataTypes";

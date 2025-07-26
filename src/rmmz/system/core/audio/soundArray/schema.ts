@@ -1,5 +1,5 @@
-import type { AudioFileParams } from "@RpgTypes/utils";
 import type { JSONSchemaType } from "ajv";
+import type { AudioFileParams } from "src/libs/utils";
 import SCHEMA_AUDIO_FILE_PARAMS_SYSTEM from "./audio/schema";
 
 const SCHEMA_SYSTEM_SOUND_ARRAY = {

@@ -1,8 +1,8 @@
-import type { AudioFileParams } from "@RpgTypes/utils";
 import type { JSONSchemaType } from "ajv";
+import type { AudioFileParams } from "src/libs/utils/types";
 import type { MoveRouteDataUnkwnown } from "./moveRoute";
 
-const SCHEMA_MOVEROUTE_DATA = {
+export const SCHEMA_MOVEROUTE_DATA = {
   type: "object",
   required: ["wait", "repeat", "skippable", "list"],
   properties: {
@@ -40,5 +40,3 @@ const SCHEMA_MOVEROUTE_DATA = {
     },
   },
 } as const satisfies JSONSchemaType<MoveRouteDataUnkwnown>;
-
-export default SCHEMA_MOVEROUTE_DATA;
