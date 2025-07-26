@@ -8,6 +8,7 @@ import dts from "vite-plugin-dts";
 import path from "path";
 import terser from "@rollup/plugin-terser";
 import { validateSchemaPlugin } from "./build/validateSchemaPlugin";
+import { alias } from "./viteAlias.mts";
 declare const __dirname: string;
 
 const libBuild = {
@@ -48,17 +49,7 @@ const buildMainLib: UserConfig = {
     },
   },
   resolve: {
-    alias: {
-      "@RpgTypes/eventCommand": path.resolve(
-        __dirname,
-        "src/rmmz/eventCommand"
-      ),
-      "@RpgTypes/rpg": path.resolve(__dirname, "./src/rmmz/rpg"),
-
-      "@RpgTypes/system": path.resolve(__dirname, "./src/rmmz/system"),
-      "@RpgTypes": path.resolve(__dirname, "./src/libs"),
-      src: path.resolve(__dirname, "./src/libs"),
-    },
+    alias: alias,
   },
   plugins: [
     validateSchemaPlugin(),

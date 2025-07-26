@@ -14,6 +14,7 @@
     "baseUrl": "./",
     "paths": {
       "src/*": ["src/libs/*"],
+      "src/rmmz/eventCommand": ["src/rmmz/eventCommand"],
       "src/namedItemSource": ["src/libs/namedItemSource"],
       "@RpgTypes/rpg": ["src/rmmz/rpg"],
       "@RpgTypes/system": ["src/rmmz/system"],
