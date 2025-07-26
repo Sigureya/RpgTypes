@@ -1,4 +1,9 @@
-import { BuildEnvironmentOptions, defineConfig, UserConfig } from "vite";
+import {
+  BuildEnvironmentOptions,
+  defineConfig,
+  LibraryOptions,
+  UserConfig,
+} from "vite";
 import dts from "vite-plugin-dts";
 import path from "path";
 import terser from "@rollup/plugin-terser";
@@ -12,7 +17,7 @@ const libBuild = {
   exclude: [],
 };
 
-const normalBuild: UserConfig = {
+const buildMainLib: UserConfig = {
   build: {
     outDir: libBuild.outDir,
     lib: {
@@ -64,6 +69,33 @@ const normalBuild: UserConfig = {
     }),
   ],
 };
+const buildValidate: UserConfig = {
+  build: {
+    outDir: "./dist/validate",
+    lib: {
+      entry: "./src/validate.ts", // 新しいエントリーポイント
+      name: "validate",
+      fileName: (format) => `validate.${format}.js`,
+    },
+    minify: false,
+    sourcemap: true,
+    rollupOptions: {
+      output: [
+        {
+          format: "es",
+          entryFileNames: "validate.es.js",
+          exports: "named",
+        },
+        {
+          format: "cjs",
+          entryFileNames: "validate.cjs.js",
+          exports: "named",
+        },
+      ],
+    },
+  },
+  plugins: [validateSchemaPlugin()],
+};
 const dummyBuiild = (): BuildEnvironmentOptions => ({
   outDir: "./dummy",
   lib: {
@@ -74,6 +106,9 @@ const dummyBuiild = (): BuildEnvironmentOptions => ({
 });
 
 export default defineConfig(({ mode }): UserConfig => {
+  if (mode === "generateschema") {
+    return buildValidate;
+  }
   if (mode === "validate") {
     return {
       plugins: [validateSchemaPlugin()],
@@ -81,5 +116,5 @@ export default defineConfig(({ mode }): UserConfig => {
       build: dummyBuiild(),
     };
   }
-  return normalBuild;
+  return buildMainLib;
 });

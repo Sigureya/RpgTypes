@@ -1,10 +1,6 @@
-import { Data_Actor, Data_Armor, Data_Class, Data_Enemy, Data_State, Data_Weapon } from './traitContainers';
+import { Data_Armor, Data_Weapon } from './traitContainers';
 import { Data_Item, Data_Skill } from './usableItems';
 export declare const isDataItem: (data: unknown) => data is Data_Item;
 export declare const isDataSkill: (data: unknown) => data is Data_Skill;
-export declare const isDataActor: (data: unknown) => data is Data_Actor;
 export declare const isDataArmor: (data: unknown) => data is Data_Armor;
 export declare const isDataWeapon: (data: unknown) => data is Data_Weapon;
-export declare const isDataEnemy: (data: unknown) => data is Data_Enemy;
-export declare const isDataState: (data: unknown) => data is Data_State;
-export declare const isDataClass: (data: unknown) => data is Data_Class;
