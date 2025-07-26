@@ -1,12 +1,11 @@
 import { describe, expect, it } from "vitest";
 import type { Data_Enemy } from "@RpgTypes/rmmz";
-import { extractImageFromEnemy, extractImageFromActor } from "./mainData";
 import type {
   ExtractedActorImage,
   ExtractedEnemyImage,
   ImageExtractableActor,
-} from "./types";
-
+} from "./mainData";
+import { extractImageFromEnemy, extractImageFromActor } from "./mainData";
 describe("extractImageFromEnemy", () => {
   it("should extract image data from enemy", () => {
     const enemy: Pick<Data_Enemy, "id" | "battlerName"> = {
