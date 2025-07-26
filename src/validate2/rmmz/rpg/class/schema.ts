@@ -1,5 +1,5 @@
+import type { Data_Class } from "@RpgTypes/rpg";
 import type { JSONSchemaType } from "ajv";
-import type { Data_Class } from "./types";
 
 export const SCHEMA_DATA_CLASS = {
   type: "object",
@@ -67,4 +67,3 @@ export const SCHEMA_DATA_CLASS = {
 
   additionalProperties: false,
 } satisfies JSONSchemaType<Data_Class>;
-export default SCHEMA_DATA_CLASS;

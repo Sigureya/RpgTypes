@@ -56,5 +56,3 @@ export const SCHEMA_DATA_ARMMOR = {
     },
   },
 } as const satisfies JSONSchemaType<Data_Armor>;
-
-export default SCHEMA_DATA_ARMMOR;
