@@ -73,7 +73,7 @@ const buildValidate: UserConfig = {
   build: {
     outDir: "./dist/validate",
     lib: {
-      entry: "./src/validate.ts", // 新しいエントリーポイント
+      entry: "./src/validate2/index.ts", // 新しいエントリーポイント
       name: "validate",
       fileName: (format) => `validate.${format}.js`,
     },
@@ -106,10 +106,10 @@ const dummyBuiild = (): BuildEnvironmentOptions => ({
 });
 
 export default defineConfig(({ mode }): UserConfig => {
-  if (mode === "generateschema") {
+  if (mode === "validate") {
     return buildValidate;
   }
-  if (mode === "validate") {
+  if (mode === "generateschema") {
     return {
       plugins: [validateSchemaPlugin()],
 
