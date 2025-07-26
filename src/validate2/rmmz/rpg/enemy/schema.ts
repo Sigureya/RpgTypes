@@ -1,7 +1,11 @@
+import type {
+  ParamArray,
+  Enemy_Action,
+  Trait,
+  DropItem,
+  Data_Enemy,
+} from "@RpgTypes/rpg";
 import type { JSONSchemaType } from "ajv";
-import type { ParamArray } from "../members";
-import type { Trait } from "../trait";
-import type { Data_Enemy, DropItem, Enemy_Action } from "./types";
 
 export const SCHEMA_DATA_ENEMY = {
   type: "object",

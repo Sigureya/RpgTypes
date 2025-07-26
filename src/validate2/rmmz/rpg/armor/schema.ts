@@ -1,27 +1,31 @@
+import type { Data_Armor, ParamArray } from "@RpgTypes/rpg";
 import type { JSONSchemaType } from "ajv";
-import type { Data_Class } from "./types";
 
-export const SCHEMA_DATA_CLASS = {
+export const SCHEMA_DATA_ARMMOR = {
   type: "object",
   required: [
     "name",
     "id",
-    "note",
-    "expParams",
+    "description",
+    "iconIndex",
+    "price",
     "params",
-    "learnings",
     "traits",
+    "note",
+    "etypeId",
+    "atypeId",
   ],
 
   properties: {
     name: { type: "string" },
     id: { type: "integer", minimum: 0 },
+    description: { type: "string" },
+    iconIndex: { type: "integer", minimum: 0 },
+    price: { type: "integer", minimum: 0 },
     note: { type: "string" },
+    etypeId: { type: "integer", minimum: 0 },
+    atypeId: { type: "integer", minimum: 0 },
 
-    expParams: {
-      type: "array",
-      items: { type: "integer" },
-    },
     params: {
       type: "array",
       items: [
@@ -36,20 +40,8 @@ export const SCHEMA_DATA_CLASS = {
       ],
       minItems: 8,
       maxItems: 8,
-    } satisfies JSONSchemaType<Data_Class["params"]>,
-    learnings: {
-      type: "array",
-      items: {
-        type: "object",
-        properties: {
-          level: { type: "integer" },
-          skillId: { type: "integer" },
-          note: { type: "string" },
-        },
-        required: ["level", "skillId"],
-        additionalProperties: false,
-      },
-    } satisfies JSONSchemaType<Data_Class["learnings"]>,
+    } satisfies JSONSchemaType<ParamArray>,
+
     traits: {
       type: "array",
       items: {
@@ -60,11 +52,7 @@ export const SCHEMA_DATA_CLASS = {
           value: { type: "integer" },
         },
         required: ["code", "dataId", "value"],
-        additionalProperties: false,
       },
-    } satisfies JSONSchemaType<Data_Class["traits"]>,
+    },
   },
-
-  additionalProperties: false,
-} satisfies JSONSchemaType<Data_Class>;
-export default SCHEMA_DATA_CLASS;
+} as const satisfies JSONSchemaType<Data_Armor>;

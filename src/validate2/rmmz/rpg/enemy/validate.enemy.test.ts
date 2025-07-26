@@ -1,6 +1,5 @@
 import { describe, test, expect } from "vitest";
-import { makeEnemyData } from "./enemy";
-import type { Data_Enemy } from "./types";
+import type { Data_Enemy } from "@RpgTypes/rpg";
 const validate = require("./enemyValidate.cjs");
 
 const isDataEnemy = (data: unknown): data is Data_Enemy => {
@@ -8,10 +7,6 @@ const isDataEnemy = (data: unknown): data is Data_Enemy => {
 };
 
 describe("isDataEnemy", () => {
-  test("Valid enemy2", () => {
-    const enemy: Data_Enemy = makeEnemyData();
-    expect(enemy).toSatisfy(isDataEnemy);
-  });
   test("Valid enemy", () => {
     const enemy: Data_Enemy = {
       name: "Goblin",

@@ -1,32 +1,27 @@
+import type { Data_Class } from "@RpgTypes/rpg";
 import type { JSONSchemaType } from "ajv";
-import type { ParamArray } from "../members";
-import type { Data_Armor } from "./types";
 
-export const SCHEMA_DATA_ARMMOR = {
+export const SCHEMA_DATA_CLASS = {
   type: "object",
   required: [
     "name",
     "id",
-    "description",
-    "iconIndex",
-    "price",
-    "params",
-    "traits",
     "note",
-    "etypeId",
-    "atypeId",
+    "expParams",
+    "params",
+    "learnings",
+    "traits",
   ],
 
   properties: {
     name: { type: "string" },
     id: { type: "integer", minimum: 0 },
-    description: { type: "string" },
-    iconIndex: { type: "integer", minimum: 0 },
-    price: { type: "integer", minimum: 0 },
     note: { type: "string" },
-    etypeId: { type: "integer", minimum: 0 },
-    atypeId: { type: "integer", minimum: 0 },
 
+    expParams: {
+      type: "array",
+      items: { type: "integer" },
+    },
     params: {
       type: "array",
       items: [
@@ -41,8 +36,20 @@ export const SCHEMA_DATA_ARMMOR = {
       ],
       minItems: 8,
       maxItems: 8,
-    } satisfies JSONSchemaType<ParamArray>,
-
+    } satisfies JSONSchemaType<Data_Class["params"]>,
+    learnings: {
+      type: "array",
+      items: {
+        type: "object",
+        properties: {
+          level: { type: "integer" },
+          skillId: { type: "integer" },
+          note: { type: "string" },
+        },
+        required: ["level", "skillId"],
+        additionalProperties: false,
+      },
+    } satisfies JSONSchemaType<Data_Class["learnings"]>,
     traits: {
       type: "array",
       items: {
@@ -53,9 +60,10 @@ export const SCHEMA_DATA_ARMMOR = {
           value: { type: "integer" },
         },
         required: ["code", "dataId", "value"],
+        additionalProperties: false,
       },
-    },
+    } satisfies JSONSchemaType<Data_Class["traits"]>,
   },
-} as const satisfies JSONSchemaType<Data_Armor>;
 
-export default SCHEMA_DATA_ARMMOR;
+  additionalProperties: false,
+} satisfies JSONSchemaType<Data_Class>;

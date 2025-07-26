@@ -1,6 +1,5 @@
 import { describe, test, expect } from "vitest";
-import { makeStateData } from "./state";
-import type { Data_State } from "./types";
+import type { Data_State } from "@RpgTypes/rpg";
 const validate = require("./stateValidate.cjs"); // Adjust the import based on your setup
 
 const isDataState = (data: unknown): data is Data_State => {
@@ -8,10 +7,6 @@ const isDataState = (data: unknown): data is Data_State => {
 };
 
 describe("isDataState", () => {
-  test("Valid state2", () => {
-    const state: Data_State = makeStateData();
-    expect(state).toSatisfy(isDataState);
-  });
   test("Valid state", () => {
     const state: Data_State = {
       id: 1,

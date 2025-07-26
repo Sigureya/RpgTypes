@@ -1,7 +1,6 @@
 import Ajv from "ajv";
 import { SCHEMA_DATA_ITEM, SCHEMA_DATA_SKILL } from "./schema.usableItem";
-import type { Data_Actor, Data_Armor, Data_Weapon } from "./traitContainers";
-import SCHEMA_DATA_ARMMOR from "./traitContainers/armor/schema";
+import type { Data_Weapon } from "./traitContainers";
 import SCHEMA_DATA_WEAPON from "./traitContainers/weapon/schema";
 import type { Data_Item, Data_Skill } from "./usableItems";
 
@@ -17,11 +16,6 @@ export const isDataItem = (data: unknown): data is Data_Item => {
 const skill = ajv.compile(SCHEMA_DATA_SKILL);
 export const isDataSkill = (data: unknown): data is Data_Skill => {
   return skill(data);
-};
-
-const armor = ajv.compile(SCHEMA_DATA_ARMMOR);
-export const isDataArmor = (data: unknown): data is Data_Armor => {
-  return armor(data);
 };
 
 const weapon = ajv.compile(SCHEMA_DATA_WEAPON);
