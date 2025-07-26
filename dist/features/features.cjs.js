@@ -5,4 +5,4 @@ exports.buildReferenceItemSources = (t2, r, s, a, o, m) => [...e.defineTraitItem
   const o = e.resolveItemEffectLabels(s);
   return t.mergeItemsSource(a ? [...o, ...a] : o, r);
 }, exports.compileTraitDisplayData = (r, s) => t.mergeItemsSource(e.resolveTraitLabels(s), r);
-//# sourceMappingURL=app.cjs.js.map
+//# sourceMappingURL=features.cjs.js.map

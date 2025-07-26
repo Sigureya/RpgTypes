@@ -13,7 +13,7 @@ export default defineConfig(({ mode }) => {
 
   const entryPoints = {
     main: path.resolve(srcDir, "index.ts"),
-    app: path.resolve(srcDir, "app/index.ts"),
+    features: path.resolve(srcDir, "features/index.ts"),
     libs: path.resolve(srcDir, "libs/index.ts"),
     rmmz: path.resolve(srcDir, "rmmz/index.ts"),
     validate: path.resolve(srcDir, "validate/rmmz/eventCommand/index.ts"),
