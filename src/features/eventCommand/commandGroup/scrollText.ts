@@ -1,9 +1,9 @@
-import type { EventCommand } from "@sigureya/rpgtypes";
+import type { EventCommand } from "@RpgTypes/rmmz";
 import {
-  isCommandShowScrollingTextBody,
   isCommandScrollTextHead,
+  isCommandShowScrollingTextBody,
   SHOW_SCROLLING_TEXT_BODY,
-} from "@sigureya/rpgtypes";
+} from "@RpgTypes/rmmz";
 import { pickCommands, SimpleEventCommandGroup } from "./core";
 
 export const extractScrollTextGroup = (

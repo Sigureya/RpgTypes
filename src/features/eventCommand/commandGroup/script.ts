@@ -1,8 +1,5 @@
-import {
-  isCommandScriptBody,
-  isCommandScriptHeader,
-  type EventCommand,
-} from "@sigureya/rpgtypes";
+import type { EventCommand } from "@RpgTypes/rmmz";
+import { isCommandScriptBody, isCommandScriptHeader } from "@RpgTypes/rmmz";
 import { pickCommands, CombinedEventCommandGroup } from "./core";
 export const extractScriptGroup = (
   list: ReadonlyArray<EventCommand>,

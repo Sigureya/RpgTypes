@@ -1,13 +1,13 @@
 import type {
   EventCommand,
-  Command_ShowMessage,
   Command_ShowMessageBody,
-} from "@sigureya/rpgtypes";
+  Command_ShowMessageHeader,
+} from "@RpgTypes/rmmz";
 import {
   isCommandShowMessage,
   isCommandShowMessageBody,
   SHOW_MESSAGE_BODY,
-} from "@sigureya/rpgtypes";
+} from "@RpgTypes/rmmz";
 import { pickCommands, SimpleEventCommandGroup } from "./core";
 
 export const extractMessageGroup = (
@@ -28,7 +28,7 @@ export const createMessageGroup = (
 ) => {
   const { bodies, header } = extractMessageGroup(list, index);
   return new SimpleEventCommandGroup<
-    Command_ShowMessage,
+    Command_ShowMessageHeader,
     Command_ShowMessageBody
   >(SHOW_MESSAGE_BODY, header, bodies);
 };

@@ -1,8 +1,8 @@
 import type {
-  Command_CommentBody,
   EventCommand,
-  EventCommandLike,
   Command_CommentHeader,
+  Command_CommentBody,
+  EventCommandLike,
 } from "@RpgTypes/rmmz";
 import {
   COMMENT_BODY,
