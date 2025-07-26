@@ -1,7 +1,7 @@
 import type { JSONSchemaType } from "ajv";
-import type { Data_Weapon } from "./weapon";
+import type { Data_Weapon } from "../../../../rmmz/rpg/data/main/traitContainers/weapon/weapon";
 
-const SCHEMA_DATA_WEAPON = {
+export const SCHEMA_DATA_WEAPON = {
   type: "object",
   required: [
     "name",
@@ -66,4 +66,3 @@ const SCHEMA_DATA_WEAPON = {
     },
   },
 } as const satisfies JSONSchemaType<Data_Weapon>;
-export default SCHEMA_DATA_WEAPON;
