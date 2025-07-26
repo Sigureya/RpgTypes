@@ -1,6 +1,6 @@
-import type { ParamArray_ControlVariables } from "@RpgTypes/eventCommand";
-import type { AudioFileParams, ColorRGBA } from "@RpgTypes/utils";
+import type { AudioFileParams, ColorRGBA } from "src/libs";
 import type { ValueOf } from "src/libs/templates/valueOf";
+import type { ParamArray_ControlVariables } from "src/rmmz/eventCommand";
 import type { BranchParameters } from "./branchParams";
 import type { EventCommandLike } from "./eventComandLike";
 import type * as EventCommandCodes from "./eventCommandCodes";

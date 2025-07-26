@@ -1,4 +1,4 @@
-import type { DomainLabel } from "@RpgTypes/templates";
+import type { DomainLabel } from "src/libs/templates";
 import type { EffectLabelDefinition, ItemEffectLabelSet } from "./types";
 
 const FORMAT_GROW = "{name} + {value1}" as const;

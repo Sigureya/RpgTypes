@@ -1,4 +1,4 @@
-import { makeAudioFileParams } from "@RpgTypes/utils";
+import { makeAudioFileParams } from "src/libs/utils";
 import type { System_SoundsArray, System_SoundsObject } from "./types";
 
 export const makeSoundsArray = (

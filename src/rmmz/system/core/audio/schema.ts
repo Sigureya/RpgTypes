@@ -1,5 +1,5 @@
-import type { AudioFileParams } from "@RpgTypes/utils";
 import type { JSONSchemaType } from "ajv";
+import type { AudioFileParams } from "src/libs/utils";
 import type { JSONSchemaAudioFileParams } from "src/libs/utils/types/audioFileParams/schemaType";
 import type { System_AudioFiles } from "./types";
 
