@@ -1,6 +1,6 @@
 import Ajv from "ajv";
 import { SCHEMA_DATA_ITEM, SCHEMA_DATA_SKILL } from "./schema.usableItem";
-import type { Data_Actor, Data_Armor, Data_Weapon } from "./traitContainers";
+import type { Data_Weapon } from "./traitContainers";
 import SCHEMA_DATA_WEAPON from "./traitContainers/weapon/schema";
 import type { Data_Item, Data_Skill } from "./usableItems";
 
