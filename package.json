@@ -12,10 +12,10 @@
       "import": "./dist/main/rpgTypes.es.js",
       "require": "./dist/main/rpgTypes.cjs.js"
     },
-    "./app": {
-      "types": "./dist/app/index.d.ts",
-      "import": "./dist/app/app.es.js",
-      "require": "./dist/app/app.cjs.js"
+    "./features": {
+      "types": "./dist/features/index.d.ts",
+      "import": "./dist/features/features.es.js",
+      "require": "./dist/features/features.cjs.js"
     },
     "./libs": {
       "types": "./dist/libs/index.d.ts",
