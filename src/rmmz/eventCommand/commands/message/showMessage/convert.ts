@@ -1,4 +1,4 @@
-import { SHOW_MESSAGE, SHOW_MESSAGE_BODY } from "@RpgTypes/rpg";
+import { SHOW_MESSAGE, SHOW_MESSAGE_BODY } from "@RpgTypes/rmmz/rpg";
 import type {
   Command_ShowMessageBody,
   Command_ShowMessageHeader,

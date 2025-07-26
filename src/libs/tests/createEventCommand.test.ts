@@ -4,7 +4,7 @@ import type {
   EventCommandTable,
   EventCommandParameters,
   EventCodeTable,
-} from "@RpgTypes/rpg";
+} from "@RpgTypes/rmmz/rpg";
 import { createEventCommand, showMessage } from "./createEventCommand";
 describe("createEventCommand", () => {
   it("should create a SHOW_MESSAGE command", () => {

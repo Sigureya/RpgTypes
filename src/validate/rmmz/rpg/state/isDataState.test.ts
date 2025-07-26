@@ -1,5 +1,5 @@
 import { describe, test, expect } from "vitest";
-import type { Data_State } from "@RpgTypes/rpg";
+import type { Data_State } from "@RpgTypes/rmmz/rpg";
 const validate = require("./stateValidate.cjs"); // Adjust the import based on your setup
 
 const isDataState = (data: unknown): data is Data_State => {

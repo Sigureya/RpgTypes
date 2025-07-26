@@ -7,7 +7,7 @@ import {
   CHANGE_BATTLE_BGM,
   CHANGE_VICTORY_ME,
   CHANGE_DEFEAT_ME,
-} from "@RpgTypes/rpg";
+} from "@RpgTypes/rmmz/rpg";
 import {
   makeCommandAudioAny,
   makeCommandChangeBattleBGM,

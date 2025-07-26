@@ -4,7 +4,7 @@ import type {
   Trait,
   DropItem,
   Data_Enemy,
-} from "@RpgTypes/rpg";
+} from "@RpgTypes/rmmz/rpg";
 import type { JSONSchemaType } from "ajv";
 
 export const SCHEMA_DATA_ENEMY = {

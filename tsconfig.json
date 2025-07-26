@@ -14,8 +14,7 @@
     "baseUrl": "./",
     "rootDir": "src",
     "paths": {
-      "@RpgTypes/*": ["src/*"],
-      "@RpgTypes/rpg": ["src/rmmz"]
+      "@RpgTypes/*": ["src/*"]
     }
   },
   "include": ["./src/**/*"],

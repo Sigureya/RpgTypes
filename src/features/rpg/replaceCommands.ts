@@ -3,7 +3,7 @@ import type {
   Data_Troop,
   EventCommand,
   MapEventContainer,
-} from "@RpgTypes/rpg";
+} from "@RpgTypes/rmmz/rpg";
 import type { EventCommandContainer } from "./map/";
 
 type EventCommandReplaceFunc = (

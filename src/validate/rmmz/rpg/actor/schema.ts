@@ -1,4 +1,4 @@
-import type { Data_Actor } from "@RpgTypes/rpg";
+import type { Data_Actor } from "@RpgTypes/rmmz/rpg";
 import type { JSONSchemaType } from "ajv";
 
 export const SCHEMA_DATA_ACTOR = {

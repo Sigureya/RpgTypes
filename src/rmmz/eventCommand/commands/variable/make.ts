@@ -1,4 +1,4 @@
-import { CONTROL_VARIABLES } from "@RpgTypes/rpg";
+import { CONTROL_VARIABLES } from "@RpgTypes/rmmz/rpg";
 import {
   toArrayOperandConstant,
   toArrayOperandItemData,

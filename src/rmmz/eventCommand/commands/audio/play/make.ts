@@ -6,7 +6,7 @@ import {
   CHANGE_BATTLE_BGM,
   CHANGE_VICTORY_ME,
   CHANGE_DEFEAT_ME,
-} from "@RpgTypes/rpg";
+} from "@RpgTypes/rmmz/";
 import type { AudioFileParams } from "src/libs";
 import { makeAudioFileParams } from "src/libs";
 import type {

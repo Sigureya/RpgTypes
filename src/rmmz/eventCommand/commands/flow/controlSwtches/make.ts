@@ -1,4 +1,4 @@
-import { CONTROL_SWITCHES } from "@RpgTypes/rpg";
+import { CONTROL_SWITCHES } from "@RpgTypes/rmmz/rpg";
 import type {
   Command_ControlSwitches,
   ParamArray_ControlSwitches,
