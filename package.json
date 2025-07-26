@@ -19,6 +19,7 @@
   "scripts": {
     "build:schema": "vite build --mode validate",
     "build": "vite build",
+    "generate:schema": "vite build --mode generateschema",
     "test": "vitest",
     "test:watch": "vitest --watch",
     "lint": "eslint src --ext .ts",
