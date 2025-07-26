@@ -1,5 +1,5 @@
 import type { JSONSchemaType } from "ajv";
-import type { Data_State } from "./types";
+import type { Data_State } from "../../../../rmmz/rpg/data/main/traitContainers/state/types";
 
 export const SCHEMA_DATA_STATE = {
   type: "object",
@@ -73,5 +73,3 @@ export const SCHEMA_DATA_STATE = {
     } satisfies JSONSchemaType<Data_State["traits"]>,
   },
 } as const satisfies JSONSchemaType<Data_State>;
-
-export default SCHEMA_DATA_STATE;
