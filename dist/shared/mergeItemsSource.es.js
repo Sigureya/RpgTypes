@@ -1,23 +1,22 @@
-const e = (e2) => `${e2.author}.${e2.module}.${e2.kind}`, t = (e2, t2) => {
-  const n2 = a(t2);
-  return e2.reduce((e3, t3) => {
-    const a2 = r(t3, n2);
-    return e3.set(t3.kindId, a2), e3;
+const o = (e) => `${e.author}.${e.module}.${e.kind}`, l = (e, t) => {
+  const n = c(t);
+  return e.reduce((a, r) => {
+    const s = u(r, n);
+    return a.set(r.kindId, s), a;
   }, /* @__PURE__ */ new Map());
-}, r = (e2, t2) => {
-  const r2 = n(e2.dataSource, t2);
-  return { patternCompiled: e2.pattern, label: e2.label, data: r2 ? r2.items : void 0 };
-}, n = (t2, r2) => {
-  if (t2) return r2.get(e(t2));
-}, a = (t2) => t2.reduce((t3, r2) => {
-  const n2 = {
-    items: o(r2.items),
-    source: r2.source,
-    label: r2.label
+}, u = (e, t) => {
+  const n = d(e.dataSource, t);
+  return { patternCompiled: e.pattern, label: e.label, data: n ? n.items : void 0 };
+}, d = (e, t) => {
+  if (e) return t.get(o(e));
+}, c = (e) => e.reduce((t, n) => {
+  const a = {
+    items: i(n.items),
+    source: n.source,
+    label: n.label
   };
-  return t3.set(e(r2.source), n2), t3;
-}, /* @__PURE__ */ new Map()), o = (e2) => e2.map((e3) => ({ id: e3.id, name: e3.name }));
+  return t.set(o(n.source), a), t;
+}, /* @__PURE__ */ new Map()), i = (e) => e.map((t) => ({ id: t.id, name: t.name }));
 export {
-  t as m
+  l as m
 };
-//# sourceMappingURL=mergeItemsSource.es.js.map

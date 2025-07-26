@@ -1,68 +1,67 @@
-const e = (e2) => e2.map((e3) => ({ dataKey: e3, placeHolder: `{${e3}}` })), a = (e2) => ({
-  dataKey: e2.dataIdKey,
-  placeHolder: `{${e2.dataIdKey}}`,
+const u = (a) => a.map((e) => ({ dataKey: e, placeHolder: `{${e}}` })), b = (a) => ({
+  dataKey: a.dataIdKey,
+  placeHolder: `{${a.dataIdKey}}`,
   sourceId: {
-    author: e2.sourceId.author,
-    kind: e2.sourceId.kind,
-    module: e2.sourceId.module
+    author: a.sourceId.author,
+    kind: a.sourceId.kind,
+    module: a.sourceId.module
   }
-}), r = (e2) => {
-  var _a, _b, _c, _d;
-  return /* @__PURE__ */ new Set([...((_a = e2.placeHolder) == null ? void 0 : _a.numbers) ?? [], ...e2.itemMapper ? [e2.itemMapper.placeHolder] : [], ...((_b = e2.itemMappers) == null ? void 0 : _b.map((e3) => e3.placeHolder)) ?? [], ...((_c = e2.placeHolder) == null ? void 0 : _c.strings) ?? [], ...((_d = e2.arrayIndex) == null ? void 0 : _d.map((e3) => e3.dataIdKey)) ?? []]);
-}, t = (e2) => {
-  const a2 = e2.itemMappers ?? [];
-  return e2.itemMapper ? [...a2, e2.itemMapper] : [...a2];
-}, l = (r2, l2 = []) => {
+}), x = (a) => {
+  var e, r, t, l;
+  return /* @__PURE__ */ new Set([...((e = a.placeHolder) == null ? void 0 : e.numbers) ?? [], ...a.itemMapper ? [a.itemMapper.placeHolder] : [], ...((r = a.itemMappers) == null ? void 0 : r.map((n) => n.placeHolder)) ?? [], ...((t = a.placeHolder) == null ? void 0 : t.strings) ?? [], ...((l = a.arrayIndex) == null ? void 0 : l.map((n) => n.dataIdKey)) ?? []]);
+}, I = (a) => {
+  const e = a.itemMappers ?? [];
+  return a.itemMapper ? [...e, a.itemMapper] : [...e];
+}, g = (a, e = []) => {
   return {
-    itemMappers: [...t(r2), ...l2].map(n),
-    fallbackFormat: { text: d(r2), label: o(r2) },
-    properties: (p2 = r2.placeHolder ?? {}, { numbers: p2.numbers ? e(p2.numbers) : [], strings: p2.strings ? e(p2.strings) : [] }),
-    arrayIndex: r2.arrayIndex ? r2.arrayIndex.map(a) : []
+    itemMappers: [...I(a), ...e].map(k),
+    fallbackFormat: { text: H(a), label: K(a) },
+    properties: (r = a.placeHolder ?? {}, { numbers: r.numbers ? u(r.numbers) : [], strings: r.strings ? u(r.strings) : [] }),
+    arrayIndex: a.arrayIndex ? a.arrayIndex.map(b) : []
   };
-  var p2;
-}, n = (e2) => ({
-  placeHolder: `{${e2.placeHolder}}`,
-  kindKey: e2.kindKey,
-  dataIdKey: e2.dataIdKey
-}), d = (e2) => {
-  if (e2.fallbackFormat && void 0 !== e2.fallbackFormat.text) return e2.fallbackFormat.text;
-  const a2 = ((e3) => {
-    var _a, _b, _c;
-    return /* @__PURE__ */ new Set([...((_a = e3.placeHolder) == null ? void 0 : _a.numbers) ?? [], ...((_b = e3.placeHolder) == null ? void 0 : _b.strings) ?? [], ...((_c = e3.arrayIndex) == null ? void 0 : _c.map((e4) => e4.dataIdKey)) ?? []]);
-  })(e2);
-  return 0 === a2.size ? "value not found" : Array.from(a2).map((e3) => `${e3}:{${e3}}`).join(", ");
-}, o = (e2) => {
-  var _a;
-  return void 0 !== ((_a = e2.fallbackFormat) == null ? void 0 : _a.label) ? e2.fallbackFormat.label : "unknown key:{key}";
-}, p = (e2, a2, r2) => {
-  const t2 = a2[r2.dataKey];
-  return null == t2 ? e2 : e2.replaceAll(r2.placeHolder, String(t2));
-}, s = (e2, a2, r2, t2, l2) => {
-  const n2 = ((e3, a3, r3) => {
-    const t3 = r3.properties.numbers.reduce((e4, r4) => p(e4, a3, r4), e3);
-    return r3.properties.strings.reduce((e4, r4) => p(e4, a3, r4), t3);
-  })(t2, e2, r2);
-  return a2 ? c(n2, e2, r2, a2, l2) : n2;
-}, c = (e2, a2, r2, t2, l2) => {
-  const n2 = ((e3, a3) => {
-    const r3 = ((e4, a4) => {
-      const r4 = a4[e4];
-      return r4 && r4.id === e4 ? r4 : a4.find((a5) => a5.id === e4);
-    })(a3, e3);
-    return r3 ? r3.name : `?data[${a3}]`;
-  })(t2, l2(a2));
-  return r2.itemMappers.reduce((e3, a3) => e3.replaceAll(a3.placeHolder, n2), e2);
-}, m = (e2 = {}) => ({
-  name: e2.name ?? "",
-  volume: e2.volume ?? 100,
-  pitch: e2.pitch ?? 100,
-  pan: e2.pan ?? 0
+  var r;
+}, k = (a) => ({
+  placeHolder: `{${a.placeHolder}}`,
+  kindKey: a.kindKey,
+  dataIdKey: a.dataIdKey
+}), H = (a) => {
+  if (a.fallbackFormat && a.fallbackFormat.text !== void 0) return a.fallbackFormat.text;
+  const e = ((r) => {
+    var t, l, n;
+    return /* @__PURE__ */ new Set([...((t = r.placeHolder) == null ? void 0 : t.numbers) ?? [], ...((l = r.placeHolder) == null ? void 0 : l.strings) ?? [], ...((n = r.arrayIndex) == null ? void 0 : n.map((d) => d.dataIdKey)) ?? []]);
+  })(a);
+  return e.size === 0 ? "value not found" : Array.from(e).map((r) => `${r}:{${r}}`).join(", ");
+}, K = (a) => {
+  var e;
+  return ((e = a.fallbackFormat) == null ? void 0 : e.label) !== void 0 ? a.fallbackFormat.label : "unknown key:{key}";
+}, i = (a, e, r) => {
+  const t = e[r.dataKey];
+  return t == null ? a : a.replaceAll(r.placeHolder, String(t));
+}, M = (a, e, r, t, l) => {
+  const n = ((d, p, c) => {
+    const m = c.properties.numbers.reduce((s, o) => i(s, p, o), d);
+    return c.properties.strings.reduce((s, o) => i(s, p, o), m);
+  })(t, a, r);
+  return e ? f(n, a, r, e, l) : n;
+}, f = (a, e, r, t, l) => {
+  const n = ((d, p) => {
+    const c = ((m, s) => {
+      const o = s[m];
+      return o && o.id === m ? o : s.find((y) => y.id === m);
+    })(p, d);
+    return c ? c.name : `?data[${p}]`;
+  })(t, l(e));
+  return r.itemMappers.reduce((d, p) => d.replaceAll(p.placeHolder, n), a);
+}, v = (a = {}) => ({
+  name: a.name ?? "",
+  volume: a.volume ?? 100,
+  pitch: a.pitch ?? 100,
+  pan: a.pan ?? 0
 });
 export {
-  s as a,
-  t as b,
-  l as c,
-  r as g,
-  m
+  M as a,
+  I as b,
+  g as c,
+  x as g,
+  v as m
 };
-//# sourceMappingURL=make.es.js.map
