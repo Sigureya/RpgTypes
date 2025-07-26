@@ -1,4 +1,4 @@
-import { EventCommandUnknown } from '../../../eventCommand/frame';
+import { EventCommandUnknown } from '../../../eventCommand';
 import { EventCommand } from './map';
 export interface Data_CommonEvent extends Data_CommonEventLike {
     trigger: number;

@@ -1,4 +1,4 @@
-import { SourceIdentifier } from '../../../../../../../../libs/namedItemSource';
+import { SourceIdentifier } from '../../../../../../../../libs';
 export interface EscapeLabel {
     escape: string;
 }

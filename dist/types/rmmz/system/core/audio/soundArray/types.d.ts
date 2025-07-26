@@ -1,4 +1,4 @@
-import { AudioFileParams } from '../../../../../libs/utils';
+import { AudioFileParams } from 'src/libs/utils';
 export type System_SoundsArray = [
     cursor: AudioFileParams,
     ok: AudioFileParams,

@@ -1,4 +1,4 @@
-declare const SCHEMA_MOVEROUTE_DATA: {
+export declare const SCHEMA_MOVEROUTE_DATA: {
     readonly type: "object";
     readonly required: readonly ["wait", "repeat", "skippable", "list"];
     readonly properties: {
@@ -52,4 +52,3 @@ declare const SCHEMA_MOVEROUTE_DATA: {
         };
     };
 };
-export default SCHEMA_MOVEROUTE_DATA;

@@ -124,7 +124,7 @@ declare const SCHEMA_DATA_MAP: {
             readonly type: "array";
             readonly items: {
                 readonly type: "object";
-                readonly required: ("name" | "id" | "x" | "y" | "pages")[];
+                readonly required: ("id" | "name" | "x" | "y" | "pages")[];
                 readonly properties: {
                     readonly id: {
                         readonly type: "integer";

@@ -1,4 +1,4 @@
-import { PickByTypeKeys } from '../../../../../templates';
+import { PickByTypeKeys } from 'src/libs/templates';
 export interface FormatPlaceholder<T, V> {
     dataKey: PickByTypeKeys<T, V>;
     placeHolder: `{${PickByTypeKeys<T, V>}}`;

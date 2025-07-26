@@ -1,4 +1,4 @@
-import { ValueOf } from '../../../../../../../../../libs/templates/valueOf';
+import { ValueOf } from 'src/libs/templates/valueOf';
 export type GoodsType = {
     item: 0;
     weapon: 1;

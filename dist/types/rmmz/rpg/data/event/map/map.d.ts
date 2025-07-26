@@ -1,5 +1,5 @@
 import { EventCommandUnknown } from '../../../../eventCommand';
-import { AudioFileParams } from '../../../../../libs/utils';
+import { AudioFileParams } from 'src/libs';
 import { EventCommand, MapEvent } from './event/page';
 import { MapEventContainer } from './mapEventContainer';
 import { Encounter } from './members';

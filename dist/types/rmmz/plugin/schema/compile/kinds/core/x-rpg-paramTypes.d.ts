@@ -1,4 +1,4 @@
-import { SourceIdentifier } from '../../../../../../libs/namedItemSource';
+import { SourceIdentifier } from '../../../../../../libs';
 import { X_ParamData, X_RmmzParam } from './paramBase/x-rpg-param';
 import { NumberParam } from './primitiveParams';
 export type X_ParamDataId = X_RmmzParam<SourceIdentifier, "dataId">;

@@ -1,4 +1,4 @@
-import { ValueOf } from '../../../../../../../../../libs/templates/valueOf';
+import { ValueOf } from 'src/libs/templates/valueOf';
 import { Designation, Operation_AddSub } from './constants';
 export type Param_ChangeEnemyParameters = [
     enemyId: number,

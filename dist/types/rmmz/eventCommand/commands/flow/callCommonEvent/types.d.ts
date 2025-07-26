@@ -1,4 +1,4 @@
-import { EventCommandLike2 } from '../../../frame';
+import { EventCommandLike2 } from '../../..';
 export type ParamArray_CommonEvent = [eventId: number];
 export type ParamObject_CommonEvent = {
     eventId: number;

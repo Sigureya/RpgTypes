@@ -1,4 +1,4 @@
-import { Data_NamedItem } from '../../../libs/namedItemSource';
+import { Data_NamedItem } from '../../../libs';
 export interface Data_Tileset extends Data_NamedItem {
     note: string;
     flags: number[];

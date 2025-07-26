@@ -1,3 +1,4 @@
+import { makeAudioFileParams, type AudioFileParams } from "@RpgTypes/libs";
 import {
   PLAY_BGM,
   PLAY_BGS,
@@ -6,9 +7,7 @@ import {
   CHANGE_BATTLE_BGM,
   CHANGE_VICTORY_ME,
   CHANGE_DEFEAT_ME,
-} from "@RpgTypes/rmmz/";
-import type { AudioFileParams } from "src/libs";
-import { makeAudioFileParams } from "src/libs";
+} from "@RpgTypes/rmmz";
 import type {
   Command_PlayBGM,
   Command_PlayBGS,

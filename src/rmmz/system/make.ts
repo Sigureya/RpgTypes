@@ -1,4 +1,5 @@
-import { makeAudioFileParams, type AudioFileParams } from "src/libs";
+import type { AudioFileParams } from "@RpgTypes/libs";
+import { makeAudioFileParams } from "@RpgTypes/libs";
 import {
   makeBooleanOptions,
   makeDataNames,

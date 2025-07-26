@@ -23,15 +23,15 @@ const h = "rmmz", f = "colors", x = (e, a, s, r = {
 }, []), u = (e, a, s) => {
   const r = e.pattern.includes(a.placeHolder), t = !!e.dataSource;
   return !r && t ? { message: s.missingName, reason: a.placeHolder } : r && !t ? { message: s.missingSourceId, reason: a.placeHolder } : void 0;
-}, b = (e) => typeof e == "number" && !Number.isNaN(e), L = (e) => Object.entries(e).map(([, a]) => a.title);
+}, b = (e) => Object.entries(e).map(([, a]) => a.title), L = (e) => typeof e == "number" && !Number.isNaN(e);
 export {
   h as AUTHOR_RMMZ,
   f as SRC_COLOR,
   y as applyFormatRule,
   N as compileFormatRule,
   x as detectFormatErrors,
-  L as domainNames,
-  b as isValidNumber,
+  b as domainNames,
+  L as isValidNumber,
   R as makeAudioFileParams,
   E as mergeItemsSource
 };

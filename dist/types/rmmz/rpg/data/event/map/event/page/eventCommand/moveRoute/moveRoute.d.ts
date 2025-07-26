@@ -1,4 +1,4 @@
-import { AudioFileParams } from '../../../../../../../../../libs/utils';
+import { AudioFileParams } from 'src/libs/utils';
 export interface MoveRouteCommandUnknown {
     code: number;
     parameters: (string | number | AudioFileParams)[];

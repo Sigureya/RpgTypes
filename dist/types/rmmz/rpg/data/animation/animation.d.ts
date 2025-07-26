@@ -1,4 +1,4 @@
-import { AudioFileParams, ColorRGBA } from '../../../../libs/utils';
+import { AudioFileParams, ColorRGBA } from 'src/libs/utils';
 export interface FlashTiming {
     frame: number;
     duration: number;

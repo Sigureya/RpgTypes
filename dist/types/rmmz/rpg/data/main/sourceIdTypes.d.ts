@@ -1,4 +1,4 @@
-import { SourceIdentifierBase } from '../../../../libs/namedItemSource';
+import { SourceIdentifierBase } from '../../../../libs';
 export interface SourceId_Data<Kind extends string> extends SourceIdentifierBase<{
     author: "rmmz";
     module: "data";

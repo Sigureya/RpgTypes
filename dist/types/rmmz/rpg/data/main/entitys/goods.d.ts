@@ -1,4 +1,4 @@
-import { Data_NamedItem } from '../../../../../libs/namedItemSource';
+import { Data_NamedItem } from '../../../../../libs';
 export interface Data_Goods extends Data_NamedItem {
     name: string;
     id: number;

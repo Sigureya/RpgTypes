@@ -1,4 +1,4 @@
-import { makeAudioFileParams } from "src/libs/utils";
+import { makeAudioFileParams } from "@RpgTypes/libs/utils";
 import type { Data_Vehicle } from "./types";
 
 export const makeVehicleData = (
