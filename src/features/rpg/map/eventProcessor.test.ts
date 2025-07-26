@@ -1,10 +1,9 @@
 import { describe, expect, test, vi } from "vitest";
+import type { MapEventContainer, EventCommand } from "@RpgTypes/rpg";
 import type {
-  Command_ChangeNickName,
+  Command_ChangeActorNickName,
   Command_CommonEvent,
-  EventCommand,
-  MapEventContainer,
-} from "@sigureya/rpgtypes";
+} from "src/rmmz/eventCommand";
 import {
   createEventContext,
   createCommandContext,
@@ -14,7 +13,7 @@ import {
 } from "./eventProcessor";
 
 // Mock Data
-const mockCommandA: Command_ChangeNickName = {
+const mockCommandA: Command_ChangeActorNickName = {
   code: 324,
   indent: 0,
   parameters: [0, "nickName"],

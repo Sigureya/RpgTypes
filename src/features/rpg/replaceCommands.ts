@@ -3,7 +3,7 @@ import type {
   Data_Troop,
   EventCommand,
   MapEventContainer,
-} from "@sigureya/rpgtypes";
+} from "@RpgTypes/rpg";
 import type { EventCommandContainer } from "./map/";
 
 type EventCommandReplaceFunc = (
