@@ -1,4 +1,4 @@
-declare const SCHEMA_COMMAND_ANY_AUDIO: {
+export declare const SCHEMA_COMMAND_ANY_AUDIO: {
     readonly type: "object";
     readonly required: readonly ["code", "parameters", "indent"];
     readonly properties: {
@@ -36,4 +36,3 @@ declare const SCHEMA_COMMAND_ANY_AUDIO: {
     };
     readonly additionalProperties: false;
 };
-export default SCHEMA_COMMAND_ANY_AUDIO;

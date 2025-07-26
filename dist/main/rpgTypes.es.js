@@ -1541,27 +1541,12 @@ const hm = lm.compile(_o), bm = (e2) => [e2.level ?? "Level", e2.levelA ?? "Leve
 }, parameters: { type: "array", minItems: 2, maxItems: 2, items: [{ type: "number" }, { type: "boolean" }] } }, required: ["code", "indent", "parameters"] }), Bp = (e2) => Hp(e2), Vp = zp.compile({
   type: "object",
   required: ["code", "parameters", "indent"],
-  properties: { code: { type: "integer", enum: [132, 133, 139, 241, 245, 249, 250] }, indent: { type: "integer" }, parameters: {
-    type: "array",
-    minItems: 1,
-    maxItems: 1,
-    items: [{
-      type: "object",
-      properties: { name: { type: "string" }, volume: { type: "integer" }, pitch: { type: "integer" }, pan: { type: "integer" } },
-      required: ["name", "volume", "pitch", "pan"],
-      additionalProperties: false
-    }]
-  } },
-  additionalProperties: false
-}), Op = (e2) => Vp(e2), Wp = zp.compile({
-  type: "object",
-  required: ["code", "parameters", "indent"],
   properties: { indent: { type: "integer", minimum: 0 }, parameters: { type: "array", minItems: 0, maxItems: 0 }, code: {
     type: "integer",
     enum: [0, 109, 112, 113, 115, 204, 206, 213, 214, 216, 217, 221, 222, 243, 244, 251, 314, 315, 340, 351, 352, 353, 354, 411]
   } },
   additionalProperties: false
-}), Gp = (e2) => Wp(e2), Xp = zp.compile({
+}), Op = (e2) => Vp(e2), Wp = zp.compile({
   type: "object",
   required: ["code", "parameters", "indent"],
   properties: { code: { type: "integer", enum: [108, 355, 401, 405, 408, 655] }, indent: { type: "integer", minimum: 0 }, parameters: {
@@ -1571,28 +1556,28 @@ const hm = lm.compile(_o), bm = (e2) => [e2.level ?? "Level", e2.levelA ?? "Leve
     items: [{ type: "string" }]
   } },
   additionalProperties: false
-}), Yp = (e2) => Xp(e2), Kp = zp.compile({ type: "object", properties: { code: { type: "number", const: 117 }, indent: {
+}), Gp = (e2) => Wp(e2), Xp = zp.compile({ type: "object", properties: { code: { type: "number", const: 117 }, indent: {
   type: "integer",
   minimum: 0
-}, parameters: { type: "array", minItems: 1, maxItems: 1, items: [{ type: "number", minimum: 0, default: 0 }] } }, required: ["code", "indent", "parameters"] }), _p = (e2) => Kp(e2), $p = zp.compile({
+}, parameters: { type: "array", minItems: 1, maxItems: 1, items: [{ type: "number", minimum: 0, default: 0 }] } }, required: ["code", "indent", "parameters"] }), Yp = (e2) => Xp(e2), Kp = zp.compile({
   type: "object",
   properties: { code: { type: "number", const: 102 }, indent: { type: "integer", minimum: 0 }, parameters: { type: "array", minItems: 5, maxItems: 5, items: [{ type: "array", items: { type: "string" } }, {
     type: "integer"
   }, { type: "integer" }, { type: "integer" }, { type: "integer" }] } },
   required: ["code", "indent", "parameters"]
-}), Up = (e2) => $p(e2), Zp = zp.compile({
+}), _p = (e2) => Kp(e2), $p = zp.compile({
   type: "object",
   properties: { code: {
     type: "number",
     const: 402
   }, indent: { type: "integer", minimum: 0 }, parameters: { type: "array", minItems: 2, maxItems: 2, items: [{ type: "integer" }, { type: "string" }] } },
   required: ["code", "indent", "parameters"]
-}), Jp = (e2) => Zp(e2), Qp = zp.compile({ type: "object", properties: { code: { type: "number", const: 103 }, indent: { type: "integer", minimum: 0 }, parameters: {
+}), Up = (e2) => $p(e2), Zp = zp.compile({ type: "object", properties: { code: { type: "number", const: 103 }, indent: { type: "integer", minimum: 0 }, parameters: {
   type: "array",
   minItems: 2,
   maxItems: 2,
   items: [{ type: "number" }, { type: "number" }]
-} }, required: ["code", "indent", "parameters"] }), ec = (e2) => Qp(e2), tc = zp.compile({
+} }, required: ["code", "indent", "parameters"] }), Jp = (e2) => Zp(e2), Qp = zp.compile({
   type: "object",
   required: ["code", "parameters", "indent"],
   properties: { code: { type: "integer", const: 101 }, indent: { type: "integer", minimum: 0 }, parameters: { type: "array", items: [{ type: "string" }, {
@@ -1600,37 +1585,37 @@ const hm = lm.compile(_o), bm = (e2) => [e2.level ?? "Level", e2.levelA ?? "Leve
     minimum: 0,
     maximum: 7
   }, { type: "integer", minimum: 0, maximum: 2 }, { type: "integer", minimum: 0, maximum: 2 }, { type: "string" }], minItems: 5, maxItems: 5 } }
-}), ac = (e2) => tc(e2), rc = (e2) => Op(e2) && 241 === e2.code, ic = (e2) => Op(e2) && 245 === e2.code, sc = (e2) => Op(e2) && 249 === e2.code, nc = (e2) => Op(e2) && 250 === e2.code, oc = (e2) => Op(e2) && 132 === e2.code, mc = (e2) => Op(e2) && 133 === e2.code, pc = (e2) => Op(e2) && 139 === e2.code, cc = (e2) => Yp(e2) && 401 === e2.code, dc = (e2) => Yp(e2) && 405 === e2.code, lc = (e2) => Yp(e2) && 108 === e2.code, uc = (e2) => Yp(e2) && 408 === e2.code, yc = (e2) => Yp(e2) && 355 === e2.code, gc = (e2) => Yp(e2) && 655 === e2.code, fc = "bgm", hc = "se", bc = "me", vc = "bgs", Ic = "battlebacks1", kc = "battlebacks2", Pc = "characters", xc = "enemies", Nc = "faces", wc = "parallaxes", Tc = "pictures", Sc = "sv_actors", qc = "sv_enemies", Ac = "system", Rc = "tilesets", Fc = "titles1", jc = "titles2", Dc = "System.json", Cc = "Actors.json", Mc = "Classes.json", zc = "Skills.json", Ec = "Items.json", Lc = "Weapons.json", Hc = "Armors.json", Bc = "Enemies.json", Vc = "Troops.json", Oc = "States.json", Wc = "Animations.json", Gc = "Tilesets.json", Xc = "CommonEvents.json", Yc = "MapInfos.json", Kc = "data", _c = "img", $c = "audio", Uc = "js", Zc = (e2, t2) => ({
+}), ec = (e2) => Qp(e2), tc = (e2) => Gp(e2) && 401 === e2.code, ac = (e2) => Gp(e2) && 405 === e2.code, rc = (e2) => Gp(e2) && 108 === e2.code, ic = (e2) => Gp(e2) && 408 === e2.code, sc = (e2) => Gp(e2) && 355 === e2.code, nc = (e2) => Gp(e2) && 655 === e2.code, oc = "bgm", mc = "se", pc = "me", cc = "bgs", dc = "battlebacks1", lc = "battlebacks2", uc = "characters", yc = "enemies", gc = "faces", fc = "parallaxes", hc = "pictures", bc = "sv_actors", vc = "sv_enemies", Ic = "system", kc = "tilesets", Pc = "titles1", xc = "titles2", Nc = "System.json", wc = "Actors.json", Tc = "Classes.json", Sc = "Skills.json", qc = "Items.json", Ac = "Weapons.json", Rc = "Armors.json", Fc = "Enemies.json", jc = "Troops.json", Dc = "States.json", Cc = "Animations.json", Mc = "Tilesets.json", zc = "CommonEvents.json", Ec = "MapInfos.json", Lc = "data", Hc = "img", Bc = "audio", Vc = "js", Oc = (e2, t2) => ({
   type: "array",
   items: t2,
-  ...Jc(e2),
-  ...Qc(e2.default)
-}), Jc = (e2) => ({ ..."string" == typeof e2.text ? { title: e2.text } : {}, ..."string" == typeof e2.desc ? { description: e2.desc } : {} }), Qc = (e2) => void 0 !== e2 ? {
+  ...Wc(e2),
+  ...Gc(e2.default)
+}), Wc = (e2) => ({ ..."string" == typeof e2.text ? { title: e2.text } : {}, ..."string" == typeof e2.desc ? { description: e2.desc } : {} }), Gc = (e2) => void 0 !== e2 ? {
   default: e2
-} : {}, ed = (e2) => void 0 === e2 || 0 === e2, td = (e2) => Zc(e2, { type: "string" }), ad = (e2) => {
+} : {}, Xc = (e2) => void 0 === e2 || 0 === e2, Yc = (e2) => Oc(e2, { type: "string" }), Kc = (e2) => {
   switch (e2.kind) {
     case "string":
     case "multiline_string":
       return ((e3) => ({
         type: "string",
-        ...Jc(e3),
-        ...Qc(e3.default)
+        ...Wc(e3),
+        ...Gc(e3.default)
       }))(e2);
     case "file":
     case "combo":
-      return ((e3) => ({ type: "string", ...Qc(e3.default), ...Jc(e3) }))(e2);
+      return ((e3) => ({ type: "string", ...Gc(e3.default), ...Wc(e3) }))(e2);
     case "select":
-      return ((e3) => ({ type: "string", ...Qc(e3.default), ...Jc(e3), ...e3.options ? {
+      return ((e3) => ({ type: "string", ...Gc(e3.default), ...Wc(e3), ...e3.options ? {
         enum: e3.options.map((e4) => e4.value)
       } : {} }))(e2);
     case "file[]":
     case "string[]":
     case "multiline_string[]":
-      return td(e2);
+      return Yc(e2);
     case "number[]":
       return ((e3) => ({ type: "array", items: {
-        type: ed(e3.decimals) ? "integer" : "number"
-      }, ...Qc(e3.default), ...Jc(e3) }))(e2);
+        type: Xc(e3.decimals) ? "integer" : "number"
+      }, ...Gc(e3.default), ...Wc(e3) }))(e2);
     case "actor[]":
     case "weapon[]":
     case "armor[]":
@@ -1640,9 +1625,9 @@ const hm = lm.compile(_o), bm = (e2) => [e2.level ?? "Level", e2.levelA ?? "Leve
     case "state[]":
     case "class[]":
     case "troop[]":
-      return ((e3) => Zc(e3, { type: "integer" }))(e2);
+      return ((e3) => Oc(e3, { type: "integer" }))(e2);
     case "number":
-      return ((e3) => ({ type: ed(e3.decimals) ? "integer" : "number", ...Qc(e3.default), ...Jc(e3) }))(e2);
+      return ((e3) => ({ type: Xc(e3.decimals) ? "integer" : "number", ...Gc(e3.default), ...Wc(e3) }))(e2);
     case "actor":
     case "weapon":
     case "armor":
@@ -1652,176 +1637,176 @@ const hm = lm.compile(_o), bm = (e2) => [e2.level ?? "Level", e2.levelA ?? "Leve
     case "state":
     case "class":
     case "troop":
-      return ((e3) => ({ type: "integer", ...Qc(e3.default), ...Jc(e3) }))(e2);
+      return ((e3) => ({ type: "integer", ...Gc(e3.default), ...Wc(e3) }))(e2);
     case "boolean":
-      return ((e3) => ({ type: "boolean", ...Qc(e3.default), ...Jc(e3) }))(e2);
+      return ((e3) => ({ type: "boolean", ...Gc(e3.default), ...Wc(e3) }))(e2);
     case "struct":
-      return { $ref: `#/definitions/${(t2 = e2).struct}`, ...Jc(t2) };
+      return { $ref: `#/definitions/${(t2 = e2).struct}`, ...Wc(t2) };
     default:
       return {};
   }
   var t2;
-}, rd = (e2, t2) => Object.entries(t2).reduce((t3, [a2, r2]) => {
+}, _c = (e2, t2) => Object.entries(t2).reduce((t3, [a2, r2]) => {
   if (a2 in e2) {
     const i2 = e2[a2];
     if ("string" == typeof i2) return { ...t3, [a2]: r2(i2) };
   }
   return t3;
-}, {}), id = (e2, t2, a2, r2) => ({
+}, {}), $c = (e2, t2, a2, r2) => ({
   default: t2,
-  ...rd(a2, r2),
+  ..._c(a2, r2),
   kind: e2
-}), sd = (e2, t2, a2) => ({ default: [], ...rd(t2, a2), kind: e2 }), nd = "help", od = "kind", md = "text", pd = "struct", cd = (e2) => {
+}), Uc = (e2, t2, a2) => ({ default: [], ..._c(t2, a2), kind: e2 }), Zc = "help", Jc = "kind", Qc = "text", ed = "struct", td = (e2) => {
   const t2 = JSON.parse(e2);
-  return Array.isArray(t2) ? t2.map(dd) : "object" == typeof t2 && null !== t2 ? Object.fromEntries(Object.entries(t2).map(([e3, t3]) => [e3, dd(t3)])) : t2;
-}, dd = (e2) => {
+  return Array.isArray(t2) ? t2.map(ad) : "object" == typeof t2 && null !== t2 ? Object.fromEntries(Object.entries(t2).map(([e3, t3]) => [e3, ad(t3)])) : t2;
+}, ad = (e2) => {
   if ("string" != typeof e2) return e2;
   try {
     const t2 = JSON.parse(e2);
-    return Array.isArray(t2) ? t2.map(dd) : "object" == typeof t2 && null !== t2 ? Object.fromEntries(Object.entries(t2).map(([e3, t3]) => [e3, dd(t3)])) : t2;
+    return Array.isArray(t2) ? t2.map(ad) : "object" == typeof t2 && null !== t2 ? Object.fromEntries(Object.entries(t2).map(([e3, t3]) => [e3, ad(t3)])) : t2;
   } catch {
     return e2;
   }
-}, ld = (e2) => {
-  if (od in e2.attr) {
-    const t2 = Id[e2.attr.kind];
+}, rd = (e2) => {
+  if (Jc in e2.attr) {
+    const t2 = dd[e2.attr.kind];
     if (t2) return t2(e2);
   }
-  return id("any", "", e2.attr, gd);
-}, ud = (e2) => e2, yd = (e2) => e2.replace("[", "").replace("]", "").split(",").map((e3) => parseFloat(e3.replaceAll('"', "").trim())).filter((e3) => !isNaN(e3)), gd = {
-  default: ud,
-  text: ud,
-  desc: ud,
-  parent: ud
-}, fd = (e2) => id("string", "", e2.attr, gd), hd = (e2) => {
-  const t2 = { default: (e3) => cd(e3), text: ud, desc: ud, parent: ud };
-  return sd("string[]", e2.attr, t2);
-}, bd = (e2, t2) => {
+  return $c("any", "", e2.attr, nd);
+}, id = (e2) => e2, sd = (e2) => e2.replace("[", "").replace("]", "").split(",").map((e3) => parseFloat(e3.replaceAll('"', "").trim())).filter((e3) => !isNaN(e3)), nd = {
+  default: id,
+  text: id,
+  desc: id,
+  parent: id
+}, od = (e2) => $c("string", "", e2.attr, nd), md = (e2) => {
+  const t2 = { default: (e3) => td(e3), text: id, desc: id, parent: id };
+  return Uc("string[]", e2.attr, t2);
+}, pd = (e2, t2) => {
   const a2 = {
-    default: yd,
-    text: ud,
-    desc: ud,
-    parent: ud
+    default: sd,
+    text: id,
+    desc: id,
+    parent: id
   };
-  return sd(t2, e2.attr, a2);
-}, vd = (e2, t2) => {
-  const a2 = { default: (e3) => parseInt(e3, 10), text: ud, desc: ud, parent: ud };
-  return id(t2, 0, e2.attr, a2);
-}, Id = {
+  return Uc(t2, e2.attr, a2);
+}, cd = (e2, t2) => {
+  const a2 = { default: (e3) => parseInt(e3, 10), text: id, desc: id, parent: id };
+  return $c(t2, 0, e2.attr, a2);
+}, dd = {
   number: (e2) => ((e3) => {
     const t2 = {
       default: (e4) => parseFloat(e4),
-      text: ud,
-      desc: ud,
+      text: id,
+      desc: id,
       decimals: (e4) => parseInt(e4, 10),
       min: (e4) => parseFloat(e4),
       max: (e4) => parseFloat(e4),
-      parent: ud
+      parent: id
     };
-    return id("number", 0, e3.attr, t2);
+    return $c("number", 0, e3.attr, t2);
   })(e2),
   "number[]": (e2) => {
-    const t2 = { default: yd, text: ud, desc: ud, decimals: (e3) => parseInt(e3, 10), min: (e3) => parseFloat(e3), max: (e3) => parseFloat(e3), parent: ud };
-    return sd("number[]", e2.attr, t2);
+    const t2 = { default: sd, text: id, desc: id, decimals: (e3) => parseInt(e3, 10), min: (e3) => parseFloat(e3), max: (e3) => parseFloat(e3), parent: id };
+    return Uc("number[]", e2.attr, t2);
   },
-  string: fd,
-  "string[]": hd,
-  multiline_string: fd,
-  "multiline_string[]": hd,
+  string: od,
+  "string[]": md,
+  multiline_string: od,
+  "multiline_string[]": md,
   combo: (e2) => {
     var _a2;
     const t2 = ((_a2 = e2.options) == null ? void 0 : _a2.map((e3) => e3.option)) ?? [];
-    return { ...id("combo", "", e2.attr, gd), options: t2 };
+    return { ...$c("combo", "", e2.attr, nd), options: t2 };
   },
   select: (e2) => {
     var _a2;
     const t2 = ((_a2 = e2.options) == null ? void 0 : _a2.map((e3) => ({ option: e3.option, value: e3.value }))) ?? [];
-    return { ...id("select", "", e2.attr, gd), options: t2 };
+    return { ...$c("select", "", e2.attr, nd), options: t2 };
   },
-  actor: (e2) => vd(e2, "actor"),
-  "actor[]": (e2) => bd(e2, "actor[]"),
-  class: (e2) => vd(e2, "class"),
-  "class[]": (e2) => bd(e2, "class[]"),
-  skill: (e2) => vd(e2, "skill"),
-  "skill[]": (e2) => bd(e2, "skill[]"),
-  item: (e2) => vd(e2, "item"),
-  "item[]": (e2) => bd(e2, "item[]"),
-  weapon: (e2) => vd(e2, "weapon"),
-  "weapon[]": (e2) => bd(e2, "weapon[]"),
-  armor: (e2) => vd(e2, "armor"),
-  "armor[]": (e2) => bd(e2, "armor[]"),
-  state: (e2) => vd(e2, "state"),
-  "state[]": (e2) => bd(e2, "state[]"),
-  enemy: (e2) => vd(e2, "enemy"),
-  "enemy[]": (e2) => bd(e2, "enemy[]"),
-  common_event: (e2) => vd(e2, "common_event"),
-  "common_event[]": (e2) => bd(e2, "common_event[]"),
-  switch: (e2) => vd(e2, "switch"),
-  "switch[]": (e2) => bd(e2, "switch[]"),
-  variable: (e2) => vd(e2, "variable"),
-  "variable[]": (e2) => bd(e2, "variable[]"),
-  troop: (e2) => vd(e2, "troop"),
-  "troop[]": (e2) => bd(e2, "troop[]"),
+  actor: (e2) => cd(e2, "actor"),
+  "actor[]": (e2) => pd(e2, "actor[]"),
+  class: (e2) => cd(e2, "class"),
+  "class[]": (e2) => pd(e2, "class[]"),
+  skill: (e2) => cd(e2, "skill"),
+  "skill[]": (e2) => pd(e2, "skill[]"),
+  item: (e2) => cd(e2, "item"),
+  "item[]": (e2) => pd(e2, "item[]"),
+  weapon: (e2) => cd(e2, "weapon"),
+  "weapon[]": (e2) => pd(e2, "weapon[]"),
+  armor: (e2) => cd(e2, "armor"),
+  "armor[]": (e2) => pd(e2, "armor[]"),
+  state: (e2) => cd(e2, "state"),
+  "state[]": (e2) => pd(e2, "state[]"),
+  enemy: (e2) => cd(e2, "enemy"),
+  "enemy[]": (e2) => pd(e2, "enemy[]"),
+  common_event: (e2) => cd(e2, "common_event"),
+  "common_event[]": (e2) => pd(e2, "common_event[]"),
+  switch: (e2) => cd(e2, "switch"),
+  "switch[]": (e2) => pd(e2, "switch[]"),
+  variable: (e2) => cd(e2, "variable"),
+  "variable[]": (e2) => pd(e2, "variable[]"),
+  troop: (e2) => cd(e2, "troop"),
+  "troop[]": (e2) => pd(e2, "troop[]"),
   boolean: (e2) => {
     const t2 = {
       default: (e3) => "true" === e3,
-      text: ud,
-      desc: ud,
-      on: ud,
-      off: ud,
-      parent: ud
+      text: id,
+      desc: id,
+      on: id,
+      off: id,
+      parent: id
     };
-    return id("boolean", true, e2.attr, t2);
+    return $c("boolean", true, e2.attr, t2);
   },
   file: (e2) => {
-    const t2 = { default: ud, text: ud, desc: ud, parent: ud, dir: ud };
-    return { dir: "", ...id("file", "", e2.attr, t2) };
+    const t2 = { default: id, text: id, desc: id, parent: id, dir: id };
+    return { dir: "", ...$c("file", "", e2.attr, t2) };
   },
   "file[]": (e2) => {
-    const t2 = { default: (e3) => cd(e3), text: ud, desc: ud, parent: ud, dir: ud };
-    return { dir: "", ...sd("file[]", e2.attr, t2) };
+    const t2 = { default: (e3) => td(e3), text: id, desc: id, parent: id, dir: id };
+    return { dir: "", ...Uc("file[]", e2.attr, t2) };
   }
-}, kd = "BODY", Pd = "STRUCT", xd = "NONE", Nd = (e2, t2) => {
-  const a2 = e2.lines.length > 0 ? Td(e2) : e2, r2 = t2[1] || void 0;
-  return { ...a2, structName: r2, blockType: r2 ? Pd : "INVALID", locale: t2[2], lines: [] };
-}, wd = (e2) => ({
-  ...e2.lines.length > 0 ? Td(e2) : e2,
-  blockType: kd,
+}, ld = "BODY", ud = "STRUCT", yd = "NONE", gd = (e2, t2) => {
+  const a2 = e2.lines.length > 0 ? hd(e2) : e2, r2 = t2[1] || void 0;
+  return { ...a2, structName: r2, blockType: r2 ? ud : "INVALID", locale: t2[2], lines: [] };
+}, fd = (e2) => ({
+  ...e2.lines.length > 0 ? hd(e2) : e2,
+  blockType: ld,
   structName: void 0,
   locale: void 0,
   lines: []
-}), Td = (e2) => e2.blockType === kd ? { ...e2, bodies: e2.bodies.concat([{ lines: [...e2.lines] }]), lines: [], blockType: xd } : e2.structName && e2.blockType === Pd ? {
+}), hd = (e2) => e2.blockType === ld ? { ...e2, bodies: e2.bodies.concat([{ lines: [...e2.lines] }]), lines: [], blockType: yd } : e2.structName && e2.blockType === ud ? {
   ...e2,
   structs: e2.structs.concat([{ struct: e2.structName, locale: e2.locale, lines: [...e2.lines] }]),
-  blockType: xd,
+  blockType: yd,
   structName: void 0,
   locale: void 0,
   lines: []
 } : {
   ...e2,
-  blockType: xd,
+  blockType: yd,
   structName: void 0,
   lines: []
-}, Sd = (e2) => e2.currentOption ? { items: e2.items.concat({ option: e2.currentOption, value: e2.currentOption }) } : e2, qd = (e2) => ({
+}, bd = (e2) => e2.currentOption ? { items: e2.items.concat({ option: e2.currentOption, value: e2.currentOption }) } : e2, vd = (e2) => ({
   ..."string" == typeof e2.desc ? { desc: e2.desc } : {},
   ..."string" == typeof e2.text ? { text: e2.text } : {}
-}), Ad = (e2) => {
-  const t2 = Rd(e2), a2 = jd(t2);
-  return Fd(a2);
-}, Rd = (e2) => {
+}), Id = (e2) => {
+  const t2 = kd(e2), a2 = xd(t2);
+  return Pd(a2);
+}, kd = (e2) => {
   if (e2.currentParam && e2.currentOption) {
     const t2 = e2.currentParam.attr.kind;
-    if ("select" === t2 || "combo" === t2) return { ...e2, currentParam: { ...e2.currentParam, options: Sd(e2.currentOption).items } };
+    if ("select" === t2 || "combo" === t2) return { ...e2, currentParam: { ...e2.currentParam, options: bd(e2.currentOption).items } };
   }
   return e2;
-}, Fd = (e2) => e2.currentParam ? {
+}, Pd = (e2) => e2.currentParam ? {
   ...e2,
   params: [...e2.params, e2.currentParam],
   currentParam: null,
   currentContext: null
-} : e2, jd = (e2) => {
+} : e2, xd = (e2) => {
   if (e2.currentCommand) {
-    const t2 = e2.currentParam ? [...e2.currentCommand.args, e2.currentParam] : e2.currentCommand.args, a2 = { ...qd(e2.currentCommand), command: e2.currentCommand.command, args: t2 };
+    const t2 = e2.currentParam ? [...e2.currentCommand.args, e2.currentParam] : e2.currentCommand.args, a2 = { ...vd(e2.currentCommand), command: e2.currentCommand.command, args: t2 };
     return {
       ...e2,
       commands: [...e2.commands, a2],
@@ -1832,15 +1817,15 @@ const hm = lm.compile(_o), bm = (e2) => [e2.level ?? "Level", e2.levelA ?? "Leve
     };
   }
   return e2;
-}, Dd = (e2, t2) => {
+}, Nd = (e2, t2) => {
   const a2 = e2.lines.reduce((e3, a3) => {
     const r2 = a3.trim().replace(/^\*\s?/, "");
-    if (!r2.startsWith("@")) return e3.currentContext === nd ? { ...e3, helpLines: e3.helpLines.concat(r2) } : e3;
+    if (!r2.startsWith("@")) return e3.currentContext === Zc ? { ...e3, helpLines: e3.helpLines.concat(r2) } : e3;
     const [i2, ...s2] = r2.slice(1).split(" "), n2 = s2.join(" ").trim(), o2 = t2[i2];
     return o2 ? o2(e3, n2) : e3;
-  }, Md());
-  return Ad(a2);
-}, Cd = (e2, t2) => {
+  }, Td());
+  return Id(a2);
+}, wd = (e2, t2) => {
   const a2 = ((e3) => {
     const t3 = e3.split("\n"), a3 = {
       structs: [],
@@ -1848,14 +1833,14 @@ const hm = lm.compile(_o), bm = (e2) => [e2.level ?? "Level", e2.levelA ?? "Leve
       structName: void 0,
       locale: void 0,
       lines: [],
-      blockType: xd
+      blockType: yd
     }, r3 = t3.reduce((e4, t4) => {
       const a4 = t4.trim(), r4 = a4.match(/^\/\*~struct~([A-Za-z0-9_]+)(?::([A-Za-z0-9_-]+))?/);
-      return r4 ? Nd(e4, r4) : "/*:" === a4 ? wd(e4) : "*/" === a4 ? e4.lines.length > 0 ? Td(e4) : e4 : { ...e4, lines: e4.lines.concat([a4]) };
+      return r4 ? gd(e4, r4) : "/*:" === a4 ? fd(e4) : "*/" === a4 ? e4.lines.length > 0 ? hd(e4) : e4 : { ...e4, lines: e4.lines.concat([a4]) };
     }, a3);
     return { structs: r3.structs, bodies: r3.bodies };
   })(e2), r2 = a2.structs.map((e3) => ((e4) => {
-    const t3 = Dd(e4, Ld);
+    const t3 = Nd(e4, Ad);
     return { name: e4.struct, params: t3.params };
   })(e3)), i2 = ((e3) => {
     if (0 !== e3.bodies.length) return e3.bodies[0];
@@ -1867,9 +1852,9 @@ const hm = lm.compile(_o), bm = (e2) => [e2.level ?? "Level", e2.levelA ?? "Leve
     helpLines: [],
     structs: r2
   };
-  const s2 = Dd(i2, t2);
+  const s2 = Nd(i2, t2);
   return { params: s2.params, commands: s2.commands, meta: s2.meta, helpLines: s2.helpLines, structs: r2 };
-}, Md = () => ({
+}, Td = () => ({
   helpLines: [],
   params: [],
   commands: [],
@@ -1879,30 +1864,30 @@ const hm = lm.compile(_o), bm = (e2) => [e2.level ?? "Level", e2.levelA ?? "Leve
   currentOption: null,
   dependencies: { base: [], orderBefore: [], orderAfter: [] },
   meta: {}
-}), zd = (e2, t2, a2) => e2.currentParam && !(t2 in e2.currentParam.attr) ? {
+}), Sd = (e2, t2, a2) => e2.currentParam && !(t2 in e2.currentParam.attr) ? {
   ...e2,
   currentParam: { ...e2.currentParam, attr: { ...e2.currentParam.attr, [t2]: a2 } }
-} : e2, Ed = (e2, t2, a2) => ({ ...e2, meta: { [t2]: a2, ...e2.meta } }), Ld = {
+} : e2, qd = (e2, t2, a2) => ({ ...e2, meta: { [t2]: a2, ...e2.meta } }), Ad = {
   param: (e2, t2) => {
-    const a2 = Ad(e2);
+    const a2 = Id(e2);
     return a2.params.some((e3) => e3.name === t2) ? a2 : { ...a2, currentContext: "param", currentParam: { name: t2, attr: {} } };
   },
-  text: (e2, t2) => e2.currentParam ? zd(e2, md, t2) : e2.currentCommand && !(md in e2.currentCommand) ? { ...e2, currentCommand: {
-    ...qd(e2.currentCommand),
+  text: (e2, t2) => e2.currentParam ? Sd(e2, Qc, t2) : e2.currentCommand && !(Qc in e2.currentCommand) ? { ...e2, currentCommand: {
+    ...vd(e2.currentCommand),
     command: e2.currentCommand.command,
     args: e2.currentCommand.args,
-    [md]: t2
+    [Qc]: t2
   } } : e2,
-  desc: (e2, t2) => e2.currentParam ? zd(e2, "desc", t2) : e2.currentCommand ? { ...e2, currentCommand: { ...e2.currentCommand, desc: t2 } } : e2,
+  desc: (e2, t2) => e2.currentParam ? Sd(e2, "desc", t2) : e2.currentCommand ? { ...e2, currentCommand: { ...e2.currentCommand, desc: t2 } } : e2,
   command: (e2, t2) => {
-    const a2 = Ad(e2);
+    const a2 = Id(e2);
     return a2.commands.some((e3) => e3.command === t2) ? a2 : { ...a2, currentCommand: { command: t2, args: [] }, currentParam: null };
   },
   arg: (e2, t2) => {
     if (!e2.currentCommand) return e2;
     if (e2.currentParam) {
       const a2 = {
-        ...qd(e2.currentCommand),
+        ...vd(e2.currentCommand),
         command: e2.currentCommand.command,
         args: e2.currentCommand.args.concat(e2.currentParam)
       };
@@ -1916,7 +1901,7 @@ const hm = lm.compile(_o), bm = (e2) => [e2.level ?? "Level", e2.levelA ?? "Leve
     }
     return { ...e2, currentParam: { name: t2, attr: {} } };
   },
-  help: (e2) => ({ ...Ad(e2), currentContext: nd }),
+  help: (e2) => ({ ...Id(e2), currentContext: Zc }),
   option: (e2, t2) => {
     if (!e2.currentParam) return e2;
     const a2 = ((e3, t3) => e3.currentOption ? { items: e3.items.concat({ option: e3.currentOption, value: e3.currentOption }), currentOption: t3 } : { items: e3.items, currentOption: t3 })(e2.currentOption ?? {
@@ -1933,16 +1918,16 @@ const hm = lm.compile(_o), bm = (e2) => [e2.level ?? "Level", e2.levelA ?? "Leve
   },
   type: (e2, t2) => {
     if (((e3) => e3.endsWith(">") && e3.startsWith("struct<"))(t2)) {
-      const a2 = t2.slice(7, -1), r2 = zd(e2, pd, a2);
-      return zd(r2, od, pd);
+      const a2 = t2.slice(7, -1), r2 = Sd(e2, ed, a2);
+      return Sd(r2, Jc, ed);
     }
-    return e2.currentParam ? zd(e2, od, t2) : e2;
+    return e2.currentParam ? Sd(e2, Jc, t2) : e2;
   },
-  default: (e2, t2) => zd(e2, "default", t2),
-  on: (e2, t2) => zd(e2, "on", t2),
-  off: (e2, t2) => zd(e2, "off", t2),
-  min: (e2, t2) => zd(e2, "min", t2),
-  max: (e2, t2) => zd(e2, "max", t2),
+  default: (e2, t2) => Sd(e2, "default", t2),
+  on: (e2, t2) => Sd(e2, "on", t2),
+  off: (e2, t2) => Sd(e2, "off", t2),
+  min: (e2, t2) => Sd(e2, "min", t2),
+  max: (e2, t2) => Sd(e2, "max", t2),
   base: (e2, t2) => {
     return { ...e2, dependencies: (a2 = e2.dependencies, r2 = t2, { orderAfter: a2.orderAfter, orderBefore: a2.orderBefore, base: a2.base.concat(r2) }) };
     var a2, r2;
@@ -1958,20 +1943,20 @@ const hm = lm.compile(_o), bm = (e2) => [e2.level ?? "Level", e2.levelA ?? "Leve
     };
     var a2, r2;
   },
-  author: (e2, t2) => Ed(e2, "author", t2),
-  plugindesc: (e2, t2) => Ed(e2, "plugindesc", t2),
-  url: (e2, t2) => Ed(e2, "url", t2)
-}, Hd = (e2) => Bd(((e3) => Cd(e3, Ld))(e2)), Bd = (e2) => ({
+  author: (e2, t2) => qd(e2, "author", t2),
+  plugindesc: (e2, t2) => qd(e2, "plugindesc", t2),
+  url: (e2, t2) => qd(e2, "url", t2)
+}, Rd = (e2) => Fd(((e3) => wd(e3, Ad))(e2)), Fd = (e2) => ({
   target: "MZ",
   meta: e2.meta,
-  commands: Od(e2.commands),
-  params: Vd(e2.params)
-}), Vd = (e2) => e2.reduce((e3, t2) => ({ [t2.name]: ld(t2), ...e3 }), {}), Od = (e2) => e2.reduce((e3, t2) => {
-  const a2 = { desc: t2.desc, text: t2.text, args: Vd(t2.args) };
+  commands: Dd(e2.commands),
+  params: jd(e2.params)
+}), jd = (e2) => e2.reduce((e3, t2) => ({ [t2.name]: rd(t2), ...e3 }), {}), Dd = (e2) => e2.reduce((e3, t2) => {
+  const a2 = { desc: t2.desc, text: t2.text, args: jd(t2.args) };
   return { [t2.command]: a2, ...e3 };
-}, {}), Wd = (e2) => Hd(e2), Gd = (e2) => ((e3) => {
+}, {}), Cd = (e2) => Rd(e2), Md = (e2) => ((e3) => {
   const t2 = Object.entries(e3).reduce((e4, [t3, a2]) => {
-    const r2 = ad(a2);
+    const r2 = Kc(a2);
     return { ...e4, [t3]: r2 };
   }, {});
   return {
@@ -1981,20 +1966,187 @@ const hm = lm.compile(_o), bm = (e2) => [e2.level ?? "Level", e2.levelA ?? "Leve
     additionalProperties: false
   };
 })(e2);
-function Xd(e2) {
+function zd(e2) {
   return e2 && e2.__esModule && Object.prototype.hasOwnProperty.call(e2, "default") ? e2.default : e2;
 }
-var Yd, Kd = { exports: {} };
-const _d = Xd(function() {
-  if (Yd) return Kd.exports;
-  function e2(t2, { instancePath: a2 = "", parentData: r2, parentDataProperty: i2, rootData: s2 = t2 } = {}) {
-    if (!t2 || "object" != typeof t2 || Array.isArray(t2)) return e2.errors = [{
-      instancePath: a2,
+var Ed, Ld = { exports: {} };
+const Hd = zd(function() {
+  if (Ed) return Ld.exports;
+  Ed = 1, Ld.exports = t2, Ld.exports.default = t2;
+  const e2 = { properties: { code: { enum: [132, 133, 139, 241, 245, 249, 250] } } };
+  function t2(a2, { instancePath: r2 = "", parentData: i2, parentDataProperty: s2, rootData: n2 = a2 } = {}) {
+    if (!a2 || "object" != typeof a2 || Array.isArray(a2)) return t2.errors = [{
+      instancePath: r2,
       schemaPath: "#/type",
       keyword: "type",
       params: { type: "object" },
       message: "must be object"
     }], false;
+    {
+      let i3;
+      if (void 0 === a2.code && (i3 = "code") || void 0 === a2.parameters && (i3 = "parameters") || void 0 === a2.indent && (i3 = "indent")) return t2.errors = [{
+        instancePath: r2,
+        schemaPath: "#/required",
+        keyword: "required",
+        params: { missingProperty: i3 },
+        message: "must have required property '" + i3 + "'"
+      }], false;
+      for (const e3 in a2) if ("code" !== e3 && "indent" !== e3 && "parameters" !== e3) return t2.errors = [{
+        instancePath: r2,
+        schemaPath: "#/additionalProperties",
+        keyword: "additionalProperties",
+        params: { additionalProperty: e3 },
+        message: "must NOT have additional properties"
+      }], false;
+      if (void 0 !== a2.code) {
+        let i4 = a2.code;
+        const s3 = 0;
+        if ("number" != typeof i4 || i4 % 1 || isNaN(i4) || !isFinite(i4)) return t2.errors = [{
+          instancePath: r2 + "/code",
+          schemaPath: "#/properties/code/type",
+          keyword: "type",
+          params: { type: "integer" },
+          message: "must be integer"
+        }], false;
+        if (132 !== i4 && 133 !== i4 && 139 !== i4 && 241 !== i4 && 245 !== i4 && 249 !== i4 && 250 !== i4) return t2.errors = [{
+          instancePath: r2 + "/code",
+          schemaPath: "#/properties/code/enum",
+          keyword: "enum",
+          params: { allowedValues: e2.properties.code.enum },
+          message: "must be equal to one of the allowed values"
+        }], false;
+        var o2 = 0 === s3;
+      } else o2 = true;
+      if (o2) {
+        if (void 0 !== a2.indent) {
+          let e3 = a2.indent;
+          const i4 = 0;
+          if ("number" != typeof e3 || e3 % 1 || isNaN(e3) || !isFinite(e3)) return t2.errors = [{
+            instancePath: r2 + "/indent",
+            schemaPath: "#/properties/indent/type",
+            keyword: "type",
+            params: { type: "integer" },
+            message: "must be integer"
+          }], false;
+          o2 = 0 === i4;
+        } else o2 = true;
+        if (o2) if (void 0 !== a2.parameters) {
+          let e3 = a2.parameters;
+          const i4 = 0;
+          if (!Array.isArray(e3)) return t2.errors = [{
+            instancePath: r2 + "/parameters",
+            schemaPath: "#/properties/parameters/type",
+            keyword: "type",
+            params: { type: "array" },
+            message: "must be array"
+          }], false;
+          if (e3.length > 1) return t2.errors = [{
+            instancePath: r2 + "/parameters",
+            schemaPath: "#/properties/parameters/maxItems",
+            keyword: "maxItems",
+            params: { limit: 1 },
+            message: "must NOT have more than 1 items"
+          }], false;
+          if (e3.length < 1) return t2.errors = [{
+            instancePath: r2 + "/parameters",
+            schemaPath: "#/properties/parameters/minItems",
+            keyword: "minItems",
+            params: { limit: 1 },
+            message: "must NOT have fewer than 1 items"
+          }], false;
+          if (e3.length > 0) {
+            let a3 = e3[0];
+            if (!a3 || "object" != typeof a3 || Array.isArray(a3)) return t2.errors = [{
+              instancePath: r2 + "/parameters/0",
+              schemaPath: "#/properties/parameters/items/0/type",
+              keyword: "type",
+              params: { type: "object" },
+              message: "must be object"
+            }], false;
+            {
+              let e4;
+              if (void 0 === a3.name && (e4 = "name") || void 0 === a3.volume && (e4 = "volume") || void 0 === a3.pitch && (e4 = "pitch") || void 0 === a3.pan && (e4 = "pan")) return t2.errors = [{
+                instancePath: r2 + "/parameters/0",
+                schemaPath: "#/properties/parameters/items/0/required",
+                keyword: "required",
+                params: { missingProperty: e4 },
+                message: "must have required property '" + e4 + "'"
+              }], false;
+              for (const e5 in a3) if ("name" !== e5 && "volume" !== e5 && "pitch" !== e5 && "pan" !== e5) return t2.errors = [{
+                instancePath: r2 + "/parameters/0",
+                schemaPath: "#/properties/parameters/items/0/additionalProperties",
+                keyword: "additionalProperties",
+                params: { additionalProperty: e5 },
+                message: "must NOT have additional properties"
+              }], false;
+              if (void 0 !== a3.name) {
+                const e5 = 0;
+                if ("string" != typeof a3.name) return t2.errors = [{
+                  instancePath: r2 + "/parameters/0/name",
+                  schemaPath: "#/properties/parameters/items/0/properties/name/type",
+                  keyword: "type",
+                  params: { type: "string" },
+                  message: "must be string"
+                }], false;
+                var m2 = 0 === e5;
+              } else m2 = true;
+              if (m2) {
+                if (void 0 !== a3.volume) {
+                  let e5 = a3.volume;
+                  const i5 = 0;
+                  if ("number" != typeof e5 || e5 % 1 || isNaN(e5) || !isFinite(e5)) return t2.errors = [{
+                    instancePath: r2 + "/parameters/0/volume",
+                    schemaPath: "#/properties/parameters/items/0/properties/volume/type",
+                    keyword: "type",
+                    params: { type: "integer" },
+                    message: "must be integer"
+                  }], false;
+                  m2 = 0 === i5;
+                } else m2 = true;
+                if (m2) {
+                  if (void 0 !== a3.pitch) {
+                    let e5 = a3.pitch;
+                    const i5 = 0;
+                    if ("number" != typeof e5 || e5 % 1 || isNaN(e5) || !isFinite(e5)) return t2.errors = [{
+                      instancePath: r2 + "/parameters/0/pitch",
+                      schemaPath: "#/properties/parameters/items/0/properties/pitch/type",
+                      keyword: "type",
+                      params: { type: "integer" },
+                      message: "must be integer"
+                    }], false;
+                    m2 = 0 === i5;
+                  } else m2 = true;
+                  if (m2) if (void 0 !== a3.pan) {
+                    let e5 = a3.pan;
+                    const i5 = 0;
+                    if ("number" != typeof e5 || e5 % 1 || isNaN(e5) || !isFinite(e5)) return t2.errors = [{
+                      instancePath: r2 + "/parameters/0/pan",
+                      schemaPath: "#/properties/parameters/items/0/properties/pan/type",
+                      keyword: "type",
+                      params: { type: "integer" },
+                      message: "must be integer"
+                    }], false;
+                    m2 = 0 === i5;
+                  } else m2 = true;
+                }
+              }
+            }
+          }
+          o2 = 0 === i4;
+        } else o2 = true;
+      }
+    }
+    return t2.errors = null, true;
+  }
+  return Ld.exports;
+}()), Bd = (e2) => Hd(e2);
+var Vd, Od = {
+  exports: {}
+};
+const Wd = zd(function() {
+  if (Vd) return Od.exports;
+  function e2(t2, { instancePath: a2 = "", parentData: r2, parentDataProperty: i2, rootData: s2 = t2 } = {}) {
+    if (!t2 || "object" != typeof t2 || Array.isArray(t2)) return e2.errors = [{ instancePath: a2, schemaPath: "#/type", keyword: "type", params: { type: "object" }, message: "must be object" }], false;
     {
       let r3;
       if (void 0 === t2.name && (r3 = "name") || void 0 === t2.id && (r3 = "id") || void 0 === t2.nickname && (r3 = "nickname") || void 0 === t2.battlerName && (r3 = "battlerName") || void 0 === t2.characterName && (r3 = "characterName") || void 0 === t2.characterIndex && (r3 = "characterIndex") || void 0 === t2.faceName && (r3 = "faceName") || void 0 === t2.faceIndex && (r3 = "faceIndex") || void 0 === t2.classId && (r3 = "classId") || void 0 === t2.initialLevel && (r3 = "initialLevel") || void 0 === t2.maxLevel && (r3 = "maxLevel")) return e2.errors = [{
@@ -2295,11 +2447,11 @@ const _d = Xd(function() {
     }
     return e2.errors = null, true;
   }
-  return Yd = 1, Kd.exports = e2, Kd.exports.default = e2, Kd.exports;
-}()), $d = (e2) => _d(e2);
-var Ud, Zd = { exports: {} };
-const Jd = Xd(function() {
-  if (Ud) return Zd.exports;
+  return Vd = 1, Od.exports = e2, Od.exports.default = e2, Od.exports;
+}()), Gd = (e2) => Wd(e2);
+var Xd, Yd = { exports: {} };
+const Kd = zd(function() {
+  if (Xd) return Yd.exports;
   function e2(t2, { instancePath: a2 = "", parentData: r2, parentDataProperty: i2, rootData: s2 = t2 } = {}) {
     if (!t2 || "object" != typeof t2 || Array.isArray(t2)) return e2.errors = [{
       instancePath: a2,
@@ -2646,11 +2798,11 @@ const Jd = Xd(function() {
     }
     return e2.errors = null, true;
   }
-  return Ud = 1, Zd.exports = e2, Zd.exports.default = e2, Zd.exports;
-}()), Qd = (e2) => Jd(e2);
-var el, tl = { exports: {} };
-const al = Xd(function() {
-  if (el) return tl.exports;
+  return Xd = 1, Yd.exports = e2, Yd.exports.default = e2, Yd.exports;
+}()), _d = (e2) => Kd(e2);
+var $d, Ud = { exports: {} };
+const Zd = zd(function() {
+  if ($d) return Ud.exports;
   function e2(t2, { instancePath: a2 = "", parentData: r2, parentDataProperty: i2, rootData: s2 = t2 } = {}) {
     if (!t2 || "object" != typeof t2 || Array.isArray(t2)) return e2.errors = [{
       instancePath: a2,
@@ -3030,8 +3182,8 @@ const al = Xd(function() {
     }
     return e2.errors = null, true;
   }
-  return el = 1, tl.exports = e2, tl.exports.default = e2, tl.exports;
-}()), rl = (e2) => al(e2);
+  return $d = 1, Ud.exports = e2, Ud.exports.default = e2, Ud.exports;
+}()), Jd = (e2) => Zd(e2);
 export {
   at as ABORT_BATTLE,
   bi as AUTHOR_RMMZ,
@@ -3122,46 +3274,46 @@ export {
   Ie as FADEOUT_BGM,
   Ne as FADEOUT_BGS,
   oe as FADEOUT_SCREEN,
-  Cc as FILENAME_ACTORS,
-  Wc as FILENAME_ANIMATIONS,
-  Hc as FILENAME_ARMORS,
-  Mc as FILENAME_CLASSES,
-  Xc as FILENAME_COMMON_EVENTS,
-  Bc as FILENAME_ENEMIES,
-  Ec as FILENAME_ITEMS,
-  Yc as FILENAME_MAP_INFOS,
-  zc as FILENAME_SKILLS,
-  Oc as FILENAME_STATES,
-  Dc as FILENAME_SYSTEM,
-  Gc as FILENAME_TILESET,
-  Vc as FILENAME_TROOPS,
-  Lc as FILENAME_WEAPONS,
+  wc as FILENAME_ACTORS,
+  Cc as FILENAME_ANIMATIONS,
+  Rc as FILENAME_ARMORS,
+  Tc as FILENAME_CLASSES,
+  zc as FILENAME_COMMON_EVENTS,
+  Fc as FILENAME_ENEMIES,
+  qc as FILENAME_ITEMS,
+  Ec as FILENAME_MAP_INFOS,
+  Sc as FILENAME_SKILLS,
+  Dc as FILENAME_STATES,
+  Nc as FILENAME_SYSTEM,
+  Mc as FILENAME_TILESET,
+  jc as FILENAME_TROOPS,
+  Ac as FILENAME_WEAPONS,
   ni as FLAG_ID_AUTO_BATTLE,
   oi as FLAG_ID_GUARD,
   pi as FLAG_ID_PRESERVE_TP,
   mi as FLAG_ID_SUBSTITUTE,
   ce as FLASH_SCREEN,
-  $c as FOLDER_AUDIO,
-  fc as FOLDER_AUDIO_BGM,
-  vc as FOLDER_AUDIO_BGS,
-  bc as FOLDER_AUDIO_ME,
-  hc as FOLDER_AUDIO_SE,
-  Kc as FOLDER_DATA,
-  _c as FOLDER_IMG,
-  Ic as FOLDER_IMG_BATTLEBACK1,
-  kc as FOLDER_IMG_BATTLEBACK2,
-  Pc as FOLDER_IMG_CHACTERS,
-  xc as FOLDER_IMG_ENEMIES,
-  Nc as FOLDER_IMG_FACES,
-  wc as FOLDER_IMG_PARALLACES,
-  Tc as FOLDER_IMG_PICTURES,
-  Sc as FOLDER_IMG_SV_ACTORS,
-  qc as FOLDER_IMG_SV_ENEMIES,
-  Ac as FOLDER_IMG_SYSTEM,
-  Rc as FOLDER_IMG_TILESETS,
-  Fc as FOLDER_IMG_TITLES1,
-  jc as FOLDER_IMG_TITLES2,
-  Uc as FOLDER_JS,
+  Bc as FOLDER_AUDIO,
+  oc as FOLDER_AUDIO_BGM,
+  cc as FOLDER_AUDIO_BGS,
+  pc as FOLDER_AUDIO_ME,
+  mc as FOLDER_AUDIO_SE,
+  Lc as FOLDER_DATA,
+  Hc as FOLDER_IMG,
+  dc as FOLDER_IMG_BATTLEBACK1,
+  lc as FOLDER_IMG_BATTLEBACK2,
+  uc as FOLDER_IMG_CHACTERS,
+  yc as FOLDER_IMG_ENEMIES,
+  gc as FOLDER_IMG_FACES,
+  fc as FOLDER_IMG_PARALLACES,
+  hc as FOLDER_IMG_PICTURES,
+  bc as FOLDER_IMG_SV_ACTORS,
+  vc as FOLDER_IMG_SV_ENEMIES,
+  Ic as FOLDER_IMG_SYSTEM,
+  kc as FOLDER_IMG_TILESETS,
+  Pc as FOLDER_IMG_TITLES1,
+  xc as FOLDER_IMG_TITLES2,
+  Vc as FOLDER_JS,
   tt as FORCE_ACTION,
   nt as GAME_OVER,
   ne as GATHER_FOLLOWERS,
@@ -3398,33 +3550,26 @@ export {
   ko as getVariableNames,
   oo as getWeaponCategoryEnabled,
   wo as getWeaponTypes,
+  Bd as isAudioCommand,
   Mp as isCloneableCommand,
-  Op as isCommandAudio,
   Lp as isCommandChangeActorText,
-  oc as isCommandChangeBattleBgm,
-  pc as isCommandChangeDefeatMe,
-  mc as isCommandChangeVictoryMe,
-  uc as isCommandCommentBody,
-  lc as isCommandCommentHeader,
-  _p as isCommandCommonEvent,
-  ec as isCommandInputNumber,
-  Gp as isCommandNonParam,
-  rc as isCommandPlayBgm,
-  ic as isCommandPlayBgs,
-  sc as isCommandPlayMe,
-  nc as isCommandPlaySe,
-  gc as isCommandScriptBody,
-  yc as isCommandScriptHeader,
+  ic as isCommandCommentBody,
+  rc as isCommandCommentHeader,
+  Yp as isCommandCommonEvent,
+  Jp as isCommandInputNumber,
+  Op as isCommandNonParam,
+  nc as isCommandScriptBody,
+  sc as isCommandScriptHeader,
   Bp as isCommandScrollTextHead,
-  Jp as isCommandShowChoiceItem,
-  Up as isCommandShowChoices,
-  ac as isCommandShowMessage,
-  cc as isCommandShowMessageBody,
-  dc as isCommandShowScrollingTextBody,
-  Yp as isCommandTextBody,
-  $d as isDataActor,
-  Qd as isDataArmor2,
-  rl as isDataClass,
+  Up as isCommandShowChoiceItem,
+  _p as isCommandShowChoices,
+  ec as isCommandShowMessage,
+  tc as isCommandShowMessageBody,
+  ac as isCommandShowScrollingTextBody,
+  Gp as isCommandTextBody,
+  Gd as isDataActor,
+  _d as isDataArmor2,
+  Jd as isDataClass,
   Os as isDataItem,
   fa as isDataMap,
   ga as isDataMapInfo,
@@ -3500,7 +3645,7 @@ export {
   Di as mergeItemsSource,
   Fa as normalizeDataActor,
   si as partyAbilityToArray,
-  Wd as pluginSourceToJSON,
+  Cd as pluginSourceToJSON,
   Us as readNote,
   $s as readNoteObject,
   Lr as regularParamName,
@@ -3512,7 +3657,7 @@ export {
   di as specialFlagToArray,
   Zr as specialParamName,
   Ur as specialParamsToArray,
-  Gd as structToJSONSchema,
+  Md as structToJSONSchema,
   Xm as toArrayCommonEvent,
   Km as toArrayControlSwitches,
   ep as toArrayInputNumber,
