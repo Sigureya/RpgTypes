@@ -4,11 +4,14 @@ export const pickCommands = <
   Head extends EventCommand,
   Body extends ExtractCommandByParam<[string]>
 >(
-  array: ReadonlyArray<unknown>,
+  array: ReadonlyArray<EventCommand>,
   index: number,
-  headFn: (data: unknown) => data is Head,
-  bodyFn: (data: unknown) => data is Body
-) => {
+  headFn: (data: EventCommand) => data is Head,
+  bodyFn: (data: EventCommand) => data is Body
+): {
+  header: Head;
+  bodies: Body[];
+} => {
   const head = array[index];
   if (!headFn(head)) {
     throw new Error(`Invalid head at index ${index}: ${JSON.stringify(head)}`);

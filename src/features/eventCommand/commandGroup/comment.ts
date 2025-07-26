@@ -4,11 +4,7 @@ import type {
   Command_CommentBody,
   EventCommandLike,
 } from "@RpgTypes/rmmz";
-import {
-  COMMENT_BODY,
-  isCommandCommentBody,
-  isCommandCommentHeader,
-} from "@RpgTypes/rmmz";
+import { COMMENT_BODY, COMMENT_HEAD } from "@RpgTypes/rmmz";
 import type { EventCommandGroup_Comment } from "./core";
 import {
   SimpleEventCommandGroup,
@@ -19,12 +15,15 @@ import {
 export const extractCommentGroup = (
   list: ReadonlyArray<EventCommand>,
   index: number
-) => {
+): {
+  header: Command_CommentHeader;
+  bodies: Command_CommentBody[];
+} => {
   return pickCommands(
     list,
     index,
-    (a) => isCommandCommentHeader(a),
-    (b) => isCommandCommentBody(b)
+    (a) => a.code === COMMENT_HEAD,
+    (b) => b.code === COMMENT_BODY
   );
 };
 
