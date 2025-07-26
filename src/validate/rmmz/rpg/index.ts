@@ -1,4 +1,4 @@
 export { isDataActor } from "./actor/validate";
 
-export { isDataArmor2 } from "./armor/validate";
-export { isDataClass } from "./class/validate";
+export { isDataArmor as isDataArmor2 } from "./armor/isDataArmor";
+export { isDataClass } from "./class/isDataClass";
