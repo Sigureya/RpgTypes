@@ -1,299 +1,292 @@
-import { g as e } from "../../../shared/_commonjsHelpers.es.js";
-var t, r = { exports: {} };
-const s = e(function() {
-  if (t) return r.exports;
-  function e2(t2, { instancePath: r2 = "", parentData: s2, parentDataProperty: i2, rootData: a2 = t2 } = {}) {
-    if (!t2 || "object" != typeof t2 || Array.isArray(t2)) return e2.errors = [{
-      instancePath: r2,
+import { g as v } from "../../../shared/_commonjsHelpers.es.js";
+var j, k = { exports: {} };
+const G = v(function() {
+  if (j) return k.exports;
+  function r(t, { instancePath: e = "", parentData: l, parentDataProperty: P, rootData: N = t } = {}) {
+    if (!t || typeof t != "object" || Array.isArray(t)) return r.errors = [{
+      instancePath: e,
       schemaPath: "#/type",
       keyword: "type",
       params: { type: "object" },
       message: "must be object"
-    }], false;
+    }], !1;
     {
-      let s3;
-      if (void 0 === t2.name && (s3 = "name") || void 0 === t2.id && (s3 = "id") || void 0 === t2.nickname && (s3 = "nickname") || void 0 === t2.battlerName && (s3 = "battlerName") || void 0 === t2.characterName && (s3 = "characterName") || void 0 === t2.characterIndex && (s3 = "characterIndex") || void 0 === t2.faceName && (s3 = "faceName") || void 0 === t2.faceIndex && (s3 = "faceIndex") || void 0 === t2.classId && (s3 = "classId") || void 0 === t2.initialLevel && (s3 = "initialLevel") || void 0 === t2.maxLevel && (s3 = "maxLevel")) return e2.errors = [{
-        instancePath: r2,
+      let c;
+      if (t.name === void 0 && (c = "name") || t.id === void 0 && (c = "id") || t.nickname === void 0 && (c = "nickname") || t.battlerName === void 0 && (c = "battlerName") || t.characterName === void 0 && (c = "characterName") || t.characterIndex === void 0 && (c = "characterIndex") || t.faceName === void 0 && (c = "faceName") || t.faceIndex === void 0 && (c = "faceIndex") || t.classId === void 0 && (c = "classId") || t.initialLevel === void 0 && (c = "initialLevel") || t.maxLevel === void 0 && (c = "maxLevel")) return r.errors = [{
+        instancePath: e,
         schemaPath: "#/required",
         keyword: "required",
-        params: { missingProperty: s3 },
-        message: "must have required property '" + s3 + "'"
-      }], false;
-      if (void 0 !== t2.name) {
-        const s4 = 0;
-        if ("string" != typeof t2.name) return e2.errors = [{ instancePath: r2 + "/name", schemaPath: "#/properties/name/type", keyword: "type", params: { type: "string" }, message: "must be string" }], false;
-        var n2 = 0 === s4;
-      } else n2 = true;
-      if (n2) {
-        if (void 0 !== t2.battlerName) {
-          const s4 = 0;
-          if ("string" != typeof t2.battlerName) return e2.errors = [{
-            instancePath: r2 + "/battlerName",
+        params: { missingProperty: c },
+        message: "must have required property '" + c + "'"
+      }], !1;
+      if (t.name !== void 0) {
+        if (typeof t.name != "string") return r.errors = [{ instancePath: e + "/name", schemaPath: "#/properties/name/type", keyword: "type", params: { type: "string" }, message: "must be string" }], !1;
+        var s = !0;
+      } else s = !0;
+      if (s) {
+        if (t.battlerName !== void 0) {
+          if (typeof t.battlerName != "string") return r.errors = [{
+            instancePath: e + "/battlerName",
             schemaPath: "#/properties/battlerName/type",
             keyword: "type",
             params: { type: "string" },
             message: "must be string"
-          }], false;
-          n2 = 0 === s4;
-        } else n2 = true;
-        if (n2) {
-          if (void 0 !== t2.characterName) {
-            const s4 = 0;
-            if ("string" != typeof t2.characterName) return e2.errors = [{
-              instancePath: r2 + "/characterName",
+          }], !1;
+          s = !0;
+        } else s = !0;
+        if (s) {
+          if (t.characterName !== void 0) {
+            if (typeof t.characterName != "string") return r.errors = [{
+              instancePath: e + "/characterName",
               schemaPath: "#/properties/characterName/type",
               keyword: "type",
               params: { type: "string" },
               message: "must be string"
-            }], false;
-            n2 = 0 === s4;
-          } else n2 = true;
-          if (n2) {
-            if (void 0 !== t2.characterIndex) {
-              let s4 = t2.characterIndex;
-              const i3 = 0;
-              if ("number" != typeof s4 || s4 % 1 || isNaN(s4) || !isFinite(s4)) return e2.errors = [{ instancePath: r2 + "/characterIndex", schemaPath: "#/properties/characterIndex/type", keyword: "type", params: {
+            }], !1;
+            s = !0;
+          } else s = !0;
+          if (s) {
+            if (t.characterIndex !== void 0) {
+              let m = t.characterIndex;
+              const a = 0;
+              if (typeof m != "number" || m % 1 || isNaN(m) || !isFinite(m)) return r.errors = [{ instancePath: e + "/characterIndex", schemaPath: "#/properties/characterIndex/type", keyword: "type", params: {
                 type: "integer"
-              }, message: "must be integer" }], false;
-              n2 = 0 === i3;
-            } else n2 = true;
-            if (n2) {
-              if (void 0 !== t2.faceName) {
-                const s4 = 0;
-                if ("string" != typeof t2.faceName) return e2.errors = [{
-                  instancePath: r2 + "/faceName",
+              }, message: "must be integer" }], !1;
+              s = a === 0;
+            } else s = !0;
+            if (s) {
+              if (t.faceName !== void 0) {
+                if (typeof t.faceName != "string") return r.errors = [{
+                  instancePath: e + "/faceName",
                   schemaPath: "#/properties/faceName/type",
                   keyword: "type",
                   params: { type: "string" },
                   message: "must be string"
-                }], false;
-                n2 = 0 === s4;
-              } else n2 = true;
-              if (n2) {
-                if (void 0 !== t2.faceIndex) {
-                  let s4 = t2.faceIndex;
-                  const i3 = 0;
-                  if ("number" != typeof s4 || s4 % 1 || isNaN(s4) || !isFinite(s4)) return e2.errors = [{
-                    instancePath: r2 + "/faceIndex",
+                }], !1;
+                s = !0;
+              } else s = !0;
+              if (s) {
+                if (t.faceIndex !== void 0) {
+                  let m = t.faceIndex;
+                  const a = 0;
+                  if (typeof m != "number" || m % 1 || isNaN(m) || !isFinite(m)) return r.errors = [{
+                    instancePath: e + "/faceIndex",
                     schemaPath: "#/properties/faceIndex/type",
                     keyword: "type",
                     params: { type: "integer" },
                     message: "must be integer"
-                  }], false;
-                  if ("number" == typeof s4 && isFinite(s4)) {
-                    if (s4 > 7 || isNaN(s4)) return e2.errors = [{
-                      instancePath: r2 + "/faceIndex",
+                  }], !1;
+                  if (typeof m == "number" && isFinite(m)) {
+                    if (m > 7 || isNaN(m)) return r.errors = [{
+                      instancePath: e + "/faceIndex",
                       schemaPath: "#/properties/faceIndex/maximum",
                       keyword: "maximum",
                       params: { comparison: "<=", limit: 7 },
                       message: "must be <= 7"
-                    }], false;
-                    if (s4 < 0 || isNaN(s4)) return e2.errors = [{
-                      instancePath: r2 + "/faceIndex",
+                    }], !1;
+                    if (m < 0 || isNaN(m)) return r.errors = [{
+                      instancePath: e + "/faceIndex",
                       schemaPath: "#/properties/faceIndex/minimum",
                       keyword: "minimum",
                       params: { comparison: ">=", limit: 0 },
                       message: "must be >= 0"
-                    }], false;
+                    }], !1;
                   }
-                  n2 = 0 === i3;
-                } else n2 = true;
-                if (n2) {
-                  if (void 0 !== t2.id) {
-                    let s4 = t2.id;
-                    const i3 = 0;
-                    if ("number" != typeof s4 || s4 % 1 || isNaN(s4) || !isFinite(s4)) return e2.errors = [{
-                      instancePath: r2 + "/id",
+                  s = a === 0;
+                } else s = !0;
+                if (s) {
+                  if (t.id !== void 0) {
+                    let m = t.id;
+                    const a = 0;
+                    if (typeof m != "number" || m % 1 || isNaN(m) || !isFinite(m)) return r.errors = [{
+                      instancePath: e + "/id",
                       schemaPath: "#/properties/id/type",
                       keyword: "type",
                       params: { type: "integer" },
                       message: "must be integer"
-                    }], false;
-                    if ("number" == typeof s4 && isFinite(s4) && (s4 < 0 || isNaN(s4))) return e2.errors = [{
-                      instancePath: r2 + "/id",
+                    }], !1;
+                    if (typeof m == "number" && isFinite(m) && (m < 0 || isNaN(m))) return r.errors = [{
+                      instancePath: e + "/id",
                       schemaPath: "#/properties/id/minimum",
                       keyword: "minimum",
                       params: { comparison: ">=", limit: 0 },
                       message: "must be >= 0"
-                    }], false;
-                    n2 = 0 === i3;
-                  } else n2 = true;
-                  if (n2) {
-                    if (void 0 !== t2.nickname) {
-                      const s4 = 0;
-                      if ("string" != typeof t2.nickname) return e2.errors = [{
-                        instancePath: r2 + "/nickname",
+                    }], !1;
+                    s = a === 0;
+                  } else s = !0;
+                  if (s) {
+                    if (t.nickname !== void 0) {
+                      if (typeof t.nickname != "string") return r.errors = [{
+                        instancePath: e + "/nickname",
                         schemaPath: "#/properties/nickname/type",
                         keyword: "type",
                         params: { type: "string" },
                         message: "must be string"
-                      }], false;
-                      n2 = 0 === s4;
-                    } else n2 = true;
-                    if (n2) {
-                      if (void 0 !== t2.profile) {
-                        const s4 = 0;
-                        if ("string" != typeof t2.profile) return e2.errors = [{ instancePath: r2 + "/profile", schemaPath: "#/properties/profile/type", keyword: "type", params: { type: "string" }, message: "must be string" }], false;
-                        n2 = 0 === s4;
-                      } else n2 = true;
-                      if (n2) {
-                        if (void 0 !== t2.initialLevel) {
-                          let s4 = t2.initialLevel;
-                          const i3 = 0;
-                          if ("number" != typeof s4 || s4 % 1 || isNaN(s4) || !isFinite(s4)) return e2.errors = [{
-                            instancePath: r2 + "/initialLevel",
+                      }], !1;
+                      s = !0;
+                    } else s = !0;
+                    if (s) {
+                      if (t.profile !== void 0) {
+                        if (typeof t.profile != "string") return r.errors = [{ instancePath: e + "/profile", schemaPath: "#/properties/profile/type", keyword: "type", params: { type: "string" }, message: "must be string" }], !1;
+                        s = !0;
+                      } else s = !0;
+                      if (s) {
+                        if (t.initialLevel !== void 0) {
+                          let m = t.initialLevel;
+                          const a = 0;
+                          if (typeof m != "number" || m % 1 || isNaN(m) || !isFinite(m)) return r.errors = [{
+                            instancePath: e + "/initialLevel",
                             schemaPath: "#/properties/initialLevel/type",
                             keyword: "type",
                             params: { type: "integer" },
                             message: "must be integer"
-                          }], false;
-                          if ("number" == typeof s4 && isFinite(s4) && (s4 < 0 || isNaN(s4))) return e2.errors = [{ instancePath: r2 + "/initialLevel", schemaPath: "#/properties/initialLevel/minimum", keyword: "minimum", params: {
+                          }], !1;
+                          if (typeof m == "number" && isFinite(m) && (m < 0 || isNaN(m))) return r.errors = [{ instancePath: e + "/initialLevel", schemaPath: "#/properties/initialLevel/minimum", keyword: "minimum", params: {
                             comparison: ">=",
                             limit: 0
-                          }, message: "must be >= 0" }], false;
-                          n2 = 0 === i3;
-                        } else n2 = true;
-                        if (n2) {
-                          if (void 0 !== t2.maxLevel) {
-                            let s4 = t2.maxLevel;
-                            const i3 = 0;
-                            if ("number" != typeof s4 || s4 % 1 || isNaN(s4) || !isFinite(s4)) return e2.errors = [{
-                              instancePath: r2 + "/maxLevel",
+                          }, message: "must be >= 0" }], !1;
+                          s = a === 0;
+                        } else s = !0;
+                        if (s) {
+                          if (t.maxLevel !== void 0) {
+                            let m = t.maxLevel;
+                            const a = 0;
+                            if (typeof m != "number" || m % 1 || isNaN(m) || !isFinite(m)) return r.errors = [{
+                              instancePath: e + "/maxLevel",
                               schemaPath: "#/properties/maxLevel/type",
                               keyword: "type",
                               params: { type: "integer" },
                               message: "must be integer"
-                            }], false;
-                            n2 = 0 === i3;
-                          } else n2 = true;
-                          if (n2) {
-                            if (void 0 !== t2.classId) {
-                              let s4 = t2.classId;
-                              const i3 = 0;
-                              if ("number" != typeof s4 || s4 % 1 || isNaN(s4) || !isFinite(s4)) return e2.errors = [{
-                                instancePath: r2 + "/classId",
+                            }], !1;
+                            s = a === 0;
+                          } else s = !0;
+                          if (s) {
+                            if (t.classId !== void 0) {
+                              let m = t.classId;
+                              const a = 0;
+                              if (typeof m != "number" || m % 1 || isNaN(m) || !isFinite(m)) return r.errors = [{
+                                instancePath: e + "/classId",
                                 schemaPath: "#/properties/classId/type",
                                 keyword: "type",
                                 params: { type: "integer" },
                                 message: "must be integer"
-                              }], false;
-                              if ("number" == typeof s4 && isFinite(s4) && (s4 < 0 || isNaN(s4))) return e2.errors = [{ instancePath: r2 + "/classId", schemaPath: "#/properties/classId/minimum", keyword: "minimum", params: {
+                              }], !1;
+                              if (typeof m == "number" && isFinite(m) && (m < 0 || isNaN(m))) return r.errors = [{ instancePath: e + "/classId", schemaPath: "#/properties/classId/minimum", keyword: "minimum", params: {
                                 comparison: ">=",
                                 limit: 0
-                              }, message: "must be >= 0" }], false;
-                              n2 = 0 === i3;
-                            } else n2 = true;
-                            if (n2) {
-                              if (void 0 !== t2.equips) {
-                                let s4 = t2.equips;
-                                const i3 = 0;
-                                if (!Array.isArray(s4)) return e2.errors = [{
-                                  instancePath: r2 + "/equips",
+                              }, message: "must be >= 0" }], !1;
+                              s = a === 0;
+                            } else s = !0;
+                            if (s) {
+                              if (t.equips !== void 0) {
+                                let m = t.equips;
+                                const a = 0;
+                                if (!Array.isArray(m)) return r.errors = [{
+                                  instancePath: e + "/equips",
                                   schemaPath: "#/properties/equips/type",
                                   keyword: "type",
                                   params: { type: "array" },
                                   message: "must be array"
-                                }], false;
+                                }], !1;
                                 {
-                                  const t3 = s4.length;
-                                  for (let i4 = 0; i4 < t3; i4++) {
-                                    let t4 = s4[i4];
-                                    const a3 = 0;
-                                    if ("number" != typeof t4 || t4 % 1 || isNaN(t4) || !isFinite(t4)) return e2.errors = [{ instancePath: r2 + "/equips/" + i4, schemaPath: "#/properties/equips/items/type", keyword: "type", params: {
+                                  const n = m.length;
+                                  for (let i = 0; i < n; i++) {
+                                    let y = m[i];
+                                    const o = 0;
+                                    if (typeof y != "number" || y % 1 || isNaN(y) || !isFinite(y)) return r.errors = [{ instancePath: e + "/equips/" + i, schemaPath: "#/properties/equips/items/type", keyword: "type", params: {
                                       type: "integer"
-                                    }, message: "must be integer" }], false;
-                                    if (!(0 === a3)) break;
+                                    }, message: "must be integer" }], !1;
+                                    if (o !== 0) break;
                                   }
                                 }
-                                n2 = 0 === i3;
-                              } else n2 = true;
-                              if (n2) {
-                                if (void 0 !== t2.note) {
-                                  const s4 = 0;
-                                  if ("string" != typeof t2.note) return e2.errors = [{
-                                    instancePath: r2 + "/note",
+                                s = a === 0;
+                              } else s = !0;
+                              if (s) {
+                                if (t.note !== void 0) {
+                                  if (typeof t.note != "string") return r.errors = [{
+                                    instancePath: e + "/note",
                                     schemaPath: "#/properties/note/type",
                                     keyword: "type",
                                     params: { type: "string" },
                                     message: "must be string"
-                                  }], false;
-                                  n2 = 0 === s4;
-                                } else n2 = true;
-                                if (n2) if (void 0 !== t2.traits) {
-                                  let s4 = t2.traits;
-                                  const i3 = 0;
-                                  if (!Array.isArray(s4)) return e2.errors = [{
-                                    instancePath: r2 + "/traits",
+                                  }], !1;
+                                  s = !0;
+                                } else s = !0;
+                                if (s) if (t.traits !== void 0) {
+                                  let m = t.traits;
+                                  const a = 0;
+                                  if (!Array.isArray(m)) return r.errors = [{
+                                    instancePath: e + "/traits",
                                     schemaPath: "#/properties/traits/type",
                                     keyword: "type",
                                     params: { type: "array" },
                                     message: "must be array"
-                                  }], false;
+                                  }], !1;
                                   {
-                                    const t3 = s4.length;
-                                    for (let i4 = 0; i4 < t3; i4++) {
-                                      let t4 = s4[i4];
-                                      const a3 = 0;
-                                      if (!t4 || "object" != typeof t4 || Array.isArray(t4)) return e2.errors = [{
-                                        instancePath: r2 + "/traits/" + i4,
+                                    const n = m.length;
+                                    for (let i = 0; i < n; i++) {
+                                      let y = m[i];
+                                      const o = 0;
+                                      if (!y || typeof y != "object" || Array.isArray(y)) return r.errors = [{
+                                        instancePath: e + "/traits/" + i,
                                         schemaPath: "#/properties/traits/items/type",
                                         keyword: "type",
                                         params: { type: "object" },
                                         message: "must be object"
-                                      }], false;
+                                      }], !1;
                                       {
-                                        let s5;
-                                        if (void 0 === t4.code && (s5 = "code") || void 0 === t4.dataId && (s5 = "dataId") || void 0 === t4.value && (s5 = "value")) return e2.errors = [{
-                                          instancePath: r2 + "/traits/" + i4,
+                                        let p;
+                                        if (y.code === void 0 && (p = "code") || y.dataId === void 0 && (p = "dataId") || y.value === void 0 && (p = "value")) return r.errors = [{
+                                          instancePath: e + "/traits/" + i,
                                           schemaPath: "#/properties/traits/items/required",
                                           keyword: "required",
-                                          params: { missingProperty: s5 },
-                                          message: "must have required property '" + s5 + "'"
-                                        }], false;
-                                        if (void 0 !== t4.code) {
-                                          let s6 = t4.code;
-                                          const a4 = 0;
-                                          if ("number" != typeof s6 || s6 % 1 || isNaN(s6) || !isFinite(s6)) return e2.errors = [{
-                                            instancePath: r2 + "/traits/" + i4 + "/code",
+                                          params: { missingProperty: p },
+                                          message: "must have required property '" + p + "'"
+                                        }], !1;
+                                        if (y.code !== void 0) {
+                                          let d = y.code;
+                                          const g = 0;
+                                          if (typeof d != "number" || d % 1 || isNaN(d) || !isFinite(d)) return r.errors = [{
+                                            instancePath: e + "/traits/" + i + "/code",
                                             schemaPath: "#/properties/traits/items/properties/code/type",
                                             keyword: "type",
                                             params: { type: "integer" },
                                             message: "must be integer"
-                                          }], false;
-                                          var o2 = 0 === a4;
-                                        } else o2 = true;
-                                        if (o2) {
-                                          if (void 0 !== t4.dataId) {
-                                            let s6 = t4.dataId;
-                                            const a4 = 0;
-                                            if ("number" != typeof s6 || s6 % 1 || isNaN(s6) || !isFinite(s6)) return e2.errors = [{
-                                              instancePath: r2 + "/traits/" + i4 + "/dataId",
+                                          }], !1;
+                                          var h = g === 0;
+                                        } else h = !0;
+                                        if (h) {
+                                          if (y.dataId !== void 0) {
+                                            let d = y.dataId;
+                                            const g = 0;
+                                            if (typeof d != "number" || d % 1 || isNaN(d) || !isFinite(d)) return r.errors = [{
+                                              instancePath: e + "/traits/" + i + "/dataId",
                                               schemaPath: "#/properties/traits/items/properties/dataId/type",
                                               keyword: "type",
                                               params: { type: "integer" },
                                               message: "must be integer"
-                                            }], false;
-                                            o2 = 0 === a4;
-                                          } else o2 = true;
-                                          if (o2) if (void 0 !== t4.value) {
-                                            let s6 = t4.value;
-                                            const a4 = 0;
-                                            if ("number" != typeof s6 || s6 % 1 || isNaN(s6) || !isFinite(s6)) return e2.errors = [{
-                                              instancePath: r2 + "/traits/" + i4 + "/value",
+                                            }], !1;
+                                            h = g === 0;
+                                          } else h = !0;
+                                          if (h) if (y.value !== void 0) {
+                                            let d = y.value;
+                                            const g = 0;
+                                            if (typeof d != "number" || d % 1 || isNaN(d) || !isFinite(d)) return r.errors = [{
+                                              instancePath: e + "/traits/" + i + "/value",
                                               schemaPath: "#/properties/traits/items/properties/value/type",
                                               keyword: "type",
                                               params: { type: "integer" },
                                               message: "must be integer"
-                                            }], false;
-                                            o2 = 0 === a4;
-                                          } else o2 = true;
+                                            }], !1;
+                                            h = g === 0;
+                                          } else h = !0;
                                         }
                                       }
-                                      if (!(0 === a3)) break;
+                                      if (o !== 0) break;
                                     }
                                   }
-                                  n2 = 0 === i3;
-                                } else n2 = true;
+                                  s = a === 0;
+                                } else s = !0;
                               }
                             }
                           }
@@ -308,267 +301,264 @@ const s = e(function() {
         }
       }
     }
-    return e2.errors = null, true;
+    return r.errors = null, !0;
   }
-  return t = 1, r.exports = e2, r.exports.default = e2, r.exports;
-}()), i = (e2) => s(e2);
-var a, n = { exports: {} };
-const o = e(function() {
-  if (a) return n.exports;
-  function e2(t2, { instancePath: r2 = "", parentData: s2, parentDataProperty: i2, rootData: a2 = t2 } = {}) {
-    if (!t2 || "object" != typeof t2 || Array.isArray(t2)) return e2.errors = [{
-      instancePath: r2,
+  return j = 1, k.exports = r, k.exports.default = r, k.exports;
+}()), U = (r) => G(r);
+var D, w = { exports: {} };
+const H = v(function() {
+  if (D) return w.exports;
+  function r(t, { instancePath: e = "", parentData: l, parentDataProperty: P, rootData: N = t } = {}) {
+    if (!t || typeof t != "object" || Array.isArray(t)) return r.errors = [{
+      instancePath: e,
       schemaPath: "#/type",
       keyword: "type",
       params: { type: "object" },
       message: "must be object"
-    }], false;
+    }], !1;
     {
-      let s3;
-      if (void 0 === t2.name && (s3 = "name") || void 0 === t2.id && (s3 = "id") || void 0 === t2.description && (s3 = "description") || void 0 === t2.iconIndex && (s3 = "iconIndex") || void 0 === t2.price && (s3 = "price") || void 0 === t2.params && (s3 = "params") || void 0 === t2.traits && (s3 = "traits") || void 0 === t2.note && (s3 = "note") || void 0 === t2.etypeId && (s3 = "etypeId") || void 0 === t2.atypeId && (s3 = "atypeId")) return e2.errors = [{
-        instancePath: r2,
+      let m;
+      if (t.name === void 0 && (m = "name") || t.id === void 0 && (m = "id") || t.description === void 0 && (m = "description") || t.iconIndex === void 0 && (m = "iconIndex") || t.price === void 0 && (m = "price") || t.params === void 0 && (m = "params") || t.traits === void 0 && (m = "traits") || t.note === void 0 && (m = "note") || t.etypeId === void 0 && (m = "etypeId") || t.atypeId === void 0 && (m = "atypeId")) return r.errors = [{
+        instancePath: e,
         schemaPath: "#/required",
         keyword: "required",
-        params: { missingProperty: s3 },
-        message: "must have required property '" + s3 + "'"
-      }], false;
-      if (void 0 !== t2.name) {
-        const s4 = 0;
-        if ("string" != typeof t2.name) return e2.errors = [{ instancePath: r2 + "/name", schemaPath: "#/properties/name/type", keyword: "type", params: { type: "string" }, message: "must be string" }], false;
-        var n2 = 0 === s4;
-      } else n2 = true;
-      if (n2) {
-        if (void 0 !== t2.id) {
-          let s4 = t2.id;
-          const i3 = 0;
-          if ("number" != typeof s4 || s4 % 1 || isNaN(s4) || !isFinite(s4)) return e2.errors = [{
-            instancePath: r2 + "/id",
+        params: { missingProperty: m },
+        message: "must have required property '" + m + "'"
+      }], !1;
+      if (t.name !== void 0) {
+        if (typeof t.name != "string") return r.errors = [{ instancePath: e + "/name", schemaPath: "#/properties/name/type", keyword: "type", params: { type: "string" }, message: "must be string" }], !1;
+        var s = !0;
+      } else s = !0;
+      if (s) {
+        if (t.id !== void 0) {
+          let a = t.id;
+          const n = 0;
+          if (typeof a != "number" || a % 1 || isNaN(a) || !isFinite(a)) return r.errors = [{
+            instancePath: e + "/id",
             schemaPath: "#/properties/id/type",
             keyword: "type",
             params: { type: "integer" },
             message: "must be integer"
-          }], false;
-          if ("number" == typeof s4 && isFinite(s4) && (s4 < 0 || isNaN(s4))) return e2.errors = [{
-            instancePath: r2 + "/id",
+          }], !1;
+          if (typeof a == "number" && isFinite(a) && (a < 0 || isNaN(a))) return r.errors = [{
+            instancePath: e + "/id",
             schemaPath: "#/properties/id/minimum",
             keyword: "minimum",
             params: { comparison: ">=", limit: 0 },
             message: "must be >= 0"
-          }], false;
-          n2 = 0 === i3;
-        } else n2 = true;
-        if (n2) {
-          if (void 0 !== t2.description) {
-            const s4 = 0;
-            if ("string" != typeof t2.description) return e2.errors = [{
-              instancePath: r2 + "/description",
+          }], !1;
+          s = n === 0;
+        } else s = !0;
+        if (s) {
+          if (t.description !== void 0) {
+            if (typeof t.description != "string") return r.errors = [{
+              instancePath: e + "/description",
               schemaPath: "#/properties/description/type",
               keyword: "type",
               params: { type: "string" },
               message: "must be string"
-            }], false;
-            n2 = 0 === s4;
-          } else n2 = true;
-          if (n2) {
-            if (void 0 !== t2.iconIndex) {
-              let s4 = t2.iconIndex;
-              const i3 = 0;
-              if ("number" != typeof s4 || s4 % 1 || isNaN(s4) || !isFinite(s4)) return e2.errors = [{
-                instancePath: r2 + "/iconIndex",
+            }], !1;
+            s = !0;
+          } else s = !0;
+          if (s) {
+            if (t.iconIndex !== void 0) {
+              let a = t.iconIndex;
+              const n = 0;
+              if (typeof a != "number" || a % 1 || isNaN(a) || !isFinite(a)) return r.errors = [{
+                instancePath: e + "/iconIndex",
                 schemaPath: "#/properties/iconIndex/type",
                 keyword: "type",
                 params: { type: "integer" },
                 message: "must be integer"
-              }], false;
-              if ("number" == typeof s4 && isFinite(s4) && (s4 < 0 || isNaN(s4))) return e2.errors = [{
-                instancePath: r2 + "/iconIndex",
+              }], !1;
+              if (typeof a == "number" && isFinite(a) && (a < 0 || isNaN(a))) return r.errors = [{
+                instancePath: e + "/iconIndex",
                 schemaPath: "#/properties/iconIndex/minimum",
                 keyword: "minimum",
                 params: { comparison: ">=", limit: 0 },
                 message: "must be >= 0"
-              }], false;
-              n2 = 0 === i3;
-            } else n2 = true;
-            if (n2) {
-              if (void 0 !== t2.price) {
-                let s4 = t2.price;
-                const i3 = 0;
-                if ("number" != typeof s4 || s4 % 1 || isNaN(s4) || !isFinite(s4)) return e2.errors = [{
-                  instancePath: r2 + "/price",
+              }], !1;
+              s = n === 0;
+            } else s = !0;
+            if (s) {
+              if (t.price !== void 0) {
+                let a = t.price;
+                const n = 0;
+                if (typeof a != "number" || a % 1 || isNaN(a) || !isFinite(a)) return r.errors = [{
+                  instancePath: e + "/price",
                   schemaPath: "#/properties/price/type",
                   keyword: "type",
                   params: { type: "integer" },
                   message: "must be integer"
-                }], false;
-                if ("number" == typeof s4 && isFinite(s4) && (s4 < 0 || isNaN(s4))) return e2.errors = [{
-                  instancePath: r2 + "/price",
+                }], !1;
+                if (typeof a == "number" && isFinite(a) && (a < 0 || isNaN(a))) return r.errors = [{
+                  instancePath: e + "/price",
                   schemaPath: "#/properties/price/minimum",
                   keyword: "minimum",
                   params: { comparison: ">=", limit: 0 },
                   message: "must be >= 0"
-                }], false;
-                n2 = 0 === i3;
-              } else n2 = true;
-              if (n2) {
-                if (void 0 !== t2.note) {
-                  const s4 = 0;
-                  if ("string" != typeof t2.note) return e2.errors = [{
-                    instancePath: r2 + "/note",
+                }], !1;
+                s = n === 0;
+              } else s = !0;
+              if (s) {
+                if (t.note !== void 0) {
+                  if (typeof t.note != "string") return r.errors = [{
+                    instancePath: e + "/note",
                     schemaPath: "#/properties/note/type",
                     keyword: "type",
                     params: { type: "string" },
                     message: "must be string"
-                  }], false;
-                  n2 = 0 === s4;
-                } else n2 = true;
-                if (n2) {
-                  if (void 0 !== t2.etypeId) {
-                    let s4 = t2.etypeId;
-                    const i3 = 0;
-                    if ("number" != typeof s4 || s4 % 1 || isNaN(s4) || !isFinite(s4)) return e2.errors = [{
-                      instancePath: r2 + "/etypeId",
+                  }], !1;
+                  s = !0;
+                } else s = !0;
+                if (s) {
+                  if (t.etypeId !== void 0) {
+                    let a = t.etypeId;
+                    const n = 0;
+                    if (typeof a != "number" || a % 1 || isNaN(a) || !isFinite(a)) return r.errors = [{
+                      instancePath: e + "/etypeId",
                       schemaPath: "#/properties/etypeId/type",
                       keyword: "type",
                       params: { type: "integer" },
                       message: "must be integer"
-                    }], false;
-                    if ("number" == typeof s4 && isFinite(s4) && (s4 < 0 || isNaN(s4))) return e2.errors = [{
-                      instancePath: r2 + "/etypeId",
+                    }], !1;
+                    if (typeof a == "number" && isFinite(a) && (a < 0 || isNaN(a))) return r.errors = [{
+                      instancePath: e + "/etypeId",
                       schemaPath: "#/properties/etypeId/minimum",
                       keyword: "minimum",
                       params: { comparison: ">=", limit: 0 },
                       message: "must be >= 0"
-                    }], false;
-                    n2 = 0 === i3;
-                  } else n2 = true;
-                  if (n2) {
-                    if (void 0 !== t2.atypeId) {
-                      let s4 = t2.atypeId;
-                      const i3 = 0;
-                      if ("number" != typeof s4 || s4 % 1 || isNaN(s4) || !isFinite(s4)) return e2.errors = [{
-                        instancePath: r2 + "/atypeId",
+                    }], !1;
+                    s = n === 0;
+                  } else s = !0;
+                  if (s) {
+                    if (t.atypeId !== void 0) {
+                      let a = t.atypeId;
+                      const n = 0;
+                      if (typeof a != "number" || a % 1 || isNaN(a) || !isFinite(a)) return r.errors = [{
+                        instancePath: e + "/atypeId",
                         schemaPath: "#/properties/atypeId/type",
                         keyword: "type",
                         params: { type: "integer" },
                         message: "must be integer"
-                      }], false;
-                      if ("number" == typeof s4 && isFinite(s4) && (s4 < 0 || isNaN(s4))) return e2.errors = [{
-                        instancePath: r2 + "/atypeId",
+                      }], !1;
+                      if (typeof a == "number" && isFinite(a) && (a < 0 || isNaN(a))) return r.errors = [{
+                        instancePath: e + "/atypeId",
                         schemaPath: "#/properties/atypeId/minimum",
                         keyword: "minimum",
                         params: { comparison: ">=", limit: 0 },
                         message: "must be >= 0"
-                      }], false;
-                      n2 = 0 === i3;
-                    } else n2 = true;
-                    if (n2) {
-                      if (void 0 !== t2.params) {
-                        let s4 = t2.params;
-                        const i3 = 0;
-                        if (!Array.isArray(s4)) return e2.errors = [{
-                          instancePath: r2 + "/params",
+                      }], !1;
+                      s = n === 0;
+                    } else s = !0;
+                    if (s) {
+                      if (t.params !== void 0) {
+                        let a = t.params;
+                        const n = 0;
+                        if (!Array.isArray(a)) return r.errors = [{
+                          instancePath: e + "/params",
                           schemaPath: "#/properties/params/type",
                           keyword: "type",
                           params: { type: "array" },
                           message: "must be array"
-                        }], false;
-                        if (s4.length > 8) return e2.errors = [{
-                          instancePath: r2 + "/params",
+                        }], !1;
+                        if (a.length > 8) return r.errors = [{
+                          instancePath: e + "/params",
                           schemaPath: "#/properties/params/maxItems",
                           keyword: "maxItems",
                           params: { limit: 8 },
                           message: "must NOT have more than 8 items"
-                        }], false;
-                        if (s4.length < 8) return e2.errors = [{ instancePath: r2 + "/params", schemaPath: "#/properties/params/minItems", keyword: "minItems", params: {
+                        }], !1;
+                        if (a.length < 8) return r.errors = [{ instancePath: e + "/params", schemaPath: "#/properties/params/minItems", keyword: "minItems", params: {
                           limit: 8
-                        }, message: "must NOT have fewer than 8 items" }], false;
+                        }, message: "must NOT have fewer than 8 items" }], !1;
                         {
-                          const t3 = s4.length;
-                          if (t3 > 0) {
-                            let t4 = s4[0];
-                            const i4 = 0;
-                            if ("number" != typeof t4 || t4 % 1 || isNaN(t4) || !isFinite(t4)) return e2.errors = [{
-                              instancePath: r2 + "/params/0",
+                          const i = a.length;
+                          if (i > 0) {
+                            let y = a[0];
+                            const o = 0;
+                            if (typeof y != "number" || y % 1 || isNaN(y) || !isFinite(y)) return r.errors = [{
+                              instancePath: e + "/params/0",
                               schemaPath: "#/properties/params/items/0/type",
                               keyword: "type",
                               params: { type: "integer" },
                               message: "must be integer"
-                            }], false;
-                            var o2 = 0 === i4;
+                            }], !1;
+                            var h = o === 0;
                           }
-                          if (o2) {
-                            if (t3 > 1) {
-                              let t4 = s4[1];
-                              const i4 = 0;
-                              if ("number" != typeof t4 || t4 % 1 || isNaN(t4) || !isFinite(t4)) return e2.errors = [{ instancePath: r2 + "/params/1", schemaPath: "#/properties/params/items/1/type", keyword: "type", params: {
+                          if (h) {
+                            if (i > 1) {
+                              let y = a[1];
+                              const o = 0;
+                              if (typeof y != "number" || y % 1 || isNaN(y) || !isFinite(y)) return r.errors = [{ instancePath: e + "/params/1", schemaPath: "#/properties/params/items/1/type", keyword: "type", params: {
                                 type: "integer"
-                              }, message: "must be integer" }], false;
-                              o2 = 0 === i4;
+                              }, message: "must be integer" }], !1;
+                              h = o === 0;
                             }
-                            if (o2) {
-                              if (t3 > 2) {
-                                let t4 = s4[2];
-                                const i4 = 0;
-                                if ("number" != typeof t4 || t4 % 1 || isNaN(t4) || !isFinite(t4)) return e2.errors = [{
-                                  instancePath: r2 + "/params/2",
+                            if (h) {
+                              if (i > 2) {
+                                let y = a[2];
+                                const o = 0;
+                                if (typeof y != "number" || y % 1 || isNaN(y) || !isFinite(y)) return r.errors = [{
+                                  instancePath: e + "/params/2",
                                   schemaPath: "#/properties/params/items/2/type",
                                   keyword: "type",
                                   params: { type: "integer" },
                                   message: "must be integer"
-                                }], false;
-                                o2 = 0 === i4;
+                                }], !1;
+                                h = o === 0;
                               }
-                              if (o2) {
-                                if (t3 > 3) {
-                                  let t4 = s4[3];
-                                  const i4 = 0;
-                                  if ("number" != typeof t4 || t4 % 1 || isNaN(t4) || !isFinite(t4)) return e2.errors = [{ instancePath: r2 + "/params/3", schemaPath: "#/properties/params/items/3/type", keyword: "type", params: {
+                              if (h) {
+                                if (i > 3) {
+                                  let y = a[3];
+                                  const o = 0;
+                                  if (typeof y != "number" || y % 1 || isNaN(y) || !isFinite(y)) return r.errors = [{ instancePath: e + "/params/3", schemaPath: "#/properties/params/items/3/type", keyword: "type", params: {
                                     type: "integer"
-                                  }, message: "must be integer" }], false;
-                                  o2 = 0 === i4;
+                                  }, message: "must be integer" }], !1;
+                                  h = o === 0;
                                 }
-                                if (o2) {
-                                  if (t3 > 4) {
-                                    let t4 = s4[4];
-                                    const i4 = 0;
-                                    if ("number" != typeof t4 || t4 % 1 || isNaN(t4) || !isFinite(t4)) return e2.errors = [{
-                                      instancePath: r2 + "/params/4",
+                                if (h) {
+                                  if (i > 4) {
+                                    let y = a[4];
+                                    const o = 0;
+                                    if (typeof y != "number" || y % 1 || isNaN(y) || !isFinite(y)) return r.errors = [{
+                                      instancePath: e + "/params/4",
                                       schemaPath: "#/properties/params/items/4/type",
                                       keyword: "type",
                                       params: { type: "integer" },
                                       message: "must be integer"
-                                    }], false;
-                                    o2 = 0 === i4;
+                                    }], !1;
+                                    h = o === 0;
                                   }
-                                  if (o2) {
-                                    if (t3 > 5) {
-                                      let t4 = s4[5];
-                                      const i4 = 0;
-                                      if ("number" != typeof t4 || t4 % 1 || isNaN(t4) || !isFinite(t4)) return e2.errors = [{ instancePath: r2 + "/params/5", schemaPath: "#/properties/params/items/5/type", keyword: "type", params: {
+                                  if (h) {
+                                    if (i > 5) {
+                                      let y = a[5];
+                                      const o = 0;
+                                      if (typeof y != "number" || y % 1 || isNaN(y) || !isFinite(y)) return r.errors = [{ instancePath: e + "/params/5", schemaPath: "#/properties/params/items/5/type", keyword: "type", params: {
                                         type: "integer"
-                                      }, message: "must be integer" }], false;
-                                      o2 = 0 === i4;
+                                      }, message: "must be integer" }], !1;
+                                      h = o === 0;
                                     }
-                                    if (o2) {
-                                      if (t3 > 6) {
-                                        let t4 = s4[6];
-                                        const i4 = 0;
-                                        if ("number" != typeof t4 || t4 % 1 || isNaN(t4) || !isFinite(t4)) return e2.errors = [{
-                                          instancePath: r2 + "/params/6",
+                                    if (h) {
+                                      if (i > 6) {
+                                        let y = a[6];
+                                        const o = 0;
+                                        if (typeof y != "number" || y % 1 || isNaN(y) || !isFinite(y)) return r.errors = [{
+                                          instancePath: e + "/params/6",
                                           schemaPath: "#/properties/params/items/6/type",
                                           keyword: "type",
                                           params: { type: "integer" },
                                           message: "must be integer"
-                                        }], false;
-                                        o2 = 0 === i4;
+                                        }], !1;
+                                        h = o === 0;
                                       }
-                                      if (o2 && t3 > 7) {
-                                        let t4 = s4[7];
-                                        const i4 = 0;
-                                        if ("number" != typeof t4 || t4 % 1 || isNaN(t4) || !isFinite(t4)) return e2.errors = [{ instancePath: r2 + "/params/7", schemaPath: "#/properties/params/items/7/type", keyword: "type", params: {
+                                      if (h && i > 7) {
+                                        let y = a[7];
+                                        const o = 0;
+                                        if (typeof y != "number" || y % 1 || isNaN(y) || !isFinite(y)) return r.errors = [{ instancePath: e + "/params/7", schemaPath: "#/properties/params/items/7/type", keyword: "type", params: {
                                           type: "integer"
-                                        }, message: "must be integer" }], false;
-                                        o2 = 0 === i4;
+                                        }, message: "must be integer" }], !1;
+                                        h = o === 0;
                                       }
                                     }
                                   }
@@ -577,79 +567,79 @@ const o = e(function() {
                             }
                           }
                         }
-                        n2 = 0 === i3;
-                      } else n2 = true;
-                      if (n2) if (void 0 !== t2.traits) {
-                        let s4 = t2.traits;
-                        const i3 = 0;
-                        if (!Array.isArray(s4)) return e2.errors = [{
-                          instancePath: r2 + "/traits",
+                        s = n === 0;
+                      } else s = !0;
+                      if (s) if (t.traits !== void 0) {
+                        let a = t.traits;
+                        const n = 0;
+                        if (!Array.isArray(a)) return r.errors = [{
+                          instancePath: e + "/traits",
                           schemaPath: "#/properties/traits/type",
                           keyword: "type",
                           params: { type: "array" },
                           message: "must be array"
-                        }], false;
+                        }], !1;
                         {
-                          const t3 = s4.length;
-                          for (let i4 = 0; i4 < t3; i4++) {
-                            let t4 = s4[i4];
-                            const a3 = 0;
-                            if (!t4 || "object" != typeof t4 || Array.isArray(t4)) return e2.errors = [{ instancePath: r2 + "/traits/" + i4, schemaPath: "#/properties/traits/items/type", keyword: "type", params: {
+                          const i = a.length;
+                          for (let y = 0; y < i; y++) {
+                            let o = a[y];
+                            const p = 0;
+                            if (!o || typeof o != "object" || Array.isArray(o)) return r.errors = [{ instancePath: e + "/traits/" + y, schemaPath: "#/properties/traits/items/type", keyword: "type", params: {
                               type: "object"
-                            }, message: "must be object" }], false;
+                            }, message: "must be object" }], !1;
                             {
-                              let s5;
-                              if (void 0 === t4.code && (s5 = "code") || void 0 === t4.dataId && (s5 = "dataId") || void 0 === t4.value && (s5 = "value")) return e2.errors = [{
-                                instancePath: r2 + "/traits/" + i4,
+                              let d;
+                              if (o.code === void 0 && (d = "code") || o.dataId === void 0 && (d = "dataId") || o.value === void 0 && (d = "value")) return r.errors = [{
+                                instancePath: e + "/traits/" + y,
                                 schemaPath: "#/properties/traits/items/required",
                                 keyword: "required",
-                                params: { missingProperty: s5 },
-                                message: "must have required property '" + s5 + "'"
-                              }], false;
-                              if (void 0 !== t4.code) {
-                                let s6 = t4.code;
-                                const a4 = 0;
-                                if ("number" != typeof s6 || s6 % 1 || isNaN(s6) || !isFinite(s6)) return e2.errors = [{
-                                  instancePath: r2 + "/traits/" + i4 + "/code",
+                                params: { missingProperty: d },
+                                message: "must have required property '" + d + "'"
+                              }], !1;
+                              if (o.code !== void 0) {
+                                let g = o.code;
+                                const f = 0;
+                                if (typeof g != "number" || g % 1 || isNaN(g) || !isFinite(g)) return r.errors = [{
+                                  instancePath: e + "/traits/" + y + "/code",
                                   schemaPath: "#/properties/traits/items/properties/code/type",
                                   keyword: "type",
                                   params: { type: "integer" },
                                   message: "must be integer"
-                                }], false;
-                                var p2 = 0 === a4;
-                              } else p2 = true;
-                              if (p2) {
-                                if (void 0 !== t4.dataId) {
-                                  let s6 = t4.dataId;
-                                  const a4 = 0;
-                                  if ("number" != typeof s6 || s6 % 1 || isNaN(s6) || !isFinite(s6)) return e2.errors = [{
-                                    instancePath: r2 + "/traits/" + i4 + "/dataId",
+                                }], !1;
+                                var c = f === 0;
+                              } else c = !0;
+                              if (c) {
+                                if (o.dataId !== void 0) {
+                                  let g = o.dataId;
+                                  const f = 0;
+                                  if (typeof g != "number" || g % 1 || isNaN(g) || !isFinite(g)) return r.errors = [{
+                                    instancePath: e + "/traits/" + y + "/dataId",
                                     schemaPath: "#/properties/traits/items/properties/dataId/type",
                                     keyword: "type",
                                     params: { type: "integer" },
                                     message: "must be integer"
-                                  }], false;
-                                  p2 = 0 === a4;
-                                } else p2 = true;
-                                if (p2) if (void 0 !== t4.value) {
-                                  let s6 = t4.value;
-                                  const a4 = 0;
-                                  if ("number" != typeof s6 || s6 % 1 || isNaN(s6) || !isFinite(s6)) return e2.errors = [{
-                                    instancePath: r2 + "/traits/" + i4 + "/value",
+                                  }], !1;
+                                  c = f === 0;
+                                } else c = !0;
+                                if (c) if (o.value !== void 0) {
+                                  let g = o.value;
+                                  const f = 0;
+                                  if (typeof g != "number" || g % 1 || isNaN(g) || !isFinite(g)) return r.errors = [{
+                                    instancePath: e + "/traits/" + y + "/value",
                                     schemaPath: "#/properties/traits/items/properties/value/type",
                                     keyword: "type",
                                     params: { type: "integer" },
                                     message: "must be integer"
-                                  }], false;
-                                  p2 = 0 === a4;
-                                } else p2 = true;
+                                  }], !1;
+                                  c = f === 0;
+                                } else c = !0;
                               }
                             }
-                            if (!(0 === a3)) break;
+                            if (p !== 0) break;
                           }
                         }
-                        n2 = 0 === i3;
-                      } else n2 = true;
+                        s = n === 0;
+                      } else s = !0;
                     }
                   }
                 }
@@ -659,210 +649,208 @@ const o = e(function() {
         }
       }
     }
-    return e2.errors = null, true;
+    return r.errors = null, !0;
   }
-  return a = 1, n.exports = e2, n.exports.default = e2, n.exports;
-}()), p = (e2) => o(e2);
-var m, y = { exports: {} };
-const c = e(function() {
-  if (m) return y.exports;
-  function e2(t2, { instancePath: r2 = "", parentData: s2, parentDataProperty: i2, rootData: a2 = t2 } = {}) {
-    if (!t2 || "object" != typeof t2 || Array.isArray(t2)) return e2.errors = [{
-      instancePath: r2,
+  return D = 1, w.exports = r, w.exports.default = r, w.exports;
+}()), V = (r) => H(r);
+var B, I = { exports: {} };
+const E = v(function() {
+  if (B) return I.exports;
+  function r(t, { instancePath: e = "", parentData: l, parentDataProperty: P, rootData: N = t } = {}) {
+    if (!t || typeof t != "object" || Array.isArray(t)) return r.errors = [{
+      instancePath: e,
       schemaPath: "#/type",
       keyword: "type",
       params: { type: "object" },
       message: "must be object"
-    }], false;
+    }], !1;
     {
-      let s3;
-      if (void 0 === t2.name && (s3 = "name") || void 0 === t2.id && (s3 = "id") || void 0 === t2.note && (s3 = "note") || void 0 === t2.expParams && (s3 = "expParams") || void 0 === t2.params && (s3 = "params") || void 0 === t2.learnings && (s3 = "learnings") || void 0 === t2.traits && (s3 = "traits")) return e2.errors = [{
-        instancePath: r2,
+      let a;
+      if (t.name === void 0 && (a = "name") || t.id === void 0 && (a = "id") || t.note === void 0 && (a = "note") || t.expParams === void 0 && (a = "expParams") || t.params === void 0 && (a = "params") || t.learnings === void 0 && (a = "learnings") || t.traits === void 0 && (a = "traits")) return r.errors = [{
+        instancePath: e,
         schemaPath: "#/required",
         keyword: "required",
-        params: { missingProperty: s3 },
-        message: "must have required property '" + s3 + "'"
-      }], false;
-      for (const s4 in t2) if ("name" !== s4 && "id" !== s4 && "note" !== s4 && "expParams" !== s4 && "params" !== s4 && "learnings" !== s4 && "traits" !== s4) return e2.errors = [{
-        instancePath: r2,
+        params: { missingProperty: a },
+        message: "must have required property '" + a + "'"
+      }], !1;
+      for (const n in t) if (n !== "name" && n !== "id" && n !== "note" && n !== "expParams" && n !== "params" && n !== "learnings" && n !== "traits") return r.errors = [{
+        instancePath: e,
         schemaPath: "#/additionalProperties",
         keyword: "additionalProperties",
-        params: { additionalProperty: s4 },
+        params: { additionalProperty: n },
         message: "must NOT have additional properties"
-      }], false;
-      if (void 0 !== t2.name) {
-        const s4 = 0;
-        if ("string" != typeof t2.name) return e2.errors = [{ instancePath: r2 + "/name", schemaPath: "#/properties/name/type", keyword: "type", params: { type: "string" }, message: "must be string" }], false;
-        var n2 = 0 === s4;
-      } else n2 = true;
-      if (n2) {
-        if (void 0 !== t2.id) {
-          let s4 = t2.id;
-          const i3 = 0;
-          if ("number" != typeof s4 || s4 % 1 || isNaN(s4) || !isFinite(s4)) return e2.errors = [{
-            instancePath: r2 + "/id",
+      }], !1;
+      if (t.name !== void 0) {
+        if (typeof t.name != "string") return r.errors = [{ instancePath: e + "/name", schemaPath: "#/properties/name/type", keyword: "type", params: { type: "string" }, message: "must be string" }], !1;
+        var s = !0;
+      } else s = !0;
+      if (s) {
+        if (t.id !== void 0) {
+          let n = t.id;
+          const i = 0;
+          if (typeof n != "number" || n % 1 || isNaN(n) || !isFinite(n)) return r.errors = [{
+            instancePath: e + "/id",
             schemaPath: "#/properties/id/type",
             keyword: "type",
             params: { type: "integer" },
             message: "must be integer"
-          }], false;
-          if ("number" == typeof s4 && isFinite(s4) && (s4 < 0 || isNaN(s4))) return e2.errors = [{
-            instancePath: r2 + "/id",
+          }], !1;
+          if (typeof n == "number" && isFinite(n) && (n < 0 || isNaN(n))) return r.errors = [{
+            instancePath: e + "/id",
             schemaPath: "#/properties/id/minimum",
             keyword: "minimum",
             params: { comparison: ">=", limit: 0 },
             message: "must be >= 0"
-          }], false;
-          n2 = 0 === i3;
-        } else n2 = true;
-        if (n2) {
-          if (void 0 !== t2.note) {
-            const s4 = 0;
-            if ("string" != typeof t2.note) return e2.errors = [{
-              instancePath: r2 + "/note",
+          }], !1;
+          s = i === 0;
+        } else s = !0;
+        if (s) {
+          if (t.note !== void 0) {
+            if (typeof t.note != "string") return r.errors = [{
+              instancePath: e + "/note",
               schemaPath: "#/properties/note/type",
               keyword: "type",
               params: { type: "string" },
               message: "must be string"
-            }], false;
-            n2 = 0 === s4;
-          } else n2 = true;
-          if (n2) {
-            if (void 0 !== t2.expParams) {
-              let s4 = t2.expParams;
-              const i3 = 0;
-              if (!Array.isArray(s4)) return e2.errors = [{
-                instancePath: r2 + "/expParams",
+            }], !1;
+            s = !0;
+          } else s = !0;
+          if (s) {
+            if (t.expParams !== void 0) {
+              let n = t.expParams;
+              const i = 0;
+              if (!Array.isArray(n)) return r.errors = [{
+                instancePath: e + "/expParams",
                 schemaPath: "#/properties/expParams/type",
                 keyword: "type",
                 params: { type: "array" },
                 message: "must be array"
-              }], false;
+              }], !1;
               {
-                const t3 = s4.length;
-                for (let i4 = 0; i4 < t3; i4++) {
-                  let t4 = s4[i4];
-                  const a3 = 0;
-                  if ("number" != typeof t4 || t4 % 1 || isNaN(t4) || !isFinite(t4)) return e2.errors = [{ instancePath: r2 + "/expParams/" + i4, schemaPath: "#/properties/expParams/items/type", keyword: "type", params: {
+                const y = n.length;
+                for (let o = 0; o < y; o++) {
+                  let p = n[o];
+                  const d = 0;
+                  if (typeof p != "number" || p % 1 || isNaN(p) || !isFinite(p)) return r.errors = [{ instancePath: e + "/expParams/" + o, schemaPath: "#/properties/expParams/items/type", keyword: "type", params: {
                     type: "integer"
-                  }, message: "must be integer" }], false;
-                  if (!(0 === a3)) break;
+                  }, message: "must be integer" }], !1;
+                  if (d !== 0) break;
                 }
               }
-              n2 = 0 === i3;
-            } else n2 = true;
-            if (n2) {
-              if (void 0 !== t2.params) {
-                let s4 = t2.params;
-                const i3 = 0;
-                if (!Array.isArray(s4)) return e2.errors = [{
-                  instancePath: r2 + "/params",
+              s = i === 0;
+            } else s = !0;
+            if (s) {
+              if (t.params !== void 0) {
+                let n = t.params;
+                const i = 0;
+                if (!Array.isArray(n)) return r.errors = [{
+                  instancePath: e + "/params",
                   schemaPath: "#/properties/params/type",
                   keyword: "type",
                   params: { type: "array" },
                   message: "must be array"
-                }], false;
-                if (s4.length > 8) return e2.errors = [{
-                  instancePath: r2 + "/params",
+                }], !1;
+                if (n.length > 8) return r.errors = [{
+                  instancePath: e + "/params",
                   schemaPath: "#/properties/params/maxItems",
                   keyword: "maxItems",
                   params: { limit: 8 },
                   message: "must NOT have more than 8 items"
-                }], false;
-                if (s4.length < 8) return e2.errors = [{
-                  instancePath: r2 + "/params",
+                }], !1;
+                if (n.length < 8) return r.errors = [{
+                  instancePath: e + "/params",
                   schemaPath: "#/properties/params/minItems",
                   keyword: "minItems",
                   params: { limit: 8 },
                   message: "must NOT have fewer than 8 items"
-                }], false;
+                }], !1;
                 {
-                  const t3 = s4.length;
-                  if (t3 > 0) {
-                    let t4 = s4[0];
-                    const i4 = 0;
-                    if ("number" != typeof t4 || t4 % 1 || isNaN(t4) || !isFinite(t4)) return e2.errors = [{
-                      instancePath: r2 + "/params/0",
+                  const y = n.length;
+                  if (y > 0) {
+                    let o = n[0];
+                    const p = 0;
+                    if (typeof o != "number" || o % 1 || isNaN(o) || !isFinite(o)) return r.errors = [{
+                      instancePath: e + "/params/0",
                       schemaPath: "#/properties/params/items/0/type",
                       keyword: "type",
                       params: { type: "integer" },
                       message: "must be integer"
-                    }], false;
-                    var o2 = 0 === i4;
+                    }], !1;
+                    var h = p === 0;
                   }
-                  if (o2) {
-                    if (t3 > 1) {
-                      let t4 = s4[1];
-                      const i4 = 0;
-                      if ("number" != typeof t4 || t4 % 1 || isNaN(t4) || !isFinite(t4)) return e2.errors = [{ instancePath: r2 + "/params/1", schemaPath: "#/properties/params/items/1/type", keyword: "type", params: {
+                  if (h) {
+                    if (y > 1) {
+                      let o = n[1];
+                      const p = 0;
+                      if (typeof o != "number" || o % 1 || isNaN(o) || !isFinite(o)) return r.errors = [{ instancePath: e + "/params/1", schemaPath: "#/properties/params/items/1/type", keyword: "type", params: {
                         type: "integer"
-                      }, message: "must be integer" }], false;
-                      o2 = 0 === i4;
+                      }, message: "must be integer" }], !1;
+                      h = p === 0;
                     }
-                    if (o2) {
-                      if (t3 > 2) {
-                        let t4 = s4[2];
-                        const i4 = 0;
-                        if ("number" != typeof t4 || t4 % 1 || isNaN(t4) || !isFinite(t4)) return e2.errors = [{
-                          instancePath: r2 + "/params/2",
+                    if (h) {
+                      if (y > 2) {
+                        let o = n[2];
+                        const p = 0;
+                        if (typeof o != "number" || o % 1 || isNaN(o) || !isFinite(o)) return r.errors = [{
+                          instancePath: e + "/params/2",
                           schemaPath: "#/properties/params/items/2/type",
                           keyword: "type",
                           params: { type: "integer" },
                           message: "must be integer"
-                        }], false;
-                        o2 = 0 === i4;
+                        }], !1;
+                        h = p === 0;
                       }
-                      if (o2) {
-                        if (t3 > 3) {
-                          let t4 = s4[3];
-                          const i4 = 0;
-                          if ("number" != typeof t4 || t4 % 1 || isNaN(t4) || !isFinite(t4)) return e2.errors = [{ instancePath: r2 + "/params/3", schemaPath: "#/properties/params/items/3/type", keyword: "type", params: {
+                      if (h) {
+                        if (y > 3) {
+                          let o = n[3];
+                          const p = 0;
+                          if (typeof o != "number" || o % 1 || isNaN(o) || !isFinite(o)) return r.errors = [{ instancePath: e + "/params/3", schemaPath: "#/properties/params/items/3/type", keyword: "type", params: {
                             type: "integer"
-                          }, message: "must be integer" }], false;
-                          o2 = 0 === i4;
+                          }, message: "must be integer" }], !1;
+                          h = p === 0;
                         }
-                        if (o2) {
-                          if (t3 > 4) {
-                            let t4 = s4[4];
-                            const i4 = 0;
-                            if ("number" != typeof t4 || t4 % 1 || isNaN(t4) || !isFinite(t4)) return e2.errors = [{
-                              instancePath: r2 + "/params/4",
+                        if (h) {
+                          if (y > 4) {
+                            let o = n[4];
+                            const p = 0;
+                            if (typeof o != "number" || o % 1 || isNaN(o) || !isFinite(o)) return r.errors = [{
+                              instancePath: e + "/params/4",
                               schemaPath: "#/properties/params/items/4/type",
                               keyword: "type",
                               params: { type: "integer" },
                               message: "must be integer"
-                            }], false;
-                            o2 = 0 === i4;
+                            }], !1;
+                            h = p === 0;
                           }
-                          if (o2) {
-                            if (t3 > 5) {
-                              let t4 = s4[5];
-                              const i4 = 0;
-                              if ("number" != typeof t4 || t4 % 1 || isNaN(t4) || !isFinite(t4)) return e2.errors = [{ instancePath: r2 + "/params/5", schemaPath: "#/properties/params/items/5/type", keyword: "type", params: {
+                          if (h) {
+                            if (y > 5) {
+                              let o = n[5];
+                              const p = 0;
+                              if (typeof o != "number" || o % 1 || isNaN(o) || !isFinite(o)) return r.errors = [{ instancePath: e + "/params/5", schemaPath: "#/properties/params/items/5/type", keyword: "type", params: {
                                 type: "integer"
-                              }, message: "must be integer" }], false;
-                              o2 = 0 === i4;
+                              }, message: "must be integer" }], !1;
+                              h = p === 0;
                             }
-                            if (o2) {
-                              if (t3 > 6) {
-                                let t4 = s4[6];
-                                const i4 = 0;
-                                if ("number" != typeof t4 || t4 % 1 || isNaN(t4) || !isFinite(t4)) return e2.errors = [{
-                                  instancePath: r2 + "/params/6",
+                            if (h) {
+                              if (y > 6) {
+                                let o = n[6];
+                                const p = 0;
+                                if (typeof o != "number" || o % 1 || isNaN(o) || !isFinite(o)) return r.errors = [{
+                                  instancePath: e + "/params/6",
                                   schemaPath: "#/properties/params/items/6/type",
                                   keyword: "type",
                                   params: { type: "integer" },
                                   message: "must be integer"
-                                }], false;
-                                o2 = 0 === i4;
+                                }], !1;
+                                h = p === 0;
                               }
-                              if (o2 && t3 > 7) {
-                                let t4 = s4[7];
-                                const i4 = 0;
-                                if ("number" != typeof t4 || t4 % 1 || isNaN(t4) || !isFinite(t4)) return e2.errors = [{ instancePath: r2 + "/params/7", schemaPath: "#/properties/params/items/7/type", keyword: "type", params: {
+                              if (h && y > 7) {
+                                let o = n[7];
+                                const p = 0;
+                                if (typeof o != "number" || o % 1 || isNaN(o) || !isFinite(o)) return r.errors = [{ instancePath: e + "/params/7", schemaPath: "#/properties/params/items/7/type", keyword: "type", params: {
                                   type: "integer"
-                                }, message: "must be integer" }], false;
-                                o2 = 0 === i4;
+                                }, message: "must be integer" }], !1;
+                                h = p === 0;
                               }
                             }
                           }
@@ -871,416 +859,412 @@ const c = e(function() {
                     }
                   }
                 }
-                n2 = 0 === i3;
-              } else n2 = true;
-              if (n2) {
-                if (void 0 !== t2.learnings) {
-                  let s4 = t2.learnings;
-                  const i3 = 0;
-                  if (!Array.isArray(s4)) return e2.errors = [{
-                    instancePath: r2 + "/learnings",
+                s = i === 0;
+              } else s = !0;
+              if (s) {
+                if (t.learnings !== void 0) {
+                  let n = t.learnings;
+                  const i = 0;
+                  if (!Array.isArray(n)) return r.errors = [{
+                    instancePath: e + "/learnings",
                     schemaPath: "#/properties/learnings/type",
                     keyword: "type",
                     params: { type: "array" },
                     message: "must be array"
-                  }], false;
+                  }], !1;
                   {
-                    const t3 = s4.length;
-                    for (let i4 = 0; i4 < t3; i4++) {
-                      let t4 = s4[i4];
-                      const a3 = 0;
-                      if (!t4 || "object" != typeof t4 || Array.isArray(t4)) return e2.errors = [{
-                        instancePath: r2 + "/learnings/" + i4,
+                    const y = n.length;
+                    for (let o = 0; o < y; o++) {
+                      let p = n[o];
+                      const d = 0;
+                      if (!p || typeof p != "object" || Array.isArray(p)) return r.errors = [{
+                        instancePath: e + "/learnings/" + o,
                         schemaPath: "#/properties/learnings/items/type",
                         keyword: "type",
                         params: { type: "object" },
                         message: "must be object"
-                      }], false;
+                      }], !1;
                       {
-                        let s5;
-                        if (void 0 === t4.level && (s5 = "level") || void 0 === t4.skillId && (s5 = "skillId")) return e2.errors = [{
-                          instancePath: r2 + "/learnings/" + i4,
+                        let g;
+                        if (p.level === void 0 && (g = "level") || p.skillId === void 0 && (g = "skillId")) return r.errors = [{
+                          instancePath: e + "/learnings/" + o,
                           schemaPath: "#/properties/learnings/items/required",
                           keyword: "required",
-                          params: { missingProperty: s5 },
-                          message: "must have required property '" + s5 + "'"
-                        }], false;
-                        for (const s6 in t4) if ("level" !== s6 && "skillId" !== s6 && "note" !== s6) return e2.errors = [{
-                          instancePath: r2 + "/learnings/" + i4,
+                          params: { missingProperty: g },
+                          message: "must have required property '" + g + "'"
+                        }], !1;
+                        for (const f in p) if (f !== "level" && f !== "skillId" && f !== "note") return r.errors = [{
+                          instancePath: e + "/learnings/" + o,
                           schemaPath: "#/properties/learnings/items/additionalProperties",
                           keyword: "additionalProperties",
-                          params: { additionalProperty: s6 },
+                          params: { additionalProperty: f },
                           message: "must NOT have additional properties"
-                        }], false;
-                        if (void 0 !== t4.level) {
-                          let s6 = t4.level;
-                          const a4 = 0;
-                          if ("number" != typeof s6 || s6 % 1 || isNaN(s6) || !isFinite(s6)) return e2.errors = [{
-                            instancePath: r2 + "/learnings/" + i4 + "/level",
+                        }], !1;
+                        if (p.level !== void 0) {
+                          let f = p.level;
+                          const u = 0;
+                          if (typeof f != "number" || f % 1 || isNaN(f) || !isFinite(f)) return r.errors = [{
+                            instancePath: e + "/learnings/" + o + "/level",
                             schemaPath: "#/properties/learnings/items/properties/level/type",
                             keyword: "type",
                             params: { type: "integer" },
                             message: "must be integer"
-                          }], false;
-                          var p2 = 0 === a4;
-                        } else p2 = true;
-                        if (p2) {
-                          if (void 0 !== t4.skillId) {
-                            let s6 = t4.skillId;
-                            const a4 = 0;
-                            if ("number" != typeof s6 || s6 % 1 || isNaN(s6) || !isFinite(s6)) return e2.errors = [{
-                              instancePath: r2 + "/learnings/" + i4 + "/skillId",
+                          }], !1;
+                          var c = u === 0;
+                        } else c = !0;
+                        if (c) {
+                          if (p.skillId !== void 0) {
+                            let f = p.skillId;
+                            const u = 0;
+                            if (typeof f != "number" || f % 1 || isNaN(f) || !isFinite(f)) return r.errors = [{
+                              instancePath: e + "/learnings/" + o + "/skillId",
                               schemaPath: "#/properties/learnings/items/properties/skillId/type",
                               keyword: "type",
                               params: { type: "integer" },
                               message: "must be integer"
-                            }], false;
-                            p2 = 0 === a4;
-                          } else p2 = true;
-                          if (p2) if (void 0 !== t4.note) {
-                            const s6 = 0;
-                            if ("string" != typeof t4.note) return e2.errors = [{
-                              instancePath: r2 + "/learnings/" + i4 + "/note",
+                            }], !1;
+                            c = u === 0;
+                          } else c = !0;
+                          if (c) if (p.note !== void 0) {
+                            if (typeof p.note != "string") return r.errors = [{
+                              instancePath: e + "/learnings/" + o + "/note",
                               schemaPath: "#/properties/learnings/items/properties/note/type",
                               keyword: "type",
                               params: { type: "string" },
                               message: "must be string"
-                            }], false;
-                            p2 = 0 === s6;
-                          } else p2 = true;
+                            }], !1;
+                            c = !0;
+                          } else c = !0;
                         }
                       }
-                      if (!(0 === a3)) break;
+                      if (d !== 0) break;
                     }
                   }
-                  n2 = 0 === i3;
-                } else n2 = true;
-                if (n2) if (void 0 !== t2.traits) {
-                  let s4 = t2.traits;
-                  const i3 = 0;
-                  if (!Array.isArray(s4)) return e2.errors = [{
-                    instancePath: r2 + "/traits",
+                  s = i === 0;
+                } else s = !0;
+                if (s) if (t.traits !== void 0) {
+                  let n = t.traits;
+                  const i = 0;
+                  if (!Array.isArray(n)) return r.errors = [{
+                    instancePath: e + "/traits",
                     schemaPath: "#/properties/traits/type",
                     keyword: "type",
                     params: { type: "array" },
                     message: "must be array"
-                  }], false;
+                  }], !1;
                   {
-                    const t3 = s4.length;
-                    for (let i4 = 0; i4 < t3; i4++) {
-                      let t4 = s4[i4];
-                      const a3 = 0;
-                      if (!t4 || "object" != typeof t4 || Array.isArray(t4)) return e2.errors = [{
-                        instancePath: r2 + "/traits/" + i4,
+                    const y = n.length;
+                    for (let o = 0; o < y; o++) {
+                      let p = n[o];
+                      const d = 0;
+                      if (!p || typeof p != "object" || Array.isArray(p)) return r.errors = [{
+                        instancePath: e + "/traits/" + o,
                         schemaPath: "#/properties/traits/items/type",
                         keyword: "type",
                         params: { type: "object" },
                         message: "must be object"
-                      }], false;
+                      }], !1;
                       {
-                        let s5;
-                        if (void 0 === t4.code && (s5 = "code") || void 0 === t4.dataId && (s5 = "dataId") || void 0 === t4.value && (s5 = "value")) return e2.errors = [{
-                          instancePath: r2 + "/traits/" + i4,
+                        let g;
+                        if (p.code === void 0 && (g = "code") || p.dataId === void 0 && (g = "dataId") || p.value === void 0 && (g = "value")) return r.errors = [{
+                          instancePath: e + "/traits/" + o,
                           schemaPath: "#/properties/traits/items/required",
                           keyword: "required",
-                          params: { missingProperty: s5 },
-                          message: "must have required property '" + s5 + "'"
-                        }], false;
-                        for (const s6 in t4) if ("code" !== s6 && "dataId" !== s6 && "value" !== s6) return e2.errors = [{
-                          instancePath: r2 + "/traits/" + i4,
+                          params: { missingProperty: g },
+                          message: "must have required property '" + g + "'"
+                        }], !1;
+                        for (const f in p) if (f !== "code" && f !== "dataId" && f !== "value") return r.errors = [{
+                          instancePath: e + "/traits/" + o,
                           schemaPath: "#/properties/traits/items/additionalProperties",
                           keyword: "additionalProperties",
-                          params: { additionalProperty: s6 },
+                          params: { additionalProperty: f },
                           message: "must NOT have additional properties"
-                        }], false;
-                        if (void 0 !== t4.code) {
-                          let s6 = t4.code;
-                          const a4 = 0;
-                          if ("number" != typeof s6 || s6 % 1 || isNaN(s6) || !isFinite(s6)) return e2.errors = [{
-                            instancePath: r2 + "/traits/" + i4 + "/code",
+                        }], !1;
+                        if (p.code !== void 0) {
+                          let f = p.code;
+                          const u = 0;
+                          if (typeof f != "number" || f % 1 || isNaN(f) || !isFinite(f)) return r.errors = [{
+                            instancePath: e + "/traits/" + o + "/code",
                             schemaPath: "#/properties/traits/items/properties/code/type",
                             keyword: "type",
                             params: { type: "integer" },
                             message: "must be integer"
-                          }], false;
-                          var m2 = 0 === a4;
-                        } else m2 = true;
-                        if (m2) {
-                          if (void 0 !== t4.dataId) {
-                            let s6 = t4.dataId;
-                            const a4 = 0;
-                            if ("number" != typeof s6 || s6 % 1 || isNaN(s6) || !isFinite(s6)) return e2.errors = [{
-                              instancePath: r2 + "/traits/" + i4 + "/dataId",
+                          }], !1;
+                          var m = u === 0;
+                        } else m = !0;
+                        if (m) {
+                          if (p.dataId !== void 0) {
+                            let f = p.dataId;
+                            const u = 0;
+                            if (typeof f != "number" || f % 1 || isNaN(f) || !isFinite(f)) return r.errors = [{
+                              instancePath: e + "/traits/" + o + "/dataId",
                               schemaPath: "#/properties/traits/items/properties/dataId/type",
                               keyword: "type",
                               params: { type: "integer" },
                               message: "must be integer"
-                            }], false;
-                            m2 = 0 === a4;
-                          } else m2 = true;
-                          if (m2) if (void 0 !== t4.value) {
-                            let s6 = t4.value;
-                            const a4 = 0;
-                            if ("number" != typeof s6 || s6 % 1 || isNaN(s6) || !isFinite(s6)) return e2.errors = [{
-                              instancePath: r2 + "/traits/" + i4 + "/value",
+                            }], !1;
+                            m = u === 0;
+                          } else m = !0;
+                          if (m) if (p.value !== void 0) {
+                            let f = p.value;
+                            const u = 0;
+                            if (typeof f != "number" || f % 1 || isNaN(f) || !isFinite(f)) return r.errors = [{
+                              instancePath: e + "/traits/" + o + "/value",
                               schemaPath: "#/properties/traits/items/properties/value/type",
                               keyword: "type",
                               params: { type: "integer" },
                               message: "must be integer"
-                            }], false;
-                            m2 = 0 === a4;
-                          } else m2 = true;
+                            }], !1;
+                            m = u === 0;
+                          } else m = !0;
                         }
                       }
-                      if (!(0 === a3)) break;
+                      if (d !== 0) break;
                     }
                   }
-                  n2 = 0 === i3;
-                } else n2 = true;
+                  s = i === 0;
+                } else s = !0;
               }
             }
           }
         }
       }
     }
-    return e2.errors = null, true;
+    return r.errors = null, !0;
   }
-  return m = 1, y.exports = e2, y.exports.default = e2, y.exports;
-}()), d = (e2) => c(e2);
-var u, f = { exports: {} };
-const h = e(function() {
-  if (u) return f.exports;
-  function e2(t2, { instancePath: r2 = "", parentData: s2, parentDataProperty: i2, rootData: a2 = t2 } = {}) {
-    if (!t2 || "object" != typeof t2 || Array.isArray(t2)) return e2.errors = [{
-      instancePath: r2,
+  return B = 1, I.exports = r, I.exports.default = r, I.exports;
+}()), X = (r) => E(r);
+var R, F = { exports: {} };
+const S = v(function() {
+  if (R) return F.exports;
+  function r(t, { instancePath: e = "", parentData: l, parentDataProperty: P, rootData: N = t } = {}) {
+    if (!t || typeof t != "object" || Array.isArray(t)) return r.errors = [{
+      instancePath: e,
       schemaPath: "#/type",
       keyword: "type",
       params: { type: "object" },
       message: "must be object"
-    }], false;
+    }], !1;
     {
-      let s3;
-      if (void 0 === t2.name && (s3 = "name") || void 0 === t2.id && (s3 = "id") || void 0 === t2.battlerName && (s3 = "battlerName") || void 0 === t2.battlerHue && (s3 = "battlerHue") || void 0 === t2.exp && (s3 = "exp") || void 0 === t2.gold && (s3 = "gold") || void 0 === t2.note && (s3 = "note") || void 0 === t2.params && (s3 = "params") || void 0 === t2.dropItems && (s3 = "dropItems") || void 0 === t2.traits && (s3 = "traits") || void 0 === t2.actions && (s3 = "actions")) return e2.errors = [{
-        instancePath: r2,
+      let n;
+      if (t.name === void 0 && (n = "name") || t.id === void 0 && (n = "id") || t.battlerName === void 0 && (n = "battlerName") || t.battlerHue === void 0 && (n = "battlerHue") || t.exp === void 0 && (n = "exp") || t.gold === void 0 && (n = "gold") || t.note === void 0 && (n = "note") || t.params === void 0 && (n = "params") || t.dropItems === void 0 && (n = "dropItems") || t.traits === void 0 && (n = "traits") || t.actions === void 0 && (n = "actions")) return r.errors = [{
+        instancePath: e,
         schemaPath: "#/required",
         keyword: "required",
-        params: { missingProperty: s3 },
-        message: "must have required property '" + s3 + "'"
-      }], false;
-      if (void 0 !== t2.name) {
-        const s4 = 0;
-        if ("string" != typeof t2.name) return e2.errors = [{ instancePath: r2 + "/name", schemaPath: "#/properties/name/type", keyword: "type", params: { type: "string" }, message: "must be string" }], false;
-        var n2 = 0 === s4;
-      } else n2 = true;
-      if (n2) {
-        if (void 0 !== t2.id) {
-          let s4 = t2.id;
-          const i3 = 0;
-          if ("number" != typeof s4 || s4 % 1 || isNaN(s4) || !isFinite(s4)) return e2.errors = [{
-            instancePath: r2 + "/id",
+        params: { missingProperty: n },
+        message: "must have required property '" + n + "'"
+      }], !1;
+      if (t.name !== void 0) {
+        if (typeof t.name != "string") return r.errors = [{ instancePath: e + "/name", schemaPath: "#/properties/name/type", keyword: "type", params: { type: "string" }, message: "must be string" }], !1;
+        var s = !0;
+      } else s = !0;
+      if (s) {
+        if (t.id !== void 0) {
+          let i = t.id;
+          const y = 0;
+          if (typeof i != "number" || i % 1 || isNaN(i) || !isFinite(i)) return r.errors = [{
+            instancePath: e + "/id",
             schemaPath: "#/properties/id/type",
             keyword: "type",
             params: { type: "integer" },
             message: "must be integer"
-          }], false;
-          if ("number" == typeof s4 && isFinite(s4) && (s4 < 0 || isNaN(s4))) return e2.errors = [{
-            instancePath: r2 + "/id",
+          }], !1;
+          if (typeof i == "number" && isFinite(i) && (i < 0 || isNaN(i))) return r.errors = [{
+            instancePath: e + "/id",
             schemaPath: "#/properties/id/minimum",
             keyword: "minimum",
             params: { comparison: ">=", limit: 0 },
             message: "must be >= 0"
-          }], false;
-          n2 = 0 === i3;
-        } else n2 = true;
-        if (n2) {
-          if (void 0 !== t2.battlerHue) {
-            let s4 = t2.battlerHue;
-            const i3 = 0;
-            if ("number" != typeof s4 || s4 % 1 || isNaN(s4) || !isFinite(s4)) return e2.errors = [{
-              instancePath: r2 + "/battlerHue",
+          }], !1;
+          s = y === 0;
+        } else s = !0;
+        if (s) {
+          if (t.battlerHue !== void 0) {
+            let i = t.battlerHue;
+            const y = 0;
+            if (typeof i != "number" || i % 1 || isNaN(i) || !isFinite(i)) return r.errors = [{
+              instancePath: e + "/battlerHue",
               schemaPath: "#/properties/battlerHue/type",
               keyword: "type",
               params: { type: "integer" },
               message: "must be integer"
-            }], false;
-            if ("number" == typeof s4 && isFinite(s4) && (s4 < 0 || isNaN(s4))) return e2.errors = [{ instancePath: r2 + "/battlerHue", schemaPath: "#/properties/battlerHue/minimum", keyword: "minimum", params: {
+            }], !1;
+            if (typeof i == "number" && isFinite(i) && (i < 0 || isNaN(i))) return r.errors = [{ instancePath: e + "/battlerHue", schemaPath: "#/properties/battlerHue/minimum", keyword: "minimum", params: {
               comparison: ">=",
               limit: 0
-            }, message: "must be >= 0" }], false;
-            n2 = 0 === i3;
-          } else n2 = true;
-          if (n2) {
-            if (void 0 !== t2.battlerName) {
-              const s4 = 0;
-              if ("string" != typeof t2.battlerName) return e2.errors = [{
-                instancePath: r2 + "/battlerName",
+            }, message: "must be >= 0" }], !1;
+            s = y === 0;
+          } else s = !0;
+          if (s) {
+            if (t.battlerName !== void 0) {
+              if (typeof t.battlerName != "string") return r.errors = [{
+                instancePath: e + "/battlerName",
                 schemaPath: "#/properties/battlerName/type",
                 keyword: "type",
                 params: { type: "string" },
                 message: "must be string"
-              }], false;
-              n2 = 0 === s4;
-            } else n2 = true;
-            if (n2) {
-              if (void 0 !== t2.exp) {
-                let s4 = t2.exp;
-                const i3 = 0;
-                if ("number" != typeof s4 || s4 % 1 || isNaN(s4) || !isFinite(s4)) return e2.errors = [{
-                  instancePath: r2 + "/exp",
+              }], !1;
+              s = !0;
+            } else s = !0;
+            if (s) {
+              if (t.exp !== void 0) {
+                let i = t.exp;
+                const y = 0;
+                if (typeof i != "number" || i % 1 || isNaN(i) || !isFinite(i)) return r.errors = [{
+                  instancePath: e + "/exp",
                   schemaPath: "#/properties/exp/type",
                   keyword: "type",
                   params: { type: "integer" },
                   message: "must be integer"
-                }], false;
-                if ("number" == typeof s4 && isFinite(s4) && (s4 < 0 || isNaN(s4))) return e2.errors = [{
-                  instancePath: r2 + "/exp",
+                }], !1;
+                if (typeof i == "number" && isFinite(i) && (i < 0 || isNaN(i))) return r.errors = [{
+                  instancePath: e + "/exp",
                   schemaPath: "#/properties/exp/minimum",
                   keyword: "minimum",
                   params: { comparison: ">=", limit: 0 },
                   message: "must be >= 0"
-                }], false;
-                n2 = 0 === i3;
-              } else n2 = true;
-              if (n2) {
-                if (void 0 !== t2.gold) {
-                  let s4 = t2.gold;
-                  const i3 = 0;
-                  if ("number" != typeof s4 || s4 % 1 || isNaN(s4) || !isFinite(s4)) return e2.errors = [{
-                    instancePath: r2 + "/gold",
+                }], !1;
+                s = y === 0;
+              } else s = !0;
+              if (s) {
+                if (t.gold !== void 0) {
+                  let i = t.gold;
+                  const y = 0;
+                  if (typeof i != "number" || i % 1 || isNaN(i) || !isFinite(i)) return r.errors = [{
+                    instancePath: e + "/gold",
                     schemaPath: "#/properties/gold/type",
                     keyword: "type",
                     params: { type: "integer" },
                     message: "must be integer"
-                  }], false;
-                  if ("number" == typeof s4 && isFinite(s4) && (s4 < 0 || isNaN(s4))) return e2.errors = [{
-                    instancePath: r2 + "/gold",
+                  }], !1;
+                  if (typeof i == "number" && isFinite(i) && (i < 0 || isNaN(i))) return r.errors = [{
+                    instancePath: e + "/gold",
                     schemaPath: "#/properties/gold/minimum",
                     keyword: "minimum",
                     params: { comparison: ">=", limit: 0 },
                     message: "must be >= 0"
-                  }], false;
-                  n2 = 0 === i3;
-                } else n2 = true;
-                if (n2) {
-                  if (void 0 !== t2.note) {
-                    const s4 = 0;
-                    if ("string" != typeof t2.note) return e2.errors = [{
-                      instancePath: r2 + "/note",
+                  }], !1;
+                  s = y === 0;
+                } else s = !0;
+                if (s) {
+                  if (t.note !== void 0) {
+                    if (typeof t.note != "string") return r.errors = [{
+                      instancePath: e + "/note",
                       schemaPath: "#/properties/note/type",
                       keyword: "type",
                       params: { type: "string" },
                       message: "must be string"
-                    }], false;
-                    n2 = 0 === s4;
-                  } else n2 = true;
-                  if (n2) {
-                    if (void 0 !== t2.params) {
-                      let s4 = t2.params;
-                      const i3 = 0;
-                      if (!Array.isArray(s4)) return e2.errors = [{
-                        instancePath: r2 + "/params",
+                    }], !1;
+                    s = !0;
+                  } else s = !0;
+                  if (s) {
+                    if (t.params !== void 0) {
+                      let i = t.params;
+                      const y = 0;
+                      if (!Array.isArray(i)) return r.errors = [{
+                        instancePath: e + "/params",
                         schemaPath: "#/properties/params/type",
                         keyword: "type",
                         params: { type: "array" },
                         message: "must be array"
-                      }], false;
-                      if (s4.length > 8) return e2.errors = [{
-                        instancePath: r2 + "/params",
+                      }], !1;
+                      if (i.length > 8) return r.errors = [{
+                        instancePath: e + "/params",
                         schemaPath: "#/properties/params/maxItems",
                         keyword: "maxItems",
                         params: { limit: 8 },
                         message: "must NOT have more than 8 items"
-                      }], false;
-                      if (s4.length < 8) return e2.errors = [{ instancePath: r2 + "/params", schemaPath: "#/properties/params/minItems", keyword: "minItems", params: {
+                      }], !1;
+                      if (i.length < 8) return r.errors = [{ instancePath: e + "/params", schemaPath: "#/properties/params/minItems", keyword: "minItems", params: {
                         limit: 8
-                      }, message: "must NOT have fewer than 8 items" }], false;
+                      }, message: "must NOT have fewer than 8 items" }], !1;
                       {
-                        const t3 = s4.length;
-                        if (t3 > 0) {
-                          let t4 = s4[0];
-                          const i4 = 0;
-                          if ("number" != typeof t4 || t4 % 1 || isNaN(t4) || !isFinite(t4)) return e2.errors = [{
-                            instancePath: r2 + "/params/0",
+                        const o = i.length;
+                        if (o > 0) {
+                          let p = i[0];
+                          const d = 0;
+                          if (typeof p != "number" || p % 1 || isNaN(p) || !isFinite(p)) return r.errors = [{
+                            instancePath: e + "/params/0",
                             schemaPath: "#/properties/params/items/0/type",
                             keyword: "type",
                             params: { type: "integer" },
                             message: "must be integer"
-                          }], false;
-                          var o2 = 0 === i4;
+                          }], !1;
+                          var h = d === 0;
                         }
-                        if (o2) {
-                          if (t3 > 1) {
-                            let t4 = s4[1];
-                            const i4 = 0;
-                            if ("number" != typeof t4 || t4 % 1 || isNaN(t4) || !isFinite(t4)) return e2.errors = [{ instancePath: r2 + "/params/1", schemaPath: "#/properties/params/items/1/type", keyword: "type", params: {
+                        if (h) {
+                          if (o > 1) {
+                            let p = i[1];
+                            const d = 0;
+                            if (typeof p != "number" || p % 1 || isNaN(p) || !isFinite(p)) return r.errors = [{ instancePath: e + "/params/1", schemaPath: "#/properties/params/items/1/type", keyword: "type", params: {
                               type: "integer"
-                            }, message: "must be integer" }], false;
-                            o2 = 0 === i4;
+                            }, message: "must be integer" }], !1;
+                            h = d === 0;
                           }
-                          if (o2) {
-                            if (t3 > 2) {
-                              let t4 = s4[2];
-                              const i4 = 0;
-                              if ("number" != typeof t4 || t4 % 1 || isNaN(t4) || !isFinite(t4)) return e2.errors = [{
-                                instancePath: r2 + "/params/2",
+                          if (h) {
+                            if (o > 2) {
+                              let p = i[2];
+                              const d = 0;
+                              if (typeof p != "number" || p % 1 || isNaN(p) || !isFinite(p)) return r.errors = [{
+                                instancePath: e + "/params/2",
                                 schemaPath: "#/properties/params/items/2/type",
                                 keyword: "type",
                                 params: { type: "integer" },
                                 message: "must be integer"
-                              }], false;
-                              o2 = 0 === i4;
+                              }], !1;
+                              h = d === 0;
                             }
-                            if (o2) {
-                              if (t3 > 3) {
-                                let t4 = s4[3];
-                                const i4 = 0;
-                                if ("number" != typeof t4 || t4 % 1 || isNaN(t4) || !isFinite(t4)) return e2.errors = [{ instancePath: r2 + "/params/3", schemaPath: "#/properties/params/items/3/type", keyword: "type", params: {
+                            if (h) {
+                              if (o > 3) {
+                                let p = i[3];
+                                const d = 0;
+                                if (typeof p != "number" || p % 1 || isNaN(p) || !isFinite(p)) return r.errors = [{ instancePath: e + "/params/3", schemaPath: "#/properties/params/items/3/type", keyword: "type", params: {
                                   type: "integer"
-                                }, message: "must be integer" }], false;
-                                o2 = 0 === i4;
+                                }, message: "must be integer" }], !1;
+                                h = d === 0;
                               }
-                              if (o2) {
-                                if (t3 > 4) {
-                                  let t4 = s4[4];
-                                  const i4 = 0;
-                                  if ("number" != typeof t4 || t4 % 1 || isNaN(t4) || !isFinite(t4)) return e2.errors = [{
-                                    instancePath: r2 + "/params/4",
+                              if (h) {
+                                if (o > 4) {
+                                  let p = i[4];
+                                  const d = 0;
+                                  if (typeof p != "number" || p % 1 || isNaN(p) || !isFinite(p)) return r.errors = [{
+                                    instancePath: e + "/params/4",
                                     schemaPath: "#/properties/params/items/4/type",
                                     keyword: "type",
                                     params: { type: "integer" },
                                     message: "must be integer"
-                                  }], false;
-                                  o2 = 0 === i4;
+                                  }], !1;
+                                  h = d === 0;
                                 }
-                                if (o2) {
-                                  if (t3 > 5) {
-                                    let t4 = s4[5];
-                                    const i4 = 0;
-                                    if ("number" != typeof t4 || t4 % 1 || isNaN(t4) || !isFinite(t4)) return e2.errors = [{ instancePath: r2 + "/params/5", schemaPath: "#/properties/params/items/5/type", keyword: "type", params: {
+                                if (h) {
+                                  if (o > 5) {
+                                    let p = i[5];
+                                    const d = 0;
+                                    if (typeof p != "number" || p % 1 || isNaN(p) || !isFinite(p)) return r.errors = [{ instancePath: e + "/params/5", schemaPath: "#/properties/params/items/5/type", keyword: "type", params: {
                                       type: "integer"
-                                    }, message: "must be integer" }], false;
-                                    o2 = 0 === i4;
+                                    }, message: "must be integer" }], !1;
+                                    h = d === 0;
                                   }
-                                  if (o2) {
-                                    if (t3 > 6) {
-                                      let t4 = s4[6];
-                                      const i4 = 0;
-                                      if ("number" != typeof t4 || t4 % 1 || isNaN(t4) || !isFinite(t4)) return e2.errors = [{
-                                        instancePath: r2 + "/params/6",
+                                  if (h) {
+                                    if (o > 6) {
+                                      let p = i[6];
+                                      const d = 0;
+                                      if (typeof p != "number" || p % 1 || isNaN(p) || !isFinite(p)) return r.errors = [{
+                                        instancePath: e + "/params/6",
                                         schemaPath: "#/properties/params/items/6/type",
                                         keyword: "type",
                                         params: { type: "integer" },
                                         message: "must be integer"
-                                      }], false;
-                                      o2 = 0 === i4;
+                                      }], !1;
+                                      h = d === 0;
                                     }
-                                    if (o2 && t3 > 7) {
-                                      let t4 = s4[7];
-                                      const i4 = 0;
-                                      if ("number" != typeof t4 || t4 % 1 || isNaN(t4) || !isFinite(t4)) return e2.errors = [{ instancePath: r2 + "/params/7", schemaPath: "#/properties/params/items/7/type", keyword: "type", params: {
+                                    if (h && o > 7) {
+                                      let p = i[7];
+                                      const d = 0;
+                                      if (typeof p != "number" || p % 1 || isNaN(p) || !isFinite(p)) return r.errors = [{ instancePath: e + "/params/7", schemaPath: "#/properties/params/items/7/type", keyword: "type", params: {
                                         type: "integer"
-                                      }, message: "must be integer" }], false;
-                                      o2 = 0 === i4;
+                                      }, message: "must be integer" }], !1;
+                                      h = d === 0;
                                     }
                                   }
                                 }
@@ -1289,280 +1273,280 @@ const h = e(function() {
                           }
                         }
                       }
-                      n2 = 0 === i3;
-                    } else n2 = true;
-                    if (n2) {
-                      if (void 0 !== t2.actions) {
-                        let s4 = t2.actions;
-                        const i3 = 0;
-                        if (!Array.isArray(s4)) return e2.errors = [{
-                          instancePath: r2 + "/actions",
+                      s = y === 0;
+                    } else s = !0;
+                    if (s) {
+                      if (t.actions !== void 0) {
+                        let i = t.actions;
+                        const y = 0;
+                        if (!Array.isArray(i)) return r.errors = [{
+                          instancePath: e + "/actions",
                           schemaPath: "#/properties/actions/type",
                           keyword: "type",
                           params: { type: "array" },
                           message: "must be array"
-                        }], false;
+                        }], !1;
                         {
-                          const t3 = s4.length;
-                          for (let i4 = 0; i4 < t3; i4++) {
-                            let t4 = s4[i4];
-                            const a3 = 0;
-                            if (!t4 || "object" != typeof t4 || Array.isArray(t4)) return e2.errors = [{ instancePath: r2 + "/actions/" + i4, schemaPath: "#/properties/actions/items/type", keyword: "type", params: {
+                          const o = i.length;
+                          for (let p = 0; p < o; p++) {
+                            let d = i[p];
+                            const g = 0;
+                            if (!d || typeof d != "object" || Array.isArray(d)) return r.errors = [{ instancePath: e + "/actions/" + p, schemaPath: "#/properties/actions/items/type", keyword: "type", params: {
                               type: "object"
-                            }, message: "must be object" }], false;
+                            }, message: "must be object" }], !1;
                             {
-                              let s5;
-                              if (void 0 === t4.conditionParam1 && (s5 = "conditionParam1") || void 0 === t4.conditionParam2 && (s5 = "conditionParam2") || void 0 === t4.conditionType && (s5 = "conditionType") || void 0 === t4.skillId && (s5 = "skillId") || void 0 === t4.rating && (s5 = "rating")) return e2.errors = [{
-                                instancePath: r2 + "/actions/" + i4,
+                              let f;
+                              if (d.conditionParam1 === void 0 && (f = "conditionParam1") || d.conditionParam2 === void 0 && (f = "conditionParam2") || d.conditionType === void 0 && (f = "conditionType") || d.skillId === void 0 && (f = "skillId") || d.rating === void 0 && (f = "rating")) return r.errors = [{
+                                instancePath: e + "/actions/" + p,
                                 schemaPath: "#/properties/actions/items/required",
                                 keyword: "required",
-                                params: { missingProperty: s5 },
-                                message: "must have required property '" + s5 + "'"
-                              }], false;
-                              if (void 0 !== t4.conditionParam1) {
-                                let s6 = t4.conditionParam1;
-                                const a4 = 0;
-                                if ("number" != typeof s6 || s6 % 1 || isNaN(s6) || !isFinite(s6)) return e2.errors = [{
-                                  instancePath: r2 + "/actions/" + i4 + "/conditionParam1",
+                                params: { missingProperty: f },
+                                message: "must have required property '" + f + "'"
+                              }], !1;
+                              if (d.conditionParam1 !== void 0) {
+                                let u = d.conditionParam1;
+                                const b = 0;
+                                if (typeof u != "number" || u % 1 || isNaN(u) || !isFinite(u)) return r.errors = [{
+                                  instancePath: e + "/actions/" + p + "/conditionParam1",
                                   schemaPath: "#/properties/actions/items/properties/conditionParam1/type",
                                   keyword: "type",
                                   params: { type: "integer" },
                                   message: "must be integer"
-                                }], false;
-                                var p2 = 0 === a4;
-                              } else p2 = true;
-                              if (p2) {
-                                if (void 0 !== t4.conditionParam2) {
-                                  let s6 = t4.conditionParam2;
-                                  const a4 = 0;
-                                  if ("number" != typeof s6 || s6 % 1 || isNaN(s6) || !isFinite(s6)) return e2.errors = [{
-                                    instancePath: r2 + "/actions/" + i4 + "/conditionParam2",
+                                }], !1;
+                                var c = b === 0;
+                              } else c = !0;
+                              if (c) {
+                                if (d.conditionParam2 !== void 0) {
+                                  let u = d.conditionParam2;
+                                  const b = 0;
+                                  if (typeof u != "number" || u % 1 || isNaN(u) || !isFinite(u)) return r.errors = [{
+                                    instancePath: e + "/actions/" + p + "/conditionParam2",
                                     schemaPath: "#/properties/actions/items/properties/conditionParam2/type",
                                     keyword: "type",
                                     params: { type: "integer" },
                                     message: "must be integer"
-                                  }], false;
-                                  p2 = 0 === a4;
-                                } else p2 = true;
-                                if (p2) {
-                                  if (void 0 !== t4.conditionType) {
-                                    let s6 = t4.conditionType;
-                                    const a4 = 0;
-                                    if ("number" != typeof s6 || s6 % 1 || isNaN(s6) || !isFinite(s6)) return e2.errors = [{
-                                      instancePath: r2 + "/actions/" + i4 + "/conditionType",
+                                  }], !1;
+                                  c = b === 0;
+                                } else c = !0;
+                                if (c) {
+                                  if (d.conditionType !== void 0) {
+                                    let u = d.conditionType;
+                                    const b = 0;
+                                    if (typeof u != "number" || u % 1 || isNaN(u) || !isFinite(u)) return r.errors = [{
+                                      instancePath: e + "/actions/" + p + "/conditionType",
                                       schemaPath: "#/properties/actions/items/properties/conditionType/type",
                                       keyword: "type",
                                       params: { type: "integer" },
                                       message: "must be integer"
-                                    }], false;
-                                    p2 = 0 === a4;
-                                  } else p2 = true;
-                                  if (p2) {
-                                    if (void 0 !== t4.skillId) {
-                                      let s6 = t4.skillId;
-                                      const a4 = 0;
-                                      if ("number" != typeof s6 || s6 % 1 || isNaN(s6) || !isFinite(s6)) return e2.errors = [{
-                                        instancePath: r2 + "/actions/" + i4 + "/skillId",
+                                    }], !1;
+                                    c = b === 0;
+                                  } else c = !0;
+                                  if (c) {
+                                    if (d.skillId !== void 0) {
+                                      let u = d.skillId;
+                                      const b = 0;
+                                      if (typeof u != "number" || u % 1 || isNaN(u) || !isFinite(u)) return r.errors = [{
+                                        instancePath: e + "/actions/" + p + "/skillId",
                                         schemaPath: "#/properties/actions/items/properties/skillId/type",
                                         keyword: "type",
                                         params: { type: "integer" },
                                         message: "must be integer"
-                                      }], false;
-                                      p2 = 0 === a4;
-                                    } else p2 = true;
-                                    if (p2) if (void 0 !== t4.rating) {
-                                      let s6 = t4.rating;
-                                      const a4 = 0;
-                                      if ("number" != typeof s6 || s6 % 1 || isNaN(s6) || !isFinite(s6)) return e2.errors = [{
-                                        instancePath: r2 + "/actions/" + i4 + "/rating",
+                                      }], !1;
+                                      c = b === 0;
+                                    } else c = !0;
+                                    if (c) if (d.rating !== void 0) {
+                                      let u = d.rating;
+                                      const b = 0;
+                                      if (typeof u != "number" || u % 1 || isNaN(u) || !isFinite(u)) return r.errors = [{
+                                        instancePath: e + "/actions/" + p + "/rating",
                                         schemaPath: "#/properties/actions/items/properties/rating/type",
                                         keyword: "type",
                                         params: { type: "integer" },
                                         message: "must be integer"
-                                      }], false;
-                                      p2 = 0 === a4;
-                                    } else p2 = true;
+                                      }], !1;
+                                      c = b === 0;
+                                    } else c = !0;
                                   }
                                 }
                               }
                             }
-                            if (!(0 === a3)) break;
+                            if (g !== 0) break;
                           }
                         }
-                        n2 = 0 === i3;
-                      } else n2 = true;
-                      if (n2) {
-                        if (void 0 !== t2.traits) {
-                          let s4 = t2.traits;
-                          const i3 = 0;
-                          if (!Array.isArray(s4)) return e2.errors = [{
-                            instancePath: r2 + "/traits",
+                        s = y === 0;
+                      } else s = !0;
+                      if (s) {
+                        if (t.traits !== void 0) {
+                          let i = t.traits;
+                          const y = 0;
+                          if (!Array.isArray(i)) return r.errors = [{
+                            instancePath: e + "/traits",
                             schemaPath: "#/properties/traits/type",
                             keyword: "type",
                             params: { type: "array" },
                             message: "must be array"
-                          }], false;
+                          }], !1;
                           {
-                            const t3 = s4.length;
-                            for (let i4 = 0; i4 < t3; i4++) {
-                              let t4 = s4[i4];
-                              const a3 = 0;
-                              if (!t4 || "object" != typeof t4 || Array.isArray(t4)) return e2.errors = [{
-                                instancePath: r2 + "/traits/" + i4,
+                            const o = i.length;
+                            for (let p = 0; p < o; p++) {
+                              let d = i[p];
+                              const g = 0;
+                              if (!d || typeof d != "object" || Array.isArray(d)) return r.errors = [{
+                                instancePath: e + "/traits/" + p,
                                 schemaPath: "#/properties/traits/items/type",
                                 keyword: "type",
                                 params: { type: "object" },
                                 message: "must be object"
-                              }], false;
+                              }], !1;
                               {
-                                let s5;
-                                if (void 0 === t4.code && (s5 = "code") || void 0 === t4.dataId && (s5 = "dataId") || void 0 === t4.value && (s5 = "value")) return e2.errors = [{
-                                  instancePath: r2 + "/traits/" + i4,
+                                let f;
+                                if (d.code === void 0 && (f = "code") || d.dataId === void 0 && (f = "dataId") || d.value === void 0 && (f = "value")) return r.errors = [{
+                                  instancePath: e + "/traits/" + p,
                                   schemaPath: "#/properties/traits/items/required",
                                   keyword: "required",
-                                  params: { missingProperty: s5 },
-                                  message: "must have required property '" + s5 + "'"
-                                }], false;
-                                if (void 0 !== t4.code) {
-                                  let s6 = t4.code;
-                                  const a4 = 0;
-                                  if ("number" != typeof s6 || s6 % 1 || isNaN(s6) || !isFinite(s6)) return e2.errors = [{
-                                    instancePath: r2 + "/traits/" + i4 + "/code",
+                                  params: { missingProperty: f },
+                                  message: "must have required property '" + f + "'"
+                                }], !1;
+                                if (d.code !== void 0) {
+                                  let u = d.code;
+                                  const b = 0;
+                                  if (typeof u != "number" || u % 1 || isNaN(u) || !isFinite(u)) return r.errors = [{
+                                    instancePath: e + "/traits/" + p + "/code",
                                     schemaPath: "#/properties/traits/items/properties/code/type",
                                     keyword: "type",
                                     params: { type: "integer" },
                                     message: "must be integer"
-                                  }], false;
-                                  var m2 = 0 === a4;
-                                } else m2 = true;
-                                if (m2) {
-                                  if (void 0 !== t4.dataId) {
-                                    let s6 = t4.dataId;
-                                    const a4 = 0;
-                                    if ("number" != typeof s6 || s6 % 1 || isNaN(s6) || !isFinite(s6)) return e2.errors = [{
-                                      instancePath: r2 + "/traits/" + i4 + "/dataId",
+                                  }], !1;
+                                  var m = b === 0;
+                                } else m = !0;
+                                if (m) {
+                                  if (d.dataId !== void 0) {
+                                    let u = d.dataId;
+                                    const b = 0;
+                                    if (typeof u != "number" || u % 1 || isNaN(u) || !isFinite(u)) return r.errors = [{
+                                      instancePath: e + "/traits/" + p + "/dataId",
                                       schemaPath: "#/properties/traits/items/properties/dataId/type",
                                       keyword: "type",
                                       params: { type: "integer" },
                                       message: "must be integer"
-                                    }], false;
-                                    m2 = 0 === a4;
-                                  } else m2 = true;
-                                  if (m2) if (void 0 !== t4.value) {
-                                    let s6 = t4.value;
-                                    const a4 = 0;
-                                    if ("number" != typeof s6 || s6 % 1 || isNaN(s6) || !isFinite(s6)) return e2.errors = [{
-                                      instancePath: r2 + "/traits/" + i4 + "/value",
+                                    }], !1;
+                                    m = b === 0;
+                                  } else m = !0;
+                                  if (m) if (d.value !== void 0) {
+                                    let u = d.value;
+                                    const b = 0;
+                                    if (typeof u != "number" || u % 1 || isNaN(u) || !isFinite(u)) return r.errors = [{
+                                      instancePath: e + "/traits/" + p + "/value",
                                       schemaPath: "#/properties/traits/items/properties/value/type",
                                       keyword: "type",
                                       params: { type: "integer" },
                                       message: "must be integer"
-                                    }], false;
-                                    m2 = 0 === a4;
-                                  } else m2 = true;
+                                    }], !1;
+                                    m = b === 0;
+                                  } else m = !0;
                                 }
                               }
-                              if (!(0 === a3)) break;
+                              if (g !== 0) break;
                             }
                           }
-                          n2 = 0 === i3;
-                        } else n2 = true;
-                        if (n2) if (void 0 !== t2.dropItems) {
-                          let s4 = t2.dropItems;
-                          const i3 = 0;
-                          if (!Array.isArray(s4)) return e2.errors = [{
-                            instancePath: r2 + "/dropItems",
+                          s = y === 0;
+                        } else s = !0;
+                        if (s) if (t.dropItems !== void 0) {
+                          let i = t.dropItems;
+                          const y = 0;
+                          if (!Array.isArray(i)) return r.errors = [{
+                            instancePath: e + "/dropItems",
                             schemaPath: "#/properties/dropItems/type",
                             keyword: "type",
                             params: { type: "array" },
                             message: "must be array"
-                          }], false;
+                          }], !1;
                           {
-                            const t3 = s4.length;
-                            for (let i4 = 0; i4 < t3; i4++) {
-                              let t4 = s4[i4];
-                              const a3 = 0;
-                              if (!t4 || "object" != typeof t4 || Array.isArray(t4)) return e2.errors = [{
-                                instancePath: r2 + "/dropItems/" + i4,
+                            const o = i.length;
+                            for (let p = 0; p < o; p++) {
+                              let d = i[p];
+                              const g = 0;
+                              if (!d || typeof d != "object" || Array.isArray(d)) return r.errors = [{
+                                instancePath: e + "/dropItems/" + p,
                                 schemaPath: "#/properties/dropItems/items/type",
                                 keyword: "type",
                                 params: { type: "object" },
                                 message: "must be object"
-                              }], false;
+                              }], !1;
                               {
-                                let s5;
-                                if (void 0 === t4.kind && (s5 = "kind") || void 0 === t4.dataId && (s5 = "dataId") || void 0 === t4.denominator && (s5 = "denominator")) return e2.errors = [{
-                                  instancePath: r2 + "/dropItems/" + i4,
+                                let f;
+                                if (d.kind === void 0 && (f = "kind") || d.dataId === void 0 && (f = "dataId") || d.denominator === void 0 && (f = "denominator")) return r.errors = [{
+                                  instancePath: e + "/dropItems/" + p,
                                   schemaPath: "#/properties/dropItems/items/required",
                                   keyword: "required",
-                                  params: { missingProperty: s5 },
-                                  message: "must have required property '" + s5 + "'"
-                                }], false;
-                                if (void 0 !== t4.kind) {
-                                  let s6 = t4.kind;
-                                  const a4 = 0;
-                                  if ("number" != typeof s6 || s6 % 1 || isNaN(s6) || !isFinite(s6)) return e2.errors = [{
-                                    instancePath: r2 + "/dropItems/" + i4 + "/kind",
+                                  params: { missingProperty: f },
+                                  message: "must have required property '" + f + "'"
+                                }], !1;
+                                if (d.kind !== void 0) {
+                                  let u = d.kind;
+                                  const b = 0;
+                                  if (typeof u != "number" || u % 1 || isNaN(u) || !isFinite(u)) return r.errors = [{
+                                    instancePath: e + "/dropItems/" + p + "/kind",
                                     schemaPath: "#/properties/dropItems/items/properties/kind/type",
                                     keyword: "type",
                                     params: { type: "integer" },
                                     message: "must be integer"
-                                  }], false;
-                                  var y2 = 0 === a4;
-                                } else y2 = true;
-                                if (y2) {
-                                  if (void 0 !== t4.dataId) {
-                                    let s6 = t4.dataId;
-                                    const a4 = 0;
-                                    if ("number" != typeof s6 || s6 % 1 || isNaN(s6) || !isFinite(s6)) return e2.errors = [{
-                                      instancePath: r2 + "/dropItems/" + i4 + "/dataId",
+                                  }], !1;
+                                  var a = b === 0;
+                                } else a = !0;
+                                if (a) {
+                                  if (d.dataId !== void 0) {
+                                    let u = d.dataId;
+                                    const b = 0;
+                                    if (typeof u != "number" || u % 1 || isNaN(u) || !isFinite(u)) return r.errors = [{
+                                      instancePath: e + "/dropItems/" + p + "/dataId",
                                       schemaPath: "#/properties/dropItems/items/properties/dataId/type",
                                       keyword: "type",
                                       params: { type: "integer" },
                                       message: "must be integer"
-                                    }], false;
-                                    y2 = 0 === a4;
-                                  } else y2 = true;
-                                  if (y2) {
-                                    if (void 0 !== t4.denominator) {
-                                      let s6 = t4.denominator;
-                                      const a4 = 0;
-                                      if ("number" != typeof s6 || s6 % 1 || isNaN(s6) || !isFinite(s6)) return e2.errors = [{
-                                        instancePath: r2 + "/dropItems/" + i4 + "/denominator",
+                                    }], !1;
+                                    a = b === 0;
+                                  } else a = !0;
+                                  if (a) {
+                                    if (d.denominator !== void 0) {
+                                      let u = d.denominator;
+                                      const b = 0;
+                                      if (typeof u != "number" || u % 1 || isNaN(u) || !isFinite(u)) return r.errors = [{
+                                        instancePath: e + "/dropItems/" + p + "/denominator",
                                         schemaPath: "#/properties/dropItems/items/properties/denominator/type",
                                         keyword: "type",
                                         params: { type: "integer" },
                                         message: "must be integer"
-                                      }], false;
-                                      if ("number" == typeof s6 && isFinite(s6) && (s6 < 0 || isNaN(s6))) return e2.errors = [{
-                                        instancePath: r2 + "/dropItems/" + i4 + "/denominator",
+                                      }], !1;
+                                      if (typeof u == "number" && isFinite(u) && (u < 0 || isNaN(u))) return r.errors = [{
+                                        instancePath: e + "/dropItems/" + p + "/denominator",
                                         schemaPath: "#/properties/dropItems/items/properties/denominator/minimum",
                                         keyword: "minimum",
                                         params: { comparison: ">=", limit: 0 },
                                         message: "must be >= 0"
-                                      }], false;
-                                      y2 = 0 === a4;
-                                    } else y2 = true;
-                                    if (y2) if (void 0 !== t4.rate) {
-                                      let s6 = t4.rate;
-                                      const a4 = 0;
-                                      if ("number" != typeof s6 || !isFinite(s6)) return e2.errors = [{
-                                        instancePath: r2 + "/dropItems/" + i4 + "/rate",
+                                      }], !1;
+                                      a = b === 0;
+                                    } else a = !0;
+                                    if (a) if (d.rate !== void 0) {
+                                      let u = d.rate;
+                                      const b = 0;
+                                      if (typeof u != "number" || !isFinite(u)) return r.errors = [{
+                                        instancePath: e + "/dropItems/" + p + "/rate",
                                         schemaPath: "#/properties/dropItems/items/properties/rate/type",
                                         keyword: "type",
                                         params: { type: "number" },
                                         message: "must be number"
-                                      }], false;
-                                      y2 = 0 === a4;
-                                    } else y2 = true;
+                                      }], !1;
+                                      a = b === 0;
+                                    } else a = !0;
                                   }
                                 }
                               }
-                              if (!(0 === a3)) break;
+                              if (g !== 0) break;
                             }
                           }
-                          n2 = 0 === i3;
-                        } else n2 = true;
+                          s = y === 0;
+                        } else s = !0;
                       }
                     }
                   }
@@ -1573,452 +1557,446 @@ const h = e(function() {
         }
       }
     }
-    return e2.errors = null, true;
+    return r.errors = null, !0;
   }
-  return u = 1, f.exports = e2, f.exports.default = e2, f.exports;
-}()), g = (e2) => h(e2);
-var l, P = { exports: {} };
-const b = e(function() {
-  if (l) return P.exports;
-  function e2(t2, { instancePath: r2 = "", parentData: s2, parentDataProperty: i2, rootData: a2 = t2 } = {}) {
-    if (!t2 || "object" != typeof t2 || Array.isArray(t2)) return e2.errors = [{
-      instancePath: r2,
+  return R = 1, F.exports = r, F.exports.default = r, F.exports;
+}()), Y = (r) => S(r);
+var W, x = { exports: {} };
+const z = v(function() {
+  if (W) return x.exports;
+  function r(t, { instancePath: e = "", parentData: l, parentDataProperty: P, rootData: N = t } = {}) {
+    if (!t || typeof t != "object" || Array.isArray(t)) return r.errors = [{
+      instancePath: e,
       schemaPath: "#/type",
       keyword: "type",
       params: { type: "object" },
       message: "must be object"
-    }], false;
+    }], !1;
     {
-      let s3;
-      if (void 0 === t2.name && (s3 = "name") || void 0 === t2.id && (s3 = "id") || void 0 === t2.description && (s3 = "description") || void 0 === t2.iconIndex && (s3 = "iconIndex") || void 0 === t2.note && (s3 = "note") || void 0 === t2.animationId && (s3 = "animationId") || void 0 === t2.hitType && (s3 = "hitType") || void 0 === t2.occasion && (s3 = "occasion") || void 0 === t2.repeats && (s3 = "repeats") || void 0 === t2.scope && (s3 = "scope") || void 0 === t2.speed && (s3 = "speed") || void 0 === t2.successRate && (s3 = "successRate") || void 0 === t2.tpGain && (s3 = "tpGain") || void 0 === t2.consumable && (s3 = "consumable") || void 0 === t2.price && (s3 = "price") || void 0 === t2.effects && (s3 = "effects")) return e2.errors = [{
-        instancePath: r2,
+      let m;
+      if (t.name === void 0 && (m = "name") || t.id === void 0 && (m = "id") || t.description === void 0 && (m = "description") || t.iconIndex === void 0 && (m = "iconIndex") || t.note === void 0 && (m = "note") || t.animationId === void 0 && (m = "animationId") || t.hitType === void 0 && (m = "hitType") || t.occasion === void 0 && (m = "occasion") || t.repeats === void 0 && (m = "repeats") || t.scope === void 0 && (m = "scope") || t.speed === void 0 && (m = "speed") || t.successRate === void 0 && (m = "successRate") || t.tpGain === void 0 && (m = "tpGain") || t.consumable === void 0 && (m = "consumable") || t.price === void 0 && (m = "price") || t.effects === void 0 && (m = "effects")) return r.errors = [{
+        instancePath: e,
         schemaPath: "#/required",
         keyword: "required",
-        params: { missingProperty: s3 },
-        message: "must have required property '" + s3 + "'"
-      }], false;
-      if (void 0 !== t2.name) {
-        const s4 = 0;
-        if ("string" != typeof t2.name) return e2.errors = [{ instancePath: r2 + "/name", schemaPath: "#/properties/name/type", keyword: "type", params: { type: "string" }, message: "must be string" }], false;
-        var n2 = 0 === s4;
-      } else n2 = true;
-      if (n2) {
-        if (void 0 !== t2.id) {
-          let s4 = t2.id;
-          const i3 = 0;
-          if ("number" != typeof s4 || s4 % 1 || isNaN(s4) || !isFinite(s4)) return e2.errors = [{
-            instancePath: r2 + "/id",
+        params: { missingProperty: m },
+        message: "must have required property '" + m + "'"
+      }], !1;
+      if (t.name !== void 0) {
+        if (typeof t.name != "string") return r.errors = [{ instancePath: e + "/name", schemaPath: "#/properties/name/type", keyword: "type", params: { type: "string" }, message: "must be string" }], !1;
+        var s = !0;
+      } else s = !0;
+      if (s) {
+        if (t.id !== void 0) {
+          let a = t.id;
+          const n = 0;
+          if (typeof a != "number" || a % 1 || isNaN(a) || !isFinite(a)) return r.errors = [{
+            instancePath: e + "/id",
             schemaPath: "#/properties/id/type",
             keyword: "type",
             params: { type: "integer" },
             message: "must be integer"
-          }], false;
-          if ("number" == typeof s4 && isFinite(s4) && (s4 < 0 || isNaN(s4))) return e2.errors = [{
-            instancePath: r2 + "/id",
+          }], !1;
+          if (typeof a == "number" && isFinite(a) && (a < 0 || isNaN(a))) return r.errors = [{
+            instancePath: e + "/id",
             schemaPath: "#/properties/id/minimum",
             keyword: "minimum",
             params: { comparison: ">=", limit: 0 },
             message: "must be >= 0"
-          }], false;
-          n2 = 0 === i3;
-        } else n2 = true;
-        if (n2) {
-          if (void 0 !== t2.description) {
-            const s4 = 0;
-            if ("string" != typeof t2.description) return e2.errors = [{
-              instancePath: r2 + "/description",
+          }], !1;
+          s = n === 0;
+        } else s = !0;
+        if (s) {
+          if (t.description !== void 0) {
+            if (typeof t.description != "string") return r.errors = [{
+              instancePath: e + "/description",
               schemaPath: "#/properties/description/type",
               keyword: "type",
               params: { type: "string" },
               message: "must be string"
-            }], false;
-            n2 = 0 === s4;
-          } else n2 = true;
-          if (n2) {
-            if (void 0 !== t2.iconIndex) {
-              let s4 = t2.iconIndex;
-              const i3 = 0;
-              if ("number" != typeof s4 || s4 % 1 || isNaN(s4) || !isFinite(s4)) return e2.errors = [{
-                instancePath: r2 + "/iconIndex",
+            }], !1;
+            s = !0;
+          } else s = !0;
+          if (s) {
+            if (t.iconIndex !== void 0) {
+              let a = t.iconIndex;
+              const n = 0;
+              if (typeof a != "number" || a % 1 || isNaN(a) || !isFinite(a)) return r.errors = [{
+                instancePath: e + "/iconIndex",
                 schemaPath: "#/properties/iconIndex/type",
                 keyword: "type",
                 params: { type: "integer" },
                 message: "must be integer"
-              }], false;
-              if ("number" == typeof s4 && isFinite(s4) && (s4 < 0 || isNaN(s4))) return e2.errors = [{
-                instancePath: r2 + "/iconIndex",
+              }], !1;
+              if (typeof a == "number" && isFinite(a) && (a < 0 || isNaN(a))) return r.errors = [{
+                instancePath: e + "/iconIndex",
                 schemaPath: "#/properties/iconIndex/minimum",
                 keyword: "minimum",
                 params: { comparison: ">=", limit: 0 },
                 message: "must be >= 0"
-              }], false;
-              n2 = 0 === i3;
-            } else n2 = true;
-            if (n2) {
-              if (void 0 !== t2.note) {
-                const s4 = 0;
-                if ("string" != typeof t2.note) return e2.errors = [{
-                  instancePath: r2 + "/note",
+              }], !1;
+              s = n === 0;
+            } else s = !0;
+            if (s) {
+              if (t.note !== void 0) {
+                if (typeof t.note != "string") return r.errors = [{
+                  instancePath: e + "/note",
                   schemaPath: "#/properties/note/type",
                   keyword: "type",
                   params: { type: "string" },
                   message: "must be string"
-                }], false;
-                n2 = 0 === s4;
-              } else n2 = true;
-              if (n2) {
-                if (void 0 !== t2.animationId) {
-                  let s4 = t2.animationId;
-                  const i3 = 0;
-                  if ("number" != typeof s4 || s4 % 1 || isNaN(s4) || !isFinite(s4)) return e2.errors = [{
-                    instancePath: r2 + "/animationId",
+                }], !1;
+                s = !0;
+              } else s = !0;
+              if (s) {
+                if (t.animationId !== void 0) {
+                  let a = t.animationId;
+                  const n = 0;
+                  if (typeof a != "number" || a % 1 || isNaN(a) || !isFinite(a)) return r.errors = [{
+                    instancePath: e + "/animationId",
                     schemaPath: "#/properties/animationId/type",
                     keyword: "type",
                     params: { type: "integer" },
                     message: "must be integer"
-                  }], false;
-                  if ("number" == typeof s4 && isFinite(s4) && (s4 < 0 || isNaN(s4))) return e2.errors = [{
-                    instancePath: r2 + "/animationId",
+                  }], !1;
+                  if (typeof a == "number" && isFinite(a) && (a < 0 || isNaN(a))) return r.errors = [{
+                    instancePath: e + "/animationId",
                     schemaPath: "#/properties/animationId/minimum",
                     keyword: "minimum",
                     params: { comparison: ">=", limit: 0 },
                     message: "must be >= 0"
-                  }], false;
-                  n2 = 0 === i3;
-                } else n2 = true;
-                if (n2) {
-                  if (void 0 !== t2.hitType) {
-                    let s4 = t2.hitType;
-                    const i3 = 0;
-                    if ("number" != typeof s4 || s4 % 1 || isNaN(s4) || !isFinite(s4)) return e2.errors = [{
-                      instancePath: r2 + "/hitType",
+                  }], !1;
+                  s = n === 0;
+                } else s = !0;
+                if (s) {
+                  if (t.hitType !== void 0) {
+                    let a = t.hitType;
+                    const n = 0;
+                    if (typeof a != "number" || a % 1 || isNaN(a) || !isFinite(a)) return r.errors = [{
+                      instancePath: e + "/hitType",
                       schemaPath: "#/properties/hitType/type",
                       keyword: "type",
                       params: { type: "integer" },
                       message: "must be integer"
-                    }], false;
-                    n2 = 0 === i3;
-                  } else n2 = true;
-                  if (n2) {
-                    if (void 0 !== t2.occasion) {
-                      let s4 = t2.occasion;
-                      const i3 = 0;
-                      if ("number" != typeof s4 || s4 % 1 || isNaN(s4) || !isFinite(s4)) return e2.errors = [{
-                        instancePath: r2 + "/occasion",
+                    }], !1;
+                    s = n === 0;
+                  } else s = !0;
+                  if (s) {
+                    if (t.occasion !== void 0) {
+                      let a = t.occasion;
+                      const n = 0;
+                      if (typeof a != "number" || a % 1 || isNaN(a) || !isFinite(a)) return r.errors = [{
+                        instancePath: e + "/occasion",
                         schemaPath: "#/properties/occasion/type",
                         keyword: "type",
                         params: { type: "integer" },
                         message: "must be integer"
-                      }], false;
-                      n2 = 0 === i3;
-                    } else n2 = true;
-                    if (n2) {
-                      if (void 0 !== t2.repeats) {
-                        let s4 = t2.repeats;
-                        const i3 = 0;
-                        if ("number" != typeof s4 || s4 % 1 || isNaN(s4) || !isFinite(s4)) return e2.errors = [{
-                          instancePath: r2 + "/repeats",
+                      }], !1;
+                      s = n === 0;
+                    } else s = !0;
+                    if (s) {
+                      if (t.repeats !== void 0) {
+                        let a = t.repeats;
+                        const n = 0;
+                        if (typeof a != "number" || a % 1 || isNaN(a) || !isFinite(a)) return r.errors = [{
+                          instancePath: e + "/repeats",
                           schemaPath: "#/properties/repeats/type",
                           keyword: "type",
                           params: { type: "integer" },
                           message: "must be integer"
-                        }], false;
-                        n2 = 0 === i3;
-                      } else n2 = true;
-                      if (n2) {
-                        if (void 0 !== t2.scope) {
-                          let s4 = t2.scope;
-                          const i3 = 0;
-                          if ("number" != typeof s4 || s4 % 1 || isNaN(s4) || !isFinite(s4)) return e2.errors = [{ instancePath: r2 + "/scope", schemaPath: "#/properties/scope/type", keyword: "type", params: {
+                        }], !1;
+                        s = n === 0;
+                      } else s = !0;
+                      if (s) {
+                        if (t.scope !== void 0) {
+                          let a = t.scope;
+                          const n = 0;
+                          if (typeof a != "number" || a % 1 || isNaN(a) || !isFinite(a)) return r.errors = [{ instancePath: e + "/scope", schemaPath: "#/properties/scope/type", keyword: "type", params: {
                             type: "integer"
-                          }, message: "must be integer" }], false;
-                          n2 = 0 === i3;
-                        } else n2 = true;
-                        if (n2) {
-                          if (void 0 !== t2.speed) {
-                            let s4 = t2.speed;
-                            const i3 = 0;
-                            if ("number" != typeof s4 || s4 % 1 || isNaN(s4) || !isFinite(s4)) return e2.errors = [{
-                              instancePath: r2 + "/speed",
+                          }, message: "must be integer" }], !1;
+                          s = n === 0;
+                        } else s = !0;
+                        if (s) {
+                          if (t.speed !== void 0) {
+                            let a = t.speed;
+                            const n = 0;
+                            if (typeof a != "number" || a % 1 || isNaN(a) || !isFinite(a)) return r.errors = [{
+                              instancePath: e + "/speed",
                               schemaPath: "#/properties/speed/type",
                               keyword: "type",
                               params: { type: "integer" },
                               message: "must be integer"
-                            }], false;
-                            n2 = 0 === i3;
-                          } else n2 = true;
-                          if (n2) {
-                            if (void 0 !== t2.successRate) {
-                              let s4 = t2.successRate;
-                              const i3 = 0;
-                              if ("number" != typeof s4 || s4 % 1 || isNaN(s4) || !isFinite(s4)) return e2.errors = [{ instancePath: r2 + "/successRate", schemaPath: "#/properties/successRate/type", keyword: "type", params: {
+                            }], !1;
+                            s = n === 0;
+                          } else s = !0;
+                          if (s) {
+                            if (t.successRate !== void 0) {
+                              let a = t.successRate;
+                              const n = 0;
+                              if (typeof a != "number" || a % 1 || isNaN(a) || !isFinite(a)) return r.errors = [{ instancePath: e + "/successRate", schemaPath: "#/properties/successRate/type", keyword: "type", params: {
                                 type: "integer"
-                              }, message: "must be integer" }], false;
-                              n2 = 0 === i3;
-                            } else n2 = true;
-                            if (n2) {
-                              if (void 0 !== t2.tpGain) {
-                                let s4 = t2.tpGain;
-                                const i3 = 0;
-                                if ("number" != typeof s4 || s4 % 1 || isNaN(s4) || !isFinite(s4)) return e2.errors = [{
-                                  instancePath: r2 + "/tpGain",
+                              }, message: "must be integer" }], !1;
+                              s = n === 0;
+                            } else s = !0;
+                            if (s) {
+                              if (t.tpGain !== void 0) {
+                                let a = t.tpGain;
+                                const n = 0;
+                                if (typeof a != "number" || a % 1 || isNaN(a) || !isFinite(a)) return r.errors = [{
+                                  instancePath: e + "/tpGain",
                                   schemaPath: "#/properties/tpGain/type",
                                   keyword: "type",
                                   params: { type: "integer" },
                                   message: "must be integer"
-                                }], false;
-                                n2 = 0 === i3;
-                              } else n2 = true;
-                              if (n2) {
-                                if (void 0 !== t2.consumable) {
-                                  const s4 = 0;
-                                  if ("boolean" != typeof t2.consumable) return e2.errors = [{
-                                    instancePath: r2 + "/consumable",
+                                }], !1;
+                                s = n === 0;
+                              } else s = !0;
+                              if (s) {
+                                if (t.consumable !== void 0) {
+                                  if (typeof t.consumable != "boolean") return r.errors = [{
+                                    instancePath: e + "/consumable",
                                     schemaPath: "#/properties/consumable/type",
                                     keyword: "type",
                                     params: { type: "boolean" },
                                     message: "must be boolean"
-                                  }], false;
-                                  n2 = 0 === s4;
-                                } else n2 = true;
-                                if (n2) {
-                                  if (void 0 !== t2.price) {
-                                    let s4 = t2.price;
-                                    const i3 = 0;
-                                    if ("number" != typeof s4 || s4 % 1 || isNaN(s4) || !isFinite(s4)) return e2.errors = [{
-                                      instancePath: r2 + "/price",
+                                  }], !1;
+                                  s = !0;
+                                } else s = !0;
+                                if (s) {
+                                  if (t.price !== void 0) {
+                                    let a = t.price;
+                                    const n = 0;
+                                    if (typeof a != "number" || a % 1 || isNaN(a) || !isFinite(a)) return r.errors = [{
+                                      instancePath: e + "/price",
                                       schemaPath: "#/properties/price/type",
                                       keyword: "type",
                                       params: { type: "integer" },
                                       message: "must be integer"
-                                    }], false;
-                                    if ("number" == typeof s4 && isFinite(s4) && (s4 < 0 || isNaN(s4))) return e2.errors = [{
-                                      instancePath: r2 + "/price",
+                                    }], !1;
+                                    if (typeof a == "number" && isFinite(a) && (a < 0 || isNaN(a))) return r.errors = [{
+                                      instancePath: e + "/price",
                                       schemaPath: "#/properties/price/minimum",
                                       keyword: "minimum",
                                       params: { comparison: ">=", limit: 0 },
                                       message: "must be >= 0"
-                                    }], false;
-                                    n2 = 0 === i3;
-                                  } else n2 = true;
-                                  if (n2) {
-                                    if (void 0 !== t2.itypeId) {
-                                      let s4 = t2.itypeId;
-                                      const i3 = 0;
-                                      if ("number" != typeof s4 || s4 % 1 || isNaN(s4) || !isFinite(s4)) return e2.errors = [{
-                                        instancePath: r2 + "/itypeId",
+                                    }], !1;
+                                    s = n === 0;
+                                  } else s = !0;
+                                  if (s) {
+                                    if (t.itypeId !== void 0) {
+                                      let a = t.itypeId;
+                                      const n = 0;
+                                      if (typeof a != "number" || a % 1 || isNaN(a) || !isFinite(a)) return r.errors = [{
+                                        instancePath: e + "/itypeId",
                                         schemaPath: "#/properties/itypeId/type",
                                         keyword: "type",
                                         params: { type: "integer" },
                                         message: "must be integer"
-                                      }], false;
-                                      if ("number" == typeof s4 && isFinite(s4) && (s4 < 0 || isNaN(s4))) return e2.errors = [{
-                                        instancePath: r2 + "/itypeId",
+                                      }], !1;
+                                      if (typeof a == "number" && isFinite(a) && (a < 0 || isNaN(a))) return r.errors = [{
+                                        instancePath: e + "/itypeId",
                                         schemaPath: "#/properties/itypeId/minimum",
                                         keyword: "minimum",
                                         params: { comparison: ">=", limit: 0 },
                                         message: "must be >= 0"
-                                      }], false;
-                                      n2 = 0 === i3;
-                                    } else n2 = true;
-                                    if (n2) {
-                                      if (void 0 !== t2.effects) {
-                                        let s4 = t2.effects;
-                                        const i3 = 0;
-                                        if (!Array.isArray(s4)) return e2.errors = [{ instancePath: r2 + "/effects", schemaPath: "#/properties/effects/type", keyword: "type", params: { type: "array" }, message: "must be array" }], false;
+                                      }], !1;
+                                      s = n === 0;
+                                    } else s = !0;
+                                    if (s) {
+                                      if (t.effects !== void 0) {
+                                        let a = t.effects;
+                                        const n = 0;
+                                        if (!Array.isArray(a)) return r.errors = [{ instancePath: e + "/effects", schemaPath: "#/properties/effects/type", keyword: "type", params: { type: "array" }, message: "must be array" }], !1;
                                         {
-                                          const t3 = s4.length;
-                                          for (let i4 = 0; i4 < t3; i4++) {
-                                            let t4 = s4[i4];
-                                            const a3 = 0;
-                                            if (!t4 || "object" != typeof t4 || Array.isArray(t4)) return e2.errors = [{
-                                              instancePath: r2 + "/effects/" + i4,
+                                          const i = a.length;
+                                          for (let y = 0; y < i; y++) {
+                                            let o = a[y];
+                                            const p = 0;
+                                            if (!o || typeof o != "object" || Array.isArray(o)) return r.errors = [{
+                                              instancePath: e + "/effects/" + y,
                                               schemaPath: "#/properties/effects/items/type",
                                               keyword: "type",
                                               params: { type: "object" },
                                               message: "must be object"
-                                            }], false;
+                                            }], !1;
                                             {
-                                              let s5;
-                                              if (void 0 === t4.code && (s5 = "code") || void 0 === t4.dataId && (s5 = "dataId") || void 0 === t4.value1 && (s5 = "value1") || void 0 === t4.value2 && (s5 = "value2")) return e2.errors = [{
-                                                instancePath: r2 + "/effects/" + i4,
+                                              let d;
+                                              if (o.code === void 0 && (d = "code") || o.dataId === void 0 && (d = "dataId") || o.value1 === void 0 && (d = "value1") || o.value2 === void 0 && (d = "value2")) return r.errors = [{
+                                                instancePath: e + "/effects/" + y,
                                                 schemaPath: "#/properties/effects/items/required",
                                                 keyword: "required",
-                                                params: { missingProperty: s5 },
-                                                message: "must have required property '" + s5 + "'"
-                                              }], false;
-                                              for (const s6 in t4) if ("code" !== s6 && "dataId" !== s6 && "value1" !== s6 && "value2" !== s6) return e2.errors = [{
-                                                instancePath: r2 + "/effects/" + i4,
+                                                params: { missingProperty: d },
+                                                message: "must have required property '" + d + "'"
+                                              }], !1;
+                                              for (const g in o) if (g !== "code" && g !== "dataId" && g !== "value1" && g !== "value2") return r.errors = [{
+                                                instancePath: e + "/effects/" + y,
                                                 schemaPath: "#/properties/effects/items/additionalProperties",
                                                 keyword: "additionalProperties",
-                                                params: { additionalProperty: s6 },
+                                                params: { additionalProperty: g },
                                                 message: "must NOT have additional properties"
-                                              }], false;
-                                              if (void 0 !== t4.code) {
-                                                let s6 = t4.code;
-                                                const a4 = 0;
-                                                if ("number" != typeof s6 || s6 % 1 || isNaN(s6) || !isFinite(s6)) return e2.errors = [{
-                                                  instancePath: r2 + "/effects/" + i4 + "/code",
+                                              }], !1;
+                                              if (o.code !== void 0) {
+                                                let g = o.code;
+                                                const f = 0;
+                                                if (typeof g != "number" || g % 1 || isNaN(g) || !isFinite(g)) return r.errors = [{
+                                                  instancePath: e + "/effects/" + y + "/code",
                                                   schemaPath: "#/properties/effects/items/properties/code/type",
                                                   keyword: "type",
                                                   params: { type: "integer" },
                                                   message: "must be integer"
-                                                }], false;
-                                                var o2 = 0 === a4;
-                                              } else o2 = true;
-                                              if (o2) {
-                                                if (void 0 !== t4.dataId) {
-                                                  let s6 = t4.dataId;
-                                                  const a4 = 0;
-                                                  if ("number" != typeof s6 || s6 % 1 || isNaN(s6) || !isFinite(s6)) return e2.errors = [{
-                                                    instancePath: r2 + "/effects/" + i4 + "/dataId",
+                                                }], !1;
+                                                var h = f === 0;
+                                              } else h = !0;
+                                              if (h) {
+                                                if (o.dataId !== void 0) {
+                                                  let g = o.dataId;
+                                                  const f = 0;
+                                                  if (typeof g != "number" || g % 1 || isNaN(g) || !isFinite(g)) return r.errors = [{
+                                                    instancePath: e + "/effects/" + y + "/dataId",
                                                     schemaPath: "#/properties/effects/items/properties/dataId/type",
                                                     keyword: "type",
                                                     params: { type: "integer" },
                                                     message: "must be integer"
-                                                  }], false;
-                                                  if ("number" == typeof s6 && isFinite(s6) && (s6 < 0 || isNaN(s6))) return e2.errors = [{
-                                                    instancePath: r2 + "/effects/" + i4 + "/dataId",
+                                                  }], !1;
+                                                  if (typeof g == "number" && isFinite(g) && (g < 0 || isNaN(g))) return r.errors = [{
+                                                    instancePath: e + "/effects/" + y + "/dataId",
                                                     schemaPath: "#/properties/effects/items/properties/dataId/minimum",
                                                     keyword: "minimum",
                                                     params: { comparison: ">=", limit: 0 },
                                                     message: "must be >= 0"
-                                                  }], false;
-                                                  o2 = 0 === a4;
-                                                } else o2 = true;
-                                                if (o2) {
-                                                  if (void 0 !== t4.value1) {
-                                                    let s6 = t4.value1;
-                                                    const a4 = 0;
-                                                    if ("number" != typeof s6 || s6 % 1 || isNaN(s6) || !isFinite(s6)) return e2.errors = [{
-                                                      instancePath: r2 + "/effects/" + i4 + "/value1",
+                                                  }], !1;
+                                                  h = f === 0;
+                                                } else h = !0;
+                                                if (h) {
+                                                  if (o.value1 !== void 0) {
+                                                    let g = o.value1;
+                                                    const f = 0;
+                                                    if (typeof g != "number" || g % 1 || isNaN(g) || !isFinite(g)) return r.errors = [{
+                                                      instancePath: e + "/effects/" + y + "/value1",
                                                       schemaPath: "#/properties/effects/items/properties/value1/type",
                                                       keyword: "type",
                                                       params: { type: "integer" },
                                                       message: "must be integer"
-                                                    }], false;
-                                                    o2 = 0 === a4;
-                                                  } else o2 = true;
-                                                  if (o2) if (void 0 !== t4.value2) {
-                                                    let s6 = t4.value2;
-                                                    const a4 = 0;
-                                                    if ("number" != typeof s6 || s6 % 1 || isNaN(s6) || !isFinite(s6)) return e2.errors = [{
-                                                      instancePath: r2 + "/effects/" + i4 + "/value2",
+                                                    }], !1;
+                                                    h = f === 0;
+                                                  } else h = !0;
+                                                  if (h) if (o.value2 !== void 0) {
+                                                    let g = o.value2;
+                                                    const f = 0;
+                                                    if (typeof g != "number" || g % 1 || isNaN(g) || !isFinite(g)) return r.errors = [{
+                                                      instancePath: e + "/effects/" + y + "/value2",
                                                       schemaPath: "#/properties/effects/items/properties/value2/type",
                                                       keyword: "type",
                                                       params: { type: "integer" },
                                                       message: "must be integer"
-                                                    }], false;
-                                                    o2 = 0 === a4;
-                                                  } else o2 = true;
+                                                    }], !1;
+                                                    h = f === 0;
+                                                  } else h = !0;
                                                 }
                                               }
                                             }
-                                            if (!(0 === a3)) break;
+                                            if (p !== 0) break;
                                           }
                                         }
-                                        n2 = 0 === i3;
-                                      } else n2 = true;
-                                      if (n2) if (void 0 !== t2.damage) {
-                                        let s4 = t2.damage;
-                                        const i3 = 0;
-                                        if (!s4 || "object" != typeof s4 || Array.isArray(s4)) return e2.errors = [{
-                                          instancePath: r2 + "/damage",
+                                        s = n === 0;
+                                      } else s = !0;
+                                      if (s) if (t.damage !== void 0) {
+                                        let a = t.damage;
+                                        const n = 0;
+                                        if (!a || typeof a != "object" || Array.isArray(a)) return r.errors = [{
+                                          instancePath: e + "/damage",
                                           schemaPath: "#/properties/damage/type",
                                           keyword: "type",
                                           params: { type: "object" },
                                           message: "must be object"
-                                        }], false;
+                                        }], !1;
                                         {
-                                          let t3;
-                                          if (void 0 === s4.type && (t3 = "type") || void 0 === s4.elementId && (t3 = "elementId") || void 0 === s4.formula && (t3 = "formula") || void 0 === s4.variance && (t3 = "variance") || void 0 === s4.critical && (t3 = "critical")) return e2.errors = [{
-                                            instancePath: r2 + "/damage",
+                                          let i;
+                                          if (a.type === void 0 && (i = "type") || a.elementId === void 0 && (i = "elementId") || a.formula === void 0 && (i = "formula") || a.variance === void 0 && (i = "variance") || a.critical === void 0 && (i = "critical")) return r.errors = [{
+                                            instancePath: e + "/damage",
                                             schemaPath: "#/properties/damage/required",
                                             keyword: "required",
-                                            params: { missingProperty: t3 },
-                                            message: "must have required property '" + t3 + "'"
-                                          }], false;
-                                          for (const t4 in s4) if ("type" !== t4 && "elementId" !== t4 && "formula" !== t4 && "variance" !== t4 && "critical" !== t4) return e2.errors = [{
-                                            instancePath: r2 + "/damage",
+                                            params: { missingProperty: i },
+                                            message: "must have required property '" + i + "'"
+                                          }], !1;
+                                          for (const y in a) if (y !== "type" && y !== "elementId" && y !== "formula" && y !== "variance" && y !== "critical") return r.errors = [{
+                                            instancePath: e + "/damage",
                                             schemaPath: "#/properties/damage/additionalProperties",
                                             keyword: "additionalProperties",
-                                            params: { additionalProperty: t4 },
+                                            params: { additionalProperty: y },
                                             message: "must NOT have additional properties"
-                                          }], false;
-                                          if (void 0 !== s4.type) {
-                                            let t4 = s4.type;
-                                            const i4 = 0;
-                                            if ("number" != typeof t4 || t4 % 1 || isNaN(t4) || !isFinite(t4)) return e2.errors = [{
-                                              instancePath: r2 + "/damage/type",
+                                          }], !1;
+                                          if (a.type !== void 0) {
+                                            let y = a.type;
+                                            const o = 0;
+                                            if (typeof y != "number" || y % 1 || isNaN(y) || !isFinite(y)) return r.errors = [{
+                                              instancePath: e + "/damage/type",
                                               schemaPath: "#/properties/damage/properties/type/type",
                                               keyword: "type",
                                               params: { type: "integer" },
                                               message: "must be integer"
-                                            }], false;
-                                            var p2 = 0 === i4;
-                                          } else p2 = true;
-                                          if (p2) {
-                                            if (void 0 !== s4.elementId) {
-                                              let t4 = s4.elementId;
-                                              const i4 = 0;
-                                              if ("number" != typeof t4 || t4 % 1 || isNaN(t4) || !isFinite(t4)) return e2.errors = [{
-                                                instancePath: r2 + "/damage/elementId",
+                                            }], !1;
+                                            var c = o === 0;
+                                          } else c = !0;
+                                          if (c) {
+                                            if (a.elementId !== void 0) {
+                                              let y = a.elementId;
+                                              const o = 0;
+                                              if (typeof y != "number" || y % 1 || isNaN(y) || !isFinite(y)) return r.errors = [{
+                                                instancePath: e + "/damage/elementId",
                                                 schemaPath: "#/properties/damage/properties/elementId/type",
                                                 keyword: "type",
                                                 params: { type: "integer" },
                                                 message: "must be integer"
-                                              }], false;
-                                              if ("number" == typeof t4 && isFinite(t4) && (t4 < 0 || isNaN(t4))) return e2.errors = [{
-                                                instancePath: r2 + "/damage/elementId",
+                                              }], !1;
+                                              if (typeof y == "number" && isFinite(y) && (y < 0 || isNaN(y))) return r.errors = [{
+                                                instancePath: e + "/damage/elementId",
                                                 schemaPath: "#/properties/damage/properties/elementId/minimum",
                                                 keyword: "minimum",
                                                 params: { comparison: ">=", limit: 0 },
                                                 message: "must be >= 0"
-                                              }], false;
-                                              p2 = 0 === i4;
-                                            } else p2 = true;
-                                            if (p2) {
-                                              if (void 0 !== s4.formula) {
-                                                const t4 = 0;
-                                                if ("string" != typeof s4.formula) return e2.errors = [{
-                                                  instancePath: r2 + "/damage/formula",
+                                              }], !1;
+                                              c = o === 0;
+                                            } else c = !0;
+                                            if (c) {
+                                              if (a.formula !== void 0) {
+                                                if (typeof a.formula != "string") return r.errors = [{
+                                                  instancePath: e + "/damage/formula",
                                                   schemaPath: "#/properties/damage/properties/formula/type",
                                                   keyword: "type",
                                                   params: { type: "string" },
                                                   message: "must be string"
-                                                }], false;
-                                                p2 = 0 === t4;
-                                              } else p2 = true;
-                                              if (p2) {
-                                                if (void 0 !== s4.variance) {
-                                                  let t4 = s4.variance;
-                                                  const i4 = 0;
-                                                  if ("number" != typeof t4 || t4 % 1 || isNaN(t4) || !isFinite(t4)) return e2.errors = [{
-                                                    instancePath: r2 + "/damage/variance",
+                                                }], !1;
+                                                c = !0;
+                                              } else c = !0;
+                                              if (c) {
+                                                if (a.variance !== void 0) {
+                                                  let y = a.variance;
+                                                  const o = 0;
+                                                  if (typeof y != "number" || y % 1 || isNaN(y) || !isFinite(y)) return r.errors = [{
+                                                    instancePath: e + "/damage/variance",
                                                     schemaPath: "#/properties/damage/properties/variance/type",
                                                     keyword: "type",
                                                     params: { type: "integer" },
                                                     message: "must be integer"
-                                                  }], false;
-                                                  p2 = 0 === i4;
-                                                } else p2 = true;
-                                                if (p2) if (void 0 !== s4.critical) {
-                                                  const t4 = 0;
-                                                  if ("boolean" != typeof s4.critical) return e2.errors = [{
-                                                    instancePath: r2 + "/damage/critical",
+                                                  }], !1;
+                                                  c = o === 0;
+                                                } else c = !0;
+                                                if (c) if (a.critical !== void 0) {
+                                                  if (typeof a.critical != "boolean") return r.errors = [{
+                                                    instancePath: e + "/damage/critical",
                                                     schemaPath: "#/properties/damage/properties/critical/type",
                                                     keyword: "type",
                                                     params: { type: "boolean" },
                                                     message: "must be boolean"
-                                                  }], false;
-                                                  p2 = 0 === t4;
-                                                } else p2 = true;
+                                                  }], !1;
+                                                  c = !0;
+                                                } else c = !0;
                                               }
                                             }
                                           }
                                         }
-                                        n2 = 0 === i3;
-                                      } else n2 = true;
+                                        s = n === 0;
+                                      } else s = !0;
                                     }
                                   }
                                 }
@@ -2036,15 +2014,15 @@ const b = e(function() {
         }
       }
     }
-    return e2.errors = null, true;
+    return r.errors = null, !0;
   }
-  return l = 1, P.exports = e2, P.exports.default = e2, P.exports;
-}()), v = (e2) => b(e2);
-var N, k = { exports: {} };
-const w = e(function() {
-  if (N) return k.exports;
-  N = 1, k.exports = r2, k.exports.default = r2;
-  const e2 = { properties: {
+  return W = 1, x.exports = r, x.exports.default = r, x.exports;
+}()), Z = (r) => z(r);
+var O, q = { exports: {} };
+const J = v(function() {
+  if (O) return q.exports;
+  O = 1, q.exports = e, q.exports.default = e;
+  const r = { properties: {
     name: { type: "string" },
     id: { type: "integer", minimum: 0 },
     description: { type: "string" },
@@ -2075,538 +2053,531 @@ const w = e(function() {
       type: "object",
       properties: { code: { type: "integer" }, dataId: { type: "integer", minimum: 0 }, value1: { type: "integer" }, value2: { type: "integer" } },
       required: ["code", "dataId", "value1", "value2"],
-      additionalProperties: false
+      additionalProperties: !1
     } },
     damage: { type: "object", properties: { type: { type: "integer" }, elementId: { type: "integer", minimum: 0 }, formula: { type: "string" }, variance: { type: "integer" }, critical: {
       type: "boolean"
-    } }, required: ["type", "elementId", "formula", "variance", "critical"], additionalProperties: false }
-  } }, t2 = Object.prototype.hasOwnProperty;
-  function r2(s2, { instancePath: i2 = "", parentData: a2, parentDataProperty: n2, rootData: o2 = s2 } = {}) {
-    if (!s2 || "object" != typeof s2 || Array.isArray(s2)) return r2.errors = [{
-      instancePath: i2,
+    } }, required: ["type", "elementId", "formula", "variance", "critical"], additionalProperties: !1 }
+  } }, t = Object.prototype.hasOwnProperty;
+  function e(l, { instancePath: P = "", parentData: N, parentDataProperty: s, rootData: h = l } = {}) {
+    if (!l || typeof l != "object" || Array.isArray(l)) return e.errors = [{
+      instancePath: P,
       schemaPath: "#/type",
       keyword: "type",
       params: { type: "object" },
       message: "must be object"
-    }], false;
+    }], !1;
     {
-      let a3;
-      if (void 0 === s2.name && (a3 = "name") || void 0 === s2.id && (a3 = "id") || void 0 === s2.description && (a3 = "description") || void 0 === s2.iconIndex && (a3 = "iconIndex") || void 0 === s2.message1 && (a3 = "message1") || void 0 === s2.message2 && (a3 = "message2") || void 0 === s2.messageType && (a3 = "messageType") || void 0 === s2.mpCost && (a3 = "mpCost") || void 0 === s2.requiredWtypeId1 && (a3 = "requiredWtypeId1") || void 0 === s2.requiredWtypeId2 && (a3 = "requiredWtypeId2") || void 0 === s2.stypeId && (a3 = "stypeId") || void 0 === s2.tpCost && (a3 = "tpCost") || void 0 === s2.animationId && (a3 = "animationId") || void 0 === s2.hitType && (a3 = "hitType") || void 0 === s2.occasion && (a3 = "occasion") || void 0 === s2.repeats && (a3 = "repeats") || void 0 === s2.scope && (a3 = "scope") || void 0 === s2.speed && (a3 = "speed") || void 0 === s2.successRate && (a3 = "successRate") || void 0 === s2.tpGain && (a3 = "tpGain") || void 0 === s2.note && (a3 = "note") || void 0 === s2.effects && (a3 = "effects")) return r2.errors = [{
-        instancePath: i2,
+      let n;
+      if (l.name === void 0 && (n = "name") || l.id === void 0 && (n = "id") || l.description === void 0 && (n = "description") || l.iconIndex === void 0 && (n = "iconIndex") || l.message1 === void 0 && (n = "message1") || l.message2 === void 0 && (n = "message2") || l.messageType === void 0 && (n = "messageType") || l.mpCost === void 0 && (n = "mpCost") || l.requiredWtypeId1 === void 0 && (n = "requiredWtypeId1") || l.requiredWtypeId2 === void 0 && (n = "requiredWtypeId2") || l.stypeId === void 0 && (n = "stypeId") || l.tpCost === void 0 && (n = "tpCost") || l.animationId === void 0 && (n = "animationId") || l.hitType === void 0 && (n = "hitType") || l.occasion === void 0 && (n = "occasion") || l.repeats === void 0 && (n = "repeats") || l.scope === void 0 && (n = "scope") || l.speed === void 0 && (n = "speed") || l.successRate === void 0 && (n = "successRate") || l.tpGain === void 0 && (n = "tpGain") || l.note === void 0 && (n = "note") || l.effects === void 0 && (n = "effects")) return e.errors = [{
+        instancePath: P,
         schemaPath: "#/required",
         keyword: "required",
-        params: { missingProperty: a3 },
-        message: "must have required property '" + a3 + "'"
-      }], false;
-      for (const a4 in s2) if (!t2.call(e2.properties, a4)) return r2.errors = [{
-        instancePath: i2,
+        params: { missingProperty: n },
+        message: "must have required property '" + n + "'"
+      }], !1;
+      for (const i in l) if (!t.call(r.properties, i)) return e.errors = [{
+        instancePath: P,
         schemaPath: "#/additionalProperties",
         keyword: "additionalProperties",
-        params: { additionalProperty: a4 },
+        params: { additionalProperty: i },
         message: "must NOT have additional properties"
-      }], false;
-      if (void 0 !== s2.name) {
-        const e3 = 0;
-        if ("string" != typeof s2.name) return r2.errors = [{
-          instancePath: i2 + "/name",
+      }], !1;
+      if (l.name !== void 0) {
+        if (typeof l.name != "string") return e.errors = [{
+          instancePath: P + "/name",
           schemaPath: "#/properties/name/type",
           keyword: "type",
           params: { type: "string" },
           message: "must be string"
-        }], false;
-        var p2 = 0 === e3;
-      } else p2 = true;
-      if (p2) {
-        if (void 0 !== s2.id) {
-          let e3 = s2.id;
-          const t3 = 0;
-          if ("number" != typeof e3 || e3 % 1 || isNaN(e3) || !isFinite(e3)) return r2.errors = [{
-            instancePath: i2 + "/id",
+        }], !1;
+        var c = !0;
+      } else c = !0;
+      if (c) {
+        if (l.id !== void 0) {
+          let i = l.id;
+          const y = 0;
+          if (typeof i != "number" || i % 1 || isNaN(i) || !isFinite(i)) return e.errors = [{
+            instancePath: P + "/id",
             schemaPath: "#/properties/id/type",
             keyword: "type",
             params: { type: "integer" },
             message: "must be integer"
-          }], false;
-          if ("number" == typeof e3 && isFinite(e3) && (e3 < 0 || isNaN(e3))) return r2.errors = [{
-            instancePath: i2 + "/id",
+          }], !1;
+          if (typeof i == "number" && isFinite(i) && (i < 0 || isNaN(i))) return e.errors = [{
+            instancePath: P + "/id",
             schemaPath: "#/properties/id/minimum",
             keyword: "minimum",
             params: { comparison: ">=", limit: 0 },
             message: "must be >= 0"
-          }], false;
-          p2 = 0 === t3;
-        } else p2 = true;
-        if (p2) {
-          if (void 0 !== s2.description) {
-            const e3 = 0;
-            if ("string" != typeof s2.description) return r2.errors = [{
-              instancePath: i2 + "/description",
+          }], !1;
+          c = y === 0;
+        } else c = !0;
+        if (c) {
+          if (l.description !== void 0) {
+            if (typeof l.description != "string") return e.errors = [{
+              instancePath: P + "/description",
               schemaPath: "#/properties/description/type",
               keyword: "type",
               params: { type: "string" },
               message: "must be string"
-            }], false;
-            p2 = 0 === e3;
-          } else p2 = true;
-          if (p2) {
-            if (void 0 !== s2.iconIndex) {
-              let e3 = s2.iconIndex;
-              const t3 = 0;
-              if ("number" != typeof e3 || e3 % 1 || isNaN(e3) || !isFinite(e3)) return r2.errors = [{
-                instancePath: i2 + "/iconIndex",
+            }], !1;
+            c = !0;
+          } else c = !0;
+          if (c) {
+            if (l.iconIndex !== void 0) {
+              let i = l.iconIndex;
+              const y = 0;
+              if (typeof i != "number" || i % 1 || isNaN(i) || !isFinite(i)) return e.errors = [{
+                instancePath: P + "/iconIndex",
                 schemaPath: "#/properties/iconIndex/type",
                 keyword: "type",
                 params: { type: "integer" },
                 message: "must be integer"
-              }], false;
-              if ("number" == typeof e3 && isFinite(e3) && (e3 < 0 || isNaN(e3))) return r2.errors = [{ instancePath: i2 + "/iconIndex", schemaPath: "#/properties/iconIndex/minimum", keyword: "minimum", params: {
+              }], !1;
+              if (typeof i == "number" && isFinite(i) && (i < 0 || isNaN(i))) return e.errors = [{ instancePath: P + "/iconIndex", schemaPath: "#/properties/iconIndex/minimum", keyword: "minimum", params: {
                 comparison: ">=",
                 limit: 0
-              }, message: "must be >= 0" }], false;
-              p2 = 0 === t3;
-            } else p2 = true;
-            if (p2) {
-              if (void 0 !== s2.message1) {
-                const e3 = 0;
-                if ("string" != typeof s2.message1) return r2.errors = [{
-                  instancePath: i2 + "/message1",
+              }, message: "must be >= 0" }], !1;
+              c = y === 0;
+            } else c = !0;
+            if (c) {
+              if (l.message1 !== void 0) {
+                if (typeof l.message1 != "string") return e.errors = [{
+                  instancePath: P + "/message1",
                   schemaPath: "#/properties/message1/type",
                   keyword: "type",
                   params: { type: "string" },
                   message: "must be string"
-                }], false;
-                p2 = 0 === e3;
-              } else p2 = true;
-              if (p2) {
-                if (void 0 !== s2.message2) {
-                  const e3 = 0;
-                  if ("string" != typeof s2.message2) return r2.errors = [{ instancePath: i2 + "/message2", schemaPath: "#/properties/message2/type", keyword: "type", params: {
+                }], !1;
+                c = !0;
+              } else c = !0;
+              if (c) {
+                if (l.message2 !== void 0) {
+                  if (typeof l.message2 != "string") return e.errors = [{ instancePath: P + "/message2", schemaPath: "#/properties/message2/type", keyword: "type", params: {
                     type: "string"
-                  }, message: "must be string" }], false;
-                  p2 = 0 === e3;
-                } else p2 = true;
-                if (p2) {
-                  if (void 0 !== s2.messageType) {
-                    let e3 = s2.messageType;
-                    const t3 = 0;
-                    if ("number" != typeof e3 || e3 % 1 || isNaN(e3) || !isFinite(e3)) return r2.errors = [{ instancePath: i2 + "/messageType", schemaPath: "#/properties/messageType/type", keyword: "type", params: {
+                  }, message: "must be string" }], !1;
+                  c = !0;
+                } else c = !0;
+                if (c) {
+                  if (l.messageType !== void 0) {
+                    let i = l.messageType;
+                    const y = 0;
+                    if (typeof i != "number" || i % 1 || isNaN(i) || !isFinite(i)) return e.errors = [{ instancePath: P + "/messageType", schemaPath: "#/properties/messageType/type", keyword: "type", params: {
                       type: "integer"
-                    }, message: "must be integer" }], false;
-                    if ("number" == typeof e3 && isFinite(e3) && (e3 < 0 || isNaN(e3))) return r2.errors = [{
-                      instancePath: i2 + "/messageType",
+                    }, message: "must be integer" }], !1;
+                    if (typeof i == "number" && isFinite(i) && (i < 0 || isNaN(i))) return e.errors = [{
+                      instancePath: P + "/messageType",
                       schemaPath: "#/properties/messageType/minimum",
                       keyword: "minimum",
                       params: { comparison: ">=", limit: 0 },
                       message: "must be >= 0"
-                    }], false;
-                    p2 = 0 === t3;
-                  } else p2 = true;
-                  if (p2) {
-                    if (void 0 !== s2.mpCost) {
-                      let e3 = s2.mpCost;
-                      const t3 = 0;
-                      if ("number" != typeof e3 || e3 % 1 || isNaN(e3) || !isFinite(e3)) return r2.errors = [{
-                        instancePath: i2 + "/mpCost",
+                    }], !1;
+                    c = y === 0;
+                  } else c = !0;
+                  if (c) {
+                    if (l.mpCost !== void 0) {
+                      let i = l.mpCost;
+                      const y = 0;
+                      if (typeof i != "number" || i % 1 || isNaN(i) || !isFinite(i)) return e.errors = [{
+                        instancePath: P + "/mpCost",
                         schemaPath: "#/properties/mpCost/type",
                         keyword: "type",
                         params: { type: "integer" },
                         message: "must be integer"
-                      }], false;
-                      p2 = 0 === t3;
-                    } else p2 = true;
-                    if (p2) {
-                      if (void 0 !== s2.requiredWtypeId1) {
-                        let e3 = s2.requiredWtypeId1;
-                        const t3 = 0;
-                        if ("number" != typeof e3 || e3 % 1 || isNaN(e3) || !isFinite(e3)) return r2.errors = [{ instancePath: i2 + "/requiredWtypeId1", schemaPath: "#/properties/requiredWtypeId1/type", keyword: "type", params: {
+                      }], !1;
+                      c = y === 0;
+                    } else c = !0;
+                    if (c) {
+                      if (l.requiredWtypeId1 !== void 0) {
+                        let i = l.requiredWtypeId1;
+                        const y = 0;
+                        if (typeof i != "number" || i % 1 || isNaN(i) || !isFinite(i)) return e.errors = [{ instancePath: P + "/requiredWtypeId1", schemaPath: "#/properties/requiredWtypeId1/type", keyword: "type", params: {
                           type: "integer"
-                        }, message: "must be integer" }], false;
-                        if ("number" == typeof e3 && isFinite(e3) && (e3 < 0 || isNaN(e3))) return r2.errors = [{
-                          instancePath: i2 + "/requiredWtypeId1",
+                        }, message: "must be integer" }], !1;
+                        if (typeof i == "number" && isFinite(i) && (i < 0 || isNaN(i))) return e.errors = [{
+                          instancePath: P + "/requiredWtypeId1",
                           schemaPath: "#/properties/requiredWtypeId1/minimum",
                           keyword: "minimum",
                           params: { comparison: ">=", limit: 0 },
                           message: "must be >= 0"
-                        }], false;
-                        p2 = 0 === t3;
-                      } else p2 = true;
-                      if (p2) {
-                        if (void 0 !== s2.requiredWtypeId2) {
-                          let e3 = s2.requiredWtypeId2;
-                          const t3 = 0;
-                          if ("number" != typeof e3 || e3 % 1 || isNaN(e3) || !isFinite(e3)) return r2.errors = [{
-                            instancePath: i2 + "/requiredWtypeId2",
+                        }], !1;
+                        c = y === 0;
+                      } else c = !0;
+                      if (c) {
+                        if (l.requiredWtypeId2 !== void 0) {
+                          let i = l.requiredWtypeId2;
+                          const y = 0;
+                          if (typeof i != "number" || i % 1 || isNaN(i) || !isFinite(i)) return e.errors = [{
+                            instancePath: P + "/requiredWtypeId2",
                             schemaPath: "#/properties/requiredWtypeId2/type",
                             keyword: "type",
                             params: { type: "integer" },
                             message: "must be integer"
-                          }], false;
-                          if ("number" == typeof e3 && isFinite(e3) && (e3 < 0 || isNaN(e3))) return r2.errors = [{
-                            instancePath: i2 + "/requiredWtypeId2",
+                          }], !1;
+                          if (typeof i == "number" && isFinite(i) && (i < 0 || isNaN(i))) return e.errors = [{
+                            instancePath: P + "/requiredWtypeId2",
                             schemaPath: "#/properties/requiredWtypeId2/minimum",
                             keyword: "minimum",
                             params: { comparison: ">=", limit: 0 },
                             message: "must be >= 0"
-                          }], false;
-                          p2 = 0 === t3;
-                        } else p2 = true;
-                        if (p2) {
-                          if (void 0 !== s2.stypeId) {
-                            let e3 = s2.stypeId;
-                            const t3 = 0;
-                            if ("number" != typeof e3 || e3 % 1 || isNaN(e3) || !isFinite(e3)) return r2.errors = [{
-                              instancePath: i2 + "/stypeId",
+                          }], !1;
+                          c = y === 0;
+                        } else c = !0;
+                        if (c) {
+                          if (l.stypeId !== void 0) {
+                            let i = l.stypeId;
+                            const y = 0;
+                            if (typeof i != "number" || i % 1 || isNaN(i) || !isFinite(i)) return e.errors = [{
+                              instancePath: P + "/stypeId",
                               schemaPath: "#/properties/stypeId/type",
                               keyword: "type",
                               params: { type: "integer" },
                               message: "must be integer"
-                            }], false;
-                            if ("number" == typeof e3 && isFinite(e3) && (e3 < 0 || isNaN(e3))) return r2.errors = [{
-                              instancePath: i2 + "/stypeId",
+                            }], !1;
+                            if (typeof i == "number" && isFinite(i) && (i < 0 || isNaN(i))) return e.errors = [{
+                              instancePath: P + "/stypeId",
                               schemaPath: "#/properties/stypeId/minimum",
                               keyword: "minimum",
                               params: { comparison: ">=", limit: 0 },
                               message: "must be >= 0"
-                            }], false;
-                            p2 = 0 === t3;
-                          } else p2 = true;
-                          if (p2) {
-                            if (void 0 !== s2.tpCost) {
-                              let e3 = s2.tpCost;
-                              const t3 = 0;
-                              if ("number" != typeof e3 || e3 % 1 || isNaN(e3) || !isFinite(e3)) return r2.errors = [{
-                                instancePath: i2 + "/tpCost",
+                            }], !1;
+                            c = y === 0;
+                          } else c = !0;
+                          if (c) {
+                            if (l.tpCost !== void 0) {
+                              let i = l.tpCost;
+                              const y = 0;
+                              if (typeof i != "number" || i % 1 || isNaN(i) || !isFinite(i)) return e.errors = [{
+                                instancePath: P + "/tpCost",
                                 schemaPath: "#/properties/tpCost/type",
                                 keyword: "type",
                                 params: { type: "integer" },
                                 message: "must be integer"
-                              }], false;
-                              p2 = 0 === t3;
-                            } else p2 = true;
-                            if (p2) {
-                              if (void 0 !== s2.animationId) {
-                                let e3 = s2.animationId;
-                                const t3 = 0;
-                                if ("number" != typeof e3 || e3 % 1 || isNaN(e3) || !isFinite(e3)) return r2.errors = [{ instancePath: i2 + "/animationId", schemaPath: "#/properties/animationId/type", keyword: "type", params: {
+                              }], !1;
+                              c = y === 0;
+                            } else c = !0;
+                            if (c) {
+                              if (l.animationId !== void 0) {
+                                let i = l.animationId;
+                                const y = 0;
+                                if (typeof i != "number" || i % 1 || isNaN(i) || !isFinite(i)) return e.errors = [{ instancePath: P + "/animationId", schemaPath: "#/properties/animationId/type", keyword: "type", params: {
                                   type: "integer"
-                                }, message: "must be integer" }], false;
-                                if ("number" == typeof e3 && isFinite(e3) && (e3 < 0 || isNaN(e3))) return r2.errors = [{
-                                  instancePath: i2 + "/animationId",
+                                }, message: "must be integer" }], !1;
+                                if (typeof i == "number" && isFinite(i) && (i < 0 || isNaN(i))) return e.errors = [{
+                                  instancePath: P + "/animationId",
                                   schemaPath: "#/properties/animationId/minimum",
                                   keyword: "minimum",
                                   params: { comparison: ">=", limit: 0 },
                                   message: "must be >= 0"
-                                }], false;
-                                p2 = 0 === t3;
-                              } else p2 = true;
-                              if (p2) {
-                                if (void 0 !== s2.hitType) {
-                                  let e3 = s2.hitType;
-                                  const t3 = 0;
-                                  if ("number" != typeof e3 || e3 % 1 || isNaN(e3) || !isFinite(e3)) return r2.errors = [{
-                                    instancePath: i2 + "/hitType",
+                                }], !1;
+                                c = y === 0;
+                              } else c = !0;
+                              if (c) {
+                                if (l.hitType !== void 0) {
+                                  let i = l.hitType;
+                                  const y = 0;
+                                  if (typeof i != "number" || i % 1 || isNaN(i) || !isFinite(i)) return e.errors = [{
+                                    instancePath: P + "/hitType",
                                     schemaPath: "#/properties/hitType/type",
                                     keyword: "type",
                                     params: { type: "integer" },
                                     message: "must be integer"
-                                  }], false;
-                                  if ("number" == typeof e3 && isFinite(e3) && (e3 < 0 || isNaN(e3))) return r2.errors = [{
-                                    instancePath: i2 + "/hitType",
+                                  }], !1;
+                                  if (typeof i == "number" && isFinite(i) && (i < 0 || isNaN(i))) return e.errors = [{
+                                    instancePath: P + "/hitType",
                                     schemaPath: "#/properties/hitType/minimum",
                                     keyword: "minimum",
                                     params: { comparison: ">=", limit: 0 },
                                     message: "must be >= 0"
-                                  }], false;
-                                  p2 = 0 === t3;
-                                } else p2 = true;
-                                if (p2) {
-                                  if (void 0 !== s2.occasion) {
-                                    let e3 = s2.occasion;
-                                    const t3 = 0;
-                                    if ("number" != typeof e3 || e3 % 1 || isNaN(e3) || !isFinite(e3)) return r2.errors = [{
-                                      instancePath: i2 + "/occasion",
+                                  }], !1;
+                                  c = y === 0;
+                                } else c = !0;
+                                if (c) {
+                                  if (l.occasion !== void 0) {
+                                    let i = l.occasion;
+                                    const y = 0;
+                                    if (typeof i != "number" || i % 1 || isNaN(i) || !isFinite(i)) return e.errors = [{
+                                      instancePath: P + "/occasion",
                                       schemaPath: "#/properties/occasion/type",
                                       keyword: "type",
                                       params: { type: "integer" },
                                       message: "must be integer"
-                                    }], false;
-                                    p2 = 0 === t3;
-                                  } else p2 = true;
-                                  if (p2) {
-                                    if (void 0 !== s2.repeats) {
-                                      let e3 = s2.repeats;
-                                      const t3 = 0;
-                                      if ("number" != typeof e3 || e3 % 1 || isNaN(e3) || !isFinite(e3)) return r2.errors = [{
-                                        instancePath: i2 + "/repeats",
+                                    }], !1;
+                                    c = y === 0;
+                                  } else c = !0;
+                                  if (c) {
+                                    if (l.repeats !== void 0) {
+                                      let i = l.repeats;
+                                      const y = 0;
+                                      if (typeof i != "number" || i % 1 || isNaN(i) || !isFinite(i)) return e.errors = [{
+                                        instancePath: P + "/repeats",
                                         schemaPath: "#/properties/repeats/type",
                                         keyword: "type",
                                         params: { type: "integer" },
                                         message: "must be integer"
-                                      }], false;
-                                      if ("number" == typeof e3 && isFinite(e3) && (e3 < 0 || isNaN(e3))) return r2.errors = [{ instancePath: i2 + "/repeats", schemaPath: "#/properties/repeats/minimum", keyword: "minimum", params: {
+                                      }], !1;
+                                      if (typeof i == "number" && isFinite(i) && (i < 0 || isNaN(i))) return e.errors = [{ instancePath: P + "/repeats", schemaPath: "#/properties/repeats/minimum", keyword: "minimum", params: {
                                         comparison: ">=",
                                         limit: 0
-                                      }, message: "must be >= 0" }], false;
-                                      p2 = 0 === t3;
-                                    } else p2 = true;
-                                    if (p2) {
-                                      if (void 0 !== s2.scope) {
-                                        let e3 = s2.scope;
-                                        const t3 = 0;
-                                        if ("number" != typeof e3 || e3 % 1 || isNaN(e3) || !isFinite(e3)) return r2.errors = [{
-                                          instancePath: i2 + "/scope",
+                                      }, message: "must be >= 0" }], !1;
+                                      c = y === 0;
+                                    } else c = !0;
+                                    if (c) {
+                                      if (l.scope !== void 0) {
+                                        let i = l.scope;
+                                        const y = 0;
+                                        if (typeof i != "number" || i % 1 || isNaN(i) || !isFinite(i)) return e.errors = [{
+                                          instancePath: P + "/scope",
                                           schemaPath: "#/properties/scope/type",
                                           keyword: "type",
                                           params: { type: "integer" },
                                           message: "must be integer"
-                                        }], false;
-                                        p2 = 0 === t3;
-                                      } else p2 = true;
-                                      if (p2) {
-                                        if (void 0 !== s2.speed) {
-                                          let e3 = s2.speed;
-                                          const t3 = 0;
-                                          if ("number" != typeof e3 || e3 % 1 || isNaN(e3) || !isFinite(e3)) return r2.errors = [{
-                                            instancePath: i2 + "/speed",
+                                        }], !1;
+                                        c = y === 0;
+                                      } else c = !0;
+                                      if (c) {
+                                        if (l.speed !== void 0) {
+                                          let i = l.speed;
+                                          const y = 0;
+                                          if (typeof i != "number" || i % 1 || isNaN(i) || !isFinite(i)) return e.errors = [{
+                                            instancePath: P + "/speed",
                                             schemaPath: "#/properties/speed/type",
                                             keyword: "type",
                                             params: { type: "integer" },
                                             message: "must be integer"
-                                          }], false;
-                                          p2 = 0 === t3;
-                                        } else p2 = true;
-                                        if (p2) {
-                                          if (void 0 !== s2.successRate) {
-                                            let e3 = s2.successRate;
-                                            const t3 = 0;
-                                            if ("number" != typeof e3 || e3 % 1 || isNaN(e3) || !isFinite(e3)) return r2.errors = [{
-                                              instancePath: i2 + "/successRate",
+                                          }], !1;
+                                          c = y === 0;
+                                        } else c = !0;
+                                        if (c) {
+                                          if (l.successRate !== void 0) {
+                                            let i = l.successRate;
+                                            const y = 0;
+                                            if (typeof i != "number" || i % 1 || isNaN(i) || !isFinite(i)) return e.errors = [{
+                                              instancePath: P + "/successRate",
                                               schemaPath: "#/properties/successRate/type",
                                               keyword: "type",
                                               params: { type: "integer" },
                                               message: "must be integer"
-                                            }], false;
-                                            p2 = 0 === t3;
-                                          } else p2 = true;
-                                          if (p2) {
-                                            if (void 0 !== s2.tpGain) {
-                                              let e3 = s2.tpGain;
-                                              const t3 = 0;
-                                              if ("number" != typeof e3 || e3 % 1 || isNaN(e3) || !isFinite(e3)) return r2.errors = [{ instancePath: i2 + "/tpGain", schemaPath: "#/properties/tpGain/type", keyword: "type", params: {
+                                            }], !1;
+                                            c = y === 0;
+                                          } else c = !0;
+                                          if (c) {
+                                            if (l.tpGain !== void 0) {
+                                              let i = l.tpGain;
+                                              const y = 0;
+                                              if (typeof i != "number" || i % 1 || isNaN(i) || !isFinite(i)) return e.errors = [{ instancePath: P + "/tpGain", schemaPath: "#/properties/tpGain/type", keyword: "type", params: {
                                                 type: "integer"
-                                              }, message: "must be integer" }], false;
-                                              p2 = 0 === t3;
-                                            } else p2 = true;
-                                            if (p2) {
-                                              if (void 0 !== s2.note) {
-                                                const e3 = 0;
-                                                if ("string" != typeof s2.note) return r2.errors = [{
-                                                  instancePath: i2 + "/note",
+                                              }, message: "must be integer" }], !1;
+                                              c = y === 0;
+                                            } else c = !0;
+                                            if (c) {
+                                              if (l.note !== void 0) {
+                                                if (typeof l.note != "string") return e.errors = [{
+                                                  instancePath: P + "/note",
                                                   schemaPath: "#/properties/note/type",
                                                   keyword: "type",
                                                   params: { type: "string" },
                                                   message: "must be string"
-                                                }], false;
-                                                p2 = 0 === e3;
-                                              } else p2 = true;
-                                              if (p2) {
-                                                if (void 0 !== s2.effects) {
-                                                  let e3 = s2.effects;
-                                                  const t3 = 0;
-                                                  if (!Array.isArray(e3)) return r2.errors = [{ instancePath: i2 + "/effects", schemaPath: "#/properties/effects/type", keyword: "type", params: { type: "array" }, message: "must be array" }], false;
+                                                }], !1;
+                                                c = !0;
+                                              } else c = !0;
+                                              if (c) {
+                                                if (l.effects !== void 0) {
+                                                  let i = l.effects;
+                                                  const y = 0;
+                                                  if (!Array.isArray(i)) return e.errors = [{ instancePath: P + "/effects", schemaPath: "#/properties/effects/type", keyword: "type", params: { type: "array" }, message: "must be array" }], !1;
                                                   {
-                                                    const t4 = e3.length;
-                                                    for (let s3 = 0; s3 < t4; s3++) {
-                                                      let t5 = e3[s3];
-                                                      const a4 = 0;
-                                                      if (!t5 || "object" != typeof t5 || Array.isArray(t5)) return r2.errors = [{
-                                                        instancePath: i2 + "/effects/" + s3,
+                                                    const o = i.length;
+                                                    for (let p = 0; p < o; p++) {
+                                                      let d = i[p];
+                                                      const g = 0;
+                                                      if (!d || typeof d != "object" || Array.isArray(d)) return e.errors = [{
+                                                        instancePath: P + "/effects/" + p,
                                                         schemaPath: "#/properties/effects/items/type",
                                                         keyword: "type",
                                                         params: { type: "object" },
                                                         message: "must be object"
-                                                      }], false;
+                                                      }], !1;
                                                       {
-                                                        let e4;
-                                                        if (void 0 === t5.code && (e4 = "code") || void 0 === t5.dataId && (e4 = "dataId") || void 0 === t5.value1 && (e4 = "value1") || void 0 === t5.value2 && (e4 = "value2")) return r2.errors = [{
-                                                          instancePath: i2 + "/effects/" + s3,
+                                                        let f;
+                                                        if (d.code === void 0 && (f = "code") || d.dataId === void 0 && (f = "dataId") || d.value1 === void 0 && (f = "value1") || d.value2 === void 0 && (f = "value2")) return e.errors = [{
+                                                          instancePath: P + "/effects/" + p,
                                                           schemaPath: "#/properties/effects/items/required",
                                                           keyword: "required",
-                                                          params: { missingProperty: e4 },
-                                                          message: "must have required property '" + e4 + "'"
-                                                        }], false;
-                                                        for (const e5 in t5) if ("code" !== e5 && "dataId" !== e5 && "value1" !== e5 && "value2" !== e5) return r2.errors = [{
-                                                          instancePath: i2 + "/effects/" + s3,
+                                                          params: { missingProperty: f },
+                                                          message: "must have required property '" + f + "'"
+                                                        }], !1;
+                                                        for (const u in d) if (u !== "code" && u !== "dataId" && u !== "value1" && u !== "value2") return e.errors = [{
+                                                          instancePath: P + "/effects/" + p,
                                                           schemaPath: "#/properties/effects/items/additionalProperties",
                                                           keyword: "additionalProperties",
-                                                          params: { additionalProperty: e5 },
+                                                          params: { additionalProperty: u },
                                                           message: "must NOT have additional properties"
-                                                        }], false;
-                                                        if (void 0 !== t5.code) {
-                                                          let e5 = t5.code;
-                                                          const a5 = 0;
-                                                          if ("number" != typeof e5 || e5 % 1 || isNaN(e5) || !isFinite(e5)) return r2.errors = [{
-                                                            instancePath: i2 + "/effects/" + s3 + "/code",
+                                                        }], !1;
+                                                        if (d.code !== void 0) {
+                                                          let u = d.code;
+                                                          const b = 0;
+                                                          if (typeof u != "number" || u % 1 || isNaN(u) || !isFinite(u)) return e.errors = [{
+                                                            instancePath: P + "/effects/" + p + "/code",
                                                             schemaPath: "#/properties/effects/items/properties/code/type",
                                                             keyword: "type",
                                                             params: { type: "integer" },
                                                             message: "must be integer"
-                                                          }], false;
-                                                          var m2 = 0 === a5;
-                                                        } else m2 = true;
-                                                        if (m2) {
-                                                          if (void 0 !== t5.dataId) {
-                                                            let e5 = t5.dataId;
-                                                            const a5 = 0;
-                                                            if ("number" != typeof e5 || e5 % 1 || isNaN(e5) || !isFinite(e5)) return r2.errors = [{
-                                                              instancePath: i2 + "/effects/" + s3 + "/dataId",
+                                                          }], !1;
+                                                          var m = b === 0;
+                                                        } else m = !0;
+                                                        if (m) {
+                                                          if (d.dataId !== void 0) {
+                                                            let u = d.dataId;
+                                                            const b = 0;
+                                                            if (typeof u != "number" || u % 1 || isNaN(u) || !isFinite(u)) return e.errors = [{
+                                                              instancePath: P + "/effects/" + p + "/dataId",
                                                               schemaPath: "#/properties/effects/items/properties/dataId/type",
                                                               keyword: "type",
                                                               params: { type: "integer" },
                                                               message: "must be integer"
-                                                            }], false;
-                                                            if ("number" == typeof e5 && isFinite(e5) && (e5 < 0 || isNaN(e5))) return r2.errors = [{
-                                                              instancePath: i2 + "/effects/" + s3 + "/dataId",
+                                                            }], !1;
+                                                            if (typeof u == "number" && isFinite(u) && (u < 0 || isNaN(u))) return e.errors = [{
+                                                              instancePath: P + "/effects/" + p + "/dataId",
                                                               schemaPath: "#/properties/effects/items/properties/dataId/minimum",
                                                               keyword: "minimum",
                                                               params: { comparison: ">=", limit: 0 },
                                                               message: "must be >= 0"
-                                                            }], false;
-                                                            m2 = 0 === a5;
-                                                          } else m2 = true;
-                                                          if (m2) {
-                                                            if (void 0 !== t5.value1) {
-                                                              let e5 = t5.value1;
-                                                              const a5 = 0;
-                                                              if ("number" != typeof e5 || e5 % 1 || isNaN(e5) || !isFinite(e5)) return r2.errors = [{
-                                                                instancePath: i2 + "/effects/" + s3 + "/value1",
+                                                            }], !1;
+                                                            m = b === 0;
+                                                          } else m = !0;
+                                                          if (m) {
+                                                            if (d.value1 !== void 0) {
+                                                              let u = d.value1;
+                                                              const b = 0;
+                                                              if (typeof u != "number" || u % 1 || isNaN(u) || !isFinite(u)) return e.errors = [{
+                                                                instancePath: P + "/effects/" + p + "/value1",
                                                                 schemaPath: "#/properties/effects/items/properties/value1/type",
                                                                 keyword: "type",
                                                                 params: { type: "integer" },
                                                                 message: "must be integer"
-                                                              }], false;
-                                                              m2 = 0 === a5;
-                                                            } else m2 = true;
-                                                            if (m2) if (void 0 !== t5.value2) {
-                                                              let e5 = t5.value2;
-                                                              const a5 = 0;
-                                                              if ("number" != typeof e5 || e5 % 1 || isNaN(e5) || !isFinite(e5)) return r2.errors = [{
-                                                                instancePath: i2 + "/effects/" + s3 + "/value2",
+                                                              }], !1;
+                                                              m = b === 0;
+                                                            } else m = !0;
+                                                            if (m) if (d.value2 !== void 0) {
+                                                              let u = d.value2;
+                                                              const b = 0;
+                                                              if (typeof u != "number" || u % 1 || isNaN(u) || !isFinite(u)) return e.errors = [{
+                                                                instancePath: P + "/effects/" + p + "/value2",
                                                                 schemaPath: "#/properties/effects/items/properties/value2/type",
                                                                 keyword: "type",
                                                                 params: { type: "integer" },
                                                                 message: "must be integer"
-                                                              }], false;
-                                                              m2 = 0 === a5;
-                                                            } else m2 = true;
+                                                              }], !1;
+                                                              m = b === 0;
+                                                            } else m = !0;
                                                           }
                                                         }
                                                       }
-                                                      if (!(0 === a4)) break;
+                                                      if (g !== 0) break;
                                                     }
                                                   }
-                                                  p2 = 0 === t3;
-                                                } else p2 = true;
-                                                if (p2) if (void 0 !== s2.damage) {
-                                                  let e3 = s2.damage;
-                                                  const t3 = 0;
-                                                  if (!e3 || "object" != typeof e3 || Array.isArray(e3)) return r2.errors = [{
-                                                    instancePath: i2 + "/damage",
+                                                  c = y === 0;
+                                                } else c = !0;
+                                                if (c) if (l.damage !== void 0) {
+                                                  let i = l.damage;
+                                                  const y = 0;
+                                                  if (!i || typeof i != "object" || Array.isArray(i)) return e.errors = [{
+                                                    instancePath: P + "/damage",
                                                     schemaPath: "#/properties/damage/type",
                                                     keyword: "type",
                                                     params: { type: "object" },
                                                     message: "must be object"
-                                                  }], false;
+                                                  }], !1;
                                                   {
-                                                    let t4;
-                                                    if (void 0 === e3.type && (t4 = "type") || void 0 === e3.elementId && (t4 = "elementId") || void 0 === e3.formula && (t4 = "formula") || void 0 === e3.variance && (t4 = "variance") || void 0 === e3.critical && (t4 = "critical")) return r2.errors = [{
-                                                      instancePath: i2 + "/damage",
+                                                    let o;
+                                                    if (i.type === void 0 && (o = "type") || i.elementId === void 0 && (o = "elementId") || i.formula === void 0 && (o = "formula") || i.variance === void 0 && (o = "variance") || i.critical === void 0 && (o = "critical")) return e.errors = [{
+                                                      instancePath: P + "/damage",
                                                       schemaPath: "#/properties/damage/required",
                                                       keyword: "required",
-                                                      params: { missingProperty: t4 },
-                                                      message: "must have required property '" + t4 + "'"
-                                                    }], false;
-                                                    for (const t5 in e3) if ("type" !== t5 && "elementId" !== t5 && "formula" !== t5 && "variance" !== t5 && "critical" !== t5) return r2.errors = [{
-                                                      instancePath: i2 + "/damage",
+                                                      params: { missingProperty: o },
+                                                      message: "must have required property '" + o + "'"
+                                                    }], !1;
+                                                    for (const p in i) if (p !== "type" && p !== "elementId" && p !== "formula" && p !== "variance" && p !== "critical") return e.errors = [{
+                                                      instancePath: P + "/damage",
                                                       schemaPath: "#/properties/damage/additionalProperties",
                                                       keyword: "additionalProperties",
-                                                      params: { additionalProperty: t5 },
+                                                      params: { additionalProperty: p },
                                                       message: "must NOT have additional properties"
-                                                    }], false;
-                                                    if (void 0 !== e3.type) {
-                                                      let t5 = e3.type;
-                                                      const s3 = 0;
-                                                      if ("number" != typeof t5 || t5 % 1 || isNaN(t5) || !isFinite(t5)) return r2.errors = [{
-                                                        instancePath: i2 + "/damage/type",
+                                                    }], !1;
+                                                    if (i.type !== void 0) {
+                                                      let p = i.type;
+                                                      const d = 0;
+                                                      if (typeof p != "number" || p % 1 || isNaN(p) || !isFinite(p)) return e.errors = [{
+                                                        instancePath: P + "/damage/type",
                                                         schemaPath: "#/properties/damage/properties/type/type",
                                                         keyword: "type",
                                                         params: { type: "integer" },
                                                         message: "must be integer"
-                                                      }], false;
-                                                      var y2 = 0 === s3;
-                                                    } else y2 = true;
-                                                    if (y2) {
-                                                      if (void 0 !== e3.elementId) {
-                                                        let t5 = e3.elementId;
-                                                        const s3 = 0;
-                                                        if ("number" != typeof t5 || t5 % 1 || isNaN(t5) || !isFinite(t5)) return r2.errors = [{
-                                                          instancePath: i2 + "/damage/elementId",
+                                                      }], !1;
+                                                      var a = d === 0;
+                                                    } else a = !0;
+                                                    if (a) {
+                                                      if (i.elementId !== void 0) {
+                                                        let p = i.elementId;
+                                                        const d = 0;
+                                                        if (typeof p != "number" || p % 1 || isNaN(p) || !isFinite(p)) return e.errors = [{
+                                                          instancePath: P + "/damage/elementId",
                                                           schemaPath: "#/properties/damage/properties/elementId/type",
                                                           keyword: "type",
                                                           params: { type: "integer" },
                                                           message: "must be integer"
-                                                        }], false;
-                                                        if ("number" == typeof t5 && isFinite(t5) && (t5 < 0 || isNaN(t5))) return r2.errors = [{
-                                                          instancePath: i2 + "/damage/elementId",
+                                                        }], !1;
+                                                        if (typeof p == "number" && isFinite(p) && (p < 0 || isNaN(p))) return e.errors = [{
+                                                          instancePath: P + "/damage/elementId",
                                                           schemaPath: "#/properties/damage/properties/elementId/minimum",
                                                           keyword: "minimum",
                                                           params: { comparison: ">=", limit: 0 },
                                                           message: "must be >= 0"
-                                                        }], false;
-                                                        y2 = 0 === s3;
-                                                      } else y2 = true;
-                                                      if (y2) {
-                                                        if (void 0 !== e3.formula) {
-                                                          const t5 = 0;
-                                                          if ("string" != typeof e3.formula) return r2.errors = [{
-                                                            instancePath: i2 + "/damage/formula",
+                                                        }], !1;
+                                                        a = d === 0;
+                                                      } else a = !0;
+                                                      if (a) {
+                                                        if (i.formula !== void 0) {
+                                                          if (typeof i.formula != "string") return e.errors = [{
+                                                            instancePath: P + "/damage/formula",
                                                             schemaPath: "#/properties/damage/properties/formula/type",
                                                             keyword: "type",
                                                             params: { type: "string" },
                                                             message: "must be string"
-                                                          }], false;
-                                                          y2 = 0 === t5;
-                                                        } else y2 = true;
-                                                        if (y2) {
-                                                          if (void 0 !== e3.variance) {
-                                                            let t5 = e3.variance;
-                                                            const s3 = 0;
-                                                            if ("number" != typeof t5 || t5 % 1 || isNaN(t5) || !isFinite(t5)) return r2.errors = [{
-                                                              instancePath: i2 + "/damage/variance",
+                                                          }], !1;
+                                                          a = !0;
+                                                        } else a = !0;
+                                                        if (a) {
+                                                          if (i.variance !== void 0) {
+                                                            let p = i.variance;
+                                                            const d = 0;
+                                                            if (typeof p != "number" || p % 1 || isNaN(p) || !isFinite(p)) return e.errors = [{
+                                                              instancePath: P + "/damage/variance",
                                                               schemaPath: "#/properties/damage/properties/variance/type",
                                                               keyword: "type",
                                                               params: { type: "integer" },
                                                               message: "must be integer"
-                                                            }], false;
-                                                            y2 = 0 === s3;
-                                                          } else y2 = true;
-                                                          if (y2) if (void 0 !== e3.critical) {
-                                                            const t5 = 0;
-                                                            if ("boolean" != typeof e3.critical) return r2.errors = [{
-                                                              instancePath: i2 + "/damage/critical",
+                                                            }], !1;
+                                                            a = d === 0;
+                                                          } else a = !0;
+                                                          if (a) if (i.critical !== void 0) {
+                                                            if (typeof i.critical != "boolean") return e.errors = [{
+                                                              instancePath: P + "/damage/critical",
                                                               schemaPath: "#/properties/damage/properties/critical/type",
                                                               keyword: "type",
                                                               params: { type: "boolean" },
                                                               message: "must be boolean"
-                                                            }], false;
-                                                            y2 = 0 === t5;
-                                                          } else y2 = true;
+                                                            }], !1;
+                                                            a = !0;
+                                                          } else a = !0;
                                                         }
                                                       }
                                                     }
                                                   }
-                                                  p2 = 0 === t3;
-                                                } else p2 = true;
+                                                  c = y === 0;
+                                                } else c = !0;
                                               }
                                             }
                                           }
@@ -2629,385 +2600,374 @@ const w = e(function() {
         }
       }
     }
-    return r2.errors = null, true;
+    return e.errors = null, !0;
   }
-  return k.exports;
-}()), I = (e2) => w(e2);
-var F, x = { exports: {} };
-const q = e(function() {
-  if (F) return x.exports;
-  function e2(t2, { instancePath: r2 = "", parentData: s2, parentDataProperty: i2, rootData: a2 = t2 } = {}) {
-    if (!t2 || "object" != typeof t2 || Array.isArray(t2)) return e2.errors = [{
-      instancePath: r2,
+  return q.exports;
+}()), _ = (r) => J(r);
+var C, A = { exports: {} };
+const K = v(function() {
+  if (C) return A.exports;
+  function r(t, { instancePath: e = "", parentData: l, parentDataProperty: P, rootData: N = t } = {}) {
+    if (!t || typeof t != "object" || Array.isArray(t)) return r.errors = [{
+      instancePath: e,
       schemaPath: "#/type",
       keyword: "type",
       params: { type: "object" },
       message: "must be object"
-    }], false;
+    }], !1;
     {
-      let s3;
-      if (void 0 === t2.name && (s3 = "name") || void 0 === t2.id && (s3 = "id") || void 0 === t2.iconIndex && (s3 = "iconIndex") || void 0 === t2.message1 && (s3 = "message1") || void 0 === t2.message2 && (s3 = "message2") || void 0 === t2.message3 && (s3 = "message3") || void 0 === t2.message4 && (s3 = "message4") || void 0 === t2.restriction && (s3 = "restriction") || void 0 === t2.priority && (s3 = "priority") || void 0 === t2.motion && (s3 = "motion") || void 0 === t2.overlay && (s3 = "overlay") || void 0 === t2.removeAtBattleEnd && (s3 = "removeAtBattleEnd") || void 0 === t2.removeByDamage && (s3 = "removeByDamage") || void 0 === t2.removeByWalking && (s3 = "removeByWalking") || void 0 === t2.removeByRestriction && (s3 = "removeByRestriction") || void 0 === t2.autoRemovalTiming && (s3 = "autoRemovalTiming") || void 0 === t2.minTurns && (s3 = "minTurns") || void 0 === t2.maxTurns && (s3 = "maxTurns") || void 0 === t2.chanceByDamage && (s3 = "chanceByDamage") || void 0 === t2.stepsToRemove && (s3 = "stepsToRemove") || void 0 === t2.note && (s3 = "note")) return e2.errors = [{
-        instancePath: r2,
+      let c;
+      if (t.name === void 0 && (c = "name") || t.id === void 0 && (c = "id") || t.iconIndex === void 0 && (c = "iconIndex") || t.message1 === void 0 && (c = "message1") || t.message2 === void 0 && (c = "message2") || t.message3 === void 0 && (c = "message3") || t.message4 === void 0 && (c = "message4") || t.restriction === void 0 && (c = "restriction") || t.priority === void 0 && (c = "priority") || t.motion === void 0 && (c = "motion") || t.overlay === void 0 && (c = "overlay") || t.removeAtBattleEnd === void 0 && (c = "removeAtBattleEnd") || t.removeByDamage === void 0 && (c = "removeByDamage") || t.removeByWalking === void 0 && (c = "removeByWalking") || t.removeByRestriction === void 0 && (c = "removeByRestriction") || t.autoRemovalTiming === void 0 && (c = "autoRemovalTiming") || t.minTurns === void 0 && (c = "minTurns") || t.maxTurns === void 0 && (c = "maxTurns") || t.chanceByDamage === void 0 && (c = "chanceByDamage") || t.stepsToRemove === void 0 && (c = "stepsToRemove") || t.note === void 0 && (c = "note")) return r.errors = [{
+        instancePath: e,
         schemaPath: "#/required",
         keyword: "required",
-        params: { missingProperty: s3 },
-        message: "must have required property '" + s3 + "'"
-      }], false;
-      if (void 0 !== t2.name) {
-        const s4 = 0;
-        if ("string" != typeof t2.name) return e2.errors = [{ instancePath: r2 + "/name", schemaPath: "#/properties/name/type", keyword: "type", params: { type: "string" }, message: "must be string" }], false;
-        var n2 = 0 === s4;
-      } else n2 = true;
-      if (n2) {
-        if (void 0 !== t2.id) {
-          let s4 = t2.id;
-          const i3 = 0;
-          if ("number" != typeof s4 || s4 % 1 || isNaN(s4) || !isFinite(s4)) return e2.errors = [{
-            instancePath: r2 + "/id",
+        params: { missingProperty: c },
+        message: "must have required property '" + c + "'"
+      }], !1;
+      if (t.name !== void 0) {
+        if (typeof t.name != "string") return r.errors = [{ instancePath: e + "/name", schemaPath: "#/properties/name/type", keyword: "type", params: { type: "string" }, message: "must be string" }], !1;
+        var s = !0;
+      } else s = !0;
+      if (s) {
+        if (t.id !== void 0) {
+          let m = t.id;
+          const a = 0;
+          if (typeof m != "number" || m % 1 || isNaN(m) || !isFinite(m)) return r.errors = [{
+            instancePath: e + "/id",
             schemaPath: "#/properties/id/type",
             keyword: "type",
             params: { type: "integer" },
             message: "must be integer"
-          }], false;
-          if ("number" == typeof s4 && isFinite(s4) && (s4 < 0 || isNaN(s4))) return e2.errors = [{
-            instancePath: r2 + "/id",
+          }], !1;
+          if (typeof m == "number" && isFinite(m) && (m < 0 || isNaN(m))) return r.errors = [{
+            instancePath: e + "/id",
             schemaPath: "#/properties/id/minimum",
             keyword: "minimum",
             params: { comparison: ">=", limit: 0 },
             message: "must be >= 0"
-          }], false;
-          n2 = 0 === i3;
-        } else n2 = true;
-        if (n2) {
-          if (void 0 !== t2.iconIndex) {
-            let s4 = t2.iconIndex;
-            const i3 = 0;
-            if ("number" != typeof s4 || s4 % 1 || isNaN(s4) || !isFinite(s4)) return e2.errors = [{
-              instancePath: r2 + "/iconIndex",
+          }], !1;
+          s = a === 0;
+        } else s = !0;
+        if (s) {
+          if (t.iconIndex !== void 0) {
+            let m = t.iconIndex;
+            const a = 0;
+            if (typeof m != "number" || m % 1 || isNaN(m) || !isFinite(m)) return r.errors = [{
+              instancePath: e + "/iconIndex",
               schemaPath: "#/properties/iconIndex/type",
               keyword: "type",
               params: { type: "integer" },
               message: "must be integer"
-            }], false;
-            if ("number" == typeof s4 && isFinite(s4) && (s4 < 0 || isNaN(s4))) return e2.errors = [{ instancePath: r2 + "/iconIndex", schemaPath: "#/properties/iconIndex/minimum", keyword: "minimum", params: {
+            }], !1;
+            if (typeof m == "number" && isFinite(m) && (m < 0 || isNaN(m))) return r.errors = [{ instancePath: e + "/iconIndex", schemaPath: "#/properties/iconIndex/minimum", keyword: "minimum", params: {
               comparison: ">=",
               limit: 0
-            }, message: "must be >= 0" }], false;
-            n2 = 0 === i3;
-          } else n2 = true;
-          if (n2) {
-            if (void 0 !== t2.message1) {
-              const s4 = 0;
-              if ("string" != typeof t2.message1) return e2.errors = [{
-                instancePath: r2 + "/message1",
+            }, message: "must be >= 0" }], !1;
+            s = a === 0;
+          } else s = !0;
+          if (s) {
+            if (t.message1 !== void 0) {
+              if (typeof t.message1 != "string") return r.errors = [{
+                instancePath: e + "/message1",
                 schemaPath: "#/properties/message1/type",
                 keyword: "type",
                 params: { type: "string" },
                 message: "must be string"
-              }], false;
-              n2 = 0 === s4;
-            } else n2 = true;
-            if (n2) {
-              if (void 0 !== t2.message2) {
-                const s4 = 0;
-                if ("string" != typeof t2.message2) return e2.errors = [{ instancePath: r2 + "/message2", schemaPath: "#/properties/message2/type", keyword: "type", params: {
+              }], !1;
+              s = !0;
+            } else s = !0;
+            if (s) {
+              if (t.message2 !== void 0) {
+                if (typeof t.message2 != "string") return r.errors = [{ instancePath: e + "/message2", schemaPath: "#/properties/message2/type", keyword: "type", params: {
                   type: "string"
-                }, message: "must be string" }], false;
-                n2 = 0 === s4;
-              } else n2 = true;
-              if (n2) {
-                if (void 0 !== t2.message3) {
-                  const s4 = 0;
-                  if ("string" != typeof t2.message3) return e2.errors = [{
-                    instancePath: r2 + "/message3",
+                }, message: "must be string" }], !1;
+                s = !0;
+              } else s = !0;
+              if (s) {
+                if (t.message3 !== void 0) {
+                  if (typeof t.message3 != "string") return r.errors = [{
+                    instancePath: e + "/message3",
                     schemaPath: "#/properties/message3/type",
                     keyword: "type",
                     params: { type: "string" },
                     message: "must be string"
-                  }], false;
-                  n2 = 0 === s4;
-                } else n2 = true;
-                if (n2) {
-                  if (void 0 !== t2.message4) {
-                    const s4 = 0;
-                    if ("string" != typeof t2.message4) return e2.errors = [{
-                      instancePath: r2 + "/message4",
+                  }], !1;
+                  s = !0;
+                } else s = !0;
+                if (s) {
+                  if (t.message4 !== void 0) {
+                    if (typeof t.message4 != "string") return r.errors = [{
+                      instancePath: e + "/message4",
                       schemaPath: "#/properties/message4/type",
                       keyword: "type",
                       params: { type: "string" },
                       message: "must be string"
-                    }], false;
-                    n2 = 0 === s4;
-                  } else n2 = true;
-                  if (n2) {
-                    if (void 0 !== t2.restriction) {
-                      let s4 = t2.restriction;
-                      const i3 = 0;
-                      if ("number" != typeof s4 || s4 % 1 || isNaN(s4) || !isFinite(s4)) return e2.errors = [{
-                        instancePath: r2 + "/restriction",
+                    }], !1;
+                    s = !0;
+                  } else s = !0;
+                  if (s) {
+                    if (t.restriction !== void 0) {
+                      let m = t.restriction;
+                      const a = 0;
+                      if (typeof m != "number" || m % 1 || isNaN(m) || !isFinite(m)) return r.errors = [{
+                        instancePath: e + "/restriction",
                         schemaPath: "#/properties/restriction/type",
                         keyword: "type",
                         params: { type: "integer" },
                         message: "must be integer"
-                      }], false;
-                      n2 = 0 === i3;
-                    } else n2 = true;
-                    if (n2) {
-                      if (void 0 !== t2.priority) {
-                        let s4 = t2.priority;
-                        const i3 = 0;
-                        if ("number" != typeof s4 || s4 % 1 || isNaN(s4) || !isFinite(s4)) return e2.errors = [{
-                          instancePath: r2 + "/priority",
+                      }], !1;
+                      s = a === 0;
+                    } else s = !0;
+                    if (s) {
+                      if (t.priority !== void 0) {
+                        let m = t.priority;
+                        const a = 0;
+                        if (typeof m != "number" || m % 1 || isNaN(m) || !isFinite(m)) return r.errors = [{
+                          instancePath: e + "/priority",
                           schemaPath: "#/properties/priority/type",
                           keyword: "type",
                           params: { type: "integer" },
                           message: "must be integer"
-                        }], false;
-                        n2 = 0 === i3;
-                      } else n2 = true;
-                      if (n2) {
-                        if (void 0 !== t2.motion) {
-                          let s4 = t2.motion;
-                          const i3 = 0;
-                          if ("number" != typeof s4 || s4 % 1 || isNaN(s4) || !isFinite(s4)) return e2.errors = [{
-                            instancePath: r2 + "/motion",
+                        }], !1;
+                        s = a === 0;
+                      } else s = !0;
+                      if (s) {
+                        if (t.motion !== void 0) {
+                          let m = t.motion;
+                          const a = 0;
+                          if (typeof m != "number" || m % 1 || isNaN(m) || !isFinite(m)) return r.errors = [{
+                            instancePath: e + "/motion",
                             schemaPath: "#/properties/motion/type",
                             keyword: "type",
                             params: { type: "integer" },
                             message: "must be integer"
-                          }], false;
-                          n2 = 0 === i3;
-                        } else n2 = true;
-                        if (n2) {
-                          if (void 0 !== t2.overlay) {
-                            let s4 = t2.overlay;
-                            const i3 = 0;
-                            if ("number" != typeof s4 || s4 % 1 || isNaN(s4) || !isFinite(s4)) return e2.errors = [{
-                              instancePath: r2 + "/overlay",
+                          }], !1;
+                          s = a === 0;
+                        } else s = !0;
+                        if (s) {
+                          if (t.overlay !== void 0) {
+                            let m = t.overlay;
+                            const a = 0;
+                            if (typeof m != "number" || m % 1 || isNaN(m) || !isFinite(m)) return r.errors = [{
+                              instancePath: e + "/overlay",
                               schemaPath: "#/properties/overlay/type",
                               keyword: "type",
                               params: { type: "integer" },
                               message: "must be integer"
-                            }], false;
-                            n2 = 0 === i3;
-                          } else n2 = true;
-                          if (n2) {
-                            if (void 0 !== t2.removeAtBattleEnd) {
-                              const s4 = 0;
-                              if ("boolean" != typeof t2.removeAtBattleEnd) return e2.errors = [{
-                                instancePath: r2 + "/removeAtBattleEnd",
+                            }], !1;
+                            s = a === 0;
+                          } else s = !0;
+                          if (s) {
+                            if (t.removeAtBattleEnd !== void 0) {
+                              if (typeof t.removeAtBattleEnd != "boolean") return r.errors = [{
+                                instancePath: e + "/removeAtBattleEnd",
                                 schemaPath: "#/properties/removeAtBattleEnd/type",
                                 keyword: "type",
                                 params: { type: "boolean" },
                                 message: "must be boolean"
-                              }], false;
-                              n2 = 0 === s4;
-                            } else n2 = true;
-                            if (n2) {
-                              if (void 0 !== t2.removeByDamage) {
-                                const s4 = 0;
-                                if ("boolean" != typeof t2.removeByDamage) return e2.errors = [{ instancePath: r2 + "/removeByDamage", schemaPath: "#/properties/removeByDamage/type", keyword: "type", params: {
+                              }], !1;
+                              s = !0;
+                            } else s = !0;
+                            if (s) {
+                              if (t.removeByDamage !== void 0) {
+                                if (typeof t.removeByDamage != "boolean") return r.errors = [{ instancePath: e + "/removeByDamage", schemaPath: "#/properties/removeByDamage/type", keyword: "type", params: {
                                   type: "boolean"
-                                }, message: "must be boolean" }], false;
-                                n2 = 0 === s4;
-                              } else n2 = true;
-                              if (n2) {
-                                if (void 0 !== t2.removeByWalking) {
-                                  const s4 = 0;
-                                  if ("boolean" != typeof t2.removeByWalking) return e2.errors = [{
-                                    instancePath: r2 + "/removeByWalking",
+                                }, message: "must be boolean" }], !1;
+                                s = !0;
+                              } else s = !0;
+                              if (s) {
+                                if (t.removeByWalking !== void 0) {
+                                  if (typeof t.removeByWalking != "boolean") return r.errors = [{
+                                    instancePath: e + "/removeByWalking",
                                     schemaPath: "#/properties/removeByWalking/type",
                                     keyword: "type",
                                     params: { type: "boolean" },
                                     message: "must be boolean"
-                                  }], false;
-                                  n2 = 0 === s4;
-                                } else n2 = true;
-                                if (n2) {
-                                  if (void 0 !== t2.removeByRestriction) {
-                                    const s4 = 0;
-                                    if ("boolean" != typeof t2.removeByRestriction) return e2.errors = [{
-                                      instancePath: r2 + "/removeByRestriction",
+                                  }], !1;
+                                  s = !0;
+                                } else s = !0;
+                                if (s) {
+                                  if (t.removeByRestriction !== void 0) {
+                                    if (typeof t.removeByRestriction != "boolean") return r.errors = [{
+                                      instancePath: e + "/removeByRestriction",
                                       schemaPath: "#/properties/removeByRestriction/type",
                                       keyword: "type",
                                       params: { type: "boolean" },
                                       message: "must be boolean"
-                                    }], false;
-                                    n2 = 0 === s4;
-                                  } else n2 = true;
-                                  if (n2) {
-                                    if (void 0 !== t2.messageType) {
-                                      let s4 = t2.messageType;
-                                      const i3 = 0;
-                                      if ("number" != typeof s4 || s4 % 1 || isNaN(s4) || !isFinite(s4)) return e2.errors = [{
-                                        instancePath: r2 + "/messageType",
+                                    }], !1;
+                                    s = !0;
+                                  } else s = !0;
+                                  if (s) {
+                                    if (t.messageType !== void 0) {
+                                      let m = t.messageType;
+                                      const a = 0;
+                                      if (typeof m != "number" || m % 1 || isNaN(m) || !isFinite(m)) return r.errors = [{
+                                        instancePath: e + "/messageType",
                                         schemaPath: "#/properties/messageType/type",
                                         keyword: "type",
                                         params: { type: "integer" },
                                         message: "must be integer"
-                                      }], false;
-                                      n2 = 0 === i3;
-                                    } else n2 = true;
-                                    if (n2) {
-                                      if (void 0 !== t2.releaseByDamage) {
-                                        const s4 = 0;
-                                        if ("boolean" != typeof t2.releaseByDamage) return e2.errors = [{
-                                          instancePath: r2 + "/releaseByDamage",
+                                      }], !1;
+                                      s = a === 0;
+                                    } else s = !0;
+                                    if (s) {
+                                      if (t.releaseByDamage !== void 0) {
+                                        if (typeof t.releaseByDamage != "boolean") return r.errors = [{
+                                          instancePath: e + "/releaseByDamage",
                                           schemaPath: "#/properties/releaseByDamage/type",
                                           keyword: "type",
                                           params: { type: "boolean" },
                                           message: "must be boolean"
-                                        }], false;
-                                        n2 = 0 === s4;
-                                      } else n2 = true;
-                                      if (n2) {
-                                        if (void 0 !== t2.autoRemovalTiming) {
-                                          let s4 = t2.autoRemovalTiming;
-                                          const i3 = 0;
-                                          if ("number" != typeof s4 || s4 % 1 || isNaN(s4) || !isFinite(s4)) return e2.errors = [{ instancePath: r2 + "/autoRemovalTiming", schemaPath: "#/properties/autoRemovalTiming/type", keyword: "type", params: {
+                                        }], !1;
+                                        s = !0;
+                                      } else s = !0;
+                                      if (s) {
+                                        if (t.autoRemovalTiming !== void 0) {
+                                          let m = t.autoRemovalTiming;
+                                          const a = 0;
+                                          if (typeof m != "number" || m % 1 || isNaN(m) || !isFinite(m)) return r.errors = [{ instancePath: e + "/autoRemovalTiming", schemaPath: "#/properties/autoRemovalTiming/type", keyword: "type", params: {
                                             type: "integer"
-                                          }, message: "must be integer" }], false;
-                                          n2 = 0 === i3;
-                                        } else n2 = true;
-                                        if (n2) {
-                                          if (void 0 !== t2.minTurns) {
-                                            let s4 = t2.minTurns;
-                                            const i3 = 0;
-                                            if ("number" != typeof s4 || s4 % 1 || isNaN(s4) || !isFinite(s4)) return e2.errors = [{
-                                              instancePath: r2 + "/minTurns",
+                                          }, message: "must be integer" }], !1;
+                                          s = a === 0;
+                                        } else s = !0;
+                                        if (s) {
+                                          if (t.minTurns !== void 0) {
+                                            let m = t.minTurns;
+                                            const a = 0;
+                                            if (typeof m != "number" || m % 1 || isNaN(m) || !isFinite(m)) return r.errors = [{
+                                              instancePath: e + "/minTurns",
                                               schemaPath: "#/properties/minTurns/type",
                                               keyword: "type",
                                               params: { type: "integer" },
                                               message: "must be integer"
-                                            }], false;
-                                            n2 = 0 === i3;
-                                          } else n2 = true;
-                                          if (n2) {
-                                            if (void 0 !== t2.maxTurns) {
-                                              let s4 = t2.maxTurns;
-                                              const i3 = 0;
-                                              if ("number" != typeof s4 || s4 % 1 || isNaN(s4) || !isFinite(s4)) return e2.errors = [{
-                                                instancePath: r2 + "/maxTurns",
+                                            }], !1;
+                                            s = a === 0;
+                                          } else s = !0;
+                                          if (s) {
+                                            if (t.maxTurns !== void 0) {
+                                              let m = t.maxTurns;
+                                              const a = 0;
+                                              if (typeof m != "number" || m % 1 || isNaN(m) || !isFinite(m)) return r.errors = [{
+                                                instancePath: e + "/maxTurns",
                                                 schemaPath: "#/properties/maxTurns/type",
                                                 keyword: "type",
                                                 params: { type: "integer" },
                                                 message: "must be integer"
-                                              }], false;
-                                              n2 = 0 === i3;
-                                            } else n2 = true;
-                                            if (n2) {
-                                              if (void 0 !== t2.chanceByDamage) {
-                                                let s4 = t2.chanceByDamage;
-                                                const i3 = 0;
-                                                if ("number" != typeof s4 || s4 % 1 || isNaN(s4) || !isFinite(s4)) return e2.errors = [{
-                                                  instancePath: r2 + "/chanceByDamage",
+                                              }], !1;
+                                              s = a === 0;
+                                            } else s = !0;
+                                            if (s) {
+                                              if (t.chanceByDamage !== void 0) {
+                                                let m = t.chanceByDamage;
+                                                const a = 0;
+                                                if (typeof m != "number" || m % 1 || isNaN(m) || !isFinite(m)) return r.errors = [{
+                                                  instancePath: e + "/chanceByDamage",
                                                   schemaPath: "#/properties/chanceByDamage/type",
                                                   keyword: "type",
                                                   params: { type: "integer" },
                                                   message: "must be integer"
-                                                }], false;
-                                                n2 = 0 === i3;
-                                              } else n2 = true;
-                                              if (n2) {
-                                                if (void 0 !== t2.stepsToRemove) {
-                                                  let s4 = t2.stepsToRemove;
-                                                  const i3 = 0;
-                                                  if ("number" != typeof s4 || s4 % 1 || isNaN(s4) || !isFinite(s4)) return e2.errors = [{
-                                                    instancePath: r2 + "/stepsToRemove",
+                                                }], !1;
+                                                s = a === 0;
+                                              } else s = !0;
+                                              if (s) {
+                                                if (t.stepsToRemove !== void 0) {
+                                                  let m = t.stepsToRemove;
+                                                  const a = 0;
+                                                  if (typeof m != "number" || m % 1 || isNaN(m) || !isFinite(m)) return r.errors = [{
+                                                    instancePath: e + "/stepsToRemove",
                                                     schemaPath: "#/properties/stepsToRemove/type",
                                                     keyword: "type",
                                                     params: { type: "integer" },
                                                     message: "must be integer"
-                                                  }], false;
-                                                  n2 = 0 === i3;
-                                                } else n2 = true;
-                                                if (n2) {
-                                                  if (void 0 !== t2.note) {
-                                                    const s4 = 0;
-                                                    if ("string" != typeof t2.note) return e2.errors = [{
-                                                      instancePath: r2 + "/note",
+                                                  }], !1;
+                                                  s = a === 0;
+                                                } else s = !0;
+                                                if (s) {
+                                                  if (t.note !== void 0) {
+                                                    if (typeof t.note != "string") return r.errors = [{
+                                                      instancePath: e + "/note",
                                                       schemaPath: "#/properties/note/type",
                                                       keyword: "type",
                                                       params: { type: "string" },
                                                       message: "must be string"
-                                                    }], false;
-                                                    n2 = 0 === s4;
-                                                  } else n2 = true;
-                                                  if (n2) if (void 0 !== t2.traits) {
-                                                    let s4 = t2.traits;
-                                                    const i3 = 0;
-                                                    if (!Array.isArray(s4)) return e2.errors = [{
-                                                      instancePath: r2 + "/traits",
+                                                    }], !1;
+                                                    s = !0;
+                                                  } else s = !0;
+                                                  if (s) if (t.traits !== void 0) {
+                                                    let m = t.traits;
+                                                    const a = 0;
+                                                    if (!Array.isArray(m)) return r.errors = [{
+                                                      instancePath: e + "/traits",
                                                       schemaPath: "#/properties/traits/type",
                                                       keyword: "type",
                                                       params: { type: "array" },
                                                       message: "must be array"
-                                                    }], false;
+                                                    }], !1;
                                                     {
-                                                      const t3 = s4.length;
-                                                      for (let i4 = 0; i4 < t3; i4++) {
-                                                        let t4 = s4[i4];
-                                                        const a3 = 0;
-                                                        if (!t4 || "object" != typeof t4 || Array.isArray(t4)) return e2.errors = [{
-                                                          instancePath: r2 + "/traits/" + i4,
+                                                      const n = m.length;
+                                                      for (let i = 0; i < n; i++) {
+                                                        let y = m[i];
+                                                        const o = 0;
+                                                        if (!y || typeof y != "object" || Array.isArray(y)) return r.errors = [{
+                                                          instancePath: e + "/traits/" + i,
                                                           schemaPath: "#/properties/traits/items/type",
                                                           keyword: "type",
                                                           params: { type: "object" },
                                                           message: "must be object"
-                                                        }], false;
+                                                        }], !1;
                                                         {
-                                                          let s5;
-                                                          if (void 0 === t4.code && (s5 = "code") || void 0 === t4.dataId && (s5 = "dataId") || void 0 === t4.value && (s5 = "value")) return e2.errors = [{
-                                                            instancePath: r2 + "/traits/" + i4,
+                                                          let p;
+                                                          if (y.code === void 0 && (p = "code") || y.dataId === void 0 && (p = "dataId") || y.value === void 0 && (p = "value")) return r.errors = [{
+                                                            instancePath: e + "/traits/" + i,
                                                             schemaPath: "#/properties/traits/items/required",
                                                             keyword: "required",
-                                                            params: { missingProperty: s5 },
-                                                            message: "must have required property '" + s5 + "'"
-                                                          }], false;
-                                                          if (void 0 !== t4.code) {
-                                                            let s6 = t4.code;
-                                                            const a4 = 0;
-                                                            if ("number" != typeof s6 || s6 % 1 || isNaN(s6) || !isFinite(s6)) return e2.errors = [{
-                                                              instancePath: r2 + "/traits/" + i4 + "/code",
+                                                            params: { missingProperty: p },
+                                                            message: "must have required property '" + p + "'"
+                                                          }], !1;
+                                                          if (y.code !== void 0) {
+                                                            let d = y.code;
+                                                            const g = 0;
+                                                            if (typeof d != "number" || d % 1 || isNaN(d) || !isFinite(d)) return r.errors = [{
+                                                              instancePath: e + "/traits/" + i + "/code",
                                                               schemaPath: "#/properties/traits/items/properties/code/type",
                                                               keyword: "type",
                                                               params: { type: "integer" },
                                                               message: "must be integer"
-                                                            }], false;
-                                                            var o2 = 0 === a4;
-                                                          } else o2 = true;
-                                                          if (o2) {
-                                                            if (void 0 !== t4.dataId) {
-                                                              let s6 = t4.dataId;
-                                                              const a4 = 0;
-                                                              if ("number" != typeof s6 || s6 % 1 || isNaN(s6) || !isFinite(s6)) return e2.errors = [{
-                                                                instancePath: r2 + "/traits/" + i4 + "/dataId",
+                                                            }], !1;
+                                                            var h = g === 0;
+                                                          } else h = !0;
+                                                          if (h) {
+                                                            if (y.dataId !== void 0) {
+                                                              let d = y.dataId;
+                                                              const g = 0;
+                                                              if (typeof d != "number" || d % 1 || isNaN(d) || !isFinite(d)) return r.errors = [{
+                                                                instancePath: e + "/traits/" + i + "/dataId",
                                                                 schemaPath: "#/properties/traits/items/properties/dataId/type",
                                                                 keyword: "type",
                                                                 params: { type: "integer" },
                                                                 message: "must be integer"
-                                                              }], false;
-                                                              o2 = 0 === a4;
-                                                            } else o2 = true;
-                                                            if (o2) if (void 0 !== t4.value) {
-                                                              let s6 = t4.value;
-                                                              const a4 = 0;
-                                                              if ("number" != typeof s6 || s6 % 1 || isNaN(s6) || !isFinite(s6)) return e2.errors = [{
-                                                                instancePath: r2 + "/traits/" + i4 + "/value",
+                                                              }], !1;
+                                                              h = g === 0;
+                                                            } else h = !0;
+                                                            if (h) if (y.value !== void 0) {
+                                                              let d = y.value;
+                                                              const g = 0;
+                                                              if (typeof d != "number" || d % 1 || isNaN(d) || !isFinite(d)) return r.errors = [{
+                                                                instancePath: e + "/traits/" + i + "/value",
                                                                 schemaPath: "#/properties/traits/items/properties/value/type",
                                                                 keyword: "type",
                                                                 params: { type: "integer" },
                                                                 message: "must be integer"
-                                                              }], false;
-                                                              o2 = 0 === a4;
-                                                            } else o2 = true;
+                                                              }], !1;
+                                                              h = g === 0;
+                                                            } else h = !0;
                                                           }
                                                         }
-                                                        if (!(0 === a3)) break;
+                                                        if (o !== 0) break;
                                                       }
                                                     }
-                                                    n2 = 0 === i3;
-                                                  } else n2 = true;
+                                                    s = a === 0;
+                                                  } else s = !0;
                                                 }
                                               }
                                             }
@@ -3031,287 +2991,284 @@ const q = e(function() {
         }
       }
     }
-    return e2.errors = null, true;
+    return r.errors = null, !0;
   }
-  return F = 1, x.exports = e2, x.exports.default = e2, x.exports;
-}()), A = (e2) => q(e2);
-var T, j = { exports: {} };
-const D = e(function() {
-  if (T) return j.exports;
-  function e2(t2, { instancePath: r2 = "", parentData: s2, parentDataProperty: i2, rootData: a2 = t2 } = {}) {
-    if (!t2 || "object" != typeof t2 || Array.isArray(t2)) return e2.errors = [{
-      instancePath: r2,
+  return C = 1, A.exports = r, A.exports.default = r, A.exports;
+}()), $ = (r) => K(r);
+var L, T = { exports: {} };
+const M = v(function() {
+  if (L) return T.exports;
+  function r(t, { instancePath: e = "", parentData: l, parentDataProperty: P, rootData: N = t } = {}) {
+    if (!t || typeof t != "object" || Array.isArray(t)) return r.errors = [{
+      instancePath: e,
       schemaPath: "#/type",
       keyword: "type",
       params: { type: "object" },
       message: "must be object"
-    }], false;
+    }], !1;
     {
-      let s3;
-      if (void 0 === t2.name && (s3 = "name") || void 0 === t2.id && (s3 = "id") || void 0 === t2.description && (s3 = "description") || void 0 === t2.iconIndex && (s3 = "iconIndex") || void 0 === t2.price && (s3 = "price") || void 0 === t2.params && (s3 = "params") || void 0 === t2.traits && (s3 = "traits") || void 0 === t2.note && (s3 = "note") || void 0 === t2.etypeId && (s3 = "etypeId") || void 0 === t2.animationId && (s3 = "animationId")) return e2.errors = [{
-        instancePath: r2,
+      let a;
+      if (t.name === void 0 && (a = "name") || t.id === void 0 && (a = "id") || t.description === void 0 && (a = "description") || t.iconIndex === void 0 && (a = "iconIndex") || t.price === void 0 && (a = "price") || t.params === void 0 && (a = "params") || t.traits === void 0 && (a = "traits") || t.note === void 0 && (a = "note") || t.etypeId === void 0 && (a = "etypeId") || t.animationId === void 0 && (a = "animationId")) return r.errors = [{
+        instancePath: e,
         schemaPath: "#/required",
         keyword: "required",
-        params: { missingProperty: s3 },
-        message: "must have required property '" + s3 + "'"
-      }], false;
-      if (void 0 !== t2.name) {
-        const s4 = 0;
-        if ("string" != typeof t2.name) return e2.errors = [{ instancePath: r2 + "/name", schemaPath: "#/properties/name/type", keyword: "type", params: { type: "string" }, message: "must be string" }], false;
-        var n2 = 0 === s4;
-      } else n2 = true;
-      if (n2) {
-        if (void 0 !== t2.id) {
-          let s4 = t2.id;
-          const i3 = 0;
-          if ("number" != typeof s4 || s4 % 1 || isNaN(s4) || !isFinite(s4)) return e2.errors = [{
-            instancePath: r2 + "/id",
+        params: { missingProperty: a },
+        message: "must have required property '" + a + "'"
+      }], !1;
+      if (t.name !== void 0) {
+        if (typeof t.name != "string") return r.errors = [{ instancePath: e + "/name", schemaPath: "#/properties/name/type", keyword: "type", params: { type: "string" }, message: "must be string" }], !1;
+        var s = !0;
+      } else s = !0;
+      if (s) {
+        if (t.id !== void 0) {
+          let n = t.id;
+          const i = 0;
+          if (typeof n != "number" || n % 1 || isNaN(n) || !isFinite(n)) return r.errors = [{
+            instancePath: e + "/id",
             schemaPath: "#/properties/id/type",
             keyword: "type",
             params: { type: "integer" },
             message: "must be integer"
-          }], false;
-          if ("number" == typeof s4 && isFinite(s4) && (s4 < 0 || isNaN(s4))) return e2.errors = [{
-            instancePath: r2 + "/id",
+          }], !1;
+          if (typeof n == "number" && isFinite(n) && (n < 0 || isNaN(n))) return r.errors = [{
+            instancePath: e + "/id",
             schemaPath: "#/properties/id/minimum",
             keyword: "minimum",
             params: { comparison: ">=", limit: 0 },
             message: "must be >= 0"
-          }], false;
-          n2 = 0 === i3;
-        } else n2 = true;
-        if (n2) {
-          if (void 0 !== t2.description) {
-            const s4 = 0;
-            if ("string" != typeof t2.description) return e2.errors = [{
-              instancePath: r2 + "/description",
+          }], !1;
+          s = i === 0;
+        } else s = !0;
+        if (s) {
+          if (t.description !== void 0) {
+            if (typeof t.description != "string") return r.errors = [{
+              instancePath: e + "/description",
               schemaPath: "#/properties/description/type",
               keyword: "type",
               params: { type: "string" },
               message: "must be string"
-            }], false;
-            n2 = 0 === s4;
-          } else n2 = true;
-          if (n2) {
-            if (void 0 !== t2.iconIndex) {
-              let s4 = t2.iconIndex;
-              const i3 = 0;
-              if ("number" != typeof s4 || s4 % 1 || isNaN(s4) || !isFinite(s4)) return e2.errors = [{
-                instancePath: r2 + "/iconIndex",
+            }], !1;
+            s = !0;
+          } else s = !0;
+          if (s) {
+            if (t.iconIndex !== void 0) {
+              let n = t.iconIndex;
+              const i = 0;
+              if (typeof n != "number" || n % 1 || isNaN(n) || !isFinite(n)) return r.errors = [{
+                instancePath: e + "/iconIndex",
                 schemaPath: "#/properties/iconIndex/type",
                 keyword: "type",
                 params: { type: "integer" },
                 message: "must be integer"
-              }], false;
-              if ("number" == typeof s4 && isFinite(s4) && (s4 < 0 || isNaN(s4))) return e2.errors = [{
-                instancePath: r2 + "/iconIndex",
+              }], !1;
+              if (typeof n == "number" && isFinite(n) && (n < 0 || isNaN(n))) return r.errors = [{
+                instancePath: e + "/iconIndex",
                 schemaPath: "#/properties/iconIndex/minimum",
                 keyword: "minimum",
                 params: { comparison: ">=", limit: 0 },
                 message: "must be >= 0"
-              }], false;
-              n2 = 0 === i3;
-            } else n2 = true;
-            if (n2) {
-              if (void 0 !== t2.price) {
-                let s4 = t2.price;
-                const i3 = 0;
-                if ("number" != typeof s4 || s4 % 1 || isNaN(s4) || !isFinite(s4)) return e2.errors = [{
-                  instancePath: r2 + "/price",
+              }], !1;
+              s = i === 0;
+            } else s = !0;
+            if (s) {
+              if (t.price !== void 0) {
+                let n = t.price;
+                const i = 0;
+                if (typeof n != "number" || n % 1 || isNaN(n) || !isFinite(n)) return r.errors = [{
+                  instancePath: e + "/price",
                   schemaPath: "#/properties/price/type",
                   keyword: "type",
                   params: { type: "integer" },
                   message: "must be integer"
-                }], false;
-                if ("number" == typeof s4 && isFinite(s4) && (s4 < 0 || isNaN(s4))) return e2.errors = [{
-                  instancePath: r2 + "/price",
+                }], !1;
+                if (typeof n == "number" && isFinite(n) && (n < 0 || isNaN(n))) return r.errors = [{
+                  instancePath: e + "/price",
                   schemaPath: "#/properties/price/minimum",
                   keyword: "minimum",
                   params: { comparison: ">=", limit: 0 },
                   message: "must be >= 0"
-                }], false;
-                n2 = 0 === i3;
-              } else n2 = true;
-              if (n2) {
-                if (void 0 !== t2.note) {
-                  const s4 = 0;
-                  if ("string" != typeof t2.note) return e2.errors = [{
-                    instancePath: r2 + "/note",
+                }], !1;
+                s = i === 0;
+              } else s = !0;
+              if (s) {
+                if (t.note !== void 0) {
+                  if (typeof t.note != "string") return r.errors = [{
+                    instancePath: e + "/note",
                     schemaPath: "#/properties/note/type",
                     keyword: "type",
                     params: { type: "string" },
                     message: "must be string"
-                  }], false;
-                  n2 = 0 === s4;
-                } else n2 = true;
-                if (n2) {
-                  if (void 0 !== t2.etypeId) {
-                    let s4 = t2.etypeId;
-                    const i3 = 0;
-                    if ("number" != typeof s4 || s4 % 1 || isNaN(s4) || !isFinite(s4)) return e2.errors = [{
-                      instancePath: r2 + "/etypeId",
+                  }], !1;
+                  s = !0;
+                } else s = !0;
+                if (s) {
+                  if (t.etypeId !== void 0) {
+                    let n = t.etypeId;
+                    const i = 0;
+                    if (typeof n != "number" || n % 1 || isNaN(n) || !isFinite(n)) return r.errors = [{
+                      instancePath: e + "/etypeId",
                       schemaPath: "#/properties/etypeId/type",
                       keyword: "type",
                       params: { type: "integer" },
                       message: "must be integer"
-                    }], false;
-                    if ("number" == typeof s4 && isFinite(s4) && (s4 < 0 || isNaN(s4))) return e2.errors = [{
-                      instancePath: r2 + "/etypeId",
+                    }], !1;
+                    if (typeof n == "number" && isFinite(n) && (n < 0 || isNaN(n))) return r.errors = [{
+                      instancePath: e + "/etypeId",
                       schemaPath: "#/properties/etypeId/minimum",
                       keyword: "minimum",
                       params: { comparison: ">=", limit: 0 },
                       message: "must be >= 0"
-                    }], false;
-                    n2 = 0 === i3;
-                  } else n2 = true;
-                  if (n2) {
-                    if (void 0 !== t2.wtypeId) {
-                      let s4 = t2.wtypeId;
-                      const i3 = 0;
-                      if ("number" != typeof s4 || s4 % 1 || isNaN(s4) || !isFinite(s4)) return e2.errors = [{
-                        instancePath: r2 + "/wtypeId",
+                    }], !1;
+                    s = i === 0;
+                  } else s = !0;
+                  if (s) {
+                    if (t.wtypeId !== void 0) {
+                      let n = t.wtypeId;
+                      const i = 0;
+                      if (typeof n != "number" || n % 1 || isNaN(n) || !isFinite(n)) return r.errors = [{
+                        instancePath: e + "/wtypeId",
                         schemaPath: "#/properties/wtypeId/type",
                         keyword: "type",
                         params: { type: "integer" },
                         message: "must be integer"
-                      }], false;
-                      if ("number" == typeof s4 && isFinite(s4) && (s4 < 0 || isNaN(s4))) return e2.errors = [{
-                        instancePath: r2 + "/wtypeId",
+                      }], !1;
+                      if (typeof n == "number" && isFinite(n) && (n < 0 || isNaN(n))) return r.errors = [{
+                        instancePath: e + "/wtypeId",
                         schemaPath: "#/properties/wtypeId/minimum",
                         keyword: "minimum",
                         params: { comparison: ">=", limit: 0 },
                         message: "must be >= 0"
-                      }], false;
-                      n2 = 0 === i3;
-                    } else n2 = true;
-                    if (n2) {
-                      if (void 0 !== t2.animationId) {
-                        let s4 = t2.animationId;
-                        const i3 = 0;
-                        if ("number" != typeof s4 || s4 % 1 || isNaN(s4) || !isFinite(s4)) return e2.errors = [{
-                          instancePath: r2 + "/animationId",
+                      }], !1;
+                      s = i === 0;
+                    } else s = !0;
+                    if (s) {
+                      if (t.animationId !== void 0) {
+                        let n = t.animationId;
+                        const i = 0;
+                        if (typeof n != "number" || n % 1 || isNaN(n) || !isFinite(n)) return r.errors = [{
+                          instancePath: e + "/animationId",
                           schemaPath: "#/properties/animationId/type",
                           keyword: "type",
                           params: { type: "integer" },
                           message: "must be integer"
-                        }], false;
-                        if ("number" == typeof s4 && isFinite(s4) && (s4 < 0 || isNaN(s4))) return e2.errors = [{
-                          instancePath: r2 + "/animationId",
+                        }], !1;
+                        if (typeof n == "number" && isFinite(n) && (n < 0 || isNaN(n))) return r.errors = [{
+                          instancePath: e + "/animationId",
                           schemaPath: "#/properties/animationId/minimum",
                           keyword: "minimum",
                           params: { comparison: ">=", limit: 0 },
                           message: "must be >= 0"
-                        }], false;
-                        n2 = 0 === i3;
-                      } else n2 = true;
-                      if (n2) {
-                        if (void 0 !== t2.params) {
-                          let s4 = t2.params;
-                          const i3 = 0;
-                          if (!Array.isArray(s4)) return e2.errors = [{
-                            instancePath: r2 + "/params",
+                        }], !1;
+                        s = i === 0;
+                      } else s = !0;
+                      if (s) {
+                        if (t.params !== void 0) {
+                          let n = t.params;
+                          const i = 0;
+                          if (!Array.isArray(n)) return r.errors = [{
+                            instancePath: e + "/params",
                             schemaPath: "#/properties/params/type",
                             keyword: "type",
                             params: { type: "array" },
                             message: "must be array"
-                          }], false;
-                          if (s4.length > 8) return e2.errors = [{
-                            instancePath: r2 + "/params",
+                          }], !1;
+                          if (n.length > 8) return r.errors = [{
+                            instancePath: e + "/params",
                             schemaPath: "#/properties/params/maxItems",
                             keyword: "maxItems",
                             params: { limit: 8 },
                             message: "must NOT have more than 8 items"
-                          }], false;
-                          if (s4.length < 8) return e2.errors = [{ instancePath: r2 + "/params", schemaPath: "#/properties/params/minItems", keyword: "minItems", params: {
+                          }], !1;
+                          if (n.length < 8) return r.errors = [{ instancePath: e + "/params", schemaPath: "#/properties/params/minItems", keyword: "minItems", params: {
                             limit: 8
-                          }, message: "must NOT have fewer than 8 items" }], false;
+                          }, message: "must NOT have fewer than 8 items" }], !1;
                           {
-                            const t3 = s4.length;
-                            if (t3 > 0) {
-                              let t4 = s4[0];
-                              const i4 = 0;
-                              if ("number" != typeof t4 || t4 % 1 || isNaN(t4) || !isFinite(t4)) return e2.errors = [{
-                                instancePath: r2 + "/params/0",
+                            const y = n.length;
+                            if (y > 0) {
+                              let o = n[0];
+                              const p = 0;
+                              if (typeof o != "number" || o % 1 || isNaN(o) || !isFinite(o)) return r.errors = [{
+                                instancePath: e + "/params/0",
                                 schemaPath: "#/properties/params/items/0/type",
                                 keyword: "type",
                                 params: { type: "integer" },
                                 message: "must be integer"
-                              }], false;
-                              var o2 = 0 === i4;
+                              }], !1;
+                              var h = p === 0;
                             }
-                            if (o2) {
-                              if (t3 > 1) {
-                                let t4 = s4[1];
-                                const i4 = 0;
-                                if ("number" != typeof t4 || t4 % 1 || isNaN(t4) || !isFinite(t4)) return e2.errors = [{ instancePath: r2 + "/params/1", schemaPath: "#/properties/params/items/1/type", keyword: "type", params: {
+                            if (h) {
+                              if (y > 1) {
+                                let o = n[1];
+                                const p = 0;
+                                if (typeof o != "number" || o % 1 || isNaN(o) || !isFinite(o)) return r.errors = [{ instancePath: e + "/params/1", schemaPath: "#/properties/params/items/1/type", keyword: "type", params: {
                                   type: "integer"
-                                }, message: "must be integer" }], false;
-                                o2 = 0 === i4;
+                                }, message: "must be integer" }], !1;
+                                h = p === 0;
                               }
-                              if (o2) {
-                                if (t3 > 2) {
-                                  let t4 = s4[2];
-                                  const i4 = 0;
-                                  if ("number" != typeof t4 || t4 % 1 || isNaN(t4) || !isFinite(t4)) return e2.errors = [{
-                                    instancePath: r2 + "/params/2",
+                              if (h) {
+                                if (y > 2) {
+                                  let o = n[2];
+                                  const p = 0;
+                                  if (typeof o != "number" || o % 1 || isNaN(o) || !isFinite(o)) return r.errors = [{
+                                    instancePath: e + "/params/2",
                                     schemaPath: "#/properties/params/items/2/type",
                                     keyword: "type",
                                     params: { type: "integer" },
                                     message: "must be integer"
-                                  }], false;
-                                  o2 = 0 === i4;
+                                  }], !1;
+                                  h = p === 0;
                                 }
-                                if (o2) {
-                                  if (t3 > 3) {
-                                    let t4 = s4[3];
-                                    const i4 = 0;
-                                    if ("number" != typeof t4 || t4 % 1 || isNaN(t4) || !isFinite(t4)) return e2.errors = [{ instancePath: r2 + "/params/3", schemaPath: "#/properties/params/items/3/type", keyword: "type", params: {
+                                if (h) {
+                                  if (y > 3) {
+                                    let o = n[3];
+                                    const p = 0;
+                                    if (typeof o != "number" || o % 1 || isNaN(o) || !isFinite(o)) return r.errors = [{ instancePath: e + "/params/3", schemaPath: "#/properties/params/items/3/type", keyword: "type", params: {
                                       type: "integer"
-                                    }, message: "must be integer" }], false;
-                                    o2 = 0 === i4;
+                                    }, message: "must be integer" }], !1;
+                                    h = p === 0;
                                   }
-                                  if (o2) {
-                                    if (t3 > 4) {
-                                      let t4 = s4[4];
-                                      const i4 = 0;
-                                      if ("number" != typeof t4 || t4 % 1 || isNaN(t4) || !isFinite(t4)) return e2.errors = [{
-                                        instancePath: r2 + "/params/4",
+                                  if (h) {
+                                    if (y > 4) {
+                                      let o = n[4];
+                                      const p = 0;
+                                      if (typeof o != "number" || o % 1 || isNaN(o) || !isFinite(o)) return r.errors = [{
+                                        instancePath: e + "/params/4",
                                         schemaPath: "#/properties/params/items/4/type",
                                         keyword: "type",
                                         params: { type: "integer" },
                                         message: "must be integer"
-                                      }], false;
-                                      o2 = 0 === i4;
+                                      }], !1;
+                                      h = p === 0;
                                     }
-                                    if (o2) {
-                                      if (t3 > 5) {
-                                        let t4 = s4[5];
-                                        const i4 = 0;
-                                        if ("number" != typeof t4 || t4 % 1 || isNaN(t4) || !isFinite(t4)) return e2.errors = [{ instancePath: r2 + "/params/5", schemaPath: "#/properties/params/items/5/type", keyword: "type", params: {
+                                    if (h) {
+                                      if (y > 5) {
+                                        let o = n[5];
+                                        const p = 0;
+                                        if (typeof o != "number" || o % 1 || isNaN(o) || !isFinite(o)) return r.errors = [{ instancePath: e + "/params/5", schemaPath: "#/properties/params/items/5/type", keyword: "type", params: {
                                           type: "integer"
-                                        }, message: "must be integer" }], false;
-                                        o2 = 0 === i4;
+                                        }, message: "must be integer" }], !1;
+                                        h = p === 0;
                                       }
-                                      if (o2) {
-                                        if (t3 > 6) {
-                                          let t4 = s4[6];
-                                          const i4 = 0;
-                                          if ("number" != typeof t4 || t4 % 1 || isNaN(t4) || !isFinite(t4)) return e2.errors = [{
-                                            instancePath: r2 + "/params/6",
+                                      if (h) {
+                                        if (y > 6) {
+                                          let o = n[6];
+                                          const p = 0;
+                                          if (typeof o != "number" || o % 1 || isNaN(o) || !isFinite(o)) return r.errors = [{
+                                            instancePath: e + "/params/6",
                                             schemaPath: "#/properties/params/items/6/type",
                                             keyword: "type",
                                             params: { type: "integer" },
                                             message: "must be integer"
-                                          }], false;
-                                          o2 = 0 === i4;
+                                          }], !1;
+                                          h = p === 0;
                                         }
-                                        if (o2 && t3 > 7) {
-                                          let t4 = s4[7];
-                                          const i4 = 0;
-                                          if ("number" != typeof t4 || t4 % 1 || isNaN(t4) || !isFinite(t4)) return e2.errors = [{ instancePath: r2 + "/params/7", schemaPath: "#/properties/params/items/7/type", keyword: "type", params: {
+                                        if (h && y > 7) {
+                                          let o = n[7];
+                                          const p = 0;
+                                          if (typeof o != "number" || o % 1 || isNaN(o) || !isFinite(o)) return r.errors = [{ instancePath: e + "/params/7", schemaPath: "#/properties/params/items/7/type", keyword: "type", params: {
                                             type: "integer"
-                                          }, message: "must be integer" }], false;
-                                          o2 = 0 === i4;
+                                          }, message: "must be integer" }], !1;
+                                          h = p === 0;
                                         }
                                       }
                                     }
@@ -3320,196 +3277,194 @@ const D = e(function() {
                               }
                             }
                           }
-                          n2 = 0 === i3;
-                        } else n2 = true;
-                        if (n2) {
-                          if (void 0 !== t2.damage) {
-                            let s4 = t2.damage;
-                            const i3 = 0;
-                            if (!s4 || "object" != typeof s4 || Array.isArray(s4)) return e2.errors = [{
-                              instancePath: r2 + "/damage",
+                          s = i === 0;
+                        } else s = !0;
+                        if (s) {
+                          if (t.damage !== void 0) {
+                            let n = t.damage;
+                            const i = 0;
+                            if (!n || typeof n != "object" || Array.isArray(n)) return r.errors = [{
+                              instancePath: e + "/damage",
                               schemaPath: "#/properties/damage/type",
                               keyword: "type",
                               params: { type: "object" },
                               message: "must be object"
-                            }], false;
+                            }], !1;
                             {
-                              let t3;
-                              if (void 0 === s4.type && (t3 = "type") || void 0 === s4.elementId && (t3 = "elementId") || void 0 === s4.formula && (t3 = "formula") || void 0 === s4.variance && (t3 = "variance") || void 0 === s4.critical && (t3 = "critical")) return e2.errors = [{
-                                instancePath: r2 + "/damage",
+                              let y;
+                              if (n.type === void 0 && (y = "type") || n.elementId === void 0 && (y = "elementId") || n.formula === void 0 && (y = "formula") || n.variance === void 0 && (y = "variance") || n.critical === void 0 && (y = "critical")) return r.errors = [{
+                                instancePath: e + "/damage",
                                 schemaPath: "#/properties/damage/required",
                                 keyword: "required",
-                                params: { missingProperty: t3 },
-                                message: "must have required property '" + t3 + "'"
-                              }], false;
-                              if (void 0 !== s4.type) {
-                                let t4 = s4.type;
-                                const i4 = 0;
-                                if ("number" != typeof t4 || t4 % 1 || isNaN(t4) || !isFinite(t4)) return e2.errors = [{
-                                  instancePath: r2 + "/damage/type",
+                                params: { missingProperty: y },
+                                message: "must have required property '" + y + "'"
+                              }], !1;
+                              if (n.type !== void 0) {
+                                let o = n.type;
+                                const p = 0;
+                                if (typeof o != "number" || o % 1 || isNaN(o) || !isFinite(o)) return r.errors = [{
+                                  instancePath: e + "/damage/type",
                                   schemaPath: "#/properties/damage/properties/type/type",
                                   keyword: "type",
                                   params: { type: "integer" },
                                   message: "must be integer"
-                                }], false;
-                                if ("number" == typeof t4 && isFinite(t4) && (t4 < 0 || isNaN(t4))) return e2.errors = [{
-                                  instancePath: r2 + "/damage/type",
+                                }], !1;
+                                if (typeof o == "number" && isFinite(o) && (o < 0 || isNaN(o))) return r.errors = [{
+                                  instancePath: e + "/damage/type",
                                   schemaPath: "#/properties/damage/properties/type/minimum",
                                   keyword: "minimum",
                                   params: { comparison: ">=", limit: 0 },
                                   message: "must be >= 0"
-                                }], false;
-                                var p2 = 0 === i4;
-                              } else p2 = true;
-                              if (p2) {
-                                if (void 0 !== s4.elementId) {
-                                  let t4 = s4.elementId;
-                                  const i4 = 0;
-                                  if ("number" != typeof t4 || t4 % 1 || isNaN(t4) || !isFinite(t4)) return e2.errors = [{
-                                    instancePath: r2 + "/damage/elementId",
+                                }], !1;
+                                var c = p === 0;
+                              } else c = !0;
+                              if (c) {
+                                if (n.elementId !== void 0) {
+                                  let o = n.elementId;
+                                  const p = 0;
+                                  if (typeof o != "number" || o % 1 || isNaN(o) || !isFinite(o)) return r.errors = [{
+                                    instancePath: e + "/damage/elementId",
                                     schemaPath: "#/properties/damage/properties/elementId/type",
                                     keyword: "type",
                                     params: { type: "integer" },
                                     message: "must be integer"
-                                  }], false;
-                                  if ("number" == typeof t4 && isFinite(t4) && (t4 < 0 || isNaN(t4))) return e2.errors = [{
-                                    instancePath: r2 + "/damage/elementId",
+                                  }], !1;
+                                  if (typeof o == "number" && isFinite(o) && (o < 0 || isNaN(o))) return r.errors = [{
+                                    instancePath: e + "/damage/elementId",
                                     schemaPath: "#/properties/damage/properties/elementId/minimum",
                                     keyword: "minimum",
                                     params: { comparison: ">=", limit: 0 },
                                     message: "must be >= 0"
-                                  }], false;
-                                  p2 = 0 === i4;
-                                } else p2 = true;
-                                if (p2) {
-                                  if (void 0 !== s4.formula) {
-                                    const t4 = 0;
-                                    if ("string" != typeof s4.formula) return e2.errors = [{
-                                      instancePath: r2 + "/damage/formula",
+                                  }], !1;
+                                  c = p === 0;
+                                } else c = !0;
+                                if (c) {
+                                  if (n.formula !== void 0) {
+                                    if (typeof n.formula != "string") return r.errors = [{
+                                      instancePath: e + "/damage/formula",
                                       schemaPath: "#/properties/damage/properties/formula/type",
                                       keyword: "type",
                                       params: { type: "string" },
                                       message: "must be string"
-                                    }], false;
-                                    p2 = 0 === t4;
-                                  } else p2 = true;
-                                  if (p2) {
-                                    if (void 0 !== s4.variance) {
-                                      let t4 = s4.variance;
-                                      const i4 = 0;
-                                      if ("number" != typeof t4 || t4 % 1 || isNaN(t4) || !isFinite(t4)) return e2.errors = [{
-                                        instancePath: r2 + "/damage/variance",
+                                    }], !1;
+                                    c = !0;
+                                  } else c = !0;
+                                  if (c) {
+                                    if (n.variance !== void 0) {
+                                      let o = n.variance;
+                                      const p = 0;
+                                      if (typeof o != "number" || o % 1 || isNaN(o) || !isFinite(o)) return r.errors = [{
+                                        instancePath: e + "/damage/variance",
                                         schemaPath: "#/properties/damage/properties/variance/type",
                                         keyword: "type",
                                         params: { type: "integer" },
                                         message: "must be integer"
-                                      }], false;
-                                      if ("number" == typeof t4 && isFinite(t4)) {
-                                        if (t4 > 100 || isNaN(t4)) return e2.errors = [{
-                                          instancePath: r2 + "/damage/variance",
+                                      }], !1;
+                                      if (typeof o == "number" && isFinite(o)) {
+                                        if (o > 100 || isNaN(o)) return r.errors = [{
+                                          instancePath: e + "/damage/variance",
                                           schemaPath: "#/properties/damage/properties/variance/maximum",
                                           keyword: "maximum",
                                           params: { comparison: "<=", limit: 100 },
                                           message: "must be <= 100"
-                                        }], false;
-                                        if (t4 < 0 || isNaN(t4)) return e2.errors = [{
-                                          instancePath: r2 + "/damage/variance",
+                                        }], !1;
+                                        if (o < 0 || isNaN(o)) return r.errors = [{
+                                          instancePath: e + "/damage/variance",
                                           schemaPath: "#/properties/damage/properties/variance/minimum",
                                           keyword: "minimum",
                                           params: { comparison: ">=", limit: 0 },
                                           message: "must be >= 0"
-                                        }], false;
+                                        }], !1;
                                       }
-                                      p2 = 0 === i4;
-                                    } else p2 = true;
-                                    if (p2) if (void 0 !== s4.critical) {
-                                      const t4 = 0;
-                                      if ("boolean" != typeof s4.critical) return e2.errors = [{
-                                        instancePath: r2 + "/damage/critical",
+                                      c = p === 0;
+                                    } else c = !0;
+                                    if (c) if (n.critical !== void 0) {
+                                      if (typeof n.critical != "boolean") return r.errors = [{
+                                        instancePath: e + "/damage/critical",
                                         schemaPath: "#/properties/damage/properties/critical/type",
                                         keyword: "type",
                                         params: { type: "boolean" },
                                         message: "must be boolean"
-                                      }], false;
-                                      p2 = 0 === t4;
-                                    } else p2 = true;
+                                      }], !1;
+                                      c = !0;
+                                    } else c = !0;
                                   }
                                 }
                               }
                             }
-                            n2 = 0 === i3;
-                          } else n2 = true;
-                          if (n2) if (void 0 !== t2.traits) {
-                            let s4 = t2.traits;
-                            const i3 = 0;
-                            if (!Array.isArray(s4)) return e2.errors = [{ instancePath: r2 + "/traits", schemaPath: "#/properties/traits/type", keyword: "type", params: {
+                            s = i === 0;
+                          } else s = !0;
+                          if (s) if (t.traits !== void 0) {
+                            let n = t.traits;
+                            const i = 0;
+                            if (!Array.isArray(n)) return r.errors = [{ instancePath: e + "/traits", schemaPath: "#/properties/traits/type", keyword: "type", params: {
                               type: "array"
-                            }, message: "must be array" }], false;
+                            }, message: "must be array" }], !1;
                             {
-                              const t3 = s4.length;
-                              for (let i4 = 0; i4 < t3; i4++) {
-                                let t4 = s4[i4];
-                                const a3 = 0;
-                                if (!t4 || "object" != typeof t4 || Array.isArray(t4)) return e2.errors = [{
-                                  instancePath: r2 + "/traits/" + i4,
+                              const y = n.length;
+                              for (let o = 0; o < y; o++) {
+                                let p = n[o];
+                                const d = 0;
+                                if (!p || typeof p != "object" || Array.isArray(p)) return r.errors = [{
+                                  instancePath: e + "/traits/" + o,
                                   schemaPath: "#/properties/traits/items/type",
                                   keyword: "type",
                                   params: { type: "object" },
                                   message: "must be object"
-                                }], false;
+                                }], !1;
                                 {
-                                  let s5;
-                                  if (void 0 === t4.code && (s5 = "code") || void 0 === t4.dataId && (s5 = "dataId") || void 0 === t4.value && (s5 = "value")) return e2.errors = [{
-                                    instancePath: r2 + "/traits/" + i4,
+                                  let g;
+                                  if (p.code === void 0 && (g = "code") || p.dataId === void 0 && (g = "dataId") || p.value === void 0 && (g = "value")) return r.errors = [{
+                                    instancePath: e + "/traits/" + o,
                                     schemaPath: "#/properties/traits/items/required",
                                     keyword: "required",
-                                    params: { missingProperty: s5 },
-                                    message: "must have required property '" + s5 + "'"
-                                  }], false;
-                                  if (void 0 !== t4.code) {
-                                    let s6 = t4.code;
-                                    const a4 = 0;
-                                    if ("number" != typeof s6 || s6 % 1 || isNaN(s6) || !isFinite(s6)) return e2.errors = [{
-                                      instancePath: r2 + "/traits/" + i4 + "/code",
+                                    params: { missingProperty: g },
+                                    message: "must have required property '" + g + "'"
+                                  }], !1;
+                                  if (p.code !== void 0) {
+                                    let f = p.code;
+                                    const u = 0;
+                                    if (typeof f != "number" || f % 1 || isNaN(f) || !isFinite(f)) return r.errors = [{
+                                      instancePath: e + "/traits/" + o + "/code",
                                       schemaPath: "#/properties/traits/items/properties/code/type",
                                       keyword: "type",
                                       params: { type: "integer" },
                                       message: "must be integer"
-                                    }], false;
-                                    var m2 = 0 === a4;
-                                  } else m2 = true;
-                                  if (m2) {
-                                    if (void 0 !== t4.dataId) {
-                                      let s6 = t4.dataId;
-                                      const a4 = 0;
-                                      if ("number" != typeof s6 || s6 % 1 || isNaN(s6) || !isFinite(s6)) return e2.errors = [{
-                                        instancePath: r2 + "/traits/" + i4 + "/dataId",
+                                    }], !1;
+                                    var m = u === 0;
+                                  } else m = !0;
+                                  if (m) {
+                                    if (p.dataId !== void 0) {
+                                      let f = p.dataId;
+                                      const u = 0;
+                                      if (typeof f != "number" || f % 1 || isNaN(f) || !isFinite(f)) return r.errors = [{
+                                        instancePath: e + "/traits/" + o + "/dataId",
                                         schemaPath: "#/properties/traits/items/properties/dataId/type",
                                         keyword: "type",
                                         params: { type: "integer" },
                                         message: "must be integer"
-                                      }], false;
-                                      m2 = 0 === a4;
-                                    } else m2 = true;
-                                    if (m2) if (void 0 !== t4.value) {
-                                      let s6 = t4.value;
-                                      const a4 = 0;
-                                      if ("number" != typeof s6 || s6 % 1 || isNaN(s6) || !isFinite(s6)) return e2.errors = [{
-                                        instancePath: r2 + "/traits/" + i4 + "/value",
+                                      }], !1;
+                                      m = u === 0;
+                                    } else m = !0;
+                                    if (m) if (p.value !== void 0) {
+                                      let f = p.value;
+                                      const u = 0;
+                                      if (typeof f != "number" || f % 1 || isNaN(f) || !isFinite(f)) return r.errors = [{
+                                        instancePath: e + "/traits/" + o + "/value",
                                         schemaPath: "#/properties/traits/items/properties/value/type",
                                         keyword: "type",
                                         params: { type: "integer" },
                                         message: "must be integer"
-                                      }], false;
-                                      m2 = 0 === a4;
-                                    } else m2 = true;
+                                      }], !1;
+                                      m = u === 0;
+                                    } else m = !0;
                                   }
                                 }
-                                if (!(0 === a3)) break;
+                                if (d !== 0) break;
                               }
                             }
-                            n2 = 0 === i3;
-                          } else n2 = true;
+                            s = i === 0;
+                          } else s = !0;
                         }
                       }
                     }
@@ -3521,18 +3476,17 @@ const D = e(function() {
         }
       }
     }
-    return e2.errors = null, true;
+    return r.errors = null, !0;
   }
-  return T = 1, j.exports = e2, j.exports.default = e2, j.exports;
-}()), B = (e2) => D(e2);
+  return L = 1, T.exports = r, T.exports.default = r, T.exports;
+}()), ee = (r) => M(r);
 export {
-  i as isDataActor,
-  p as isDataArmor,
-  d as isDataClass,
-  g as isDataEnemy,
-  v as isDataItem,
-  I as isDataSkill,
-  A as isDataState,
-  B as isDataWeapon
+  U as isDataActor,
+  V as isDataArmor,
+  X as isDataClass,
+  Y as isDataEnemy,
+  Z as isDataItem,
+  _ as isDataSkill,
+  $ as isDataState,
+  ee as isDataWeapon
 };
-//# sourceMappingURL=rpg.es.js.map

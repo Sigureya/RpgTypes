@@ -27,8 +27,8 @@ export default defineConfig(({ mode }) => {
         entry: entryPoints,
         formats: ["es", "cjs"],
       },
-      sourcemap: true,
-      minify: false,
+      sourcemap: false,
+      minify: true,
       rollupOptions: {
         input: entryPoints,
         output: {
