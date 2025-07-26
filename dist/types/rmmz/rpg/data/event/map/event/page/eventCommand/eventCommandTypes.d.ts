@@ -1,5 +1,5 @@
-import { ColorRGBA } from '../../../../../../../../libs/utils';
-import { ValueOf } from '../../../../../../../../libs/templates/valueOf';
+import { ValueOf } from 'src/libs/templates/valueOf';
+import { ColorRGBA } from 'src/libs/utils/types';
 import { BranchParameters } from './branchParams';
 import { EventCommandLike } from './eventComandLike';
 import { MovePicture, ShopGoods, ShowPicture, Toggle, Operation_PlusMinus, Designation } from './paramaters';

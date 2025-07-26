@@ -1,4 +1,4 @@
-import { SourceIdentifier } from '../../../../../../../../libs/namedItemSource';
+import { SourceIdentifier } from '../../../../../../../../libs';
 export interface EffectDefinitionResolved {
     kindId: number;
     label: string;

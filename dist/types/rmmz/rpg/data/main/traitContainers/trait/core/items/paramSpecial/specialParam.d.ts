@@ -1,4 +1,4 @@
-import { Data_NamedItem, NamedItemSource } from '../../../../../../../../../libs/namedItemSource';
+import { Data_NamedItem, NamedItemSource } from '../../../../../../../../../libs';
 import { TraitLabelWithOption } from '../traitLabel';
 import { SpecialParamLabels } from './labels';
 export declare const defineTraitSpecialParam: (specialParam: TraitLabelWithOption<SpecialParamLabels>) => NamedItemSource;

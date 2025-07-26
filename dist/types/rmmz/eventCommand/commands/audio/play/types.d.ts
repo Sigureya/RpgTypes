@@ -1,5 +1,5 @@
-import { EventCommandLike2 } from '../../../frame';
-import { AudioFileParams } from '../../../../../libs/utils';
+import { EventCommandLike2 } from '../../..';
+import { AudioFileParams } from 'src/libs/utils';
 export interface AudioCommandBase<Code extends number> extends EventCommandLike2<Code> {
     code: Code;
     parameters: [AudioFileParams];

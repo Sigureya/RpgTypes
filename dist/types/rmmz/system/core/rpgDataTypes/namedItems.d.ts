@@ -1,3 +1,3 @@
-import { NamedItemSource } from '../../../../libs/namedItemSource';
+import { NamedItemSource } from '../../../../libs';
 import { System_RPG_DataNames, SystemLabel_DataNames } from './types';
 export declare const defineSystemItems: (system: System_RPG_DataNames, label: SystemLabel_DataNames) => NamedItemSource[];

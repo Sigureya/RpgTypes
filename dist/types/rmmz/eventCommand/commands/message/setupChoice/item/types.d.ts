@@ -1,4 +1,4 @@
-import { EventCommandLike2 } from '../../../../frame';
+import { EventCommandLike2 } from '../../../..';
 export interface ParamObject_ShowChoiceWhen {
     index: number;
     name: string;

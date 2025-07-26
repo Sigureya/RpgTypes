@@ -1,4 +1,4 @@
-import { AudioFileParams } from '../../../../../libs/utils';
+import { AudioFileParams } from '../../../../../libs';
 import { Command_PlayBGM, Command_PlayBGS, Command_PlayME, Command_PlaySE, Command_ChangeDefeatME, Command_ChangeVictoryME, Command_ChangeBattleBGM, CommandUnion_AnyAudio } from './types';
 export declare const makeAudioCommand: <Code extends CommandUnion_AnyAudio["code"]>(code: Code, filename: string) => {
     code: Code;

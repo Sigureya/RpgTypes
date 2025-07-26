@@ -1,4 +1,4 @@
-import { PickByTypeKeys } from '../../../../../templates';
+import { PickByTypeKeys } from 'src/libs/templates';
 export interface FormatItemMapper<T> {
     placeHolder: string;
     kindKey: PickByTypeKeys<T, number>;

@@ -1,6 +1,6 @@
-import { ParamArray_ControlVariables } from '../../../../../../../eventCommand';
-import { AudioFileParams, ColorRGBA } from '../../../../../../../../libs/utils';
-import { ValueOf } from '../../../../../../../../libs/templates/valueOf';
+import { AudioFileParams, ColorRGBA } from 'src/libs';
+import { ValueOf } from 'src/libs/templates/valueOf';
+import { ParamArray_ControlVariables } from 'src/rmmz/eventCommand';
 import { BranchParameters } from './branchParams';
 import { EventCommandLike } from './eventComandLike';
 import { Command_RotatePicture, Command_SetEventLocation, Command_SetVehicleLocation, Command_TintPicture } from './eventCommandTypes';

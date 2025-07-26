@@ -1,4 +1,4 @@
-declare const SCHEMA_AUDIO_FILE_PARAMS_SYSTEM: {
+export declare const SCHEMA_AUDIO_FILE_PARAMS_SYSTEM: {
     readonly type: "object";
     readonly properties: {
         readonly name: {

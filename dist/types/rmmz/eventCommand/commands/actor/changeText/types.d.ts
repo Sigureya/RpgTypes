@@ -1,4 +1,4 @@
-import { EventCommandLike2 } from '../../../frame';
+import { EventCommandLike2 } from 'dist/types/rmmz/eventCommand';
 export type ParamArray_ChangeActorText = [actorId: number, text: string];
 export interface ParamObject_ChangeActorName {
     actorId: number;

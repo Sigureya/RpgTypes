@@ -1,5 +1,5 @@
-import { EventCommandLike2 } from '../../frame';
-import { ValueOf } from '../../../../libs/templates/valueOf';
+import { EventCommandLike2 } from '../..';
+import { ValueOf } from 'src/libs/templates/valueOf';
 export interface Command_ControlTimer extends EventCommandLike2<124> {
     parameters: [operation: ValueOf<Operation_PlusMinus>, time: number];
 }

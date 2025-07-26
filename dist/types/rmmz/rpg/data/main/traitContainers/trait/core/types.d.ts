@@ -1,4 +1,4 @@
-import { SourceIdentifier } from '../../../../../../../libs/namedItemSource';
+import { SourceIdentifier } from '../../../../../../../libs';
 import { TraitCode } from './constants';
 export interface TraitFormat {
     pattern: string;

@@ -1,4 +1,4 @@
-import { ValueOf } from '../../../../../libs/templates/valueOf';
+import { ValueOf } from 'src/libs/templates/valueOf';
 import { STATUS } from './actor/dataSource';
 import { CHARACTER } from './character/dataSource';
 import { VARIABLE_SRC_LAST } from './last/dataSource';
