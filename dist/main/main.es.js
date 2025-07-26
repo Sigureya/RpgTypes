@@ -1,16 +1,22 @@
 import { buildReferenceItemSources, compileItemEffectDisplayData, compileTraitDisplayData } from "../features/features.es.js";
-import { g as se } from "../shared/index.es.js";
-import { i } from "../shared/index.es.js";
 import { AUTHOR_RMMZ, SRC_COLOR, detectFormatErrors, domainNames, isValidNumber } from "../libs/libs.es.js";
 import { a, c, m } from "../shared/make.es.js";
 import { m as m2 } from "../shared/mergeItemsSource.es.js";
-import { cB, ce, cp, bt, cb, bv, co, bC, bz, ct, cu, cv, cD, cm, bA, bq, ci, br, by, cj, cn, cr, cc, bu, bO, cs, bx, ca, ck, bK, bD, cq, bw, bs, bB, bc, bb, bj, be, bf, bo, bm, bp, bn, dD, em, dX, dY, eO, eP, dZ, cx, cw, cy, bN, b_, bi, bR, c1, c5, bQ, aA, aJ, aF, aB, aL, aG, aD, aM, aC, aI, az, aK, aH, aE, bT, aP, ai, al, ak, aj, aN, aO, am, an, ao, ap, aq, ar, as, at, au, av, aw, ax, ay, aQ, cA, cF, bP, cd, bJ, dR, dT, dS, b7, bk, dQ, eQ, eR, bl, dC, dV, dO, bg, bh, ea, bX, ch, b2, cC, cE, O, R, Q, S, P, c0, c4, c6, c9, c7, cJ, cK, cl, c3, cG, bY, ds, de, dq, dr, dd, dk, dj, cM, c_, cX, cZ, cN, cY, cO, cR, cS, cV, cP, cW, cQ, cT, cU, dt, du, di, dh, dc, db, dm, dl, dp, dn, d6, d5, d4, d7, da, d0, d1, d8, d2, d9, d3, c$, dg, df, c2, cH, cI, bH, b8, bG, bI, bF, b$, bU, cf, cg, bL, bM, cz, b5, b6, b3, b4, bW, b9, ba, bd, dW, eb, ei, ej, ek, ed, eg, ec, ef, ee, el, eh, c8, bZ, bS, bE, bV, G, a1, a0, s, aX, aU, cL, e3, aY, dU, dN, n, o, y, D, B, I, aV, $, eA, aW, _, eu, ew, ey, es, eB, e8, eJ, ex, et, ev, ez, a2, a3, af, ae, a7, aa, a5, ah, ag, a4, a9, a8, ab, ac, ad, a6, e0, dB, dA, e1, en, e2, aT, dF, dH, c as c10, eG, dI, d, m as m3, a as a10, b, i as i2, k, j, v, u, l, q, z, e, f, g, h, N, M, L, F, A, H, K, r, w, aZ, dE, eI, dJ, eN, dK, dL, b1, eH, eC, eD, d_, dy, dv, dw, dx, dz, eE, eF, eK, e4, d$, eq, er, dM, ep, eo, eL, a_, b0, a$, eM, dP, dG, aR, e6, e5, e7, e9, aS, t, p, x, Y, T, Z, X, V, W, U, E, C, J } from "../shared/plugin.es.js";
-import { E as E2, F as F2, G as G2, D as D2, aB as aB2, aC as aC2, az as az2, aI as aI2, ay as ay2, aG as aG2, aH as aH2, aw as aw2, ax as ax2, aD as aD2, aE as aE2, aA as aA2, aF as aF2, K as K2, N as N2, J as J2, I as I2, H as H2, O as O2, L as L2, M as M2, P as P2, Q as Q2, ap as ap2, aq as aq2, as as as2, ar as ar2, aj as aj2, am as am2, ah as ah2, ai as ai2, al as al2, ak as ak2, $ as $2, X as X2, Y as Y2, a0 as a02, Z as Z2, V as V2, W as W2, _ as _2, ad as ad2, ac as ac2, a5 as a52, a8 as a82, ab as ab2, aa as aa2, a7 as a72, a6 as a62, a9 as a92, a4 as a42, x as x2, i as i3, m as m4, k as k2, j as j2, l as l2, z as z2, b as b10, T as T2, t as t2, u as u2, v as v2, s as s2, f as f2, A as A2, p as p2, q as q2, n as n2, o as o2, w as w2, h as h2, y as y2, c as c11, e as e10, g as g2, C as C2, d as d10, aQ as aQ2, B as B2, R as R2, a as a11, an as an2, a1 as a12, at as at2, ae as ae2, U as U2, S as S2, aO as aO2, aK as aK2, aL as aL2, aM as aM2, aP as aP2, aJ as aJ2, aN as aN2, ao as ao2, a3 as a32, a2 as a22, av as av2, r as r2, au as au2, ag as ag2, af as af2 } from "../shared/namedItems.es.js";
+import { cB, ce, cp, bt, cb, bv, co, bC, bz, ct, cu, cv, cD, cm, bA, bq, ci, br, by, cj, cn, cr, cc, bu, bO, cs, bx, ca, ck, bK, bD, cq, bw, bs, bB, bc, bb, bj, be, bf, bo, bm, bp, bn, dD, em, dX, dY, eO, eP, dZ, cx, cw, cy, bN, b_, bi, bR, c1, c5, bQ, aA, aJ, aF, aB, aL, aG, aD, aM, aC, aI, az, aK, aH, aE, bT, aP, ai, al, ak, aj, aN, aO, am, an, ao, ap, aq, ar, as, at, au, av, aw, ax, ay, aQ, cA, cF, bP, cd, bJ, dR, dT, dS, b7, bk, dQ, eQ, eR, bl, dC, dV, dO, bg, bh, ea, bX, ch, b2, cC, cE, O, R, Q, S, P, c0, c4, c6, c9, c7, cJ, cK, cl, c3, cG, bY, ds, de, dq, dr, dd, dk, dj, cM, c_, cX, cZ, cN, cY, cO, cR, cS, cV, cP, cW, cQ, cT, cU, dt, du, di, dh, dc, db, dm, dl, dp, dn, d6, d5, d4, d7, da, d0, d1, d8, d2, d9, d3, c$, dg, df, c2, cH, cI, bH, b8, bG, bI, bF, b$, bU, cf, cg, bL, bM, cz, b5, b6, b3, b4, bW, b9, ba, bd, dW, eb, ei, ej, ek, ed, eg, ec, ef, ee, el, eh, c8, bZ, bS, bE, bV, G, a1, a0, s, aX, aU, cL, e3, aY, dU, dN, n, o, y, D, B, I, aV, $, eA, aW, _, eu, ew, ey, es, eB, e8, eJ, ex, et, ev, ez, a2, a3, af, ae, a7, aa, a5, ah, ag, a4, a9, a8, ab, ac, ad, a6, e0, dB, dA, e1, en, e2, aT, dF, dH, c as c10, eG, dI, d, m as m3, a as a10, b, i, k, j, v, u, l, q, z, e, f, g, h, N, M, L, F, A, H, K, r, w, aZ, dE, eI, dJ, eN, dK, dL, b1, eH, eC, eD, d_, dy, dv, dw, dx, dz, eE, eF, eK, e4, d$, eq, er, dM, ep, eo, eL, a_, b0, a$, eM, dP, dG, aR, e6, e5, e7, e9, aS, t, p, x, Y, T, Z, X, V, W, U, E, C, J } from "../shared/plugin.es.js";
+import { E as E2, F as F2, G as G2, D as D2, aB as aB2, aC as aC2, az as az2, aI as aI2, ay as ay2, aG as aG2, aH as aH2, aw as aw2, ax as ax2, aD as aD2, aE as aE2, aA as aA2, aF as aF2, K as K2, N as N2, J as J2, I as I2, H as H2, O as O2, L as L2, M as M2, P as P2, Q as Q2, ap as ap2, aq as aq2, as as as2, ar as ar2, aj as aj2, am as am2, ah as ah2, ai as ai2, al as al2, ak as ak2, $ as $2, X as X2, Y as Y2, a0 as a02, Z as Z2, V as V2, W as W2, _ as _2, ad as ad2, ac as ac2, a5 as a52, a8 as a82, ab as ab2, aa as aa2, a7 as a72, a6 as a62, a9 as a92, a4 as a42, x as x2, i as i2, m as m4, k as k2, j as j2, l as l2, z as z2, b as b10, T as T2, t as t2, u as u2, v as v2, s as s2, f as f2, A as A2, p as p2, q as q2, n as n2, o as o2, w as w2, h as h2, y as y2, c as c11, e as e10, g as g2, C as C2, d as d10, aQ as aQ2, B as B2, R as R2, a as a11, an as an2, a1 as a12, at as at2, ae as ae2, U as U2, S as S2, aO as aO2, aK as aK2, aL as aL2, aM as aM2, aP as aP2, aJ as aJ2, aN as aN2, ao as ao2, a3 as a32, a2 as a22, av as av2, r as r2, au as au2, ag as ag2, af as af2 } from "../shared/namedItems.es.js";
+import { g as se } from "../shared/index.es.js";
+import { i as i3 } from "../shared/index.es.js";
 var te, re = { exports: {} };
 const ie = se(function() {
   if (te) return re.exports;
   function e11(a13, { instancePath: s3 = "", parentData: t3, parentDataProperty: r3, rootData: i4 = a13 } = {}) {
-    if (!a13 || "object" != typeof a13 || Array.isArray(a13)) return e11.errors = [{ instancePath: s3, schemaPath: "#/type", keyword: "type", params: { type: "object" }, message: "must be object" }], false;
+    if (!a13 || "object" != typeof a13 || Array.isArray(a13)) return e11.errors = [{
+      instancePath: s3,
+      schemaPath: "#/type",
+      keyword: "type",
+      params: { type: "object" },
+      message: "must be object"
+    }], false;
     {
       let t4;
       if (void 0 === a13.name && (t4 = "name") || void 0 === a13.id && (t4 = "id") || void 0 === a13.nickname && (t4 = "nickname") || void 0 === a13.battlerName && (t4 = "battlerName") || void 0 === a13.characterName && (t4 = "characterName") || void 0 === a13.characterIndex && (t4 = "characterIndex") || void 0 === a13.faceName && (t4 = "faceName") || void 0 === a13.faceIndex && (t4 = "faceIndex") || void 0 === a13.classId && (t4 = "classId") || void 0 === a13.initialLevel && (t4 = "initialLevel") || void 0 === a13.maxLevel && (t4 = "maxLevel")) return e11.errors = [{
@@ -1329,7 +1335,7 @@ export {
   bZ as TINT_PICTURE,
   bS as TINT_SCREEN,
   x2 as TRAIT_ACTION_PLUS,
-  i3 as TRAIT_ATTACK_ELEMENT,
+  i2 as TRAIT_ATTACK_ELEMENT,
   m4 as TRAIT_ATTACK_SKILL,
   k2 as TRAIT_ATTACK_SPEED,
   j2 as TRAIT_ATTACK_STATE,
@@ -1414,7 +1420,7 @@ export {
   aJ2 as getVariableNames,
   ez as getWeaponCategoryEnabled,
   aN2 as getWeaponTypes,
-  i as isAudioCommand,
+  i3 as isAudioCommand,
   a2 as isCloneableCommand,
   a3 as isCommandChangeActorText,
   af as isCommandCommentBody,
@@ -1452,7 +1458,7 @@ export {
   m3 as makeCommandChangeActorName,
   a10 as makeCommandChangeActorNickName,
   b as makeCommandChangeActorProfile,
-  i2 as makeCommandChangeBattleBGM,
+  i as makeCommandChangeBattleBGM,
   k as makeCommandChangeDefeatME,
   j as makeCommandChangeVictoryME,
   v as makeCommandCommentBody,
