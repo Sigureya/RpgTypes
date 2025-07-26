@@ -1,11 +1,11 @@
 import type { JSONSchemaType } from "ajv";
 import type { AudioFileParams } from "src/utils";
 import type { JSONSchemaAudioFileParams } from "src/utils/types/audioFileParams/schemaType";
-import type { CommandUnion_AnyAudio } from "./types";
+import type { CommandUnion_AnyAudio } from "../../../../../rmmz/eventCommand/commands/audio/play/types";
 
 // enumは意図的に直書き。
 // 定数を使うとimport解決でエラーが起こる
-const SCHEMA_COMMAND_ANY_AUDIO = {
+export const SCHEMA_COMMAND_ANY_AUDIO = {
   type: "object",
   required: ["code", "parameters", "indent"],
 
@@ -36,5 +36,3 @@ const SCHEMA_COMMAND_ANY_AUDIO = {
   },
   additionalProperties: false,
 } as const satisfies JSONSchemaType<CommandUnion_AnyAudio>;
-
-export default SCHEMA_COMMAND_ANY_AUDIO;
