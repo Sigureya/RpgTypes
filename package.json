@@ -11,6 +11,26 @@
       "types": "./dist/main/index.d.ts",
       "import": "./dist/main/rpgTypes.es.js",
       "require": "./dist/main/rpgTypes.cjs.js"
+    },
+    "./app": {
+      "types": "./dist/app/index.d.ts",
+      "import": "./dist/app/app.es.js",
+      "require": "./dist/app/app.cjs.js"
+    },
+    "./libs": {
+      "types": "./dist/libs/index.d.ts",
+      "import": "./dist/libs/libs.es.js",
+      "require": "./dist/libs/libs.cjs.js"
+    },
+    "./rmmz": {
+      "types": "./dist/rmmz/index.d.ts",
+      "import": "./dist/rmmz/rmmz.es.js",
+      "require": "./dist/rmmz/rmmz.cjs.js"
+    },
+    "./validate": {
+      "types": "./dist/validate/index.d.ts",
+      "import": "./dist/validate/validate.es.js",
+      "require": "./dist/validate/validate.cjs.js"
     }
   },
   "files": [
