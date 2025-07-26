@@ -55,7 +55,7 @@ const testPickCommands = (
   });
 };
 
-describe.skip("pickCommands  - should handle a single head and a single body", () => {
+describe("pickCommands  - should handle a single head and a single body", () => {
   const commands: EventCommand[] = [
     makeCommandShowMessage({}),
     makeCommandShowMessageBody("bbb"),
@@ -93,7 +93,7 @@ describe.skip("pickCommands  - should handle a single head and a single body", (
     });
   });
 
-  describe.skip("Valid cases with multiple bodies", () => {
+  describe("Valid cases with multiple bodies", () => {
     const mockFn = makeMockFunctions();
     const commands: EventCommand[] = [
       makeCommandShowMessage({}),
@@ -137,7 +137,7 @@ describe.skip("pickCommands  - should handle a single head and a single body", (
     });
   });
 });
-describe.skip("pickCommands - Complex Cases", () => {
+describe("pickCommands - Complex Cases", () => {
   const commands: EventCommand[] = [
     makeCommandShowMessage({ speakerName: "alice" }),
     makeCommandShowMessageBody("bbb"),
@@ -161,7 +161,7 @@ describe.skip("pickCommands - Complex Cases", () => {
     );
   });
 
-  describe.skip("Valid case with multiple bodies", () => {
+  describe("Valid case with multiple bodies", () => {
     const mockFn = makeMockFunctions();
     testPickCommands(
       "should pick a valid head with multiple bodies",
