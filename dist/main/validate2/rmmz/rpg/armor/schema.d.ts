@@ -73,4 +73,3 @@ export declare const SCHEMA_DATA_ARMMOR: {
         };
     };
 };
-export default SCHEMA_DATA_ARMMOR;

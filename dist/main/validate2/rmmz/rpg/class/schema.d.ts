@@ -81,4 +81,3 @@ export declare const SCHEMA_DATA_CLASS: {
     };
     additionalProperties: false;
 };
-export default SCHEMA_DATA_CLASS;
