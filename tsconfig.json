@@ -12,6 +12,7 @@
     "noEmit": false,
     "emitDeclarationOnly": true,
     "baseUrl": "./",
+    "rootDir": "src",
     "paths": {
       "src/*": ["src/libs/*"],
       "src/rmmz/eventCommand": ["src/rmmz/eventCommand"],
@@ -23,6 +24,6 @@
       "@RpgTypes/*": ["src/libs/*"]
     }
   },
-  "include": ["src/**/*"],
+  "include": ["./src/**/*"],
   "exclude": ["node_modules", ".vscode"]
 }
