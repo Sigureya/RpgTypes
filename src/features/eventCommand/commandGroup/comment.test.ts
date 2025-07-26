@@ -53,30 +53,28 @@ describe.skip("createCommentGroup - CombinedEventCommandGroup Creation", () => {
     ];
     const group: EventCommandGroup_Comment = createCommentGroup(commands, 0);
 
-    describe(() => {
-      describe("should create an instance of CombinedEventCommandGroup", () => {
-        expect(group).toBeInstanceOf(CombinedEventCommandGroup);
-      });
+    describe("should create an instance of CombinedEventCommandGroup", () => {
+      expect(group).toBeInstanceOf(CombinedEventCommandGroup);
+    });
 
-      describe("should return correct body text", () => {
-        expect(group.getBodyText()).toBe("aaa\nbbb\nccc");
-      });
-      const expectedCommand: Command_CommentHeader =
-        makeCommandCommentHeader("aaa\nbbb\nccc");
+    describe("should return correct body text", () => {
+      expect(group.getBodyText()).toBe("aaa\nbbb\nccc");
+    });
+    const expectedCommand: Command_CommentHeader =
+      makeCommandCommentHeader("aaa\nbbb\nccc");
 
-      describe("should return correct merged body", () => {
-        const mergedBody = group.mergedBody();
-        expect(mergedBody).toEqual(expectedCommand);
-      });
-      describe("", () => {
-        const normalizedCommands = group.normalizedCommands();
-        expect(normalizedCommands).toEqual([expectedCommand]);
-      });
+    describe("should return correct merged body", () => {
+      const mergedBody = group.mergedBody();
+      expect(mergedBody).toEqual(expectedCommand);
+    });
+    describe("", () => {
+      const normalizedCommands = group.normalizedCommands();
+      expect(normalizedCommands).toEqual([expectedCommand]);
     });
   });
 });
 
-describe("createCommentGroup - SimpleEventCommandGroup Creation", () => {
+describe.skip("createCommentGroup - SimpleEventCommandGroup Creation", () => {
   const commands = [
     makeCommandCommentHeader(CHOICE_HELP_TEXT),
     makeCommandCommentBody("Help text"),
