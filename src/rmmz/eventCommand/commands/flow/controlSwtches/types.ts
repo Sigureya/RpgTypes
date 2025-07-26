@@ -1,5 +1,5 @@
 import type { EventCommandLike, Toggle } from "@RpgTypes/rpg";
-import type { ValueOf } from "src/templates/valueOf";
+import type { ValueOf } from "src/libs/templates/valueOf";
 
 export interface Command_ControlSwitches extends EventCommandLike<121> {
   parameters: ParamArray_ControlSwitches;

@@ -32,8 +32,8 @@ import {
   DEFAULT_SYSTEM_LABELS_DATA_TYPES,
   defineSystemItems,
 } from "@RpgTypes/system";
+import type { DomainName } from "src/libs/templates";
 import type { Data_NamedItem, NamedItemSource } from "src/namedItemSource";
-import type { DomainName } from "src/templates";
 import { buildReferenceItemSources } from "./formatTraits";
 
 const mockNormalLabel: NormalLabel = { normal: "Normal" };

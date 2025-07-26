@@ -1,4 +1,5 @@
 import { describe, test, expect } from "vitest";
+import type { AudioFileParams } from "src/libs";
 import type {
   Command_ChangeBattleBGM,
   Command_ChangeDefeatME,
@@ -17,7 +18,6 @@ import {
   makeCommandChangeVictoryME,
   makeCommandChangeDefeatME,
 } from "src/rmmz/eventCommand";
-import type { AudioFileParams } from "src/utils";
 const validate = require("./playAudioValidate.cjs");
 const isCommandAudio = (x: unknown): boolean => {
   return validate(x);

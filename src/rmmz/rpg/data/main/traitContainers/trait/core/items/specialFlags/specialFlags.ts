@@ -1,5 +1,5 @@
+import type { DomainLabel } from "src/libs/templates";
 import type { Data_NamedItem, NamedItemSource } from "src/namedItemSource";
-import type { DomainLabel } from "src/templates";
 import type { SourceId_TraitSpecialFlag } from "../sourceIdTypes";
 import {
   FLAG_ID_AUTO_BATTLE,

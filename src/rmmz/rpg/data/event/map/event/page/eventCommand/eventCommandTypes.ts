@@ -1,5 +1,5 @@
 import type { ColorRGBA } from "@RpgTypes/utils";
-import type { ValueOf } from "src/templates/valueOf";
+import type { ValueOf } from "src/libs/templates/valueOf";
 import type { BranchParameters } from "./branchParams";
 import type { EventCommandLike } from "./eventComandLike";
 import type {

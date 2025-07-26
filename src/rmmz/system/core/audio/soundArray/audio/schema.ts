@@ -1,7 +1,7 @@
 import type { JSONSchemaType } from "ajv";
-import type { AudioFileParams } from "src/utils";
+import type { AudioFileParams } from "src/libs/utils";
 
-const SCHEMA_AUDIO_FILE_PARAMS_SYSTEM = {
+export const SCHEMA_AUDIO_FILE_PARAMS_SYSTEM = {
   type: "object",
   properties: {
     name: { type: "string" },

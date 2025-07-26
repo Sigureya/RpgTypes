@@ -1,6 +1,6 @@
 import { describe, test, expect } from "vitest";
 import Ajv from "ajv";
-import type { AudioFileParams } from "src/utils";
+import type { AudioFileParams } from "src/libs/utils";
 import SCHEMA_MAP_EVENT_PAGE from "./event/page/schema";
 import { makeMapData } from "./make";
 import type { Data_Map } from "./map";

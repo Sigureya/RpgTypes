@@ -1,4 +1,4 @@
-import type { DomainLabel } from "src/templates";
+import type { DomainLabel } from "src/libs";
 import type { DataLabels } from "./dataLabels";
 import type {
   ActorLabels,
