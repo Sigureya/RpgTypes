@@ -14,13 +14,8 @@
     "baseUrl": "./",
     "rootDir": "src",
     "paths": {
-      "src/*": ["src/*"],
-      "src/rmmz/eventCommand": ["src/rmmz/eventCommand"],
-      "src/namedItemSource": ["src/libs/namedItemSource"],
-      "@RpgTypes/rpg": ["src/rmmz/rpg"],
-      "@RpgTypes/system": ["src/rmmz/system"],
-      "@RpgTypes/eventCommand": ["src/rmmz/eventCommand"],
-      "@RpgTypes/eventCommand/frame": ["src/rmmz/eventCommand/frame"]
+      "@RpgTypes/*": ["src/*"],
+      "@RpgTypes/rpg": ["src/rmmz"]
     }
   },
   "include": ["./src/**/*"],

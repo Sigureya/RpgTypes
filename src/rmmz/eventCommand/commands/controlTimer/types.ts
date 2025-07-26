@@ -1,4 +1,4 @@
-import type { EventCommandLike2 } from "@RpgTypes/eventCommand/frame";
+import type { EventCommandLike2 } from "@RpgTypes/rmmz/eventCommand";
 import type { ValueOf } from "src/libs/templates/valueOf";
 
 export interface Command_ControlTimer extends EventCommandLike2<124> {

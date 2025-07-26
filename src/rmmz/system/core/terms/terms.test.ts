@@ -1,5 +1,5 @@
 import { describe, expect, test } from "vitest";
-import type { Data_NamedItem } from "src/namedItemSource";
+import type { Data_NamedItem } from "@RpgTypes/libs";
 import { getParamNames } from "./terms";
 import type { System_Terms_Params } from "./types";
 

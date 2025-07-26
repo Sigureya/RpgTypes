@@ -1,4 +1,4 @@
-import type { Data_NamedItem } from "src/namedItemSource";
+import type { Data_NamedItem } from "@RpgTypes/libs";
 
 export interface Data_Tileset extends Data_NamedItem {
   note: string;

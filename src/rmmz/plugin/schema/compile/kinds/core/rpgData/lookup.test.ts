@@ -1,9 +1,9 @@
 import { describe, expect, test } from "vitest";
-import type { SourceIdUnion_RpgData } from "@RpgTypes/rpg";
+import type { SourceIdUnion_RpgData } from "@RpgTypes/rmmz/rpg";
 import type {
   SourceId_SystemSwitches,
   SourceId_SystemVariables,
-} from "@RpgTypes/system";
+} from "@RpgTypes/rmmz/system";
 import type { SourceId_RmmzUnknown } from "./lookup";
 import { lookupKind, isRmmzDataKind } from "./lookup";
 import type {

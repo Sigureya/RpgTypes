@@ -1,4 +1,4 @@
-import type { EventCommandLike2 } from "@RpgTypes/eventCommand/frame";
+import type { EventCommandLike2 } from "@RpgTypes/rmmz/eventCommand";
 import type { AudioFileParams } from "src/libs/utils";
 
 export interface AudioCommandBase<Code extends number>

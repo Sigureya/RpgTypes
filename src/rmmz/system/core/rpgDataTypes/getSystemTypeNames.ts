@@ -1,4 +1,4 @@
-import type { Data_NamedItem } from "src/namedItemSource";
+import type { Data_NamedItem } from "@RpgTypes/libs";
 import type { System_RPG_DataNames } from "./types";
 
 const makeNamedItem = (name: string, index: number): Data_NamedItem => ({

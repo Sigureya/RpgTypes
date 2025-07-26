@@ -1,4 +1,4 @@
-import type { Data_System } from "@RpgTypes/system";
+import type { Data_System } from "@RpgTypes/rmmz/system";
 import type { ControlCharInfo } from "./controlChars";
 import { createControlCharFormat } from "./controlChars";
 import { CTRL_CHAR_ACTOR, CTRL_CHAR_VARIABLE } from "./controlChars/constants";

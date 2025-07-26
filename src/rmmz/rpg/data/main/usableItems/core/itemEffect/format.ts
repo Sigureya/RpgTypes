@@ -1,4 +1,4 @@
-import type { Data_NamedItem } from "src/namedItemSource";
+import type { Data_NamedItem } from "@RpgTypes/libs";
 import type { ItemEffect } from "./itemEffect";
 import type { EffectDefinitionResolved } from "./labels";
 const FORMAT_NAME = "{name}" as const;

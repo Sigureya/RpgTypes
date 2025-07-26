@@ -1,4 +1,4 @@
-import type { NamedItemSource } from "src/namedItemSource";
+import type { NamedItemSource } from "@RpgTypes/libs";
 import type { Data_CommonEventLike } from "./event";
 import type { GameData } from "./gameDataTypes";
 import type {

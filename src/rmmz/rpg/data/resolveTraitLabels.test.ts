@@ -1,5 +1,5 @@
 import { describe, test, expect } from "vitest";
-import type { SourceIdentifier } from "src/namedItemSource";
+import type { SourceIdentifier } from "@RpgTypes/libs";
 import { LABEL_SET_TRAIT } from "./main/traitContainers/trait/core/default";
 import type { TraitFormat } from "./main/traitContainers/trait/core/types";
 import { resolveTraitLabels } from "./resolveTraitLabels";

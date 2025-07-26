@@ -1,4 +1,4 @@
-import type { EventCommandUnknown } from "@RpgTypes/eventCommand";
+import type { EventCommandUnknown } from "@RpgTypes/rmmz/eventCommand";
 import type { JSONSchemaType } from "ajv";
 import type {
   BattleEventPage,

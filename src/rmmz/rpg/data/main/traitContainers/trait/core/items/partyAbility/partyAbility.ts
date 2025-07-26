@@ -1,5 +1,5 @@
+import type { Data_NamedItem, NamedItemSource } from "@RpgTypes/libs";
 import type { DomainLabel } from "src/libs/templates";
-import type { Data_NamedItem, NamedItemSource } from "src/namedItemSource";
 import type { SourceId_TraitPartyAbility } from "../sourceIdTypes";
 import {
   PARTY_ABILITY_ENCOUNTER_HALF,

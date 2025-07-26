@@ -1,16 +1,16 @@
 import type {
-  FormatErrorLabels,
-  FormatRule,
-  FormatWithSource,
   Data_NamedItem,
   FormatErrorGroup,
+  FormatErrorLabels,
   FormatInput,
-} from "src/namedItemSource";
+  FormatRule,
+  FormatWithSource,
+} from "@RpgTypes/libs";
 import {
-  detectFormatErrors,
   applyFormatRule,
   compileFormatRule,
-} from "src/namedItemSource";
+  detectFormatErrors,
+} from "@RpgTypes/libs";
 import type { Trait } from "./types";
 
 const RULE_TRAIT = {

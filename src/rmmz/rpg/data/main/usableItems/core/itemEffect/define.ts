@@ -1,3 +1,4 @@
+import type { SourceIdentifier } from "@RpgTypes/libs";
 import {
   EFFECT_SPECIAL,
   type SourceId_DataCommonEvent,
@@ -5,7 +6,6 @@ import {
   type SourceId_DataState,
   type SourceId_TraitRegularParam,
 } from "@RpgTypes/rpg";
-import type { SourceIdentifier } from "src/namedItemSource";
 import {
   EFFECT_ADD_STATE,
   EFFECT_GROW,

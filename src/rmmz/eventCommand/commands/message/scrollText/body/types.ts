@@ -1,4 +1,4 @@
-import type { EventCommandLike2 } from "@RpgTypes/eventCommand";
+import type { EventCommandLike2 } from "@RpgTypes/rmmz/eventCommand";
 
 export type ParamArray_ScrollTextBody = [content: string];
 export interface ParamObject_ScrollTextBody {

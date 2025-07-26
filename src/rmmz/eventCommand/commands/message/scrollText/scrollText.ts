@@ -1,4 +1,4 @@
-import { SHOW_SCROLLING_TEXT, SHOW_SCROLLING_TEXT_BODY } from "@RpgTypes/rpg";
+import { SHOW_SCROLLING_TEXT, SHOW_SCROLLING_TEXT_BODY } from "@RpgTypes/rmmz";
 import type {
   ParamArray_ScrollTextBody,
   ParamObject_ScrollTextBody,

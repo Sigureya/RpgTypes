@@ -1,5 +1,5 @@
 import { describe, expect, test } from "vitest";
-import type { Data_NamedItem } from "src/namedItemSource";
+import type { Data_NamedItem } from "@RpgTypes/libs";
 import { collapsOptionsToArray } from "./collaps";
 import {
   COLLAPS_NORMAL,

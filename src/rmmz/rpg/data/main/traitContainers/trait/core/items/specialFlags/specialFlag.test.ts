@@ -1,5 +1,5 @@
 import { describe, expect, test } from "vitest";
-import type { Data_NamedItem } from "src/namedItemSource";
+import type { Data_NamedItem } from "@RpgTypes/libs";
 import {
   FLAG_ID_AUTO_BATTLE,
   FLAG_ID_GUARD,

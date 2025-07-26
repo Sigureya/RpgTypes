@@ -1,5 +1,5 @@
-import type { GlobalLabel, TraitLabelSet } from "@RpgTypes/rpg";
-import type { NamedItemSource } from "src/namedItemSource";
+import type { NamedItemSource } from "@RpgTypes/libs";
+import type { GlobalLabel, TraitLabelSet } from "@RpgTypes/rmmz";
 import {
   defineTraitRegularParam,
   defineTraitExtraParam,

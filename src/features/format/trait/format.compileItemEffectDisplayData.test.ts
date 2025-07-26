@@ -1,4 +1,7 @@
 import { test, expect, describe } from "vitest";
+import type { Data_NamedItem, FormatCompiled } from "@RpgTypes/libs";
+import type { System_RPG_DataNames } from "@RpgTypes/rmmz/system";
+import { DEFAULT_SYSTEM_LABELS_DATA_TYPES } from "@RpgTypes/rmmz/system";
 import type {
   Data_Actor,
   Data_Armor,
@@ -41,9 +44,6 @@ import {
   EFFECT_REMOVE_STATE,
   EFFECT_SPECIAL,
 } from "@RpgTypes/rpg";
-import type { System_RPG_DataNames } from "@RpgTypes/system";
-import { DEFAULT_SYSTEM_LABELS_DATA_TYPES } from "@RpgTypes/system";
-import type { Data_NamedItem, FormatCompiled } from "src/namedItemSource";
 import {
   buildReferenceItemSources,
   compileItemEffectDisplayData,

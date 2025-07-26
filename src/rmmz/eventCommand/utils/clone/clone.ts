@@ -1,7 +1,7 @@
 import type {
   EventCommandLike2,
   EventCommandUnknown,
-} from "@RpgTypes/eventCommand";
+} from "@RpgTypes/rmmz/eventCommand";
 
 export const cloneParameters = <
   Param extends ReadonlyArray<number | boolean | string>

@@ -1,4 +1,4 @@
-import type { EventCommandLike2 } from "@RpgTypes/eventCommand";
+import type { EventCommandLike2 } from "@RpgTypes/rmmz/eventCommand";
 
 export type ParamArray_InputNumber = [variableId: number, digits: number];
 export interface ParamObject_InputNumber {

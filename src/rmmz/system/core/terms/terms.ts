@@ -1,4 +1,4 @@
-import type { Data_NamedItem } from "src/namedItemSource";
+import type { Data_NamedItem } from "@RpgTypes/libs";
 import type {
   SystemLabels_TermsParamNames,
   Terms_ParamNamesArray,

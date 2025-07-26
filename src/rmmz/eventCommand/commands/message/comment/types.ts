@@ -1,4 +1,4 @@
-import type { EventCommandLike2 } from "@RpgTypes/eventCommand/frame";
+import type { EventCommandLike2 } from "@RpgTypes/rmmz/eventCommand/frame";
 export type ParamArray_Comment = [comment: string];
 export interface ParamObject_Comment {
   comment: string;

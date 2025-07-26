@@ -1,6 +1,6 @@
+import type { Data_NamedItem, NamedItemSource } from "@RpgTypes/libs";
 import type { SourceId_TraitCollaps } from "@RpgTypes/rpg";
 import type { DomainLabel } from "src/libs/templates";
-import type { Data_NamedItem, NamedItemSource } from "src/namedItemSource";
 import {
   COLLAPS_NORMAL,
   COLLAPS_BOSS,
