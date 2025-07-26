@@ -1,4 +1,4 @@
-import type { SourceIdentifierBase } from "src/namedItemSource";
+import type { SourceIdentifierBase } from "@RpgTypes/libs";
 
 export interface SourceID_Trait<Kind extends string>
   extends SourceIdentifierBase<{

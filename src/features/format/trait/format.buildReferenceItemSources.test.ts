@@ -1,39 +1,40 @@
 import { describe, test, expect } from "vitest";
 import type {
-  GameData,
-  Data_Skill,
-  Data_State,
+  Data_NamedItem,
+  DomainName,
+  NamedItemSource,
+} from "@RpgTypes/libs";
+import type {
   Data_Actor,
   Data_Armor,
-  Data_Weapon,
   Data_Class,
+  Data_CommonEvent,
   Data_Enemy,
   Data_Item,
-  Data_CommonEvent,
+  Data_Skill,
+  Data_State,
+  Data_Weapon,
+  GameData,
   NormalLabel,
-} from "@RpgTypes/rpg";
-import {
-  makeSkillData,
-  makeStateData,
-  makeActorData,
-  makeArmorData,
-  makeWeaponData,
-  makeClassData,
-  makeEnemyData,
-  makeItemData,
-  makeCommonEventData,
-  LABEL_SET_DATA,
-  LABEL_SET_TRAIT,
-  defineTraitItems,
-  defineGameDataSources,
-} from "@RpgTypes/rpg";
-import type { System_RPG_DataNames } from "@RpgTypes/system";
+  System_RPG_DataNames,
+} from "@RpgTypes/rmmz";
 import {
   DEFAULT_SYSTEM_LABELS_DATA_TYPES,
+  defineGameDataSources,
   defineSystemItems,
-} from "@RpgTypes/system";
-import type { DomainName } from "src/libs/templates";
-import type { Data_NamedItem, NamedItemSource } from "src/namedItemSource";
+  defineTraitItems,
+  LABEL_SET_DATA,
+  LABEL_SET_TRAIT,
+  makeActorData,
+  makeArmorData,
+  makeClassData,
+  makeCommonEventData,
+  makeEnemyData,
+  makeItemData,
+  makeSkillData,
+  makeStateData,
+  makeWeaponData,
+} from "@RpgTypes/rmmz";
 import { buildReferenceItemSources } from "./formatTraits";
 
 const mockNormalLabel: NormalLabel = { normal: "Normal" };

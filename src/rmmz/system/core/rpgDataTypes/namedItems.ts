@@ -1,4 +1,4 @@
-import type { NamedItemSource } from "src/namedItemSource";
+import type { NamedItemSource } from "@RpgTypes/libs";
 import {
   getElementTypes,
   getEquipTypes,

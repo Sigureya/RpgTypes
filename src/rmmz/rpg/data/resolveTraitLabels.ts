@@ -4,7 +4,7 @@ import type {
   SourceId_SystemEquipTypes,
   SourceId_SystemSkillTypes,
   SourceId_SystemWeaponTypes,
-} from "@RpgTypes/system";
+} from "@RpgTypes/rmmz/system";
 import type { SourceId_DataState, SourceId_DataSkill } from "./main";
 import {
   TRAIT_ELEMENT_RATE,

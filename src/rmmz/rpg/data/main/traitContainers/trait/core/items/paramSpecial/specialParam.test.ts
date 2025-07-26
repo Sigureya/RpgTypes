@@ -1,5 +1,5 @@
 import { describe, expect, test } from "vitest";
-import type { Data_NamedItem } from "src/namedItemSource";
+import type { Data_NamedItem } from "@RpgTypes/libs";
 import {
   SPECIAL_PARAM_TGR,
   SPECIAL_PARAM_GRD,

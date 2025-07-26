@@ -1,4 +1,4 @@
-import type { EventCommandLike2 } from "@RpgTypes/eventCommand";
+import type { EventCommandLike2 } from "@RpgTypes/rmmz/eventCommand";
 import type { ParamArray_ControlVariables } from "./paramArray";
 
 export interface Command_ControlVariables<

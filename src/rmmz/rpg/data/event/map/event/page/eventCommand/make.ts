@@ -1,4 +1,4 @@
-import type { CommandParamaterType } from "@RpgTypes/eventCommand";
+import type { CommandParamaterType } from "@RpgTypes/rmmz/eventCommand";
 import type { EventCommandLike } from "./eventComandLike";
 import type { EventCode } from "./eventCommand";
 

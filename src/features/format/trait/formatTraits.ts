@@ -1,27 +1,25 @@
 import type {
+  FormatCompiled,
+  NamedItemSource,
+} from "@RpgTypes/libs/namedItemSource";
+import { mergeItemsSource } from "@RpgTypes/libs/namedItemSource";
+import type {
   GameData,
   DataLabels,
   TraitLabelSet,
   NormalLabel,
   ItemEffectLabelSet,
   EffectDefinitionResolved,
-} from "@RpgTypes/rpg";
+  SystemLabel_DataNames,
+  System_RPG_DataNames,
+} from "@RpgTypes/rmmz";
 import {
   defineTraitItems,
   defineGameDataSources,
   resolveTraitLabels,
   resolveItemEffectLabels,
-} from "@RpgTypes/rpg";
-import type {
-  System_RPG_DataNames,
-  SystemLabel_DataNames,
-} from "@RpgTypes/system";
-import { defineSystemItems } from "@RpgTypes/system";
-import {
-  type NamedItemSource,
-  type FormatCompiled,
-  mergeItemsSource,
-} from "src/namedItemSource";
+  defineSystemItems,
+} from "@RpgTypes/rmmz";
 
 export const buildReferenceItemSources = (
   gameData: GameData,

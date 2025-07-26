@@ -1,4 +1,4 @@
-import type { SourceIdentifier } from "src/namedItemSource";
+import type { SourceIdentifier } from "@RpgTypes/libs";
 
 // This type uses `satisfies` to ensure type safety while avoiding circular dependencies.
 // Ideally, these values would be provided via constants or functions, but doing so would increase import/export dependencies

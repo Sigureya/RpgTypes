@@ -1,5 +1,5 @@
 import { test, describe, expect } from "vitest";
-import type { NamedItemSource } from "src/namedItemSource";
+import type { NamedItemSource } from "@RpgTypes/libs";
 import { makeDataNames } from "./dataTypes";
 import { defineSystemItems } from "./namedItems";
 import type { SystemLabel_DataNames } from "./types";

@@ -1,5 +1,5 @@
 import { describe, test, expect } from "vitest";
-import type { SourceIdentifier } from "src/namedItemSource";
+import type { SourceIdentifier } from "@RpgTypes/libs";
 import { resolveItemEffectLabels } from "./define";
 import type { EffectDefinitionResolved } from "./labels";
 import { LABEL_SET_ITEM_EFFECT } from "./labels";

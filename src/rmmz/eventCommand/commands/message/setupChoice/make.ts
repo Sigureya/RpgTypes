@@ -1,4 +1,4 @@
-import type { SHOW_CHOICES, SHOW_CHOICES_ITEM } from "@RpgTypes/rpg";
+import type { SHOW_CHOICES, SHOW_CHOICES_ITEM } from "@RpgTypes/rmmz";
 import type {
   ParamObject_ShowChoiceWhen,
   Command_ShowChoiceWhen,

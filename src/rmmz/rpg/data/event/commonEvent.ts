@@ -1,4 +1,4 @@
-import type { EventCommandUnknown } from "@RpgTypes/eventCommand/frame";
+import type { EventCommandUnknown } from "@RpgTypes/rmmz/eventCommand";
 import type { EventCommand } from "./map";
 
 export interface Data_CommonEvent extends Data_CommonEventLike {

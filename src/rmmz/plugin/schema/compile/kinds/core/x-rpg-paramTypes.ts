@@ -1,4 +1,4 @@
-import type { SourceIdentifier } from "src/namedItemSource";
+import type { SourceIdentifier } from "@RpgTypes/libs";
 import type { X_ParamData, X_RmmzParam } from "./paramBase/x-rpg-param";
 import type { NumberParam } from "./primitiveParams";
 

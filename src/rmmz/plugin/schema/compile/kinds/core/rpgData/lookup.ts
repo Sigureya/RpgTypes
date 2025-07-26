@@ -1,9 +1,9 @@
-import type { SourceIdUnion_RpgData } from "@RpgTypes/rpg";
+import type { SourceIdentifier } from "@RpgTypes/libs";
+import type { SourceIdUnion_RpgData } from "@RpgTypes/rmmz/rpg";
 import type {
   SourceId_SystemSwitches,
   SourceId_SystemVariables,
-} from "@RpgTypes/system";
-import type { SourceIdentifier } from "src/namedItemSource";
+} from "@RpgTypes/rmmz/system";
 import type {
   DataKind_SystemUnion,
   DataKind_RpgUnion,

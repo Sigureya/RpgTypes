@@ -1,4 +1,4 @@
-import type { Data_NamedItem, NamedItemSource } from "src/namedItemSource";
+import type { Data_NamedItem, NamedItemSource } from "@RpgTypes/libs";
 import type { SourceId_TraitSpecialParam } from "../sourceIdTypes";
 import type { TraitLabelWithOption } from "../traitLabel";
 import {

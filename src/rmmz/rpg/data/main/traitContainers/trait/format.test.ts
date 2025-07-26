@@ -2,10 +2,10 @@ import { describe, test, expect } from "vitest";
 import type {
   Data_NamedItem,
   FormatErrorLabels,
-  FormatInput,
   FormatWithSource,
   SourceIdentifier,
-} from "src/namedItemSource";
+  FormatInput,
+} from "@RpgTypes/libs";
 import { detectTraitFormatErrors, formatTraitText } from "./format";
 import type { Trait } from "./types";
 

@@ -1,4 +1,23 @@
 import { test, expect, describe } from "vitest";
+import type {
+  Data_NamedItem,
+  FormatCompiled,
+  NamedItemSource,
+} from "@RpgTypes/libs";
+import type {
+  GameData,
+  Data_Actor,
+  Data_Armor,
+  Data_Class,
+  Data_CommonEvent,
+  Data_Enemy,
+  Data_Item,
+  Data_Skill,
+  Data_State,
+  Data_Weapon,
+  NormalLabel,
+  TraitCode,
+} from "@RpgTypes/rmmz/rpg";
 import {
   collapsOptionsToArray,
   extraParamsToArray,
@@ -43,33 +62,16 @@ import {
   TRAIT_STATE_RATE,
   TRAIT_STATE_RESIST,
   TRAIT_XPARAM,
-  type Data_Actor,
-  type Data_Armor,
-  type Data_Class,
-  type Data_CommonEvent,
-  type Data_Enemy,
-  type Data_Item,
-  type Data_Skill,
-  type Data_State,
-  type Data_Weapon,
-  type GameData,
-  type NormalLabel,
-  type TraitCode,
-} from "@RpgTypes/rpg";
+} from "@RpgTypes/rmmz/rpg";
 import {
+  DEFAULT_SYSTEM_LABELS_DATA_TYPES,
   getArmorTypes,
   getElementTypes,
   getEquipTypes,
   getSkillTypes,
   getWeaponTypes,
-} from "@RpgTypes/system";
-import { DEFAULT_SYSTEM_LABELS_DATA_TYPES } from "@RpgTypes/system";
-import type { System_RPG_DataNames } from "@RpgTypes/system";
-import type {
-  Data_NamedItem,
-  FormatCompiled,
-  NamedItemSource,
-} from "src/namedItemSource";
+  type System_RPG_DataNames,
+} from "@RpgTypes/rmmz/system";
 import {
   buildReferenceItemSources,
   compileTraitDisplayData,
