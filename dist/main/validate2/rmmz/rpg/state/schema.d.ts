@@ -93,4 +93,3 @@ export declare const SCHEMA_DATA_STATE: {
         };
     };
 };
-export default SCHEMA_DATA_STATE;
