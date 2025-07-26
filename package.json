@@ -3,14 +3,14 @@
   "version": "2.3.0",
   "description": "A TypeScript library for RpgMakerMZ-related types.",
   "sideEffects": false,
-  "main": "./dist/rpgTypes.cjs.js",
-  "module": "./dist/rpgTypes.es.js",
-  "types": "./dist/index.d.ts",
+  "main": "./dist/main/rpgTypes.cjs.js",
+  "module": "./dist/main/rpgTypes.es.js",
+  "types": "./dist/main/index.d.ts",
   "exports": {
     ".": {
-      "types": "./dist/index.d.ts",
-      "import": "./dist/rpgTypes.es.js",
-      "require": "./dist/rpgTypes.cjs.js"
+      "types": "./dist/main/index.d.ts",
+      "import": "./dist/main/rpgTypes.es.js",
+      "require": "./dist/main/rpgTypes.cjs.js"
     }
   },
   "files": [
