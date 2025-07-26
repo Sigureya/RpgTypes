@@ -14,7 +14,7 @@
     "baseUrl": "./",
     "rootDir": "src",
     "paths": {
-      "src/*": ["src/libs/*"],
+      "src/*": ["src/*"],
       "src/rmmz/eventCommand": ["src/rmmz/eventCommand"],
       "src/namedItemSource": ["src/libs/namedItemSource"],
       "@RpgTypes/rpg": ["src/rmmz/rpg"],

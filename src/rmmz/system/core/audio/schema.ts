@@ -1,6 +1,6 @@
 import type { AudioFileParams } from "@RpgTypes/utils";
 import type { JSONSchemaType } from "ajv";
-import type { JSONSchemaAudioFileParams } from "src/utils/types/audioFileParams/schemaType";
+import type { JSONSchemaAudioFileParams } from "src/libs/utils/types/audioFileParams/schemaType";
 import type { System_AudioFiles } from "./types";
 
 const audioFileParamsSchema = {

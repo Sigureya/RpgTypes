@@ -1,6 +1,6 @@
 import type { JSONSchemaType } from "ajv";
+import type { DiscriminatedUnionSchemaType3 } from "src/libs/templates/discriminator/discriminator3";
 import type { SourceIdentifier } from "src/namedItemSource";
-import type { DiscriminatedUnionSchemaType3 } from "src/templates/discriminator/discriminator3";
 import type { X_ParamData, X_RmmzParamBase } from "./paramBase/x-rpg-param";
 import type {
   BooleanParam,

@@ -1,6 +1,6 @@
 import { describe, test, expect } from "vitest";
 import Ajv from "ajv";
-import { makeAudioFileParams } from "src/utils";
+import { makeAudioFileParams } from "src/libs";
 import SCHEMA_SYSTEM_SOUND_ARRAY from "./schema";
 import { makeSoundsArray, makeSoundsObject } from "./soundArray";
 import type { System_SoundsArray, System_SoundsObject } from "./types";

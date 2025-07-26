@@ -1,5 +1,5 @@
 import type { JSONSchemaType } from "ajv";
-import type { AudioFileParams } from "src/utils";
+import type { AudioFileParams } from "src/libs";
 import type { MapEvent } from "./event";
 import SCHEMA_MAP_EVENT_PAGE from "./event/page/schema";
 import type { Data_Map } from "./map";
