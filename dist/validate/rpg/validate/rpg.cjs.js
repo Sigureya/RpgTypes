@@ -1,178 +1,17 @@
-function e(e2) {
-  return e2 && e2.__esModule && Object.prototype.hasOwnProperty.call(e2, "default") ? e2.default : e2;
-}
+"use strict";
+Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+const e = require("../../../shared/_commonjsHelpers.cjs.js");
 var t, r = { exports: {} };
-const s = e(function() {
+var s = function() {
   if (t) return r.exports;
-  t = 1, r.exports = s2, r.exports.default = s2;
-  const e2 = { properties: { code: { enum: [132, 133, 139, 241, 245, 249, 250] } } };
-  function s2(t2, { instancePath: r2 = "", parentData: i2, parentDataProperty: a2, rootData: n2 = t2 } = {}) {
-    if (!t2 || "object" != typeof t2 || Array.isArray(t2)) return s2.errors = [{ instancePath: r2, schemaPath: "#/type", keyword: "type", params: { type: "object" }, message: "must be object" }], false;
-    {
-      let i3;
-      if (void 0 === t2.code && (i3 = "code") || void 0 === t2.parameters && (i3 = "parameters") || void 0 === t2.indent && (i3 = "indent")) return s2.errors = [{
-        instancePath: r2,
-        schemaPath: "#/required",
-        keyword: "required",
-        params: { missingProperty: i3 },
-        message: "must have required property '" + i3 + "'"
-      }], false;
-      for (const e3 in t2) if ("code" !== e3 && "indent" !== e3 && "parameters" !== e3) return s2.errors = [{
-        instancePath: r2,
-        schemaPath: "#/additionalProperties",
-        keyword: "additionalProperties",
-        params: { additionalProperty: e3 },
-        message: "must NOT have additional properties"
-      }], false;
-      if (void 0 !== t2.code) {
-        let i4 = t2.code;
-        const a3 = 0;
-        if ("number" != typeof i4 || i4 % 1 || isNaN(i4) || !isFinite(i4)) return s2.errors = [{
-          instancePath: r2 + "/code",
-          schemaPath: "#/properties/code/type",
-          keyword: "type",
-          params: { type: "integer" },
-          message: "must be integer"
-        }], false;
-        if (132 !== i4 && 133 !== i4 && 139 !== i4 && 241 !== i4 && 245 !== i4 && 249 !== i4 && 250 !== i4) return s2.errors = [{
-          instancePath: r2 + "/code",
-          schemaPath: "#/properties/code/enum",
-          keyword: "enum",
-          params: { allowedValues: e2.properties.code.enum },
-          message: "must be equal to one of the allowed values"
-        }], false;
-        var o2 = 0 === a3;
-      } else o2 = true;
-      if (o2) {
-        if (void 0 !== t2.indent) {
-          let e3 = t2.indent;
-          const i4 = 0;
-          if ("number" != typeof e3 || e3 % 1 || isNaN(e3) || !isFinite(e3)) return s2.errors = [{
-            instancePath: r2 + "/indent",
-            schemaPath: "#/properties/indent/type",
-            keyword: "type",
-            params: { type: "integer" },
-            message: "must be integer"
-          }], false;
-          o2 = 0 === i4;
-        } else o2 = true;
-        if (o2) if (void 0 !== t2.parameters) {
-          let e3 = t2.parameters;
-          const i4 = 0;
-          if (!Array.isArray(e3)) return s2.errors = [{
-            instancePath: r2 + "/parameters",
-            schemaPath: "#/properties/parameters/type",
-            keyword: "type",
-            params: { type: "array" },
-            message: "must be array"
-          }], false;
-          if (e3.length > 1) return s2.errors = [{
-            instancePath: r2 + "/parameters",
-            schemaPath: "#/properties/parameters/maxItems",
-            keyword: "maxItems",
-            params: { limit: 1 },
-            message: "must NOT have more than 1 items"
-          }], false;
-          if (e3.length < 1) return s2.errors = [{
-            instancePath: r2 + "/parameters",
-            schemaPath: "#/properties/parameters/minItems",
-            keyword: "minItems",
-            params: { limit: 1 },
-            message: "must NOT have fewer than 1 items"
-          }], false;
-          if (e3.length > 0) {
-            let t3 = e3[0];
-            if (!t3 || "object" != typeof t3 || Array.isArray(t3)) return s2.errors = [{
-              instancePath: r2 + "/parameters/0",
-              schemaPath: "#/properties/parameters/items/0/type",
-              keyword: "type",
-              params: { type: "object" },
-              message: "must be object"
-            }], false;
-            {
-              let e4;
-              if (void 0 === t3.name && (e4 = "name") || void 0 === t3.volume && (e4 = "volume") || void 0 === t3.pitch && (e4 = "pitch") || void 0 === t3.pan && (e4 = "pan")) return s2.errors = [{
-                instancePath: r2 + "/parameters/0",
-                schemaPath: "#/properties/parameters/items/0/required",
-                keyword: "required",
-                params: { missingProperty: e4 },
-                message: "must have required property '" + e4 + "'"
-              }], false;
-              for (const e5 in t3) if ("name" !== e5 && "volume" !== e5 && "pitch" !== e5 && "pan" !== e5) return s2.errors = [{
-                instancePath: r2 + "/parameters/0",
-                schemaPath: "#/properties/parameters/items/0/additionalProperties",
-                keyword: "additionalProperties",
-                params: { additionalProperty: e5 },
-                message: "must NOT have additional properties"
-              }], false;
-              if (void 0 !== t3.name) {
-                const e5 = 0;
-                if ("string" != typeof t3.name) return s2.errors = [{
-                  instancePath: r2 + "/parameters/0/name",
-                  schemaPath: "#/properties/parameters/items/0/properties/name/type",
-                  keyword: "type",
-                  params: { type: "string" },
-                  message: "must be string"
-                }], false;
-                var p2 = 0 === e5;
-              } else p2 = true;
-              if (p2) {
-                if (void 0 !== t3.volume) {
-                  let e5 = t3.volume;
-                  const i5 = 0;
-                  if ("number" != typeof e5 || e5 % 1 || isNaN(e5) || !isFinite(e5)) return s2.errors = [{
-                    instancePath: r2 + "/parameters/0/volume",
-                    schemaPath: "#/properties/parameters/items/0/properties/volume/type",
-                    keyword: "type",
-                    params: { type: "integer" },
-                    message: "must be integer"
-                  }], false;
-                  p2 = 0 === i5;
-                } else p2 = true;
-                if (p2) {
-                  if (void 0 !== t3.pitch) {
-                    let e5 = t3.pitch;
-                    const i5 = 0;
-                    if ("number" != typeof e5 || e5 % 1 || isNaN(e5) || !isFinite(e5)) return s2.errors = [{
-                      instancePath: r2 + "/parameters/0/pitch",
-                      schemaPath: "#/properties/parameters/items/0/properties/pitch/type",
-                      keyword: "type",
-                      params: { type: "integer" },
-                      message: "must be integer"
-                    }], false;
-                    p2 = 0 === i5;
-                  } else p2 = true;
-                  if (p2) if (void 0 !== t3.pan) {
-                    let e5 = t3.pan;
-                    const i5 = 0;
-                    if ("number" != typeof e5 || e5 % 1 || isNaN(e5) || !isFinite(e5)) return s2.errors = [{
-                      instancePath: r2 + "/parameters/0/pan",
-                      schemaPath: "#/properties/parameters/items/0/properties/pan/type",
-                      keyword: "type",
-                      params: { type: "integer" },
-                      message: "must be integer"
-                    }], false;
-                    p2 = 0 === i5;
-                  } else p2 = true;
-                }
-              }
-            }
-          }
-          o2 = 0 === i4;
-        } else o2 = true;
-      }
-    }
-    return s2.errors = null, true;
-  }
-  return r.exports;
-}()), i = (e2) => s(e2);
-var a, n = {
-  exports: {}
-};
-const o = e(function() {
-  if (a) return n.exports;
   function e2(t2, { instancePath: r2 = "", parentData: s2, parentDataProperty: i2, rootData: a2 = t2 } = {}) {
-    if (!t2 || "object" != typeof t2 || Array.isArray(t2)) return e2.errors = [{ instancePath: r2, schemaPath: "#/type", keyword: "type", params: { type: "object" }, message: "must be object" }], false;
+    if (!t2 || "object" != typeof t2 || Array.isArray(t2)) return e2.errors = [{
+      instancePath: r2,
+      schemaPath: "#/type",
+      keyword: "type",
+      params: { type: "object" },
+      message: "must be object"
+    }], false;
     {
       let s3;
       if (void 0 === t2.name && (s3 = "name") || void 0 === t2.id && (s3 = "id") || void 0 === t2.nickname && (s3 = "nickname") || void 0 === t2.battlerName && (s3 = "battlerName") || void 0 === t2.characterName && (s3 = "characterName") || void 0 === t2.characterIndex && (s3 = "characterIndex") || void 0 === t2.faceName && (s3 = "faceName") || void 0 === t2.faceIndex && (s3 = "faceIndex") || void 0 === t2.classId && (s3 = "classId") || void 0 === t2.initialLevel && (s3 = "initialLevel") || void 0 === t2.maxLevel && (s3 = "maxLevel")) return e2.errors = [{
@@ -473,11 +312,12 @@ const o = e(function() {
     }
     return e2.errors = null, true;
   }
-  return a = 1, n.exports = e2, n.exports.default = e2, n.exports;
-}()), p = (e2) => o(e2);
-var m, y = { exports: {} };
-const c = e(function() {
-  if (m) return y.exports;
+  return t = 1, r.exports = e2, r.exports.default = e2, r.exports;
+}();
+const i = e.getDefaultExportFromCjs(s);
+var a, n = { exports: {} };
+var o = function() {
+  if (a) return n.exports;
   function e2(t2, { instancePath: r2 = "", parentData: s2, parentDataProperty: i2, rootData: a2 = t2 } = {}) {
     if (!t2 || "object" != typeof t2 || Array.isArray(t2)) return e2.errors = [{
       instancePath: r2,
@@ -824,11 +664,12 @@ const c = e(function() {
     }
     return e2.errors = null, true;
   }
-  return m = 1, y.exports = e2, y.exports.default = e2, y.exports;
-}()), d = (e2) => c(e2);
-var u, f = { exports: {} };
-const h = e(function() {
-  if (u) return f.exports;
+  return a = 1, n.exports = e2, n.exports.default = e2, n.exports;
+}();
+const p = e.getDefaultExportFromCjs(o);
+var m, y = { exports: {} };
+var c = function() {
+  if (m) return y.exports;
   function e2(t2, { instancePath: r2 = "", parentData: s2, parentDataProperty: i2, rootData: a2 = t2 } = {}) {
     if (!t2 || "object" != typeof t2 || Array.isArray(t2)) return e2.errors = [{
       instancePath: r2,
@@ -1208,11 +1049,12 @@ const h = e(function() {
     }
     return e2.errors = null, true;
   }
-  return u = 1, f.exports = e2, f.exports.default = e2, f.exports;
-}()), g = (e2) => h(e2);
-var l, P = { exports: {} };
-const b = e(function() {
-  if (l) return P.exports;
+  return m = 1, y.exports = e2, y.exports.default = e2, y.exports;
+}();
+const d = e.getDefaultExportFromCjs(c);
+var u, f = { exports: {} };
+var h = function() {
+  if (u) return f.exports;
   function e2(t2, { instancePath: r2 = "", parentData: s2, parentDataProperty: i2, rootData: a2 = t2 } = {}) {
     if (!t2 || "object" != typeof t2 || Array.isArray(t2)) return e2.errors = [{
       instancePath: r2,
@@ -1738,11 +1580,12 @@ const b = e(function() {
     }
     return e2.errors = null, true;
   }
-  return l = 1, P.exports = e2, P.exports.default = e2, P.exports;
-}()), v = (e2) => b(e2);
-var N, k = { exports: {} };
-const w = e(function() {
-  if (N) return k.exports;
+  return u = 1, f.exports = e2, f.exports.default = e2, f.exports;
+}();
+const g = e.getDefaultExportFromCjs(h);
+var l, P = { exports: {} };
+var b = function() {
+  if (l) return P.exports;
   function e2(t2, { instancePath: r2 = "", parentData: s2, parentDataProperty: i2, rootData: a2 = t2 } = {}) {
     if (!t2 || "object" != typeof t2 || Array.isArray(t2)) return e2.errors = [{
       instancePath: r2,
@@ -2201,57 +2044,57 @@ const w = e(function() {
     }
     return e2.errors = null, true;
   }
-  return N = 1, k.exports = e2, k.exports.default = e2, k.exports;
-}()), I = (e2) => w(e2);
-var F, x = { exports: {} };
-const q = e(function() {
-  if (F) return x.exports;
-  F = 1, x.exports = r2, x.exports.default = r2;
-  const e2 = { properties: {
-    name: { type: "string" },
-    id: { type: "integer", minimum: 0 },
-    description: { type: "string" },
-    iconIndex: { type: "integer", minimum: 0 },
-    message1: {
-      type: "string"
-    },
-    message2: { type: "string" },
-    messageType: { type: "integer", minimum: 0 },
-    mpCost: { type: "integer" },
-    requiredWtypeId1: { type: "integer", minimum: 0 },
-    requiredWtypeId2: { type: "integer", minimum: 0 },
-    stypeId: { type: "integer", minimum: 0 },
-    tpCost: { type: "integer" },
-    animationId: { type: "integer", minimum: 0 },
-    hitType: { type: "integer", minimum: 0 },
-    occasion: { type: "integer" },
-    repeats: {
-      type: "integer",
-      minimum: 0
-    },
-    scope: { type: "integer" },
-    speed: { type: "integer" },
-    successRate: { type: "integer" },
-    tpGain: { type: "integer" },
-    note: { type: "string" },
-    effects: { type: "array", items: {
-      type: "object",
-      properties: { code: { type: "integer" }, dataId: { type: "integer", minimum: 0 }, value1: { type: "integer" }, value2: { type: "integer" } },
-      required: ["code", "dataId", "value1", "value2"],
-      additionalProperties: false
-    } },
-    damage: { type: "object", properties: { type: { type: "integer" }, elementId: { type: "integer", minimum: 0 }, formula: { type: "string" }, variance: { type: "integer" }, critical: {
-      type: "boolean"
-    } }, required: ["type", "elementId", "formula", "variance", "critical"], additionalProperties: false }
-  } }, t2 = Object.prototype.hasOwnProperty;
+  return l = 1, P.exports = e2, P.exports.default = e2, P.exports;
+}();
+const v = e.getDefaultExportFromCjs(b);
+var N, k = { exports: {} };
+var w = function() {
+  if (N) return k.exports;
+  N = 1, k.exports = r2, k.exports.default = r2;
+  const e2 = {
+    properties: {
+      name: { type: "string" },
+      id: { type: "integer", minimum: 0 },
+      description: { type: "string" },
+      iconIndex: { type: "integer", minimum: 0 },
+      message1: { type: "string" },
+      message2: { type: "string" },
+      messageType: { type: "integer", minimum: 0 },
+      mpCost: { type: "integer" },
+      requiredWtypeId1: { type: "integer", minimum: 0 },
+      requiredWtypeId2: {
+        type: "integer",
+        minimum: 0
+      },
+      stypeId: { type: "integer", minimum: 0 },
+      tpCost: { type: "integer" },
+      animationId: { type: "integer", minimum: 0 },
+      hitType: { type: "integer", minimum: 0 },
+      occasion: {
+        type: "integer"
+      },
+      repeats: { type: "integer", minimum: 0 },
+      scope: { type: "integer" },
+      speed: { type: "integer" },
+      successRate: { type: "integer" },
+      tpGain: { type: "integer" },
+      note: { type: "string" },
+      effects: {
+        type: "array",
+        items: {
+          type: "object",
+          properties: { code: { type: "integer" }, dataId: { type: "integer", minimum: 0 }, value1: { type: "integer" }, value2: { type: "integer" } },
+          required: ["code", "dataId", "value1", "value2"],
+          additionalProperties: false
+        }
+      },
+      damage: { type: "object", properties: { type: { type: "integer" }, elementId: { type: "integer", minimum: 0 }, formula: {
+        type: "string"
+      }, variance: { type: "integer" }, critical: { type: "boolean" } }, required: ["type", "elementId", "formula", "variance", "critical"], additionalProperties: false }
+    }
+  }, t2 = Object.prototype.hasOwnProperty;
   function r2(s2, { instancePath: i2 = "", parentData: a2, parentDataProperty: n2, rootData: o2 = s2 } = {}) {
-    if (!s2 || "object" != typeof s2 || Array.isArray(s2)) return r2.errors = [{
-      instancePath: i2,
-      schemaPath: "#/type",
-      keyword: "type",
-      params: { type: "object" },
-      message: "must be object"
-    }], false;
+    if (!s2 || "object" != typeof s2 || Array.isArray(s2)) return r2.errors = [{ instancePath: i2, schemaPath: "#/type", keyword: "type", params: { type: "object" }, message: "must be object" }], false;
     {
       let a3;
       if (void 0 === s2.name && (a3 = "name") || void 0 === s2.id && (a3 = "id") || void 0 === s2.description && (a3 = "description") || void 0 === s2.iconIndex && (a3 = "iconIndex") || void 0 === s2.message1 && (a3 = "message1") || void 0 === s2.message2 && (a3 = "message2") || void 0 === s2.messageType && (a3 = "messageType") || void 0 === s2.mpCost && (a3 = "mpCost") || void 0 === s2.requiredWtypeId1 && (a3 = "requiredWtypeId1") || void 0 === s2.requiredWtypeId2 && (a3 = "requiredWtypeId2") || void 0 === s2.stypeId && (a3 = "stypeId") || void 0 === s2.tpCost && (a3 = "tpCost") || void 0 === s2.animationId && (a3 = "animationId") || void 0 === s2.hitType && (a3 = "hitType") || void 0 === s2.occasion && (a3 = "occasion") || void 0 === s2.repeats && (a3 = "repeats") || void 0 === s2.scope && (a3 = "scope") || void 0 === s2.speed && (a3 = "speed") || void 0 === s2.successRate && (a3 = "successRate") || void 0 === s2.tpGain && (a3 = "tpGain") || void 0 === s2.note && (a3 = "note") || void 0 === s2.effects && (a3 = "effects")) return r2.errors = [{
@@ -2794,11 +2637,12 @@ const q = e(function() {
     }
     return r2.errors = null, true;
   }
-  return x.exports;
-}()), A = (e2) => q(e2);
-var T, j = { exports: {} };
-const D = e(function() {
-  if (T) return j.exports;
+  return k.exports;
+}();
+const I = e.getDefaultExportFromCjs(w);
+var F, x = { exports: {} };
+var q = function() {
+  if (F) return x.exports;
   function e2(t2, { instancePath: r2 = "", parentData: s2, parentDataProperty: i2, rootData: a2 = t2 } = {}) {
     if (!t2 || "object" != typeof t2 || Array.isArray(t2)) return e2.errors = [{
       instancePath: r2,
@@ -3196,11 +3040,12 @@ const D = e(function() {
     }
     return e2.errors = null, true;
   }
-  return T = 1, j.exports = e2, j.exports.default = e2, j.exports;
-}()), B = (e2) => D(e2);
-var R, O = { exports: {} };
-const W = e(function() {
-  if (R) return O.exports;
+  return F = 1, x.exports = e2, x.exports.default = e2, x.exports;
+}();
+const A = e.getDefaultExportFromCjs(q);
+var j, T = { exports: {} };
+var D = function() {
+  if (j) return T.exports;
   function e2(t2, { instancePath: r2 = "", parentData: s2, parentDataProperty: i2, rootData: a2 = t2 } = {}) {
     if (!t2 || "object" != typeof t2 || Array.isArray(t2)) return e2.errors = [{
       instancePath: r2,
@@ -3686,17 +3531,8 @@ const W = e(function() {
     }
     return e2.errors = null, true;
   }
-  return R = 1, O.exports = e2, O.exports.default = e2, O.exports;
-}()), C = (e2) => W(e2);
-export {
-  i as isAudioCommand,
-  p as isDataActor,
-  d as isDataArmor,
-  g as isDataClass,
-  v as isDataEnemy,
-  I as isDataItem,
-  A as isDataSkill,
-  B as isDataState,
-  C as isDataWeapon
-};
-//# sourceMappingURL=validate.es.js.map
+  return j = 1, T.exports = e2, T.exports.default = e2, T.exports;
+}();
+const B = e.getDefaultExportFromCjs(D);
+exports.isDataActor = (e2) => i(e2), exports.isDataArmor = (e2) => p(e2), exports.isDataClass = (e2) => d(e2), exports.isDataEnemy = (e2) => g(e2), exports.isDataItem = (e2) => v(e2), exports.isDataSkill = (e2) => I(e2), exports.isDataState = (e2) => A(e2), exports.isDataWeapon = (e2) => B(e2);
+//# sourceMappingURL=rpg.cjs.js.map
