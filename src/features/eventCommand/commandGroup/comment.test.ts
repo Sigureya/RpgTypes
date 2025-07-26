@@ -76,40 +76,40 @@ describe.skip("createCommentGroup - CombinedEventCommandGroup Creation", () => {
   });
 });
 
-// describe("createCommentGroup - SimpleEventCommandGroup Creation", () => {
-//   const commands = [
-//     makeCommandCommentHeader(CHOICE_HELP_TEXT),
-//     makeCommandCommentBody("Help text"),
-//   ];
-//   const group: EventCommandGroup_Comment = createCommentGroup(commands, 0);
+describe("createCommentGroup - SimpleEventCommandGroup Creation", () => {
+  const commands = [
+    makeCommandCommentHeader(CHOICE_HELP_TEXT),
+    makeCommandCommentBody("Help text"),
+  ];
 
-//   describe("SimpleEventCommandGroup instance validation", () => {
-//     test("should create an instance of SimpleEventCommandGroup", () => {
-//       expect(group).toBeInstanceOf(SimpleEventCommandGroup);
-//     });
+  test("SimpleEventCommandGroup instance validation", () => {
+    const group: EventCommandGroup_Comment = createCommentGroup(commands, 0);
+    describe("should create an instance of SimpleEventCommandGroup", () => {
+      expect(group).toBeInstanceOf(SimpleEventCommandGroup);
+    });
 
-//     test("should return correct body text", () => {
-//       expect(group.getBodyText()).toBe("Help text");
-//     });
+    describe("should return correct body text", () => {
+      expect(group.getBodyText()).toBe("Help text");
+    });
 
-//     test("should return correct merged body", () => {
-//       const mergedBody = group.mergedBody();
-//       expect(mergedBody).toEqual({
-//         code: 408 satisfies typeof COMMENT_BODY,
-//         indent: 0,
-//         parameters: ["Help text"],
-//       } satisfies Command_CommentBody);
-//     });
-//     test("should return normalized commands", () => {
-//       const normalizedCommands = group.normalizedCommands();
-//       const expectedCommands = [
-//         makeCommandCommentHeader(CHOICE_HELP_TEXT),
-//         makeCommandCommentBody("Help text"),
-//       ] satisfies [Command_CommentHeader, Command_CommentBody];
-//       expect(normalizedCommands).toEqual(expectedCommands);
-//     });
-//   });
-// });
+    describe("should return correct merged body", () => {
+      const mergedBody = group.mergedBody();
+      expect(mergedBody).toEqual({
+        code: 408 satisfies typeof COMMENT_BODY,
+        indent: 0,
+        parameters: ["Help text"],
+      } satisfies Command_CommentBody);
+    });
+    describe("should return normalized commands", () => {
+      const normalizedCommands = group.normalizedCommands();
+      const expectedCommands = [
+        makeCommandCommentHeader(CHOICE_HELP_TEXT),
+        makeCommandCommentBody("Help text"),
+      ] satisfies [Command_CommentHeader, Command_CommentBody];
+      expect(normalizedCommands).toEqual(expectedCommands);
+    });
+  });
+});
 
 describe("isChoiceHelp - Validation Tests", () => {
   test("should return true for a valid choice help header", () => {
