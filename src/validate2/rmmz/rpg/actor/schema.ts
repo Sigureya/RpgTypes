@@ -1,5 +1,5 @@
+import type { Data_Actor } from "@RpgTypes/rpg";
 import type { JSONSchemaType } from "ajv";
-import type { Data_Actor } from "./types";
 
 export const SCHEMA_DATA_ACTOR = {
   type: "object",
