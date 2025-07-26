@@ -1,4 +1,4 @@
-import { describe, test, expect } from "vitest";
+import { test, expect } from "vitest";
 import type { Data_Actor } from "@RpgTypes/rpg";
 const validate = require("./actorValidate.cjs"); // Adjust the import based on your setup
 
