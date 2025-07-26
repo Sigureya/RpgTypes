@@ -1,5 +1,5 @@
 import { describe, test, expect } from "vitest";
-import type { Data_Enemy } from "@RpgTypes/rpg";
+import type { Data_Enemy } from "@RpgTypes/rmmz/rpg";
 const validate = require("./enemyValidate.cjs");
 
 const isDataEnemy = (data: unknown): data is Data_Enemy => {

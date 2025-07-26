@@ -5,7 +5,7 @@ import {
   COMMENT_HEAD,
   SCRIPT_EVAL_BODY,
   SCRIPT_EVAL,
-} from "@RpgTypes/rpg";
+} from "@RpgTypes/rmmz/rpg";
 import type {
   Command_ShowMessageBody,
   Command_CommentBody,

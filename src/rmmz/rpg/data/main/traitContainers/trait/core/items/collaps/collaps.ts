@@ -1,5 +1,5 @@
 import type { Data_NamedItem, NamedItemSource } from "@RpgTypes/libs";
-import type { SourceId_TraitCollaps } from "@RpgTypes/rpg";
+import type { SourceId_TraitCollaps } from "@RpgTypes/rmmz/rpg";
 import type { DomainLabel } from "src/libs/templates";
 import {
   COLLAPS_NORMAL,

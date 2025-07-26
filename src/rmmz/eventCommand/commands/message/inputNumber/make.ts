@@ -1,4 +1,4 @@
-import { INPUT_NUMBER } from "@RpgTypes/rpg";
+import { INPUT_NUMBER } from "@RpgTypes/rmmz/rpg";
 import type {
   Command_InputNumber,
   ParamArray_InputNumber,

@@ -1,11 +1,13 @@
 import type { SourceIdentifier } from "@RpgTypes/libs";
+import type {
+  SourceId_DataCommonEvent,
+  SourceId_DataSkill,
+  SourceId_DataState,
+} from "@RpgTypes/rmmz/rpg";
 import {
   EFFECT_SPECIAL,
-  type SourceId_DataCommonEvent,
-  type SourceId_DataSkill,
-  type SourceId_DataState,
   type SourceId_TraitRegularParam,
-} from "@RpgTypes/rpg";
+} from "@RpgTypes/rmmz/rpg";
 import {
   EFFECT_ADD_STATE,
   EFFECT_GROW,

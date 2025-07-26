@@ -1,4 +1,4 @@
-import { COMMON_EVENT } from "@RpgTypes/rpg";
+import { COMMON_EVENT } from "@RpgTypes/rmmz/rpg";
 import type { Command_CommonEvent, ParamObject_CommonEvent } from "./types";
 import type { ParamArray_CommonEvent } from "./types";
 

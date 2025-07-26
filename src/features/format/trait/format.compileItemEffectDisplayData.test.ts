@@ -1,7 +1,5 @@
 import { test, expect, describe } from "vitest";
 import type { Data_NamedItem, FormatCompiled } from "@RpgTypes/libs";
-import type { System_RPG_DataNames } from "@RpgTypes/rmmz/system";
-import { DEFAULT_SYSTEM_LABELS_DATA_TYPES } from "@RpgTypes/rmmz/system";
 import type {
   Data_Actor,
   Data_Armor,
@@ -14,7 +12,7 @@ import type {
   Data_Weapon,
   GameData,
   NormalLabel,
-} from "@RpgTypes/rpg";
+} from "@RpgTypes/rmmz/rpg";
 import {
   makeActorData,
   makeArmorData,
@@ -43,7 +41,11 @@ import {
   EFFECT_REMOVE_DEBUFF,
   EFFECT_REMOVE_STATE,
   EFFECT_SPECIAL,
-} from "@RpgTypes/rpg";
+} from "@RpgTypes/rmmz/rpg";
+import {
+  type System_RPG_DataNames,
+  DEFAULT_SYSTEM_LABELS_DATA_TYPES,
+} from "@RpgTypes/rmmz/system";
 import {
   buildReferenceItemSources,
   compileItemEffectDisplayData,
