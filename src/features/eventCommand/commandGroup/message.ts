@@ -17,8 +17,8 @@ export const extractMessageGroup = (
   return pickCommands(
     list,
     index,
-    isCommandShowMessage,
-    isCommandShowMessageBody
+    (a) => isCommandShowMessage(a),
+    (b) => isCommandShowMessageBody(b)
   );
 };
 

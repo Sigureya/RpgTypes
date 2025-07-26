@@ -19,7 +19,7 @@ import type { EventCommandGroup_Comment } from "./core";
 import { CombinedEventCommandGroup, SimpleEventCommandGroup } from "./core";
 
 describe("extractCommentGroup - Validation Tests", () => {
-  test.skip("aa", () => {
+  test("aa", () => {
     const commands = [
       makeCommandCommentHeader("Header text"),
       makeCommandCommentBody("Body text 1"),
