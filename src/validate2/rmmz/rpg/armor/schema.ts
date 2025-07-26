@@ -1,6 +1,5 @@
+import type { Data_Armor, ParamArray } from "@RpgTypes/rpg";
 import type { JSONSchemaType } from "ajv";
-import type { ParamArray } from "../members";
-import type { Data_Armor } from "./types";
 
 export const SCHEMA_DATA_ARMMOR = {
   type: "object",
