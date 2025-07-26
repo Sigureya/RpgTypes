@@ -1,4 +1,4 @@
-import type { EventCommand, ExtractCommandByParam } from "@sigureya/rpgtypes";
+import type { EventCommand, ExtractCommandByParam } from "@RpgTypes/rmmz";
 
 export const pickCommands = <
   Head extends EventCommand,
@@ -13,6 +13,9 @@ export const pickCommands = <
   if (!headFn(head)) {
     throw new Error(`Invalid head at index ${index}: ${JSON.stringify(head)}`);
   }
+
+  // どうしようもないので、ここだけeslintのルールを無効化する
+  // eslint-disable-next-line functional/no-loop-statements
   const bodys: Body[] = [];
   for (let i = index + 1; i < array.length; i++) {
     const body = array[i];
