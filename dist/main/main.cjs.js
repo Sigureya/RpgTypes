@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
-const e = require("../app/app.cjs.js"), t = require("../shared/index.cjs.js"), r = require("../libs/libs.cjs.js"), a = require("../shared/make.cjs.js"), s = require("../shared/mergeItemsSource.cjs.js"), o = require("../shared/plugin.cjs.js"), i = require("../shared/namedItems.cjs.js");
+const e = require("../features/features.cjs.js"), t = require("../shared/index.cjs.js"), r = require("../libs/libs.cjs.js"), a = require("../shared/make.cjs.js"), s = require("../shared/mergeItemsSource.cjs.js"), o = require("../shared/plugin.cjs.js"), i = require("../shared/namedItems.cjs.js");
 var p, m = { exports: {} };
 var E = function() {
   if (p) return m.exports;

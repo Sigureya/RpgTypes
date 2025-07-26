@@ -1,4 +1,4 @@
-import { buildReferenceItemSources, compileItemEffectDisplayData, compileTraitDisplayData } from "../app/app.es.js";
+import { buildReferenceItemSources, compileItemEffectDisplayData, compileTraitDisplayData } from "../features/features.es.js";
 import { g as se } from "../shared/index.es.js";
 import { i } from "../shared/index.es.js";
 import { AUTHOR_RMMZ, SRC_COLOR, detectFormatErrors, domainNames, isValidNumber } from "../libs/libs.es.js";
