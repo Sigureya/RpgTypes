@@ -23,8 +23,8 @@ export const extractCommentGroup = (
   return pickCommands(
     list,
     index,
-    isCommandCommentHeader,
-    isCommandCommentBody
+    (a) => isCommandCommentHeader(a),
+    (b) => isCommandCommentBody(b)
   );
 };
 
