@@ -1,0 +1,14 @@
+export declare const FILENAME_SYSTEM = "System.json";
+export declare const FILENAME_ACTORS = "Actors.json";
+export declare const FILENAME_CLASSES = "Classes.json";
+export declare const FILENAME_SKILLS = "Skills.json";
+export declare const FILENAME_ITEMS = "Items.json";
+export declare const FILENAME_WEAPONS = "Weapons.json";
+export declare const FILENAME_ARMORS = "Armors.json";
+export declare const FILENAME_ENEMIES = "Enemies.json";
+export declare const FILENAME_TROOPS = "Troops.json";
+export declare const FILENAME_STATES = "States.json";
+export declare const FILENAME_ANIMATIONS = "Animations.json";
+export declare const FILENAME_TILESET = "Tilesets.json";
+export declare const FILENAME_COMMON_EVENTS = "CommonEvents.json";
+export declare const FILENAME_MAP_INFOS = "MapInfos.json";
