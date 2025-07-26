@@ -8,9 +8,6 @@ import { alias } from "./viteAlias.mts";
 const srcDir = path.resolve(__dirname, "src");
 
 export default defineConfig(({ mode }) => {
-  const isValidateMode = mode === "validate";
-  const isGenerateSchemaMode = mode === "generateschema";
-
   const entryPoints = {
     main: path.resolve(srcDir, "index.ts"),
     features: path.resolve(srcDir, "features/index.ts"),
@@ -21,7 +18,7 @@ export default defineConfig(({ mode }) => {
 
   return {
     build: {
-      outDir: isValidateMode ? "./dist/validate" : "./dist",
+      outDir: "./dist",
       lib: {
         entry: entryPoints,
         formats: ["es", "cjs"],
@@ -51,7 +48,7 @@ export default defineConfig(({ mode }) => {
     plugins: [
       validateSchemaPlugin(),
       dts({
-        outDir: isValidateMode ? "./dist/validate" : "./dist/types",
+        outDir: "./dist/types",
         include: ["src/**/*.ts"],
         exclude: ["src/**/*.test.ts"],
         rollupTypes: false,
