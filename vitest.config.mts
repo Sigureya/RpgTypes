@@ -1,5 +1,6 @@
 import { defineConfig } from "vitest/config";
 import path from "path";
+import { alias } from "./viteAlias.mts";
 declare const __dirname: string;
 
 export default defineConfig({
@@ -12,16 +13,6 @@ export default defineConfig({
     },
   },
   resolve: {
-    alias: {
-      "@RpgTypes/eventCommand": path.resolve(
-        __dirname,
-        "src/rmmz/eventCommand"
-      ),
-      "@RpgTypes/rpg": path.resolve(__dirname, "./src/rmmz/rpg"),
-
-      "@RpgTypes/system": path.resolve(__dirname, "./src/rmmz/system"),
-      "@RpgTypes": path.resolve(__dirname, "./src/libs"),
-      src: path.resolve(__dirname, "./src/libs"),
-    },
+    alias: alias,
   },
 });

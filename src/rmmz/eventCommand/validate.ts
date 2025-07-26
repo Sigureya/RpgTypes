@@ -11,7 +11,6 @@ import type {
   Command_ShowMessageHeader,
 } from "./commands";
 import SCHEMA_COMMAND_CHANGE_ACTOR_TEXT from "./commands/actor/changeText/schema";
-import SCHEMA_COMMAND_ANY_AUDIO from "./commands/audio/play/schema";
 import SCHEMA_COMMAND_CALL_COMMON_EVENT from "./commands/flow/callCommonEvent/schema";
 import SCHEMA_COMMAND_INPUT_NUMBER from "./commands/message/inputNumber/schema";
 import SCHEMA_COMMAND_SCROLL_TEXT_HEAD from "./commands/message/scrollText/head/schema";
@@ -42,13 +41,6 @@ export const isCommandScrollTextHead = (
   data: unknown
 ): data is Command_ScrollTextHeader => {
   return scrollTextHead(data);
-};
-
-const audioCommand = ajv.compile(SCHEMA_COMMAND_ANY_AUDIO);
-export const isCommandAudio = (
-  data: unknown
-): data is CommandUnion_AnyAudio => {
-  return audioCommand(data);
 };
 
 const emptyParam = ajv.compile(SCHEMA_COMMAND_EMPTY_PARAM);
