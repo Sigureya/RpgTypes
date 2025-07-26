@@ -13,7 +13,11 @@ export default defineConfig(({ mode }) => {
     features: path.resolve(srcDir, "features/index.ts"),
     libs: path.resolve(srcDir, "libs/index.ts"),
     rmmz: path.resolve(srcDir, "rmmz/index.ts"),
-    validate: path.resolve(srcDir, "validate/index.ts"),
+    "validate/rpg": path.resolve(srcDir, "validate/rmmz/rpg/index.ts"),
+    "validate/eventCommand": path.resolve(
+      srcDir,
+      "validate/rmmz/eventCommand/index.ts"
+    ),
   };
 
   return {

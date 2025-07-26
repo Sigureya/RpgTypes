@@ -1,184 +1,15 @@
-"use strict";
-function e(e2) {
-  return e2 && e2.__esModule && Object.prototype.hasOwnProperty.call(e2, "default") ? e2.default : e2;
-}
-Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+import { g as e } from "../../../shared/_commonjsHelpers.es.js";
 var t, r = { exports: {} };
 const s = e(function() {
   if (t) return r.exports;
-  t = 1, r.exports = s2, r.exports.default = s2;
-  const e2 = { properties: { code: { enum: [132, 133, 139, 241, 245, 249, 250] } } };
-  function s2(t2, { instancePath: r2 = "", parentData: i2, parentDataProperty: a2, rootData: n2 = t2 } = {}) {
-    if (!t2 || "object" != typeof t2 || Array.isArray(t2)) return s2.errors = [{
+  function e2(t2, { instancePath: r2 = "", parentData: s2, parentDataProperty: i2, rootData: a2 = t2 } = {}) {
+    if (!t2 || "object" != typeof t2 || Array.isArray(t2)) return e2.errors = [{
       instancePath: r2,
       schemaPath: "#/type",
       keyword: "type",
       params: { type: "object" },
       message: "must be object"
     }], false;
-    {
-      let i3;
-      if (void 0 === t2.code && (i3 = "code") || void 0 === t2.parameters && (i3 = "parameters") || void 0 === t2.indent && (i3 = "indent")) return s2.errors = [{
-        instancePath: r2,
-        schemaPath: "#/required",
-        keyword: "required",
-        params: { missingProperty: i3 },
-        message: "must have required property '" + i3 + "'"
-      }], false;
-      for (const e3 in t2) if ("code" !== e3 && "indent" !== e3 && "parameters" !== e3) return s2.errors = [{
-        instancePath: r2,
-        schemaPath: "#/additionalProperties",
-        keyword: "additionalProperties",
-        params: { additionalProperty: e3 },
-        message: "must NOT have additional properties"
-      }], false;
-      if (void 0 !== t2.code) {
-        let i4 = t2.code;
-        const a3 = 0;
-        if ("number" != typeof i4 || i4 % 1 || isNaN(i4) || !isFinite(i4)) return s2.errors = [{
-          instancePath: r2 + "/code",
-          schemaPath: "#/properties/code/type",
-          keyword: "type",
-          params: { type: "integer" },
-          message: "must be integer"
-        }], false;
-        if (132 !== i4 && 133 !== i4 && 139 !== i4 && 241 !== i4 && 245 !== i4 && 249 !== i4 && 250 !== i4) return s2.errors = [{
-          instancePath: r2 + "/code",
-          schemaPath: "#/properties/code/enum",
-          keyword: "enum",
-          params: { allowedValues: e2.properties.code.enum },
-          message: "must be equal to one of the allowed values"
-        }], false;
-        var o2 = 0 === a3;
-      } else o2 = true;
-      if (o2) {
-        if (void 0 !== t2.indent) {
-          let e3 = t2.indent;
-          const i4 = 0;
-          if ("number" != typeof e3 || e3 % 1 || isNaN(e3) || !isFinite(e3)) return s2.errors = [{
-            instancePath: r2 + "/indent",
-            schemaPath: "#/properties/indent/type",
-            keyword: "type",
-            params: { type: "integer" },
-            message: "must be integer"
-          }], false;
-          o2 = 0 === i4;
-        } else o2 = true;
-        if (o2) if (void 0 !== t2.parameters) {
-          let e3 = t2.parameters;
-          const i4 = 0;
-          if (!Array.isArray(e3)) return s2.errors = [{
-            instancePath: r2 + "/parameters",
-            schemaPath: "#/properties/parameters/type",
-            keyword: "type",
-            params: { type: "array" },
-            message: "must be array"
-          }], false;
-          if (e3.length > 1) return s2.errors = [{
-            instancePath: r2 + "/parameters",
-            schemaPath: "#/properties/parameters/maxItems",
-            keyword: "maxItems",
-            params: { limit: 1 },
-            message: "must NOT have more than 1 items"
-          }], false;
-          if (e3.length < 1) return s2.errors = [{
-            instancePath: r2 + "/parameters",
-            schemaPath: "#/properties/parameters/minItems",
-            keyword: "minItems",
-            params: { limit: 1 },
-            message: "must NOT have fewer than 1 items"
-          }], false;
-          if (e3.length > 0) {
-            let t3 = e3[0];
-            if (!t3 || "object" != typeof t3 || Array.isArray(t3)) return s2.errors = [{
-              instancePath: r2 + "/parameters/0",
-              schemaPath: "#/properties/parameters/items/0/type",
-              keyword: "type",
-              params: { type: "object" },
-              message: "must be object"
-            }], false;
-            {
-              let e4;
-              if (void 0 === t3.name && (e4 = "name") || void 0 === t3.volume && (e4 = "volume") || void 0 === t3.pitch && (e4 = "pitch") || void 0 === t3.pan && (e4 = "pan")) return s2.errors = [{
-                instancePath: r2 + "/parameters/0",
-                schemaPath: "#/properties/parameters/items/0/required",
-                keyword: "required",
-                params: { missingProperty: e4 },
-                message: "must have required property '" + e4 + "'"
-              }], false;
-              for (const e5 in t3) if ("name" !== e5 && "volume" !== e5 && "pitch" !== e5 && "pan" !== e5) return s2.errors = [{
-                instancePath: r2 + "/parameters/0",
-                schemaPath: "#/properties/parameters/items/0/additionalProperties",
-                keyword: "additionalProperties",
-                params: { additionalProperty: e5 },
-                message: "must NOT have additional properties"
-              }], false;
-              if (void 0 !== t3.name) {
-                const e5 = 0;
-                if ("string" != typeof t3.name) return s2.errors = [{
-                  instancePath: r2 + "/parameters/0/name",
-                  schemaPath: "#/properties/parameters/items/0/properties/name/type",
-                  keyword: "type",
-                  params: { type: "string" },
-                  message: "must be string"
-                }], false;
-                var p2 = 0 === e5;
-              } else p2 = true;
-              if (p2) {
-                if (void 0 !== t3.volume) {
-                  let e5 = t3.volume;
-                  const i5 = 0;
-                  if ("number" != typeof e5 || e5 % 1 || isNaN(e5) || !isFinite(e5)) return s2.errors = [{
-                    instancePath: r2 + "/parameters/0/volume",
-                    schemaPath: "#/properties/parameters/items/0/properties/volume/type",
-                    keyword: "type",
-                    params: { type: "integer" },
-                    message: "must be integer"
-                  }], false;
-                  p2 = 0 === i5;
-                } else p2 = true;
-                if (p2) {
-                  if (void 0 !== t3.pitch) {
-                    let e5 = t3.pitch;
-                    const i5 = 0;
-                    if ("number" != typeof e5 || e5 % 1 || isNaN(e5) || !isFinite(e5)) return s2.errors = [{
-                      instancePath: r2 + "/parameters/0/pitch",
-                      schemaPath: "#/properties/parameters/items/0/properties/pitch/type",
-                      keyword: "type",
-                      params: { type: "integer" },
-                      message: "must be integer"
-                    }], false;
-                    p2 = 0 === i5;
-                  } else p2 = true;
-                  if (p2) if (void 0 !== t3.pan) {
-                    let e5 = t3.pan;
-                    const i5 = 0;
-                    if ("number" != typeof e5 || e5 % 1 || isNaN(e5) || !isFinite(e5)) return s2.errors = [{
-                      instancePath: r2 + "/parameters/0/pan",
-                      schemaPath: "#/properties/parameters/items/0/properties/pan/type",
-                      keyword: "type",
-                      params: { type: "integer" },
-                      message: "must be integer"
-                    }], false;
-                    p2 = 0 === i5;
-                  } else p2 = true;
-                }
-              }
-            }
-          }
-          o2 = 0 === i4;
-        } else o2 = true;
-      }
-    }
-    return s2.errors = null, true;
-  }
-  return r.exports;
-}());
-var i, a = { exports: {} };
-const n = e(function() {
-  if (i) return a.exports;
-  function e2(t2, { instancePath: r2 = "", parentData: s2, parentDataProperty: i2, rootData: a2 = t2 } = {}) {
-    if (!t2 || "object" != typeof t2 || Array.isArray(t2)) return e2.errors = [{ instancePath: r2, schemaPath: "#/type", keyword: "type", params: { type: "object" }, message: "must be object" }], false;
     {
       let s3;
       if (void 0 === t2.name && (s3 = "name") || void 0 === t2.id && (s3 = "id") || void 0 === t2.nickname && (s3 = "nickname") || void 0 === t2.battlerName && (s3 = "battlerName") || void 0 === t2.characterName && (s3 = "characterName") || void 0 === t2.characterIndex && (s3 = "characterIndex") || void 0 === t2.faceName && (s3 = "faceName") || void 0 === t2.faceIndex && (s3 = "faceIndex") || void 0 === t2.classId && (s3 = "classId") || void 0 === t2.initialLevel && (s3 = "initialLevel") || void 0 === t2.maxLevel && (s3 = "maxLevel")) return e2.errors = [{
@@ -479,11 +310,11 @@ const n = e(function() {
     }
     return e2.errors = null, true;
   }
-  return i = 1, a.exports = e2, a.exports.default = e2, a.exports;
-}());
-var o, p = { exports: {} };
-const m = e(function() {
-  if (o) return p.exports;
+  return t = 1, r.exports = e2, r.exports.default = e2, r.exports;
+}()), i = (e2) => s(e2);
+var a, n = { exports: {} };
+const o = e(function() {
+  if (a) return n.exports;
   function e2(t2, { instancePath: r2 = "", parentData: s2, parentDataProperty: i2, rootData: a2 = t2 } = {}) {
     if (!t2 || "object" != typeof t2 || Array.isArray(t2)) return e2.errors = [{
       instancePath: r2,
@@ -830,11 +661,11 @@ const m = e(function() {
     }
     return e2.errors = null, true;
   }
-  return o = 1, p.exports = e2, p.exports.default = e2, p.exports;
-}());
-var y, c = { exports: {} };
-const d = e(function() {
-  if (y) return c.exports;
+  return a = 1, n.exports = e2, n.exports.default = e2, n.exports;
+}()), p = (e2) => o(e2);
+var m, y = { exports: {} };
+const c = e(function() {
+  if (m) return y.exports;
   function e2(t2, { instancePath: r2 = "", parentData: s2, parentDataProperty: i2, rootData: a2 = t2 } = {}) {
     if (!t2 || "object" != typeof t2 || Array.isArray(t2)) return e2.errors = [{
       instancePath: r2,
@@ -1214,8 +1045,8 @@ const d = e(function() {
     }
     return e2.errors = null, true;
   }
-  return y = 1, c.exports = e2, c.exports.default = e2, c.exports;
-}());
+  return m = 1, y.exports = e2, y.exports.default = e2, y.exports;
+}()), d = (e2) => c(e2);
 var u, f = { exports: {} };
 const h = e(function() {
   if (u) return f.exports;
@@ -1745,10 +1576,10 @@ const h = e(function() {
     return e2.errors = null, true;
   }
   return u = 1, f.exports = e2, f.exports.default = e2, f.exports;
-}());
-var g, l = { exports: {} };
-const P = e(function() {
-  if (g) return l.exports;
+}()), g = (e2) => h(e2);
+var l, P = { exports: {} };
+const b = e(function() {
+  if (l) return P.exports;
   function e2(t2, { instancePath: r2 = "", parentData: s2, parentDataProperty: i2, rootData: a2 = t2 } = {}) {
     if (!t2 || "object" != typeof t2 || Array.isArray(t2)) return e2.errors = [{
       instancePath: r2,
@@ -2207,12 +2038,12 @@ const P = e(function() {
     }
     return e2.errors = null, true;
   }
-  return g = 1, l.exports = e2, l.exports.default = e2, l.exports;
-}());
-var b, v = { exports: {} };
-const N = e(function() {
-  if (b) return v.exports;
-  b = 1, v.exports = r2, v.exports.default = r2;
+  return l = 1, P.exports = e2, P.exports.default = e2, P.exports;
+}()), v = (e2) => b(e2);
+var N, k = { exports: {} };
+const w = e(function() {
+  if (N) return k.exports;
+  N = 1, k.exports = r2, k.exports.default = r2;
   const e2 = { properties: {
     name: { type: "string" },
     id: { type: "integer", minimum: 0 },
@@ -2800,11 +2631,11 @@ const N = e(function() {
     }
     return r2.errors = null, true;
   }
-  return v.exports;
-}());
-var k, w = { exports: {} };
-const I = e(function() {
-  if (k) return w.exports;
+  return k.exports;
+}()), I = (e2) => w(e2);
+var F, x = { exports: {} };
+const q = e(function() {
+  if (F) return x.exports;
   function e2(t2, { instancePath: r2 = "", parentData: s2, parentDataProperty: i2, rootData: a2 = t2 } = {}) {
     if (!t2 || "object" != typeof t2 || Array.isArray(t2)) return e2.errors = [{
       instancePath: r2,
@@ -3202,11 +3033,11 @@ const I = e(function() {
     }
     return e2.errors = null, true;
   }
-  return k = 1, w.exports = e2, w.exports.default = e2, w.exports;
-}());
-var F, x = { exports: {} };
-const q = e(function() {
-  if (F) return x.exports;
+  return F = 1, x.exports = e2, x.exports.default = e2, x.exports;
+}()), A = (e2) => q(e2);
+var T, j = { exports: {} };
+const D = e(function() {
+  if (T) return j.exports;
   function e2(t2, { instancePath: r2 = "", parentData: s2, parentDataProperty: i2, rootData: a2 = t2 } = {}) {
     if (!t2 || "object" != typeof t2 || Array.isArray(t2)) return e2.errors = [{
       instancePath: r2,
@@ -3692,7 +3523,16 @@ const q = e(function() {
     }
     return e2.errors = null, true;
   }
-  return F = 1, x.exports = e2, x.exports.default = e2, x.exports;
-}());
-exports.isAudioCommand = (e2) => s(e2), exports.isDataActor = (e2) => n(e2), exports.isDataArmor = (e2) => m(e2), exports.isDataClass = (e2) => d(e2), exports.isDataEnemy = (e2) => h(e2), exports.isDataItem = (e2) => P(e2), exports.isDataSkill = (e2) => N(e2), exports.isDataState = (e2) => I(e2), exports.isDataWeapon = (e2) => q(e2);
-//# sourceMappingURL=validate.cjs.js.map
+  return T = 1, j.exports = e2, j.exports.default = e2, j.exports;
+}()), B = (e2) => D(e2);
+export {
+  i as isDataActor,
+  p as isDataArmor,
+  d as isDataClass,
+  g as isDataEnemy,
+  v as isDataItem,
+  I as isDataSkill,
+  A as isDataState,
+  B as isDataWeapon
+};
+//# sourceMappingURL=rpg.es.js.map
