@@ -1,4 +1,4 @@
-declare const SCHEMA_DATA_WEAPON: {
+export declare const SCHEMA_DATA_WEAPON: {
     readonly type: "object";
     readonly required: readonly ["name", "id", "description", "iconIndex", "price", "params", "traits", "note", "etypeId", "animationId"];
     readonly properties: {
@@ -103,4 +103,3 @@ declare const SCHEMA_DATA_WEAPON: {
         };
     };
 };
-export default SCHEMA_DATA_WEAPON;
