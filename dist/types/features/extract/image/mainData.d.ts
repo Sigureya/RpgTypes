@@ -1,5 +1,4 @@
-import { ImageFolders } from 'src/rmmz/folderNames';
-import { Data_Actor } from 'src/rmmz/rpg/data';
+import { Data_Actor, Data_Enemy, ImageFolders } from '../../../rmmz';
 export interface ExtractedEnemyImage {
     key: string;
     image: string;
@@ -12,3 +11,5 @@ export interface ExtractedActorImage {
     id: number;
 }
 export type ImageExtractableActor = Pick<Data_Actor, "id" | "faceName" | "battlerName" | "characterName">;
+export declare const extractImageFromEnemy: (enemy: Pick<Data_Enemy, "id" | "battlerName">) => ExtractedEnemyImage;
+export declare const extractImageFromActor: (actor: ImageExtractableActor) => ExtractedActorImage[];
