@@ -1,5 +1,6 @@
 import { EventCommand } from '../../../../../rmmz';
-import { EventCommandGroup, TextCommandBody } from './types';
+import { EventCommandGroup } from './types';
+import { TextCommandBody } from './utils/textCommandBody';
 export declare class SimpleEventCommandGroup<Header extends EventCommand, Body extends TextCommandBody> implements EventCommandGroup<Header, Body> {
     readonly bodyCode: Body["code"];
     readonly header: Header;

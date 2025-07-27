@@ -1,5 +1,4 @@
-import { Command_ShowMessageHeader } from '../../../../../../rmmz';
-import { Command_CommentHeader, Command_CommentBody, Command_ScriptBody, Command_ScriptHeader, Command_ShowMessageBody, Command_ScrollTextHeader, Command_ScrollTextBody as Command_ShowScrollingTextBody, EventCommand, ExtractCommandByParam, SHOW_MESSAGE_BODY } from '@sigureya/rpgtypes';
+import { Command_CommentBody, Command_CommentHeader, Command_ScriptBody, Command_ScriptHeader, Command_ScrollTextBody, Command_ScrollTextHeader, Command_ShowMessageBody, Command_ShowMessageHeader, EventCommand, ExtractCommandByParam, SHOW_MESSAGE_BODY } from '../../../../../../rmmz';
 export interface EventCommandGroupBase<Header extends EventCommand, Body extends ExtractCommandByParam<[string]>> {
     header: Header;
     bodies: Body[];
@@ -32,5 +31,5 @@ export type EventCommandGroup_Message = EventCommandGroup<Command_ShowMessageHea
     bodyCode: typeof SHOW_MESSAGE_BODY;
 };
 export type EventCommandGroup_Comment = EventCommandGroup<Command_CommentHeader, Command_CommentBody>;
-export type EventCommandGroup_ScrollingText = EventCommandGroup<Command_ScrollTextHeader, Command_ShowScrollingTextBody>;
+export type EventCommandGroup_ScrollingText = EventCommandGroup<Command_ScrollTextHeader, Command_ScrollTextBody>;
 export type EventCommandGroup_Script = EventCommandGroup<Command_ScriptHeader, Command_ScriptBody>;

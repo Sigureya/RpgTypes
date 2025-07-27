@@ -1,4 +1,5 @@
-import { EventCommandGroup, TextCommandBody } from './types';
+import { EventCommandGroup } from './types';
+import { TextCommandBody } from './utils/textCommandBody';
 export declare class CombinedEventCommandGroup<Header extends TextCommandBody, Body extends TextCommandBody> implements EventCommandGroup<Header, Body> {
     readonly header: Header;
     readonly bodies: Body[];

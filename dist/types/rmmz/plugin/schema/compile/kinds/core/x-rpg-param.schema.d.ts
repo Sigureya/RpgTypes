@@ -24,7 +24,7 @@ declare const SCHEMA_RPG_PARAM_META_SCHEMA: {
         };
     }, {
         type: "object";
-        required: ("kind" | "data")[];
+        required: ("data" | "kind")[];
         additionalProperties: false;
         properties: {
             kind: {
