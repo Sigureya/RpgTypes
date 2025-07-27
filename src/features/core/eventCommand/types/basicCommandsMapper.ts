@@ -32,7 +32,7 @@ export interface BasicMappingObject<T> extends FallbackMapper<T> {
 
   controlSwitch: CallBackFunc<RpgTypes.Command_ControlSwitches, T>;
   controlVariable: CallBackFunc<RpgTypes.Command_ControlVariables, T>;
-  // controlSelfSwitch: CallBackFunc<RpgTypes.Command_ControlSelfSwitch, T>;
+  controlSelfSwitch: CallBackFunc<RpgTypes.Command_ControlSelfSwitch, T>;
   controlTimer: CallBackFunc<RpgTypes.Command_ControlTimer, T>;
   conditionalBranch: CallBackFunc<RpgTypes.Command_ConditionalBranch, T>;
 
