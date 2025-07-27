@@ -1,5 +1,5 @@
 import type { JSONSchemaType } from "ajv";
-import type { Command_ShowChoices } from "./types";
+import type { Command_ShowChoices } from "./body/types";
 
 const SCHEMA_COMMAND_SHOW_CHOICES = {
   type: "object",
