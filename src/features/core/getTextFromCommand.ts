@@ -1,4 +1,5 @@
-import type { EventCommand } from "@RpgTypes/rmmz";
+import type { COMMENT_HEAD, SCRIPT_EVAL } from "@RpgTypes/rmmz";
+import { type EventCommand } from "@RpgTypes/rmmz";
 import { mappingCommandList } from "./eventCommand/allMapping";
 import type { TextCommandMapper } from "./eventCommand/textCommandMapper";
 import {
@@ -29,7 +30,13 @@ const extractTextMapper: TextCommandMapper<TextCommandParameter[]> = {
   changeProfile: (command) => [extractTextFromActorCommand(command)],
   showChoices: (command) => extractTextParamsFromChoice(command),
   showScrollingText: (groop) => {
-    return [groop.mergedBody()];
+    return [
+      {
+        code: groop.header.code,
+        paramIndex: 0,
+        value: groop.getBodyText(),
+      },
+    ];
   },
   showMessage(data): TextCommandParameter[] {
     if (data.bodies.length === 0) {
@@ -40,10 +47,21 @@ const extractTextMapper: TextCommandMapper<TextCommandParameter[]> = {
   choiceWhen() {
     return [];
   },
-  comment(groop) {
-    return [groop.mergedBody()];
-  },
-  script: (groop) => [], // readScript(groop),
+  comment: (groop) => [
+    {
+      code: 108 satisfies typeof COMMENT_HEAD,
+      paramIndex: 0,
+      value: groop.getBodyText(),
+    },
+  ],
+
+  script: (groop) => [
+    {
+      code: 355 satisfies typeof SCRIPT_EVAL,
+      paramIndex: 0,
+      value: groop.getBodyText(),
+    },
+  ],
   other: () => [],
   commentBody: () => [],
 };

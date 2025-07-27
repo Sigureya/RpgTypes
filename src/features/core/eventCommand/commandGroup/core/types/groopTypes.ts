@@ -1,16 +1,16 @@
-import type { Command_ShowMessageHeader } from "@RpgTypes/rmmz";
 import type {
-  Command_CommentHeader,
   Command_CommentBody,
+  Command_CommentHeader,
   Command_ScriptBody,
   Command_ScriptHeader,
-  Command_ShowMessageBody,
+  Command_ScrollTextBody,
   Command_ScrollTextHeader,
-  Command_ScrollTextBody as Command_ShowScrollingTextBody,
+  Command_ShowMessageBody,
+  Command_ShowMessageHeader,
   EventCommand,
   ExtractCommandByParam,
   SHOW_MESSAGE_BODY,
-} from "@sigureya/rpgtypes";
+} from "@RpgTypes/rmmz";
 
 export interface EventCommandGroupBase<
   Header extends EventCommand,
@@ -60,7 +60,7 @@ export type EventCommandGroup_Comment = EventCommandGroup<
 
 export type EventCommandGroup_ScrollingText = EventCommandGroup<
   Command_ScrollTextHeader,
-  Command_ShowScrollingTextBody
+  Command_ScrollTextBody
 >;
 
 export type EventCommandGroup_Script = EventCommandGroup<
