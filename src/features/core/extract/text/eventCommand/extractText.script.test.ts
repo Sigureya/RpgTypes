@@ -1,11 +1,11 @@
 import { describe, test, expect } from "vitest";
 import { createScriptGroup } from "@RpgTypes/features/core/eventCommand/commandGroup";
-import type { EventCommand } from "@sigureya/rpgtypes";
+import type { EventCommand } from "@RpgTypes/rmmz";
 import {
   makeCommandScriptBody,
   makeCommandScriptHeader,
   SCRIPT_EVAL,
-} from "@sigureya/rpgtypes";
+} from "@RpgTypes/rmmz";
 import { extractTextParamFromScript } from "./extractText";
 import type { TextCommandParameter } from "./types";
 

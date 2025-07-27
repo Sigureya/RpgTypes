@@ -1,9 +1,9 @@
-import type { Command_ShowMessageHeader, Data_Actor } from "@sigureya/rpgtypes";
-import {
-  isCommandShowMessage,
-  type EventCommand,
-  ControlChar,
-} from "@sigureya/rpgtypes";
+import type {
+  Command_ShowMessageHeader,
+  EventCommand,
+  Data_Actor,
+} from "@RpgTypes/rmmz";
+import { isCommandShowMessage } from "@RpgTypes/rmmz";
 
 export const pickSpeakerName = (command: Command_ShowMessageHeader): string => {
   return command.parameters[4] ? command.parameters[4].trimEnd() : "";
