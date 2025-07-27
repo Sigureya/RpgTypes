@@ -18,7 +18,7 @@ export const readNote = (note: string): NoteReadResult[] => {
  * note文字列を解析し、キーと値のペアを取得します。
  * タグが閉じられていない場合、その要素は無視されます。
  */
-const readNoteEx = <Result>(
+export const readNoteEx = <Result>(
   note: string,
   fn: (key: string, value: string) => Result
 ): Result[] => {
