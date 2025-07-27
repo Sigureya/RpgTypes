@@ -7,17 +7,19 @@ import { alias } from "./viteAlias.mts";
 
 const srcDir = path.resolve(__dirname, "src");
 
+const validateEntryPoints = () =>
+  ["validate/rmmz/rpg", "validate/rmmz/eventCommand"].reduce((acc, dir) => {
+    acc[dir] = path.resolve(srcDir, `${dir}/index.ts`);
+    return acc;
+  }, {});
+
 export default defineConfig(({ mode }) => {
   const entryPoints = {
+    ...validateEntryPoints(),
     main: path.resolve(srcDir, "index.ts"),
     features: path.resolve(srcDir, "features/index.ts"),
     libs: path.resolve(srcDir, "libs/index.ts"),
     rmmz: path.resolve(srcDir, "rmmz/index.ts"),
-    "validate/rpg": path.resolve(srcDir, "validate/rmmz/rpg/index.ts"),
-    "validate/eventCommand": path.resolve(
-      srcDir,
-      "validate/rmmz/eventCommand/index.ts"
-    ),
   };
 
   return {
@@ -34,6 +36,9 @@ export default defineConfig(({ mode }) => {
         output: {
           entryFileNames: (chunkInfo) => {
             const name = chunkInfo.name;
+            if (name.startsWith("validate/")) {
+              return "[name].[format].js";
+            }
             return `${name}/[name].[format].js`;
           },
           chunkFileNames: "shared/[name].[format].js",
