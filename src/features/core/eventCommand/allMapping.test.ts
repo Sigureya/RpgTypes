@@ -1,6 +1,12 @@
 import { describe, expect, test, vi } from "vitest";
 import { makeAudioFileParams } from "@RpgTypes/libs";
-import { makeCommandChangeBattleBGM } from "@RpgTypes/rmmz";
+import type { Command_ChangeActorImages } from "@RpgTypes/rmmz";
+import {
+  makeCommandChangeActorImages,
+  makeCommandChangeBattleBGM,
+  makeCommandMovePicture,
+  makeCommandShowPicture,
+} from "@RpgTypes/rmmz";
 import * as CMD from "@sigureya/rpgtypes";
 import { mappingCommand } from "./allMapping";
 import type { BasicMappingObject } from "./types/basicCommandsMapper";
@@ -77,13 +83,9 @@ describe("mappingCommand", () => {
     indent: 0,
     parameters: ["label"],
   });
-  testMapping<CMD.Command_ChangeActorImages>(
+  testMapping<Command_ChangeActorImages>(
     "changeActorImages",
-    CMD.makeCommandChangeActorImages({
-      actorId: 1,
-      faceIndex: 0,
-      characterIndex: 0,
-    })
+    makeCommandChangeActorImages({})
   );
   testMapping<CMD.Command_ChangeWindowColor>("changeWindowColor", {
     code: CMD.CHANGE_WINDOW_COLOR,
@@ -171,14 +173,35 @@ describe("mappingCommand", () => {
     indent: 0,
     parameters: [0, "image", 2],
   });
-  testMapping<CMD.Command_ShowPicture>("showPicture", RmmzMock.MockShowPicture);
-  testMapping<CMD.Command_MovePicture>("movePicture", RmmzMock.MockMovePicture);
+  testMapping<CMD.Command_ShowPicture>(
+    "showPicture",
+    makeCommandShowPicture({})
+  );
+  testMapping<CMD.Command_MovePicture>(
+    "movePicture",
+    makeCommandMovePicture({
+      pictureId: 0,
+      origin: 0,
+      x: 0,
+      y: 0,
+      scaleX: 100,
+      scaleY: 100,
+      opacity: 255,
+      blendMode: 0,
+      wait: false,
+      easingType: 0,
+    })
+  );
   testMapping<CMD.Command_RotatePicture>("rotatePicture", {
     code: CMD.ROTATE_PICTURE,
     indent: 0,
     parameters: [0, 0],
   });
-  testMapping<CMD.Command_TintPicture>("tintPicture", RmmzMock.MockTintPicture);
+  testMapping<CMD.Command_TintPicture>("tintPicture", {
+    code: CMD.TINT_PICTURE,
+    indent: 0,
+    parameters: [0, mockColor, 0, false],
+  });
   testMapping<CMD.Command_ErasePicture>("erasePicture", {
     code: CMD.ERASE_PICTURE,
     indent: 0,
@@ -189,9 +212,19 @@ describe("mappingCommand", () => {
     indent: 0,
     parameters: ["", 0, 0, false],
   });
-  testMapping<CMD.Command_PlayBGM>("playBGM", RmmzMock.MockPlayBGM);
-  testMapping<CMD.Command_FadeOutBGM>("fadeOutBGM", RmmzMock.MockFadeOutBGM);
-  testMapping<CMD.Command_PlaySE>("playSE", RmmzMock.MockPlaySE);
+  testMapping<CMD.Command_PlayBGM>(
+    "playBGM",
+    CMD.makeCommandPlayBGM(makeAudioFileParams())
+  );
+  testMapping<CMD.Command_FadeOutBGM>("fadeOutBGM", {
+    code: CMD.FADEOUT_BGM,
+    indent: 0,
+    parameters: [0],
+  });
+  testMapping<CMD.Command_PlaySE>(
+    "playSE",
+    CMD.makeCommandPlaySE(makeAudioFileParams())
+  );
   testMapping<CMD.Command_StopSE>("stopSE", {
     code: CMD.STOP_SE,
     indent: 0,
