@@ -1,4 +1,4 @@
-import type { TextCommandBody } from "../types/textCommandBody";
+import type { TextCommandBody } from "./textCommandBody";
 export const textFromJoinedBodies = (
   list: ReadonlyArray<Pick<TextCommandBody, "parameters">>
 ): string => {

@@ -1,6 +1,6 @@
 import { describe, test, expect } from "vitest";
-import type { TextCommandBody } from "../types/textCommandBody";
 import { textFromJoinedBodies } from "./join";
+import type { TextCommandBody } from "./textCommandBody";
 
 type PickedTextCommandBody = Pick<TextCommandBody, "parameters">;
 describe("textFromJoinedBodies", () => {

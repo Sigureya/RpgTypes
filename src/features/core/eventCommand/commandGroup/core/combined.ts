@@ -1,5 +1,6 @@
-import type { EventCommandGroup, TextCommandBody } from "./types";
+import type { EventCommandGroup } from "./types";
 import { textFromJoinedBodies } from "./utils/join";
+import type { TextCommandBody } from "./utils/textCommandBody";
 
 // 注釈やコメントなどの先頭とbodyが同じパラメータ型のパターン
 export class CombinedEventCommandGroup<
