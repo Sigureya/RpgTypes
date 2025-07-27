@@ -6,8 +6,8 @@ import {
   makeCommandScriptHeader,
   SCRIPT_EVAL,
 } from "@RpgTypes/rmmz";
-import { extractTextParamFromScript } from "./extractText";
-import type { TextCommandParameter } from "./types";
+import type { TextCommandParameter } from "./extract/text/eventCommand/types";
+import { extractTextParamFromScript } from "./extractGroupText";
 
 const test44 = (script: string, command: EventCommand[], index = 0) => {
   const expected: TextCommandParameter = {
