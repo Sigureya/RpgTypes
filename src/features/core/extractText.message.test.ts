@@ -6,8 +6,8 @@ import {
   makeCommandShowMessageBody,
   SHOW_MESSAGE_BODY,
 } from "@RpgTypes/rmmz";
-import { extractTextParamFromMessage } from "./extractText";
-import type { TextCommandParameter } from "./types";
+import type { TextCommandParameter } from "./extract/text/eventCommand/types";
+import { extractTextParamFromMessage } from "./extractGroupText";
 
 const test2 = (command: EventCommand[], expected: TextCommandParameter) => {
   test("", () => {
