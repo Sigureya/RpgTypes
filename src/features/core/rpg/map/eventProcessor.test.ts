@@ -2,6 +2,7 @@ import { describe, expect, test, vi } from "vitest";
 import type {
   Command_ChangeActorNickName,
   Command_CommonEvent,
+  EventCommandUnknown,
 } from "@RpgTypes/rmmz/eventCommand";
 import type { MapEventContainer, EventCommand } from "@RpgTypes/rmmz/rpg";
 import {
@@ -11,6 +12,7 @@ import {
   processMapEvents,
   gatherEventCommandContext,
 } from "./eventProcessor";
+import type { MapEventContext, MapEventLike } from "./types";
 
 // Mock Data
 const mockCommandA: Command_ChangeActorNickName = {
@@ -27,7 +29,7 @@ const mockCommandB: Command_CommonEvent = {
 const mockEvent1 = {
   id: 1,
   pages: [{ list: [mockCommandA] }],
-};
+} satisfies MapEventLike;
 const mockEvent2 = {
   id: 2,
   pages: [
@@ -35,11 +37,11 @@ const mockEvent2 = {
     { list: [mockCommandB] },
     { list: [mockCommandA, mockCommandA] },
   ],
-};
+} satisfies MapEventLike;
 const mockEvent3 = {
   id: 3,
   pages: [{ list: [mockCommandB] }],
-};
+} satisfies MapEventLike;
 
 const mockMap = Object.freeze<MapEventContainer<EventCommand>>({
   events: [mockEvent1, null, mockEvent2, mockEvent3, null],
@@ -56,13 +58,19 @@ describe("createEventContext", () => {
 describe("createCommandContext", () => {
   test("should map event commands to context", () => {
     const result = createCommandContext(mockEvent1.pages[0], 0, mockEvent1);
-    expect(result).toEqual([{ data: mockCommandA, eventId: 1, pageIndex: 0 }]);
+    expect(result).toEqual([
+      {
+        data: mockCommandA,
+        eventId: 1,
+        pageIndex: 0,
+      } satisfies MapEventContext<EventCommandUnknown>,
+    ]);
   });
 });
 
 describe("processEventPages", () => {
   test("should process all event pages with a provided function", () => {
-    const mockFn = vi.fn((page) => page.list.length);
+    const mockFn = vi.fn((page): number => page.list.length);
     const result = processEventPages(mockEvent2, mockFn);
 
     expect(result).toEqual([2, 1, 2]);
@@ -92,12 +100,12 @@ describe("gatherEventCommandContext", () => {
       data: mockCommandA,
       eventId: 1,
       pageIndex: 0,
-    });
+    } satisfies MapEventContext<EventCommandUnknown>);
     expect(result).toContainEqual({
       data: mockCommandB,
       eventId: 3,
       pageIndex: 0,
-    });
+    } satisfies MapEventContext<EventCommandUnknown>);
   });
 
   test("should correctly track function calls", () => {
