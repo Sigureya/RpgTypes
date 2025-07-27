@@ -19,55 +19,57 @@ import type { EventCommandGroup_Comment } from "./core";
 import { CombinedEventCommandGroup, SimpleEventCommandGroup } from "./core";
 
 describe("extractCommentGroup - Validation Tests", () => {
-  test("aa", () => {
-    const commands = [
-      makeCommandCommentHeader("Header text"),
+  const commands = [
+    makeCommandCommentHeader("Header text"),
+    makeCommandCommentBody("Body text 1"),
+    makeCommandCommentBody("Body text 2"),
+    makeCommandCommonEvent({ eventId: 6 }),
+  ];
+
+  const expected = {
+    header: makeCommandCommentHeader("Header text"),
+    bodies: [
       makeCommandCommentBody("Body text 1"),
       makeCommandCommentBody("Body text 2"),
-      makeCommandCommonEvent({ eventId: 6 }),
-    ];
-
-    const expected = {
-      header: makeCommandCommentHeader("Header text"),
-      bodies: [
-        makeCommandCommentBody("Body text 1"),
-        makeCommandCommentBody("Body text 2"),
-      ] satisfies Command_CommentBody[],
-    };
+    ] satisfies Command_CommentBody[],
+  };
+  test("bb", () => {
     const result = extractCommentGroup(commands, 0);
-    describe("bb", () => {
-      expect(result.header).toEqual(expected.header);
-    });
-    describe("cc", () => {
-      expect(result.bodies).toEqual(expected.bodies);
-    });
+    expect(result.header).toEqual(expected.header);
+  });
+  test("cc", () => {
+    const result = extractCommentGroup(commands, 0);
+    expect(result.bodies).toEqual(expected.bodies);
   });
 });
 
 describe("createCommentGroup - CombinedEventCommandGroup Creation", () => {
-  test("CombinedEventCommandGroup instance validation", () => {
+  describe("CombinedEventCommandGroup instance validation", () => {
     const commands = [
       makeCommandCommentHeader("aaa"),
       makeCommandCommentBody("bbb"),
       makeCommandCommentBody("ccc"),
     ];
-    const group: EventCommandGroup_Comment = createCommentGroup(commands, 0);
 
-    describe("should create an instance of CombinedEventCommandGroup", () => {
+    test("should create an instance of CombinedEventCommandGroup", () => {
+      const group: EventCommandGroup_Comment = createCommentGroup(commands, 0);
       expect(group).toBeInstanceOf(CombinedEventCommandGroup);
     });
 
-    describe("should return correct body text", () => {
+    test("should return correct body text", () => {
+      const group: EventCommandGroup_Comment = createCommentGroup(commands, 0);
       expect(group.getBodyText()).toBe("aaa\nbbb\nccc");
     });
     const expectedCommand: Command_CommentHeader =
       makeCommandCommentHeader("aaa\nbbb\nccc");
 
-    describe("should return correct merged body", () => {
+    test("should return correct merged body", () => {
+      const group: EventCommandGroup_Comment = createCommentGroup(commands, 0);
       const mergedBody = group.mergedBody();
       expect(mergedBody).toEqual(expectedCommand);
     });
-    describe("", () => {
+    test("", () => {
+      const group: EventCommandGroup_Comment = createCommentGroup(commands, 0);
       const normalizedCommands = group.normalizedCommands();
       expect(normalizedCommands).toEqual([expectedCommand]);
     });
