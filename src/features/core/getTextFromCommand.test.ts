@@ -15,6 +15,7 @@ import {
   CHANGE_NICKNAME,
   CHANGE_PROFILE,
   COMMENT_HEAD,
+  makeCommandCommentHeader,
   makeCommandShowMessage,
   SHOW_CHOICES,
   SHOW_MESSAGE,
@@ -43,7 +44,7 @@ const createMockCommand = <Code extends PickCommandByParam<[string]>["code"]>(
 const flattenExtractedText = (s: EventCommand[]) =>
   extractTextFromEventCommands(s).flat();
 
-describe.skip("extractTextFromEventCommands", () => {
+describe("extractTextFromEventCommands", () => {
   describe("showMessage", () => {
     test("empty", () => {
       const command: Command_ShowMessageHeader = makeCommandShowMessage({
@@ -140,23 +141,24 @@ describe.skip("extractTextFromEventCommands", () => {
       ];
       expect(result).toEqual(expected);
     });
-    test.skip("multi", () => {
+    test("multi", () => {
       const command: Command_CommentHeader = {
         code: COMMENT_HEAD,
         parameters: ["comment"],
         indent: 0,
       };
-      const bodies: Command_CommentHeader[] = createMockCommand(COMMENT_HEAD);
+      const mockTexts = ["aaa", "bbb", "ccc"];
+      const bodies: Command_CommentHeader[] = mockTexts.map((text) =>
+        makeCommandCommentHeader(text)
+      );
       const result = flattenExtractedText([command, ...bodies]);
       const expected: CommandParameter<string>[] = [
         { code: COMMENT_HEAD, value: "comment", paramIndex: 0 },
-        {
-          code: COMMENT_HEAD,
-          value: MockJoinedText,
-          paramIndex: 0,
-        },
+        { code: COMMENT_HEAD, value: "aaa", paramIndex: 0 },
+        { code: COMMENT_HEAD, value: "bbb", paramIndex: 0 },
+        { code: COMMENT_HEAD, value: "ccc", paramIndex: 0 },
       ];
-      expect(result[1]).toEqual(expected[1]);
+      expect(result).toEqual(expected);
     });
   });
 
