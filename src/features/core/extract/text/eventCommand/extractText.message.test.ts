@@ -1,14 +1,11 @@
 import { test, expect, describe } from "vitest";
 import { createMessageGroup } from "@RpgTypes/features/core/eventCommand/commandGroup";
-import type {
-  EventCommand,
-  Command_ShowMessageHeader,
-} from "@sigureya/rpgtypes";
+import type { Command_ShowMessageHeader, EventCommand } from "@RpgTypes/rmmz";
 import {
   makeCommandShowMessage,
   makeCommandShowMessageBody,
   SHOW_MESSAGE_BODY,
-} from "@sigureya/rpgtypes";
+} from "@RpgTypes/rmmz";
 import { extractTextParamFromMessage } from "./extractText";
 import type { TextCommandParameter } from "./types";
 
