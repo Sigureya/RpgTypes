@@ -1,0 +1,3 @@
+import { Command_ShowMessageHeader } from '@sigureya/rpgtypes';
+export declare const pickSpeakerName: (command: Command_ShowMessageHeader) => string;
+export declare const speakerNameIsHHH: (name: string) => boolean;
