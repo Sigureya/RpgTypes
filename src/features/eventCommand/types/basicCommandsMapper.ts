@@ -1,0 +1,112 @@
+import type { Command_ShowMessageHeader, EventCommand } from "@RpgTypes/rmmz";
+import type * as RpgTypes from "@RpgTypes/rmmz";
+import type { Command_StopSE } from "@RpgTypes/rmmz/eventCommand";
+
+export type CallBackFunc<
+  Command extends {
+    code: number;
+    parameters: readonly unknown[];
+    indent: number;
+  },
+  Reulst = void
+> = (
+  command: Readonly<Command>,
+  index: number,
+  list: ReadonlyArray<Readonly<EventCommand>>
+) => Reulst;
+
+export interface FallbackMapper<T> {
+  other: CallBackFunc<EventCommand, T>;
+}
+
+export interface BasicMappingObject<T> extends FallbackMapper<T> {
+  showMessageHeader: CallBackFunc<Command_ShowMessageHeader, T>;
+  showMessageBody: CallBackFunc<RpgTypes.Command_ShowMessageBody, T>;
+
+  showScrollingTextBody: CallBackFunc<RpgTypes.Command_ScrollTextBody, T>;
+  commentHedder: CallBackFunc<RpgTypes.Command_CommentHeader, T>;
+  commentBody: CallBackFunc<RpgTypes.Command_CommentBody, T>;
+
+  scriptHedder: CallBackFunc<RpgTypes.Command_ScriptHeader, T>;
+  scriptBody: CallBackFunc<RpgTypes.Command_ScriptBody, T>;
+
+  controlSwitch: CallBackFunc<RpgTypes.Command_ControlSwitches, T>;
+  controlVariable: CallBackFunc<RpgTypes.Command_ControlVariables, T>;
+  // controlSelfSwitch: CallBackFunc<RpgTypes.Command_ControlSelfSwitch, T>;
+  controlTimer: CallBackFunc<RpgTypes.Command_ControlTimer, T>;
+  conditionalBranch: CallBackFunc<RpgTypes.Command_ConditionalBranch, T>;
+
+  battleProcessing: CallBackFunc<RpgTypes.Command_BattleProcessing, T>;
+  showChoices: CallBackFunc<RpgTypes.Command_ShowChoices, T>;
+  choiceWhen: CallBackFunc<RpgTypes.Command_ShowChoiceWhen, T>;
+  changeName: CallBackFunc<RpgTypes.Command_ChangeActorName, T>;
+  changeProfile: CallBackFunc<RpgTypes.Command_ChangeActorProfile, T>;
+  changeNickname: CallBackFunc<RpgTypes.Command_ChangeActorNickName, T>;
+
+  label: CallBackFunc<RpgTypes.Command_Label, T>;
+  labelJump: CallBackFunc<RpgTypes.Command_LabelJump, T>;
+  commonEvent: CallBackFunc<RpgTypes.Command_CommonEvent, T>;
+  changeBattleBGM: CallBackFunc<RpgTypes.Command_ChangeBattleBGM, T>;
+  changeVictoryME: CallBackFunc<RpgTypes.Command_ChangeVictoryME, T>;
+  changeDefeatME: CallBackFunc<RpgTypes.Command_ChangeDefeatME, T>;
+  changeSaveAccess: CallBackFunc<RpgTypes.Command_ChangeSaveAccess, T>;
+  changeMenuAccess: CallBackFunc<RpgTypes.Command_ChangeMenuAccess, T>;
+  changeEncounter: CallBackFunc<RpgTypes.Command_ChangeEncounter, T>;
+  changeFormationAccess: CallBackFunc<
+    RpgTypes.Command_ChangeFormationAccess,
+    T
+  >;
+  changeWindowColor: CallBackFunc<RpgTypes.Command_ChangeWindowColor, T>;
+  changeGold: CallBackFunc<RpgTypes.Command_ChangeGold, T>;
+
+  showAnimation: CallBackFunc<RpgTypes.Command_ShowAnimation, T>;
+  transferPlayer: CallBackFunc<RpgTypes.Command_TransferPlayer, T>;
+  setVehicleLocation: CallBackFunc<RpgTypes.Command_SetVehicleLocation, T>;
+  setEventLocation: CallBackFunc<RpgTypes.Command_SetEventLocation, T>;
+  scrollMap: CallBackFunc<RpgTypes.Command_ScrollMap, T>;
+  setMovementRoute: CallBackFunc<RpgTypes.Command_SetMovementRoute, T>;
+  gettingOnOffVehicle: CallBackFunc<RpgTypes.Command_GetOnOffVehicle, T>;
+  changeTransparency: CallBackFunc<RpgTypes.Command_ChangeTransparency, T>;
+  showPicture: CallBackFunc<RpgTypes.Command_ShowPicture, T>;
+  movePicture: CallBackFunc<RpgTypes.Command_MovePicture, T>;
+  rotatePicture: CallBackFunc<RpgTypes.Command_RotatePicture, T>;
+  tintPicture: CallBackFunc<RpgTypes.Command_TintPicture, T>;
+  erasePicture: CallBackFunc<RpgTypes.Command_ErasePicture, T>;
+  setWeatherEffects: CallBackFunc<RpgTypes.Command_SetWeatherEffect, T>;
+  playBGM: CallBackFunc<RpgTypes.Command_PlayBGM, T>;
+  fadeOutBGM: CallBackFunc<RpgTypes.Command_FadeOutBGM, T>;
+  saveBGM: CallBackFunc<RpgTypes.Command_SaveBGM, T>;
+  resumeBGM: CallBackFunc<RpgTypes.Command_ResumeBGM, T>;
+  playBGS: CallBackFunc<RpgTypes.Command_PlayBGS, T>;
+  fadeOutBGS: CallBackFunc<RpgTypes.Command_FadeOutBGS, T>;
+  playME: CallBackFunc<RpgTypes.Command_PlayME, T>;
+  playSE: CallBackFunc<RpgTypes.Command_PlaySE, T>;
+  stopSE: CallBackFunc<Command_StopSE, T>;
+  playMovie: CallBackFunc<RpgTypes.Command_PlayMovie, T>;
+  changePlayerFollowers: CallBackFunc<
+    RpgTypes.Command_ChangePlayerFollowers,
+    T
+  >;
+  gameover: CallBackFunc<RpgTypes.Command_GameOver, T>;
+  wait: CallBackFunc<RpgTypes.Command_Wait, T>;
+  shonAnimation: CallBackFunc<RpgTypes.Command_ShowAnimation, T>;
+  gatherFollowers: CallBackFunc<RpgTypes.Command_GatherFollowers, T>;
+  changeWeapon: CallBackFunc<RpgTypes.Command_ChangeWeapons, T>;
+  changeArmor: CallBackFunc<RpgTypes.Command_ChangeArmors, T>;
+  changePartyMember: CallBackFunc<RpgTypes.Command_ChangePartyMember, T>;
+  changeActorImages: CallBackFunc<RpgTypes.Command_ChangeActorImages, T>;
+
+  changeTileset: CallBackFunc<RpgTypes.Command_ChangeTileset, T>;
+  changeBattleBackground: CallBackFunc<
+    RpgTypes.Command_ChangeBattleBackground,
+    T
+  >;
+  changeParallax: CallBackFunc<RpgTypes.Command_ChangeParallax, T>;
+  getLocationsInfo: CallBackFunc<RpgTypes.Command_GetLocationInfo, T>;
+
+  changeVehicleImage: CallBackFunc<RpgTypes.Command_ChangeVehicleImage, T>;
+
+  tintScreen: CallBackFunc<RpgTypes.Command_TintScreen, T>;
+  flashScreen: CallBackFunc<RpgTypes.Command_FlashScreen, T>;
+  shakeScreen: CallBackFunc<RpgTypes.Command_ShakeScreen, T>;
+}
