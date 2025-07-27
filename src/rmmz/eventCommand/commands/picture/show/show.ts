@@ -1,7 +1,7 @@
 import type {
-  Command_ShowPicture,
+  Command_ShowPicture2,
   ParamObject_ParamsMovePicture,
-  Command_MovePicture,
+  Command_MovePicture2,
   ParamsArray_ParamsMovePicture,
   ParamObject_ParamsShowPicture,
 } from "./types";
@@ -16,7 +16,7 @@ export const makeCommandShowPicture = ({
   scaleY = 100,
   opacity = 255,
   blendMode = 0,
-}: Partial<ParamObject_ParamsShowPicture>): Command_ShowPicture => ({
+}: Partial<ParamObject_ParamsShowPicture>): Command_ShowPicture2 => ({
   code: 231,
   indent: 0,
   parameters: [
@@ -43,7 +43,7 @@ export const makeCommandMovePicture = ({
   blendMode,
   wait = false,
   easingType = 0,
-}: ParamObject_ParamsMovePicture): Command_MovePicture => ({
+}: ParamObject_ParamsMovePicture): Command_MovePicture2 => ({
   code: 232,
   indent: 0,
   parameters: [

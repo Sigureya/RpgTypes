@@ -1,17 +1,12 @@
-import {
-  beforeEach,
-  describe,
-  expect,
-  test,
-  vi,
-  type MockedObject,
-} from "vitest";
+import type { MockedObject } from "vitest";
+import { describe, expect, test, vi } from "vitest";
 import type {
   Command_ChangeActorName,
   Command_ChangeActorNickName,
   Command_ChangeActorProfile,
+  Command_ShowChoices,
+  EventCommand,
 } from "@RpgTypes/rmmz";
-import type { Command_ShowChoices, EventCommand } from "@sigureya/rpgtypes";
 import { handlerDispatch } from "./text";
 import type { TextCommandMapper } from "./textCommandMapper";
 
@@ -29,6 +24,7 @@ const createMockMapper = (): MockedObject<TextCommandMapper<void>> => ({
   commentBody: vi.fn(),
   other: vi.fn(),
 });
+
 describe("handlerDispatch", () => {
   test("ShowChoices", () => {
     const mapper = createMockMapper();

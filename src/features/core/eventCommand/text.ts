@@ -1,3 +1,4 @@
+import type { EventCommand } from "@RpgTypes/rmmz";
 import {
   CHANGE_NAME,
   CHANGE_NICKNAME,
@@ -8,8 +9,7 @@ import {
   SHOW_CHOICES_ITEM,
   SHOW_MESSAGE,
   SHOW_SCROLLING_TEXT,
-} from "@sigureya/rpgtypes";
-import type { EventCommand } from "@sigureya/rpgtypes";
+} from "@RpgTypes/rmmz";
 import {
   createMessageGroup,
   createScrollTextGroup,

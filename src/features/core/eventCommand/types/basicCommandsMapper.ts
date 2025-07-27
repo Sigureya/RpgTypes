@@ -67,8 +67,8 @@ export interface BasicMappingObject<T> extends FallbackMapper<T> {
   setMovementRoute: CallBackFunc<RpgTypes.Command_SetMovementRoute, T>;
   gettingOnOffVehicle: CallBackFunc<RpgTypes.Command_GetOnOffVehicle, T>;
   changeTransparency: CallBackFunc<RpgTypes.Command_ChangeTransparency, T>;
-  showPicture: CallBackFunc<RpgTypes.Command_ShowPicture, T>;
-  movePicture: CallBackFunc<RpgTypes.Command_MovePicture, T>;
+  showPicture: CallBackFunc<RpgTypes.Command_ShowPicture2, T>;
+  movePicture: CallBackFunc<RpgTypes.Command_MovePicture2, T>;
   rotatePicture: CallBackFunc<RpgTypes.Command_RotatePicture, T>;
   tintPicture: CallBackFunc<RpgTypes.Command_TintPicture, T>;
   erasePicture: CallBackFunc<RpgTypes.Command_ErasePicture, T>;
