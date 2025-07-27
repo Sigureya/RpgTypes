@@ -1,11 +1,26 @@
-import { a as i, d as c, aQ as p, r as f, av as l } from "../shared/namedItems.es.js";
-import { m as r } from "../shared/mergeItemsSource.es.js";
-const d = (a, s, t, e, o, m) => [...i(t, e), ...c(a, s), ...p(o, m)], u = (a, s) => r(f(s), a), y = (a, s, t) => {
-  const e = l(s);
-  return r(t ? [...e, ...t] : e, a);
+import { a as f, d, aQ as p, r as N, av as g } from "../shared/namedItems.es.js";
+import { m as c } from "../shared/mergeItemsSource.es.js";
+const b = (a) => ({
+  key: "battlerName",
+  image: a.battlerName,
+  id: a.id
+}), m = (a, e, t) => ({ folder: t, key: e, image: a[e], id: a.id }), n = (a) => [m(a, "faceName", "faces"), m(a, "characterName", "characters"), m(a, "battlerName", "sv_actors")], s = (a, e) => ({
+  folder: "characters",
+  key: e,
+  image: a[e].characterName
+}), i = (a, e, t) => ({
+  folder: t,
+  key: e,
+  image: a[e]
+}), I = (a) => [i(a, "title1Name", "titles1"), i(a, "title2Name", "titles2"), s(a, "boat"), s(a, "ship"), s(a, "airship")], k = (a, e, t, r, o, l) => [...f(t, r), ...d(a, e), ...p(o, l)], x = (a, e) => c(N(e), a), D = (a, e, t) => {
+  const r = g(e);
+  return c(t ? [...r, ...t] : r, a);
 };
 export {
-  d as buildReferenceItemSources,
-  y as compileItemEffectDisplayData,
-  u as compileTraitDisplayData
+  k as buildReferenceItemSources,
+  D as compileItemEffectDisplayData,
+  x as compileTraitDisplayData,
+  n as extractImageFromActor,
+  b as extractImageFromEnemy,
+  I as extractImageFromSystem
 };
