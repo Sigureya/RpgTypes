@@ -1,6 +1,7 @@
 import type { EventCommand } from "@RpgTypes/rmmz";
-import type { EventCommandGroup, TextCommandBody } from "./types";
+import type { EventCommandGroup } from "./types";
 import { textFromJoinedBodies } from "./utils/join";
+import type { TextCommandBody } from "./utils/textCommandBody";
 
 //　メッセージとかscrollテキスト。ヘッダとbodyが異なるパターン
 export class SimpleEventCommandGroup<
