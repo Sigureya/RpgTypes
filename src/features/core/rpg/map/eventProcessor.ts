@@ -3,7 +3,7 @@ import type {
   Data_CommonEvent,
   Data_Troop,
   MapEventContainer,
-} from "@sigureya/rpgtypes";
+} from "@RpgTypes/rmmz";
 import type { MapEventContext } from "./types";
 
 interface EventContainer<Command> {
