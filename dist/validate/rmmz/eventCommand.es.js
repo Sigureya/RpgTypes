@@ -1,4 +1,4 @@
-import { g as f } from "../../../shared/_commonjsHelpers.es.js";
+import { g as f } from "../../shared/_commonjsHelpers.es.js";
 var u, h = { exports: {} };
 const l = f(function() {
   if (u) return h.exports;

@@ -1,8 +1,8 @@
-import { EventCommand } from '@sigureya/rpgtypes';
-export type EventCommandContainer = CommandContainer<EventCommand>;
-export interface CommandContainer<Command> {
+import { EventCommand, EventCommandUnknown } from '../../../../rmmz';
+export interface CommandContainer<Command extends EventCommandUnknown> {
     list: ReadonlyArray<Command>;
 }
+export type EventCommandContainer = CommandContainer<EventCommand>;
 export interface MapEventLike {
     id: number;
     pages: EventCommandContainer[];

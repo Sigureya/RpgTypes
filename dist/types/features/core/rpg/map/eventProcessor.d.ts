@@ -1,4 +1,4 @@
-import { BattleEventPage, Data_CommonEvent, Data_Troop, MapEventContainer } from '@sigureya/rpgtypes';
+import { BattleEventPage, Data_CommonEvent, Data_Troop, MapEventContainer } from '../../../../rmmz';
 import { MapEventContext } from './types';
 interface EventContainer<Command> {
     id: number;
