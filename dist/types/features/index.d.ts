@@ -1,2 +1,2 @@
-export * from './extract';
+export * from './core/extract';
 export * from './format/trait/formatTraits';

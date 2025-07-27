@@ -4,5 +4,6 @@ export * from './flow';
 export * from './message';
 export * from './message';
 export * from './nonParam';
+export * from './picture';
 export * from './script';
 export * from './variable';
