@@ -143,8 +143,4 @@ export default [
     files: ["src/**/*index.ts"],
     rules: { "sort-exports/sort-exports": ["error", { sortDir: "asc" }] },
   },
-  {
-    files: ["src/features/eventCommand/commandGroup/core/utils/pick.ts"],
-    "@functional/no-loop-statements": "off",
-  },
 ];

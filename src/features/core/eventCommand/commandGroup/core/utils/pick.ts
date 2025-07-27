@@ -18,7 +18,8 @@ export const pickCommands = <
   }
 
   // どうしようもないので、ここだけeslintのルールを無効化する
-  // eslint-disable-next-line functional/no-loop-statements
+  /* eslint-disable @functional/no-loop-statements */
+  /* eslint-disable @functional/no-let */
   const bodys: Body[] = [];
   for (let i = index + 1; i < array.length; i++) {
     const body = array[i];
