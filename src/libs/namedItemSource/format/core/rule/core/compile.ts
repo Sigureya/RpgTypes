@@ -1,4 +1,4 @@
-import type { PickByTypeKeys } from "src/libs/templates/pickByType";
+import type { PickByTypeKeys } from "@RpgTypes/libs/templates/pick/pickByType";
 import type { FormatArrayIndexCompiled } from "./array";
 import type {
   FormatArrayInput,
