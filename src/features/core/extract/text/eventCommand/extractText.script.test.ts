@@ -6,7 +6,7 @@ import {
   makeCommandScriptHeader,
   SCRIPT_EVAL,
 } from "@sigureya/rpgtypes";
-import { extractTextParamFromScript } from "./script";
+import { extractTextParamFromScript } from "./extractText";
 import type { TextCommandParameter } from "./types";
 
 const test44 = (script: string, command: EventCommand[], index = 0) => {

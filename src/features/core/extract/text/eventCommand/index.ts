@@ -1,2 +1,2 @@
-export * from "./actor";
+export * from "./extractText";
 export * from "./types";

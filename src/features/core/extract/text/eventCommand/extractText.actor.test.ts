@@ -6,7 +6,7 @@ import type {
   Command_ChangeActorProfile,
 } from "@RpgTypes/rmmz/eventCommand";
 import type { CommandParameter } from "@RpgTypes/rmmz/eventCommand/utils/pickParam";
-import { extractTextFromActorCommand } from "./actor";
+import { extractTextFromActorCommand } from "./extractText";
 
 describe("extractTextFromActorCommand", () => {
   describe("changeName", () => {
