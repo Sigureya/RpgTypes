@@ -63,7 +63,7 @@ export const resolveTraitLabels = (labels: TraitLabelSet): TraitFormat[] => {
     extraParam(labels.extraParam),
     specialParam(labels.specialParam),
     attackElement(labels.attackElement),
-    atttackState(labels.attackState),
+    attackState(labels.attackState),
     attackSpeed(labels.attackSpeed),
     attackTimes(labels.attackTimes),
     attackSkill(labels.attackSkill),
@@ -162,7 +162,7 @@ const attackElement = (label: RawTraitLabel): TraitFormat => ({
   dataSource: systemElementsSourceId(),
 });
 
-const atttackState = (label: RawTraitLabel): TraitFormat => ({
+const attackState = (label: RawTraitLabel): TraitFormat => ({
   pattern: label.format,
   label: label.title,
   kindId: TRAIT_ATTACK_STATE,
