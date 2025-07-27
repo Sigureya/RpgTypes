@@ -44,7 +44,7 @@ describe("extractCommentGroup - Validation Tests", () => {
   });
 });
 
-describe.skip("createCommentGroup - CombinedEventCommandGroup Creation", () => {
+describe("createCommentGroup - CombinedEventCommandGroup Creation", () => {
   test("CombinedEventCommandGroup instance validation", () => {
     const commands = [
       makeCommandCommentHeader("aaa"),
@@ -74,7 +74,7 @@ describe.skip("createCommentGroup - CombinedEventCommandGroup Creation", () => {
   });
 });
 
-describe.skip("createCommentGroup - SimpleEventCommandGroup Creation", () => {
+describe("createCommentGroup - SimpleEventCommandGroup Creation", () => {
   const commands = [
     makeCommandCommentHeader(CHOICE_HELP_TEXT),
     makeCommandCommentBody("Help text"),
