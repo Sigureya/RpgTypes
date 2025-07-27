@@ -45,7 +45,7 @@ export const mappingCommand = <T>(
     // メッセージ関連
     case Code.SHOW_MESSAGE:
       return table.showMessage
-        ? table.showMessage(createMessageGroup(array, index))
+        ? table.showMessage(createMessageGroup(array, index), index, array)
         : table.other(command, index, array);
     case Code.SHOW_MESSAGE_BODY:
       return callHandler(
@@ -57,7 +57,11 @@ export const mappingCommand = <T>(
       );
     case Code.SHOW_SCROLLING_TEXT:
       return table.showScrollingText
-        ? table.showScrollingText(createScrollTextGroup(array, index))
+        ? table.showScrollingText(
+            createScrollTextGroup(array, index),
+            index,
+            array
+          )
         : table.other(command, index, array);
     case Code.SHOW_SCROLLING_TEXT_BODY:
       return callHandler(
@@ -75,13 +79,13 @@ export const mappingCommand = <T>(
     // コメント・スクリプト関連
     case Code.COMMENT_HEAD:
       return table.comment
-        ? table.comment(createCommentGroup(array, index))
+        ? table.comment(createCommentGroup(array, index), index, array)
         : table.other(command, index, array);
     case Code.COMMENT_BODY:
       return callHandler(command, index, array, table.commentBody, table.other);
     case Code.SCRIPT_EVAL:
       return table.script
-        ? table.script(createScriptGroup(array, index))
+        ? table.script(createScriptGroup(array, index), index, array)
         : table.other(command, index, array);
     case Code.SCRIPT_EVAL_BODY:
       return callHandler(command, index, array, table.scriptBody, table.other);
