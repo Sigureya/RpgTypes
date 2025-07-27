@@ -31,13 +31,13 @@ describe("extractScriptGroup - Validation Tests", () => {
     expect(extractScriptGroup(mockCommands, 1)).toEqual(expected);
   });
 
-  const result = extractScriptGroup(mockCommands, 1);
-
   test("should extract the correct header", () => {
+    const result = extractScriptGroup(mockCommands, 1);
     expect(result.header).toEqual(expected.header);
   });
 
   test("should extract the correct bodies", () => {
+    const result = extractScriptGroup(mockCommands, 1);
     expect(result.bodies).toEqual(expected.bodies);
   });
 });
