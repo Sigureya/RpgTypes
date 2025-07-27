@@ -1,9 +1,12 @@
-import type { Command_SelfSwitch, ParamObject_SelfSwitch } from "./types";
+import type {
+  Command_ControlSelfSwitch,
+  ParamObject_SelfSwitch,
+} from "./types";
 import type { ParamArray_SelfSwitch } from "./types";
 
 export function makeCommandSelfSwitch(
   params: ParamObject_SelfSwitch
-): Command_SelfSwitch {
+): Command_ControlSelfSwitch {
   return {
     code: 123, // Assuming 123 is the code for self switch command
     indent: 0,
@@ -23,16 +26,16 @@ export function fromArraySelfSwitch(
 export function toArraySelfSwitch(
   object: Partial<ParamObject_SelfSwitch>
 ): ParamArray_SelfSwitch {
-  return [object.switchName ?? "", object.value ?? false];
+  return [object.switchName ?? "", object.value ? 1 : 0];
 }
 
 export function isSelfSwitchCommand(
-  command: Command_SelfSwitch | unknown
-): command is Command_SelfSwitch {
+  command: Command_ControlSelfSwitch | unknown
+): command is Command_ControlSelfSwitch {
   return (
     typeof command === "object" &&
     command !== null &&
     "code" in command &&
-    (command as Command_SelfSwitch).code === 123
+    (command as Command_ControlSelfSwitch).code === 123
   );
 }
