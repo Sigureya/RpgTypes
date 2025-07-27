@@ -192,7 +192,7 @@ describe("pickCommands - Complex Cases", () => {
   });
 });
 
-describe.skip("pickCommands - Edge cases", () => {
+describe("pickCommands - Edge cases", () => {
   describe("Empty array handling", () => {
     const mockFn = makeMockFunctions();
     test("should throw an error when the array is empty", () => {
@@ -200,8 +200,8 @@ describe.skip("pickCommands - Edge cases", () => {
         pickCommands(
           [],
           0,
-          mockFn.head as unknown as typeof isCommandShowMessage,
-          mockFn.body as unknown as typeof isCommandShowMessageBody
+          (a): a is EventCommand => mockFn.head(a),
+          (b): b is Command_ShowMessageBody => mockFn.body(b)
         )
       ).toThrow();
     });
