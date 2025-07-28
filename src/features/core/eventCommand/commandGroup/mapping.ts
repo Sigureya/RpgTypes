@@ -1,10 +1,10 @@
+import type { EventCommand } from "@RpgTypes/rmmz";
 import {
   COMMENT_HEAD,
   SCRIPT_EVAL,
   SHOW_MESSAGE,
   SHOW_SCROLLING_TEXT,
-  type EventCommand,
-} from "@sigureya/rpgtypes";
+} from "@RpgTypes/rmmz";
 import { createCommentGroup } from "./comment";
 import type { GroopMapper } from "./core";
 import { createMessageGroup } from "./message";
