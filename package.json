@@ -41,6 +41,10 @@
     "build": "vite build",
     "generate:schema": "vite build --mode generateschema",
     "test": "vitest",
+    "test:libs": "vitest run src/libs",
+    "test:rmmz-rpg": "vitest run src/rmmz/rpg",
+    "test:rmmz-command": "vitest run src/rmmz/eventCommand",
+    "test:features": "vitest run src/features",
     "test:watch": "vitest --watch",
     "lint": "eslint src --ext .ts",
     "typecheck": "tsc --noEmit"
