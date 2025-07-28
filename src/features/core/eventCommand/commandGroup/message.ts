@@ -3,11 +3,7 @@ import type {
   Command_ShowMessageBody,
   Command_ShowMessageHeader,
 } from "@RpgTypes/rmmz";
-import {
-  isCommandShowMessage,
-  isCommandShowMessageBody,
-  SHOW_MESSAGE_BODY,
-} from "@RpgTypes/rmmz";
+import { SHOW_MESSAGE, SHOW_MESSAGE_BODY } from "@RpgTypes/rmmz";
 import { pickCommands, SimpleEventCommandGroup } from "./core";
 
 export const extractMessageGroup = (
@@ -17,8 +13,8 @@ export const extractMessageGroup = (
   return pickCommands(
     list,
     index,
-    (a) => isCommandShowMessage(a),
-    (b) => isCommandShowMessageBody(b)
+    (a) => a.code === SHOW_MESSAGE,
+    (b) => b.code === SHOW_MESSAGE_BODY
   );
 };
 
