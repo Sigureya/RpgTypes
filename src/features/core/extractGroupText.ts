@@ -1,6 +1,13 @@
+import {
+  SCRIPT_EVAL,
+  SHOW_MESSAGE_BODY,
+  SHOW_SCROLLING_TEXT_BODY,
+} from "@RpgTypes/rmmz";
 import type {
+  EventCommandGroup_Comment,
   EventCommandGroup_Message,
   EventCommandGroup_Script,
+  EventCommandGroup_ScrollingText,
 } from "./eventCommand/commandGroup";
 import type { TextCommandParameter } from "./extract/text/eventCommand";
 import { pickSpeakerName } from "./extract/text/eventCommand/speaker";
@@ -9,7 +16,7 @@ export const extractTextParamFromMessage = (
   messageCommand: EventCommandGroup_Message
 ): Required<TextCommandParameter> => {
   return {
-    code: messageCommand.bodyCode,
+    code: SHOW_MESSAGE_BODY,
     paramIndex: 0,
     value: messageCommand.getBodyText(),
     speaker: pickSpeakerName(messageCommand.header),
@@ -18,6 +25,26 @@ export const extractTextParamFromMessage = (
 
 export const extractTextParamFromScript = (
   group: EventCommandGroup_Script
+): TextCommandParameter => {
+  return {
+    code: SCRIPT_EVAL,
+    paramIndex: 0,
+    value: group.getBodyText(),
+  };
+};
+
+export const extractTextParamFromShowScrollingText = (
+  group: EventCommandGroup_ScrollingText
+): TextCommandParameter => {
+  return {
+    code: SHOW_SCROLLING_TEXT_BODY,
+    paramIndex: 0,
+    value: group.getBodyText(),
+  };
+};
+
+export const extractTextParamFromComment = (
+  group: EventCommandGroup_Comment
 ): TextCommandParameter => {
   return {
     code: group.header.code,
