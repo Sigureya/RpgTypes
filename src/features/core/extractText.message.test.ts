@@ -3,7 +3,6 @@ import { createMessageGroup } from "@RpgTypes/features/core/eventCommand/command
 import type {
   Command_ShowMessageBody,
   Command_ShowMessageHeader,
-  EventCommand,
 } from "@RpgTypes/rmmz";
 import {
   makeCommandShowMessage,
@@ -13,16 +12,8 @@ import {
 import type { TextCommandParameter } from "./extract/text/eventCommand/types";
 import { extractTextParamFromMessage } from "./extractGroupText";
 
-const test2 = (command: EventCommand[], expected: TextCommandParameter) => {
-  test("", () => {
-    const group = createMessageGroup(command, 0);
-    const result = extractTextParamFromMessage(group);
-    expect(result satisfies typeof expected).toEqual(expected);
-  });
-};
-
 describe("extractTextParamFromMessage", () => {
-  describe("", () => {
+  test("single body", () => {
     const commands: [Command_ShowMessageHeader, Command_ShowMessageBody] = [
       makeCommandShowMessage({
         speakerName: "abc",
@@ -35,9 +26,11 @@ describe("extractTextParamFromMessage", () => {
       value: "xxx",
       paramIndex: 0,
     };
-    test2(commands, expected);
+    const group = createMessageGroup(commands, 0);
+    const result = extractTextParamFromMessage(group);
+    expect(result).toEqual(expected);
   });
-  describe("", () => {
+  test("mulit body", () => {
     const commands = [
       makeCommandShowMessage({
         speakerName: "abc",
@@ -48,12 +41,14 @@ describe("extractTextParamFromMessage", () => {
     const expected: TextCommandParameter = {
       speaker: "abc",
       code: SHOW_MESSAGE_BODY,
-      value: ["xxx ", "yyy"].join("\n"),
+      value: ["xxx", "yyy"].join("\n"),
       paramIndex: 0,
     };
-    test2(commands, expected);
+    const group = createMessageGroup(commands, 0);
+    const result = extractTextParamFromMessage(group);
+    expect(result).toEqual(expected);
   });
-  describe("", () => {
+  test("text include nl", () => {
     const commands = [
       makeCommandShowMessage({
         speakerName: "abc",
@@ -66,14 +61,15 @@ describe("extractTextParamFromMessage", () => {
       value: "xxx\nyyy",
       paramIndex: 0,
     };
-    test2(commands, expected);
+
+    const group = createMessageGroup(commands, 0);
+    const result = extractTextParamFromMessage(group);
+    expect(result).toEqual(expected);
   });
-});
-describe("", () => {
-  const command: Command_ShowMessageHeader = makeCommandShowMessage({
-    speakerName: "abc",
-  });
-  test("", () => {
+  test("missing body", () => {
+    const command: Command_ShowMessageHeader = makeCommandShowMessage({
+      speakerName: "abc",
+    });
     const group = createMessageGroup([command], 0);
     const result = extractTextParamFromMessage(group);
     expect(result).toEqual({
