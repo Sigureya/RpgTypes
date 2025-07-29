@@ -104,9 +104,9 @@ export const collectMapEvents = <Result, Command, Event extends { id: number }>(
     page: NonNullable<(typeof map)["events"][number]>["pages"][number],
     pageIndex: number,
     container: NonNullable<(typeof map)["events"][number]>
-  ) => Result[]
+  ) => Result
 ): Result[] => {
-  return processMapEvents(map, fn).flat(2);
+  return processMapEvents(map, fn).flat(1);
 };
 
 /**
