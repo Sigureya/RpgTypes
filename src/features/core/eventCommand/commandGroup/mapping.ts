@@ -11,31 +11,36 @@ import { createMessageGroup } from "./message";
 import { createScriptGroup } from "./script";
 import { createScrollTextGroup } from "./scrollText";
 
-export const isGroupCommand = (command: EventCommand) => {
-  return (
-    command.code === SHOW_MESSAGE ||
-    command.code === SCRIPT_EVAL ||
-    command.code === COMMENT_HEAD ||
-    command.code === SHOW_SCROLLING_TEXT
-  );
+const table = {
+  [SHOW_MESSAGE]: <T>(
+    array: EventCommand[],
+    index: number,
+    mapper: GroopMapper<T>
+  ): T => mapper.showMessage(createMessageGroup(array, index), index, array),
+  [SCRIPT_EVAL]: <T>(
+    array: EventCommand[],
+    index: number,
+    mapper: GroopMapper<T>
+  ): T => mapper.script(createScriptGroup(array, index), index, array),
+  [COMMENT_HEAD]: <T>(
+    array: EventCommand[],
+    index: number,
+    mapper: GroopMapper<T>
+  ): T => mapper.comment(createCommentGroup(array, index), index, array),
+  [SHOW_SCROLLING_TEXT]: <T>(
+    array: EventCommand[],
+    index: number,
+    mapper: GroopMapper<T>
+  ): T =>
+    mapper.showScrollingText(createScrollTextGroup(array, index), index, array),
 };
 
-const xxxx = <T>(
+export const mappingGroupCommand2 = <T, U>(
   array: EventCommand[],
   index: number,
-  mapper: GroopMapper<T | undefined>
-) => {
-  const command = array[index];
-  if (!command) {
-    return;
-  }
-  if (command.code === SHOW_MESSAGE) {
-    return mapper.showMessage(createMessageGroup(array, index), index, array);
-  }
-  if (command.code === SCRIPT_EVAL) {
-    return mapper.script(createScriptGroup(array, index), index, array);
-  }
-  if (command.code === COMMENT_HEAD) {
-    return mapper.comment(createCommentGroup(array, index), index, array);
-  }
+  mapper: GroopMapper<T>,
+  fallback: (array: EventCommand[], index: number) => U
+): T | U => {
+  const fn = table[array[index].code as keyof typeof table];
+  return fn ? fn(array, index, mapper) : fallback(array, index);
 };
