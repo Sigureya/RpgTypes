@@ -1,67 +1,55 @@
-import type { COMMENT_HEAD, SCRIPT_EVAL } from "@RpgTypes/rmmz";
-import { type EventCommand } from "@RpgTypes/rmmz";
-import { mappingCommandList } from "./eventCommand/allMapping";
-import type { TextCommandMapper } from "./eventCommand/textCommandMapper";
+import {
+  CHANGE_NAME,
+  CHANGE_NICKNAME,
+  CHANGE_PROFILE,
+  SHOW_CHOICES,
+  type EventCommand,
+} from "@RpgTypes/rmmz";
+import type { GroopMapper } from "./eventCommand/commandGroup";
+import { getGroupHandlingFunc } from "./eventCommand/commandGroup/mapping";
+import type { TextCommandParameter } from "./extract/text/eventCommand";
 import {
   extractTextFromActorCommand,
   extractTextParamsFromChoice,
 } from "./extract/text/eventCommand";
-import type { TextCommandParameter } from "./extract/text/eventCommand";
-import { extractTextParamFromMessage } from "./extractGroupText";
-import { processEventPages } from "./rpg";
+import {
+  extractTextParamFromComment,
+  extractTextParamFromMessage,
+  extractTextParamFromScript,
+  extractTextParamFromShowScrollingText,
+} from "./extractGroupText";
 
-type CommandParam = TextCommandParameter;
 export const extractTextFromEventCommands = (
   list: ReadonlyArray<EventCommand>
-): TextCommandParameter[][] => {
-  return mappingCommandList(list, extractTextMapper);
-};
-export const extractTextFromEventPages = (event: {
-  pages: { list: EventCommand[] }[];
-}): CommandParam[][][] => {
-  return processEventPages(event, (page) =>
-    extractTextFromEventCommands(page.list)
-  );
-};
-
-const extractTextMapper: TextCommandMapper<TextCommandParameter[]> = {
-  changeName: (command) => [extractTextFromActorCommand(command)],
-  changeNickname: (command) => [extractTextFromActorCommand(command)],
-  changeProfile: (command) => [extractTextFromActorCommand(command)],
-  showChoices: (command) => extractTextParamsFromChoice(command),
-  showScrollingText: (groop) => {
-    return [
-      {
-        code: groop.header.code,
-        paramIndex: 0,
-        value: groop.getBodyText(),
-      },
-    ];
-  },
-  showMessage(data): TextCommandParameter[] {
-    if (data.bodies.length === 0) {
-      return [];
+): TextCommandParameter[] => {
+  return list.reduce<TextCommandParameter[]>((acc, command, index) => {
+    if (command.code === SHOW_CHOICES) {
+      return [...acc, ...extractTextParamsFromChoice(command)];
     }
-    return [extractTextParamFromMessage(data)];
-  },
-  choiceWhen() {
-    return [];
-  },
-  comment: (groop) => [
-    {
-      code: 108 satisfies typeof COMMENT_HEAD,
-      paramIndex: 0,
-      value: groop.getBodyText(),
-    },
-  ],
+    const fn = getGroupHandlingFunc(command.code);
+    if (fn) {
+      const g2 = fn<TextCommandParameter | undefined>(list, index, groupMapper);
+      if (g2 !== undefined) {
+        return [...acc, g2];
+      }
+    }
+    if (command.code === CHANGE_NICKNAME) {
+      return [...acc, extractTextFromActorCommand(command)];
+    }
+    if (command.code === CHANGE_NAME) {
+      return [...acc, extractTextFromActorCommand(command)];
+    }
+    if (command.code === CHANGE_PROFILE) {
+      return [...acc, extractTextFromActorCommand(command)];
+    }
 
-  script: (groop) => [
-    {
-      code: 355 satisfies typeof SCRIPT_EVAL,
-      paramIndex: 0,
-      value: groop.getBodyText(),
-    },
-  ],
-  other: () => [],
-  commentBody: () => [],
+    return acc;
+  }, []);
 };
+
+const groupMapper = {
+  comment: (g) => extractTextParamFromComment(g),
+  showMessage: (g) => extractTextParamFromMessage(g),
+  script: (group) => extractTextParamFromScript(group),
+  showScrollingText: (group) => extractTextParamFromShowScrollingText(group),
+} as const satisfies GroopMapper<TextCommandParameter | undefined>;
