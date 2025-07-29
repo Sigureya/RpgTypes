@@ -11,7 +11,10 @@ import { createMessageGroup } from "./message";
 import { createScriptGroup } from "./script";
 import { createScrollTextGroup } from "./scrollText";
 
-const table = {
+const table: Record<
+  number,
+  <T>(array: EventCommand[], index: number, mapper: GroopMapper<T>) => T
+> = {
   [SHOW_MESSAGE]: <T>(
     array: EventCommand[],
     index: number,
