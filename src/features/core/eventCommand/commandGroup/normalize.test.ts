@@ -1,9 +1,11 @@
 import { describe, test, expect } from "vitest";
 import type { EventCommand } from "@RpgTypes/rmmz";
 import {
+  COMMENT_BODY,
   COMMENT_HEAD,
   SCRIPT_EVAL,
   SCRIPT_EVAL_BODY,
+  SHOW_MESSAGE_BODY,
   makeCommandShowMessage,
   makeCommandShowMessageBody,
 } from "@RpgTypes/rmmz";
@@ -17,6 +19,8 @@ interface TestCase {
 
 const TEXT_A = "text a" as const;
 const TEXT_B = "text b" as const;
+const TEXT_X = "text x" as const;
+const TEXT_Y = "text y" as const;
 
 const testCaseEmpty: TestCase[] = [
   {
@@ -42,6 +46,64 @@ const testCasesMessage: TestCase[] = [
       makeCommandShowMessageBody("message"),
     ],
   },
+  {
+    caseName: "showMessage with empty body",
+    input: [
+      makeCommandShowMessage({
+        speakerName: "spkeaker",
+      }),
+      makeCommandShowMessageBody(""),
+    ],
+    expected: [
+      makeCommandShowMessage({
+        speakerName: "spkeaker",
+      }),
+      makeCommandShowMessageBody(""),
+    ],
+  },
+  {
+    caseName: "multiple showMessage",
+    input: [
+      makeCommandShowMessage({
+        speakerName: TEXT_A,
+      }),
+      makeCommandShowMessageBody(TEXT_B),
+      makeCommandShowMessage({
+        speakerName: TEXT_X,
+      }),
+      { code: SHOW_MESSAGE_BODY, indent: 0, parameters: [TEXT_Y] },
+    ],
+    expected: [
+      makeCommandShowMessage({
+        speakerName: TEXT_A,
+      }),
+      makeCommandShowMessageBody(TEXT_B),
+      makeCommandShowMessage({
+        speakerName: TEXT_X,
+      }),
+      { code: SHOW_MESSAGE_BODY, indent: 0, parameters: [TEXT_Y] },
+    ],
+  },
+  {
+    caseName: "showMessage with body",
+    input: [
+      makeCommandShowMessage({
+        speakerName: TEXT_X,
+      }),
+      { code: SHOW_MESSAGE_BODY, indent: 0, parameters: [TEXT_A] },
+      { code: SHOW_MESSAGE_BODY, indent: 0, parameters: [TEXT_B] },
+    ],
+    expected: [
+      makeCommandShowMessage({
+        speakerName: TEXT_X,
+      }),
+      {
+        code: SHOW_MESSAGE_BODY,
+        indent: 0,
+        parameters: [[TEXT_A, TEXT_B].join("\n")],
+      },
+    ],
+  },
 ];
 
 const testCasesComment: TestCase[] = [
@@ -55,6 +117,31 @@ const testCasesComment: TestCase[] = [
     input: [{ code: COMMENT_HEAD, indent: 0, parameters: ["it is comment"] }],
     expected: [
       { code: COMMENT_HEAD, indent: 0, parameters: ["it is comment"] },
+    ],
+  },
+  {
+    caseName: "multiple comments",
+    input: [
+      { code: COMMENT_HEAD, indent: 0, parameters: [TEXT_A] },
+      { code: COMMENT_HEAD, indent: 0, parameters: [TEXT_B] },
+    ],
+    expected: [
+      { code: COMMENT_HEAD, indent: 0, parameters: [TEXT_A] },
+      { code: COMMENT_HEAD, indent: 0, parameters: [TEXT_B] },
+    ],
+  },
+  {
+    caseName: "comment with body",
+    input: [
+      { code: COMMENT_HEAD, indent: 0, parameters: [TEXT_A] },
+      { code: COMMENT_BODY, indent: 0, parameters: [TEXT_B] },
+    ],
+    expected: [
+      {
+        code: COMMENT_HEAD,
+        indent: 0,
+        parameters: [[TEXT_A, TEXT_B].join("\n")],
+      },
     ],
   },
 ];
