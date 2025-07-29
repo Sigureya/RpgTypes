@@ -1,4 +1,4 @@
-import type { EventCommand } from "@sigureya/rpgtypes";
+import type { EventCommand } from "@RpgTypes/rmmz";
 import type { GroopMapper } from "./commandGroup";
 import type {
   CallBackFunc,
