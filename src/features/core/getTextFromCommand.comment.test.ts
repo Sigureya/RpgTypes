@@ -1,11 +1,8 @@
 import { describe, test, expect } from "vitest";
-import type { Command_CommentHeader, EventCommand } from "@RpgTypes/rmmz";
+import type { Command_CommentHeader } from "@RpgTypes/rmmz";
 import { COMMENT_HEAD, makeCommandCommentHeader } from "@RpgTypes/rmmz";
 import type { CommandParameter } from "@RpgTypes/rmmz/eventCommand/pickCommandParam";
 import { extractTextFromEventCommands } from "./getTextFromCommand";
-
-const flattenExtractedText = (s: EventCommand[]) =>
-  extractTextFromEventCommands(s).flat();
 
 describe("extractTextFromEventCommands", () => {
   describe("comment", () => {
@@ -15,7 +12,7 @@ describe("extractTextFromEventCommands", () => {
         parameters: [""],
         indent: 0,
       };
-      const result = flattenExtractedText([command]);
+      const result = extractTextFromEventCommands([command]);
       const expected: CommandParameter<string>[] = [
         { code: COMMENT_HEAD, value: "", paramIndex: 0 },
       ];
@@ -28,7 +25,7 @@ describe("extractTextFromEventCommands", () => {
         parameters: ["comment"],
         indent: 0,
       };
-      const result = flattenExtractedText([command]);
+      const result = extractTextFromEventCommands([command]);
       const expected: CommandParameter<string>[] = [
         { code: COMMENT_HEAD, value: "comment", paramIndex: 0 },
       ];
@@ -44,7 +41,7 @@ describe("extractTextFromEventCommands", () => {
       const bodies: Command_CommentHeader[] = mockTexts.map((text) =>
         makeCommandCommentHeader(text)
       );
-      const result = flattenExtractedText([command, ...bodies]);
+      const result = extractTextFromEventCommands([command, ...bodies]);
       const expected: CommandParameter<string>[] = [
         { code: COMMENT_HEAD, value: "comment", paramIndex: 0 },
         { code: COMMENT_HEAD, value: "aaa", paramIndex: 0 },
