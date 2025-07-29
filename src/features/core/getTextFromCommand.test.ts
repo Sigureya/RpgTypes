@@ -3,12 +3,9 @@ import type {
   Command_ChangeActorProfile,
   Command_CommentHeader,
   Command_ShowChoices,
-  Command_ShowMessageBody,
-  EventCommand,
-  PickCommandByParam,
-  Command_ShowMessageHeader,
   Command_ChangeActorName,
   Command_ChangeActorNickName,
+  ExtractCommandByParam,
 } from "@RpgTypes/rmmz";
 import {
   CHANGE_NAME,
@@ -16,95 +13,12 @@ import {
   CHANGE_PROFILE,
   COMMENT_HEAD,
   makeCommandCommentHeader,
-  makeCommandShowMessage,
   SHOW_CHOICES,
-  SHOW_MESSAGE,
-  SHOW_MESSAGE_BODY,
 } from "@RpgTypes/rmmz";
 import type { CommandParameter } from "@RpgTypes/rmmz/eventCommand/pickCommandParam";
-import type { TextCommandParameter } from "./extract/text/eventCommand";
 import { extractTextFromEventCommands } from "./getTextFromCommand";
 
-const MockJoinedText = "The quick\nbrown fox\njumps over" as const;
-
-const createMockCommand = <Code extends PickCommandByParam<[string]>["code"]>(
-  code: Code,
-  textList = ["The quick", "brown fox", "jumps over"]
-): {
-  code: Code;
-  indent: number;
-  parameters: [string];
-}[] =>
-  textList.map((s) => ({
-    code,
-    indent: 0,
-    parameters: [s],
-  }));
-
 describe("extractTextFromEventCommands", () => {
-  describe("showMessage", () => {
-    test("single", () => {
-      const command: [Command_ShowMessageHeader, Command_ShowMessageBody] = [
-        makeCommandShowMessage({
-          speakerName: "speaker",
-        }),
-        {
-          code: SHOW_MESSAGE_BODY,
-          parameters: ["message"],
-          indent: 0,
-        },
-      ];
-      const result = extractTextFromEventCommands(command);
-      const expected: TextCommandParameter[] = [
-        {
-          speaker: "speaker",
-          code: SHOW_MESSAGE_BODY,
-          value: "message",
-          paramIndex: 0,
-        },
-      ];
-      expect(result).toEqual(expected);
-    });
-    test("multi", () => {
-      const command: Command_ShowMessageHeader = makeCommandShowMessage({
-        speakerName: "speaker",
-      });
-      const bodies: Command_ShowMessageBody[] =
-        createMockCommand(SHOW_MESSAGE_BODY);
-      const result = extractTextFromEventCommands([command, ...bodies]);
-      const expected: TextCommandParameter[] = [
-        {
-          speaker: "speaker",
-          code: SHOW_MESSAGE_BODY,
-          value: MockJoinedText,
-          paramIndex: 0,
-        },
-      ];
-      expect(result).toEqual(expected);
-    });
-    test("multi with empty", () => {
-      const textList = ["", "The quick", "brown fox", "jumps over"];
-      const bodies: Command_ShowMessageBody[] = createMockCommand(
-        SHOW_MESSAGE_BODY,
-        textList
-      );
-      const command: Command_ShowMessageHeader = {
-        code: SHOW_MESSAGE,
-        parameters: ["", 0, 0, 0, "speaker"],
-        indent: 0,
-      };
-      const result = extractTextFromEventCommands([command, ...bodies]);
-      const expected: TextCommandParameter[] = [
-        {
-          speaker: "speaker",
-          code: SHOW_MESSAGE_BODY,
-          value: textList.join("\n"),
-          paramIndex: 0,
-        },
-      ];
-      expect(result).toEqual(expected);
-    });
-  });
   describe("comment", () => {
     test("empty", () => {
       const command: Command_CommentHeader = {

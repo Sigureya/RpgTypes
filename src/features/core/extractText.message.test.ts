@@ -1,6 +1,10 @@
 import { test, expect, describe } from "vitest";
 import { createMessageGroup } from "@RpgTypes/features/core/eventCommand/commandGroup";
-import type { Command_ShowMessageHeader, EventCommand } from "@RpgTypes/rmmz";
+import type {
+  Command_ShowMessageBody,
+  Command_ShowMessageHeader,
+  EventCommand,
+} from "@RpgTypes/rmmz";
 import {
   makeCommandShowMessage,
   makeCommandShowMessageBody,
@@ -19,7 +23,7 @@ const test2 = (command: EventCommand[], expected: TextCommandParameter) => {
 
 describe("extractTextParamFromMessage", () => {
   describe("", () => {
-    const commands = [
+    const commands: [Command_ShowMessageHeader, Command_ShowMessageBody] = [
       makeCommandShowMessage({
         speakerName: "abc",
       }),
@@ -44,7 +48,7 @@ describe("extractTextParamFromMessage", () => {
     const expected: TextCommandParameter = {
       speaker: "abc",
       code: SHOW_MESSAGE_BODY,
-      value: "xxx\nyyy",
+      value: ["xxx ", "yyy"].join("\n"),
       paramIndex: 0,
     };
     test2(commands, expected);
