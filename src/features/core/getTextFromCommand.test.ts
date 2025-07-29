@@ -41,18 +41,8 @@ const createMockCommand = <Code extends PickCommandByParam<[string]>["code"]>(
     parameters: [s],
   }));
 
-const flattenExtractedText = (s: EventCommand[]) =>
-  extractTextFromEventCommands(s).flat();
-
 describe("extractTextFromEventCommands", () => {
   describe("showMessage", () => {
-    test("empty", () => {
-      const command: Command_ShowMessageHeader = makeCommandShowMessage({
-        speakerName: "abc",
-      });
-      const result = flattenExtractedText([command]);
-      expect(result).toEqual([]);
-    });
     test("single", () => {
       const command: [Command_ShowMessageHeader, Command_ShowMessageBody] = [
         makeCommandShowMessage({
@@ -64,7 +54,7 @@ describe("extractTextFromEventCommands", () => {
           indent: 0,
         },
       ];
-      const result = flattenExtractedText(command);
+      const result = extractTextFromEventCommands(command);
       const expected: TextCommandParameter[] = [
         {
           speaker: "speaker",
@@ -81,7 +71,7 @@ describe("extractTextFromEventCommands", () => {
       });
       const bodies: Command_ShowMessageBody[] =
         createMockCommand(SHOW_MESSAGE_BODY);
-      const result = flattenExtractedText([command, ...bodies]);
+      const result = extractTextFromEventCommands([command, ...bodies]);
       const expected: TextCommandParameter[] = [
         {
           speaker: "speaker",
@@ -103,7 +93,7 @@ describe("extractTextFromEventCommands", () => {
         parameters: ["", 0, 0, 0, "speaker"],
         indent: 0,
       };
-      const result = flattenExtractedText([command, ...bodies]);
+      const result = extractTextFromEventCommands([command, ...bodies]);
       const expected: TextCommandParameter[] = [
         {
           speaker: "speaker",
@@ -122,7 +112,7 @@ describe("extractTextFromEventCommands", () => {
         parameters: [""],
         indent: 0,
       };
-      const result = flattenExtractedText([command]);
+      const result = extractTextFromEventCommands([command]);
       const expected: CommandParameter<string>[] = [
         { code: COMMENT_HEAD, value: "", paramIndex: 0 },
       ];
@@ -135,7 +125,7 @@ describe("extractTextFromEventCommands", () => {
         parameters: ["comment"],
         indent: 0,
       };
-      const result = flattenExtractedText([command]);
+      const result = extractTextFromEventCommands([command]);
       const expected: CommandParameter<string>[] = [
         { code: COMMENT_HEAD, value: "comment", paramIndex: 0 },
       ];
@@ -151,7 +141,7 @@ describe("extractTextFromEventCommands", () => {
       const bodies: Command_CommentHeader[] = mockTexts.map((text) =>
         makeCommandCommentHeader(text)
       );
-      const result = flattenExtractedText([command, ...bodies]);
+      const result = extractTextFromEventCommands([command, ...bodies]);
       const expected: CommandParameter<string>[] = [
         { code: COMMENT_HEAD, value: "comment", paramIndex: 0 },
         { code: COMMENT_HEAD, value: "aaa", paramIndex: 0 },
@@ -169,7 +159,7 @@ describe("extractTextFromEventCommands", () => {
         parameters: [1, "name"],
         indent: 0,
       };
-      const result = flattenExtractedText([command]);
+      const result = extractTextFromEventCommands([command]);
       const expected: CommandParameter<string>[] = [
         { code: CHANGE_NAME, value: "name", paramIndex: 1 },
       ];
@@ -181,7 +171,7 @@ describe("extractTextFromEventCommands", () => {
         parameters: [1, "name"],
         indent: 0,
       };
-      const result = flattenExtractedText([command]);
+      const result = extractTextFromEventCommands([command]);
       const expected: CommandParameter<string>[] = [
         { code: CHANGE_NICKNAME, value: "name", paramIndex: 1 },
       ];
@@ -193,7 +183,7 @@ describe("extractTextFromEventCommands", () => {
         parameters: [1, "name"],
         indent: 0,
       };
-      const result = flattenExtractedText([command]);
+      const result = extractTextFromEventCommands([command]);
       const expected: CommandParameter<string>[] = [
         { code: CHANGE_PROFILE, value: "name", paramIndex: 1 },
       ];
@@ -208,7 +198,7 @@ describe("extractTextFromEventCommands", () => {
         parameters: [[], 0, 0, 0, 2],
         indent: 0,
       };
-      const result = flattenExtractedText([command]);
+      const result = extractTextFromEventCommands([command]);
       expect(result).toEqual([]);
       expect(result.length).toEqual(0);
     });
@@ -218,7 +208,7 @@ describe("extractTextFromEventCommands", () => {
         parameters: [["choice1", "choice2"], 0, 0, 0, 2],
         indent: 0,
       };
-      const result = flattenExtractedText([command]);
+      const result = extractTextFromEventCommands([command]);
       const expected: CommandParameter<string>[] = [
         { code: SHOW_CHOICES, value: "choice1", paramIndex: 0 },
         { code: SHOW_CHOICES, value: "choice2", paramIndex: 1 },
