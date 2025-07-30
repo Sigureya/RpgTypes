@@ -49,7 +49,7 @@ export declare const processMapEvents: <Result, Command, Event extends object>(m
 }>) => Result) => Result[][];
 export declare const collectMapEvents: <Result, Command, Event extends {
     id: number;
-}>(map: MapEventContainer<Command, Event & EventContainer<Command>>, fn: (page: NonNullable<(typeof map)["events"][number]>["pages"][number], pageIndex: number, container: NonNullable<(typeof map)["events"][number]>) => Result[]) => Result[];
+}>(map: MapEventContainer<Command, Event & EventContainer<Command>>, fn: (page: NonNullable<(typeof map)["events"][number]>["pages"][number], pageIndex: number, container: NonNullable<(typeof map)["events"][number]>) => Result) => Result[];
 /**
  * Processes all troop event pages.
  * @param list The list of troop events.
