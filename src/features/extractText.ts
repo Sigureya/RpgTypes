@@ -18,3 +18,16 @@ export {
   extractImageFromActor,
   extractImageFromEnemy,
 } from "./core/extract/image/mainData";
+
+export {
+  extractNoteText,
+  extractTextData,
+  extractTextFromActor,
+  extractTextFromArmor,
+  extractTextFromClass,
+  extractTextFromEnemy,
+  extractTextFromItem,
+  extractTextFromSkill,
+  extractTextFromState,
+  extractTextFromWeapon,
+} from "./core/extract/text/mainData";
