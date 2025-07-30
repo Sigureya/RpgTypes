@@ -3,4 +3,4 @@ export interface ReadNoteOption {
   suffix: string;
 }
 
-export type NoteReadResult = [key: string, value: string];
+export type NoteReadResult = { key: string; value: string };
