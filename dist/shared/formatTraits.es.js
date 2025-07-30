@@ -1,13 +1,13 @@
-import { w as u, C as l, p as m, S as g, o as w, n as T, v as b, k as C, a as N, u as k, b3 as x, q as y, aP as j, aL as E, aQ as S, cI as z, b8 as M, b7 as $, cU as q, r as J, cr as L } from "./namedItems.es.js";
-import { m as v } from "./mergeItemsSource.es.js";
-const f = (e) => e.map((a) => a.parameters[0].trimEnd()).join(`
+import { w as l, C as u, p as c, S as b, o as k, n as C, v as x, k as N, a as j, u as E, b3 as y, q as v, aP as S, aL as q, aQ as z, cI as J, cJ as M, b8 as $, b7 as L, cU as O, r as P, cr as Q } from "./namedItems.es.js";
+import { a as U, m as f } from "./pick.es.js";
+const B = (e) => e.map((a) => a.parameters[0].trimEnd()).join(`
 `).trimEnd();
-class B {
-  constructor(a, r) {
-    this.header = a, this.bodies = r;
+class I {
+  constructor(a, s) {
+    this.header = a, this.bodies = s;
   }
   getBodyText() {
-    return f(this.joinCommandBodies());
+    return B(this.joinCommandBodies());
   }
   mergedBody() {
     return { code: this.header.code, indent: this.header.indent, parameters: [this.getBodyText()] };
@@ -19,16 +19,16 @@ class B {
     return [this.mergedBody()];
   }
 }
-class c {
-  constructor(a, r, t) {
-    this.bodyCode = a, this.header = r, this.bodies = t;
+class h {
+  constructor(a, s, t) {
+    this.bodyCode = a, this.header = s, this.bodies = t;
   }
   normalizedCommands() {
     const a = { ...this.header, code: this.header.code, indent: this.header.indent, parameters: [...this.header.parameters] };
     return this.bodies.length === 0 ? [a] : [a, this.mergedBody()];
   }
   getBodyText() {
-    return f(this.bodies);
+    return B(this.bodies);
   }
   joinCommandBodies() {
     return this.bodies;
@@ -37,90 +37,103 @@ class c {
     return { code: this.bodyCode, indent: this.header.indent, parameters: [this.getBodyText()] };
   }
 }
-const n = (e, a, r, t) => {
-  const s = e[a];
-  if (!r(s)) throw new Error(`Invalid head at index ${a}: ${JSON.stringify(s)}`);
+const i = (e, a, s, t) => {
+  const r = e[a];
+  if (!s(r)) throw new Error(`Invalid head at index ${a}: ${JSON.stringify(r)}`);
   const d = [];
-  for (let o = a + 1; o < e.length; o++) {
-    const p = e[o];
-    if (!t(p)) break;
-    d.push(p);
+  for (let n = a + 1; n < e.length; n++) {
+    const g = e[n];
+    if (!t(g)) break;
+    d.push(g);
   }
-  return { header: s, bodies: d };
-}, O = (e, a) => {
-  const { bodies: r, header: t } = ((s, d) => n(s, d, (o) => o.code === l, (o) => o.code === u))(e, a);
-  return P(t) ? new c(u, t, r) : new B(t, r);
-}, P = (e) => e.parameters[0] === "選択肢ヘルプ", Q = (e, a) => {
-  const { bodies: r, header: t } = ((s, d) => n(s, d, (o) => o.code === g, (o) => o.code === m))(e, a);
-  return new c(m, t, r);
-}, U = (e, a) => {
-  const { bodies: r, header: t } = ((s, d) => n(s, d, T, w))(e, a);
-  return new B(t, r);
+  return { header: r, bodies: d };
 }, _ = (e, a) => {
-  const { bodies: r, header: t } = ((s, d) => n(s, d, N, C))(e, a);
-  return new c(b, t, r);
-}, A = {
-  [g]: (e, a, r) => r.showMessage(Q(e, a), a, e),
-  [x]: (e, a, r) => r.script(U(e, a), a, e),
-  [l]: (e, a, r) => r.comment(O(e, a), a, e),
-  [k]: (e, a, r) => r.showScrollingText(_(e, a), a, e)
-}, D = (e) => ((a, r) => ({
+  const { bodies: s, header: t } = ((r, d) => i(r, d, (n) => n.code === u, (n) => n.code === l))(e, a);
+  return A(t) ? new h(l, t, s) : new I(t, s);
+}, A = (e) => e.parameters[0] === "選択肢ヘルプ", D = (e, a) => {
+  const { bodies: s, header: t } = ((r, d) => i(r, d, (n) => n.code === b, (n) => n.code === c))(e, a);
+  return new h(c, t, s);
+}, F = (e, a) => {
+  const { bodies: s, header: t } = ((r, d) => i(r, d, C, k))(e, a);
+  return new I(t, s);
+}, G = (e, a) => {
+  const { bodies: s, header: t } = ((r, d) => i(r, d, j, N))(e, a);
+  return new h(x, t, s);
+}, H = {
+  [b]: (e, a, s) => s.showMessage(D(e, a), a, e),
+  [y]: (e, a, s) => s.script(F(e, a), a, e),
+  [u]: (e, a, s) => s.comment(_(e, a), a, e),
+  [E]: (e, a, s) => s.showScrollingText(G(e, a), a, e)
+}, K = (e) => ((a, s) => ({
   code: a.code,
-  paramIndex: r,
-  value: a.parameters[r]
-}))(e, 1), F = (e) => e.parameters[0].map((a, r) => ({ code: y, paramIndex: r, value: a })), h = (e) => e.reduce((a, r, t) => {
-  if (r.code === y) return [...a, ...F(r)];
-  const s = (d = r.code, A[d]);
+  paramIndex: s,
+  value: a.parameters[s]
+}))(e, 1), R = (e) => e.parameters[0].map((a, s) => ({ code: v, paramIndex: s, value: a })), p = (e) => e.reduce((a, s, t) => {
+  if (s.code === v) return [...a, ...R(s)];
+  const r = (d = s.code, H[d]);
   var d;
-  if (s) {
-    const o = s(e, t, G);
-    if (o !== void 0) return [...a, o];
+  if (r) {
+    const n = r(e, t, V);
+    if (n !== void 0) return [...a, n];
   }
-  return r.code === j || r.code === E || r.code === S ? [...a, D(r)] : a;
-}, []), G = { comment: (e) => {
+  return s.code === S || s.code === q || s.code === z ? [...a, K(s)] : a;
+}, []), V = { comment: (e) => {
   return { code: (a = e).header.code, paramIndex: 0, value: a.getBodyText() };
   var a;
 }, showMessage: (e) => {
   return {
-    code: m,
+    code: c,
     paramIndex: 0,
     value: (a = e).getBodyText(),
-    speaker: (r = a.header, r.parameters[4] ? r.parameters[4].trimEnd() : "")
+    speaker: (s = a.header, s.parameters[4] ? s.parameters[4].trimEnd() : "")
   };
-  var a, r;
-}, script: (e) => ((a) => ({ code: x, paramIndex: 0, value: a.getBodyText() }))(e), showScrollingText: (e) => ((a) => ({
-  code: b,
+  var a, s;
+}, script: (e) => ((a) => ({ code: y, paramIndex: 0, value: a.getBodyText() }))(e), showScrollingText: (e) => ((a) => ({
+  code: x,
   paramIndex: 0,
   value: a.getBodyText()
-}))(e) }, H = (e) => !!e, I = (e, a) => e.pages.map((r, t) => a(r, t, e)), K = (e, a) => ((r, t) => r.events.filter(H).map((s) => I(s, t)))(e, a).flat(1), X = (e) => {
-  return a = (r, t, { id: s }) => ({ eventId: s, commands: h(r.list) }), e.map((r) => a(r, 0, r));
+}))(e) }, W = (e) => !!e, w = (e, a) => e.pages.map((s, t) => a(s, t, e)), X = (e, a) => ((s, t) => s.events.filter(W).map((r) => w(r, t)))(e, a).flat(1), se = (e) => {
+  return a = (s, t, { id: r }) => ({ eventId: r, commands: p(s.list) }), e.map((s) => a(s, 0, s));
   var a;
-}, Y = (e) => ((a, r) => a.map((t) => I(t, r)))(e, (a, r, { id: t }) => ({
+}, te = (e) => ((a, s) => a.map((t) => w(t, s)))(e, (a, s, { id: t }) => ({
   eventId: t,
-  pageIndex: r,
-  commands: h(a.list)
-})), Z = (e) => ({ note: e.note, noteItems: z(e.note), displayedName: e.displayName, commands: R(e) }), R = (e) => K(e, (a, r, t) => ({
+  pageIndex: s,
+  commands: p(a.list)
+})), re = (e) => ({ note: e.note, noteItems: J(e.note), displayedName: e.displayName, commands: Y(e) }), Y = (e) => X(e, (a, s, t) => ({
   eventId: t.id,
-  pageIndex: r,
-  commands: h(a.list),
+  pageIndex: s,
+  commands: p(a.list),
   note: t.note,
   noteItems: []
-})), ee = (e) => ({ key: "battlerName", image: e.battlerName, id: e.id }), i = (e, a, r) => ({
-  folder: r,
+})), de = (e) => ({ key: "battlerName", image: e.battlerName, id: e.id }), m = (e, a, s) => ({
+  folder: s,
   key: a,
   image: e[a],
   id: e.id
-}), ae = (e) => [i(e, "faceName", "faces"), i(e, "characterName", "characters"), i(e, "battlerName", "sv_actors")], re = (e, a, r, t, s, d) => [...M(r, t), ...$(e, a), ...q(s, d)], te = (e, a) => v(J(a), e), se = (e, a, r) => {
-  const t = L(a);
-  return v(r ? [...t, ...r] : t, e);
+}), ne = (e) => [m(e, "faceName", "faces"), m(e, "characterName", "characters"), m(e, "battlerName", "sv_actors")], T = (e, a, s) => ({ key: e, text: a, id: s.id }), o = (e, a) => ({
+  main: U(e, a, (s, t) => T(s, t, e)),
+  note: Z(e)
+}), Z = (e) => M(e.note, (a, s) => T(a, s, e)), oe = (e) => o(e, ["name", "nickname", "profile"]), ie = (e) => o(e, ["name"]), me = (e) => o(e, ["name"]), ce = (e) => o(e, ["name", "description", "message1", "message2"]), he = (e) => o(e, ["name", "description"]), pe = (e) => o(e, ["name", "description"]), ge = (e) => o(e, ["name", "description"]), le = (e) => o(e, ["name", "message1", "message2", "message3", "message4"]), ue = (e, a, s, t, r, d) => [...$(s, t), ...L(e, a), ...O(r, d)], be = (e, a) => f(P(a), e), xe = (e, a, s) => {
+  const t = Q(a);
+  return f(s ? [...t, ...s] : t, e);
 };
 export {
-  X as a,
-  Z as b,
-  ae as c,
-  ee as d,
-  Y as e,
-  re as f,
-  te as g,
-  se as h
+  se as a,
+  re as b,
+  ne as c,
+  de as d,
+  te as e,
+  Z as f,
+  o as g,
+  oe as h,
+  ge as i,
+  me as j,
+  ie as k,
+  he as l,
+  ce as m,
+  le as n,
+  pe as o,
+  ue as p,
+  be as q,
+  xe as r
 };
