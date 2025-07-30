@@ -1,3 +1,2 @@
-export * from './core/extract';
-export * from './core/extractGroupText';
+export * from './extractText';
 export * from './format/trait/formatTraits';

@@ -10,3 +10,11 @@ export {
   type ExtractedMapTexts,
   extractMapText,
 } from "./core/extractMapText";
+
+export {
+  type ExtractedActorImage,
+  type ExtractedEnemyImage,
+  type ImageExtractableActor,
+  extractImageFromActor,
+  extractImageFromEnemy,
+} from "./core/extract/image/mainData";

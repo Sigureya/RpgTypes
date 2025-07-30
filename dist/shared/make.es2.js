@@ -1,27 +1,30 @@
-import K from "ajv";
-import { c as Ee, a as Fe, m } from "./make.es.js";
-const oa = ({ actorId: e = 1, faceIndex: t = 0, faceName: a = "", characterIndex: r = 0, characterName: o = "", battlerName: p = "" } = {}, d = 0) => ({
+import be from "ajv";
+import { c as qe, a as Me, m as o } from "./make.es.js";
+import { aL as Re, aP as je, aQ as Ee, ao as Fe, as as Be, au as Ve, av as Le, T as He, U as Oe, _ as ze, B as We, G as Xe, C as Ge, w as Ye, I as Ue, S as _e, p as Ke, b3 as Ze, b4 as $e } from "./namedItems.es.js";
+const ya = ({ actorId: e = 1, faceIndex: t = 0, faceName: a = "", characterIndex: r = 0, characterName: m = "", battlerName: p = "" } = {}, l = 0) => ({
   code: 322,
-  indent: d,
-  parameters: [e, o, r, a, t, p]
-}), $ = (e, t) => `\\${e}[${t}]`, ma = (e, t) => t.map((a, r) => ({
-  text: a,
-  controlChar: $(e, r)
-})), pa = (e) => Array.from(e.matchAll(/\\([A-Za-z]+)\[(\d+)]/g)).map((t) => ({ char: t[1], id: parseInt(t[2], 10) })), ca = (e) => e.map((t) => ({
-  text: t.name,
-  controlChar: $("N", t.id)
-})), da = (e) => e.variables.map((t, a) => ({ text: t || "", controlChar: $("V", a) })).filter((t) => t.text !== ""), la = (e = {}) => ({
+  indent: l,
+  parameters: [e, m, r, a, t, p]
+}), U = (e, t) => `\\${e}[${t}]`, ga = (e, t) => t.map((a, r) => ({ text: a, controlChar: U(e, r) })), ba = (e) => Array.from(e.matchAll(/\\([A-Za-z]+)\[(\d+)]/g)).map((t) => ({
+  char: t[1],
+  id: parseInt(t[2], 10)
+})), fa = (e) => e.map((t) => ({ text: t.name, controlChar: U("N", t.id) })), Ia = (e) => e.variables.map((t, a) => ({ text: t || "", controlChar: U("V", a) })).filter((t) => t.text !== ""), va = (e = {}) => ({
   id: e.id ?? 0,
   name: e.name ?? "",
   trigger: e.trigger ?? 0,
   list: e.list ?? [],
   switchId: e.switchId ?? 0
-}), ua = (e = {}) => ({ id: e.id ?? 0, name: e.name ?? "", members: e.members ?? [], pages: e.pages ?? [] }), ya = (e = {}) => ({
+}), ha = (e = {}) => ({ id: e.id ?? 0, name: e.name ?? "", members: e.members ?? [], pages: e.pages ?? [] }), xa = (e = {}) => ({
   enemyId: e.enemyId ?? 0,
   x: e.x ?? 0,
   y: e.y ?? 0,
   hidden: e.hidden ?? !1
-}), ga = (e = {}) => ({ actorHp: e.actorHp ?? 0, actorId: e.actorId ?? 0, enemyValid: e.enemyValid ?? 0, switchValid: e.switchValid ?? 0 }), Be = (e = {}) => ({
+}), Ta = (e = {}) => ({
+  actorHp: e.actorHp ?? 0,
+  actorId: e.actorId ?? 0,
+  enemyValid: e.enemyValid ?? 0,
+  switchValid: e.switchValid ?? 0
+}), Je = (e = {}) => ({
   switch1Id: e.switch1Id ?? 0,
   switch1Valid: e.switch1Id !== void 0,
   switch2Id: e.switch2Id ?? 0,
@@ -35,24 +38,24 @@ const oa = ({ actorId: e = 1, faceIndex: t = 0, faceName: a = "", characterIndex
   itemValid: e.itemId !== void 0,
   actorId: e.actorId ?? 0,
   actorValid: e.actorId !== void 0
-}), ba = 0, Ia = 101, fa = 401, va = 102, ha = 402, xa = 103, Ta = 104, ka = 105, wa = 405, Na = 108, Sa = 408, Pa = 109, qa = 111, Aa = 411, Ca = 112, Da = 113, Ma = 115, ja = 117, Ra = 118, Ea = 119, Fa = 121, Ba = 122, Va = 123, La = 124, Ha = 125, Oa = 126, za = 127, Wa = 128, Xa = 129, Ga = 132, Ya = 133, Ua = 134, _a = 135, Ka = 136, $a = 137, Za = 138, Ja = 139, Qa = 140, er = 201, tr = 202, ar = 203, rr = 204, ir = 205, sr = 206, nr = 211, or = 212, mr = 213, pr = 214, cr = 216, dr = 217, lr = 221, ur = 222, yr = 223, gr = 224, br = 225, Ir = 230, fr = 231, vr = 232, hr = 233, xr = 234, Tr = 235, kr = 236, wr = 241, Nr = 242, Sr = 243, Pr = 244, qr = 245, Ar = 246, Cr = 249, Dr = 250, Mr = 251, jr = 261, Rr = 282, Er = 283, Fr = 284, Br = 285, Vr = 301, Lr = 302, Hr = 605, Or = 303, zr = 311, Wr = 312, Xr = 313, Gr = 314, Yr = 315, Ur = 320, _r = 321, Kr = 322, $r = 323, Zr = 324, Jr = 325, Qr = 331, ei = 332, ti = 333, ai = 334, ri = 335, ii = 336, si = 337, ni = 339, oi = 340, mi = 351, pi = 342, ci = 352, di = 353, li = 354, ui = 355, yi = 655, gi = 356, bi = 357, Ii = (e, t, a = 0) => ({
+}), ka = (e, t, a = 0) => ({
   code: e,
   indent: a,
   parameters: t
-}), fi = 0, vi = 1, hi = 2, xi = 3, Ti = 4, ki = 5, wi = 6, Ni = 7, Si = 8, Pi = 9, qi = 10, Ai = 11, Ci = 12, Di = 13, Mi = 14, ji = 15, Ri = 16, Ei = 17, Fi = 18, Bi = 19, Vi = 20, Li = 21, Hi = 22, Oi = 23, zi = 24, Wi = 25, Xi = 26, Gi = 27, Yi = 28, Ui = 29, _i = 30, Ki = 31, $i = 32, Zi = 33, Ji = 34, Qi = 35, es = 36, ts = 37, as = 38, rs = 39, is = 40, ss = 41, ns = 42, os = 43, ms = 44, ps = 45, cs = () => ({
+}), wa = 0, Na = 1, Sa = 2, Pa = 3, Ca = 4, Aa = 5, Da = 6, qa = 7, Ma = 8, Ra = 9, ja = 10, Ea = 11, Fa = 12, Ba = 13, Va = 14, La = 15, Ha = 16, Oa = 17, za = 18, Wa = 19, Xa = 20, Ga = 21, Ya = 22, Ua = 23, _a = 24, Ka = 25, Za = 26, $a = 27, Ja = 28, Qa = 29, er = 30, tr = 31, ar = 32, rr = 33, ir = 34, sr = 35, nr = 36, or = 37, mr = 38, pr = 39, cr = 40, lr = 41, dr = 42, ur = 43, yr = 44, gr = 45, br = () => ({
   id: 1,
   name: "",
   pages: [],
   note: "",
   x: 0,
   y: 0
-}), ds = () => ({ characterIndex: 0, characterName: "", direction: 2, pattern: 0, tileId: 0 }), ls = () => ({ conditions: Be(), list: [], directionFix: !1, image: {
+}), fr = () => ({ characterIndex: 0, characterName: "", direction: 2, pattern: 0, tileId: 0 }), Ir = () => ({ conditions: Je(), list: [], directionFix: !1, image: {
   characterIndex: 0,
   characterName: "",
   direction: 2,
   pattern: 0,
   tileId: 0
-}, moveFrequency: 5, moveRoute: { list: [], repeat: !1, skippable: !1, wait: !1 } }), us = (e = {}) => ({
+}, moveFrequency: 5, moveRoute: { list: [], repeat: !1, skippable: !1, wait: !1 } }), vr = (e = {}) => ({
   data: e.data ?? [],
   battleback1Name: e.battleback1Name ?? "",
   battleback2Name: e.battleback2Name ?? "",
@@ -75,10 +78,10 @@ const oa = ({ actorId: e = 1, faceIndex: t = 0, faceName: a = "", characterIndex
   displayName: e.displayName ?? "",
   encounterList: e.encounterList ?? [],
   events: e.events ?? []
-}), ys = (e = { id: 0 }) => {
+}), hr = (e = { id: 0 }) => {
   return { name: e.name ?? (t = e.id, t.toString().padStart(3, "0")), id: e.id, expanded: e.expanded ?? !1, order: e.order ?? 0, parentId: e.parentId ?? 0, scrollX: e.scrollX ?? 0, scrollY: e.scrollY ?? 0 };
   var t;
-}, Ve = {
+}, Qe = {
   type: "object",
   required: ["image", "moveRoute", "conditions", "directionFix", "moveFrequency"],
   properties: { moveFrequency: { type: "integer" }, directionFix: { type: "boolean" }, conditions: {
@@ -109,7 +112,7 @@ const oa = ({ actorId: e = 1, faceIndex: t = 0, faceName: a = "", characterIndex
       }] } } }
     } } }
   } }
-}, Le = {
+}, et = {
   type: "object",
   required: ["battleback1Name", "battleback2Name", "note", "width", "height", "x", "y", "parallaxSy", "parallaxSx", "parallaxLoopY", "parallaxLoopX", "disableDashing", "parallaxName", "parallaxShow", "displayName", "data", "autoplayBgm", "bgm", "autoplayBgs", "bgs"],
   properties: {
@@ -148,16 +151,16 @@ const oa = ({ actorId: e = 1, faceIndex: t = 0, faceName: a = "", characterIndex
       x: { type: "integer" },
       y: { type: "integer" },
       note: { type: "string" },
-      pages: { type: "array", items: Ve }
+      pages: { type: "array", items: Qe }
     } } }
   }
-}, ve = new K({ strict: !0 }), He = ve.compile({
+}, fe = new be({ strict: !0 }), tt = fe.compile({
   type: "object",
   required: ["name", "id", "expanded", "order", "parentId", "scrollX", "scrollY"],
   properties: { name: { type: "string" }, id: { type: "integer", minimum: 0 }, expanded: { type: "boolean" }, order: {
     type: "integer"
   }, parentId: { type: "integer" }, scrollX: { type: "number" }, scrollY: { type: "number" } }
-}), Oe = ve.compile(Le), gs = (e) => He(e), bs = (e) => Oe(e), ze = { actor: { title: "アクター", options: {
+}), at = fe.compile(et), xr = (e) => tt(e), Tr = (e) => at(e), rt = { actor: { title: "アクター", options: {
   initialEquipments: "初期装備",
   faceImage: "顔画像",
   characterImage: "キャラクター画像",
@@ -193,10 +196,10 @@ const oa = ({ actorId: e = 1, faceIndex: t = 0, faceName: a = "", characterIndex
   scope: "範囲",
   speed: "速度補正",
   successRate: "成功率"
-} }, commonEvent: { title: "コモンイベント", options: { trigger: "トリガー", switchId: "スイッチID", name: "名前", id: "ID", list: "コマンドリスト" } } }, We = {
+} }, commonEvent: { title: "コモンイベント", options: { trigger: "トリガー", switchId: "スイッチID", name: "名前", id: "ID", list: "コマンドリスト" } } }, it = {
   title: "ダメージ",
   options: {}
-}, Z = (e = {}) => ({ type: e.type ?? 0, elementId: e.elementId ?? 0, formula: e.formula ?? "", variance: e.variance ?? 0, critical: e.critical ?? !1 }), Is = (e = {}) => ({
+}, _ = (e = {}) => ({ type: e.type ?? 0, elementId: e.elementId ?? 0, formula: e.formula ?? "", variance: e.variance ?? 0, critical: e.critical ?? !1 }), kr = (e = {}) => ({
   name: e.name ?? "",
   id: e.id ?? 0,
   battlerName: e.battlerName ?? "",
@@ -212,7 +215,7 @@ const oa = ({ actorId: e = 1, faceIndex: t = 0, faceName: a = "", characterIndex
   equips: [],
   initialLevel: e.initialLevel ?? 0,
   maxLevel: e.maxLevel ?? 0
-}), fs = (e) => ({
+}), wr = (e) => ({
   name: e.name ?? "",
   id: e.id ?? 0,
   battlerName: e.battlerName ?? "",
@@ -228,7 +231,7 @@ const oa = ({ actorId: e = 1, faceIndex: t = 0, faceName: a = "", characterIndex
   equips: [],
   initialLevel: e.initialLevel ?? 0,
   maxLevel: e.maxLevel ?? 0
-}), vs = (e = {}) => ({
+}), Nr = (e = {}) => ({
   id: e.id ?? 0,
   name: e.name ?? "",
   iconIndex: e.iconIndex ?? 0,
@@ -239,24 +242,24 @@ const oa = ({ actorId: e = 1, faceIndex: t = 0, faceName: a = "", characterIndex
   params: e.params ?? [0, 0, 0, 0, 0, 0, 0, 0],
   etypeId: e.etypeId ?? 0,
   price: e.price ?? 0
-}), hs = (e = {}) => ({ name: e.name ?? "", id: e.id ?? 0, traits: [], note: e.note ?? "", params: [0, 0, 0, 0, 0, 0, 0, 0], learnings: e.learnings ?? [], expParams: e.expParams ?? [] }), Xe = (e = {}) => ({
+}), Sr = (e = {}) => ({ name: e.name ?? "", id: e.id ?? 0, traits: [], note: e.note ?? "", params: [0, 0, 0, 0, 0, 0, 0, 0], learnings: e.learnings ?? [], expParams: e.expParams ?? [] }), st = (e = {}) => ({
   dataId: e.dataId ?? 0,
   denominator: e.denominator ?? 0,
   kind: e.kind ?? 0
-}), xs = (e = {}) => ({
+}), Pr = (e = {}) => ({
   conditionParam1: e.conditionParam1 ?? 0,
   conditionParam2: e.conditionParam2 ?? 0,
   conditionType: e.conditionType ?? 0,
   rating: e.rating ?? 0,
   skillId: e.skillId ?? 0
-}), Ts = (e = {}) => {
+}), Cr = (e = {}) => {
   var t;
   return {
     name: e.name ?? "",
     id: e.id ?? 0,
     battlerName: e.battlerName ?? "",
     battlerHue: e.battlerHue ?? 0,
-    dropItems: ((t = e.dropItems) == null ? void 0 : t.map(() => Xe())) ?? [],
+    dropItems: ((t = e.dropItems) == null ? void 0 : t.map(() => st())) ?? [],
     exp: e.exp ?? 0,
     gold: e.gold ?? 0,
     traits: [],
@@ -264,7 +267,7 @@ const oa = ({ actorId: e = 1, faceIndex: t = 0, faceName: a = "", characterIndex
     params: [0, 0, 0, 0, 0, 0, 0, 0],
     actions: []
   };
-}, ks = (e = {}) => ({
+}, Ar = (e = {}) => ({
   name: e.name ?? "",
   id: e.id ?? 0,
   iconIndex: e.iconIndex ?? 0,
@@ -289,8 +292,8 @@ const oa = ({ actorId: e = 1, faceIndex: t = 0, faceName: a = "", characterIndex
   chanceByDamage: e.chanceByDamage ?? 0,
   removeByWalking: e.removeByWalking ?? !1,
   stepsToRemove: e.stepsToRemove ?? 0
-}), l = "{name}", A = "{name} * {value}%", pe = "{name} + {value}%", ce = "{value}", Ge = { title: "特徴", options: {
-  regularParam: { title: "基本能力値", format: A, options: {
+}), d = "{name}", C = "{name} * {value}%", ne = "{name} + {value}%", oe = "{value}", nt = { title: "特徴", options: {
+  regularParam: { title: "基本能力値", format: C, options: {
     maxHp: "最大HP",
     maxMp: "最大MP",
     atk: "攻撃力",
@@ -300,7 +303,7 @@ const oa = ({ actorId: e = 1, faceIndex: t = 0, faceName: a = "", characterIndex
     agi: "敏捷性",
     luk: "運"
   } },
-  extraParam: { title: "追加能力値", format: pe, options: {
+  extraParam: { title: "追加能力値", format: ne, options: {
     hitRate: "命中率",
     evasionRate: "回避率",
     criticalRate: "クリティカル率",
@@ -312,7 +315,7 @@ const oa = ({ actorId: e = 1, faceIndex: t = 0, faceName: a = "", characterIndex
     mpRegenerationRate: "MP再生率",
     tpRegenerationRate: "TP再生率"
   } },
-  specialParam: { title: "特殊能力値", format: A, options: {
+  specialParam: { title: "特殊能力値", format: C, options: {
     targetRate: "狙われ率",
     guardEffectRate: "防御効果率",
     recoveryEffectRate: "回復効果率",
@@ -326,15 +329,15 @@ const oa = ({ actorId: e = 1, faceIndex: t = 0, faceName: a = "", characterIndex
   } },
   specialFlag: {
     title: "特殊フラグ",
-    format: l,
+    format: d,
     options: { autoBattle: "自動戦闘", guard: "防御", substitute: "身代わり", preventEscape: "逃走防止" }
   },
-  collaps: { title: "消滅エフェクト", format: l, options: {
+  collaps: { title: "消滅エフェクト", format: d, options: {
     bossCollaps: "ボス崩壊",
     instantCollaps: "即時崩壊",
     noneCollaps: "崩壊なし"
   } },
-  partyAbility: { title: "パーティ能力", format: l, options: {
+  partyAbility: { title: "パーティ能力", format: d, options: {
     cancelSurprise: "不意打ち無効",
     dropItemDouble: "アイテムドロップ2倍",
     encounterHalf: "エンカウント半減",
@@ -342,40 +345,40 @@ const oa = ({ actorId: e = 1, faceIndex: t = 0, faceName: a = "", characterIndex
     goldDouble: "ゴールド2倍",
     raisePreemptive: "先制攻撃率アップ"
   } },
-  elementRate: { title: "属性有効度", format: A },
-  debuffRate: { title: "弱体有効度", format: A },
-  stateRate: { title: "ステート有効度", format: A },
+  elementRate: { title: "属性有効度", format: C },
+  debuffRate: { title: "弱体有効度", format: C },
+  stateRate: { title: "ステート有効度", format: C },
   stateResist: {
     title: "ステート無効",
-    format: l
+    format: d
   },
-  attackElement: { title: "攻撃属性", format: l },
-  attackState: { title: "攻撃ステート", format: pe },
-  attackSpeed: { title: "攻撃速度補正", format: ce },
+  attackElement: { title: "攻撃属性", format: d },
+  attackState: { title: "攻撃ステート", format: ne },
+  attackSpeed: { title: "攻撃速度補正", format: oe },
   attackTimes: {
     title: "攻撃追加回数",
-    format: ce
+    format: oe
   },
-  actionPlus: { title: "行動追加", format: A },
-  attackSkill: { title: "攻撃スキル", format: l },
-  equipWeaponType: { title: "装備武器タイプ", format: l },
-  equipArmorType: { title: "装備防具タイプ", format: l },
+  actionPlus: { title: "行動追加", format: C },
+  attackSkill: { title: "攻撃スキル", format: d },
+  equipWeaponType: { title: "装備武器タイプ", format: d },
+  equipArmorType: { title: "装備防具タイプ", format: d },
   equipLock: {
     title: "装備固定",
-    format: l
+    format: d
   },
-  equipSeal: { title: "装備封印", format: l },
-  slotType: { title: "スロットタイプ", format: l },
-  skillAdd: { title: "スキル追加", format: l },
-  skillSeal: { title: "スキルタイプ封印", format: l },
-  skillTypeAdd: { title: "スキルタイプ追加", format: l },
-  skillTypeSeal: { title: "スキルタイプ封印", format: l }
-} }, Ye = { itemMapper: { placeHolder: "name", dataIdKey: "dataId", kindKey: "code" }, placeHolder: {
+  equipSeal: { title: "装備封印", format: d },
+  slotType: { title: "スロットタイプ", format: d },
+  skillAdd: { title: "スキル追加", format: d },
+  skillSeal: { title: "スキルタイプ封印", format: d },
+  skillTypeAdd: { title: "スキルタイプ追加", format: d },
+  skillTypeSeal: { title: "スキルタイプ封印", format: d }
+} }, ot = { itemMapper: { placeHolder: "name", dataIdKey: "dataId", kindKey: "code" }, placeHolder: {
   numbers: ["value"]
-} }, ws = (e, t, a) => {
-  const r = Ee(Ye);
-  return Fe(t, a, r, e.pattern, (o) => o.dataId);
-}, Ns = (e = {}) => ({
+} }, Dr = (e, t, a) => {
+  const r = qe(ot);
+  return Me(t, a, r, e.pattern, (m) => m.dataId);
+}, qr = (e = {}) => ({
   id: e.id ?? 0,
   name: e.name ?? "",
   iconIndex: e.iconIndex ?? 0,
@@ -386,9 +389,9 @@ const oa = ({ actorId: e = 1, faceIndex: t = 0, faceName: a = "", characterIndex
   params: e.params ?? [0, 0, 0, 0, 0, 0, 0, 0],
   etypeId: e.etypeId ?? 0,
   price: e.price ?? 0,
-  damage: Z(e.damage ?? {}),
+  damage: _(e.damage ?? {}),
   wtypeId: e.wtypeId ?? 0
-}), Ss = {
+}), Mr = {
   type: "object",
   required: ["name", "id", "description", "iconIndex", "price", "params", "traits", "note", "etypeId", "animationId"],
   properties: { name: { type: "string" }, id: { type: "integer", minimum: 0 }, description: { type: "string" }, iconIndex: { type: "integer", minimum: 0 }, price: { type: "integer", minimum: 0 }, note: {
@@ -405,50 +408,50 @@ const oa = ({ actorId: e = 1, faceIndex: t = 0, faceName: a = "", characterIndex
   }, traits: { type: "array", items: { type: "object", properties: { code: { type: "integer" }, dataId: { type: "integer" }, value: {
     type: "integer"
   } }, required: ["code", "dataId", "value"] } } }
-}, Ps = {
+}, Rr = {
   title: "武器",
   options: { weaponTypeId: "武器タイプID" }
-}, qs = 0, As = 1, Cs = 2, de = "{name} {value1}%", O = "{value1}% + {value2}", le = "{name} {value1}ターン", j = "{name}", Ue = { title: "使用効果", options: {
-  addBuff: { desc: "バフを付与する", domainName: "バフ付与", format: le },
-  addDebuff: { desc: "デバフを付与する", domainName: "デバフ付与", format: le },
-  gainTp: { desc: "TPを指定した量だけ増加させます。", domainName: "TP増加", format: O },
+}, jr = 0, Er = 1, Fr = 2, me = "{name} {value1}%", L = "{value1}% + {value2}", pe = "{name} {value1}ターン", q = "{name}", mt = { title: "使用効果", options: {
+  addBuff: { desc: "バフを付与する", domainName: "バフ付与", format: pe },
+  addDebuff: { desc: "デバフを付与する", domainName: "デバフ付与", format: pe },
+  gainTp: { desc: "TPを指定した量だけ増加させます。", domainName: "TP増加", format: L },
   grow: {
     desc: "成長効果",
     domainName: "成長効果",
     format: "{name} + {value1}"
   },
-  learnSkill: { desc: "スキルを習得する", domainName: "スキル習得", format: j },
+  learnSkill: { desc: "スキルを習得する", domainName: "スキル習得", format: q },
   recoverHp: {
     desc: "HPを回復します。最大HPに対する割合と一定値のいずれか一方または両方を指定します。アイテムの場合は、特殊能力値[薬の知識]の倍率が適用されます。",
     domainName: "HP回復",
-    format: O
+    format: L
   },
-  recoverMp: { desc: "MPを回復します。最大MPに対する割合と一定値のいずれか一方または両方を指定します。アイテムの場合は、特殊能力値[薬の知識]の倍率が適用されます。", domainName: "MP回復", format: O },
+  recoverMp: { desc: "MPを回復します。最大MPに対する割合と一定値のいずれか一方または両方を指定します。アイテムの場合は、特殊能力値[薬の知識]の倍率が適用されます。", domainName: "MP回復", format: L },
   removeBuff: {
     desc: "バフを解除する",
     domainName: "バフ解除",
-    format: j
+    format: q
   },
-  removeDebuff: { desc: "デバフを解除する", domainName: "デバフ解除", format: j },
-  removeState: { desc: "指定したステートを付加します。", domainName: "ステート付加", format: de },
+  removeDebuff: { desc: "デバフを解除する", domainName: "デバフ解除", format: q },
+  removeState: { desc: "指定したステートを付加します。", domainName: "ステート付加", format: me },
   special: {
     desc: "特殊効果",
     domainName: "特殊効果",
-    format: j
+    format: q
   },
-  addState: { desc: "状態異常を解除する", domainName: "ステート解除", format: de },
-  commonEvent: { desc: "コモンイベントを実行する", domainName: "コモンイベント", format: j }
-} }, Ds = 0, Ms = (e, t, a) => {
-  const r = a.find((p) => p.id === t.dataId), o = r ? r.name : "Unknown Item";
-  return e.pattern.replaceAll("{value1}", t.value1.toString()).replaceAll("{value2}", t.value2.toString()).replaceAll("{name}", o);
-}, js = { title: "アイテム", options: { consumable: "消耗品" } }, Rs = {
+  addState: { desc: "状態異常を解除する", domainName: "ステート解除", format: me },
+  commonEvent: { desc: "コモンイベントを実行する", domainName: "コモンイベント", format: q }
+} }, Br = 0, Vr = (e, t, a) => {
+  const r = a.find((p) => p.id === t.dataId), m = r ? r.name : "Unknown Item";
+  return e.pattern.replaceAll("{value1}", t.value1.toString()).replaceAll("{value2}", t.value2.toString()).replaceAll("{name}", m);
+}, Lr = { title: "アイテム", options: { consumable: "消耗品" } }, Hr = {
   title: "スキル",
   options: { requiredWeaponTypeId1: "必要武器タイプ1", requiredWeaponTypeId2: "必要武器タイプ2", mpCost: "MP消費", tpCost: "TP消費" }
-}, Es = { title: "", options: {
+}, Or = { title: "", options: {
   scope: "範囲",
   speed: "速度補正",
   successRate: "成功率"
-} }, Fs = (e = {}) => ({
+} }, zr = (e = {}) => ({
   animationId: e.animationId ?? 0,
   id: e.id ?? 0,
   name: e.name ?? "",
@@ -464,15 +467,15 @@ const oa = ({ actorId: e = 1, faceIndex: t = 0, faceName: a = "", characterIndex
   repeats: e.repeats ?? 0,
   tpGain: e.tpGain ?? 0,
   hitType: e.hitType ?? 0,
-  damage: Z(e.damage ?? {}),
+  damage: _(e.damage ?? {}),
   effects: [],
   price: 0
-}), Bs = (e = {}) => ({
+}), Wr = (e = {}) => ({
   stypeId: e.stypeId ?? 0,
   requiredWtypeId1: e.requiredWtypeId1 ?? 0,
   requiredWtypeId2: e.requiredWtypeId2 ?? 0,
   animationId: e.animationId ?? 0,
-  damage: Z(e.damage ?? {}),
+  damage: _(e.damage ?? {}),
   description: e.description ?? "",
   effects: [],
   hitType: e.hitType ?? 0,
@@ -491,23 +494,7 @@ const oa = ({ actorId: e = 1, faceIndex: t = 0, faceName: a = "", characterIndex
   successRate: e.successRate ?? 0,
   tpCost: e.tpCost ?? 0,
   tpGain: e.tpGain ?? 0
-}), he = (e, t) => `<${e}:${t}>`, Vs = () => /<([^<>:]{1,100}):([^>]{1,1000})>/g, Ls = (e, t) => xe(e.note, (a, r) => t(a, r, e)), Hs = (e) => xe(e, (t, a) => [t, a]), xe = (e, t) => {
-  const a = /<([^<>:]{1,100}):([^>]{1,1000})>/g;
-  return Array.from(e.matchAll(a), (r) => t(r[1], r[2]));
-}, Os = (e, t) => {
-  if (e.length >= 3e3) throw new Error("Note text is too long. Please shorten it.");
-  return e.replaceAll(/<([^<>:]{1,100}):([^>]{1,1000})>/g, (a, r, o) => {
-    const p = t(r, o);
-    if (p.length >= 1e3) throw new Error("Note text is too long. Please shorten it.");
-    return he(r, p);
-  });
-}, zs = (e, t) => {
-  const a = /<([^<>:]{1,100}):([^>]{1,1000})>/g, r = Array.from(e.matchAll(a)).find((o) => o[1] === t);
-  return r ? r[2] : void 0;
-}, Ws = (e, t, a) => {
-  const r = /<([^<>:]{1,100}):([^>]{1,1000})>/g;
-  return e.replace(r, (o, p) => p === t ? he(p, a) : o);
-}, Xs = "data", Gs = "actor", Ys = "map", Us = "enemy", _s = "state", Ks = "skill", $s = "item", Zs = "weapon", Js = "armor", Qs = "class", en = "common_event", tn = "troop", _e = {
+}), Xr = "data", Gr = "actor", Yr = "map", Ur = "enemy", _r = "state", Kr = "skill", Zr = "item", $r = "weapon", Jr = "armor", Qr = "class", ei = "common_event", ti = "troop", pt = {
   id: "識別子",
   name: "名前",
   note: "メモ",
@@ -551,67 +538,67 @@ const oa = ({ actorId: e = 1, faceIndex: t = 0, faceName: a = "", characterIndex
   instantCollaps: "即時崩壊",
   noneCollaps: "崩壊なし",
   escape: "逃走"
-}, an = () => ({ rpg: { damage: We, data: ze, traits: Ge, itemEffect: Ue }, global: _e }), rn = (e, t = 0) => ({ code: 320, parameters: [e.actorId, e.name], indent: t }), sn = (e, t = 0) => ({
-  code: 324,
+}, ai = () => ({ rpg: { damage: it, data: rt, traits: nt, itemEffect: mt }, global: pt }), ri = (e, t = 0) => ({ code: Re, parameters: [e.actorId, e.name], indent: t }), ii = (e, t = 0) => ({
+  code: je,
   parameters: [e.actorId, e.nickname],
   indent: t
-}), nn = (e, t = 0) => ({ code: 325, parameters: [e.actorId, e.profile], indent: t }), on = (e, t) => N(e, m({ name: t })), N = (e, t, a = 0) => ({
+}), si = (e, t = 0) => ({ code: Ee, parameters: [e.actorId, e.profile], indent: t }), ni = (e, t) => w(e, o({ name: t })), w = (e, t, a = 0) => ({
   code: e,
-  parameters: [m(t)],
+  parameters: [o(t)],
   indent: a
-}), mn = (e, t = 0) => N(241, e, t), pn = (e, t = 0) => N(245, e, t), cn = (e, t = 0) => N(249, e, t), dn = (e, t = 0) => N(250, e, t), ln = (e, t = 0) => N(132, e, t), un = (e, t = 0) => N(133, e, t), yn = (e, t = 0) => N(139, e, t), gn = (e, t = 0) => ({
-  code: 117,
+}), oi = (e, t = 0) => w(Fe, e, t), mi = (e, t = 0) => w(Be, e, t), pi = (e, t = 0) => w(Ve, e, t), ci = (e, t = 0) => w(Le, e, t), li = (e, t = 0) => w(He, e, t), di = (e, t = 0) => w(Oe, e, t), ui = (e, t = 0) => w(ze, e, t), yi = (e, t = 0) => ({
+  code: We,
   indent: t,
-  parameters: Ke(e ?? {})
-}), bn = (e) => ({ eventId: e[0] }), Ke = (e) => [e.eventId ?? 0], In = (e) => ({ min: e[0], max: e[1], value: e[2] }), $e = (e) => [e.min, e.max, e.value], fn = (e, t = 0) => ({
-  code: 121,
+  parameters: ct(e ?? {})
+}), gi = (e) => ({ eventId: e[0] }), ct = (e) => [e.eventId ?? 0], bi = (e) => ({ min: e[0], max: e[1], value: e[2] }), lt = (e) => [e.min, e.max, e.value], fi = (e, t = 0) => ({
+  code: Xe,
   indent: t,
-  parameters: $e(e)
-}), Te = (e) => [e], vn = (e) => ({ comment: e[0] }), Ze = (e, t = 0) => ({ code: 108, indent: t, parameters: Te(e) }), Je = (e, t = 0) => ({
-  code: 408,
+  parameters: lt(e)
+}), Ie = (e) => [e], Ii = (e) => ({ comment: e[0] }), dt = (e, t = 0) => ({ code: Ge, indent: t, parameters: Ie(e) }), ut = (e, t = 0) => ({
+  code: Ye,
   indent: t,
-  parameters: Te(e)
-}), hn = (e, t = 0) => e.map((a, r) => r === 0 ? Ze(a, t) : Je(a, t)), Qe = (e) => [e.variableId ?? 0, e.digits ?? 0], xn = (e) => ({ variableId: e[0], digits: e[1] }), Tn = (e, t = 0) => ({
-  code: 103,
+  parameters: Ie(e)
+}), vi = (e, t = 0) => e.map((a, r) => r === 0 ? dt(a, t) : ut(a, t)), yt = (e) => [e.variableId ?? 0, e.digits ?? 0], hi = (e) => ({ variableId: e[0], digits: e[1] }), xi = (e, t = 0) => ({
+  code: Ue,
   indent: t,
-  parameters: Qe(e ?? {})
-}), kn = (e, t = 0) => ({ code: 402, indent: t, parameters: [(e == null ? void 0 : e.index) ?? 0, (e == null ? void 0 : e.name) ?? ""] }), wn = (e) => ({ index: e[0], name: e[1] }), Nn = (e) => [e.index ?? 0, e.name ?? ""], Sn = (e) => ({
+  parameters: yt(e ?? {})
+}), Ti = (e, t = 0) => ({ code: 402, indent: t, parameters: [(e == null ? void 0 : e.index) ?? 0, (e == null ? void 0 : e.name) ?? ""] }), ki = (e) => ({ index: e[0], name: e[1] }), wi = (e) => [e.index ?? 0, e.name ?? ""], Ni = (e) => ({
   choices: e[0],
   cancelType: e[1],
   defaultType: e[2],
   positionType: e[3],
   background: e[4]
-}), Pn = (e) => [e.choices ?? [], e.cancelType ?? 0, e.defaultType ?? 0, e.positionType ?? 2, e.background ?? 0], qn = (e, t = 0) => ({
+}), Si = (e) => [e.choices ?? [], e.cancelType ?? 0, e.defaultType ?? 0, e.positionType ?? 2, e.background ?? 0], Pi = (e, t = 0) => ({
   code: 102,
   indent: t,
   parameters: [(e == null ? void 0 : e.choices) ?? [], (e == null ? void 0 : e.cancelType) ?? 0, (e == null ? void 0 : e.defaultType) ?? 0, (e == null ? void 0 : e.positionType) ?? 2, (e == null ? void 0 : e.background) ?? 0]
-}), An = (e) => ({
+}), Ci = (e) => ({
   code: e.code,
   indent: e.indent,
   parameters: [[...e.parameters[0]], e.parameters[1], e.parameters[2], e.parameters[3], e.parameters[4]]
-}), Cn = (e, t = 0) => ({
-  code: 101,
+}), Ai = (e, t = 0) => ({
+  code: _e,
   indent: t,
   parameters: [(e == null ? void 0 : e.facename) ?? "", (e == null ? void 0 : e.faceIndex) ?? 0, (e == null ? void 0 : e.background) ?? 0, (e == null ? void 0 : e.positionType) ?? 2, (e == null ? void 0 : e.speakerName) ?? ""]
-}), Dn = (e) => ({
+}), Di = (e) => ({
   facename: e[0],
   faceIndex: e[1],
   background: e[2],
   positionType: e[3],
   speakerName: e[4]
-}), Mn = (e) => [e.facename, e.faceIndex, e.background, e.positionType, e.speakerName], jn = (e, t = 0) => ({
-  code: 401,
+}), qi = (e) => [e.facename, e.faceIndex, e.background, e.positionType, e.speakerName], Mi = (e, t = 0) => ({
+  code: Ke,
   indent: t,
   parameters: [e]
-}), Rn = ({ pictureId: e = 0, origin: t = 0, name: a = "", x: r = 0, y: o = 0, scaleX: p = 100, scaleY: d = 100, opacity: u = 255, blendMode: y = 0 }) => ({
+}), Ri = ({ pictureId: e = 0, origin: t = 0, name: a = "", x: r = 0, y: m = 0, scaleX: p = 100, scaleY: l = 100, opacity: u = 255, blendMode: y = 0 }) => ({
   code: 231,
   indent: 0,
-  parameters: [e, a, t, r, o, p, d, u, y]
-}), En = ({ pictureId: e, origin: t, x: a, y: r, scaleX: o, scaleY: p, opacity: d, blendMode: u, wait: y = !1, easingType: f = 0 }) => ({ code: 232, indent: 0, parameters: [e, t, a, r, o, p, d, u, y, f] }), et = (e, t = 0) => ({
-  code: 355,
+  parameters: [e, a, t, r, m, p, l, u, y]
+}), ji = ({ pictureId: e, origin: t, x: a, y: r, scaleX: m, scaleY: p, opacity: l, blendMode: u, wait: y = !1, easingType: I = 0 }) => ({ code: 232, indent: 0, parameters: [e, t, a, r, m, p, l, u, y, I] }), gt = (e, t = 0) => ({
+  code: Ze,
   indent: t,
   parameters: [e]
-}), tt = (e, t = 0) => ({ code: 655, indent: t, parameters: [e] }), Fn = (e, t = 0) => e.map((a, r) => r === 0 ? et(a, t) : tt(a, t)), Bn = 0, Vn = 1, Ln = 2, Hn = 3, On = 4, at = {
+}), bt = (e, t = 0) => ({ code: $e, indent: t, parameters: [e] }), Ei = (e, t = 0) => e.map((a, r) => r === 0 ? gt(a, t) : bt(a, t)), Fi = 0, Bi = 1, Vi = 2, Li = 3, Hi = 4, ft = {
   HP: 0,
   MP: 1,
   MHP: 2,
@@ -623,7 +610,7 @@ const oa = ({ actorId: e = 1, faceIndex: t = 0, faceName: a = "", characterIndex
   AGI: 8,
   LUK: 9,
   TP: 10
-}, zn = (e, t, a = 0) => [e.startId, e.endId ?? e.startId, a, 0, t.value], Wn = (e, t, a = 0) => [e.startId, e.endId ?? e.startId, a, 1, t.variableId], Xn = (e, t, a = 0) => [e.startId, e.endId ?? e.startId, a, 2, t.min, t.max], Gn = (e, t, a = 0) => [e.startId, e.endId ?? e.startId, a, 4, t.code], Yn = (e, t, a = 0) => [e.startId, e.endId ?? e.startId, a, 3, t.type, t.itemId], Un = (e, t, a = 0) => [e.startId, e.endId ?? e.startId, a, 3, 3, t.index, t.param], _n = (e, t, a = 0) => [e.startId, e.endId ?? e.startId, a, 3, 4, t.index, at[t.param]], Kn = (e, t) => {
+}, Oi = (e, t, a = 0) => [e.startId, e.endId ?? e.startId, a, 0, t.value], zi = (e, t, a = 0) => [e.startId, e.endId ?? e.startId, a, 1, t.variableId], Wi = (e, t, a = 0) => [e.startId, e.endId ?? e.startId, a, 2, t.min, t.max], Xi = (e, t, a = 0) => [e.startId, e.endId ?? e.startId, a, 4, t.code], Gi = (e, t, a = 0) => [e.startId, e.endId ?? e.startId, a, 3, t.type, t.itemId], Yi = (e, t, a = 0) => [e.startId, e.endId ?? e.startId, a, 3, 3, t.index, t.param], Ui = (e, t, a = 0) => [e.startId, e.endId ?? e.startId, a, 3, 4, t.index, ft[t.param]], _i = (e, t) => {
   switch (t[6]) {
     case 0:
       return e.hp;
@@ -633,7 +620,7 @@ const oa = ({ actorId: e = 1, faceIndex: t = 0, faceName: a = "", characterIndex
       return e.tp;
   }
   return t[6] >= 2 && t[6] <= 9 ? e.param(t[6] - 2) : 0;
-}, $n = (e, t) => {
+}, Ki = (e, t) => {
   switch (t[6]) {
     case 0:
       return e.level;
@@ -647,99 +634,41 @@ const oa = ({ actorId: e = 1, faceIndex: t = 0, faceName: a = "", characterIndex
       return e.tp;
   }
   return t[6] >= 4 && t[6] <= 11 ? e.param(t[6] - 4) : 0;
-}, rt = (e) => [...e], Zn = (e) => ({
+}, It = (e) => [...e], Zi = (e) => ({
   code: e.code,
   indent: e.indent,
-  parameters: rt(e.parameters)
-}), it = (e) => typeof e == "string" || typeof e == "number" || typeof e == "boolean", Jn = (e) => e.parameters.every(it), T = new K({ strict: !0 }), st = T.compile({
-  type: "object",
-  required: ["code", "parameters", "indent"],
-  properties: { code: { type: "integer", enum: [320, 324, 325] }, indent: { type: "integer" }, parameters: { type: "array", minItems: 2, maxItems: 2, items: [{
-    type: "integer",
-    minimum: 0
-  }, { type: "string" }] } },
-  additionalProperties: !1
-}), Qn = (e) => st(e), nt = T.compile({ type: "object", properties: { code: { type: "number", const: 105 }, indent: {
-  type: "integer",
-  minimum: 0
-}, parameters: { type: "array", minItems: 2, maxItems: 2, items: [{ type: "number" }, { type: "boolean" }] } }, required: ["code", "indent", "parameters"] }), eo = (e) => nt(e), ot = T.compile({
-  type: "object",
-  required: ["code", "parameters", "indent"],
-  properties: { indent: { type: "integer", minimum: 0 }, parameters: { type: "array", minItems: 0, maxItems: 0 }, code: {
-    type: "integer",
-    enum: [0, 109, 112, 113, 115, 204, 206, 213, 214, 216, 217, 221, 222, 243, 244, 251, 314, 315, 340, 351, 352, 353, 354, 411]
-  } },
-  additionalProperties: !1
-}), to = (e) => ot(e), mt = T.compile({
-  type: "object",
-  required: ["code", "parameters", "indent"],
-  properties: { code: { type: "integer", enum: [108, 355, 401, 405, 408, 655] }, indent: { type: "integer", minimum: 0 }, parameters: {
-    type: "array",
-    minItems: 1,
-    maxItems: 1,
-    items: [{ type: "string" }]
-  } },
-  additionalProperties: !1
-}), D = (e) => mt(e), pt = T.compile({ type: "object", properties: { code: { type: "number", const: 117 }, indent: {
-  type: "integer",
-  minimum: 0
-}, parameters: { type: "array", minItems: 1, maxItems: 1, items: [{ type: "number", minimum: 0, default: 0 }] } }, required: ["code", "indent", "parameters"] }), ao = (e) => pt(e), ct = T.compile({
-  type: "object",
-  properties: { code: { type: "number", const: 102 }, indent: { type: "integer", minimum: 0 }, parameters: { type: "array", minItems: 5, maxItems: 5, items: [{ type: "array", items: { type: "string" } }, {
-    type: "integer"
-  }, { type: "integer" }, { type: "integer" }, { type: "integer" }] } },
-  required: ["code", "indent", "parameters"]
-}), ro = (e) => ct(e), dt = T.compile({
-  type: "object",
-  properties: { code: {
-    type: "number",
-    const: 402
-  }, indent: { type: "integer", minimum: 0 }, parameters: { type: "array", minItems: 2, maxItems: 2, items: [{ type: "integer" }, { type: "string" }] } },
-  required: ["code", "indent", "parameters"]
-}), io = (e) => dt(e), lt = T.compile({ type: "object", properties: { code: { type: "number", const: 103 }, indent: { type: "integer", minimum: 0 }, parameters: {
-  type: "array",
-  minItems: 2,
-  maxItems: 2,
-  items: [{ type: "number" }, { type: "number" }]
-} }, required: ["code", "indent", "parameters"] }), so = (e) => lt(e), ut = T.compile({
-  type: "object",
-  required: ["code", "parameters", "indent"],
-  properties: { code: { type: "integer", const: 101 }, indent: { type: "integer", minimum: 0 }, parameters: { type: "array", items: [{ type: "string" }, {
-    type: "integer",
-    minimum: 0,
-    maximum: 7
-  }, { type: "integer", minimum: 0, maximum: 2 }, { type: "integer", minimum: 0, maximum: 2 }, { type: "string" }], minItems: 5, maxItems: 5 } }
-}), no = (e) => ut(e), oo = (e) => D(e) && e.code === 401, mo = (e) => D(e) && e.code === 405, po = (e) => D(e) && e.code === 108, co = (e) => D(e) && e.code === 408, lo = (e) => D(e) && e.code === 355, uo = (e) => D(e) && e.code === 655, yo = "bgm", go = "se", bo = "me", Io = "bgs", fo = "battlebacks1", vo = "battlebacks2", ho = "characters", xo = "enemies", To = "faces", ko = "parallaxes", wo = "pictures", No = "sv_actors", So = "sv_enemies", Po = "system", qo = "tilesets", Ao = "titles1", Co = "titles2", Do = "System.json", Mo = "Actors.json", jo = "Classes.json", Ro = "Skills.json", Eo = "Items.json", Fo = "Weapons.json", Bo = "Armors.json", Vo = "Enemies.json", Lo = "Troops.json", Ho = "States.json", Oo = "Animations.json", zo = "Tilesets.json", Wo = "CommonEvents.json", Xo = "MapInfos.json", Go = "data", Yo = "img", Uo = "audio", _o = "js", ke = (e, t) => ({
+  parameters: It(e.parameters)
+}), vt = (e) => typeof e == "string" || typeof e == "number" || typeof e == "boolean", $i = (e) => e.parameters.every(vt), Ji = "bgm", Qi = "se", es = "me", ts = "bgs", as = "battlebacks1", rs = "battlebacks2", is = "characters", ss = "enemies", ns = "faces", os = "parallaxes", ms = "pictures", ps = "sv_actors", cs = "sv_enemies", ls = "system", ds = "tilesets", us = "titles1", ys = "titles2", gs = "System.json", bs = "Actors.json", fs = "Classes.json", Is = "Skills.json", vs = "Items.json", hs = "Weapons.json", xs = "Armors.json", Ts = "Enemies.json", ks = "Troops.json", ws = "States.json", Ns = "Animations.json", Ss = "Tilesets.json", Ps = "CommonEvents.json", Cs = "MapInfos.json", As = "data", Ds = "img", qs = "audio", Ms = "js", ve = (e, t) => ({
   type: "array",
   items: t,
   ...x(e),
-  ...k(e.default)
-}), x = (e) => ({ ...typeof e.text == "string" ? { title: e.text } : {}, ...typeof e.desc == "string" ? { description: e.desc } : {} }), k = (e) => e !== void 0 ? {
+  ...T(e.default)
+}), x = (e) => ({ ...typeof e.text == "string" ? { title: e.text } : {}, ...typeof e.desc == "string" ? { description: e.desc } : {} }), T = (e) => e !== void 0 ? {
   default: e
-} : {}, ue = (e) => e === void 0 || e === 0, yt = (e) => ke(e, { type: "string" }), gt = (e) => {
+} : {}, ce = (e) => e === void 0 || e === 0, ht = (e) => ve(e, { type: "string" }), xt = (e) => {
   switch (e.kind) {
     case "string":
     case "multiline_string":
       return ((a) => ({
         type: "string",
         ...x(a),
-        ...k(a.default)
+        ...T(a.default)
       }))(e);
     case "file":
     case "combo":
-      return ((a) => ({ type: "string", ...k(a.default), ...x(a) }))(e);
+      return ((a) => ({ type: "string", ...T(a.default), ...x(a) }))(e);
     case "select":
-      return ((a) => ({ type: "string", ...k(a.default), ...x(a), ...a.options ? {
+      return ((a) => ({ type: "string", ...T(a.default), ...x(a), ...a.options ? {
         enum: a.options.map((r) => r.value)
       } : {} }))(e);
     case "file[]":
     case "string[]":
     case "multiline_string[]":
-      return yt(e);
+      return ht(e);
     case "number[]":
       return ((a) => ({ type: "array", items: {
-        type: ue(a.decimals) ? "integer" : "number"
-      }, ...k(a.default), ...x(a) }))(e);
+        type: ce(a.decimals) ? "integer" : "number"
+      }, ...T(a.default), ...x(a) }))(e);
     case "actor[]":
     case "weapon[]":
     case "armor[]":
@@ -749,9 +678,9 @@ const oa = ({ actorId: e = 1, faceIndex: t = 0, faceName: a = "", characterIndex
     case "state[]":
     case "class[]":
     case "troop[]":
-      return ((a) => ke(a, { type: "integer" }))(e);
+      return ((a) => ve(a, { type: "integer" }))(e);
     case "number":
-      return ((a) => ({ type: ue(a.decimals) ? "integer" : "number", ...k(a.default), ...x(a) }))(e);
+      return ((a) => ({ type: ce(a.decimals) ? "integer" : "number", ...T(a.default), ...x(a) }))(e);
     case "actor":
     case "weapon":
     case "armor":
@@ -761,62 +690,62 @@ const oa = ({ actorId: e = 1, faceIndex: t = 0, faceName: a = "", characterIndex
     case "state":
     case "class":
     case "troop":
-      return ((a) => ({ type: "integer", ...k(a.default), ...x(a) }))(e);
+      return ((a) => ({ type: "integer", ...T(a.default), ...x(a) }))(e);
     case "boolean":
-      return ((a) => ({ type: "boolean", ...k(a.default), ...x(a) }))(e);
+      return ((a) => ({ type: "boolean", ...T(a.default), ...x(a) }))(e);
     case "struct":
       return { $ref: `#/definitions/${(t = e).struct}`, ...x(t) };
     default:
       return {};
   }
   var t;
-}, we = (e, t) => Object.entries(t).reduce((a, [r, o]) => {
+}, he = (e, t) => Object.entries(t).reduce((a, [r, m]) => {
   if (r in e) {
     const p = e[r];
-    if (typeof p == "string") return { ...a, [r]: o(p) };
+    if (typeof p == "string") return { ...a, [r]: m(p) };
   }
   return a;
-}, {}), w = (e, t, a, r) => ({
+}, {}), k = (e, t, a, r) => ({
   default: t,
-  ...we(a, r),
+  ...he(a, r),
   kind: e
-}), B = (e, t, a) => ({ default: [], ...we(t, a), kind: e }), Ne = "help", Y = "kind", z = "text", ye = "struct", Se = (e) => {
+}), E = (e, t, a) => ({ default: [], ...he(t, a), kind: e }), xe = "help", X = "kind", H = "text", le = "struct", Te = (e) => {
   const t = JSON.parse(e);
-  return Array.isArray(t) ? t.map(V) : typeof t == "object" && t !== null ? Object.fromEntries(Object.entries(t).map(([a, r]) => [a, V(r)])) : t;
-}, V = (e) => {
+  return Array.isArray(t) ? t.map(F) : typeof t == "object" && t !== null ? Object.fromEntries(Object.entries(t).map(([a, r]) => [a, F(r)])) : t;
+}, F = (e) => {
   if (typeof e != "string") return e;
   try {
     const t = JSON.parse(e);
-    return Array.isArray(t) ? t.map(V) : typeof t == "object" && t !== null ? Object.fromEntries(Object.entries(t).map(([a, r]) => [a, V(r)])) : t;
+    return Array.isArray(t) ? t.map(F) : typeof t == "object" && t !== null ? Object.fromEntries(Object.entries(t).map(([a, r]) => [a, F(r)])) : t;
   } catch {
     return e;
   }
-}, bt = (e) => {
-  if (Y in e.attr) {
-    const t = It[e.attr.kind];
+}, Tt = (e) => {
+  if (X in e.attr) {
+    const t = kt[e.attr.kind];
     if (t) return t(e);
   }
-  return w("any", "", e.attr, L);
-}, n = (e) => e, Pe = (e) => e.replace("[", "").replace("]", "").split(",").map((t) => parseFloat(t.replaceAll('"', "").trim())).filter((t) => !isNaN(t)), L = {
+  return k("any", "", e.attr, B);
+}, n = (e) => e, ke = (e) => e.replace("[", "").replace("]", "").split(",").map((t) => parseFloat(t.replaceAll('"', "").trim())).filter((t) => !isNaN(t)), B = {
   default: n,
   text: n,
   desc: n,
   parent: n
-}, ge = (e) => w("string", "", e.attr, L), be = (e) => {
-  const t = { default: (a) => Se(a), text: n, desc: n, parent: n };
-  return B("string[]", e.attr, t);
+}, de = (e) => k("string", "", e.attr, B), ue = (e) => {
+  const t = { default: (a) => Te(a), text: n, desc: n, parent: n };
+  return E("string[]", e.attr, t);
 }, g = (e, t) => {
   const a = {
-    default: Pe,
+    default: ke,
     text: n,
     desc: n,
     parent: n
   };
-  return B(t, e.attr, a);
+  return E(t, e.attr, a);
 }, b = (e, t) => {
   const a = { default: (r) => parseInt(r, 10), text: n, desc: n, parent: n };
-  return w(t, 0, e.attr, a);
-}, It = {
+  return k(t, 0, e.attr, a);
+}, kt = {
   number: (e) => ((t) => {
     const a = {
       default: (r) => parseFloat(r),
@@ -827,25 +756,25 @@ const oa = ({ actorId: e = 1, faceIndex: t = 0, faceName: a = "", characterIndex
       max: (r) => parseFloat(r),
       parent: n
     };
-    return w("number", 0, t.attr, a);
+    return k("number", 0, t.attr, a);
   })(e),
   "number[]": (e) => {
-    const t = { default: Pe, text: n, desc: n, decimals: (a) => parseInt(a, 10), min: (a) => parseFloat(a), max: (a) => parseFloat(a), parent: n };
-    return B("number[]", e.attr, t);
+    const t = { default: ke, text: n, desc: n, decimals: (a) => parseInt(a, 10), min: (a) => parseFloat(a), max: (a) => parseFloat(a), parent: n };
+    return E("number[]", e.attr, t);
   },
-  string: ge,
-  "string[]": be,
-  multiline_string: ge,
-  "multiline_string[]": be,
+  string: de,
+  "string[]": ue,
+  multiline_string: de,
+  "multiline_string[]": ue,
   combo: (e) => {
     var a;
     const t = ((a = e.options) == null ? void 0 : a.map((r) => r.option)) ?? [];
-    return { ...w("combo", "", e.attr, L), options: t };
+    return { ...k("combo", "", e.attr, B), options: t };
   },
   select: (e) => {
     var a;
     const t = ((a = e.options) == null ? void 0 : a.map((r) => ({ option: r.option, value: r.value }))) ?? [];
-    return { ...w("select", "", e.attr, L), options: t };
+    return { ...k("select", "", e.attr, B), options: t };
   },
   actor: (e) => b(e, "actor"),
   "actor[]": (e) => g(e, "actor[]"),
@@ -880,57 +809,57 @@ const oa = ({ actorId: e = 1, faceIndex: t = 0, faceName: a = "", characterIndex
       off: n,
       parent: n
     };
-    return w("boolean", !0, e.attr, t);
+    return k("boolean", !0, e.attr, t);
   },
   file: (e) => {
     const t = { default: n, text: n, desc: n, parent: n, dir: n };
-    return { dir: "", ...w("file", "", e.attr, t) };
+    return { dir: "", ...k("file", "", e.attr, t) };
   },
   "file[]": (e) => {
-    const t = { default: (a) => Se(a), text: n, desc: n, parent: n, dir: n };
-    return { dir: "", ...B("file[]", e.attr, t) };
+    const t = { default: (a) => Te(a), text: n, desc: n, parent: n, dir: n };
+    return { dir: "", ...E("file[]", e.attr, t) };
   }
-}, qe = "BODY", Ae = "STRUCT", E = "NONE", ft = (e, t) => {
-  const a = e.lines.length > 0 ? J(e) : e, r = t[1] || void 0;
-  return { ...a, structName: r, blockType: r ? Ae : "INVALID", locale: t[2], lines: [] };
-}, vt = (e) => ({
-  ...e.lines.length > 0 ? J(e) : e,
-  blockType: qe,
+}, we = "BODY", Ne = "STRUCT", R = "NONE", wt = (e, t) => {
+  const a = e.lines.length > 0 ? K(e) : e, r = t[1] || void 0;
+  return { ...a, structName: r, blockType: r ? Ne : "INVALID", locale: t[2], lines: [] };
+}, Nt = (e) => ({
+  ...e.lines.length > 0 ? K(e) : e,
+  blockType: we,
   structName: void 0,
   locale: void 0,
   lines: []
-}), J = (e) => e.blockType === qe ? { ...e, bodies: e.bodies.concat([{ lines: [...e.lines] }]), lines: [], blockType: E } : e.structName && e.blockType === Ae ? {
+}), K = (e) => e.blockType === we ? { ...e, bodies: e.bodies.concat([{ lines: [...e.lines] }]), lines: [], blockType: R } : e.structName && e.blockType === Ne ? {
   ...e,
   structs: e.structs.concat([{ struct: e.structName, locale: e.locale, lines: [...e.lines] }]),
-  blockType: E,
+  blockType: R,
   structName: void 0,
   locale: void 0,
   lines: []
 } : {
   ...e,
-  blockType: E,
+  blockType: R,
   structName: void 0,
   lines: []
-}, ht = (e) => e.currentOption ? { items: e.items.concat({ option: e.currentOption, value: e.currentOption }) } : e, U = (e) => ({
+}, St = (e) => e.currentOption ? { items: e.items.concat({ option: e.currentOption, value: e.currentOption }) } : e, G = (e) => ({
   ...typeof e.desc == "string" ? { desc: e.desc } : {},
   ...typeof e.text == "string" ? { text: e.text } : {}
-}), F = (e) => {
-  const t = xt(e), a = kt(t);
-  return Tt(a);
-}, xt = (e) => {
+}), j = (e) => {
+  const t = Pt(e), a = At(t);
+  return Ct(a);
+}, Pt = (e) => {
   if (e.currentParam && e.currentOption) {
     const t = e.currentParam.attr.kind;
-    if (t === "select" || t === "combo") return { ...e, currentParam: { ...e.currentParam, options: ht(e.currentOption).items } };
+    if (t === "select" || t === "combo") return { ...e, currentParam: { ...e.currentParam, options: St(e.currentOption).items } };
   }
   return e;
-}, Tt = (e) => e.currentParam ? {
+}, Ct = (e) => e.currentParam ? {
   ...e,
   params: [...e.params, e.currentParam],
   currentParam: null,
   currentContext: null
-} : e, kt = (e) => {
+} : e, At = (e) => {
   if (e.currentCommand) {
-    const t = e.currentParam ? [...e.currentCommand.args, e.currentParam] : e.currentCommand.args, a = { ...U(e.currentCommand), command: e.currentCommand.command, args: t };
+    const t = e.currentParam ? [...e.currentCommand.args, e.currentParam] : e.currentCommand.args, a = { ...G(e.currentCommand), command: e.currentCommand.command, args: t };
     return {
       ...e,
       commands: [...e.commands, a],
@@ -941,45 +870,45 @@ const oa = ({ actorId: e = 1, faceIndex: t = 0, faceName: a = "", characterIndex
     };
   }
   return e;
-}, Ie = (e, t) => {
-  const a = e.lines.reduce((r, o) => {
-    const p = o.trim().replace(/^\*\s?/, "");
-    if (!p.startsWith("@")) return r.currentContext === Ne ? { ...r, helpLines: r.helpLines.concat(p) } : r;
-    const [d, ...u] = p.slice(1).split(" "), y = u.join(" ").trim(), f = t[d];
-    return f ? f(r, y) : r;
-  }, Nt());
-  return F(a);
-}, wt = (e, t) => {
-  const a = ((d) => {
-    const u = d.split(`
+}, ye = (e, t) => {
+  const a = e.lines.reduce((r, m) => {
+    const p = m.trim().replace(/^\*\s?/, "");
+    if (!p.startsWith("@")) return r.currentContext === xe ? { ...r, helpLines: r.helpLines.concat(p) } : r;
+    const [l, ...u] = p.slice(1).split(" "), y = u.join(" ").trim(), I = t[l];
+    return I ? I(r, y) : r;
+  }, qt());
+  return j(a);
+}, Dt = (e, t) => {
+  const a = ((l) => {
+    const u = l.split(`
 `), y = {
       structs: [],
       bodies: [],
       structName: void 0,
       locale: void 0,
       lines: [],
-      blockType: E
-    }, f = u.reduce((v, R) => {
-      const S = R.trim(), M = S.match(/^\/\*~struct~([A-Za-z0-9_]+)(?::([A-Za-z0-9_-]+))?/);
-      return M ? ft(v, M) : S === "/*:" ? vt(v) : S === "*/" ? v.lines.length > 0 ? J(v) : v : { ...v, lines: v.lines.concat([S]) };
+      blockType: R
+    }, I = u.reduce((v, M) => {
+      const N = M.trim(), D = N.match(/^\/\*~struct~([A-Za-z0-9_]+)(?::([A-Za-z0-9_-]+))?/);
+      return D ? wt(v, D) : N === "/*:" ? Nt(v) : N === "*/" ? v.lines.length > 0 ? K(v) : v : { ...v, lines: v.lines.concat([N]) };
     }, y);
-    return { structs: f.structs, bodies: f.bodies };
-  })(e), r = a.structs.map((d) => ((u) => {
-    const y = Ie(u, Ce);
+    return { structs: I.structs, bodies: I.bodies };
+  })(e), r = a.structs.map((l) => ((u) => {
+    const y = ye(u, Se);
     return { name: u.struct, params: y.params };
-  })(d)), o = ((d) => {
-    if (d.bodies.length !== 0) return d.bodies[0];
+  })(l)), m = ((l) => {
+    if (l.bodies.length !== 0) return l.bodies[0];
   })(a);
-  if (!o) return {
+  if (!m) return {
     params: [],
     commands: [],
     meta: {},
     helpLines: [],
     structs: r
   };
-  const p = Ie(o, t);
+  const p = ye(m, t);
   return { params: p.params, commands: p.commands, meta: p.meta, helpLines: p.helpLines, structs: r };
-}, Nt = () => ({
+}, qt = () => ({
   helpLines: [],
   params: [],
   commands: [],
@@ -992,27 +921,27 @@ const oa = ({ actorId: e = 1, faceIndex: t = 0, faceName: a = "", characterIndex
 }), h = (e, t, a) => e.currentParam && !(t in e.currentParam.attr) ? {
   ...e,
   currentParam: { ...e.currentParam, attr: { ...e.currentParam.attr, [t]: a } }
-} : e, W = (e, t, a) => ({ ...e, meta: { [t]: a, ...e.meta } }), Ce = {
+} : e, O = (e, t, a) => ({ ...e, meta: { [t]: a, ...e.meta } }), Se = {
   param: (e, t) => {
-    const a = F(e);
+    const a = j(e);
     return a.params.some((r) => r.name === t) ? a : { ...a, currentContext: "param", currentParam: { name: t, attr: {} } };
   },
-  text: (e, t) => e.currentParam ? h(e, z, t) : e.currentCommand && !(z in e.currentCommand) ? { ...e, currentCommand: {
-    ...U(e.currentCommand),
+  text: (e, t) => e.currentParam ? h(e, H, t) : e.currentCommand && !(H in e.currentCommand) ? { ...e, currentCommand: {
+    ...G(e.currentCommand),
     command: e.currentCommand.command,
     args: e.currentCommand.args,
-    [z]: t
+    [H]: t
   } } : e,
   desc: (e, t) => e.currentParam ? h(e, "desc", t) : e.currentCommand ? { ...e, currentCommand: { ...e.currentCommand, desc: t } } : e,
   command: (e, t) => {
-    const a = F(e);
+    const a = j(e);
     return a.commands.some((r) => r.command === t) ? a : { ...a, currentCommand: { command: t, args: [] }, currentParam: null };
   },
   arg: (e, t) => {
     if (!e.currentCommand) return e;
     if (e.currentParam) {
       const a = {
-        ...U(e.currentCommand),
+        ...G(e.currentCommand),
         command: e.currentCommand.command,
         args: e.currentCommand.args.concat(e.currentParam)
       };
@@ -1026,27 +955,27 @@ const oa = ({ actorId: e = 1, faceIndex: t = 0, faceName: a = "", characterIndex
     }
     return { ...e, currentParam: { name: t, attr: {} } };
   },
-  help: (e) => ({ ...F(e), currentContext: Ne }),
+  help: (e) => ({ ...j(e), currentContext: xe }),
   option: (e, t) => {
     if (!e.currentParam) return e;
-    const a = ((r, o) => r.currentOption ? { items: r.items.concat({ option: r.currentOption, value: r.currentOption }), currentOption: o } : { items: r.items, currentOption: o })(e.currentOption ?? {
+    const a = ((r, m) => r.currentOption ? { items: r.items.concat({ option: r.currentOption, value: r.currentOption }), currentOption: m } : { items: r.items, currentOption: m })(e.currentOption ?? {
       items: []
     }, t);
     return { ...e, currentOption: a };
   },
   value: (e, t) => {
     if (!e.currentOption) return e;
-    const a = ((r, o) => r.currentOption ? { items: r.items.concat({ option: r.currentOption, value: o }) } : {
+    const a = ((r, m) => r.currentOption ? { items: r.items.concat({ option: r.currentOption, value: m }) } : {
       items: r.items
     })(e.currentOption, t);
     return { ...e, currentOption: a };
   },
   type: (e, t) => {
     if (((a) => a.endsWith(">") && a.startsWith("struct<"))(t)) {
-      const a = t.slice(7, -1), r = h(e, ye, a);
-      return h(r, Y, ye);
+      const a = t.slice(7, -1), r = h(e, le, a);
+      return h(r, X, le);
     }
-    return e.currentParam ? h(e, Y, t) : e;
+    return e.currentParam ? h(e, X, t) : e;
   },
   default: (e, t) => h(e, "default", t),
   on: (e, t) => h(e, "on", t),
@@ -1068,21 +997,21 @@ const oa = ({ actorId: e = 1, faceIndex: t = 0, faceName: a = "", characterIndex
     };
     var a, r;
   },
-  author: (e, t) => W(e, "author", t),
-  plugindesc: (e, t) => W(e, "plugindesc", t),
-  url: (e, t) => W(e, "url", t)
-}, St = (e) => Pt(((t) => wt(t, Ce))(e)), Pt = (e) => ({
+  author: (e, t) => O(e, "author", t),
+  plugindesc: (e, t) => O(e, "plugindesc", t),
+  url: (e, t) => O(e, "url", t)
+}, Mt = (e) => Rt(((t) => Dt(t, Se))(e)), Rt = (e) => ({
   target: "MZ",
   meta: e.meta,
-  commands: qt(e.commands),
-  params: De(e.params)
-}), De = (e) => e.reduce((t, a) => ({ [a.name]: bt(a), ...t }), {}), qt = (e) => e.reduce((t, a) => {
-  const r = { desc: a.desc, text: a.text, args: De(a.args) };
+  commands: jt(e.commands),
+  params: Pe(e.params)
+}), Pe = (e) => e.reduce((t, a) => ({ [a.name]: Tt(a), ...t }), {}), jt = (e) => e.reduce((t, a) => {
+  const r = { desc: a.desc, text: a.text, args: Pe(a.args) };
   return { [a.command]: r, ...t };
-}, {}), Ko = (e) => St(e), $o = (e) => ((t) => {
-  const a = Object.entries(t).reduce((r, [o, p]) => {
-    const d = gt(p);
-    return { ...r, [o]: d };
+}, {}), Rs = (e) => Mt(e), js = (e) => ((t) => {
+  const a = Object.entries(t).reduce((r, [m, p]) => {
+    const l = xt(p);
+    return { ...r, [m]: l };
   }, {});
   return {
     type: "object",
@@ -1090,7 +1019,7 @@ const oa = ({ actorId: e = 1, faceIndex: t = 0, faceName: a = "", characterIndex
     required: Object.keys(a),
     additionalProperties: !1
   };
-})(e), At = (e = {}) => ({
+})(e), Et = (e = {}) => ({
   gameId: e.gameId ?? 0,
   screenWidth: e.screenWidth ?? 0,
   screenHeight: e.screenHeight ?? 0,
@@ -1102,7 +1031,7 @@ const oa = ({ actorId: e = 1, faceIndex: t = 0, faceName: a = "", characterIndex
   mainFontFilename: e.mainFontFilename ?? "",
   fallbackFonts: e.fallbackFonts ?? "",
   fontSize: e.fontSize ?? 28
-}), Ct = (e = {}) => [m(e.cursor), m(e.ok), m(e.cancel), m(e.buzzer), m(e.equip), m(e.save), m(e.load), m(e.battleStart), m(e.escape), m(e.enemyAttack), m(e.enemyDamage), m(e.enemyCollapse), m(e.bossCollapes1), m(e.bossCollapes2), m(e.actorDamage), m(e.actorCollapse), m(e.playRecovery), m(e.playMiss), m(e.playEvasion), m(e.playMagicEvasion), m(e.playReflection), m(e.shop), m(e.useItem), m(e.useSkill)], Zo = (e) => ({
+}), Ft = (e = {}) => [o(e.cursor), o(e.ok), o(e.cancel), o(e.buzzer), o(e.equip), o(e.save), o(e.load), o(e.battleStart), o(e.escape), o(e.enemyAttack), o(e.enemyDamage), o(e.enemyCollapse), o(e.bossCollapes1), o(e.bossCollapes2), o(e.actorDamage), o(e.actorCollapse), o(e.playRecovery), o(e.playMiss), o(e.playEvasion), o(e.playMagicEvasion), o(e.playReflection), o(e.shop), o(e.useItem), o(e.useSkill)], Es = (e) => ({
   cursor: e[0],
   ok: e[1],
   cancel: e[2],
@@ -1127,24 +1056,24 @@ const oa = ({ actorId: e = 1, faceIndex: t = 0, faceName: a = "", characterIndex
   shop: e[21],
   useItem: e[22],
   useSkill: e[23]
-}), Jo = (e) => e.menuCommands[0], Qo = (e) => e.menuCommands[1], em = (e) => e.menuCommands[2], tm = (e) => e.menuCommands[3], am = (e) => e.menuCommands[4], rm = (e) => e.menuCommands[5], im = (e) => e.itemCategories[0], sm = (e) => e.itemCategories[1], nm = (e) => e.itemCategories[2], om = (e) => e.itemCategories[3], Dt = (e = {}) => [e.item ?? !0, e.weapon ?? !0, e.armor ?? !0, e.keyItem ?? !0], mm = (e) => ({
+}), Fs = (e) => e.menuCommands[0], Bs = (e) => e.menuCommands[1], Vs = (e) => e.menuCommands[2], Ls = (e) => e.menuCommands[3], Hs = (e) => e.menuCommands[4], Os = (e) => e.menuCommands[5], zs = (e) => e.itemCategories[0], Ws = (e) => e.itemCategories[1], Xs = (e) => e.itemCategories[2], Gs = (e) => e.itemCategories[3], Bt = (e = {}) => [e.item ?? !0, e.weapon ?? !0, e.armor ?? !0, e.keyItem ?? !0], Ys = (e) => ({
   item: e[0],
   weapon: e[1],
   armor: e[2],
   keyItem: e[3]
-}), Mt = (e = {}) => [e.item ?? !0, e.skill ?? !0, e.equip ?? !0, e.status ?? !0, e.formation ?? !0, e.save ?? !0], pm = (e) => ({
+}), Vt = (e = {}) => [e.item ?? !0, e.skill ?? !0, e.equip ?? !0, e.status ?? !0, e.formation ?? !0, e.save ?? !0], Us = (e) => ({
   item: e[0],
   skill: e[1],
   equip: e[2],
   status: e[3],
   formation: e[4],
   save: e[5]
-}), jt = { required: ["itemCategories", "menuCommands"], additionalProperties: !1, type: "object", properties: { itemCategories: {
+}), Lt = { required: ["itemCategories", "menuCommands"], additionalProperties: !1, type: "object", properties: { itemCategories: {
   type: "array",
   maxItems: 4,
   minItems: 4,
   items: { type: "boolean" }
-}, menuCommands: { type: "array", maxItems: 6, minItems: 6, items: { type: "boolean" } } } }, Rt = (e = {}) => ({
+}, menuCommands: { type: "array", maxItems: 6, minItems: 6, items: { type: "boolean" } } } }, Ht = (e = {}) => ({
   optAutosave: e.optAutosave ?? !0,
   optDisplayTp: e.optDisplayTp ?? !0,
   optDrawTitle: e.optDrawTitle ?? !0,
@@ -1157,52 +1086,52 @@ const oa = ({ actorId: e = 1, faceIndex: t = 0, faceName: a = "", characterIndex
   optTransparent: e.optTransparent ?? !0,
   optMessageSkip: e.optMessageSkip ?? !0,
   optSplashScreen: e.optSplashScreen ?? !0
-}), I = { type: "boolean" }, Et = {
+}), f = { type: "boolean" }, Ot = {
   type: "object",
   additionalProperties: !1,
   required: ["optAutosave", "optDisplayTp", "optDrawTitle", "optExtraExp", "optFloorDeath", "optFollowers", "optKeyItemsNumber", "optSideView", "optSlipDeath", "optTransparent", "optMessageSkip", "optSplashScreen"],
   properties: {
-    optAutosave: I,
-    optDisplayTp: I,
-    optDrawTitle: I,
-    optExtraExp: I,
-    optFloorDeath: I,
-    optFollowers: I,
-    optKeyItemsNumber: I,
-    optSideView: I,
-    optSlipDeath: I,
-    optTransparent: I,
-    optMessageSkip: I,
-    optSplashScreen: I
+    optAutosave: f,
+    optDisplayTp: f,
+    optDrawTitle: f,
+    optExtraExp: f,
+    optFloorDeath: f,
+    optFollowers: f,
+    optKeyItemsNumber: f,
+    optSideView: f,
+    optSlipDeath: f,
+    optTransparent: f,
+    optMessageSkip: f,
+    optSplashScreen: f
   }
-}, cm = (e = {}) => ({
+}, _s = (e = {}) => ({
   startMapId: e.startMapId ?? 0,
   startX: e.startX ?? 0,
   startY: e.startY ?? 0,
   partyMembersArray: e.partyMembersArray ? Array.from(e.partyMembersArray) : [1]
-}), Ft = (e) => ({
-  armorTypes: P(e.armorTypes),
-  elements: P(e.elements),
-  equipTypes: P(e.equipTypes),
-  weaponTypes: P(e.weaponTypes),
-  skillTypes: P(e.skillTypes),
-  variables: P(e.variables),
-  switches: P(e.switches)
-}), P = (e) => e ? [...e] : [], Bt = (e) => [e.mhp ?? "", e.mmp ?? "", e.atk ?? "", e.def ?? "", e.mat ?? "", e.mdf ?? "", e.agi ?? "", e.luk ?? "", e.hit ?? "", e.eva ?? ""], dm = (e) => e.terms.params.map((t, a) => ({
+}), zt = (e) => ({
+  armorTypes: S(e.armorTypes),
+  elements: S(e.elements),
+  equipTypes: S(e.equipTypes),
+  weaponTypes: S(e.weaponTypes),
+  skillTypes: S(e.skillTypes),
+  variables: S(e.variables),
+  switches: S(e.switches)
+}), S = (e) => e ? [...e] : [], Wt = (e) => [e.mhp ?? "", e.mmp ?? "", e.atk ?? "", e.def ?? "", e.mat ?? "", e.mdf ?? "", e.agi ?? "", e.luk ?? "", e.hit ?? "", e.eva ?? ""], Ks = (e) => e.terms.params.map((t, a) => ({
   name: t,
   id: a
-})), lm = (e) => ({ background: e.background ?? 0, offsetX: e.offsetX ?? 0, offsetY: e.offsetY ?? 0 }), X = (e = {}) => ({
+})), Zs = (e) => ({ background: e.background ?? 0, offsetX: e.offsetX ?? 0, offsetY: e.offsetY ?? 0 }), z = (e = {}) => ({
   characterIndex: e.characterIndex ?? 0,
   characterName: e.characterName ?? "",
-  bgm: m(e.bgm ?? {}),
+  bgm: o(e.bgm ?? {}),
   startMapId: e.startMapId ?? 0,
   startX: e.startX ?? 0,
   startY: e.startY ?? 0
-}), Vt = (e = {}) => ({
+}), Xt = (e = {}) => ({
   jsonFormatLevel: e.jsonFormatLevel ?? 0,
   messageWidth1: e.messageWidth1 ?? 816,
   messageWidth2: e.messageWidth2 ?? 816
-}), um = { title: "オプション", options: {
+}), $s = { title: "オプション", options: {
   optDrawTitle: "ゲームタイトルの描画",
   optDisplayTp: "ウィンドウにTPを表示",
   optFloorDeath: "床ダメージで戦闘不能",
@@ -1215,7 +1144,7 @@ const oa = ({ actorId: e = 1, faceIndex: t = 0, faceName: a = "", characterIndex
   optTransparent: "透明状態で開始",
   optMessageSkip: "メッセージスキップを有効化",
   optSplashScreen: "スプラッシュ画面を表示"
-} }, ym = { title: "タイプ", format: "{name}", options: {
+} }, Js = { title: "タイプ", format: "{name}", options: {
   elements: "属性",
   equipTypes: "装備タイプ",
   skillTypes: "スキルタイプ",
@@ -1223,10 +1152,10 @@ const oa = ({ actorId: e = 1, faceIndex: t = 0, faceName: a = "", characterIndex
   armorTypes: "防具タイプ",
   switches: "スイッチ",
   variables: "変数"
-} }, gm = {
+} }, Qs = {
   title: "能力値",
   options: { agi: "敏捷", atk: "攻撃力", def: "防御力", eva: "回避", hit: "命中", luk: "運", mat: "魔法攻撃力", mdf: "魔法防御力", mhp: "最大HP", mmp: "最大MP" }
-}, bm = { title: "コマンド", options: {
+}, en = { title: "コマンド", options: {
   item: "アイテム",
   skill: "スキル",
   equip: "装備",
@@ -1251,53 +1180,53 @@ const oa = ({ actorId: e = 1, faceIndex: t = 0, faceName: a = "", characterIndex
   keyItem: "大事なもの",
   optimize: "最強装備",
   toTitle: "タイトルへ戻る"
-} }, Me = {
+} }, Ce = {
   type: "object",
   additionalProperties: !1,
   required: ["type", "weaponImageId"],
   properties: { type: { type: "number" }, weaponImageId: { type: "number" } }
-}, je = {
+}, Ae = {
   additionalProperties: !1,
   type: "object",
   required: ["tileSize", "faceSize", "iconSize"],
   properties: { tileSize: { type: "integer", minimum: 0 }, faceSize: { type: "integer", minimum: 0 }, iconSize: { type: "integer", minimum: 0 } }
-}, Re = {
+}, De = {
   additionalProperties: !1,
   type: "object",
   required: ["actorId", "equips", "level"],
   properties: { actorId: { type: "integer" }, level: { type: "integer", minimum: 1 }, equips: { type: "array", items: {
     type: "integer"
   } } }
-}, C = { type: "object", properties: { name: { type: "string" }, volume: { type: "integer", minimum: 0, maximum: 100 }, pitch: { type: "integer", minimum: 0, maximum: 100 }, pan: {
+}, A = { type: "object", properties: { name: { type: "string" }, volume: { type: "integer", minimum: 0, maximum: 100 }, pitch: { type: "integer", minimum: 0, maximum: 100 }, pan: {
   type: "integer",
   minimum: -100,
   maximum: 100
-} }, required: ["name", "volume", "pitch", "pan"], additionalProperties: !1 }, Lt = {
+} }, required: ["name", "volume", "pitch", "pan"], additionalProperties: !1 }, Gt = {
   additionalProperties: !1,
   type: "object",
   required: ["battleBgm", "victoryMe", "gameoverMe", "titleBgm", "defeatMe", "sounds"],
-  properties: { battleBgm: C, victoryMe: C, gameoverMe: C, titleBgm: C, defeatMe: C, sounds: {
+  properties: { battleBgm: A, victoryMe: A, gameoverMe: A, titleBgm: A, defeatMe: A, sounds: {
     type: "array",
-    items: C,
+    items: A,
     minItems: 24,
     maxItems: 24
   } }
-}, Ht = { type: "object", additionalProperties: !1, required: ["magicSkills", "battleSystem"], properties: { magicSkills: {
+}, Yt = { type: "object", additionalProperties: !1, required: ["magicSkills", "battleSystem"], properties: { magicSkills: {
   type: "array",
   items: { type: "number" },
   minItems: 0,
   uniqueItems: !0
-}, battleSystem: { type: "number" } } }, Ot = { additionalProperties: !1, type: "object", required: ["startMapId", "startX", "startY", "partyMembersArray"], properties: {
+}, battleSystem: { type: "number" } } }, Ut = { additionalProperties: !1, type: "object", required: ["startMapId", "startX", "startY", "partyMembersArray"], properties: {
   startMapId: { type: "integer", minimum: 0 },
   startX: { type: "integer", minimum: 0 },
   startY: { type: "integer", minimum: 0 },
   partyMembersArray: { type: "array", items: { type: "integer", minimum: 0 } }
-} }, zt = {
+} }, _t = {
   additionalProperties: !1,
   type: "object",
   required: ["title1Name", "title2Name"],
   properties: { title1Name: { type: "string" }, title2Name: { type: "string" } }
-}, Wt = {
+}, Kt = {
   type: "object",
   additionalProperties: !1,
   required: ["locale", "versionId", "windowTone"],
@@ -1307,20 +1236,20 @@ const oa = ({ actorId: e = 1, faceIndex: t = 0, faceName: a = "", characterIndex
     minItems: 4,
     maxItems: 4
   } }
-}, q = { type: "array", items: { type: "string" } }, Xt = {
+}, P = { type: "array", items: { type: "string" } }, Zt = {
   additionalProperties: !1,
   type: "object",
   required: ["weaponTypes", "skillTypes", "elements", "variables", "equipTypes", "switches", "armorTypes"],
   properties: {
-    weaponTypes: q,
-    skillTypes: q,
-    elements: q,
-    variables: q,
-    equipTypes: q,
-    switches: q,
-    armorTypes: q
+    weaponTypes: P,
+    skillTypes: P,
+    elements: P,
+    variables: P,
+    equipTypes: P,
+    switches: P,
+    armorTypes: P
   }
-}, c = { type: "string" }, fe = { type: "string", nullable: !0 }, i = { type: "string" }, Gt = {
+}, c = { type: "string" }, ge = { type: "string", nullable: !0 }, i = { type: "string" }, $t = {
   required: ["terms", "currencyUnit", "gameTitle"],
   additionalProperties: !1,
   type: "object",
@@ -1389,7 +1318,7 @@ const oa = ({ actorId: e = 1, faceIndex: t = 0, faceName: a = "", characterIndex
       }
     }, commands: {
       type: "array",
-      items: [c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, fe, c, c, fe, c, c],
+      items: [c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, ge, c, c, ge, c, c],
       minItems: 26,
       maxItems: 26
     }, basic: { type: "array", items: { type: "string" }, minItems: 10, maxItems: 10 }, params: {
@@ -1400,12 +1329,12 @@ const oa = ({ actorId: e = 1, faceIndex: t = 0, faceName: a = "", characterIndex
       uniqueItems: !0
     } }
   } }
-}, Yt = {
+}, Jt = {
   additionalProperties: !1,
   type: "object",
   required: ["battleback1Name", "battleback2Name", "battlerHue", "battlerName", "editMapId", "editor", "testBattlers", "testTroopId"],
   properties: {
-    testBattlers: { type: "array", items: Re },
+    testBattlers: { type: "array", items: De },
     testTroopId: { type: "integer", minimum: 0 },
     battleback1Name: { type: "string" },
     battleback2Name: { type: "string" },
@@ -1418,7 +1347,7 @@ const oa = ({ actorId: e = 1, faceIndex: t = 0, faceName: a = "", characterIndex
       maximum: 1e3
     }, messageWidth2: { type: "integer", minimum: 0, maximum: 1e3 }, jsonFormatLevel: { type: "integer", minimum: 0, maximum: 4 } } }
   }
-}, G = {
+}, W = {
   additionalProperties: !1,
   type: "object",
   required: ["characterIndex", "characterName", "bgm", "startMapId", "startX", "startY"],
@@ -1438,10 +1367,10 @@ const oa = ({ actorId: e = 1, faceIndex: t = 0, faceName: a = "", characterIndex
     startX: { type: "integer", minimum: 0, maximum: 5e3 },
     startY: { type: "integer", minimum: 0, maximum: 5e3 }
   }
-}, Ut = { additionalProperties: !1, required: ["airship", "boat", "ship", "advanced", "attackMotions"], type: "object", properties: {
-  airship: G,
-  boat: G,
-  ship: G,
+}, Qt = { additionalProperties: !1, required: ["airship", "boat", "ship", "advanced", "attackMotions"], type: "object", properties: {
+  airship: W,
+  boat: W,
+  ship: W,
   advanced: {
     type: "object",
     properties: {
@@ -1462,67 +1391,67 @@ const oa = ({ actorId: e = 1, faceIndex: t = 0, faceName: a = "", characterIndex
     required: ["gameId", "screenWidth", "screenHeight", "uiAreaWidth", "uiAreaHeight", "windowOpacity", "screenScale", "numberFontFilename", "mainFontFilename", "fallbackFonts", "fontSize"],
     additionalProperties: !1
   },
-  attackMotions: { type: "array", items: Me }
-} }, _t = (e) => e.reduce((t, a) => ({ required: [...t.required, ...a.required], properties: { ...t.properties, ...a.properties } }), {
+  attackMotions: { type: "array", items: Ce }
+} }, ea = (e) => e.reduce((t, a) => ({ required: [...t.required, ...a.required], properties: { ...t.properties, ...a.properties } }), {
   required: [],
   properties: {}
-}), H = new K({ strict: !0 }), Kt = ((e) => {
-  const t = _t(e);
+}), V = new be({ strict: !0 }), ta = ((e) => {
+  const t = ea(e);
   return {
     additionalProperties: !1,
     type: "object",
     required: Array.from(new Set(t.required)),
     properties: t.properties
   };
-})([Ut, Lt, Ht, jt, Et, Ot, je, Wt, Xt, Gt, zt, Yt]), $t = H.compile(Kt), Im = (e) => $t(e), Zt = H.compile(Re);
-H.compile(Me);
-const Jt = H.compile(je), Qt = (e) => [e.level ?? "Level", e.levelA ?? "Level", e.hp ?? "HP", e.hpA ?? "HP", e.mp ?? "MP", e.mpA ?? "MP", e.tp ?? "TP", e.tpA ?? "TP", e.experience ?? "EXP", e.exp ?? "EXP"], ea = (e, t) => [e.fight ?? "Fight", e.escape ?? "Escape", e.attack ?? "Attack", e.guard ?? "Guard", e.item ?? "Item", e.skill ?? "Skill", e.equip ?? "Equip", e.status ?? "Status", e.formation ?? "Formation", e.save ?? "Save", e.gameEnd ?? "Game End", e.options ?? "Options", e.weapon ?? "Weapon", e.armor ?? "Armor", e.keyItem ?? "Key Item", e.equip2 ?? "Equip2", e.optimize ?? "Optimize", e.clear ?? "Clear", e.newGame ?? "New Game", e.continue_ ?? "Continue", t, e.toTitle ?? "To Title", e.cancel ?? "Cancel", t, e.buy ?? "Buy", e.sell ?? "Sell"], s = (e, t) => typeof e == "string" ? e : t, fm = (e) => {
-  var a, r, o, p, d, u, y, f, v, R, S, M, Q, ee, te, ae, re, ie, se, ne, oe, me;
-  const t = aa(e.size);
+})([Qt, Gt, Yt, Lt, Ot, Ut, Ae, Kt, Zt, $t, _t, Jt]), aa = V.compile(ta), tn = (e) => aa(e), ra = V.compile(De);
+V.compile(Ce);
+const ia = V.compile(Ae), sa = (e) => [e.level ?? "Level", e.levelA ?? "Level", e.hp ?? "HP", e.hpA ?? "HP", e.mp ?? "MP", e.mpA ?? "MP", e.tp ?? "TP", e.tpA ?? "TP", e.experience ?? "EXP", e.exp ?? "EXP"], na = (e, t) => [e.fight ?? "Fight", e.escape ?? "Escape", e.attack ?? "Attack", e.guard ?? "Guard", e.item ?? "Item", e.skill ?? "Skill", e.equip ?? "Equip", e.status ?? "Status", e.formation ?? "Formation", e.save ?? "Save", e.gameEnd ?? "Game End", e.options ?? "Options", e.weapon ?? "Weapon", e.armor ?? "Armor", e.keyItem ?? "Key Item", e.equip2 ?? "Equip2", e.optimize ?? "Optimize", e.clear ?? "Clear", e.newGame ?? "New Game", e.continue_ ?? "Continue", t, e.toTitle ?? "To Title", e.cancel ?? "Cancel", t, e.buy ?? "Buy", e.sell ?? "Sell"], s = (e, t) => typeof e == "string" ? e : t, an = (e) => {
+  var a, r, m, p, l, u, y, I, v, M, N, D, Z, $, J, Q, ee, te, ae, re, ie, se;
+  const t = ma(e.size);
   return {
-    ...Rt(e.options),
+    ...Ht(e.options),
     currencyUnit: ((a = e.texts) == null ? void 0 : a.currencyUnit) ?? "",
     gameTitle: ((r = e.texts) == null ? void 0 : r.gameTitle) ?? "",
-    sounds: Ct(e.sounds),
-    editor: Vt(e.editing),
-    advanced: At(e.advanced),
-    title1Name: ((o = e.images) == null ? void 0 : o.title1Name) ?? "",
+    sounds: Ft(e.sounds),
+    editor: Xt(e.editing),
+    advanced: Et(e.advanced),
+    title1Name: ((m = e.images) == null ? void 0 : m.title1Name) ?? "",
     title2Name: ((p = e.images) == null ? void 0 : p.title2Name) ?? "",
-    ...Ft(e.dataNames ?? {}),
-    magicSkills: _([]),
-    airship: X((d = e.vehicles) == null ? void 0 : d.airship),
-    boat: X((u = e.vehicles) == null ? void 0 : u.boat),
-    ship: X((y = e.vehicles) == null ? void 0 : y.ship),
-    defeatMe: m((f = e.me) == null ? void 0 : f.defeatMe),
-    gameoverMe: m((v = e.me) == null ? void 0 : v.gameoverMe),
-    titleBgm: m((R = e.bgm) == null ? void 0 : R.titleBgm),
+    ...zt(e.dataNames ?? {}),
+    magicSkills: Y([]),
+    airship: z((l = e.vehicles) == null ? void 0 : l.airship),
+    boat: z((u = e.vehicles) == null ? void 0 : u.boat),
+    ship: z((y = e.vehicles) == null ? void 0 : y.ship),
+    defeatMe: o((I = e.me) == null ? void 0 : I.defeatMe),
+    gameoverMe: o((v = e.me) == null ? void 0 : v.gameoverMe),
+    titleBgm: o((M = e.bgm) == null ? void 0 : M.titleBgm),
     tileSize: t.tileSize,
     faceSize: t.faceSize,
     iconSize: t.iconSize,
     versionId: 1,
     attackMotions: [],
-    battleback1Name: ((S = e.battleTest) == null ? void 0 : S.battleback1Name) ?? "",
-    battleback2Name: ((M = e.battleTest) == null ? void 0 : M.battleback2Name) ?? "",
-    testTroopId: ((Q = e.battleTest) == null ? void 0 : Q.testTroopId) ?? 0,
-    testBattlers: ra((ee = e.battleTest) == null ? void 0 : ee.testBattlers, ia),
-    battleBgm: m((te = e.bgm) == null ? void 0 : te.battleBgm),
-    victoryMe: m((ae = e.me) == null ? void 0 : ae.victoryMe),
-    editMapId: ((re = e.editorTemporary) == null ? void 0 : re.editMapId) ?? 0,
-    battlerName: ((ie = e.editorTemporary) == null ? void 0 : ie.battlerName) ?? "",
+    battleback1Name: ((N = e.battleTest) == null ? void 0 : N.battleback1Name) ?? "",
+    battleback2Name: ((D = e.battleTest) == null ? void 0 : D.battleback2Name) ?? "",
+    testTroopId: ((Z = e.battleTest) == null ? void 0 : Z.testTroopId) ?? 0,
+    testBattlers: pa(($ = e.battleTest) == null ? void 0 : $.testBattlers, ca),
+    battleBgm: o((J = e.bgm) == null ? void 0 : J.battleBgm),
+    victoryMe: o((Q = e.me) == null ? void 0 : Q.victoryMe),
+    editMapId: ((ee = e.editorTemporary) == null ? void 0 : ee.editMapId) ?? 0,
+    battlerName: ((te = e.editorTemporary) == null ? void 0 : te.battlerName) ?? "",
     locale: "",
-    startMapId: ((se = e.gameInit) == null ? void 0 : se.startMapId) ?? 0,
-    startX: ((ne = e.gameInit) == null ? void 0 : ne.startX) ?? 0,
-    startY: ((oe = e.gameInit) == null ? void 0 : oe.startY) ?? 0,
+    startMapId: ((ae = e.gameInit) == null ? void 0 : ae.startMapId) ?? 0,
+    startX: ((re = e.gameInit) == null ? void 0 : re.startX) ?? 0,
+    startY: ((ie = e.gameInit) == null ? void 0 : ie.startY) ?? 0,
     windowTone: [0, 0, 0, 0],
-    terms: ta(e.terms ?? {}),
-    itemCategories: Dt(e.itemCategories),
-    partyMembersArray: _((me = e.gameInit) == null ? void 0 : me.partyMembersArray),
+    terms: oa(e.terms ?? {}),
+    itemCategories: Bt(e.itemCategories),
+    partyMembersArray: Y((se = e.gameInit) == null ? void 0 : se.partyMembersArray),
     battleSystem: 0,
     battlerHue: 0,
-    menuCommands: Mt(e.menuComamnds)
+    menuCommands: Vt(e.menuComamnds)
   };
-}, ta = (e) => {
-  return { basic: Qt(e.basic ?? {}), commands: (a = e.commands ?? {}, ea(a, "")), params: Bt(e.params ?? {}), messages: (t = e.messages ?? {}, {
+}, oa = (e) => {
+  return { basic: sa(e.basic ?? {}), commands: (a = e.commands ?? {}, na(a, "")), params: Wt(e.params ?? {}), messages: (t = e.messages ?? {}, {
     actionFailure: s(t.actionFailure, "Action failed."),
     actorDamage: s(t.actorDamage, "%1 took %2 damage."),
     actorRecovery: s(t.actorRecovery, "%1 recovered %2 HP."),
@@ -1578,379 +1507,247 @@ const Jt = H.compile(je), Qt = (e) => [e.level ?? "Level", e.levelA ?? "Level", 
     victory: s(t.victory, "Victory!")
   }) };
   var t, a;
-}, _ = (e) => e ? [...e] : [], aa = (e) => ((t) => Jt(t))(e) ? {
+}, Y = (e) => e ? [...e] : [], ma = (e) => ((t) => ia(t))(e) ? {
   tileSize: e.tileSize,
   faceSize: e.faceSize,
   iconSize: e.iconSize
-} : { tileSize: 48, faceSize: 144, iconSize: 32 }, ra = (e, t) => e ? e.map(t) : [], ia = (e) => ((t) => Zt(t))(e) ? { actorId: e.actorId, equips: _(e.equips), level: e.level } : {
+} : { tileSize: 48, faceSize: 144, iconSize: 32 }, pa = (e, t) => e ? e.map(t) : [], ca = (e) => ((t) => ra(t))(e) ? { actorId: e.actorId, equips: Y(e.equips), level: e.level } : {
   actorId: 0,
   equips: [],
   level: 1
 };
 export {
-  Un as $,
-  Tn as A,
-  kn as B,
-  wn as C,
-  Nn as D,
-  Sn as E,
-  Pn as F,
-  qn as G,
-  An as H,
-  Cn as I,
-  Dn as J,
-  Mn as K,
-  jn as L,
-  Rn as M,
-  En as N,
-  et as O,
-  tt as P,
-  Fn as Q,
-  Bn as R,
-  Vn as S,
-  Ln as T,
-  Hn as U,
-  On as V,
-  zn as W,
-  Wn as X,
-  Xn as Y,
-  Gn as Z,
-  Yn as _,
-  rn as a,
-  da as a$,
-  _n as a0,
-  Kn as a1,
-  $n as a2,
-  rt as a3,
-  Zn as a4,
-  Jn as a5,
-  Qn as a6,
-  eo as a7,
-  to as a8,
-  D as a9,
-  Ao as aA,
-  Co as aB,
-  Do as aC,
-  Mo as aD,
-  jo as aE,
-  Ro as aF,
-  Eo as aG,
-  Fo as aH,
-  Bo as aI,
-  Vo as aJ,
-  Lo as aK,
-  Ho as aL,
-  Oo as aM,
-  zo as aN,
-  Wo as aO,
-  Xo as aP,
-  Go as aQ,
-  Yo as aR,
-  Uo as aS,
-  _o as aT,
-  Ko as aU,
-  $o as aV,
-  an as aW,
-  $ as aX,
-  ma as aY,
-  pa as aZ,
-  ca as a_,
-  ao as aa,
-  ro as ab,
-  io as ac,
-  so as ad,
-  no as ae,
-  oo as af,
-  mo as ag,
-  po as ah,
-  co as ai,
-  lo as aj,
-  uo as ak,
-  yo as al,
-  go as am,
-  bo as an,
-  Io as ao,
-  fo as ap,
-  vo as aq,
-  ho as ar,
-  xo as as,
-  To as at,
-  ko as au,
-  wo as av,
-  No as aw,
-  So as ax,
-  Po as ay,
-  qo as az,
-  sn as b,
-  hr as b$,
-  la as b0,
-  ua as b1,
-  ya as b2,
-  ga as b3,
-  Be as b4,
-  ba as b5,
-  Ia as b6,
-  fa as b7,
-  va as b8,
-  ha as b9,
-  Ua as bA,
-  _a as bB,
-  Ka as bC,
-  $a as bD,
-  Za as bE,
-  Ja as bF,
-  Qa as bG,
-  er as bH,
-  tr as bI,
-  ar as bJ,
-  rr as bK,
-  ir as bL,
-  sr as bM,
-  nr as bN,
-  or as bO,
-  mr as bP,
-  pr as bQ,
-  cr as bR,
-  dr as bS,
-  lr as bT,
-  ur as bU,
-  yr as bV,
-  gr as bW,
-  br as bX,
-  Ir as bY,
-  fr as bZ,
-  vr as b_,
-  xa as ba,
-  Ta as bb,
-  ka as bc,
-  wa as bd,
-  Na as be,
-  Sa as bf,
-  Pa as bg,
-  qa as bh,
-  Aa as bi,
-  Ca as bj,
-  Da as bk,
-  Ma as bl,
-  ja as bm,
-  Ra as bn,
-  Ea as bo,
-  Fa as bp,
-  Ba as bq,
-  Va as br,
-  La as bs,
-  Ha as bt,
-  Oa as bu,
-  za as bv,
-  Wa as bw,
-  Xa as bx,
-  Ga as by,
-  Ya as bz,
-  nn as c,
-  Ci as c$,
-  xr as c0,
-  Tr as c1,
-  kr as c2,
-  wr as c3,
-  Nr as c4,
-  Sr as c5,
-  Pr as c6,
-  qr as c7,
-  Ar as c8,
-  Cr as c9,
-  ri as cA,
-  ii as cB,
-  si as cC,
-  ni as cD,
-  oi as cE,
-  mi as cF,
-  pi as cG,
-  ci as cH,
-  di as cI,
-  li as cJ,
-  ui as cK,
-  yi as cL,
-  gi as cM,
-  bi as cN,
-  Ii as cO,
-  fi as cP,
-  vi as cQ,
-  hi as cR,
-  xi as cS,
-  Ti as cT,
-  ki as cU,
-  wi as cV,
-  Ni as cW,
-  Si as cX,
-  Pi as cY,
-  qi as cZ,
-  Ai as c_,
-  Dr as ca,
-  Mr as cb,
-  jr as cc,
-  Rr as cd,
-  Er as ce,
-  Fr as cf,
-  Br as cg,
-  Vr as ch,
-  Lr as ci,
-  Hr as cj,
-  Or as ck,
-  zr as cl,
-  Wr as cm,
-  Xr as cn,
-  Gr as co,
-  Yr as cp,
-  Ur as cq,
-  _r as cr,
-  Kr as cs,
-  $r as ct,
-  Zr as cu,
-  Jr as cv,
-  Qr as cw,
-  ei as cx,
-  ti as cy,
-  ai as cz,
-  on as d,
-  js as d$,
-  Di as d0,
-  Mi as d1,
-  ji as d2,
-  Ri as d3,
-  Ei as d4,
-  Fi as d5,
-  Bi as d6,
-  Vi as d7,
-  Li as d8,
-  Hi as d9,
-  ls as dA,
-  us as dB,
-  ys as dC,
-  gs as dD,
-  bs as dE,
-  ze as dF,
-  We as dG,
-  Z as dH,
-  Is as dI,
-  fs as dJ,
-  vs as dK,
-  hs as dL,
-  Xe as dM,
-  xs as dN,
-  Ts as dO,
-  ks as dP,
-  ws as dQ,
-  Ge as dR,
-  Ns as dS,
-  Ss as dT,
-  Ps as dU,
-  qs as dV,
-  As as dW,
-  Cs as dX,
-  Ms as dY,
-  Ue as dZ,
-  Ds as d_,
-  Oi as da,
-  zi as db,
-  Wi as dc,
-  Xi as dd,
-  Gi as de,
-  Yi as df,
-  Ui as dg,
-  _i as dh,
-  Ki as di,
-  $i as dj,
-  Zi as dk,
-  Ji as dl,
-  Qi as dm,
-  es as dn,
-  ts as dp,
-  as as dq,
-  rs as dr,
-  is as ds,
-  ss as dt,
-  ns as du,
-  os as dv,
-  ms as dw,
-  ps as dx,
-  cs as dy,
-  ds as dz,
-  N as e,
-  Rs as e0,
-  Es as e1,
-  Fs as e2,
-  Bs as e3,
-  he as e4,
-  Vs as e5,
-  Ls as e6,
-  Hs as e7,
-  xe as e8,
-  Os as e9,
-  im as eA,
-  sm as eB,
-  nm as eC,
-  om as eD,
-  Dt as eE,
-  mm as eF,
-  Mt as eG,
-  pm as eH,
-  Rt as eI,
-  cm as eJ,
-  Ft as eK,
-  dm as eL,
-  Bt as eM,
-  lm as eN,
-  X as eO,
-  Vt as eP,
-  um as eQ,
-  ym as eR,
-  gm as eS,
-  bm as eT,
-  zs as ea,
-  Ws as eb,
-  Xs as ec,
-  Gs as ed,
-  Ys as ee,
-  Us as ef,
-  _s as eg,
-  Ks as eh,
-  $s as ei,
-  Zs as ej,
-  Js as ek,
-  Qs as el,
-  en as em,
-  tn as en,
-  _e as eo,
-  Im as ep,
-  fm as eq,
-  At as er,
-  Ct as es,
-  Zo as et,
-  Jo as eu,
-  Qo as ev,
-  em as ew,
-  tm as ex,
-  am as ey,
-  rm as ez,
-  mn as f,
-  pn as g,
-  cn as h,
-  dn as i,
-  ln as j,
-  un as k,
-  yn as l,
-  oa as m,
-  gn as n,
-  bn as o,
-  In as p,
-  $e as q,
-  fn as r,
-  Te as s,
-  Ke as t,
-  vn as u,
-  Ze as v,
-  Je as w,
-  hn as x,
-  Qe as y,
-  xn as z
+  Yi as $,
+  xi as A,
+  Ti as B,
+  ki as C,
+  wi as D,
+  Ni as E,
+  Si as F,
+  Pi as G,
+  Ci as H,
+  Ai as I,
+  Di as J,
+  qi as K,
+  Mi as L,
+  Ri as M,
+  ji as N,
+  gt as O,
+  bt as P,
+  Ei as Q,
+  Fi as R,
+  Bi as S,
+  Vi as T,
+  Li as U,
+  Hi as V,
+  Oi as W,
+  zi as X,
+  Wi as Y,
+  Xi as Z,
+  Gi as _,
+  ri as a,
+  Ma as a$,
+  Ui as a0,
+  _i as a1,
+  Ki as a2,
+  It as a3,
+  Zi as a4,
+  $i as a5,
+  Ji as a6,
+  Qi as a7,
+  es as a8,
+  ts as a9,
+  Cs as aA,
+  As as aB,
+  Ds as aC,
+  qs as aD,
+  Ms as aE,
+  Rs as aF,
+  js as aG,
+  ai as aH,
+  U as aI,
+  ga as aJ,
+  ba as aK,
+  fa as aL,
+  Ia as aM,
+  va as aN,
+  ha as aO,
+  xa as aP,
+  Ta as aQ,
+  Je as aR,
+  ka as aS,
+  wa as aT,
+  Na as aU,
+  Sa as aV,
+  Pa as aW,
+  Ca as aX,
+  Aa as aY,
+  Da as aZ,
+  qa as a_,
+  as as aa,
+  rs as ab,
+  is as ac,
+  ss as ad,
+  ns as ae,
+  os as af,
+  ms as ag,
+  ps as ah,
+  cs as ai,
+  ls as aj,
+  ds as ak,
+  us as al,
+  ys as am,
+  gs as an,
+  bs as ao,
+  fs as ap,
+  Is as aq,
+  vs as ar,
+  hs as as,
+  xs as at,
+  Ts as au,
+  ks as av,
+  ws as aw,
+  Ns as ax,
+  Ss as ay,
+  Ps as az,
+  ii as b,
+  Vr as b$,
+  Ra as b0,
+  ja as b1,
+  Ea as b2,
+  Fa as b3,
+  Ba as b4,
+  Va as b5,
+  La as b6,
+  Ha as b7,
+  Oa as b8,
+  za as b9,
+  gr as bA,
+  br as bB,
+  fr as bC,
+  Ir as bD,
+  vr as bE,
+  hr as bF,
+  xr as bG,
+  Tr as bH,
+  rt as bI,
+  it as bJ,
+  _ as bK,
+  kr as bL,
+  wr as bM,
+  Nr as bN,
+  Sr as bO,
+  st as bP,
+  Pr as bQ,
+  Cr as bR,
+  Ar as bS,
+  Dr as bT,
+  nt as bU,
+  qr as bV,
+  Mr as bW,
+  Rr as bX,
+  jr as bY,
+  Er as bZ,
+  Fr as b_,
+  Wa as ba,
+  Xa as bb,
+  Ga as bc,
+  Ya as bd,
+  Ua as be,
+  _a as bf,
+  Ka as bg,
+  Za as bh,
+  $a as bi,
+  Ja as bj,
+  Qa as bk,
+  er as bl,
+  tr as bm,
+  ar as bn,
+  rr as bo,
+  ir as bp,
+  sr as bq,
+  nr as br,
+  or as bs,
+  mr as bt,
+  pr as bu,
+  cr as bv,
+  lr as bw,
+  dr as bx,
+  ur as by,
+  yr as bz,
+  si as c,
+  mt as c0,
+  Br as c1,
+  Lr as c2,
+  Hr as c3,
+  Or as c4,
+  zr as c5,
+  Wr as c6,
+  Xr as c7,
+  Gr as c8,
+  Yr as c9,
+  Ys as cA,
+  Vt as cB,
+  Us as cC,
+  Ht as cD,
+  _s as cE,
+  zt as cF,
+  Ks as cG,
+  Wt as cH,
+  Zs as cI,
+  z as cJ,
+  Xt as cK,
+  $s as cL,
+  Js as cM,
+  Qs as cN,
+  en as cO,
+  Ur as ca,
+  _r as cb,
+  Kr as cc,
+  Zr as cd,
+  $r as ce,
+  Jr as cf,
+  Qr as cg,
+  ei as ch,
+  ti as ci,
+  pt as cj,
+  tn as ck,
+  an as cl,
+  Et as cm,
+  Ft as cn,
+  Es as co,
+  Fs as cp,
+  Bs as cq,
+  Vs as cr,
+  Ls as cs,
+  Hs as ct,
+  Os as cu,
+  zs as cv,
+  Ws as cw,
+  Xs as cx,
+  Gs as cy,
+  Bt as cz,
+  ni as d,
+  w as e,
+  oi as f,
+  mi as g,
+  pi as h,
+  ci as i,
+  li as j,
+  di as k,
+  ui as l,
+  ya as m,
+  yi as n,
+  gi as o,
+  bi as p,
+  lt as q,
+  fi as r,
+  Ie as s,
+  ct as t,
+  Ii as u,
+  dt as v,
+  ut as w,
+  vi as x,
+  yt as y,
+  hi as z
 };
