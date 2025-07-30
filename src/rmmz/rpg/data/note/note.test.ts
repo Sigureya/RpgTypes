@@ -6,6 +6,7 @@ import {
   replaceNote,
   readNoteObject,
 } from "./note";
+import type { NoteReadResult } from "./types";
 
 const exampleNoteTokyo = "<code:13><name:tokyo>";
 const exampleNoteSaitama = "<code:11><name:saitama>";
@@ -83,23 +84,40 @@ describe("readNoteObject", () => {
 
 describe("readNote", () => {
   describe("Normal cases", () => {
-    test("Parses the note string and retrieves key-value pairs", () => {
-      const result = readNote(exampleNoteTokyo);
-      expect(result).toEqual([
-        ["code", "13"],
-        ["name", "tokyo"],
-      ]);
-
-      const result2 = readNote(exampleNoteSaitama);
-      expect(result2).toEqual([
-        ["code", "11"],
-        ["name", "saitama"],
-      ]);
+    describe("Parses the note string and retrieves key-value pairs", () => {
+      test("", () => {
+        const result = readNote(exampleNoteTokyo);
+        const expectedResult: NoteReadResult[] = [
+          {
+            key: "code",
+            value: "13",
+          },
+          {
+            key: "name",
+            value: "tokyo",
+          },
+        ];
+        expect(result).toEqual(expectedResult);
+      });
+      test("", () => {
+        const result2 = readNote(exampleNoteSaitama);
+        const expectedResult2: NoteReadResult[] = [
+          { key: "code", value: "11" },
+          { key: "name", value: "saitama" },
+        ];
+        expect(result2).toEqual(expectedResult2);
+      });
     });
 
     test("Reads only valid parts when incomplete tags are mixed", () => {
       const result = readNote("<code:13><name:tok");
-      expect(result).toEqual([["code", "13"]]);
+      const expectedResult: NoteReadResult[] = [
+        {
+          key: "code",
+          value: "13",
+        },
+      ];
+      expect(result).toEqual(expectedResult);
     });
 
     test("Returns an empty array when an empty string is passed", () => {

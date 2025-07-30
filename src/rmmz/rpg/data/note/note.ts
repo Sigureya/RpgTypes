@@ -12,7 +12,7 @@ export const readNoteObject = <Result, T extends { note: string }>(
 ): Result[] => readNoteEx(data.note, (key, value) => fn(key, value, data));
 
 export const readNote = (note: string): NoteReadResult[] => {
-  return readNoteEx(note, (key, value) => [key, value]);
+  return readNoteEx(note, (key, value) => ({ key, value }));
 };
 /**
  * note文字列を解析し、キーと値のペアを取得します。
