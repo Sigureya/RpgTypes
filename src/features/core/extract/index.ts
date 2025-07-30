@@ -11,7 +11,6 @@ export type {
   TextExtractable,
 } from "./text/mainData";
 export { extractImageFromActor, extractImageFromEnemy } from "./image/mainData";
-
 export {
   extractNoteText,
   extractTextData,
