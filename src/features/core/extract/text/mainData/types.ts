@@ -1,17 +1,23 @@
 import type { PickByType } from "@RpgTypes/libs/templates";
 
-export interface ExtractedTextItem<Key extends string = string> {
-  key: Key;
-  text: string;
-  id: number;
-}
-
-export interface ExtractedText<T> {
-  main: ExtractedTextItem<Extract<keyof T, string>>[];
-  note: ExtractedTextItem[];
-}
-
 export type TextExtractable<T> = PickByType<T, string> & {
   id: number;
   note: string;
 };
+
+export type ExtractedText<T> = {
+  main: ExtractedTextProperty<T>[];
+  note: ExtractedTextItem[];
+};
+
+export interface ExtractedTextItem {
+  key: string;
+  text: string;
+  id: number;
+}
+
+export interface ExtractedTextProperty<T> {
+  key: Extract<keyof PickByType<T, string>, string>;
+  text: string;
+  id: number;
+}
