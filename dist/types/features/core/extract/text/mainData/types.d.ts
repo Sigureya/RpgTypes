@@ -1,4 +1,4 @@
-import { PickByType } from '../../../../../libs/templates';
+import { PickByType, PickByTypeKeys } from '../../../../../libs/templates';
 export type TextExtractable<T> = PickByType<T, string> & {
     id: number;
     note: string;
@@ -13,7 +13,7 @@ export interface ExtractedTextItem {
     id: number;
 }
 export interface ExtractedTextProperty<T> {
-    key: Extract<keyof PickByType<T, string>, string>;
+    key: PickByTypeKeys<T, string>;
     text: string;
     id: number;
 }

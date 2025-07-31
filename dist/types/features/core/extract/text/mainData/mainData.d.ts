@@ -1,4 +1,4 @@
-import { PickByType } from '../../../../../libs/templates';
+import { PickByTypeKeys } from '../../../../../libs/templates';
 import { Data_Actor, Data_Armor, Data_Class, Data_Enemy, Data_Item, Data_Skill, Data_State, Data_Weapon } from '../../../../../rmmz';
 import { ExtractedTextItem, TextExtractable, ExtractedText } from './types';
 export declare const extractTextData: <T extends {
@@ -6,7 +6,7 @@ export declare const extractTextData: <T extends {
     id: number;
 }>(data: T & {
     id: number;
-}, keys: Extract<keyof PickByType<T, string>, string>[]) => {
+}, keys: PickByTypeKeys<T, string>[]) => {
     note: ExtractedTextItem[];
     main: {
         key: Extract<{ [K in keyof T]: T[K] extends string ? K : never; }[keyof T], string>;
