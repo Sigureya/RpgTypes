@@ -1,5 +1,22 @@
 import { describe, expect, test } from "vitest";
-import * as RpgTypes from "@RpgTypes/rmmz";
+import type {
+  Data_Actor,
+  Data_Enemy,
+  Data_Armor,
+  Data_Weapon,
+  Data_Item,
+  Data_Skill,
+  Data_State,
+} from "@RpgTypes/rmmz";
+import {
+  makeActorData,
+  makeEnemyData,
+  makeArmorData,
+  makeWeaponData,
+  makeItemData,
+  makeSkillData,
+  makeStateData,
+} from "@RpgTypes/rmmz";
 import {
   extractTextFromEnemy,
   extractTextFromArmor,
@@ -9,10 +26,10 @@ import {
   extractTextFromState,
   extractTextFromActor,
 } from "./mainData";
-import type { ExtractedText, TextExtractable } from "./types";
+import type { TextExtractable, ExtractedText } from "./types";
 
 describe("extractTextFromActor", () => {
-  const expected: ExtractedText = {
+  const expected: ExtractedText<Data_Actor> = {
     main: [
       { key: "name", text: "アクター", id: 1 },
       { key: "nickname", text: "ニックネーム", id: 1 },
@@ -20,40 +37,40 @@ describe("extractTextFromActor", () => {
     ],
     note: [],
   };
-  const actor: TextExtractable<RpgTypes.Data_Actor> = RpgTypes.makeActorData({
+  const actor = makeActorData({
     nickname: "ニックネーム",
     name: "アクター",
     profile: "プロフィール",
     id: 1,
   });
   test("extract", () => {
-    const result: ExtractedText = extractTextFromActor(actor);
+    const result: ExtractedText<Data_Actor> = extractTextFromActor(actor);
     expect(result).toEqual(expected);
   });
 });
 
 describe("extractTextFromEnemy", () => {
-  const enemy: TextExtractable<RpgTypes.Data_Enemy> = RpgTypes.makeEnemyData({
+  const enemy: TextExtractable<Data_Enemy> = makeEnemyData({
     name: "エネミー",
     id: 2,
   });
-  const expected: ExtractedText = {
+  const expected: ExtractedText<Data_Enemy> = {
     main: [{ key: "name", text: "エネミー", id: 2 }],
     note: [],
   };
   test("extract", () => {
-    const result = extractTextFromEnemy(enemy);
+    const result: ExtractedText<Data_Enemy> = extractTextFromEnemy(enemy);
     expect(result).toEqual(expected);
   });
 });
 
 describe("extractTextFromArmor", () => {
-  const armor = RpgTypes.makeArmorData({
+  const armor = makeArmorData({
     name: "アーマー",
     description: "アーマー説明",
     id: 3,
   });
-  const expected: ExtractedText = {
+  const expected: ExtractedText<Data_Armor> = {
     main: [
       { key: "name", text: "アーマー", id: 3 },
       { key: "description", text: "アーマー説明", id: 3 },
@@ -72,7 +89,7 @@ describe("extractTextFromArmor", () => {
 });
 
 describe("extractTextFromWeapon", () => {
-  const weapon = RpgTypes.makeWeaponData({
+  const weapon = makeWeaponData({
     name: "ウェポン",
     description: "ウェポン説明",
     id: 4,
@@ -83,7 +100,7 @@ describe("extractTextFromWeapon", () => {
     expect(weapon.description).toBe("ウェポン説明");
     expect(weapon.id).toBe(4);
   });
-  const expected: ExtractedText = {
+  const expected: ExtractedText<Data_Weapon> = {
     main: [
       { key: "name", text: "ウェポン", id: 4 },
       { key: "description", text: "ウェポン説明", id: 4 },
@@ -97,7 +114,7 @@ describe("extractTextFromWeapon", () => {
 });
 
 describe("extractTextFromItem", () => {
-  const item = RpgTypes.makeItemData({
+  const item = makeItemData({
     name: "アイテム",
     description: "アイテム説明",
     id: 5,
@@ -107,7 +124,7 @@ describe("extractTextFromItem", () => {
     expect(item.description).toBe("アイテム説明");
     expect(item.id).toBe(5);
   });
-  const expected: ExtractedText = {
+  const expected: ExtractedText<Data_Item> = {
     main: [
       { key: "name", text: "アイテム", id: 5 },
       { key: "description", text: "アイテム説明", id: 5 },
@@ -121,7 +138,7 @@ describe("extractTextFromItem", () => {
 });
 
 describe("extractTextFromSkill", () => {
-  const skill = RpgTypes.makeSkillData({
+  const skill = makeSkillData({
     name: "スキル",
     description: "スキル説明",
     message1: "msg1",
@@ -133,7 +150,7 @@ describe("extractTextFromSkill", () => {
     expect(skill.description).toBe("スキル説明");
     expect(skill.id).toBe(6);
   });
-  const expected: ExtractedText = {
+  const expected: ExtractedText<Data_Skill> = {
     main: [
       { key: "name", text: "スキル", id: 6 },
       { key: "description", text: "スキル説明", id: 6 },
@@ -149,7 +166,7 @@ describe("extractTextFromSkill", () => {
 });
 
 describe("extractTextFromState", () => {
-  const state = RpgTypes.makeStateData({
+  const state = makeStateData({
     name: "ステート",
     message1: "msg1",
     message2: "msg2",
@@ -166,7 +183,7 @@ describe("extractTextFromState", () => {
     expect(state.message3).toBe("msg3");
     expect(state.message4).toBe("msg4");
   });
-  const expected: ExtractedText = {
+  const expected: ExtractedText<Data_State> = {
     main: [
       { key: "name", text: "ステート", id: 7 },
       { key: "message1", text: "msg1", id: 7 },
