@@ -1,39 +1,39 @@
 import { g as c, b as p } from "../shared/make.es.js";
-import { a as M, c as N, m as R } from "../shared/make.es.js";
-import { m as E, p as S, a as F } from "../shared/pick.es.js";
-const h = "rmmz", f = "colors", x = (e, a, s, r = {
+import { a as R, c as A, m as E } from "../shared/make.es.js";
+import { m as F } from "../shared/mergeItemsSource.es.js";
+const f = "rmmz", x = "colors", b = (e, a, r, s = {
   placeHolderMaxLength: 50,
   formatMaxLength: 200
-}) => e.pattern.length >= r.formatMaxLength ? { formatLabel: e.label, syntaxErrors: [{ message: s.formatVeryLong, reason: e.pattern.slice(0, r.formatMaxLength) }], semanticErrors: [] } : {
+}) => e.pattern.length >= s.formatMaxLength ? { formatLabel: e.label, syntaxErrors: [{ message: r.formatVeryLong, reason: e.pattern.slice(0, s.formatMaxLength) }], semanticErrors: [] } : {
   formatLabel: e.label,
-  semanticErrors: g(e, a, s),
-  syntaxErrors: i(e.pattern, a, s, r.placeHolderMaxLength)
-}, i = (e, a, s, r) => {
+  semanticErrors: g(e, a, r),
+  syntaxErrors: i(e.pattern, a, r, s.placeHolderMaxLength)
+}, i = (e, a, r, s) => {
   const t = Array.from(e.matchAll(/\{([.a-zA-Z0-9]+)\}/g)), n = c(a);
   return t.reduce((o, l) => {
     const m = l[1];
-    return m.length === 0 ? o : m.length > r ? (o.push({ message: s.longPlaceHolder, reason: m.slice(0, r) }), o) : (n.has(m) || o.push({
-      message: s.extraPlaceHolder,
+    return m.length === 0 ? o : m.length > s ? (o.push({ message: r.longPlaceHolder, reason: m.slice(0, s) }), o) : (n.has(m) || o.push({
+      message: r.extraPlaceHolder,
       reason: m
     }), o);
   }, []);
-}, g = (e, a, s) => p(a).reduce((r, t) => {
-  const n = u(e, t, s);
-  return n && r.push(n), r;
-}, []), u = (e, a, s) => {
-  const r = e.pattern.includes(a.placeHolder), t = !!e.dataSource;
-  return !r && t ? { message: s.missingName, reason: a.placeHolder } : r && !t ? { message: s.missingSourceId, reason: a.placeHolder } : void 0;
-}, b = (e) => Object.entries(e).map(([, a]) => a.title), L = (e) => typeof e == "number" && !Number.isNaN(e);
+}, g = (e, a, r) => p(a).reduce((s, t) => {
+  const n = u(e, t, r);
+  return n && s.push(n), s;
+}, []), u = (e, a, r) => {
+  const s = e.pattern.includes(a.placeHolder), t = !!e.dataSource;
+  return !s && t ? { message: r.missingName, reason: a.placeHolder } : s && !t ? { message: r.missingSourceId, reason: a.placeHolder } : void 0;
+}, L = (e) => Object.entries(e).map(([, a]) => a.title), d = (e, a, r) => a.map((s) => r(s, e[s], e)), H = (e, a, r) => d(e, a, r), y = (e) => typeof e == "number" && !Number.isNaN(e);
 export {
-  h as AUTHOR_RMMZ,
-  f as SRC_COLOR,
-  M as applyFormatRule,
-  N as compileFormatRule,
-  x as detectFormatErrors,
-  b as domainNames,
-  L as isValidNumber,
-  R as makeAudioFileParams,
-  E as mergeItemsSource,
-  S as pickPropertys,
-  F as pickString
+  f as AUTHOR_RMMZ,
+  x as SRC_COLOR,
+  R as applyFormatRule,
+  A as compileFormatRule,
+  b as detectFormatErrors,
+  L as domainNames,
+  y as isValidNumber,
+  E as makeAudioFileParams,
+  F as mergeItemsSource,
+  d as pickPropertys,
+  H as pickString
 };
