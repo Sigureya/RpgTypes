@@ -1,4 +1,4 @@
-import type { PickByType } from "@RpgTypes/libs/templates";
+import type { PickByTypeKeys } from "@RpgTypes/libs/templates";
 import type {
   Data_Actor,
   Data_Armor,
@@ -18,7 +18,7 @@ import type {
 
 export const extractTextData = <T extends { note: string; id: number }>(
   data: T & { id: number },
-  keys: Extract<keyof PickByType<T, string>, string>[]
+  keys: PickByTypeKeys<T, string>[]
 ) => {
   return {
     note: extractNoteText(data),
