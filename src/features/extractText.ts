@@ -7,7 +7,11 @@ export type {
   ExtractedCommonEventText,
 } from "./core/extractEventText";
 
-export { extractMapText } from "./core/extractMapText";
+export {
+  type ExtractedMapEventTexts,
+  type ExtractedMapTexts,
+  extractMapText,
+} from "./core/extractMapText";
 
 export type {
   ExtractedActorImage,
