@@ -4,6 +4,10 @@ export type {
   Terms_GameCommands,
 } from "./core/commands/types";
 export type {
+  SystemLabels_TermsParamNames,
+  Terms_ParamNamesArray,
+} from "./core/paramArray/types";
+export type {
   System_Terms,
   System_TermsPartial,
   System_Terms_Params,
