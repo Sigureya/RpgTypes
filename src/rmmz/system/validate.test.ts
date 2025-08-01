@@ -1,6 +1,5 @@
 import { describe, test, expect } from "vitest";
-import type { AttackMotion } from "./core";
-import type { Terms_Messages } from "./core/terms/core/messages";
+import type { AttackMotion, Terms_Messages } from "./core";
 import type { Data_System } from "./system";
 import { isAttackMotion, isDataSystem } from "./validate";
 
