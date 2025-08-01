@@ -36,3 +36,8 @@ export {
   extractTextFromState,
   extractTextFromWeapon,
 } from "./core/extract/text/mainData";
+
+export {
+  type ExtractedSystemTexts,
+  extractTextFromSystem,
+} from "./core/extract/text/system";
