@@ -1,7 +1,4 @@
-import { ItemCategories, MenuCommandsEnabled, System_Advanced, System_Bgm, System_BooleanGameOptions, System_RPG_DataNames, System_GameInitial, System_TitleImages, System_ImageSize, System_Me, System_SoundsObject, System_Vehicles } from './core';
-import { Terms_Basic } from './core/terms/core/basic';
-import { Terms_GameCommands } from './core/terms/core/commands';
-import { Terms_Messages } from './core/terms/core/messages';
+import { ItemCategories, MenuCommandsEnabled, System_Advanced, System_Bgm, System_BooleanGameOptions, System_RPG_DataNames, System_GameInitial, System_TitleImages, System_ImageSize, System_Me, System_SoundsObject, System_Vehicles, Terms_GameCommands, Terms_Basic, Terms_Messages } from './core';
 import { EditorSettings, System_TestBattle, System_EditorTemporary } from './gameEdit';
 import { System_Text } from './subset';
 export interface SystemDataFragments {

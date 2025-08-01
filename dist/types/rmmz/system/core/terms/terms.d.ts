@@ -1,5 +1,3 @@
 import { Data_NamedItem } from '../../../../libs';
-import { SystemLabels_TermsParamNames, Terms_ParamNamesArray } from './core/paramArray/types';
-import { System_Terms_Params } from './types';
-export declare const makeParamNamesArray: (param: Partial<SystemLabels_TermsParamNames>) => Terms_ParamNamesArray;
+import { System_Terms_Params } from './core/types';
 export declare const getParamNames: (system: System_Terms_Params) => Data_NamedItem[];
