@@ -4,9 +4,9 @@ import type {
   System_BooleanGameOptions,
   System_TitleImages,
   SystemLabel_DataNames,
+  SystemLabels_GameCommands,
+  SystemLabels_TermsParamNames,
 } from "./core";
-import type { SystemLabels_GameCommands } from "./core/terms/core/commands";
-import type { SystemLabels_TermsParamNames } from "./core/terms/core/paramArray";
 import type { System_Text } from "./subset";
 type AsLabel<T> = Record<keyof T, string>;
 
