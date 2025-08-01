@@ -8,6 +8,9 @@ import {
   makeParamNamesArray,
   makeSoundsArray,
   makeSystemAdvanced,
+  makeTermsBasic,
+  makeTermsCommandArray,
+  makeTermsMessages,
   makeVehicleData,
 } from "./core";
 import type {
@@ -16,11 +19,8 @@ import type {
   System_ImageSize,
   System_Terms,
   System_TermsPartial,
+  Terms_Messages,
 } from "./core";
-import { makeTermsBasic } from "./core/terms/core/basic";
-import { makeTermsCommand } from "./core/terms/core/commands";
-import type { Terms_Messages } from "./core/terms/core/messages";
-import { makeTermsMessages } from "./core/terms/core/messages";
 import type { EditorSettings } from "./gameEdit";
 import { makeEditorSetting } from "./gameEdit";
 import type { TestBattler } from "./gameEdit/testPlay/testBattler/types";
@@ -99,7 +99,7 @@ export default makeSystemData;
 const makeTerms = (terms: System_TermsPartial): System_Terms => {
   return {
     basic: makeTermsBasic(terms.basic ?? {}) satisfies string[],
-    commands: makeTermsCommand(terms.commands ?? {}) satisfies string[],
+    commands: makeTermsCommandArray(terms.commands ?? {}) satisfies string[],
     params: makeParamNamesArray(terms.params ?? {}) satisfies string[],
     messages: makeTermsMessages(terms.messages ?? {}) satisfies Record<
       keyof Terms_Messages,
