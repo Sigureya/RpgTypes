@@ -1,7 +1,7 @@
 import { describe, expect, test } from "vitest";
 import type { Data_NamedItem } from "@RpgTypes/libs";
+import type { System_Terms_Params } from "./core/types";
 import { getParamNames } from "./terms";
-import type { System_Terms_Params } from "./types";
 
 const system = {
   terms: {

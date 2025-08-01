@@ -1,6 +1,6 @@
 import type { JSONSchemaType, SchemaObject } from "ajv";
 import SCHEMA_SYSTEM_TERMS_CORE from "./core/schema";
-import type { System_TextBundle } from "./types";
+import type { System_TextBundle } from "./core/types";
 
 const SCHEMA_SYSTEM_TERMS_BUNDLE = {
   required: [
