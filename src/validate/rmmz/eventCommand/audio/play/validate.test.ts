@@ -33,30 +33,30 @@ describe("isCommandAudio", () => {
   test("Play BGM", () => {
     const command: Command_PlayBGM = makeCommandPlayBGM(MockAudio);
 
-    expect(isCommandAudio(command)).toBe(true);
+    expect(command).toSatisfy(isCommandAudio);
   });
   test("Play BGS", () => {
     const command: Command_PlayBGS = makeCommandPlayBGS(MockAudio);
-    expect(isCommandAudio(command)).toBe(true);
+    expect(command).toSatisfy(isCommandAudio);
   });
   test("Play ME", () => {
     const command: Command_PlayME = makeCommandPlayME(MockAudio);
-    expect(isCommandAudio(command)).toBe(true);
+    expect(command).toSatisfy(isCommandAudio);
   });
   test("Play SE", () => {
     const command: Command_PlaySE = makeCommandPlaySE(MockAudio);
-    expect(isCommandAudio(command)).toBe(true);
+    expect(command).toSatisfy(isCommandAudio);
   });
   test("Change Battle BGM", () => {
     const cmd: Command_ChangeBattleBGM = makeCommandChangeBattleBGM(MockAudio);
-    expect(isCommandAudio(cmd)).toBe(true);
+    expect(cmd).toSatisfy(isCommandAudio);
   });
   test("Change Victory ME", () => {
     const cmd: Command_ChangeVictoryME = makeCommandChangeVictoryME(MockAudio);
-    expect(isCommandAudio(cmd)).toBe(true);
+    expect(cmd).toSatisfy(isCommandAudio);
   });
   test("Change Defeat ME", () => {
     const cmd: Command_ChangeDefeatME = makeCommandChangeDefeatME(MockAudio);
-    expect(isCommandAudio(cmd)).toBe(true);
+    expect(cmd).toSatisfy(isCommandAudio);
   });
 });
