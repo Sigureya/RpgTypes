@@ -2,6 +2,8 @@ export {
   expectBattleEventTexts,
   extractCommonEventTexts,
 } from "./core/extractEventText";
+
+export { extractTextFromEventCommands } from "./core/getTextFromCommand";
 export type {
   ExtractedBattleEventText,
   ExtractedCommonEventText,
