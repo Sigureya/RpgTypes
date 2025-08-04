@@ -23,7 +23,11 @@ export {
   extractImageFromEnemy,
 } from "./core/extract/image/mainData";
 
-export type { ExtractedText } from "./core/extract/text/mainData/types";
+export type {
+  ExtractedText,
+  ExtractedTextProperty,
+  ExtractedTextItem,
+} from "./core/extract/text/mainData/types";
 export {
   extractNoteText,
   extractTextData,
