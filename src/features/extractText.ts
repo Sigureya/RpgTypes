@@ -3,6 +3,7 @@ export {
   extractCommonEventTexts,
 } from "./core/extractEventText";
 
+export type { TextCommandParameter } from "./core/extract/text/eventCommand/types";
 export { extractTextFromEventCommands } from "./core/getTextFromCommand";
 export type {
   ExtractedBattleEventText,
