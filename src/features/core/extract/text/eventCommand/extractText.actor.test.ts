@@ -9,7 +9,7 @@ import type { CommandParameter } from "@RpgTypes/rmmz/eventCommand/utils/pickPar
 import { extractTextFromActorCommand } from "./extractText";
 
 describe("extractTextFromActorCommand", () => {
-  describe("changeName", () => {
+  test("changeName", () => {
     const command: Command_ChangeActorName = {
       code: CHANGE_NAME,
       parameters: [1, "name"],
@@ -20,12 +20,10 @@ describe("extractTextFromActorCommand", () => {
       value: "name",
       paramIndex: 1,
     };
-    test("", () => {
-      const result = extractTextFromActorCommand(command);
-      expect(result).toEqual(expected satisfies typeof result);
-    });
+    const result = extractTextFromActorCommand(command);
+    expect(result).toEqual(expected);
   });
-  describe("changeNickname", () => {
+  test("changeNickname", () => {
     const command: Command_ChangeActorNickName = {
       code: CHANGE_NICKNAME,
       parameters: [1, "name"],
@@ -36,12 +34,10 @@ describe("extractTextFromActorCommand", () => {
       value: "name",
       paramIndex: 1,
     };
-    test("", () => {
-      const result = extractTextFromActorCommand(command);
-      expect(result).toEqual(expected satisfies typeof result);
-    });
+    const result = extractTextFromActorCommand(command);
+    expect(result).toEqual(expected);
   });
-  describe("changeProfile", () => {
+  test("changeProfile", () => {
     const command: Command_ChangeActorProfile = {
       code: CHANGE_PROFILE,
       parameters: [1, "name"],
@@ -52,9 +48,7 @@ describe("extractTextFromActorCommand", () => {
       value: "name",
       paramIndex: 1,
     };
-    test("", () => {
-      const result = extractTextFromActorCommand(command);
-      expect(result).toEqual(expected satisfies typeof result);
-    });
+    const result = extractTextFromActorCommand(command);
+    expect(result).toEqual(expected);
   });
 });
