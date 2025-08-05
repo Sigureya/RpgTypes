@@ -1,5 +1,5 @@
 import { EventCommand } from '../../../../../../rmmz';
-import { EventCommandGroup_Message, EventCommandGroup_ScrollingText, EventCommandGroup_Comment, EventCommandGroup_Script } from './groopTypes';
+import { EventCommandGroup_Message, EventCommandGroup_ScrollingText, EventCommandGroup_Comment, EventCommandGroup_Script } from './groupTypes';
 export interface GroopMapper<T> {
     showMessage(groop: EventCommandGroup_Message, index: number, array: ReadonlyArray<EventCommand>): T;
     showScrollingText(groop: EventCommandGroup_ScrollingText, index: number, array: ReadonlyArray<EventCommand>): T;

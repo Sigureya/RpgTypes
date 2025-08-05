@@ -1,2 +1,2 @@
-export * from './groopTypes';
+export * from './groupTypes';
 export * from './mapperType';
