@@ -4,7 +4,7 @@ import type {
   EventCommandGroup_ScrollingText,
   EventCommandGroup_Comment,
   EventCommandGroup_Script,
-} from "./groopTypes";
+} from "./groupTypes";
 
 export interface GroopMapper<T> {
   showMessage(
