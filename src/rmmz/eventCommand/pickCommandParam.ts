@@ -1,8 +1,8 @@
 import type { AudioFileParams } from "@RpgTypes/libs";
 import type { IndexOfCommandParameter } from "./utils/pickParam";
 
-export interface CommandParameter<T> {
-  code: number;
+export interface CommandParameter<T, Code extends number = number> {
+  code: Code;
   paramIndex: number;
   value: T;
 }
