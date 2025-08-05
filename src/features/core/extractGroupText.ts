@@ -1,4 +1,5 @@
 import {
+  COMMENT_HEAD,
   SCRIPT_EVAL,
   SHOW_MESSAGE_BODY,
   SHOW_SCROLLING_TEXT_BODY,
@@ -47,7 +48,7 @@ export const extractTextParamFromComment = (
   group: EventCommandGroup_Comment
 ): TextCommandParameter => {
   return {
-    code: group.header.code,
+    code: COMMENT_HEAD,
     paramIndex: 0,
     value: group.getBodyText(),
   };

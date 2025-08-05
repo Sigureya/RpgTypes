@@ -12,11 +12,12 @@ export const pickCommandParamString = <
   Index extends IndexOfCommandParameter<
     { code: number; parameters: Params },
     string
-  >
+  >,
+  Code extends number
 >(
-  command: { code: number; parameters: Params },
+  command: { code: Code; parameters: Params },
   index: Index
-): CommandParameter<Params[Index]> => ({
+): CommandParameter<Params[Index], Code> => ({
   code: command.code,
   paramIndex: index,
   value: command.parameters[index],
