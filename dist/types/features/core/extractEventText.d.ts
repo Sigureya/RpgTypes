@@ -10,4 +10,4 @@ export interface ExtractedBattleEventText {
     commands: TextCommandParameter[];
     pageIndex: number;
 }
-export declare const expectBattleEventTexts: (list: ReadonlyArray<Data_Troop>) => ExtractedBattleEventText[][];
+export declare const extractBattleEventTexts: (list: ReadonlyArray<Data_Troop>) => ExtractedBattleEventText[][];
