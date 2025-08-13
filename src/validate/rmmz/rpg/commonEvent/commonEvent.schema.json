@@ -1,0 +1,22 @@
+{
+  "type": "object",
+  "required": ["trigger", "id", "name", "list", "switchId"],
+  "properties": {
+    "trigger": { "type": "integer", "minimum": 0 },
+    "id": { "type": "integer", "minimum": 0 },
+    "name": { "type": "string" },
+    "list": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["code", "indent", "parameters"],
+        "properties": {
+          "code": { "type": "integer" },
+          "indent": { "type": "integer" },
+          "parameters": { "type": "array" }
+        }
+      }
+    },
+    "switchId": { "type": "integer", "minimum": 0 }
+  }
+}
