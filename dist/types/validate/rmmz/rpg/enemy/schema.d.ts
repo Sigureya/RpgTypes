@@ -115,4 +115,3 @@ export declare const SCHEMA_DATA_ENEMY: {
         };
     };
 };
-export default SCHEMA_DATA_ENEMY;
