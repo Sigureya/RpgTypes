@@ -121,7 +121,23 @@ export declare const normalizeCommands: (list: ReadonlyArray<EventCommand>) => (
     indent: number;
 } | {
     parameters: [value: import('../../../..').AudioFileParams];
+    code: 140;
+    indent: number;
+} | {
+    parameters: [value: import('../../../..').AudioFileParams];
     code: 133;
+    indent: number;
+} | {
+    parameters: [tileSetId: number];
+    code: 282;
+    indent: number;
+} | {
+    parameters: [battleBack1Name: string, battleBack2name: string];
+    code: 283;
+    indent: number;
+} | {
+    parameters: [0 | 1 | 2, troopId: number, canEscape: boolean, canLose: boolean];
+    code: 301;
     indent: number;
 } | {
     parameters: [value: import('../../../../libs/templates/valueOf').ValueOf<import('../../../../rmmz').Toggle>];
@@ -148,8 +164,132 @@ export declare const normalizeCommands: (list: ReadonlyArray<EventCommand>) => (
     code: 139;
     indent: number;
 } | {
+    parameters: [type: string, power: number, duration: number, needsWait: boolean];
+    code: 236;
+    indent: number;
+} | {
     parameters: [value: import('../../../..').AudioFileParams];
-    code: 140;
+    code: 241;
+    indent: number;
+} | {
+    parameters: [duration: number];
+    code: 242;
+    indent: number;
+} | {
+    parameters: [value: import('../../../..').AudioFileParams];
+    code: 245;
+    indent: number;
+} | {
+    parameters: [duration: number];
+    code: 246;
+    indent: number;
+} | {
+    parameters: [value: import('../../../..').AudioFileParams];
+    code: 250;
+    indent: number;
+} | {
+    parameters: [];
+    code: 251;
+    indent: number;
+} | {
+    parameters: [value: import('../../../..').AudioFileParams];
+    code: 249;
+    indent: number;
+} | {
+    parameters: [filename: string];
+    code: 261;
+    indent: number;
+} | {
+    parameters: [];
+    code: 243;
+    indent: number;
+} | {
+    parameters: [];
+    code: 244;
+    indent: number;
+} | {
+    parameters: import('../../../../rmmz').ShopProcessing;
+    code: 302;
+    indent: number;
+} | {
+    parameters: import('../../../../rmmz').ShopGoods;
+    code: 605;
+    indent: number;
+} | {
+    parameters: [actorId: number, name: string];
+    code: 303;
+    indent: number;
+} | {
+    parameters: [targetSelect: import('../../../../libs/templates/valueOf').ValueOf<import('../../../../rmmz').Designation>, index: number, oparation: import('../../../../libs/templates/valueOf').ValueOf<import('../../../../rmmz').Operation_PlusMinus>, oprandType: import('../../../../libs/templates/valueOf').ValueOf<import('../../../../rmmz').Designation>, VariableIdOrValue: number, allowDetah: boolean];
+    code: 311;
+    indent: number;
+} | {
+    parameters: [targetSelect: import('../../../../libs/templates/valueOf').ValueOf<import('../../../../rmmz').Designation>, index: number, oparation: import('../../../../libs/templates/valueOf').ValueOf<import('../../../../rmmz').Operation_PlusMinus>, oprandType: import('../../../../libs/templates/valueOf').ValueOf<import('../../../../rmmz').Designation>, VariableIdOrValue: number];
+    code: 312;
+    indent: number;
+} | {
+    parameters: [targetSelect: import('../../../../libs/templates/valueOf').ValueOf<import('../../../../rmmz').Designation>, index: number, oparation: import('../../../../libs/templates/valueOf').ValueOf<import('../../../../rmmz').Operation_PlusMinus>, oprandType: import('../../../../libs/templates/valueOf').ValueOf<import('../../../../rmmz').Designation>, VariableIdOrValue: number];
+    code: 313;
+    indent: number;
+} | {
+    parameters: [];
+    code: 314;
+    indent: number;
+} | {
+    parameters: import('../../../../rmmz').Param_ChangeEnemyParameters;
+    code: 333;
+    indent: number;
+} | {
+    parameters: import('../../../../rmmz').Param_EnemyIterate;
+    code: 335;
+    indent: number;
+} | {
+    parameters: import('../../../../rmmz').Param_EnemyIterate;
+    code: 334;
+    indent: number;
+} | {
+    parameters: [enemyId: number, newEnemyId: number];
+    code: 336;
+    indent: number;
+} | {
+    parameters: [characterId: number, animationId: number];
+    code: 337;
+    indent: number;
+} | {
+    parameters: [characterId: number, action: string];
+    code: 339;
+    indent: number;
+} | {
+    parameters: [];
+    code: 340;
+    indent: number;
+} | {
+    parameters: [];
+    code: 351;
+    indent: number;
+} | {
+    parameters: [actorId: number, name: string];
+    code: 320;
+    indent: number;
+} | {
+    parameters: [actorId: number, classId: number, keepExp: boolean];
+    code: 321;
+    indent: number;
+} | {
+    parameters: [];
+    code: 315;
+    indent: number;
+} | {
+    parameters: [name: string, loopX: boolean, loopY: boolean, sx: number, sy: number];
+    code: 284;
+    indent: number;
+} | {
+    parameters: [actorId: number, characterImage: string, characterIndex: number, faceImage: string, faceIndex: number, battlerImage: string];
+    code: 322;
+    indent: number;
+} | {
+    parameters: [actorId: number, characterImage: string, characterIndex: number];
+    code: 323;
     indent: number;
 } | {
     parameters: [designation: import('../../../../libs/templates/valueOf').ValueOf<import('../../../../rmmz').Designation>, mapId: number, x: number, y: number, direction: import('../../../../rmmz').Direction8, fadeType: number];
@@ -182,6 +322,10 @@ export declare const normalizeCommands: (list: ReadonlyArray<EventCommand>) => (
 } | {
     parameters: [characterId: number, animationId: number, waiting: import('../../../../libs/templates/valueOf').ValueOf<import('../../../../rmmz').Toggle>];
     code: 212;
+    indent: number;
+} | {
+    parameters: import('../../../../rmmz').Param_ChangeEnemyParameters;
+    code: 331;
     indent: number;
 } | {
     parameters: [];
@@ -232,140 +376,16 @@ export declare const normalizeCommands: (list: ReadonlyArray<EventCommand>) => (
     code: 232;
     indent: number;
 } | {
-    parameters: [pictureId: number, speed: number];
-    code: 233;
-    indent: number;
-} | {
     parameters: [pictureId: number, color: import('../../../..').ColorRGBA, duration: number, wait: boolean];
     code: 234;
     indent: number;
 } | {
+    parameters: [pictureId: number, speed: number];
+    code: 233;
+    indent: number;
+} | {
     parameters: [pictureId: number];
     code: 235;
-    indent: number;
-} | {
-    parameters: [type: string, power: number, duration: number, needsWait: boolean];
-    code: 236;
-    indent: number;
-} | {
-    parameters: [value: import('../../../..').AudioFileParams];
-    code: 241;
-    indent: number;
-} | {
-    parameters: [duration: number];
-    code: 242;
-    indent: number;
-} | {
-    parameters: [];
-    code: 243;
-    indent: number;
-} | {
-    parameters: [];
-    code: 244;
-    indent: number;
-} | {
-    parameters: [value: import('../../../..').AudioFileParams];
-    code: 245;
-    indent: number;
-} | {
-    parameters: [duration: number];
-    code: 246;
-    indent: number;
-} | {
-    parameters: [value: import('../../../..').AudioFileParams];
-    code: 249;
-    indent: number;
-} | {
-    parameters: [value: import('../../../..').AudioFileParams];
-    code: 250;
-    indent: number;
-} | {
-    parameters: [];
-    code: 251;
-    indent: number;
-} | {
-    parameters: [filename: string];
-    code: 261;
-    indent: number;
-} | {
-    parameters: [tileSetId: number];
-    code: 282;
-    indent: number;
-} | {
-    parameters: [battleBack1Name: string, battleBack2name: string];
-    code: 283;
-    indent: number;
-} | {
-    parameters: [name: string, loopX: boolean, loopY: boolean, sx: number, sy: number];
-    code: 284;
-    indent: number;
-} | {
-    parameters: [variableId: number, mode: number, designation: import('../../../../libs/templates/valueOf').ValueOf<import('../../../../rmmz').Designation>, x: number, y: number];
-    code: 285;
-    indent: number;
-} | {
-    parameters: [0 | 1 | 2, troopId: number, canEscape: boolean, canLose: boolean];
-    code: 301;
-    indent: number;
-} | {
-    parameters: import('../../../../rmmz').ShopProcessing;
-    code: 302;
-    indent: number;
-} | {
-    parameters: import('../../../../rmmz').ShopGoods;
-    code: 605;
-    indent: number;
-} | {
-    parameters: [actorId: number, name: string];
-    code: 303;
-    indent: number;
-} | {
-    parameters: [targetSelect: import('../../../../libs/templates/valueOf').ValueOf<import('../../../../rmmz').Designation>, index: number, oparation: import('../../../../libs/templates/valueOf').ValueOf<import('../../../../rmmz').Operation_PlusMinus>, oprandType: import('../../../../libs/templates/valueOf').ValueOf<import('../../../../rmmz').Designation>, VariableIdOrValue: number, allowDetah: boolean];
-    code: 311;
-    indent: number;
-} | {
-    parameters: [targetSelect: import('../../../../libs/templates/valueOf').ValueOf<import('../../../../rmmz').Designation>, index: number, oparation: import('../../../../libs/templates/valueOf').ValueOf<import('../../../../rmmz').Operation_PlusMinus>, oprandType: import('../../../../libs/templates/valueOf').ValueOf<import('../../../../rmmz').Designation>, VariableIdOrValue: number];
-    code: 312;
-    indent: number;
-} | {
-    parameters: [targetSelect: import('../../../../libs/templates/valueOf').ValueOf<import('../../../../rmmz').Designation>, index: number, oparation: import('../../../../libs/templates/valueOf').ValueOf<import('../../../../rmmz').Operation_PlusMinus>, oprandType: import('../../../../libs/templates/valueOf').ValueOf<import('../../../../rmmz').Designation>, VariableIdOrValue: number];
-    code: 313;
-    indent: number;
-} | {
-    parameters: [];
-    code: 314;
-    indent: number;
-} | {
-    parameters: [];
-    code: 315;
-    indent: number;
-} | {
-    parameters: [actorId: number, name: string];
-    code: 320;
-    indent: number;
-} | {
-    parameters: [actorId: number, classId: number, keepExp: boolean];
-    code: 321;
-    indent: number;
-} | {
-    parameters: [actorId: number, characterImage: string, characterIndex: number, faceImage: string, faceIndex: number, battlerImage: string];
-    code: 322;
-    indent: number;
-} | {
-    parameters: [actorId: number, characterImage: string, characterIndex: number];
-    code: 323;
-    indent: number;
-} | {
-    parameters: [actorId: number, name: string];
-    code: 324;
-    indent: number;
-} | {
-    parameters: [actorId: number, name: string];
-    code: 325;
-    indent: number;
-} | {
-    parameters: import('../../../../rmmz').Param_ChangeEnemyParameters;
-    code: 331;
     indent: number;
 } | {
     parameters: import('../../../../rmmz').Param_ChangeEnemyParameters;
@@ -373,39 +393,19 @@ export declare const normalizeCommands: (list: ReadonlyArray<EventCommand>) => (
     indent: number;
 } | {
     parameters: import('../../../../rmmz').Param_ChangeEnemyParameters;
-    code: 333;
-    indent: number;
-} | {
-    parameters: import('../../../../rmmz').Param_EnemyIterate;
-    code: 334;
-    indent: number;
-} | {
-    parameters: import('../../../../rmmz').Param_EnemyIterate;
-    code: 335;
-    indent: number;
-} | {
-    parameters: [enemyId: number, newEnemyId: number];
-    code: 336;
-    indent: number;
-} | {
-    parameters: [characterId: number, animationId: number];
-    code: 337;
-    indent: number;
-} | {
-    parameters: [characterId: number, action: string];
-    code: 339;
-    indent: number;
-} | {
-    parameters: [];
-    code: 340;
-    indent: number;
-} | {
-    parameters: [];
-    code: 351;
-    indent: number;
-} | {
-    parameters: import('../../../../rmmz').Param_ChangeEnemyParameters;
     code: 342;
+    indent: number;
+} | {
+    parameters: [actorId: number, name: string];
+    code: 324;
+    indent: number;
+} | {
+    parameters: [variableId: number, mode: number, designation: import('../../../../libs/templates/valueOf').ValueOf<import('../../../../rmmz').Designation>, x: number, y: number];
+    code: 285;
+    indent: number;
+} | {
+    parameters: [actorId: number, name: string];
+    code: 325;
     indent: number;
 } | {
     parameters: [];
