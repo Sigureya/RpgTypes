@@ -1,4 +1,4 @@
-import type { EventCommandLike2 } from "dist/types/rmmz/eventCommand";
+import type { EventCommandLike2 } from "@RpgTypes/rmmz/eventCommand/frame";
 
 export type ParamArray_ChangeActorText = [actorId: number, text: string];
 
