@@ -1,5 +1,5 @@
 export {
-  expectBattleEventTexts,
+  extractBattleEventTexts,
   extractCommonEventTexts,
 } from "./core/extractEventText";
 
