@@ -1,6 +1,7 @@
 export { isDataActor } from "./actor/isDataActor";
 export { isDataArmor } from "./armor/isDataArmor";
 export { isDataClass } from "./class/isDataClass";
+export { isDataCommonEvent } from "./commonEvent/isDataCommonEvent";
 export { isDataEnemy } from "./enemy/isDataEnemy";
 export { isDataItem } from "./item/isDataItem";
 export { isDataSkill } from "./skill/isDataSkill";
