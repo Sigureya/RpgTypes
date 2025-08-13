@@ -97,5 +97,3 @@ export const SCHEMA_DATA_ENEMY = {
     } satisfies JSONSchemaType<DropItem[]>,
   },
 } as const satisfies JSONSchemaType<Data_Enemy>;
-
-export default SCHEMA_DATA_ENEMY;
