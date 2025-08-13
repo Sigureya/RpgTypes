@@ -34,7 +34,7 @@ export interface ExtractedBattleEventText {
   pageIndex: number;
 }
 
-export const expectBattleEventTexts = (list: ReadonlyArray<Data_Troop>) => {
+export const extractBattleEventTexts = (list: ReadonlyArray<Data_Troop>) => {
   return processTroopEvents(
     list,
     (
