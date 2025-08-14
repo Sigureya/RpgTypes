@@ -5,7 +5,7 @@ import { extractTextFromEventCommands } from "./getTextFromCommand";
 import { collectMapEvents } from "./rpg";
 
 export interface ExtractedMapTexts {
-  commands: ExtractedMapEventTexts[];
+  events: ExtractedMapEventTexts[];
   note: string;
   noteItems: NoteReadResult[];
   displayedName: string;
@@ -13,6 +13,7 @@ export interface ExtractedMapTexts {
 
 export interface ExtractedMapEventTexts {
   eventId: number;
+  name: string;
   pageIndex: number;
   commands: TextCommandParameter[];
   note: string;
@@ -23,7 +24,7 @@ export const extractMapText = (map: Data_Map): ExtractedMapTexts => ({
   note: map.note,
   noteItems: readNote(map.note),
   displayedName: map.displayName,
-  commands: extractMapEventTexts(map),
+  events: extractMapEventTexts(map),
 });
 
 const extractMapEventTexts = (map: Data_Map): ExtractedMapEventTexts[] => {
@@ -35,6 +36,7 @@ const extractMapEventTexts = (map: Data_Map): ExtractedMapEventTexts[] => {
       commands: extractTextFromEventCommands(page.list),
       note: event.note,
       noteItems: [],
+      name: event.name,
     })
   );
 };
