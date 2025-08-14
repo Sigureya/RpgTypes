@@ -1,13 +1,13 @@
 import { w as l, C as p, p as c, S as y, o as I, n as w, v as b, k, a as C, u as N, b3 as x, q as j, aP as q, aL as E, aQ as S, cI as U, cJ as $, cW as z, d0 as J, c$ as M, cY as L, b8 as O, b7 as P, cU as Q, r as W, cr as Y } from "./make.es3.js";
-import { m as T } from "./mergeItemsSource.es.js";
-const v = (e) => e.map((a) => a.parameters[0].trimEnd()).join(`
+import { m as v } from "./mergeItemsSource.es.js";
+const T = (e) => e.map((a) => a.parameters[0].trimEnd()).join(`
 `).trimEnd();
 class f {
   constructor(a, s) {
     this.header = a, this.bodies = s;
   }
   getBodyText() {
-    return v(this.joinCommandBodies());
+    return T(this.joinCommandBodies());
   }
   mergedBody() {
     return { code: this.header.code, indent: this.header.indent, parameters: [this.getBodyText()] };
@@ -28,7 +28,7 @@ class h {
     return this.bodies.length === 0 ? [a] : [a, this.mergedBody()];
   }
   getBodyText() {
-    return v(this.bodies);
+    return T(this.bodies);
   }
   joinCommandBodies() {
     return this.bodies;
@@ -94,8 +94,8 @@ const i = (e, a, s, t) => {
   note: e.note,
   noteItems: U(e.note),
   displayedName: e.displayName,
-  commands: ee(e)
-}), ee = (e) => Z(e, (a, s, t) => ({ eventId: t.id, pageIndex: s, commands: g(a.list), note: t.note, noteItems: [] })), oe = (e) => ({
+  events: ee(e)
+}), ee = (e) => Z(e, (a, s, t) => ({ eventId: t.id, pageIndex: s, commands: g(a.list), note: t.note, noteItems: [], name: t.name })), oe = (e) => ({
   key: "battlerName",
   image: e.battlerName,
   id: e.id
@@ -123,9 +123,9 @@ const i = (e, a, s, t) => {
     messages: J(e.terms.messages),
     params: z(e.terms.params)
   }
-}), xe = (e, a, s, t, r, d) => [...O(s, t), ...P(e, a), ...Q(r, d)], Te = (e, a) => T(W(a), e), ve = (e, a, s) => {
+}), xe = (e, a, s, t, r, d) => [...O(s, t), ...P(e, a), ...Q(r, d)], ve = (e, a) => v(W(a), e), Te = (e, a, s) => {
   const t = Y(a);
-  return T(s ? [...t, ...s] : t, e);
+  return v(s ? [...t, ...s] : t, e);
 };
 export {
   re as a,
@@ -146,6 +146,6 @@ export {
   ue as p,
   be as q,
   xe as r,
-  Te as s,
-  ve as t
+  ve as s,
+  Te as t
 };
