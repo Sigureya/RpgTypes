@@ -8,16 +8,19 @@ export const mapKeys = <T, R>(
   return keyList.map((key: PickByTypeKeys<T, string>): R => fn(data[key], key));
 };
 
-export const mapKeysToObject = <T>(
+export const mapKeysToObject = <
+  T,
+  List extends ReadonlyArray<PickByTypeKeys<T, string>>
+>(
   data: T,
-  keyList: ReadonlyArray<PickByTypeKeys<T, string>>,
+  keyList: List,
   fn: (
     text: T[PickByTypeKeys<T, string>],
     key: PickByTypeKeys<T, string>
   ) => [key: PickByTypeKeys<T, string>, value: string]
 ) => {
   return Object.fromEntries<string>(mapKeys(data, keyList, fn)) as Record<
-    PickByTypeKeys<T, string>,
+    List[number],
     string
   >;
 };
