@@ -1,10 +1,7 @@
 import { describe, test, expect, vi } from "vitest";
 import { createNoteEntity, replaceNote } from "./note";
-import type { NoteReadResult } from "./types";
 
 const exampleNoteTokyo = "<code:13><name:tokyo>";
-const exampleNoteSaitama = "<code:11><name:saitama>";
-
 describe("createNoteEntity", () => {
   describe("Normal cases", () => {
     test("Generates a string with the specified key and value", () => {
@@ -30,18 +27,10 @@ describe("replaceNote", () => {
     });
 
     test("Does not throw an error for an empty string", () => {
-      const result = replaceNote("", mockDictionary);
+      const mockFn = vi.fn(() => "");
+      const result = replaceNote("", mockFn);
       expect(result).toBe("");
+      expect(mockFn).not.toBeCalled();
     });
   });
-
-  // Uncomment and modify if needed
-  // describe("Error cases", () => {
-  //   test("Does not throw an error even if the dictionary function is invalid", () => {
-  //     const result = replaceNote(exampleNoteTokyo, () => {
-  //       throw new Error("Dictionary function error");
-  //     });
-  //     expect(result).toBe(exampleNoteTokyo);
-  //   });
-  // });
 });
