@@ -5,7 +5,7 @@ import type {
 } from "@RpgTypes/rmmz";
 import type { SimpleEventCommandGroup } from "./core/simple";
 
-interface ResultXX<Command extends EventCommand> {
+export interface ResultXX<Command extends EventCommand> {
   spekerCommand: Command;
   messaege: string;
 }
