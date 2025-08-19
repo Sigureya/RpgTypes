@@ -43,7 +43,7 @@ const table: Record<
 };
 
 export const getGroupHandlingFunc = (
-  n: number
+  eventCode: number
 ):
   | undefined
   | (<T>(
@@ -51,5 +51,5 @@ export const getGroupHandlingFunc = (
       index: number,
       mapper: GroopMapper<T>
     ) => T) => {
-  return table[n];
+  return table[eventCode];
 };
