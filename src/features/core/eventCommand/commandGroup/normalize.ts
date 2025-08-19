@@ -13,8 +13,47 @@ import { createCommentGroup } from "./comment";
 import { createMessageGroup } from "./message";
 import { createScriptGroup } from "./script";
 import { createScrollTextGroup } from "./scrollText";
+import { insertSpeakerCommand } from "./speakerNameMV";
+
+export const normalizeCommandsForMV = (list: ReadonlyArray<EventCommand>) => {
+  return xxxDetail(list, (acc, command, index, input) => {
+    const group = createMessageGroup(input, index);
+    return [...acc, ...insertSpeakerCommand(group, () => undefined)];
+  });
+};
 
 export const normalizeCommands = (list: ReadonlyArray<EventCommand>) => {
+  return xxxDetail(list, messaege);
+};
+
+const xxxDetail = (
+  list: ReadonlyArray<EventCommand>,
+  messageFn: (
+    acc: ReadonlyArray<EventCommand>,
+    command: unknown,
+    index: number,
+    input: ReadonlyArray<EventCommand>
+  ) => EventCommand[]
+): EventCommand[] => {
+  const FUNCTION_TABLE: Record<
+    number,
+    (
+      acc: EventCommand[],
+      command: EventCommand,
+      index: number,
+      input: ReadonlyArray<EventCommand>
+    ) => EventCommand[]
+  > = {
+    [SCRIPT_EVAL_BODY]: bodyFn,
+    [COMMENT_BODY]: bodyFn,
+    [SHOW_MESSAGE_BODY]: bodyFn,
+    [SHOW_SCROLLING_TEXT_BODY]: bodyFn,
+    [COMMENT_HEAD]: processComment,
+    [SHOW_MESSAGE]: messageFn,
+    [SHOW_SCROLLING_TEXT]: processScroolText,
+    [SCRIPT_EVAL]: processScript,
+  };
+
   return list.reduce<EventCommand[]>((acc, command, index, array) => {
     const fn = FUNCTION_TABLE[command.code];
     if (fn) {
@@ -25,33 +64,43 @@ export const normalizeCommands = (list: ReadonlyArray<EventCommand>) => {
   }, []);
 };
 
-const FUNCTION_TABLE: Record<
-  number,
-  (
-    acc: EventCommand[],
-    command: EventCommand,
-    index: number,
-    input: ReadonlyArray<EventCommand>
-  ) => EventCommand[]
-> = {
-  [SCRIPT_EVAL_BODY]: (acc) => acc,
-  [COMMENT_BODY]: (acc) => acc,
-  [SHOW_MESSAGE_BODY]: (acc) => acc,
-  [SHOW_SCROLLING_TEXT_BODY]: (acc) => acc,
-  [COMMENT_HEAD]: (acc, command, index, input) => {
-    const group = createCommentGroup(input, index);
-    return [...acc, ...group.normalizedCommands()];
-  },
-  [SHOW_MESSAGE]: (acc, command, index, input) => {
-    const group = createMessageGroup(input, index);
-    return [...acc, ...group.normalizedCommands()];
-  },
-  [SHOW_SCROLLING_TEXT]: (acc, command, index, input) => {
-    const group = createScrollTextGroup(input, index);
-    return [...acc, ...group.normalizedCommands()];
-  },
-  [SCRIPT_EVAL]: (acc, command, index, input) => {
-    const group = createScriptGroup(input, index);
-    return [...acc, ...group.normalizedCommands()];
-  },
+const bodyFn = (acc: EventCommand[]) => acc;
+
+const processComment = (
+  acc: ReadonlyArray<EventCommand>,
+  command: unknown,
+  index: number,
+  input: ReadonlyArray<EventCommand>
+): EventCommand[] => {
+  const group = createCommentGroup(input, index);
+  return [...acc, ...group.normalizedCommands()];
+};
+const processScroolText = (
+  acc: ReadonlyArray<EventCommand>,
+  command: unknown,
+  index: number,
+  input: ReadonlyArray<EventCommand>
+): EventCommand[] => {
+  const group = createScrollTextGroup(input, index);
+  return [...acc, ...group.normalizedCommands()];
+};
+
+const processScript = (
+  acc: ReadonlyArray<EventCommand>,
+  command: unknown,
+  index: number,
+  input: ReadonlyArray<EventCommand>
+): EventCommand[] => {
+  const group = createScriptGroup(input, index);
+  return [...acc, ...group.normalizedCommands()];
+};
+
+const messaege = (
+  acc: ReadonlyArray<EventCommand>,
+  command: unknown,
+  index: number,
+  input: ReadonlyArray<EventCommand>
+) => {
+  const group = createMessageGroup(input, index);
+  return [...acc, ...group.normalizedCommands()];
 };
