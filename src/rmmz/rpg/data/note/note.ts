@@ -1,6 +1,6 @@
 import { buildNoteFromNormalized, normalizeNote } from "./normarize";
 import { makeRegex } from "./read";
-import type { NoteReadResult } from "./types";
+import type { NormalizedNote, NoteReadResult } from "./types";
 
 export const createNoteEntity = (key: string, value: string): string => {
   return `<${key}:${value}>`;
@@ -16,16 +16,15 @@ export const replaceNote = (
   note: string,
   transformFunction: (item: NoteReadResult) => string
 ): string => {
-  const normalized = normalizeNote(note);
-  const newItems = normalized.items.map((item: NoteReadResult) => {
-    return {
-      key: item.key,
-      value: transformFunction(item),
-    };
-  });
+  const normalized: NormalizedNote = normalizeNote(note);
   return buildNoteFromNormalized({
     note: normalized.note,
-    items: newItems,
+    items: normalized.items.map(
+      (item): NoteReadResult => ({
+        key: item.key,
+        value: transformFunction(item),
+      })
+    ),
   });
 };
 
