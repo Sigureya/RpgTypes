@@ -3,4 +3,12 @@ export interface ReadNoteOption {
   suffix: string;
 }
 
-export type NoteReadResult = { key: string; value: string };
+export interface NoteReadResult {
+  key: string;
+  value: string;
+}
+
+export interface NormalizedNote {
+  note: string;
+  items: NoteReadResult[];
+}
