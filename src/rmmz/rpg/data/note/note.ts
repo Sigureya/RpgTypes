@@ -1,4 +1,6 @@
+import { buildNoteFromNormalized, normalizeNote } from "./normarize";
 import { makeRegex } from "./read";
+import type { NoteReadResult } from "./types";
 
 export const createNoteEntity = (key: string, value: string): string => {
   return `<${key}:${value}>`;
@@ -14,20 +16,18 @@ export const replaceNote = (
   note: string,
   transformFunction: (key: string, value: string) => string
 ): string => {
-  if (note.length >= 3000) {
-    throw new Error("Note text is too long. Please shorten it.");
-  }
-
-  return note.replaceAll(
-    makeRegex(),
-    (_subString, key: string, value: string) => {
-      const newText = transformFunction(key, value);
-      if (newText.length >= 1000) {
-        throw new Error("Note text is too long. Please shorten it.");
-      }
-      return createNoteEntity(key, newText);
-    }
-  );
+  const normalized = normalizeNote(note);
+  const n2 = normalized.items.map((item: NoteReadResult) => {
+    const newValue = transformFunction(item.key, item.value);
+    return {
+      key: item.key,
+      value: newValue,
+    };
+  });
+  return buildNoteFromNormalized({
+    note: normalized.note,
+    items: n2,
+  });
 };
 
 export const getNoteValue = (
