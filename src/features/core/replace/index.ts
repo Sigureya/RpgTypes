@@ -1,6 +1,7 @@
 export {
-  repaceActorText,
-  repaceClassText,
-  repaceEnemyText,
-  repaceItemText,
+  replaceActorText,
+  replaceClassText,
+  replaceEnemyText,
+  replaceItemText,
+  replaceSkillText,
 } from "./rpgData";
