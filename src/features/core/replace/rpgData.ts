@@ -1,16 +1,27 @@
 import type {
   Data_Actor,
-  Data_Enemy,
-  Data_Skill,
-  Data_Class,
-  Data_Item,
-  Data_Weapon,
   Data_Armor,
+  Data_Class,
+  Data_Enemy,
+  Data_Item,
+  Data_Skill,
   Data_State,
+  Data_Weapon,
+  NoteReadResult,
 } from "@RpgTypes/rmmz";
-import { replaceNote2, replaceXXXX } from "./utils";
+import { replaceNote } from "@RpgTypes/rmmz";
+import { replaceXXXX } from "./utils";
 
-export const repaceActorText = (
+const replaceNote2 = (
+  data: { note: string },
+  dic: ReadonlyMap<string, string>
+): string => {
+  return replaceNote(data.note, (item: NoteReadResult): string =>
+    replaceXXXX(item.value, dic)
+  );
+};
+
+export const replaceActorText = (
   actor: Data_Actor,
   map: ReadonlyMap<string, string>
 ) => {
@@ -28,7 +39,7 @@ export const repaceActorText = (
   };
 };
 
-export const repaceEnemyText = (
+export const replaceEnemyText = (
   enemy: Data_Enemy,
   map: ReadonlyMap<string, string>
 ) => {
@@ -41,7 +52,7 @@ export const repaceEnemyText = (
   };
 };
 
-export const repaceClassText = (
+export const replaceClassText = (
   data: Data_Class,
   map: ReadonlyMap<string, string>
 ) => {
@@ -54,7 +65,7 @@ export const repaceClassText = (
   };
 };
 
-export const repaceSkillText = (
+export const replaceSkillText = (
   skill: Data_Skill,
   map: ReadonlyMap<string, string>
 ) => {
@@ -74,7 +85,7 @@ export const repaceSkillText = (
   };
 };
 
-export const repaceItemText = <T extends Data_Item | Data_Weapon | Data_Armor>(
+export const replaceItemText = <T extends Data_Item | Data_Weapon | Data_Armor>(
   item: T,
   map: ReadonlyMap<string, string>
 ) => {
@@ -89,7 +100,7 @@ export const repaceItemText = <T extends Data_Item | Data_Weapon | Data_Armor>(
   } satisfies T;
 };
 
-export const repaceStateText = (
+export const replaceStateText = (
   state: Data_State,
   map: ReadonlyMap<string, string>
 ) => {
