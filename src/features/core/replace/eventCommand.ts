@@ -4,19 +4,21 @@ import type {
   Command_ChangeActorProfile,
   Command_ChangeActorNickName,
   Command_ShowMessageBody,
+  Command_ShowChoices,
+  Command_CommentHeader,
 } from "@RpgTypes/rmmz";
 import { makeCommandShowMessage } from "@RpgTypes/rmmz";
 import { replaceXXXX } from "./utils";
 
 export const replaceTextForCommand2 = (
-  command: Command_ShowMessageBody,
+  command: Command_ShowMessageBody | Command_CommentHeader,
   map: ReadonlyMap<string, string>
-): Command_ShowMessageBody => {
-  const newText = replaceXXXX(command.parameters[0], map);
+) => {
+  const newText: string = replaceXXXX(command.parameters[0], map);
   return {
     code: command.code,
     indent: command.indent,
-    parameters: [newText],
+    parameters: [newText] satisfies [string],
   };
 };
 
@@ -55,4 +57,24 @@ export const replaceTextForCommandActor = <
     | Command_ChangeActorName
     | Command_ChangeActorProfile
     | Command_ChangeActorNickName;
+};
+
+export const replaceTextForCommandShowChoices = (
+  command: Command_ShowChoices,
+  map: ReadonlyMap<string, string>
+): Command_ShowChoices => {
+  const newChoices: string[] = command.parameters[0].map((choice) =>
+    replaceXXXX(choice, map)
+  );
+  return {
+    code: command.code,
+    indent: command.indent,
+    parameters: [
+      newChoices,
+      command.parameters[1],
+      command.parameters[2],
+      command.parameters[3],
+      command.parameters[4],
+    ],
+  };
 };
