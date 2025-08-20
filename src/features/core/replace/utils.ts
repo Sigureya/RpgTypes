@@ -1,4 +1,4 @@
-import type { NoteReadResult, NormalizedNote } from "@RpgTypes/rmmz";
+import type { NormalizedNote, NoteReadResult } from "@RpgTypes/rmmz";
 import { buildNoteFromNormalized, normalizeNote } from "@RpgTypes/rmmz";
 
 export const replaceNote2 = (

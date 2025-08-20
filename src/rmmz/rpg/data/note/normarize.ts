@@ -1,4 +1,3 @@
-import { buildNoteString } from "./build";
 import { makeRegex, readNote } from "./read";
 import type { NormalizedNote } from "./types";
 
@@ -11,9 +10,14 @@ export const normalizeNote = (note: string): NormalizedNote => {
   };
 };
 
-export const buildNoteFromNormalized = (note: NormalizedNote): string => {
-  const base: string = buildNoteString(note.items);
-  return [note.note, base].filter((text) => text !== "").join("\n");
+export const buildNoteFromNormalized = (
+  note: NormalizedNote,
+  sep: string = "\n"
+): string => {
+  const base2: string[] = note.items.map(
+    (item) => `<${item.key}:${item.value}>`
+  );
+  return [...base2, note.note].join(sep).trim();
 };
 
 const removeNoteTags = (note: string) => {
