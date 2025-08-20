@@ -1,5 +1,6 @@
 import { describe, test, expect, vi } from "vitest";
 import { createNoteEntity, replaceNote } from "./note";
+import type { NoteReadResult } from "./types";
 
 const exampleNoteTokyo = "<code:13><name:tokyo>";
 describe("createNoteEntity", () => {
@@ -12,7 +13,7 @@ describe("createNoteEntity", () => {
 });
 
 describe("replaceNote", () => {
-  const mockDictionary = (key: string, value: string): string => {
+  const mockDictionary = ({ key, value }: NoteReadResult): string => {
     if (key === "name") {
       return value.toUpperCase();
     }
