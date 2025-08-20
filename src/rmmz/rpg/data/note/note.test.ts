@@ -23,14 +23,15 @@ describe("replaceNote", () => {
   describe("Normal cases", () => {
     test("Replaces values using a dictionary function", () => {
       const result = replaceNote(exampleNoteTokyo, mockDictionary);
-      expect(result).toBe("<code:13><name:TOKYO>");
+      const expected = ["<code:13>", "<name:TOKYO>"].join("\n");
+      expect(result).toBe(expected);
     });
 
     test("Does not throw an error for an empty string", () => {
-      const mockFn = vi.fn(() => "");
+      const mockFn = vi.fn(() => "no call");
       const result = replaceNote("", mockFn);
-      expect(result).toBe("");
       expect(mockFn).not.toBeCalled();
+      expect(result).toBe("");
     });
   });
 });
