@@ -8,22 +8,16 @@ import type {
   Data_Armor,
   Data_State,
 } from "@RpgTypes/rmmz";
-import { replaceNote2 } from "./note";
-
-const xxx = (text: string, map: ReadonlyMap<string, string>): string => {
-  const s2 = text.trimEnd();
-  const vv = map.get(s2);
-  return vv !== undefined ? vv : s2;
-};
+import { replaceNote2, replaceXXXX } from "./utils";
 
 export const repaceActorText = (
   actor: Data_Actor,
   map: ReadonlyMap<string, string>
 ) => {
   const note: string = replaceNote2(actor, map);
-  const name = xxx(actor.name, map);
-  const nickname = xxx(actor.nickname, map);
-  const profile = xxx(actor.profile, map);
+  const name = replaceXXXX(actor.name, map);
+  const nickname = replaceXXXX(actor.nickname, map);
+  const profile = replaceXXXX(actor.profile, map);
 
   return {
     ...actor,
@@ -39,7 +33,7 @@ export const repaceEnemyText = (
   map: ReadonlyMap<string, string>
 ) => {
   const note: string = replaceNote2(enemy, map);
-  const name: string = xxx(enemy.name, map);
+  const name: string = replaceXXXX(enemy.name, map);
   return {
     ...enemy,
     name: name,
@@ -52,7 +46,7 @@ export const repaceClassText = (
   map: ReadonlyMap<string, string>
 ) => {
   const note: string = replaceNote2(data, map);
-  const name: string = xxx(data.name, map);
+  const name: string = replaceXXXX(data.name, map);
   return {
     ...data,
     name: name,
@@ -65,10 +59,10 @@ export const repaceSkillText = (
   map: ReadonlyMap<string, string>
 ) => {
   const note: string = replaceNote2(skill, map);
-  const name: string = xxx(skill.name, map);
-  const description: string = xxx(skill.description, map);
-  const message1: string = xxx(skill.message1, map);
-  const message2: string = xxx(skill.message2, map);
+  const name: string = replaceXXXX(skill.name, map);
+  const description: string = replaceXXXX(skill.description, map);
+  const message1: string = replaceXXXX(skill.message1, map);
+  const message2: string = replaceXXXX(skill.message2, map);
 
   return {
     ...skill,
@@ -85,8 +79,8 @@ export const repaceItemText = <T extends Data_Item | Data_Weapon | Data_Armor>(
   map: ReadonlyMap<string, string>
 ) => {
   const note: string = replaceNote2(item, map);
-  const name: string = xxx(item.name, map);
-  const description: string = xxx(item.description, map);
+  const name: string = replaceXXXX(item.name, map);
+  const description: string = replaceXXXX(item.description, map);
   return {
     ...item,
     name: name,
@@ -100,11 +94,11 @@ export const repaceStateText = (
   map: ReadonlyMap<string, string>
 ) => {
   const note: string = replaceNote2(state, map);
-  const name: string = xxx(state.name, map);
-  const message1: string = xxx(state.message1, map);
-  const message2: string = xxx(state.message2, map);
-  const message3: string = xxx(state.message3, map);
-  const message4: string = xxx(state.message4, map);
+  const name: string = replaceXXXX(state.name, map);
+  const message1: string = replaceXXXX(state.message1, map);
+  const message2: string = replaceXXXX(state.message2, map);
+  const message3: string = replaceXXXX(state.message3, map);
+  const message4: string = replaceXXXX(state.message4, map);
 
   return {
     ...state,

@@ -1,9 +1,8 @@
 import type { NoteReadResult, NormalizedNote } from "@RpgTypes/rmmz";
 import { buildNoteFromNormalized, normalizeNote } from "@RpgTypes/rmmz";
-import { replaceXXXX } from "./xxx";
 
 export const replaceNote2 = (
-  data: { id: number; note: string },
+  data: { note: string },
   dic: ReadonlyMap<string, string>
 ): string => {
   const normalized: NormalizedNote = normalizeNote(data.note);
@@ -18,4 +17,13 @@ export const replaceNote2 = (
     note: normalized.note,
     items: items,
   });
+};
+
+export const replaceXXXX = (
+  text: string,
+  map: ReadonlyMap<string, string>
+): string => {
+  const trimedKey = text.trimEnd();
+  const value = map.get(trimedKey);
+  return value !== undefined ? value.trimEnd() : trimedKey;
 };
