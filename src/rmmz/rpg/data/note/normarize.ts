@@ -7,7 +7,7 @@ export interface NormalizedNote {
   items: NoteReadResult[];
 }
 
-export const NormalizedNote = (note: string): NormalizedNote => {
+export const normalizeNote = (note: string): NormalizedNote => {
   const tagRemoved = removeNoteTags(note);
   const items = readNote(note);
   return {
