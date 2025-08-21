@@ -6,12 +6,51 @@ import type {
   Command_ShowMessageBody,
   Command_ShowChoices,
   Command_CommentHeader,
+  EventCommand,
+  Command_CommentBody,
 } from "@RpgTypes/rmmz";
-import { makeCommandShowMessage } from "@RpgTypes/rmmz";
+import {
+  CHANGE_NAME,
+  CHANGE_NICKNAME,
+  CHANGE_PROFILE,
+  COMMENT_BODY,
+  COMMENT_HEAD,
+  makeCommandShowMessage,
+  SHOW_CHOICES,
+  SHOW_MESSAGE,
+  SHOW_MESSAGE_BODY,
+} from "@RpgTypes/rmmz";
 import { replaceXXXX } from "./utils";
 
+export const replaceEventCommandTexts = (
+  list: ReadonlyArray<EventCommand>,
+  map: ReadonlyMap<string, string>
+): EventCommand[] => {
+  return list.map((command) => {
+    switch (command.code) {
+      case SHOW_MESSAGE:
+        return replaceTextForCommandShowMessage(command, map);
+      case SHOW_CHOICES:
+        return replaceTextForCommandShowChoices(command, map);
+      case SHOW_MESSAGE_BODY:
+      case COMMENT_HEAD:
+      case COMMENT_BODY:
+        return replaceTextForCommand2(command, map);
+      case CHANGE_NAME:
+      case CHANGE_NICKNAME:
+      case CHANGE_PROFILE:
+        return replaceTextForCommandActor(command, map);
+      default:
+        return command;
+    }
+  });
+};
+
 export const replaceTextForCommand2 = (
-  command: Command_ShowMessageBody | Command_CommentHeader,
+  command:
+    | Command_ShowMessageBody
+    | Command_CommentHeader
+    | Command_CommentBody,
   map: ReadonlyMap<string, string>
 ) => {
   const newText: string = replaceXXXX(command.parameters[0], map);
