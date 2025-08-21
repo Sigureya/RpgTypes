@@ -1,5 +1,15 @@
-import f from "ajv";
-const Qa = 0, Ya = 101, Za = 401, ae = 102, ee = 402, te = 103, se = 104, re = 105, me = 405, ie = 108, oe = 408, ne = 109, le = 111, de = 411, ce = 112, pe = 113, ue = 115, be = 117, ye = 118, ke = 119, ge = 121, fe = 122, he = 123, ve = 124, Re = 125, Ie = 126, ze = 127, Se = 128, xe = 129, Te = 132, we = 133, Ae = 134, Ee = 135, Pe = 136, De = 137, qe = 138, Ne = 139, He = 140, Ge = 201, Ce = 202, Me = 203, je = 204, Fe = 205, Ve = 206, Le = 211, Be = 212, Ue = 213, Xe = 214, $e = 216, _e = 217, Oe = 221, We = 222, Ke = 223, Je = 224, Qe = 225, Ye = 230, Ze = 231, at = 232, et = 233, tt = 234, st = 235, rt = 236, mt = 241, it = 242, ot = 243, nt = 244, lt = 245, dt = 246, ct = 249, pt = 250, ut = 251, bt = 261, yt = 282, kt = 283, gt = 284, ft = 285, ht = 301, vt = 302, Rt = 605, It = 303, zt = 311, St = 312, xt = 313, Tt = 314, wt = 315, At = 320, Et = 321, Pt = 322, Dt = 323, qt = 324, Nt = 325, Ht = 331, Gt = 332, Ct = 333, Mt = 334, jt = 335, Ft = 336, Vt = 337, Lt = 339, Bt = 340, Ut = 351, Xt = 342, $t = 352, _t = 353, Ot = 354, Wt = 355, Kt = 655, Jt = 356, Qt = 357, Yt = (a, e) => [h(a.skills, e), v(a.actors, e), R(a.states, e), I(a.armors, e), z(a.classes, e), S(a.enemies, e), x(a.items, e), T(a.weapons, e), w(a.commonEvents, e)], h = (a, e) => ({
+import g from "ajv";
+const te = 0, se = 101, re = 401, me = 102, ie = 402, oe = 103, ne = 104, le = 105, de = 405, ce = 108, pe = 408, ue = 109, be = 111, ye = 411, ke = 112, ge = 113, fe = 115, he = 117, ve = 118, Re = 119, Ie = 121, ze = 122, Se = 123, xe = 124, Te = 125, Ae = 126, we = 127, Ee = 128, Pe = 129, qe = 132, De = 133, Ne = 134, He = 135, Fe = 136, Ge = 137, Ce = 138, Me = 139, je = 140, Ve = 201, Le = 202, $e = 203, Be = 204, Ue = 205, Xe = 206, _e = 211, Oe = 212, We = 213, Ke = 214, Je = 216, Qe = 217, Ye = 221, Ze = 222, at = 223, et = 224, tt = 225, st = 230, rt = 231, mt = 232, it = 233, ot = 234, nt = 235, lt = 236, dt = 241, ct = 242, pt = 243, ut = 244, bt = 245, yt = 246, kt = 249, gt = 250, ft = 251, ht = 261, vt = 282, Rt = 283, It = 284, zt = 285, St = 301, xt = 302, Tt = 605, At = 303, wt = 311, Et = 312, Pt = 313, qt = 314, Dt = 315, Nt = 320, Ht = 321, Ft = 322, Gt = 323, Ct = 324, Mt = 325, jt = 331, Vt = 332, Lt = 333, $t = 334, Bt = 335, Ut = 336, Xt = 337, _t = 339, Ot = 340, Wt = 351, Kt = 342, Jt = 352, Qt = 353, Yt = 354, Zt = 355, as = 655, es = 356, ts = 357, ss = (a, e) => a.events.map((s) => s ? {
+  ...s,
+  pages: f(s, e)
+} : null), f = (a, e) => a.pages.map((s) => ({
+  conditions: s.conditions,
+  image: s.image,
+  directionFix: s.directionFix,
+  moveFrequency: s.moveFrequency,
+  moveRoute: s.moveRoute,
+  list: e(s.list)
+})), rs = (a, e) => [h(a.skills, e), v(a.actors, e), R(a.states, e), I(a.armors, e), z(a.classes, e), S(a.enemies, e), x(a.items, e), T(a.weapons, e), A(a.commonEvents, e)], h = (a, e) => ({
   label: e.skill.title,
   items: a,
   source: { author: "rmmz", module: "data", kind: "skill" }
@@ -19,25 +29,25 @@ const Qa = 0, Ya = 101, Za = 401, ae = 102, ee = 402, te = 103, se = 104, re = 1
   author: "rmmz",
   module: "data",
   kind: "weapon"
-} }), w = (a, e) => ({
+} }), A = (a, e) => ({
   items: a,
   label: e.commonEvent.title,
   source: { author: "rmmz", module: "data", kind: "common_event" }
-}), Zt = 11, as = 12, es = 13, ts = 14, ss = 21, rs = 22, ms = 23, is = 31, os = 32, ns = 33, ls = 34, ds = 35, cs = 41, ps = 42, us = 43, bs = 44, ys = 51, ks = 52, gs = 53, fs = 54, hs = 55, vs = 61, Rs = 62, Is = 63, zs = 64, Ss = 0, xs = 1, Ts = 2, ws = 3, A = (a, e) => ({
+}), ms = 11, is = 12, os = 13, ns = 14, ls = 21, ds = 22, cs = 23, ps = 31, us = 32, bs = 33, ys = 34, ks = 35, gs = 41, fs = 42, hs = 43, vs = 44, Rs = 51, Is = 52, zs = 53, Ss = 54, xs = 55, Ts = 61, As = 62, ws = 63, Es = 64, Ps = 0, qs = 1, Ds = 2, Ns = 3, w = (a, e) => ({
   items: E(a.options, e),
   label: a.title,
   source: { author: "rmmz", module: "trait", kind: "collaps" }
 }), E = (a, e) => [{ id: 0, name: e.normal }, { id: 1, name: a.bossCollaps }, { id: 2, name: a.instantCollaps }, {
   id: 3,
   name: a.noneCollaps
-}], As = 0, Es = 1, Ps = 2, Ds = 3, qs = 4, Ns = 5, Hs = 6, Gs = 7, Cs = 8, Ms = 9, P = (a) => ({
-  items: D(a.options),
+}], Hs = 0, Fs = 1, Gs = 2, Cs = 3, Ms = 4, js = 5, Vs = 6, Ls = 7, $s = 8, Bs = 9, P = (a) => ({
+  items: q(a.options),
   label: a.title,
   source: { author: "rmmz", module: "trait", kind: "xparams" }
-}), D = (a) => [{ id: 0, name: a.hitRate }, { id: 1, name: a.evasionRate }, { id: 2, name: a.criticalRate }, { id: 3, name: a.criticalEvasionRate }, { id: 4, name: a.magicEvasionRate }, {
+}), q = (a) => [{ id: 0, name: a.hitRate }, { id: 1, name: a.evasionRate }, { id: 2, name: a.criticalRate }, { id: 3, name: a.criticalEvasionRate }, { id: 4, name: a.magicEvasionRate }, {
   id: 5,
   name: a.magicReflectionRate
-}, { id: 6, name: a.counterAttackRate }, { id: 7, name: a.hpRegenerationRate }, { id: 8, name: a.mpRegenerationRate }, { id: 9, name: a.tpRegenerationRate }], js = (a, e) => {
+}, { id: 6, name: a.counterAttackRate }, { id: 7, name: a.hpRegenerationRate }, { id: 8, name: a.mpRegenerationRate }, { id: 9, name: a.tpRegenerationRate }], Us = (a, e) => {
   switch (a) {
     case 3:
       return e.criticalEvasionRate;
@@ -61,10 +71,10 @@ const Qa = 0, Ya = 101, Za = 401, ae = 102, ee = 402, te = 103, se = 104, re = 1
       return e.tpRegenerationRate;
   }
   return `?xparams[${a}]`;
-}, Fs = 0, Vs = 1, Ls = 2, Bs = 3, Us = 4, Xs = 5, $s = 6, _s = 7, q = (a) => ({ items: N(a.options), label: a.title, source: { author: "rmmz", module: "trait", kind: "params" } }), N = (a) => [{
+}, Xs = 0, _s = 1, Os = 2, Ws = 3, Ks = 4, Js = 5, Qs = 6, Ys = 7, D = (a) => ({ items: N(a.options), label: a.title, source: { author: "rmmz", module: "trait", kind: "params" } }), N = (a) => [{
   id: 0,
   name: a.maxHp
-}, { id: 1, name: a.maxMp }, { id: 2, name: a.atk }, { id: 3, name: a.def }, { id: 4, name: a.matk }, { id: 5, name: a.mdef }, { id: 6, name: a.agi }, { id: 7, name: a.luk }], Os = (a, e) => {
+}, { id: 1, name: a.maxMp }, { id: 2, name: a.atk }, { id: 3, name: a.def }, { id: 4, name: a.matk }, { id: 5, name: a.mdef }, { id: 6, name: a.agi }, { id: 7, name: a.luk }], Zs = (a, e) => {
   switch (a) {
     case 0:
       return e.maxHp;
@@ -85,13 +95,13 @@ const Qa = 0, Ya = 101, Za = 401, ae = 102, ee = 402, te = 103, se = 104, re = 1
     default:
       return `?rparams[${a}]`;
   }
-}, Ws = 0, Ks = 1, Js = 2, Qs = 3, Ys = 4, Zs = 5, ar = 6, er = 7, tr = 8, sr = 9, H = (a) => ({ items: G(a.options), label: a.title, source: { author: "rmmz", module: "trait", kind: "sparams" } }), G = (a) => [{
+}, ar = 0, er = 1, tr = 2, sr = 3, rr = 4, mr = 5, ir = 6, or = 7, nr = 8, lr = 9, H = (a) => ({ items: F(a.options), label: a.title, source: { author: "rmmz", module: "trait", kind: "sparams" } }), F = (a) => [{
   id: 0,
   name: a.targetRate
 }, { id: 1, name: a.guardEffectRate }, { id: 2, name: a.recoveryEffectRate }, { id: 3, name: a.pharmacology }, { id: 4, name: a.mpCostRate }, { id: 5, name: a.tpChargeRate }, {
   id: 6,
   name: a.physicalDamageRate
-}, { id: 7, name: a.magicDamageRate }, { id: 8, name: a.floorDamageRate }, { id: 9, name: a.experienceRate }], rr = (a, e) => {
+}, { id: 7, name: a.magicDamageRate }, { id: 8, name: a.floorDamageRate }, { id: 9, name: a.experienceRate }], dr = (a, e) => {
   switch (a) {
     case 9:
       return e.experienceRate;
@@ -115,131 +125,136 @@ const Qa = 0, Ya = 101, Za = 401, ae = 102, ee = 402, te = 103, se = 104, re = 1
       return e.recoveryEffectRate;
   }
   return `?sparams[${a}]`;
-}, mr = 0, ir = 1, or = 2, nr = 3, lr = 4, dr = 5, C = (a) => ({
-  items: M(a.options),
+}, cr = 0, pr = 1, ur = 2, br = 3, yr = 4, kr = 5, G = (a) => ({
+  items: C(a.options),
   label: a.title,
   source: { author: "rmmz", module: "trait", kind: "partyAbility" }
-}), M = (a) => [{ id: 0, name: a.encounterHalf }, { id: 1, name: a.encounterNone }, { id: 2, name: a.cancelSurprise }, {
+}), C = (a) => [{ id: 0, name: a.encounterHalf }, { id: 1, name: a.encounterNone }, { id: 2, name: a.cancelSurprise }, {
   id: 3,
   name: a.raisePreemptive
-}, { id: 4, name: a.goldDouble }, { id: 5, name: a.dropItemDouble }], cr = 0, pr = 1, ur = 2, br = 3, j = (a) => ({ items: F(a.options), label: a.title, source: {
+}, { id: 4, name: a.goldDouble }, { id: 5, name: a.dropItemDouble }], gr = 0, fr = 1, hr = 2, vr = 3, M = (a) => ({ items: j(a.options), label: a.title, source: {
   author: "rmmz",
   module: "trait",
   kind: "sflag"
-} }), F = (a) => [{ id: 0, name: a.autoBattle }, { id: 1, name: a.guard }, { id: 2, name: a.substitute }, {
+} }), j = (a) => [{ id: 0, name: a.autoBattle }, { id: 1, name: a.guard }, { id: 2, name: a.substitute }, {
   id: 3,
   name: a.preventEscape
-}], yr = (a, e) => [q(a.regularParam), P(a.extraParam), H(a.specialParam), A(a.collaps, e), j(a.specialFlag), C(a.partyAbility)], kr = 11, gr = 12, fr = 13, hr = 21, vr = 22, Rr = 31, Ir = 32, zr = 33, Sr = 34, xr = 41, Tr = 42, wr = 43, Ar = 44, Er = (a) => [L(a), B(a), U(a), X(a), $(a), _(a), O(a), W(a), K(a), V(a), J(a), Q(a), Y(a)], s = (a, e, r) => ({
+}], Rr = (a, e) => [D(a.regularParam), P(a.extraParam), H(a.specialParam), w(a.collaps, e), M(a.specialFlag), G(a.partyAbility)], Ir = 11, zr = 12, Sr = 13, xr = 21, Tr = 22, Ar = 31, wr = 32, Er = 33, Pr = 34, qr = 41, Dr = 42, Nr = 43, Hr = 44, Fr = (a) => [L(a), $(a), B(a), U(a), X(a), _(a), O(a), W(a), K(a), V(a), J(a), Q(a), Y(a)], r = (a, e, s) => ({
   kindId: a,
   label: e.domainName,
   pattern: e.format,
   description: e.desc,
-  dataSource: r
-}), V = (a) => s(41, a.special), L = (a) => s(11, a.recoverHp), B = (a) => s(12, a.recoverMp), U = (a) => s(13, a.gainTp), X = (a) => s(21, a.addState, {
+  dataSource: s
+}), V = (a) => r(41, a.special), L = (a) => r(11, a.recoverHp), $ = (a) => r(12, a.recoverMp), B = (a) => r(13, a.gainTp), U = (a) => r(21, a.addState, {
   author: "rmmz",
   module: "data",
   kind: "state"
-}), $ = (a) => s(22, a.removeState, { author: "rmmz", module: "data", kind: "state" }), _ = (a) => s(31, a.addBuff, { author: "rmmz", module: "trait", kind: "params" }), O = (a) => s(32, a.addDebuff, {
+}), X = (a) => r(22, a.removeState, { author: "rmmz", module: "data", kind: "state" }), _ = (a) => r(31, a.addBuff, { author: "rmmz", module: "trait", kind: "params" }), O = (a) => r(32, a.addDebuff, {
   author: "rmmz",
   module: "trait",
   kind: "params"
-}), W = (a) => s(33, a.removeBuff, { author: "rmmz", module: "trait", kind: "params" }), K = (a) => s(34, a.removeDebuff, {
+}), W = (a) => r(33, a.removeBuff, { author: "rmmz", module: "trait", kind: "params" }), K = (a) => r(34, a.removeDebuff, {
   author: "rmmz",
   module: "trait",
   kind: "params"
-}), J = (a) => s(42, a.grow, { author: "rmmz", module: "trait", kind: "params" }), Q = (a) => s(43, a.learnSkill, { author: "rmmz", module: "data", kind: "skill" }), Y = (a) => s(44, a.commonEvent, {
+}), J = (a) => r(42, a.grow, { author: "rmmz", module: "trait", kind: "params" }), Q = (a) => r(43, a.learnSkill, { author: "rmmz", module: "data", kind: "skill" }), Y = (a) => r(44, a.commonEvent, {
   author: "rmmz",
   module: "data",
   kind: "common_event"
-}), b = (a, e) => `<${a}:${e}>`, Pr = () => /<([^<>:]{1,100}):([^>]{1,1000})>/g, Dr = (a, e) => y(a.note, (r, m) => e(r, m, a)), qr = (a) => y(a, (e, r) => ({
-  key: e,
-  value: r
-})), y = (a, e) => {
-  const r = /<([^<>:]{1,100}):([^>]{1,1000})>/g;
-  return Array.from(a.matchAll(r), (m) => e(m[1], m[2]));
-}, Nr = (a, e) => {
-  if (a.length >= 3e3) throw new Error("Note text is too long. Please shorten it.");
-  return a.replaceAll(/<([^<>:]{1,100}):([^>]{1,1000})>/g, (r, m, l) => {
-    const d = e(m, l);
-    if (d.length >= 1e3) throw new Error("Note text is too long. Please shorten it.");
-    return b(m, d);
-  });
-}, Hr = (a, e) => {
-  const r = /<([^<>:]{1,100}):([^>]{1,1000})>/g, m = Array.from(a.matchAll(r)).find((l) => l[1] === e);
+}), Gr = (a, e) => b(a.note, (s, m) => e(s, m, a)), Z = (a) => b(a, (e, s) => ({ key: e, value: s })), b = (a, e) => {
+  const s = /<([^<>:]{1,100}):([^>]{1,1000})>/g;
+  return Array.from(a.matchAll(s), (m) => e(m[1], m[2]));
+}, aa = (a, e = `
+`) => [...a.items.map((s) => `<${s.key}:${s.value}>`), a.note].join(e).trim(), ea = (a) => ({ note: ta(a), items: Z(a) }), ta = (a) => {
+  if (a.length >= 3e4) throw new Error("Note text is too long. Please shorten it.");
+  return a.replaceAll(/<([^<>:]{1,100}):([^>]{1,1000})>/g, "");
+}, sa = (a, e) => `<${a}:${e}>`, Cr = (a, e) => {
+  const s = ea(a), m = s.items.map((n) => ({ key: n.key, value: e(n) }));
+  return aa({ note: s.note, items: m });
+}, Mr = (a, e) => {
+  const s = /<([^<>:]{1,100}):([^>]{1,1000})>/g, m = Array.from(a.matchAll(s)).find((n) => n[1] === e);
   return m ? m[2] : void 0;
-}, Gr = (a, e, r) => {
+}, jr = (a, e, s) => {
   const m = /<([^<>:]{1,100}):([^>]{1,1000})>/g;
-  return a.replace(m, (l, d) => d === e ? b(d, r) : l);
-}, Cr = (a) => [Z(a.elementRate), aa(a.debuffRate), ea(a.stateRate), ta(a.stateResist), sa(a.regularParam), ra(a.extraParam), ma(a.specialParam), ia(a.attackElement), oa(a.attackState), na(a.attackSpeed), la(a.attackTimes), da(a.attackSkill), ca(a.skillTypeAdd), pa(a.skillTypeSeal), ua(a.skillAdd), ba(a.skillSeal), ya(a.equipWeaponType), ka(a.equipArmorType), ga(a.equipLock), fa(a.equipSeal), ha(a.slotType), va(a.actionPlus), Ra(a.specialFlag), Ia(a.collaps), za(a.partyAbility)], Z = (a) => ({
+  return a.replace(m, (n, u) => u === e ? sa(u, s) : n);
+}, Vr = (a) => [ra(a.elementRate), ma(a.debuffRate), ia(a.stateRate), oa(a.stateResist), na(a.regularParam), la(a.extraParam), da(a.specialParam), ca(a.attackElement), pa(a.attackState), ua(a.attackSpeed), ba(a.attackTimes), ya(a.attackSkill), ka(a.skillTypeAdd), ga(a.skillTypeSeal), fa(a.skillAdd), ha(a.skillSeal), va(a.equipWeaponType), Ra(a.equipArmorType), Ia(a.equipLock), za(a.equipSeal), Sa(a.slotType), xa(a.actionPlus), Ta(a.specialFlag), Aa(a.collaps), wa(a.partyAbility)], ra = (a) => ({
   pattern: a.format,
   label: a.title,
   kindId: 11,
-  dataSource: k()
-}), aa = (a) => ({ pattern: a.format, label: a.title, kindId: 12, dataSource: { author: "rmmz", module: "trait", kind: "params" } }), ea = (a) => ({
+  dataSource: y()
+}), ma = (a) => ({ pattern: a.format, label: a.title, kindId: 12, dataSource: { author: "rmmz", module: "trait", kind: "params" } }), ia = (a) => ({
   pattern: a.format,
   label: a.title,
   kindId: 13,
-  dataSource: c()
-}), ta = (a) => ({ pattern: a.format, label: a.title, kindId: 14, dataSource: c() }), sa = (a) => ({
+  dataSource: d()
+}), oa = (a) => ({ pattern: a.format, label: a.title, kindId: 14, dataSource: d() }), na = (a) => ({
   pattern: a.format,
   label: a.title,
   kindId: 21,
   dataSource: { author: "rmmz", module: "trait", kind: "params" }
-}), ra = (a) => ({ pattern: a.format, label: a.title, kindId: 22, dataSource: { author: "rmmz", module: "trait", kind: "xparams" } }), ma = (a) => ({
+}), la = (a) => ({ pattern: a.format, label: a.title, kindId: 22, dataSource: { author: "rmmz", module: "trait", kind: "xparams" } }), da = (a) => ({
   pattern: a.format,
   label: a.title,
   kindId: 23,
   dataSource: { author: "rmmz", module: "trait", kind: "sparams" }
-}), ia = (a) => ({ pattern: a.format, label: a.title, kindId: 31, dataSource: k() }), oa = (a) => ({
+}), ca = (a) => ({ pattern: a.format, label: a.title, kindId: 31, dataSource: y() }), pa = (a) => ({
   pattern: a.format,
   label: a.title,
   kindId: 32,
-  dataSource: c()
-}), na = (a) => ({ pattern: a.format, label: a.title, kindId: 33 }), la = (a) => ({ pattern: a.format, label: a.title, kindId: 34 }), da = (a) => ({
+  dataSource: d()
+}), ua = (a) => ({ pattern: a.format, label: a.title, kindId: 33 }), ba = (a) => ({ pattern: a.format, label: a.title, kindId: 34 }), ya = (a) => ({
   pattern: a.format,
   label: a.title,
   kindId: 35,
-  dataSource: p()
-}), ca = (a) => ({ pattern: a.format, label: a.title, kindId: 41, dataSource: g() }), pa = (a) => ({
+  dataSource: c()
+}), ka = (a) => ({ pattern: a.format, label: a.title, kindId: 41, dataSource: k() }), ga = (a) => ({
   pattern: a.format,
   label: a.title,
   kindId: 42,
-  dataSource: g()
-}), ua = (a) => ({ pattern: a.format, label: a.title, kindId: 43, dataSource: p() }), ba = (a) => ({ pattern: a.format, label: a.title, kindId: 44, dataSource: p() }), ya = (a) => ({
+  dataSource: k()
+}), fa = (a) => ({ pattern: a.format, label: a.title, kindId: 43, dataSource: c() }), ha = (a) => ({ pattern: a.format, label: a.title, kindId: 44, dataSource: c() }), va = (a) => ({
   pattern: a.format,
   label: a.title,
   kindId: 51,
-  dataSource: Sa()
-}), ka = (a) => ({ pattern: a.format, label: a.title, kindId: 52, dataSource: xa() }), ga = (a) => ({
+  dataSource: Ea()
+}), Ra = (a) => ({ pattern: a.format, label: a.title, kindId: 52, dataSource: Pa() }), Ia = (a) => ({
   pattern: a.format,
   label: a.title,
   kindId: 53,
-  dataSource: u()
-}), fa = (a) => ({ pattern: a.format, label: a.title, kindId: 54, dataSource: u() }), ha = (a) => ({ pattern: a.format, label: a.title, kindId: 55, dataSource: u() }), va = (a) => ({
+  dataSource: p()
+}), za = (a) => ({ pattern: a.format, label: a.title, kindId: 54, dataSource: p() }), Sa = (a) => ({ pattern: a.format, label: a.title, kindId: 55, dataSource: p() }), xa = (a) => ({
   pattern: a.format,
   label: a.title,
   kindId: 61
-}), Ra = (a) => ({ pattern: a.format, label: a.title, kindId: 62, dataSource: { author: "rmmz", module: "trait", kind: "sflag" } }), Ia = (a) => ({ pattern: a.format, label: a.title, kindId: 63, dataSource: {
+}), Ta = (a) => ({ pattern: a.format, label: a.title, kindId: 62, dataSource: { author: "rmmz", module: "trait", kind: "sflag" } }), Aa = (a) => ({ pattern: a.format, label: a.title, kindId: 63, dataSource: {
   author: "rmmz",
   module: "trait",
   kind: "collaps"
-} }), za = (a) => ({ pattern: a.format, label: a.title, kindId: 64, dataSource: { author: "rmmz", module: "trait", kind: "partyAbility" } }), c = () => ({
+} }), wa = (a) => ({ pattern: a.format, label: a.title, kindId: 64, dataSource: { author: "rmmz", module: "trait", kind: "partyAbility" } }), d = () => ({
   author: "rmmz",
   module: "data",
   kind: "state"
-}), p = () => ({ author: "rmmz", module: "data", kind: "skill" }), k = () => ({ author: "rmmz", module: "system", kind: "elements" }), g = () => ({
+}), c = () => ({ author: "rmmz", module: "data", kind: "skill" }), y = () => ({ author: "rmmz", module: "system", kind: "elements" }), k = () => ({
   author: "rmmz",
   module: "system",
   kind: "skillTypes"
-}), Sa = () => ({ author: "rmmz", module: "system", kind: "weaponTypes" }), xa = () => ({ author: "rmmz", module: "system", kind: "armorTypes" }), u = () => ({
+}), Ea = () => ({ author: "rmmz", module: "system", kind: "weaponTypes" }), Pa = () => ({ author: "rmmz", module: "system", kind: "armorTypes" }), p = () => ({
   author: "rmmz",
   module: "system",
   kind: "equipTypes"
-}), i = new f({ strict: !0 }), Ta = i.compile({ type: "object", required: ["code", "parameters", "indent"], properties: {
-  code: { type: "integer", enum: [320, 324, 325] },
-  indent: { type: "integer" },
-  parameters: { type: "array", minItems: 2, maxItems: 2, items: [{ type: "integer", minimum: 0 }, { type: "string" }] }
-}, additionalProperties: !1 }), Mr = (a) => Ta(a), wa = i.compile({
+}), Lr = (a, e = 0) => ({ code: 101, indent: e, parameters: [(a == null ? void 0 : a.facename) ?? "", (a == null ? void 0 : a.faceIndex) ?? 0, (a == null ? void 0 : a.background) ?? 0, (a == null ? void 0 : a.positionType) ?? 2, (a == null ? void 0 : a.speakerName) ?? ""] }), $r = (a) => ({
+  facename: a[0],
+  faceIndex: a[1],
+  background: a[2],
+  positionType: a[3],
+  speakerName: a[4]
+}), Br = (a) => [a.facename, a.faceIndex, a.background, a.positionType, a.speakerName], Ur = (a, e = 0) => ({
+  code: 401,
+  indent: e,
+  parameters: [a]
+}), i = new g({ strict: !0 }), qa = i.compile({ type: "object", required: ["code", "parameters", "indent"], properties: { code: { type: "integer", enum: [320, 324, 325] }, indent: {
+  type: "integer"
+}, parameters: { type: "array", minItems: 2, maxItems: 2, items: [{ type: "integer", minimum: 0 }, { type: "string" }] } }, additionalProperties: !1 }), Xr = (a) => qa(a), Da = i.compile({
   type: "object",
   properties: {
     code: { type: "number", const: 105 },
@@ -247,7 +262,7 @@ const Qa = 0, Ya = 101, Za = 401, ae = 102, ee = 402, te = 103, se = 104, re = 1
     parameters: { type: "array", minItems: 2, maxItems: 2, items: [{ type: "number" }, { type: "boolean" }] }
   },
   required: ["code", "indent", "parameters"]
-}), jr = (a) => wa(a), Aa = i.compile({
+}), _r = (a) => Da(a), Na = i.compile({
   type: "object",
   required: ["code", "parameters", "indent"],
   properties: {
@@ -256,10 +271,10 @@ const Qa = 0, Ya = 101, Za = 401, ae = 102, ee = 402, te = 103, se = 104, re = 1
     code: { type: "integer", enum: [0, 109, 112, 113, 115, 204, 206, 213, 214, 216, 217, 221, 222, 243, 244, 251, 314, 315, 340, 351, 352, 353, 354, 411] }
   },
   additionalProperties: !1
-}), Fr = (a) => Aa(a), Ea = i.compile({ type: "object", required: ["code", "parameters", "indent"], properties: { code: { type: "integer", enum: [108, 355, 401, 405, 408, 655] }, indent: {
+}), Or = (a) => Na(a), Ha = i.compile({ type: "object", required: ["code", "parameters", "indent"], properties: { code: { type: "integer", enum: [108, 355, 401, 405, 408, 655] }, indent: {
   type: "integer",
   minimum: 0
-}, parameters: { type: "array", minItems: 1, maxItems: 1, items: [{ type: "string" }] } }, additionalProperties: !1 }), n = (a) => Ea(a), Pa = i.compile({
+}, parameters: { type: "array", minItems: 1, maxItems: 1, items: [{ type: "string" }] } }, additionalProperties: !1 }), l = (a) => Ha(a), Fa = i.compile({
   type: "object",
   properties: {
     code: { type: "number", const: 117 },
@@ -267,7 +282,7 @@ const Qa = 0, Ya = 101, Za = 401, ae = 102, ee = 402, te = 103, se = 104, re = 1
     parameters: { type: "array", minItems: 1, maxItems: 1, items: [{ type: "number", minimum: 0, default: 0 }] }
   },
   required: ["code", "indent", "parameters"]
-}), Vr = (a) => Pa(a), Da = i.compile({
+}), Wr = (a) => Fa(a), Ga = i.compile({
   type: "object",
   properties: { code: { type: "number", const: 102 }, indent: { type: "integer", minimum: 0 }, parameters: {
     type: "array",
@@ -276,19 +291,19 @@ const Qa = 0, Ya = 101, Za = 401, ae = 102, ee = 402, te = 103, se = 104, re = 1
     items: [{ type: "array", items: { type: "string" } }, { type: "integer" }, { type: "integer" }, { type: "integer" }, { type: "integer" }]
   } },
   required: ["code", "indent", "parameters"]
-}), Lr = (a) => Da(a), qa = i.compile({ type: "object", properties: { code: { type: "number", const: 402 }, indent: { type: "integer", minimum: 0 }, parameters: {
+}), Kr = (a) => Ga(a), Ca = i.compile({ type: "object", properties: { code: { type: "number", const: 402 }, indent: { type: "integer", minimum: 0 }, parameters: {
   type: "array",
   minItems: 2,
   maxItems: 2,
   items: [{ type: "integer" }, { type: "string" }]
-} }, required: ["code", "indent", "parameters"] }), Br = (a) => qa(a), Na = i.compile({
+} }, required: ["code", "indent", "parameters"] }), Jr = (a) => Ca(a), Ma = i.compile({
   type: "object",
   properties: { code: {
     type: "number",
     const: 103
   }, indent: { type: "integer", minimum: 0 }, parameters: { type: "array", minItems: 2, maxItems: 2, items: [{ type: "number" }, { type: "number" }] } },
   required: ["code", "indent", "parameters"]
-}), Ur = (a) => Na(a), Ha = i.compile({
+}), Qr = (a) => Ma(a), ja = i.compile({
   type: "object",
   required: ["code", "parameters", "indent"],
   properties: { code: { type: "integer", const: 101 }, indent: {
@@ -299,30 +314,30 @@ const Qa = 0, Ya = 101, Za = 401, ae = 102, ee = 402, te = 103, se = 104, re = 1
     minimum: 0,
     maximum: 2
   }, { type: "string" }], minItems: 5, maxItems: 5 } }
-}), Xr = (a) => Ha(a), $r = (a) => n(a) && a.code === 401, _r = (a) => n(a) && a.code === 405, Or = (a) => n(a) && a.code === 108, Wr = (a) => n(a) && a.code === 408, Kr = (a) => n(a) && a.code === 355, Jr = (a) => n(a) && a.code === 655, o = (a, e) => ({
+}), Yr = (a) => ja(a), Zr = (a) => l(a) && a.code === 401, am = (a) => l(a) && a.code === 405, em = (a) => l(a) && a.code === 108, tm = (a) => l(a) && a.code === 408, sm = (a) => l(a) && a.code === 355, rm = (a) => l(a) && a.code === 655, o = (a, e) => ({
   name: a,
   id: e
-}), Ga = (a) => a.variables.map(o), Ca = (a) => a.elements.map(o), Ma = (a) => a.equipTypes.map(o), ja = (a) => a.skillTypes.map(o), Fa = (a) => a.weaponTypes.map(o), Va = (a) => a.armorTypes.map(o), La = (a) => a.switches.map(o), Qr = (a, e) => [Ua(a, e), Xa(a, e), Wa(a, e), $a(a, e), Ba(a, e), _a(a, e), Oa(a, e)], Ba = (a, e) => ({
-  items: Va(a),
+}), Va = (a) => a.variables.map(o), La = (a) => a.elements.map(o), $a = (a) => a.equipTypes.map(o), Ba = (a) => a.skillTypes.map(o), Ua = (a) => a.weaponTypes.map(o), Xa = (a) => a.armorTypes.map(o), _a = (a) => a.switches.map(o), mm = (a, e) => [Wa(a, e), Ka(a, e), Za(a, e), Ja(a, e), Oa(a, e), Qa(a, e), Ya(a, e)], Oa = (a, e) => ({
+  items: Xa(a),
   label: e.options.armorTypes,
   source: { author: "rmmz", module: "system", kind: "armorTypes" }
-}), Ua = (a, e) => ({ items: Ca(a), label: e.options.elements, source: {
+}), Wa = (a, e) => ({ items: La(a), label: e.options.elements, source: {
   author: "rmmz",
   module: "system",
   kind: "elements"
-} }), Xa = (a, e) => ({ items: Ma(a), label: e.options.equipTypes, source: { author: "rmmz", module: "system", kind: "equipTypes" } }), $a = (a, e) => ({
-  items: ja(a),
+} }), Ka = (a, e) => ({ items: $a(a), label: e.options.equipTypes, source: { author: "rmmz", module: "system", kind: "equipTypes" } }), Ja = (a, e) => ({
+  items: Ba(a),
   label: e.options.skillTypes,
   source: { author: "rmmz", module: "system", kind: "skillTypes" }
-}), _a = (a, e) => ({ items: Ga(a), label: e.options.variables, source: {
+}), Qa = (a, e) => ({ items: Va(a), label: e.options.variables, source: {
   author: "rmmz",
   module: "system",
   kind: "variable"
-} }), Oa = (a, e) => ({ items: La(a), label: e.options.switches, source: { author: "rmmz", module: "system", kind: "switch" } }), Wa = (a, e) => ({
-  items: Fa(a),
+} }), Ya = (a, e) => ({ items: _a(a), label: e.options.switches, source: { author: "rmmz", module: "system", kind: "switch" } }), Za = (a, e) => ({
+  items: Ua(a),
   label: e.options.weaponTypes,
   source: { author: "rmmz", module: "system", kind: "weaponTypes" }
-}), Yr = (a) => [a.mhp ?? "", a.mmp ?? "", a.atk ?? "", a.def ?? "", a.mat ?? "", a.mdf ?? "", a.agi ?? "", a.luk ?? "", a.hit ?? "", a.eva ?? ""], Zr = (a) => ({
+}), im = (a) => [a.mhp ?? "", a.mmp ?? "", a.atk ?? "", a.def ?? "", a.mat ?? "", a.mdf ?? "", a.agi ?? "", a.luk ?? "", a.hit ?? "", a.eva ?? ""], om = (a) => ({
   mhp: a[0],
   mmp: a[1],
   atk: a[2],
@@ -333,7 +348,7 @@ const Qa = 0, Ya = 101, Za = 401, ae = 102, ee = 402, te = 103, se = 104, re = 1
   luk: a[7],
   hit: a[8],
   eva: a[9]
-}), am = (a) => [a.level ?? "Level", a.levelA ?? "Level", a.hp ?? "HP", a.hpA ?? "HP", a.mp ?? "MP", a.mpA ?? "MP", a.tp ?? "TP", a.tpA ?? "TP", a.experience ?? "EXP", a.exp ?? "EXP"], em = (a) => ({
+}), nm = (a) => [a.level ?? "Level", a.levelA ?? "Level", a.hp ?? "HP", a.hpA ?? "HP", a.mp ?? "MP", a.mpA ?? "MP", a.tp ?? "TP", a.tpA ?? "TP", a.experience ?? "EXP", a.exp ?? "EXP"], lm = (a) => ({
   level: a[0],
   levelA: a[1],
   hp: a[2],
@@ -344,7 +359,7 @@ const Qa = 0, Ya = 101, Za = 401, ae = 102, ee = 402, te = 103, se = 104, re = 1
   tpA: a[7],
   experience: a[8],
   exp: a[9]
-}), tm = (a) => Ka(a, ""), Ka = (a, e) => [a.fight ?? "Fight", a.escape ?? "Escape", a.attack ?? "Attack", a.guard ?? "Guard", a.item ?? "Item", a.skill ?? "Skill", a.equip ?? "Equip", a.status ?? "Status", a.formation ?? "Formation", a.save ?? "Save", a.gameEnd ?? "Game End", a.options ?? "Options", a.weapon ?? "Weapon", a.armor ?? "Armor", a.keyItem ?? "Key Item", a.equip2 ?? "Equip2", a.optimize ?? "Optimize", a.clear ?? "Clear", a.newGame ?? "New Game", a.continue_ ?? "Continue", e, a.toTitle ?? "To Title", a.cancel ?? "Cancel", e, a.buy ?? "Buy", a.sell ?? "Sell"], sm = (a) => ({
+}), dm = (a) => ae(a, ""), ae = (a, e) => [a.fight ?? "Fight", a.escape ?? "Escape", a.attack ?? "Attack", a.guard ?? "Guard", a.item ?? "Item", a.skill ?? "Skill", a.equip ?? "Equip", a.status ?? "Status", a.formation ?? "Formation", a.save ?? "Save", a.gameEnd ?? "Game End", a.options ?? "Options", a.weapon ?? "Weapon", a.armor ?? "Armor", a.keyItem ?? "Key Item", a.equip2 ?? "Equip2", a.optimize ?? "Optimize", a.clear ?? "Clear", a.newGame ?? "New Game", a.continue_ ?? "Continue", e, a.toTitle ?? "To Title", a.cancel ?? "Cancel", e, a.buy ?? "Buy", a.sell ?? "Sell"], cm = (a) => ({
   fight: a[0],
   escape: a[1],
   attack: a[2],
@@ -369,7 +384,7 @@ const Qa = 0, Ya = 101, Za = 401, ae = 102, ee = 402, te = 103, se = 104, re = 1
   cancel: a[22],
   buy: a[24],
   sell: a[25]
-}), t = (a, e) => typeof a == "string" ? a : e, rm = (a) => ({
+}), t = (a, e) => typeof a == "string" ? a : e, pm = (a) => ({
   actionFailure: t(a.actionFailure, "Action failed."),
   actorDamage: t(a.actorDamage, "%1 took %2 damage."),
   actorRecovery: t(a.actorRecovery, "%1 recovered %2 HP."),
@@ -426,45 +441,45 @@ const Qa = 0, Ya = 101, Za = 401, ae = 102, ee = 402, te = 103, se = 104, re = 1
 });
 export {
   He as $,
-  pe as A,
-  be as B,
-  ie as C,
-  ye as D,
-  ue as E,
-  ke as F,
+  de as A,
+  pe as B,
+  ce as C,
+  ue as D,
+  be as E,
+  ye as F,
   ge as G,
   fe as H,
-  te as I,
+  oe as I,
   he as J,
   ve as K,
-  ce as L,
+  ke as L,
   Re as M,
-  Qa as N,
+  te as N,
   Ie as O,
   ze as P,
   Se as Q,
   xe as R,
-  Ya as S,
+  se as S,
   Te as T,
-  we as U,
-  Ae as V,
+  Ae as U,
+  we as V,
   Ee as W,
   Pe as X,
-  De as Y,
-  qe as Z,
+  qe as Y,
+  De as Z,
   Ne as _,
-  jr as a,
-  Xt as a$,
-  Ge as a0,
-  Ce as a1,
-  Me as a2,
-  je as a3,
-  Fe as a4,
+  Ur as a,
+  Ut as a$,
+  Fe as a0,
+  Ge as a1,
+  Ce as a2,
+  Me as a3,
+  je as a4,
   Ve as a5,
   Le as a6,
-  Be as a7,
-  Ue as a8,
-  Xe as a9,
+  $e as a7,
+  Be as a8,
+  Ue as a9,
   gt as aA,
   ft as aB,
   ht as aC,
@@ -475,24 +490,24 @@ export {
   St as aH,
   xt as aI,
   Tt as aJ,
-  wt as aK,
-  At as aL,
+  At as aK,
+  wt as aL,
   Et as aM,
   Pt as aN,
-  Dt as aO,
-  qt as aP,
+  qt as aO,
+  Dt as aP,
   Nt as aQ,
   Ht as aR,
-  Gt as aS,
-  Ct as aT,
-  Mt as aU,
-  jt as aV,
-  Ft as aW,
+  Ft as aS,
+  Gt as aT,
+  Ct as aU,
+  Mt as aV,
+  jt as aW,
   Vt as aX,
   Lt as aY,
-  Bt as aZ,
-  Ut as a_,
-  $e as aa,
+  $t as aZ,
+  Bt as a_,
+  Xe as aa,
   _e as ab,
   Oe as ac,
   We as ad,
@@ -518,9 +533,9 @@ export {
   bt as ax,
   yt as ay,
   kt as az,
-  Fr as b,
-  Os as b$,
-  $t as b0,
+  _r as b,
+  Js as b$,
+  Xt as b0,
   _t as b1,
   Ot as b2,
   Wt as b3,
@@ -528,148 +543,154 @@ export {
   Jt as b5,
   Qt as b6,
   Yt as b7,
-  yr as b8,
-  Zt as b9,
-  Ss as bA,
-  xs as bB,
-  Ts as bC,
-  ws as bD,
-  As as bE,
-  Es as bF,
-  Ps as bG,
+  Zt as b8,
+  as as b9,
+  As as bA,
+  ws as bB,
+  Es as bC,
+  w as bD,
+  E as bE,
+  Ps as bF,
+  qs as bG,
   Ds as bH,
-  qs as bI,
-  Ns as bJ,
-  Hs as bK,
+  Ns as bI,
+  Hs as bJ,
+  Fs as bK,
   Gs as bL,
   Cs as bM,
   Ms as bN,
-  P as bO,
-  D as bP,
-  js as bQ,
-  Fs as bR,
-  Vs as bS,
-  Ls as bT,
-  Bs as bU,
+  js as bO,
+  Vs as bP,
+  Ls as bQ,
+  $s as bR,
+  Bs as bS,
+  P as bT,
+  q as bU,
   Us as bV,
   Xs as bW,
-  $s as bX,
-  _s as bY,
-  q as bZ,
-  N as b_,
-  as as ba,
-  es as bb,
-  ts as bc,
-  ss as bd,
-  rs as be,
-  ms as bf,
-  is as bg,
-  os as bh,
-  ns as bi,
-  ls as bj,
-  ds as bk,
-  cs as bl,
-  ps as bm,
-  us as bn,
-  bs as bo,
-  ys as bp,
-  ks as bq,
-  gs as br,
-  fs as bs,
-  hs as bt,
-  vs as bu,
-  Rs as bv,
-  Is as bw,
-  zs as bx,
-  A as by,
-  E as bz,
-  n as c,
-  sm as c$,
-  Ws as c0,
-  Ks as c1,
-  Js as c2,
-  Qs as c3,
-  Ys as c4,
-  Zs as c5,
-  ar as c6,
-  er as c7,
-  tr as c8,
-  sr as c9,
-  Sr as cA,
-  xr as cB,
-  Tr as cC,
+  _s as bX,
+  Os as bY,
+  Ws as bZ,
+  Ks as b_,
+  es as ba,
+  ts as bb,
+  rs as bc,
+  Rr as bd,
+  ms as be,
+  is as bf,
+  os as bg,
+  ns as bh,
+  ls as bi,
+  ds as bj,
+  cs as bk,
+  ps as bl,
+  us as bm,
+  bs as bn,
+  ys as bo,
+  ks as bp,
+  gs as bq,
+  fs as br,
+  hs as bs,
+  vs as bt,
+  Rs as bu,
+  Is as bv,
+  zs as bw,
+  Ss as bx,
+  xs as by,
+  Ts as bz,
+  Or as c,
+  im as c$,
+  Qs as c0,
+  Ys as c1,
+  D as c2,
+  N as c3,
+  Zs as c4,
+  ar as c5,
+  er as c6,
+  tr as c7,
+  sr as c8,
+  rr as c9,
+  xr as cA,
+  Tr as cB,
+  Ar as cC,
   wr as cD,
-  Ar as cE,
-  b as cF,
-  Pr as cG,
+  Er as cE,
+  Pr as cF,
+  qr as cG,
   Dr as cH,
-  qr as cI,
-  y as cJ,
-  Nr as cK,
-  Hr as cL,
-  Gr as cM,
-  Ga as cN,
-  Ca as cO,
-  Ma as cP,
-  ja as cQ,
-  Fa as cR,
-  Va as cS,
-  La as cT,
-  Qr as cU,
-  Yr as cV,
-  Zr as cW,
-  am as cX,
-  em as cY,
-  tm as cZ,
-  Ka as c_,
-  H as ca,
-  G as cb,
-  rr as cc,
-  mr as cd,
-  ir as ce,
-  or as cf,
-  nr as cg,
-  lr as ch,
-  dr as ci,
-  C as cj,
-  M as ck,
-  cr as cl,
-  pr as cm,
-  ur as cn,
-  br as co,
-  j as cp,
-  F as cq,
-  Er as cr,
-  kr as cs,
-  gr as ct,
-  fr as cu,
-  hr as cv,
-  vr as cw,
-  Rr as cx,
-  Ir as cy,
-  zr as cz,
-  Vr as d,
-  rm as d0,
-  Lr as e,
-  Br as f,
-  Ur as g,
-  Xr as h,
-  Mr as i,
-  $r as j,
-  _r as k,
-  Or as l,
-  Wr as m,
-  Kr as n,
-  Jr as o,
-  Za as p,
-  ae as q,
-  Cr as r,
-  ee as s,
-  se as t,
-  re as u,
-  me as v,
-  oe as w,
-  ne as x,
-  le as y,
-  de as z
+  Nr as cI,
+  Hr as cJ,
+  aa as cK,
+  ea as cL,
+  Z as cM,
+  b as cN,
+  Gr as cO,
+  sa as cP,
+  Cr as cQ,
+  Mr as cR,
+  jr as cS,
+  Va as cT,
+  La as cU,
+  $a as cV,
+  Ba as cW,
+  Ua as cX,
+  Xa as cY,
+  _a as cZ,
+  mm as c_,
+  mr as ca,
+  ir as cb,
+  or as cc,
+  nr as cd,
+  lr as ce,
+  H as cf,
+  F as cg,
+  dr as ch,
+  cr as ci,
+  pr as cj,
+  ur as ck,
+  br as cl,
+  yr as cm,
+  kr as cn,
+  G as co,
+  C as cp,
+  gr as cq,
+  fr as cr,
+  hr as cs,
+  vr as ct,
+  M as cu,
+  j as cv,
+  Fr as cw,
+  Ir as cx,
+  zr as cy,
+  Sr as cz,
+  l as d,
+  om as d0,
+  nm as d1,
+  lm as d2,
+  dm as d3,
+  ae as d4,
+  cm as d5,
+  pm as d6,
+  Wr as e,
+  $r as f,
+  Kr as g,
+  Jr as h,
+  Xr as i,
+  Qr as j,
+  Yr as k,
+  Zr as l,
+  Lr as m,
+  am as n,
+  em as o,
+  tm as p,
+  sm as q,
+  rm as r,
+  Vr as s,
+  Br as t,
+  ss as u,
+  re as v,
+  me as w,
+  ie as x,
+  ne as y,
+  le as z
 };

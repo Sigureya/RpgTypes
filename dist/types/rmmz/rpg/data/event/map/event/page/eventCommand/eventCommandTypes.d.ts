@@ -244,7 +244,7 @@ export interface Command_ChangeEnemyMP extends EventCommandLike<332> {
     parameters: Param_ChangeEnemyParameters;
 }
 export interface Command_PluginCommandMV extends EventCommandLike<356> {
-    parameters: [command: string, args: string];
+    parameters: [commandAndArgs: string];
 }
 export interface Command_PluginCommandMZ extends EventCommandLike<357> {
     parameters: [
