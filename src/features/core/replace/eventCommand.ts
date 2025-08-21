@@ -20,7 +20,7 @@ import {
   SHOW_MESSAGE,
   SHOW_MESSAGE_BODY,
 } from "@RpgTypes/rmmz";
-import { replaceXXXX } from "./utils";
+import { replaceTextByMap } from "./utils";
 
 export const replaceEventCommandTexts = (
   list: ReadonlyArray<EventCommand>,
@@ -53,7 +53,7 @@ export const replaceTextForCommand2 = (
     | Command_CommentBody,
   map: ReadonlyMap<string, string>
 ) => {
-  const newText: string = replaceXXXX(command.parameters[0], map);
+  const newText: string = replaceTextByMap(command.parameters[0], map);
   return {
     code: command.code,
     indent: command.indent,
@@ -65,7 +65,7 @@ export const replaceTextForCommandShowMessage = (
   command: Command_ShowMessageHeader,
   map: ReadonlyMap<string, string>
 ): Command_ShowMessageHeader => {
-  const newText = replaceXXXX(command.parameters[4], map);
+  const newText = replaceTextByMap(command.parameters[4], map);
   return makeCommandShowMessage(
     {
       facename: command.parameters[0],
@@ -87,7 +87,7 @@ export const replaceTextForCommandActor = <
   command: Command,
   map: ReadonlyMap<string, string>
 ) => {
-  const newName = replaceXXXX(command.parameters[1], map);
+  const newName = replaceTextByMap(command.parameters[1], map);
   return {
     code: command.code,
     indent: command.indent,
@@ -103,7 +103,7 @@ export const replaceTextForCommandShowChoices = (
   map: ReadonlyMap<string, string>
 ): Command_ShowChoices => {
   const newChoices: string[] = command.parameters[0].map((choice) =>
-    replaceXXXX(choice, map)
+    replaceTextByMap(choice, map)
   );
   return {
     code: command.code,

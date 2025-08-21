@@ -1,4 +1,4 @@
-export const replaceXXXX = (
+export const replaceTextByMap = (
   text: string,
   map: ReadonlyMap<string, string>
 ): string => {

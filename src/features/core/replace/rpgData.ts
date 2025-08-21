@@ -10,14 +10,14 @@ import type {
   NoteReadResult,
 } from "@RpgTypes/rmmz";
 import { replaceNote } from "@RpgTypes/rmmz";
-import { replaceXXXX } from "./utils";
+import { replaceTextByMap } from "./utils";
 
 const replaceNote2 = (
   data: { note: string },
   dic: ReadonlyMap<string, string>
 ): string => {
   return replaceNote(data.note, (item: NoteReadResult): string =>
-    replaceXXXX(item.value, dic)
+    replaceTextByMap(item.value, dic)
   );
 };
 
@@ -26,9 +26,9 @@ export const replaceActorText = (
   map: ReadonlyMap<string, string>
 ) => {
   const note: string = replaceNote2(actor, map);
-  const name = replaceXXXX(actor.name, map);
-  const nickname = replaceXXXX(actor.nickname, map);
-  const profile = replaceXXXX(actor.profile, map);
+  const name = replaceTextByMap(actor.name, map);
+  const nickname = replaceTextByMap(actor.nickname, map);
+  const profile = replaceTextByMap(actor.profile, map);
 
   return {
     ...actor,
@@ -44,7 +44,7 @@ export const replaceEnemyText = (
   map: ReadonlyMap<string, string>
 ) => {
   const note: string = replaceNote2(enemy, map);
-  const name: string = replaceXXXX(enemy.name, map);
+  const name: string = replaceTextByMap(enemy.name, map);
   return {
     ...enemy,
     name: name,
@@ -57,7 +57,7 @@ export const replaceClassText = (
   map: ReadonlyMap<string, string>
 ) => {
   const note: string = replaceNote2(data, map);
-  const name: string = replaceXXXX(data.name, map);
+  const name: string = replaceTextByMap(data.name, map);
   return {
     ...data,
     name: name,
@@ -70,10 +70,10 @@ export const replaceSkillText = (
   map: ReadonlyMap<string, string>
 ) => {
   const note: string = replaceNote2(skill, map);
-  const name: string = replaceXXXX(skill.name, map);
-  const description: string = replaceXXXX(skill.description, map);
-  const message1: string = replaceXXXX(skill.message1, map);
-  const message2: string = replaceXXXX(skill.message2, map);
+  const name: string = replaceTextByMap(skill.name, map);
+  const description: string = replaceTextByMap(skill.description, map);
+  const message1: string = replaceTextByMap(skill.message1, map);
+  const message2: string = replaceTextByMap(skill.message2, map);
 
   return {
     ...skill,
@@ -90,8 +90,8 @@ export const replaceItemText = <T extends Data_Item | Data_Weapon | Data_Armor>(
   map: ReadonlyMap<string, string>
 ) => {
   const note: string = replaceNote2(item, map);
-  const name: string = replaceXXXX(item.name, map);
-  const description: string = replaceXXXX(item.description, map);
+  const name: string = replaceTextByMap(item.name, map);
+  const description: string = replaceTextByMap(item.description, map);
   return {
     ...item,
     name: name,
@@ -105,11 +105,11 @@ export const replaceStateText = (
   map: ReadonlyMap<string, string>
 ) => {
   const note: string = replaceNote2(state, map);
-  const name: string = replaceXXXX(state.name, map);
-  const message1: string = replaceXXXX(state.message1, map);
-  const message2: string = replaceXXXX(state.message2, map);
-  const message3: string = replaceXXXX(state.message3, map);
-  const message4: string = replaceXXXX(state.message4, map);
+  const name: string = replaceTextByMap(state.name, map);
+  const message1: string = replaceTextByMap(state.message1, map);
+  const message2: string = replaceTextByMap(state.message2, map);
+  const message3: string = replaceTextByMap(state.message3, map);
+  const message4: string = replaceTextByMap(state.message4, map);
 
   return {
     ...state,
