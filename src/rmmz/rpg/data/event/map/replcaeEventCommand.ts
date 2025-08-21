@@ -1,9 +1,5 @@
-import type {
-  Data_Map,
-  EventCommand,
-  MapEvent,
-  MapEventPage,
-} from "@RpgTypes/rmmz";
+import type { EventCommand, MapEvent, MapEventPage } from "./event";
+import type { Data_Map } from "./map";
 
 export const repleaceEventCommands = (
   map: Data_Map,
