@@ -4,6 +4,5 @@ export {
   replaceEnemyText,
   replaceItemText,
   replaceSkillText,
-} from "./rpgData";
-export { replaceMapTexts } from "./event";
-export { replaceTextByMap } from "./utils";
+  replaceStateText,
+} from "./core/replace/text/rpgData";
