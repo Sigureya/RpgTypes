@@ -5,6 +5,7 @@ import type {
   MapEventContainer,
 } from "@RpgTypes/rmmz/rpg";
 import type { EventCommandContainer } from "./map/";
+import type { ReplaceableEventPage } from "./types";
 
 type EventCommandReplaceFunc = (
   list: ReadonlyArray<EventCommand>
@@ -21,12 +22,7 @@ export const replaceEventCommands = <T extends EventCommandContainer>(
   };
 };
 
-export const replacePages = <
-  Pages extends {
-    id: number;
-    pages: { readonly list: ReadonlyArray<EventCommand> }[];
-  }
->(
+export const replacePages = <Pages extends ReplaceableEventPage>(
   container: Pages,
   fn: EventCommandReplaceFunc
 ): Pages => {
