@@ -1,4 +1,4 @@
-import { Data_Actor, Data_Armor, Data_Class, Data_Enemy, Data_Item, Data_Skill, Data_State, Data_Weapon } from '../../../rmmz';
+import { Data_Actor, Data_Armor, Data_Class, Data_Enemy, Data_Item, Data_Skill, Data_State, Data_Weapon } from '../../../../rmmz';
 export declare const replaceActorText: (actor: Data_Actor, map: ReadonlyMap<string, string>) => {
     name: string;
     nickname: string;
@@ -14,7 +14,7 @@ export declare const replaceActorText: (actor: Data_Actor, map: ReadonlyMap<stri
     equips: number[];
     faceIndex: number;
     faceName: string;
-    traits: import('../../../rmmz').Trait[];
+    traits: import('../../../../rmmz').Trait[];
 };
 export declare const replaceEnemyText: (enemy: Data_Enemy, map: ReadonlyMap<string, string>) => {
     name: string;
@@ -24,19 +24,19 @@ export declare const replaceEnemyText: (enemy: Data_Enemy, map: ReadonlyMap<stri
     battlerHue: number;
     exp: number;
     gold: number;
-    params: import('../../../rmmz').ParamArray;
-    actions: import('../../../rmmz').Enemy_Action[];
-    traits: import('../../../rmmz').Trait[];
-    dropItems: import('../../../rmmz').DropItem[];
+    params: import('../../../../rmmz').ParamArray;
+    actions: import('../../../../rmmz').Enemy_Action[];
+    traits: import('../../../../rmmz').Trait[];
+    dropItems: import('../../../../rmmz').DropItem[];
 };
 export declare const replaceClassText: (data: Data_Class, map: ReadonlyMap<string, string>) => {
     name: string;
     note: string;
     id: number;
     expParams: number[];
-    params: import('../../../rmmz').ParamArray;
-    learnings: import('../../../rmmz').Learning[];
-    traits: import('../../../rmmz').Trait[];
+    params: import('../../../../rmmz').ParamArray;
+    learnings: import('../../../../rmmz').Learning[];
+    traits: import('../../../../rmmz').Trait[];
 };
 export declare const replaceSkillText: (skill: Data_Skill, map: ReadonlyMap<string, string>) => {
     name: string;
@@ -60,8 +60,8 @@ export declare const replaceSkillText: (skill: Data_Skill, map: ReadonlyMap<stri
     speed: number;
     successRate: number;
     tpGain: number;
-    effects: import('../../../rmmz').ItemEffect[];
-    damage: import('../../../rmmz').Damage;
+    effects: import('../../../../rmmz').ItemEffect[];
+    damage: import('../../../../rmmz').Damage;
 };
 export declare const replaceItemText: <T extends Data_Item | Data_Weapon | Data_Armor>(item: T, map: ReadonlyMap<string, string>) => T & {
     name: string;
@@ -92,5 +92,5 @@ export declare const replaceStateText: (state: Data_State, map: ReadonlyMap<stri
     maxTurns: number;
     chanceByDamage: number;
     stepsToRemove: number;
-    traits: import('../../../rmmz').Trait[];
+    traits: import('../../../../rmmz').Trait[];
 };
