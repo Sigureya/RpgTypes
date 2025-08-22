@@ -2,9 +2,9 @@ import { describe, expect, test } from "vitest";
 import type {
   Data_CommonEvent,
   EventCommand,
-  MapEventContainer,
   ExtractCommandByParam,
-} from "@sigureya/rpgtypes";
+  MapEventContainer,
+} from "@RpgTypes/rmmz";
 import {
   replaceEventCommands,
   replacePages,
