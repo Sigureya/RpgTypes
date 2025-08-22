@@ -11,9 +11,18 @@ type Code =
   | typeof CHANGE_ARMORS
   | typeof CONDITIONAL_BRANCH;
 
+export type ItemKind = "item" | "weapon" | "armor";
+
 export interface ItemCommandParameter {
-  kind: "item" | "weapon" | "armor";
+  itemKind: ItemKind;
   dataId: number;
   code: Code;
   paramIndex: number;
+  commandKind: string;
+  operation: string;
+}
+
+export interface ItemCommandTerms {
+  gainItem(itemKind: "item" | "weapon" | "armor"): string;
+  loseItem(itemKind: "item" | "weapon" | "armor"): string;
 }
