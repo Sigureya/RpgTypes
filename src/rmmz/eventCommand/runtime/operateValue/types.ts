@@ -1,6 +1,6 @@
-export interface OperateValueHandlers<T, Result> {
-  directValue(operand: number): T;
-  variableValue(operand: number): T;
-  negativeValue(value: T): Result;
-  postiveValue(value: T): Result;
+export interface OperateValueHandlers<Result, Value> {
+  directValue(operand: number): Value;
+  variableValue(operand: number): Value;
+  negativeValue(value: Value): Result;
+  postiveValue(value: Value): Result;
 }
