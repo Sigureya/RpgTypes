@@ -5,12 +5,14 @@ import type {
   ExtractCommandByParam,
   MapEventContainer,
 } from "@RpgTypes/rmmz";
+import type { CommandContainer } from "./map";
 import {
   replaceEventCommands,
   replacePages,
   replaceMapEvents,
   replaceCommonEvents,
 } from "./replaceCommands";
+import type { ReplaceableEventPage } from "./types";
 
 // Helper function to create a mock EventCommand
 const createMockCommand = (
@@ -30,17 +32,23 @@ const mockTransform = (commands: ReadonlyArray<EventCommand>): EventCommand[] =>
 
 describe("replaceEventCommands", () => {
   test("should replace commands using the provided function", () => {
-    const event = { list: [createMockCommand(221), createMockCommand(217)] };
+    const event: CommandContainer<EventCommand> = {
+      list: [createMockCommand(221), createMockCommand(217)],
+    };
     const result = replaceEventCommands(event, mockTransform);
 
-    expect(result.list).toEqual([
+    const expected: EventCommand[] = [
       { code: 221, indent: 8, parameters: [] },
       { code: 217, indent: 8, parameters: [] },
-    ]);
+    ];
+
+    expect(result.list).toEqual(expected);
   });
 
   test("should return a new object with modified list", () => {
-    const event = { list: [createMockCommand(251)] };
+    const event: CommandContainer<EventCommand> = {
+      list: [createMockCommand(251)],
+    };
     const result = replaceEventCommands(event, mockTransform);
 
     expect(result).not.toBe(event);
@@ -50,19 +58,23 @@ describe("replaceEventCommands", () => {
 
 describe("replacePages", () => {
   test("should replace commands across multiple pages", () => {
-    const container = {
+    const container: ReplaceableEventPage = {
       id: 0,
       pages: [
         { list: [createMockCommand(113)] },
         { list: [createMockCommand(115)] },
       ],
     };
-    const result = replacePages(container, mockTransform);
+    const result: ReplaceableEventPage = replacePages(container, mockTransform);
+    const expected: ReplaceableEventPage = {
+      id: 0,
+      pages: [
+        { list: [{ code: 113, indent: 8, parameters: [] }] },
+        { list: [{ code: 115, indent: 8, parameters: [] }] },
+      ],
+    };
 
-    expect(result.pages).toEqual([
-      { list: [{ code: 113, indent: 8, parameters: [] }] },
-      { list: [{ code: 115, indent: 8, parameters: [] }] },
-    ]);
+    expect(result).toEqual(expected);
   });
 });
 
@@ -77,11 +89,13 @@ describe("replaceMapEvents", () => {
     };
     const result = replaceMapEvents(map, mockTransform);
 
-    expect(result.events).toEqual([
+    const expected = [
       { id: 2, pages: [{ list: [{ code: 353, indent: 8, parameters: [] }] }] },
       null,
       { id: 5, pages: [{ list: [{ code: 109, indent: 8, parameters: [] }] }] },
-    ]);
+    ];
+
+    expect(result.events).toEqual(expected);
   });
 
   test("should preserve null values in event list", () => {
@@ -114,29 +128,24 @@ describe("replaceCommonEvents", () => {
       },
     ];
     const result = replaceCommonEvents(events, mockTransform);
-
-    expect(result).toEqual([
+    const expected: Data_CommonEvent[] = [
       {
         id: 1,
         list: [{ code: 221, indent: 8, parameters: [] }],
         name: "to-kai",
         trigger: 0,
         switchId: 0,
-      } satisfies Data_CommonEvent,
+      },
       {
         id: 2,
-        list: [
-          {
-            code: 217,
-            indent: 8,
-            parameters: [],
-          },
-        ],
+        list: [{ code: 217, indent: 8, parameters: [] }],
         name: "yokosuka",
         trigger: 0,
         switchId: 0,
-      } satisfies Data_CommonEvent,
-    ]);
+      },
+    ];
+
+    expect(result).toEqual(expected);
   });
 });
 // Troopはデータが複雑なので後回しにする
