@@ -18,3 +18,10 @@ export interface RpnCommand_Value {
   rpn: "value";
   name: string;
 }
+
+export type RpnCommand =
+  | RpnCommand_Add
+  | RpnCommand_Subtract
+  | RpnCommand_Multiply
+  | RpnCommand_Divide
+  | RpnCommand_Value;
