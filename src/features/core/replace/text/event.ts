@@ -1,4 +1,10 @@
-import type { Data_Map, EventCommand } from "@RpgTypes/rmmz";
+import type {
+  BattleEventPage,
+  Data_Map,
+  Data_Troop,
+  EventCommand,
+  Data_CommonEvent,
+} from "@RpgTypes/rmmz";
 import { replaceNote, repleaceEventCommands } from "@RpgTypes/rmmz";
 import { replaceEventCommandTexts } from "./eventCommand";
 import { replaceTextByMap } from "./utils";
@@ -23,5 +29,32 @@ export const replaceMapTexts = (
   return {
     ...map,
     ...partialMap,
+  };
+};
+
+export const replaceTroopTexts = (
+  troop: Data_Troop,
+  dic: ReadonlyMap<string, string>
+): Data_Troop => {
+  const pages = troop.pages.map(
+    (page): BattleEventPage => ({
+      list: replaceEventCommandTexts(page.list, dic),
+      conditions: page.conditions,
+      span: page.span,
+    })
+  );
+  return {
+    ...troop,
+    pages: pages,
+  };
+};
+
+export const replaceCommonEventTexts = (
+  commonEvent: Data_CommonEvent,
+  dic: ReadonlyMap<string, string>
+): Data_CommonEvent => {
+  return {
+    ...commonEvent,
+    list: replaceEventCommandTexts(commonEvent.list, dic),
   };
 };
