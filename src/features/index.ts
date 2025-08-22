@@ -1,3 +1,3 @@
-export * from "./core/replace";
+export * from "./core/replace/text";
 export * from "./extractText";
 export * from "./format/trait/formatTraits";

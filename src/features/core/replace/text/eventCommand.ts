@@ -8,6 +8,7 @@ import type {
   Command_CommentHeader,
   EventCommand,
   Command_CommentBody,
+  Command_ScrollTextBody,
 } from "@RpgTypes/rmmz";
 import {
   CHANGE_NAME,
@@ -19,6 +20,7 @@ import {
   SHOW_CHOICES,
   SHOW_MESSAGE,
   SHOW_MESSAGE_BODY,
+  SHOW_SCROLLING_TEXT_BODY,
 } from "@RpgTypes/rmmz";
 import { replaceTextByMap } from "./utils";
 
@@ -35,6 +37,7 @@ export const replaceEventCommandTexts = (
       case SHOW_MESSAGE_BODY:
       case COMMENT_HEAD:
       case COMMENT_BODY:
+      case SHOW_SCROLLING_TEXT_BODY:
         return replaceTextForCommand2(command, map);
       case CHANGE_NAME:
       case CHANGE_NICKNAME:
@@ -50,7 +53,8 @@ export const replaceTextForCommand2 = (
   command:
     | Command_ShowMessageBody
     | Command_CommentHeader
-    | Command_CommentBody,
+    | Command_CommentBody
+    | Command_ScrollTextBody,
   map: ReadonlyMap<string, string>
 ) => {
   const newText: string = replaceTextByMap(command.parameters[0], map);
