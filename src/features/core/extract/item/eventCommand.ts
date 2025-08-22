@@ -4,6 +4,12 @@ import type {
   Command_ChangeWeapons,
 } from "@RpgTypes/rmmz";
 import { CHANGE_ARMORS, CHANGE_ITEMS, CHANGE_WEAPONS } from "@RpgTypes/rmmz";
+import type {
+  Command_ChangeArmors2,
+  Command_ChangeItems2,
+  Command_ChangeWeapons2,
+} from "@RpgTypes/rmmz/eventCommand/commands/item/types";
+import { operateValueChangeGoods } from "@RpgTypes/rmmz/eventCommand/operateValue";
 import type { ItemCommandParameter, ItemCommandTerms, ItemKind } from "./types";
 
 const operation = (
@@ -18,23 +24,20 @@ const TABLE = {
   [CHANGE_ARMORS]: "armor",
 } as const;
 
-const xxxx = (
-  command: Command_ChangeWeapons | Command_ChangeArmors | Command_ChangeItems,
-  terms: ItemCommandTerms
-) => {
-  //    if(command.parameters[0] ===OPErati)
-};
+const GAIN_ITEM_V = 0 as const;
 
-const changeWeapon = (
-  command: Command_ChangeWeapons,
-  terms: ItemCommandTerms
+const xxx = (
+  command: Command_ChangeArmors2 | Command_ChangeItems2 | Command_ChangeWeapons2
 ) => {
-  return {
-    itemKind: "weapon",
-    dataId: command.parameters[1],
-    code: command.code,
-    paramIndex: 0,
-    commandKind: "changeWeapons",
-    operation: operation(value, "weapon", terms),
-  } as ItemCommandParameter;
+  return operateValueChangeGoods(command, {
+    directValue: (operand) => ({ operand: "direct", value: operand }),
+    variableValue: (operand) => ({ operand: "direct", value: operand }),
+    negativeValue: (value) => ({
+      kind: TABLE[command.code],
+      dataId: command.parameters[1],
+      value: value.value,
+      operation: "loseItem",
+    }),
+    postiveValue: (value) => ({}),
+  });
 };

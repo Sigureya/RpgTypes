@@ -23,6 +23,6 @@ export interface ItemCommandParameter {
 }
 
 export interface ItemCommandTerms {
-  gainItem(itemKind: "item" | "weapon" | "armor"): string;
-  loseItem(itemKind: "item" | "weapon" | "armor"): string;
+  gainItem(itemKind: ItemKind): string;
+  loseItem(itemKind: ItemKind): string;
 }
