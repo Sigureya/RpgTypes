@@ -1,12 +1,15 @@
 import { describe, test, expect } from "vitest";
-import { calculateRPN } from "./reversePolish";
+import { calculateRPN, buildExpr } from "./reversePolish";
 import type { RpnCommand } from "./types";
 
 interface TestCase {
   caseName: string;
   variables: Record<string, number>;
   commands: ReadonlyArray<RpnCommand>;
-  expected: { value: number };
+  expected: {
+    value: number;
+    expr: string;
+  };
 }
 
 const runTestCase = ({ caseName, commands, expected, variables }: TestCase) => {
@@ -14,6 +17,10 @@ const runTestCase = ({ caseName, commands, expected, variables }: TestCase) => {
     test(`calculates RPN correctly`, () => {
       const result: number = calculateRPN(commands, variables);
       expect(result).toBe(expected.value);
+    });
+    test(`builds expression correctly`, () => {
+      const expr: string = buildExpr(commands);
+      expect(expr).toBe(expected.expr);
     });
   });
 };
@@ -25,7 +32,10 @@ const testCase: TestCase[] = [
       a: 2,
       b: 3,
     },
-    expected: { value: 5 },
+    expected: {
+      value: 5,
+      expr: "a + b",
+    },
     commands: [
       { rpn: "value", name: "a" },
       { rpn: "value", name: "b" },
@@ -38,7 +48,10 @@ const testCase: TestCase[] = [
       a: 5,
       b: 3,
     },
-    expected: { value: 2 },
+    expected: {
+      value: 2,
+      expr: "a - b",
+    },
     commands: [
       { rpn: "value", name: "a" },
       { rpn: "value", name: "b" },
@@ -52,7 +65,10 @@ const testCase: TestCase[] = [
       a: 2,
       b: 3,
     },
-    expected: { value: 6 },
+    expected: {
+      value: 6,
+      expr: "a * b",
+    },
     commands: [
       { rpn: "value", name: "a" },
       { rpn: "value", name: "b" },
