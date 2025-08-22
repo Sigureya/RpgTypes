@@ -17,9 +17,9 @@ export interface ItemCommandParameter {
   itemKind: ItemKind;
   dataId: number;
   code: Code;
-  paramIndex: number;
   commandKind: string;
   operation: string;
+  value: number;
 }
 
 export interface ItemCommandTerms {
