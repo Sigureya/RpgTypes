@@ -25,7 +25,7 @@ export interface Command_ChangeWeapons2
   ];
 }
 
-export interface Command_ChangeArmors
+export interface Command_ChangeArmors2
   extends EventCommandLike2<typeof CHANGE_ARMORS> {
   parameters: [
     operation: ValueOf<Operation_PlusMinus>,
