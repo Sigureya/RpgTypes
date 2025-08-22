@@ -80,22 +80,33 @@ describe("replacePages", () => {
 
 describe("replaceMapEvents", () => {
   test("should replace commands for all map events", () => {
-    const map = {
+    const map: MapEventContainer<EventCommand> = {
       events: [
         { id: 2, pages: [{ list: [createMockCommand(353)] }] },
         null,
         { id: 5, pages: [{ list: [createMockCommand(109)] }] },
       ],
     };
-    const result = replaceMapEvents(map, mockTransform);
+    const result: MapEventContainer<EventCommand> = replaceMapEvents(
+      map,
+      mockTransform
+    );
 
-    const expected = [
-      { id: 2, pages: [{ list: [{ code: 353, indent: 8, parameters: [] }] }] },
-      null,
-      { id: 5, pages: [{ list: [{ code: 109, indent: 8, parameters: [] }] }] },
-    ];
+    const expected: MapEventContainer<EventCommand> = {
+      events: [
+        {
+          id: 2,
+          pages: [{ list: [{ code: 353, indent: 8, parameters: [] }] }],
+        },
+        null,
+        {
+          id: 5,
+          pages: [{ list: [{ code: 109, indent: 8, parameters: [] }] }],
+        },
+      ],
+    };
 
-    expect(result.events).toEqual(expected);
+    expect(result).toEqual(expected);
   });
 
   test("should preserve null values in event list", () => {
