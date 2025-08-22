@@ -4,11 +4,11 @@ export const OPERAND_DIRECT = 0 as const;
 
 export const OPERATION_POSITIVE = 0 as const;
 
-export const operateValue = <T, Result>(
+export const operateValue = <Result, T>(
   operation: number,
   operandType: number,
   operand: number,
-  handlers: OperateValueHandlers<T, Result>
+  handlers: OperateValueHandlers<Result, T>
 ): Result => {
   const value: T =
     operandType === OPERAND_DIRECT
