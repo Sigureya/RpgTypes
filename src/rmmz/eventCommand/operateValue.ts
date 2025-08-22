@@ -8,29 +8,30 @@ import type { EventCommandLike2 } from "./frame";
 import { operateValue } from "./runtime/operateValue/operateValue";
 import type { OperateValueHandlers } from "./runtime/operateValue/types";
 
-export const operateValueChangeGoods = <T>(
+export const operateValueChangeGoods = <T, V>(
   command:
     | Command_ChangeArmors2
     | Command_ChangeItems2
     | Command_ChangeWeapons2,
-  handlers: OperateValueHandlers<T, number>
+  handlers: OperateValueHandlers<T, V>
 ): T => {
   return basicOperate(command, handlers);
 };
 
-export const operateValueChangeGold = <T>(
+export const operateValueChangeGold = <T, V>(
   command: Command_ChangeGold2,
-  handlers: OperateValueHandlers<T, number>
+  handlers: OperateValueHandlers<T, V>
 ): T => {
   return basicOperate(command, handlers);
 };
 
 const basicOperate = <
   Command extends EventCommandLike2<number, [number, number, number]>,
-  Result
+  Result,
+  Value
 >(
   command: Command,
-  handlers: OperateValueHandlers<Result, number>
+  handlers: OperateValueHandlers<Result, Value>
 ): Result => {
   const operation = command.parameters[0];
   const operandType = command.parameters[1];
