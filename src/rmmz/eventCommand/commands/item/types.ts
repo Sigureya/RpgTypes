@@ -9,27 +9,51 @@ import type {
 
 export interface Command_ChangeItems2
   extends EventCommandLike2<typeof CHANGE_ITEMS> {
-  parameters: [
-    operation: ValueOf<Operation_PlusMinus>,
-    itemId: number,
-    value: number
-  ];
+  parameters: ParamArray_ChangeItems2;
 }
 
 export interface Command_ChangeWeapons2
   extends EventCommandLike2<typeof CHANGE_WEAPONS> {
-  parameters: [
-    operation: ValueOf<Operation_PlusMinus>,
-    weaponId: number,
-    value: number
-  ];
+  parameters: ParamArray_ChangeWeapons2;
 }
 
 export interface Command_ChangeArmors2
   extends EventCommandLike2<typeof CHANGE_ARMORS> {
-  parameters: [
-    operation: ValueOf<Operation_PlusMinus>,
-    armorId: number,
-    value: number
-  ];
+  parameters: ParamArray_ChangeArmors2;
 }
+
+export interface ParamObject_ChangeItems2 {
+  operation: ValueOf<Operation_PlusMinus>;
+  itemId: number;
+  value: number;
+}
+
+export interface ParamObject_ChangeWeapons2 {
+  operation: ValueOf<Operation_PlusMinus>;
+  weaponId: number;
+  value: number;
+}
+
+export interface ParamObject_ChangeArmors2 {
+  operation: ValueOf<Operation_PlusMinus>;
+  armorId: number;
+  value: number;
+}
+
+export type ParamArray_ChangeItems2 = [
+  operation: ValueOf<Operation_PlusMinus>,
+  itemId: number,
+  value: number
+];
+
+export type ParamArray_ChangeWeapons2 = [
+  operation: ValueOf<Operation_PlusMinus>,
+  weaponId: number,
+  value: number
+];
+
+export type ParamArray_ChangeArmors2 = [
+  operation: ValueOf<Operation_PlusMinus>,
+  armorId: number,
+  value: number
+];
