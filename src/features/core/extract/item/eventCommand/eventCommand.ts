@@ -16,6 +16,8 @@ import type {
   ItemCommandTerms2,
 } from "./types";
 
+const e2 = () => {};
+
 const KIND_TABKE = {
   [CHANGE_WEAPONS]: "weapon",
   [CHANGE_ARMORS]: "armor",
