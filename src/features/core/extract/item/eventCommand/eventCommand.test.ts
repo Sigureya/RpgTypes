@@ -12,7 +12,7 @@ import {
   makeCommandLoseArmorV,
   makeCommandLoseItem,
 } from "@RpgTypes/rmmz/eventCommand/commands/item";
-import { extractItemChangeData } from "./eventCommand";
+import { extractItemChangeData, extractItemCommands } from "./eventCommand";
 import type {
   ItemCommandParameterDirect,
   ItemCommandParameterVariable,
@@ -76,7 +76,7 @@ const testCase: TestCase[] = [
       dataId: 123,
       code: CHANGE_ARMORS,
       commandNameMZ: commandNameTable[CHANGE_ARMORS],
-      operation: TERMS.gain,
+      operation: TERMS.lose,
       value: 5,
       direct: true,
       includesEquip: false,
@@ -118,13 +118,23 @@ const testCase: TestCase[] = [
 
 describe("extractItemChangeData", () => {
   testCase.forEach(({ caseName, command, expected }) => {
-    test(caseName, () => {
-      const result = extractItemChangeData(
-        command,
-        TERMS,
-        (code) => commandNameTable[code]
-      );
-      expect(result).toEqual(expected);
+    describe(caseName, () => {
+      test("extractItemChangeData", () => {
+        const result = extractItemChangeData(
+          command,
+          TERMS,
+          (code) => commandNameTable[code]
+        );
+        expect(result).toEqual(expected);
+      });
+      test("extractItemCommands", () => {
+        const result = extractItemCommands(
+          [command],
+          TERMS,
+          (code) => commandNameTable[code]
+        );
+        expect(result).toEqual([expected]);
+      });
     });
   });
 });

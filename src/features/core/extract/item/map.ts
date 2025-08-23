@@ -1,21 +1,28 @@
 import type { Data_Map, MapEventPage } from "@RpgTypes/rmmz";
+import type { EventCommand2 } from "@RpgTypes/rmmz/eventCommand/commands/union";
 import { processMapEvents } from "../../rpg";
-import type { ItemCommandParameter } from "./eventCommand/types";
+import { extractItemCommands } from "./eventCommand/eventCommand";
+import type { ItemCommandCode, ItemCommandTerms2 } from "./eventCommand/types";
+import type { ExtractedMapEventItems } from "./types";
 
-const mmm = (map: Data_Map) => {
-  return processMapEvents(map, (e) => {
-    //    const commands=
-    return 0;
-  });
+export const mmm = (
+  map: Data_Map<EventCommand2>,
+  terms: ItemCommandTerms2,
+  commandNameFn: (code: ItemCommandCode) => string
+): ExtractedMapEventItems[][] => {
+  return processMapEvents(
+    map,
+    (page, index, event): ExtractedMapEventItems => ({
+      ...conditionXX(page),
+      commands: extractItemCommands(page.list, terms, commandNameFn),
+      eventName: event.name,
+      pageIndex: index,
+    })
+  );
 };
 
-interface ItemXXX {
-  pageCondition?: {
-    itemId: number;
-  };
-  commands: ItemCommandParameter[];
-}
-
-// const conditionXX = (page: MapEventPage) => {
-//   page.conditions.itemId;
-// };
+const conditionXX = (page: MapEventPage<EventCommand2>) => {
+  return page.conditions.itemId > 0 && page.conditions.itemValid
+    ? { pageCondition: { itemId: page.conditions.itemId } }
+    : {};
+};

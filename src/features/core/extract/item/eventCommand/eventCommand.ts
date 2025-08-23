@@ -9,6 +9,7 @@ import {
   OPERATION_GAIN,
   OPERATION_LOSE,
 } from "@RpgTypes/rmmz/eventCommand/commands/item/types/constants";
+import type { EventCommand2 } from "@RpgTypes/rmmz/eventCommand/commands/union";
 import type {
   ItemCommandCode,
   ItemCommandParameterDirect,
@@ -16,7 +17,28 @@ import type {
   ItemCommandTerms2,
 } from "./types";
 
-const e2 = () => {};
+export const extractItemCommands = (
+  list: ReadonlyArray<EventCommand2>,
+  terms: ItemCommandTerms2,
+  commandNameFn: (code: ItemCommandCode) => string
+): (ItemCommandParameterDirect | ItemCommandParameterVariable)[] => {
+  return list.reduce(
+    (
+      acc: (ItemCommandParameterDirect | ItemCommandParameterVariable)[],
+      command
+    ) => {
+      if (
+        command.code === CHANGE_ARMORS ||
+        command.code === CHANGE_ITEMS ||
+        command.code === CHANGE_WEAPONS
+      ) {
+        acc.push(extractItemChangeData(command, terms, commandNameFn));
+      }
+      return acc;
+    },
+    []
+  );
+};
 
 const KIND_TABKE = {
   [CHANGE_WEAPONS]: "weapon",
