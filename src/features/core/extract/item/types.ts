@@ -8,3 +8,10 @@ export interface ExtractedMapEventItems {
   pageIndex: number;
   commands: ItemCommandParameter[];
 }
+
+export interface ExtractedTroopEventItems {
+  troopId: number;
+  eventName: string;
+  pageIndex: number;
+  commands: ItemCommandParameter[];
+}
