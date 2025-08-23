@@ -1,15 +1,15 @@
 import type { EventCommand } from "./map/event/page";
 
-export interface Data_Troop {
+export interface Data_Troop<Command = EventCommand> {
   members: Troop_Member[];
-  pages: BattleEventPage[];
+  pages: BattleEventPage<Command>[];
 
   id: number;
   name: string;
 }
-export interface BattleEventPage {
+export interface BattleEventPage<Command = EventCommand> {
   conditions: Troop_EventConditions;
-  list: EventCommand[];
+  list: Command[];
   span: number;
 }
 export interface Troop_EventConditions {
