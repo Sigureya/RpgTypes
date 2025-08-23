@@ -1,8 +1,8 @@
-import type { Command_ChangeWeapons, EventCode } from "@RpgTypes/rmmz";
 import { CHANGE_ARMORS, CHANGE_ITEMS, CHANGE_WEAPONS } from "@RpgTypes/rmmz";
 import type {
   Command_ChangeArmors2,
   Command_ChangeItems2,
+  Command_ChangeWeapons2,
 } from "@RpgTypes/rmmz/eventCommand/commands/item";
 import {
   OPERATION_GAIN,
@@ -23,7 +23,10 @@ const KIND_TABKE = {
 } as const;
 
 export const changeArmors = (
-  command: Command_ChangeArmors2 | Command_ChangeItems2 | Command_ChangeWeapons,
+  command:
+    | Command_ChangeArmors2
+    | Command_ChangeItems2
+    | Command_ChangeWeapons2,
   terms: ItemCommandTerms2,
   commandNameFn: (code: ItemCommandCode) => string
 ): ItemCommandParameterDirect | ItemCommandParameterVariable => {
