@@ -5,10 +5,10 @@ import type {
   Command_ChangeWeapons2,
 } from "@RpgTypes/rmmz/eventCommand/commands/item";
 import {
+  OPERAND_DIRECT,
   OPERATION_GAIN,
   OPERATION_LOSE,
 } from "@RpgTypes/rmmz/eventCommand/commands/item/types/constants";
-import { OPERAND_DIRECT } from "@RpgTypes/rmmz/eventCommand/runtime/operateValue/operateValue";
 import type {
   ItemCommandCode,
   ItemCommandParameterDirect,
@@ -22,7 +22,7 @@ const KIND_TABKE = {
   [CHANGE_ITEMS]: "item",
 } as const;
 
-export const changeArmors = (
+export const extractItemChangeData = (
   command:
     | Command_ChangeArmors2
     | Command_ChangeItems2
@@ -32,14 +32,14 @@ export const changeArmors = (
 ): ItemCommandParameterDirect | ItemCommandParameterVariable => {
   const operand =
     command.parameters[3] === OPERAND_DIRECT
-      ? ({
-          direct: true,
+      ? {
+          direct: true as const,
           value: command.parameters[2],
-        } as const)
-      : ({
-          direct: false,
+        }
+      : {
+          direct: false as const,
           variableId: command.parameters[2],
-        } as const);
+        };
 
   const operation =
     command.parameters[0] === OPERATION_GAIN
