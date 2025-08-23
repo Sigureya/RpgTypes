@@ -32,10 +32,6 @@ export interface ItemCommandParameterVariable extends ItemCommandParameter {
   variableId: number;
 }
 
-export interface ItemCommandTerms {
-  gainItem(itemKind: ItemKind): string;
-  loseItem(itemKind: ItemKind): string;
-}
 export interface ItemCommandTerms2 {
   gain: string;
   lose: string;
