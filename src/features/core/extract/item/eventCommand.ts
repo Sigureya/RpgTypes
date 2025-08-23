@@ -8,7 +8,7 @@ import type {
   Command_ChangeArmors2,
   Command_ChangeItems2,
   Command_ChangeWeapons2,
-} from "@RpgTypes/rmmz/eventCommand/commands/item/types";
+} from "@RpgTypes/rmmz/eventCommand/commands/item";
 import { operateValueChangeGoods } from "@RpgTypes/rmmz/eventCommand/operateValue";
 import type { OperateValueHandlers } from "@RpgTypes/rmmz/eventCommand/runtime/operateValue/types";
 import type { ItemCommandParameter, ItemCommandTerms, ItemKind } from "./types";
@@ -30,14 +30,13 @@ const GAIN_ITEM_V = 0 as const;
 interface OperandValue {
   operand: "direct" | "variable";
   value: number;
+  direct: boolean;
 }
 
 interface ValueChange {
   value: number;
   operation: "gainItem" | "loseItem";
 }
-
-const changeItems2 = (command: Command_ChangeItems2) => {};
 
 export const changeGoods = (
   command:
@@ -46,16 +45,26 @@ export const changeGoods = (
     | Command_ChangeWeapons2,
   terms: ItemCommandTerms
 ) => {
-  const { gainItem, value } = operateValueChangeGoods(command, {
-    directValue: (operand) => ({ operand: "direct", value: operand }),
-    variableValue: (operand) => ({ operand: "variable", value: operand }),
-    negativeValue: (value) => ({
+  const { gainItem, value, operand } = operateValueChangeGoods(command, {
+    directValue: (operand): OperandValue => ({
+      operand: "direct",
+      value: operand,
+      direct: true,
+    }),
+    variableValue: (operand): OperandValue => ({
+      operand: "variable",
+      value: operand,
+      direct: false,
+    }),
+    negativeValue: (value: OperandValue) => ({
       value: value.value,
       gainItem: false,
+      operand: value.operand,
     }),
-    postiveValue: (value) => ({
+    postiveValue: (value: OperandValue) => ({
       value: value.value,
       gainItem: true,
+      operand: value.operand,
     }),
   });
 

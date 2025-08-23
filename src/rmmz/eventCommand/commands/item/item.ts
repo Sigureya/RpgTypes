@@ -1,0 +1,99 @@
+import { CHANGE_ITEMS } from "@RpgTypes/rmmz/rpg";
+import {
+  OPERAND_DIRECT,
+  OPERAND_VARIABLE,
+  OPERATION_GAIN,
+  OPERATION_LOSE,
+} from "./types/constants";
+import type {
+  Command_ChangeItems2,
+  ParamArray_ChangeItems2,
+  ParamObject_ChangeItemsFullset,
+  ParamObject_ChangeItems,
+  ParamObject_ChangeItemsV,
+} from "./types/item";
+
+export const fromArrayChangeItems = (
+  arr: ParamArray_ChangeItems2
+): ParamObject_ChangeItemsFullset => ({
+  operation: arr[0],
+  itemId: arr[1],
+  value: arr[2],
+  operand: arr[3],
+  includesEquip: arr[4],
+});
+
+export const makeCommandChangeItems = (
+  param: ParamObject_ChangeItemsFullset,
+  indent: number = 0
+): Command_ChangeItems2 => ({
+  code: CHANGE_ITEMS,
+  parameters: [
+    param.operation,
+    param.itemId,
+    param.value,
+    param.operand,
+    param.includesEquip,
+  ],
+  indent,
+});
+
+export const makeCommandGainItem = (
+  param: ParamObject_ChangeItems,
+  indent: number = 0
+): Command_ChangeItems2 => ({
+  code: CHANGE_ITEMS,
+  parameters: [
+    OPERATION_GAIN,
+    param.itemId,
+    param.value,
+    OPERAND_DIRECT,
+    false,
+  ],
+  indent,
+});
+
+export const makeCommandGainItemV = (
+  param: ParamObject_ChangeItemsV,
+  indent: number = 0
+): Command_ChangeItems2 => ({
+  code: CHANGE_ITEMS,
+  parameters: [
+    OPERATION_GAIN,
+    param.itemId,
+    param.variableId,
+    OPERAND_VARIABLE,
+    false,
+  ],
+  indent,
+});
+
+export const makeCommandLoseItem = (
+  param: ParamObject_ChangeItems,
+  indent: number = 0
+): Command_ChangeItems2 => ({
+  code: CHANGE_ITEMS,
+  parameters: [
+    OPERATION_LOSE,
+    param.itemId,
+    param.value,
+    OPERAND_DIRECT,
+    false,
+  ],
+  indent,
+});
+
+export const makeCommandLoseItemV = (
+  param: ParamObject_ChangeItemsV,
+  indent: number = 0
+): Command_ChangeItems2 => ({
+  code: CHANGE_ITEMS,
+  parameters: [
+    OPERATION_LOSE,
+    param.itemId,
+    param.variableId,
+    OPERAND_VARIABLE,
+    false,
+  ],
+  indent,
+});
