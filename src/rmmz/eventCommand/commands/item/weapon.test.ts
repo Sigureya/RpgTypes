@@ -9,9 +9,9 @@ import {
 import type {
   Command_ChangeWeapons2,
   ParamArray_ChangeWeapons2,
-  ParamObject_ChangeWeapons2,
-  ParamObject_GainWeapon,
-  ParamObject_GainWeaponV,
+  ParamObject_ChangeWeaponsFullset,
+  ParamObject_ChangeWeapons,
+  ParamObject_ChangeWeaponsV,
 } from "./types/weapon";
 import {
   fromArrayChangeWeapons,
@@ -24,7 +24,7 @@ import {
 
 describe("makeCommandChangeWeapons", () => {
   test("creates correct command object", () => {
-    const param: ParamObject_ChangeWeapons2 = {
+    const param: ParamObject_ChangeWeaponsFullset = {
       operation: 0,
       weaponId: 1,
       value: 5,
@@ -41,7 +41,7 @@ describe("makeCommandChangeWeapons", () => {
   });
 
   test("default indent is 0", () => {
-    const param: ParamObject_ChangeWeapons2 = {
+    const param: ParamObject_ChangeWeaponsFullset = {
       operation: 1,
       weaponId: 2,
       value: 10,
@@ -61,7 +61,7 @@ describe("makeCommandChangeWeapons", () => {
 describe("fromArrayChangeWeapons", () => {
   test("converts array to ParamObject_ChangeWeapons2", () => {
     const arr: ParamArray_ChangeWeapons2 = [0, 1, 5, 0, false];
-    const expected: ParamObject_ChangeWeapons2 = {
+    const expected: ParamObject_ChangeWeaponsFullset = {
       operation: 0,
       weaponId: 1,
       value: 5,
@@ -75,7 +75,7 @@ describe("fromArrayChangeWeapons", () => {
 
 describe("makeCommandGainWeapon", () => {
   test("creates command with direct operand", () => {
-    const param: ParamObject_GainWeapon = { weaponId: 42, value: 5 };
+    const param: ParamObject_ChangeWeapons = { weaponId: 42, value: 5 };
     const expected: Command_ChangeWeapons2 = {
       code: CHANGE_WEAPONS,
       parameters: [OPERATION_GAIN, 42, 5, OPERAND_DIRECT, false],
@@ -88,7 +88,7 @@ describe("makeCommandGainWeapon", () => {
 
 describe("makeCommandGainWeaponV", () => {
   test("creates command with variable operand", () => {
-    const param: ParamObject_GainWeaponV = { weaponId: 42, variableId: 3 };
+    const param: ParamObject_ChangeWeaponsV = { weaponId: 42, variableId: 3 };
     const expected: Command_ChangeWeapons2 = {
       code: CHANGE_WEAPONS,
       parameters: [OPERATION_GAIN, 42, 3, OPERAND_VARIABLE, false],
@@ -101,7 +101,7 @@ describe("makeCommandGainWeaponV", () => {
 
 describe("makeCommandLoseWeapon", () => {
   test("creates command with direct operand", () => {
-    const param: ParamObject_GainWeapon = { weaponId: 42, value: 5 };
+    const param: ParamObject_ChangeWeapons = { weaponId: 42, value: 5 };
     const expected: Command_ChangeWeapons2 = {
       code: CHANGE_WEAPONS,
       parameters: [OPERATION_LOSE, 42, 5, OPERAND_DIRECT, false],
@@ -113,7 +113,7 @@ describe("makeCommandLoseWeapon", () => {
 });
 describe("makeCommandLoseWeaponV", () => {
   test("creates command with direct operand", () => {
-    const param: ParamObject_GainWeaponV = { weaponId: 42, variableId: 5 };
+    const param: ParamObject_ChangeWeaponsV = { weaponId: 42, variableId: 5 };
     const expected: Command_ChangeWeapons2 = {
       code: CHANGE_WEAPONS,
       parameters: [OPERATION_LOSE, 42, 5, OPERAND_VARIABLE, false],

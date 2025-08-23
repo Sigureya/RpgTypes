@@ -8,7 +8,7 @@ export interface Command_ChangeWeapons2
   parameters: ParamArray_ChangeWeapons2;
 }
 
-export interface ParamObject_ChangeWeapons2 {
+export interface ParamObject_ChangeWeaponsFullset {
   operation: ValueOf<Operation_PlusMinus>;
   weaponId: number;
   value: number;
@@ -25,11 +25,12 @@ export type ParamArray_ChangeWeapons2 = [
   includesEquip: boolean
 ];
 
-export interface ParamObject_GainWeapon {
+export interface ParamObject_ChangeWeapons {
   weaponId: number;
   value: number;
 }
-export interface ParamObject_GainWeaponV {
+
+export interface ParamObject_ChangeWeaponsV {
   weaponId: number;
   variableId: number;
 }
