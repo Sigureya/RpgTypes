@@ -106,7 +106,9 @@ export const collectMapEvents = <Result, Command, Event extends { id: number }>(
     container: NonNullable<(typeof map)["events"][number]>
   ) => Result
 ): Result[] => {
-  return processMapEvents(map, fn).flat(1);
+  return map.events
+    .filter(isValidEvent)
+    .flatMap((event) => processEventPages(event, fn));
 };
 
 /**
@@ -115,15 +117,26 @@ export const collectMapEvents = <Result, Command, Event extends { id: number }>(
  * @param func The function to apply to each event page.
  * @returns A 2D array where each element represents the processed result of a troop's pages.
  */
-export const processTroopEvents = <Result>(
-  list: ReadonlyArray<Data_Troop>,
+export const processTroopEvents = <Result, Command>(
+  list: ReadonlyArray<Data_Troop<Command>>,
   func: (
-    page: BattleEventPage,
+    page: BattleEventPage<Command>,
     pageIndex: number,
-    container: Data_Troop
+    container: Data_Troop<Command>
   ) => Result
 ): Result[][] => {
   return list.map((troop) => processEventPages(troop, func));
+};
+
+export const correctTroopEvents = <Result, Command>(
+  list: ReadonlyArray<Data_Troop<Command>>,
+  func: (
+    page: BattleEventPage<Command>,
+    pageIndex: number,
+    container: Data_Troop<Command>
+  ) => Result
+): Result[] => {
+  return list.flatMap((troop) => processEventPages(troop, func));
 };
 
 /**
