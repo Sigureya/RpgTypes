@@ -56,7 +56,8 @@ export declare const collectMapEvents: <Result, Command, Event extends {
  * @param func The function to apply to each event page.
  * @returns A 2D array where each element represents the processed result of a troop's pages.
  */
-export declare const processTroopEvents: <Result>(list: ReadonlyArray<Data_Troop>, func: (page: BattleEventPage, pageIndex: number, container: Data_Troop) => Result) => Result[][];
+export declare const processTroopEvents: <Result, Command>(list: ReadonlyArray<Data_Troop<Command>>, func: (page: BattleEventPage<Command>, pageIndex: number, container: Data_Troop<Command>) => Result) => Result[][];
+export declare const correctTroopEvents: <Result, Command>(list: ReadonlyArray<Data_Troop<Command>>, func: (page: BattleEventPage<Command>, pageIndex: number, container: Data_Troop<Command>) => Result) => Result[];
 /**
  * Processes all common events.
  * @param events The list of common events.
