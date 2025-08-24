@@ -13,6 +13,7 @@ import type {
 import type { Command_CommonEvent } from "./flow/callCommonEvent";
 import type { Command_ControlSwitches } from "./flow/controlSwtches";
 import type { Command_ExitEventProcessing } from "./flow/exitEvent/types";
+import type { Command_Label, Command_LabelJump } from "./flow/label/types";
 import type { Command_Loop, Command_LoopBreak } from "./flow/loop/types";
 import type { Command_ControlSelfSwitch } from "./flow/selfSwitch/types";
 import type { Command_InputNumber } from "./inputNumber/types";
@@ -22,6 +23,7 @@ import type {
   Command_ChangeWeapons2,
 } from "./item/change";
 import type { Command_SelectItem } from "./item/select/types";
+import type { Command_ChangeTileset } from "./mapImage/tileset/types";
 import type {
   Command_ChangeFormationAccess,
   Command_ChangeMenuAccess,
@@ -43,12 +45,12 @@ import type {
   Command_ShowMessageBody,
   Command_ShowMessageHeader,
 } from "./message/showMessage";
+import type { Command_PlayMovie } from "./movie/types";
 import type { Command_PluginCommandMV } from "./mv/pluginCommandMV";
 import type {
   Command_FadeOutScreen,
   Command_GameOver,
   Command_GatherFollowers,
-  Command_GetOnOffVehicle,
   Command_OpenSaveScreen,
   Command_ResumeBGM,
   Command_ReturnToTitleScreen,
@@ -66,7 +68,7 @@ import type {
   Command_ShopProcessingBody2,
 } from "./shop/types";
 import type { Command_ControlVariables } from "./variable/types";
-
+import type { Command_GetOnOffVehicle } from "./vehicle/types";
 export type EventCommand2 =
   | Command_ChangeArmors2
   | Command_ChangeItems2
@@ -118,4 +120,8 @@ export type EventCommand2 =
   | Command_PluginCommandMV
   | Command_ConditionalBranchElse
   | Command_ConditionalBranch
-  | Command_SelectItem;
+  | Command_SelectItem
+  | Command_PlayMovie
+  | Command_Label
+  | Command_LabelJump
+  | Command_ChangeTileset;
