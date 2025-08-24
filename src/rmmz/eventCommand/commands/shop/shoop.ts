@@ -13,7 +13,7 @@ const GOODS_TYPES = {
   armors: 2,
 } as const;
 
-const isCustomPriceXX = (goods: ParamObject_ShopGoods): boolean =>
+const isCustomPrice = (goods: ParamObject_ShopGoods): boolean =>
   goods.customPrice !== undefined && goods.customPrice !== 0;
 
 export const makeCoomandShopGoods = (
@@ -22,7 +22,9 @@ export const makeCoomandShopGoods = (
 ): (Command_ShopProcessing | Command_ShopProcessingBody)[] => {
   return goods.map(
     (item, index): Command_ShopProcessing | Command_ShopProcessingBody => {
-      const isCustomPrice = isCustomPriceXX(item) ? CUSTOM_PRICE : NORMAL_PRICE;
+      const usingCustomPrice = isCustomPrice(item)
+        ? CUSTOM_PRICE
+        : NORMAL_PRICE;
       return index === 0
         ? ({
             code: SHOP_PROCESSING,
@@ -30,7 +32,7 @@ export const makeCoomandShopGoods = (
             parameters: [
               GOODS_TYPES[item.itemType],
               item.id,
-              isCustomPrice,
+              usingCustomPrice,
               item.customPrice ?? 0,
               buyOnly,
             ],
@@ -41,7 +43,7 @@ export const makeCoomandShopGoods = (
             parameters: [
               GOODS_TYPES[item.itemType],
               item.id,
-              isCustomPrice,
+              usingCustomPrice,
               item.customPrice ?? 0,
             ],
           } satisfies Command_ShopProcessingBody);
