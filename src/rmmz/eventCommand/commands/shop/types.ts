@@ -11,12 +11,12 @@ export type GoodsType = {
 
 type GOODS_TYPES = ValueOf<GoodsType>;
 
-export interface Command_ShopProcessing
+export interface Command_ShopProcessing2
   extends EventCommandLike2<typeof SHOP_PROCESSING> {
   parameters: ShopProcessing;
 }
 
-export interface Command_ShopProcessingBody
+export interface Command_ShopProcessingBody2
   extends EventCommandLike2<typeof SHOP_PROCESSING_BODY> {
   parameters: ShopGoods;
 }
