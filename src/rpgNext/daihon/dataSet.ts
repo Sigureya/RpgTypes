@@ -11,3 +11,9 @@ export interface DataSet {
 export interface XXX {
   makeUnknownName: (nameKey: string) => string;
 }
+
+export interface ErrorMessageTable {
+  xx: string;
+  actorNotFound: string;
+  faceNotFound: string;
+}
