@@ -39,7 +39,7 @@ const makeMessageHedder = (
   dataSet: DataSet,
   xxx: XXX,
   error: ErrorMessageTable
-): null | Success<Command_ShowMessageHeader> | Failure => {
+): Success<Command_ShowMessageHeader> | Failure => {
   const actor = dataSet.actors.get(command.args.speaker);
   if (actor === undefined) {
     return {
