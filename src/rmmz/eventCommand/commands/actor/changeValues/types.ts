@@ -22,10 +22,12 @@ export type ParamArray_ChangeActorValue = [
   index: number,
   operation: number,
   valueType: number,
-  value: number
+  value: number,
+  allowDeath: boolean
 ];
 
 export interface ParamObject_ChangeActorValue {
+  allowDeath: boolean;
   targetType: "direct" | "variable" | "each";
   target: number;
   operation: "plus" | "minus";
