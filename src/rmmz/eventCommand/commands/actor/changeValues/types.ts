@@ -4,7 +4,7 @@ import type { TARGET_DIRECT, TARGET_VARIABLE } from "./constants";
 
 export interface Command_ChangeActorHP
   extends EventCommandLike2<typeof CHANGE_HP> {
-  parameters: ParamArray_ChangeActorValue;
+  parameters: ParamArray_ChangeActorHP;
 }
 
 export interface Command_ChangeActorMP
@@ -22,6 +22,14 @@ export type ParamArray_ChangeActorValue = [
   index: number,
   operation: number,
   valueType: number,
+  value: number
+];
+
+export type ParamArray_ChangeActorHP = [
+  targetType: typeof TARGET_DIRECT | typeof TARGET_VARIABLE,
+  index: number,
+  operation: number,
+  valueType: number,
   value: number,
   allowDeath: boolean
 ];
@@ -33,3 +41,7 @@ export interface ParamObject_ChangeActorValue {
   operation: "plus" | "minus";
   operand: { type: "variable" | "direct"; value: number };
 }
+
+export type ParamObject_ChangeActorHP = ParamObject_ChangeActorValue & {
+  allowDeath: boolean;
+};

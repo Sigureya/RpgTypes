@@ -1,4 +1,3 @@
-import type { EventCommandLike2 } from "@RpgTypes/rmmz/eventCommand/frame";
 import { CHANGE_MP, CHANGE_TP, CHANGE_HP } from "@RpgTypes/rmmz/rpg";
 import { OPERATION_MINUS, OPERATION_PLUS } from "./constants";
 import type {
@@ -6,6 +5,7 @@ import type {
   Command_ChangeActorMP,
   Command_ChangeActorTP,
   ParamArray_ChangeActorValue,
+  ParamObject_ChangeActorHP,
   ParamObject_ChangeActorValue,
 } from "./types";
 
@@ -17,108 +17,129 @@ const OPERAND = {
 type Operation = typeof OPERATION_PLUS | typeof OPERATION_MINUS;
 
 export const makeCommandGainActorHP = (
-  params: ParamObject_ChangeActorValue,
+  params: ParamObject_ChangeActorHP,
   indent: number = 0
 ): Command_ChangeActorHP => {
-  return VFT[params.targetType](CHANGE_HP, params, indent, OPERATION_PLUS);
+  return {
+    code: CHANGE_HP,
+    indent,
+    parameters: [
+      ...VALIABLE_FUNCTION_TABLE[params.targetType](params, OPERATION_PLUS),
+      params.allowDeath,
+    ],
+  };
 };
 
 export const makeCommandLoseActorHP = (
-  params: ParamObject_ChangeActorValue,
+  params: ParamObject_ChangeActorHP,
   indent: number = 0
 ): Command_ChangeActorHP => {
-  return VFT[params.targetType](CHANGE_HP, params, indent, OPERATION_MINUS);
+  return {
+    code: CHANGE_HP,
+    indent,
+    parameters: [
+      ...VALIABLE_FUNCTION_TABLE[params.targetType](params, OPERATION_MINUS),
+      params.allowDeath,
+    ],
+  };
 };
 
 export const makeCommandGainActorTP = (
   params: ParamObject_ChangeActorValue,
   indent: number = 0
 ): Command_ChangeActorTP => {
-  return VFT[params.targetType](CHANGE_TP, params, indent, OPERATION_PLUS);
+  return {
+    code: CHANGE_TP,
+    indent,
+    parameters: VALIABLE_FUNCTION_TABLE[params.targetType](
+      params,
+      OPERATION_PLUS
+    ),
+  };
 };
 
 export const makeCommandLoseActorTP = (
   params: ParamObject_ChangeActorValue,
   indent: number = 0
 ): Command_ChangeActorTP => {
-  return VFT[params.targetType](CHANGE_TP, params, indent, OPERATION_MINUS);
+  return {
+    code: CHANGE_TP,
+    indent,
+    parameters: VALIABLE_FUNCTION_TABLE[params.targetType](
+      params,
+      OPERATION_MINUS
+    ),
+  };
 };
 
 export const makeCommandGainActorMP = (
   params: ParamObject_ChangeActorValue,
   indent: number = 0
 ): Command_ChangeActorMP => {
-  return VFT[params.targetType](CHANGE_MP, params, indent, OPERATION_PLUS);
+  return {
+    code: CHANGE_MP,
+    indent,
+    parameters: VALIABLE_FUNCTION_TABLE[params.targetType](
+      params,
+      OPERATION_PLUS
+    ),
+  };
 };
 
 export const makeCommandLoseActorMP = (
   params: ParamObject_ChangeActorValue,
   indent: number = 0
 ): Command_ChangeActorMP => {
-  return VFT[params.targetType](CHANGE_MP, params, indent, OPERATION_MINUS);
-};
-
-const targetEach = <Code extends number>(
-  code: Code,
-  params: ParamObject_ChangeActorValue,
-  indent: number,
-  operation: Operation
-): EventCommandLike2<Code, ParamArray_ChangeActorValue> => {
   return {
-    code: code,
-    indent: indent,
-    parameters: [
-      OPERAND.direct,
-      -1, // each
-      operation,
-      OPERAND[params.operand.type],
-      params.operand.value,
-      params.allowDeath,
-    ],
+    code: CHANGE_MP,
+    indent,
+    parameters: VALIABLE_FUNCTION_TABLE[params.targetType](
+      params,
+      OPERATION_MINUS
+    ),
   };
 };
 
-const targetDirect = <Code extends number>(
-  code: Code,
+const targetEach = (
   params: ParamObject_ChangeActorValue,
-  indent: number,
   operation: Operation
-): EventCommandLike2<Code, ParamArray_ChangeActorValue> => {
-  return {
-    code: code,
-    indent: indent,
-    parameters: [
-      OPERAND.direct,
-      params.target,
-      operation,
-      OPERAND[params.operand.type],
-      params.operand.value,
-      params.allowDeath,
-    ],
-  };
+): ParamArray_ChangeActorValue => {
+  return [
+    OPERAND.direct,
+    -1, // each
+    operation,
+    OPERAND[params.operand.type],
+    params.operand.value,
+  ];
 };
 
-const targetValiable = <Code extends number>(
-  code: Code,
+const targetDirect = (
   params: ParamObject_ChangeActorValue,
-  indent: number,
   operation: Operation
-): EventCommandLike2<Code, ParamArray_ChangeActorValue> => {
-  return {
-    code: code,
-    indent: indent,
-    parameters: [
-      OPERAND.variable,
-      params.target,
-      operation,
-      OPERAND[params.operand.type],
-      params.operand.value,
-      params.allowDeath,
-    ],
-  };
+): ParamArray_ChangeActorValue => {
+  return [
+    OPERAND.direct,
+    params.target,
+    operation,
+    OPERAND[params.operand.type],
+    params.operand.value,
+  ];
 };
 
-const VFT = {
+const targetValiable = (
+  params: ParamObject_ChangeActorValue,
+  operation: Operation
+): ParamArray_ChangeActorValue => {
+  return [
+    OPERAND.variable,
+    params.target,
+    operation,
+    OPERAND[params.operand.type],
+    params.operand.value,
+  ];
+};
+
+const VALIABLE_FUNCTION_TABLE = {
   direct: targetDirect,
   variable: targetValiable,
   each: targetEach,
