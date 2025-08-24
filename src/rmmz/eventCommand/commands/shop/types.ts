@@ -1,6 +1,7 @@
 import type { EventCommandLike2 } from "@RpgTypes/rmmz/eventCommand/frame";
 import type { SHOP_PROCESSING, SHOP_PROCESSING_BODY } from "@RpgTypes/rmmz/rpg";
 import type { ValueOf } from "src/libs/templates/valueOf";
+import type { CUSTOM_PRICE, NORMAL_PRICE } from "./constants";
 
 export type GoodsType = {
   item: 0;
@@ -23,14 +24,14 @@ export interface Command_ShopProcessingBody
 export type ShopGoods = [
   itemType: GOODS_TYPES,
   id: number,
-  isCustomPrice: 0 | 1,
+  isCustomPrice: typeof CUSTOM_PRICE | typeof NORMAL_PRICE,
   customPrice: number
 ];
 
 export type ShopProcessing = [
   itemType: GOODS_TYPES,
   id: number,
-  isCustomPrice: 0 | 1,
+  isCustomPrice: typeof CUSTOM_PRICE | typeof NORMAL_PRICE,
   customPrice: number,
   buyOnly: boolean
 ];
