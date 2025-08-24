@@ -1,0 +1,13 @@
+import type { AudioFileParams } from "@RpgTypes/libs";
+import type { DaihonActor } from "./actors/types";
+
+export interface DataSet {
+  voice: Map<string, AudioFileParams>;
+  messages: Map<string, string>;
+  actors: Map<string, DaihonActor>;
+  vocab: Map<string, string>;
+}
+
+export interface XXX {
+  makeUnknownName: (nameKey: string) => string;
+}
