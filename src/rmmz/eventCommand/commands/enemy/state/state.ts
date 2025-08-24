@@ -10,8 +10,8 @@ export const makeCommandAddEnemyState = (
 ): Command_ChangeEnemyState => {
   return {
     code: 333,
-    parameters: [param.enemyIndex, ADD_STATE, param.stateId],
     indent,
+    parameters: [param.enemyIndex, ADD_STATE, param.stateId],
   };
 };
 
@@ -21,29 +21,29 @@ export const makeCommandRemoveEnemyState = (
 ): Command_ChangeEnemyState => {
   return {
     code: 333,
-    parameters: [param.enemyIndex, REMOVE_STATE, param.stateId],
     indent,
+    parameters: [param.enemyIndex, REMOVE_STATE, param.stateId],
   };
 };
 
 export const makeCommandAddEachEnemyState = (
-  param: ParamObject_ChangeEnemyState,
+  param: { stateId: number },
   indent = 0
 ): Command_ChangeEnemyState => {
   return {
     code: 333,
-    parameters: [ITERATE_EACH, ADD_STATE, param.stateId],
     indent,
+    parameters: [ITERATE_EACH, ADD_STATE, param.stateId],
   };
 };
 
 export const makeCommandRemoveEachEnemyState = (
-  param: ParamObject_ChangeEnemyState,
+  param: { stateId: number },
   indent = 0
 ): Command_ChangeEnemyState => {
   return {
     code: 333,
-    parameters: [ITERATE_EACH, REMOVE_STATE, param.stateId],
     indent,
+    parameters: [ITERATE_EACH, REMOVE_STATE, param.stateId],
   };
 };
