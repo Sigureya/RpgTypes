@@ -73,7 +73,8 @@ const targetEach = <Code extends number>(
       operation,
       OPERAND[params.operand.type],
       params.operand.value,
-    ] satisfies ParamArray_ChangeActorValue,
+      params.allowDeath,
+    ],
   };
 };
 
@@ -92,7 +93,8 @@ const targetDirect = <Code extends number>(
       operation,
       OPERAND[params.operand.type],
       params.operand.value,
-    ] satisfies ParamArray_ChangeActorValue,
+      params.allowDeath,
+    ],
   };
 };
 
@@ -111,7 +113,8 @@ const targetValiable = <Code extends number>(
       operation,
       OPERAND[params.operand.type],
       params.operand.value,
-    ] satisfies ParamArray_ChangeActorValue,
+      params.allowDeath,
+    ],
   };
 };
 
