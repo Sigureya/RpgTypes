@@ -6,6 +6,10 @@ import type {
 import type { Command_ChangeActorImages } from "./actor/changeImages/types";
 import type { CommandUnion_AnyAudio } from "./audio";
 import type { Command_ControlTimer } from "./controlTimer";
+import type {
+  Command_ConditionalBranch,
+  Command_ConditionalBranchElse,
+} from "./flow/branch/types";
 import type { Command_CommonEvent } from "./flow/callCommonEvent";
 import type { Command_ControlSwitches } from "./flow/controlSwtches";
 import type { Command_ExitEventProcessing } from "./flow/exitEvent/types";
@@ -17,6 +21,7 @@ import type {
   Command_ChangeItems2,
   Command_ChangeWeapons2,
 } from "./item/change";
+import type { Command_SelectItem } from "./item/select/types";
 import type {
   Command_ChangeFormationAccess,
   Command_ChangeMenuAccess,
@@ -110,4 +115,7 @@ export type EventCommand2 =
   | Command_ScrollTextBody
   | Command_ShowChoices
   | Command_ShowChoiceWhen
-  | Command_PluginCommandMV;
+  | Command_PluginCommandMV
+  | Command_ConditionalBranchElse
+  | Command_ConditionalBranch
+  | Command_SelectItem;
