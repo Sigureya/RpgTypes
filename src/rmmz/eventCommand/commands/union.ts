@@ -5,6 +5,11 @@ import type {
 } from "./actor";
 import type { Command_ChangeActorImages } from "./actor/changeImages/types";
 import type { CommandUnion_AnyAudio } from "./audio";
+import type {
+  Command_FadeOutScreen,
+  Command_ResumeBGM,
+  Command_SaveBGM,
+} from "./audio/other/types";
 import type { Command_ControlTimer } from "./controlTimer";
 import type {
   Command_ConditionalBranch,
@@ -48,13 +53,10 @@ import type {
 import type { Command_PlayMovie } from "./movie/types";
 import type { Command_PluginCommandMV } from "./mv/pluginCommandMV";
 import type {
-  Command_FadeOutScreen,
   Command_GameOver,
   Command_GatherFollowers,
   Command_OpenSaveScreen,
-  Command_ResumeBGM,
   Command_ReturnToTitleScreen,
-  Command_SaveBGM,
   Command_Skip,
   Command_EraseEvent,
   Command_FadeInScreen,
@@ -69,6 +71,7 @@ import type {
 } from "./shop/types";
 import type { Command_ControlVariables } from "./variable/types";
 import type { Command_GetOnOffVehicle } from "./vehicle/types";
+
 export type EventCommand2 =
   | Command_ChangeArmors2
   | Command_ChangeItems2
