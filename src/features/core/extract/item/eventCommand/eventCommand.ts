@@ -3,12 +3,12 @@ import type {
   Command_ChangeArmors2,
   Command_ChangeItems2,
   Command_ChangeWeapons2,
-} from "@RpgTypes/rmmz/eventCommand/commands/item";
+} from "@RpgTypes/rmmz/eventCommand/commands/item/change";
 import {
   OPERAND_DIRECT,
   OPERATION_GAIN,
   OPERATION_LOSE,
-} from "@RpgTypes/rmmz/eventCommand/commands/item/types/constants";
+} from "@RpgTypes/rmmz/eventCommand/commands/item/change/types/constants";
 import type { EventCommand2 } from "@RpgTypes/rmmz/eventCommand/commands/union";
 import type {
   ItemCommandCode,
