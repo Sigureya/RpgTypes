@@ -3,6 +3,7 @@ import { CUSTOM_PRICE, NORMAL_PRICE } from "./constants";
 import type {
   Command_ShopProcessing,
   Command_ShopProcessingBody,
+  GoodsType,
   ParamObject_ShopGoods,
   ParamObject_ShopProcessing,
 } from "./types";
@@ -11,12 +12,12 @@ const GOODS_TYPES = {
   item: 0,
   weapon: 1,
   armors: 2,
-} as const;
+} as const satisfies GoodsType;
 
 const isCustomPrice = (goods: ParamObject_ShopGoods): boolean =>
   goods.customPrice !== undefined && goods.customPrice !== 0;
 
-export const makeCoomandShopGoods = (
+export const makeCommandShopProcessing = (
   { goods, buyOnly = false }: ParamObject_ShopProcessing,
   indent: number = 0
 ): (Command_ShopProcessing | Command_ShopProcessingBody)[] => {
@@ -30,7 +31,7 @@ export const makeCoomandShopGoods = (
             code: SHOP_PROCESSING,
             indent: indent,
             parameters: [
-              GOODS_TYPES[item.itemType],
+              GOODS_TYPES[item.itemType] ?? 0,
               item.id,
               usingCustomPrice,
               item.customPrice ?? 0,
@@ -41,7 +42,7 @@ export const makeCoomandShopGoods = (
             code: SHOP_PROCESSING_BODY,
             indent: indent,
             parameters: [
-              GOODS_TYPES[item.itemType],
+              GOODS_TYPES[item.itemType] ?? 0,
               item.id,
               usingCustomPrice,
               item.customPrice ?? 0,
