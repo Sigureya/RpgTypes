@@ -3,16 +3,13 @@ import SCHEMA_COMMAND_EMPTY_PARAM from "./commandEmptyParam.schema";
 import type {
   CommandUnion_ChangeActorText,
   Command_ScrollTextHeader,
-  CommandUnion_AnyAudio,
   Command_CommonEvent,
   Command_ShowChoices,
   Command_ShowChoiceWhen,
-  Command_InputNumber,
   Command_ShowMessageHeader,
 } from "./commands";
 import SCHEMA_COMMAND_CHANGE_ACTOR_TEXT from "./commands/actor/changeText/schema";
 import SCHEMA_COMMAND_CALL_COMMON_EVENT from "./commands/flow/callCommonEvent/schema";
-import SCHEMA_COMMAND_INPUT_NUMBER from "./commands/message/inputNumber/schema";
 import SCHEMA_COMMAND_SCROLL_TEXT_HEAD from "./commands/message/scrollText/head/schema";
 import SCHEMA_COMMAND_SHOW_CHOICE_WHEN from "./commands/message/setupChoice/item/schema";
 import SCHEMA_COMMAND_SHOW_CHOICES from "./commands/message/setupChoice/schema";
@@ -76,13 +73,6 @@ export const isCommandShowChoiceItem = (
   data: unknown
 ): data is Command_ShowChoiceWhen => {
   return showChoiceItem(data);
-};
-
-const inputNumber = ajv.compile(SCHEMA_COMMAND_INPUT_NUMBER);
-export const isCommandInputNumber = (
-  data: unknown
-): data is Command_InputNumber => {
-  return inputNumber(data);
 };
 
 const showMessage = ajv.compile(SCHEMA_COMMAND_SHOW_MESSAGE);

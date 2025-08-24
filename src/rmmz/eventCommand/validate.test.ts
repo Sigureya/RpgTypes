@@ -1,6 +1,5 @@
 import { describe, test, expect } from "vitest";
 import { makeCommandCommonEvent, type Command_CommonEvent } from "./commands";
-import { makeCommandInputNumber } from "./commands/message/inputNumber/make";
 import {
   makeCommandSetupChoice,
   makeCommandShowChoiceItem,
@@ -8,7 +7,6 @@ import {
 import { makeCommandShowMessage } from "./commands/message/showMessage/convert";
 import {
   isCommandCommonEvent,
-  isCommandInputNumber,
   isCommandShowChoiceItem,
   isCommandShowChoices,
   isCommandShowMessage,
@@ -57,17 +55,6 @@ describe("isCommandShowChoiceItem", () => {
   });
 
   testInvalidPattern(isCommandShowChoiceItem);
-});
-describe("isCommandInputNumber", () => {
-  test("Valid command", () => {
-    const command = makeCommandInputNumber({
-      variableId: 1,
-      digits: 2,
-    });
-    expect(command).toSatisfy(isCommandInputNumber);
-  });
-
-  testInvalidPattern(isCommandInputNumber);
 });
 
 describe("isCommandShowMessage", () => {
