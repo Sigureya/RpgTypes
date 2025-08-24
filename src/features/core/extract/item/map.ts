@@ -1,21 +1,22 @@
-import type { Data_Map, Data_Troop, MapEventPage } from "@RpgTypes/rmmz";
+import type {
+  Data_Map,
+  Data_Troop,
+  MapEventPage,
+  MapFileInfo,
+} from "@RpgTypes/rmmz";
 import type { EventCommand2 } from "@RpgTypes/rmmz/eventCommand/commands/union";
-import {
-  collectMapEvents,
-  correctTroopEvents,
-  processTroopEvents,
-} from "../../rpg";
+import { collectMapEvents, correctTroopEvents } from "../../rpg";
 import { extractItemCommands } from "./eventCommand/eventCommand";
 import type { ItemCommandCode, ItemCommandTerms2 } from "./eventCommand/types";
 import type { ExtractedMapEventItems, ExtractedTroopEventItems } from "./types";
 
 export const extractItemFromMap = (
-  map: Data_Map<EventCommand2>,
+  map: MapFileInfo<Data_Map<EventCommand2>>,
   terms: ItemCommandTerms2,
   commandNameFn: (code: ItemCommandCode) => string
 ): ExtractedMapEventItems[] => {
   return collectMapEvents(
-    map,
+    map.map,
     (page, index, event): ExtractedMapEventItems => ({
       ...conditionXX(page),
       commands: extractItemCommands(page.list, terms, commandNameFn),
