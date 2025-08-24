@@ -9,7 +9,7 @@ import type {
   Command_ChangeArmors2,
   Command_ChangeItems2,
   Command_ChangeWeapons2,
-} from "./item";
+} from "./item/change";
 import type {
   Command_EraseEvent,
   Command_ExitEventProcessing,
