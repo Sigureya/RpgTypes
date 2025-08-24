@@ -3,9 +3,9 @@ export interface Success<T> {
   value: T;
 }
 
-export interface Failure {
+export interface Failure<ErrorType = string> {
   success: false;
-  error: string;
+  error: ErrorType;
 }
 
 export type Result<T> = Success<T> | Failure;
