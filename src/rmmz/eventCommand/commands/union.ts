@@ -23,6 +23,23 @@ import type {
   Command_ChangeSaveAccess,
 } from "./menu/types";
 import type {
+  Command_CommentBody,
+  Command_CommentHeader,
+} from "./message/comment/types";
+import type {
+  Command_ScrollTextBody,
+  Command_ScrollTextHeader,
+} from "./message/scrollText";
+import type {
+  Command_ShowChoiceWhen,
+  Command_ShowChoices,
+} from "./message/setupChoice";
+import type {
+  Command_ShowMessageBody,
+  Command_ShowMessageHeader,
+} from "./message/showMessage";
+import type { Command_PluginCommandMV } from "./mv/pluginCommandMV";
+import type {
   Command_FadeOutScreen,
   Command_GameOver,
   Command_GatherFollowers,
@@ -39,6 +56,10 @@ import type { Command_ChangePartyMember } from "./party/changeMember/types";
 import type { Command_ChangeGold2 } from "./party/gold/changeGold";
 import type { Command_MovePicture2, Command_ShowPicture2 } from "./picture";
 import type { Command_ScriptBody, Command_ScriptHeader } from "./script/types";
+import type {
+  Command_ShopProcessing2,
+  Command_ShopProcessingBody2,
+} from "./shop/types";
 import type { Command_ControlVariables } from "./variable/types";
 
 export type EventCommand2 =
@@ -78,4 +99,15 @@ export type EventCommand2 =
   | Command_ControlSelfSwitch
   | Command_InputNumber
   | Command_ChangePartyMember
-  | Command_ChangeGold2;
+  | Command_ChangeGold2
+  | Command_ShopProcessing2
+  | Command_ShopProcessingBody2
+  | Command_ShowMessageHeader
+  | Command_ShowMessageBody
+  | Command_CommentHeader
+  | Command_CommentBody
+  | Command_ScrollTextHeader
+  | Command_ScrollTextBody
+  | Command_ShowChoices
+  | Command_ShowChoiceWhen
+  | Command_PluginCommandMV;

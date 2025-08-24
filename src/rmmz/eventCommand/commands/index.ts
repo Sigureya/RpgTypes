@@ -1,10 +1,12 @@
 export * from "./actor";
 export * from "./audio";
+// export * from "./controlTimer";
 export * from "./flow";
-export * from "./message";
+export * from "./inputNumber";
 export * from "./message";
 export * from "./mv/pluginCommandMV";
 export * from "./nonParam/types";
 export * from "./picture";
 export * from "./script";
+export * from "./shop";
 export * from "./variable";

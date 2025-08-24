@@ -1,8 +1,8 @@
 import { SHOP_PROCESSING, SHOP_PROCESSING_BODY } from "@RpgTypes/rmmz/rpg";
 import { CUSTOM_PRICE, NORMAL_PRICE } from "./constants";
 import type {
-  Command_ShopProcessing,
-  Command_ShopProcessingBody,
+  Command_ShopProcessing2,
+  Command_ShopProcessingBody2,
   GoodsType,
   ParamObject_ShopGoods,
   ParamObject_ShopProcessing,
@@ -20,9 +20,9 @@ const isCustomPrice = (goods: ParamObject_ShopGoods): boolean =>
 export const makeCommandShopProcessing = (
   { goods, buyOnly = false }: ParamObject_ShopProcessing,
   indent: number = 0
-): (Command_ShopProcessing | Command_ShopProcessingBody)[] => {
+): (Command_ShopProcessing2 | Command_ShopProcessingBody2)[] => {
   return goods.map(
-    (item, index): Command_ShopProcessing | Command_ShopProcessingBody => {
+    (item, index): Command_ShopProcessing2 | Command_ShopProcessingBody2 => {
       const usingCustomPrice = isCustomPrice(item)
         ? CUSTOM_PRICE
         : NORMAL_PRICE;
@@ -31,23 +31,23 @@ export const makeCommandShopProcessing = (
             code: SHOP_PROCESSING,
             indent: indent,
             parameters: [
-              GOODS_TYPES[item.itemType] ?? 0,
+              GOODS_TYPES[item.itemType] ?? GOODS_TYPES.item,
               item.id,
               usingCustomPrice,
               item.customPrice ?? 0,
               buyOnly,
             ],
-          } satisfies Command_ShopProcessing)
+          } satisfies Command_ShopProcessing2)
         : ({
             code: SHOP_PROCESSING_BODY,
             indent: indent,
             parameters: [
-              GOODS_TYPES[item.itemType] ?? 0,
+              GOODS_TYPES[item.itemType] ?? GOODS_TYPES.item,
               item.id,
               usingCustomPrice,
               item.customPrice ?? 0,
             ],
-          } satisfies Command_ShopProcessingBody);
+          } satisfies Command_ShopProcessingBody2);
     }
   );
 };

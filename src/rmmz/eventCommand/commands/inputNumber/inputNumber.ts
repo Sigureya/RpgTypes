@@ -12,10 +12,13 @@ export const makeCommandInputNumber = (
   parameters: [params.variableId, params.maxDigits],
   indent,
 });
+export const toArrayInputNumber = (
+  param: Partial<ParamObject_InputNumber>
+): ParamArray_InputNumber => [param.variableId ?? 0, param.maxDigits ?? 0];
 
 export const fromArrayInputNumber = (
-  arr: ParamArray_InputNumber
+  array: ParamArray_InputNumber
 ): ParamObject_InputNumber => ({
-  variableId: arr[0],
-  maxDigits: arr[1],
+  variableId: array[0],
+  maxDigits: array[1],
 });
