@@ -8,13 +8,8 @@ export interface Command_EraseEvent extends EventCommandLike<214, []> {}
 
 export interface Command_GatherFollowers extends EventCommandLike<217, []> {}
 
-export interface Command_FadeOutScreen extends EventCommandLike<221, []> {}
-
 export interface Command_FadeInScreen extends EventCommandLike<222, []> {}
 
-export interface Command_SaveBGM extends EventCommandLike<243, []> {}
-
-export interface Command_ResumeBGM extends EventCommandLike<244, []> {}
 export interface Command_OpenSaveScreen extends EventCommandLike<352, []> {}
 export interface Command_GameOver extends EventCommandLike<353, []> {}
 export interface Command_ReturnToTitleScreen
