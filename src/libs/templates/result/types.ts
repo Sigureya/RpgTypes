@@ -9,3 +9,8 @@ export interface Failure<ErrorType = string> {
 }
 
 export type Result<T> = Success<T> | Failure;
+
+export interface PartitionedResult<T, U> {
+  success: T[];
+  failure: U[];
+}
