@@ -3,17 +3,8 @@ import type { EventCommandLike } from "@RpgTypes/rmmz/rpg";
 export interface Command_Skip extends EventCommandLike<109> {
   parameters: [];
 }
-export interface Command_Loop extends EventCommandLike<112> {
-  parameters: [];
-}
-export interface Command_LoopBreak extends EventCommandLike<113> {
-  parameters: [];
-}
 export interface Command_GetOnOffVehicle extends EventCommandLike<206, []> {}
 
-export interface Command_ExitEventProcessing extends EventCommandLike<115> {
-  parameters: [];
-}
 export interface Command_EraseEvent extends EventCommandLike<214, []> {}
 
 export interface Command_GatherFollowers extends EventCommandLike<217, []> {}

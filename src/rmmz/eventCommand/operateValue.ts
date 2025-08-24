@@ -1,7 +1,9 @@
-import type { Command_ChangeArmors2 } from "./commands/item/types/armor";
-import { OPERAND_DIRECT } from "./commands/item/types/constants";
-import type { Command_ChangeItems2 } from "./commands/item/types/item";
-import type { Command_ChangeWeapons2 } from "./commands/item/types/weapon";
+import type {
+  Command_ChangeArmors2,
+  Command_ChangeItems2,
+  Command_ChangeWeapons2,
+} from "./commands/item/change";
+import { OPERAND_DIRECT } from "./commands/item/change/types/constants";
 import type { Command_ChangeGold2 } from "./commands/party/gold/changeGold";
 import type { OperateValueHandlers } from "./runtime/operateValue/types";
 

@@ -7,13 +7,13 @@ import type {
 
 export const toArrayInputNumber = (
   param: Partial<ParamObject_InputNumber>
-): ParamArray_InputNumber => [param.variableId ?? 0, param.digits ?? 0];
+): ParamArray_InputNumber => [param.variableId ?? 0, param.maxDigits ?? 0];
 
 export const fromArrayInputNumber = (
   array: ParamArray_InputNumber
 ): ParamObject_InputNumber => ({
   variableId: array[0],
-  digits: array[1],
+  maxDigits: array[1],
 });
 
 export const makeCommandInputNumber = (

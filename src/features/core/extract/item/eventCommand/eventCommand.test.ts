@@ -1,17 +1,15 @@
 import { test, expect, describe } from "vitest";
 import { CHANGE_ARMORS, CHANGE_ITEMS, CHANGE_WEAPONS } from "@RpgTypes/rmmz";
-import type {
-  Command_ChangeArmors2,
-  Command_ChangeItems2,
-  Command_ChangeWeapons2,
-} from "@RpgTypes/rmmz/eventCommand/commands/item";
 import {
   makeCommandGainArmor,
   makeCommandGainArmorV,
   makeCommandLoseArmor,
   makeCommandLoseArmorV,
   makeCommandLoseItem,
-} from "@RpgTypes/rmmz/eventCommand/commands/item";
+  type Command_ChangeArmors2,
+  type Command_ChangeItems2,
+  type Command_ChangeWeapons2,
+} from "@RpgTypes/rmmz/eventCommand/commands/item/change";
 import { extractItemChangeData, extractItemCommands } from "./eventCommand";
 import type {
   ItemCommandParameterDirect,
