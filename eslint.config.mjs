@@ -140,6 +140,12 @@ export default [
     },
   },
   {
+    files: ["src/rmmzRuntime/**/*.ts"],
+    rules: {
+      "@functional/no-return-void": "off",
+    },
+  },
+  {
     files: ["src/**/*index.ts"],
     rules: { "sort-exports/sort-exports": ["error", { sortDir: "asc" }] },
   },
