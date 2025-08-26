@@ -1,15 +1,29 @@
-export interface NewCommand_LocalNumber {
+import type { Argment } from "../core/types/argment";
+
+export interface NewCommand_LocalNumberLiteral {
   code: "localNumber";
+  name: string;
+  uuid: string;
   arg: {
-    name: string;
     value: number;
   };
 }
 
 export interface NewCommand_LocalString {
   code: "localString";
+  name: string;
+  uuid: string;
   arg: {
-    name: string;
     value: string;
+  };
+}
+
+export interface NewCommand_CallNumberFunction {
+  code: "callNumberFunction";
+  name: string;
+  uuid: string;
+  arg: {
+    functionName: string;
+    functionArgs: Argment[];
   };
 }

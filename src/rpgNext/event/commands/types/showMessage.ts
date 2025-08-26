@@ -1,4 +1,4 @@
-export interface ShowMessage {
+export interface NewCommand_ShowMessage {
   code: "showMessage";
   arg: {
     faceId: number;
