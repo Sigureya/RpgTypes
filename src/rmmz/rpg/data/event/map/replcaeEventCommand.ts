@@ -2,7 +2,7 @@ import type { EventCommandUnknown } from "@RpgTypes/rmmz/eventCommand";
 import type { MapEvent, MapEventPage } from "./event";
 import type { Data_Map } from "./map";
 
-export const repleaceEventCommands = <Command extends EventCommandUnknown>(
+export const repleaceMapEventCommands = <Command extends EventCommandUnknown>(
   map: Data_Map<Command>,
   fn: (list: ReadonlyArray<Command>) => Command[]
 ): (MapEvent<Command> | null)[] => {

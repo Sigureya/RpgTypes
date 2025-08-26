@@ -4,4 +4,4 @@ export * from "./map";
 export * from "./mapFileInfo";
 export * from "./mapInfo";
 export * from "./types/mapEventContainer";
-export { repleaceEventCommands } from "./replcaeEventCommand";
+export { repleaceMapEventCommands } from "./replcaeEventCommand";
