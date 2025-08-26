@@ -24,7 +24,7 @@ export const updateState = (
   return writeResult(nextIndex, command, waitUpdated, func, commandTable);
 };
 
-const writeResult = (
+export const writeResult = (
   nextIndex: number,
   command: NewComamnd,
   state: EventState,
