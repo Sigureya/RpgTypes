@@ -1,3 +1,4 @@
+import type { PickByType } from "@RpgTypes/libs";
 import type {
   Data_Actor,
   Data_Armor,
@@ -21,8 +22,8 @@ const replaceNote2 = (
   );
 };
 
-export const replaceActorText = (
-  actor: Data_Actor,
+export const replaceActorText = <Actor extends PickByType<Data_Actor, string>>(
+  actor: Actor,
   map: ReadonlyMap<string, string>
 ) => {
   const note: string = replaceNote2(actor, map);
@@ -39,8 +40,8 @@ export const replaceActorText = (
   };
 };
 
-export const replaceEnemyText = (
-  enemy: Data_Enemy,
+export const replaceEnemyText = <Enemy extends PickByType<Data_Enemy, string>>(
+  enemy: Enemy,
   map: ReadonlyMap<string, string>
 ) => {
   const note: string = replaceNote2(enemy, map);
@@ -52,8 +53,8 @@ export const replaceEnemyText = (
   };
 };
 
-export const replaceClassText = (
-  data: Data_Class,
+export const replaceClassText = <Class extends PickByType<Data_Class, string>>(
+  data: Class,
   map: ReadonlyMap<string, string>
 ) => {
   const note: string = replaceNote2(data, map);
@@ -65,8 +66,8 @@ export const replaceClassText = (
   };
 };
 
-export const replaceSkillText = (
-  skill: Data_Skill,
+export const replaceSkillText = <Skill extends PickByType<Data_Skill, string>>(
+  skill: Skill,
   map: ReadonlyMap<string, string>
 ) => {
   const note: string = replaceNote2(skill, map);
@@ -100,8 +101,8 @@ export const replaceItemText = <T extends Data_Item | Data_Weapon | Data_Armor>(
   } satisfies T;
 };
 
-export const replaceStateText = (
-  state: Data_State,
+export const replaceStateText = <State extends PickByType<Data_State, string>>(
+  state: State,
   map: ReadonlyMap<string, string>
 ) => {
   const note: string = replaceNote2(state, map);
