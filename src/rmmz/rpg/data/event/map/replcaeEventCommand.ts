@@ -1,11 +1,12 @@
-import type { EventCommand, MapEvent, MapEventPage } from "./event";
+import type { EventCommandUnknown } from "@RpgTypes/rmmz/eventCommand";
+import type { MapEvent, MapEventPage } from "./event";
 import type { Data_Map } from "./map";
 
-export const repleaceEventCommands = (
-  map: Data_Map,
-  fn: (list: ReadonlyArray<EventCommand>) => EventCommand[]
-): (MapEvent | null)[] => {
-  return map.events.map((event): MapEvent | null => {
+export const repleaceEventCommands = <Command extends EventCommandUnknown>(
+  map: Data_Map<Command>,
+  fn: (list: ReadonlyArray<Command>) => Command[]
+): (MapEvent<Command> | null)[] => {
+  return map.events.map((event): MapEvent<Command> | null => {
     if (!event) {
       return null;
     }
@@ -16,12 +17,12 @@ export const repleaceEventCommands = (
   });
 };
 
-const convertPages = (
-  mapEvent: MapEvent,
-  fn: (list: ReadonlyArray<EventCommand>) => EventCommand[]
-): MapEventPage[] => {
+const convertPages = <Command extends EventCommandUnknown>(
+  mapEvent: MapEvent<Command>,
+  fn: (list: ReadonlyArray<Command>) => Command[]
+): MapEventPage<Command>[] => {
   return mapEvent.pages.map(
-    (page): MapEventPage => ({
+    (page): MapEventPage<Command> => ({
       conditions: page.conditions,
       image: page.image,
       directionFix: page.directionFix,
