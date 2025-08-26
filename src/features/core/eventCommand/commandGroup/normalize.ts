@@ -1,4 +1,4 @@
-import type { EventCommand } from "@RpgTypes/rmmz";
+import type { EventCommand, EventCommand2 } from "@RpgTypes/rmmz";
 import {
   COMMENT_HEAD,
   COMMENT_BODY,
@@ -76,21 +76,21 @@ const processComment = (
   return [...acc, ...group.normalizedCommands()];
 };
 const processScroolText = (
-  acc: ReadonlyArray<EventCommand>,
+  acc: ReadonlyArray<EventCommand2>,
   command: unknown,
   index: number,
-  input: ReadonlyArray<EventCommand>
-): EventCommand[] => {
+  input: ReadonlyArray<EventCommand2>
+): EventCommand2[] => {
   const group = createScrollTextGroup(input, index);
   return [...acc, ...group.normalizedCommands()];
 };
 
 const processScript = (
-  acc: ReadonlyArray<EventCommand>,
+  acc: ReadonlyArray<EventCommand2>,
   command: unknown,
   index: number,
   input: ReadonlyArray<EventCommand>
-): EventCommand[] => {
+): EventCommand2[] => {
   const group = createScriptGroup(input, index);
   return [...acc, ...group.normalizedCommands()];
 };

@@ -1,14 +1,14 @@
-import type { EventCommand } from "@RpgTypes/rmmz";
+import type { EventCommand2 } from "@RpgTypes/rmmz";
 import { isCommandScriptBody, isCommandScriptHeader } from "@RpgTypes/rmmz";
 import { pickCommands, CombinedEventCommandGroup } from "./core";
 export const extractScriptGroup = (
-  list: ReadonlyArray<EventCommand>,
+  list: ReadonlyArray<EventCommand2>,
   index: number
 ) => {
   return pickCommands(list, index, isCommandScriptHeader, isCommandScriptBody);
 };
 export const createScriptGroup = (
-  list: ReadonlyArray<EventCommand>,
+  list: ReadonlyArray<EventCommand2>,
   index: number
 ) => {
   const { bodies, header } = extractScriptGroup(list, index);
