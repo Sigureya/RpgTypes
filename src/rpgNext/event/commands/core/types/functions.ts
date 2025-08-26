@@ -13,3 +13,8 @@ export interface FunctionsTable {
   ): object;
   wait(wait: WaitXXX): boolean;
 }
+
+export interface FunctionArg {
+  name: string;
+  args: object;
+}
