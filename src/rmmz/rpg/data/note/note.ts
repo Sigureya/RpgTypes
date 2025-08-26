@@ -14,7 +14,8 @@ export const createNoteEntity = (key: string, value: string): string => {
  */
 export const replaceNote = (
   note: string,
-  transformFunction: (item: NoteReadResult) => string
+  transformFunction: (item: NoteReadResult) => string,
+  sep = "\n"
 ): string => {
   const normalized: NormalizedNote = normalizeNote(note);
   const newItems = normalized.items.map(
@@ -23,10 +24,13 @@ export const replaceNote = (
       value: transformFunction(item),
     })
   );
-  return buildNoteFromNormalized({
-    note: normalized.note,
-    items: newItems,
-  });
+  return buildNoteFromNormalized(
+    {
+      note: normalized.note,
+      items: newItems,
+    },
+    sep
+  );
 };
 
 export const getNoteValue = (

@@ -12,9 +12,12 @@ export const replaceTextByMap = (
 
 export const replaceNoteTextByMap = (
   data: { note: string },
-  dic: ReadonlyMap<string, string>
+  dic: ReadonlyMap<string, string>,
+  sep = "\n"
 ): string => {
-  return replaceNote(data.note, (item: NoteReadResult): string =>
-    replaceTextByMap(item.value, dic)
+  return replaceNote(
+    data.note,
+    (item: NoteReadResult): string => replaceTextByMap(item.value, dic),
+    sep
   );
 };
