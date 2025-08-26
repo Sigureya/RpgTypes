@@ -6,6 +6,8 @@ import type { EventState } from "./state";
 import type { WaitXXX, SideEffect } from "./types";
 
 export interface CommandDefine<T> {
+  createDefaultCommand?(): T;
+
   isCommand?(data: unknown): data is T;
   commandTrait?(command: T): CommandTrait;
   execute(
