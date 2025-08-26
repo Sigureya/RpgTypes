@@ -1,5 +1,6 @@
 import { updateLocalVariable } from "./localValiable";
 import type { NewComamnd } from "./types/command";
+import type { CommandExecuteResult2 } from "./types/commandResult";
 import type { CommandDefine } from "./types/define";
 import type { FunctionsTable } from "./types/functions";
 import type { EventLoaclVariables, EventState } from "./types/state";
@@ -10,15 +11,15 @@ export const updateState = (
   state: EventState,
   func: FunctionsTable,
   commandTable: ReadonlyMap<string, CommandDefine<object>>
-) => {
+): CommandExecuteResult2 => {
   const waitUpdated: EventState = updateWait(state, (w) => func.wait(w));
   if (waitUpdated.wait === null) {
-    return waitUpdated;
+    return { newState: waitUpdated };
   }
   const nextIndex = waitUpdated.currentIndex + 1;
   const command = commands[nextIndex];
   if (command === undefined) {
-    return waitUpdated;
+    return { newState: waitUpdated };
   }
   return writeResult(nextIndex, command, waitUpdated, func, commandTable);
 };
@@ -29,7 +30,7 @@ const writeResult = (
   state: EventState,
   func: FunctionsTable,
   commandTable: ReadonlyMap<string, CommandDefine<object>>
-): { newState: EventState; sideEffect?: SideEffect; error?: string } => {
+): { newState: EventState; sideEffect?: SideEffect } => {
   const def = commandTable.get(command.code);
   if (def === undefined) {
     throw new Error(`Undefined command code: ${command.code}`);
