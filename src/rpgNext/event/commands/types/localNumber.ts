@@ -2,8 +2,8 @@ import type { Argment } from "../core/types/argment";
 
 export interface NewCommand_LocalNumberLiteral {
   code: "localNumber";
-  name: string;
-  uuid: string;
+  //  name: string;
+  vvv: string;
   arg: {
     value: number;
   };
