@@ -1,10 +1,10 @@
-import type { Argment } from "./core/argment";
-import type { FunctionsTable } from "./core/functions";
-import type { EventState } from "./core/state";
+import type { Argment } from "./types/argment";
+import type { FunctionsTable } from "./types/functions";
+import type { EventState } from "./types/state";
 
-export const evaluteArgment = (
+export const evaluteArgments = (
   state: EventState,
-  args: Argment[],
+  args: ReadonlyArray<Argment>,
   table: FunctionsTable
 ): Record<string, string | number> => {
   const argList = args.map((a): [string, string | number] => {
