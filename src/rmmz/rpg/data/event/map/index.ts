@@ -1,7 +1,7 @@
 export * from "./event";
 export * from "./make";
 export * from "./map";
-export * from "./mapEventContainer";
 export * from "./mapFileInfo";
 export * from "./mapInfo";
+export * from "./types/mapEventContainer";
 export { repleaceEventCommands } from "./replcaeEventCommand";
