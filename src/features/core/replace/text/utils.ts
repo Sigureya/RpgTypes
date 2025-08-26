@@ -1,3 +1,6 @@
+import type { NoteReadResult } from "@RpgTypes/rmmz";
+import { replaceNote } from "@RpgTypes/rmmz";
+
 export const replaceTextByMap = (
   text: string,
   map: ReadonlyMap<string, string>
@@ -5,4 +8,13 @@ export const replaceTextByMap = (
   const trimedKey = text.trimEnd();
   const value = map.get(trimedKey);
   return value !== undefined ? value.trimEnd() : trimedKey;
+};
+
+export const replaceNoteTextByMap = (
+  data: { note: string },
+  dic: ReadonlyMap<string, string>
+): string => {
+  return replaceNote(data.note, (item: NoteReadResult): string =>
+    replaceTextByMap(item.value, dic)
+  );
 };
