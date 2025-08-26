@@ -1,6 +1,6 @@
 import { describe, expect, test } from "vitest";
-import type { EventCommand2 } from "@RpgTypes/rmmz";
-import { makeMapData } from "@RpgTypes/rmmz";
+import type { Data_Map, EventCommand2 } from "@RpgTypes/rmmz";
+import { makeMapData, makeMapEvent } from "@RpgTypes/rmmz";
 import { replaceMapDataTexts } from "./map";
 import { replaceNoteTextByMap } from "./utils";
 
@@ -29,3 +29,32 @@ describe("replaceMapDataTexts", () => {
     expect(result.note).toBe(expectedNote);
   });
 });
+
+const dictionary = new Map<string, string>([
+  ["Hello", "Hi"],
+  ["World", "Earth"],
+  ["foo", "bar"],
+  ["baz", "qux"],
+]);
+
+interface TestCase {
+  caseName: string;
+  input: Data_Map<EventCommand2>;
+  expected: Data_Map<EventCommand2>;
+}
+
+const testCases: TestCase[] = [
+  {
+    caseName: "",
+    input: makeMapData({
+      displayName: "Hello",
+      note: "<test:foo> and <test:baz> and <test:nochange>",
+      events: [makeMapEvent()],
+    }),
+    expected: makeMapData({
+      displayName: "Hi",
+      note: "<test:bar>\n<test:qux>\n<test:nochange>\n and  and",
+      events: [],
+    }),
+  },
+];
