@@ -10,13 +10,13 @@ import {
 import { CombinedEventCommandGroup } from "./core";
 import { createScriptGroup, extractScriptGroup } from "./script";
 
-const mockCommands: EventCommand[] = [
+const mockCommands = [
   makeCommandCommonEvent({ eventId: 6 }),
   makeCommandScriptHeader("const a=0;"),
   makeCommandScriptBody("const b=1;"),
   makeCommandScriptBody("const c=2;"),
   makeCommandCommonEvent({ eventId: 8 }),
-];
+] as const satisfies EventCommand[];
 
 describe("extractScriptGroup - Validation Tests", () => {
   const expected = {
