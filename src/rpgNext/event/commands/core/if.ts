@@ -3,7 +3,7 @@ import type { FunctionsTable } from "./types/functions";
 import type { NewCommand_If } from "./types/if";
 import type { EventState } from "./types/state";
 
-const IF: CommandDefine<NewCommand_If> = {
+export const IF: CommandDefine<NewCommand_If> = {
   execute: (command, state, func) => {
     const value: number = ccc(command, state, func);
     return {
