@@ -8,12 +8,12 @@ import type { WaitXXX, SideEffect } from "./types";
 export interface CommandDefine<T> {
   isCommand?(data: unknown): data is T;
   commandTrait?(command: T): CommandTrait;
-  execute?(
-    state: EventState,
+  execute(
     command: T,
+    state: EventState,
     func: FunctionsTable
   ): CommandExecuteResult;
-  wait?(command: T): WaitXXX;
-  sideEffect?(command: T): SideEffect;
-  evaluete?(command: T, state: EventState, func: FunctionsTable): EvaluteResult;
+  // wait?(command: T): WaitXXX;
+  // sideEffect?(command: T): SideEffect;
+  // evaluete?(command: T, state: EventState, func: FunctionsTable): EvaluteResult;
 }

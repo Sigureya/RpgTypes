@@ -1,6 +1,8 @@
-import type { EventState } from "./state";
+import type { EvaluteResult } from "./evaluteResult";
+import type { SideEffect, WaitXXX } from "./types";
 
 export interface CommandExecuteResult {
-  nextState: EventState;
-  sideEffect?: {};
+  sideEffect?: SideEffect;
+  wait?: WaitXXX;
+  result?: EvaluteResult;
 }

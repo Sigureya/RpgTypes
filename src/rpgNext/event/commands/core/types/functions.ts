@@ -1,4 +1,5 @@
 import type { EventState } from "./state";
+import type { WaitXXX } from "./types";
 
 export interface FunctionsTable {
   callBoolean(state: EventState, name: string, arg: object): boolean;
@@ -10,4 +11,5 @@ export interface FunctionsTable {
     arg: object,
     requiredResultType: string
   ): object;
+  wait(wait: WaitXXX): boolean;
 }

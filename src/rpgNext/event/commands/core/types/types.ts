@@ -5,5 +5,6 @@ export interface SideEffect {
 
 export interface WaitXXX {
   wait: string;
+  count: number;
   arg: object;
 }

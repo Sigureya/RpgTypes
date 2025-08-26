@@ -1,13 +1,15 @@
+import type { WaitXXX } from "./types";
+
 export interface EventState {
   currentIndex: number;
   params: {};
   picutres: {};
-  localNumbers: Record<string, number>;
-  localStrings: Record<string, string>;
-  wait?: {
-    mode: string;
-    handlerName: string;
-    arg: {};
-  };
+  localValiables: EventLoaclVariables;
+  wait: WaitXXX | null;
   child: EventState | null;
+}
+
+export interface EventLoaclVariables {
+  strings: Record<string, string>;
+  numbers: Record<string, number>;
 }
