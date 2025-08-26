@@ -1,8 +1,8 @@
 import type { CommandDefine } from "./core/types/define";
 import type { NewCommand_ShowMessage } from "./types/showMessage";
 
-const COMMAND_MESSAGE: CommandDefine<NewCommand_ShowMessage> = {
-  execute(command, state, func) {
+export const COMMAND_MESSAGE: CommandDefine<NewCommand_ShowMessage> = {
+  execute(command) {
     return {
       wait: {
         wait: "message",
