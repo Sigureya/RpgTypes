@@ -1,9 +1,23 @@
-import type { Data_Map, EventCommandUnknown } from "@RpgTypes/rmmz";
+import type { Data_Map, EventCommand2 } from "@RpgTypes/rmmz";
+import { repleaceMapEventCommands } from "@RpgTypes/rmmz";
+import { replaceEventCommandTexts } from "./eventCommand";
 import { replaceTextByMap } from "./utils";
 
-export const mapXX = <Command extends EventCommandUnknown>(
-  mapData: Data_Map<Command>,
+export const replaceMapDataTexts = (
+  mapData: Data_Map<EventCommand2>,
   map: ReadonlyMap<string, string>
-) => {
+): Data_Map<EventCommand2> => {
   const displayName = replaceTextByMap(mapData.displayName, map);
+
+  const events = repleaceMapEventCommands(mapData, (commandList) =>
+    replaceEventCommandTexts(commandList, map)
+  );
+  const partial: Partial<Data_Map<EventCommand2>> = {
+    displayName,
+    events,
+  };
+  return {
+    ...mapData,
+    ...partial,
+  };
 };
