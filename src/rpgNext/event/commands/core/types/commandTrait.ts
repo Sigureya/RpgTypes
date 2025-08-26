@@ -5,4 +5,8 @@ export interface CommandTrait {
   read: {
     valueType: "string" | "number";
   }[];
+  call: {
+    valueType: "string" | "number" | "object";
+    function: string;
+  }[];
 }

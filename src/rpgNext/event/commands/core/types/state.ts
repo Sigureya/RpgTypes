@@ -9,5 +9,5 @@ export interface EventState {
     handlerName: string;
     arg: {};
   };
-  child?: EventState;
+  child: EventState | null;
 }
