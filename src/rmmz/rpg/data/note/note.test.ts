@@ -2,7 +2,8 @@ import { describe, test, expect, vi } from "vitest";
 import { createNoteEntity, replaceNote } from "./note";
 import type { NoteReadResult } from "./types";
 
-const exampleNoteTokyo = "<code:13><name:tokyo>";
+const exampleNoteTokyo = "<code:13><name:tokyo>" as const;
+
 describe("createNoteEntity", () => {
   describe("Normal cases", () => {
     test("Generates a string with the specified key and value", () => {
