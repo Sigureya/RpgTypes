@@ -3,7 +3,7 @@ import type { AudioFileParams } from "src/libs";
 import type { MapEvent } from "./event";
 import SCHEMA_MAP_EVENT_PAGE from "./event/page/schema";
 import type { Data_Map } from "./map";
-import type { Encounter } from "./members";
+import type { Encounter } from "./types/encounter";
 
 const SCHEMA_DATA_MAP = {
   type: "object",

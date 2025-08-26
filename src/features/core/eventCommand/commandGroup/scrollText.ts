@@ -1,4 +1,4 @@
-import type { EventCommand } from "@RpgTypes/rmmz";
+import type { EventCommand2 } from "@RpgTypes/rmmz";
 import {
   isCommandScrollTextHead,
   isCommandShowScrollingTextBody,
@@ -7,7 +7,7 @@ import {
 import { pickCommands, SimpleEventCommandGroup } from "./core";
 
 export const extractScrollTextGroup = (
-  list: ReadonlyArray<EventCommand>,
+  list: ReadonlyArray<EventCommand2>,
   index: number
 ) => {
   return pickCommands(
@@ -19,7 +19,7 @@ export const extractScrollTextGroup = (
 };
 
 export const createScrollTextGroup = (
-  list: ReadonlyArray<EventCommand>,
+  list: ReadonlyArray<EventCommand2>,
   index: number
 ) => {
   const { bodies, header } = extractScrollTextGroup(list, index);

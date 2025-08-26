@@ -43,8 +43,6 @@ import type {
   Command_ChangeVictoryME,
   Command_CommentBody,
   Command_CommentHeader,
-  Command_ConditionalBranchElse,
-  Command_SaveBGM,
   Command_ScriptBody,
   Command_ScriptHeader,
   Command_ScrollTextBody,
@@ -54,6 +52,8 @@ import type {
   Command_ShowMessageBody,
   Command_ShowMessageHeader,
 } from "./commands";
+import type { Command_SaveBGM } from "./commands/audio/other/types";
+import type { Command_ConditionalBranchElse } from "./commands/flow/branch";
 
 export interface EventCommandTable2 {
   showMessage: Command_ShowMessageHeader;

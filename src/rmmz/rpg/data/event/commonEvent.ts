@@ -1,7 +1,8 @@
 import type { EventCommandUnknown } from "@RpgTypes/rmmz/eventCommand";
 
-export interface Data_CommonEvent<Command extends EventCommandUnknown>
-  extends Data_CommonEventLike {
+export interface Data_CommonEvent<
+  Command extends EventCommandUnknown = EventCommandUnknown
+> extends Data_CommonEventLike {
   trigger: number;
   id: number;
   name: string;

@@ -1,6 +1,6 @@
-import type { EventCommand } from "@RpgTypes/rmmz";
+import type { EventCommandUnknown } from "@RpgTypes/rmmz";
 
-export interface ReplaceableEventPage {
+export interface ReplaceableEventPage<Command extends EventCommandUnknown> {
   id: number;
-  pages: { readonly list: ReadonlyArray<EventCommand> }[];
+  pages: { readonly list: ReadonlyArray<Command> }[];
 }

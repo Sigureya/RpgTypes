@@ -1,9 +1,9 @@
+import type { EventCommand2 } from "@RpgTypes/rmmz";
 import {
   CHANGE_NAME,
   CHANGE_NICKNAME,
   CHANGE_PROFILE,
   SHOW_CHOICES,
-  type EventCommand,
 } from "@RpgTypes/rmmz";
 import type { GroopMapper } from "./eventCommand/commandGroup";
 import { getGroupHandlingFunc } from "./eventCommand/commandGroup/mapping";
@@ -20,7 +20,7 @@ import {
 } from "./extractGroupText";
 
 export const extractTextFromEventCommands = (
-  list: ReadonlyArray<EventCommand>
+  list: ReadonlyArray<EventCommand2>
 ): TextCommandParameter[] => {
   return list.reduce<TextCommandParameter[]>((acc, command, index) => {
     if (command.code === SHOW_CHOICES) {

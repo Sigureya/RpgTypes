@@ -2,6 +2,7 @@ import type {
   BattleEventPage,
   Data_CommonEvent,
   Data_Troop,
+  EventCommandUnknown,
   MapEventContainer,
 } from "@RpgTypes/rmmz";
 import type { MapEventContext } from "./types";
@@ -145,12 +146,12 @@ export const correctTroopEvents = <Result, Command>(
  * @param func The function to apply to each common event.
  * @returns An array of processed common events.
  */
-export const processCommonEvents = <T>(
-  events: ReadonlyArray<Data_CommonEvent>,
+export const processCommonEvents = <T, Command extends EventCommandUnknown>(
+  events: ReadonlyArray<Data_CommonEvent<Command>>,
   func: (
-    common: Readonly<Data_CommonEvent>,
+    common: Readonly<Data_CommonEvent<Command>>,
     index: number,
-    common2: Readonly<Data_CommonEvent>
+    common2: Readonly<Data_CommonEvent<Command>>
   ) => T
 ): T[] => {
   return events.map((common) => func(common, 0, common));

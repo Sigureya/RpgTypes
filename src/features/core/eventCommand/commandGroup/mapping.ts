@@ -1,4 +1,4 @@
-import type { EventCommand } from "@RpgTypes/rmmz";
+import type { EventCommand2 } from "@RpgTypes/rmmz";
 import {
   COMMENT_HEAD,
   SCRIPT_EVAL,
@@ -14,28 +14,28 @@ import { createScrollTextGroup } from "./scrollText";
 const table: Record<
   number,
   <T>(
-    array: ReadonlyArray<EventCommand>,
+    array: ReadonlyArray<EventCommand2>,
     index: number,
     mapper: GroopMapper<T>
   ) => T
 > = {
   [SHOW_MESSAGE]: <T>(
-    array: ReadonlyArray<EventCommand>,
+    array: ReadonlyArray<EventCommand2>,
     index: number,
     mapper: GroopMapper<T>
   ): T => mapper.showMessage(createMessageGroup(array, index), index, array),
   [SCRIPT_EVAL]: <T>(
-    array: ReadonlyArray<EventCommand>,
+    array: ReadonlyArray<EventCommand2>,
     index: number,
     mapper: GroopMapper<T>
   ): T => mapper.script(createScriptGroup(array, index), index, array),
   [COMMENT_HEAD]: <T>(
-    array: ReadonlyArray<EventCommand>,
+    array: ReadonlyArray<EventCommand2>,
     index: number,
     mapper: GroopMapper<T>
   ): T => mapper.comment(createCommentGroup(array, index), index, array),
   [SHOW_SCROLLING_TEXT]: <T>(
-    array: ReadonlyArray<EventCommand>,
+    array: ReadonlyArray<EventCommand2>,
     index: number,
     mapper: GroopMapper<T>
   ): T =>
@@ -47,7 +47,7 @@ export const getGroupHandlingFunc = (
 ):
   | undefined
   | (<T>(
-      array: ReadonlyArray<EventCommand>,
+      array: ReadonlyArray<EventCommand2>,
       index: number,
       mapper: GroopMapper<T>
     ) => T) => {

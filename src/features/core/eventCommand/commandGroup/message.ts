@@ -1,13 +1,13 @@
 import type {
-  EventCommand,
   Command_ShowMessageBody,
   Command_ShowMessageHeader,
+  EventCommand2,
 } from "@RpgTypes/rmmz";
 import { SHOW_MESSAGE, SHOW_MESSAGE_BODY } from "@RpgTypes/rmmz";
 import { pickCommands, SimpleEventCommandGroup } from "./core";
 
 export const extractMessageGroup = (
-  list: ReadonlyArray<EventCommand>,
+  list: ReadonlyArray<EventCommand2>,
   index: number
 ) => {
   return pickCommands(
@@ -19,7 +19,7 @@ export const extractMessageGroup = (
 };
 
 export const createMessageGroup = (
-  list: ReadonlyArray<EventCommand>,
+  list: ReadonlyArray<EventCommand2>,
   index: number
 ) => {
   const { bodies, header } = extractMessageGroup(list, index);

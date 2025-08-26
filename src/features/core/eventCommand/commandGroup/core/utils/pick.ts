@@ -1,13 +1,13 @@
-import type { EventCommand, ExtractCommandByParam } from "@RpgTypes/rmmz";
+import type { EventCommand2, ExtractCommandByParam } from "@RpgTypes/rmmz";
 
 export const pickCommands = <
-  Head extends EventCommand,
-  Body extends ExtractCommandByParam<[string]>
+  Head extends EventCommand2,
+  Body extends ExtractCommandByParam<[string], EventCommand2>
 >(
-  array: ReadonlyArray<EventCommand>,
+  array: ReadonlyArray<EventCommand2>,
   index: number,
-  headFn: (data: EventCommand) => data is Head,
-  bodyFn: (data: EventCommand) => data is Body
+  headFn: (data: EventCommand2) => data is Head,
+  bodyFn: (data: EventCommand2) => data is Body
 ): {
   header: Head;
   bodies: Body[];

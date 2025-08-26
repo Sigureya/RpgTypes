@@ -2,6 +2,8 @@ import type {
   Data_CommonEvent,
   Data_Troop,
   EventCommand,
+  EventCommand2,
+  EventCommandUnknown,
 } from "@RpgTypes/rmmz";
 import type { TextCommandParameter } from "./extract/text/eventCommand";
 import { extractTextFromEventCommands } from "./getTextFromCommand";
@@ -13,12 +15,12 @@ export interface ExtractedCommonEventText {
 }
 
 export const extractCommonEventTexts = (
-  commons: Data_CommonEvent[]
+  commons: Data_CommonEvent<EventCommand2>[]
 ): ExtractedCommonEventText[] => {
   return processCommonEvents(
     commons,
     (
-      page: { list: EventCommand[] },
+      page: { list: EventCommand2[] },
       pageIndex: number,
       { id }: { id: number }
     ) => ({
