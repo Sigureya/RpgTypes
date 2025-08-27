@@ -1,6 +1,6 @@
 import { describe, test, expect } from "vitest";
-import type { OptionItem, Token } from "./selectOption";
 import { compileOptionItems } from "./selectOption";
+import type { OptionItem, Token } from "./types/selectOption";
 
 interface TokenOfOptionItem extends Token {
   keyword: keyof OptionItem;
