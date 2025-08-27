@@ -1,11 +1,11 @@
 import type { PluginDependencies } from "./dependencies";
 import type { KeywordEnum } from "./keyword/types";
-import type { OptionItem } from "./selectOption";
 import type {
   PluginParamTokens,
   PluginCommandTokens,
   PluginMeta,
 } from "./types";
+import type { OptionItem } from "./types/selectOption";
 
 export interface OptionsState {
   items: OptionItem[];

@@ -1,14 +1,5 @@
 import { KEYWORD_OPTION, KEYWORD_VALUE } from "./keyword/constants";
-
-export interface Token {
-  keyword: string;
-  value: string;
-}
-
-export interface OptionItem {
-  option: string;
-  value: string;
-}
+import type { OptionItem, Token } from "./types/selectOption";
 
 interface State {
   result: OptionItem[];
