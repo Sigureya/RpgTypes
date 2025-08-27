@@ -1,6 +1,6 @@
 import { Command_ShowMessageHeader, Command_ChangeActorName, Command_ChangeActorProfile, Command_ChangeActorNickName, Command_ShowMessageBody, Command_ShowChoices, Command_CommentHeader, Command_CommentBody, Command_ScrollTextBody, EventCommand } from '../../../../rmmz';
 export declare const replaceEventCommandTexts: (list: ReadonlyArray<EventCommand>, map: ReadonlyMap<string, string>) => EventCommand[];
-export declare const replaceTextForCommand2: (command: Command_ShowMessageBody | Command_CommentHeader | Command_CommentBody | Command_ScrollTextBody, map: ReadonlyMap<string, string>) => {
+export declare const replaceTextForCommand: (command: Command_ShowMessageBody | Command_CommentHeader | Command_CommentBody | Command_ScrollTextBody, map: ReadonlyMap<string, string>) => {
     code: 401 | 405 | 108 | 408;
     indent: number;
     parameters: [string];

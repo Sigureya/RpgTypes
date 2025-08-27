@@ -72,7 +72,7 @@ export declare const LABELS_SYSTEM_GAME_COMMANDS: {
         sell: string;
         cancel: string;
         clear: string;
-        continue_: string;
+        continueGame: string;
         equip2: string;
         keyItem: string;
         optimize: string;
