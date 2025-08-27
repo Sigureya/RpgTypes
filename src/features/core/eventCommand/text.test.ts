@@ -5,7 +5,6 @@ import type {
   Command_ChangeActorNickName,
   Command_ChangeActorProfile,
   Command_ShowChoices,
-  EventCommand,
 } from "@RpgTypes/rmmz";
 import { handlerDispatch } from "./text";
 import type { TextCommandMapper } from "./textCommandMapper";
