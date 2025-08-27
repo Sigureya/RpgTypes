@@ -2,7 +2,12 @@ import type { ParseState } from "./internalTypes";
 import { finalizeOptions } from "./option";
 import type { PluginCommandTokens } from "./types";
 
-export const withTexts = (command: { desc?: string; text?: string }) => {
+export interface DescAndText {
+  desc?: string;
+  text?: string;
+}
+
+export const withTexts = (command: DescAndText): DescAndText => {
   return {
     ...(typeof command.desc === "string" ? { desc: command.desc } : {}),
     ...(typeof command.text === "string" ? { text: command.text } : {}),

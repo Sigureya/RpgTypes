@@ -31,7 +31,7 @@ export const addOption = (
       };
 };
 
-export const finalizeOptions = (state: OptionsState) => {
+export const finalizeOptions = (state: OptionsState): OptionsState => {
   if (state.currentOption) {
     return {
       items: state.items.concat({
