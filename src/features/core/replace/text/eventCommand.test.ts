@@ -17,7 +17,7 @@ import {
   SHOW_MESSAGE_BODY,
 } from "@RpgTypes/rmmz";
 import {
-  replaceTextForCommand2,
+  replaceTextForCommand,
   replaceTextForCommandActor,
   replaceTextForCommandShowChoices,
   replaceTextForCommandShowMessage,
@@ -31,7 +31,7 @@ describe("replaceTextForCommand2", () => {
       indent: 1,
       parameters: ["foo"],
     };
-    const result = replaceTextForCommand2(command, map);
+    const result = replaceTextForCommand(command, map);
     expect(result.parameters[0]).toBe("bar");
   });
 });

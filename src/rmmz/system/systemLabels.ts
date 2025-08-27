@@ -87,7 +87,7 @@ export const LABELS_SYSTEM_GAME_COMMANDS = {
     sell: "売る",
     cancel: "キャンセル",
     clear: "クリア",
-    continue_: "続きから",
+    continueGame: "続きから",
     equip2: "装備2",
     keyItem: "大事なもの",
     optimize: "最強装備",
