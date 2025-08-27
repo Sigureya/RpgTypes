@@ -10,11 +10,6 @@ import type {
 import { extractTextFromEventCommands } from "./getTextFromCommand";
 import { processCommonEvents, processTroopEvents } from "./rpg";
 
-export type {
-  ExtractedBattleEventText,
-  ExtractedCommonEventText,
-} from "./extract/types";
-
 export const extractCommonEventTexts = (
   commons: ReadonlyArray<Data_CommonEvent<EventCommand>>
 ): ExtractedCommonEventText[] => {
