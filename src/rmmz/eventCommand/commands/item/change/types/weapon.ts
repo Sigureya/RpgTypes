@@ -3,9 +3,9 @@ import type { EventCommandLike2 } from "@RpgTypes/rmmz/eventCommand/frame";
 import type { CHANGE_WEAPONS, Operation_PlusMinus } from "@RpgTypes/rmmz/rpg";
 import type { OPERAND_DIRECT, OPERAND_VARIABLE } from "./constants";
 
-export interface Command_ChangeWeapons2
+export interface Command_ChangeWeapons
   extends EventCommandLike2<typeof CHANGE_WEAPONS> {
-  parameters: ParamArray_ChangeWeapons2;
+  parameters: ParamArray_ChangeWeapons;
 }
 
 export interface ParamObject_ChangeWeaponsFullset {
@@ -17,7 +17,7 @@ export interface ParamObject_ChangeWeaponsFullset {
   includesEquip: boolean;
 }
 
-export type ParamArray_ChangeWeapons2 = [
+export type ParamArray_ChangeWeapons = [
   operation: ValueOf<Operation_PlusMinus>,
   weaponId: number,
   value: number,

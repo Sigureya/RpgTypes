@@ -15,8 +15,8 @@ export type {
 } from "./types/item";
 
 export type {
-  Command_ChangeWeapons2,
-  ParamArray_ChangeWeapons2,
+  Command_ChangeWeapons,
+  ParamArray_ChangeWeapons,
   ParamObject_ChangeWeapons,
   ParamObject_ChangeWeaponsFullset,
   ParamObject_ChangeWeaponsV,
