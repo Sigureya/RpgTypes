@@ -1,5 +1,5 @@
 import { describe, test, expect } from "vitest";
-import type { ParseState, OptionsState } from "./internalTypes";
+import type { ParseState } from "./internalTypes";
 import {
   handleBase,
   handleOption,
@@ -56,16 +56,37 @@ describe("handleOrderBefore", () => {
 
 // handleOptionのテスト
 describe("handleOption", () => {
-  test.skip("should add option when currentParam is set", () => {
+  test("should add option when currentParam is set", () => {
     const state: ParseState = {
       ...createInitialState(),
       currentParam: { name: "param", attr: {} },
       currentOption: { items: [] },
     };
+    const expected: ParseState = {
+      ...createInitialState(),
+      currentParam: { name: "param", attr: {} },
+      currentOption: { items: [], currentOption: "option1" },
+    };
     const next: ParseState = handleOption(state, "option1");
-    expect(next.currentOption?.items.some((i) => i.option === "option1")).toBe(
-      true
-    );
+    expect(next).not.toBe(state);
+    expect(next).toEqual(expected);
+  });
+  test("", () => {
+    const state: ParseState = {
+      ...createInitialState(),
+      currentParam: { name: "param", attr: {} },
+      currentOption: { items: [], currentOption: "option1" },
+    };
+    const expected: ParseState = {
+      ...createInitialState(),
+      currentParam: { name: "param", attr: {} },
+      currentOption: {
+        items: [{ option: "option1", value: "value1" }],
+      },
+    };
+    const next = handleValue(state, "value1");
+    expect(next).not.toBe(state);
+    expect(next).toEqual(expected);
   });
 
   test("should not add option when currentParam is null", () => {
