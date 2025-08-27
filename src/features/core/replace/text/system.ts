@@ -1,5 +1,5 @@
 import type { Data_System } from "@RpgTypes/rmmz";
-import { replaceSystemTerms } from "./sytemTerms";
+import { replaceSystemTerms } from "./systemTerms";
 import { replaceTextByMap } from "./utils";
 
 export const replaceSystemText = (
