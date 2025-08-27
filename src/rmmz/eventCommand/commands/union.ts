@@ -52,9 +52,9 @@ import type { Command_Loop, Command_LoopBreak } from "./flow/loop/types";
 import type { Command_ControlSelfSwitch } from "./flow/selfSwitch/types";
 import type { Command_InputNumber } from "./inputNumber/types";
 import type {
-  Command_ChangeArmors2,
-  Command_ChangeItems2,
-  Command_ChangeWeapons2,
+  Command_ChangeArmors,
+  Command_ChangeItems,
+  Command_ChangeWeapons,
 } from "./item/change";
 import type { Command_SelectItem } from "./item/select/types";
 import type { Command_ChangeParallax } from "./map/parallax/types";
@@ -168,9 +168,9 @@ export type EventCommand =
   | Command_LoopBreak
   | Command_ControlSelfSwitch
   | Command_InputNumber
-  | Command_ChangeArmors2
-  | Command_ChangeItems2
-  | Command_ChangeWeapons2
+  | Command_ChangeArmors
+  | Command_ChangeItems
+  | Command_ChangeWeapons
   | Command_SelectItem
   | Command_ChangeParallax
   | Command_ScrollMap
