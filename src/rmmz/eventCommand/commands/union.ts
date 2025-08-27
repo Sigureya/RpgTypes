@@ -10,6 +10,7 @@ import type {
   Command_ChangeActorMP,
   Command_ChangeActorTP,
 } from "./actor/changeValues/types";
+import type { Command_ShowAnimation } from "./animation/types";
 import type {
   Command_FadeOutBGM,
   Command_FadeOutBGS,
@@ -26,10 +27,12 @@ import type {
   Command_PlayME,
   Command_PlaySE,
 } from "./audio/play/types";
+import type { Command_StopSE } from "./audio/stop";
 import type { Command_ShowBalloonIcon } from "./balloon/types";
 import type { Command_ChangeBattleBackground } from "./battle/background/types";
 import type { Command_BattleProcessing } from "./battle/battleProcessing/types";
 import type { Command_ControlTimer } from "./controlTimer/types";
+import type { Command_ChangeEncounter } from "./encounter/types";
 import type {
   Command_ChangeEnemyHP,
   Command_ChangeEnemyMP,
@@ -58,6 +61,7 @@ import type { Command_ScrollMap } from "./map/scroll/types";
 import type { Command_EraseEvent } from "./mapEvent/eraseEvent/types";
 import type { Command_SetEventLocation } from "./mapEvent/setLocation/types";
 import type { Command_ChangeTileset } from "./mapImage/tileset/types";
+import type { Command_TransferPlayer } from "./mapPlayer/transferPlayer/types";
 import type { Command_OpenSaveScreen } from "./menu/save/types";
 import type {
   Command_ChangeFormationAccess,
@@ -109,13 +113,18 @@ import type {
   Command_ShopProcessingBody2,
 } from "./shop/types";
 import type { Command_Skip } from "./skip/types";
+import type { Command_ChangeTransparency } from "./transparency/types";
 import type { Command_ControlVariables } from "./variable/types";
+import type { Command_ChangeVehicleImage } from "./vehicle/changeImage/types";
 import type { Command_SetVehicleLocation } from "./vehicle/setLocation/types";
 import type { Command_GetOnOffVehicle } from "./vehicle/types";
 import type { Command_Wait } from "./wait/types";
 import type { Command_SetWeatherEffect } from "./weather/types";
+import type { Command_ChangeWindowColor } from "./window/changeWindowColor/types";
 
 export type EventCommand2 =
+  | Command_ChangeWindowColor
+  | Command_StopSE
   | Command_ChangeClaass
   | Command_ChangeActorImages
   | Command_ChangeActorName
@@ -203,4 +212,9 @@ export type EventCommand2 =
   | Command_GetOnOffVehicle
   | Command_Wait
   | Command_SetWeatherEffect
-  | Command_SetEventLocation;
+  | Command_SetEventLocation
+  | Command_ChangeVehicleImage
+  | Command_TransferPlayer
+  | Command_ShowAnimation
+  | Command_ChangeEncounter
+  | Command_ChangeTransparency;
