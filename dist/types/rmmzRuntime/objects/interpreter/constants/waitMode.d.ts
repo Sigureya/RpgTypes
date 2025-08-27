@@ -1,0 +1,11 @@
+export declare const WAIT_MODE_NONE: "";
+export declare const WAIT_MODE_MESSAGE: "message";
+export declare const WAIT_MODE_MOVING: "transfer";
+export declare const WAIT_MODE_SCROLL: "scroll";
+export declare const WAIT_MODE_ROUTE: "route";
+export declare const WAIT_MODE_ANIMATION: "animation";
+export declare const WAIT_MODE_BALLOON: "balloon";
+export declare const WAIT_MODE_GATHER: "gather";
+export declare const WAIT_MODE_ACTION: "action";
+export declare const WAIT_MODE_VIDEO: "video";
+export declare const WAIT_MODE_IMAGE: "image";

@@ -1,5 +1,5 @@
 declare const SCHEMA_COMMAND_CONTROL_TIMER: {
-    required: ("code" | "parameters" | "indent")[];
+    required: ("parameters" | "code" | "indent")[];
     type: "object";
     properties: {
         code: {

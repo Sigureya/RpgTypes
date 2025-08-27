@@ -46,9 +46,9 @@ export interface ParamObject_ParamsMovePicture {
     wait: boolean;
     easingType: number;
 }
-export interface Command_ShowPicture2 extends EventCommandLike2<231> {
+export interface Command_ShowPicture extends EventCommandLike2<231> {
     parameters: ParamsArray_ShowPicture;
 }
-export interface Command_MovePicture2 extends EventCommandLike2<232> {
+export interface Command_MovePicture extends EventCommandLike2<232> {
     parameters: ParamsArray_ParamsMovePicture;
 }

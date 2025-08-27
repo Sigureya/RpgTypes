@@ -1,0 +1,14 @@
+import { EventCommandLike2 } from '../../../frame';
+import { CHANGE_ENEMY_STATE } from '../../../../rpg';
+import { ADD_STATE, REMOVE_STATE } from './constants';
+export interface Command_ChangeEnemyState extends EventCommandLike2<typeof CHANGE_ENEMY_STATE> {
+}
+export type ParamArray_ChangeEnemyState = [
+    enemyIndex: number,
+    operation: typeof ADD_STATE | typeof REMOVE_STATE,
+    stateId: number
+];
+export interface ParamObject_ChangeEnemyState {
+    enemyIndex: number;
+    stateId: number;
+}

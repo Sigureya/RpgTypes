@@ -6,7 +6,8 @@ export interface Command_TintPicture extends EventCommandLike2<234> {
     parameters: [
         pictureId: number,
         tone: [number, number, number, number],
-        duration: number
+        duration: number,
+        wait: boolean
     ];
 }
 export interface Command_ErasePicture extends EventCommandLike2<235> {

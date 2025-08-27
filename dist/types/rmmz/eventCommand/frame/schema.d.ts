@@ -1,7 +1,7 @@
 declare const SCHEMA_COMMAND_UNKNOWN: {
     readonly type: "object";
     readonly additionalProperties: false;
-    readonly required: ("code" | "parameters" | "indent")[];
+    readonly required: ("parameters" | "code" | "indent")[];
     readonly properties: {
         readonly code: {
             readonly type: "integer";

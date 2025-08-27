@@ -1,8 +1,8 @@
-import { EventCommand, EventCommandUnknown } from '../../../../rmmz';
+import { EventCommandUnknown } from '../../../../rmmz';
 export interface CommandContainer<Command extends EventCommandUnknown> {
     list: ReadonlyArray<Command>;
 }
-export type EventCommandContainer = CommandContainer<EventCommand>;
+export type EventCommandContainer = CommandContainer<EventCommandUnknown>;
 export interface MapEventLike {
     id: number;
     pages: EventCommandContainer[];

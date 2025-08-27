@@ -1,4 +1,4 @@
-import { BattleEventPage, Data_CommonEvent, Data_Troop, MapEventContainer } from '../../../../rmmz';
+import { BattleEventPage, Data_CommonEvent, Data_Troop, EventCommandUnknown, MapEventContainer } from '../../../../rmmz';
 import { MapEventContext } from './types';
 interface EventContainer<Command> {
     id: number;
@@ -64,7 +64,7 @@ export declare const correctTroopEvents: <Result, Command>(list: ReadonlyArray<D
  * @param func The function to apply to each common event.
  * @returns An array of processed common events.
  */
-export declare const processCommonEvents: <T>(events: ReadonlyArray<Data_CommonEvent>, func: (common: Readonly<Data_CommonEvent>, index: number, common2: Readonly<Data_CommonEvent>) => T) => T[];
+export declare const processCommonEvents: <T, Command extends EventCommandUnknown>(events: ReadonlyArray<Data_CommonEvent<Command>>, func: (common: Readonly<Data_CommonEvent<Command>>, index: number, common2: Readonly<Data_CommonEvent<Command>>) => T) => T[];
 /**
  * Gathers all event command contexts from a map.
  * @param map The map containing events.

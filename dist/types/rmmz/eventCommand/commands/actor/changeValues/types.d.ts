@@ -1,0 +1,40 @@
+import { EventCommandLike2 } from '../../../frame';
+import { CHANGE_HP, CHANGE_MP, CHANGE_TP } from '../../../../rpg';
+import { TARGET_DIRECT, TARGET_VARIABLE } from './constants';
+export interface Command_ChangeActorHP extends EventCommandLike2<typeof CHANGE_HP> {
+    parameters: ParamArray_ChangeActorHP;
+}
+export interface Command_ChangeActorMP extends EventCommandLike2<typeof CHANGE_MP> {
+    parameters: ParamArray_ChangeActorValue;
+}
+export interface Command_ChangeActorTP extends EventCommandLike2<typeof CHANGE_TP> {
+    parameters: ParamArray_ChangeActorValue;
+}
+export type ParamArray_ChangeActorValue = [
+    targetType: typeof TARGET_DIRECT | typeof TARGET_VARIABLE,
+    index: number,
+    operation: number,
+    valueType: number,
+    value: number
+];
+export type ParamArray_ChangeActorHP = [
+    targetType: typeof TARGET_DIRECT | typeof TARGET_VARIABLE,
+    index: number,
+    operation: number,
+    valueType: number,
+    value: number,
+    allowDeath: boolean
+];
+export interface ParamObject_ChangeActorValue {
+    allowDeath: boolean;
+    targetType: "direct" | "variable" | "each";
+    target: number;
+    operation: "plus" | "minus";
+    operand: {
+        type: "variable" | "direct";
+        value: number;
+    };
+}
+export type ParamObject_ChangeActorHP = ParamObject_ChangeActorValue & {
+    allowDeath: boolean;
+};
