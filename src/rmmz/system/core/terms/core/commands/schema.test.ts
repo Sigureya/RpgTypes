@@ -103,7 +103,7 @@ describe("makeTermsCommand with all properties set", () => {
     optimize: "Q16",
     clear: "R17",
     newGame: "S18",
-    continue_: "T19",
+    continueGame: "T19",
     toTitle: "U21",
     cancel: "V22",
     buy: "Y24",
