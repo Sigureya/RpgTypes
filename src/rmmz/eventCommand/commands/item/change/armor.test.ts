@@ -9,9 +9,9 @@ import {
   makeCommandLoseArmorV,
 } from "./armor";
 import type {
-  Command_ChangeArmors2,
-  ParamArray_ChangeArmors2,
-  ParamObject_ChangeArmors2,
+  Command_ChangeArmors,
+  ParamArray_ChangeArmors,
+  ParamObject_ChangeArmors,
   ParamObject_GainArmor,
   ParamObject_GainArmorV,
 } from "./types/armor";
@@ -24,14 +24,14 @@ import {
 
 describe("makeCommandChangeArmors", () => {
   test("creates correct command object", () => {
-    const param: ParamObject_ChangeArmors2 = {
+    const param: ParamObject_ChangeArmors = {
       operation: 0,
       armorId: 1,
       value: 5,
       operand: 0,
       includesEquip: false,
     };
-    const expected: Command_ChangeArmors2 = {
+    const expected: Command_ChangeArmors = {
       code: CHANGE_ARMORS,
       parameters: [0, 1, 5, 0, false],
       indent: 2,
@@ -41,14 +41,14 @@ describe("makeCommandChangeArmors", () => {
   });
 
   test("default indent is 0", () => {
-    const param: ParamObject_ChangeArmors2 = {
+    const param: ParamObject_ChangeArmors = {
       operation: 1,
       armorId: 2,
       value: 10,
       operand: 1,
       includesEquip: true,
     };
-    const expected: Command_ChangeArmors2 = {
+    const expected: Command_ChangeArmors = {
       code: CHANGE_ARMORS,
       parameters: [1, 2, 10, 1, true],
       indent: 3,
@@ -60,8 +60,8 @@ describe("makeCommandChangeArmors", () => {
 
 describe("fromArrayChangeArmors", () => {
   test("converts array to ParamObject_ChangeArmors2", () => {
-    const arr: ParamArray_ChangeArmors2 = [1, 2, 3, 0, true];
-    const expected: ParamObject_ChangeArmors2 = {
+    const arr: ParamArray_ChangeArmors = [1, 2, 3, 0, true];
+    const expected: ParamObject_ChangeArmors = {
       operation: 1,
       armorId: 2,
       value: 3,
@@ -76,7 +76,7 @@ describe("fromArrayChangeArmors", () => {
 describe("makeCommandGainArmor", () => {
   test("creates command with direct operand", () => {
     const param: ParamObject_GainArmor = { armorId: 42, value: 5 };
-    const expected: Command_ChangeArmors2 = {
+    const expected: Command_ChangeArmors = {
       code: CHANGE_ARMORS,
       parameters: [OPERATION_GAIN, 42, 5, OPERAND_DIRECT, false],
       indent: 0,
@@ -89,7 +89,7 @@ describe("makeCommandGainArmor", () => {
 describe("makeCommandGainArmorV", () => {
   test("creates command with variable operand", () => {
     const param: ParamObject_GainArmorV = { armorId: 42, variableId: 7 };
-    const expected: Command_ChangeArmors2 = {
+    const expected: Command_ChangeArmors = {
       code: CHANGE_ARMORS,
       parameters: [OPERATION_GAIN, 42, 7, OPERAND_VARIABLE, false],
       indent: 0,
@@ -102,7 +102,7 @@ describe("makeCommandGainArmorV", () => {
 describe("makeCommandLoseArmor", () => {
   test("creates command with direct operand", () => {
     const param: ParamObject_GainArmor = { armorId: 88, value: 1 };
-    const expected: Command_ChangeArmors2 = {
+    const expected: Command_ChangeArmors = {
       code: CHANGE_ARMORS,
       parameters: [OPERATION_LOSE, 88, 1, OPERAND_DIRECT, false],
       indent: 0,
@@ -115,7 +115,7 @@ describe("makeCommandLoseArmor", () => {
 describe("makeCommandLoseArmorV", () => {
   test("creates command with variable operand", () => {
     const param: ParamObject_GainArmorV = { armorId: 55, variableId: 3 };
-    const expected: Command_ChangeArmors2 = {
+    const expected: Command_ChangeArmors = {
       code: CHANGE_ARMORS,
       parameters: [OPERATION_LOSE, 55, 3, OPERAND_VARIABLE, false],
       indent: 5,

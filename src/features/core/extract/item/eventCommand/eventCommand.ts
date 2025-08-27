@@ -1,8 +1,8 @@
 import { CHANGE_ARMORS, CHANGE_ITEMS, CHANGE_WEAPONS } from "@RpgTypes/rmmz";
 import type {
-  Command_ChangeArmors2,
-  Command_ChangeItems2,
-  Command_ChangeWeapons2,
+  Command_ChangeArmors,
+  Command_ChangeItems,
+  Command_ChangeWeapons,
 } from "@RpgTypes/rmmz/eventCommand/commands/item/change";
 import {
   OPERAND_DIRECT,
@@ -47,10 +47,7 @@ const KIND_TABKE = {
 } as const;
 
 export const extractItemChangeData = (
-  command:
-    | Command_ChangeArmors2
-    | Command_ChangeItems2
-    | Command_ChangeWeapons2,
+  command: Command_ChangeArmors | Command_ChangeItems | Command_ChangeWeapons,
   terms: ItemCommandTerms2,
   commandNameFn: (code: ItemCommandCode) => string
 ): ItemCommandParameterDirect | ItemCommandParameterVariable => {

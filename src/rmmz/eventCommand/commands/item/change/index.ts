@@ -1,22 +1,22 @@
 export type {
-  Command_ChangeArmors2,
-  ParamArray_ChangeArmors2,
-  ParamObject_ChangeArmors2,
+  Command_ChangeArmors,
+  ParamArray_ChangeArmors,
+  ParamObject_ChangeArmors,
   ParamObject_GainArmor,
   ParamObject_GainArmorV,
 } from "./types/armor";
 
 export type {
-  Command_ChangeItems2,
-  ParamArray_ChangeItems2,
+  Command_ChangeItems,
+  ParamArray_ChangeItems,
   ParamObject_ChangeItems,
   ParamObject_ChangeItemsFullset,
   ParamObject_ChangeItemsV,
 } from "./types/item";
 
 export type {
-  Command_ChangeWeapons2,
-  ParamArray_ChangeWeapons2,
+  Command_ChangeWeapons,
+  ParamArray_ChangeWeapons,
   ParamObject_ChangeWeapons,
   ParamObject_ChangeWeaponsFullset,
   ParamObject_ChangeWeaponsV,

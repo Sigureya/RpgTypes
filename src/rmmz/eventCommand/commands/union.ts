@@ -52,14 +52,15 @@ import type { Command_Loop, Command_LoopBreak } from "./flow/loop/types";
 import type { Command_ControlSelfSwitch } from "./flow/selfSwitch/types";
 import type { Command_InputNumber } from "./inputNumber/types";
 import type {
-  Command_ChangeArmors2,
-  Command_ChangeItems2,
-  Command_ChangeWeapons2,
+  Command_ChangeArmors,
+  Command_ChangeItems,
+  Command_ChangeWeapons,
 } from "./item/change";
 import type { Command_SelectItem } from "./item/select/types";
 import type { Command_ChangeParallax } from "./map/parallax/types";
 import type { Command_ScrollMap } from "./map/scroll/types";
 import type { Command_EraseEvent } from "./mapEvent/eraseEvent/types";
+import type { Command_GetLocationInfo } from "./mapEvent/getLocationInfo/types";
 import type { Command_SetEventLocation } from "./mapEvent/setLocation/types";
 import type { Command_ChangeTileset } from "./mapImage/tileset/types";
 import type { Command_TransferPlayer } from "./mapPlayer/transferPlayer/types";
@@ -98,7 +99,7 @@ import type { Command_NoOperation } from "./noOperation";
 import type { Command_ChangePartyMember } from "./party/changeMember/types";
 import type { Command_ChangeGold } from "./party/gold/changeGold";
 import type { Command_RecoverAll } from "./party/types/recoverAll";
-import type { Command_MovePicture2, Command_ShowPicture2 } from "./picture";
+import type { Command_MovePicture, Command_ShowPicture } from "./picture";
 import type {
   Command_ErasePicture,
   Command_RotatePicture,
@@ -112,8 +113,8 @@ import type {
 } from "./screen/types";
 import type { Command_ScriptBody, Command_ScriptHeader } from "./script/types";
 import type {
-  Command_ShopProcessing2,
-  Command_ShopProcessingBody2,
+  Command_ShopProcessing,
+  Command_ShopProcessingBody,
 } from "./shop/types";
 import type { Command_Skip } from "./skip/types";
 import type { Command_ChangeTransparency } from "./transparency/types";
@@ -168,9 +169,9 @@ export type EventCommand =
   | Command_LoopBreak
   | Command_ControlSelfSwitch
   | Command_InputNumber
-  | Command_ChangeArmors2
-  | Command_ChangeItems2
-  | Command_ChangeWeapons2
+  | Command_ChangeArmors
+  | Command_ChangeItems
+  | Command_ChangeWeapons
   | Command_SelectItem
   | Command_ChangeParallax
   | Command_ScrollMap
@@ -197,8 +198,8 @@ export type EventCommand =
   | Command_FadeInScreen
   | Command_ChangePartyMember
   | Command_ChangeGold
-  | Command_MovePicture2
-  | Command_ShowPicture2
+  | Command_MovePicture
+  | Command_ShowPicture
   | Command_ErasePicture
   | Command_RotatePicture
   | Command_TintPicture
@@ -208,8 +209,8 @@ export type EventCommand =
   | Command_FadeOutScreen
   | Command_ScriptBody
   | Command_ScriptHeader
-  | Command_ShopProcessing2
-  | Command_ShopProcessingBody2
+  | Command_ShopProcessing
+  | Command_ShopProcessingBody
   | Command_Skip
   | Command_ControlVariables
   | Command_SetVehicleLocation
@@ -223,4 +224,5 @@ export type EventCommand =
   | Command_ChangeEncounter
   | Command_ChangeTransparency
   | Command_RecoverAll
-  | Command_ChangeExp;
+  | Command_ChangeExp
+  | Command_GetLocationInfo;

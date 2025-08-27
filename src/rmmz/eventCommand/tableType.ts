@@ -1,39 +1,4 @@
 import type {
-  Command_BattleProcessing,
-  Command_ChangeActorImages,
-  Command_ChangeArmors,
-  Command_ChangeBattleBackground,
-  Command_ChangeClaass,
-  Command_ChangeEncounter,
-  Command_ChangeEnemyHP,
-  Command_ChangeEnemyMP,
-  Command_ChangeFormationAccess,
-  Command_ChangeGold,
-  Command_ChangeItems,
-  Command_ChangeMenuAccess,
-  Command_ChangeParallax,
-  Command_ChangePartyMember,
-  Command_ChangePlayerFollowers,
-  Command_ChangeSaveAccess,
-  Command_ChangeTileset,
-  Command_ChangeTransparency,
-  Command_ChangeVehicleImage,
-  Command_ChangeWeapons,
-  Command_ChangeWindowColor,
-  Command_ConditionalBranch,
-  Command_MovePicture,
-  Command_ScrollMap,
-  Command_SelectItem,
-  Command_SetEventLocation,
-  Command_SetMovementRoute,
-  Command_SetVehicleLocation,
-  Command_SetWeatherEffect,
-  Command_ShopProcessingBody,
-  Command_ShowAnimation,
-  Command_ShowBalloonIcon,
-  Command_ShowPicture,
-} from "../rpg";
-import type {
   Command_ChangeActorName,
   Command_ChangeActorNickName,
   Command_ChangeActorProfile,
@@ -43,6 +8,7 @@ import type {
   Command_ChangeVictoryME,
   Command_CommentBody,
   Command_CommentHeader,
+  Command_MovePicture,
   Command_ScriptBody,
   Command_ScriptHeader,
   Command_ScrollTextBody,
@@ -51,9 +17,49 @@ import type {
   Command_ShowChoiceWhen,
   Command_ShowMessageBody,
   Command_ShowMessageHeader,
+  Command_ShowPicture,
 } from "./commands";
+import type { Command_ChangeClaass } from "./commands/actor/changeClass/types";
+import type { Command_ChangeActorImages } from "./commands/actor/changeImages/types";
+import type { Command_ShowAnimation } from "./commands/animation/types";
 import type { Command_SaveBGM } from "./commands/audio/other/types";
-import type { Command_ConditionalBranchElse } from "./commands/flow/branch";
+import type { Command_ShowBalloonIcon } from "./commands/balloon/types";
+import type { Command_ChangeBattleBackground } from "./commands/battle/background/types";
+import type { Command_BattleProcessing } from "./commands/battle/battleProcessing/types";
+import type { Command_ChangeEncounter } from "./commands/encounter/types";
+import type {
+  Command_ChangeEnemyHP,
+  Command_ChangeEnemyMP,
+} from "./commands/enemy/change/types";
+import type {
+  Command_ConditionalBranch,
+  Command_ConditionalBranchElse,
+} from "./commands/flow/branch";
+import type {
+  Command_ChangeArmors,
+  Command_ChangeItems,
+  Command_ChangeWeapons,
+} from "./commands/item/change";
+import type { Command_SelectItem } from "./commands/item/select/types";
+import type { Command_ChangeParallax } from "./commands/map/parallax/types";
+import type { Command_ScrollMap } from "./commands/map/scroll/types";
+import type { Command_SetEventLocation } from "./commands/mapEvent/setLocation/types";
+import type { Command_ChangePlayerFollowers } from "./commands/mapFollwer/types";
+import type { Command_ChangeTileset } from "./commands/mapImage/tileset/types";
+import type {
+  Command_ChangeFormationAccess,
+  Command_ChangeMenuAccess,
+  Command_ChangeSaveAccess,
+} from "./commands/menu/types";
+import type { Command_SetMovementRoute } from "./commands/movementRoute/command";
+import type { Command_ChangePartyMember } from "./commands/party/changeMember/types";
+import type { Command_ChangeGold } from "./commands/party/gold/changeGold";
+import type { Command_ShopProcessingBody } from "./commands/shop";
+import type { Command_ChangeTransparency } from "./commands/transparency/types";
+import type { Command_ChangeVehicleImage } from "./commands/vehicle/changeImage/types";
+import type { Command_SetVehicleLocation } from "./commands/vehicle/setLocation/types";
+import type { Command_SetWeatherEffect } from "./commands/weather/types";
+import type { Command_ChangeWindowColor } from "./commands/window/changeWindowColor/types";
 
 export interface EventCommandTable2 {
   showMessage: Command_ShowMessageHeader;

@@ -1,6 +1,5 @@
 import { describe, expect, test, vi } from "vitest";
 import { makeAudioFileParams } from "@RpgTypes/libs";
-import type { Command_ChangeActorImages } from "@RpgTypes/rmmz";
 import {
   makeCommandChangeActorImages,
   makeCommandChangeBattleBGM,
@@ -8,6 +7,7 @@ import {
   makeCommandShowPicture,
 } from "@RpgTypes/rmmz";
 import type { EventCommand } from "@RpgTypes/rmmz/eventCommand";
+import type { Command_ChangeActorImages } from "@RpgTypes/rmmz/eventCommand/commands/actor/changeImages/types";
 import type { Command_FadeOutBGM } from "@RpgTypes/rmmz/eventCommand/commands/audio/other/types";
 import * as CMD from "@sigureya/rpgtypes";
 import { mappingCommand } from "./allMapping";
