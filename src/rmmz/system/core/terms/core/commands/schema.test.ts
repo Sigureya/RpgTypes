@@ -75,7 +75,7 @@ describe("makeTermsCommand individual property assignment", () => {
   testTermsCommandProperty("optimize", "Optimize-16");
   testTermsCommandProperty("clear", "Clear-17");
   testTermsCommandProperty("newGame", "New Game-18");
-  testTermsCommandProperty("continue_", "Continue-19");
+  testTermsCommandProperty("continueGame", "Continue-19");
   testTermsCommandProperty("toTitle", "To Title-21");
   testTermsCommandProperty("cancel", "Cancel-22");
   testTermsCommandProperty("buy", "Buy-24");
