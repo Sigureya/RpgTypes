@@ -39,7 +39,7 @@ import type { Command_EnemyTransform } from "./enemy/transform/types";
 import type {
   Command_ConditionalBranch,
   Command_ConditionalBranchElse,
-} from "./flow/branch/types";
+} from "./flow/branch/commandTypes";
 import type { Command_CommonEvent } from "./flow/callCommonEvent";
 import type { Command_ControlSwitches } from "./flow/controlSwtches";
 import type { Command_ExitEventProcessing } from "./flow/exitEvent/types";
