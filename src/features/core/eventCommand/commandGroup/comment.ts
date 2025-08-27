@@ -2,7 +2,7 @@ import type {
   Command_CommentHeader,
   Command_CommentBody,
   EventCommandLike,
-  EventCommand2,
+  EventCommand,
 } from "@RpgTypes/rmmz";
 import { COMMENT_BODY, COMMENT_HEAD } from "@RpgTypes/rmmz";
 import type { EventCommandGroup_Comment } from "./core";
@@ -13,7 +13,7 @@ import {
 } from "./core";
 
 export const extractCommentGroup = (
-  list: ReadonlyArray<EventCommand2>,
+  list: ReadonlyArray<EventCommand>,
   index: number
 ): {
   header: Command_CommentHeader;
@@ -28,7 +28,7 @@ export const extractCommentGroup = (
 };
 
 export const createCommentGroup = (
-  list: ReadonlyArray<EventCommand2>,
+  list: ReadonlyArray<EventCommand>,
   index: number
 ): EventCommandGroup_Comment => {
   const { bodies, header } = extractCommentGroup(list, index);
