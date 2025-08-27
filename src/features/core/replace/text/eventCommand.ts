@@ -8,7 +8,7 @@ import type {
   Command_CommentHeader,
   Command_CommentBody,
   Command_ScrollTextBody,
-  EventCommand2,
+  EventCommand,
 } from "@RpgTypes/rmmz";
 import {
   CHANGE_NAME,
@@ -25,9 +25,9 @@ import {
 import { replaceTextByMap } from "./utils";
 
 export const replaceEventCommandTexts = (
-  list: ReadonlyArray<EventCommand2>,
+  list: ReadonlyArray<EventCommand>,
   map: ReadonlyMap<string, string>
-): EventCommand2[] => {
+): EventCommand[] => {
   return list.map((command) => {
     switch (command.code) {
       case SHOW_MESSAGE:
