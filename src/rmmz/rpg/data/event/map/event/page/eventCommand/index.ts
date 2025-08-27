@@ -1,4 +1,3 @@
-export * from "./branchParams";
 export * from "./eventComandLike";
 export * from "./eventCommand";
 export * from "./eventCommandCodes";
