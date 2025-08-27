@@ -1,4 +1,5 @@
 import type { Command_ChangeClaass } from "./actor/changeClass/types";
+import type { Command_ChangeExp } from "./actor/changeExp/types";
 import type { Command_ChangeActorImages } from "./actor/changeImages/types";
 import type {
   Command_ChangeActorName,
@@ -221,4 +222,5 @@ export type EventCommand =
   | Command_ShowAnimation
   | Command_ChangeEncounter
   | Command_ChangeTransparency
-  | Command_RecoverAll;
+  | Command_RecoverAll
+  | Command_ChangeExp;
