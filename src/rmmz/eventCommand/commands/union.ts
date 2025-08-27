@@ -60,6 +60,7 @@ import type { Command_SelectItem } from "./item/select/types";
 import type { Command_ChangeParallax } from "./map/parallax/types";
 import type { Command_ScrollMap } from "./map/scroll/types";
 import type { Command_EraseEvent } from "./mapEvent/eraseEvent/types";
+import type { Command_GetLocationInfo } from "./mapEvent/getLocationInfo/types";
 import type { Command_SetEventLocation } from "./mapEvent/setLocation/types";
 import type { Command_ChangeTileset } from "./mapImage/tileset/types";
 import type { Command_TransferPlayer } from "./mapPlayer/transferPlayer/types";
@@ -223,4 +224,5 @@ export type EventCommand =
   | Command_ChangeEncounter
   | Command_ChangeTransparency
   | Command_RecoverAll
-  | Command_ChangeExp;
+  | Command_ChangeExp
+  | Command_GetLocationInfo;
