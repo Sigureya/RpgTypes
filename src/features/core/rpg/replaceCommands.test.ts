@@ -50,7 +50,7 @@ describe("replaceEventCommands", () => {
 
   test("should return a new object with modified list", () => {
     const event = {
-      list: [createMockCommand(315)],
+      list: [createMockCommand(214)],
     } as const satisfies CommandContainer<EventCommand>;
     const result = replaceEventCommands(event, mockTransform);
 
@@ -118,14 +118,22 @@ describe("replaceMapEvents", () => {
         null,
         {
           id: 0,
-          pages: [{ list: [{ code: 213, indent: 0, parameters: [] }] }],
+          pages: [{ list: [{ code: 217, indent: 0, parameters: [] }] }],
         },
       ],
     } as const satisfies MapEventContainer<EventCommand>;
     const result = replaceMapEvents(map, mockTransform);
 
-    expect(result.events[0]).toBeNull();
-    expect(result.events[1]?.pages[0].list[0].code).toBe(213);
+    const expected = {
+      events: [
+        null,
+        {
+          id: 0,
+          pages: [{ list: [{ code: 217, indent: 8, parameters: [] }] }],
+        },
+      ],
+    } as const satisfies MapEventContainer<EventCommand>;
+    expect(result).toEqual(expected);
   });
 });
 
