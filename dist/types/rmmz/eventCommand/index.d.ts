@@ -5,4 +5,4 @@ export * from './unionTypes';
 export * from './utils';
 export * from './validate';
 export * from './validateTextBody';
-export type { EventCommand2 } from './commands/union';
+export type { EventCommand } from './commands/union';

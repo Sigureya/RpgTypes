@@ -1,8 +1,8 @@
-import { EventCommandUnknown } from '../../../../eventCommand';
+import { EventCommand, EventCommandUnknown } from '../../../../eventCommand';
 import { AudioFileParams } from 'src/libs';
-import { EventCommand, MapEvent } from './event/page';
-import { MapEventContainer } from './mapEventContainer';
-import { Encounter } from './members';
+import { MapEvent } from './event';
+import { Encounter } from './types/encounter';
+import { MapEventContainer } from './types/mapEventContainer';
 export interface Data_Map<CommandType extends EventCommandUnknown = EventCommand> extends MapEventContainer<CommandType> {
     data: number[];
     battleback1Name: string;

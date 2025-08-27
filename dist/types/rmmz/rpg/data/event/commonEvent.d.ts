@@ -1,10 +1,9 @@
 import { EventCommandUnknown } from '../../../eventCommand';
-import { EventCommand } from './map';
-export interface Data_CommonEvent extends Data_CommonEventLike {
+export interface Data_CommonEvent<Command extends EventCommandUnknown = EventCommandUnknown> extends Data_CommonEventLike {
     trigger: number;
     id: number;
     name: string;
-    list: EventCommand[];
+    list: Command[];
     switchId: number;
 }
 export interface Data_CommonEventLike {

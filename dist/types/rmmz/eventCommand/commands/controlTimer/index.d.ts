@@ -1,2 +1,2 @@
 export * from './make';
-export * from './types';
+export type { Command_ControlTimer, Paramobject_ControlTimer } from './types';
