@@ -9,7 +9,7 @@ import {
   OPERATION_GAIN,
   OPERATION_LOSE,
 } from "@RpgTypes/rmmz/eventCommand/commands/item/change/types/constants";
-import type { EventCommand2 } from "@RpgTypes/rmmz/eventCommand/commands/union";
+import type { EventCommand } from "@RpgTypes/rmmz/eventCommand/commands/union";
 import type {
   ItemCommandCode,
   ItemCommandParameterDirect,
@@ -18,7 +18,7 @@ import type {
 } from "./types";
 
 export const extractItemCommands = (
-  list: ReadonlyArray<EventCommand2>,
+  list: ReadonlyArray<EventCommand>,
   terms: ItemCommandTerms2,
   commandNameFn: (code: ItemCommandCode) => string
 ): (ItemCommandParameterDirect | ItemCommandParameterVariable)[] => {

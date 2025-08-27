@@ -13,7 +13,7 @@ export interface ExtractedCommonEventText {
 }
 
 export const extractCommonEventTexts = (
-  commons: Data_CommonEvent[]
+  commons: ReadonlyArray<Data_CommonEvent<EventCommand>>
 ): ExtractedCommonEventText[] => {
   return processCommonEvents(
     commons,
@@ -34,7 +34,9 @@ export interface ExtractedBattleEventText {
   pageIndex: number;
 }
 
-export const extractBattleEventTexts = (list: ReadonlyArray<Data_Troop>) => {
+export const extractBattleEventTexts = (
+  list: ReadonlyArray<Data_Troop<EventCommand>>
+) => {
   return processTroopEvents(
     list,
     (

@@ -1,10 +1,11 @@
 import type { EventCommandUnknown } from "@RpgTypes/rmmz/eventCommand";
 import type { MapEvent_PageCondition } from "./condition";
-import type { EventCommand } from "./eventCommand";
 import type { MoveRouteDataUnkwnown } from "./eventCommand/moveRoute";
 import type { MapEvent_Image } from "./image/types";
 
-export interface MapEventPage<T extends EventCommandUnknown = EventCommand> {
+export interface MapEventPage<
+  T extends EventCommandUnknown = EventCommandUnknown
+> {
   conditions: MapEvent_PageCondition;
   list: T[];
   directionFix: boolean;

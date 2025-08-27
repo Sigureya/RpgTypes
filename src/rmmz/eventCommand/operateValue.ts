@@ -4,7 +4,7 @@ import type {
   Command_ChangeWeapons2,
 } from "./commands/item/change";
 import { OPERAND_DIRECT } from "./commands/item/change/types/constants";
-import type { Command_ChangeGold2 } from "./commands/party/gold/changeGold";
+import type { Command_ChangeGold } from "./commands/party/gold/changeGold";
 import type { OperateValueHandlers } from "./runtime/operateValue/types";
 
 export const OPERATION_POSITIVE = 0 as const;
@@ -38,7 +38,7 @@ export const operateValueChangeGoods = <T, V>(
 };
 
 export const operateValueChangeGold = <T, V>(
-  command: Command_ChangeGold2,
+  command: Command_ChangeGold,
   handlers: OperateValueHandlers<T, V>
 ): T => {
   const operation = command.parameters[0];

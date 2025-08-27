@@ -1,7 +1,7 @@
 import type {
-  EventCommand,
   Command_ShowMessageBody,
   Command_ShowMessageHeader,
+  EventCommand,
 } from "@RpgTypes/rmmz";
 import { SHOW_MESSAGE, SHOW_MESSAGE_BODY } from "@RpgTypes/rmmz";
 import { pickCommands, SimpleEventCommandGroup } from "./core";

@@ -2,9 +2,10 @@ import { describe, expect, test, vi } from "vitest";
 import type {
   Command_ChangeActorNickName,
   Command_CommonEvent,
+  EventCommand,
   EventCommandUnknown,
 } from "@RpgTypes/rmmz/eventCommand";
-import type { MapEventContainer, EventCommand } from "@RpgTypes/rmmz/rpg";
+import type { MapEventContainer } from "@RpgTypes/rmmz/rpg";
 import {
   createEventContext,
   createCommandContext,

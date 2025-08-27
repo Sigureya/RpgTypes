@@ -2,6 +2,7 @@ import { describe, expect, test } from "vitest";
 import type {
   Data_CommonEvent,
   EventCommand,
+  EventCommandUnknown,
   ExtractCommandByParam,
   MapEventContainer,
 } from "@RpgTypes/rmmz";
@@ -16,7 +17,7 @@ import type { ReplaceableEventPage } from "./types";
 
 // Helper function to create a mock EventCommand
 const createMockCommand = (
-  code: ExtractCommandByParam<[]>["code"]
+  code: ExtractCommandByParam<[], EventCommand>["code"]
 ): ExtractCommandByParam<[]> => ({
   code,
   indent: 0,
@@ -24,7 +25,9 @@ const createMockCommand = (
 });
 
 // Simple transformation function: increments command code
-const mockTransform = (commands: ReadonlyArray<EventCommand>): EventCommand[] =>
+const mockTransform = <Command extends EventCommandUnknown>(
+  commands: ReadonlyArray<Command>
+): Command[] =>
   commands.map((cmd) => ({
     ...cmd,
     indent: 8,
@@ -32,10 +35,10 @@ const mockTransform = (commands: ReadonlyArray<EventCommand>): EventCommand[] =>
 
 describe("replaceEventCommands", () => {
   test("should replace commands using the provided function", () => {
-    const event: CommandContainer<EventCommand> = {
+    const event = {
       list: [createMockCommand(221), createMockCommand(217)],
-    };
-    const result = replaceEventCommands(event, mockTransform);
+    } as const satisfies CommandContainer<EventCommand>;
+    const result = replaceEventCommands(event, (x) => mockTransform(x));
 
     const expected: EventCommand[] = [
       { code: 221, indent: 8, parameters: [] },
@@ -46,9 +49,9 @@ describe("replaceEventCommands", () => {
   });
 
   test("should return a new object with modified list", () => {
-    const event: CommandContainer<EventCommand> = {
-      list: [createMockCommand(251)],
-    };
+    const event = {
+      list: [createMockCommand(214)],
+    } as const satisfies CommandContainer<EventCommand>;
     const result = replaceEventCommands(event, mockTransform);
 
     expect(result).not.toBe(event);
@@ -58,14 +61,14 @@ describe("replaceEventCommands", () => {
 
 describe("replacePages", () => {
   test("should replace commands across multiple pages", () => {
-    const container: ReplaceableEventPage = {
+    const container = {
       id: 0,
       pages: [
         { list: [createMockCommand(113)] },
         { list: [createMockCommand(115)] },
       ],
-    };
-    const result: ReplaceableEventPage = replacePages(container, mockTransform);
+    } as const satisfies ReplaceableEventPage;
+    const result = replacePages(container, mockTransform);
     const expected: ReplaceableEventPage = {
       id: 0,
       pages: [
@@ -110,19 +113,33 @@ describe("replaceMapEvents", () => {
   });
 
   test("should preserve null values in event list", () => {
-    const map: MapEventContainer<EventCommand> = {
-      events: [null, { id: 0, pages: [{ list: [createMockCommand(213)] }] }],
-    };
+    const map = {
+      events: [
+        null,
+        {
+          id: 0,
+          pages: [{ list: [{ code: 217, indent: 0, parameters: [] }] }],
+        },
+      ],
+    } as const satisfies MapEventContainer<EventCommand>;
     const result = replaceMapEvents(map, mockTransform);
 
-    expect(result.events[0]).toBeNull();
-    expect(result.events[1]?.pages[0].list[0].code).toBe(213);
+    const expected = {
+      events: [
+        null,
+        {
+          id: 0,
+          pages: [{ list: [{ code: 217, indent: 8, parameters: [] }] }],
+        },
+      ],
+    } as const satisfies MapEventContainer<EventCommand>;
+    expect(result).toEqual(expected);
   });
 });
 
 describe("replaceCommonEvents", () => {
   test("should replace commands in common events", () => {
-    const events: Data_CommonEvent[] = [
+    const events: Data_CommonEvent<EventCommand>[] = [
       {
         id: 1,
         list: [createMockCommand(221)],
@@ -139,7 +156,7 @@ describe("replaceCommonEvents", () => {
       },
     ];
     const result = replaceCommonEvents(events, mockTransform);
-    const expected: Data_CommonEvent[] = [
+    const expected: Data_CommonEvent<EventCommand>[] = [
       {
         id: 1,
         list: [{ code: 221, indent: 8, parameters: [] }],

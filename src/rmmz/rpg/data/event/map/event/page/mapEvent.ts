@@ -1,8 +1,7 @@
 import type { EventCommandUnknown } from "@RpgTypes/rmmz/eventCommand";
-import type { EventCommand } from "./eventCommand";
 import type { MapEventPage } from "./page";
 
-export interface MapEvent<T extends EventCommandUnknown = EventCommand> {
+export interface MapEvent<T extends EventCommandUnknown = EventCommandUnknown> {
   id: number;
   name: string;
   pages: MapEventPage<T>[];

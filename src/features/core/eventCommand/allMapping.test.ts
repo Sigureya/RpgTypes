@@ -7,6 +7,8 @@ import {
   makeCommandMovePicture,
   makeCommandShowPicture,
 } from "@RpgTypes/rmmz";
+import type { EventCommand } from "@RpgTypes/rmmz/eventCommand";
+import type { Command_FadeOutBGM } from "@RpgTypes/rmmz/eventCommand/commands/audio/other/types";
 import * as CMD from "@sigureya/rpgtypes";
 import { mappingCommand } from "./allMapping";
 import type { BasicMappingObject } from "./types/basicCommandsMapper";
@@ -19,7 +21,7 @@ const createMockMapper = <Key extends string & keyof BasicMappingObject<void>>(
     other: vi.fn(),
   };
 };
-const testMapping = <Command extends CMD.EventCommand>(
+const testMapping = <Command extends EventCommand>(
   key: keyof BasicMappingObject<void>,
   command: Command
 ) => {
@@ -216,7 +218,7 @@ describe("mappingCommand", () => {
     "playBGM",
     CMD.makeCommandPlayBGM(makeAudioFileParams())
   );
-  testMapping<CMD.Command_FadeOutBGM>("fadeOutBGM", {
+  testMapping<Command_FadeOutBGM>("fadeOutBGM", {
     code: CMD.FADEOUT_BGM,
     indent: 0,
     parameters: [0],

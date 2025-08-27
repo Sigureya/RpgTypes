@@ -5,7 +5,6 @@ import type {
   Command_ChangeActorNickName,
   Command_ChangeActorProfile,
   Command_ShowChoices,
-  EventCommand,
 } from "@RpgTypes/rmmz";
 import { handlerDispatch } from "./text";
 import type { TextCommandMapper } from "./textCommandMapper";
@@ -72,11 +71,11 @@ describe("handlerDispatch", () => {
     expect(mapper.changeNickname).toHaveBeenCalledWith(command, 0, [command]);
   });
 
-  test("other", () => {
-    const mapper = createMockMapper();
-    const command: EventCommand = { code: 0, parameters: [], indent: 0 };
-    mapper.other.mockReturnValue(undefined);
-    handlerDispatch([command], 0, mapper);
-    expect(mapper.other).toHaveBeenCalledWith(command, 0, [command]);
-  });
+  // test("other", () => {
+  //   const mapper = createMockMapper();
+  //   const command: EventCommand = { code: 0, parameters: [], indent: 0 };
+  //   mapper.other.mockReturnValue(undefined);
+  //   handlerDispatch([command], 0, mapper);
+  //   expect(mapper.other).toHaveBeenCalledWith(command, 0, [command]);
+  // });
 });

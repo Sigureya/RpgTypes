@@ -1,9 +1,10 @@
+import type { EventCommandUnknown } from "@RpgTypes/rmmz/eventCommand";
 import type { Data_CommonEvent } from "./commonEvent";
 import type { Data_Troop, Troop_EventConditions, Troop_Member } from "./troop";
 
-export const makeCommonEventData = (
-  data: Partial<Data_CommonEvent> = {}
-): Data_CommonEvent => ({
+export const makeCommonEventData = <Command extends EventCommandUnknown>(
+  data: Partial<Data_CommonEvent<Command>> = {}
+): Data_CommonEvent<Command> => ({
   id: data.id ?? 0,
   name: data.name ?? "",
   trigger: data.trigger ?? 0,
@@ -11,7 +12,9 @@ export const makeCommonEventData = (
   switchId: data.switchId ?? 0,
 });
 
-export const makeTroopData = (data: Partial<Data_Troop> = {}): Data_Troop => ({
+export const makeTroopData = <Command extends EventCommandUnknown>(
+  data: Partial<Data_Troop<Command>> = {}
+): Data_Troop<Command> => ({
   id: data.id ?? 0,
   name: data.name ?? "",
   members: data.members ?? [],

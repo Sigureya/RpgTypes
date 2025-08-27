@@ -1,12 +1,12 @@
 import { describe, expect, test } from "vitest";
-import type { Data_Map, EventCommand2 } from "@RpgTypes/rmmz";
+import type { Data_Map, EventCommand } from "@RpgTypes/rmmz";
 import { makeMapData, makeMapEvent } from "@RpgTypes/rmmz";
 import { replaceMapDataTexts } from "./map";
 import { replaceNoteTextByMap } from "./utils";
 
 describe("replaceMapDataTexts", () => {
   test("replaces displayName", () => {
-    const mapData = makeMapData<EventCommand2>({
+    const mapData = makeMapData<EventCommand>({
       displayName: "Old Name",
       events: [],
     });
@@ -15,7 +15,7 @@ describe("replaceMapDataTexts", () => {
     expect(result.displayName).toBe("New Name");
   });
   test("replaces note", () => {
-    const mapData = makeMapData<EventCommand2>({
+    const mapData = makeMapData<EventCommand>({
       displayName: "Map",
       note: "<test:foo> and <test:baz> and <test:nochange>",
       events: [],
@@ -39,8 +39,8 @@ const dictionary = new Map<string, string>([
 
 interface TestCase {
   caseName: string;
-  input: Data_Map<EventCommand2>;
-  expected: Data_Map<EventCommand2>;
+  input: Data_Map<EventCommand>;
+  expected: Data_Map<EventCommand>;
 }
 
 const testCases: TestCase[] = [

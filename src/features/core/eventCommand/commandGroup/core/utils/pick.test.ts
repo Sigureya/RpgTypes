@@ -19,7 +19,7 @@ import { pickCommands } from "./pick";
 type Pair = ReturnType<
   typeof pickCommands<Command_ShowMessageHeader, Command_ShowMessageBody>
 >;
-const pickEx = (commands: EventCommand[], index: number): Pair => {
+const pickEx = (commands: ReadonlyArray<EventCommand>, index: number): Pair => {
   return pickCommands(
     commands,
     index,
@@ -39,7 +39,7 @@ const testPickCommands = (
     head: MockedFunction<typeof isCommandShowMessage>;
     body: MockedFunction<typeof isCommandShowMessageBody>;
   },
-  commands: EventCommand[],
+  commands: ReadonlyArray<EventCommand>,
   index: number,
   expected: Pair
 ) => {
@@ -56,10 +56,10 @@ const testPickCommands = (
 };
 
 describe("pickCommands  - should handle a single head and a single body", () => {
-  const commands: EventCommand[] = [
+  const commands = [
     makeCommandShowMessage({}),
     makeCommandShowMessageBody("bbb"),
-  ];
+  ] as const satisfies ReadonlyArray<EventCommand>;
   describe("Invalid cases", () => {
     test("should throw an error when the head is invalid", () => {
       expect(() => pickEx(commands, 1)).toThrow();
@@ -95,14 +95,14 @@ describe("pickCommands  - should handle a single head and a single body", () => 
 
   describe("Valid cases with multiple bodies", () => {
     const mockFn = makeMockFunctions();
-    const commands: EventCommand[] = [
+    const commands = [
       makeCommandShowMessage({}),
       makeCommandShowMessageBody("bbb"),
       makeCommandShowMessageBody("ccc"),
       makeCommandCommonEvent({ eventId: 5 }),
       makeCommandShowMessageBody("ddd"),
       makeCommandCommonEvent({ eventId: 100 }),
-    ];
+    ] as const satisfies ReadonlyArray<EventCommand>;
     testPickCommands(
       "should pick a valid head with multiple bodies",
       mockFn,
@@ -138,14 +138,14 @@ describe("pickCommands  - should handle a single head and a single body", () => 
   });
 });
 describe("pickCommands - Complex Cases", () => {
-  const commands: EventCommand[] = [
+  const commands = [
     makeCommandShowMessage({ speakerName: "alice" }),
     makeCommandShowMessageBody("bbb"),
     makeCommandCommonEvent({ eventId: 5 }),
     makeCommandShowMessage({ speakerName: "bob" }),
     makeCommandShowMessageBody("xxx"),
     makeCommandShowMessageBody("yyy"),
-  ];
+  ] as const satisfies ReadonlyArray<EventCommand>;
 
   describe("Valid case with a single body", () => {
     const mockFn = makeMockFunctions();
@@ -214,10 +214,10 @@ describe("pickCommands - Edge cases", () => {
   });
   describe("Empty body handling", () => {
     const mockFn = makeMockFunctions();
-    const commands: EventCommand[] = [
+    const commands = [
       makeCommandShowMessage({}),
       makeCommandCommonEvent({ eventId: 5 }),
-    ];
+    ] as const satisfies ReadonlyArray<EventCommand>;
     testPickCommands(
       "should pick a valid head with no bodies",
       mockFn,

@@ -14,7 +14,7 @@ export const callHandler = <T, Command extends EventCommand>(
   index: number,
   array: ReadonlyArray<EventCommand>,
   handler: CallBackFunc<Command, T> | undefined,
-  fallback: CallBackFunc<EventCommand, T>
+  fallback: CallBackFunc<Code.EventCommand, T>
 ): T => {
   return handler
     ? handler(command, index, array)

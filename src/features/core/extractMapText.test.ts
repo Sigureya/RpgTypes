@@ -1,10 +1,10 @@
 import { test, expect, describe } from "vitest";
-import type { Data_Map } from "@RpgTypes/rmmz";
-import { makeMapData, makeMapEvent, readNote } from "@RpgTypes/rmmz";
+import type { Data_Map, EventCommand } from "@RpgTypes/rmmz";
+import { makeMapData, readNote } from "@RpgTypes/rmmz";
 import type { ExtractedMapEventTexts } from "./extractMapText";
 import { extractMapText } from "./extractMapText";
 
-const createMockMap = () =>
+const createMockMap = (): Data_Map<EventCommand> =>
   makeMapData({
     note: "<warp:x=0 y=0>",
     events: [
@@ -21,7 +21,7 @@ const createMockMap = () =>
   });
 
 describe("extractMapText", () => {
-  const mockMap: Data_Map = createMockMap();
+  const mockMap: Data_Map<EventCommand> = createMockMap();
   const result = extractMapText(mockMap);
   test("", () => {
     expect(result.displayedName).toBe(mockMap.displayName);

@@ -1,9 +1,9 @@
+import type { EventCommand } from "@RpgTypes/rmmz";
 import {
   CHANGE_NAME,
   CHANGE_NICKNAME,
   CHANGE_PROFILE,
   SHOW_CHOICES,
-  type EventCommand,
 } from "@RpgTypes/rmmz";
 import type { GroopMapper } from "./eventCommand/commandGroup";
 import { getGroupHandlingFunc } from "./eventCommand/commandGroup/mapping";
