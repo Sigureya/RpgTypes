@@ -1,7 +1,7 @@
 import type {
   Command_ShowMessageHeader,
-  EventCommand,
   Data_Actor,
+  EventCommand,
 } from "@RpgTypes/rmmz";
 import { isCommandShowMessage } from "@RpgTypes/rmmz";
 
