@@ -11,7 +11,7 @@ export const replaceSystemTerms = (
   map: ReadonlyMap<string, string>
 ): System_Terms => {
   return {
-    params: ppp(terms.params, map),
+    params: replaceParams(terms.params, map),
     messages: replaceSystemMessages(terms.messages, map),
     commands: replaceCommandsArray(terms.commands, map),
     basic: replaceBasicTerms(terms.basic, map),
@@ -70,7 +70,7 @@ const replaceCommandsArray = (
   ];
 };
 
-const ppp = (
+const replaceParams = (
   params: System_Terms["params"],
   map: ReadonlyMap<string, string>
 ): System_Terms["params"] => [
