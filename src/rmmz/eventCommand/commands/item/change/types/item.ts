@@ -3,12 +3,12 @@ import type { EventCommandLike2 } from "@RpgTypes/rmmz/eventCommand/frame";
 import type { CHANGE_ITEMS, Operation_PlusMinus } from "@RpgTypes/rmmz/rpg";
 import type { OPERAND_DIRECT, OPERAND_VARIABLE } from "./constants";
 
-export interface Command_ChangeItems2
+export interface Command_ChangeItems
   extends EventCommandLike2<typeof CHANGE_ITEMS> {
-  parameters: ParamArray_ChangeItems2;
+  parameters: ParamArray_ChangeItems;
 }
 
-export type ParamArray_ChangeItems2 = [
+export type ParamArray_ChangeItems = [
   operation: ValueOf<Operation_PlusMinus>,
   itemId: number,
   value: number,

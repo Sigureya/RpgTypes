@@ -6,15 +6,15 @@ import {
   OPERATION_LOSE,
 } from "./types/constants";
 import type {
-  Command_ChangeItems2,
-  ParamArray_ChangeItems2,
+  Command_ChangeItems,
+  ParamArray_ChangeItems,
   ParamObject_ChangeItemsFullset,
   ParamObject_ChangeItems,
   ParamObject_ChangeItemsV,
 } from "./types/item";
 
 export const fromArrayChangeItems = (
-  arr: ParamArray_ChangeItems2
+  arr: ParamArray_ChangeItems
 ): ParamObject_ChangeItemsFullset => ({
   operation: arr[0],
   itemId: arr[1],
@@ -26,7 +26,7 @@ export const fromArrayChangeItems = (
 export const makeCommandChangeItems = (
   param: ParamObject_ChangeItemsFullset,
   indent: number = 0
-): Command_ChangeItems2 => ({
+): Command_ChangeItems => ({
   code: CHANGE_ITEMS,
   parameters: [
     param.operation,
@@ -41,7 +41,7 @@ export const makeCommandChangeItems = (
 export const makeCommandGainItem = (
   param: ParamObject_ChangeItems,
   indent: number = 0
-): Command_ChangeItems2 => ({
+): Command_ChangeItems => ({
   code: CHANGE_ITEMS,
   parameters: [
     OPERATION_GAIN,
@@ -56,7 +56,7 @@ export const makeCommandGainItem = (
 export const makeCommandGainItemV = (
   param: ParamObject_ChangeItemsV,
   indent: number = 0
-): Command_ChangeItems2 => ({
+): Command_ChangeItems => ({
   code: CHANGE_ITEMS,
   parameters: [
     OPERATION_GAIN,
@@ -71,7 +71,7 @@ export const makeCommandGainItemV = (
 export const makeCommandLoseItem = (
   param: ParamObject_ChangeItems,
   indent: number = 0
-): Command_ChangeItems2 => ({
+): Command_ChangeItems => ({
   code: CHANGE_ITEMS,
   parameters: [
     OPERATION_LOSE,
@@ -86,7 +86,7 @@ export const makeCommandLoseItem = (
 export const makeCommandLoseItemV = (
   param: ParamObject_ChangeItemsV,
   indent: number = 0
-): Command_ChangeItems2 => ({
+): Command_ChangeItems => ({
   code: CHANGE_ITEMS,
   parameters: [
     OPERATION_LOSE,
