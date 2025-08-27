@@ -3,7 +3,7 @@ import { describe, test, expect, vi } from "vitest";
 import type {
   Command_CommonEvent,
   Command_ShowMessageBody,
-  EventCommand2,
+  EventCommand,
   ExtractCommandByParam,
 } from "@RpgTypes/rmmz";
 import {
@@ -19,10 +19,7 @@ import { pickCommands } from "./pick";
 type Pair = ReturnType<
   typeof pickCommands<Command_ShowMessageHeader, Command_ShowMessageBody>
 >;
-const pickEx = (
-  commands: ReadonlyArray<EventCommand2>,
-  index: number
-): Pair => {
+const pickEx = (commands: ReadonlyArray<EventCommand>, index: number): Pair => {
   return pickCommands(
     commands,
     index,
@@ -42,7 +39,7 @@ const testPickCommands = (
     head: MockedFunction<typeof isCommandShowMessage>;
     body: MockedFunction<typeof isCommandShowMessageBody>;
   },
-  commands: ReadonlyArray<EventCommand2>,
+  commands: ReadonlyArray<EventCommand>,
   index: number,
   expected: Pair
 ) => {
@@ -50,7 +47,7 @@ const testPickCommands = (
     const result = pickCommands(
       commands,
       index,
-      (a): a is EventCommand2 => mockFn.head(a),
+      (a): a is EventCommand => mockFn.head(a),
       (b): b is ExtractCommandByParam<[string]> => mockFn.body(b)
     );
     expect(result.header).toEqual(expected.header);
@@ -62,7 +59,7 @@ describe("pickCommands  - should handle a single head and a single body", () => 
   const commands = [
     makeCommandShowMessage({}),
     makeCommandShowMessageBody("bbb"),
-  ] as const satisfies ReadonlyArray<EventCommand2>;
+  ] as const satisfies ReadonlyArray<EventCommand>;
   describe("Invalid cases", () => {
     test("should throw an error when the head is invalid", () => {
       expect(() => pickEx(commands, 1)).toThrow();
@@ -105,7 +102,7 @@ describe("pickCommands  - should handle a single head and a single body", () => 
       makeCommandCommonEvent({ eventId: 5 }),
       makeCommandShowMessageBody("ddd"),
       makeCommandCommonEvent({ eventId: 100 }),
-    ] as const satisfies ReadonlyArray<EventCommand2>;
+    ] as const satisfies ReadonlyArray<EventCommand>;
     testPickCommands(
       "should pick a valid head with multiple bodies",
       mockFn,
@@ -148,7 +145,7 @@ describe("pickCommands - Complex Cases", () => {
     makeCommandShowMessage({ speakerName: "bob" }),
     makeCommandShowMessageBody("xxx"),
     makeCommandShowMessageBody("yyy"),
-  ] as const satisfies ReadonlyArray<EventCommand2>;
+  ] as const satisfies ReadonlyArray<EventCommand>;
 
   describe("Valid case with a single body", () => {
     const mockFn = makeMockFunctions();
@@ -203,7 +200,7 @@ describe("pickCommands - Edge cases", () => {
         pickCommands(
           [],
           0,
-          (a): a is EventCommand2 => mockFn.head(a),
+          (a): a is EventCommand => mockFn.head(a),
           (b): b is Command_ShowMessageBody => mockFn.body(b)
         )
       ).toThrow();
@@ -220,7 +217,7 @@ describe("pickCommands - Edge cases", () => {
     const commands = [
       makeCommandShowMessage({}),
       makeCommandCommonEvent({ eventId: 5 }),
-    ] as const satisfies ReadonlyArray<EventCommand2>;
+    ] as const satisfies ReadonlyArray<EventCommand>;
     testPickCommands(
       "should pick a valid head with no bodies",
       mockFn,

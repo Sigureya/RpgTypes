@@ -1,4 +1,4 @@
-import type { EventCommand2, EventCommandUnknown } from "@RpgTypes/rmmz";
+import type { EventCommand, EventCommandUnknown } from "@RpgTypes/rmmz";
 import type {
   Data_CommonEvent,
   Data_Troop,
@@ -7,12 +7,13 @@ import type {
 import type { CommandContainer } from "./map/";
 import type { ReplaceableEventPage } from "./types";
 
-type EventCommandReplaceFunc = (
-  list: ReadonlyArray<EventCommandUnknown>
-) => EventCommandUnknown[];
+type EventCommandReplaceFunc = <Command extends EventCommandUnknown>(
+  list: ReadonlyArray<Command>
+) => Command[];
 
 export const replaceEventCommands = <
-  T extends CommandContainer<EventCommandUnknown>
+  Command extends EventCommandUnknown,
+  T extends CommandContainer<Command> = CommandContainer<Command>
 >(
   data: T,
   fn: EventCommandReplaceFunc
@@ -24,7 +25,7 @@ export const replaceEventCommands = <
   };
 };
 
-export const replacePages = <Pages extends ReplaceableEventPage<EventCommand2>>(
+export const replacePages = <Pages extends ReplaceableEventPage<EventCommand>>(
   container: Pages,
   fn: EventCommandReplaceFunc
 ): Pages => {
@@ -34,7 +35,7 @@ export const replacePages = <Pages extends ReplaceableEventPage<EventCommand2>>(
   };
 };
 
-export const replaceMapEvents = <Map extends MapEventContainer<EventCommand2>>(
+export const replaceMapEvents = <Map extends MapEventContainer<EventCommand>>(
   map: Map,
   fn: EventCommandReplaceFunc
 ): Map => {
@@ -50,15 +51,15 @@ export const replaceMapEvents = <Map extends MapEventContainer<EventCommand2>>(
 };
 
 export const replaceCommonEvents = (
-  events: ReadonlyArray<Data_CommonEvent<EventCommand2>>,
+  events: ReadonlyArray<Data_CommonEvent<EventCommand>>,
   fn: EventCommandReplaceFunc
-): Data_CommonEvent<EventCommand2>[] => {
+): Data_CommonEvent<EventCommand>[] => {
   return events.map((commonEvent) => replaceEventCommands(commonEvent, fn));
 };
 
 export const replaceTroops = (
-  list: ReadonlyArray<Data_Troop<EventCommand2>>,
+  list: ReadonlyArray<Data_Troop<EventCommand>>,
   fn: EventCommandReplaceFunc
-): Data_Troop<EventCommand2>[] => {
+): Data_Troop<EventCommand>[] => {
   return list.map((troop) => replacePages(troop, fn));
 };

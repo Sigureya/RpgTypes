@@ -1,4 +1,4 @@
-import type { EventCommand2 } from "@RpgTypes/rmmz";
+import type { EventCommand } from "@RpgTypes/rmmz";
 import {
   CHANGE_NAME,
   CHANGE_NICKNAME,
@@ -20,7 +20,7 @@ import {
 } from "./extractGroupText";
 
 export const extractTextFromEventCommands = (
-  list: ReadonlyArray<EventCommand2>
+  list: ReadonlyArray<EventCommand>
 ): TextCommandParameter[] => {
   return list.reduce<TextCommandParameter[]>((acc, command, index) => {
     if (command.code === SHOW_CHOICES) {

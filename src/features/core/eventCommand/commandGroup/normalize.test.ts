@@ -1,5 +1,5 @@
 import { describe, test, expect } from "vitest";
-import type { EventCommand2 } from "@RpgTypes/rmmz";
+import type { EventCommand } from "@RpgTypes/rmmz";
 import {
   COMMENT_BODY,
   COMMENT_HEAD,
@@ -13,8 +13,8 @@ import { normalizeCommands } from "./normalize";
 
 interface TestCase {
   caseName: string;
-  input: EventCommand2[];
-  expected: EventCommand2[];
+  input: EventCommand[];
+  expected: EventCommand[];
 }
 
 const TEXT_A = "text a" as const;

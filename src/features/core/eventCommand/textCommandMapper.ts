@@ -5,7 +5,7 @@ import type {
   Command_CommentBody,
   Command_ShowChoices,
   Command_ShowChoiceWhen,
-  EventCommand2,
+  EventCommand,
 } from "@RpgTypes/rmmz";
 import type {
   EventCommandGroup_Message,
@@ -27,5 +27,5 @@ export interface TextCommandMapper<T> {
   changeNickname: CallBackFunc<Command_ChangeActorNickName, T>;
   commentBody: CallBackFunc<Command_CommentBody, T>;
 
-  other: CallBackFunc<EventCommand2, T>;
+  other: CallBackFunc<EventCommand, T>;
 }
