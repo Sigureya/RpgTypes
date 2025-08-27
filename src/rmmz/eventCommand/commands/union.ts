@@ -93,8 +93,10 @@ import type {
   Command_ReturnToTitleScreen,
   Command_FadeInScreen,
 } from "./nonParam/types";
+import type { Command_NoOperation } from "./noOperation";
 import type { Command_ChangePartyMember } from "./party/changeMember/types";
 import type { Command_ChangeGold } from "./party/gold/changeGold";
+import type { Command_RecoverAll } from "./party/types/recoverAll";
 import type { Command_MovePicture2, Command_ShowPicture2 } from "./picture";
 import type {
   Command_ErasePicture,
@@ -122,7 +124,8 @@ import type { Command_Wait } from "./wait/types";
 import type { Command_SetWeatherEffect } from "./weather/types";
 import type { Command_ChangeWindowColor } from "./window/changeWindowColor/types";
 
-export type EventCommand2 =
+export type EventCommand =
+  | Command_NoOperation
   | Command_ChangeWindowColor
   | Command_StopSE
   | Command_ChangeClaass
@@ -217,4 +220,5 @@ export type EventCommand2 =
   | Command_TransferPlayer
   | Command_ShowAnimation
   | Command_ChangeEncounter
-  | Command_ChangeTransparency;
+  | Command_ChangeTransparency
+  | Command_RecoverAll;
