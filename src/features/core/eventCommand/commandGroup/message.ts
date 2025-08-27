@@ -13,8 +13,8 @@ export const extractMessageGroup = (
   return pickCommands(
     list,
     index,
-    (a) => a.code === SHOW_MESSAGE,
-    (b) => b.code === SHOW_MESSAGE_BODY
+    (a): a is Command_ShowMessageHeader => a.code === SHOW_MESSAGE,
+    (b): b is Command_ShowMessageBody => b.code === SHOW_MESSAGE_BODY
   );
 };
 
