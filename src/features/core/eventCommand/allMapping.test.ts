@@ -1,4 +1,5 @@
 import { describe, expect, test, vi } from "vitest";
+import type { ColorRGBA } from "@RpgTypes/libs";
 import { makeAudioFileParams } from "@RpgTypes/libs";
 import {
   BATTLE_PROCESSING,
@@ -85,7 +86,6 @@ import type {
 } from "@RpgTypes/rmmz/eventCommand/commands/picture/other/types";
 import type { Command_ChangeTransparency } from "@RpgTypes/rmmz/eventCommand/commands/transparency/types";
 import type { Command_ChangeWindowColor } from "@RpgTypes/rmmz/eventCommand/commands/window/changeWindowColor/types";
-import type * as CMD from "@sigureya/rpgtypes";
 import { mappingCommand } from "./allMapping";
 import type { BasicMappingObject } from "./types/basicCommandsMapper";
 
@@ -116,7 +116,7 @@ const testMapping = <Command extends EventCommand>(
 };
 
 describe("mappingCommand", () => {
-  const mockColor: CMD.ColorRGBA = [0, 0, 0, 0];
+  const mockColor: ColorRGBA = [0, 0, 0, 0];
 
   testMapping<Command_Wait>("wait", {
     code: WAIT,
