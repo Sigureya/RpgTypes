@@ -44,7 +44,7 @@ export const splitBlock = (block: string): Block => {
     blockType: BLOCK_NONE,
   };
 
-  const finalState = lines.reduce<BlockState>((state, line) => {
+  const finalState = lines.reduce((state, line): BlockState => {
     const trimmed = line.trim();
     const structMatch = trimmed.match(
       /^\/\*~struct~([A-Za-z0-9_]+)(?::([A-Za-z0-9_-]+))?/

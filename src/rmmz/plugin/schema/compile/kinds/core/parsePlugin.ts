@@ -13,7 +13,7 @@ export interface PluginParam {
   attr: PrimitiveParam;
 }
 
-export const parsePlugin = (text: string) => {
+export const parsePlugin = (text: string): PluginJSON => {
   return compilePlugin(parse(text));
 };
 
