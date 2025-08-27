@@ -1,4 +1,4 @@
-import { NoteReadResult, Data_Map } from '../../rmmz';
+import { NoteReadResult, Data_Map, EventCommand } from '../../rmmz';
 import { TextCommandParameter } from './extract/text/eventCommand';
 export interface ExtractedMapTexts {
     events: ExtractedMapEventTexts[];
@@ -14,4 +14,4 @@ export interface ExtractedMapEventTexts {
     note: string;
     noteItems: NoteReadResult[];
 }
-export declare const extractMapText: (map: Data_Map) => ExtractedMapTexts;
+export declare const extractMapText: (map: Data_Map<EventCommand>) => ExtractedMapTexts;

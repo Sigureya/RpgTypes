@@ -1,96 +1,36 @@
+import { PickByType } from '../../../../libs';
 import { Data_Actor, Data_Armor, Data_Class, Data_Enemy, Data_Item, Data_Skill, Data_State, Data_Weapon } from '../../../../rmmz';
-export declare const replaceActorText: (actor: Data_Actor, map: ReadonlyMap<string, string>) => {
+export declare const replaceActorText: <Actor extends PickByType<Data_Actor, string>>(actor: Actor, map: ReadonlyMap<string, string>) => Actor & {
     name: string;
     nickname: string;
     profile: string;
     note: string;
-    id: number;
-    initialLevel: number;
-    maxLevel: number;
-    classId: number;
-    battlerName: string;
-    characterIndex: number;
-    characterName: string;
-    equips: number[];
-    faceIndex: number;
-    faceName: string;
-    traits: import('../../../../rmmz').Trait[];
 };
-export declare const replaceEnemyText: (enemy: Data_Enemy, map: ReadonlyMap<string, string>) => {
+export declare const replaceEnemyText: <Enemy extends PickByType<Data_Enemy, string>>(enemy: Enemy, map: ReadonlyMap<string, string>) => Enemy & {
     name: string;
     note: string;
-    id: number;
-    battlerName: string;
-    battlerHue: number;
-    exp: number;
-    gold: number;
-    params: import('../../../../rmmz').ParamArray;
-    actions: import('../../../../rmmz').Enemy_Action[];
-    traits: import('../../../../rmmz').Trait[];
-    dropItems: import('../../../../rmmz').DropItem[];
 };
-export declare const replaceClassText: (data: Data_Class, map: ReadonlyMap<string, string>) => {
+export declare const replaceClassText: <Class extends PickByType<Data_Class, string>>(data: Class, map: ReadonlyMap<string, string>) => Class & {
     name: string;
     note: string;
-    id: number;
-    expParams: number[];
-    params: import('../../../../rmmz').ParamArray;
-    learnings: import('../../../../rmmz').Learning[];
-    traits: import('../../../../rmmz').Trait[];
 };
-export declare const replaceSkillText: (skill: Data_Skill, map: ReadonlyMap<string, string>) => {
+export declare const replaceSkillText: <Skill extends PickByType<Data_Skill, string>>(skill: Skill, map: ReadonlyMap<string, string>) => Skill & {
     name: string;
     description: string;
     message1: string;
     message2: string;
     note: string;
-    id: number;
-    iconIndex: number;
-    messageType: number;
-    mpCost: number;
-    requiredWtypeId1: number;
-    requiredWtypeId2: number;
-    stypeId: number;
-    tpCost: number;
-    animationId: number;
-    hitType: number;
-    occasion: number;
-    repeats: number;
-    scope: number;
-    speed: number;
-    successRate: number;
-    tpGain: number;
-    effects: import('../../../../rmmz').ItemEffect[];
-    damage: import('../../../../rmmz').Damage;
 };
 export declare const replaceItemText: <T extends Data_Item | Data_Weapon | Data_Armor>(item: T, map: ReadonlyMap<string, string>) => T & {
     name: string;
     description: string;
     note: string;
 };
-export declare const replaceStateText: (state: Data_State, map: ReadonlyMap<string, string>) => {
+export declare const replaceStateText: <State extends PickByType<Data_State, string>>(state: State, map: ReadonlyMap<string, string>) => State & {
     name: string;
     message1: string;
     message2: string;
     message3: string;
     message4: string;
     note: string;
-    id: number;
-    iconIndex: number;
-    restriction: number;
-    priority: number;
-    motion: number;
-    overlay: number;
-    removeAtBattleEnd: boolean;
-    removeByRestriction: boolean;
-    removeByDamage: boolean;
-    removeByWalking: boolean;
-    messageType: number;
-    releaseByDamage: boolean;
-    autoRemovalTiming: number;
-    minTurns: number;
-    maxTurns: number;
-    chanceByDamage: number;
-    stepsToRemove: number;
-    traits: import('../../../../rmmz').Trait[];
 };

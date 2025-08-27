@@ -1,10 +1,11 @@
-import { Data_CommonEvent, Data_Troop, EventCommand, MapEventContainer } from '../../../rmmz/rpg';
-import { EventCommandContainer } from './map/';
+import { EventCommand, EventCommandUnknown } from '../../../rmmz';
+import { Data_CommonEvent, Data_Troop, MapEventContainer } from '../../../rmmz/rpg';
+import { CommandContainer } from './map/';
 import { ReplaceableEventPage } from './types';
-type EventCommandReplaceFunc = (list: ReadonlyArray<EventCommand>) => EventCommand[];
-export declare const replaceEventCommands: <T extends EventCommandContainer>(data: T, fn: EventCommandReplaceFunc) => T;
-export declare const replacePages: <Pages extends ReplaceableEventPage>(container: Pages, fn: EventCommandReplaceFunc) => Pages;
+type EventCommandReplaceFunc = <Command extends EventCommandUnknown>(list: ReadonlyArray<Command>) => Command[];
+export declare const replaceEventCommands: <Command extends EventCommandUnknown, T extends CommandContainer<Command> = CommandContainer<Command>>(data: T, fn: EventCommandReplaceFunc) => T;
+export declare const replacePages: <Pages extends ReplaceableEventPage<EventCommand>>(container: Pages, fn: EventCommandReplaceFunc) => Pages;
 export declare const replaceMapEvents: <Map extends MapEventContainer<EventCommand>>(map: Map, fn: EventCommandReplaceFunc) => Map;
-export declare const replaceCommonEvents: (events: ReadonlyArray<Data_CommonEvent>, fn: EventCommandReplaceFunc) => Data_CommonEvent[];
-export declare const replaceTroops: (list: ReadonlyArray<Data_Troop>, fn: EventCommandReplaceFunc) => Data_Troop[];
+export declare const replaceCommonEvents: (events: ReadonlyArray<Data_CommonEvent<EventCommand>>, fn: EventCommandReplaceFunc) => Data_CommonEvent<EventCommand>[];
+export declare const replaceTroops: (list: ReadonlyArray<Data_Troop<EventCommand>>, fn: EventCommandReplaceFunc) => Data_Troop<EventCommand>[];
 export {};

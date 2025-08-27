@@ -1,7 +1,7 @@
-import { EventCommand } from '../../../rmmz';
-export interface ReplaceableEventPage {
+import { EventCommand, EventCommandUnknown } from '../../../rmmz';
+export interface ReplaceableEventPage<Command extends EventCommandUnknown = EventCommand> {
     id: number;
     pages: {
-        readonly list: ReadonlyArray<EventCommand>;
+        readonly list: ReadonlyArray<Command>;
     }[];
 }
