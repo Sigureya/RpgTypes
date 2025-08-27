@@ -7,7 +7,7 @@ import type {
 } from "@RpgTypes/rmmz/rpg";
 
 export interface Command_FadeOutBGM
-  extends EventCommandLike2<typeof FADEOUT_BGM, []> {}
+  extends EventCommandLike2<typeof FADEOUT_BGM, [duration: number]> {}
 
 export interface Command_SaveBGM
   extends EventCommandLike2<typeof SAVE_BGM, []> {}
