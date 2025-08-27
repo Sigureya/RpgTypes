@@ -31,7 +31,7 @@ export const makeTermsCommandArrayWithNulls = <T extends "" | null>(
     param.optimize ?? "Optimize",
     param.clear ?? "Clear",
     param.newGame ?? "New Game",
-    param.continue_ ?? "Continue",
+    param.continueGame ?? "Continue",
     empty,
     param.toTitle ?? "To Title",
     param.cancel ?? "Cancel",
@@ -64,7 +64,7 @@ export const makeTermsCommandFromArray = <T extends "" | null = "">(
     optimize: param[16],
     clear: param[17],
     newGame: param[18],
-    continue_: param[19],
+    continueGame: param[19],
     toTitle: param[21],
     cancel: param[22],
 
