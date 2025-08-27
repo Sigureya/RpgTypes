@@ -5,17 +5,15 @@ export {
 
 export type { TextCommandParameter } from "./core/extract/text/eventCommand/types";
 export { extractTextFromEventCommands } from "./core/getTextFromCommand";
+
+export { extractMapText } from "./core/extractMapText";
+
 export type {
   ExtractedBattleEventText,
   ExtractedCommonEventText,
-} from "./core/extractEventText";
-
-export {
-  type ExtractedMapEventTexts,
-  type ExtractedMapTexts,
-  extractMapText,
-} from "./core/extractMapText";
-
+  ExtractedMapEventTexts,
+  ExtractedMapTexts,
+} from "./core/extract/types";
 export type {
   ExtractedActorImage,
   ExtractedEnemyImage,

@@ -28,9 +28,13 @@ export const extractTextFromEventCommands = (
     }
     const fn = getGroupHandlingFunc(command.code);
     if (fn) {
-      const g2 = fn<TextCommandParameter | undefined>(list, index, groupMapper);
-      if (g2 !== undefined) {
-        return [...acc, g2];
+      const textCommand = fn<TextCommandParameter | undefined>(
+        list,
+        index,
+        groupMapper
+      );
+      if (textCommand !== undefined) {
+        return [...acc, textCommand];
       }
     }
     if (command.code === CHANGE_NICKNAME) {
