@@ -40,35 +40,36 @@ const flushOptionsToParam = (state: ParseState): ParseState => {
 };
 
 const flushCurrentParam = (state: ParseState): ParseState => {
-  if (state.currentParam) {
-    return {
-      ...state,
-      params: [...state.params, state.currentParam],
-      currentParam: null,
-      currentContext: null,
-    };
+  if (!state.currentParam) {
+    return state;
   }
-  return state;
+  return {
+    ...state,
+    params: [...state.params, state.currentParam],
+    currentParam: null,
+    currentContext: null,
+  };
 };
 
 const flushCurrentCommand = (state: ParseState): ParseState => {
-  if (state.currentCommand) {
-    const newArgs = state.currentParam
-      ? [...state.currentCommand.args, state.currentParam]
-      : state.currentCommand.args;
-    const newCommand: PluginCommandTokens = {
-      ...withTexts(state.currentCommand),
-      command: state.currentCommand.command,
-      args: newArgs,
-    };
-    return {
-      ...state,
-      commands: [...state.commands, newCommand],
-      currentCommand: null,
-      currentParam: null,
-      currentContext: null,
-      currentOption: null,
-    };
+  if (!state.currentCommand) {
+    return state;
   }
-  return state;
+
+  const newArgs = state.currentParam
+    ? [...state.currentCommand.args, state.currentParam]
+    : state.currentCommand.args;
+  const newCommand: PluginCommandTokens = {
+    ...withTexts(state.currentCommand),
+    command: state.currentCommand.command,
+    args: newArgs,
+  };
+  return {
+    ...state,
+    commands: [...state.commands, newCommand],
+    currentCommand: null,
+    currentParam: null,
+    currentContext: null,
+    currentOption: null,
+  };
 };
