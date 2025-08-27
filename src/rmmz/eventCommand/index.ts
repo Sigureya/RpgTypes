@@ -1,6 +1,6 @@
 export * from "./commands";
 export * from "./frame";
-export * from "./tableType";
+export * from "./commands/tableType";
 export * from "./unionTypes";
 export * from "./utils";
 export * from "./validate";

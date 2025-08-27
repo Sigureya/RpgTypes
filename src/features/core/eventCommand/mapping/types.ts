@@ -1,4 +1,4 @@
-import type { EventCode, EventCommandTable2 } from "@RpgTypes/rmmz";
+import type { EventCode, EventCommandTable } from "@RpgTypes/rmmz";
 import {
   SHOW_MESSAGE,
   ABORT_BATTLE,
@@ -64,7 +64,7 @@ import {
 } from "@RpgTypes/rmmz";
 
 interface VV {
-  name: Extract<keyof EventCommandTable2, string>;
+  name: Extract<keyof EventCommandTable, string>;
 }
 
 const TABLE = {
