@@ -1,8 +1,9 @@
 import type { EventCommandUnknown } from "@RpgTypes/rmmz/eventCommand";
-import type { EventCommand } from "./event";
 import type { Data_Map } from "./map";
 
-export const makeMapData = <Command extends EventCommandUnknown = EventCommand>(
+export const makeMapData = <
+  Command extends EventCommandUnknown = EventCommandUnknown
+>(
   map: Partial<Data_Map<Command>> = {}
 ): Data_Map<Command> => {
   return {
