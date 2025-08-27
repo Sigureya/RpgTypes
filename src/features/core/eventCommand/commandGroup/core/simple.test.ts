@@ -1,7 +1,7 @@
 import { describe, test, expect } from "vitest";
 import {
-  createEventCommand,
   makeCommandShowMessage,
+  makeCommandShowMessageBody,
   SHOW_MESSAGE_BODY,
 } from "@RpgTypes/rmmz";
 import type { Command_ShowMessageHeader } from "@RpgTypes/rmmz";
@@ -16,7 +16,7 @@ const testSimpleEventCommandGroup = (
   const group = new SimpleEventCommandGroup(
     SHOW_MESSAGE_BODY,
     header,
-    bodyTexts.map((text) => createEventCommand(SHOW_MESSAGE_BODY, [text]))
+    bodyTexts.map((text) => makeCommandShowMessageBody(text))
   );
 
   describe("SimpleEventCommandGroup - Body Text and Merged Body Validation", () => {
