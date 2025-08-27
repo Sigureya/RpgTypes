@@ -1,6 +1,6 @@
 import type { AudioFileParams } from "src/libs/utils";
-import type * as MoveRouteConstants from "./domains/moveRoute/constants";
-import type { CommandTemplateSimple } from "./template/";
+import type * as MoveRouteConstants from "../rpg/data/event/map/event/page/eventCommand/types/domains/moveRoute/constants";
+import type { CommandTemplateSimple } from "../rpg/data/event/map/event/page/eventCommand/types/template";
 
 export type MoveRouteMapper = CommandTemplateSimple<
   typeof MoveRouteConstants,
