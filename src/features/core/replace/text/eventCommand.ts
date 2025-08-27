@@ -38,7 +38,7 @@ export const replaceEventCommandTexts = (
       case COMMENT_HEAD:
       case COMMENT_BODY:
       case SHOW_SCROLLING_TEXT_BODY:
-        return replaceTextForCommand2(command, map);
+        return replaceTextForCommand(command, map);
       case CHANGE_NAME:
       case CHANGE_NICKNAME:
       case CHANGE_PROFILE:
@@ -49,7 +49,7 @@ export const replaceEventCommandTexts = (
   });
 };
 
-export const replaceTextForCommand2 = (
+export const replaceTextForCommand = (
   command:
     | Command_ShowMessageBody
     | Command_CommentHeader
