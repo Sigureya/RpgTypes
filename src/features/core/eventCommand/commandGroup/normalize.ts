@@ -1,4 +1,4 @@
-import type { EventCommand, EventCommand2 } from "@RpgTypes/rmmz";
+import type { EventCommand2 } from "@RpgTypes/rmmz";
 import {
   COMMENT_HEAD,
   COMMENT_BODY,
@@ -15,34 +15,34 @@ import { createScriptGroup } from "./script";
 import { createScrollTextGroup } from "./scrollText";
 import { insertSpeakerCommand } from "./speakerNameMV";
 
-export const normalizeCommandsForMV = (list: ReadonlyArray<EventCommand>) => {
+export const normalizeCommandsForMV = (list: ReadonlyArray<EventCommand2>) => {
   return xxxDetail(list, (acc, command, index, input) => {
     const group = createMessageGroup(input, index);
     return [...acc, ...insertSpeakerCommand(group, () => undefined)];
   });
 };
 
-export const normalizeCommands = (list: ReadonlyArray<EventCommand>) => {
+export const normalizeCommands = (list: ReadonlyArray<EventCommand2>) => {
   return xxxDetail(list, messaege);
 };
 
 const xxxDetail = (
-  list: ReadonlyArray<EventCommand>,
+  list: ReadonlyArray<EventCommand2>,
   messageFn: (
-    acc: ReadonlyArray<EventCommand>,
+    acc: ReadonlyArray<EventCommand2>,
     command: unknown,
     index: number,
-    input: ReadonlyArray<EventCommand>
-  ) => EventCommand[]
-): EventCommand[] => {
+    input: ReadonlyArray<EventCommand2>
+  ) => EventCommand2[]
+): EventCommand2[] => {
   const FUNCTION_TABLE: Record<
     number,
     (
-      acc: EventCommand[],
-      command: EventCommand,
+      acc: EventCommand2[],
+      command: EventCommand2,
       index: number,
-      input: ReadonlyArray<EventCommand>
-    ) => EventCommand[]
+      input: ReadonlyArray<EventCommand2>
+    ) => EventCommand2[]
   > = {
     [SCRIPT_EVAL_BODY]: bodyFn,
     [COMMENT_BODY]: bodyFn,
@@ -54,7 +54,7 @@ const xxxDetail = (
     [SCRIPT_EVAL]: processScript,
   };
 
-  return list.reduce<EventCommand[]>((acc, command, index, array) => {
+  return list.reduce<EventCommand2[]>((acc, command, index, array) => {
     const fn = FUNCTION_TABLE[command.code];
     if (fn) {
       return fn(acc, command, index, array);
@@ -64,14 +64,14 @@ const xxxDetail = (
   }, []);
 };
 
-const bodyFn = (acc: EventCommand[]) => acc;
+const bodyFn = (acc: EventCommand2[]) => acc;
 
 const processComment = (
-  acc: ReadonlyArray<EventCommand>,
+  acc: ReadonlyArray<EventCommand2>,
   command: unknown,
   index: number,
-  input: ReadonlyArray<EventCommand>
-): EventCommand[] => {
+  input: ReadonlyArray<EventCommand2>
+): EventCommand2[] => {
   const group = createCommentGroup(input, index);
   return [...acc, ...group.normalizedCommands()];
 };
@@ -89,17 +89,17 @@ const processScript = (
   acc: ReadonlyArray<EventCommand2>,
   command: unknown,
   index: number,
-  input: ReadonlyArray<EventCommand>
+  input: ReadonlyArray<EventCommand2>
 ): EventCommand2[] => {
   const group = createScriptGroup(input, index);
   return [...acc, ...group.normalizedCommands()];
 };
 
 const messaege = (
-  acc: ReadonlyArray<EventCommand>,
+  acc: ReadonlyArray<EventCommand2>,
   command: unknown,
   index: number,
-  input: ReadonlyArray<EventCommand>
+  input: ReadonlyArray<EventCommand2>
 ) => {
   const group = createMessageGroup(input, index);
   return [...acc, ...group.normalizedCommands()];

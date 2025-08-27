@@ -1,6 +1,11 @@
 import type { Command_ShowMessageHeader, EventCommand } from "@RpgTypes/rmmz";
 import type * as RpgTypes from "@RpgTypes/rmmz";
 import type { Command_StopSE } from "@RpgTypes/rmmz/eventCommand";
+import type {
+  Command_ResumeBGM,
+  Command_SaveBGM,
+} from "@RpgTypes/rmmz/eventCommand/commands/audio/other/types";
+import type { Command_GetOnOffVehicle } from "@RpgTypes/rmmz/eventCommand/commands/vehicle/types";
 
 export type CallBackFunc<
   Command extends {
@@ -12,7 +17,7 @@ export type CallBackFunc<
 > = (
   command: Readonly<Command>,
   index: number,
-  list: ReadonlyArray<Readonly<EventCommand>>
+  list: ReadonlyArray<Readonly<RpgTypes.EventCommand2>>
 ) => Reulst;
 
 export interface FallbackMapper<T> {
@@ -65,7 +70,7 @@ export interface BasicMappingObject<T> extends FallbackMapper<T> {
   setEventLocation: CallBackFunc<RpgTypes.Command_SetEventLocation, T>;
   scrollMap: CallBackFunc<RpgTypes.Command_ScrollMap, T>;
   setMovementRoute: CallBackFunc<RpgTypes.Command_SetMovementRoute, T>;
-  gettingOnOffVehicle: CallBackFunc<RpgTypes.Command_GetOnOffVehicle, T>;
+  gettingOnOffVehicle: CallBackFunc<Command_GetOnOffVehicle, T>;
   changeTransparency: CallBackFunc<RpgTypes.Command_ChangeTransparency, T>;
   showPicture: CallBackFunc<RpgTypes.Command_ShowPicture2, T>;
   movePicture: CallBackFunc<RpgTypes.Command_MovePicture2, T>;
@@ -75,8 +80,8 @@ export interface BasicMappingObject<T> extends FallbackMapper<T> {
   setWeatherEffects: CallBackFunc<RpgTypes.Command_SetWeatherEffect, T>;
   playBGM: CallBackFunc<RpgTypes.Command_PlayBGM, T>;
   fadeOutBGM: CallBackFunc<RpgTypes.Command_FadeOutBGM, T>;
-  saveBGM: CallBackFunc<RpgTypes.Command_SaveBGM, T>;
-  resumeBGM: CallBackFunc<RpgTypes.Command_ResumeBGM, T>;
+  saveBGM: CallBackFunc<Command_SaveBGM, T>;
+  resumeBGM: CallBackFunc<Command_ResumeBGM, T>;
   playBGS: CallBackFunc<RpgTypes.Command_PlayBGS, T>;
   fadeOutBGS: CallBackFunc<RpgTypes.Command_FadeOutBGS, T>;
   playME: CallBackFunc<RpgTypes.Command_PlayME, T>;

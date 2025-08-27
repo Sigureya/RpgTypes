@@ -1,6 +1,6 @@
 import { describe, test, expect } from "vitest";
 import { createScriptGroup } from "@RpgTypes/features/core/eventCommand/commandGroup";
-import type { EventCommand } from "@RpgTypes/rmmz";
+import type { EventCommand2 } from "@RpgTypes/rmmz";
 import {
   makeCommandScriptBody,
   makeCommandScriptHeader,
@@ -9,7 +9,7 @@ import {
 import type { TextCommandParameter } from "./extract/text/eventCommand/types";
 import { extractTextParamFromScript } from "./extractGroupText";
 
-const test44 = (script: string, command: EventCommand[], index = 0) => {
+const test44 = (script: string, command: EventCommand2[], index = 0) => {
   const expected: TextCommandParameter = {
     code: SCRIPT_EVAL,
     paramIndex: 0,

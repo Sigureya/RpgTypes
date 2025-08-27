@@ -1,4 +1,9 @@
-import type { NoteReadResult, Data_Map } from "@RpgTypes/rmmz";
+import type {
+  NoteReadResult,
+  Data_Map,
+  EventCommandUnknown,
+  EventCommand2,
+} from "@RpgTypes/rmmz";
 import { readNote } from "@RpgTypes/rmmz";
 import type { TextCommandParameter } from "./extract/text/eventCommand";
 import { extractTextFromEventCommands } from "./getTextFromCommand";
@@ -20,14 +25,18 @@ export interface ExtractedMapEventTexts {
   noteItems: NoteReadResult[];
 }
 
-export const extractMapText = (map: Data_Map): ExtractedMapTexts => ({
+export const extractMapText = (
+  map: Data_Map<EventCommand2>
+): ExtractedMapTexts => ({
   note: map.note,
   noteItems: readNote(map.note),
   displayedName: map.displayName,
   events: extractMapEventTexts(map),
 });
 
-const extractMapEventTexts = (map: Data_Map): ExtractedMapEventTexts[] => {
+const extractMapEventTexts = (
+  map: Data_Map<EventCommand2>
+): ExtractedMapEventTexts[] => {
   return collectMapEvents(
     map,
     (page, pageIndex, event): ExtractedMapEventTexts => ({

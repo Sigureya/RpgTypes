@@ -1,4 +1,4 @@
-import type { EventCommand } from "@RpgTypes/rmmz";
+import type { EventCommand, EventCommand2 } from "@RpgTypes/rmmz";
 import {
   CHANGE_NAME,
   CHANGE_NICKNAME,
@@ -19,7 +19,7 @@ import {
 import type { TextCommandMapper } from "./textCommandMapper";
 
 export const handlerDispatch = <T>(
-  array: ReadonlyArray<EventCommand>,
+  array: ReadonlyArray<EventCommand2>,
   index: number,
   table: TextCommandMapper<T>
 ): T => {
@@ -51,7 +51,7 @@ export const handlerDispatch = <T>(
 };
 
 export const mapTextCommand = <T>(
-  list: ReadonlyArray<EventCommand>,
+  list: ReadonlyArray<EventCommand2>,
   table: TextCommandMapper<T>
 ): T[] => {
   return list.map<T>((command, index, array) =>

@@ -2,6 +2,7 @@ import { describe, expect, test } from "vitest";
 import type {
   Data_CommonEvent,
   EventCommand,
+  EventCommand2,
   ExtractCommandByParam,
   MapEventContainer,
 } from "@RpgTypes/rmmz";
@@ -24,7 +25,9 @@ const createMockCommand = (
 });
 
 // Simple transformation function: increments command code
-const mockTransform = (commands: ReadonlyArray<EventCommand>): EventCommand[] =>
+const mockTransform = (
+  commands: ReadonlyArray<EventCommand2>
+): EventCommand2[] =>
   commands.map((cmd) => ({
     ...cmd,
     indent: 8,
@@ -32,12 +35,12 @@ const mockTransform = (commands: ReadonlyArray<EventCommand>): EventCommand[] =>
 
 describe("replaceEventCommands", () => {
   test("should replace commands using the provided function", () => {
-    const event: CommandContainer<EventCommand> = {
+    const event = {
       list: [createMockCommand(221), createMockCommand(217)],
-    };
+    } as const satisfies CommandContainer<EventCommand2>;
     const result = replaceEventCommands(event, mockTransform);
 
-    const expected: EventCommand[] = [
+    const expected: EventCommand2[] = [
       { code: 221, indent: 8, parameters: [] },
       { code: 217, indent: 8, parameters: [] },
     ];
@@ -46,9 +49,9 @@ describe("replaceEventCommands", () => {
   });
 
   test("should return a new object with modified list", () => {
-    const event: CommandContainer<EventCommand> = {
+    const event = {
       list: [createMockCommand(251)],
-    };
+    } as const satisfies CommandContainer<EventCommand2>;
     const result = replaceEventCommands(event, mockTransform);
 
     expect(result).not.toBe(event);
@@ -58,14 +61,14 @@ describe("replaceEventCommands", () => {
 
 describe("replacePages", () => {
   test("should replace commands across multiple pages", () => {
-    const container: ReplaceableEventPage = {
+    const container = {
       id: 0,
       pages: [
         { list: [createMockCommand(113)] },
         { list: [createMockCommand(115)] },
       ],
-    };
-    const result: ReplaceableEventPage = replacePages(container, mockTransform);
+    } as const satisfies ReplaceableEventPage;
+    const result = replacePages(container, mockTransform);
     const expected: ReplaceableEventPage = {
       id: 0,
       pages: [
@@ -80,19 +83,19 @@ describe("replacePages", () => {
 
 describe("replaceMapEvents", () => {
   test("should replace commands for all map events", () => {
-    const map: MapEventContainer<EventCommand> = {
+    const map: MapEventContainer<EventCommand2> = {
       events: [
         { id: 2, pages: [{ list: [createMockCommand(353)] }] },
         null,
         { id: 5, pages: [{ list: [createMockCommand(109)] }] },
       ],
     };
-    const result: MapEventContainer<EventCommand> = replaceMapEvents(
+    const result: MapEventContainer<EventCommand2> = replaceMapEvents(
       map,
       mockTransform
     );
 
-    const expected: MapEventContainer<EventCommand> = {
+    const expected: MapEventContainer<EventCommand2> = {
       events: [
         {
           id: 2,
@@ -110,9 +113,15 @@ describe("replaceMapEvents", () => {
   });
 
   test("should preserve null values in event list", () => {
-    const map: MapEventContainer<EventCommand> = {
-      events: [null, { id: 0, pages: [{ list: [createMockCommand(213)] }] }],
-    };
+    const map = {
+      events: [
+        null,
+        {
+          id: 0,
+          pages: [{ list: [{ code: 213, indent: 0, parameters: [] }] }],
+        },
+      ],
+    } as const satisfies MapEventContainer<EventCommand>;
     const result = replaceMapEvents(map, mockTransform);
 
     expect(result.events[0]).toBeNull();
@@ -122,7 +131,7 @@ describe("replaceMapEvents", () => {
 
 describe("replaceCommonEvents", () => {
   test("should replace commands in common events", () => {
-    const events: Data_CommonEvent[] = [
+    const events: Data_CommonEvent<EventCommand2>[] = [
       {
         id: 1,
         list: [createMockCommand(221)],
@@ -139,7 +148,7 @@ describe("replaceCommonEvents", () => {
       },
     ];
     const result = replaceCommonEvents(events, mockTransform);
-    const expected: Data_CommonEvent[] = [
+    const expected: Data_CommonEvent<EventCommand2>[] = [
       {
         id: 1,
         list: [{ code: 221, indent: 8, parameters: [] }],

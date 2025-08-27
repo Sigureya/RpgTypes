@@ -3,6 +3,7 @@ import type {
   Command_ScrollTextBody,
   Command_ScrollTextHeader,
   EventCommand,
+  EventCommand2,
 } from "@RpgTypes/rmmz";
 import { SHOW_SCROLLING_TEXT_BODY } from "@RpgTypes/rmmz";
 import {
@@ -12,7 +13,7 @@ import {
 import { SimpleEventCommandGroup, type EventCommandGroupBase } from "./core";
 import { createScrollTextGroup, extractScrollTextGroup } from "./scrollText";
 
-const mockCommands: EventCommand[] = [
+const mockCommands: EventCommand2[] = [
   makeCommandScrollingTextHeader({
     speed: 2,
   }),

@@ -1,22 +1,22 @@
 import type {
   Command_ShowMessageBody,
   Command_ShowMessageHeader,
-  EventCommand,
+  EventCommand2,
 } from "@RpgTypes/rmmz";
 import type { SimpleEventCommandGroup } from "./core/simple";
 
-export interface ResultXX<Command extends EventCommand> {
+export interface ResultXX<Command extends EventCommand2> {
   spekerCommand: Command;
   messaege: string;
 }
 
-export const insertSpeakerCommand = <Command extends EventCommand>(
+export const insertSpeakerCommand = <Command extends EventCommand2>(
   commandGroup: SimpleEventCommandGroup<
     Command_ShowMessageHeader,
     Command_ShowMessageBody
   >,
   fn: (text: string) => ResultXX<Command> | undefined
-): EventCommand[] => {
+): EventCommand2[] => {
   const speaker = fn(commandGroup.getBodyText());
   if (!speaker) {
     return commandGroup.normalizedCommands();

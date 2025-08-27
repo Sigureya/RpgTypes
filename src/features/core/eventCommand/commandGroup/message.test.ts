@@ -15,7 +15,7 @@ import type { EventCommandGroupBase } from "./core";
 import { SimpleEventCommandGroup } from "./core";
 import { createMessageGroup, extractMessageGroup } from "./message";
 
-const mockCommands: EventCommand[] = [
+const mockCommands = [
   makeCommandCommonEvent({ eventId: 6 }),
   makeCommandShowMessage({
     facename: "face",
@@ -25,7 +25,7 @@ const mockCommands: EventCommand[] = [
   { code: 401, parameters: ["bbb"], indent: 0 },
   { code: 401, parameters: ["ccc"], indent: 0 },
   makeCommandCommonEvent({ eventId: 10 }),
-];
+] as const satisfies ReadonlyArray<EventCommand>;
 
 describe("extractMessageGroup", () => {
   test("should extract a valid message group with a header and multiple bodies", () => {
