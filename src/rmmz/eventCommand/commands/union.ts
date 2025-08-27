@@ -98,7 +98,7 @@ import type { Command_NoOperation } from "./noOperation";
 import type { Command_ChangePartyMember } from "./party/changeMember/types";
 import type { Command_ChangeGold } from "./party/gold/changeGold";
 import type { Command_RecoverAll } from "./party/types/recoverAll";
-import type { Command_MovePicture2, Command_ShowPicture2 } from "./picture";
+import type { Command_MovePicture, Command_ShowPicture } from "./picture";
 import type {
   Command_ErasePicture,
   Command_RotatePicture,
@@ -112,8 +112,8 @@ import type {
 } from "./screen/types";
 import type { Command_ScriptBody, Command_ScriptHeader } from "./script/types";
 import type {
-  Command_ShopProcessing2,
-  Command_ShopProcessingBody2,
+  Command_ShopProcessing,
+  Command_ShopProcessingBody,
 } from "./shop/types";
 import type { Command_Skip } from "./skip/types";
 import type { Command_ChangeTransparency } from "./transparency/types";
@@ -197,8 +197,8 @@ export type EventCommand =
   | Command_FadeInScreen
   | Command_ChangePartyMember
   | Command_ChangeGold
-  | Command_MovePicture2
-  | Command_ShowPicture2
+  | Command_MovePicture
+  | Command_ShowPicture
   | Command_ErasePicture
   | Command_RotatePicture
   | Command_TintPicture
@@ -208,8 +208,8 @@ export type EventCommand =
   | Command_FadeOutScreen
   | Command_ScriptBody
   | Command_ScriptHeader
-  | Command_ShopProcessing2
-  | Command_ShopProcessingBody2
+  | Command_ShopProcessing
+  | Command_ShopProcessingBody
   | Command_Skip
   | Command_ControlVariables
   | Command_SetVehicleLocation

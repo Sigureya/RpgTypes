@@ -1,8 +1,8 @@
 import { CHANGE_ARMORS } from "@RpgTypes/rmmz/rpg";
 import type {
-  Command_ChangeArmors2,
-  ParamArray_ChangeArmors2,
-  ParamObject_ChangeArmors2,
+  Command_ChangeArmors,
+  ParamArray_ChangeArmors,
+  ParamObject_ChangeArmors,
   ParamObject_GainArmor,
   ParamObject_GainArmorV,
 } from "./types/armor";
@@ -14,9 +14,9 @@ import {
 } from "./types/constants";
 
 export const makeCommandChangeArmors = (
-  param: ParamObject_ChangeArmors2,
+  param: ParamObject_ChangeArmors,
   indent: number = 0
-): Command_ChangeArmors2 => ({
+): Command_ChangeArmors => ({
   code: CHANGE_ARMORS,
   parameters: [
     param.operation,
@@ -29,8 +29,8 @@ export const makeCommandChangeArmors = (
 });
 
 export const fromArrayChangeArmors = (
-  arr: ParamArray_ChangeArmors2
-): ParamObject_ChangeArmors2 => ({
+  arr: ParamArray_ChangeArmors
+): ParamObject_ChangeArmors => ({
   operation: arr[0],
   armorId: arr[1],
   value: arr[2],
@@ -41,7 +41,7 @@ export const fromArrayChangeArmors = (
 export const makeCommandGainArmor = (
   param: ParamObject_GainArmor,
   indent: number = 0
-): Command_ChangeArmors2 => ({
+): Command_ChangeArmors => ({
   code: CHANGE_ARMORS,
   parameters: [
     OPERATION_GAIN,
@@ -56,7 +56,7 @@ export const makeCommandGainArmor = (
 export const makeCommandGainArmorV = (
   param: ParamObject_GainArmorV,
   indent: number = 0
-): Command_ChangeArmors2 => ({
+): Command_ChangeArmors => ({
   code: CHANGE_ARMORS,
   parameters: [
     OPERATION_GAIN,
@@ -71,7 +71,7 @@ export const makeCommandGainArmorV = (
 export const makeCommandLoseArmor = (
   param: ParamObject_GainArmor,
   indent: number = 0
-): Command_ChangeArmors2 => ({
+): Command_ChangeArmors => ({
   code: CHANGE_ARMORS,
   parameters: [
     OPERATION_LOSE,
@@ -86,7 +86,7 @@ export const makeCommandLoseArmor = (
 export const makeCommandLoseArmorV = (
   param: ParamObject_GainArmorV,
   indent: number = 0
-): Command_ChangeArmors2 => ({
+): Command_ChangeArmors => ({
   code: CHANGE_ARMORS,
   parameters: [
     OPERATION_LOSE,

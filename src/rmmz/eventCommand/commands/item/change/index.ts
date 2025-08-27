@@ -1,7 +1,7 @@
 export type {
-  Command_ChangeArmors2,
-  ParamArray_ChangeArmors2,
-  ParamObject_ChangeArmors2,
+  Command_ChangeArmors as Command_ChangeArmors2,
+  ParamArray_ChangeArmors as ParamArray_ChangeArmors2,
+  ParamObject_ChangeArmors as ParamObject_ChangeArmors2,
   ParamObject_GainArmor,
   ParamObject_GainArmorV,
 } from "./types/armor";
