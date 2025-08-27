@@ -18,7 +18,7 @@ export interface Terms_GameCommands {
     optimize: string;
     clear: string;
     newGame: string;
-    continue_: string;
+    continueGame: string;
     toTitle: string;
     cancel: string;
     buy: string;
