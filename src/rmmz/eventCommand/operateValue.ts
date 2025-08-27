@@ -1,7 +1,7 @@
 import type {
-  Command_ChangeArmors2,
-  Command_ChangeItems2,
-  Command_ChangeWeapons2,
+  Command_ChangeArmors,
+  Command_ChangeItems,
+  Command_ChangeWeapons,
 } from "./commands/item/change";
 import { OPERAND_DIRECT } from "./commands/item/change/types/constants";
 import type { Command_ChangeGold } from "./commands/party/gold/changeGold";
@@ -28,7 +28,7 @@ export const operateValue = <Result, T>(
 export const operateValueChangeGoods = <T, V>(
   {
     parameters,
-  }: Command_ChangeArmors2 | Command_ChangeItems2 | Command_ChangeWeapons2,
+  }: Command_ChangeArmors | Command_ChangeItems | Command_ChangeWeapons,
   handlers: OperateValueHandlers<T, V>
 ): T => {
   const operation = parameters[1];
