@@ -9,8 +9,8 @@ interface State {
 export const compileOptionItems = (
   tokens: ReadonlyArray<Token>
 ): OptionItem[] => {
-  const { current, result } = tokens.reduce<State>(
-    (acc, token) => {
+  const { current, result } = tokens.reduce(
+    (acc: State, token: Token) => {
       if (acc.current && token.keyword === KEYWORD_VALUE) {
         return {
           result: [
