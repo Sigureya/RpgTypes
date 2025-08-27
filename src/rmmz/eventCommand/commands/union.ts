@@ -1,16 +1,41 @@
+import type { Command_ChangeClaass } from "./actor/changeClass/types";
+import type { Command_ChangeActorImages } from "./actor/changeImages/types";
 import type {
   Command_ChangeActorName,
   Command_ChangeActorNickName,
   Command_ChangeActorProfile,
-} from "./actor";
-import type { Command_ChangeActorImages } from "./actor/changeImages/types";
-import type { CommandUnion_AnyAudio } from "./audio";
+} from "./actor/changeText/types";
 import type {
-  Command_FadeOutScreen,
+  Command_ChangeActorHP,
+  Command_ChangeActorMP,
+  Command_ChangeActorTP,
+} from "./actor/changeValues/types";
+import type {
+  Command_FadeOutBGM,
+  Command_FadeOutBGS,
   Command_ResumeBGM,
   Command_SaveBGM,
 } from "./audio/other/types";
-import type { Command_ControlTimer } from "./controlTimer";
+import type {
+  Command_ChangeBattleBGM,
+  Command_ChangeDefeatME,
+  Command_ChangeVehicleBGM,
+  Command_ChangeVictoryME,
+  Command_PlayBGM,
+  Command_PlayBGS,
+  Command_PlayME,
+  Command_PlaySE,
+} from "./audio/play/types";
+import type { Command_ShowBalloonIcon } from "./balloon/types";
+import type { Command_ChangeBattleBackground } from "./battle/background/types";
+import type { Command_BattleProcessing } from "./battle/battleProcessing/types";
+import type { Command_ControlTimer } from "./controlTimer/types";
+import type {
+  Command_ChangeEnemyHP,
+  Command_ChangeEnemyMP,
+} from "./enemy/change/types";
+import type { Command_ChangeEnemyState } from "./enemy/state/types";
+import type { Command_EnemyTransform } from "./enemy/transform/types";
 import type {
   Command_ConditionalBranch,
   Command_ConditionalBranchElse,
@@ -28,7 +53,12 @@ import type {
   Command_ChangeWeapons2,
 } from "./item/change";
 import type { Command_SelectItem } from "./item/select/types";
+import type { Command_ChangeParallax } from "./map/parallax/types";
+import type { Command_ScrollMap } from "./map/scroll/types";
+import type { Command_EraseEvent } from "./mapEvent/eraseEvent/types";
+import type { Command_SetEventLocation } from "./mapEvent/setLocation/types";
 import type { Command_ChangeTileset } from "./mapImage/tileset/types";
+import type { Command_OpenSaveScreen } from "./menu/save/types";
 import type {
   Command_ChangeFormationAccess,
   Command_ChangeMenuAccess,
@@ -50,81 +80,127 @@ import type {
   Command_ShowMessageBody,
   Command_ShowMessageHeader,
 } from "./message/showMessage";
+import type { Command_SetMovementRoute } from "./movementRoute/command";
 import type { Command_PlayMovie } from "./movie/types";
 import type { Command_PluginCommandMV } from "./mv/pluginCommandMV";
 import type {
   Command_GameOver,
   Command_GatherFollowers,
-  Command_OpenSaveScreen,
   Command_ReturnToTitleScreen,
-  Command_Skip,
-  Command_EraseEvent,
   Command_FadeInScreen,
 } from "./nonParam/types";
 import type { Command_ChangePartyMember } from "./party/changeMember/types";
-import type { Command_ChangeGold2 } from "./party/gold/changeGold";
+import type { Command_ChangeGold } from "./party/gold/changeGold";
 import type { Command_MovePicture2, Command_ShowPicture2 } from "./picture";
+import type {
+  Command_ErasePicture,
+  Command_RotatePicture,
+  Command_TintPicture,
+} from "./picture/other/types";
+import type {
+  Command_FlashScreen,
+  Command_ShakeScreen,
+  Command_TintScreen,
+  Command_FadeOutScreen,
+} from "./screen/types";
 import type { Command_ScriptBody, Command_ScriptHeader } from "./script/types";
 import type {
   Command_ShopProcessing2,
   Command_ShopProcessingBody2,
 } from "./shop/types";
+import type { Command_Skip } from "./skip/types";
 import type { Command_ControlVariables } from "./variable/types";
+import type { Command_SetVehicleLocation } from "./vehicle/setLocation/types";
 import type { Command_GetOnOffVehicle } from "./vehicle/types";
+import type { Command_Wait } from "./wait/types";
+import type { Command_SetWeatherEffect } from "./weather/types";
 
 export type EventCommand2 =
-  | Command_ChangeArmors2
-  | Command_ChangeItems2
-  | Command_ChangeWeapons2
+  | Command_ChangeClaass
+  | Command_ChangeActorImages
   | Command_ChangeActorName
   | Command_ChangeActorNickName
   | Command_ChangeActorProfile
-  | CommandUnion_AnyAudio
-  | Command_EraseEvent
-  | Command_ExitEventProcessing
-  | Command_FadeInScreen
-  | Command_FadeOutScreen
-  | Command_GameOver
-  | Command_GatherFollowers
-  | Command_GetOnOffVehicle
-  | Command_Loop
-  | Command_LoopBreak
-  | Command_OpenSaveScreen
+  | Command_ChangeActorHP
+  | Command_ChangeActorMP
+  | Command_ChangeActorTP
+  | Command_FadeOutBGM
+  | Command_FadeOutBGS
   | Command_ResumeBGM
-  | Command_ReturnToTitleScreen
   | Command_SaveBGM
-  | Command_Skip
-  | Command_ShowPicture2
-  | Command_MovePicture2
+  | Command_ChangeBattleBGM
+  | Command_ChangeDefeatME
+  | Command_ChangeVehicleBGM
+  | Command_ChangeVictoryME
+  | Command_PlayBGM
+  | Command_PlayBGS
+  | Command_PlayME
+  | Command_PlaySE
+  | Command_ShowBalloonIcon
+  | Command_ChangeBattleBackground
+  | Command_BattleProcessing
   | Command_ControlTimer
-  | Command_ScriptHeader
-  | Command_ScriptBody
-  | Command_ControlVariables
-  | Command_ChangeMenuAccess
-  | Command_ChangeSaveAccess
-  | Command_ChangeFormationAccess
+  | Command_ChangeEnemyHP
+  | Command_ChangeEnemyMP
+  | Command_ChangeEnemyState
+  | Command_EnemyTransform
+  | Command_ConditionalBranch
+  | Command_ConditionalBranchElse
   | Command_CommonEvent
   | Command_ControlSwitches
-  | Command_ChangeActorImages
-  | Command_ControlSelfSwitch
-  | Command_InputNumber
-  | Command_ChangePartyMember
-  | Command_ChangeGold2
-  | Command_ShopProcessing2
-  | Command_ShopProcessingBody2
-  | Command_ShowMessageHeader
-  | Command_ShowMessageBody
-  | Command_CommentHeader
-  | Command_CommentBody
-  | Command_ScrollTextHeader
-  | Command_ScrollTextBody
-  | Command_ShowChoices
-  | Command_ShowChoiceWhen
-  | Command_PluginCommandMV
-  | Command_ConditionalBranchElse
-  | Command_ConditionalBranch
-  | Command_SelectItem
-  | Command_PlayMovie
+  | Command_ExitEventProcessing
   | Command_Label
   | Command_LabelJump
-  | Command_ChangeTileset;
+  | Command_Loop
+  | Command_LoopBreak
+  | Command_ControlSelfSwitch
+  | Command_InputNumber
+  | Command_ChangeArmors2
+  | Command_ChangeItems2
+  | Command_ChangeWeapons2
+  | Command_SelectItem
+  | Command_ChangeParallax
+  | Command_ScrollMap
+  | Command_EraseEvent
+  | Command_ChangeTileset
+  | Command_OpenSaveScreen
+  | Command_ChangeFormationAccess
+  | Command_ChangeMenuAccess
+  | Command_ChangeSaveAccess
+  | Command_CommentBody
+  | Command_CommentHeader
+  | Command_ScrollTextBody
+  | Command_ScrollTextHeader
+  | Command_ShowChoiceWhen
+  | Command_ShowChoices
+  | Command_ShowMessageBody
+  | Command_ShowMessageHeader
+  | Command_SetMovementRoute
+  | Command_PlayMovie
+  | Command_PluginCommandMV
+  | Command_GameOver
+  | Command_GatherFollowers
+  | Command_ReturnToTitleScreen
+  | Command_FadeInScreen
+  | Command_ChangePartyMember
+  | Command_ChangeGold
+  | Command_MovePicture2
+  | Command_ShowPicture2
+  | Command_ErasePicture
+  | Command_RotatePicture
+  | Command_TintPicture
+  | Command_FlashScreen
+  | Command_ShakeScreen
+  | Command_TintScreen
+  | Command_FadeOutScreen
+  | Command_ScriptBody
+  | Command_ScriptHeader
+  | Command_ShopProcessing2
+  | Command_ShopProcessingBody2
+  | Command_Skip
+  | Command_ControlVariables
+  | Command_SetVehicleLocation
+  | Command_GetOnOffVehicle
+  | Command_Wait
+  | Command_SetWeatherEffect
+  | Command_SetEventLocation;
