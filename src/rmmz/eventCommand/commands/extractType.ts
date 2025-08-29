@@ -1,5 +1,5 @@
 import type { EventCode } from "@RpgTypes/rmmz/rpg";
-import type { EventCommand } from "../commands/union";
+import type { EventCommand } from "./union";
 
 export type ExtractCommandByParam<
   P extends unknown[],
@@ -13,8 +13,3 @@ export type ExtractCommandByCode<
 
 export type CommandParamaterType<Code extends EventCode> =
   ExtractCommandByCode<Code>["parameters"];
-
-/**
- * @deprecated Use `ExtractCommandByParam` instead.
- */
-export type PickCommandByParam<P extends unknown[]> = ExtractCommandByParam<P>;
