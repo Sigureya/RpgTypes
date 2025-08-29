@@ -106,9 +106,9 @@ import type {
   Command_RotatePicture,
   Command_TintPicture,
 } from "./picture/other/types";
+import type { Command_ShakeScreen } from "./screen/shake/types";
 import type {
   Command_FlashScreen,
-  Command_ShakeScreen,
   Command_TintScreen,
   Command_FadeOutScreen,
 } from "./screen/types";
