@@ -2,14 +2,13 @@ import type { ColorRGBA } from "@RpgTypes/libs";
 import type {
   FADEOUT_SCREEN,
   FLASH_SCREEN,
-  SHAKE_SCREEN,
   TINT_SCREEN,
 } from "@RpgTypes/rmmz/rpg";
 import type { EventCommandLike2 } from "../../frame";
 
 export interface Command_TintScreen
   extends EventCommandLike2<typeof TINT_SCREEN> {
-  parameters: [color: ColorRGBA, duration: number, wait: boolean];
+  parameters: ParamArray_TintScreen;
 }
 
 export interface Command_FlashScreen
@@ -17,12 +16,13 @@ export interface Command_FlashScreen
   parameters: [color: ColorRGBA, duration: number, wait: boolean];
 }
 
-export interface Command_ShakeScreen
-  extends EventCommandLike2<typeof SHAKE_SCREEN> {
-  parameters: [power: number, speed: number, duration: number, wait: boolean];
-}
-
 export interface Command_FadeOutScreen
   extends EventCommandLike2<typeof FADEOUT_SCREEN> {
   parameters: [];
 }
+
+export type ParamArray_TintScreen = [
+  color: ColorRGBA,
+  duration: number,
+  wait: boolean
+];
