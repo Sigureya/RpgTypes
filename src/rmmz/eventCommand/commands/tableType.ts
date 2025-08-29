@@ -62,6 +62,7 @@ import type { Command_ScrollMap } from "./map/scroll/types";
 import type { Command_EraseEvent } from "./mapEvent/eraseEvent/types";
 import type { Command_GetLocationInfo } from "./mapEvent/getLocationInfo/types";
 import type { Command_SetEventLocation } from "./mapEvent/setLocation/types";
+import type { Command_ChangePlayerFollowers } from "./mapFollwer/types";
 import type { Command_ChangeTileset } from "./mapImage/tileset/types";
 import type { Command_TransferPlayer } from "./mapPlayer/transferPlayer/types";
 import type { Command_OpenSaveScreen } from "./menu/save/types";
@@ -239,4 +240,5 @@ export interface EventCommandTable {
   changeExp: Command_ChangeExp;
   changeEnemyState: Command_ChangeEnemyState;
   transferPlayer: Command_TransferPlayer;
+  changePlayerFollowers: Command_ChangePlayerFollowers;
 }
