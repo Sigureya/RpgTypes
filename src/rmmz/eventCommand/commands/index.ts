@@ -25,4 +25,9 @@ export * from "./variable";
 export * from "./vehicle";
 export * from "./wait";
 export * from "./weather";
+export {
+  CommandParamaterType,
+  ExtractCommandByCode,
+  ExtractCommandByParam,
+} from "./extractType";
 export type { Command_NoOperation } from "./noOperation";

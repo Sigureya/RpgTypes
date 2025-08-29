@@ -1,4 +1,5 @@
-import type { EventCommandLike2, ExtractCommandByParam } from "./frame";
+import type { ExtractCommandByParam } from "./commands/extractType";
+import type { EventCommandLike2 } from "./frame";
 
 export type CommandUnion_TextBody = EventCommandLike2<
   | 108 // comment
