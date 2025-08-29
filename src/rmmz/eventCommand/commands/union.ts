@@ -62,6 +62,7 @@ import type { Command_ScrollMap } from "./map/scroll/types";
 import type { Command_EraseEvent } from "./mapEvent/eraseEvent/types";
 import type { Command_GetLocationInfo } from "./mapEvent/getLocationInfo/types";
 import type { Command_SetEventLocation } from "./mapEvent/setLocation/types";
+import type { Command_ChangePlayerFollowers } from "./mapFollwer/types";
 import type { Command_ChangeTileset } from "./mapImage/tileset/types";
 import type { Command_TransferPlayer } from "./mapPlayer/transferPlayer/types";
 import type { Command_OpenSaveScreen } from "./menu/save/types";
@@ -105,9 +106,9 @@ import type {
   Command_RotatePicture,
   Command_TintPicture,
 } from "./picture/other/types";
+import type { Command_ShakeScreen } from "./screen/shake/types";
 import type {
   Command_FlashScreen,
-  Command_ShakeScreen,
   Command_TintScreen,
   Command_FadeOutScreen,
 } from "./screen/types";
@@ -128,6 +129,7 @@ import type { Command_ChangeWindowColor } from "./window/changeWindowColor/types
 
 export type EventCommand =
   | Command_NoOperation
+  | Command_ChangePlayerFollowers
   | Command_ChangeWindowColor
   | Command_StopSE
   | Command_ChangeClaass
