@@ -100,12 +100,13 @@ import type { Command_NoOperation } from "./noOperation";
 import type { Command_ChangePartyMember } from "./party/changeMember/types";
 import type { Command_ChangeGold } from "./party/gold/changeGold";
 import type { Command_RecoverAll } from "./party/types/recoverAll";
-import type { Command_MovePicture, Command_ShowPicture } from "./picture";
 import type {
-  Command_ErasePicture,
+  Command_MovePicture,
   Command_RotatePicture,
+  Command_ShowPicture,
   Command_TintPicture,
-} from "./picture/other/types";
+} from "./picture";
+import type { Command_ErasePicture } from "./picture/erase/types";
 import type { Command_ShakeScreen } from "./screen/shake/types";
 import type {
   Command_FlashScreen,
