@@ -7,7 +7,7 @@ export type {
   ParamObject_ChangeActorName,
   ParamObject_ChangeActorNickName,
 } from "./changeText/types";
-export {
+export type {
   Command_ChangeActorImages,
   ParamArray_ChangeActorImages,
   ParamObject_ChangeActorImages,
@@ -20,6 +20,12 @@ export type {
   Command_ChangeExp,
   ParamArray_ChangeExp,
 } from "./changeExp/types";
+
+export type {
+  Command_NameInputProcessing,
+  ParamArray_NameInputProcessing,
+} from "./nameInput/types";
+
 export { makeCommandChangeActorImages } from "./changeImages/make";
 export {
   makeCommandChangeActorName,
