@@ -57,13 +57,13 @@ import type {
   Command_ChangeWeapons,
 } from "./item/change";
 import type { Command_SelectItem } from "./item/select/types";
+import type { Command_ChangeMapNameDisplay } from "./map/changeMapNameDisplay/types";
 import type { Command_ChangeParallax } from "./map/parallax/types";
 import type { Command_ScrollMap } from "./map/scroll/types";
 import type { Command_EraseEvent } from "./mapEvent/eraseEvent/types";
 import type { Command_GetLocationInfo } from "./mapEvent/getLocationInfo/types";
 import type { Command_SetEventLocation } from "./mapEvent/setLocation/types";
 import type { Command_ChangePlayerFollowers } from "./mapFollwer/types";
-import type { Command_ChangeTileset } from "./mapImage/tileset/types";
 import type { Command_TransferPlayer } from "./mapPlayer/transferPlayer/types";
 import type { Command_OpenSaveScreen } from "./menu/save/types";
 import type {
@@ -100,12 +100,13 @@ import type { Command_NoOperation } from "./noOperation";
 import type { Command_ChangePartyMember } from "./party/changeMember/types";
 import type { Command_ChangeGold } from "./party/gold/changeGold";
 import type { Command_RecoverAll } from "./party/types/recoverAll";
-import type { Command_MovePicture, Command_ShowPicture } from "./picture";
 import type {
-  Command_ErasePicture,
+  Command_MovePicture,
   Command_RotatePicture,
+  Command_ShowPicture,
   Command_TintPicture,
-} from "./picture/other/types";
+} from "./picture";
+import type { Command_ErasePicture } from "./picture/erase/types";
 import type { Command_ShakeScreen } from "./screen/shake/types";
 import type {
   Command_FlashScreen,
@@ -118,6 +119,7 @@ import type {
   Command_ShopProcessingBody,
 } from "./shop/types";
 import type { Command_Skip } from "./skip/types";
+import type { Command_ChangeTileset } from "./tileset/types";
 import type { Command_ChangeTransparency } from "./transparency/types";
 import type { Command_ControlVariables } from "./variable/types";
 import type { Command_ChangeVehicleImage } from "./vehicle/changeImage/types";
@@ -227,4 +229,5 @@ export type EventCommand =
   | Command_ChangeTransparency
   | Command_RecoverAll
   | Command_ChangeExp
-  | Command_GetLocationInfo;
+  | Command_GetLocationInfo
+  | Command_ChangeMapNameDisplay;
