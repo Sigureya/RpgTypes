@@ -27,14 +27,35 @@ import type {
   ParamArray_MovementRoute,
   ParamArray_ShowAnimation,
   ParamArray_ShowBalloonIcon,
+  ParamArray_EraseEvent,
+  ParamArray_TintScreen,
+  ParamArray_Wait,
+  ParamsArray_ShowPicture,
+  ParamsArray_MovePicture,
+  ParamArray_RotatePicture,
+  ParamArray_TintPicture,
+  ParamArray_WeatherEffect,
+  ParamArray_FadeOutAudio,
+  ParamArray_PlayMovie,
+  ParamArray_GetLocationInfo,
+  ParamArray_ChangeBattleBackground,
+  ParamArray_ChangeParallax,
 } from "./commands";
 import type { ParamArray_ChangeActorImages } from "./commands/actor/changeImages/types";
 import type { ParamArray_ChangeActorHP } from "./commands/actor/changeValues/types";
 import type { ParamArray_ControlTimer } from "./commands/controlTimer/types";
 import type { BranchParameters } from "./commands/flow/branch/types/branchParams";
 import type { ParamArray_SelectItem } from "./commands/item/select/types";
+import type { ParamArray_ChangeMapNameDisplay } from "./commands/map/changeMapNameDisplay/types";
+import type {
+  Command_ChangePlayerFollowers,
+  ParamArray_ChangePlayerFollowers,
+} from "./commands/mapFollwer/types";
 import type { ParamArray_TransferPlayer } from "./commands/mapPlayer/transferPlayer/types";
 import type { ParamArray_ChangePartyMember } from "./commands/party/changeMember/types";
+import type { ParamArray_ErasePicture } from "./commands/picture/erase/types";
+import type { ParamArray_ShakeScreen } from "./commands/screen/shake/types";
+import type { ParamArray_ChangeTileset } from "./commands/tileset/types";
 import type { ParamArray_ChangeTransparency } from "./commands/transparency/types";
 import type { EventCommand } from "./commands/union";
 
@@ -57,8 +78,10 @@ type CommandTypeAssert = {
 };
 
 export interface EventCommandMapper extends CommandTypeAssert {
-  command101: (param: ParamArray_ShowMessage) => boolean;
-  command102: (param: ParamArray_SetupChoice) => boolean;
+  command282: (param: ParamArray_ChangeTileset) => boolean;
+
+  command101: (showMessage: ParamArray_ShowMessage) => boolean;
+  command102: (setupChoice: ParamArray_SetupChoice) => boolean;
   command103: (param: ParamArray_InputNumber) => boolean;
   command104: (param: ParamArray_SelectItem) => boolean;
   command105: (param: ParamArray_ScrollTextHeader) => boolean;
@@ -98,6 +121,39 @@ export interface EventCommandMapper extends CommandTypeAssert {
   command211: (params: ParamArray_ChangeTransparency) => boolean;
   command212: (params: ParamArray_ShowAnimation) => boolean;
   command213: (params: ParamArray_ShowBalloonIcon) => boolean;
+  command214: (params: ParamArray_EraseEvent) => boolean;
+
+  command216: (params: ParamArray_ChangePlayerFollowers) => boolean;
+  command217: (params: []) => boolean;
+  command221: (params: []) => boolean;
+  command222: (params: []) => boolean;
+  command223: (params: ParamArray_TintScreen) => boolean;
+  command224: (params: ParamArray_TintScreen) => boolean;
+  command225: (params: ParamArray_ShakeScreen) => boolean;
+  command230: (params: ParamArray_Wait) => boolean;
+  command231: (params: ParamsArray_ShowPicture) => boolean;
+  command232: (params: ParamsArray_MovePicture) => boolean;
+  command233: (params: ParamArray_RotatePicture) => boolean;
+  command234: (params: ParamArray_TintPicture) => boolean;
+  command235: (params: ParamArray_ErasePicture) => boolean;
+  command236: (params: ParamArray_WeatherEffect) => boolean;
+
+  command241: (playBgm: [AudioFileParams]) => boolean;
+  command242: (fadeoutBgm: ParamArray_FadeOutAudio) => boolean;
+  command243: (params: []) => boolean;
+  command244: (params: []) => boolean;
+  command245: (params: [AudioFileParams]) => boolean;
+  command246: (params: ParamArray_FadeOutAudio) => boolean;
+
+  command249: (playME: [AudioFileParams]) => boolean;
+  command250: (playSE: [AudioFileParams]) => boolean;
+  command251: (stopSE: []) => boolean;
+  command261: (playMove: ParamArray_PlayMovie) => boolean;
+
+  command281: (param: ParamArray_ChangeMapNameDisplay) => boolean;
+  command283: (params: ParamArray_ChangeBattleBackground) => boolean;
+  command284: (param: ParamArray_ChangeParallax) => boolean;
+  command285: (param: ParamArray_GetLocationInfo) => boolean;
 
   command311: (param: ParamArray_ChangeActorHP) => boolean;
   command322: (param: ParamArray_ChangeActorImages) => boolean;
@@ -106,11 +162,7 @@ export interface EventCommandMapper extends CommandTypeAssert {
 // const ee: ExtractCommandByCode<213> = {};
 
 const xx2: Partial<CommandTypeAssert> = {
-  command101: (param) => true,
-  command129: (param) => true,
-
-  command201: (param) => true,
   command204: (param) => true,
-  // command203
+
   // command111,
 };
