@@ -77,6 +77,8 @@ export const STOP_SE = 251 as const;
 
 export const PLAY_MOVIE = 261 as const;
 
+export const CHANGE_MAP_NAME_DISPLAY = 281 as const;
+
 export const CHANGE_TILESET = 282 as const;
 export const CHANGE_BATTLE_BACKGROUND = 283 as const;
 export const CHANGE_PARALLAX = 284 as const;
