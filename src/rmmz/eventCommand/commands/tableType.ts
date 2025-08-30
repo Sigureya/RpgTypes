@@ -63,7 +63,6 @@ import type { Command_EraseEvent } from "./mapEvent/eraseEvent/types";
 import type { Command_GetLocationInfo } from "./mapEvent/getLocationInfo/types";
 import type { Command_SetEventLocation } from "./mapEvent/setLocation/types";
 import type { Command_ChangePlayerFollowers } from "./mapFollwer/types";
-import type { Command_ChangeTileset } from "./mapImage/tileset/types";
 import type { Command_TransferPlayer } from "./mapPlayer/transferPlayer/types";
 import type { Command_OpenSaveScreen } from "./menu/save/types";
 import type {
@@ -119,6 +118,7 @@ import type {
   Command_ShopProcessingBody,
 } from "./shop/types";
 import type { Command_Skip } from "./skip/types";
+import type { Command_ChangeTileset } from "./tileset/types";
 import type { Command_ChangeTransparency } from "./transparency/types";
 import type { Command_ControlVariables } from "./variable/types";
 import type { Command_ChangeVehicleImage } from "./vehicle/changeImage/types";
