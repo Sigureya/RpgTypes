@@ -51,7 +51,6 @@ export type {
   Command_NameInputProcessing,
   ParamArray_NameInputProcessing,
 } from "./nameInput/types";
-
 export { makeCommandChangeActorImages } from "./changeImages/make";
 export {
   makeCommandChangeActorName,
