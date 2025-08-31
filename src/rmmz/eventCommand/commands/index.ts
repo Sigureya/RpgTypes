@@ -11,6 +11,7 @@ export * from "./inputNumber";
 export * from "./item";
 export * from "./map";
 export * from "./mapEvent";
+export * from "./mapPlayer";
 export * from "./menu";
 export * from "./message";
 export * from "./movementRoute";
