@@ -9,18 +9,18 @@ export type GoodsType = {
 };
 type GOODS_TYPES = ValueOf<GoodsType>;
 export interface Command_ShopProcessing extends EventCommandLike2<typeof SHOP_PROCESSING> {
-    parameters: ShopProcessing;
+    parameters: ParamArray_ShopProcessing;
 }
 export interface Command_ShopProcessingBody extends EventCommandLike2<typeof SHOP_PROCESSING_BODY> {
-    parameters: ShopGoods;
+    parameters: ParamArray_ShopGoods;
 }
-export type ShopGoods = [
+export type ParamArray_ShopGoods = [
     itemType: GOODS_TYPES,
     id: number,
     isCustomPrice: typeof CUSTOM_PRICE | typeof NORMAL_PRICE,
     customPrice: number
 ];
-export type ShopProcessing = [
+export type ParamArray_ShopProcessing = [
     itemType: GOODS_TYPES,
     id: number,
     isCustomPrice: typeof CUSTOM_PRICE | typeof NORMAL_PRICE,
