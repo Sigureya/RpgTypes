@@ -1,6 +1,10 @@
+import type { Command_ChangeSkill } from "./actor";
 import type { Command_ChangeClaass } from "./actor/changeClass/types";
 import type { Command_ChangeExp } from "./actor/changeExp/types";
 import type { Command_ChangeActorImages } from "./actor/changeImages/types";
+import type { Command_ChangeActorLevel } from "./actor/changeLevel/types";
+import type { Command_ChangeParam } from "./actor/changeParam/types";
+import type { Command_ChangeActorState } from "./actor/changeState/types";
 import type {
   Command_ChangeActorName,
   Command_ChangeActorNickName,
@@ -230,4 +234,8 @@ export type EventCommand =
   | Command_RecoverAll
   | Command_ChangeExp
   | Command_GetLocationInfo
-  | Command_ChangeMapNameDisplay;
+  | Command_ChangeMapNameDisplay
+  | Command_ChangeActorState
+  | Command_ChangeActorLevel
+  | Command_ChangeSkill
+  | Command_ChangeParam;
