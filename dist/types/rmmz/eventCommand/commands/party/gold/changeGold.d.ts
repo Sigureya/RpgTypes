@@ -2,9 +2,10 @@ import { ValueOf } from '../../../../../libs/templates/valueOf';
 import { EventCommandLike2 } from '../../../frame';
 import { CHANGE_GOLD, Operation_PlusMinus } from '../../../../rpg';
 export interface Command_ChangeGold extends EventCommandLike2<typeof CHANGE_GOLD> {
-    parameters: [
-        operation: ValueOf<Operation_PlusMinus>,
-        operandType: number,
-        operand: number
-    ];
+    parameters: ParamArray_ChangeGold;
 }
+export type ParamArray_ChangeGold = [
+    operation: ValueOf<Operation_PlusMinus>,
+    operandType: number,
+    operand: number
+];
