@@ -1,4 +1,3 @@
-export * from "./changeImages/make";
 export type {
   CommandUnion_ChangeActorText,
   Command_ChangeActorName,
@@ -8,6 +7,38 @@ export type {
   ParamObject_ChangeActorName,
   ParamObject_ChangeActorNickName,
 } from "./changeText/types";
+export type {
+  Command_ChangeActorImages,
+  ParamArray_ChangeActorImages,
+  ParamObject_ChangeActorImages,
+} from "./changeImages/types";
+export {
+  Command_ChangeActorLevel,
+  ParamArray_ChangeActorLevel,
+} from "./changeLevel/types";
+export {
+  Command_ChangeActorState,
+  ParamArray_ChangeActorState,
+} from "./changeState/types";
+
+export type {
+  Command_ChangeClaass,
+  ParamArray_ChangeClass,
+} from "./changeClass/types";
+export type {
+  Command_ChangeExp,
+  ParamArray_ChangeExp,
+} from "./changeExp/types";
+export {
+  Command_ChangeSkill,
+  ParamArray_ChangeSkill,
+} from "./changeSkill/types";
+export type {
+  Command_NameInputProcessing,
+  ParamArray_NameInputProcessing,
+} from "./nameInput/types";
+
+export { makeCommandChangeActorImages } from "./changeImages/make";
 export {
   makeCommandChangeActorName,
   makeCommandChangeActorNickName,

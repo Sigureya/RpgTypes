@@ -2,7 +2,7 @@ import type {
   Command_ShowPicture,
   ParamObject_ParamsMovePicture,
   Command_MovePicture,
-  ParamsArray_ParamsMovePicture,
+  ParamsArray_MovePicture,
   ParamObject_ParamsShowPicture,
 } from "./types";
 
@@ -57,5 +57,5 @@ export const makeCommandMovePicture = ({
     blendMode,
     wait,
     easingType,
-  ] as ParamsArray_ParamsMovePicture,
+  ] as ParamsArray_MovePicture,
 });

@@ -16,4 +16,8 @@ export interface Command_ResumeBGM
   extends EventCommandLike2<typeof RESUME_BGM, []> {}
 
 export interface Command_FadeOutBGS
-  extends EventCommandLike2<typeof FADEOUT_BGS> {}
+  extends EventCommandLike2<typeof FADEOUT_BGS> {
+  parameters: ParamArray_FadeOutAudio;
+}
+
+export type ParamArray_FadeOutAudio = [duration: number];

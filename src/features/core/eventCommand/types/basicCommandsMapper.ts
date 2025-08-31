@@ -1,8 +1,10 @@
 import type { Command_ShowMessageHeader } from "@RpgTypes/rmmz";
 import type * as RpgTypes from "@RpgTypes/rmmz";
 import type {
+  Command_FlashScreen,
   Command_ShowChoices,
   Command_StopSE,
+  Command_TintScreen,
 } from "@RpgTypes/rmmz/eventCommand";
 import type { Command_ChangeActorImages } from "@RpgTypes/rmmz/eventCommand/commands/actor/changeImages/types";
 import type { Command_ShowAnimation } from "@RpgTypes/rmmz/eventCommand/commands/animation/types";
@@ -30,7 +32,6 @@ import type { Command_ScrollMap } from "@RpgTypes/rmmz/eventCommand/commands/map
 import type { Command_GetLocationInfo } from "@RpgTypes/rmmz/eventCommand/commands/mapEvent/getLocationInfo/types";
 import type { Command_SetEventLocation } from "@RpgTypes/rmmz/eventCommand/commands/mapEvent/setLocation/types";
 import type { Command_ChangePlayerFollowers } from "@RpgTypes/rmmz/eventCommand/commands/mapFollwer/types";
-import type { Command_ChangeTileset } from "@RpgTypes/rmmz/eventCommand/commands/mapImage/tileset/types";
 import type { Command_TransferPlayer } from "@RpgTypes/rmmz/eventCommand/commands/mapPlayer/transferPlayer/types";
 import type {
   Command_ChangeFormationAccess,
@@ -41,16 +42,9 @@ import type { Command_SetMovementRoute } from "@RpgTypes/rmmz/eventCommand/comma
 import type { Command_PlayMovie } from "@RpgTypes/rmmz/eventCommand/commands/movie/types";
 import type { Command_ChangePartyMember } from "@RpgTypes/rmmz/eventCommand/commands/party/changeMember/types";
 import type { Command_ChangeGold } from "@RpgTypes/rmmz/eventCommand/commands/party/gold/changeGold";
-import type {
-  Command_ErasePicture,
-  Command_RotatePicture,
-  Command_TintPicture,
-} from "@RpgTypes/rmmz/eventCommand/commands/picture/other/types";
-import type {
-  Command_FlashScreen,
-  Command_ShakeScreen,
-  Command_TintScreen,
-} from "@RpgTypes/rmmz/eventCommand/commands/screen/types";
+import type { Command_ErasePicture } from "@RpgTypes/rmmz/eventCommand/commands/picture/erase/types";
+import type { Command_ShakeScreen } from "@RpgTypes/rmmz/eventCommand/commands/screen/shake/types";
+import type { Command_ChangeTileset } from "@RpgTypes/rmmz/eventCommand/commands/tileset/types";
 import type { Command_ChangeTransparency } from "@RpgTypes/rmmz/eventCommand/commands/transparency/types";
 import type { Command_ChangeVehicleImage } from "@RpgTypes/rmmz/eventCommand/commands/vehicle/changeImage/types";
 import type { Command_SetVehicleLocation } from "@RpgTypes/rmmz/eventCommand/commands/vehicle/setLocation/types";
@@ -119,8 +113,8 @@ export interface BasicMappingObject<T> extends FallbackMapper<T> {
   changeTransparency: CallBackFunc<Command_ChangeTransparency, T>;
   showPicture: CallBackFunc<RpgTypes.Command_ShowPicture, T>;
   movePicture: CallBackFunc<RpgTypes.Command_MovePicture, T>;
-  rotatePicture: CallBackFunc<Command_RotatePicture, T>;
-  tintPicture: CallBackFunc<Command_TintPicture, T>;
+  rotatePicture: CallBackFunc<RpgTypes.Command_RotatePicture, T>;
+  tintPicture: CallBackFunc<RpgTypes.Command_TintPicture, T>;
   erasePicture: CallBackFunc<Command_ErasePicture, T>;
   setWeatherEffects: CallBackFunc<Command_SetWeatherEffect, T>;
   playBGM: CallBackFunc<RpgTypes.Command_PlayBGM, T>;

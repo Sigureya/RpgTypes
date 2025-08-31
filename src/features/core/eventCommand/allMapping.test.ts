@@ -65,13 +65,14 @@ import type {
   Command_PlayBGM,
   Command_PlayMovie,
   Command_PlaySE,
+  Command_RotatePicture,
   Command_SetEventLocation,
   Command_SetVehicleLocation,
   Command_SetWeatherEffect,
-  Command_ShakeScreen,
   Command_ShowAnimation,
   Command_ShowPicture,
   Command_StopSE,
+  Command_TintPicture,
   Command_TintScreen,
   Command_Wait,
   EventCommand,
@@ -79,11 +80,8 @@ import type {
 import type { Command_ChangeActorImages } from "@RpgTypes/rmmz/eventCommand/commands/actor/changeImages/types";
 import type { Command_FadeOutBGM } from "@RpgTypes/rmmz/eventCommand/commands/audio/other/types";
 import type { Command_TransferPlayer } from "@RpgTypes/rmmz/eventCommand/commands/mapPlayer/transferPlayer/types";
-import type {
-  Command_RotatePicture,
-  Command_TintPicture,
-  Command_ErasePicture,
-} from "@RpgTypes/rmmz/eventCommand/commands/picture/other/types";
+import type { Command_ErasePicture } from "@RpgTypes/rmmz/eventCommand/commands/picture/erase/types";
+import type { Command_ShakeScreen } from "@RpgTypes/rmmz/eventCommand/commands/screen/shake/types";
 import type { Command_ChangeTransparency } from "@RpgTypes/rmmz/eventCommand/commands/transparency/types";
 import type { Command_ChangeWindowColor } from "@RpgTypes/rmmz/eventCommand/commands/window/changeWindowColor/types";
 import { mappingCommand } from "./allMapping";
@@ -97,6 +95,7 @@ const createMockMapper = <Key extends string & keyof BasicMappingObject<void>>(
     other: vi.fn(),
   };
 };
+
 const testMapping = <Command extends EventCommand>(
   key: keyof BasicMappingObject<void>,
   command: Command
