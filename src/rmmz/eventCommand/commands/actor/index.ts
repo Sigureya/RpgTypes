@@ -8,6 +8,17 @@ export type {
   ParamObject_ChangeActorNickName,
 } from "./changeText/types";
 export type {
+  Command_ChangeActorHP,
+  Command_ChangeActorMP,
+  Command_ChangeActorTP,
+  ParamArray_ChangeActorHP,
+  ParamArray_ChangeActorMP,
+  ParamArray_ChangeActorTP,
+  ParamArray_ChangeActorValue,
+  ParamObject_ChangeActorHP,
+  ParamObject_ChangeActorValue,
+} from "./changeValues/types";
+export type {
   Command_ChangeActorImages,
   ParamArray_ChangeActorImages,
   ParamObject_ChangeActorImages,
@@ -20,7 +31,6 @@ export type {
   Command_ChangeActorState,
   ParamArray_ChangeActorState,
 } from "./changeState/types";
-
 export type {
   Command_ChangeClaass,
   ParamArray_ChangeClass,
@@ -29,6 +39,10 @@ export type {
   Command_ChangeExp,
   ParamArray_ChangeExp,
 } from "./changeExp/types";
+export type {
+  Command_ChangeParam,
+  ParamArray_ChangeParam,
+} from "./changeParam/types";
 export type {
   Command_ChangeSkill,
   ParamArray_ChangeSkill,
