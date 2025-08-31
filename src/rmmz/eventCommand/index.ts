@@ -5,5 +5,10 @@ export * from "./unionTypes";
 export * from "./utils";
 export * from "./validate";
 export * from "./validateTextBody";
+// export {
+//   CommandParamaterType,
+//   ExtractCommandByCode,
+//   ExtractCommandByParam,
+// } from "./commands/extractType";
 export type { EventCommand } from "./commands/union";
-export type { InterpreterMapper as EventCommandMapper } from "./interpreterMethods";
+export type { InterpreterMapper } from "./interpreterMethods";

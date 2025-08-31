@@ -8,9 +8,9 @@ import type {
   Command_ShowMessageBody,
   Command_ShowMessageHeader,
   EventCommand,
-  ExtractCommandByParam,
   SHOW_MESSAGE_BODY,
 } from "@RpgTypes/rmmz";
+import type { ExtractCommandByParam } from "@RpgTypes/rmmz/eventCommand/commands/extractType";
 
 export interface EventCommandGroupBase<
   Header extends EventCommand,

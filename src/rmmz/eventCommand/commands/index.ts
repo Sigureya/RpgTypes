@@ -27,7 +27,7 @@ export * from "./variable";
 export * from "./vehicle";
 export * from "./wait";
 export * from "./weather";
-export {
+export type {
   CommandParamaterType,
   ExtractCommandByCode,
   ExtractCommandByParam,
