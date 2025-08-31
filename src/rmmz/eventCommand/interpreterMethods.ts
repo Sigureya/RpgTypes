@@ -86,7 +86,7 @@ type CommandTypeAssert = {
     : (params: Extract<MainCommands, { code: K }>["parameters"]) => boolean;
 };
 
-export interface EventCommandMapper extends CommandTypeAssert {
+export interface InterpreterMapper extends CommandTypeAssert {
   command101: (showMessage: ParamArray_ShowMessage) => boolean;
   command102: (setupChoice: ParamArray_SetupChoice) => boolean;
   command103: (params: ParamArray_InputNumber) => boolean;
