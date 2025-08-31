@@ -11,7 +11,7 @@ export type ParamsArray_ShowPicture = [
     opacity: number,
     blendMode: PicutureBlendModeV2
 ];
-export type ParamsArray_ParamsMovePicture = [
+export type ParamsArray_MovePicture = [
     pictureId: number,
     origin: 0 | 1,
     x: number,
@@ -50,5 +50,5 @@ export interface Command_ShowPicture extends EventCommandLike2<231> {
     parameters: ParamsArray_ShowPicture;
 }
 export interface Command_MovePicture extends EventCommandLike2<232> {
-    parameters: ParamsArray_ParamsMovePicture;
+    parameters: ParamsArray_MovePicture;
 }

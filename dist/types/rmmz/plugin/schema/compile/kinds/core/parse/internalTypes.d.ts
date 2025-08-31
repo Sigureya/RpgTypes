@@ -1,7 +1,7 @@
 import { PluginDependencies } from './dependencies';
 import { KeywordEnum } from './keyword/types';
-import { OptionItem } from './selectOption';
 import { PluginParamTokens, PluginCommandTokens, PluginMeta } from './types';
+import { OptionItem } from './types/selectOption';
 export interface OptionsState {
     items: OptionItem[];
     currentOption?: string;

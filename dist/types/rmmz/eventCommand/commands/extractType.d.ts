@@ -1,5 +1,5 @@
 import { EventCode } from '../../rpg';
-import { EventCommand } from '../commands/union';
+import { EventCommand } from './union';
 export type ExtractCommandByParam<P extends unknown[], Commands = EventCommand> = Extract<Commands, {
     parameters: P;
 }>;
@@ -7,7 +7,3 @@ export type ExtractCommandByCode<C extends number, Commands = EventCommand> = Ex
     code: C;
 }>;
 export type CommandParamaterType<Code extends EventCode> = ExtractCommandByCode<Code>["parameters"];
-/**
- * @deprecated Use `ExtractCommandByParam` instead.
- */
-export type PickCommandByParam<P extends unknown[]> = ExtractCommandByParam<P>;

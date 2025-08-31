@@ -5,10 +5,10 @@ export interface Command_ChangeActorHP extends EventCommandLike2<typeof CHANGE_H
     parameters: ParamArray_ChangeActorHP;
 }
 export interface Command_ChangeActorMP extends EventCommandLike2<typeof CHANGE_MP> {
-    parameters: ParamArray_ChangeActorValue;
+    parameters: ParamArray_ChangeActorMP;
 }
 export interface Command_ChangeActorTP extends EventCommandLike2<typeof CHANGE_TP> {
-    parameters: ParamArray_ChangeActorValue;
+    parameters: ParamArray_ChangeActorTP;
 }
 export type ParamArray_ChangeActorValue = [
     targetType: typeof TARGET_DIRECT | typeof TARGET_VARIABLE,
@@ -17,6 +17,8 @@ export type ParamArray_ChangeActorValue = [
     valueType: number,
     value: number
 ];
+export type ParamArray_ChangeActorMP = ParamArray_ChangeActorValue;
+export type ParamArray_ChangeActorTP = ParamArray_ChangeActorValue;
 export type ParamArray_ChangeActorHP = [
     targetType: typeof TARGET_DIRECT | typeof TARGET_VARIABLE,
     index: number,

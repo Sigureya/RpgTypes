@@ -1,5 +1,5 @@
 import { Command_ShowMessageHeader } from '../../../../rmmz';
-import { Command_ShowChoices, Command_StopSE } from '../../../../rmmz/eventCommand';
+import { Command_FlashScreen, Command_ShowChoices, Command_StopSE, Command_TintScreen } from '../../../../rmmz/eventCommand';
 import { Command_ChangeActorImages } from '../../../../rmmz/eventCommand/commands/actor/changeImages/types';
 import { Command_ShowAnimation } from '../../../../rmmz/eventCommand/commands/animation/types';
 import { Command_FadeOutBGM, Command_FadeOutBGS, Command_ResumeBGM, Command_SaveBGM } from '../../../../rmmz/eventCommand/commands/audio/other/types';
@@ -15,15 +15,15 @@ import { Command_ScrollMap } from '../../../../rmmz/eventCommand/commands/map/sc
 import { Command_GetLocationInfo } from '../../../../rmmz/eventCommand/commands/mapEvent/getLocationInfo/types';
 import { Command_SetEventLocation } from '../../../../rmmz/eventCommand/commands/mapEvent/setLocation/types';
 import { Command_ChangePlayerFollowers } from '../../../../rmmz/eventCommand/commands/mapFollwer/types';
-import { Command_ChangeTileset } from '../../../../rmmz/eventCommand/commands/mapImage/tileset/types';
 import { Command_TransferPlayer } from '../../../../rmmz/eventCommand/commands/mapPlayer/transferPlayer/types';
 import { Command_ChangeFormationAccess, Command_ChangeMenuAccess, Command_ChangeSaveAccess } from '../../../../rmmz/eventCommand/commands/menu/types';
 import { Command_SetMovementRoute } from '../../../../rmmz/eventCommand/commands/movementRoute/command';
 import { Command_PlayMovie } from '../../../../rmmz/eventCommand/commands/movie/types';
 import { Command_ChangePartyMember } from '../../../../rmmz/eventCommand/commands/party/changeMember/types';
 import { Command_ChangeGold } from '../../../../rmmz/eventCommand/commands/party/gold/changeGold';
-import { Command_ErasePicture, Command_RotatePicture, Command_TintPicture } from '../../../../rmmz/eventCommand/commands/picture/other/types';
-import { Command_FlashScreen, Command_ShakeScreen, Command_TintScreen } from '../../../../rmmz/eventCommand/commands/screen/types';
+import { Command_ErasePicture } from '../../../../rmmz/eventCommand/commands/picture/erase/types';
+import { Command_ShakeScreen } from '../../../../rmmz/eventCommand/commands/screen/shake/types';
+import { Command_ChangeTileset } from '../../../../rmmz/eventCommand/commands/tileset/types';
 import { Command_ChangeTransparency } from '../../../../rmmz/eventCommand/commands/transparency/types';
 import { Command_ChangeVehicleImage } from '../../../../rmmz/eventCommand/commands/vehicle/changeImage/types';
 import { Command_SetVehicleLocation } from '../../../../rmmz/eventCommand/commands/vehicle/setLocation/types';
@@ -77,8 +77,8 @@ export interface BasicMappingObject<T> extends FallbackMapper<T> {
     changeTransparency: CallBackFunc<Command_ChangeTransparency, T>;
     showPicture: CallBackFunc<RpgTypes.Command_ShowPicture, T>;
     movePicture: CallBackFunc<RpgTypes.Command_MovePicture, T>;
-    rotatePicture: CallBackFunc<Command_RotatePicture, T>;
-    tintPicture: CallBackFunc<Command_TintPicture, T>;
+    rotatePicture: CallBackFunc<RpgTypes.Command_RotatePicture, T>;
+    tintPicture: CallBackFunc<RpgTypes.Command_TintPicture, T>;
     erasePicture: CallBackFunc<Command_ErasePicture, T>;
     setWeatherEffects: CallBackFunc<Command_SetWeatherEffect, T>;
     playBGM: CallBackFunc<RpgTypes.Command_PlayBGM, T>;

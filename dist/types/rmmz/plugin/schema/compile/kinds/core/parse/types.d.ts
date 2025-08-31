@@ -1,6 +1,6 @@
 import { PluginDependencies } from './dependencies';
 import { KeywordEnum } from './keyword/types';
-import { OptionItem } from './selectOption';
+import { OptionItem } from './types/selectOption';
 export interface PluginParamTokens {
     name: string;
     attr: PluginTokens;

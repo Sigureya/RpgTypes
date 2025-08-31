@@ -12,11 +12,11 @@ export type {
   ParamArray_ChangeActorImages,
   ParamObject_ChangeActorImages,
 } from "./changeImages/types";
-export {
+export type {
   Command_ChangeActorLevel,
   ParamArray_ChangeActorLevel,
 } from "./changeLevel/types";
-export {
+export type {
   Command_ChangeActorState,
   ParamArray_ChangeActorState,
 } from "./changeState/types";
@@ -29,7 +29,7 @@ export type {
   Command_ChangeExp,
   ParamArray_ChangeExp,
 } from "./changeExp/types";
-export {
+export type {
   Command_ChangeSkill,
   ParamArray_ChangeSkill,
 } from "./changeSkill/types";
