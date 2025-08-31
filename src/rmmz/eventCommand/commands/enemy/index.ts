@@ -5,8 +5,13 @@ export type {
 } from "./change/types";
 
 export type {
+  Command_EnemyAppear,
+  ParamArray_EnemyAppear,
+} from "./appear/types";
+
+export type {
   Command_EnemyRecoverAll,
-  ParamArray_RecoverAll,
+  ParamArray_EnemyRecoverAll,
 } from "./recoverAll/types";
 
 export type {
@@ -19,7 +24,6 @@ export {
   fromArrayEnemyTransform,
   makeCommandEnemyTransform,
 } from "./transform/transfrom";
-
 export {
   makeCommandAddEachEnemyState,
   makeCommandAddEnemyState,

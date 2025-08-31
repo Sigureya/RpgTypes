@@ -32,4 +32,6 @@ export type {
   ExtractCommandByCode,
   ExtractCommandByParam,
 } from "./extractType";
+
+export type { Command_ChangeWindowColor } from "./window/changeWindowColor/types";
 export type { Command_NoOperation } from "./noOperation";
