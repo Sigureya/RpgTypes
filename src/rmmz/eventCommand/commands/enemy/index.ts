@@ -5,6 +5,11 @@ export type {
 } from "./change/types";
 
 export type {
+  Command_EnemyRecoverAll,
+  ParamArray_RecoverAll,
+} from "./recoverAll/types";
+
+export type {
   Command_EnemyTransform,
   ParamArray_EnemyTransfrom,
   ParamObject_EnemyTransform,
