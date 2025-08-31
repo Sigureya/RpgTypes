@@ -97,6 +97,10 @@ export const CHANGE_EXP = 315 as const;
 
 export const CHANGE_ACTOR_STATE = 313 as const;
 
+export const CHANGE_PARAMETER = 317 as const;
+
+export const CHANGE_SKILL = 318 as const;
+
 export const CHANGE_NAME = 320 as const;
 export const CHANGE_CLASS = 321 as const;
 export const CHANGE_ACTOR_IMAGES = 322 as const;
