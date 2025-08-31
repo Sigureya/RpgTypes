@@ -3,9 +3,11 @@ import type { CHANGE_VEHICLE_IMAGE } from "@RpgTypes/rmmz/rpg";
 
 export interface Command_ChangeVehicleImage
   extends EventCommandLike2<typeof CHANGE_VEHICLE_IMAGE> {
-  parameters: [
-    vehicleId: number,
-    characterImage: string,
-    characterIndex: number
-  ];
+  parameters: ParamArray_ChangeVehicleImage;
 }
+
+export type ParamArray_ChangeVehicleImage = [
+  vehicleId: number,
+  characterImage: string,
+  characterIndex: number
+];

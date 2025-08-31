@@ -34,14 +34,18 @@ import type {
 } from "./audio/play/types";
 import type { Command_StopSE } from "./audio/stop";
 import type { Command_ShowBalloonIcon } from "./balloon/types";
+import type { Command_AbortBattle } from "./battle/abort/types";
 import type { Command_ChangeBattleBackground } from "./battle/background/types";
 import type { Command_BattleProcessing } from "./battle/battleProcessing/types";
+import type { Command_ShowBattleAnimation } from "./battle/showAnimation/types";
 import type { Command_ControlTimer } from "./controlTimer/types";
 import type { Command_ChangeEncounter } from "./encounter/types";
+import type { Command_EnemyAppear } from "./enemy";
 import type {
   Command_ChangeEnemyHP,
   Command_ChangeEnemyMP,
 } from "./enemy/change/types";
+import type { Command_EnemyRecoverAll } from "./enemy/recoverAll/types";
 import type { Command_ChangeEnemyState } from "./enemy/state/types";
 import type { Command_EnemyTransform } from "./enemy/transform/types";
 import type {
@@ -69,6 +73,7 @@ import type { Command_GetLocationInfo } from "./mapEvent/getLocationInfo/types";
 import type { Command_SetEventLocation } from "./mapEvent/setLocation/types";
 import type { Command_ChangePlayerFollowers } from "./mapFollwer/types";
 import type { Command_TransferPlayer } from "./mapPlayer/transferPlayer/types";
+import type { Command_OpenMenu } from "./menu/open/types";
 import type { Command_OpenSaveScreen } from "./menu/save/types";
 import type {
   Command_ChangeFormationAccess,
@@ -238,4 +243,9 @@ export type EventCommand =
   | Command_ChangeActorState
   | Command_ChangeActorLevel
   | Command_ChangeSkill
-  | Command_ChangeParam;
+  | Command_ChangeParam
+  | Command_EnemyRecoverAll
+  | Command_EnemyAppear
+  | Command_AbortBattle
+  | Command_OpenMenu
+  | Command_ShowBattleAnimation;

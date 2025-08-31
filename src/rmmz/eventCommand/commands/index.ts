@@ -22,6 +22,7 @@ export * from "./picture";
 export * from "./screen";
 export * from "./script";
 export * from "./shop";
+export * from "./skip/types";
 export * from "./tileset/types";
 export * from "./variable";
 export * from "./vehicle";
@@ -32,4 +33,6 @@ export type {
   ExtractCommandByCode,
   ExtractCommandByParam,
 } from "./extractType";
+
+export type { Command_ChangeWindowColor } from "./window/changeWindowColor/types";
 export type { Command_NoOperation } from "./noOperation";
