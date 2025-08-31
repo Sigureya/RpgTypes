@@ -1,16 +1,20 @@
 import { AudioFileParams, ColorRGBA } from '../../libs';
 import { EventCode } from '../rpg';
-import { ParamArray_InputNumber, ParamArray_SetupChoice, ParamArray_ShowMessage, ParamArray_ChangeArmors, ParamArray_ChangeItems, ParamArray_ChangeWeapons, ParamArray_Comment, ParamArray_CommonEvent, ParamArray_ControlSwitches, ParamArray_ControlVariables, ParamArray_ScrollTextHeader, Command_ShopProcessingBody, Command_ShowMessageBody, Command_ScrollTextBody, Command_CommentBody, Command_CommentHeader, ParamArray_Label, ParamArray_SelfSwitch, ParamArray_ChangeEnabled, ParamArray_SetVehicleLocation, ParamArray_SetEventLocation, ParamArray_ScrollMap, ParamArray_MovementRoute, ParamArray_ShowAnimation, ParamArray_ShowBalloonIcon, ParamArray_EraseEvent, ParamArray_TintScreen, ParamArray_Wait, ParamsArray_ShowPicture, ParamsArray_MovePicture, ParamArray_RotatePicture, ParamArray_TintPicture, ParamArray_WeatherEffect, ParamArray_FadeOutAudio, ParamArray_PlayMovie, ParamArray_GetLocationInfo, ParamArray_ChangeBattleBackground, ParamArray_ChangeParallax, ParamArray_BattleProcessing, ParamArray_ShopProcessing, ParamArray_ChangeActorState, ParamArray_ChangeExp, ParamArray_ChangeSkill, ParamArray_ChangeClass } from './commands';
+import { ParamArray_InputNumber, ParamArray_SetupChoice, ParamArray_ShowMessage, ParamArray_ChangeArmors, ParamArray_ChangeItems, ParamArray_ChangeWeapons, ParamArray_Comment, ParamArray_CommonEvent, ParamArray_ControlSwitches, ParamArray_ControlVariables, ParamArray_ScrollTextHeader, Command_ShopProcessingBody, Command_ShowMessageBody, Command_ScrollTextBody, Command_CommentBody, Command_CommentHeader, ParamArray_Label, ParamArray_SelfSwitch, ParamArray_ChangeEnabled, ParamArray_SetVehicleLocation, ParamArray_SetEventLocation, ParamArray_ScrollMap, ParamArray_MovementRoute, ParamArray_ShowAnimation, ParamArray_ShowBalloonIcon, ParamArray_EraseEvent, ParamArray_TintScreen, ParamArray_Wait, ParamsArray_ShowPicture, ParamsArray_MovePicture, ParamArray_RotatePicture, ParamArray_TintPicture, ParamArray_WeatherEffect, ParamArray_FadeOutAudio, ParamArray_PlayMovie, ParamArray_GetLocationInfo, ParamArray_ChangeBattleBackground, ParamArray_ChangeParallax, ParamArray_BattleProcessing, ParamArray_ShopProcessing, ParamArray_ChangeActorState, ParamArray_ChangeExp, ParamArray_ChangeSkill, ParamArray_ChangeClass, ParamArray_ChangeVehicleImage, ParamArray_ChangeActorText, ParamArray_ChangeEnemyParameters, ParamArray_EnemyTransfrom, ParamArray_EnemyAppear, ParamArray_Script, ParamArray_PluginCommandMV } from './commands';
 import { ParamArray_ChangeActorImages } from './commands/actor/changeImages/types';
 import { ParamArray_ChangeActorLevel } from './commands/actor/changeLevel/types';
 import { ParamArray_ChangeParam } from './commands/actor/changeParam/types';
 import { ParamArray_ChangeActorHP, ParamArray_ChangeActorMP, ParamArray_ChangeActorTP } from './commands/actor/changeValues/types';
+import { ParamArray_ShowBattleAnimation } from './commands/battle/showAnimation/types';
 import { ParamArray_ControlTimer } from './commands/controlTimer/types';
+import { ParamArray_EnemyRecoverAll } from './commands/enemy/recoverAll/types';
+import { ParamArray_ChangeEnemyState } from './commands/enemy/state/types';
 import { BranchParameters } from './commands/flow/branch/types/branchParams';
 import { ParamArray_SelectItem } from './commands/item/select/types';
 import { ParamArray_ChangeMapNameDisplay } from './commands/map/changeMapNameDisplay/types';
 import { ParamArray_ChangePlayerFollowers } from './commands/mapFollwer/types';
 import { ParamArray_TransferPlayer } from './commands/mapPlayer/transferPlayer/types';
+import { ParamArray_OpenMenu } from './commands/menu/open/types';
 import { ParamArray_ChangePartyMember } from './commands/party/changeMember/types';
 import { ParamArray_RecoverAll } from './commands/party/types/recoverAll';
 import { ParamArray_ErasePicture } from './commands/picture/erase/types';
@@ -18,12 +22,11 @@ import { ParamArray_ShakeScreen } from './commands/screen/shake/types';
 import { ParamArray_ChangeTileset } from './commands/tileset/types';
 import { ParamArray_ChangeTransparency } from './commands/transparency/types';
 import { EventCommand } from './commands/union';
-type MainCommands = Exclude<EventCommand, Command_ShopProcessingBody>;
-type XXXCommands = Command_ShopProcessingBody | Command_ShowMessageBody | Command_ScrollTextBody | Command_CommentHeader | Command_CommentBody;
+type SubCommands = Command_ShopProcessingBody | Command_ShowMessageBody | Command_ScrollTextBody | Command_CommentHeader | Command_CommentBody | Command_ShopProcessingBody;
 type CommandTypeAssert = {
-    [K in Exclude<EventCode, 0 | XXXCommands["code"]> as `command${K}`]: Extract<MainCommands, {
+    [K in Exclude<EventCode, 0 | SubCommands["code"]> as `command${K}`]: Extract<EventCommand, {
         code: K;
-    }> extends undefined ? never : (params: Extract<MainCommands, {
+    }> extends undefined ? never : (params: Extract<EventCommand, {
         code: K;
     }>["parameters"]) => boolean;
 };
@@ -107,8 +110,26 @@ export interface InterpreterMapper extends CommandTypeAssert {
     command316: (changeLevel: ParamArray_ChangeActorLevel) => boolean;
     command317: (params: ParamArray_ChangeParam) => boolean;
     command318: (params: ParamArray_ChangeSkill) => boolean;
-    command322: (params: ParamArray_ChangeActorImages) => boolean;
     command320: (params: [number, string]) => boolean;
     command321: (params: ParamArray_ChangeClass) => boolean;
+    command322: (params: ParamArray_ChangeActorImages) => boolean;
+    command323: (params: ParamArray_ChangeVehicleImage) => boolean;
+    command324: (changeNickname: ParamArray_ChangeActorText) => boolean;
+    command325: (changeProfile: ParamArray_ChangeActorText) => boolean;
+    command331: (changeEnemyHP: ParamArray_ChangeEnemyParameters) => boolean;
+    command332: (changeEnemyMP: ParamArray_ChangeEnemyParameters) => boolean;
+    command343: (changeEnemyTP: ParamArray_ChangeEnemyParameters) => boolean;
+    command333: (params: ParamArray_ChangeEnemyState) => boolean;
+    command334: (params: ParamArray_EnemyRecoverAll) => boolean;
+    command335: (param: ParamArray_EnemyAppear) => boolean;
+    command336: (params: ParamArray_EnemyTransfrom) => boolean;
+    command337: (params: ParamArray_ShowBattleAnimation) => boolean;
+    command340: (abortBattle: []) => boolean;
+    command351: (params: ParamArray_OpenMenu) => boolean;
+    command352: (openSaveScreen: []) => boolean;
+    command353: (gameOver: []) => boolean;
+    command354: (returnToTitleScreen: []) => boolean;
+    command355: (params: ParamArray_Script) => boolean;
+    command356: (params: ParamArray_PluginCommandMV) => boolean;
 }
 export {};
