@@ -1,9 +1,7 @@
 import { ParseState } from './internalTypes';
-export declare const withTexts: (command: {
+export interface DescAndText {
     desc?: string;
     text?: string;
-}) => {
-    text?: string | undefined;
-    desc?: string | undefined;
-};
+}
+export declare const withTexts: (command: DescAndText) => DescAndText;
 export declare const flashCurrentItem: (state: ParseState) => ParseState;

@@ -67,7 +67,7 @@ declare const SCHEMA_DATA_TROOP: {
                         items: {
                             type: string;
                             additionalProperties: boolean;
-                            required: ("parameters" | "code" | "indent")[];
+                            required: ("code" | "indent" | "parameters")[];
                             properties: {
                                 code: {
                                     type: string;
