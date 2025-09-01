@@ -15,9 +15,6 @@ export interface Command_ChangeVictoryME extends AudioCommandBase<133> {
 export interface Command_ChangeDefeatME extends AudioCommandBase<139> {
     parameters: [value: AudioFileParams];
 }
-export interface Command_ChangeVehicleBGM extends EventCommandLike2<140> {
-    parameters: [vehicleId: number, audio: AudioFileParams];
-}
 export interface Command_PlayBGM extends EventCommandLike2<241> {
     parameters: [value: AudioFileParams];
 }

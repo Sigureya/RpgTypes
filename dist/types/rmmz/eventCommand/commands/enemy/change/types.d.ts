@@ -1,7 +1,7 @@
 import { ValueOf } from '../../../../../libs/templates/valueOf';
 import { EventCommandLike2 } from '../../../frame';
 import { Designation, Operation_AddSub } from '../../../../rpg';
-export type ParamArray_ChangeEnemyParameters = [
+export type ParamArray_ChangeEnemyValue = [
     enemyId: number,
     operation: number,
     operandType: ValueOf<Designation>,
@@ -9,8 +9,11 @@ export type ParamArray_ChangeEnemyParameters = [
     value: number
 ];
 export interface Command_ChangeEnemyHP extends EventCommandLike2<331> {
-    parameters: ParamArray_ChangeEnemyParameters;
+    parameters: ParamArray_ChangeEnemyValue;
 }
 export interface Command_ChangeEnemyMP extends EventCommandLike2<332> {
-    parameters: ParamArray_ChangeEnemyParameters;
+    parameters: ParamArray_ChangeEnemyValue;
+}
+export interface Command_ChangeEnemyTP extends EventCommandLike2<342> {
+    parameters: ParamArray_ChangeEnemyValue;
 }
