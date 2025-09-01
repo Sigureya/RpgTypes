@@ -17,6 +17,7 @@ export type {
   BranchParam_Weapon,
   BranchParameters,
 } from "./types/branchParams";
+export type { Command_BranchElse, ParamArray_BranchElse } from "./types/else";
 export type {
   Command_ConditionalBranch,
   Command_ConditionalBranchElse,

@@ -1,6 +1,6 @@
 import { AudioFileParams, ColorRGBA } from '../../libs';
 import { EventCode } from '../rpg';
-import { ParamArray_InputNumber, ParamArray_SetupChoice, ParamArray_ShowMessage, ParamArray_ChangeArmors, ParamArray_ChangeItems, ParamArray_ChangeWeapons, ParamArray_Comment, ParamArray_CommonEvent, ParamArray_ControlSwitches, ParamArray_ControlVariables, ParamArray_ScrollTextHeader, Command_ShopProcessingBody, Command_ShowMessageBody, Command_ScrollTextBody, Command_CommentBody, Command_CommentHeader, ParamArray_Label, ParamArray_SelfSwitch, ParamArray_ChangeEnabled, ParamArray_SetVehicleLocation, ParamArray_SetEventLocation, ParamArray_ScrollMap, ParamArray_MovementRoute, ParamArray_ShowAnimation, ParamArray_ShowBalloonIcon, ParamArray_EraseEvent, ParamArray_TintScreen, ParamArray_Wait, ParamsArray_ShowPicture, ParamsArray_MovePicture, ParamArray_RotatePicture, ParamArray_TintPicture, ParamArray_WeatherEffect, ParamArray_FadeOutAudio, ParamArray_PlayMovie, ParamArray_GetLocationInfo, ParamArray_ChangeBattleBackground, ParamArray_ChangeParallax, ParamArray_BattleProcessing, ParamArray_ShopProcessing, ParamArray_ChangeActorState, ParamArray_ChangeExp, ParamArray_ChangeSkill, ParamArray_ChangeClass, ParamArray_ChangeVehicleImage, ParamArray_ChangeActorText, ParamArray_ChangeEnemyParameters, ParamArray_EnemyTransfrom, ParamArray_EnemyAppear, ParamArray_Script, ParamArray_PluginCommandMV } from './commands';
+import { ParamArray_InputNumber, ParamArray_SetupChoice, ParamArray_ShowMessage, ParamArray_ChangeArmors, ParamArray_ChangeItems, ParamArray_ChangeWeapons, ParamArray_Comment, ParamArray_CommonEvent, ParamArray_ControlSwitches, ParamArray_ControlVariables, ParamArray_ScrollTextHeader, Command_ShopProcessingBody, Command_ShowMessageBody, Command_ScrollTextBody, Command_CommentBody, Command_CommentHeader, ParamArray_Label, ParamArray_SelfSwitch, ParamArray_ChangeEnabled, ParamArray_SetVehicleLocation, ParamArray_SetEventLocation, ParamArray_ScrollMap, ParamArray_MovementRoute, ParamArray_ShowAnimation, ParamArray_ShowBalloonIcon, ParamArray_EraseEvent, ParamArray_TintScreen, ParamArray_Wait, ParamsArray_ShowPicture, ParamsArray_MovePicture, ParamArray_RotatePicture, ParamArray_TintPicture, ParamArray_WeatherEffect, ParamArray_FadeOutAudio, ParamArray_PlayMovie, ParamArray_GetLocationInfo, ParamArray_ChangeBattleBackground, ParamArray_ChangeParallax, ParamArray_BattleProcessing, ParamArray_ShopProcessing, ParamArray_ChangeActorState, ParamArray_ChangeExp, ParamArray_ChangeSkill, ParamArray_ChangeClass, ParamArray_ChangeVehicleImage, ParamArray_ChangeActorText, ParamArray_ChangeEnemyParameters, ParamArray_EnemyTransfrom, ParamArray_EnemyAppear, ParamArray_Script, ParamArray_PluginCommandMV, Command_ShowChoiceWhen, ParamArray_BranchElse, ParamArray_NameInputProcessing, ParamArray_ChangeGold, ParamArray_ChangeVehicleBGM } from './commands';
 import { ParamArray_ChangeActorImages } from './commands/actor/changeImages/types';
 import { ParamArray_ChangeActorLevel } from './commands/actor/changeLevel/types';
 import { ParamArray_ChangeParam } from './commands/actor/changeParam/types';
@@ -15,6 +15,7 @@ import { ParamArray_ChangeMapNameDisplay } from './commands/map/changeMapNameDis
 import { ParamArray_ChangePlayerFollowers } from './commands/mapFollwer/types';
 import { ParamArray_TransferPlayer } from './commands/mapPlayer/transferPlayer/types';
 import { ParamArray_OpenMenu } from './commands/menu/open/types';
+import { ParamArray_PluginCommandMZ } from './commands/mz';
 import { ParamArray_ChangePartyMember } from './commands/party/changeMember/types';
 import { ParamArray_RecoverAll } from './commands/party/types/recoverAll';
 import { ParamArray_ErasePicture } from './commands/picture/erase/types';
@@ -22,9 +23,9 @@ import { ParamArray_ShakeScreen } from './commands/screen/shake/types';
 import { ParamArray_ChangeTileset } from './commands/tileset/types';
 import { ParamArray_ChangeTransparency } from './commands/transparency/types';
 import { EventCommand } from './commands/union';
-type SubCommands = Command_ShopProcessingBody | Command_ShowMessageBody | Command_ScrollTextBody | Command_CommentHeader | Command_CommentBody | Command_ShopProcessingBody;
+type SubCommands = Command_ShopProcessingBody | Command_ShowMessageBody | Command_ScrollTextBody | Command_CommentHeader | Command_CommentBody | Command_ShopProcessingBody | Command_ShowChoiceWhen;
 type CommandTypeAssert = {
-    [K in Exclude<EventCode, 0 | SubCommands["code"]> as `command${K}`]: Extract<EventCommand, {
+    [K in Exclude<EventCode, 0 | SubCommands["code"] | 655> as `command${K}`]: Extract<EventCommand, {
         code: K;
     }> extends undefined ? never : (params: Extract<EventCommand, {
         code: K;
@@ -37,6 +38,7 @@ export interface InterpreterMapper extends CommandTypeAssert {
     command104: (params: ParamArray_SelectItem) => boolean;
     command105: (params: ParamArray_ScrollTextHeader) => boolean;
     command108: (params: ParamArray_Comment) => boolean;
+    command109: (skip: []) => boolean;
     command111: (params: BranchParameters) => boolean;
     command112: (params: []) => boolean;
     command113: (params: []) => boolean;
@@ -48,6 +50,7 @@ export interface InterpreterMapper extends CommandTypeAssert {
     command122: (params: ParamArray_ControlVariables) => boolean;
     command123: (params: ParamArray_SelfSwitch) => boolean;
     command124: (params: ParamArray_ControlTimer) => boolean;
+    command125: (params: ParamArray_ChangeGold) => boolean;
     command126: (params: ParamArray_ChangeItems) => boolean;
     command127: (params: ParamArray_ChangeWeapons) => boolean;
     command128: (params: ParamArray_ChangeArmors) => boolean;
@@ -60,6 +63,7 @@ export interface InterpreterMapper extends CommandTypeAssert {
     command137: (params: ParamArray_ChangeEnabled) => boolean;
     command138: (params: [ColorRGBA]) => boolean;
     command139: (params: [AudioFileParams]) => boolean;
+    command140: (params: ParamArray_ChangeVehicleBGM) => boolean;
     command201: (params: ParamArray_TransferPlayer) => boolean;
     command202: (params: ParamArray_SetVehicleLocation) => boolean;
     command203: (params: ParamArray_SetEventLocation) => boolean;
@@ -101,6 +105,7 @@ export interface InterpreterMapper extends CommandTypeAssert {
     command285: (params: ParamArray_GetLocationInfo) => boolean;
     command301: (params: ParamArray_BattleProcessing) => boolean;
     command302: (params: ParamArray_ShopProcessing) => boolean;
+    command303: (params: ParamArray_NameInputProcessing) => boolean;
     command311: (params: ParamArray_ChangeActorHP) => boolean;
     command312: (changeMP: ParamArray_ChangeActorMP) => boolean;
     command326: (changeTP: ParamArray_ChangeActorTP) => boolean;
@@ -125,11 +130,14 @@ export interface InterpreterMapper extends CommandTypeAssert {
     command336: (params: ParamArray_EnemyTransfrom) => boolean;
     command337: (params: ParamArray_ShowBattleAnimation) => boolean;
     command340: (abortBattle: []) => boolean;
+    command342: (params: ParamArray_ChangeEnemyParameters) => boolean;
     command351: (params: ParamArray_OpenMenu) => boolean;
     command352: (openSaveScreen: []) => boolean;
     command353: (gameOver: []) => boolean;
     command354: (returnToTitleScreen: []) => boolean;
     command355: (params: ParamArray_Script) => boolean;
     command356: (params: ParamArray_PluginCommandMV) => boolean;
+    command357: (params: ParamArray_PluginCommandMZ) => boolean;
+    command411: (params: ParamArray_BranchElse) => boolean;
 }
 export {};
