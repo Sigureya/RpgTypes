@@ -5,7 +5,7 @@ import { Command_ChangeActorName, Command_ChangeActorNickName, Command_ChangeAct
 import { Command_ChangeActorHP, Command_ChangeActorMP, Command_ChangeActorTP } from './actor/changeValues/types';
 import { Command_ShowAnimation } from './animation/types';
 import { Command_FadeOutBGM, Command_FadeOutBGS, Command_ResumeBGM, Command_SaveBGM } from './audio/other/types';
-import { Command_ChangeBattleBGM, Command_ChangeDefeatME, Command_ChangeVehicleBGM, Command_ChangeVictoryME, Command_PlayBGM, Command_PlayBGS, Command_PlayME, Command_PlaySE } from './audio/play/types';
+import { Command_ChangeBattleBGM, Command_ChangeDefeatME, Command_ChangeVictoryME, Command_PlayBGM, Command_PlayBGS, Command_PlayME, Command_PlaySE } from './audio/play/types';
 import { Command_StopSE } from './audio/stop';
 import { Command_ShowBalloonIcon } from './balloon/types';
 import { Command_ChangeBattleBackground } from './battle/background/types';
@@ -56,6 +56,7 @@ import { Command_Skip } from './skip/types';
 import { Command_ChangeTileset } from './tileset/types';
 import { Command_ChangeTransparency } from './transparency/types';
 import { Command_ControlVariables } from './variable/types';
+import { Command_ChangeVehicleBGM } from './vehicle';
 import { Command_ChangeVehicleImage } from './vehicle/changeImage/types';
 import { Command_SetVehicleLocation } from './vehicle/setLocation/types';
 import { Command_GetOnOffVehicle } from './vehicle/types';

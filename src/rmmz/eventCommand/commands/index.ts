@@ -18,6 +18,7 @@ export * from "./message";
 export * from "./movementRoute";
 export * from "./movie";
 export * from "./mv/pluginCommandMV";
+export * from "./mz";
 export * from "./nonParam/types";
 export * from "./party";
 export * from "./picture";
@@ -31,7 +32,6 @@ export * from "./variable";
 export * from "./vehicle";
 export * from "./wait";
 export * from "./weather";
-
 export type {
   CommandParamaterType,
   ExtractCommandByCode,
