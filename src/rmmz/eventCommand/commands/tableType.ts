@@ -21,7 +21,6 @@ import type {
 import type {
   Command_ChangeBattleBGM,
   Command_ChangeDefeatME,
-  Command_ChangeVehicleBGM,
   Command_ChangeVictoryME,
   Command_PlayBGM,
   Command_PlayBGS,
@@ -121,6 +120,7 @@ import type { Command_Skip } from "./skip/types";
 import type { Command_ChangeTileset } from "./tileset/types";
 import type { Command_ChangeTransparency } from "./transparency/types";
 import type { Command_ControlVariables } from "./variable/types";
+import type { Command_ChangeVehicleBGM } from "./vehicle";
 import type { Command_ChangeVehicleImage } from "./vehicle/changeImage/types";
 import type { Command_SetVehicleLocation } from "./vehicle/setLocation/types";
 import type { Command_GetOnOffVehicle } from "./vehicle/types";
