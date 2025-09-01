@@ -1,4 +1,4 @@
-import type { Command_ChangeSkill } from "./actor";
+import type { Command_ChangeSkill, Command_NameInputProcessing } from "./actor";
 import type { Command_ChangeClaass } from "./actor/changeClass/types";
 import type { Command_ChangeExp } from "./actor/changeExp/types";
 import type { Command_ChangeActorImages } from "./actor/changeImages/types";
@@ -25,7 +25,6 @@ import type {
 import type {
   Command_ChangeBattleBGM,
   Command_ChangeDefeatME,
-  Command_ChangeVehicleBGM,
   Command_ChangeVictoryME,
   Command_PlayBGM,
   Command_PlayBGS,
@@ -44,20 +43,26 @@ import type { Command_EnemyAppear } from "./enemy";
 import type {
   Command_ChangeEnemyHP,
   Command_ChangeEnemyMP,
+  Command_ChangeEnemyTP,
 } from "./enemy/change/types";
 import type { Command_EnemyRecoverAll } from "./enemy/recoverAll/types";
 import type { Command_ChangeEnemyState } from "./enemy/state/types";
 import type { Command_EnemyTransform } from "./enemy/transform/types";
 import type {
+  Command_BranchElse,
+  Command_CommonEvent,
+  Command_ControlSelfSwitch,
+  Command_ControlSwitches,
+  Command_ExitEventProcessing,
+  Command_Label,
+  Command_LabelJump,
+  Command_Loop,
+  Command_LoopBreak,
+} from "./flow";
+import type {
   Command_ConditionalBranch,
   Command_ConditionalBranchElse,
 } from "./flow/branch/commandTypes";
-import type { Command_CommonEvent } from "./flow/callCommonEvent";
-import type { Command_ControlSwitches } from "./flow/controlSwtches";
-import type { Command_ExitEventProcessing } from "./flow/exitEvent/types";
-import type { Command_Label, Command_LabelJump } from "./flow/label/types";
-import type { Command_Loop, Command_LoopBreak } from "./flow/loop/types";
-import type { Command_ControlSelfSwitch } from "./flow/selfSwitch/types";
 import type { Command_InputNumber } from "./inputNumber/types";
 import type {
   Command_ChangeArmors,
@@ -99,6 +104,7 @@ import type {
 import type { Command_SetMovementRoute } from "./movementRoute/command";
 import type { Command_PlayMovie } from "./movie/types";
 import type { Command_PluginCommandMV } from "./mv/pluginCommandMV";
+import type { Command_PluginCommandMZ } from "./mz";
 import type {
   Command_GameOver,
   Command_GatherFollowers,
@@ -131,6 +137,7 @@ import type { Command_Skip } from "./skip/types";
 import type { Command_ChangeTileset } from "./tileset/types";
 import type { Command_ChangeTransparency } from "./transparency/types";
 import type { Command_ControlVariables } from "./variable/types";
+import type { Command_ChangeVehicleBGM } from "./vehicle";
 import type { Command_ChangeVehicleImage } from "./vehicle/changeImage/types";
 import type { Command_SetVehicleLocation } from "./vehicle/setLocation/types";
 import type { Command_GetOnOffVehicle } from "./vehicle/types";
@@ -248,4 +255,8 @@ export type EventCommand =
   | Command_EnemyAppear
   | Command_AbortBattle
   | Command_OpenMenu
-  | Command_ShowBattleAnimation;
+  | Command_ShowBattleAnimation
+  | Command_PluginCommandMZ
+  | Command_BranchElse
+  | Command_ChangeEnemyTP
+  | Command_NameInputProcessing;

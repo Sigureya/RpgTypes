@@ -1,7 +1,7 @@
 export type {
   Command_ChangeEnemyHP,
   Command_ChangeEnemyMP,
-  ParamArray_ChangeEnemyParameters,
+  ParamArray_ChangeEnemyValue as ParamArray_ChangeEnemyParameters,
 } from "./change/types";
 
 export type {
