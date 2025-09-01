@@ -8,7 +8,10 @@ export type {
   ParamArray_ChangePartyMember,
   ParamObject_ChangePartyMember,
 } from "./changeMember/types";
-export type { Command_RecoverAll } from "./types/recoverAll";
+export type {
+  Command_RecoverAll,
+  ParamArray_RecoverAll,
+} from "./types/recoverAll";
 export {
   makeCommandAddPartyMember,
   makeCommandRemovePartyMember,
