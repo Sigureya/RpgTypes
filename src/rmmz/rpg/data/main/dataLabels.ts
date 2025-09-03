@@ -1,5 +1,5 @@
 import type { DomainLabel } from "src/libs/templates/domainLabel";
-import type { Data_CommonEvent } from "../event";
+import type { Data_CommonEventUnknown } from "../event";
 import type {
   WeaponLabels,
   ArmorLabels,
@@ -21,5 +21,5 @@ export interface DataLabels {
   skill: DomainLabel<SkillLabels>;
   //  equipItem: EquipItemLabels;
   usableItem: DomainLabel<UsableItemLabels>;
-  commonEvent: DomainLabel<Record<keyof Data_CommonEvent, string>>;
+  commonEvent: DomainLabel<Record<keyof Data_CommonEventUnknown, string>>;
 }

@@ -1,13 +1,13 @@
-import { da as G, db as j, dc as z, V as N, T as w, U as k, cT as F, aY as B, aX as D, aT as E, z as b, A as h, C as l, u, v as A, S as v, m as H, s as L, q as J, p as K, l as O, b as P, y as $, bb as C, cP as M, cQ as Q, d3 as X, d9 as Y, d8 as Z, d5 as _, bg as W, bf as ee, d1 as se, r as te, cz as ae } from "./make.es3.js";
+import { da as G, db as j, dc as z, V as w, T as k, U as B, cT as F, aY as D, aX as E, aT as A, z as b, A as h, C as l, u, v, S as f, m as H, s as L, q as J, p as K, l as O, b as P, y as $, bb as C, cP as M, cQ as Q, d3 as X, d9 as Y, d8 as Z, d5 as _, bg as W, bf as ee, d1 as se, r as te, cz as ae } from "./make.es3.js";
 import { m as R } from "./mergeItemsSource.es.js";
-const V = (e, s, a) => e.reduce((r, n) => (n.code !== N && n.code !== w && n.code !== k || r.push(ne(n, s, a)), r), []), re = {
-  [k]: "weapon",
-  [N]: "armor",
-  [w]: "item"
+const V = (e, s, a) => e.reduce((r, n) => (n.code !== w && n.code !== k && n.code !== B || r.push(ne(n, s, a)), r), []), re = {
+  [B]: "weapon",
+  [w]: "armor",
+  [k]: "item"
 }, ne = (e, s, a) => {
   const r = e.parameters[3] === G ? { direct: !0, value: e.parameters[2] } : { direct: !1, variableId: e.parameters[2] }, n = e.parameters[0] === j ? s.gain : e.parameters[0] === z ? s.lose : s.unknown;
   return { itemKind: re[e.code], dataId: e.parameters[1], code: e.code, commandNameMZ: a(e.code), operation: n, includesEquip: e.parameters[4], ...r };
-}, oe = (e) => !!e, f = (e, s) => e.pages.map((a, r) => s(a, r, e)), U = (e, s) => e.events.filter(oe).flatMap((a) => f(a, s)), Ce = (e, s, a) => U(e.map, (r, n, o) => ({
+}, oe = (e) => !!e, T = (e, s) => e.pages.map((a, r) => s(a, r, e)), U = (e, s) => e.events.filter(oe).flatMap((a) => T(a, s)), Ce = (e, s, a) => U(e.map, (r, n, o) => ({
   ...me(r),
   commands: V(r.list, s, a),
   eventName: o.name,
@@ -18,7 +18,7 @@ const V = (e, s, a) => e.reduce((r, n) => (n.code !== N && n.code !== w && n.cod
     eventName: m.name,
     troopId: m.id,
     pageIndex: o
-  }), e.flatMap((n) => f(n, r));
+  }), e.flatMap((n) => T(n, r));
   var r;
 }, t = (e, s) => {
   const a = e.trimEnd(), r = s.get(a);
@@ -42,20 +42,20 @@ const V = (e, s, a) => e.reduce((r, n) => (n.code !== N && n.code !== w && n.cod
 }, Ge = (e, s) => {
   const a = d(e, s), r = t(e.name, s), n = t(e.message1, s), o = t(e.message2, s), m = t(e.message3, s), p = t(e.message4, s);
   return { ...e, name: r, message1: n, message2: o, message3: m, message4: p, note: a };
-}, T = (e, s) => e.map((a) => {
+}, x = (e, s) => e.map((a) => {
   switch (a.code) {
-    case v:
+    case f:
       return de(a, s);
-    case A:
+    case v:
       return pe(a, s);
     case u:
     case l:
     case h:
     case b:
       return ie(a, s);
+    case A:
     case E:
     case D:
-    case B:
       return ce(a, s);
     default:
       return a;
@@ -82,15 +82,15 @@ const V = (e, s, a) => e.reduce((r, n) => (n.code !== N && n.code !== w && n.cod
 }, pe = (e, s) => {
   const a = e.parameters[0].map((r) => t(r, s));
   return {
-    code: e.code,
+    code: v,
     indent: e.indent,
     parameters: [a, e.parameters[1], e.parameters[2], e.parameters[3], e.parameters[4]]
   };
 }, je = (e, s) => {
-  const a = e.pages.map((r) => ({ list: T(r.list, s), conditions: r.conditions, span: r.span }));
+  const a = e.pages.map((r) => ({ list: x(r.list, s), conditions: r.conditions, span: r.span }));
   return { ...e, pages: a };
-}, ze = (e, s) => ({ ...e, list: T(e.list, s) }), Fe = (e, s) => {
-  const a = t(e.displayName, s), r = d(e, s), n = { displayName: a, events: L(e, (o) => T(o, s)), note: r };
+}, ze = (e, s) => ({ ...e, list: x(e.list, s) }), Fe = (e, s) => {
+  const a = t(e.displayName, s), r = d(e, s), n = { displayName: a, events: L(e, (o) => x(o, s)), note: r };
   return { ...e, ...n };
 }, ue = (e, s) => ({
   params: ye(e.params, s),
@@ -180,7 +180,7 @@ class q {
     return [this.mergedBody()];
   }
 }
-class x {
+class I {
   constructor(s, a, r) {
     this.bodyCode = s, this.header = a, this.bodies = r;
   }
@@ -210,18 +210,18 @@ const g = (e, s, a, r) => {
   return { header: n, bodies: o };
 }, be = (e, s) => {
   const { bodies: a, header: r } = ((n, o) => g(n, o, (m) => m.code === l, (m) => m.code === h))(e, s);
-  return ve(r) ? new x(h, r, a) : new q(r, a);
+  return ve(r) ? new I(h, r, a) : new q(r, a);
 }, ve = (e) => e.parameters[0] === "選択肢ヘルプ", fe = (e, s) => {
-  const { bodies: a, header: r } = ((n, o) => g(n, o, (m) => m.code === v, (m) => m.code === u))(e, s);
-  return new x(u, r, a);
+  const { bodies: a, header: r } = ((n, o) => g(n, o, (m) => m.code === f, (m) => m.code === u))(e, s);
+  return new I(u, r, a);
 }, Te = (e, s) => {
   const { bodies: a, header: r } = ((n, o) => g(n, o, K, J))(e, s);
   return new q(r, a);
 }, xe = (e, s) => {
   const { bodies: a, header: r } = ((n, o) => g(n, o, P, O))(e, s);
-  return new x(b, r, a);
+  return new I(b, r, a);
 }, Ie = {
-  [v]: (e, s, a) => a.showMessage(fe(e, s), s, e),
+  [f]: (e, s, a) => a.showMessage(fe(e, s), s, e),
   [C]: (e, s, a) => a.script(Te(e, s), s, e),
   [l]: (e, s, a) => a.comment(be(e, s), s, e),
   [$]: (e, s, a) => a.showScrollingText(xe(e, s), s, e)
@@ -229,15 +229,15 @@ const g = (e, s, a, r) => {
   code: s.code,
   paramIndex: a,
   value: s.parameters[a]
-}))(e, 1), we = (e) => e.parameters[0].map((s, a) => ({ code: 102, paramIndex: a, value: s })), I = (e) => e.reduce((s, a, r) => {
-  if (a.code === A) return [...s, ...we(a)];
+}))(e, 1), we = (e) => e.parameters[0].map((s, a) => ({ code: 102, paramIndex: a, value: s })), N = (e) => e.reduce((s, a, r) => {
+  if (a.code === v) return [...s, ...we(a)];
   const n = (o = a.code, Ie[o]);
   var o;
   if (n) {
     const m = n(e, r, ke);
     if (m !== void 0) return [...s, m];
   }
-  return a.code === D || a.code === E || a.code === B ? [...s, Ne(a)] : s;
+  return a.code === E || a.code === A || a.code === D ? [...s, Ne(a)] : s;
 }, []), ke = { comment: (e) => ({ code: l, paramIndex: 0, value: e.getBodyText() }), showMessage: (e) => {
   return { code: u, paramIndex: 0, value: (s = e).getBodyText(), speaker: (a = s.header, a.parameters[4] ? a.parameters[4].trimEnd() : "") };
   var s, a;
@@ -246,16 +246,16 @@ const g = (e, s, a, r) => {
   paramIndex: 0,
   value: s.getBodyText()
 }))(e) }, Le = (e) => {
-  return s = (a, r, { id: n }) => ({ eventId: n, commands: I(a.list) }), e.map((a) => s(a, 0, a));
+  return s = (a, r, { id: n }) => ({ eventId: n, commands: N(a.list) }), e.map((a) => s(a, 0, a));
   var s;
-}, Je = (e) => ((s, a) => s.map((r) => f(r, a)))(e, (s, a, { id: r }) => ({
+}, Je = (e) => ((s, a) => s.map((r) => T(r, a)))(e, (s, a, { id: r }) => ({
   eventId: r,
   pageIndex: a,
-  commands: I(s.list)
+  commands: N(s.list)
 })), Ke = (e) => ({ note: e.note, noteItems: M(e.note), displayedName: e.displayName, events: Be(e) }), Be = (e) => U(e, (s, a, r) => ({
   eventId: r.id,
   pageIndex: a,
-  commands: I(s.list),
+  commands: N(s.list),
   note: r.note,
   noteItems: M(r.note),
   name: r.name
@@ -315,7 +315,7 @@ export {
   Ge as i,
   ze as j,
   je as k,
-  T as l,
+  x as l,
   ie as m,
   ce as n,
   pe as o,
@@ -328,6 +328,6 @@ export {
   He as v,
   Je as w,
   Le as x,
-  I as y,
+  N as y,
   Ke as z
 };

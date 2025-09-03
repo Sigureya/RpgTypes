@@ -7,9 +7,9 @@ import type {
 import { replaceEventCommandTexts } from "./eventCommand";
 
 export const replaceTroopTexts = (
-  troop: Data_Troop<EventCommand>,
+  troop: Data_Troop,
   dic: ReadonlyMap<string, string>
-): Data_Troop<EventCommand> => {
+): Data_Troop => {
   const pages = troop.pages.map(
     (page): BattleEventPage<EventCommand> => ({
       list: replaceEventCommandTexts(page.list, dic),
@@ -24,9 +24,9 @@ export const replaceTroopTexts = (
 };
 
 export const replaceCommonEventTexts = (
-  commonEvent: Data_CommonEvent<EventCommand>,
+  commonEvent: Data_CommonEvent,
   dic: ReadonlyMap<string, string>
-): Data_CommonEvent<EventCommand> => {
+): Data_CommonEvent => {
   return {
     ...commonEvent,
     list: replaceEventCommandTexts(commonEvent.list, dic),

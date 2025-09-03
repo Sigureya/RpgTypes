@@ -2,14 +2,19 @@ import type { EventCommandUnknown } from "@RpgTypes/rmmz/eventCommand";
 import type { JSONSchemaType } from "ajv";
 import type {
   BattleEventPage,
-  Data_Troop,
+  Data_TroopUnknonw,
   Troop_EventConditions,
   Troop_Member,
 } from "./troop";
 
 const SCHEMA_DATA_TROOP = {
   type: "object",
-  required: ["id", "name", "members", "pages"] satisfies (keyof Data_Troop)[],
+  required: [
+    "id",
+    "name",
+    "members",
+    "pages",
+  ] satisfies (keyof Data_TroopUnknonw)[],
   properties: {
     id: { type: "integer", minimum: 0 },
     name: { type: "string" },

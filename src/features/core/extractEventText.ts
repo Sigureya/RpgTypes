@@ -11,12 +11,12 @@ import { extractTextFromEventCommands } from "./getTextFromCommand";
 import { processCommonEvents, processTroopEvents } from "./rpg";
 
 export const extractCommonEventTexts = (
-  commons: ReadonlyArray<Data_CommonEvent<EventCommand>>
+  commons: ReadonlyArray<Data_CommonEvent>
 ): ExtractedCommonEventText[] => {
   return processCommonEvents(
     commons,
     (
-      page: { list: EventCommand[] },
+      page: { list: ReadonlyArray<EventCommand> },
       pageIndex: number,
       { id }: { id: number }
     ): ExtractedCommonEventText => ({
@@ -27,12 +27,12 @@ export const extractCommonEventTexts = (
 };
 
 export const extractBattleEventTexts = (
-  list: ReadonlyArray<Data_Troop<EventCommand>>
+  list: ReadonlyArray<Data_Troop>
 ): ExtractedBattleEventText[][] => {
   return processTroopEvents(
     list,
     (
-      page: { list: EventCommand[] },
+      page: { list: ReadonlyArray<EventCommand> },
       pageIndex: number,
       { id }: { id: number }
     ): ExtractedBattleEventText => ({

@@ -1,4 +1,4 @@
-import { BattleEventPage, Data_CommonEvent, Data_Troop, EventCommandUnknown, MapEventContainer } from '../../../../rmmz';
+import { BattleEventPage, Data_CommonEventUnknown, Data_TroopUnknonw, EventCommandUnknown, MapEventContainer } from '../../../../rmmz';
 import { MapEventContext } from './types';
 interface EventContainer<Command> {
     id: number;
@@ -56,15 +56,15 @@ export declare const collectMapEvents: <Result, Command, Event extends {
  * @param func The function to apply to each event page.
  * @returns A 2D array where each element represents the processed result of a troop's pages.
  */
-export declare const processTroopEvents: <Result, Command>(list: ReadonlyArray<Data_Troop<Command>>, func: (page: BattleEventPage<Command>, pageIndex: number, container: Data_Troop<Command>) => Result) => Result[][];
-export declare const correctTroopEvents: <Result, Command>(list: ReadonlyArray<Data_Troop<Command>>, func: (page: BattleEventPage<Command>, pageIndex: number, container: Data_Troop<Command>) => Result) => Result[];
+export declare const processTroopEvents: <Result, Command>(list: ReadonlyArray<Data_TroopUnknonw<Command>>, func: (page: BattleEventPage<Command>, pageIndex: number, container: Data_TroopUnknonw<Command>) => Result) => Result[][];
+export declare const correctTroopEvents: <Result, Command>(list: ReadonlyArray<Data_TroopUnknonw<Command>>, func: (page: BattleEventPage<Command>, pageIndex: number, container: Data_TroopUnknonw<Command>) => Result) => Result[];
 /**
  * Processes all common events.
  * @param events The list of common events.
  * @param func The function to apply to each common event.
  * @returns An array of processed common events.
  */
-export declare const processCommonEvents: <T, Command extends EventCommandUnknown>(events: ReadonlyArray<Data_CommonEvent<Command>>, func: (common: Readonly<Data_CommonEvent<Command>>, index: number, common2: Readonly<Data_CommonEvent<Command>>) => T) => T[];
+export declare const processCommonEvents: <T, Command extends EventCommandUnknown>(events: ReadonlyArray<Data_CommonEventUnknown<Command>>, func: (common: Readonly<Data_CommonEventUnknown<Command>>, index: number, common2: Readonly<Data_CommonEventUnknown<Command>>) => T) => T[];
 /**
  * Gathers all event command contexts from a map.
  * @param map The map containing events.
