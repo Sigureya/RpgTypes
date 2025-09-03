@@ -1,7 +1,7 @@
 import type {
   BattleEventPage,
   Data_CommonEventUnknown,
-  Data_Troop,
+  Data_TroopUnknonw,
   EventCommandUnknown,
   MapEventContainer,
 } from "@RpgTypes/rmmz";
@@ -119,22 +119,22 @@ export const collectMapEvents = <Result, Command, Event extends { id: number }>(
  * @returns A 2D array where each element represents the processed result of a troop's pages.
  */
 export const processTroopEvents = <Result, Command>(
-  list: ReadonlyArray<Data_Troop<Command>>,
+  list: ReadonlyArray<Data_TroopUnknonw<Command>>,
   func: (
     page: BattleEventPage<Command>,
     pageIndex: number,
-    container: Data_Troop<Command>
+    container: Data_TroopUnknonw<Command>
   ) => Result
 ): Result[][] => {
   return list.map((troop) => processEventPages(troop, func));
 };
 
 export const correctTroopEvents = <Result, Command>(
-  list: ReadonlyArray<Data_Troop<Command>>,
+  list: ReadonlyArray<Data_TroopUnknonw<Command>>,
   func: (
     page: BattleEventPage<Command>,
     pageIndex: number,
-    container: Data_Troop<Command>
+    container: Data_TroopUnknonw<Command>
   ) => Result
 ): Result[] => {
   return list.flatMap((troop) => processEventPages(troop, func));
