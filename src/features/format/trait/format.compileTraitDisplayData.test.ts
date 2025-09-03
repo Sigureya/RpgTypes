@@ -9,7 +9,7 @@ import type {
   Data_Actor,
   Data_Armor,
   Data_Class,
-  Data_CommonEvent,
+  Data_CommonEventUnknown,
   Data_Enemy,
   Data_Item,
   Data_Skill,
@@ -132,7 +132,7 @@ const makeGameData = (
   items: data.items.map(makeItemData) satisfies Data_Item[],
   commonEvents: data.commonEvents.map(
     makeCommonEventData
-  ) satisfies Data_CommonEvent[],
+  ) satisfies Data_CommonEventUnknown[],
 });
 
 const mockNormalLabel: NormalLabel = { normal: "Normal" };

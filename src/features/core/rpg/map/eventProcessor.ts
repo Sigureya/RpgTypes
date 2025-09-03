@@ -1,6 +1,6 @@
 import type {
   BattleEventPage,
-  Data_CommonEvent,
+  Data_CommonEventUnknown,
   Data_Troop,
   EventCommandUnknown,
   MapEventContainer,
@@ -147,11 +147,11 @@ export const correctTroopEvents = <Result, Command>(
  * @returns An array of processed common events.
  */
 export const processCommonEvents = <T, Command extends EventCommandUnknown>(
-  events: ReadonlyArray<Data_CommonEvent<Command>>,
+  events: ReadonlyArray<Data_CommonEventUnknown<Command>>,
   func: (
-    common: Readonly<Data_CommonEvent<Command>>,
+    common: Readonly<Data_CommonEventUnknown<Command>>,
     index: number,
-    common2: Readonly<Data_CommonEvent<Command>>
+    common2: Readonly<Data_CommonEventUnknown<Command>>
   ) => T
 ): T[] => {
   return events.map((common) => func(common, 0, common));

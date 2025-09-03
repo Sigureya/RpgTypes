@@ -1,6 +1,6 @@
 import type { EventCommand, EventCommandUnknown } from "@RpgTypes/rmmz";
 import type {
-  Data_CommonEvent,
+  Data_CommonEventUnknown,
   Data_Troop,
   MapEventContainer,
 } from "@RpgTypes/rmmz/rpg";
@@ -51,9 +51,9 @@ export const replaceMapEvents = <Map extends MapEventContainer<EventCommand>>(
 };
 
 export const replaceCommonEvents = (
-  events: ReadonlyArray<Data_CommonEvent<EventCommand>>,
+  events: ReadonlyArray<Data_CommonEventUnknown<EventCommand>>,
   fn: EventCommandReplaceFunc
-): Data_CommonEvent<EventCommand>[] => {
+): Data_CommonEventUnknown<EventCommand>[] => {
   return events.map((commonEvent) => replaceEventCommands(commonEvent, fn));
 };
 

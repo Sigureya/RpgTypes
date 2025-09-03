@@ -1,6 +1,6 @@
 import { describe, expect, test } from "vitest";
 import type {
-  Data_CommonEvent,
+  Data_CommonEventUnknown,
   EventCommand,
   EventCommandUnknown,
   ExtractCommandByParam,
@@ -139,7 +139,7 @@ describe("replaceMapEvents", () => {
 
 describe("replaceCommonEvents", () => {
   test("should replace commands in common events", () => {
-    const events: Data_CommonEvent<EventCommand>[] = [
+    const events: Data_CommonEventUnknown<EventCommand>[] = [
       {
         id: 1,
         list: [createMockCommand(221)],
@@ -156,7 +156,7 @@ describe("replaceCommonEvents", () => {
       },
     ];
     const result = replaceCommonEvents(events, mockTransform);
-    const expected: Data_CommonEvent<EventCommand>[] = [
+    const expected: Data_CommonEventUnknown<EventCommand>[] = [
       {
         id: 1,
         list: [{ code: 221, indent: 8, parameters: [] }],
