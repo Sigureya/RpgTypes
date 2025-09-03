@@ -1,9 +1,5 @@
 import type { EventCommand } from "@RpgTypes/rmmz";
-import {
-  isCommandScrollTextHead,
-  isCommandShowScrollingTextBody,
-  SHOW_SCROLLING_TEXT_BODY,
-} from "@RpgTypes/rmmz";
+import { SHOW_SCROLLING_TEXT, SHOW_SCROLLING_TEXT_BODY } from "@RpgTypes/rmmz";
 import { pickCommands, SimpleEventCommandGroup } from "./core";
 
 export const extractScrollTextGroup = (
@@ -13,8 +9,8 @@ export const extractScrollTextGroup = (
   return pickCommands(
     list,
     index,
-    isCommandScrollTextHead,
-    isCommandShowScrollingTextBody
+    (cmd) => cmd.code === SHOW_SCROLLING_TEXT,
+    (cmd) => cmd.code === SHOW_SCROLLING_TEXT_BODY
   );
 };
 
