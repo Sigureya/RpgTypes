@@ -15,7 +15,7 @@ const noimportGroups = [
   "dgram",
   "dns",
   "domain",
-  "events",
+  //  "events",
   "http",
   "https",
   "net",
