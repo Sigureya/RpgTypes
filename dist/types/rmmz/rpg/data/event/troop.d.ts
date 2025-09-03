@@ -1,5 +1,5 @@
 import { EventCommandUnknown } from '../../../eventCommand';
-export interface Data_Troop<Command = EventCommandUnknown> {
+export interface Data_TroopUnknonw<Command = EventCommandUnknown> {
     members: Troop_Member[];
     pages: BattleEventPage<Command>[];
     id: number;
