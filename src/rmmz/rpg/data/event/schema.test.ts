@@ -3,7 +3,7 @@ import Ajv from "ajv";
 import { makeTroopData, makeTroopEventConditions } from "./makeEvent";
 import { COMMENT_HEAD } from "./map/event/page";
 import SCHEMA_DATA_TROOP from "./schema";
-import type { Data_Troop } from "./troop";
+import type { Data_TroopUnknonw } from "./troop";
 
 const ajv = new Ajv({
   strict: true,
@@ -12,13 +12,13 @@ const ajv = new Ajv({
 
 const troopSchema = ajv.compile(SCHEMA_DATA_TROOP);
 
-const isDataTroop = (data: unknown): data is Data_Troop => {
+const isDataTroop = (data: unknown): data is Data_TroopUnknonw => {
   return troopSchema(data);
 };
 
 describe("", () => {
   test("", () => {
-    const troop: Data_Troop = makeTroopData();
+    const troop: Data_TroopUnknonw = makeTroopData();
     expect(troop).toSatisfy(isDataTroop);
   });
   test("", () => {
