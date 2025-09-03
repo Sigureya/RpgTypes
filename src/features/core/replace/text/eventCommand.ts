@@ -49,12 +49,14 @@ export const replaceEventCommandTexts = (
   });
 };
 
-export const replaceTextForCommand = (
-  command:
+export const replaceTextForCommand = <
+  Command extends
     | Command_ShowMessageBody
     | Command_CommentHeader
     | Command_CommentBody
-    | Command_ScrollTextBody,
+    | Command_ScrollTextBody
+>(
+  command: Command,
   map: ReadonlyMap<string, string>
 ) => {
   const newText: string = replaceTextByMap(command.parameters[0], map);
@@ -62,7 +64,11 @@ export const replaceTextForCommand = (
     code: command.code,
     indent: command.indent,
     parameters: [newText] satisfies [string],
-  };
+  } satisfies
+    | Command_ShowMessageBody
+    | Command_CommentHeader
+    | Command_CommentBody
+    | Command_ScrollTextBody;
 };
 
 export const replaceTextForCommandShowMessage = (
@@ -110,7 +116,7 @@ export const replaceTextForCommandShowChoices = (
     replaceTextByMap(choice, map)
   );
   return {
-    code: command.code,
+    code: SHOW_CHOICES,
     indent: command.indent,
     parameters: [
       newChoices,
