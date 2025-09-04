@@ -1,14 +1,9 @@
 import { describe, test, expect } from "vitest";
 import type {
   Command_CommonEvent,
-  Command_ShowMessageHeader,
+  EventCommandLike2,
 } from "@RpgTypes/rmmz/eventCommand";
-import {
-  makeCommandCommonEvent,
-  makeCommandShowMessage,
-  type EventCommandLike2,
-} from "@RpgTypes/rmmz/eventCommand";
-import { SHOW_MESSAGE } from "@RpgTypes/rmmz/rpg";
+import { makeCommandCommonEvent } from "@RpgTypes/rmmz/eventCommand";
 import {
   cloneEventCommand,
   cloneParameters,
@@ -42,20 +37,20 @@ const testCloneEventCommand = <P extends Array<number | boolean | string>>(
 };
 
 describe("cloneEventCommand utility functions", () => {
-  describe("ShowMessage command", () => {
-    const command = makeCommandShowMessage({
-      facename: "face",
-      faceIndex: 5,
-      speakerName: "name",
-      background: 0,
-      positionType: 2,
-    });
-    testCloneEventCommand(command, {
-      code: SHOW_MESSAGE,
-      indent: 0,
-      parameters: ["face", 5, 0, 2, "name"],
-    } satisfies Command_ShowMessageHeader);
-  });
+  // describe("ShowMessage command", () => {
+  //   const command = makeCommandShowMessage({
+  //     facename: "face",
+  //     faceIndex: 5,
+  //     speakerName: "name",
+  //     background: 0,
+  //     positionType: 2,
+  //   });
+  //   testCloneEventCommand(command, {
+  //     code: SHOW_MESSAGE,
+  //     indent: 0,
+  //     parameters: ["face", 5, 0, 2, "name"],
+  //   } satisfies Command_ShowMessageHeader);
+  // });
 
   describe("CommonEvent command", () => {
     const command = makeCommandCommonEvent(

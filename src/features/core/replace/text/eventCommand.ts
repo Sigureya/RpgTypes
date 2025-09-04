@@ -75,7 +75,9 @@ export const replaceTextForCommandShowMessage = (
   command: Command_ShowMessageHeader,
   map: ReadonlyMap<string, string>
 ): Command_ShowMessageHeader => {
-  const newText = replaceTextByMap(command.parameters[4], map);
+  const newText: string = command.parameters[4]
+    ? replaceTextByMap(command.parameters[4], map)
+    : "";
   return makeCommandShowMessage(
     {
       facename: command.parameters[0],

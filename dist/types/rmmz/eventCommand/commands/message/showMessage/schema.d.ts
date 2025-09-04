@@ -28,6 +28,7 @@ declare const SCHEMA_COMMAND_SHOW_MESSAGE: {
                 readonly maximum: 2;
             }, {
                 readonly type: "string";
+                readonly nullable: true;
             }];
             readonly minItems: 5;
             readonly maxItems: 5;

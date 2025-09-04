@@ -14,7 +14,7 @@ const SCHEMA_COMMAND_SHOW_MESSAGE = {
         { type: "integer", minimum: 0, maximum: 7 }, // faceIndex
         { type: "integer", minimum: 0, maximum: 2 }, // background
         { type: "integer", minimum: 0, maximum: 2 }, // positionType
-        { type: "string" }, // speakerName
+        { type: "string", nullable: true }, // speakerName
       ] as const,
 
       minItems: 5,

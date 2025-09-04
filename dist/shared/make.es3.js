@@ -247,7 +247,7 @@ const Ue = 0, Xe = 101, Oe = 401, We = 102, _e = 402, je = 103, Ke = 104, Je = 1
   faceIndex: e[1],
   background: e[2],
   positionType: e[3],
-  speakerName: e[4]
+  speakerName: e[4] ?? ""
 }), Fr = (e) => [e.facename, e.faceIndex, e.background, e.positionType, e.speakerName], Vr = (e, a = 0) => ({ code: 401, indent: a, parameters: [e] }), o = (e, a) => ({
   name: e,
   id: a

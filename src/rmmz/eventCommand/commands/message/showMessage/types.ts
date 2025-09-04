@@ -5,7 +5,7 @@ export type ParamArray_ShowMessage = [
   faceIndex: number,
   background: number,
   positionType: number,
-  speakerName: string
+  speakerName: string | undefined
 ];
 
 export interface ParamObject_ShowMessage {
@@ -17,13 +17,7 @@ export interface ParamObject_ShowMessage {
 }
 
 export interface Command_ShowMessageHeader extends EventCommandLike2<101> {
-  parameters: [
-    facename: string,
-    faceIndex: number,
-    background: number,
-    positionType: number,
-    speakerName: string
-  ];
+  parameters: ParamArray_ShowMessage;
 }
 
 /**
