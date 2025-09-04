@@ -1,4 +1,4 @@
-export declare const SCHEMA_COMMAND_CALL_COMMON_EVENT: {
+export declare const SCHEMA_COMMAND_SHOW_MESSAGE: {
     readonly type: "object";
     readonly required: readonly ["code", "indent", "parameters"];
     readonly properties: {
@@ -27,6 +27,7 @@ export declare const SCHEMA_COMMAND_CALL_COMMON_EVENT: {
                 readonly minimum: 0;
             }, {
                 readonly type: "string";
+                readonly nullable: true;
             }];
         };
     };

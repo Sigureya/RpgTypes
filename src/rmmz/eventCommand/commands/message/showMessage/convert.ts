@@ -29,7 +29,7 @@ export const fromArrayShowMessageHeader = (
     faceIndex: array[1],
     background: array[2],
     positionType: array[3],
-    speakerName: array[4],
+    speakerName: array[4] ?? "",
   };
 };
 

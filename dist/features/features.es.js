@@ -70,7 +70,7 @@ const R = (e, t, a) => e.reduce((r, o) => (o.code !== C && o.code !== w && o.cod
   const a = s(e.parameters[0], t);
   return { code: e.code, indent: e.indent, parameters: [a] };
 }, ne = (e, t) => {
-  const a = s(e.parameters[4], t);
+  const a = e.parameters[4] ? s(e.parameters[4], t) : "";
   return z({
     facename: e.parameters[0],
     faceIndex: e.parameters[1],
