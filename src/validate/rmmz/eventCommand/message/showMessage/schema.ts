@@ -1,7 +1,7 @@
 import type { Command_ShowMessageHeader } from "@RpgTypes/rmmz/eventCommand";
 import type { JSONSchemaType } from "ajv";
 
-export const SCHEMA_COMMAND_CALL_COMMON_EVENT = {
+export const SCHEMA_COMMAND_SHOW_MESSAGE = {
   type: "object",
 
   required: ["code", "indent", "parameters"],
@@ -19,7 +19,7 @@ export const SCHEMA_COMMAND_CALL_COMMON_EVENT = {
         { type: "integer", minimum: 0 },
         { type: "integer", minimum: 0 },
         { type: "integer", minimum: 0 },
-        { type: "string" },
+        { type: "string", nullable: true },
       ],
     },
   },
