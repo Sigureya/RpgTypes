@@ -28,17 +28,11 @@ const R = (e, t, a) => e.reduce((r, o) => (o.code !== C && o.code !== w && o.cod
   var r;
 }, s = (e, t) => {
   const a = e.trimEnd(), r = t.get(a);
-  return r !== void 0 ? r.trimEnd() : a;
+  return r ? r.trimEnd() : a;
 }, i = (e, t, a = `
 `) => L(e.note, (r) => s(r.value, t), a), ke = (e, t) => {
   const a = i(e, t), r = s(e.name, t), o = s(e.nickname, t), m = s(e.profile, t);
-  return {
-    ...e,
-    name: r,
-    nickname: o,
-    profile: m,
-    note: a
-  };
+  return { ...e, name: r, nickname: o, profile: m, note: a };
 }, Be = (e, t) => {
   const a = i(e, t), r = s(e.name, t);
   return { ...e, name: r, note: a };
