@@ -1,12 +1,8 @@
-const Ue = 0, Xe = 101, Oe = 401, We = 102, _e = 402, je = 103, Ke = 104, Je = 105, Qe = 405, Ye = 108, Ze = 408, ea = 109, aa = 111, ta = 411, sa = 112, ra = 113, ma = 115, oa = 117, ia = 118, na = 119, la = 121, da = 122, ca = 123, ua = 124, pa = 125, ba = 126, ka = 127, fa = 128, ya = 129, ga = 132, ha = 133, va = 134, Ra = 135, za = 136, Sa = 137, Ia = 138, Ta = 139, Aa = 140, Ea = 201, wa = 202, xa = 203, Pa = 204, Da = 205, Na = 206, qa = 211, Ga = 212, Ha = 213, Fa = 214, Ca = 216, Ma = 217, Va = 221, La = 222, $a = 223, Ba = 224, Ua = 225, Xa = 230, Oa = 231, Wa = 232, _a = 233, ja = 234, Ka = 235, Ja = 236, Qa = 241, Ya = 242, Za = 243, et = 244, at = 245, tt = 246, st = 249, rt = 250, mt = 251, ot = 261, it = 281, nt = 282, lt = 283, dt = 284, ct = 285, ut = 301, pt = 302, bt = 605, kt = 303, ft = 311, yt = 312, gt = 326, ht = 314, vt = 315, Rt = 313, zt = 317, St = 318, It = 320, Tt = 321, At = 322, Et = 323, wt = 324, xt = 325, Pt = 331, Dt = 332, Nt = 333, qt = 334, Gt = 335, Ht = 336, Ft = 337, Ct = 339, Mt = 340, Vt = 351, Lt = 342, $t = 352, Bt = 353, Ut = 354, Xt = 355, Ot = 655, Wt = 356, _t = 357, jt = (e, a) => e.events.map((s) => s ? {
+const Ue = 0, Xe = 101, Oe = 401, We = 102, _e = 402, je = 103, Ke = 104, Je = 105, Qe = 405, Ye = 108, Ze = 408, ea = 109, aa = 111, ta = 411, sa = 112, ra = 113, ma = 115, oa = 117, ia = 118, la = 119, na = 121, da = 122, ca = 123, ua = 124, pa = 125, ba = 126, ka = 127, fa = 128, ya = 129, ga = 132, ha = 133, va = 134, Ra = 135, za = 136, Sa = 137, Ia = 138, Ta = 139, Aa = 140, Ea = 201, wa = 202, xa = 203, Pa = 204, Da = 205, Na = 206, Ga = 211, qa = 212, Ha = 213, Ca = 214, Ma = 216, Fa = 217, Va = 221, La = 222, $a = 223, Ba = 224, Ua = 225, Xa = 230, Oa = 231, Wa = 232, _a = 233, ja = 234, Ka = 235, Ja = 236, Qa = 241, Ya = 242, Za = 243, et = 244, at = 245, tt = 246, st = 249, rt = 250, mt = 251, ot = 261, it = 281, lt = 282, nt = 283, dt = 284, ct = 285, ut = 301, pt = 302, bt = 605, kt = 303, ft = 311, yt = 312, gt = 326, ht = 314, vt = 315, Rt = 313, zt = 317, St = 318, It = 320, Tt = 321, At = 322, Et = 323, wt = 324, xt = 325, Pt = 331, Dt = 332, Nt = 333, Gt = 334, qt = 335, Ht = 336, Ct = 337, Mt = 339, Ft = 340, Vt = 351, Lt = 342, $t = 352, Bt = 353, Ut = 354, Xt = 355, Ot = 655, Wt = 356, _t = 357, jt = (e, a) => e.events.map((s) => s ? {
   ...s,
   pages: k(s, a)
 } : null), k = (e, a) => e.pages.map((s) => ({
-  conditions: s.conditions,
-  image: s.image,
-  directionFix: s.directionFix,
-  moveFrequency: s.moveFrequency,
-  moveRoute: s.moveRoute,
+  ...s,
   list: a(s.list)
 })), Kt = (e, a) => [f(e.skills, a), y(e.actors, a), g(e.states, a), h(e.armors, a), v(e.classes, a), R(e.enemies, a), z(e.items, a), S(e.weapons, a), I(e.commonEvents, a)], f = (e, a) => ({
   label: a.skill.title,
@@ -32,14 +28,14 @@ const Ue = 0, Xe = 101, Oe = 401, We = 102, _e = 402, je = 103, Ke = 104, Je = 1
   items: e,
   label: a.commonEvent.title,
   source: { author: "rmmz", module: "data", kind: "common_event" }
-}), Jt = 11, Qt = 12, Yt = 13, Zt = 14, es = 21, as = 22, ts = 23, ss = 31, rs = 32, ms = 33, os = 34, is = 35, ns = 41, ls = 42, ds = 43, cs = 44, us = 51, ps = 52, bs = 53, ks = 54, fs = 55, ys = 61, gs = 62, hs = 63, vs = 64, Rs = 0, zs = 1, Ss = 2, Is = 3, T = (e, a) => ({
+}), Jt = 11, Qt = 12, Yt = 13, Zt = 14, es = 21, as = 22, ts = 23, ss = 31, rs = 32, ms = 33, os = 34, is = 35, ls = 41, ns = 42, ds = 43, cs = 44, us = 51, ps = 52, bs = 53, ks = 54, fs = 55, ys = 61, gs = 62, hs = 63, vs = 64, Rs = 0, zs = 1, Ss = 2, Is = 3, T = (e, a) => ({
   items: A(e.options, a),
   label: e.title,
   source: { author: "rmmz", module: "trait", kind: "collaps" }
 }), A = (e, a) => [{ id: 0, name: a.normal }, { id: 1, name: e.bossCollaps }, { id: 2, name: e.instantCollaps }, {
   id: 3,
   name: e.noneCollaps
-}], Ts = 0, As = 1, Es = 2, ws = 3, xs = 4, Ps = 5, Ds = 6, Ns = 7, qs = 8, Gs = 9, E = (e) => ({
+}], Ts = 0, As = 1, Es = 2, ws = 3, xs = 4, Ps = 5, Ds = 6, Ns = 7, Gs = 8, qs = 9, E = (e) => ({
   items: w(e.options),
   label: e.title,
   source: { author: "rmmz", module: "trait", kind: "xparams" }
@@ -70,7 +66,7 @@ const Ue = 0, Xe = 101, Oe = 401, We = 102, _e = 402, je = 103, Ke = 104, Je = 1
       return a.tpRegenerationRate;
   }
   return `?xparams[${e}]`;
-}, Fs = 0, Cs = 1, Ms = 2, Vs = 3, Ls = 4, $s = 5, Bs = 6, Us = 7, x = (e) => ({ items: P(e.options), label: e.title, source: { author: "rmmz", module: "trait", kind: "params" } }), P = (e) => [{
+}, Cs = 0, Ms = 1, Fs = 2, Vs = 3, Ls = 4, $s = 5, Bs = 6, Us = 7, x = (e) => ({ items: P(e.options), label: e.title, source: { author: "rmmz", module: "trait", kind: "params" } }), P = (e) => [{
   id: 0,
   name: e.maxHp
 }, { id: 1, name: e.maxMp }, { id: 2, name: e.atk }, { id: 3, name: e.def }, { id: 4, name: e.matk }, { id: 5, name: e.mdef }, { id: 6, name: e.agi }, { id: 7, name: e.luk }], Xs = (e, a) => {
@@ -124,27 +120,27 @@ const Ue = 0, Xe = 101, Oe = 401, We = 102, _e = 402, je = 103, Ke = 104, Je = 1
       return a.recoveryEffectRate;
   }
   return `?sparams[${e}]`;
-}, tr = 0, sr = 1, rr = 2, mr = 3, or = 4, ir = 5, q = (e) => ({
-  items: G(e.options),
+}, tr = 0, sr = 1, rr = 2, mr = 3, or = 4, ir = 5, G = (e) => ({
+  items: q(e.options),
   label: e.title,
   source: { author: "rmmz", module: "trait", kind: "partyAbility" }
-}), G = (e) => [{ id: 0, name: e.encounterHalf }, { id: 1, name: e.encounterNone }, { id: 2, name: e.cancelSurprise }, {
+}), q = (e) => [{ id: 0, name: e.encounterHalf }, { id: 1, name: e.encounterNone }, { id: 2, name: e.cancelSurprise }, {
   id: 3,
   name: e.raisePreemptive
-}, { id: 4, name: e.goldDouble }, { id: 5, name: e.dropItemDouble }], nr = 0, lr = 1, dr = 2, cr = 3, H = (e) => ({ items: F(e.options), label: e.title, source: {
+}, { id: 4, name: e.goldDouble }, { id: 5, name: e.dropItemDouble }], lr = 0, nr = 1, dr = 2, cr = 3, H = (e) => ({ items: C(e.options), label: e.title, source: {
   author: "rmmz",
   module: "trait",
   kind: "sflag"
-} }), F = (e) => [{ id: 0, name: e.autoBattle }, { id: 1, name: e.guard }, { id: 2, name: e.substitute }, {
+} }), C = (e) => [{ id: 0, name: e.autoBattle }, { id: 1, name: e.guard }, { id: 2, name: e.substitute }, {
   id: 3,
   name: e.preventEscape
-}], ur = (e, a) => [x(e.regularParam), E(e.extraParam), D(e.specialParam), T(e.collaps, a), H(e.specialFlag), q(e.partyAbility)], pr = 11, br = 12, kr = 13, fr = 21, yr = 22, gr = 31, hr = 32, vr = 33, Rr = 34, zr = 41, Sr = 42, Ir = 43, Tr = 44, Ar = (e) => [M(e), V(e), L(e), $(e), B(e), U(e), X(e), O(e), W(e), C(e), _(e), j(e), K(e)], r = (e, a, s) => ({
+}], ur = (e, a) => [x(e.regularParam), E(e.extraParam), D(e.specialParam), T(e.collaps, a), H(e.specialFlag), G(e.partyAbility)], pr = 11, br = 12, kr = 13, fr = 21, yr = 22, gr = 31, hr = 32, vr = 33, Rr = 34, zr = 41, Sr = 42, Ir = 43, Tr = 44, Ar = (e) => [F(e), V(e), L(e), $(e), B(e), U(e), X(e), O(e), W(e), M(e), _(e), j(e), K(e)], r = (e, a, s) => ({
   kindId: e,
   label: a.domainName,
   pattern: a.format,
   description: a.desc,
   dataSource: s
-}), C = (e) => r(41, e.special), M = (e) => r(11, e.recoverHp), V = (e) => r(12, e.recoverMp), L = (e) => r(13, e.gainTp), $ = (e) => r(21, e.addState, {
+}), M = (e) => r(41, e.special), F = (e) => r(11, e.recoverHp), V = (e) => r(12, e.recoverMp), L = (e) => r(13, e.gainTp), $ = (e) => r(21, e.addState, {
   author: "rmmz",
   module: "data",
   kind: "state"
@@ -169,15 +165,15 @@ const Ue = 0, Xe = 101, Oe = 401, We = 102, _e = 402, je = 103, Ke = 104, Je = 1
   return e.replaceAll(/<([^<>:]{1,100}):([^>]{1,1000})>/g, "");
 }, ee = (e, a) => `<${e}:${a}>`, wr = (e, a, s = `
 `) => {
-  const m = Y(e), i = m.items.map((n) => ({ key: n.key, value: a(n) }));
+  const m = Y(e), i = m.items.map((l) => ({ key: l.key, value: a(l) }));
   return Q({ note: m.note, items: i }, s);
 }, xr = (e, a) => {
   const s = /<([^<>:]{1,100}):([^>]{1,1000})>/g, m = Array.from(e.matchAll(s)).find((i) => i[1] === a);
   return m ? m[2] : void 0;
 }, Pr = (e, a, s) => {
   const m = /<([^<>:]{1,100}):([^>]{1,1000})>/g;
-  return e.replace(m, (i, n) => n === a ? ee(n, s) : i);
-}, Dr = (e) => [ae(e.elementRate), te(e.debuffRate), se(e.stateRate), re(e.stateResist), me(e.regularParam), oe(e.extraParam), ie(e.specialParam), ne(e.attackElement), le(e.attackState), de(e.attackSpeed), ce(e.attackTimes), ue(e.attackSkill), pe(e.skillTypeAdd), be(e.skillTypeSeal), ke(e.skillAdd), fe(e.skillSeal), ye(e.equipWeaponType), ge(e.equipArmorType), he(e.equipLock), ve(e.equipSeal), Re(e.slotType), ze(e.actionPlus), Se(e.specialFlag), Ie(e.collaps), Te(e.partyAbility)], ae = (e) => ({
+  return e.replace(m, (i, l) => l === a ? ee(l, s) : i);
+}, Dr = (e) => [ae(e.elementRate), te(e.debuffRate), se(e.stateRate), re(e.stateResist), me(e.regularParam), oe(e.extraParam), ie(e.specialParam), le(e.attackElement), ne(e.attackState), de(e.attackSpeed), ce(e.attackTimes), ue(e.attackSkill), pe(e.skillTypeAdd), be(e.skillTypeSeal), ke(e.skillAdd), fe(e.skillSeal), ye(e.equipWeaponType), ge(e.equipArmorType), he(e.equipLock), ve(e.equipSeal), Re(e.slotType), ze(e.actionPlus), Se(e.specialFlag), Ie(e.collaps), Te(e.partyAbility)], ae = (e) => ({
   pattern: e.format,
   label: e.title,
   kindId: 11,
@@ -186,8 +182,8 @@ const Ue = 0, Xe = 101, Oe = 401, We = 102, _e = 402, je = 103, Ke = 104, Je = 1
   pattern: e.format,
   label: e.title,
   kindId: 13,
-  dataSource: l()
-}), re = (e) => ({ pattern: e.format, label: e.title, kindId: 14, dataSource: l() }), me = (e) => ({
+  dataSource: n()
+}), re = (e) => ({ pattern: e.format, label: e.title, kindId: 14, dataSource: n() }), me = (e) => ({
   pattern: e.format,
   label: e.title,
   kindId: 21,
@@ -197,11 +193,11 @@ const Ue = 0, Xe = 101, Oe = 401, We = 102, _e = 402, je = 103, Ke = 104, Je = 1
   label: e.title,
   kindId: 23,
   dataSource: { author: "rmmz", module: "trait", kind: "sparams" }
-}), ne = (e) => ({ pattern: e.format, label: e.title, kindId: 31, dataSource: p() }), le = (e) => ({
+}), le = (e) => ({ pattern: e.format, label: e.title, kindId: 31, dataSource: p() }), ne = (e) => ({
   pattern: e.format,
   label: e.title,
   kindId: 32,
-  dataSource: l()
+  dataSource: n()
 }), de = (e) => ({ pattern: e.format, label: e.title, kindId: 33 }), ce = (e) => ({ pattern: e.format, label: e.title, kindId: 34 }), ue = (e) => ({
   pattern: e.format,
   label: e.title,
@@ -230,7 +226,7 @@ const Ue = 0, Xe = 101, Oe = 401, We = 102, _e = 402, je = 103, Ke = 104, Je = 1
   author: "rmmz",
   module: "trait",
   kind: "collaps"
-} }), Te = (e) => ({ pattern: e.format, label: e.title, kindId: 64, dataSource: { author: "rmmz", module: "trait", kind: "partyAbility" } }), l = () => ({
+} }), Te = (e) => ({ pattern: e.format, label: e.title, kindId: 64, dataSource: { author: "rmmz", module: "trait", kind: "partyAbility" } }), n = () => ({
   author: "rmmz",
   module: "data",
   kind: "state"
@@ -242,28 +238,28 @@ const Ue = 0, Xe = 101, Oe = 401, We = 102, _e = 402, je = 103, Ke = 104, Je = 1
   author: "rmmz",
   module: "system",
   kind: "equipTypes"
-}), Nr = 0, qr = 1, Gr = 0, Hr = 1, Fr = (e, a = 0) => ({
+}), Nr = 0, Gr = 1, qr = 0, Hr = 1, Cr = (e, a = 0) => ({
   code: 101,
   indent: a,
   parameters: [(e == null ? void 0 : e.facename) ?? "", (e == null ? void 0 : e.faceIndex) ?? 0, (e == null ? void 0 : e.background) ?? 0, (e == null ? void 0 : e.positionType) ?? 2, (e == null ? void 0 : e.speakerName) ?? ""]
-}), Cr = (e) => ({
+}), Mr = (e) => ({
   facename: e[0],
   faceIndex: e[1],
   background: e[2],
   positionType: e[3],
   speakerName: e[4]
-}), Mr = (e) => [e.facename, e.faceIndex, e.background, e.positionType, e.speakerName], Vr = (e, a = 0) => ({ code: 401, indent: a, parameters: [e] }), o = (e, a) => ({
+}), Fr = (e) => [e.facename, e.faceIndex, e.background, e.positionType, e.speakerName], Vr = (e, a = 0) => ({ code: 401, indent: a, parameters: [e] }), o = (e, a) => ({
   name: e,
   id: a
-}), we = (e) => e.variables.map(o), xe = (e) => e.elements.map(o), Pe = (e) => e.equipTypes.map(o), De = (e) => e.skillTypes.map(o), Ne = (e) => e.weaponTypes.map(o), qe = (e) => e.armorTypes.map(o), Ge = (e) => e.switches.map(o), Lr = (e, a) => [Fe(e, a), Ce(e, a), $e(e, a), Me(e, a), He(e, a), Ve(e, a), Le(e, a)], He = (e, a) => ({
-  items: qe(e),
+}), we = (e) => e.variables.map(o), xe = (e) => e.elements.map(o), Pe = (e) => e.equipTypes.map(o), De = (e) => e.skillTypes.map(o), Ne = (e) => e.weaponTypes.map(o), Ge = (e) => e.armorTypes.map(o), qe = (e) => e.switches.map(o), Lr = (e, a) => [Ce(e, a), Me(e, a), $e(e, a), Fe(e, a), He(e, a), Ve(e, a), Le(e, a)], He = (e, a) => ({
+  items: Ge(e),
   label: a.options.armorTypes,
   source: { author: "rmmz", module: "system", kind: "armorTypes" }
-}), Fe = (e, a) => ({ items: xe(e), label: a.options.elements, source: {
+}), Ce = (e, a) => ({ items: xe(e), label: a.options.elements, source: {
   author: "rmmz",
   module: "system",
   kind: "elements"
-} }), Ce = (e, a) => ({ items: Pe(e), label: a.options.equipTypes, source: { author: "rmmz", module: "system", kind: "equipTypes" } }), Me = (e, a) => ({
+} }), Me = (e, a) => ({ items: Pe(e), label: a.options.equipTypes, source: { author: "rmmz", module: "system", kind: "equipTypes" } }), Fe = (e, a) => ({
   items: De(e),
   label: a.options.skillTypes,
   source: { author: "rmmz", module: "system", kind: "skillTypes" }
@@ -271,7 +267,7 @@ const Ue = 0, Xe = 101, Oe = 401, We = 102, _e = 402, je = 103, Ke = 104, Je = 1
   author: "rmmz",
   module: "system",
   kind: "variable"
-} }), Le = (e, a) => ({ items: Ge(e), label: a.options.switches, source: { author: "rmmz", module: "system", kind: "switch" } }), $e = (e, a) => ({
+} }), Le = (e, a) => ({ items: qe(e), label: a.options.switches, source: { author: "rmmz", module: "system", kind: "switch" } }), $e = (e, a) => ({
   items: Ne(e),
   label: a.options.weaponTypes,
   source: { author: "rmmz", module: "system", kind: "weaponTypes" }
@@ -378,7 +374,7 @@ const Ue = 0, Xe = 101, Oe = 401, We = 102, _e = 402, je = 103, Ke = 104, Je = 1
   victory: t(e.victory, "Victory!")
 });
 export {
-  Fa as $,
+  Ca as $,
   ka as A,
   fa as B,
   Ye as C,
@@ -403,13 +399,13 @@ export {
   Pa as V,
   Da as W,
   Na as X,
-  qa as Y,
-  Ga as Z,
+  Ga as Y,
+  qa as Z,
   Ha as _,
   Vr as a,
   Wt as a$,
-  Ca as a0,
-  Ma as a1,
+  Ma as a0,
+  Fa as a1,
   Va as a2,
   La as a3,
   $a as a4,
@@ -432,12 +428,12 @@ export {
   Pt as aL,
   Dt as aM,
   Nt as aN,
-  qt as aO,
-  Gt as aP,
+  Gt as aO,
+  qt as aP,
   Ht as aQ,
-  Ft as aR,
-  Ct as aS,
-  Mt as aT,
+  Ct as aR,
+  Mt as aS,
+  Ft as aT,
   Vt as aU,
   Lt as aV,
   $t as aW,
@@ -460,8 +456,8 @@ export {
   mt as am,
   ot as an,
   it as ao,
-  nt as ap,
-  lt as aq,
+  lt as ap,
+  nt as aq,
   dt as ar,
   ct as as,
   ut as at,
@@ -489,14 +485,14 @@ export {
   Ps as bD,
   Ds as bE,
   Ns as bF,
-  qs as bG,
-  Gs as bH,
+  Gs as bG,
+  qs as bH,
   E as bI,
   w as bJ,
   Hs as bK,
-  Fs as bL,
-  Cs as bM,
-  Ms as bN,
+  Cs as bL,
+  Ms as bM,
+  Fs as bN,
   Vs as bO,
   Ls as bP,
   $s as bQ,
@@ -515,8 +511,8 @@ export {
   ms as bc,
   os as bd,
   is as be,
-  ns as bf,
-  ls as bg,
+  ls as bf,
+  ns as bg,
   ds as bh,
   cs as bi,
   us as bj,
@@ -561,8 +557,8 @@ export {
   Pe as cK,
   De as cL,
   Ne as cM,
-  qe as cN,
-  Ge as cO,
+  Ge as cN,
+  qe as cO,
   Lr as cP,
   $r as cQ,
   Br as cR,
@@ -572,20 +568,20 @@ export {
   Be as cV,
   Wr as cW,
   _r as cX,
-  Gr as cY,
+  qr as cY,
   Nr as cZ,
-  qr as c_,
+  Gr as c_,
   mr as ca,
   or as cb,
   ir as cc,
-  q as cd,
-  G as ce,
-  nr as cf,
-  lr as cg,
+  G as cd,
+  q as ce,
+  lr as cf,
+  nr as cg,
   dr as ch,
   cr as ci,
   H as cj,
-  F as ck,
+  C as ck,
   Ar as cl,
   pr as cm,
   br as cn,
@@ -603,22 +599,22 @@ export {
   Q as cz,
   We as d,
   _e as e,
-  Cr as f,
+  Mr as f,
   Ke as g,
   Je as h,
   Qe as i,
   Ze as j,
   ea as k,
   aa as l,
-  Fr as m,
+  Cr as m,
   ta as n,
   ra as o,
   oa as p,
   ia as q,
   Dr as r,
-  na as s,
-  Mr as t,
-  la as u,
+  la as s,
+  Fr as t,
+  na as u,
   da as v,
   ca as w,
   ua as x,
