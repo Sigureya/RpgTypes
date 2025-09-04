@@ -1,22 +1,23 @@
 import { describe, expect, test } from "vitest";
 import type { Command_ShowMessageHeader, ControlChar } from "@RpgTypes/rmmz";
 import { getControlChars, makeCommandShowMessage } from "@RpgTypes/rmmz";
-import { pickSpeakerName, speakerNameIsHHH } from "./speaker";
+import { pickSpeakerName } from "./speaker";
 
-describe.skip("", () => {
-  describe("", () => {
-    test("", () => expect(speakerNameIsHHH("abc")).toBe(true));
-    test("", () => expect(speakerNameIsHHH("\\C[67]abc")).toBe(true));
-  });
-  describe("", () => {
-    test("", () => expect(speakerNameIsHHH("\\N[3]")).toBe(false));
-    test("", () => expect(speakerNameIsHHH("\\C[67]\\N[3]")).toBe(false));
-  });
-  describe("", () => {
-    test("", () => expect(speakerNameIsHHH("\\V[67]")).toBe(false));
-    test("", () => expect(speakerNameIsHHH("\\C[67]\\V[32]")).toBe(false));
-  });
-});
+// describe.skip("", () => {
+//   describe("", () => {
+//     test("", () => expect(speakerNameIsHHH("abc")).toBe(true));
+//     test("", () => expect(speakerNameIsHHH("\\C[67]abc")).toBe(true));
+//   });
+//   describe("", () => {
+//     test("", () => expect(speakerNameIsHHH("\\N[3]")).toBe(false));
+//     test("", () => expect(speakerNameIsHHH("\\C[67]\\N[3]")).toBe(false));
+//   });
+//   describe("", () => {
+//     test("", () => expect(speakerNameIsHHH("\\V[67]")).toBe(false));
+//     test("", () => expect(speakerNameIsHHH("\\C[67]\\V[32]")).toBe(false));
+//   });
+// });
+
 describe("", () => {
   describe("", () => {
     test("", () => {
