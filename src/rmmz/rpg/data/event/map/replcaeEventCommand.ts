@@ -23,11 +23,12 @@ const convertPages = <Command extends EventCommandUnknown>(
 ): MapEventPage<Command>[] => {
   return mapEvent.pages.map(
     (page): MapEventPage<Command> => ({
-      conditions: page.conditions,
-      image: page.image,
-      directionFix: page.directionFix,
-      moveFrequency: page.moveFrequency,
-      moveRoute: page.moveRoute,
+      ...page,
+      //     conditions: page.conditions,
+      // image: page.image,
+      // directionFix: page.directionFix,
+      // moveFrequency: page.moveFrequency,
+      // moveRoute: page.moveRoute,
       list: fn(page.list),
     })
   );
