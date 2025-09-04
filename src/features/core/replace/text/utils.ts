@@ -7,7 +7,7 @@ export const replaceTextByMap = (
 ): string => {
   const trimedKey = text.trimEnd();
   const value = map.get(trimedKey);
-  return value !== undefined ? value.trimEnd() : trimedKey;
+  return !!value ? value.trimEnd() : trimedKey;
 };
 
 export const replaceNoteTextByMap = (
