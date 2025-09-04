@@ -21,6 +21,11 @@ describe("replaceTextByMap", () => {
     expect(replaceTextByMap("World   ", map)).toBe("Earth");
     expect(replaceTextByMap("NoChange   ", map)).toBe("NoChange");
   });
+  test("xxx", () => {
+    const map = new Map([["cat", "猫"]]);
+    expect(replaceTextByMap("cat", map)).toBe("猫");
+    expect(replaceTextByMap("dog", map)).toBe("dog");
+  });
 });
 
 describe("replaceNoteTextByMap", () => {
