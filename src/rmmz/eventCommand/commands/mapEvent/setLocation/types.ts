@@ -1,4 +1,5 @@
-import type { Direction8, EventCommandLike } from "@RpgTypes/rmmz/rpg";
+import type { EventCommandLike } from "@RpgTypes/rmmz/rpg";
+import type { Direction8 } from "@RpgTypes/rmmz/utils";
 
 export interface Command_SetEventLocation extends EventCommandLike<203> {
   parameters: ParamArray_SetEventLocation;

@@ -1,5 +1,6 @@
 import type { EventCommandLike2 } from "@RpgTypes/rmmz/eventCommand/frame";
-import type { Direction8, SCROLL_MAP } from "@RpgTypes/rmmz/rpg";
+import type { SCROLL_MAP } from "@RpgTypes/rmmz/rpg";
+import type { Direction8 } from "@RpgTypes/rmmz/utils";
 
 export interface Command_ScrollMap
   extends EventCommandLike2<typeof SCROLL_MAP> {
