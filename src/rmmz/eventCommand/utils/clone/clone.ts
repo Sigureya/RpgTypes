@@ -1,5 +1,5 @@
 import type {
-  EventCommandLike2,
+  EventCommandLike,
   EventCommandUnknown,
 } from "@RpgTypes/rmmz/eventCommand";
 
@@ -14,7 +14,7 @@ export const cloneParameters = <
 export const cloneEventCommand = <
   Param extends Array<number | boolean | string>
 >(
-  command: EventCommandLike2<number, Param>
+  command: EventCommandLike<number, Param>
 ) => {
   return {
     code: command.code,
@@ -30,6 +30,6 @@ const isPrimitive = (value: unknown): value is string | number | boolean =>
 
 export const isCloneableCommand = (
   value: EventCommandUnknown
-): value is EventCommandLike2<number, (string | number | boolean)[]> => {
+): value is EventCommandLike<number, (string | number | boolean)[]> => {
   return value.parameters.every(isPrimitive);
 };

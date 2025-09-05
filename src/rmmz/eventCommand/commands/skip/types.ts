@@ -1,5 +1,5 @@
-import type { EventCommandLike2 } from "../../frame";
+import type { EventCommandLike } from "../../frame";
 
-export interface Command_Skip extends EventCommandLike2<109> {
+export interface Command_Skip extends EventCommandLike<109> {
   parameters: [];
 }

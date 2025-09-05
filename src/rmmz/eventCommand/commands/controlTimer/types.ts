@@ -1,7 +1,7 @@
-import type { EventCommandLike2 } from "@RpgTypes/rmmz/eventCommand";
+import type { EventCommandLike } from "@RpgTypes/rmmz/eventCommand";
 import type { ValueOf } from "src/libs/templates/valueOf";
 
-export interface Command_ControlTimer extends EventCommandLike2<124> {
+export interface Command_ControlTimer extends EventCommandLike<124> {
   parameters: [operation: ValueOf<Operation_PlusMinus>, time: number];
 }
 export type Operation_PlusMinus = { plus: 0; minus: 1 };

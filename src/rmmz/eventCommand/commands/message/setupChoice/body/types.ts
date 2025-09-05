@@ -1,4 +1,4 @@
-import type { EventCommandLike2 } from "@RpgTypes/rmmz/eventCommand";
+import type { EventCommandLike } from "@RpgTypes/rmmz/eventCommand";
 
 export type ParamArray_SetupChoice = [
   choices: string[],
@@ -15,6 +15,6 @@ export interface ParamObject_SetupChoice {
   background: number;
 }
 
-export interface Command_ShowChoices extends EventCommandLike2<102> {
+export interface Command_ShowChoices extends EventCommandLike<102> {
   parameters: ParamArray_SetupChoice;
 }

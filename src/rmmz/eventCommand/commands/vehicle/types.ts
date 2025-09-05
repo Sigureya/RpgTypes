@@ -1,3 +1,3 @@
-import type { EventCommandLike2 } from "../../frame";
+import type { EventCommandLike } from "../../frame";
 
-export interface Command_GetOnOffVehicle extends EventCommandLike2<206, []> {}
+export interface Command_GetOnOffVehicle extends EventCommandLike<206, []> {}

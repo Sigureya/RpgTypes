@@ -1,7 +1,7 @@
 import { describe, test, expect } from "vitest";
 import type {
   Command_CommonEvent,
-  EventCommandLike2,
+  EventCommandLike,
 } from "@RpgTypes/rmmz/eventCommand";
 import { makeCommandCommonEvent } from "@RpgTypes/rmmz/eventCommand";
 import {
@@ -11,8 +11,8 @@ import {
 } from "./clone";
 
 const testCloneEventCommand = <P extends Array<number | boolean | string>>(
-  command: EventCommandLike2<number, P>,
-  expected: EventCommandLike2<number, P>
+  command: EventCommandLike<number, P>,
+  expected: EventCommandLike<number, P>
 ) => {
   test("should be cloneable (isCloneableCommand returns true)", () => {
     expect(isCloneableCommand(command)).toBe(true);

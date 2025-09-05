@@ -1,3 +1,3 @@
-import type { EventCommandLike2 } from "@RpgTypes/rmmz";
+import type { EventCommandLike } from "@RpgTypes/rmmz";
 
-export interface Command_StopSE extends EventCommandLike2<251, []> {}
+export interface Command_StopSE extends EventCommandLike<251, []> {}

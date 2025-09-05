@@ -1,4 +1,4 @@
-import type { EventCommandLike2 } from "@RpgTypes/rmmz";
+import type { EventCommandLike } from "@RpgTypes/rmmz";
 
 export type ParamArray_ChangeActorImages = [
   actorId: number,
@@ -18,6 +18,6 @@ export interface ParamObject_ChangeActorImages {
   battlerName: string;
 }
 
-export interface Command_ChangeActorImages extends EventCommandLike2<322> {
+export interface Command_ChangeActorImages extends EventCommandLike<322> {
   parameters: ParamArray_ChangeActorImages;
 }

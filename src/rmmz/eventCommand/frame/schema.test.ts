@@ -1,7 +1,7 @@
 import { describe, test, expect } from "vitest";
 import { Ajv } from "ajv";
 import SCHEMA_COMMAND_UNKNOWN from "./schema";
-import type { EventCommandUnknown, EventCommandLike2 } from "./types";
+import type { EventCommandUnknown, EventCommandLike } from "./types";
 
 const ajv = new Ajv({ strict: true });
 const cccc = ajv.compile(SCHEMA_COMMAND_UNKNOWN);
@@ -21,7 +21,7 @@ describe("isCommandLike", () => {
     expect(validCommand).toSatisfy(isCommandLike);
   });
   test("returns true for valid EventCommandBase object", () => {
-    const validCommand: EventCommandLike2<number, [number]> = {
+    const validCommand: EventCommandLike<number, [number]> = {
       code: 1,
       parameters: [6],
       indent: 0,

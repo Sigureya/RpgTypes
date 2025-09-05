@@ -4,20 +4,20 @@ import type {
   FLASH_SCREEN,
   TINT_SCREEN,
 } from "@RpgTypes/rmmz/rpg";
-import type { EventCommandLike2 } from "../../frame";
+import type { EventCommandLike } from "../../frame";
 
 export interface Command_TintScreen
-  extends EventCommandLike2<typeof TINT_SCREEN> {
+  extends EventCommandLike<typeof TINT_SCREEN> {
   parameters: ParamArray_TintScreen;
 }
 
 export interface Command_FlashScreen
-  extends EventCommandLike2<typeof FLASH_SCREEN> {
+  extends EventCommandLike<typeof FLASH_SCREEN> {
   parameters: [color: ColorRGBA, duration: number, wait: boolean];
 }
 
 export interface Command_FadeOutScreen
-  extends EventCommandLike2<typeof FADEOUT_SCREEN> {
+  extends EventCommandLike<typeof FADEOUT_SCREEN> {
   parameters: [];
 }
 

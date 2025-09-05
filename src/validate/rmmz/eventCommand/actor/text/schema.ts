@@ -1,5 +1,5 @@
 import type {
-  EventCommandLike2,
+  EventCommandLike,
   CHANGE_PROFILE,
   CHANGE_NICKNAME,
   CHANGE_NAME,
@@ -24,7 +24,7 @@ export const SCHEMA_COMMAND_ACTOR = {
   },
   additionalProperties: false,
 } as const satisfies JSONSchemaType<
-  EventCommandLike2<
+  EventCommandLike<
     typeof CHANGE_PROFILE | typeof CHANGE_NICKNAME | typeof CHANGE_NAME,
     [number, string]
   >

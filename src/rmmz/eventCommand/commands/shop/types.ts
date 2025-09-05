@@ -1,4 +1,4 @@
-import type { EventCommandLike2 } from "@RpgTypes/rmmz/eventCommand/frame";
+import type { EventCommandLike } from "@RpgTypes/rmmz/eventCommand/frame";
 import type { SHOP_PROCESSING, SHOP_PROCESSING_BODY } from "@RpgTypes/rmmz/rpg";
 import type { ValueOf } from "src/libs/templates/valueOf";
 import type { CUSTOM_PRICE, NORMAL_PRICE } from "./constants";
@@ -12,12 +12,12 @@ export type GoodsType = {
 type GOODS_TYPES = ValueOf<GoodsType>;
 
 export interface Command_ShopProcessing
-  extends EventCommandLike2<typeof SHOP_PROCESSING> {
+  extends EventCommandLike<typeof SHOP_PROCESSING> {
   parameters: ParamArray_ShopProcessing;
 }
 
 export interface Command_ShopProcessingBody
-  extends EventCommandLike2<typeof SHOP_PROCESSING_BODY> {
+  extends EventCommandLike<typeof SHOP_PROCESSING_BODY> {
   parameters: ParamArray_ShopGoods;
 }
 

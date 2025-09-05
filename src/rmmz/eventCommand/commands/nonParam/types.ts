@@ -1,4 +1,5 @@
-import type { EventCommandLike, GAME_OVER } from "@RpgTypes/rmmz/rpg";
+import type { GAME_OVER } from "@RpgTypes/rmmz/rpg";
+import type { EventCommandLike } from "../../frame";
 
 export interface Command_GatherFollowers extends EventCommandLike<217, []> {}
 

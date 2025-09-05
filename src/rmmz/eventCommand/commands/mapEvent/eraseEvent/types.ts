@@ -1,8 +1,8 @@
-import type { EventCommandLike2 } from "@RpgTypes/rmmz/eventCommand/frame";
+import type { EventCommandLike } from "@RpgTypes/rmmz/eventCommand/frame";
 import type { ERASE_EVENT } from "@RpgTypes/rmmz/rpg";
 
 export interface Command_EraseEvent
-  extends EventCommandLike2<typeof ERASE_EVENT, ParamArray_EraseEvent> {
+  extends EventCommandLike<typeof ERASE_EVENT, ParamArray_EraseEvent> {
   parameters: ParamArray_EraseEvent;
 }
 

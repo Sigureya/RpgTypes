@@ -1,20 +1,20 @@
 import type { ValueOf } from "@RpgTypes/libs/templates/valueOf";
-import type { EventCommandLike2 } from "@RpgTypes/rmmz/eventCommand/frame";
+import type { EventCommandLike } from "@RpgTypes/rmmz/eventCommand/frame";
 import type { CHANGE_ITEMS, Operation_PlusMinus } from "@RpgTypes/rmmz/rpg";
 import type { OPERAND_DIRECT, OPERAND_VARIABLE } from "./constants";
 
 export interface Command_ChangeItems
-  extends EventCommandLike2<typeof CHANGE_ITEMS> {
+  extends EventCommandLike<typeof CHANGE_ITEMS> {
   parameters: ParamArray_ChangeItems;
 }
 
 export interface Command_ChangeItemsDirect
-  extends EventCommandLike2<typeof CHANGE_ITEMS> {
+  extends EventCommandLike<typeof CHANGE_ITEMS> {
   parameters: ParamArray_ChangeItemsDirect;
 }
 
 export interface Command_ChangeItemsByVariable
-  extends EventCommandLike2<typeof CHANGE_ITEMS> {
+  extends EventCommandLike<typeof CHANGE_ITEMS> {
   parameters: ParamArray_ChangeItemsVariable;
 }
 

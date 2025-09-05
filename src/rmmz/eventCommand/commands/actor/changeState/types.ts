@@ -1,6 +1,6 @@
-import type { EventCommandLike2 } from "@RpgTypes/rmmz/eventCommand/frame";
+import type { EventCommandLike } from "@RpgTypes/rmmz/eventCommand/frame";
 
-export interface Command_ChangeActorState extends EventCommandLike2<313> {
+export interface Command_ChangeActorState extends EventCommandLike<313> {
   parameters: ParamArray_ChangeActorState;
 }
 
