@@ -4,4 +4,23 @@ export interface Command_PluginCommandMZ {
   parameters: ParamArray_PluginCommandMZ;
 }
 
-export type ParamArray_PluginCommandMZ = [];
+export type ParamArray_PluginCommandMZ = [
+  pluginName: string,
+  commandName: string,
+  commandTitle: string,
+  args: Record<string, string>
+];
+
+export interface ParamObject_PluginCommandMZ {
+  pluginName: string;
+  commandName: string;
+  commandTitle: string;
+  args: Record<string, string>;
+}
+
+export interface ParamObjectPartial_PluginCommandMZ {
+  pluginName: string;
+  commandName: string;
+  commandTitle?: string;
+  args?: Record<string, string>;
+}
