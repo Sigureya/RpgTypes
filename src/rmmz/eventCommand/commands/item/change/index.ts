@@ -8,7 +8,11 @@ export type {
 
 export type {
   Command_ChangeItems,
+  Command_ChangeItemsByVariable,
+  Command_ChangeItemsDirect,
   ParamArray_ChangeItems,
+  ParamArray_ChangeItemsDirect,
+  ParamArray_ChangeItemsVariable,
   ParamObject_ChangeItems,
   ParamObject_ChangeItemsFullset,
   ParamObject_ChangeItemsV,
@@ -33,6 +37,7 @@ export {
 
 export {
   fromArrayChangeItems,
+  isUsingVaribleCommandChangingItems,
   makeCommandChangeItems,
   makeCommandGainItem,
   makeCommandGainItemV,
