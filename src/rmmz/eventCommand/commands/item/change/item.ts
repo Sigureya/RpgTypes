@@ -14,6 +14,7 @@ import type {
   ParamObject_ChangeItemsV,
   ParamArray_ChangeItemsVariable,
   ParamArray_ChangeItemsDirect,
+  Command_ChangeItemsByVariable,
 } from "./types/item";
 
 export const fromArrayChangeItems = (
@@ -81,3 +82,9 @@ export const makeCommandLoseItemV = (
       OPERAND_VARIABLE,
     ],
   } satisfies Command_ChangeItems);
+
+export const isUsingVaribleCommandChangingItems = (
+  command: Command_ChangeItems
+): command is Command_ChangeItemsByVariable => {
+  return command.parameters[3] === OPERAND_VARIABLE;
+};
