@@ -1,4 +1,4 @@
-import type { EventCommandLike2 } from "@RpgTypes/rmmz";
+import type { EventCommandLike } from "@RpgTypes/rmmz";
 
 export type PicutureBlendModeV2 = 0 | 1 | 2 | 3;
 
@@ -52,10 +52,10 @@ export interface ParamObject_ParamsMovePicture {
   easingType: number;
 }
 
-export interface Command_ShowPicture extends EventCommandLike2<231> {
+export interface Command_ShowPicture extends EventCommandLike<231> {
   parameters: ParamsArray_ShowPicture;
 }
 
-export interface Command_MovePicture extends EventCommandLike2<232> {
+export interface Command_MovePicture extends EventCommandLike<232> {
   parameters: ParamsArray_MovePicture;
 }

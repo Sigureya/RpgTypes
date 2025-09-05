@@ -1,6 +1,6 @@
-import type { EventCommandLike2 } from "@RpgTypes/rmmz/eventCommand";
+import type { EventCommandLike } from "@RpgTypes/rmmz/eventCommand";
 
-export interface Command_PluginCommandMV extends EventCommandLike2<356> {
+export interface Command_PluginCommandMV extends EventCommandLike<356> {
   parameters: ParamArray_PluginCommandMV;
 }
 

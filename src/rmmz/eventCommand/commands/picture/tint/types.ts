@@ -1,9 +1,9 @@
 import type { ColorRGBA } from "@RpgTypes/libs";
-import type { EventCommandLike2 } from "@RpgTypes/rmmz/eventCommand/frame";
+import type { EventCommandLike } from "@RpgTypes/rmmz/eventCommand/frame";
 import type { TINT_PICTURE } from "@RpgTypes/rmmz/rpg";
 
 export interface Command_TintPicture
-  extends EventCommandLike2<typeof TINT_PICTURE> {
+  extends EventCommandLike<typeof TINT_PICTURE> {
   parameters: ParamArray_TintPicture;
 }
 

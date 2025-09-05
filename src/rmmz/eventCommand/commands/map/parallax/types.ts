@@ -1,6 +1,6 @@
-import type { EventCommandLike2 } from "@RpgTypes/rmmz/eventCommand/frame";
+import type { EventCommandLike } from "@RpgTypes/rmmz/eventCommand/frame";
 
-export interface Command_ChangeParallax extends EventCommandLike2<284> {
+export interface Command_ChangeParallax extends EventCommandLike<284> {
   parameters: ParamArray_ChangeParallax;
 }
 

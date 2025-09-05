@@ -3,13 +3,8 @@ export interface EventCommandUnknown {
   indent: number;
   parameters: unknown[];
 }
-/**
- * @deprecated
- * Use `EventCommandUnknown` instead.
- */
-export type EventCommandBase = EventCommandUnknown;
 
-export interface EventCommandLike2<
+export interface EventCommandLike<
   Code extends number,
   Param extends unknown[] = unknown[]
 > extends EventCommandUnknown {

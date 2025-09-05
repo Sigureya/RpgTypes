@@ -1,6 +1,6 @@
-import type { EventCommandLike2 } from "@RpgTypes/rmmz/eventCommand";
+import type { EventCommandLike } from "@RpgTypes/rmmz/eventCommand";
 
-export interface Command_ErasePicture extends EventCommandLike2<235> {
+export interface Command_ErasePicture extends EventCommandLike<235> {
   parameters: ParamArray_ErasePicture;
 }
 

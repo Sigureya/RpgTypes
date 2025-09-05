@@ -1,6 +1,6 @@
-import type { EventCommandLike2 } from "../../frame";
+import type { EventCommandLike } from "../../frame";
 
-export interface Command_Wait extends EventCommandLike2<230> {
+export interface Command_Wait extends EventCommandLike<230> {
   parameters: ParamArray_Wait;
 }
 

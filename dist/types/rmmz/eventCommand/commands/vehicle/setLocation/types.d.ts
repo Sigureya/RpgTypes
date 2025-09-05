@@ -1,7 +1,7 @@
 import { ValueOf } from '../../../../../libs/templates/valueOf';
-import { EventCommandLike2 } from '../../../frame';
+import { EventCommandLike } from '../../../frame';
 import { Designation } from '../../../../rpg';
-export interface Command_SetVehicleLocation extends EventCommandLike2<202> {
+export interface Command_SetVehicleLocation extends EventCommandLike<202> {
     parameters: ParamArray_SetVehicleLocation;
 }
 export type ParamArray_SetVehicleLocation = [

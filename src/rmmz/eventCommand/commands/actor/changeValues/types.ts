@@ -1,19 +1,19 @@
-import type { EventCommandLike2 } from "@RpgTypes/rmmz/eventCommand/frame";
+import type { EventCommandLike } from "@RpgTypes/rmmz/eventCommand/frame";
 import type { CHANGE_HP, CHANGE_MP, CHANGE_TP } from "@RpgTypes/rmmz/rpg";
 import type { TARGET_DIRECT, TARGET_VARIABLE } from "./constants";
 
 export interface Command_ChangeActorHP
-  extends EventCommandLike2<typeof CHANGE_HP> {
+  extends EventCommandLike<typeof CHANGE_HP> {
   parameters: ParamArray_ChangeActorHP;
 }
 
 export interface Command_ChangeActorMP
-  extends EventCommandLike2<typeof CHANGE_MP> {
+  extends EventCommandLike<typeof CHANGE_MP> {
   parameters: ParamArray_ChangeActorMP;
 }
 
 export interface Command_ChangeActorTP
-  extends EventCommandLike2<typeof CHANGE_TP> {
+  extends EventCommandLike<typeof CHANGE_TP> {
   parameters: ParamArray_ChangeActorTP;
 }
 

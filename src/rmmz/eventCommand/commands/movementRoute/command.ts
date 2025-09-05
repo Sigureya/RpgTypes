@@ -1,6 +1,6 @@
 import type { MoveRouteData } from "@RpgTypes/rmmz/rpg";
-import type { EventCommandLike2 } from "../../frame";
-export interface Command_SetMovementRoute extends EventCommandLike2<205> {
+import type { EventCommandLike } from "../../frame";
+export interface Command_SetMovementRoute extends EventCommandLike<205> {
   parameters: [characterId: number, movement: MoveRouteData];
 }
 

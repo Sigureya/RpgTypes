@@ -1,8 +1,8 @@
-import type { EventCommandLike2 } from "@RpgTypes/rmmz/eventCommand/frame";
+import type { EventCommandLike } from "@RpgTypes/rmmz/eventCommand/frame";
 import type { ENEMY_TRANSFORM } from "@RpgTypes/rmmz/rpg";
 
 export interface Command_EnemyTransform
-  extends EventCommandLike2<typeof ENEMY_TRANSFORM> {
+  extends EventCommandLike<typeof ENEMY_TRANSFORM> {
   parameters: ParamArray_EnemyTransfrom;
 }
 

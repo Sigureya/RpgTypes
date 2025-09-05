@@ -1,8 +1,8 @@
 import type { ValueOf } from "@RpgTypes/libs/templates/valueOf";
-import type { EventCommandLike2 } from "@RpgTypes/rmmz/eventCommand/frame";
+import type { EventCommandLike } from "@RpgTypes/rmmz/eventCommand/frame";
 import type { Designation } from "@RpgTypes/rmmz/rpg";
 
-export interface Command_BattleProcessing extends EventCommandLike2<301> {
+export interface Command_BattleProcessing extends EventCommandLike<301> {
   parameters: ParamArray_BattleProcessing;
 }
 

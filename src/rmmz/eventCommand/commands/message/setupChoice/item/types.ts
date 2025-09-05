@@ -1,4 +1,4 @@
-import type { EventCommandLike2 } from "@RpgTypes/rmmz/eventCommand";
+import type { EventCommandLike } from "@RpgTypes/rmmz/eventCommand";
 
 export interface ParamObject_ShowChoiceWhen {
   index: number;
@@ -7,6 +7,6 @@ export interface ParamObject_ShowChoiceWhen {
 
 export type ParamArray_ShowChoiceWhen = [index: number, name: string];
 
-export interface Command_ShowChoiceWhen extends EventCommandLike2<402> {
+export interface Command_ShowChoiceWhen extends EventCommandLike<402> {
   parameters: ParamArray_ShowChoiceWhen;
 }

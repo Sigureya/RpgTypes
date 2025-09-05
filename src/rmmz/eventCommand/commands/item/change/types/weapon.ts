@@ -1,10 +1,10 @@
 import type { ValueOf } from "@RpgTypes/libs/templates/valueOf";
-import type { EventCommandLike2 } from "@RpgTypes/rmmz/eventCommand/frame";
+import type { EventCommandLike } from "@RpgTypes/rmmz/eventCommand/frame";
 import type { CHANGE_WEAPONS, Operation_PlusMinus } from "@RpgTypes/rmmz/rpg";
 import type { OPERAND_DIRECT, OPERAND_VARIABLE } from "./constants";
 
 export interface Command_ChangeWeapons
-  extends EventCommandLike2<typeof CHANGE_WEAPONS> {
+  extends EventCommandLike<typeof CHANGE_WEAPONS> {
   parameters: ParamArray_ChangeWeapons;
 }
 

@@ -1,8 +1,8 @@
 import { ValueOf } from '../../../../../libs/templates/valueOf';
-import { EventCommandLike2 } from '../../../frame';
+import { EventCommandLike } from '../../../frame';
 import { Designation } from '../../../../rpg';
 import { Direction8 } from '../../../../utils';
-export interface Command_TransferPlayer extends EventCommandLike2<201> {
+export interface Command_TransferPlayer extends EventCommandLike<201> {
     parameters: ParamArray_TransferPlayer;
 }
 export type ParamArray_TransferPlayer = [

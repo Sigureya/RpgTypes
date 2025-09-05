@@ -1,4 +1,4 @@
-import type { EventCommandLike2 } from "@RpgTypes/rmmz/eventCommand/frame";
+import type { EventCommandLike } from "@RpgTypes/rmmz/eventCommand/frame";
 import { CHANGE_ITEMS } from "@RpgTypes/rmmz/rpg";
 import {
   OPERAND_DIRECT,
@@ -61,7 +61,7 @@ export const makeCommandGainItemV = (
 export const makeCommandLoseItem = (
   param: ParamObject_ChangeItems,
   indent: number = 0
-): EventCommandLike2<typeof CHANGE_ITEMS, ParamArray_ChangeItemsDirect> =>
+): EventCommandLike<typeof CHANGE_ITEMS, ParamArray_ChangeItemsDirect> =>
   ({
     code: CHANGE_ITEMS,
     indent,
@@ -71,7 +71,7 @@ export const makeCommandLoseItem = (
 export const makeCommandLoseItemV = (
   param: ParamObject_ChangeItemsV,
   indent: number = 0
-): EventCommandLike2<typeof CHANGE_ITEMS, ParamArray_ChangeItemsVariable> =>
+): EventCommandLike<typeof CHANGE_ITEMS, ParamArray_ChangeItemsVariable> =>
   ({
     code: CHANGE_ITEMS,
     indent,

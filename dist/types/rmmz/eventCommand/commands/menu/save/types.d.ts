@@ -1,3 +1,3 @@
-import { EventCommandLike2 } from '../../../frame';
-export interface Command_OpenSaveScreen extends EventCommandLike2<352, []> {
+import { EventCommandLike } from '../../../frame';
+export interface Command_OpenSaveScreen extends EventCommandLike<352, []> {
 }

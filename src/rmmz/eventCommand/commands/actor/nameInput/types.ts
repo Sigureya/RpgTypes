@@ -1,8 +1,8 @@
-import type { EventCommandLike2 } from "@RpgTypes/rmmz/eventCommand/frame";
+import type { EventCommandLike } from "@RpgTypes/rmmz/eventCommand/frame";
 import type { NAME_INPUT_PROCESSING } from "@RpgTypes/rmmz/rpg";
 
 export interface Command_NameInputProcessing
-  extends EventCommandLike2<typeof NAME_INPUT_PROCESSING> {
+  extends EventCommandLike<typeof NAME_INPUT_PROCESSING> {
   parameters: ParamArray_NameInputProcessing;
 }
 

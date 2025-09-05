@@ -1,3 +1,3 @@
-import type { EventCommandLike2 } from "../frame";
+import type { EventCommandLike } from "../frame";
 
-export interface Command_NoOperation extends EventCommandLike2<0> {} // No parameters
+export interface Command_NoOperation extends EventCommandLike<0> {} // No parameters

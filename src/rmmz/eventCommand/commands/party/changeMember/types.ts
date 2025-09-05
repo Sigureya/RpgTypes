@@ -1,8 +1,8 @@
 import type { ValueOf } from "@RpgTypes/libs/templates/valueOf";
-import type { EventCommandLike2 } from "@RpgTypes/rmmz/eventCommand/frame";
+import type { EventCommandLike } from "@RpgTypes/rmmz/eventCommand/frame";
 import type { Operation_PlusMinus } from "@RpgTypes/rmmz/rpg";
 
-export interface Command_ChangePartyMember extends EventCommandLike2<129> {
+export interface Command_ChangePartyMember extends EventCommandLike<129> {
   parameters: ParamArray_ChangePartyMember;
 }
 

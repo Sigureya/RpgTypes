@@ -1,4 +1,4 @@
-import type { EventCommandLike2 } from "@RpgTypes/rmmz/eventCommand/frame";
+import type { EventCommandLike } from "@RpgTypes/rmmz/eventCommand/frame";
 import type {
   FADEOUT_BGM,
   FADEOUT_BGS,
@@ -7,16 +7,16 @@ import type {
 } from "@RpgTypes/rmmz/rpg";
 
 export interface Command_FadeOutBGM
-  extends EventCommandLike2<typeof FADEOUT_BGM, [duration: number]> {}
+  extends EventCommandLike<typeof FADEOUT_BGM, [duration: number]> {}
 
 export interface Command_SaveBGM
-  extends EventCommandLike2<typeof SAVE_BGM, []> {}
+  extends EventCommandLike<typeof SAVE_BGM, []> {}
 
 export interface Command_ResumeBGM
-  extends EventCommandLike2<typeof RESUME_BGM, []> {}
+  extends EventCommandLike<typeof RESUME_BGM, []> {}
 
 export interface Command_FadeOutBGS
-  extends EventCommandLike2<typeof FADEOUT_BGS> {
+  extends EventCommandLike<typeof FADEOUT_BGS> {
   parameters: ParamArray_FadeOutAudio;
 }
 

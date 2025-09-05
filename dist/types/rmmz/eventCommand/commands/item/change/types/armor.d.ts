@@ -1,8 +1,8 @@
 import { ValueOf } from '../../../../../../libs/templates/valueOf';
-import { EventCommandLike2 } from '../../../../frame';
+import { EventCommandLike } from '../../../../frame';
 import { CHANGE_ARMORS, Operation_PlusMinus } from '../../../../../rpg';
 import { OPERAND_DIRECT, OPERAND_VARIABLE } from './constants';
-export interface Command_ChangeArmors extends EventCommandLike2<typeof CHANGE_ARMORS> {
+export interface Command_ChangeArmors extends EventCommandLike<typeof CHANGE_ARMORS> {
     parameters: ParamArray_ChangeArmors;
 }
 export type ParamArray_ChangeArmors = [
