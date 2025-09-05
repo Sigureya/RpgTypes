@@ -1,10 +1,10 @@
-import { EventCommandLike2 } from '../../../frame';
+import { EventCommandLike } from '../../../frame';
 import { CHANGE_ITEMS } from '../../../../rpg';
 import { Command_ChangeItems, ParamArray_ChangeItems, ParamObject_ChangeItemsFullset, ParamObject_ChangeItems, ParamObject_ChangeItemsV, ParamArray_ChangeItemsVariable, ParamArray_ChangeItemsDirect, Command_ChangeItemsByVariable } from './types/item';
 export declare const fromArrayChangeItems: (arr: ParamArray_ChangeItems) => ParamObject_ChangeItemsFullset;
 export declare const makeCommandChangeItems: (param: ParamObject_ChangeItemsFullset, indent?: number) => Command_ChangeItems;
 export declare const makeCommandGainItem: (param: ParamObject_ChangeItems, indent?: number) => Command_ChangeItems;
 export declare const makeCommandGainItemV: (param: ParamObject_ChangeItemsV, indent?: number) => Command_ChangeItems;
-export declare const makeCommandLoseItem: (param: ParamObject_ChangeItems, indent?: number) => EventCommandLike2<typeof CHANGE_ITEMS, ParamArray_ChangeItemsDirect>;
-export declare const makeCommandLoseItemV: (param: ParamObject_ChangeItemsV, indent?: number) => EventCommandLike2<typeof CHANGE_ITEMS, ParamArray_ChangeItemsVariable>;
+export declare const makeCommandLoseItem: (param: ParamObject_ChangeItems, indent?: number) => EventCommandLike<typeof CHANGE_ITEMS, ParamArray_ChangeItemsDirect>;
+export declare const makeCommandLoseItemV: (param: ParamObject_ChangeItemsV, indent?: number) => EventCommandLike<typeof CHANGE_ITEMS, ParamArray_ChangeItemsVariable>;
 export declare const isUsingVaribleCommandChangingItems: (command: Command_ChangeItems) => command is Command_ChangeItemsByVariable;

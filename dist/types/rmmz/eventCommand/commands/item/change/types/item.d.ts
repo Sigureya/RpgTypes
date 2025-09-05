@@ -1,14 +1,14 @@
 import { ValueOf } from '../../../../../../libs/templates/valueOf';
-import { EventCommandLike2 } from '../../../../frame';
+import { EventCommandLike } from '../../../../frame';
 import { CHANGE_ITEMS, Operation_PlusMinus } from '../../../../../rpg';
 import { OPERAND_DIRECT, OPERAND_VARIABLE } from './constants';
-export interface Command_ChangeItems extends EventCommandLike2<typeof CHANGE_ITEMS> {
+export interface Command_ChangeItems extends EventCommandLike<typeof CHANGE_ITEMS> {
     parameters: ParamArray_ChangeItems;
 }
-export interface Command_ChangeItemsDirect extends EventCommandLike2<typeof CHANGE_ITEMS> {
+export interface Command_ChangeItemsDirect extends EventCommandLike<typeof CHANGE_ITEMS> {
     parameters: ParamArray_ChangeItemsDirect;
 }
-export interface Command_ChangeItemsByVariable extends EventCommandLike2<typeof CHANGE_ITEMS> {
+export interface Command_ChangeItemsByVariable extends EventCommandLike<typeof CHANGE_ITEMS> {
     parameters: ParamArray_ChangeItemsVariable;
 }
 export type ParamArray_ChangeItems = ParamArray_ChangeItemsDirect | ParamArray_ChangeItemsVariable;

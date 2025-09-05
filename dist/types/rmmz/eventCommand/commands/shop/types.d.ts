@@ -1,4 +1,4 @@
-import { EventCommandLike2 } from '../../frame';
+import { EventCommandLike } from '../../frame';
 import { SHOP_PROCESSING, SHOP_PROCESSING_BODY } from '../../../rpg';
 import { ValueOf } from 'src/libs/templates/valueOf';
 import { CUSTOM_PRICE, NORMAL_PRICE } from './constants';
@@ -8,10 +8,10 @@ export type GoodsType = {
     armors: 2;
 };
 type GOODS_TYPES = ValueOf<GoodsType>;
-export interface Command_ShopProcessing extends EventCommandLike2<typeof SHOP_PROCESSING> {
+export interface Command_ShopProcessing extends EventCommandLike<typeof SHOP_PROCESSING> {
     parameters: ParamArray_ShopProcessing;
 }
-export interface Command_ShopProcessingBody extends EventCommandLike2<typeof SHOP_PROCESSING_BODY> {
+export interface Command_ShopProcessingBody extends EventCommandLike<typeof SHOP_PROCESSING_BODY> {
     parameters: ParamArray_ShopGoods;
 }
 export type ParamArray_ShopGoods = [

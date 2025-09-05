@@ -1,4 +1,4 @@
-import { EventCommandLike2 } from '../../../..';
+import { EventCommandLike } from '../../../..';
 export type PicutureBlendModeV2 = 0 | 1 | 2 | 3;
 export type ParamsArray_ShowPicture = [
     pictureId: number,
@@ -46,9 +46,9 @@ export interface ParamObject_ParamsMovePicture {
     wait: boolean;
     easingType: number;
 }
-export interface Command_ShowPicture extends EventCommandLike2<231> {
+export interface Command_ShowPicture extends EventCommandLike<231> {
     parameters: ParamsArray_ShowPicture;
 }
-export interface Command_MovePicture extends EventCommandLike2<232> {
+export interface Command_MovePicture extends EventCommandLike<232> {
     parameters: ParamsArray_MovePicture;
 }

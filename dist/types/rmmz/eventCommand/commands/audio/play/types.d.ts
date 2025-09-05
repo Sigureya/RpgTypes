@@ -1,6 +1,6 @@
-import { EventCommandLike2 } from '../../..';
+import { EventCommandLike } from '../../..';
 import { AudioFileParams } from 'src/libs/utils';
-export interface AudioCommandBase<Code extends number> extends EventCommandLike2<Code> {
+export interface AudioCommandBase<Code extends number> extends EventCommandLike<Code> {
     code: Code;
     parameters: [AudioFileParams];
 }
@@ -15,15 +15,15 @@ export interface Command_ChangeVictoryME extends AudioCommandBase<133> {
 export interface Command_ChangeDefeatME extends AudioCommandBase<139> {
     parameters: [value: AudioFileParams];
 }
-export interface Command_PlayBGM extends EventCommandLike2<241> {
+export interface Command_PlayBGM extends EventCommandLike<241> {
     parameters: [value: AudioFileParams];
 }
-export interface Command_PlayBGS extends EventCommandLike2<245> {
+export interface Command_PlayBGS extends EventCommandLike<245> {
     parameters: [value: AudioFileParams];
 }
-export interface Command_PlayME extends EventCommandLike2<249> {
+export interface Command_PlayME extends EventCommandLike<249> {
     parameters: [value: AudioFileParams];
 }
-export interface Command_PlaySE extends EventCommandLike2<250> {
+export interface Command_PlaySE extends EventCommandLike<250> {
     parameters: [value: AudioFileParams];
 }

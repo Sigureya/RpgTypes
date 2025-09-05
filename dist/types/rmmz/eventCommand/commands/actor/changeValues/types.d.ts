@@ -1,13 +1,13 @@
-import { EventCommandLike2 } from '../../../frame';
+import { EventCommandLike } from '../../../frame';
 import { CHANGE_HP, CHANGE_MP, CHANGE_TP } from '../../../../rpg';
 import { TARGET_DIRECT, TARGET_VARIABLE } from './constants';
-export interface Command_ChangeActorHP extends EventCommandLike2<typeof CHANGE_HP> {
+export interface Command_ChangeActorHP extends EventCommandLike<typeof CHANGE_HP> {
     parameters: ParamArray_ChangeActorHP;
 }
-export interface Command_ChangeActorMP extends EventCommandLike2<typeof CHANGE_MP> {
+export interface Command_ChangeActorMP extends EventCommandLike<typeof CHANGE_MP> {
     parameters: ParamArray_ChangeActorMP;
 }
-export interface Command_ChangeActorTP extends EventCommandLike2<typeof CHANGE_TP> {
+export interface Command_ChangeActorTP extends EventCommandLike<typeof CHANGE_TP> {
     parameters: ParamArray_ChangeActorTP;
 }
 export type ParamArray_ChangeActorValue = [

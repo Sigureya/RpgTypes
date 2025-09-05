@@ -1,4 +1,4 @@
-import { EventCommandLike2 } from '../../../..';
+import { EventCommandLike } from '../../../..';
 export type ParamArray_ChangeActorImages = [
     actorId: number,
     characterImage: string,
@@ -15,6 +15,6 @@ export interface ParamObject_ChangeActorImages {
     characterName: string;
     battlerName: string;
 }
-export interface Command_ChangeActorImages extends EventCommandLike2<322> {
+export interface Command_ChangeActorImages extends EventCommandLike<322> {
     parameters: ParamArray_ChangeActorImages;
 }

@@ -1,5 +1,5 @@
-import { EventCommandLike2 } from '../../../frame';
-export interface Command_ChangeBattleBackground extends EventCommandLike2<283> {
+import { EventCommandLike } from '../../../frame';
+export interface Command_ChangeBattleBackground extends EventCommandLike<283> {
     parameters: ParamArray_ChangeBattleBackground;
 }
 export type ParamArray_ChangeBattleBackground = [

@@ -1,4 +1,5 @@
-import { EventCommandLike, GAME_OVER } from '../../../rpg';
+import { GAME_OVER } from '../../../rpg';
+import { EventCommandLike } from '../../frame';
 export interface Command_GatherFollowers extends EventCommandLike<217, []> {
 }
 export interface Command_FadeInScreen extends EventCommandLike<222, []> {

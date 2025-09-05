@@ -1,3 +1,3 @@
-import { EventCommandLike2 } from '../../..';
-export interface Command_StopSE extends EventCommandLike2<251, []> {
+import { EventCommandLike } from '../../..';
+export interface Command_StopSE extends EventCommandLike<251, []> {
 }

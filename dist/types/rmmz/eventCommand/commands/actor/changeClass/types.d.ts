@@ -1,5 +1,5 @@
-import { EventCommandLike2 } from '../../../frame';
-export interface Command_ChangeClaass extends EventCommandLike2<321> {
+import { EventCommandLike } from '../../../frame';
+export interface Command_ChangeClaass extends EventCommandLike<321> {
     parameters: ParamArray_ChangeClass;
 }
 export type ParamArray_ChangeClass = [
