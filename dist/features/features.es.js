@@ -1,4 +1,4 @@
-import { cZ as j, cY as q, c$ as H, B as C, z as w, A as E, cF as L, aK as D, aJ as k, aF as B, i as l, j as T, C as x, c as u, d as h, S as v, m as z, b as Z, a_ as $, aZ as b, h as S, cB as A, cC as J, cR as W, cX as K, cW as _, cT as O, b2 as P, b1 as X, cP as Y, r as Q, cl as ee } from "../shared/make.es2.js";
+import { cZ as j, cY as q, c$ as H, B as C, z as w, A as E, cF as L, aK as D, aJ as k, aF as B, i as l, j as T, C as x, c as u, d as h, S as b, m as z, b as Z, a_ as $, aZ as v, h as S, cB as A, cC as J, cR as W, cX as K, cW as _, cT as O, b2 as P, b1 as X, cP as Y, r as Q, cl as ee } from "../shared/make.es2.js";
 import { m as M } from "../shared/mergeItemsSource.es.js";
 const R = (e, t, a) => e.reduce((r, o) => (o.code !== C && o.code !== w && o.code !== E || r.push(se(o, t, a)), r), []), te = {
   [E]: "weapon",
@@ -8,31 +8,36 @@ const R = (e, t, a) => e.reduce((r, o) => (o.code !== C && o.code !== w && o.cod
   const r = e.parameters[3] === j ? { direct: !0, value: e.parameters[2] } : {
     direct: !1,
     variableId: e.parameters[2]
-  }, o = e.parameters[0] === q ? t.gain : e.parameters[0] === H ? t.lose : t.unknown;
+  }, o = e.parameters[0] === q ? t.gain : e.parameters[0] === H ? t.lose : t.unknown, n = typeof e.parameters[4] == "boolean" ? { includesEquip: e.parameters[4] } : {};
   return {
     itemKind: te[e.code],
     dataId: e.parameters[1],
     code: e.code,
     commandNameMZ: a(e.code),
     operation: o,
-    includesEquip: e.parameters[4],
+    ...n,
     ...r
   };
-}, ae = (e) => !!e, f = (e, t) => e.pages.map((a, r) => t(a, r, e)), V = (e, t) => e.events.filter(ae).flatMap((a) => f(a, t)), Ee = (e, t, a) => V(e.map, (r, o, m) => ({
+}, ae = (e) => !!e, f = (e, t) => e.pages.map((a, r) => t(a, r, e)), V = (e, t) => e.events.filter(ae).flatMap((a) => f(a, t)), Ee = (e, t, a) => V(e.map, (r, o, n) => ({
   ...re(r),
   commands: R(r.list, t, a),
-  eventName: m.name,
+  eventName: n.name,
   pageIndex: o
 })), re = (e) => e.conditions.itemId > 0 && e.conditions.itemValid ? { pageCondition: { itemId: e.conditions.itemId } } : {}, De = (e, t, a) => {
-  return r = (o, m, n) => ({ commands: R(o.list, t, a), eventName: n.name, troopId: n.id, pageIndex: m }), e.flatMap((o) => f(o, r));
+  return r = (o, n, m) => ({
+    commands: R(o.list, t, a),
+    eventName: m.name,
+    troopId: m.id,
+    pageIndex: n
+  }), e.flatMap((o) => f(o, r));
   var r;
 }, s = (e, t) => {
   const a = e.trimEnd(), r = t.get(a);
   return r ? r.trimEnd() : a;
 }, i = (e, t, a = `
 `) => L(e.note, (r) => s(r.value, t), a), ke = (e, t) => {
-  const a = i(e, t), r = s(e.name, t), o = s(e.nickname, t), m = s(e.profile, t);
-  return { ...e, name: r, nickname: o, profile: m, note: a };
+  const a = i(e, t), r = s(e.name, t), o = s(e.nickname, t), n = s(e.profile, t);
+  return { ...e, name: r, nickname: o, profile: n, note: a };
 }, Be = (e, t) => {
   const a = i(e, t), r = s(e.name, t);
   return { ...e, name: r, note: a };
@@ -40,17 +45,17 @@ const R = (e, t, a) => e.reduce((r, o) => (o.code !== C && o.code !== w && o.cod
   const a = i(e, t), r = s(e.name, t);
   return { ...e, name: r, note: a };
 }, Ae = (e, t) => {
-  const a = i(e, t), r = s(e.name, t), o = s(e.description, t), m = s(e.message1, t), n = s(e.message2, t);
-  return { ...e, name: r, description: o, message1: m, message2: n, note: a };
+  const a = i(e, t), r = s(e.name, t), o = s(e.description, t), n = s(e.message1, t), m = s(e.message2, t);
+  return { ...e, name: r, description: o, message1: n, message2: m, note: a };
 }, Me = (e, t) => {
   const a = i(e, t), r = s(e.name, t), o = s(e.description, t);
   return { ...e, name: r, description: o, note: a };
 }, Re = (e, t) => {
-  const a = i(e, t), r = s(e.name, t), o = s(e.message1, t), m = s(e.message2, t), n = s(e.message3, t), p = s(e.message4, t);
-  return { ...e, name: r, message1: o, message2: m, message3: n, message4: p, note: a };
+  const a = i(e, t), r = s(e.name, t), o = s(e.message1, t), n = s(e.message2, t), m = s(e.message3, t), p = s(e.message4, t);
+  return { ...e, name: r, message1: o, message2: n, message3: m, message4: p, note: a };
 }, I = (e, t) => e.map((a) => {
   switch (a.code) {
-    case v:
+    case b:
       return ne(a, t);
     case h:
       return ce(a, t);
@@ -96,7 +101,7 @@ const R = (e, t, a) => e.reduce((r, o) => (o.code !== C && o.code !== w && o.cod
   const a = e.pages.map((r) => ({ list: I(r.list, t), conditions: r.conditions, span: r.span }));
   return { ...e, pages: a };
 }, Ue = (e, t) => ({ ...e, list: I(e.list, t) }), Ge = (e, t) => {
-  const a = s(e.displayName, t), r = i(e, t), o = { displayName: a, events: Z(e, (m) => I(m, t)), note: r };
+  const a = s(e.displayName, t), r = i(e, t), o = { displayName: a, events: Z(e, (n) => I(n, t)), note: r };
   return { ...e, ...o };
 }, ie = (e, t) => ({
   params: le(e.params, t),
@@ -207,43 +212,43 @@ class N {
 const g = (e, t, a, r) => {
   const o = e[t];
   if (!a(o)) throw new Error(`Invalid head at index ${t}: ${JSON.stringify(o)}`);
-  const m = [];
-  for (let n = t + 1; n < e.length; n++) {
-    const p = e[n];
+  const n = [];
+  for (let m = t + 1; m < e.length; m++) {
+    const p = e[m];
     if (!r(p)) break;
-    m.push(p);
+    n.push(p);
   }
-  return { header: o, bodies: m };
+  return { header: o, bodies: n };
 }, xe = (e, t) => {
-  const { bodies: a, header: r } = ((o, m) => g(o, m, (n) => n.code === x, (n) => n.code === T))(e, t);
+  const { bodies: a, header: r } = ((o, n) => g(o, n, (m) => m.code === x, (m) => m.code === T))(e, t);
   return ge(r) ? new N(T, r, a) : new G(r, a);
 }, ge = (e) => e.parameters[0] === "選択肢ヘルプ", ye = (e, t) => {
-  const { bodies: a, header: r } = ((o, m) => g(o, m, (n) => n.code === v, (n) => n.code === u))(e, t);
+  const { bodies: a, header: r } = ((o, n) => g(o, n, (m) => m.code === b, (m) => m.code === u))(e, t);
   return new N(u, r, a);
 }, Te = (e, t) => {
-  const { bodies: a, header: r } = ((o, m) => g(o, m, (n) => n.code === b, (n) => n.code === $))(e, t);
+  const { bodies: a, header: r } = ((o, n) => g(o, n, (m) => m.code === v, (m) => m.code === $))(e, t);
   return new G(r, a);
 }, he = (e, t) => {
-  const { bodies: a, header: r } = ((o, m) => g(o, m, (n) => n.code === S, (n) => n.code === l))(e, t);
+  const { bodies: a, header: r } = ((o, n) => g(o, n, (m) => m.code === S, (m) => m.code === l))(e, t);
   return new N(l, r, a);
-}, ve = {
-  [v]: (e, t, a) => a.showMessage(ye(e, t), t, e),
-  [b]: (e, t, a) => a.script(Te(e, t), t, e),
+}, be = {
+  [b]: (e, t, a) => a.showMessage(ye(e, t), t, e),
+  [v]: (e, t, a) => a.script(Te(e, t), t, e),
   [x]: (e, t, a) => a.comment(xe(e, t), t, e),
   [S]: (e, t, a) => a.showScrollingText(he(e, t), t, e)
-}, be = (e) => ((t, a) => ({
+}, ve = (e) => ((t, a) => ({
   code: t.code,
   paramIndex: a,
   value: t.parameters[a]
 }))(e, 1), fe = (e) => e.parameters[0].map((t, a) => ({ code: 102, paramIndex: a, value: t })), F = (e) => e.reduce((t, a, r) => {
   if (a.code === h) return [...t, ...fe(a)];
-  const o = (m = a.code, ve[m]);
-  var m;
+  const o = (n = a.code, be[n]);
+  var n;
   if (o) {
-    const n = o(e, r, Ie);
-    if (n !== void 0) return [...t, n];
+    const m = o(e, r, Ie);
+    if (m !== void 0) return [...t, m];
   }
-  return a.code === k || a.code === B || a.code === D ? [...t, be(a)] : t;
+  return a.code === k || a.code === B || a.code === D ? [...t, ve(a)] : t;
 }, []), Ie = {
   comment: (e) => ({ code: x, paramIndex: 0, value: e.getBodyText() }),
   showMessage: (e) => {
@@ -251,7 +256,7 @@ const g = (e, t, a, r) => {
     var t, a;
   },
   script: (e) => ((t) => ({
-    code: b,
+    code: v,
     paramIndex: 0,
     value: t.getBodyText()
   }))(e),
@@ -295,7 +300,7 @@ const g = (e, t, a, r) => {
     messages: K(e.terms.messages),
     params: W(e.terms.params)
   }
-}), Qe = (e, t, a, r, o, m) => [...P(a, r), ...X(e, t), ...Y(o, m)], et = (e, t) => M(Q(t), e), tt = (e, t, a) => {
+}), Qe = (e, t, a, r, o, n) => [...P(a, r), ...X(e, t), ...Y(o, n)], et = (e, t) => M(Q(t), e), tt = (e, t, a) => {
   const r = ee(t);
   return M(a ? [...r, ...a] : r, e);
 };
