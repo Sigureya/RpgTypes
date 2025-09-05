@@ -20,7 +20,6 @@ export const fromArrayChangeItems = (
   itemId: arr[1],
   value: arr[2],
   operand: arr[3],
-  includesEquip: arr[4],
 });
 
 export const makeCommandChangeItems = (
@@ -28,14 +27,8 @@ export const makeCommandChangeItems = (
   indent: number = 0
 ): Command_ChangeItems => ({
   code: CHANGE_ITEMS,
-  parameters: [
-    param.operation,
-    param.itemId,
-    param.value,
-    param.operand,
-    param.includesEquip,
-  ],
   indent,
+  parameters: [param.operation, param.itemId, param.value, param.operand],
 });
 
 export const makeCommandGainItem = (
@@ -43,14 +36,8 @@ export const makeCommandGainItem = (
   indent: number = 0
 ): Command_ChangeItems => ({
   code: CHANGE_ITEMS,
-  parameters: [
-    OPERATION_GAIN,
-    param.itemId,
-    param.value,
-    OPERAND_DIRECT,
-    false,
-  ],
   indent,
+  parameters: [OPERATION_GAIN, param.itemId, param.value, OPERAND_DIRECT],
 });
 
 export const makeCommandGainItemV = (
@@ -58,14 +45,13 @@ export const makeCommandGainItemV = (
   indent: number = 0
 ): Command_ChangeItems => ({
   code: CHANGE_ITEMS,
+  indent,
   parameters: [
     OPERATION_GAIN,
     param.itemId,
     param.variableId,
     OPERAND_VARIABLE,
-    false,
   ],
-  indent,
 });
 
 export const makeCommandLoseItem = (
@@ -73,14 +59,8 @@ export const makeCommandLoseItem = (
   indent: number = 0
 ): Command_ChangeItems => ({
   code: CHANGE_ITEMS,
-  parameters: [
-    OPERATION_LOSE,
-    param.itemId,
-    param.value,
-    OPERAND_DIRECT,
-    false,
-  ],
   indent,
+  parameters: [OPERATION_LOSE, param.itemId, param.value, OPERAND_DIRECT],
 });
 
 export const makeCommandLoseItemV = (
@@ -88,12 +68,11 @@ export const makeCommandLoseItemV = (
   indent: number = 0
 ): Command_ChangeItems => ({
   code: CHANGE_ITEMS,
+  indent,
   parameters: [
     OPERATION_LOSE,
     param.itemId,
     param.variableId,
     OPERAND_VARIABLE,
-    false,
   ],
-  indent,
 });

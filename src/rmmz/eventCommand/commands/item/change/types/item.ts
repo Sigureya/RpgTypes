@@ -8,12 +8,22 @@ export interface Command_ChangeItems
   parameters: ParamArray_ChangeItems;
 }
 
-export type ParamArray_ChangeItems = [
+export type ParamArray_ChangeItems =
+  | ParamArray_ChangeItemsDirect
+  | ParamArray_ChangeItemsVariable;
+
+export type ParamArray_ChangeItemsDirect = [
   operation: ValueOf<Operation_PlusMinus>,
-  itemId: number,
+  dataId: number,
   value: number,
-  direct: typeof OPERAND_DIRECT | typeof OPERAND_VARIABLE,
-  includesEquip: boolean
+  direct: typeof OPERAND_DIRECT
+];
+
+export type ParamArray_ChangeItemsVariable = [
+  operation: ValueOf<Operation_PlusMinus>,
+  dataId: number,
+  value: number,
+  byVariable: typeof OPERAND_VARIABLE
 ];
 
 export interface ParamObject_ChangeItemsFullset {
@@ -21,7 +31,6 @@ export interface ParamObject_ChangeItemsFullset {
   itemId: number;
   value: number;
   operand: typeof OPERAND_DIRECT | typeof OPERAND_VARIABLE;
-  includesEquip: boolean;
 }
 
 export interface ParamObject_ChangeItems {
