@@ -1,4 +1,5 @@
-import { Direction8, EventCommandLike } from '../../../../rpg';
+import { EventCommandLike } from '../../../../rpg';
+import { Direction8 } from '../../../../utils';
 export interface Command_SetEventLocation extends EventCommandLike<203> {
     parameters: ParamArray_SetEventLocation;
 }
