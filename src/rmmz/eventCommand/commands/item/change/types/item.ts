@@ -8,6 +8,16 @@ export interface Command_ChangeItems
   parameters: ParamArray_ChangeItems;
 }
 
+export interface Command_ChangeItemsDirect
+  extends EventCommandLike2<typeof CHANGE_ITEMS> {
+  parameters: ParamArray_ChangeItemsDirect;
+}
+
+export interface Command_ChangeItemsByVariable
+  extends EventCommandLike2<typeof CHANGE_ITEMS> {
+  parameters: ParamArray_ChangeItemsVariable;
+}
+
 export type ParamArray_ChangeItems =
   | ParamArray_ChangeItemsDirect
   | ParamArray_ChangeItemsVariable;
