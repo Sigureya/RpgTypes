@@ -68,13 +68,21 @@ export const extractItemChangeData = (
       : command.parameters[0] === OPERATION_LOSE
       ? terms.lose
       : terms.unknown;
+
+  const includesEquip =
+    typeof command.parameters[4] === "boolean"
+      ? {
+          includesEquip: command.parameters[4],
+        }
+      : {};
+
   return {
     itemKind: KIND_TABKE[command.code],
     dataId: command.parameters[1],
     code: command.code,
     commandNameMZ: commandNameFn(command.code),
     operation: operation,
-    includesEquip: command.parameters[4],
+    ...includesEquip,
     ...operand,
   };
 };

@@ -108,7 +108,6 @@ const testCase: TestCase[] = [
       operation: TERMS.lose,
       value: 3,
       direct: true,
-      includesEquip: false,
     },
   },
 ];
