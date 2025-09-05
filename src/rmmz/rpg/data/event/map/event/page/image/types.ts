@@ -1,4 +1,4 @@
-import type { Direction8 } from "../eventCommand";
+import type { Direction8 } from "@RpgTypes/rmmz/utils";
 
 export interface MapEvent_Image {
   characterIndex: number;
