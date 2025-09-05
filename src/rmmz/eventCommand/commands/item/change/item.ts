@@ -1,3 +1,4 @@
+import type { EventCommandLike2 } from "@RpgTypes/rmmz/eventCommand/frame";
 import { CHANGE_ITEMS } from "@RpgTypes/rmmz/rpg";
 import {
   OPERAND_DIRECT,
@@ -11,6 +12,9 @@ import type {
   ParamObject_ChangeItemsFullset,
   ParamObject_ChangeItems,
   ParamObject_ChangeItemsV,
+  ParamArray_ChangeItemsVariable,
+  ParamArray_ChangeItemsDirect,
+  Command_ChangeItemsByVariable,
 } from "./types/item";
 
 export const fromArrayChangeItems = (
@@ -20,7 +24,6 @@ export const fromArrayChangeItems = (
   itemId: arr[1],
   value: arr[2],
   operand: arr[3],
-  includesEquip: arr[4],
 });
 
 export const makeCommandChangeItems = (
@@ -28,14 +31,8 @@ export const makeCommandChangeItems = (
   indent: number = 0
 ): Command_ChangeItems => ({
   code: CHANGE_ITEMS,
-  parameters: [
-    param.operation,
-    param.itemId,
-    param.value,
-    param.operand,
-    param.includesEquip,
-  ],
   indent,
+  parameters: [param.operation, param.itemId, param.value, param.operand],
 });
 
 export const makeCommandGainItem = (
@@ -43,14 +40,8 @@ export const makeCommandGainItem = (
   indent: number = 0
 ): Command_ChangeItems => ({
   code: CHANGE_ITEMS,
-  parameters: [
-    OPERATION_GAIN,
-    param.itemId,
-    param.value,
-    OPERAND_DIRECT,
-    false,
-  ],
   indent,
+  parameters: [OPERATION_GAIN, param.itemId, param.value, OPERAND_DIRECT],
 });
 
 export const makeCommandGainItemV = (
@@ -58,42 +49,42 @@ export const makeCommandGainItemV = (
   indent: number = 0
 ): Command_ChangeItems => ({
   code: CHANGE_ITEMS,
+  indent,
   parameters: [
     OPERATION_GAIN,
     param.itemId,
     param.variableId,
     OPERAND_VARIABLE,
-    false,
   ],
-  indent,
 });
 
 export const makeCommandLoseItem = (
   param: ParamObject_ChangeItems,
   indent: number = 0
-): Command_ChangeItems => ({
-  code: CHANGE_ITEMS,
-  parameters: [
-    OPERATION_LOSE,
-    param.itemId,
-    param.value,
-    OPERAND_DIRECT,
-    false,
-  ],
-  indent,
-});
+): EventCommandLike2<typeof CHANGE_ITEMS, ParamArray_ChangeItemsDirect> =>
+  ({
+    code: CHANGE_ITEMS,
+    indent,
+    parameters: [OPERATION_LOSE, param.itemId, param.value, OPERAND_DIRECT],
+  } satisfies Command_ChangeItems);
 
 export const makeCommandLoseItemV = (
   param: ParamObject_ChangeItemsV,
   indent: number = 0
-): Command_ChangeItems => ({
-  code: CHANGE_ITEMS,
-  parameters: [
-    OPERATION_LOSE,
-    param.itemId,
-    param.variableId,
-    OPERAND_VARIABLE,
-    false,
-  ],
-  indent,
-});
+): EventCommandLike2<typeof CHANGE_ITEMS, ParamArray_ChangeItemsVariable> =>
+  ({
+    code: CHANGE_ITEMS,
+    indent,
+    parameters: [
+      OPERATION_LOSE,
+      param.itemId,
+      param.variableId,
+      OPERAND_VARIABLE,
+    ],
+  } satisfies Command_ChangeItems);
+
+export const isUsingVaribleCommandChangingItems = (
+  command: Command_ChangeItems
+): command is Command_ChangeItemsByVariable => {
+  return command.parameters[3] === OPERAND_VARIABLE;
+};
