@@ -32,7 +32,7 @@ export type ParamArray_ChangeWeapons =
   | ParamArray_GainWeaponsVariable
   | ParamArray_LoseWeaponVariable;
 
-export type ParamArray_ChangeWeapons2<
+export type ParamArray_ChangeWeaponsTemplate<
   T extends {
     operation: ValueOf<Operation_PlusMinus>;
     operand: typeof OPERAND_DIRECT | typeof OPERAND_VARIABLE;
@@ -45,22 +45,22 @@ export type ParamArray_ChangeWeapons2<
   includesEquip: boolean
 ];
 
-export type ParamArray_GainWeaponsDirect = ParamArray_ChangeWeapons2<{
+export type ParamArray_GainWeaponsDirect = ParamArray_ChangeWeaponsTemplate<{
   operation: Operation_PlusMinus["PLUS"];
   operand: typeof OPERAND_DIRECT;
 }>;
 
-export type ParamArray_LoseWeaponsDirect = ParamArray_ChangeWeapons2<{
+export type ParamArray_LoseWeaponsDirect = ParamArray_ChangeWeaponsTemplate<{
   operation: Operation_PlusMinus["MINUS"];
   operand: typeof OPERAND_DIRECT;
 }>;
 
-export type ParamArray_GainWeaponsVariable = ParamArray_ChangeWeapons2<{
+export type ParamArray_GainWeaponsVariable = ParamArray_ChangeWeaponsTemplate<{
   operation: Operation_PlusMinus["PLUS"];
   operand: typeof OPERAND_VARIABLE;
 }>;
 
-export type ParamArray_LoseWeaponVariable = ParamArray_ChangeWeapons2<{
+export type ParamArray_LoseWeaponVariable = ParamArray_ChangeWeaponsTemplate<{
   operation: Operation_PlusMinus["MINUS"];
   operand: typeof OPERAND_VARIABLE;
 }>;
