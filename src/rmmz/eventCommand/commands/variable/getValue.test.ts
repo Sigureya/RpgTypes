@@ -1,10 +1,8 @@
 import type { MockedObject } from "vitest";
 import { describe, test, expect, vi } from "vitest";
 import type { ParamArray } from "@RpgTypes/rmmz/rpg";
-import {
-  toArrayOperandActorStatus,
-  toArrayOperandEnemyStatus,
-} from "./convert";
+import { toArrayOperandActorStatus } from "./actor";
+import { toArrayOperandEnemyStatus } from "./enemy";
 import { getActorValue, getEnemyValue } from "./getValue";
 import type { DataOperand_Enemy } from "./types";
 

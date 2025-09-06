@@ -22,7 +22,7 @@ export const toArrayOperandActorStatus = (
   value.param,
 ];
 
-export const makeCommandVariableFromStatusData = (
+export const makeCommandVariableFromActorStatusData = (
   target: ParamObject_WritingTarget,
   value: ParamObject_Operand_ActorStatus,
   other: MakeOtherParam = {}

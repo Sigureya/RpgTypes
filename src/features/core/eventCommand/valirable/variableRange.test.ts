@@ -6,10 +6,10 @@ import type {
   Operand_ItemData,
 } from "@RpgTypes/rmmz";
 import {
-  makeCommandVariableFromConstant,
   makeCommandVariableFromEnemyData,
   makeCommandVariableFromItemData,
-} from "@RpgTypes/rmmz/eventCommand/commands/variable/make";
+} from "@RpgTypes/rmmz";
+import { makeCommandVariableFromConstant } from "@RpgTypes/rmmz/eventCommand/commands/variable/make";
 import { ENEMY_PARAM_INDEX } from "@RpgTypes/rmmz/eventCommand/commands/variable/types/enemy/dataSource";
 import type { VVV } from "./types";
 import { extractVariableFromControlVariables } from "./variableControle";
