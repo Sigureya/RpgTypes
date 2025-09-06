@@ -32,7 +32,7 @@ describe("makeCommandGainArmor", () => {
   });
   test("returns false for isUsingVariableCommandChangingItems", () => {
     const result = makeCommandGainArmor(param);
-    expect(result).toSatisfy(isUsingVaribleCommandChangingItems);
+    expect(result).not.toSatisfy(isUsingVaribleCommandChangingItems);
   });
 });
 
