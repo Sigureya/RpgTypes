@@ -18,7 +18,6 @@ export interface ParamObject_Operand_Random {
 }
 
 export interface ParamObject_Operand_ItemData {
-  type: 0 | 1 | 2; // ITEM | WEAPON | ARMOR
   itemId: number;
 }
 
