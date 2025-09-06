@@ -85,7 +85,7 @@ describe("makeCommandGainWeapon", () => {
     const result = makeCommandGainWeapon(param);
     expect(result).toEqual(expected);
   });
-  test("", () => {
+  test("is not using variable", () => {
     const result = makeCommandGainWeapon(param);
     expect(result).not.toSatisfy(isCommandChangeWeaponsUsingVariable);
   });
@@ -102,7 +102,7 @@ describe("makeCommandGainWeaponV", () => {
     const result = makeCommandGainWeaponV(param, 1);
     expect(result).toEqual(expected);
   });
-  test("", () => {
+  test("is using variable", () => {
     const result = makeCommandGainWeaponV(param, 1);
     expect(result).toSatisfy(isCommandChangeWeaponsUsingVariable);
   });
@@ -120,7 +120,7 @@ describe("makeCommandLoseWeapon", () => {
     const result = makeCommandLoseWeapon(param);
     expect(result).toEqual(expected);
   });
-  test("", () => {
+  test("is not using variable", () => {
     const result = makeCommandLoseWeapon(param);
     expect(result).not.toSatisfy(isCommandChangeWeaponsUsingVariable);
   });
@@ -136,7 +136,7 @@ describe("makeCommandLoseWeaponV", () => {
     const result = makeCommandLoseWeaponV(param);
     expect(result).toEqual(expected);
   });
-  test("", () => {
+  test("is using variable", () => {
     const result = makeCommandLoseWeaponV(param);
     expect(result).toSatisfy(isCommandChangeWeaponsUsingVariable);
   });
