@@ -2,9 +2,9 @@ import { describe, test, expect } from "vitest";
 import { CHANGE_ARMORS } from "@RpgTypes/rmmz/rpg";
 import {
   makeCommandGainArmor,
-  makeCommandGainArmorV,
+  makeCommandGainArmorByVariable,
   makeCommandLoseArmor,
-  makeCommandLoseArmorV,
+  makeCommandLoseArmorByVariable,
   isUsingVaribleCommandChangingItems,
 } from "./armor";
 import type {
@@ -30,13 +30,13 @@ describe("makeCommandGainArmor", () => {
     const result = makeCommandGainArmor(param);
     expect(result).toEqual(expected);
   });
-  test("is not using variable", () => {
+  test("returns false for isUsingVariableCommandChangingItems", () => {
     const result = makeCommandGainArmor(param);
     expect(result).toSatisfy(isUsingVaribleCommandChangingItems);
   });
 });
 
-describe("makeCommandGainArmorV", () => {
+describe("makeCommandGainArmorByVariable", () => {
   const param: ParamObject_ChangeArmorsV = { armorId: 42, variableId: 7 };
   const expected: Command_ChangeArmors = {
     code: CHANGE_ARMORS,
@@ -44,11 +44,11 @@ describe("makeCommandGainArmorV", () => {
     indent: 0,
   };
   test("creates command with variable operand", () => {
-    const result = makeCommandGainArmorV(param);
+    const result = makeCommandGainArmorByVariable(param);
     expect(result).toEqual(expected);
   });
-  test("is using variable", () => {
-    const result = makeCommandGainArmorV(param);
+  test("returns true for isUsingVariableCommandChangingItems", () => {
+    const result = makeCommandGainArmorByVariable(param);
     expect(result).toSatisfy(isUsingVaribleCommandChangingItems);
   });
 });
@@ -64,7 +64,7 @@ describe("makeCommandLoseArmor", () => {
     const result = makeCommandLoseArmor(param);
     expect(result).toEqual(expected);
   });
-  test("is not using variable", () => {
+  test("returns false for isUsingVariableCommandChangingItems", () => {
     const result = makeCommandLoseArmor(param);
     expect(result).not.toSatisfy(isUsingVaribleCommandChangingItems);
   });
@@ -78,11 +78,11 @@ describe("makeCommandLoseArmorV", () => {
     indent: 5,
   };
   test("creates command with variable operand", () => {
-    const result = makeCommandLoseArmorV(param, 5);
+    const result = makeCommandLoseArmorByVariable(param, 5);
     expect(result).toEqual(expected);
   });
-  test("is using variable", () => {
-    const result = makeCommandLoseArmorV(param, 5);
+  test("returns true for isUsingVariableCommandChangingItems", () => {
+    const result = makeCommandLoseArmorByVariable(param, 5);
     expect(result).toSatisfy(isUsingVaribleCommandChangingItems);
   });
 });

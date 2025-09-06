@@ -2,8 +2,6 @@ export type {
   Command_ChangeArmors,
   ParamArray_ChangeArmors,
   ParamObject_ChangeArmors,
-  ParamObject_GainArmor,
-  ParamObject_GainArmorV,
 } from "./types/armor";
 
 export type {
@@ -11,8 +9,11 @@ export type {
   Command_ChangeItemsByVariable,
   Command_ChangeItemsDirect,
   ParamArray_ChangeItems,
-  ParamArray_ChangeItemsDirect,
-  ParamArray_ChangeItemsVariable,
+  ParamArray_ChangeItemsTemplate,
+  ParamArray_GainItemsDirect,
+  ParamArray_GainItemsVariable,
+  ParamArray_LoseItemVariable,
+  ParamArray_LoseItemsDirect,
   ParamObject_ChangeItems,
   ParamObject_ChangeItemsFullset,
   ParamObject_ChangeItemsV,
@@ -25,15 +26,6 @@ export type {
   ParamObject_ChangeWeaponsFullset,
   ParamObject_ChangeWeaponsV,
 } from "./types/weapon";
-
-export {
-  fromArrayChangeArmors,
-  makeCommandChangeArmors,
-  makeCommandGainArmor,
-  makeCommandGainArmorV,
-  makeCommandLoseArmor,
-  makeCommandLoseArmorV,
-} from "./armor";
 
 export {
   fromArrayChangeItems,
@@ -53,3 +45,10 @@ export {
   makeCommandLoseWeapon,
   makeCommandLoseWeaponV,
 } from "./weapon";
+
+export {
+  makeCommandGainArmor,
+  makeCommandGainArmorByVariable,
+  makeCommandLoseArmor,
+  makeCommandLoseArmorByVariable,
+} from "./armor";
