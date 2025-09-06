@@ -20,6 +20,7 @@ import {
   makeCommandGainWeaponV,
   makeCommandLoseWeapon,
   makeCommandLoseWeaponV,
+  isCommandChangeWeaponsUsingVariable,
 } from "./weapon";
 
 describe("makeCommandChangeWeapons", () => {
@@ -59,67 +60,84 @@ describe("makeCommandChangeWeapons", () => {
 });
 
 describe("fromArrayChangeWeapons", () => {
+  const arr: ParamArray_ChangeWeapons = [0, 1, 5, 0, false];
+  const expected: ParamObject_ChangeWeaponsFullset = {
+    operation: 0,
+    weaponId: 1,
+    value: 5,
+    operand: 0,
+    includesEquip: false,
+  };
   test("converts array to ParamObject_ChangeWeapons2", () => {
-    const arr: ParamArray_ChangeWeapons = [0, 1, 5, 0, false];
-    const expected: ParamObject_ChangeWeaponsFullset = {
-      operation: 0,
-      weaponId: 1,
-      value: 5,
-      operand: 0,
-      includesEquip: false,
-    };
     const result = fromArrayChangeWeapons(arr);
     expect(result).toEqual(expected);
   });
 });
 
 describe("makeCommandGainWeapon", () => {
+  const param: ParamObject_ChangeWeapons = { weaponId: 42, value: 5 };
+  const expected: Command_ChangeWeapons = {
+    code: CHANGE_WEAPONS,
+    parameters: [OPERATION_GAIN, 42, 5, OPERAND_DIRECT, false],
+    indent: 0,
+  };
   test("creates command with direct operand", () => {
-    const param: ParamObject_ChangeWeapons = { weaponId: 42, value: 5 };
-    const expected: Command_ChangeWeapons = {
-      code: CHANGE_WEAPONS,
-      parameters: [OPERATION_GAIN, 42, 5, OPERAND_DIRECT, false],
-      indent: 0,
-    };
     const result = makeCommandGainWeapon(param);
     expect(result).toEqual(expected);
+  });
+  test("", () => {
+    const result = makeCommandGainWeapon(param);
+    expect(result).not.toSatisfy(isCommandChangeWeaponsUsingVariable);
   });
 });
 
 describe("makeCommandGainWeaponV", () => {
+  const param: ParamObject_ChangeWeaponsV = { weaponId: 42, variableId: 3 };
+  const expected: Command_ChangeWeapons = {
+    code: CHANGE_WEAPONS,
+    parameters: [OPERATION_GAIN, 42, 3, OPERAND_VARIABLE, false],
+    indent: 1,
+  };
   test("creates command with variable operand", () => {
-    const param: ParamObject_ChangeWeaponsV = { weaponId: 42, variableId: 3 };
-    const expected: Command_ChangeWeapons = {
-      code: CHANGE_WEAPONS,
-      parameters: [OPERATION_GAIN, 42, 3, OPERAND_VARIABLE, false],
-      indent: 1,
-    };
     const result = makeCommandGainWeaponV(param, 1);
     expect(result).toEqual(expected);
+  });
+  test("", () => {
+    const result = makeCommandGainWeaponV(param, 1);
+    expect(result).toSatisfy(isCommandChangeWeaponsUsingVariable);
   });
 });
 
 describe("makeCommandLoseWeapon", () => {
+  const param: ParamObject_ChangeWeapons = { weaponId: 42, value: 5 };
+  const expected: Command_ChangeWeapons = {
+    code: CHANGE_WEAPONS,
+    parameters: [OPERATION_LOSE, 42, 5, OPERAND_DIRECT, false],
+    indent: 0,
+  };
+
   test("creates command with direct operand", () => {
-    const param: ParamObject_ChangeWeapons = { weaponId: 42, value: 5 };
-    const expected: Command_ChangeWeapons = {
-      code: CHANGE_WEAPONS,
-      parameters: [OPERATION_LOSE, 42, 5, OPERAND_DIRECT, false],
-      indent: 0,
-    };
     const result = makeCommandLoseWeapon(param);
     expect(result).toEqual(expected);
   });
+  test("", () => {
+    const result = makeCommandLoseWeapon(param);
+    expect(result).not.toSatisfy(isCommandChangeWeaponsUsingVariable);
+  });
 });
 describe("makeCommandLoseWeaponV", () => {
+  const param: ParamObject_ChangeWeaponsV = { weaponId: 42, variableId: 5 };
+  const expected: Command_ChangeWeapons = {
+    code: CHANGE_WEAPONS,
+    parameters: [OPERATION_LOSE, 42, 5, OPERAND_VARIABLE, false],
+    indent: 0,
+  };
   test("creates command with direct operand", () => {
-    const param: ParamObject_ChangeWeaponsV = { weaponId: 42, variableId: 5 };
-    const expected: Command_ChangeWeapons = {
-      code: CHANGE_WEAPONS,
-      parameters: [OPERATION_LOSE, 42, 5, OPERAND_VARIABLE, false],
-      indent: 0,
-    };
     const result = makeCommandLoseWeaponV(param);
     expect(result).toEqual(expected);
+  });
+  test("", () => {
+    const result = makeCommandLoseWeaponV(param);
+    expect(result).toSatisfy(isCommandChangeWeaponsUsingVariable);
   });
 });

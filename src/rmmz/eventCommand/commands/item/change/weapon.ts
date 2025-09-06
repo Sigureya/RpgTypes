@@ -15,6 +15,12 @@ import type {
   Command_ChangeWeaponsByVariable,
 } from "./types/weapon";
 
+export const isCommandChangeWeaponsUsingVariable = (
+  command: Command_ChangeWeapons
+): command is Command_ChangeWeaponsByVariable => {
+  return command.parameters[3] === OPERAND_VARIABLE;
+};
+
 export const fromArrayChangeWeapons = (
   arr: ParamArray_ChangeWeapons
 ): ParamObject_ChangeWeaponsFullset => ({
