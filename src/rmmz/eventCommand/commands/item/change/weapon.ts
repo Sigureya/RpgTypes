@@ -11,6 +11,8 @@ import type {
   ParamObject_ChangeWeaponsFullset,
   ParamObject_ChangeWeapons,
   ParamObject_ChangeWeaponsV,
+  Command_ChangeWeaponsDirect,
+  Command_ChangeWeaponsByVariable,
 } from "./types/weapon";
 
 export const fromArrayChangeWeapons = (
@@ -41,7 +43,7 @@ export const makeCommandChangeWeapons = (
 export const makeCommandGainWeapon = (
   param: ParamObject_ChangeWeapons,
   indent: number = 0
-): Command_ChangeWeapons => ({
+): Command_ChangeWeaponsDirect => ({
   code: CHANGE_WEAPONS,
   indent,
   parameters: [
@@ -52,10 +54,11 @@ export const makeCommandGainWeapon = (
     false,
   ],
 });
+
 export const makeCommandGainWeaponV = (
   param: ParamObject_ChangeWeaponsV,
   indent: number = 0
-): Command_ChangeWeapons => ({
+): Command_ChangeWeaponsByVariable => ({
   code: CHANGE_WEAPONS,
   indent,
   parameters: [
@@ -70,7 +73,7 @@ export const makeCommandGainWeaponV = (
 export const makeCommandLoseWeapon = (
   param: ParamObject_ChangeWeapons,
   indent: number = 0
-): Command_ChangeWeapons => ({
+): Command_ChangeWeaponsDirect => ({
   code: CHANGE_WEAPONS,
   indent,
   parameters: [
@@ -85,7 +88,7 @@ export const makeCommandLoseWeapon = (
 export const makeCommandLoseWeaponV = (
   param: ParamObject_ChangeWeaponsV,
   indent: number = 0
-): Command_ChangeWeapons => ({
+): Command_ChangeWeaponsByVariable => ({
   code: CHANGE_WEAPONS,
   indent,
   parameters: [

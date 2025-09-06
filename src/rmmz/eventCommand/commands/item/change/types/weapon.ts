@@ -3,9 +3,19 @@ import type { EventCommandLike } from "@RpgTypes/rmmz/eventCommand/frame";
 import type { CHANGE_WEAPONS, Operation_PlusMinus } from "@RpgTypes/rmmz/rpg";
 import type { OPERAND_DIRECT, OPERAND_VARIABLE } from "./constants";
 
-export interface Command_ChangeWeapons
+export type Command_ChangeWeapons = EventCommandLike<
+  typeof CHANGE_WEAPONS,
+  ParamArray_ChangeWeaponsVariable | ParamArray_ChangeWeaponsDirect
+>;
+
+export interface Command_ChangeWeaponsByVariable
   extends EventCommandLike<typeof CHANGE_WEAPONS> {
-  parameters: ParamArray_ChangeWeapons;
+  parameters: ParamArray_ChangeWeaponsVariable;
+}
+
+export interface Command_ChangeWeaponsDirect
+  extends EventCommandLike<typeof CHANGE_WEAPONS> {
+  parameters: ParamArray_ChangeWeaponsDirect;
 }
 
 export interface ParamObject_ChangeWeaponsFullset {
