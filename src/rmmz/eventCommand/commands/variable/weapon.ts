@@ -7,17 +7,6 @@ import type {
   Operand_WeaponData,
 } from "./types";
 
-export const makeCommandVariableFromWeapon = (
-  target: ParamObject_WritingTarget,
-  value: ParamObject_Operand_WeaponData
-): Command_ControlVariables<Operand_WeaponData> => {
-  return {
-    code: CONTROL_VARIABLES,
-    indent: 0,
-    parameters: toArrayOperandWeaponData(target, value, 0),
-  };
-};
-
 export const toArrayOperandWeaponData = (
   target: ParamObject_WritingTarget,
   value: ParamObject_Operand_WeaponData,
@@ -30,3 +19,14 @@ export const toArrayOperandWeaponData = (
   TYPE_WEAPON,
   value.weaponId,
 ];
+
+export const makeCommandVariableFromWeapon = (
+  target: ParamObject_WritingTarget,
+  value: ParamObject_Operand_WeaponData
+): Command_ControlVariables<Operand_WeaponData> => {
+  return {
+    code: CONTROL_VARIABLES,
+    indent: 0,
+    parameters: toArrayOperandWeaponData(target, value, 0),
+  };
+};

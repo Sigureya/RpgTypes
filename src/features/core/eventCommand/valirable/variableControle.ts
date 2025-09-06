@@ -2,8 +2,7 @@ import type {
   Command_ControlVariables,
   Operand_Variable,
 } from "@RpgTypes/rmmz";
-import { CONTROL_VARIABLES } from "@RpgTypes/rmmz";
-import { isCommandOperandVariables } from "@RpgTypes/rmmz/eventCommand/commands/variable/utils";
+import { CONTROL_VARIABLES, isCommandOperandVariables } from "@RpgTypes/rmmz";
 import type { VariableParam, VVV } from "./types";
 
 const rangeEx = <T>(

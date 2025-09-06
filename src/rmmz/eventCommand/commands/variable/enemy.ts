@@ -9,18 +9,6 @@ import type {
 import { ENEMY_PARAM_INDEX } from "./types/enemy/dataSource";
 import type { MakeOtherParam } from "./types/other";
 
-export const makeCommandVariableFromEnemyData = (
-  target: ParamObject_WritingTarget,
-  value: ParamObject_Operand_Enemy,
-  other: MakeOtherParam = {}
-): Command_ControlVariables<Operand_EnemyStatus> => {
-  return {
-    code: CONTROL_VARIABLES,
-    indent: other.indent ?? 0,
-    parameters: toArrayOperandEnemyStatus(target, value, other.operation ?? 0),
-  };
-};
-
 export const toArrayOperandEnemyStatus = (
   target: ParamObject_WritingTarget,
   value: ParamObject_Operand_Enemy,
@@ -34,3 +22,15 @@ export const toArrayOperandEnemyStatus = (
   value.index,
   ENEMY_PARAM_INDEX[value.param],
 ];
+
+export const makeCommandVariableFromEnemyData = (
+  target: ParamObject_WritingTarget,
+  value: ParamObject_Operand_Enemy,
+  other: MakeOtherParam = {}
+): Command_ControlVariables<Operand_EnemyStatus> => {
+  return {
+    code: CONTROL_VARIABLES,
+    indent: other.indent ?? 0,
+    parameters: toArrayOperandEnemyStatus(target, value, other.operation ?? 0),
+  };
+};
