@@ -14,8 +14,13 @@ export interface ParamObject_Operand_Random {
     max: number;
 }
 export interface ParamObject_Operand_ItemData {
-    type: 0 | 1 | 2;
     itemId: number;
+}
+export interface ParamObject_Operand_WeaponData {
+    weaponId: number;
+}
+export interface ParamObject_Operand_ArmorData {
+    armorId: number;
 }
 export interface ParamObject_Operand_PartyData {
     type: 6;
