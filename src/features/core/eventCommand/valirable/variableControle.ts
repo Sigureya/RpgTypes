@@ -20,14 +20,14 @@ export const extractVariableFromControlVariables = (
   command: Command_ControlVariables
 ): VVV => {
   return isCommandOperandVariables(command)
-    ? vvv(command)
+    ? fromVariable(command)
     : {
-        write: rrr2(command),
+        write: writeTargets(command),
         read: [],
       };
 };
 
-const rrr2 = (command: Command_ControlVariables): VariableParam[] => {
+const writeTargets = (command: Command_ControlVariables): VariableParam[] => {
   return rangeEx(
     command,
     (id): VariableParam => ({
@@ -37,9 +37,11 @@ const rrr2 = (command: Command_ControlVariables): VariableParam[] => {
   );
 };
 
-const vvv = (command: Command_ControlVariables<Operand_Variable>): VVV => {
+const fromVariable = (
+  command: Command_ControlVariables<Operand_Variable>
+): VVV => {
   return {
-    write: rrr2(command),
+    write: writeTargets(command),
     read: [
       {
         code: CONTROL_VARIABLES,
