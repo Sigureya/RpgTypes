@@ -1,25 +1,30 @@
+import { TYPE_WEAPON, TYPE_ARMOR } from "./constants";
 import {
   OPERAND_CONSTANT,
   OPERAND_GAMEDATA,
   OPERAND_RANDOM,
   OPERAND_SCRIPT,
   OPERAND_VARIABLE,
-} from "./constatns/operand";
+} from "./constants/operand";
 import type {
   Operand_ActorStatus,
+  Operand_ArmorData,
   Operand_Constatant,
   Operand_EnemyStatus,
   Operand_ItemData,
   Operand_Random,
   Operand_Script,
   Operand_Variable,
+  Operand_WeaponData,
   ParamObject_Operand_ActorStatus,
+  ParamObject_Operand_ArmorData,
   ParamObject_Operand_Constant,
   ParamObject_Operand_Enemy,
   ParamObject_Operand_ItemData,
   ParamObject_Operand_Random,
   ParamObject_Operand_Script,
   ParamObject_Operand_Variable,
+  ParamObject_Operand_WeaponData,
   ParamObject_WritingTarget,
 } from "./types";
 import { ENEMY_PARAM_INDEX } from "./types/enemy/dataSource";
@@ -82,6 +87,32 @@ export const toArrayOperandItemData = (
   OPERAND_GAMEDATA,
   value.type,
   value.itemId,
+];
+
+export const toArrayOperandWeaponData = (
+  target: ParamObject_WritingTarget,
+  value: ParamObject_Operand_WeaponData,
+  operation: number = 0
+): Operand_WeaponData => [
+  target.startId,
+  target.endId ?? target.startId,
+  operation,
+  OPERAND_GAMEDATA,
+  TYPE_WEAPON,
+  value.weaponId,
+];
+
+export const toArrayOperandArmorData = (
+  target: ParamObject_WritingTarget,
+  value: ParamObject_Operand_ArmorData,
+  operation: number = 0
+): Operand_ArmorData => [
+  target.startId,
+  target.endId ?? target.startId,
+  operation,
+  OPERAND_GAMEDATA,
+  TYPE_ARMOR,
+  value.armorId,
 ];
 
 export const toArrayOperandActorStatus = (
