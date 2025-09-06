@@ -13,15 +13,26 @@ export interface ParamObject_ChangeWeaponsFullset {
   weaponId: number;
   value: number;
   operand: typeof OPERAND_DIRECT | typeof OPERAND_VARIABLE;
-
   includesEquip: boolean;
 }
 
-export type ParamArray_ChangeWeapons = [
+export type ParamArray_ChangeWeapons =
+  | ParamArray_ChangeWeaponsDirect
+  | ParamArray_ChangeWeaponsVariable;
+
+export type ParamArray_ChangeWeaponsDirect = [
   operation: ValueOf<Operation_PlusMinus>,
   weaponId: number,
   value: number,
-  direct: typeof OPERAND_DIRECT | typeof OPERAND_VARIABLE,
+  direct: typeof OPERAND_DIRECT,
+  includesEquip: boolean
+];
+
+export type ParamArray_ChangeWeaponsVariable = [
+  operation: ValueOf<Operation_PlusMinus>,
+  weaponId: number,
+  value: number,
+  byVariable: typeof OPERAND_VARIABLE,
   includesEquip: boolean
 ];
 

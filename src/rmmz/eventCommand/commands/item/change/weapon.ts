@@ -43,6 +43,7 @@ export const makeCommandGainWeapon = (
   indent: number = 0
 ): Command_ChangeWeapons => ({
   code: CHANGE_WEAPONS,
+  indent,
   parameters: [
     OPERATION_GAIN,
     param.weaponId,
@@ -50,13 +51,13 @@ export const makeCommandGainWeapon = (
     OPERAND_DIRECT,
     false,
   ],
-  indent,
 });
 export const makeCommandGainWeaponV = (
   param: ParamObject_ChangeWeaponsV,
   indent: number = 0
 ): Command_ChangeWeapons => ({
   code: CHANGE_WEAPONS,
+  indent,
   parameters: [
     OPERATION_GAIN,
     param.weaponId,
@@ -64,7 +65,6 @@ export const makeCommandGainWeaponV = (
     OPERAND_VARIABLE,
     false,
   ],
-  indent,
 });
 
 export const makeCommandLoseWeapon = (
@@ -72,6 +72,7 @@ export const makeCommandLoseWeapon = (
   indent: number = 0
 ): Command_ChangeWeapons => ({
   code: CHANGE_WEAPONS,
+  indent,
   parameters: [
     OPERATION_LOSE,
     param.weaponId,
@@ -79,7 +80,6 @@ export const makeCommandLoseWeapon = (
     OPERAND_DIRECT,
     false,
   ],
-  indent,
 });
 
 export const makeCommandLoseWeaponV = (
@@ -87,6 +87,7 @@ export const makeCommandLoseWeaponV = (
   indent: number = 0
 ): Command_ChangeWeapons => ({
   code: CHANGE_WEAPONS,
+  indent,
   parameters: [
     OPERATION_LOSE,
     param.weaponId,
@@ -94,5 +95,4 @@ export const makeCommandLoseWeaponV = (
     OPERAND_VARIABLE,
     false,
   ],
-  indent,
 });
