@@ -12,7 +12,6 @@ export const extractVariableInputNumber = (
   return {
     code: INPUT_NUMBER,
     variableId: command.parameters[0],
-    paramIndex: 0,
   };
 };
 
@@ -22,7 +21,6 @@ export const extractVariableGainItem = (
   return {
     code: CHANGE_WEAPONS,
     variableId: command.parameters[2],
-    paramIndex: 2,
   };
 };
 
@@ -32,6 +30,5 @@ export const extractVariableSelectItem = (
   return {
     code: SELECT_ITEM,
     variableId: command.parameters[0],
-    paramIndex: 0,
   };
 };

@@ -22,6 +22,14 @@ export interface ParamObject_Operand_ItemData {
   itemId: number;
 }
 
+export interface ParamObject_Operand_WeaponData {
+  weaponId: number;
+}
+
+export interface ParamObject_Operand_ArmorData {
+  armorId: number;
+}
+
 export interface ParamObject_Operand_PartyData {
   type: 6; // PARTY
   index: number;

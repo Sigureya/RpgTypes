@@ -33,6 +33,16 @@ export type Operand_ItemData = OperandGamedata<
   [itemId: number]
 >;
 
+export type Operand_WeaponData = OperandGamedata<
+  GAMEDATA["WEAPON"],
+  [weaponId: number]
+>;
+
+export type Operand_ArmorData = OperandGamedata<
+  GAMEDATA["ARMOR"],
+  [armorId: number]
+>;
+
 export type Operand_ActorStatus = OperandGamedata<
   GAMEDATA["ACTOR"],
   [index: number, param: ValueOf<typeof STATUS>]

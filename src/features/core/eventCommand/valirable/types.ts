@@ -1,5 +1,9 @@
 export interface VariableParam {
   code: number;
   variableId: number;
-  paramIndex: number;
+}
+
+export interface VVV {
+  write: VariableParam[];
+  read: VariableParam[];
 }

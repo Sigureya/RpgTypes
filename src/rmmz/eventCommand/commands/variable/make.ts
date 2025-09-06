@@ -25,6 +25,8 @@ import type {
   Operand_EnemyStatus,
   ParamObject_Operand_ActorStatus,
   ParamObject_Operand_Enemy,
+  ParamObject_Operand_WeaponData,
+  Operand_WeaponData,
 } from "./types";
 
 interface MakeOtherParam {
@@ -88,6 +90,24 @@ export const makeCommandVariableFromItemData = (
     code: CONTROL_VARIABLES,
     indent: other.indent ?? 0,
     parameters: toArrayOperandItemData(target, value, other.operation ?? 0),
+  };
+};
+
+export const makeCommandVariableFromWeapon = (
+  target: ParamObject_WritingTarget,
+  value: ParamObject_Operand_WeaponData
+): Command_ControlVariables<Operand_WeaponData> => {
+  return {
+    code: CONTROL_VARIABLES,
+    indent: 0,
+    parameters: [
+      target.startId,
+      target.endId ?? target.startId,
+      0,
+      3,
+      1,
+      value.weaponId,
+    ],
   };
 };
 
