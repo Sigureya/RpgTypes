@@ -1,14 +1,24 @@
 import { CONTROL_VARIABLES } from "@RpgTypes/rmmz/rpg";
-import { toArrayOperandConstant, toArrayOperandVariable } from "./convert";
+import { OPERAND_CONSTANT } from "./constants/operand";
 import type {
   Command_ControlVariables,
   Operand_Constatant,
-  Operand_Variable,
   ParamObject_Operand_Constant,
-  ParamObject_Operand_Variable,
   ParamObject_WritingTarget,
 } from "./types";
 import type { MakeOtherParam } from "./types/other";
+
+export const toArrayOperandConstant = (
+  target: ParamObject_WritingTarget,
+  value: ParamObject_Operand_Constant,
+  operation: number = 0
+): Operand_Constatant => [
+  target.startId,
+  target.endId ?? target.startId,
+  operation,
+  OPERAND_CONSTANT,
+  value.value,
+];
 
 export const makeCommandVariableFromConstant = (
   target: ParamObject_WritingTarget,
@@ -19,17 +29,5 @@ export const makeCommandVariableFromConstant = (
     code: CONTROL_VARIABLES,
     indent: other.indent ?? 0,
     parameters: toArrayOperandConstant(target, value, other.operation ?? 0),
-  };
-};
-
-export const makeCommandVariableFromVariable = (
-  target: ParamObject_WritingTarget,
-  value: ParamObject_Operand_Variable,
-  other: MakeOtherParam = {}
-): Command_ControlVariables<Operand_Variable> => {
-  return {
-    code: CONTROL_VARIABLES,
-    indent: other.indent ?? 0,
-    parameters: toArrayOperandVariable(target, value, other.operation ?? 0),
   };
 };

@@ -6,11 +6,7 @@ import type {
   Operand_Script,
   Command_ControlVariables,
 } from "./types";
-
-interface MakeOtherParam {
-  indent?: number;
-  operation?: number;
-}
+import type { MakeOtherParam } from "./types/other";
 
 export const toArrayOperandScript = (
   target: ParamObject_WritingTarget,
