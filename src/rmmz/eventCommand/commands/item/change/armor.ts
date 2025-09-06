@@ -1,10 +1,10 @@
 import { CHANGE_ARMORS } from "@RpgTypes/rmmz/rpg";
 import type {
-  Command_ChangeArmors,
-  ParamArray_ChangeArmors,
   ParamObject_ChangeArmors,
-  ParamObject_GainArmor,
-  ParamObject_GainArmorV,
+  ParamObject_ChangeArmorsV,
+  Command_ChangeArmorsByVariable,
+  Command_ChangeArmorsDirect,
+  Command_ChangeArmors,
 } from "./types/armor";
 import {
   OPERAND_DIRECT,
@@ -13,36 +13,18 @@ import {
   OPERATION_LOSE,
 } from "./types/constants";
 
-export const makeCommandChangeArmors = (
-  param: ParamObject_ChangeArmors,
-  indent: number = 0
-): Command_ChangeArmors => ({
-  code: CHANGE_ARMORS,
-  parameters: [
-    param.operation,
-    param.armorId,
-    param.value,
-    param.operand,
-    param.includesEquip,
-  ],
-  indent,
-});
-
-export const fromArrayChangeArmors = (
-  arr: ParamArray_ChangeArmors
-): ParamObject_ChangeArmors => ({
-  operation: arr[0],
-  armorId: arr[1],
-  value: arr[2],
-  operand: arr[3],
-  includesEquip: arr[4],
-});
+export const isUsingVaribleCommandChangingItems = (
+  command: Command_ChangeArmors
+): command is Command_ChangeArmorsByVariable => {
+  return command.parameters[3] === OPERAND_VARIABLE;
+};
 
 export const makeCommandGainArmor = (
-  param: ParamObject_GainArmor,
+  param: ParamObject_ChangeArmors,
   indent: number = 0
-): Command_ChangeArmors => ({
+): Command_ChangeArmorsDirect => ({
   code: CHANGE_ARMORS,
+  indent,
   parameters: [
     OPERATION_GAIN,
     param.armorId,
@@ -50,14 +32,14 @@ export const makeCommandGainArmor = (
     OPERAND_DIRECT,
     false,
   ],
-  indent,
 });
 
-export const makeCommandGainArmorV = (
-  param: ParamObject_GainArmorV,
+export const makeCommandGainArmorByVariable = (
+  param: ParamObject_ChangeArmorsV,
   indent: number = 0
-): Command_ChangeArmors => ({
+): Command_ChangeArmorsByVariable => ({
   code: CHANGE_ARMORS,
+  indent,
   parameters: [
     OPERATION_GAIN,
     param.armorId,
@@ -65,14 +47,14 @@ export const makeCommandGainArmorV = (
     OPERAND_VARIABLE,
     false,
   ],
-  indent,
 });
 
 export const makeCommandLoseArmor = (
-  param: ParamObject_GainArmor,
+  param: ParamObject_ChangeArmors,
   indent: number = 0
-): Command_ChangeArmors => ({
+): Command_ChangeArmorsDirect => ({
   code: CHANGE_ARMORS,
+  indent,
   parameters: [
     OPERATION_LOSE,
     param.armorId,
@@ -80,14 +62,14 @@ export const makeCommandLoseArmor = (
     OPERAND_DIRECT,
     false,
   ],
-  indent,
 });
 
-export const makeCommandLoseArmorV = (
-  param: ParamObject_GainArmorV,
+export const makeCommandLoseArmorByVariable = (
+  param: ParamObject_ChangeArmorsV,
   indent: number = 0
-): Command_ChangeArmors => ({
+): Command_ChangeArmorsByVariable => ({
   code: CHANGE_ARMORS,
+  indent,
   parameters: [
     OPERATION_LOSE,
     param.armorId,
@@ -95,5 +77,4 @@ export const makeCommandLoseArmorV = (
     OPERAND_VARIABLE,
     false,
   ],
-  indent,
 });

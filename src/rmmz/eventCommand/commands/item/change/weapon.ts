@@ -11,7 +11,15 @@ import type {
   ParamObject_ChangeWeaponsFullset,
   ParamObject_ChangeWeapons,
   ParamObject_ChangeWeaponsV,
+  Command_ChangeWeaponsDirect,
+  Command_ChangeWeaponsByVariable,
 } from "./types/weapon";
+
+export const isCommandChangeWeaponsUsingVariable = (
+  command: Command_ChangeWeapons
+): command is Command_ChangeWeaponsByVariable => {
+  return command.parameters[3] === OPERAND_VARIABLE;
+};
 
 export const fromArrayChangeWeapons = (
   arr: ParamArray_ChangeWeapons
@@ -41,8 +49,9 @@ export const makeCommandChangeWeapons = (
 export const makeCommandGainWeapon = (
   param: ParamObject_ChangeWeapons,
   indent: number = 0
-): Command_ChangeWeapons => ({
+): Command_ChangeWeaponsDirect => ({
   code: CHANGE_WEAPONS,
+  indent,
   parameters: [
     OPERATION_GAIN,
     param.weaponId,
@@ -50,13 +59,14 @@ export const makeCommandGainWeapon = (
     OPERAND_DIRECT,
     false,
   ],
-  indent,
 });
+
 export const makeCommandGainWeaponV = (
   param: ParamObject_ChangeWeaponsV,
   indent: number = 0
-): Command_ChangeWeapons => ({
+): Command_ChangeWeaponsByVariable => ({
   code: CHANGE_WEAPONS,
+  indent,
   parameters: [
     OPERATION_GAIN,
     param.weaponId,
@@ -64,14 +74,14 @@ export const makeCommandGainWeaponV = (
     OPERAND_VARIABLE,
     false,
   ],
-  indent,
 });
 
 export const makeCommandLoseWeapon = (
   param: ParamObject_ChangeWeapons,
   indent: number = 0
-): Command_ChangeWeapons => ({
+): Command_ChangeWeaponsDirect => ({
   code: CHANGE_WEAPONS,
+  indent,
   parameters: [
     OPERATION_LOSE,
     param.weaponId,
@@ -79,14 +89,14 @@ export const makeCommandLoseWeapon = (
     OPERAND_DIRECT,
     false,
   ],
-  indent,
 });
 
 export const makeCommandLoseWeaponV = (
   param: ParamObject_ChangeWeaponsV,
   indent: number = 0
-): Command_ChangeWeapons => ({
+): Command_ChangeWeaponsByVariable => ({
   code: CHANGE_WEAPONS,
+  indent,
   parameters: [
     OPERATION_LOSE,
     param.weaponId,
@@ -94,5 +104,4 @@ export const makeCommandLoseWeaponV = (
     OPERAND_VARIABLE,
     false,
   ],
-  indent,
 });
