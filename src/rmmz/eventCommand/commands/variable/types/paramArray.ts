@@ -1,7 +1,7 @@
 import type { ValueOf } from "src/libs/templates/valueOf";
 import type { STATUS } from "./actor/dataSource";
-import type { CHARACTER } from "./character/dataSource";
 import type { VARIABLE_SRC_LAST } from "./last/dataSource";
+import type { CHARACTER_DATA_SOURCE } from "./mapCharacter/dataSource";
 import type { GAMEDATA, OPERAND, OTHER } from "./operand";
 type Header = [startId: number, endId: number, operationType: number];
 
@@ -55,7 +55,7 @@ export type Operand_EnemyStatus = OperandGamedata<
 
 export type Operand_CharacterData = OperandGamedata<
   GAMEDATA["CHARACTER"],
-  [id: number, param: ValueOf<typeof CHARACTER>]
+  [id: number, param: ValueOf<typeof CHARACTER_DATA_SOURCE>]
 >;
 
 export type Operand_PartyData = OperandGamedata<

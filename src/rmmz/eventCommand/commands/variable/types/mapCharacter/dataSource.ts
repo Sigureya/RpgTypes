@@ -1,4 +1,4 @@
-export const CHARACTER = {
+export const CHARACTER_DATA_SOURCE = {
   X: 0,
   Y: 1,
   DIRECTION: 2,
