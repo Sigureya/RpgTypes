@@ -1,10 +1,9 @@
 import { CHANGE_ARMORS } from "@RpgTypes/rmmz/rpg";
 import type {
-  Command_ChangeArmors,
-  ParamArray_ChangeArmors,
   ParamObject_ChangeArmors,
-  ParamObject_GainArmor,
-  ParamObject_GainArmorV,
+  ParamObject_ChangeArmorsV,
+  Command_ChangeArmorsByVariable,
+  Command_ChangeArmorsDirect,
 } from "./types/armor";
 import {
   OPERAND_DIRECT,
@@ -13,35 +12,10 @@ import {
   OPERATION_LOSE,
 } from "./types/constants";
 
-export const makeCommandChangeArmors = (
+export const makeCommandGainArmor = (
   param: ParamObject_ChangeArmors,
   indent: number = 0
-): Command_ChangeArmors => ({
-  code: CHANGE_ARMORS,
-  parameters: [
-    param.operation,
-    param.armorId,
-    param.value,
-    param.operand,
-    param.includesEquip,
-  ],
-  indent,
-});
-
-export const fromArrayChangeArmors = (
-  arr: ParamArray_ChangeArmors
-): ParamObject_ChangeArmors => ({
-  operation: arr[0],
-  armorId: arr[1],
-  value: arr[2],
-  operand: arr[3],
-  includesEquip: arr[4],
-});
-
-export const makeCommandGainArmor = (
-  param: ParamObject_GainArmor,
-  indent: number = 0
-): Command_ChangeArmors => ({
+): Command_ChangeArmorsDirect => ({
   code: CHANGE_ARMORS,
   parameters: [
     OPERATION_GAIN,
@@ -54,9 +28,9 @@ export const makeCommandGainArmor = (
 });
 
 export const makeCommandGainArmorV = (
-  param: ParamObject_GainArmorV,
+  param: ParamObject_ChangeArmorsV,
   indent: number = 0
-): Command_ChangeArmors => ({
+): Command_ChangeArmorsByVariable => ({
   code: CHANGE_ARMORS,
   parameters: [
     OPERATION_GAIN,
@@ -69,9 +43,9 @@ export const makeCommandGainArmorV = (
 });
 
 export const makeCommandLoseArmor = (
-  param: ParamObject_GainArmor,
+  param: ParamObject_ChangeArmors,
   indent: number = 0
-): Command_ChangeArmors => ({
+): Command_ChangeArmorsDirect => ({
   code: CHANGE_ARMORS,
   parameters: [
     OPERATION_LOSE,
@@ -84,9 +58,9 @@ export const makeCommandLoseArmor = (
 });
 
 export const makeCommandLoseArmorV = (
-  param: ParamObject_GainArmorV,
+  param: ParamObject_ChangeArmorsV,
   indent: number = 0
-): Command_ChangeArmors => ({
+): Command_ChangeArmorsByVariable => ({
   code: CHANGE_ARMORS,
   parameters: [
     OPERATION_LOSE,
