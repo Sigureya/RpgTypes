@@ -1,4 +1,3 @@
-import type { EventCommandLike } from "@RpgTypes/rmmz/eventCommand/frame";
 import { CHANGE_ITEMS } from "@RpgTypes/rmmz/rpg";
 import {
   OPERAND_DIRECT,
@@ -12,9 +11,8 @@ import type {
   ParamObject_ChangeItemsFullset,
   ParamObject_ChangeItems,
   ParamObject_ChangeItemsV,
-  ParamArray_ChangeItemsVariable,
-  ParamArray_ChangeItemsDirect,
   Command_ChangeItemsByVariable,
+  Command_ChangeItemsDirect,
 } from "./types/item";
 
 export const fromArrayChangeItems = (
@@ -38,7 +36,7 @@ export const makeCommandChangeItems = (
 export const makeCommandGainItem = (
   param: ParamObject_ChangeItems,
   indent: number = 0
-): Command_ChangeItems => ({
+): Command_ChangeItemsDirect => ({
   code: CHANGE_ITEMS,
   indent,
   parameters: [OPERATION_GAIN, param.itemId, param.value, OPERAND_DIRECT],
@@ -61,18 +59,18 @@ export const makeCommandGainItemV = (
 export const makeCommandLoseItem = (
   param: ParamObject_ChangeItems,
   indent: number = 0
-): EventCommandLike<typeof CHANGE_ITEMS, ParamArray_ChangeItemsDirect> =>
-  ({
+): Command_ChangeItemsDirect => {
+  return {
     code: CHANGE_ITEMS,
     indent,
     parameters: [OPERATION_LOSE, param.itemId, param.value, OPERAND_DIRECT],
-  } satisfies Command_ChangeItems);
-
+  };
+};
 export const makeCommandLoseItemV = (
   param: ParamObject_ChangeItemsV,
   indent: number = 0
-): EventCommandLike<typeof CHANGE_ITEMS, ParamArray_ChangeItemsVariable> =>
-  ({
+): Command_ChangeItemsByVariable => {
+  return {
     code: CHANGE_ITEMS,
     indent,
     parameters: [
@@ -81,7 +79,8 @@ export const makeCommandLoseItemV = (
       param.variableId,
       OPERAND_VARIABLE,
     ],
-  } satisfies Command_ChangeItems);
+  };
+};
 
 export const isUsingVaribleCommandChangingItems = (
   command: Command_ChangeItems
