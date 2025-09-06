@@ -1,4 +1,4 @@
-export declare const CHARACTER: {
+export declare const CHARACTER_DATA_SOURCE: {
     readonly X: 0;
     readonly Y: 1;
     readonly DIRECTION: 2;

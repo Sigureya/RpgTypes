@@ -1,7 +1,7 @@
 import { ValueOf } from 'src/libs/templates/valueOf';
 import { STATUS } from './actor/dataSource';
-import { CHARACTER } from './character/dataSource';
 import { VARIABLE_SRC_LAST } from './last/dataSource';
+import { CHARACTER_DATA_SOURCE } from './mapCharacter/dataSource';
 import { GAMEDATA, OPERAND, OTHER } from './operand';
 type Header = [startId: number, endId: number, operationType: number];
 type Operand<Code extends number, Params extends unknown[]> = [
@@ -22,6 +22,12 @@ type OperandGamedata<DataType extends number, Params extends unknown[]> = Operan
 export type Operand_ItemData = OperandGamedata<GAMEDATA["ITEM"] | GAMEDATA["WEAPON"] | GAMEDATA["ARMOR"], [
     itemId: number
 ]>;
+export type Operand_WeaponData = OperandGamedata<GAMEDATA["WEAPON"], [
+    weaponId: number
+]>;
+export type Operand_ArmorData = OperandGamedata<GAMEDATA["ARMOR"], [
+    armorId: number
+]>;
 export type Operand_ActorStatus = OperandGamedata<GAMEDATA["ACTOR"], [
     index: number,
     param: ValueOf<typeof STATUS>
@@ -32,7 +38,7 @@ export type Operand_EnemyStatus = OperandGamedata<GAMEDATA["ENEMY"], [
 ]>;
 export type Operand_CharacterData = OperandGamedata<GAMEDATA["CHARACTER"], [
     id: number,
-    param: ValueOf<typeof CHARACTER>
+    param: ValueOf<typeof CHARACTER_DATA_SOURCE>
 ]>;
 export type Operand_PartyData = OperandGamedata<GAMEDATA["PARTY"], [
     index: number
