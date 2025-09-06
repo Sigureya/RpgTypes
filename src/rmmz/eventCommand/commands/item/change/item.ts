@@ -15,6 +15,12 @@ import type {
   Command_ChangeItemsDirect,
 } from "./types/item";
 
+export const isUsingVaribleCommandChangingItems = (
+  command: Command_ChangeItems
+): command is Command_ChangeItemsByVariable => {
+  return command.parameters[3] === OPERAND_VARIABLE;
+};
+
 export const fromArrayChangeItems = (
   arr: ParamArray_ChangeItems
 ): ParamObject_ChangeItemsFullset => ({
@@ -80,10 +86,4 @@ export const makeCommandLoseItemV = (
       OPERAND_VARIABLE,
     ],
   };
-};
-
-export const isUsingVaribleCommandChangingItems = (
-  command: Command_ChangeItems
-): command is Command_ChangeItemsByVariable => {
-  return command.parameters[3] === OPERAND_VARIABLE;
 };
