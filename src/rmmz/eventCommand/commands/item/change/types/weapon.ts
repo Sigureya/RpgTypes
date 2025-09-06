@@ -5,17 +5,17 @@ import type { OPERAND_DIRECT, OPERAND_VARIABLE } from "./constants";
 
 export type Command_ChangeWeapons = EventCommandLike<
   typeof CHANGE_WEAPONS,
-  ParamArray_ChangeWeaponsVariable | ParamArray_ChangeWeaponsDirect
+  ParamArray_ChangeWeapons
 >;
 
 export interface Command_ChangeWeaponsByVariable
   extends EventCommandLike<typeof CHANGE_WEAPONS> {
-  parameters: ParamArray_ChangeWeaponsVariable;
+  parameters: ParamArray_GainWeaponsVariable | ParamArray_LoseWeaponVariable;
 }
 
 export interface Command_ChangeWeaponsDirect
   extends EventCommandLike<typeof CHANGE_WEAPONS> {
-  parameters: ParamArray_ChangeWeaponsDirect;
+  parameters: ParamArray_GainWeaponsDirect | ParamArray_LoseWeaponsDirect;
 }
 
 export interface ParamObject_ChangeWeaponsFullset {
@@ -27,24 +27,43 @@ export interface ParamObject_ChangeWeaponsFullset {
 }
 
 export type ParamArray_ChangeWeapons =
-  | ParamArray_ChangeWeaponsDirect
-  | ParamArray_ChangeWeaponsVariable;
+  | ParamArray_GainWeaponsDirect
+  | ParamArray_LoseWeaponsDirect
+  | ParamArray_GainWeaponsVariable
+  | ParamArray_LoseWeaponVariable;
 
-export type ParamArray_ChangeWeaponsDirect = [
-  operation: ValueOf<Operation_PlusMinus>,
+export type ParamArray_ChangeWeapons2<
+  T extends {
+    operation: ValueOf<Operation_PlusMinus>;
+    operand: typeof OPERAND_DIRECT | typeof OPERAND_VARIABLE;
+  }
+> = [
+  operation: T["operation"],
   weaponId: number,
   value: number,
-  direct: typeof OPERAND_DIRECT,
+  operand: T["operand"],
   includesEquip: boolean
 ];
 
-export type ParamArray_ChangeWeaponsVariable = [
-  operation: ValueOf<Operation_PlusMinus>,
-  weaponId: number,
-  value: number,
-  byVariable: typeof OPERAND_VARIABLE,
-  includesEquip: boolean
-];
+export type ParamArray_GainWeaponsDirect = ParamArray_ChangeWeapons2<{
+  operation: Operation_PlusMinus["PLUS"];
+  operand: typeof OPERAND_DIRECT;
+}>;
+
+export type ParamArray_LoseWeaponsDirect = ParamArray_ChangeWeapons2<{
+  operation: Operation_PlusMinus["MINUS"];
+  operand: typeof OPERAND_DIRECT;
+}>;
+
+export type ParamArray_GainWeaponsVariable = ParamArray_ChangeWeapons2<{
+  operation: Operation_PlusMinus["PLUS"];
+  operand: typeof OPERAND_VARIABLE;
+}>;
+
+export type ParamArray_LoseWeaponVariable = ParamArray_ChangeWeapons2<{
+  operation: Operation_PlusMinus["MINUS"];
+  operand: typeof OPERAND_VARIABLE;
+}>;
 
 export interface ParamObject_ChangeWeapons {
   weaponId: number;
