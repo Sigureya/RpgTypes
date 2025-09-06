@@ -4,6 +4,7 @@ import type {
   ParamObject_ChangeArmorsV,
   Command_ChangeArmorsByVariable,
   Command_ChangeArmorsDirect,
+  Command_ChangeArmors,
 } from "./types/armor";
 import {
   OPERAND_DIRECT,
@@ -11,6 +12,12 @@ import {
   OPERATION_GAIN,
   OPERATION_LOSE,
 } from "./types/constants";
+
+export const isUsingVaribleCommandChangingItems = (
+  command: Command_ChangeArmors
+): command is Command_ChangeArmorsByVariable => {
+  return command.parameters[3] === OPERAND_VARIABLE;
+};
 
 export const makeCommandGainArmor = (
   param: ParamObject_ChangeArmors,

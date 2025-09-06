@@ -5,6 +5,7 @@ import {
   makeCommandGainArmorV,
   makeCommandLoseArmor,
   makeCommandLoseArmorV,
+  isUsingVaribleCommandChangingItems,
 } from "./armor";
 import type {
   Command_ChangeArmors,
@@ -19,53 +20,69 @@ import {
 } from "./types/constants";
 
 describe("makeCommandGainArmor", () => {
+  const param: ParamObject_ChangeArmors = { armorId: 42, value: 5 };
+  const expected: Command_ChangeArmors = {
+    code: CHANGE_ARMORS,
+    parameters: [OPERATION_GAIN, 42, 5, OPERAND_DIRECT, false],
+    indent: 0,
+  };
   test("creates command with direct operand", () => {
-    const param: ParamObject_ChangeArmors = { armorId: 42, value: 5 };
-    const expected: Command_ChangeArmors = {
-      code: CHANGE_ARMORS,
-      parameters: [OPERATION_GAIN, 42, 5, OPERAND_DIRECT, false],
-      indent: 0,
-    };
     const result = makeCommandGainArmor(param);
     expect(result).toEqual(expected);
+  });
+  test("is not using variable", () => {
+    const result = makeCommandGainArmor(param);
+    expect(result).toSatisfy(isUsingVaribleCommandChangingItems);
   });
 });
 
 describe("makeCommandGainArmorV", () => {
+  const param: ParamObject_ChangeArmorsV = { armorId: 42, variableId: 7 };
+  const expected: Command_ChangeArmors = {
+    code: CHANGE_ARMORS,
+    parameters: [OPERATION_GAIN, 42, 7, OPERAND_VARIABLE, false],
+    indent: 0,
+  };
   test("creates command with variable operand", () => {
-    const param: ParamObject_ChangeArmorsV = { armorId: 42, variableId: 7 };
-    const expected: Command_ChangeArmors = {
-      code: CHANGE_ARMORS,
-      parameters: [OPERATION_GAIN, 42, 7, OPERAND_VARIABLE, false],
-      indent: 0,
-    };
     const result = makeCommandGainArmorV(param);
     expect(result).toEqual(expected);
+  });
+  test("is using variable", () => {
+    const result = makeCommandGainArmorV(param);
+    expect(result).toSatisfy(isUsingVaribleCommandChangingItems);
   });
 });
 
 describe("makeCommandLoseArmor", () => {
+  const param: ParamObject_ChangeArmors = { armorId: 88, value: 1 };
+  const expected: Command_ChangeArmors = {
+    code: CHANGE_ARMORS,
+    parameters: [OPERATION_LOSE, 88, 1, OPERAND_DIRECT, false],
+    indent: 0,
+  };
   test("creates command with direct operand", () => {
-    const param: ParamObject_ChangeArmors = { armorId: 88, value: 1 };
-    const expected: Command_ChangeArmors = {
-      code: CHANGE_ARMORS,
-      parameters: [OPERATION_LOSE, 88, 1, OPERAND_DIRECT, false],
-      indent: 0,
-    };
     const result = makeCommandLoseArmor(param);
     expect(result).toEqual(expected);
+  });
+  test("is not using variable", () => {
+    const result = makeCommandLoseArmor(param);
+    expect(result).not.toSatisfy(isUsingVaribleCommandChangingItems);
   });
 });
 
 describe("makeCommandLoseArmorV", () => {
+  const param: ParamObject_ChangeArmorsV = { armorId: 55, variableId: 3 };
+  const expected: Command_ChangeArmors = {
+    code: CHANGE_ARMORS,
+    parameters: [OPERATION_LOSE, 55, 3, OPERAND_VARIABLE, false],
+    indent: 5,
+  };
   test("creates command with variable operand", () => {
-    const param: ParamObject_ChangeArmorsV = { armorId: 55, variableId: 3 };
-    const expected: Command_ChangeArmors = {
-      code: CHANGE_ARMORS,
-      parameters: [OPERATION_LOSE, 55, 3, OPERAND_VARIABLE, false],
-      indent: 5,
-    };
     const result = makeCommandLoseArmorV(param, 5);
     expect(result).toEqual(expected);
+  });
+  test("is using variable", () => {
+    const result = makeCommandLoseArmorV(param, 5);
+    expect(result).toSatisfy(isUsingVaribleCommandChangingItems);
   });
 });
