@@ -1,4 +1,4 @@
-import { TYPE_WEAPON, TYPE_ARMOR } from "./constants";
+import { TYPE_WEAPON, TYPE_ARMOR, TYPE_ITEM } from "./constants";
 import {
   OPERAND_CONSTANT,
   OPERAND_GAMEDATA,
@@ -52,6 +52,7 @@ export const toArrayOperandVariable = (
   OPERAND_VARIABLE,
   value.variableId,
 ];
+
 export const toArrayOperandRandom = (
   target: ParamObject_WritingTarget,
   value: ParamObject_Operand_Random,
@@ -76,6 +77,7 @@ export const toArrayOperandScript = (
   OPERAND_SCRIPT,
   value.code,
 ];
+
 export const toArrayOperandItemData = (
   target: ParamObject_WritingTarget,
   value: ParamObject_Operand_ItemData,
@@ -85,7 +87,7 @@ export const toArrayOperandItemData = (
   target.endId ?? target.startId,
   operation,
   OPERAND_GAMEDATA,
-  value.type,
+  TYPE_ITEM,
   value.itemId,
 ];
 

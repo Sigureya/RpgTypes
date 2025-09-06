@@ -80,13 +80,13 @@ const testCases: TestCase[] = [
     command: {
       input: makeCommandVariableFromItemData(
         { startId: 10, endId: 10 },
-        { itemId: 321, type: 1 },
+        { itemId: 321 },
         { indent: 6 }
       ),
       expected: {
         code: 122,
         indent: 6,
-        parameters: [10, 10, 0, 3, 1, 321] satisfies Operand_ItemData,
+        parameters: [10, 10, 0, 3, 0, 321] satisfies Operand_ItemData,
       },
     },
     expectedResult: {

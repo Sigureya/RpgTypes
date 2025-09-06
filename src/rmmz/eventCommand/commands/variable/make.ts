@@ -7,6 +7,8 @@ import {
   toArrayOperandActorStatus,
   toArrayOperandVariable,
   toArrayOperandEnemyStatus,
+  toArrayOperandWeaponData,
+  toArrayOperandArmorData,
 } from "./convert";
 import type {
   Command_ControlVariables,
@@ -15,18 +17,20 @@ import type {
   Operand_Random,
   Operand_Script,
   Operand_ItemData,
+  Operand_ActorStatus,
+  Operand_EnemyStatus,
   ParamObject_Operand_Constant,
   ParamObject_Operand_Variable,
   ParamObject_Operand_Random,
   ParamObject_WritingTarget,
   ParamObject_Operand_Script,
   ParamObject_Operand_ItemData,
-  Operand_ActorStatus,
-  Operand_EnemyStatus,
   ParamObject_Operand_ActorStatus,
   ParamObject_Operand_Enemy,
   ParamObject_Operand_WeaponData,
   Operand_WeaponData,
+  Operand_ArmorData,
+  ParamObject_Operand_ArmorData,
 } from "./types";
 
 interface MakeOtherParam {
@@ -57,6 +61,7 @@ export const makeCommandVariableFromVariable = (
     parameters: toArrayOperandVariable(target, value, other.operation ?? 0),
   };
 };
+
 export const makeCommandVariableFromRandom = (
   target: ParamObject_WritingTarget,
   value: ParamObject_Operand_Random,
@@ -100,14 +105,18 @@ export const makeCommandVariableFromWeapon = (
   return {
     code: CONTROL_VARIABLES,
     indent: 0,
-    parameters: [
-      target.startId,
-      target.endId ?? target.startId,
-      0,
-      3,
-      1,
-      value.weaponId,
-    ],
+    parameters: toArrayOperandWeaponData(target, value, 0),
+  };
+};
+
+export const makeCommandVariableFromArmor = (
+  target: ParamObject_WritingTarget,
+  value: ParamObject_Operand_ArmorData
+): Command_ControlVariables<Operand_ArmorData> => {
+  return {
+    code: CONTROL_VARIABLES,
+    indent: 0,
+    parameters: toArrayOperandArmorData(target, value, 0),
   };
 };
 
