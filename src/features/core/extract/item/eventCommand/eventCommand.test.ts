@@ -7,9 +7,9 @@ import type {
 } from "@RpgTypes/rmmz/eventCommand/commands/item/change";
 import {
   makeCommandGainArmor,
-  makeCommandGainArmorV,
+  makeCommandGainArmorByVariable,
   makeCommandLoseArmor,
-  makeCommandLoseArmorV,
+  makeCommandLoseArmorByVariable,
   makeCommandLoseItem,
 } from "@RpgTypes/rmmz/eventCommand/commands/item/change";
 import { extractItemChangeData, extractItemCommands } from "./eventCommand";
@@ -53,7 +53,7 @@ const testCase: TestCase[] = [
   },
   {
     caseName: "variable operand",
-    command: makeCommandGainArmorV({ armorId: 123, variableId: 33 }),
+    command: makeCommandGainArmorByVariable({ armorId: 123, variableId: 33 }),
     expected: {
       itemKind: "armor",
       dataId: 123,
@@ -81,7 +81,7 @@ const testCase: TestCase[] = [
   },
   {
     caseName: "variable operand",
-    command: makeCommandLoseArmorV({ armorId: 123, variableId: 56 }),
+    command: makeCommandLoseArmorByVariable({ armorId: 123, variableId: 56 }),
     expected: {
       itemKind: "armor",
       dataId: 123,
