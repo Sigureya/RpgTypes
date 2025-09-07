@@ -1,12 +1,34 @@
 import type { EventCommandLike } from "@RpgTypes/rmmz/eventCommand/frame";
+import type { BATTLE_PROCESSING } from "@RpgTypes/rmmz/rpg";
 import type {
   BATTLE_DIRECT,
   BATTLE_ENCOUNT,
   BATTLE_VARIABLE,
 } from "./constants";
 
-export interface Command_BattleProcessing extends EventCommandLike<301> {
+export interface Command_BattleProcessing
+  extends EventCommandLike<typeof BATTLE_PROCESSING> {
   parameters: ParamArray_BattleProcessing;
+}
+
+export type Command_BattleProcessing_Variable = EventCommandLike<
+  typeof BATTLE_PROCESSING,
+  ParamArray_BattleProcessing_Variable
+>;
+
+export interface ParamObject_BattleBase {
+  canEscape: boolean;
+  canLose: boolean;
+}
+
+export interface ParamObject_BattleProcessing_Direct
+  extends Partial<ParamObject_BattleBase> {
+  troopId: number;
+}
+
+export interface ParamObject_BattleProcessing_Variable
+  extends Partial<ParamObject_BattleBase> {
+  variableId: number;
 }
 
 export type ParamArray_BattleProcessing =
