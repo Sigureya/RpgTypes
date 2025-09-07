@@ -6,4 +6,9 @@ export interface Command_EnemyRecoverAll
   parameters: ParamArray_EnemyRecoverAll;
 }
 
-export type ParamArray_EnemyRecoverAll = [];
+export interface Command_EnemyRecoverAllEach
+  extends EventCommandLike<typeof ENEMY_RECOVER_ALL> {
+  parameters: [0];
+}
+
+export type ParamArray_EnemyRecoverAll = [enemyIndex: number];
