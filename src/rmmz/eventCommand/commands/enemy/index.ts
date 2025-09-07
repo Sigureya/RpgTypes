@@ -19,6 +19,7 @@ export type {
   Command_EnemyRecoverAll,
   ParamArray_EnemyRecoverAll,
 } from "./recoverAll/types";
+
 export type {
   Command_EnemyTransform,
   ParamArray_EnemyTransfrom,
@@ -34,3 +35,7 @@ export {
   makeCommandRemoveEachEnemyState,
   makeCommandRemoveEnemyState,
 } from "./state/state";
+export {
+  makeCommandEnemyRecoverAll,
+  makeCommandEnemyRecoverAllEach,
+} from "./recoverAll/recoverAll";
