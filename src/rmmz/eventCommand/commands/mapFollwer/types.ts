@@ -1,8 +1,10 @@
 import type { ValueOf } from "@RpgTypes/libs/templates/valueOf";
-import type { Toggle } from "@RpgTypes/rmmz/rpg";
+import type { CHANGE_PLAYER_FOLLOWERS } from "@RpgTypes/rmmz/rpg";
+import type { Toggle } from "@RpgTypes/rmmz/utils";
 import type { EventCommandLike } from "../../frame";
 
-export interface Command_ChangePlayerFollowers extends EventCommandLike<216> {
+export interface Command_ChangePlayerFollowers
+  extends EventCommandLike<typeof CHANGE_PLAYER_FOLLOWERS> {
   parameters: ParamArray_ChangePlayerFollowers;
 }
 

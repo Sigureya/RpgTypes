@@ -1,8 +1,10 @@
 import type { ValueOf } from "@RpgTypes/libs/templates/valueOf";
-import type { Toggle } from "@RpgTypes/rmmz/rpg";
+import type { CHANGE_TRANSPARENCY } from "@RpgTypes/rmmz/rpg";
+import type { Toggle } from "@RpgTypes/rmmz/utils";
 import type { EventCommandLike } from "../../frame";
 
-export interface Command_ChangeTransparency extends EventCommandLike<211> {
+export interface Command_ChangeTransparency
+  extends EventCommandLike<typeof CHANGE_TRANSPARENCY> {
   parameters: ParamArray_ChangeTransparency;
 }
 

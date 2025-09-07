@@ -1,6 +1,6 @@
-import type { ValueOf } from "@RpgTypes/libs/templates/valueOf";
 import type { EventCommandLike } from "@RpgTypes/rmmz/eventCommand/frame";
-import type { CHANGE_WEAPONS, Operation_PlusMinus } from "@RpgTypes/rmmz/rpg";
+import type { CHANGE_WEAPONS } from "@RpgTypes/rmmz/rpg";
+import type { Operation_PlusMinus } from "@RpgTypes/rmmz/utils";
 import type { OPERAND_DIRECT, OPERAND_VARIABLE } from "./constants";
 
 export type Command_ChangeWeapons = EventCommandLike<
@@ -19,7 +19,7 @@ export interface Command_ChangeWeaponsDirect
 }
 
 export interface ParamObject_ChangeWeaponsFullset {
-  operation: ValueOf<Operation_PlusMinus>;
+  operation: Operation_PlusMinus["PLUS"] | Operation_PlusMinus["MINUS"];
   weaponId: number;
   value: number;
   operand: typeof OPERAND_DIRECT | typeof OPERAND_VARIABLE;
@@ -34,7 +34,7 @@ export type ParamArray_ChangeWeapons =
 
 export type ParamArray_ChangeWeaponsTemplate<
   T extends {
-    operation: ValueOf<Operation_PlusMinus>;
+    operation: Operation_PlusMinus["PLUS"] | Operation_PlusMinus["MINUS"];
     operand: typeof OPERAND_DIRECT | typeof OPERAND_VARIABLE;
   }
 > = [

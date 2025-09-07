@@ -1,6 +1,6 @@
 import type { ValueOf } from "@RpgTypes/libs/templates/valueOf";
 import type { EventCommandLike } from "@RpgTypes/rmmz/eventCommand/frame";
-import type { Designation, Operation_AddSub } from "@RpgTypes/rmmz/rpg";
+import type { Designation, Operation_AddSub } from "@RpgTypes/rmmz/utils";
 
 export type ParamArray_ChangeEnemyValue = [
   enemyId: number,
