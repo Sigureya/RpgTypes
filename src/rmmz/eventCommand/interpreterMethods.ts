@@ -78,7 +78,7 @@ import type { ParamArray_TransferPlayer } from "./commands/mapPlayer/transferPla
 import type { ParamArray_OpenMenu } from "./commands/menu/open/types";
 import type { ParamArray_PluginCommandMZ } from "./commands/mz";
 import type { ParamArray_ChangePartyMember } from "./commands/party/changeMember/types";
-import type { ParamArray_RecoverAll } from "./commands/party/types/recoverAll";
+import type { ParamArray_RecoverAll } from "./commands/actor/recoverAll/types";
 import type { ParamArray_ErasePicture } from "./commands/picture/erase/types";
 import type { ParamArray_ShakeScreen } from "./commands/screen/shake/types";
 import type { ParamArray_ChangeTileset } from "./commands/tileset/types";

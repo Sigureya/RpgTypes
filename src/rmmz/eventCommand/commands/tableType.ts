@@ -97,7 +97,7 @@ import type {
 import type { Command_NoOperation } from "./noOperation";
 import type { Command_ChangePartyMember } from "./party/changeMember/types";
 import type { Command_ChangeGold } from "./party/gold/changeGold";
-import type { Command_RecoverAll } from "./party/types/recoverAll";
+import type { Command_RecoverAll } from "./actor/recoverAll/types";
 import type {
   Command_MovePicture,
   Command_RotatePicture,
