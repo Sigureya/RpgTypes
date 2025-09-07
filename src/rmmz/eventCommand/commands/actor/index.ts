@@ -1,3 +1,4 @@
+export * from "./recoverAll/index";
 export type {
   CommandUnion_ChangeActorText,
   Command_ChangeActorName,
