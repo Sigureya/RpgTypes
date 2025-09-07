@@ -1,6 +1,7 @@
 import type { ValueOf } from "@RpgTypes/libs/templates/valueOf";
 import type { EventCommandLike } from "@RpgTypes/rmmz/eventCommand/frame";
-import type { CHANGE_GOLD, Operation_PlusMinus } from "@RpgTypes/rmmz/rpg";
+import type { CHANGE_GOLD } from "@RpgTypes/rmmz/rpg";
+import type { Operation_PlusMinus } from "@RpgTypes/rmmz/utils";
 
 export interface Command_ChangeGold
   extends EventCommandLike<typeof CHANGE_GOLD> {

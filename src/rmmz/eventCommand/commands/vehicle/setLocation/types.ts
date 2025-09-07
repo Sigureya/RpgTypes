@@ -1,6 +1,6 @@
 import type { ValueOf } from "@RpgTypes/libs/templates/valueOf";
 import type { EventCommandLike } from "@RpgTypes/rmmz/eventCommand/frame";
-import type { Designation } from "@RpgTypes/rmmz/rpg";
+import type { Designation } from "@RpgTypes/rmmz/utils";
 
 export interface Command_SetVehicleLocation extends EventCommandLike<202> {
   parameters: ParamArray_SetVehicleLocation;

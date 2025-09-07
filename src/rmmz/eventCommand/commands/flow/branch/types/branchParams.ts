@@ -1,4 +1,4 @@
-import type { Operation_PlusMinus, Toggle } from "@RpgTypes/rmmz/rpg";
+import type { Toggle, Operation_PlusMinus } from "@RpgTypes/rmmz/utils";
 import type { ValueOf } from "src/libs/templates/valueOf";
 import type { BranchCodeTable } from "./branch";
 

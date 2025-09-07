@@ -1,6 +1,7 @@
 import type { ValueOf } from "@RpgTypes/libs/templates/valueOf";
 import type { EventCommandLike } from "@RpgTypes/rmmz/eventCommand/frame";
-import type { Designation, GET_LOCATION_INFO } from "@RpgTypes/rmmz/rpg";
+import type { GET_LOCATION_INFO } from "@RpgTypes/rmmz/rpg";
+import type { Designation } from "@RpgTypes/rmmz/utils";
 
 export interface Command_GetLocationInfo
   extends EventCommandLike<typeof GET_LOCATION_INFO> {

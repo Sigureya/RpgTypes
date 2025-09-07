@@ -4,8 +4,8 @@ import type {
   CHANGE_MENU_ACCESS,
   CHANGE_SAVE_ACCESS,
   CHANGE_FORMATION_ACCESS,
-  Toggle,
 } from "@RpgTypes/rmmz/rpg";
+import type { Toggle } from "@RpgTypes/rmmz/utils";
 
 export type ParamArray_ChangeEnabled = [value: ValueOf<Toggle>];
 
