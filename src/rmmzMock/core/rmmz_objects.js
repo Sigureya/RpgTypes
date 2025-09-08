@@ -11300,3 +11300,4 @@ Game_Interpreter.prototype.command357 = function (params) {
 };
 
 //-----------------------------------------------------------------------------
+export { Game_Enemy };
