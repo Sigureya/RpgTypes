@@ -66,7 +66,7 @@ export interface TextManager_Interface {
   get obtainSkill(): string;
   get useItem(): string;
   get criticalToEnemy(): string;
-  get criticalToActorU(): string;
+  get criticalToActor(): string;
   get actorDamage(): string;
   get actorRecovery(): string;
   get actorGain(): string;
