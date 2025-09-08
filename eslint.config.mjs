@@ -140,9 +140,10 @@ export default [
     },
   },
   {
-    files: ["src/rmmzRuntime/**/*.ts"],
+    files: ["src/rmmzRuntime/**/*.ts", "src/rmmzMock/**/*.ts"],
     rules: {
       "@functional/no-return-void": "off",
+      "@typescript-eslint/ban-ts-comment": "off",
     },
   },
   {
