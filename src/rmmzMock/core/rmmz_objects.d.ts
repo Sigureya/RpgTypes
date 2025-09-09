@@ -1,1 +1,5 @@
-export { Game_Enemy } from "@RpgTypes/rmmzRuntime/objects/enemy";
+export {
+  Game_Enemy,
+  Game_Troop,
+  Game_Interpreter,
+} from "@RpgTypes/rmmzRuntime";
