@@ -5,8 +5,8 @@ import {
   makeParamArray,
   TRAIT_ATTACK_ELEMENT,
 } from "@RpgTypes/rmmz/rpg";
-import { Game_Enemy } from "@RpgTypes/rmmzMock/core/rmmz_objects";
 import "@RpgTypes/rmmzMock/prototypeOverwrite";
+import { Game_Enemy } from "./rmmz_objects";
 
 const mockDragon: Data_Enemy = makeEnemyData({
   name: "dragon",
