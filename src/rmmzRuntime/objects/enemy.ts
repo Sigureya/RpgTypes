@@ -2,8 +2,10 @@ import type {
   Data_AnyGoodsUnion,
   Enemy_Action,
   Data_Enemy,
+  Trait,
 } from "@RpgTypes/rmmz/rpg";
-import type { Rmmz_Enemy } from "@RpgTypes/rmmzRuntime/objects/battler/enemy";
+import type { Rmmz_Enemy } from "./core/battler/enemy";
+import type { Rmmz_Action } from "./core/types";
 
 export declare class Game_Enemy implements Partial<Rmmz_Enemy> {
   constructor(enemyId: number, x: number, y: number);
@@ -23,7 +25,7 @@ export declare class Game_Enemy implements Partial<Rmmz_Enemy> {
   //  opponentsUnit(): any;
   index(): number;
   isBattleMember(): boolean;
-  traitObjects(): any;
+  traitObjects(): Trait[];
   paramBase(paramId: number): number;
   exp(): number;
   gold(): number;
@@ -40,9 +42,10 @@ export declare class Game_Enemy implements Partial<Rmmz_Enemy> {
   isLetterEmpty(): boolean;
   setLetter(letter: string): void;
   setPlural(plural: boolean): void;
-  performActionStart(action: any): void;
-  performAction(action: any): void;
-  performActionEnd(action: any): void;
+  performActionStart(action: Rmmz_Action): void;
+  performAction(action: Rmmz_Action): void;
+  performActionEnd(action: Rmmz_Action): void;
+
   performDamage(): void;
   performCollapse(): void;
   transform(enemyId: number): void;
