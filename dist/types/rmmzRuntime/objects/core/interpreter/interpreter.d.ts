@@ -1,6 +1,7 @@
-import { EventCode } from '../../../rmmz/rpg';
+import { EventCode } from '../../../../rmmz/rpg';
 import { WaitMode } from './constants/types';
-export interface Rmmz_Interpreter<Coomand> {
+import { InterpreterMapper } from './types/interpreterMethods';
+export interface Rmmz_Interpreter<Coomand> extends InterpreterMapper {
     checkOverflow(): void;
     clear(): void;
     setup(list: Coomand[], eventId: number): void;
