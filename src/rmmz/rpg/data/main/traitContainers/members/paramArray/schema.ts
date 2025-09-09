@@ -1,5 +1,5 @@
 import type { JSONSchemaType } from "ajv";
-import type { ParamArray } from "./paramArray";
+import type { ParamArray } from "./types";
 
 const SCHEMA_PARAM_ARRAY = {
   type: "array",
