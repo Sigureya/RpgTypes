@@ -1,8 +1,4 @@
 import { ParamObject_WritingTarget, ParamObject_Operand_Script, Operand_Script, Command_ControlVariables } from './types';
-interface MakeOtherParam {
-    indent?: number;
-    operation?: number;
-}
+import { MakeOtherParam } from './types/other';
 export declare const toArrayOperandScript: (target: ParamObject_WritingTarget, value: ParamObject_Operand_Script, operation?: number) => Operand_Script;
 export declare const makeCommandVariableFromScript: (target: ParamObject_WritingTarget, value: ParamObject_Operand_Script, other?: MakeOtherParam) => Command_ControlVariables<Operand_Script>;
-export {};

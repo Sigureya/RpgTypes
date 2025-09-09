@@ -1,9 +1,10 @@
 export * from './constants';
-export * from './convert';
 export * from './types';
 export { getActorValue, getEnemyValue } from './getValue';
+export { isCommandOperandVariables } from './gameVariable';
 export { makeCommandVariableFromActorStatusData, toArrayOperandActorStatus, } from './actor';
 export { makeCommandVariableFromArmor, toArrayOperandArmorData } from './armor';
+export { makeCommandVariableFromConstant, toArrayOperandConstant, } from './literal';
 export { makeCommandVariableFromEnemyData, toArrayOperandEnemyStatus, } from './enemy';
 export { makeCommandVariableFromItemData, toArrayOperandItemData, } from './items';
 export { makeCommandVariableFromRandom, toArrayOperandRandom } from './random';

@@ -1,5 +1,5 @@
 import { ValueOf } from '../../../../libs/templates/valueOf';
-import { Toggle } from '../../../rpg';
+import { Toggle } from '../../../utils';
 import { EventCommandLike } from '../../frame';
 export interface Command_ShowAnimation extends EventCommandLike<212> {
     parameters: ParamArray_ShowAnimation;

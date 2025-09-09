@@ -1,0 +1,37 @@
+import { Data_Armor, Data_Item, Data_Map, Data_Skill, Data_Weapon } from '../../../rmmz/rpg';
+import { RpgDataTypes } from './dataTypes';
+import { DataFileInfo } from './types';
+export interface DataManager_Interface {
+    get _databaseFiles(): DataFileInfo[];
+    loadGlobalInfo(): void;
+    removeInvalidGlobalInfo(): void;
+    saveGlobalInfo(): void;
+    isGlobalInfoLoaded(): boolean;
+    loadDatabase(): void;
+    loadDataFile(name: string, src: string): void;
+    isDatabaseLoaded(): boolean;
+    loadMapData(mapId: number): void;
+    makeEmptyMap(): void;
+    isMapLoaded(): boolean;
+    onLoad(object: RpgDataTypes): void;
+    isMapObject(data: RpgDataTypes): data is Data_Map;
+    extractArrayMetadata(list: unknown): void;
+    extractMetadata(): void;
+    isBattleTest(): boolean;
+    isEventTest(): boolean;
+    isTitleSkip(): boolean;
+    isSkill(data: unknown): data is Data_Skill;
+    isItem(data: unknown): data is Data_Item;
+    isWeapon(data: unknown): data is Data_Weapon;
+    isArmor(data: unknown): data is Data_Armor;
+    createGameObjects(): void;
+    setupNewGame(): void;
+    setupBattleTest(): void;
+    setupEventTest(): void;
+    isAnySavefileExists(): boolean;
+    latestSavefileId(): number;
+    earliestSavefileId(): number;
+    emptySavefileId(): number;
+    loadGame(savefileId: number): Promise<number>;
+    saveGame(savefileId: number): Promise<void>;
+}

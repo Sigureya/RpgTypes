@@ -45,7 +45,7 @@ import { Command_GameOver, Command_GatherFollowers, Command_ReturnToTitleScreen,
 import { Command_NoOperation } from './noOperation';
 import { Command_ChangePartyMember } from './party/changeMember/types';
 import { Command_ChangeGold } from './party/gold/changeGold';
-import { Command_RecoverAll } from './party/types/recoverAll';
+import { Command_RecoverAll } from './actor/recoverAll/types';
 import { Command_MovePicture, Command_RotatePicture, Command_ShowPicture, Command_TintPicture } from './picture';
 import { Command_ErasePicture } from './picture/erase/types';
 import { Command_ShakeScreen } from './screen/shake/types';

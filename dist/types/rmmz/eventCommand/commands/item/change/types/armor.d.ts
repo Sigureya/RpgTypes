@@ -1,29 +1,55 @@
 import { ValueOf } from '../../../../../../libs/templates/valueOf';
 import { EventCommandLike } from '../../../../frame';
-import { CHANGE_ARMORS, Operation_PlusMinus } from '../../../../../rpg';
+import { CHANGE_ARMORS } from '../../../../../rpg';
+import { Operation_PlusMinus } from '../../../../../utils';
 import { OPERAND_DIRECT, OPERAND_VARIABLE } from './constants';
-export interface Command_ChangeArmors extends EventCommandLike<typeof CHANGE_ARMORS> {
-    parameters: ParamArray_ChangeArmors;
+export type Command_ChangeArmors = EventCommandLike<typeof CHANGE_ARMORS, ParamArray_ChangeArmors>;
+export interface Command_ChangeArmorsByVariable extends EventCommandLike<typeof CHANGE_ARMORS> {
+    parameters: ParamArray_GainArmorsVariable | ParamArray_LoseArmorVariable;
 }
-export type ParamArray_ChangeArmors = [
-    operation: ValueOf<Operation_PlusMinus>,
-    armorId: number,
-    value: number,
-    direct: typeof OPERAND_DIRECT | typeof OPERAND_VARIABLE,
-    includesEquip: boolean
-];
-export interface ParamObject_ChangeArmors {
+export interface Command_ChangeArmorsDirect extends EventCommandLike<typeof CHANGE_ARMORS> {
+    parameters: ParamArray_GainArmorsDirect | ParamArray_LoseArmorsDirect;
+}
+export interface ParamObject_ChangeArmorsFullset {
     operation: ValueOf<Operation_PlusMinus>;
-    armorId: number;
+    weaponId: number;
     value: number;
     operand: typeof OPERAND_DIRECT | typeof OPERAND_VARIABLE;
     includesEquip: boolean;
 }
-export interface ParamObject_GainArmor {
+export type ParamArray_ChangeArmors = ParamArray_GainArmorsDirect | ParamArray_LoseArmorsDirect | ParamArray_GainArmorsVariable | ParamArray_LoseArmorVariable;
+type ParamArray_ChangeArmorsTemplate<T extends {
+    operation: ValueOf<Operation_PlusMinus>;
+    operand: typeof OPERAND_DIRECT | typeof OPERAND_VARIABLE;
+}> = [
+    operation: T["operation"],
+    weaponId: number,
+    value: number,
+    operand: T["operand"],
+    includesEquip: boolean
+];
+export type ParamArray_GainArmorsDirect = ParamArray_ChangeArmorsTemplate<{
+    operation: Operation_PlusMinus["PLUS"];
+    operand: typeof OPERAND_DIRECT;
+}>;
+export type ParamArray_LoseArmorsDirect = ParamArray_ChangeArmorsTemplate<{
+    operation: Operation_PlusMinus["MINUS"];
+    operand: typeof OPERAND_DIRECT;
+}>;
+export type ParamArray_GainArmorsVariable = ParamArray_ChangeArmorsTemplate<{
+    operation: Operation_PlusMinus["PLUS"];
+    operand: typeof OPERAND_VARIABLE;
+}>;
+export type ParamArray_LoseArmorVariable = ParamArray_ChangeArmorsTemplate<{
+    operation: Operation_PlusMinus["MINUS"];
+    operand: typeof OPERAND_VARIABLE;
+}>;
+export interface ParamObject_ChangeArmors {
     armorId: number;
     value: number;
 }
-export interface ParamObject_GainArmorV {
+export interface ParamObject_ChangeArmorsV {
     armorId: number;
     variableId: number;
 }
+export {};

@@ -5,3 +5,4 @@ export type { Command_EnemyRecoverAll, ParamArray_EnemyRecoverAll, } from './rec
 export type { Command_EnemyTransform, ParamArray_EnemyTransfrom, ParamObject_EnemyTransform, } from './transform/types';
 export { fromArrayEnemyTransform, makeCommandEnemyTransform, } from './transform/transfrom';
 export { makeCommandAddEachEnemyState, makeCommandAddEnemyState, makeCommandRemoveEachEnemyState, makeCommandRemoveEnemyState, } from './state/state';
+export { makeCommandEnemyRecoverAll, makeCommandEnemyRecoverAllEach, } from './recoverAll/recoverAll';

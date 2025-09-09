@@ -1,6 +1,6 @@
 import { ValueOf } from '../../../../../libs/templates/valueOf';
 import { EventCommandLike } from '../../../frame';
-import { Operation_PlusMinus } from '../../../../rpg';
+import { Operation_PlusMinus } from '../../../../utils';
 export interface Command_ChangePartyMember extends EventCommandLike<129> {
     parameters: ParamArray_ChangePartyMember;
 }
