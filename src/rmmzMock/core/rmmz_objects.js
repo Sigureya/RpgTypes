@@ -11300,4 +11300,35 @@ Game_Interpreter.prototype.command357 = function (params) {
 };
 
 //-----------------------------------------------------------------------------
-export { Game_Enemy };
+export {
+  Game_Troop,
+  Game_Interpreter,
+  Game_Action,
+  Game_ActionResult,
+  Game_Actor,
+  Game_Actors,
+  Game_Battler,
+  Game_BattlerBase,
+  Game_Character,
+  Game_CharacterBase,
+  Game_CommonEvent,
+  Game_Enemy,
+  Game_Event,
+  Game_Follower,
+  Game_Followers,
+  Game_Item,
+  Game_Map,
+  Game_Message,
+  Game_Party,
+  Game_Picture,
+  Game_Player,
+  Game_Screen,
+  Game_SelfSwitches,
+  Game_Switches,
+  Game_System,
+  Game_Temp,
+  Game_Timer,
+  Game_Unit,
+  Game_Variables,
+  Game_Vehicle,
+};
