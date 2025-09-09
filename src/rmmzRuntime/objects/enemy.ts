@@ -29,7 +29,7 @@ export declare class Game_Enemy implements Partial<Rmmz_Enemy> {
   paramBase(paramId: number): number;
   exp(): number;
   gold(): number;
-  makeDropItems(): any[];
+  makeDropItems(): Data_AnyGoodsUnion[];
   dropItemRate(): number;
   itemObject(kind: number, dataId: number): Data_AnyGoodsUnion | null;
   isSpriteVisible(): boolean;
@@ -61,6 +61,6 @@ export declare class Game_Enemy implements Partial<Rmmz_Enemy> {
     actionList: ReadonlyArray<Enemy_Action>,
     ratingZero: number
   ): void;
-  selectAllActions(actionList: any[]): void;
+  selectAllActions(actionList: ReadonlyArray<Enemy_Action>): void;
   makeActions(): void;
 }
