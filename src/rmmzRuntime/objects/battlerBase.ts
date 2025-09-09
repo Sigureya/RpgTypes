@@ -10,6 +10,15 @@ import type {
 import type { Rmmz_BattlerBase } from "./core/battler/base";
 
 export declare class Game_BattlerBase implements Rmmz_BattlerBase {
+  get mhp(): number;
+  get mmp(): number;
+  get atk(): number;
+  get def(): number;
+  get mat(): number;
+  get mdf(): number;
+  get agi(): number;
+  get luk(): number;
+
   canEquip(item: Data_Equipment): boolean;
   canEquipWeapon(weapon: Data_Weapon): boolean;
   canEquipArmor(armor: Data_Armor): boolean;
