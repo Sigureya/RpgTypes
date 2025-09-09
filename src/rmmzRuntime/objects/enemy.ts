@@ -4,10 +4,14 @@ import type {
   Data_Enemy,
   Trait,
 } from "@RpgTypes/rmmz/rpg";
+import { Game_Battler } from "./battler";
 import type { Rmmz_Enemy } from "./core/battler/enemy";
 import type { Rmmz_Action } from "./core/types";
 
-export declare class Game_Enemy implements Partial<Rmmz_Enemy> {
+export declare class Game_Enemy
+  extends Game_Battler
+  implements Partial<Rmmz_Enemy>
+{
   constructor(enemyId: number, x: number, y: number);
 
   addNewState(stateId: number): void;
