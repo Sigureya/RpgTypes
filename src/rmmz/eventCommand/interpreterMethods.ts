@@ -66,8 +66,10 @@ import type {
   ParamArray_ChangeActorMP,
   ParamArray_ChangeActorTP,
 } from "./commands/actor/changeValues/types";
+import type { ParamArray_RecoverAll } from "./commands/actor/recoverAll/types";
 import type { ParamArray_ShowBattleAnimation } from "./commands/battle/showAnimation/types";
 import type { ParamArray_ControlTimer } from "./commands/controlTimer/types";
+import type { ParamArray_ChangeEnemyHP } from "./commands/enemy/change/types";
 import type { ParamArray_EnemyRecoverAll } from "./commands/enemy/recoverAll/types";
 import type { ParamArray_ChangeEnemyState } from "./commands/enemy/state/types";
 import type { BranchParameters } from "./commands/flow/branch/types/branchParams";
@@ -78,7 +80,6 @@ import type { ParamArray_TransferPlayer } from "./commands/mapPlayer/transferPla
 import type { ParamArray_OpenMenu } from "./commands/menu/open/types";
 import type { ParamArray_PluginCommandMZ } from "./commands/mz";
 import type { ParamArray_ChangePartyMember } from "./commands/party/changeMember/types";
-import type { ParamArray_RecoverAll } from "./commands/actor/recoverAll/types";
 import type { ParamArray_ErasePicture } from "./commands/picture/erase/types";
 import type { ParamArray_ShakeScreen } from "./commands/screen/shake/types";
 import type { ParamArray_ChangeTileset } from "./commands/tileset/types";
@@ -204,7 +205,7 @@ export interface InterpreterMapper extends CommandTypeAssert {
   command324: (changeNickname: ParamArray_ChangeActorText) => boolean;
   command325: (changeProfile: ParamArray_ChangeActorText) => boolean;
 
-  command331: (changeEnemyHP: ParamArray_ChangeEnemyParameters) => boolean;
+  command331: (changeEnemyHP: ParamArray_ChangeEnemyHP) => boolean;
   command332: (changeEnemyMP: ParamArray_ChangeEnemyParameters) => boolean;
   command343: (changeEnemyTP: ParamArray_ChangeEnemyParameters) => boolean;
   command333: (params: ParamArray_ChangeEnemyState) => boolean;
