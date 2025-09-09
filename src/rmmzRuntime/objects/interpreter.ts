@@ -1,0 +1,230 @@
+import type { AudioFileParams, ColorRGBA } from "@RpgTypes/libs";
+import type {
+  BranchParameters,
+  EventCommand,
+  ParamArray_BattleProcessing,
+  ParamArray_BranchElse,
+  ParamArray_ChangeActorHP,
+  ParamArray_ChangeActorImages,
+  ParamArray_ChangeActorLevel,
+  ParamArray_ChangeActorMP,
+  ParamArray_ChangeActorState,
+  ParamArray_ChangeActorText,
+  ParamArray_ChangeActorTP,
+  ParamArray_ChangeArmors,
+  ParamArray_ChangeBattleBackground,
+  ParamArray_ChangeClass,
+  ParamArray_ChangeEnabled,
+  ParamArray_ChangeEnemyHP,
+  ParamArray_ChangeEnemyValue,
+  ParamArray_ChangeEnemyState,
+  ParamArray_ChangeExp,
+  ParamArray_ChangeGold,
+  ParamArray_ChangeItems,
+  ParamArray_ChangeMapNameDisplay,
+  ParamArray_ChangeParallax,
+  ParamArray_ChangeParam,
+  ParamArray_ChangePartyMember,
+  ParamArray_ChangePlayerFollowers,
+  ParamArray_ChangeSkill,
+  ParamArray_ChangeTileset,
+  ParamArray_ChangeTransparency,
+  ParamArray_ChangeVehicleBGM,
+  ParamArray_ChangeVehicleImage,
+  ParamArray_ChangeWeapons,
+  ParamArray_Comment,
+  ParamArray_CommonEvent,
+  ParamArray_ControlSwitches,
+  ParamArray_ControlTimer,
+  ParamArray_ControlVariables,
+  ParamArray_EnemyAppear,
+  ParamArray_EnemyRecoverAll,
+  ParamArray_EnemyTransfrom,
+  ParamArray_EraseEvent,
+  ParamArray_ErasePicture,
+  ParamArray_FadeOutAudio,
+  ParamArray_GetLocationInfo,
+  ParamArray_InputNumber,
+  ParamArray_Label,
+  ParamArray_MovementRoute,
+  ParamArray_NameInputProcessing,
+  ParamArray_OpenMenu,
+  ParamArray_PlayMovie,
+  ParamArray_PluginCommandMV,
+  ParamArray_PluginCommandMZ,
+  ParamArray_RecoverAll,
+  ParamArray_RotatePicture,
+  ParamArray_Script,
+  ParamArray_ScrollMap,
+  ParamArray_ScrollTextHeader,
+  ParamArray_SelectItem,
+  ParamArray_SelfSwitch,
+  ParamArray_SetEventLocation,
+  ParamArray_SetupChoice,
+  ParamArray_SetVehicleLocation,
+  ParamArray_ShakeScreen,
+  ParamArray_ShopProcessing,
+  ParamArray_ShowAnimation,
+  ParamArray_ShowBalloonIcon,
+  ParamArray_ShowBattleAnimation,
+  ParamArray_ShowMessage,
+  ParamArray_TintPicture,
+  ParamArray_TintScreen,
+  ParamArray_TransferPlayer,
+  ParamArray_Wait,
+  ParamArray_WeatherEffect,
+  ParamsArray_MovePicture,
+  ParamsArray_ShowPicture,
+} from "@RpgTypes/rmmz/eventCommand";
+import type { EventCode } from "@RpgTypes/rmmz/rpg";
+import type { InterpreterMapper, Rmmz_Interpreter } from "./core";
+import type { WaitMode } from "./core/interpreter/constants/types";
+
+export declare class Game_Interpreter
+  implements Rmmz_Interpreter<EventCommand>, InterpreterMapper
+{
+  checkOverflow(): void;
+  clear(): void;
+  setup(list: ReadonlyArray<EventCommand>, eventId: number): void;
+  loadImage(): void;
+  eventId(): number;
+  isOnCurrentMap(): boolean;
+  setupReservedCommonEvent(): boolean;
+  operateValue(operation: number, operandType: number, operand: number): number;
+  changeHp(target: unknown, value: number, allowDeath: boolean): void;
+  isRunning(): boolean;
+  update(): void;
+  updateChild(): boolean;
+  updateWait(): boolean;
+  updateWaitCount(): boolean;
+  updateWaitMode(): boolean;
+  setWaitMode<Mode extends string = WaitMode>(waitMode: Mode): void;
+  wait(duration: number): void;
+  fadeSpeed(): number;
+  executeCommand(): boolean;
+  checkFreeze(): boolean;
+  terminate(): void;
+  skipBranch(): void;
+  currentCommand(): EventCommand | undefined;
+  nextEventCode(): EventCode | 0;
+  command101(showMessage: ParamArray_ShowMessage): boolean;
+  command102(setupChoice: ParamArray_SetupChoice): boolean;
+  command103(params: ParamArray_InputNumber): boolean;
+  command104(params: ParamArray_SelectItem): boolean;
+  command105(params: ParamArray_ScrollTextHeader): boolean;
+  command108(params: ParamArray_Comment): boolean;
+  command109(skip: []): boolean;
+  command111(params: BranchParameters): boolean;
+  command112(params: []): boolean;
+  command113(params: []): boolean;
+  command115(params: []): boolean;
+  command117(params: ParamArray_CommonEvent): boolean;
+  command118(params: ParamArray_Label): boolean;
+  command119(params: ParamArray_Label): boolean;
+
+  command121(params: ParamArray_ControlSwitches): boolean;
+  command122(params: ParamArray_ControlVariables): boolean;
+  command123(params: ParamArray_SelfSwitch): boolean;
+  command124(params: ParamArray_ControlTimer): boolean;
+  command125(params: ParamArray_ChangeGold): boolean;
+  command126(params: ParamArray_ChangeItems): boolean;
+  command127(params: ParamArray_ChangeWeapons): boolean;
+  command128(params: ParamArray_ChangeArmors): boolean;
+  command129(params: ParamArray_ChangePartyMember): boolean;
+
+  command132(params: [AudioFileParams]): boolean;
+  command133(params: [AudioFileParams]): boolean;
+  command134(params: ParamArray_ChangeEnabled): boolean;
+  command135(params: ParamArray_ChangeEnabled): boolean;
+  command136(params: ParamArray_ChangeEnabled): boolean;
+  command137(params: ParamArray_ChangeEnabled): boolean;
+  command138(params: [ColorRGBA]): boolean;
+  command139(params: [AudioFileParams]): boolean;
+  command140(params: ParamArray_ChangeVehicleBGM): boolean;
+  command201(params: ParamArray_TransferPlayer): boolean;
+  command202(params: ParamArray_SetVehicleLocation): boolean;
+  command203(params: ParamArray_SetEventLocation): boolean;
+
+  command204(params: ParamArray_ScrollMap): boolean;
+  command205(params: ParamArray_MovementRoute): boolean;
+  command206(params: []): boolean;
+
+  command211(params: ParamArray_ChangeTransparency): boolean;
+  command212(params: ParamArray_ShowAnimation): boolean;
+  command213(params: ParamArray_ShowBalloonIcon): boolean;
+  command214(params: ParamArray_EraseEvent): boolean;
+  command216(params: ParamArray_ChangePlayerFollowers): boolean;
+  command217(params: []): boolean;
+
+  command221(fadeoutScreen: []): boolean;
+  command222(fadeinScreen: []): boolean;
+  command223(params: ParamArray_TintScreen): boolean;
+  command224(params: ParamArray_TintScreen): boolean;
+  command225(params: ParamArray_ShakeScreen): boolean;
+
+  command230(params: ParamArray_Wait): boolean;
+  command231(params: ParamsArray_ShowPicture): boolean;
+  command232(params: ParamsArray_MovePicture): boolean;
+  command233(params: ParamArray_RotatePicture): boolean;
+  command234(params: ParamArray_TintPicture): boolean;
+  command235(params: ParamArray_ErasePicture): boolean;
+  command236(params: ParamArray_WeatherEffect): boolean;
+
+  command241(playBgm: [AudioFileParams]): boolean;
+  command242(fadeoutBgm: ParamArray_FadeOutAudio): boolean;
+  command243(params: []): boolean;
+  command244(params: []): boolean;
+  command245(params: [AudioFileParams]): boolean;
+  command246(params: ParamArray_FadeOutAudio): boolean;
+
+  command249(playME: [AudioFileParams]): boolean;
+  command250(playSE: [AudioFileParams]): boolean;
+  command251(stopSE: []): boolean;
+  command261(playMove: ParamArray_PlayMovie): boolean;
+
+  command281(params: ParamArray_ChangeMapNameDisplay): boolean;
+  command282(params: ParamArray_ChangeTileset): boolean;
+  command283(params: ParamArray_ChangeBattleBackground): boolean;
+  command284(params: ParamArray_ChangeParallax): boolean;
+  command285(params: ParamArray_GetLocationInfo): boolean;
+
+  command301(params: ParamArray_BattleProcessing): boolean;
+  command302(params: ParamArray_ShopProcessing): boolean;
+  command303(params: ParamArray_NameInputProcessing): boolean;
+  command311(params: ParamArray_ChangeActorHP): boolean;
+  command312(changeMP: ParamArray_ChangeActorMP): boolean;
+  command326(changeTP: ParamArray_ChangeActorTP): boolean;
+  command313(params: ParamArray_ChangeActorState): boolean;
+  command314(params: ParamArray_RecoverAll): boolean;
+  command315(params: ParamArray_ChangeExp): boolean;
+  command316(changeLevel: ParamArray_ChangeActorLevel): boolean;
+  command317(params: ParamArray_ChangeParam): boolean;
+  command318(params: ParamArray_ChangeSkill): boolean;
+  command320(params: [number, string]): boolean;
+  command321(params: ParamArray_ChangeClass): boolean;
+  command322(params: ParamArray_ChangeActorImages): boolean;
+  command323(params: ParamArray_ChangeVehicleImage): boolean;
+  command324(changeNickname: ParamArray_ChangeActorText): boolean;
+  command325(changeProfile: ParamArray_ChangeActorText): boolean;
+
+  command331(changeEnemyHP: ParamArray_ChangeEnemyHP): boolean;
+  command332(changeEnemyMP: ParamArray_ChangeEnemyValue): boolean;
+  command343(changeEnemyTP: ParamArray_ChangeEnemyValue): boolean;
+  command333(params: ParamArray_ChangeEnemyState): boolean;
+  command334(params: ParamArray_EnemyRecoverAll): boolean;
+  command335(param: ParamArray_EnemyAppear): boolean;
+  command336(params: ParamArray_EnemyTransfrom): boolean;
+  command337(params: ParamArray_ShowBattleAnimation): boolean;
+
+  command340(abortBattle: []): boolean;
+  command342(params: ParamArray_ChangeEnemyValue): boolean;
+  command351(params: ParamArray_OpenMenu): boolean;
+  command352(openSaveScreen: []): boolean;
+  command353(gameOver: []): boolean;
+  command354(returnToTitleScreen: []): boolean;
+  command355(params: ParamArray_Script): boolean;
+  command356(params: ParamArray_PluginCommandMV): boolean;
+  command357(params: ParamArray_PluginCommandMZ): boolean;
+
+  command411(params: ParamArray_BranchElse): boolean;
+}
