@@ -1,12 +1,6 @@
 import type { AudioFileParams, ColorRGBA } from "@RpgTypes/libs";
 import type {
   BranchParameters,
-  Command_CommentBody,
-  Command_CommentHeader,
-  Command_ScrollTextBody,
-  Command_ShopProcessingBody,
-  Command_ShowChoiceWhen,
-  Command_ShowMessageBody,
   EventCommand,
   ParamArray_BattleProcessing,
   ParamArray_BranchElse,
@@ -21,6 +15,7 @@ import type {
   ParamArray_ChangeBattleBackground,
   ParamArray_ChangeClass,
   ParamArray_ChangeEnabled,
+  ParamArray_ChangeEnemyHP,
   ParamArray_ChangeEnemyValue,
   ParamArray_ChangeEnemyState,
   ParamArray_ChangeExp,
@@ -81,28 +76,37 @@ import type {
   ParamsArray_MovePicture,
   ParamsArray_ShowPicture,
 } from "@RpgTypes/rmmz/eventCommand";
-import type { ParamArray_ChangeEnemyHP } from "@RpgTypes/rmmz/eventCommand/commands/enemy/change/types";
 import type { EventCode } from "@RpgTypes/rmmz/rpg";
+import type { InterpreterMapper, Rmmz_Interpreter } from "./core";
+import type { WaitMode } from "./core/interpreter/constants/types";
 
-type SubCommands =
-  | Command_ShopProcessingBody
-  | Command_ShowMessageBody
-  | Command_ScrollTextBody
-  | Command_CommentHeader
-  | Command_CommentBody
-  | Command_ShopProcessingBody
-  | Command_ShowChoiceWhen;
-
-type CommandTypeAssert = {
-  [K in Exclude<
-    EventCode,
-    0 | SubCommands["code"] | 655 | 339
-  > as `command${K}`]: Extract<EventCommand, { code: K }> extends undefined
-    ? never
-    : (params: Extract<EventCommand, { code: K }>["parameters"]) => boolean;
-};
-
-export interface InterpreterMapper extends CommandTypeAssert {
+export declare class Game_Interpreter
+  implements Rmmz_Interpreter<EventCommand>, InterpreterMapper
+{
+  checkOverflow(): void;
+  clear(): void;
+  setup(list: ReadonlyArray<EventCommand>, eventId: number): void;
+  loadImage(): void;
+  eventId(): number;
+  isOnCurrentMap(): boolean;
+  setupReservedCommonEvent(): boolean;
+  operateValue(operation: number, operandType: number, operand: number): number;
+  changeHp(target: unknown, value: number, allowDeath: boolean): void;
+  isRunning(): boolean;
+  update(): void;
+  updateChild(): boolean;
+  updateWait(): boolean;
+  updateWaitCount(): boolean;
+  updateWaitMode(): boolean;
+  setWaitMode<Mode extends string = WaitMode>(waitMode: Mode): void;
+  wait(duration: number): void;
+  fadeSpeed(): number;
+  executeCommand(): boolean;
+  checkFreeze(): boolean;
+  terminate(): void;
+  skipBranch(): void;
+  currentCommand(): EventCommand | undefined;
+  nextEventCode(): EventCode | 0;
   command101(showMessage: ParamArray_ShowMessage): boolean;
   command102(setupChoice: ParamArray_SetupChoice): boolean;
   command103(params: ParamArray_InputNumber): boolean;
@@ -211,6 +215,7 @@ export interface InterpreterMapper extends CommandTypeAssert {
   command335(param: ParamArray_EnemyAppear): boolean;
   command336(params: ParamArray_EnemyTransfrom): boolean;
   command337(params: ParamArray_ShowBattleAnimation): boolean;
+
   command340(abortBattle: []): boolean;
   command342(params: ParamArray_ChangeEnemyValue): boolean;
   command351(params: ParamArray_OpenMenu): boolean;
