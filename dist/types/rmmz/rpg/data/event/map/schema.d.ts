@@ -103,7 +103,7 @@ declare const SCHEMA_DATA_MAP: {
             type: "array";
             items: {
                 type: "object";
-                required: ("regionSet" | "troopId" | "weight")[];
+                required: ("troopId" | "regionSet" | "weight")[];
                 properties: {
                     regionSet: {
                         type: "array";
