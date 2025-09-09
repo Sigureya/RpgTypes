@@ -1,3 +1,4 @@
+import { makeParamArray } from "../members";
 import type { Data_Enemy, DropItem, Enemy_Action } from "./types";
 
 export const makeDropItem = (dropItem: Partial<DropItem> = {}): DropItem => ({
@@ -27,15 +28,17 @@ export const makeEnemyData = (data: Partial<Data_Enemy> = {}): Data_Enemy => ({
   gold: data.gold ?? 0,
   traits: [],
   note: data.note ?? "",
-  params: [
-    0, // maxhp
-    0, // maxmp
-    0, // atk
-    0, // def
-    0, // mat
-    0, // mdf
-    0, // agi
-    0, // luk
-  ],
+  params: data.params
+    ? [...data.params]
+    : makeParamArray({
+        mhp: 0,
+        mmp: 0,
+        atk: 0,
+        def: 0,
+        mat: 0,
+        mdf: 0,
+        agi: 0,
+        luk: 0,
+      }),
   actions: [],
 });
