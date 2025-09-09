@@ -1,90 +1,88 @@
 import type { AudioFileParams, ColorRGBA } from "@RpgTypes/libs";
-import type { EventCode } from "../rpg";
 import type {
-  ParamArray_InputNumber,
-  ParamArray_SetupChoice,
-  ParamArray_ShowMessage,
+  BranchParameters,
+  Command_CommentBody,
+  Command_CommentHeader,
+  Command_ScrollTextBody,
+  Command_ShopProcessingBody,
+  Command_ShowChoiceWhen,
+  Command_ShowMessageBody,
+  EventCommand,
+  ParamArray_BattleProcessing,
+  ParamArray_BranchElse,
+  ParamArray_ChangeActorHP,
+  ParamArray_ChangeActorImages,
+  ParamArray_ChangeActorLevel,
+  ParamArray_ChangeActorMP,
+  ParamArray_ChangeActorState,
+  ParamArray_ChangeActorText,
+  ParamArray_ChangeActorTP,
   ParamArray_ChangeArmors,
+  ParamArray_ChangeBattleBackground,
+  ParamArray_ChangeClass,
+  ParamArray_ChangeEnabled,
+  ParamArray_ChangeEnemyParameters,
+  ParamArray_ChangeEnemyState,
+  ParamArray_ChangeExp,
+  ParamArray_ChangeGold,
   ParamArray_ChangeItems,
+  ParamArray_ChangeMapNameDisplay,
+  ParamArray_ChangeParallax,
+  ParamArray_ChangeParam,
+  ParamArray_ChangePartyMember,
+  ParamArray_ChangePlayerFollowers,
+  ParamArray_ChangeSkill,
+  ParamArray_ChangeTileset,
+  ParamArray_ChangeTransparency,
+  ParamArray_ChangeVehicleBGM,
+  ParamArray_ChangeVehicleImage,
   ParamArray_ChangeWeapons,
   ParamArray_Comment,
   ParamArray_CommonEvent,
   ParamArray_ControlSwitches,
+  ParamArray_ControlTimer,
   ParamArray_ControlVariables,
-  ParamArray_ScrollTextHeader,
-  Command_ShopProcessingBody,
-  Command_ShowMessageBody,
-  Command_ScrollTextBody,
-  Command_CommentBody,
-  Command_CommentHeader,
+  ParamArray_EnemyAppear,
+  ParamArray_EnemyRecoverAll,
+  ParamArray_EnemyTransfrom,
+  ParamArray_EraseEvent,
+  ParamArray_ErasePicture,
+  ParamArray_FadeOutAudio,
+  ParamArray_GetLocationInfo,
+  ParamArray_InputNumber,
   ParamArray_Label,
-  ParamArray_SelfSwitch,
-  ParamArray_ChangeEnabled,
-  ParamArray_SetVehicleLocation,
-  ParamArray_SetEventLocation,
-  ParamArray_ScrollMap,
   ParamArray_MovementRoute,
+  ParamArray_NameInputProcessing,
+  ParamArray_OpenMenu,
+  ParamArray_PlayMovie,
+  ParamArray_PluginCommandMV,
+  ParamArray_PluginCommandMZ,
+  ParamArray_RecoverAll,
+  ParamArray_RotatePicture,
+  ParamArray_Script,
+  ParamArray_ScrollMap,
+  ParamArray_ScrollTextHeader,
+  ParamArray_SelectItem,
+  ParamArray_SelfSwitch,
+  ParamArray_SetEventLocation,
+  ParamArray_SetupChoice,
+  ParamArray_SetVehicleLocation,
+  ParamArray_ShakeScreen,
+  ParamArray_ShopProcessing,
   ParamArray_ShowAnimation,
   ParamArray_ShowBalloonIcon,
-  ParamArray_EraseEvent,
-  ParamArray_TintScreen,
-  ParamArray_Wait,
-  ParamsArray_ShowPicture,
-  ParamsArray_MovePicture,
-  ParamArray_RotatePicture,
+  ParamArray_ShowBattleAnimation,
+  ParamArray_ShowMessage,
   ParamArray_TintPicture,
+  ParamArray_TintScreen,
+  ParamArray_TransferPlayer,
+  ParamArray_Wait,
   ParamArray_WeatherEffect,
-  ParamArray_FadeOutAudio,
-  ParamArray_PlayMovie,
-  ParamArray_GetLocationInfo,
-  ParamArray_ChangeBattleBackground,
-  ParamArray_ChangeParallax,
-  ParamArray_BattleProcessing,
-  ParamArray_ShopProcessing,
-  ParamArray_ChangeActorState,
-  ParamArray_ChangeExp,
-  ParamArray_ChangeSkill,
-  ParamArray_ChangeClass,
-  ParamArray_ChangeVehicleImage,
-  ParamArray_ChangeActorText,
-  ParamArray_ChangeEnemyParameters,
-  ParamArray_EnemyTransfrom,
-  ParamArray_EnemyAppear,
-  ParamArray_Script,
-  ParamArray_PluginCommandMV,
-  Command_ShowChoiceWhen,
-  ParamArray_BranchElse,
-  ParamArray_NameInputProcessing,
-  ParamArray_ChangeGold,
-  ParamArray_ChangeVehicleBGM,
-} from "./commands";
-import type { ParamArray_ChangeActorImages } from "./commands/actor/changeImages/types";
-import type { ParamArray_ChangeActorLevel } from "./commands/actor/changeLevel/types";
-import type { ParamArray_ChangeParam } from "./commands/actor/changeParam/types";
-import type {
-  ParamArray_ChangeActorHP,
-  ParamArray_ChangeActorMP,
-  ParamArray_ChangeActorTP,
-} from "./commands/actor/changeValues/types";
-import type { ParamArray_RecoverAll } from "./commands/actor/recoverAll/types";
-import type { ParamArray_ShowBattleAnimation } from "./commands/battle/showAnimation/types";
-import type { ParamArray_ControlTimer } from "./commands/controlTimer/types";
-import type { ParamArray_ChangeEnemyHP } from "./commands/enemy/change/types";
-import type { ParamArray_EnemyRecoverAll } from "./commands/enemy/recoverAll/types";
-import type { ParamArray_ChangeEnemyState } from "./commands/enemy/state/types";
-import type { BranchParameters } from "./commands/flow/branch/types/branchParams";
-import type { ParamArray_SelectItem } from "./commands/item/select/types";
-import type { ParamArray_ChangeMapNameDisplay } from "./commands/map/changeMapNameDisplay/types";
-import type { ParamArray_ChangePlayerFollowers } from "./commands/mapFollwer/types";
-import type { ParamArray_TransferPlayer } from "./commands/mapPlayer/transferPlayer/types";
-import type { ParamArray_OpenMenu } from "./commands/menu/open/types";
-import type { ParamArray_PluginCommandMZ } from "./commands/mz";
-import type { ParamArray_ChangePartyMember } from "./commands/party/changeMember/types";
-import type { ParamArray_ErasePicture } from "./commands/picture/erase/types";
-import type { ParamArray_ShakeScreen } from "./commands/screen/shake/types";
-import type { ParamArray_ChangeTileset } from "./commands/tileset/types";
-import type { ParamArray_ChangeTransparency } from "./commands/transparency/types";
-import type { EventCommand } from "./commands/union";
+  ParamsArray_MovePicture,
+  ParamsArray_ShowPicture,
+} from "@RpgTypes/rmmz/eventCommand";
+import type { ParamArray_ChangeEnemyHP } from "@RpgTypes/rmmz/eventCommand/commands/enemy/change/types";
+import type { EventCode } from "@RpgTypes/rmmz/rpg";
 
 type SubCommands =
   | Command_ShopProcessingBody
