@@ -1,6 +1,7 @@
 import { ValueOf } from '../../../../../libs/templates/valueOf';
 import { EventCommandLike } from '../../../frame';
-import { CHANGE_GOLD, Operation_PlusMinus } from '../../../../rpg';
+import { CHANGE_GOLD } from '../../../../rpg';
+import { Operation_PlusMinus } from '../../../../utils';
 export interface Command_ChangeGold extends EventCommandLike<typeof CHANGE_GOLD> {
     parameters: ParamArray_ChangeGold;
 }

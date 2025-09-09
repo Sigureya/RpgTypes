@@ -1,4 +1,4 @@
-import { Operation_PlusMinus, Toggle } from '../../../../../rpg';
+import { Toggle, Operation_PlusMinus } from '../../../../../utils';
 import { ValueOf } from 'src/libs/templates/valueOf';
 import { BranchCodeTable } from './branch';
 export type BranchParam_Switch = [

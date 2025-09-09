@@ -1,3 +1,4 @@
+export * from './recoverAll/index';
 export type { CommandUnion_ChangeActorText, Command_ChangeActorName, Command_ChangeActorNickName, Command_ChangeActorProfile, ParamArray_ChangeActorText, ParamObject_ChangeActorName, ParamObject_ChangeActorNickName, } from './changeText/types';
 export type { Command_ChangeActorHP, Command_ChangeActorMP, Command_ChangeActorTP, ParamArray_ChangeActorHP, ParamArray_ChangeActorMP, ParamArray_ChangeActorTP, ParamArray_ChangeActorValue, ParamObject_ChangeActorHP, ParamObject_ChangeActorValue, } from './changeValues/types';
 export type { Command_ChangeActorImages, ParamArray_ChangeActorImages, ParamObject_ChangeActorImages, } from './changeImages/types';

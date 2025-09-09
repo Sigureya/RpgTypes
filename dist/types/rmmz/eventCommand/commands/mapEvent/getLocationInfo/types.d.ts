@@ -1,6 +1,7 @@
 import { ValueOf } from '../../../../../libs/templates/valueOf';
 import { EventCommandLike } from '../../../frame';
-import { Designation, GET_LOCATION_INFO } from '../../../../rpg';
+import { GET_LOCATION_INFO } from '../../../../rpg';
+import { Designation } from '../../../../utils';
 export interface Command_GetLocationInfo extends EventCommandLike<typeof GET_LOCATION_INFO> {
     parameters: ParamArray_GetLocationInfo;
 }

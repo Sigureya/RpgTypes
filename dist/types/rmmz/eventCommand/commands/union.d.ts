@@ -7,6 +7,7 @@ import { Command_ChangeParam } from './actor/changeParam/types';
 import { Command_ChangeActorState } from './actor/changeState/types';
 import { Command_ChangeActorName, Command_ChangeActorNickName, Command_ChangeActorProfile } from './actor/changeText/types';
 import { Command_ChangeActorHP, Command_ChangeActorMP, Command_ChangeActorTP } from './actor/changeValues/types';
+import { Command_RecoverAll } from './actor/recoverAll/types';
 import { Command_ShowAnimation } from './animation/types';
 import { Command_FadeOutBGM, Command_FadeOutBGS, Command_ResumeBGM, Command_SaveBGM } from './audio/other/types';
 import { Command_ChangeBattleBGM, Command_ChangeDefeatME, Command_ChangeVictoryME, Command_PlayBGM, Command_PlayBGS, Command_PlayME, Command_PlaySE } from './audio/play/types';
@@ -51,7 +52,6 @@ import { Command_GameOver, Command_GatherFollowers, Command_ReturnToTitleScreen,
 import { Command_NoOperation } from './noOperation';
 import { Command_ChangePartyMember } from './party/changeMember/types';
 import { Command_ChangeGold } from './party/gold/changeGold';
-import { Command_RecoverAll } from './party/types/recoverAll';
 import { Command_MovePicture, Command_RotatePicture, Command_ShowPicture, Command_TintPicture } from './picture';
 import { Command_ErasePicture } from './picture/erase/types';
 import { Command_ShakeScreen } from './screen/shake/types';
