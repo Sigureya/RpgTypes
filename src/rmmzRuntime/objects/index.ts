@@ -1,2 +1,2 @@
 export { Game_Enemy } from "./enemy";
-export { Game_Troop } from "./troopClass";
+export { Game_Troop } from "./troop";

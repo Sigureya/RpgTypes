@@ -1,17 +1,32 @@
 import { describe, test, expect } from "vitest";
 import type { Data_Enemy } from "@RpgTypes/rmmz/rpg";
-import { makeEnemyData, TRAIT_ATTACK_ELEMENT } from "@RpgTypes/rmmz/rpg";
-import { Game_Enemy } from "@RpgTypes/rmmzMock/core/rmmz_objects";
+import {
+  makeEnemyData,
+  makeParamArray,
+  TRAIT_ATTACK_ELEMENT,
+} from "@RpgTypes/rmmz/rpg";
 import "@RpgTypes/rmmzMock/prototypeOverwrite";
+import { Game_Enemy } from "./rmmz_objects";
 
 const mockDragon: Data_Enemy = makeEnemyData({
   name: "dragon",
+  battlerName: "DRAGON",
+  battlerHue: 123,
+  dropItems: [],
   actions: [],
   id: 2,
   exp: 6789,
   gold: 1234,
   note: "",
-  params: [0, 200, 150, 100, 50, 30, 20, 10],
+  params: makeParamArray({
+    mhp: 108,
+    atk: 130,
+    def: 95,
+    mat: 80,
+    mdf: 85,
+    agi: 102,
+    luk: 111,
+  }),
   traits: [{ code: TRAIT_ATTACK_ELEMENT, dataId: 4, value: 50 }],
 });
 
