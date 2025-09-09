@@ -1,0 +1,63 @@
+import type {
+  Data_AnyGoodsUnion,
+  Enemy_Action,
+  Data_Enemy,
+} from "@RpgTypes/rmmz/rpg";
+import type { Rmmz_Enemy } from "@RpgTypes/rmmzRuntime/objects/battler/enemy";
+
+export declare class Game_Enemy implements Partial<Rmmz_Enemy> {
+  constructor(enemyId: number, x: number, y: number);
+
+  addNewState(stateId: number): void;
+  enemyId(): number;
+  enemy(): Data_Enemy;
+  isAlive(): boolean;
+  isDead(): boolean;
+  isHidden(): boolean;
+
+  // 追加メンバ関数（型不明なものはany指定）
+  initialize(enemyId: number, x: number, y: number): void;
+  initMembers(): void;
+  setup(enemyId: number, x: number, y: number): void;
+  // friendsUnit(): any;
+  //  opponentsUnit(): any;
+  index(): number;
+  isBattleMember(): boolean;
+  traitObjects(): any;
+  paramBase(paramId: number): number;
+  exp(): number;
+  gold(): number;
+  makeDropItems(): any[];
+  dropItemRate(): number;
+  itemObject(kind: number, dataId: number): Data_AnyGoodsUnion | null;
+  isSpriteVisible(): boolean;
+  screenX(): number;
+  screenY(): number;
+  battlerName(): string;
+  battlerHue(): number;
+  originalName(): string;
+  name(): string;
+  isLetterEmpty(): boolean;
+  setLetter(letter: string): void;
+  setPlural(plural: boolean): void;
+  performActionStart(action: any): void;
+  performAction(action: any): void;
+  performActionEnd(action: any): void;
+  performDamage(): void;
+  performCollapse(): void;
+  transform(enemyId: number): void;
+  meetsCondition(action: Enemy_Action): boolean;
+  meetsTurnCondition(param1: number, param2: number): boolean;
+  meetsHpCondition(param1: number, param2: number): boolean;
+  meetsMpCondition(param1: number, param2: number): boolean;
+  meetsStateCondition(param: number): boolean;
+  meetsPartyLevelCondition(param: number): boolean;
+  meetsSwitchCondition(param: number): boolean;
+  isActionValid(action: Enemy_Action): boolean;
+  selectAction(
+    actionList: ReadonlyArray<Enemy_Action>,
+    ratingZero: number
+  ): void;
+  selectAllActions(actionList: any[]): void;
+  makeActions(): void;
+}
