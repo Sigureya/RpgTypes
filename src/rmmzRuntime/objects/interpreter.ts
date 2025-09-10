@@ -83,6 +83,7 @@ import type { WaitMode } from "./core/interpreter/constants/types";
 export declare class Game_Interpreter
   implements Rmmz_Interpreter<EventCommand>, InterpreterMapper
 {
+  constructor(depth?: number);
   checkOverflow(): void;
   clear(): void;
   setup(list: ReadonlyArray<EventCommand>, eventId: number): void;
