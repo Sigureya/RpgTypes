@@ -108,7 +108,7 @@ const targetEach = (
     OPERAND.direct,
     -1, // each
     operation,
-    OPERAND[params.operand.type],
+    OPERAND[params.operand.mode],
     params.operand.value,
   ];
 };
@@ -121,7 +121,7 @@ const targetDirect = (
     OPERAND.direct,
     params.target,
     operation,
-    OPERAND[params.operand.type],
+    OPERAND[params.operand.mode],
     params.operand.value,
   ];
 };
@@ -134,7 +134,7 @@ const targetValiable = (
     OPERAND.variable,
     params.target,
     operation,
-    OPERAND[params.operand.type],
+    OPERAND[params.operand.mode],
     params.operand.value,
   ];
 };

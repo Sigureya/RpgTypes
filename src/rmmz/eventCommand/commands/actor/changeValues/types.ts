@@ -38,11 +38,9 @@ export type ParamArray_ChangeActorHP = [
 ];
 
 export interface ParamObject_ChangeActorValue {
-  allowDeath: boolean;
   targetType: "direct" | "variable" | "each";
   target: number;
-  operation: "plus" | "minus";
-  operand: { type: "variable" | "direct"; value: number };
+  operand: { mode: "variable" | "direct"; value: number };
 }
 
 export type ParamObject_ChangeActorHP = ParamObject_ChangeActorValue & {

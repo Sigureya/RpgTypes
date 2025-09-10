@@ -83,12 +83,11 @@ const testCases: TestCase[] = [
     command: makeCommandGainActorHP({
       allowDeath: false,
       operand: {
-        type: "direct",
+        mode: "direct",
         value: 123,
       },
       targetType: "each",
       target: 0,
-      operation: "plus",
     }),
     key: "gainMp",
     value: 123,
