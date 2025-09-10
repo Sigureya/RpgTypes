@@ -67,10 +67,6 @@ describe("mockData", () => {
 });
 
 describe("Game_Enemy", () => {
-  test("enemyId", () => {
-    const enemy = createEnemy();
-    expect(enemy.enemyId()).toBe(2);
-  });
   test("enemy", () => {
     const enemy = createEnemy();
     expect(enemy.enemy()).toBe(mockDragon);
@@ -81,44 +77,30 @@ describe("Game_Enemy", () => {
     expect(enemy.isEnemy()).toBe(true);
   });
 
-  test("name", () => {
+  test("", () => {
     const enemy = createEnemy();
-
-    expect(enemy.name()).toBe("dragon");
+    const e2: Partial<Data_Enemy> = {
+      id: enemy.enemyId(),
+      name: enemy.name(),
+      battlerHue: enemy.battlerHue(),
+      battlerName: enemy.battlerName(),
+      exp: enemy.exp(),
+      gold: enemy.gold(),
+    };
+    expect(mockDragon).toMatchObject(e2);
   });
-
-  describe("params", () => {
+  test("params", () => {
     const enemy = createEnemy();
-    test("mhp", () => {
-      expect(enemy.paramBase(0)).toBe(mockDragonParams.mhp);
-      expect(enemy.mhp).toBe(mockDragonParams.mhp);
-    });
-    test("mmp", () => {
-      expect(enemy.paramBase(1)).toBe(mockDragonParams.mmp);
-      expect(enemy.mmp).toBe(mockDragonParams.mmp);
-    });
-    test("atk", () => {
-      expect(enemy.paramBase(2)).toBe(mockDragonParams.atk);
-      expect(enemy.atk).toBe(mockDragonParams.atk);
-    });
-
-    test("def", () => {
-      expect(enemy.paramBase(3)).toBe(mockDragonParams.def);
-      expect(enemy.def).toBe(mockDragonParams.def);
-    });
-
-    test("mat", () => {
-      expect(enemy.paramBase(4)).toBe(mockDragonParams.mat);
-      expect(enemy.mat).toBe(mockDragonParams.mat);
-    });
-
-    test("mdf", () => {
-      expect(enemy.paramBase(5)).toBe(mockDragonParams.mdf);
-      expect(enemy.mdf).toBe(mockDragonParams.mdf);
-    });
-    test("agi", () => {
-      expect(enemy.paramBase(6)).toBe(mockDragonParams.agi);
-      expect(enemy.agi).toBe(mockDragonParams.agi);
-    });
+    const paramObject: StatusParamObject = {
+      agi: enemy.agi,
+      atk: enemy.atk,
+      def: enemy.def,
+      luk: enemy.luk,
+      mat: enemy.mat,
+      mdf: enemy.mdf,
+      mhp: enemy.mhp,
+      mmp: enemy.mmp,
+    };
+    expect(paramObject).toEqual(mockDragonParams);
   });
 });

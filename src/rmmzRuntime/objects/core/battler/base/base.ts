@@ -9,4 +9,16 @@ export interface Rmmz_BattlerBase
     Rmmz_Equipable,
     Rmmz_ItemUser,
     Rmmz_Stateable,
-    Rmmz_StatusParams {}
+    Rmmz_StatusParams {
+  get mhp(): number;
+  get mmp(): number;
+  get atk(): number;
+  get def(): number;
+  get mat(): number;
+  get mdf(): number;
+  get agi(): number;
+  get luk(): number;
+  get hp(): number;
+  get mp(): number;
+  get tp(): number;
+}
