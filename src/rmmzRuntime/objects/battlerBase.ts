@@ -18,6 +18,9 @@ export declare class Game_BattlerBase implements Rmmz_BattlerBase {
   get mdf(): number;
   get agi(): number;
   get luk(): number;
+  get hp(): number;
+  get mp(): number;
+  get tp(): number;
 
   canEquip(item: Data_Equipment): boolean;
   canEquipWeapon(weapon: Data_Weapon): boolean;
