@@ -5,9 +5,9 @@ import type { EventCommand } from "@RpgTypes/rmmz/eventCommand";
 import { makeCommandGainActorHP } from "@RpgTypes/rmmz/eventCommand";
 import type { Data_Enemy } from "@RpgTypes/rmmz/rpg";
 import { makeParamArray } from "@RpgTypes/rmmz/rpg";
-import { Game_Interpreter } from "@RpgTypes/rmmzRuntime";
 import type { Rmmz_Battler } from "@RpgTypes/rmmzRuntime/objects/core/battler/battler";
 import type { Rmmz_Unit } from "@RpgTypes/rmmzRuntime/objects/core/unit/unit";
+import { Game_Interpreter } from "./rmmz_objects";
 
 const mockBirdman: Data_Enemy = {
   name: "birdman",
@@ -38,16 +38,17 @@ globalThis.$dataEnemies = mockEnemies;
 
 declare global {
   var $dataEnemies: (Data_Enemy | null)[];
-  var $gameTroop: XXXUnit;
+  var $gameTroop: FakeUnit;
+  var $gameParty: FakeUnit;
 }
 
 type Keys = "loseHp" | "loseMp" | "loseTp" | "gaineHp" | "gainMp" | "gainTp";
 
-type MockBattler = Pick<Rmmz_Battler, Keys>;
+type FakeBattler = Pick<Rmmz_Battler, Keys>;
 
-type XXXUnit = Pick<Rmmz_Unit<MockBattler>, "members">;
+type FakeUnit = Pick<Rmmz_Unit<FakeBattler>, "members">;
 
-const makeMockEnemy = (): MockedObject<MockBattler> => {
+const makeMockBattler = (): MockedObject<FakeBattler> => {
   return {
     loseHp: vi.fn(),
     loseMp: vi.fn(),
@@ -64,11 +65,26 @@ interface TestCase {
 }
 
 const runCommandTest = ({ command, key, value }: TestCase) => {
-  const mockBattler = makeMockEnemy();
-  const mockTroop: MockedObject<XXXUnit> = {
+  const mockBattler = makeMockBattler();
+  const mockTroop: MockedObject<FakeUnit> = {
     members: vi.fn(() => [mockBattler]),
   };
   globalThis.$gameTroop = mockTroop;
+  test(key, () => {
+    const interpreter = new Game_Interpreter();
+    interpreter.setup([command], 0);
+    const result = interpreter.executeCommand();
+    expect(result).toBe(true);
+    expect(mockBattler[key]).toHaveBeenCalledWith(value);
+  });
+};
+const runPartyTest = ({ command, key, value }: TestCase) => {
+  const mockBattler = makeMockBattler();
+  const mockParty: MockedObject<FakeUnit> = {
+    members: vi.fn(() => [mockBattler]),
+  };
+  globalThis.$gameParty = mockParty;
+
   test(key, () => {
     const interpreter = new Game_Interpreter();
     interpreter.setup([command], 0);
@@ -94,6 +110,6 @@ const testCases: TestCase[] = [
   },
 ];
 
-describe.skip("", () => {
-  testCases.forEach(runCommandTest);
+describe("", () => {
+  testCases.forEach(runPartyTest);
 });
