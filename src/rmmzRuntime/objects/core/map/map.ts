@@ -2,7 +2,7 @@ import type { Data_CommonEvent } from "@RpgTypes/rmmz/events";
 import type { Data_Tileset } from "@RpgTypes/rmmz/rpg";
 import type { Direction8 } from "@RpgTypes/rmmz/utils";
 import type { Rmmz_Event } from "./event";
-import type { Game_Vehicle } from "./vehicle";
+import type { Rmmz_Vehicle } from "./vehicle";
 
 export interface Rmmz_Map {
   initialize(): void;
@@ -25,10 +25,10 @@ export interface Rmmz_Map {
   createVehicles(): void;
   refereshVehicles(): void;
   vehicles(): void;
-  vehicle(type: string | number): Game_Vehicle | null;
-  boat(): Game_Vehicle;
-  ship(): Game_Vehicle;
-  airship(): Game_Vehicle;
+  vehicle(type: string | number): Rmmz_Vehicle | null;
+  boat(): Rmmz_Vehicle;
+  ship(): Rmmz_Vehicle;
+  airship(): Rmmz_Vehicle;
   setupEvents(): void;
   events(): Rmmz_Event[];
   event(eventId: number): Rmmz_Event | undefined;
