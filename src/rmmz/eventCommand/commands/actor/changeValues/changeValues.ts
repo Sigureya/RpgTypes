@@ -24,7 +24,11 @@ export const makeCommandGainActorHP = (
     code: CHANGE_HP,
     indent,
     parameters: [
-      ...VALIABLE_FUNCTION_TABLE[params.targetType](params, OPERATION_PLUS),
+      0,
+      params.target,
+      OPERATION_PLUS,
+      OPERAND[params.operand.mode],
+      params.operand.value,
       params.allowDeath,
     ],
   };
