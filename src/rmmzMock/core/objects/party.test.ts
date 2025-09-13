@@ -3,6 +3,7 @@ import { describe, test, expect, vi } from "vitest";
 import type {
   Command_ChangeActorHP,
   Command_ChangeActorMP,
+  EventCommand,
 } from "@RpgTypes/rmmz/eventCommand";
 import {
   makeCommandGainActorHP,
@@ -65,7 +66,7 @@ const makeMocks = (): MakeMocksResult => {
   return { mockBattler, mockActors, mockMap, mockParty, mockBattler2 };
 };
 
-const makeInterpreter = () => {
+const makeInterpreter = (command: EventCommand) => {
   const interpreter = new Game_Interpreter();
   vi.spyOn(interpreter, "operateValue");
   vi.spyOn(interpreter, "iterateActorEx");
@@ -73,6 +74,7 @@ const makeInterpreter = () => {
 
   vi.spyOn(interpreter, "command311");
   vi.spyOn(interpreter, "command312");
+  interpreter.setup([command], 0);
   return interpreter;
 };
 
@@ -118,8 +120,7 @@ describe("gainHp single", () => {
     const mocks = makeMocks();
     setupGlobal(mocks);
     const { mockBattler, mockBattler2, mockActors } = mocks;
-    const interpreter = makeInterpreter();
-    interpreter.setup([command], 0);
+    const interpreter = makeInterpreter(command);
 
     const result = interpreter.executeCommand();
     paramCalledWith(command, interpreter);
@@ -135,16 +136,17 @@ describe("gainHp single", () => {
   });
 });
 
-describe("gainHp single", () => {
+describe("gainMp single", () => {
+  const MP_CONST = 456 as const;
   const command: Command_ChangeActorMP = {
     code: 312,
     indent: 0,
-    parameters: [0, 1, 0, 0, 123],
+    parameters: [0, 1, 0, 0, MP_CONST],
   };
   test("make command", () => {
     const newCommand = makeCommandGainActorMP({
       target: 1,
-      operand: { mode: "direct", value: 123 },
+      operand: { mode: "direct", value: MP_CONST },
       targetType: "direct",
     });
     expect(newCommand).toEqual(command);
@@ -154,8 +156,7 @@ describe("gainHp single", () => {
     const mocks = makeMocks();
     setupGlobal(mocks);
     const { mockBattler, mockBattler2, mockActors } = mocks;
-    const interpreter = makeInterpreter();
-    interpreter.setup([command], 0);
+    const interpreter = makeInterpreter(command);
 
     const result = interpreter.executeCommand();
     paramCalledWith(command, interpreter);
@@ -166,7 +167,7 @@ describe("gainHp single", () => {
     );
     expect(mockActors.actor).toHaveBeenCalledWith(1);
     expect(result).toBe(true);
-    expect(mockBattler.gainMp).toHaveBeenCalledWith(123);
+    expect(mockBattler.gainMp).toHaveBeenCalledWith(MP_CONST);
     expect(mockBattler2.gainHp).not.toHaveBeenCalled();
   });
 });
