@@ -77,11 +77,20 @@ import type {
   ParamsArray_ShowPicture,
 } from "@RpgTypes/rmmz/eventCommand";
 import type { EventCode } from "@RpgTypes/rmmz/rpg";
-import type { InterpreterMapper, Rmmz_Interpreter } from "./core";
+import type {
+  InterpreterMapper,
+  Rmmz_Actor,
+  Rmmz_Enemy,
+  Rmmz_Interpreter,
+} from "./core";
 import type { WaitMode } from "./core/interpreter/constants/types";
+import type { Rmmz_InterpreterBattler } from "./core/interpreter/types/actor";
 
 export declare class Game_Interpreter
-  implements Rmmz_Interpreter<EventCommand>, InterpreterMapper
+  implements
+    Rmmz_Interpreter<EventCommand>,
+    InterpreterMapper,
+    Rmmz_InterpreterBattler<Rmmz_Actor, Rmmz_Enemy>
 {
   constructor(depth?: number);
   checkOverflow(): void;
@@ -108,6 +117,15 @@ export declare class Game_Interpreter
   skipBranch(): void;
   currentCommand(): EventCommand | undefined;
   nextEventCode(): EventCode | 0;
+
+  iterateActorEx(
+    param1: number,
+    param2: number,
+    callback: (actir: Rmmz_Actor) => void
+  ): void;
+  iterateActorId(actorId: number, callBack: (actor: Rmmz_Actor) => void): void;
+  iterateEnemyId(enemyId: number, callBack: (enemy: Rmmz_Enemy) => void): void;
+
   command101(showMessage: ParamArray_ShowMessage): boolean;
   command102(setupChoice: ParamArray_SetupChoice): boolean;
   command103(params: ParamArray_InputNumber): boolean;

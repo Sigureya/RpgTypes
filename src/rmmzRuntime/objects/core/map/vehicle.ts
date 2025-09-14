@@ -2,7 +2,7 @@ import type { Data_Vehicle } from "@RpgTypes/rmmz/system";
 import type { Direction8 } from "@RpgTypes/rmmz/utils";
 import type { AudioFileParams } from "@sigureya/rpgtypes";
 
-export interface Game_Vehicle {
+export interface Rmmz_Vehicle {
   _type: string;
   isBoat(): boolean;
   isShip(): boolean;

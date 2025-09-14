@@ -42,6 +42,8 @@
     "generate:schema": "vite build --mode generateschema",
     "test": "vitest",
     "test:libs": "vitest run src/libs",
+    "test:rmmz-runtime": "vitest run src/rmmzRuntime",
+    "test:rmmz-mock": "vitest  src/rmmzMock",
     "test:rmmz-rpg": "vitest run src/rmmz/rpg",
     "test:rmmz-command": "vitest run src/rmmz/eventCommand",
     "test:features": "vitest run src/features",
