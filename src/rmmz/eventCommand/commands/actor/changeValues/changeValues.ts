@@ -87,10 +87,13 @@ export const makeCommandGainActorMP = (
   return {
     code: CHANGE_MP,
     indent,
-    parameters: VALIABLE_FUNCTION_TABLE[params.targetType](
-      params,
-      OPERATION_PLUS
-    ),
+    parameters: [
+      OPERAND.direct,
+      params.targetType === "each" ? 0 : params.target,
+      OPERATION_PLUS,
+      OPERAND[params.operand.mode],
+      params.operand.value,
+    ],
   };
 };
 
