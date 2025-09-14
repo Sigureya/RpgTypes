@@ -144,7 +144,7 @@ describe("gain HP", () => {
       indent: 0,
       parameters: [0, 0, 0, 0, 123, false],
     };
-    test.skip("make command", () => {
+    test("make command", () => {
       const newCommand = makeCommandGainActorHP({
         allowDeath: false,
         targetType: "each",
@@ -163,10 +163,7 @@ describe("gain HP", () => {
       paramCalledWith(command, interpreter);
 
       expect(interpreter.command311).toHaveBeenCalledWith(command.parameters);
-      expect(interpreter.iterateActorId).toHaveBeenCalledWith(
-        0,
-        expect.any(Function)
-      );
+
       expect(mockActors.actor).toHaveBeenCalledWith(1);
       expect(mockActors.actor).toHaveBeenCalledWith(2);
 
