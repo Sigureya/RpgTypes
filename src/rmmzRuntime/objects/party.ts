@@ -4,4 +4,7 @@ import { Game_Unit } from "./unit";
 
 export declare class Game_Party
   extends Game_Unit<Rmmz_Actor>
-  implements Partial<Rmmz_Unit<Rmmz_Actor>> {}
+  implements Partial<Rmmz_Unit<Rmmz_Actor>>
+{
+  _actors: number[];
+}

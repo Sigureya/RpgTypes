@@ -63,10 +63,8 @@ const makeMocks = (): MakeMocksResult => {
   const mockActors = makeMockActors([mockBattler, mockBattler2]);
   const mockMap = makeMockMap();
   const mockParty = new Game_Party();
-  mockParty._actors = [1, 2];
-
   // メンバーを加える必要がある
-  //  mockParty.ad
+  mockParty._actors = [1, 2];
   return { mockBattler, mockActors, mockMap, mockParty, mockBattler2 };
 };
 
@@ -83,9 +81,7 @@ const makeInterpreter = (command: EventCommand) => {
 };
 
 const setupGlobal = (mocks: MakeMocksResult) => {
-  // globalThis.$gameActors = mocks.mockActors as unknown as Rmmz_Actors;
   vi.stubGlobal("$gameActors", mocks.mockActors);
-
   vi.stubGlobal("$gameParty", mocks.mockParty);
   vi.stubGlobal("$gameMap", mocks.mockMap);
 };
@@ -107,7 +103,7 @@ const paramCalledWith = (
 };
 
 describe("gain HP", () => {
-  describe.skip("single", () => {
+  describe("single", () => {
     const command: Command_ChangeActorHP = {
       code: 311,
       indent: 0,
