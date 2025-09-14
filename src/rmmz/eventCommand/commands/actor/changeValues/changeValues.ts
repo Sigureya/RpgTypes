@@ -24,7 +24,7 @@ export const makeCommandGainActorHP = (
     code: CHANGE_HP,
     indent,
     parameters: [
-      0,
+      OPERAND.direct,
       params.targetType === "each" ? -1 : params.target,
       OPERATION_PLUS,
       OPERAND[params.operand.mode],
@@ -42,7 +42,11 @@ export const makeCommandLoseActorHP = (
     code: CHANGE_HP,
     indent,
     parameters: [
-      ...VALIABLE_FUNCTION_TABLE[params.targetType](params, OPERATION_MINUS),
+      OPERAND.direct,
+      params.targetType === "each" ? -1 : params.target,
+      OPERATION_MINUS,
+      OPERAND[params.operand.mode],
+      params.operand.value,
       params.allowDeath,
     ],
   };
