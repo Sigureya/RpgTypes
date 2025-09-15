@@ -3,13 +3,15 @@ import { describe, test, expect, vi } from "vitest";
 import type {
   Command_ChangeActorHP,
   Command_ChangeActorMP,
+  Command_ChangeActorTP,
   EventCommand,
 } from "@RpgTypes/rmmz/eventCommand";
 import {
   makeCommandGainActorHP,
   makeCommandGainActorMP,
+  makeCommandGainActorTP,
 } from "@RpgTypes/rmmz/eventCommand";
-import type { Rmmz_Actors } from "@RpgTypes/rmmzRuntime";
+import type { Rmmz_Actors, Rmmz_Variables } from "@RpgTypes/rmmzRuntime";
 import type { Rmmz_ActorsTemplate } from "@RpgTypes/rmmzRuntime/objects/core/battler/actors";
 import type { FakeMap, FakeBattler } from "./fakes/types";
 import { Game_Interpreter, Game_Party } from "./rmmz_objects";
@@ -55,9 +57,25 @@ interface MakeMocksResult {
   mockActors: MockedActors;
   mockMap: FakeMap;
   mockParty: Game_Party;
+  mockVariables: MockedObject<Rmmz_Variables>;
 }
 
-const makeMocks = (): MakeMocksResult => {
+const makeMockVariables = (
+  values: Record<number, number>
+): MockedObject<Rmmz_Variables> => {
+  return {
+    clear: vi.fn(),
+    value: vi.fn((id: number) => values[id] || 0),
+    setValue: vi.fn(),
+    onChange: vi.fn(),
+  };
+};
+
+interface MockParam {
+  variables?: Record<number, number>;
+}
+
+const makeMocks = ({ variables = {} }: MockParam = {}): MakeMocksResult => {
   const mockBattler = makeMockBattler(1);
   const mockBattler2 = makeMockBattler(2);
   const mockActors = makeMockActors([mockBattler, mockBattler2]);
@@ -65,7 +83,15 @@ const makeMocks = (): MakeMocksResult => {
   const mockParty = new Game_Party();
   // メンバーを加える必要がある
   mockParty._actors = [1, 2];
-  return { mockBattler, mockActors, mockMap, mockParty, mockBattler2 };
+  const mockVariables = makeMockVariables(variables);
+  return {
+    mockBattler,
+    mockActors,
+    mockMap,
+    mockParty,
+    mockBattler2,
+    mockVariables,
+  };
 };
 
 const makeInterpreter = (command: EventCommand) => {
@@ -76,6 +102,7 @@ const makeInterpreter = (command: EventCommand) => {
 
   vi.spyOn(interpreter, "command311");
   vi.spyOn(interpreter, "command312");
+  vi.spyOn(interpreter, "command326");
   interpreter.setup([command], 0);
   return interpreter;
 };
@@ -84,10 +111,14 @@ const setupGlobal = (mocks: MakeMocksResult) => {
   vi.stubGlobal("$gameActors", mocks.mockActors);
   vi.stubGlobal("$gameParty", mocks.mockParty);
   vi.stubGlobal("$gameMap", mocks.mockMap);
+  vi.stubGlobal("$gameVariables", mocks.mockVariables);
 };
 
 const paramCalledWith = (
-  command: Command_ChangeActorHP | Command_ChangeActorMP,
+  command:
+    | Command_ChangeActorHP
+    | Command_ChangeActorMP
+    | Command_ChangeActorTP,
   interpreter: Game_Interpreter
 ) => {
   expect(interpreter.iterateActorEx).toHaveBeenCalledWith(
@@ -227,7 +258,7 @@ describe("gain MP", () => {
     test("exec command", () => {
       const mocks = makeMocks();
       setupGlobal(mocks);
-      const { mockBattler, mockBattler2, mockActors } = mocks;
+      const { mockBattler, mockBattler2, mockActors, mockVariables } = mocks;
       const interpreter = makeInterpreter(command);
 
       const result = interpreter.executeCommand();
@@ -241,6 +272,101 @@ describe("gain MP", () => {
       expect(result).toBe(true);
       expect(mockBattler.gainMp).toHaveBeenCalledWith(123);
       expect(mockBattler2.gainMp).toHaveBeenCalledWith(123);
+      expect(mockVariables.value).not.toHaveBeenCalled();
+    });
+  });
+});
+
+describe("gain TP", () => {
+  describe("target single", () => {
+    const TP_CONST = 789 as const;
+    const command: Command_ChangeActorTP = {
+      code: 326,
+      indent: 0,
+      parameters: [0, 1, 0, 0, TP_CONST],
+    };
+    test("make command", () => {
+      const newCommand = makeCommandGainActorTP({
+        target: 1,
+        operand: { mode: "direct", value: TP_CONST },
+        targetType: "direct",
+      });
+      expect(newCommand).toEqual(command);
+    });
+    test("exec", () => {
+      const mocks = makeMocks();
+      setupGlobal(mocks);
+      const { mockBattler, mockBattler2, mockActors, mockVariables } = mocks;
+      const interpreter = makeInterpreter(command);
+      const result = interpreter.executeCommand();
+      paramCalledWith(command, interpreter);
+      expect(interpreter.command326).toHaveBeenCalledWith(command.parameters);
+      expect(interpreter.iterateActorId).toHaveBeenCalledWith(
+        1,
+        expect.any(Function)
+      );
+      expect(mockActors.actor).toHaveBeenCalledWith(1);
+      expect(result).toBe(true);
+      expect(mockBattler.gainTp).toHaveBeenCalledWith(TP_CONST);
+      expect(mockBattler2.gainTp).not.toHaveBeenCalled();
+      expect(mockVariables.value).not.toHaveBeenCalled();
+    });
+  });
+  describe("target each", () => {
+    const command: Command_ChangeActorTP = {
+      code: 326,
+      indent: 0,
+      parameters: [0, 0, 0, 0, 123],
+    };
+    test("make command", () => {
+      const newCommand: Command_ChangeActorTP = makeCommandGainActorTP({
+        targetType: "each",
+        target: 0,
+        operand: { mode: "direct", value: 123 },
+      });
+      expect(newCommand).toEqual(command);
+    });
+    test("exec command", () => {
+      const mocks = makeMocks();
+      setupGlobal(mocks);
+      const { mockBattler, mockBattler2, mockActors, mockVariables } = mocks;
+      const interpreter = makeInterpreter(command);
+      const result = interpreter.executeCommand();
+      paramCalledWith(command, interpreter);
+      expect(interpreter.command326).toHaveBeenCalledWith(command.parameters);
+      expect(mockActors.actor).toHaveBeenCalledWith(1);
+      expect(mockActors.actor).toHaveBeenCalledWith(2);
+      expect(result).toBe(true);
+      expect(mockBattler.gainTp).toHaveBeenCalledWith(123);
+      expect(mockBattler2.gainTp).toHaveBeenCalledWith(123);
+      expect(mockVariables.value).not.toHaveBeenCalled();
+    });
+  });
+
+  describe("target select variable", () => {
+    const command: Command_ChangeActorTP = {
+      code: 326,
+      indent: 0,
+      parameters: [1, 251, 0, 1, 252],
+    };
+
+    const variables = { 251: 1, 252: 493 } as const;
+
+    test("exec command", () => {
+      const mocks = makeMocks({ variables });
+      setupGlobal(mocks);
+      const { mockBattler, mockBattler2, mockActors, mockVariables } = mocks;
+      const interpreter = makeInterpreter(command);
+      const result = interpreter.executeCommand();
+      paramCalledWith(command, interpreter);
+      expect(mockVariables.value).toReturnWith(variables[251]);
+      expect(mockVariables.value).toReturnWith(variables[252]);
+
+      expect(interpreter.command326).toHaveBeenCalledWith(command.parameters);
+      expect(mockActors.actor).toHaveBeenCalledWith(1);
+      expect(result).toBe(true);
+      expect(mockBattler.gainTp).toHaveBeenCalledWith(variables[252]);
+      expect(mockBattler2.gainTp).not.toHaveBeenCalled();
     });
   });
 });
