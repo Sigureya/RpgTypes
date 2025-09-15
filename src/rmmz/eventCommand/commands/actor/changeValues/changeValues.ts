@@ -4,6 +4,7 @@ import type {
   Command_ChangeActorHP,
   Command_ChangeActorMP,
   Command_ChangeActorTP,
+  ParamArray_ChangeActorHP,
   ParamArray_ChangeActorValue,
   ParamObject_ChangeActorHP,
   ParamObject_ChangeActorValue,
@@ -23,14 +24,7 @@ export const makeCommandGainActorHP = (
   return {
     code: CHANGE_HP,
     indent,
-    parameters: [
-      OPERAND.direct,
-      params.targetType === "each" ? 0 : params.target,
-      OPERATION_PLUS,
-      OPERAND[params.operand.mode],
-      params.operand.value,
-      params.allowDeath,
-    ],
+    parameters: changeHpSingleDirect(OPERATION_PLUS, params),
   };
 };
 
@@ -41,14 +35,7 @@ export const makeCommandLoseActorHP = (
   return {
     code: CHANGE_HP,
     indent,
-    parameters: [
-      OPERAND.direct,
-      params.targetType === "each" ? 0 : params.target,
-      OPERATION_MINUS,
-      OPERAND[params.operand.mode],
-      params.operand.value,
-      params.allowDeath,
-    ],
+    parameters: changeHpSingleDirect(OPERATION_MINUS, params),
   };
 };
 
@@ -59,10 +46,7 @@ export const makeCommandGainActorTP = (
   return {
     code: CHANGE_TP,
     indent,
-    parameters: VALIABLE_FUNCTION_TABLE[params.targetType](
-      params,
-      OPERATION_PLUS
-    ),
+    parameters: changeValueSingleDirect(OPERATION_PLUS, params),
   };
 };
 
@@ -73,10 +57,7 @@ export const makeCommandLoseActorTP = (
   return {
     code: CHANGE_TP,
     indent,
-    parameters: VALIABLE_FUNCTION_TABLE[params.targetType](
-      params,
-      OPERATION_MINUS
-    ),
+    parameters: changeValueSingleDirect(OPERATION_MINUS, params),
   };
 };
 
@@ -87,13 +68,7 @@ export const makeCommandGainActorMP = (
   return {
     code: CHANGE_MP,
     indent,
-    parameters: [
-      OPERAND.direct,
-      params.targetType === "each" ? 0 : params.target,
-      OPERATION_PLUS,
-      OPERAND[params.operand.mode],
-      params.operand.value,
-    ],
+    parameters: changeValueSingleDirect(OPERATION_PLUS, params),
   };
 };
 
@@ -104,54 +79,29 @@ export const makeCommandLoseActorMP = (
   return {
     code: CHANGE_MP,
     indent,
-    parameters: VALIABLE_FUNCTION_TABLE[params.targetType](
-      params,
-      OPERATION_MINUS
-    ),
+    parameters: changeValueSingleDirect(OPERATION_MINUS, params),
   };
 };
 
-const targetEach = (
-  params: ParamObject_ChangeActorValue,
-  operation: Operation
-): ParamArray_ChangeActorValue => {
-  return [
-    OPERAND.direct,
-    -1, // each
-    operation,
-    OPERAND[params.operand.mode],
-    params.operand.value,
-  ];
-};
+const changeValueSingleDirect = (
+  operation: Operation,
+  params: ParamObject_ChangeActorValue
+): ParamArray_ChangeActorValue => [
+  OPERAND.direct,
+  params.targetType === "each" ? 0 : params.target,
+  operation,
+  OPERAND[params.operand.mode],
+  params.operand.value,
+];
 
-const targetDirect = (
-  params: ParamObject_ChangeActorValue,
-  operation: Operation
-): ParamArray_ChangeActorValue => {
-  return [
-    OPERAND.direct,
-    params.target,
-    operation,
-    OPERAND[params.operand.mode],
-    params.operand.value,
-  ];
-};
-
-const targetValiable = (
-  params: ParamObject_ChangeActorValue,
-  operation: Operation
-): ParamArray_ChangeActorValue => {
-  return [
-    OPERAND.variable,
-    params.target,
-    operation,
-    OPERAND[params.operand.mode],
-    params.operand.value,
-  ];
-};
-
-const VALIABLE_FUNCTION_TABLE = {
-  direct: targetDirect,
-  variable: targetValiable,
-  each: targetEach,
-} as const;
+const changeHpSingleDirect = (
+  operation: Operation,
+  params: ParamObject_ChangeActorHP
+): ParamArray_ChangeActorHP => [
+  OPERAND.direct,
+  params.targetType === "each" ? 0 : params.target,
+  operation,
+  OPERAND[params.operand.mode],
+  params.operand.value,
+  params.allowDeath,
+];
