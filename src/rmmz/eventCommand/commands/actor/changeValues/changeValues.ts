@@ -86,22 +86,26 @@ export const makeCommandLoseActorMP = (
 const changeValueSingleDirect = (
   operation: Operation,
   params: ParamObject_ChangeActorValue
-): ParamArray_ChangeActorValue => [
-  OPERAND.direct,
-  params.targetType === "each" ? 0 : params.target,
-  operation,
-  OPERAND[params.operand.mode],
-  params.operand.value,
-];
+): ParamArray_ChangeActorValue => {
+  return [
+    params.targetType === "variable" ? OPERAND.variable : OPERAND.direct,
+    params.targetType === "each" ? 0 : params.target,
+    operation,
+    OPERAND[params.operand.mode],
+    params.operand.value,
+  ];
+};
 
 const changeHpSingleDirect = (
   operation: Operation,
   params: ParamObject_ChangeActorHP
-): ParamArray_ChangeActorHP => [
-  OPERAND.direct,
-  params.targetType === "each" ? 0 : params.target,
-  operation,
-  OPERAND[params.operand.mode],
-  params.operand.value,
-  params.allowDeath,
-];
+): ParamArray_ChangeActorHP => {
+  return [
+    params.targetType === "variable" ? OPERAND.variable : OPERAND.direct,
+    params.targetType === "each" ? 0 : params.target,
+    operation,
+    OPERAND[params.operand.mode],
+    params.operand.value,
+    params.allowDeath,
+  ];
+};

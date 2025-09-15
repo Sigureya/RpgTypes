@@ -37,10 +37,20 @@ export type ParamArray_ChangeActorHP = [
   allowDeath: boolean
 ];
 
-export interface ParamObject_ChangeActorValue {
-  targetType: "direct" | "variable" | "each";
-  target: number;
-  operand: { mode: "variable" | "direct"; value: number };
+export type ParamObject_ChangeActorValue =
+  | {
+      targetType: "direct" | "variable";
+      target: number;
+      operand: Operand;
+    }
+  | {
+      targetType: "each";
+      operand: Operand;
+    };
+
+interface Operand {
+  mode: "variable" | "direct";
+  value: number;
 }
 
 export type ParamObject_ChangeActorHP = ParamObject_ChangeActorValue & {

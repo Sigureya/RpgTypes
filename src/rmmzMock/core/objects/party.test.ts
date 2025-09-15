@@ -11,16 +11,10 @@ import {
   makeCommandGainActorMP,
   makeCommandGainActorTP,
 } from "@RpgTypes/rmmz/eventCommand";
-import type { Rmmz_Actors, Rmmz_Variables } from "@RpgTypes/rmmzRuntime";
+import type { Rmmz_Variables } from "@RpgTypes/rmmzRuntime";
 import type { Rmmz_ActorsTemplate } from "@RpgTypes/rmmzRuntime/objects/core/battler/actors";
 import type { FakeMap, FakeBattler } from "./fakes/types";
 import { Game_Interpreter, Game_Party } from "./rmmz_objects";
-
-declare global {
-  var $gameParty: Game_Party;
-  var $gameMap: Partial<FakeMap>;
-  var $gameActors: Rmmz_Actors;
-}
 
 type FakeActor = FakeBattler & { actorId(): number };
 
@@ -179,7 +173,6 @@ describe("gain HP", () => {
       const newCommand: Command_ChangeActorHP = makeCommandGainActorHP({
         allowDeath: false,
         targetType: "each",
-        target: 0,
         operand: { mode: "direct", value: 123 },
       });
       expect(newCommand).toEqual(command);
@@ -250,7 +243,6 @@ describe("gain MP", () => {
     test("make command", () => {
       const newCommand: Command_ChangeActorMP = makeCommandGainActorMP({
         targetType: "each",
-        target: 0,
         operand: { mode: "direct", value: 123 },
       });
       expect(newCommand).toEqual(command);
@@ -321,7 +313,6 @@ describe("gain TP", () => {
     test("make command", () => {
       const newCommand: Command_ChangeActorTP = makeCommandGainActorTP({
         targetType: "each",
-        target: 0,
         operand: { mode: "direct", value: 123 },
       });
       expect(newCommand).toEqual(command);
@@ -352,6 +343,14 @@ describe("gain TP", () => {
 
     const variables = { 251: 1, 252: 493 } as const;
 
+    test("make command", () => {
+      const newCommand: Command_ChangeActorTP = makeCommandGainActorTP({
+        targetType: "variable",
+        target: 251,
+        operand: { mode: "variable", value: 252 },
+      });
+      expect(newCommand).toEqual(command);
+    });
     test("exec command", () => {
       const mocks = makeMocks({ variables });
       setupGlobal(mocks);
