@@ -5,5 +5,5 @@ export interface Rmmz_InterpreterBattler<Actor, Enemy> {
     dataId: number,
     callBack: (actor: Actor) => void
   ): void;
-  iterateEnemyId(enemyId: number, callBack: (enemy: Enemy) => void): void;
+  iterateEnemyIndex(enemyId: number, callBack: (enemy: Enemy) => void): void;
 }

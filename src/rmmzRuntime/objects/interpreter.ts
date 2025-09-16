@@ -124,7 +124,10 @@ export declare class Game_Interpreter
     callback: (actir: Rmmz_Actor) => void
   ): void;
   iterateActorId(actorId: number, callBack: (actor: Rmmz_Actor) => void): void;
-  iterateEnemyId(enemyId: number, callBack: (enemy: Rmmz_Enemy) => void): void;
+  iterateEnemyIndex(
+    enemyId: number,
+    callBack: (enemy: Rmmz_Enemy) => void
+  ): void;
 
   command101(showMessage: ParamArray_ShowMessage): boolean;
   command102(setupChoice: ParamArray_SetupChoice): boolean;
