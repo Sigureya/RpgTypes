@@ -20,7 +20,7 @@ type FakeActor = FakeBattler & { actorId(): number };
 type MockedActors = MockedObject<Rmmz_ActorsTemplate<FakeBattler>>;
 
 interface MakeMocksResult {
-  mockBattler: MockedObject<FakeActor>;
+  mockBattler1: MockedObject<FakeActor>;
   mockBattler2: MockedObject<FakeActor>;
   mockActors: MockedActors;
   mockMap: FakeMap;
@@ -139,7 +139,7 @@ const makeMocks = ({ variables }: MockParam): MakeMocksResult => {
   const mockParty = makeMockParty([1, 2]);
   const mockVariables = makeMockVariables(variables ?? {});
   return {
-    mockBattler: mockBattler1,
+    mockBattler1,
     mockActors,
     mockMap,
     mockParty,
@@ -185,7 +185,7 @@ const runTestCase = (testCase: TestCase) => {
       paramCalledWith(testCase.command, interpreter);
       actorsCalled(mock.mockActors, testCase.actors);
       testCase.usingVariables(mock.mockVariables);
-      testCase.changeValue([mock.mockBattler, mock.mockBattler2]);
+      testCase.changeValue([mock.mockBattler1, mock.mockBattler2]);
     });
   });
 };
@@ -325,26 +325,27 @@ const testCases: TestCase[] = [
       expect(v.value).toReturnWith(231);
     },
   },
-
   {
-    caseName: "gain TP each",
+    caseName: "each actor gain TP (variables[72]:231)",
     command: {
       code: 326,
       indent: 0,
-      parameters: [0, 0, 0, 0, 123],
+      parameters: [0, 0, 0, 1, 72],
     },
     expected: makeCommandGainActorTP({
       targetType: "each",
-      operand: { mode: "direct", value: 123 },
+      operand: { mode: "variable", value: 72 },
     }),
     members: (party) => each(party),
     actors: { called: [1, 2], notCalled: [] },
     changeValue: ([a1, a2]) => {
-      expect(a1.gainTp).toHaveBeenCalledWith(123);
-      expect(a2.gainTp).toHaveBeenCalledWith(123);
+      expect(a1.gainTp).toHaveBeenCalledWith(231);
+      expect(a2.gainTp).toHaveBeenCalledWith(231);
     },
+    variableLiteral: { 72: 231 },
     usingVariables: (v) => {
-      expect(v.value).not.toHaveBeenCalled();
+      expect(v.value).toHaveBeenCalledWith(72);
+      expect(v.value).toReturnWith(231);
     },
   },
 ];
