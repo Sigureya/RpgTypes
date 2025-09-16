@@ -10,6 +10,7 @@ import {
   makeCommandGainEnemyMP,
   makeCommandGainEnemyTP,
   makeCommandLoseEnemyMP,
+  makeCommandLoseEnemyTP,
 } from "@RpgTypes/rmmz/eventCommand/commands/enemy/change/change";
 import type { Rmmz_Variables } from "@RpgTypes/rmmzRuntime";
 import type { Rmmz_Unit } from "@RpgTypes/rmmzRuntime/objects/core/unit/unit";
@@ -295,6 +296,21 @@ const testCaseTP: TestCase<Command_ChangeEnemyTP>[] = [
     variables: { 22: 654 },
     targets: [0, 1, 2],
     value: 654,
+    fnName: "gainTp",
+  },
+  {
+    caseName: "lose TP enemyIndex=each value=V[13]:234",
+    command: makeCommandLoseEnemyTP({
+      operand: { mode: "variable", value: 13 },
+    }),
+    expected: {
+      code: 342,
+      indent: 0,
+      parameters: [-1, 1, 1, 13],
+    },
+    variables: { 13: 234 },
+    targets: [0, 1, 2],
+    value: -234,
     fnName: "gainTp",
   },
 ];
