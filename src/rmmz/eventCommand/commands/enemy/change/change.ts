@@ -16,37 +16,37 @@ const OPERAND = {
   variable: 1,
 } as const;
 
-export const makeCommandGainHP = (
-  params: ParamObject_ChangeEnemyHP,
-  indent: number = 0
-): Command_ChangeEnemyHP => ({
-  code: 331,
-  indent,
-  parameters: changeHpSingleDirect(OPERATION_PLUS, params),
-});
+// export const makeCommandGainHP = (
+//   params: ParamObject_ChangeEnemyHP,
+//   indent: number = 0
+// ): Command_ChangeEnemyHP => ({
+//   code: 331,
+//   indent,
+//   parameters: changeHpSingleDirect(OPERATION_PLUS, params),
+// });
 
-export const makeCommandLoseHP = (
-  params: ParamObject_ChangeEnemyHP,
-  indent: number = 0
-): Command_ChangeEnemyHP => ({
-  code: 331,
-  indent,
-  parameters: changeHpSingleDirect(OPERATION_MINUS, params),
-});
+// export const makeCommandLoseHP = (
+//   params: ParamObject_ChangeEnemyHP,
+//   indent: number = 0
+// ): Command_ChangeEnemyHP => ({
+//   code: 331,
+//   indent,
+//   parameters: changeHpSingleDirect(OPERATION_MINUS, params),
+// });
 
-const changeHpSingleDirect = (
-  operation: Operation,
-  params: ParamObject_ChangeEnemyHP
-): ParamArray_ChangeEnemyHP => {
-  return [
-    params.targetType === "variable" ? OPERAND.variable : OPERAND.direct,
-    params.targetType === "each" ? 0 : params.target,
-    operation,
-    OPERAND[params.operand.mode],
-    params.operand.value,
-    params.allowDeath,
-  ];
-};
+// const changeHpSingleDirect = (
+//   operation: Operation,
+//   params: ParamObject_ChangeEnemyHP
+// ): ParamArray_ChangeEnemyHP => {
+//   return [
+//     params.targetType === "variable" ? OPERAND.variable : OPERAND.direct,
+//     params.targetType === "each" ? 0 : params.target,
+//     operation,
+//     OPERAND[params.operand.mode],
+//     params.operand.value,
+//     params.allowDeath,
+//   ];
+// };
 
 export const makeCommandGainEnemyMP = (
   param: ParamObject_ChangeEnemyValue,
@@ -89,7 +89,7 @@ const changeValueSingleDirect = (
   params: ParamObject_ChangeEnemyValue
 ): ParamArray_ChangeEnemyValue => {
   return [
-    params.targetType === "each" ? 0 : params.target,
+    params.targetIndex,
     operation,
     OPERAND[params.operand.mode],
     params.operand.value,
