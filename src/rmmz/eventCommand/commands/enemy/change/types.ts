@@ -49,6 +49,10 @@ interface Operand {
   value: number;
 }
 
+export type ParamObject_ChangeEnemyHP = ParamObject_ChangeEnemyValue & {
+  allowDeath: boolean;
+};
+
 export type ParamArray_LoseAllEnemyMP = ParamArray_ChangeEnemyValueTemplate<{
   targetType: Designation["DIRECT"];
   operation: Operation_AddSub["SUB"];
