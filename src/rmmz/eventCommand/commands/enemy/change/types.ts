@@ -34,7 +34,7 @@ export type ParamArray_ChangeEnemyValueTemplate<
 ];
 
 export type ParamObject_ChangeEnemyValue = {
-  targetIndex: number;
+  targetIndex?: number;
   operand: Operand;
 };
 

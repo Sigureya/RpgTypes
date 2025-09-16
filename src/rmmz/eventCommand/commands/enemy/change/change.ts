@@ -16,6 +16,7 @@ const OPERAND = {
   variable: 1,
 } as const;
 
+const ENEMY_EACH = -1 as const;
 // export const makeCommandGainHP = (
 //   params: ParamObject_ChangeEnemyHP,
 //   indent: number = 0
@@ -89,7 +90,7 @@ const changeValueSingleDirect = (
   params: ParamObject_ChangeEnemyValue
 ): ParamArray_ChangeEnemyValue => {
   return [
-    params.targetIndex,
+    params.targetIndex ?? ENEMY_EACH,
     operation,
     OPERAND[params.operand.mode],
     params.operand.value,
