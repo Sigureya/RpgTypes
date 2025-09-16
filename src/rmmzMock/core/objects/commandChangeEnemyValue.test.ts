@@ -7,8 +7,7 @@ import type {
   EventCommand,
 } from "@RpgTypes/rmmz/eventCommand";
 import { makeCommandGainEnemyMP } from "@RpgTypes/rmmz/eventCommand/commands/enemy/change/change";
-import type { Rmmz_Enemy, Rmmz_Variables } from "@RpgTypes/rmmzRuntime";
-import type { Rmmz_Troop } from "@RpgTypes/rmmzRuntime/objects/core/troop";
+import type { Rmmz_Variables } from "@RpgTypes/rmmzRuntime";
 import type { Rmmz_Unit } from "@RpgTypes/rmmzRuntime/objects/core/unit/unit";
 import type { FakeBattler, FakeMap } from "./fakes/types";
 import { Game_Interpreter } from "./rmmz_objects";
@@ -32,6 +31,16 @@ const paramCalledWith = (
   );
   const key: keyof Game_Interpreter = `command${command.code}`;
   expect(interpreter[key]).toHaveBeenCalledWith(command.parameters);
+};
+
+const variableCallWith = (
+  mock: MockedObject<Rmmz_Variables>,
+  record: Record<number, number>
+) => {
+  Object.entries(record).forEach(([k, v]) => {
+    expect(mock.value).toHaveBeenCalledWith(Number(k));
+    expect(mock.value).toHaveReturnedWith(v);
+  });
 };
 
 type MokedTroop = MockedObject<
@@ -117,15 +126,16 @@ interface TestCase<T extends CommandTypes> {
   targets: number[];
   value: number;
   fnName: keyof FakeBattler;
+  variables?: Record<number, number>;
 }
 
 const runTestCase = <T extends CommandTypes>(testCase: TestCase<T>) => {
   describe(testCase.caseName, () => {
-    test("", () => {
+    test("make command", () => {
       expect(testCase.command).toEqual(testCase.expected);
     });
-    test("", () => {
-      const mock = makeMocks();
+    test("run command", () => {
+      const mock = makeMocks(testCase.variables);
       setupGlobal(mock);
       const interpreter = makeInterpreter(testCase.command);
       interpreter.executeCommand();
@@ -135,6 +145,9 @@ const runTestCase = <T extends CommandTypes>(testCase: TestCase<T>) => {
           testCase.value
         );
       });
+      if (testCase.variables) {
+        variableCallWith(mock.mockVariables, testCase.variables);
+      }
     });
   });
 };
@@ -143,17 +156,32 @@ const testCaseMP: TestCase<Command_ChangeEnemyMP>[] = [
   {
     caseName: "gain MP enemyIndex=2 value=455",
     command: makeCommandGainEnemyMP({
-      targetType: "direct",
-      target: 0,
+      targetIndex: 2,
       operand: { mode: "direct", value: 455 },
     }),
     expected: {
       code: 332,
       indent: 0,
-      parameters: [0, 0, 0, 455],
+      parameters: [2, 0, 0, 455],
     },
-    targets: [0],
+    targets: [2],
     value: 455,
+    fnName: "gainMp",
+  },
+  {
+    caseName: "gain MP enemyIndex=2 value=V[12]:815",
+    command: makeCommandGainEnemyMP({
+      targetIndex: 1,
+      operand: { mode: "variable", value: 12 },
+    }),
+    expected: {
+      code: 332,
+      indent: 0,
+      parameters: [1, 0, 1, 12],
+    },
+    variables: { 12: 815 },
+    targets: [1],
+    value: 815,
     fnName: "gainMp",
   },
 ];
