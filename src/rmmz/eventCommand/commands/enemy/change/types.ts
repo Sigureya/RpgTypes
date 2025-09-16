@@ -64,7 +64,6 @@ export type ParamArray_GainEnemyMP = ParamArray_ChangeEnemyValueTemplate<{
 }>;
 
 export type ParamArray_ChangeEnemyValue = [
-  targetType: Designation["DIRECT"] | Designation["VARIABLE"],
   index: number,
   operation: Operation_AddSub["ADD"] | Operation_AddSub["SUB"],
   valueType: number,

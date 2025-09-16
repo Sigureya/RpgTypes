@@ -89,7 +89,6 @@ const changeValueSingleDirect = (
   params: ParamObject_ChangeEnemyValue
 ): ParamArray_ChangeEnemyValue => {
   return [
-    params.targetType === "variable" ? OPERAND.variable : OPERAND.direct,
     params.targetType === "each" ? 0 : params.target,
     operation,
     OPERAND[params.operand.mode],
