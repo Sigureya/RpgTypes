@@ -125,19 +125,19 @@ const makeMockVariables = (
 ): MockedObject<Rmmz_Variables> => {
   return {
     clear: vi.fn(),
-    value: vi.fn((id: number) => values[id] || 0),
+    value: vi.fn((id: number) => values[id] ?? NaN),
     setValue: vi.fn(),
     onChange: vi.fn(),
   };
 };
 
-const makeMocks = ({ variables = {} }: MockParam = {}): MakeMocksResult => {
+const makeMocks = ({ variables }: MockParam): MakeMocksResult => {
   const mockBattler1 = makeMockBattler(1);
   const mockBattler2 = makeMockBattler(2);
   const mockActors = makeMockActors([mockBattler1, mockBattler2]);
   const mockMap = makeMockMap();
   const mockParty = makeMockParty([1, 2]);
-  const mockVariables = makeMockVariables(variables);
+  const mockVariables = makeMockVariables(variables ?? {});
   return {
     mockBattler: mockBattler1,
     mockActors,
@@ -176,7 +176,7 @@ const runTestCase = (testCase: TestCase) => {
       expect(testCase.command).toEqual(testCase.expected);
     });
     test("exec", () => {
-      const mock = makeMocks(testCase.variableLiteral);
+      const mock = makeMocks({ variables: testCase.variableLiteral });
       setupGlobal(mock);
       const interpreter = makeInterpreter(testCase.command);
       const result: boolean = interpreter.executeCommand();
@@ -184,8 +184,8 @@ const runTestCase = (testCase: TestCase) => {
       testCase.members(mock.mockParty);
       paramCalledWith(testCase.command, interpreter);
       actorsCalled(mock.mockActors, testCase.actors);
-      testCase.changeValue([mock.mockBattler, mock.mockBattler2]);
       testCase.usingVariables(mock.mockVariables);
+      testCase.changeValue([mock.mockBattler, mock.mockBattler2]);
     });
   });
 };
@@ -301,6 +301,31 @@ const testCases: TestCase[] = [
       expect(v.value).not.toHaveBeenCalled();
     },
   },
+  {
+    caseName: "gain TP direct V",
+    command: {
+      code: 326,
+      indent: 0,
+      parameters: [0, 1, 0, 1, 64],
+    },
+    expected: makeCommandGainActorTP({
+      targetType: "direct",
+      target: 1,
+      operand: { mode: "variable", value: 64 },
+    }),
+    members: (party) => single(party),
+    actors: { called: [1], notCalled: [2] },
+    changeValue: ([a1, a2]) => {
+      expect(a1.gainTp).toHaveBeenCalledWith(231);
+      expect(a2.gainTp).not.toHaveBeenCalled();
+    },
+    variableLiteral: { 64: 231 },
+    usingVariables: (v) => {
+      expect(v.value).toHaveBeenCalledWith(64);
+      expect(v.value).toReturnWith(231);
+    },
+  },
+
   {
     caseName: "gain TP each",
     command: {
