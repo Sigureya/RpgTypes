@@ -6,7 +6,11 @@ import type {
   Command_ChangeEnemyTP,
   EventCommand,
 } from "@RpgTypes/rmmz/eventCommand";
-import { makeCommandGainEnemyMP } from "@RpgTypes/rmmz/eventCommand/commands/enemy/change/change";
+import {
+  makeCommandGainEnemyMP,
+  makeCommandGainEnemyTP,
+  makeCommandLoseEnemyMP,
+} from "@RpgTypes/rmmz/eventCommand/commands/enemy/change/change";
 import type { Rmmz_Variables } from "@RpgTypes/rmmzRuntime";
 import type { Rmmz_Unit } from "@RpgTypes/rmmzRuntime/objects/core/unit/unit";
 import type { FakeBattler, FakeMap } from "./fakes/types";
@@ -135,11 +139,13 @@ const runTestCase = <T extends CommandTypes>(testCase: TestCase<T>) => {
       expect(testCase.command).toEqual(testCase.expected);
     });
     test("run command", () => {
-      const mock = makeMocks(testCase.variables);
+      const mock = makeMocks(testCase.variables ?? {});
       setupGlobal(mock);
-      const interpreter = makeInterpreter(testCase.command);
+      const interpreter = makeInterpreter(testCase.expected);
       interpreter.executeCommand();
-      paramCalledWith(testCase.command, interpreter);
+      expect(mock.troop.members).toHaveBeenCalled();
+      expect(interpreter.operateValue).toReturnWith(testCase.value);
+      paramCalledWith(testCase.expected, interpreter);
       testCase.targets.forEach((i) => {
         expect(mock.enemies[i][testCase.fnName]).toHaveBeenCalledWith(
           testCase.value
@@ -182,6 +188,51 @@ const testCaseMP: TestCase<Command_ChangeEnemyMP>[] = [
     variables: { 12: 815 },
     targets: [1],
     value: 815,
+    fnName: "gainMp",
+  },
+  {
+    caseName: "gain MP enemyIndex=each value=456",
+    command: makeCommandGainEnemyMP({
+      operand: { mode: "direct", value: 456 },
+    }),
+    expected: {
+      code: 332,
+      indent: 0,
+      parameters: [-1, 0, 0, 456],
+    },
+    targets: [0, 1, 2],
+    value: 456,
+    fnName: "gainMp",
+  },
+  {
+    caseName: "gain MP enemyIndex=each value=V[22]353",
+    command: makeCommandGainEnemyMP({
+      operand: { mode: "variable", value: 22 },
+    }),
+    expected: {
+      code: 332,
+      indent: 0,
+      parameters: [-1, 0, 1, 22],
+    },
+    variables: { 22: 353 },
+    targets: [0, 1, 2],
+    value: 353,
+    fnName: "gainMp",
+  },
+
+  {
+    caseName: "lose MP enemyIndex=each value=V[13]:123",
+    command: makeCommandLoseEnemyMP({
+      operand: { mode: "variable", value: 13 },
+    }),
+    expected: {
+      code: 332,
+      indent: 0,
+      parameters: [-1, 1, 1, 13],
+    },
+    variables: { 13: 123 },
+    targets: [0, 1, 2],
+    value: -123,
     fnName: "gainMp",
   },
 ];
