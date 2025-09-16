@@ -33,6 +33,26 @@ export type ParamArray_ChangeEnemyValueTemplate<
   value: number
 ];
 
+export type ParamObject_ChangeEnemyValue =
+  | {
+      targetType: "direct" | "variable";
+      target: number;
+      operand: Operand;
+    }
+  | {
+      targetType: "each";
+      operand: Operand;
+    };
+
+interface Operand {
+  mode: "variable" | "direct";
+  value: number;
+}
+
+export type ParamObject_ChangeEnemyHP = ParamObject_ChangeEnemyValue & {
+  allowDeath: boolean;
+};
+
 export type ParamArray_LoseAllEnemyMP = ParamArray_ChangeEnemyValueTemplate<{
   targetType: Designation["DIRECT"];
   operation: Operation_AddSub["SUB"];
@@ -44,7 +64,6 @@ export type ParamArray_GainEnemyMP = ParamArray_ChangeEnemyValueTemplate<{
 }>;
 
 export type ParamArray_ChangeEnemyValue = [
-  targetType: Designation["DIRECT"] | Designation["VARIABLE"],
   index: number,
   operation: Operation_AddSub["ADD"] | Operation_AddSub["SUB"],
   valueType: number,
