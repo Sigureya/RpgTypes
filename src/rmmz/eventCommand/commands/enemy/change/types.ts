@@ -33,6 +33,22 @@ export type ParamArray_ChangeEnemyValueTemplate<
   value: number
 ];
 
+export type ParamObject_ChangeEnemyValue =
+  | {
+      targetType: "direct" | "variable";
+      target: number;
+      operand: Operand;
+    }
+  | {
+      targetType: "each";
+      operand: Operand;
+    };
+
+interface Operand {
+  mode: "variable" | "direct";
+  value: number;
+}
+
 export type ParamArray_LoseAllEnemyMP = ParamArray_ChangeEnemyValueTemplate<{
   targetType: Designation["DIRECT"];
   operation: Operation_AddSub["SUB"];
