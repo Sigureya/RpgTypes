@@ -190,7 +190,7 @@ const runTestCase = (testCase: TestCase) => {
   });
 };
 
-const testCases: TestCase[] = [
+const testCasesHP: TestCaseTemplate<Command_ChangeActorHP>[] = [
   {
     caseName: "gain HP actorId=1 value=123 allowDeath=false",
     command: {
@@ -265,6 +265,115 @@ const testCases: TestCase[] = [
     },
   },
   {
+    caseName: "gain HP actorId=1 value=V[81]:123 allowDeath=true",
+    command: {
+      code: 311,
+      indent: 0,
+      parameters: [0, 1, 0, 1, 81, true],
+    },
+    expected: makeCommandGainActorHP({
+      allowDeath: true,
+      targetType: "direct",
+      target: 1,
+      operand: { mode: "variable", value: 81 },
+    }),
+    members: (party) => single(party),
+    actors: { called: [1], notCalled: [2] },
+    variableLiteral: { 81: 123 },
+    changeValue: ([a1, a2]) => {
+      expect(a1.gainHp).toHaveBeenCalledWith(123);
+      expect(a2.gainHp).not.toHaveBeenCalled();
+    },
+    usingVariables: (v) => {
+      expect(v.value).toHaveBeenCalledWith(81);
+      expect(v.value).toReturnWith(123);
+    },
+  },
+  {
+    caseName: "gain HP each value=V[81]:123 allowDeath=false",
+    command: {
+      code: 311,
+      indent: 0,
+      parameters: [0, 0, 0, 1, 81, false],
+    },
+    expected: makeCommandGainActorHP({
+      allowDeath: false,
+      targetType: "each",
+      operand: { mode: "variable", value: 81 },
+    }),
+    members: (party) => each(party),
+    actors: { called: [1, 2], notCalled: [] },
+    variableLiteral: { 81: 123 },
+    changeValue: ([a1, a2]) => {
+      expect(a1.gainHp).toHaveBeenCalledWith(123);
+      expect(a2.gainHp).toHaveBeenCalledWith(123);
+    },
+    usingVariables: (v) => {
+      expect(v.value).toHaveBeenCalledTimes(1);
+      expect(v.value).toHaveBeenCalledWith(81);
+      expect(v.value).toReturnWith(123);
+    },
+  },
+
+  {
+    caseName: "gain HP actorId=V[80]:2 value=123 allowDeath=true",
+    command: {
+      code: 311,
+      indent: 0,
+      parameters: [1, 80, 0, 0, 123, true],
+    },
+    expected: makeCommandGainActorHP({
+      allowDeath: true,
+      targetType: "variable",
+      target: 80,
+      operand: { mode: "direct", value: 123 },
+    }),
+    members: (party) => single(party),
+    actors: { called: [2], notCalled: [1] },
+    variableLiteral: { 80: 2 },
+    changeValue: ([a1, a2]) => {
+      expect(a1.gainHp).not.toHaveBeenCalled();
+      expect(a2.gainHp).toHaveBeenCalledWith(123);
+    },
+    usingVariables: (v) => {
+      expect(v.value).toHaveBeenCalledTimes(1);
+      expect(v.value).toHaveBeenCalledWith(80);
+      expect(v.value).toReturnWith(2);
+    },
+  },
+
+  {
+    caseName: "gain HP actorId=V[80]:2 value=V[81]:123 allowDeath=true",
+    command: {
+      code: 311,
+      indent: 0,
+      parameters: [1, 80, 0, 1, 81, true],
+    },
+    expected: makeCommandGainActorHP({
+      allowDeath: true,
+      targetType: "variable",
+      target: 80,
+      operand: { mode: "variable", value: 81 },
+    }),
+    members: (party) => single(party),
+    actors: { called: [2], notCalled: [1] },
+    variableLiteral: { 80: 2, 81: 123 },
+    changeValue: ([a1, a2]) => {
+      expect(a1.gainHp).not.toHaveBeenCalled();
+      expect(a2.gainHp).toHaveBeenCalledWith(123);
+    },
+    usingVariables: (v) => {
+      expect(v.value).toHaveBeenCalledTimes(2);
+      expect(v.value).toHaveBeenCalledWith(80);
+      expect(v.value).toHaveBeenCalledWith(81);
+      expect(v.value).toHaveReturnedWith(2);
+      expect(v.value).toHaveReturnedWith(123);
+    },
+  },
+];
+
+const testCasesMP: TestCaseTemplate<Command_ChangeActorMP>[] = [
+  {
     caseName: "gain MP actorId=1 value=123",
     command: {
       code: 312,
@@ -331,6 +440,36 @@ const testCases: TestCase[] = [
       expect(v.value).toReturnWith(217);
     },
   },
+  {
+    caseName: "gain MP actorId=V[90]:2 value=V[91]:77",
+    command: {
+      code: 312,
+      indent: 0,
+      parameters: [1, 90, 0, 1, 91],
+    },
+    expected: makeCommandGainActorMP({
+      targetType: "variable",
+      target: 90,
+      operand: { mode: "variable", value: 91 },
+    }),
+    members: (party) => single(party),
+    actors: { called: [2], notCalled: [1] },
+    variableLiteral: { 90: 2, 91: 77 },
+    changeValue: ([a1, a2]) => {
+      expect(a1.gainMp).not.toHaveBeenCalled();
+      expect(a2.gainMp).toHaveBeenCalledWith(77);
+    },
+    usingVariables: (v) => {
+      expect(v.value).toHaveBeenCalledTimes(2);
+      expect(v.value).toHaveBeenCalledWith(90);
+      expect(v.value).toHaveBeenCalledWith(91);
+      expect(v.value).toHaveReturnedWith(2);
+      expect(v.value).toHaveReturnedWith(77);
+    },
+  },
+];
+
+const testCasesTP: TestCaseTemplate<Command_ChangeActorTP>[] = [
   {
     caseName: "gain TP actorId=1 value=123",
     command: {
@@ -426,6 +565,35 @@ const testCases: TestCase[] = [
       expect(v.value).toReturnWith(231);
     },
   },
+  {
+    caseName: "gain TP actorId=V[99]:2 value=V[100]:88",
+    command: {
+      code: 326,
+      indent: 0,
+      parameters: [1, 99, 0, 1, 100],
+    },
+    expected: makeCommandGainActorTP({
+      targetType: "variable",
+      target: 99,
+      operand: { mode: "variable", value: 100 },
+    }),
+    members: (party) => single(party),
+    actors: { called: [2], notCalled: [1] },
+    variableLiteral: { 99: 2, 100: 88 },
+    changeValue: ([a1, a2]) => {
+      expect(a1.gainTp).not.toHaveBeenCalled();
+      expect(a2.gainTp).toHaveBeenCalledWith(88);
+    },
+    usingVariables: (v) => {
+      expect(v.value).toHaveBeenCalledTimes(2);
+      expect(v.value).toHaveBeenCalledWith(99);
+      expect(v.value).toHaveBeenCalledWith(100);
+      expect(v.value).toHaveReturnedWith(2);
+      expect(v.value).toHaveReturnedWith(88);
+    },
+  },
 ];
 
-testCases.forEach((tc) => runTestCase(tc));
+testCasesHP.forEach((tc) => runTestCase(tc));
+testCasesMP.forEach((tc) => runTestCase(tc));
+testCasesTP.forEach((tc) => runTestCase(tc));
