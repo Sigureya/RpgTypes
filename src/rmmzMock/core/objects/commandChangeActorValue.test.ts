@@ -59,12 +59,12 @@ const paramCalledWith = (
   expect(interpreter[key]).toHaveBeenCalledWith(command.parameters);
 };
 
-interface ActorCCC {
+interface ActorsCalledWith {
   called: number[];
   notCalled: number[];
 }
 
-const actorsCalled = (mockActors: MockedActors, ids: ActorCCC) => {
+const actorsCalled = (mockActors: MockedActors, ids: ActorsCalledWith) => {
   ids.called.forEach((id) => {
     expect(mockActors.actor).toHaveBeenCalledWith(id);
   });
@@ -160,7 +160,7 @@ interface TestCaseTemplate<Command> {
   expected: Command;
   variableLiteral?: Record<number, number>;
   members: (party: Game_Party) => void;
-  actors: ActorCCC;
+  actors: ActorsCalledWith;
   changeValue: (battlers: MockedObject<FakeActor>[]) => void;
   usingVariables: (v: MockedObject<Rmmz_Variables>) => void;
 }
@@ -280,6 +280,30 @@ const testCases: TestCase[] = [
     },
   },
   {
+    caseName: "each actor gain MP (variables[55]:217)",
+    command: {
+      code: 312,
+      indent: 0,
+      parameters: [0, 0, 0, 1, 55],
+    },
+    expected: makeCommandGainActorMP({
+      targetType: "each",
+      operand: { mode: "variable", value: 55 },
+    }),
+    members: (party) => each(party),
+    actors: { called: [1, 2], notCalled: [] },
+    changeValue: ([a1, a2]) => {
+      expect(a1.gainMp).toHaveBeenCalledWith(217);
+      expect(a2.gainMp).toHaveBeenCalledWith(217);
+    },
+    variableLiteral: { 55: 217 },
+    usingVariables: (v) => {
+      expect(v.value).toHaveBeenCalledTimes(1);
+      expect(v.value).toHaveBeenCalledWith(55);
+      expect(v.value).toReturnWith(217);
+    },
+  },
+  {
     caseName: "gain TP direct",
     command: {
       code: 326,
@@ -344,6 +368,7 @@ const testCases: TestCase[] = [
     },
     variableLiteral: { 72: 231 },
     usingVariables: (v) => {
+      expect(v.value).toHaveBeenCalledTimes(1);
       expect(v.value).toHaveBeenCalledWith(72);
       expect(v.value).toReturnWith(231);
     },
