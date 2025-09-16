@@ -236,5 +236,69 @@ const testCaseMP: TestCase<Command_ChangeEnemyMP>[] = [
     fnName: "gainMp",
   },
 ];
+const testCaseTP: TestCase<Command_ChangeEnemyTP>[] = [
+  {
+    caseName: "gain TP enemyIndex=2 value=123",
+    command: makeCommandGainEnemyTP({
+      targetIndex: 2,
+      operand: { mode: "direct", value: 123 },
+    }),
+    expected: {
+      code: 342,
+      indent: 0,
+      parameters: [2, 0, 0, 123],
+    },
+    targets: [2],
+    value: 123,
+    fnName: "gainTp",
+  },
+  {
+    caseName: "gain TP enemyIndex=2 value=V[21]:321",
+    command: makeCommandGainEnemyTP({
+      targetIndex: 2,
+      operand: { mode: "variable", value: 21 },
+    }),
+    expected: {
+      code: 342,
+      indent: 0,
+      parameters: [2, 0, 1, 21],
+    },
+    variables: { 21: 321 },
+    targets: [2],
+    value: 321,
+    fnName: "gainTp",
+  },
+  {
+    caseName: "gain TP enemyIndex=each value=456",
+    command: makeCommandGainEnemyTP({
+      operand: { mode: "direct", value: 456 },
+    }),
+    expected: {
+      code: 342,
+      indent: 0,
+      parameters: [-1, 0, 0, 456],
+    },
+    targets: [0, 1, 2],
+    value: 456,
+    fnName: "gainTp",
+  },
+  {
+    caseName: "gain TP enemyIndex=each value=V[22]:654",
+    command: makeCommandGainEnemyTP({
+      operand: { mode: "variable", value: 22 },
+    }),
+    expected: {
+      code: 342,
+      indent: 0,
+      parameters: [-1, 0, 1, 22],
+    },
+    variables: { 22: 654 },
+    targets: [0, 1, 2],
+    value: 654,
+    fnName: "gainTp",
+  },
+];
 
 testCaseMP.forEach(runTestCase);
+
+testCaseTP.forEach(runTestCase);
