@@ -33,16 +33,10 @@ export type ParamArray_ChangeEnemyValueTemplate<
   value: number
 ];
 
-export type ParamObject_ChangeEnemyValue =
-  | {
-      targetType: "direct" | "variable";
-      target: number;
-      operand: Operand;
-    }
-  | {
-      targetType: "each";
-      operand: Operand;
-    };
+export type ParamObject_ChangeEnemyValue = {
+  targetIndex?: number;
+  operand: Operand;
+};
 
 interface Operand {
   mode: "variable" | "direct";
