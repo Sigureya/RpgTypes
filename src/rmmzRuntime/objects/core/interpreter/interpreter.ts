@@ -27,4 +27,5 @@ export interface Rmmz_Interpreter<Coomand> {
   currentCommand(): Coomand | undefined;
   nextEventCode(): EventCode | 0;
   setupItemChoice(params: unknown): void;
+  setupNumInput(params: unknown): void;
 }
