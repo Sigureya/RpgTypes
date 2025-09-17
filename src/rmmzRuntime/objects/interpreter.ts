@@ -96,7 +96,7 @@ export declare class Game_Interpreter
   checkOverflow(): void;
   clear(): void;
   setup(list: ReadonlyArray<EventCommand>, eventId: number): void;
-  loadImage(): void;
+  loadImages(): void;
   eventId(): number;
   isOnCurrentMap(): boolean;
   setupReservedCommonEvent(): boolean;

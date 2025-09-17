@@ -147,7 +147,7 @@ export default [
     },
   },
   {
-    files: ["src/**/*index.ts"],
+    files: ["src/**/*index.ts", "src/**/*.d.ts"],
     rules: { "sort-exports/sort-exports": ["error", { sortDir: "asc" }] },
   },
 ];
