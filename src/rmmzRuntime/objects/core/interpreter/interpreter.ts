@@ -5,7 +5,7 @@ export interface Rmmz_Interpreter<Coomand> {
   checkOverflow(): void;
   clear(): void;
   setup(list: Coomand[], eventId: number): void;
-  loadImage(): void;
+  loadImages(): void;
   eventId(): number;
   isOnCurrentMap(): boolean;
   setupReservedCommonEvent(): boolean;
