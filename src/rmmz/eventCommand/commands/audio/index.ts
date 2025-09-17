@@ -1,3 +1,3 @@
-export * from "./other/types";
+export * from "./other";
 export * from "./play";
 export * from "./stop";

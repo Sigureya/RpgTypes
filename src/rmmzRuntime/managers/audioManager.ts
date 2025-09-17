@@ -3,6 +3,7 @@ import type { AudioFileParams } from "@RpgTypes/libs";
 export interface Rmmz_AudioManager {
   playBgm(bgm: AudioFileParams): void;
   stopBgm(): void;
+  stopSe(): void;
   fadeOutBgm(duration: number): void;
   fadeInBgm(bgm: AudioFileParams, duration: number): void;
   playBgs(bgs: AudioFileParams): void;
