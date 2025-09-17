@@ -21,7 +21,7 @@ const makeMockedInterpreter = () => {
   const keys: (keyof Game_Interpreter)[] = [
     "command101",
     "nextEventCode",
-    "loadImage",
+    "loadImages",
   ];
   const inter = new Game_Interpreter();
   keys.forEach((k) => {
@@ -75,7 +75,7 @@ const makeMocks = (): Mocks => {
 };
 
 interface TestCase {
-  mm: Command_ShowMessageHeader;
+  expected: Command_ShowMessageHeader;
   hedder: Command_ShowMessageHeader;
   body: Command_ShowMessageBody[];
 }
@@ -103,7 +103,7 @@ const messageToHaveBeenCalled = (
 const runTestCase = (testCase: TestCase) => {
   describe("", () => {
     test("make command", () => {
-      expect(testCase.mm).toEqual(testCase.hedder);
+      expect(testCase.expected).toEqual(testCase.hedder);
     });
     test("exec", () => {
       const { message, imageManager } = makeMocks();
@@ -114,7 +114,7 @@ const runTestCase = (testCase: TestCase) => {
 
       const interpreter = makeMockedInterpreter();
       interpreter.setup([testCase.hedder, ...testCase.body], 0);
-      expect(interpreter.loadImage).toHaveBeenCalledTimes(1);
+      expect(interpreter.loadImages).toHaveBeenCalledTimes(1);
       expect(imageManager.loadFace).toHaveBeenCalledWith(
         testCase.hedder.parameters[0]
       );
@@ -133,9 +133,35 @@ const runTestCase = (testCase: TestCase) => {
   });
 };
 
+describe("Command_ShowMessage", () => {
+  test("hedder", () => {
+    const command = makeCommandShowMessage({
+      speakerName: "speaker",
+      facename: "face",
+      faceIndex: 3,
+      background: 0,
+      positionType: 1,
+    });
+    const expected: Command_ShowMessageHeader = {
+      code: 101,
+      indent: 0,
+      parameters: ["face", 3, 0, 1, "speaker"],
+    };
+    expect(command).toEqual(expected);
+  });
+  test("body", () => {
+    const command = makeCommandShowMessageBody("text1");
+    const expected: Command_ShowMessageBody = {
+      code: 401,
+      indent: 0,
+      parameters: ["text1"],
+    };
+    expect(command).toEqual(expected);
+  });
+});
 const testCases: TestCase[] = [
   {
-    mm: makeCommandShowMessage({
+    expected: makeCommandShowMessage({
       speakerName: "speaker",
       facename: "face",
       faceIndex: 0,
