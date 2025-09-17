@@ -1,3 +1,4 @@
-import { Rmmz_BattlerBase } from './base';
-export interface Rmmz_Actor extends Rmmz_BattlerBase {
+import { Rmmz_Battler } from './battler';
+export interface Rmmz_Actor extends Rmmz_Battler {
+    actorId(): number;
 }

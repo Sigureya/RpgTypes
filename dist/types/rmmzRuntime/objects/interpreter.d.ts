@@ -1,16 +1,40 @@
-import { AudioFileParams, ColorRGBA } from '../../../../../libs';
-import { BranchParameters, Command_CommentBody, Command_CommentHeader, Command_ScrollTextBody, Command_ShopProcessingBody, Command_ShowChoiceWhen, Command_ShowMessageBody, EventCommand, ParamArray_BattleProcessing, ParamArray_BranchElse, ParamArray_ChangeActorHP, ParamArray_ChangeActorImages, ParamArray_ChangeActorLevel, ParamArray_ChangeActorMP, ParamArray_ChangeActorState, ParamArray_ChangeActorText, ParamArray_ChangeActorTP, ParamArray_ChangeArmors, ParamArray_ChangeBattleBackground, ParamArray_ChangeClass, ParamArray_ChangeEnabled, ParamArray_ChangeEnemyValue, ParamArray_ChangeEnemyState, ParamArray_ChangeExp, ParamArray_ChangeGold, ParamArray_ChangeItems, ParamArray_ChangeMapNameDisplay, ParamArray_ChangeParallax, ParamArray_ChangeParam, ParamArray_ChangePartyMember, ParamArray_ChangePlayerFollowers, ParamArray_ChangeSkill, ParamArray_ChangeTileset, ParamArray_ChangeTransparency, ParamArray_ChangeVehicleBGM, ParamArray_ChangeVehicleImage, ParamArray_ChangeWeapons, ParamArray_Comment, ParamArray_CommonEvent, ParamArray_ControlSwitches, ParamArray_ControlTimer, ParamArray_ControlVariables, ParamArray_EnemyAppear, ParamArray_EnemyRecoverAll, ParamArray_EnemyTransfrom, ParamArray_EraseEvent, ParamArray_ErasePicture, ParamArray_FadeOutAudio, ParamArray_GetLocationInfo, ParamArray_InputNumber, ParamArray_Label, ParamArray_MovementRoute, ParamArray_NameInputProcessing, ParamArray_OpenMenu, ParamArray_PlayMovie, ParamArray_PluginCommandMV, ParamArray_PluginCommandMZ, ParamArray_RecoverAll, ParamArray_RotatePicture, ParamArray_Script, ParamArray_ScrollMap, ParamArray_ScrollTextHeader, ParamArray_SelectItem, ParamArray_SelfSwitch, ParamArray_SetEventLocation, ParamArray_SetupChoice, ParamArray_SetVehicleLocation, ParamArray_ShakeScreen, ParamArray_ShopProcessing, ParamArray_ShowAnimation, ParamArray_ShowBalloonIcon, ParamArray_ShowBattleAnimation, ParamArray_ShowMessage, ParamArray_TintPicture, ParamArray_TintScreen, ParamArray_TransferPlayer, ParamArray_Wait, ParamArray_WeatherEffect, ParamsArray_MovePicture, ParamsArray_ShowPicture } from '../../../../../rmmz/eventCommand';
-import { ParamArray_ChangeEnemyHP } from '../../../../../rmmz/eventCommand/commands/enemy/change/types';
-import { EventCode } from '../../../../../rmmz/rpg';
-type SubCommands = Command_ShopProcessingBody | Command_ShowMessageBody | Command_ScrollTextBody | Command_CommentHeader | Command_CommentBody | Command_ShopProcessingBody | Command_ShowChoiceWhen;
-type CommandTypeAssert = {
-    [K in Exclude<EventCode, 0 | SubCommands["code"] | 655 | 339> as `command${K}`]: Extract<EventCommand, {
-        code: K;
-    }> extends undefined ? never : (params: Extract<EventCommand, {
-        code: K;
-    }>["parameters"]) => boolean;
-};
-export interface InterpreterMapper extends CommandTypeAssert {
+import { AudioFileParams, ColorRGBA } from '../../libs';
+import { BranchParameters, EventCommand, ParamArray_BattleProcessing, ParamArray_BranchElse, ParamArray_ChangeActorHP, ParamArray_ChangeActorImages, ParamArray_ChangeActorLevel, ParamArray_ChangeActorMP, ParamArray_ChangeActorState, ParamArray_ChangeActorText, ParamArray_ChangeActorTP, ParamArray_ChangeArmors, ParamArray_ChangeBattleBackground, ParamArray_ChangeClass, ParamArray_ChangeEnabled, ParamArray_ChangeEnemyHP, ParamArray_ChangeEnemyValue, ParamArray_ChangeEnemyState, ParamArray_ChangeExp, ParamArray_ChangeGold, ParamArray_ChangeItems, ParamArray_ChangeMapNameDisplay, ParamArray_ChangeParallax, ParamArray_ChangeParam, ParamArray_ChangePartyMember, ParamArray_ChangePlayerFollowers, ParamArray_ChangeSkill, ParamArray_ChangeTileset, ParamArray_ChangeTransparency, ParamArray_ChangeVehicleBGM, ParamArray_ChangeVehicleImage, ParamArray_ChangeWeapons, ParamArray_Comment, ParamArray_CommonEvent, ParamArray_ControlSwitches, ParamArray_ControlTimer, ParamArray_ControlVariables, ParamArray_EnemyAppear, ParamArray_EnemyRecoverAll, ParamArray_EnemyTransfrom, ParamArray_EraseEvent, ParamArray_ErasePicture, ParamArray_FadeOutAudio, ParamArray_GetLocationInfo, ParamArray_InputNumber, ParamArray_Label, ParamArray_MovementRoute, ParamArray_NameInputProcessing, ParamArray_OpenMenu, ParamArray_PlayMovie, ParamArray_PluginCommandMV, ParamArray_PluginCommandMZ, ParamArray_RecoverAll, ParamArray_RotatePicture, ParamArray_Script, ParamArray_ScrollMap, ParamArray_ScrollTextHeader, ParamArray_SelectItem, ParamArray_SelfSwitch, ParamArray_SetEventLocation, ParamArray_SetupChoice, ParamArray_SetVehicleLocation, ParamArray_ShakeScreen, ParamArray_ShopProcessing, ParamArray_ShowAnimation, ParamArray_ShowBalloonIcon, ParamArray_ShowBattleAnimation, ParamArray_ShowMessage, ParamArray_TintPicture, ParamArray_TintScreen, ParamArray_TransferPlayer, ParamArray_Wait, ParamArray_WeatherEffect, ParamsArray_MovePicture, ParamsArray_ShowPicture } from '../../rmmz/eventCommand';
+import { EventCode } from '../../rmmz/rpg';
+import { InterpreterMapper, Rmmz_Actor, Rmmz_Enemy, Rmmz_Interpreter } from './core';
+import { WaitMode } from './core/interpreter/constants/types';
+import { Rmmz_InterpreterBattler } from './core/interpreter/types/actor';
+export declare class Game_Interpreter implements Rmmz_Interpreter<EventCommand>, InterpreterMapper, Rmmz_InterpreterBattler<Rmmz_Actor, Rmmz_Enemy> {
+    constructor(depth?: number);
+    checkOverflow(): void;
+    clear(): void;
+    setup(list: ReadonlyArray<EventCommand>, eventId: number): void;
+    loadImages(): void;
+    eventId(): number;
+    isOnCurrentMap(): boolean;
+    setupReservedCommonEvent(): boolean;
+    operateValue(operation: number, operandType: number, operand: number): number;
+    changeHp(target: unknown, value: number, allowDeath: boolean): void;
+    isRunning(): boolean;
+    update(): void;
+    updateChild(): boolean;
+    updateWait(): boolean;
+    updateWaitCount(): boolean;
+    updateWaitMode(): boolean;
+    setWaitMode<Mode extends string = WaitMode>(waitMode: Mode): void;
+    wait(duration: number): void;
+    fadeSpeed(): number;
+    executeCommand(): boolean;
+    checkFreeze(): boolean;
+    terminate(): void;
+    skipBranch(): void;
+    currentCommand(): EventCommand | undefined;
+    nextEventCode(): EventCode | 0;
+    setupItemChoice(params: unknown): void;
+    setupNumInput(params: unknown): void;
+    iterateActorEx(param1: number, param2: number, callback: (actir: Rmmz_Actor) => void): void;
+    iterateActorId(actorId: number, callBack: (actor: Rmmz_Actor) => void): void;
+    iterateEnemyIndex(enemyId: number, callBack: (enemy: Rmmz_Enemy) => void): void;
     command101(showMessage: ParamArray_ShowMessage): boolean;
     command102(setupChoice: ParamArray_SetupChoice): boolean;
     command103(params: ParamArray_InputNumber): boolean;
@@ -119,4 +143,3 @@ export interface InterpreterMapper extends CommandTypeAssert {
     command357(params: ParamArray_PluginCommandMZ): boolean;
     command411(params: ParamArray_BranchElse): boolean;
 }
-export {};

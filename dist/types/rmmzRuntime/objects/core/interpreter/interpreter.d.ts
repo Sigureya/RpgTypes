@@ -1,11 +1,10 @@
 import { EventCode } from '../../../../rmmz/rpg';
 import { WaitMode } from './constants/types';
-import { InterpreterMapper } from './types/interpreterMethods';
-export interface Rmmz_Interpreter<Coomand> extends InterpreterMapper {
+export interface Rmmz_Interpreter<Coomand> {
     checkOverflow(): void;
     clear(): void;
     setup(list: Coomand[], eventId: number): void;
-    loadImage(): void;
+    loadImages(): void;
     eventId(): number;
     isOnCurrentMap(): boolean;
     setupReservedCommonEvent(): boolean;
@@ -26,4 +25,6 @@ export interface Rmmz_Interpreter<Coomand> extends InterpreterMapper {
     skipBranch(): void;
     currentCommand(): Coomand | undefined;
     nextEventCode(): EventCode | 0;
+    setupItemChoice(params: unknown): void;
+    setupNumInput(params: unknown): void;
 }
