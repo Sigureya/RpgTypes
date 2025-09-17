@@ -1,4 +1,4 @@
-export type { Command_ChangeEnemyHP, Command_ChangeEnemyMP, ParamArray_ChangeEnemyValue as ParamArray_ChangeEnemyParameters, } from './change/types';
+export type { Command_ChangeEnemyHP, Command_ChangeEnemyMP, Command_ChangeEnemyTP, ParamArray_ChangeEnemyHP, ParamArray_ChangeEnemyValue, ParamArray_GainEnemyMP, } from './change/types';
 export type { Command_ChangeEnemyState, ParamArray_ChangeEnemyState, ParamObject_ChangeEnemyState, } from './state/types';
 export type { Command_EnemyAppear, ParamArray_EnemyAppear, } from './appear/types';
 export type { Command_EnemyRecoverAll, ParamArray_EnemyRecoverAll, } from './recoverAll/types';
