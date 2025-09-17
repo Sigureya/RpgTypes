@@ -22,6 +22,8 @@ const makeMockedInterpreter = () => {
     "command101",
     "nextEventCode",
     "loadImages",
+    "setupItemChoice",
+    "setWaitMode",
   ];
   const inter = new Game_Interpreter();
   keys.forEach((k) => {
@@ -42,10 +44,11 @@ type FakeMessage = Pick<
   | "setChoicePositionType"
   | "setNumberInput"
   | "setSpeakerName"
+  | "setItemChoice"
 >;
 
-const makeMockMessage2 = (): FakeMessage => ({
-  isBusy: vi.fn(() => false),
+const makeMockMessage = (param: { busy?: boolean } = {}): FakeMessage => ({
+  isBusy: vi.fn(() => param.busy ?? false),
   add: vi.fn(),
   setFaceImage: vi.fn(),
   setBackground: vi.fn(),
@@ -55,11 +58,13 @@ const makeMockMessage2 = (): FakeMessage => ({
   setChoicePositionType: vi.fn(),
   setNumberInput: vi.fn(),
   setSpeakerName: vi.fn(),
+  setItemChoice: vi.fn(),
 });
+
 type MockedImageManager = MockedObject<Pick<Rmmz_ImageManager, "loadFace">>;
 
 const makeMockImageManager = (): MockedImageManager => ({
-  loadFace: vi.fn((filename: string) => ({})),
+  loadFace: vi.fn(),
 });
 
 interface Mocks {
@@ -69,13 +74,12 @@ interface Mocks {
 
 const makeMocks = (): Mocks => {
   return {
-    message: makeMockMessage2(),
+    message: makeMockMessage(),
     imageManager: makeMockImageManager(),
   };
 };
 
 interface TestCase {
-  expected: Command_ShowMessageHeader;
   hedder: Command_ShowMessageHeader;
   body: Command_ShowMessageBody[];
 }
@@ -100,38 +104,72 @@ const messageToHaveBeenCalled = (
   );
 };
 
-const runTestCase = (testCase: TestCase) => {
-  describe("", () => {
-    test("make command", () => {
-      expect(testCase.expected).toEqual(testCase.hedder);
-    });
-    test("exec", () => {
-      const { message, imageManager } = makeMocks();
-      const map = makeMockMap();
-      vi.stubGlobal("$gameMap", map);
-      vi.stubGlobal("$gameMessage", message);
-      vi.stubGlobal("ImageManager", imageManager);
-
-      const interpreter = makeMockedInterpreter();
-      interpreter.setup([testCase.hedder, ...testCase.body], 0);
-      expect(interpreter.loadImages).toHaveBeenCalledTimes(1);
-      expect(imageManager.loadFace).toHaveBeenCalledWith(
-        testCase.hedder.parameters[0]
-      );
-
-      const result = interpreter.executeCommand();
-      expect(result).toBe(true);
-      messageToHaveBeenCalled(testCase.hedder, message);
-      expect(interpreter.command101).toHaveBeenCalledWith(
-        testCase.hedder.parameters
-      );
-
-      testCase.body.forEach((cmd) => {
-        expect(message.add).toHaveBeenCalledWith(cmd.parameters[0]);
-      });
-    });
+describe("wait for message", () => {
+  test("false", () => {
+    const message = makeMockMessage({ busy: false });
+    const interpreter = makeMockedInterpreter();
+    vi.stubGlobal("$gameMessage", message);
+    interpreter.setWaitMode("message");
+    const result = interpreter.updateWaitMode();
+    expect(result).toBe(false);
+    expect(message.isBusy).toHaveBeenCalled();
   });
-};
+  test("true", () => {
+    const message = makeMockMessage({ busy: true });
+    const interpreter = makeMockedInterpreter();
+    vi.stubGlobal("$gameMessage", message);
+    interpreter.setWaitMode("message");
+    const result = interpreter.updateWaitMode();
+    expect(result).toBe(true);
+    expect(message.isBusy).toHaveBeenCalled();
+  });
+});
+
+describe("", () => {
+  const testCase: TestCase = {
+    hedder: {
+      code: 101,
+      indent: 0,
+      parameters: ["face", 0, 0, 1, "speaker"],
+    },
+    body: [{ code: 401, indent: 0, parameters: ["text1"] }],
+  };
+
+  test("setup interpreter", () => {
+    const { imageManager } = makeMocks();
+    const map = makeMockMap();
+    vi.stubGlobal("$gameMap", map);
+    vi.stubGlobal("ImageManager", imageManager);
+    const interpreter = makeMockedInterpreter();
+    interpreter.setup([testCase.hedder, ...testCase.body], 0);
+    expect(interpreter.loadImages).toHaveBeenCalledTimes(1);
+    expect(imageManager.loadFace).toHaveBeenCalledWith(
+      testCase.hedder.parameters[0]
+    );
+  });
+
+  test("exec", () => {
+    const { message, imageManager } = makeMocks();
+    const map = makeMockMap();
+    vi.stubGlobal("$gameMap", map);
+    vi.stubGlobal("$gameMessage", message);
+    vi.stubGlobal("ImageManager", imageManager);
+
+    const interpreter = makeMockedInterpreter();
+    interpreter.setup([testCase.hedder, ...testCase.body], 0);
+    const result = interpreter.executeCommand();
+    expect(result).toBe(true);
+    messageToHaveBeenCalled(testCase.hedder, message);
+    expect(interpreter.command101).toHaveBeenCalledWith(
+      testCase.hedder.parameters
+    );
+
+    testCase.body.forEach((cmd) => {
+      expect(message.add).toHaveBeenCalledWith(cmd.parameters[0]);
+    });
+    expect(interpreter.setWaitMode).toHaveBeenCalledWith("message");
+  });
+});
 
 describe("Command_ShowMessage", () => {
   test("hedder", () => {
@@ -159,22 +197,3 @@ describe("Command_ShowMessage", () => {
     expect(command).toEqual(expected);
   });
 });
-const testCases: TestCase[] = [
-  {
-    expected: makeCommandShowMessage({
-      speakerName: "speaker",
-      facename: "face",
-      faceIndex: 0,
-      background: 0,
-      positionType: 1,
-    }),
-    hedder: {
-      code: 101,
-      indent: 0,
-      parameters: ["face", 0, 0, 1, "speaker"],
-    },
-    body: [{ code: 401, indent: 0, parameters: ["text1"] }],
-  },
-];
-
-testCases.forEach((tc) => runTestCase(tc));
