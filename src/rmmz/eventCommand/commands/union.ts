@@ -17,6 +17,7 @@ import type {
 } from "./actor/changeValues/types";
 import type { Command_RecoverAll } from "./actor/recoverAll/types";
 import type { Command_ShowAnimation } from "./animation/types";
+import type { Command_FadeInBGM, Command_FadeInBGS } from "./audio";
 import type {
   Command_FadeOutBGM,
   Command_FadeOutBGS,
@@ -259,4 +260,6 @@ export type EventCommand =
   | Command_PluginCommandMZ
   | Command_BranchElse
   | Command_ChangeEnemyTP
-  | Command_NameInputProcessing;
+  | Command_NameInputProcessing
+  | Command_FadeInBGM
+  | Command_FadeInBGS;
