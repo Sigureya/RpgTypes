@@ -1,9 +1,11 @@
 import type { MockedObject } from "vitest";
 import { describe, expect, test, vi } from "vitest";
 import type {
+  Command_InputNumber,
   ParamArray_InputNumber,
   ParamArray_SelectItem,
 } from "@RpgTypes/rmmz/eventCommand";
+import { makeCommandInputNumber } from "@RpgTypes/rmmz/eventCommand";
 import type { Rmmz_Message } from "@RpgTypes/rmmzRuntime/objects";
 import { Game_Interpreter } from "./rmmz_objects";
 
@@ -37,14 +39,17 @@ const makeMockedInterpreter = () => {
 
 describe("command103 (Input Number)", () => {
   test("should call setNumberInput and setWaitMode when not busy", () => {
+    const command: Command_InputNumber = makeCommandInputNumber({
+      maxDigits: 2,
+      variableId: 5,
+    });
     const message = makeMockMessage({ busy: false });
     vi.stubGlobal("$gameMessage", message);
     const interpreter = makeMockedInterpreter();
-    const params: ParamArray_InputNumber = [5, 2];
-    const result = interpreter.command103(params);
+    const result = interpreter.command103(command.parameters);
     expect(result).toBe(true);
     expect(message.isBusy).toHaveBeenCalled();
-    expect(interpreter.setupNumInput).toHaveBeenCalledWith(params);
+    expect(interpreter.setupNumInput).toHaveBeenCalledWith(command.parameters);
     expect(message.setNumberInput).toHaveBeenCalledWith(5, 2);
     expect(interpreter.setWaitMode).toHaveBeenCalledWith("message");
   });
