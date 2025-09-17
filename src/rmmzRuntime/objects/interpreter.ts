@@ -117,6 +117,7 @@ export declare class Game_Interpreter
   skipBranch(): void;
   currentCommand(): EventCommand | undefined;
   nextEventCode(): EventCode | 0;
+  setupItemChoice(params: unknown): void;
 
   iterateActorEx(
     param1: number,

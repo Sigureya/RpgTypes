@@ -26,4 +26,5 @@ export interface Rmmz_Interpreter<Coomand> {
   skipBranch(): void;
   currentCommand(): Coomand | undefined;
   nextEventCode(): EventCode | 0;
+  setupItemChoice(params: unknown): void;
 }
