@@ -1,0 +1,1 @@
+export { paramHasText } from "./hasText";
