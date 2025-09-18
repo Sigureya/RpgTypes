@@ -48,6 +48,7 @@
     "test:rmmz-runtime": "vitest run src/rmmzRuntime",
     "test:rmmz-mock": "vitest  src/rmmzMock",
     "test:rmmz-rpg": "vitest run src/rmmz/rpg",
+    "test:rmmz-plugin": "vitest run src/rmmz/plugin",
     "test:rmmz-command": "vitest run src/rmmz/eventCommand",
     "test:features": "vitest run src/features",
     "test:watch": "vitest --watch",
