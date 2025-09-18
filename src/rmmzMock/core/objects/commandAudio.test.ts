@@ -9,6 +9,8 @@ import type {
   Command_StopSE,
   Command_FadeOutBGM,
   Command_FadeOutBGS,
+  Command_SaveBGM,
+  Command_ResumeBGM,
 } from "@RpgTypes/rmmz/eventCommand";
 import {
   makeCommandPlayME,
@@ -17,10 +19,20 @@ import {
   makeCommandPlaySE,
   makeCommandFadeOutBGM,
   makeCommandFadeOutBGS,
+  makeCommandSaveBGM,
+  makeCommandResumeBGM,
 } from "@RpgTypes/rmmz/eventCommand";
 import type { Rmmz_AudioManager } from "@RpgTypes/rmmzRuntime";
+import type { Rmmz_System } from "@RpgTypes/rmmzRuntime/objects/core/system/system";
 import type { FakeMap } from "./fakes/types";
 import { Game_Interpreter } from "./rmmz_objects";
+
+type FakeSystem = Pick<Rmmz_System, "saveBgm" | "replayBgm">;
+
+const makeMockSystem = (): MockedObject<FakeSystem> => ({
+  saveBgm: vi.fn(),
+  replayBgm: vi.fn(),
+});
 
 const makeMockMap = (): FakeMap => ({
   mapId: () => 1,
@@ -90,20 +102,6 @@ const runTestCase = <T extends EventCommand>(testCase: TestCase<T>) => {
   });
 };
 
-const stopSe: TestCase<Command_StopSE> = {
-  commandFn: "command251",
-  fn: "stopSe",
-  command: {
-    code: 251,
-    indent: 0,
-    parameters: [],
-  },
-  makedCommand: {
-    code: 251,
-    indent: 0,
-    parameters: [],
-  },
-};
 const playBgm: TestCase<Command_PlayBGM> = {
   commandFn: "command241",
   fn: "playBgm",
@@ -119,21 +117,15 @@ const playBgm: TestCase<Command_PlayBGM> = {
     pan: 0,
   }),
 };
-
-const playSe: TestCase<Command_PlaySE> = {
-  commandFn: "command250",
-  fn: "playSe",
+const fadeOutBgm: TestCase<Command_FadeOutBGM> = {
+  commandFn: "command242",
+  fn: "fadeOutBgm",
   command: {
-    code: 250,
+    code: 242,
     indent: 0,
-    parameters: [{ name: "se", volume: 44, pitch: 55, pan: 66 }],
+    parameters: [120],
   },
-  makedCommand: makeCommandPlaySE({
-    name: "se",
-    volume: 44,
-    pitch: 55,
-    pan: 66,
-  }),
+  makedCommand: makeCommandFadeOutBGM({ duration: 120 }),
 };
 
 const playBgs: TestCase<Command_PlayBGS> = {
@@ -152,6 +144,17 @@ const playBgs: TestCase<Command_PlayBGS> = {
   }),
 };
 
+const fadeOutBgs: TestCase<Command_FadeOutBGS> = {
+  commandFn: "command246",
+  fn: "fadeOutBgs",
+  command: {
+    code: 246,
+    indent: 0,
+    parameters: [150],
+  },
+  makedCommand: makeCommandFadeOutBGS({ duration: 150 }),
+};
+
 const playMe: TestCase<Command_PlayME> = {
   commandFn: "command249",
   fn: "playMe",
@@ -168,28 +171,84 @@ const playMe: TestCase<Command_PlayME> = {
   }),
 };
 
-const fadeOutBgm: TestCase<Command_FadeOutBGM> = {
-  commandFn: "command242",
-  fn: "fadeOutBgm",
+const playSe: TestCase<Command_PlaySE> = {
+  commandFn: "command250",
+  fn: "playSe",
   command: {
-    code: 242,
+    code: 250,
     indent: 0,
-    parameters: [120],
+    parameters: [{ name: "se", volume: 44, pitch: 55, pan: 66 }],
   },
-  makedCommand: makeCommandFadeOutBGM({ duration: 120 }),
+  makedCommand: makeCommandPlaySE({
+    name: "se",
+    volume: 44,
+    pitch: 55,
+    pan: 66,
+  }),
+};
+const stopSe: TestCase<Command_StopSE> = {
+  commandFn: "command251",
+  fn: "stopSe",
+  command: {
+    code: 251,
+    indent: 0,
+    parameters: [],
+  },
+  makedCommand: {
+    code: 251,
+    indent: 0,
+    parameters: [],
+  },
 };
 
-const fadeOutBgs: TestCase<Command_FadeOutBGS> = {
-  commandFn: "command246",
-  fn: "fadeOutBgs",
-  command: {
-    code: 246,
-    indent: 0,
-    parameters: [150],
-  },
-  makedCommand: makeCommandFadeOutBGS({ duration: 150 }),
-};
-
-[stopSe, playBgm, playSe, playBgs, playMe, fadeOutBgm, fadeOutBgs].forEach(
-  (c) => runTestCase<EventCommand>(c)
+[playBgm, fadeOutBgm, playBgs, fadeOutBgs, playMe, playSe, stopSe].forEach(
+  (c: TestCase<EventCommand>) => runTestCase(c)
 );
+
+describe("BGM Save", () => {
+  test("make", () => {
+    const command = makeCommandSaveBGM(5);
+    const expected: Command_SaveBGM = {
+      code: 243,
+      indent: 5,
+      parameters: [],
+    };
+    expect(command).toEqual(expected);
+  });
+
+  test("exec", () => {
+    const map = makeMockMap();
+    vi.stubGlobal("$gameMap", map);
+    const system = makeMockSystem();
+    vi.stubGlobal("$gameSystem", system);
+    const interpreter = makeMockedInterpreter();
+    const command = makeCommandSaveBGM();
+    interpreter.setup([command], 0);
+    interpreter.executeCommand();
+    expect(interpreter.command243).toHaveBeenCalledWith(command.parameters);
+  });
+});
+
+describe("BGM Resume", () => {
+  test("make", () => {
+    const command = makeCommandResumeBGM(3);
+    const expected: Command_ResumeBGM = {
+      code: 244,
+      indent: 3,
+      parameters: [],
+    };
+    expect(command).toEqual(expected);
+  });
+
+  test("exec", () => {
+    const map = makeMockMap();
+    vi.stubGlobal("$gameMap", map);
+    const system = makeMockSystem();
+    vi.stubGlobal("$gameSystem", system);
+    const interpreter = makeMockedInterpreter();
+    const command = makeCommandResumeBGM();
+    interpreter.setup([command], 0);
+    interpreter.executeCommand();
+    expect(interpreter.command244).toHaveBeenCalledWith(command.parameters);
+  });
+});
