@@ -1,22 +1,20 @@
 import type { MockedObject } from "vitest";
 import { describe, expect, test, vi } from "vitest";
 import type {
-  Command_ChangeActorHP,
   Command_ChangeActorMP,
-  Command_ChangeActorTP,
   EventCommand,
 } from "@RpgTypes/rmmz/eventCommand";
 import {
-  makeCommandGainActorTP,
-  makeCommandLoseActorTP,
+  makeCommandGainActorMP,
+  makeCommandLoseActorMP,
 } from "@RpgTypes/rmmz/eventCommand";
-import type { Rmmz_Variables } from "@RpgTypes/rmmzRuntime";
+import type { Rmmz_Actor, Rmmz_Variables } from "@RpgTypes/rmmzRuntime";
 import type { Rmmz_ActorsTemplate } from "@RpgTypes/rmmzRuntime/objects/core/battler/actors";
-import type { FakeBattler, FakeMap } from "./fakes/types";
+import type { FakeMap } from "./fakes/types";
 import { Game_Party, Game_Interpreter } from "./rmmz_objects";
 
-type FakeActor = FakeBattler & { actorId(): number };
-type MockedActors = MockedObject<Rmmz_ActorsTemplate<FakeBattler>>;
+type FakeActor = Pick<Rmmz_Actor, "actorId" | "gainMp">;
+type MockedActors = MockedObject<Rmmz_ActorsTemplate<FakeActor>>;
 
 interface MakeMocksResult {
   mockBattler1: MockedObject<FakeActor>;
@@ -35,13 +33,8 @@ const single = (mockParty: Game_Party) => {
   expect(mockParty.members).not.toHaveBeenCalled();
 };
 
-type CommandTypes =
-  | Command_ChangeActorHP
-  | Command_ChangeActorMP
-  | Command_ChangeActorTP;
-
 const paramCalledWith = (
-  command: CommandTypes,
+  command: Command_ChangeActorMP,
   interpreter: Game_Interpreter
 ) => {
   expect(interpreter.iterateActorEx).toHaveBeenCalledWith(
@@ -88,19 +81,10 @@ const makeInterpreter = (command: EventCommand) => {
 const makeMockBattler = (id: number): MockedObject<FakeActor> => {
   return {
     actorId: vi.fn(() => id),
-    loseHp: vi.fn(),
-    loseMp: vi.fn(),
-    loseTp: vi.fn(),
-    gainHp: vi.fn(),
     gainMp: vi.fn(),
-    gainTp: vi.fn(),
-    isAlive: vi.fn(() => true),
-    isDead: vi.fn(() => false),
   };
 };
-const makeMockActors = (
-  actor: ({ actorId(): number } & FakeBattler)[]
-): MockedActors => ({
+const makeMockActors = (actor: FakeActor[]): MockedActors => ({
   actor: vi.fn((id: number) => actor.find((a) => a.actorId() === id) || null),
   initialize: vi.fn(),
 });
@@ -164,10 +148,7 @@ interface TestCaseTemplate<Command> {
   usingVariables: (v: MockedObject<Rmmz_Variables>) => void;
 }
 
-type TestCase =
-  | TestCaseTemplate<Command_ChangeActorHP>
-  | TestCaseTemplate<Command_ChangeActorMP>
-  | TestCaseTemplate<Command_ChangeActorTP>;
+type TestCase = TestCaseTemplate<Command_ChangeActorMP>;
 
 const runTestCase = (testCase: TestCase) => {
   describe(testCase.caseName, () => {
@@ -189,15 +170,15 @@ const runTestCase = (testCase: TestCase) => {
   });
 };
 
-const testCasesTP: TestCaseTemplate<Command_ChangeActorTP>[] = [
+const testCasesMP: TestCaseTemplate<Command_ChangeActorMP>[] = [
   {
-    caseName: "gain TP actorId=1 value=123",
+    caseName: "gain MP actorId=1 value=123",
     command: {
-      code: 326,
+      code: 312,
       indent: 0,
       parameters: [0, 1, 0, 0, 123],
     },
-    expected: makeCommandGainActorTP({
+    expected: makeCommandGainActorMP({
       targetType: "direct",
       target: 1,
       operand: { mode: "direct", value: 123 },
@@ -205,142 +186,170 @@ const testCasesTP: TestCaseTemplate<Command_ChangeActorTP>[] = [
     members: (party) => single(party),
     actors: { called: [1], notCalled: [2] },
     changeValue: ([a1, a2]) => {
-      expect(a1.gainTp).toHaveBeenCalledWith(123);
-      expect(a2.gainTp).not.toHaveBeenCalled();
+      expect(a1.gainMp).toHaveBeenCalledWith(123);
+      expect(a2.gainMp).not.toHaveBeenCalled();
     },
     usingVariables: (v) => {
       expect(v.value).not.toHaveBeenCalled();
     },
   },
   {
-    caseName: "gain TP actorId=V[88]:2 value=123",
+    caseName: "gain MP target=each value=123",
     command: {
-      code: 326,
-      indent: 0,
-      parameters: [1, 88, 0, 0, 123],
-    },
-    expected: makeCommandGainActorTP({
-      targetType: "variable",
-      target: 88,
-      operand: { mode: "direct", value: 123 },
-    }),
-    members: (party) => single(party),
-    actors: { called: [2], notCalled: [0] },
-    variableLiteral: { 88: 2 },
-    changeValue: ([a1, a2]) => {
-      expect(a2.gainTp).toHaveBeenCalledWith(123);
-      expect(a1.gainTp).not.toHaveBeenCalled();
-    },
-    usingVariables: (v) => {
-      expect(v.value).toBeCalledTimes(1);
-      expect(v.value).toBeCalledWith(88);
-      expect(v.value).toReturnWith(2);
-    },
-  },
-  {
-    caseName: "gain TP actorId=1 value=V[64]:231",
-    command: {
-      code: 326,
-      indent: 0,
-      parameters: [0, 1, 0, 1, 64],
-    },
-    expected: makeCommandGainActorTP({
-      targetType: "direct",
-      target: 1,
-      operand: { mode: "variable", value: 64 },
-    }),
-    members: (party) => single(party),
-    actors: { called: [1], notCalled: [2] },
-    changeValue: ([a1, a2]) => {
-      expect(a1.gainTp).toHaveBeenCalledWith(231);
-      expect(a2.gainTp).not.toHaveBeenCalled();
-    },
-    variableLiteral: { 64: 231 },
-    usingVariables: (v) => {
-      expect(v.value).toHaveBeenCalledWith(64);
-      expect(v.value).toReturnWith(231);
-    },
-  },
-  {
-    caseName: "gain TP target=each value=123",
-    command: {
-      code: 326,
+      code: 312,
       indent: 0,
       parameters: [0, 0, 0, 0, 123],
     },
-    expected: makeCommandGainActorTP({
+    expected: makeCommandGainActorMP({
       targetType: "each",
       operand: { mode: "direct", value: 123 },
     }),
     members: (party) => each(party),
     actors: { called: [1, 2], notCalled: [] },
     changeValue: ([a1, a2]) => {
-      expect(a1.gainTp).toHaveBeenCalledWith(123);
-      expect(a2.gainTp).toHaveBeenCalledWith(123);
+      expect(a1.gainMp).toHaveBeenCalledWith(123);
+      expect(a2.gainMp).toHaveBeenCalledWith(123);
     },
     usingVariables: (v) => {
       expect(v.value).not.toHaveBeenCalled();
     },
   },
   {
-    caseName: "gain TP target=each value=V[72]:231",
+    caseName: "gain MP actorId=V[90]:2 value=123",
     command: {
-      code: 326,
+      code: 312,
       indent: 0,
-      parameters: [0, 0, 0, 1, 72],
+      parameters: [1, 90, 0, 0, 123],
     },
-    expected: makeCommandGainActorTP({
+    expected: makeCommandGainActorMP({
+      targetType: "variable",
+      target: 90,
+      operand: { mode: "direct", value: 123 },
+    }),
+    members: (party) => single(party),
+    actors: { called: [2], notCalled: [1] },
+    variableLiteral: { 90: 2 },
+    changeValue: ([a1, a2]) => {
+      expect(a1.gainMp).not.toHaveBeenCalled();
+      expect(a2.gainMp).toHaveBeenCalledWith(123);
+    },
+    usingVariables: (v) => {
+      expect(v.value).toHaveBeenCalledTimes(1);
+      expect(v.value).toHaveBeenCalledWith(90);
+      expect(v.value).toHaveReturnedWith(2);
+    },
+  },
+  {
+    caseName: "gain MP actorId=1 value=V[91]:77",
+    command: {
+      code: 312,
+      indent: 0,
+      parameters: [0, 1, 0, 1, 91],
+    },
+    expected: makeCommandGainActorMP({
+      targetType: "direct",
+      target: 1,
+      operand: { mode: "variable", value: 91 },
+    }),
+    members: (party) => single(party),
+    actors: { called: [1], notCalled: [2] },
+    variableLiteral: { 91: 77 },
+    changeValue: ([a1, a2]) => {
+      expect(a1.gainMp).toHaveBeenCalledWith(77);
+      expect(a2.gainMp).not.toHaveBeenCalled();
+    },
+    usingVariables: (v) => {
+      expect(v.value).toHaveBeenCalledWith(91);
+      expect(v.value).toHaveReturnedWith(77);
+    },
+  },
+
+  {
+    caseName: "gain MP target=each value=V[55]:217",
+    command: {
+      code: 312,
+      indent: 0,
+      parameters: [0, 0, 0, 1, 55],
+    },
+    expected: makeCommandGainActorMP({
       targetType: "each",
-      operand: { mode: "variable", value: 72 },
+      operand: { mode: "variable", value: 55 },
     }),
     members: (party) => each(party),
     actors: { called: [1, 2], notCalled: [] },
     changeValue: ([a1, a2]) => {
-      expect(a1.gainTp).toHaveBeenCalledWith(231);
-      expect(a2.gainTp).toHaveBeenCalledWith(231);
+      expect(a1.gainMp).toHaveBeenCalledWith(217);
+      expect(a2.gainMp).toHaveBeenCalledWith(217);
     },
-    variableLiteral: { 72: 231 },
+    variableLiteral: { 55: 217 },
     usingVariables: (v) => {
       expect(v.value).toHaveBeenCalledTimes(1);
-      expect(v.value).toHaveBeenCalledWith(72);
-      expect(v.value).toReturnWith(231);
+      expect(v.value).toHaveBeenCalledWith(55);
+      expect(v.value).toReturnWith(217);
     },
   },
   {
-    caseName: "gain TP actorId=V[99]:2 value=V[100]:88",
+    caseName: "gain MP actorId=V[90]:2 value=V[91]:77",
     command: {
-      code: 326,
+      code: 312,
       indent: 0,
-      parameters: [1, 99, 0, 1, 100],
+      parameters: [1, 90, 0, 1, 91],
     },
-    expected: makeCommandGainActorTP({
+    expected: makeCommandGainActorMP({
       targetType: "variable",
-      target: 99,
-      operand: { mode: "variable", value: 100 },
+      target: 90,
+      operand: { mode: "variable", value: 91 },
     }),
     members: (party) => single(party),
     actors: { called: [2], notCalled: [1] },
-    variableLiteral: { 99: 2, 100: 88 },
+    variableLiteral: { 90: 2, 91: 77 },
     changeValue: ([a1, a2]) => {
-      expect(a1.gainTp).not.toHaveBeenCalled();
-      expect(a2.gainTp).toHaveBeenCalledWith(88);
+      expect(a1.gainMp).not.toHaveBeenCalled();
+      expect(a2.gainMp).toHaveBeenCalledWith(77);
     },
     usingVariables: (v) => {
       expect(v.value).toHaveBeenCalledTimes(2);
-      expect(v.value).toHaveBeenCalledWith(99);
-      expect(v.value).toHaveBeenCalledWith(100);
+      expect(v.value).toHaveBeenCalledWith(90);
+      expect(v.value).toHaveBeenCalledWith(91);
       expect(v.value).toHaveReturnedWith(2);
-      expect(v.value).toHaveReturnedWith(88);
+      expect(v.value).toHaveReturnedWith(77);
     },
   },
   {
-    caseName: "lose TP actorId=1 value=123",
+    caseName: "lose MP actorId=V[90]:2 value=V[91]:77",
     command: {
-      code: 326,
+      code: 312,
+      indent: 0,
+      parameters: [1, 90, 1, 1, 91],
+    },
+    expected: makeCommandLoseActorMP({
+      targetType: "variable",
+      target: 90,
+      operand: { mode: "variable", value: 91 },
+    }),
+    members: (party) => single(party),
+    actors: { called: [2], notCalled: [1] },
+    variableLiteral: { 90: 2, 91: 77 },
+    changeValue: ([a1, a2]) => {
+      expect(a1.gainMp).not.toHaveBeenCalled();
+      expect(a2.gainMp).toHaveBeenCalledWith(-77);
+    },
+    usingVariables: (v) => {
+      expect(v.value).toHaveBeenCalledTimes(2);
+      expect(v.value).toHaveBeenCalledWith(90);
+      expect(v.value).toHaveBeenCalledWith(91);
+      expect(v.value).toHaveReturnedWith(2);
+      expect(v.value).toHaveReturnedWith(77);
+    },
+  },
+  {
+    caseName: "lose MP actorId=1 value=123",
+    command: {
+      code: 312,
       indent: 0,
       parameters: [0, 1, 1, 0, 123],
     },
-    expected: makeCommandLoseActorTP({
+    expected: makeCommandLoseActorMP({
       targetType: "direct",
       target: 1,
       operand: { mode: "direct", value: 123 },
@@ -348,40 +357,40 @@ const testCasesTP: TestCaseTemplate<Command_ChangeActorTP>[] = [
     members: (party) => single(party),
     actors: { called: [1], notCalled: [2] },
     changeValue: ([a1, a2]) => {
-      expect(a1.gainTp).toHaveBeenCalledWith(-123);
-      expect(a2.gainTp).not.toHaveBeenCalled();
+      expect(a1.gainMp).toHaveBeenCalledWith(-123);
+      expect(a2.gainMp).not.toHaveBeenCalled();
     },
     usingVariables: (v) => {
       expect(v.value).not.toHaveBeenCalled();
     },
   },
   {
-    caseName: "lose TP actorId=V[99]:2 value=V[100]:88",
+    caseName: "lose MP actorId=V[90]:2 value=V[91]:77",
     command: {
-      code: 326,
+      code: 312,
       indent: 0,
-      parameters: [1, 99, 1, 1, 100],
+      parameters: [1, 90, 1, 1, 91],
     },
-    expected: makeCommandLoseActorTP({
+    expected: makeCommandLoseActorMP({
       targetType: "variable",
-      target: 99,
-      operand: { mode: "variable", value: 100 },
+      target: 90,
+      operand: { mode: "variable", value: 91 },
     }),
     members: (party) => single(party),
     actors: { called: [2], notCalled: [1] },
-    variableLiteral: { 99: 2, 100: 88 },
+    variableLiteral: { 90: 2, 91: 77 },
     changeValue: ([a1, a2]) => {
-      expect(a1.gainTp).not.toHaveBeenCalled();
-      expect(a2.gainTp).toHaveBeenCalledWith(-88);
+      expect(a1.gainMp).not.toHaveBeenCalled();
+      expect(a2.gainMp).toHaveBeenCalledWith(-77);
     },
     usingVariables: (v) => {
       expect(v.value).toHaveBeenCalledTimes(2);
-      expect(v.value).toHaveBeenCalledWith(99);
-      expect(v.value).toHaveBeenCalledWith(100);
+      expect(v.value).toHaveBeenCalledWith(90);
+      expect(v.value).toHaveBeenCalledWith(91);
       expect(v.value).toHaveReturnedWith(2);
-      expect(v.value).toHaveReturnedWith(88);
+      expect(v.value).toHaveReturnedWith(77);
     },
   },
 ];
 
-testCasesTP.forEach((tc) => runTestCase(tc));
+testCasesMP.forEach((tc) => runTestCase(tc));
