@@ -1,3 +1,3 @@
-export * from "./managers/index";
-export * from "./objects/index";
-export * from "./scene/index";
+export * from "./managers";
+export * from "./objects";
+export * from "./scene";
