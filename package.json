@@ -31,6 +31,9 @@
       "types": "./dist/validate/index.d.ts",
       "import": "./dist/validate/validate.es.js",
       "require": "./dist/validate/validate.cjs.js"
+    },
+    "./rmmzRuntime": {
+      "types": "./dist/rmmzRuntime/index.d.ts"
     }
   },
   "files": [
