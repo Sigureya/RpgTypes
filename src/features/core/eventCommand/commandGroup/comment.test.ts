@@ -33,11 +33,11 @@ describe("extractCommentGroup - Validation Tests", () => {
       makeCommandCommentBody("Body text 2"),
     ] satisfies Command_CommentBody[],
   };
-  test("bb", () => {
+  test("header", () => {
     const result = extractCommentGroup(commands, 0);
     expect(result.header).toEqual(expected.header);
   });
-  test("cc", () => {
+  test("bodies", () => {
     const result = extractCommentGroup(commands, 0);
     expect(result.bodies).toEqual(expected.bodies);
   });
@@ -68,7 +68,7 @@ describe("createCommentGroup - CombinedEventCommandGroup Creation", () => {
       const mergedBody = group.mergedBody();
       expect(mergedBody).toEqual(expectedCommand);
     });
-    test("", () => {
+    test("should return normalized commands", () => {
       const group: EventCommandGroup_Comment = createCommentGroup(commands, 0);
       const normalizedCommands = group.normalizedCommands();
       expect(normalizedCommands).toEqual([expectedCommand]);
