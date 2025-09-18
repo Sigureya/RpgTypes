@@ -1,3 +1,3 @@
 export type { DataFileInfo } from './types';
-export type { DataManager_Interface } from './dataManager';
+export type { Rmmz_DataManager } from './dataManager';
 export type { RpgDataTypes } from './dataTypes';
