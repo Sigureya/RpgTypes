@@ -9,7 +9,7 @@ import {
   makeCommandShowMessageBody,
 } from "@RpgTypes/rmmz/eventCommand";
 import type { Rmmz_ImageManager } from "@RpgTypes/rmmzRuntime";
-import type { Rmmz_Message } from "@RpgTypes/rmmzRuntime/objects/core/message";
+import type { Rmmz_Message } from "@RpgTypes/rmmzRuntime/objects";
 import type { FakeMap } from "./fakes/types";
 import { Game_Interpreter } from "./rmmz_objects";
 
