@@ -1,4 +1,4 @@
-export interface SoundManager_Interface {
+export interface Rmmz_SoundManager {
     preloadImportantSounds(): void;
     playCursor(): void;
     playOk(): void;

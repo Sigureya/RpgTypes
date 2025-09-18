@@ -1,4 +1,4 @@
-export interface ColorManager_Interface {
+export interface Rmmz_ColorManager {
   textColor(n: number): string;
   normalColor(): string;
   systemColor(): string;
