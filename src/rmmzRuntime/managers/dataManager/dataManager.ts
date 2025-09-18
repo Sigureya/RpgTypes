@@ -8,7 +8,7 @@ import type {
 import type { RpgDataTypes } from "./dataTypes";
 import type { DataFileInfo } from "./types";
 
-export interface DataManager_Interface {
+export interface Rmmz_DataManager {
   get _databaseFiles(): DataFileInfo[];
   loadGlobalInfo(): void;
   removeInvalidGlobalInfo(): void;

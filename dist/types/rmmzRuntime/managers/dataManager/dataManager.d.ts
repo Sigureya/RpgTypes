@@ -1,7 +1,7 @@
 import { Data_Armor, Data_Item, Data_Map, Data_Skill, Data_Weapon } from '../../../rmmz/rpg';
 import { RpgDataTypes } from './dataTypes';
 import { DataFileInfo } from './types';
-export interface DataManager_Interface {
+export interface Rmmz_DataManager {
     get _databaseFiles(): DataFileInfo[];
     loadGlobalInfo(): void;
     removeInvalidGlobalInfo(): void;

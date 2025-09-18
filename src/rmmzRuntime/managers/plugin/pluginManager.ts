@@ -1,4 +1,4 @@
-export interface PluginManager_Interface<InterPreter> {
+export interface Rmmz_PluginManager<InterPreter> {
   _commands: Record<string, (args: Record<string, string>) => void>;
 
   parameters(name: string): Record<string, string>;
