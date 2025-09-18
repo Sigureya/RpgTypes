@@ -1,11 +1,11 @@
 import type { Audio, Display, Facade, Process } from "./interface";
 import type { Battle_Reward } from "./interface/reward";
 
-export interface Manager_Battle extends Audio, Display, Process, Facade {
+export interface Rmmz_BattleManager extends Audio, Display, Process, Facade {
   _rewards: Battle_Reward;
 }
 
-declare class T implements Manager_Battle {
+declare class T implements Rmmz_BattleManager {
   _rewards: Battle_Reward;
   saveBgmAndBgs(): void;
   playBattleBgm(): void;

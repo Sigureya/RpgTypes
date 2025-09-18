@@ -1,4 +1,4 @@
-interface Battle_Rule {
+export interface Battle_Rule {
   checkBattleEnd(): boolean;
   endAction(): void;
   updateAction(): void;
