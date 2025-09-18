@@ -33,7 +33,7 @@
       "require": "./dist/validate/validate.cjs.js"
     },
     "./rmmzRuntime": {
-      "types": "./dist/rmmzRuntime/index.d.ts"
+      "types": "./dist/types/rmmzRuntime/index.d.ts"
     }
   },
   "files": [
