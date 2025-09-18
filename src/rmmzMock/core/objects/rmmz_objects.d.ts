@@ -4,6 +4,7 @@ export {
   Game_Interpreter,
   Game_Message,
   Game_Party,
+  Game_System,
   Game_Troop,
   Game_Unit,
   Game_Variables,
