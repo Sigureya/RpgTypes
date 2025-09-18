@@ -22,6 +22,6 @@ export const replaceSystemText = (
 const replaceArray = (
   list: ReadonlyArray<string>,
   map: ReadonlyMap<string, string>
-) => {
+): string[] => {
   return list.map((item) => replaceTextByMap(item, map));
 };
