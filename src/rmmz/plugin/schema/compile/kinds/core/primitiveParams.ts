@@ -4,6 +4,12 @@ import type {
   DataKind_SystemUnion,
 } from "./rpgData/rpgDataTypesNames";
 
+export type PrimitiveStringParam =
+  | StringParam
+  | AnyStringParam
+  | ComboParam
+  | SelectParam;
+
 export type PrimitiveParam =
   | BooleanParam
   | NumberParam

@@ -10,16 +10,18 @@ export interface PluginJSON {
   structs: Record<string, PluginStructBody>;
 }
 
-export interface PluginCommandBody {
+export interface PluginCommandBody<Param = PrimitiveParam> {
   desc?: string;
   text?: string;
   args: {
-    [key: string]: PrimitiveParam;
+    [key: string]: Param;
   };
 }
 
-export interface PluginStructBody {
+export interface PluginStructBody<Param = PrimitiveParam> {
   params: {
-    [key: string]: PrimitiveParam;
+    [key: string]: Param;
   };
 }
+
+export interface XXX {}
