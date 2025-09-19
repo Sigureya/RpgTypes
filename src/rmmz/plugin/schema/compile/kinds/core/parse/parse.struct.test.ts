@@ -1,6 +1,10 @@
 import { describe, test, expect } from "vitest";
 import { parsePlugin } from "./parse";
-import type { PluginParamTokens, StructParseState } from "./types";
+import type {
+  ParsedPlugin,
+  PluginParamTokens,
+  StructParseState,
+} from "./types";
 
 describe("parsePlugin", () => {
   describe("structs", () => {
@@ -25,11 +29,13 @@ describe("parsePlugin", () => {
       "@default 20",
       `*/`,
     ];
-    const result = parsePlugin(tokens.join("\n"));
+    const src: string = tokens.join("\n");
     test("commands is empty", () => {
+      const result: ParsedPlugin = parsePlugin(src);
       expect(result.commands).toEqual([]);
     });
-    test("params is empty", () => {
+    test("params", () => {
+      const result: ParsedPlugin = parsePlugin(src);
       const expected: PluginParamTokens[] = [
         {
           name: "num",
@@ -47,16 +53,24 @@ describe("parsePlugin", () => {
       expect(result.params).toEqual(expected);
     });
     test("structs is defined", () => {
+      const result: ParsedPlugin = parsePlugin(src);
       const struct: StructParseState = {
         name: "Person",
         params: [
           {
             name: "name",
-            attr: { kind: "string", default: "bob", desc: "This is the name" },
+            attr: {
+              kind: "string",
+              default: "bob",
+              desc: "This is the name",
+            },
           },
           {
             name: "age",
-            attr: { kind: "number", default: "20" },
+            attr: {
+              kind: "number",
+              default: "20",
+            },
           },
         ],
       };
