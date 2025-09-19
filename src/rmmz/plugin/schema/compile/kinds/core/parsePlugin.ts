@@ -35,7 +35,9 @@ const compilePlugin = (parsedPlugin: ParsedPlugin): PluginJSON => {
 const reduceParams = (
   params: ReadonlyArray<PluginParamTokens>
 ): { [key: string]: PrimitiveParam } => {
-  return Object.fromEntries(params.map((p) => [p.name, compileAttributes(p)]));
+  return Object.fromEntries(
+    params.map((p): [string, PrimitiveParam] => [p.name, compileAttributes(p)])
+  );
 };
 
 const reduceCommands = (
