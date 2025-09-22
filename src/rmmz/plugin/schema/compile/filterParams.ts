@@ -6,7 +6,7 @@ import type {
   PluginJSON,
 } from "./kinds/core/pluginJSONTypes";
 
-export const filterPlugin = <T extends PrimitiveParam>(
+export const filterPluginSchemaByParam = <T extends PrimitiveParam>(
   p: PluginJSON,
   fn: (param: PrimitiveParam) => param is T
 ): FilteredPluginSchema<T> => {
