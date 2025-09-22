@@ -23,5 +23,3 @@ export interface PluginStructBody<Param = PrimitiveParam> {
     [key: string]: Param;
   };
 }
-
-export interface XXX {}
