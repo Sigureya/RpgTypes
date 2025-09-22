@@ -1,6 +1,6 @@
 import { test, expect, describe } from "vitest";
 import { parsePlugin } from "./parsePlugin";
-import type { PluginCommandBody } from "./pluginJSONTypes";
+import type { PluginCommandBody, PluginStructBody } from "./pluginJSONTypes";
 import type { PrimitiveParam } from "./primitiveParams";
 
 const mockTexts: string[] = [
@@ -41,6 +41,17 @@ const mockTexts: string[] = [
   "@help",
   "This is a mock plugin for testing.",
   "*/",
+  `/*~struct~Person:`,
+
+  "@param name",
+  "@desc This is the name",
+  "@type string",
+  "@default bob",
+
+  "@param age",
+  "@type number",
+  "@default 20",
+  `*/`,
 ];
 
 describe("parsePlugin", () => {
@@ -81,7 +92,7 @@ describe("parsePlugin", () => {
             default: "abc",
           },
         },
-      } satisfies PluginCommandBody,
+      },
       load: {
         args: {
           arg1: {
@@ -92,8 +103,23 @@ describe("parsePlugin", () => {
           },
           arg2: { kind: "string", default: "abc" },
         },
-      } satisfies PluginCommandBody,
+      },
     };
     expect(result.commands).toEqual(expected);
+  });
+  test("should parse structs correctly", () => {
+    const expected: Record<string, PluginStructBody> = {
+      Person: {
+        params: {
+          name: {
+            kind: "string",
+            desc: "This is the name",
+            default: "bob",
+          },
+          age: { kind: "number", default: 20 },
+        },
+      },
+    };
+    expect(result.structs).toEqual(expected);
   });
 });

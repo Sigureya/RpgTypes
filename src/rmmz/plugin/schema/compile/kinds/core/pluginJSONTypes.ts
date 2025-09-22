@@ -7,12 +7,19 @@ export interface PluginJSON {
   commands: Record<string, PluginCommandBody>;
   params: Record<string, PrimitiveParam>;
   dependencies?: PluginDependencies;
+  structs: Record<string, PluginStructBody>;
 }
 
-export interface PluginCommandBody {
+export interface PluginCommandBody<Param = PrimitiveParam> {
   desc?: string;
   text?: string;
   args: {
-    [key: string]: PrimitiveParam;
+    [key: string]: Param;
+  };
+}
+
+export interface PluginStructBody<Param = PrimitiveParam> {
+  params: {
+    [key: string]: Param;
   };
 }

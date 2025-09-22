@@ -4,8 +4,13 @@ import type {
   ParsedPlugin,
   PluginCommandTokens,
   PluginParamTokens,
+  StructParseState,
 } from "./parse/types";
-import type { PluginCommandBody, PluginJSON } from "./pluginJSONTypes";
+import type {
+  PluginCommandBody,
+  PluginJSON,
+  PluginStructBody,
+} from "./pluginJSONTypes";
 import type { PrimitiveParam } from "./primitiveParams";
 
 export interface PluginParam {
@@ -23,32 +28,42 @@ const compilePlugin = (parsedPlugin: ParsedPlugin): PluginJSON => {
     meta: parsedPlugin.meta,
     commands: reduceCommands(parsedPlugin.commands),
     params: reduceParams(parsedPlugin.params),
+    structs: reduceStructs(parsedPlugin.structs),
   };
 };
 
 const reduceParams = (
   params: ReadonlyArray<PluginParamTokens>
 ): { [key: string]: PrimitiveParam } => {
-  return params.reduce<{ [key: string]: PrimitiveParam }>((acc, param) => {
-    return {
-      [param.name]: compileAttributes(param),
-      ...acc,
-    };
-  }, {});
+  return Object.fromEntries(
+    params.map((p): [string, PrimitiveParam] => [p.name, compileAttributes(p)])
+  );
 };
 
 const reduceCommands = (
   tokens: ReadonlyArray<PluginCommandTokens>
 ): Record<string, PluginCommandBody> => {
-  return tokens.reduce((acc, token) => {
-    const body: PluginCommandBody = {
-      desc: token.desc,
-      text: token.text,
-      args: reduceParams(token.args),
-    };
-    return {
-      [token.command]: body,
-      ...acc,
-    };
-  }, {});
+  return Object.fromEntries(
+    tokens.map((token): [string, PluginCommandBody] => [
+      token.command,
+      {
+        desc: token.desc,
+        text: token.text,
+        args: reduceParams(token.args),
+      },
+    ])
+  );
+};
+
+const reduceStructs = (
+  structs: ReadonlyArray<StructParseState>
+): Record<string, PluginStructBody> => {
+  return Object.fromEntries(
+    structs.map((struct): [string, PluginStructBody] => [
+      struct.name,
+      {
+        params: reduceParams(struct.params),
+      },
+    ])
+  );
 };
