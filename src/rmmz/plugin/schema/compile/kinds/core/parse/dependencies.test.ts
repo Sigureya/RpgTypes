@@ -1,6 +1,6 @@
 import { describe, test, expect } from "vitest";
-import type { PluginDependencies } from "./dependencies";
 import { addBasePlugin, addOrderBefore, addOrderAfter } from "./dependencies";
+import type { PluginDependencies } from "./types/pluginDependencies";
 
 describe("PluginDependencies helpers", () => {
   const baseDep: PluginDependencies = {
