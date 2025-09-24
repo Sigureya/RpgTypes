@@ -4,7 +4,7 @@ import type {
   PluginParamTokens,
   PluginCommandTokens,
   PluginMeta,
-} from "./types";
+} from "./types/types";
 import type { OptionItem } from "./types/selectOption";
 
 export interface OptionsState {

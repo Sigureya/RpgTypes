@@ -5,7 +5,7 @@ import type {
   PluginCommandTokens,
   PluginParamTokens,
   StructParseState,
-} from "./parse/types";
+} from "./parse/types/types";
 import type {
   PluginCommandBody,
   PluginJSON,

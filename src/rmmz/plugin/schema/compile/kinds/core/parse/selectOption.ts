@@ -1,4 +1,4 @@
-import { KEYWORD_OPTION, KEYWORD_VALUE } from "./keyword/constants";
+import { KEYWORD_OPTION, KEYWORD_VALUE } from "./types/keyword/constants";
 import type { OptionItem, Token } from "./types/selectOption";
 
 interface State {

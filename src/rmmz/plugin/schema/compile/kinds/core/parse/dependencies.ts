@@ -1,8 +1,4 @@
-export interface PluginDependencies {
-  base: string[];
-  orderBefore: string[];
-  orderAfter: string[];
-}
+import type { PluginDependencies } from "./types/pluginDependencies";
 
 export const addBasePlugin = (
   dep: PluginDependencies,
