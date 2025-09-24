@@ -1,5 +1,6 @@
 import type { PluginDependencies } from "./parse/dependencies";
 import type { PrimitiveParam } from "./primitiveParams";
+import type { PluginStructBodyTemplate } from "./struct/types";
 
 export interface PluginJSON {
   target: string;
@@ -7,7 +8,7 @@ export interface PluginJSON {
   commands: Record<string, PluginCommandBody>;
   params: Record<string, PrimitiveParam>;
   dependencies?: PluginDependencies;
-  structs: Record<string, PluginStructBody>;
+  structs: Record<string, PluginStructBodyTemplate<PrimitiveParam>>;
 }
 
 export interface PluginCommandBody<Param = PrimitiveParam> {
@@ -18,8 +19,4 @@ export interface PluginCommandBody<Param = PrimitiveParam> {
   };
 }
 
-export interface PluginStructBody<Param = PrimitiveParam> {
-  params: {
-    [key: string]: Param;
-  };
-}
+export type PluginStructBody<T = PrimitiveParam> = PluginStructBodyTemplate<T>;
