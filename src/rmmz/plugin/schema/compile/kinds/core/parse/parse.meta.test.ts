@@ -1,9 +1,10 @@
 import { describe, expect, it } from "vitest";
 import { parsePlugin } from "./parse";
+import type { ParsedPlugin } from "./types";
 
 describe("parsePlugin", () => {
   it("returns an empty meta object for empty input", () => {
-    const result = parsePlugin("");
+    const result: ParsedPlugin = parsePlugin("");
     expect(result.meta).toEqual({});
   });
 

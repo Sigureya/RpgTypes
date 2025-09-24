@@ -1,9 +1,9 @@
 import { describe, test, expect } from "vitest";
 import { parsePlugin } from "./parse";
-import type { ParsedPlugin } from "./types/types";
+import type { ParsedPlugin } from "./types";
 
 describe("parsePlugin", () => {
-  test("", () => {
+  test("select with options and values, default is one of values, option text is same as value", () => {
     const tokens: string[] = [
       "/*:",
 
@@ -37,7 +37,7 @@ describe("parsePlugin", () => {
     expect(result.params).toEqual(expected.params);
   });
 
-  test("", () => {
+  test("select with options and values, default is one of values, option text is different from value", () => {
     const tokens: string[] = [
       "/*:",
       "@param list",
@@ -72,7 +72,7 @@ describe("parsePlugin", () => {
     const result: ParsedPlugin = parsePlugin(tokens.join("\n"));
     expect(result.params).toMatchObject(expected.params);
   });
-  test("", () => {
+  test("combo with options, default is one of option texts, option text is same as value", () => {
     const tokens: string[] = [
       "/*:",
       "@param list",

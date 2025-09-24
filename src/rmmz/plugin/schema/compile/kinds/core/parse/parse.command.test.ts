@@ -1,9 +1,9 @@
 import { describe, test, expect } from "vitest";
 import { parsePlugin } from "./parse";
-import type { ParsedPlugin, PluginCommandTokens } from "./types/types";
+import type { ParsedPlugin, PluginCommandTokens } from "./types";
 
 describe("parsePlugin", () => {
-  test("", () => {
+  test("should parse a command with arguments correctly", () => {
     const mockTexts: string[] = [
       "/*:",
       "@command save",
