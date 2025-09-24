@@ -28,6 +28,16 @@ export type PrimitiveParam =
   | StructArrayRefParam
   | AnyStringParam;
 
+export type ParamKinds = Exclude<
+  PrimitiveParam,
+  ArrayParam | StructArrayRefParam
+>["kind"];
+
+export interface ArrayParam {
+  kind: `${string}[]`;
+  default: unknown[];
+}
+
 export interface RpgDataIdParam extends ParamBase {
   kind: DataKind_RpgUnion;
   default: number;
