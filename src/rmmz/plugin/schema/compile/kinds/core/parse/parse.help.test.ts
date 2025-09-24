@@ -4,7 +4,7 @@ import type {
   ParsedPlugin,
   PluginCommandTokens,
   PluginParamTokens,
-} from "./types";
+} from "./types/types";
 
 const mockTexts: string[] = [
   "/*:",

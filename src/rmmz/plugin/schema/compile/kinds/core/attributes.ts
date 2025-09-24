@@ -1,8 +1,8 @@
 import type { MappingTable } from "./mapping/mapping";
 import { compileParam, compileArrayParam } from "./mapping/mapping";
-import { KEYWORD_KIND } from "./parse/keyword/constants";
-import type { PluginParamTokens } from "./parse/types";
+import { KEYWORD_KIND } from "./parse/types/keyword/constants";
 import type { OptionItem } from "./parse/types/selectOption";
+import type { PluginParamTokens } from "./parse/types/types";
 import type {
   BooleanParam,
   NumberParam,

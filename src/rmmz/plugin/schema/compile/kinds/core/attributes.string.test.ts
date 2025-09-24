@@ -1,7 +1,7 @@
 import { describe, expect, test } from "vitest";
 import type { ParamSoruceRecord } from "./attributes";
 import { compileAttributes } from "./attributes";
-import type { PluginParamTokens } from "./parse/types";
+import type { PluginParamTokens } from "./parse/types/types";
 import type { StringArrayParam, StringParam } from "./primitiveParams";
 
 describe("compileAttributes - string", () => {

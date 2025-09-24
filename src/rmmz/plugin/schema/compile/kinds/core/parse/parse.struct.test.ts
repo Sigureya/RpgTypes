@@ -4,7 +4,7 @@ import type {
   ParsedPlugin,
   PluginParamTokens,
   StructParseState,
-} from "./types";
+} from "./types/types";
 
 describe("parsePlugin", () => {
   describe("structs", () => {

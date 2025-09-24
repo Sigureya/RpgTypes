@@ -1,4 +1,4 @@
-import type { PluginDependencies } from "./parse/dependencies";
+import type { PluginDependencies } from "./parse/types/pluginDependencies";
 import type { PrimitiveParam } from "./primitiveParams";
 import type { PluginStructBodyTemplate } from "./struct/types";
 

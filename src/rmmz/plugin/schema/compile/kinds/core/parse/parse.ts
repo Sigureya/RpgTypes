@@ -3,24 +3,6 @@ import { splitBlock } from "./block";
 import { flashCurrentItem, withTexts } from "./flashState";
 import type { ParseState } from "./internalTypes";
 import {
-  KEYWORD_TEXT,
-  KEYWORD_DESC,
-  KEYWORD_DEFAULT,
-  KEYWORD_ON,
-  KEYWORD_OFF,
-  KEYWORD_MIN,
-  KEYWORD_MAX,
-  KEYWORD_PARAM,
-  KEYWORD_ARG,
-  KEYWORD_HELP,
-  KEYWORD_KIND,
-  KEYWORD_AUTHOR,
-  KEYWORD_PLUGINDESC,
-  KEYWORD_URL,
-  KEYWORD_STRUCT,
-} from "./keyword/constants";
-import type { KeywordEnum } from "./keyword/types";
-import {
   handleBase,
   handleOption,
   handleOrderAfter,
@@ -28,12 +10,30 @@ import {
   handleValue,
 } from "./state";
 import { typeIsStruct } from "./struct";
+import {
+  KEYWORD_HELP,
+  KEYWORD_PARAM,
+  KEYWORD_TEXT,
+  KEYWORD_DESC,
+  KEYWORD_ARG,
+  KEYWORD_STRUCT,
+  KEYWORD_KIND,
+  KEYWORD_DEFAULT,
+  KEYWORD_ON,
+  KEYWORD_OFF,
+  KEYWORD_MIN,
+  KEYWORD_MAX,
+  KEYWORD_AUTHOR,
+  KEYWORD_PLUGINDESC,
+  KEYWORD_URL,
+} from "./types/keyword/constants";
+import type { KeywordEnum } from "./types/keyword/types";
+import type { PluginMeta } from "./types/pluginMeta";
 import type {
   ParsedPlugin,
   PluginCommandTokens,
-  PluginMeta,
   StructParseState,
-} from "./types";
+} from "./types/types";
 
 export const parsePlugin = (text: string) => {
   return parsePluginCore(text, KEYWORD_FUNC_TABLE);

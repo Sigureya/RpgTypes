@@ -1,6 +1,6 @@
 import type { ParseState } from "./internalTypes";
 import { finalizeOptions } from "./option";
-import type { PluginCommandTokens } from "./types";
+import type { PluginCommandTokens } from "./types/types";
 
 export interface DescAndText {
   desc?: string;
