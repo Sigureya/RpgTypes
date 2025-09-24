@@ -19,10 +19,10 @@ export interface PluginParam {
 }
 
 export const parsePlugin = (text: string): PluginJSON => {
-  return compilePlugin(parse(text));
+  return compilePluginCore(parse(text));
 };
 
-const compilePlugin = (parsedPlugin: ParsedPlugin): PluginJSON => {
+const compilePluginCore = (parsedPlugin: ParsedPlugin): PluginJSON => {
   return {
     target: "MZ",
     meta: parsedPlugin.meta,
