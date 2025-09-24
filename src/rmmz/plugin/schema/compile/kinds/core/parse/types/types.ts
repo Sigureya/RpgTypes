@@ -5,11 +5,11 @@ import type { OptionItem } from "./selectOption";
 
 export interface PluginParamTokens {
   name: string;
-  attr: PluginTokens;
+  attr: PluginTokensRecord;
   options?: OptionItem[];
 }
 
-export type PluginTokens = { [key in KeywordEnum]?: string };
+export type PluginTokensRecord = { [key in KeywordEnum]?: string };
 
 export interface PluginCommandTokens {
   command: string;
@@ -18,16 +18,22 @@ export interface PluginCommandTokens {
   args: PluginParamTokens[];
 }
 
-export interface ParsedPlugin {
+export interface StructParseState {
+  name: string;
+  params: PluginParamTokens[];
+}
+
+export interface PluginTokens {
+  params: PluginParamTokens[];
+  commands: PluginCommandTokens[];
+  structs: StructParseState[];
+}
+
+export interface ParsedPlugin extends PluginTokens {
   meta: Partial<PluginMeta>;
   params: PluginParamTokens[];
   commands: PluginCommandTokens[];
   helpLines: string[];
   dependencies?: PluginDependencies;
   structs: StructParseState[];
-}
-
-export interface StructParseState {
-  name: string;
-  params: PluginParamTokens[];
 }

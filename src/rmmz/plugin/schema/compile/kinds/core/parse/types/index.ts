@@ -4,7 +4,7 @@ export type {
   ParsedPlugin,
   PluginCommandTokens,
   PluginParamTokens,
-  PluginTokens,
+  PluginTokensRecord,
   StructParseState,
 } from "./types";
 export type { PluginDependencies } from "./pluginDependencies";
