@@ -14,10 +14,10 @@ import type {
 import type { PrimitiveParam } from "./primitiveParams";
 
 export const parsePlugin = (text: string): PluginJSON => {
-  return compilePluginCore(parse(text));
+  return compilePluginToObject(parse(text));
 };
 
-const compilePluginCore = (parsedPlugin: ParsedPlugin): PluginJSON => {
+const compilePluginToObject = (parsedPlugin: ParsedPlugin): PluginJSON => {
   return {
     target: "MZ",
     meta: parsedPlugin.meta,
