@@ -5,20 +5,20 @@ export interface PluginParam {
   attr: PrimitiveParam;
 }
 
-export interface PluginCommandEx {
+export interface PluginCommandSchemaArray {
   command: string;
   desc?: string;
   text?: string;
   args: PluginParam[];
 }
 
-export interface PluginStructEx {
+export interface PluginStructSchemaArray {
   struct: string;
   params: PluginParam[];
 }
 
-export interface PluginXXX {
-  commands: PluginCommandEx[];
+export interface PluginSchemaArray {
+  commands: PluginCommandSchemaArray[];
   params: PluginParam[];
-  structs: PluginStructEx[];
+  structs: PluginStructSchemaArray[];
 }
