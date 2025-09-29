@@ -35,7 +35,7 @@ import type {
   StructParseState,
 } from "./types/types";
 
-export const parsePlugin = (text: string) => {
+export const parsePlugin = (text: string): ParsedPlugin => {
   return parsePluginCore(text, KEYWORD_FUNC_TABLE);
 };
 
