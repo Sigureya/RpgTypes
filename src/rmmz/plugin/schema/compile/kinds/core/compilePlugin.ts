@@ -28,10 +28,13 @@ const compilePluginToObjectCore = (parsedPlugin: ParsedPlugin): PluginJSON => {
 };
 
 const reduceParams = (
-  params: ReadonlyArray<PluginParamTokens>
+  paramTokens: ReadonlyArray<PluginParamTokens>
 ): { [key: string]: PrimitiveParam } => {
   return Object.fromEntries(
-    params.map((p): [string, PrimitiveParam] => [p.name, compileAttributes(p)])
+    paramTokens.map((param): [string, PrimitiveParam] => [
+      param.name,
+      compileAttributes(param),
+    ])
   );
 };
 
