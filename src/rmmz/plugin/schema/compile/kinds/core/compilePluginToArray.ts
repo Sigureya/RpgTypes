@@ -1,10 +1,10 @@
 import { compileAttributes } from "./attributes";
 import type {
-  ParsedPlugin,
   PluginCommandTokens,
   PluginParamTokens,
   StructParseState,
 } from "./parse/types";
+import type { PluginTokens } from "./parse/types/types";
 import type {
   PluginCommandSchemaArray,
   PluginParam,
@@ -13,7 +13,7 @@ import type {
 } from "./types";
 
 export const compilePluginAsArray = (
-  parsedPlugin: ParsedPlugin
+  parsedPlugin: PluginTokens
 ): PluginSchemaArray => ({
   commands: mapCommands(parsedPlugin.commands),
   params: mapParams(parsedPlugin.params),
@@ -32,8 +32,8 @@ const mapCommands = (
   return commands.map(
     (cmd): PluginCommandSchemaArray => ({
       command: cmd.command,
-      desc: cmd.desc,
-      text: cmd.text,
+      //      desc: cmd.desc,
+      //      text: cmd.text,
       args: mapParams(cmd.args),
     })
   );

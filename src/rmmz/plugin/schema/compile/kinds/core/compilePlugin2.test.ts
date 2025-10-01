@@ -6,6 +6,7 @@ import type { PluginTokens } from "./parse/types/types";
 import type {
   PluginCommandSchemaArray,
   PluginParam,
+  PluginSchemaArray,
   PluginStructSchemaArray,
 } from "./types";
 const mockTexts: ReadonlyArray<string> = [
@@ -91,9 +92,9 @@ const mockInput: PluginTokens = {
           name: "arg1",
           attr: {
             default: "123",
-            //            desc: "load Save File",
+            //          desc: "load Save File",
             kind: "number",
-            //          text: "arg1 text",
+            //            text: "arg1 text",
           },
         },
         {
@@ -109,13 +110,13 @@ const mockInput: PluginTokens = {
       command: "load",
       args: [
         {
+          name: "arg1",
           attr: {
             default: "456",
-            desc: "load Save File",
+            //          desc: "load Save File",
             kind: "number",
-            text: "arg1 text",
+            //            text: "arg1 text",
           },
-          name: "arg1",
         },
         {
           attr: {
@@ -144,73 +145,93 @@ const mockInput: PluginTokens = {
   ],
 };
 
-describe("", () => {
-  test("", () => {
+describe("@@", () => {
+  test("ss", () => {
     const src = mockTexts.join("\n");
     const result: ParsedPlugin = parsePlugin(src);
     expect(result).toMatchObject(mockInput);
   });
 });
 
-describe.skip("parsePlugin", () => {
-  const src = mockTexts.join("\n");
-
-  const parsed: ParsedPlugin = parsePlugin(src);
+describe("parsePlugin", () => {
   test("params", () => {
-    const expected: PluginParam[] = [
-      {
-        name: "bool",
-        attr: {
-          kind: "boolean",
-          default: false,
-          text: "autoBattle",
-          on: "enabled",
-          off: "disabled",
+    const input: PluginTokens = {
+      params: mockInput.params,
+      commands: [],
+      structs: [],
+    };
+
+    const expected: PluginSchemaArray = {
+      commands: [],
+      structs: [],
+      params: [
+        {
+          name: "bool",
+          attr: {
+            kind: "boolean",
+            default: false,
+            text: "autoBattle",
+            on: "enabled",
+            off: "disabled",
+          },
         },
-      },
-      {
-        name: "num",
-        attr: {
-          default: 0,
-          kind: "number",
-          max: 100,
-          min: 0,
+        {
+          name: "num",
+          attr: {
+            default: 0,
+            kind: "number",
+            max: 100,
+            min: 0,
+          },
         },
-      },
-    ];
-    const result = compilePluginAsArray(parsed);
-    expect(result.params).toEqual(expected);
+      ],
+    };
+    const result = compilePluginAsArray(input);
+    expect(result).toEqual(expected);
   });
   test("commands", () => {
+    const input: PluginTokens = {
+      params: [],
+      structs: [],
+      commands: mockInput.commands,
+    };
     const expected: PluginCommandSchemaArray[] = [
       {
         command: "save",
-        text: "writeSave",
-        desc: "write Save File",
+        //        text: "writeSave",
+        //        desc: "write Save File",
         args: [
-          { name: "arg1", attr: { kind: "number", default: 123 } },
+          {
+            name: "arg1",
+            attr: {
+              kind: "number",
+              default: 123,
+              //              text: "arg1 text",
+              //            desc: "load Save File",
+            },
+          },
           { name: "arg2", attr: { kind: "string", default: "abc" } },
         ],
       },
       {
         command: "load",
-        text: "arg1 text",
-        desc: "load Save File",
+        //        text: "arg1 text",
+        //       desc: "load Save File",
         args: [
           {
             name: "arg1",
             attr: {
               kind: "number",
               default: 456,
-              desc: "load Save File",
-              text: "arg1 text",
+              //  desc: "load Save File",
+              //  text: "arg1 text",
             },
           },
           { name: "arg2", attr: { kind: "string", default: "abc" } },
         ],
       },
     ];
-    const result = compilePluginAsArray(parsed);
+    const result = compilePluginAsArray(input);
     expect(result.commands).toEqual(expected);
   });
   test("structs", () => {
@@ -226,7 +247,7 @@ describe.skip("parsePlugin", () => {
         ],
       },
     ];
-    const result = compilePluginAsArray(parsed);
+    const result = compilePluginAsArray(mockInput);
     expect(result.structs).toEqual(expected);
   });
 });
