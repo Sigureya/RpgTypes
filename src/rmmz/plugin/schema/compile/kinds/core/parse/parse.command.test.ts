@@ -15,6 +15,7 @@ describe("parsePlugin", () => {
       "@default 123",
 
       "@arg arg2",
+      "@text text2",
       "@type string",
       "@default abc",
       "*/",
@@ -38,6 +39,7 @@ describe("parsePlugin", () => {
           attr: {
             kind: "string",
             default: "abc",
+            text: "text2",
           },
         },
       ],
