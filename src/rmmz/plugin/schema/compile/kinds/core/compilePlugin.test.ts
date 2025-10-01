@@ -1,5 +1,5 @@
 import { test, expect, describe } from "vitest";
-import { parsePlugin } from "./compilePlugin";
+import { compilePluginToObject } from "./compilePlugin";
 import type { PluginCommandBody, PluginStructBody } from "./pluginJSONTypes";
 import type { PrimitiveParam } from "./primitiveParams";
 
@@ -55,7 +55,7 @@ const mockTexts: string[] = [
 ];
 
 describe("parsePlugin", () => {
-  const result = parsePlugin(mockTexts.join("\n"));
+  const result = compilePluginToObject(mockTexts.join("\n"));
   test("should parse plugin annotations correctly", () => {
     expect(result.meta).toBeDefined();
   });
