@@ -1,5 +1,5 @@
 import { test, expect, describe } from "vitest";
-import { parsePlugin } from "./parsePlugin";
+import { parsePlugin } from "./compilePlugin";
 import type { PluginCommandBody, PluginStructBody } from "./pluginJSONTypes";
 import type { PrimitiveParam } from "./primitiveParams";
 
