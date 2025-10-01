@@ -13,11 +13,11 @@ import type {
 } from "./pluginJSONTypes";
 import type { PrimitiveParam } from "./primitiveParams";
 
-export const parsePlugin = (text: string): PluginJSON => {
-  return compilePluginToObject(parse(text));
+export const compilePluginToObject = (text: string): PluginJSON => {
+  return compilePluginToObjectCore(parse(text));
 };
 
-const compilePluginToObject = (parsedPlugin: ParsedPlugin): PluginJSON => {
+const compilePluginToObjectCore = (parsedPlugin: ParsedPlugin): PluginJSON => {
   return {
     target: "MZ",
     meta: parsedPlugin.meta,
