@@ -32,8 +32,8 @@ const mapCommands = (
   return commands.map(
     (cmd): PluginCommandSchemaArray => ({
       command: cmd.command,
-      //      desc: cmd.desc,
-      //      text: cmd.text,
+      desc: cmd.desc,
+      text: cmd.text,
       args: mapParams(cmd.args),
     })
   );
