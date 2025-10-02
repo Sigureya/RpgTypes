@@ -1,17 +1,17 @@
-import { compileAttributes } from "./attributes";
+import { compileAttributes } from "./core/attributes";
 import type {
   PluginCommandTokens,
   PluginParamTokens,
   StructParseState,
-} from "./parse/types";
-import type { PluginTokens } from "./parse/types/types";
-import type { PrimitiveParam } from "./primitiveParams";
+} from "./core/parse/types";
+import type { PluginTokens } from "./core/parse/types/types";
+import type { PrimitiveParam } from "./core/primitiveParams";
 import type {
   PluginCommandSchemaArray,
   PluginParam,
   PluginSchemaArray,
   PluginStructSchemaArray,
-} from "./types";
+} from "./core/types";
 
 export const compilePluginAsArray = (
   parsedPlugin: PluginTokens
