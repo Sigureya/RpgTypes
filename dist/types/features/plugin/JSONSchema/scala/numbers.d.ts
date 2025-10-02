@@ -1,5 +1,5 @@
+import { NumberParam, NumberArrayParam } from '../../../../rmmz/plugin/schema/compile';
 import { JSONSchemaType } from 'ajv';
-import { NumberParam, NumberArrayParam } from '../../../rmmz/plugin/schema/compile/kinds/core/primitiveParams';
 import { JSONSchemaTypeWithRpgParam } from './x-param/base/x-rpg-param';
 export declare const compileNumberField: (data: NumberParam) => JSONSchemaType<number>;
 export declare const compileNumberArrayField: (data: NumberArrayParam) => JSONSchemaType<number[]>;

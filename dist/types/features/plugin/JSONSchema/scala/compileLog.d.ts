@@ -1,4 +1,4 @@
-import { StructParam, StructDefParam } from '../../rmmz/plugin/schema/compile/kinds/core/pluginEntriesEx';
+import { StructParam, StructDefParam } from '../../../../rmmz/plugin/schema/compile/kinds/core/pluginEntriesEx';
 import { JSONSchemaType } from 'ajv';
 import { Schema } from 'jsonschema';
 export interface CompileResult<T extends object> {
