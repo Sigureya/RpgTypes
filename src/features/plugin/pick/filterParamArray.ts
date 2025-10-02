@@ -1,35 +1,35 @@
 /* eslint-disable @functional/no-return-void */
 
-import type { NamedAttribute, PluginParamGroups } from "./filter2Type2";
 import type {
-  ArrayParam,
-  ParamKinds,
-  PrimitiveParam,
   ScalaParam,
-  StructArrayRefParam,
+  PrimitiveParam,
+  ArrayParam,
   StructRefParam,
-} from "./kinds";
-import type { PluginParam } from "./kinds/core/types";
-import { isArrayParam } from "./kinds/isArray";
-import { isStructArrayParam, isStructParam } from "./kinds/isStruct";
+  StructArrayRefParam,
+} from "@RpgTypes/rmmz/plugin/schema/compile";
+import type { PluginParam } from "@RpgTypes/rmmz/plugin/schema/compile/kinds/core/types";
+import { isArrayParam } from "@RpgTypes/rmmz/plugin/schema/compile/kinds/isArray";
+import {
+  isStructParam,
+  isStructArrayParam,
+} from "@RpgTypes/rmmz/plugin/schema/compile/kinds/isStruct";
+import type { PluginParamGroups, NamedAttribute } from "./filter2Type2";
 
-export interface ParamFilterCriteria {
-  structNames: ReadonlySet<string>;
-  singleKinds: ReadonlySet<ParamKinds>;
-  arrayKinds: ReadonlySet<`${ParamKinds}[]`>;
-}
-
-export const filterParams2 = (
-  params2: ReadonlyArray<PluginParam<PrimitiveParam>>,
-  { arrayKinds, singleKinds, structNames }: ParamFilterCriteria
+export const filterParams = <
+  Fn extends (param: ScalaParam, name: string) => boolean
+>(
+  params2: PluginParam<PrimitiveParam>[],
+  set: Pick<ReadonlySet<string>, "has">,
+  fn: Fn
 ): PluginParamGroups => {
   const single: NamedAttribute<ScalaParam>[] = [];
   const array: NamedAttribute<Extract<PrimitiveParam, ArrayParam>>[] = [];
   const struct: NamedAttribute<StructRefParam>[] = [];
   const structArray: NamedAttribute<StructArrayRefParam>[] = [];
+
   params2.forEach(({ attr, name }) => {
     if (isStructParam(attr)) {
-      if (structNames.has(attr.struct)) {
+      if (set.has(attr.struct)) {
         struct.push({
           attr: attr,
           name: name,
@@ -38,7 +38,7 @@ export const filterParams2 = (
       return;
     }
     if (isStructArrayParam(attr)) {
-      if (structNames.has(attr.struct)) {
+      if (set.has(attr.struct)) {
         structArray.push({
           attr: attr,
           name: name,
@@ -47,15 +47,13 @@ export const filterParams2 = (
       return;
     }
     if (isArrayParam(attr)) {
-      if (arrayKinds.has(attr.kind)) {
-        array.push({
-          name: name,
-          attr: attr,
-        });
-      }
+      array.push({
+        name: name,
+        attr: attr,
+      });
       return;
     }
-    if (singleKinds.has(attr.kind)) {
+    if (fn(attr, name)) {
       single.push({
         name: name,
         attr: attr,

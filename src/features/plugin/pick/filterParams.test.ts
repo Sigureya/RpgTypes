@@ -1,8 +1,10 @@
 import { describe, expect, test } from "vitest";
+import type {
+  PluginJSON,
+  PrimitiveParam,
+} from "@RpgTypes/rmmz/plugin/schema/compile";
 import type { FilteredPluginSchema } from "./filtedTypes";
 import { filterPluginSchemaByParam } from "./filterParams";
-import type { PrimitiveParam } from "./kinds";
-import type { PluginJSON } from "./kinds/core/pluginJSONTypes";
 
 const paramIsNumber = (param: PrimitiveParam): param is PrimitiveParam => {
   return param.kind === "number";

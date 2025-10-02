@@ -1,10 +1,10 @@
 import { describe, expect, test } from "vitest";
+import type { PrimitiveParam } from "../../../rmmz/plugin/schema/compile/kinds";
+import type { ParamKinds } from "../../../rmmz/plugin/schema/compile/kinds";
+import type { PluginParam } from "../../../rmmz/plugin/schema/compile/kinds/core/types";
 import type { PluginParamGroups } from "./filter2Type2";
 import type { ParamFilterCriteria } from "./filterParamArray2";
 import { filterParams2 } from "./filterParamArray2";
-import type { PrimitiveParam } from "./kinds";
-import type { ParamKinds } from "./kinds";
-import type { PluginParam } from "./kinds/core/types";
 
 interface TestCase {
   caseName: string;

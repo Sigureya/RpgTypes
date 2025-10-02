@@ -1,4 +1,4 @@
-import type { PluginStructBody } from "./kinds/core/pluginJSONTypes";
+import type { PluginStructBody } from "@RpgTypes/rmmz/plugin/schema/compile";
 
 export type CommandArgsSchemaMap<T> = {
   [k: string]: { args: Record<string, T> };

@@ -1,6 +1,6 @@
+import type { ParamKinds } from "@RpgTypes/rmmz/plugin/schema/compile";
+import type { PluginStructSchemaArray } from "@RpgTypes/rmmz/plugin/schema/compile/kinds/core/types";
 import type { ParamFilterCriteria } from "./filterParamArray2";
-import type { ParamKinds } from "./kinds";
-import type { PluginStructSchemaArray } from "./kinds/core/types";
 
 const stst = (
   structs: ReadonlyArray<PluginStructSchemaArray>,
