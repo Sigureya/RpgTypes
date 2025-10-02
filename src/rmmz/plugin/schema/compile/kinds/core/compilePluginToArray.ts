@@ -9,8 +9,8 @@ import type { PrimitiveParam } from "./primitiveParams";
 import type {
   PluginCommandSchemaArray,
   PluginParam,
-  PluginStructSchemaArray,
   PluginSchemaArray,
+  PluginStructSchemaArray,
 } from "./types";
 
 export const compilePluginAsArray = (
@@ -47,11 +47,9 @@ const mapCommands = (
 
 const mapStructs = (
   structs: ReadonlyArray<StructParseState>
-): PluginStructSchemaArray<PrimitiveParam>[] => {
-  return structs.map(
-    (s): PluginStructSchemaArray<PrimitiveParam> => ({
-      struct: s.name,
-      params: mapParams(s.params),
-    })
-  );
+): PluginStructSchemaArray[] => {
+  return structs.map((s) => ({
+    struct: s.name,
+    params: mapParams(s.params),
+  }));
 };
