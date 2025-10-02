@@ -1,24 +1,24 @@
 import type { PrimitiveParam } from "./primitiveParams";
 
-export interface PluginParam {
+export interface PluginParam<T = PrimitiveParam> {
   name: string;
-  attr: PrimitiveParam;
+  attr: T;
 }
 
-export interface PluginCommandSchemaArray {
+export interface PluginCommandSchemaArray<T = PrimitiveParam> {
   command: string;
   desc?: string;
   text?: string;
-  args: PluginParam[];
+  args: PluginParam<T>[];
 }
 
-export interface PluginStructSchemaArray {
+export interface PluginStructSchemaArray<T = PluginParam<PrimitiveParam>> {
   struct: string;
-  params: PluginParam[];
+  params: T[];
 }
 
-export interface PluginSchemaArray {
-  commands: PluginCommandSchemaArray[];
-  params: PluginParam[];
-  structs: PluginStructSchemaArray[];
+export interface PluginSchemaArray<T = PrimitiveParam> {
+  commands: PluginCommandSchemaArray<T>[];
+  params: PluginParam<T>[];
+  structs: PluginStructSchemaArray<PluginParam<T>>[];
 }
