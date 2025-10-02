@@ -33,7 +33,10 @@ const runTestCase = (testCase: TestCase) => {
         mockedSet,
         (p): p is ScalaParam => true
       );
-      expect(result).toEqual(testCase.expected);
+      expect(result.array).toEqual(testCase.expected.array);
+      expect(result.single).toEqual(testCase.expected.single);
+      expect(result.struct).toEqual(testCase.expected.struct);
+      expect(result.structArray).toEqual(testCase.expected.structArray);
     });
     test("set calls", () => {
       const mockedSet = makeMockedSet(testCase.input.setItems);
@@ -91,6 +94,25 @@ const testCases: TestCase[] = [
       struct: [
         { name: "structParam", attr: { kind: "struct", struct: "MyStruct" } },
       ],
+      structArray: [],
+    },
+  },
+  {
+    input: {
+      params: [
+        { name: "singleParam", attr: { kind: "number", default: 9 } },
+        { name: "arrayParam", attr: { kind: "number[]", default: [1, 2, 3] } },
+      ],
+      fn: (p) => p.kind === "number",
+      setItems: [],
+    },
+    setCallArg: [],
+    expected: {
+      single: [{ name: "singleParam", attr: { kind: "number", default: 9 } }],
+      array: [
+        { name: "arrayParam", attr: { kind: "number[]", default: [1, 2, 3] } },
+      ],
+      struct: [],
       structArray: [],
     },
   },
