@@ -7,3 +7,4 @@ export {
 } from "./scala/compileField";
 export { compileStructDetail } from "./scala/compileFieldEx";
 export { makePluginParamSchema } from "./paramSchema";
+export { structToJSONSchema } from "./sturctRoot";

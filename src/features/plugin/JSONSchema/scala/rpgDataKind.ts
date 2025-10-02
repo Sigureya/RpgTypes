@@ -1,11 +1,10 @@
-import { withTexts } from "@RpgTypes/features/pluguinJSONSchema/scala/base/basicMetaField";
 import type {
   RpgDataIdParam,
   SystemDataIdParam,
 } from "@RpgTypes/rmmz/plugin/schema/compile";
 import { lookupKind } from "@RpgTypes/rmmz/plugin/schema/compile/kinds/core/rpgData/lookup";
-import { withDefault } from "@RpgTypes/rmmz/plugin/schema/compile/kinds/utils";
 import type { JSONSchemaType } from "ajv";
+import { withDefault, withTexts } from "./base/basicMetaField";
 import type { X_Param } from "./x-param/base/x-rpg-param";
 import { xparamBaseData } from "./x-param/base/x-rpg-param";
 export const makeRpgIdField = (data: RpgDataIdParam | SystemDataIdParam) =>
