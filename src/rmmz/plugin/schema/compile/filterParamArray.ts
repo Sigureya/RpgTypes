@@ -1,6 +1,6 @@
 /* eslint-disable @functional/no-return-void */
 
-import type { PluginParamGroups } from "./filter2Type2";
+import type { PluginParamGroups, NamedAttribute } from "./filter2Type2";
 import type {
   PrimitiveParam,
   ArrayParam,
@@ -12,27 +12,16 @@ import type { PluginParam } from "./kinds/core/types";
 import { isArrayParam } from "./kinds/isArray";
 import { isStructArrayParam, isStructParam } from "./kinds/isStruct";
 
-export interface GGG<T> {
-  single: { name: string; attr: ScalaParam }[];
-  array: { name: string; attr: Extract<PrimitiveParam, ArrayParam> }[];
-  struct: PPP<StructRefParam>[];
-  structArray: PPP<StructArrayRefParam>[];
-}
-
-export interface PPP<T> {
-  name: string;
-  attr: T;
-}
-
 export const filterParams = <T extends ScalaParam>(
   params2: PluginParam<PrimitiveParam>[],
   set: Pick<ReadonlySet<string>, "has">,
-  fn: (param: ScalaParam) => param is T
-): GGG<T> => {
-  const single: GGG<T>["single"] = [];
-  const array: GGG<T>["array"] = [];
-  const struct: GGG<T>["struct"] = [];
-  const structArray: GGG<T>["structArray"] = [];
+  fn: (param: ScalaParam, name: string) => param is T
+): PluginParamGroups => {
+  const single: NamedAttribute<ScalaParam>[] = [];
+  const array: NamedAttribute<Extract<PrimitiveParam, ArrayParam>>[] = [];
+  const struct: NamedAttribute<StructRefParam>[] = [];
+  const structArray: NamedAttribute<StructArrayRefParam>[] = [];
+
   params2.forEach(({ attr, name }) => {
     if (isStructParam(attr)) {
       if (set.has(attr.struct)) {
@@ -59,7 +48,7 @@ export const filterParams = <T extends ScalaParam>(
       });
       return;
     }
-    if (fn(attr)) {
+    if (fn(attr, name)) {
       single.push({
         name: name,
         attr: attr,
@@ -71,5 +60,5 @@ export const filterParams = <T extends ScalaParam>(
     array: array,
     struct: struct,
     structArray: structArray,
-  } satisfies Record<keyof PluginParamGroups, unknown>;
+  };
 };
