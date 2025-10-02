@@ -6,8 +6,8 @@ import type {
 } from "@RpgTypes/rmmz/plugin/schema/compile";
 import { lookupKind } from "@RpgTypes/rmmz/plugin/schema/compile/kinds/core/rpgData/lookup";
 import type { JSONSchemaType } from "ajv";
-import type { X_RmmzParam } from "./base/x-rpg-param";
 import { makeRpgIdField, makeRpgIdFieldWithXParam } from "./rpgDataKind";
+import type { X_RmmzParam } from "./x-param/base/x-rpg-param";
 
 interface TestCase {
   caseName: string;

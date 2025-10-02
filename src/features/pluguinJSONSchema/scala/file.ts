@@ -1,9 +1,8 @@
+import type { FileParam } from "@RpgTypes/rmmz/plugin/schema/compile";
 import type { JSONSchemaType } from "ajv";
-import { withTexts } from "../../../rmmz/plugin/schema/compile/kinds/core/paramBase/basicMetaField";
-import type { JSONSchemaTypeWithRpgParam } from "./base/x-rpg-param";
-import { xparamBaseData } from "./base/x-rpg-param";
-import type { FileParam } from "../../../rmmz/plugin/schema/compile/kinds/core/primitiveParams";
-import { withDefault } from "../../../rmmz/plugin/schema/compile/kinds/utils";
+import { withDefault, withTexts } from "./base/basicMetaField";
+import type { JSONSchemaTypeWithRpgParam } from "./x-param/base/x-rpg-param";
+import { xparamBaseData } from "./x-param/base/x-rpg-param";
 
 export const compileFileField = (data: FileParam) =>
   ({

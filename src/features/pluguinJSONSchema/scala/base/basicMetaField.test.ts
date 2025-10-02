@@ -1,14 +1,10 @@
 import { describe, test, expect } from "vitest";
-import type { JSONSchemaType } from "ajv";
-import {
-  withDefault,
-  withTexts,
-  compileArrayField,
-} from "../../../../rmmz/plugin/schema/compile/kinds/core/paramBase/basicMetaField";
 import type {
   ArrayParamBase,
   ParamBase,
-} from "../../../../rmmz/plugin/schema/compile/kinds/core/paramBase/paramBase";
+} from "@RpgTypes/rmmz/plugin/schema/compile/kinds/core/paramBase";
+import type { JSONSchemaType } from "ajv";
+import { withDefault, withTexts, compileArrayField } from "./basicMetaField";
 
 describe("withTexts", () => {
   test("should return an object with title and description if provided", () => {

@@ -1,7 +1,7 @@
-import { withTexts } from "../../../rmmz/plugin/schema/compile/kinds/core/paramBase/basicMetaField";
-import type { X_RPG_PARM, X_RmmzParam } from "./base/x-rpg-param";
-import { xparamBaseData } from "./base/x-rpg-param";
-import type { StructRefParam } from "../../../rmmz/plugin/schema/compile/kinds/core/primitiveParams";
+import type { StructRefParam } from "@RpgTypes/rmmz/plugin/schema/compile";
+import { withTexts } from "./base/basicMetaField";
+import type { X_RPG_PARM, X_RmmzParam } from "./x-param/base/x-rpg-param";
+import { xparamBaseData } from "./x-param/base/x-rpg-param";
 
 export interface JSONSchemaStructRef {
   $ref: string;

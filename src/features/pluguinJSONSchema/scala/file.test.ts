@@ -1,14 +1,13 @@
 import { describe, test, expect } from "vitest";
+import type { FileParam } from "@RpgTypes/rmmz/plugin/schema/compile";
 import type { JSONSchemaType } from "ajv";
 import {
   compilePrimitiveField,
   compilePrimitiveFieldWithXParam,
 } from "../compileField";
-import type { JSONSchemaTypeWithRpgParam } from "./base/x-rpg-param";
-import type { FileParam } from "../../../rmmz/plugin/schema/compile/kinds/core/primitiveParams";
 import { compileFileField, compileFileFieldWithXparam } from "./file";
-import type { AnyParamSchema } from "../meta/anyParamSchema";
-
+import type { AnyParamSchema } from "./meta/anyParamSchema";
+import type { JSONSchemaTypeWithRpgParam } from "./x-param/base/x-rpg-param";
 const mockData: FileParam = {
   kind: "file",
   default: "defaultFile",

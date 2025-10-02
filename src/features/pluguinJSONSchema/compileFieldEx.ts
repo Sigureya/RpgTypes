@@ -1,18 +1,18 @@
-import type { JSONSchemaType } from "ajv";
 import type {
   StructParam,
-  PluginStructEx,
-  StructArrayDefParam,
   StructDefParam,
-} from "../../rmmz/plugin/schema/compile/kinds/core/pluginEntriesEx";
-import { withDefault } from "../../rmmz/plugin/schema/compile/kinds/utils";
+  StructArrayDefParam,
+  PluginStructEx,
+} from "@RpgTypes/rmmz/plugin/schema/compile/kinds/core/pluginEntriesEx";
+import type { JSONSchemaType } from "ajv";
 import {
   compilePrimitiveFieldWithXParam,
   compilePrimitiveField,
 } from "./compileField";
 import type { StructCompileLog } from "./compileLog";
-import type { AnyParamSchema } from "./meta/anyParamSchema";
-import type { CompileContext } from "./meta/compileOption";
+import { withDefault } from "./scala/base/basicMetaField";
+import type { AnyParamSchema } from "./scala/meta/anyParamSchema";
+import type { CompileContext } from "./scala/meta/compileOption";
 
 interface SchemaAndLog {
   schema: AnyParamSchema;

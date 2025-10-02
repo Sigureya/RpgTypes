@@ -1,5 +1,5 @@
 import { describe, test, expect } from "vitest";
-import type { ParamBase } from "../../../../rmmz/plugin/schema/compile/kinds/core/paramBase/paramBase";
+import type { ParamBase } from "@RpgTypes/rmmz/plugin/schema/compile/kinds/core/paramBase";
 import type { X_RmmzParamBase, X_Param } from "./x-rpg-param";
 import { X_RPG_PARM, xparamBaseData } from "./x-rpg-param";
 

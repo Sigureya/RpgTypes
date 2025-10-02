@@ -5,7 +5,10 @@ import type {
 } from "@RpgTypes/rmmz/plugin/schema/compile/kinds/core/pluginEntriesEx";
 import { compileStructDetail } from "./compileFieldEx";
 import type { CompileResult } from "./compileLog";
-import type { PluginMeta, PluginCompileOptions } from "./meta/compileOption";
+import type {
+  PluginMeta,
+  PluginCompileOptions,
+} from "./scala/meta/compileOption";
 
 const SEPARATOR = "." as const;
 

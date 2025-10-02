@@ -1,4 +1,4 @@
 export {
   withDefault,
   compileArrayField,
-} from "./core/paramBase/basicMetaField";
+} from "../../../../../features/pluguinJSONSchema/scala/base/basicMetaField";

@@ -1,8 +1,8 @@
 import { describe, test, expect } from "vitest";
+import type { StructDefParam } from "@RpgTypes/rmmz/plugin/schema/compile/kinds/core/pluginEntriesEx";
 import type { JSONSchemaType } from "ajv";
 import type { StructCompileLogObjectEntry } from "./compileLog";
 import { defineStructs } from "./compileLog";
-import type { StructDefParam } from "../../rmmz/plugin/schema/compile/kinds/core/pluginEntriesEx";
 
 interface Person {
   name: string;
