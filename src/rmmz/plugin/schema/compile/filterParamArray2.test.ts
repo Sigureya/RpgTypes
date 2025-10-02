@@ -1,6 +1,6 @@
 import { describe, expect, test } from "vitest";
 import type { PluginParamGroups } from "./filter2Type2";
-import type { PPP } from "./filterParamArray2";
+import type { ParamFilterCriteria } from "./filterParamArray2";
 import { filterParams2 } from "./filterParamArray2";
 import type { PrimitiveParam } from "./kinds";
 import type { ParamKinds } from "./kinds";
@@ -10,7 +10,7 @@ interface TestCase {
   caseName: string;
   input: {
     params: PluginParam<PrimitiveParam>[];
-    ppp: PPP;
+    ppp: ParamFilterCriteria;
   };
   expected: PluginParamGroups<PrimitiveParam>;
 }
@@ -19,7 +19,7 @@ const makePPP = (p: {
   single: ParamKinds[];
   array: `${ParamKinds}[]`[];
   struct: string[];
-}): PPP => ({
+}): ParamFilterCriteria => ({
   singleKinds: new Set<ParamKinds>(p.single),
   arrayKinds: new Set<`${ParamKinds}[]`>(p.array),
   structNames: new Set<string>(p.struct),

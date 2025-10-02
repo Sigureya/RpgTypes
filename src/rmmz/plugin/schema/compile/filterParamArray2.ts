@@ -13,15 +13,15 @@ import type { PluginParam } from "./kinds/core/types";
 import { isArrayParam } from "./kinds/isArray";
 import { isStructArrayParam, isStructParam } from "./kinds/isStruct";
 
-export interface PPP {
+export interface ParamFilterCriteria {
   structNames: ReadonlySet<string>;
   singleKinds: ReadonlySet<ParamKinds>;
   arrayKinds: ReadonlySet<`${ParamKinds}[]`>;
 }
 
 export const filterParams2 = (
-  params2: PluginParam<PrimitiveParam>[],
-  { arrayKinds, singleKinds, structNames }: PPP
+  params2: ReadonlyArray<PluginParam<PrimitiveParam>>,
+  { arrayKinds, singleKinds, structNames }: ParamFilterCriteria
 ): PluginParamGroups => {
   const single: NamedAttribute<ScalaParam>[] = [];
   const array: NamedAttribute<Extract<PrimitiveParam, ArrayParam>>[] = [];
