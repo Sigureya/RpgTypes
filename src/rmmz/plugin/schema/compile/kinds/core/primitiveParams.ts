@@ -33,6 +33,11 @@ export type ParamKinds = Exclude<
   ArrayParam | StructArrayRefParam
 >["kind"];
 
+export type ScalaParam = Exclude<
+  PrimitiveParam,
+  ArrayParam | StructArrayRefParam | KindOfStructBase
+>;
+
 export interface ArrayParam {
   kind: `${string}[]`;
   default: unknown[];
