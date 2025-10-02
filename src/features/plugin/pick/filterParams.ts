@@ -1,10 +1,10 @@
-import type { CommandArgsSchemaMap, FilteredPluginSchema } from "./filtedTypes";
-import type { PrimitiveParam } from "./kinds";
+import type { PrimitiveParam } from "../../../rmmz/plugin/schema/compile/kinds";
 import type {
   PluginStructBody,
   PluginCommandBody,
   PluginJSON,
-} from "./kinds/core/pluginJSONTypes";
+} from "../../../rmmz/plugin/schema/compile/kinds/core/pluginJSONTypes";
+import type { CommandArgsSchemaMap, FilteredPluginSchema } from "./filtedTypes";
 
 export const filterPluginSchemaByParam = <T extends PrimitiveParam>(
   p: PluginJSON,
