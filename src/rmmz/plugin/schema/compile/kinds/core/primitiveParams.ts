@@ -48,6 +48,11 @@ export interface RpgDataIdParam extends ParamBase {
   default: number;
 }
 
+export interface RpgVariableParam extends ParamBase {
+  kind: `variable`;
+  default: number;
+}
+
 export interface RpgDataIdArrayParam extends ParamBase {
   kind: `${DataKind_RpgUnion}[]`;
   default: number[];
