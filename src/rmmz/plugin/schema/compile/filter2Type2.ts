@@ -1,13 +1,19 @@
 import type {
   ArrayParam,
   PrimitiveParam,
+  ScalaParam,
   StructArrayRefParam,
   StructRefParam,
 } from "./kinds";
 
 export interface PluginParamGroups<T = PrimitiveParam> {
-  single: { name: string; attr: Exclude<T, ArrayParam> }[];
-  array: { name: string; attr: Extract<T, ArrayParam> }[];
-  struct: StructRefParam[];
-  structArray: StructArrayRefParam[];
+  single: NamedAttribute<ScalaParam>[];
+  array: NamedAttribute<Extract<PrimitiveParam, ArrayParam>>[];
+  struct: NamedAttribute<StructRefParam>[];
+  structArray: NamedAttribute<StructArrayRefParam>[];
+}
+
+export interface NamedAttribute<T> {
+  name: string;
+  attr: T;
 }
