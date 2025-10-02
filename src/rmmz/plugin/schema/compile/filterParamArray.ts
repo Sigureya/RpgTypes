@@ -12,10 +12,12 @@ import type { PluginParam } from "./kinds/core/types";
 import { isArrayParam } from "./kinds/isArray";
 import { isStructArrayParam, isStructParam } from "./kinds/isStruct";
 
-export const filterParams = <T extends ScalaParam>(
+export const filterParams = <
+  Fn extends (param: ScalaParam, name: string) => boolean
+>(
   params2: PluginParam<PrimitiveParam>[],
   set: Pick<ReadonlySet<string>, "has">,
-  fn: (param: ScalaParam, name: string) => param is T
+  fn: Fn
 ): PluginParamGroups => {
   const single: NamedAttribute<ScalaParam>[] = [];
   const array: NamedAttribute<Extract<PrimitiveParam, ArrayParam>>[] = [];
