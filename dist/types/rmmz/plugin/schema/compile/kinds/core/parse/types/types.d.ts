@@ -1,12 +1,13 @@
-import { PluginDependencies } from './dependencies';
 import { KeywordEnum } from './keyword/types';
-import { OptionItem } from './types/selectOption';
+import { PluginDependencies } from './pluginDependencies';
+import { PluginMeta } from './pluginMeta';
+import { OptionItem } from './selectOption';
 export interface PluginParamTokens {
     name: string;
-    attr: PluginTokens;
+    attr: PluginTokensRecord;
     options?: OptionItem[];
 }
-export type PluginTokens = {
+export type PluginTokensRecord = {
     [key in KeywordEnum]?: string;
 };
 export interface PluginCommandTokens {
@@ -15,20 +16,20 @@ export interface PluginCommandTokens {
     desc?: string;
     args: PluginParamTokens[];
 }
-export interface ParsedPlugin {
+export interface StructParseState {
+    name: string;
+    params: PluginParamTokens[];
+}
+export interface PluginTokens {
+    params: PluginParamTokens[];
+    commands: PluginCommandTokens[];
+    structs: StructParseState[];
+}
+export interface ParsedPlugin extends PluginTokens {
     meta: Partial<PluginMeta>;
     params: PluginParamTokens[];
     commands: PluginCommandTokens[];
     helpLines: string[];
     dependencies?: PluginDependencies;
     structs: StructParseState[];
-}
-export interface PluginMeta {
-    author: string;
-    plugindesc: string;
-    url: string;
-}
-export interface StructParseState {
-    name: string;
-    params: PluginParamTokens[];
 }

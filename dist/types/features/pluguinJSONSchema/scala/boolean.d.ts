@@ -1,5 +1,5 @@
+import { BooleanParam } from '../../../rmmz/plugin/schema/compile';
 import { JSONSchemaType } from 'ajv';
-import { JSONSchemaTypeWithRpgParam } from './core/paramBase/x-rpg-param';
-import { BooleanParam } from './core/primitiveParams';
+import { JSONSchemaTypeWithRpgParam } from './x-param/base/x-rpg-param';
 export declare const compileBooleanField: (data: BooleanParam) => JSONSchemaType<boolean>;
 export declare const compileBooleanFieldWithXParam: (data: BooleanParam) => JSONSchemaTypeWithRpgParam<BooleanParam>;

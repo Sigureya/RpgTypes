@@ -1,4 +1,4 @@
-import { StructRefParam } from './core/primitiveParams';
+import { StructRefParam } from '../../../rmmz/plugin/schema/compile';
 export interface JSONSchemaStructRef {
     $ref: string;
     description?: string;

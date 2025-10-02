@@ -1,5 +1,5 @@
-import { JSONSchemaTypeWithRpgParam } from './core/paramBase/x-rpg-param';
-import { FileParam } from './core/primitiveParams';
+import { FileParam } from '../../../rmmz/plugin/schema/compile';
+import { JSONSchemaTypeWithRpgParam } from './x-param/base/x-rpg-param';
 export declare const compileFileField: (data: FileParam) => {
     title?: string;
     description?: string;

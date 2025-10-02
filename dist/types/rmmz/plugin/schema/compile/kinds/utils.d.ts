@@ -1,1 +1,1 @@
-export { withDefault, compileArrayField, } from './core/paramBase/basicMetaField';
+export { withDefault, compileArrayField, } from '../../../../../features/pluguinJSONSchema/scala/base/basicMetaField';
