@@ -6,8 +6,8 @@ import type {
 } from "./kinds";
 
 export interface PluginParamGroups<T = PrimitiveParam> {
-  single: Exclude<T, ArrayParam>[];
-  array: Extract<T, ArrayParam>[];
-  structs: StructRefParam[];
+  single: { name: string; attr: Exclude<T, ArrayParam> }[];
+  array: { name: string; attr: Extract<T, ArrayParam> }[];
+  struct: StructRefParam[];
   structArray: StructArrayRefParam[];
 }
