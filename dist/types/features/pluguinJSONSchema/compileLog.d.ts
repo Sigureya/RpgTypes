@@ -1,6 +1,6 @@
+import { StructParam, StructDefParam } from '../../rmmz/plugin/schema/compile/kinds/core/pluginEntriesEx';
 import { JSONSchemaType } from 'ajv';
 import { Schema } from 'jsonschema';
-import { StructDefParam, StructParam } from './core/pluginEntriesEx';
 export interface CompileResult<T extends object> {
     schema: JSONSchemaType<T>;
     logs: StructCompileLog[];

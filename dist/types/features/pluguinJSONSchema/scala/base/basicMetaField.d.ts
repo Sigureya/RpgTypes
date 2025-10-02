@@ -1,5 +1,5 @@
+import { ArrayParamBase, ParamBase } from '../../../../rmmz/plugin/schema/compile/kinds/core/paramBase';
 import { JSONSchemaType } from 'ajv';
-import { ArrayParamBase, ParamBase } from './paramBase';
 export declare const compileArrayField: <T, S extends JSONSchemaType<T>>(data: ArrayParamBase<T>, itemSchema: S) => {
     default?: T[] | undefined;
     title?: string;

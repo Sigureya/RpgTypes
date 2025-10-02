@@ -1,7 +1,7 @@
+import { StructParam } from '../../rmmz/plugin/schema/compile/kinds/core/pluginEntriesEx';
 import { StructCompileLog } from './compileLog';
-import { StructParam } from './core/pluginEntriesEx';
-import { AnyParamSchema } from './pluginMeta/anyParamSchema';
-import { CompileContext } from './pluginMeta/compileOption';
+import { AnyParamSchema } from './scala/meta/anyParamSchema';
+import { CompileContext } from './scala/meta/compileOption';
 export declare const compileStructDetail: <T>(path: string, title: string, props: Record<string, StructParam>, ctx: CompileContext) => {
     schema: {
         type: "object";

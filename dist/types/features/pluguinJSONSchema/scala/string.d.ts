@@ -1,5 +1,5 @@
 import { JSONSchemaType } from 'ajv';
-import { JSONSchemaTypeWithRpgParam } from './core/paramBase/x-rpg-param';
-import { StringParam } from './core/primitiveParams';
+import { StringParam } from '../../../rmmz/plugin/schema/compile/kinds/core/primitiveParams';
+import { JSONSchemaTypeWithRpgParam } from './x-param/base/x-rpg-param';
 export declare const compileStringField: (data: StringParam) => JSONSchemaType<string>;
 export declare const compileStringFieldWithXparam: (data: StringParam) => JSONSchemaTypeWithRpgParam<StringParam>;
