@@ -5,9 +5,9 @@ import type {
   StructRefParam,
 } from "./kinds";
 
-export interface XX {
-  single: Exclude<PrimitiveParam, ArrayParam>[];
-  array: Extract<PrimitiveParam, ArrayParam>[];
-  struct: StructRefParam[];
+export interface PluginParamGroups<T = PrimitiveParam> {
+  single: Exclude<T, ArrayParam>[];
+  array: Extract<T, ArrayParam>[];
+  structs: StructRefParam[];
   structArray: StructArrayRefParam[];
 }

@@ -1,10 +1,10 @@
 import { describe, expect, test } from "vitest";
 import { rrr } from "./filter2";
-import type { XX } from "./filter2Type2";
+import type { PluginParamGroups } from "./filter2Type2";
 import type { PrimitiveParam } from "./kinds";
 interface TestCase {
   input: Record<string, PrimitiveParam>;
-  expected: XX;
+  expected: PluginParamGroups;
 }
 
 const runTestCase = (testCase: TestCase) => {
@@ -26,7 +26,7 @@ const testCases: TestCase[] = [
         { kind: "number", default: 0 },
       ],
       array: [],
-      struct: [],
+      structs: [],
       structArray: [],
     },
   },
@@ -38,7 +38,7 @@ const testCases: TestCase[] = [
     expected: {
       single: [{ kind: "number", default: 0 }],
       array: [{ kind: "string[]", default: [] }],
-      struct: [],
+      structs: [],
       structArray: [],
     },
   },
@@ -52,7 +52,7 @@ const testCases: TestCase[] = [
     expected: {
       single: [{ kind: "boolean", default: false }],
       array: [{ kind: "string[]", default: [] }],
-      struct: [{ kind: "struct", default: {}, struct: "s" }],
+      structs: [{ kind: "struct", default: {}, struct: "s" }],
       structArray: [{ kind: "struct[]", default: [], struct: "t" }],
     },
   },
