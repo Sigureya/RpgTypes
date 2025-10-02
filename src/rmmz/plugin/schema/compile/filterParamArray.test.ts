@@ -2,7 +2,7 @@ import type { MockedObject } from "vitest";
 import { describe, expect, test, vi } from "vitest";
 import type { PluginParamGroups } from "./filter2Type2";
 import { filterParams } from "./filterParamArray";
-import type { PrimitiveParam, ScalaParam } from "./kinds";
+import type { PrimitiveParam } from "./kinds";
 import type { PluginParam } from "./kinds/core/types";
 
 type MockedSet = MockedObject<Pick<ReadonlySet<string>, "has">>;
@@ -15,6 +15,7 @@ const makeMockedSet = (items: ReadonlyArray<string>): MockedSet => {
 };
 
 interface TestCase {
+  caseName: string;
   input: {
     params: PluginParam<PrimitiveParam>[];
     setItems: ReadonlyArray<string>;
@@ -25,13 +26,11 @@ interface TestCase {
 }
 
 const runTestCase = (testCase: TestCase) => {
-  describe("result", () => {
+  describe(testCase.caseName, () => {
     test("result", () => {
       const mockedSet = makeMockedSet(testCase.input.setItems);
-      const result = filterParams(
-        testCase.input.params,
-        mockedSet,
-        (p): p is ScalaParam => true
+      const result = filterParams(testCase.input.params, mockedSet, (p) =>
+        testCase.input.fn(p)
       );
       expect(result.array).toEqual(testCase.expected.array);
       expect(result.single).toEqual(testCase.expected.single);
@@ -40,10 +39,8 @@ const runTestCase = (testCase: TestCase) => {
     });
     test("set calls", () => {
       const mockedSet = makeMockedSet(testCase.input.setItems);
-      filterParams(
-        testCase.input.params,
-        mockedSet,
-        (p): p is ScalaParam => true
+      filterParams(testCase.input.params, mockedSet, (p) =>
+        testCase.input.fn(p)
       );
       testCase.setCallArg.forEach((key) => {
         expect(mockedSet.has).toHaveBeenCalledWith(key);
@@ -58,6 +55,7 @@ const runTestCase = (testCase: TestCase) => {
 
 const testCases: TestCase[] = [
   {
+    caseName: "すべてtrue",
     input: {
       params: [
         { name: "singleParam", attr: { kind: "number", default: 9 } },
@@ -78,6 +76,7 @@ const testCases: TestCase[] = [
     },
   },
   {
+    caseName: "すべてfalse",
     input: {
       params: [
         { name: "singleParam", attr: { kind: "number", default: 9 } },
@@ -89,7 +88,9 @@ const testCases: TestCase[] = [
     },
     setCallArg: ["MyStruct"],
     expected: {
-      array: [],
+      array: [
+        { name: "arrayParam", attr: { kind: "number[]", default: [1, 2, 3] } },
+      ],
       single: [],
       struct: [
         { name: "structParam", attr: { kind: "struct", struct: "MyStruct" } },
@@ -98,6 +99,7 @@ const testCases: TestCase[] = [
     },
   },
   {
+    caseName: "numberだけtrue",
     input: {
       params: [
         { name: "singleParam", attr: { kind: "number", default: 9 } },
