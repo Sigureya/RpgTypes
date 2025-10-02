@@ -1,13 +1,13 @@
 import { describe, test, expect } from "vitest";
+import type { SelectParam } from "@RpgTypes/rmmz/plugin/schema/compile";
 import type { JSONSchemaType } from "ajv";
 import {
   compilePrimitiveField,
   compilePrimitiveFieldWithXParam,
 } from "../compileField";
-import type { JSONSchemaTypeWithRpgParam } from "./base/x-rpg-param";
-import type { SelectParam } from "../../../rmmz/plugin/schema/compile/kinds/core/primitiveParams";
-import type { AnyParamSchema } from "../meta/anyParamSchema";
+import type { AnyParamSchema } from "./meta/anyParamSchema";
 import { compileSelectField, compileSelectFieldWithXparam } from "./select";
+import type { JSONSchemaTypeWithRpgParam } from "./x-param/base/x-rpg-param";
 
 const data = {
   kind: "select",

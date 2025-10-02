@@ -1,10 +1,10 @@
-import type { JSONSchemaType } from "ajv";
-import type { Schema } from "jsonschema";
 import type {
+  StructParam,
   StructDefParam,
   StructArrayDefParam,
-  StructParam,
-} from "../../rmmz/plugin/schema/compile/kinds/core/pluginEntriesEx";
+} from "@RpgTypes/rmmz/plugin/schema/compile/kinds/core/pluginEntriesEx";
+import type { JSONSchemaType } from "ajv";
+import type { Schema } from "jsonschema";
 
 export interface CompileResult<T extends object> {
   schema: JSONSchemaType<T>;

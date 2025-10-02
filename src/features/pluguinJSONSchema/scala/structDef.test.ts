@@ -1,9 +1,9 @@
 import { describe, test, expect } from "vitest";
+import type { StructRefParam } from "@RpgTypes/rmmz/plugin/schema/compile";
 import type { Schema } from "jsonschema";
-import type { X_RmmzParam } from "./base/x-rpg-param";
-import { X_RPG_PARM } from "./base/x-rpg-param";
-import type { StructRefParam } from "../../../rmmz/plugin/schema/compile/kinds/core/primitiveParams";
 import { makeStructRef, makeStructRefWithXParam } from "./structDef";
+import type { X_RmmzParam } from "./x-param/base/x-rpg-param";
+import { X_RPG_PARM } from "./x-param/base/x-rpg-param";
 
 describe("StructDef schema generation", () => {
   const mockData: StructRefParam = {

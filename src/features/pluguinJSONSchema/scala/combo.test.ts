@@ -1,13 +1,13 @@
 import { describe, test, expect } from "vitest";
+import type { ComboParam } from "@RpgTypes/rmmz/plugin/schema/compile";
 import type { JSONSchemaType } from "ajv";
-import { compileComboField, compileComboFieldWithXparam } from "./combo";
 import {
   compilePrimitiveField,
   compilePrimitiveFieldWithXParam,
 } from "../compileField";
-import type { JSONSchemaTypeWithRpgParam } from "./base/x-rpg-param";
-import type { ComboParam } from "../../../rmmz/plugin/schema/compile/kinds/core/primitiveParams";
-import type { AnyParamSchema } from "../meta/anyParamSchema";
+import { compileComboField, compileComboFieldWithXparam } from "./combo";
+import type { AnyParamSchema } from "./meta/anyParamSchema";
+import type { JSONSchemaTypeWithRpgParam } from "./x-param/base/x-rpg-param";
 
 const data: ComboParam = {
   kind: "combo",

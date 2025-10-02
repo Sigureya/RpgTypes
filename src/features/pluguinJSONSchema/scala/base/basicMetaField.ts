@@ -1,5 +1,8 @@
+import type {
+  ArrayParamBase,
+  ParamBase,
+} from "@RpgTypes/rmmz/plugin/schema/compile/kinds/core/paramBase";
 import type { JSONSchemaType } from "ajv";
-import type { ArrayParamBase, ParamBase } from "./paramBase";
 
 export const compileArrayField = <T, S extends JSONSchemaType<T>>(
   data: ArrayParamBase<T>,

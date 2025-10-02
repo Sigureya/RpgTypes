@@ -5,9 +5,9 @@ import {
   compilePrimitiveField,
   compilePrimitiveFieldWithXParam,
 } from "../compileField";
-import type { AnyParamSchema } from "../meta/anyParamSchema";
-import type { JSONSchemaTypeWithRpgParam } from "./base/x-rpg-param";
 import { compileBooleanField, compileBooleanFieldWithXParam } from "./boolean";
+import type { AnyParamSchema } from "./meta/anyParamSchema";
+import type { JSONSchemaTypeWithRpgParam } from "./x-param/base/x-rpg-param";
 
 const mockData: BooleanParam = {
   kind: "boolean",

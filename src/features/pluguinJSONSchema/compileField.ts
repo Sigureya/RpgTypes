@@ -1,12 +1,12 @@
-import type { PrimitiveParam } from "../../rmmz/plugin/schema/compile/kinds/core/primitiveParams";
-import { compileArrayField } from "../../rmmz/plugin/schema/compile/kinds/utils";
-import type { AnyParamSchema } from "./meta/anyParamSchema";
+import type { PrimitiveParam } from "@RpgTypes/rmmz/plugin/schema/compile";
+import { compileArrayField } from "./scala/base/basicMetaField";
 import {
   compileBooleanFieldWithXParam,
   compileBooleanField,
 } from "./scala/boolean";
 import { compileComboField, compileComboFieldWithXparam } from "./scala/combo";
 import { compileFileField, compileFileFieldWithXparam } from "./scala/file";
+import type { AnyParamSchema } from "./scala/meta/anyParamSchema";
 import {
   compileNumberArrayField,
   compileNumberArrayFieldWithXParam,

@@ -1,13 +1,13 @@
 import type { SourceIdentifier } from "@RpgTypes/libs";
 import type { DiscriminatedUnionSchemaType3 } from "@RpgTypes/libs/templates/discriminator/discriminator3";
-import type { JSONSchemaType } from "ajv";
-import type { X_ParamData, X_RmmzParamBase } from "./scala/base/x-rpg-param";
 import type {
   BooleanParam,
   ComboParam,
   SelectParam,
   StringParam,
-} from "../../rmmz/plugin/schema/compile/kinds/core/primitiveParams";
+} from "@RpgTypes/rmmz/plugin/schema/compile";
+import type { JSONSchemaType } from "ajv";
+import type { X_ParamData, X_RmmzParamBase } from "./base/x-rpg-param";
 import type { X_ParamDataId, X_ParamNumber } from "./x-rpg-paramTypes";
 
 type UnionSchema = DiscriminatedUnionSchemaType3<
