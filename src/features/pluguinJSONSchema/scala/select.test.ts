@@ -4,7 +4,7 @@ import type { JSONSchemaType } from "ajv";
 import {
   compilePrimitiveField,
   compilePrimitiveFieldWithXParam,
-} from "../compileField";
+} from "./compileField";
 import type { AnyParamSchema } from "./meta/anyParamSchema";
 import { compileSelectField, compileSelectFieldWithXparam } from "./select";
 import type { JSONSchemaTypeWithRpgParam } from "./x-param/base/x-rpg-param";

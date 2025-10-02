@@ -1,7 +1,6 @@
+import type { StringParam } from "@RpgTypes/rmmz/plugin/schema/compile";
 import type { JSONSchemaType } from "ajv";
-import type { StringParam } from "../../../rmmz/plugin/schema/compile/kinds/core/primitiveParams";
-import { withDefault } from "../../../rmmz/plugin/schema/compile/kinds/utils";
-import { withTexts } from "./base/basicMetaField";
+import { withDefault, withTexts } from "./base/basicMetaField";
 import type { JSONSchemaTypeWithRpgParam } from "./x-param/base/x-rpg-param";
 import { xparamBaseData } from "./x-param/base/x-rpg-param";
 

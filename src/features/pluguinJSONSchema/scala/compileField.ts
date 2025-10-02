@@ -1,28 +1,19 @@
 import type { PrimitiveParam } from "@RpgTypes/rmmz/plugin/schema/compile";
-import { compileArrayField } from "./scala/base/basicMetaField";
-import {
-  compileBooleanFieldWithXParam,
-  compileBooleanField,
-} from "./scala/boolean";
-import { compileComboField, compileComboFieldWithXparam } from "./scala/combo";
-import { compileFileField, compileFileFieldWithXparam } from "./scala/file";
-import type { AnyParamSchema } from "./scala/meta/anyParamSchema";
+import { compileArrayField } from "./base/basicMetaField";
+import { compileBooleanFieldWithXParam, compileBooleanField } from "./boolean";
+import { compileComboField, compileComboFieldWithXparam } from "./combo";
+import { compileFileField, compileFileFieldWithXparam } from "./file";
+import type { AnyParamSchema } from "./meta/anyParamSchema";
 import {
   compileNumberArrayField,
   compileNumberArrayFieldWithXParam,
   compileNumberField,
   compileNumberFieldWithXparam,
-} from "./scala/numbers";
-import { makeRpgIdField, makeRpgIdFieldWithXParam } from "./scala/rpgDataKind";
-import {
-  compileSelectField,
-  compileSelectFieldWithXparam,
-} from "./scala/select";
-import {
-  compileStringField,
-  compileStringFieldWithXparam,
-} from "./scala/string";
-import { makeStructRef } from "./scala/structDef";
+} from "./numbers";
+import { makeRpgIdField, makeRpgIdFieldWithXParam } from "./rpgDataKind";
+import { compileSelectField, compileSelectFieldWithXparam } from "./select";
+import { compileStringField, compileStringFieldWithXparam } from "./string";
+import { makeStructRef } from "./structDef";
 
 const makeStringArrayField = (
   data: Extract<PrimitiveParam, { default: string[] }>
