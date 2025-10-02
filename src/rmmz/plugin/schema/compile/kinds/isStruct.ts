@@ -4,11 +4,13 @@ import type {
   StructRefParam,
 } from "./core/primitiveParams";
 
-export const isStruct = (param: PrimitiveParam): param is StructRefParam => {
+export const isStructParam = (
+  param: PrimitiveParam
+): param is StructRefParam => {
   return param.kind === "struct";
 };
 
-export const isStructArray = (
+export const isStructArrayParam = (
   param: PrimitiveParam
 ): param is StructArrayRefParam => {
   return param.kind === "struct[]";
