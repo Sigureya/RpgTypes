@@ -12,12 +12,7 @@ export interface PluginCommandSchemaArray<T = PrimitiveParam> {
   args: PluginParam<T>[];
 }
 
-export interface PluginStructSchemaArray<T = PrimitiveParam> {
-  struct: string;
-  params: PluginParam<T>[];
-}
-
-export interface XXX<T> {
+export interface PluginStructSchemaArray<T = PluginParam<PrimitiveParam>> {
   struct: string;
   params: T[];
 }
@@ -25,5 +20,5 @@ export interface XXX<T> {
 export interface PluginSchemaArray<T = PrimitiveParam> {
   commands: PluginCommandSchemaArray<T>[];
   params: PluginParam<T>[];
-  structs: PluginStructSchemaArray<T>[];
+  structs: PluginStructSchemaArray<PluginParam<T>>[];
 }
