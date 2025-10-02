@@ -5,14 +5,14 @@ import type {
   PluginStructEx,
 } from "@RpgTypes/rmmz/plugin/schema/compile/kinds/core/pluginEntriesEx";
 import type { JSONSchemaType } from "ajv";
+import { withDefault } from "./base/basicMetaField";
 import {
   compilePrimitiveFieldWithXParam,
   compilePrimitiveField,
 } from "./compileField";
 import type { StructCompileLog } from "./compileLog";
-import { withDefault } from "./scala/base/basicMetaField";
-import type { AnyParamSchema } from "./scala/meta/anyParamSchema";
-import type { CompileContext } from "./scala/meta/compileOption";
+import type { AnyParamSchema } from "./meta/anyParamSchema";
+import type { CompileContext } from "./meta/compileOption";
 
 interface SchemaAndLog {
   schema: AnyParamSchema;

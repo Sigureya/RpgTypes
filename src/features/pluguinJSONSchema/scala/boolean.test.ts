@@ -1,11 +1,11 @@
 import { describe, test, expect } from "vitest";
+import type { BooleanParam } from "@RpgTypes/rmmz/plugin/schema/compile";
 import type { JSONSchemaType } from "ajv";
-import type { BooleanParam } from "../../../rmmz/plugin/schema/compile/kinds/core/primitiveParams";
+import { compileBooleanField, compileBooleanFieldWithXParam } from "./boolean";
 import {
   compilePrimitiveField,
   compilePrimitiveFieldWithXParam,
-} from "../compileField";
-import { compileBooleanField, compileBooleanFieldWithXParam } from "./boolean";
+} from "./compileField";
 import type { AnyParamSchema } from "./meta/anyParamSchema";
 import type { JSONSchemaTypeWithRpgParam } from "./x-param/base/x-rpg-param";
 

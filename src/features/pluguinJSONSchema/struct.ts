@@ -3,8 +3,8 @@ import type {
   PluginCommand,
   PluginStructEx,
 } from "@RpgTypes/rmmz/plugin/schema/compile/kinds/core/pluginEntriesEx";
-import { compileStructDetail } from "./compileFieldEx";
-import type { CompileResult } from "./compileLog";
+import { compileStructDetail } from "./scala/compileFieldEx";
+import type { CompileResult } from "./scala/compileLog";
 import type {
   PluginMeta,
   PluginCompileOptions,

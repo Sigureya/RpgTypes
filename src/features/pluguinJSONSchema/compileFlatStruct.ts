@@ -1,5 +1,5 @@
 import type { PrimitiveParam } from "@RpgTypes/rmmz/plugin/schema/compile";
-import { compilePrimitiveField } from "./compileField";
+import { compilePrimitiveField } from "./scala/compileField";
 import type { AnyParamSchema } from "./scala/meta/anyParamSchema";
 
 export interface PrimitiveStructSchema<T extends object> {

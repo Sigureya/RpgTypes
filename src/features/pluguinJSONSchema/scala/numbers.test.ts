@@ -7,7 +7,7 @@ import type { JSONSchemaType } from "ajv";
 import {
   compilePrimitiveField,
   compilePrimitiveFieldWithXParam,
-} from "../compileField";
+} from "./compileField";
 import type { AnyParamSchema } from "./meta/anyParamSchema";
 import {
   compileNumberField,

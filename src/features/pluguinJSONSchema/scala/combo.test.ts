@@ -1,11 +1,11 @@
 import { describe, test, expect } from "vitest";
 import type { ComboParam } from "@RpgTypes/rmmz/plugin/schema/compile";
 import type { JSONSchemaType } from "ajv";
+import { compileComboField, compileComboFieldWithXparam } from "./combo";
 import {
   compilePrimitiveField,
   compilePrimitiveFieldWithXParam,
-} from "../compileField";
-import { compileComboField, compileComboFieldWithXparam } from "./combo";
+} from "./compileField";
 import type { AnyParamSchema } from "./meta/anyParamSchema";
 import type { JSONSchemaTypeWithRpgParam } from "./x-param/base/x-rpg-param";
 
