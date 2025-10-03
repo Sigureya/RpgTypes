@@ -1,5 +1,5 @@
 import { describe, test, expect } from "vitest";
-import type { StructRefParam } from "@RpgTypes/rmmz/plugin/schema/compile";
+import type { StructRefParam } from "@RpgTypes/rmmz/plugin";
 import type { Schema } from "jsonschema";
 import { makeStructRef, makeStructRefWithXParam } from "./structDef";
 import type { X_RmmzParam } from "./x-param/base/x-rpg-param";

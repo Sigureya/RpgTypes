@@ -4,8 +4,8 @@ import type {
   ArrayParam,
   StructRefParam,
   StructArrayRefParam,
-} from "@RpgTypes/rmmz/plugin/schema/compile";
-import type { PluginStructSchemaArray } from "@RpgTypes/rmmz/plugin/schema/compile/kinds/core/types";
+  PluginStructSchemaArray,
+} from "@RpgTypes/rmmz/plugin";
 
 export interface PluginParamGroups<T extends PrimitiveParam = PrimitiveParam> {
   single: NamedAttribute<ScalaParam>[];

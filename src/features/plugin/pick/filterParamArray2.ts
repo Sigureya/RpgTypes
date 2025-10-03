@@ -1,19 +1,19 @@
 /* eslint-disable @functional/no-return-void */
 
 import type {
-  ArrayParam,
   ParamKinds,
+  PluginParam,
   PrimitiveParam,
   ScalaParam,
-  StructArrayRefParam,
+  ArrayParam,
   StructRefParam,
-} from "../../../rmmz/plugin/schema/compile/kinds";
-import type { PluginParam } from "../../../rmmz/plugin/schema/compile/kinds/core/types";
-import { isArrayParam } from "../../../rmmz/plugin/schema/compile/kinds/isArray";
+  StructArrayRefParam,
+} from "@RpgTypes/rmmz/plugin";
+import { isArrayParam } from "@RpgTypes/rmmz/plugin/isArray";
 import {
-  isStructArrayParam,
   isStructParam,
-} from "../../../rmmz/plugin/schema/compile/kinds/isStruct";
+  isStructArrayParam,
+} from "@RpgTypes/rmmz/plugin/isStruct";
 import type { NamedAttribute, PluginParamGroups } from "./filter2Type2";
 
 export interface ParamFilterCriteria {

@@ -2,17 +2,17 @@
 
 import type {
   ScalaParam,
+  PluginParam,
   PrimitiveParam,
   ArrayParam,
   StructRefParam,
   StructArrayRefParam,
-} from "@RpgTypes/rmmz/plugin/schema/compile";
-import type { PluginParam } from "@RpgTypes/rmmz/plugin/schema/compile/kinds/core/types";
-import { isArrayParam } from "@RpgTypes/rmmz/plugin/schema/compile/kinds/isArray";
+} from "@RpgTypes/rmmz/plugin";
+import { isArrayParam } from "@RpgTypes/rmmz/plugin/isArray";
 import {
   isStructParam,
   isStructArrayParam,
-} from "@RpgTypes/rmmz/plugin/schema/compile/kinds/isStruct";
+} from "@RpgTypes/rmmz/plugin/isStruct";
 import type { PluginParamGroups, NamedAttribute } from "./filter2Type2";
 
 export const filterParams = <

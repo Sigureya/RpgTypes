@@ -1,8 +1,6 @@
 import { describe, expect, test } from "vitest";
-import type {
-  PluginJSON,
-  PrimitiveParam,
-} from "@RpgTypes/rmmz/plugin/schema/compile";
+import type { PrimitiveParam } from "@RpgTypes/rmmz/plugin";
+import type { PluginJSON } from "@RpgTypes/rmmz/plugin/core/pluginJSONTypes";
 import type { FilteredPluginSchema } from "./filtedTypes";
 import { filterPluginSchemaByParam } from "./filterParams";
 

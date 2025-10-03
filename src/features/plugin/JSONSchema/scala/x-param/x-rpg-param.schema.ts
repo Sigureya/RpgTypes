@@ -5,7 +5,7 @@ import type {
   ComboParam,
   SelectParam,
   StringParam,
-} from "@RpgTypes/rmmz/plugin/schema/compile";
+} from "@RpgTypes/rmmz/plugin";
 import type { JSONSchemaType } from "ajv";
 import type { X_ParamData, X_RmmzParamBase } from "./base/x-rpg-param";
 import type { X_ParamDataId, X_ParamNumber } from "./x-rpg-paramTypes";

@@ -1,5 +1,5 @@
 import { describe, test, expect } from "vitest";
-import type { BooleanParam } from "@RpgTypes/rmmz/plugin/schema/compile";
+import type { BooleanParam } from "@RpgTypes/rmmz/plugin";
 import Ajv from "ajv";
 import { makePluginParamSchema } from "./paramSchema";
 

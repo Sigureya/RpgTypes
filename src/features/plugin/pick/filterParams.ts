@@ -1,9 +1,9 @@
-import type { PrimitiveParam } from "../../../rmmz/plugin/schema/compile/kinds";
+import type { PrimitiveParam } from "@RpgTypes/rmmz/plugin";
 import type {
-  PluginStructBody,
   PluginCommandBody,
   PluginJSON,
-} from "../../../rmmz/plugin/schema/compile/kinds/core/pluginJSONTypes";
+  PluginStructBody,
+} from "@RpgTypes/rmmz/plugin/core/pluginJSONTypes";
 import type { CommandArgsSchemaMap, FilteredPluginSchema } from "./filtedTypes";
 
 export const filterPluginSchemaByParam = <T extends PrimitiveParam>(

@@ -1,8 +1,5 @@
 import { describe, test, expect } from "vitest";
-import type {
-  PluginStructEx,
-  StructDefParam,
-} from "@RpgTypes/rmmz/plugin/schema/compile/kinds/core/pluginEntriesEx";
+import type { PluginStructEx, StructDefParam } from "@RpgTypes/rmmz/plugin";
 import type { JSONSchemaType } from "ajv";
 import { defineStructs } from "./scala/compileLog";
 import { compilePluginStruct } from "./struct";

@@ -1,4 +1,4 @@
-import type { PrimitiveParam } from "@RpgTypes/rmmz/plugin/schema/compile";
+import type { PrimitiveParam } from "@RpgTypes/rmmz/plugin/core/primitiveParams";
 import type { PrimitiveStructSchema } from "./compileFlatStruct";
 import { compileFlatStruct } from "./compileFlatStruct";
 

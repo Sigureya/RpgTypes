@@ -3,7 +3,7 @@ import type {
   StructDefParam,
   StructArrayDefParam,
   PluginStructEx,
-} from "@RpgTypes/rmmz/plugin/schema/compile/kinds/core/pluginEntriesEx";
+} from "@RpgTypes/rmmz/plugin";
 import type { JSONSchemaType } from "ajv";
 import { withDefault } from "./base/basicMetaField";
 import {

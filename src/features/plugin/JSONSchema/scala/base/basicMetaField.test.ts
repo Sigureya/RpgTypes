@@ -1,8 +1,5 @@
 import { describe, test, expect } from "vitest";
-import type {
-  ArrayParamBase,
-  ParamBase,
-} from "@RpgTypes/rmmz/plugin/schema/compile/kinds/core/paramBase";
+import type { ArrayParamBase, ParamBase } from "@RpgTypes/rmmz/plugin";
 import type { JSONSchemaType } from "ajv";
 import { withDefault, withTexts, compileArrayField } from "./basicMetaField";
 

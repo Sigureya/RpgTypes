@@ -1,8 +1,6 @@
+import type { FilteredPluginSchema } from "@RpgTypes/features/plugin/pick/filtedTypes";
 import type { Command_PluginCommandMZ } from "@RpgTypes/rmmz";
-import type {
-  FilteredPluginSchema,
-  PrimitiveStringParam,
-} from "@RpgTypes/rmmz/plugin/schema/compile";
+import type { PrimitiveStringParam } from "@RpgTypes/rmmz/plugin";
 import type { ExtractedPluginCommandArgs } from "./types";
 
 export const extractPluginCommandArgs = (

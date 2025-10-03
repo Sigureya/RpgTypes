@@ -1,4 +1,4 @@
-import type { PrimitiveParam } from "@RpgTypes/rmmz/plugin/schema/compile";
+import type { PrimitiveParam } from "@RpgTypes/rmmz/plugin";
 import { compileArrayField } from "./base/basicMetaField";
 import { compileBooleanFieldWithXParam, compileBooleanField } from "./boolean";
 import { compileComboField, compileComboFieldWithXparam } from "./combo";

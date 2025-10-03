@@ -1,8 +1,3 @@
-import type { PrimitiveParam } from "../../../rmmz/plugin/schema/compile/kinds";
-import type {
-  PluginParam,
-  PluginStructSchemaArray,
-} from "../../../rmmz/plugin/schema/compile/kinds/core/types";
 import type { PluginParamGroups } from "./filter2Type2";
 
 export const isEmptyParamGroup = (gropu: PluginParamGroups): boolean => {

@@ -1,8 +1,5 @@
-import { PLUGIN_COMMAND } from "@RpgTypes/rmmz/plugin/schema/compile/kinds/constants";
-import type {
-  PluginCommand,
-  PluginStructEx,
-} from "@RpgTypes/rmmz/plugin/schema/compile/kinds/core/pluginEntriesEx";
+import type { PluginCommand, PluginStructEx } from "@RpgTypes/rmmz/plugin";
+import { PLUGIN_COMMAND } from "@RpgTypes/rmmz/plugin/constants";
 import { compileStructDetail } from "./scala/compileFieldEx";
 import type { CompileResult } from "./scala/compileLog";
 import type {
