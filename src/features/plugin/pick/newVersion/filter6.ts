@@ -2,29 +2,35 @@ import type {
   ParamKinds,
   PluginStructSchemaArray,
 } from "@RpgTypes/rmmz/plugin";
-import type { ParamFilterCriteria } from "./filterParamArray2";
 import {
   createStructMap,
   structDependencies,
 } from "./structDep/structDependencies";
 
+export interface RRR {
+  structNames: Set<string>;
+  structNests: Set<string>;
+  singleKinds: Set<ParamKinds>;
+  arrayKinds: Set<`${ParamKinds}[]`>;
+}
+
 export const stst = (
   structs: ReadonlyArray<PluginStructSchemaArray>,
   kinds: ReadonlyArray<ParamKinds>
-): ParamFilterCriteria => {
-  const singleKinds: ReadonlySet<ParamKinds> = new Set(kinds);
+): RRR => {
+  const singleKinds: Set<ParamKinds> = new Set(kinds);
   const arrayKinds = new Set(kinds.map((k): `${ParamKinds}[]` => `${k}[]`));
   const scalaMatchedStructs = structs.filter((s) =>
     isAnyAttributeKindMatched(s, singleKinds, arrayKinds)
   );
-  const structMap = createStructMap(structs);
-  const structNames: string[] = scalaMatchedStructs.flatMap((s) =>
-    structDependencies(s.struct, structMap)
-  );
+  const structMap = createStructMap(scalaMatchedStructs);
   return {
     arrayKinds: arrayKinds,
     singleKinds: singleKinds,
-    structNames: new Set(structNames),
+    structNames: new Set(scalaMatchedStructs.map((s) => s.struct)),
+    structNests: new Set(
+      structs.flatMap((s) => structDependencies(s.struct, structMap))
+    ),
   };
 };
 
