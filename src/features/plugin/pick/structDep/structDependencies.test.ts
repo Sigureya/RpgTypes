@@ -107,6 +107,7 @@ const testCases: TestCase[] = [
     expected: [],
   },
 ];
+
 describe("structDep", () => {
   runTestCases(testCases);
 });

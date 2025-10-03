@@ -10,7 +10,7 @@ import {
   isStructParam,
 } from "@RpgTypes/rmmz/plugin/isStruct";
 
-const isXXStrurct = (
+const hasStruct = (
   param: PrimitiveParam,
   visited: ReadonlySet<string>
 ): param is StructRefParam | StructArrayRefParam => {
@@ -20,23 +20,23 @@ const isXXStrurct = (
   return false;
 };
 
-function collectStructDeps(
+const collectStructDeps = (
   name: string,
   map: ReadonlyMap<string, ReadonlyArray<PrimitiveParam>>,
   visited: Set<string>
-): string[] {
+): string[] => {
   const struct = map.get(name);
   if (!struct) {
     return [];
   }
   return struct
-    .filter((param) => isXXStrurct(param, visited))
+    .filter((param) => hasStruct(param, visited))
     .flatMap((param) => {
       const depName: string = param.struct;
       visited.add(depName);
       return [depName, ...collectStructDeps(depName, map, visited)];
     });
-}
+};
 
 export const structDependencies = (
   structName: string,
@@ -44,6 +44,19 @@ export const structDependencies = (
 ): string[] => {
   const visited = new Set<string>();
   return collectStructDeps(structName, map, visited);
+};
+
+export const structDependenciesEx = (
+  structs: ReadonlyArray<PluginStructSchemaArray<PluginParam>>
+): Map<string, string[]> => {
+  const map = createStructMap(structs);
+  const items = Array.from(map.keys()).map(
+    (structName: string): [string, string[]] => [
+      structName,
+      structDependencies(structName, map),
+    ]
+  );
+  return new Map(items);
 };
 
 export const createStructMap = (
