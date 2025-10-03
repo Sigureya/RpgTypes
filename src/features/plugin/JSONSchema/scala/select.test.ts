@@ -1,5 +1,5 @@
 import { describe, test, expect } from "vitest";
-import type { SelectParam } from "@RpgTypes/rmmz/plugin/schema/compile";
+import type { SelectParam } from "@RpgTypes/rmmz/plugin";
 import type { JSONSchemaType } from "ajv";
 import {
   compilePrimitiveField,

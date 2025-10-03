@@ -1,11 +1,11 @@
 import { test, expect, describe } from "vitest";
 import { compilePluginAsArray } from "./compilePluginToArray";
-import type { PluginTokens } from "./parse/types/types";
+import type { PluginTokens } from "./core/parse/types/types";
 import type {
   PluginCommandSchemaArray,
   PluginSchemaArray,
   PluginStructSchemaArray,
-} from "./types";
+} from "./core/types";
 
 describe("parsePlugin", () => {
   test("params", () => {

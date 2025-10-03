@@ -1,5 +1,5 @@
 import { describe, test, expect } from "vitest";
-import type { PluginStructType } from "@RpgTypes/rmmz/plugin/schema/compile/kinds/core/pluginEntryTypes";
+import type { PluginStructType } from "@RpgTypes/rmmz/plugin";
 import { Ajv, type JSONSchemaType } from "ajv";
 import type { PluginMeta } from "./scala/meta/compileOption";
 import { compilePluginStruct } from "./struct";

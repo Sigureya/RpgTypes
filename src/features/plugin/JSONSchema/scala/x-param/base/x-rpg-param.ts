@@ -1,4 +1,4 @@
-import type { ParamBase } from "@RpgTypes/rmmz/plugin/schema/compile/kinds/core/paramBase";
+import type { ParamBase } from "@RpgTypes/rmmz/plugin";
 import type { JSONSchemaType } from "ajv";
 
 // JSONSchemaの拡張データ型。

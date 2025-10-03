@@ -1,7 +1,10 @@
 import { test, expect, describe } from "vitest";
 import { compilePluginToObject } from "./compilePlugin";
-import type { PluginCommandBody, PluginStructBody } from "./pluginJSONTypes";
-import type { PrimitiveParam } from "./primitiveParams";
+import type {
+  PluginCommandBody,
+  PluginStructBody,
+} from "./core/pluginJSONTypes";
+import type { PrimitiveParam } from "./core/primitiveParams";
 
 const mockTexts: string[] = [
   "/*:",

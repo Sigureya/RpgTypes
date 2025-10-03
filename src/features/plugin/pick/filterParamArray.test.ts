@@ -1,7 +1,6 @@
 import type { MockedObject } from "vitest";
 import { describe, expect, test, vi } from "vitest";
-import type { PrimitiveParam } from "@RpgTypes/rmmz/plugin/schema/compile";
-import type { PluginParam } from "@RpgTypes/rmmz/plugin/schema/compile/kinds/core/types";
+import type { PluginParam, PrimitiveParam } from "@RpgTypes/rmmz/plugin";
 import type { PluginParamGroups } from "./filter2Type2";
 import { filterParams } from "./filterParamArray";
 

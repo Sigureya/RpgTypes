@@ -1,18 +1,18 @@
 import type {
   BooleanParam,
   ComboParam,
-  RpgDataIdParam,
-  FileParam,
   FileArrayParam,
-  NumberParam,
+  FileParam,
   NumberArrayParam,
-  StructRefParam,
-  StructArrayRefParam,
+  NumberParam,
+  RpgDataIdParam,
   SelectParam,
-  StringParam,
   StringArrayParam,
-} from "@RpgTypes/rmmz/plugin/schema/compile";
-import type { ParamBase } from "@RpgTypes/rmmz/plugin/schema/compile/kinds/core/paramBase";
+  StringParam,
+  StructArrayRefParam,
+  StructRefParam,
+} from "@RpgTypes/rmmz/plugin";
+import type { ParamBase } from "@RpgTypes/rmmz/plugin/core/paramBase";
 import type { JSONSchemaType } from "ajv";
 import type { DiscriminatedUnionSchemaType3 } from "src/libs/templates/discriminator/discriminator3";
 

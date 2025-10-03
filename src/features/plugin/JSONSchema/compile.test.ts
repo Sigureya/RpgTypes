@@ -3,7 +3,7 @@ import type {
   PluginCommand,
   PluginStructEx,
   StructParam,
-} from "@RpgTypes/rmmz/plugin/schema/compile/kinds/core/pluginEntriesEx";
+} from "@RpgTypes/rmmz/plugin";
 import type { JSONSchemaType } from "ajv";
 import { compilePluginStruct } from "./struct";
 interface PluginXX {

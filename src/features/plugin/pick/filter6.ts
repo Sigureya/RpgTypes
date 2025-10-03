@@ -1,5 +1,7 @@
-import type { ParamKinds } from "@RpgTypes/rmmz/plugin/schema/compile";
-import type { PluginStructSchemaArray } from "@RpgTypes/rmmz/plugin/schema/compile/kinds/core/types";
+import type {
+  ParamKinds,
+  PluginStructSchemaArray,
+} from "@RpgTypes/rmmz/plugin";
 import type { ParamFilterCriteria } from "./filterParamArray2";
 
 const stst = (
