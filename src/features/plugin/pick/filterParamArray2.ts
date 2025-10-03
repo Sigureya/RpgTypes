@@ -14,7 +14,7 @@ import {
   isStructParam,
   isStructArrayParam,
 } from "@RpgTypes/rmmz/plugin/isStruct";
-import type { NamedAttribute, PluginParamGroups } from "./filter2Type2";
+import type { NamedAttribute, PluginParamGroups } from "./newVersion/types";
 
 export interface ParamFilterCriteria {
   structNames: ReadonlySet<string>;

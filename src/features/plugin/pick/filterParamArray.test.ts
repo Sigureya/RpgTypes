@@ -1,8 +1,8 @@
 import type { MockedObject } from "vitest";
 import { describe, expect, test, vi } from "vitest";
 import type { PluginParam, PrimitiveParam } from "@RpgTypes/rmmz/plugin";
-import type { PluginParamGroups } from "./filter2Type2";
 import { filterParams } from "./filterParamArray";
+import type { PluginParamGroups } from "./newVersion/types";
 
 type MockedSet = MockedObject<Pick<ReadonlySet<string>, "has">>;
 

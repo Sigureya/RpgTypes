@@ -1,8 +1,8 @@
 import { describe, test, expect } from "vitest";
 import type { ParamKinds } from "@RpgTypes/rmmz/plugin";
 import type { PluginStructSchemaArray } from "@RpgTypes/rmmz/plugin";
-import type { RRR } from "./filter6";
-import { stst } from "./filter6";
+import { collectStructsByKinds } from "./collectStructs";
+import type { StructCollection } from "./types";
 
 const mockStructs: PluginStructSchemaArray[] = [
   {
@@ -56,10 +56,17 @@ const mockStructs: PluginStructSchemaArray[] = [
   },
 ];
 
+interface Expected extends Record<keyof StructCollection, string[]> {
+  matchedStructs: string[];
+  nestedStructs: string[];
+  targetKinds: string[];
+  targetArrayKinds: string[];
+}
+
 interface TestCase {
   caseName: string;
   input: ParamKinds[];
-  expected: Record<keyof RRR, string[]>;
+  expected: Expected;
 }
 
 const runTestCase = (
@@ -67,10 +74,10 @@ const runTestCase = (
   { caseName, expected, input }: TestCase
 ) => {
   test(caseName, () => {
-    const result = stst(structs, input);
-    expect(result.singleKinds).toEqual(new Set(expected.singleKinds));
-    expect(result.arrayKinds).toEqual(new Set(expected.arrayKinds));
-    expect(result.structNames).toEqual(new Set(expected.structNames));
+    const result = collectStructsByKinds(structs, input);
+    expect(result.targetKinds).toEqual(new Set(expected.targetKinds));
+    expect(result.targetArrayKinds).toEqual(new Set(expected.targetArrayKinds));
+    expect(result.matchedStructs).toEqual(new Set(expected.matchedStructs));
   });
 };
 
@@ -79,10 +86,10 @@ const testCases: TestCase[] = [
     caseName: "empty",
     input: [],
     expected: {
-      structNames: [],
-      structNests: [],
-      arrayKinds: [],
-      singleKinds: [],
+      matchedStructs: [],
+      nestedStructs: [],
+      targetArrayKinds: [],
+      targetKinds: [],
     },
   },
 
@@ -90,31 +97,31 @@ const testCases: TestCase[] = [
     caseName: "item",
     input: ["item"],
     expected: {
-      structNames: ["I"],
-      structNests: [],
-      arrayKinds: ["item[]"],
-      singleKinds: ["item"],
+      matchedStructs: ["I"],
+      nestedStructs: [],
+      targetArrayKinds: ["item[]"],
+      targetKinds: ["item"],
     },
   },
   {
     caseName: "boolean",
     input: ["boolean"],
     expected: {
-      structNames: ["B"],
-      structNests: ["A"],
+      matchedStructs: ["B"],
+      nestedStructs: ["A"],
 
-      singleKinds: ["boolean"],
-      arrayKinds: ["boolean[]"],
+      targetKinds: ["boolean"],
+      targetArrayKinds: ["boolean[]"],
     },
   },
   {
     caseName: "boolean + item",
     input: ["boolean", "item"],
     expected: {
-      structNames: ["B", "I"],
-      structNests: ["A", "B"],
-      singleKinds: ["boolean", "item"],
-      arrayKinds: ["boolean[]", "item[]"],
+      matchedStructs: ["B", "I"],
+      nestedStructs: ["A", "B"],
+      targetKinds: ["boolean", "item"],
+      targetArrayKinds: ["boolean[]", "item[]"],
     },
   },
 
@@ -122,30 +129,30 @@ const testCases: TestCase[] = [
     caseName: "number",
     input: ["number"],
     expected: {
-      structNames: ["C", "X", "Z"],
-      structNests: ["A", "B", "X", "Y"],
-      singleKinds: ["number"],
-      arrayKinds: ["number[]"],
+      matchedStructs: ["C", "X", "Z"],
+      nestedStructs: ["A", "B", "X", "Y"],
+      targetKinds: ["number"],
+      targetArrayKinds: ["number[]"],
     },
   },
   {
     caseName: "string",
     input: ["string"],
     expected: {
-      structNames: ["Y"],
-      structNests: ["X"],
-      singleKinds: ["string"],
-      arrayKinds: ["string[]"],
+      matchedStructs: ["Y"],
+      nestedStructs: ["X"],
+      targetKinds: ["string"],
+      targetArrayKinds: ["string[]"],
     },
   },
   {
     caseName: "variable",
     input: ["variable"],
     expected: {
-      structNames: ["V", "W"],
-      structNests: [],
-      singleKinds: ["variable"],
-      arrayKinds: ["variable[]"],
+      matchedStructs: ["V", "W"],
+      nestedStructs: [],
+      targetKinds: ["variable"],
+      targetArrayKinds: ["variable[]"],
     },
   },
 ];

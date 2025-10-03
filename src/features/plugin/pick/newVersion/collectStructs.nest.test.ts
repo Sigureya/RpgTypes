@@ -4,8 +4,8 @@ import type {
   PrimitiveParam,
   ScalaParam,
 } from "@RpgTypes/rmmz";
-import type { RRR } from "./filter6";
-import { stst } from "./filter6";
+import { collectStructsByKinds } from "./collectStructs";
+import type { StructCollection } from "./types";
 
 const createMockStructsABCD = (
   param: PrimitiveParam
@@ -75,28 +75,32 @@ const runTestCase = ({ paramABCD, paramXYZ }: TestCase) => {
     });
 
     test(`ABCD:${paramABCD.kind}`, () => {
-      const result: RRR = stst(structs, [paramABCD.kind]);
-      const expected: RRR = {
-        structNames: new Set(["ABCD"]),
-        structNests: new Set(["A", "B", "C", "D"]),
-        singleKinds: new Set([paramABCD.kind]),
-        arrayKinds: new Set([`${paramABCD.kind}[]` as const]),
+      const result: StructCollection = collectStructsByKinds(structs, [
+        paramABCD.kind,
+      ]);
+      const expected: StructCollection = {
+        matchedStructs: new Set(["ABCD"]),
+        nestedStructs: new Set(["A", "B", "C", "D"]),
+        targetKinds: new Set([paramABCD.kind]),
+        targetArrayKinds: new Set([`${paramABCD.kind}[]` as const]),
       };
-      expect(result.structNames).toEqual(expected.structNames);
-      expect(result.singleKinds).toEqual(expected.singleKinds);
-      expect(result.arrayKinds).toEqual(expected.arrayKinds);
+      expect(result.matchedStructs).toEqual(expected.matchedStructs);
+      expect(result.targetKinds).toEqual(expected.targetKinds);
+      expect(result.targetArrayKinds).toEqual(expected.targetArrayKinds);
     });
     test(`XYZ:${paramXYZ.kind}`, () => {
-      const result: RRR = stst(structs, [paramXYZ.kind]);
-      const expected: RRR = {
-        structNames: new Set(["XYZ"]),
-        structNests: new Set(["X", "Y", "Z"]),
-        singleKinds: new Set([paramXYZ.kind]),
-        arrayKinds: new Set([`${paramXYZ.kind}[]` as const]),
+      const result: StructCollection = collectStructsByKinds(structs, [
+        paramXYZ.kind,
+      ]);
+      const expected: StructCollection = {
+        matchedStructs: new Set(["XYZ"]),
+        nestedStructs: new Set(["X", "Y", "Z"]),
+        targetKinds: new Set([paramXYZ.kind]),
+        targetArrayKinds: new Set([`${paramXYZ.kind}[]` as const]),
       };
-      expect(result.structNames).toEqual(expected.structNames);
-      expect(result.singleKinds).toEqual(expected.singleKinds);
-      expect(result.arrayKinds).toEqual(expected.arrayKinds);
+      expect(result.matchedStructs).toEqual(expected.matchedStructs);
+      expect(result.targetKinds).toEqual(expected.targetKinds);
+      expect(result.targetArrayKinds).toEqual(expected.targetArrayKinds);
     });
   });
 };
