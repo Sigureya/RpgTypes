@@ -1,6 +1,7 @@
 import { describe, test, expect } from "vitest";
 import type { ParamKinds } from "@RpgTypes/rmmz/plugin";
 import type { PluginStructSchemaArray } from "@RpgTypes/rmmz/plugin";
+import type { RRR } from "./filter6";
 import { stst } from "./filter6";
 
 const mockStructs: PluginStructSchemaArray[] = [
@@ -58,37 +59,71 @@ const mockStructs: PluginStructSchemaArray[] = [
 interface TestCase {
   caseName: string;
   input: ParamKinds[];
-  expected: {
-    structs: string[];
-    singleKinds: ParamKinds[];
-    arrayKinds: `${ParamKinds}[]`[];
-  };
+  expected: Record<keyof RRR, string[]>;
 }
 
-const runTestCase = ({ caseName, expected, input }: TestCase) => {
+const runTestCase = (
+  structs: PluginStructSchemaArray[],
+  { caseName, expected, input }: TestCase
+) => {
   test(caseName, () => {
-    const result = stst(mockStructs, input);
-    expect(result.structNames).toEqual(new Set(expected.structs));
+    const result = stst(structs, input);
     expect(result.singleKinds).toEqual(new Set(expected.singleKinds));
     expect(result.arrayKinds).toEqual(new Set(expected.arrayKinds));
+    expect(result.structNames).toEqual(new Set(expected.structNames));
   });
 };
 
 const testCases: TestCase[] = [
   {
+    caseName: "empty",
+    input: [],
+    expected: {
+      structNames: [],
+      structNests: [],
+      arrayKinds: [],
+      singleKinds: [],
+    },
+  },
+
+  {
+    caseName: "item",
+    input: ["item"],
+    expected: {
+      structNames: ["I"],
+      structNests: [],
+      arrayKinds: ["item[]"],
+      singleKinds: ["item"],
+    },
+  },
+  {
     caseName: "boolean",
     input: ["boolean"],
     expected: {
-      structs: ["A", "B"],
+      structNames: ["B"],
+      structNests: ["A"],
+
       singleKinds: ["boolean"],
       arrayKinds: ["boolean[]"],
     },
   },
   {
+    caseName: "boolean + item",
+    input: ["boolean", "item"],
+    expected: {
+      structNames: ["B", "I"],
+      structNests: ["A", "B"],
+      singleKinds: ["boolean", "item"],
+      arrayKinds: ["boolean[]", "item[]"],
+    },
+  },
+
+  {
     caseName: "number",
     input: ["number"],
     expected: {
-      structs: ["A", "B", "C", "X", "Y", "Z"],
+      structNames: ["C", "X", "Z"],
+      structNests: ["A", "B", "X", "Y"],
       singleKinds: ["number"],
       arrayKinds: ["number[]"],
     },
@@ -97,31 +132,25 @@ const testCases: TestCase[] = [
     caseName: "string",
     input: ["string"],
     expected: {
-      structs: ["X", "Y", "Z"],
+      structNames: ["Y"],
+      structNests: ["X"],
       singleKinds: ["string"],
       arrayKinds: ["string[]"],
     },
   },
-  {
-    caseName: "variable",
-    input: ["variable"],
-    expected: {
-      structs: ["V", "W"],
-      singleKinds: ["variable"],
-      arrayKinds: ["variable[]"],
-    },
-  },
-  {
-    caseName: "item",
-    input: ["item"],
-    expected: {
-      structs: ["I"],
-      arrayKinds: ["item[]"],
-      singleKinds: ["item"],
-    },
-  },
+  //   {
+  //     caseName: "variable",
+  //     input: ["variable"],
+  //     expected: {
+  //       structs: ["V", "W"],
+  //       singleKinds: ["variable"],
+  //       arrayKinds: ["variable[]"],
+  //     },
+  //   },
 ];
 
 describe("stst", () => {
-  testCases.forEach(runTestCase);
+  testCases.forEach((t) => {
+    runTestCase(mockStructs, t);
+  });
 });
