@@ -1,4 +1,4 @@
-import { FileParam } from '../../../../rmmz/plugin/schema/compile';
+import { FileParam } from '../../../../rmmz/plugin';
 import { JSONSchemaTypeWithRpgParam } from './x-param/base/x-rpg-param';
 export declare const compileFileField: (data: FileParam) => {
     title?: string;

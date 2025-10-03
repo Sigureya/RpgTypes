@@ -1,4 +1,4 @@
-import { RpgDataIdParam, SystemDataIdParam } from '../../../../rmmz/plugin/schema/compile';
+import { RpgDataIdParam, SystemDataIdParam } from '../../../../rmmz';
 export declare const makeRpgIdField: (data: RpgDataIdParam | SystemDataIdParam) => {
     title?: string;
     description?: string;
@@ -7,7 +7,7 @@ export declare const makeRpgIdField: (data: RpgDataIdParam | SystemDataIdParam) 
 };
 export declare const makeRpgIdFieldWithXParam: (data: RpgDataIdParam | SystemDataIdParam) => {
     "x-rpg-param": {
-        data: import('../../../../rmmz/plugin/schema/compile/kinds/core/rpgData/lookup').SourceId_RmmzUnknown | import('../../../../rmmz/plugin/schema/compile/kinds/core/rpgData/lookup').SourceId_ValidRmmzData;
+        data: import('../../../../rmmz/plugin/core/rpgData/lookup').SourceId_RmmzUnknown | import('../../../../rmmz/plugin/core/rpgData/lookup').SourceId_ValidRmmzData;
         parent?: string | undefined;
         kind: string;
     };

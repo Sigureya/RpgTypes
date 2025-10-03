@@ -1,4 +1,4 @@
-import { PrimitiveParam } from '../../../rmmz/plugin/schema/compile';
+import { PrimitiveParam } from '../../../rmmz/plugin';
 import { AnyParamSchema } from './scala/meta/anyParamSchema';
 export interface PrimitiveStructSchema<T extends object> {
     type: "object";

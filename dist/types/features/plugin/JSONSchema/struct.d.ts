@@ -1,4 +1,4 @@
-import { PluginCommand, PluginStructEx } from '../../../rmmz/plugin/schema/compile/kinds/core/pluginEntriesEx';
+import { PluginCommand, PluginStructEx } from '../../../rmmz/plugin';
 import { PluginMeta, PluginCompileOptions } from './scala/meta/compileOption';
 export declare const compilePluginCommand: <T extends object>(titles: PluginMeta, { args, command }: PluginCommand<T>, options: Partial<PluginCompileOptions>) => {
     schema: {
@@ -8,7 +8,7 @@ export declare const compilePluginCommand: <T extends object>(titles: PluginMeta
         required: string[];
         additionalProperties: false;
     };
-    logs: import('.').StructCompileLog<import('../../../rmmz/plugin/schema/compile/kinds/core/pluginEntriesEx').StructParam>[];
+    logs: import('.').StructCompileLog<import('../../../rmmz/plugin').StructParam>[];
 };
 export declare const compilePluginStruct: <T extends object>(tiles: PluginMeta, { params, struct: structName }: PluginStructEx<T>, options: Partial<PluginCompileOptions>) => {
     schema: {
@@ -18,5 +18,5 @@ export declare const compilePluginStruct: <T extends object>(tiles: PluginMeta, 
         required: string[];
         additionalProperties: false;
     };
-    logs: import('.').StructCompileLog<import('../../../rmmz/plugin/schema/compile/kinds/core/pluginEntriesEx').StructParam>[];
+    logs: import('.').StructCompileLog<import('../../../rmmz/plugin').StructParam>[];
 };
