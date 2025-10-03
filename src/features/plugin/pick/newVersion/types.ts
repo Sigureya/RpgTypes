@@ -1,11 +1,19 @@
 import type {
+  ArrayParam,
+  ParamKinds,
+  PluginStructSchemaArray,
   PrimitiveParam,
   ScalaParam,
-  ArrayParam,
-  StructRefParam,
   StructArrayRefParam,
-  PluginStructSchemaArray,
+  StructRefParam,
 } from "@RpgTypes/rmmz/plugin";
+
+export interface StructCollection {
+  matchedStructs: Set<string>;
+  nestedStructs: Set<string>;
+  targetKinds: Set<ParamKinds>;
+  targetArrayKinds: Set<`${ParamKinds}[]`>;
+}
 
 export interface PluginParamGroups<T extends PrimitiveParam = PrimitiveParam> {
   single: NamedAttribute<ScalaParam>[];

@@ -4,9 +4,9 @@ import type {
   PluginParam,
   PrimitiveParam,
 } from "@RpgTypes/rmmz/plugin";
-import type { PluginParamGroups } from "./filter2Type2";
 import type { ParamFilterCriteria } from "./filterParamArray2";
 import { filterParams2 } from "./filterParamArray2";
+import type { PluginParamGroups } from "./newVersion/types";
 
 interface TestCase {
   caseName: string;
