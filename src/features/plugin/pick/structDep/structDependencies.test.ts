@@ -3,7 +3,7 @@ import type {
   PluginStructSchemaArray,
   PrimitiveParam,
 } from "@RpgTypes/rmmz/plugin";
-import { structDep, createStructMap } from "./structDep";
+import { structDependencies, createStructMap } from "./structDependencies";
 
 const mockStructs: ReadonlyArray<PluginStructSchemaArray> = [
   {
@@ -16,6 +16,28 @@ const mockStructs: ReadonlyArray<PluginStructSchemaArray> = [
   },
   {
     struct: "C",
+    params: [{ name: "num", attr: { kind: "number", default: 0 } }],
+  },
+  {
+    struct: "X",
+    params: [
+      { name: "numArray", attr: { kind: "number[]", default: [12] } },
+      { name: "y", attr: { kind: "struct[]", struct: "Y", default: [] } },
+      { name: "c", attr: { kind: "struct", struct: "C" } },
+    ],
+  },
+  {
+    struct: "Y",
+    params: [
+      { name: "str", attr: { kind: "string", default: "" } },
+      {
+        name: "z",
+        attr: { kind: "struct", struct: "Z" },
+      },
+    ],
+  },
+  {
+    struct: "Z",
     params: [{ name: "num", attr: { kind: "number", default: 0 } }],
   },
 ];
@@ -47,7 +69,7 @@ const runTestCases = (testCases: TestCase[]) => {
   const map = createStructMap(mockStructs);
   testCases.forEach(({ caseName, input, expected }) => {
     test(caseName, () => {
-      const result = structDep(input, map);
+      const result = structDependencies(input, map);
       expect(result).toEqual(expected);
     });
   });
@@ -67,6 +89,21 @@ const testCases: TestCase[] = [
   {
     caseName: "Struct C has no dependencies",
     input: "C",
+    expected: [],
+  },
+  {
+    caseName: "Struct X depends on Y and C",
+    input: "X",
+    expected: ["Y", "Z", "C"],
+  },
+  {
+    caseName: "Struct Y depends on Z",
+    input: "Y",
+    expected: ["Z"],
+  },
+  {
+    caseName: "Struct Z has no dependencies",
+    input: "Z",
     expected: [],
   },
 ];

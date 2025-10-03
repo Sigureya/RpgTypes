@@ -38,7 +38,7 @@ function collectStructDeps(
     });
 }
 
-export const structDep = (
+export const structDependencies = (
   structName: string,
   map: ReadonlyMap<string, ReadonlyArray<PrimitiveParam>>
 ): string[] => {
