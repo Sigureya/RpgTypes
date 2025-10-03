@@ -24,6 +24,10 @@ const mockStructs: PluginStructSchemaArray[] = [
     params: [{ name: "v", attr: { kind: "variable", default: 0 } }],
   },
   {
+    struct: "I",
+    params: [{ name: "i", attr: { kind: "item", default: 0 } }],
+  },
+  {
     struct: "W",
     params: [
       { name: "w", attr: { kind: "weapon", default: 0 } },
@@ -105,6 +109,15 @@ const testCases: TestCase[] = [
       structs: ["V", "W"],
       singleKinds: ["variable"],
       arrayKinds: ["variable[]"],
+    },
+  },
+  {
+    caseName: "item",
+    input: ["item"],
+    expected: {
+      structs: ["I"],
+      arrayKinds: ["item[]"],
+      singleKinds: ["item"],
     },
   },
 ];
