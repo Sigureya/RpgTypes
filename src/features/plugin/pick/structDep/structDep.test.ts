@@ -1,5 +1,8 @@
 import { describe, expect, test } from "vitest";
-import type { PluginStructSchemaArray } from "@RpgTypes/rmmz/plugin";
+import type {
+  PluginStructSchemaArray,
+  PrimitiveParam,
+} from "@RpgTypes/rmmz/plugin";
 import { structDep, createStructMap } from "./structDep";
 
 const mockStructs: ReadonlyArray<PluginStructSchemaArray> = [
@@ -19,11 +22,18 @@ const mockStructs: ReadonlyArray<PluginStructSchemaArray> = [
 
 describe("createStructMap", () => {
   test("creates a map from struct name to struct definition", () => {
-    const structMap = createStructMap(mockStructs);
+    const structMap: Map<string, PrimitiveParam[]> =
+      createStructMap(mockStructs);
     expect(structMap.size).toBe(mockStructs.length);
-    expect(structMap.get("A")).toBe(mockStructs[0]);
-    expect(structMap.get("B")).toBe(mockStructs[1]);
-    expect(structMap.get("C")).toBe(mockStructs[2]);
+    expect(structMap.get("A")).toEqual<PrimitiveParam[]>([
+      { kind: "struct", struct: "B" },
+    ]);
+    expect(structMap.get("B")).toEqual<PrimitiveParam[]>([
+      { kind: "struct", struct: "C" },
+    ]);
+    expect(structMap.get("C")).toEqual<PrimitiveParam[]>([
+      { kind: "number", default: 0 },
+    ]);
   });
 });
 
