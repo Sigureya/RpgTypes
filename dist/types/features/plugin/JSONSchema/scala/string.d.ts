@@ -1,4 +1,4 @@
-import { StringParam } from '../../../../rmmz/plugin/schema/compile';
+import { StringParam } from '../../../../rmmz/plugin';
 import { JSONSchemaType } from 'ajv';
 import { JSONSchemaTypeWithRpgParam } from './x-param/base/x-rpg-param';
 export declare const compileStringField: (data: StringParam) => JSONSchemaType<string>;

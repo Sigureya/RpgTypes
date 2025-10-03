@@ -1,5 +1,4 @@
-import { ArrayParam, PrimitiveParam, ScalaParam, StructArrayRefParam, StructRefParam } from './kinds';
-import { PluginStructSchemaArray } from './kinds/core/types';
+import { PrimitiveParam, ScalaParam, ArrayParam, StructRefParam, StructArrayRefParam, PluginStructSchemaArray } from '../../../rmmz/plugin';
 export interface PluginParamGroups<T extends PrimitiveParam = PrimitiveParam> {
     single: NamedAttribute<ScalaParam>[];
     array: NamedAttribute<Extract<T, ArrayParam>>[];

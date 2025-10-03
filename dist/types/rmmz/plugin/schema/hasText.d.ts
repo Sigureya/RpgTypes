@@ -1,2 +1,2 @@
-import { PrimitiveParam, PrimitiveStringParam } from './compile/kinds';
+import { PrimitiveParam, PrimitiveStringParam } from '../core/primitiveParams';
 export declare const paramHasText: (param: PrimitiveParam) => param is PrimitiveStringParam;

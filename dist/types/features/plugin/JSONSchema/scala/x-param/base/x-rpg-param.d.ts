@@ -1,4 +1,4 @@
-import { ParamBase } from '../../../../../../rmmz/plugin/schema/compile/kinds/core/paramBase';
+import { ParamBase } from '../../../../../../rmmz/plugin';
 import { JSONSchemaType } from 'ajv';
 export declare const X_RPG_PARM: "x-rpg-param";
 export interface X_Param {

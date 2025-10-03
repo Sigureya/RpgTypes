@@ -1,4 +1,4 @@
-import { StructParam } from '../../../../rmmz/plugin/schema/compile/kinds/core/pluginEntriesEx';
+import { StructParam } from '../../../../rmmz/plugin';
 import { StructCompileLog } from './compileLog';
 import { AnyParamSchema } from './meta/anyParamSchema';
 import { CompileContext } from './meta/compileOption';

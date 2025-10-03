@@ -1,2 +1,2 @@
-import { PluginJSON } from './schema/compile/kinds/core/pluginJSONTypes';
+import { PluginJSON } from './core/pluginJSONTypes';
 export declare const pluginSourceToJSON: (text: string) => PluginJSON;
