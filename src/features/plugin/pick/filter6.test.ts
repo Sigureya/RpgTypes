@@ -138,15 +138,16 @@ const testCases: TestCase[] = [
       arrayKinds: ["string[]"],
     },
   },
-  //   {
-  //     caseName: "variable",
-  //     input: ["variable"],
-  //     expected: {
-  //       structs: ["V", "W"],
-  //       singleKinds: ["variable"],
-  //       arrayKinds: ["variable[]"],
-  //     },
-  //   },
+  {
+    caseName: "variable",
+    input: ["variable"],
+    expected: {
+      structNames: ["V", "W"],
+      structNests: [],
+      singleKinds: ["variable"],
+      arrayKinds: ["variable[]"],
+    },
+  },
 ];
 
 describe("stst", () => {

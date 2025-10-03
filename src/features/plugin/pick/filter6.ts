@@ -2,24 +2,23 @@ import type {
   ParamKinds,
   PluginStructSchemaArray,
 } from "@RpgTypes/rmmz/plugin";
-import type { ParamFilterCriteria } from "./filterParamArray2";
 import {
   createStructMap,
   structDependencies,
 } from "./structDep/structDependencies";
 
 export interface RRR {
-  structNames: ReadonlySet<string>;
-  structNests: ReadonlySet<string>;
-  singleKinds: ReadonlySet<ParamKinds>;
-  arrayKinds: ReadonlySet<`${ParamKinds}[]`>;
+  structNames: Set<string>;
+  structNests: Set<string>;
+  singleKinds: Set<ParamKinds>;
+  arrayKinds: Set<`${ParamKinds}[]`>;
 }
 
 export const stst = (
   structs: ReadonlyArray<PluginStructSchemaArray>,
   kinds: ReadonlyArray<ParamKinds>
 ): RRR => {
-  const singleKinds: ReadonlySet<ParamKinds> = new Set(kinds);
+  const singleKinds: Set<ParamKinds> = new Set(kinds);
   const arrayKinds = new Set(kinds.map((k): `${ParamKinds}[]` => `${k}[]`));
   const scalaMatchedStructs = structs.filter((s) =>
     isAnyAttributeKindMatched(s, singleKinds, arrayKinds)
