@@ -8,10 +8,13 @@ import { alias } from "./viteAlias.mts";
 const srcDir = path.resolve(__dirname, "src");
 
 const validateEntryPoints = () =>
-  ["validate/rmmz/rpg", "validate/rmmz/eventCommand"].reduce((acc, dir) => {
-    acc[dir] = path.resolve(srcDir, `${dir}/index.ts`);
-    return acc;
-  }, {});
+  ["validate/rmmz/rpg", "validate/rmmz/eventCommand"].reduce(
+    (acc, dir): Record<string, string> => {
+      acc[dir] = path.resolve(srcDir, `${dir}/index.ts`);
+      return acc;
+    },
+    {}
+  );
 
 export default defineConfig(({ mode }) => {
   const entryPoints = {
