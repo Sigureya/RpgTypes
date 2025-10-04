@@ -110,7 +110,7 @@ export declare const SCHEMA_DATA_ENEMY: {
                         type: string;
                     };
                 };
-                required: ("kind" | "dataId" | "denominator")[];
+                required: ("dataId" | "denominator" | "kind")[];
             };
         };
     };
