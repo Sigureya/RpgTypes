@@ -5,7 +5,7 @@ import type {
 import {
   createStructMap,
   structDependencies,
-} from "./structDep/structDependencies";
+} from "../structDep/structDependencies";
 import type { StructCollection } from "./types";
 
 export const collectStructsByKinds = (

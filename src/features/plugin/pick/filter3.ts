@@ -1,4 +1,4 @@
-import type { PluginParamGroups } from "./newVersion/types";
+import type { PluginParamGroups } from "./newVersion/filter/types";
 
 export const isEmptyParamGroup = (gropu: PluginParamGroups): boolean => {
   return (
