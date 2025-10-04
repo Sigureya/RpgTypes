@@ -1,4 +1,4 @@
-import { RpgDataIdParam, SystemDataIdParam } from '../../../../rmmz';
+import { RpgDataIdParam, SystemDataIdParam } from '../../../../rmmz/plugin';
 export declare const makeRpgIdField: (data: RpgDataIdParam | SystemDataIdParam) => {
     title?: string;
     description?: string;

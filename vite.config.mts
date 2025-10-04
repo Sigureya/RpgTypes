@@ -16,14 +16,18 @@ const validateEntryPoints = () =>
     {}
   );
 
+const rmmzModules = () => ({
+  "rmmz/plugin": path.resolve(srcDir, "rmmz/plugin/index.ts"),
+});
+
 export default defineConfig(({ mode }) => {
   const entryPoints: Record<string, string> = {
     ...validateEntryPoints(),
+    ...rmmzModules(),
     main: path.resolve(srcDir, "index.ts"),
     features: path.resolve(srcDir, "features/index.ts"),
     libs: path.resolve(srcDir, "libs/index.ts"),
     rmmz: path.resolve(srcDir, "rmmz/index.ts"),
-    "rmmz/plugin": path.resolve(srcDir, "rmmz/plugin/index.ts"),
   };
 
   return {
