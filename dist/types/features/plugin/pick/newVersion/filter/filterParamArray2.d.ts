@@ -1,5 +1,5 @@
-import { ParamKinds, PluginParam, PrimitiveParam } from '../../../rmmz/plugin';
-import { PluginParamGroups } from './filter2Type2';
+import { ParamKinds, PluginParam, PrimitiveParam } from '../../../../../rmmz/plugin';
+import { PluginParamGroups } from './types';
 export interface ParamFilterCriteria {
     structNames: ReadonlySet<string>;
     singleKinds: ReadonlySet<ParamKinds>;
