@@ -1,9 +1,10 @@
-import type { RpgDataIdParam, SystemDataIdParam } from "@RpgTypes/rmmz";
+import type { RpgDataIdParam, SystemDataIdParam } from "@RpgTypes/rmmz/plugin";
 import { lookupKind } from "@RpgTypes/rmmz/plugin/core/rpgData/lookup";
 import type { JSONSchemaType } from "ajv";
 import { withDefault, withTexts } from "./base/basicMetaField";
 import type { X_Param } from "./x-param/base/x-rpg-param";
 import { xparamBaseData } from "./x-param/base/x-rpg-param";
+
 export const makeRpgIdField = (data: RpgDataIdParam | SystemDataIdParam) =>
   ({
     type: "integer",

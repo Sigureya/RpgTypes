@@ -3,7 +3,7 @@ import type {
   PluginStructSchemaArray,
   PrimitiveParam,
   ScalaParam,
-} from "@RpgTypes/rmmz";
+} from "@RpgTypes/rmmz/plugin";
 import { collectStructsByKinds } from "./collectStructs";
 import type { StructCollection } from "./types";
 
