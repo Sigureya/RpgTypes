@@ -2,10 +2,7 @@ import type {
   ParamKinds,
   PluginStructSchemaArray,
 } from "@RpgTypes/rmmz/plugin";
-import {
-  createStructMap,
-  structDependencies,
-} from "../structDep/structDependencies";
+import { createStructMap, structDependencies } from "./structDependencies";
 import type { StructCollection } from "./types";
 
 export const collectStructsByKinds = (
