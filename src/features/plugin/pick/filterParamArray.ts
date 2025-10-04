@@ -13,7 +13,10 @@ import {
   isStructParam,
   isStructArrayParam,
 } from "@RpgTypes/rmmz/plugin/isStruct";
-import type { PluginParamGroups, NamedAttribute } from "./newVersion/types";
+import type {
+  PluginParamGroups,
+  NamedAttribute,
+} from "./newVersion/filter/types";
 
 export const filterParams = <
   Fn extends (param: ScalaParam, name: string) => boolean

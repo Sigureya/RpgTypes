@@ -6,7 +6,7 @@ import type {
 } from "@RpgTypes/rmmz/plugin";
 import type { ParamFilterCriteria } from "./filterParamArray2";
 import { filterParams2 } from "./filterParamArray2";
-import type { PluginParamGroups } from "./newVersion/types";
+import type { PluginParamGroups } from "./types";
 
 interface TestCase {
   caseName: string;
