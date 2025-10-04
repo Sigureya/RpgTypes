@@ -12,7 +12,7 @@ interface TestCase {
   caseName: string;
   input: {
     params: PluginParam<PrimitiveParam>[];
-    ppp: ParamFilterCriteria;
+    pickTargets: ParamFilterCriteria;
   };
   expected: PluginParamGroups<PrimitiveParam>;
 }
@@ -36,7 +36,7 @@ const testCases: TestCase[] = [
         { name: "arrayParam", attr: { kind: "number[]", default: [1, 2, 3] } },
         { name: "structParam", attr: { kind: "struct", struct: "MyStruct" } },
       ],
-      ppp: makePPP({ single: ["number"], array: [], struct: [] }),
+      pickTargets: makePPP({ single: ["number"], array: [], struct: [] }),
     },
     expected: {
       single: [{ name: "singleParam", attr: { kind: "number", default: 9 } }],
@@ -53,7 +53,7 @@ const testCases: TestCase[] = [
         { name: "arrayParam", attr: { kind: "number[]", default: [1, 2, 3] } },
         { name: "structParam", attr: { kind: "struct", struct: "MyStruct" } },
       ],
-      ppp: makePPP({ single: [], array: ["number[]"], struct: [] }),
+      pickTargets: makePPP({ single: [], array: ["number[]"], struct: [] }),
     },
     expected: {
       single: [],
@@ -76,7 +76,7 @@ const testCases: TestCase[] = [
           attr: { kind: "struct[]", struct: "MyStruct" },
         },
       ],
-      ppp: makePPP({ single: [], array: [], struct: ["MyStruct"] }),
+      pickTargets: makePPP({ single: [], array: [], struct: ["MyStruct"] }),
     },
     expected: {
       single: [],
@@ -104,7 +104,7 @@ const testCases: TestCase[] = [
           attr: { kind: "struct[]", struct: "MyStruct" },
         },
       ],
-      ppp: makePPP({
+      pickTargets: makePPP({
         single: ["number"],
         array: ["number[]"],
         struct: ["MyStruct"],
@@ -131,7 +131,10 @@ const testCases: TestCase[] = [
 describe("filterParams2", () => {
   testCases.forEach((testCase) => {
     test(testCase.caseName, () => {
-      const result = filterParams2(testCase.input.params, testCase.input.ppp);
+      const result = filterParams2(
+        testCase.input.params,
+        testCase.input.pickTargets
+      );
       expect(result).toEqual(testCase.expected);
     });
   });
