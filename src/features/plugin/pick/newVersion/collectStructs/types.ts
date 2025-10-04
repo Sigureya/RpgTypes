@@ -6,3 +6,11 @@ export interface StructCollection {
   targetKinds: Set<ParamKinds>;
   targetArrayKinds: Set<`${ParamKinds}[]`>;
 }
+
+export interface ReadonlyStructCollection
+  extends Record<keyof StructCollection, ReadonlySet<string>> {
+  readonly matchedStructs: ReadonlySet<string>;
+  readonly nestedStructs: ReadonlySet<string>;
+  readonly targetKinds: ReadonlySet<ParamKinds>;
+  readonly targetArrayKinds: ReadonlySet<`${ParamKinds}[]`>;
+}
