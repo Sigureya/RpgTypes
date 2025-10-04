@@ -1,6 +1,5 @@
 export * from "./eventCommand";
 export * from "./folderNames";
-export * from "./plugin";
 export * from "./rpg";
 export * from "./system";
 export * from "./utils";
