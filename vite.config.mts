@@ -17,12 +17,13 @@ const validateEntryPoints = () =>
   );
 
 export default defineConfig(({ mode }) => {
-  const entryPoints = {
+  const entryPoints: Record<string, string> = {
     ...validateEntryPoints(),
     main: path.resolve(srcDir, "index.ts"),
     features: path.resolve(srcDir, "features/index.ts"),
     libs: path.resolve(srcDir, "libs/index.ts"),
     rmmz: path.resolve(srcDir, "rmmz/index.ts"),
+    "rmmz/plugin": path.resolve(srcDir, "rmmz/plugin/index.ts"),
   };
 
   return {
@@ -42,6 +43,10 @@ export default defineConfig(({ mode }) => {
             if (name.startsWith("validate/")) {
               return "[name].[format].js";
             }
+            if (name.startsWith("rmmz/")) {
+              return "[name].[format].js";
+            }
+
             return `${name}/[name].[format].js`;
           },
           chunkFileNames: "shared/[name].[format].js",

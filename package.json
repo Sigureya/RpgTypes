@@ -27,6 +27,11 @@
       "import": "./dist/rmmz/rmmz.es.js",
       "require": "./dist/rmmz/rmmz.cjs.js"
     },
+    "./rmmz/plugin": {
+      "types": "./dist/rmmz/plugin/index.d.ts",
+      "import": "./dist/rmmz/plugin.es.js",
+      "require": "./dist/rmmz/plugin.cjs.js"
+    },
     "./validate": {
       "types": "./dist/validate/index.d.ts",
       "import": "./dist/validate/validate.es.js",
