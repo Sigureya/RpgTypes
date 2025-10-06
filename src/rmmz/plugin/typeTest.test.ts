@@ -1,6 +1,16 @@
 import { describe, test, expect } from "vitest";
-import type { StringArrayParam, StringParam } from "./core/primitiveParams";
-import { isArrayParam, isArrayParamEx } from "./typeTest";
+import type {
+  StringArrayParam,
+  StringParam,
+  StructRefParam,
+  StructArrayRefParam,
+} from "./core/primitiveParams";
+import {
+  isArrayParam,
+  isArrayParamEx,
+  isStructArrayParam,
+  isStructParam,
+} from "./typeTest";
 
 describe("isArrayParam", () => {
   test("returns false for non-array param, true for array param", () => {
@@ -30,6 +40,7 @@ describe("isArrayParam", () => {
     expect(actual).toEqual(expected);
   });
 });
+
 describe("isArrayEx", () => {
   test("returns false for non-array param, true for array param of specified kind", () => {
     const stringParam: StringParam = {
@@ -51,5 +62,52 @@ describe("isArrayEx", () => {
       default: ["a", "b", "c"],
     };
     expect(stringArrayParam).not.toSatisfy((p) => isArrayParamEx(p, "number"));
+  });
+});
+
+describe("isStructParam", () => {
+  test("returns true for struct param", () => {
+    const structParam: StructRefParam = {
+      kind: "struct",
+      struct: "MyStruct",
+      default: {},
+    };
+    expect(structParam).toSatisfy(isStructParam);
+  });
+
+  test("returns false for non-struct param", () => {
+    const stringParam: StringParam = {
+      kind: "string",
+      default: "abc",
+    };
+    expect(stringParam).not.toSatisfy(isStructParam);
+  });
+});
+
+describe("isStructArrayParam", () => {
+  test("returns true for struct[] param", () => {
+    const structArrayParam: StructArrayRefParam = {
+      kind: "struct[]",
+      struct: "MyStruct",
+      default: [],
+    };
+    expect(structArrayParam).toSatisfy(isStructArrayParam);
+  });
+
+  test("returns false for non-struct[] param", () => {
+    const stringArrayParam: StringArrayParam = {
+      kind: "string[]",
+      default: ["a", "b"],
+    };
+    expect(stringArrayParam).not.toSatisfy(isStructArrayParam);
+  });
+
+  test("returns false for struct param", () => {
+    const structParam: StructRefParam = {
+      kind: "struct",
+      struct: "MyStruct",
+      default: {},
+    };
+    expect(structParam).not.toSatisfy(isStructArrayParam);
   });
 });
