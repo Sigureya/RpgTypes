@@ -2,6 +2,8 @@ import type {
   ArrayParam,
   ParamKinds,
   PrimitiveParam,
+  StructArrayRefParam,
+  StructRefParam,
 } from "./core/primitiveParams";
 
 export const isArrayParam = <T extends PrimitiveParam>(
@@ -18,4 +20,16 @@ export const isArrayParamEx = <T extends PrimitiveParam, K extends ParamKinds>(
     return param.kind === `${kind}[]`;
   }
   return false;
+};
+
+export const isStructParam = (
+  param: PrimitiveParam
+): param is StructRefParam => {
+  return param.kind === "struct";
+};
+
+export const isStructArrayParam = (
+  param: PrimitiveParam
+): param is StructArrayRefParam => {
+  return param.kind === "struct[]";
 };
