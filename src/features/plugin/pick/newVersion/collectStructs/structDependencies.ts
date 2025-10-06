@@ -5,10 +5,7 @@ import type {
   StructArrayRefParam,
   StructRefParam,
 } from "@RpgTypes/rmmz/plugin";
-import {
-  isStructArrayParam,
-  isStructParam,
-} from "@RpgTypes/rmmz/plugin/isStruct";
+import { isStructArrayParam, isStructParam } from "@RpgTypes/rmmz/plugin";
 
 const hasStruct = (
   param: PrimitiveParam,

@@ -8,11 +8,11 @@ import type {
   StructRefParam,
   StructArrayRefParam,
 } from "@RpgTypes/rmmz/plugin";
-import { isArrayParam } from "@RpgTypes/rmmz/plugin/isArray";
 import {
-  isStructParam,
+  isArrayParam,
   isStructArrayParam,
-} from "@RpgTypes/rmmz/plugin/isStruct";
+  isStructParam,
+} from "@RpgTypes/rmmz/plugin/typeTest";
 import type {
   PluginParamGroups,
   NamedAttribute,

@@ -1,6 +1,6 @@
 import { describe, test, expect } from "vitest";
 import type { StringArrayParam, StringParam } from "./core/primitiveParams";
-import { isArrayParam, isArrayParamEx } from "./isArray";
+import { isArrayParam, isArrayParamEx } from "./typeTest";
 
 describe("isArrayParam", () => {
   test("returns false for non-array param, true for array param", () => {
