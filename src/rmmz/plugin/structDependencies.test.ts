@@ -1,8 +1,5 @@
 import { describe, expect, test } from "vitest";
-import type {
-  PluginStructSchemaArray,
-  PrimitiveParam,
-} from "@RpgTypes/rmmz/plugin";
+import type { PluginStructSchemaArray, PrimitiveParam } from "./core";
 import { structDependencies, createStructMap } from "./structDependencies";
 
 const mockStructs: ReadonlyArray<PluginStructSchemaArray> = [
