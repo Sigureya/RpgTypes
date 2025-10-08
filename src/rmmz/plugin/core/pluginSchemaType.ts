@@ -1,8 +1,8 @@
+import type { PrimitiveParam } from "./paramUnion";
 import type {
   BooleanParam,
   StructArrayRefParam,
   StructRefParam,
-  PrimitiveParam,
   AnyStringParam,
 } from "./primitiveParams";
 
