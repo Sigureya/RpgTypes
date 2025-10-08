@@ -1,3 +1,4 @@
+export type * from "./paramUnion";
 export type * from "./pluginEntriesEx";
 export type * from "./pluginEntryTypes";
 export type * from "./pluginJSONTypes";

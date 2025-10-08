@@ -2,12 +2,9 @@ import { describe, expect, test } from "vitest";
 import type {
   ParamKinds,
   PluginCommandSchemaArray,
-  PluginSchemaArray,
   PluginStructSchemaArray,
 } from "@RpgTypes/rmmz/plugin";
 import { collectStructsByKinds } from "./collectStructs/collectStructs";
-import type { ReadonlyStructCollection } from "./collectStructs/types";
-import type { ParamFilterCriteria } from "./filter/filterParamArray2";
 import type { PluginParamGroups } from "./filter/types";
 import { filterPluginCommand } from "./xxx";
 

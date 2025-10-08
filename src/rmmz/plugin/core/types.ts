@@ -1,4 +1,4 @@
-import type { PrimitiveParam } from "./primitiveParams";
+import type { PrimitiveParam } from "./paramUnion";
 
 export interface PluginParam<T = PrimitiveParam> {
   name: string;
