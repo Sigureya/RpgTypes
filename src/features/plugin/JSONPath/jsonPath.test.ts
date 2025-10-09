@@ -1,6 +1,6 @@
 import { describe, test, expect } from "vitest";
 import { JSONPathJS } from "jsonpath-js";
-import type { PluginStructSchemaArray } from "./core";
+import type { PluginStructSchemaArray } from "../../../rmmz/plugin/core";
 import { structToJsonPath2 } from "./jsonPath";
 
 interface Person {
