@@ -1,1 +1,0 @@
-export { paramHasText } from "./hasText";
