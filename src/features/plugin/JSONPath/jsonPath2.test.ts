@@ -1,5 +1,5 @@
 import { describe, test, expect } from "vitest";
-import type { PluginParamType } from "@RpgTypes/rmmz/plugin/core/pluginSchemaType";
+import type { PluginParamType2 } from "@RpgTypes/rmmz/plugin/core/pluginSchemaType";
 import { JSONPathJS } from "jsonpath-js";
 import { scalaParamPath, arrayParamPath } from "./jsonPath";
 import type { ParamJSONPath } from "./types";
@@ -23,7 +23,7 @@ const mockStruct = [
     name: "items",
     attr: { kind: "item[]", default: [1, 2] },
   },
-] as const satisfies PluginParamType<Person>[];
+] as const satisfies PluginParamType2<Person>[];
 
 const mockPerson = {
   name: "Taro",

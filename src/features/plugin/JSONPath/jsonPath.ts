@@ -3,14 +3,21 @@ import type {
   ScalaParam,
   ArrayParamTypes,
   StructRefParam,
+  PluginStructSchemaArray,
+  StructArrayRefParam,
 } from "@RpgTypes/rmmz/plugin";
-import { isArrayParam } from "@RpgTypes/rmmz/plugin";
-import type { ParamJSONPath } from "./types";
+import {
+  isArrayParam,
+  isStructArrayParam,
+  isStructParam,
+} from "@RpgTypes/rmmz/plugin";
+import type { ParamJSONPath, ParamJSONPathSturct } from "./types";
 
 interface PathX {
   kind: string;
   path: string[];
 }
+
 export const structToJsonPath2 = (
   params: PluginParam[],
   parentPath: ReadonlyArray<string> = []
@@ -58,6 +65,40 @@ export const structParamPath = (
   return {
     parent: parent,
     param: param,
-    path: "",
+    path: `${parent}.${param.name}`,
+  };
+};
+
+export const structArrayParamPath = (
+  param: PluginParam<StructArrayRefParam>,
+  parent: string
+): ParamJSONPath<PluginParam<StructArrayRefParam>> => {
+  return {
+    parent: parent,
+    param: param,
+    path: `${parent}.${param.name}[*]`,
+  };
+};
+
+export const structXXX = (
+  structSchema: PluginStructSchemaArray,
+  parent: string
+): ParamJSONPathSturct => {
+  const params: ParamJSONPath[] = structSchema.params.map(({ attr, name }) => {
+    if (isStructArrayParam(attr)) {
+      return structArrayParamPath({ attr, name }, parent);
+    }
+    if (isArrayParam(attr)) {
+      return arrayParamPath({ attr, name }, parent);
+    }
+    if (isStructParam(attr)) {
+      return structParamPath({ attr, name }, parent);
+    }
+    return scalaParamPath({ attr, name }, parent);
+  });
+
+  return {
+    struct: structSchema.struct,
+    params: params,
   };
 };
