@@ -1,5 +1,6 @@
 import { describe, test, expect } from "vitest";
 import type { Trait } from "@RpgTypes/rmmz";
+import type { PluginStructSchemaArray3 } from "@RpgTypes/rmmz/plugin";
 import type { JsonValueEx } from "./deep";
 import { deep2 } from "./deep";
 import type { ParamJSONPathSturct } from "./types";
@@ -10,28 +11,41 @@ interface Actor {
   traits: Trait[];
 }
 
+const actorSchema = {
+  struct: "Actor",
+  params: [
+    { name: "name", attr: { kind: "string", default: "Taro" } },
+    { name: "id", attr: { kind: "number", default: 1 } },
+    {
+      name: "traits",
+      attr: { kind: "struct[]", struct: "Trait", default: [] },
+    },
+  ],
+} as const satisfies PluginStructSchemaArray3<Actor>;
+
 describe("deep2", () => {
+  const actorPath: ParamJSONPathSturct = {
+    struct: "Actor",
+    scala: [],
+    params: [
+      {
+        parent: "$",
+        path: "$.name",
+        param: { name: "name", attr: { kind: "string", default: "Taro" } },
+      },
+      {
+        parent: "$",
+        param: { name: "id", attr: { kind: "number", default: 1 } },
+        path: "$.id",
+      },
+      {
+        parent: "$",
+        param: { name: "code", attr: { kind: "number", default: 0 } },
+        path: "$.traits[*].code",
+      },
+    ],
+  };
   test("", () => {
-    const actorPath: ParamJSONPathSturct = {
-      struct: "Actor",
-      params: [
-        {
-          parent: "$",
-          path: "$.name",
-          param: { name: "name", attr: { kind: "string", default: "Taro" } },
-        },
-        {
-          parent: "$",
-          param: { name: "id", attr: { kind: "number", default: 1 } },
-          path: "$.id",
-        },
-        {
-          parent: "$",
-          param: { name: "code", attr: { kind: "number", default: 0 } },
-          path: "$.traits[*].code",
-        },
-      ],
-    };
     const actor = {
       name: "Taro",
       id: 1,
