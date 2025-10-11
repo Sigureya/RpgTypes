@@ -8,5 +8,6 @@ export interface ParamJSONPath<Param = PluginParam<PrimitiveParam>> {
 
 export interface ParamJSONPathSturct {
   struct: string;
+  scala: ParamJSONPath[];
   params: ParamJSONPath[];
 }
