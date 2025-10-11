@@ -1,7 +1,7 @@
 import { describe, test, expect } from "vitest";
 import type { PluginParamType2 } from "@RpgTypes/rmmz/plugin/core/pluginSchemaType";
 import { JSONPathJS } from "jsonpath-js";
-import { scalaParamPath, arrayParamPath } from "./jsonPath";
+import { arrayParamPath, scalaParamPath } from "./param";
 import type { ParamJSONPath } from "./types";
 
 interface Person {
