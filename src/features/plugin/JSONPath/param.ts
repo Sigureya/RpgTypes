@@ -7,23 +7,6 @@ import type {
 } from "@RpgTypes/rmmz/plugin";
 import type { ParamJSONPath } from "./types";
 
-export interface PathX {
-  kind: string;
-  path: string[];
-}
-
-export const structToJsonPath = (
-  params: PluginParam[],
-  parentPath: ReadonlyArray<string> = []
-): PathX[] => {
-  return params.map(
-    (p): PathX => ({
-      kind: p.attr.kind,
-      path: [...parentPath, p.name],
-    })
-  );
-};
-
 export const scalaParamPath = (
   param: PluginParam<ScalaParam>,
   parent: string
