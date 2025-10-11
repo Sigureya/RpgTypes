@@ -1,7 +1,18 @@
 import { describe, test, expect } from "vitest";
+import type { Trait } from "@RpgTypes/rmmz";
+import type {
+  PluginParam,
+  StructArrayRefParam,
+  StructRefParam,
+} from "@RpgTypes/rmmz/plugin";
 import type { PluginParamType2 } from "@RpgTypes/rmmz/plugin/core/pluginSchemaType";
 import { JSONPathJS } from "jsonpath-js";
-import { arrayParamPath, scalaParamPath } from "./param";
+import {
+  arrayParamPath,
+  scalaParamPath,
+  structArrayParamPath,
+  structParamPath,
+} from "./param";
 import type { ParamJSONPath } from "./types";
 
 interface Person {
@@ -34,7 +45,7 @@ const mockPerson = {
 describe("scalaParamPath ", () => {
   describe("number param age", () => {
     const mockPath = "$.age";
-    test("", () => {
+    test("create", () => {
       const result: ParamJSONPath = scalaParamPath(mockStruct[0], "$");
       const expected: ParamJSONPath = {
         parent: "$",
@@ -43,7 +54,7 @@ describe("scalaParamPath ", () => {
       };
       expect(result).toEqual(expected);
     });
-    test("", () => {
+    test("find", () => {
       const jsonPath = new JSONPathJS(mockPath);
       const value = jsonPath.find(mockPerson);
       const expected = [20];
@@ -53,7 +64,7 @@ describe("scalaParamPath ", () => {
 
   describe("string param name", () => {
     const mockPath = "$.name";
-    test("", () => {
+    test("create", () => {
       const result: ParamJSONPath = scalaParamPath(mockStruct[1], "$");
       const expected: ParamJSONPath = {
         parent: "$",
@@ -62,7 +73,7 @@ describe("scalaParamPath ", () => {
       };
       expect(result).toEqual(expected);
     });
-    test("", () => {
+    test("find", () => {
       const jsonPath = new JSONPathJS(mockPath);
       const value = jsonPath.find(mockPerson);
       const expected = ["Taro"];
@@ -74,7 +85,7 @@ describe("scalaParamPath ", () => {
 describe("arrayParamPath ", () => {
   describe("item[] param items", () => {
     const mockPath = "$.items[*]";
-    test("", () => {
+    test("create", () => {
       const result = arrayParamPath(mockStruct[2], "$");
       const expected: ParamJSONPath = {
         parent: "$",
@@ -83,11 +94,54 @@ describe("arrayParamPath ", () => {
       };
       expect(result).toEqual(expected);
     });
-    test("", () => {
+    test("find", () => {
       const jsonPath = new JSONPathJS(mockPath);
       const value = jsonPath.find(mockPerson);
       const expected = [3, 7];
       expect(value).toEqual(expected);
     });
+  });
+});
+
+describe("structParamPath", () => {
+  const path = "$.trait";
+  test("create", () => {
+    const param: PluginParam<StructRefParam> = {
+      name: "trait",
+      attr: { kind: "struct", struct: "Trait", default: {} },
+    };
+    const result = structParamPath(param, "$");
+    const expected: ParamJSONPath<PluginParam<StructRefParam>> = {
+      parent: "$",
+      param: param,
+      path: path,
+    };
+    expect(result).toEqual(expected);
+  });
+  test("find", () => {
+    const obj = {
+      trait: { code: 11, dataId: 81, value: 123 },
+    } as const satisfies { trait: Trait };
+    const jsonPath = new JSONPathJS(path);
+    const value = jsonPath.find(obj);
+    const expected: Trait[] = [{ code: 11, dataId: 81, value: 123 }];
+    expect(value).toEqual(expected);
+  });
+});
+
+describe("structArrayParamPath", () => {
+  const path = "$.traits[*]";
+  test("create", () => {
+    const param: PluginParam<StructArrayRefParam> = {
+      name: "traits",
+      attr: { kind: "struct[]", struct: "Trait", default: [] },
+    };
+    const result: ParamJSONPath<PluginParam> = structArrayParamPath(param, "$");
+    const expected: ParamJSONPath<PluginParam> = {
+      parent: "$",
+      param: param,
+      path: path,
+    };
+    expect(result).toEqual(expected);
   });
 });
