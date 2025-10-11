@@ -1,82 +1,36 @@
-import type {
-  PluginParam,
-  ScalaParam,
-  ArrayParamTypes,
-  StructRefParam,
-  PluginStructSchemaArray,
-  StructArrayRefParam,
-} from "@RpgTypes/rmmz/plugin";
+import type { PluginStructSchemaArray } from "@RpgTypes/rmmz/plugin";
 import {
   isArrayParam,
   isStructArrayParam,
   isStructParam,
 } from "@RpgTypes/rmmz/plugin";
+import { createStructMap3 } from "@RpgTypes/rmmz/plugin/gen";
+import {
+  structParamPath,
+  structArrayParamPath,
+  scalaParamPath,
+  arrayParamPath,
+} from "./param";
 import type { ParamJSONPath, ParamJSONPathSturct } from "./types";
 
-interface PathX {
-  kind: string;
-  path: string[];
-}
+export type YYY = ReturnType<typeof structYYY>;
 
-export const structToJsonPath2 = (
-  params: PluginParam[],
-  parentPath: ReadonlyArray<string> = []
+export const structYYY = (
+  structSchema: PluginStructSchemaArray,
+  parent: string
 ) => {
-  return params;
-};
-export const structToJsonPath = (
-  params: PluginParam[],
-  parentPath: ReadonlyArray<string> = []
-): PathX[] => {
-  return params.map(
-    (p): PathX => ({
-      kind: p.attr.kind,
-      path: [...parentPath, p.name],
-    })
-  );
-};
-
-export const scalaParamPath = (
-  param: PluginParam<ScalaParam>,
-  parent: string
-): ParamJSONPath => {
   return {
-    parent: parent,
-    path: [parent, ".", param.name].join(""),
-    param: param,
-  };
-};
-
-export const arrayParamPath = (
-  param: PluginParam<ArrayParamTypes>,
-  parent: string
-): ParamJSONPath<PluginParam<ArrayParamTypes>> => {
-  return {
-    parent: parent,
-    path: [parent, ".", param.name, "[*]"].join(""),
-    param: param,
-  };
-};
-
-export const structParamPath = (
-  param: PluginParam<StructRefParam>,
-  parent: string
-): ParamJSONPath<PluginParam<StructRefParam>> => {
-  return {
-    parent: parent,
-    param: param,
-    path: `${parent}.${param.name}`,
-  };
-};
-
-export const structArrayParamPath = (
-  param: PluginParam<StructArrayRefParam>,
-  parent: string
-): ParamJSONPath<PluginParam<StructArrayRefParam>> => {
-  return {
-    parent: parent,
-    param: param,
-    path: `${parent}.${param.name}[*]`,
+    struct: structSchema.struct,
+    params: createStructMap3(structSchema, {
+      struct: (struct, name) => {
+        return structParamPath({ attr: struct, name: name }, parent);
+      },
+      structArray: (structArray, name) => {
+        return structArrayParamPath({ attr: structArray, name }, parent);
+      },
+      scala: (param, name) => scalaParamPath({ attr: param, name }, parent),
+      array: (param, name) => arrayParamPath({ attr: param, name }, parent),
+    }),
   };
 };
 
@@ -98,6 +52,7 @@ export const structXXX = (
   });
 
   return {
+    scala: [],
     struct: structSchema.struct,
     params: params,
   };
