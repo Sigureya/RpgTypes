@@ -1,3 +1,4 @@
+import type { PrimitiveParam } from "./core";
 import { compileAttributes } from "./core/attributes";
 import { parsePlugin as parse } from "./core/parse/parse";
 import type {
@@ -11,7 +12,6 @@ import type {
   PluginJSON,
   PluginStructBody,
 } from "./core/pluginJSONTypes";
-import type { PrimitiveParam } from "./core/primitiveParams";
 
 export const compilePluginToObject = (text: string): PluginJSON => {
   return compilePluginToObjectCore(parse(text));

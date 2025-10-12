@@ -15,6 +15,10 @@ export type PrimitiveStructParams<T extends object> = {
   [K in Extract<keyof T, string>]: PluginSchemaType<T[K]>;
 };
 
+export type PluginParamType2<T> = {
+  [K in keyof T]: { name: K; attr: PluginSchemaType<T[K]> };
+}[keyof T];
+
 export type PluginSchemaType<T> = T extends boolean
   ? BooleanParam
   : T extends number

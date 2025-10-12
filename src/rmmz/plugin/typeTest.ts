@@ -1,7 +1,6 @@
+import type { ParamKinds, PrimitiveParam, PrimitiveStringParam } from "./core";
 import type {
   ArrayParam,
-  ParamKinds,
-  PrimitiveParam,
   StructArrayRefParam,
   StructRefParam,
 } from "./core/primitiveParams";
@@ -32,4 +31,11 @@ export const isStructArrayParam = (
   param: PrimitiveParam
 ): param is StructArrayRefParam => {
   return param.kind === "struct[]";
+};
+
+const TABLE: ReadonlyArray<string> = ["string", "multiline_string", "select"];
+export const paramHasText = (
+  param: PrimitiveParam
+): param is PrimitiveStringParam => {
+  return TABLE.includes(param.kind);
 };
