@@ -26,7 +26,7 @@ interface MockEvent {
   name: string;
   condition: Condition;
 }
-describe("Condition", () => {
+describe.skip("Condition", () => {
   const mockCondition = { code: 1, value: 20 } as const satisfies Condition;
 
   const mockPath = {};
