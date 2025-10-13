@@ -1,5 +1,6 @@
 /* eslint-disable @functional/no-return-void */
 
+import type { ClassifiedPluginParams } from "./classifyTypes";
 import type {
   ArrayParamTypes,
   PluginParam,
@@ -9,13 +10,6 @@ import type {
   StructRefParam,
 } from "./core";
 import { isArrayParam, isStructArrayParam, isStructParam } from "./typeTest";
-
-export interface ClassifiedPluginParams {
-  structs: PluginParam<StructRefParam>[];
-  structArrays: PluginParam<StructArrayRefParam>[];
-  scalas: PluginParam<ScalaParam>[];
-  scalaArrays: PluginParam<ArrayParamTypes>[];
-}
 
 export const classifyPluginParams = (
   structSchema: PluginStructSchemaArray

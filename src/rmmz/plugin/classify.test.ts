@@ -1,10 +1,22 @@
 import { test, expect, describe } from "vitest";
-import type { ClassifiedPluginParams } from "./classify";
 import { classifyPluginParams } from "./classify";
-import type { PluginStructSchemaArray } from "./core";
+import type {
+  ClassifiedPluginParams,
+  ClassifiedPluginParamsEx,
+} from "./classifyTypes";
+import type { PluginStructSchemaArray3 } from "./core";
+
+interface MockStruct {
+  name: string;
+  num: number;
+  isActive: boolean;
+  structRef: { id: number };
+  stringArray: string[];
+  numArray: number[];
+}
 
 describe("classifyPluginParams", () => {
-  const mockStructSchema: PluginStructSchemaArray = {
+  const mockStructSchema: PluginStructSchemaArray3<MockStruct> = {
     struct: "MockStruct",
     params: [
       { name: "name", attr: { kind: "string", default: "defaultText" } },
@@ -23,8 +35,9 @@ describe("classifyPluginParams", () => {
   };
 
   test("classifies params correctly", () => {
-    const result = classifyPluginParams(mockStructSchema);
-    const expected: ClassifiedPluginParams = {
+    const result: ClassifiedPluginParams =
+      classifyPluginParams(mockStructSchema);
+    const expected: ClassifiedPluginParamsEx<MockStruct> = {
       structs: [
         {
           name: "structRef",
