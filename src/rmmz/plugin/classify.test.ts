@@ -1,6 +1,6 @@
 import { test, expect, describe } from "vitest";
-import type { ClassifiedPluginParams } from "./classify";
 import { classifyPluginParams } from "./classify";
+import type { ClassifiedPluginParams } from "./classifyTypes";
 import type { PluginStructSchemaArray } from "./core";
 
 describe("classifyPluginParams", () => {
