@@ -36,7 +36,7 @@ export const classifyPluginParams = (
     if (isArrayParam(p.attr)) {
       scalaArrays.push({
         name: p.name,
-        attr: p.attr as ArrayParamTypes,
+        attr: p.attr,
       });
       return;
     }
