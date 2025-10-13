@@ -5,12 +5,14 @@ import type { JSONPathType } from "./jsonPathString";
 interface Person {
   name: string;
   age: number;
+  items: number[];
 }
 
 describe("JSONPathType", () => {
   const mockPerson = {
     name: "Bob",
     age: 20,
+    items: [1, 2, 3],
   } as const satisfies Person;
 
   test("string param name", () => {
@@ -23,6 +25,42 @@ describe("JSONPathType", () => {
     const mockPath: JSONPathType<Person> = "$.name";
     const path = new JSONPathJS(mockPath);
     const value = path.find(mockPerson);
+    expect(value).toEqual(["Bob"]);
+  });
+  test("array param items", () => {
+    const mockPath: JSONPathType<Person> = "$.items";
+    const path = new JSONPathJS(mockPath);
+    const value = path.find(mockPerson);
+    expect(value).toEqual([[1, 2, 3]]);
+  });
+
+  test("array param items", () => {
+    const mockPath: JSONPathType<Person> = `$.items[*]`;
+    const path = new JSONPathJS(mockPath);
+    const value = path.find(mockPerson);
+    expect(value).toEqual([1, 2, 3]);
+  });
+});
+
+interface Family {
+  father: Person;
+  mother: Person;
+  children: Person[];
+}
+
+describe("JSONPathType nested", () => {
+  const mockFamily = {
+    father: { name: "Bob", age: 40, items: [1, 2, 3] },
+    mother: { name: "Alice", age: 38, items: [4, 5, 6] },
+    children: [
+      { name: "Charlie", age: 10, items: [7, 8] },
+      { name: "Daisy", age: 8, items: [9] },
+    ],
+  } as const satisfies Family;
+  test.skip("string param name", () => {
+    const mockPath: JSONPathType<Family> = "$.father.name";
+    const path = new JSONPathJS(mockPath);
+    const value = path.find(mockFamily);
     expect(value).toEqual(["Bob"]);
   });
 });
