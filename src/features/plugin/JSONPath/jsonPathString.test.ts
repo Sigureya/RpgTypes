@@ -57,10 +57,22 @@ describe("JSONPathType nested", () => {
       { name: "Daisy", age: 8, items: [9] },
     ],
   } as const satisfies Family;
-  test.skip("string param name", () => {
+  test("string param name", () => {
     const mockPath: JSONPathType<Family> = "$.father.name";
     const path = new JSONPathJS(mockPath);
     const value = path.find(mockFamily);
     expect(value).toEqual(["Bob"]);
+  });
+  test("number param age", () => {
+    const mockPath: JSONPathType<Family> = "$.mother.age";
+    const path = new JSONPathJS(mockPath);
+    const value = path.find(mockFamily);
+    expect(value).toEqual([38]);
+  });
+  test("array param items", () => {
+    const mockPath: JSONPathType<Family> = "$.children[*].age";
+    const path = new JSONPathJS(mockPath);
+    const value = path.find(mockFamily);
+    expect(value).toEqual([10, 8]);
   });
 });
