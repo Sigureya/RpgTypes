@@ -1,3 +1,4 @@
+import type { PrimitiveParam } from "./core";
 import { compileAttributes } from "./core/attributes";
 import type {
   PluginCommandTokens,
@@ -5,7 +6,6 @@ import type {
   StructParseState,
 } from "./core/parse/types";
 import type { PluginTokens } from "./core/parse/types/types";
-import type { PrimitiveParam } from "./core/primitiveParams";
 import type {
   PluginCommandSchemaArray,
   PluginParam,
