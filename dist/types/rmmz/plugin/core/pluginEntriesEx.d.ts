@@ -1,5 +1,5 @@
 import { ParamBase } from './paramBase';
-import { PrimitiveParam } from './primitiveParams';
+import { PrimitiveParam } from './paramUnion';
 export type StructParam = PrimitiveParam | StructDefParam<object> | StructArrayDefParam<object>;
 export interface StructArrayDefParam<T extends object> extends PluginStructEx<T>, ParamBase {
     kind: "struct_def[]";
