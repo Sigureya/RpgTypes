@@ -392,7 +392,7 @@ describe("structToJsonPath2", () => {
   testCases.forEach((testCase) => {
     describe(testCase.caseName, () => {
       test("createPath", () => {
-        const structPath = createPathFromSchema(
+        const structPath: ParamJSONPathSturct = createPathFromSchema(
           testCase.schema,
           "$",
           makeStructMap()
