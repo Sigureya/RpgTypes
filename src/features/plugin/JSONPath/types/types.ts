@@ -22,4 +22,6 @@ export interface ParamJSONPath2<T> {
 export interface ParamJSONPathSturct2<T> {
   struct: string;
   scala: ParamJSONPath2<T>[];
+  structs?: ParamJSONPath2<T>[];
+  structArrays?: ParamJSONPath2<T>[];
 }

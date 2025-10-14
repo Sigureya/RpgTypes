@@ -15,7 +15,7 @@ type JSONPathNested<T extends object, Parent extends string> = {
         : never)
     | (T[K] extends Array<infer U>
         ?
-            | `${Parent}.${K}${ArrayAccsess}.${Extract<keyof U, string>}`
+            | `${Parent}.${K}${ArrayAccsess}.${string & keyof U}`
             | (U extends unknown[]
                 ? never
                 : U extends object
