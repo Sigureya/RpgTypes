@@ -8,7 +8,6 @@ export interface ParamJSONPath<Param = PluginParam<PrimitiveParam>> {
 }
 
 export interface ParamJSONPathSturct {
-  struct: string;
   scalas: ParamJSONPath[];
   structs: ParamJSONPath[];
   structArrays: ParamJSONPath[];
@@ -22,7 +21,6 @@ export interface ParamJSONPath2<T> {
 }
 
 export interface ParamJSONPathSturctEx<T> extends ParamJSONPathSturct {
-  struct: string;
   scalas: ParamJSONPath2<T>[];
   structs: ParamJSONPath2<T>[];
   structArrays: ParamJSONPath2<T>[];

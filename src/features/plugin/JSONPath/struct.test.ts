@@ -36,12 +36,14 @@ interface Shop {
 }
 
 interface TestCase<T> {
+  caseName: string;
   schema: ClassifiedPluginParamsEx<T>;
   mock: T;
   paths: ParamJSONPathSturctEx<T>;
 }
 
 const shopTestCase: TestCase<Shop> = {
+  caseName: "Shop",
   mock: { name: "Shop", items: [58, 66, 81] },
   schema: {
     structs: [],
@@ -50,7 +52,6 @@ const shopTestCase: TestCase<Shop> = {
     structArrays: [],
   },
   paths: {
-    struct: "Shop",
     structs: [],
     scalas: [
       {
@@ -71,6 +72,7 @@ const shopTestCase: TestCase<Shop> = {
 };
 
 const enemyTestCase = {
+  caseName: "Enemy",
   mock: {
     name: "Gobrin",
     id: 1,
@@ -105,7 +107,6 @@ const enemyTestCase = {
     ],
   },
   paths: {
-    struct: "Enemy",
     scalaArrays: [],
     scalas: [
       {
@@ -122,6 +123,11 @@ const enemyTestCase = {
     structs: [
       {
         parent: "$",
+        param: { name: "kind", attr: { kind: "number", default: 0 } },
+        path: "$.dropItem.kind",
+      },
+      {
+        parent: "$",
         path: "$.dropItem.dataId",
         param: { name: "dataId", attr: { kind: "number", default: 0 } },
       },
@@ -129,11 +135,6 @@ const enemyTestCase = {
         parent: "$",
         path: "$.dropItem.denominator",
         param: { name: "denominator", attr: { kind: "number", default: 1 } },
-      },
-      {
-        parent: "$",
-        param: { name: "kind", attr: { kind: "number", default: 0 } },
-        path: "$.dropItem.kind",
       },
     ],
     structArrays: [
@@ -172,6 +173,7 @@ const enemyTestCase = {
 } as const satisfies TestCase<Enemy>;
 
 const enemyActionTestCase: TestCase<EnemyAction> = {
+  caseName: "EnemyAction",
   mock: {
     skillId: 113,
     conditions: [
@@ -191,7 +193,6 @@ const enemyActionTestCase: TestCase<EnemyAction> = {
     ],
   },
   paths: {
-    struct: "EnemyAction",
     structs: [],
     scalaArrays: [],
     scalas: [
@@ -217,6 +218,7 @@ const enemyActionTestCase: TestCase<EnemyAction> = {
 };
 
 const eventTestCase: TestCase<MockEvent> = {
+  caseName: "MockEvent",
   mock: { id: 1, name: "Event", condition: { code: 1, value: 20 } },
   schema: {
     structs: [
@@ -230,7 +232,6 @@ const eventTestCase: TestCase<MockEvent> = {
     structArrays: [],
   },
   paths: {
-    struct: "MockEvent",
     structArrays: [],
     scalaArrays: [],
     structs: [
@@ -261,6 +262,7 @@ const eventTestCase: TestCase<MockEvent> = {
 };
 
 const traitTestCase: TestCase<Trait> = {
+  caseName: "Trait",
   mock: { code: 11, dataId: 81, value: 123 },
   schema: {
     scalas: [
@@ -273,7 +275,6 @@ const traitTestCase: TestCase<Trait> = {
     structArrays: [],
   },
   paths: {
-    struct: "Trait",
     structs: [],
     scalaArrays: [],
     structArrays: [],
@@ -298,6 +299,7 @@ const traitTestCase: TestCase<Trait> = {
 };
 
 const conditionTestCase: TestCase<Condition> = {
+  caseName: "Condition",
   schema: {
     structs: [],
     scalaArrays: [],
@@ -309,7 +311,6 @@ const conditionTestCase: TestCase<Condition> = {
   },
   mock: { code: 1, value: 20 },
   paths: {
-    struct: "Condition",
     structs: [],
     scalaArrays: [],
     structArrays: [],
@@ -329,6 +330,7 @@ const conditionTestCase: TestCase<Condition> = {
 };
 
 const dropItemTestCase: TestCase<DropItem> = {
+  caseName: "DropItem",
   mock: { kind: 1, dataId: 2, denominator: 3 },
   schema: {
     structs: [],
@@ -341,7 +343,6 @@ const dropItemTestCase: TestCase<DropItem> = {
     ],
   },
   paths: {
-    struct: "DropItem",
     structs: [],
     scalaArrays: [],
     structArrays: [],
@@ -379,23 +380,29 @@ const makeStructMap = (): ReadonlyMap<string, ClassifiedPluginParams> => {
 
 const testCases = [
   conditionTestCase,
-  //   shopTestCase,
-  //   enemyTestCase,
-  //   enemyActionTestCase,
-  //   eventTestCase,
-  //   traitTestCase,
-  //   dropItemTestCase,
+  shopTestCase,
+  enemyTestCase,
+  enemyActionTestCase,
+  eventTestCase,
+  traitTestCase,
+  dropItemTestCase,
 ];
 
 describe("structToJsonPath2", () => {
   testCases.forEach((testCase) => {
-    test.skip("createPath", () => {
-      const structPath = createPathFromSchema(
-        testCase.schema,
-        "$",
-        makeStructMap()
-      );
-      expect(structPath).toEqual(testCase.paths);
+    describe(testCase.caseName, () => {
+      test("createPath", () => {
+        const structPath = createPathFromSchema(
+          testCase.schema,
+          "$",
+          makeStructMap()
+        );
+        expect(structPath.scalaArrays).toEqual(testCase.paths.scalaArrays);
+        expect(structPath.scalas).toEqual(testCase.paths.scalas);
+        expect(structPath.structs).toEqual(testCase.paths.structs);
+        expect(structPath.structArrays).toEqual(testCase.paths.structArrays);
+        expect(structPath).toEqual(testCase.paths);
+      });
     });
   });
 });
