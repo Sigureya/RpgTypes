@@ -1,5 +1,5 @@
 import type { ParamBase } from "./paramBase";
-import type { PrimitiveParam } from "./primitiveParams";
+import type { PrimitiveParam } from "./paramUnion";
 
 // 各パラメータ型のユニオン
 export type StructParam =
