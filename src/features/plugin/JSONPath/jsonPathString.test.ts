@@ -91,6 +91,14 @@ describe("JSONPathType nested", () => {
     const value = path.find(mockFamily);
     expect(value).toEqual([1, 2, 3]);
   });
+
+  test("array param children", () => {
+    const mockPath: JSONPathType<Family> = "$.children";
+    const path = new JSONPathJS(mockPath);
+    const value = path.find(mockFamily);
+    expect(value).toEqual([mockFamily.children]);
+  });
+
   test("array param children age with wildcard", () => {
     const mockPath: JSONPathType<Family> = "$.children[*].age";
     const path = new JSONPathJS(mockPath);
