@@ -3,26 +3,30 @@ import type { ClassifiedPluginParams } from "@RpgTypes/rmmz/plugin/classifyTypes
 import type { ParamJSONPath, ParamJSONPathSturct } from "./types/types";
 
 // パラメータからJSONPath情報を生成
-function makeScalaPaths(
-  scalas: PluginParam<PrimitiveParam>[],
+const makeScalaPaths = (
+  scalas: ReadonlyArray<PluginParam<PrimitiveParam>>,
   root: string
-): ParamJSONPath[] {
-  return scalas.map((param) => ({
-    parent: root,
-    param,
-    path: `${root}.${param.name}`,
-  }));
-}
+): ParamJSONPath[] => {
+  return scalas.map(
+    (param): ParamJSONPath => ({
+      parent: root,
+      param,
+      path: `${root}.${param.name}`,
+    })
+  );
+};
 
 function makeScalaArrayPaths(
-  scalaArrays: PluginParam<PrimitiveParam>[],
+  scalaArrays: ReadonlyArray<PluginParam<PrimitiveParam>>,
   root: string
 ): ParamJSONPath[] {
-  return scalaArrays.map((param) => ({
-    parent: root,
-    param,
-    path: `${root}.${param.name}[*]`,
-  }));
+  return scalaArrays.map(
+    (param): ParamJSONPath => ({
+      parent: root,
+      param,
+      path: `${root}.${param.name}[*]`,
+    })
+  );
 }
 
 function makeStructPaths(
@@ -99,7 +103,7 @@ export const createPathFromSchema = (
   structMap: ReadonlyMap<string, ClassifiedPluginParams>
 ): ParamJSONPathSturct => {
   return {
-    struct: structMap.has(schema.structName) ? schema.structName : "",
+    struct: "",
     scalas: makeScalaPaths(schema.scalas ?? [], root),
     scalaArrays: makeScalaArrayPaths(schema.scalaArrays ?? [], root),
     structs: makeStructPaths(schema.structs ?? [], root, structMap),
