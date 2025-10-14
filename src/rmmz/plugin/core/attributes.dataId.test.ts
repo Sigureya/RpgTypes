@@ -1,11 +1,12 @@
 import { describe, expect, test } from "vitest";
 import type { ParamSoruceRecord } from "./attributes";
 import { compileAttributes } from "./attributes";
+import type { PrimitiveParam } from "./paramUnion";
 import type { PluginParamTokens } from "./parse/types/types";
-import type { RpgDataIdParam, PrimitiveParam } from "./primitiveParams";
+import type { RpgDataIdParam } from "./primitiveParams";
 
-describe("", () => {
-  test("", () => {
+describe("compileAttributes - dataId", () => {
+  test("enemy", () => {
     const mock: PluginParamTokens = {
       name: "attr",
       attr: {

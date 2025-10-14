@@ -1,12 +1,12 @@
 import type { MappingTable } from "./mapping/mapping";
 import { compileParam, compileArrayParam } from "./mapping/mapping";
+import type { PrimitiveParam } from "./paramUnion";
 import { KEYWORD_KIND } from "./parse/types/keyword/constants";
 import type { OptionItem } from "./parse/types/selectOption";
 import type { PluginParamTokens } from "./parse/types/types";
 import type {
   BooleanParam,
   NumberParam,
-  PrimitiveParam,
   FileParam,
   GenericIdParam,
   NumberArrayParam,
