@@ -17,7 +17,7 @@ export interface StructPathXX {
 export const xxxStruct = (
   params: ClassifiedPluginParams,
   parent: string,
-  structMap: ReadonlyMap<string, PluginStructSchemaArray> = new Map(),
+  structMap: ReadonlyMap<string, ClassifiedPluginParams> = new Map(),
   visited: ReadonlySet<string> = new Set()
 ): StructPathXX => {
   const scala = params.scalas.map((p) => scalaParamPath(p, parent));
