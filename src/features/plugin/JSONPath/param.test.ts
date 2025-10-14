@@ -7,6 +7,7 @@ import type {
 } from "@RpgTypes/rmmz/plugin";
 import type { PluginParamType2 } from "@RpgTypes/rmmz/plugin/core/pluginSchemaType";
 import { JSONPathJS } from "jsonpath-js";
+import type { JSONPathType } from "./jsonPathString";
 import {
   arrayParamPath,
   scalaParamPath,
@@ -19,6 +20,10 @@ interface Person {
   name: string;
   age: number;
   items: number[];
+}
+
+interface TraitContainer {
+  traits: Trait[];
 }
 
 const mockStruct = [
@@ -44,7 +49,7 @@ const mockPerson = {
 
 describe("scalaParamPath ", () => {
   describe("number param age", () => {
-    const mockPath = "$.age";
+    const mockPath: JSONPathType<Person> = "$.age";
     test("create", () => {
       const result: ParamJSONPath = scalaParamPath(mockStruct[0], "$");
       const expected: ParamJSONPath = {
@@ -63,7 +68,7 @@ describe("scalaParamPath ", () => {
   });
 
   describe("string param name", () => {
-    const mockPath = "$.name";
+    const mockPath: JSONPathType<Person> = "$.name";
     test("create", () => {
       const result: ParamJSONPath = scalaParamPath(mockStruct[1], "$");
       const expected: ParamJSONPath = {
@@ -84,7 +89,7 @@ describe("scalaParamPath ", () => {
 
 describe("arrayParamPath ", () => {
   describe("item[] param items", () => {
-    const mockPath = "$.items[*]";
+    const mockPath: JSONPathType<Person> = "$.items[*]";
     test("create", () => {
       const result = arrayParamPath(mockStruct[2], "$");
       const expected: ParamJSONPath = {
@@ -130,7 +135,7 @@ describe("structParamPath", () => {
 });
 
 describe("structArrayParamPath", () => {
-  const path = "$.traits[*]";
+  const path: JSONPathType<TraitContainer> = "$.traits[*]";
   test("create", () => {
     const param: PluginParam<StructArrayRefParam> = {
       name: "traits",
