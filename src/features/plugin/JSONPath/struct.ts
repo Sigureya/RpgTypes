@@ -1,4 +1,9 @@
-import type { PluginParam, PrimitiveParam } from "@RpgTypes/rmmz/plugin";
+import type {
+  PluginParam,
+  PrimitiveParam,
+  StructArrayRefParam,
+  StructRefParam,
+} from "@RpgTypes/rmmz/plugin";
 import type { ClassifiedPluginParams } from "@RpgTypes/rmmz/plugin/classifyTypes";
 import type { ParamJSONPath, ParamJSONPathSturct } from "./types/types";
 
@@ -30,71 +35,77 @@ function makeScalaArrayPaths(
 }
 
 function makeStructPaths(
-  structs: PluginParam<PrimitiveParam>[],
+  structs: PluginParam<StructRefParam>[],
   root: string,
   structMap: ReadonlyMap<string, ClassifiedPluginParams>
 ): ParamJSONPath[] {
-  const result: ParamJSONPath[] = [];
-  for (const struct of structs) {
+  return structs.reduce<ParamJSONPath[]>((result, struct) => {
     const structSchema = structMap.get(struct.attr.struct);
     if (!structSchema) {
-      continue;
+      return result;
     }
     // スカラー
-    for (const param of structSchema.scalas ?? []) {
-      result.push({
-        parent: root,
-        param,
-        path: `${root}.${struct.name}.${param.name}`,
-      });
-    }
+    result.push(
+      ...(structSchema.scalas ?? []).map(
+        (param): ParamJSONPath => ({
+          parent: root,
+          param,
+          path: `${root}.${struct.name}.${param.name}`,
+        })
+      )
+    );
     // 構造体（ネストは未対応）
-    for (const param of structSchema.structs ?? []) {
-      result.push({
-        parent: root,
-        param,
-        path: `${root}.${struct.name}.${param.name}`,
-      });
-    }
-  }
-  return result;
+    result.push(
+      ...(structSchema.structs ?? []).map(
+        (param): ParamJSONPath => ({
+          parent: root,
+          param,
+          path: `${root}.${struct.name}.${param.name}`,
+        })
+      )
+    );
+    return result;
+  }, []);
 }
 
 function makeStructArrayPaths(
-  structArrays: PluginParam<PrimitiveParam>[],
+  structArrays: PluginParam<StructArrayRefParam>[],
   root: string,
   structMap: ReadonlyMap<string, ClassifiedPluginParams>
 ): ParamJSONPath[] {
-  const result: ParamJSONPath[] = [];
-  for (const structArr of structArrays) {
+  return structArrays.reduce<ParamJSONPath[]>((result, structArr) => {
     const structSchema = structMap.get(structArr.attr.struct);
     if (!structSchema) {
-      continue;
+      return result;
     }
     // スカラー
-    for (const param of structSchema.scalas ?? []) {
-      result.push({
-        parent: root,
-        param,
-        path: `${root}.${structArr.name}[*].${param.name}`,
-      });
-    }
-    // 構造体（ネスト対応: さらにstructArraysがあれば再帰）
-    for (const param of structSchema.structArrays ?? []) {
-      const nestedSchema = structMap.get(param.attr.struct);
-      if (!nestedSchema) {
-        continue;
-      }
-      for (const nestedParam of nestedSchema.scalas ?? []) {
-        result.push({
+    result.push(
+      ...(structSchema.scalas ?? []).map(
+        (param): ParamJSONPath => ({
           parent: root,
-          param: nestedParam,
-          path: `${root}.${structArr.name}[*].${param.name}[*].${nestedParam.name}`,
-        });
-      }
-    }
-  }
-  return result;
+          param,
+          path: `${root}.${structArr.name}[*].${param.name}`,
+        })
+      )
+    );
+    // 構造体（ネスト対応: さらにstructArraysがあれば再帰）
+    result.push(
+      ...(structSchema.structArrays ?? []).flatMap((param): ParamJSONPath[] => {
+        const nestedSchema = structMap.get(param.attr.struct);
+        if (!nestedSchema) {
+          return [];
+        }
+        return (nestedSchema.scalas ?? []).map(
+          (nestedParam): ParamJSONPath => ({
+            parent: root,
+            param: nestedParam,
+            path: `${root}.${structArr.name}[*].${param.name}[*].${nestedParam.name}`,
+          })
+        );
+      })
+    );
+    return result;
+  }, []);
 }
 
 export const createPathFromSchema = (
