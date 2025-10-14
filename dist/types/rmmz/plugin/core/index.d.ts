@@ -1,6 +1,8 @@
+export type * from './paramUnion';
 export type * from './pluginEntriesEx';
 export type * from './pluginEntryTypes';
 export type * from './pluginJSONTypes';
+export type * from './pluginSchemaType';
 export type * from './primitiveParams';
 export type * from './rpgData/rpgDataTypesNames';
 export type * from './types';

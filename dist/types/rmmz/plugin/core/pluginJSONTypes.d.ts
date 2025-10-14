@@ -1,5 +1,5 @@
+import { PrimitiveParam } from './paramUnion';
 import { PluginDependencies } from './parse/types/pluginDependencies';
-import { PrimitiveParam } from './primitiveParams';
 import { PluginStructBodyTemplate } from './struct/types';
 export interface PluginJSON {
     target: string;

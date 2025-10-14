@@ -1,4 +1,5 @@
-import { BooleanParam, StructArrayRefParam, StructRefParam, PrimitiveParam, AnyStringParam } from './primitiveParams';
+import { PrimitiveParam } from './paramUnion';
+import { BooleanParam, StructArrayRefParam, StructRefParam, AnyStringParam } from './primitiveParams';
 export interface PrimitiveStructBase {
     struct: string;
     params: Record<string, PrimitiveParam>;
@@ -6,6 +7,12 @@ export interface PrimitiveStructBase {
 export type PrimitiveStructParams<T extends object> = {
     [K in Extract<keyof T, string>]: PluginSchemaType<T[K]>;
 };
+export type PluginParamType2<T> = {
+    [K in Extract<keyof T, string>]: {
+        name: K;
+        attr: PluginSchemaType<T[K]>;
+    };
+}[Extract<keyof T, string>];
 export type PluginSchemaType<T> = T extends boolean ? BooleanParam : T extends number ? Extract<PrimitiveParam, {
     default: number;
 }> : T extends string ? Extract<Exclude<PrimitiveParam, AnyStringParam>, {
