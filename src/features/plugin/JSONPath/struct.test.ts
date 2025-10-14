@@ -4,9 +4,8 @@ import type {
   ClassifiedPluginParams,
   ClassifiedPluginParamsEx,
 } from "@RpgTypes/rmmz/plugin/classifyTypes";
-import type { StructPathXX } from "./struct";
-import { xxxStruct } from "./struct";
-import type { ParamJSONPathSturctEx } from "./types/types";
+import { createPathFromSchema } from "./struct";
+import type { ParamJSONPathSturct, ParamJSONPathSturctEx } from "./types/types";
 
 interface Enemy {
   name: string;
@@ -391,13 +390,12 @@ const testCases = [
 describe("structToJsonPath2", () => {
   testCases.forEach((testCase) => {
     test.skip("createPath", () => {
-      const structPath: StructPathXX = xxxStruct(
+      const structPath = createPathFromSchema(
         testCase.schema,
         "$",
         makeStructMap()
       );
-      //   expect(structPath).toBe(testCase.paths.struct);
-      //   expect(structPath).toEqual(testCase.paths);
+      expect(structPath).toEqual(testCase.paths);
     });
   });
 });
