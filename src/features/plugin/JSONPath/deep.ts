@@ -1,6 +1,6 @@
 import { JSONPathJS } from "jsonpath-js";
-import type { Json } from "./jsonTypes";
-import type { ParamJSONPath, ParamJSONPathSturct } from "./types";
+import type { Json } from "./types/jsonTypes";
+import type { ParamJSONPath, ParamJSONPathSturct } from "./types/types";
 
 export interface JsonValueEx {
   value: Json;
