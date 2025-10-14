@@ -1,7 +1,7 @@
 import type {
   ParamKinds,
-  PluginCommandSchemaArray,
   PluginSchemaArray,
+  PluginCommandSchemaArray,
 } from "@RpgTypes/rmmz/plugin";
 import { collectStructsByKinds } from "./collectStructs/collectStructs";
 import type { ReadonlyStructCollection } from "./collectStructs/types";
@@ -46,7 +46,7 @@ export const filterPluginCommand = (
   commandList: ReadonlyArray<PluginCommandSchemaArray>,
   criteria: ParamFilterCriteria
 ): PluginParamGroups[] => {
-  return commandList.reduce((acc, cmd): PluginParamGroups[] => {
+  return commandList.reduce<PluginParamGroups[]>((acc, cmd) => {
     const group = filterParams2(cmd.args, criteria);
     return isEmptyParamGroup(group) ? acc : acc.concat(group);
   }, []);
