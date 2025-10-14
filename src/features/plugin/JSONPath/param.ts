@@ -10,10 +10,10 @@ import type { ParamJSONPath } from "./types";
 export const scalaParamPath = (
   param: PluginParam<ScalaParam>,
   parent: string
-): ParamJSONPath => {
+): ParamJSONPath<PluginParam<ScalaParam>> => {
   return {
     parent: parent,
-    path: [parent, ".", param.name].join(""),
+    path: `${parent}.${param.name}`,
     param: param,
   };
 };
@@ -24,7 +24,7 @@ export const arrayParamPath = (
 ): ParamJSONPath<PluginParam<ArrayParamTypes>> => {
   return {
     parent: parent,
-    path: [parent, ".", param.name, "[*]"].join(""),
+    path: `${parent}.${param.name}[*]`,
     param: param,
   };
 };
