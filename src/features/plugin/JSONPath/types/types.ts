@@ -9,8 +9,10 @@ export interface ParamJSONPath<Param = PluginParam<PrimitiveParam>> {
 
 export interface ParamJSONPathSturct {
   struct: string;
-  scala: ParamJSONPath[];
-  params: ParamJSONPath[];
+  scalas: ParamJSONPath[];
+  structs: ParamJSONPath[];
+  structArrays: ParamJSONPath[];
+  scalaArrays: ParamJSONPath[];
 }
 
 export interface ParamJSONPath2<T> {
@@ -19,10 +21,10 @@ export interface ParamJSONPath2<T> {
   param: PluginParam<PrimitiveParam>;
 }
 
-export interface ParamJSONPathSturct2<T> {
+export interface ParamJSONPathSturctEx<T> extends ParamJSONPathSturct {
   struct: string;
-  scala: ParamJSONPath2<T>[];
+  scalas: ParamJSONPath2<T>[];
   structs: ParamJSONPath2<T>[];
   structArrays: ParamJSONPath2<T>[];
-  sclaArrays: ParamJSONPath2<T>[];
+  scalaArrays: ParamJSONPath2<T>[];
 }
