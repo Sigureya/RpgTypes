@@ -1,6 +1,6 @@
 import { test, expect, describe } from "vitest";
 import type { ParamFilter } from "./paramFilter";
-import { ppp, createParamFilter } from "./paramFilter";
+import { createParamFilter } from "./paramFilter";
 
 describe("createParamFilter", () => {
   const eeFilter: ParamFilter<"boolean" | "number"> = {
