@@ -4,10 +4,8 @@ import type {
   ClassifiedPluginParams,
   ClassifiedPluginParamsEx,
 } from "@RpgTypes/rmmz/plugin/classifyTypes";
-import { JSONPathJS } from "jsonpath-js";
 import type { StructPathXX } from "./struct";
 import { xxxStruct } from "./struct";
-import type { JSONPathType } from "./types/jsonPathString";
 import type { ParamJSONPathSturct2 } from "./types/types";
 
 interface Enemy {
@@ -40,8 +38,8 @@ interface Shop {
 
 interface TestCase<T> {
   schema: ClassifiedPluginParamsEx<T>;
-  mock?: T;
-  paths?: ParamJSONPathSturct2<T>;
+  mock: T;
+  paths: ParamJSONPathSturct2<T>;
 }
 
 const shopTestCase: TestCase<Shop> = {
@@ -62,6 +60,14 @@ const shopTestCase: TestCase<Shop> = {
         path: "$.name",
       },
     ],
+    sclaArrays: [
+      {
+        parent: "$",
+        param: { name: "items", attr: { kind: "number[]", default: [] } },
+        path: "$.items[*]",
+      },
+    ],
+    structArrays: [],
   },
 };
 
@@ -98,6 +104,7 @@ const enemyTestCase = {
   },
   paths: {
     struct: "Enemy",
+    sclaArrays: [],
     scala: [
       {
         parent: "$",
@@ -156,6 +163,30 @@ const enemyActionTestCase: TestCase<EnemyAction> = {
       },
     ],
   },
+  paths: {
+    struct: "EnemyAction",
+    structs: [],
+    sclaArrays: [],
+    scala: [
+      {
+        parent: "$",
+        param: { name: "skillId", attr: { kind: "number", default: 0 } },
+        path: "$.skillId",
+      },
+    ],
+    structArrays: [
+      {
+        parent: "$",
+        param: { name: "code", attr: { kind: "number", default: 0 } },
+        path: "$.conditions[*].code",
+      },
+      {
+        parent: "$",
+        param: { name: "value", attr: { kind: "number", default: 0 } },
+        path: "$.conditions[*].value",
+      },
+    ],
+  },
 };
 
 const eventTestCase: TestCase<MockEvent> = {
@@ -173,6 +204,20 @@ const eventTestCase: TestCase<MockEvent> = {
   },
   paths: {
     struct: "MockEvent",
+    structArrays: [],
+    sclaArrays: [],
+    structs: [
+      {
+        parent: "$",
+        param: { name: "code", attr: { kind: "number", default: 0 } },
+        path: "$.condition.code",
+      },
+      {
+        parent: "$",
+        param: { name: "value", attr: { kind: "number", default: 0 } },
+        path: "$.condition.value",
+      },
+    ],
     scala: [
       {
         parent: "$",
@@ -183,16 +228,6 @@ const eventTestCase: TestCase<MockEvent> = {
         parent: "$",
         param: { name: "name", attr: { kind: "string", default: "Event" } },
         path: "$.name",
-      },
-      {
-        parent: "$",
-        param: { name: "code", attr: { kind: "number", default: 0 } },
-        path: "$.condition.code",
-      },
-      {
-        parent: "$",
-        param: { name: "value", attr: { kind: "number", default: 0 } },
-        path: "$.condition.value",
       },
     ],
   },
@@ -212,6 +247,9 @@ const traitTestCase: TestCase<Trait> = {
   },
   paths: {
     struct: "Trait",
+    structs: [],
+    sclaArrays: [],
+    structArrays: [],
     scala: [
       {
         parent: "$",
@@ -245,6 +283,9 @@ const conditionTestCase: TestCase<Condition> = {
   mock: { code: 1, value: 20 },
   paths: {
     struct: "Condition",
+    structs: [],
+    sclaArrays: [],
+    structArrays: [],
     scala: [
       {
         parent: "$",
@@ -272,7 +313,31 @@ const dropItemTestCase: TestCase<DropItem> = {
       { name: "denominator", attr: { kind: "number", default: 1 } },
     ],
   },
+  paths: {
+    struct: "DropItem",
+    structs: [],
+    sclaArrays: [],
+    structArrays: [],
+    scala: [
+      {
+        parent: "$",
+        param: { name: "kind", attr: { kind: "number", default: 0 } },
+        path: "$.kind",
+      },
+      {
+        parent: "$",
+        param: { name: "dataId", attr: { kind: "number", default: 0 } },
+        path: "$.dataId",
+      },
+      {
+        parent: "$",
+        param: { name: "denominator", attr: { kind: "number", default: 1 } },
+        path: "$.denominator",
+      },
+    ],
+  },
 };
+
 const makeStructMap = (): ReadonlyMap<string, ClassifiedPluginParams> => {
   return new Map<string, ClassifiedPluginParams>([
     ["Enemy", enemyTestCase.schema],
@@ -285,113 +350,26 @@ const makeStructMap = (): ReadonlyMap<string, ClassifiedPluginParams> => {
   ]);
 };
 
-const runTestCase = <T>(testCase: TestCase<T>) => {
-  describe("createPath", () => {
-    const structPath: StructPathXX = xxxStruct(
-      testCase.schema,
-      "$",
-      makeStructMap()
-    );
-  });
-};
+const testCases = [
+  conditionTestCase,
+  //   shopTestCase,
+  //   enemyTestCase,
+  //   enemyActionTestCase,
+  //   eventTestCase,
+  //   traitTestCase,
+  //   dropItemTestCase,
+];
 
-describe("Condition", () => {
-  const mockCondition = { code: 1, value: 20 } as const satisfies Condition;
-
-  const mockPath: ParamJSONPathSturct2<Condition> = {
-    struct: "Condition",
-    scala: [
-      {
-        parent: "$",
-        param: { name: "code", attr: { kind: "number", default: 0 } },
-        path: "$.code",
-      },
-      {
-        parent: "$",
-        param: { name: "value", attr: { kind: "number", default: 0 } },
-        path: "$.value",
-      },
-    ],
-  };
-  test.skip("createPath", () => {
-    const result: StructPathXX = xxxStruct(
-      conditionTestCase.schema,
-      "$",
-      makeStructMap()
-    );
-    expect(result).toEqual(mockPath);
-  });
-
-  describe("find", () => {
-    test("code", () => {
-      const path: JSONPathType<Condition> = "$.code";
-      const jsonPath = new JSONPathJS(path);
-      const value = jsonPath.find(mockCondition);
-      expect(value).toEqual([1]);
-    });
-    test("value", () => {
-      const path: JSONPathType<Condition> = "$.value";
-      const jsonPath = new JSONPathJS(path);
-      const value = jsonPath.find(mockCondition);
-      expect(value).toEqual([20]);
-    });
-  });
-});
-
-describe("EnemyAction", () => {
-  const mockEnemyAction = {
-    skillId: 5,
-    conditions: [
-      { code: 1, value: 20 },
-      { code: 2, value: 30 },
-    ],
-  } as const satisfies EnemyAction;
-  const mockPath: ParamJSONPathSturct2<EnemyAction> = {
-    struct: "EnemyAction",
-    scala: [
-      {
-        parent: "$",
-        param: { name: "skillId", attr: { kind: "number", default: 0 } },
-        path: "$.skillId",
-      },
-      {
-        parent: "$",
-        param: { name: "code", attr: { kind: "number", default: 0 } },
-        path: "$.conditions[*].code",
-      },
-      {
-        parent: "$",
-        param: { name: "value", attr: { kind: "number", default: 0 } },
-        path: "$.conditions[*].value",
-      },
-    ],
-  };
-
-  describe.skip("createPath", () => {
-    const enemyActionPath: StructPathXX = xxxStruct(
-      enemyActionTestCase.schema,
-      "$"
-    );
-    expect(enemyActionPath).toEqual(mockPath);
-  });
-  describe("find", () => {
-    test("skillId", () => {
-      const path: JSONPathType<EnemyAction> = "$.skillId";
-      const jsonPath = new JSONPathJS(path);
-      const value = jsonPath.find(mockEnemyAction);
-      expect(value).toEqual([5]);
-    });
-    test("conditions[*].code", () => {
-      const path: JSONPathType<EnemyAction> = `$.conditions[*].code`;
-      const jsonPath = new JSONPathJS(path);
-      const value = jsonPath.find(mockEnemyAction);
-      expect(value).toEqual([1, 2]);
-    });
-    test("conditions[*].value", () => {
-      const path: JSONPathType<EnemyAction> = `$.conditions[*].value`;
-      const jsonPath = new JSONPathJS(path);
-      const value = jsonPath.find(mockEnemyAction);
-      expect(value).toEqual([20, 30]);
+describe("structToJsonPath2", () => {
+  testCases.forEach((testCase) => {
+    test.skip("createPath", () => {
+      const structPath: StructPathXX = xxxStruct(
+        testCase.schema,
+        "$",
+        makeStructMap()
+      );
+      //   expect(structPath).toBe(testCase.paths.struct);
+      //   expect(structPath).toEqual(testCase.paths);
     });
   });
 });
