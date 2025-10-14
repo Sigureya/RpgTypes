@@ -8,10 +8,10 @@ import type { ClassifiedPluginParams } from "@RpgTypes/rmmz/plugin/classifyTypes
 import type { ParamJSONPath, ParamJSONPathSturct } from "./types/types";
 
 // パラメータからJSONPath情報を生成
-const makeScalaPaths = (
+function makeScalaPaths(
   scalas: ReadonlyArray<PluginParam<PrimitiveParam>>,
   root: string
-): ParamJSONPath[] => {
+): ParamJSONPath[] {
   return scalas.map(
     (param): ParamJSONPath => ({
       parent: root,
@@ -19,7 +19,7 @@ const makeScalaPaths = (
       path: `${root}.${param.name}`,
     })
   );
-};
+}
 
 function makeScalaArrayPaths(
   scalaArrays: ReadonlyArray<PluginParam<PrimitiveParam>>,
@@ -35,7 +35,7 @@ function makeScalaArrayPaths(
 }
 
 function makeStructPaths(
-  structs: PluginParam<StructRefParam>[],
+  structs: ReadonlyArray<PluginParam<StructRefParam>>,
   root: string,
   structMap: ReadonlyMap<string, ClassifiedPluginParams>
 ): ParamJSONPath[] {
