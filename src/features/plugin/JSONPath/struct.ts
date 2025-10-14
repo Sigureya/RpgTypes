@@ -1,7 +1,12 @@
+import type { PluginParam, PrimitiveParam } from "@RpgTypes/rmmz/plugin";
 import type { ClassifiedPluginParams } from "@RpgTypes/rmmz/plugin/classifyTypes";
+import type { ParamJSONPath, ParamJSONPathSturct } from "./types/types";
 
 // パラメータからJSONPath情報を生成
-function makeScalaPaths(scalas: any[], root: string) {
+function makeScalaPaths(
+  scalas: PluginParam<PrimitiveParam>[],
+  root: string
+): ParamJSONPath[] {
   return scalas.map((param) => ({
     parent: root,
     param,
@@ -9,7 +14,10 @@ function makeScalaPaths(scalas: any[], root: string) {
   }));
 }
 
-function makeScalaArrayPaths(scalaArrays: any[], root: string) {
+function makeScalaArrayPaths(
+  scalaArrays: PluginParam<PrimitiveParam>[],
+  root: string
+): ParamJSONPath[] {
   return scalaArrays.map((param) => ({
     parent: root,
     param,
@@ -18,11 +26,11 @@ function makeScalaArrayPaths(scalaArrays: any[], root: string) {
 }
 
 function makeStructPaths(
-  structs: any[],
+  structs: PluginParam<PrimitiveParam>[],
   root: string,
   structMap: ReadonlyMap<string, ClassifiedPluginParams>
-) {
-  const result: any[] = [];
+): ParamJSONPath[] {
+  const result: ParamJSONPath[] = [];
   for (const struct of structs) {
     const structSchema = structMap.get(struct.attr.struct);
     if (!structSchema) {
@@ -49,11 +57,11 @@ function makeStructPaths(
 }
 
 function makeStructArrayPaths(
-  structArrays: any[],
+  structArrays: PluginParam<PrimitiveParam>[],
   root: string,
   structMap: ReadonlyMap<string, ClassifiedPluginParams>
-) {
-  const result: any[] = [];
+): ParamJSONPath[] {
+  const result: ParamJSONPath[] = [];
   for (const structArr of structArrays) {
     const structSchema = structMap.get(structArr.attr.struct);
     if (!structSchema) {
@@ -89,7 +97,7 @@ export const createPathFromSchema = (
   schema: ClassifiedPluginParams,
   root: string,
   structMap: ReadonlyMap<string, ClassifiedPluginParams>
-) => {
+): ParamJSONPathSturct => {
   return {
     struct: structMap.has(schema.structName) ? schema.structName : "",
     scalas: makeScalaPaths(schema.scalas ?? [], root),
