@@ -85,12 +85,12 @@ describe("JSONPathType nested", () => {
     const value = path.find(mockFamily);
     expect(value).toEqual([[1, 2, 3]]);
   });
-  //   test("array param items with wildcard", () => {
-  //     const mockPath: JSONPathType<Family> = "$.father.items[*]";
-  //     const path = new JSONPathJS(mockPath);
-  //     const value = path.find(mockFamily);
-  //     expect(value).toEqual([1, 2, 3]);
-  //   });
+  // test("array param items with wildcard", () => {
+  //   const mockPath: JSONPathType<Family> = "$.father.items[*]";
+  //   const path = new JSONPathJS(mockPath);
+  //   const value = path.find(mockFamily);
+  //   expect(value).toEqual([1, 2, 3]);
+  // });
   test("array param children age with wildcard", () => {
     const mockPath: JSONPathType<Family> = "$.children[*].age";
     const path = new JSONPathJS(mockPath);
@@ -102,6 +102,22 @@ describe("JSONPathType nested", () => {
     const path = new JSONPathJS(mockPath);
     const value = path.find(mockFamily);
     const expected: string[] = ["Charlie", "Daisy"];
+    expect(value).toEqual(expected);
+  });
+
+  test("array param children items with wildcard", () => {
+    const mockPath: JSONPathType<Family> = "$.children[*].items";
+    const path = new JSONPathJS(mockPath);
+    const value = path.find(mockFamily);
+    const expected: number[][] = [[7, 8], [9]];
+    expect(value).toEqual(expected);
+  });
+
+  test("array param children items with wildcard", () => {
+    const mockPath: JSONPathType<Family> = "$.children[*].items[*]";
+    const path = new JSONPathJS(mockPath);
+    const value = path.find(mockFamily);
+    const expected: number[] = [7, 8, 9];
     expect(value).toEqual(expected);
   });
 });
