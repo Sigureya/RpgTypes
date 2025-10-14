@@ -379,12 +379,12 @@ const makeStructMap = (): ReadonlyMap<string, ClassifiedPluginParams> => {
 
 const testCases = [
   conditionTestCase,
-  //   shopTestCase,
-  //   enemyTestCase,
-  //   enemyActionTestCase,
-  //   eventTestCase,
-  //   traitTestCase,
-  //   dropItemTestCase,
+  shopTestCase,
+  enemyTestCase,
+  enemyActionTestCase,
+  eventTestCase,
+  traitTestCase,
+  dropItemTestCase,
 ];
 
 describe("structToJsonPath2", () => {
