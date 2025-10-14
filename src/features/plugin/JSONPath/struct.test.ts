@@ -6,7 +6,7 @@ import type {
 } from "@RpgTypes/rmmz/plugin/classifyTypes";
 import type { StructPathXX } from "./struct";
 import { xxxStruct } from "./struct";
-import type { ParamJSONPathSturct2 } from "./types/types";
+import type { ParamJSONPathSturctEx } from "./types/types";
 
 interface Enemy {
   name: string;
@@ -39,7 +39,7 @@ interface Shop {
 interface TestCase<T> {
   schema: ClassifiedPluginParamsEx<T>;
   mock: T;
-  paths: ParamJSONPathSturct2<T>;
+  paths: ParamJSONPathSturctEx<T>;
 }
 
 const shopTestCase: TestCase<Shop> = {
@@ -53,14 +53,14 @@ const shopTestCase: TestCase<Shop> = {
   paths: {
     struct: "Shop",
     structs: [],
-    scala: [
+    scalas: [
       {
         parent: "$",
         param: { name: "name", attr: { kind: "string", default: "Shop" } },
         path: "$.name",
       },
     ],
-    sclaArrays: [
+    scalaArrays: [
       {
         parent: "$",
         param: { name: "items", attr: { kind: "number[]", default: [] } },
@@ -77,7 +77,10 @@ const enemyTestCase = {
     id: 1,
     traits: [{ code: 11, dataId: 81, value: 123 }],
     dropItem: { kind: 1, dataId: 2, denominator: 3 },
-    actions: [{ skillId: 5, conditions: [{ code: 1, value: 20 }] }],
+    actions: [
+      { skillId: 3, conditions: [{ code: 2, value: 275 }] },
+      { skillId: 6, conditions: [{ code: 5, value: 320 }] },
+    ],
   },
   schema: {
     scalaArrays: [],
@@ -104,8 +107,8 @@ const enemyTestCase = {
   },
   paths: {
     struct: "Enemy",
-    sclaArrays: [],
-    scala: [
+    scalaArrays: [],
+    scalas: [
       {
         parent: "$",
         param: { name: "name", attr: { kind: "string", default: "Gobrin" } },
@@ -140,6 +143,31 @@ const enemyTestCase = {
         param: { name: "code", attr: { kind: "number", default: 0 } },
         path: "$.traits[*].code",
       },
+      {
+        parent: "$",
+        param: { name: "dataId", attr: { kind: "number", default: 0 } },
+        path: "$.traits[*].dataId",
+      },
+      {
+        parent: "$",
+        param: { name: "value", attr: { kind: "number", default: 0 } },
+        path: "$.traits[*].value",
+      },
+      {
+        parent: "$",
+        param: { name: "skillId", attr: { kind: "number", default: 0 } },
+        path: "$.actions[*].skillId",
+      },
+      {
+        parent: "$",
+        param: { name: "code", attr: { kind: "number", default: 0 } },
+        path: "$.actions[*].conditions[*].code",
+      },
+      {
+        parent: "$",
+        param: { name: "value", attr: { kind: "number", default: 0 } },
+        path: "$.actions[*].conditions[*].value",
+      },
     ],
   },
 } as const satisfies TestCase<Enemy>;
@@ -166,8 +194,8 @@ const enemyActionTestCase: TestCase<EnemyAction> = {
   paths: {
     struct: "EnemyAction",
     structs: [],
-    sclaArrays: [],
-    scala: [
+    scalaArrays: [],
+    scalas: [
       {
         parent: "$",
         param: { name: "skillId", attr: { kind: "number", default: 0 } },
@@ -205,7 +233,7 @@ const eventTestCase: TestCase<MockEvent> = {
   paths: {
     struct: "MockEvent",
     structArrays: [],
-    sclaArrays: [],
+    scalaArrays: [],
     structs: [
       {
         parent: "$",
@@ -218,7 +246,7 @@ const eventTestCase: TestCase<MockEvent> = {
         path: "$.condition.value",
       },
     ],
-    scala: [
+    scalas: [
       {
         parent: "$",
         param: { name: "id", attr: { kind: "number", default: 1 } },
@@ -248,9 +276,9 @@ const traitTestCase: TestCase<Trait> = {
   paths: {
     struct: "Trait",
     structs: [],
-    sclaArrays: [],
+    scalaArrays: [],
     structArrays: [],
-    scala: [
+    scalas: [
       {
         parent: "$",
         param: { name: "code", attr: { kind: "number", default: 0 } },
@@ -284,9 +312,9 @@ const conditionTestCase: TestCase<Condition> = {
   paths: {
     struct: "Condition",
     structs: [],
-    sclaArrays: [],
+    scalaArrays: [],
     structArrays: [],
-    scala: [
+    scalas: [
       {
         parent: "$",
         param: { name: "code", attr: { kind: "number", default: 0 } },
@@ -316,9 +344,9 @@ const dropItemTestCase: TestCase<DropItem> = {
   paths: {
     struct: "DropItem",
     structs: [],
-    sclaArrays: [],
+    scalaArrays: [],
     structArrays: [],
-    scala: [
+    scalas: [
       {
         parent: "$",
         param: { name: "kind", attr: { kind: "number", default: 0 } },
