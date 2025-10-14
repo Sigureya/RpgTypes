@@ -11,7 +11,7 @@ type JSONPathNested<T extends object, Parent extends string> =
         | (T[K] extends object
             ? T[K] extends unknown[]
               ? `${Parent}.${K & string}${ArrayAccsess}`
-              : JSONPathNested<T[K], `${Parent}.${K & string}`>
+              : ValueOf<JSONPathNested<T[K], `${Parent}.${K & string}`>>
             : never)
         | (T[K] extends Array<infer U>
             ?
@@ -23,5 +23,5 @@ type JSONPathNested<T extends object, Parent extends string> =
                         JSONPathNested<U, `${Parent}.${K}${ArrayAccsess}`>
                       >
                     : never)
-            : `${Parent}.${K}.${Extract<keyof T[K], string>}`);
+            : never);
     };
