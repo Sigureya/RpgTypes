@@ -2,12 +2,11 @@ import { describe, test, expect } from "vitest";
 import type { Trait } from "@RpgTypes/rmmz";
 import type {
   PluginParam,
+  PluginParamType2,
   StructArrayRefParam,
   StructRefParam,
 } from "@RpgTypes/rmmz/plugin";
-import type { PluginParamType2 } from "@RpgTypes/rmmz/plugin/core/pluginSchemaType";
 import { JSONPathJS } from "jsonpath-js";
-import type { JSONPathType } from "./jsonPathString";
 import {
   arrayParamPath,
   scalaParamPath,
@@ -15,6 +14,7 @@ import {
   structParamPath,
 } from "./param";
 import type { ParamJSONPath } from "./types";
+import type { JSONPathType } from "./types/jsonPathString";
 
 interface Person {
   name: string;
