@@ -103,7 +103,6 @@ export const createPathFromSchema = (
   structMap: ReadonlyMap<string, ClassifiedPluginParams>
 ): ParamJSONPathSturct => {
   return {
-    struct: "",
     scalas: makeScalaPaths(schema.scalas ?? [], root),
     scalaArrays: makeScalaArrayPaths(schema.scalaArrays ?? [], root),
     structs: makeStructPaths(schema.structs ?? [], root, structMap),
