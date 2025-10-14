@@ -4,6 +4,7 @@ import type {
   ClassifiedPluginParams,
   ClassifiedPluginParamsEx,
 } from "@RpgTypes/rmmz/plugin/classifyTypes";
+import { findValues, type PPValue } from "./findValues";
 import { createPathFromSchema } from "./struct";
 import type { ParamJSONPathSturct, ParamJSONPathSturctEx } from "./types/types";
 
@@ -40,11 +41,18 @@ interface TestCase<T> {
   schema: ClassifiedPluginParamsEx<T>;
   mock: T;
   paths: ParamJSONPathSturctEx<T>;
+  ppValues: PPValue[];
 }
 
-const shopTestCase: TestCase<Shop> = {
+const shopTestCase = {
   caseName: "Shop",
   mock: { name: "Shop", items: [58, 66, 81] },
+  ppValues: [
+    { name: "name", value: "Shop", kind: "string" },
+    { name: "items", value: 58, kind: "number[]" },
+    { name: "items", value: 66, kind: "number[]" },
+    { name: "items", value: 81, kind: "number[]" },
+  ],
   schema: {
     structs: [],
     scalaArrays: [{ name: "items", attr: { kind: "number[]", default: [] } }],
@@ -69,7 +77,7 @@ const shopTestCase: TestCase<Shop> = {
     ],
     structArrays: [],
   },
-};
+} as const satisfies TestCase<Shop>;
 
 const enemyTestCase = {
   caseName: "Enemy",
@@ -83,6 +91,14 @@ const enemyTestCase = {
       { skillId: 6, conditions: [{ code: 5, value: 320 }] },
     ],
   },
+  ppValues: [
+    { name: "name", value: "Gobrin", kind: "string" },
+    { name: "id", value: 1, kind: "number" },
+    { name: "code", value: 11, kind: "number" },
+    { name: "dataId", value: 81, kind: "number" },
+    { name: "value", value: 123, kind: "number" },
+    { name: "kind", value: 1, kind: "number" },
+  ],
   schema: {
     scalaArrays: [],
     scalas: [
@@ -172,7 +188,7 @@ const enemyTestCase = {
   },
 } as const satisfies TestCase<Enemy>;
 
-const enemyActionTestCase: TestCase<EnemyAction> = {
+const enemyActionTestCase = {
   caseName: "EnemyAction",
   mock: {
     skillId: 113,
@@ -181,6 +197,13 @@ const enemyActionTestCase: TestCase<EnemyAction> = {
       { code: 2, value: 30 },
     ],
   },
+  ppValues: [
+    { name: "skillId", value: 113, kind: "number" },
+    { name: "code", value: 1, kind: "number[]" },
+    { name: "value", value: 20, kind: "number[]" },
+    { name: "code", value: 2, kind: "number" },
+    { name: "value", value: 30, kind: "number" },
+  ],
   schema: {
     structs: [],
     scalaArrays: [],
@@ -215,11 +238,17 @@ const enemyActionTestCase: TestCase<EnemyAction> = {
       },
     ],
   },
-};
+} as const satisfies TestCase<EnemyAction>;
 
-const eventTestCase: TestCase<MockEvent> = {
+const eventTestCase = {
   caseName: "MockEvent",
   mock: { id: 1, name: "Event", condition: { code: 1, value: 20 } },
+  ppValues: [
+    { name: "id", value: 1, kind: "number" },
+    { name: "name", value: "Event", kind: "string" },
+    { name: "code", value: 1, kind: "number" },
+    { name: "value", value: 20, kind: "number" },
+  ],
   schema: {
     structs: [
       { name: "condition", attr: { kind: "struct", struct: "Condition" } },
@@ -259,11 +288,16 @@ const eventTestCase: TestCase<MockEvent> = {
       },
     ],
   },
-};
+} as const satisfies TestCase<MockEvent>;
 
-const traitTestCase: TestCase<Trait> = {
+const traitTestCase = {
   caseName: "Trait",
   mock: { code: 11, dataId: 81, value: 123 },
+  ppValues: [
+    { name: "code", value: 11, kind: "number" },
+    { name: "dataId", value: 81, kind: "number" },
+    { name: "value", value: 123, kind: "number" },
+  ],
   schema: {
     scalas: [
       { name: "code", attr: { kind: "number", default: 0 } },
@@ -296,9 +330,9 @@ const traitTestCase: TestCase<Trait> = {
       },
     ],
   },
-};
+} as const satisfies TestCase<Trait>;
 
-const conditionTestCase: TestCase<Condition> = {
+const conditionTestCase = {
   caseName: "Condition",
   schema: {
     structs: [],
@@ -310,6 +344,10 @@ const conditionTestCase: TestCase<Condition> = {
     structArrays: [],
   },
   mock: { code: 1, value: 20 },
+  ppValues: [
+    { name: "code", value: 1, kind: "number" },
+    { name: "value", value: 20, kind: "number" },
+  ],
   paths: {
     structs: [],
     scalaArrays: [],
@@ -327,11 +365,16 @@ const conditionTestCase: TestCase<Condition> = {
       },
     ],
   },
-};
+} as const satisfies TestCase<Condition>;
 
-const dropItemTestCase: TestCase<DropItem> = {
+const dropItemTestCase = {
   caseName: "DropItem",
   mock: { kind: 1, dataId: 2, denominator: 3 },
+  ppValues: [
+    { name: "kind", value: 1, kind: "number" },
+    { name: "dataId", value: 2, kind: "number" },
+    { name: "denominator", value: 3, kind: "number" },
+  ],
   schema: {
     structs: [],
     scalaArrays: [],
@@ -364,7 +407,7 @@ const dropItemTestCase: TestCase<DropItem> = {
       },
     ],
   },
-};
+} as const satisfies TestCase<DropItem>;
 
 const makeStructMap = (): ReadonlyMap<string, ClassifiedPluginParams> => {
   return new Map<string, ClassifiedPluginParams>([
@@ -402,6 +445,10 @@ describe("structToJsonPath2", () => {
         expect(structPath.structs).toEqual(testCase.paths.structs);
         expect(structPath.structArrays).toEqual(testCase.paths.structArrays);
         expect(structPath).toEqual(testCase.paths);
+      });
+      test.skip("findValues", () => {
+        const ppValues: PPValue[] = findValues(testCase.mock, testCase.paths);
+        expect(ppValues).toEqual(testCase.ppValues);
       });
     });
   });
