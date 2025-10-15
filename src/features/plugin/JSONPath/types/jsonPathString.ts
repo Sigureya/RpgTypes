@@ -7,11 +7,11 @@ type ArrayAccsess = `[${number}]` | "[*]";
 
 type JSONPathNested<T extends object, Parent extends string> = {
   [K in Extract<keyof T, string>]:
-    | `${Parent}.${K & string}`
+    | `${Parent}.${K}`
     | (T[K] extends object
         ? T[K] extends unknown[]
-          ? `${Parent}.${K & string}${ArrayAccsess}`
-          : ValueOf<JSONPathNested<T[K], `${Parent}.${K & string}`>>
+          ? `${Parent}.${K}${ArrayAccsess}`
+          : ValueOf<JSONPathNested<T[K], `${Parent}.${K}`>>
         : never)
     | (T[K] extends Array<infer U>
         ? U extends unknown[]
