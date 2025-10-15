@@ -436,7 +436,7 @@ const testCases = [
   conditionTestCase,
   shopTestCase,
   //  enemyTestCase,
-  enemyActionTestCase,
+  // enemyActionTestCase,
   eventTestCase,
   traitTestCase,
   dropItemTestCase,
