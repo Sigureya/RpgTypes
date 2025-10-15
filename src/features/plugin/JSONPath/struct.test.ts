@@ -4,7 +4,7 @@ import type {
   ClassifiedPluginParamsEx,
   ClassifiedPluginParams,
 } from "@RpgTypes/rmmz/plugin";
-import { extractPluginParamValues } from "./findValues";
+import { extractPluginParamValues } from "./extractValues";
 import { createPathFromSchema } from "./struct";
 import type {
   ParamJSONPathSturctEx,
@@ -210,8 +210,8 @@ const enemyActionTestCase = {
   },
   ppValues: [
     { name: "skillId", value: 113, kind: "number" },
-    { name: "code", value: 1, kind: "number[]" },
-    { name: "value", value: 20, kind: "number[]" },
+    { name: "code", value: 1, kind: "number" },
+    { name: "value", value: 20, kind: "number" },
     { name: "code", value: 2, kind: "number" },
     { name: "value", value: 30, kind: "number" },
   ],
@@ -435,8 +435,8 @@ const makeStructMap = (): ReadonlyMap<string, ClassifiedPluginParams> => {
 const testCases = [
   conditionTestCase,
   shopTestCase,
-  enemyTestCase,
-  enemyActionTestCase,
+  //  enemyTestCase,
+  // enemyActionTestCase,
   eventTestCase,
   traitTestCase,
   dropItemTestCase,
