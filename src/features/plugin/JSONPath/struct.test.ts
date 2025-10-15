@@ -1,12 +1,17 @@
-import { describe, expect, test } from "vitest";
-import type { DropItem, Trait } from "@RpgTypes/rmmz";
+import { describe, test, expect } from "vitest";
+import type { Trait, DropItem } from "@RpgTypes/rmmz";
 import type {
-  ClassifiedPluginParams,
   ClassifiedPluginParamsEx,
-} from "@RpgTypes/rmmz/plugin/classifyTypes";
-import { findValues, type PPValue } from "./findValues";
+  ClassifiedPluginParams,
+} from "@RpgTypes/rmmz/plugin";
+import { extractPluginParamValues } from "./findValues";
 import { createPathFromSchema } from "./struct";
-import type { ParamJSONPathSturct, ParamJSONPathSturctEx } from "./types/types";
+import type {
+  ParamJSONPathSturctEx,
+  JSONValue,
+  ParamJSONPathSturct,
+  PluginParamExtractedValue,
+} from "./types";
 
 interface Enemy {
   name: string;
@@ -42,6 +47,12 @@ interface TestCase<T> {
   mock: T;
   paths: ParamJSONPathSturctEx<T>;
   ppValues: PPValue[];
+}
+
+interface PPValue {
+  name: string;
+  value: JSONValue;
+  kind: string;
 }
 
 const shopTestCase = {
@@ -431,7 +442,7 @@ const testCases = [
   dropItemTestCase,
 ];
 
-describe("structToJsonPath2", () => {
+describe("structToJsonPath", () => {
   testCases.forEach((testCase) => {
     describe(testCase.caseName, () => {
       test("createPath", () => {
@@ -446,9 +457,19 @@ describe("structToJsonPath2", () => {
         expect(structPath.structArrays).toEqual(testCase.paths.structArrays);
         expect(structPath).toEqual(testCase.paths);
       });
-      test.skip("findValues", () => {
-        const ppValues: PPValue[] = findValues(testCase.mock, testCase.paths);
-        expect(ppValues).toEqual(testCase.ppValues);
+      test("extract values", () => {
+        const extracted: PluginParamExtractedValue[] = extractPluginParamValues(
+          testCase.mock,
+          testCase.paths
+        );
+        const maped = extracted.map(
+          (v: PluginParamExtractedValue): PPValue => ({
+            name: v.name,
+            value: v.value,
+            kind: v.param.kind,
+          })
+        );
+        expect(maped).toEqual(testCase.ppValues);
       });
     });
   });
