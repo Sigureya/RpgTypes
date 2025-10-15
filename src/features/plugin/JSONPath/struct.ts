@@ -5,7 +5,7 @@ import type {
   StructRefParam,
 } from "@RpgTypes/rmmz/plugin";
 import type { ClassifiedPluginParams } from "@RpgTypes/rmmz/plugin/classifyTypes";
-import type { ParamJSONPath, ParamJSONPathSturct } from "./types/types";
+import type { ParamJSONPath, ParamJSONPathSturct } from "./types";
 
 // パラメータからJSONPath情報を生成
 function makeScalaPaths(
