@@ -95,6 +95,28 @@ const makeMap = (): ReadonlyMap<string, ClassifiedPluginParams> => {
   ]);
 };
 
+describe("address", () => {
+  const expected: StructPropertysPath[] = [
+    {
+      scalas: `$.address["street","city","zipCode"]`,
+      scalaArrays: [],
+      structName: "Address",
+    },
+  ];
+  test("getPathFromStruct", () => {
+    const param = {
+      name: "address",
+      attr: { kind: "struct", struct: "Address" },
+    } as const satisfies PluginParam<StructRefParam>;
+    const structMap: ReadonlyMap<string, ClassifiedPluginParams> = new Map([
+      ["Address", addressSchema],
+    ]);
+    const result = getPathFromStructParam([param], "$", structMap);
+    expect(result.items).toEqual(expected);
+    expect(result.errors).toEqual([]);
+  });
+});
+
 describe("person", () => {
   const expected: StructPropertysPath[] = [
     {
@@ -187,12 +209,13 @@ describe("school", () => {
     },
   ];
 
+  const structMap = makeMap();
   test("getPathFromStruct", () => {
     const param: PluginParam<StructRefParam> = {
       name: "school",
       attr: { kind: "struct", struct: "School" },
     };
-    const result: Result4 = getPathFromStructParam([param], "$", makeMap());
+    const result: Result4 = getPathFromStructParam([param], "$", structMap);
     expect(result.items).toEqual(expected);
     expect(result.errors).toEqual([]);
   });

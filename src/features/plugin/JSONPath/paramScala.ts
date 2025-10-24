@@ -4,7 +4,7 @@ import type {
   ArrayParamTypes,
 } from "@RpgTypes/rmmz/plugin";
 
-export const getScalaParams = (
+export const makeScalaParams = (
   scalas: ReadonlyArray<PluginParam<ScalaParam>>,
   parent: string
 ): string => {
@@ -12,7 +12,7 @@ export const getScalaParams = (
   return `${parent}[${itesm}]`;
 };
 
-export const getScalaArrayParams = (
+export const makeScalaArrayParams = (
   scalaArrays: ReadonlyArray<PluginParam<ArrayParamTypes>>,
   parent: string
 ): string[] => {

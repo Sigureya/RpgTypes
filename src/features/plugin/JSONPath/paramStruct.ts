@@ -3,20 +3,15 @@ import type {
   StructRefParam,
 } from "@RpgTypes/rmmz/plugin";
 import type { PluginParam } from "@RpgTypes/rmmz/plugin/core/types";
-import { getScalaParams, getScalaArrayParams } from "./paramScala";
+import { makeScalaParams, makeScalaArrayParams } from "./paramScala";
 import type { ErrorCodes } from "./types/errorTypes";
 import type { StructPropertysPath, Result4 } from "./types/struct2";
 
 const ERROR_CODE = {
   undefinedStruct: "undefined_struct",
+  cyclicStruct: "cyclic_struct",
 } as const satisfies ErrorCodes;
 
-/**
- * 指定した struct 名（schema）の内容を basePath を起点に再帰的に収集して Result3[] を返す
- * - for 禁止
- * - void を返さない（常に Result3[] を返す）
- * - 各 Result3 に型名情報 (struct) を追加する
- */
 function collectFromSchema(
   schemaName: string,
   basePath: string,
@@ -27,7 +22,12 @@ function collectFromSchema(
   if (visited.has(schemaName)) {
     return {
       items: [],
-      errors: [],
+      errors: [
+        {
+          code: errors.cyclicStruct,
+          path: basePath,
+        },
+      ],
     };
   }
 
@@ -44,11 +44,11 @@ function collectFromSchema(
     };
   }
 
-  // 現在ノード（このスキーマ由来）の Result3（struct に schemaName を含める）
+  // 現在ノード（このスキーマ由来）に関する情報を取得。scala値のみ。
   const current: StructPropertysPath = {
     structName: schemaName,
-    scalas: getScalaParams(schema.scalas, basePath),
-    scalaArrays: getScalaArrayParams(schema.scalaArrays, basePath),
+    scalas: makeScalaParams(schema.scalas, basePath),
+    scalaArrays: makeScalaArrayParams(schema.scalaArrays, basePath),
   };
 
   // structs（通常の入れ子）の再帰結果を reduce で取得
@@ -68,16 +68,19 @@ function collectFromSchema(
 
   // structArrays（配列入れ子）の再帰結果を reduce で取得
   const structArrayChildren = schema.structArrays.reduce<Result4[]>(
-    (acc, sa) =>
-      acc.concat(
+    (acc, sa) => {
+      const v2 = new Set(visited);
+      v2.add(schemaName);
+      return acc.concat(
         collectFromSchema(
           sa.attr.struct,
           `${basePath}.${sa.name}[*]`,
           structMap,
           errors,
-          visited
+          v2
         )
-      ),
+      );
+    },
     []
   );
 
@@ -100,16 +103,16 @@ function collectFromSchema(
 export function getPathFromStructParam(
   params: ReadonlyArray<PluginParam<StructRefParam>>,
   parent: string,
-  structMap: ReadonlyMap<string, ClassifiedPluginParams>
+  structMap: ReadonlyMap<string, ClassifiedPluginParams>,
+  errors: ErrorCodes = ERROR_CODE
 ): Result4 {
   return params.reduce<Result4>(
     (result, param) => {
-      const res = collectFromSchema(
+      const res: Result4 = getPathFromStructSchema(
         param.attr.struct,
         `${parent}.${param.name}`,
         structMap,
-        ERROR_CODE,
-        new Set()
+        errors
       );
       return {
         items: result.items.concat(res.items),
@@ -126,13 +129,8 @@ export function getPathFromStructParam(
 export function getPathFromStructSchema(
   structName: string,
   parent: string,
-  structMap: ReadonlyMap<string, ClassifiedPluginParams>
+  structMap: ReadonlyMap<string, ClassifiedPluginParams>,
+  errors: ErrorCodes = ERROR_CODE
 ): Result4 {
-  return collectFromSchema(
-    structName,
-    parent,
-    structMap,
-    ERROR_CODE,
-    new Set()
-  );
+  return collectFromSchema(structName, parent, structMap, errors, new Set());
 }
