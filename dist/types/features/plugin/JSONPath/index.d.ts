@@ -1,3 +1,3 @@
 export type * from './types';
 export type { JSONPathType } from './types/jsonPathString';
-export { createPathFromSchema } from './struct';
+export { getPathFromStructParam, getPathFromStructSchema } from './paramStruct';
