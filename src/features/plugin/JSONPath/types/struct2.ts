@@ -10,3 +10,14 @@ export interface Result3 {
   scalas: string;
   scalaArrays: string[];
 }
+
+export interface Error {
+  path: string;
+  paramName: string;
+  code: string;
+}
+
+export interface Result4 {
+  items: Result3[];
+  errors: Error[];
+}
