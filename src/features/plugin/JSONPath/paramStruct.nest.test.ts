@@ -5,13 +5,14 @@ import type {
 } from "@RpgTypes/rmmz/plugin";
 import type { ClassifiedPluginParamsEx } from "@RpgTypes/rmmz/plugin";
 import type { PluginParam } from "@RpgTypes/rmmz/plugin/core/types";
-import { getPathFromStructParam, getPathFromStructSchema } from "./paramStruct";
+import { getPathFromStructParam } from "./paramStruct";
 import type { Result3 } from "./types/struct2";
 
 interface Person {
   name: string;
   age: number;
   items: number[];
+  nicknames: string[];
 }
 
 interface Address {
@@ -39,7 +40,10 @@ const personScheame: ClassifiedPluginParamsEx<Person> = {
     { name: "name", attr: { kind: "string", default: "" } },
     { name: "age", attr: { kind: "number", default: 0 } },
   ],
-  scalaArrays: [{ name: "items", attr: { kind: "number[]", default: [] } }],
+  scalaArrays: [
+    { name: "items", attr: { kind: "number[]", default: [] } },
+    { name: "nicknames", attr: { kind: "string[]", default: [] } },
+  ],
 };
 
 const addressSchema: ClassifiedPluginParamsEx<Address> = {
@@ -99,11 +103,17 @@ describe("classroom", () => {
     },
     {
       scalas: `$.classroom.teacher["name","age"]`,
-      scalaArrays: ["$.classroom.teacher.items[*]"],
+      scalaArrays: [
+        "$.classroom.teacher.items[*]",
+        "$.classroom.teacher.nicknames[*]",
+      ],
     },
     {
       scalas: `$.classroom.students[*]["name","age"]`,
-      scalaArrays: ["$.classroom.students[*].items[*]"],
+      scalaArrays: [
+        "$.classroom.students[*].items[*]",
+        "$.classroom.students[*].nicknames[*]",
+      ],
     },
   ];
   test("getPathFromStruct", () => {
@@ -132,11 +142,17 @@ describe("school", () => {
     },
     {
       scalas: `$.school.classrooms[*].teacher["name","age"]`,
-      scalaArrays: ["$.school.classrooms[*].teacher.items[*]"],
+      scalaArrays: [
+        "$.school.classrooms[*].teacher.items[*]",
+        "$.school.classrooms[*].teacher.nicknames[*]",
+      ],
     },
     {
       scalas: `$.school.classrooms[*].students[*]["name","age"]`,
-      scalaArrays: ["$.school.classrooms[*].students[*].items[*]"],
+      scalaArrays: [
+        "$.school.classrooms[*].students[*].items[*]",
+        "$.school.classrooms[*].students[*].nicknames[*]",
+      ],
     },
   ];
 
