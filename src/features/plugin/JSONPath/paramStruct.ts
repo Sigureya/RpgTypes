@@ -20,7 +20,8 @@ const ERROR_CODE = {
 interface Frame {
   schemaName: string;
   basePath: string;
-  visited: Set<string>;
+  // visited を廃止し、ancestor list (配列) で循環検出を行う
+  ancestry: string[];
 }
 interface State {
   frames: Frame[];
@@ -28,11 +29,6 @@ interface State {
   errs: StructPathError[];
 }
 
-/**
- * ミュータブル集約版の 1 ステップ関数。
- * - 内部で state を mutate してから同一 state を返す（副作用ありだが concat を避ける）
- * - 再帰 / for / while / void 戻り値 を使わない設計
- */
 const stepState = (
   state: State,
   structMap: ReadonlyMap<string, ClassifiedPluginParams>,
@@ -46,10 +42,10 @@ const stepState = (
   const frame = state.frames.pop() as Frame;
   const name = frame.schemaName;
   const path = frame.basePath;
-  const vis = frame.visited;
+  const ancestry = frame.ancestry;
 
-  // 循環チェック
-  if (vis.has(name)) {
+  // 循環チェック（ancestry に同じ schemaName が含まれていれば循環）
+  if (ancestry.includes(name)) {
     state.errs.push({ code: errors.cyclicStruct, path });
     return state;
   }
@@ -60,39 +56,43 @@ const stepState = (
     return state;
   }
 
-  // 現在ノードを追加（pre-order）
-  const current: StructPropertysPath = {
-    structName: name,
-    scalas: makeScalaParams(schema.scalas, path),
-    scalaArrays: makeScalaArrayParams(schema.scalaArrays, path),
-  };
-  state.items.push(current);
+  if (schema.scalas.length > 0 || schema.scalaArrays.length > 0) {
+    // 現在ノードを追加（pre-order）
 
-  // childVisited を作る（新しい Set を返す）
-  const childVisited = new Set(vis);
-  childVisited.add(name);
+    const current: StructPropertysPath = {
+      structName: name,
+      scalaArrays: makeScalaArrayParams(schema.scalaArrays, path),
+      scalas:
+        schema.scalas.length > 0
+          ? makeScalaParams(schema.scalas, path)
+          : undefined,
+    };
+    state.items.push(current);
+  }
+
+  // childAncestry を作る（配列を concat して新しい配列を作成）
+  const childAncestry = ancestry.concat(name);
 
   // 子フレームを作成（希望する処理順: structFrames -> structArrayFrames）
   const structFrames: Frame[] = schema.structs.map(
     (s): Frame => ({
       schemaName: s.attr.struct,
       basePath: `${path}.${s.name}`,
-      visited: new Set(childVisited),
+      ancestry: childAncestry,
     })
   );
   const structArrayFrames: Frame[] = schema.structArrays.map(
     (sa): Frame => ({
       schemaName: sa.attr.struct,
       basePath: `${path}.${sa.name}[*]`,
-      visited: new Set(childVisited),
+      ancestry: childAncestry,
     })
   );
 
   // childrenDesired: structs の順で先に処理し、その後 structArrays を処理したい
   const childrenDesired: Frame[] = structFrames.concat(structArrayFrames);
 
-  // LIFO スタックなので、desired の逆順で push する。
-  // reverse().reduce を使い、コールバックは値を返す（void 戻りを定義しない）
+  // LIFO スタックなので、desired の逆順で push する（reduce を使用して void 戻りを避ける）
   childrenDesired
     .slice()
     .reverse()
@@ -104,22 +104,16 @@ const stepState = (
   return state;
 };
 
-/**
- * collectFromSchema - ミュータブル集約版
- * - frames/items/errs を内部でミュータブルに更新し、最終結果を返却
- * - 再帰/for/while/void 戻りを用いない呼び出し構造
- */
 function collectFromSchema(
   schemaName: string,
   basePath: string,
   structMap: ReadonlyMap<string, ClassifiedPluginParams>,
-  errors: ErrorCodes,
-  visited: ReadonlySet<string>
+  errors: ErrorCodes
 ): Result4 {
   const initialFrame: Frame = {
     schemaName,
     basePath,
-    visited: new Set(Array.from(visited)),
+    ancestry: [],
   };
 
   const state: State = {
@@ -173,6 +167,5 @@ export function getPathFromStructSchema(
   structMap: ReadonlyMap<string, ClassifiedPluginParams>,
   errors: ErrorCodes = ERROR_CODE
 ): Result4 {
-  return collectFromSchema(structName, parent, structMap, errors, new Set());
+  return collectFromSchema(structName, parent, structMap, errors);
 }
-// ...existing code...

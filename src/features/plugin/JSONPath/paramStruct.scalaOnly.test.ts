@@ -31,13 +31,13 @@ describe("person", () => {
     structs: [],
     structArrays: [],
   };
-  const expected: StructPropertysPath[] = [
+  const expected = [
     {
       scalas: `$.person["name","age","b"]`,
       scalaArrays: ["$.person.numberArray[*]", "$.person.stringArray[*]"],
       structName: "MockPerson",
     },
-  ];
+  ] as const satisfies StructPropertysPath[];
   test("getPathFromStruct", () => {
     const param = {
       name: "person",
