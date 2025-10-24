@@ -1,6 +1,5 @@
 import type {
   ClassifiedPluginParams,
-  StructArrayRefParam,
   StructRefParam,
 } from "@RpgTypes/rmmz/plugin";
 import type { PluginParam } from "@RpgTypes/rmmz/plugin/core/types";
@@ -16,11 +15,11 @@ export const getPathFromStructParam = (
 };
 
 export const getPathFromStructSchema = (
-  params: ClassifiedPluginParams,
+  schema: ClassifiedPluginParams,
   parent: string,
   map: ReadonlyMap<string, ClassifiedPluginParams>
 ): Result3[] => {
-  return getPathFromStruct2(params, parent, map);
+  return getPathFromStruct2(schema, parent, map);
 };
 
 const getPathFromStruct2 = (
