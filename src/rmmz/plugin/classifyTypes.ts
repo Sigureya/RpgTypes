@@ -7,7 +7,12 @@ import type {
 } from "./core";
 import type { PluginParamType2 } from "./core/pluginSchemaType";
 
-export interface ClassifiedPluginParams {
+export interface ScalaStruct {
+  scalas: PluginParam<ScalaParam>[];
+  scalaArrays: PluginParam<ArrayParamTypes>[];
+}
+
+export interface ClassifiedPluginParams extends ScalaStruct {
   structs: PluginParam<StructRefParam>[];
   structArrays: PluginParam<StructArrayRefParam>[];
   scalas: PluginParam<ScalaParam>[];
