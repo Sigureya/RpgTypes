@@ -6,7 +6,7 @@ import type {
 import type { ClassifiedPluginParamsEx } from "@RpgTypes/rmmz/plugin";
 import type { PluginParam } from "@RpgTypes/rmmz/plugin/core/types";
 import { getPathFromStructParam } from "./paramStruct";
-import type { StructPropertysPath, Result4 } from "./types/struct2";
+import type { StructPropertysPath, StructPathResult } from "./types/struct2";
 
 interface Person {
   name: string;
@@ -133,7 +133,11 @@ describe("person", () => {
     const structMap: ReadonlyMap<string, ClassifiedPluginParams> = new Map([
       ["Person", personScheame],
     ]);
-    const result: Result4 = getPathFromStructParam([param], "$", structMap);
+    const result: StructPathResult = getPathFromStructParam(
+      [param],
+      "$",
+      structMap
+    );
     expect(result.items).toEqual(expected);
     expect(result.errors).toEqual([]);
   });
@@ -168,7 +172,11 @@ describe("classroom", () => {
       name: "classroom",
       attr: { kind: "struct", struct: "Class" },
     };
-    const result: Result4 = getPathFromStructParam([param], "$", makeMap());
+    const result: StructPathResult = getPathFromStructParam(
+      [param],
+      "$",
+      makeMap()
+    );
     expect(result.items).toEqual(expected);
     expect(result.errors).toEqual([]);
   });
@@ -215,7 +223,11 @@ describe("school", () => {
       name: "school",
       attr: { kind: "struct", struct: "School" },
     };
-    const result: Result4 = getPathFromStructParam([param], "$", structMap);
+    const result: StructPathResult = getPathFromStructParam(
+      [param],
+      "$",
+      structMap
+    );
     expect(result.items).toEqual(expected);
     expect(result.errors).toEqual([]);
   });

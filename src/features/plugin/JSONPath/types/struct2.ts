@@ -16,7 +16,7 @@ export interface StructPathError {
   code: string;
 }
 
-export interface Result4 {
+export interface StructPathResult {
   items: StructPropertysPath[];
   errors: StructPathError[];
 }

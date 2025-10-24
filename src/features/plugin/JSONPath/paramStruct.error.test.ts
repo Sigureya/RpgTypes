@@ -6,7 +6,7 @@ import type {
 } from "@RpgTypes/rmmz/plugin";
 import { getPathFromStructParam } from "./paramStruct";
 import type { ErrorCodes } from "./types/errorTypes";
-import type { Result4 } from "./types/struct2";
+import type { StructPathResult } from "./types/struct2";
 
 const schema: ClassifiedPluginParams = {
   structs: [
@@ -39,8 +39,12 @@ describe("cyclic struct", () => {
       name: "loop",
       attr: { kind: "struct", struct: "LoopMock" },
     } as const satisfies PluginParam<StructRefParam>;
-    const result: Result4 = getPathFromStructParam([param], "$", structMap);
-    const expected: Result4 = {
+    const result: StructPathResult = getPathFromStructParam(
+      [param],
+      "$",
+      structMap
+    );
+    const expected: StructPathResult = {
       items: [],
       errors: [
         { code: errors.cyclicStruct, path: "$.loop.loopMock" },
@@ -59,8 +63,12 @@ describe("undefined struct", () => {
       name: "undefinedStruct",
       attr: { kind: "struct", struct: "UndefinedStruct" },
     } as const satisfies PluginParam<StructRefParam>;
-    const result: Result4 = getPathFromStructParam([param], "$", structMap);
-    const expected: Result4 = {
+    const result: StructPathResult = getPathFromStructParam(
+      [param],
+      "$",
+      structMap
+    );
+    const expected: StructPathResult = {
       items: [],
       errors: [{ code: errors.undefinedStruct, path: "$.undefinedStruct" }],
     };
