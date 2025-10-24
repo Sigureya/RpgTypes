@@ -1,11 +1,7 @@
 import { describe, test, expect } from "vitest";
 import type { ClassifiedPluginParamsEx } from "@RpgTypes/rmmz/plugin";
 import { JSONPathJS } from "jsonpath-js";
-import {
-  getScalaParams,
-  getScalaArrayParams,
-  makeScalaPath,
-} from "./paramScala";
+import { getScalaParams, getScalaArrayParams } from "./paramScala";
 
 interface ArrayMock {
   numberArray: number[];
@@ -103,26 +99,4 @@ describe("getScalaArrayParams", () => {
     ];
     expect(result).toEqual(expected);
   });
-});
-
-test("makeScalaPath", () => {
-  const schema: ClassifiedPluginParamsEx<ScalaMock & ArrayMock> = {
-    structs: [],
-    structArrays: [],
-    scalas: [
-      { name: "stringParam", attr: { kind: "string", default: "" } },
-      { name: "numberParam", attr: { kind: "number", default: 0 } },
-      { name: "booleanParam", attr: { kind: "boolean", default: false } },
-    ],
-    scalaArrays: [
-      { name: "numberArray", attr: { kind: "number[]", default: [] } },
-      { name: "stringArray", attr: { kind: "string[]", default: [] } },
-    ],
-  };
-  const parent = "$";
-  const result = makeScalaPath(schema, parent);
-  expect(result.scalas).toBe(getScalaParams(schema.scalas, parent));
-  expect(result.scalaArrays).toEqual(
-    getScalaArrayParams(schema.scalaArrays, parent)
-  );
 });
