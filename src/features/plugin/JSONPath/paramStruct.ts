@@ -20,7 +20,7 @@ const ERROR_CODE = {
 interface Frame {
   schemaName: string;
   basePath: string;
-  visited: ReadonlySet<string>;
+  visited: Set<string>;
 }
 interface State {
   frames: Frame[];
@@ -29,43 +29,35 @@ interface State {
 }
 
 /**
- * 1ステップ分の状態遷移を行う純粋関数（collectFromSchema の外側へ移動）
- * - 禁止事項(再帰/for/while/void戻り)に従い、State を返す設計
+ * ミュータブル集約版の 1 ステップ関数。
+ * - 内部で state を mutate してから同一 state を返す（副作用ありだが concat を避ける）
+ * - 再帰 / for / while / void 戻り値 を使わない設計
  */
 const stepState = (
   state: State,
   structMap: ReadonlyMap<string, ClassifiedPluginParams>,
   errors: ErrorCodes
 ): State => {
-  const frames = state.frames;
-  if (frames.length === 0) {
+  if (state.frames.length === 0) {
     return state;
   }
 
-  // LIFO: 最後の要素を取り出す（pop の代わりに slice で新しい配列を作成）
-  const frame = frames[frames.length - 1];
-  const rest = frames.slice(0, frames.length - 1);
-
+  // スタック操作：pop / push を用いてミュータブルに集約
+  const frame = state.frames.pop() as Frame;
   const name = frame.schemaName;
   const path = frame.basePath;
   const vis = frame.visited;
 
-  // cyclic check
+  // 循環チェック
   if (vis.has(name)) {
-    return {
-      frames: rest,
-      items: state.items,
-      errs: state.errs.concat([{ code: errors.cyclicStruct, path }]),
-    };
+    state.errs.push({ code: errors.cyclicStruct, path });
+    return state;
   }
 
   const schema = structMap.get(name);
   if (!schema) {
-    return {
-      frames: rest,
-      items: state.items,
-      errs: state.errs.concat([{ code: errors.undefinedStruct, path }]),
-    };
+    state.errs.push({ code: errors.undefinedStruct, path });
+    return state;
   }
 
   // 現在ノードを追加（pre-order）
@@ -74,12 +66,13 @@ const stepState = (
     scalas: makeScalaParams(schema.scalas, path),
     scalaArrays: makeScalaArrayParams(schema.scalaArrays, path),
   };
+  state.items.push(current);
 
   // childVisited を作る（新しい Set を返す）
   const childVisited = new Set(vis);
   childVisited.add(name);
 
-  // 子フレームを作成（structs -> structArrays の順に展開するため push 順序を調整）
+  // 子フレームを作成（希望する処理順: structFrames -> structArrayFrames）
   const structFrames: Frame[] = schema.structs.map(
     (s): Frame => ({
       schemaName: s.attr.struct,
@@ -95,25 +88,26 @@ const stepState = (
     })
   );
 
-  // 元の実装と同じ処理順（structs の子を先に、structArrays の子を後で処理）にするため、
-  // スタックに push する配列を逆順で組み立てる。
-  const childrenToPush = structArrayFrames
+  // childrenDesired: structs の順で先に処理し、その後 structArrays を処理したい
+  const childrenDesired: Frame[] = structFrames.concat(structArrayFrames);
+
+  // LIFO スタックなので、desired の逆順で push する。
+  // reverse().reduce を使い、コールバックは値を返す（void 戻りを定義しない）
+  childrenDesired
     .slice()
     .reverse()
-    .concat(structFrames.slice().reverse());
+    .reduce<Frame[]>((acc, f) => {
+      state.frames.push(f);
+      return acc;
+    }, []);
 
-  const newFrames = rest.concat(childrenToPush);
-
-  return {
-    frames: newFrames,
-    items: state.items.concat([current]),
-    errs: state.errs,
-  };
+  return state;
 };
 
 /**
- * イミュータブルな状態を返す一ステップ関数を使ったイテレーティブ実装。
- * 禁止条件に合わせて for/while/再帰 を使わずにスタック処理を行う。
+ * collectFromSchema - ミュータブル集約版
+ * - frames/items/errs を内部でミュータブルに更新し、最終結果を返却
+ * - 再帰/for/while/void 戻りを用いない呼び出し構造
  */
 function collectFromSchema(
   schemaName: string,
@@ -128,20 +122,20 @@ function collectFromSchema(
     visited: new Set(Array.from(visited)),
   };
 
-  const initialState: State = {
+  const state: State = {
     frames: [initialFrame],
     items: [],
     errs: [],
   };
 
-  // 上限反復回数 — structMap.size に依存（充分に大きければ処理は完了する）
-  const maxPass = Math.max(1, structMap.size * 3 + 5);
+  // 上限反復回数 — safe upper bound
+  const maxPass: number = Math.max(1, structMap.size * 3 + 5);
 
-  // reduce を使って stepState を複数回適用（ループではなく高階関数）
-  const finalState = Array.from({ length: maxPass }).reduce<State>((s) => {
-    // 早期終了: フレームが空なら以降のステップは noop
-    return s.frames.length === 0 ? s : stepState(s, structMap, errors);
-  }, initialState);
+  // reduce を使って stepState を繰り返す（for/while を使わない）
+  const finalState = Array.from({ length: maxPass }).reduce<State>(
+    (s) => (s.frames.length === 0 ? s : stepState(s, structMap, errors)),
+    state
+  );
 
   return { items: finalState.items, errors: finalState.errs };
 }
