@@ -4,7 +4,7 @@ import type {
 } from "@RpgTypes/rmmz/plugin";
 import type { PluginParam } from "@RpgTypes/rmmz/plugin/core/types";
 import { getScalaParams, getScalaArrayParams } from "./paramScala";
-import type { Result3 } from "./types/struct2";
+import type { Result3, Result4 } from "./types/struct2";
 
 /**
  * 指定した struct 名（schema）の内容を basePath を起点に再帰的に収集して Result3[] を返す
@@ -16,10 +16,13 @@ function collectFromSchema(
   schemaName: string,
   basePath: string,
   structMap: ReadonlyMap<string, ClassifiedPluginParams>
-): Result3[] {
+): Result4 {
   const schema = structMap.get(schemaName);
   if (!schema) {
-    return [];
+    return {
+      items: [],
+      errors: [],
+    };
   }
 
   // 現在ノード（このスキーマ由来）の Result3（struct に schemaName を含める）
@@ -30,7 +33,7 @@ function collectFromSchema(
   };
 
   // structs（通常の入れ子）の再帰結果を reduce で取得
-  const structChildren = (schema.structs ?? []).reduce<Result3[]>(
+  const structChildren = (schema.structs ?? []).reduce<Result4[]>(
     (acc, s) =>
       acc.concat(
         collectFromSchema(s.attr.struct, `${basePath}.${s.name}`, structMap)
@@ -39,7 +42,7 @@ function collectFromSchema(
   );
 
   // structArrays（配列入れ子）の再帰結果を reduce で取得
-  const structArrayChildren = (schema.structArrays ?? []).reduce<Result3[]>(
+  const structArrayChildren = (schema.structArrays ?? []).reduce<Result4[]>(
     (acc, sa) =>
       acc.concat(
         collectFromSchema(
@@ -51,7 +54,17 @@ function collectFromSchema(
     []
   );
 
-  return [current, ...structChildren, ...structArrayChildren];
+  return {
+    items: [
+      current,
+      ...structChildren.flatMap((r) => r.items),
+      ...structArrayChildren.flatMap((r) => r.items),
+    ],
+    errors: [
+      ...structChildren.flatMap((r) => r.errors),
+      ...structArrayChildren.flatMap((r) => r.errors),
+    ],
+  };
 }
 
 /**
@@ -61,13 +74,20 @@ export function getPathFromStructParam(
   params: ReadonlyArray<PluginParam<StructRefParam>>,
   parent: string,
   structMap: ReadonlyMap<string, ClassifiedPluginParams>
-): Result3[] {
-  return (params ?? []).reduce<Result3[]>(
-    (acc, p) =>
-      acc.concat(
-        collectFromSchema(p.attr.struct, `${parent}.${p.name}`, structMap)
-      ),
-    []
+): Result4 {
+  return params.reduce<Result4>(
+    (result, param) => {
+      const res = collectFromSchema(
+        param.attr.struct,
+        `${parent}.${param.name}`,
+        structMap
+      );
+      return {
+        items: result.items.concat(res.items),
+        errors: result.errors.concat(res.errors),
+      };
+    },
+    { items: [], errors: [] }
   );
 }
 
@@ -78,6 +98,6 @@ export function getPathFromStructSchema(
   structName: string,
   parent: string,
   structMap: ReadonlyMap<string, ClassifiedPluginParams>
-): Result3[] {
+): Result4 {
   return collectFromSchema(structName, parent, structMap);
 }
