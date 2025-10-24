@@ -5,6 +5,7 @@ import type {
 } from "@RpgTypes/rmmz/plugin";
 import type { ClassifiedPluginParamsEx } from "@RpgTypes/rmmz/plugin";
 import type { PluginParam } from "@RpgTypes/rmmz/plugin/core/types";
+import { JSONPathJS } from "jsonpath-js";
 import { getPathFromStructParam, getPathFromStructSchema } from "./paramStruct";
 import type { Result3 } from "./types/struct2";
 
@@ -54,5 +55,17 @@ describe("person", () => {
       new Map()
     );
     expect(result).toEqual(expected);
+  });
+  test("isvalid path", () => {
+    expected.forEach((item) => {
+      expect(() => {
+        new JSONPathJS(item.scalas);
+      }).not.toThrow();
+      item.scalaArrays.forEach((path) => {
+        expect(() => {
+          new JSONPathJS(path);
+        }).not.toThrow();
+      });
+    });
   });
 });
