@@ -9,6 +9,7 @@ import type { StructPropertysPath, Result4 } from "./types/struct2";
 
 const ERROR_CODE = {
   undefinedStruct: "undefined_struct",
+  cyclicStruct: "cyclic_struct",
 } as const satisfies ErrorCodes;
 
 function collectFromSchema(
@@ -21,7 +22,12 @@ function collectFromSchema(
   if (visited.has(schemaName)) {
     return {
       items: [],
-      errors: [],
+      errors: [
+        {
+          code: errors.cyclicStruct,
+          path: basePath,
+        },
+      ],
     };
   }
 
@@ -62,16 +68,19 @@ function collectFromSchema(
 
   // structArrays（配列入れ子）の再帰結果を reduce で取得
   const structArrayChildren = schema.structArrays.reduce<Result4[]>(
-    (acc, sa) =>
-      acc.concat(
+    (acc, sa) => {
+      const v2 = new Set(visited);
+      v2.add(schemaName);
+      return acc.concat(
         collectFromSchema(
           sa.attr.struct,
           `${basePath}.${sa.name}[*]`,
           structMap,
           errors,
-          visited
+          v2
         )
-      ),
+      );
+    },
     []
   );
 
@@ -94,16 +103,16 @@ function collectFromSchema(
 export function getPathFromStructParam(
   params: ReadonlyArray<PluginParam<StructRefParam>>,
   parent: string,
-  structMap: ReadonlyMap<string, ClassifiedPluginParams>
+  structMap: ReadonlyMap<string, ClassifiedPluginParams>,
+  errors: ErrorCodes = ERROR_CODE
 ): Result4 {
   return params.reduce<Result4>(
     (result, param) => {
-      const res = collectFromSchema(
+      const res: Result4 = getPathFromStructSchema(
         param.attr.struct,
         `${parent}.${param.name}`,
         structMap,
-        ERROR_CODE,
-        new Set()
+        errors
       );
       return {
         items: result.items.concat(res.items),
@@ -120,13 +129,8 @@ export function getPathFromStructParam(
 export function getPathFromStructSchema(
   structName: string,
   parent: string,
-  structMap: ReadonlyMap<string, ClassifiedPluginParams>
+  structMap: ReadonlyMap<string, ClassifiedPluginParams>,
+  errors: ErrorCodes = ERROR_CODE
 ): Result4 {
-  return collectFromSchema(
-    structName,
-    parent,
-    structMap,
-    ERROR_CODE,
-    new Set()
-  );
+  return collectFromSchema(structName, parent, structMap, errors, new Set());
 }
