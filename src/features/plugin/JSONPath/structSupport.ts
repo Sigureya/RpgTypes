@@ -1,6 +1,4 @@
 import type {
-  StructRefParam,
-  ClassifiedPluginParams,
   PluginParam,
   ScalaParam,
   ArrayParamTypes,
