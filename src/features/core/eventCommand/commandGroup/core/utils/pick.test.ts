@@ -237,26 +237,22 @@ describe("pickCommands - Edge cases", () => {
   });
 });
 
-describe.skip("isCommand** functions", () => {
+describe("isCommand** functions", () => {
   test("isCommandShowMessage should correctly identify valid and invalid heads", () => {
     const command: Command_ShowMessageHeader = makeCommandShowMessage({});
-    expect(isCommandShowMessage(command)).toBe(true);
-    // expect(isCommandShowMessage(null)).toBe(false);
-    // expect(isCommandShowMessage(undefined)).toBe(false);
+    expect(command).toSatisfy(isCommandShowMessage);
   });
 
   test("isCommandShowMessageBody should correctly identify valid and invalid bodies", () => {
     const command: Command_ShowMessageBody = makeCommandShowMessageBody("aaa");
-    expect(isCommandShowMessageBody(command)).toBe(true);
-    // expect(isCommandShowMessageBody(null)).toBe(false);
-    // expect(isCommandShowMessageBody(undefined)).toBe(false);
+    expect(command).toSatisfy(isCommandShowMessageBody);
   });
 
   test("isCommandShowMessage and isCommandShowMessageBody should reject unrelated commands", () => {
     const command: Command_CommonEvent = makeCommandCommonEvent({
       eventId: 5,
     });
-    expect(isCommandShowMessage(command)).toBe(false);
-    expect(isCommandShowMessageBody(command)).toBe(false);
+    expect(command).not.toSatisfy(isCommandShowMessage);
+    expect(command).not.toSatisfy(isCommandShowMessageBody);
   });
 });
