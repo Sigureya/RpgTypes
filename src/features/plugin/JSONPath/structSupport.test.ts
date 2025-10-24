@@ -1,12 +1,5 @@
 import { describe, test, expect } from "vitest";
-import type {
-  StructRefParam,
-  ClassifiedPluginParams,
-  PluginParam,
-  ScalaParam,
-  ArrayParamTypes,
-  ClassifiedPluginParamsEx,
-} from "@RpgTypes/rmmz/plugin";
+import type { ClassifiedPluginParamsEx } from "@RpgTypes/rmmz/plugin";
 import { JSONPathJS } from "jsonpath-js";
 import { getScalaParams, getScalaArrayParams } from "./structSupport";
 
@@ -45,15 +38,19 @@ describe("getScalaParams", () => {
   });
   test("find", () => {
     const jsonPath = new JSONPathJS(path);
-    const result = jsonPath.find(mockData);
-    const expected: (string | number | boolean)[] = ["hello", 42, true];
+    const result = jsonPath.pathSegments(mockData);
+    const expected: typeof result = [
+      { value: "hello", segments: ["stringParam"] },
+      { value: 42, segments: ["numberParam"] },
+      { value: true, segments: ["booleanParam"] },
+    ];
     expect(result).toEqual(expected);
   });
 });
 
 describe("getScalaArrayParams", () => {
   const mockData = {
-    numberArray: [1, 2, 3],
+    numberArray: [211, 217, 235],
     stringArray: ["a", "b", "c"],
     files: ["face.png", "icon.png"],
   } as const satisfies ArrayMock;
@@ -75,20 +72,31 @@ describe("getScalaArrayParams", () => {
   });
   test("find number params", () => {
     const jsonPath = new JSONPathJS(paths[0]);
-    const result = jsonPath.find(mockData);
-    const expected: number[] = [1, 2, 3];
+    const result = jsonPath.pathSegments(mockData);
+    const expected: typeof result = [
+      { value: 211, segments: ["numberArray", 0] },
+      { value: 217, segments: ["numberArray", 1] },
+      { value: 235, segments: ["numberArray", 2] },
+    ];
     expect(result).toEqual(expected);
   });
   test("find string params", () => {
     const jsonPath = new JSONPathJS(paths[1]);
-    const result = jsonPath.find(mockData);
-    const expected: string[] = ["a", "b", "c"];
+    const result = jsonPath.pathSegments(mockData);
+    const expected: typeof result = [
+      { value: "a", segments: ["stringArray", 0] },
+      { value: "b", segments: ["stringArray", 1] },
+      { value: "c", segments: ["stringArray", 2] },
+    ];
     expect(result).toEqual(expected);
   });
   test("find file params", () => {
     const jsonPath = new JSONPathJS(paths[2]);
-    const result = jsonPath.find(mockData);
-    const expected: string[] = ["face.png", "icon.png"];
+    const result = jsonPath.pathSegments(mockData);
+    const expected: typeof result = [
+      { value: "face.png", segments: ["files", 0] },
+      { value: "icon.png", segments: ["files", 1] },
+    ];
     expect(result).toEqual(expected);
   });
 });
