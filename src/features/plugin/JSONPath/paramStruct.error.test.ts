@@ -57,3 +57,20 @@ describe("cyclic struct", () => {
     expect(result.items).toEqual(expected.items);
   });
 });
+
+describe("undefined struct", () => {
+  const structMap: ReadonlyMap<string, ClassifiedPluginParams> = new Map();
+  test("getPathFromStruct", () => {
+    const param = {
+      name: "undefinedStruct",
+      attr: { kind: "struct", struct: "UndefinedStruct" },
+    } as const satisfies PluginParam<StructRefParam>;
+    const result: Result4 = getPathFromStructParam([param], "$", structMap);
+    const expected: Result4 = {
+      items: [],
+      errors: [{ code: errors.undefinedStruct, path: "$.undefinedStruct" }],
+    };
+    expect(result.errors).toEqual(expected.errors);
+    expect(result.items).toEqual(expected.items);
+  });
+});
