@@ -34,7 +34,10 @@ describe("person", () => {
   const expected = [
     {
       scalas: `$.person["name","age","b"]`,
-      scalaArrays: ["$.person.numberArray[*]", "$.person.stringArray[*]"],
+      scalaArrays: [
+        { path: "$.person.numberArray[*]" },
+        { path: "$.person.stringArray[*]" },
+      ],
       structName: "MockPerson",
     },
   ] as const satisfies StructPropertysPath[];
@@ -64,7 +67,7 @@ describe("person", () => {
       }).not.toThrow();
       item.scalaArrays.forEach((path) => {
         expect(() => {
-          new JSONPathJS(path);
+          new JSONPathJS(path.path);
         }).not.toThrow();
       });
     });

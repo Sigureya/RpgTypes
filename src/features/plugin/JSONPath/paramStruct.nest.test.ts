@@ -121,7 +121,10 @@ describe("person", () => {
   const expected: StructPropertysPath[] = [
     {
       scalas: `$.person["name","age"]`,
-      scalaArrays: ["$.person.items[*]", "$.person.nicknames[*]"],
+      scalaArrays: [
+        { path: "$.person.items[*]" },
+        { path: "$.person.nicknames[*]" },
+      ],
       structName: "Person",
     },
   ];
@@ -153,16 +156,16 @@ describe("classroom", () => {
     {
       scalas: `$.classroom.teacher["name","age"]`,
       scalaArrays: [
-        "$.classroom.teacher.items[*]",
-        "$.classroom.teacher.nicknames[*]",
+        { path: "$.classroom.teacher.items[*]" },
+        { path: "$.classroom.teacher.nicknames[*]" },
       ],
       structName: "Person",
     },
     {
       scalas: `$.classroom.students[*]["name","age"]`,
       scalaArrays: [
-        "$.classroom.students[*].items[*]",
-        "$.classroom.students[*].nicknames[*]",
+        { path: "$.classroom.students[*].items[*]" },
+        { path: "$.classroom.students[*].nicknames[*]" },
       ],
       structName: "Person",
     },
@@ -203,16 +206,19 @@ describe("school", () => {
       structName: "Person",
       scalas: `$.school.classrooms[*].teacher["name","age"]`,
       scalaArrays: [
-        "$.school.classrooms[*].teacher.items[*]",
-        "$.school.classrooms[*].teacher.nicknames[*]",
+        { path: "$.school.classrooms[*].teacher.items[*]" },
+
+        {
+          path: "$.school.classrooms[*].teacher.nicknames[*]",
+        },
       ],
     },
     {
       structName: "Person",
       scalas: `$.school.classrooms[*].students[*]["name","age"]`,
       scalaArrays: [
-        "$.school.classrooms[*].students[*].items[*]",
-        "$.school.classrooms[*].students[*].nicknames[*]",
+        { path: "$.school.classrooms[*].students[*].items[*]" },
+        { path: "$.school.classrooms[*].students[*].nicknames[*]" },
       ],
     },
   ];

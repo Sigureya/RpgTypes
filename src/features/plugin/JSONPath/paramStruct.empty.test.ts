@@ -73,7 +73,7 @@ describe("empty struct", () => {
       {
         structName: "EmptyStructArray",
         scalas: undefined,
-        scalaArrays: ["$.emptyStructArray.numberArray[*]"],
+        scalaArrays: [{ path: "$.emptyStructArray.numberArray[*]" }],
       },
     ];
     expect(result.items).toEqual(expected);

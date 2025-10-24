@@ -1,7 +1,7 @@
 export interface StructPropertysPath {
   structName: string;
   scalas: string | undefined;
-  scalaArrays: string[];
+  scalaArrays: { path: string }[];
 }
 
 export interface StructPathError {
