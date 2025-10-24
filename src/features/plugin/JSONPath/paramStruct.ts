@@ -12,6 +12,13 @@ const ERROR_CODE = {
   cyclicStruct: "cyclic_struct",
 } as const satisfies ErrorCodes;
 
+function makeError(code: string, path: string): Result4 {
+  return {
+    items: [],
+    errors: [{ code, path }],
+  };
+}
+
 function collectFromSchema(
   schemaName: string,
   basePath: string,
@@ -20,28 +27,12 @@ function collectFromSchema(
   visited: ReadonlySet<string>
 ): Result4 {
   if (visited.has(schemaName)) {
-    return {
-      items: [],
-      errors: [
-        {
-          code: errors.cyclicStruct,
-          path: basePath,
-        },
-      ],
-    };
+    return makeError(errors.cyclicStruct, basePath);
   }
 
   const schema = structMap.get(schemaName);
   if (!schema) {
-    return {
-      items: [],
-      errors: [
-        {
-          code: errors.undefinedStruct,
-          path: basePath,
-        },
-      ],
-    };
+    return makeError(errors.undefinedStruct, basePath);
   }
 
   // 現在ノード（このスキーマ由来）に関する情報を取得。scala値のみ。
