@@ -3,7 +3,7 @@ import type {
   StructRefParam,
 } from "@RpgTypes/rmmz/plugin";
 import type { PluginParam } from "@RpgTypes/rmmz/plugin/core/types";
-import { getScalaParams, getScalaArrayParams } from "./paramScala";
+import { makeScalaParams, makeScalaArrayParams } from "./paramScala";
 import type { ErrorCodes } from "./types/errorTypes";
 import type { StructPropertysPath, Result4 } from "./types/struct2";
 
@@ -11,12 +11,6 @@ const ERROR_CODE = {
   undefinedStruct: "undefined_struct",
 } as const satisfies ErrorCodes;
 
-/**
- * 指定した struct 名（schema）の内容を basePath を起点に再帰的に収集して Result3[] を返す
- * - for 禁止
- * - void を返さない（常に Result3[] を返す）
- * - 各 Result3 に型名情報 (struct) を追加する
- */
 function collectFromSchema(
   schemaName: string,
   basePath: string,
@@ -44,11 +38,11 @@ function collectFromSchema(
     };
   }
 
-  // 現在ノード（このスキーマ由来）の Result3（struct に schemaName を含める）
+  // 現在ノード（このスキーマ由来）に関する情報を取得。scala値のみ。
   const current: StructPropertysPath = {
     structName: schemaName,
-    scalas: getScalaParams(schema.scalas, basePath),
-    scalaArrays: getScalaArrayParams(schema.scalaArrays, basePath),
+    scalas: makeScalaParams(schema.scalas, basePath),
+    scalaArrays: makeScalaArrayParams(schema.scalaArrays, basePath),
   };
 
   // structs（通常の入れ子）の再帰結果を reduce で取得
