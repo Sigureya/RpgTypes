@@ -8,7 +8,7 @@ import { makeScalaParams, makeScalaArrayParams } from "./paramScala";
 import type { ErrorCodes } from "./types/errorTypes";
 import type {
   StructPropertysPath,
-  Result4,
+  StructPathResult,
   StructPathError,
 } from "./types/struct2";
 
@@ -109,7 +109,7 @@ function collectFromSchema(
   basePath: string,
   structMap: ReadonlyMap<string, ClassifiedPluginParams>,
   errors: ErrorCodes
-): Result4 {
+): StructPathResult {
   const initialFrame: Frame = {
     schemaName,
     basePath,
@@ -140,10 +140,10 @@ export function getPathFromStructParam(
   parent: string,
   structMap: ReadonlyMap<string, ClassifiedPluginParams>,
   errors: ErrorCodes = ERROR_CODE
-): Result4 {
-  return params.reduce<Result4>(
+): StructPathResult {
+  return params.reduce<StructPathResult>(
     (result, param) => {
-      const res: Result4 = getPathFromStructSchema(
+      const res: StructPathResult = getPathFromStructSchema(
         param.attr.struct,
         `${parent}.${param.name}`,
         structMap,
@@ -166,6 +166,6 @@ export function getPathFromStructSchema(
   parent: string,
   structMap: ReadonlyMap<string, ClassifiedPluginParams>,
   errors: ErrorCodes = ERROR_CODE
-): Result4 {
+): StructPathResult {
   return collectFromSchema(structName, parent, structMap, errors);
 }

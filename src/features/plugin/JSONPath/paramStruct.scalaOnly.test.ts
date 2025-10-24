@@ -7,7 +7,7 @@ import type { ClassifiedPluginParamsEx } from "@RpgTypes/rmmz/plugin";
 import type { PluginParam } from "@RpgTypes/rmmz/plugin/core/types";
 import { JSONPathJS } from "jsonpath-js";
 import { getPathFromStructParam, getPathFromStructSchema } from "./paramStruct";
-import type { StructPropertysPath, Result4 } from "./types/struct2";
+import type { StructPropertysPath, StructPathResult } from "./types/struct2";
 
 interface MockPerson {
   name: string;
@@ -50,7 +50,7 @@ describe("person", () => {
     expect(result.items).toEqual(expected);
   });
   test("getPathFromStructSchema", () => {
-    const result: Result4 = getPathFromStructSchema(
+    const result: StructPathResult = getPathFromStructSchema(
       "MockPerson",
       "$.person",
       new Map([["MockPerson", personSchema]])
