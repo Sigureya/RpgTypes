@@ -11,12 +11,12 @@ export interface StructPropertysPath {
   scalaArrays: string[];
 }
 
-export interface Error {
+export interface StructPathError {
   path: string;
   code: string;
 }
 
 export interface Result4 {
   items: StructPropertysPath[];
-  errors: Error[];
+  errors: StructPathError[];
 }
