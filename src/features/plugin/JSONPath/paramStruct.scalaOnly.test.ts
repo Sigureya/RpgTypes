@@ -7,7 +7,7 @@ import type { ClassifiedPluginParamsEx } from "@RpgTypes/rmmz/plugin";
 import type { PluginParam } from "@RpgTypes/rmmz/plugin/core/types";
 import { JSONPathJS } from "jsonpath-js";
 import { getPathFromStructParam, getPathFromStructSchema } from "./paramStruct";
-import type { Result3, Result4 } from "./types/struct2";
+import type { StructPropertysPath, Result4 } from "./types/struct2";
 
 interface MockPerson {
   name: string;
@@ -31,11 +31,11 @@ describe("person", () => {
     structs: [],
     structArrays: [],
   };
-  const expected: Result3[] = [
+  const expected: StructPropertysPath[] = [
     {
       scalas: `$.person["name","age","b"]`,
       scalaArrays: ["$.person.numberArray[*]", "$.person.stringArray[*]"],
-      struct: "MockPerson",
+      structName: "MockPerson",
     },
   ];
   test("getPathFromStruct", () => {

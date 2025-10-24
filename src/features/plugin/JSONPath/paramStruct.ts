@@ -4,7 +4,12 @@ import type {
 } from "@RpgTypes/rmmz/plugin";
 import type { PluginParam } from "@RpgTypes/rmmz/plugin/core/types";
 import { getScalaParams, getScalaArrayParams } from "./paramScala";
-import type { Result3, Result4 } from "./types/struct2";
+import type { ErrorCodes } from "./types/errorTypes";
+import type { StructPropertysPath, Result4 } from "./types/struct2";
+
+const ERROR_CODE = {
+  undefinedStruct: "undefined_struct",
+} as const satisfies ErrorCodes;
 
 /**
  * 指定した struct 名（schema）の内容を basePath を起点に再帰的に収集して Result3[] を返す
@@ -15,40 +20,62 @@ import type { Result3, Result4 } from "./types/struct2";
 function collectFromSchema(
   schemaName: string,
   basePath: string,
-  structMap: ReadonlyMap<string, ClassifiedPluginParams>
+  structMap: ReadonlyMap<string, ClassifiedPluginParams>,
+  errors: ErrorCodes,
+  visited: ReadonlySet<string>
 ): Result4 {
-  const schema = structMap.get(schemaName);
-  if (!schema) {
+  if (visited.has(schemaName)) {
     return {
       items: [],
       errors: [],
     };
   }
 
+  const schema = structMap.get(schemaName);
+  if (!schema) {
+    return {
+      items: [],
+      errors: [
+        {
+          code: errors.undefinedStruct,
+          path: basePath,
+        },
+      ],
+    };
+  }
+
   // 現在ノード（このスキーマ由来）の Result3（struct に schemaName を含める）
-  const current: Result3 = {
-    struct: schemaName,
+  const current: StructPropertysPath = {
+    structName: schemaName,
     scalas: getScalaParams(schema.scalas, basePath),
     scalaArrays: getScalaArrayParams(schema.scalaArrays, basePath),
   };
 
   // structs（通常の入れ子）の再帰結果を reduce で取得
-  const structChildren = (schema.structs ?? []).reduce<Result4[]>(
-    (acc, s) =>
-      acc.concat(
-        collectFromSchema(s.attr.struct, `${basePath}.${s.name}`, structMap)
-      ),
-    []
-  );
+  const structChildren = schema.structs.reduce<Result4[]>((acc, s) => {
+    const v2 = new Set(visited);
+    v2.add(schemaName);
+    return acc.concat(
+      collectFromSchema(
+        s.attr.struct,
+        `${basePath}.${s.name}`,
+        structMap,
+        errors,
+        v2
+      )
+    );
+  }, []);
 
   // structArrays（配列入れ子）の再帰結果を reduce で取得
-  const structArrayChildren = (schema.structArrays ?? []).reduce<Result4[]>(
+  const structArrayChildren = schema.structArrays.reduce<Result4[]>(
     (acc, sa) =>
       acc.concat(
         collectFromSchema(
           sa.attr.struct,
           `${basePath}.${sa.name}[*]`,
-          structMap
+          structMap,
+          errors,
+          visited
         )
       ),
     []
@@ -80,7 +107,9 @@ export function getPathFromStructParam(
       const res = collectFromSchema(
         param.attr.struct,
         `${parent}.${param.name}`,
-        structMap
+        structMap,
+        ERROR_CODE,
+        new Set()
       );
       return {
         items: result.items.concat(res.items),
@@ -99,5 +128,11 @@ export function getPathFromStructSchema(
   parent: string,
   structMap: ReadonlyMap<string, ClassifiedPluginParams>
 ): Result4 {
-  return collectFromSchema(structName, parent, structMap);
+  return collectFromSchema(
+    structName,
+    parent,
+    structMap,
+    ERROR_CODE,
+    new Set()
+  );
 }
