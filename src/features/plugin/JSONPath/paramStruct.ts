@@ -104,15 +104,12 @@ function collectFromSchema(
   schemaName: string,
   basePath: string,
   structMap: ReadonlyMap<string, ClassifiedPluginParams>,
-  errors: ErrorCodes,
-  visited: ReadonlySet<string>
+  errors: ErrorCodes
 ): Result4 {
-  const initialAncestry = Array.from(visited); // 既存の visited を配列として継承可能
-
   const initialFrame: Frame = {
     schemaName,
     basePath,
-    ancestry: initialAncestry,
+    ancestry: [],
   };
 
   const state: State = {
@@ -166,5 +163,5 @@ export function getPathFromStructSchema(
   structMap: ReadonlyMap<string, ClassifiedPluginParams>,
   errors: ErrorCodes = ERROR_CODE
 ): Result4 {
-  return collectFromSchema(structName, parent, structMap, errors, new Set());
+  return collectFromSchema(structName, parent, structMap, errors);
 }
