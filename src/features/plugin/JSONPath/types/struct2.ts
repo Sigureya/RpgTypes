@@ -6,6 +6,7 @@ export interface CCCResult {
 }
 
 export interface Result3 {
+  struct: string;
   scalas: string;
   scalaArrays: string[];
 }
