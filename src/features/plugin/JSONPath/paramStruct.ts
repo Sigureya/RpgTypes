@@ -3,67 +3,42 @@ import type {
   StructRefParam,
 } from "@RpgTypes/rmmz/plugin";
 import type { PluginParam } from "@RpgTypes/rmmz/plugin/core/types";
+import { makeScalaPath } from "./paramScala";
 import type { Result3 } from "./types/struct2";
 
-function makeScalasPath(
-  base: string,
-  scalas: ReadonlyArray<PluginParam>
-): string {
-  if (!scalas || scalas.length === 0) {
-    return `${base}[]`;
-  }
-  const names = scalas
-    .map((s) => s.name)
-    .map((n) => `"${n}"`)
-    .join(",");
-  return `${base}[${names}]`;
-}
-
-function makeScalaArraysPaths(
-  base: string,
-  scalaArrays: ReadonlyArray<PluginParam>
-): string[] {
-  if (!scalaArrays || scalaArrays.length === 0) {
-    return [];
-  }
-  return scalaArrays.map((p) => `${base}.${p.name}[*]`);
-}
-
-/**
- * 指定した struct 名（schema）の内容を basePath を起点に再帰的に収集して Result3[] を返す
- */
 function collectFromSchema(
   schemaName: string,
   basePath: string,
-  structMap: ReadonlyMap<string, ClassifiedPluginParams>,
-  out: Result3[]
-): void {
+  structMap: ReadonlyMap<string, ClassifiedPluginParams>
+): Result3[] {
   const schema = structMap.get(schemaName);
   if (!schema) {
-    return;
+    return [];
   }
 
-  // scalas のパス（basePath["a","b"] 形式）
-  const scalasPath = makeScalasPath(basePath, schema.scalas ?? []);
-  // scalaArrays のパス（basePath.prop[*] 形式）
-  const scalaArrays = makeScalaArraysPaths(basePath, schema.scalaArrays ?? []);
+  const current: Result3 = makeScalaPath(schema, basePath);
 
-  out.push({
-    scalas: scalasPath,
-    scalaArrays,
-  });
+  const structChildren = schema.structs.reduce<Result3[]>(
+    (acc, s) =>
+      acc.concat(
+        collectFromSchema(s.attr.struct, `${basePath}.${s.name}`, structMap)
+      ),
+    []
+  );
 
-  // struct fields -> 再帰（普通のドットアクセス）
-  for (const s of schema.structs ?? []) {
-    const childBase = `${basePath}.${s.name}`;
-    collectFromSchema(s.attr.struct, childBase, structMap, out);
-  }
+  const structArrayChildren = schema.structArrays.reduce<Result3[]>(
+    (acc, sa) =>
+      acc.concat(
+        collectFromSchema(
+          sa.attr.struct,
+          `${basePath}.${sa.name}[*]`,
+          structMap
+        )
+      ),
+    []
+  );
 
-  // struct array fields -> 再帰（ワイルドカード付き）
-  for (const sa of schema.structArrays ?? []) {
-    const childBase = `${basePath}.${sa.name}[*]`;
-    collectFromSchema(sa.attr.struct, childBase, structMap, out);
-  }
+  return [current, ...structChildren, ...structArrayChildren];
 }
 
 /**
@@ -74,12 +49,13 @@ export function getPathFromStructParam(
   parent: string,
   structMap: ReadonlyMap<string, ClassifiedPluginParams>
 ): Result3[] {
-  const result: Result3[] = [];
-  for (const p of params) {
-    const base = `${parent}.${p.name}`;
-    collectFromSchema(p.attr.struct, base, structMap, result);
-  }
-  return result;
+  return params.reduce<Result3[]>(
+    (acc, p) =>
+      acc.concat(
+        collectFromSchema(p.attr.struct, `${parent}.${p.name}`, structMap)
+      ),
+    []
+  );
 }
 
 /**
@@ -90,8 +66,5 @@ export function getPathFromStructSchema(
   parent: string,
   structMap: ReadonlyMap<string, ClassifiedPluginParams>
 ): Result3[] {
-  const result: Result3[] = [];
-  const base = `${parent}`;
-  collectFromSchema(structName, base, structMap, result);
-  return result;
+  return collectFromSchema(structName, parent, structMap);
 }
