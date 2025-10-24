@@ -58,10 +58,14 @@ const stepState = (
 
   if (schema.scalas.length > 0 || schema.scalaArrays.length > 0) {
     // 現在ノードを追加（pre-order）
+
     const current: StructPropertysPath = {
       structName: name,
-      scalas: makeScalaParams(schema.scalas, path),
       scalaArrays: makeScalaArrayParams(schema.scalaArrays, path),
+      scalas:
+        schema.scalas.length > 0
+          ? makeScalaParams(schema.scalas, path)
+          : undefined,
     };
     state.items.push(current);
   }
