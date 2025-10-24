@@ -12,6 +12,8 @@ interface MockPerson {
   name: string;
   age: number;
   b: boolean;
+  numberArray: number[];
+  stringArray: string[];
 }
 
 describe("person", () => {
@@ -21,14 +23,17 @@ describe("person", () => {
       { name: "age", attr: { kind: "number", default: 0 } },
       { name: "b", attr: { kind: "boolean", default: false } },
     ],
-    scalaArrays: [],
+    scalaArrays: [
+      { name: "numberArray", attr: { kind: "number[]", default: [] } },
+      { name: "stringArray", attr: { kind: "string[]", default: [] } },
+    ],
     structs: [],
     structArrays: [],
   };
   const expected: Result3[] = [
     {
       scalas: `$.person["name","age","b"]`,
-      scalaArrays: [],
+      scalaArrays: ["$.person.numberArray[*]", "$.person.stringArray[*]"],
     },
   ];
   test("getPathFromStruct", () => {
