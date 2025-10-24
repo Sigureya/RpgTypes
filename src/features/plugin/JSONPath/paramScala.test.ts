@@ -1,7 +1,11 @@
 import { describe, test, expect } from "vitest";
 import type { ClassifiedPluginParamsEx } from "@RpgTypes/rmmz/plugin";
 import { JSONPathJS } from "jsonpath-js";
-import { getScalaParams, getScalaArrayParams } from "./paramScala";
+import {
+  getScalaParams,
+  getScalaArrayParams,
+  makeScalaPath,
+} from "./paramScala";
 
 interface ArrayMock {
   numberArray: number[];
@@ -66,8 +70,8 @@ describe("getScalaArrayParams", () => {
   };
   const paths = ["$.numberArray[*]", "$.stringArray[*]", "$.files[*]"] as const;
 
-  test("", () => {
-    const path1 = getScalaArrayParams(schema.scalaArrays, "$");
+  test("create path", () => {
+    const path1: string[] = getScalaArrayParams(schema.scalaArrays, "$");
     expect(path1).toEqual(paths);
   });
   test("find number params", () => {
@@ -99,4 +103,26 @@ describe("getScalaArrayParams", () => {
     ];
     expect(result).toEqual(expected);
   });
+});
+
+test("makeScalaPath", () => {
+  const schema: ClassifiedPluginParamsEx<ScalaMock & ArrayMock> = {
+    structs: [],
+    structArrays: [],
+    scalas: [
+      { name: "stringParam", attr: { kind: "string", default: "" } },
+      { name: "numberParam", attr: { kind: "number", default: 0 } },
+      { name: "booleanParam", attr: { kind: "boolean", default: false } },
+    ],
+    scalaArrays: [
+      { name: "numberArray", attr: { kind: "number[]", default: [] } },
+      { name: "stringArray", attr: { kind: "string[]", default: [] } },
+    ],
+  };
+  const parent = "$";
+  const result = makeScalaPath(schema, parent);
+  expect(result.scalas).toBe(getScalaParams(schema.scalas, parent));
+  expect(result.scalaArrays).toEqual(
+    getScalaArrayParams(schema.scalaArrays, parent)
+  );
 });
