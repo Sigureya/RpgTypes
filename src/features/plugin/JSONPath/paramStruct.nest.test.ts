@@ -187,12 +187,13 @@ describe("school", () => {
     },
   ];
 
+  const structMap = makeMap();
   test("getPathFromStruct", () => {
     const param: PluginParam<StructRefParam> = {
       name: "school",
       attr: { kind: "struct", struct: "School" },
     };
-    const result: Result4 = getPathFromStructParam([param], "$", makeMap());
+    const result: Result4 = getPathFromStructParam([param], "$", structMap);
     expect(result.items).toEqual(expected);
     expect(result.errors).toEqual([]);
   });
