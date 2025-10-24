@@ -7,7 +7,7 @@ export interface CCCResult {
 
 export interface StructPropertysPath {
   structName: string;
-  scalas: string;
+  scalas: string | null;
   scalaArrays: string[];
 }
 
