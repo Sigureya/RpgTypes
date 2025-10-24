@@ -95,11 +95,33 @@ const makeMap = (): ReadonlyMap<string, ClassifiedPluginParams> => {
   ]);
 };
 
+describe("person", () => {
+  const expected: Result3[] = [
+    {
+      scalas: `$.person["name","age"]`,
+      scalaArrays: ["$.person.items[*]", "$.person.nicknames[*]"],
+      struct: "Person",
+    },
+  ];
+  test("getPathFromStruct", () => {
+    const param = {
+      name: "person",
+      attr: { kind: "struct", struct: "Person" },
+    } as const satisfies PluginParam<StructRefParam>;
+    const structMap: ReadonlyMap<string, ClassifiedPluginParams> = new Map([
+      ["Person", personScheame],
+    ]);
+    const result = getPathFromStructParam([param], "$", structMap);
+    expect(result).toEqual(expected);
+  });
+});
+
 describe("classroom", () => {
   const expected: Result3[] = [
     {
       scalas: `$.classroom["className"]`,
       scalaArrays: [],
+      struct: "Class",
     },
     {
       scalas: `$.classroom.teacher["name","age"]`,
@@ -107,6 +129,7 @@ describe("classroom", () => {
         "$.classroom.teacher.items[*]",
         "$.classroom.teacher.nicknames[*]",
       ],
+      struct: "Person",
     },
     {
       scalas: `$.classroom.students[*]["name","age"]`,
@@ -114,6 +137,7 @@ describe("classroom", () => {
         "$.classroom.students[*].items[*]",
         "$.classroom.students[*].nicknames[*]",
       ],
+      struct: "Person",
     },
   ];
   test("getPathFromStruct", () => {
@@ -129,18 +153,22 @@ describe("classroom", () => {
 describe("school", () => {
   const expected: Result3[] = [
     {
+      struct: "School",
       scalas: `$.school["since"]`,
       scalaArrays: [],
     },
     {
+      struct: "Address",
       scalas: `$.school.address["street","city","zipCode"]`,
       scalaArrays: [],
     },
     {
+      struct: "Class",
       scalas: `$.school.classrooms[*]["className"]`,
       scalaArrays: [],
     },
     {
+      struct: "Person",
       scalas: `$.school.classrooms[*].teacher["name","age"]`,
       scalaArrays: [
         "$.school.classrooms[*].teacher.items[*]",
@@ -148,6 +176,7 @@ describe("school", () => {
       ],
     },
     {
+      struct: "Person",
       scalas: `$.school.classrooms[*].students[*]["name","age"]`,
       scalaArrays: [
         "$.school.classrooms[*].students[*].items[*]",

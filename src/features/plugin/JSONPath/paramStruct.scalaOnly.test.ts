@@ -35,6 +35,7 @@ describe("person", () => {
     {
       scalas: `$.person["name","age","b"]`,
       scalaArrays: ["$.person.numberArray[*]", "$.person.stringArray[*]"],
+      struct: "MockPerson",
     },
   ];
   test("getPathFromStruct", () => {
