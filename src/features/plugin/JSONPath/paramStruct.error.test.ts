@@ -41,13 +41,7 @@ describe("cyclic struct", () => {
     } as const satisfies PluginParam<StructRefParam>;
     const result: Result4 = getPathFromStructParam([param], "$", structMap);
     const expected: Result4 = {
-      items: [
-        {
-          scalaArrays: [],
-          scalas: "$.loop[]",
-          structName: "LoopMock",
-        },
-      ],
+      items: [],
       errors: [
         { code: errors.cyclicStruct, path: "$.loop.loopMock" },
         { code: errors.cyclicStruct, path: "$.loop.loopMockArray[*]" },
