@@ -59,7 +59,9 @@ const stepState = (
 
     const current: StructPropertysPath = {
       structName: name,
-      scalaArrays: makeScalaArrayParams(schema.scalaArrays, path),
+      scalaArrays: makeScalaArrayParams(schema.scalaArrays, path).map((s) => ({
+        path: s,
+      })),
       scalas:
         schema.scalas.length > 0
           ? makeScalaParams(schema.scalas, path)
