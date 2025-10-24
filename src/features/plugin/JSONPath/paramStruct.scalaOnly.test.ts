@@ -45,14 +45,14 @@ describe("person", () => {
     const structMap: ReadonlyMap<string, ClassifiedPluginParams> = new Map([
       ["MockPerson", personSchema],
     ]);
-    const result = getPathFromStructParam([param], "$.person", structMap);
+    const result = getPathFromStructParam([param], "$", structMap);
     expect(result).toEqual(expected);
   });
   test("getPathFromStructSchema", () => {
     const result: Result3[] = getPathFromStructSchema(
-      personSchema,
+      "MockPerson",
       "$.person",
-      new Map()
+      new Map([["MockPerson", personSchema]])
     );
     expect(result).toEqual(expected);
   });
