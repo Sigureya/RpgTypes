@@ -1,4 +1,3 @@
-// ...existing code...
 import type {
   ClassifiedPluginParams,
   StructRefParam,
@@ -20,7 +19,6 @@ const ERROR_CODE = {
 interface Frame {
   schemaName: string;
   basePath: string;
-  // visited を廃止し、ancestor list (配列) で循環検出を行う
   ancestry: string[];
 }
 interface State {
@@ -134,7 +132,6 @@ function collectFromSchema(
   return { items: finalState.items, errors: finalState.errs };
 }
 
-// ...existing code...
 export function getPathFromStructParam(
   params: ReadonlyArray<PluginParam<StructRefParam>>,
   parent: string,
@@ -158,9 +155,6 @@ export function getPathFromStructParam(
   );
 }
 
-/**
- * struct schema 名と parent を渡して Result3[] を得る補助関数
- */
 export function getPathFromStructSchema(
   structName: string,
   parent: string,
