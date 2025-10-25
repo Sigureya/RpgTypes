@@ -8,7 +8,7 @@ export interface StructPropertysPath {
 
 export interface PathPair<T = PluginParam> {
   path: string;
-  param?: T;
+  param: T;
 }
 
 export interface ArrayPathPair {
