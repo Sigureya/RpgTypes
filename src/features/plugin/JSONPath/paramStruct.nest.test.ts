@@ -122,8 +122,8 @@ describe("person", () => {
     {
       scalas: `$.person["name","age"]`,
       scalaArrays: [
-        { path: "$.person.items[*]" },
-        { path: "$.person.nicknames[*]" },
+        { path: "$.person.items[*]", param: personScheame.scalaArrays[0] },
+        { path: "$.person.nicknames[*]", param: personScheame.scalaArrays[1] },
       ],
       structName: "Person",
     },
@@ -156,16 +156,28 @@ describe("classroom", () => {
     {
       scalas: `$.classroom.teacher["name","age"]`,
       scalaArrays: [
-        { path: "$.classroom.teacher.items[*]" },
-        { path: "$.classroom.teacher.nicknames[*]" },
+        {
+          path: "$.classroom.teacher.items[*]",
+          param: personScheame.scalaArrays[0],
+        },
+        {
+          path: "$.classroom.teacher.nicknames[*]",
+          param: personScheame.scalaArrays[1],
+        },
       ],
       structName: "Person",
     },
     {
       scalas: `$.classroom.students[*]["name","age"]`,
       scalaArrays: [
-        { path: "$.classroom.students[*].items[*]" },
-        { path: "$.classroom.students[*].nicknames[*]" },
+        {
+          path: "$.classroom.students[*].items[*]",
+          param: personScheame.scalaArrays[0],
+        },
+        {
+          path: "$.classroom.students[*].nicknames[*]",
+          param: personScheame.scalaArrays[1],
+        },
       ],
       structName: "Person",
     },
@@ -206,10 +218,13 @@ describe("school", () => {
       structName: "Person",
       scalas: `$.school.classrooms[*].teacher["name","age"]`,
       scalaArrays: [
-        { path: "$.school.classrooms[*].teacher.items[*]" },
-
+        {
+          path: "$.school.classrooms[*].teacher.items[*]",
+          param: personScheame.scalaArrays[0],
+        },
         {
           path: "$.school.classrooms[*].teacher.nicknames[*]",
+          param: personScheame.scalaArrays[1],
         },
       ],
     },
@@ -217,8 +232,14 @@ describe("school", () => {
       structName: "Person",
       scalas: `$.school.classrooms[*].students[*]["name","age"]`,
       scalaArrays: [
-        { path: "$.school.classrooms[*].students[*].items[*]" },
-        { path: "$.school.classrooms[*].students[*].nicknames[*]" },
+        {
+          path: "$.school.classrooms[*].students[*].items[*]",
+          param: personScheame.scalaArrays[0],
+        },
+        {
+          path: "$.school.classrooms[*].students[*].nicknames[*]",
+          param: personScheame.scalaArrays[1],
+        },
       ],
     },
   ];

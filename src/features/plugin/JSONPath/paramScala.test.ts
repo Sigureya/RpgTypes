@@ -2,6 +2,7 @@ import { describe, test, expect } from "vitest";
 import type { ClassifiedPluginParamsEx } from "@RpgTypes/rmmz/plugin";
 import { JSONPathJS } from "jsonpath-js";
 import { makeScalaParams, makeScalaArrayParams } from "./paramScala";
+import type { PathPair } from "./types/struct2";
 
 interface ArrayMock {
   numberArray: number[];
@@ -64,14 +65,27 @@ describe("makeScalaArrayParams", () => {
       { name: "files", attr: { kind: "file[]", default: [], dir: "img" } },
     ],
   };
-  const paths = ["$.numberArray[*]", "$.stringArray[*]", "$.files[*]"] as const;
+  const paths = [
+    {
+      path: "$.numberArray[*]",
+      param: schema.scalaArrays[0],
+    },
+    {
+      path: "$.stringArray[*]",
+      param: schema.scalaArrays[1],
+    },
+    {
+      path: "$.files[*]",
+      param: schema.scalaArrays[2],
+    },
+  ] as const satisfies PathPair[];
 
   test("create path", () => {
-    const path1: string[] = makeScalaArrayParams(schema.scalaArrays, "$");
+    const path1: PathPair[] = makeScalaArrayParams(schema.scalaArrays, "$");
     expect(path1).toEqual(paths);
   });
   test("find number params", () => {
-    const jsonPath = new JSONPathJS(paths[0]);
+    const jsonPath = new JSONPathJS(paths[0].path);
     const result = jsonPath.pathSegments(mockData);
     const expected: typeof result = [
       { value: 211, segments: ["numberArray", 0] },
@@ -81,7 +95,7 @@ describe("makeScalaArrayParams", () => {
     expect(result).toEqual(expected);
   });
   test("find string params", () => {
-    const jsonPath = new JSONPathJS(paths[1]);
+    const jsonPath = new JSONPathJS(paths[1].path);
     const result = jsonPath.pathSegments(mockData);
     const expected: typeof result = [
       { value: "a", segments: ["stringArray", 0] },
@@ -91,7 +105,7 @@ describe("makeScalaArrayParams", () => {
     expect(result).toEqual(expected);
   });
   test("find file params", () => {
-    const jsonPath = new JSONPathJS(paths[2]);
+    const jsonPath = new JSONPathJS(paths[2].path);
     const result = jsonPath.pathSegments(mockData);
     const expected: typeof result = [
       { value: "face.png", segments: ["files", 0] },
