@@ -3,7 +3,7 @@ import type {
   ScalaParam,
   ArrayParamTypes,
 } from "@RpgTypes/rmmz/plugin";
-import type { PathPair } from "./types/struct2";
+import type { ArrayPathPair } from "./types/struct2";
 
 export const makeScalaParams = (
   scalas: ReadonlyArray<PluginParam<ScalaParam>>,
@@ -16,9 +16,9 @@ export const makeScalaParams = (
 export const makeScalaArrayParams = (
   scalaArrays: ReadonlyArray<PluginParam<ArrayParamTypes>>,
   parent: string
-): PathPair<PluginParam<ArrayParamTypes>>[] => {
+): ArrayPathPair[] => {
   return scalaArrays.map(
-    (param): PathPair<PluginParam<ArrayParamTypes>> => ({
+    (param): ArrayPathPair => ({
       path: `${parent}.${param.name}[*]`,
       param: param,
     })
