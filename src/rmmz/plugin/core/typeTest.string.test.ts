@@ -7,6 +7,7 @@ import {
   paramHasText,
   isStructParam,
   isStructArrayParam,
+  isNumberValueParam,
 } from "./typeTest";
 
 const stringParam: StringParam = {
@@ -52,6 +53,14 @@ const runTestCase = (param: ScalaParam) => {
       expect(param).not.toSatisfy(isStructArrayParam);
       expect(isStructArrayParam(param)).toBe(false);
     });
+    it("does have text", () => {
+      expect(param).toSatisfy(paramHasText);
+      expect(paramHasText(param)).toBe(true);
+    });
+    it("is not number value param", () => {
+      expect(param).not.toSatisfy(isNumberValueParam);
+      expect(isNumberValueParam(param)).toBe(false);
+    });
   });
 };
 
@@ -60,18 +69,3 @@ const runTestCase = (param: ScalaParam) => {
     runTestCase(param);
   }
 );
-
-describe("paramHasText", () => {
-  it("select", () => {
-    expect(selectParam).toSatisfy(paramHasText);
-  });
-  it("combo", () => {
-    expect(comboParam).toSatisfy(paramHasText);
-  });
-  it("string", () => {
-    expect(stringParam).toSatisfy(paramHasText);
-  });
-  it("multiline_string", () => {
-    expect(multilineStringParam).toSatisfy(paramHasText);
-  });
-});
