@@ -2,6 +2,7 @@ import { describe, test, expect } from "vitest";
 import { extractArrayParamValue } from "./buildPathRead";
 import type {
   ArrayParamPairEx,
+  ArrayPathPair,
   NumberSequenceParamValues,
   StringSequenceParamValues,
 } from "./types";
@@ -67,11 +68,11 @@ describe("aa", () => {
       expect(result).toEqual(expected);
     });
     test("nested", () => {
-      const path = {
+      const path: ArrayPathPair = {
         path: `$.arrayMock.items[*]`,
         param: {
-          name: "items" as const,
-          attr: { kind: "item[]" as const, default: [] },
+          name: "items",
+          attr: { kind: "item[]", default: [] },
         },
       };
       const expected = {
@@ -102,11 +103,11 @@ describe("aa", () => {
       expect(result).toEqual(expected);
     });
     test("nested", () => {
-      const path = {
+      const path: ArrayPathPair = {
         path: "$.arrayMock.stringArray[*]",
         param: {
           name: "stringArray",
-          attr: { kind: "string[]" as const, default: [] },
+          attr: { kind: "string[]", default: [] },
         },
       };
       const expected = {
