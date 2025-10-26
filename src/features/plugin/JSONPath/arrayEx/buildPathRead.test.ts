@@ -18,13 +18,19 @@ interface ArrayMock {
   items: number[];
 }
 
+interface NestedMock {
+  arrayMock: ArrayMock;
+}
+
 describe("aa", () => {
   const mockData = {
-    numberArray: [233, 211, 209],
-    stringArray: ["a", "b", "c"],
-    files: ["face.png", "icon.png"],
-    items: [1, 2, 3, 4, 5],
-  } as const satisfies ArrayMock;
+    arrayMock: {
+      numberArray: [233, 211, 209],
+      stringArray: ["a", "b", "c"],
+      files: ["face.png", "icon.png"],
+      items: [1, 2, 3, 4, 5],
+    },
+  } as const satisfies NestedMock;
 
   test("number array", () => {
     const path = {
@@ -39,41 +45,78 @@ describe("aa", () => {
       valueKind: "number",
       param: path.param,
     };
-    const result = extractArrayParamValue(mockData, path);
-    expect(result).toEqual(expected);
-  });
-  test("items", () => {
-    const path = {
-      path: `$.items[*]`,
-      param: {
-        name: "items",
-        attr: { kind: "item[]", default: [] },
-      },
-    } as const satisfies ArrayParamPairEx<ArrayMock>;
-    const expected: NumberSequenceParamValues = {
-      values: [1, 2, 3, 4, 5],
-      valueKind: "number",
-      param: path.param,
-    };
-    const result = extractArrayParamValue(mockData, path);
+    const result = extractArrayParamValue(mockData.arrayMock, path);
     expect(result).toEqual(expected);
   });
 
-  test("string array", () => {
-    const path = {
-      path: "$.stringArray[*]",
-      param: {
-        name: "stringArray",
-        attr: { kind: "string[]", default: [] },
-      },
-    } as const satisfies ArrayParamPairEx<ArrayMock>;
-    const expected: StringSequenceParamValues = {
-      values: ["a", "b", "c"],
-      valueKind: "string",
-      param: path.param,
-    };
-    const result = extractArrayParamValue(mockData, path);
-    expect(result).toEqual(expected);
+  describe("items", () => {
+    test("direct", () => {
+      const path = {
+        path: `$.items[*]`,
+        param: {
+          name: "items",
+          attr: { kind: "item[]", default: [] },
+        },
+      } as const satisfies ArrayParamPairEx<ArrayMock>;
+      const expected: NumberSequenceParamValues = {
+        values: [1, 2, 3, 4, 5],
+        valueKind: "number",
+        param: path.param,
+      };
+      const result = extractArrayParamValue(mockData.arrayMock, path);
+      expect(result).toEqual(expected);
+    });
+    test("nested", () => {
+      const path = {
+        path: `$.arrayMock.items[*]`,
+        param: {
+          name: "items" as const,
+          attr: { kind: "item[]" as const, default: [] },
+        },
+      };
+      const expected = {
+        values: [1, 2, 3, 4, 5],
+        valueKind: "number",
+        param: path.param,
+      };
+      const result = extractArrayParamValue(mockData, path);
+      expect(result).toEqual(expected);
+    });
+  });
+
+  describe("string array", () => {
+    test("direct", () => {
+      const path = {
+        path: "$.stringArray[*]",
+        param: {
+          name: "stringArray",
+          attr: { kind: "string[]", default: [] },
+        },
+      } as const satisfies ArrayParamPairEx<ArrayMock>;
+      const expected: StringSequenceParamValues = {
+        values: ["a", "b", "c"],
+        valueKind: "string",
+        param: path.param,
+      };
+      const result = extractArrayParamValue(mockData.arrayMock, path);
+      expect(result).toEqual(expected);
+    });
+    test("nested", () => {
+      const path = {
+        path: "$.arrayMock.stringArray[*]",
+        param: {
+          name: "stringArray",
+          attr: { kind: "string[]" as const, default: [] },
+        },
+      };
+      const expected = {
+        values: ["a", "b", "c"],
+        valueKind: "string",
+        param: path.param,
+      };
+      const result = extractArrayParamValue(mockData, path);
+      expect(result).toEqual(expected);
+    });
   });
 
   test("unmatched path", () => {
