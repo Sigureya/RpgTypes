@@ -3,6 +3,7 @@ import type {
   ParamKinds,
   PrimitiveStringParam,
   ScalaParam,
+  ArrayParamTypes,
 } from "./paramUnion";
 import type {
   ArrayParam,
@@ -51,7 +52,7 @@ export const paramHasText = (
   return TABLE_S.includes(param.kind);
 };
 
-const TABLE = {
+const TABLE: Record<string, { type: string }> = {
   string: { type: "string" },
   number: { type: "number" },
   boolean: { type: "boolean" },
@@ -72,6 +73,7 @@ const TABLE = {
   combo: { type: "string" },
   select: { type: "string" },
   any: { type: "string" },
+  struct: { type: "struct" },
 } as const satisfies {
   [key in ParamKinds]?: { type: string };
 };
@@ -88,4 +90,18 @@ export const isNumberValueParam = (
 ): param is Extract<PrimitiveParam, { default: number }> => {
   const info = TABLE[param.kind];
   return info.type === "number";
+};
+
+export const isNumberArrayParam = (
+  param: ArrayParam
+): param is Extract<ArrayParam, { default: number[] }> => {
+  const info = TABLE[param.kind.replace("[]", "") as ParamKinds];
+  return info.type === "number";
+};
+
+export const isStringArrayParam = (
+  param: ArrayParam
+): param is Extract<ArrayParamTypes, { default: string[] }> => {
+  const info = TABLE[param.kind.replace("[]", "") as ParamKinds];
+  return info.type === "string";
 };

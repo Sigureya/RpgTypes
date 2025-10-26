@@ -1,5 +1,5 @@
+import type { JSONValue } from "@RpgTypes/libs";
 import type { PrimitiveParam } from "@RpgTypes/rmmz/plugin";
-import type { JSONValue } from "./jsonTypes";
 
 export interface PluginParamExtractedValue {
   name: string;
