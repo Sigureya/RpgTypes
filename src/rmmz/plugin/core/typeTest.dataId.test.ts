@@ -1,6 +1,12 @@
 import { describe, expect, it } from "vitest";
 import type { RpgDataIdParam, RpgVariableParam } from "./primitiveParams";
-import { isStringValueParam, isArrayParam, paramHasText } from "./typeTest";
+import {
+  isStringValueParam,
+  isArrayParam,
+  paramHasText,
+  isStructParam,
+  isStructArrayParam,
+} from "./typeTest";
 
 const runTestCase = (param: RpgDataIdParam | RpgVariableParam) => {
   describe(`dataId kind=${param.kind}`, () => {
@@ -12,6 +18,12 @@ const runTestCase = (param: RpgDataIdParam | RpgVariableParam) => {
     });
     it("does not have text", () => {
       expect(param).not.toSatisfy(paramHasText);
+    });
+    it("is not struct param", () => {
+      expect(param).not.toSatisfy(isStructParam);
+    });
+    it("is not struct array param", () => {
+      expect(param).not.toSatisfy(isStructArrayParam);
     });
   });
 };
