@@ -23,7 +23,7 @@ interface NestedMock {
   arrayMock: ArrayMock;
 }
 
-describe("aa", () => {
+describe("extractArrayParamValue", () => {
   const mockData = {
     arrayMock: {
       numberArray: [233, 211, 209],
