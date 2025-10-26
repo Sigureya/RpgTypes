@@ -33,7 +33,7 @@ interface School {
   since: number;
 }
 
-const personScheame: ClassifiedPluginParamsEx<Person> = {
+const personScheame = {
   structs: [],
   structArrays: [],
   scalas: [
@@ -44,9 +44,9 @@ const personScheame: ClassifiedPluginParamsEx<Person> = {
     { name: "items", attr: { kind: "number[]", default: [] } },
     { name: "nicknames", attr: { kind: "string[]", default: [] } },
   ],
-};
+} as const satisfies ClassifiedPluginParamsEx<Person>;
 
-const addressSchema: ClassifiedPluginParamsEx<Address> = {
+const addressSchema = {
   structs: [],
   structArrays: [],
   scalas: [
@@ -55,9 +55,9 @@ const addressSchema: ClassifiedPluginParamsEx<Address> = {
     { name: "zipCode", attr: { kind: "string", default: "" } },
   ],
   scalaArrays: [],
-};
+} as const satisfies ClassifiedPluginParamsEx<Address>;
 
-const classRoomSchema: ClassifiedPluginParamsEx<Class> = {
+const classRoomSchema = {
   scalas: [{ name: "className", attr: { kind: "string", default: "" } }],
   scalaArrays: [],
   structs: [
@@ -72,9 +72,9 @@ const classRoomSchema: ClassifiedPluginParamsEx<Class> = {
       attr: { kind: "struct[]", struct: "Person", default: [] },
     },
   ],
-};
+} as const satisfies ClassifiedPluginParamsEx<Class>;
 
-const schoolSchema: ClassifiedPluginParamsEx<School> = {
+const schoolSchema = {
   scalas: [{ name: "since", attr: { kind: "number", default: 0 } }],
   scalaArrays: [],
   structs: [{ name: "address", attr: { kind: "struct", struct: "Address" } }],
@@ -84,7 +84,7 @@ const schoolSchema: ClassifiedPluginParamsEx<School> = {
       attr: { kind: "struct[]", struct: "Class", default: [] },
     },
   ],
-};
+} as const satisfies ClassifiedPluginParamsEx<School>;
 
 const makeMap = (): ReadonlyMap<string, ClassifiedPluginParams> => {
   return new Map<string, ClassifiedPluginParams>([
@@ -122,8 +122,8 @@ describe("person", () => {
     {
       scalas: `$.person["name","age"]`,
       scalaArrays: [
-        { path: "$.person.items[*]" },
-        { path: "$.person.nicknames[*]" },
+        { path: "$.person.items[*]", param: personScheame.scalaArrays[0] },
+        { path: "$.person.nicknames[*]", param: personScheame.scalaArrays[1] },
       ],
       structName: "Person",
     },
@@ -156,16 +156,28 @@ describe("classroom", () => {
     {
       scalas: `$.classroom.teacher["name","age"]`,
       scalaArrays: [
-        { path: "$.classroom.teacher.items[*]" },
-        { path: "$.classroom.teacher.nicknames[*]" },
+        {
+          path: "$.classroom.teacher.items[*]",
+          param: personScheame.scalaArrays[0],
+        },
+        {
+          path: "$.classroom.teacher.nicknames[*]",
+          param: personScheame.scalaArrays[1],
+        },
       ],
       structName: "Person",
     },
     {
       scalas: `$.classroom.students[*]["name","age"]`,
       scalaArrays: [
-        { path: "$.classroom.students[*].items[*]" },
-        { path: "$.classroom.students[*].nicknames[*]" },
+        {
+          path: "$.classroom.students[*].items[*]",
+          param: personScheame.scalaArrays[0],
+        },
+        {
+          path: "$.classroom.students[*].nicknames[*]",
+          param: personScheame.scalaArrays[1],
+        },
       ],
       structName: "Person",
     },
@@ -206,10 +218,13 @@ describe("school", () => {
       structName: "Person",
       scalas: `$.school.classrooms[*].teacher["name","age"]`,
       scalaArrays: [
-        { path: "$.school.classrooms[*].teacher.items[*]" },
-
+        {
+          path: "$.school.classrooms[*].teacher.items[*]",
+          param: personScheame.scalaArrays[0],
+        },
         {
           path: "$.school.classrooms[*].teacher.nicknames[*]",
+          param: personScheame.scalaArrays[1],
         },
       ],
     },
@@ -217,8 +232,14 @@ describe("school", () => {
       structName: "Person",
       scalas: `$.school.classrooms[*].students[*]["name","age"]`,
       scalaArrays: [
-        { path: "$.school.classrooms[*].students[*].items[*]" },
-        { path: "$.school.classrooms[*].students[*].nicknames[*]" },
+        {
+          path: "$.school.classrooms[*].students[*].items[*]",
+          param: personScheame.scalaArrays[0],
+        },
+        {
+          path: "$.school.classrooms[*].students[*].nicknames[*]",
+          param: personScheame.scalaArrays[1],
+        },
       ],
     },
   ];
