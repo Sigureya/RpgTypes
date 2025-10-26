@@ -1,20 +1,8 @@
 import type { JSONValue } from "@RpgTypes/libs";
-import type { ArrayParamTypes, PluginParam } from "@RpgTypes/rmmz/plugin";
+import type { ArrayParamTypes } from "@RpgTypes/rmmz/plugin";
 import { isNumberArrayParam, isStringArrayParam } from "@RpgTypes/rmmz/plugin";
 import { JSONPathJS } from "jsonpath-js";
-import type { ArrayPathPair } from "./types/struct2";
-
-export interface SSP {
-  values: string[];
-  valueKind: "string";
-  param: PluginParam<Extract<ArrayParamTypes, { default: string[] }>>;
-}
-
-export interface NNP {
-  values: number[];
-  valueKind: "number";
-  param: PluginParam<Extract<ArrayParamTypes, { default: number[] }>>;
-}
+import type { ArrayPathPair, NNP, SSP } from "./types";
 
 export const aa = (
   object: JSONValue,
