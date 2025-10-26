@@ -2,12 +2,16 @@ import type { JSONValue } from "@RpgTypes/libs";
 import type { ArrayParamTypes } from "@RpgTypes/rmmz/plugin";
 import { isNumberArrayParam, isStringArrayParam } from "@RpgTypes/rmmz/plugin";
 import { JSONPathJS } from "jsonpath-js";
-import type { ArrayPathPair, NNP, SSP } from "./types";
+import type {
+  ArrayPathPair,
+  NumberSequenceParamValues,
+  StringSequenceParamValues,
+} from "./types";
 
-export const aa = (
+export const extractArrayParamValue = (
   object: JSONValue,
   pair: ArrayPathPair
-): null | SSP | NNP => {
+): null | StringSequenceParamValues | NumberSequenceParamValues => {
   const path = new JSONPathJS(pair.path);
   const values: JSONValue = path.find(object);
   if (!Array.isArray(values)) {

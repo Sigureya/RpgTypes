@@ -1,8 +1,10 @@
 import { describe, test, expect } from "vitest";
-import type { ArrayParamTypes, StringArrayParam } from "@RpgTypes/rmmz/plugin";
-import type { JSONPathType } from "../types";
-import { aa } from "./buildPathRead";
-import type { NNP, SSP } from "./types";
+import { extractArrayParamValue } from "./buildPathRead";
+import type {
+  ArrayParamPairEx,
+  NumberSequenceParamValues,
+  StringSequenceParamValues,
+} from "./types";
 
 interface ArrayMock {
   numberArray: number[];
@@ -20,55 +22,52 @@ describe("aa", () => {
   } as const satisfies ArrayMock;
 
   test("number array", () => {
-    const pathNum: JSONPathType<ArrayMock> = `$.numberArray[*]`;
-    const paramAttr: ArrayParamTypes = {
-      kind: "number[]",
-      default: [],
-    };
-    const expected: NNP = {
+    const path = {
+      path: "$.numberArray[*]",
+      param: {
+        name: "numberArray",
+        attr: { kind: "number[]", default: [] },
+      },
+    } as const satisfies ArrayParamPairEx<ArrayMock>;
+    const expected: NumberSequenceParamValues = {
       values: [233, 211, 209],
       valueKind: "number",
-      param: { name: "numberArray", attr: paramAttr },
+      param: path.param,
     };
-    const result = aa(mockData, {
-      path: pathNum,
-      param: { name: "numberArray", attr: paramAttr },
-    });
+    const result = extractArrayParamValue(mockData, path);
     expect(result).toEqual(expected);
   });
   test("items", () => {
-    const pathNum: JSONPathType<ArrayMock> = `$.items[*]`;
-    const paramAttr: ArrayParamTypes = {
-      kind: "item[]",
-      default: [],
-    };
-    const expected: NNP = {
+    const path = {
+      path: `$.items[*]`,
+      param: {
+        name: "items",
+        attr: { kind: "item[]", default: [] },
+      },
+    } as const satisfies ArrayParamPairEx<ArrayMock>;
+    const expected: NumberSequenceParamValues = {
       values: [1, 2, 3, 4, 5],
       valueKind: "number",
-      param: { name: "items", attr: paramAttr },
+      param: path.param,
     };
-    const result = aa(mockData, {
-      param: { name: "items", attr: paramAttr },
-      path: pathNum,
-    });
+    const result = extractArrayParamValue(mockData, path);
     expect(result).toEqual(expected);
   });
 
   test("string array", () => {
-    const pathStr: JSONPathType<ArrayMock> = `$.stringArray[*]`;
-    const paramAttr: StringArrayParam = {
-      kind: "string[]",
-      default: [],
-    };
-    const expected: SSP = {
+    const path = {
+      path: "$.stringArray[*]",
+      param: {
+        name: "stringArray",
+        attr: { kind: "string[]", default: [] },
+      },
+    } as const satisfies ArrayParamPairEx<ArrayMock>;
+    const expected: StringSequenceParamValues = {
       values: ["a", "b", "c"],
       valueKind: "string",
-      param: { name: "stringArray", attr: paramAttr },
+      param: path.param,
     };
-    const result = aa(mockData, {
-      path: pathStr,
-      param: { name: "stringArray", attr: paramAttr },
-    });
+    const result = extractArrayParamValue(mockData, path);
     expect(result).toEqual(expected);
   });
 });
