@@ -1,9 +1,13 @@
-import type { ParamKinds, PrimitiveParam, PrimitiveStringParam } from "./core";
+import type {
+  PrimitiveParam,
+  ParamKinds,
+  PrimitiveStringParam,
+} from "./paramUnion";
 import type {
   ArrayParam,
-  StructArrayRefParam,
   StructRefParam,
-} from "./core/primitiveParams";
+  StructArrayRefParam,
+} from "./primitiveParams";
 
 export const isArrayParam = <T extends PrimitiveParam>(
   param: T

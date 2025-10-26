@@ -5,7 +5,7 @@ import type {
   PluginStructSchemaArray,
   PluginParam,
 } from "./core";
-import { isStructArrayParam, isStructParam } from "./typeTest";
+import { isStructArrayParam, isStructParam } from "./core";
 
 const hasStruct = (
   param: PrimitiveParam,

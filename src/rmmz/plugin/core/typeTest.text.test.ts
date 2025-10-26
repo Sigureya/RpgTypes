@@ -1,5 +1,5 @@
 import { describe, test, expect } from "vitest";
-import type { PrimitiveParam } from "./core";
+import type { PrimitiveParam } from "./paramUnion";
 import { paramHasText } from "./typeTest";
 const stringParams: PrimitiveParam[] = [
   {

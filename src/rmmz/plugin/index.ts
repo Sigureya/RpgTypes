@@ -1,5 +1,4 @@
 export * from "./core";
-export * from "./typeTest";
 export type {
   ClassifiedPluginParams,
   ClassifiedPluginParamsEx,

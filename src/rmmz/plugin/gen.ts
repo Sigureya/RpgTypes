@@ -5,12 +5,12 @@ import type {
   StructRefParam,
   StructArrayRefParam,
 } from "./core";
+import { isArrayParam, isStructArrayParam, isStructParam } from "./core";
 import type {
   ScalaParam,
   ArrayParamTypes,
   PrimitiveParam,
 } from "./core/paramUnion";
-import { isArrayParam, isStructArrayParam, isStructParam } from "./typeTest";
 
 export interface Handlers2<ST, STA, S, A> {
   struct: (
