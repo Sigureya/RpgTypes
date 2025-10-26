@@ -6,6 +6,11 @@ import type {
   StringSequenceParamValues,
 } from "./types";
 
+interface Person {
+  name: string;
+  age: number;
+}
+
 interface ArrayMock {
   numberArray: number[];
   stringArray: string[];
@@ -68,6 +73,28 @@ describe("aa", () => {
       param: path.param,
     };
     const result = extractArrayParamValue(mockData, path);
+    expect(result).toEqual(expected);
+  });
+
+  test("unmatched path", () => {
+    const path = {
+      path: "$.stringArray[*]",
+      param: {
+        name: "stringArray",
+        attr: { kind: "string[]", default: [] },
+      },
+    } as const satisfies ArrayParamPairEx<ArrayMock>;
+
+    const mock = {
+      age: 30,
+      name: "Alice",
+    } as const satisfies Person;
+    const expected: StringSequenceParamValues = {
+      values: [],
+      valueKind: "string",
+      param: path.param,
+    };
+    const result = extractArrayParamValue(mock, path);
     expect(result).toEqual(expected);
   });
 });
