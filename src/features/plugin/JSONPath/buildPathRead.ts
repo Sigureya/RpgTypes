@@ -1,7 +1,7 @@
+import type { JSONValue } from "@RpgTypes/libs";
 import type { ArrayParamTypes, PluginParam } from "@RpgTypes/rmmz/plugin";
 import { isNumberArrayParam, isStringArrayParam } from "@RpgTypes/rmmz/plugin";
 import { JSONPathJS } from "jsonpath-js";
-import type { JSONValue } from "./types";
 import type { ArrayPathPair } from "./types/struct2";
 
 export interface SSP {
