@@ -1,47 +1,54 @@
-import type { ScalaStruct } from "@RpgTypes/rmmz/plugin/classifyTypes";
+import type { ArrayParamTypes, PluginParam } from "@RpgTypes/rmmz/plugin";
+import { isNumberArrayParam, isStringArrayParam } from "@RpgTypes/rmmz/plugin";
 import { JSONPathJS } from "jsonpath-js";
 import type { JSONValue } from "./types";
-import type { ArrayPathPair, StructPropertysPath } from "./types/struct2";
+import type { ArrayPathPair } from "./types/struct2";
 
-const pp = (path: StructPropertysPath, schema: ScalaStruct) => {
-  return {
-    s: {
-      paramSchema: [...schema.scalas],
-    },
-    a: {
-      paramSchema: [...schema.scalaArrays],
-    },
-  };
-};
+export interface SSP {
+  values: string[];
+  valueKind: "string";
+  param: PluginParam<Extract<ArrayParamTypes, { default: string[] }>>;
+}
 
-export const aa = (object: JSONValue, pair: ArrayPathPair) => {
+export interface NNP {
+  values: number[];
+  valueKind: "number";
+  param: PluginParam<Extract<ArrayParamTypes, { default: number[] }>>;
+}
+
+export const aa = (
+  object: JSONValue,
+  pair: ArrayPathPair
+): null | SSP | NNP => {
   const path = new JSONPathJS(pair.path);
-
   const values: JSONValue = path.find(object);
   if (!Array.isArray(values)) {
-    return [];
+    return null;
   }
-  const s: string[] = values.filter((v) => typeof v === "string");
-  return [];
-};
 
-const xxx = (
-  p: StructPropertysPath,
-  structMap: ReadonlyMap<string, ScalaStruct>
-) => {
-  const schema = structMap.get(p.structName);
-  if (!schema) {
-    return "";
+  const attr: ArrayParamTypes = pair.param.attr;
+  if (isStringArrayParam(attr)) {
+    const s: string[] = values.filter((v) => typeof v === "string");
+    return {
+      values: s,
+      valueKind: "string",
+      param: {
+        name: pair.param.name,
+        attr: attr,
+      },
+    };
   }
-  //  p.scalaArrays[0].
-};
+  if (isNumberArrayParam(attr)) {
+    const n: number[] = values.filter((v) => typeof v === "number");
+    return {
+      values: n,
+      valueKind: "number",
+      param: {
+        name: pair.param.name,
+        attr: attr,
+      },
+    };
+  }
 
-const getParamKind = (
-  p: StructPropertysPath,
-  structMap: ReadonlyMap<string, ScalaStruct>
-) => {
-  const schema = structMap.get(p.structName);
-  if (!schema) {
-    return "";
-  }
+  return null;
 };
