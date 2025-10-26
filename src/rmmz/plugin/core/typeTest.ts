@@ -82,3 +82,10 @@ export const isStringValueParam = (
   const info = TABLE[param.kind];
   return info.type === "string";
 };
+
+export const isNumberValueParam = (
+  param: ScalaParam
+): param is Extract<PrimitiveParam, { default: number }> => {
+  const info = TABLE[param.kind];
+  return info.type === "number";
+};
