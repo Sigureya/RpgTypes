@@ -38,7 +38,13 @@ export const isStructArrayParam = (
   return param.kind === "struct[]";
 };
 
-const TABLE_S: ReadonlyArray<string> = ["string", "multiline_string", "select"];
+const TABLE_S: ReadonlyArray<string> = [
+  "string",
+  "multiline_string",
+  "select",
+  "combo",
+  "any",
+];
 export const paramHasText = (
   param: PrimitiveParam
 ): param is PrimitiveStringParam => {
