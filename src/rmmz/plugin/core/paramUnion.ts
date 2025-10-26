@@ -10,6 +10,8 @@ import type {
   NumberParam,
   RpgDataIdArrayParam,
   RpgDataIdParam,
+  RpgSwitchParam,
+  RpgVariableParam,
   SelectParam,
   StringArrayParam,
   StringParam,
@@ -37,6 +39,8 @@ export type PrimitiveParam =
   | StringArrayParam
   | SystemDataIdParam
   | SystemDataIdArrayParam
+  | RpgVariableParam
+  | RpgSwitchParam
   | FileParam
   | FileArrayParam
   | StructRefParam

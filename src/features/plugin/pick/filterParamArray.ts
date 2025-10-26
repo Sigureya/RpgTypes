@@ -12,7 +12,7 @@ import {
   isArrayParam,
   isStructArrayParam,
   isStructParam,
-} from "@RpgTypes/rmmz/plugin/typeTest";
+} from "@RpgTypes/rmmz/plugin";
 import type {
   PluginParamGroups,
   NamedAttribute,
