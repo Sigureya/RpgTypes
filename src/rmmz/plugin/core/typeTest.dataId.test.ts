@@ -6,6 +6,7 @@ import {
   paramHasText,
   isStructParam,
   isStructArrayParam,
+  isNumberValueParam,
 } from "./typeTest";
 
 const runTestCase = (param: RpgDataIdParam | RpgVariableParam) => {
@@ -24,6 +25,9 @@ const runTestCase = (param: RpgDataIdParam | RpgVariableParam) => {
     });
     it("is not struct array param", () => {
       expect(param).not.toSatisfy(isStructArrayParam);
+    });
+    it("is number value param", () => {
+      expect(param).toSatisfy(isNumberValueParam);
     });
   });
 };

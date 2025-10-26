@@ -6,6 +6,7 @@ import {
   isStringValueParam,
   isStructParam,
   isStructArrayParam,
+  isNumberValueParam,
 } from "./typeTest";
 
 describe("FileParam", () => {
@@ -31,6 +32,10 @@ describe("FileParam", () => {
   it("is not struct array param", () => {
     expect(param).not.toSatisfy(isStructArrayParam);
     expect(isStructArrayParam(param)).toBe(false);
+  });
+  it("is not number value param", () => {
+    expect(param).not.toSatisfy(isNumberValueParam);
+    expect(isNumberValueParam(param)).toBe(false);
   });
 });
 
