@@ -1,5 +1,5 @@
+import type { JSONPathType } from "@RpgTypes/libs";
 import type { PluginParam, PrimitiveParam } from "@RpgTypes/rmmz/plugin";
-import type { JSONPathType } from "./jsonPathString";
 
 export interface ParamJSONPath<Param = PluginParam<PrimitiveParam>> {
   parent: string;
