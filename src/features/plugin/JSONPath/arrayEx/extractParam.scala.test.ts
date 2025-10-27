@@ -1,7 +1,7 @@
 import { describe, test, expect } from "vitest";
 import type { PluginParam, ScalaParam } from "@RpgTypes/rmmz/plugin";
-import type { ScalaPathResult } from "./scala";
-import { ssss } from "./scala";
+import { extractScalaParams } from "./extractParam";
+import type { ScalaPathResult } from "./types";
 
 interface Person {
   name: string;
@@ -31,8 +31,13 @@ describe("ssss", () => {
     { name: "age", attr: { kind: "number", default: 0 } },
     { name: "isStudent", attr: { kind: "boolean", default: false } },
   ] as const satisfies PluginParam<ScalaParam>[];
+
   test("path", () => {
-    const xx = ssss(mockData, "$.person['name','age','isStudent']", schema);
+    const xx = extractScalaParams(
+      mockData,
+      "$.person['name','age','isStudent']",
+      schema
+    );
     const expected: ScalaPathResult[] = [
       { value: "Alice", param: schema[0] },
       { value: 30, param: schema[1] },
@@ -41,7 +46,7 @@ describe("ssss", () => {
     expect(xx).toEqual(expected);
   });
   test("array", () => {
-    const xx = ssss(
+    const xx = extractScalaParams(
       mockData,
       "$.students[*]['name','age','isStudent']",
       schema

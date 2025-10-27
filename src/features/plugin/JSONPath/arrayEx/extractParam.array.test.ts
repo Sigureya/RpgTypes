@@ -1,5 +1,5 @@
 import { describe, test, expect } from "vitest";
-import { extractArrayParamValue } from "./buildPathRead";
+import { extractArrayParamValue } from "./extractParam";
 import type {
   ArrayParamPairEx,
   ArrayPathPair,
