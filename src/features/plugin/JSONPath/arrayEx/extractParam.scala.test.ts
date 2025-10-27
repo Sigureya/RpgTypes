@@ -14,7 +14,7 @@ interface MockData {
   students: Person[];
 }
 
-describe("ssss", () => {
+describe("extractScalaParams", () => {
   const mockData = {
     person: {
       name: "Alice",
@@ -33,7 +33,7 @@ describe("ssss", () => {
   ] as const satisfies PluginParam<ScalaParam>[];
 
   test("path", () => {
-    const xx = extractScalaParams(
+    const result: ScalaPathResult[] = extractScalaParams(
       mockData,
       "$.person['name','age','isStudent']",
       schema
@@ -43,10 +43,11 @@ describe("ssss", () => {
       { value: 30, param: schema[1] },
       { value: false, param: schema[2] },
     ];
-    expect(xx).toEqual(expected);
+    expect(result).toEqual(expected);
   });
+
   test("array", () => {
-    const xx = extractScalaParams(
+    const result: ScalaPathResult[] = extractScalaParams(
       mockData,
       "$.students[*]['name','age','isStudent']",
       schema
@@ -59,6 +60,6 @@ describe("ssss", () => {
       { value: 22, param: schema[1] },
       { value: true, param: schema[2] },
     ];
-    expect(xx).toEqual(expected);
+    expect(result).toEqual(expected);
   });
 });
