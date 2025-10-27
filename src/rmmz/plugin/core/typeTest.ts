@@ -92,6 +92,12 @@ export const isStringValueParam = (
 };
 
 export const isNumberValueParam = (
+  param: PrimitiveParam
+): param is Extract<PrimitiveParam, { default: number }> => {
+  return isScalarParam(param) && isNumberValueParamEx(param);
+};
+
+export const isNumberValueParamEx = (
   param: ScalaParam
 ): param is Extract<PrimitiveParam, { default: number }> => {
   const info = TABLE[param.kind];
