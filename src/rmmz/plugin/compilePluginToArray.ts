@@ -1,4 +1,10 @@
 import type { PrimitiveParam } from "./core";
+import type {
+  PluginCommandSchemaArray,
+  PluginParam,
+  PluginSchemaArray,
+  PluginStructSchemaArray,
+} from "./core/arraySchemaTypes";
 import { compileAttributes } from "./core/attributes";
 import type {
   PluginCommandTokens,
@@ -6,14 +12,8 @@ import type {
   StructParseState,
 } from "./core/parse/types";
 import type { PluginTokens } from "./core/parse/types/types";
-import type {
-  PluginCommandSchemaArray,
-  PluginParam,
-  PluginSchemaArray,
-  PluginStructSchemaArray,
-} from "./core/types";
 
-export const compilePluginAsArray = (
+export const compilePluginAsArraySchema = (
   parsedPlugin: PluginTokens
 ): PluginSchemaArray => ({
   commands: mapCommands(parsedPlugin.commands),
