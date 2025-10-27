@@ -5,6 +5,7 @@ import {
   isArrayParamEx,
   isStructArrayParam,
   isStructParam,
+  isScalarParam,
 } from "./typeTest";
 
 describe("struct", () => {
@@ -23,6 +24,9 @@ describe("struct", () => {
   });
   test("isArrayParamEx returns false for struct param", () => {
     expect(param).not.toSatisfy((p) => isArrayParamEx(p, "struct"));
+  });
+  test("isScalarParam returns false for struct param", () => {
+    expect(param).not.toSatisfy(isScalarParam);
   });
 });
 
@@ -43,5 +47,8 @@ describe("struct array", () => {
   });
   test("isArrayParamEx returns true for struct array param", () => {
     expect(param).toSatisfy((p) => isArrayParamEx(p, "struct"));
+  });
+  test("isScalarParam returns false for struct array param", () => {
+    expect(param).not.toSatisfy(isScalarParam);
   });
 });

@@ -27,6 +27,12 @@ export const isArrayParamEx = <T extends PrimitiveParam, K extends ParamKinds>(
   return false;
 };
 
+export const isScalarParam = <T extends PrimitiveParam>(
+  param: T
+): param is Extract<T, ScalaParam> => {
+  return !isArrayParam(param) && param.kind !== "struct";
+};
+
 export const isStructParam = (
   param: PrimitiveParam
 ): param is StructRefParam => {

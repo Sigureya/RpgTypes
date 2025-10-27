@@ -7,6 +7,7 @@ import {
   isStructParam,
   isStructArrayParam,
   isNumberValueParam,
+  isScalarParam,
 } from "./typeTest";
 
 const runTestCase = (param: RpgDataIdParam | RpgVariableParam) => {
@@ -28,6 +29,9 @@ const runTestCase = (param: RpgDataIdParam | RpgVariableParam) => {
     });
     it("is number value param", () => {
       expect(param).toSatisfy(isNumberValueParam);
+    });
+    it("is scalar param", () => {
+      expect(param).toSatisfy(isScalarParam);
     });
   });
 };

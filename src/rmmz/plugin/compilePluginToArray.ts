@@ -15,7 +15,7 @@ import type {
 
 export const compilePluginAsArray = (
   parsedPlugin: PluginTokens
-): PluginSchemaArray<PrimitiveParam> => ({
+): PluginSchemaArray => ({
   commands: mapCommands(parsedPlugin.commands),
   params: mapParams(parsedPlugin.params),
   structs: mapStructs(parsedPlugin.structs),
@@ -48,8 +48,10 @@ const mapCommands = (
 const mapStructs = (
   structs: ReadonlyArray<StructParseState>
 ): PluginStructSchemaArray[] => {
-  return structs.map((s) => ({
-    struct: s.name,
-    params: mapParams(s.params),
-  }));
+  return structs.map(
+    (s): PluginStructSchemaArray => ({
+      struct: s.name,
+      params: mapParams(s.params),
+    })
+  );
 };
