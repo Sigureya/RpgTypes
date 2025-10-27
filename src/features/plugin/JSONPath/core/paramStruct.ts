@@ -2,7 +2,7 @@ import type {
   ClassifiedPluginParams,
   StructRefParam,
 } from "@RpgTypes/rmmz/plugin";
-import type { PluginParam } from "@RpgTypes/rmmz/plugin/core/types";
+import type { PluginParam } from "@RpgTypes/rmmz/plugin";
 import { makeScalaArrayParams, makeScalaParams } from "./paramScala";
 import type {
   ErrorCodes,

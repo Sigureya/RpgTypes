@@ -1,3 +1,4 @@
+export type * from "./arraySchemaTypes";
 export type * from "./paramUnion";
 export type * from "./pluginEntriesEx";
 export type * from "./pluginEntryTypes";
@@ -6,7 +7,6 @@ export type * from "./pluginSchemaType";
 export type * from "./primitiveParams";
 export type * from "./rpgData/rpgDataTypesNames";
 export * from "./typeTest";
-export type * from "./types";
 export type { ArrayParamBase, ParamBase } from "./paramBase";
 export { compileAttributes } from "./attributes";
 export { isRmmzDataKind, lookupKind } from "./rpgData/lookup";

@@ -4,6 +4,7 @@ export type {
   ParsedPlugin,
   PluginCommandTokens,
   PluginParamTokens,
+  PluginTokens,
   PluginTokensRecord,
   StructParseState,
 } from "./types";

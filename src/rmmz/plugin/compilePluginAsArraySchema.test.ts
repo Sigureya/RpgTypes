@@ -1,13 +1,13 @@
 import { test, expect, describe } from "vitest";
-import { compilePluginAsArray } from "./compilePluginToArray";
-import type { PluginTokens } from "./core/parse/types/types";
+import { compilePluginAsArraySchema } from "./compilePluginAsArraySchema";
 import type {
   PluginCommandSchemaArray,
   PluginSchemaArray,
   PluginStructSchemaArray,
-} from "./core/types";
+} from "./core/arraySchemaTypes";
+import type { PluginTokens } from "./core/parse/types/types";
 
-describe("parsePlugin", () => {
+describe("compilePluginAsArraySchema", () => {
   test("params", () => {
     const input: PluginTokens = {
       commands: [],
@@ -60,7 +60,7 @@ describe("parsePlugin", () => {
         },
       ],
     };
-    const result = compilePluginAsArray(input);
+    const result = compilePluginAsArraySchema(input);
     expect(result).toEqual(expected);
   });
   test("commands", () => {
@@ -91,7 +91,6 @@ describe("parsePlugin", () => {
         {
           command: "load",
           desc: "load Save File",
-
           args: [
             {
               name: "arg1",
@@ -113,7 +112,7 @@ describe("parsePlugin", () => {
         },
       ],
     };
-    const result = compilePluginAsArray(input);
+    const result = compilePluginAsArraySchema(input);
     const expectedSvaeCommand: PluginCommandSchemaArray = {
       command: "save",
       text: "writeSave",
@@ -186,7 +185,7 @@ describe("parsePlugin", () => {
         ],
       },
     ];
-    const result = compilePluginAsArray(input);
+    const result = compilePluginAsArraySchema(input);
     expect(result.structs).toEqual(expected);
   });
 });
