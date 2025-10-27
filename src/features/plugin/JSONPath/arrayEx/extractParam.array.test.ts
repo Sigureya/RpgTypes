@@ -68,18 +68,18 @@ describe("extractArrayParamValue", () => {
       expect(result).toEqual(expected);
     });
     test("nested", () => {
-      const path: ArrayPathPair = {
+      const path = {
         path: `$.arrayMock.items[*]`,
         param: {
           name: "items",
           attr: { kind: "item[]", default: [] },
         },
-      };
+      } as const satisfies ArrayPathPair;
       const expected = {
         values: [1, 2, 3, 4, 5],
         valueKind: "number",
         param: path.param,
-      };
+      } as const satisfies NumberSequenceParamValues;
       const result = extractArrayParamValue(mockData, path);
       expect(result).toEqual(expected);
     });
