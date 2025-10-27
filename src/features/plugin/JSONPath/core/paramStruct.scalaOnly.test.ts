@@ -1,10 +1,10 @@
 import { describe, test, expect } from "vitest";
 import type {
   ClassifiedPluginParams,
+  ClassifiedPluginParamsEx,
+  PluginParam,
   StructRefParam,
 } from "@RpgTypes/rmmz/plugin";
-import type { ClassifiedPluginParamsEx } from "@RpgTypes/rmmz/plugin";
-import type { PluginParam } from "@RpgTypes/rmmz/plugin/core/types";
 import { JSONPathJS } from "jsonpath-js";
 import { getPathFromStructParam, getPathFromStructSchema } from "./paramStruct";
 import type { StructPathResult, StructPropertysPath } from "./types";
