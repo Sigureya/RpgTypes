@@ -1,9 +1,9 @@
+import type { JSONPathType } from "@RpgTypes/libs";
 import type {
   ArrayParamTypes,
   PluginParam,
   PluginParamType2,
 } from "@RpgTypes/rmmz/plugin";
-import type { JSONPathType } from "../types";
 
 export interface ArrayPathPair {
   path: string;
