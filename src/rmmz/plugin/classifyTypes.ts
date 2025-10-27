@@ -5,7 +5,7 @@ import type {
   ScalaParam,
   ArrayParamTypes,
 } from "./core";
-import type { PluginParamType2 } from "./core/pluginSchemaType";
+import type { PluginStructParamTypeEx } from "./core/pluginSchemaType";
 
 export interface ScalaStruct {
   scalas: PluginParam<ScalaParam>[];
@@ -20,8 +20,11 @@ export interface ClassifiedPluginParams extends ScalaStruct {
 }
 
 export interface ClassifiedPluginParamsEx<T> extends ClassifiedPluginParams {
-  structs: Extract<PluginParamType2<T>, { attr: StructRefParam }>[];
-  structArrays: Extract<PluginParamType2<T>, { attr: StructArrayRefParam }>[];
-  scalas: Extract<PluginParamType2<T>, { attr: ScalaParam }>[];
-  scalaArrays: Extract<PluginParamType2<T>, { attr: ArrayParamTypes }>[];
+  structs: Extract<PluginStructParamTypeEx<T>, { attr: StructRefParam }>[];
+  structArrays: Extract<
+    PluginStructParamTypeEx<T>,
+    { attr: StructArrayRefParam }
+  >[];
+  scalas: Extract<PluginStructParamTypeEx<T>, { attr: ScalaParam }>[];
+  scalaArrays: Extract<PluginStructParamTypeEx<T>, { attr: ArrayParamTypes }>[];
 }

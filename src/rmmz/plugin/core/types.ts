@@ -1,5 +1,5 @@
 import type { PrimitiveParam } from "./paramUnion";
-import type { PluginParamType2 } from "./pluginSchemaType";
+import type { PluginStructParamTypeEx } from "./pluginSchemaType";
 
 export interface PluginParam<T = PrimitiveParam> {
   name: string;
@@ -26,5 +26,5 @@ export interface PluginSchemaArray<T = PrimitiveParam> {
 
 export type PluginStructSchemaArray3<T> = {
   struct: string;
-  params: PluginParamType2<T>[];
+  params: PluginStructParamTypeEx<T>[];
 };
