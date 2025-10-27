@@ -18,10 +18,16 @@ export interface PluginStructSchemaArray<T = PluginParam<PrimitiveParam>> {
   params: T[];
 }
 
-export interface PluginSchemaArray<T = PrimitiveParam> {
+export interface PluginSchemaArrayEx<T> {
   commands: PluginCommandSchemaArray<T>[];
   params: PluginParam<T>[];
   structs: PluginStructSchemaArray<PluginParam<T>>[];
+}
+
+export interface PluginSchemaArray {
+  commands: PluginCommandSchemaArray[];
+  params: PluginParam[];
+  structs: PluginStructSchemaArray<PluginParam>[];
 }
 
 export type PluginStructSchemaArray3<T> = {
