@@ -1,5 +1,5 @@
 import { test, expect, describe } from "vitest";
-import { compilePluginAsArraySchema } from "./compilePluginToArray";
+import { compilePluginAsArraySchema } from "./compilePluginAsArraySchema";
 import type {
   PluginCommandSchemaArray,
   PluginSchemaArray,
@@ -7,7 +7,7 @@ import type {
 } from "./core/arraySchemaTypes";
 import type { PluginTokens } from "./core/parse/types/types";
 
-describe("parsePlugin", () => {
+describe("compilePluginAsArraySchema", () => {
   test("params", () => {
     const input: PluginTokens = {
       commands: [],
