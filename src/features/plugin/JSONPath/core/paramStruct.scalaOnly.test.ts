@@ -7,7 +7,7 @@ import type { ClassifiedPluginParamsEx } from "@RpgTypes/rmmz/plugin";
 import type { PluginParam } from "@RpgTypes/rmmz/plugin/core/types";
 import { JSONPathJS } from "jsonpath-js";
 import { getPathFromStructParam, getPathFromStructSchema } from "./paramStruct";
-import type { StructPropertysPath, StructPathResult } from "./types/struct2";
+import type { StructPathResult, StructPropertysPath } from "./types";
 
 interface MockPerson {
   name: string;

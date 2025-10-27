@@ -5,7 +5,7 @@ import type {
   ClassifiedPluginParams,
 } from "@RpgTypes/rmmz/plugin";
 import { getPathFromStructParam } from "./paramStruct";
-import type { StructPropertysPath } from "./types/struct2";
+import type { StructPropertysPath } from "./types";
 
 describe("empty struct", () => {
   test("getPathFromStruct", () => {
