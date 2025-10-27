@@ -1,8 +1,8 @@
 export * from "./types";
 export type { ErrorCodes } from "./errorTypes";
-export type { PluginParamExtractedValue } from "./pluginParam";
 export type {
+  PathPair,
   StructPathError,
   StructPathResult,
   StructPropertysPath,
-} from "./struct2";
+} from "./pathSchema";

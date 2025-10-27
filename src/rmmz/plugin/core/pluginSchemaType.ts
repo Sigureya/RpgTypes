@@ -15,7 +15,7 @@ export type PrimitiveStructParams<T extends object> = {
   [K in Extract<keyof T, string>]: PluginSchemaType<T[K]>;
 };
 
-export type PluginParamType2<T> = {
+export type PluginStructParamTypeEx<T> = {
   [K in Extract<keyof T, string>]: { name: K; attr: PluginSchemaType<T[K]> };
 }[Extract<keyof T, string>];
 

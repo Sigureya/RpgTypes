@@ -6,7 +6,7 @@ import type {
 import type { ClassifiedPluginParamsEx } from "@RpgTypes/rmmz/plugin";
 import type { PluginParam } from "@RpgTypes/rmmz/plugin/core/types";
 import { getPathFromStructParam } from "./paramStruct";
-import type { StructPropertysPath, StructPathResult } from "./types/struct2";
+import type { StructPathResult, StructPropertysPath } from "./types";
 
 interface Person {
   name: string;

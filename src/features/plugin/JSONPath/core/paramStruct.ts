@@ -4,12 +4,12 @@ import type {
 } from "@RpgTypes/rmmz/plugin";
 import type { PluginParam } from "@RpgTypes/rmmz/plugin/core/types";
 import { makeScalaArrayParams, makeScalaParams } from "./paramScala";
-import type { ErrorCodes } from "./types/errorTypes";
 import type {
+  ErrorCodes,
   StructPropertysPath,
-  StructPathResult,
   StructPathError,
-} from "./types/struct2";
+  StructPathResult,
+} from "./types";
 
 const ERROR_CODE = {
   undefinedStruct: "undefined_struct",

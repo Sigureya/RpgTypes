@@ -11,7 +11,7 @@ import type {
   NumberSequenceParamValues,
   ScalaPathResult,
   StringSequenceParamValues,
-} from "./types";
+} from "./extractedTypes";
 
 export const extractArrayParamValue = (
   object: JSONValue,

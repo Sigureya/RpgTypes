@@ -5,8 +5,7 @@ import type {
   StructRefParam,
 } from "@RpgTypes/rmmz/plugin";
 import { getPathFromStructParam } from "./paramStruct";
-import type { ErrorCodes } from "./types/errorTypes";
-import type { StructPathResult } from "./types/struct2";
+import type { ErrorCodes, StructPathResult } from "./types";
 
 const schema: ClassifiedPluginParams = {
   structs: [

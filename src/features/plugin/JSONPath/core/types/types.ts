@@ -1,10 +1,10 @@
 import type { JSONPathType } from "@RpgTypes/libs";
 import type { PluginParam, PrimitiveParam } from "@RpgTypes/rmmz/plugin";
 
-export interface ParamJSONPath<Param = PluginParam<PrimitiveParam>> {
+export interface ParamJSONPath {
   parent: string;
   path: string;
-  param: Param;
+  param: PluginParam;
 }
 
 export interface ParamJSONPathSturct {
@@ -14,15 +14,15 @@ export interface ParamJSONPathSturct {
   scalaArrays: ParamJSONPath[];
 }
 
-export interface ParamJSONPath2<T> {
+export interface ParamJSONPathEx<T> extends ParamJSONPath {
   path: JSONPathType<T>;
   parent: string;
   param: PluginParam<PrimitiveParam>;
 }
 
 export interface ParamJSONPathSturctEx<T> extends ParamJSONPathSturct {
-  scalas: ParamJSONPath2<T>[];
-  structs: ParamJSONPath2<T>[];
-  structArrays: ParamJSONPath2<T>[];
-  scalaArrays: ParamJSONPath2<T>[];
+  scalas: ParamJSONPathEx<T>[];
+  structs: ParamJSONPathEx<T>[];
+  structArrays: ParamJSONPathEx<T>[];
+  scalaArrays: ParamJSONPathEx<T>[];
 }
