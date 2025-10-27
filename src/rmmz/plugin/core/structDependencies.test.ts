@@ -1,42 +1,81 @@
 import { describe, expect, test } from "vitest";
-import type { PluginStructSchemaArray, PrimitiveParam } from "./core";
+import type {
+  PluginStructSchemaArray,
+  PluginStructSchemaArray3,
+} from "./arraySchemaTypes";
+import type { PrimitiveParam } from "./paramUnion";
 import { structDependencies, createStructMap } from "./structDependencies";
 
+interface A {
+  b: B;
+}
+interface B {
+  c: C;
+}
+
+interface C {
+  num: number;
+}
+
+interface X {
+  numArray: number[];
+  y: Y[];
+  c: C;
+}
+
+interface Y {
+  str: string;
+  z: Z;
+}
+
+interface Z {
+  num: number;
+}
+
+const schemaA: PluginStructSchemaArray3<A> = {
+  struct: "A",
+  params: [{ name: "b", attr: { kind: "struct", struct: "B" } }],
+};
+
+const schemaB: PluginStructSchemaArray3<B> = {
+  struct: "B",
+  params: [{ name: "c", attr: { kind: "struct", struct: "C" } }],
+};
+
+const schemaC: PluginStructSchemaArray3<C> = {
+  struct: "C",
+  params: [{ name: "num", attr: { kind: "number", default: 0 } }],
+};
+
+const schemaX: PluginStructSchemaArray3<X> = {
+  struct: "X",
+  params: [
+    { name: "numArray", attr: { kind: "number[]", default: [12] } },
+    { name: "y", attr: { kind: "struct[]", struct: "Y", default: [] } },
+    { name: "c", attr: { kind: "struct", struct: "C" } },
+  ],
+};
+
+const schemaY: PluginStructSchemaArray3<Y> = {
+  struct: "Y",
+  params: [
+    { name: "str", attr: { kind: "string", default: "" } },
+    { name: "z", attr: { kind: "struct", struct: "Z" } },
+  ],
+};
+
+const schemaZ: PluginStructSchemaArray3<Z> = {
+  struct: "Z",
+  params: [{ name: "num", attr: { kind: "number", default: 0 } }],
+};
+
 const mockStructs: ReadonlyArray<PluginStructSchemaArray> = [
-  {
-    struct: "A",
-    params: [{ name: "b", attr: { kind: "struct", struct: "B" } }],
-  },
-  {
-    struct: "B",
-    params: [{ name: "c", attr: { kind: "struct", struct: "C" } }],
-  },
-  {
-    struct: "C",
-    params: [{ name: "num", attr: { kind: "number", default: 0 } }],
-  },
-  {
-    struct: "X",
-    params: [
-      { name: "numArray", attr: { kind: "number[]", default: [12] } },
-      { name: "y", attr: { kind: "struct[]", struct: "Y", default: [] } },
-      { name: "c", attr: { kind: "struct", struct: "C" } },
-    ],
-  },
-  {
-    struct: "Y",
-    params: [
-      { name: "str", attr: { kind: "string", default: "" } },
-      {
-        name: "z",
-        attr: { kind: "struct", struct: "Z" },
-      },
-    ],
-  },
-  {
-    struct: "Z",
-    params: [{ name: "num", attr: { kind: "number", default: 0 } }],
-  },
+  schemaA,
+  schemaB,
+  schemaC,
+  schemaX,
+  schemaY,
+  schemaZ,
 ];
 
 describe("createStructMap", () => {

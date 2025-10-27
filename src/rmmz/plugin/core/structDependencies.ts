@@ -3,9 +3,8 @@ import type {
   StructRefParam,
   StructArrayRefParam,
   PluginStructSchemaArray,
-  PluginParam,
-} from "./core";
-import { isStructArrayParam, isStructParam } from "./core";
+} from ".";
+import { isStructArrayParam, isStructParam } from ".";
 
 const hasStruct = (
   param: PrimitiveParam,
@@ -57,7 +56,7 @@ export const structDependencies = (
 // };
 
 export const createStructMap = (
-  structs: ReadonlyArray<PluginStructSchemaArray<PluginParam>>
+  structs: ReadonlyArray<PluginStructSchemaArray>
 ): Map<string, PrimitiveParam[]> => {
   return new Map(structs.map((s) => [s.struct, s.params.map((p) => p.attr)]));
 };
