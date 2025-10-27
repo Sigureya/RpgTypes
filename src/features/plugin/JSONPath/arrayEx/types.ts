@@ -3,6 +3,7 @@ import type {
   ArrayParamTypes,
   PluginParam,
   PluginParamType2,
+  ScalaParam,
 } from "@RpgTypes/rmmz/plugin";
 
 export interface ArrayPathPair {
@@ -25,4 +26,8 @@ export interface NumberSequenceParamValues {
   values: number[];
   valueKind: "number";
   param: PluginParam<Extract<ArrayParamTypes, { default: number[] }>>;
+}
+export interface ScalaPathResult {
+  value: number | string | boolean;
+  param: PluginParam<ScalaParam>;
 }
