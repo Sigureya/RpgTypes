@@ -3,7 +3,7 @@ import type {
   StructRefParam,
 } from "@RpgTypes/rmmz/plugin";
 import type { PluginParam } from "@RpgTypes/rmmz/plugin/core/types";
-import { makeScalaParams, makeScalaArrayParams } from "./paramScala";
+import { makeScalaArrayParams, makeScalaParams } from "./paramScala";
 import type { ErrorCodes } from "./types/errorTypes";
 import type {
   StructPropertysPath,
