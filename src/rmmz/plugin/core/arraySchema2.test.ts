@@ -1,6 +1,6 @@
 import { describe, expect, test } from "vitest";
 import { ssss } from "./arraySchema2";
-import type { PluginParam, PluginStructSchemaArray3 } from "./arraySchemaTypes";
+import type { PluginStructSchemaArray3 } from "./arraySchemaTypes";
 
 interface Person {
   name: string;
