@@ -35,6 +35,12 @@ const makeMockFn = (fn: (param: PluginParam) => boolean) => {
 };
 
 describe("cmdEx", () => {
+  test("empty", () => {
+    const mockFn = makeMockFn(() => true);
+    const result = cmdEx([], new Set(), (p): p is PluginParam => mockFn(p));
+    expect(mockFn).toHaveBeenCalledTimes(0);
+    expect(result).toEqual([]);
+  });
   test("a", () => {
     const mockFn = makeMockFn((p) => p.attr.kind === "string");
     const result = cmdEx(
