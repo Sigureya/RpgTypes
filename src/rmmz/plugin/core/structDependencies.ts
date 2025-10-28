@@ -1,11 +1,7 @@
-import type {
-  PrimitiveParam,
-  StructRefParam,
-  StructArrayRefParam,
-  PluginStructSchemaArray,
-  PluginParam,
-} from "./core";
-import { isStructArrayParam, isStructParam } from "./core";
+import type { PluginStructSchemaArray } from "./arraySchemaTypes";
+import type { PrimitiveParam } from "./paramUnion";
+import type { StructRefParam, StructArrayRefParam } from "./primitiveParams";
+import { isStructParam, isStructArrayParam } from "./typeTest";
 
 const hasStruct = (
   param: PrimitiveParam,
@@ -43,21 +39,8 @@ export const structDependencies = (
   return collectStructDeps(structName, map, visited);
 };
 
-// export const structDependenciesEx = (
-//   structs: ReadonlyArray<PluginStructSchemaArray<PluginParam>>
-// ): Map<string, string[]> => {
-//   const map = createStructMap(structs);
-//   const items = Array.from(map.keys()).map(
-//     (structName: string): [string, string[]] => [
-//       structName,
-//       structDependencies(structName, map),
-//     ]
-//   );
-//   return new Map(items);
-// };
-
 export const createStructMap = (
-  structs: ReadonlyArray<PluginStructSchemaArray<PluginParam>>
+  structs: ReadonlyArray<PluginStructSchemaArray>
 ): Map<string, PrimitiveParam[]> => {
   return new Map(structs.map((s) => [s.struct, s.params.map((p) => p.attr)]));
 };

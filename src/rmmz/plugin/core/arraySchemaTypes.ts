@@ -34,3 +34,8 @@ export type PluginStructSchemaArray3<T> = {
   struct: string;
   params: PluginStructParamTypeEx<T>[];
 };
+
+export interface GG {
+  directs: PluginStructSchemaArray[];
+  indirects: PluginStructSchemaArray[];
+}

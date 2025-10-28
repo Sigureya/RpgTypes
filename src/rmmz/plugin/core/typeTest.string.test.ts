@@ -7,7 +7,7 @@ import {
   paramHasText,
   isStructParam,
   isStructArrayParam,
-  isNumberValueParam,
+  isNumberValueParamEx,
   isScalarParam,
 } from "./typeTest";
 
@@ -59,8 +59,8 @@ const runTestCase = (param: ScalaParam) => {
       expect(paramHasText(param)).toBe(true);
     });
     it("is not number value param", () => {
-      expect(param).not.toSatisfy(isNumberValueParam);
-      expect(isNumberValueParam(param)).toBe(false);
+      expect(param).not.toSatisfy(isNumberValueParamEx);
+      expect(isNumberValueParamEx(param)).toBe(false);
     });
     it("is scalar param", () => {
       expect(param).toSatisfy(isScalarParam);

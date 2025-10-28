@@ -1,44 +1,83 @@
 import type {
-  PluginStructSchemaArray,
+  GG,
   PluginParam,
-  PluginSchemaArray,
+  PluginStructSchemaArray,
 } from "./arraySchemaTypes";
-import type { PrimitiveStringParam, PrimitiveParam } from "./paramUnion";
-import type { FileParam } from "./primitiveParams";
-import { isScalarParam, isNumberValueParam } from "./typeTest";
+import type { StructRefParam } from "./primitiveParams";
 
-export const filterStructs = (
-  s: ReadonlyArray<PluginStructSchemaArray>,
-  fn: (param: PluginParam) => boolean
-): PluginStructSchemaArray[] => {
-  return [];
-};
+function createRefMap(
+  schemas: ReadonlyArray<PluginStructSchemaArray>
+): Record<string, PluginParam<StructRefParam>[]> {
+  return Object.fromEntries(
+    schemas.map((schema) => [
+      schema.struct,
+      schema.params.filter(
+        (param: PluginParam): param is PluginParam<StructRefParam> =>
+          param.attr.kind === "struct"
+      ),
+    ])
+  );
+}
 
-const xxx = (
-  schema: PluginSchemaArray,
-  fn: (param: PluginParam) => boolean
-) => {
-  const structs = schema.structs.map((struct) => sss(struct, fn));
+function propagate(
+  allStructNames: ReadonlyArray<string>,
+  refMap: Record<string, PluginParam<StructRefParam>[]>,
+  initialNames: Set<string>
+): Set<string> {
+  type State = { names: Set<string>; changed: boolean };
+
+  // 最大伝播回数分だけreduceで状態を伝播
+  const finalState = allStructNames.reduce<State>(
+    (state) => {
+      if (!state.changed) {
+        return state;
+      }
+      const next: string[] = allStructNames.filter(
+        (struct) =>
+          !state.names.has(struct) &&
+          refMap[struct].some((ref) => state.names.has(ref.attr.struct))
+      );
+      if (next.length === 0) {
+        return { names: state.names, changed: false };
+      }
+      return {
+        names: new Set([...state.names, ...next]),
+        changed: true,
+      };
+    },
+    { names: initialNames, changed: true }
+  );
+
+  return finalState.names;
+}
+
+function findIndirectsFunctional(
+  schemas: ReadonlyArray<PluginStructSchemaArray>,
+  directStructNames: ReadonlySet<string>
+): Set<string> {
+  const refMap = createRefMap(schemas);
+  const allStructNames = Object.keys(refMap);
+  return propagate(allStructNames, refMap, new Set(directStructNames));
+}
+
+export function filterStructs(
+  schemas: ReadonlyArray<PluginStructSchemaArray>,
+  predicate: (param: PluginParam) => boolean
+): GG {
+  // 直接一致するstructを抽出
+  const directs = schemas.filter((schema) => schema.params.some(predicate));
+  const directStructNames = new Set(directs.map((s) => s.struct));
+
+  // 間接的に関連するstructを抽出（非再帰・イミュータブル）
+  const indirects = findIndirectsFunctional(schemas, directStructNames);
+
+  // indirectsの順序をテスト期待値に合わせるため、schemasの順でフィルタ
+  const indirectsOrdered = schemas.filter(
+    (s) => !directStructNames.has(s.struct) && indirects.has(s.struct)
+  );
+
   return {
-    commands: schema.params.filter(fn),
-    structs: schema.structs.map((struct) => sss(struct, fn)),
-    params: schema.params.filter(fn),
+    directs,
+    indirects: indirectsOrdered,
   };
-};
-
-const attrXX = (
-  param: PluginParam
-): param is PluginParam<PrimitiveStringParam | FileParam> => {
-  const attr: PrimitiveParam = param.attr;
-  return isScalarParam(attr) && isNumberValueParam(attr);
-};
-
-const sss = (
-  struct: PluginStructSchemaArray,
-  fn: (param: PluginParam) => boolean
-) => {
-  return {
-    struct: struct.struct,
-    params: struct.params.filter(fn),
-  } satisfies PluginStructSchemaArray;
-};
+}

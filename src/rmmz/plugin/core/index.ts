@@ -9,4 +9,5 @@ export type * from "./rpgData/rpgDataTypesNames";
 export * from "./typeTest";
 export type { ArrayParamBase, ParamBase } from "./paramBase";
 export { compileAttributes } from "./attributes";
+export { createStructMap } from "./aaCreartStructMap";
 export { isRmmzDataKind, lookupKind } from "./rpgData/lookup";
