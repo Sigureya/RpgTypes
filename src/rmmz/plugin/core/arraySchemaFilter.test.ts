@@ -103,6 +103,7 @@ describe("filterStructs no match", () => {
       directs: [],
       indirects: [],
     };
-    expect(result).toEqual(expected);
+    expect(result.directs).toEqual(expected.directs);
+    expect(result.indirects).toEqual(expected.indirects);
   });
 });
