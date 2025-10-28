@@ -5,33 +5,37 @@ import type {
   PluginParam,
   PluginStructSchemaArray,
 } from "./arraySchemaTypes";
-// ...existing code...
+import type { StructRefParam } from "./primitiveParams";
 
 /**
  * schemasから参照関係マップを生成する
  */
 function createRefMap(
   schemas: ReadonlyArray<PluginStructSchemaArray>
-): Record<string, string[]> {
-  return schemas.reduce<Record<string, string[]>>((acc, schema) => {
-    acc[schema.struct] = schema.params.flatMap((param) =>
-      param.attr?.kind === "struct" ? [param.attr.struct] : []
-    );
-    return acc;
-  }, {});
+): Record<string, PluginParam<StructRefParam>[]> {
+  return Object.fromEntries(
+    schemas.map((schema) => [
+      schema.struct,
+      schema.params.filter(
+        (param: PluginParam): param is PluginParam<StructRefParam> =>
+          param.attr.kind === "struct"
+      ),
+    ])
+  );
 }
-
+// ...existing code...
 /**
  * 間接的に参照されるstruct名を集める（再帰・ループ禁止なのでreduceで伝播）
  */
 function propagate(
   allStructNames: string[],
-  refMap: Record<string, string[]>,
+  refMap: Record<string, PluginParam<StructRefParam>[]>,
   names: Set<string>
 ): Set<string> {
   const next = allStructNames.filter(
     (struct) =>
-      !names.has(struct) && refMap[struct].some((ref) => names.has(ref))
+      !names.has(struct) &&
+      refMap[struct].some((ref) => names.has(ref.attr.struct))
   );
   if (next.length === 0) {
     return names;
@@ -64,7 +68,6 @@ function findIndirectsFunctional(
 
   return schemas.filter((s) => indirectNames.includes(s.struct));
 }
-// ...existing code...
 /**
  * 指定した条件に一致するstructをdirectsに、間接的に関連するstructをindirectsに分類する
  */
