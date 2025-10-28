@@ -4,7 +4,7 @@ import type {
   PluginStructSchemaArray3,
 } from "./arraySchemaTypes";
 import type { PrimitiveParam } from "./paramUnion";
-import { structDependencies, createStructMap } from "./structDependencies";
+import { structDependencies } from "./structDependencies";
 
 interface A {
   b: B;
@@ -100,6 +100,12 @@ interface TestCase {
   input: string;
   expected: string[];
 }
+
+const createStructMap = (
+  structs: ReadonlyArray<PluginStructSchemaArray>
+): Map<string, PrimitiveParam[]> => {
+  return new Map(structs.map((s) => [s.struct, s.params.map((p) => p.attr)]));
+};
 
 const runTestCases = (testCases: TestCase[]) => {
   const map = createStructMap(mockStructs);
