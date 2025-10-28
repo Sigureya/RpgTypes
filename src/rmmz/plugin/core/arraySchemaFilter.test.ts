@@ -1,5 +1,5 @@
 import { describe, expect, test } from "vitest";
-import { filterStructs } from "./arraySchema";
+import { filterStructs } from "./arraySchemaFilter";
 import type {
   GG,
   PluginStructSchemaArray,
