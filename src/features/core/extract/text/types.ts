@@ -1,29 +1,40 @@
 import type { NoteReadResult } from "@RpgTypes/rmmz";
-import type { TextCommandParameter } from "./eventCommand";
+import type {
+  PluginCommandMzParameter,
+  TextCommandParameter,
+} from "./eventCommand";
 
-export interface ExtractedBattleEventText {
+export interface ExtractedBattleEventText<
+  T extends PluginCommandMzParameter = PluginCommandMzParameter
+> {
   eventId: number;
-  commands: TextCommandParameter[];
+  commands: (TextCommandParameter | T)[];
   pageIndex: number;
 }
 
-export interface ExtractedCommonEventText {
+export interface ExtractedCommonEventText<
+  T extends PluginCommandMzParameter = PluginCommandMzParameter
+> {
   eventId: number;
-  commands: TextCommandParameter[];
+  commands: (TextCommandParameter | T)[];
 }
 
-export interface ExtractedMapTexts {
-  events: ExtractedMapEventTexts[];
+export interface ExtractedMapTexts<
+  T extends PluginCommandMzParameter = PluginCommandMzParameter
+> {
+  events: ExtractedMapEventTexts<T>[];
   note: string;
   noteItems: NoteReadResult[];
   displayedName: string;
 }
 
-export interface ExtractedMapEventTexts {
+export interface ExtractedMapEventTexts<
+  T extends PluginCommandMzParameter = PluginCommandMzParameter
+> {
   eventId: number;
   name: string;
   pageIndex: number;
-  commands: TextCommandParameter[];
+  commands: (TextCommandParameter | T)[];
   note: string;
   noteItems: NoteReadResult[];
 }
