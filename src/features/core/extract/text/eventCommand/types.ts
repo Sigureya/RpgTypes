@@ -22,8 +22,7 @@ type BaseCode =
 
 export type TextCommandParameter =
   | GenericCommandParameter
-  | MessageCommandParameter
-  | PluginCommandMzParameter;
+  | MessageCommandParameter;
 
 export interface GenericCommandParameter
   extends CommandParameter<string, BaseCode> {
@@ -47,8 +46,10 @@ export interface MessageCommandParameter
   code: typeof SHOW_MESSAGE_BODY;
 }
 
-export interface ExtractedEventText {
+export interface ExtractedEventText<
+  P extends PluginCommandMzParameter = PluginCommandMzParameter
+> {
   eventId: number;
   pageIndex: number;
-  commands: TextCommandParameter[];
+  commands: (TextCommandParameter | P)[];
 }
