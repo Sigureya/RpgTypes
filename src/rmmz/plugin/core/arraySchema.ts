@@ -5,9 +5,6 @@ import type {
 } from "./arraySchemaTypes";
 import type { StructRefParam } from "./primitiveParams";
 
-/**
- * schemasから参照関係マップを生成する
- */
 function createRefMap(
   schemas: ReadonlyArray<PluginStructSchemaArray>
 ): Record<string, PluginParam<StructRefParam>[]> {
@@ -22,15 +19,11 @@ function createRefMap(
   );
 }
 
-/**
- * 間接的に参照されるstruct名を集める（再帰・ループ禁止・state型で伝播）
- */
 function propagate(
   allStructNames: ReadonlyArray<string>,
   refMap: Record<string, PluginParam<StructRefParam>[]>,
   initialNames: Set<string>
 ): Set<string> {
-  // 状態を保持する型
   type State = { names: Set<string>; changed: boolean };
 
   // 最大伝播回数分だけreduceで状態を伝播
@@ -57,16 +50,13 @@ function propagate(
 
   return finalState.names;
 }
-/**
- * structNameを参照しているschemasをindirectsへ追加する（非再帰・イミュータブル・簡略化版）
- */
+
 function findIndirectsFunctional(
   schemas: ReadonlyArray<PluginStructSchemaArray>,
   directStructNames: ReadonlySet<string>
 ): Set<string> {
   const refMap = createRefMap(schemas);
   const allStructNames = Object.keys(refMap);
-  // propagate関数を利用
   return propagate(allStructNames, refMap, new Set(directStructNames));
 }
 
