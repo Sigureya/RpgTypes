@@ -9,6 +9,8 @@ import {
 import type { GroopMapper } from "./eventCommand/commandGroup";
 import { getGroupHandlingFunc } from "./eventCommand/commandGroup/mapping";
 import type {
+  GenericCommandParameter,
+  MessageCommandParameter,
   PluginCommandMzParameter,
   TextCommandParameter,
 } from "./extract/text/eventCommand";
@@ -26,10 +28,7 @@ import {
 export const extractTextFromEventCommands = (
   list: ReadonlyArray<EventCommand>
 ): TextCommandParameter[] => {
-  return extractTextFromEventCommandsCore(
-    list,
-    (): PluginCommandMzParameter[] => []
-  );
+  return extractTextFromEventCommandsCore(list, () => []);
 };
 
 export const extractTextFromEventCommandsEx = <
@@ -37,7 +36,7 @@ export const extractTextFromEventCommandsEx = <
 >(
   list: ReadonlyArray<EventCommand>,
   pluginCommandFn: (command: Command_PluginCommandMZ) => T[]
-): TextCommandParameter[] => {
+): (MessageCommandParameter | GenericCommandParameter | T)[] => {
   return extractTextFromEventCommandsCore(list, pluginCommandFn);
 };
 
@@ -45,7 +44,7 @@ const extractTextFromEventCommandsCore = <T extends PluginCommandMzParameter>(
   list: ReadonlyArray<EventCommand>,
   pluginCommandFn: (command: Command_PluginCommandMZ) => T[]
 ): (TextCommandParameter | T)[] => {
-  return list.reduce<TextCommandParameter[]>((acc, command, index) => {
+  return list.reduce<(T | TextCommandParameter)[]>((acc, command, index) => {
     if (command.code === SHOW_CHOICES) {
       return [...acc, ...extractTextParamsFromChoice(command)];
     }
@@ -70,7 +69,10 @@ const extractTextFromEventCommandsCore = <T extends PluginCommandMzParameter>(
       return [...acc, extractTextFromActorCommand(command)];
     }
     if (command.code === PLUGIN_COMMAND_MZ) {
-      return [...acc, ...pluginCommandFn(command)];
+      const pluginComandArgs: T[] = pluginCommandFn(command);
+      return pluginComandArgs.length === 0
+        ? acc
+        : [...acc, ...pluginComandArgs];
     }
 
     return acc;
