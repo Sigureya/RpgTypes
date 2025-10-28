@@ -1,5 +1,5 @@
 import type { NoteReadResult } from "@RpgTypes/rmmz";
-import type { TextCommandParameter } from "./text/eventCommand";
+import type { TextCommandParameter } from "./eventCommand";
 
 export interface ExtractedBattleEventText {
   eventId: number;

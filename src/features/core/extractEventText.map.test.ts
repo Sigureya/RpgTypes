@@ -1,7 +1,7 @@
 import { test, expect, describe } from "vitest";
 import type { Data_Map, EventCommand } from "@RpgTypes/rmmz";
 import { makeMapData, readNote } from "@RpgTypes/rmmz";
-import type { ExtractedMapEventTexts } from "./extract/types";
+import type { ExtractedMapEventTexts } from "./extract/text/types";
 import { extractMapText } from "./extractEventText";
 
 const createMockMap = (): Data_Map<EventCommand> =>

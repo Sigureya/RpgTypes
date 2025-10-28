@@ -10,7 +10,7 @@ import type {
   ExtractedCommonEventText,
   ExtractedMapEventTexts,
   ExtractedMapTexts,
-} from "./extract/types";
+} from "./extract/text/types";
 import { extractTextFromEventCommands } from "./getTextFromCommand";
 import {
   collectMapEvents,
