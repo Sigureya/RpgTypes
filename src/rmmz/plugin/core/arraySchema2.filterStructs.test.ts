@@ -15,42 +15,18 @@ interface Employee {
 interface Compony {
   companyId: string;
   employees: Employee[];
+  president: Person;
 }
 
-const personSchema: PluginStructSchemaArray3<Person> = {
-  struct: "Person",
-  params: [
-    { name: "name", attr: { kind: "string", default: "" } },
-    { name: "age", attr: { kind: "number", default: 0 } },
-  ],
-};
-
-const employeeSchema: PluginStructSchemaArray3<Employee> = {
-  struct: "Employee",
-  params: [
-    { name: "employeeId", attr: { kind: "string", default: "" } },
-    { name: "person", attr: { kind: "struct", struct: "Person" } },
-  ],
-};
-
-const componySchema: PluginStructSchemaArray3<Compony> = {
-  struct: "Compony",
-  params: [
-    { name: "companyId", attr: { kind: "string", default: "" } },
-    { name: "employees", attr: { kind: "struct[]", struct: "Employee" } },
-  ],
-};
-
 describe("filterStructParam", () => {
-  test("e", () => {
-    const result = filterStructParam(employeeSchema);
-    const expected: PluginStructSchemaArray3<Employee> = {
-      struct: "Employee",
-      params: [{ name: "person", attr: { kind: "struct", struct: "Person" } }],
+  test("scala only", () => {
+    const personSchema: PluginStructSchemaArray3<Person> = {
+      struct: "Person",
+      params: [
+        { name: "name", attr: { kind: "string", default: "" } },
+        { name: "age", attr: { kind: "number", default: 0 } },
+      ],
     };
-    expect(result).toEqual(expected);
-  });
-  test("p", () => {
     const result = filterStructParam(personSchema);
     const expected: PluginStructSchemaArray3<Person> = {
       struct: "Person",
@@ -58,12 +34,36 @@ describe("filterStructParam", () => {
     };
     expect(result).toEqual(expected);
   });
-  test("c", () => {
+  test("hasStruct", () => {
+    const employeeSchema: PluginStructSchemaArray3<Employee> = {
+      struct: "Employee",
+      params: [
+        { name: "employeeId", attr: { kind: "string", default: "" } },
+        { name: "person", attr: { kind: "struct", struct: "Person" } },
+      ],
+    };
+    const result = filterStructParam(employeeSchema);
+    const expected: PluginStructSchemaArray3<Employee> = {
+      struct: "Employee",
+      params: [{ name: "person", attr: { kind: "struct", struct: "Person" } }],
+    };
+    expect(result).toEqual(expected);
+  });
+  test("hasStructArray", () => {
+    const componySchema: PluginStructSchemaArray3<Compony> = {
+      struct: "Compony",
+      params: [
+        { name: "companyId", attr: { kind: "string", default: "" } },
+        { name: "employees", attr: { kind: "struct[]", struct: "Employee" } },
+        { name: "president", attr: { kind: "struct", struct: "Person" } },
+      ],
+    };
     const result = filterStructParam(componySchema);
     const expected: PluginStructSchemaArray3<Compony> = {
       struct: "Compony",
       params: [
         { name: "employees", attr: { kind: "struct[]", struct: "Employee" } },
+        { name: "president", attr: { kind: "struct", struct: "Person" } },
       ],
     };
     expect(result).toEqual(expected);
