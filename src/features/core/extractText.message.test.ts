@@ -71,12 +71,13 @@ describe("extractTextParamFromMessage", () => {
       speakerName: "abc",
     });
     const group = createMessageGroup([command], 0);
-    const result = extractTextParamFromMessage(group);
-    expect(result).toEqual({
+    const expected: TextCommandParameter = {
       speaker: "abc",
       code: SHOW_MESSAGE_BODY,
       value: "",
       paramIndex: 0,
-    } satisfies typeof result);
+    };
+    const result = extractTextParamFromMessage(group);
+    expect(result).toEqual(expected satisfies typeof result);
   });
 });
