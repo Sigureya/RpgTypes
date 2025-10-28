@@ -11,7 +11,6 @@ import type {
   SSSS,
 } from "./arraySchemaTypes2";
 import { isStructAttr } from "./arraySchemaUtils";
-import type { StructArrayRefParam, StructRefParam } from "./primitiveParams";
 
 interface GGG<T extends PluginParam> {
   struct: string;
@@ -23,10 +22,29 @@ export const filterStructParam = (struct: PluginStructSchemaArray): SSSS => ({
   params: struct.params.filter(isStructAttr),
 });
 
-export const cccc = <T extends PluginParam>(
+export function cccc<T extends PluginParam>(
   schema: PluginSchemaArray,
   predicate: (param: PluginParam) => param is T
-) => {
+): PluginSchemaArray;
+
+export function cccc(
+  schema: PluginSchemaArray,
+  predicate: (param: PluginParam) => boolean
+): PluginSchemaArray;
+
+export function cccc<T extends PluginParam>(
+  schema: PluginSchemaArray,
+  predicate:
+    | ((param: PluginParam) => param is T)
+    | ((param: PluginParam) => boolean)
+) {
+  return cccc2<T>(schema, predicate as (param: PluginParam) => param is T);
+}
+
+function cccc2<T extends PluginParam>(
+  schema: PluginSchemaArray,
+  predicate: (param: PluginParam) => param is T
+): PluginSchemaArray {
   const { directs, indirects, indirectsNames } = filterStructs(
     schema.structs,
     predicate
@@ -44,7 +62,7 @@ export const cccc = <T extends PluginParam>(
     commands: c2,
     params: schema.params,
   } satisfies PluginSchemaArray;
-};
+}
 
 export const cmdEx = <T extends PluginParam>(
   commands: PluginCommandSchemaArray[],
