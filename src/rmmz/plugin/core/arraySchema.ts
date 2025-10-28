@@ -5,51 +5,66 @@ import type {
   PluginParam,
   PluginStructSchemaArray,
 } from "./arraySchemaTypes";
-import type { StructRefParam } from "./primitiveParams";
-import { isStructParam } from "./typeTest";
+// ...existing code...
 
 /**
- * structNameを参照しているschemasをindirectsへ追加する（非再帰・イミュータブル・禁止事項対応）
+ * schemasから参照関係マップを生成する
+ */
+function createRefMap(
+  schemas: ReadonlyArray<PluginStructSchemaArray>
+): Record<string, string[]> {
+  return schemas.reduce<Record<string, string[]>>((acc, schema) => {
+    acc[schema.struct] = schema.params.flatMap((param) =>
+      param.attr?.kind === "struct" ? [param.attr.struct] : []
+    );
+    return acc;
+  }, {});
+}
+
+/**
+ * 間接的に参照されるstruct名を集める（再帰・ループ禁止なのでreduceで伝播）
+ */
+function propagate(
+  allStructNames: string[],
+  refMap: Record<string, string[]>,
+  names: Set<string>
+): Set<string> {
+  const next = allStructNames.filter(
+    (struct) =>
+      !names.has(struct) && refMap[struct].some((ref) => names.has(ref))
+  );
+  if (next.length === 0) {
+    return names;
+  }
+  return propagate(allStructNames, refMap, new Set([...names, ...next]));
+}
+
+/**
+ * structNameを参照しているschemasをindirectsへ追加する（非再帰・イミュータブル・簡略化版）
  */
 function findIndirectsFunctional(
   schemas: ReadonlyArray<PluginStructSchemaArray>,
   directStructNames: Set<string>
 ): PluginStructSchemaArray[] {
-  // 間接的に参照されるstruct名を集める
-  const allStructNames = schemas.map((s): string => s.struct);
   // 参照関係をマップ化
-  const refMap: Record<string, string[]> = Object.fromEntries(
-    schemas.map((schema) => [
-      schema.struct,
-      schema.params
-        .filter((param): param is PluginParam<StructRefParam> =>
-          isStructParam(param.attr)
-        )
-        .map((param) => param.attr.struct),
-    ])
+  const refMap = createRefMap(schemas);
+
+  const allStructNames = Object.keys(refMap);
+
+  // propagate関数を利用
+  const allRelated = propagate(
+    allStructNames,
+    refMap,
+    new Set(directStructNames)
   );
-
-  // 間接的に参照されるstruct名を集める（再帰・ループ禁止なのでreduceで伝播）
-  function propagate(names: Set<string>): Set<string> {
-    const next = allStructNames.filter(
-      (struct) =>
-        !names.has(struct) && refMap[struct].some((ref) => names.has(ref))
-    );
-    if (next.length === 0) {
-      return names;
-    }
-    return propagate(new Set([...names, ...next]));
-  }
-
-  const allRelated = propagate(new Set(directStructNames));
   // 直接一致は除外
-  const indirectNames = [...allRelated].filter(
-    (name) => !directStructNames.has(name)
+  const indirectNames = allStructNames.filter(
+    (name) => allRelated.has(name) && !directStructNames.has(name)
   );
 
   return schemas.filter((s) => indirectNames.includes(s.struct));
 }
-
+// ...existing code...
 /**
  * 指定した条件に一致するstructをdirectsに、間接的に関連するstructをindirectsに分類する
  */
