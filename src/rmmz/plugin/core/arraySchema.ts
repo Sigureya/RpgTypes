@@ -45,21 +45,14 @@ function propagate(
  */
 function findIndirectsFunctional(
   schemas: ReadonlyArray<PluginStructSchemaArray>,
-  directStructNames: Set<string>
-): string[] {
+  directStructNames: ReadonlySet<string>
+) {
   const refMap = createRefMap(schemas);
 
   const allStructNames = Object.keys(refMap);
 
   // propagate関数を利用
-  const allRelated = propagate(
-    allStructNames,
-    refMap,
-    new Set(directStructNames)
-  );
-  return allStructNames.filter(
-    (name) => allRelated.has(name) && !directStructNames.has(name)
-  );
+  return propagate(allStructNames, refMap, new Set(directStructNames));
 }
 
 export function filterStructs(
@@ -71,12 +64,12 @@ export function filterStructs(
   const directStructNames = new Set(directs.map((s) => s.struct));
 
   // 間接的に関連するstructを抽出（非再帰・イミュータブル）
-  const indirects = new Set(
-    findIndirectsFunctional(schemas, directStructNames)
-  );
+  const indirects = findIndirectsFunctional(schemas, directStructNames);
 
   // indirectsの順序をテスト期待値に合わせるため、schemasの順でフィルタ
-  const indirectsOrdered = schemas.filter((s) => indirects.has(s.struct));
+  const indirectsOrdered = schemas.filter(
+    (s) => !directStructNames.has(s.struct) && indirects.has(s.struct)
+  );
 
   return {
     directs,
