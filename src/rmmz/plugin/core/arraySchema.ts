@@ -1,5 +1,3 @@
-// ...existing code...
-
 import type {
   GG,
   PluginParam,
@@ -23,7 +21,6 @@ function createRefMap(
     ])
   );
 }
-// ...existing code...
 /**
  * 間接的に参照されるstruct名を集める（再帰・ループ禁止なのでreduceで伝播）
  */
@@ -49,8 +46,7 @@ function propagate(
 function findIndirectsFunctional(
   schemas: ReadonlyArray<PluginStructSchemaArray>,
   directStructNames: Set<string>
-): PluginStructSchemaArray[] {
-  // 参照関係をマップ化
+): string[] {
   const refMap = createRefMap(schemas);
 
   const allStructNames = Object.keys(refMap);
@@ -61,16 +57,11 @@ function findIndirectsFunctional(
     refMap,
     new Set(directStructNames)
   );
-  // 直接一致は除外
-  const indirectNames = allStructNames.filter(
+  return allStructNames.filter(
     (name) => allRelated.has(name) && !directStructNames.has(name)
   );
-
-  return schemas.filter((s) => indirectNames.includes(s.struct));
 }
-/**
- * 指定した条件に一致するstructをdirectsに、間接的に関連するstructをindirectsに分類する
- */
+
 export function filterStructs(
   schemas: ReadonlyArray<PluginStructSchemaArray>,
   predicate: (param: PluginParam) => boolean
@@ -80,16 +71,15 @@ export function filterStructs(
   const directStructNames = new Set(directs.map((s) => s.struct));
 
   // 間接的に関連するstructを抽出（非再帰・イミュータブル）
-  const indirects = findIndirectsFunctional(schemas, directStructNames);
+  const indirects = new Set(
+    findIndirectsFunctional(schemas, directStructNames)
+  );
 
   // indirectsの順序をテスト期待値に合わせるため、schemasの順でフィルタ
-  const indirectsOrdered = schemas.filter((s) =>
-    indirects.some((i) => i.struct === s.struct)
-  );
+  const indirectsOrdered = schemas.filter((s) => indirects.has(s.struct));
 
   return {
     directs,
     indirects: indirectsOrdered,
   };
 }
-// ...existing code...
