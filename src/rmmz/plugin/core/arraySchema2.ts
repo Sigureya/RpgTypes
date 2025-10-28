@@ -1,13 +1,17 @@
 import { filterStructs } from "./arraySchemaFilter";
 import type {
+  PluginCommandSchemaArray,
   PluginParam,
   PluginSchemaArray,
   PluginStructSchemaArray,
 } from "./arraySchemaTypes";
-import type { SSSS } from "./arraySchemaTypes2";
+import type {
+  PluginCommandSchemaArrayGGG,
+  PP,
+  SSSS,
+} from "./arraySchemaTypes2";
 import { isStructAttr } from "./arraySchemaUtils";
 import type { StructArrayRefParam, StructRefParam } from "./primitiveParams";
-import { isStructArrayParam, isStructParam } from "./typeTest";
 
 interface GGG<T extends PluginParam> {
   struct: string;
@@ -19,7 +23,7 @@ export const ssss = (struct: PluginStructSchemaArray): SSSS => ({
   params: struct.params.filter(isStructAttr),
 });
 
-const cccc = <T extends PluginParam>(
+export const cccc = <T extends PluginParam>(
   schema: PluginSchemaArray,
   predicate: (param: PluginParam) => param is T
 ) => {
@@ -33,4 +37,33 @@ const cccc = <T extends PluginParam>(
   return {
     structs: s2,
   };
+};
+
+const ss6 = (
+  param: PluginParam,
+  structNames: ReadonlySet<string>
+): param is PluginParam<StructRefParam | StructArrayRefParam> => {
+  if (isStructAttr(param)) {
+    return structNames.has(param.attr.struct);
+  }
+  return false;
+};
+
+export const cmdEx = <T extends PluginParam>(
+  commands: PluginCommandSchemaArray[],
+  structNames: ReadonlySet<string>,
+  predicate: (param: PluginParam) => param is T
+): PluginCommandSchemaArrayGGG<T | PP>[] => {
+  return commands.map(
+    (cmd): PluginCommandSchemaArrayGGG<T | PP> => ({
+      command: cmd.command,
+      desc: cmd.desc,
+      text: cmd.text,
+      args: cmd.args.filter((param): param is PP | T => {
+        return isStructAttr(param)
+          ? structNames.has(param.attr.struct)
+          : predicate(param);
+      }),
+    })
+  );
 };
