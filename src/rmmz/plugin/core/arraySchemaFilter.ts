@@ -58,7 +58,10 @@ export function filterStructs(
   const directs = schemas.filter((schema) => schema.params.some(predicate));
   const directStructNames = new Set(directs.map((s) => s.struct));
 
-  const indirects = findIndirectsFunctional(schemas, directStructNames);
+  const indirects: Set<string> = findIndirectsFunctional(
+    schemas,
+    directStructNames
+  );
   const indirectsOrdered = schemas.filter(
     (s) => !directStructNames.has(s.struct) && indirects.has(s.struct)
   );
@@ -66,6 +69,6 @@ export function filterStructs(
   return {
     directs,
     indirects: indirectsOrdered,
-    //    indirectsNames: indirects,
+    indirectsNames: indirects,
   };
 }
