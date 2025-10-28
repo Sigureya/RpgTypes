@@ -1,4 +1,3 @@
-import type { PluginStructSchemaArray } from "./arraySchemaTypes";
 import type { PrimitiveParam } from "./paramUnion";
 import type { StructRefParam, StructArrayRefParam } from "./primitiveParams";
 import { isStructParam, isStructArrayParam } from "./typeTest";
@@ -37,10 +36,4 @@ export const structDependencies = (
 ): string[] => {
   const visited = new Set<string>();
   return collectStructDeps(structName, map, visited);
-};
-
-export const createStructMap = (
-  structs: ReadonlyArray<PluginStructSchemaArray>
-): Map<string, PrimitiveParam[]> => {
-  return new Map(structs.map((s) => [s.struct, s.params.map((p) => p.attr)]));
 };
