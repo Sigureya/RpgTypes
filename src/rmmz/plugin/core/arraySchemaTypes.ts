@@ -6,11 +6,18 @@ export interface PluginParam<T = PrimitiveParam> {
   attr: T;
 }
 
-export interface PluginCommandSchemaArray<T = PrimitiveParam> {
+export interface PluginCommandSchemaArray {
   command: string;
   desc?: string;
   text?: string;
-  args: PluginParam<T>[];
+  args: PluginParam[];
+}
+
+export interface PluginCommandSchemaArrayEx<ArgStruct> {
+  command: string;
+  desc?: string;
+  text?: string;
+  args: PluginStructParamTypeEx<ArgStruct>[];
 }
 
 export interface PluginStructSchemaArray {
@@ -19,7 +26,7 @@ export interface PluginStructSchemaArray {
 }
 
 export interface PluginSchemaArrayEx<T> {
-  commands: PluginCommandSchemaArray<T>[];
+  commands: PluginCommandSchemaArrayEx<T>[];
   params: PluginParam<T>[];
   structs: PluginStructSchemaArray[];
 }

@@ -4,5 +4,5 @@ export type {
   ClassifiedPluginParamsEx,
 } from "./classifyTypes";
 export { classifyPluginParams } from "./classify";
-export { createStructMap, structDependencies } from "./core/structDependencies";
+export { createStructMap } from "./core";
 export { pluginSourceToJSON } from "./plugin";

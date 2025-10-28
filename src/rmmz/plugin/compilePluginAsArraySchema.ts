@@ -34,9 +34,9 @@ const mapParams = (
 
 const mapCommands = (
   commands: ReadonlyArray<PluginCommandTokens>
-): PluginCommandSchemaArray<PrimitiveParam>[] => {
+): PluginCommandSchemaArray[] => {
   return commands.map(
-    (cmd): PluginCommandSchemaArray<PrimitiveParam> => ({
+    (cmd): PluginCommandSchemaArray => ({
       command: cmd.command,
       desc: cmd.desc,
       text: cmd.text,

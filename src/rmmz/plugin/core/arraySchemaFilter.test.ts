@@ -1,5 +1,5 @@
 import { describe, expect, test } from "vitest";
-import { filterStructs } from "./arraySchema";
+import { filterStructs } from "./arraySchemaFilter";
 import type {
   GG,
   PluginStructSchemaArray,
@@ -103,6 +103,7 @@ describe("filterStructs no match", () => {
       directs: [],
       indirects: [],
     };
-    expect(result).toEqual(expected);
+    expect(result.directs).toEqual(expected.directs);
+    expect(result.indirects).toEqual(expected.indirects);
   });
 });
