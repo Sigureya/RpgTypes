@@ -1,5 +1,5 @@
 import { describe, expect, test } from "vitest";
-import { ssss } from "./arraySchema2";
+import { filterStructParam } from "./arraySchema2";
 import type { PluginStructSchemaArray3 } from "./arraySchemaTypes";
 
 interface Person {
@@ -41,9 +41,9 @@ const componySchema: PluginStructSchemaArray3<Compony> = {
   ],
 };
 
-describe("s", () => {
+describe("filterStructParam", () => {
   test("e", () => {
-    const result = ssss(employeeSchema);
+    const result = filterStructParam(employeeSchema);
     const expected: PluginStructSchemaArray3<Employee> = {
       struct: "Employee",
       params: [{ name: "person", attr: { kind: "struct", struct: "Person" } }],
@@ -51,7 +51,7 @@ describe("s", () => {
     expect(result).toEqual(expected);
   });
   test("p", () => {
-    const result = ssss(personSchema);
+    const result = filterStructParam(personSchema);
     const expected: PluginStructSchemaArray3<Person> = {
       struct: "Person",
       params: [],
@@ -59,7 +59,7 @@ describe("s", () => {
     expect(result).toEqual(expected);
   });
   test("c", () => {
-    const result = ssss(componySchema);
+    const result = filterStructParam(componySchema);
     const expected: PluginStructSchemaArray3<Compony> = {
       struct: "Compony",
       params: [

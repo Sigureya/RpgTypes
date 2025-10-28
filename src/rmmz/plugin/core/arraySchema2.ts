@@ -18,7 +18,7 @@ interface GGG<T extends PluginParam> {
   params: T[];
 }
 
-export const ssss = (struct: PluginStructSchemaArray): SSSS => ({
+export const filterStructParam = (struct: PluginStructSchemaArray): SSSS => ({
   struct: struct.struct,
   params: struct.params.filter(isStructAttr),
 });
@@ -27,26 +27,23 @@ export const cccc = <T extends PluginParam>(
   schema: PluginSchemaArray,
   predicate: (param: PluginParam) => param is T
 ) => {
-  const { directs, indirects } = filterStructs(schema.structs, predicate);
+  const { directs, indirects, indirectsNames } = filterStructs(
+    schema.structs,
+    predicate
+  );
   const s2: GGG<T>[] = directs.map((s) => ({
     struct: s.struct,
     params: s.params.filter((p) => predicate(p)),
   }));
 
-  const s3 = indirects.map(ssss);
+  const c2 = cmdEx<T>(schema.commands, indirectsNames, predicate);
+
+  const s3 = indirects.map(filterStructParam);
   return {
     structs: s2,
-  };
-};
-
-const ss6 = (
-  param: PluginParam,
-  structNames: ReadonlySet<string>
-): param is PluginParam<StructRefParam | StructArrayRefParam> => {
-  if (isStructAttr(param)) {
-    return structNames.has(param.attr.struct);
-  }
-  return false;
+    commands: c2,
+    params: schema.params,
+  } satisfies PluginSchemaArray;
 };
 
 export const cmdEx = <T extends PluginParam>(
