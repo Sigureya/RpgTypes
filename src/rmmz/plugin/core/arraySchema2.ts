@@ -5,6 +5,7 @@ import type {
   PluginStructSchemaArray,
 } from "./arraySchemaTypes";
 import type { SSSS } from "./arraySchemaTypes2";
+import { isStructAttr } from "./arraySchemaUtils";
 import type { StructArrayRefParam, StructRefParam } from "./primitiveParams";
 import { isStructArrayParam, isStructParam } from "./typeTest";
 
@@ -12,12 +13,6 @@ interface GGG<T extends PluginParam> {
   struct: string;
   params: T[];
 }
-
-export const isStructAttr = (
-  param: PluginParam
-): param is PluginParam<StructRefParam | StructArrayRefParam> => {
-  return isStructParam(param.attr) || isStructArrayParam(param.attr);
-};
 
 export const ssss = (struct: PluginStructSchemaArray): SSSS => ({
   struct: struct.struct,
