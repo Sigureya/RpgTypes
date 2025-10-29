@@ -2,6 +2,7 @@ import { describe, expect, test, vi } from "vitest";
 import type { ItemEffect } from "@RpgTypes/rmmz/rpg";
 import { cccc } from "./arraySchema2";
 import type {
+  PluginCommandSchemaArrayEx,
   PluginParam,
   PluginSchemaArray,
   PluginStructSchemaArray3,
@@ -12,6 +13,14 @@ interface Item {
   name: string;
   description: string;
   effects: ItemEffect[];
+}
+
+interface ShowText {
+  text: string;
+}
+
+interface ShowNumber {
+  value: number;
 }
 
 const itemSchema: PluginStructSchemaArray3<Item> = {
@@ -37,6 +46,16 @@ const effectSchema: PluginStructSchemaArray3<ItemEffect> = {
   ],
 };
 
+const showTextSchema: PluginCommandSchemaArrayEx<ShowText> = {
+  command: "ShowText",
+  args: [{ name: "text", attr: { kind: "string", default: "Hello World!" } }],
+};
+
+const showNumberSchema: PluginCommandSchemaArrayEx<ShowNumber> = {
+  command: "ShowNumber",
+  args: [{ name: "value", attr: { kind: "number", default: 42 } }],
+};
+
 describe("cccc", () => {
   test("empty", () => {
     const mockFn = vi.fn((p): p is PluginParam => true);
@@ -54,15 +73,32 @@ describe("cccc", () => {
     expect(mockFn).toHaveBeenCalledTimes(0);
     expect(result).toEqual(expected);
   });
+  describe("", () => {
+    const isNumberParam = (p: PluginParam) => p.attr.kind === "number";
+    test("", () => {
+      const mockFn = vi.fn((p: PluginParam): p is PluginParam =>
+        isNumberParam(p)
+      );
+      const plugin: PluginSchemaArray = {
+        commands: [showNumberSchema],
+        structs: [],
+        params: [],
+      };
+      const result = cccc(plugin, (p): p is PluginParam => mockFn(p));
+      expect(result.commands).toEqual(plugin.commands);
+      expect(result.params).toEqual(plugin.params);
+      expect(result.structs).toEqual(plugin.structs);
+    });
+  });
   test("a", () => {
     const mockFn = vi.fn((p: PluginParam) => p.attr.kind === "string");
     const plugin: PluginSchemaArray = {
-      commands: [],
+      commands: [showTextSchema, showNumberSchema],
       structs: [itemSchema, effectSchema],
       params: [{ name: "items", attr: { kind: "struct[]", struct: "Item" } }],
     };
     const expected: PluginSchemaArray = {
-      commands: [],
+      commands: [showTextSchema],
       structs: [
         {
           struct: "Item",
