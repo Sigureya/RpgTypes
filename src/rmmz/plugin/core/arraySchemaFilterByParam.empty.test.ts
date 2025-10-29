@@ -17,8 +17,8 @@ const emptyCommandSchema: PluginCommandSchemaArray = {
   args: [],
 };
 
-describe("cccc", () => {
-  test("empty", () => {
+describe("filterPluginSchemaByParam - returns empty schema", () => {
+  test("when input is empty", () => {
     const mockFn = vi.fn((p): p is PluginParam => true);
     const plugin: PluginSchemaArray = {
       commands: [],
@@ -34,7 +34,7 @@ describe("cccc", () => {
     expect(mockFn).toHaveBeenCalledTimes(0);
     expect(result).toEqual(expected);
   });
-  test("empty2", () => {
+  test("when only empty commands and structs are present", () => {
     const mockFn = vi.fn((p): p is PluginParam => false);
     const plugin: PluginSchemaArray = {
       commands: [emptyCommandSchema],
@@ -50,7 +50,7 @@ describe("cccc", () => {
     expect(mockFn).toHaveBeenCalledTimes(0);
     expect(result).toEqual(expected);
   });
-  test("empty3", () => {
+  test("when all params are struct type and predicate is always false", () => {
     const mockFn = vi.fn((p): p is PluginParam => false);
     const plugin: PluginSchemaArray = {
       commands: [emptyCommandSchema],
