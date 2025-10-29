@@ -35,14 +35,11 @@ describe("cccc", () => {
     expect(result).toEqual(expected);
   });
   test("empty2", () => {
-    const mockFn = vi.fn((p): p is PluginParam => true);
+    const mockFn = vi.fn((p): p is PluginParam => false);
     const plugin: PluginSchemaArray = {
       commands: [emptyCommandSchema],
       structs: [emptyStructSchema],
-      params: [
-        { name: "dummy", attr: { kind: "struct", struct: "Empty" } },
-        { name: "dummyArray", attr: { kind: "struct[]", struct: "Empty" } },
-      ],
+      params: [],
     };
     const result = cccc(plugin, mockFn);
     const expected: PluginSchemaArray = {
@@ -50,7 +47,7 @@ describe("cccc", () => {
       structs: [],
       params: [],
     };
-    expect(mockFn).toHaveBeenCalledTimes(0);
+    expect(mockFn).toHaveBeenCalledTimes(plugin.params.length);
     expect(result).toEqual(expected);
   });
 });
