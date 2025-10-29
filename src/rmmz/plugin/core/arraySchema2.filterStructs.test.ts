@@ -1,5 +1,5 @@
 import { describe, expect, test } from "vitest";
-import { filterStructParam } from "./arraySchema2";
+import { filterStructParam } from "./arraySchemaFilterByParam";
 import type { PluginStructSchemaArray3 } from "./arraySchemaTypes";
 
 interface Person {
