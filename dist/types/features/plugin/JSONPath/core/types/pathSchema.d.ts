@@ -1,7 +1,12 @@
+import { ArrayParamTypes, PluginParam } from '../../../../../rmmz/plugin';
 export interface StructPropertysPath {
     structName: string;
     scalas: string | undefined;
-    scalaArrays: string[];
+    scalaArrays: PathPair[];
+}
+export interface PathPair {
+    path: string;
+    param: PluginParam<ArrayParamTypes>;
 }
 export interface StructPathError {
     path: string;
