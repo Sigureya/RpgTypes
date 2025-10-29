@@ -13,10 +13,7 @@ import type {
   ExtractedMapEventTexts,
   ExtractedMapTexts,
 } from "./extract/text/types";
-import {
-  extractTextFromEventCommands,
-  extractTextFromEventCommandsEx,
-} from "./getTextFromCommand";
+import { extractTextFromEventCommandsEx } from "./getTextFromCommand";
 import {
   collectMapEvents,
   processCommonEvents,
@@ -41,7 +38,8 @@ export const extractCommonEventTexts = <T extends PluginCommandMzParameter>(
 };
 
 export const extractBattleEventTexts = <T extends PluginCommandMzParameter>(
-  list: ReadonlyArray<Data_Troop>
+  list: ReadonlyArray<Data_Troop>,
+  pluginCommandEvaltor: (command: Command_PluginCommandMZ) => T[] = () => []
 ): ExtractedBattleEventText<T>[][] => {
   return processTroopEvents(
     list,
@@ -52,7 +50,7 @@ export const extractBattleEventTexts = <T extends PluginCommandMzParameter>(
     ): ExtractedBattleEventText<T> => ({
       eventId: id,
       pageIndex,
-      commands: extractTextFromEventCommands(page.list),
+      commands: extractTextFromEventCommandsEx(page.list, pluginCommandEvaltor),
     })
   );
 };
