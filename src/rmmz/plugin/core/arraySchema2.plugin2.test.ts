@@ -1,6 +1,6 @@
 import { describe, expect, test, vi } from "vitest";
 import type { ItemEffect } from "@RpgTypes/rmmz/rpg";
-import { cccc } from "./arraySchema2";
+import { filterPluginSchemaByParam } from "./arraySchemaFilterByParam";
 import type {
   PluginCommandSchemaArray,
   PluginCommandSchemaArrayEx,
@@ -108,7 +108,9 @@ describe.skip("cccc", () => {
           { name: "position", attr: { kind: "struct", struct: "Vector2" } },
         ],
       };
-      const result = cccc(plugin, (p): p is PluginParam => mockFn(p));
+      const result = filterPluginSchemaByParam(plugin, (p): p is PluginParam =>
+        mockFn(p)
+      );
       expect(result.commands).toEqual(plugin.commands);
       expect(result.structs).toEqual(plugin.structs);
       expect(result.params).toEqual(plugin.params);
@@ -123,7 +125,7 @@ describe.skip("cccc", () => {
           { name: "bool", attr: { kind: "boolean", default: true } },
         ],
       };
-      const result = cccc(plugin, (p) => mockFn(p));
+      const result = filterPluginSchemaByParam(plugin, (p) => mockFn(p));
       expect(result.commands).toEqual([]);
       expect(result.params).toEqual([]);
       expect(result.structs).toEqual([]);
@@ -153,7 +155,9 @@ describe.skip("cccc", () => {
       ],
       params: [{ name: "items", attr: { kind: "struct[]", struct: "Item" } }],
     };
-    const result = cccc(plugin, (p): p is PluginParam => mockFn(p));
+    const result = filterPluginSchemaByParam(plugin, (p): p is PluginParam =>
+      mockFn(p)
+    );
     expect(result.commands).toEqual(expected.commands);
     expect(result.params).toEqual(expected.params);
     expect(result.structs).toEqual(expected.structs);
