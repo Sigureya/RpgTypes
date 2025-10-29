@@ -63,6 +63,16 @@ export const filterStructs2 = (
   return { directs, indirects, directNames };
 };
 
+export const filterStructs3 = (
+  schemas: ReadonlyArray<PluginStructSchemaArray>,
+  predicate: (param: PluginStructSchemaArray) => boolean
+): PluginStructSchemaArray[] => {
+  const { indirects, directNames } = filterStructs2(schemas, predicate);
+  return schemas.filter(
+    (s) => !directNames.has(s.struct) && indirects.has(s.struct)
+  );
+};
+
 export function filterStructs(
   schemas: ReadonlyArray<PluginStructSchemaArray>,
   predicate: (param: PluginParam) => boolean
