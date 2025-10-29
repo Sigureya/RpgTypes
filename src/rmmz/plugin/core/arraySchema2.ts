@@ -69,7 +69,9 @@ function cccc2<T extends PluginParam>(
   return {
     structs: s2,
     commands: newCommands,
-    params: schema.params.filter((p): p is T => predicate(p)),
+    params: schema.params.filter((p): p is T =>
+      isStructAttr(p) ? indirectsNames.has(p.attr.struct) : predicate(p)
+    ),
   };
 }
 
