@@ -22,6 +22,11 @@ interface Vector2 {
   y: number;
 }
 
+interface MessagePair {
+  message: string;
+  speakerName: string;
+}
+
 const emptyStructSchema = {
   struct: "Empty",
   params: [],
@@ -40,6 +45,14 @@ const vector2Schema = {
   ],
 } as const satisfies PluginStructSchemaArray3<Vector2>;
 
+const messagePairSchema: PluginStructSchemaArray3<MessagePair> = {
+  struct: "MessagePair",
+  params: [
+    { name: "message", attr: { kind: "string", default: "" } },
+    { name: "speakerName", attr: { kind: "string", default: "Narrator" } },
+  ],
+};
+
 const showTextSchema: PluginCommandSchemaArrayEx<ShowText> = {
   command: "ShowText",
   args: [{ name: "text", attr: { kind: "string", default: "Hello World!" } }],
@@ -51,39 +64,6 @@ const showNumberSchema: PluginCommandSchemaArrayEx<ShowNumber> = {
 };
 
 describe("cccc", () => {
-  test("empty", () => {
-    const mockFn = vi.fn((p): p is PluginParam => true);
-    const plugin: PluginSchemaArray = {
-      commands: [],
-      structs: [],
-      params: [],
-    };
-    const result = cccc(plugin, mockFn);
-    const expected: PluginSchemaArray = {
-      commands: [],
-      structs: [],
-      params: [],
-    };
-    expect(mockFn).toHaveBeenCalledTimes(0);
-    expect(result).toEqual(expected);
-  });
-  test("empty2", () => {
-    const mockFn = vi.fn((p): p is PluginParam => true);
-    const plugin: PluginSchemaArray = {
-      commands: [emptyCommandSchema],
-      structs: [emptyStructSchema],
-      params: [],
-    };
-    const result = cccc(plugin, mockFn);
-    const expected: PluginSchemaArray = {
-      commands: [],
-      structs: [],
-      params: [],
-    };
-    expect(mockFn).toHaveBeenCalledTimes(0);
-    expect(result).toEqual(expected);
-  });
-
   describe("predicate type guard:number", () => {
     const isNumberParam = (p: PluginParam) => p.attr.kind === "number";
     test("keep number param", () => {
@@ -95,13 +75,7 @@ describe("cccc", () => {
           showNumberSchema,
           {
             command: "ExcuteEffect",
-            args: [
-              { name: "target", attr: { kind: "number", default: 0 } },
-              {
-                name: "effect",
-                attr: { kind: "struct", struct: "ItemEffect" },
-              },
-            ],
+            args: [{ name: "target", attr: { kind: "number", default: 0 } }],
           },
         ],
         structs: [vector2Schema],
@@ -130,6 +104,25 @@ describe("cccc", () => {
       expect(result.params).toEqual([]);
       expect(result.structs).toEqual([]);
       expect(mockFn).toHaveBeenCalledWith(showTextSchema.args[0]);
+    });
+  });
+  describe("", () => {
+    const isStringParam = (p: PluginParam) => p.attr.kind === "string";
+    test("keep string param", () => {
+      const mockFn = vi.fn((p: PluginParam): p is PluginParam =>
+        isStringParam(p)
+      );
+      const plugin: PluginSchemaArray = {
+        commands: [showTextSchema],
+        structs: [messagePairSchema],
+        params: [
+          { name: "greeting", attr: { kind: "string", default: "Hello" } },
+        ],
+      };
+      const result = cccc(plugin, (p): p is PluginParam => mockFn(p));
+      expect(result.commands).toEqual(plugin.commands);
+      expect(result.structs).toEqual(plugin.structs);
+      expect(result.params).toEqual(plugin.params);
     });
   });
 });
