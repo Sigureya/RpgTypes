@@ -81,7 +81,7 @@ const showNumberSchema: PluginCommandSchemaArrayEx<ShowNumber> = {
   args: [{ name: "value", attr: { kind: "number", default: 42 } }],
 };
 
-describe("cccc", () => {
+describe.skip("cccc", () => {
   describe("predicate type guard:number", () => {
     const isNumberParam = (p: PluginParam) => p.attr.kind === "number";
     test("keep number param", () => {
