@@ -22,6 +22,16 @@ export const filterStructParam = (struct: PluginStructSchemaArray): SSSS => ({
   params: struct.params.filter(isStructAttr),
 });
 
+export const filterStructParamEx = <T extends PluginParam>(
+  struct: PluginStructSchemaArray,
+  predicate: (param: PluginParam) => param is Extract<PluginParam, T>
+) => ({
+  struct: struct.struct,
+  params: struct.params.filter((param): param is T => {
+    return predicate(param);
+  }),
+});
+
 export function cccc<T extends PluginParam>(
   schema: PluginSchemaArray,
   predicate: (param: PluginParam) => param is T
@@ -45,23 +55,24 @@ function cccc2<T extends PluginParam>(
   schema: PluginSchemaArray,
   predicate: (param: PluginParam) => param is T
 ): PluginSchemaArray {
-  const { directs, indirects, indirectsNames } = filterStructs(
-    schema.structs,
-    predicate
-  );
-  const s2: GGG<T>[] = directs.map((s) => ({
-    struct: s.struct,
-    params: s.params.filter((p) => predicate(p)),
-  }));
+  const { directs, indirectsNames } = filterStructs(schema.structs, predicate);
 
-  const c2 = cmdEx<T>(schema.commands, indirectsNames, predicate);
+  const s2: GGG<T>[] = directs
+    .map((s) => ({
+      struct: s.struct,
+      params: s.params.filter((p) => predicate(p)),
+    }))
+    .filter((s) => s.params.length > 0);
 
-  const s3 = indirects.map(filterStructParam);
+  const newCommands = cmdEx<T>(schema.commands, indirectsNames, predicate);
+
   return {
     structs: s2,
-    commands: c2,
-    params: schema.params,
-  } satisfies PluginSchemaArray;
+    commands: newCommands,
+    params: schema.params.filter((p): p is T =>
+      isStructAttr(p) ? indirectsNames.has(p.attr.struct) : predicate(p)
+    ),
+  };
 }
 
 export const cmdEx = <T extends PluginParam>(
@@ -69,16 +80,18 @@ export const cmdEx = <T extends PluginParam>(
   structNames: ReadonlySet<string>,
   predicate: (param: PluginParam) => param is T
 ): PluginCommandSchemaArrayGGG<T | PP>[] => {
-  return commands.map(
-    (cmd): PluginCommandSchemaArrayGGG<T | PP> => ({
-      command: cmd.command,
-      desc: cmd.desc,
-      text: cmd.text,
-      args: cmd.args.filter((param): param is PP | T => {
-        return isStructAttr(param)
-          ? structNames.has(param.attr.struct)
-          : predicate(param);
-      }),
-    })
-  );
+  return commands
+    .map(
+      (cmd): PluginCommandSchemaArrayGGG<T | PP> => ({
+        ...(cmd.desc ? { desc: cmd.desc } : {}),
+        ...(cmd.text ? { text: cmd.text } : {}),
+        command: cmd.command,
+        args: cmd.args.filter((param): param is PP | T => {
+          return isStructAttr(param)
+            ? structNames.has(param.attr.struct)
+            : predicate(param);
+        }),
+      })
+    )
+    .filter((cmd) => cmd.args.length > 0);
 };
