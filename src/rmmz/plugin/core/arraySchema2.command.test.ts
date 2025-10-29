@@ -1,5 +1,5 @@
 import { describe, expect, test, vi } from "vitest";
-import { cmdEx } from "./arraySchema2";
+import { cmdEx } from "./arraySchemaFilterByParam";
 import type {
   PluginCommandSchemaArrayEx,
   PluginParam,
