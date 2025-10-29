@@ -55,15 +55,7 @@ function cccc2<T extends PluginParam>(
   schema: PluginSchemaArray,
   predicate: (param: PluginParam) => param is T
 ): PluginSchemaArray {
-  const { directs, indirects, indirectsNames } = filterStructs(
-    schema.structs,
-    predicate
-  );
-  const s3 = pxpx(indirects, (param): param is T | PP =>
-    isStructAttr(param)
-      ? indirectsNames.has(param.attr.struct)
-      : predicate(param)
-  );
+  const { directs, indirectsNames } = filterStructs(schema.structs, predicate);
 
   const s2: GGG<T>[] = directs
     .map((s) => ({
@@ -77,8 +69,8 @@ function cccc2<T extends PluginParam>(
   return {
     structs: s2,
     commands: newCommands,
-    params: schema.params,
-  } satisfies PluginSchemaArray;
+    params: schema.params.filter((p): p is T => predicate(p)),
+  };
 }
 
 export const cmdEx = <T extends PluginParam>(
@@ -100,22 +92,4 @@ export const cmdEx = <T extends PluginParam>(
       })
     )
     .filter((cmd) => cmd.args.length > 0);
-};
-
-const pxpx = <T extends PluginParam>(
-  structs: PluginStructSchemaArray[],
-  fn: (param: PluginParam) => param is T
-): PluginStructSchemaArray[] => {
-  return structs.reduce<PluginStructSchemaArray[]>((acc, struct) => {
-    const newParams: T[] = struct.params.filter((p) => fn(p));
-    if (newParams.length === 0) {
-      return acc;
-    }
-
-    acc.push({
-      struct: struct.struct,
-      params: newParams,
-    });
-    return acc;
-  }, []);
 };
