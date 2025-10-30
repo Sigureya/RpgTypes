@@ -48,18 +48,20 @@ describe("cmdEx", () => {
       new Set(["A"]),
       (p): p is PluginParam => mockFn(p)
     );
-    const expected: PluginCommandSchemaArrayEx<UseItem> = {
-      command: "UseItem",
-      args: [
-        { name: "message", attr: { kind: "string", default: "Used item." } },
-        { name: "a", attr: { struct: "A", kind: "struct" } },
-      ],
-    };
+    const expected: PluginCommandSchemaArrayEx<UseItem>[] = [
+      {
+        command: "UseItem",
+        args: [
+          { name: "message", attr: { kind: "string", default: "Used item." } },
+          { name: "a", attr: { struct: "A", kind: "struct" } },
+        ],
+      },
+    ];
     expect(mockFn).toHaveBeenCalledTimes(3);
     expect(mockFn).toHaveBeenNthCalledWith(1, useItemSchema.args[0]);
     expect(mockFn).toHaveBeenNthCalledWith(2, useItemSchema.args[1]);
     expect(mockFn).toHaveBeenNthCalledWith(3, useItemSchema.args[2]);
-    expect(result[0]).toEqual(expected);
+    expect(result).toEqual(expected);
   });
   test("b", () => {
     const mockFn = makeMockFn((p) => p.attr.kind === "number");
@@ -68,18 +70,20 @@ describe("cmdEx", () => {
       new Set(["B"]),
       (p): p is PluginParam => mockFn(p)
     );
-    const expected: PluginCommandSchemaArrayEx<UseItem> = {
-      command: "UseItem",
-      args: [
-        { name: "itemId", attr: { kind: "number", default: 1 } },
-        { name: "targetId", attr: { kind: "number", default: 0 } },
-        { name: "b", attr: { struct: "B", kind: "struct" } },
-      ],
-    };
+    const expected: PluginCommandSchemaArrayEx<UseItem>[] = [
+      {
+        command: "UseItem",
+        args: [
+          { name: "itemId", attr: { kind: "number", default: 1 } },
+          { name: "targetId", attr: { kind: "number", default: 0 } },
+          { name: "b", attr: { struct: "B", kind: "struct" } },
+        ],
+      },
+    ];
     expect(mockFn).toHaveBeenCalledTimes(3);
     expect(mockFn).toHaveBeenNthCalledWith(1, useItemSchema.args[0]);
     expect(mockFn).toHaveBeenNthCalledWith(2, useItemSchema.args[1]);
     expect(mockFn).toHaveBeenNthCalledWith(3, useItemSchema.args[2]);
-    expect(result[0]).toEqual(expected);
+    expect(result).toEqual(expected);
   });
 });
