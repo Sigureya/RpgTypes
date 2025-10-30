@@ -6,6 +6,7 @@ import {
   isStructArrayParam,
   isStructParam,
   isScalarParam,
+  isNumberValueParamGG,
 } from "./typeTest";
 
 describe("struct", () => {
@@ -27,6 +28,9 @@ describe("struct", () => {
   });
   test("isScalarParam returns false for struct param", () => {
     expect(param).not.toSatisfy(isScalarParam);
+  });
+  test("isNumberValueParamGG returns false for struct param", () => {
+    expect(param).not.toSatisfy(isNumberValueParamGG);
   });
 });
 
