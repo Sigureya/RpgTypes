@@ -21,7 +21,7 @@ import type {
 export const filterParams = <
   Fn extends (param: ScalaParam, name: string) => boolean
 >(
-  params2: PluginParam<PrimitiveParam>[],
+  params2: ReadonlyArray<PluginParam>,
   set: Pick<ReadonlySet<string>, "has">,
   fn: Fn
 ): PluginParamGroups => {

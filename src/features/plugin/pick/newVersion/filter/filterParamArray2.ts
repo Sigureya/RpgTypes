@@ -23,7 +23,7 @@ export interface ParamFilterCriteria {
 }
 
 export const filterParams2 = (
-  params2: ReadonlyArray<PluginParam<PrimitiveParam>>,
+  params2: ReadonlyArray<PluginParam>,
   { arrayKinds, singleKinds, structNames }: ParamFilterCriteria
 ): PluginParamGroups => {
   const single: NamedAttribute<ScalaParam>[] = [];

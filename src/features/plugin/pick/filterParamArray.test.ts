@@ -16,7 +16,7 @@ const makeMockedSet = (items: ReadonlyArray<string>): MockedSet => {
 interface TestCase {
   caseName: string;
   input: {
-    params: PluginParam<PrimitiveParam>[];
+    params: PluginParam[];
     setItems: ReadonlyArray<string>;
     fn: (param: PrimitiveParam) => boolean;
   };

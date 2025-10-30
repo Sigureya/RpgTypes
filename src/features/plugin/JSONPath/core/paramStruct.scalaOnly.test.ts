@@ -2,7 +2,7 @@ import { describe, test, expect } from "vitest";
 import type {
   ClassifiedPluginParams,
   ClassifiedPluginParamsEx,
-  PluginParam,
+  PluginParamEx,
   StructRefParam,
 } from "@RpgTypes/rmmz/plugin";
 import { JSONPathJS } from "jsonpath-js";
@@ -49,7 +49,7 @@ describe("person", () => {
     const param = {
       name: "person",
       attr: { kind: "struct", struct: "MockPerson" },
-    } as const satisfies PluginParam<StructRefParam>;
+    } as const satisfies PluginParamEx<StructRefParam>;
     const structMap: ReadonlyMap<string, ClassifiedPluginParams> = new Map([
       ["MockPerson", personSchema],
     ]);

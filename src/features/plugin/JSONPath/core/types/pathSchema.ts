@@ -1,4 +1,4 @@
-import type { ArrayParamTypes, PluginParam } from "@RpgTypes/rmmz/plugin";
+import type { ArrayParamTypes, PluginParamEx } from "@RpgTypes/rmmz/plugin";
 
 export interface StructPropertysPath {
   structName: string;
@@ -8,7 +8,7 @@ export interface StructPropertysPath {
 
 export interface PathPair {
   path: string;
-  param: PluginParam<ArrayParamTypes>;
+  param: PluginParamEx<ArrayParamTypes>;
 }
 
 export interface StructPathError {

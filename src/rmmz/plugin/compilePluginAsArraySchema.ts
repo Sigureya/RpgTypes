@@ -1,4 +1,3 @@
-import type { PrimitiveParam } from "./core";
 import type {
   PluginCommandSchemaArray,
   PluginParam,
@@ -21,11 +20,9 @@ export const compilePluginAsArraySchema = (
   structs: mapStructs(parsedPlugin.structs),
 });
 
-const mapParams = (
-  params: ReadonlyArray<PluginParamTokens>
-): PluginParam<PrimitiveParam>[] => {
+const mapParams = (params: ReadonlyArray<PluginParamTokens>): PluginParam[] => {
   return params.map(
-    (p): PluginParam<PrimitiveParam> => ({
+    (p): PluginParam => ({
       name: p.name,
       attr: compileAttributes(p),
     })

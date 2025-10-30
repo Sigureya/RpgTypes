@@ -1,14 +1,14 @@
 import type { JSONPathType } from "@RpgTypes/libs";
 import type {
   ArrayParamTypes,
-  PluginParam,
+  PluginParamEx,
   PluginStructParamTypeEx,
   ScalaParam,
 } from "@RpgTypes/rmmz/plugin";
 
 export interface ArrayPathPair {
   path: string;
-  param: PluginParam<ArrayParamTypes>;
+  param: PluginParamEx<ArrayParamTypes>;
 }
 
 export interface ArrayParamPairEx<T> {
@@ -19,16 +19,16 @@ export interface ArrayParamPairEx<T> {
 export interface StringSequenceParamValues {
   values: string[];
   valueKind: "string";
-  param: PluginParam<Extract<ArrayParamTypes, { default: string[] }>>;
+  param: PluginParamEx<Extract<ArrayParamTypes, { default: string[] }>>;
 }
 
 export interface NumberSequenceParamValues {
   values: number[];
   valueKind: "number";
-  param: PluginParam<Extract<ArrayParamTypes, { default: number[] }>>;
+  param: PluginParamEx<Extract<ArrayParamTypes, { default: number[] }>>;
 }
 
 export interface ScalaPathResult {
   value: number | string | boolean;
-  param: PluginParam<ScalaParam>;
+  param: PluginParamEx<ScalaParam>;
 }

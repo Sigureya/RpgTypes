@@ -1,7 +1,12 @@
 import type { PrimitiveParam } from "./paramUnion";
 import type { PluginStructParamTypeEx } from "./pluginSchemaType";
 
-export interface PluginParam<T = PrimitiveParam> {
+export interface PluginParam {
+  name: string;
+  attr: PrimitiveParam;
+}
+
+export interface PluginParamEx<T extends PrimitiveParam> {
   name: string;
   attr: T;
 }
@@ -30,9 +35,9 @@ export interface PluginStructSchemaArrayEx<T extends PluginParam> {
   params: T[];
 }
 
-export interface PluginSchemaArrayEx<T> {
+export interface PluginSchemaArrayEx<T extends PrimitiveParam> {
   commands: PluginCommandSchemaArrayEx<T>[];
-  params: PluginParam<T>[];
+  params: PluginParamEx<T>[];
   structs: PluginStructSchemaArray[];
 }
 

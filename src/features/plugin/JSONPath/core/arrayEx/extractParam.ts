@@ -1,7 +1,7 @@
 import type { JSONValue } from "@RpgTypes/libs";
 import type {
   ArrayParamTypes,
-  PluginParam,
+  PluginParamEx,
   ScalaParam,
 } from "@RpgTypes/rmmz/plugin";
 import { isNumberArrayParam, isStringArrayParam } from "@RpgTypes/rmmz/plugin";
@@ -53,7 +53,7 @@ export const extractArrayParamValue = (
 export const extractScalaParams = (
   data: JSONValue,
   path: string,
-  params: ReadonlyArray<PluginParam<ScalaParam>>
+  params: ReadonlyArray<PluginParamEx<ScalaParam>>
 ): ScalaPathResult[] => {
   const map = new Map(params.map((param) => [param.name, param.attr] as const));
   const jsonPath = new JSONPathJS(path);

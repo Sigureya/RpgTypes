@@ -1,7 +1,7 @@
 import { describe, test, expect } from "vitest";
 import type {
   ClassifiedPluginParams,
-  PluginParam,
+  PluginParamEx,
   StructRefParam,
 } from "@RpgTypes/rmmz/plugin";
 import { getPathFromStructParam } from "./paramStruct";
@@ -37,7 +37,7 @@ describe("cyclic struct", () => {
     const param = {
       name: "loop",
       attr: { kind: "struct", struct: "LoopMock" },
-    } as const satisfies PluginParam<StructRefParam>;
+    } as const satisfies PluginParamEx<StructRefParam>;
     const result: StructPathResult = getPathFromStructParam(
       [param],
       "$",
@@ -61,7 +61,7 @@ describe("undefined struct", () => {
     const param = {
       name: "undefinedStruct",
       attr: { kind: "struct", struct: "UndefinedStruct" },
-    } as const satisfies PluginParam<StructRefParam>;
+    } as const satisfies PluginParamEx<StructRefParam>;
     const result: StructPathResult = getPathFromStructParam(
       [param],
       "$",
