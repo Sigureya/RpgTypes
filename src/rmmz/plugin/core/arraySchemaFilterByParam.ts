@@ -54,7 +54,7 @@ const pickStructParams = <T extends PluginParam>(
 function cccc2<T extends PluginParam>(
   schema: PluginSchemaArray,
   predicate: (param: PluginParam) => param is T
-): PluginSchemaArray {
+) {
   const { directs, indirectsNames } = filterStructs(schema.structs, predicate);
   const newStructs: PluginStructSchemaArrayEx<T>[] = pickStructParams<T>(
     directs,
@@ -86,8 +86,9 @@ export const cmdEx = <T extends PluginParam>(
   structNames: ReadonlySet<string>,
   predicate: (param: PluginParam) => param is T
 ): PluginCommandSchemaArrayGGG<T | PP>[] => {
-  return commands.reduce((acc, cmd): PluginCommandSchemaArrayGGG<T | PP>[] => {
-    const args = paramsXXX(cmd.args, structNames, predicate);
+  type R = PluginCommandSchemaArrayGGG<T | PP>;
+  return commands.reduce<R[]>((acc, cmd): R[] => {
+    const args: (T | PP)[] = paramsXXX(cmd.args, structNames, predicate);
     if (args.length === 0) {
       return acc;
     }

@@ -1,9 +1,9 @@
 /* eslint-disable @functional/no-return-void */
 import type {
   PluginStructSchemaArray,
-  PluginParam,
   StructRefParam,
   StructArrayRefParam,
+  PluginParamEx,
 } from "./core";
 import { isArrayParam, isStructArrayParam, isStructParam } from "./core";
 import type {
@@ -44,7 +44,7 @@ export const createStructMap3 = <ST, STA, S, A>(
   const scalas: S[] = [];
   const arrays: A[] = [];
 
-  structSchema.params.forEach((p: PluginParam<PrimitiveParam>) => {
+  structSchema.params.forEach((p: PluginParamEx<PrimitiveParam>) => {
     if (isStructParam(p.attr)) {
       const otehrStruct = structMap.get(p.attr.struct);
       structs.push(handlers.struct(p.attr, p.name, otehrStruct ?? null));

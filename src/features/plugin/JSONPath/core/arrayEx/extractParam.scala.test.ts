@@ -1,5 +1,5 @@
 import { describe, test, expect } from "vitest";
-import type { PluginParam, ScalaParam } from "@RpgTypes/rmmz/plugin";
+import type { PluginParamEx, ScalaParam } from "@RpgTypes/rmmz/plugin";
 import type { ScalaPathResult } from "./extractedTypes";
 import { extractScalaParams } from "./extractParam";
 
@@ -30,7 +30,7 @@ describe("extractScalaParams", () => {
     { name: "name", attr: { kind: "string", default: "" } },
     { name: "age", attr: { kind: "number", default: 0 } },
     { name: "isStudent", attr: { kind: "boolean", default: false } },
-  ] as const satisfies PluginParam<ScalaParam>[];
+  ] as const satisfies PluginParamEx<ScalaParam>[];
 
   test("path", () => {
     const result: ScalaPathResult[] = extractScalaParams(

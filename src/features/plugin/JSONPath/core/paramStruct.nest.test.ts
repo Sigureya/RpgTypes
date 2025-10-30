@@ -2,7 +2,7 @@ import { describe, test, expect } from "vitest";
 import type {
   ClassifiedPluginParams,
   ClassifiedPluginParamsEx,
-  PluginParam,
+  PluginParamEx,
   StructRefParam,
 } from "@RpgTypes/rmmz/plugin";
 import { getPathFromStructParam } from "./paramStruct";
@@ -107,7 +107,7 @@ describe("address", () => {
     const param = {
       name: "address",
       attr: { kind: "struct", struct: "Address" },
-    } as const satisfies PluginParam<StructRefParam>;
+    } as const satisfies PluginParamEx<StructRefParam>;
     const structMap: ReadonlyMap<string, ClassifiedPluginParams> = new Map([
       ["Address", addressSchema],
     ]);
@@ -132,7 +132,7 @@ describe("person", () => {
     const param = {
       name: "person",
       attr: { kind: "struct", struct: "Person" },
-    } as const satisfies PluginParam<StructRefParam>;
+    } as const satisfies PluginParamEx<StructRefParam>;
     const structMap: ReadonlyMap<string, ClassifiedPluginParams> = new Map([
       ["Person", personScheame],
     ]);
@@ -183,7 +183,7 @@ describe("classroom", () => {
     },
   ];
   test("getPathFromStruct", () => {
-    const param: PluginParam<StructRefParam> = {
+    const param: PluginParamEx<StructRefParam> = {
       name: "classroom",
       attr: { kind: "struct", struct: "Class" },
     };
@@ -246,7 +246,7 @@ describe("school", () => {
 
   const structMap = makeMap();
   test("getPathFromStruct", () => {
-    const param: PluginParam<StructRefParam> = {
+    const param: PluginParamEx<StructRefParam> = {
       name: "school",
       attr: { kind: "struct", struct: "School" },
     };

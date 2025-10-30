@@ -1,5 +1,5 @@
 import type { JSONPathType } from "@RpgTypes/libs";
-import type { PluginParam, PrimitiveParam } from "@RpgTypes/rmmz/plugin";
+import type { PluginParam } from "@RpgTypes/rmmz/plugin";
 
 export interface ParamJSONPath {
   parent: string;
@@ -17,7 +17,7 @@ export interface ParamJSONPathSturct {
 export interface ParamJSONPathEx<T> extends ParamJSONPath {
   path: JSONPathType<T>;
   parent: string;
-  param: PluginParam<PrimitiveParam>;
+  param: PluginParam;
 }
 
 export interface ParamJSONPathSturctEx<T> extends ParamJSONPathSturct {

@@ -11,7 +11,7 @@ import type { PluginParamGroups } from "./types";
 interface TestCase {
   caseName: string;
   input: {
-    params: PluginParam<PrimitiveParam>[];
+    params: PluginParam[];
     pickTargets: ParamFilterCriteria;
   };
   expected: PluginParamGroups<PrimitiveParam>;

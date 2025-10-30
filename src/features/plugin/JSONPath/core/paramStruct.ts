@@ -1,8 +1,8 @@
 import type {
   ClassifiedPluginParams,
+  PluginParamEx,
   StructRefParam,
 } from "@RpgTypes/rmmz/plugin";
-import type { PluginParam } from "@RpgTypes/rmmz/plugin";
 import { makeScalaArrayParams, makeScalaParams } from "./paramScala";
 import type {
   ErrorCodes,
@@ -108,16 +108,16 @@ function collectFromSchema(
   structMap: ReadonlyMap<string, ClassifiedPluginParams>,
   errors: ErrorCodes
 ): StructPathResult {
-  const initialFrame: Frame = {
-    schemaName,
-    basePath,
-    ancestry: [],
-  };
-
   const state: State = {
-    frames: [initialFrame],
     items: [],
     errs: [],
+    frames: [
+      {
+        schemaName,
+        basePath,
+        ancestry: [],
+      },
+    ],
   };
 
   // 上限反復回数 — safe upper bound
@@ -133,7 +133,7 @@ function collectFromSchema(
 }
 
 export function getPathFromStructParam(
-  params: ReadonlyArray<PluginParam<StructRefParam>>,
+  params: ReadonlyArray<PluginParamEx<StructRefParam>>,
   parent: string,
   structMap: ReadonlyMap<string, ClassifiedPluginParams>,
   errors: ErrorCodes = ERROR_CODE

@@ -1,12 +1,12 @@
 import type {
-  PluginParam,
   ScalaParam,
   ArrayParamTypes,
+  PluginParamEx,
 } from "@RpgTypes/rmmz/plugin";
 import type { ArrayPathPair } from "./arrayEx/extractedTypes";
 
 export const makeScalaParams = (
-  scalas: ReadonlyArray<PluginParam<ScalaParam>>,
+  scalas: ReadonlyArray<PluginParamEx<ScalaParam>>,
   parent: string
 ): string => {
   const itesm = scalas.map((param) => `"${param.name}"`).join(",");
@@ -14,7 +14,7 @@ export const makeScalaParams = (
 };
 
 export const makeScalaArrayParams = (
-  scalaArrays: ReadonlyArray<PluginParam<ArrayParamTypes>>,
+  scalaArrays: ReadonlyArray<PluginParamEx<ArrayParamTypes>>,
   parent: string
 ): ArrayPathPair[] => {
   return scalaArrays.map(

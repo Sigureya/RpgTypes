@@ -1,5 +1,5 @@
 import { describe, test, expect } from "vitest";
-import type { PluginParam } from "./arraySchemaTypes";
+import type { PluginParamEx } from "./arraySchemaTypes";
 import { isStructAttr } from "./arraySchemaUtils";
 import type {
   StructRefParam,
@@ -9,7 +9,7 @@ import type {
 
 describe("isStructAttr", () => {
   test("returns true for struct param", () => {
-    const param: PluginParam<StructRefParam> = {
+    const param: PluginParamEx<StructRefParam> = {
       name: "example",
       attr: { kind: "struct", struct: "MyStruct" },
     };
@@ -17,7 +17,7 @@ describe("isStructAttr", () => {
     expect(isStructAttr(param)).toBe(true);
   });
   test("returns true for struct array param", () => {
-    const param: PluginParam<StructArrayRefParam> = {
+    const param: PluginParamEx<StructArrayRefParam> = {
       name: "exampleArray",
       attr: { kind: "struct[]", struct: "MyStruct" },
     };
@@ -25,7 +25,7 @@ describe("isStructAttr", () => {
     expect(isStructAttr(param)).toBe(true);
   });
   test("returns false for non-struct param", () => {
-    const param: PluginParam<NumberParam> = {
+    const param: PluginParamEx<NumberParam> = {
       name: "exampleNumber",
       attr: { kind: "number", default: 0 },
     };

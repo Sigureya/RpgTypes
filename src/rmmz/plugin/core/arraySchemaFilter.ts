@@ -1,11 +1,15 @@
 import type { ArraySchemaFilterd } from "./arraySchemaFilterdTypes";
-import type { PluginParam, PluginStructSchemaArray } from "./arraySchemaTypes";
+import type {
+  PluginParam,
+  PluginParamEx,
+  PluginStructSchemaArray,
+} from "./arraySchemaTypes";
 import { isStructAttr } from "./arraySchemaUtils";
 import type { StructArrayRefParam, StructRefParam } from "./primitiveParams";
 
 function createRefMap(
   schemas: ReadonlyArray<PluginStructSchemaArray>
-): Record<string, PluginParam<StructRefParam | StructArrayRefParam>[]> {
+): Record<string, PluginParamEx<StructRefParam | StructArrayRefParam>[]> {
   return Object.fromEntries(
     schemas.map((schema) => [schema.struct, schema.params.filter(isStructAttr)])
   );
@@ -13,7 +17,7 @@ function createRefMap(
 
 function propagate(
   allStructNames: ReadonlyArray<string>,
-  refMap: Record<string, PluginParam<StructRefParam | StructArrayRefParam>[]>,
+  refMap: Record<string, PluginParamEx<StructRefParam | StructArrayRefParam>[]>,
   initialNames: Set<string>
 ): Set<string> {
   type State = { names: Set<string>; changed: boolean };
