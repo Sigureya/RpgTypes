@@ -25,6 +25,11 @@ export interface PluginStructSchemaArray {
   params: PluginParam[];
 }
 
+export interface PluginStructSchemaArrayEx<T extends PluginParam> {
+  struct: string;
+  params: T[];
+}
+
 export interface PluginSchemaArrayEx<T> {
   commands: PluginCommandSchemaArrayEx<T>[];
   params: PluginParam<T>[];
