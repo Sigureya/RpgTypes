@@ -14,7 +14,7 @@ import {
   isStructArrayParam,
   isNumberValueParamEx,
   isScalarParam,
-  isNumberValueParamGG,
+  hasNumberValueParam,
 } from "./typeTest";
 
 const runTestCase = (param: PrimitiveParam) => {
@@ -41,7 +41,7 @@ const runTestCase = (param: PrimitiveParam) => {
       expect(param).toSatisfy(isScalarParam);
     });
     it("is number value param GG", () => {
-      expect(param).toSatisfy(isNumberValueParamGG);
+      expect(param).toSatisfy(hasNumberValueParam);
     });
   });
 };
@@ -102,7 +102,7 @@ describe("number arrays", () => {
         expect(param).toSatisfy(isNumberValueParamEx);
       });
       it("is number value param GG", () => {
-        expect(param).toSatisfy(isNumberValueParamGG);
+        expect(param).toSatisfy(hasNumberValueParam);
       });
     });
   });

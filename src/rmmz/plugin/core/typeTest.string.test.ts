@@ -9,7 +9,7 @@ import {
   isStructArrayParam,
   isNumberValueParamEx,
   isScalarParam,
-  isNumberValueParamGG,
+  hasNumberValueParam,
 } from "./typeTest";
 
 const stringParam: StringParam = {
@@ -68,8 +68,8 @@ const runTestCase = (param: ScalaParam) => {
       expect(isScalarParam(param)).toBe(true);
     });
     it("is not number value param GG", () => {
-      expect(param).not.toSatisfy(isNumberValueParamGG);
-      expect(isNumberValueParamGG(param)).toBe(false);
+      expect(param).not.toSatisfy(hasNumberValueParam);
+      expect(hasNumberValueParam(param)).toBe(false);
     });
   });
 };
