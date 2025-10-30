@@ -76,11 +76,21 @@ function cccc2<T extends PluginParam>(
   return {
     structs: s2,
     commands: newCommands,
-    params: schema.params.filter((p): p is T =>
-      isStructAttr(p) ? indirectsNames.has(p.attr.struct) : predicate(p)
-    ),
+    params: paramsXXX(schema.params, indirectsNames, predicate),
   };
 }
+
+const paramsXXX = <T extends PluginParam>(
+  params: ReadonlyArray<PluginParam>,
+  structNames: ReadonlySet<string>,
+  predicate: (param: PluginParam) => param is T
+): (T | PP)[] => {
+  return params.filter((param): param is T | PP => {
+    return isStructAttr(param)
+      ? structNames.has(param.attr.struct)
+      : predicate(param);
+  });
+};
 
 export const cmdEx = <T extends PluginParam>(
   commands: PluginCommandSchemaArray[],
@@ -93,11 +103,7 @@ export const cmdEx = <T extends PluginParam>(
         ...(cmd.desc ? { desc: cmd.desc } : {}),
         ...(cmd.text ? { text: cmd.text } : {}),
         command: cmd.command,
-        args: cmd.args.filter((param): param is PP | T => {
-          return isStructAttr(param)
-            ? structNames.has(param.attr.struct)
-            : predicate(param);
-        }),
+        args: paramsXXX(cmd.args, structNames, predicate),
       })
     )
     .filter((cmd) => cmd.args.length > 0);
