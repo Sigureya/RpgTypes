@@ -12,11 +12,22 @@ import type {
   SSSS,
 } from "./arraySchemaTypes2";
 import { isStructAttr } from "./arraySchemaUtils";
+import { isNumberValueParam, paramHasText } from "./typeTest";
 
 export const filterStructParam = (struct: PluginStructSchemaArray): SSSS => ({
   struct: struct.struct,
   params: struct.params.filter(isStructAttr),
 });
+
+export const filterPluginSchemaByStringParam = (schema: PluginSchemaArray) => {
+  return filterPluginSchemaByParam(schema, (param) => paramHasText(param.attr));
+};
+
+export const filterPluginSchemaByNumberParam = (schema: PluginSchemaArray) => {
+  return filterPluginSchemaByParam(schema, (param) =>
+    isNumberValueParam(param.attr)
+  );
+};
 
 export function filterPluginSchemaByParam<T extends PluginParam>(
   schema: PluginSchemaArray,
