@@ -97,14 +97,17 @@ export const cmdEx = <T extends PluginParam>(
   structNames: ReadonlySet<string>,
   predicate: (param: PluginParam) => param is T
 ): PluginCommandSchemaArrayGGG<T | PP>[] => {
-  return commands
-    .map(
-      (cmd): PluginCommandSchemaArrayGGG<T | PP> => ({
-        ...(cmd.desc ? { desc: cmd.desc } : {}),
-        ...(cmd.text ? { text: cmd.text } : {}),
-        command: cmd.command,
-        args: paramsXXX(cmd.args, structNames, predicate),
-      })
-    )
-    .filter((cmd) => cmd.args.length > 0);
+  return commands.reduce((acc, cmd): PluginCommandSchemaArrayGGG<T | PP>[] => {
+    const args = paramsXXX(cmd.args, structNames, predicate);
+    if (args.length === 0) {
+      return acc;
+    }
+    acc.push({
+      ...(cmd.desc ? { desc: cmd.desc } : {}),
+      ...(cmd.text ? { text: cmd.text } : {}),
+      command: cmd.command,
+      args: args,
+    });
+    return acc;
+  }, []);
 };
