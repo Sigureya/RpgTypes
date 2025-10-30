@@ -80,8 +80,21 @@ const TABLE: Record<string, { type: string }> = {
   select: { type: "string" },
   any: { type: "string" },
   struct: { type: "struct" },
+  "actor[]": { type: "number" },
+  "class[]": { type: "number" },
+  "enemy[]": { type: "number" },
+  "skill[]": { type: "number" },
+  "item[]": { type: "number" },
+  "weapon[]": { type: "number" },
+  "armor[]": { type: "number" },
+  "state[]": { type: "number" },
+  "common_event[]": { type: "number" },
+  "troop[]": { type: "number" },
+  "switch[]": { type: "number" },
+  "variable[]": { type: "number" },
+  "number[]": { type: "number" },
 } as const satisfies {
-  [key in ParamKinds]?: { type: string };
+  [key in PrimitiveParam["kind"]]?: { type: string };
 };
 
 export const isStringValueParam = (
@@ -102,6 +115,12 @@ export const isNumberValueParamEx = (
 ): param is Extract<PrimitiveParam, { default: number }> => {
   const info = TABLE[param.kind];
   return info.type === "number";
+};
+
+export const isNumberValueParamGG = (param: PrimitiveParam) => {
+  return isArrayParam(param)
+    ? isNumberArrayParam(param)
+    : isNumberValueParam(param);
 };
 
 export const isNumberArrayParam = (
