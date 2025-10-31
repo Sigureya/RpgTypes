@@ -30,7 +30,7 @@ export const isArrayParamEx = <T extends PrimitiveParam, K extends ParamKinds>(
 export const isScalarParam = <T extends PrimitiveParam>(
   param: T
 ): param is Extract<T, ScalaParam> => {
-  return !isArrayParam(param) && param.kind !== "struct";
+  return param.kind !== "struct" && !isArrayParam(param);
 };
 
 export const isStructParam = (
@@ -45,56 +45,10 @@ export const isStructArrayParam = (
   return param.kind === "struct[]";
 };
 
-const TABLE_S: ReadonlyArray<string> = [
-  "string",
-  "multiline_string",
-  "select",
-  "combo",
-  "any",
-];
 export const paramHasText = (
   param: PrimitiveParam
 ): param is PrimitiveStringParam => {
-  return TABLE_S.includes(param.kind);
-};
-
-const TABLE: Record<string, { type: string }> = {
-  string: { type: "string" },
-  number: { type: "number" },
-  boolean: { type: "boolean" },
-  armor: { type: "number" },
-  actor: { type: "number" },
-  class: { type: "number" },
-  enemy: { type: "number" },
-  skill: { type: "number" },
-  state: { type: "number" },
-  item: { type: "number" },
-  weapon: { type: "number" },
-  common_event: { type: "number" },
-  switch: { type: "number" },
-  variable: { type: "number" },
-  troop: { type: "number" },
-  multiline_string: { type: "string" },
-  file: { type: "string" },
-  combo: { type: "string" },
-  select: { type: "string" },
-  any: { type: "string" },
-  struct: { type: "struct" },
-  "actor[]": { type: "number" },
-  "class[]": { type: "number" },
-  "enemy[]": { type: "number" },
-  "skill[]": { type: "number" },
-  "item[]": { type: "number" },
-  "weapon[]": { type: "number" },
-  "armor[]": { type: "number" },
-  "state[]": { type: "number" },
-  "common_event[]": { type: "number" },
-  "troop[]": { type: "number" },
-  "switch[]": { type: "number" },
-  "variable[]": { type: "number" },
-  "number[]": { type: "number" },
-} as const satisfies {
-  [key in PrimitiveParam["kind"]]?: { type: string };
+  return TABLE[param.kind]?.hasText === true;
 };
 
 export const isStringValueParam = (
@@ -117,7 +71,9 @@ export const isNumberValueParamEx = (
   return info.type === "number";
 };
 
-export const isNumberValueParamGG = (param: PrimitiveParam) => {
+export const hasNumberValueParam = (
+  param: PrimitiveParam
+): param is Extract<PrimitiveParam, { default: number | number[] }> => {
   return isArrayParam(param)
     ? isNumberArrayParam(param)
     : isNumberValueParam(param);
@@ -135,4 +91,59 @@ export const isStringArrayParam = (
 ): param is Extract<ArrayParamTypes, { default: string[] }> => {
   const info = TABLE[param.kind.replace("[]", "") as ParamKinds];
   return info.type === "string";
+};
+
+interface TableInfo {
+  type: string;
+  hasText?: boolean;
+}
+
+const HAS_TEXT = { type: "string", hasText: true } as const satisfies TableInfo;
+const DATA_ID = { type: "number", hasText: false } as const satisfies TableInfo;
+const NUMBER_TYPE = {
+  type: "number",
+  hasText: false,
+} as const satisfies TableInfo;
+
+const NUMBER_ARRAY_TYPE = {
+  type: "number",
+  hasText: false,
+} as const satisfies TableInfo;
+const TABLE: Record<string, TableInfo> = {
+  string: HAS_TEXT,
+  number: NUMBER_TYPE,
+  boolean: { type: "boolean" },
+  armor: DATA_ID,
+  actor: DATA_ID,
+  class: DATA_ID,
+  enemy: DATA_ID,
+  skill: DATA_ID,
+  state: DATA_ID,
+  item: DATA_ID,
+  weapon: DATA_ID,
+  common_event: DATA_ID,
+  switch: DATA_ID,
+  variable: DATA_ID,
+  troop: DATA_ID,
+  multiline_string: HAS_TEXT,
+  file: { type: "string", hasText: false },
+  combo: HAS_TEXT,
+  select: HAS_TEXT,
+  any: HAS_TEXT,
+  struct: { type: "struct" },
+  "actor[]": NUMBER_ARRAY_TYPE,
+  "enemy[]": NUMBER_ARRAY_TYPE,
+  "class[]": NUMBER_ARRAY_TYPE,
+  "skill[]": NUMBER_ARRAY_TYPE,
+  "state[]": NUMBER_ARRAY_TYPE,
+  "item[]": NUMBER_ARRAY_TYPE,
+  "weapon[]": NUMBER_ARRAY_TYPE,
+  "common_event[]": NUMBER_ARRAY_TYPE,
+  "troop[]": NUMBER_ARRAY_TYPE,
+  "armor[]": NUMBER_ARRAY_TYPE,
+  "switch[]": NUMBER_ARRAY_TYPE,
+  "variable[]": NUMBER_ARRAY_TYPE,
+  "number[]": NUMBER_ARRAY_TYPE,
+} as const satisfies {
+  [key in PrimitiveParam["kind"]]?: TableInfo;
 };

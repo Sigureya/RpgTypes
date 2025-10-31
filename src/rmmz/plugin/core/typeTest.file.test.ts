@@ -7,7 +7,7 @@ import {
   isStructParam,
   isStructArrayParam,
   isNumberValueParamEx,
-  isNumberValueParamGG,
+  hasNumberValueParam,
 } from "./typeTest";
 
 describe("FileParam", () => {
@@ -39,8 +39,8 @@ describe("FileParam", () => {
     expect(isNumberValueParamEx(param)).toBe(false);
   });
   it("is not number value param GG", () => {
-    expect(param).not.toSatisfy(isNumberValueParamGG);
-    expect(isNumberValueParamGG(param)).toBe(false);
+    expect(param).not.toSatisfy(hasNumberValueParam);
+    expect(hasNumberValueParam(param)).toBe(false);
   });
 });
 
