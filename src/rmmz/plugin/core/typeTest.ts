@@ -30,7 +30,7 @@ export const isArrayParamEx = <T extends PrimitiveParam, K extends ParamKinds>(
 export const isScalarParam = <T extends PrimitiveParam>(
   param: T
 ): param is Extract<T, ScalaParam> => {
-  return !isArrayParam(param) && param.kind !== "struct";
+  return param.kind !== "struct" && !isArrayParam(param);
 };
 
 export const isStructParam = (
@@ -45,17 +45,52 @@ export const isStructArrayParam = (
   return param.kind === "struct[]";
 };
 
-const TABLE_S: ReadonlyArray<string> = [
-  "string",
-  "multiline_string",
-  "select",
-  "combo",
-  "any",
-];
 export const paramHasText = (
   param: PrimitiveParam
 ): param is PrimitiveStringParam => {
-  return TABLE_S.includes(param.kind);
+  return TABLE[param.kind]?.hasText === true;
+};
+
+export const isStringValueParam = (
+  param: ScalaParam
+): param is Extract<PrimitiveParam, { default: string }> => {
+  const info = TABLE[param.kind];
+  return info.type === "string";
+};
+
+export const isNumberValueParam = (
+  param: PrimitiveParam
+): param is Extract<PrimitiveParam, { default: number }> => {
+  return isScalarParam(param) && isNumberValueParamEx(param);
+};
+
+export const isNumberValueParamEx = (
+  param: ScalaParam
+): param is Extract<PrimitiveParam, { default: number }> => {
+  const info = TABLE[param.kind];
+  return info.type === "number";
+};
+
+export const hasNumberValueParam = (
+  param: PrimitiveParam
+): param is Extract<PrimitiveParam, { default: number | number[] }> => {
+  return isArrayParam(param)
+    ? isNumberArrayParam(param)
+    : isNumberValueParam(param);
+};
+
+export const isNumberArrayParam = (
+  param: ArrayParam
+): param is Extract<ArrayParam, { default: number[] }> => {
+  const info = TABLE[param.kind.replace("[]", "") as ParamKinds];
+  return info.type === "number";
+};
+
+export const isStringArrayParam = (
+  param: ArrayParam
+): param is Extract<ArrayParamTypes, { default: string[] }> => {
+  const info = TABLE[param.kind.replace("[]", "") as ParamKinds];
+  return info.type === "string";
 };
 
 interface TableInfo {
@@ -111,46 +146,4 @@ const TABLE: Record<string, TableInfo> = {
   "number[]": NUMBER_ARRAY_TYPE,
 } as const satisfies {
   [key in PrimitiveParam["kind"]]?: TableInfo;
-};
-
-export const isStringValueParam = (
-  param: ScalaParam
-): param is Extract<PrimitiveParam, { default: string }> => {
-  const info = TABLE[param.kind];
-  return info.type === "string";
-};
-
-export const isNumberValueParam = (
-  param: PrimitiveParam
-): param is Extract<PrimitiveParam, { default: number }> => {
-  return isScalarParam(param) && isNumberValueParamEx(param);
-};
-
-export const isNumberValueParamEx = (
-  param: ScalaParam
-): param is Extract<PrimitiveParam, { default: number }> => {
-  const info = TABLE[param.kind];
-  return info.type === "number";
-};
-
-export const hasNumberValueParam = (
-  param: PrimitiveParam
-): param is Extract<PrimitiveParam, { default: number | number[] }> => {
-  return isArrayParam(param)
-    ? isNumberArrayParam(param)
-    : isNumberValueParam(param);
-};
-
-export const isNumberArrayParam = (
-  param: ArrayParam
-): param is Extract<ArrayParam, { default: number[] }> => {
-  const info = TABLE[param.kind.replace("[]", "") as ParamKinds];
-  return info.type === "number";
-};
-
-export const isStringArrayParam = (
-  param: ArrayParam
-): param is Extract<ArrayParamTypes, { default: string[] }> => {
-  const info = TABLE[param.kind.replace("[]", "") as ParamKinds];
-  return info.type === "string";
 };
