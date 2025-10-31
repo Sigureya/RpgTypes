@@ -49,4 +49,25 @@ describe("parsePlugin", () => {
     ];
     expect(result.params).toEqual(expected);
   });
+  test("", () => {
+    const mockTexts: string[] = [
+      "/*:",
+      "@param data ",
+      "@type string ",
+      "@default ",
+      "*/",
+    ];
+    const result: ParsedPlugin = parsePlugin(mockTexts.join("\n"));
+
+    const expected: PluginParamTokens[] = [
+      {
+        name: "data",
+        attr: {
+          kind: "string",
+          default: "",
+        },
+      },
+    ];
+    expect(result.params).toEqual(expected);
+  });
 });
