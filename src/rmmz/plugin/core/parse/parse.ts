@@ -36,7 +36,35 @@ import type {
 } from "./types/types";
 
 export const parsePlugin = (text: string): ParsedPlugin => {
-  return parsePluginCore(text, KEYWORD_FUNC_TABLE);
+  const blocks: Block = splitBlock(text);
+  const structs = blocks.structs.map((s) => parseStructBlock(s));
+  const body = getBody(blocks);
+  if (!body) {
+    return {
+      params: [],
+      commands: [],
+      meta: {},
+      helpLines: [],
+      structs: structs,
+    };
+  }
+
+  const finalState = parseBodyBlock(body, KEYWORD_FUNC_TABLE);
+  return {
+    params: finalState.params,
+    commands: finalState.commands,
+    meta: finalState.meta,
+    helpLines: finalState.helpLines,
+    structs: structs,
+  };
+};
+
+const parseStructBlock = (body: PlguinStructBlock): StructParseState => {
+  const state = parseBodyBlock(body, KEYWORD_FUNC_TABLE);
+  return {
+    name: body.struct,
+    params: state.params,
+  };
 };
 
 const getBody = (block: Block): PlguinBodyBlock | undefined => {
@@ -51,61 +79,28 @@ const parseBodyBlock = (
   table: Record<string, (state: ParseState, value: string) => ParseState>
 ): ParseState => {
   const state = body.lines.reduce<ParseState>((acc, line) => {
-    const trimmed = line.trim().replace(/^\*\s?/, "");
+    // 先頭の'*'や空白を除去
+    const trimmed = line.trimEnd().replace(/^[\*\s]*/, "");
     if (!trimmed.startsWith("@")) {
+      // @タグがない場合はヘルプ行として追加するか無視
       if (acc.currentContext === KEYWORD_HELP) {
-        // キーワードが来ない場合はヘルプ行として追加
         return { ...acc, helpLines: acc.helpLines.concat(trimmed) };
       }
-      // コメントモード以外 & キーワードが来ない場合は無視
       return acc;
     }
-
-    const [tag, ...rest] = trimmed.slice(1).split(" ");
-    const value = rest.join(" ").trim();
-    const fn = table[tag as keyof typeof table];
-
+    // @タグと値を抽出
+    const match = trimmed.match(/^@(\S+)\s*(.*)$/);
+    if (!match) {
+      return acc;
+    }
+    const [, tag, value] = match;
+    const fn = table[tag];
     if (fn) {
-      return fn(acc, value);
+      return fn(acc, value.trim());
     }
     return acc;
   }, makeParseState());
   return flashCurrentItem(state);
-};
-
-const parseStructBlock = (body: PlguinStructBlock): StructParseState => {
-  const state = parseBodyBlock(body, KEYWORD_FUNC_TABLE);
-  return {
-    name: body.struct,
-    params: state.params,
-  };
-};
-
-const parsePluginCore = (
-  text: string,
-  table: Record<string, (state: ParseState, value: string) => ParseState>
-): ParsedPlugin => {
-  const blocks: Block = splitBlock(text);
-  const structs = blocks.structs.map((s) => parseStructBlock(s));
-  const body = getBody(blocks);
-  if (!body) {
-    return {
-      params: [],
-      commands: [],
-      meta: {},
-      helpLines: [],
-      structs: structs,
-    };
-  }
-
-  const finalState = parseBodyBlock(body, table);
-  return {
-    params: finalState.params,
-    commands: finalState.commands,
-    meta: finalState.meta,
-    helpLines: finalState.helpLines,
-    structs: structs,
-  };
 };
 
 const makeParseState = (): ParseState => ({
@@ -204,25 +199,25 @@ const handleArgContext = (state: ParseState, value: string): ParseState => {
   if (!state.currentCommand) {
     return state;
   }
-  if (state.currentParam) {
-    const argAddedCommand: PluginCommandTokens = {
-      ...withTexts(state.currentCommand),
-      command: state.currentCommand.command,
-      args: state.currentCommand.args.concat(state.currentParam),
-    };
+  if (!state.currentParam) {
     return {
       ...state,
-      commands: state.commands,
-      currentCommand: argAddedCommand,
-      currentContext: KEYWORD_ARG,
       currentParam: {
         name: value,
         attr: {},
       },
     };
   }
+  const argAddedCommand: PluginCommandTokens = {
+    ...withTexts(state.currentCommand),
+    command: state.currentCommand.command,
+    args: state.currentCommand.args.concat(state.currentParam),
+  };
   return {
     ...state,
+    commands: state.commands,
+    currentCommand: argAddedCommand,
+    currentContext: KEYWORD_ARG,
     currentParam: {
       name: value,
       attr: {},
