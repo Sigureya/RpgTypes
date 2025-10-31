@@ -1,6 +1,11 @@
 import { describe, expect, it } from "vitest";
-import type { ScalaParam } from "./paramUnion";
-import type { StringParam, ComboParam, SelectParam } from "./primitiveParams";
+import type { PrimitiveParam, ScalaParam } from "./paramUnion";
+import type {
+  StringParam,
+  ComboParam,
+  SelectParam,
+  FileParam,
+} from "./primitiveParams";
 import {
   isStringValueParam,
   isArrayParam,
@@ -55,10 +60,6 @@ const runTestCase = (param: ScalaParam) => {
       expect(param).not.toSatisfy(isStructArrayParam);
       expect(isStructArrayParam(param)).toBe(false);
     });
-    it("does have text", () => {
-      expect(param).toSatisfy(paramHasText);
-      expect(paramHasText(param)).toBe(true);
-    });
     it("is not number value param", () => {
       expect(param).not.toSatisfy(isNumberValueParamEx);
       expect(isNumberValueParamEx(param)).toBe(false);
@@ -76,6 +77,37 @@ const runTestCase = (param: ScalaParam) => {
 
 [stringParam, multilineStringParam, comboParam, selectParam].forEach(
   (param) => {
+    it("does have text", () => {
+      expect(param).toSatisfy(paramHasText);
+      expect(paramHasText(param)).toBe(true);
+    });
     runTestCase(param);
   }
 );
+
+describe("single file param", () => {
+  const fileParam: FileParam = { kind: "file", default: "icon", dir: "img" };
+
+  it("does not have text", () => {
+    expect(fileParam).not.toSatisfy(paramHasText);
+    expect(paramHasText(fileParam)).toBe(false);
+  });
+  runTestCase(fileParam);
+});
+
+describe("file array param", () => {
+  const fileArrayParam: PrimitiveParam = {
+    kind: "file[]",
+    dir: "img",
+    default: ["icon1", "icon2"],
+  };
+  // it("is string value param", () => {
+  //   expect(fileArrayParam).toSatisfy(isStringValueParam);
+  //   expect(isStringValueParam(fileArrayParam)).toBe(true);
+  // });
+
+  it("is array param", () => {
+    expect(fileArrayParam).toSatisfy(isArrayParam);
+    expect(isArrayParam(fileArrayParam)).toBe(true);
+  });
+});
