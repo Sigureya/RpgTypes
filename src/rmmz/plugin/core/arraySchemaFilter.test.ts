@@ -1,13 +1,6 @@
 import { describe, expect, test } from "vitest";
-import { filterStructs } from "./arraySchemaFilter";
-import type {
-  GG,
-  PluginStructSchemaArray,
-  PluginStructSchemaArray3,
-} from "./arraySchemaTypes";
-import type { NumberParam } from "./primitiveParams";
-import { isNumberValueParam } from "./typeTest";
-
+import { findIndirectsFunctional } from "./arraySchemaFilter";
+import type { PluginStructSchemaArray3 } from "./arraySchemaTypes";
 interface A {
   b: B;
 }
@@ -35,11 +28,15 @@ interface Z {}
 
 describe("", () => {
   test("", () => {
-    const command: NumberParam = {
-      kind: "number",
-      default: 0,
-    };
-    expect(isNumberValueParam(command)).toBe(true);
+    const result: Set<string> = findIndirectsFunctional([], new Set());
+    expect(result.size).toBe(0);
+  });
+  test("", () => {
+    const result: Set<string> = findIndirectsFunctional(
+      [],
+      new Set(["A", "B", "C"])
+    );
+    expect(result).toEqual(new Set(["A", "B", "C"]));
   });
 });
 
@@ -60,28 +57,37 @@ describe("", () => {
     struct: "D",
     params: [{ name: "data", attr: { kind: "number", default: 0 } }],
   };
-  test("filterStructs", () => {
-    const schemas: PluginStructSchemaArray[] = [
-      schemaA,
-      schemaB,
-      schemaC,
-      schemaD,
-    ];
-    const result = filterStructs(schemas, (param) =>
-      isNumberValueParam(param.attr)
+  test("", () => {
+    const result: Set<string> = findIndirectsFunctional(
+      [schemaA, schemaB, schemaC, schemaD],
+      new Set(["D"])
     );
-
-    const expected: GG = {
-      directs: [schemaD],
-      indirects: [schemaA, schemaB, schemaC],
-    };
-
-    expect(result.directs).toEqual(expected.directs);
-    expect(result.indirects).toEqual(expected.indirects);
+    expect(result).toEqual(new Set(["A", "B", "C", "D"]));
+  });
+  test("", () => {
+    const result: Set<string> = findIndirectsFunctional(
+      [schemaA, schemaB, schemaC, schemaD],
+      new Set(["C"])
+    );
+    expect(result).toEqual(new Set(["A", "B", "C"]));
+  });
+  test("", () => {
+    const result: Set<string> = findIndirectsFunctional(
+      [schemaA, schemaB, schemaC, schemaD],
+      new Set(["B"])
+    );
+    expect(result).toEqual(new Set(["A", "B"]));
+  });
+  test("", () => {
+    const result: Set<string> = findIndirectsFunctional(
+      [schemaA, schemaB, schemaC, schemaD],
+      new Set(["A"])
+    );
+    expect(result).toEqual(new Set(["A"]));
   });
 });
 
-describe("filterStructs no match", () => {
+describe("", () => {
   const schemaX: PluginStructSchemaArray3<X> = {
     struct: "X",
     params: [{ name: "y", attr: { kind: "struct", struct: "Y" } }],
@@ -94,16 +100,25 @@ describe("filterStructs no match", () => {
     struct: "Z",
     params: [],
   };
-  test("filterStructs", () => {
-    const schemas: PluginStructSchemaArray[] = [schemaX, schemaY, schemaZ];
-    const result: GG = filterStructs(schemas, (param) =>
-      isNumberValueParam(param.attr)
+  test("", () => {
+    const result: Set<string> = findIndirectsFunctional(
+      [schemaX, schemaY, schemaZ],
+      new Set(["A"])
     );
-    const expected: GG = {
-      directs: [],
-      indirects: [],
-    };
-    expect(result.directs).toEqual(expected.directs);
-    expect(result.indirects).toEqual(expected.indirects);
+    expect(result).toEqual(new Set(["A"]));
+  });
+  test("", () => {
+    const result: Set<string> = findIndirectsFunctional(
+      [schemaX, schemaY, schemaZ],
+      new Set(["Z"])
+    );
+    expect(result).toEqual(new Set(["X", "Y", "Z"]));
+  });
+  test("", () => {
+    const result: Set<string> = findIndirectsFunctional(
+      [schemaX, schemaY, schemaZ],
+      new Set(["Y"])
+    );
+    expect(result).toEqual(new Set(["X", "Y"]));
   });
 });

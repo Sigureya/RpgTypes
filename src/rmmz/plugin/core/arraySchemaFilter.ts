@@ -1,11 +1,9 @@
-import type { ArraySchemaFilterd } from "./arraySchemaFilterdTypes";
 import type {
-  PluginParam,
   PluginParamEx,
   PluginStructSchemaArray,
 } from "./arraySchemaTypes";
-import { isStructAttr } from "./arraySchemaUtils";
 import type { StructArrayRefParam, StructRefParam } from "./primitiveParams";
+import { isStructAttr } from "./typeTest";
 
 function createRefMap(
   schemas: ReadonlyArray<PluginStructSchemaArray>
@@ -54,33 +52,4 @@ export function findIndirectsFunctional(
   const refMap = createRefMap(schemas);
   const allStructNames = Object.keys(refMap);
   return propagate(allStructNames, refMap, new Set(directStructNames));
-}
-
-const filterStructs2 = (
-  schemas: ReadonlyArray<PluginStructSchemaArray>,
-  predicate: (param: PluginStructSchemaArray) => boolean
-): ArraySchemaFilterd => {
-  const directs = schemas.filter(predicate);
-  const directNames: Set<string> = new Set(directs.map((s) => s.struct));
-  const indirects: Set<string> = findIndirectsFunctional(schemas, directNames);
-
-  return { directs, indirects, directNames };
-};
-
-export function filterStructs(
-  schemas: ReadonlyArray<PluginStructSchemaArray>,
-  predicate: (param: PluginParam) => boolean
-) {
-  const { directs, indirects, directNames } = filterStructs2(schemas, (s) =>
-    s.params.some((p) => predicate(p))
-  );
-  const indirectsOrdered = schemas.filter(
-    (s) => !directNames.has(s.struct) && indirects.has(s.struct)
-  );
-
-  return {
-    directs,
-    indirects: indirectsOrdered,
-    indirectsNames: indirects,
-  };
 }
