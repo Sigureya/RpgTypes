@@ -47,7 +47,7 @@ function propagate(
   return finalState.names;
 }
 
-function findIndirectsFunctional(
+export function findIndirectsFunctional(
   schemas: ReadonlyArray<PluginStructSchemaArray>,
   directStructNames: ReadonlySet<string>
 ): Set<string> {
