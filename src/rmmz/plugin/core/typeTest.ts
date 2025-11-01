@@ -46,7 +46,7 @@ export const isStructArrayParam = (
 };
 
 export const paramHasText = (
-  param: Exclude<PrimitiveParam, { struct: string }>
+  param: PrimitiveParam
 ): param is PrimitiveStringParam => {
   return TABLE[param.kind]?.hasText === true;
 };
