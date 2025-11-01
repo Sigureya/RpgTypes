@@ -8,7 +8,7 @@ import type {
   PluginStructSchemaArrayEx,
 } from "./arraySchemaTypes";
 import type { PluginCommandSchemaArrayGGG, PP } from "./arraySchemaTypes2";
-import type { PrimitiveStringParam } from "./paramUnion";
+import type { PrimitiveParam, PrimitiveStringParam } from "./paramUnion";
 import type { StringArrayParam } from "./primitiveParams";
 import {
   hasTextAttr,
@@ -18,18 +18,20 @@ import {
 } from "./typeTest";
 
 export const filterPluginSchemaByStringParam = (schema: PluginSchemaArray) => {
-  type Type = PluginParamEx<PrimitiveStringParam | StringArrayParam>;
-  return cccc2<Type>(schema, hasTextAttr);
+  type Type = PrimitiveStringParam | StringArrayParam;
+  return cccc2<PluginParamEx<Type>>(schema, hasTextAttr);
 };
 
 export const filterPluginSchemaByNumberParam = (schema: PluginSchemaArray) => {
-  return cccc2(schema, isNumberAttr);
+  type Type = Extract<PrimitiveParam, { default: number[] | number }>;
+  return cccc2<PluginParamEx<Type>>(schema, isNumberAttr);
 };
 
 export const filterPluginSchemaByVariableParam = (
   schema: PluginSchemaArray
 ) => {
-  return cccc2(schema, isVariableAttr);
+  type Type = Extract<PrimitiveParam, { kind: "variable" | "variable[]" }>;
+  return cccc2<PluginParamEx<Type>>(schema, isVariableAttr);
 };
 
 export function filterPluginSchemaByParam<T extends PluginParam>(
