@@ -56,7 +56,7 @@ export function findIndirectsFunctional(
   return propagate(allStructNames, refMap, new Set(directStructNames));
 }
 
-export const filterStructs2 = (
+const filterStructs2 = (
   schemas: ReadonlyArray<PluginStructSchemaArray>,
   predicate: (param: PluginStructSchemaArray) => boolean
 ): ArraySchemaFilterd => {
