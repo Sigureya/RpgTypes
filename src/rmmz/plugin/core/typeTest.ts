@@ -1,3 +1,4 @@
+import type { PluginParam, PluginParamEx } from "./arraySchemaTypes";
 import type {
   PrimitiveParam,
   ParamKinds,
@@ -40,6 +41,12 @@ export const isStructParam = (
   return param.kind === "struct";
 };
 
+export const isStructAttr = (
+  param: PluginParam
+): param is PluginParamEx<StructRefParam | StructArrayRefParam> => {
+  return isStructParam(param.attr) || isStructArrayParam(param.attr);
+};
+
 export const isStructArrayParam = (
   param: PrimitiveParam
 ): param is StructArrayRefParam => {
@@ -50,6 +57,12 @@ export const paramHasText = (
   param: PrimitiveParam
 ): param is PrimitiveStringParam | PrimitiveStringArrayParam => {
   return TABLE[param.kind]?.hasText === true;
+};
+
+export const hasTextAttr = (
+  param: PluginParam
+): param is PluginParamEx<PrimitiveStringParam | PrimitiveStringArrayParam> => {
+  return TABLE[param.attr.kind]?.hasText === true;
 };
 
 export const isStringValueParam = (
@@ -92,6 +105,14 @@ export const isStringArrayParam = (
 ): param is Extract<ArrayParamTypes, { default: string[] }> => {
   const info = TABLE[param.kind.replace("[]", "") as ParamKinds];
   return info.type === "string";
+};
+
+export const isVariableAttr = (
+  param: PluginParam
+): param is PluginParamEx<
+  Extract<PrimitiveParam, { kind: "variable" | "variable[]" }>
+> => {
+  return param.attr.kind === "variable" || param.attr.kind === "variable[]";
 };
 
 interface TableInfo {
