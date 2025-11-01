@@ -1,30 +1,19 @@
 import { findIndirectsFunctional } from "./arraySchemaFilter";
 import type {
-  PluginStructSchemaArrayEx,
   PluginCommandSchemaArray,
   PluginParam,
   PluginSchemaArray,
   PluginStructSchemaArray,
-  PluginParamEx,
+  PluginStructSchemaArrayEx,
 } from "./arraySchemaTypes";
-import type {
-  PluginCommandSchemaArrayGGG,
-  PP,
-  SSSS,
-} from "./arraySchemaTypes2";
+import type { PluginCommandSchemaArrayGGG, PP } from "./arraySchemaTypes2";
 import { isStructAttr } from "./arraySchemaUtils";
-import type { PrimitiveParam } from "./paramUnion";
 import { isNumberValueParam, paramHasText } from "./typeTest";
 
-export const filterStructParam = (struct: PluginStructSchemaArray): SSSS => ({
-  struct: struct.struct,
-  params: struct.params.filter(isStructAttr),
-});
-
-const pp3 = (p: PluginParam): p is PluginParam => paramHasText(p.attr);
-
 export const filterPluginSchemaByStringParam = (schema: PluginSchemaArray) => {
-  return cccc2<PluginParam>(schema, pp3);
+  return cccc2<PluginParam>(schema, (param): param is PluginParam =>
+    paramHasText(param.attr)
+  );
 };
 
 export const filterPluginSchemaByNumberParam = (schema: PluginSchemaArray) => {
@@ -85,8 +74,9 @@ const stex = <T extends PluginParam>(
   structs: ReadonlyArray<PluginStructSchemaArray>,
   structNames: ReadonlySet<string>,
   predicate: (param: PluginParam) => param is T
-) => {
-  return structs.reduce<PluginStructSchemaArray[]>((acc, struct) => {
+): PluginStructSchemaArrayEx<T | PP>[] => {
+  type XX = PluginStructSchemaArrayEx<T | PP>;
+  return structs.reduce<XX[]>((acc, struct) => {
     const params: (T | PP)[] = paramsXXX(struct.params, structNames, predicate);
     if (params.length === 0) {
       return acc;
