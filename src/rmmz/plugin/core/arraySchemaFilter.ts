@@ -1,15 +1,15 @@
-import type { ArraySchemaFilterd } from "./arraySchemaFilterdTypes";
 import type {
-  PluginParam,
   PluginParamEx,
   PluginStructSchemaArray,
 } from "./arraySchemaTypes";
-import { isStructAttr } from "./arraySchemaUtils";
 import type { StructArrayRefParam, StructRefParam } from "./primitiveParams";
+import { isStructAttr } from "./typeTest";
+
+type ParamType = PluginParamEx<StructRefParam | StructArrayRefParam>[];
 
 function createRefMap(
   schemas: ReadonlyArray<PluginStructSchemaArray>
-): Record<string, PluginParamEx<StructRefParam | StructArrayRefParam>[]> {
+): Record<string, ParamType> {
   return Object.fromEntries(
     schemas.map((schema) => [schema.struct, schema.params.filter(isStructAttr)])
   );
@@ -17,7 +17,7 @@ function createRefMap(
 
 function propagate(
   allStructNames: ReadonlyArray<string>,
-  refMap: Record<string, PluginParamEx<StructRefParam | StructArrayRefParam>[]>,
+  refMap: Record<string, ParamType>,
   initialNames: Set<string>
 ): Set<string> {
   type State = { names: Set<string>; changed: boolean };
@@ -47,40 +47,11 @@ function propagate(
   return finalState.names;
 }
 
-function findIndirectsFunctional(
+export const findIndirectsFunctional = (
   schemas: ReadonlyArray<PluginStructSchemaArray>,
   directStructNames: ReadonlySet<string>
-): Set<string> {
+): Set<string> => {
   const refMap = createRefMap(schemas);
   const allStructNames = Object.keys(refMap);
   return propagate(allStructNames, refMap, new Set(directStructNames));
-}
-
-export const filterStructs2 = (
-  schemas: ReadonlyArray<PluginStructSchemaArray>,
-  predicate: (param: PluginStructSchemaArray) => boolean
-): ArraySchemaFilterd => {
-  const directs = schemas.filter(predicate);
-  const directNames: Set<string> = new Set(directs.map((s) => s.struct));
-  const indirects: Set<string> = findIndirectsFunctional(schemas, directNames);
-
-  return { directs, indirects, directNames };
 };
-
-export function filterStructs(
-  schemas: ReadonlyArray<PluginStructSchemaArray>,
-  predicate: (param: PluginParam) => boolean
-) {
-  const { directs, indirects, directNames } = filterStructs2(schemas, (s) =>
-    s.params.some((p) => predicate(p))
-  );
-  const indirectsOrdered = schemas.filter(
-    (s) => !directNames.has(s.struct) && indirects.has(s.struct)
-  );
-
-  return {
-    directs,
-    indirects: indirectsOrdered,
-    indirectsNames: indirects,
-  };
-}

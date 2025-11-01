@@ -85,6 +85,17 @@ const runTestCase = (param: ScalaParam) => {
   }
 );
 
+describe("string array param", () => {
+  const stringArrayParam: PrimitiveParam = {
+    kind: "string[]",
+    default: ["hello", "world"],
+  };
+  it("has text", () => {
+    expect(stringArrayParam).toSatisfy(paramHasText);
+    expect(paramHasText(stringArrayParam)).toBe(true);
+  });
+});
+
 describe("single file param", () => {
   const fileParam: FileParam = { kind: "file", default: "icon", dir: "img" };
 

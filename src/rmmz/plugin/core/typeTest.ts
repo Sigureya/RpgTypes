@@ -1,3 +1,4 @@
+import type { PluginParam, PluginParamEx } from "./arraySchemaTypes";
 import type {
   PrimitiveParam,
   ParamKinds,
@@ -9,6 +10,7 @@ import type {
   ArrayParam,
   StructRefParam,
   StructArrayRefParam,
+  StringArrayParam,
 } from "./primitiveParams";
 
 export const isArrayParam = <T extends PrimitiveParam>(
@@ -39,6 +41,12 @@ export const isStructParam = (
   return param.kind === "struct";
 };
 
+export const isStructAttr = (
+  param: PluginParam
+): param is PluginParamEx<StructRefParam | StructArrayRefParam> => {
+  return isStructParam(param.attr) || isStructArrayParam(param.attr);
+};
+
 export const isStructArrayParam = (
   param: PrimitiveParam
 ): param is StructArrayRefParam => {
@@ -47,8 +55,14 @@ export const isStructArrayParam = (
 
 export const paramHasText = (
   param: PrimitiveParam
-): param is PrimitiveStringParam => {
+): param is PrimitiveStringParam | StringArrayParam => {
   return TABLE[param.kind]?.hasText === true;
+};
+
+export const hasTextAttr = (
+  param: PluginParam
+): param is PluginParamEx<PrimitiveStringParam | StringArrayParam> => {
+  return TABLE[param.attr.kind]?.hasText === true;
 };
 
 export const isStringValueParam = (
@@ -86,11 +100,27 @@ export const isNumberArrayParam = (
   return info.type === "number";
 };
 
+export const isNumberAttr = (
+  param: PluginParam
+): param is PluginParamEx<
+  Extract<PrimitiveParam, { default: number[] | number }>
+> => {
+  return TABLE[param.attr.kind]?.type === "number";
+};
+
 export const isStringArrayParam = (
   param: ArrayParam
 ): param is Extract<ArrayParamTypes, { default: string[] }> => {
   const info = TABLE[param.kind.replace("[]", "") as ParamKinds];
   return info.type === "string";
+};
+
+export const isVariableAttr = (
+  param: PluginParam
+): param is PluginParamEx<
+  Extract<PrimitiveParam, { kind: "variable" | "variable[]" }>
+> => {
+  return param.attr.kind === "variable" || param.attr.kind === "variable[]";
 };
 
 interface TableInfo {
@@ -127,6 +157,9 @@ const TABLE: Record<string, TableInfo> = {
   troop: DATA_ID,
   multiline_string: HAS_TEXT,
   file: { type: "string", hasText: false },
+  "file[]": { type: "string", hasText: false },
+  "multiline_string[]": HAS_TEXT,
+  "string[]": HAS_TEXT,
   combo: HAS_TEXT,
   select: HAS_TEXT,
   any: HAS_TEXT,
