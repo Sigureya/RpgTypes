@@ -35,12 +35,6 @@ export interface PluginStructSchemaArrayEx<T extends PluginParam> {
   params: T[];
 }
 
-export interface PluginSchemaArrayEx<T extends PrimitiveParam> {
-  commands: PluginCommandSchemaArrayEx<T>[];
-  params: PluginParamEx<T>[];
-  structs: PluginStructSchemaArray[];
-}
-
 export interface PluginSchemaArray {
   commands: PluginCommandSchemaArray[];
   params: PluginParam[];
