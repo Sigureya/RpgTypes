@@ -19,9 +19,19 @@ export interface RpgVariableParam extends ParamBase {
   default: number;
 }
 
+export interface RpgVariableArrayParam extends ParamBase {
+  kind: `variable[]`;
+  default: number[];
+}
+
 export interface RpgSwitchParam extends ParamBase {
   kind: `switch`;
   default: number;
+}
+
+export interface RpgSwitchArrayParam extends ParamBase {
+  kind: `switch[]`;
+  default: number[];
 }
 
 export interface RpgDataIdArrayParam extends ParamBase {
