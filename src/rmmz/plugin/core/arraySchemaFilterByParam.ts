@@ -2,24 +2,34 @@ import { findIndirectsFunctional } from "./arraySchemaFilter";
 import type {
   PluginCommandSchemaArray,
   PluginParam,
+  PluginParamEx,
   PluginSchemaArray,
   PluginStructSchemaArray,
   PluginStructSchemaArrayEx,
 } from "./arraySchemaTypes";
 import type { PluginCommandSchemaArrayGGG, PP } from "./arraySchemaTypes2";
-import { isStructAttr } from "./arraySchemaUtils";
-import { isNumberValueParam, paramHasText } from "./typeTest";
+import type { PrimitiveStringParam } from "./paramUnion";
+import type { StringArrayParam } from "./primitiveParams";
+import {
+  hasTextAttr,
+  isNumberAttr,
+  isStructAttr,
+  isVariableAttr,
+} from "./typeTest";
 
 export const filterPluginSchemaByStringParam = (schema: PluginSchemaArray) => {
-  return cccc2<PluginParam>(schema, (param): param is PluginParam =>
-    paramHasText(param.attr)
-  );
+  type Type = PluginParamEx<PrimitiveStringParam | StringArrayParam>;
+  return cccc2<Type>(schema, hasTextAttr);
 };
 
 export const filterPluginSchemaByNumberParam = (schema: PluginSchemaArray) => {
-  return filterPluginSchemaByParam(schema, (param) =>
-    isNumberValueParam(param.attr)
-  );
+  return cccc2(schema, isNumberAttr);
+};
+
+export const filterPluginSchemaByVariableParam = (
+  schema: PluginSchemaArray
+) => {
+  return cccc2(schema, isVariableAttr);
 };
 
 export function filterPluginSchemaByParam<T extends PluginParam>(
@@ -50,7 +60,7 @@ function cccc2<T extends PluginParam>(
   });
   const gg = new Set<string>(base.map((s) => s.struct));
   const s3: Set<string> = findIndirectsFunctional(schema.structs, gg);
-  const newStructs = stex(schema.structs, s3, predicate);
+  const newStructs = rebuildStructs(schema.structs, s3, predicate);
   return {
     structs: newStructs,
     commands: cmdEx(schema.commands, s3, predicate),
@@ -70,7 +80,7 @@ const paramsXXX = <T extends PluginParam>(
   });
 };
 
-const stex = <T extends PluginParam>(
+const rebuildStructs = <T extends PluginParam>(
   structs: ReadonlyArray<PluginStructSchemaArray>,
   structNames: ReadonlySet<string>,
   predicate: (param: PluginParam) => param is T
