@@ -5,7 +5,7 @@ import type {
   PluginCommandSchemaArrayEx,
   PluginParam,
   PluginSchemaArray,
-  PluginStructSchemaArray3,
+  PluginStructSchemaArrayEx,
 } from "./arraySchemaTypes";
 
 interface ShowText {
@@ -32,9 +32,9 @@ const vector2Schema = {
     { name: "x", attr: { kind: "number", default: 0 } },
     { name: "y", attr: { kind: "number", default: 0 } },
   ],
-} as const satisfies PluginStructSchemaArray3<Vector2>;
+} as const satisfies PluginStructSchemaArrayEx<Vector2>;
 
-const messagePairSchema: PluginStructSchemaArray3<MessagePair> = {
+const messagePairSchema: PluginStructSchemaArrayEx<MessagePair> = {
   struct: "Message",
   params: [
     { name: "message", attr: { kind: "string", default: "" } },

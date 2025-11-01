@@ -11,6 +11,10 @@ import type {
   StructRefParam,
   StructArrayRefParam,
   StringArrayParam,
+  FileParam,
+  FileArrayParam,
+  RpgVariableParam,
+  RpgVariableArrayParam,
 } from "./primitiveParams";
 
 export const isArrayParam = <T extends PrimitiveParam>(
@@ -117,10 +121,16 @@ export const isStringArrayParam = (
 
 export const isVariableAttr = (
   param: PluginParam
-): param is PluginParamEx<
-  Extract<PrimitiveParam, { kind: "variable" | "variable[]" }>
-> => {
+): param is
+  | PluginParamEx<RpgVariableParam>
+  | PluginParamEx<RpgVariableArrayParam> => {
   return param.attr.kind === "variable" || param.attr.kind === "variable[]";
+};
+
+export const isFileAttr = (
+  param: PluginParam
+): param is PluginParamEx<FileParam | FileArrayParam> => {
+  return param.attr.kind === "file" || param.attr.kind === "file[]";
 };
 
 interface TableInfo {

@@ -1,5 +1,5 @@
 import { describe, expect, test, vi } from "vitest";
-import { cmdEx } from "./arraySchemaFilterByParam";
+import { rebuildCommands } from "./arraySchemaFilterByParam";
 import type {
   PluginCommandSchemaArrayEx,
   PluginParam,
@@ -37,13 +37,15 @@ const makeMockFn = (fn: (param: PluginParam) => boolean) => {
 describe("cmdEx", () => {
   test("empty", () => {
     const mockFn = makeMockFn(() => true);
-    const result = cmdEx([], new Set(), (p): p is PluginParam => mockFn(p));
+    const result = rebuildCommands([], new Set(), (p): p is PluginParam =>
+      mockFn(p)
+    );
     expect(mockFn).toHaveBeenCalledTimes(0);
     expect(result).toEqual([]);
   });
   test("a", () => {
     const mockFn = makeMockFn((p) => p.attr.kind === "string");
-    const result = cmdEx(
+    const result = rebuildCommands(
       [useItemSchema, emptyArgSchema],
       new Set(["A"]),
       (p): p is PluginParam => mockFn(p)
@@ -65,7 +67,7 @@ describe("cmdEx", () => {
   });
   test("b", () => {
     const mockFn = makeMockFn((p) => p.attr.kind === "number");
-    const result = cmdEx(
+    const result = rebuildCommands(
       [useItemSchema, emptyArgSchema],
       new Set(["B"]),
       (p): p is PluginParam => mockFn(p)

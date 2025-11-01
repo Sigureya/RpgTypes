@@ -4,7 +4,7 @@ import type {
   ClassifiedPluginParams,
   ClassifiedPluginParamsEx,
 } from "./classifyTypes";
-import type { PluginStructSchemaArray3 } from "./core";
+import type { PluginStructSchemaArrayEx } from "./core";
 
 interface MockStruct {
   name: string;
@@ -16,7 +16,7 @@ interface MockStruct {
 }
 
 describe("classifyPluginParams", () => {
-  const mockStructSchema: PluginStructSchemaArray3<MockStruct> = {
+  const mockStructSchema: PluginStructSchemaArrayEx<MockStruct> = {
     struct: "MockStruct",
     params: [
       { name: "name", attr: { kind: "string", default: "defaultText" } },

@@ -7,7 +7,7 @@ import type {
   PluginParam,
   PluginSchemaArray,
   PluginStructSchemaArray,
-  PluginStructSchemaArray3,
+  PluginStructSchemaArrayEx,
 } from "./arraySchemaTypes";
 
 interface Item {
@@ -40,7 +40,7 @@ const emptyCommandSchema: PluginCommandSchemaArray = {
   args: [],
 };
 
-const itemSchema: PluginStructSchemaArray3<Item> = {
+const itemSchema: PluginStructSchemaArrayEx<Item> = {
   struct: "Item",
   params: [
     { name: "id", attr: { kind: "number", default: 1 } },
@@ -53,7 +53,7 @@ const itemSchema: PluginStructSchemaArray3<Item> = {
   ],
 };
 
-const effectSchema: PluginStructSchemaArray3<ItemEffect> = {
+const effectSchema: PluginStructSchemaArrayEx<ItemEffect> = {
   struct: "ItemEffect",
   params: [
     { name: "code", attr: { kind: "number", default: 0 } },
@@ -69,7 +69,7 @@ const vector2Schema = {
     { name: "x", attr: { kind: "number", default: 0 } },
     { name: "y", attr: { kind: "number", default: 0 } },
   ],
-} as const satisfies PluginStructSchemaArray3<Vector2>;
+} as const satisfies PluginStructSchemaArrayEx<Vector2>;
 
 const showTextSchema: PluginCommandSchemaArrayEx<ShowText> = {
   command: "ShowText",
@@ -151,7 +151,7 @@ describe.skip("cccc", () => {
               attr: { kind: "string", default: "item description" },
             },
           ],
-        } satisfies PluginStructSchemaArray3<Item>,
+        } satisfies PluginStructSchemaArrayEx<Item>,
       ],
       params: [{ name: "items", attr: { kind: "struct[]", struct: "Item" } }],
     };

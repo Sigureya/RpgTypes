@@ -3,7 +3,7 @@ import { filterPluginSchemaByParam } from "./arraySchemaFilterByParam";
 import type {
   PluginCommandSchemaArrayEx,
   PluginSchemaArray,
-  PluginStructSchemaArray3,
+  PluginStructSchemaArrayEx,
 } from "./arraySchemaTypes";
 interface Shop {
   items: number[];
@@ -21,7 +21,7 @@ interface ShowMessage {
   position: Vector2;
 }
 
-const shppSchema: PluginStructSchemaArray3<Shop> = {
+const shppSchema: PluginStructSchemaArrayEx<Shop> = {
   struct: "Shop",
   params: [
     { name: "items", attr: { kind: "number[]", default: [] } },
@@ -30,7 +30,7 @@ const shppSchema: PluginStructSchemaArray3<Shop> = {
   ],
 };
 
-const vec2Schema: PluginStructSchemaArray3<Vector2> = {
+const vec2Schema: PluginStructSchemaArrayEx<Vector2> = {
   struct: "Vector2",
   params: [
     { name: "x", attr: { kind: "number", default: 0 } },

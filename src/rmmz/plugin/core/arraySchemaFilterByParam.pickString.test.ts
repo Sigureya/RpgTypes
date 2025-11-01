@@ -2,7 +2,7 @@ import { describe, expect, test } from "vitest";
 import { filterPluginSchemaByStringParam } from "./arraySchemaFilterByParam";
 import type {
   PluginSchemaArray,
-  PluginStructSchemaArray3,
+  PluginStructSchemaArrayEx,
 } from "./arraySchemaTypes";
 
 interface MockData {
@@ -21,7 +21,7 @@ interface Item {
   price: number;
 }
 
-const itemSchema: PluginStructSchemaArray3<Item> = {
+const itemSchema: PluginStructSchemaArrayEx<Item> = {
   struct: "Item",
   params: [
     { name: "name", attr: { kind: "string", default: "" } },
@@ -29,7 +29,7 @@ const itemSchema: PluginStructSchemaArray3<Item> = {
   ],
 };
 
-const structSchema: PluginStructSchemaArray3<MockData> = {
+const structSchema: PluginStructSchemaArrayEx<MockData> = {
   struct: "MockData",
   params: [
     { name: "message", attr: { kind: "string", default: "" } },

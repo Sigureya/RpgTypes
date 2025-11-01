@@ -30,15 +30,9 @@ export interface PluginStructSchemaArray {
   params: PluginParam[];
 }
 
-export interface PluginStructSchemaArrayEx<T extends PluginParam> {
+export interface PluginStructSchemaArrayFilterd<T extends PluginParam> {
   struct: string;
   params: T[];
-}
-
-export interface PluginSchemaArrayEx<T extends PrimitiveParam> {
-  commands: PluginCommandSchemaArrayEx<T>[];
-  params: PluginParamEx<T>[];
-  structs: PluginStructSchemaArray[];
 }
 
 export interface PluginSchemaArray {
@@ -47,12 +41,7 @@ export interface PluginSchemaArray {
   structs: PluginStructSchemaArray[];
 }
 
-export type PluginStructSchemaArray3<T> = {
+export type PluginStructSchemaArrayEx<T> = {
   struct: string;
   params: PluginStructParamTypeEx<T>[];
 };
-
-export interface GG {
-  directs: PluginStructSchemaArray[];
-  indirects: PluginStructSchemaArray[];
-}
