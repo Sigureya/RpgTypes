@@ -46,7 +46,7 @@ export const isStructArrayParam = (
 };
 
 export const paramHasText = (
-  param: PrimitiveParam
+  param: Exclude<PrimitiveParam, { struct: string }>
 ): param is PrimitiveStringParam => {
   return TABLE[param.kind]?.hasText === true;
 };
@@ -127,6 +127,9 @@ const TABLE: Record<string, TableInfo> = {
   troop: DATA_ID,
   multiline_string: HAS_TEXT,
   file: { type: "string", hasText: false },
+  "file[]": { type: "string", hasText: false },
+  "multiline_string[]": HAS_TEXT,
+  "string[]": HAS_TEXT,
   combo: HAS_TEXT,
   select: HAS_TEXT,
   any: HAS_TEXT,
