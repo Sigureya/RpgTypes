@@ -1,10 +1,11 @@
-import { filterStructs } from "./arraySchemaFilter";
+import { findIndirectsFunctional } from "./arraySchemaFilter";
 import type {
   PluginStructSchemaArrayEx,
   PluginCommandSchemaArray,
   PluginParam,
   PluginSchemaArray,
   PluginStructSchemaArray,
+  PluginParamEx,
 } from "./arraySchemaTypes";
 import type {
   PluginCommandSchemaArrayGGG,
@@ -12,6 +13,7 @@ import type {
   SSSS,
 } from "./arraySchemaTypes2";
 import { isStructAttr } from "./arraySchemaUtils";
+import type { PrimitiveParam } from "./paramUnion";
 import { isNumberValueParam, paramHasText } from "./typeTest";
 
 export const filterStructParam = (struct: PluginStructSchemaArray): SSSS => ({
@@ -19,8 +21,10 @@ export const filterStructParam = (struct: PluginStructSchemaArray): SSSS => ({
   params: struct.params.filter(isStructAttr),
 });
 
+const pp3 = (p: PluginParam): p is PluginParam => paramHasText(p.attr);
+
 export const filterPluginSchemaByStringParam = (schema: PluginSchemaArray) => {
-  return filterPluginSchemaByParam(schema, (param) => paramHasText(param.attr));
+  return cccc2<PluginParam>(schema, pp3);
 };
 
 export const filterPluginSchemaByNumberParam = (schema: PluginSchemaArray) => {
@@ -48,35 +52,20 @@ export function filterPluginSchemaByParam<T extends PluginParam>(
   return cccc2<T>(schema, predicate as (param: PluginParam) => param is T);
 }
 
-const pickStructParams = <T extends PluginParam>(
-  structs: PluginStructSchemaArray[],
-  predicate: (param: PluginParam) => param is T
-): PluginStructSchemaArrayEx<T>[] => {
-  return structs.reduce<PluginStructSchemaArrayEx<T>[]>((acc, s) => {
-    const params: T[] = s.params.filter((p): p is T => predicate(p));
-    if (params.length === 0) {
-      return acc;
-    }
-    acc.push({ struct: s.struct, params });
-    return acc;
-  }, []);
-};
-
 function cccc2<T extends PluginParam>(
   schema: PluginSchemaArray,
   predicate: (param: PluginParam) => param is T
 ) {
-  const { directs, indirectsNames } = filterStructs(schema.structs, predicate);
-  const newStructs: PluginStructSchemaArrayEx<T>[] = pickStructParams<T>(
-    directs,
-    predicate
-  );
-  const newCommands = cmdEx<T>(schema.commands, indirectsNames, predicate);
-
+  const base = schema.structs.filter((s) => {
+    return s.params.some((p) => predicate(p));
+  });
+  const gg = new Set<string>(base.map((s) => s.struct));
+  const s3: Set<string> = findIndirectsFunctional(schema.structs, gg);
+  const newStructs = stex(schema.structs, s3, predicate);
   return {
     structs: newStructs,
-    commands: newCommands,
-    params: paramsXXX(schema.params, indirectsNames, predicate),
+    commands: cmdEx(schema.commands, s3, predicate),
+    params: paramsXXX(schema.params, s3, predicate),
   };
 }
 
@@ -90,6 +79,21 @@ const paramsXXX = <T extends PluginParam>(
       ? structNames.has(param.attr.struct)
       : predicate(param);
   });
+};
+
+const stex = <T extends PluginParam>(
+  structs: ReadonlyArray<PluginStructSchemaArray>,
+  structNames: ReadonlySet<string>,
+  predicate: (param: PluginParam) => param is T
+) => {
+  return structs.reduce<PluginStructSchemaArray[]>((acc, struct) => {
+    const params: (T | PP)[] = paramsXXX(struct.params, structNames, predicate);
+    if (params.length === 0) {
+      return acc;
+    }
+    acc.push({ struct: struct.struct, params: params });
+    return acc;
+  }, []);
 };
 
 export const cmdEx = <T extends PluginParam>(
