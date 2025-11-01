@@ -4,6 +4,7 @@ import type {
   PrimitiveStringParam,
   ScalaParam,
   ArrayParamTypes,
+  PrimitiveStringArrayParam,
 } from "./paramUnion";
 import type {
   ArrayParam,
@@ -47,7 +48,7 @@ export const isStructArrayParam = (
 
 export const paramHasText = (
   param: PrimitiveParam
-): param is PrimitiveStringParam => {
+): param is PrimitiveStringParam | PrimitiveStringArrayParam => {
   return TABLE[param.kind]?.hasText === true;
 };
 
