@@ -5,12 +5,12 @@ import type {
   PrimitiveStringParam,
   ScalaParam,
   ArrayParamTypes,
-  PrimitiveStringArrayParam,
 } from "./paramUnion";
 import type {
   ArrayParam,
   StructRefParam,
   StructArrayRefParam,
+  StringArrayParam,
 } from "./primitiveParams";
 
 export const isArrayParam = <T extends PrimitiveParam>(
@@ -55,13 +55,13 @@ export const isStructArrayParam = (
 
 export const paramHasText = (
   param: PrimitiveParam
-): param is PrimitiveStringParam | PrimitiveStringArrayParam => {
+): param is PrimitiveStringParam | StringArrayParam => {
   return TABLE[param.kind]?.hasText === true;
 };
 
 export const hasTextAttr = (
   param: PluginParam
-): param is PluginParamEx<PrimitiveStringParam | PrimitiveStringArrayParam> => {
+): param is PluginParamEx<PrimitiveStringParam | StringArrayParam> => {
   return TABLE[param.attr.kind]?.hasText === true;
 };
 
@@ -98,6 +98,14 @@ export const isNumberArrayParam = (
 ): param is Extract<ArrayParam, { default: number[] }> => {
   const info = TABLE[param.kind.replace("[]", "") as ParamKinds];
   return info.type === "number";
+};
+
+export const isNumberAttr = (
+  param: PluginParam
+): param is PluginParamEx<
+  Extract<PrimitiveParam, { default: number[] | number }>
+> => {
+  return TABLE[param.attr.kind]?.type === "number";
 };
 
 export const isStringArrayParam = (
