@@ -45,11 +45,11 @@ function propagate(
   return finalState.names;
 }
 
-export function findIndirectsFunctional(
+export const findIndirectsFunctional = (
   schemas: ReadonlyArray<PluginStructSchemaArray>,
   directStructNames: ReadonlySet<string>
-): Set<string> {
+): Set<string> => {
   const refMap = createRefMap(schemas);
   const allStructNames = Object.keys(refMap);
   return propagate(allStructNames, refMap, new Set(directStructNames));
-}
+};
