@@ -1,6 +1,6 @@
 import { describe, expect, test } from "vitest";
 import { findIndirectsFunctional } from "./arraySchemaFilter";
-import type { PluginStructSchemaArray3 } from "./arraySchemaTypes";
+import type { PluginStructSchemaArrayEx } from "./arraySchemaTypes";
 interface A {
   b: B;
 }
@@ -41,19 +41,19 @@ describe("", () => {
 });
 
 describe("", () => {
-  const schemaA: PluginStructSchemaArray3<A> = {
+  const schemaA: PluginStructSchemaArrayEx<A> = {
     struct: "A",
     params: [{ name: "b", attr: { kind: "struct", struct: "B" } }],
   };
-  const schemaB: PluginStructSchemaArray3<B> = {
+  const schemaB: PluginStructSchemaArrayEx<B> = {
     struct: "B",
     params: [{ name: "c", attr: { kind: "struct", struct: "C" } }],
   };
-  const schemaC: PluginStructSchemaArray3<C> = {
+  const schemaC: PluginStructSchemaArrayEx<C> = {
     struct: "C",
     params: [{ name: "d", attr: { kind: "struct", struct: "D" } }],
   };
-  const schemaD: PluginStructSchemaArray3<D> = {
+  const schemaD: PluginStructSchemaArrayEx<D> = {
     struct: "D",
     params: [{ name: "data", attr: { kind: "number", default: 0 } }],
   };
@@ -88,15 +88,15 @@ describe("", () => {
 });
 
 describe("", () => {
-  const schemaX: PluginStructSchemaArray3<X> = {
+  const schemaX: PluginStructSchemaArrayEx<X> = {
     struct: "X",
     params: [{ name: "y", attr: { kind: "struct", struct: "Y" } }],
   };
-  const schemaY: PluginStructSchemaArray3<Y> = {
+  const schemaY: PluginStructSchemaArrayEx<Y> = {
     struct: "Y",
     params: [{ name: "z", attr: { kind: "struct", struct: "Z" } }],
   };
-  const schemaZ: PluginStructSchemaArray3<Z> = {
+  const schemaZ: PluginStructSchemaArrayEx<Z> = {
     struct: "Z",
     params: [],
   };

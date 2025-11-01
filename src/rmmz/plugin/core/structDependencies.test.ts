@@ -1,7 +1,7 @@
 import { describe, expect, test } from "vitest";
 import type {
   PluginStructSchemaArray,
-  PluginStructSchemaArray3,
+  PluginStructSchemaArrayEx,
 } from "./arraySchemaTypes";
 import type { PrimitiveParam } from "./paramUnion";
 import { structDependencies } from "./structDependencies";
@@ -32,22 +32,22 @@ interface Z {
   num: number;
 }
 
-const schemaA: PluginStructSchemaArray3<A> = {
+const schemaA: PluginStructSchemaArrayEx<A> = {
   struct: "A",
   params: [{ name: "b", attr: { kind: "struct", struct: "B" } }],
 };
 
-const schemaB: PluginStructSchemaArray3<B> = {
+const schemaB: PluginStructSchemaArrayEx<B> = {
   struct: "B",
   params: [{ name: "c", attr: { kind: "struct", struct: "C" } }],
 };
 
-const schemaC: PluginStructSchemaArray3<C> = {
+const schemaC: PluginStructSchemaArrayEx<C> = {
   struct: "C",
   params: [{ name: "num", attr: { kind: "number", default: 0 } }],
 };
 
-const schemaX: PluginStructSchemaArray3<X> = {
+const schemaX: PluginStructSchemaArrayEx<X> = {
   struct: "X",
   params: [
     { name: "numArray", attr: { kind: "number[]", default: [12] } },
@@ -56,7 +56,7 @@ const schemaX: PluginStructSchemaArray3<X> = {
   ],
 };
 
-const schemaY: PluginStructSchemaArray3<Y> = {
+const schemaY: PluginStructSchemaArrayEx<Y> = {
   struct: "Y",
   params: [
     { name: "str", attr: { kind: "string", default: "" } },
@@ -64,7 +64,7 @@ const schemaY: PluginStructSchemaArray3<Y> = {
   ],
 };
 
-const schemaZ: PluginStructSchemaArray3<Z> = {
+const schemaZ: PluginStructSchemaArrayEx<Z> = {
   struct: "Z",
   params: [{ name: "num", attr: { kind: "number", default: 0 } }],
 };

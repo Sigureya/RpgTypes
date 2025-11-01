@@ -3,7 +3,7 @@ import type {
   PluginParam,
   PluginParamEx,
   PluginSchemaArray,
-  PluginStructSchemaArrayEx,
+  PluginStructSchemaArrayFilterd,
 } from "./arraySchemaTypes";
 import type {
   StructRefParam,
@@ -30,7 +30,7 @@ export interface PluginSchemaArrayEx<T extends PluginParam>
   extends PluginSchemaArray {
   commands: PluginCommandSchemaArrayEx<T | StructPluginParam>[];
   params: (T | StructPluginParam)[];
-  structs: PluginStructSchemaArrayEx<T | StructPluginParam>[];
+  structs: PluginStructSchemaArrayFilterd<T | StructPluginParam>[];
 }
 
 export type PluginVariableSchema = PluginSchemaArrayEx<

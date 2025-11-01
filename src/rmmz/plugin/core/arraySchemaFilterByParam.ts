@@ -5,7 +5,7 @@ import type {
   PluginParamEx,
   PluginSchemaArray,
   PluginStructSchemaArray,
-  PluginStructSchemaArrayEx,
+  PluginStructSchemaArrayFilterd,
 } from "./arraySchemaTypes";
 import type {
   PluginCommandSchemaArrayEx,
@@ -87,7 +87,7 @@ const buildFilteredSchema = <T extends PluginParam>(
     schema.structs,
     directTypeNames
   );
-  const newStructs: PluginStructSchemaArrayEx<T | StructPluginParam>[] =
+  const newStructs: PluginStructSchemaArrayFilterd<T | StructPluginParam>[] =
     rebuildStructs(schema.structs, depTypesName, predicate);
   return {
     structs: newStructs,
@@ -112,8 +112,8 @@ const rebuildStructs = <T extends PluginParam>(
   structs: ReadonlyArray<PluginStructSchemaArray>,
   structNames: ReadonlySet<string>,
   predicate: (param: PluginParam) => param is T
-): PluginStructSchemaArrayEx<T | StructPluginParam>[] => {
-  type XX = PluginStructSchemaArrayEx<T | StructPluginParam>;
+): PluginStructSchemaArrayFilterd<T | StructPluginParam>[] => {
+  type XX = PluginStructSchemaArrayFilterd<T | StructPluginParam>;
   return structs.reduce<XX[]>((acc, struct) => {
     const params: (T | StructPluginParam)[] = rebuildParams(
       struct.params,
