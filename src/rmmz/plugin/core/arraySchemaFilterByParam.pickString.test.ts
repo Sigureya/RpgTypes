@@ -49,7 +49,7 @@ const structSchema: PluginStructSchemaArray3<MockData> = {
 };
 
 describe("filterPluginSchemaByStringParam", () => {
-  test.skip("", () => {
+  test("", () => {
     const schema: PluginSchemaArray = {
       structs: [structSchema, itemSchema],
       commands: [],
