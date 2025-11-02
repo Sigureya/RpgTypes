@@ -4,7 +4,7 @@ import type {
   ClassifiedPluginParams,
   ClassifiedPluginParamsEx,
 } from "./classifyTypes";
-import type { PluginStructSchemaArrayEx } from "./core/params/arraySchemaTypes";
+import type { PluginStructSchemaArrayEx } from "./core/params/types/arraySchemaTypes";
 
 interface MockStruct {
   name: string;

@@ -3,7 +3,7 @@ import { rebuildCommands } from "./arraySchemaFilterByParam";
 import type {
   PluginCommandSchemaArrayEx,
   PluginParam,
-} from "./arraySchemaTypes";
+} from "./types/arraySchemaTypes";
 
 interface UseItem {
   itemId: number;

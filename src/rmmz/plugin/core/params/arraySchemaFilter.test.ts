@@ -1,6 +1,6 @@
 import { describe, expect, test } from "vitest";
 import { findIndirectsFunctional } from "./arraySchemaFilter";
-import type { PluginStructSchemaArrayEx } from "./arraySchemaTypes";
+import type { PluginStructSchemaArrayEx } from "./types/arraySchemaTypes";
 interface A {
   b: B;
 }

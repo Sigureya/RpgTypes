@@ -7,7 +7,7 @@ import type {
 import type {
   DataKind_SystemUnion,
   DataKind_RpgUnion,
-} from "./rpgDataTypesNames";
+} from "./types/rpgDataTypesNames";
 
 const DATA = 0 as const;
 const SYSTEM_V = 1 as const;
