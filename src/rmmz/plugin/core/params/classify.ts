@@ -12,6 +12,9 @@ import type {
   FileParam,
   FileArrayParam,
   ClassifiedPluginParamsEx2,
+  PrimitiveStringParam,
+  ClassifiedPluginFileParams,
+  ClassifiedTextParams,
 } from "./types";
 import {
   isStructParam,
@@ -23,7 +26,7 @@ import {
 export const classifyPluginParams = (
   structSchema: PluginStructSchemaArray
 ): ClassifiedPluginParams => {
-  return xxx(
+  return classifyPluginParamsCore(
     structSchema,
     (p): p is PluginParamEx<ScalaParam> => true,
     (p): p is PluginParamEx<ArrayParamTypes> => true
@@ -32,23 +35,28 @@ export const classifyPluginParams = (
 
 export const classifyFileParams = (
   structSchema: PluginStructSchemaArray
-): ClassifiedPluginParamsEx2<FileParam, FileArrayParam> => {
-  return xxx(
+): ClassifiedPluginFileParams => {
+  return classifyPluginParamsCore(
     structSchema,
     (p): p is PluginParamEx<FileParam> => p.attr.kind === "file",
     (p): p is PluginParamEx<FileArrayParam> => p.attr.kind === "file[]"
   );
 };
 
-export const classifyTextParams = (structSchema: PluginStructSchemaArray) => {
-  return xxx(
+export const classifyTextParams = (
+  structSchema: PluginStructSchemaArray
+): ClassifiedTextParams => {
+  return classifyPluginParamsCore(
     structSchema,
-    (p): p is PluginParamEx<ScalaParam> => hasTextAttr(p),
+    (p): p is PluginParamEx<PrimitiveStringParam> => hasTextAttr(p),
     (p) => hasTextAttr(p)
   );
 };
 
-const xxx = <T extends ScalaParam, A extends ArrayParamTypes>(
+const classifyPluginParamsCore = <
+  T extends ScalaParam,
+  A extends ArrayParamTypes
+>(
   structSchema: PluginStructSchemaArray,
   predicate: (param: PluginParam) => param is PluginParamEx<T>,
   arrayPredicate: (
