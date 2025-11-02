@@ -44,7 +44,7 @@ export const isStructParam = (
   return param.kind === "struct";
 };
 
-export const isStructAttr = (
+export const hasStructAttr = (
   param: PluginParam
 ): param is PluginParamEx<StructRefParam | StructArrayRefParam> => {
   return isStructParam(param.attr) || isStructArrayParam(param.attr);

@@ -4,7 +4,7 @@ import type {
   StructArrayRefParam,
   PluginStructSchemaArray,
 } from "./types";
-import { isStructAttr } from "./typeTest";
+import { hasStructAttr } from "./typeTest";
 
 type ParamType = PluginParamEx<StructRefParam | StructArrayRefParam>[];
 
@@ -12,7 +12,10 @@ function createRefMap(
   schemas: ReadonlyArray<PluginStructSchemaArray>
 ): Record<string, ParamType> {
   return Object.fromEntries(
-    schemas.map((schema) => [schema.struct, schema.params.filter(isStructAttr)])
+    schemas.map((schema) => [
+      schema.struct,
+      schema.params.filter(hasStructAttr),
+    ])
   );
 }
 

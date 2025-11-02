@@ -5,7 +5,7 @@ import type {
   StructArrayRefParam,
   NumberParam,
 } from "./types";
-import { isStructAttr } from "./typeTest";
+import { hasStructAttr } from "./typeTest";
 
 describe("isStructAttr", () => {
   test("returns true for struct param", () => {
@@ -13,23 +13,23 @@ describe("isStructAttr", () => {
       name: "example",
       attr: { kind: "struct", struct: "MyStruct" },
     };
-    expect(param).toSatisfy(isStructAttr);
-    expect(isStructAttr(param)).toBe(true);
+    expect(param).toSatisfy(hasStructAttr);
+    expect(hasStructAttr(param)).toBe(true);
   });
   test("returns true for struct array param", () => {
     const param: PluginParamEx<StructArrayRefParam> = {
       name: "exampleArray",
       attr: { kind: "struct[]", struct: "MyStruct" },
     };
-    expect(param).toSatisfy(isStructAttr);
-    expect(isStructAttr(param)).toBe(true);
+    expect(param).toSatisfy(hasStructAttr);
+    expect(hasStructAttr(param)).toBe(true);
   });
   test("returns false for non-struct param", () => {
     const param: PluginParamEx<NumberParam> = {
       name: "exampleNumber",
       attr: { kind: "number", default: 0 },
     };
-    expect(param).not.toSatisfy(isStructAttr);
-    expect(isStructAttr(param)).toBe(false);
+    expect(param).not.toSatisfy(hasStructAttr);
+    expect(hasStructAttr(param)).toBe(false);
   });
 });
