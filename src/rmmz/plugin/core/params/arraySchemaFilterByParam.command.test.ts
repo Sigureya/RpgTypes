@@ -31,8 +31,8 @@ const makeMockFn = (fn: (param: PluginParam) => boolean) => {
   return vi.fn((p): p is PluginParam => fn(p));
 };
 
-describe("cmdEx", () => {
-  test("empty", () => {
+describe("rebuildCommands filtering behavior", () => {
+  test("returns empty array when input is empty", () => {
     const mockFn = makeMockFn(() => true);
     const result = rebuildCommands([], new Set(), (p): p is PluginParam =>
       mockFn(p)
@@ -40,7 +40,7 @@ describe("cmdEx", () => {
     expect(mockFn).toHaveBeenCalledTimes(0);
     expect(result).toEqual([]);
   });
-  test("a", () => {
+  test("filters string kind and struct A", () => {
     const mockFn = makeMockFn((p) => p.attr.kind === "string");
     const result = rebuildCommands(
       [useItemSchema, emptyArgSchema],
@@ -62,7 +62,7 @@ describe("cmdEx", () => {
     expect(mockFn).toHaveBeenNthCalledWith(3, useItemSchema.args[2]);
     expect(result).toEqual(expected);
   });
-  test("b", () => {
+  test("filters number kind and struct B", () => {
     const mockFn = makeMockFn((p) => p.attr.kind === "number");
     const result = rebuildCommands(
       [useItemSchema, emptyArgSchema],

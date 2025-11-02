@@ -26,12 +26,12 @@ interface Y {
 }
 interface Z {}
 
-describe("", () => {
-  test("", () => {
+describe("Empty input tests", () => {
+  test("returns empty set for empty input", () => {
     const result: Set<string> = findIndirectsFunctional([], new Set());
     expect(result.size).toBe(0);
   });
-  test("", () => {
+  test("returns initial set when no schema", () => {
     const result: Set<string> = findIndirectsFunctional(
       [],
       new Set(["A", "B", "C"])
@@ -40,7 +40,7 @@ describe("", () => {
   });
 });
 
-describe("", () => {
+describe("ABCD struct dependency resolution", () => {
   const schemaA: PluginStructSchemaArrayEx<A> = {
     struct: "A",
     params: [{ name: "b", attr: { kind: "struct", struct: "B" } }],
@@ -57,28 +57,28 @@ describe("", () => {
     struct: "D",
     params: [{ name: "data", attr: { kind: "number", default: 0 } }],
   };
-  test("", () => {
+  test("starting from D returns all ABCD", () => {
     const result: Set<string> = findIndirectsFunctional(
       [schemaA, schemaB, schemaC, schemaD],
       new Set(["D"])
     );
     expect(result).toEqual(new Set(["A", "B", "C", "D"]));
   });
-  test("", () => {
+  test("starting from C returns ABC", () => {
     const result: Set<string> = findIndirectsFunctional(
       [schemaA, schemaB, schemaC, schemaD],
       new Set(["C"])
     );
     expect(result).toEqual(new Set(["A", "B", "C"]));
   });
-  test("", () => {
+  test("starting from B returns AB", () => {
     const result: Set<string> = findIndirectsFunctional(
       [schemaA, schemaB, schemaC, schemaD],
       new Set(["B"])
     );
     expect(result).toEqual(new Set(["A", "B"]));
   });
-  test("", () => {
+  test("starting from A returns only A", () => {
     const result: Set<string> = findIndirectsFunctional(
       [schemaA, schemaB, schemaC, schemaD],
       new Set(["A"])
@@ -87,7 +87,7 @@ describe("", () => {
   });
 });
 
-describe("", () => {
+describe("XYZ struct dependency resolution", () => {
   const schemaX: PluginStructSchemaArrayEx<X> = {
     struct: "X",
     params: [{ name: "y", attr: { kind: "struct", struct: "Y" } }],
@@ -100,21 +100,21 @@ describe("", () => {
     struct: "Z",
     params: [],
   };
-  test("", () => {
+  test("starting from A returns only A", () => {
     const result: Set<string> = findIndirectsFunctional(
       [schemaX, schemaY, schemaZ],
       new Set(["A"])
     );
     expect(result).toEqual(new Set(["A"]));
   });
-  test("", () => {
+  test("starting from Z returns XYZ", () => {
     const result: Set<string> = findIndirectsFunctional(
       [schemaX, schemaY, schemaZ],
       new Set(["Z"])
     );
     expect(result).toEqual(new Set(["X", "Y", "Z"]));
   });
-  test("", () => {
+  test("starting from Y returns XY", () => {
     const result: Set<string> = findIndirectsFunctional(
       [schemaX, schemaY, schemaZ],
       new Set(["Y"])
