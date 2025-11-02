@@ -1,19 +1,28 @@
-import type { PluginSchemaArray } from "./bundleArray";
-import type { PluginCommandSchemaArrayEx3 } from "./commandsArray";
-import type { PluginParamEx, PluginParam } from "./paramItem";
 import type {
-  StructRefParam,
-  StructArrayRefParam,
+  PluginCommandSchemaArray,
+  PluginCommandSchemaArrayEx3,
+} from "./arrayCommands";
+import type {
+  PluginStructSchemaArray,
+  PluginStructSchemaArrayFilterd,
+} from "./arrayStructs";
+import type {
+  PluginParam,
+  PluginParamEx,
+  StructPluginParam,
+} from "./paramItem";
+import type {
   RpgVariableParam,
   RpgVariableArrayParam,
   FileParam,
   FileArrayParam,
 } from "./primitive";
-import type { PluginStructSchemaArrayFilterd } from "./structs";
 
-export type StructPluginParam = PluginParamEx<
-  StructRefParam | StructArrayRefParam
->;
+export interface PluginSchemaArray {
+  commands: PluginCommandSchemaArray[];
+  params: PluginParam[];
+  structs: PluginStructSchemaArray[];
+}
 
 export interface PluginSchemaArrayEx2<T extends PluginParam>
   extends PluginSchemaArray {
