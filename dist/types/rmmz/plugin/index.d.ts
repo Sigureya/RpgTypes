@@ -1,5 +1,3 @@
 export * from './core';
-export type { ClassifiedPluginParams, ClassifiedPluginParamsEx, } from './classifyTypes';
-export { classifyPluginParams } from './classify';
-export { createStructMap } from './core';
+export type { ClassifiedPluginParams, ClassifiedPluginParamsEx, } from './core/params/types/classifyTypes';
 export { pluginSourceToJSON } from './plugin';

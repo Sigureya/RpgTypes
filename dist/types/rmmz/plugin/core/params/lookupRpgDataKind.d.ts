@@ -1,7 +1,7 @@
 import { SourceIdentifier } from '../../../../libs';
 import { SourceIdUnion_RpgData } from '../../../rpg';
 import { SourceId_SystemSwitches, SourceId_SystemVariables } from '../../../system';
-import { DataKind_SystemUnion, DataKind_RpgUnion } from './rpgDataTypesNames';
+import { DataKind_SystemUnion, DataKind_RpgUnion } from './types/rpgDataTypesNames';
 export interface SourceId_RmmzUnknown extends SourceIdentifier {
     author: "rmmz";
     module: "unknown";

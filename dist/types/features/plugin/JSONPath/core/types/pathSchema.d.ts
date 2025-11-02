@@ -1,4 +1,4 @@
-import { ArrayParamTypes, PluginParam } from '../../../../../rmmz/plugin';
+import { ArrayParamTypes, PluginParamEx } from '../../../../../rmmz/plugin';
 export interface StructPropertysPath {
     structName: string;
     scalas: string | undefined;
@@ -6,7 +6,7 @@ export interface StructPropertysPath {
 }
 export interface PathPair {
     path: string;
-    param: PluginParam<ArrayParamTypes>;
+    param: PluginParamEx<ArrayParamTypes>;
 }
 export interface StructPathError {
     path: string;
