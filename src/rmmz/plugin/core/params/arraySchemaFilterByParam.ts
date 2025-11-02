@@ -11,6 +11,7 @@ import type {
   PluginSchemaArrayEx2,
   PluginStructSchemaArray,
   PluginStructSchemaArrayFilterd,
+  PluginTextSchema,
   PluginVariableSchema,
   PrimitiveParam,
   PrimitiveStringParam,
@@ -27,7 +28,9 @@ import {
   isVariableAttr,
 } from "./typeTest";
 
-export const filterPluginSchemaByStringParam = (schema: PluginSchemaArray) => {
+export const filterPluginSchemaByStringParam = (
+  schema: PluginSchemaArray
+): PluginTextSchema => {
   type Type = PrimitiveStringParam | StringArrayParam;
   return buildFilteredSchema<PluginParamEx<Type>>(schema, hasTextAttr);
 };
