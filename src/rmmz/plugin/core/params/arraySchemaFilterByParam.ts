@@ -1,4 +1,4 @@
-import { findIndirectsFunctional } from "./arraySchemaFilter";
+import { collectDependentStructNames } from "./arraySchemaDependent";
 import type {
   FileArrayParam,
   FileParam,
@@ -81,7 +81,7 @@ const buildFilteredSchema = <T extends PluginParam>(
     return s.params.some((p) => predicate(p));
   });
   const directTypeNames = new Set<string>(base.map((s) => s.struct));
-  const depTypesName: Set<string> = findIndirectsFunctional(
+  const depTypesName: Set<string> = collectDependentStructNames(
     schema.structs,
     directTypeNames
   );

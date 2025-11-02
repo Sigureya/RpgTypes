@@ -76,13 +76,13 @@ const A = (r) => r.kind.endsWith("[]"), fr = (r, e) => !!A(r) && r.kind === `${e
       };
     }, { names: a, changed: !0 }).names;
   }(Object.keys(t), t, new Set(e));
-}, D = (r, e, t) => {
+}, I = (r, e, t) => {
   const n = e.get(r);
   return n ? n.filter((c) => ((a, o) => !(!j(a) && !_(a) || !a.struct || o.has(a.struct)))(c, t)).flatMap((c) => {
     const a = c.struct;
-    return t.add(a), [a, ...D(a, e, t)];
+    return t.add(a), [a, ...I(a, e, t)];
   }) : [];
-}, Ar = (r, e) => D(r, e, /* @__PURE__ */ new Set()), M = (r, e) => Object.entries(e).reduce((t, [n, c]) => {
+}, Ar = (r, e) => I(r, e, /* @__PURE__ */ new Set()), M = (r, e) => Object.entries(e).reduce((t, [n, c]) => {
   if (n in r) {
     const a = r[n];
     if (typeof a == "string") return { ...t, [n]: c(a) };
@@ -113,7 +113,7 @@ const A = (r) => r.kind.endsWith("[]"), fr = (r, e) => !!A(r) && r.kind === `${e
 }]), blockType: P, structName: void 0, locale: void 0, lines: [] } : { ...r, blockType: P, structName: void 0, lines: [] }, er = (r) => r.currentOption ? { items: r.items.concat({
   option: r.currentOption,
   value: r.currentOption
-}) } : r, J = "help", w = "kind", T = "text", L = "struct", Z = (r) => {
+}) } : r, J = "help", S = "kind", N = "text", L = "struct", Z = (r) => {
   const e = JSON.parse(r);
   return Array.isArray(e) ? e.map(v) : typeof e == "object" && e !== null ? Object.fromEntries(Object.entries(e).map(([t, n]) => [t, v(n)])) : e;
 }, v = (r) => {
@@ -125,7 +125,7 @@ const A = (r) => r.kind.endsWith("[]"), fr = (r, e) => !!A(r) && r.kind === `${e
     return r;
   }
 }, tr = (r) => {
-  if (w in r.attr) {
+  if (S in r.attr) {
     const e = nr[r.attr.kind];
     if (e) return e(r);
   }
@@ -135,7 +135,7 @@ const A = (r) => r.kind.endsWith("[]"), fr = (r, e) => !!A(r) && r.kind === `${e
   text: s,
   desc: s,
   parent: s
-}, I = (r) => f("string", "", r.attr, C), V = (r) => {
+}, V = (r) => f("string", "", r.attr, C), D = (r) => {
   const e = { default: (t) => Z(t), text: s, desc: s, parent: s };
   return O("string[]", r.attr, e);
 }, l = (r, e) => {
@@ -169,10 +169,10 @@ const A = (r) => r.kind.endsWith("[]"), fr = (r, e) => !!A(r) && r.kind === `${e
     };
     return O("number[]", r.attr, e);
   },
-  string: I,
-  "string[]": V,
-  multiline_string: I,
-  "multiline_string[]": V,
+  string: V,
+  "string[]": D,
+  multiline_string: V,
+  "multiline_string[]": D,
   combo: (r) => {
     var t;
     const e = ((t = r.options) == null ? void 0 : t.map((n) => n.option)) ?? [];
@@ -222,7 +222,7 @@ const A = (r) => r.kind.endsWith("[]"), fr = (r, e) => !!A(r) && r.kind === `${e
     const e = { default: (t) => Z(t), text: s, desc: s, parent: s, dir: s };
     return { dir: "", ...O("file[]", r.attr, e) };
   }
-}, Tr = (r) => new Map(r.map((e) => [e.struct, e.params.map((t) => t.attr)])), S = (r) => ({ ...typeof r.desc == "string" ? { desc: r.desc } : {}, ...typeof r.text == "string" ? { text: r.text } : {} }), k = (r) => {
+}, Nr = (r) => new Map(r.map((e) => [e.struct, e.params.map((t) => t.attr)])), w = (r) => ({ ...typeof r.desc == "string" ? { desc: r.desc } : {}, ...typeof r.text == "string" ? { text: r.text } : {} }), k = (r) => {
   const e = ar(r), t = cr(e);
   return sr(t);
 }, ar = (r) => {
@@ -237,7 +237,7 @@ const A = (r) => r.kind.endsWith("[]"), fr = (r, e) => !!A(r) && r.kind === `${e
 }, sr = (r) => r.currentParam ? { ...r, params: [...r.params, r.currentParam], currentParam: null, currentContext: null } : r, cr = (r) => {
   if (!r.currentCommand) return r;
   const e = r.currentParam ? [...r.currentCommand.args, r.currentParam] : r.currentCommand.args, t = {
-    ...S(r.currentCommand),
+    ...w(r.currentCommand),
     command: r.currentCommand.command,
     args: e
   };
@@ -292,7 +292,7 @@ const A = (r) => r.kind.endsWith("[]"), fr = (r, e) => !!A(r) && r.kind === `${e
   currentOption: null,
   dependencies: { base: [], orderBefore: [], orderAfter: [] },
   meta: {}
-}), p = (r, e, t) => r.currentParam && !(e in r.currentParam.attr) ? { ...r, currentParam: { ...r.currentParam, attr: { ...r.currentParam.attr, [e]: t } } } : r, N = (r, e, t) => ({
+}), p = (r, e, t) => r.currentParam && !(e in r.currentParam.attr) ? { ...r, currentParam: { ...r.currentParam, attr: { ...r.currentParam.attr, [e]: t } } } : r, T = (r, e, t) => ({
   ...r,
   meta: { [e]: t, ...r.meta }
 }), $ = {
@@ -300,11 +300,11 @@ const A = (r) => r.kind.endsWith("[]"), fr = (r, e) => !!A(r) && r.kind === `${e
     const t = k(r);
     return t.params.some((n) => n.name === e) ? t : { ...t, currentContext: "param", currentParam: { name: e, attr: {} } };
   },
-  text: (r, e) => r.currentParam ? p(r, T, e) : r.currentCommand && !(T in r.currentCommand) ? { ...r, currentCommand: {
-    ...S(r.currentCommand),
+  text: (r, e) => r.currentParam ? p(r, N, e) : r.currentCommand && !(N in r.currentCommand) ? { ...r, currentCommand: {
+    ...w(r.currentCommand),
     command: r.currentCommand.command,
     args: r.currentCommand.args,
-    [T]: e
+    [N]: e
   } } : r,
   desc: (r, e) => r.currentParam ? p(r, "desc", e) : r.currentCommand ? { ...r, currentCommand: { ...r.currentCommand, desc: e } } : r,
   command: (r, e) => {
@@ -317,7 +317,7 @@ const A = (r) => r.kind.endsWith("[]"), fr = (r, e) => !!A(r) && r.kind === `${e
       ...r,
       currentParam: { name: e, attr: {} }
     };
-    const t = { ...S(r.currentCommand), command: r.currentCommand.command, args: r.currentCommand.args.concat(r.currentParam) };
+    const t = { ...w(r.currentCommand), command: r.currentCommand.command, args: r.currentCommand.args.concat(r.currentParam) };
     return {
       ...r,
       commands: r.commands,
@@ -344,9 +344,9 @@ const A = (r) => r.kind.endsWith("[]"), fr = (r, e) => !!A(r) && r.kind === `${e
   type: (r, e) => {
     if (((t) => t.endsWith(">") && t.startsWith("struct<"))(e)) {
       const t = e.slice(7, -1), n = p(r, L, t);
-      return p(n, w, L);
+      return p(n, S, L);
     }
-    return r.currentParam ? p(r, w, e) : r;
+    return r.currentParam ? p(r, S, e) : r;
   },
   default: (r, e) => p(r, "default", e),
   on: (r, e) => p(r, "on", e),
@@ -368,9 +368,9 @@ const A = (r) => r.kind.endsWith("[]"), fr = (r, e) => !!A(r) && r.kind === `${e
     };
     var t, n;
   },
-  author: (r, e) => N(r, "author", e),
-  plugindesc: (r, e) => N(r, "plugindesc", e),
-  url: (r, e) => N(r, "url", e)
+  author: (r, e) => T(r, "author", e),
+  plugindesc: (r, e) => T(r, "plugindesc", e),
+  url: (r, e) => T(r, "url", e)
 }, lr = (r) => ({
   target: "MZ",
   meta: r.meta,
@@ -381,12 +381,12 @@ const A = (r) => r.kind.endsWith("[]"), fr = (r, e) => !!A(r) && r.kind === `${e
   desc: e.desc,
   text: e.text,
   args: B(e.args)
-}])), pr = (r) => Object.fromEntries(r.map((e) => [e.name, { params: B(e.params) }])), Nr = (r) => ((e) => lr(or(e)))(r);
+}])), pr = (r) => Object.fromEntries(r.map((e) => [e.name, { params: B(e.params) }])), Tr = (r) => ((e) => lr(or(e)))(r);
 export {
   vr as classifyPluginParams,
+  Cr as collectDependentStructNames,
   tr as compileAttributes,
-  Tr as createStructMap,
-  Cr as findIndirectsFunctional,
+  Nr as createStructMap,
   gr as hasNumberValueParam,
   hr as hasTextAttr,
   A as isArrayParam,
@@ -406,6 +406,6 @@ export {
   kr as isVariableAttr,
   _r as lookupKind,
   br as paramHasText,
-  Nr as pluginSourceToJSON,
+  Tr as pluginSourceToJSON,
   Ar as structDependencies
 };
