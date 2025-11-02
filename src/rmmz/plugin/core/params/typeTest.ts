@@ -22,6 +22,12 @@ export const isArrayParam = <T extends PrimitiveParam>(
   return param.kind.endsWith("[]");
 };
 
+export const isArrayAttr = <T extends PrimitiveParam>(
+  param: PluginParam
+): param is PluginParamEx<Extract<T, ArrayParam>> => {
+  return isArrayParam(param.attr);
+};
+
 export const isArrayParamEx = <T extends PrimitiveParam, K extends ParamKinds>(
   param: T,
   kind: K
@@ -56,15 +62,23 @@ export const isStructArrayParam = (
   return param.kind === "struct[]";
 };
 
+export const isStructArrayAttr = (
+  param: PluginParam
+): param is PluginParamEx<StructArrayRefParam> => {
+  return param.attr.kind === "struct[]";
+};
+
 export const paramHasText = (
   param: PrimitiveParam
 ): param is PrimitiveStringParam | StringArrayParam => {
   return TABLE[param.kind]?.hasText === true;
 };
 
-export const hasTextAttr = (
-  param: PluginParam
-): param is PluginParamEx<PrimitiveStringParam | StringArrayParam> => {
+export const hasTextAttr = <P extends PrimitiveParam>(
+  param: PluginParamEx<P>
+): param is PluginParamEx<
+  Extract<P, PrimitiveStringParam | StringArrayParam>
+> => {
   return TABLE[param.attr.kind]?.hasText === true;
 };
 
