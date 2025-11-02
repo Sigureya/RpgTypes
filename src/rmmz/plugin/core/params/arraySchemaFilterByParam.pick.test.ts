@@ -1,7 +1,11 @@
 import { describe, expect, test } from "vitest";
 import { filterPluginSchemaByParam } from "./arraySchemaFilterByParam";
 import type {
+  NumberArrayParam,
+  NumberParam,
   PluginCommandSchemaArrayEx,
+  PluginParam,
+  PluginParamEx,
   PluginSchemaArray,
   PluginStructSchemaArrayEx,
 } from "./types";
@@ -52,12 +56,15 @@ const pluginSchema: PluginSchemaArray = {
   params: [],
 };
 
+const isNumberParam = (
+  param: PluginParam
+): param is PluginParamEx<NumberParam | NumberArrayParam> => {
+  return param.attr.kind === "number" || param.attr.kind === "number[]";
+};
+
 describe("filterPluginSchemaByParam", () => {
   test("", () => {
-    const result = filterPluginSchemaByParam(
-      pluginSchema,
-      (param) => param.attr.kind === "number[]" || param.attr.kind === "number"
-    );
+    const result = filterPluginSchemaByParam(pluginSchema, isNumberParam);
     const expected: PluginSchemaArray = {
       structs: [
         {

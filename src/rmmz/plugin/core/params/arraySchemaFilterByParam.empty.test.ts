@@ -25,7 +25,9 @@ describe("filterPluginSchemaByParam - returns empty schema", () => {
       structs: [],
       params: [],
     };
-    const result = filterPluginSchemaByParam(plugin, mockFn);
+    const result = filterPluginSchemaByParam(plugin, (p): p is PluginParam =>
+      mockFn(p)
+    );
     const expected: PluginSchemaArray = {
       commands: [],
       structs: [],
@@ -41,7 +43,9 @@ describe("filterPluginSchemaByParam - returns empty schema", () => {
       structs: [emptyStructSchema],
       params: [],
     };
-    const result = filterPluginSchemaByParam(plugin, mockFn);
+    const result = filterPluginSchemaByParam(plugin, (p): p is PluginParam =>
+      mockFn(p)
+    );
     const expected: PluginSchemaArray = {
       commands: [],
       structs: [],
@@ -60,7 +64,9 @@ describe("filterPluginSchemaByParam - returns empty schema", () => {
         { name: "dummyArray", attr: { kind: "struct[]", struct: "Empty" } },
       ],
     };
-    const result = filterPluginSchemaByParam(plugin, mockFn);
+    const result = filterPluginSchemaByParam(plugin, (p): p is PluginParam =>
+      mockFn(p)
+    );
     const expected: PluginSchemaArray = {
       commands: [],
       structs: [],

@@ -94,8 +94,9 @@ describe("arraySchemaFilterByParam", () => {
     });
     test("returns empty schema when no params are number", () => {
       const mockFn = vi.fn((p: PluginParam) => isNumberParam(p));
-      const result = filterPluginSchemaByParam(pluginSchemaStringOnly, (p) =>
-        mockFn(p)
+      const result = filterPluginSchemaByParam(
+        pluginSchemaStringOnly,
+        (p): p is PluginParam => mockFn(p)
       );
       const expected: PluginSchemaArray = {
         commands: [],
@@ -121,8 +122,9 @@ describe("arraySchemaFilterByParam", () => {
     });
     test("returns empty schema when no params are string", () => {
       const mockFn = vi.fn((p: PluginParam) => isStringParam(p));
-      const result = filterPluginSchemaByParam(pluginSchemaNumberOnly, (p) =>
-        mockFn(p)
+      const result = filterPluginSchemaByParam(
+        pluginSchemaNumberOnly,
+        (p): p is PluginParam => mockFn(p)
       );
       const expected: PluginSchemaArray = {
         commands: [],
