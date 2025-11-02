@@ -1,5 +1,5 @@
 import { describe, test, expect } from "vitest";
-import type { StructRefParam, StructArrayRefParam } from "./types/primitive";
+import type { StructRefParam, StructArrayRefParam } from "./types";
 import {
   isArrayParam,
   isArrayParamEx,
