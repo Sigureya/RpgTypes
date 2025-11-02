@@ -1,9 +1,5 @@
 import { PrimitiveParam } from './paramUnion';
-import { BooleanParam, StructArrayRefParam, StructRefParam, AnyStringParam } from './primitiveParams';
-export interface PrimitiveStructBase {
-    struct: string;
-    params: Record<string, PrimitiveParam>;
-}
+import { BooleanParam, AnyStringParam, StructArrayRefParam, StructRefParam } from './primitive';
 export type PrimitiveStructParams<T extends object> = {
     [K in Extract<keyof T, string>]: PluginSchemaType<T[K]>;
 };

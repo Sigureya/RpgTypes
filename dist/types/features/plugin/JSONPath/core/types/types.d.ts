@@ -1,5 +1,5 @@
 import { JSONPathType } from '../../../../../libs';
-import { PluginParam, PrimitiveParam } from '../../../../../rmmz/plugin';
+import { PluginParam } from '../../../../../rmmz/plugin';
 export interface ParamJSONPath {
     parent: string;
     path: string;
@@ -14,7 +14,7 @@ export interface ParamJSONPathSturct {
 export interface ParamJSONPathEx<T> extends ParamJSONPath {
     path: JSONPathType<T>;
     parent: string;
-    param: PluginParam<PrimitiveParam>;
+    param: PluginParam;
 }
 export interface ParamJSONPathSturctEx<T> extends ParamJSONPathSturct {
     scalas: ParamJSONPathEx<T>[];

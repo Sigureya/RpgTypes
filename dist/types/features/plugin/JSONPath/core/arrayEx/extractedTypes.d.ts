@@ -1,8 +1,8 @@
 import { JSONPathType } from '../../../../../libs';
-import { ArrayParamTypes, PluginParam, PluginStructParamTypeEx, ScalaParam } from '../../../../../rmmz/plugin';
+import { ArrayParamTypes, PluginParamEx, PluginStructParamTypeEx, ScalaParam } from '../../../../../rmmz/plugin';
 export interface ArrayPathPair {
     path: string;
-    param: PluginParam<ArrayParamTypes>;
+    param: PluginParamEx<ArrayParamTypes>;
 }
 export interface ArrayParamPairEx<T> {
     path: JSONPathType<T>;
@@ -11,18 +11,18 @@ export interface ArrayParamPairEx<T> {
 export interface StringSequenceParamValues {
     values: string[];
     valueKind: "string";
-    param: PluginParam<Extract<ArrayParamTypes, {
+    param: PluginParamEx<Extract<ArrayParamTypes, {
         default: string[];
     }>>;
 }
 export interface NumberSequenceParamValues {
     values: number[];
     valueKind: "number";
-    param: PluginParam<Extract<ArrayParamTypes, {
+    param: PluginParamEx<Extract<ArrayParamTypes, {
         default: number[];
     }>>;
 }
 export interface ScalaPathResult {
     value: number | string | boolean;
-    param: PluginParam<ScalaParam>;
+    param: PluginParamEx<ScalaParam>;
 }

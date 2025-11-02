@@ -1,4 +1,4 @@
-import { ArrayParamBase, ParamBase } from '../../../../../rmmz/plugin/core/paramBase';
+import { ArrayParamBase, ParamBase } from '../../../../../rmmz/plugin';
 import { JSONSchemaType } from 'ajv';
 export declare const compileArrayField: <T, S extends JSONSchemaType<T>>(data: ArrayParamBase<T>, itemSchema: S) => {
     default?: T[] | undefined;
