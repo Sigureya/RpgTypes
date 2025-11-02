@@ -23,7 +23,7 @@ export const isArrayParam = <T extends PrimitiveParam>(
 };
 
 export const isArrayAttr = <T extends PrimitiveParam>(
-  param: PluginParam
+  param: PluginParamEx<T>
 ): param is PluginParamEx<Extract<T, ArrayParam>> => {
   return isArrayParam(param.attr);
 };
