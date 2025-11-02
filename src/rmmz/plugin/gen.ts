@@ -10,7 +10,7 @@ import type {
   ScalaParam,
   ArrayParamTypes,
   PrimitiveParam,
-} from "./core/paramUnion";
+} from "./core/paramTypes/paramUnion";
 
 export interface Handlers2<ST, STA, S, A> {
   struct: (

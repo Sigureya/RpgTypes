@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import type { FileParam, FileArrayParam } from "./primitiveParams";
+import type { FileParam, FileArrayParam } from "./primitive";
 import {
   isArrayParam,
   paramHasText,

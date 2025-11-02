@@ -3,7 +3,7 @@ import type {
   PluginParam,
   PluginSchemaArray,
   PluginStructSchemaArray,
-} from "./core/arraySchemaTypes";
+} from "./core/paramTypes/arraySchemaTypes";
 import { compileAttributes } from "./core/attributes";
 import type {
   PluginCommandTokens,

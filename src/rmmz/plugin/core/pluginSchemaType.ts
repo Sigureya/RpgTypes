@@ -1,10 +1,10 @@
-import type { PrimitiveParam } from "./paramUnion";
 import type {
+  AnyStringParam,
   BooleanParam,
   StructArrayRefParam,
   StructRefParam,
-  AnyStringParam,
-} from "./primitiveParams";
+} from "./paramTypes";
+import type { PrimitiveParam } from "./paramTypes/paramUnion";
 
 export interface PrimitiveStructBase {
   struct: string;

@@ -13,7 +13,7 @@ import {
   isStructParam,
   isStructArrayParam,
   isArrayParam,
-} from "./core/typeTest";
+} from "./core/paramTypes/typeTest";
 
 export const classifyPluginParams = (
   structSchema: PluginStructSchemaArray

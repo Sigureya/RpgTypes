@@ -4,7 +4,7 @@ import type {
   StructRefParam,
   StructArrayRefParam,
   NumberParam,
-} from "./primitiveParams";
+} from "./primitive";
 import { isStructAttr } from "./typeTest";
 
 describe("isStructAttr", () => {

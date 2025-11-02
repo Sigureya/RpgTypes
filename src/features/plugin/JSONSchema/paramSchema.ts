@@ -5,6 +5,7 @@ import type {
   FileParam,
   NumberArrayParam,
   NumberParam,
+  ParamBase,
   RpgDataIdParam,
   SelectParam,
   StringArrayParam,
@@ -12,7 +13,6 @@ import type {
   StructArrayRefParam,
   StructRefParam,
 } from "@RpgTypes/rmmz/plugin";
-import type { ParamBase } from "@RpgTypes/rmmz/plugin/core/paramBase";
 import type { JSONSchemaType } from "ajv";
 import type { DiscriminatedUnionSchemaType3 } from "src/libs/templates/discriminator/discriminator3";
 

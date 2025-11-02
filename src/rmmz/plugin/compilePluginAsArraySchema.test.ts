@@ -4,7 +4,7 @@ import type {
   PluginCommandSchemaArray,
   PluginSchemaArray,
   PluginStructSchemaArray,
-} from "./core/arraySchemaTypes";
+} from "./core/paramTypes/arraySchemaTypes";
 import type { PluginTokens } from "./core/parse/types/types";
 
 describe("compilePluginAsArraySchema", () => {

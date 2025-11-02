@@ -16,11 +16,12 @@ import type {
 } from "./arraySchemaTypes2";
 import type { PrimitiveParam, PrimitiveStringParam } from "./paramUnion";
 import type {
-  FileArrayParam,
-  FileParam,
+  StringArrayParam,
+  RpgVariableParam,
   RpgVariableArrayParam,
-} from "./primitiveParams";
-import type { RpgVariableParam, StringArrayParam } from "./primitiveParams";
+  FileParam,
+  FileArrayParam,
+} from "./primitive";
 import {
   hasTextAttr,
   isFileAttr,

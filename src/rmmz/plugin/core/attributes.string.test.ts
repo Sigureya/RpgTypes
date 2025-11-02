@@ -1,8 +1,8 @@
 import { describe, expect, test } from "vitest";
 import type { ParamSoruceRecord } from "./attributes";
 import { compileAttributes } from "./attributes";
+import type { StringParam, StringArrayParam } from "./paramTypes";
 import type { PluginParamTokens } from "./parse/types/types";
-import type { StringArrayParam, StringParam } from "./primitiveParams";
 
 describe("compileAttributes - string", () => {
   test("minimum set", () => {

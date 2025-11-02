@@ -1,26 +1,26 @@
 import type { MappingTable } from "./mapping/mapping";
 import { compileParam, compileArrayParam } from "./mapping/mapping";
-import type { PrimitiveParam } from "./paramUnion";
-import { KEYWORD_KIND } from "./parse/types/keyword/constants";
-import type { OptionItem } from "./parse/types/selectOption";
-import type { PluginParamTokens } from "./parse/types/types";
 import type {
   BooleanParam,
-  NumberParam,
+  ComboParam,
+  FileArrayParam,
   FileParam,
   GenericIdParam,
   NumberArrayParam,
-  StringArrayParam,
-  FileArrayParam,
-  StringParam,
-  ComboParam,
+  NumberParam,
   SelectParam,
-} from "./primitiveParams";
-import { parseDeepJSON } from "./rmmzJSON";
+  StringArrayParam,
+  StringParam,
+} from "./paramTypes";
+import type { PrimitiveParam } from "./paramTypes/paramUnion";
 import type {
   DataKind_RpgUnion,
   DataKind_SystemUnion,
-} from "./rpgData/rpgDataTypesNames";
+} from "./paramTypes/rpgData/rpgDataTypesNames";
+import { KEYWORD_KIND } from "./parse/types/keyword/constants";
+import type { OptionItem } from "./parse/types/selectOption";
+import type { PluginParamTokens } from "./parse/types/types";
+import { parseDeepJSON } from "./rmmzJSON";
 
 type MappingTableEx<T> = MappingTable<Omit<T, "kind">>;
 

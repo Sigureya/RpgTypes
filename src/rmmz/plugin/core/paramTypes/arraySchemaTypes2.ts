@@ -10,9 +10,9 @@ import type {
   StructArrayRefParam,
   RpgVariableParam,
   RpgVariableArrayParam,
-  FileArrayParam,
   FileParam,
-} from "./primitiveParams";
+  FileArrayParam,
+} from "./primitive";
 
 export type StructPluginParam = PluginParamEx<
   StructRefParam | StructArrayRefParam
