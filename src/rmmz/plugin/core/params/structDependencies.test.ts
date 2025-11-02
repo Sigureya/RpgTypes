@@ -3,8 +3,8 @@ import { structDependencies } from "./structDependencies";
 import type {
   PluginStructSchemaArrayEx,
   PluginStructSchemaArray,
-} from "./types/arraySchemaTypes";
-import type { PrimitiveParam } from "./types/paramUnion";
+  PrimitiveParam,
+} from "./types";
 
 interface A {
   b: B;
