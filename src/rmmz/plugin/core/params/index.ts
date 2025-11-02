@@ -1,3 +1,4 @@
+export * from "./arraySchemaFilterByParam";
 export * from "./classify";
 export * from "./lookupRpgDataKind";
 export * from "./typeTest";
