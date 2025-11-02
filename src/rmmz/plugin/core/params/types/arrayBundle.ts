@@ -3,14 +3,14 @@ import type {
   PluginCommandSchemaArrayEx3,
 } from "./arrayCommands";
 import type {
-  PluginStructSchemaArray,
-  PluginStructSchemaArrayFilterd,
-} from "./arrayStructs";
-import type {
   PluginParam,
   PluginParamEx,
   StructPluginParam,
-} from "./paramItem";
+} from "./arrayParamItems";
+import type {
+  PluginStructSchemaArray,
+  PluginStructSchemaArrayFilterd,
+} from "./arrayStructs";
 import type {
   RpgVariableParam,
   RpgVariableArrayParam,

@@ -1,4 +1,4 @@
-import type { PluginParam } from "./paramItem";
+import type { PluginParam } from "./arrayParamItems";
 import type { PluginStructParamTypeEx } from "./pluginSchemaType";
 
 export interface PluginCommandSchemaArray {
