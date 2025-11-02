@@ -1,10 +1,10 @@
 import type {
   PluginCommandSchemaArray,
   PluginParam,
-  PluginSchemaArray,
   PluginStructSchemaArray,
-} from "./core/arraySchemaTypes";
-import { compileAttributes } from "./core/attributes";
+  PluginSchemaArray,
+} from "./core";
+import { compileAttributes } from "./core";
 import type {
   PluginCommandTokens,
   PluginParamTokens,

@@ -5,7 +5,7 @@ import type {
   ComboParam,
   SelectParam,
   FileParam,
-} from "./primitiveParams";
+} from "./primitive";
 import {
   isStringValueParam,
   isArrayParam,

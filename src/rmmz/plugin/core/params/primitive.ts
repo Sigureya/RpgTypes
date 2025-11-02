@@ -1,17 +1,8 @@
 import type { ParamBase } from "./paramBase";
-import type {
-  DataKind_RpgUnion,
-  DataKind_SystemUnion,
-} from "./rpgData/rpgDataTypesNames";
 
 export interface ArrayParam {
   kind: `${string}[]`;
   default: unknown[];
-}
-
-export interface RpgDataIdParam extends ParamBase {
-  kind: DataKind_RpgUnion;
-  default: number;
 }
 
 export interface RpgVariableParam extends ParamBase {
@@ -31,11 +22,6 @@ export interface RpgSwitchParam extends ParamBase {
 
 export interface RpgSwitchArrayParam extends ParamBase {
   kind: `switch[]`;
-  default: number[];
-}
-
-export interface RpgDataIdArrayParam extends ParamBase {
-  kind: `${DataKind_RpgUnion}[]`;
   default: number[];
 }
 
@@ -85,16 +71,6 @@ export interface NumberArrayParam extends ParamBase {
 export interface GenericIdParam extends ParamBase {
   kind: "id";
   default: number;
-}
-
-export interface SystemDataIdParam extends ParamBase {
-  kind: DataKind_SystemUnion;
-  default: number;
-}
-
-export interface SystemDataIdArrayParam extends ParamBase {
-  kind: `${DataKind_SystemUnion}[]`;
-  default: number[];
 }
 
 export interface FileParam extends ParamBase {

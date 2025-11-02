@@ -1,10 +1,10 @@
 import { test, expect, describe } from "vitest";
 import { compilePluginAsArraySchema } from "./compilePluginAsArraySchema";
 import type {
-  PluginCommandSchemaArray,
   PluginSchemaArray,
+  PluginCommandSchemaArray,
   PluginStructSchemaArray,
-} from "./core/arraySchemaTypes";
+} from "./core/params/arraySchemaTypes";
 import type { PluginTokens } from "./core/parse/types/types";
 
 describe("compilePluginAsArraySchema", () => {

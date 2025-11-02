@@ -1,10 +1,10 @@
 import { describe, test, expect } from "vitest";
 import type {
-  StringArrayParam,
   StringParam,
-  StructArrayRefParam,
+  StringArrayParam,
   StructRefParam,
-} from "./primitiveParams";
+  StructArrayRefParam,
+} from "./primitive";
 import {
   isArrayParam,
   isArrayParamEx,

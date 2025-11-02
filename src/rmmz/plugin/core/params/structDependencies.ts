@@ -1,5 +1,5 @@
 import type { PrimitiveParam } from "./paramUnion";
-import type { StructRefParam, StructArrayRefParam } from "./primitiveParams";
+import type { StructRefParam, StructArrayRefParam } from "./primitive";
 import { isStructParam, isStructArrayParam } from "./typeTest";
 
 const hasStruct = (

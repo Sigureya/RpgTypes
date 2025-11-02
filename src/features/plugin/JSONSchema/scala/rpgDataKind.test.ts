@@ -1,7 +1,10 @@
 import { describe, expect, test } from "vitest";
 import type { SourceIdentifier } from "@RpgTypes/libs";
-import type { RpgDataIdParam, SystemDataIdParam } from "@RpgTypes/rmmz/plugin";
-import { lookupKind } from "@RpgTypes/rmmz/plugin/core/rpgData/lookup";
+import {
+  lookupKind,
+  type RpgDataIdParam,
+  type SystemDataIdParam,
+} from "@RpgTypes/rmmz/plugin";
 import type { JSONSchemaType } from "ajv";
 import { makeRpgIdField, makeRpgIdFieldWithXParam } from "./rpgDataKind";
 import type { X_RmmzParam } from "./x-param/base/x-rpg-param";

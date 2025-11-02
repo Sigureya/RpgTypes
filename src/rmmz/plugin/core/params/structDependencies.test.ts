@@ -1,7 +1,7 @@
 import { describe, expect, test } from "vitest";
 import type {
-  PluginStructSchemaArray,
   PluginStructSchemaArrayEx,
+  PluginStructSchemaArray,
 } from "./arraySchemaTypes";
 import type { PrimitiveParam } from "./paramUnion";
 import { structDependencies } from "./structDependencies";

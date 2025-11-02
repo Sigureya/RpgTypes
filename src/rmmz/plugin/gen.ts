@@ -1,16 +1,14 @@
 /* eslint-disable @functional/no-return-void */
 import type {
-  PluginStructSchemaArray,
-  StructRefParam,
-  StructArrayRefParam,
+  ArrayParamTypes,
   PluginParamEx,
+  PluginStructSchemaArray,
+  PrimitiveParam,
+  ScalaParam,
+  StructArrayRefParam,
+  StructRefParam,
 } from "./core";
 import { isArrayParam, isStructArrayParam, isStructParam } from "./core";
-import type {
-  ScalaParam,
-  ArrayParamTypes,
-  PrimitiveParam,
-} from "./core/paramUnion";
 
 export interface Handlers2<ST, STA, S, A> {
   struct: (

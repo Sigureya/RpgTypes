@@ -2,7 +2,7 @@ import type {
   PluginParamEx,
   PluginStructSchemaArray,
 } from "./arraySchemaTypes";
-import type { StructArrayRefParam, StructRefParam } from "./primitiveParams";
+import type { StructRefParam, StructArrayRefParam } from "./primitive";
 import { isStructAttr } from "./typeTest";
 
 type ParamType = PluginParamEx<StructRefParam | StructArrayRefParam>[];
