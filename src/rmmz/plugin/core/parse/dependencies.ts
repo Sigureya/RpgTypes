@@ -1,4 +1,4 @@
-import type { PluginDependencies } from "./types/pluginDependencies";
+import type { PluginDependencies } from "./types";
 
 export const addBasePlugin = (
   dep: PluginDependencies,
