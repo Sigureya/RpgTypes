@@ -1,3 +1,4 @@
+import type { StructDefParam, StructArrayDefParam } from "./objectSturctDef";
 import type {
   StringParam,
   AnyStringParam,
@@ -24,7 +25,6 @@ import type {
   RpgDataIdParam,
   RpgDataIdArrayParam,
 } from "./rpgDataTypes";
-import type { StructDefParam, StructArrayDefParam } from "./sturctDef";
 
 export type PrimitiveStringParam =
   | StringParam
