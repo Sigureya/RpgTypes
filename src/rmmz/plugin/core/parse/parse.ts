@@ -10,6 +10,13 @@ import {
   handleValue,
 } from "./state";
 import { typeIsStruct } from "./struct";
+import type {
+  ParsedPlugin,
+  StructParseState,
+  PluginCommandTokens,
+  PluginMeta,
+  KeywordEnum,
+} from "./types";
 import {
   KEYWORD_HELP,
   KEYWORD_PARAM,
@@ -26,14 +33,7 @@ import {
   KEYWORD_AUTHOR,
   KEYWORD_PLUGINDESC,
   KEYWORD_URL,
-} from "./types/keyword/constants";
-import type { KeywordEnum } from "./types/keyword/types";
-import type { PluginMeta } from "./types/pluginMeta";
-import type {
-  ParsedPlugin,
-  PluginCommandTokens,
-  StructParseState,
-} from "./types/types";
+} from "./types";
 
 export const parsePlugin = (text: string): ParsedPlugin => {
   const blocks: Block = splitBlock(text);

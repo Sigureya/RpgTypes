@@ -1,10 +1,10 @@
-import { test, expect, describe } from "vitest";
+import { describe, test, expect } from "vitest";
 import { classifyPluginParams } from "./classify";
 import type {
+  PluginStructSchemaArrayEx,
   ClassifiedPluginParams,
   ClassifiedPluginParamsEx,
-} from "./classifyTypes";
-import type { PluginStructSchemaArrayEx } from "./core";
+} from "./types";
 
 interface MockStruct {
   name: string;

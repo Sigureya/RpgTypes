@@ -1,4 +1,4 @@
-import type { ParamKinds, ScalaParam } from "./core";
+import type { ParamKinds } from "./core";
 
 export interface ParamFilter<K extends ParamKinds> {
   kinds: K[];
@@ -14,11 +14,4 @@ export const createParamFilter = <K extends ParamKinds>(
     single: new Set(kinds),
     array: new Set(kinds.map((k): `${K}[]` => `${k}[]`)),
   };
-};
-
-export const ppp = <K extends ParamKinds>(
-  param: ScalaParam,
-  filter: ParamFilter<K>
-): param is Extract<ScalaParam, { kind: K }> => {
-  return filter.single.has(param.kind as K);
 };
