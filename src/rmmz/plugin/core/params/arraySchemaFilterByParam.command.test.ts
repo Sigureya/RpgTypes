@@ -1,9 +1,6 @@
 import { describe, expect, test, vi } from "vitest";
 import { rebuildCommands } from "./arraySchemaFilterByParam";
-import type {
-  PluginCommandSchemaArrayEx,
-  PluginParam,
-} from "./types/arraySchemaTypes";
+import type { PluginCommandSchemaArrayEx, PluginParam } from "./types";
 
 interface UseItem {
   itemId: number;

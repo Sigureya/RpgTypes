@@ -5,7 +5,7 @@ import type {
   PluginParam,
   PluginSchemaArray,
   PluginStructSchemaArray,
-} from "./types/arraySchemaTypes";
+} from "./types";
 
 const emptyStructSchema = {
   struct: "Empty",
