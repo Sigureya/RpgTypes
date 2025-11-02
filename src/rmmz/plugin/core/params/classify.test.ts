@@ -35,8 +35,9 @@ describe("classifyPluginParams", () => {
   };
 
   test("classifies params correctly", () => {
-    const result: ClassifiedPluginParams =
-      classifyPluginParams(mockStructSchema);
+    const result: ClassifiedPluginParams = classifyPluginParams(
+      mockStructSchema.params
+    );
     const expected: ClassifiedPluginParamsEx<MockStruct> = {
       structs: [
         {

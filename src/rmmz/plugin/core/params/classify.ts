@@ -1,7 +1,6 @@
 /* eslint-disable @functional/no-return-void */
 
 import type {
-  PluginStructSchemaArray,
   PluginParamEx,
   StructRefParam,
   StructArrayRefParam,
@@ -24,30 +23,30 @@ import {
 } from "./typeTest";
 
 export const classifyPluginParams = (
-  structSchema: PluginStructSchemaArray
+  params: ReadonlyArray<PluginParam>
 ): ClassifiedPluginParams => {
   return classifyPluginParamsCore(
-    structSchema.params,
+    params,
     (p): p is PluginParamEx<ScalaParam> => true,
     (p): p is PluginParamEx<ArrayParamTypes> => true
   );
 };
 
 export const classifyFileParams = (
-  structSchema: PluginStructSchemaArray
+  params: ReadonlyArray<PluginParam>
 ): ClassifiedPluginFileParams => {
   return classifyPluginParamsCore(
-    structSchema.params,
+    params,
     (p): p is PluginParamEx<FileParam> => p.attr.kind === "file",
     (p): p is PluginParamEx<FileArrayParam> => p.attr.kind === "file[]"
   );
 };
 
 export const classifyTextParams = (
-  structSchema: PluginStructSchemaArray
+  params: ReadonlyArray<PluginParam>
 ): ClassifiedTextParams => {
   return classifyPluginParamsCore(
-    structSchema.params,
+    params,
     (p): p is PluginParamEx<PrimitiveStringParam> => hasTextAttr(p),
     (p) => hasTextAttr(p)
   );
