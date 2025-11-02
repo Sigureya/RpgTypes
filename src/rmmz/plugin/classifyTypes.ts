@@ -5,7 +5,7 @@ import type {
   ArrayParamTypes,
   PluginParamEx,
 } from "./core";
-import type { PluginStructParamTypeEx } from "./core/pluginSchemaType";
+import type { PluginStructParamTypeEx } from "./core/params/pluginSchemaType";
 
 export interface ScalaStruct {
   scalas: PluginParamEx<ScalaParam>[];

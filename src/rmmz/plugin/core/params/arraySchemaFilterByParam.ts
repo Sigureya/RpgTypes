@@ -8,11 +8,11 @@ import type {
   PluginStructSchemaArrayFilterd,
 } from "./arraySchemaTypes";
 import type {
-  PluginCommandSchemaArrayEx,
+  PluginCommandSchemaArrayEx3,
   PluginFileParamsSchema,
   PluginVariableSchema,
   StructPluginParam,
-  PluginSchemaArrayEx,
+  PluginSchemaArrayEx2,
 } from "./arraySchemaTypes2";
 import type { PrimitiveParam, PrimitiveStringParam } from "./paramUnion";
 import type {
@@ -57,7 +57,7 @@ export const filterPluginSchemaByFileParam = (
 export function filterPluginSchemaByParam<T extends PluginParam>(
   schema: PluginSchemaArray,
   predicate: (param: PluginParam) => param is T
-): PluginSchemaArrayEx<T>;
+): PluginSchemaArrayEx2<T>;
 
 export function filterPluginSchemaByParam(
   schema: PluginSchemaArray,
@@ -79,7 +79,7 @@ export function filterPluginSchemaByParam<T extends PluginParam>(
 const buildFilteredSchema = <T extends PluginParam>(
   schema: PluginSchemaArray,
   predicate: (param: PluginParam) => param is T
-): PluginSchemaArrayEx<T> => {
+): PluginSchemaArrayEx2<T> => {
   const base: PluginStructSchemaArray[] = schema.structs.filter((s) => {
     return s.params.some((p) => predicate(p));
   });
@@ -133,8 +133,8 @@ export const rebuildCommands = <T extends PluginParam>(
   commands: ReadonlyArray<PluginCommandSchemaArray>,
   structNames: ReadonlySet<string>,
   predicate: (param: PluginParam) => param is T
-): PluginCommandSchemaArrayEx<T | StructPluginParam>[] => {
-  type R = PluginCommandSchemaArrayEx<T | StructPluginParam>;
+): PluginCommandSchemaArrayEx3<T | StructPluginParam>[] => {
+  type R = PluginCommandSchemaArrayEx3<T | StructPluginParam>;
   return commands.reduce<R[]>((acc, cmd): R[] => {
     const args: (T | StructPluginParam)[] = rebuildParams(
       cmd.args,

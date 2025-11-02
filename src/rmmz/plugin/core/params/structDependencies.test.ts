@@ -1,9 +1,9 @@
 import { describe, expect, test } from "vitest";
 import type {
-  PluginStructSchemaArray,
   PluginStructSchemaArrayEx,
-} from "./paramTypes/arraySchemaTypes";
-import type { PrimitiveParam } from "./paramTypes/paramUnion";
+  PluginStructSchemaArray,
+} from "./arraySchemaTypes";
+import type { PrimitiveParam } from "./paramUnion";
 import { structDependencies } from "./structDependencies";
 
 interface A {

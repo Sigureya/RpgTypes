@@ -1,6 +1,6 @@
-import type { StructArrayRefParam, StructRefParam } from "./paramTypes";
-import type { PrimitiveParam } from "./paramTypes/paramUnion";
-import { isStructParam, isStructArrayParam } from "./paramTypes/typeTest";
+import type { PrimitiveParam } from "./paramUnion";
+import type { StructRefParam, StructArrayRefParam } from "./primitive";
+import { isStructParam, isStructArrayParam } from "./typeTest";
 
 const hasStruct = (
   param: PrimitiveParam,

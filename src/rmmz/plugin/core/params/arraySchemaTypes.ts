@@ -1,5 +1,5 @@
-import type { PluginStructParamTypeEx } from "../pluginSchemaType";
 import type { PrimitiveParam } from "./paramUnion";
+import type { PluginStructParamTypeEx } from "./pluginSchemaType";
 
 export interface PluginParam {
   name: string;

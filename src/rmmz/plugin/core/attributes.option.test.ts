@@ -1,6 +1,6 @@
 import { describe, test, expect } from "vitest";
 import { compileAttributes, type ParamSoruceRecord } from "./attributes";
-import type { ComboParam, SelectParam } from "./paramTypes";
+import type { ComboParam, SelectParam } from "./params";
 import type { PluginParamTokens } from "./parse/types/types";
 
 describe("compileAttributes - combo", () => {

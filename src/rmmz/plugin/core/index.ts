@@ -1,14 +1,6 @@
-export type * from "./paramTypes";
-export type * from "./paramTypes/arraySchemaTypes";
-export type * from "./paramTypes/paramUnion";
-export type * from "./paramTypes/rpgData/rpgDataTypesNames";
-export type * from "./paramTypes/rpgDataTypes";
-export * from "./paramTypes/typeTest";
-export type * from "./pluginEntriesEx";
-export type * from "./pluginEntryTypes";
+export * from "./params";
 export type * from "./pluginJSONTypes";
-export type * from "./pluginSchemaType";
 export { compileAttributes } from "./attributes";
 export { createStructMap } from "./aaCreartStructMap";
-export { isRmmzDataKind, lookupKind } from "./paramTypes/rpgData/lookup";
-export { structDependencies } from "./structDependencies";
+export { isRmmzDataKind, lookupKind } from "./params/rpgData/lookup";
+export { structDependencies } from "./params/structDependencies";

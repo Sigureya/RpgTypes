@@ -1,4 +1,4 @@
-import type { PrimitiveParam } from "./paramTypes/paramUnion";
+import type { PrimitiveParam } from "./params";
 import type { PluginDependencies } from "./parse/types/pluginDependencies";
 import type { PluginStructBodyTemplate } from "./struct/types";
 

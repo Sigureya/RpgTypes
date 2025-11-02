@@ -9,11 +9,7 @@ import type {
   StructArrayRefParam,
   StructRefParam,
 } from "./core";
-import {
-  isStructParam,
-  isStructArrayParam,
-  isArrayParam,
-} from "./core/paramTypes/typeTest";
+import { isStructParam, isStructArrayParam, isArrayParam } from "./core";
 
 export const classifyPluginParams = (
   structSchema: PluginStructSchemaArray

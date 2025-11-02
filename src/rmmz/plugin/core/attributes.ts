@@ -1,22 +1,20 @@
 import type { MappingTable } from "./mapping/mapping";
 import { compileParam, compileArrayParam } from "./mapping/mapping";
 import type {
-  BooleanParam,
-  ComboParam,
-  FileArrayParam,
-  FileParam,
-  GenericIdParam,
-  NumberArrayParam,
-  NumberParam,
-  SelectParam,
-  StringArrayParam,
   StringParam,
-} from "./paramTypes";
-import type { PrimitiveParam } from "./paramTypes/paramUnion";
-import type {
+  ComboParam,
+  SelectParam,
+  BooleanParam,
+  NumberParam,
+  NumberArrayParam,
+  StringArrayParam,
+  FileParam,
+  FileArrayParam,
+  GenericIdParam,
   DataKind_RpgUnion,
   DataKind_SystemUnion,
-} from "./paramTypes/rpgData/rpgDataTypesNames";
+  PrimitiveParam,
+} from "./params";
 import { KEYWORD_KIND } from "./parse/types/keyword/constants";
 import type { OptionItem } from "./parse/types/selectOption";
 import type { PluginParamTokens } from "./parse/types/types";
