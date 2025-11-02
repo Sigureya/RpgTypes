@@ -11,6 +11,7 @@ import type {
   PluginSchemaArrayEx2,
   PluginStructSchemaArray,
   PluginStructSchemaArrayFilterd,
+  PluginTextSchema,
   PluginVariableSchema,
   PrimitiveParam,
   PrimitiveStringParam,
@@ -23,11 +24,13 @@ import {
   hasTextAttr,
   isFileAttr,
   isNumberAttr,
-  isStructAttr,
+  hasStructAttr,
   isVariableAttr,
 } from "./typeTest";
 
-export const filterPluginSchemaByStringParam = (schema: PluginSchemaArray) => {
+export const filterPluginSchemaByStringParam = (
+  schema: PluginSchemaArray
+): PluginTextSchema => {
   type Type = PrimitiveStringParam | StringArrayParam;
   return buildFilteredSchema<PluginParamEx<Type>>(schema, hasTextAttr);
 };
@@ -100,7 +103,7 @@ const rebuildParams = <T extends PluginParam>(
   predicate: (param: PluginParam) => param is T
 ): (T | StructPluginParam)[] => {
   return params.filter((param): param is T | StructPluginParam => {
-    return isStructAttr(param)
+    return hasStructAttr(param)
       ? structNames.has(param.attr.struct)
       : predicate(param);
   });

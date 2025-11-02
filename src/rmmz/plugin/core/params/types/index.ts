@@ -3,6 +3,7 @@ export type * from "./arrayCommands";
 export type * from "./arrayParamItems";
 export type * from "./arrayStructs";
 export type * from "./classifyTypes";
+export type * from "./classifyTypesEx";
 export type * from "./objectCommand";
 export type * from "./objectStruct";
 export type * from "./objectSturctDef";

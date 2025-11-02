@@ -11,11 +11,13 @@ import type {
   PluginStructSchemaArray,
   PluginStructSchemaArrayFilterd,
 } from "./arrayStructs";
+import type { PrimitiveStringParam } from "./paramUnion";
 import type {
   RpgVariableParam,
   RpgVariableArrayParam,
   FileParam,
   FileArrayParam,
+  StringArrayParam,
 } from "./primitive";
 
 export interface PluginSchemaArray {
@@ -37,4 +39,8 @@ export type PluginVariableSchema = PluginSchemaArrayEx2<
 
 export type PluginFileParamsSchema = PluginSchemaArrayEx2<
   PluginParamEx<FileParam | FileArrayParam>
+>;
+
+export type PluginTextSchema = PluginSchemaArrayEx2<
+  PluginParamEx<PrimitiveStringParam | StringArrayParam>
 >;
