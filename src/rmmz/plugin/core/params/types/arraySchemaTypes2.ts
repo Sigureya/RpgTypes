@@ -1,10 +1,6 @@
-import type {
-  PluginCommandSchemaArray,
-  PluginParam,
-  PluginParamEx,
-  PluginSchemaArray,
-  PluginStructSchemaArrayFilterd,
-} from "./arraySchemaTypes";
+import type { PluginSchemaArray } from "./bundleArray";
+import type { PluginCommandSchemaArrayEx3 } from "./commandsArray";
+import type { PluginParamEx, PluginParam } from "./paramItem";
 import type {
   StructRefParam,
   StructArrayRefParam,
@@ -13,18 +9,11 @@ import type {
   FileParam,
   FileArrayParam,
 } from "./primitive";
+import type { PluginStructSchemaArrayFilterd } from "./structs";
 
 export type StructPluginParam = PluginParamEx<
   StructRefParam | StructArrayRefParam
 >;
-
-export interface PluginCommandSchemaArrayEx3<T extends PluginParam>
-  extends PluginCommandSchemaArray {
-  command: string;
-  desc?: string;
-  text?: string;
-  args: T[];
-}
 
 export interface PluginSchemaArrayEx2<T extends PluginParam>
   extends PluginSchemaArray {
