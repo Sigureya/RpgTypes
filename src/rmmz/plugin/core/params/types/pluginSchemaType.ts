@@ -6,11 +6,6 @@ import type {
   StructRefParam,
 } from "./primitive";
 
-export interface PrimitiveStructBase {
-  struct: string;
-  params: Record<string, PrimitiveParam>;
-}
-
 export type PrimitiveStructParams<T extends object> = {
   [K in Extract<keyof T, string>]: PluginSchemaType<T[K]>;
 };

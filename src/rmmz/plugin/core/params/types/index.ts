@@ -1,12 +1,13 @@
 export type * from "./arrayBundle";
 export type * from "./arrayCommands";
 export type * from "./arrayStructs";
+export type * from "./objectCommand";
+export type * from "./objectStruct";
 export type * from "./paramBase";
 export type * from "./paramItem";
 export type * from "./paramUnion";
-export type * from "./pluginEntriesEx";
-export type * from "./pluginEntryTypes";
 export type * from "./pluginSchemaType";
 export type * from "./primitive";
 export type * from "./rpgDataTypes";
 export type * from "./rpgDataTypesNames";
+export type * from "./sturctDef";

@@ -24,6 +24,7 @@ import type {
   RpgDataIdParam,
   RpgDataIdArrayParam,
 } from "./rpgDataTypes";
+import type { StructDefParam, StructArrayDefParam } from "./sturctDef";
 
 export type PrimitiveStringParam =
   | StringParam
@@ -64,3 +65,9 @@ export type ScalaParam = Exclude<
 >;
 
 export type ArrayParamTypes = Extract<PrimitiveParam, ArrayParam>;
+
+// 各パラメータ型のユニオン
+export type StructParam =
+  | PrimitiveParam
+  | StructDefParam<object> // ネスト構造体対応
+  | StructArrayDefParam<object>;
