@@ -9,62 +9,75 @@ import type {
   ArrayParamTypes,
   ClassifiedPluginParams,
   PluginParam,
+  FileParam,
+  FileArrayParam,
+  ClassifiedPluginParamsEx2,
 } from "./types";
-import { isStructParam, isStructArrayParam, isArrayParam } from "./typeTest";
+import {
+  isStructParam,
+  isStructArrayAttr,
+  isArrayAttr,
+  hasTextAttr,
+} from "./typeTest";
 
-const xxx = <T extends PluginParam, A extends ArrayParamTypes>(
+export const classifyPluginParams = (
+  structSchema: PluginStructSchemaArray
+): ClassifiedPluginParams => {
+  return xxx(
+    structSchema,
+    (p): p is PluginParamEx<ScalaParam> => true,
+    (p): p is PluginParamEx<ArrayParamTypes> => true
+  );
+};
+
+export const classifyFileParams = (
+  structSchema: PluginStructSchemaArray
+): ClassifiedPluginParamsEx2<FileParam, FileArrayParam> => {
+  return xxx(
+    structSchema,
+    (p): p is PluginParamEx<FileParam> => p.attr.kind === "file",
+    (p): p is PluginParamEx<FileArrayParam> => p.attr.kind === "file[]"
+  );
+};
+
+export const classifyTextParams = (structSchema: PluginStructSchemaArray) => {
+  return xxx(
+    structSchema,
+    (p): p is PluginParamEx<ScalaParam> => hasTextAttr(p),
+    (p) => hasTextAttr(p)
+  );
+};
+
+const xxx = <T extends ScalaParam, A extends ArrayParamTypes>(
   structSchema: PluginStructSchemaArray,
-  predicate: (param: PluginParam) => param is T,
-  arrayPredicate: (param: PluginParam) => param is PluginParamEx<A>
-) => {
+  predicate: (param: PluginParam) => param is PluginParamEx<T>,
+  arrayPredicate: (
+    param: PluginParamEx<ArrayParamTypes>
+  ) => param is PluginParamEx<A>
+): ClassifiedPluginParamsEx2<T, A> => {
   const structs: PluginParamEx<StructRefParam>[] = [];
   const structArrays: PluginParamEx<StructArrayRefParam>[] = [];
-  const scalas: T[] = [];
+  const scalas: PluginParamEx<T>[] = [];
   const scalaArrays: PluginParamEx<A>[] = [];
   structSchema.params.forEach((p) => {
     if (isStructParam(p.attr)) {
       structs.push({ name: p.name, attr: p.attr });
       return;
     }
-    if (isStructArrayParam(p.attr)) {
-      structArrays.push({ name: p.name, attr: p.attr });
+    if (isStructArrayAttr(p)) {
+      structArrays.push(p);
       return;
     }
-    if (arrayPredicate(p)) {
-      scalaArrays.push(p);
-      return;
+    if (isArrayAttr(p)) {
+      if (arrayPredicate(p)) {
+        scalaArrays.push(p);
+        return;
+      }
+    } else {
+      if (predicate(p)) {
+        scalas.push(p);
+      }
     }
-    if (predicate(p)) {
-      scalas.push(p);
-    }
-  });
-  return { structs, structArrays, scalas, scalaArrays };
-};
-
-export const classifyPluginParams = (
-  structSchema: PluginStructSchemaArray
-): ClassifiedPluginParams => {
-  const structs: PluginParamEx<StructRefParam>[] = [];
-  const structArrays: PluginParamEx<StructArrayRefParam>[] = [];
-  const scalas: PluginParamEx<ScalaParam>[] = [];
-  const scalaArrays: PluginParamEx<ArrayParamTypes>[] = [];
-  structSchema.params.forEach((p) => {
-    if (isStructParam(p.attr)) {
-      structs.push({ name: p.name, attr: p.attr });
-      return;
-    }
-    if (isStructArrayParam(p.attr)) {
-      structArrays.push({ name: p.name, attr: p.attr });
-      return;
-    }
-    if (isArrayParam(p.attr)) {
-      scalaArrays.push({
-        name: p.name,
-        attr: p.attr,
-      });
-      return;
-    }
-    scalas.push({ name: p.name, attr: p.attr });
   });
   return { structs, structArrays, scalas, scalaArrays };
 };
