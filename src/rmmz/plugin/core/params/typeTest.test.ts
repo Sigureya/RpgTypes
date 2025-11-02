@@ -4,7 +4,7 @@ import type {
   StringArrayParam,
   StructRefParam,
   StructArrayRefParam,
-} from "./types/primitive";
+} from "./types";
 import {
   isArrayParam,
   isArrayParamEx,

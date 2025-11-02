@@ -1,5 +1,4 @@
 import { describe, expect, test, vi } from "vitest";
-import type { ItemEffect } from "@RpgTypes/rmmz/rpg";
 import { filterPluginSchemaByParam } from "./arraySchemaFilterByParam";
 import type {
   PluginCommandSchemaArray,
@@ -9,6 +8,13 @@ import type {
   PluginStructSchemaArray,
   PluginStructSchemaArrayEx,
 } from "./types";
+
+interface ItemEffect {
+  code: number;
+  dataId: number;
+  value1: number;
+  value2: number;
+}
 
 interface Item {
   id: number;
@@ -81,7 +87,7 @@ const showNumberSchema: PluginCommandSchemaArrayEx<ShowNumber> = {
   args: [{ name: "value", attr: { kind: "number", default: 42 } }],
 };
 
-describe.skip("cccc", () => {
+describe("filterPluginSchemaByParam", () => {
   describe("predicate type guard:number", () => {
     const isNumberParam = (p: PluginParam) => p.attr.kind === "number";
     test("keep number param", () => {

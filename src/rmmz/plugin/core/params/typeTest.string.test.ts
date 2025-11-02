@@ -1,11 +1,12 @@
 import { describe, expect, it } from "vitest";
-import type { PrimitiveParam, ScalaParam } from "./types/paramUnion";
 import type {
   StringParam,
   ComboParam,
   SelectParam,
+  ScalaParam,
+  PrimitiveParam,
   FileParam,
-} from "./types/primitive";
+} from "./types";
 import {
   isStringValueParam,
   isArrayParam,

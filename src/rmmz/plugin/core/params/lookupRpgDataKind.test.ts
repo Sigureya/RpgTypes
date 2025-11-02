@@ -6,10 +6,7 @@ import type {
 } from "@RpgTypes/rmmz/system";
 import type { SourceId_RmmzUnknown } from "./lookupRpgDataKind";
 import { lookupKind, isRmmzDataKind } from "./lookupRpgDataKind";
-import type {
-  DataKind_SystemUnion,
-  DataKind_RpgUnion,
-} from "./types/rpgDataTypesNames";
+import type { DataKind_SystemUnion, DataKind_RpgUnion } from "./types";
 
 interface TestCase {
   arg: DataKind_RpgUnion | DataKind_SystemUnion;
