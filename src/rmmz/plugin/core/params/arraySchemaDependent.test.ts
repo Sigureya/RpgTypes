@@ -1,5 +1,5 @@
 import { describe, expect, test } from "vitest";
-import { findIndirectsFunctional } from "./arraySchemaFilter";
+import { collectDependentStructNames } from "./arraySchemaDependent";
 import type { PluginStructSchemaArrayEx } from "./types";
 interface A {
   b: B;
@@ -28,11 +28,11 @@ interface Z {}
 
 describe("Empty input tests", () => {
   test("returns empty set for empty input", () => {
-    const result: Set<string> = findIndirectsFunctional([], new Set());
+    const result: Set<string> = collectDependentStructNames([], new Set());
     expect(result.size).toBe(0);
   });
   test("returns initial set when no schema", () => {
-    const result: Set<string> = findIndirectsFunctional(
+    const result: Set<string> = collectDependentStructNames(
       [],
       new Set(["A", "B", "C"])
     );
@@ -58,28 +58,28 @@ describe("ABCD struct dependency resolution", () => {
     params: [{ name: "data", attr: { kind: "number", default: 0 } }],
   };
   test("starting from D returns all ABCD", () => {
-    const result: Set<string> = findIndirectsFunctional(
+    const result: Set<string> = collectDependentStructNames(
       [schemaA, schemaB, schemaC, schemaD],
       new Set(["D"])
     );
     expect(result).toEqual(new Set(["A", "B", "C", "D"]));
   });
   test("starting from C returns ABC", () => {
-    const result: Set<string> = findIndirectsFunctional(
+    const result: Set<string> = collectDependentStructNames(
       [schemaA, schemaB, schemaC, schemaD],
       new Set(["C"])
     );
     expect(result).toEqual(new Set(["A", "B", "C"]));
   });
   test("starting from B returns AB", () => {
-    const result: Set<string> = findIndirectsFunctional(
+    const result: Set<string> = collectDependentStructNames(
       [schemaA, schemaB, schemaC, schemaD],
       new Set(["B"])
     );
     expect(result).toEqual(new Set(["A", "B"]));
   });
   test("starting from A returns only A", () => {
-    const result: Set<string> = findIndirectsFunctional(
+    const result: Set<string> = collectDependentStructNames(
       [schemaA, schemaB, schemaC, schemaD],
       new Set(["A"])
     );
@@ -101,21 +101,21 @@ describe("XYZ struct dependency resolution", () => {
     params: [],
   };
   test("starting from A returns only A", () => {
-    const result: Set<string> = findIndirectsFunctional(
+    const result: Set<string> = collectDependentStructNames(
       [schemaX, schemaY, schemaZ],
       new Set(["A"])
     );
     expect(result).toEqual(new Set(["A"]));
   });
   test("starting from Z returns XYZ", () => {
-    const result: Set<string> = findIndirectsFunctional(
+    const result: Set<string> = collectDependentStructNames(
       [schemaX, schemaY, schemaZ],
       new Set(["Z"])
     );
     expect(result).toEqual(new Set(["X", "Y", "Z"]));
   });
   test("starting from Y returns XY", () => {
-    const result: Set<string> = findIndirectsFunctional(
+    const result: Set<string> = collectDependentStructNames(
       [schemaX, schemaY, schemaZ],
       new Set(["Y"])
     );
