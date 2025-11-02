@@ -1,7 +1,6 @@
 /* eslint-disable @functional/no-return-void */
 
 import type {
-  PluginStructSchemaArray,
   PluginParamEx,
   StructRefParam,
   StructArrayRefParam,
@@ -24,30 +23,30 @@ import {
 } from "./typeTest";
 
 export const classifyPluginParams = (
-  structSchema: PluginStructSchemaArray
+  params: ReadonlyArray<PluginParam>
 ): ClassifiedPluginParams => {
   return classifyPluginParamsCore(
-    structSchema,
+    params,
     (p): p is PluginParamEx<ScalaParam> => true,
     (p): p is PluginParamEx<ArrayParamTypes> => true
   );
 };
 
 export const classifyFileParams = (
-  structSchema: PluginStructSchemaArray
+  params: ReadonlyArray<PluginParam>
 ): ClassifiedPluginFileParams => {
   return classifyPluginParamsCore(
-    structSchema,
+    params,
     (p): p is PluginParamEx<FileParam> => p.attr.kind === "file",
     (p): p is PluginParamEx<FileArrayParam> => p.attr.kind === "file[]"
   );
 };
 
 export const classifyTextParams = (
-  structSchema: PluginStructSchemaArray
+  params: ReadonlyArray<PluginParam>
 ): ClassifiedTextParams => {
   return classifyPluginParamsCore(
-    structSchema,
+    params,
     (p): p is PluginParamEx<PrimitiveStringParam> => hasTextAttr(p),
     (p) => hasTextAttr(p)
   );
@@ -57,7 +56,7 @@ const classifyPluginParamsCore = <
   T extends ScalaParam,
   A extends ArrayParamTypes
 >(
-  structSchema: PluginStructSchemaArray,
+  paramArray: ReadonlyArray<PluginParam>,
   predicate: (param: PluginParam) => param is PluginParamEx<T>,
   arrayPredicate: (
     param: PluginParamEx<ArrayParamTypes>
@@ -67,7 +66,7 @@ const classifyPluginParamsCore = <
   const structArrays: PluginParamEx<StructArrayRefParam>[] = [];
   const scalas: PluginParamEx<T>[] = [];
   const scalaArrays: PluginParamEx<A>[] = [];
-  structSchema.params.forEach((p) => {
+  paramArray.forEach((p) => {
     if (isStructParam(p.attr)) {
       structs.push({ name: p.name, attr: p.attr });
       return;

@@ -4,7 +4,12 @@ export interface StructPropertysPath {
   structName: string;
   scalas: string | undefined;
   scalaArrays: PathPair[];
+  params?: unknown[];
 }
+
+type SPR<T> = {
+  [K in keyof T as string]: unknown;
+};
 
 export interface PathPair {
   path: string;

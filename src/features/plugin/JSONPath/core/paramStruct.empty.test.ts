@@ -15,10 +15,10 @@ describe("empty struct", () => {
       structs: [],
       structArrays: [],
     };
-    const param = {
+    const param: PluginParamEx<StructRefParam> = {
       name: "emptyStruct",
       attr: { kind: "struct", struct: "EmptyStruct" },
-    } as const satisfies PluginParamEx<StructRefParam>;
+    };
     const structMap: ReadonlyMap<string, ClassifiedPluginParams> = new Map([
       ["EmptyStruct", schema],
     ]);
@@ -32,10 +32,10 @@ describe("empty struct", () => {
       structs: [],
       structArrays: [],
     };
-    const param = {
+    const param: PluginParamEx<StructRefParam> = {
       name: "notEmptyStruct",
       attr: { kind: "struct", struct: "NotEmptyStruct" },
-    } as const satisfies PluginParamEx<StructRefParam>;
+    };
     const structMap: ReadonlyMap<string, ClassifiedPluginParams> = new Map([
       ["NotEmptyStruct", schema],
     ]);
@@ -61,10 +61,10 @@ describe("empty struct", () => {
       structArrays: [],
       structs: [],
     };
-    const param = {
+    const param: PluginParamEx<StructRefParam> = {
       name: "emptyStructArray",
       attr: { kind: "struct", struct: "EmptyStructArray" },
-    } as const satisfies PluginParamEx<StructRefParam>;
+    };
     const structMap: ReadonlyMap<string, ClassifiedPluginParams> = new Map([
       ["EmptyStructArray", schema],
     ]);

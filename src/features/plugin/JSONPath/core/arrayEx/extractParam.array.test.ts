@@ -34,17 +34,20 @@ describe("extractArrayParamValue", () => {
   } as const satisfies NestedMock;
 
   test("number array", () => {
-    const path = {
+    const path: ArrayParamPairEx<ArrayMock> = {
       path: "$.numberArray[*]",
       param: {
         name: "numberArray",
         attr: { kind: "number[]", default: [] },
       },
-    } as const satisfies ArrayParamPairEx<ArrayMock>;
+    };
     const expected: NumberSequenceParamValues = {
       values: [233, 211, 209],
       valueKind: "number",
-      param: path.param,
+      param: {
+        name: "numberArray",
+        attr: { kind: "number[]", default: [] },
+      },
     };
     const result = extractArrayParamValue(mockData.arrayMock, path);
     expect(result).toEqual(expected);
@@ -52,17 +55,20 @@ describe("extractArrayParamValue", () => {
 
   describe("items", () => {
     test("direct", () => {
-      const path = {
+      const path: ArrayParamPairEx<ArrayMock> = {
         path: `$.items[*]`,
         param: {
           name: "items",
           attr: { kind: "item[]", default: [] },
         },
-      } as const satisfies ArrayParamPairEx<ArrayMock>;
+      };
       const expected: NumberSequenceParamValues = {
         values: [1, 2, 3, 4, 5],
         valueKind: "number",
-        param: path.param,
+        param: {
+          name: "items",
+          attr: { kind: "item[]", default: [] },
+        },
       };
       const result = extractArrayParamValue(mockData.arrayMock, path);
       expect(result).toEqual(expected);
@@ -121,14 +127,13 @@ describe("extractArrayParamValue", () => {
   });
 
   test("unmatched path", () => {
-    const path = {
+    const path: ArrayParamPairEx<ArrayMock> = {
       path: "$.stringArray[*]",
       param: {
         name: "stringArray",
         attr: { kind: "string[]", default: [] },
       },
-    } as const satisfies ArrayParamPairEx<ArrayMock>;
-
+    };
     const mock = {
       age: 30,
       name: "Alice",
@@ -136,7 +141,10 @@ describe("extractArrayParamValue", () => {
     const expected: StringSequenceParamValues = {
       values: [],
       valueKind: "string",
-      param: path.param,
+      param: {
+        name: "stringArray",
+        attr: { kind: "string[]", default: [] },
+      },
     };
     const result = extractArrayParamValue(mock, path);
     expect(result).toEqual(expected);

@@ -5,6 +5,8 @@ import type {
   PluginParamEx,
   StructRefParam,
 } from "@RpgTypes/rmmz/plugin";
+import type { ScalaPathResult } from "./arrayEx/extractedTypes";
+import { extractScalaParams } from "./arrayEx/extractParam";
 import { getPathFromStructParam } from "./paramStruct";
 import type { StructPathResult, StructPropertysPath } from "./types";
 
@@ -96,24 +98,44 @@ const makeMap = (): ReadonlyMap<string, ClassifiedPluginParams> => {
 };
 
 describe("address", () => {
-  const expected: StructPropertysPath[] = [
+  const path = [
     {
       scalas: `$.address["street","city","zipCode"]`,
       scalaArrays: [],
       structName: "Address",
     },
-  ];
+  ] as const satisfies StructPropertysPath[];
+  const paramSchema = {
+    name: "address",
+    attr: { kind: "struct", struct: "Address" },
+  } as const satisfies PluginParamEx<StructRefParam>;
   test("getPathFromStruct", () => {
-    const param = {
-      name: "address",
-      attr: { kind: "struct", struct: "Address" },
-    } as const satisfies PluginParamEx<StructRefParam>;
     const structMap: ReadonlyMap<string, ClassifiedPluginParams> = new Map([
       ["Address", addressSchema],
     ]);
-    const result = getPathFromStructParam([param], "$", structMap);
-    expect(result.items).toEqual(expected);
+    const result = getPathFromStructParam([paramSchema], "$", structMap);
+    expect(result.items).toEqual(path);
     expect(result.errors).toEqual([]);
+  });
+  test.skip("", () => {
+    const paramObject = {
+      address: {
+        city: "Sample City",
+        street: "123 Sample St",
+        zipCode: "12345",
+      } as const satisfies Address,
+    };
+    const expectedValues: ScalaPathResult[] = [
+      {
+        value: "Sample City",
+        param: { name: "street", attr: { kind: "string", default: "" } },
+      },
+      //      { value: "123 Sample St", param: path[0].scalas[0] },
+    ];
+
+    // const result = extractScalaParams(paramObject, path[0].scalas, [
+    //   paramSchema,
+    // ]);
   });
 });
 

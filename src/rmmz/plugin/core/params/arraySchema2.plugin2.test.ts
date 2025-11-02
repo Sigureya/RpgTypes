@@ -131,7 +131,9 @@ describe("filterPluginSchemaByParam", () => {
           { name: "bool", attr: { kind: "boolean", default: true } },
         ],
       };
-      const result = filterPluginSchemaByParam(plugin, (p) => mockFn(p));
+      const result = filterPluginSchemaByParam(plugin, (p): p is PluginParam =>
+        mockFn(p)
+      );
       expect(result.commands).toEqual([]);
       expect(result.params).toEqual([]);
       expect(result.structs).toEqual([]);

@@ -1,82 +1,17 @@
 import { collectDependentStructNames } from "./arraySchemaDependent";
 import type {
-  FileArrayParam,
-  FileParam,
-  PluginCommandSchemaArray,
-  PluginCommandSchemaArrayEx3,
-  PluginFileParamsSchema,
   PluginParam,
-  PluginParamEx,
   PluginSchemaArray,
   PluginSchemaArrayEx2,
   PluginStructSchemaArray,
   PluginStructSchemaArrayFilterd,
-  PluginTextSchema,
-  PluginVariableSchema,
-  PrimitiveParam,
-  PrimitiveStringParam,
-  RpgVariableArrayParam,
-  RpgVariableParam,
-  StringArrayParam,
   StructPluginParam,
+  PluginCommandSchemaArray,
+  PluginCommandSchemaArrayEx3,
 } from "./types";
-import {
-  hasTextAttr,
-  isFileAttr,
-  isNumberAttr,
-  hasStructAttr,
-  isVariableAttr,
-} from "./typeTest";
+import { hasStructAttr } from "./typeTest";
 
-export const filterPluginSchemaByStringParam = (
-  schema: PluginSchemaArray
-): PluginTextSchema => {
-  type Type = PrimitiveStringParam | StringArrayParam;
-  return buildFilteredSchema<PluginParamEx<Type>>(schema, hasTextAttr);
-};
-
-export const filterPluginSchemaByNumberParam = (schema: PluginSchemaArray) => {
-  type Type = Extract<PrimitiveParam, { default: number[] | number }>;
-  return buildFilteredSchema<PluginParamEx<Type>>(schema, isNumberAttr);
-};
-
-export const filterPluginSchemaByVariableParam = (
-  schema: PluginSchemaArray
-): PluginVariableSchema => {
-  type Type = RpgVariableParam | RpgVariableArrayParam;
-  return buildFilteredSchema<PluginParamEx<Type>>(schema, isVariableAttr);
-};
-
-export const filterPluginSchemaByFileParam = (
-  schema: PluginSchemaArray
-): PluginFileParamsSchema => {
-  type Type = FileParam | FileArrayParam;
-  return buildFilteredSchema<PluginParamEx<Type>>(schema, isFileAttr);
-};
-
-export function filterPluginSchemaByParam<T extends PluginParam>(
-  schema: PluginSchemaArray,
-  predicate: (param: PluginParam) => param is T
-): PluginSchemaArrayEx2<T>;
-
-export function filterPluginSchemaByParam(
-  schema: PluginSchemaArray,
-  predicate: (param: PluginParam) => boolean
-): PluginSchemaArray;
-
-export function filterPluginSchemaByParam<T extends PluginParam>(
-  schema: PluginSchemaArray,
-  predicate:
-    | ((param: PluginParam) => param is T)
-    | ((param: PluginParam) => boolean)
-) {
-  return buildFilteredSchema<T>(
-    schema,
-    predicate as (param: PluginParam) => param is T
-  );
-}
-
-const buildFilteredSchema = <T extends PluginParam>(
+export const filterPluginSchemaByParam = <T extends PluginParam>(
   schema: PluginSchemaArray,
   predicate: (param: PluginParam) => param is T
 ): PluginSchemaArrayEx2<T> => {
