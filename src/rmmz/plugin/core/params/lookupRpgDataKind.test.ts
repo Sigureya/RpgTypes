@@ -4,12 +4,12 @@ import type {
   SourceId_SystemSwitches,
   SourceId_SystemVariables,
 } from "@RpgTypes/rmmz/system";
-import type { SourceId_RmmzUnknown } from "./lookup";
-import { lookupKind, isRmmzDataKind } from "./lookup";
+import type { SourceId_RmmzUnknown } from "./lookupRpgDataKind";
+import { lookupKind, isRmmzDataKind } from "./lookupRpgDataKind";
 import type {
   DataKind_SystemUnion,
   DataKind_RpgUnion,
-} from "./rpgDataTypesNames";
+} from "./types/rpgDataTypesNames";
 
 interface TestCase {
   arg: DataKind_RpgUnion | DataKind_SystemUnion;

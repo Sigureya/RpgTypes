@@ -2,7 +2,7 @@ import type { ParamBase } from "./paramBase";
 import type {
   DataKind_SystemUnion,
   DataKind_RpgUnion,
-} from "./rpgData/rpgDataTypesNames";
+} from "./rpgDataTypesNames";
 
 export interface SystemDataIdParam extends ParamBase {
   kind: DataKind_SystemUnion;

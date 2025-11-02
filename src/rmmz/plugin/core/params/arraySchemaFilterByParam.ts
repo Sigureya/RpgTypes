@@ -1,27 +1,24 @@
 import { findIndirectsFunctional } from "./arraySchemaFilter";
 import type {
+  FileArrayParam,
+  FileParam,
   PluginCommandSchemaArray,
+  PluginCommandSchemaArrayEx3,
+  PluginFileParamsSchema,
   PluginParam,
   PluginParamEx,
   PluginSchemaArray,
+  PluginSchemaArrayEx2,
   PluginStructSchemaArray,
   PluginStructSchemaArrayFilterd,
-} from "./arraySchemaTypes";
-import type {
-  PluginCommandSchemaArrayEx3,
-  PluginFileParamsSchema,
   PluginVariableSchema,
-  StructPluginParam,
-  PluginSchemaArrayEx2,
-} from "./arraySchemaTypes2";
-import type { PrimitiveParam, PrimitiveStringParam } from "./paramUnion";
-import type {
-  StringArrayParam,
-  RpgVariableParam,
+  PrimitiveParam,
+  PrimitiveStringParam,
   RpgVariableArrayParam,
-  FileParam,
-  FileArrayParam,
-} from "./primitive";
+  RpgVariableParam,
+  StringArrayParam,
+  StructPluginParam,
+} from "./types";
 import {
   hasTextAttr,
   isFileAttr,

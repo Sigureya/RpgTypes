@@ -4,7 +4,7 @@ import type {
   PluginCommandSchemaArrayEx,
   PluginSchemaArray,
   PluginStructSchemaArrayEx,
-} from "./arraySchemaTypes";
+} from "./types";
 interface Shop {
   items: number[];
   name: string;

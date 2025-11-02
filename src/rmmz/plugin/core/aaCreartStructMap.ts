@@ -1,5 +1,5 @@
-import type { PluginStructSchemaArray } from "./params/arraySchemaTypes";
-import type { PrimitiveParam } from "./params/paramUnion";
+import type { PluginStructSchemaArray } from "./params/types/arraySchemaTypes";
+import type { PrimitiveParam } from "./params/types/paramUnion";
 
 export const createStructMap = (
   structs: ReadonlyArray<PluginStructSchemaArray>

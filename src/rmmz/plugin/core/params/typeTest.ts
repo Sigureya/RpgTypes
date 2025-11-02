@@ -1,21 +1,19 @@
-import type { PluginParam, PluginParamEx } from "./arraySchemaTypes";
-import type {
-  PrimitiveParam,
-  ParamKinds,
-  ScalaParam,
-  PrimitiveStringParam,
-  ArrayParamTypes,
-} from "./paramUnion";
 import type {
   ArrayParam,
-  StructRefParam,
-  StructArrayRefParam,
-  StringArrayParam,
-  RpgVariableParam,
-  RpgVariableArrayParam,
-  FileParam,
+  ArrayParamTypes,
   FileArrayParam,
-} from "./primitive";
+  FileParam,
+  ParamKinds,
+  PrimitiveParam,
+  PrimitiveStringParam,
+  RpgVariableArrayParam,
+  RpgVariableParam,
+  ScalaParam,
+  StringArrayParam,
+  StructArrayRefParam,
+  StructRefParam,
+} from "./types";
+import type { PluginParam, PluginParamEx } from "./types/arraySchemaTypes";
 
 export const isArrayParam = <T extends PrimitiveParam>(
   param: T

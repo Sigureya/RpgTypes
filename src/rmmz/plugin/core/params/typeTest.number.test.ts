@@ -1,11 +1,11 @@
 import { describe, expect, it } from "vitest";
-import type { PrimitiveParam } from "./paramUnion";
+import type { PrimitiveParam } from "./types/paramUnion";
 import type {
   RpgVariableParam,
   RpgSwitchParam,
   NumberParam,
-} from "./primitive";
-import type { RpgDataIdParam } from "./rpgDataTypes";
+} from "./types/primitive";
+import type { RpgDataIdParam } from "./types/rpgDataTypes";
 import {
   isStringValueParam,
   isArrayParam,

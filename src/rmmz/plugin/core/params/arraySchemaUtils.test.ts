@@ -1,10 +1,10 @@
 import { describe, test, expect } from "vitest";
-import type { PluginParamEx } from "./arraySchemaTypes";
+import type { PluginParamEx } from "./types/arraySchemaTypes";
 import type {
   StructRefParam,
   StructArrayRefParam,
   NumberParam,
-} from "./primitive";
+} from "./types/primitive";
 import { isStructAttr } from "./typeTest";
 
 describe("isStructAttr", () => {

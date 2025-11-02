@@ -1,8 +1,8 @@
 import { describe, expect, test } from "vitest";
 import type { ParamSoruceRecord } from "./attributes";
 import { compileAttributes } from "./attributes";
-import type { PrimitiveParam } from "./params/paramUnion";
-import type { RpgDataIdParam } from "./params/rpgDataTypes";
+import type { PrimitiveParam } from "./params/types/paramUnion";
+import type { RpgDataIdParam } from "./params/types/rpgDataTypes";
 import type { PluginParamTokens } from "./parse/types/types";
 
 describe("compileAttributes - dataId", () => {

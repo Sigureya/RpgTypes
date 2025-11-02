@@ -8,7 +8,7 @@ import type {
   PluginSchemaArray,
   PluginStructSchemaArray,
   PluginStructSchemaArrayEx,
-} from "./arraySchemaTypes";
+} from "./types";
 
 interface Item {
   id: number;

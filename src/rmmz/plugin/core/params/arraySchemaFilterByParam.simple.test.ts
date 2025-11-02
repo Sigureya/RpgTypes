@@ -6,7 +6,7 @@ import type {
   PluginParam,
   PluginSchemaArray,
   PluginStructSchemaArrayEx,
-} from "./arraySchemaTypes";
+} from "./types";
 
 interface ShowText {
   text: string;

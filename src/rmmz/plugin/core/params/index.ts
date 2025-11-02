@@ -1,15 +1,6 @@
-export type * from "./arraySchemaFilterdTypes";
-export type * from "./arraySchemaTypes";
-export type * from "./arraySchemaTypes2";
-export type * from "./paramBase";
-export type * from "./paramUnion";
-export type * from "./pluginEntriesEx";
-export type * from "./pluginEntryTypes";
-export type * from "./pluginSchemaType";
-export type * from "./primitive";
-export * from "./rpgData/lookup";
-export * from "./rpgData/rpgDataTypesNames";
-export type * from "./rpgDataTypes";
+export * from "./lookupRpgDataKind";
 export * from "./typeTest";
+export type * from "./types";
+export * from "./types/rpgDataTypesNames";
 export { findIndirectsFunctional } from "./arraySchemaFilter";
 export { structDependencies } from "./structDependencies";
