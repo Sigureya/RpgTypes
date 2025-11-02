@@ -1,11 +1,7 @@
-import type {
-  StructRefParam,
-  StructArrayRefParam,
-  ScalaParam,
-  ArrayParamTypes,
-  PluginParamEx,
-} from "./core";
-import type { PluginStructParamTypeEx } from "./core/params/types/pluginSchemaType";
+import type { PluginParamEx } from "./arrayParamItems";
+import type { ScalaParam, ArrayParamTypes } from "./paramUnion";
+import type { PluginStructParamTypeEx } from "./pluginSchemaType";
+import type { StructRefParam, StructArrayRefParam } from "./primitive";
 
 export interface ScalaStruct {
   scalas: PluginParamEx<ScalaParam>[];

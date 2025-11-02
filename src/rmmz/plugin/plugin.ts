@@ -1,4 +1,4 @@
-import { compilePluginToObject } from "./compilePlugin";
+import { compilePluginToObject } from "./core/compilePlugin";
 import type { PluginJSON } from "./core/pluginJSONTypes";
 
 export const pluginSourceToJSON = (text: string): PluginJSON => {

@@ -2,6 +2,5 @@ export * from "./core";
 export type {
   ClassifiedPluginParams,
   ClassifiedPluginParamsEx,
-} from "./classifyTypes";
-export { classifyPluginParams } from "./classify";
+} from "./core/params/types/classifyTypes";
 export { pluginSourceToJSON } from "./plugin";

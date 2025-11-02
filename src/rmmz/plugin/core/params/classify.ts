@@ -1,15 +1,15 @@
 /* eslint-disable @functional/no-return-void */
 
-import type { ClassifiedPluginParams } from "./classifyTypes";
 import type {
-  ArrayParamTypes,
-  PluginParamEx,
   PluginStructSchemaArray,
-  ScalaParam,
-  StructArrayRefParam,
+  PluginParamEx,
   StructRefParam,
-} from "./core";
-import { isStructParam, isStructArrayParam, isArrayParam } from "./core";
+  StructArrayRefParam,
+  ScalaParam,
+  ArrayParamTypes,
+  ClassifiedPluginParams,
+} from "./types";
+import { isStructParam, isStructArrayParam, isArrayParam } from "./typeTest";
 
 export const classifyPluginParams = (
   structSchema: PluginStructSchemaArray
