@@ -26,11 +26,20 @@ export interface ClassifiedPluginParamsEx2<
 }
 
 export interface ClassifiedPluginParamsEx<T> extends ClassifiedPluginParams {
-  structs: Extract<PluginStructParamTypeEx<T>, { attr: StructRefParam }>[];
+  structs: Extract<
+    PluginStructParamTypeEx<T>,
+    { attr: StructRefParam; name: string }
+  >[];
   structArrays: Extract<
     PluginStructParamTypeEx<T>,
-    { attr: StructArrayRefParam }
+    { attr: StructArrayRefParam; name: string }
   >[];
-  scalas: Extract<PluginStructParamTypeEx<T>, { attr: ScalaParam }>[];
-  scalaArrays: Extract<PluginStructParamTypeEx<T>, { attr: ArrayParamTypes }>[];
+  scalas: Extract<
+    PluginStructParamTypeEx<T>,
+    { attr: ScalaParam; name: string }
+  >[];
+  scalaArrays: Extract<
+    PluginStructParamTypeEx<T>,
+    { attr: ArrayParamTypes; name: string }
+  >[];
 }

@@ -1,5 +1,5 @@
+import type { PrimitiveStructParams } from "./objectStruct";
 import type { StructParam } from "./paramUnion";
-import type { PrimitiveStructParams } from "./pluginSchemaType";
 
 export interface PluginCommandType<T extends object> {
   command: string;
