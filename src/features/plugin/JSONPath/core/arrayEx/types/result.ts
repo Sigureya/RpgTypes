@@ -1,20 +1,8 @@
-import type { JSONPathType } from "@RpgTypes/libs";
 import type {
   ArrayParamTypes,
   PluginParamEx,
-  PluginStructParamTypeEx,
   ScalaParam,
 } from "@RpgTypes/rmmz/plugin";
-
-export interface ArrayPathPair {
-  path: string;
-  param: PluginParamEx<ArrayParamTypes>;
-}
-
-export interface ArrayParamPairEx<T> {
-  path: JSONPathType<T>;
-  param: PluginStructParamTypeEx<T>;
-}
 
 export interface StringSequenceParamValues {
   values: string[];

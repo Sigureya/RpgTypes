@@ -6,12 +6,12 @@ import type {
 } from "@RpgTypes/rmmz/plugin";
 import { isNumberArrayParam, isStringArrayParam } from "@RpgTypes/rmmz/plugin";
 import { JSONPathJS } from "jsonpath-js";
+import type { ArrayPathPair } from "./types/query";
 import type {
-  ArrayPathPair,
+  StringSequenceParamValues,
   NumberSequenceParamValues,
   ScalaPathResult,
-  StringSequenceParamValues,
-} from "./extractedTypes";
+} from "./types/result";
 
 export const extractArrayParamValue = (
   object: JSONValue,

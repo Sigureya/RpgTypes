@@ -1,7 +1,7 @@
 import { describe, test, expect } from "vitest";
 import type { PluginParamEx, ScalaParam } from "@RpgTypes/rmmz/plugin";
-import type { ScalaPathResult } from "./extractedTypes";
 import { extractScalaParams } from "./extractParam";
+import type { ScalaPathResult } from "./types/result";
 
 interface Person {
   name: string;
