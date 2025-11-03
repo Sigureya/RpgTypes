@@ -6,8 +6,11 @@ export interface PluginParam {
   attr: PrimitiveParam;
 }
 
-export interface PluginParamEx<T extends PrimitiveParam> {
-  name: string;
+export interface PluginParamEx<
+  T extends PrimitiveParam,
+  N extends string = string
+> {
+  name: Extract<N, string>;
   attr: T;
 }
 
