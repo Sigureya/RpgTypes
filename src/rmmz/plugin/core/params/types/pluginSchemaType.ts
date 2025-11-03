@@ -6,12 +6,8 @@ import type {
   StructRefParam,
 } from "./primitive";
 
-export type PrimitiveStructParams<T extends object> = {
-  [K in Extract<keyof T, string>]: PluginSchemaType<T[K]>;
-};
-
 export type PluginStructParamTypeEx<T> = {
-  [K in Extract<keyof T, string>]: { name: K; attr: PluginSchemaType<T[K]> };
+  [K in keyof T as string]: { name: K; attr: PluginSchemaType<T[K]> };
 }[Extract<keyof T, string>];
 
 export type PluginSchemaType<T> = T extends boolean
