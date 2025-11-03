@@ -9,9 +9,6 @@ export interface PluginStructEx<T extends object> {
   };
 }
 
-/**
- * @deprecated
- */
 export interface PrimitiveStructBase {
   struct: string;
   params: Record<string, PrimitiveParam>;
