@@ -1,4 +1,14 @@
-import type { PluginParamEx, PrimitiveParam, ToObjectParams } from "./types";
+import { textAndDesc } from "@RpgTypes/rmmz/utils";
+import type {
+  PluginCommandSchemaArrayEx3,
+  PluginCommandTypeEx,
+  PluginParam,
+  PluginParamEx,
+  PluginStructSchemaArray,
+  PluginStructType,
+  PrimitiveParam,
+  ToObjectParams,
+} from "./types";
 
 export function toObjectPluginParams<
   T extends PrimitiveParam,
@@ -19,4 +29,23 @@ export const toArrayPluginParam = <T extends PrimitiveParam, K extends string>(
       };
     }
   );
+};
+
+export const convertStructSchema = <T extends PluginStructSchemaArray>(
+  schema: T
+): PluginStructType<object> => {
+  return {
+    struct: schema.struct,
+    params: toObjectPluginParams(schema.params),
+  };
+};
+
+export const convertPluginCommandSchema = <T extends PluginParam>(
+  command: PluginCommandSchemaArrayEx3<T>
+): PluginCommandTypeEx<object> => {
+  return {
+    ...textAndDesc(command),
+    command: command.command,
+    args: toObjectPluginParams(command.args),
+  };
 };
