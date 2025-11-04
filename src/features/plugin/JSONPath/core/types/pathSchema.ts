@@ -10,6 +10,7 @@ export interface StructPropertysPath {
   scalas: string | undefined;
   scalaArrays: PathPair[];
   objectSchema: Record<string, PrimitiveParam>;
+  arraySchema: Record<string, PrimitiveParam>;
 }
 
 export interface StructPropertysPathV2<T> {

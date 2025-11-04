@@ -1,7 +1,11 @@
 import type { JSONValue } from "@RpgTypes/libs";
 import type { PrimitiveParam } from "@RpgTypes/rmmz/plugin";
 import { JSONPathJS } from "jsonpath-js";
-import type { ScalaPathResult } from "./arrayEx/types/result";
+import type {
+  NumberSequenceParamValues,
+  ScalaPathResult,
+  StringSequenceParamValues,
+} from "./arrayEx/types/result";
 import type { StructPropertysPath } from "./types";
 
 export const extractScalaValuesFromJson = (
@@ -50,4 +54,11 @@ const collectScalaResults = (
     };
     return [...acc, result];
   }, []);
+};
+
+export const extractArrayValuesFromJson = (
+  json: JSONValue,
+  structPath: StructPropertysPath
+): (StringSequenceParamValues | NumberSequenceParamValues)[] => {
+  return [];
 };
