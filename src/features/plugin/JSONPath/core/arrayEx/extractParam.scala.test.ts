@@ -36,12 +36,17 @@ describe("extractScalaParams", () => {
     const result: ScalaPathResult[] = extractScalaParams(
       mockData,
       "$.person['name','age','isStudent']",
-      schema
+      schema,
+      "Person"
     );
     const expected: ScalaPathResult[] = [
-      { value: "Alice", param: schema[0] },
-      { value: 30, param: schema[1] },
-      { value: false, param: schema[2] },
+      {
+        structName: "Person",
+        value: "Alice",
+        param: schema[0],
+      },
+      { structName: "Person", value: 30, param: schema[1] },
+      { structName: "Person", value: false, param: schema[2] },
     ];
     expect(result).toEqual(expected);
   });
@@ -50,15 +55,16 @@ describe("extractScalaParams", () => {
     const result: ScalaPathResult[] = extractScalaParams(
       mockData,
       "$.students[*]['name','age','isStudent']",
-      schema
+      schema,
+      "Person"
     );
     const expected: ScalaPathResult[] = [
-      { value: "Bob", param: schema[0] },
-      { value: 20, param: schema[1] },
-      { value: true, param: schema[2] },
-      { value: "Charlie", param: schema[0] },
-      { value: 22, param: schema[1] },
-      { value: true, param: schema[2] },
+      { structName: "Person", value: "Bob", param: schema[0] },
+      { structName: "Person", value: 20, param: schema[1] },
+      { structName: "Person", value: true, param: schema[2] },
+      { structName: "Person", value: "Charlie", param: schema[0] },
+      { structName: "Person", value: 22, param: schema[1] },
+      { structName: "Person", value: true, param: schema[2] },
     ];
     expect(result).toEqual(expected);
   });

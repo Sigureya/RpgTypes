@@ -1,8 +1,9 @@
 import { describe, test, expect } from "vitest";
-import type {
-  StructRefParam,
-  ClassifiedPluginParams,
-  PluginParamEx,
+import {
+  type StructRefParam,
+  type ClassifiedPluginParams,
+  type PluginParamEx,
+  toObjectPluginParams,
 } from "@RpgTypes/rmmz/plugin";
 import { getPathFromStructParam } from "./paramStruct";
 import type { StructPropertysPath } from "./types";
@@ -45,9 +46,10 @@ describe("empty struct", () => {
         structName: "NotEmptyStruct",
         scalas: `$.notEmptyStruct["actorId"]`,
         scalaArrays: [],
-        os: {
+        objectSchema: {
           actorId: { kind: "actor", default: 0 },
         },
+        arraySchema: {},
       },
     ];
     expect(result.items).toEqual(expected);
@@ -74,7 +76,10 @@ describe("empty struct", () => {
     const result = getPathFromStructParam([param], "$", structMap);
     const expected: StructPropertysPath[] = [
       {
-        os: {},
+        objectSchema: {},
+        arraySchema: {
+          numberArray: { kind: "number[]", default: [] },
+        },
         structName: "EmptyStructArray",
         scalas: undefined,
         scalaArrays: [

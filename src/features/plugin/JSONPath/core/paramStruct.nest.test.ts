@@ -1,14 +1,18 @@
 import { describe, test, expect } from "vitest";
-import {
-  toObjectPluginParams,
-  type ClassifiedPluginParams,
-  type ClassifiedPluginParamsEx,
-  type PluginParamEx,
-  type StructRefParam,
+import type {
+  ClassifiedPluginParams,
+  ClassifiedPluginParamsEx,
+  PluginParamEx,
+  StructRefParam,
 } from "@RpgTypes/rmmz/plugin";
-import type { ScalaPathResult } from "./arrayEx/types/result";
+import { toObjectPluginParams } from "@RpgTypes/rmmz/plugin";
+import type {
+  NumberSequenceParamValues,
+  ScalaPathResult,
+  StringSequenceParamValues,
+} from "./arrayEx/types/result";
 import { getPathFromStructParam } from "./paramStruct";
-import { rrr } from "./read";
+import { extractArrayValuesFromJson, extractScalaValuesFromJson } from "./read";
 import type { StructPathResult, StructPropertysPath } from "./types";
 
 interface Person {
@@ -103,12 +107,20 @@ describe("address", () => {
     scalas: `$.address["street","city","zipCode"]`,
     scalaArrays: [],
     structName: "Address",
-    os: toObjectPluginParams(addressSchema.scalas),
+    arraySchema: {},
+    objectSchema: toObjectPluginParams(addressSchema.scalas),
   };
   const paramSchema = {
     name: "address",
     attr: { kind: "struct", struct: "Address" },
   } as const satisfies PluginParamEx<StructRefParam>;
+  const paramObject = {
+    address: {
+      city: "Sample City",
+      street: "123 Sample St",
+      zipCode: "12345",
+    } as const satisfies Address,
+  };
   test("getPathFromStruct", () => {
     const structMap: ReadonlyMap<string, ClassifiedPluginParams> = new Map([
       ["Address", addressSchema],
@@ -117,14 +129,8 @@ describe("address", () => {
     expect(result.items).toEqual([path]);
     expect(result.errors).toEqual([]);
   });
-  test.skip("", () => {
-    const paramObject = {
-      address: {
-        city: "Sample City",
-        street: "123 Sample St",
-        zipCode: "12345",
-      } as const satisfies Address,
-    };
+
+  test("extractScalaValuesFromJson", () => {
     const expectedValues: ScalaPathResult[] = [
       {
         structName: "Address",
@@ -141,20 +147,19 @@ describe("address", () => {
         param: { name: "zipCode", attr: { kind: "string", default: "" } },
         value: "12345",
       },
-
-      //      { value: "123 Sample St", param: path[0].scalas[0] },
     ];
 
-    const result = rrr(paramObject, path);
+    const result = extractScalaValuesFromJson(paramObject, path);
     expect(result).toEqual(expectedValues);
-    // const result = extractScalaParams(paramObject, path[0].scalas, [
-    //   paramSchema,
-    // ]);
+  });
+  test("", () => {
+    const result = extractArrayValuesFromJson(paramObject, path);
+    expect(result).toEqual([]);
   });
 });
 
 describe("person", () => {
-  const expected: StructPropertysPath[] = [
+  const path: StructPropertysPath[] = [
     {
       scalas: `$.person["name","age"]`,
       scalaArrays: [
@@ -162,9 +167,18 @@ describe("person", () => {
         { path: "$.person.nicknames[*]", param: personScheame.scalaArrays[1] },
       ],
       structName: "Person",
-      os: toObjectPluginParams(personScheame.scalas),
+      arraySchema: toObjectPluginParams(personScheame.scalaArrays),
+      objectSchema: toObjectPluginParams(personScheame.scalas),
     },
   ];
+  const paramObject = {
+    person: {
+      name: "John Doe",
+      age: 30,
+      items: [1, 2, 3],
+      nicknames: ["Johnny", "JD"],
+    } as const satisfies Person,
+  };
   test("getPathFromStruct", () => {
     const param = {
       name: "person",
@@ -178,8 +192,43 @@ describe("person", () => {
       "$",
       structMap
     );
-    expect(result.items).toEqual(expected);
+    expect(result.items).toEqual(path);
     expect(result.errors).toEqual([]);
+  });
+  test("extractScalaValuesFromJson", () => {
+    const expectedValues: ScalaPathResult[] = [
+      {
+        structName: "Person",
+        param: { name: "name", attr: { kind: "string", default: "" } },
+        value: "John Doe",
+      },
+      {
+        structName: "Person",
+        param: { name: "age", attr: { kind: "number", default: 0 } },
+        value: 30,
+      },
+    ];
+    const result = extractScalaValuesFromJson(paramObject, path[0]);
+    expect(result).toEqual(expectedValues);
+  });
+  test("extractArrayValuesFromJson", () => {
+    const expectedValues: (
+      | StringSequenceParamValues
+      | NumberSequenceParamValues
+    )[] = [
+      {
+        param: { name: "items", attr: { kind: "number[]", default: [] } },
+        values: [1, 2, 3],
+        valueKind: "number",
+      },
+      {
+        param: { name: "nicknames", attr: { kind: "string[]", default: [] } },
+        values: ["Johnny", "JD"],
+        valueKind: "string",
+      },
+    ];
+    const result = extractArrayValuesFromJson(paramObject, path[0]);
+    expect(result).toEqual(expectedValues);
   });
 });
 
@@ -189,7 +238,8 @@ describe("classroom", () => {
       scalas: `$.classroom["className"]`,
       scalaArrays: [],
       structName: "Class",
-      os: toObjectPluginParams(classRoomSchema.scalas),
+      objectSchema: toObjectPluginParams(classRoomSchema.scalas),
+      arraySchema: toObjectPluginParams(classRoomSchema.scalaArrays),
     },
     {
       scalas: `$.classroom.teacher["name","age"]`,
@@ -204,7 +254,8 @@ describe("classroom", () => {
         },
       ],
       structName: "Person",
-      os: toObjectPluginParams(personScheame.scalas),
+      objectSchema: toObjectPluginParams(personScheame.scalas),
+      arraySchema: toObjectPluginParams(personScheame.scalaArrays),
     },
     {
       scalas: `$.classroom.students[*]["name","age"]`,
@@ -219,7 +270,8 @@ describe("classroom", () => {
         },
       ],
       structName: "Person",
-      os: toObjectPluginParams(personScheame.scalas),
+      objectSchema: toObjectPluginParams(personScheame.scalas),
+      arraySchema: toObjectPluginParams(personScheame.scalaArrays),
     },
   ];
   test("getPathFromStruct", () => {
@@ -243,22 +295,26 @@ describe("school", () => {
       structName: "School",
       scalas: `$.school["since"]`,
       scalaArrays: [],
-      os: toObjectPluginParams(schoolSchema.scalas),
+      objectSchema: toObjectPluginParams(schoolSchema.scalas),
+      arraySchema: {},
     },
     {
       structName: "Address",
       scalas: `$.school.address["street","city","zipCode"]`,
       scalaArrays: [],
-      os: toObjectPluginParams(addressSchema.scalas),
+      objectSchema: toObjectPluginParams(addressSchema.scalas),
+      arraySchema: {},
     },
     {
       structName: "Class",
       scalas: `$.school.classrooms[*]["className"]`,
       scalaArrays: [],
-      os: toObjectPluginParams(classRoomSchema.scalas),
+      objectSchema: toObjectPluginParams(classRoomSchema.scalas),
+      arraySchema: toObjectPluginParams(classRoomSchema.scalaArrays),
     },
     {
-      os: toObjectPluginParams(personScheame.scalas),
+      objectSchema: toObjectPluginParams(personScheame.scalas),
+      arraySchema: toObjectPluginParams(personScheame.scalaArrays),
       structName: "Person",
       scalas: `$.school.classrooms[*].teacher["name","age"]`,
       scalaArrays: [
@@ -285,7 +341,8 @@ describe("school", () => {
           param: personScheame.scalaArrays[1],
         },
       ],
-      os: toObjectPluginParams(personScheame.scalas),
+      objectSchema: toObjectPluginParams(personScheame.scalas),
+      arraySchema: toObjectPluginParams(personScheame.scalaArrays),
     },
   ];
 

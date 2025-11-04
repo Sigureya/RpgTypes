@@ -1,49 +1,73 @@
 import type { JSONValue } from "@RpgTypes/libs";
 import type { PrimitiveParam } from "@RpgTypes/rmmz/plugin";
 import { JSONPathJS } from "jsonpath-js";
-import type { ScalaPathResult } from "./arrayEx/types/result";
+import { extractArrayParamValue } from "./arrayEx/extractParam";
+import type {
+  NumberSequenceParamValues,
+  ScalaPathResult,
+  StringSequenceParamValues,
+} from "./arrayEx/types/result";
 import type { StructPropertysPath } from "./types";
 
-export const rrr = (
+export const extractScalaValuesFromJson = (
   json: JSONValue,
-  path: StructPropertysPath
+  structPath: StructPropertysPath
 ): ScalaPathResult[] => {
-  if (!path.scalas) {
+  if (!structPath.scalas) {
     return [];
   }
-  const p = new JSONPathJS(path.scalas);
-  const seg = p.pathSegments(json);
-  return pp(seg, path);
+  const jsonPath = new JSONPathJS(structPath.scalas);
+  const segments = jsonPath.pathSegments(json);
+  return collectScalaResults(segments, structPath, structPath.structName);
 };
 
-interface Seg {
+interface PathSegment {
   value: JSONValue;
   segments: (string | number)[];
 }
 
-const pp = (
-  seg: ReadonlyArray<Seg>,
-  path: StructPropertysPath
+/**
+ * セグメント配列からScalaPathResult配列を生成する
+ */
+const collectScalaResults = (
+  segments: ReadonlyArray<PathSegment>,
+  structPath: StructPropertysPath,
+  structName: string
 ): ScalaPathResult[] => {
-  return seg.reduce<ScalaPathResult[]>((acc, { segments, value }) => {
+  return segments.reduce<ScalaPathResult[]>((acc, { segments, value }) => {
     if (typeof value === "object") {
       return acc;
     }
-    const name = segments[segments.length - 1];
-    if (typeof name === "number") {
+    const paramName = segments[segments.length - 1];
+    if (typeof paramName === "number") {
       return acc;
     }
 
-    const schema: PrimitiveParam | undefined = path.os[name];
+    const schema: PrimitiveParam | undefined =
+      structPath.objectSchema[paramName];
     if (!schema) {
       return acc;
     }
 
     const result: ScalaPathResult = {
       value: value,
-      structName: path.structName,
-      param: { name, attr: schema },
+      structName: structName,
+      param: { name: paramName, attr: schema },
     };
     return [...acc, result];
   }, []);
+};
+
+export const extractArrayValuesFromJson = (
+  json: JSONValue,
+  structPath: StructPropertysPath
+): (StringSequenceParamValues | NumberSequenceParamValues)[] => {
+  return structPath.scalaArrays
+    .map((scalaArray) => {
+      return extractArrayParamValue(json, scalaArray);
+    })
+    .filter(
+      (v): v is StringSequenceParamValues | NumberSequenceParamValues =>
+        v !== null
+    );
 };
