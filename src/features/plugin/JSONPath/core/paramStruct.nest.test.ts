@@ -8,6 +8,7 @@ import {
 } from "@RpgTypes/rmmz/plugin";
 import type { ScalaPathResult } from "./arrayEx/types/result";
 import { getPathFromStructParam } from "./paramStruct";
+import { rrr } from "./read";
 import type { StructPathResult, StructPropertysPath } from "./types";
 
 interface Person {
@@ -98,14 +99,12 @@ const makeMap = (): ReadonlyMap<string, ClassifiedPluginParams> => {
 };
 
 describe("address", () => {
-  const path = [
-    {
-      scalas: `$.address["street","city","zipCode"]`,
-      scalaArrays: [],
-      structName: "Address",
-      os: toObjectPluginParams(addressSchema.scalas),
-    },
-  ] as const satisfies StructPropertysPath[];
+  const path: StructPropertysPath = {
+    scalas: `$.address["street","city","zipCode"]`,
+    scalaArrays: [],
+    structName: "Address",
+    os: toObjectPluginParams(addressSchema.scalas),
+  };
   const paramSchema = {
     name: "address",
     attr: { kind: "struct", struct: "Address" },
@@ -115,7 +114,7 @@ describe("address", () => {
       ["Address", addressSchema],
     ]);
     const result = getPathFromStructParam([paramSchema], "$", structMap);
-    expect(result.items).toEqual(path);
+    expect(result.items).toEqual([path]);
     expect(result.errors).toEqual([]);
   });
   test.skip("", () => {
@@ -128,12 +127,26 @@ describe("address", () => {
     };
     const expectedValues: ScalaPathResult[] = [
       {
-        value: "Sample City",
+        structName: "Address",
         param: { name: "street", attr: { kind: "string", default: "" } },
+        value: "123 Sample St",
       },
+      {
+        structName: "Address",
+        param: { name: "city", attr: { kind: "string", default: "" } },
+        value: "Sample City",
+      },
+      {
+        structName: "Address",
+        param: { name: "zipCode", attr: { kind: "string", default: "" } },
+        value: "12345",
+      },
+
       //      { value: "123 Sample St", param: path[0].scalas[0] },
     ];
 
+    const result = rrr(paramObject, path);
+    expect(result).toEqual(expectedValues);
     // const result = extractScalaParams(paramObject, path[0].scalas, [
     //   paramSchema,
     // ]);

@@ -1,7 +1,7 @@
 import type {
   ArrayParamTypes,
+  PluginParam,
   PluginParamEx,
-  ScalaParam,
 } from "@RpgTypes/rmmz/plugin";
 
 export interface StringSequenceParamValues {
@@ -18,5 +18,7 @@ export interface NumberSequenceParamValues {
 
 export interface ScalaPathResult {
   value: number | string | boolean;
-  param: PluginParamEx<ScalaParam>;
+
+  structName: string;
+  param: PluginParam;
 }
