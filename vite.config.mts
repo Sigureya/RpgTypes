@@ -59,7 +59,7 @@ export default defineConfig(({ mode }) => {
         },
         external: (id) =>
           id.endsWith(".test.ts") ||
-          ["ajv", "ajv-formats", "jsonschema"].includes(id),
+          ["ajv", "ajv-formats", "jsonschema", "jsonpath-js"].includes(id),
         plugins: [terser({ output: { comments: false, max_line_len: 180 } })],
       },
     },
