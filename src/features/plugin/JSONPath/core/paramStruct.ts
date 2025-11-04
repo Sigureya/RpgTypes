@@ -185,23 +185,22 @@ export function getPathFromStructParam(
   structMap: ReadonlyMap<string, ClassifiedPluginParams>,
   errors: ErrorCodes = ERROR_CODE
 ): StructPathResult {
-  return params.reduce<StructPathResult>(
-    (result, param) => {
-      const res: StructPathResult = getPathFromStructSchema(
-        param.attr.struct,
-        `${parent}.${param.name}`,
-        structMap,
-        errors
-      );
-      return {
-        items: result.items.concat(res.items),
-        errors: result.errors.concat(res.errors),
-      };
-    },
-    { items: [], errors: [] }
+  // 各パラメータから構造体名を取得し、collectFromSchemaで集約
+  const results = params.map((param) =>
+    collectFromSchema(
+      param.attr.struct,
+      `${parent}.${param.name}`,
+      structMap,
+      errors
+    )
   );
-}
 
+  // itemsとerrorsをまとめて返す
+  return {
+    items: results.flatMap((r) => r.items),
+    errors: results.flatMap((r) => r.errors),
+  };
+}
 export function getPathFromStructSchema(
   structName: string,
   parent: string,
