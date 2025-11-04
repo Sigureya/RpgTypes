@@ -1,7 +1,8 @@
 import { PluginCommandSchemaArray, PluginCommandSchemaArrayEx3 } from './arrayCommands';
 import { PluginParam, PluginParamEx, StructPluginParam } from './arrayParamItems';
 import { PluginStructSchemaArray, PluginStructSchemaArrayFilterd } from './arrayStructs';
-import { RpgVariableParam, RpgVariableArrayParam, FileParam, FileArrayParam } from './primitive';
+import { PrimitiveStringParam } from './paramUnion';
+import { RpgVariableParam, RpgVariableArrayParam, FileParam, FileArrayParam, StringArrayParam } from './primitive';
 export interface PluginSchemaArray {
     commands: PluginCommandSchemaArray[];
     params: PluginParam[];
@@ -14,3 +15,4 @@ export interface PluginSchemaArrayEx2<T extends PluginParam> extends PluginSchem
 }
 export type PluginVariableSchema = PluginSchemaArrayEx2<PluginParamEx<RpgVariableParam | RpgVariableArrayParam>>;
 export type PluginFileParamsSchema = PluginSchemaArrayEx2<PluginParamEx<FileParam | FileArrayParam>>;
+export type PluginTextSchema = PluginSchemaArrayEx2<PluginParamEx<PrimitiveStringParam | StringArrayParam>>;

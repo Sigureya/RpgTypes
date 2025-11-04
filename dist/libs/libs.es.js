@@ -1,5 +1,5 @@
-import { g as c, b as p } from "../shared/make.es.js";
-import { a as R, c as A, m as E } from "../shared/make.es.js";
+import { g as c, b as p } from "../shared/make.es2.js";
+import { a as R, c as A, m as E } from "../shared/make.es2.js";
 import { m as F } from "../shared/mergeItemsSource.es.js";
 const f = "rmmz", x = "colors", b = (e, a, r, s = {
   placeHolderMaxLength: 50,
