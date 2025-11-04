@@ -1,9 +1,10 @@
 import { describe, test, expect } from "vitest";
-import type {
-  ClassifiedPluginParams,
-  ClassifiedPluginParamsEx,
-  PluginParamEx,
-  StructRefParam,
+import {
+  toObjectPluginParams,
+  type ClassifiedPluginParams,
+  type ClassifiedPluginParamsEx,
+  type PluginParamEx,
+  type StructRefParam,
 } from "@RpgTypes/rmmz/plugin";
 import { JSONPathJS } from "jsonpath-js";
 import { getPathFromStructParam, getPathFromStructSchema } from "./paramStruct";
@@ -43,6 +44,7 @@ describe("person", () => {
         { path: "$.person.stringArray[*]", param: personSchema.scalaArrays[1] },
       ],
       structName: "MockPerson",
+      os: toObjectPluginParams(personSchema.scalas),
     },
   ] as const satisfies StructPropertysPath[];
   test("getPathFromStruct", () => {

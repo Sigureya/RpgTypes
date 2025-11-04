@@ -9,9 +9,6 @@ export interface PluginStructEx<T extends object> {
   };
 }
 
-/**
- * @deprecated
- */
 export interface PrimitiveStructBase {
   struct: string;
   params: Record<string, PrimitiveParam>;
@@ -22,7 +19,7 @@ export interface PluginStructType<T extends object> {
   params: PrimitiveStructParams<T>;
 }
 
-export type ToObjectParams<T extends PrimitiveParam, K extends string> = {
+export type ObjectParamsV5<K extends string, T extends PrimitiveParam> = {
   [key in K]?: T;
 };
 

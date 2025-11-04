@@ -1,11 +1,10 @@
 import { describe, test, expect } from "vitest";
+import { extractArrayParamValue } from "./extractParam";
+import type { ArrayParamPairEx, ArrayPathPair } from "./types/query";
 import type {
-  ArrayParamPairEx,
-  ArrayPathPair,
   NumberSequenceParamValues,
   StringSequenceParamValues,
-} from "./extractedTypes";
-import { extractArrayParamValue } from "./extractParam";
+} from "./types/result";
 
 interface Person {
   name: string;

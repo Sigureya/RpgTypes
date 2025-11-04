@@ -1,5 +1,5 @@
 import type { PluginParamEx } from "./arrayParamItems";
-import type { ScalaParam, ArrayParamTypes } from "./paramUnion";
+import type { ScalaParam, ArrayParamTypes, PrimitiveParam } from "./paramUnion";
 import type { PluginStructParamTypeEx } from "./pluginSchemaType";
 import type { StructRefParam, StructArrayRefParam } from "./primitive";
 
@@ -25,21 +25,14 @@ export interface ClassifiedPluginParamsEx2<
   scalaArrays: PluginParamEx<A>[];
 }
 
+export type ParamTypesEx4<T, Attr extends PrimitiveParam> = Extract<
+  PluginStructParamTypeEx<T>,
+  { attr: Attr; name: string }
+>;
+
 export interface ClassifiedPluginParamsEx<T> extends ClassifiedPluginParams {
-  structs: Extract<
-    PluginStructParamTypeEx<T>,
-    { attr: StructRefParam; name: string }
-  >[];
-  structArrays: Extract<
-    PluginStructParamTypeEx<T>,
-    { attr: StructArrayRefParam; name: string }
-  >[];
-  scalas: Extract<
-    PluginStructParamTypeEx<T>,
-    { attr: ScalaParam; name: string }
-  >[];
-  scalaArrays: Extract<
-    PluginStructParamTypeEx<T>,
-    { attr: ArrayParamTypes; name: string }
-  >[];
+  structs: ParamTypesEx4<T, StructRefParam>[];
+  structArrays: ParamTypesEx4<T, StructArrayRefParam>[];
+  scalas: ParamTypesEx4<T, ScalaParam>[];
+  scalaArrays: ParamTypesEx4<T, ArrayParamTypes>[];
 }

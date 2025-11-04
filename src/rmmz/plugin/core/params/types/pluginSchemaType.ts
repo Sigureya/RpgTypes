@@ -13,6 +13,24 @@ export type PluginStructParamTypeEx<T> = {
   };
 }[Extract<keyof T, string>];
 
+export type Error_NullForbidden = {
+  kind: "null is Forbidden";
+  default?: null;
+};
+
+export type Error_BooleanArrayForbidden = {
+  kind: "boolean[] is Forbidden";
+};
+
+export type Error_UndefinedForbidden = {
+  kind: "undefined is Forbidden";
+};
+
+export type PluginParamForbiddenTypes =
+  | Error_NullForbidden
+  | Error_UndefinedForbidden
+  | Error_BooleanArrayForbidden;
+
 export type PluginSchemaType<T> = T extends boolean
   ? BooleanParam
   : T extends number
@@ -24,16 +42,11 @@ export type PluginSchemaType<T> = T extends boolean
   : T extends string[]
   ? Extract<PrimitiveParam, { default: string[] }>
   : T extends null
-  ? {
-      kind: "null is Forbidden";
-      default?: null;
-    }
+  ? Error_NullForbidden
   : T extends undefined
-  ? {
-      kind: "undefined is Forbidden";
-    }
+  ? Error_UndefinedForbidden
   : T extends boolean[]
-  ? { kind: "boolean[] is Forbidden" }
+  ? Error_BooleanArrayForbidden
   : T extends object[]
   ? StructArrayRefParam
   : T extends object

@@ -1,8 +1,9 @@
 import type {
   ClassifiedPluginParams,
-  PluginParamEx,
   StructRefParam,
+  PluginParamEx,
 } from "@RpgTypes/rmmz/plugin";
+import { toObjectPluginParams } from "@RpgTypes/rmmz/plugin";
 import { makeScalaArrayParams, makeScalaParams } from "./paramScala";
 import type {
   ErrorCodes,
@@ -27,6 +28,54 @@ interface State {
   errs: StructPathError[];
 }
 
+const createNode = (
+  structSchema: ClassifiedPluginParams,
+  { path, structName }: { path: string; structName: string }
+): StructPropertysPath => {
+  const os = toObjectPluginParams(structSchema.scalas);
+
+  return {
+    os: os,
+    // struct: structSchema,
+    structName: structName,
+    scalaArrays: makeScalaArrayParams(structSchema.scalaArrays, path),
+    scalas:
+      structSchema.scalas.length > 0
+        ? makeScalaParams(structSchema.scalas, path)
+        : undefined,
+  };
+};
+
+const createChildFrames = (
+  lastFrame: Frame,
+  structSchema: ClassifiedPluginParams
+): Frame[] => {
+  const childAncestry: string[] = lastFrame.ancestry.concat(
+    lastFrame.schemaName
+  );
+  const path: string = lastFrame.basePath;
+  // // 子フレームを作成（希望する処理順: structFrames -> structArrayFrames）
+  const structFrames: Frame[] = structSchema.structs.map(
+    (s): Frame => ({
+      schemaName: s.attr.struct,
+      basePath: `${path}.${s.name}`,
+      ancestry: childAncestry,
+    })
+  );
+  const structArrayFrames: Frame[] = structSchema.structArrays.map(
+    (sa): Frame => ({
+      schemaName: sa.attr.struct,
+      basePath: `${path}.${sa.name}[*]`,
+      ancestry: childAncestry,
+    })
+  );
+  // childrenDesired: structs の順で先に処理し、その後 structArrays を処理したい
+
+  return [...structFrames, ...structArrayFrames]
+    .slice() // 余計な要素を削る
+    .reverse(); // LIFO スタックなので、desired の逆順で push
+};
+
 const stepState = (
   state: State,
   structMap: ReadonlyMap<string, ClassifiedPluginParams>,
@@ -38,68 +87,60 @@ const stepState = (
 
   // スタック操作：pop / push を用いてミュータブルに集約
   const frame = state.frames.pop() as Frame;
-  const name = frame.schemaName;
-  const path = frame.basePath;
-  const ancestry = frame.ancestry;
 
   // 循環チェック（ancestry に同じ schemaName が含まれていれば循環）
-  if (ancestry.includes(name)) {
-    state.errs.push({ code: errors.cyclicStruct, path });
-    return state;
+  if (frame.ancestry.includes(frame.schemaName)) {
+    return {
+      frames: state.frames,
+      items: state.items,
+      errs: [
+        ...state.errs,
+        {
+          code: errors.cyclicStruct,
+          path: frame.basePath,
+        },
+      ],
+    };
   }
 
-  const schema = structMap.get(name);
-  if (!schema) {
-    state.errs.push({ code: errors.undefinedStruct, path });
-    return state;
+  const structSchema = structMap.get(frame.schemaName);
+  if (!structSchema) {
+    return {
+      frames: state.frames,
+      items: state.items,
+      errs: [
+        ...state.errs,
+        {
+          code: errors.undefinedStruct,
+          path: frame.basePath,
+        },
+      ],
+    };
   }
 
-  if (schema.scalas.length > 0 || schema.scalaArrays.length > 0) {
+  const childrenDesired: Frame[] = createChildFrames(frame, structSchema);
+
+  if (structSchema.scalas.length > 0 || structSchema.scalaArrays.length > 0) {
     // 現在ノードを追加（pre-order）
 
-    const current: StructPropertysPath = {
-      structName: name,
-      scalaArrays: makeScalaArrayParams(schema.scalaArrays, path),
-      scalas:
-        schema.scalas.length > 0
-          ? makeScalaParams(schema.scalas, path)
-          : undefined,
+    const current: StructPropertysPath = createNode(structSchema, {
+      path: frame.basePath,
+      structName: frame.schemaName,
+    });
+    return {
+      frames: [...state.frames, ...childrenDesired],
+      items: [...state.items, current],
+      errs: state.errs,
     };
-    state.items.push(current);
   }
 
-  // childAncestry を作る（配列を concat して新しい配列を作成）
-  const childAncestry = ancestry.concat(name);
-
-  // 子フレームを作成（希望する処理順: structFrames -> structArrayFrames）
-  const structFrames: Frame[] = schema.structs.map(
-    (s): Frame => ({
-      schemaName: s.attr.struct,
-      basePath: `${path}.${s.name}`,
-      ancestry: childAncestry,
-    })
-  );
-  const structArrayFrames: Frame[] = schema.structArrays.map(
-    (sa): Frame => ({
-      schemaName: sa.attr.struct,
-      basePath: `${path}.${sa.name}[*]`,
-      ancestry: childAncestry,
-    })
-  );
-
-  // childrenDesired: structs の順で先に処理し、その後 structArrays を処理したい
-  const childrenDesired: Frame[] = structFrames.concat(structArrayFrames);
-
-  // LIFO スタックなので、desired の逆順で push する（reduce を使用して void 戻りを避ける）
-  childrenDesired
-    .slice()
-    .reverse()
-    .reduce<Frame[]>((acc, f) => {
-      state.frames.push(f);
-      return acc;
-    }, []);
-
-  return state;
+  return childrenDesired.length > 0
+    ? {
+        frames: [...state.frames, ...childrenDesired],
+        items: state.items,
+        errs: state.errs,
+      }
+    : state;
 };
 
 function collectFromSchema(
