@@ -104,7 +104,6 @@ describe("address", () => {
       scalaArrays: [],
       structName: "Address",
       os: toObjectPluginParams(addressSchema.scalas),
-      //      struct: addressSchema,
     },
   ] as const satisfies StructPropertysPath[];
   const paramSchema = {
