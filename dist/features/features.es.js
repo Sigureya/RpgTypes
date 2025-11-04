@@ -1,4 +1,4 @@
-import { cZ as me, cY as de, c$ as pe, B as R, z as _, A as V, cF as le, aK as U, aJ as L, aF as O, i as b, j as F, C as v, c as h, d as S, S as C, m as ue, b as ye, a_ as ge, aZ as D, h as G, b0 as fe, cB as z, cC as xe, cR as be, cX as he, cW as Te, cT as ke, b2 as ve, b1 as Ie, cP as Ne, r as we, cl as je } from "../shared/make.es2.js";
+import { cZ as me, cY as de, c$ as pe, B as R, z as _, A as V, cF as le, aK as U, aJ as L, aF as O, i as b, j as F, C as v, c as h, d as S, S as C, m as ue, b as ye, a_ as ge, aZ as D, h as G, b0 as fe, cB as z, cC as xe, cR as be, cX as he, cW as Te, cT as ke, b2 as ve, b1 as Ie, cP as Ne, r as we, cl as je } from "../shared/make.es3.js";
 import { m as Z } from "../shared/mergeItemsSource.es.js";
 import { l as Fe } from "../shared/lookupRpgDataKind.es.js";
 const H = (e, a, t) => e.reduce((s, n) => (n.code !== R && n.code !== _ && n.code !== V || s.push(Ce(n, a, t)), s), []), Se = { [V]: "weapon", [R]: "armor", [_]: "item" }, Ce = (e, a, t) => {
