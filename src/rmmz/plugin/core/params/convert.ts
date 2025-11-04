@@ -10,12 +10,11 @@ import type {
   ObjectParamsV5,
 } from "./types";
 
-export function toObjectPluginParams<
-  T extends PrimitiveParam,
-  K extends string
->(params: ReadonlyArray<PluginParamEx<T, K>>): ObjectParamsV5<K, T> {
-  const e = params.map((p): [K, T] => [p.name, p.attr]);
-  return Object.fromEntries<T>(e) as ObjectParamsV5<K, T>;
+export function toObjectPluginParams(
+  params: ReadonlyArray<PluginParam>
+): Record<string, PrimitiveParam> {
+  const e = params.map((p): [string, PrimitiveParam] => [p.name, p.attr]);
+  return Object.fromEntries(e);
 }
 
 export const toArrayPluginParam = <T extends PrimitiveParam, K extends string>(

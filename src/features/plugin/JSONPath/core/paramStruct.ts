@@ -37,9 +37,7 @@ const createNode = (
   structSchema: ClassifiedPluginParams,
   { path, structName }: { path: string; structName: string }
 ): StructPropertysPath => {
-  const os: ObjectParamsV5<string, ScalaParam> = toObjectPluginParams(
-    structSchema.scalas
-  );
+  const os = toObjectPluginParams(structSchema.scalas);
 
   return {
     os: os,
