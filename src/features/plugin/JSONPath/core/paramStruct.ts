@@ -124,7 +124,7 @@ const stepState = (
     });
     newFrames.push(...childrenDesired);
     return {
-      frames: [...newFrames, ...childrenDesired],
+      frames: newFrames,
       items: [...state.items, current],
       errs: state.errs,
     };
