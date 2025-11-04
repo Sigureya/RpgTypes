@@ -1,12 +1,12 @@
 import { describe, test, expect } from "vitest";
-import type {
-  ClassifiedPluginParams,
-  ClassifiedPluginParamsEx,
-  PluginParamEx,
-  StructRefParam,
+import {
+  toObjectPluginParams,
+  type ClassifiedPluginParams,
+  type ClassifiedPluginParamsEx,
+  type PluginParamEx,
+  type StructRefParam,
 } from "@RpgTypes/rmmz/plugin";
-import type { ScalaPathResult } from "./arrayEx/extractedTypes";
-import { extractScalaParams } from "./arrayEx/extractParam";
+import type { ScalaPathResult } from "./arrayEx/types/result";
 import { getPathFromStructParam } from "./paramStruct";
 import type { StructPathResult, StructPropertysPath } from "./types";
 
@@ -103,6 +103,8 @@ describe("address", () => {
       scalas: `$.address["street","city","zipCode"]`,
       scalaArrays: [],
       structName: "Address",
+      os: toObjectPluginParams(addressSchema.scalas),
+      //      struct: addressSchema,
     },
   ] as const satisfies StructPropertysPath[];
   const paramSchema = {
@@ -148,6 +150,7 @@ describe("person", () => {
         { path: "$.person.nicknames[*]", param: personScheame.scalaArrays[1] },
       ],
       structName: "Person",
+      os: toObjectPluginParams(personScheame.scalas),
     },
   ];
   test("getPathFromStruct", () => {
@@ -174,6 +177,7 @@ describe("classroom", () => {
       scalas: `$.classroom["className"]`,
       scalaArrays: [],
       structName: "Class",
+      os: toObjectPluginParams(classRoomSchema.scalas),
     },
     {
       scalas: `$.classroom.teacher["name","age"]`,
@@ -188,6 +192,7 @@ describe("classroom", () => {
         },
       ],
       structName: "Person",
+      os: toObjectPluginParams(personScheame.scalas),
     },
     {
       scalas: `$.classroom.students[*]["name","age"]`,
@@ -202,6 +207,7 @@ describe("classroom", () => {
         },
       ],
       structName: "Person",
+      os: toObjectPluginParams(personScheame.scalas),
     },
   ];
   test("getPathFromStruct", () => {
@@ -225,18 +231,22 @@ describe("school", () => {
       structName: "School",
       scalas: `$.school["since"]`,
       scalaArrays: [],
+      os: toObjectPluginParams(schoolSchema.scalas),
     },
     {
       structName: "Address",
       scalas: `$.school.address["street","city","zipCode"]`,
       scalaArrays: [],
+      os: toObjectPluginParams(addressSchema.scalas),
     },
     {
       structName: "Class",
       scalas: `$.school.classrooms[*]["className"]`,
       scalaArrays: [],
+      os: toObjectPluginParams(classRoomSchema.scalas),
     },
     {
+      os: toObjectPluginParams(personScheame.scalas),
       structName: "Person",
       scalas: `$.school.classrooms[*].teacher["name","age"]`,
       scalaArrays: [
@@ -263,6 +273,7 @@ describe("school", () => {
           param: personScheame.scalaArrays[1],
         },
       ],
+      os: toObjectPluginParams(personScheame.scalas),
     },
   ];
 

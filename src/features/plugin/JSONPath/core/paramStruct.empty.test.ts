@@ -45,6 +45,9 @@ describe("empty struct", () => {
         structName: "NotEmptyStruct",
         scalas: `$.notEmptyStruct["actorId"]`,
         scalaArrays: [],
+        os: {
+          actorId: { kind: "actor", default: 0 },
+        },
       },
     ];
     expect(result.items).toEqual(expected);
@@ -71,6 +74,7 @@ describe("empty struct", () => {
     const result = getPathFromStructParam([param], "$", structMap);
     const expected: StructPropertysPath[] = [
       {
+        os: {},
         structName: "EmptyStructArray",
         scalas: undefined,
         scalaArrays: [

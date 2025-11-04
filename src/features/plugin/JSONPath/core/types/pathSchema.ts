@@ -1,15 +1,29 @@
-import type { ArrayParamTypes, PluginParamEx } from "@RpgTypes/rmmz/plugin";
+import type {
+  ArrayParamTypes,
+  PluginParamEx,
+  ParamTypesEx4,
+  StructRefParam,
+  StructArrayRefParam,
+  ClassifiedPluginParams,
+  ObjectParamsV5,
+  ScalaParam,
+  PrimitiveParam,
+} from "@RpgTypes/rmmz/plugin";
 
 export interface StructPropertysPath {
   structName: string;
   scalas: string | undefined;
   scalaArrays: PathPair[];
-  params?: unknown[];
+  struct?: null;
+  os?: Partial<Record<string, PrimitiveParam>> | null;
 }
 
-type SPR<T> = {
-  [K in keyof T as string]: unknown;
-};
+export interface StructPropertysPathV2<T> {
+  structName: string;
+  scalas: string | undefined;
+  scalaArrays: PathPair[];
+  struct?: null | ClassifiedPluginParams;
+}
 
 export interface PathPair {
   path: string;

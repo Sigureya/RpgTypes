@@ -1,7 +1,13 @@
 import type {
+  ScalaParam,
+  ObjectParamsV5,
   ClassifiedPluginParams,
-  PluginParamEx,
   StructRefParam,
+  PluginParamEx,
+} from "@RpgTypes/rmmz/plugin";
+import {
+  convertStructSchema,
+  toObjectPluginParams,
 } from "@RpgTypes/rmmz/plugin";
 import { makeScalaArrayParams, makeScalaParams } from "./paramScala";
 import type {
@@ -27,6 +33,26 @@ interface State {
   errs: StructPathError[];
 }
 
+const createNode = (
+  structSchema: ClassifiedPluginParams,
+  { path, structName }: { path: string; structName: string }
+): StructPropertysPath => {
+  const os: ObjectParamsV5<string, ScalaParam> = toObjectPluginParams(
+    structSchema.scalas
+  );
+
+  return {
+    os: os,
+    // struct: structSchema,
+    structName: structName,
+    scalaArrays: makeScalaArrayParams(structSchema.scalaArrays, path),
+    scalas:
+      structSchema.scalas.length > 0
+        ? makeScalaParams(structSchema.scalas, path)
+        : undefined,
+  };
+};
+
 const stepState = (
   state: State,
   structMap: ReadonlyMap<string, ClassifiedPluginParams>,
@@ -48,23 +74,19 @@ const stepState = (
     return state;
   }
 
-  const schema = structMap.get(name);
-  if (!schema) {
+  const structSchema = structMap.get(name);
+  if (!structSchema) {
     state.errs.push({ code: errors.undefinedStruct, path });
     return state;
   }
 
-  if (schema.scalas.length > 0 || schema.scalaArrays.length > 0) {
+  if (structSchema.scalas.length > 0 || structSchema.scalaArrays.length > 0) {
     // 現在ノードを追加（pre-order）
 
-    const current: StructPropertysPath = {
+    const current: StructPropertysPath = createNode(structSchema, {
+      path,
       structName: name,
-      scalaArrays: makeScalaArrayParams(schema.scalaArrays, path),
-      scalas:
-        schema.scalas.length > 0
-          ? makeScalaParams(schema.scalas, path)
-          : undefined,
-    };
+    });
     state.items.push(current);
   }
 
@@ -72,14 +94,14 @@ const stepState = (
   const childAncestry = ancestry.concat(name);
 
   // 子フレームを作成（希望する処理順: structFrames -> structArrayFrames）
-  const structFrames: Frame[] = schema.structs.map(
+  const structFrames: Frame[] = structSchema.structs.map(
     (s): Frame => ({
       schemaName: s.attr.struct,
       basePath: `${path}.${s.name}`,
       ancestry: childAncestry,
     })
   );
-  const structArrayFrames: Frame[] = schema.structArrays.map(
+  const structArrayFrames: Frame[] = structSchema.structArrays.map(
     (sa): Frame => ({
       schemaName: sa.attr.struct,
       basePath: `${path}.${sa.name}[*]`,

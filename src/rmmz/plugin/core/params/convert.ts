@@ -7,19 +7,19 @@ import type {
   PluginStructSchemaArray,
   PluginStructType,
   PrimitiveParam,
-  ToObjectParams,
+  ObjectParamsV5,
 } from "./types";
 
 export function toObjectPluginParams<
   T extends PrimitiveParam,
   K extends string
->(params: ReadonlyArray<PluginParamEx<T, K>>): ToObjectParams<T, K> {
+>(params: ReadonlyArray<PluginParamEx<T, K>>): ObjectParamsV5<K, T> {
   const e = params.map((p): [K, T] => [p.name, p.attr]);
-  return Object.fromEntries<T>(e) as ToObjectParams<T, K>;
+  return Object.fromEntries<T>(e) as ObjectParamsV5<K, T>;
 }
 
 export const toArrayPluginParam = <T extends PrimitiveParam, K extends string>(
-  params: ToObjectParams<T, K & string>
+  params: ObjectParamsV5<K & string, T>
 ): PluginParamEx<T, string & K>[] => {
   return Object.entries<T>(params as Record<string & K, T>).map(
     ([name, attr]): PluginParamEx<T, K & string> => {

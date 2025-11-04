@@ -6,7 +6,7 @@ import type {
   PrimitiveParam,
   PrimitiveStructParams,
   ScalaParam,
-  ToObjectParams,
+  ObjectParamsV5,
 } from "./types";
 
 interface MockStruct {
@@ -33,7 +33,7 @@ const nameSort = <P extends PluginParam>(params: ReadonlyArray<P>) => {
 
 describe("ToObjectParams<T> and PluginParamEx<T, K> conversion and type validation", () => {
   describe("ToObjectParams<ScalaParam, keyof T> <-> PluginParamEx<ScalaParam, keyof T>[]", () => {
-    const objectParams: ToObjectParams<ScalaParam, keyof MockStruct> = {
+    const objectParams: ObjectParamsV5<keyof MockStruct, ScalaParam> = {
       name: { kind: "string", default: "defaultName" },
       num: { kind: "number", default: 100 },
       isActive: { kind: "boolean", default: false },

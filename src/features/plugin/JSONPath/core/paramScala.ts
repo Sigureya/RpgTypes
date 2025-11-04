@@ -3,7 +3,7 @@ import type {
   ArrayParamTypes,
   PluginParamEx,
 } from "@RpgTypes/rmmz/plugin";
-import type { ArrayPathPair } from "./arrayEx/extractedTypes";
+import type { ArrayPathPair } from "./arrayEx/types/query";
 
 export const makeScalaParams = (
   scalas: ReadonlyArray<PluginParamEx<ScalaParam>>,
