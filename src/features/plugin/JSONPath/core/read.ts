@@ -4,45 +4,49 @@ import { JSONPathJS } from "jsonpath-js";
 import type { ScalaPathResult } from "./arrayEx/types/result";
 import type { StructPropertysPath } from "./types";
 
-export const rrr = (
+export const extractScalaValuesFromJson = (
   json: JSONValue,
-  path: StructPropertysPath
+  structPath: StructPropertysPath
 ): ScalaPathResult[] => {
-  if (!path.scalas) {
+  if (!structPath.scalas) {
     return [];
   }
-  const p = new JSONPathJS(path.scalas);
-  const seg = p.pathSegments(json);
-  return pp(seg, path);
+  const jsonPath = new JSONPathJS(structPath.scalas);
+  const segments = jsonPath.pathSegments(json);
+  return collectScalaResults(segments, structPath);
 };
 
-interface Seg {
+interface PathSegment {
   value: JSONValue;
   segments: (string | number)[];
 }
 
-const pp = (
-  seg: ReadonlyArray<Seg>,
-  path: StructPropertysPath
+/**
+ * セグメント配列からScalaPathResult配列を生成する
+ */
+const collectScalaResults = (
+  segments: ReadonlyArray<PathSegment>,
+  structPath: StructPropertysPath
 ): ScalaPathResult[] => {
-  return seg.reduce<ScalaPathResult[]>((acc, { segments, value }) => {
+  return segments.reduce<ScalaPathResult[]>((acc, { segments, value }) => {
     if (typeof value === "object") {
       return acc;
     }
-    const name = segments[segments.length - 1];
-    if (typeof name === "number") {
+    const paramName = segments[segments.length - 1];
+    if (typeof paramName === "number") {
       return acc;
     }
 
-    const schema: PrimitiveParam | undefined = path.os[name];
+    const schema: PrimitiveParam | undefined =
+      structPath.objectSchema[paramName];
     if (!schema) {
       return acc;
     }
 
     const result: ScalaPathResult = {
       value: value,
-      structName: path.structName,
-      param: { name, attr: schema },
+      structName: structPath.structName,
+      param: { name: paramName, attr: schema },
     };
     return [...acc, result];
   }, []);

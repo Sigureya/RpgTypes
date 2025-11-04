@@ -35,7 +35,7 @@ const createNode = (
   const os = toObjectPluginParams(structSchema.scalas);
 
   return {
-    os: os,
+    objectSchema: os,
     // struct: structSchema,
     structName: structName,
     scalaArrays: makeScalaArrayParams(structSchema.scalaArrays, path),

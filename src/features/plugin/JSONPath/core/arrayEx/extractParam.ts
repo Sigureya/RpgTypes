@@ -53,7 +53,8 @@ export const extractArrayParamValue = (
 export const extractScalaParams = (
   data: JSONValue,
   path: string,
-  params: ReadonlyArray<PluginParamEx<ScalaParam>>
+  params: ReadonlyArray<PluginParamEx<ScalaParam>>,
+  structName: string
 ): ScalaPathResult[] => {
   const map = new Map(params.map((param) => [param.name, param.attr] as const));
   const jsonPath = new JSONPathJS(path);
@@ -71,6 +72,7 @@ export const extractScalaParams = (
       return acc;
     }
     acc.push({
+      structName,
       value: value,
       param: { name: lastSegment, attr: schema },
     });
