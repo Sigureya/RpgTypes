@@ -1,6 +1,7 @@
 import type { JSONValue } from "@RpgTypes/libs";
 import type { PrimitiveParam } from "@RpgTypes/rmmz/plugin";
 import { JSONPathJS } from "jsonpath-js";
+import { extractArrayParamValue } from "./arrayEx/extractParam";
 import type {
   NumberSequenceParamValues,
   ScalaPathResult,
@@ -17,7 +18,7 @@ export const extractScalaValuesFromJson = (
   }
   const jsonPath = new JSONPathJS(structPath.scalas);
   const segments = jsonPath.pathSegments(json);
-  return collectScalaResults(segments, structPath);
+  return collectScalaResults(segments, structPath, structPath.structName);
 };
 
 interface PathSegment {
@@ -30,7 +31,8 @@ interface PathSegment {
  */
 const collectScalaResults = (
   segments: ReadonlyArray<PathSegment>,
-  structPath: StructPropertysPath
+  structPath: StructPropertysPath,
+  structName: string
 ): ScalaPathResult[] => {
   return segments.reduce<ScalaPathResult[]>((acc, { segments, value }) => {
     if (typeof value === "object") {
@@ -49,7 +51,7 @@ const collectScalaResults = (
 
     const result: ScalaPathResult = {
       value: value,
-      structName: structPath.structName,
+      structName: structName,
       param: { name: paramName, attr: schema },
     };
     return [...acc, result];
@@ -60,5 +62,12 @@ export const extractArrayValuesFromJson = (
   json: JSONValue,
   structPath: StructPropertysPath
 ): (StringSequenceParamValues | NumberSequenceParamValues)[] => {
-  return [];
+  return structPath.scalaArrays
+    .map((scalaArray) => {
+      return extractArrayParamValue(json, scalaArray);
+    })
+    .filter(
+      (v): v is StringSequenceParamValues | NumberSequenceParamValues =>
+        v !== null
+    );
 };

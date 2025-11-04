@@ -6,9 +6,13 @@ import type {
   StructRefParam,
 } from "@RpgTypes/rmmz/plugin";
 import { toObjectPluginParams } from "@RpgTypes/rmmz/plugin";
-import type { ScalaPathResult } from "./arrayEx/types/result";
+import type {
+  NumberSequenceParamValues,
+  ScalaPathResult,
+  StringSequenceParamValues,
+} from "./arrayEx/types/result";
 import { getPathFromStructParam } from "./paramStruct";
-import { extractScalaValuesFromJson } from "./read";
+import { extractArrayValuesFromJson, extractScalaValuesFromJson } from "./read";
 import type { StructPathResult, StructPropertysPath } from "./types";
 
 interface Person {
@@ -110,6 +114,13 @@ describe("address", () => {
     name: "address",
     attr: { kind: "struct", struct: "Address" },
   } as const satisfies PluginParamEx<StructRefParam>;
+  const paramObject = {
+    address: {
+      city: "Sample City",
+      street: "123 Sample St",
+      zipCode: "12345",
+    } as const satisfies Address,
+  };
   test("getPathFromStruct", () => {
     const structMap: ReadonlyMap<string, ClassifiedPluginParams> = new Map([
       ["Address", addressSchema],
@@ -118,14 +129,8 @@ describe("address", () => {
     expect(result.items).toEqual([path]);
     expect(result.errors).toEqual([]);
   });
+
   test("extractScalaValuesFromJson", () => {
-    const paramObject = {
-      address: {
-        city: "Sample City",
-        street: "123 Sample St",
-        zipCode: "12345",
-      } as const satisfies Address,
-    };
     const expectedValues: ScalaPathResult[] = [
       {
         structName: "Address",
@@ -147,6 +152,10 @@ describe("address", () => {
     const result = extractScalaValuesFromJson(paramObject, path);
     expect(result).toEqual(expectedValues);
   });
+  test("", () => {
+    const result = extractArrayValuesFromJson(paramObject, path);
+    expect(result).toEqual([]);
+  });
 });
 
 describe("person", () => {
@@ -162,6 +171,14 @@ describe("person", () => {
       objectSchema: toObjectPluginParams(personScheame.scalas),
     },
   ];
+  const paramObject = {
+    person: {
+      name: "John Doe",
+      age: 30,
+      items: [1, 2, 3],
+      nicknames: ["Johnny", "JD"],
+    } as const satisfies Person,
+  };
   test("getPathFromStruct", () => {
     const param = {
       name: "person",
@@ -179,14 +196,6 @@ describe("person", () => {
     expect(result.errors).toEqual([]);
   });
   test("extractScalaValuesFromJson", () => {
-    const paramObject = {
-      person: {
-        name: "John Doe",
-        age: 30,
-        items: [1, 2, 3],
-        nicknames: ["Johnny", "JD"],
-      } as const satisfies Person,
-    };
     const expectedValues: ScalaPathResult[] = [
       {
         structName: "Person",
@@ -200,6 +209,25 @@ describe("person", () => {
       },
     ];
     const result = extractScalaValuesFromJson(paramObject, path[0]);
+    expect(result).toEqual(expectedValues);
+  });
+  test("extractArrayValuesFromJson", () => {
+    const expectedValues: (
+      | StringSequenceParamValues
+      | NumberSequenceParamValues
+    )[] = [
+      {
+        param: { name: "items", attr: { kind: "number[]", default: [] } },
+        values: [1, 2, 3],
+        valueKind: "number",
+      },
+      {
+        param: { name: "nicknames", attr: { kind: "string[]", default: [] } },
+        values: ["Johnny", "JD"],
+        valueKind: "string",
+      },
+    ];
+    const result = extractArrayValuesFromJson(paramObject, path[0]);
     expect(result).toEqual(expectedValues);
   });
 });
