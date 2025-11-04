@@ -23,7 +23,7 @@ interface Frame {
   ancestry: string[];
 }
 interface State {
-  frames: Frame[];
+  frames: Array<Frame>;
   items: StructPropertysPath[];
   errs: StructPathError[];
 }
@@ -72,34 +72,6 @@ const createChildFrames = (
   return [...structFrames, ...structArrayFrames].reverse(); // LIFO スタックなので、desired の逆順で push
 };
 
-const addNewNode = (
-  state: State,
-  frame: Frame,
-  structSchema: ClassifiedPluginParams,
-  childrenDesired: ReadonlyArray<Frame>
-): State => {
-  if (structSchema.scalas.length > 0 || structSchema.scalaArrays.length > 0) {
-    // 現在ノードを追加（pre-order）
-
-    const current: StructPropertysPath = createNode(structSchema, {
-      path: frame.basePath,
-      structName: frame.schemaName,
-    });
-    return {
-      frames: [...state.frames, ...childrenDesired],
-      items: [...state.items, current],
-      errs: state.errs,
-    };
-  }
-  return childrenDesired.length > 0
-    ? {
-        frames: [...state.frames, ...childrenDesired],
-        items: state.items,
-        errs: state.errs,
-      }
-    : state;
-};
-
 const stepState = (
   state: State,
   structMap: ReadonlyMap<string, ClassifiedPluginParams>,
@@ -109,13 +81,13 @@ const stepState = (
     return state;
   }
 
-  // スタック操作：pop / push を用いてミュータブルに集約
-  const frame = state.frames.pop() as Frame;
+  const frame = state.frames[state.frames.length - 1];
+  const newFrames: Frame[] = state.frames.slice(0, -1);
 
   // 循環チェック（ancestry に同じ schemaName が含まれていれば循環）
   if (frame.ancestry.includes(frame.schemaName)) {
     return {
-      frames: state.frames,
+      frames: newFrames,
       items: state.items,
       errs: [
         ...state.errs,
@@ -130,7 +102,7 @@ const stepState = (
   const structSchema = structMap.get(frame.schemaName);
   if (!structSchema) {
     return {
-      frames: state.frames,
+      frames: newFrames,
       items: state.items,
       errs: [
         ...state.errs,
@@ -143,8 +115,26 @@ const stepState = (
   }
 
   const childrenDesired: Frame[] = createChildFrames(frame, structSchema);
+  if (structSchema.scalas.length > 0 || structSchema.scalaArrays.length > 0) {
+    // 現在ノードを追加（pre-order）
 
-  return addNewNode(state, frame, structSchema, childrenDesired);
+    const current: StructPropertysPath = createNode(structSchema, {
+      path: frame.basePath,
+      structName: frame.schemaName,
+    });
+    newFrames.push(...childrenDesired);
+    return {
+      frames: [...newFrames, ...childrenDesired],
+      items: [...state.items, current],
+      errs: state.errs,
+    };
+  }
+  newFrames.push(...childrenDesired);
+  return {
+    frames: newFrames,
+    items: state.items,
+    errs: state.errs,
+  };
 };
 
 function collectFromSchema(
