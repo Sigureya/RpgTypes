@@ -51,47 +51,15 @@ const createNode = (
   };
 };
 
-const stepState = (
-  state: State,
-  structMap: ReadonlyMap<string, ClassifiedPluginParams>,
-  errors: ErrorCodes
-): State => {
-  if (state.frames.length === 0) {
-    return state;
-  }
-
-  // スタック操作：pop / push を用いてミュータブルに集約
-  const frame = state.frames.pop() as Frame;
-  const name = frame.schemaName;
-  const path = frame.basePath;
-  const ancestry = frame.ancestry;
-
-  // 循環チェック（ancestry に同じ schemaName が含まれていれば循環）
-  if (ancestry.includes(name)) {
-    state.errs.push({ code: errors.cyclicStruct, path });
-    return state;
-  }
-
-  const structSchema = structMap.get(name);
-  if (!structSchema) {
-    state.errs.push({ code: errors.undefinedStruct, path });
-    return state;
-  }
-
-  if (structSchema.scalas.length > 0 || structSchema.scalaArrays.length > 0) {
-    // 現在ノードを追加（pre-order）
-
-    const current: StructPropertysPath = createNode(structSchema, {
-      path,
-      structName: name,
-    });
-    state.items.push(current);
-  }
-
-  // childAncestry を作る（配列を concat して新しい配列を作成）
-  const childAncestry = ancestry.concat(name);
-
-  // 子フレームを作成（希望する処理順: structFrames -> structArrayFrames）
+const jjFF = (
+  lastFrame: Frame,
+  structSchema: ClassifiedPluginParams
+): Frame[] => {
+  const childAncestry: string[] = lastFrame.ancestry.concat(
+    lastFrame.schemaName
+  );
+  const path: string = lastFrame.basePath;
+  // // 子フレームを作成（希望する処理順: structFrames -> structArrayFrames）
   const structFrames: Frame[] = structSchema.structs.map(
     (s): Frame => ({
       schemaName: s.attr.struct,
@@ -106,9 +74,52 @@ const stepState = (
       ancestry: childAncestry,
     })
   );
-
   // childrenDesired: structs の順で先に処理し、その後 structArrays を処理したい
-  const childrenDesired: Frame[] = structFrames.concat(structArrayFrames);
+
+  return [...structFrames, ...structArrayFrames];
+};
+
+const stepState = (
+  state: State,
+  structMap: ReadonlyMap<string, ClassifiedPluginParams>,
+  errors: ErrorCodes
+): State => {
+  if (state.frames.length === 0) {
+    return state;
+  }
+
+  // スタック操作：pop / push を用いてミュータブルに集約
+  const frame = state.frames.pop() as Frame;
+
+  // 循環チェック（ancestry に同じ schemaName が含まれていれば循環）
+  if (frame.ancestry.includes(frame.schemaName)) {
+    state.errs.push({
+      code: errors.cyclicStruct,
+      path: frame.basePath,
+    });
+    return state;
+  }
+
+  const structSchema = structMap.get(frame.schemaName);
+  if (!structSchema) {
+    state.errs.push({
+      code: errors.undefinedStruct,
+      path: frame.basePath,
+    });
+    return state;
+  }
+
+  if (structSchema.scalas.length > 0 || structSchema.scalaArrays.length > 0) {
+    // 現在ノードを追加（pre-order）
+
+    const current: StructPropertysPath = createNode(structSchema, {
+      path: frame.basePath,
+      structName: frame.schemaName,
+    });
+    state.items.push(current);
+  }
+
+  const childrenDesired: Frame[] = jjFF(frame, structSchema);
 
   // LIFO スタックなので、desired の逆順で push する（reduce を使用して void 戻りを避ける）
   childrenDesired
