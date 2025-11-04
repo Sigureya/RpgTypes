@@ -1,14 +1,9 @@
 import type {
-  ScalaParam,
-  ObjectParamsV5,
   ClassifiedPluginParams,
   StructRefParam,
   PluginParamEx,
 } from "@RpgTypes/rmmz/plugin";
-import {
-  convertStructSchema,
-  toObjectPluginParams,
-} from "@RpgTypes/rmmz/plugin";
+import { toObjectPluginParams } from "@RpgTypes/rmmz/plugin";
 import { makeScalaArrayParams, makeScalaParams } from "./paramScala";
 import type {
   ErrorCodes,
@@ -51,7 +46,7 @@ const createNode = (
   };
 };
 
-const jjFF = (
+const createChildFrames = (
   lastFrame: Frame,
   structSchema: ClassifiedPluginParams
 ): Frame[] => {
@@ -93,21 +88,37 @@ const stepState = (
 
   // 循環チェック（ancestry に同じ schemaName が含まれていれば循環）
   if (frame.ancestry.includes(frame.schemaName)) {
-    state.errs.push({
-      code: errors.cyclicStruct,
-      path: frame.basePath,
-    });
-    return state;
+    return {
+      frames: state.frames,
+      items: state.items,
+      errs: [
+        ...state.errs,
+        {
+          code: errors.cyclicStruct,
+          path: frame.basePath,
+        },
+      ],
+    };
   }
 
   const structSchema = structMap.get(frame.schemaName);
   if (!structSchema) {
-    state.errs.push({
-      code: errors.undefinedStruct,
-      path: frame.basePath,
-    });
-    return state;
+    return {
+      frames: state.frames,
+      items: state.items,
+      errs: [
+        ...state.errs,
+        {
+          code: errors.undefinedStruct,
+          path: frame.basePath,
+        },
+      ],
+    };
   }
+
+  const childrenDesired: Frame[] = createChildFrames(frame, structSchema)
+    .slice() // 余計な要素を削る
+    .reverse(); // LIFO スタックなので、desired の逆順で push
 
   if (structSchema.scalas.length > 0 || structSchema.scalaArrays.length > 0) {
     // 現在ノードを追加（pre-order）
@@ -116,21 +127,18 @@ const stepState = (
       path: frame.basePath,
       structName: frame.schemaName,
     });
-    state.items.push(current);
+    return {
+      frames: [...state.frames, ...childrenDesired],
+      items: [...state.items, current],
+      errs: state.errs,
+    };
   }
 
-  const childrenDesired: Frame[] = jjFF(frame, structSchema);
-
-  // LIFO スタックなので、desired の逆順で push する（reduce を使用して void 戻りを避ける）
-  childrenDesired
-    .slice()
-    .reverse()
-    .reduce<Frame[]>((acc, f) => {
-      state.frames.push(f);
-      return acc;
-    }, []);
-
-  return state;
+  return {
+    frames: [...state.frames, ...childrenDesired],
+    items: state.items,
+    errs: state.errs,
+  };
 };
 
 function collectFromSchema(
