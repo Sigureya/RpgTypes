@@ -71,7 +71,9 @@ const createChildFrames = (
   );
   // childrenDesired: structs の順で先に処理し、その後 structArrays を処理したい
 
-  return [...structFrames, ...structArrayFrames];
+  return [...structFrames, ...structArrayFrames]
+    .slice() // 余計な要素を削る
+    .reverse(); // LIFO スタックなので、desired の逆順で push
 };
 
 const stepState = (
@@ -116,9 +118,7 @@ const stepState = (
     };
   }
 
-  const childrenDesired: Frame[] = createChildFrames(frame, structSchema)
-    .slice() // 余計な要素を削る
-    .reverse(); // LIFO スタックなので、desired の逆順で push
+  const childrenDesired: Frame[] = createChildFrames(frame, structSchema);
 
   if (structSchema.scalas.length > 0 || structSchema.scalaArrays.length > 0) {
     // 現在ノードを追加（pre-order）
@@ -134,11 +134,13 @@ const stepState = (
     };
   }
 
-  return {
-    frames: [...state.frames, ...childrenDesired],
-    items: state.items,
-    errs: state.errs,
-  };
+  return childrenDesired.length > 0
+    ? {
+        frames: [...state.frames, ...childrenDesired],
+        items: state.items,
+        errs: state.errs,
+      }
+    : state;
 };
 
 function collectFromSchema(
