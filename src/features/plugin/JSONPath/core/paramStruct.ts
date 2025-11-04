@@ -71,9 +71,35 @@ const createChildFrames = (
   );
   // childrenDesired: structs の順で先に処理し、その後 structArrays を処理したい
 
-  return [...structFrames, ...structArrayFrames]
-    .slice() // 余計な要素を削る
-    .reverse(); // LIFO スタックなので、desired の逆順で push
+  return [...structFrames, ...structArrayFrames].reverse(); // LIFO スタックなので、desired の逆順で push
+};
+
+const addNewNode = (
+  state: State,
+  frame: Frame,
+  structSchema: ClassifiedPluginParams,
+  childrenDesired: ReadonlyArray<Frame>
+): State => {
+  if (structSchema.scalas.length > 0 || structSchema.scalaArrays.length > 0) {
+    // 現在ノードを追加（pre-order）
+
+    const current: StructPropertysPath = createNode(structSchema, {
+      path: frame.basePath,
+      structName: frame.schemaName,
+    });
+    return {
+      frames: [...state.frames, ...childrenDesired],
+      items: [...state.items, current],
+      errs: state.errs,
+    };
+  }
+  return childrenDesired.length > 0
+    ? {
+        frames: [...state.frames, ...childrenDesired],
+        items: state.items,
+        errs: state.errs,
+      }
+    : state;
 };
 
 const stepState = (
@@ -120,27 +146,7 @@ const stepState = (
 
   const childrenDesired: Frame[] = createChildFrames(frame, structSchema);
 
-  if (structSchema.scalas.length > 0 || structSchema.scalaArrays.length > 0) {
-    // 現在ノードを追加（pre-order）
-
-    const current: StructPropertysPath = createNode(structSchema, {
-      path: frame.basePath,
-      structName: frame.schemaName,
-    });
-    return {
-      frames: [...state.frames, ...childrenDesired],
-      items: [...state.items, current],
-      errs: state.errs,
-    };
-  }
-
-  return childrenDesired.length > 0
-    ? {
-        frames: [...state.frames, ...childrenDesired],
-        items: state.items,
-        errs: state.errs,
-      }
-    : state;
+  return addNewNode(state, frame, structSchema, childrenDesired);
 };
 
 function collectFromSchema(
