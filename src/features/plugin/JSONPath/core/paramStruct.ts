@@ -28,10 +28,10 @@ interface State {
   errs: StructPathError[];
 }
 
-const createNode = (
+function createNode(
   structSchema: ClassifiedPluginParams,
   { path, structName }: { path: string; structName: string }
-): StructPropertysPath => {
+): StructPropertysPath {
   return {
     arraySchema: toObjectPluginParams(structSchema.scalaArrays),
     objectSchema: toObjectPluginParams(structSchema.scalas),
@@ -42,12 +42,12 @@ const createNode = (
         ? makeScalaParams(structSchema.scalas, path)
         : undefined,
   };
-};
+}
 
-const createChildFrames = (
+function createChildFrames(
   lastFrame: Frame,
   structSchema: ClassifiedPluginParams
-): Frame[] => {
+): Frame[] {
   const childAncestry: string[] = lastFrame.ancestry.concat(
     lastFrame.schemaName
   );
@@ -70,13 +70,13 @@ const createChildFrames = (
   // childrenDesired: structs の順で先に処理し、その後 structArrays を処理したい
 
   return [...structFrames, ...structArrayFrames].reverse(); // LIFO スタックなので、desired の逆順で push
-};
+}
 
-const stepState = (
+function stepState(
   state: State,
   structMap: ReadonlyMap<string, ClassifiedPluginParams>,
   errors: ErrorCodes
-): State => {
+): State {
   if (state.frames.length === 0) {
     return state;
   }
@@ -135,7 +135,7 @@ const stepState = (
     items: state.items,
     errs: state.errs,
   };
-};
+}
 
 function collectFromSchema(
   schemaName: string,
@@ -167,12 +167,12 @@ function collectFromSchema(
   return { items: finalState.items, errors: finalState.errs };
 }
 
-export function getPathFromStructParam(
+export const getPathFromStructParam = (
   params: ReadonlyArray<PluginParamEx<StructRefParam>>,
   parent: string,
   structMap: ReadonlyMap<string, ClassifiedPluginParams>,
   errors: ErrorCodes = ERROR_CODE
-): StructPathResult {
+): StructPathResult => {
   // 各パラメータから構造体名を取得し、collectFromSchemaで集約
   const results = params.map((param) =>
     collectFromSchema(
@@ -188,12 +188,13 @@ export function getPathFromStructParam(
     items: results.flatMap((r) => r.items),
     errors: results.flatMap((r) => r.errors),
   };
-}
-export function getPathFromStructSchema(
+};
+
+export const getPathFromStructSchema = (
   structName: string,
   parent: string,
   structMap: ReadonlyMap<string, ClassifiedPluginParams>,
   errors: ErrorCodes = ERROR_CODE
-): StructPathResult {
+): StructPathResult => {
   return collectFromSchema(structName, parent, structMap, errors);
-}
+};
