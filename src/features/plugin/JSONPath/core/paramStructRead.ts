@@ -66,8 +66,5 @@ export const extractArrayValuesFromJson = (
     .map((scalaArray) => {
       return extractArrayParamValue(json, scalaArray);
     })
-    .filter(
-      (v): v is StringSequenceParamValues | NumberSequenceParamValues =>
-        v !== null
-    );
+    .filter((v) => v !== null);
 };

@@ -12,7 +12,10 @@ import type {
   StringSequenceParamValues,
 } from "./arrayEx/types/result";
 import { getPathFromStructParam } from "./paramStruct";
-import { extractArrayValuesFromJson, extractScalaValuesFromJson } from "./read";
+import {
+  extractArrayValuesFromJson,
+  extractScalaValuesFromJson,
+} from "./paramStructRead";
 import type { StructPathResult, StructPropertysPath } from "./types";
 
 interface Person {
