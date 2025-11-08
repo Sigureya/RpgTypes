@@ -16,9 +16,7 @@ const validateEntryPoints = () =>
     {}
   );
 
-const rmmzModules = () => ({
-  "rmmz/plugin": path.resolve(srcDir, "rmmz/plugin/index.ts"),
-});
+const rmmzModules = () => ({});
 
 export default defineConfig(({ mode }) => {
   const entryPoints: Record<string, string> = {
