@@ -18,6 +18,14 @@ const validateEntryPoints = () =>
 
 const rmmzModules = () => ({});
 
+const externalModules = [
+  "ajv",
+  "ajv-formats",
+  "jsonschema",
+  "jsonpath-js",
+  "@sigureya/rmmz-plugin-schema",
+];
+
 export default defineConfig(({ mode }) => {
   const entryPoints: Record<string, string> = {
     ...validateEntryPoints(),
@@ -56,8 +64,7 @@ export default defineConfig(({ mode }) => {
           exports: "named",
         },
         external: (id) =>
-          id.endsWith(".test.ts") ||
-          ["ajv", "ajv-formats", "jsonschema", "jsonpath-js"].includes(id),
+          id.endsWith(".test.ts") || externalModules.includes(id),
         plugins: [terser({ output: { comments: false, max_line_len: 180 } })],
       },
     },
