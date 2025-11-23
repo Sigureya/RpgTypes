@@ -79,7 +79,15 @@ describe("extractMapText", () => {
     });
     const mockFn = vi.fn<
       (cmd: Command_PluginCommandMZ) => PluginCommandMzParameter[]
-    >(() => [{ code: 357, value: "PluginCommand", paramIndex: 0 }]);
+    >(() => [
+      {
+        code: 357,
+        value: "PluginCommand",
+        paramIndex: 0,
+        commandName: "CommandA",
+        pluginName: "MockPlugin",
+      },
+    ]);
     const result = extractMapText(mockMap, mockFn);
     expect(mockFn).toHaveBeenCalledWith(mockPluginCommand);
     expect(mockFn).toHaveBeenCalledTimes(1);
@@ -88,7 +96,15 @@ describe("extractMapText", () => {
         eventId: 1,
         name: "Event1",
         pageIndex: 0,
-        commands: [{ code: 357, value: "PluginCommand", paramIndex: 0 }],
+        commands: [
+          {
+            code: 357,
+            value: "PluginCommand",
+            paramIndex: 0,
+            commandName: "CommandA",
+            pluginName: "MockPlugin",
+          },
+        ],
         note: "",
         noteItems: [],
       },
