@@ -12,7 +12,7 @@ export type {
   ExtractedCommonEventText,
   ExtractedMapEventTexts,
   ExtractedMapTexts,
-} from "./core/extract/text/types";
+} from "./core/extract/text/eventCommand";
 export type {
   ExtractedActorImage,
   ExtractedEnemyImage,
