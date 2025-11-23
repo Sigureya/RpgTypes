@@ -3,7 +3,7 @@ import type {
   ExtractedBattleEventText,
   ExtractedCommonEventText,
   ExtractedMapTexts,
-} from "./text/types";
+} from "./text/eventCommand";
 
 export interface GameDataExtractor {
   extractMapTexts(rpgMap: Data_Map): ExtractedMapTexts;
