@@ -36,6 +36,8 @@ export interface PluginCommandMzParameter
   paramIndex: number;
   value: string;
   code: typeof PLUGIN_COMMAND_MZ;
+  pluginName: string;
+  commandName: string;
 }
 
 export interface MessageCommandParameter
