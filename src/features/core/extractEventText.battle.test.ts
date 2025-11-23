@@ -1,6 +1,6 @@
 import { test, expect, describe, vi } from "vitest";
 import type { Data_Troop } from "@RpgTypes/rmmz";
-import type { ExtractedBattleEventText } from "../extractText";
+import type { ExtractedBattleEventText } from "./extract/text/eventCommand";
 import { extractBattleEventTexts } from "./extractEventText";
 
 describe("extractBattleEventTexts", () => {
