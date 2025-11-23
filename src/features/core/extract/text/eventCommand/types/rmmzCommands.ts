@@ -3,13 +3,14 @@ import type {
   CHANGE_NICKNAME,
   CHANGE_PROFILE,
   COMMENT_HEAD,
-  PLUGIN_COMMAND_MZ,
   SCRIPT_EVAL,
   SHOW_CHOICES,
   SHOW_MESSAGE_BODY,
   SHOW_SCROLLING_TEXT_BODY,
 } from "@RpgTypes/rmmz";
 import type { CommandParameter } from "@RpgTypes/rmmz/eventCommand/pickCommandParam";
+import type { PluginCommandMzParameter } from "./pluginCommand";
+import type { TextCommandParameter } from "./union";
 
 type BaseCode =
   | typeof CHANGE_NICKNAME
@@ -20,24 +21,11 @@ type BaseCode =
   | typeof SCRIPT_EVAL
   | typeof COMMENT_HEAD;
 
-export type TextCommandParameter =
-  | GenericCommandParameter
-  | MessageCommandParameter;
-
 export interface GenericCommandParameter
   extends CommandParameter<string, BaseCode> {
   paramIndex: number;
   value: string;
   code: BaseCode;
-}
-
-export interface PluginCommandMzParameter
-  extends CommandParameter<string, typeof PLUGIN_COMMAND_MZ> {
-  paramIndex: number;
-  value: string;
-  code: typeof PLUGIN_COMMAND_MZ;
-  pluginName: string;
-  commandName: string;
 }
 
 export interface MessageCommandParameter
