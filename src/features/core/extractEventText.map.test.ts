@@ -11,8 +11,10 @@ import {
   PLUGIN_COMMAND_MZ,
   readNote,
 } from "@RpgTypes/rmmz";
-import type { PluginCommandMzParameter } from "./extract/text/eventCommand";
-import type { ExtractedMapEventTexts } from "./extract/text/types";
+import type {
+  ExtractedMapEventTexts,
+  PluginCommandMzParameter,
+} from "./extract/text/eventCommand";
 import { extractMapText } from "./extractEventText";
 
 const createMockMap = (): Data_Map<EventCommand> =>
