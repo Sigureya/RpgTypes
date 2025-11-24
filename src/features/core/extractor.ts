@@ -1,18 +1,21 @@
-import type { Data_CommonEvent, Data_Map, Data_Troop } from "@RpgTypes/rmmz";
+import type {
+  Command_PluginCommandMZ,
+  Data_CommonEvent,
+  Data_Map,
+  Data_Troop,
+} from "@RpgTypes/rmmz";
 import { PLUGIN_COMMAND_MZ } from "@RpgTypes/rmmz";
 import type {
   CommandMapKey,
   CommandArgExtractors,
-  PluginValues,
-  CommandExtractResult,
 } from "@sigureya/rmmz-plugin-schema/features";
 import { extractPluginCommandParams } from "./extract/plugin/pluginCommand";
-import type { PluginCommandMzParameter } from "./extract/text/eventCommand";
 import type {
+  PluginCommandMzParameter,
   ExtractedBattleEventText,
   ExtractedCommonEventText,
   ExtractedMapTexts,
-} from "./extract/text/eventCommand/types";
+} from "./extract/text/eventCommand";
 import type { GameDataExtractor } from "./extract/types";
 import {
   extractBattleEventTexts,
@@ -35,36 +38,33 @@ class GameDataExtractorClass implements GameDataExtractor {
     this._commandMap = commandMap;
   }
   extractMapTexts(rpgMap: Data_Map): ExtractedMapTexts {
-    return extractMapText(rpgMap, (command) => {
-      const args = extractPluginCommandParams(command, this._commandMap);
-      return args.values.map((v) => convertPluginCommand(args, v));
-    });
+    return extractMapText(rpgMap, (command) => this.extractArgs(command));
   }
   extractBattleText(
     troop: ReadonlyArray<Data_Troop>
   ): ExtractedBattleEventText[][] {
-    return extractBattleEventTexts(troop, (command) => {
-      const args = extractPluginCommandParams(command, this._commandMap);
-      return args.values.map((v) => convertPluginCommand(args, v));
-    });
+    return extractBattleEventTexts(troop, (command) =>
+      this.extractArgs(command)
+    );
   }
   extractCommonEventText(
     commons: ReadonlyArray<Data_CommonEvent>
   ): ExtractedCommonEventText[] {
-    return extractCommonEventTexts(commons, (command) => {
-      const args = extractPluginCommandParams(command, this._commandMap);
-      return args.values.map((v) => convertPluginCommand(args, v));
-    });
+    return extractCommonEventTexts(commons, (command) =>
+      this.extractArgs(command)
+    );
+  }
+
+  extractArgs(command: Command_PluginCommandMZ): PluginCommandMzParameter[] {
+    const args = extractPluginCommandParams(command, this._commandMap);
+    return args.values.map(
+      (v): PluginCommandMzParameter => ({
+        code: PLUGIN_COMMAND_MZ,
+        value: v.value as string,
+        paramIndex: 3,
+        commandName: args.commandName,
+        pluginName: args.pluginName,
+      })
+    );
   }
 }
-
-const convertPluginCommand = (
-  { commandName, pluginName }: CommandExtractResult,
-  value: PluginValues
-): PluginCommandMzParameter => ({
-  code: PLUGIN_COMMAND_MZ,
-  value: value.value as string,
-  paramIndex: 3,
-  commandName,
-  pluginName,
-});
