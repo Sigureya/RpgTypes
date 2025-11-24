@@ -1,6 +1,6 @@
 import { test, expect, describe, vi } from "vitest";
 import type { Data_CommonEvent } from "@RpgTypes/rmmz";
-import type { ExtractedCommonEventText } from "./extract/text/types";
+import type { ExtractedCommonEventText } from "./extract/text/eventCommand";
 import { extractCommonEventTexts } from "./extractEventText";
 
 describe("extractCommonEventTexts", () => {

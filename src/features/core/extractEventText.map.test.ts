@@ -11,8 +11,10 @@ import {
   PLUGIN_COMMAND_MZ,
   readNote,
 } from "@RpgTypes/rmmz";
-import type { PluginCommandMzParameter } from "./extract/text/eventCommand";
-import type { ExtractedMapEventTexts } from "./extract/text/types";
+import type {
+  ExtractedMapEventTexts,
+  PluginCommandMzParameter,
+} from "./extract/text/eventCommand";
 import { extractMapText } from "./extractEventText";
 
 const createMockMap = (): Data_Map<EventCommand> =>
@@ -79,7 +81,15 @@ describe("extractMapText", () => {
     });
     const mockFn = vi.fn<
       (cmd: Command_PluginCommandMZ) => PluginCommandMzParameter[]
-    >(() => [{ code: 357, value: "PluginCommand", paramIndex: 0 }]);
+    >(() => [
+      {
+        code: 357,
+        value: "PluginCommand",
+        paramIndex: 0,
+        commandName: "CommandA",
+        pluginName: "MockPlugin",
+      },
+    ]);
     const result = extractMapText(mockMap, mockFn);
     expect(mockFn).toHaveBeenCalledWith(mockPluginCommand);
     expect(mockFn).toHaveBeenCalledTimes(1);
@@ -88,7 +98,15 @@ describe("extractMapText", () => {
         eventId: 1,
         name: "Event1",
         pageIndex: 0,
-        commands: [{ code: 357, value: "PluginCommand", paramIndex: 0 }],
+        commands: [
+          {
+            code: 357,
+            value: "PluginCommand",
+            paramIndex: 0,
+            commandName: "CommandA",
+            pluginName: "MockPlugin",
+          },
+        ],
         note: "",
         noteItems: [],
       },

@@ -9,8 +9,6 @@ import {
 import type { GroopMapper } from "./eventCommand/commandGroup";
 import { getGroupHandlingFunc } from "./eventCommand/commandGroup/mapping";
 import type {
-  GenericCommandParameter,
-  MessageCommandParameter,
   PluginCommandMzParameter,
   TextCommandParameter,
 } from "./extract/text/eventCommand";
@@ -36,7 +34,7 @@ export const extractTextFromEventCommandsEx = <
 >(
   list: ReadonlyArray<EventCommand>,
   pluginCommandFn: (command: Command_PluginCommandMZ) => T[]
-): (MessageCommandParameter | GenericCommandParameter | T)[] => {
+): (TextCommandParameter | T)[] => {
   return extractTextFromEventCommandsCore(list, pluginCommandFn);
 };
 

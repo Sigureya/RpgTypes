@@ -1,8 +1,6 @@
 import type { NoteReadResult } from "@RpgTypes/rmmz";
-import type {
-  PluginCommandMzParameter,
-  TextCommandParameter,
-} from "./eventCommand";
+import type { PluginCommandMzParameter } from "./pluginCommand";
+import type { TextCommandParameter } from "./union";
 
 export interface ExtractedBattleEventText<
   T extends PluginCommandMzParameter = PluginCommandMzParameter
