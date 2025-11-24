@@ -6,7 +6,8 @@ export {
 
 export type { TextCommandParameter } from "./core/extract/text/eventCommand/types";
 export { extractTextFromEventCommands } from "./core/getTextFromCommand";
-
+export { createTextDataExtractor } from "./core/extractor";
+export type { GameDataExtractor } from "./core/extract/types";
 export type {
   ExtractedBattleEventText,
   ExtractedCommonEventText,
