@@ -1,8 +1,14 @@
-import type { Data_Map, Data_Troop, Data_CommonEvent } from "@RpgTypes/rmmz";
+import type {
+  Data_Map,
+  Data_Troop,
+  Data_CommonEvent,
+  Command_PluginCommandMZ,
+} from "@RpgTypes/rmmz";
 import type {
   ExtractedBattleEventText,
   ExtractedCommonEventText,
   ExtractedMapTexts,
+  PluginCommandMzParameter,
 } from "./text/eventCommand";
 
 export interface GameDataExtractor {
@@ -13,4 +19,5 @@ export interface GameDataExtractor {
   extractCommonEventText(
     commons: ReadonlyArray<Data_CommonEvent>
   ): ExtractedCommonEventText[];
+  extractArgs(command: Command_PluginCommandMZ): PluginCommandMzParameter[];
 }
