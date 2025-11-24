@@ -1,5 +1,6 @@
-import { NoteReadResult } from '../../../../rmmz';
-import { PluginCommandMzParameter, TextCommandParameter } from './eventCommand';
+import { NoteReadResult } from '../../../../../../rmmz';
+import { PluginCommandMzParameter } from './pluginCommand';
+import { TextCommandParameter } from './union';
 export interface ExtractedBattleEventText<T extends PluginCommandMzParameter = PluginCommandMzParameter> {
     eventId: number;
     commands: (TextCommandParameter | T)[];
