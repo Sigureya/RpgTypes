@@ -1,6 +1,6 @@
 import type { JSONValue } from "@RpgTypes/libs";
 import type { Command_PluginCommandMZ } from "@RpgTypes/rmmz";
-import { parseDeepJSON } from "@sigureya/rmmz-plugin-schema";
+import { parseDeepRecord } from "@sigureya/rmmz-plugin-schema";
 import type {
   CommandArgExtractors,
   CommandExtractResult,
@@ -8,7 +8,7 @@ import type {
 } from "@sigureya/rmmz-plugin-schema/features";
 import { extractPluginCommandArgs } from "@sigureya/rmmz-plugin-schema/features";
 
-export const extractPluginCommandParams = (
+export const extractPluginCommandMzArgs = (
   command: Command_PluginCommandMZ,
   commandMap: ReadonlyMap<CommandMapKey, CommandArgExtractors>
 ): CommandExtractResult => {
@@ -22,13 +22,6 @@ export const extractPluginCommandParams = (
       values: [],
     };
   }
-  const argObject: JSONValue = parseArgs(command.parameters[3]);
+  const argObject: JSONValue = parseDeepRecord(command.parameters[3]);
   return extractPluginCommandArgs(argObject, extractor);
-};
-
-const parseArgs = (args: Record<string, string>): Record<string, JSONValue> => {
-  const entries = Object.entries(args).map(
-    ([key, value]): [string, JSONValue] => [key, parseDeepJSON(value)]
-  );
-  return Object.fromEntries<JSONValue>(entries);
 };

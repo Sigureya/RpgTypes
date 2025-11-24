@@ -5,11 +5,15 @@ import type {
   Data_Troop,
 } from "@RpgTypes/rmmz";
 import { PLUGIN_COMMAND_MZ } from "@RpgTypes/rmmz";
+import type { PluginSchema } from "@sigureya/rmmz-plugin-schema";
 import type {
   CommandMapKey,
   CommandArgExtractors,
+  PluginValues,
 } from "@sigureya/rmmz-plugin-schema/features";
-import { extractPluginCommandParams } from "./extract/plugin/pluginCommand";
+import { compileCommandExtractorsFromPlugins } from "@sigureya/rmmz-plugin-schema/features";
+import { JSONPathJS } from "jsonpath-js";
+import { extractPluginCommandMzArgs } from "./extract/plugin/pluginCommand";
 import type {
   PluginCommandMzParameter,
   ExtractedBattleEventText,
@@ -24,9 +28,13 @@ import {
 } from "./extractEventText";
 
 export const createTextDataExtractor = (
-  commandMap: ReadonlyMap<CommandMapKey, CommandArgExtractors>
+  schemas: ReadonlyArray<PluginSchema>
 ): GameDataExtractor => {
-  return new GameDataExtractorClass(commandMap);
+  const map = compileCommandExtractorsFromPlugins(
+    schemas,
+    (path) => new JSONPathJS(path)
+  );
+  return new GameDataExtractorClass(map);
 };
 
 class GameDataExtractorClass implements GameDataExtractor {
@@ -56,11 +64,11 @@ class GameDataExtractorClass implements GameDataExtractor {
   }
 
   extractArgs(command: Command_PluginCommandMZ): PluginCommandMzParameter[] {
-    const args = extractPluginCommandParams(command, this._commandMap);
-    return args.values.map(
+    const args = extractPluginCommandMzArgs(command, this._commandMap);
+    return args.values.filter(isSSS).map(
       (v): PluginCommandMzParameter => ({
         code: PLUGIN_COMMAND_MZ,
-        value: v.value as string,
+        value: v.value,
         paramIndex: 3,
         commandName: args.commandName,
         pluginName: args.pluginName,
@@ -68,3 +76,7 @@ class GameDataExtractorClass implements GameDataExtractor {
     );
   }
 }
+
+const isSSS = (v: PluginValues): v is PluginValues & { value: string } => {
+  return typeof v.value === "string";
+};
