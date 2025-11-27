@@ -7,6 +7,7 @@ export interface GenericCommandParameter extends CommandParameter<string, BaseCo
     paramIndex: number;
     value: string;
     code: BaseCode;
+    speaker?: string;
 }
 export interface MessageCommandParameter extends CommandParameter<string, typeof SHOW_MESSAGE_BODY> {
     speaker: string;
