@@ -26,6 +26,7 @@ export interface GenericCommandParameter
   paramIndex: number;
   value: string;
   code: BaseCode;
+  speaker?: string;
 }
 
 export interface MessageCommandParameter
