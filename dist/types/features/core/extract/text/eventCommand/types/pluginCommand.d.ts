@@ -6,4 +6,5 @@ export interface PluginCommandMzParameter extends CommandParameter<string, typeo
     code: typeof PLUGIN_COMMAND_MZ;
     pluginName: string;
     commandName: string;
+    speaker?: undefined;
 }

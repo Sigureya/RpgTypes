@@ -8,4 +8,5 @@ export interface PluginCommandMzParameter
   code: typeof PLUGIN_COMMAND_MZ;
   pluginName: string;
   commandName: string;
+  speaker?: undefined;
 }
