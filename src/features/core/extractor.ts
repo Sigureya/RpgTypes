@@ -3,6 +3,7 @@ import type {
   Data_CommonEvent,
   Data_Map,
   Data_Troop,
+  EventCommand,
 } from "@RpgTypes/rmmz";
 import { PLUGIN_COMMAND_MZ } from "@RpgTypes/rmmz";
 import type { PluginSchema } from "@sigureya/rmmz-plugin-schema";
@@ -19,6 +20,7 @@ import type {
   ExtractedBattleEventText,
   ExtractedCommonEventText,
   ExtractedMapTexts,
+  TextCommandParameter,
 } from "./extract/text/eventCommand";
 import type { GameDataExtractor } from "./extract/types";
 import {
@@ -26,6 +28,7 @@ import {
   extractCommonEventTexts,
   extractMapText,
 } from "./extractEventText";
+import { extractTextFromEventCommandsEx } from "./getTextFromCommand";
 
 export const createTextDataExtractor = (
   schemas: ReadonlyArray<PluginSchema>
@@ -73,6 +76,13 @@ class GameDataExtractorClass implements GameDataExtractor {
         commandName: args.commandName,
         pluginName: args.pluginName,
       })
+    );
+  }
+  extractCommandTexts(
+    commands: ReadonlyArray<EventCommand>
+  ): TextCommandParameter[] {
+    return extractTextFromEventCommandsEx(commands, (command) =>
+      this.extractArgs(command)
     );
   }
 }
