@@ -1,3 +1,4 @@
+import type { PluginCommandMzParameter } from "./pluginCommand";
 import type {
   GenericCommandParameter,
   MessageCommandParameter,
@@ -5,4 +6,5 @@ import type {
 
 export type TextCommandParameter =
   | GenericCommandParameter
-  | MessageCommandParameter;
+  | MessageCommandParameter
+  | PluginCommandMzParameter;
