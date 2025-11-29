@@ -16,7 +16,7 @@ import type {
   ExtractedMapTexts,
   PluginCommandMzParameter,
 } from "./extract/text/eventCommand";
-import { createTextDataExtractor } from "./extractor";
+import { createTextDataExtractorFromSchemas } from "./extractor";
 
 const messagePluginSchema: PluginSchema = {
   pluginName: "MessagePlugin",
@@ -41,7 +41,7 @@ const messagePluginSchema: PluginSchema = {
     ],
   },
 };
-const extractor = createTextDataExtractor([messagePluginSchema]);
+const extractor = createTextDataExtractorFromSchemas([messagePluginSchema]);
 
 describe("GameDataExtractor", () => {
   describe("extractArgs", () => {
