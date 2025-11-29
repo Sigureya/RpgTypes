@@ -1,7 +1,7 @@
 export { extractBattleEventTexts, extractCommonEventTexts, extractMapText, } from './core/extractEventText';
 export type { TextCommandParameter } from './core/extract/text/eventCommand/types';
 export { extractTextFromEventCommands, extractTextFromEventCommandsEx, } from './core/getTextFromCommand';
-export { createTextDataExtractor } from './core/extractor';
+export { createTextDataExtractorFromSchemas, createTextDataExtractorFromCommandItems, } from './core/extractor';
 export type { GameDataExtractor } from './core/extract/types';
 export type { ExtractedBattleEventText, ExtractedCommonEventText, ExtractedMapEventTexts, ExtractedMapTexts, } from './core/extract/text/eventCommand';
 export type { ExtractedActorImage, ExtractedEnemyImage, ImageExtractableActor, } from './core/extract/image/mainData';

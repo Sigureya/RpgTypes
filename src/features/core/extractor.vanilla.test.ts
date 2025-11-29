@@ -11,14 +11,14 @@ import type {
   PluginCommandMzParameter,
 } from "./extract/text/eventCommand";
 import { extractCommonEventTexts, extractMapText } from "./extractEventText";
-import { createTextDataExtractor } from "./extractor";
+import { createTextDataExtractorFromSchemas } from "./extractor";
 
 const mockCommands: EventCommand[] = [
   makeCommandShowMessage({ facename: "", speakerName: "bob" }),
   makeCommandShowMessageBody("testMessage"),
 ];
 
-const extractor = createTextDataExtractor([]);
+const extractor = createTextDataExtractorFromSchemas([]);
 
 describe("GameDataExtractor", () => {
   const mockCommonEvents: Data_CommonEvent[] = [

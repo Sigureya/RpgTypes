@@ -30,7 +30,15 @@ import {
 } from "./extractEventText";
 import { extractTextFromEventCommandsEx } from "./getTextFromCommand";
 
-export const createTextDataExtractor = (
+export const createTextDataExtractorFromCommandItems = (
+  commands: ReadonlyArray<[CommandMapKey, CommandArgExtractors]>
+): GameDataExtractor => {
+  type MapType = ReadonlyMap<CommandMapKey, CommandArgExtractors>;
+  const map: MapType = new Map(commands);
+  return new GameDataExtractorClass(map);
+};
+
+export const createTextDataExtractorFromSchemas = (
   schemas: ReadonlyArray<PluginSchema>
 ): GameDataExtractor => {
   const map = compileCommandExtractorsFromPlugins(

@@ -9,7 +9,10 @@ export {
   extractTextFromEventCommands,
   extractTextFromEventCommandsEx,
 } from "./core/getTextFromCommand";
-export { createTextDataExtractor } from "./core/extractor";
+export {
+  createTextDataExtractorFromSchemas,
+  createTextDataExtractorFromCommandItems,
+} from "./core/extractor";
 export type { GameDataExtractor } from "./core/extract/types";
 export type {
   ExtractedBattleEventText,
