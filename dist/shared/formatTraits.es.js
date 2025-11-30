@@ -467,9 +467,9 @@ const dt = (e, t, a, r = de) => {
   if (!m) return {
     pluginName: a,
     commandName: r,
-    values: []
+    args: []
   };
-  return c = je(e.parameters[3]), { pluginName: (i = m).pluginName, commandName: i.commandName, values: ft(c, i.extractors) };
+  return c = je(e.parameters[3]), { pluginName: (i = m).pluginName, commandName: i.commandName, args: ft(c, i.extractors) };
   var c, i;
 }, Lt = (e) => {
   const t = new Map(e);
@@ -498,7 +498,7 @@ class ue {
   }
   extractArgs(t) {
     const a = It(t, this._commandMap);
-    return a.values.filter(kt).map((r) => ({
+    return a.args.filter(kt).map((r) => ({
       code: Y,
       value: r.value,
       paramIndex: 3,

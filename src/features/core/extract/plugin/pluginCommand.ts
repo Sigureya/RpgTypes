@@ -19,7 +19,7 @@ export const extractPluginCommandMzArgs = (
     return {
       pluginName,
       commandName,
-      values: [],
+      args: [],
     };
   }
   const argObject: JSONValue = parseDeepRecord(command.parameters[3]);
