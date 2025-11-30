@@ -84,6 +84,8 @@ class GameDataExtractorClass implements GameDataExtractor {
         code: PLUGIN_COMMAND_MZ,
         value: v.value,
         paramIndex: 3,
+        argName: v.param.name,
+        argTitle: v.param.attr.text ?? v.param.name,
         commandName: args.commandName,
         pluginName: args.pluginName,
       })
