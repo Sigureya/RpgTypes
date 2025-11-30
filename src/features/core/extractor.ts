@@ -56,6 +56,9 @@ class GameDataExtractorClass implements GameDataExtractor {
   constructor(commandMap: ReadonlyMap<CommandMapKey, CommandArgExtractors>) {
     this._commandMap = commandMap;
   }
+  keys(): string[] {
+    return Array.from(this._commandMap.keys());
+  }
   extractMapTexts(rpgMap: Data_Map): ExtractedMapTexts {
     return extractMapText(rpgMap, (command) => this.extractArgs(command));
   }
