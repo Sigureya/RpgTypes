@@ -1,7 +1,7 @@
 var le = Object.defineProperty;
 var ye = (e, t, a) => t in e ? le(e, t, { enumerable: !0, configurable: !0, writable: !0, value: a }) : e[t] = a;
 var q = (e, t, a) => ye(e, typeof t != "symbol" ? t + "" : t, a);
-import { cY as ge, cZ as he, c_ as fe, B as L, z as O, A as K, cF as be, aK as Z, aJ as W, aF as Q, i as I, j as E, C as $, c as k, d as D, S as R, m as ve, b as Ne, a_ as xe, aZ as _, h as X, b0 as Y, cB as ee, cC as Te, cR as Ae, cX as we, cW as Ie, cT as ke, b2 as $e, b1 as Se, cP as Me, r as Ce, cl as Be } from "./make.es2.js";
+import { cY as ge, cZ as he, c_ as fe, B as L, z as O, A as K, cF as be, aK as Z, aJ as W, aF as Q, i as I, j as E, C as $, c as k, d as D, S as R, m as ve, b as Ne, a_ as xe, aZ as _, h as X, b0 as Y, cB as ee, cC as Te, cR as Ae, cX as we, cW as Ie, cT as ke, b2 as $e, b1 as Me, cP as Se, r as Ce, cl as Be } from "./make.es2.js";
 import { JSONPathJS as Pe } from "jsonpath-js";
 import { parseDeepRecord as je } from "@sigureya/rmmz-plugin-schema";
 import { m as te } from "./mergeItemsSource.es.js";
@@ -204,7 +204,7 @@ class U {
     return { code: this.bodyCode, indent: this.header.indent, parameters: [this.getBodyText()] };
   }
 }
-const S = (e, t, a, s) => {
+const M = (e, t, a, s) => {
   const n = e[t];
   if (!a(n)) throw new Error(`Invalid head at index ${t}: ${JSON.stringify(n)}`);
   const o = [];
@@ -215,16 +215,16 @@ const S = (e, t, a, s) => {
   }
   return { header: n, bodies: o };
 }, Oe = (e, t) => {
-  const { bodies: a, header: s } = ((n, o) => S(n, o, (m) => m.code === $, (m) => m.code === E))(e, t);
+  const { bodies: a, header: s } = ((n, o) => M(n, o, (m) => m.code === $, (m) => m.code === E))(e, t);
   return Ke(s) ? new U(E, s, a) : new ne(s, a);
 }, Ke = (e) => e.parameters[0] === "選択肢ヘルプ", Ze = (e, t) => {
-  const { bodies: a, header: s } = ((n, o) => S(n, o, (m) => m.code === R, (m) => m.code === k))(e, t);
+  const { bodies: a, header: s } = ((n, o) => M(n, o, (m) => m.code === R, (m) => m.code === k))(e, t);
   return new U(k, s, a);
 }, We = (e, t) => {
-  const { bodies: a, header: s } = ((n, o) => S(n, o, (m) => m.code === _, (m) => m.code === xe))(e, t);
+  const { bodies: a, header: s } = ((n, o) => M(n, o, (m) => m.code === _, (m) => m.code === xe))(e, t);
   return new ne(s, a);
 }, Qe = (e, t) => {
-  const { bodies: a, header: s } = ((n, o) => S(n, o, (m) => m.code === X, (m) => m.code === I))(e, t);
+  const { bodies: a, header: s } = ((n, o) => M(n, o, (m) => m.code === X, (m) => m.code === I))(e, t);
   return new U(I, s, a);
 }, Xe = {
   [R]: (e, t, a) => a.showMessage(Ze(e, t), t, e),
@@ -235,7 +235,7 @@ const S = (e, t, a, s) => {
   code: t.code,
   paramIndex: a,
   value: t.parameters[a]
-}))(e, 1), Ye = (e) => e.parameters[0].map((t, a) => ({ code: 102, paramIndex: a, value: t })), Ht = (e) => oe(e, () => []), M = (e, t) => oe(e, t), oe = (e, t) => e.reduce((a, s, n) => {
+}))(e, 1), Ye = (e) => e.parameters[0].map((t, a) => ({ code: 102, paramIndex: a, value: t })), Ht = (e) => oe(e, () => []), S = (e, t) => oe(e, t), oe = (e, t) => e.reduce((a, s, n) => {
   if (s.code === D) return [...a, ...Ye(s)];
   const o = (m = s.code, Xe[m]);
   var m;
@@ -259,16 +259,16 @@ const S = (e, t, a, s) => {
   return { code: k, paramIndex: 0, value: (t = e).getBodyText(), speaker: (a = t.header, a.parameters[4] ? a.parameters[4].trimEnd() : "") };
   var t, a;
 }, script: (e) => ((t) => ({ code: _, paramIndex: 0, value: t.getBodyText() }))(e), showScrollingText: (e) => ((t) => ({ code: I, paramIndex: 0, value: t.getBodyText() }))(e) }, tt = (e, t = () => []) => {
-  return a = (s, n, { id: o }) => ({ eventId: o, commands: M(s.list, t) }), e.map((s) => a(s, 0, s));
+  return a = (s, n, { id: o }) => ({ eventId: o, commands: S(s.list, t) }), e.map((s) => a(s, 0, s));
   var a;
 }, at = (e, t = () => []) => ((a, s) => a.map((n) => J(n, s)))(e, (a, s, { id: n }) => ({
   eventId: n,
   pageIndex: s,
-  commands: M(a.list, t)
+  commands: S(a.list, t)
 })), st = (e, t = () => []) => ({ note: e.note, noteItems: ee(e.note), displayedName: e.displayName, events: rt(e, t) }), rt = (e, t) => se(e, (a, s, n) => ({
   eventId: n.id,
   pageIndex: s,
-  commands: M(a.list, t),
+  commands: S(a.list, t),
   note: n.note,
   noteItems: ee(n.note),
   name: n.name
@@ -484,6 +484,9 @@ class ue {
     q(this, "_commandMap");
     this._commandMap = t;
   }
+  keys() {
+    return Array.from(this._commandMap.keys());
+  }
   extractMapTexts(t) {
     return st(t, (a) => this.extractArgs(a));
   }
@@ -495,22 +498,31 @@ class ue {
   }
   extractArgs(t) {
     const a = It(t, this._commandMap);
-    return a.values.filter(kt).map((s) => ({ code: Y, value: s.value, paramIndex: 3, commandName: a.commandName, pluginName: a.pluginName }));
+    return a.values.filter(kt).map((s) => ({
+      code: Y,
+      value: s.value,
+      paramIndex: 3,
+      commandName: a.commandName,
+      pluginName: a.pluginName
+    }));
   }
   extractCommandTexts(t) {
-    return M(t, (a) => this.extractArgs(a));
+    return S(t, (a) => this.extractArgs(a));
   }
 }
-const kt = (e) => typeof e.value == "string", Kt = (e) => ({ key: "battlerName", image: e.battlerName, id: e.id }), j = (e, t, a) => ({
+const kt = (e) => typeof e.value == "string", Kt = (e) => ({
+  key: "battlerName",
+  image: e.battlerName,
+  id: e.id
+}), j = (e, t, a) => ({
   folder: a,
   key: t,
   image: e[t],
   id: e.id
-}), Zt = (e) => [j(e, "faceName", "faces"), j(e, "characterName", "characters"), j(e, "battlerName", "sv_actors")], y = (e, t) => ({ note: $t(e), main: t.map((a) => ({
-  key: a,
-  text: e[a],
-  id: e.id
-})) }), $t = (e) => Te(e.note, (t, a) => ({
+}), Zt = (e) => [j(e, "faceName", "faces"), j(e, "characterName", "characters"), j(e, "battlerName", "sv_actors")], y = (e, t) => ({
+  note: $t(e),
+  main: t.map((a) => ({ key: a, text: e[a], id: e.id }))
+}), $t = (e) => Te(e.note, (t, a) => ({
   key: t,
   text: a,
   id: e.id
@@ -526,13 +538,13 @@ const kt = (e) => typeof e.value == "string", Kt = (e) => ({ key: "battlerName",
     messages: we(e.terms.messages),
     params: Ae(e.terms.params)
   }
-}), na = (e, t, a, s, n, o) => [...$e(a, s), ...Se(e, t), ...Me(n, o)], oa = (e, t) => te(Ce(t), e), ma = (e, t, a) => {
+}), na = (e, t, a, s, n, o) => [...$e(a, s), ...Me(e, t), ...Se(n, o)], oa = (e, t) => te(Ce(t), e), ma = (e, t, a) => {
   const s = Be(t);
   return te(a ? [...s, ...a] : s, e);
 };
 export {
   Ht as A,
-  M as B,
+  S as B,
   Ot as C,
   Lt as D,
   Zt as E,

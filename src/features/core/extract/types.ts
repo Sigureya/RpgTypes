@@ -25,4 +25,5 @@ export interface GameDataExtractor {
   extractCommandTexts(
     commands: ReadonlyArray<EventCommand>
   ): TextCommandParameter[];
+  keys(): string[];
 }
