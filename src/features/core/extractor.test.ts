@@ -34,6 +34,7 @@ const messagePluginSchema: PluginSchema = {
             attr: {
               kind: "string",
               default: "Hello World",
+              text: "a message text",
             },
           },
         ],
@@ -63,6 +64,8 @@ describe("GameDataExtractor", () => {
           paramIndex: 3,
           pluginName: "MessagePlugin",
           commandName: "ShowMessage",
+          argName: "text",
+          argTitle: "a message text",
         },
       ];
       const result = extractor.extractArgs(command);
@@ -126,6 +129,8 @@ describe("GameDataExtractor", () => {
                 paramIndex: 3,
                 pluginName: "MessagePlugin",
                 value: "test message",
+                argName: "text",
+                argTitle: "a message text",
               },
               {
                 code: SHOW_SCROLLING_TEXT_BODY,

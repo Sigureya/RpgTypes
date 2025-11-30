@@ -3,10 +3,12 @@ import type { CommandParameter } from "@RpgTypes/rmmz/eventCommand/pickCommandPa
 
 export interface PluginCommandMzParameter
   extends CommandParameter<string, typeof PLUGIN_COMMAND_MZ> {
-  paramIndex: number;
+  paramIndex: 3;
   value: string;
   code: typeof PLUGIN_COMMAND_MZ;
   pluginName: string;
   commandName: string;
+  argName: string;
+  argTitle: string;
   speaker?: undefined;
 }
