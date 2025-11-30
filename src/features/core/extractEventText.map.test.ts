@@ -85,9 +85,11 @@ describe("extractMapText", () => {
       {
         code: 357,
         value: "PluginCommand",
-        paramIndex: 0,
+        paramIndex: 3,
         commandName: "CommandA",
         pluginName: "MockPlugin",
+        argName: "arg1",
+        argTitle: "Argument 1",
       },
     ]);
     const result = extractMapText(mockMap, mockFn);
@@ -102,9 +104,11 @@ describe("extractMapText", () => {
           {
             code: 357,
             value: "PluginCommand",
-            paramIndex: 0,
+            paramIndex: 3,
             commandName: "CommandA",
             pluginName: "MockPlugin",
+            argName: "arg1",
+            argTitle: "Argument 1",
           },
         ],
         note: "",

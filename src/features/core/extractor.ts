@@ -78,16 +78,16 @@ class GameDataExtractorClass implements GameDataExtractor {
   }
 
   extractArgs(command: Command_PluginCommandMZ): PluginCommandMzParameter[] {
-    const args = extractPluginCommandMzArgs(command, this._commandMap);
-    return args.values.filter(isSSS).map(
+    const entries = extractPluginCommandMzArgs(command, this._commandMap);
+    return entries.args.filter(isSSS).map(
       (v): PluginCommandMzParameter => ({
         code: PLUGIN_COMMAND_MZ,
         value: v.value,
         paramIndex: 3,
         argName: v.param.name,
         argTitle: v.param.attr.text ?? v.param.name,
-        commandName: args.commandName,
-        pluginName: args.pluginName,
+        commandName: entries.commandName,
+        pluginName: entries.pluginName,
       })
     );
   }
