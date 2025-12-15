@@ -21,22 +21,20 @@ const mockCommands: EventCommand[] = [
 const extractor = createTextDataExtractorFromSchemas([]);
 
 describe("GameDataExtractor", () => {
-  const mockCommonEvents: Data_CommonEvent[] = [
-    {
-      id: 1,
-      name: "testCommonEvent",
-      list: mockCommands,
-      switchId: 0,
-      trigger: 0,
-    },
-  ];
+  const mockCommonEvents: Data_CommonEvent = {
+    id: 1,
+    name: "testCommonEvent",
+    list: mockCommands,
+    switchId: 0,
+    trigger: 0,
+  };
   test("", () => {
     const mockFn = vi.fn((): PluginCommandMzParameter[] => []);
     extractCommonEventTexts(mockCommonEvents, mockFn);
     expect(mockFn).not.toBeCalled();
   });
   test("", () => {
-    const expected: ExtractedCommonEventText[] = extractCommonEventTexts(
+    const expected: ExtractedCommonEventText = extractCommonEventTexts(
       mockCommonEvents,
       () => []
     );

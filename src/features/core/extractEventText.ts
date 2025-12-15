@@ -14,42 +14,29 @@ import type {
   ExtractedMapTexts,
 } from "./extract/text/eventCommand";
 import { extractTextFromEventCommandsEx } from "./getTextFromCommand";
-import {
-  collectMapEvents,
-  processCommonEvents,
-  processTroopEvents,
-} from "./rpg";
+import { collectMapEvents } from "./rpg";
 
 export const extractCommonEventTexts = <T extends PluginCommandMzParameter>(
-  commons: ReadonlyArray<Data_CommonEvent>,
+  commons: Data_CommonEvent,
   pluginCommandEvaltor: (command: Command_PluginCommandMZ) => T[] = () => []
-): ExtractedCommonEventText<T>[] => {
-  return processCommonEvents(
-    commons,
-    (
-      page: { list: ReadonlyArray<EventCommand> },
-      pageIndex: number,
-      { id }: { id: number }
-    ): ExtractedCommonEventText<T> => ({
-      eventId: id,
-      commands: extractTextFromEventCommandsEx(page.list, pluginCommandEvaltor),
-    })
-  );
+): ExtractedCommonEventText<T> => {
+  return {
+    eventId: commons.id,
+    commands: extractTextFromEventCommandsEx(
+      commons.list,
+      pluginCommandEvaltor
+    ),
+  };
 };
 
 export const extractBattleEventTexts = <T extends PluginCommandMzParameter>(
-  list: ReadonlyArray<Data_Troop>,
+  list: Data_Troop,
   pluginCommandEvaltor: (command: Command_PluginCommandMZ) => T[] = () => []
-): ExtractedBattleEventText<T>[][] => {
-  return processTroopEvents(
-    list,
-    (
-      page: { list: ReadonlyArray<EventCommand> },
-      pageIndex: number,
-      { id }: { id: number }
-    ): ExtractedBattleEventText<T> => ({
-      eventId: id,
-      pageIndex,
+): ExtractedBattleEventText<T>[] => {
+  return list.pages.map(
+    (page, pageIndex): ExtractedBattleEventText<T> => ({
+      eventId: list.id,
+      pageIndex: pageIndex,
       commands: extractTextFromEventCommandsEx(page.list, pluginCommandEvaltor),
     })
   );
