@@ -62,16 +62,13 @@ class GameDataExtractorClass implements GameDataExtractor {
   extractMapTexts(rpgMap: Data_Map): ExtractedMapTexts {
     return extractMapText(rpgMap, (command) => this.extractArgs(command));
   }
-  extractBattleText(
-    troop: ReadonlyArray<Data_Troop>
-  ): ExtractedBattleEventText[][] {
+  extractBattleText(troop: Data_Troop): ExtractedBattleEventText[] {
     return extractBattleEventTexts(troop, (command) =>
       this.extractArgs(command)
     );
   }
-  extractCommonEventText(
-    commons: ReadonlyArray<Data_CommonEvent>
-  ): ExtractedCommonEventText[] {
+
+  extractCommonEventText(commons: Data_CommonEvent): ExtractedCommonEventText {
     return extractCommonEventTexts(commons, (command) =>
       this.extractArgs(command)
     );

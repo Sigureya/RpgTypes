@@ -5,18 +5,17 @@ import { extractBattleEventTexts } from "./extractEventText";
 
 describe("extractBattleEventTexts", () => {
   test("emptyTroops", () => {
-    const mockTroops: Data_Troop[] = [
-      {
-        id: 1,
-        name: "Troop 1",
-        members: [],
-        pages: [],
-      },
-    ];
+    const mockTroops: Data_Troop = {
+      id: 1,
+      name: "Troop 1",
+      members: [],
+      pages: [],
+    };
+
     const mockFn = vi.fn(() => []);
     const result = extractBattleEventTexts(mockTroops, mockFn);
     expect(mockFn).not.toHaveBeenCalled();
-    const expected: ExtractedBattleEventText[][] = [[]];
+    const expected: ExtractedBattleEventText[] = [];
     expect(result).toEqual(expected);
   });
 });
