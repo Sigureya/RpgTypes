@@ -12,6 +12,7 @@ export {
 export {
   createTextDataExtractorFromSchemas,
   createTextDataExtractorFromCommandItems,
+  createTextDataExtractor,
 } from "./core/extractor";
 export type { GameDataExtractor } from "./core/extract/types";
 export type {
