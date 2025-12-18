@@ -42,39 +42,52 @@ const extractTextFromEventCommandsCore = <T extends PluginCommandMzParameter>(
   list: ReadonlyArray<EventCommand>,
   pluginCommandFn: (command: Command_PluginCommandMZ) => T[]
 ): (TextCommandParameter | T)[] => {
-  return list.reduce<(T | TextCommandParameter)[]>((acc, command, index) => {
-    if (command.code === SHOW_CHOICES) {
-      return [...acc, ...extractTextParamsFromChoice(command)];
-    }
-    const fn = getGroupHandlingFunc(command.code);
-    if (fn) {
-      const textCommand = fn<TextCommandParameter | undefined>(
-        list,
-        index,
-        groupMapper
-      );
-      if (textCommand !== undefined) {
-        return [...acc, textCommand];
+  return list
+    .flatMap(
+      (
+        command,
+        index
+      ): null | TextCommandParameter[] | TextCommandParameter => {
+        return forCommand(command, index, list, pluginCommandFn);
       }
-    }
-    if (command.code === CHANGE_NICKNAME) {
-      return [...acc, extractTextFromActorCommand(command)];
-    }
-    if (command.code === CHANGE_NAME) {
-      return [...acc, extractTextFromActorCommand(command)];
-    }
-    if (command.code === CHANGE_PROFILE) {
-      return [...acc, extractTextFromActorCommand(command)];
-    }
-    if (command.code === PLUGIN_COMMAND_MZ) {
-      const pluginComandArgs: T[] = pluginCommandFn(command);
-      return pluginComandArgs.length === 0
-        ? acc
-        : [...acc, ...pluginComandArgs];
-    }
+    )
+    .filter((v) => v !== null);
+};
 
-    return acc;
-  }, []);
+const forCommand = <T extends PluginCommandMzParameter>(
+  command: EventCommand,
+  index: number,
+  list: ReadonlyArray<EventCommand>,
+  pluginCommandFn: (command: Command_PluginCommandMZ) => T[]
+) => {
+  if (command.code === SHOW_CHOICES) {
+    return extractTextParamsFromChoice(command);
+  }
+  const fn = getGroupHandlingFunc(command.code);
+  if (fn) {
+    const textCommand = fn<TextCommandParameter | undefined>(
+      list,
+      index,
+      groupMapper
+    );
+    if (textCommand !== undefined) {
+      return [textCommand];
+    }
+  }
+  if (command.code === CHANGE_NICKNAME) {
+    return extractTextFromActorCommand(command);
+  }
+  if (command.code === CHANGE_NAME) {
+    return extractTextFromActorCommand(command);
+  }
+  if (command.code === CHANGE_PROFILE) {
+    return extractTextFromActorCommand(command);
+  }
+
+  if (command.code === PLUGIN_COMMAND_MZ) {
+    return pluginCommandFn(command);
+  }
+  return null;
 };
 
 const groupMapper = {
