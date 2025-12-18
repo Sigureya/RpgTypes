@@ -12,10 +12,7 @@ import type {
   CommandArgExtractors,
   PluginValues,
 } from "@sigureya/rmmz-plugin-schema/features";
-import {
-  compileCommandExtractorsFromPlugins,
-  createPluginValueExtractor,
-} from "@sigureya/rmmz-plugin-schema/features";
+import { compileCommandExtractorsFromPlugins } from "@sigureya/rmmz-plugin-schema/features";
 import { JSONPathJS } from "jsonpath-js";
 import { extractPluginCommandMzArgs } from "./extract/plugin/pluginCommand";
 import type {
