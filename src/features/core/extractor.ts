@@ -6,13 +6,14 @@ import type {
   EventCommand,
 } from "@RpgTypes/rmmz";
 import { PLUGIN_COMMAND_MZ } from "@RpgTypes/rmmz";
-import type { PluginSchema } from "@sigureya/rmmz-plugin-schema";
+import type { PluginMinimumSchema } from "@sigureya/rmmz-plugin-schema";
 import type {
   CommandMapKey,
   CommandArgExtractors,
   PluginValues,
+  CommandExtractorEntry,
 } from "@sigureya/rmmz-plugin-schema/features";
-import { compileCommandExtractorsFromPlugins } from "@sigureya/rmmz-plugin-schema/features";
+import { createPluginCommandExtractor } from "@sigureya/rmmz-plugin-schema/features";
 import { JSONPathJS } from "jsonpath-js";
 import { extractPluginCommandMzArgs } from "./extract/plugin/pluginCommand";
 import type {
@@ -42,17 +43,13 @@ export const createTextDataExtractor = (): GameDataExtractor => {
   return new GameDataExtractorClass(new Map());
 };
 
-/**
- * @deprecated use createTextDataExtractorFromCommandItems instead
- */
 export const createTextDataExtractorFromSchemas = (
-  schemas: ReadonlyArray<PluginSchema>
+  schemas: ReadonlyArray<PluginMinimumSchema>
 ): GameDataExtractor => {
-  const map = compileCommandExtractorsFromPlugins(
-    schemas,
-    (path) => new JSONPathJS(path)
+  const list: CommandExtractorEntry[] = schemas.flatMap((schema) =>
+    createPluginCommandExtractor(schema, (path) => new JSONPathJS(path))
   );
-  return new GameDataExtractorClass(map);
+  return new GameDataExtractorClass(new Map(list));
 };
 
 class GameDataExtractorClass implements GameDataExtractor {
