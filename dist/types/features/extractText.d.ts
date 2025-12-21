@@ -1,5 +1,5 @@
 export { extractBattleEventTexts, extractCommonEventTexts, extractMapText, } from './core/extractEventText';
-export type { TextCommandParameter } from './core/extract/text/eventCommand/types';
+export type { TextCommandParameter, PluginCommandMzParameter, GenericCommandParameter, MessageCommandParameter, } from './core/extract/text/eventCommand/types';
 export { extractTextFromEventCommands, extractTextFromEventCommandsEx, } from './core/getTextFromCommand';
 export { createTextDataExtractorFromSchemas, createTextDataExtractorFromCommandItems, createTextDataExtractor, } from './core/extractor';
 export type { GameDataExtractor } from './core/extract/types';

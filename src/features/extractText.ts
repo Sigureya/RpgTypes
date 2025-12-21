@@ -4,7 +4,12 @@ export {
   extractMapText,
 } from "./core/extractEventText";
 
-export type { TextCommandParameter } from "./core/extract/text/eventCommand/types";
+export type {
+  TextCommandParameter,
+  PluginCommandMzParameter,
+  GenericCommandParameter,
+  MessageCommandParameter,
+} from "./core/extract/text/eventCommand/types";
 export {
   extractTextFromEventCommands,
   extractTextFromEventCommandsEx,
