@@ -1,3 +1,4 @@
+export * from "./core/extract/index";
 export * from "./core/extract/item/index";
 export * from "./core/replace/text";
 export * from "./extractText";
