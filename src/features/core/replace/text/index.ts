@@ -17,6 +17,7 @@ export {
   replaceTextForCommandShowMessage,
 } from "./eventCommand";
 export { replaceMapDataTexts } from "./map";
-export { replaceNoteTextByMap, replaceTextByMap } from "./utils";
-export { replaceSystemTerms } from "./systemTerms";
+export { replaceNoteTextByMap } from "./note";
+export { replaceSystemTermsByMap as replaceSystemTerms } from "./systemTerms";
 export { replaceSystemText } from "./system";
+export { replaceTextByMap } from "./utils";

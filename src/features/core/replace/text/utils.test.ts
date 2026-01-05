@@ -1,5 +1,5 @@
 import { describe, expect, test } from "vitest";
-import { replaceNoteTextByMap, replaceTextByMap } from "./utils";
+import { replaceTextByMap } from "./utils";
 
 describe("replaceTextByMap", () => {
   test("replaces text using map", () => {
@@ -25,17 +25,5 @@ describe("replaceTextByMap", () => {
     const map = new Map([["cat", "猫"]]);
     expect(replaceTextByMap("cat", map)).toBe("猫");
     expect(replaceTextByMap("dog", map)).toBe("dog");
-  });
-});
-
-describe("replaceNoteTextByMap", () => {
-  test("replaces note text using map", () => {
-    const map = new Map([
-      ["foo", "bar"],
-      ["baz", "qux"],
-    ]);
-    const data = { note: "<test:foo> and <test:baz> and <test:nochange>" };
-    const result = replaceNoteTextByMap(data, map, "\n");
-    expect(result).toBe("<test:bar>\n<test:qux>\n<test:nochange>\n and  and");
   });
 });

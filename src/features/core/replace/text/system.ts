@@ -1,5 +1,5 @@
 import type { Data_System } from "@RpgTypes/rmmz";
-import { replaceSystemTerms } from "./systemTerms";
+import { replaceSystemTermsByMap } from "./systemTerms";
 import { replaceTextByMap } from "./utils";
 
 export const replaceSystemText = (
@@ -15,7 +15,7 @@ export const replaceSystemText = (
     weaponTypes: replaceArray(system.weaponTypes, map),
     armorTypes: replaceArray(system.armorTypes, map),
     equipTypes: replaceArray(system.equipTypes, map),
-    terms: replaceSystemTerms(system.terms, map),
+    terms: replaceSystemTermsByMap(system.terms, map),
   };
 };
 

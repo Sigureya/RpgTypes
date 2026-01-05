@@ -9,7 +9,8 @@ import type {
   Data_State,
   Data_Weapon,
 } from "@RpgTypes/rmmz";
-import { replaceNoteTextByMap, replaceTextByMap } from "./utils";
+import { replaceNoteTextByMap } from "./note";
+import { replaceTextByMap } from "./utils";
 
 export const replaceActorText = <Actor extends PickByType<Data_Actor, string>>(
   actor: Actor,
