@@ -13,7 +13,7 @@ import {
   makeTermsMessages,
   makeParamNamesArray,
 } from "@RpgTypes/rmmz";
-import { replaceSystemTerms } from "./systemTerms";
+import { replaceSystemTermsByMap } from "./systemTerms";
 
 const mockBasicTerms = {
   exp: "EXP",
@@ -152,7 +152,7 @@ describe("replaceSystemTerms", () => {
     messages: makeTermsMessages(mockMessages),
     params: makeParamNamesArray({}),
   };
-  const replaced = replaceSystemTerms(terms, mockMap);
+  const replaced = replaceSystemTermsByMap(terms, mockMap);
   test("basic terms are replaced", () => {
     const basicArray: Terms_BasicArray = makeTermsBasic({
       exp: "経験値",
