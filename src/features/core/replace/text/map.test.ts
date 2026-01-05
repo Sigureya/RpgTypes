@@ -2,7 +2,7 @@ import { describe, expect, test } from "vitest";
 import type { Data_Map, EventCommand } from "@RpgTypes/rmmz";
 import { makeMapData, makeMapEvent } from "@RpgTypes/rmmz";
 import { replaceMapDataTexts } from "./map";
-import { replaceNoteTextByMap } from "./utils";
+import { replaceNoteTextByMap } from "./note";
 
 describe("replaceMapDataTexts", () => {
   test("replaces displayName", () => {
