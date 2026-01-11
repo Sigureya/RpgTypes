@@ -11,7 +11,7 @@ describe("replaceMapDataTexts", () => {
       events: [],
     });
     const map = new Map([["Old Name", "New Name"]]);
-    const result = replaceMapDataTexts(mapData, map);
+    const result = replaceMapDataTexts(mapData, (s) => map.get(s));
     expect(result.displayName).toBe("New Name");
   });
   test("replaces note", () => {
@@ -24,7 +24,7 @@ describe("replaceMapDataTexts", () => {
       ["foo", "bar"],
       ["baz", "qux"],
     ]);
-    const result = replaceMapDataTexts(mapData, map);
+    const result = replaceMapDataTexts(mapData, (key) => map.get(key));
     const expectedNote = replaceNoteTextByMap({ note: mapData.note }, map);
     expect(result.note).toBe(expectedNote);
   });

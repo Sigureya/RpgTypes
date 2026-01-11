@@ -12,9 +12,9 @@ export const replaceTroopTexts = (
 ): Data_Troop => {
   const pages = troop.pages.map(
     (page): BattleEventPage<EventCommand> => ({
-      list: replaceEventCommandTexts(page.list, dic),
       conditions: page.conditions,
       span: page.span,
+      list: ccc(page.list, (key) => dic.get(key)),
     })
   );
   return {
@@ -29,6 +29,13 @@ export const replaceCommonEventTexts = (
 ): Data_CommonEvent => {
   return {
     ...commonEvent,
-    list: replaceEventCommandTexts(commonEvent.list, dic),
+    list: ccc(commonEvent.list, (key) => dic.get(key)),
   };
+};
+
+const ccc = (
+  list: ReadonlyArray<EventCommand>,
+  fn: (key: string) => string | undefined
+): EventCommand[] => {
+  return list.map((c) => replaceEventCommandTexts(c, fn));
 };
