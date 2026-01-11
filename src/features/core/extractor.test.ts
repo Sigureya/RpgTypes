@@ -22,6 +22,7 @@ const messagePluginSchema: PluginSchema = {
   pluginName: "MessagePlugin",
   target: "MZ",
   meta: {},
+  dependencies: { base: [], orderAfter: [], orderBefore: [] },
   schema: {
     structs: [],
     params: [],
