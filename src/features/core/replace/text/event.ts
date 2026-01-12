@@ -1,20 +1,26 @@
 import type {
+  Data_Map,
   BattleEventPage,
+  Command_PluginCommandMZ,
   Data_CommonEvent,
   Data_Troop,
   EventCommand,
 } from "@RpgTypes/rmmz";
+import { repleaceMapEventCommands } from "@RpgTypes/rmmz";
 import { replaceEventCommandTexts } from "./eventCommand";
+import { replaceNoteTextByFunction } from "./note";
+import { replaceTextByFunction } from "./utils";
 
 export const replaceTroopTexts = (
   troop: Data_Troop,
-  fn: (key: string) => string | undefined
+  fn: (key: string) => string | undefined,
+  pluginCommandFn: (command: Command_PluginCommandMZ) => EventCommand = (c) => c
 ): Data_Troop => {
   const pages = troop.pages.map(
     (page): BattleEventPage<EventCommand> => ({
       conditions: page.conditions,
       span: page.span,
-      list: ccc(page.list, fn),
+      list: ccc(page.list, fn, pluginCommandFn),
     })
   );
   return {
@@ -25,17 +31,39 @@ export const replaceTroopTexts = (
 
 export const replaceCommonEventTexts = (
   commonEvent: Data_CommonEvent,
-  fn: (key: string) => string | undefined
+  fn: (key: string) => string | undefined,
+  pluginCommandFn: (command: Command_PluginCommandMZ) => EventCommand = (c) => c
 ): Data_CommonEvent => {
   return {
     ...commonEvent,
-    list: ccc(commonEvent.list, fn),
+    list: ccc(commonEvent.list, fn, pluginCommandFn),
+  };
+};
+
+export const replaceMapDataTexts = (
+  mapData: Data_Map<EventCommand>,
+  fn: (key: string) => string | undefined
+): Data_Map<EventCommand> => {
+  const displayName = replaceTextByFunction(mapData.displayName, fn);
+  const note = replaceNoteTextByFunction(mapData, fn);
+  const events = repleaceMapEventCommands(mapData, (commandList) =>
+    commandList.map((command) => replaceEventCommandTexts(command, fn))
+  );
+  const partial: Partial<Data_Map<EventCommand>> = {
+    displayName,
+    events,
+    note,
+  };
+  return {
+    ...mapData,
+    ...partial,
   };
 };
 
 const ccc = (
   list: ReadonlyArray<EventCommand>,
-  fn: (key: string) => string | undefined
+  fn: (key: string) => string | undefined,
+  pluginCommandFn: (command: Command_PluginCommandMZ) => EventCommand
 ): EventCommand[] => {
-  return list.map((c) => replaceEventCommandTexts(c, fn));
+  return list.map((c) => replaceEventCommandTexts(c, fn, pluginCommandFn));
 };
