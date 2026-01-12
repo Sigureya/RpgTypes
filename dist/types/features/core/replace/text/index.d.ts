@@ -1,7 +1,8 @@
 export { replaceActorText, replaceItemText as replaceArmorText, replaceClassText, replaceEnemyText, replaceItemText, replaceSkillText, replaceStateText, replaceItemText as replaceWeaponText, } from './rpgData';
 export { replaceCommonEventTexts, replaceTroopTexts } from './event';
-export { replaceEventCommandTexts, replaceTextForCommand, replaceTextForCommandActor, replaceTextForCommandShowChoices, replaceTextForCommandShowMessage, } from './eventCommand';
+export { replaceEventCommandTexts as replaceEventCommandTexts3 } from './eventCommand';
 export { replaceMapDataTexts } from './map';
-export { replaceNoteTextByMap, replaceTextByMap } from './utils';
-export { replaceSystemTerms } from './systemTerms';
+export { replaceNoteTextByFunction, replaceNoteTextByMap } from './note';
+export { replaceSystemTermsByMap as replaceSystemTerms } from './systemTerms';
 export { replaceSystemText } from './system';
+export { replaceTextByMap } from './utils';
