@@ -45,16 +45,28 @@ interface TestCase {
 
 const testCases: TestCase[] = [
   {
-    caseName: "",
+    caseName: "replaces displayName and note",
     input: makeMapData({
       displayName: "Hello",
-      note: "<test:foo> and <test:baz> and <test:nochange>",
+      note: ["<test:foo> ", "<test:baz>", "<test:nochange>"].join("\n"),
       events: [makeMapEvent()],
     }),
     expected: makeMapData({
       displayName: "Hi",
-      note: "<test:bar>\n<test:qux>\n<test:nochange>\n and  and",
-      events: [],
+      note: ["<test:bar>", "<test:qux>", "<test:nochange>"].join("\n"),
+      events: [makeMapEvent({})],
     }),
   },
 ];
+const runTestCase = (testCase: TestCase) => {
+  test(testCase.caseName, () => {
+    const result = replaceMapDataTexts(testCase.input, (key: string) =>
+      dictionary.get(key)
+    );
+    expect(result).toEqual(testCase.expected);
+  });
+};
+
+describe("replaceActorText", () => {
+  testCases.forEach((testCase) => runTestCase(testCase));
+});
