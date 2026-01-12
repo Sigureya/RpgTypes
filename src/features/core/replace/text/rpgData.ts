@@ -9,17 +9,17 @@ import type {
   Data_State,
   Data_Weapon,
 } from "@RpgTypes/rmmz";
-import { replaceNoteTextByMap } from "./note";
-import { replaceTextByMap } from "./utils";
+import { replaceNoteTextByFunction } from "./note";
+import { replaceTextByFunction } from "./utils";
 
 export const replaceActorText = <Actor extends PickByType<Data_Actor, string>>(
   actor: Actor,
-  map: ReadonlyMap<string, string>
+  fn: (key: string) => string | undefined
 ) => {
-  const note: string = replaceNoteTextByMap(actor, map);
-  const name = replaceTextByMap(actor.name, map);
-  const nickname = replaceTextByMap(actor.nickname, map);
-  const profile = replaceTextByMap(actor.profile, map);
+  const note: string = replaceNoteTextByFunction(actor, fn);
+  const name: string = replaceTextByFunction(actor.name, fn);
+  const nickname: string = replaceTextByFunction(actor.nickname, fn);
+  const profile: string = replaceTextByFunction(actor.profile, fn);
 
   return {
     ...actor,
@@ -32,10 +32,10 @@ export const replaceActorText = <Actor extends PickByType<Data_Actor, string>>(
 
 export const replaceEnemyText = <Enemy extends PickByType<Data_Enemy, string>>(
   enemy: Enemy,
-  map: ReadonlyMap<string, string>
+  fn: (key: string) => string | undefined
 ) => {
-  const note: string = replaceNoteTextByMap(enemy, map);
-  const name: string = replaceTextByMap(enemy.name, map);
+  const note: string = replaceNoteTextByFunction(enemy, fn);
+  const name: string = replaceTextByFunction(enemy.name, fn);
   return {
     ...enemy,
     name: name,
@@ -45,10 +45,10 @@ export const replaceEnemyText = <Enemy extends PickByType<Data_Enemy, string>>(
 
 export const replaceClassText = <Class extends PickByType<Data_Class, string>>(
   data: Class,
-  map: ReadonlyMap<string, string>
+  fn: (key: string) => string | undefined
 ) => {
-  const note: string = replaceNoteTextByMap(data, map);
-  const name: string = replaceTextByMap(data.name, map);
+  const note: string = replaceNoteTextByFunction(data, fn);
+  const name: string = replaceTextByFunction(data.name, fn);
   return {
     ...data,
     name: name,
@@ -58,13 +58,13 @@ export const replaceClassText = <Class extends PickByType<Data_Class, string>>(
 
 export const replaceSkillText = <Skill extends PickByType<Data_Skill, string>>(
   skill: Skill,
-  map: ReadonlyMap<string, string>
+  fn: (key: string) => string | undefined
 ) => {
-  const note: string = replaceNoteTextByMap(skill, map);
-  const name: string = replaceTextByMap(skill.name, map);
-  const description: string = replaceTextByMap(skill.description, map);
-  const message1: string = replaceTextByMap(skill.message1, map);
-  const message2: string = replaceTextByMap(skill.message2, map);
+  const note: string = replaceNoteTextByFunction(skill, fn);
+  const name: string = replaceTextByFunction(skill.name, fn);
+  const description: string = replaceTextByFunction(skill.description, fn);
+  const message1: string = replaceTextByFunction(skill.message1, fn);
+  const message2: string = replaceTextByFunction(skill.message2, fn);
 
   return {
     ...skill,
@@ -78,11 +78,11 @@ export const replaceSkillText = <Skill extends PickByType<Data_Skill, string>>(
 
 export const replaceItemText = <T extends Data_Item | Data_Weapon | Data_Armor>(
   item: T,
-  map: ReadonlyMap<string, string>
+  fn: (key: string) => string | undefined
 ) => {
-  const note: string = replaceNoteTextByMap(item, map);
-  const name: string = replaceTextByMap(item.name, map);
-  const description: string = replaceTextByMap(item.description, map);
+  const note: string = replaceNoteTextByFunction(item, fn);
+  const name: string = replaceTextByFunction(item.name, fn);
+  const description: string = replaceTextByFunction(item.description, fn);
   return {
     ...item,
     name: name,
@@ -93,14 +93,14 @@ export const replaceItemText = <T extends Data_Item | Data_Weapon | Data_Armor>(
 
 export const replaceStateText = <State extends PickByType<Data_State, string>>(
   state: State,
-  map: ReadonlyMap<string, string>
+  fn: (key: string) => string | undefined
 ) => {
-  const note: string = replaceNoteTextByMap(state, map);
-  const name: string = replaceTextByMap(state.name, map);
-  const message1: string = replaceTextByMap(state.message1, map);
-  const message2: string = replaceTextByMap(state.message2, map);
-  const message3: string = replaceTextByMap(state.message3, map);
-  const message4: string = replaceTextByMap(state.message4, map);
+  const note: string = replaceNoteTextByFunction(state, fn);
+  const name: string = replaceTextByFunction(state.name, fn);
+  const message1: string = replaceTextByFunction(state.message1, fn);
+  const message2: string = replaceTextByFunction(state.message2, fn);
+  const message3: string = replaceTextByFunction(state.message3, fn);
+  const message4: string = replaceTextByFunction(state.message4, fn);
 
   return {
     ...state,
