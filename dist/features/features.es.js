@@ -1,4 +1,4 @@
-import { P as t, R as r, Q as s, B as x, A as m, z as c, u as o, v as T, C as p, D as l, a as n, b as F, c as E, d as y, w as C, E as I, e as i, F as D, G as S, H as d, I as f, J as v, x as A, y as M, K as g, L as u, M as B, O as N, N as h, r as k, f as b, g as z, k as P, h as R, m as W, f as j, n as q, o as w, p as G, i as H, j as J, q as K, s as L, t as O, l as Q, f as U } from "../shared/formatTraits.es.js";
+import { P as t, R as r, Q as s, B as x, A as m, z as c, u as o, v as T, C as p, D as l, a as n, b as F, c as E, d as y, w as C, E as I, e as i, F as D, G as S, H as d, I as f, J as v, x as A, y as M, K as g, L as u, M as B, O as N, N as h, r as k, f as b, g as z, k as P, h as R, n as W, f as j, l as q, o as w, p as G, i as H, j as J, q as K, s as L, t as O, m as Q, f as U } from "../shared/formatTraits.es.js";
 export {
   t as buildReferenceItemSources,
   r as compileItemEffectDisplayData,
