@@ -8,13 +8,13 @@ import { replaceEventCommandTexts } from "./eventCommand";
 
 export const replaceTroopTexts = (
   troop: Data_Troop,
-  dic: ReadonlyMap<string, string>
+  fn: (key: string) => string | undefined
 ): Data_Troop => {
   const pages = troop.pages.map(
     (page): BattleEventPage<EventCommand> => ({
-      list: replaceEventCommandTexts(page.list, dic),
       conditions: page.conditions,
       span: page.span,
+      list: ccc(page.list, fn),
     })
   );
   return {
@@ -25,10 +25,17 @@ export const replaceTroopTexts = (
 
 export const replaceCommonEventTexts = (
   commonEvent: Data_CommonEvent,
-  dic: ReadonlyMap<string, string>
+  fn: (key: string) => string | undefined
 ): Data_CommonEvent => {
   return {
     ...commonEvent,
-    list: replaceEventCommandTexts(commonEvent.list, dic),
+    list: ccc(commonEvent.list, fn),
   };
+};
+
+const ccc = (
+  list: ReadonlyArray<EventCommand>,
+  fn: (key: string) => string | undefined
+): EventCommand[] => {
+  return list.map((c) => replaceEventCommandTexts(c, fn));
 };

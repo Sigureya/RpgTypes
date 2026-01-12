@@ -22,34 +22,32 @@ import {
   SHOW_MESSAGE_BODY,
   SHOW_SCROLLING_TEXT_BODY,
 } from "@RpgTypes/rmmz";
-import { replaceTextByMap } from "./utils";
+import { replaceTextByFunction } from "./utils";
 
 export const replaceEventCommandTexts = (
-  list: ReadonlyArray<EventCommand>,
-  map: ReadonlyMap<string, string>
-): EventCommand[] => {
-  return list.map((command) => {
-    switch (command.code) {
-      case SHOW_MESSAGE:
-        return replaceTextForCommandShowMessage(command, map);
-      case SHOW_CHOICES:
-        return replaceTextForCommandShowChoices(command, map);
-      case SHOW_MESSAGE_BODY:
-      case COMMENT_HEAD:
-      case COMMENT_BODY:
-      case SHOW_SCROLLING_TEXT_BODY:
-        return replaceTextForCommand(command, map);
-      case CHANGE_NAME:
-      case CHANGE_NICKNAME:
-      case CHANGE_PROFILE:
-        return replaceTextForCommandActor(command, map);
-      default:
-        return command;
-    }
-  });
+  command: EventCommand,
+  fn: (key: string) => string | undefined
+): EventCommand => {
+  switch (command.code) {
+    case SHOW_MESSAGE:
+      return replaceTextForCommandShowMessage(command, fn);
+    case SHOW_CHOICES:
+      return replaceTextForCommandShowChoices(command, fn);
+    case SHOW_MESSAGE_BODY:
+    case COMMENT_HEAD:
+    case COMMENT_BODY:
+    case SHOW_SCROLLING_TEXT_BODY:
+      return replaceTextForCommand(command, fn);
+    case CHANGE_NAME:
+    case CHANGE_NICKNAME:
+    case CHANGE_PROFILE:
+      return replaceTextForCommandActor(command, fn);
+    default:
+      return command;
+  }
 };
 
-export const replaceTextForCommand = <
+const replaceTextForCommand = <
   Command extends
     | Command_ShowMessageBody
     | Command_CommentHeader
@@ -57,9 +55,9 @@ export const replaceTextForCommand = <
     | Command_ScrollTextBody
 >(
   command: Command,
-  map: ReadonlyMap<string, string>
+  fn: (key: string) => string | undefined
 ) => {
-  const newText: string = replaceTextByMap(command.parameters[0], map);
+  const newText: string = replaceTextByFunction(command.parameters[0], fn);
   return {
     code: command.code,
     indent: command.indent,
@@ -71,12 +69,12 @@ export const replaceTextForCommand = <
     | Command_ScrollTextBody;
 };
 
-export const replaceTextForCommandShowMessage = (
+const replaceTextForCommandShowMessage = (
   command: Command_ShowMessageHeader,
-  map: ReadonlyMap<string, string>
+  fn: (key: string) => string | undefined
 ): Command_ShowMessageHeader => {
   const newText: string = command.parameters[4]
-    ? replaceTextByMap(command.parameters[4], map)
+    ? replaceTextByFunction(command.parameters[4], fn)
     : "";
   return makeCommandShowMessage(
     {
@@ -90,16 +88,16 @@ export const replaceTextForCommandShowMessage = (
   );
 };
 
-export const replaceTextForCommandActor = <
+const replaceTextForCommandActor = <
   Command extends
     | Command_ChangeActorName
     | Command_ChangeActorProfile
     | Command_ChangeActorNickName
 >(
   command: Command,
-  map: ReadonlyMap<string, string>
+  fn: (key: string) => string | undefined
 ) => {
-  const newName = replaceTextByMap(command.parameters[1], map);
+  const newName = replaceTextByFunction(command.parameters[1], fn);
   return {
     code: command.code,
     indent: command.indent,
@@ -110,12 +108,12 @@ export const replaceTextForCommandActor = <
     | Command_ChangeActorNickName;
 };
 
-export const replaceTextForCommandShowChoices = (
+const replaceTextForCommandShowChoices = (
   command: Command_ShowChoices,
-  map: ReadonlyMap<string, string>
+  fn: (key: string) => string | undefined
 ): Command_ShowChoices => {
   const newChoices: string[] = command.parameters[0].map((choice) =>
-    replaceTextByMap(choice, map)
+    replaceTextByFunction(choice, fn)
   );
   return {
     code: SHOW_CHOICES,

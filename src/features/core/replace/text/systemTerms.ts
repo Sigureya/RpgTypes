@@ -4,7 +4,7 @@ import type {
   Terms_CommandArray,
   Terms_Messages,
 } from "@RpgTypes/rmmz";
-import { replaceTextByMap } from "./utils";
+import { replaceTextByFunction, replaceTextByMap } from "./utils";
 
 export const replaceSystemTermsByMap = (
   terms: System_Terms,
@@ -17,12 +17,20 @@ export const replaceSystemTermsByMap = (
 
 export const replaceSystemTerms = (
   terms: System_Terms,
-  newTextFn: (text: string) => string
+  newTextFn: (text: string) => string | undefined
 ): System_Terms => ({
-  params: replaceParams(terms.params, newTextFn),
-  messages: replaceSystemMessages(terms.messages, newTextFn),
-  commands: replaceCommandsArray(terms.commands, newTextFn),
-  basic: replaceBasicTerms(terms.basic, newTextFn),
+  params: replaceParams(terms.params, (s) =>
+    replaceTextByFunction(s, newTextFn)
+  ),
+  messages: replaceSystemMessages(terms.messages, (s) =>
+    replaceTextByFunction(s, newTextFn)
+  ),
+  basic: replaceBasicTerms(terms.basic, (s) =>
+    replaceTextByFunction(s, newTextFn)
+  ),
+  commands: replaceCommandsArray(terms.commands, (s) =>
+    replaceTextByFunction(s, newTextFn)
+  ),
 });
 
 const replaceBasicTerms = (

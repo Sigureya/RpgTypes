@@ -16,12 +16,7 @@ import {
   SHOW_MESSAGE,
   SHOW_MESSAGE_BODY,
 } from "@RpgTypes/rmmz";
-import {
-  replaceTextForCommand,
-  replaceTextForCommandActor,
-  replaceTextForCommandShowChoices,
-  replaceTextForCommandShowMessage,
-} from "./eventCommand";
+import { replaceEventCommandTexts } from "./eventCommand";
 
 describe("replaceTextForCommand2", () => {
   test("replaces text in parameters[0]", () => {
@@ -31,7 +26,7 @@ describe("replaceTextForCommand2", () => {
       indent: 1,
       parameters: ["foo"],
     };
-    const result = replaceTextForCommand(command, map);
+    const result = replaceEventCommandTexts(command, (key) => map.get(key));
     expect(result.parameters[0]).toBe("bar");
   });
 });
@@ -54,7 +49,7 @@ describe("replaceTextForCommandShowMessage", () => {
       indent: 0,
       parameters: ["face", 1, 0, 2, "Narrator"],
     };
-    const result = replaceTextForCommandShowMessage(command, map);
+    const result = replaceEventCommandTexts(command, (key) => map.get(key));
     expect(result).toEqual(expected);
   });
 });
@@ -74,7 +69,7 @@ describe("replaceTextForCommandActor", () => {
       parameters: [1, "Bob"],
     };
 
-    const result = replaceTextForCommandActor(command, map);
+    const result = replaceEventCommandTexts(command, (key) => map.get(key));
     expect(result).toEqual(expected);
   });
   test("replaces actor nickname", () => {
@@ -91,7 +86,7 @@ describe("replaceTextForCommandActor", () => {
       parameters: [1, "Nickname"],
     };
 
-    const result = replaceTextForCommandActor(command, map);
+    const result = replaceEventCommandTexts(command, (key) => map.get(key));
     expect(result).toEqual(expected);
   });
   test("replaces actor profile", () => {
@@ -108,7 +103,7 @@ describe("replaceTextForCommandActor", () => {
       parameters: [1, "New profile text"],
     };
 
-    const result = replaceTextForCommandActor(command, map);
+    const result = replaceEventCommandTexts(command, (key) => map.get(key));
     expect(result).toEqual(expected);
   });
 });
@@ -126,7 +121,7 @@ describe("replaceTextForCommandShowChoices", () => {
       indent: 0,
       parameters: [["OptionA", "Choice2"], 0, 0, 0, 0],
     };
-    const result = replaceTextForCommandShowChoices(command, map);
+    const result = replaceEventCommandTexts(command, (key) => map.get(key));
     expect(result).toEqual(expected);
   });
 });

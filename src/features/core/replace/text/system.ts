@@ -1,27 +1,27 @@
 import type { Data_System } from "@RpgTypes/rmmz";
-import { replaceSystemTermsByMap } from "./systemTerms";
-import { replaceTextByMap } from "./utils";
+import { replaceSystemTerms } from "./systemTerms";
+import { replaceTextByFunction } from "./utils";
 
 export const replaceSystemText = (
   system: Data_System,
-  map: ReadonlyMap<string, string>
+  fn: (key: string) => string | undefined
 ): Data_System => {
   return {
     ...system,
-    gameTitle: replaceTextByMap(system.gameTitle, map),
-    currencyUnit: replaceTextByMap(system.currencyUnit, map),
-    elements: replaceArray(system.elements, map),
-    skillTypes: replaceArray(system.skillTypes, map),
-    weaponTypes: replaceArray(system.weaponTypes, map),
-    armorTypes: replaceArray(system.armorTypes, map),
-    equipTypes: replaceArray(system.equipTypes, map),
-    terms: replaceSystemTermsByMap(system.terms, map),
+    gameTitle: replaceTextByFunction(system.gameTitle, fn),
+    currencyUnit: replaceTextByFunction(system.currencyUnit, fn),
+    elements: replaceArray(system.elements, fn),
+    skillTypes: replaceArray(system.skillTypes, fn),
+    weaponTypes: replaceArray(system.weaponTypes, fn),
+    armorTypes: replaceArray(system.armorTypes, fn),
+    equipTypes: replaceArray(system.equipTypes, fn),
+    terms: replaceSystemTerms(system.terms, fn),
   };
 };
 
 const replaceArray = (
   list: ReadonlyArray<string>,
-  map: ReadonlyMap<string, string>
+  fn: (key: string) => string | undefined
 ): string[] => {
-  return list.map((item) => replaceTextByMap(item, map));
+  return list.map((item) => replaceTextByFunction(item, fn));
 };
