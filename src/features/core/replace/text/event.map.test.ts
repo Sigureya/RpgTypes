@@ -1,7 +1,7 @@
 import { describe, expect, test } from "vitest";
 import type { Data_Map, EventCommand } from "@RpgTypes/rmmz";
 import { makeMapData, makeMapEvent } from "@RpgTypes/rmmz";
-import { replaceMapDataTexts } from "./map";
+import { replaceMapDataTexts } from "./event";
 import { replaceNoteTextByMap } from "./note";
 
 describe("replaceMapDataTexts", () => {
