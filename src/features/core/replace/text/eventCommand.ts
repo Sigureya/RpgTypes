@@ -29,7 +29,9 @@ import { replaceTextByFunction } from "./utils";
 export const replaceEventCommandTexts = (
   command: EventCommand,
   fn: (key: string) => string | undefined,
-  pluginCommandFn: (command: Command_PluginCommandMZ) => EventCommand = (c) => c
+  pluginCommandFn: (
+    command: Command_PluginCommandMZ
+  ) => Command_PluginCommandMZ = (c) => c
 ): EventCommand => {
   switch (command.code) {
     case PLUGIN_COMMAND_MZ:
