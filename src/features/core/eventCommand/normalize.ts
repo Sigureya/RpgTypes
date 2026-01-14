@@ -5,8 +5,6 @@ import type {
   ExtractCommandByCode,
   Command_ShowMessageHeader,
   Command_ShowMessageBody,
-  Command_CommentBody,
-  Command_CommentHeader,
   NormalizedEventCommand,
   Command_ScriptHeader,
   Command_ScrollTextBody,
@@ -24,7 +22,6 @@ import {
   SHOW_SCROLLING_TEXT_BODY,
 } from "@RpgTypes/rmmz";
 import type {
-  EventCommandGroup_Comment,
   EventCommandGroup_Message,
   EventCommandGroup_Script,
   EventCommandGroup_ScrollingText,
@@ -32,33 +29,21 @@ import type {
 } from "./commandGroup";
 import { getGroupHandlingFunc } from "./commandGroup/mapping";
 
-export interface CommandNormalizeHandlers {
-  pluginCommand: (command: Command_PluginCommandMZ) => Command_PluginCommandMZ;
-  comment: (
-    command: EventCommandGroup_Comment
-  ) => [Command_CommentHeader] | [Command_CommentHeader, Command_CommentBody];
-  script: (script: EventCommandGroup_Script) => Command_ScriptHeader;
-}
-
 export const normalizeEventCommands = (
-  commands: ReadonlyArray<EventCommand>,
-  handlers: CommandNormalizeHandlers = {
-    pluginCommand: (c) => c,
-    comment: (g) => g.normalizedCommands(),
-    script: (g) => normalizeScript(g),
-  }
+  commands: ReadonlyArray<EventCommand>
 ): NormalizedEventCommand[] => {
-  const mapper: GroopMapper<NormalizedEventCommand[]> = {
-    comment: (g): NormalizedEventCommand[] => g.normalizedCommands(),
-    script: (g) => [handlers.script(g)],
-    showMessage: normalizeMessage,
-    showScrollingText: normalizeScrollText,
-  };
+  const mapper: GroopMapper<NormalizedEventCommand[] | NormalizedEventCommand> =
+    {
+      comment: (g) => g.normalizedCommands(),
+      script: normalizeScript,
+      showMessage: normalizeMessage,
+      showScrollingText: normalizeScrollText,
+    };
 
   return commands
     .map((command, index) => {
       return command.code === PLUGIN_COMMAND_MZ
-        ? handlers.pluginCommand(command)
+        ? command
         : forCommand(command, index, commands, mapper);
     })
     .filter((v) => v !== undefined)
@@ -69,7 +54,7 @@ const forCommand = (
   command: Exclude<EventCommand, Command_PluginCommandMZ>,
   index: number,
   list: ReadonlyArray<EventCommand>,
-  groupMapper: GroopMapper<NormalizedEventCommand[]>
+  groupMapper: GroopMapper<NormalizedEventCommand[] | NormalizedEventCommand>
 ): NormalizedEventCommand[] | NormalizedEventCommand | undefined => {
   if (
     command.code === SHOW_MESSAGE_BODY ||
@@ -80,11 +65,7 @@ const forCommand = (
   }
   const fn = getGroupHandlingFunc(command.code);
   if (fn) {
-    return fn<NormalizedEventCommand[]>(
-      list,
-      index,
-      groupMapper
-    ) satisfies NormalizedEventCommand[];
+    return fn(list, index, groupMapper);
   }
 
   if (command.code === SHOW_CHOICES) {
