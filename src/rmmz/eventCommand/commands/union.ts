@@ -145,7 +145,10 @@ import type { Command_Wait } from "./wait/types";
 import type { Command_SetWeatherEffect } from "./weather/types";
 import type { Command_ChangeWindowColor } from "./window/changeWindowColor/types";
 
-export type EventCommand =
+export type EventCommand = NormalizedEventCommand | Command_ScriptBody;
+
+export type NormalizedEventCommand =
+  | Command_ScriptHeader
   | Command_NoOperation
   | Command_ChangePlayerFollowers
   | Command_ChangeWindowColor
@@ -227,8 +230,6 @@ export type EventCommand =
   | Command_ShakeScreen
   | Command_TintScreen
   | Command_FadeOutScreen
-  | Command_ScriptBody
-  | Command_ScriptHeader
   | Command_ShopProcessing
   | Command_ShopProcessingBody
   | Command_Skip

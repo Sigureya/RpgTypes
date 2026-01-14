@@ -28,6 +28,7 @@ export * from "./shop";
 export * from "./skip/types";
 export * from "./tileset/types";
 export * from "./transparency";
+export * from "./union";
 export * from "./variable";
 export * from "./vehicle";
 export * from "./wait";

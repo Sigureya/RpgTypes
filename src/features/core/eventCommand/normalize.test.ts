@@ -12,7 +12,7 @@ import {
   SHOW_CHOICES,
   SHOW_MESSAGE_BODY,
 } from "@RpgTypes/rmmz";
-import { normalizeEventCommands } from "./normarize";
+import { normalizeEventCommands } from "./normalize";
 
 describe("normarizeEventCommands", () => {
   test("should normalize SHOW_CHOICES command by trimming end spaces", () => {

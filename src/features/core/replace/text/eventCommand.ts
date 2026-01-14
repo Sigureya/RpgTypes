@@ -8,8 +8,8 @@ import type {
   Command_CommentHeader,
   Command_CommentBody,
   Command_ScrollTextBody,
-  EventCommand,
   Command_PluginCommandMZ,
+  NormalizedEventCommand,
 } from "@RpgTypes/rmmz";
 import {
   CHANGE_NAME,
@@ -27,12 +27,12 @@ import {
 import { replaceTextByFunction } from "./utils";
 
 export const replaceEventCommandTexts = (
-  command: EventCommand,
+  command: NormalizedEventCommand,
   fn: (key: string) => string | undefined,
   pluginCommandFn: (
     command: Command_PluginCommandMZ
   ) => Command_PluginCommandMZ = (c) => c
-): EventCommand => {
+): NormalizedEventCommand => {
   switch (command.code) {
     case PLUGIN_COMMAND_MZ:
       return pluginCommandFn(command);
