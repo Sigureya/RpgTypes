@@ -7,6 +7,8 @@ import type {
   Command_ShowMessageBody,
   Command_CommentBody,
   Command_CommentHeader,
+  NormalizedEventCommand,
+  Command_ScriptHeader,
 } from "@RpgTypes/rmmz";
 import {
   CHANGE_NAME,
@@ -14,6 +16,8 @@ import {
   CHANGE_PROFILE,
   COMMENT_BODY,
   PLUGIN_COMMAND_MZ,
+  SCRIPT_EVAL,
+  SCRIPT_EVAL_BODY,
   SHOW_CHOICES,
   SHOW_MESSAGE_BODY,
   SHOW_SCROLLING_TEXT_BODY,
@@ -34,7 +38,7 @@ interface CommandNormalizeHandlers {
 
 export const normalizeEventCommands = (
   commands: ReadonlyArray<EventCommand>
-): EventCommand[] => {
+): NormalizedEventCommand[] => {
   return commands
     .map((command, index) => {
       return forCommand(command, index, commands, {
@@ -51,7 +55,7 @@ const forCommand = (
   index: number,
   list: ReadonlyArray<EventCommand>,
   handlers: CommandNormalizeHandlers
-): EventCommand[] | EventCommand | undefined => {
+): NormalizedEventCommand[] | NormalizedEventCommand | undefined => {
   if (
     command.code === SHOW_MESSAGE_BODY ||
     command.code === SHOW_SCROLLING_TEXT_BODY ||
@@ -61,11 +65,11 @@ const forCommand = (
   }
   const fn = getGroupHandlingFunc(command.code);
   if (fn) {
-    return fn<EventCommand[]>(
+    return fn<NormalizedEventCommand[]>(
       list,
       index,
       groupMapper
-    ) satisfies EventCommand[];
+    ) satisfies NormalizedEventCommand[];
   }
 
   if (command.code === SHOW_CHOICES) {
@@ -81,6 +85,9 @@ const forCommand = (
   }
   if (command.code === PLUGIN_COMMAND_MZ) {
     return handlers.pluginCommand(command);
+  }
+  if (command.code === SCRIPT_EVAL_BODY) {
+    return undefined;
   }
 
   return command;
@@ -117,9 +124,17 @@ const normalizePluginCommand = (
 };
 
 const groupMapper = {
-  comment: (g) => g.normalizedCommands(),
-  script: (g) => g.normalizedCommands(),
-  showMessage: (g: EventCommandGroup_Message) => {
+  comment: (g): NormalizedEventCommand[] => g.normalizedCommands(),
+  script: (g): [NormalizedEventCommand] => {
+    const text = g.getBodyText().trimEnd();
+    const newBody: Command_ScriptHeader = {
+      code: SCRIPT_EVAL,
+      indent: g.header.indent,
+      parameters: [text],
+    };
+    return [newBody];
+  },
+  showMessage: (g: EventCommandGroup_Message): NormalizedEventCommand[] => {
     const nexText = g.getBodyText().trimEnd();
     const newBody: Command_ShowMessageBody = {
       code: SHOW_MESSAGE_BODY,
@@ -128,8 +143,8 @@ const groupMapper = {
     };
     return [messageHeader(g.header), newBody];
   },
-  showScrollingText: (g) => g.normalizedCommands(),
-} as const satisfies GroopMapper<EventCommand[]>;
+  showScrollingText: (g): NormalizedEventCommand[] => g.normalizedCommands(),
+} as const satisfies GroopMapper<NormalizedEventCommand[]>;
 
 const messageHeader = (
   commahd: Command_ShowMessageHeader
