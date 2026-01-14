@@ -2,11 +2,14 @@ import type { EventCommandUnknown } from "@RpgTypes/rmmz/eventCommand";
 import type { MapEvent, MapEventPage } from "./event";
 import type { Data_Map } from "./map";
 
-export const repleaceMapEventCommands = <Command extends EventCommandUnknown>(
+export const repleaceMapEventCommands = <
+  Command extends EventCommandUnknown,
+  RC extends EventCommandUnknown = Command
+>(
   map: Data_Map<Command>,
-  fn: (list: ReadonlyArray<Command>) => Command[]
-): (MapEvent<Command> | null)[] => {
-  return map.events.map((event): MapEvent<Command> | null => {
+  fn: (list: ReadonlyArray<Command>) => RC[]
+): (MapEvent<RC> | null)[] => {
+  return map.events.map((event): MapEvent<RC> | null => {
     if (!event) {
       return null;
     }
@@ -17,12 +20,15 @@ export const repleaceMapEventCommands = <Command extends EventCommandUnknown>(
   });
 };
 
-const convertPages = <Command extends EventCommandUnknown>(
+const convertPages = <
+  Command extends EventCommandUnknown,
+  RC extends EventCommandUnknown = Command
+>(
   mapEvent: MapEvent<Command>,
-  fn: (list: ReadonlyArray<Command>) => Command[]
-): MapEventPage<Command>[] => {
+  fn: (list: ReadonlyArray<Command>) => RC[]
+): MapEventPage<RC>[] => {
   return mapEvent.pages.map(
-    (page): MapEventPage<Command> => ({
+    (page): MapEventPage<RC> => ({
       ...page,
       //     conditions: page.conditions,
       // image: page.image,
