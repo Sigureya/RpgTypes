@@ -10,9 +10,11 @@ import {
   CHANGE_NAME,
   CHANGE_NICKNAME,
   CHANGE_PROFILE,
+  COMMENT_BODY,
   PLUGIN_COMMAND_MZ,
   SHOW_CHOICES,
   SHOW_MESSAGE_BODY,
+  SHOW_SCROLLING_TEXT_BODY,
 } from "@RpgTypes/rmmz";
 import type { EventCommandGroup_Message, GroopMapper } from "./commandGroup";
 import { getGroupHandlingFunc } from "./commandGroup/mapping";
@@ -34,7 +36,11 @@ const forCommand = (
   list: ReadonlyArray<EventCommand>,
   pluginCommandFn: (command: Command_PluginCommandMZ) => Command_PluginCommandMZ
 ): EventCommand[] | EventCommand | undefined => {
-  if (command.code === 401 || command.code === 402) {
+  if (
+    command.code === SHOW_MESSAGE_BODY ||
+    command.code === SHOW_SCROLLING_TEXT_BODY ||
+    command.code === COMMENT_BODY
+  ) {
     return undefined;
   }
   const fn = getGroupHandlingFunc(command.code);
@@ -50,14 +56,10 @@ const forCommand = (
     return normalizeChoiceCommand(command);
   }
 
-  if (command.code === 101) {
-    return messageHeader(command);
-  }
-
   if (
+    command.code === CHANGE_NAME ||
     command.code === CHANGE_NICKNAME ||
-    command.code === CHANGE_PROFILE ||
-    command.code === CHANGE_NAME
+    command.code === CHANGE_PROFILE
   ) {
     return normalizePluginCommand(command);
   }
