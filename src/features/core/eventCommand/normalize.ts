@@ -5,6 +5,8 @@ import type {
   ExtractCommandByCode,
   Command_ShowMessageHeader,
   Command_ShowMessageBody,
+  Command_CommentBody,
+  Command_CommentHeader,
 } from "@RpgTypes/rmmz";
 import {
   CHANGE_NAME,
@@ -16,15 +18,29 @@ import {
   SHOW_MESSAGE_BODY,
   SHOW_SCROLLING_TEXT_BODY,
 } from "@RpgTypes/rmmz";
-import type { EventCommandGroup_Message, GroopMapper } from "./commandGroup";
+import type {
+  EventCommandGroup_Comment,
+  EventCommandGroup_Message,
+  GroopMapper,
+} from "./commandGroup";
 import { getGroupHandlingFunc } from "./commandGroup/mapping";
+
+interface CommandNormalizeHandlers {
+  pluginCommand: (command: Command_PluginCommandMZ) => Command_PluginCommandMZ;
+  comment: (
+    command: EventCommandGroup_Comment
+  ) => [Command_CommentHeader] | [Command_CommentHeader, Command_CommentBody];
+}
 
 export const normalizeEventCommands = (
   commands: ReadonlyArray<EventCommand>
 ): EventCommand[] => {
   return commands
     .map((command, index) => {
-      return forCommand(command, index, commands, (c) => c);
+      return forCommand(command, index, commands, {
+        pluginCommand: (c) => c,
+        comment: (g) => g.normalizedCommands(),
+      });
     })
     .filter((v) => v !== undefined)
     .flat();
@@ -34,7 +50,7 @@ const forCommand = (
   command: EventCommand,
   index: number,
   list: ReadonlyArray<EventCommand>,
-  pluginCommandFn: (command: Command_PluginCommandMZ) => Command_PluginCommandMZ
+  handlers: CommandNormalizeHandlers
 ): EventCommand[] | EventCommand | undefined => {
   if (
     command.code === SHOW_MESSAGE_BODY ||
@@ -64,7 +80,7 @@ const forCommand = (
     return normalizePluginCommand(command);
   }
   if (command.code === PLUGIN_COMMAND_MZ) {
-    return pluginCommandFn(command);
+    return handlers.pluginCommand(command);
   }
 
   return command;
