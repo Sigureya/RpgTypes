@@ -9,6 +9,7 @@ import type {
   Command_CommentHeader,
   NormalizedEventCommand,
   Command_ScriptHeader,
+  Command_ScrollTextBody,
 } from "@RpgTypes/rmmz";
 import {
   CHANGE_NAME,
@@ -25,36 +26,50 @@ import {
 import type {
   EventCommandGroup_Comment,
   EventCommandGroup_Message,
+  EventCommandGroup_Script,
+  EventCommandGroup_ScrollingText,
   GroopMapper,
 } from "./commandGroup";
 import { getGroupHandlingFunc } from "./commandGroup/mapping";
 
-interface CommandNormalizeHandlers {
+export interface CommandNormalizeHandlers {
   pluginCommand: (command: Command_PluginCommandMZ) => Command_PluginCommandMZ;
   comment: (
     command: EventCommandGroup_Comment
   ) => [Command_CommentHeader] | [Command_CommentHeader, Command_CommentBody];
+  script: (script: EventCommandGroup_Script) => Command_ScriptHeader;
 }
 
 export const normalizeEventCommands = (
-  commands: ReadonlyArray<EventCommand>
+  commands: ReadonlyArray<EventCommand>,
+  handlers: CommandNormalizeHandlers = {
+    pluginCommand: (c) => c,
+    comment: (g) => g.normalizedCommands(),
+    script: (g) => normalizeScript(g),
+  }
 ): NormalizedEventCommand[] => {
+  const mapper: GroopMapper<NormalizedEventCommand[]> = {
+    comment: (g): NormalizedEventCommand[] => g.normalizedCommands(),
+    script: (g) => [handlers.script(g)],
+    showMessage: normalizeMessage,
+    showScrollingText: normalizeScrollText,
+  };
+
   return commands
     .map((command, index) => {
-      return forCommand(command, index, commands, {
-        pluginCommand: (c) => c,
-        comment: (g) => g.normalizedCommands(),
-      });
+      return command.code === PLUGIN_COMMAND_MZ
+        ? handlers.pluginCommand(command)
+        : forCommand(command, index, commands, mapper);
     })
     .filter((v) => v !== undefined)
     .flat();
 };
 
 const forCommand = (
-  command: EventCommand,
+  command: Exclude<EventCommand, Command_PluginCommandMZ>,
   index: number,
   list: ReadonlyArray<EventCommand>,
-  handlers: CommandNormalizeHandlers
+  groupMapper: GroopMapper<NormalizedEventCommand[]>
 ): NormalizedEventCommand[] | NormalizedEventCommand | undefined => {
   if (
     command.code === SHOW_MESSAGE_BODY ||
@@ -82,9 +97,6 @@ const forCommand = (
     command.code === CHANGE_PROFILE
   ) {
     return normalizePluginCommand(command);
-  }
-  if (command.code === PLUGIN_COMMAND_MZ) {
-    return handlers.pluginCommand(command);
   }
   if (command.code === SCRIPT_EVAL_BODY) {
     return undefined;
@@ -123,28 +135,39 @@ const normalizePluginCommand = (
   };
 };
 
-const groupMapper = {
-  comment: (g): NormalizedEventCommand[] => g.normalizedCommands(),
-  script: (g): [NormalizedEventCommand] => {
-    const text = g.getBodyText().trimEnd();
-    const newBody: Command_ScriptHeader = {
-      code: SCRIPT_EVAL,
-      indent: g.header.indent,
-      parameters: [text],
-    };
-    return [newBody];
-  },
-  showMessage: (g: EventCommandGroup_Message): NormalizedEventCommand[] => {
-    const nexText = g.getBodyText().trimEnd();
-    const newBody: Command_ShowMessageBody = {
-      code: SHOW_MESSAGE_BODY,
-      indent: g.header.indent,
-      parameters: [nexText],
-    };
-    return [messageHeader(g.header), newBody];
-  },
-  showScrollingText: (g): NormalizedEventCommand[] => g.normalizedCommands(),
-} as const satisfies GroopMapper<NormalizedEventCommand[]>;
+const normalizeScript = (
+  script: EventCommandGroup_Script
+): Command_ScriptHeader => {
+  return {
+    code: SCRIPT_EVAL,
+    indent: script.header.indent,
+    parameters: [script.getBodyText().trimEnd()],
+  };
+};
+
+const normalizeMessage = (
+  g: EventCommandGroup_Message
+): NormalizedEventCommand[] => {
+  const nexText = g.getBodyText().trimEnd();
+  const newBody: Command_ShowMessageBody = {
+    code: SHOW_MESSAGE_BODY,
+    indent: g.header.indent,
+    parameters: [nexText],
+  };
+  return [messageHeader(g.header), newBody];
+};
+
+const normalizeScrollText = (
+  g: EventCommandGroup_ScrollingText
+): NormalizedEventCommand[] => {
+  const nexText = g.getBodyText().trimEnd();
+  const newBody: Command_ScrollTextBody = {
+    code: SHOW_SCROLLING_TEXT_BODY,
+    indent: g.header.indent,
+    parameters: [nexText],
+  };
+  return [g.header, newBody];
+};
 
 const messageHeader = (
   commahd: Command_ShowMessageHeader
