@@ -5,6 +5,9 @@ import type {
   Data_CommonEvent,
   Data_Troop,
   EventCommand,
+  Data_CommonEventUnknown,
+  NormalizedEventCommand,
+  Data_TroopUnknonw,
 } from "@RpgTypes/rmmz";
 import { repleaceMapEventCommands } from "@RpgTypes/rmmz";
 import { replaceEventCommandTexts } from "./eventCommand";
@@ -12,7 +15,7 @@ import { replaceNoteTextByFunction } from "./note";
 import { replaceTextByFunction } from "./utils";
 
 export const replaceTroopTexts = (
-  troop: Data_Troop,
+  troop: Data_TroopUnknonw<NormalizedEventCommand>,
   fn: (key: string) => string | undefined,
   pluginCommandFn: (
     command: Command_PluginCommandMZ
@@ -32,7 +35,7 @@ export const replaceTroopTexts = (
 };
 
 export const replaceCommonEventTexts = (
-  commonEvent: Data_CommonEvent,
+  commonEvent: Data_CommonEventUnknown<NormalizedEventCommand>,
   fn: (key: string) => string | undefined,
   pluginCommandFn: (
     command: Command_PluginCommandMZ
@@ -45,7 +48,7 @@ export const replaceCommonEventTexts = (
 };
 
 const ccc = (
-  list: ReadonlyArray<EventCommand>,
+  list: ReadonlyArray<NormalizedEventCommand>,
   fn: (key: string) => string | undefined,
   pluginCommandFn: (command: Command_PluginCommandMZ) => Command_PluginCommandMZ
 ): EventCommand[] => {
@@ -53,7 +56,7 @@ const ccc = (
 };
 
 export const replaceMapDataTexts = (
-  mapData: Data_Map<EventCommand>,
+  mapData: Data_Map<NormalizedEventCommand>,
   fn: (key: string) => string | undefined,
   pluginCommandFn: (
     command: Command_PluginCommandMZ
