@@ -89,27 +89,29 @@ describe("extractTextFromArmor", () => {
 });
 
 describe("extractTextFromWeapon", () => {
-  const weapon = makeWeaponData({
-    name: "ウェポン",
-    description: "ウェポン説明",
-    id: 4,
-  });
+  describe("", () => {
+    const weapon = makeWeaponData({
+      name: "ウェポン",
+      description: "ウェポン説明",
+      id: 4,
+    });
 
-  test("param", () => {
-    expect(weapon.name).toBe("ウェポン");
-    expect(weapon.description).toBe("ウェポン説明");
-    expect(weapon.id).toBe(4);
-  });
-  const expected: ExtractedText<Data_Weapon> = {
-    main: [
-      { key: "name", text: "ウェポン", id: 4 },
-      { key: "description", text: "ウェポン説明", id: 4 },
-    ],
-    note: [],
-  };
-  test("extract", () => {
-    const result = extractTextFromWeapon(weapon);
-    expect(result).toEqual(expected);
+    test("param", () => {
+      expect(weapon.name).toBe("ウェポン");
+      expect(weapon.description).toBe("ウェポン説明");
+      expect(weapon.id).toBe(4);
+    });
+    const expected: ExtractedText<Data_Weapon> = {
+      main: [
+        { key: "name", text: "ウェポン", id: 4 },
+        { key: "description", text: "ウェポン説明", id: 4 },
+      ],
+      note: [],
+    };
+    test("extract", () => {
+      const result = extractTextFromWeapon(weapon);
+      expect(result).toEqual(expected);
+    });
   });
 });
 
