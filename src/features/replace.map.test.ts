@@ -7,7 +7,7 @@ import type {
 import { makeMapData, makeMapEvent } from "@RpgTypes/rmmz";
 import { replaceNoteTextByMap } from "./core/replace/text";
 import type { ReplaceTextHandlers } from "./replace";
-import { replaceMapDataTexts } from "./replace";
+import { replaceMapData } from "./replace";
 
 const dictionary = new Map<string, string>([
   ["Hello", "Hi"],
@@ -31,7 +31,7 @@ describe("replaceMapDataTexts", () => {
       events: [],
     });
     const map = new Map([["Old Name", "New Name"]]);
-    const result = replaceMapDataTexts(mapData, createReplaceHandlers(map));
+    const result = replaceMapData(mapData, createReplaceHandlers(map));
     expect(result.displayName).toBe("New Name");
   });
   test("replaces note", () => {
@@ -44,7 +44,7 @@ describe("replaceMapDataTexts", () => {
       ["foo", "bar"],
       ["baz", "qux"],
     ]);
-    const result = replaceMapDataTexts(mapData, createReplaceHandlers(map));
+    const result = replaceMapData(mapData, createReplaceHandlers(map));
     const expectedNote = replaceNoteTextByMap({ note: mapData.note }, map);
     expect(result.note).toBe(expectedNote);
   });
@@ -73,7 +73,7 @@ const testCases: TestCase[] = [
 ];
 const runTestCase = (testCase: TestCase) => {
   test(testCase.caseName, () => {
-    const result = replaceMapDataTexts(
+    const result = replaceMapData(
       testCase.input,
       createReplaceHandlers(dictionary)
     );

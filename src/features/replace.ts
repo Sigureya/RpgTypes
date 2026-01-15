@@ -42,7 +42,7 @@ export const replaceEventCommandTexts = (
   );
 };
 
-export const replaceTroopTexts = (
+export const replaceTroopData = (
   troop: Data_TroopUnknonw<EventCommand>,
   handlers: ReplaceTextHandlers
 ): Data_TroopUnknonw<NormalizedEventCommand> => {
@@ -60,7 +60,7 @@ export const replaceTroopTexts = (
   };
 };
 
-export const replaceCommonEventTexts = (
+export const replaceCommonEventData = (
   commonEvent: Data_CommonEventUnknown<EventCommand>,
   handlers: ReplaceTextHandlers
 ): Data_CommonEventUnknown<NormalizedEventCommand> => {
@@ -73,7 +73,7 @@ export const replaceCommonEventTexts = (
   };
 };
 
-export const replaceMapDataTexts = (
+export const replaceMapData = (
   mapData: Data_Map<EventCommand>,
   handlers: ReplaceTextHandlers
 ): Data_Map<NormalizedEventCommand> => {
