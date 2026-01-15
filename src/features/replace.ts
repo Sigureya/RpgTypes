@@ -1,5 +1,4 @@
 import type {
-  MapEvent,
   Data_Map,
   EventCommand,
   NormalizedEventCommand,
@@ -25,10 +24,11 @@ export interface ReplaceTextHandlers {
   text: (key: string) => string | undefined;
 }
 
-export const replaceEventCommandTexts4 = (
+export const replaceEventCommandTexts = (
   commandList: ReadonlyArray<EventCommand>,
   handlers: ReplaceTextHandlers
 ): NormalizedEventCommand[] => {
+  const textFn = (key: string): string | undefined => handlers.text(key);
   return normalizeEventCommands(commandList).map(
     (command: NormalizedEventCommand): NormalizedEventCommand => {
       if (command.code === PLUGIN_COMMAND_MZ) {
@@ -37,27 +37,14 @@ export const replaceEventCommandTexts4 = (
       if (command.code === SCRIPT_EVAL) {
         return handlers.scriptCommand(command);
       }
-      return replaceBasicEventCommandTexts(command, (key: string) =>
-        handlers.text(key)
-      );
+      return replaceBasicEventCommandTexts(command, textFn);
     }
   );
 };
 
-export const replaceTroopTexts2 = (
+export const replaceTroopTexts = (
   troop: Data_TroopUnknonw<EventCommand>,
   handlers: ReplaceTextHandlers
-): Data_TroopUnknonw<NormalizedEventCommand> => {
-  return replaceTroopTextsXX(
-    troop,
-    (commandList: ReadonlyArray<EventCommand>) =>
-      replaceEventCommandTexts4(commandList, handlers)
-  );
-};
-
-const replaceTroopTextsXX = (
-  troop: Data_TroopUnknonw<EventCommand>,
-  commandFn: (commands: ReadonlyArray<EventCommand>) => NormalizedEventCommand[]
 ): Data_TroopUnknonw<NormalizedEventCommand> => {
   return {
     members: troop.members,
@@ -67,13 +54,13 @@ const replaceTroopTextsXX = (
       (page): BattleEventPage<NormalizedEventCommand> => ({
         conditions: page.conditions,
         span: page.span,
-        list: commandFn(page.list),
+        list: replaceEventCommandTexts(page.list, handlers),
       })
     ),
   };
 };
 
-export const replaceCommonEventTexts2 = (
+export const replaceCommonEventTexts = (
   commonEvent: Data_CommonEventUnknown<EventCommand>,
   handlers: ReplaceTextHandlers
 ): Data_CommonEventUnknown<NormalizedEventCommand> => {
@@ -82,7 +69,7 @@ export const replaceCommonEventTexts2 = (
     name: commonEvent.name,
     trigger: commonEvent.trigger,
     switchId: commonEvent.switchId,
-    list: replaceEventCommandTexts4(commonEvent.list, handlers),
+    list: replaceEventCommandTexts(commonEvent.list, handlers),
   };
 };
 
@@ -90,27 +77,24 @@ export const replaceMapDataTexts = (
   mapData: Data_Map<EventCommand>,
   handlers: ReplaceTextHandlers
 ): Data_Map<NormalizedEventCommand> => {
-  return replaceMapDataTextsXXX(
+  return replaceMapDataTextsCore(
     mapData,
     (key: string) => handlers.text(key),
     (commandList: ReadonlyArray<EventCommand>) =>
-      replaceEventCommandTexts4(commandList, handlers)
+      replaceEventCommandTexts(commandList, handlers)
   );
 };
 
-const replaceMapDataTextsXXX = (
+const replaceMapDataTextsCore = (
   mapData: Data_Map<EventCommand>,
   fn: (key: string) => string | undefined,
   commandFn: (commands: ReadonlyArray<EventCommand>) => NormalizedEventCommand[]
 ): Data_Map<NormalizedEventCommand> => {
-  type MapEventType = (MapEvent<NormalizedEventCommand> | null)[];
-  const displayName = replaceTextByFunction(mapData.displayName, fn);
-  const note = replaceNoteTextByFunction(mapData, fn);
-  const events: MapEventType = repleaceMapEventCommands(mapData, commandFn);
+  // スプレッド構文だと型チェックを通れないので、全て手動でコピー
   return {
-    displayName,
-    events,
-    note,
+    note: replaceNoteTextByFunction(mapData, fn),
+    displayName: replaceTextByFunction(mapData.displayName, fn),
+    events: repleaceMapEventCommands(mapData, commandFn),
     data: mapData.data,
     x: mapData.x,
     y: mapData.y,
