@@ -10,6 +10,7 @@ import type {
   Command_ScrollTextBody,
   Command_PluginCommandMZ,
   NormalizedEventCommand,
+  Command_ScriptHeader,
 } from "@RpgTypes/rmmz";
 import {
   CHANGE_NAME,
@@ -18,7 +19,6 @@ import {
   COMMENT_BODY,
   COMMENT_HEAD,
   makeCommandShowMessage,
-  PLUGIN_COMMAND_MZ,
   SHOW_CHOICES,
   SHOW_MESSAGE,
   SHOW_MESSAGE_BODY,
@@ -26,16 +26,14 @@ import {
 } from "@RpgTypes/rmmz";
 import { replaceTextByFunction } from "./utils";
 
-export const replaceEventCommandTexts = (
-  command: NormalizedEventCommand,
-  fn: (key: string) => string | undefined,
-  pluginCommandFn: (
-    command: Command_PluginCommandMZ
-  ) => Command_PluginCommandMZ = (c) => c
+export const replaceBasicEventCommandTexts = (
+  command: Exclude<
+    NormalizedEventCommand,
+    Command_PluginCommandMZ | Command_ScriptHeader
+  >,
+  fn: (key: string) => string | undefined
 ): NormalizedEventCommand => {
   switch (command.code) {
-    case PLUGIN_COMMAND_MZ:
-      return pluginCommandFn(command);
     case SHOW_MESSAGE:
       return replaceTextForCommandShowMessage(command, fn);
     case SHOW_CHOICES:

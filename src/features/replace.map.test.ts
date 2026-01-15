@@ -1,34 +1,13 @@
 import { describe, expect, test } from "vitest";
-import type { Data_Map, EventCommand } from "@RpgTypes/rmmz";
+import type {
+  Data_Map,
+  EventCommand,
+  NormalizedEventCommand,
+} from "@RpgTypes/rmmz";
 import { makeMapData, makeMapEvent } from "@RpgTypes/rmmz";
-import { replaceMapDataTexts } from "./event";
-import { replaceNoteTextByMap } from "./note";
-
-describe("replaceMapDataTexts", () => {
-  test("replaces displayName", () => {
-    const mapData = makeMapData<EventCommand>({
-      displayName: "Old Name",
-      events: [],
-    });
-    const map = new Map([["Old Name", "New Name"]]);
-    const result = replaceMapDataTexts(mapData, (s) => map.get(s));
-    expect(result.displayName).toBe("New Name");
-  });
-  test("replaces note", () => {
-    const mapData = makeMapData<EventCommand>({
-      displayName: "Map",
-      note: "<test:foo> and <test:baz> and <test:nochange>",
-      events: [],
-    });
-    const map = new Map([
-      ["foo", "bar"],
-      ["baz", "qux"],
-    ]);
-    const result = replaceMapDataTexts(mapData, (key) => map.get(key));
-    const expectedNote = replaceNoteTextByMap({ note: mapData.note }, map);
-    expect(result.note).toBe(expectedNote);
-  });
-});
+import { replaceNoteTextByMap } from "./core/replace/text";
+import type { ReplaceTextHandlers } from "./replace";
+import { replaceMapData } from "./replace";
 
 const dictionary = new Map<string, string>([
   ["Hello", "Hi"],
@@ -37,9 +16,43 @@ const dictionary = new Map<string, string>([
   ["baz", "qux"],
 ]);
 
+const createReplaceHandlers = (
+  map: ReadonlyMap<string, string>
+): ReplaceTextHandlers => ({
+  pluginCommand: (c) => c,
+  scriptCommand: (c) => c,
+  text: (key: string) => map.get(key),
+});
+
+describe("replaceMapDataTexts", () => {
+  test("replaces displayName", () => {
+    const mapData = makeMapData<NormalizedEventCommand>({
+      displayName: "Old Name",
+      events: [],
+    });
+    const map = new Map([["Old Name", "New Name"]]);
+    const result = replaceMapData(mapData, createReplaceHandlers(map));
+    expect(result.displayName).toBe("New Name");
+  });
+  test("replaces note", () => {
+    const mapData = makeMapData<NormalizedEventCommand>({
+      displayName: "Map",
+      note: "<test:foo> and <test:baz> and <test:nochange>",
+      events: [],
+    });
+    const map = new Map([
+      ["foo", "bar"],
+      ["baz", "qux"],
+    ]);
+    const result = replaceMapData(mapData, createReplaceHandlers(map));
+    const expectedNote = replaceNoteTextByMap({ note: mapData.note }, map);
+    expect(result.note).toBe(expectedNote);
+  });
+});
+
 interface TestCase {
   caseName: string;
-  input: Data_Map<EventCommand>;
+  input: Data_Map<NormalizedEventCommand>;
   expected: Data_Map<EventCommand>;
 }
 
@@ -60,8 +73,9 @@ const testCases: TestCase[] = [
 ];
 const runTestCase = (testCase: TestCase) => {
   test(testCase.caseName, () => {
-    const result = replaceMapDataTexts(testCase.input, (key: string) =>
-      dictionary.get(key)
+    const result = replaceMapData(
+      testCase.input,
+      createReplaceHandlers(dictionary)
     );
     expect(result).toEqual(testCase.expected);
   });
