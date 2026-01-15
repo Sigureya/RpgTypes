@@ -10,6 +10,7 @@ import type {
   Command_ScrollTextBody,
   Command_PluginCommandMZ,
   NormalizedEventCommand,
+  Command_ScriptHeader,
 } from "@RpgTypes/rmmz";
 import {
   CHANGE_NAME,
@@ -26,7 +27,10 @@ import {
 import { replaceTextByFunction } from "./utils";
 
 export const replaceBasicEventCommandTexts = (
-  command: Exclude<NormalizedEventCommand, Command_PluginCommandMZ>,
+  command: Exclude<
+    NormalizedEventCommand,
+    Command_PluginCommandMZ | Command_ScriptHeader
+  >,
   fn: (key: string) => string | undefined
 ): NormalizedEventCommand => {
   switch (command.code) {
