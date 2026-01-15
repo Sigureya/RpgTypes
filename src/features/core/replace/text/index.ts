@@ -9,11 +9,6 @@ export {
   replaceItemText as replaceWeaponText,
 } from "./rpgData";
 export { replaceBasicEventCommandTexts } from "./eventCommand";
-export {
-  replaceCommonEventTexts,
-  replaceMapDataTexts,
-  replaceTroopTexts,
-} from "./event";
 export { replaceNoteTextByFunction, replaceNoteTextByMap } from "./note";
 export { replaceSystemTermsByMap as replaceSystemTerms } from "./systemTerms";
 export { replaceSystemText } from "./system";

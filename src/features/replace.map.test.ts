@@ -5,8 +5,24 @@ import type {
   NormalizedEventCommand,
 } from "@RpgTypes/rmmz";
 import { makeMapData, makeMapEvent } from "@RpgTypes/rmmz";
-import { replaceMapDataTexts } from "./event";
-import { replaceNoteTextByMap } from "./note";
+import { replaceNoteTextByMap } from "./core/replace/text";
+import type { ReplaceTextHandlers } from "./replace";
+import { replaceMapDataTexts } from "./replace";
+
+const dictionary = new Map<string, string>([
+  ["Hello", "Hi"],
+  ["World", "Earth"],
+  ["foo", "bar"],
+  ["baz", "qux"],
+]);
+
+const createReplaceHandlers = (
+  map: ReadonlyMap<string, string>
+): ReplaceTextHandlers => ({
+  pluginCommand: (c) => c,
+  scriptCommand: (c) => c,
+  text: (key: string) => map.get(key),
+});
 
 describe("replaceMapDataTexts", () => {
   test("replaces displayName", () => {
@@ -15,7 +31,7 @@ describe("replaceMapDataTexts", () => {
       events: [],
     });
     const map = new Map([["Old Name", "New Name"]]);
-    const result = replaceMapDataTexts(mapData, (s) => map.get(s));
+    const result = replaceMapDataTexts(mapData, createReplaceHandlers(map));
     expect(result.displayName).toBe("New Name");
   });
   test("replaces note", () => {
@@ -28,18 +44,11 @@ describe("replaceMapDataTexts", () => {
       ["foo", "bar"],
       ["baz", "qux"],
     ]);
-    const result = replaceMapDataTexts(mapData, (key) => map.get(key));
+    const result = replaceMapDataTexts(mapData, createReplaceHandlers(map));
     const expectedNote = replaceNoteTextByMap({ note: mapData.note }, map);
     expect(result.note).toBe(expectedNote);
   });
 });
-
-const dictionary = new Map<string, string>([
-  ["Hello", "Hi"],
-  ["World", "Earth"],
-  ["foo", "bar"],
-  ["baz", "qux"],
-]);
 
 interface TestCase {
   caseName: string;
@@ -64,8 +73,9 @@ const testCases: TestCase[] = [
 ];
 const runTestCase = (testCase: TestCase) => {
   test(testCase.caseName, () => {
-    const result = replaceMapDataTexts(testCase.input, (key: string) =>
-      dictionary.get(key)
+    const result = replaceMapDataTexts(
+      testCase.input,
+      createReplaceHandlers(dictionary)
     );
     expect(result).toEqual(testCase.expected);
   });
