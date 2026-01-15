@@ -9,8 +9,8 @@ import type {
   NormalizedEventCommand,
   Data_TroopUnknonw,
 } from "@RpgTypes/rmmz";
-import { repleaceMapEventCommands } from "@RpgTypes/rmmz";
-import { replaceEventCommandTexts } from "./eventCommand";
+import { PLUGIN_COMMAND_MZ, repleaceMapEventCommands } from "@RpgTypes/rmmz";
+import { replaceBasicEventCommandTexts } from "./eventCommand";
 import { replaceNoteTextByFunction } from "./note";
 import { replaceTextByFunction } from "./utils";
 
@@ -51,8 +51,12 @@ const ccc = (
   list: ReadonlyArray<NormalizedEventCommand>,
   fn: (key: string) => string | undefined,
   pluginCommandFn: (command: Command_PluginCommandMZ) => Command_PluginCommandMZ
-): EventCommand[] => {
-  return list.map((c) => replaceEventCommandTexts(c, fn, pluginCommandFn));
+): NormalizedEventCommand[] => {
+  return list.map((c) =>
+    c.code === PLUGIN_COMMAND_MZ
+      ? pluginCommandFn(c)
+      : replaceBasicEventCommandTexts(c, fn)
+  );
 };
 
 export const replaceMapDataTexts = (
@@ -61,16 +65,14 @@ export const replaceMapDataTexts = (
   pluginCommandFn: (
     command: Command_PluginCommandMZ
   ) => Command_PluginCommandMZ = (c) => c
-): Data_Map<EventCommand> => {
+): Data_Map<NormalizedEventCommand> => {
   const displayName = replaceTextByFunction(mapData.displayName, fn);
   const note = replaceNoteTextByFunction(mapData, fn);
   const events = repleaceMapEventCommands(mapData, (commandList) =>
-    commandList.map((command) =>
-      replaceEventCommandTexts(command, fn, pluginCommandFn)
-    )
+    ccc(commandList, fn, pluginCommandFn)
   );
 
-  const partial: Partial<Data_Map<EventCommand>> = {
+  const partial: Partial<Data_Map<NormalizedEventCommand>> = {
     displayName,
     events,
     note,
