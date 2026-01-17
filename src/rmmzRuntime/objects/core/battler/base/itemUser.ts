@@ -1,4 +1,4 @@
-import type { Data_Skill } from "@sigureya/rpgtypes";
+import type { Data_Skill } from "@RpgTypes/rmmz/rpg";
 
 export interface Rmmz_ItemUser {
   canInput(): boolean;
