@@ -1,4 +1,4 @@
-import type { ParamID } from "@sigureya/rpgtypes";
+import type { ParamID } from "@RpgTypes/rmmz/rpg";
 
 export interface Rmmz_StatusParams {
   paramMin(paramId: ParamID): number;

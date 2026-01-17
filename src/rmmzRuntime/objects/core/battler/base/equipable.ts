@@ -2,7 +2,7 @@ import type {
   Data_Equipment,
   Data_Weapon,
   Data_Armor,
-} from "@sigureya/rpgtypes";
+} from "@RpgTypes/rmmz/rpg";
 
 export interface Rmmz_Equipable {
   canEquip(item: Data_Equipment): boolean;
