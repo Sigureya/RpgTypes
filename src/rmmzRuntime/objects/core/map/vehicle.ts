@@ -1,6 +1,6 @@
+import type { AudioFileParams } from "@RpgTypes/libs";
 import type { Data_Vehicle } from "@RpgTypes/rmmz/system";
 import type { Direction8 } from "@RpgTypes/rmmz/utils";
-import type { AudioFileParams } from "@sigureya/rpgtypes";
 
 export interface Rmmz_Vehicle {
   _type: string;
