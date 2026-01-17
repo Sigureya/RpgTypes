@@ -1,4 +1,4 @@
-import { ParamID } from '@sigureya/rpgtypes';
+import { ParamID } from '../../../../../rmmz/rpg';
 export interface Rmmz_BattlerBuffs {
     clearBuffs(): void;
     eraseBuff(paramId: ParamID): void;

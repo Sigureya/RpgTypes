@@ -1,4 +1,4 @@
-import { Data_State } from '@sigureya/rpgtypes';
+import { Data_State } from '../../../../../rmmz/rpg';
 export interface Rmmz_Stateable {
     clearStates(): void;
     eraseState(stateId: number): void;
