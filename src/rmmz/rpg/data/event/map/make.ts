@@ -1,10 +1,21 @@
 import type { EventCommandUnknown } from "@RpgTypes/rmmz/eventCommand";
 import type { Data_Map } from "./map";
+import type { MapFileInfo } from "./mapFileInfo";
+import type { Data_MapInfo } from "./mapInfo";
+
+export const makeMapFileInfo = <T>(
+  info: Data_MapInfo,
+  data: T,
+): MapFileInfo<T> => ({
+  map: data,
+  filename: `Map${info.id.toString().padStart(3, "0")}` as `Map${string}`,
+  editingName: info.name,
+});
 
 export const makeMapData = <
-  Command extends EventCommandUnknown = EventCommandUnknown
+  Command extends EventCommandUnknown = EventCommandUnknown,
 >(
-  map: Partial<Data_Map<Command>> = {}
+  map: Partial<Data_Map<Command>> = {},
 ): Data_Map<Command> => {
   return {
     data: map.data ?? [],
