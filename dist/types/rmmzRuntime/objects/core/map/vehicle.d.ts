@@ -1,6 +1,6 @@
+import { AudioFileParams } from '../../../../libs';
 import { Data_Vehicle } from '../../../../rmmz/system';
 import { Direction8 } from '../../../../rmmz/utils';
-import { AudioFileParams } from '@sigureya/rpgtypes';
 export interface Rmmz_Vehicle {
     _type: string;
     isBoat(): boolean;
