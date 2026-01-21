@@ -26,7 +26,7 @@ export interface ReplaceTextHandlers {
 
 export const replaceEventCommandTexts = (
   commandList: ReadonlyArray<EventCommand>,
-  handlers: ReplaceTextHandlers
+  handlers: ReplaceTextHandlers,
 ): NormalizedEventCommand[] => {
   const textFn = (key: string): string | undefined => handlers.text(key);
   return normalizeEventCommands(commandList).map(
@@ -38,13 +38,13 @@ export const replaceEventCommandTexts = (
         return handlers.scriptCommand(command);
       }
       return replaceBasicEventCommandTexts(command, textFn);
-    }
+    },
   );
 };
 
 export const replaceTroopData = (
   troop: Data_TroopUnknonw<EventCommand>,
-  handlers: ReplaceTextHandlers
+  handlers: ReplaceTextHandlers,
 ): Data_TroopUnknonw<NormalizedEventCommand> => {
   return {
     members: troop.members,
@@ -55,14 +55,14 @@ export const replaceTroopData = (
         conditions: page.conditions,
         span: page.span,
         list: replaceEventCommandTexts(page.list, handlers),
-      })
+      }),
     ),
   };
 };
 
 export const replaceCommonEventData = (
   commonEvent: Data_CommonEventUnknown<EventCommand>,
-  handlers: ReplaceTextHandlers
+  handlers: ReplaceTextHandlers,
 ): Data_CommonEventUnknown<NormalizedEventCommand> => {
   return {
     id: commonEvent.id,
@@ -75,26 +75,28 @@ export const replaceCommonEventData = (
 
 export const replaceMapData = (
   mapData: Data_Map<EventCommand>,
-  handlers: ReplaceTextHandlers
+  handlers: ReplaceTextHandlers,
 ): Data_Map<NormalizedEventCommand> => {
   return replaceMapDataTextsCore(
     mapData,
     (key: string) => handlers.text(key),
     (commandList: ReadonlyArray<EventCommand>) =>
-      replaceEventCommandTexts(commandList, handlers)
+      replaceEventCommandTexts(commandList, handlers),
   );
 };
 
 const replaceMapDataTextsCore = (
   mapData: Data_Map<EventCommand>,
   fn: (key: string) => string | undefined,
-  commandFn: (commands: ReadonlyArray<EventCommand>) => NormalizedEventCommand[]
+  commandFn: (
+    commands: ReadonlyArray<EventCommand>,
+  ) => NormalizedEventCommand[],
 ): Data_Map<NormalizedEventCommand> => {
   // スプレッド構文だと型チェックを通れないので、全て手動でコピー
   return {
     note: replaceNoteTextByFunction(mapData, fn),
     displayName: replaceTextByFunction(mapData.displayName, fn),
-    events: repleaceMapEventCommands(mapData, commandFn),
+    events: repleaceMapEventCommands(mapData.events, commandFn),
     data: mapData.data,
     x: mapData.x,
     y: mapData.y,
