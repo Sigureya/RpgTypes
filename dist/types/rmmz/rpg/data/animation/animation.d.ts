@@ -14,15 +14,15 @@ export interface Vector3 {
     z: number;
 }
 export interface Data_Animation {
-    id: number;
-    displayType: number;
-    effectName: string;
-    flashTimings: FlashTiming[];
     name: string;
+    id: number;
+    effectName: string;
+    displayType: number;
     offsetX: number;
     offsetY: number;
-    rotation: Vector3;
     scale: number;
-    soundTimings: SoundTiming[];
     speed: number;
+    rotation: Vector3;
+    soundTimings: SoundTiming[];
+    flashTimings: FlashTiming[];
 }

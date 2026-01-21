@@ -564,7 +564,7 @@ const Ea = (e) => typeof e.value == "string", mt = (e) => ({
 }), Tt = (e, a) => Ja(e, (t) => a.text(t), (t) => z(t, a)), Ja = (e, a, t) => ({
   note: w(e, a),
   displayName: c(e.displayName, a),
-  events: Me(e, t),
+  events: Me(e.events, t),
   data: e.data,
   x: e.x,
   y: e.y,
