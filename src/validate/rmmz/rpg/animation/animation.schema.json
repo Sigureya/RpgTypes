@@ -1,0 +1,76 @@
+{
+  "required": [
+    "name",
+    "id",
+    "effectName",
+    "displayType",
+    "offsetX",
+    "offsetY",
+    "scale",
+    "speed",
+    "rotation",
+    "soundTimings",
+    "flashTimings"
+  ],
+  "type": "object",
+  "properties": {
+    "speed": { "minimum": 1, "type": "integer" },
+    "displayType": { "type": "integer" },
+    "effectName": { "type": "string" },
+    "id": { "minimum": 0, "type": "integer" },
+    "name": { "type": "string" },
+    "offsetX": { "type": "integer" },
+    "offsetY": { "type": "integer" },
+    "rotation": {
+      "properties": {
+        "x": { "type": "number" },
+        "y": { "type": "number" },
+        "z": { "type": "number" }
+      },
+      "required": ["x", "y", "z"],
+      "type": "object"
+    },
+    "scale": { "minimum": 1, "type": "integer" },
+    "flashTimings": {
+      "items": {
+        "properties": {
+          "color": {
+            "items": {
+              "maximum": 255,
+              "minimum": 0,
+              "type": "integer"
+            },
+            "maxItems": 4,
+            "minItems": 4,
+            "type": "array"
+          },
+          "duration": { "type": "integer" },
+          "frame": { "type": "integer" }
+        },
+        "required": ["color", "duration", "frame"],
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "soundTimings": {
+      "items": {
+        "properties": {
+          "frame": { "type": "integer" },
+          "se": {
+            "properties": {
+              "name": { "type": "string" },
+              "pan": { "type": "integer" },
+              "pitch": { "type": "integer" },
+              "volume": { "type": "integer" }
+            },
+            "required": ["name", "volume", "pitch", "pan"],
+            "type": "object"
+          }
+        },
+        "required": ["se", "frame"],
+        "type": "object"
+      },
+      "type": "array"
+    }
+  }
+}
