@@ -18,8 +18,8 @@ export const SCHEMA_DATA_MAPINFO = {
     displayName: { type: "string" },
     order: { type: "integer" },
     expanded: { type: "boolean" },
-    scrollX: { type: "integer" },
-    scrollY: { type: "integer" },
+    scrollX: { type: "number" },
+    scrollY: { type: "number" },
     parentId: { type: "integer", minimum: 0 },
   },
 } as const satisfies JSONSchemaType<Data_MapInfo>;
