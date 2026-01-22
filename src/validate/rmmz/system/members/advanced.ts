@@ -1,7 +1,7 @@
+import type { System_Advanced } from "@RpgTypes/rmmz";
 import type { JSONSchemaType } from "ajv";
-import type { System_Advanced } from "./advanced";
 
-const SCHEMA_SYSTEM_ADVANCED = {
+export const SCHEMA_SYSTEM_ADVANCED = {
   type: "object",
   properties: {
     gameId: { type: "integer" },
@@ -32,5 +32,3 @@ const SCHEMA_SYSTEM_ADVANCED = {
   ],
   additionalProperties: false,
 } as const satisfies JSONSchemaType<System_Advanced>;
-
-export default SCHEMA_SYSTEM_ADVANCED;

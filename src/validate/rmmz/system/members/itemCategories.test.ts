@@ -1,11 +1,11 @@
 import { describe, test, expect } from "vitest";
-import Ajv from "ajv";
+import type { ItemCategories, ItemCategoriesArray } from "@RpgTypes/rmmz";
 import {
   makeItemCategories,
   makeItemCategoriesFromArray,
-} from "./itemCategories";
-import SCHEMA_SYSTEM_ITEM_CATEGORIES from "./schema";
-import type { ItemCategories, ItemCategoriesArray } from "./types";
+} from "@RpgTypes/rmmz";
+import Ajv from "ajv";
+import { SCHEMA_SYSTEM_ITEM_CATEGORIES } from "./itemCategories";
 
 const ajv = new Ajv({ strict: false });
 const validate = ajv.compile(SCHEMA_SYSTEM_ITEM_CATEGORIES);
@@ -87,38 +87,38 @@ describe("makeItemCategories", () => {
 describe("makeItemCategories <-> makeItemCategoriesFromArray round trip", () => {
   testRoundTrip(
     { armor: true, item: false, keyItem: false, weapon: false },
-    "armor only true"
+    "armor only true",
   );
   testRoundTrip(
     { armor: false, item: true, keyItem: false, weapon: false },
-    "item only true"
+    "item only true",
   );
   testRoundTrip(
     { armor: false, item: false, keyItem: true, weapon: false },
-    "keyItem only true"
+    "keyItem only true",
   );
   testRoundTrip(
     { armor: false, item: false, keyItem: false, weapon: true },
-    "weapon only true"
+    "weapon only true",
   );
   testRoundTrip(
     { armor: true, item: true, keyItem: false, weapon: false },
-    "armor and item true"
+    "armor and item true",
   );
   testRoundTrip(
     { armor: false, item: true, keyItem: true, weapon: false },
-    "item and keyItem true"
+    "item and keyItem true",
   );
   testRoundTrip(
     { armor: true, item: true, keyItem: true, weapon: false },
-    "armor, item, keyItem true"
+    "armor, item, keyItem true",
   );
   testRoundTrip(
     { armor: false, item: false, keyItem: false, weapon: false },
-    "all false"
+    "all false",
   );
   testRoundTrip(
     { armor: true, item: true, keyItem: true, weapon: true },
-    "all true"
+    "all true",
   );
 });

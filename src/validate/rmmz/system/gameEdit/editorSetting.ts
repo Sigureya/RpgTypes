@@ -1,7 +1,7 @@
+import type { EditorSettings } from "@RpgTypes/rmmz";
 import type { JSONSchemaType } from "ajv";
-import type { EditorSettings } from "./types";
 
-const SCHEMA_SYSTEM_EDITOR_SETTINGS: JSONSchemaType<EditorSettings> = {
+export const SCHEMA_SYSTEM_EDITOR_SETTINGS = {
   additionalProperties: false,
   type: "object",
   required: ["messageWidth1", "messageWidth2", "jsonFormatLevel"],
@@ -11,5 +11,3 @@ const SCHEMA_SYSTEM_EDITOR_SETTINGS: JSONSchemaType<EditorSettings> = {
     jsonFormatLevel: { type: "integer", minimum: 0, maximum: 4 },
   },
 } as const satisfies JSONSchemaType<EditorSettings>;
-
-export default SCHEMA_SYSTEM_EDITOR_SETTINGS;

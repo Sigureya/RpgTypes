@@ -1,9 +1,9 @@
 import { describe, test, expect } from "vitest";
+import { makeAudioFileParams } from "@RpgTypes/libs";
+import type { System_SoundsObject, System_SoundsArray } from "@RpgTypes/rmmz";
+import { makeSoundsArray, makeSoundsObject } from "@RpgTypes/rmmz";
 import Ajv from "ajv";
-import { makeAudioFileParams } from "src/libs";
-import SCHEMA_SYSTEM_SOUND_ARRAY from "./schema";
-import { makeSoundsArray, makeSoundsObject } from "./soundArray";
-import type { System_SoundsArray, System_SoundsObject } from "./types";
+import { SCHEMA_SYSTEM_SOUND_ARRAY } from "./audio";
 
 const ajv = new Ajv({ strict: true });
 const validate = ajv.compile(SCHEMA_SYSTEM_SOUND_ARRAY);

@@ -1,5 +1,5 @@
+import type { AudioFileParams } from "@RpgTypes/libs";
 import type { JSONSchemaType } from "ajv";
-import type { AudioFileParams } from "src/libs/utils";
 
 export const SCHEMA_AUDIO_FILE_PARAMS_SYSTEM = {
   type: "object",
@@ -13,4 +13,9 @@ export const SCHEMA_AUDIO_FILE_PARAMS_SYSTEM = {
   additionalProperties: false,
 } as const satisfies JSONSchemaType<AudioFileParams>;
 
-export default SCHEMA_AUDIO_FILE_PARAMS_SYSTEM;
+export const SCHEMA_SYSTEM_SOUND_ARRAY = {
+  type: "array",
+  maxItems: 24,
+  minItems: 24,
+  items: SCHEMA_AUDIO_FILE_PARAMS_SYSTEM,
+} as const satisfies JSONSchemaType<AudioFileParams[]>;
