@@ -1,7 +1,7 @@
 import { describe, test, expect } from "vitest";
+import type { Terms_Messages } from "@RpgTypes/rmmz";
 import Ajv from "ajv";
-import SCHEMA_SYSTEM_TERMS_MESSAGES from "./schema";
-import type { Terms_Messages } from "./types";
+import { SCHEMA_SYSTEM_TERMS_MESSAGES } from "./messages";
 
 const ajv = new Ajv({ strict: true });
 const validate = ajv.compile(SCHEMA_SYSTEM_TERMS_MESSAGES);
