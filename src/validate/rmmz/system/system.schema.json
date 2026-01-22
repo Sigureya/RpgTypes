@@ -10,6 +10,67 @@
         "pitch": { "type": "integer", "minimum": 50, "maximum": 150 },
         "pan": { "type": "integer", "minimum": -100, "maximum": 100 }
       }
+    },
+    "vehicle": {
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "characterIndex",
+        "characterName",
+        "bgm",
+        "startMapId",
+        "startX",
+        "startY"
+      ],
+      "properties": {
+        "characterIndex": { "type": "integer", "minimum": 0, "maximum": 7 },
+        "characterName": { "type": "string", "minLength": 1 },
+        "bgm": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["name", "volume", "pitch", "pan"],
+          "properties": {
+            "name": { "type": "string" },
+            "volume": { "type": "integer", "minimum": 0, "maximum": 100 },
+            "pitch": { "type": "integer", "minimum": 50, "maximum": 150 },
+            "pan": { "type": "integer", "minimum": -100, "maximum": 100 }
+          }
+        },
+        "startMapId": { "type": "integer", "minimum": 0 },
+        "startX": { "type": "integer", "minimum": 0, "maximum": 5000 },
+        "startY": { "type": "integer", "minimum": 0, "maximum": 5000 }
+      }
+    },
+    "advanced": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "gameId": { "type": "integer" },
+        "screenWidth": { "type": "integer" },
+        "screenHeight": { "type": "integer" },
+        "uiAreaWidth": { "type": "integer" },
+        "uiAreaHeight": { "type": "integer" },
+        "windowOpacity": { "type": "integer" },
+        "screenScale": { "type": "number" },
+
+        "numberFontFilename": { "type": "string" },
+        "mainFontFilename": { "type": "string" },
+        "fallbackFonts": { "type": "string" },
+        "fontSize": { "type": "integer" }
+      },
+      "required": [
+        "gameId",
+        "screenWidth",
+        "screenHeight",
+        "uiAreaWidth",
+        "uiAreaHeight",
+        "windowOpacity",
+        "screenScale",
+        "numberFontFilename",
+        "mainFontFilename",
+        "fallbackFonts",
+        "fontSize"
+      ]
     }
   },
 
@@ -85,35 +146,7 @@
       }
     },
     "advanced": {
-      "type": "object",
-      "properties": {
-        "gameId": { "type": "integer" },
-        "screenWidth": { "type": "integer" },
-        "screenHeight": { "type": "integer" },
-        "uiAreaWidth": { "type": "integer" },
-        "uiAreaHeight": { "type": "integer" },
-        "windowOpacity": { "type": "integer" },
-        "screenScale": { "type": "number" },
-
-        "numberFontFilename": { "type": "string" },
-        "mainFontFilename": { "type": "string" },
-        "fallbackFonts": { "type": "string" },
-        "fontSize": { "type": "integer" }
-      },
-      "required": [
-        "gameId",
-        "screenWidth",
-        "screenHeight",
-        "uiAreaWidth",
-        "uiAreaHeight",
-        "windowOpacity",
-        "screenScale",
-        "numberFontFilename",
-        "mainFontFilename",
-        "fallbackFonts",
-        "fontSize"
-      ],
-      "additionalProperties": false
+      "$ref": "#/$defs/advanced"
     },
     "attackMotions": {
       "items": {
@@ -131,192 +164,9 @@
       },
       "type": "array"
     },
-    "airship": {
-      "additionalProperties": false,
-      "properties": {
-        "bgm": {
-          "additionalProperties": false,
-          "properties": {
-            "name": {
-              "type": "string"
-            },
-            "pan": {
-              "maximum": 100,
-              "minimum": -100,
-              "type": "integer"
-            },
-            "pitch": {
-              "maximum": 150,
-              "minimum": 50,
-              "type": "integer"
-            },
-            "volume": {
-              "maximum": 100,
-              "minimum": 0,
-              "type": "integer"
-            }
-          },
-          "required": ["name", "volume", "pitch", "pan"],
-          "type": "object"
-        },
-        "characterIndex": {
-          "maximum": 7,
-          "minimum": 0,
-          "type": "integer"
-        },
-        "characterName": {
-          "minLength": 1,
-          "type": "string"
-        },
-        "startMapId": {
-          "minimum": 0,
-          "type": "integer"
-        },
-        "startX": {
-          "maximum": 5000,
-          "minimum": 0,
-          "type": "integer"
-        },
-        "startY": {
-          "maximum": 5000,
-          "minimum": 0,
-          "type": "integer"
-        }
-      },
-      "required": [
-        "characterIndex",
-        "characterName",
-        "bgm",
-        "startMapId",
-        "startX",
-        "startY"
-      ],
-      "type": "object"
-    },
-    "boat": {
-      "additionalProperties": false,
-      "properties": {
-        "bgm": {
-          "additionalProperties": false,
-          "properties": {
-            "name": {
-              "type": "string"
-            },
-            "pan": {
-              "maximum": 100,
-              "minimum": -100,
-              "type": "integer"
-            },
-            "pitch": {
-              "maximum": 150,
-              "minimum": 50,
-              "type": "integer"
-            },
-            "volume": {
-              "maximum": 100,
-              "minimum": 0,
-              "type": "integer"
-            }
-          },
-          "required": ["name", "volume", "pitch", "pan"],
-          "type": "object"
-        },
-        "characterIndex": {
-          "maximum": 7,
-          "minimum": 0,
-          "type": "integer"
-        },
-        "characterName": {
-          "minLength": 1,
-          "type": "string"
-        },
-        "startMapId": {
-          "minimum": 0,
-          "type": "integer"
-        },
-        "startX": {
-          "maximum": 5000,
-          "minimum": 0,
-          "type": "integer"
-        },
-        "startY": {
-          "maximum": 5000,
-          "minimum": 0,
-          "type": "integer"
-        }
-      },
-      "required": [
-        "characterIndex",
-        "characterName",
-        "bgm",
-        "startMapId",
-        "startX",
-        "startY"
-      ],
-      "type": "object"
-    },
-    "ship": {
-      "additionalProperties": false,
-      "properties": {
-        "bgm": {
-          "additionalProperties": false,
-          "properties": {
-            "name": {
-              "type": "string"
-            },
-            "pan": {
-              "maximum": 100,
-              "minimum": -100,
-              "type": "integer"
-            },
-            "pitch": {
-              "maximum": 150,
-              "minimum": 50,
-              "type": "integer"
-            },
-            "volume": {
-              "maximum": 100,
-              "minimum": 0,
-              "type": "integer"
-            }
-          },
-          "required": ["name", "volume", "pitch", "pan"],
-          "type": "object"
-        },
-        "characterIndex": {
-          "maximum": 7,
-          "minimum": 0,
-          "type": "integer"
-        },
-        "characterName": {
-          "minLength": 1,
-          "type": "string"
-        },
-        "startMapId": {
-          "minimum": 0,
-          "type": "integer"
-        },
-        "startX": {
-          "maximum": 5000,
-          "minimum": 0,
-          "type": "integer"
-        },
-        "startY": {
-          "maximum": 5000,
-          "minimum": 0,
-          "type": "integer"
-        }
-      },
-      "required": [
-        "characterIndex",
-        "characterName",
-        "bgm",
-        "startMapId",
-        "startX",
-        "startY"
-      ],
-      "type": "object"
-    },
+    "ship": { "$ref": "#/$defs/vehicle" },
+    "boat": { "$ref": "#/$defs/vehicle" },
+    "airship": { "$ref": "#/$defs/vehicle" },
     "optAutosave": { "type": "boolean" },
     "optDisplayTp": { "type": "boolean" },
     "optFloorDeath": { "type": "boolean" },

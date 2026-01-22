@@ -1,6 +1,6 @@
+import type { AudioFileParams } from "@RpgTypes/libs";
 import type {
   Data_System,
-  Data_Vehicle,
   System_Bgm,
   System_BooleanGameOptions,
   System_GameEditorBundleRMMZ,
@@ -19,10 +19,7 @@ import { SCHEMA_SYSTEM_EDITOR_SETTINGS } from "./gameEdit/editorSetting";
 import { SCHEMA_SYSTEM_TEST_BATTLER } from "./gameEdit/testBattle";
 import { SCHEMA_SYSTEM_ADVANCED } from "./members/advanced";
 import { SCHEMA_SYSTEM_MEMBERS_ATTACK_MOTION } from "./members/attackMotion";
-import {
-  SCHEMA_AUDIO_FILE_PARAMS_SYSTEM,
-  SCHEMA_SYSTEM_SOUND_ARRAY,
-} from "./members/audio";
+import { SCHEMA_SYSTEM_SOUND_ARRAY } from "./members/audio";
 import { SCHEMA_SYSTEM_TERMS_CORE } from "./members/trems/terms";
 import { SCHEMA_SYSTEM_VEHICLE } from "./members/vehicle";
 
@@ -53,7 +50,9 @@ export const SCHEMA_DATA_SYSTEM2 = {
         pitch: { type: "integer", minimum: 50, maximum: 150 },
         pan: { type: "integer", minimum: -100, maximum: 100 },
       },
-    },
+    } as const satisfies JSONSchemaType<AudioFileParams>,
+    vehicle: SCHEMA_SYSTEM_VEHICLE,
+    advanced: SCHEMA_SYSTEM_ADVANCED,
   },
   type: "object",
   required: [
@@ -119,10 +118,10 @@ export const SCHEMA_DATA_SYSTEM2 = {
     currencyUnit: { type: "string" },
     terms: SCHEMA_SYSTEM_TERMS_CORE,
     // Vehicles
-    ship: SCHEMA_SYSTEM_VEHICLE satisfies JSONSchemaType<Data_Vehicle>,
-    boat: SCHEMA_SYSTEM_VEHICLE satisfies JSONSchemaType<Data_Vehicle>,
-    airship: SCHEMA_SYSTEM_VEHICLE satisfies JSONSchemaType<Data_Vehicle>,
-    advanced: SCHEMA_SYSTEM_ADVANCED,
+    ship: { $ref: "#/$defs/vehicle" },
+    boat: { $ref: "#/$defs/vehicle" },
+    airship: { $ref: "#/$defs/vehicle" },
+    advanced: { $ref: "#/$defs/advanced" },
     // AudioFiles
     titleBgm: { $ref: "#/$defs/audio" },
     battleBgm: { $ref: "#/$defs/audio" },
