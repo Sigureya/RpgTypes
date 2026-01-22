@@ -7,14 +7,17 @@ import { alias } from "./viteAlias.mts";
 
 const srcDir = path.resolve(__dirname, "src");
 
-const validateEntryPoints = () =>
-  ["validate/rmmz/rpg", "validate/rmmz/eventCommand"].reduce(
-    (acc, dir): Record<string, string> => {
-      acc[dir] = path.resolve(srcDir, `${dir}/index.ts`);
-      return acc;
-    },
-    {}
-  );
+const validateEntryPoints = () => {
+  const entries = [
+    "validate/rmmz/rpg",
+    "validate/rmmz/eventCommand",
+    "validate/rmmz/system",
+  ].map((dir): [string, string] => [
+    dir,
+    path.resolve(srcDir, `${dir}/index.ts`),
+  ]);
+  return Object.fromEntries(entries);
+};
 
 const rmmzModules = () => ({});
 
