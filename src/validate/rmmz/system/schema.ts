@@ -22,7 +22,7 @@ import { SCHEMA_SYSTEM_MEMBERS_ATTACK_MOTION } from "./members/attackMotion";
 import {
   SCHEMA_AUDIO_FILE_PARAMS_SYSTEM,
   SCHEMA_SYSTEM_SOUND_ARRAY,
-} from "./members/schema";
+} from "./members/audio";
 import { SCHEMA_SYSTEM_TERMS_CORE } from "./members/trems/terms";
 import { SCHEMA_SYSTEM_VEHICLE } from "./members/vehicle";
 

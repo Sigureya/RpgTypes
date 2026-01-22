@@ -1,6 +1,6 @@
 import type { AudioFileParams } from "@RpgTypes/libs";
 import type { JSONSchemaType } from "ajv";
-import { SCHEMA_AUDIO_FILE_PARAMS_SYSTEM } from "./schema";
+import { SCHEMA_AUDIO_FILE_PARAMS_SYSTEM } from "./audio";
 
 export const SCHEMA_SYSTEM_SOUND_ARRAY = {
   type: "array",
