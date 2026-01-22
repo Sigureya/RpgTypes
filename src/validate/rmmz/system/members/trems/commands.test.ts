@@ -1,12 +1,12 @@
 import { describe, test, expect } from "vitest";
-import Ajv from "ajv";
+import type { Terms_CommandArray, Terms_GameCommands } from "@RpgTypes/rmmz";
 import {
   makeTermsCommandArray,
-  makeTermsCommandFromArray,
   makeTermsCommandArrayWithNulls,
-} from "./commands";
-import SCHEMA_SYSTEM_MEMBERS_TERMS_COMMANDS_ARRAY from "./schema";
-import type { Terms_GameCommands, Terms_CommandArray } from "./types";
+  makeTermsCommandFromArray,
+} from "@RpgTypes/rmmz";
+import Ajv from "ajv";
+import { SCHEMA_SYSTEM_MEMBERS_TERMS_COMMANDS_ARRAY } from "./commands";
 
 const ajv = new Ajv();
 const validate = ajv.compile(SCHEMA_SYSTEM_MEMBERS_TERMS_COMMANDS_ARRAY);
@@ -17,7 +17,7 @@ describe("SCHEMA_SYSTEM_MEMBERS_TERMS_COMMANDS_ARRAY", () => {
   });
   test("makeTermsCommand returns valid Terms_CommandArray with default values", () => {
     const validTermsCommandArray: Terms_CommandArray = makeTermsCommandArray(
-      {}
+      {},
     );
     expect(validate(validTermsCommandArray)).toBe(true);
   });
@@ -41,7 +41,7 @@ describe("SCHEMA_SYSTEM_MEMBERS_TERMS_COMMANDS_ARRAY", () => {
 
 const testTermsCommandProperty = (
   key: keyof Terms_GameCommands,
-  text: string
+  text: string,
 ) => {
   const terms: Partial<Terms_GameCommands> = {
     [key]: text,
