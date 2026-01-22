@@ -55,7 +55,8 @@ export const SCHEMA_DATA_SYSTEM2 = {
     advanced: SCHEMA_SYSTEM_ADVANCED,
     attackMotion: SCHEMA_SYSTEM_MEMBERS_ATTACK_MOTION,
     itemCategories: SCHEMA_SYSTEM_ITEM_CATEGORIES,
-    testBattler: SCHEMA_SYSTEM_TEST_BATTLER,
+    TestBattler: SCHEMA_SYSTEM_TEST_BATTLER,
+    Editor: SCHEMA_SYSTEM_EDITOR_SETTINGS,
   },
   type: "object",
   required: [
@@ -174,10 +175,10 @@ export const SCHEMA_DATA_SYSTEM2 = {
     },
 
     // Editor
-    editor: SCHEMA_SYSTEM_EDITOR_SETTINGS,
+    editor: { $ref: "#/$defs/Editor" },
     testBattlers: {
       type: "array",
-      items: { $ref: "#/$defs/testBattler" },
+      items: { $ref: "#/$defs/TestBattler" },
     },
     editMapId: { type: "integer", minimum: 0 },
     battlerHue: { type: "integer" },

@@ -87,7 +87,7 @@
       "minItems": 4,
       "items": { "type": "boolean" }
     },
-    "testBattler": {
+    "TestBattler": {
       "additionalProperties": false,
       "properties": {
         "actorId": {
@@ -107,6 +107,16 @@
       },
       "required": ["actorId", "level", "equips"],
       "type": "object"
+    },
+    "Editor": {
+      "additionalProperties": false,
+      "type": "object",
+      "required": ["messageWidth1", "messageWidth2", "jsonFormatLevel"],
+      "properties": {
+        "messageWidth1": { "type": "integer", "minimum": 0, "maximum": 1000 },
+        "messageWidth2": { "type": "integer", "minimum": 0, "maximum": 1000 },
+        "jsonFormatLevel": { "type": "integer", "minimum": 0, "maximum": 4 }
+      }
     }
   },
 
@@ -171,16 +181,7 @@
   "properties": {
     "gameTitle": { "type": "string" },
     "currencyUnit": { "type": "string" },
-    "editor": {
-      "additionalProperties": false,
-      "type": "object",
-      "required": ["messageWidth1", "messageWidth2", "jsonFormatLevel"],
-      "properties": {
-        "messageWidth1": { "type": "integer", "minimum": 0, "maximum": 1000 },
-        "messageWidth2": { "type": "integer", "minimum": 0, "maximum": 1000 },
-        "jsonFormatLevel": { "type": "integer", "minimum": 0, "maximum": 4 }
-      }
-    },
+    "editor": { "$ref": "#/$defs/Editor" },
     "advanced": {
       "$ref": "#/$defs/advanced"
     },
@@ -229,7 +230,7 @@
     "testBattlers": {
       "type": "array",
       "items": {
-        "$ref": "#/$defs/testBattler"
+        "$ref": "#/$defs/TestBattler"
       }
     },
     "editMapId": { "type": "integer", "minimum": 0 },
