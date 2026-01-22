@@ -1,7 +1,7 @@
 import { describe, test, expect } from "vitest";
+import type { System_Advanced } from "@RpgTypes/rmmz/system";
 import Ajv from "ajv";
-import type { System_Advanced } from "./advanced";
-import SCHEMA_SYSTEM_ADVANCED from "./schema";
+import { SCHEMA_SYSTEM_ADVANCED } from "./advanced";
 const ajv = new Ajv();
 
 const isSystemAdvanced = ajv.compile(SCHEMA_SYSTEM_ADVANCED);
