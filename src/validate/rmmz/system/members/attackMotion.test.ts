@@ -1,7 +1,8 @@
 import { describe, test, expect } from "vitest";
+import type { AttackMotion } from "@RpgTypes/rmmz";
 import Ajv from "ajv";
-import SCHEMA_SYSTEM_MEMBERS_ATTACK_MOTION from "./schema";
-import type { AttackMotion } from "./types";
+import { SCHEMA_SYSTEM_MEMBERS_ATTACK_MOTION } from "./attackMotion";
+
 const ajv = new Ajv({ strict: true });
 const validate = ajv.compile(SCHEMA_SYSTEM_MEMBERS_ATTACK_MOTION);
 

@@ -1,7 +1,7 @@
 import { describe, test, expect } from "vitest";
+import type { Data_Vehicle } from "@RpgTypes/rmmz";
 import Ajv from "ajv";
-import SCHEMA_SYSTEM_VEHICLE from "./schema";
-import type { Data_Vehicle } from "./types";
+import { SCHEMA_SYSTEM_VEHICLE } from "./vehicle";
 
 const ajv = new Ajv();
 const validate = ajv.compile(SCHEMA_SYSTEM_VEHICLE);
