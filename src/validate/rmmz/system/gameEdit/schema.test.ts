@@ -16,14 +16,14 @@ describe("SCHEMA_SYSTEM_TEST_BATTLERS", () => {
       equips: [2, 3, 5, 6, 7, 8],
       level: 1,
     };
-    expect(validate(validTestBattler)).toBe(true);
+    expect(validTestBattler).toSatisfy(validate);
   });
   test("should invalidate a TestBattler object with missing properties", () => {
     const invalidTestBattler = {
       actorId: 1,
       equips: [2, 3, 5, 6, 7, 8],
     };
-    expect(validate(invalidTestBattler)).toBe(false);
+    expect(invalidTestBattler).not.toSatisfy(validate);
   });
 
   test("should invalidate a TestBattler object with additional properties", () => {
@@ -33,6 +33,6 @@ describe("SCHEMA_SYSTEM_TEST_BATTLERS", () => {
       level: 1,
       extraProperty: "invalid",
     };
-    expect(validate(invalidTestBattler)).toBe(false);
+    expect(invalidTestBattler).not.toSatisfy(validate);
   });
 });

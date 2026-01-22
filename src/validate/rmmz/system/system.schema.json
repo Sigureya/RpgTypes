@@ -341,6 +341,7 @@
     "testBattlers": {
       "type": "array",
       "items": {
+        "additionalProperties": false,
         "properties": {
           "actorId": {
             "minimum": 0,
