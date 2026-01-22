@@ -19,8 +19,12 @@ import { SCHEMA_SYSTEM_EDITOR_SETTINGS } from "./gameEdit/editorSetting";
 import { SCHEMA_SYSTEM_TEST_BATTLER } from "./gameEdit/testBattle";
 import { SCHEMA_SYSTEM_ADVANCED } from "./members/advanced";
 import { SCHEMA_SYSTEM_MEMBERS_ATTACK_MOTION } from "./members/attackMotion";
-import { SCHEMA_SYSTEM_SOUND_ARRAY } from "./members/audio";
-import { SCHEMA_SYSTEM_TERMS_CORE } from "./members/trems/terms";
+import { SCHEMA_SYSTEM_ITEM_CATEGORIES } from "./members/itemCategories";
+import { SCHEMA_SYSTEM_MENU_COMMANDS_ENABLED } from "./members/menuCommands";
+import { SCHEMA_SYSTEM_MEMBERS_TERMS_BASIC_ARRAY } from "./members/trems/basic";
+import { SCHEMA_SYSTEM_MEMBERS_TERMS_COMMANDS_ARRAY } from "./members/trems/commands";
+import { SCHEMA_SYSTEM_TERMS_MESSAGES } from "./members/trems/messages";
+import { SCHEMA_SYSTEM_PARAM_NAMS_ARRAY } from "./members/trems/paramArray";
 import { SCHEMA_SYSTEM_VEHICLE } from "./members/vehicle";
 
 interface System
@@ -40,7 +44,7 @@ interface System
 
 export const SCHEMA_DATA_SYSTEM2 = {
   $defs: {
-    audio: {
+    Audio: {
       type: "object",
       required: ["name", "volume", "pitch", "pan"],
       additionalProperties: false,
@@ -51,8 +55,17 @@ export const SCHEMA_DATA_SYSTEM2 = {
         pan: { type: "integer", minimum: -100, maximum: 100 },
       },
     } as const satisfies JSONSchemaType<AudioFileParams>,
-    vehicle: SCHEMA_SYSTEM_VEHICLE,
-    advanced: SCHEMA_SYSTEM_ADVANCED,
+    Vehicle: SCHEMA_SYSTEM_VEHICLE,
+    Advanced: SCHEMA_SYSTEM_ADVANCED,
+    AttackMotion: SCHEMA_SYSTEM_MEMBERS_ATTACK_MOTION,
+    ItemCategories: SCHEMA_SYSTEM_ITEM_CATEGORIES,
+    TestBattler: SCHEMA_SYSTEM_TEST_BATTLER,
+    Editor: SCHEMA_SYSTEM_EDITOR_SETTINGS,
+    MenuCommands: SCHEMA_SYSTEM_MENU_COMMANDS_ENABLED,
+    TermsCommands: SCHEMA_SYSTEM_MEMBERS_TERMS_COMMANDS_ARRAY,
+    TermsBasic: SCHEMA_SYSTEM_MEMBERS_TERMS_BASIC_ARRAY,
+    TermsParams: SCHEMA_SYSTEM_PARAM_NAMS_ARRAY,
+    TermsMessages: SCHEMA_SYSTEM_TERMS_MESSAGES,
   },
   type: "object",
   required: [
@@ -116,21 +129,31 @@ export const SCHEMA_DATA_SYSTEM2 = {
     // Texts
     gameTitle: { type: "string" },
     currencyUnit: { type: "string" },
-    terms: SCHEMA_SYSTEM_TERMS_CORE,
+    terms: {
+      type: "object",
+      additionalProperties: false,
+      required: ["messages", "commands", "basic", "params"],
+      properties: {
+        messages: { $ref: "#/$defs/TermsMessages" },
+        commands: { $ref: "#/$defs/TermsCommands" },
+        basic: { $ref: "#/$defs/TermsBasic" },
+        params: { $ref: "#/$defs/TermsParams" },
+      },
+    },
     // Vehicles
-    ship: { $ref: "#/$defs/vehicle" },
-    boat: { $ref: "#/$defs/vehicle" },
-    airship: { $ref: "#/$defs/vehicle" },
-    advanced: { $ref: "#/$defs/advanced" },
+    ship: { $ref: "#/$defs/Vehicle" },
+    boat: { $ref: "#/$defs/Vehicle" },
+    airship: { $ref: "#/$defs/Vehicle" },
+    advanced: { $ref: "#/$defs/Advanced" },
     // AudioFiles
-    titleBgm: { $ref: "#/$defs/audio" },
-    battleBgm: { $ref: "#/$defs/audio" },
-    gameoverMe: { $ref: "#/$defs/audio" },
-    victoryMe: { $ref: "#/$defs/audio" },
-    defeatMe: { $ref: "#/$defs/audio" },
+    titleBgm: { $ref: "#/$defs/Audio" },
+    battleBgm: { $ref: "#/$defs/Audio" },
+    gameoverMe: { $ref: "#/$defs/Audio" },
+    victoryMe: { $ref: "#/$defs/Audio" },
+    defeatMe: { $ref: "#/$defs/Audio" },
     attackMotions: {
       type: "array",
-      items: SCHEMA_SYSTEM_MEMBERS_ATTACK_MOTION,
+      items: { $ref: "#/$defs/AttackMotion" },
     },
     // Options
     optAutosave: { type: "boolean" },
@@ -171,15 +194,20 @@ export const SCHEMA_DATA_SYSTEM2 = {
     },
 
     // Editor
-    editor: SCHEMA_SYSTEM_EDITOR_SETTINGS,
+    editor: { $ref: "#/$defs/Editor" },
     testBattlers: {
       type: "array",
-      items: SCHEMA_SYSTEM_TEST_BATTLER,
+      items: { $ref: "#/$defs/TestBattler" },
     },
     editMapId: { type: "integer", minimum: 0 },
     battlerHue: { type: "integer" },
     battlerName: { type: "string" },
-    sounds: SCHEMA_SYSTEM_SOUND_ARRAY,
+    sounds: {
+      type: "array",
+      maxItems: 24,
+      minItems: 24,
+      items: { $ref: "#/$defs/Audio" },
+    },
     title1Name: { type: "string" },
     title2Name: { type: "string" },
     versionId: { type: "integer" },
@@ -188,7 +216,11 @@ export const SCHEMA_DATA_SYSTEM2 = {
       type: "array",
       items: { type: "integer", minimum: 0, maximum: 255 },
     },
-    itemCategories: {},
-    menuCommands: {},
+    itemCategories: {
+      $ref: "#/$defs/ItemCategories",
+    },
+    menuCommands: {
+      $ref: "#/$defs/MenuCommands",
+    },
   } satisfies Record<keyof (System | Data_System), Schema>,
 } as const satisfies Schema;

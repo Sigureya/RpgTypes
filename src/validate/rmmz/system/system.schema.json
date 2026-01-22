@@ -1,6 +1,6 @@
 {
   "$defs": {
-    "audio": {
+    "Audio": {
       "type": "object",
       "required": ["name", "volume", "pitch", "pan"],
       "additionalProperties": false,
@@ -11,7 +11,7 @@
         "pan": { "type": "integer", "minimum": -100, "maximum": 100 }
       }
     },
-    "vehicle": {
+    "Vehicle": {
       "additionalProperties": false,
       "type": "object",
       "required": [
@@ -41,7 +41,7 @@
         "startY": { "type": "integer", "minimum": 0, "maximum": 5000 }
       }
     },
-    "advanced": {
+    "Advanced": {
       "additionalProperties": false,
       "type": "object",
       "properties": {
@@ -71,6 +71,213 @@
         "fallbackFonts",
         "fontSize"
       ]
+    },
+    "AttackMotion": {
+      "additionalProperties": false,
+      "properties": {
+        "type": { "type": "number" },
+        "weaponImageId": { "type": "number" }
+      },
+      "required": ["type", "weaponImageId"],
+      "type": "object"
+    },
+    "ItemCategories": {
+      "type": "array",
+      "maxItems": 4,
+      "minItems": 4,
+      "items": { "type": "boolean" }
+    },
+    "TestBattler": {
+      "additionalProperties": false,
+      "properties": {
+        "actorId": {
+          "minimum": 0,
+          "type": "integer"
+        },
+        "equips": {
+          "items": {
+            "type": "integer"
+          },
+          "type": "array"
+        },
+        "level": {
+          "minimum": 0,
+          "type": "integer"
+        }
+      },
+      "required": ["actorId", "level", "equips"],
+      "type": "object"
+    },
+    "Editor": {
+      "additionalProperties": false,
+      "type": "object",
+      "required": ["messageWidth1", "messageWidth2", "jsonFormatLevel"],
+      "properties": {
+        "messageWidth1": { "type": "integer", "minimum": 0, "maximum": 1000 },
+        "messageWidth2": { "type": "integer", "minimum": 0, "maximum": 1000 },
+        "jsonFormatLevel": { "type": "integer", "minimum": 0, "maximum": 4 }
+      }
+    },
+    "MenuCommands": {
+      "type": "array",
+      "maxItems": 6,
+      "minItems": 6,
+      "items": {
+        "type": "boolean"
+      }
+    },
+    "TermsBasic": {
+      "items": { "type": "string" },
+      "maxItems": 10,
+      "minItems": 10,
+      "type": "array"
+    },
+    "TermsParams": {
+      "items": {
+        "minLength": 0,
+        "type": "string"
+      },
+      "maxItems": 10,
+      "minItems": 10,
+      "type": "array"
+    },
+    "TermsCommands": {
+      "maxItems": 26,
+      "minItems": 26,
+      "type": "array",
+      "items": [
+        { "type": "string" },
+        { "type": "string" },
+        { "type": "string" },
+        { "type": "string" },
+        { "type": "string" },
+        { "type": "string" },
+        { "type": "string" },
+        { "type": "string" },
+        { "type": "string" },
+        { "type": "string" },
+        { "type": "string" },
+        { "type": "string" },
+        { "type": "string" },
+        { "type": "string" },
+        { "type": "string" },
+        { "type": "string" },
+        { "type": "string" },
+        { "type": "string" },
+        { "type": "string" },
+        { "type": "string" },
+        { "type": "string", "nullable": true },
+        { "type": "string" },
+        { "type": "string" },
+        { "type": "string", "nullable": true },
+        { "type": "string" },
+        { "type": "string" }
+      ]
+    },
+    "TermsMessages": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "actionFailure",
+        "actorDamage",
+        "actorNoDamage",
+        "actorRecovery",
+        "actorGain",
+        "actorLoss",
+        "actorDrain",
+        "alwaysDash",
+        "bgmVolume",
+        "bgsVolume",
+        "commandRemember",
+        "criticalToActor",
+        "criticalToEnemy",
+        "counterAttack",
+        "debuffAdd",
+        "defeat",
+        "enemyDamage",
+        "enemyNoDamage",
+        "enemyRecovery",
+        "enemyGain",
+        "enemyLoss",
+        "enemyDrain",
+        "evasion",
+        "expNext",
+        "expTotal",
+        "escapeFailure",
+        "escapeStart",
+        "file",
+        "loadMessage",
+        "meVolume",
+        "magicEvasion",
+        "magicReflection",
+        "obtainExp",
+        "obtainGold",
+        "obtainItem",
+        "obtainSkill",
+        "partyName",
+        "preemptive",
+        "saveMessage",
+        "seVolume",
+        "substitute",
+        "touchUI",
+        "victory",
+        "useItem"
+      ],
+      "properties": {
+        "actionFailure": { "type": "string" },
+        "actorDamage": { "type": "string" },
+        "actorDrain": { "type": "string" },
+        "actorGain": { "type": "string" },
+        "actorLoss": { "type": "string" },
+        "actorNoDamage": { "type": "string" },
+        "actorNoHit": { "type": "string" },
+        "actorRecovery": { "type": "string" },
+        "alwaysDash": { "type": "string" },
+        "autosave": { "type": "string" },
+        "bgmVolume": { "type": "string" },
+        "bgsVolume": { "type": "string" },
+        "buffAdd": { "type": "string" },
+        "buffRemove": { "type": "string" },
+        "commandRemember": { "type": "string" },
+        "counterAttack": { "type": "string" },
+        "criticalToActor": { "type": "string" },
+        "criticalToEnemy": { "type": "string" },
+        "debuffAdd": { "type": "string" },
+        "defeat": { "type": "string" },
+        "emerge": { "type": "string" },
+        "enemyDamage": { "type": "string" },
+        "enemyDrain": { "type": "string" },
+        "enemyGain": { "type": "string" },
+        "enemyLoss": { "type": "string" },
+        "enemyNoDamage": { "type": "string" },
+        "enemyNoHit": { "type": "string" },
+        "enemyRecovery": { "type": "string" },
+        "escapeFailure": { "type": "string" },
+        "escapeStart": { "type": "string" },
+        "evasion": { "type": "string" },
+        "expNext": { "type": "string" },
+        "expTotal": { "type": "string" },
+        "file": { "type": "string" },
+        "levelUp": { "type": "string" },
+        "loadMessage": { "type": "string" },
+        "magicEvasion": { "type": "string" },
+        "magicReflection": { "type": "string" },
+        "meVolume": { "type": "string" },
+        "obtainExp": { "type": "string" },
+        "obtainGold": { "type": "string" },
+        "obtainItem": { "type": "string" },
+        "obtainSkill": { "type": "string" },
+        "partyName": { "type": "string" },
+        "possession": { "type": "string" },
+        "preemptive": { "type": "string" },
+        "saveMessage": { "type": "string" },
+        "seVolume": { "type": "string" },
+        "substitute": { "type": "string" },
+        "surprise": { "type": "string" },
+        "touchUI": { "type": "string" },
+        "useItem": { "type": "string" },
+        "victory": { "type": "string" }
+      }
     }
   },
 
@@ -135,38 +342,47 @@
   "properties": {
     "gameTitle": { "type": "string" },
     "currencyUnit": { "type": "string" },
-    "editor": {
-      "additionalProperties": false,
-      "type": "object",
-      "required": ["messageWidth1", "messageWidth2", "jsonFormatLevel"],
-      "properties": {
-        "messageWidth1": { "type": "integer", "minimum": 0, "maximum": 1000 },
-        "messageWidth2": { "type": "integer", "minimum": 0, "maximum": 1000 },
-        "jsonFormatLevel": { "type": "integer", "minimum": 0, "maximum": 4 }
-      }
-    },
+    "editor": { "$ref": "#/$defs/Editor" },
     "advanced": {
-      "$ref": "#/$defs/advanced"
+      "$ref": "#/$defs/Advanced"
     },
     "attackMotions": {
-      "items": {
-        "additionalProperties": false,
-        "properties": {
-          "type": {
-            "type": "number"
-          },
-          "weaponImageId": {
-            "type": "number"
-          }
-        },
-        "required": ["type", "weaponImageId"],
-        "type": "object"
-      },
+      "items": { "$ref": "#/$defs/AttackMotion" },
       "type": "array"
     },
-    "ship": { "$ref": "#/$defs/vehicle" },
-    "boat": { "$ref": "#/$defs/vehicle" },
-    "airship": { "$ref": "#/$defs/vehicle" },
+    "titleBgm": { "$ref": "#/$defs/Audio" },
+    "battleBgm": { "$ref": "#/$defs/Audio" },
+    "gameoverMe": { "$ref": "#/$defs/Audio" },
+    "victoryMe": { "$ref": "#/$defs/Audio" },
+    "defeatMe": { "$ref": "#/$defs/Audio" },
+    "sounds": {
+      "type": "array",
+      "maxItems": 24,
+      "minItems": 24,
+      "items": { "$ref": "#/$defs/Audio" }
+    },
+    "itemCategories": { "$ref": "#/$defs/ItemCategories" },
+    "menuCommands": { "$ref": "#/$defs/MenuCommands" },
+    "ship": { "$ref": "#/$defs/Vehicle" },
+    "boat": { "$ref": "#/$defs/Vehicle" },
+    "airship": { "$ref": "#/$defs/Vehicle" },
+    "testBattlers": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/TestBattler"
+      }
+    },
+    "terms": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["messages", "commands", "basic", "params"],
+      "properties": {
+        "messages": { "$ref": "#/$defs/TermsMessages" },
+        "commands": { "$ref": "#/$defs/TermsCommands" },
+        "basic": { "$ref": "#/$defs/TermsBasic" },
+        "params": { "$ref": "#/$defs/TermsParams" }
+      }
+    },
     "optAutosave": { "type": "boolean" },
     "optDisplayTp": { "type": "boolean" },
     "optFloorDeath": { "type": "boolean" },
@@ -202,30 +418,6 @@
       "items": { "type": "integer" }
     },
 
-    "testBattlers": {
-      "type": "array",
-      "items": {
-        "additionalProperties": false,
-        "properties": {
-          "actorId": {
-            "minimum": 0,
-            "type": "integer"
-          },
-          "equips": {
-            "items": {
-              "type": "integer"
-            },
-            "type": "array"
-          },
-          "level": {
-            "minimum": 0,
-            "type": "integer"
-          }
-        },
-        "required": ["actorId", "level", "equips"],
-        "type": "object"
-      }
-    },
     "editMapId": { "type": "integer", "minimum": 0 },
     "battlerHue": { "type": "integer" },
     "battlerName": { "type": "string" },
@@ -236,191 +428,6 @@
     "windowTone": {
       "type": "array",
       "items": { "type": "integer", "minimum": 0, "maximum": 255 }
-    },
-    "itemCategories": {},
-    "menuCommands": {},
-    "terms": {
-      "additionalProperties": false,
-      "type": "object",
-      "required": ["messages", "commands", "basic", "params"],
-      "properties": {
-        "basic": {
-          "items": {
-            "type": "string"
-          },
-          "maxItems": 10,
-          "minItems": 10,
-          "type": "array"
-        },
-        "commands": {
-          "maxItems": 26,
-          "minItems": 26,
-          "type": "array",
-          "items": [
-            { "type": "string" },
-            { "type": "string" },
-            { "type": "string" },
-            { "type": "string" },
-            { "type": "string" },
-            { "type": "string" },
-            { "type": "string" },
-            { "type": "string" },
-            { "type": "string" },
-            { "type": "string" },
-            { "type": "string" },
-            { "type": "string" },
-            { "type": "string" },
-            { "type": "string" },
-            { "type": "string" },
-            { "type": "string" },
-            { "type": "string" },
-            { "type": "string" },
-            { "type": "string" },
-            { "type": "string" },
-            { "type": "string", "nullable": true },
-            { "type": "string" },
-            { "type": "string" },
-            { "type": "string", "nullable": true },
-            { "type": "string" },
-            { "type": "string" }
-          ]
-        },
-        "messages": {
-          "type": "object",
-          "additionalProperties": false,
-          "required": [
-            "actionFailure",
-            "actorDamage",
-            "actorNoDamage",
-            "actorRecovery",
-            "actorGain",
-            "actorLoss",
-            "actorDrain",
-            "alwaysDash",
-            "bgmVolume",
-            "bgsVolume",
-            "commandRemember",
-            "criticalToActor",
-            "criticalToEnemy",
-            "counterAttack",
-            "debuffAdd",
-            "defeat",
-            "enemyDamage",
-            "enemyNoDamage",
-            "enemyRecovery",
-            "enemyGain",
-            "enemyLoss",
-            "enemyDrain",
-            "evasion",
-            "expNext",
-            "expTotal",
-            "escapeFailure",
-            "escapeStart",
-            "file",
-            "loadMessage",
-            "meVolume",
-            "magicEvasion",
-            "magicReflection",
-            "obtainExp",
-            "obtainGold",
-            "obtainItem",
-            "obtainSkill",
-            "partyName",
-            "preemptive",
-            "saveMessage",
-            "seVolume",
-            "substitute",
-            "touchUI",
-            "victory",
-            "useItem"
-          ],
-          "properties": {
-            "actionFailure": { "type": "string" },
-            "actorDamage": { "type": "string" },
-            "actorDrain": { "type": "string" },
-            "actorGain": { "type": "string" },
-            "actorLoss": { "type": "string" },
-            "actorNoDamage": { "type": "string" },
-            "actorNoHit": { "type": "string" },
-            "actorRecovery": { "type": "string" },
-            "alwaysDash": { "type": "string" },
-            "autosave": { "type": "string" },
-            "bgmVolume": { "type": "string" },
-            "bgsVolume": { "type": "string" },
-            "buffAdd": { "type": "string" },
-            "buffRemove": { "type": "string" },
-            "commandRemember": { "type": "string" },
-            "counterAttack": { "type": "string" },
-            "criticalToActor": { "type": "string" },
-            "criticalToEnemy": { "type": "string" },
-            "debuffAdd": { "type": "string" },
-            "defeat": { "type": "string" },
-            "emerge": { "type": "string" },
-            "enemyDamage": { "type": "string" },
-            "enemyDrain": { "type": "string" },
-            "enemyGain": { "type": "string" },
-            "enemyLoss": { "type": "string" },
-            "enemyNoDamage": { "type": "string" },
-            "enemyNoHit": { "type": "string" },
-            "enemyRecovery": { "type": "string" },
-            "escapeFailure": { "type": "string" },
-            "escapeStart": { "type": "string" },
-            "evasion": { "type": "string" },
-            "expNext": { "type": "string" },
-            "expTotal": { "type": "string" },
-            "file": { "type": "string" },
-            "levelUp": { "type": "string" },
-            "loadMessage": { "type": "string" },
-            "magicEvasion": { "type": "string" },
-            "magicReflection": { "type": "string" },
-            "meVolume": { "type": "string" },
-            "obtainExp": { "type": "string" },
-            "obtainGold": { "type": "string" },
-            "obtainItem": { "type": "string" },
-            "obtainSkill": { "type": "string" },
-            "partyName": { "type": "string" },
-            "possession": { "type": "string" },
-            "preemptive": { "type": "string" },
-            "saveMessage": { "type": "string" },
-            "seVolume": { "type": "string" },
-            "substitute": { "type": "string" },
-            "surprise": { "type": "string" },
-            "touchUI": { "type": "string" },
-            "useItem": { "type": "string" },
-            "victory": { "type": "string" }
-          }
-        },
-        "params": {
-          "items": {
-            "minLength": 0,
-            "type": "string"
-          },
-          "maxItems": 10,
-          "minItems": 10,
-          "type": "array"
-        }
-      }
-    },
-    "titleBgm": { "$ref": "#/$defs/audio" },
-    "battleBgm": { "$ref": "#/$defs/audio" },
-    "gameoverMe": { "$ref": "#/$defs/audio" },
-    "victoryMe": { "$ref": "#/$defs/audio" },
-    "defeatMe": { "$ref": "#/$defs/audio" },
-    "sounds": {
-      "type": "array",
-      "maxItems": 24,
-      "minItems": 24,
-      "items": {
-        "type": "object",
-        "properties": {
-          "name": { "type": "string" },
-          "volume": { "type": "integer" },
-          "pitch": { "type": "integer" },
-          "pan": { "type": "integer" }
-        },
-        "required": ["name", "volume", "pitch", "pan"],
-        "additionalProperties": false
-      }
     }
   }
 }

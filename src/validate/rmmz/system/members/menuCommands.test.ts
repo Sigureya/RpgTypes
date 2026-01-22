@@ -1,11 +1,14 @@
 import { describe, test, expect } from "vitest";
-import Ajv from "ajv";
+import type {
+  MenuCommandsEnabled,
+  MenuCommandsEnabledArray,
+} from "@RpgTypes/rmmz";
 import {
   makeMenuCommandsEnabled,
   makeMenuCommandsEnabledFromArray,
-} from "./make";
-import SCHEMA_SYSTEM_MENU_COMMANDS_ENABLED from "./schema";
-import type { MenuCommandsEnabled, MenuCommandsEnabledArray } from "./types";
+} from "@RpgTypes/rmmz";
+import Ajv from "ajv";
+import { SCHEMA_SYSTEM_MENU_COMMANDS_ENABLED } from "./menuCommands";
 
 const ajv = new Ajv({ strict: false });
 const validate = ajv.compile(SCHEMA_SYSTEM_MENU_COMMANDS_ENABLED);
@@ -28,7 +31,7 @@ describe("MenuCommandsEnabledArray length validation", () => {
   });
   test("invalid: array length is 7 (too long)", () => {
     expect([false, false, false, false, false, false, false]).not.toSatisfy(
-      validate
+      validate,
     );
   });
   test("invalid: array length is 5 with all true", () => {
