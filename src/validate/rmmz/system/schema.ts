@@ -17,7 +17,7 @@ import type { System_Bundle } from "@RpgTypes/rmmz/system/core/bundle";
 import type { JSONSchemaType, Schema } from "ajv";
 import { SCHEMA_SYSTEM_EDITOR_SETTINGS } from "./gameEdit/editorSetting";
 import { SCHEMA_SYSTEM_TEST_BATTLE } from "./gameEdit/testBattle";
-import { SCHEMA_SYSTEM_ADVANCED } from "./members/adovanced";
+import { SCHEMA_SYSTEM_ADVANCED } from "./members/advanced";
 import { SCHEMA_SYSTEM_MEMBERS_ATTACK_MOTION } from "./members/attackMotion";
 import {
   SCHEMA_AUDIO_FILE_PARAMS_SYSTEM,
@@ -43,7 +43,63 @@ interface System
 
 export const SCHEMA_DATA_SYSTEM2 = {
   type: "object",
-  required: [],
+  required: [
+    "gameTitle",
+    "currencyUnit",
+    "terms",
+    "ship",
+    "boat",
+    "airship",
+    "advanced",
+    "titleBgm",
+    "battleBgm",
+    "gameoverMe",
+    "victoryMe",
+    "defeatMe",
+    "attackMotions",
+    "optAutosave",
+    "optDisplayTp",
+    "optFloorDeath",
+    "optFollowers",
+    "optKeyItemsNumber",
+    "optSideView",
+    "optSlipDeath",
+    "optTransparent",
+    "optSplashScreen",
+    "optDrawTitle",
+    "optExtraExp",
+    "optMessageSkip",
+    "startMapId",
+    "startX",
+    "startY",
+    "faceSize",
+    "tileSize",
+    "iconSize",
+    "battleSystem",
+    "elements",
+    "weaponTypes",
+    "armorTypes",
+    "equipTypes",
+    "skillTypes",
+    "switches",
+    "variables",
+    "magicSkills",
+    "battleback1Name",
+    "battleback2Name",
+    "testTroopId",
+    "partyMembersArray",
+    "editor",
+    "testBattlers",
+    "editMapId",
+    "battlerHue",
+    "battlerName",
+    "sounds",
+    "title1Name",
+    "title2Name",
+    "versionId",
+    "locale",
+    "windowTone",
+  ],
   properties: {
     // Texts
     gameTitle: { type: "string" },
@@ -122,5 +178,5 @@ export const SCHEMA_DATA_SYSTEM2 = {
     },
     itemCategories: {},
     menuCommands: {},
-  } satisfies Record<keyof (System & Data_System), Schema>,
+  } satisfies Record<keyof (System | Data_System), Schema>,
 };
