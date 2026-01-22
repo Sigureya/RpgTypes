@@ -1,6 +1,6 @@
 export declare const SCHEMA_DATA_SYSTEM2: {
     readonly $defs: {
-        readonly audio: {
+        readonly Audio: {
             readonly type: "object";
             readonly required: readonly ["name", "volume", "pitch", "pan"];
             readonly additionalProperties: false;
@@ -25,267 +25,7 @@ export declare const SCHEMA_DATA_SYSTEM2: {
                 };
             };
         };
-    };
-    readonly type: "object";
-    readonly required: readonly ["gameTitle", "currencyUnit", "terms", "ship", "boat", "airship", "advanced", "titleBgm", "battleBgm", "gameoverMe", "victoryMe", "defeatMe", "attackMotions", "optAutosave", "optDisplayTp", "optFloorDeath", "optFollowers", "optKeyItemsNumber", "optSideView", "optSlipDeath", "optTransparent", "optSplashScreen", "optDrawTitle", "optExtraExp", "optMessageSkip", "startMapId", "startX", "startY", "faceSize", "tileSize", "iconSize", "battleSystem", "elements", "weaponTypes", "armorTypes", "equipTypes", "skillTypes", "switches", "variables", "magicSkills", "battleback1Name", "battleback2Name", "testTroopId", "partyMembersArray", "editor", "testBattlers", "editMapId", "battlerHue", "battlerName", "sounds", "title1Name", "title2Name", "versionId", "locale", "windowTone"];
-    readonly properties: {
-        gameTitle: {
-            type: string;
-        };
-        currencyUnit: {
-            type: string;
-        };
-        terms: {
-            readonly additionalProperties: false;
-            readonly type: "object";
-            readonly required: ("params" | "messages" | "commands" | "basic")[];
-            readonly properties: {
-                messages: {
-                    readonly type: "object";
-                    readonly additionalProperties: false;
-                    readonly required: readonly ["actionFailure", "actorDamage", "actorNoDamage", "actorRecovery", "actorGain", "actorLoss", "actorDrain", "alwaysDash", "bgmVolume", "bgsVolume", "commandRemember", "criticalToActor", "criticalToEnemy", "counterAttack", "debuffAdd", "defeat", "enemyDamage", "enemyNoDamage", "enemyRecovery", "enemyGain", "enemyLoss", "enemyDrain", "evasion", "expNext", "expTotal", "escapeFailure", "escapeStart", "file", "loadMessage", "meVolume", "magicEvasion", "magicReflection", "obtainExp", "obtainGold", "obtainItem", "obtainSkill", "partyName", "preemptive", "saveMessage", "seVolume", "substitute", "touchUI", "victory", "useItem"];
-                    readonly properties: {
-                        readonly actionFailure: {
-                            readonly type: "string";
-                        };
-                        readonly actorDamage: {
-                            readonly type: "string";
-                        };
-                        readonly actorNoDamage: {
-                            readonly type: "string";
-                        };
-                        readonly actorRecovery: {
-                            readonly type: "string";
-                        };
-                        readonly actorGain: {
-                            readonly type: "string";
-                        };
-                        readonly actorLoss: {
-                            readonly type: "string";
-                        };
-                        readonly actorDrain: {
-                            readonly type: "string";
-                        };
-                        readonly alwaysDash: {
-                            readonly type: "string";
-                        };
-                        readonly bgmVolume: {
-                            readonly type: "string";
-                        };
-                        readonly bgsVolume: {
-                            readonly type: "string";
-                        };
-                        readonly commandRemember: {
-                            readonly type: "string";
-                        };
-                        readonly criticalToActor: {
-                            readonly type: "string";
-                        };
-                        readonly criticalToEnemy: {
-                            readonly type: "string";
-                        };
-                        readonly counterAttack: {
-                            readonly type: "string";
-                        };
-                        readonly debuffAdd: {
-                            readonly type: "string";
-                        };
-                        readonly defeat: {
-                            readonly type: "string";
-                        };
-                        readonly enemyDamage: {
-                            readonly type: "string";
-                        };
-                        readonly enemyNoDamage: {
-                            readonly type: "string";
-                        };
-                        readonly enemyRecovery: {
-                            readonly type: "string";
-                        };
-                        readonly enemyGain: {
-                            readonly type: "string";
-                        };
-                        readonly enemyLoss: {
-                            readonly type: "string";
-                        };
-                        readonly enemyDrain: {
-                            readonly type: "string";
-                        };
-                        readonly evasion: {
-                            readonly type: "string";
-                        };
-                        readonly expNext: {
-                            readonly type: "string";
-                        };
-                        readonly expTotal: {
-                            readonly type: "string";
-                        };
-                        readonly escapeFailure: {
-                            readonly type: "string";
-                        };
-                        readonly escapeStart: {
-                            readonly type: "string";
-                        };
-                        readonly file: {
-                            readonly type: "string";
-                        };
-                        readonly loadMessage: {
-                            readonly type: "string";
-                        };
-                        readonly meVolume: {
-                            readonly type: "string";
-                        };
-                        readonly magicEvasion: {
-                            readonly type: "string";
-                        };
-                        readonly magicReflection: {
-                            readonly type: "string";
-                        };
-                        readonly obtainExp: {
-                            readonly type: "string";
-                        };
-                        readonly obtainGold: {
-                            readonly type: "string";
-                        };
-                        readonly obtainItem: {
-                            readonly type: "string";
-                        };
-                        readonly obtainSkill: {
-                            readonly type: "string";
-                        };
-                        readonly partyName: {
-                            readonly type: "string";
-                        };
-                        readonly preemptive: {
-                            readonly type: "string";
-                        };
-                        readonly saveMessage: {
-                            readonly type: "string";
-                        };
-                        readonly seVolume: {
-                            readonly type: "string";
-                        };
-                        readonly substitute: {
-                            readonly type: "string";
-                        };
-                        readonly touchUI: {
-                            readonly type: "string";
-                        };
-                        readonly victory: {
-                            readonly type: "string";
-                        };
-                        readonly useItem: {
-                            readonly type: "string";
-                        };
-                        readonly buffAdd: {
-                            readonly type: "string";
-                        };
-                        readonly buffRemove: {
-                            readonly type: "string";
-                        };
-                        readonly actorNoHit: {
-                            readonly type: "string";
-                        };
-                        readonly enemyNoHit: {
-                            readonly type: "string";
-                        };
-                        readonly autosave: {
-                            readonly type: "string";
-                        };
-                        readonly emerge: {
-                            readonly type: "string";
-                        };
-                        readonly levelUp: {
-                            readonly type: "string";
-                        };
-                        readonly possession: {
-                            readonly type: "string";
-                        };
-                        readonly surprise: {
-                            readonly type: "string";
-                        };
-                    };
-                };
-                commands: {
-                    readonly type: "array";
-                    readonly items: readonly [{
-                        readonly type: "string";
-                    }, {
-                        readonly type: "string";
-                    }, {
-                        readonly type: "string";
-                    }, {
-                        readonly type: "string";
-                    }, {
-                        readonly type: "string";
-                    }, {
-                        readonly type: "string";
-                    }, {
-                        readonly type: "string";
-                    }, {
-                        readonly type: "string";
-                    }, {
-                        readonly type: "string";
-                    }, {
-                        readonly type: "string";
-                    }, {
-                        readonly type: "string";
-                    }, {
-                        readonly type: "string";
-                    }, {
-                        readonly type: "string";
-                    }, {
-                        readonly type: "string";
-                    }, {
-                        readonly type: "string";
-                    }, {
-                        readonly type: "string";
-                    }, {
-                        readonly type: "string";
-                    }, {
-                        readonly type: "string";
-                    }, {
-                        readonly type: "string";
-                    }, {
-                        readonly type: "string";
-                    }, {
-                        readonly type: "string";
-                        readonly nullable: true;
-                    }, {
-                        readonly type: "string";
-                    }, {
-                        readonly type: "string";
-                    }, {
-                        readonly type: "string";
-                        readonly nullable: true;
-                    }, {
-                        readonly type: "string";
-                    }, {
-                        readonly type: "string";
-                    }];
-                    readonly minItems: 26;
-                    readonly maxItems: 26;
-                };
-                basic: {
-                    readonly type: "array";
-                    readonly items: {
-                        readonly type: "string";
-                    };
-                    readonly minItems: 10;
-                    readonly maxItems: 10;
-                };
-                params: {
-                    readonly type: "array";
-                    readonly items: {
-                        readonly type: "string";
-                        readonly minLength: 0;
-                    };
-                    readonly minItems: 10;
-                    readonly maxItems: 10;
-                };
-            };
-        };
-        ship: {
+        readonly Vehicle: {
             readonly additionalProperties: false;
             readonly type: "object";
             readonly required: readonly ["characterIndex", "characterName", "bgm", "startMapId", "startX", "startY"];
@@ -340,117 +80,7 @@ export declare const SCHEMA_DATA_SYSTEM2: {
                 };
             };
         };
-        boat: {
-            readonly additionalProperties: false;
-            readonly type: "object";
-            readonly required: readonly ["characterIndex", "characterName", "bgm", "startMapId", "startX", "startY"];
-            readonly properties: {
-                readonly characterIndex: {
-                    readonly type: "integer";
-                    readonly minimum: 0;
-                    readonly maximum: 7;
-                };
-                readonly characterName: {
-                    readonly type: "string";
-                    readonly minLength: 1;
-                };
-                readonly bgm: {
-                    readonly type: "object";
-                    readonly additionalProperties: false;
-                    readonly required: readonly ["name", "volume", "pitch", "pan"];
-                    readonly properties: {
-                        readonly name: {
-                            readonly type: "string";
-                        };
-                        readonly volume: {
-                            readonly type: "integer";
-                            readonly minimum: 0;
-                            readonly maximum: 100;
-                        };
-                        readonly pitch: {
-                            readonly type: "integer";
-                            readonly minimum: 50;
-                            readonly maximum: 150;
-                        };
-                        readonly pan: {
-                            readonly type: "integer";
-                            readonly minimum: -100;
-                            readonly maximum: 100;
-                        };
-                    };
-                };
-                readonly startMapId: {
-                    readonly type: "integer";
-                    readonly minimum: 0;
-                };
-                readonly startX: {
-                    readonly type: "integer";
-                    readonly minimum: 0;
-                    readonly maximum: 5000;
-                };
-                readonly startY: {
-                    readonly type: "integer";
-                    readonly minimum: 0;
-                    readonly maximum: 5000;
-                };
-            };
-        };
-        airship: {
-            readonly additionalProperties: false;
-            readonly type: "object";
-            readonly required: readonly ["characterIndex", "characterName", "bgm", "startMapId", "startX", "startY"];
-            readonly properties: {
-                readonly characterIndex: {
-                    readonly type: "integer";
-                    readonly minimum: 0;
-                    readonly maximum: 7;
-                };
-                readonly characterName: {
-                    readonly type: "string";
-                    readonly minLength: 1;
-                };
-                readonly bgm: {
-                    readonly type: "object";
-                    readonly additionalProperties: false;
-                    readonly required: readonly ["name", "volume", "pitch", "pan"];
-                    readonly properties: {
-                        readonly name: {
-                            readonly type: "string";
-                        };
-                        readonly volume: {
-                            readonly type: "integer";
-                            readonly minimum: 0;
-                            readonly maximum: 100;
-                        };
-                        readonly pitch: {
-                            readonly type: "integer";
-                            readonly minimum: 50;
-                            readonly maximum: 150;
-                        };
-                        readonly pan: {
-                            readonly type: "integer";
-                            readonly minimum: -100;
-                            readonly maximum: 100;
-                        };
-                    };
-                };
-                readonly startMapId: {
-                    readonly type: "integer";
-                    readonly minimum: 0;
-                };
-                readonly startX: {
-                    readonly type: "integer";
-                    readonly minimum: 0;
-                    readonly maximum: 5000;
-                };
-                readonly startY: {
-                    readonly type: "integer";
-                    readonly minimum: 0;
-                    readonly maximum: 5000;
-                };
-            };
-        };
-        advanced: {
+        readonly Advanced: {
             readonly type: "object";
             readonly properties: {
                 readonly gameId: {
@@ -490,6 +120,362 @@ export declare const SCHEMA_DATA_SYSTEM2: {
             readonly required: readonly ["gameId", "screenWidth", "screenHeight", "uiAreaWidth", "uiAreaHeight", "windowOpacity", "screenScale", "numberFontFilename", "mainFontFilename", "fallbackFonts", "fontSize"];
             readonly additionalProperties: false;
         };
+        readonly AttackMotion: {
+            readonly type: "object";
+            readonly additionalProperties: false;
+            readonly required: readonly ["type", "weaponImageId"];
+            readonly properties: {
+                readonly type: {
+                    readonly type: "number";
+                };
+                readonly weaponImageId: {
+                    readonly type: "number";
+                };
+            };
+        };
+        readonly ItemCategories: {
+            readonly type: "array";
+            readonly maxItems: 4;
+            readonly minItems: 4;
+            readonly items: {
+                readonly type: "boolean";
+            };
+        };
+        readonly TestBattler: {
+            readonly type: "object";
+            readonly required: readonly ["actorId", "level", "equips"];
+            readonly additionalProperties: false;
+            readonly properties: {
+                readonly level: {
+                    readonly type: "integer";
+                    readonly minimum: 0;
+                };
+                readonly actorId: {
+                    readonly type: "integer";
+                    readonly minimum: 0;
+                };
+                readonly equips: {
+                    readonly type: "array";
+                    readonly items: {
+                        readonly type: "integer";
+                    };
+                };
+            };
+        };
+        readonly Editor: {
+            readonly additionalProperties: false;
+            readonly type: "object";
+            readonly required: readonly ["messageWidth1", "messageWidth2", "jsonFormatLevel"];
+            readonly properties: {
+                readonly messageWidth1: {
+                    readonly type: "integer";
+                    readonly minimum: 0;
+                    readonly maximum: 1000;
+                };
+                readonly messageWidth2: {
+                    readonly type: "integer";
+                    readonly minimum: 0;
+                    readonly maximum: 1000;
+                };
+                readonly jsonFormatLevel: {
+                    readonly type: "integer";
+                    readonly minimum: 0;
+                    readonly maximum: 4;
+                };
+            };
+        };
+        readonly MenuCommands: {
+            readonly type: "array";
+            readonly maxItems: 6;
+            readonly minItems: 6;
+            readonly items: {
+                readonly type: "boolean";
+            };
+        };
+        readonly TermsCommands: {
+            readonly type: "array";
+            readonly items: readonly [{
+                readonly type: "string";
+            }, {
+                readonly type: "string";
+            }, {
+                readonly type: "string";
+            }, {
+                readonly type: "string";
+            }, {
+                readonly type: "string";
+            }, {
+                readonly type: "string";
+            }, {
+                readonly type: "string";
+            }, {
+                readonly type: "string";
+            }, {
+                readonly type: "string";
+            }, {
+                readonly type: "string";
+            }, {
+                readonly type: "string";
+            }, {
+                readonly type: "string";
+            }, {
+                readonly type: "string";
+            }, {
+                readonly type: "string";
+            }, {
+                readonly type: "string";
+            }, {
+                readonly type: "string";
+            }, {
+                readonly type: "string";
+            }, {
+                readonly type: "string";
+            }, {
+                readonly type: "string";
+            }, {
+                readonly type: "string";
+            }, {
+                readonly type: "string";
+                readonly nullable: true;
+            }, {
+                readonly type: "string";
+            }, {
+                readonly type: "string";
+            }, {
+                readonly type: "string";
+                readonly nullable: true;
+            }, {
+                readonly type: "string";
+            }, {
+                readonly type: "string";
+            }];
+            readonly minItems: 26;
+            readonly maxItems: 26;
+        };
+        readonly TermsBasic: {
+            readonly type: "array";
+            readonly items: {
+                readonly type: "string";
+            };
+            readonly minItems: 10;
+            readonly maxItems: 10;
+        };
+        readonly TermsParams: {
+            readonly type: "array";
+            readonly items: {
+                readonly type: "string";
+                readonly minLength: 0;
+            };
+            readonly minItems: 10;
+            readonly maxItems: 10;
+        };
+        readonly TermsMessages: {
+            readonly type: "object";
+            readonly additionalProperties: false;
+            readonly required: readonly ["actionFailure", "actorDamage", "actorNoDamage", "actorRecovery", "actorGain", "actorLoss", "actorDrain", "alwaysDash", "bgmVolume", "bgsVolume", "commandRemember", "criticalToActor", "criticalToEnemy", "counterAttack", "debuffAdd", "defeat", "enemyDamage", "enemyNoDamage", "enemyRecovery", "enemyGain", "enemyLoss", "enemyDrain", "evasion", "expNext", "expTotal", "escapeFailure", "escapeStart", "file", "loadMessage", "meVolume", "magicEvasion", "magicReflection", "obtainExp", "obtainGold", "obtainItem", "obtainSkill", "partyName", "preemptive", "saveMessage", "seVolume", "substitute", "touchUI", "victory", "useItem"];
+            readonly properties: {
+                readonly actionFailure: {
+                    readonly type: "string";
+                };
+                readonly actorDamage: {
+                    readonly type: "string";
+                };
+                readonly actorNoDamage: {
+                    readonly type: "string";
+                };
+                readonly actorRecovery: {
+                    readonly type: "string";
+                };
+                readonly actorGain: {
+                    readonly type: "string";
+                };
+                readonly actorLoss: {
+                    readonly type: "string";
+                };
+                readonly actorDrain: {
+                    readonly type: "string";
+                };
+                readonly alwaysDash: {
+                    readonly type: "string";
+                };
+                readonly bgmVolume: {
+                    readonly type: "string";
+                };
+                readonly bgsVolume: {
+                    readonly type: "string";
+                };
+                readonly commandRemember: {
+                    readonly type: "string";
+                };
+                readonly criticalToActor: {
+                    readonly type: "string";
+                };
+                readonly criticalToEnemy: {
+                    readonly type: "string";
+                };
+                readonly counterAttack: {
+                    readonly type: "string";
+                };
+                readonly debuffAdd: {
+                    readonly type: "string";
+                };
+                readonly defeat: {
+                    readonly type: "string";
+                };
+                readonly enemyDamage: {
+                    readonly type: "string";
+                };
+                readonly enemyNoDamage: {
+                    readonly type: "string";
+                };
+                readonly enemyRecovery: {
+                    readonly type: "string";
+                };
+                readonly enemyGain: {
+                    readonly type: "string";
+                };
+                readonly enemyLoss: {
+                    readonly type: "string";
+                };
+                readonly enemyDrain: {
+                    readonly type: "string";
+                };
+                readonly evasion: {
+                    readonly type: "string";
+                };
+                readonly expNext: {
+                    readonly type: "string";
+                };
+                readonly expTotal: {
+                    readonly type: "string";
+                };
+                readonly escapeFailure: {
+                    readonly type: "string";
+                };
+                readonly escapeStart: {
+                    readonly type: "string";
+                };
+                readonly file: {
+                    readonly type: "string";
+                };
+                readonly loadMessage: {
+                    readonly type: "string";
+                };
+                readonly meVolume: {
+                    readonly type: "string";
+                };
+                readonly magicEvasion: {
+                    readonly type: "string";
+                };
+                readonly magicReflection: {
+                    readonly type: "string";
+                };
+                readonly obtainExp: {
+                    readonly type: "string";
+                };
+                readonly obtainGold: {
+                    readonly type: "string";
+                };
+                readonly obtainItem: {
+                    readonly type: "string";
+                };
+                readonly obtainSkill: {
+                    readonly type: "string";
+                };
+                readonly partyName: {
+                    readonly type: "string";
+                };
+                readonly preemptive: {
+                    readonly type: "string";
+                };
+                readonly saveMessage: {
+                    readonly type: "string";
+                };
+                readonly seVolume: {
+                    readonly type: "string";
+                };
+                readonly substitute: {
+                    readonly type: "string";
+                };
+                readonly touchUI: {
+                    readonly type: "string";
+                };
+                readonly victory: {
+                    readonly type: "string";
+                };
+                readonly useItem: {
+                    readonly type: "string";
+                };
+                readonly buffAdd: {
+                    readonly type: "string";
+                };
+                readonly buffRemove: {
+                    readonly type: "string";
+                };
+                readonly actorNoHit: {
+                    readonly type: "string";
+                };
+                readonly enemyNoHit: {
+                    readonly type: "string";
+                };
+                readonly autosave: {
+                    readonly type: "string";
+                };
+                readonly emerge: {
+                    readonly type: "string";
+                };
+                readonly levelUp: {
+                    readonly type: "string";
+                };
+                readonly possession: {
+                    readonly type: "string";
+                };
+                readonly surprise: {
+                    readonly type: "string";
+                };
+            };
+        };
+    };
+    readonly type: "object";
+    readonly required: readonly ["gameTitle", "currencyUnit", "terms", "ship", "boat", "airship", "advanced", "titleBgm", "battleBgm", "gameoverMe", "victoryMe", "defeatMe", "attackMotions", "optAutosave", "optDisplayTp", "optFloorDeath", "optFollowers", "optKeyItemsNumber", "optSideView", "optSlipDeath", "optTransparent", "optSplashScreen", "optDrawTitle", "optExtraExp", "optMessageSkip", "startMapId", "startX", "startY", "faceSize", "tileSize", "iconSize", "battleSystem", "elements", "weaponTypes", "armorTypes", "equipTypes", "skillTypes", "switches", "variables", "magicSkills", "battleback1Name", "battleback2Name", "testTroopId", "partyMembersArray", "editor", "testBattlers", "editMapId", "battlerHue", "battlerName", "sounds", "title1Name", "title2Name", "versionId", "locale", "windowTone"];
+    readonly properties: {
+        gameTitle: {
+            type: string;
+        };
+        currencyUnit: {
+            type: string;
+        };
+        terms: {
+            type: string;
+            additionalProperties: boolean;
+            required: string[];
+            properties: {
+                messages: {
+                    $ref: string;
+                };
+                commands: {
+                    $ref: string;
+                };
+                basic: {
+                    $ref: string;
+                };
+                params: {
+                    $ref: string;
+                };
+            };
+        };
+        ship: {
+            $ref: string;
+        };
+        boat: {
+            $ref: string;
+        };
+        airship: {
+            $ref: string;
+        };
+        advanced: {
+            $ref: string;
+        };
         titleBgm: {
             $ref: string;
         };
@@ -508,17 +494,7 @@ export declare const SCHEMA_DATA_SYSTEM2: {
         attackMotions: {
             type: string;
             items: {
-                readonly type: "object";
-                readonly additionalProperties: false;
-                readonly required: readonly ["type", "weaponImageId"];
-                readonly properties: {
-                    readonly type: {
-                        readonly type: "number";
-                    };
-                    readonly weaponImageId: {
-                        readonly type: "number";
-                    };
-                };
+                $ref: string;
             };
         };
         optAutosave: {
@@ -651,49 +627,12 @@ export declare const SCHEMA_DATA_SYSTEM2: {
             };
         };
         editor: {
-            readonly additionalProperties: false;
-            readonly type: "object";
-            readonly required: readonly ["messageWidth1", "messageWidth2", "jsonFormatLevel"];
-            readonly properties: {
-                readonly messageWidth1: {
-                    readonly type: "integer";
-                    readonly minimum: 0;
-                    readonly maximum: 1000;
-                };
-                readonly messageWidth2: {
-                    readonly type: "integer";
-                    readonly minimum: 0;
-                    readonly maximum: 1000;
-                };
-                readonly jsonFormatLevel: {
-                    readonly type: "integer";
-                    readonly minimum: 0;
-                    readonly maximum: 4;
-                };
-            };
+            $ref: string;
         };
         testBattlers: {
             type: string;
             items: {
-                readonly type: "object";
-                readonly required: readonly ["actorId", "level", "equips"];
-                readonly additionalProperties: false;
-                readonly properties: {
-                    readonly level: {
-                        readonly type: "integer";
-                        readonly minimum: 0;
-                    };
-                    readonly actorId: {
-                        readonly type: "integer";
-                        readonly minimum: 0;
-                    };
-                    readonly equips: {
-                        readonly type: "array";
-                        readonly items: {
-                            readonly type: "integer";
-                        };
-                    };
-                };
+                $ref: string;
             };
         };
         editMapId: {
@@ -707,27 +646,11 @@ export declare const SCHEMA_DATA_SYSTEM2: {
             type: string;
         };
         sounds: {
-            readonly type: "array";
-            readonly maxItems: 24;
-            readonly minItems: 24;
-            readonly items: {
-                readonly type: "object";
-                readonly properties: {
-                    readonly name: {
-                        readonly type: "string";
-                    };
-                    readonly volume: {
-                        readonly type: "integer";
-                    };
-                    readonly pitch: {
-                        readonly type: "integer";
-                    };
-                    readonly pan: {
-                        readonly type: "integer";
-                    };
-                };
-                readonly required: readonly ["name", "volume", "pitch", "pan"];
-                readonly additionalProperties: false;
+            type: string;
+            maxItems: number;
+            minItems: number;
+            items: {
+                $ref: string;
             };
         };
         title1Name: {
@@ -750,7 +673,11 @@ export declare const SCHEMA_DATA_SYSTEM2: {
                 maximum: number;
             };
         };
-        itemCategories: {};
-        menuCommands: {};
+        itemCategories: {
+            $ref: string;
+        };
+        menuCommands: {
+            $ref: string;
+        };
     };
 };
