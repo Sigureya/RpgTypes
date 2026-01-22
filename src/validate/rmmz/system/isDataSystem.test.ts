@@ -1,6 +1,6 @@
 import { describe, test, expect } from "vitest";
 import type { Data_System, Terms_Messages } from "@RpgTypes/rmmz";
-import { SCHEMA_DATA_SYSTEM2 } from "./schema";
+import { SCHEMA_DATA_SYSTEM } from "./schema";
 const validate = require("./systemValidate.cjs");
 
 const isDataSystem = (data: unknown): data is Data_System => {
@@ -248,7 +248,7 @@ describe("isDataSystem", () => {
 
 describe("Schema coverage and consistency checks", () => {
   const dataKeys: string[] = Object.keys(mockSystem);
-  const schemaKeys: string[] = Object.keys(SCHEMA_DATA_SYSTEM2.properties);
+  const schemaKeys: string[] = Object.keys(SCHEMA_DATA_SYSTEM.properties);
   const schemaSet: ReadonlySet<string> = new Set(schemaKeys);
   describe("schema keys are not duplicated", () => {
     test("Simple check", () => {
