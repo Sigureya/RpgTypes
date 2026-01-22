@@ -15,17 +15,19 @@ import type {
 } from "@RpgTypes/rmmz/system";
 import type { System_Bundle } from "@RpgTypes/rmmz/system/core/bundle";
 import type { JSONSchemaType, Schema } from "ajv";
+import {
+  SCHEMA_SYSTEM_ADVANCED,
+  SCHEMA_SYSTEM_MEMBERS_ATTACK_MOTION,
+  SCHEMA_SYSTEM_ITEM_CATEGORIES,
+  SCHEMA_SYSTEM_MENU_COMMANDS_ENABLED,
+  SCHEMA_SYSTEM_MEMBERS_TERMS_COMMANDS_ARRAY,
+  SCHEMA_SYSTEM_MEMBERS_TERMS_BASIC_ARRAY,
+  SCHEMA_SYSTEM_PARAM_NAMS_ARRAY,
+  SCHEMA_SYSTEM_TERMS_MESSAGES,
+  SCHEMA_SYSTEM_VEHICLE,
+} from "./core";
 import { SCHEMA_SYSTEM_EDITOR_SETTINGS } from "./gameEdit/editorSetting";
 import { SCHEMA_SYSTEM_TEST_BATTLER } from "./gameEdit/testBattle";
-import { SCHEMA_SYSTEM_ADVANCED } from "./members/advanced";
-import { SCHEMA_SYSTEM_MEMBERS_ATTACK_MOTION } from "./members/attackMotion";
-import { SCHEMA_SYSTEM_ITEM_CATEGORIES } from "./members/itemCategories";
-import { SCHEMA_SYSTEM_MENU_COMMANDS_ENABLED } from "./members/menuCommands";
-import { SCHEMA_SYSTEM_MEMBERS_TERMS_BASIC_ARRAY } from "./members/trems/basic";
-import { SCHEMA_SYSTEM_MEMBERS_TERMS_COMMANDS_ARRAY } from "./members/trems/commands";
-import { SCHEMA_SYSTEM_TERMS_MESSAGES } from "./members/trems/messages";
-import { SCHEMA_SYSTEM_PARAM_NAMS_ARRAY } from "./members/trems/paramArray";
-import { SCHEMA_SYSTEM_VEHICLE } from "./members/vehicle";
 
 interface System
   extends
