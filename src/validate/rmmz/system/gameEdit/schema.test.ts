@@ -1,7 +1,7 @@
 import { describe, test, expect } from "vitest";
+import type { TestBattler } from "@RpgTypes/rmmz";
 import Ajv from "ajv";
-import SCHEMA_SYSTEM_TEST_BATTLER from "./schema";
-import type { TestBattler } from "./types";
+import { SCHEMA_SYSTEM_TEST_BATTLER } from "./testBattle";
 const ajv = new Ajv({ strict: true });
 const validate = ajv.compile(SCHEMA_SYSTEM_TEST_BATTLER);
 

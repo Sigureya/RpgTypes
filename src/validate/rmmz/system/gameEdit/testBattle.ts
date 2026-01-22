@@ -1,7 +1,7 @@
 import type { TestBattler } from "@RpgTypes/rmmz";
 import type { JSONSchemaType } from "ajv";
 
-export const SCHEMA_SYSTEM_TEST_BATTLE = {
+export const SCHEMA_SYSTEM_TEST_BATTLER = {
   type: "object",
   required: ["actorId", "level", "equips"],
   properties: {

@@ -16,7 +16,7 @@ import type {
 import type { System_Bundle } from "@RpgTypes/rmmz/system/core/bundle";
 import type { JSONSchemaType, Schema } from "ajv";
 import { SCHEMA_SYSTEM_EDITOR_SETTINGS } from "./gameEdit/editorSetting";
-import { SCHEMA_SYSTEM_TEST_BATTLE } from "./gameEdit/testBattle";
+import { SCHEMA_SYSTEM_TEST_BATTLER } from "./gameEdit/testBattle";
 import { SCHEMA_SYSTEM_ADVANCED } from "./members/advanced";
 import { SCHEMA_SYSTEM_MEMBERS_ATTACK_MOTION } from "./members/attackMotion";
 import {
@@ -162,7 +162,7 @@ export const SCHEMA_DATA_SYSTEM2 = {
     editor: SCHEMA_SYSTEM_EDITOR_SETTINGS,
     testBattlers: {
       type: "array",
-      items: SCHEMA_SYSTEM_TEST_BATTLE,
+      items: SCHEMA_SYSTEM_TEST_BATTLER,
     },
     editMapId: { type: "integer", minimum: 0 },
     battlerHue: { type: "integer" },
