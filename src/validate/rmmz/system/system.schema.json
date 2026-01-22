@@ -1,4 +1,18 @@
 {
+  "$defs": {
+    "audio": {
+      "type": "object",
+      "required": ["name", "volume", "pitch", "pan"],
+      "additionalProperties": false,
+      "properties": {
+        "name": { "type": "string" },
+        "volume": { "type": "integer", "minimum": 0, "maximum": 100 },
+        "pitch": { "type": "integer", "minimum": 50, "maximum": 150 },
+        "pan": { "type": "integer", "minimum": -100, "maximum": 100 }
+      }
+    }
+  },
+
   "type": "object",
   "required": [
     "gameTitle",
@@ -537,61 +551,11 @@
         }
       }
     },
-    "titleBgm": {
-      "type": "object",
-      "properties": {
-        "name": { "type": "string" },
-        "volume": { "type": "integer" },
-        "pitch": { "type": "integer" },
-        "pan": { "type": "integer" }
-      },
-      "required": ["name", "volume", "pitch", "pan"],
-      "additionalProperties": false
-    },
-    "battleBgm": {
-      "type": "object",
-      "properties": {
-        "name": { "type": "string" },
-        "volume": { "type": "integer" },
-        "pitch": { "type": "integer" },
-        "pan": { "type": "integer" }
-      },
-      "required": ["name", "volume", "pitch", "pan"],
-      "additionalProperties": false
-    },
-    "gameoverMe": {
-      "type": "object",
-      "properties": {
-        "name": { "type": "string" },
-        "volume": { "type": "integer" },
-        "pitch": { "type": "integer" },
-        "pan": { "type": "integer" }
-      },
-      "required": ["name", "volume", "pitch", "pan"],
-      "additionalProperties": false
-    },
-    "victoryMe": {
-      "type": "object",
-      "properties": {
-        "name": { "type": "string" },
-        "volume": { "type": "integer" },
-        "pitch": { "type": "integer" },
-        "pan": { "type": "integer" }
-      },
-      "required": ["name", "volume", "pitch", "pan"],
-      "additionalProperties": false
-    },
-    "defeatMe": {
-      "type": "object",
-      "properties": {
-        "name": { "type": "string" },
-        "volume": { "type": "integer" },
-        "pitch": { "type": "integer" },
-        "pan": { "type": "integer" }
-      },
-      "required": ["name", "volume", "pitch", "pan"],
-      "additionalProperties": false
-    },
+    "titleBgm": { "$ref": "#/$defs/audio" },
+    "battleBgm": { "$ref": "#/$defs/audio" },
+    "gameoverMe": { "$ref": "#/$defs/audio" },
+    "victoryMe": { "$ref": "#/$defs/audio" },
+    "defeatMe": { "$ref": "#/$defs/audio" },
     "sounds": {
       "type": "array",
       "maxItems": 24,
