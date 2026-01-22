@@ -1,6 +1,11 @@
 import { describe, test, expect } from "vitest";
 import type { Data_System, Terms_Messages } from "@RpgTypes/rmmz";
 import { SCHEMA_DATA_SYSTEM2 } from "./schema";
+const validate = require("./systemValidate.cjs");
+
+const isDataSystem = (data: unknown): data is Data_System => {
+  return validate(data);
+};
 
 const mockSystem: Data_System = {
   optAutosave: true,
@@ -234,6 +239,13 @@ const mockSystem: Data_System = {
     messageWidth2: 0,
   },
 };
+
+describe("isDataSystem", () => {
+  test("should validate a correct Data_System object", () => {
+    expect(mockSystem).toSatisfy(isDataSystem);
+  });
+});
+
 describe("Schema coverage and consistency checks", () => {
   const dataKeys: string[] = Object.keys(mockSystem);
   const schemaKeys: string[] = Object.keys(SCHEMA_DATA_SYSTEM2.properties);
