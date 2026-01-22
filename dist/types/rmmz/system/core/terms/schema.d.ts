@@ -12,7 +12,7 @@ declare const SCHEMA_SYSTEM_TERMS_BUNDLE: {
         readonly terms: {
             readonly additionalProperties: false;
             readonly type: "object";
-            readonly required: ("messages" | "commands" | "params" | "basic")[];
+            readonly required: ("params" | "messages" | "commands" | "basic")[];
             readonly properties: {
                 messages: {
                     readonly type: "object";

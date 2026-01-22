@@ -1,4 +1,4 @@
-declare const SCHEMA_SYSTEM_MEMBERS_ATTACK_MOTION: {
+export declare const SCHEMA_SYSTEM_MEMBERS_ATTACK_MOTION: {
     readonly type: "object";
     readonly additionalProperties: false;
     readonly required: readonly ["type", "weaponImageId"];
@@ -11,4 +11,3 @@ declare const SCHEMA_SYSTEM_MEMBERS_ATTACK_MOTION: {
         };
     };
 };
-export default SCHEMA_SYSTEM_MEMBERS_ATTACK_MOTION;
