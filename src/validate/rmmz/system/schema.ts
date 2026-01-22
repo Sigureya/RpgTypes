@@ -44,7 +44,7 @@ interface System
     System_OtherData,
     System_Bundle {}
 
-export const SCHEMA_DATA_SYSTEM2 = {
+export const SCHEMA_DATA_SYSTEM = {
   $defs: {
     Audio: {
       type: "object",
@@ -157,6 +157,20 @@ export const SCHEMA_DATA_SYSTEM2 = {
       type: "array",
       items: { $ref: "#/$defs/AttackMotion" },
     },
+    sounds: {
+      type: "array",
+      maxItems: 24,
+      minItems: 24,
+      items: { $ref: "#/$defs/Audio" },
+    },
+    // Menu
+    itemCategories: {
+      $ref: "#/$defs/ItemCategories",
+    },
+    menuCommands: {
+      $ref: "#/$defs/MenuCommands",
+    },
+
     // Options
     optAutosave: { type: "boolean" },
     optDisplayTp: { type: "boolean" },
@@ -204,12 +218,6 @@ export const SCHEMA_DATA_SYSTEM2 = {
     editMapId: { type: "integer", minimum: 0 },
     battlerHue: { type: "integer" },
     battlerName: { type: "string" },
-    sounds: {
-      type: "array",
-      maxItems: 24,
-      minItems: 24,
-      items: { $ref: "#/$defs/Audio" },
-    },
     title1Name: { type: "string" },
     title2Name: { type: "string" },
     versionId: { type: "integer" },
@@ -217,12 +225,6 @@ export const SCHEMA_DATA_SYSTEM2 = {
     windowTone: {
       type: "array",
       items: { type: "integer", minimum: 0, maximum: 255 },
-    },
-    itemCategories: {
-      $ref: "#/$defs/ItemCategories",
-    },
-    menuCommands: {
-      $ref: "#/$defs/MenuCommands",
     },
   } satisfies Record<keyof (System | Data_System), Schema>,
 } as const satisfies Schema;
