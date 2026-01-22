@@ -8,7 +8,7 @@ export interface System_Terms {
     params: Terms_ParamNamesArray;
     basic: Terms_BasicArray;
 }
-export interface System_TextBundle extends SystemLabels_TermsParamNames {
+export interface System_TextBundle extends System_Terms_Params {
     terms: System_Terms;
     gameTitle: string;
     currencyUnit: string;

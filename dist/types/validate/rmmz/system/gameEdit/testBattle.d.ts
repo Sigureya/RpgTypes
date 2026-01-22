@@ -1,14 +1,15 @@
-declare const SCHEMA_SYSTEM_TEST_BATTLER: {
-    readonly additionalProperties: false;
+export declare const SCHEMA_SYSTEM_TEST_BATTLER: {
     readonly type: "object";
-    readonly required: readonly ["actorId", "equips", "level"];
+    readonly required: readonly ["actorId", "level", "equips"];
+    readonly additionalProperties: false;
     readonly properties: {
-        readonly actorId: {
-            readonly type: "integer";
-        };
         readonly level: {
             readonly type: "integer";
-            readonly minimum: 1;
+            readonly minimum: 0;
+        };
+        readonly actorId: {
+            readonly type: "integer";
+            readonly minimum: 0;
         };
         readonly equips: {
             readonly type: "array";
@@ -18,4 +19,3 @@ declare const SCHEMA_SYSTEM_TEST_BATTLER: {
         };
     };
 };
-export default SCHEMA_SYSTEM_TEST_BATTLER;
