@@ -19,7 +19,7 @@ import { SCHEMA_SYSTEM_EDITOR_SETTINGS } from "./gameEdit/editorSetting";
 import { SCHEMA_SYSTEM_TEST_BATTLER } from "./gameEdit/testBattle";
 import { SCHEMA_SYSTEM_ADVANCED } from "./members/advanced";
 import { SCHEMA_SYSTEM_MEMBERS_ATTACK_MOTION } from "./members/attackMotion";
-import { SCHEMA_SYSTEM_SOUND_ARRAY } from "./members/audio";
+import { SCHEMA_SYSTEM_ITEM_CATEGORIES } from "./members/itemCategories";
 import { SCHEMA_SYSTEM_TERMS_CORE } from "./members/trems/terms";
 import { SCHEMA_SYSTEM_VEHICLE } from "./members/vehicle";
 
@@ -53,6 +53,9 @@ export const SCHEMA_DATA_SYSTEM2 = {
     } as const satisfies JSONSchemaType<AudioFileParams>,
     vehicle: SCHEMA_SYSTEM_VEHICLE,
     advanced: SCHEMA_SYSTEM_ADVANCED,
+    attackMotion: SCHEMA_SYSTEM_MEMBERS_ATTACK_MOTION,
+    itemCategories: SCHEMA_SYSTEM_ITEM_CATEGORIES,
+    testBattler: SCHEMA_SYSTEM_TEST_BATTLER,
   },
   type: "object",
   required: [
@@ -130,7 +133,7 @@ export const SCHEMA_DATA_SYSTEM2 = {
     defeatMe: { $ref: "#/$defs/audio" },
     attackMotions: {
       type: "array",
-      items: SCHEMA_SYSTEM_MEMBERS_ATTACK_MOTION,
+      items: { $ref: "#/$defs/attackMotion" },
     },
     // Options
     optAutosave: { type: "boolean" },
@@ -174,12 +177,17 @@ export const SCHEMA_DATA_SYSTEM2 = {
     editor: SCHEMA_SYSTEM_EDITOR_SETTINGS,
     testBattlers: {
       type: "array",
-      items: SCHEMA_SYSTEM_TEST_BATTLER,
+      items: { $ref: "#/$defs/testBattler" },
     },
     editMapId: { type: "integer", minimum: 0 },
     battlerHue: { type: "integer" },
     battlerName: { type: "string" },
-    sounds: SCHEMA_SYSTEM_SOUND_ARRAY,
+    sounds: {
+      type: "array",
+      maxItems: 24,
+      minItems: 24,
+      items: { $ref: "#/$defs/audio" },
+    },
     title1Name: { type: "string" },
     title2Name: { type: "string" },
     versionId: { type: "integer" },
@@ -188,7 +196,9 @@ export const SCHEMA_DATA_SYSTEM2 = {
       type: "array",
       items: { type: "integer", minimum: 0, maximum: 255 },
     },
-    itemCategories: {},
+    itemCategories: {
+      $ref: "#/$defs/itemCategories",
+    },
     menuCommands: {},
   } satisfies Record<keyof (System | Data_System), Schema>,
 } as const satisfies Schema;

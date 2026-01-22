@@ -71,6 +71,42 @@
         "fallbackFonts",
         "fontSize"
       ]
+    },
+    "attackMotion": {
+      "additionalProperties": false,
+      "properties": {
+        "type": { "type": "number" },
+        "weaponImageId": { "type": "number" }
+      },
+      "required": ["type", "weaponImageId"],
+      "type": "object"
+    },
+    "itemCategories": {
+      "type": "array",
+      "maxItems": 4,
+      "minItems": 4,
+      "items": { "type": "boolean" }
+    },
+    "testBattler": {
+      "additionalProperties": false,
+      "properties": {
+        "actorId": {
+          "minimum": 0,
+          "type": "integer"
+        },
+        "equips": {
+          "items": {
+            "type": "integer"
+          },
+          "type": "array"
+        },
+        "level": {
+          "minimum": 0,
+          "type": "integer"
+        }
+      },
+      "required": ["actorId", "level", "equips"],
+      "type": "object"
     }
   },
 
@@ -149,19 +185,7 @@
       "$ref": "#/$defs/advanced"
     },
     "attackMotions": {
-      "items": {
-        "additionalProperties": false,
-        "properties": {
-          "type": {
-            "type": "number"
-          },
-          "weaponImageId": {
-            "type": "number"
-          }
-        },
-        "required": ["type", "weaponImageId"],
-        "type": "object"
-      },
+      "items": { "$ref": "#/$defs/attackMotion" },
       "type": "array"
     },
     "ship": { "$ref": "#/$defs/vehicle" },
@@ -205,25 +229,7 @@
     "testBattlers": {
       "type": "array",
       "items": {
-        "additionalProperties": false,
-        "properties": {
-          "actorId": {
-            "minimum": 0,
-            "type": "integer"
-          },
-          "equips": {
-            "items": {
-              "type": "integer"
-            },
-            "type": "array"
-          },
-          "level": {
-            "minimum": 0,
-            "type": "integer"
-          }
-        },
-        "required": ["actorId", "level", "equips"],
-        "type": "object"
+        "$ref": "#/$defs/testBattler"
       }
     },
     "editMapId": { "type": "integer", "minimum": 0 },
@@ -237,7 +243,7 @@
       "type": "array",
       "items": { "type": "integer", "minimum": 0, "maximum": 255 }
     },
-    "itemCategories": {},
+    "itemCategories": { "$ref": "#/$defs/itemCategories" },
     "menuCommands": {},
     "terms": {
       "additionalProperties": false,
@@ -410,17 +416,7 @@
       "type": "array",
       "maxItems": 24,
       "minItems": 24,
-      "items": {
-        "type": "object",
-        "properties": {
-          "name": { "type": "string" },
-          "volume": { "type": "integer" },
-          "pitch": { "type": "integer" },
-          "pan": { "type": "integer" }
-        },
-        "required": ["name", "volume", "pitch", "pan"],
-        "additionalProperties": false
-      }
+      "items": { "$ref": "#/$defs/audio" }
     }
   }
 }
