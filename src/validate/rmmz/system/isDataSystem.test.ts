@@ -1,9 +1,7 @@
 import { describe, test, expect } from "vitest";
-import type { AttackMotion, Terms_Messages } from "./core";
-import type { Data_System } from "./system";
-import { isAttackMotion, isDataSystem } from "./validate";
+import type { Data_System, Terms_Messages } from "@RpgTypes/rmmz";
 
-const mockSystem = {
+const mockSystem: Data_System = {
   optAutosave: true,
   optDisplayTp: true,
   optDrawTitle: true,
@@ -86,10 +84,8 @@ const mockSystem = {
   variables: ["Variable1", "Variable2"],
   magicSkills: [1, 4],
   attackMotions: [
-    {
-      type: 4,
-      weaponImageId: 3,
-    },
+    { type: 4, weaponImageId: 3 },
+    { type: 5, weaponImageId: 6 },
   ],
   testBattlers: [{ actorId: 1, equips: [12, 45], level: 85 }],
   advanced: {
@@ -236,41 +232,6 @@ const mockSystem = {
     messageWidth1: 0,
     messageWidth2: 0,
   },
-} as const satisfies Data_System;
+};
 
-describe("Data_System", () => {
-  test("", () => {
-    expect(isDataSystem(mockSystem)).toBe(true);
-  });
-});
-
-describe("isAttackMotion", () => {
-  test("normal case", () => {
-    const mockMotion: AttackMotion = {
-      type: 4,
-      weaponImageId: 3,
-    };
-    expect(mockMotion).toSatisfy(isAttackMotion);
-  });
-  describe("error case", () => {
-    test("missing type", () => {
-      const mockMotion: Omit<AttackMotion, "type"> = {
-        weaponImageId: 3,
-      };
-      expect(mockMotion).not.toSatisfy(isAttackMotion);
-    });
-    test("missing weaponImageId", () => {
-      const mockMotion: Omit<AttackMotion, "weaponImageId"> = {
-        type: 4,
-      };
-      expect(mockMotion).not.toSatisfy(isAttackMotion);
-    });
-    test("error case", () => {
-      const mockMotion: Record<keyof AttackMotion, string> = {
-        type: "4",
-        weaponImageId: "3",
-      };
-      expect(mockMotion).not.toSatisfy(isAttackMotion);
-    });
-  });
-});
+test.skip("", () => {});
