@@ -26,10 +26,8 @@ import { makeEditorSetting } from "./gameEdit";
 import type { TestBattler } from "./gameEdit/testPlay/testBattler/types";
 import type { Data_System } from "./system";
 import type { SystemDataFragments } from "./systemSegments";
-import { isImageSize, isTestBattler } from "./validate";
-
 export const makeSystemData = (
-  fragments: Partial<SystemDataFragments>
+  fragments: Partial<SystemDataFragments>,
 ): Data_System => {
   const size = cloneSize(fragments.size);
 
@@ -70,7 +68,7 @@ export const makeSystemData = (
     testTroopId: fragments.battleTest?.testTroopId ?? 0,
     testBattlers: cloneObjectArray(
       fragments.battleTest?.testBattlers,
-      cloneTestBattler
+      cloneTestBattler,
     ),
     battleBgm: makeAudioFileParams(fragments.bgm?.battleBgm),
     victoryMe: makeAudioFileParams(fragments.me?.victoryMe),
@@ -83,13 +81,13 @@ export const makeSystemData = (
     windowTone: [0, 0, 0, 0],
     terms: makeTerms(fragments.terms ?? {}) satisfies System_Terms,
     itemCategories: makeItemCategories(
-      fragments.itemCategories
+      fragments.itemCategories,
     ) satisfies boolean[],
     partyMembersArray: cloneNumberArray(fragments.gameInit?.partyMembersArray),
     battleSystem: 0,
     battlerHue: 0,
     menuCommands: makeMenuCommandsEnabled(
-      fragments.menuComamnds
+      fragments.menuComamnds,
     ) satisfies boolean[],
   };
 };
@@ -112,12 +110,14 @@ const cloneNumberArray = (array?: ReadonlyArray<number>) => {
   return array ? [...array] : [];
 };
 
-const cloneSize = (data: unknown): System_ImageSize => {
-  return isImageSize(data)
+const cloneSize = (
+  data: Partial<System_ImageSize> | undefined,
+): System_ImageSize => {
+  return data
     ? {
-        tileSize: data.tileSize,
-        faceSize: data.faceSize,
-        iconSize: data.iconSize,
+        tileSize: data.tileSize ?? 48,
+        faceSize: data.faceSize ?? 144,
+        iconSize: data.iconSize ?? 32,
       }
     : {
         tileSize: 48,
@@ -127,14 +127,14 @@ const cloneSize = (data: unknown): System_ImageSize => {
 };
 
 const cloneObjectArray = <T>(
-  array: ReadonlyArray<unknown> | undefined,
-  fn: (data: unknown) => T
-) => {
+  array: ReadonlyArray<T> | undefined,
+  fn: (data: T) => T,
+): T[] => {
   return array ? array.map(fn) : [];
 };
 
-const cloneTestBattler = (data: unknown): TestBattler => {
-  return isTestBattler(data)
+const cloneTestBattler = (data: TestBattler | undefined): TestBattler => {
+  return data
     ? {
         actorId: data.actorId,
         equips: cloneNumberArray(data.equips),
