@@ -1,19 +1,29 @@
 import type {
-  AttackMotion,
-  EditorSettings,
-  System_Advanced,
+  Data_System,
+  Data_Vehicle,
   System_Bgm,
   System_BooleanGameOptions,
+  System_GameEditorBundleRMMZ,
   System_GameInitial,
   System_ImageSize,
   System_Me,
+  System_OtherData,
+  System_RPG_DataNames,
+  System_TextBundle,
+  System_TitleImages,
   System_Vehicles,
-} from "@RpgTypes/rmmz";
+} from "@RpgTypes/rmmz/system";
+import type { System_Bundle } from "@RpgTypes/rmmz/system/core/bundle";
 import type { JSONSchemaType, Schema } from "ajv";
 import { SCHEMA_SYSTEM_EDITOR_SETTINGS } from "./gameEdit/editorSetting";
+import { SCHEMA_SYSTEM_TEST_BATTLE } from "./gameEdit/testBattle";
 import { SCHEMA_SYSTEM_ADVANCED } from "./members/adovanced";
 import { SCHEMA_SYSTEM_MEMBERS_ATTACK_MOTION } from "./members/attackMotion";
-import { SCHEMA_AUDIO_FILE_PARAMS_SYSTEM } from "./members/schema";
+import {
+  SCHEMA_AUDIO_FILE_PARAMS_SYSTEM,
+  SCHEMA_SYSTEM_SOUND_ARRAY,
+} from "./members/schema";
+import { SCHEMA_SYSTEM_TERMS_CORE } from "./members/trems/terms";
 import { SCHEMA_SYSTEM_VEHICLE } from "./members/vehicle";
 
 interface System
@@ -24,49 +34,37 @@ interface System
     System_ImageSize,
     System_Bgm,
     System_Me,
-    Members {}
+    System_RPG_DataNames,
+    System_GameEditorBundleRMMZ,
+    System_TextBundle,
+    System_TitleImages,
+    System_OtherData,
+    System_Bundle {}
 
-interface Members {
-  advanced: System_Advanced;
-  battleSystem: number;
-  attackMotions: AttackMotion[];
-  editor: EditorSettings;
-
-  //  sounds: System_SoundsArray;
-}
-
-export const SCHEMA_DATA_SYSTEM2: JSONSchemaType<System> = {
+export const SCHEMA_DATA_SYSTEM2 = {
   type: "object",
-  required: [
-    "ship",
-    "boat",
-    "airship",
-    "optAutosave",
-    "optDisplayTp",
-    "optFloorDeath",
-    "optFollowers",
-    "optKeyItemsNumber",
-    "optSideView",
-    "optSlipDeath",
-    "optTransparent",
-    "optSplashScreen",
-    "optMessageSkip",
-  ],
+  required: [],
   properties: {
-    ship: SCHEMA_SYSTEM_VEHICLE,
-    boat: SCHEMA_SYSTEM_VEHICLE,
-    airship: SCHEMA_SYSTEM_VEHICLE,
+    // Texts
+    gameTitle: { type: "string" },
+    currencyUnit: { type: "string" },
+    terms: SCHEMA_SYSTEM_TERMS_CORE,
+    // Vehicles
+    ship: SCHEMA_SYSTEM_VEHICLE satisfies JSONSchemaType<Data_Vehicle>,
+    boat: SCHEMA_SYSTEM_VEHICLE satisfies JSONSchemaType<Data_Vehicle>,
+    airship: SCHEMA_SYSTEM_VEHICLE satisfies JSONSchemaType<Data_Vehicle>,
     advanced: SCHEMA_SYSTEM_ADVANCED,
+    // AudioFiles
     titleBgm: SCHEMA_AUDIO_FILE_PARAMS_SYSTEM,
     battleBgm: SCHEMA_AUDIO_FILE_PARAMS_SYSTEM,
     gameoverMe: SCHEMA_AUDIO_FILE_PARAMS_SYSTEM,
     victoryMe: SCHEMA_AUDIO_FILE_PARAMS_SYSTEM,
     defeatMe: SCHEMA_AUDIO_FILE_PARAMS_SYSTEM,
-    editor: SCHEMA_SYSTEM_EDITOR_SETTINGS,
     attackMotions: {
       type: "array",
       items: SCHEMA_SYSTEM_MEMBERS_ATTACK_MOTION,
     },
+    // Options
     optAutosave: { type: "boolean" },
     optDisplayTp: { type: "boolean" },
     optFloorDeath: { type: "boolean" },
@@ -85,10 +83,44 @@ export const SCHEMA_DATA_SYSTEM2: JSONSchemaType<System> = {
     faceSize: { type: "integer", minimum: 0 },
     tileSize: { type: "integer", minimum: 0 },
     iconSize: { type: "integer", minimum: 0 },
+    battleSystem: { type: "integer", minimum: 0, maximum: 2 },
+    // RPG Data Names
+    elements: { type: "array", items: { type: "string" } },
+    weaponTypes: { type: "array", items: { type: "string" } },
+    armorTypes: { type: "array", items: { type: "string" } },
+    equipTypes: { type: "array", items: { type: "string" } },
+    skillTypes: { type: "array", items: { type: "string" } },
+    switches: { type: "array", items: { type: "string" } },
+    variables: { type: "array", items: { type: "string" } },
+    magicSkills: { type: "array", items: { type: "integer" } },
+    // Test Play
+    battleback1Name: { type: "string" },
+    battleback2Name: { type: "string" },
+    testTroopId: { type: "integer", minimum: 0 },
     partyMembersArray: {
       type: "array",
       items: { type: "integer" },
     },
-    battleSystem: { type: "integer", minimum: 0, maximum: 2 },
-  } as const satisfies Record<keyof System, Schema>,
+
+    // Editor
+    editor: SCHEMA_SYSTEM_EDITOR_SETTINGS,
+    testBattlers: {
+      type: "array",
+      items: SCHEMA_SYSTEM_TEST_BATTLE,
+    },
+    editMapId: { type: "integer", minimum: 0 },
+    battlerHue: { type: "integer" },
+    battlerName: { type: "string" },
+    sounds: SCHEMA_SYSTEM_SOUND_ARRAY,
+    title1Name: { type: "string" },
+    title2Name: { type: "string" },
+    versionId: { type: "integer" },
+    locale: { type: "string" },
+    windowTone: {
+      type: "array",
+      items: { type: "integer", minimum: 0, maximum: 255 },
+    },
+    itemCategories: {},
+    menuCommands: {},
+  } satisfies Record<keyof (System & Data_System), Schema>,
 };
