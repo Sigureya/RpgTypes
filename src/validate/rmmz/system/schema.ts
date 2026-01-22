@@ -42,6 +42,19 @@ interface System
     System_Bundle {}
 
 export const SCHEMA_DATA_SYSTEM2 = {
+  $defs: {
+    audio: {
+      type: "object",
+      required: ["name", "volume", "pitch", "pan"],
+      additionalProperties: false,
+      properties: {
+        name: { type: "string" },
+        volume: { type: "integer", minimum: 0, maximum: 100 },
+        pitch: { type: "integer", minimum: 50, maximum: 150 },
+        pan: { type: "integer", minimum: -100, maximum: 100 },
+      },
+    },
+  },
   type: "object",
   required: [
     "gameTitle",
@@ -111,11 +124,11 @@ export const SCHEMA_DATA_SYSTEM2 = {
     airship: SCHEMA_SYSTEM_VEHICLE satisfies JSONSchemaType<Data_Vehicle>,
     advanced: SCHEMA_SYSTEM_ADVANCED,
     // AudioFiles
-    titleBgm: SCHEMA_AUDIO_FILE_PARAMS_SYSTEM,
-    battleBgm: SCHEMA_AUDIO_FILE_PARAMS_SYSTEM,
-    gameoverMe: SCHEMA_AUDIO_FILE_PARAMS_SYSTEM,
-    victoryMe: SCHEMA_AUDIO_FILE_PARAMS_SYSTEM,
-    defeatMe: SCHEMA_AUDIO_FILE_PARAMS_SYSTEM,
+    titleBgm: { $ref: "#/$defs/audio" },
+    battleBgm: { $ref: "#/$defs/audio" },
+    gameoverMe: { $ref: "#/$defs/audio" },
+    victoryMe: { $ref: "#/$defs/audio" },
+    defeatMe: { $ref: "#/$defs/audio" },
     attackMotions: {
       type: "array",
       items: SCHEMA_SYSTEM_MEMBERS_ATTACK_MOTION,
@@ -179,4 +192,4 @@ export const SCHEMA_DATA_SYSTEM2 = {
     itemCategories: {},
     menuCommands: {},
   } satisfies Record<keyof (System | Data_System), Schema>,
-};
+} as const satisfies Schema;
