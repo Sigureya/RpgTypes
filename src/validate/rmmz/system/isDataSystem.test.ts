@@ -1,5 +1,6 @@
 import { describe, test, expect } from "vitest";
 import type { Data_System, Terms_Messages } from "@RpgTypes/rmmz";
+import { SCHEMA_DATA_SYSTEM2 } from "./schema";
 
 const mockSystem: Data_System = {
   optAutosave: true,
@@ -233,5 +234,21 @@ const mockSystem: Data_System = {
     messageWidth2: 0,
   },
 };
-
-test.skip("", () => {});
+describe("Schema coverage and consistency checks", () => {
+  const dataKeys: string[] = Object.keys(mockSystem);
+  const schemaKeys: string[] = Object.keys(SCHEMA_DATA_SYSTEM2.properties);
+  const schemaSet: ReadonlySet<string> = new Set(schemaKeys);
+  describe("schema keys are not duplicated", () => {
+    test("Simple check", () => {
+      expect(schemaKeys.length).toBe(schemaSet.size);
+    });
+    test("Strict check", () => {
+      expect(schemaKeys.toSorted()).toEqual(Array.from(schemaSet).toSorted());
+    });
+  });
+  describe("schema keys are not missing", () => {
+    test("All required schema keys are present", () => {
+      expect(dataKeys.filter((k) => !schemaSet.has(k))).toEqual([]);
+    });
+  });
+});
