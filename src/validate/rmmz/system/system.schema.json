@@ -376,7 +376,7 @@
       "type": "object",
       "additionalProperties": false,
       "required": ["messages", "commands", "basic", "params"],
-      "propeties": {
+      "properties": {
         "messages": { "$ref": "#/$defs/TermsMessages" },
         "commands": { "$ref": "#/$defs/TermsCommands" },
         "basic": { "$ref": "#/$defs/TermsBasic" },

@@ -133,7 +133,7 @@ export const SCHEMA_DATA_SYSTEM2 = {
       type: "object",
       additionalProperties: false,
       required: ["messages", "commands", "basic", "params"],
-      propeties: {
+      properties: {
         messages: { $ref: "#/$defs/TermsMessages" },
         commands: { $ref: "#/$defs/TermsCommands" },
         basic: { $ref: "#/$defs/TermsBasic" },
