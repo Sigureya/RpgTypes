@@ -3,6 +3,7 @@ import type { JSONSchemaType } from "ajv";
 
 export const SCHEMA_MAP_EVENT_PAGE_CONDITION = {
   type: "object",
+  additionalProperties: false,
   required: [
     "switch1Id",
     "switch1Valid",

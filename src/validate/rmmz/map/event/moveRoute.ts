@@ -4,6 +4,7 @@ import type { AudioFileParams } from "src/libs/utils/types";
 
 export const SCHEMA_MOVEROUTE_DATA = {
   type: "object",
+  additionalProperties: false,
   required: ["wait", "repeat", "skippable", "list"],
   properties: {
     wait: { type: "boolean" },

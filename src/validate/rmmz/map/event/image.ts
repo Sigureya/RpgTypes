@@ -10,6 +10,7 @@ export const SCHEMA_MAP_EVENT_IMAGE = {
     "pattern",
     "tileId",
   ],
+  additionalProperties: false,
   properties: {
     characterIndex: { type: "integer", minimum: 0 },
     characterName: { type: "string" },
