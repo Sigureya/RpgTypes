@@ -1,8 +1,8 @@
 import { describe, test, expect } from "vitest";
+import type { MapEvent_PageCondition, PageConditionArg } from "@RpgTypes/rmmz";
+import { makeEventPageCondition } from "@RpgTypes/rmmz";
 import Ajv from "ajv";
-import type { MapEvent_PageCondition, PageConditionArg } from "./condition";
-import { makeEventPageCondition } from "./make";
-import SCHEMA_MAP_EVENT_PAGE_CONDITION from "./schema";
+import { SCHEMA_MAP_EVENT_PAGE_CONDITION } from "./condition";
 const ajv = new Ajv({
   code: { source: false },
   strict: true,
