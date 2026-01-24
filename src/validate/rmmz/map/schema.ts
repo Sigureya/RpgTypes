@@ -1,13 +1,15 @@
 import type { AudioFileParams } from "@RpgTypes/libs";
-import type { Data_Map, MapEvent } from "@RpgTypes/rmmz";
+import type { Data_Map, MapEvent, MapEventPage } from "@RpgTypes/rmmz";
 import type { Encounter } from "@RpgTypes/rmmz/rpg/data/event/map/types/encounter";
 import type { JSONSchemaType, Schema } from "ajv";
+import { SCHEMA_MAP_EVENT_PAGE_CONDITION } from "./event/condition";
 import { SCHEMA_MAP_EVENT_IMAGE } from "./event/image";
 import { SCHEMA_MOVEROUTE_DATA } from "./event/moveRoute";
 
 export const SCHEMA_DATA_MAP = {
   type: "object",
-  aditionalProperties: false,
+  additionalProperties: false,
+
   $defs: {
     AudioFileParams: {
       type: "object",
@@ -63,13 +65,14 @@ export const SCHEMA_DATA_MAP = {
                 "moveFrequency",
               ],
               properties: {
+                priorityType: { type: "integer" },
                 directionFix: { type: "boolean" },
                 moveFrequency: { type: "integer" },
-                conditions: { $ref: "#/$defs/MapEventPageCondition" },
+                conditions: SCHEMA_MAP_EVENT_PAGE_CONDITION,
                 list: { type: "array" },
                 image: SCHEMA_MAP_EVENT_IMAGE,
                 moveRoute: SCHEMA_MOVEROUTE_DATA,
-              },
+              } as const satisfies Record<keyof MapEventPage, Schema>,
             },
           },
         },
