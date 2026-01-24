@@ -1,0 +1,240 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "$defs": {
+    "AudioFileParams": {
+      "properties": {
+        "name": { "type": "string" },
+        "pan": { "type": "integer" },
+        "pitch": { "type": "integer" },
+        "volume": { "type": "integer" }
+      },
+      "required": ["name", "pan", "pitch", "volume"],
+      "type": "object"
+    },
+    "EncounterList": {
+      "items": {
+        "properties": {
+          "regionSet": {
+            "items": { "type": "integer" },
+            "type": "array"
+          },
+          "troopId": { "type": "integer" },
+          "weight": { "type": "integer" }
+        },
+        "required": ["regionSet", "troopId", "weight"],
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "MapEvents": {
+      "type": "array",
+      "items": {
+        "required": ["id", "name", "x", "y", "pages", "note"],
+        "type": "object",
+        "properties": {
+          "id": { "type": "integer" },
+          "name": { "type": "string" },
+          "note": { "type": "string" },
+          "pages": {
+            "type": "array",
+            "items": {
+              "required": [
+                "conditions",
+                "image",
+                "list",
+                "moveRoute",
+                "directionFix",
+                "priorityType",
+                "moveFrequency"
+              ],
+              "type": "object",
+              "properties": {
+                "priorityType": { "type": "integer" },
+                "conditions": {
+                  "additionalProperties": false,
+                  "type": "object",
+                  "required": [
+                    "switch1Id",
+                    "switch1Valid",
+                    "switch2Id",
+                    "switch2Valid",
+                    "variableId",
+                    "variableValid",
+                    "selfSwitchCh",
+                    "selfSwitchValid",
+                    "variableValue",
+                    "itemId",
+                    "itemValid",
+                    "actorId",
+                    "actorValid"
+                  ],
+                  "properties": {
+                    "switch1Id": { "type": "integer", "minimum": 0 },
+                    "switch1Valid": { "type": "boolean" },
+                    "switch2Id": { "type": "integer", "minimum": 0 },
+                    "switch2Valid": { "type": "boolean" },
+                    "variableId": { "type": "integer", "minimum": 0 },
+                    "variableValid": { "type": "boolean" },
+                    "selfSwitchCh": { "type": "string" },
+                    "selfSwitchValid": { "type": "boolean" },
+                    "variableValue": { "type": "integer" },
+                    "itemId": { "type": "integer", "minimum": 0 },
+                    "itemValid": { "type": "boolean" },
+                    "actorId": { "type": "integer" },
+                    "actorValid": { "type": "boolean" }
+                  }
+                },
+                "directionFix": {
+                  "type": "boolean"
+                },
+                "image": {
+                  "additionalProperties": false,
+                  "properties": {
+                    "characterIndex": {
+                      "minimum": 0,
+                      "type": "integer"
+                    },
+                    "characterName": {
+                      "type": "string"
+                    },
+                    "direction": {
+                      "enum": [2, 4, 6, 8],
+                      "type": "integer"
+                    },
+                    "pattern": { "type": "integer" },
+                    "tileId": { "type": "integer" }
+                  },
+                  "required": [
+                    "characterIndex",
+                    "characterName",
+                    "direction",
+                    "pattern",
+                    "tileId"
+                  ],
+                  "type": "object"
+                },
+                "list": {
+                  "type": "array"
+                },
+                "moveFrequency": {
+                  "type": "integer"
+                },
+                "moveRoute": {
+                  "additionalProperties": false,
+                  "properties": {
+                    "list": {
+                      "items": {
+                        "properties": {
+                          "code": {
+                            "type": "integer"
+                          },
+                          "parameters": {
+                            "items": {
+                              "oneOf": [
+                                {
+                                  "type": "string"
+                                },
+                                {
+                                  "type": "number"
+                                },
+                                {
+                                  "properties": {
+                                    "name": { "type": "string" },
+                                    "pan": { "type": "integer" },
+                                    "pitch": { "type": "integer" },
+                                    "volume": { "type": "integer" }
+                                  },
+                                  "required": [
+                                    "name",
+                                    "pan",
+                                    "pitch",
+                                    "volume"
+                                  ],
+                                  "type": "object"
+                                }
+                              ]
+                            },
+                            "type": "array"
+                          }
+                        },
+                        "required": ["code", "parameters"],
+                        "type": "object"
+                      },
+                      "type": "array"
+                    },
+                    "repeat": { "type": "boolean" },
+                    "skippable": { "type": "boolean" },
+                    "wait": { "type": "boolean" }
+                  },
+                  "required": ["wait", "repeat", "skippable", "list"],
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "x": { "type": "integer" },
+          "y": { "type": "integer" }
+        }
+      }
+    }
+  },
+  "properties": {
+    "autoplayBgm": { "type": "boolean" },
+    "autoplayBgs": { "type": "boolean" },
+    "battleback1Name": { "type": "string" },
+    "battleback2Name": { "type": "string" },
+    "bgm": { "$ref": "#/$defs/AudioFileParams" },
+    "bgs": { "$ref": "#/$defs/AudioFileParams" },
+    "data": {
+      "items": { "type": "integer" },
+      "type": "array"
+    },
+    "disableDashing": { "type": "boolean" },
+    "displayName": { "type": "string" },
+    "encounterList": { "$ref": "#/$defs/EncounterList" },
+    "events": {
+      "$ref": "#/$defs/MapEvents"
+    },
+    "height": {
+      "minimum": 0,
+      "type": "integer"
+    },
+    "note": {
+      "type": "string"
+    },
+    "parallaxLoopX": { "type": "boolean" },
+    "parallaxLoopY": { "type": "boolean" },
+    "parallaxName": { "type": "string" },
+    "parallaxShow": { "type": "boolean" },
+    "parallaxSx": { "type": "integer" },
+    "parallaxSy": { "type": "integer" },
+    "tilesetId": { "type": "integer" },
+    "width": { "minimum": 0, "type": "integer" },
+    "x": { "minimum": 0, "type": "integer" },
+    "y": { "minimum": 0, "type": "integer" }
+  },
+  "required": [
+    "battleback1Name",
+    "battleback2Name",
+    "note",
+    "width",
+    "height",
+    "x",
+    "y",
+    "parallaxSy",
+    "parallaxSx",
+    "parallaxLoopY",
+    "parallaxLoopX",
+    "disableDashing",
+    "parallaxName",
+    "parallaxShow",
+    "displayName",
+    "data",
+    "autoplayBgm",
+    "bgm",
+    "autoplayBgs",
+    "bgs",
+    "tilesetId"
+  ]
+}
