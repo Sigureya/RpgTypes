@@ -1,7 +1,7 @@
+import type { MapEvent_Image } from "@RpgTypes/rmmz/rpg";
 import type { JSONSchemaType } from "ajv";
-import type { MapEvent_Image } from "./types";
 
-const SCHEMA_MAP_EVENT_IMAGE = {
+export const SCHEMA_MAP_EVENT_IMAGE = {
   type: "object",
   required: [
     "characterIndex",
@@ -18,5 +18,3 @@ const SCHEMA_MAP_EVENT_IMAGE = {
     tileId: { type: "integer" },
   },
 } as const satisfies JSONSchemaType<MapEvent_Image>;
-
-export default SCHEMA_MAP_EVENT_IMAGE;
