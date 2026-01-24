@@ -4,7 +4,7 @@ import type { MoveRouteDataUnkwnown } from "./eventCommand/moveRoute";
 import type { MapEvent_Image } from "./image/types";
 
 export interface MapEventPage<
-  T extends EventCommandUnknown = EventCommandUnknown
+  T extends EventCommandUnknown = EventCommandUnknown,
 > {
   conditions: MapEvent_PageCondition;
   list: T[];
@@ -12,4 +12,5 @@ export interface MapEventPage<
   image: MapEvent_Image;
   moveFrequency: number;
   moveRoute: MoveRouteDataUnkwnown;
+  priorityType: number;
 }
