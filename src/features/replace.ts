@@ -98,6 +98,7 @@ const replaceMapDataTextsCore = (
     displayName: replaceTextByFunction(mapData.displayName, fn),
     events: repleaceMapEventCommands(mapData.events, commandFn),
     data: mapData.data,
+    tilesetId: mapData.tilesetId,
     x: mapData.x,
     y: mapData.y,
     autoplayBgm: mapData.autoplayBgm,

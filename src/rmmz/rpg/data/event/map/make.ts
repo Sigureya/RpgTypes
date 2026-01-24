@@ -18,10 +18,10 @@ export const makeMapData = <
   map: Partial<Data_Map<Command>> = {},
 ): Data_Map<Command> => {
   return {
+    tilesetId: map.tilesetId ?? 1,
     data: map.data ?? [],
     battleback1Name: map.battleback1Name ?? "",
     battleback2Name: map.battleback2Name ?? "",
-
     autoplayBgm: map.autoplayBgm ?? false,
     autoplayBgs: map.autoplayBgs ?? false,
     parallaxLoopX: map.parallaxLoopX ?? false,
