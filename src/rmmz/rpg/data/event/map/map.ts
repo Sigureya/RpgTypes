@@ -8,7 +8,7 @@ import type { Encounter } from "./types/encounter";
 import type { MapEventContainer } from "./types/mapEventContainer";
 
 export interface Data_Map<
-  CommandType extends EventCommandUnknown = EventCommand
+  CommandType extends EventCommandUnknown = EventCommand,
 > extends MapEventContainer<CommandType> {
   data: number[];
   battleback1Name: string;
@@ -37,6 +37,7 @@ export interface Data_Map<
 
   events: Array<MapEvent<CommandType> | null>;
   encounterList: Encounter[];
+  tilesetId: number;
 }
 
 export type Map_ImageFiles = Pick<
