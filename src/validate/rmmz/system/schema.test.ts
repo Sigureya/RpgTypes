@@ -13,7 +13,7 @@ interface RequiredAndProperties {
   properties: Set<string>;
 }
 
-const xxxx = (schema: {
+const getRequiredPropertySets = (schema: {
   required: ReadonlyArray<string>;
   properties: Record<string, unknown>;
 }): RequiredAndProperties => {
@@ -23,33 +23,37 @@ const xxxx = (schema: {
   };
 };
 
-describe("definition has correct required and properties", () => {
+describe("all properties are required", () => {
   test("System", () => {
-    const props = xxxx(SCHEMA_DATA_SYSTEM);
+    const props = getRequiredPropertySets(SCHEMA_DATA_SYSTEM);
     expect(props.required).toEqual(props.properties);
   });
   test("Audio", () => {
-    const props = xxxx(SCHEMA_DATA_SYSTEM.$defs.Audio);
+    const props = getRequiredPropertySets(SCHEMA_DATA_SYSTEM.$defs.Audio);
     expect(props.required).toEqual(props.properties);
   });
   test("Vehicle", () => {
-    const props = xxxx(SCHEMA_DATA_SYSTEM.$defs.Vehicle);
+    const props = getRequiredPropertySets(SCHEMA_DATA_SYSTEM.$defs.Vehicle);
     expect(props.required).toEqual(props.properties);
   });
   test("System_TestBattler ", () => {
-    const props = xxxx(SCHEMA_DATA_SYSTEM.$defs.TestBattler);
+    const props = getRequiredPropertySets(SCHEMA_DATA_SYSTEM.$defs.TestBattler);
     expect(props.required).toEqual(props.properties);
   });
   test("System_Advanced", () => {
-    const props = xxxx(SCHEMA_DATA_SYSTEM.$defs.Advanced);
+    const props = getRequiredPropertySets(SCHEMA_DATA_SYSTEM.$defs.Advanced);
     expect(props.required).toEqual(props.properties);
   });
   test("System_AttackMotion", () => {
-    const props = xxxx(SCHEMA_DATA_SYSTEM.$defs.AttackMotion);
+    const props = getRequiredPropertySets(
+      SCHEMA_DATA_SYSTEM.$defs.AttackMotion,
+    );
     expect(props.required).toEqual(props.properties);
   });
   test("System_ItemCategories", () => {
-    const props = xxxx(SCHEMA_DATA_SYSTEM.$defs.TermsMessages);
+    const props = getRequiredPropertySets(
+      SCHEMA_DATA_SYSTEM.$defs.TermsMessages,
+    );
     expect(props.required).toEqual(props.properties);
   });
 });
