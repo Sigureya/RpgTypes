@@ -24,6 +24,7 @@ export const SCHEMA_MAP_EVENT_PAGE = {
     list: {
       type: "array",
       items: {
+        additionalProperties: false,
         type: "object",
         required: ["code", "parameters", "indent"],
         properties: {
@@ -42,4 +43,4 @@ export const SCHEMA_MAP_EVENT_PAGE = {
     image: SCHEMA_MAP_EVENT_IMAGE,
     moveRoute: SCHEMA_MOVEROUTE_DATA,
   } as const satisfies Record<keyof MapEventPage, Schema>,
-};
+} as const satisfies Schema;

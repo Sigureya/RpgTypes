@@ -10,6 +10,7 @@ export const SCHEMA_DATA_MAP = {
   $defs: {
     AudioFileParams: {
       type: "object",
+      additionalProperties: false,
       required: ["name", "pan", "pitch", "volume"],
       properties: {
         name: { type: "string" },
@@ -21,6 +22,7 @@ export const SCHEMA_DATA_MAP = {
     EncounterList: {
       type: "array",
       items: {
+        additionalProperties: false,
         type: "object",
         required: ["regionSet", "troopId", "weight"],
         properties: {
@@ -59,7 +61,7 @@ export const SCHEMA_DATA_MAP = {
           },
         ],
       },
-    } as const,
+    } as const satisfies Schema,
   },
 
   required: [
