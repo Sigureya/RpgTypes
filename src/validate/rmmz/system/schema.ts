@@ -1,19 +1,5 @@
 import type { AudioFileParams } from "@RpgTypes/libs";
-import type {
-  Data_System,
-  System_Bgm,
-  System_BooleanGameOptions,
-  System_GameEditorBundleRMMZ,
-  System_GameInitial,
-  System_ImageSize,
-  System_Me,
-  System_OtherData,
-  System_RPG_DataNames,
-  System_TextBundle,
-  System_TitleImages,
-  System_Vehicles,
-} from "@RpgTypes/rmmz/system";
-import type { System_Bundle } from "@RpgTypes/rmmz/system/core/bundle";
+import type { Data_System } from "@RpgTypes/rmmz/system";
 import type { JSONSchemaType, Schema } from "ajv";
 import {
   SCHEMA_SYSTEM_ADVANCED,
@@ -26,25 +12,12 @@ import {
   SCHEMA_SYSTEM_TERMS_MESSAGES,
   SCHEMA_SYSTEM_VEHICLE,
 } from "./core";
+import { SCHEMA_SYSTEM_TITLE_COMMAND_WINDOW } from "./core/titleCommandWindow";
 import { SCHEMA_SYSTEM_EDITOR_SETTINGS } from "./gameEdit/editorSetting";
 import { SCHEMA_SYSTEM_TEST_BATTLER } from "./gameEdit/testBattle";
 
-interface System
-  extends
-    System_BooleanGameOptions,
-    System_Vehicles,
-    System_GameInitial,
-    System_ImageSize,
-    System_Bgm,
-    System_Me,
-    System_RPG_DataNames,
-    System_GameEditorBundleRMMZ,
-    System_TextBundle,
-    System_TitleImages,
-    System_OtherData,
-    System_Bundle {}
-
 export const SCHEMA_DATA_SYSTEM = {
+  additionalProperties: true,
   $defs: {
     Audio: {
       type: "object",
@@ -68,6 +41,7 @@ export const SCHEMA_DATA_SYSTEM = {
     TermsBasic: SCHEMA_SYSTEM_MEMBERS_TERMS_BASIC_ARRAY,
     TermsParams: SCHEMA_SYSTEM_PARAM_NAMS_ARRAY,
     TermsMessages: SCHEMA_SYSTEM_TERMS_MESSAGES,
+    TitleCommandWindow: SCHEMA_SYSTEM_TITLE_COMMAND_WINDOW,
   },
   type: "object",
   required: [
@@ -114,7 +88,7 @@ export const SCHEMA_DATA_SYSTEM = {
     "battleback1Name",
     "battleback2Name",
     "testTroopId",
-    "partyMembersArray",
+    "partyMembers",
     "editor",
     "testBattlers",
     "editMapId",
@@ -128,7 +102,8 @@ export const SCHEMA_DATA_SYSTEM = {
     "windowTone",
     "itemCategories",
     "menuCommands",
-  ],
+    "titleCommandWindow",
+  ] satisfies (keyof Data_System)[],
   properties: {
     // Texts
     gameTitle: { type: "string" },
@@ -206,7 +181,7 @@ export const SCHEMA_DATA_SYSTEM = {
     battleback1Name: { type: "string" },
     battleback2Name: { type: "string" },
     testTroopId: { type: "integer", minimum: 0 },
-    partyMembersArray: {
+    partyMembers: {
       type: "array",
       items: { type: "integer" },
     },
@@ -228,5 +203,6 @@ export const SCHEMA_DATA_SYSTEM = {
       type: "array",
       items: { type: "integer", minimum: 0, maximum: 255 },
     },
-  } satisfies Record<keyof (System | Data_System), Schema>,
+    titleCommandWindow: { $ref: "#/$defs/TitleCommandWindow" },
+  } satisfies Record<keyof Data_System, Schema>,
 } as const satisfies Schema;
