@@ -276,6 +276,7 @@ describe("makeSystemData", () => {
         uiAreaHeight: 0,
         uiAreaWidth: 0,
         windowOpacity: 255,
+        picturesUpperLimit: 100,
       },
       battlerHue: 0,
       battlerName: "BattlerName",
@@ -683,6 +684,11 @@ describe("makeSystemData", () => {
         battleSystem: 1,
         magicSkills: [1, 4],
       },
+      titleCommandWindow: {
+        background: 1,
+        offsetX: 120,
+        offsetY: 240,
+      },
     });
     expect(data.locale).toEqual(expected.locale);
     expect(data.advanced).toEqual(expected.advanced);
@@ -696,6 +702,7 @@ describe("makeSystemData", () => {
     expect(data.airship).toEqual(expected.airship);
     expect(data.boat).toEqual(expected.boat);
     expect(data.menuCommands).toEqual(expected.menuCommands);
+    expect(data.titleCommandWindow).toEqual(expected.titleCommandWindow);
     expect(data).toEqual(expected);
   });
 });
