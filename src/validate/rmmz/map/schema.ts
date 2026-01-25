@@ -33,26 +33,31 @@ export const SCHEMA_DATA_MAP = {
     MapEvents: {
       type: "array",
       items: {
-        type: "object",
-        required: [
-          "id",
-          "name",
-          "x",
-          "y",
-          "pages",
-          "note",
-        ] satisfies (keyof MapEvent)[],
-        properties: {
-          id: { type: "integer" },
-          name: { type: "string" },
-          x: { type: "integer" },
-          y: { type: "integer" },
-          note: { type: "string" },
-          pages: {
-            type: "array",
-            items: SCHEMA_MAP_EVENT_PAGE,
+        oneOf: [
+          { type: "null" },
+          {
+            type: "object",
+            required: [
+              "id",
+              "name",
+              "x",
+              "y",
+              "pages",
+              "note",
+            ] satisfies (keyof MapEvent)[],
+            properties: {
+              id: { type: "integer" },
+              name: { type: "string" },
+              x: { type: "integer" },
+              y: { type: "integer" },
+              note: { type: "string" },
+              pages: {
+                type: "array",
+                items: SCHEMA_MAP_EVENT_PAGE,
+              },
+            },
           },
-        },
+        ],
       },
     } as const,
   },

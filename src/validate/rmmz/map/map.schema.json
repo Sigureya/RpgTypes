@@ -30,152 +30,157 @@
     "MapEvents": {
       "type": "array",
       "items": {
-        "required": ["id", "name", "x", "y", "pages", "note"],
-        "type": "object",
-        "properties": {
-          "id": { "type": "integer" },
-          "name": { "type": "string" },
-          "note": { "type": "string" },
-          "pages": {
-            "type": "array",
-            "items": {
-              "required": [
-                "conditions",
-                "image",
-                "list",
-                "moveRoute",
-                "directionFix",
-                "priorityType",
-                "moveFrequency"
-              ],
-              "type": "object",
-              "properties": {
-                "priorityType": { "type": "integer" },
-                "conditions": {
-                  "additionalProperties": false,
+        "oneOf": [
+          { "type": "null" },
+          {
+            "required": ["id", "name", "x", "y", "pages", "note"],
+            "type": "object",
+            "properties": {
+              "id": { "type": "integer" },
+              "name": { "type": "string" },
+              "note": { "type": "string" },
+              "pages": {
+                "type": "array",
+                "items": {
+                  "required": [
+                    "conditions",
+                    "image",
+                    "list",
+                    "moveRoute",
+                    "directionFix",
+                    "priorityType",
+                    "moveFrequency"
+                  ],
                   "type": "object",
-                  "required": [
-                    "switch1Id",
-                    "switch1Valid",
-                    "switch2Id",
-                    "switch2Valid",
-                    "variableId",
-                    "variableValid",
-                    "selfSwitchCh",
-                    "selfSwitchValid",
-                    "variableValue",
-                    "itemId",
-                    "itemValid",
-                    "actorId",
-                    "actorValid"
-                  ],
                   "properties": {
-                    "switch1Id": { "type": "integer", "minimum": 0 },
-                    "switch1Valid": { "type": "boolean" },
-                    "switch2Id": { "type": "integer", "minimum": 0 },
-                    "switch2Valid": { "type": "boolean" },
-                    "variableId": { "type": "integer", "minimum": 0 },
-                    "variableValid": { "type": "boolean" },
-                    "selfSwitchCh": { "type": "string" },
-                    "selfSwitchValid": { "type": "boolean" },
-                    "variableValue": { "type": "integer" },
-                    "itemId": { "type": "integer", "minimum": 0 },
-                    "itemValid": { "type": "boolean" },
-                    "actorId": { "type": "integer" },
-                    "actorValid": { "type": "boolean" }
-                  }
-                },
-                "directionFix": {
-                  "type": "boolean"
-                },
-                "image": {
-                  "additionalProperties": false,
-                  "properties": {
-                    "characterIndex": {
-                      "minimum": 0,
-                      "type": "integer"
+                    "priorityType": { "type": "integer" },
+                    "conditions": {
+                      "additionalProperties": false,
+                      "type": "object",
+                      "required": [
+                        "switch1Id",
+                        "switch1Valid",
+                        "switch2Id",
+                        "switch2Valid",
+                        "variableId",
+                        "variableValid",
+                        "selfSwitchCh",
+                        "selfSwitchValid",
+                        "variableValue",
+                        "itemId",
+                        "itemValid",
+                        "actorId",
+                        "actorValid"
+                      ],
+                      "properties": {
+                        "switch1Id": { "type": "integer", "minimum": 0 },
+                        "switch1Valid": { "type": "boolean" },
+                        "switch2Id": { "type": "integer", "minimum": 0 },
+                        "switch2Valid": { "type": "boolean" },
+                        "variableId": { "type": "integer", "minimum": 0 },
+                        "variableValid": { "type": "boolean" },
+                        "selfSwitchCh": { "type": "string" },
+                        "selfSwitchValid": { "type": "boolean" },
+                        "variableValue": { "type": "integer" },
+                        "itemId": { "type": "integer", "minimum": 0 },
+                        "itemValid": { "type": "boolean" },
+                        "actorId": { "type": "integer" },
+                        "actorValid": { "type": "boolean" }
+                      }
                     },
-                    "characterName": {
-                      "type": "string"
+                    "directionFix": {
+                      "type": "boolean"
                     },
-                    "direction": {
-                      "enum": [2, 4, 6, 8],
-                      "type": "integer"
-                    },
-                    "pattern": { "type": "integer" },
-                    "tileId": { "type": "integer" }
-                  },
-                  "required": [
-                    "characterIndex",
-                    "characterName",
-                    "direction",
-                    "pattern",
-                    "tileId"
-                  ],
-                  "type": "object"
-                },
-                "list": {
-                  "type": "array"
-                },
-                "moveFrequency": {
-                  "type": "integer"
-                },
-                "moveRoute": {
-                  "additionalProperties": false,
-                  "properties": {
-                    "list": {
-                      "items": {
-                        "properties": {
-                          "code": {
-                            "type": "integer"
-                          },
-                          "parameters": {
-                            "items": {
-                              "oneOf": [
-                                {
-                                  "type": "string"
-                                },
-                                {
-                                  "type": "number"
-                                },
-                                {
-                                  "properties": {
-                                    "name": { "type": "string" },
-                                    "pan": { "type": "integer" },
-                                    "pitch": { "type": "integer" },
-                                    "volume": { "type": "integer" }
-                                  },
-                                  "required": [
-                                    "name",
-                                    "pan",
-                                    "pitch",
-                                    "volume"
-                                  ],
-                                  "type": "object"
-                                }
-                              ]
-                            },
-                            "type": "array"
-                          }
+                    "image": {
+                      "additionalProperties": false,
+                      "properties": {
+                        "characterIndex": {
+                          "minimum": 0,
+                          "type": "integer"
                         },
-                        "required": ["code", "parameters"],
-                        "type": "object"
+                        "characterName": {
+                          "type": "string"
+                        },
+                        "direction": {
+                          "enum": [2, 4, 6, 8],
+                          "type": "integer"
+                        },
+                        "pattern": { "type": "integer" },
+                        "tileId": { "type": "integer" }
                       },
+                      "required": [
+                        "characterIndex",
+                        "characterName",
+                        "direction",
+                        "pattern",
+                        "tileId"
+                      ],
+                      "type": "object"
+                    },
+                    "list": {
                       "type": "array"
                     },
-                    "repeat": { "type": "boolean" },
-                    "skippable": { "type": "boolean" },
-                    "wait": { "type": "boolean" }
-                  },
-                  "required": ["wait", "repeat", "skippable", "list"],
-                  "type": "object"
+                    "moveFrequency": {
+                      "type": "integer"
+                    },
+                    "moveRoute": {
+                      "additionalProperties": false,
+                      "properties": {
+                        "list": {
+                          "items": {
+                            "properties": {
+                              "code": {
+                                "type": "integer"
+                              },
+                              "parameters": {
+                                "items": {
+                                  "oneOf": [
+                                    {
+                                      "type": "string"
+                                    },
+                                    {
+                                      "type": "number"
+                                    },
+                                    {
+                                      "properties": {
+                                        "name": { "type": "string" },
+                                        "pan": { "type": "integer" },
+                                        "pitch": { "type": "integer" },
+                                        "volume": { "type": "integer" }
+                                      },
+                                      "required": [
+                                        "name",
+                                        "pan",
+                                        "pitch",
+                                        "volume"
+                                      ],
+                                      "type": "object"
+                                    }
+                                  ]
+                                },
+                                "type": "array"
+                              }
+                            },
+                            "required": ["code", "parameters"],
+                            "type": "object"
+                          },
+                          "type": "array"
+                        },
+                        "repeat": { "type": "boolean" },
+                        "skippable": { "type": "boolean" },
+                        "wait": { "type": "boolean" }
+                      },
+                      "required": ["wait", "repeat", "skippable", "list"],
+                      "type": "object"
+                    }
+                  }
                 }
-              }
+              },
+              "x": { "type": "integer" },
+              "y": { "type": "integer" }
             }
-          },
-          "x": { "type": "integer" },
-          "y": { "type": "integer" }
-        }
+          }
+        ]
       }
     }
   },
