@@ -1,5 +1,6 @@
 export declare const SCHEMA_MOVEROUTE_DATA: {
     readonly type: "object";
+    readonly additionalProperties: false;
     readonly required: readonly ["wait", "repeat", "skippable", "list"];
     readonly properties: {
         readonly wait: {

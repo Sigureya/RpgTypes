@@ -26,6 +26,7 @@ export interface Data_Map<CommandType extends EventCommandUnknown = EventCommand
     autoplayBgs: boolean;
     events: Array<MapEvent<CommandType> | null>;
     encounterList: Encounter[];
+    tilesetId: number;
 }
 export type Map_ImageFiles = Pick<Data_Map, "battleback1Name" | "battleback2Name" | "parallaxName">;
 export type Map_Parallax = Pick<Data_Map, "parallaxLoopX" | "parallaxLoopY" | "parallaxShow" | "parallaxSx" | "parallaxSy">;

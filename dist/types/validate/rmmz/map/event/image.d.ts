@@ -1,6 +1,7 @@
-declare const SCHEMA_MAP_EVENT_IMAGE: {
+export declare const SCHEMA_MAP_EVENT_IMAGE: {
     readonly type: "object";
     readonly required: readonly ["characterIndex", "characterName", "direction", "pattern", "tileId"];
+    readonly additionalProperties: false;
     readonly properties: {
         readonly characterIndex: {
             readonly type: "integer";
@@ -21,4 +22,3 @@ declare const SCHEMA_MAP_EVENT_IMAGE: {
         };
     };
 };
-export default SCHEMA_MAP_EVENT_IMAGE;
