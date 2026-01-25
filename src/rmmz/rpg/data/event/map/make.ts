@@ -33,8 +33,6 @@ export const makeMapData = <
     encounterStep: map.encounterStep ?? 30,
     scrollType: map.scrollType ?? 0,
     specifyBattleback: map.specifyBattleback ?? false,
-    x: map.x ?? 0,
-    y: map.y ?? 0,
     width: map.width ?? 0,
     height: map.height ?? 0,
     note: map.note ?? "",
