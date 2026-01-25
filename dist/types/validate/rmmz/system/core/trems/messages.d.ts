@@ -1,7 +1,7 @@
 export declare const SCHEMA_SYSTEM_TERMS_MESSAGES: {
     readonly type: "object";
     readonly additionalProperties: false;
-    readonly required: readonly ["actionFailure", "actorDamage", "actorNoDamage", "actorRecovery", "actorGain", "actorLoss", "actorDrain", "alwaysDash", "bgmVolume", "bgsVolume", "commandRemember", "criticalToActor", "criticalToEnemy", "counterAttack", "debuffAdd", "defeat", "enemyDamage", "enemyNoDamage", "enemyRecovery", "enemyGain", "enemyLoss", "enemyDrain", "evasion", "expNext", "expTotal", "escapeFailure", "escapeStart", "file", "loadMessage", "meVolume", "magicEvasion", "magicReflection", "obtainExp", "obtainGold", "obtainItem", "obtainSkill", "partyName", "preemptive", "saveMessage", "seVolume", "substitute", "touchUI", "victory", "useItem"];
+    readonly required: readonly ["actionFailure", "actorDamage", "actorDrain", "actorGain", "actorLoss", "actorNoDamage", "actorNoHit", "actorRecovery", "alwaysDash", "autosave", "bgmVolume", "bgsVolume", "buffAdd", "buffRemove", "commandRemember", "counterAttack", "criticalToActor", "criticalToEnemy", "debuffAdd", "defeat", "emerge", "enemyDamage", "enemyDrain", "enemyGain", "enemyLoss", "enemyNoDamage", "enemyNoHit", "enemyRecovery", "escapeFailure", "escapeStart", "evasion", "expNext", "expTotal", "file", "levelUp", "loadMessage", "magicEvasion", "magicReflection", "meVolume", "obtainExp", "obtainGold", "obtainItem", "obtainSkill", "partyName", "possession", "preemptive", "saveMessage", "seVolume", "substitute", "surprise", "touchUI", "useItem", "victory"];
     readonly properties: {
         readonly actionFailure: {
             readonly type: "string";

@@ -272,7 +272,7 @@ export declare const SCHEMA_DATA_SYSTEM: {
         readonly TermsMessages: {
             readonly type: "object";
             readonly additionalProperties: false;
-            readonly required: readonly ["actionFailure", "actorDamage", "actorNoDamage", "actorRecovery", "actorGain", "actorLoss", "actorDrain", "alwaysDash", "bgmVolume", "bgsVolume", "commandRemember", "criticalToActor", "criticalToEnemy", "counterAttack", "debuffAdd", "defeat", "enemyDamage", "enemyNoDamage", "enemyRecovery", "enemyGain", "enemyLoss", "enemyDrain", "evasion", "expNext", "expTotal", "escapeFailure", "escapeStart", "file", "loadMessage", "meVolume", "magicEvasion", "magicReflection", "obtainExp", "obtainGold", "obtainItem", "obtainSkill", "partyName", "preemptive", "saveMessage", "seVolume", "substitute", "touchUI", "victory", "useItem"];
+            readonly required: readonly ["actionFailure", "actorDamage", "actorDrain", "actorGain", "actorLoss", "actorNoDamage", "actorNoHit", "actorRecovery", "alwaysDash", "autosave", "bgmVolume", "bgsVolume", "buffAdd", "buffRemove", "commandRemember", "counterAttack", "criticalToActor", "criticalToEnemy", "debuffAdd", "defeat", "emerge", "enemyDamage", "enemyDrain", "enemyGain", "enemyLoss", "enemyNoDamage", "enemyNoHit", "enemyRecovery", "escapeFailure", "escapeStart", "evasion", "expNext", "expTotal", "file", "levelUp", "loadMessage", "magicEvasion", "magicReflection", "meVolume", "obtainExp", "obtainGold", "obtainItem", "obtainSkill", "partyName", "possession", "preemptive", "saveMessage", "seVolume", "substitute", "surprise", "touchUI", "useItem", "victory"];
             readonly properties: {
                 readonly actionFailure: {
                     readonly type: "string";
@@ -437,7 +437,7 @@ export declare const SCHEMA_DATA_SYSTEM: {
         };
     };
     readonly type: "object";
-    readonly required: readonly ["gameTitle", "currencyUnit", "terms", "ship", "boat", "airship", "advanced", "titleBgm", "battleBgm", "gameoverMe", "victoryMe", "defeatMe", "attackMotions", "optAutosave", "optDisplayTp", "optFloorDeath", "optFollowers", "optKeyItemsNumber", "optSideView", "optSlipDeath", "optTransparent", "optSplashScreen", "optDrawTitle", "optExtraExp", "optMessageSkip", "startMapId", "startX", "startY", "faceSize", "tileSize", "iconSize", "battleSystem", "elements", "weaponTypes", "armorTypes", "equipTypes", "skillTypes", "switches", "variables", "magicSkills", "battleback1Name", "battleback2Name", "testTroopId", "partyMembersArray", "editor", "testBattlers", "editMapId", "battlerHue", "battlerName", "sounds", "title1Name", "title2Name", "versionId", "locale", "windowTone"];
+    readonly required: readonly ["gameTitle", "currencyUnit", "terms", "ship", "boat", "airship", "advanced", "titleBgm", "battleBgm", "gameoverMe", "victoryMe", "defeatMe", "attackMotions", "optAutosave", "optDisplayTp", "optFloorDeath", "optFollowers", "optKeyItemsNumber", "optSideView", "optSlipDeath", "optTransparent", "optSplashScreen", "optDrawTitle", "optExtraExp", "optMessageSkip", "startMapId", "startX", "startY", "faceSize", "tileSize", "iconSize", "battleSystem", "elements", "weaponTypes", "armorTypes", "equipTypes", "skillTypes", "switches", "variables", "magicSkills", "battleback1Name", "battleback2Name", "testTroopId", "partyMembersArray", "editor", "testBattlers", "editMapId", "battlerHue", "battlerName", "sounds", "title1Name", "title2Name", "versionId", "locale", "windowTone", "itemCategories", "menuCommands"];
     readonly properties: {
         gameTitle: {
             type: string;

@@ -1,13 +1,13 @@
 import { g as U } from "../../shared/_commonjsHelpers.es.js";
-var L, R, E = { exports: {} }, O = {};
+var R, H, E = { exports: {} }, O = {};
 const K = U(function() {
-  if (R) return E.exports;
-  R = 1, E.exports = s, E.exports.default = s;
+  if (H) return E.exports;
+  H = 1, E.exports = s, E.exports.default = s;
   const M = {
     properties: { gameId: { type: "integer" }, screenWidth: { type: "integer" }, screenHeight: { type: "integer" }, uiAreaWidth: { type: "integer" }, uiAreaHeight: { type: "integer" }, windowOpacity: {
       type: "integer"
     }, screenScale: { type: "number" }, numberFontFilename: { type: "string" }, mainFontFilename: { type: "string" }, fallbackFonts: { type: "string" }, fontSize: { type: "integer" } }
-  }, z = {
+  }, L = {
     properties: {
       actionFailure: { type: "string" },
       actorDamage: { type: "string" },
@@ -74,20 +74,20 @@ const K = U(function() {
       victory: { type: "string" }
     }
   }, W = Object.prototype.hasOwnProperty, q = function() {
-    if (L) return O;
+    if (R) return O;
     function i(r) {
       const X = r.length;
       let D, Y = 0, m = 0;
       for (; m < X; ) Y++, D = r.charCodeAt(m++), D >= 55296 && D <= 56319 && m < X && (D = r.charCodeAt(m), (64512 & D) == 56320 && m++);
       return Y;
     }
-    return L = 1, Object.defineProperty(O, "__esModule", { value: !0 }), O.default = i, i.code = 'require("ajv/dist/runtime/ucs2length").default', O;
+    return R = 1, Object.defineProperty(O, "__esModule", { value: !0 }), O.default = i, i.code = 'require("ajv/dist/runtime/ucs2length").default', O;
   }().default;
   function s(i, { instancePath: r = "", parentData: X, parentDataProperty: D, rootData: Y = i } = {}) {
     if (!i || typeof i != "object" || Array.isArray(i)) return s.errors = [{ instancePath: r, schemaPath: "#/type", keyword: "type", params: { type: "object" }, message: "must be object" }], !1;
     {
       let h;
-      if (i.gameTitle === void 0 && (h = "gameTitle") || i.currencyUnit === void 0 && (h = "currencyUnit") || i.terms === void 0 && (h = "terms") || i.ship === void 0 && (h = "ship") || i.boat === void 0 && (h = "boat") || i.airship === void 0 && (h = "airship") || i.advanced === void 0 && (h = "advanced") || i.titleBgm === void 0 && (h = "titleBgm") || i.battleBgm === void 0 && (h = "battleBgm") || i.gameoverMe === void 0 && (h = "gameoverMe") || i.victoryMe === void 0 && (h = "victoryMe") || i.defeatMe === void 0 && (h = "defeatMe") || i.attackMotions === void 0 && (h = "attackMotions") || i.optAutosave === void 0 && (h = "optAutosave") || i.optDisplayTp === void 0 && (h = "optDisplayTp") || i.optFloorDeath === void 0 && (h = "optFloorDeath") || i.optFollowers === void 0 && (h = "optFollowers") || i.optKeyItemsNumber === void 0 && (h = "optKeyItemsNumber") || i.optSideView === void 0 && (h = "optSideView") || i.optSlipDeath === void 0 && (h = "optSlipDeath") || i.optTransparent === void 0 && (h = "optTransparent") || i.optSplashScreen === void 0 && (h = "optSplashScreen") || i.optDrawTitle === void 0 && (h = "optDrawTitle") || i.optExtraExp === void 0 && (h = "optExtraExp") || i.optMessageSkip === void 0 && (h = "optMessageSkip") || i.startMapId === void 0 && (h = "startMapId") || i.startX === void 0 && (h = "startX") || i.startY === void 0 && (h = "startY") || i.faceSize === void 0 && (h = "faceSize") || i.tileSize === void 0 && (h = "tileSize") || i.iconSize === void 0 && (h = "iconSize") || i.battleSystem === void 0 && (h = "battleSystem") || i.elements === void 0 && (h = "elements") || i.weaponTypes === void 0 && (h = "weaponTypes") || i.armorTypes === void 0 && (h = "armorTypes") || i.equipTypes === void 0 && (h = "equipTypes") || i.skillTypes === void 0 && (h = "skillTypes") || i.switches === void 0 && (h = "switches") || i.variables === void 0 && (h = "variables") || i.magicSkills === void 0 && (h = "magicSkills") || i.battleback1Name === void 0 && (h = "battleback1Name") || i.battleback2Name === void 0 && (h = "battleback2Name") || i.testTroopId === void 0 && (h = "testTroopId") || i.partyMembersArray === void 0 && (h = "partyMembersArray") || i.editor === void 0 && (h = "editor") || i.testBattlers === void 0 && (h = "testBattlers") || i.editMapId === void 0 && (h = "editMapId") || i.battlerHue === void 0 && (h = "battlerHue") || i.battlerName === void 0 && (h = "battlerName") || i.sounds === void 0 && (h = "sounds") || i.title1Name === void 0 && (h = "title1Name") || i.title2Name === void 0 && (h = "title2Name") || i.versionId === void 0 && (h = "versionId") || i.locale === void 0 && (h = "locale") || i.windowTone === void 0 && (h = "windowTone")) return s.errors = [{
+      if (i.gameTitle === void 0 && (h = "gameTitle") || i.currencyUnit === void 0 && (h = "currencyUnit") || i.terms === void 0 && (h = "terms") || i.ship === void 0 && (h = "ship") || i.boat === void 0 && (h = "boat") || i.airship === void 0 && (h = "airship") || i.advanced === void 0 && (h = "advanced") || i.titleBgm === void 0 && (h = "titleBgm") || i.battleBgm === void 0 && (h = "battleBgm") || i.gameoverMe === void 0 && (h = "gameoverMe") || i.victoryMe === void 0 && (h = "victoryMe") || i.defeatMe === void 0 && (h = "defeatMe") || i.attackMotions === void 0 && (h = "attackMotions") || i.optAutosave === void 0 && (h = "optAutosave") || i.optDisplayTp === void 0 && (h = "optDisplayTp") || i.optFloorDeath === void 0 && (h = "optFloorDeath") || i.optFollowers === void 0 && (h = "optFollowers") || i.optKeyItemsNumber === void 0 && (h = "optKeyItemsNumber") || i.optSideView === void 0 && (h = "optSideView") || i.optSlipDeath === void 0 && (h = "optSlipDeath") || i.optTransparent === void 0 && (h = "optTransparent") || i.optSplashScreen === void 0 && (h = "optSplashScreen") || i.optDrawTitle === void 0 && (h = "optDrawTitle") || i.optExtraExp === void 0 && (h = "optExtraExp") || i.optMessageSkip === void 0 && (h = "optMessageSkip") || i.startMapId === void 0 && (h = "startMapId") || i.startX === void 0 && (h = "startX") || i.startY === void 0 && (h = "startY") || i.faceSize === void 0 && (h = "faceSize") || i.tileSize === void 0 && (h = "tileSize") || i.iconSize === void 0 && (h = "iconSize") || i.battleSystem === void 0 && (h = "battleSystem") || i.elements === void 0 && (h = "elements") || i.weaponTypes === void 0 && (h = "weaponTypes") || i.armorTypes === void 0 && (h = "armorTypes") || i.equipTypes === void 0 && (h = "equipTypes") || i.skillTypes === void 0 && (h = "skillTypes") || i.switches === void 0 && (h = "switches") || i.variables === void 0 && (h = "variables") || i.magicSkills === void 0 && (h = "magicSkills") || i.battleback1Name === void 0 && (h = "battleback1Name") || i.battleback2Name === void 0 && (h = "battleback2Name") || i.testTroopId === void 0 && (h = "testTroopId") || i.partyMembersArray === void 0 && (h = "partyMembersArray") || i.editor === void 0 && (h = "editor") || i.testBattlers === void 0 && (h = "testBattlers") || i.editMapId === void 0 && (h = "editMapId") || i.battlerHue === void 0 && (h = "battlerHue") || i.battlerName === void 0 && (h = "battlerName") || i.sounds === void 0 && (h = "sounds") || i.title1Name === void 0 && (h = "title1Name") || i.title2Name === void 0 && (h = "title2Name") || i.versionId === void 0 && (h = "versionId") || i.locale === void 0 && (h = "locale") || i.windowTone === void 0 && (h = "windowTone") || i.itemCategories === void 0 && (h = "itemCategories") || i.menuCommands === void 0 && (h = "menuCommands")) return s.errors = [{
         instancePath: r,
         schemaPath: "#/required",
         keyword: "required",
@@ -127,13 +127,13 @@ const K = U(function() {
               message: "must be object"
             }], !1;
             {
-              let p;
-              if (t.messageWidth1 === void 0 && (p = "messageWidth1") || t.messageWidth2 === void 0 && (p = "messageWidth2") || t.jsonFormatLevel === void 0 && (p = "jsonFormatLevel")) return s.errors = [{
+              let d;
+              if (t.messageWidth1 === void 0 && (d = "messageWidth1") || t.messageWidth2 === void 0 && (d = "messageWidth2") || t.jsonFormatLevel === void 0 && (d = "jsonFormatLevel")) return s.errors = [{
                 instancePath: r + "/editor",
                 schemaPath: "#/$defs/Editor/required",
                 keyword: "required",
-                params: { missingProperty: p },
-                message: "must have required property '" + p + "'"
+                params: { missingProperty: d },
+                message: "must have required property '" + d + "'"
               }], !1;
               for (const e in t) if (e !== "messageWidth1" && e !== "messageWidth2" && e !== "jsonFormatLevel") return s.errors = [{
                 instancePath: r + "/editor",
@@ -234,13 +234,13 @@ const K = U(function() {
                 message: "must be object"
               }], !1;
               {
-                let p;
-                if (t.gameId === void 0 && (p = "gameId") || t.screenWidth === void 0 && (p = "screenWidth") || t.screenHeight === void 0 && (p = "screenHeight") || t.uiAreaWidth === void 0 && (p = "uiAreaWidth") || t.uiAreaHeight === void 0 && (p = "uiAreaHeight") || t.windowOpacity === void 0 && (p = "windowOpacity") || t.screenScale === void 0 && (p = "screenScale") || t.numberFontFilename === void 0 && (p = "numberFontFilename") || t.mainFontFilename === void 0 && (p = "mainFontFilename") || t.fallbackFonts === void 0 && (p = "fallbackFonts") || t.fontSize === void 0 && (p = "fontSize")) return s.errors = [{
+                let d;
+                if (t.gameId === void 0 && (d = "gameId") || t.screenWidth === void 0 && (d = "screenWidth") || t.screenHeight === void 0 && (d = "screenHeight") || t.uiAreaWidth === void 0 && (d = "uiAreaWidth") || t.uiAreaHeight === void 0 && (d = "uiAreaHeight") || t.windowOpacity === void 0 && (d = "windowOpacity") || t.screenScale === void 0 && (d = "screenScale") || t.numberFontFilename === void 0 && (d = "numberFontFilename") || t.mainFontFilename === void 0 && (d = "mainFontFilename") || t.fallbackFonts === void 0 && (d = "fallbackFonts") || t.fontSize === void 0 && (d = "fontSize")) return s.errors = [{
                   instancePath: r + "/advanced",
                   schemaPath: "#/$defs/Advanced/required",
                   keyword: "required",
-                  params: { missingProperty: p },
-                  message: "must have required property '" + p + "'"
+                  params: { missingProperty: d },
+                  message: "must have required property '" + d + "'"
                 }], !1;
                 for (const e in t) if (!W.call(M.properties, e)) return s.errors = [{ instancePath: r + "/advanced", schemaPath: "#/$defs/Advanced/additionalProperties", keyword: "additionalProperties", params: {
                   additionalProperty: e
@@ -396,10 +396,10 @@ const K = U(function() {
                   message: "must be array"
                 }], !1;
                 {
-                  const p = t.length;
-                  for (let e = 0; e < p; e++) {
+                  const d = t.length;
+                  for (let e = 0; e < d; e++) {
                     let o = t[e];
-                    const d = 0;
+                    const p = 0;
                     if (!o || typeof o != "object" || Array.isArray(o)) return s.errors = [{
                       instancePath: r + "/attackMotions/" + e,
                       schemaPath: "#/$defs/AttackMotion/type",
@@ -444,7 +444,7 @@ const K = U(function() {
                         j = g === 0;
                       } else j = !0;
                     }
-                    if (d !== 0) break;
+                    if (p !== 0) break;
                   }
                 }
                 m = c === 0;
@@ -461,13 +461,13 @@ const K = U(function() {
                     message: "must be object"
                   }], !1;
                   {
-                    let p;
-                    if (t.name === void 0 && (p = "name") || t.volume === void 0 && (p = "volume") || t.pitch === void 0 && (p = "pitch") || t.pan === void 0 && (p = "pan")) return s.errors = [{
+                    let d;
+                    if (t.name === void 0 && (d = "name") || t.volume === void 0 && (d = "volume") || t.pitch === void 0 && (d = "pitch") || t.pan === void 0 && (d = "pan")) return s.errors = [{
                       instancePath: r + "/titleBgm",
                       schemaPath: "#/$defs/Audio/required",
                       keyword: "required",
-                      params: { missingProperty: p },
-                      message: "must have required property '" + p + "'"
+                      params: { missingProperty: d },
+                      message: "must have required property '" + d + "'"
                     }], !1;
                     for (const e in t) if (e !== "name" && e !== "volume" && e !== "pitch" && e !== "pan") return s.errors = [{
                       instancePath: r + "/titleBgm",
@@ -586,13 +586,13 @@ const K = U(function() {
                       message: "must be object"
                     }], !1;
                     {
-                      let p;
-                      if (t.name === void 0 && (p = "name") || t.volume === void 0 && (p = "volume") || t.pitch === void 0 && (p = "pitch") || t.pan === void 0 && (p = "pan")) return s.errors = [{
+                      let d;
+                      if (t.name === void 0 && (d = "name") || t.volume === void 0 && (d = "volume") || t.pitch === void 0 && (d = "pitch") || t.pan === void 0 && (d = "pan")) return s.errors = [{
                         instancePath: r + "/battleBgm",
                         schemaPath: "#/$defs/Audio/required",
                         keyword: "required",
-                        params: { missingProperty: p },
-                        message: "must have required property '" + p + "'"
+                        params: { missingProperty: d },
+                        message: "must have required property '" + d + "'"
                       }], !1;
                       for (const e in t) if (e !== "name" && e !== "volume" && e !== "pitch" && e !== "pan") return s.errors = [{
                         instancePath: r + "/battleBgm",
@@ -711,13 +711,13 @@ const K = U(function() {
                         message: "must be object"
                       }], !1;
                       {
-                        let p;
-                        if (t.name === void 0 && (p = "name") || t.volume === void 0 && (p = "volume") || t.pitch === void 0 && (p = "pitch") || t.pan === void 0 && (p = "pan")) return s.errors = [{
+                        let d;
+                        if (t.name === void 0 && (d = "name") || t.volume === void 0 && (d = "volume") || t.pitch === void 0 && (d = "pitch") || t.pan === void 0 && (d = "pan")) return s.errors = [{
                           instancePath: r + "/gameoverMe",
                           schemaPath: "#/$defs/Audio/required",
                           keyword: "required",
-                          params: { missingProperty: p },
-                          message: "must have required property '" + p + "'"
+                          params: { missingProperty: d },
+                          message: "must have required property '" + d + "'"
                         }], !1;
                         for (const e in t) if (e !== "name" && e !== "volume" && e !== "pitch" && e !== "pan") return s.errors = [{
                           instancePath: r + "/gameoverMe",
@@ -836,13 +836,13 @@ const K = U(function() {
                           message: "must be object"
                         }], !1;
                         {
-                          let p;
-                          if (t.name === void 0 && (p = "name") || t.volume === void 0 && (p = "volume") || t.pitch === void 0 && (p = "pitch") || t.pan === void 0 && (p = "pan")) return s.errors = [{
+                          let d;
+                          if (t.name === void 0 && (d = "name") || t.volume === void 0 && (d = "volume") || t.pitch === void 0 && (d = "pitch") || t.pan === void 0 && (d = "pan")) return s.errors = [{
                             instancePath: r + "/victoryMe",
                             schemaPath: "#/$defs/Audio/required",
                             keyword: "required",
-                            params: { missingProperty: p },
-                            message: "must have required property '" + p + "'"
+                            params: { missingProperty: d },
+                            message: "must have required property '" + d + "'"
                           }], !1;
                           for (const e in t) if (e !== "name" && e !== "volume" && e !== "pitch" && e !== "pan") return s.errors = [{
                             instancePath: r + "/victoryMe",
@@ -961,13 +961,13 @@ const K = U(function() {
                             message: "must be object"
                           }], !1;
                           {
-                            let p;
-                            if (t.name === void 0 && (p = "name") || t.volume === void 0 && (p = "volume") || t.pitch === void 0 && (p = "pitch") || t.pan === void 0 && (p = "pan")) return s.errors = [{
+                            let d;
+                            if (t.name === void 0 && (d = "name") || t.volume === void 0 && (d = "volume") || t.pitch === void 0 && (d = "pitch") || t.pan === void 0 && (d = "pan")) return s.errors = [{
                               instancePath: r + "/defeatMe",
                               schemaPath: "#/$defs/Audio/required",
                               keyword: "required",
-                              params: { missingProperty: p },
-                              message: "must have required property '" + p + "'"
+                              params: { missingProperty: d },
+                              message: "must have required property '" + d + "'"
                             }], !1;
                             for (const e in t) if (e !== "name" && e !== "volume" && e !== "pitch" && e !== "pan") return s.errors = [{
                               instancePath: r + "/defeatMe",
@@ -1094,10 +1094,10 @@ const K = U(function() {
                               message: "must NOT have fewer than 24 items"
                             }], !1;
                             {
-                              const p = t.length;
-                              for (let e = 0; e < p; e++) {
+                              const d = t.length;
+                              for (let e = 0; e < d; e++) {
                                 let o = t[e];
-                                const d = 0;
+                                const p = 0;
                                 if (!o || typeof o != "object" || Array.isArray(o)) return s.errors = [{
                                   instancePath: r + "/sounds/" + e,
                                   schemaPath: "#/$defs/Audio/type",
@@ -1129,9 +1129,9 @@ const K = U(function() {
                                       params: { type: "string" },
                                       message: "must be string"
                                     }], !1;
-                                    var T = !0;
-                                  } else T = !0;
-                                  if (T) {
+                                    var A = !0;
+                                  } else A = !0;
+                                  if (A) {
                                     if (o.volume !== void 0) {
                                       let y = o.volume;
                                       const g = 0;
@@ -1158,9 +1158,9 @@ const K = U(function() {
                                           message: "must be >= 0"
                                         }], !1;
                                       }
-                                      T = g === 0;
-                                    } else T = !0;
-                                    if (T) {
+                                      A = g === 0;
+                                    } else A = !0;
+                                    if (A) {
                                       if (o.pitch !== void 0) {
                                         let y = o.pitch;
                                         const g = 0;
@@ -1187,9 +1187,9 @@ const K = U(function() {
                                             message: "must be >= 50"
                                           }], !1;
                                         }
-                                        T = g === 0;
-                                      } else T = !0;
-                                      if (T) if (o.pan !== void 0) {
+                                        A = g === 0;
+                                      } else A = !0;
+                                      if (A) if (o.pan !== void 0) {
                                         let y = o.pan;
                                         const g = 0;
                                         if (typeof y != "number" || y % 1 || isNaN(y) || !isFinite(y)) return s.errors = [{
@@ -1212,12 +1212,12 @@ const K = U(function() {
                                             limit: -100
                                           }, message: "must be >= -100" }], !1;
                                         }
-                                        T = g === 0;
-                                      } else T = !0;
+                                        A = g === 0;
+                                      } else A = !0;
                                     }
                                   }
                                 }
-                                if (d !== 0) break;
+                                if (p !== 0) break;
                               }
                             }
                             m = c === 0;
@@ -1248,8 +1248,8 @@ const K = U(function() {
                                 message: "must NOT have fewer than 4 items"
                               }], !1;
                               {
-                                const p = t.length;
-                                for (let e = 0; e < p; e++)
+                                const d = t.length;
+                                for (let e = 0; e < d; e++)
                                   if (typeof t[e] != "boolean") return s.errors = [{
                                     instancePath: r + "/itemCategories/" + e,
                                     schemaPath: "#/$defs/ItemCategories/items/type",
@@ -1286,8 +1286,8 @@ const K = U(function() {
                                   message: "must NOT have fewer than 6 items"
                                 }], !1;
                                 {
-                                  const p = t.length;
-                                  for (let e = 0; e < p; e++)
+                                  const d = t.length;
+                                  for (let e = 0; e < d; e++)
                                     if (typeof t[e] != "boolean") return s.errors = [{ instancePath: r + "/menuCommands/" + e, schemaPath: "#/$defs/MenuCommands/items/type", keyword: "type", params: {
                                       type: "boolean"
                                     }, message: "must be boolean" }], !1;
@@ -1306,13 +1306,13 @@ const K = U(function() {
                                     message: "must be object"
                                   }], !1;
                                   {
-                                    let p;
-                                    if (t.characterIndex === void 0 && (p = "characterIndex") || t.characterName === void 0 && (p = "characterName") || t.bgm === void 0 && (p = "bgm") || t.startMapId === void 0 && (p = "startMapId") || t.startX === void 0 && (p = "startX") || t.startY === void 0 && (p = "startY")) return s.errors = [{
+                                    let d;
+                                    if (t.characterIndex === void 0 && (d = "characterIndex") || t.characterName === void 0 && (d = "characterName") || t.bgm === void 0 && (d = "bgm") || t.startMapId === void 0 && (d = "startMapId") || t.startX === void 0 && (d = "startX") || t.startY === void 0 && (d = "startY")) return s.errors = [{
                                       instancePath: r + "/ship",
                                       schemaPath: "#/$defs/Vehicle/required",
                                       keyword: "required",
-                                      params: { missingProperty: p },
-                                      message: "must have required property '" + p + "'"
+                                      params: { missingProperty: d },
+                                      message: "must have required property '" + d + "'"
                                     }], !1;
                                     for (const e in t) if (e !== "characterIndex" && e !== "characterName" && e !== "bgm" && e !== "startMapId" && e !== "startX" && e !== "startY") return s.errors = [{
                                       instancePath: r + "/ship",
@@ -1378,13 +1378,13 @@ const K = U(function() {
                                             message: "must be object"
                                           }], !1;
                                           {
-                                            let d;
-                                            if (e.name === void 0 && (d = "name") || e.volume === void 0 && (d = "volume") || e.pitch === void 0 && (d = "pitch") || e.pan === void 0 && (d = "pan")) return s.errors = [{
+                                            let p;
+                                            if (e.name === void 0 && (p = "name") || e.volume === void 0 && (p = "volume") || e.pitch === void 0 && (p = "pitch") || e.pan === void 0 && (p = "pan")) return s.errors = [{
                                               instancePath: r + "/ship/bgm",
                                               schemaPath: "#/$defs/Vehicle/properties/bgm/required",
                                               keyword: "required",
-                                              params: { missingProperty: d },
-                                              message: "must have required property '" + d + "'"
+                                              params: { missingProperty: p },
+                                              message: "must have required property '" + p + "'"
                                             }], !1;
                                             for (const a in e) if (a !== "name" && a !== "volume" && a !== "pitch" && a !== "pan") return s.errors = [{
                                               instancePath: r + "/ship/bgm",
@@ -1397,9 +1397,9 @@ const K = U(function() {
                                               if (typeof e.name != "string") return s.errors = [{ instancePath: r + "/ship/bgm/name", schemaPath: "#/$defs/Vehicle/properties/bgm/properties/name/type", keyword: "type", params: {
                                                 type: "string"
                                               }, message: "must be string" }], !1;
-                                              var A = !0;
-                                            } else A = !0;
-                                            if (A) {
+                                              var T = !0;
+                                            } else T = !0;
+                                            if (T) {
                                               if (e.volume !== void 0) {
                                                 let a = e.volume;
                                                 const y = 0;
@@ -1426,9 +1426,9 @@ const K = U(function() {
                                                     message: "must be >= 0"
                                                   }], !1;
                                                 }
-                                                A = y === 0;
-                                              } else A = !0;
-                                              if (A) {
+                                                T = y === 0;
+                                              } else T = !0;
+                                              if (T) {
                                                 if (e.pitch !== void 0) {
                                                   let a = e.pitch;
                                                   const y = 0;
@@ -1452,9 +1452,9 @@ const K = U(function() {
                                                       message: "must be >= 50"
                                                     }], !1;
                                                   }
-                                                  A = y === 0;
-                                                } else A = !0;
-                                                if (A) if (e.pan !== void 0) {
+                                                  T = y === 0;
+                                                } else T = !0;
+                                                if (T) if (e.pan !== void 0) {
                                                   let a = e.pan;
                                                   const y = 0;
                                                   if (typeof a != "number" || a % 1 || isNaN(a) || !isFinite(a)) return s.errors = [{
@@ -1477,8 +1477,8 @@ const K = U(function() {
                                                       message: "must be >= -100"
                                                     }], !1;
                                                   }
-                                                  A = y === 0;
-                                                } else A = !0;
+                                                  T = y === 0;
+                                                } else T = !0;
                                               }
                                             }
                                           }
@@ -1573,13 +1573,13 @@ const K = U(function() {
                                       message: "must be object"
                                     }], !1;
                                     {
-                                      let p;
-                                      if (t.characterIndex === void 0 && (p = "characterIndex") || t.characterName === void 0 && (p = "characterName") || t.bgm === void 0 && (p = "bgm") || t.startMapId === void 0 && (p = "startMapId") || t.startX === void 0 && (p = "startX") || t.startY === void 0 && (p = "startY")) return s.errors = [{
+                                      let d;
+                                      if (t.characterIndex === void 0 && (d = "characterIndex") || t.characterName === void 0 && (d = "characterName") || t.bgm === void 0 && (d = "bgm") || t.startMapId === void 0 && (d = "startMapId") || t.startX === void 0 && (d = "startX") || t.startY === void 0 && (d = "startY")) return s.errors = [{
                                         instancePath: r + "/boat",
                                         schemaPath: "#/$defs/Vehicle/required",
                                         keyword: "required",
-                                        params: { missingProperty: p },
-                                        message: "must have required property '" + p + "'"
+                                        params: { missingProperty: d },
+                                        message: "must have required property '" + d + "'"
                                       }], !1;
                                       for (const e in t) if (e !== "characterIndex" && e !== "characterName" && e !== "bgm" && e !== "startMapId" && e !== "startX" && e !== "startY") return s.errors = [{
                                         instancePath: r + "/boat",
@@ -1645,13 +1645,13 @@ const K = U(function() {
                                               message: "must be object"
                                             }], !1;
                                             {
-                                              let d;
-                                              if (e.name === void 0 && (d = "name") || e.volume === void 0 && (d = "volume") || e.pitch === void 0 && (d = "pitch") || e.pan === void 0 && (d = "pan")) return s.errors = [{
+                                              let p;
+                                              if (e.name === void 0 && (p = "name") || e.volume === void 0 && (p = "volume") || e.pitch === void 0 && (p = "pitch") || e.pan === void 0 && (p = "pan")) return s.errors = [{
                                                 instancePath: r + "/boat/bgm",
                                                 schemaPath: "#/$defs/Vehicle/properties/bgm/required",
                                                 keyword: "required",
-                                                params: { missingProperty: d },
-                                                message: "must have required property '" + d + "'"
+                                                params: { missingProperty: p },
+                                                message: "must have required property '" + p + "'"
                                               }], !1;
                                               for (const a in e) if (a !== "name" && a !== "volume" && a !== "pitch" && a !== "pan") return s.errors = [{
                                                 instancePath: r + "/boat/bgm",
@@ -1840,13 +1840,13 @@ const K = U(function() {
                                         message: "must be object"
                                       }], !1;
                                       {
-                                        let p;
-                                        if (t.characterIndex === void 0 && (p = "characterIndex") || t.characterName === void 0 && (p = "characterName") || t.bgm === void 0 && (p = "bgm") || t.startMapId === void 0 && (p = "startMapId") || t.startX === void 0 && (p = "startX") || t.startY === void 0 && (p = "startY")) return s.errors = [{
+                                        let d;
+                                        if (t.characterIndex === void 0 && (d = "characterIndex") || t.characterName === void 0 && (d = "characterName") || t.bgm === void 0 && (d = "bgm") || t.startMapId === void 0 && (d = "startMapId") || t.startX === void 0 && (d = "startX") || t.startY === void 0 && (d = "startY")) return s.errors = [{
                                           instancePath: r + "/airship",
                                           schemaPath: "#/$defs/Vehicle/required",
                                           keyword: "required",
-                                          params: { missingProperty: p },
-                                          message: "must have required property '" + p + "'"
+                                          params: { missingProperty: d },
+                                          message: "must have required property '" + d + "'"
                                         }], !1;
                                         for (const e in t) if (e !== "characterIndex" && e !== "characterName" && e !== "bgm" && e !== "startMapId" && e !== "startX" && e !== "startY") return s.errors = [{
                                           instancePath: r + "/airship",
@@ -1912,13 +1912,13 @@ const K = U(function() {
                                                 message: "must be object"
                                               }], !1;
                                               {
-                                                let d;
-                                                if (e.name === void 0 && (d = "name") || e.volume === void 0 && (d = "volume") || e.pitch === void 0 && (d = "pitch") || e.pan === void 0 && (d = "pan")) return s.errors = [{
+                                                let p;
+                                                if (e.name === void 0 && (p = "name") || e.volume === void 0 && (p = "volume") || e.pitch === void 0 && (p = "pitch") || e.pan === void 0 && (p = "pan")) return s.errors = [{
                                                   instancePath: r + "/airship/bgm",
                                                   schemaPath: "#/$defs/Vehicle/properties/bgm/required",
                                                   keyword: "required",
-                                                  params: { missingProperty: d },
-                                                  message: "must have required property '" + d + "'"
+                                                  params: { missingProperty: p },
+                                                  message: "must have required property '" + p + "'"
                                                 }], !1;
                                                 for (const a in e) if (a !== "name" && a !== "volume" && a !== "pitch" && a !== "pan") return s.errors = [{
                                                   instancePath: r + "/airship/bgm",
@@ -2108,10 +2108,10 @@ const K = U(function() {
                                           message: "must be array"
                                         }], !1;
                                         {
-                                          const p = t.length;
-                                          for (let e = 0; e < p; e++) {
+                                          const d = t.length;
+                                          for (let e = 0; e < d; e++) {
                                             let o = t[e];
-                                            const d = 0;
+                                            const p = 0;
                                             if (!o || typeof o != "object" || Array.isArray(o)) return s.errors = [{
                                               instancePath: r + "/testBattlers/" + e,
                                               schemaPath: "#/$defs/TestBattler/type",
@@ -2166,8 +2166,8 @@ const K = U(function() {
                                                     message: "must be array"
                                                   }], !1;
                                                   {
-                                                    const H = y.length;
-                                                    for (let B = 0; B < H; B++) {
+                                                    const z = y.length;
+                                                    for (let B = 0; B < z; B++) {
                                                       let C = y[B];
                                                       const G = 0;
                                                       if (typeof C != "number" || C % 1 || isNaN(C) || !isFinite(C)) return s.errors = [{
@@ -2203,7 +2203,7 @@ const K = U(function() {
                                                 } else S = !0;
                                               }
                                             }
-                                            if (d !== 0) break;
+                                            if (p !== 0) break;
                                           }
                                         }
                                         m = c === 0;
@@ -2220,13 +2220,13 @@ const K = U(function() {
                                             message: "must be object"
                                           }], !1;
                                           {
-                                            let p;
-                                            if (t.messages === void 0 && (p = "messages") || t.commands === void 0 && (p = "commands") || t.basic === void 0 && (p = "basic") || t.params === void 0 && (p = "params")) return s.errors = [{
+                                            let d;
+                                            if (t.messages === void 0 && (d = "messages") || t.commands === void 0 && (d = "commands") || t.basic === void 0 && (d = "basic") || t.params === void 0 && (d = "params")) return s.errors = [{
                                               instancePath: r + "/terms",
                                               schemaPath: "#/properties/terms/required",
                                               keyword: "required",
-                                              params: { missingProperty: p },
-                                              message: "must have required property '" + p + "'"
+                                              params: { missingProperty: d },
+                                              message: "must have required property '" + d + "'"
                                             }], !1;
                                             for (const e in t) if (e !== "messages" && e !== "commands" && e !== "basic" && e !== "params") return s.errors = [{
                                               instancePath: r + "/terms",
@@ -2246,15 +2246,15 @@ const K = U(function() {
                                                 message: "must be object"
                                               }], !1;
                                               {
-                                                let d;
-                                                if (e.actionFailure === void 0 && (d = "actionFailure") || e.actorDamage === void 0 && (d = "actorDamage") || e.actorNoDamage === void 0 && (d = "actorNoDamage") || e.actorRecovery === void 0 && (d = "actorRecovery") || e.actorGain === void 0 && (d = "actorGain") || e.actorLoss === void 0 && (d = "actorLoss") || e.actorDrain === void 0 && (d = "actorDrain") || e.alwaysDash === void 0 && (d = "alwaysDash") || e.bgmVolume === void 0 && (d = "bgmVolume") || e.bgsVolume === void 0 && (d = "bgsVolume") || e.commandRemember === void 0 && (d = "commandRemember") || e.criticalToActor === void 0 && (d = "criticalToActor") || e.criticalToEnemy === void 0 && (d = "criticalToEnemy") || e.counterAttack === void 0 && (d = "counterAttack") || e.debuffAdd === void 0 && (d = "debuffAdd") || e.defeat === void 0 && (d = "defeat") || e.enemyDamage === void 0 && (d = "enemyDamage") || e.enemyNoDamage === void 0 && (d = "enemyNoDamage") || e.enemyRecovery === void 0 && (d = "enemyRecovery") || e.enemyGain === void 0 && (d = "enemyGain") || e.enemyLoss === void 0 && (d = "enemyLoss") || e.enemyDrain === void 0 && (d = "enemyDrain") || e.evasion === void 0 && (d = "evasion") || e.expNext === void 0 && (d = "expNext") || e.expTotal === void 0 && (d = "expTotal") || e.escapeFailure === void 0 && (d = "escapeFailure") || e.escapeStart === void 0 && (d = "escapeStart") || e.file === void 0 && (d = "file") || e.loadMessage === void 0 && (d = "loadMessage") || e.meVolume === void 0 && (d = "meVolume") || e.magicEvasion === void 0 && (d = "magicEvasion") || e.magicReflection === void 0 && (d = "magicReflection") || e.obtainExp === void 0 && (d = "obtainExp") || e.obtainGold === void 0 && (d = "obtainGold") || e.obtainItem === void 0 && (d = "obtainItem") || e.obtainSkill === void 0 && (d = "obtainSkill") || e.partyName === void 0 && (d = "partyName") || e.preemptive === void 0 && (d = "preemptive") || e.saveMessage === void 0 && (d = "saveMessage") || e.seVolume === void 0 && (d = "seVolume") || e.substitute === void 0 && (d = "substitute") || e.touchUI === void 0 && (d = "touchUI") || e.victory === void 0 && (d = "victory") || e.useItem === void 0 && (d = "useItem")) return s.errors = [{
+                                                let p;
+                                                if (e.actionFailure === void 0 && (p = "actionFailure") || e.actorDamage === void 0 && (p = "actorDamage") || e.actorDrain === void 0 && (p = "actorDrain") || e.actorGain === void 0 && (p = "actorGain") || e.actorLoss === void 0 && (p = "actorLoss") || e.actorNoDamage === void 0 && (p = "actorNoDamage") || e.actorNoHit === void 0 && (p = "actorNoHit") || e.actorRecovery === void 0 && (p = "actorRecovery") || e.alwaysDash === void 0 && (p = "alwaysDash") || e.autosave === void 0 && (p = "autosave") || e.bgmVolume === void 0 && (p = "bgmVolume") || e.bgsVolume === void 0 && (p = "bgsVolume") || e.buffAdd === void 0 && (p = "buffAdd") || e.buffRemove === void 0 && (p = "buffRemove") || e.commandRemember === void 0 && (p = "commandRemember") || e.counterAttack === void 0 && (p = "counterAttack") || e.criticalToActor === void 0 && (p = "criticalToActor") || e.criticalToEnemy === void 0 && (p = "criticalToEnemy") || e.debuffAdd === void 0 && (p = "debuffAdd") || e.defeat === void 0 && (p = "defeat") || e.emerge === void 0 && (p = "emerge") || e.enemyDamage === void 0 && (p = "enemyDamage") || e.enemyDrain === void 0 && (p = "enemyDrain") || e.enemyGain === void 0 && (p = "enemyGain") || e.enemyLoss === void 0 && (p = "enemyLoss") || e.enemyNoDamage === void 0 && (p = "enemyNoDamage") || e.enemyNoHit === void 0 && (p = "enemyNoHit") || e.enemyRecovery === void 0 && (p = "enemyRecovery") || e.escapeFailure === void 0 && (p = "escapeFailure") || e.escapeStart === void 0 && (p = "escapeStart") || e.evasion === void 0 && (p = "evasion") || e.expNext === void 0 && (p = "expNext") || e.expTotal === void 0 && (p = "expTotal") || e.file === void 0 && (p = "file") || e.levelUp === void 0 && (p = "levelUp") || e.loadMessage === void 0 && (p = "loadMessage") || e.magicEvasion === void 0 && (p = "magicEvasion") || e.magicReflection === void 0 && (p = "magicReflection") || e.meVolume === void 0 && (p = "meVolume") || e.obtainExp === void 0 && (p = "obtainExp") || e.obtainGold === void 0 && (p = "obtainGold") || e.obtainItem === void 0 && (p = "obtainItem") || e.obtainSkill === void 0 && (p = "obtainSkill") || e.partyName === void 0 && (p = "partyName") || e.possession === void 0 && (p = "possession") || e.preemptive === void 0 && (p = "preemptive") || e.saveMessage === void 0 && (p = "saveMessage") || e.seVolume === void 0 && (p = "seVolume") || e.substitute === void 0 && (p = "substitute") || e.surprise === void 0 && (p = "surprise") || e.touchUI === void 0 && (p = "touchUI") || e.useItem === void 0 && (p = "useItem") || e.victory === void 0 && (p = "victory")) return s.errors = [{
                                                   instancePath: r + "/terms/messages",
                                                   schemaPath: "#/$defs/TermsMessages/required",
                                                   keyword: "required",
-                                                  params: { missingProperty: d },
-                                                  message: "must have required property '" + d + "'"
+                                                  params: { missingProperty: p },
+                                                  message: "must have required property '" + p + "'"
                                                 }], !1;
-                                                for (const a in e) if (!W.call(z.properties, a)) return s.errors = [{
+                                                for (const a in e) if (!W.call(L.properties, a)) return s.errors = [{
                                                   instancePath: r + "/terms/messages",
                                                   schemaPath: "#/$defs/TermsMessages/additionalProperties",
                                                   keyword: "additionalProperties",
@@ -2914,15 +2914,15 @@ const K = U(function() {
                                                   message: "must NOT have fewer than 26 items"
                                                 }], !1;
                                                 {
-                                                  const d = e.length;
-                                                  if (d > 0) {
+                                                  const p = e.length;
+                                                  if (p > 0) {
                                                     if (typeof e[0] != "string") return s.errors = [{ instancePath: r + "/terms/commands/0", schemaPath: "#/$defs/TermsCommands/items/0/type", keyword: "type", params: {
                                                       type: "string"
                                                     }, message: "must be string" }], !1;
                                                     var f = !0;
                                                   }
                                                   if (f) {
-                                                    if (d > 1) {
+                                                    if (p > 1) {
                                                       if (typeof e[1] != "string") return s.errors = [{
                                                         instancePath: r + "/terms/commands/1",
                                                         schemaPath: "#/$defs/TermsCommands/items/1/type",
@@ -2933,7 +2933,7 @@ const K = U(function() {
                                                       f = !0;
                                                     }
                                                     if (f) {
-                                                      if (d > 2) {
+                                                      if (p > 2) {
                                                         if (typeof e[2] != "string") return s.errors = [{
                                                           instancePath: r + "/terms/commands/2",
                                                           schemaPath: "#/$defs/TermsCommands/items/2/type",
@@ -2944,7 +2944,7 @@ const K = U(function() {
                                                         f = !0;
                                                       }
                                                       if (f) {
-                                                        if (d > 3) {
+                                                        if (p > 3) {
                                                           if (typeof e[3] != "string") return s.errors = [{
                                                             instancePath: r + "/terms/commands/3",
                                                             schemaPath: "#/$defs/TermsCommands/items/3/type",
@@ -2955,7 +2955,7 @@ const K = U(function() {
                                                           f = !0;
                                                         }
                                                         if (f) {
-                                                          if (d > 4) {
+                                                          if (p > 4) {
                                                             if (typeof e[4] != "string") return s.errors = [{
                                                               instancePath: r + "/terms/commands/4",
                                                               schemaPath: "#/$defs/TermsCommands/items/4/type",
@@ -2966,7 +2966,7 @@ const K = U(function() {
                                                             f = !0;
                                                           }
                                                           if (f) {
-                                                            if (d > 5) {
+                                                            if (p > 5) {
                                                               if (typeof e[5] != "string") return s.errors = [{
                                                                 instancePath: r + "/terms/commands/5",
                                                                 schemaPath: "#/$defs/TermsCommands/items/5/type",
@@ -2977,7 +2977,7 @@ const K = U(function() {
                                                               f = !0;
                                                             }
                                                             if (f) {
-                                                              if (d > 6) {
+                                                              if (p > 6) {
                                                                 if (typeof e[6] != "string") return s.errors = [{
                                                                   instancePath: r + "/terms/commands/6",
                                                                   schemaPath: "#/$defs/TermsCommands/items/6/type",
@@ -2988,7 +2988,7 @@ const K = U(function() {
                                                                 f = !0;
                                                               }
                                                               if (f) {
-                                                                if (d > 7) {
+                                                                if (p > 7) {
                                                                   if (typeof e[7] != "string") return s.errors = [{
                                                                     instancePath: r + "/terms/commands/7",
                                                                     schemaPath: "#/$defs/TermsCommands/items/7/type",
@@ -2999,7 +2999,7 @@ const K = U(function() {
                                                                   f = !0;
                                                                 }
                                                                 if (f) {
-                                                                  if (d > 8) {
+                                                                  if (p > 8) {
                                                                     if (typeof e[8] != "string") return s.errors = [{
                                                                       instancePath: r + "/terms/commands/8",
                                                                       schemaPath: "#/$defs/TermsCommands/items/8/type",
@@ -3010,7 +3010,7 @@ const K = U(function() {
                                                                     f = !0;
                                                                   }
                                                                   if (f) {
-                                                                    if (d > 9) {
+                                                                    if (p > 9) {
                                                                       if (typeof e[9] != "string") return s.errors = [{
                                                                         instancePath: r + "/terms/commands/9",
                                                                         schemaPath: "#/$defs/TermsCommands/items/9/type",
@@ -3021,7 +3021,7 @@ const K = U(function() {
                                                                       f = !0;
                                                                     }
                                                                     if (f) {
-                                                                      if (d > 10) {
+                                                                      if (p > 10) {
                                                                         if (typeof e[10] != "string") return s.errors = [{
                                                                           instancePath: r + "/terms/commands/10",
                                                                           schemaPath: "#/$defs/TermsCommands/items/10/type",
@@ -3032,7 +3032,7 @@ const K = U(function() {
                                                                         f = !0;
                                                                       }
                                                                       if (f) {
-                                                                        if (d > 11) {
+                                                                        if (p > 11) {
                                                                           if (typeof e[11] != "string") return s.errors = [{
                                                                             instancePath: r + "/terms/commands/11",
                                                                             schemaPath: "#/$defs/TermsCommands/items/11/type",
@@ -3043,7 +3043,7 @@ const K = U(function() {
                                                                           f = !0;
                                                                         }
                                                                         if (f) {
-                                                                          if (d > 12) {
+                                                                          if (p > 12) {
                                                                             if (typeof e[12] != "string") return s.errors = [{
                                                                               instancePath: r + "/terms/commands/12",
                                                                               schemaPath: "#/$defs/TermsCommands/items/12/type",
@@ -3054,7 +3054,7 @@ const K = U(function() {
                                                                             f = !0;
                                                                           }
                                                                           if (f) {
-                                                                            if (d > 13) {
+                                                                            if (p > 13) {
                                                                               if (typeof e[13] != "string") return s.errors = [{
                                                                                 instancePath: r + "/terms/commands/13",
                                                                                 schemaPath: "#/$defs/TermsCommands/items/13/type",
@@ -3065,7 +3065,7 @@ const K = U(function() {
                                                                               f = !0;
                                                                             }
                                                                             if (f) {
-                                                                              if (d > 14) {
+                                                                              if (p > 14) {
                                                                                 if (typeof e[14] != "string") return s.errors = [{
                                                                                   instancePath: r + "/terms/commands/14",
                                                                                   schemaPath: "#/$defs/TermsCommands/items/14/type",
@@ -3076,7 +3076,7 @@ const K = U(function() {
                                                                                 f = !0;
                                                                               }
                                                                               if (f) {
-                                                                                if (d > 15) {
+                                                                                if (p > 15) {
                                                                                   if (typeof e[15] != "string") return s.errors = [{
                                                                                     instancePath: r + "/terms/commands/15",
                                                                                     schemaPath: "#/$defs/TermsCommands/items/15/type",
@@ -3087,7 +3087,7 @@ const K = U(function() {
                                                                                   f = !0;
                                                                                 }
                                                                                 if (f) {
-                                                                                  if (d > 16) {
+                                                                                  if (p > 16) {
                                                                                     if (typeof e[16] != "string") return s.errors = [{
                                                                                       instancePath: r + "/terms/commands/16",
                                                                                       schemaPath: "#/$defs/TermsCommands/items/16/type",
@@ -3098,7 +3098,7 @@ const K = U(function() {
                                                                                     f = !0;
                                                                                   }
                                                                                   if (f) {
-                                                                                    if (d > 17) {
+                                                                                    if (p > 17) {
                                                                                       if (typeof e[17] != "string") return s.errors = [{
                                                                                         instancePath: r + "/terms/commands/17",
                                                                                         schemaPath: "#/$defs/TermsCommands/items/17/type",
@@ -3109,7 +3109,7 @@ const K = U(function() {
                                                                                       f = !0;
                                                                                     }
                                                                                     if (f) {
-                                                                                      if (d > 18) {
+                                                                                      if (p > 18) {
                                                                                         if (typeof e[18] != "string") return s.errors = [{
                                                                                           instancePath: r + "/terms/commands/18",
                                                                                           schemaPath: "#/$defs/TermsCommands/items/18/type",
@@ -3120,7 +3120,7 @@ const K = U(function() {
                                                                                         f = !0;
                                                                                       }
                                                                                       if (f) {
-                                                                                        if (d > 19) {
+                                                                                        if (p > 19) {
                                                                                           if (typeof e[19] != "string") return s.errors = [{
                                                                                             instancePath: r + "/terms/commands/19",
                                                                                             schemaPath: "#/$defs/TermsCommands/items/19/type",
@@ -3131,7 +3131,7 @@ const K = U(function() {
                                                                                           f = !0;
                                                                                         }
                                                                                         if (f) {
-                                                                                          if (d > 20) {
+                                                                                          if (p > 20) {
                                                                                             let a = e[20];
                                                                                             const y = 0;
                                                                                             if (typeof a != "string" && a !== null) return s.errors = [{
@@ -3144,7 +3144,7 @@ const K = U(function() {
                                                                                             f = y === 0;
                                                                                           }
                                                                                           if (f) {
-                                                                                            if (d > 21) {
+                                                                                            if (p > 21) {
                                                                                               if (typeof e[21] != "string") return s.errors = [{
                                                                                                 instancePath: r + "/terms/commands/21",
                                                                                                 schemaPath: "#/$defs/TermsCommands/items/21/type",
@@ -3155,7 +3155,7 @@ const K = U(function() {
                                                                                               f = !0;
                                                                                             }
                                                                                             if (f) {
-                                                                                              if (d > 22) {
+                                                                                              if (p > 22) {
                                                                                                 if (typeof e[22] != "string") return s.errors = [{
                                                                                                   instancePath: r + "/terms/commands/22",
                                                                                                   schemaPath: "#/$defs/TermsCommands/items/22/type",
@@ -3166,7 +3166,7 @@ const K = U(function() {
                                                                                                 f = !0;
                                                                                               }
                                                                                               if (f) {
-                                                                                                if (d > 23) {
+                                                                                                if (p > 23) {
                                                                                                   let a = e[23];
                                                                                                   const y = 0;
                                                                                                   if (typeof a != "string" && a !== null) return s.errors = [{
@@ -3179,7 +3179,7 @@ const K = U(function() {
                                                                                                   f = y === 0;
                                                                                                 }
                                                                                                 if (f) {
-                                                                                                  if (d > 24) {
+                                                                                                  if (p > 24) {
                                                                                                     if (typeof e[24] != "string") return s.errors = [{
                                                                                                       instancePath: r + "/terms/commands/24",
                                                                                                       schemaPath: "#/$defs/TermsCommands/items/24/type",
@@ -3189,7 +3189,7 @@ const K = U(function() {
                                                                                                     }], !1;
                                                                                                     f = !0;
                                                                                                   }
-                                                                                                  if (f && d > 25) {
+                                                                                                  if (f && p > 25) {
                                                                                                     if (typeof e[25] != "string") return s.errors = [{
                                                                                                       instancePath: r + "/terms/commands/25",
                                                                                                       schemaPath: "#/$defs/TermsCommands/items/25/type",
@@ -3244,8 +3244,8 @@ const K = U(function() {
                                                     message: "must NOT have fewer than 10 items"
                                                   }], !1;
                                                   {
-                                                    const d = e.length;
-                                                    for (let a = 0; a < d; a++)
+                                                    const p = e.length;
+                                                    for (let a = 0; a < p; a++)
                                                       if (typeof e[a] != "string") return s.errors = [{
                                                         instancePath: r + "/terms/basic/" + a,
                                                         schemaPath: "#/$defs/TermsBasic/items/type",
@@ -3281,8 +3281,8 @@ const K = U(function() {
                                                     message: "must NOT have fewer than 10 items"
                                                   }], !1;
                                                   {
-                                                    const d = e.length;
-                                                    for (let a = 0; a < d; a++) {
+                                                    const p = e.length;
+                                                    for (let a = 0; a < p; a++) {
                                                       let y = e[a];
                                                       const g = 0;
                                                       if (typeof y != "string") return s.errors = [{
@@ -3591,8 +3591,8 @@ const K = U(function() {
                                                                                     message: "must be array"
                                                                                   }], !1;
                                                                                   {
-                                                                                    const p = t.length;
-                                                                                    for (let e = 0; e < p; e++)
+                                                                                    const d = t.length;
+                                                                                    for (let e = 0; e < d; e++)
                                                                                       if (typeof t[e] != "string") return s.errors = [{
                                                                                         instancePath: r + "/elements/" + e,
                                                                                         schemaPath: "#/properties/elements/items/type",
@@ -3615,8 +3615,8 @@ const K = U(function() {
                                                                                       message: "must be array"
                                                                                     }], !1;
                                                                                     {
-                                                                                      const p = t.length;
-                                                                                      for (let e = 0; e < p; e++)
+                                                                                      const d = t.length;
+                                                                                      for (let e = 0; e < d; e++)
                                                                                         if (typeof t[e] != "string") return s.errors = [{
                                                                                           instancePath: r + "/weaponTypes/" + e,
                                                                                           schemaPath: "#/properties/weaponTypes/items/type",
@@ -3639,8 +3639,8 @@ const K = U(function() {
                                                                                         message: "must be array"
                                                                                       }], !1;
                                                                                       {
-                                                                                        const p = t.length;
-                                                                                        for (let e = 0; e < p; e++)
+                                                                                        const d = t.length;
+                                                                                        for (let e = 0; e < d; e++)
                                                                                           if (typeof t[e] != "string") return s.errors = [{
                                                                                             instancePath: r + "/armorTypes/" + e,
                                                                                             schemaPath: "#/properties/armorTypes/items/type",
@@ -3663,8 +3663,8 @@ const K = U(function() {
                                                                                           message: "must be array"
                                                                                         }], !1;
                                                                                         {
-                                                                                          const p = t.length;
-                                                                                          for (let e = 0; e < p; e++)
+                                                                                          const d = t.length;
+                                                                                          for (let e = 0; e < d; e++)
                                                                                             if (typeof t[e] != "string") return s.errors = [{
                                                                                               instancePath: r + "/equipTypes/" + e,
                                                                                               schemaPath: "#/properties/equipTypes/items/type",
@@ -3687,8 +3687,8 @@ const K = U(function() {
                                                                                             message: "must be array"
                                                                                           }], !1;
                                                                                           {
-                                                                                            const p = t.length;
-                                                                                            for (let e = 0; e < p; e++)
+                                                                                            const d = t.length;
+                                                                                            for (let e = 0; e < d; e++)
                                                                                               if (typeof t[e] != "string") return s.errors = [{
                                                                                                 instancePath: r + "/skillTypes/" + e,
                                                                                                 schemaPath: "#/properties/skillTypes/items/type",
@@ -3711,8 +3711,8 @@ const K = U(function() {
                                                                                               message: "must be array"
                                                                                             }], !1;
                                                                                             {
-                                                                                              const p = t.length;
-                                                                                              for (let e = 0; e < p; e++)
+                                                                                              const d = t.length;
+                                                                                              for (let e = 0; e < d; e++)
                                                                                                 if (typeof t[e] != "string") return s.errors = [{
                                                                                                   instancePath: r + "/switches/" + e,
                                                                                                   schemaPath: "#/properties/switches/items/type",
@@ -3735,8 +3735,8 @@ const K = U(function() {
                                                                                                 message: "must be array"
                                                                                               }], !1;
                                                                                               {
-                                                                                                const p = t.length;
-                                                                                                for (let e = 0; e < p; e++)
+                                                                                                const d = t.length;
+                                                                                                for (let e = 0; e < d; e++)
                                                                                                   if (typeof t[e] != "string") return s.errors = [{
                                                                                                     instancePath: r + "/variables/" + e,
                                                                                                     schemaPath: "#/properties/variables/items/type",
@@ -3759,10 +3759,10 @@ const K = U(function() {
                                                                                                   message: "must be array"
                                                                                                 }], !1;
                                                                                                 {
-                                                                                                  const p = t.length;
-                                                                                                  for (let e = 0; e < p; e++) {
+                                                                                                  const d = t.length;
+                                                                                                  for (let e = 0; e < d; e++) {
                                                                                                     let o = t[e];
-                                                                                                    const d = 0;
+                                                                                                    const p = 0;
                                                                                                     if (typeof o != "number" || o % 1 || isNaN(o) || !isFinite(o)) return s.errors = [{
                                                                                                       instancePath: r + "/magicSkills/" + e,
                                                                                                       schemaPath: "#/properties/magicSkills/items/type",
@@ -3770,7 +3770,7 @@ const K = U(function() {
                                                                                                       params: { type: "integer" },
                                                                                                       message: "must be integer"
                                                                                                     }], !1;
-                                                                                                    if (d !== 0) break;
+                                                                                                    if (p !== 0) break;
                                                                                                   }
                                                                                                 }
                                                                                                 m = c === 0;
@@ -3826,10 +3826,10 @@ const K = U(function() {
                                                                                                           message: "must be array"
                                                                                                         }], !1;
                                                                                                         {
-                                                                                                          const p = t.length;
-                                                                                                          for (let e = 0; e < p; e++) {
+                                                                                                          const d = t.length;
+                                                                                                          for (let e = 0; e < d; e++) {
                                                                                                             let o = t[e];
-                                                                                                            const d = 0;
+                                                                                                            const p = 0;
                                                                                                             if (typeof o != "number" || o % 1 || isNaN(o) || !isFinite(o)) return s.errors = [{
                                                                                                               instancePath: r + "/partyMembersArray/" + e,
                                                                                                               schemaPath: "#/properties/partyMembersArray/items/type",
@@ -3837,7 +3837,7 @@ const K = U(function() {
                                                                                                               params: { type: "integer" },
                                                                                                               message: "must be integer"
                                                                                                             }], !1;
-                                                                                                            if (d !== 0) break;
+                                                                                                            if (p !== 0) break;
                                                                                                           }
                                                                                                         }
                                                                                                         m = c === 0;
@@ -3936,10 +3936,10 @@ const K = U(function() {
                                                                                                                         message: "must be array"
                                                                                                                       }], !1;
                                                                                                                       {
-                                                                                                                        const p = t.length;
-                                                                                                                        for (let e = 0; e < p; e++) {
+                                                                                                                        const d = t.length;
+                                                                                                                        for (let e = 0; e < d; e++) {
                                                                                                                           let o = t[e];
-                                                                                                                          const d = 0;
+                                                                                                                          const p = 0;
                                                                                                                           if (typeof o != "number" || o % 1 || isNaN(o) || !isFinite(o)) return s.errors = [{
                                                                                                                             instancePath: r + "/windowTone/" + e,
                                                                                                                             schemaPath: "#/properties/windowTone/items/type",
@@ -3963,7 +3963,7 @@ const K = U(function() {
                                                                                                                               message: "must be >= 0"
                                                                                                                             }], !1;
                                                                                                                           }
-                                                                                                                          if (d !== 0) break;
+                                                                                                                          if (p !== 0) break;
                                                                                                                         }
                                                                                                                       }
                                                                                                                       m = c === 0;
