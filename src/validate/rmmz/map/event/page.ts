@@ -5,25 +5,23 @@ import { SCHEMA_MAP_EVENT_IMAGE } from "./image";
 import { SCHEMA_MOVEROUTE_DATA } from "./moveRoute";
 
 export const SCHEMA_MAP_EVENT_PAGE = {
-  items: {
-    type: "object",
-    required: [
-      "conditions",
-      "image",
-      "list",
-      "moveRoute",
-      "directionFix",
-      "priorityType",
-      "moveFrequency",
-    ],
-    properties: {
-      priorityType: { type: "integer" },
-      directionFix: { type: "boolean" },
-      moveFrequency: { type: "integer" },
-      conditions: SCHEMA_MAP_EVENT_PAGE_CONDITION,
-      list: { type: "array" },
-      image: SCHEMA_MAP_EVENT_IMAGE,
-      moveRoute: SCHEMA_MOVEROUTE_DATA,
-    } as const satisfies Record<keyof MapEventPage, Schema>,
-  },
+  type: "object",
+  required: [
+    "conditions",
+    "image",
+    "list",
+    "moveRoute",
+    "directionFix",
+    "priorityType",
+    "moveFrequency",
+  ],
+  properties: {
+    priorityType: { type: "integer" },
+    directionFix: { type: "boolean" },
+    moveFrequency: { type: "integer" },
+    conditions: SCHEMA_MAP_EVENT_PAGE_CONDITION,
+    list: { type: "array" },
+    image: SCHEMA_MAP_EVENT_IMAGE,
+    moveRoute: SCHEMA_MOVEROUTE_DATA,
+  } as const satisfies Record<keyof MapEventPage, Schema>,
 };
