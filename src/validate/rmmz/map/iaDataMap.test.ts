@@ -22,10 +22,10 @@ const mockEventCommands: EventCommand[] = [
   makeCommandVariableFromConstant({ startId: 1 }, { value: 123 }),
 ];
 
-const makeMapWithEvents = (
-  commands: EventCommandUnknown[],
-): Data_Map<EventCommandUnknown> => {
-  const mapEvent: MapEvent = makeMapEvent({
+const makeMapWithEvents = <T extends EventCommandUnknown>(
+  commands: T[],
+): Data_Map<T> => {
+  const mapEvent: MapEvent<T> = makeMapEvent({
     pages: [makeMapEventPage({ list: commands })],
   });
   return makeMapData({
@@ -109,6 +109,26 @@ describe("isDataMap", () => {
         const invalidMap = makeMapData({
           height: -5,
         });
+        expect(invalidMap).not.toSatisfy(isDataMap);
+      });
+      test("event page move route command has additional property", () => {
+        const invalidMap = makeMapWithEvents([
+          {
+            code: 0,
+            indent: 0,
+            parameters: [],
+            invalid: "this should not be here",
+          },
+        ]);
+        expect(invalidMap).not.toSatisfy(isDataMap);
+      });
+      test("event page with completely unknown command", () => {
+        const invalidMap = makeMapWithEvents([
+          {
+            code: 0,
+            indent: 0,
+          } as EventCommandUnknown,
+        ]);
         expect(invalidMap).not.toSatisfy(isDataMap);
       });
     });
