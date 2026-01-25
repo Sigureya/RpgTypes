@@ -1,4 +1,5 @@
 export declare const SCHEMA_DATA_SYSTEM: {
+    readonly additionalProperties: false;
     readonly $defs: {
         readonly Audio: {
             readonly type: "object";
@@ -100,6 +101,10 @@ export declare const SCHEMA_DATA_SYSTEM: {
                 };
                 readonly fontSize: {
                     readonly type: "integer";
+                };
+                readonly picturesUpperLimit: {
+                    readonly type: "integer";
+                    readonly nullable: true;
                 };
             };
             readonly required: readonly ["gameId", "screenWidth", "screenHeight", "uiAreaWidth", "uiAreaHeight", "windowOpacity", "screenScale", "numberFontFilename", "mainFontFilename", "fallbackFonts", "fontSize"];
@@ -420,9 +425,25 @@ export declare const SCHEMA_DATA_SYSTEM: {
                 };
             };
         };
+        readonly TitleCommandWindow: {
+            readonly type: "object";
+            readonly additionalProperties: false;
+            readonly required: readonly ["background", "offsetX", "offsetY"];
+            readonly properties: {
+                readonly background: {
+                    readonly type: "integer";
+                };
+                readonly offsetX: {
+                    readonly type: "integer";
+                };
+                readonly offsetY: {
+                    readonly type: "integer";
+                };
+            };
+        };
     };
     readonly type: "object";
-    readonly required: readonly ["gameTitle", "currencyUnit", "terms", "ship", "boat", "airship", "advanced", "titleBgm", "battleBgm", "gameoverMe", "victoryMe", "defeatMe", "attackMotions", "optAutosave", "optDisplayTp", "optFloorDeath", "optFollowers", "optKeyItemsNumber", "optSideView", "optSlipDeath", "optTransparent", "optSplashScreen", "optDrawTitle", "optExtraExp", "optMessageSkip", "startMapId", "startX", "startY", "faceSize", "tileSize", "iconSize", "battleSystem", "elements", "weaponTypes", "armorTypes", "equipTypes", "skillTypes", "switches", "variables", "magicSkills", "battleback1Name", "battleback2Name", "testTroopId", "partyMembersArray", "editor", "testBattlers", "editMapId", "battlerHue", "battlerName", "sounds", "title1Name", "title2Name", "versionId", "locale", "windowTone", "itemCategories", "menuCommands"];
+    readonly required: ("sounds" | "optAutosave" | "optDisplayTp" | "optDrawTitle" | "optExtraExp" | "optFloorDeath" | "optFollowers" | "optKeyItemsNumber" | "optSideView" | "optSlipDeath" | "optTransparent" | "optSplashScreen" | "optMessageSkip" | "startMapId" | "startX" | "startY" | "partyMembers" | "weaponTypes" | "skillTypes" | "elements" | "variables" | "equipTypes" | "switches" | "armorTypes" | "gameTitle" | "currencyUnit" | "battleSystem" | "magicSkills" | "title1Name" | "title2Name" | "terms" | "itemCategories" | "menuCommands" | "titleCommandWindow" | "titleBgm" | "battleBgm" | "gameoverMe" | "defeatMe" | "victoryMe" | "boat" | "ship" | "airship" | "editMapId" | "battlerHue" | "battlerName" | "testTroopId" | "testBattlers" | "battleback1Name" | "battleback2Name" | "windowTone" | "attackMotions" | "locale" | "versionId" | "advanced" | "tileSize" | "faceSize" | "iconSize" | "editor")[];
     readonly properties: {
         gameTitle: {
             type: string;
@@ -619,7 +640,7 @@ export declare const SCHEMA_DATA_SYSTEM: {
             type: string;
             minimum: number;
         };
-        partyMembersArray: {
+        partyMembers: {
             type: string;
             items: {
                 type: string;
@@ -663,6 +684,9 @@ export declare const SCHEMA_DATA_SYSTEM: {
                 minimum: number;
                 maximum: number;
             };
+        };
+        titleCommandWindow: {
+            $ref: string;
         };
     };
 };

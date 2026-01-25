@@ -10,5 +10,6 @@ export interface System_Advanced {
     mainFontFilename: string;
     fallbackFonts: string;
     fontSize: number;
+    picturesUpperLimit?: number;
 }
 export declare const makeSystemAdvanced: (advanced?: Partial<System_Advanced>) => System_Advanced;

@@ -34,6 +34,10 @@ export declare const SCHEMA_SYSTEM_ADVANCED: {
         readonly fontSize: {
             readonly type: "integer";
         };
+        readonly picturesUpperLimit: {
+            readonly type: "integer";
+            readonly nullable: true;
+        };
     };
     readonly required: readonly ["gameId", "screenWidth", "screenHeight", "uiAreaWidth", "uiAreaHeight", "windowOpacity", "screenScale", "numberFontFilename", "mainFontFilename", "fallbackFonts", "fontSize"];
     readonly additionalProperties: false;

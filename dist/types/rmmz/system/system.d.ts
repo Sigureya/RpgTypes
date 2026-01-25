@@ -1,9 +1,9 @@
 import { AudioFileParams, ColorRGBA } from 'src/libs/utils';
-import { AttackMotion, Data_Vehicle, ItemCategoriesArray, MenuCommandsEnabledArray, System_Advanced, System_SoundsArray, System_Terms } from './core';
+import { AttackMotion, Data_Vehicle, ItemCategoriesArray, MenuCommandsEnabledArray, System_Advanced, System_BooleanGameOptions, System_SoundsArray, System_Terms, System_Vehicles, TitleCommandWindow } from './core';
 import { TestBattler, EditorSettings } from './gameEdit';
-export interface Data_System {
+export interface Data_System extends System_BooleanGameOptions, System_Vehicles {
     battleSystem: number;
-    partyMembersArray: number[];
+    partyMembers: number[];
     magicSkills: number[];
     title1Name: string;
     title2Name: string;
@@ -19,6 +19,7 @@ export interface Data_System {
     armorTypes: string[];
     itemCategories: ItemCategoriesArray;
     menuCommands: MenuCommandsEnabledArray;
+    titleCommandWindow: TitleCommandWindow;
     titleBgm: AudioFileParams;
     battleBgm: AudioFileParams;
     gameoverMe: AudioFileParams;
