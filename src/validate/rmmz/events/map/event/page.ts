@@ -15,6 +15,12 @@ export const SCHEMA_MAP_EVENT_PAGE = {
     "directionFix",
     "priorityType",
     "moveFrequency",
+    "walkAnime",
+    "stepAnime",
+    "through",
+    "moveSpeed",
+    "moveType",
+    "trigger",
   ],
   properties: {
     priorityType: { type: "integer" },
@@ -42,5 +48,8 @@ export const SCHEMA_MAP_EVENT_PAGE = {
     through: { type: "boolean" },
     image: SCHEMA_MAP_EVENT_IMAGE,
     moveRoute: SCHEMA_MOVEROUTE_DATA,
+    moveSpeed: { type: "integer" },
+    moveType: { type: "integer" },
+    trigger: { type: "integer" },
   } as const satisfies Record<keyof MapEventPage, Schema>,
 } as const satisfies Schema;

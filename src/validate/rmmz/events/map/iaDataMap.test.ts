@@ -60,8 +60,6 @@ describe("isDataMap", () => {
     scrollType: 0,
     tilesetId: 1,
     width: 10,
-    x: 0,
-    y: 0,
     data: new Array(100).fill(0),
     displayName: "",
     disableDashing: false,

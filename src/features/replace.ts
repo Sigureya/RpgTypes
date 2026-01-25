@@ -99,8 +99,6 @@ const replaceMapDataTextsCore = (
     events: repleaceMapEventCommands(mapData.events, commandFn),
     data: mapData.data,
     tilesetId: mapData.tilesetId,
-    x: mapData.x,
-    y: mapData.y,
     encounterStep: mapData.encounterStep,
     scrollType: mapData.scrollType,
     specifyBattleback: mapData.specifyBattleback,

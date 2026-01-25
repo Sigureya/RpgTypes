@@ -22,8 +22,6 @@ export interface Data_Map<
   parallaxSx: number;
   parallaxSy: number;
 
-  x: number;
-  y: number;
   width: number;
   height: number;
   note: string;
