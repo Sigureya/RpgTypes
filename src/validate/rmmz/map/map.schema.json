@@ -42,6 +42,7 @@
               "pages": {
                 "type": "array",
                 "items": {
+                  "additionalProperties": false,
                   "required": [
                     "conditions",
                     "image",
@@ -53,6 +54,9 @@
                   ],
                   "type": "object",
                   "properties": {
+                    "stepAnime": { "type": "boolean" },
+                    "walkAnime": { "type": "boolean" },
+                    "through": { "type": "boolean" },
                     "priorityType": { "type": "integer" },
                     "conditions": {
                       "additionalProperties": false,
@@ -118,7 +122,19 @@
                       "type": "object"
                     },
                     "list": {
-                      "type": "array"
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "required": ["code", "parameters", "indent"],
+                        "properties": {
+                          "code": { "type": "integer" },
+                          "indent": { "type": "integer" },
+                          "parameters": {
+                            "type": "array",
+                            "items": {}
+                          }
+                        }
+                      }
                     },
                     "moveFrequency": {
                       "type": "integer"
@@ -128,6 +144,7 @@
                       "properties": {
                         "list": {
                           "items": {
+                            "additionalProperties": false,
                             "properties": {
                               "code": {
                                 "type": "integer"
