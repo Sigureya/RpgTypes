@@ -1,5 +1,6 @@
 import { describe, test, expect } from "vitest";
-import type { AttackMotion } from "@RpgTypes/rmmz";
+import type { Data_System } from "@RpgTypes/rmmz";
+import { makeSystemData, type AttackMotion } from "@RpgTypes/rmmz";
 import Ajv from "ajv";
 import { SCHEMA_SYSTEM_MEMBERS_ATTACK_MOTION } from "./attackMotion";
 
@@ -9,6 +10,12 @@ const validate = ajv.compile(SCHEMA_SYSTEM_MEMBERS_ATTACK_MOTION);
 describe("SCHEMA_SYSTEM_MEMBERS_ATTACK_MOTION", () => {
   test("should be a valid JSON schema", () => {
     expect(validate).toBeTypeOf("function");
+  });
+  test("", () => {
+    const data: Data_System = makeSystemData({});
+    data.attackMotions.forEach((motion) => {
+      expect(motion).toSatisfy(validate);
+    });
   });
 
   describe("normal case", () => {

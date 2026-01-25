@@ -1,6 +1,11 @@
 import { describe, test, expect } from "vitest";
-import type { Terms_CommandArray, Terms_GameCommands } from "@RpgTypes/rmmz";
+import type {
+  Data_System,
+  Terms_CommandArray,
+  Terms_GameCommands,
+} from "@RpgTypes/rmmz";
 import {
+  makeSystemData,
   makeTermsCommandArray,
   makeTermsCommandArrayWithNulls,
   makeTermsCommandFromArray,
@@ -36,6 +41,11 @@ describe("SCHEMA_SYSTEM_MEMBERS_TERMS_COMMANDS_ARRAY", () => {
   test("", () => {
     const array = makeTermsCommandArrayWithNulls({}, null);
     expect(array).toSatisfy(validate);
+  });
+  test("", () => {
+    const data: Data_System = makeSystemData({});
+    const termsCommandArray: Terms_CommandArray = data.terms.commands;
+    expect(termsCommandArray).toSatisfy(validate);
   });
 });
 

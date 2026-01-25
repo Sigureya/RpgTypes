@@ -1,6 +1,10 @@
 import { describe, test, expect } from "vitest";
 import type { Terms_BasicArray, Terms_Basic } from "@RpgTypes/rmmz";
-import { makeTermsBasic, makeTermsBasicFromArray } from "@RpgTypes/rmmz";
+import {
+  makeSystemData,
+  makeTermsBasic,
+  makeTermsBasicFromArray,
+} from "@RpgTypes/rmmz";
 import Ajv from "ajv";
 import { SCHEMA_SYSTEM_MEMBERS_TERMS_BASIC_ARRAY } from "./basic";
 
@@ -26,6 +30,11 @@ describe("SCHEMA_SYSTEM_MEMBERS_TERMS_BASIC", () => {
   test("invalid: array length is 11 (too long)", () => {
     const array = Array.from({ length: 11 }, () => "");
     expect(array).not.toSatisfy(validate);
+  });
+  test("", () => {
+    const data = makeSystemData({});
+    const termsBasicArray: Terms_BasicArray = data.terms.basic;
+    expect(termsBasicArray).toSatisfy(validate);
   });
 });
 

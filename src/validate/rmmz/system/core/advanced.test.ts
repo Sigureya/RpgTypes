@@ -1,5 +1,5 @@
 import { describe, test, expect } from "vitest";
-import type { System_Advanced } from "@RpgTypes/rmmz/system";
+import { makeSystemData, type System_Advanced } from "@RpgTypes/rmmz/system";
 import Ajv from "ajv";
 import { SCHEMA_SYSTEM_ADVANCED } from "./advanced";
 const ajv = new Ajv();
@@ -23,6 +23,10 @@ describe("", () => {
         windowOpacity: 255,
       };
       expect(mockAdopted).toSatisfy(isSystemAdvanced);
+    });
+    test("", () => {
+      const data = makeSystemData({});
+      expect(data.advanced).toSatisfy(isSystemAdvanced);
     });
   });
 });
