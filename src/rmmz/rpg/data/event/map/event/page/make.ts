@@ -50,12 +50,14 @@ export const makeMapEventPage = <Command extends EventCommandUnknown>({
     skippable: false,
     wait: false,
   },
+  priorityType = 1,
 }: Partial<MapEventPage<Command>> = {}): MapEventPage<Command> => {
   return {
     conditions: conditions,
     list: list,
     directionFix: directionFix,
     image: image,
+    priorityType: priorityType,
     moveFrequency: moveFrequency,
     moveRoute: {
       list: moveRoute.list,

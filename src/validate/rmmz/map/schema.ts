@@ -1,13 +1,12 @@
 import type { AudioFileParams } from "@RpgTypes/libs";
-import type { Data_Map, MapEvent } from "@RpgTypes/rmmz";
-import type { Encounter } from "@RpgTypes/rmmz/rpg/data/event/map/types/encounter";
+import type { Data_Map, Encounter, MapEvent } from "@RpgTypes/rmmz";
 import type { JSONSchemaType, Schema } from "ajv";
-import { SCHEMA_MAP_EVENT_IMAGE } from "./event/image";
-import { SCHEMA_MOVEROUTE_DATA } from "./event/moveRoute";
+import { SCHEMA_MAP_EVENT_PAGE } from "./event/page";
 
 export const SCHEMA_DATA_MAP = {
   type: "object",
-  aditionalProperties: false,
+  additionalProperties: false,
+
   $defs: {
     AudioFileParams: {
       type: "object",
@@ -34,45 +33,31 @@ export const SCHEMA_DATA_MAP = {
     MapEvents: {
       type: "array",
       items: {
-        type: "object",
-        required: [
-          "id",
-          "name",
-          "x",
-          "y",
-          "pages",
-          "note",
-        ] satisfies (keyof MapEvent)[],
-        properties: {
-          id: { type: "integer" },
-          name: { type: "string" },
-          x: { type: "integer" },
-          y: { type: "integer" },
-          note: { type: "string" },
-          pages: {
-            type: "array",
-            items: {
-              type: "object",
-              required: [
-                "conditions",
-                "image",
-                "list",
-                "moveRoute",
-                "directionFix",
-                "priorityType",
-                "moveFrequency",
-              ],
-              properties: {
-                directionFix: { type: "boolean" },
-                moveFrequency: { type: "integer" },
-                conditions: { $ref: "#/$defs/MapEventPageCondition" },
-                list: { type: "array" },
-                image: SCHEMA_MAP_EVENT_IMAGE,
-                moveRoute: SCHEMA_MOVEROUTE_DATA,
+        oneOf: [
+          { type: "null" },
+          {
+            type: "object",
+            required: [
+              "id",
+              "name",
+              "x",
+              "y",
+              "pages",
+              "note",
+            ] satisfies (keyof MapEvent)[],
+            properties: {
+              id: { type: "integer" },
+              name: { type: "string" },
+              x: { type: "integer" },
+              y: { type: "integer" },
+              note: { type: "string" },
+              pages: {
+                type: "array",
+                items: SCHEMA_MAP_EVENT_PAGE,
               },
             },
           },
-        },
+        ],
       },
     } as const,
   },
