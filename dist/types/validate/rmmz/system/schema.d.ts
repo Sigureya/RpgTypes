@@ -10,18 +10,12 @@ export declare const SCHEMA_DATA_SYSTEM: {
                 };
                 readonly volume: {
                     readonly type: "integer";
-                    readonly minimum: 0;
-                    readonly maximum: 100;
                 };
                 readonly pitch: {
                     readonly type: "integer";
-                    readonly minimum: 50;
-                    readonly maximum: 150;
                 };
                 readonly pan: {
                     readonly type: "integer";
-                    readonly minimum: -100;
-                    readonly maximum: 100;
                 };
             };
         };
@@ -37,7 +31,6 @@ export declare const SCHEMA_DATA_SYSTEM: {
                 };
                 readonly characterName: {
                     readonly type: "string";
-                    readonly minLength: 1;
                 };
                 readonly bgm: {
                     readonly type: "object";
@@ -49,18 +42,12 @@ export declare const SCHEMA_DATA_SYSTEM: {
                         };
                         readonly volume: {
                             readonly type: "integer";
-                            readonly minimum: 0;
-                            readonly maximum: 100;
                         };
                         readonly pitch: {
                             readonly type: "integer";
-                            readonly minimum: 50;
-                            readonly maximum: 150;
                         };
                         readonly pan: {
                             readonly type: "integer";
-                            readonly minimum: -100;
-                            readonly maximum: 100;
                         };
                     };
                 };
@@ -71,12 +58,10 @@ export declare const SCHEMA_DATA_SYSTEM: {
                 readonly startX: {
                     readonly type: "integer";
                     readonly minimum: 0;
-                    readonly maximum: 5000;
                 };
                 readonly startY: {
                     readonly type: "integer";
                     readonly minimum: 0;
-                    readonly maximum: 5000;
                 };
             };
         };

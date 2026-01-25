@@ -1,7 +1,8 @@
-import { ItemCategories, MenuCommandsEnabled, System_Advanced, System_Bgm, System_BooleanGameOptions, System_RPG_DataNames, System_GameInitial, System_TitleImages, System_ImageSize, System_Me, System_SoundsObject, System_Vehicles, Terms_GameCommands, Terms_Basic, Terms_Messages } from './core';
+import { ItemCategories, MenuCommandsEnabled, System_Advanced, System_Bgm, System_BooleanGameOptions, System_RPG_DataNames, System_GameInitial, System_TitleImages, System_ImageSize, System_Me, System_SoundsObject, System_Vehicles, System_TermsPartial, AttackMotion, BattleRuleRMMZ } from './core';
 import { EditorSettings, System_TestBattle, System_EditorTemporary } from './gameEdit';
 import { System_Text } from './subset';
 export interface SystemDataFragments {
+    locale: string;
     options: Partial<System_BooleanGameOptions>;
     advanced: Partial<System_Advanced>;
     vehicles: Partial<System_Vehicles>;
@@ -16,11 +17,9 @@ export interface SystemDataFragments {
     gameInit: Partial<System_GameInitial>;
     itemCategories: Partial<ItemCategories>;
     size: Partial<System_ImageSize>;
-    terms: {
-        basic?: Partial<Terms_Basic>;
-        command?: Partial<Terms_GameCommands>;
-        messages?: Partial<Terms_Messages>;
-    };
+    terms: System_TermsPartial;
     menuComamnds: Partial<MenuCommandsEnabled>;
     editorTemporary?: Partial<System_EditorTemporary>;
+    attackMotion: AttackMotion[];
+    battle: Partial<BattleRuleRMMZ>;
 }
