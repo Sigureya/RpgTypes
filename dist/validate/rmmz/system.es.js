@@ -1,13 +1,13 @@
 import { g as U } from "../../shared/_commonjsHelpers.es.js";
-var R, H, E = { exports: {} }, O = {};
+var Y, H, B = { exports: {} }, E = {};
 const K = U(function() {
-  if (H) return E.exports;
-  H = 1, E.exports = s, E.exports.default = s;
-  const M = {
+  if (H) return B.exports;
+  H = 1, B.exports = s, B.exports.default = s;
+  const O = {
     properties: { gameId: { type: "integer" }, screenWidth: { type: "integer" }, screenHeight: { type: "integer" }, uiAreaWidth: { type: "integer" }, uiAreaHeight: { type: "integer" }, windowOpacity: {
       type: "integer"
     }, screenScale: { type: "number" }, numberFontFilename: { type: "string" }, mainFontFilename: { type: "string" }, fallbackFonts: { type: "string" }, fontSize: { type: "integer" } }
-  }, L = {
+  }, z = {
     properties: {
       actionFailure: { type: "string" },
       actorDamage: { type: "string" },
@@ -73,26 +73,26 @@ const K = U(function() {
       },
       victory: { type: "string" }
     }
-  }, W = Object.prototype.hasOwnProperty, q = function() {
-    if (R) return O;
+  }, X = Object.prototype.hasOwnProperty, L = function() {
+    if (Y) return E;
     function i(r) {
-      const X = r.length;
-      let D, Y = 0, m = 0;
-      for (; m < X; ) Y++, D = r.charCodeAt(m++), D >= 55296 && D <= 56319 && m < X && (D = r.charCodeAt(m), (64512 & D) == 56320 && m++);
-      return Y;
+      const W = r.length;
+      let D, R = 0, o = 0;
+      for (; o < W; ) R++, D = r.charCodeAt(o++), D >= 55296 && D <= 56319 && o < W && (D = r.charCodeAt(o), (64512 & D) == 56320 && o++);
+      return R;
     }
-    return R = 1, Object.defineProperty(O, "__esModule", { value: !0 }), O.default = i, i.code = 'require("ajv/dist/runtime/ucs2length").default', O;
+    return Y = 1, Object.defineProperty(E, "__esModule", { value: !0 }), E.default = i, i.code = 'require("ajv/dist/runtime/ucs2length").default', E;
   }().default;
-  function s(i, { instancePath: r = "", parentData: X, parentDataProperty: D, rootData: Y = i } = {}) {
+  function s(i, { instancePath: r = "", parentData: W, parentDataProperty: D, rootData: R = i } = {}) {
     if (!i || typeof i != "object" || Array.isArray(i)) return s.errors = [{ instancePath: r, schemaPath: "#/type", keyword: "type", params: { type: "object" }, message: "must be object" }], !1;
     {
-      let h;
-      if (i.gameTitle === void 0 && (h = "gameTitle") || i.currencyUnit === void 0 && (h = "currencyUnit") || i.terms === void 0 && (h = "terms") || i.ship === void 0 && (h = "ship") || i.boat === void 0 && (h = "boat") || i.airship === void 0 && (h = "airship") || i.advanced === void 0 && (h = "advanced") || i.titleBgm === void 0 && (h = "titleBgm") || i.battleBgm === void 0 && (h = "battleBgm") || i.gameoverMe === void 0 && (h = "gameoverMe") || i.victoryMe === void 0 && (h = "victoryMe") || i.defeatMe === void 0 && (h = "defeatMe") || i.attackMotions === void 0 && (h = "attackMotions") || i.optAutosave === void 0 && (h = "optAutosave") || i.optDisplayTp === void 0 && (h = "optDisplayTp") || i.optFloorDeath === void 0 && (h = "optFloorDeath") || i.optFollowers === void 0 && (h = "optFollowers") || i.optKeyItemsNumber === void 0 && (h = "optKeyItemsNumber") || i.optSideView === void 0 && (h = "optSideView") || i.optSlipDeath === void 0 && (h = "optSlipDeath") || i.optTransparent === void 0 && (h = "optTransparent") || i.optSplashScreen === void 0 && (h = "optSplashScreen") || i.optDrawTitle === void 0 && (h = "optDrawTitle") || i.optExtraExp === void 0 && (h = "optExtraExp") || i.optMessageSkip === void 0 && (h = "optMessageSkip") || i.startMapId === void 0 && (h = "startMapId") || i.startX === void 0 && (h = "startX") || i.startY === void 0 && (h = "startY") || i.faceSize === void 0 && (h = "faceSize") || i.tileSize === void 0 && (h = "tileSize") || i.iconSize === void 0 && (h = "iconSize") || i.battleSystem === void 0 && (h = "battleSystem") || i.elements === void 0 && (h = "elements") || i.weaponTypes === void 0 && (h = "weaponTypes") || i.armorTypes === void 0 && (h = "armorTypes") || i.equipTypes === void 0 && (h = "equipTypes") || i.skillTypes === void 0 && (h = "skillTypes") || i.switches === void 0 && (h = "switches") || i.variables === void 0 && (h = "variables") || i.magicSkills === void 0 && (h = "magicSkills") || i.battleback1Name === void 0 && (h = "battleback1Name") || i.battleback2Name === void 0 && (h = "battleback2Name") || i.testTroopId === void 0 && (h = "testTroopId") || i.partyMembersArray === void 0 && (h = "partyMembersArray") || i.editor === void 0 && (h = "editor") || i.testBattlers === void 0 && (h = "testBattlers") || i.editMapId === void 0 && (h = "editMapId") || i.battlerHue === void 0 && (h = "battlerHue") || i.battlerName === void 0 && (h = "battlerName") || i.sounds === void 0 && (h = "sounds") || i.title1Name === void 0 && (h = "title1Name") || i.title2Name === void 0 && (h = "title2Name") || i.versionId === void 0 && (h = "versionId") || i.locale === void 0 && (h = "locale") || i.windowTone === void 0 && (h = "windowTone") || i.itemCategories === void 0 && (h = "itemCategories") || i.menuCommands === void 0 && (h = "menuCommands")) return s.errors = [{
+      let f;
+      if (i.gameTitle === void 0 && (f = "gameTitle") || i.currencyUnit === void 0 && (f = "currencyUnit") || i.terms === void 0 && (f = "terms") || i.ship === void 0 && (f = "ship") || i.boat === void 0 && (f = "boat") || i.airship === void 0 && (f = "airship") || i.advanced === void 0 && (f = "advanced") || i.titleBgm === void 0 && (f = "titleBgm") || i.battleBgm === void 0 && (f = "battleBgm") || i.gameoverMe === void 0 && (f = "gameoverMe") || i.victoryMe === void 0 && (f = "victoryMe") || i.defeatMe === void 0 && (f = "defeatMe") || i.attackMotions === void 0 && (f = "attackMotions") || i.optAutosave === void 0 && (f = "optAutosave") || i.optDisplayTp === void 0 && (f = "optDisplayTp") || i.optFloorDeath === void 0 && (f = "optFloorDeath") || i.optFollowers === void 0 && (f = "optFollowers") || i.optKeyItemsNumber === void 0 && (f = "optKeyItemsNumber") || i.optSideView === void 0 && (f = "optSideView") || i.optSlipDeath === void 0 && (f = "optSlipDeath") || i.optTransparent === void 0 && (f = "optTransparent") || i.optSplashScreen === void 0 && (f = "optSplashScreen") || i.optDrawTitle === void 0 && (f = "optDrawTitle") || i.optExtraExp === void 0 && (f = "optExtraExp") || i.optMessageSkip === void 0 && (f = "optMessageSkip") || i.startMapId === void 0 && (f = "startMapId") || i.startX === void 0 && (f = "startX") || i.startY === void 0 && (f = "startY") || i.faceSize === void 0 && (f = "faceSize") || i.tileSize === void 0 && (f = "tileSize") || i.iconSize === void 0 && (f = "iconSize") || i.battleSystem === void 0 && (f = "battleSystem") || i.elements === void 0 && (f = "elements") || i.weaponTypes === void 0 && (f = "weaponTypes") || i.armorTypes === void 0 && (f = "armorTypes") || i.equipTypes === void 0 && (f = "equipTypes") || i.skillTypes === void 0 && (f = "skillTypes") || i.switches === void 0 && (f = "switches") || i.variables === void 0 && (f = "variables") || i.magicSkills === void 0 && (f = "magicSkills") || i.battleback1Name === void 0 && (f = "battleback1Name") || i.battleback2Name === void 0 && (f = "battleback2Name") || i.testTroopId === void 0 && (f = "testTroopId") || i.partyMembersArray === void 0 && (f = "partyMembersArray") || i.editor === void 0 && (f = "editor") || i.testBattlers === void 0 && (f = "testBattlers") || i.editMapId === void 0 && (f = "editMapId") || i.battlerHue === void 0 && (f = "battlerHue") || i.battlerName === void 0 && (f = "battlerName") || i.sounds === void 0 && (f = "sounds") || i.title1Name === void 0 && (f = "title1Name") || i.title2Name === void 0 && (f = "title2Name") || i.versionId === void 0 && (f = "versionId") || i.locale === void 0 && (f = "locale") || i.windowTone === void 0 && (f = "windowTone") || i.itemCategories === void 0 && (f = "itemCategories") || i.menuCommands === void 0 && (f = "menuCommands")) return s.errors = [{
         instancePath: r,
         schemaPath: "#/required",
         keyword: "required",
-        params: { missingProperty: h },
-        message: "must have required property '" + h + "'"
+        params: { missingProperty: f },
+        message: "must have required property '" + f + "'"
       }], !1;
       if (i.gameTitle !== void 0) {
         if (typeof i.gameTitle != "string") return s.errors = [{
@@ -102,9 +102,9 @@ const K = U(function() {
           params: { type: "string" },
           message: "must be string"
         }], !1;
-        var m = !0;
-      } else m = !0;
-      if (m) {
+        var o = !0;
+      } else o = !0;
+      if (o) {
         if (i.currencyUnit !== void 0) {
           if (typeof i.currencyUnit != "string") return s.errors = [{
             instancePath: r + "/currencyUnit",
@@ -113,12 +113,12 @@ const K = U(function() {
             params: { type: "string" },
             message: "must be string"
           }], !1;
-          m = !0;
-        } else m = !0;
-        if (m) {
+          o = !0;
+        } else o = !0;
+        if (o) {
           if (i.editor !== void 0) {
             let t = i.editor;
-            const c = 0;
+            const y = 0;
             if (!t || typeof t != "object" || Array.isArray(t)) return s.errors = [{
               instancePath: r + "/editor",
               schemaPath: "#/$defs/Editor/type",
@@ -127,13 +127,13 @@ const K = U(function() {
               message: "must be object"
             }], !1;
             {
-              let d;
-              if (t.messageWidth1 === void 0 && (d = "messageWidth1") || t.messageWidth2 === void 0 && (d = "messageWidth2") || t.jsonFormatLevel === void 0 && (d = "jsonFormatLevel")) return s.errors = [{
+              let c;
+              if (t.messageWidth1 === void 0 && (c = "messageWidth1") || t.messageWidth2 === void 0 && (c = "messageWidth2") || t.jsonFormatLevel === void 0 && (c = "jsonFormatLevel")) return s.errors = [{
                 instancePath: r + "/editor",
                 schemaPath: "#/$defs/Editor/required",
                 keyword: "required",
-                params: { missingProperty: d },
-                message: "must have required property '" + d + "'"
+                params: { missingProperty: c },
+                message: "must have required property '" + c + "'"
               }], !1;
               for (const e in t) if (e !== "messageWidth1" && e !== "messageWidth2" && e !== "jsonFormatLevel") return s.errors = [{
                 instancePath: r + "/editor",
@@ -144,7 +144,7 @@ const K = U(function() {
               }], !1;
               if (t.messageWidth1 !== void 0) {
                 let e = t.messageWidth1;
-                const o = 0;
+                const n = 0;
                 if (typeof e != "number" || e % 1 || isNaN(e) || !isFinite(e)) return s.errors = [{
                   instancePath: r + "/editor/messageWidth1",
                   schemaPath: "#/$defs/Editor/properties/messageWidth1/type",
@@ -165,12 +165,12 @@ const K = U(function() {
                     limit: 0
                   }, message: "must be >= 0" }], !1;
                 }
-                var V = o === 0;
-              } else V = !0;
-              if (V) {
+                var S = n === 0;
+              } else S = !0;
+              if (S) {
                 if (t.messageWidth2 !== void 0) {
                   let e = t.messageWidth2;
-                  const o = 0;
+                  const n = 0;
                   if (typeof e != "number" || e % 1 || isNaN(e) || !isFinite(e)) return s.errors = [{
                     instancePath: r + "/editor/messageWidth2",
                     schemaPath: "#/$defs/Editor/properties/messageWidth2/type",
@@ -191,11 +191,11 @@ const K = U(function() {
                       limit: 0
                     }, message: "must be >= 0" }], !1;
                   }
-                  V = o === 0;
-                } else V = !0;
-                if (V) if (t.jsonFormatLevel !== void 0) {
+                  S = n === 0;
+                } else S = !0;
+                if (S) if (t.jsonFormatLevel !== void 0) {
                   let e = t.jsonFormatLevel;
-                  const o = 0;
+                  const n = 0;
                   if (typeof e != "number" || e % 1 || isNaN(e) || !isFinite(e)) return s.errors = [{
                     instancePath: r + "/editor/jsonFormatLevel",
                     schemaPath: "#/$defs/Editor/properties/jsonFormatLevel/type",
@@ -216,16 +216,16 @@ const K = U(function() {
                       limit: 0
                     }, message: "must be >= 0" }], !1;
                   }
-                  V = o === 0;
-                } else V = !0;
+                  S = n === 0;
+                } else S = !0;
               }
             }
-            m = c === 0;
-          } else m = !0;
-          if (m) {
+            o = y === 0;
+          } else o = !0;
+          if (o) {
             if (i.advanced !== void 0) {
               let t = i.advanced;
-              const c = 0;
+              const y = 0;
               if (!t || typeof t != "object" || Array.isArray(t)) return s.errors = [{
                 instancePath: r + "/advanced",
                 schemaPath: "#/$defs/Advanced/type",
@@ -234,29 +234,29 @@ const K = U(function() {
                 message: "must be object"
               }], !1;
               {
-                let d;
-                if (t.gameId === void 0 && (d = "gameId") || t.screenWidth === void 0 && (d = "screenWidth") || t.screenHeight === void 0 && (d = "screenHeight") || t.uiAreaWidth === void 0 && (d = "uiAreaWidth") || t.uiAreaHeight === void 0 && (d = "uiAreaHeight") || t.windowOpacity === void 0 && (d = "windowOpacity") || t.screenScale === void 0 && (d = "screenScale") || t.numberFontFilename === void 0 && (d = "numberFontFilename") || t.mainFontFilename === void 0 && (d = "mainFontFilename") || t.fallbackFonts === void 0 && (d = "fallbackFonts") || t.fontSize === void 0 && (d = "fontSize")) return s.errors = [{
+                let c;
+                if (t.gameId === void 0 && (c = "gameId") || t.screenWidth === void 0 && (c = "screenWidth") || t.screenHeight === void 0 && (c = "screenHeight") || t.uiAreaWidth === void 0 && (c = "uiAreaWidth") || t.uiAreaHeight === void 0 && (c = "uiAreaHeight") || t.windowOpacity === void 0 && (c = "windowOpacity") || t.screenScale === void 0 && (c = "screenScale") || t.numberFontFilename === void 0 && (c = "numberFontFilename") || t.mainFontFilename === void 0 && (c = "mainFontFilename") || t.fallbackFonts === void 0 && (c = "fallbackFonts") || t.fontSize === void 0 && (c = "fontSize")) return s.errors = [{
                   instancePath: r + "/advanced",
                   schemaPath: "#/$defs/Advanced/required",
                   keyword: "required",
-                  params: { missingProperty: d },
-                  message: "must have required property '" + d + "'"
+                  params: { missingProperty: c },
+                  message: "must have required property '" + c + "'"
                 }], !1;
-                for (const e in t) if (!W.call(M.properties, e)) return s.errors = [{ instancePath: r + "/advanced", schemaPath: "#/$defs/Advanced/additionalProperties", keyword: "additionalProperties", params: {
+                for (const e in t) if (!X.call(O.properties, e)) return s.errors = [{ instancePath: r + "/advanced", schemaPath: "#/$defs/Advanced/additionalProperties", keyword: "additionalProperties", params: {
                   additionalProperty: e
                 }, message: "must NOT have additional properties" }], !1;
                 if (t.gameId !== void 0) {
                   let e = t.gameId;
-                  const o = 0;
+                  const n = 0;
                   if (typeof e != "number" || e % 1 || isNaN(e) || !isFinite(e)) return s.errors = [{ instancePath: r + "/advanced/gameId", schemaPath: "#/$defs/Advanced/properties/gameId/type", keyword: "type", params: {
                     type: "integer"
                   }, message: "must be integer" }], !1;
-                  var u = o === 0;
-                } else u = !0;
-                if (u) {
+                  var g = n === 0;
+                } else g = !0;
+                if (g) {
                   if (t.screenWidth !== void 0) {
                     let e = t.screenWidth;
-                    const o = 0;
+                    const n = 0;
                     if (typeof e != "number" || e % 1 || isNaN(e) || !isFinite(e)) return s.errors = [{
                       instancePath: r + "/advanced/screenWidth",
                       schemaPath: "#/$defs/Advanced/properties/screenWidth/type",
@@ -264,12 +264,12 @@ const K = U(function() {
                       params: { type: "integer" },
                       message: "must be integer"
                     }], !1;
-                    u = o === 0;
-                  } else u = !0;
-                  if (u) {
+                    g = n === 0;
+                  } else g = !0;
+                  if (g) {
                     if (t.screenHeight !== void 0) {
                       let e = t.screenHeight;
-                      const o = 0;
+                      const n = 0;
                       if (typeof e != "number" || e % 1 || isNaN(e) || !isFinite(e)) return s.errors = [{
                         instancePath: r + "/advanced/screenHeight",
                         schemaPath: "#/$defs/Advanced/properties/screenHeight/type",
@@ -277,12 +277,12 @@ const K = U(function() {
                         params: { type: "integer" },
                         message: "must be integer"
                       }], !1;
-                      u = o === 0;
-                    } else u = !0;
-                    if (u) {
+                      g = n === 0;
+                    } else g = !0;
+                    if (g) {
                       if (t.uiAreaWidth !== void 0) {
                         let e = t.uiAreaWidth;
-                        const o = 0;
+                        const n = 0;
                         if (typeof e != "number" || e % 1 || isNaN(e) || !isFinite(e)) return s.errors = [{
                           instancePath: r + "/advanced/uiAreaWidth",
                           schemaPath: "#/$defs/Advanced/properties/uiAreaWidth/type",
@@ -290,12 +290,12 @@ const K = U(function() {
                           params: { type: "integer" },
                           message: "must be integer"
                         }], !1;
-                        u = o === 0;
-                      } else u = !0;
-                      if (u) {
+                        g = n === 0;
+                      } else g = !0;
+                      if (g) {
                         if (t.uiAreaHeight !== void 0) {
                           let e = t.uiAreaHeight;
-                          const o = 0;
+                          const n = 0;
                           if (typeof e != "number" || e % 1 || isNaN(e) || !isFinite(e)) return s.errors = [{
                             instancePath: r + "/advanced/uiAreaHeight",
                             schemaPath: "#/$defs/Advanced/properties/uiAreaHeight/type",
@@ -303,12 +303,12 @@ const K = U(function() {
                             params: { type: "integer" },
                             message: "must be integer"
                           }], !1;
-                          u = o === 0;
-                        } else u = !0;
-                        if (u) {
+                          g = n === 0;
+                        } else g = !0;
+                        if (g) {
                           if (t.windowOpacity !== void 0) {
                             let e = t.windowOpacity;
-                            const o = 0;
+                            const n = 0;
                             if (typeof e != "number" || e % 1 || isNaN(e) || !isFinite(e)) return s.errors = [{
                               instancePath: r + "/advanced/windowOpacity",
                               schemaPath: "#/$defs/Advanced/properties/windowOpacity/type",
@@ -316,18 +316,18 @@ const K = U(function() {
                               params: { type: "integer" },
                               message: "must be integer"
                             }], !1;
-                            u = o === 0;
-                          } else u = !0;
-                          if (u) {
+                            g = n === 0;
+                          } else g = !0;
+                          if (g) {
                             if (t.screenScale !== void 0) {
                               let e = t.screenScale;
-                              const o = 0;
+                              const n = 0;
                               if (typeof e != "number" || !isFinite(e)) return s.errors = [{ instancePath: r + "/advanced/screenScale", schemaPath: "#/$defs/Advanced/properties/screenScale/type", keyword: "type", params: {
                                 type: "number"
                               }, message: "must be number" }], !1;
-                              u = o === 0;
-                            } else u = !0;
-                            if (u) {
+                              g = n === 0;
+                            } else g = !0;
+                            if (g) {
                               if (t.numberFontFilename !== void 0) {
                                 if (typeof t.numberFontFilename != "string") return s.errors = [{
                                   instancePath: r + "/advanced/numberFontFilename",
@@ -336,9 +336,9 @@ const K = U(function() {
                                   params: { type: "string" },
                                   message: "must be string"
                                 }], !1;
-                                u = !0;
-                              } else u = !0;
-                              if (u) {
+                                g = !0;
+                              } else g = !0;
+                              if (g) {
                                 if (t.mainFontFilename !== void 0) {
                                   if (typeof t.mainFontFilename != "string") return s.errors = [{
                                     instancePath: r + "/advanced/mainFontFilename",
@@ -347,9 +347,9 @@ const K = U(function() {
                                     params: { type: "string" },
                                     message: "must be string"
                                   }], !1;
-                                  u = !0;
-                                } else u = !0;
-                                if (u) {
+                                  g = !0;
+                                } else g = !0;
+                                if (g) {
                                   if (t.fallbackFonts !== void 0) {
                                     if (typeof t.fallbackFonts != "string") return s.errors = [{
                                       instancePath: r + "/advanced/fallbackFonts",
@@ -358,11 +358,11 @@ const K = U(function() {
                                       params: { type: "string" },
                                       message: "must be string"
                                     }], !1;
-                                    u = !0;
-                                  } else u = !0;
-                                  if (u) if (t.fontSize !== void 0) {
+                                    g = !0;
+                                  } else g = !0;
+                                  if (g) if (t.fontSize !== void 0) {
                                     let e = t.fontSize;
-                                    const o = 0;
+                                    const n = 0;
                                     if (typeof e != "number" || e % 1 || isNaN(e) || !isFinite(e)) return s.errors = [{
                                       instancePath: r + "/advanced/fontSize",
                                       schemaPath: "#/$defs/Advanced/properties/fontSize/type",
@@ -370,8 +370,8 @@ const K = U(function() {
                                       params: { type: "integer" },
                                       message: "must be integer"
                                     }], !1;
-                                    u = o === 0;
-                                  } else u = !0;
+                                    g = n === 0;
+                                  } else g = !0;
                                 }
                               }
                             }
@@ -382,12 +382,12 @@ const K = U(function() {
                   }
                 }
               }
-              m = c === 0;
-            } else m = !0;
-            if (m) {
+              o = y === 0;
+            } else o = !0;
+            if (o) {
               if (i.attackMotions !== void 0) {
                 let t = i.attackMotions;
-                const c = 0;
+                const y = 0;
                 if (!Array.isArray(t)) return s.errors = [{
                   instancePath: r + "/attackMotions",
                   schemaPath: "#/properties/attackMotions/type",
@@ -396,11 +396,11 @@ const K = U(function() {
                   message: "must be array"
                 }], !1;
                 {
-                  const d = t.length;
-                  for (let e = 0; e < d; e++) {
-                    let o = t[e];
+                  const c = t.length;
+                  for (let e = 0; e < c; e++) {
+                    let n = t[e];
                     const p = 0;
-                    if (!o || typeof o != "object" || Array.isArray(o)) return s.errors = [{
+                    if (!n || typeof n != "object" || Array.isArray(n)) return s.errors = [{
                       instancePath: r + "/attackMotions/" + e,
                       schemaPath: "#/$defs/AttackMotion/type",
                       keyword: "type",
@@ -409,50 +409,50 @@ const K = U(function() {
                     }], !1;
                     {
                       let a;
-                      if (o.type === void 0 && (a = "type") || o.weaponImageId === void 0 && (a = "weaponImageId")) return s.errors = [{
+                      if (n.type === void 0 && (a = "type") || n.weaponImageId === void 0 && (a = "weaponImageId")) return s.errors = [{
                         instancePath: r + "/attackMotions/" + e,
                         schemaPath: "#/$defs/AttackMotion/required",
                         keyword: "required",
                         params: { missingProperty: a },
                         message: "must have required property '" + a + "'"
                       }], !1;
-                      for (const y in o) if (y !== "type" && y !== "weaponImageId") return s.errors = [{
+                      for (const d in n) if (d !== "type" && d !== "weaponImageId") return s.errors = [{
                         instancePath: r + "/attackMotions/" + e,
                         schemaPath: "#/$defs/AttackMotion/additionalProperties",
                         keyword: "additionalProperties",
-                        params: { additionalProperty: y },
+                        params: { additionalProperty: d },
                         message: "must NOT have additional properties"
                       }], !1;
-                      if (o.type !== void 0) {
-                        let y = o.type;
-                        const g = 0;
-                        if (typeof y != "number" || !isFinite(y)) return s.errors = [{ instancePath: r + "/attackMotions/" + e + "/type", schemaPath: "#/$defs/AttackMotion/properties/type/type", keyword: "type", params: {
+                      if (n.type !== void 0) {
+                        let d = n.type;
+                        const u = 0;
+                        if (typeof d != "number" || !isFinite(d)) return s.errors = [{ instancePath: r + "/attackMotions/" + e + "/type", schemaPath: "#/$defs/AttackMotion/properties/type/type", keyword: "type", params: {
                           type: "number"
                         }, message: "must be number" }], !1;
-                        var j = g === 0;
-                      } else j = !0;
-                      if (j) if (o.weaponImageId !== void 0) {
-                        let y = o.weaponImageId;
-                        const g = 0;
-                        if (typeof y != "number" || !isFinite(y)) return s.errors = [{
+                        var q = u === 0;
+                      } else q = !0;
+                      if (q) if (n.weaponImageId !== void 0) {
+                        let d = n.weaponImageId;
+                        const u = 0;
+                        if (typeof d != "number" || !isFinite(d)) return s.errors = [{
                           instancePath: r + "/attackMotions/" + e + "/weaponImageId",
                           schemaPath: "#/$defs/AttackMotion/properties/weaponImageId/type",
                           keyword: "type",
                           params: { type: "number" },
                           message: "must be number"
                         }], !1;
-                        j = g === 0;
-                      } else j = !0;
+                        q = u === 0;
+                      } else q = !0;
                     }
                     if (p !== 0) break;
                   }
                 }
-                m = c === 0;
-              } else m = !0;
-              if (m) {
+                o = y === 0;
+              } else o = !0;
+              if (o) {
                 if (i.titleBgm !== void 0) {
                   let t = i.titleBgm;
-                  const c = 0;
+                  const y = 0;
                   if (!t || typeof t != "object" || Array.isArray(t)) return s.errors = [{
                     instancePath: r + "/titleBgm",
                     schemaPath: "#/$defs/Audio/type",
@@ -461,13 +461,13 @@ const K = U(function() {
                     message: "must be object"
                   }], !1;
                   {
-                    let d;
-                    if (t.name === void 0 && (d = "name") || t.volume === void 0 && (d = "volume") || t.pitch === void 0 && (d = "pitch") || t.pan === void 0 && (d = "pan")) return s.errors = [{
+                    let c;
+                    if (t.name === void 0 && (c = "name") || t.volume === void 0 && (c = "volume") || t.pitch === void 0 && (c = "pitch") || t.pan === void 0 && (c = "pan")) return s.errors = [{
                       instancePath: r + "/titleBgm",
                       schemaPath: "#/$defs/Audio/required",
                       keyword: "required",
-                      params: { missingProperty: d },
-                      message: "must have required property '" + d + "'"
+                      params: { missingProperty: c },
+                      message: "must have required property '" + c + "'"
                     }], !1;
                     for (const e in t) if (e !== "name" && e !== "volume" && e !== "pitch" && e !== "pan") return s.errors = [{
                       instancePath: r + "/titleBgm",
@@ -489,7 +489,7 @@ const K = U(function() {
                     if (v) {
                       if (t.volume !== void 0) {
                         let e = t.volume;
-                        const o = 0;
+                        const n = 0;
                         if (typeof e != "number" || e % 1 || isNaN(e) || !isFinite(e)) return s.errors = [{
                           instancePath: r + "/titleBgm/volume",
                           schemaPath: "#/$defs/Audio/properties/volume/type",
@@ -497,28 +497,12 @@ const K = U(function() {
                           params: { type: "integer" },
                           message: "must be integer"
                         }], !1;
-                        if (typeof e == "number" && isFinite(e)) {
-                          if (e > 100 || isNaN(e)) return s.errors = [{
-                            instancePath: r + "/titleBgm/volume",
-                            schemaPath: "#/$defs/Audio/properties/volume/maximum",
-                            keyword: "maximum",
-                            params: { comparison: "<=", limit: 100 },
-                            message: "must be <= 100"
-                          }], !1;
-                          if (e < 0 || isNaN(e)) return s.errors = [{
-                            instancePath: r + "/titleBgm/volume",
-                            schemaPath: "#/$defs/Audio/properties/volume/minimum",
-                            keyword: "minimum",
-                            params: { comparison: ">=", limit: 0 },
-                            message: "must be >= 0"
-                          }], !1;
-                        }
-                        v = o === 0;
+                        v = n === 0;
                       } else v = !0;
                       if (v) {
                         if (t.pitch !== void 0) {
                           let e = t.pitch;
-                          const o = 0;
+                          const n = 0;
                           if (typeof e != "number" || e % 1 || isNaN(e) || !isFinite(e)) return s.errors = [{
                             instancePath: r + "/titleBgm/pitch",
                             schemaPath: "#/$defs/Audio/properties/pitch/type",
@@ -526,27 +510,11 @@ const K = U(function() {
                             params: { type: "integer" },
                             message: "must be integer"
                           }], !1;
-                          if (typeof e == "number" && isFinite(e)) {
-                            if (e > 150 || isNaN(e)) return s.errors = [{
-                              instancePath: r + "/titleBgm/pitch",
-                              schemaPath: "#/$defs/Audio/properties/pitch/maximum",
-                              keyword: "maximum",
-                              params: { comparison: "<=", limit: 150 },
-                              message: "must be <= 150"
-                            }], !1;
-                            if (e < 50 || isNaN(e)) return s.errors = [{
-                              instancePath: r + "/titleBgm/pitch",
-                              schemaPath: "#/$defs/Audio/properties/pitch/minimum",
-                              keyword: "minimum",
-                              params: { comparison: ">=", limit: 50 },
-                              message: "must be >= 50"
-                            }], !1;
-                          }
-                          v = o === 0;
+                          v = n === 0;
                         } else v = !0;
                         if (v) if (t.pan !== void 0) {
                           let e = t.pan;
-                          const o = 0;
+                          const n = 0;
                           if (typeof e != "number" || e % 1 || isNaN(e) || !isFinite(e)) return s.errors = [{
                             instancePath: r + "/titleBgm/pan",
                             schemaPath: "#/$defs/Audio/properties/pan/type",
@@ -554,30 +522,17 @@ const K = U(function() {
                             params: { type: "integer" },
                             message: "must be integer"
                           }], !1;
-                          if (typeof e == "number" && isFinite(e)) {
-                            if (e > 100 || isNaN(e)) return s.errors = [{
-                              instancePath: r + "/titleBgm/pan",
-                              schemaPath: "#/$defs/Audio/properties/pan/maximum",
-                              keyword: "maximum",
-                              params: { comparison: "<=", limit: 100 },
-                              message: "must be <= 100"
-                            }], !1;
-                            if (e < -100 || isNaN(e)) return s.errors = [{ instancePath: r + "/titleBgm/pan", schemaPath: "#/$defs/Audio/properties/pan/minimum", keyword: "minimum", params: {
-                              comparison: ">=",
-                              limit: -100
-                            }, message: "must be >= -100" }], !1;
-                          }
-                          v = o === 0;
+                          v = n === 0;
                         } else v = !0;
                       }
                     }
                   }
-                  m = c === 0;
-                } else m = !0;
-                if (m) {
+                  o = y === 0;
+                } else o = !0;
+                if (o) {
                   if (i.battleBgm !== void 0) {
                     let t = i.battleBgm;
-                    const c = 0;
+                    const y = 0;
                     if (!t || typeof t != "object" || Array.isArray(t)) return s.errors = [{
                       instancePath: r + "/battleBgm",
                       schemaPath: "#/$defs/Audio/type",
@@ -586,13 +541,13 @@ const K = U(function() {
                       message: "must be object"
                     }], !1;
                     {
-                      let d;
-                      if (t.name === void 0 && (d = "name") || t.volume === void 0 && (d = "volume") || t.pitch === void 0 && (d = "pitch") || t.pan === void 0 && (d = "pan")) return s.errors = [{
+                      let c;
+                      if (t.name === void 0 && (c = "name") || t.volume === void 0 && (c = "volume") || t.pitch === void 0 && (c = "pitch") || t.pan === void 0 && (c = "pan")) return s.errors = [{
                         instancePath: r + "/battleBgm",
                         schemaPath: "#/$defs/Audio/required",
                         keyword: "required",
-                        params: { missingProperty: d },
-                        message: "must have required property '" + d + "'"
+                        params: { missingProperty: c },
+                        message: "must have required property '" + c + "'"
                       }], !1;
                       for (const e in t) if (e !== "name" && e !== "volume" && e !== "pitch" && e !== "pan") return s.errors = [{
                         instancePath: r + "/battleBgm",
@@ -614,7 +569,7 @@ const K = U(function() {
                       if (w) {
                         if (t.volume !== void 0) {
                           let e = t.volume;
-                          const o = 0;
+                          const n = 0;
                           if (typeof e != "number" || e % 1 || isNaN(e) || !isFinite(e)) return s.errors = [{
                             instancePath: r + "/battleBgm/volume",
                             schemaPath: "#/$defs/Audio/properties/volume/type",
@@ -622,28 +577,12 @@ const K = U(function() {
                             params: { type: "integer" },
                             message: "must be integer"
                           }], !1;
-                          if (typeof e == "number" && isFinite(e)) {
-                            if (e > 100 || isNaN(e)) return s.errors = [{
-                              instancePath: r + "/battleBgm/volume",
-                              schemaPath: "#/$defs/Audio/properties/volume/maximum",
-                              keyword: "maximum",
-                              params: { comparison: "<=", limit: 100 },
-                              message: "must be <= 100"
-                            }], !1;
-                            if (e < 0 || isNaN(e)) return s.errors = [{
-                              instancePath: r + "/battleBgm/volume",
-                              schemaPath: "#/$defs/Audio/properties/volume/minimum",
-                              keyword: "minimum",
-                              params: { comparison: ">=", limit: 0 },
-                              message: "must be >= 0"
-                            }], !1;
-                          }
-                          w = o === 0;
+                          w = n === 0;
                         } else w = !0;
                         if (w) {
                           if (t.pitch !== void 0) {
                             let e = t.pitch;
-                            const o = 0;
+                            const n = 0;
                             if (typeof e != "number" || e % 1 || isNaN(e) || !isFinite(e)) return s.errors = [{
                               instancePath: r + "/battleBgm/pitch",
                               schemaPath: "#/$defs/Audio/properties/pitch/type",
@@ -651,27 +590,11 @@ const K = U(function() {
                               params: { type: "integer" },
                               message: "must be integer"
                             }], !1;
-                            if (typeof e == "number" && isFinite(e)) {
-                              if (e > 150 || isNaN(e)) return s.errors = [{
-                                instancePath: r + "/battleBgm/pitch",
-                                schemaPath: "#/$defs/Audio/properties/pitch/maximum",
-                                keyword: "maximum",
-                                params: { comparison: "<=", limit: 150 },
-                                message: "must be <= 150"
-                              }], !1;
-                              if (e < 50 || isNaN(e)) return s.errors = [{
-                                instancePath: r + "/battleBgm/pitch",
-                                schemaPath: "#/$defs/Audio/properties/pitch/minimum",
-                                keyword: "minimum",
-                                params: { comparison: ">=", limit: 50 },
-                                message: "must be >= 50"
-                              }], !1;
-                            }
-                            w = o === 0;
+                            w = n === 0;
                           } else w = !0;
                           if (w) if (t.pan !== void 0) {
                             let e = t.pan;
-                            const o = 0;
+                            const n = 0;
                             if (typeof e != "number" || e % 1 || isNaN(e) || !isFinite(e)) return s.errors = [{
                               instancePath: r + "/battleBgm/pan",
                               schemaPath: "#/$defs/Audio/properties/pan/type",
@@ -679,30 +602,17 @@ const K = U(function() {
                               params: { type: "integer" },
                               message: "must be integer"
                             }], !1;
-                            if (typeof e == "number" && isFinite(e)) {
-                              if (e > 100 || isNaN(e)) return s.errors = [{
-                                instancePath: r + "/battleBgm/pan",
-                                schemaPath: "#/$defs/Audio/properties/pan/maximum",
-                                keyword: "maximum",
-                                params: { comparison: "<=", limit: 100 },
-                                message: "must be <= 100"
-                              }], !1;
-                              if (e < -100 || isNaN(e)) return s.errors = [{ instancePath: r + "/battleBgm/pan", schemaPath: "#/$defs/Audio/properties/pan/minimum", keyword: "minimum", params: {
-                                comparison: ">=",
-                                limit: -100
-                              }, message: "must be >= -100" }], !1;
-                            }
-                            w = o === 0;
+                            w = n === 0;
                           } else w = !0;
                         }
                       }
                     }
-                    m = c === 0;
-                  } else m = !0;
-                  if (m) {
+                    o = y === 0;
+                  } else o = !0;
+                  if (o) {
                     if (i.gameoverMe !== void 0) {
                       let t = i.gameoverMe;
-                      const c = 0;
+                      const y = 0;
                       if (!t || typeof t != "object" || Array.isArray(t)) return s.errors = [{
                         instancePath: r + "/gameoverMe",
                         schemaPath: "#/$defs/Audio/type",
@@ -711,13 +621,13 @@ const K = U(function() {
                         message: "must be object"
                       }], !1;
                       {
-                        let d;
-                        if (t.name === void 0 && (d = "name") || t.volume === void 0 && (d = "volume") || t.pitch === void 0 && (d = "pitch") || t.pan === void 0 && (d = "pan")) return s.errors = [{
+                        let c;
+                        if (t.name === void 0 && (c = "name") || t.volume === void 0 && (c = "volume") || t.pitch === void 0 && (c = "pitch") || t.pan === void 0 && (c = "pan")) return s.errors = [{
                           instancePath: r + "/gameoverMe",
                           schemaPath: "#/$defs/Audio/required",
                           keyword: "required",
-                          params: { missingProperty: d },
-                          message: "must have required property '" + d + "'"
+                          params: { missingProperty: c },
+                          message: "must have required property '" + c + "'"
                         }], !1;
                         for (const e in t) if (e !== "name" && e !== "volume" && e !== "pitch" && e !== "pan") return s.errors = [{
                           instancePath: r + "/gameoverMe",
@@ -739,7 +649,7 @@ const K = U(function() {
                         if (k) {
                           if (t.volume !== void 0) {
                             let e = t.volume;
-                            const o = 0;
+                            const n = 0;
                             if (typeof e != "number" || e % 1 || isNaN(e) || !isFinite(e)) return s.errors = [{
                               instancePath: r + "/gameoverMe/volume",
                               schemaPath: "#/$defs/Audio/properties/volume/type",
@@ -747,28 +657,12 @@ const K = U(function() {
                               params: { type: "integer" },
                               message: "must be integer"
                             }], !1;
-                            if (typeof e == "number" && isFinite(e)) {
-                              if (e > 100 || isNaN(e)) return s.errors = [{
-                                instancePath: r + "/gameoverMe/volume",
-                                schemaPath: "#/$defs/Audio/properties/volume/maximum",
-                                keyword: "maximum",
-                                params: { comparison: "<=", limit: 100 },
-                                message: "must be <= 100"
-                              }], !1;
-                              if (e < 0 || isNaN(e)) return s.errors = [{
-                                instancePath: r + "/gameoverMe/volume",
-                                schemaPath: "#/$defs/Audio/properties/volume/minimum",
-                                keyword: "minimum",
-                                params: { comparison: ">=", limit: 0 },
-                                message: "must be >= 0"
-                              }], !1;
-                            }
-                            k = o === 0;
+                            k = n === 0;
                           } else k = !0;
                           if (k) {
                             if (t.pitch !== void 0) {
                               let e = t.pitch;
-                              const o = 0;
+                              const n = 0;
                               if (typeof e != "number" || e % 1 || isNaN(e) || !isFinite(e)) return s.errors = [{
                                 instancePath: r + "/gameoverMe/pitch",
                                 schemaPath: "#/$defs/Audio/properties/pitch/type",
@@ -776,27 +670,11 @@ const K = U(function() {
                                 params: { type: "integer" },
                                 message: "must be integer"
                               }], !1;
-                              if (typeof e == "number" && isFinite(e)) {
-                                if (e > 150 || isNaN(e)) return s.errors = [{
-                                  instancePath: r + "/gameoverMe/pitch",
-                                  schemaPath: "#/$defs/Audio/properties/pitch/maximum",
-                                  keyword: "maximum",
-                                  params: { comparison: "<=", limit: 150 },
-                                  message: "must be <= 150"
-                                }], !1;
-                                if (e < 50 || isNaN(e)) return s.errors = [{
-                                  instancePath: r + "/gameoverMe/pitch",
-                                  schemaPath: "#/$defs/Audio/properties/pitch/minimum",
-                                  keyword: "minimum",
-                                  params: { comparison: ">=", limit: 50 },
-                                  message: "must be >= 50"
-                                }], !1;
-                              }
-                              k = o === 0;
+                              k = n === 0;
                             } else k = !0;
                             if (k) if (t.pan !== void 0) {
                               let e = t.pan;
-                              const o = 0;
+                              const n = 0;
                               if (typeof e != "number" || e % 1 || isNaN(e) || !isFinite(e)) return s.errors = [{
                                 instancePath: r + "/gameoverMe/pan",
                                 schemaPath: "#/$defs/Audio/properties/pan/type",
@@ -804,30 +682,17 @@ const K = U(function() {
                                 params: { type: "integer" },
                                 message: "must be integer"
                               }], !1;
-                              if (typeof e == "number" && isFinite(e)) {
-                                if (e > 100 || isNaN(e)) return s.errors = [{
-                                  instancePath: r + "/gameoverMe/pan",
-                                  schemaPath: "#/$defs/Audio/properties/pan/maximum",
-                                  keyword: "maximum",
-                                  params: { comparison: "<=", limit: 100 },
-                                  message: "must be <= 100"
-                                }], !1;
-                                if (e < -100 || isNaN(e)) return s.errors = [{ instancePath: r + "/gameoverMe/pan", schemaPath: "#/$defs/Audio/properties/pan/minimum", keyword: "minimum", params: {
-                                  comparison: ">=",
-                                  limit: -100
-                                }, message: "must be >= -100" }], !1;
-                              }
-                              k = o === 0;
+                              k = n === 0;
                             } else k = !0;
                           }
                         }
                       }
-                      m = c === 0;
-                    } else m = !0;
-                    if (m) {
+                      o = y === 0;
+                    } else o = !0;
+                    if (o) {
                       if (i.victoryMe !== void 0) {
                         let t = i.victoryMe;
-                        const c = 0;
+                        const y = 0;
                         if (!t || typeof t != "object" || Array.isArray(t)) return s.errors = [{
                           instancePath: r + "/victoryMe",
                           schemaPath: "#/$defs/Audio/type",
@@ -836,13 +701,13 @@ const K = U(function() {
                           message: "must be object"
                         }], !1;
                         {
-                          let d;
-                          if (t.name === void 0 && (d = "name") || t.volume === void 0 && (d = "volume") || t.pitch === void 0 && (d = "pitch") || t.pan === void 0 && (d = "pan")) return s.errors = [{
+                          let c;
+                          if (t.name === void 0 && (c = "name") || t.volume === void 0 && (c = "volume") || t.pitch === void 0 && (c = "pitch") || t.pan === void 0 && (c = "pan")) return s.errors = [{
                             instancePath: r + "/victoryMe",
                             schemaPath: "#/$defs/Audio/required",
                             keyword: "required",
-                            params: { missingProperty: d },
-                            message: "must have required property '" + d + "'"
+                            params: { missingProperty: c },
+                            message: "must have required property '" + c + "'"
                           }], !1;
                           for (const e in t) if (e !== "name" && e !== "volume" && e !== "pitch" && e !== "pan") return s.errors = [{
                             instancePath: r + "/victoryMe",
@@ -864,7 +729,7 @@ const K = U(function() {
                           if (N) {
                             if (t.volume !== void 0) {
                               let e = t.volume;
-                              const o = 0;
+                              const n = 0;
                               if (typeof e != "number" || e % 1 || isNaN(e) || !isFinite(e)) return s.errors = [{
                                 instancePath: r + "/victoryMe/volume",
                                 schemaPath: "#/$defs/Audio/properties/volume/type",
@@ -872,28 +737,12 @@ const K = U(function() {
                                 params: { type: "integer" },
                                 message: "must be integer"
                               }], !1;
-                              if (typeof e == "number" && isFinite(e)) {
-                                if (e > 100 || isNaN(e)) return s.errors = [{
-                                  instancePath: r + "/victoryMe/volume",
-                                  schemaPath: "#/$defs/Audio/properties/volume/maximum",
-                                  keyword: "maximum",
-                                  params: { comparison: "<=", limit: 100 },
-                                  message: "must be <= 100"
-                                }], !1;
-                                if (e < 0 || isNaN(e)) return s.errors = [{
-                                  instancePath: r + "/victoryMe/volume",
-                                  schemaPath: "#/$defs/Audio/properties/volume/minimum",
-                                  keyword: "minimum",
-                                  params: { comparison: ">=", limit: 0 },
-                                  message: "must be >= 0"
-                                }], !1;
-                              }
-                              N = o === 0;
+                              N = n === 0;
                             } else N = !0;
                             if (N) {
                               if (t.pitch !== void 0) {
                                 let e = t.pitch;
-                                const o = 0;
+                                const n = 0;
                                 if (typeof e != "number" || e % 1 || isNaN(e) || !isFinite(e)) return s.errors = [{
                                   instancePath: r + "/victoryMe/pitch",
                                   schemaPath: "#/$defs/Audio/properties/pitch/type",
@@ -901,27 +750,11 @@ const K = U(function() {
                                   params: { type: "integer" },
                                   message: "must be integer"
                                 }], !1;
-                                if (typeof e == "number" && isFinite(e)) {
-                                  if (e > 150 || isNaN(e)) return s.errors = [{
-                                    instancePath: r + "/victoryMe/pitch",
-                                    schemaPath: "#/$defs/Audio/properties/pitch/maximum",
-                                    keyword: "maximum",
-                                    params: { comparison: "<=", limit: 150 },
-                                    message: "must be <= 150"
-                                  }], !1;
-                                  if (e < 50 || isNaN(e)) return s.errors = [{
-                                    instancePath: r + "/victoryMe/pitch",
-                                    schemaPath: "#/$defs/Audio/properties/pitch/minimum",
-                                    keyword: "minimum",
-                                    params: { comparison: ">=", limit: 50 },
-                                    message: "must be >= 50"
-                                  }], !1;
-                                }
-                                N = o === 0;
+                                N = n === 0;
                               } else N = !0;
                               if (N) if (t.pan !== void 0) {
                                 let e = t.pan;
-                                const o = 0;
+                                const n = 0;
                                 if (typeof e != "number" || e % 1 || isNaN(e) || !isFinite(e)) return s.errors = [{
                                   instancePath: r + "/victoryMe/pan",
                                   schemaPath: "#/$defs/Audio/properties/pan/type",
@@ -929,30 +762,17 @@ const K = U(function() {
                                   params: { type: "integer" },
                                   message: "must be integer"
                                 }], !1;
-                                if (typeof e == "number" && isFinite(e)) {
-                                  if (e > 100 || isNaN(e)) return s.errors = [{
-                                    instancePath: r + "/victoryMe/pan",
-                                    schemaPath: "#/$defs/Audio/properties/pan/maximum",
-                                    keyword: "maximum",
-                                    params: { comparison: "<=", limit: 100 },
-                                    message: "must be <= 100"
-                                  }], !1;
-                                  if (e < -100 || isNaN(e)) return s.errors = [{ instancePath: r + "/victoryMe/pan", schemaPath: "#/$defs/Audio/properties/pan/minimum", keyword: "minimum", params: {
-                                    comparison: ">=",
-                                    limit: -100
-                                  }, message: "must be >= -100" }], !1;
-                                }
-                                N = o === 0;
+                                N = n === 0;
                               } else N = !0;
                             }
                           }
                         }
-                        m = c === 0;
-                      } else m = !0;
-                      if (m) {
+                        o = y === 0;
+                      } else o = !0;
+                      if (o) {
                         if (i.defeatMe !== void 0) {
                           let t = i.defeatMe;
-                          const c = 0;
+                          const y = 0;
                           if (!t || typeof t != "object" || Array.isArray(t)) return s.errors = [{
                             instancePath: r + "/defeatMe",
                             schemaPath: "#/$defs/Audio/type",
@@ -961,13 +781,13 @@ const K = U(function() {
                             message: "must be object"
                           }], !1;
                           {
-                            let d;
-                            if (t.name === void 0 && (d = "name") || t.volume === void 0 && (d = "volume") || t.pitch === void 0 && (d = "pitch") || t.pan === void 0 && (d = "pan")) return s.errors = [{
+                            let c;
+                            if (t.name === void 0 && (c = "name") || t.volume === void 0 && (c = "volume") || t.pitch === void 0 && (c = "pitch") || t.pan === void 0 && (c = "pan")) return s.errors = [{
                               instancePath: r + "/defeatMe",
                               schemaPath: "#/$defs/Audio/required",
                               keyword: "required",
-                              params: { missingProperty: d },
-                              message: "must have required property '" + d + "'"
+                              params: { missingProperty: c },
+                              message: "must have required property '" + c + "'"
                             }], !1;
                             for (const e in t) if (e !== "name" && e !== "volume" && e !== "pitch" && e !== "pan") return s.errors = [{
                               instancePath: r + "/defeatMe",
@@ -989,7 +809,7 @@ const K = U(function() {
                             if ($) {
                               if (t.volume !== void 0) {
                                 let e = t.volume;
-                                const o = 0;
+                                const n = 0;
                                 if (typeof e != "number" || e % 1 || isNaN(e) || !isFinite(e)) return s.errors = [{
                                   instancePath: r + "/defeatMe/volume",
                                   schemaPath: "#/$defs/Audio/properties/volume/type",
@@ -997,28 +817,12 @@ const K = U(function() {
                                   params: { type: "integer" },
                                   message: "must be integer"
                                 }], !1;
-                                if (typeof e == "number" && isFinite(e)) {
-                                  if (e > 100 || isNaN(e)) return s.errors = [{
-                                    instancePath: r + "/defeatMe/volume",
-                                    schemaPath: "#/$defs/Audio/properties/volume/maximum",
-                                    keyword: "maximum",
-                                    params: { comparison: "<=", limit: 100 },
-                                    message: "must be <= 100"
-                                  }], !1;
-                                  if (e < 0 || isNaN(e)) return s.errors = [{
-                                    instancePath: r + "/defeatMe/volume",
-                                    schemaPath: "#/$defs/Audio/properties/volume/minimum",
-                                    keyword: "minimum",
-                                    params: { comparison: ">=", limit: 0 },
-                                    message: "must be >= 0"
-                                  }], !1;
-                                }
-                                $ = o === 0;
+                                $ = n === 0;
                               } else $ = !0;
                               if ($) {
                                 if (t.pitch !== void 0) {
                                   let e = t.pitch;
-                                  const o = 0;
+                                  const n = 0;
                                   if (typeof e != "number" || e % 1 || isNaN(e) || !isFinite(e)) return s.errors = [{
                                     instancePath: r + "/defeatMe/pitch",
                                     schemaPath: "#/$defs/Audio/properties/pitch/type",
@@ -1026,27 +830,11 @@ const K = U(function() {
                                     params: { type: "integer" },
                                     message: "must be integer"
                                   }], !1;
-                                  if (typeof e == "number" && isFinite(e)) {
-                                    if (e > 150 || isNaN(e)) return s.errors = [{
-                                      instancePath: r + "/defeatMe/pitch",
-                                      schemaPath: "#/$defs/Audio/properties/pitch/maximum",
-                                      keyword: "maximum",
-                                      params: { comparison: "<=", limit: 150 },
-                                      message: "must be <= 150"
-                                    }], !1;
-                                    if (e < 50 || isNaN(e)) return s.errors = [{
-                                      instancePath: r + "/defeatMe/pitch",
-                                      schemaPath: "#/$defs/Audio/properties/pitch/minimum",
-                                      keyword: "minimum",
-                                      params: { comparison: ">=", limit: 50 },
-                                      message: "must be >= 50"
-                                    }], !1;
-                                  }
-                                  $ = o === 0;
+                                  $ = n === 0;
                                 } else $ = !0;
                                 if ($) if (t.pan !== void 0) {
                                   let e = t.pan;
-                                  const o = 0;
+                                  const n = 0;
                                   if (typeof e != "number" || e % 1 || isNaN(e) || !isFinite(e)) return s.errors = [{
                                     instancePath: r + "/defeatMe/pan",
                                     schemaPath: "#/$defs/Audio/properties/pan/type",
@@ -1054,30 +842,17 @@ const K = U(function() {
                                     params: { type: "integer" },
                                     message: "must be integer"
                                   }], !1;
-                                  if (typeof e == "number" && isFinite(e)) {
-                                    if (e > 100 || isNaN(e)) return s.errors = [{
-                                      instancePath: r + "/defeatMe/pan",
-                                      schemaPath: "#/$defs/Audio/properties/pan/maximum",
-                                      keyword: "maximum",
-                                      params: { comparison: "<=", limit: 100 },
-                                      message: "must be <= 100"
-                                    }], !1;
-                                    if (e < -100 || isNaN(e)) return s.errors = [{ instancePath: r + "/defeatMe/pan", schemaPath: "#/$defs/Audio/properties/pan/minimum", keyword: "minimum", params: {
-                                      comparison: ">=",
-                                      limit: -100
-                                    }, message: "must be >= -100" }], !1;
-                                  }
-                                  $ = o === 0;
+                                  $ = n === 0;
                                 } else $ = !0;
                               }
                             }
                           }
-                          m = c === 0;
-                        } else m = !0;
-                        if (m) {
+                          o = y === 0;
+                        } else o = !0;
+                        if (o) {
                           if (i.sounds !== void 0) {
                             let t = i.sounds;
-                            const c = 0;
+                            const y = 0;
                             if (!Array.isArray(t)) return s.errors = [{ instancePath: r + "/sounds", schemaPath: "#/properties/sounds/type", keyword: "type", params: { type: "array" }, message: "must be array" }], !1;
                             if (t.length > 24) return s.errors = [{
                               instancePath: r + "/sounds",
@@ -1094,11 +869,11 @@ const K = U(function() {
                               message: "must NOT have fewer than 24 items"
                             }], !1;
                             {
-                              const d = t.length;
-                              for (let e = 0; e < d; e++) {
-                                let o = t[e];
+                              const c = t.length;
+                              for (let e = 0; e < c; e++) {
+                                let n = t[e];
                                 const p = 0;
-                                if (!o || typeof o != "object" || Array.isArray(o)) return s.errors = [{
+                                if (!n || typeof n != "object" || Array.isArray(n)) return s.errors = [{
                                   instancePath: r + "/sounds/" + e,
                                   schemaPath: "#/$defs/Audio/type",
                                   keyword: "type",
@@ -1107,132 +882,81 @@ const K = U(function() {
                                 }], !1;
                                 {
                                   let a;
-                                  if (o.name === void 0 && (a = "name") || o.volume === void 0 && (a = "volume") || o.pitch === void 0 && (a = "pitch") || o.pan === void 0 && (a = "pan")) return s.errors = [{
+                                  if (n.name === void 0 && (a = "name") || n.volume === void 0 && (a = "volume") || n.pitch === void 0 && (a = "pitch") || n.pan === void 0 && (a = "pan")) return s.errors = [{
                                     instancePath: r + "/sounds/" + e,
                                     schemaPath: "#/$defs/Audio/required",
                                     keyword: "required",
                                     params: { missingProperty: a },
                                     message: "must have required property '" + a + "'"
                                   }], !1;
-                                  for (const y in o) if (y !== "name" && y !== "volume" && y !== "pitch" && y !== "pan") return s.errors = [{
+                                  for (const d in n) if (d !== "name" && d !== "volume" && d !== "pitch" && d !== "pan") return s.errors = [{
                                     instancePath: r + "/sounds/" + e,
                                     schemaPath: "#/$defs/Audio/additionalProperties",
                                     keyword: "additionalProperties",
-                                    params: { additionalProperty: y },
+                                    params: { additionalProperty: d },
                                     message: "must NOT have additional properties"
                                   }], !1;
-                                  if (o.name !== void 0) {
-                                    if (typeof o.name != "string") return s.errors = [{
+                                  if (n.name !== void 0) {
+                                    if (typeof n.name != "string") return s.errors = [{
                                       instancePath: r + "/sounds/" + e + "/name",
                                       schemaPath: "#/$defs/Audio/properties/name/type",
                                       keyword: "type",
                                       params: { type: "string" },
                                       message: "must be string"
                                     }], !1;
-                                    var A = !0;
-                                  } else A = !0;
-                                  if (A) {
-                                    if (o.volume !== void 0) {
-                                      let y = o.volume;
-                                      const g = 0;
-                                      if (typeof y != "number" || y % 1 || isNaN(y) || !isFinite(y)) return s.errors = [{
+                                    var T = !0;
+                                  } else T = !0;
+                                  if (T) {
+                                    if (n.volume !== void 0) {
+                                      let d = n.volume;
+                                      const u = 0;
+                                      if (typeof d != "number" || d % 1 || isNaN(d) || !isFinite(d)) return s.errors = [{
                                         instancePath: r + "/sounds/" + e + "/volume",
                                         schemaPath: "#/$defs/Audio/properties/volume/type",
                                         keyword: "type",
                                         params: { type: "integer" },
                                         message: "must be integer"
                                       }], !1;
-                                      if (typeof y == "number" && isFinite(y)) {
-                                        if (y > 100 || isNaN(y)) return s.errors = [{
-                                          instancePath: r + "/sounds/" + e + "/volume",
-                                          schemaPath: "#/$defs/Audio/properties/volume/maximum",
-                                          keyword: "maximum",
-                                          params: { comparison: "<=", limit: 100 },
-                                          message: "must be <= 100"
-                                        }], !1;
-                                        if (y < 0 || isNaN(y)) return s.errors = [{
-                                          instancePath: r + "/sounds/" + e + "/volume",
-                                          schemaPath: "#/$defs/Audio/properties/volume/minimum",
-                                          keyword: "minimum",
-                                          params: { comparison: ">=", limit: 0 },
-                                          message: "must be >= 0"
-                                        }], !1;
-                                      }
-                                      A = g === 0;
-                                    } else A = !0;
-                                    if (A) {
-                                      if (o.pitch !== void 0) {
-                                        let y = o.pitch;
-                                        const g = 0;
-                                        if (typeof y != "number" || y % 1 || isNaN(y) || !isFinite(y)) return s.errors = [{
+                                      T = u === 0;
+                                    } else T = !0;
+                                    if (T) {
+                                      if (n.pitch !== void 0) {
+                                        let d = n.pitch;
+                                        const u = 0;
+                                        if (typeof d != "number" || d % 1 || isNaN(d) || !isFinite(d)) return s.errors = [{
                                           instancePath: r + "/sounds/" + e + "/pitch",
                                           schemaPath: "#/$defs/Audio/properties/pitch/type",
                                           keyword: "type",
                                           params: { type: "integer" },
                                           message: "must be integer"
                                         }], !1;
-                                        if (typeof y == "number" && isFinite(y)) {
-                                          if (y > 150 || isNaN(y)) return s.errors = [{
-                                            instancePath: r + "/sounds/" + e + "/pitch",
-                                            schemaPath: "#/$defs/Audio/properties/pitch/maximum",
-                                            keyword: "maximum",
-                                            params: { comparison: "<=", limit: 150 },
-                                            message: "must be <= 150"
-                                          }], !1;
-                                          if (y < 50 || isNaN(y)) return s.errors = [{
-                                            instancePath: r + "/sounds/" + e + "/pitch",
-                                            schemaPath: "#/$defs/Audio/properties/pitch/minimum",
-                                            keyword: "minimum",
-                                            params: { comparison: ">=", limit: 50 },
-                                            message: "must be >= 50"
-                                          }], !1;
-                                        }
-                                        A = g === 0;
-                                      } else A = !0;
-                                      if (A) if (o.pan !== void 0) {
-                                        let y = o.pan;
-                                        const g = 0;
-                                        if (typeof y != "number" || y % 1 || isNaN(y) || !isFinite(y)) return s.errors = [{
+                                        T = u === 0;
+                                      } else T = !0;
+                                      if (T) if (n.pan !== void 0) {
+                                        let d = n.pan;
+                                        const u = 0;
+                                        if (typeof d != "number" || d % 1 || isNaN(d) || !isFinite(d)) return s.errors = [{
                                           instancePath: r + "/sounds/" + e + "/pan",
                                           schemaPath: "#/$defs/Audio/properties/pan/type",
                                           keyword: "type",
                                           params: { type: "integer" },
                                           message: "must be integer"
                                         }], !1;
-                                        if (typeof y == "number" && isFinite(y)) {
-                                          if (y > 100 || isNaN(y)) return s.errors = [{
-                                            instancePath: r + "/sounds/" + e + "/pan",
-                                            schemaPath: "#/$defs/Audio/properties/pan/maximum",
-                                            keyword: "maximum",
-                                            params: { comparison: "<=", limit: 100 },
-                                            message: "must be <= 100"
-                                          }], !1;
-                                          if (y < -100 || isNaN(y)) return s.errors = [{ instancePath: r + "/sounds/" + e + "/pan", schemaPath: "#/$defs/Audio/properties/pan/minimum", keyword: "minimum", params: {
-                                            comparison: ">=",
-                                            limit: -100
-                                          }, message: "must be >= -100" }], !1;
-                                        }
-                                        A = g === 0;
-                                      } else A = !0;
+                                        T = u === 0;
+                                      } else T = !0;
                                     }
                                   }
                                 }
                                 if (p !== 0) break;
                               }
                             }
-                            m = c === 0;
-                          } else m = !0;
-                          if (m) {
+                            o = y === 0;
+                          } else o = !0;
+                          if (o) {
                             if (i.itemCategories !== void 0) {
                               let t = i.itemCategories;
-                              const c = 0;
-                              if (!Array.isArray(t)) return s.errors = [{
-                                instancePath: r + "/itemCategories",
-                                schemaPath: "#/$defs/ItemCategories/type",
-                                keyword: "type",
-                                params: { type: "array" },
-                                message: "must be array"
-                              }], !1;
+                              const y = 0;
+                              if (!Array.isArray(t)) return s.errors = [{ instancePath: r + "/itemCategories", schemaPath: "#/$defs/ItemCategories/type", keyword: "type", params: { type: "array" }, message: "must be array" }], !1;
                               if (t.length > 4) return s.errors = [{
                                 instancePath: r + "/itemCategories",
                                 schemaPath: "#/$defs/ItemCategories/maxItems",
@@ -1248,8 +972,8 @@ const K = U(function() {
                                 message: "must NOT have fewer than 4 items"
                               }], !1;
                               {
-                                const d = t.length;
-                                for (let e = 0; e < d; e++)
+                                const c = t.length;
+                                for (let e = 0; e < c; e++)
                                   if (typeof t[e] != "boolean") return s.errors = [{
                                     instancePath: r + "/itemCategories/" + e,
                                     schemaPath: "#/$defs/ItemCategories/items/type",
@@ -1258,12 +982,12 @@ const K = U(function() {
                                     message: "must be boolean"
                                   }], !1;
                               }
-                              m = c === 0;
-                            } else m = !0;
-                            if (m) {
+                              o = y === 0;
+                            } else o = !0;
+                            if (o) {
                               if (i.menuCommands !== void 0) {
                                 let t = i.menuCommands;
-                                const c = 0;
+                                const y = 0;
                                 if (!Array.isArray(t)) return s.errors = [{
                                   instancePath: r + "/menuCommands",
                                   schemaPath: "#/$defs/MenuCommands/type",
@@ -1286,18 +1010,18 @@ const K = U(function() {
                                   message: "must NOT have fewer than 6 items"
                                 }], !1;
                                 {
-                                  const d = t.length;
-                                  for (let e = 0; e < d; e++)
+                                  const c = t.length;
+                                  for (let e = 0; e < c; e++)
                                     if (typeof t[e] != "boolean") return s.errors = [{ instancePath: r + "/menuCommands/" + e, schemaPath: "#/$defs/MenuCommands/items/type", keyword: "type", params: {
                                       type: "boolean"
                                     }, message: "must be boolean" }], !1;
                                 }
-                                m = c === 0;
-                              } else m = !0;
-                              if (m) {
+                                o = y === 0;
+                              } else o = !0;
+                              if (o) {
                                 if (i.ship !== void 0) {
                                   let t = i.ship;
-                                  const c = 0;
+                                  const y = 0;
                                   if (!t || typeof t != "object" || Array.isArray(t)) return s.errors = [{
                                     instancePath: r + "/ship",
                                     schemaPath: "#/$defs/Vehicle/type",
@@ -1306,13 +1030,13 @@ const K = U(function() {
                                     message: "must be object"
                                   }], !1;
                                   {
-                                    let d;
-                                    if (t.characterIndex === void 0 && (d = "characterIndex") || t.characterName === void 0 && (d = "characterName") || t.bgm === void 0 && (d = "bgm") || t.startMapId === void 0 && (d = "startMapId") || t.startX === void 0 && (d = "startX") || t.startY === void 0 && (d = "startY")) return s.errors = [{
+                                    let c;
+                                    if (t.characterIndex === void 0 && (c = "characterIndex") || t.characterName === void 0 && (c = "characterName") || t.bgm === void 0 && (c = "bgm") || t.startMapId === void 0 && (c = "startMapId") || t.startX === void 0 && (c = "startX") || t.startY === void 0 && (c = "startY")) return s.errors = [{
                                       instancePath: r + "/ship",
                                       schemaPath: "#/$defs/Vehicle/required",
                                       keyword: "required",
-                                      params: { missingProperty: d },
-                                      message: "must have required property '" + d + "'"
+                                      params: { missingProperty: c },
+                                      message: "must have required property '" + c + "'"
                                     }], !1;
                                     for (const e in t) if (e !== "characterIndex" && e !== "characterName" && e !== "bgm" && e !== "startMapId" && e !== "startX" && e !== "startY") return s.errors = [{
                                       instancePath: r + "/ship",
@@ -1323,7 +1047,7 @@ const K = U(function() {
                                     }], !1;
                                     if (t.characterIndex !== void 0) {
                                       let e = t.characterIndex;
-                                      const o = 0;
+                                      const n = 0;
                                       if (typeof e != "number" || e % 1 || isNaN(e) || !isFinite(e)) return s.errors = [{
                                         instancePath: r + "/ship/characterIndex",
                                         schemaPath: "#/$defs/Vehicle/properties/characterIndex/type",
@@ -1344,32 +1068,19 @@ const K = U(function() {
                                           message: "must be >= 0"
                                         }], !1;
                                       }
-                                      var l = o === 0;
+                                      var l = n === 0;
                                     } else l = !0;
                                     if (l) {
                                       if (t.characterName !== void 0) {
-                                        let e = t.characterName;
-                                        const o = 0;
-                                        if (typeof e != "string") return s.errors = [{
-                                          instancePath: r + "/ship/characterName",
-                                          schemaPath: "#/$defs/Vehicle/properties/characterName/type",
-                                          keyword: "type",
-                                          params: { type: "string" },
-                                          message: "must be string"
-                                        }], !1;
-                                        if (q(e) < 1) return s.errors = [{
-                                          instancePath: r + "/ship/characterName",
-                                          schemaPath: "#/$defs/Vehicle/properties/characterName/minLength",
-                                          keyword: "minLength",
-                                          params: { limit: 1 },
-                                          message: "must NOT have fewer than 1 characters"
-                                        }], !1;
-                                        l = o === 0;
+                                        if (typeof t.characterName != "string") return s.errors = [{ instancePath: r + "/ship/characterName", schemaPath: "#/$defs/Vehicle/properties/characterName/type", keyword: "type", params: {
+                                          type: "string"
+                                        }, message: "must be string" }], !1;
+                                        l = !0;
                                       } else l = !0;
                                       if (l) {
                                         if (t.bgm !== void 0) {
                                           let e = t.bgm;
-                                          const o = 0;
+                                          const n = 0;
                                           if (!e || typeof e != "object" || Array.isArray(e)) return s.errors = [{
                                             instancePath: r + "/ship/bgm",
                                             schemaPath: "#/$defs/Vehicle/properties/bgm/type",
@@ -1397,12 +1108,12 @@ const K = U(function() {
                                               if (typeof e.name != "string") return s.errors = [{ instancePath: r + "/ship/bgm/name", schemaPath: "#/$defs/Vehicle/properties/bgm/properties/name/type", keyword: "type", params: {
                                                 type: "string"
                                               }, message: "must be string" }], !1;
-                                              var T = !0;
-                                            } else T = !0;
-                                            if (T) {
+                                              var A = !0;
+                                            } else A = !0;
+                                            if (A) {
                                               if (e.volume !== void 0) {
                                                 let a = e.volume;
-                                                const y = 0;
+                                                const d = 0;
                                                 if (typeof a != "number" || a % 1 || isNaN(a) || !isFinite(a)) return s.errors = [{
                                                   instancePath: r + "/ship/bgm/volume",
                                                   schemaPath: "#/$defs/Vehicle/properties/bgm/properties/volume/type",
@@ -1410,28 +1121,12 @@ const K = U(function() {
                                                   params: { type: "integer" },
                                                   message: "must be integer"
                                                 }], !1;
-                                                if (typeof a == "number" && isFinite(a)) {
-                                                  if (a > 100 || isNaN(a)) return s.errors = [{
-                                                    instancePath: r + "/ship/bgm/volume",
-                                                    schemaPath: "#/$defs/Vehicle/properties/bgm/properties/volume/maximum",
-                                                    keyword: "maximum",
-                                                    params: { comparison: "<=", limit: 100 },
-                                                    message: "must be <= 100"
-                                                  }], !1;
-                                                  if (a < 0 || isNaN(a)) return s.errors = [{
-                                                    instancePath: r + "/ship/bgm/volume",
-                                                    schemaPath: "#/$defs/Vehicle/properties/bgm/properties/volume/minimum",
-                                                    keyword: "minimum",
-                                                    params: { comparison: ">=", limit: 0 },
-                                                    message: "must be >= 0"
-                                                  }], !1;
-                                                }
-                                                T = y === 0;
-                                              } else T = !0;
-                                              if (T) {
+                                                A = d === 0;
+                                              } else A = !0;
+                                              if (A) {
                                                 if (e.pitch !== void 0) {
                                                   let a = e.pitch;
-                                                  const y = 0;
+                                                  const d = 0;
                                                   if (typeof a != "number" || a % 1 || isNaN(a) || !isFinite(a)) return s.errors = [{
                                                     instancePath: r + "/ship/bgm/pitch",
                                                     schemaPath: "#/$defs/Vehicle/properties/bgm/properties/pitch/type",
@@ -1439,24 +1134,11 @@ const K = U(function() {
                                                     params: { type: "integer" },
                                                     message: "must be integer"
                                                   }], !1;
-                                                  if (typeof a == "number" && isFinite(a)) {
-                                                    if (a > 150 || isNaN(a)) return s.errors = [{ instancePath: r + "/ship/bgm/pitch", schemaPath: "#/$defs/Vehicle/properties/bgm/properties/pitch/maximum", keyword: "maximum", params: {
-                                                      comparison: "<=",
-                                                      limit: 150
-                                                    }, message: "must be <= 150" }], !1;
-                                                    if (a < 50 || isNaN(a)) return s.errors = [{
-                                                      instancePath: r + "/ship/bgm/pitch",
-                                                      schemaPath: "#/$defs/Vehicle/properties/bgm/properties/pitch/minimum",
-                                                      keyword: "minimum",
-                                                      params: { comparison: ">=", limit: 50 },
-                                                      message: "must be >= 50"
-                                                    }], !1;
-                                                  }
-                                                  T = y === 0;
-                                                } else T = !0;
-                                                if (T) if (e.pan !== void 0) {
+                                                  A = d === 0;
+                                                } else A = !0;
+                                                if (A) if (e.pan !== void 0) {
                                                   let a = e.pan;
-                                                  const y = 0;
+                                                  const d = 0;
                                                   if (typeof a != "number" || a % 1 || isNaN(a) || !isFinite(a)) return s.errors = [{
                                                     instancePath: r + "/ship/bgm/pan",
                                                     schemaPath: "#/$defs/Vehicle/properties/bgm/properties/pan/type",
@@ -1464,30 +1146,17 @@ const K = U(function() {
                                                     params: { type: "integer" },
                                                     message: "must be integer"
                                                   }], !1;
-                                                  if (typeof a == "number" && isFinite(a)) {
-                                                    if (a > 100 || isNaN(a)) return s.errors = [{ instancePath: r + "/ship/bgm/pan", schemaPath: "#/$defs/Vehicle/properties/bgm/properties/pan/maximum", keyword: "maximum", params: {
-                                                      comparison: "<=",
-                                                      limit: 100
-                                                    }, message: "must be <= 100" }], !1;
-                                                    if (a < -100 || isNaN(a)) return s.errors = [{
-                                                      instancePath: r + "/ship/bgm/pan",
-                                                      schemaPath: "#/$defs/Vehicle/properties/bgm/properties/pan/minimum",
-                                                      keyword: "minimum",
-                                                      params: { comparison: ">=", limit: -100 },
-                                                      message: "must be >= -100"
-                                                    }], !1;
-                                                  }
-                                                  T = y === 0;
-                                                } else T = !0;
+                                                  A = d === 0;
+                                                } else A = !0;
                                               }
                                             }
                                           }
-                                          l = o === 0;
+                                          l = n === 0;
                                         } else l = !0;
                                         if (l) {
                                           if (t.startMapId !== void 0) {
                                             let e = t.startMapId;
-                                            const o = 0;
+                                            const n = 0;
                                             if (typeof e != "number" || e % 1 || isNaN(e) || !isFinite(e)) return s.errors = [{
                                               instancePath: r + "/ship/startMapId",
                                               schemaPath: "#/$defs/Vehicle/properties/startMapId/type",
@@ -1502,69 +1171,54 @@ const K = U(function() {
                                               params: { comparison: ">=", limit: 0 },
                                               message: "must be >= 0"
                                             }], !1;
-                                            l = o === 0;
+                                            l = n === 0;
                                           } else l = !0;
                                           if (l) {
                                             if (t.startX !== void 0) {
                                               let e = t.startX;
-                                              const o = 0;
-                                              if (typeof e != "number" || e % 1 || isNaN(e) || !isFinite(e)) return s.errors = [{
+                                              const n = 0;
+                                              if (typeof e != "number" || e % 1 || isNaN(e) || !isFinite(e)) return s.errors = [{ instancePath: r + "/ship/startX", schemaPath: "#/$defs/Vehicle/properties/startX/type", keyword: "type", params: {
+                                                type: "integer"
+                                              }, message: "must be integer" }], !1;
+                                              if (typeof e == "number" && isFinite(e) && (e < 0 || isNaN(e))) return s.errors = [{
                                                 instancePath: r + "/ship/startX",
-                                                schemaPath: "#/$defs/Vehicle/properties/startX/type",
+                                                schemaPath: "#/$defs/Vehicle/properties/startX/minimum",
+                                                keyword: "minimum",
+                                                params: { comparison: ">=", limit: 0 },
+                                                message: "must be >= 0"
+                                              }], !1;
+                                              l = n === 0;
+                                            } else l = !0;
+                                            if (l) if (t.startY !== void 0) {
+                                              let e = t.startY;
+                                              const n = 0;
+                                              if (typeof e != "number" || e % 1 || isNaN(e) || !isFinite(e)) return s.errors = [{
+                                                instancePath: r + "/ship/startY",
+                                                schemaPath: "#/$defs/Vehicle/properties/startY/type",
                                                 keyword: "type",
                                                 params: { type: "integer" },
                                                 message: "must be integer"
                                               }], !1;
-                                              if (typeof e == "number" && isFinite(e)) {
-                                                if (e > 5e3 || isNaN(e)) return s.errors = [{
-                                                  instancePath: r + "/ship/startX",
-                                                  schemaPath: "#/$defs/Vehicle/properties/startX/maximum",
-                                                  keyword: "maximum",
-                                                  params: { comparison: "<=", limit: 5e3 },
-                                                  message: "must be <= 5000"
-                                                }], !1;
-                                                if (e < 0 || isNaN(e)) return s.errors = [{ instancePath: r + "/ship/startX", schemaPath: "#/$defs/Vehicle/properties/startX/minimum", keyword: "minimum", params: {
-                                                  comparison: ">=",
-                                                  limit: 0
-                                                }, message: "must be >= 0" }], !1;
-                                              }
-                                              l = o === 0;
-                                            } else l = !0;
-                                            if (l) if (t.startY !== void 0) {
-                                              let e = t.startY;
-                                              const o = 0;
-                                              if (typeof e != "number" || e % 1 || isNaN(e) || !isFinite(e)) return s.errors = [{ instancePath: r + "/ship/startY", schemaPath: "#/$defs/Vehicle/properties/startY/type", keyword: "type", params: {
-                                                type: "integer"
-                                              }, message: "must be integer" }], !1;
-                                              if (typeof e == "number" && isFinite(e)) {
-                                                if (e > 5e3 || isNaN(e)) return s.errors = [{
-                                                  instancePath: r + "/ship/startY",
-                                                  schemaPath: "#/$defs/Vehicle/properties/startY/maximum",
-                                                  keyword: "maximum",
-                                                  params: { comparison: "<=", limit: 5e3 },
-                                                  message: "must be <= 5000"
-                                                }], !1;
-                                                if (e < 0 || isNaN(e)) return s.errors = [{
-                                                  instancePath: r + "/ship/startY",
-                                                  schemaPath: "#/$defs/Vehicle/properties/startY/minimum",
-                                                  keyword: "minimum",
-                                                  params: { comparison: ">=", limit: 0 },
-                                                  message: "must be >= 0"
-                                                }], !1;
-                                              }
-                                              l = o === 0;
+                                              if (typeof e == "number" && isFinite(e) && (e < 0 || isNaN(e))) return s.errors = [{
+                                                instancePath: r + "/ship/startY",
+                                                schemaPath: "#/$defs/Vehicle/properties/startY/minimum",
+                                                keyword: "minimum",
+                                                params: { comparison: ">=", limit: 0 },
+                                                message: "must be >= 0"
+                                              }], !1;
+                                              l = n === 0;
                                             } else l = !0;
                                           }
                                         }
                                       }
                                     }
                                   }
-                                  m = c === 0;
-                                } else m = !0;
-                                if (m) {
+                                  o = y === 0;
+                                } else o = !0;
+                                if (o) {
                                   if (i.boat !== void 0) {
                                     let t = i.boat;
-                                    const c = 0;
+                                    const y = 0;
                                     if (!t || typeof t != "object" || Array.isArray(t)) return s.errors = [{
                                       instancePath: r + "/boat",
                                       schemaPath: "#/$defs/Vehicle/type",
@@ -1573,13 +1227,13 @@ const K = U(function() {
                                       message: "must be object"
                                     }], !1;
                                     {
-                                      let d;
-                                      if (t.characterIndex === void 0 && (d = "characterIndex") || t.characterName === void 0 && (d = "characterName") || t.bgm === void 0 && (d = "bgm") || t.startMapId === void 0 && (d = "startMapId") || t.startX === void 0 && (d = "startX") || t.startY === void 0 && (d = "startY")) return s.errors = [{
+                                      let c;
+                                      if (t.characterIndex === void 0 && (c = "characterIndex") || t.characterName === void 0 && (c = "characterName") || t.bgm === void 0 && (c = "bgm") || t.startMapId === void 0 && (c = "startMapId") || t.startX === void 0 && (c = "startX") || t.startY === void 0 && (c = "startY")) return s.errors = [{
                                         instancePath: r + "/boat",
                                         schemaPath: "#/$defs/Vehicle/required",
                                         keyword: "required",
-                                        params: { missingProperty: d },
-                                        message: "must have required property '" + d + "'"
+                                        params: { missingProperty: c },
+                                        message: "must have required property '" + c + "'"
                                       }], !1;
                                       for (const e in t) if (e !== "characterIndex" && e !== "characterName" && e !== "bgm" && e !== "startMapId" && e !== "startX" && e !== "startY") return s.errors = [{
                                         instancePath: r + "/boat",
@@ -1590,7 +1244,7 @@ const K = U(function() {
                                       }], !1;
                                       if (t.characterIndex !== void 0) {
                                         let e = t.characterIndex;
-                                        const o = 0;
+                                        const n = 0;
                                         if (typeof e != "number" || e % 1 || isNaN(e) || !isFinite(e)) return s.errors = [{
                                           instancePath: r + "/boat/characterIndex",
                                           schemaPath: "#/$defs/Vehicle/properties/characterIndex/type",
@@ -1611,32 +1265,19 @@ const K = U(function() {
                                             message: "must be >= 0"
                                           }], !1;
                                         }
-                                        var b = o === 0;
+                                        var b = n === 0;
                                       } else b = !0;
                                       if (b) {
                                         if (t.characterName !== void 0) {
-                                          let e = t.characterName;
-                                          const o = 0;
-                                          if (typeof e != "string") return s.errors = [{
-                                            instancePath: r + "/boat/characterName",
-                                            schemaPath: "#/$defs/Vehicle/properties/characterName/type",
-                                            keyword: "type",
-                                            params: { type: "string" },
-                                            message: "must be string"
-                                          }], !1;
-                                          if (q(e) < 1) return s.errors = [{
-                                            instancePath: r + "/boat/characterName",
-                                            schemaPath: "#/$defs/Vehicle/properties/characterName/minLength",
-                                            keyword: "minLength",
-                                            params: { limit: 1 },
-                                            message: "must NOT have fewer than 1 characters"
-                                          }], !1;
-                                          b = o === 0;
+                                          if (typeof t.characterName != "string") return s.errors = [{ instancePath: r + "/boat/characterName", schemaPath: "#/$defs/Vehicle/properties/characterName/type", keyword: "type", params: {
+                                            type: "string"
+                                          }, message: "must be string" }], !1;
+                                          b = !0;
                                         } else b = !0;
                                         if (b) {
                                           if (t.bgm !== void 0) {
                                             let e = t.bgm;
-                                            const o = 0;
+                                            const n = 0;
                                             if (!e || typeof e != "object" || Array.isArray(e)) return s.errors = [{
                                               instancePath: r + "/boat/bgm",
                                               schemaPath: "#/$defs/Vehicle/properties/bgm/type",
@@ -1664,12 +1305,12 @@ const K = U(function() {
                                                 if (typeof e.name != "string") return s.errors = [{ instancePath: r + "/boat/bgm/name", schemaPath: "#/$defs/Vehicle/properties/bgm/properties/name/type", keyword: "type", params: {
                                                   type: "string"
                                                 }, message: "must be string" }], !1;
-                                                var F = !0;
-                                              } else F = !0;
-                                              if (F) {
+                                                var I = !0;
+                                              } else I = !0;
+                                              if (I) {
                                                 if (e.volume !== void 0) {
                                                   let a = e.volume;
-                                                  const y = 0;
+                                                  const d = 0;
                                                   if (typeof a != "number" || a % 1 || isNaN(a) || !isFinite(a)) return s.errors = [{
                                                     instancePath: r + "/boat/bgm/volume",
                                                     schemaPath: "#/$defs/Vehicle/properties/bgm/properties/volume/type",
@@ -1677,28 +1318,12 @@ const K = U(function() {
                                                     params: { type: "integer" },
                                                     message: "must be integer"
                                                   }], !1;
-                                                  if (typeof a == "number" && isFinite(a)) {
-                                                    if (a > 100 || isNaN(a)) return s.errors = [{
-                                                      instancePath: r + "/boat/bgm/volume",
-                                                      schemaPath: "#/$defs/Vehicle/properties/bgm/properties/volume/maximum",
-                                                      keyword: "maximum",
-                                                      params: { comparison: "<=", limit: 100 },
-                                                      message: "must be <= 100"
-                                                    }], !1;
-                                                    if (a < 0 || isNaN(a)) return s.errors = [{
-                                                      instancePath: r + "/boat/bgm/volume",
-                                                      schemaPath: "#/$defs/Vehicle/properties/bgm/properties/volume/minimum",
-                                                      keyword: "minimum",
-                                                      params: { comparison: ">=", limit: 0 },
-                                                      message: "must be >= 0"
-                                                    }], !1;
-                                                  }
-                                                  F = y === 0;
-                                                } else F = !0;
-                                                if (F) {
+                                                  I = d === 0;
+                                                } else I = !0;
+                                                if (I) {
                                                   if (e.pitch !== void 0) {
                                                     let a = e.pitch;
-                                                    const y = 0;
+                                                    const d = 0;
                                                     if (typeof a != "number" || a % 1 || isNaN(a) || !isFinite(a)) return s.errors = [{
                                                       instancePath: r + "/boat/bgm/pitch",
                                                       schemaPath: "#/$defs/Vehicle/properties/bgm/properties/pitch/type",
@@ -1706,24 +1331,11 @@ const K = U(function() {
                                                       params: { type: "integer" },
                                                       message: "must be integer"
                                                     }], !1;
-                                                    if (typeof a == "number" && isFinite(a)) {
-                                                      if (a > 150 || isNaN(a)) return s.errors = [{ instancePath: r + "/boat/bgm/pitch", schemaPath: "#/$defs/Vehicle/properties/bgm/properties/pitch/maximum", keyword: "maximum", params: {
-                                                        comparison: "<=",
-                                                        limit: 150
-                                                      }, message: "must be <= 150" }], !1;
-                                                      if (a < 50 || isNaN(a)) return s.errors = [{
-                                                        instancePath: r + "/boat/bgm/pitch",
-                                                        schemaPath: "#/$defs/Vehicle/properties/bgm/properties/pitch/minimum",
-                                                        keyword: "minimum",
-                                                        params: { comparison: ">=", limit: 50 },
-                                                        message: "must be >= 50"
-                                                      }], !1;
-                                                    }
-                                                    F = y === 0;
-                                                  } else F = !0;
-                                                  if (F) if (e.pan !== void 0) {
+                                                    I = d === 0;
+                                                  } else I = !0;
+                                                  if (I) if (e.pan !== void 0) {
                                                     let a = e.pan;
-                                                    const y = 0;
+                                                    const d = 0;
                                                     if (typeof a != "number" || a % 1 || isNaN(a) || !isFinite(a)) return s.errors = [{
                                                       instancePath: r + "/boat/bgm/pan",
                                                       schemaPath: "#/$defs/Vehicle/properties/bgm/properties/pan/type",
@@ -1731,30 +1343,17 @@ const K = U(function() {
                                                       params: { type: "integer" },
                                                       message: "must be integer"
                                                     }], !1;
-                                                    if (typeof a == "number" && isFinite(a)) {
-                                                      if (a > 100 || isNaN(a)) return s.errors = [{ instancePath: r + "/boat/bgm/pan", schemaPath: "#/$defs/Vehicle/properties/bgm/properties/pan/maximum", keyword: "maximum", params: {
-                                                        comparison: "<=",
-                                                        limit: 100
-                                                      }, message: "must be <= 100" }], !1;
-                                                      if (a < -100 || isNaN(a)) return s.errors = [{
-                                                        instancePath: r + "/boat/bgm/pan",
-                                                        schemaPath: "#/$defs/Vehicle/properties/bgm/properties/pan/minimum",
-                                                        keyword: "minimum",
-                                                        params: { comparison: ">=", limit: -100 },
-                                                        message: "must be >= -100"
-                                                      }], !1;
-                                                    }
-                                                    F = y === 0;
-                                                  } else F = !0;
+                                                    I = d === 0;
+                                                  } else I = !0;
                                                 }
                                               }
                                             }
-                                            b = o === 0;
+                                            b = n === 0;
                                           } else b = !0;
                                           if (b) {
                                             if (t.startMapId !== void 0) {
                                               let e = t.startMapId;
-                                              const o = 0;
+                                              const n = 0;
                                               if (typeof e != "number" || e % 1 || isNaN(e) || !isFinite(e)) return s.errors = [{
                                                 instancePath: r + "/boat/startMapId",
                                                 schemaPath: "#/$defs/Vehicle/properties/startMapId/type",
@@ -1769,69 +1368,54 @@ const K = U(function() {
                                                 params: { comparison: ">=", limit: 0 },
                                                 message: "must be >= 0"
                                               }], !1;
-                                              b = o === 0;
+                                              b = n === 0;
                                             } else b = !0;
                                             if (b) {
                                               if (t.startX !== void 0) {
                                                 let e = t.startX;
-                                                const o = 0;
-                                                if (typeof e != "number" || e % 1 || isNaN(e) || !isFinite(e)) return s.errors = [{
+                                                const n = 0;
+                                                if (typeof e != "number" || e % 1 || isNaN(e) || !isFinite(e)) return s.errors = [{ instancePath: r + "/boat/startX", schemaPath: "#/$defs/Vehicle/properties/startX/type", keyword: "type", params: {
+                                                  type: "integer"
+                                                }, message: "must be integer" }], !1;
+                                                if (typeof e == "number" && isFinite(e) && (e < 0 || isNaN(e))) return s.errors = [{
                                                   instancePath: r + "/boat/startX",
-                                                  schemaPath: "#/$defs/Vehicle/properties/startX/type",
+                                                  schemaPath: "#/$defs/Vehicle/properties/startX/minimum",
+                                                  keyword: "minimum",
+                                                  params: { comparison: ">=", limit: 0 },
+                                                  message: "must be >= 0"
+                                                }], !1;
+                                                b = n === 0;
+                                              } else b = !0;
+                                              if (b) if (t.startY !== void 0) {
+                                                let e = t.startY;
+                                                const n = 0;
+                                                if (typeof e != "number" || e % 1 || isNaN(e) || !isFinite(e)) return s.errors = [{
+                                                  instancePath: r + "/boat/startY",
+                                                  schemaPath: "#/$defs/Vehicle/properties/startY/type",
                                                   keyword: "type",
                                                   params: { type: "integer" },
                                                   message: "must be integer"
                                                 }], !1;
-                                                if (typeof e == "number" && isFinite(e)) {
-                                                  if (e > 5e3 || isNaN(e)) return s.errors = [{
-                                                    instancePath: r + "/boat/startX",
-                                                    schemaPath: "#/$defs/Vehicle/properties/startX/maximum",
-                                                    keyword: "maximum",
-                                                    params: { comparison: "<=", limit: 5e3 },
-                                                    message: "must be <= 5000"
-                                                  }], !1;
-                                                  if (e < 0 || isNaN(e)) return s.errors = [{ instancePath: r + "/boat/startX", schemaPath: "#/$defs/Vehicle/properties/startX/minimum", keyword: "minimum", params: {
-                                                    comparison: ">=",
-                                                    limit: 0
-                                                  }, message: "must be >= 0" }], !1;
-                                                }
-                                                b = o === 0;
-                                              } else b = !0;
-                                              if (b) if (t.startY !== void 0) {
-                                                let e = t.startY;
-                                                const o = 0;
-                                                if (typeof e != "number" || e % 1 || isNaN(e) || !isFinite(e)) return s.errors = [{ instancePath: r + "/boat/startY", schemaPath: "#/$defs/Vehicle/properties/startY/type", keyword: "type", params: {
-                                                  type: "integer"
-                                                }, message: "must be integer" }], !1;
-                                                if (typeof e == "number" && isFinite(e)) {
-                                                  if (e > 5e3 || isNaN(e)) return s.errors = [{
-                                                    instancePath: r + "/boat/startY",
-                                                    schemaPath: "#/$defs/Vehicle/properties/startY/maximum",
-                                                    keyword: "maximum",
-                                                    params: { comparison: "<=", limit: 5e3 },
-                                                    message: "must be <= 5000"
-                                                  }], !1;
-                                                  if (e < 0 || isNaN(e)) return s.errors = [{
-                                                    instancePath: r + "/boat/startY",
-                                                    schemaPath: "#/$defs/Vehicle/properties/startY/minimum",
-                                                    keyword: "minimum",
-                                                    params: { comparison: ">=", limit: 0 },
-                                                    message: "must be >= 0"
-                                                  }], !1;
-                                                }
-                                                b = o === 0;
+                                                if (typeof e == "number" && isFinite(e) && (e < 0 || isNaN(e))) return s.errors = [{
+                                                  instancePath: r + "/boat/startY",
+                                                  schemaPath: "#/$defs/Vehicle/properties/startY/minimum",
+                                                  keyword: "minimum",
+                                                  params: { comparison: ">=", limit: 0 },
+                                                  message: "must be >= 0"
+                                                }], !1;
+                                                b = n === 0;
                                               } else b = !0;
                                             }
                                           }
                                         }
                                       }
                                     }
-                                    m = c === 0;
-                                  } else m = !0;
-                                  if (m) {
+                                    o = y === 0;
+                                  } else o = !0;
+                                  if (o) {
                                     if (i.airship !== void 0) {
                                       let t = i.airship;
-                                      const c = 0;
+                                      const y = 0;
                                       if (!t || typeof t != "object" || Array.isArray(t)) return s.errors = [{
                                         instancePath: r + "/airship",
                                         schemaPath: "#/$defs/Vehicle/type",
@@ -1840,13 +1424,13 @@ const K = U(function() {
                                         message: "must be object"
                                       }], !1;
                                       {
-                                        let d;
-                                        if (t.characterIndex === void 0 && (d = "characterIndex") || t.characterName === void 0 && (d = "characterName") || t.bgm === void 0 && (d = "bgm") || t.startMapId === void 0 && (d = "startMapId") || t.startX === void 0 && (d = "startX") || t.startY === void 0 && (d = "startY")) return s.errors = [{
+                                        let c;
+                                        if (t.characterIndex === void 0 && (c = "characterIndex") || t.characterName === void 0 && (c = "characterName") || t.bgm === void 0 && (c = "bgm") || t.startMapId === void 0 && (c = "startMapId") || t.startX === void 0 && (c = "startX") || t.startY === void 0 && (c = "startY")) return s.errors = [{
                                           instancePath: r + "/airship",
                                           schemaPath: "#/$defs/Vehicle/required",
                                           keyword: "required",
-                                          params: { missingProperty: d },
-                                          message: "must have required property '" + d + "'"
+                                          params: { missingProperty: c },
+                                          message: "must have required property '" + c + "'"
                                         }], !1;
                                         for (const e in t) if (e !== "characterIndex" && e !== "characterName" && e !== "bgm" && e !== "startMapId" && e !== "startX" && e !== "startY") return s.errors = [{
                                           instancePath: r + "/airship",
@@ -1857,7 +1441,7 @@ const K = U(function() {
                                         }], !1;
                                         if (t.characterIndex !== void 0) {
                                           let e = t.characterIndex;
-                                          const o = 0;
+                                          const n = 0;
                                           if (typeof e != "number" || e % 1 || isNaN(e) || !isFinite(e)) return s.errors = [{
                                             instancePath: r + "/airship/characterIndex",
                                             schemaPath: "#/$defs/Vehicle/properties/characterIndex/type",
@@ -1878,32 +1462,23 @@ const K = U(function() {
                                               message: "must be >= 0"
                                             }], !1;
                                           }
-                                          var P = o === 0;
+                                          var P = n === 0;
                                         } else P = !0;
                                         if (P) {
                                           if (t.characterName !== void 0) {
-                                            let e = t.characterName;
-                                            const o = 0;
-                                            if (typeof e != "string") return s.errors = [{
+                                            if (typeof t.characterName != "string") return s.errors = [{
                                               instancePath: r + "/airship/characterName",
                                               schemaPath: "#/$defs/Vehicle/properties/characterName/type",
                                               keyword: "type",
                                               params: { type: "string" },
                                               message: "must be string"
                                             }], !1;
-                                            if (q(e) < 1) return s.errors = [{
-                                              instancePath: r + "/airship/characterName",
-                                              schemaPath: "#/$defs/Vehicle/properties/characterName/minLength",
-                                              keyword: "minLength",
-                                              params: { limit: 1 },
-                                              message: "must NOT have fewer than 1 characters"
-                                            }], !1;
-                                            P = o === 0;
+                                            P = !0;
                                           } else P = !0;
                                           if (P) {
                                             if (t.bgm !== void 0) {
                                               let e = t.bgm;
-                                              const o = 0;
+                                              const n = 0;
                                               if (!e || typeof e != "object" || Array.isArray(e)) return s.errors = [{
                                                 instancePath: r + "/airship/bgm",
                                                 schemaPath: "#/$defs/Vehicle/properties/bgm/type",
@@ -1935,12 +1510,12 @@ const K = U(function() {
                                                     params: { type: "string" },
                                                     message: "must be string"
                                                   }], !1;
-                                                  var x = !0;
-                                                } else x = !0;
-                                                if (x) {
+                                                  var F = !0;
+                                                } else F = !0;
+                                                if (F) {
                                                   if (e.volume !== void 0) {
                                                     let a = e.volume;
-                                                    const y = 0;
+                                                    const d = 0;
                                                     if (typeof a != "number" || a % 1 || isNaN(a) || !isFinite(a)) return s.errors = [{
                                                       instancePath: r + "/airship/bgm/volume",
                                                       schemaPath: "#/$defs/Vehicle/properties/bgm/properties/volume/type",
@@ -1948,25 +1523,12 @@ const K = U(function() {
                                                       params: { type: "integer" },
                                                       message: "must be integer"
                                                     }], !1;
-                                                    if (typeof a == "number" && isFinite(a)) {
-                                                      if (a > 100 || isNaN(a)) return s.errors = [{
-                                                        instancePath: r + "/airship/bgm/volume",
-                                                        schemaPath: "#/$defs/Vehicle/properties/bgm/properties/volume/maximum",
-                                                        keyword: "maximum",
-                                                        params: { comparison: "<=", limit: 100 },
-                                                        message: "must be <= 100"
-                                                      }], !1;
-                                                      if (a < 0 || isNaN(a)) return s.errors = [{ instancePath: r + "/airship/bgm/volume", schemaPath: "#/$defs/Vehicle/properties/bgm/properties/volume/minimum", keyword: "minimum", params: {
-                                                        comparison: ">=",
-                                                        limit: 0
-                                                      }, message: "must be >= 0" }], !1;
-                                                    }
-                                                    x = y === 0;
-                                                  } else x = !0;
-                                                  if (x) {
+                                                    F = d === 0;
+                                                  } else F = !0;
+                                                  if (F) {
                                                     if (e.pitch !== void 0) {
                                                       let a = e.pitch;
-                                                      const y = 0;
+                                                      const d = 0;
                                                       if (typeof a != "number" || a % 1 || isNaN(a) || !isFinite(a)) return s.errors = [{
                                                         instancePath: r + "/airship/bgm/pitch",
                                                         schemaPath: "#/$defs/Vehicle/properties/bgm/properties/pitch/type",
@@ -1974,24 +1536,11 @@ const K = U(function() {
                                                         params: { type: "integer" },
                                                         message: "must be integer"
                                                       }], !1;
-                                                      if (typeof a == "number" && isFinite(a)) {
-                                                        if (a > 150 || isNaN(a)) return s.errors = [{
-                                                          instancePath: r + "/airship/bgm/pitch",
-                                                          schemaPath: "#/$defs/Vehicle/properties/bgm/properties/pitch/maximum",
-                                                          keyword: "maximum",
-                                                          params: { comparison: "<=", limit: 150 },
-                                                          message: "must be <= 150"
-                                                        }], !1;
-                                                        if (a < 50 || isNaN(a)) return s.errors = [{ instancePath: r + "/airship/bgm/pitch", schemaPath: "#/$defs/Vehicle/properties/bgm/properties/pitch/minimum", keyword: "minimum", params: {
-                                                          comparison: ">=",
-                                                          limit: 50
-                                                        }, message: "must be >= 50" }], !1;
-                                                      }
-                                                      x = y === 0;
-                                                    } else x = !0;
-                                                    if (x) if (e.pan !== void 0) {
+                                                      F = d === 0;
+                                                    } else F = !0;
+                                                    if (F) if (e.pan !== void 0) {
                                                       let a = e.pan;
-                                                      const y = 0;
+                                                      const d = 0;
                                                       if (typeof a != "number" || a % 1 || isNaN(a) || !isFinite(a)) return s.errors = [{
                                                         instancePath: r + "/airship/bgm/pan",
                                                         schemaPath: "#/$defs/Vehicle/properties/bgm/properties/pan/type",
@@ -1999,30 +1548,17 @@ const K = U(function() {
                                                         params: { type: "integer" },
                                                         message: "must be integer"
                                                       }], !1;
-                                                      if (typeof a == "number" && isFinite(a)) {
-                                                        if (a > 100 || isNaN(a)) return s.errors = [{
-                                                          instancePath: r + "/airship/bgm/pan",
-                                                          schemaPath: "#/$defs/Vehicle/properties/bgm/properties/pan/maximum",
-                                                          keyword: "maximum",
-                                                          params: { comparison: "<=", limit: 100 },
-                                                          message: "must be <= 100"
-                                                        }], !1;
-                                                        if (a < -100 || isNaN(a)) return s.errors = [{ instancePath: r + "/airship/bgm/pan", schemaPath: "#/$defs/Vehicle/properties/bgm/properties/pan/minimum", keyword: "minimum", params: {
-                                                          comparison: ">=",
-                                                          limit: -100
-                                                        }, message: "must be >= -100" }], !1;
-                                                      }
-                                                      x = y === 0;
-                                                    } else x = !0;
+                                                      F = d === 0;
+                                                    } else F = !0;
                                                   }
                                                 }
                                               }
-                                              P = o === 0;
+                                              P = n === 0;
                                             } else P = !0;
                                             if (P) {
                                               if (t.startMapId !== void 0) {
                                                 let e = t.startMapId;
-                                                const o = 0;
+                                                const n = 0;
                                                 if (typeof e != "number" || e % 1 || isNaN(e) || !isFinite(e)) return s.errors = [{
                                                   instancePath: r + "/airship/startMapId",
                                                   schemaPath: "#/$defs/Vehicle/properties/startMapId/type",
@@ -2037,12 +1573,12 @@ const K = U(function() {
                                                   params: { comparison: ">=", limit: 0 },
                                                   message: "must be >= 0"
                                                 }], !1;
-                                                P = o === 0;
+                                                P = n === 0;
                                               } else P = !0;
                                               if (P) {
                                                 if (t.startX !== void 0) {
                                                   let e = t.startX;
-                                                  const o = 0;
+                                                  const n = 0;
                                                   if (typeof e != "number" || e % 1 || isNaN(e) || !isFinite(e)) return s.errors = [{
                                                     instancePath: r + "/airship/startX",
                                                     schemaPath: "#/$defs/Vehicle/properties/startX/type",
@@ -2050,56 +1586,41 @@ const K = U(function() {
                                                     params: { type: "integer" },
                                                     message: "must be integer"
                                                   }], !1;
-                                                  if (typeof e == "number" && isFinite(e)) {
-                                                    if (e > 5e3 || isNaN(e)) return s.errors = [{
-                                                      instancePath: r + "/airship/startX",
-                                                      schemaPath: "#/$defs/Vehicle/properties/startX/maximum",
-                                                      keyword: "maximum",
-                                                      params: { comparison: "<=", limit: 5e3 },
-                                                      message: "must be <= 5000"
-                                                    }], !1;
-                                                    if (e < 0 || isNaN(e)) return s.errors = [{ instancePath: r + "/airship/startX", schemaPath: "#/$defs/Vehicle/properties/startX/minimum", keyword: "minimum", params: {
-                                                      comparison: ">=",
-                                                      limit: 0
-                                                    }, message: "must be >= 0" }], !1;
-                                                  }
-                                                  P = o === 0;
+                                                  if (typeof e == "number" && isFinite(e) && (e < 0 || isNaN(e))) return s.errors = [{
+                                                    instancePath: r + "/airship/startX",
+                                                    schemaPath: "#/$defs/Vehicle/properties/startX/minimum",
+                                                    keyword: "minimum",
+                                                    params: { comparison: ">=", limit: 0 },
+                                                    message: "must be >= 0"
+                                                  }], !1;
+                                                  P = n === 0;
                                                 } else P = !0;
                                                 if (P) if (t.startY !== void 0) {
                                                   let e = t.startY;
-                                                  const o = 0;
+                                                  const n = 0;
                                                   if (typeof e != "number" || e % 1 || isNaN(e) || !isFinite(e)) return s.errors = [{ instancePath: r + "/airship/startY", schemaPath: "#/$defs/Vehicle/properties/startY/type", keyword: "type", params: {
                                                     type: "integer"
                                                   }, message: "must be integer" }], !1;
-                                                  if (typeof e == "number" && isFinite(e)) {
-                                                    if (e > 5e3 || isNaN(e)) return s.errors = [{
-                                                      instancePath: r + "/airship/startY",
-                                                      schemaPath: "#/$defs/Vehicle/properties/startY/maximum",
-                                                      keyword: "maximum",
-                                                      params: { comparison: "<=", limit: 5e3 },
-                                                      message: "must be <= 5000"
-                                                    }], !1;
-                                                    if (e < 0 || isNaN(e)) return s.errors = [{
-                                                      instancePath: r + "/airship/startY",
-                                                      schemaPath: "#/$defs/Vehicle/properties/startY/minimum",
-                                                      keyword: "minimum",
-                                                      params: { comparison: ">=", limit: 0 },
-                                                      message: "must be >= 0"
-                                                    }], !1;
-                                                  }
-                                                  P = o === 0;
+                                                  if (typeof e == "number" && isFinite(e) && (e < 0 || isNaN(e))) return s.errors = [{
+                                                    instancePath: r + "/airship/startY",
+                                                    schemaPath: "#/$defs/Vehicle/properties/startY/minimum",
+                                                    keyword: "minimum",
+                                                    params: { comparison: ">=", limit: 0 },
+                                                    message: "must be >= 0"
+                                                  }], !1;
+                                                  P = n === 0;
                                                 } else P = !0;
                                               }
                                             }
                                           }
                                         }
                                       }
-                                      m = c === 0;
-                                    } else m = !0;
-                                    if (m) {
+                                      o = y === 0;
+                                    } else o = !0;
+                                    if (o) {
                                       if (i.testBattlers !== void 0) {
                                         let t = i.testBattlers;
-                                        const c = 0;
+                                        const y = 0;
                                         if (!Array.isArray(t)) return s.errors = [{
                                           instancePath: r + "/testBattlers",
                                           schemaPath: "#/properties/testBattlers/type",
@@ -2108,11 +1629,11 @@ const K = U(function() {
                                           message: "must be array"
                                         }], !1;
                                         {
-                                          const d = t.length;
-                                          for (let e = 0; e < d; e++) {
-                                            let o = t[e];
+                                          const c = t.length;
+                                          for (let e = 0; e < c; e++) {
+                                            let n = t[e];
                                             const p = 0;
-                                            if (!o || typeof o != "object" || Array.isArray(o)) return s.errors = [{
+                                            if (!n || typeof n != "object" || Array.isArray(n)) return s.errors = [{
                                               instancePath: r + "/testBattlers/" + e,
                                               schemaPath: "#/$defs/TestBattler/type",
                                               keyword: "type",
@@ -2121,44 +1642,44 @@ const K = U(function() {
                                             }], !1;
                                             {
                                               let a;
-                                              if (o.actorId === void 0 && (a = "actorId") || o.level === void 0 && (a = "level") || o.equips === void 0 && (a = "equips")) return s.errors = [{
+                                              if (n.actorId === void 0 && (a = "actorId") || n.level === void 0 && (a = "level") || n.equips === void 0 && (a = "equips")) return s.errors = [{
                                                 instancePath: r + "/testBattlers/" + e,
                                                 schemaPath: "#/$defs/TestBattler/required",
                                                 keyword: "required",
                                                 params: { missingProperty: a },
                                                 message: "must have required property '" + a + "'"
                                               }], !1;
-                                              for (const y in o) if (y !== "actorId" && y !== "equips" && y !== "level") return s.errors = [{
+                                              for (const d in n) if (d !== "actorId" && d !== "equips" && d !== "level") return s.errors = [{
                                                 instancePath: r + "/testBattlers/" + e,
                                                 schemaPath: "#/$defs/TestBattler/additionalProperties",
                                                 keyword: "additionalProperties",
-                                                params: { additionalProperty: y },
+                                                params: { additionalProperty: d },
                                                 message: "must NOT have additional properties"
                                               }], !1;
-                                              if (o.actorId !== void 0) {
-                                                let y = o.actorId;
-                                                const g = 0;
-                                                if (typeof y != "number" || y % 1 || isNaN(y) || !isFinite(y)) return s.errors = [{
+                                              if (n.actorId !== void 0) {
+                                                let d = n.actorId;
+                                                const u = 0;
+                                                if (typeof d != "number" || d % 1 || isNaN(d) || !isFinite(d)) return s.errors = [{
                                                   instancePath: r + "/testBattlers/" + e + "/actorId",
                                                   schemaPath: "#/$defs/TestBattler/properties/actorId/type",
                                                   keyword: "type",
                                                   params: { type: "integer" },
                                                   message: "must be integer"
                                                 }], !1;
-                                                if (typeof y == "number" && isFinite(y) && (y < 0 || isNaN(y))) return s.errors = [{
+                                                if (typeof d == "number" && isFinite(d) && (d < 0 || isNaN(d))) return s.errors = [{
                                                   instancePath: r + "/testBattlers/" + e + "/actorId",
                                                   schemaPath: "#/$defs/TestBattler/properties/actorId/minimum",
                                                   keyword: "minimum",
                                                   params: { comparison: ">=", limit: 0 },
                                                   message: "must be >= 0"
                                                 }], !1;
-                                                var S = g === 0;
-                                              } else S = !0;
-                                              if (S) {
-                                                if (o.equips !== void 0) {
-                                                  let y = o.equips;
-                                                  const g = 0;
-                                                  if (!Array.isArray(y)) return s.errors = [{
+                                                var V = u === 0;
+                                              } else V = !0;
+                                              if (V) {
+                                                if (n.equips !== void 0) {
+                                                  let d = n.equips;
+                                                  const u = 0;
+                                                  if (!Array.isArray(d)) return s.errors = [{
                                                     instancePath: r + "/testBattlers/" + e + "/equips",
                                                     schemaPath: "#/$defs/TestBattler/properties/equips/type",
                                                     keyword: "type",
@@ -2166,12 +1687,12 @@ const K = U(function() {
                                                     message: "must be array"
                                                   }], !1;
                                                   {
-                                                    const z = y.length;
-                                                    for (let B = 0; B < z; B++) {
-                                                      let C = y[B];
+                                                    const M = d.length;
+                                                    for (let j = 0; j < M; j++) {
+                                                      let C = d[j];
                                                       const G = 0;
                                                       if (typeof C != "number" || C % 1 || isNaN(C) || !isFinite(C)) return s.errors = [{
-                                                        instancePath: r + "/testBattlers/" + e + "/equips/" + B,
+                                                        instancePath: r + "/testBattlers/" + e + "/equips/" + j,
                                                         schemaPath: "#/$defs/TestBattler/properties/equips/items/type",
                                                         keyword: "type",
                                                         params: { type: "integer" },
@@ -2180,38 +1701,38 @@ const K = U(function() {
                                                       if (G !== 0) break;
                                                     }
                                                   }
-                                                  S = g === 0;
-                                                } else S = !0;
-                                                if (S) if (o.level !== void 0) {
-                                                  let y = o.level;
-                                                  const g = 0;
-                                                  if (typeof y != "number" || y % 1 || isNaN(y) || !isFinite(y)) return s.errors = [{
+                                                  V = u === 0;
+                                                } else V = !0;
+                                                if (V) if (n.level !== void 0) {
+                                                  let d = n.level;
+                                                  const u = 0;
+                                                  if (typeof d != "number" || d % 1 || isNaN(d) || !isFinite(d)) return s.errors = [{
                                                     instancePath: r + "/testBattlers/" + e + "/level",
                                                     schemaPath: "#/$defs/TestBattler/properties/level/type",
                                                     keyword: "type",
                                                     params: { type: "integer" },
                                                     message: "must be integer"
                                                   }], !1;
-                                                  if (typeof y == "number" && isFinite(y) && (y < 0 || isNaN(y))) return s.errors = [{
+                                                  if (typeof d == "number" && isFinite(d) && (d < 0 || isNaN(d))) return s.errors = [{
                                                     instancePath: r + "/testBattlers/" + e + "/level",
                                                     schemaPath: "#/$defs/TestBattler/properties/level/minimum",
                                                     keyword: "minimum",
                                                     params: { comparison: ">=", limit: 0 },
                                                     message: "must be >= 0"
                                                   }], !1;
-                                                  S = g === 0;
-                                                } else S = !0;
+                                                  V = u === 0;
+                                                } else V = !0;
                                               }
                                             }
                                             if (p !== 0) break;
                                           }
                                         }
-                                        m = c === 0;
-                                      } else m = !0;
-                                      if (m) {
+                                        o = y === 0;
+                                      } else o = !0;
+                                      if (o) {
                                         if (i.terms !== void 0) {
                                           let t = i.terms;
-                                          const c = 0;
+                                          const y = 0;
                                           if (!t || typeof t != "object" || Array.isArray(t)) return s.errors = [{
                                             instancePath: r + "/terms",
                                             schemaPath: "#/properties/terms/type",
@@ -2220,13 +1741,13 @@ const K = U(function() {
                                             message: "must be object"
                                           }], !1;
                                           {
-                                            let d;
-                                            if (t.messages === void 0 && (d = "messages") || t.commands === void 0 && (d = "commands") || t.basic === void 0 && (d = "basic") || t.params === void 0 && (d = "params")) return s.errors = [{
+                                            let c;
+                                            if (t.messages === void 0 && (c = "messages") || t.commands === void 0 && (c = "commands") || t.basic === void 0 && (c = "basic") || t.params === void 0 && (c = "params")) return s.errors = [{
                                               instancePath: r + "/terms",
                                               schemaPath: "#/properties/terms/required",
                                               keyword: "required",
-                                              params: { missingProperty: d },
-                                              message: "must have required property '" + d + "'"
+                                              params: { missingProperty: c },
+                                              message: "must have required property '" + c + "'"
                                             }], !1;
                                             for (const e in t) if (e !== "messages" && e !== "commands" && e !== "basic" && e !== "params") return s.errors = [{
                                               instancePath: r + "/terms",
@@ -2237,7 +1758,7 @@ const K = U(function() {
                                             }], !1;
                                             if (t.messages !== void 0) {
                                               let e = t.messages;
-                                              const o = 0;
+                                              const n = 0;
                                               if (!e || typeof e != "object" || Array.isArray(e)) return s.errors = [{
                                                 instancePath: r + "/terms/messages",
                                                 schemaPath: "#/$defs/TermsMessages/type",
@@ -2254,7 +1775,7 @@ const K = U(function() {
                                                   params: { missingProperty: p },
                                                   message: "must have required property '" + p + "'"
                                                 }], !1;
-                                                for (const a in e) if (!W.call(L.properties, a)) return s.errors = [{
+                                                for (const a in e) if (!X.call(z.properties, a)) return s.errors = [{
                                                   instancePath: r + "/terms/messages",
                                                   schemaPath: "#/$defs/TermsMessages/additionalProperties",
                                                   keyword: "additionalProperties",
@@ -2269,9 +1790,9 @@ const K = U(function() {
                                                     params: { type: "string" },
                                                     message: "must be string"
                                                   }], !1;
-                                                  var n = !0;
-                                                } else n = !0;
-                                                if (n) {
+                                                  var m = !0;
+                                                } else m = !0;
+                                                if (m) {
                                                   if (e.actorDamage !== void 0) {
                                                     if (typeof e.actorDamage != "string") return s.errors = [{
                                                       instancePath: r + "/terms/messages/actorDamage",
@@ -2280,9 +1801,9 @@ const K = U(function() {
                                                       params: { type: "string" },
                                                       message: "must be string"
                                                     }], !1;
-                                                    n = !0;
-                                                  } else n = !0;
-                                                  if (n) {
+                                                    m = !0;
+                                                  } else m = !0;
+                                                  if (m) {
                                                     if (e.actorDrain !== void 0) {
                                                       if (typeof e.actorDrain != "string") return s.errors = [{
                                                         instancePath: r + "/terms/messages/actorDrain",
@@ -2291,9 +1812,9 @@ const K = U(function() {
                                                         params: { type: "string" },
                                                         message: "must be string"
                                                       }], !1;
-                                                      n = !0;
-                                                    } else n = !0;
-                                                    if (n) {
+                                                      m = !0;
+                                                    } else m = !0;
+                                                    if (m) {
                                                       if (e.actorGain !== void 0) {
                                                         if (typeof e.actorGain != "string") return s.errors = [{
                                                           instancePath: r + "/terms/messages/actorGain",
@@ -2302,9 +1823,9 @@ const K = U(function() {
                                                           params: { type: "string" },
                                                           message: "must be string"
                                                         }], !1;
-                                                        n = !0;
-                                                      } else n = !0;
-                                                      if (n) {
+                                                        m = !0;
+                                                      } else m = !0;
+                                                      if (m) {
                                                         if (e.actorLoss !== void 0) {
                                                           if (typeof e.actorLoss != "string") return s.errors = [{
                                                             instancePath: r + "/terms/messages/actorLoss",
@@ -2313,9 +1834,9 @@ const K = U(function() {
                                                             params: { type: "string" },
                                                             message: "must be string"
                                                           }], !1;
-                                                          n = !0;
-                                                        } else n = !0;
-                                                        if (n) {
+                                                          m = !0;
+                                                        } else m = !0;
+                                                        if (m) {
                                                           if (e.actorNoDamage !== void 0) {
                                                             if (typeof e.actorNoDamage != "string") return s.errors = [{
                                                               instancePath: r + "/terms/messages/actorNoDamage",
@@ -2324,9 +1845,9 @@ const K = U(function() {
                                                               params: { type: "string" },
                                                               message: "must be string"
                                                             }], !1;
-                                                            n = !0;
-                                                          } else n = !0;
-                                                          if (n) {
+                                                            m = !0;
+                                                          } else m = !0;
+                                                          if (m) {
                                                             if (e.actorNoHit !== void 0) {
                                                               if (typeof e.actorNoHit != "string") return s.errors = [{
                                                                 instancePath: r + "/terms/messages/actorNoHit",
@@ -2335,9 +1856,9 @@ const K = U(function() {
                                                                 params: { type: "string" },
                                                                 message: "must be string"
                                                               }], !1;
-                                                              n = !0;
-                                                            } else n = !0;
-                                                            if (n) {
+                                                              m = !0;
+                                                            } else m = !0;
+                                                            if (m) {
                                                               if (e.actorRecovery !== void 0) {
                                                                 if (typeof e.actorRecovery != "string") return s.errors = [{
                                                                   instancePath: r + "/terms/messages/actorRecovery",
@@ -2346,9 +1867,9 @@ const K = U(function() {
                                                                   params: { type: "string" },
                                                                   message: "must be string"
                                                                 }], !1;
-                                                                n = !0;
-                                                              } else n = !0;
-                                                              if (n) {
+                                                                m = !0;
+                                                              } else m = !0;
+                                                              if (m) {
                                                                 if (e.alwaysDash !== void 0) {
                                                                   if (typeof e.alwaysDash != "string") return s.errors = [{
                                                                     instancePath: r + "/terms/messages/alwaysDash",
@@ -2357,9 +1878,9 @@ const K = U(function() {
                                                                     params: { type: "string" },
                                                                     message: "must be string"
                                                                   }], !1;
-                                                                  n = !0;
-                                                                } else n = !0;
-                                                                if (n) {
+                                                                  m = !0;
+                                                                } else m = !0;
+                                                                if (m) {
                                                                   if (e.autosave !== void 0) {
                                                                     if (typeof e.autosave != "string") return s.errors = [{
                                                                       instancePath: r + "/terms/messages/autosave",
@@ -2368,9 +1889,9 @@ const K = U(function() {
                                                                       params: { type: "string" },
                                                                       message: "must be string"
                                                                     }], !1;
-                                                                    n = !0;
-                                                                  } else n = !0;
-                                                                  if (n) {
+                                                                    m = !0;
+                                                                  } else m = !0;
+                                                                  if (m) {
                                                                     if (e.bgmVolume !== void 0) {
                                                                       if (typeof e.bgmVolume != "string") return s.errors = [{
                                                                         instancePath: r + "/terms/messages/bgmVolume",
@@ -2379,9 +1900,9 @@ const K = U(function() {
                                                                         params: { type: "string" },
                                                                         message: "must be string"
                                                                       }], !1;
-                                                                      n = !0;
-                                                                    } else n = !0;
-                                                                    if (n) {
+                                                                      m = !0;
+                                                                    } else m = !0;
+                                                                    if (m) {
                                                                       if (e.bgsVolume !== void 0) {
                                                                         if (typeof e.bgsVolume != "string") return s.errors = [{
                                                                           instancePath: r + "/terms/messages/bgsVolume",
@@ -2390,9 +1911,9 @@ const K = U(function() {
                                                                           params: { type: "string" },
                                                                           message: "must be string"
                                                                         }], !1;
-                                                                        n = !0;
-                                                                      } else n = !0;
-                                                                      if (n) {
+                                                                        m = !0;
+                                                                      } else m = !0;
+                                                                      if (m) {
                                                                         if (e.buffAdd !== void 0) {
                                                                           if (typeof e.buffAdd != "string") return s.errors = [{
                                                                             instancePath: r + "/terms/messages/buffAdd",
@@ -2401,9 +1922,9 @@ const K = U(function() {
                                                                             params: { type: "string" },
                                                                             message: "must be string"
                                                                           }], !1;
-                                                                          n = !0;
-                                                                        } else n = !0;
-                                                                        if (n) {
+                                                                          m = !0;
+                                                                        } else m = !0;
+                                                                        if (m) {
                                                                           if (e.buffRemove !== void 0) {
                                                                             if (typeof e.buffRemove != "string") return s.errors = [{
                                                                               instancePath: r + "/terms/messages/buffRemove",
@@ -2412,9 +1933,9 @@ const K = U(function() {
                                                                               params: { type: "string" },
                                                                               message: "must be string"
                                                                             }], !1;
-                                                                            n = !0;
-                                                                          } else n = !0;
-                                                                          if (n) {
+                                                                            m = !0;
+                                                                          } else m = !0;
+                                                                          if (m) {
                                                                             if (e.commandRemember !== void 0) {
                                                                               if (typeof e.commandRemember != "string") return s.errors = [{
                                                                                 instancePath: r + "/terms/messages/commandRemember",
@@ -2423,9 +1944,9 @@ const K = U(function() {
                                                                                 params: { type: "string" },
                                                                                 message: "must be string"
                                                                               }], !1;
-                                                                              n = !0;
-                                                                            } else n = !0;
-                                                                            if (n) {
+                                                                              m = !0;
+                                                                            } else m = !0;
+                                                                            if (m) {
                                                                               if (e.counterAttack !== void 0) {
                                                                                 if (typeof e.counterAttack != "string") return s.errors = [{
                                                                                   instancePath: r + "/terms/messages/counterAttack",
@@ -2434,9 +1955,9 @@ const K = U(function() {
                                                                                   params: { type: "string" },
                                                                                   message: "must be string"
                                                                                 }], !1;
-                                                                                n = !0;
-                                                                              } else n = !0;
-                                                                              if (n) {
+                                                                                m = !0;
+                                                                              } else m = !0;
+                                                                              if (m) {
                                                                                 if (e.criticalToActor !== void 0) {
                                                                                   if (typeof e.criticalToActor != "string") return s.errors = [{
                                                                                     instancePath: r + "/terms/messages/criticalToActor",
@@ -2445,9 +1966,9 @@ const K = U(function() {
                                                                                     params: { type: "string" },
                                                                                     message: "must be string"
                                                                                   }], !1;
-                                                                                  n = !0;
-                                                                                } else n = !0;
-                                                                                if (n) {
+                                                                                  m = !0;
+                                                                                } else m = !0;
+                                                                                if (m) {
                                                                                   if (e.criticalToEnemy !== void 0) {
                                                                                     if (typeof e.criticalToEnemy != "string") return s.errors = [{
                                                                                       instancePath: r + "/terms/messages/criticalToEnemy",
@@ -2456,9 +1977,9 @@ const K = U(function() {
                                                                                       params: { type: "string" },
                                                                                       message: "must be string"
                                                                                     }], !1;
-                                                                                    n = !0;
-                                                                                  } else n = !0;
-                                                                                  if (n) {
+                                                                                    m = !0;
+                                                                                  } else m = !0;
+                                                                                  if (m) {
                                                                                     if (e.debuffAdd !== void 0) {
                                                                                       if (typeof e.debuffAdd != "string") return s.errors = [{
                                                                                         instancePath: r + "/terms/messages/debuffAdd",
@@ -2467,16 +1988,16 @@ const K = U(function() {
                                                                                         params: { type: "string" },
                                                                                         message: "must be string"
                                                                                       }], !1;
-                                                                                      n = !0;
-                                                                                    } else n = !0;
-                                                                                    if (n) {
+                                                                                      m = !0;
+                                                                                    } else m = !0;
+                                                                                    if (m) {
                                                                                       if (e.defeat !== void 0) {
                                                                                         if (typeof e.defeat != "string") return s.errors = [{ instancePath: r + "/terms/messages/defeat", schemaPath: "#/$defs/TermsMessages/properties/defeat/type", keyword: "type", params: {
                                                                                           type: "string"
                                                                                         }, message: "must be string" }], !1;
-                                                                                        n = !0;
-                                                                                      } else n = !0;
-                                                                                      if (n) {
+                                                                                        m = !0;
+                                                                                      } else m = !0;
+                                                                                      if (m) {
                                                                                         if (e.emerge !== void 0) {
                                                                                           if (typeof e.emerge != "string") return s.errors = [{
                                                                                             instancePath: r + "/terms/messages/emerge",
@@ -2485,9 +2006,9 @@ const K = U(function() {
                                                                                             params: { type: "string" },
                                                                                             message: "must be string"
                                                                                           }], !1;
-                                                                                          n = !0;
-                                                                                        } else n = !0;
-                                                                                        if (n) {
+                                                                                          m = !0;
+                                                                                        } else m = !0;
+                                                                                        if (m) {
                                                                                           if (e.enemyDamage !== void 0) {
                                                                                             if (typeof e.enemyDamage != "string") return s.errors = [{
                                                                                               instancePath: r + "/terms/messages/enemyDamage",
@@ -2496,9 +2017,9 @@ const K = U(function() {
                                                                                               params: { type: "string" },
                                                                                               message: "must be string"
                                                                                             }], !1;
-                                                                                            n = !0;
-                                                                                          } else n = !0;
-                                                                                          if (n) {
+                                                                                            m = !0;
+                                                                                          } else m = !0;
+                                                                                          if (m) {
                                                                                             if (e.enemyDrain !== void 0) {
                                                                                               if (typeof e.enemyDrain != "string") return s.errors = [{
                                                                                                 instancePath: r + "/terms/messages/enemyDrain",
@@ -2507,9 +2028,9 @@ const K = U(function() {
                                                                                                 params: { type: "string" },
                                                                                                 message: "must be string"
                                                                                               }], !1;
-                                                                                              n = !0;
-                                                                                            } else n = !0;
-                                                                                            if (n) {
+                                                                                              m = !0;
+                                                                                            } else m = !0;
+                                                                                            if (m) {
                                                                                               if (e.enemyGain !== void 0) {
                                                                                                 if (typeof e.enemyGain != "string") return s.errors = [{
                                                                                                   instancePath: r + "/terms/messages/enemyGain",
@@ -2518,9 +2039,9 @@ const K = U(function() {
                                                                                                   params: { type: "string" },
                                                                                                   message: "must be string"
                                                                                                 }], !1;
-                                                                                                n = !0;
-                                                                                              } else n = !0;
-                                                                                              if (n) {
+                                                                                                m = !0;
+                                                                                              } else m = !0;
+                                                                                              if (m) {
                                                                                                 if (e.enemyLoss !== void 0) {
                                                                                                   if (typeof e.enemyLoss != "string") return s.errors = [{
                                                                                                     instancePath: r + "/terms/messages/enemyLoss",
@@ -2529,9 +2050,9 @@ const K = U(function() {
                                                                                                     params: { type: "string" },
                                                                                                     message: "must be string"
                                                                                                   }], !1;
-                                                                                                  n = !0;
-                                                                                                } else n = !0;
-                                                                                                if (n) {
+                                                                                                  m = !0;
+                                                                                                } else m = !0;
+                                                                                                if (m) {
                                                                                                   if (e.enemyNoDamage !== void 0) {
                                                                                                     if (typeof e.enemyNoDamage != "string") return s.errors = [{
                                                                                                       instancePath: r + "/terms/messages/enemyNoDamage",
@@ -2540,9 +2061,9 @@ const K = U(function() {
                                                                                                       params: { type: "string" },
                                                                                                       message: "must be string"
                                                                                                     }], !1;
-                                                                                                    n = !0;
-                                                                                                  } else n = !0;
-                                                                                                  if (n) {
+                                                                                                    m = !0;
+                                                                                                  } else m = !0;
+                                                                                                  if (m) {
                                                                                                     if (e.enemyNoHit !== void 0) {
                                                                                                       if (typeof e.enemyNoHit != "string") return s.errors = [{
                                                                                                         instancePath: r + "/terms/messages/enemyNoHit",
@@ -2551,9 +2072,9 @@ const K = U(function() {
                                                                                                         params: { type: "string" },
                                                                                                         message: "must be string"
                                                                                                       }], !1;
-                                                                                                      n = !0;
-                                                                                                    } else n = !0;
-                                                                                                    if (n) {
+                                                                                                      m = !0;
+                                                                                                    } else m = !0;
+                                                                                                    if (m) {
                                                                                                       if (e.enemyRecovery !== void 0) {
                                                                                                         if (typeof e.enemyRecovery != "string") return s.errors = [{
                                                                                                           instancePath: r + "/terms/messages/enemyRecovery",
@@ -2562,9 +2083,9 @@ const K = U(function() {
                                                                                                           params: { type: "string" },
                                                                                                           message: "must be string"
                                                                                                         }], !1;
-                                                                                                        n = !0;
-                                                                                                      } else n = !0;
-                                                                                                      if (n) {
+                                                                                                        m = !0;
+                                                                                                      } else m = !0;
+                                                                                                      if (m) {
                                                                                                         if (e.escapeFailure !== void 0) {
                                                                                                           if (typeof e.escapeFailure != "string") return s.errors = [{
                                                                                                             instancePath: r + "/terms/messages/escapeFailure",
@@ -2573,9 +2094,9 @@ const K = U(function() {
                                                                                                             params: { type: "string" },
                                                                                                             message: "must be string"
                                                                                                           }], !1;
-                                                                                                          n = !0;
-                                                                                                        } else n = !0;
-                                                                                                        if (n) {
+                                                                                                          m = !0;
+                                                                                                        } else m = !0;
+                                                                                                        if (m) {
                                                                                                           if (e.escapeStart !== void 0) {
                                                                                                             if (typeof e.escapeStart != "string") return s.errors = [{
                                                                                                               instancePath: r + "/terms/messages/escapeStart",
@@ -2584,9 +2105,9 @@ const K = U(function() {
                                                                                                               params: { type: "string" },
                                                                                                               message: "must be string"
                                                                                                             }], !1;
-                                                                                                            n = !0;
-                                                                                                          } else n = !0;
-                                                                                                          if (n) {
+                                                                                                            m = !0;
+                                                                                                          } else m = !0;
+                                                                                                          if (m) {
                                                                                                             if (e.evasion !== void 0) {
                                                                                                               if (typeof e.evasion != "string") return s.errors = [{
                                                                                                                 instancePath: r + "/terms/messages/evasion",
@@ -2595,9 +2116,9 @@ const K = U(function() {
                                                                                                                 params: { type: "string" },
                                                                                                                 message: "must be string"
                                                                                                               }], !1;
-                                                                                                              n = !0;
-                                                                                                            } else n = !0;
-                                                                                                            if (n) {
+                                                                                                              m = !0;
+                                                                                                            } else m = !0;
+                                                                                                            if (m) {
                                                                                                               if (e.expNext !== void 0) {
                                                                                                                 if (typeof e.expNext != "string") return s.errors = [{
                                                                                                                   instancePath: r + "/terms/messages/expNext",
@@ -2606,9 +2127,9 @@ const K = U(function() {
                                                                                                                   params: { type: "string" },
                                                                                                                   message: "must be string"
                                                                                                                 }], !1;
-                                                                                                                n = !0;
-                                                                                                              } else n = !0;
-                                                                                                              if (n) {
+                                                                                                                m = !0;
+                                                                                                              } else m = !0;
+                                                                                                              if (m) {
                                                                                                                 if (e.expTotal !== void 0) {
                                                                                                                   if (typeof e.expTotal != "string") return s.errors = [{
                                                                                                                     instancePath: r + "/terms/messages/expTotal",
@@ -2617,16 +2138,16 @@ const K = U(function() {
                                                                                                                     params: { type: "string" },
                                                                                                                     message: "must be string"
                                                                                                                   }], !1;
-                                                                                                                  n = !0;
-                                                                                                                } else n = !0;
-                                                                                                                if (n) {
+                                                                                                                  m = !0;
+                                                                                                                } else m = !0;
+                                                                                                                if (m) {
                                                                                                                   if (e.file !== void 0) {
                                                                                                                     if (typeof e.file != "string") return s.errors = [{ instancePath: r + "/terms/messages/file", schemaPath: "#/$defs/TermsMessages/properties/file/type", keyword: "type", params: {
                                                                                                                       type: "string"
                                                                                                                     }, message: "must be string" }], !1;
-                                                                                                                    n = !0;
-                                                                                                                  } else n = !0;
-                                                                                                                  if (n) {
+                                                                                                                    m = !0;
+                                                                                                                  } else m = !0;
+                                                                                                                  if (m) {
                                                                                                                     if (e.levelUp !== void 0) {
                                                                                                                       if (typeof e.levelUp != "string") return s.errors = [{
                                                                                                                         instancePath: r + "/terms/messages/levelUp",
@@ -2635,9 +2156,9 @@ const K = U(function() {
                                                                                                                         params: { type: "string" },
                                                                                                                         message: "must be string"
                                                                                                                       }], !1;
-                                                                                                                      n = !0;
-                                                                                                                    } else n = !0;
-                                                                                                                    if (n) {
+                                                                                                                      m = !0;
+                                                                                                                    } else m = !0;
+                                                                                                                    if (m) {
                                                                                                                       if (e.loadMessage !== void 0) {
                                                                                                                         if (typeof e.loadMessage != "string") return s.errors = [{
                                                                                                                           instancePath: r + "/terms/messages/loadMessage",
@@ -2646,9 +2167,9 @@ const K = U(function() {
                                                                                                                           params: { type: "string" },
                                                                                                                           message: "must be string"
                                                                                                                         }], !1;
-                                                                                                                        n = !0;
-                                                                                                                      } else n = !0;
-                                                                                                                      if (n) {
+                                                                                                                        m = !0;
+                                                                                                                      } else m = !0;
+                                                                                                                      if (m) {
                                                                                                                         if (e.magicEvasion !== void 0) {
                                                                                                                           if (typeof e.magicEvasion != "string") return s.errors = [{
                                                                                                                             instancePath: r + "/terms/messages/magicEvasion",
@@ -2657,9 +2178,9 @@ const K = U(function() {
                                                                                                                             params: { type: "string" },
                                                                                                                             message: "must be string"
                                                                                                                           }], !1;
-                                                                                                                          n = !0;
-                                                                                                                        } else n = !0;
-                                                                                                                        if (n) {
+                                                                                                                          m = !0;
+                                                                                                                        } else m = !0;
+                                                                                                                        if (m) {
                                                                                                                           if (e.magicReflection !== void 0) {
                                                                                                                             if (typeof e.magicReflection != "string") return s.errors = [{
                                                                                                                               instancePath: r + "/terms/messages/magicReflection",
@@ -2668,9 +2189,9 @@ const K = U(function() {
                                                                                                                               params: { type: "string" },
                                                                                                                               message: "must be string"
                                                                                                                             }], !1;
-                                                                                                                            n = !0;
-                                                                                                                          } else n = !0;
-                                                                                                                          if (n) {
+                                                                                                                            m = !0;
+                                                                                                                          } else m = !0;
+                                                                                                                          if (m) {
                                                                                                                             if (e.meVolume !== void 0) {
                                                                                                                               if (typeof e.meVolume != "string") return s.errors = [{
                                                                                                                                 instancePath: r + "/terms/messages/meVolume",
@@ -2679,9 +2200,9 @@ const K = U(function() {
                                                                                                                                 params: { type: "string" },
                                                                                                                                 message: "must be string"
                                                                                                                               }], !1;
-                                                                                                                              n = !0;
-                                                                                                                            } else n = !0;
-                                                                                                                            if (n) {
+                                                                                                                              m = !0;
+                                                                                                                            } else m = !0;
+                                                                                                                            if (m) {
                                                                                                                               if (e.obtainExp !== void 0) {
                                                                                                                                 if (typeof e.obtainExp != "string") return s.errors = [{
                                                                                                                                   instancePath: r + "/terms/messages/obtainExp",
@@ -2690,9 +2211,9 @@ const K = U(function() {
                                                                                                                                   params: { type: "string" },
                                                                                                                                   message: "must be string"
                                                                                                                                 }], !1;
-                                                                                                                                n = !0;
-                                                                                                                              } else n = !0;
-                                                                                                                              if (n) {
+                                                                                                                                m = !0;
+                                                                                                                              } else m = !0;
+                                                                                                                              if (m) {
                                                                                                                                 if (e.obtainGold !== void 0) {
                                                                                                                                   if (typeof e.obtainGold != "string") return s.errors = [{
                                                                                                                                     instancePath: r + "/terms/messages/obtainGold",
@@ -2701,9 +2222,9 @@ const K = U(function() {
                                                                                                                                     params: { type: "string" },
                                                                                                                                     message: "must be string"
                                                                                                                                   }], !1;
-                                                                                                                                  n = !0;
-                                                                                                                                } else n = !0;
-                                                                                                                                if (n) {
+                                                                                                                                  m = !0;
+                                                                                                                                } else m = !0;
+                                                                                                                                if (m) {
                                                                                                                                   if (e.obtainItem !== void 0) {
                                                                                                                                     if (typeof e.obtainItem != "string") return s.errors = [{
                                                                                                                                       instancePath: r + "/terms/messages/obtainItem",
@@ -2712,9 +2233,9 @@ const K = U(function() {
                                                                                                                                       params: { type: "string" },
                                                                                                                                       message: "must be string"
                                                                                                                                     }], !1;
-                                                                                                                                    n = !0;
-                                                                                                                                  } else n = !0;
-                                                                                                                                  if (n) {
+                                                                                                                                    m = !0;
+                                                                                                                                  } else m = !0;
+                                                                                                                                  if (m) {
                                                                                                                                     if (e.obtainSkill !== void 0) {
                                                                                                                                       if (typeof e.obtainSkill != "string") return s.errors = [{
                                                                                                                                         instancePath: r + "/terms/messages/obtainSkill",
@@ -2723,9 +2244,9 @@ const K = U(function() {
                                                                                                                                         params: { type: "string" },
                                                                                                                                         message: "must be string"
                                                                                                                                       }], !1;
-                                                                                                                                      n = !0;
-                                                                                                                                    } else n = !0;
-                                                                                                                                    if (n) {
+                                                                                                                                      m = !0;
+                                                                                                                                    } else m = !0;
+                                                                                                                                    if (m) {
                                                                                                                                       if (e.partyName !== void 0) {
                                                                                                                                         if (typeof e.partyName != "string") return s.errors = [{
                                                                                                                                           instancePath: r + "/terms/messages/partyName",
@@ -2734,9 +2255,9 @@ const K = U(function() {
                                                                                                                                           params: { type: "string" },
                                                                                                                                           message: "must be string"
                                                                                                                                         }], !1;
-                                                                                                                                        n = !0;
-                                                                                                                                      } else n = !0;
-                                                                                                                                      if (n) {
+                                                                                                                                        m = !0;
+                                                                                                                                      } else m = !0;
+                                                                                                                                      if (m) {
                                                                                                                                         if (e.possession !== void 0) {
                                                                                                                                           if (typeof e.possession != "string") return s.errors = [{
                                                                                                                                             instancePath: r + "/terms/messages/possession",
@@ -2745,9 +2266,9 @@ const K = U(function() {
                                                                                                                                             params: { type: "string" },
                                                                                                                                             message: "must be string"
                                                                                                                                           }], !1;
-                                                                                                                                          n = !0;
-                                                                                                                                        } else n = !0;
-                                                                                                                                        if (n) {
+                                                                                                                                          m = !0;
+                                                                                                                                        } else m = !0;
+                                                                                                                                        if (m) {
                                                                                                                                           if (e.preemptive !== void 0) {
                                                                                                                                             if (typeof e.preemptive != "string") return s.errors = [{
                                                                                                                                               instancePath: r + "/terms/messages/preemptive",
@@ -2756,9 +2277,9 @@ const K = U(function() {
                                                                                                                                               params: { type: "string" },
                                                                                                                                               message: "must be string"
                                                                                                                                             }], !1;
-                                                                                                                                            n = !0;
-                                                                                                                                          } else n = !0;
-                                                                                                                                          if (n) {
+                                                                                                                                            m = !0;
+                                                                                                                                          } else m = !0;
+                                                                                                                                          if (m) {
                                                                                                                                             if (e.saveMessage !== void 0) {
                                                                                                                                               if (typeof e.saveMessage != "string") return s.errors = [{
                                                                                                                                                 instancePath: r + "/terms/messages/saveMessage",
@@ -2767,9 +2288,9 @@ const K = U(function() {
                                                                                                                                                 params: { type: "string" },
                                                                                                                                                 message: "must be string"
                                                                                                                                               }], !1;
-                                                                                                                                              n = !0;
-                                                                                                                                            } else n = !0;
-                                                                                                                                            if (n) {
+                                                                                                                                              m = !0;
+                                                                                                                                            } else m = !0;
+                                                                                                                                            if (m) {
                                                                                                                                               if (e.seVolume !== void 0) {
                                                                                                                                                 if (typeof e.seVolume != "string") return s.errors = [{
                                                                                                                                                   instancePath: r + "/terms/messages/seVolume",
@@ -2778,9 +2299,9 @@ const K = U(function() {
                                                                                                                                                   params: { type: "string" },
                                                                                                                                                   message: "must be string"
                                                                                                                                                 }], !1;
-                                                                                                                                                n = !0;
-                                                                                                                                              } else n = !0;
-                                                                                                                                              if (n) {
+                                                                                                                                                m = !0;
+                                                                                                                                              } else m = !0;
+                                                                                                                                              if (m) {
                                                                                                                                                 if (e.substitute !== void 0) {
                                                                                                                                                   if (typeof e.substitute != "string") return s.errors = [{
                                                                                                                                                     instancePath: r + "/terms/messages/substitute",
@@ -2789,9 +2310,9 @@ const K = U(function() {
                                                                                                                                                     params: { type: "string" },
                                                                                                                                                     message: "must be string"
                                                                                                                                                   }], !1;
-                                                                                                                                                  n = !0;
-                                                                                                                                                } else n = !0;
-                                                                                                                                                if (n) {
+                                                                                                                                                  m = !0;
+                                                                                                                                                } else m = !0;
+                                                                                                                                                if (m) {
                                                                                                                                                   if (e.surprise !== void 0) {
                                                                                                                                                     if (typeof e.surprise != "string") return s.errors = [{
                                                                                                                                                       instancePath: r + "/terms/messages/surprise",
@@ -2800,9 +2321,9 @@ const K = U(function() {
                                                                                                                                                       params: { type: "string" },
                                                                                                                                                       message: "must be string"
                                                                                                                                                     }], !1;
-                                                                                                                                                    n = !0;
-                                                                                                                                                  } else n = !0;
-                                                                                                                                                  if (n) {
+                                                                                                                                                    m = !0;
+                                                                                                                                                  } else m = !0;
+                                                                                                                                                  if (m) {
                                                                                                                                                     if (e.touchUI !== void 0) {
                                                                                                                                                       if (typeof e.touchUI != "string") return s.errors = [{
                                                                                                                                                         instancePath: r + "/terms/messages/touchUI",
@@ -2811,9 +2332,9 @@ const K = U(function() {
                                                                                                                                                         params: { type: "string" },
                                                                                                                                                         message: "must be string"
                                                                                                                                                       }], !1;
-                                                                                                                                                      n = !0;
-                                                                                                                                                    } else n = !0;
-                                                                                                                                                    if (n) {
+                                                                                                                                                      m = !0;
+                                                                                                                                                    } else m = !0;
+                                                                                                                                                    if (m) {
                                                                                                                                                       if (e.useItem !== void 0) {
                                                                                                                                                         if (typeof e.useItem != "string") return s.errors = [{
                                                                                                                                                           instancePath: r + "/terms/messages/useItem",
@@ -2822,9 +2343,9 @@ const K = U(function() {
                                                                                                                                                           params: { type: "string" },
                                                                                                                                                           message: "must be string"
                                                                                                                                                         }], !1;
-                                                                                                                                                        n = !0;
-                                                                                                                                                      } else n = !0;
-                                                                                                                                                      if (n) if (e.victory !== void 0) {
+                                                                                                                                                        m = !0;
+                                                                                                                                                      } else m = !0;
+                                                                                                                                                      if (m) if (e.victory !== void 0) {
                                                                                                                                                         if (typeof e.victory != "string") return s.errors = [{
                                                                                                                                                           instancePath: r + "/terms/messages/victory",
                                                                                                                                                           schemaPath: "#/$defs/TermsMessages/properties/victory/type",
@@ -2832,8 +2353,8 @@ const K = U(function() {
                                                                                                                                                           params: { type: "string" },
                                                                                                                                                           message: "must be string"
                                                                                                                                                         }], !1;
-                                                                                                                                                        n = !0;
-                                                                                                                                                      } else n = !0;
+                                                                                                                                                        m = !0;
+                                                                                                                                                      } else m = !0;
                                                                                                                                                     }
                                                                                                                                                   }
                                                                                                                                                 }
@@ -2886,12 +2407,12 @@ const K = U(function() {
                                                   }
                                                 }
                                               }
-                                              var I = o === 0;
-                                            } else I = !0;
-                                            if (I) {
+                                              var x = n === 0;
+                                            } else x = !0;
+                                            if (x) {
                                               if (t.commands !== void 0) {
                                                 let e = t.commands;
-                                                const o = 0;
+                                                const n = 0;
                                                 if (!Array.isArray(e)) return s.errors = [{
                                                   instancePath: r + "/terms/commands",
                                                   schemaPath: "#/$defs/TermsCommands/type",
@@ -2919,9 +2440,9 @@ const K = U(function() {
                                                     if (typeof e[0] != "string") return s.errors = [{ instancePath: r + "/terms/commands/0", schemaPath: "#/$defs/TermsCommands/items/0/type", keyword: "type", params: {
                                                       type: "string"
                                                     }, message: "must be string" }], !1;
-                                                    var f = !0;
+                                                    var h = !0;
                                                   }
-                                                  if (f) {
+                                                  if (h) {
                                                     if (p > 1) {
                                                       if (typeof e[1] != "string") return s.errors = [{
                                                         instancePath: r + "/terms/commands/1",
@@ -2930,9 +2451,9 @@ const K = U(function() {
                                                         params: { type: "string" },
                                                         message: "must be string"
                                                       }], !1;
-                                                      f = !0;
+                                                      h = !0;
                                                     }
-                                                    if (f) {
+                                                    if (h) {
                                                       if (p > 2) {
                                                         if (typeof e[2] != "string") return s.errors = [{
                                                           instancePath: r + "/terms/commands/2",
@@ -2941,9 +2462,9 @@ const K = U(function() {
                                                           params: { type: "string" },
                                                           message: "must be string"
                                                         }], !1;
-                                                        f = !0;
+                                                        h = !0;
                                                       }
-                                                      if (f) {
+                                                      if (h) {
                                                         if (p > 3) {
                                                           if (typeof e[3] != "string") return s.errors = [{
                                                             instancePath: r + "/terms/commands/3",
@@ -2952,9 +2473,9 @@ const K = U(function() {
                                                             params: { type: "string" },
                                                             message: "must be string"
                                                           }], !1;
-                                                          f = !0;
+                                                          h = !0;
                                                         }
-                                                        if (f) {
+                                                        if (h) {
                                                           if (p > 4) {
                                                             if (typeof e[4] != "string") return s.errors = [{
                                                               instancePath: r + "/terms/commands/4",
@@ -2963,9 +2484,9 @@ const K = U(function() {
                                                               params: { type: "string" },
                                                               message: "must be string"
                                                             }], !1;
-                                                            f = !0;
+                                                            h = !0;
                                                           }
-                                                          if (f) {
+                                                          if (h) {
                                                             if (p > 5) {
                                                               if (typeof e[5] != "string") return s.errors = [{
                                                                 instancePath: r + "/terms/commands/5",
@@ -2974,9 +2495,9 @@ const K = U(function() {
                                                                 params: { type: "string" },
                                                                 message: "must be string"
                                                               }], !1;
-                                                              f = !0;
+                                                              h = !0;
                                                             }
-                                                            if (f) {
+                                                            if (h) {
                                                               if (p > 6) {
                                                                 if (typeof e[6] != "string") return s.errors = [{
                                                                   instancePath: r + "/terms/commands/6",
@@ -2985,9 +2506,9 @@ const K = U(function() {
                                                                   params: { type: "string" },
                                                                   message: "must be string"
                                                                 }], !1;
-                                                                f = !0;
+                                                                h = !0;
                                                               }
-                                                              if (f) {
+                                                              if (h) {
                                                                 if (p > 7) {
                                                                   if (typeof e[7] != "string") return s.errors = [{
                                                                     instancePath: r + "/terms/commands/7",
@@ -2996,9 +2517,9 @@ const K = U(function() {
                                                                     params: { type: "string" },
                                                                     message: "must be string"
                                                                   }], !1;
-                                                                  f = !0;
+                                                                  h = !0;
                                                                 }
-                                                                if (f) {
+                                                                if (h) {
                                                                   if (p > 8) {
                                                                     if (typeof e[8] != "string") return s.errors = [{
                                                                       instancePath: r + "/terms/commands/8",
@@ -3007,9 +2528,9 @@ const K = U(function() {
                                                                       params: { type: "string" },
                                                                       message: "must be string"
                                                                     }], !1;
-                                                                    f = !0;
+                                                                    h = !0;
                                                                   }
-                                                                  if (f) {
+                                                                  if (h) {
                                                                     if (p > 9) {
                                                                       if (typeof e[9] != "string") return s.errors = [{
                                                                         instancePath: r + "/terms/commands/9",
@@ -3018,9 +2539,9 @@ const K = U(function() {
                                                                         params: { type: "string" },
                                                                         message: "must be string"
                                                                       }], !1;
-                                                                      f = !0;
+                                                                      h = !0;
                                                                     }
-                                                                    if (f) {
+                                                                    if (h) {
                                                                       if (p > 10) {
                                                                         if (typeof e[10] != "string") return s.errors = [{
                                                                           instancePath: r + "/terms/commands/10",
@@ -3029,9 +2550,9 @@ const K = U(function() {
                                                                           params: { type: "string" },
                                                                           message: "must be string"
                                                                         }], !1;
-                                                                        f = !0;
+                                                                        h = !0;
                                                                       }
-                                                                      if (f) {
+                                                                      if (h) {
                                                                         if (p > 11) {
                                                                           if (typeof e[11] != "string") return s.errors = [{
                                                                             instancePath: r + "/terms/commands/11",
@@ -3040,9 +2561,9 @@ const K = U(function() {
                                                                             params: { type: "string" },
                                                                             message: "must be string"
                                                                           }], !1;
-                                                                          f = !0;
+                                                                          h = !0;
                                                                         }
-                                                                        if (f) {
+                                                                        if (h) {
                                                                           if (p > 12) {
                                                                             if (typeof e[12] != "string") return s.errors = [{
                                                                               instancePath: r + "/terms/commands/12",
@@ -3051,9 +2572,9 @@ const K = U(function() {
                                                                               params: { type: "string" },
                                                                               message: "must be string"
                                                                             }], !1;
-                                                                            f = !0;
+                                                                            h = !0;
                                                                           }
-                                                                          if (f) {
+                                                                          if (h) {
                                                                             if (p > 13) {
                                                                               if (typeof e[13] != "string") return s.errors = [{
                                                                                 instancePath: r + "/terms/commands/13",
@@ -3062,9 +2583,9 @@ const K = U(function() {
                                                                                 params: { type: "string" },
                                                                                 message: "must be string"
                                                                               }], !1;
-                                                                              f = !0;
+                                                                              h = !0;
                                                                             }
-                                                                            if (f) {
+                                                                            if (h) {
                                                                               if (p > 14) {
                                                                                 if (typeof e[14] != "string") return s.errors = [{
                                                                                   instancePath: r + "/terms/commands/14",
@@ -3073,9 +2594,9 @@ const K = U(function() {
                                                                                   params: { type: "string" },
                                                                                   message: "must be string"
                                                                                 }], !1;
-                                                                                f = !0;
+                                                                                h = !0;
                                                                               }
-                                                                              if (f) {
+                                                                              if (h) {
                                                                                 if (p > 15) {
                                                                                   if (typeof e[15] != "string") return s.errors = [{
                                                                                     instancePath: r + "/terms/commands/15",
@@ -3084,9 +2605,9 @@ const K = U(function() {
                                                                                     params: { type: "string" },
                                                                                     message: "must be string"
                                                                                   }], !1;
-                                                                                  f = !0;
+                                                                                  h = !0;
                                                                                 }
-                                                                                if (f) {
+                                                                                if (h) {
                                                                                   if (p > 16) {
                                                                                     if (typeof e[16] != "string") return s.errors = [{
                                                                                       instancePath: r + "/terms/commands/16",
@@ -3095,9 +2616,9 @@ const K = U(function() {
                                                                                       params: { type: "string" },
                                                                                       message: "must be string"
                                                                                     }], !1;
-                                                                                    f = !0;
+                                                                                    h = !0;
                                                                                   }
-                                                                                  if (f) {
+                                                                                  if (h) {
                                                                                     if (p > 17) {
                                                                                       if (typeof e[17] != "string") return s.errors = [{
                                                                                         instancePath: r + "/terms/commands/17",
@@ -3106,9 +2627,9 @@ const K = U(function() {
                                                                                         params: { type: "string" },
                                                                                         message: "must be string"
                                                                                       }], !1;
-                                                                                      f = !0;
+                                                                                      h = !0;
                                                                                     }
-                                                                                    if (f) {
+                                                                                    if (h) {
                                                                                       if (p > 18) {
                                                                                         if (typeof e[18] != "string") return s.errors = [{
                                                                                           instancePath: r + "/terms/commands/18",
@@ -3117,9 +2638,9 @@ const K = U(function() {
                                                                                           params: { type: "string" },
                                                                                           message: "must be string"
                                                                                         }], !1;
-                                                                                        f = !0;
+                                                                                        h = !0;
                                                                                       }
-                                                                                      if (f) {
+                                                                                      if (h) {
                                                                                         if (p > 19) {
                                                                                           if (typeof e[19] != "string") return s.errors = [{
                                                                                             instancePath: r + "/terms/commands/19",
@@ -3128,12 +2649,12 @@ const K = U(function() {
                                                                                             params: { type: "string" },
                                                                                             message: "must be string"
                                                                                           }], !1;
-                                                                                          f = !0;
+                                                                                          h = !0;
                                                                                         }
-                                                                                        if (f) {
+                                                                                        if (h) {
                                                                                           if (p > 20) {
                                                                                             let a = e[20];
-                                                                                            const y = 0;
+                                                                                            const d = 0;
                                                                                             if (typeof a != "string" && a !== null) return s.errors = [{
                                                                                               instancePath: r + "/terms/commands/20",
                                                                                               schemaPath: "#/$defs/TermsCommands/items/20/type",
@@ -3141,9 +2662,9 @@ const K = U(function() {
                                                                                               params: { type: "string" },
                                                                                               message: "must be string"
                                                                                             }], !1;
-                                                                                            f = y === 0;
+                                                                                            h = d === 0;
                                                                                           }
-                                                                                          if (f) {
+                                                                                          if (h) {
                                                                                             if (p > 21) {
                                                                                               if (typeof e[21] != "string") return s.errors = [{
                                                                                                 instancePath: r + "/terms/commands/21",
@@ -3152,9 +2673,9 @@ const K = U(function() {
                                                                                                 params: { type: "string" },
                                                                                                 message: "must be string"
                                                                                               }], !1;
-                                                                                              f = !0;
+                                                                                              h = !0;
                                                                                             }
-                                                                                            if (f) {
+                                                                                            if (h) {
                                                                                               if (p > 22) {
                                                                                                 if (typeof e[22] != "string") return s.errors = [{
                                                                                                   instancePath: r + "/terms/commands/22",
@@ -3163,12 +2684,12 @@ const K = U(function() {
                                                                                                   params: { type: "string" },
                                                                                                   message: "must be string"
                                                                                                 }], !1;
-                                                                                                f = !0;
+                                                                                                h = !0;
                                                                                               }
-                                                                                              if (f) {
+                                                                                              if (h) {
                                                                                                 if (p > 23) {
                                                                                                   let a = e[23];
-                                                                                                  const y = 0;
+                                                                                                  const d = 0;
                                                                                                   if (typeof a != "string" && a !== null) return s.errors = [{
                                                                                                     instancePath: r + "/terms/commands/23",
                                                                                                     schemaPath: "#/$defs/TermsCommands/items/23/type",
@@ -3176,9 +2697,9 @@ const K = U(function() {
                                                                                                     params: { type: "string" },
                                                                                                     message: "must be string"
                                                                                                   }], !1;
-                                                                                                  f = y === 0;
+                                                                                                  h = d === 0;
                                                                                                 }
-                                                                                                if (f) {
+                                                                                                if (h) {
                                                                                                   if (p > 24) {
                                                                                                     if (typeof e[24] != "string") return s.errors = [{
                                                                                                       instancePath: r + "/terms/commands/24",
@@ -3187,9 +2708,9 @@ const K = U(function() {
                                                                                                       params: { type: "string" },
                                                                                                       message: "must be string"
                                                                                                     }], !1;
-                                                                                                    f = !0;
+                                                                                                    h = !0;
                                                                                                   }
-                                                                                                  if (f && p > 25) {
+                                                                                                  if (h && p > 25) {
                                                                                                     if (typeof e[25] != "string") return s.errors = [{
                                                                                                       instancePath: r + "/terms/commands/25",
                                                                                                       schemaPath: "#/$defs/TermsCommands/items/25/type",
@@ -3197,7 +2718,7 @@ const K = U(function() {
                                                                                                       params: { type: "string" },
                                                                                                       message: "must be string"
                                                                                                     }], !1;
-                                                                                                    f = !0;
+                                                                                                    h = !0;
                                                                                                   }
                                                                                                 }
                                                                                               }
@@ -3224,12 +2745,12 @@ const K = U(function() {
                                                     }
                                                   }
                                                 }
-                                                I = o === 0;
-                                              } else I = !0;
-                                              if (I) {
+                                                x = n === 0;
+                                              } else x = !0;
+                                              if (x) {
                                                 if (t.basic !== void 0) {
                                                   let e = t.basic;
-                                                  const o = 0;
+                                                  const n = 0;
                                                   if (!Array.isArray(e)) return s.errors = [{ instancePath: r + "/terms/basic", schemaPath: "#/$defs/TermsBasic/type", keyword: "type", params: {
                                                     type: "array"
                                                   }, message: "must be array" }], !1;
@@ -3254,11 +2775,11 @@ const K = U(function() {
                                                         message: "must be string"
                                                       }], !1;
                                                   }
-                                                  I = o === 0;
-                                                } else I = !0;
-                                                if (I) if (t.params !== void 0) {
+                                                  x = n === 0;
+                                                } else x = !0;
+                                                if (x) if (t.params !== void 0) {
                                                   let e = t.params;
-                                                  const o = 0;
+                                                  const n = 0;
                                                   if (!Array.isArray(e)) return s.errors = [{
                                                     instancePath: r + "/terms/params",
                                                     schemaPath: "#/$defs/TermsParams/type",
@@ -3283,33 +2804,33 @@ const K = U(function() {
                                                   {
                                                     const p = e.length;
                                                     for (let a = 0; a < p; a++) {
-                                                      let y = e[a];
-                                                      const g = 0;
-                                                      if (typeof y != "string") return s.errors = [{
+                                                      let d = e[a];
+                                                      const u = 0;
+                                                      if (typeof d != "string") return s.errors = [{
                                                         instancePath: r + "/terms/params/" + a,
                                                         schemaPath: "#/$defs/TermsParams/items/type",
                                                         keyword: "type",
                                                         params: { type: "string" },
                                                         message: "must be string"
                                                       }], !1;
-                                                      if (q(y) < 0) return s.errors = [{
+                                                      if (L(d) < 0) return s.errors = [{
                                                         instancePath: r + "/terms/params/" + a,
                                                         schemaPath: "#/$defs/TermsParams/items/minLength",
                                                         keyword: "minLength",
                                                         params: { limit: 0 },
                                                         message: "must NOT have fewer than 0 characters"
                                                       }], !1;
-                                                      if (g !== 0) break;
+                                                      if (u !== 0) break;
                                                     }
                                                   }
-                                                  I = o === 0;
-                                                } else I = !0;
+                                                  x = n === 0;
+                                                } else x = !0;
                                               }
                                             }
                                           }
-                                          m = c === 0;
-                                        } else m = !0;
-                                        if (m) {
+                                          o = y === 0;
+                                        } else o = !0;
+                                        if (o) {
                                           if (i.optAutosave !== void 0) {
                                             if (typeof i.optAutosave != "boolean") return s.errors = [{
                                               instancePath: r + "/optAutosave",
@@ -3318,9 +2839,9 @@ const K = U(function() {
                                               params: { type: "boolean" },
                                               message: "must be boolean"
                                             }], !1;
-                                            m = !0;
-                                          } else m = !0;
-                                          if (m) {
+                                            o = !0;
+                                          } else o = !0;
+                                          if (o) {
                                             if (i.optDisplayTp !== void 0) {
                                               if (typeof i.optDisplayTp != "boolean") return s.errors = [{
                                                 instancePath: r + "/optDisplayTp",
@@ -3329,9 +2850,9 @@ const K = U(function() {
                                                 params: { type: "boolean" },
                                                 message: "must be boolean"
                                               }], !1;
-                                              m = !0;
-                                            } else m = !0;
-                                            if (m) {
+                                              o = !0;
+                                            } else o = !0;
+                                            if (o) {
                                               if (i.optFloorDeath !== void 0) {
                                                 if (typeof i.optFloorDeath != "boolean") return s.errors = [{
                                                   instancePath: r + "/optFloorDeath",
@@ -3340,9 +2861,9 @@ const K = U(function() {
                                                   params: { type: "boolean" },
                                                   message: "must be boolean"
                                                 }], !1;
-                                                m = !0;
-                                              } else m = !0;
-                                              if (m) {
+                                                o = !0;
+                                              } else o = !0;
+                                              if (o) {
                                                 if (i.optFollowers !== void 0) {
                                                   if (typeof i.optFollowers != "boolean") return s.errors = [{
                                                     instancePath: r + "/optFollowers",
@@ -3351,16 +2872,16 @@ const K = U(function() {
                                                     params: { type: "boolean" },
                                                     message: "must be boolean"
                                                   }], !1;
-                                                  m = !0;
-                                                } else m = !0;
-                                                if (m) {
+                                                  o = !0;
+                                                } else o = !0;
+                                                if (o) {
                                                   if (i.optKeyItemsNumber !== void 0) {
                                                     if (typeof i.optKeyItemsNumber != "boolean") return s.errors = [{ instancePath: r + "/optKeyItemsNumber", schemaPath: "#/properties/optKeyItemsNumber/type", keyword: "type", params: {
                                                       type: "boolean"
                                                     }, message: "must be boolean" }], !1;
-                                                    m = !0;
-                                                  } else m = !0;
-                                                  if (m) {
+                                                    o = !0;
+                                                  } else o = !0;
+                                                  if (o) {
                                                     if (i.optSideView !== void 0) {
                                                       if (typeof i.optSideView != "boolean") return s.errors = [{
                                                         instancePath: r + "/optSideView",
@@ -3369,9 +2890,9 @@ const K = U(function() {
                                                         params: { type: "boolean" },
                                                         message: "must be boolean"
                                                       }], !1;
-                                                      m = !0;
-                                                    } else m = !0;
-                                                    if (m) {
+                                                      o = !0;
+                                                    } else o = !0;
+                                                    if (o) {
                                                       if (i.optSlipDeath !== void 0) {
                                                         if (typeof i.optSlipDeath != "boolean") return s.errors = [{
                                                           instancePath: r + "/optSlipDeath",
@@ -3380,9 +2901,9 @@ const K = U(function() {
                                                           params: { type: "boolean" },
                                                           message: "must be boolean"
                                                         }], !1;
-                                                        m = !0;
-                                                      } else m = !0;
-                                                      if (m) {
+                                                        o = !0;
+                                                      } else o = !0;
+                                                      if (o) {
                                                         if (i.optTransparent !== void 0) {
                                                           if (typeof i.optTransparent != "boolean") return s.errors = [{
                                                             instancePath: r + "/optTransparent",
@@ -3391,9 +2912,9 @@ const K = U(function() {
                                                             params: { type: "boolean" },
                                                             message: "must be boolean"
                                                           }], !1;
-                                                          m = !0;
-                                                        } else m = !0;
-                                                        if (m) {
+                                                          o = !0;
+                                                        } else o = !0;
+                                                        if (o) {
                                                           if (i.optSplashScreen !== void 0) {
                                                             if (typeof i.optSplashScreen != "boolean") return s.errors = [{
                                                               instancePath: r + "/optSplashScreen",
@@ -3402,9 +2923,9 @@ const K = U(function() {
                                                               params: { type: "boolean" },
                                                               message: "must be boolean"
                                                             }], !1;
-                                                            m = !0;
-                                                          } else m = !0;
-                                                          if (m) {
+                                                            o = !0;
+                                                          } else o = !0;
+                                                          if (o) {
                                                             if (i.optDrawTitle !== void 0) {
                                                               if (typeof i.optDrawTitle != "boolean") return s.errors = [{
                                                                 instancePath: r + "/optDrawTitle",
@@ -3413,9 +2934,9 @@ const K = U(function() {
                                                                 params: { type: "boolean" },
                                                                 message: "must be boolean"
                                                               }], !1;
-                                                              m = !0;
-                                                            } else m = !0;
-                                                            if (m) {
+                                                              o = !0;
+                                                            } else o = !0;
+                                                            if (o) {
                                                               if (i.optExtraExp !== void 0) {
                                                                 if (typeof i.optExtraExp != "boolean") return s.errors = [{
                                                                   instancePath: r + "/optExtraExp",
@@ -3424,9 +2945,9 @@ const K = U(function() {
                                                                   params: { type: "boolean" },
                                                                   message: "must be boolean"
                                                                 }], !1;
-                                                                m = !0;
-                                                              } else m = !0;
-                                                              if (m) {
+                                                                o = !0;
+                                                              } else o = !0;
+                                                              if (o) {
                                                                 if (i.optMessageSkip !== void 0) {
                                                                   if (typeof i.optMessageSkip != "boolean") return s.errors = [{
                                                                     instancePath: r + "/optMessageSkip",
@@ -3435,12 +2956,12 @@ const K = U(function() {
                                                                     params: { type: "boolean" },
                                                                     message: "must be boolean"
                                                                   }], !1;
-                                                                  m = !0;
-                                                                } else m = !0;
-                                                                if (m) {
+                                                                  o = !0;
+                                                                } else o = !0;
+                                                                if (o) {
                                                                   if (i.startMapId !== void 0) {
                                                                     let t = i.startMapId;
-                                                                    const c = 0;
+                                                                    const y = 0;
                                                                     if (typeof t != "number" || t % 1 || isNaN(t) || !isFinite(t)) return s.errors = [{
                                                                       instancePath: r + "/startMapId",
                                                                       schemaPath: "#/properties/startMapId/type",
@@ -3452,12 +2973,12 @@ const K = U(function() {
                                                                       comparison: ">=",
                                                                       limit: 0
                                                                     }, message: "must be >= 0" }], !1;
-                                                                    m = c === 0;
-                                                                  } else m = !0;
-                                                                  if (m) {
+                                                                    o = y === 0;
+                                                                  } else o = !0;
+                                                                  if (o) {
                                                                     if (i.startX !== void 0) {
                                                                       let t = i.startX;
-                                                                      const c = 0;
+                                                                      const y = 0;
                                                                       if (typeof t != "number" || t % 1 || isNaN(t) || !isFinite(t)) return s.errors = [{
                                                                         instancePath: r + "/startX",
                                                                         schemaPath: "#/properties/startX/type",
@@ -3472,12 +2993,12 @@ const K = U(function() {
                                                                         params: { comparison: ">=", limit: 0 },
                                                                         message: "must be >= 0"
                                                                       }], !1;
-                                                                      m = c === 0;
-                                                                    } else m = !0;
-                                                                    if (m) {
+                                                                      o = y === 0;
+                                                                    } else o = !0;
+                                                                    if (o) {
                                                                       if (i.startY !== void 0) {
                                                                         let t = i.startY;
-                                                                        const c = 0;
+                                                                        const y = 0;
                                                                         if (typeof t != "number" || t % 1 || isNaN(t) || !isFinite(t)) return s.errors = [{
                                                                           instancePath: r + "/startY",
                                                                           schemaPath: "#/properties/startY/type",
@@ -3492,12 +3013,12 @@ const K = U(function() {
                                                                           params: { comparison: ">=", limit: 0 },
                                                                           message: "must be >= 0"
                                                                         }], !1;
-                                                                        m = c === 0;
-                                                                      } else m = !0;
-                                                                      if (m) {
+                                                                        o = y === 0;
+                                                                      } else o = !0;
+                                                                      if (o) {
                                                                         if (i.faceSize !== void 0) {
                                                                           let t = i.faceSize;
-                                                                          const c = 0;
+                                                                          const y = 0;
                                                                           if (typeof t != "number" || t % 1 || isNaN(t) || !isFinite(t)) return s.errors = [{
                                                                             instancePath: r + "/faceSize",
                                                                             schemaPath: "#/properties/faceSize/type",
@@ -3512,12 +3033,12 @@ const K = U(function() {
                                                                             params: { comparison: ">=", limit: 0 },
                                                                             message: "must be >= 0"
                                                                           }], !1;
-                                                                          m = c === 0;
-                                                                        } else m = !0;
-                                                                        if (m) {
+                                                                          o = y === 0;
+                                                                        } else o = !0;
+                                                                        if (o) {
                                                                           if (i.tileSize !== void 0) {
                                                                             let t = i.tileSize;
-                                                                            const c = 0;
+                                                                            const y = 0;
                                                                             if (typeof t != "number" || t % 1 || isNaN(t) || !isFinite(t)) return s.errors = [{
                                                                               instancePath: r + "/tileSize",
                                                                               schemaPath: "#/properties/tileSize/type",
@@ -3532,12 +3053,12 @@ const K = U(function() {
                                                                               params: { comparison: ">=", limit: 0 },
                                                                               message: "must be >= 0"
                                                                             }], !1;
-                                                                            m = c === 0;
-                                                                          } else m = !0;
-                                                                          if (m) {
+                                                                            o = y === 0;
+                                                                          } else o = !0;
+                                                                          if (o) {
                                                                             if (i.iconSize !== void 0) {
                                                                               let t = i.iconSize;
-                                                                              const c = 0;
+                                                                              const y = 0;
                                                                               if (typeof t != "number" || t % 1 || isNaN(t) || !isFinite(t)) return s.errors = [{
                                                                                 instancePath: r + "/iconSize",
                                                                                 schemaPath: "#/properties/iconSize/type",
@@ -3552,12 +3073,12 @@ const K = U(function() {
                                                                                 params: { comparison: ">=", limit: 0 },
                                                                                 message: "must be >= 0"
                                                                               }], !1;
-                                                                              m = c === 0;
-                                                                            } else m = !0;
-                                                                            if (m) {
+                                                                              o = y === 0;
+                                                                            } else o = !0;
+                                                                            if (o) {
                                                                               if (i.battleSystem !== void 0) {
                                                                                 let t = i.battleSystem;
-                                                                                const c = 0;
+                                                                                const y = 0;
                                                                                 if (typeof t != "number" || t % 1 || isNaN(t) || !isFinite(t)) return s.errors = [{ instancePath: r + "/battleSystem", schemaPath: "#/properties/battleSystem/type", keyword: "type", params: {
                                                                                   type: "integer"
                                                                                 }, message: "must be integer" }], !1;
@@ -3577,12 +3098,12 @@ const K = U(function() {
                                                                                     message: "must be >= 0"
                                                                                   }], !1;
                                                                                 }
-                                                                                m = c === 0;
-                                                                              } else m = !0;
-                                                                              if (m) {
+                                                                                o = y === 0;
+                                                                              } else o = !0;
+                                                                              if (o) {
                                                                                 if (i.elements !== void 0) {
                                                                                   let t = i.elements;
-                                                                                  const c = 0;
+                                                                                  const y = 0;
                                                                                   if (!Array.isArray(t)) return s.errors = [{
                                                                                     instancePath: r + "/elements",
                                                                                     schemaPath: "#/properties/elements/type",
@@ -3591,8 +3112,8 @@ const K = U(function() {
                                                                                     message: "must be array"
                                                                                   }], !1;
                                                                                   {
-                                                                                    const d = t.length;
-                                                                                    for (let e = 0; e < d; e++)
+                                                                                    const c = t.length;
+                                                                                    for (let e = 0; e < c; e++)
                                                                                       if (typeof t[e] != "string") return s.errors = [{
                                                                                         instancePath: r + "/elements/" + e,
                                                                                         schemaPath: "#/properties/elements/items/type",
@@ -3601,12 +3122,12 @@ const K = U(function() {
                                                                                         message: "must be string"
                                                                                       }], !1;
                                                                                   }
-                                                                                  m = c === 0;
-                                                                                } else m = !0;
-                                                                                if (m) {
+                                                                                  o = y === 0;
+                                                                                } else o = !0;
+                                                                                if (o) {
                                                                                   if (i.weaponTypes !== void 0) {
                                                                                     let t = i.weaponTypes;
-                                                                                    const c = 0;
+                                                                                    const y = 0;
                                                                                     if (!Array.isArray(t)) return s.errors = [{
                                                                                       instancePath: r + "/weaponTypes",
                                                                                       schemaPath: "#/properties/weaponTypes/type",
@@ -3615,8 +3136,8 @@ const K = U(function() {
                                                                                       message: "must be array"
                                                                                     }], !1;
                                                                                     {
-                                                                                      const d = t.length;
-                                                                                      for (let e = 0; e < d; e++)
+                                                                                      const c = t.length;
+                                                                                      for (let e = 0; e < c; e++)
                                                                                         if (typeof t[e] != "string") return s.errors = [{
                                                                                           instancePath: r + "/weaponTypes/" + e,
                                                                                           schemaPath: "#/properties/weaponTypes/items/type",
@@ -3625,12 +3146,12 @@ const K = U(function() {
                                                                                           message: "must be string"
                                                                                         }], !1;
                                                                                     }
-                                                                                    m = c === 0;
-                                                                                  } else m = !0;
-                                                                                  if (m) {
+                                                                                    o = y === 0;
+                                                                                  } else o = !0;
+                                                                                  if (o) {
                                                                                     if (i.armorTypes !== void 0) {
                                                                                       let t = i.armorTypes;
-                                                                                      const c = 0;
+                                                                                      const y = 0;
                                                                                       if (!Array.isArray(t)) return s.errors = [{
                                                                                         instancePath: r + "/armorTypes",
                                                                                         schemaPath: "#/properties/armorTypes/type",
@@ -3639,8 +3160,8 @@ const K = U(function() {
                                                                                         message: "must be array"
                                                                                       }], !1;
                                                                                       {
-                                                                                        const d = t.length;
-                                                                                        for (let e = 0; e < d; e++)
+                                                                                        const c = t.length;
+                                                                                        for (let e = 0; e < c; e++)
                                                                                           if (typeof t[e] != "string") return s.errors = [{
                                                                                             instancePath: r + "/armorTypes/" + e,
                                                                                             schemaPath: "#/properties/armorTypes/items/type",
@@ -3649,12 +3170,12 @@ const K = U(function() {
                                                                                             message: "must be string"
                                                                                           }], !1;
                                                                                       }
-                                                                                      m = c === 0;
-                                                                                    } else m = !0;
-                                                                                    if (m) {
+                                                                                      o = y === 0;
+                                                                                    } else o = !0;
+                                                                                    if (o) {
                                                                                       if (i.equipTypes !== void 0) {
                                                                                         let t = i.equipTypes;
-                                                                                        const c = 0;
+                                                                                        const y = 0;
                                                                                         if (!Array.isArray(t)) return s.errors = [{
                                                                                           instancePath: r + "/equipTypes",
                                                                                           schemaPath: "#/properties/equipTypes/type",
@@ -3663,8 +3184,8 @@ const K = U(function() {
                                                                                           message: "must be array"
                                                                                         }], !1;
                                                                                         {
-                                                                                          const d = t.length;
-                                                                                          for (let e = 0; e < d; e++)
+                                                                                          const c = t.length;
+                                                                                          for (let e = 0; e < c; e++)
                                                                                             if (typeof t[e] != "string") return s.errors = [{
                                                                                               instancePath: r + "/equipTypes/" + e,
                                                                                               schemaPath: "#/properties/equipTypes/items/type",
@@ -3673,12 +3194,12 @@ const K = U(function() {
                                                                                               message: "must be string"
                                                                                             }], !1;
                                                                                         }
-                                                                                        m = c === 0;
-                                                                                      } else m = !0;
-                                                                                      if (m) {
+                                                                                        o = y === 0;
+                                                                                      } else o = !0;
+                                                                                      if (o) {
                                                                                         if (i.skillTypes !== void 0) {
                                                                                           let t = i.skillTypes;
-                                                                                          const c = 0;
+                                                                                          const y = 0;
                                                                                           if (!Array.isArray(t)) return s.errors = [{
                                                                                             instancePath: r + "/skillTypes",
                                                                                             schemaPath: "#/properties/skillTypes/type",
@@ -3687,8 +3208,8 @@ const K = U(function() {
                                                                                             message: "must be array"
                                                                                           }], !1;
                                                                                           {
-                                                                                            const d = t.length;
-                                                                                            for (let e = 0; e < d; e++)
+                                                                                            const c = t.length;
+                                                                                            for (let e = 0; e < c; e++)
                                                                                               if (typeof t[e] != "string") return s.errors = [{
                                                                                                 instancePath: r + "/skillTypes/" + e,
                                                                                                 schemaPath: "#/properties/skillTypes/items/type",
@@ -3697,12 +3218,12 @@ const K = U(function() {
                                                                                                 message: "must be string"
                                                                                               }], !1;
                                                                                           }
-                                                                                          m = c === 0;
-                                                                                        } else m = !0;
-                                                                                        if (m) {
+                                                                                          o = y === 0;
+                                                                                        } else o = !0;
+                                                                                        if (o) {
                                                                                           if (i.switches !== void 0) {
                                                                                             let t = i.switches;
-                                                                                            const c = 0;
+                                                                                            const y = 0;
                                                                                             if (!Array.isArray(t)) return s.errors = [{
                                                                                               instancePath: r + "/switches",
                                                                                               schemaPath: "#/properties/switches/type",
@@ -3711,8 +3232,8 @@ const K = U(function() {
                                                                                               message: "must be array"
                                                                                             }], !1;
                                                                                             {
-                                                                                              const d = t.length;
-                                                                                              for (let e = 0; e < d; e++)
+                                                                                              const c = t.length;
+                                                                                              for (let e = 0; e < c; e++)
                                                                                                 if (typeof t[e] != "string") return s.errors = [{
                                                                                                   instancePath: r + "/switches/" + e,
                                                                                                   schemaPath: "#/properties/switches/items/type",
@@ -3721,12 +3242,12 @@ const K = U(function() {
                                                                                                   message: "must be string"
                                                                                                 }], !1;
                                                                                             }
-                                                                                            m = c === 0;
-                                                                                          } else m = !0;
-                                                                                          if (m) {
+                                                                                            o = y === 0;
+                                                                                          } else o = !0;
+                                                                                          if (o) {
                                                                                             if (i.variables !== void 0) {
                                                                                               let t = i.variables;
-                                                                                              const c = 0;
+                                                                                              const y = 0;
                                                                                               if (!Array.isArray(t)) return s.errors = [{
                                                                                                 instancePath: r + "/variables",
                                                                                                 schemaPath: "#/properties/variables/type",
@@ -3735,8 +3256,8 @@ const K = U(function() {
                                                                                                 message: "must be array"
                                                                                               }], !1;
                                                                                               {
-                                                                                                const d = t.length;
-                                                                                                for (let e = 0; e < d; e++)
+                                                                                                const c = t.length;
+                                                                                                for (let e = 0; e < c; e++)
                                                                                                   if (typeof t[e] != "string") return s.errors = [{
                                                                                                     instancePath: r + "/variables/" + e,
                                                                                                     schemaPath: "#/properties/variables/items/type",
@@ -3745,12 +3266,12 @@ const K = U(function() {
                                                                                                     message: "must be string"
                                                                                                   }], !1;
                                                                                               }
-                                                                                              m = c === 0;
-                                                                                            } else m = !0;
-                                                                                            if (m) {
+                                                                                              o = y === 0;
+                                                                                            } else o = !0;
+                                                                                            if (o) {
                                                                                               if (i.magicSkills !== void 0) {
                                                                                                 let t = i.magicSkills;
-                                                                                                const c = 0;
+                                                                                                const y = 0;
                                                                                                 if (!Array.isArray(t)) return s.errors = [{
                                                                                                   instancePath: r + "/magicSkills",
                                                                                                   schemaPath: "#/properties/magicSkills/type",
@@ -3759,11 +3280,11 @@ const K = U(function() {
                                                                                                   message: "must be array"
                                                                                                 }], !1;
                                                                                                 {
-                                                                                                  const d = t.length;
-                                                                                                  for (let e = 0; e < d; e++) {
-                                                                                                    let o = t[e];
+                                                                                                  const c = t.length;
+                                                                                                  for (let e = 0; e < c; e++) {
+                                                                                                    let n = t[e];
                                                                                                     const p = 0;
-                                                                                                    if (typeof o != "number" || o % 1 || isNaN(o) || !isFinite(o)) return s.errors = [{
+                                                                                                    if (typeof n != "number" || n % 1 || isNaN(n) || !isFinite(n)) return s.errors = [{
                                                                                                       instancePath: r + "/magicSkills/" + e,
                                                                                                       schemaPath: "#/properties/magicSkills/items/type",
                                                                                                       keyword: "type",
@@ -3773,9 +3294,9 @@ const K = U(function() {
                                                                                                     if (p !== 0) break;
                                                                                                   }
                                                                                                 }
-                                                                                                m = c === 0;
-                                                                                              } else m = !0;
-                                                                                              if (m) {
+                                                                                                o = y === 0;
+                                                                                              } else o = !0;
+                                                                                              if (o) {
                                                                                                 if (i.battleback1Name !== void 0) {
                                                                                                   if (typeof i.battleback1Name != "string") return s.errors = [{
                                                                                                     instancePath: r + "/battleback1Name",
@@ -3784,9 +3305,9 @@ const K = U(function() {
                                                                                                     params: { type: "string" },
                                                                                                     message: "must be string"
                                                                                                   }], !1;
-                                                                                                  m = !0;
-                                                                                                } else m = !0;
-                                                                                                if (m) {
+                                                                                                  o = !0;
+                                                                                                } else o = !0;
+                                                                                                if (o) {
                                                                                                   if (i.battleback2Name !== void 0) {
                                                                                                     if (typeof i.battleback2Name != "string") return s.errors = [{
                                                                                                       instancePath: r + "/battleback2Name",
@@ -3795,12 +3316,12 @@ const K = U(function() {
                                                                                                       params: { type: "string" },
                                                                                                       message: "must be string"
                                                                                                     }], !1;
-                                                                                                    m = !0;
-                                                                                                  } else m = !0;
-                                                                                                  if (m) {
+                                                                                                    o = !0;
+                                                                                                  } else o = !0;
+                                                                                                  if (o) {
                                                                                                     if (i.testTroopId !== void 0) {
                                                                                                       let t = i.testTroopId;
-                                                                                                      const c = 0;
+                                                                                                      const y = 0;
                                                                                                       if (typeof t != "number" || t % 1 || isNaN(t) || !isFinite(t)) return s.errors = [{
                                                                                                         instancePath: r + "/testTroopId",
                                                                                                         schemaPath: "#/properties/testTroopId/type",
@@ -3812,12 +3333,12 @@ const K = U(function() {
                                                                                                         comparison: ">=",
                                                                                                         limit: 0
                                                                                                       }, message: "must be >= 0" }], !1;
-                                                                                                      m = c === 0;
-                                                                                                    } else m = !0;
-                                                                                                    if (m) {
+                                                                                                      o = y === 0;
+                                                                                                    } else o = !0;
+                                                                                                    if (o) {
                                                                                                       if (i.partyMembersArray !== void 0) {
                                                                                                         let t = i.partyMembersArray;
-                                                                                                        const c = 0;
+                                                                                                        const y = 0;
                                                                                                         if (!Array.isArray(t)) return s.errors = [{
                                                                                                           instancePath: r + "/partyMembersArray",
                                                                                                           schemaPath: "#/properties/partyMembersArray/type",
@@ -3826,11 +3347,11 @@ const K = U(function() {
                                                                                                           message: "must be array"
                                                                                                         }], !1;
                                                                                                         {
-                                                                                                          const d = t.length;
-                                                                                                          for (let e = 0; e < d; e++) {
-                                                                                                            let o = t[e];
+                                                                                                          const c = t.length;
+                                                                                                          for (let e = 0; e < c; e++) {
+                                                                                                            let n = t[e];
                                                                                                             const p = 0;
-                                                                                                            if (typeof o != "number" || o % 1 || isNaN(o) || !isFinite(o)) return s.errors = [{
+                                                                                                            if (typeof n != "number" || n % 1 || isNaN(n) || !isFinite(n)) return s.errors = [{
                                                                                                               instancePath: r + "/partyMembersArray/" + e,
                                                                                                               schemaPath: "#/properties/partyMembersArray/items/type",
                                                                                                               keyword: "type",
@@ -3840,12 +3361,12 @@ const K = U(function() {
                                                                                                             if (p !== 0) break;
                                                                                                           }
                                                                                                         }
-                                                                                                        m = c === 0;
-                                                                                                      } else m = !0;
-                                                                                                      if (m) {
+                                                                                                        o = y === 0;
+                                                                                                      } else o = !0;
+                                                                                                      if (o) {
                                                                                                         if (i.editMapId !== void 0) {
                                                                                                           let t = i.editMapId;
-                                                                                                          const c = 0;
+                                                                                                          const y = 0;
                                                                                                           if (typeof t != "number" || t % 1 || isNaN(t) || !isFinite(t)) return s.errors = [{
                                                                                                             instancePath: r + "/editMapId",
                                                                                                             schemaPath: "#/properties/editMapId/type",
@@ -3857,12 +3378,12 @@ const K = U(function() {
                                                                                                             comparison: ">=",
                                                                                                             limit: 0
                                                                                                           }, message: "must be >= 0" }], !1;
-                                                                                                          m = c === 0;
-                                                                                                        } else m = !0;
-                                                                                                        if (m) {
+                                                                                                          o = y === 0;
+                                                                                                        } else o = !0;
+                                                                                                        if (o) {
                                                                                                           if (i.battlerHue !== void 0) {
                                                                                                             let t = i.battlerHue;
-                                                                                                            const c = 0;
+                                                                                                            const y = 0;
                                                                                                             if (typeof t != "number" || t % 1 || isNaN(t) || !isFinite(t)) return s.errors = [{
                                                                                                               instancePath: r + "/battlerHue",
                                                                                                               schemaPath: "#/properties/battlerHue/type",
@@ -3870,9 +3391,9 @@ const K = U(function() {
                                                                                                               params: { type: "integer" },
                                                                                                               message: "must be integer"
                                                                                                             }], !1;
-                                                                                                            m = c === 0;
-                                                                                                          } else m = !0;
-                                                                                                          if (m) {
+                                                                                                            o = y === 0;
+                                                                                                          } else o = !0;
+                                                                                                          if (o) {
                                                                                                             if (i.battlerName !== void 0) {
                                                                                                               if (typeof i.battlerName != "string") return s.errors = [{
                                                                                                                 instancePath: r + "/battlerName",
@@ -3881,9 +3402,9 @@ const K = U(function() {
                                                                                                                 params: { type: "string" },
                                                                                                                 message: "must be string"
                                                                                                               }], !1;
-                                                                                                              m = !0;
-                                                                                                            } else m = !0;
-                                                                                                            if (m) {
+                                                                                                              o = !0;
+                                                                                                            } else o = !0;
+                                                                                                            if (o) {
                                                                                                               if (i.title1Name !== void 0) {
                                                                                                                 if (typeof i.title1Name != "string") return s.errors = [{
                                                                                                                   instancePath: r + "/title1Name",
@@ -3892,9 +3413,9 @@ const K = U(function() {
                                                                                                                   params: { type: "string" },
                                                                                                                   message: "must be string"
                                                                                                                 }], !1;
-                                                                                                                m = !0;
-                                                                                                              } else m = !0;
-                                                                                                              if (m) {
+                                                                                                                o = !0;
+                                                                                                              } else o = !0;
+                                                                                                              if (o) {
                                                                                                                 if (i.title2Name !== void 0) {
                                                                                                                   if (typeof i.title2Name != "string") return s.errors = [{
                                                                                                                     instancePath: r + "/title2Name",
@@ -3903,18 +3424,18 @@ const K = U(function() {
                                                                                                                     params: { type: "string" },
                                                                                                                     message: "must be string"
                                                                                                                   }], !1;
-                                                                                                                  m = !0;
-                                                                                                                } else m = !0;
-                                                                                                                if (m) {
+                                                                                                                  o = !0;
+                                                                                                                } else o = !0;
+                                                                                                                if (o) {
                                                                                                                   if (i.versionId !== void 0) {
                                                                                                                     let t = i.versionId;
-                                                                                                                    const c = 0;
+                                                                                                                    const y = 0;
                                                                                                                     if (typeof t != "number" || t % 1 || isNaN(t) || !isFinite(t)) return s.errors = [{ instancePath: r + "/versionId", schemaPath: "#/properties/versionId/type", keyword: "type", params: {
                                                                                                                       type: "integer"
                                                                                                                     }, message: "must be integer" }], !1;
-                                                                                                                    m = c === 0;
-                                                                                                                  } else m = !0;
-                                                                                                                  if (m) {
+                                                                                                                    o = y === 0;
+                                                                                                                  } else o = !0;
+                                                                                                                  if (o) {
                                                                                                                     if (i.locale !== void 0) {
                                                                                                                       if (typeof i.locale != "string") return s.errors = [{
                                                                                                                         instancePath: r + "/locale",
@@ -3923,11 +3444,11 @@ const K = U(function() {
                                                                                                                         params: { type: "string" },
                                                                                                                         message: "must be string"
                                                                                                                       }], !1;
-                                                                                                                      m = !0;
-                                                                                                                    } else m = !0;
-                                                                                                                    if (m) if (i.windowTone !== void 0) {
+                                                                                                                      o = !0;
+                                                                                                                    } else o = !0;
+                                                                                                                    if (o) if (i.windowTone !== void 0) {
                                                                                                                       let t = i.windowTone;
-                                                                                                                      const c = 0;
+                                                                                                                      const y = 0;
                                                                                                                       if (!Array.isArray(t)) return s.errors = [{
                                                                                                                         instancePath: r + "/windowTone",
                                                                                                                         schemaPath: "#/properties/windowTone/type",
@@ -3936,26 +3457,26 @@ const K = U(function() {
                                                                                                                         message: "must be array"
                                                                                                                       }], !1;
                                                                                                                       {
-                                                                                                                        const d = t.length;
-                                                                                                                        for (let e = 0; e < d; e++) {
-                                                                                                                          let o = t[e];
+                                                                                                                        const c = t.length;
+                                                                                                                        for (let e = 0; e < c; e++) {
+                                                                                                                          let n = t[e];
                                                                                                                           const p = 0;
-                                                                                                                          if (typeof o != "number" || o % 1 || isNaN(o) || !isFinite(o)) return s.errors = [{
+                                                                                                                          if (typeof n != "number" || n % 1 || isNaN(n) || !isFinite(n)) return s.errors = [{
                                                                                                                             instancePath: r + "/windowTone/" + e,
                                                                                                                             schemaPath: "#/properties/windowTone/items/type",
                                                                                                                             keyword: "type",
                                                                                                                             params: { type: "integer" },
                                                                                                                             message: "must be integer"
                                                                                                                           }], !1;
-                                                                                                                          if (typeof o == "number" && isFinite(o)) {
-                                                                                                                            if (o > 255 || isNaN(o)) return s.errors = [{
+                                                                                                                          if (typeof n == "number" && isFinite(n)) {
+                                                                                                                            if (n > 255 || isNaN(n)) return s.errors = [{
                                                                                                                               instancePath: r + "/windowTone/" + e,
                                                                                                                               schemaPath: "#/properties/windowTone/items/maximum",
                                                                                                                               keyword: "maximum",
                                                                                                                               params: { comparison: "<=", limit: 255 },
                                                                                                                               message: "must be <= 255"
                                                                                                                             }], !1;
-                                                                                                                            if (o < 0 || isNaN(o)) return s.errors = [{
+                                                                                                                            if (n < 0 || isNaN(n)) return s.errors = [{
                                                                                                                               instancePath: r + "/windowTone/" + e,
                                                                                                                               schemaPath: "#/properties/windowTone/items/minimum",
                                                                                                                               keyword: "minimum",
@@ -3966,8 +3487,8 @@ const K = U(function() {
                                                                                                                           if (p !== 0) break;
                                                                                                                         }
                                                                                                                       }
-                                                                                                                      m = c === 0;
-                                                                                                                    } else m = !0;
+                                                                                                                      o = y === 0;
+                                                                                                                    } else o = !0;
                                                                                                                   }
                                                                                                                 }
                                                                                                               }
@@ -4026,8 +3547,8 @@ const K = U(function() {
     }
     return s.errors = null, !0;
   }
-  return E.exports;
-}()), J = (M) => K(M);
+  return B.exports;
+}()), J = (O) => K(O);
 export {
   J as isDataSystem
 };

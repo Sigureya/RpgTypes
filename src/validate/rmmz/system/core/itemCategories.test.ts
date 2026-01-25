@@ -3,6 +3,7 @@ import type { ItemCategories, ItemCategoriesArray } from "@RpgTypes/rmmz";
 import {
   makeItemCategories,
   makeItemCategoriesFromArray,
+  makeSystemData,
 } from "@RpgTypes/rmmz";
 import Ajv from "ajv";
 import { SCHEMA_SYSTEM_ITEM_CATEGORIES } from "./itemCategories";
@@ -21,6 +22,14 @@ const testRoundTrip = (param: ItemCategories, caseName: string) => {
     expect(isValid).toBe(true);
   });
 };
+
+describe("SCHEMA_SYSTEM_ITEM_CATEGORIES", () => {
+  test("should be a valid JSON schema", () => {
+    const data = makeSystemData({});
+    const itemCategories: ItemCategoriesArray = data.itemCategories;
+    expect(itemCategories).toSatisfy(validate);
+  });
+});
 
 describe("ItemCategoriesArray length validation", () => {
   test("invalid: array length is 3 (too short)", () => {

@@ -2,7 +2,6 @@ import type { AudioFileParams } from "@RpgTypes/libs";
 import { makeAudioFileParams } from "@RpgTypes/libs";
 import {
   makeBooleanOptions,
-  makeDataNames,
   makeItemCategories,
   makeMenuCommandsEnabled,
   makeParamNamesArray,
@@ -15,7 +14,6 @@ import {
 } from "./core";
 import type {
   System_BooleanGameOptions,
-  System_RPG_DataNames,
   System_ImageSize,
   System_Terms,
   System_TermsPartial,
@@ -26,6 +24,7 @@ import { makeEditorSetting } from "./gameEdit";
 import type { TestBattler } from "./gameEdit/testPlay/testBattler/types";
 import type { Data_System } from "./system";
 import type { SystemDataFragments } from "./systemSegments";
+
 export const makeSystemData = (
   fragments: Partial<SystemDataFragments>,
 ): Data_System => {
@@ -36,6 +35,7 @@ export const makeSystemData = (
       string & keyof System_BooleanGameOptions,
       boolean
     >),
+
     currencyUnit: fragments.texts?.currencyUnit ?? "",
     gameTitle: fragments.texts?.gameTitle ?? "",
     sounds: makeSoundsArray(fragments.sounds) satisfies AudioFileParams[],
@@ -46,11 +46,15 @@ export const makeSystemData = (
     advanced: makeSystemAdvanced(fragments.advanced),
     title1Name: fragments.images?.title1Name ?? "",
     title2Name: fragments.images?.title2Name ?? "",
-    ...(makeDataNames(fragments.dataNames ?? {}) satisfies Record<
-      keyof System_RPG_DataNames,
-      string[]
-    >),
-    magicSkills: cloneNumberArray([]),
+    armorTypes: cloneValueArray(fragments.dataNames?.armorTypes),
+    equipTypes: cloneValueArray(fragments.dataNames?.equipTypes),
+    elements: cloneValueArray(fragments.dataNames?.elements),
+    skillTypes: cloneValueArray(fragments.dataNames?.skillTypes),
+    weaponTypes: cloneValueArray(fragments.dataNames?.weaponTypes),
+    switches: cloneValueArray(fragments.dataNames?.switches),
+    variables: cloneValueArray(fragments.dataNames?.variables),
+    magicSkills: cloneValueArray(fragments.battle?.magicSkills),
+    battleSystem: fragments.battle?.battleSystem ?? 0,
     airship: makeVehicleData(fragments.vehicles?.airship),
     boat: makeVehicleData(fragments.vehicles?.boat),
     ship: makeVehicleData(fragments.vehicles?.ship),
@@ -62,7 +66,7 @@ export const makeSystemData = (
     faceSize: size.faceSize,
     iconSize: size.iconSize,
     versionId: 1,
-    attackMotions: [],
+    attackMotions: fragments.attackMotion ? [...fragments.attackMotion] : [],
     battleback1Name: fragments.battleTest?.battleback1Name ?? "",
     battleback2Name: fragments.battleTest?.battleback2Name ?? "",
     testTroopId: fragments.battleTest?.testTroopId ?? 0,
@@ -74,7 +78,7 @@ export const makeSystemData = (
     victoryMe: makeAudioFileParams(fragments.me?.victoryMe),
     editMapId: fragments.editorTemporary?.editMapId ?? 0,
     battlerName: fragments.editorTemporary?.battlerName ?? "",
-    locale: "",
+    locale: fragments.locale ?? "en-US",
     startMapId: fragments.gameInit?.startMapId ?? 0,
     startX: fragments.gameInit?.startX ?? 0,
     startY: fragments.gameInit?.startY ?? 0,
@@ -83,16 +87,13 @@ export const makeSystemData = (
     itemCategories: makeItemCategories(
       fragments.itemCategories,
     ) satisfies boolean[],
-    partyMembersArray: cloneNumberArray(fragments.gameInit?.partyMembersArray),
-    battleSystem: 0,
+    partyMembersArray: cloneValueArray(fragments.gameInit?.partyMembersArray),
     battlerHue: 0,
     menuCommands: makeMenuCommandsEnabled(
       fragments.menuComamnds,
     ) satisfies boolean[],
   };
 };
-
-export default makeSystemData;
 
 const makeTerms = (terms: System_TermsPartial): System_Terms => {
   return {
@@ -106,7 +107,9 @@ const makeTerms = (terms: System_TermsPartial): System_Terms => {
   };
 };
 
-const cloneNumberArray = (array?: ReadonlyArray<number>) => {
+const cloneValueArray = <T extends number | string>(
+  array?: ReadonlyArray<T>,
+): T[] => {
   return array ? [...array] : [];
 };
 
@@ -137,7 +140,7 @@ const cloneTestBattler = (data: TestBattler | undefined): TestBattler => {
   return data
     ? {
         actorId: data.actorId,
-        equips: cloneNumberArray(data.equips),
+        equips: cloneValueArray(data.equips),
         level: data.level,
       }
     : {
