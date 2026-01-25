@@ -217,7 +217,10 @@
     "tilesetId": { "type": "integer" },
     "width": { "minimum": 0, "type": "integer" },
     "x": { "minimum": 0, "type": "integer" },
-    "y": { "minimum": 0, "type": "integer" }
+    "y": { "minimum": 0, "type": "integer" },
+    "encounterStep": { "type": "integer" },
+    "scrollType": { "type": "integer" },
+    "specifyBattleback": { "type": "boolean" }
   },
   "required": [
     "battleback1Name",
@@ -240,6 +243,11 @@
     "bgm",
     "autoplayBgs",
     "bgs",
-    "tilesetId"
+    "tilesetId",
+    "encounterList",
+    "events",
+    "encounterStep",
+    "scrollType",
+    "specifyBattleback"
   ]
 }

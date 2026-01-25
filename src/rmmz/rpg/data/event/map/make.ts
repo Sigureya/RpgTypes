@@ -30,7 +30,9 @@ export const makeMapData = <
     parallaxShow: map.parallaxShow ?? false,
     parallaxSx: map.parallaxSx ?? 0,
     parallaxSy: map.parallaxSy ?? 0,
-
+    encounterStep: map.encounterStep ?? 30,
+    scrollType: map.scrollType ?? 0,
+    specifyBattleback: map.specifyBattleback ?? false,
     x: map.x ?? 0,
     y: map.y ?? 0,
     width: map.width ?? 0,

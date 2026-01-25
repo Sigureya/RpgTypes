@@ -84,6 +84,11 @@ export const SCHEMA_DATA_MAP = {
     "autoplayBgs",
     "bgs",
     "tilesetId",
+    "encounterList",
+    "events",
+    "encounterStep",
+    "scrollType",
+    "specifyBattleback",
   ] satisfies (keyof Data_Map)[],
   properties: {
     data: { type: "array", items: { type: "integer" } },
@@ -117,5 +122,8 @@ export const SCHEMA_DATA_MAP = {
     events: {
       $ref: "#/$defs/MapEvents",
     },
+    encounterStep: { type: "integer" },
+    scrollType: { type: "integer" },
+    specifyBattleback: { type: "boolean" },
   } satisfies Record<keyof Data_Map, Schema>,
 } as const satisfies Schema;

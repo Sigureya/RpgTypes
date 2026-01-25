@@ -13,6 +13,7 @@ export interface Data_Map<
   data: number[];
   battleback1Name: string;
   battleback2Name: string;
+  specifyBattleback: boolean;
 
   parallaxLoopX: boolean;
   parallaxLoopY: boolean;
@@ -34,10 +35,11 @@ export interface Data_Map<
   bgs: AudioFileParams;
   autoplayBgm: boolean;
   autoplayBgs: boolean;
-
-  events: Array<MapEvent<CommandType> | null>;
-  encounterList: Encounter[];
+  scrollType: number;
   tilesetId: number;
+  encounterStep: number;
+  encounterList: Encounter[];
+  events: Array<MapEvent<CommandType> | null>;
 }
 
 export type Map_ImageFiles = Pick<
