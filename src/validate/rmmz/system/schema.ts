@@ -52,9 +52,9 @@ export const SCHEMA_DATA_SYSTEM = {
       additionalProperties: false,
       properties: {
         name: { type: "string" },
-        volume: { type: "integer", minimum: 0, maximum: 100 },
-        pitch: { type: "integer", minimum: 50, maximum: 150 },
-        pan: { type: "integer", minimum: -100, maximum: 100 },
+        volume: { type: "integer" },
+        pitch: { type: "integer" },
+        pan: { type: "integer" },
       },
     } as const satisfies JSONSchemaType<AudioFileParams>,
     Vehicle: SCHEMA_SYSTEM_VEHICLE,

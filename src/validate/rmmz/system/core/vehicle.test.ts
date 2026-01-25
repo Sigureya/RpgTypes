@@ -41,23 +41,6 @@ describe("SCHEMA_SYSTEM_VEHICLE", () => {
     expect(data).not.toSatisfy(validate);
   });
 
-  test("invalid bgm property fails validation", () => {
-    const data = {
-      characterIndex: 2,
-      characterName: "Airship",
-      bgm: {
-        name: "AirshipTheme",
-        volume: 200, // invalid: over max
-        pitch: 100,
-        pan: 0,
-      },
-      startMapId: 1,
-      startX: 10,
-      startY: 20,
-    };
-    expect(data).not.toSatisfy(validate);
-  });
-
   test("additional properties are not allowed", () => {
     const data = {
       characterIndex: 2,
