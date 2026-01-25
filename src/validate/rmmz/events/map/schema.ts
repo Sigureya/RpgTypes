@@ -70,8 +70,6 @@ export const SCHEMA_DATA_MAP = {
     "note",
     "width",
     "height",
-    "x",
-    "y",
     "parallaxSy",
     "parallaxSx",
     "parallaxLoopY",
@@ -104,8 +102,6 @@ export const SCHEMA_DATA_MAP = {
     parallaxSx: { type: "integer" },
 
     tilesetId: { type: "integer" },
-    x: { type: "integer", minimum: 0 },
-    y: { type: "integer", minimum: 0 },
     width: { type: "integer", minimum: 0 },
     height: { type: "integer", minimum: 0 },
     note: { type: "string" },

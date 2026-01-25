@@ -52,7 +52,13 @@
                     "moveRoute",
                     "directionFix",
                     "priorityType",
-                    "moveFrequency"
+                    "moveFrequency",
+                    "walkAnime",
+                    "stepAnime",
+                    "through",
+                    "moveSpeed",
+                    "moveType",
+                    "trigger"
                   ],
                   "type": "object",
                   "properties": {
@@ -60,6 +66,11 @@
                     "walkAnime": { "type": "boolean" },
                     "through": { "type": "boolean" },
                     "priorityType": { "type": "integer" },
+                    "moveSpeed": { "type": "integer" },
+                    "moveType": { "type": "integer" },
+                    "trigger": {
+                      "type": "integer"
+                    },
                     "conditions": {
                       "additionalProperties": false,
                       "type": "object",
@@ -222,10 +233,8 @@
     "events": {
       "$ref": "#/$defs/MapEvents"
     },
-    "height": {
-      "minimum": 0,
-      "type": "integer"
-    },
+    "width": { "minimum": 0, "type": "integer" },
+    "height": { "minimum": 0, "type": "integer" },
     "note": {
       "type": "string"
     },
@@ -236,9 +245,6 @@
     "parallaxSx": { "type": "integer" },
     "parallaxSy": { "type": "integer" },
     "tilesetId": { "type": "integer" },
-    "width": { "minimum": 0, "type": "integer" },
-    "x": { "minimum": 0, "type": "integer" },
-    "y": { "minimum": 0, "type": "integer" },
     "encounterStep": { "type": "integer" },
     "scrollType": { "type": "integer" },
     "specifyBattleback": { "type": "boolean" }
@@ -249,8 +255,6 @@
     "note",
     "width",
     "height",
-    "x",
-    "y",
     "parallaxSy",
     "parallaxSx",
     "parallaxLoopY",
