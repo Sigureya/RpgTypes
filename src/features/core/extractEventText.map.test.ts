@@ -59,6 +59,7 @@ describe("extractMapText", () => {
       note: "",
       pages: [
         {
+          priorityType: 1,
           conditions: makeEventPageCondition(),
           directionFix: false,
           image: {
