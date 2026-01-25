@@ -10,4 +10,7 @@ export interface MapEventPage<T extends EventCommandUnknown = EventCommandUnknow
     moveFrequency: number;
     moveRoute: MoveRouteDataUnkwnown;
     priorityType: number;
+    walkAnime: boolean;
+    stepAnime: boolean;
+    through: boolean;
 }

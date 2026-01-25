@@ -15,6 +15,7 @@ export declare const SCHEMA_MOVEROUTE_DATA: {
         readonly list: {
             readonly type: "array";
             readonly items: {
+                readonly additionalProperties: false;
                 readonly type: "object";
                 readonly required: readonly ["code", "parameters"];
                 readonly properties: {
@@ -30,6 +31,7 @@ export declare const SCHEMA_MOVEROUTE_DATA: {
                                 readonly type: "number";
                             }, {
                                 type: "object";
+                                additionalProperties: false;
                                 required: ("name" | "volume" | "pitch" | "pan")[];
                                 properties: {
                                     name: {

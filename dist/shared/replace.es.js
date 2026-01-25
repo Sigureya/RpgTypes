@@ -1,7 +1,7 @@
 var he = Object.defineProperty;
 var ye = (e, a, t) => a in e ? he(e, a, { enumerable: !0, configurable: !0, writable: !0, value: t }) : e[a] = t;
 var H = (e, a, t) => ye(e, typeof a != "symbol" ? a + "" : a, t);
-import { cY as fe, cZ as be, c_ as xe, B as K, z as X, A as Y, cF as Ne, aK as J, aJ as V, aF as U, i as k, j as $, C as P, c as S, d as C, S as F, m as ve, a_ as Z, aZ as E, h as W, b0 as M, cB as Q, cC as Te, cR as we, cX as Ae, cW as Ie, cT as ke, b2 as Se, b1 as Be, cP as Ce, r as Ee, cl as $e, b as Me } from "./make.es2.js";
+import { cY as fe, cZ as be, c_ as xe, B as K, z as X, A as Y, cF as Ne, aK as J, aJ as V, aF as U, i as I, j as $, C as P, c as S, d as C, S as F, m as ve, a_ as Z, aZ as E, h as W, b0 as M, cB as Q, cC as Te, cR as we, cX as Ae, cW as ke, cT as Ie, b2 as Se, b1 as Be, cP as Ce, r as Ee, cl as $e, b as Me } from "./make.es2.js";
 import { JSONPathJS as Pe } from "jsonpath-js";
 import { parseDeepRecord as De } from "@sigureya/rmmz-plugin-schema";
 import { m as ee } from "./mergeItemsSource.es.js";
@@ -68,7 +68,7 @@ const ae = (e, a, t) => e.reduce((r, s) => (s.code !== K && s.code !== X && s.co
     case S:
     case P:
     case $:
-    case k:
+    case I:
       return Ue(e, a);
     case U:
     case V:
@@ -233,8 +233,8 @@ const D = (e, a, t, r) => {
   const { bodies: t, header: r } = ((s, n) => D(s, n, (m) => m.code === E, (m) => m.code === Z))(e, a);
   return new me(r, t);
 }, Qe = (e, a) => {
-  const { bodies: t, header: r } = ((s, n) => D(s, n, (m) => m.code === W, (m) => m.code === k))(e, a);
-  return new G(k, r, t);
+  const { bodies: t, header: r } = ((s, n) => D(s, n, (m) => m.code === W, (m) => m.code === I))(e, a);
+  return new G(I, r, t);
 }, ea = {
   [F]: (e, a, t) => t.showMessage(Ze(e, a), a, e),
   [E]: (e, a, t) => t.script(We(e, a), a, e),
@@ -264,7 +264,7 @@ const D = (e, a, t, r) => {
     var a, t;
   },
   script: (e) => ((a) => ({ code: E, paramIndex: 0, value: a.getBodyText() }))(e),
-  showScrollingText: (e) => ((a) => ({ code: k, paramIndex: 0, value: a.getBodyText() }))(e)
+  showScrollingText: (e) => ((a) => ({ code: I, paramIndex: 0, value: a.getBodyText() }))(e)
 }, sa = (e, a = () => []) => ({ eventId: e.id, commands: j(e.list, a) }), na = (e, a = () => []) => e.pages.map((t, r) => ({
   eventId: e.id,
   pageIndex: r,
@@ -276,11 +276,11 @@ const D = (e, a, t, r) => {
   note: s.note,
   noteItems: Q(s.note),
   name: s.name
-})), ie = (e) => ((a) => a.kind.endsWith("[]"))(e.attr), de = (e) => e.kind === "struct", pe = (e) => e.attr.kind === "struct[]", ca = (e) => le[e.kind.replace("[]", "")].type === "number", ia = (e) => le[e.kind.replace("[]", "")].type === "string", I = {
+})), ie = (e) => ((a) => a.kind.endsWith("[]"))(e.attr), de = (e) => e.kind === "struct", pe = (e) => e.attr.kind === "struct[]", ca = (e) => le[e.kind.replace("[]", "")].type === "number", ia = (e) => le[e.kind.replace("[]", "")].type === "string", k = {
   type: "string",
   hasText: !0
 }, y = { type: "number", hasText: !1 }, h = { type: "number", hasText: !1 }, le = {
-  string: I,
+  string: k,
   number: { type: "number", hasText: !1 },
   boolean: { type: "boolean" },
   armor: y,
@@ -295,17 +295,17 @@ const D = (e, a, t, r) => {
   switch: y,
   variable: y,
   troop: y,
-  multiline_string: I,
+  multiline_string: k,
   file: { type: "string", hasText: !1 },
   "file[]": {
     type: "string",
     hasText: !1
   },
-  "multiline_string[]": I,
-  "string[]": I,
-  combo: I,
-  select: I,
-  any: I,
+  "multiline_string[]": k,
+  "string[]": k,
+  combo: k,
+  select: k,
+  any: k,
   struct: { type: "struct" },
   "actor[]": h,
   "enemy[]": h,
@@ -432,13 +432,13 @@ const ha = (e, a, t, r = ue) => ge(e.attr.struct, `${a}["${e.name}"]`, t, r), ya
 }, _ = (e, a) => e.scalarsPath ? { bundleName: e.name, arrays: O(e.scalarArrays, e.name, a), scalar: Aa(e.scalarsPath, e.objectSchema, a) } : {
   bundleName: e.name,
   arrays: O(e.scalarArrays, e.name, a)
-}, O = (e, a, t) => e.map((r) => ({ jsonPathJS: t(r.path), schema: r.param, parentType: a })), Aa = (e, a, t) => ({ jsonPathJS: t(e), record: a }), Ia = (e, a, t, r) => ({
+}, O = (e, a, t) => e.map((r) => ({ jsonPathJS: t(r.path), schema: r.param, parentType: a })), Aa = (e, a, t) => ({ jsonPathJS: t(e), record: a }), ka = (e, a, t, r) => ({
   pluginName: e,
   commandName: a.command,
   desc: a.desc ?? "",
   text: a.text ?? "",
-  extractors: ka(a, t, r)
-}), ka = (e, a, t) => e.args.map((r) => ((s, n) => {
+  extractors: Ia(a, t, r)
+}), Ia = (e, a, t) => e.args.map((r) => ((s, n) => {
   const m = s.scalars ? _(s.scalars, n) : void 0, o = s.structs.items.map((b) => _(b, n)), i = s.structArrays.items.map((b) => _(b, n));
   return {
     rootCategory: s.rootCategory,
@@ -450,7 +450,7 @@ const ha = (e, a, t, r = ue) => ge(e.attr.struct, `${a}["${e.name}"]`, t, r), ya
 })(fa("args", e.command, r, a), t)), Sa = (e, a) => {
   const t = ((r) => new Map(r.map((s) => [s.struct, da(s.params)])))(e.schema.structs);
   return Ba(e.pluginName, e.schema.commands, t, a);
-}, Ba = (e, a, t, r) => a.map((s) => [`${e}:${s.command}`, Ia(e, s, t, r)]), Ca = (e, a) => {
+}, Ba = (e, a, t, r) => a.map((s) => [`${e}:${s.command}`, ka(e, s, t, r)]), Ca = (e, a) => {
   const [t, r] = e.parameters, s = `${t}:${r}`, n = a.get(s);
   return n ? ((m, o) => ({ pluginName: o.pluginName, commandName: o.commandName, args: Ta(m, o.extractors) }))(De(e.parameters[3]), n) : { pluginName: t, commandName: r, args: [] };
 }, rt = (e) => {
@@ -511,8 +511,8 @@ const Ea = (e) => typeof e.value == "string", mt = (e) => ({
   armorTypes: [...e.armorTypes],
   weaponTypes: [...e.weaponTypes],
   terms: {
-    basic: ke(e.terms.basic),
-    commands: Ie(e.terms.commands),
+    basic: Ie(e.terms.basic),
+    commands: ke(e.terms.commands),
     messages: Ae(e.terms.messages),
     params: we(e.terms.params)
   }
@@ -520,7 +520,7 @@ const Ea = (e) => typeof e.value == "string", mt = (e) => ({
   const r = $e(a);
   return ee(t ? [...r, ...t] : r, e);
 }, Ma = (e, a, t, r) => {
-  if (e.code === S || e.code === k || e.code === $) return;
+  if (e.code === S || e.code === I || e.code === $) return;
   const s = oe(e.code);
   return s ? s(t, a, r) : e.code === C ? Pa(e) : e.code === U || e.code === V || e.code === J ? Da(e) : e.code !== Z ? e : void 0;
 }, Pa = (e) => ({
@@ -539,7 +539,7 @@ const Ea = (e) => typeof e.value == "string", mt = (e) => ({
   };
   return [La(e.header), t];
 }, _a = (e) => {
-  const a = e.getBodyText().trimEnd(), t = { code: k, indent: e.header.indent, parameters: [a] };
+  const a = e.getBodyText().trimEnd(), t = { code: I, indent: e.header.indent, parameters: [a] };
   return [e.header, t];
 }, La = (e) => {
   const a = e.parameters[4] ? e.parameters[4].trimEnd() : "";
@@ -569,6 +569,9 @@ const Ea = (e) => typeof e.value == "string", mt = (e) => ({
   tilesetId: e.tilesetId,
   x: e.x,
   y: e.y,
+  encounterStep: e.encounterStep,
+  scrollType: e.scrollType,
+  specifyBattleback: e.specifyBattleback,
   autoplayBgm: e.autoplayBgm,
   autoplayBgs: e.autoplayBgs,
   battleback1Name: e.battleback1Name,

@@ -1,7 +1,8 @@
 export declare const SCHEMA_MAP_EVENT_PAGE: {
-    type: string;
-    required: string[];
-    properties: {
+    readonly type: "object";
+    readonly additionalProperties: false;
+    readonly required: readonly ["conditions", "image", "list", "moveRoute", "directionFix", "priorityType", "moveFrequency"];
+    readonly properties: {
         readonly priorityType: {
             readonly type: "integer";
         };
@@ -63,6 +64,32 @@ export declare const SCHEMA_MAP_EVENT_PAGE: {
         };
         readonly list: {
             readonly type: "array";
+            readonly items: {
+                readonly additionalProperties: false;
+                readonly type: "object";
+                readonly required: readonly ["code", "parameters", "indent"];
+                readonly properties: {
+                    readonly code: {
+                        readonly type: "integer";
+                    };
+                    readonly indent: {
+                        readonly type: "integer";
+                    };
+                    readonly parameters: {
+                        readonly type: "array";
+                        readonly items: {};
+                    };
+                };
+            };
+        };
+        readonly stepAnime: {
+            readonly type: "boolean";
+        };
+        readonly walkAnime: {
+            readonly type: "boolean";
+        };
+        readonly through: {
+            readonly type: "boolean";
         };
         readonly image: {
             readonly type: "object";
@@ -105,6 +132,7 @@ export declare const SCHEMA_MAP_EVENT_PAGE: {
                 readonly list: {
                     readonly type: "array";
                     readonly items: {
+                        readonly additionalProperties: false;
                         readonly type: "object";
                         readonly required: readonly ["code", "parameters"];
                         readonly properties: {
@@ -120,6 +148,7 @@ export declare const SCHEMA_MAP_EVENT_PAGE: {
                                         readonly type: "number";
                                     }, {
                                         type: "object";
+                                        additionalProperties: false;
                                         required: ("name" | "volume" | "pitch" | "pan")[];
                                         properties: {
                                             name: {
