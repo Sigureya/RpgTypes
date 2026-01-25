@@ -1,5 +1,6 @@
 import { describe, test, expect } from "vitest";
 import type { Data_System, Terms_Messages } from "@RpgTypes/rmmz";
+import { makeSystemData } from "@RpgTypes/rmmz";
 import { SCHEMA_DATA_SYSTEM } from "./schema";
 const validate = require("./systemValidate.cjs");
 
@@ -9,15 +10,15 @@ const isDataSystem = (data: unknown): data is Data_System => {
 
 const mockSystem: Data_System = {
   optAutosave: true,
-  optDisplayTp: true,
+  optDisplayTp: false,
   optDrawTitle: true,
-  optExtraExp: true,
+  optExtraExp: false,
   optFloorDeath: true,
-  optFollowers: true,
+  optFollowers: false,
   optKeyItemsNumber: true,
-  optSideView: true,
+  optSideView: false,
   optSlipDeath: true,
-  optTransparent: true,
+  optTransparent: false,
   optMessageSkip: true,
   optSplashScreen: false,
   gameTitle: "Test Game",
@@ -56,30 +57,30 @@ const mockSystem: Data_System = {
     startY: 0,
   },
   sounds: [
-    { name: "Sound1", volume: 100, pitch: 100, pan: 0 },
-    { name: "Sound2", volume: 100, pitch: 100, pan: 0 },
-    { name: "Sound3", volume: 100, pitch: 100, pan: 0 },
-    { name: "Sound4", volume: 100, pitch: 100, pan: 0 },
-    { name: "Sound5", volume: 100, pitch: 100, pan: 0 },
-    { name: "Sound6", volume: 100, pitch: 100, pan: 0 },
-    { name: "Sound7", volume: 100, pitch: 100, pan: 0 },
-    { name: "Sound8", volume: 100, pitch: 100, pan: 0 },
-    { name: "Sound9", volume: 100, pitch: 100, pan: 0 },
-    { name: "Sound10", volume: 100, pitch: 100, pan: 0 },
-    { name: "Sound11", volume: 100, pitch: 100, pan: 0 },
-    { name: "Sound12", volume: 100, pitch: 100, pan: 0 },
-    { name: "Sound13", volume: 100, pitch: 100, pan: 0 },
-    { name: "Sound14", volume: 100, pitch: 100, pan: 0 },
-    { name: "Sound15", volume: 100, pitch: 100, pan: 0 },
-    { name: "Sound16", volume: 100, pitch: 100, pan: 0 },
-    { name: "Sound17", volume: 100, pitch: 100, pan: 0 },
-    { name: "Sound18", volume: 100, pitch: 100, pan: 0 },
-    { name: "Sound19", volume: 100, pitch: 100, pan: 0 },
-    { name: "Sound20", volume: 100, pitch: 100, pan: 0 },
-    { name: "Sound21", volume: 100, pitch: 100, pan: 0 },
-    { name: "Sound22", volume: 100, pitch: 100, pan: 0 },
-    { name: "Sound23", volume: 100, pitch: 100, pan: 0 },
-    { name: "Sound24", volume: 100, pitch: 100, pan: 0 },
+    { name: "cursor", volume: 100, pitch: 100, pan: 0 },
+    { name: "ok", volume: 100, pitch: 100, pan: 0 },
+    { name: "cancel", volume: 100, pitch: 100, pan: 0 },
+    { name: "buzzer", volume: 100, pitch: 100, pan: 0 },
+    { name: "equip", volume: 100, pitch: 100, pan: 0 },
+    { name: "save", volume: 100, pitch: 100, pan: 0 },
+    { name: "load", volume: 100, pitch: 100, pan: 0 },
+    { name: "battleStart", volume: 100, pitch: 100, pan: 0 },
+    { name: "escape", volume: 100, pitch: 100, pan: 0 },
+    { name: "enemyAttack", volume: 100, pitch: 100, pan: 0 },
+    { name: "enemyDamage", volume: 100, pitch: 100, pan: 0 },
+    { name: "enemyCollapse", volume: 100, pitch: 100, pan: 0 },
+    { name: "bossCollapse1", volume: 100, pitch: 100, pan: 0 },
+    { name: "bossCollapse2", volume: 100, pitch: 100, pan: 0 },
+    { name: "actorDamage", volume: 100, pitch: 100, pan: 0 },
+    { name: "actorCollapse", volume: 100, pitch: 100, pan: 0 },
+    { name: "playRecovery", volume: 100, pitch: 100, pan: 0 },
+    { name: "playMiss", volume: 100, pitch: 100, pan: 0 },
+    { name: "playEvasion", volume: 100, pitch: 100, pan: 0 },
+    { name: "playMagicEvasion", volume: 100, pitch: 100, pan: 0 },
+    { name: "playReflection", volume: 100, pitch: 100, pan: 0 },
+    { name: "shop", volume: 100, pitch: 100, pan: 0 },
+    { name: "useItem", volume: 100, pitch: 100, pan: 0 },
+    { name: "useSkill", volume: 100, pitch: 100, pan: 0 },
   ],
   armorTypes: ["Armor1", "Armor2"],
   elements: ["Element1", "Element2"],
@@ -109,15 +110,15 @@ const mockSystem: Data_System = {
   },
   battlerHue: 0,
   battlerName: "BattlerName",
-  editMapId: 0,
-  locale: "en-US",
-  startMapId: 0,
-  startX: 0,
-  startY: 0,
+  editMapId: 956,
+  locale: "ja-JP",
+  startMapId: 58,
+  startX: 22,
+  startY: 44,
   testTroopId: 0,
   windowTone: [0, 0, 0, 0],
-  battleSystem: 0,
-  faceSize: 48,
+  battleSystem: 1,
+  faceSize: 144,
   iconSize: 32,
   tileSize: 48,
   terms: {
@@ -153,7 +154,7 @@ const mockSystem: Data_System = {
       "optimize",
       "clear",
       "newGame",
-      "continue_",
+      "continue",
       "",
       "toTitle",
       "cancel",
@@ -235,11 +236,23 @@ const mockSystem: Data_System = {
   menuCommands: [true, true, true, false, false, false],
   editor: {
     jsonFormatLevel: 0,
-    messageWidth1: 0,
-    messageWidth2: 0,
+    messageWidth1: 816,
+    messageWidth2: 816,
   },
 };
 
+describe("makeSystemData", () => {
+  test("should create a Data_System object with default values", () => {
+    const data: Data_System = makeSystemData({});
+    const keys1 = new Set(Object.keys(data));
+    const keys2 = new Set(Object.keys(mockSystem));
+    expect(keys1).toEqual(keys2);
+  });
+  test("should invalidate an incorrect Data_System object", () => {
+    const data = makeSystemData({});
+    expect(data).toSatisfy(isDataSystem);
+  });
+});
 describe("isDataSystem", () => {
   test("should validate a correct Data_System object", () => {
     expect(mockSystem).toSatisfy(isDataSystem);
