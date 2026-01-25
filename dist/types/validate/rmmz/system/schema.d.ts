@@ -1,4 +1,4 @@
-export declare const SCHEMA_DATA_SYSTEM2: {
+export declare const SCHEMA_DATA_SYSTEM: {
     readonly $defs: {
         readonly Audio: {
             readonly type: "object";
@@ -497,6 +497,20 @@ export declare const SCHEMA_DATA_SYSTEM2: {
                 $ref: string;
             };
         };
+        sounds: {
+            type: string;
+            maxItems: number;
+            minItems: number;
+            items: {
+                $ref: string;
+            };
+        };
+        itemCategories: {
+            $ref: string;
+        };
+        menuCommands: {
+            $ref: string;
+        };
         optAutosave: {
             type: string;
         };
@@ -645,14 +659,6 @@ export declare const SCHEMA_DATA_SYSTEM2: {
         battlerName: {
             type: string;
         };
-        sounds: {
-            type: string;
-            maxItems: number;
-            minItems: number;
-            items: {
-                $ref: string;
-            };
-        };
         title1Name: {
             type: string;
         };
@@ -672,12 +678,6 @@ export declare const SCHEMA_DATA_SYSTEM2: {
                 minimum: number;
                 maximum: number;
             };
-        };
-        itemCategories: {
-            $ref: string;
-        };
-        menuCommands: {
-            $ref: string;
         };
     };
 };

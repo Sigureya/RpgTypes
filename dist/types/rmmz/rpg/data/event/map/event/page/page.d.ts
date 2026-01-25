@@ -9,4 +9,5 @@ export interface MapEventPage<T extends EventCommandUnknown = EventCommandUnknow
     image: MapEvent_Image;
     moveFrequency: number;
     moveRoute: MoveRouteDataUnkwnown;
+    priorityType: number;
 }

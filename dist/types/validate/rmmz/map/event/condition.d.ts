@@ -1,5 +1,6 @@
-declare const SCHEMA_MAP_EVENT_PAGE_CONDITION: {
+export declare const SCHEMA_MAP_EVENT_PAGE_CONDITION: {
     readonly type: "object";
+    readonly additionalProperties: false;
     readonly required: readonly ["switch1Id", "switch1Valid", "switch2Id", "switch2Valid", "variableId", "variableValid", "selfSwitchCh", "selfSwitchValid", "variableValue", "itemId", "itemValid", "actorId", "actorValid"];
     readonly properties: {
         readonly switch1Id: {
@@ -47,4 +48,3 @@ declare const SCHEMA_MAP_EVENT_PAGE_CONDITION: {
         };
     };
 };
-export default SCHEMA_MAP_EVENT_PAGE_CONDITION;

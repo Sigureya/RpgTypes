@@ -1,15 +1,19 @@
-declare const SCHEMA_MAP_EVENT_PAGE: {
-    readonly type: "object";
-    readonly required: ("conditions" | "directionFix" | "image" | "moveFrequency" | "moveRoute")[];
-    readonly properties: {
-        readonly moveFrequency: {
+export declare const SCHEMA_MAP_EVENT_PAGE: {
+    type: string;
+    required: string[];
+    properties: {
+        readonly priorityType: {
             readonly type: "integer";
         };
         readonly directionFix: {
             readonly type: "boolean";
         };
+        readonly moveFrequency: {
+            readonly type: "integer";
+        };
         readonly conditions: {
             readonly type: "object";
+            readonly additionalProperties: false;
             readonly required: readonly ["switch1Id", "switch1Valid", "switch2Id", "switch2Valid", "variableId", "variableValid", "selfSwitchCh", "selfSwitchValid", "variableValue", "itemId", "itemValid", "actorId", "actorValid"];
             readonly properties: {
                 readonly switch1Id: {
@@ -57,9 +61,13 @@ declare const SCHEMA_MAP_EVENT_PAGE: {
                 };
             };
         };
+        readonly list: {
+            readonly type: "array";
+        };
         readonly image: {
             readonly type: "object";
             readonly required: readonly ["characterIndex", "characterName", "direction", "pattern", "tileId"];
+            readonly additionalProperties: false;
             readonly properties: {
                 readonly characterIndex: {
                     readonly type: "integer";
@@ -82,6 +90,7 @@ declare const SCHEMA_MAP_EVENT_PAGE: {
         };
         readonly moveRoute: {
             readonly type: "object";
+            readonly additionalProperties: false;
             readonly required: readonly ["wait", "repeat", "skippable", "list"];
             readonly properties: {
                 readonly wait: {
@@ -136,4 +145,3 @@ declare const SCHEMA_MAP_EVENT_PAGE: {
         };
     };
 };
-export default SCHEMA_MAP_EVENT_PAGE;
