@@ -11,9 +11,9 @@ import type {
   System_Me,
   System_SoundsObject,
   System_Vehicles,
-  Terms_GameCommands,
-  Terms_Basic,
-  Terms_Messages,
+  System_TermsPartial,
+  AttackMotion,
+  BattleRuleRMMZ,
 } from "./core";
 import type {
   EditorSettings,
@@ -23,6 +23,7 @@ import type {
 import type { System_Text } from "./subset";
 
 export interface SystemDataFragments {
+  locale: string;
   options: Partial<System_BooleanGameOptions>;
   advanced: Partial<System_Advanced>;
   vehicles: Partial<System_Vehicles>;
@@ -37,11 +38,9 @@ export interface SystemDataFragments {
   gameInit: Partial<System_GameInitial>;
   itemCategories: Partial<ItemCategories>;
   size: Partial<System_ImageSize>;
-  terms: {
-    basic?: Partial<Terms_Basic>;
-    command?: Partial<Terms_GameCommands>;
-    messages?: Partial<Terms_Messages>;
-  };
+  terms: System_TermsPartial;
   menuComamnds: Partial<MenuCommandsEnabled>;
   editorTemporary?: Partial<System_EditorTemporary>;
+  attackMotion: AttackMotion[];
+  battle: Partial<BattleRuleRMMZ>;
 }
