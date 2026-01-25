@@ -16,4 +16,7 @@ export interface MapEventPage<
   walkAnime: boolean;
   stepAnime: boolean;
   through: boolean;
+  moveSpeed: number;
+  moveType: number;
+  trigger: number;
 }

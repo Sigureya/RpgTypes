@@ -54,6 +54,9 @@ export const makeMapEventPage = <Command extends EventCommandUnknown>({
   stepAnime = false,
   through = false,
   walkAnime = false,
+  moveSpeed = 3,
+  moveType = 0,
+  trigger = 0,
 }: Partial<MapEventPage<Command>> = {}): MapEventPage<Command> => {
   return {
     walkAnime: walkAnime,
@@ -65,6 +68,10 @@ export const makeMapEventPage = <Command extends EventCommandUnknown>({
     image: image,
     priorityType: priorityType,
     moveFrequency: moveFrequency,
+    moveSpeed: moveSpeed,
+    moveType: moveType,
+    trigger: trigger,
+
     moveRoute: {
       list: moveRoute.list,
       repeat: moveRoute.repeat,
