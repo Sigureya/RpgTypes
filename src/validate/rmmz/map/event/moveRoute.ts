@@ -13,6 +13,7 @@ export const SCHEMA_MOVEROUTE_DATA = {
     list: {
       type: "array",
       items: {
+        additionalProperties: false,
         type: "object",
         required: ["code", "parameters"],
         properties: {

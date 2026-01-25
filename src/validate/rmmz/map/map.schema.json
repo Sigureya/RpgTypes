@@ -42,6 +42,7 @@
               "pages": {
                 "type": "array",
                 "items": {
+                  "additionalProperties": false,
                   "required": [
                     "conditions",
                     "image",
@@ -143,6 +144,7 @@
                       "properties": {
                         "list": {
                           "items": {
+                            "additionalProperties": false,
                             "properties": {
                               "code": {
                                 "type": "integer"
