@@ -51,8 +51,14 @@ export const makeMapEventPage = <Command extends EventCommandUnknown>({
     wait: false,
   },
   priorityType = 1,
+  stepAnime = false,
+  through = false,
+  walkAnime = false,
 }: Partial<MapEventPage<Command>> = {}): MapEventPage<Command> => {
   return {
+    walkAnime: walkAnime,
+    stepAnime: stepAnime,
+    through: through,
     conditions: conditions,
     list: list,
     directionFix: directionFix,

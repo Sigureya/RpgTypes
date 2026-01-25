@@ -59,6 +59,9 @@ describe("extractMapText", () => {
       note: "",
       pages: [
         {
+          stepAnime: false,
+          walkAnime: false,
+          through: false,
           priorityType: 1,
           conditions: makeEventPageCondition(),
           directionFix: false,

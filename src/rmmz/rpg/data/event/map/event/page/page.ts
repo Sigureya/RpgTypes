@@ -13,4 +13,7 @@ export interface MapEventPage<
   moveFrequency: number;
   moveRoute: MoveRouteDataUnkwnown;
   priorityType: number;
+  walkAnime: boolean;
+  stepAnime: boolean;
+  through: boolean;
 }
