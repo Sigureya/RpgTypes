@@ -9,7 +9,7 @@ describe("makeGameInitial", () => {
       startMapId: 0,
       startX: 0,
       startY: 0,
-      partyMembersArray: [1],
+      partyMembers: [1],
     } satisfies System_GameInitial);
   });
 
@@ -18,7 +18,7 @@ describe("makeGameInitial", () => {
       startMapId: 1,
       startX: 2,
       startY: 3,
-      partyMembersArray: [4, 5],
+      partyMembers: [4, 5],
     };
     const gameInitial = makeGameInitial(param);
     expect(gameInitial).toMatchObject(param);
