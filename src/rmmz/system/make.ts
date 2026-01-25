@@ -10,6 +10,7 @@ import {
   makeTermsBasic,
   makeTermsCommandArray,
   makeTermsMessages,
+  makeTitleCommandWindow,
   makeVehicleData,
 } from "./core";
 import type {
@@ -35,7 +36,9 @@ export const makeSystemData = (
       string & keyof System_BooleanGameOptions,
       boolean
     >),
-
+    titleCommandWindow: makeTitleCommandWindow(
+      fragments.titleCommandWindow ?? {},
+    ),
     currencyUnit: fragments.texts?.currencyUnit ?? "",
     gameTitle: fragments.texts?.gameTitle ?? "",
     sounds: makeSoundsArray(fragments.sounds) satisfies AudioFileParams[],
@@ -87,7 +90,7 @@ export const makeSystemData = (
     itemCategories: makeItemCategories(
       fragments.itemCategories,
     ) satisfies boolean[],
-    partyMembersArray: cloneValueArray(fragments.gameInit?.partyMembersArray),
+    partyMembers: cloneValueArray(fragments.gameInit?.partyMembers),
     battlerHue: 0,
     menuCommands: makeMenuCommandsEnabled(
       fragments.menuComamnds,

@@ -16,6 +16,7 @@ export const SCHEMA_SYSTEM_ADVANCED = {
     mainFontFilename: { type: "string" },
     fallbackFonts: { type: "string" },
     fontSize: { type: "integer" },
+    picturesUpperLimit: { type: "integer", nullable: true },
   },
   required: [
     "gameId",

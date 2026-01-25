@@ -23,6 +23,11 @@ const mockSystem: Data_System = {
   optSplashScreen: false,
   gameTitle: "Test Game",
   currencyUnit: "Gold",
+  titleCommandWindow: {
+    background: 1,
+    offsetX: 120,
+    offsetY: 240,
+  },
   title1Name: "Title1",
   title2Name: "Title2",
   battleback1Name: "Battleback1",
@@ -231,7 +236,7 @@ const mockSystem: Data_System = {
     } satisfies Terms_Messages,
   },
   versionId: 1,
-  partyMembersArray: [1, 2, 3],
+  partyMembers: [1, 2, 3],
   itemCategories: [true, true, false, false],
   menuCommands: [true, true, true, false, false, false],
   editor: {

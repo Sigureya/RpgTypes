@@ -5,15 +5,19 @@ import type {
   ItemCategoriesArray,
   MenuCommandsEnabledArray,
   System_Advanced,
+  System_BooleanGameOptions,
   System_SoundsArray,
   System_Terms,
+  System_Vehicles,
+  TitleCommandWindow,
 } from "./core";
 import type { TestBattler, EditorSettings } from "./gameEdit";
 
-export interface Data_System {
+export interface Data_System
+  extends System_BooleanGameOptions, System_Vehicles {
   // battle
   battleSystem: number;
-  partyMembersArray: number[];
+  partyMembers: number[];
   // サイドビューの際に魔法モーションを取るスキル系統
   magicSkills: number[];
 
@@ -37,6 +41,8 @@ export interface Data_System {
   armorTypes: string[];
   itemCategories: ItemCategoriesArray;
   menuCommands: MenuCommandsEnabledArray;
+  // title command window
+  titleCommandWindow: TitleCommandWindow;
 
   // audioFiles - bgm
   titleBgm: AudioFileParams;

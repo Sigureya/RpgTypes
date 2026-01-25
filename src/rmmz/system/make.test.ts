@@ -91,7 +91,7 @@ const fullFragments = {
     startMapId: 10,
     startX: 20,
     startY: 30,
-    partyMembersArray: [1, 2, 3],
+    partyMembers: [1, 2, 3],
   },
   size: {
     tileSize: 48,
@@ -276,6 +276,7 @@ describe("makeSystemData", () => {
         uiAreaHeight: 0,
         uiAreaWidth: 0,
         windowOpacity: 255,
+        picturesUpperLimit: 100,
       },
       battlerHue: 0,
       battlerName: "BattlerName",
@@ -400,13 +401,18 @@ describe("makeSystemData", () => {
         } satisfies Terms_Messages,
       },
       versionId: 1,
-      partyMembersArray: [1, 2, 3],
+      partyMembers: [1, 2, 3],
       itemCategories: [true, true, false, false],
       menuCommands: [true, true, true, false, false, false],
       editor: {
         jsonFormatLevel: 0,
         messageWidth1: 816,
         messageWidth2: 816,
+      },
+      titleCommandWindow: {
+        background: 1,
+        offsetX: 120,
+        offsetY: 240,
       },
     };
 
@@ -659,7 +665,7 @@ describe("makeSystemData", () => {
         startMapId: 58,
         startX: 22,
         startY: 44,
-        partyMembersArray: [1, 2, 3],
+        partyMembers: [1, 2, 3],
       },
       editorTemporary: {
         battlerName: "BattlerName",
@@ -678,6 +684,11 @@ describe("makeSystemData", () => {
         battleSystem: 1,
         magicSkills: [1, 4],
       },
+      titleCommandWindow: {
+        background: 1,
+        offsetX: 120,
+        offsetY: 240,
+      },
     });
     expect(data.locale).toEqual(expected.locale);
     expect(data.advanced).toEqual(expected.advanced);
@@ -691,6 +702,7 @@ describe("makeSystemData", () => {
     expect(data.airship).toEqual(expected.airship);
     expect(data.boat).toEqual(expected.boat);
     expect(data.menuCommands).toEqual(expected.menuCommands);
+    expect(data.titleCommandWindow).toEqual(expected.titleCommandWindow);
     expect(data).toEqual(expected);
   });
 });

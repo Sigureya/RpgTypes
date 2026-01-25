@@ -11,10 +11,12 @@ export interface System_Advanced {
   mainFontFilename: string;
   fallbackFonts: string;
   fontSize: number;
+
+  picturesUpperLimit?: number;
 }
 
 export const makeSystemAdvanced = (
-  advanced: Partial<System_Advanced> = {}
+  advanced: Partial<System_Advanced> = {},
 ): System_Advanced => {
   return {
     gameId: advanced.gameId ?? 0,
@@ -29,5 +31,6 @@ export const makeSystemAdvanced = (
     mainFontFilename: advanced.mainFontFilename ?? "",
     fallbackFonts: advanced.fallbackFonts ?? "",
     fontSize: advanced.fontSize ?? 28,
+    picturesUpperLimit: advanced.picturesUpperLimit ?? 100,
   };
 };

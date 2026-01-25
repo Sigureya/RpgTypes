@@ -1,4 +1,5 @@
 {
+  "additionalProperties": false,
   "$defs": {
     "Audio": {
       "type": "object",
@@ -56,7 +57,11 @@
         "numberFontFilename": { "type": "string" },
         "mainFontFilename": { "type": "string" },
         "fallbackFonts": { "type": "string" },
-        "fontSize": { "type": "integer" }
+        "fontSize": { "type": "integer" },
+        "picturesUpperLimit": {
+          "nullable": true,
+          "type": "integer"
+        }
       },
       "required": [
         "gameId",
@@ -287,6 +292,16 @@
         "useItem": { "type": "string" },
         "victory": { "type": "string" }
       }
+    },
+    "TitleCommandWindow": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["background", "offsetX", "offsetY"],
+      "properties": {
+        "background": { "type": "integer" },
+        "offsetX": { "type": "integer" },
+        "offsetY": { "type": "integer" }
+      }
     }
   },
 
@@ -335,7 +350,7 @@
     "battleback1Name",
     "battleback2Name",
     "testTroopId",
-    "partyMembersArray",
+    "partyMembers",
     "editor",
     "testBattlers",
     "editMapId",
@@ -348,7 +363,8 @@
     "locale",
     "windowTone",
     "itemCategories",
-    "menuCommands"
+    "menuCommands",
+    "titleCommandWindow"
   ],
   "properties": {
     "gameTitle": { "type": "string" },
@@ -424,7 +440,7 @@
     "battleback1Name": { "type": "string" },
     "battleback2Name": { "type": "string" },
     "testTroopId": { "type": "integer", "minimum": 0 },
-    "partyMembersArray": {
+    "partyMembers": {
       "type": "array",
       "items": { "type": "integer" }
     },
@@ -439,6 +455,7 @@
     "windowTone": {
       "type": "array",
       "items": { "type": "integer", "minimum": 0, "maximum": 255 }
-    }
+    },
+    "titleCommandWindow": { "$ref": "#/$defs/TitleCommandWindow" }
   }
 }

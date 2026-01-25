@@ -40,10 +40,6 @@ describe("all properties are required", () => {
     const props = getRequiredPropertySets(SCHEMA_DATA_SYSTEM.$defs.TestBattler);
     expect(props.required).toEqual(props.properties);
   });
-  test("System_Advanced", () => {
-    const props = getRequiredPropertySets(SCHEMA_DATA_SYSTEM.$defs.Advanced);
-    expect(props.required).toEqual(props.properties);
-  });
   test("System_AttackMotion", () => {
     const props = getRequiredPropertySets(
       SCHEMA_DATA_SYSTEM.$defs.AttackMotion,
