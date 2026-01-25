@@ -26,6 +26,7 @@ import { makeEditorSetting } from "./gameEdit";
 import type { TestBattler } from "./gameEdit/testPlay/testBattler/types";
 import type { Data_System } from "./system";
 import type { SystemDataFragments } from "./systemSegments";
+
 export const makeSystemData = (
   fragments: Partial<SystemDataFragments>,
 ): Data_System => {
@@ -50,6 +51,7 @@ export const makeSystemData = (
       keyof System_RPG_DataNames,
       string[]
     >),
+
     magicSkills: cloneNumberArray([]),
     airship: makeVehicleData(fragments.vehicles?.airship),
     boat: makeVehicleData(fragments.vehicles?.boat),
@@ -62,7 +64,7 @@ export const makeSystemData = (
     faceSize: size.faceSize,
     iconSize: size.iconSize,
     versionId: 1,
-    attackMotions: [],
+    attackMotions: fragments.attackMotion ? [...fragments.attackMotion] : [],
     battleback1Name: fragments.battleTest?.battleback1Name ?? "",
     battleback2Name: fragments.battleTest?.battleback2Name ?? "",
     testTroopId: fragments.battleTest?.testTroopId ?? 0,
@@ -74,7 +76,7 @@ export const makeSystemData = (
     victoryMe: makeAudioFileParams(fragments.me?.victoryMe),
     editMapId: fragments.editorTemporary?.editMapId ?? 0,
     battlerName: fragments.editorTemporary?.battlerName ?? "",
-    locale: "",
+    locale: fragments.locale ?? "en-US",
     startMapId: fragments.gameInit?.startMapId ?? 0,
     startX: fragments.gameInit?.startX ?? 0,
     startY: fragments.gameInit?.startY ?? 0,
@@ -91,8 +93,6 @@ export const makeSystemData = (
     ) satisfies boolean[],
   };
 };
-
-export default makeSystemData;
 
 const makeTerms = (terms: System_TermsPartial): System_Terms => {
   return {
