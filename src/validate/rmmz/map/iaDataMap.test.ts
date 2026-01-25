@@ -1,11 +1,11 @@
 import { describe, test, expect } from "vitest";
-import type { EventCommand } from "@RpgTypes/rmmz";
+import type { EventCommand, EventCommandUnknown } from "@RpgTypes/rmmz";
 import {
   makeCommandShowMessage,
   makeCommandShowMessageBody,
   makeCommandVariableFromConstant,
 } from "@RpgTypes/rmmz";
-import type { Data_Map } from "@RpgTypes/rmmz/rpg";
+import type { Data_Map, MapEvent } from "@RpgTypes/rmmz/rpg";
 import {
   makeMapData,
   makeMapEvent,
@@ -21,6 +21,17 @@ const mockEventCommands: EventCommand[] = [
   makeCommandShowMessageBody("abc"),
   makeCommandVariableFromConstant({ startId: 1 }, { value: 123 }),
 ];
+
+const makeMapWithEvents = (
+  commands: EventCommandUnknown[],
+): Data_Map<EventCommandUnknown> => {
+  const mapEvent: MapEvent = makeMapEvent({
+    pages: [makeMapEventPage({ list: commands })],
+  });
+  return makeMapData({
+    events: [null, mapEvent, null],
+  });
+};
 
 describe("isDataMap", () => {
   const mockMap: Data_Map = {
@@ -59,24 +70,26 @@ describe("isDataMap", () => {
   };
   describe("validate mockEventCommands", () => {
     test("valid Data_Map", () => {
-      expect(mockMap).toSatisfy(isDataMap);
+      expect(isDataMap(mockMap)).toBe(true);
     });
 
     test("generated valid Data_Map", () => {
       const mapData: Data_Map = makeMapData({});
-      expect(mapData).toSatisfy(isDataMap);
+      expect(isDataMap(mapData)).toBe(true);
     });
-    test("valid", () => {
-      const mapData: Data_Map = makeMapData({
-        events: [
-          null,
-          makeMapEvent({
-            pages: [makeMapEventPage({ list: mockEventCommands })],
-          }),
-          null,
-        ],
-      });
-      expect(mapData).toSatisfy(isDataMap);
+    test("generated valid Data_Map with events", () => {
+      const mapData = makeMapWithEvents(mockEventCommands);
+      expect(isDataMap(mapData)).toBe(true);
+    });
+    test("allows unknown event commands at schema level", () => {
+      const mapData = makeMapWithEvents([
+        {
+          code: 123456,
+          indent: 0,
+          parameters: ["test parameter", null, undefined, 42, { a: 1, b: 2 }],
+        },
+      ]);
+      expect(isDataMap(mapData)).toBe(true);
     });
   });
 
