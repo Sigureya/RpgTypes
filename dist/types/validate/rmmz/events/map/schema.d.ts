@@ -4,6 +4,7 @@ export declare const SCHEMA_DATA_MAP: {
     readonly $defs: {
         readonly AudioFileParams: {
             readonly type: "object";
+            readonly additionalProperties: false;
             readonly required: readonly ["name", "pan", "pitch", "volume"];
             readonly properties: {
                 readonly name: {
@@ -23,6 +24,7 @@ export declare const SCHEMA_DATA_MAP: {
         readonly EncounterList: {
             readonly type: "array";
             readonly items: {
+                readonly additionalProperties: false;
                 readonly type: "object";
                 readonly required: readonly ["regionSet", "troopId", "weight"];
                 readonly properties: {
@@ -68,9 +70,10 @@ export declare const SCHEMA_DATA_MAP: {
                         readonly pages: {
                             readonly type: "array";
                             readonly items: {
-                                type: string;
-                                required: string[];
-                                properties: {
+                                readonly type: "object";
+                                readonly additionalProperties: false;
+                                readonly required: readonly ["conditions", "image", "list", "moveRoute", "directionFix", "priorityType", "moveFrequency"];
+                                readonly properties: {
                                     readonly priorityType: {
                                         readonly type: "integer";
                                     };
@@ -132,6 +135,32 @@ export declare const SCHEMA_DATA_MAP: {
                                     };
                                     readonly list: {
                                         readonly type: "array";
+                                        readonly items: {
+                                            readonly additionalProperties: false;
+                                            readonly type: "object";
+                                            readonly required: readonly ["code", "parameters", "indent"];
+                                            readonly properties: {
+                                                readonly code: {
+                                                    readonly type: "integer";
+                                                };
+                                                readonly indent: {
+                                                    readonly type: "integer";
+                                                };
+                                                readonly parameters: {
+                                                    readonly type: "array";
+                                                    readonly items: {};
+                                                };
+                                            };
+                                        };
+                                    };
+                                    readonly stepAnime: {
+                                        readonly type: "boolean";
+                                    };
+                                    readonly walkAnime: {
+                                        readonly type: "boolean";
+                                    };
+                                    readonly through: {
+                                        readonly type: "boolean";
                                     };
                                     readonly image: {
                                         readonly type: "object";
@@ -174,6 +203,7 @@ export declare const SCHEMA_DATA_MAP: {
                                             readonly list: {
                                                 readonly type: "array";
                                                 readonly items: {
+                                                    readonly additionalProperties: false;
                                                     readonly type: "object";
                                                     readonly required: readonly ["code", "parameters"];
                                                     readonly properties: {
@@ -189,6 +219,7 @@ export declare const SCHEMA_DATA_MAP: {
                                                                     readonly type: "number";
                                                                 }, {
                                                                     type: "object";
+                                                                    additionalProperties: false;
                                                                     required: ("name" | "volume" | "pitch" | "pan")[];
                                                                     properties: {
                                                                         name: {
@@ -220,7 +251,7 @@ export declare const SCHEMA_DATA_MAP: {
             };
         };
     };
-    readonly required: ("note" | "bgm" | "battleback1Name" | "battleback2Name" | "x" | "y" | "bgs" | "data" | "parallaxName" | "parallaxLoopX" | "parallaxLoopY" | "parallaxShow" | "parallaxSx" | "parallaxSy" | "width" | "height" | "displayName" | "disableDashing" | "autoplayBgm" | "autoplayBgs" | "tilesetId")[];
+    readonly required: ("note" | "bgm" | "battleback1Name" | "battleback2Name" | "x" | "y" | "bgs" | "data" | "parallaxName" | "specifyBattleback" | "parallaxLoopX" | "parallaxLoopY" | "parallaxShow" | "parallaxSx" | "parallaxSy" | "width" | "height" | "displayName" | "disableDashing" | "autoplayBgm" | "autoplayBgs" | "scrollType" | "tilesetId" | "encounterStep" | "encounterList" | "events")[];
     readonly properties: {
         data: {
             type: string;
@@ -297,6 +328,15 @@ export declare const SCHEMA_DATA_MAP: {
         };
         events: {
             $ref: string;
+        };
+        encounterStep: {
+            type: string;
+        };
+        scrollType: {
+            type: string;
+        };
+        specifyBattleback: {
+            type: string;
         };
     };
 };

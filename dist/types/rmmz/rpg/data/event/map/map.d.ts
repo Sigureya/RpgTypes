@@ -7,6 +7,7 @@ export interface Data_Map<CommandType extends EventCommandUnknown = EventCommand
     data: number[];
     battleback1Name: string;
     battleback2Name: string;
+    specifyBattleback: boolean;
     parallaxLoopX: boolean;
     parallaxLoopY: boolean;
     parallaxName: string;
@@ -24,9 +25,11 @@ export interface Data_Map<CommandType extends EventCommandUnknown = EventCommand
     bgs: AudioFileParams;
     autoplayBgm: boolean;
     autoplayBgs: boolean;
-    events: Array<MapEvent<CommandType> | null>;
-    encounterList: Encounter[];
+    scrollType: number;
     tilesetId: number;
+    encounterStep: number;
+    encounterList: Encounter[];
+    events: Array<MapEvent<CommandType> | null>;
 }
 export type Map_ImageFiles = Pick<Data_Map, "battleback1Name" | "battleback2Name" | "parallaxName">;
 export type Map_Parallax = Pick<Data_Map, "parallaxLoopX" | "parallaxLoopY" | "parallaxShow" | "parallaxSx" | "parallaxSy">;
