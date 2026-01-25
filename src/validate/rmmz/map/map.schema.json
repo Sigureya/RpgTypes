@@ -3,6 +3,7 @@
   "additionalProperties": false,
   "$defs": {
     "AudioFileParams": {
+      "additionalProperties": false,
       "properties": {
         "name": { "type": "string" },
         "pan": { "type": "integer" },
@@ -14,6 +15,7 @@
     },
     "EncounterList": {
       "items": {
+        "additionalProperties": false,
         "properties": {
           "regionSet": {
             "items": { "type": "integer" },
@@ -124,6 +126,7 @@
                     "list": {
                       "type": "array",
                       "items": {
+                        "additionalProperties": false,
                         "type": "object",
                         "required": ["code", "parameters", "indent"],
                         "properties": {
@@ -159,6 +162,7 @@
                                       "type": "number"
                                     },
                                     {
+                                      "additionalProperties": false,
                                       "properties": {
                                         "name": { "type": "string" },
                                         "pan": { "type": "integer" },

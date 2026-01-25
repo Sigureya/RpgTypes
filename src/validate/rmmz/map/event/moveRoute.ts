@@ -26,6 +26,7 @@ export const SCHEMA_MOVEROUTE_DATA = {
                 { type: "number" },
                 {
                   type: "object",
+                  additionalProperties: false,
                   required: ["name", "pan", "pitch", "volume"],
                   properties: {
                     name: { type: "string" },
