@@ -10,7 +10,7 @@ const srcDir = path.resolve(__dirname, "src");
 const validateEntryPoints = () => {
   const entries = [
     "validate/rmmz/rpg",
-    "validate/rmmz/eventCommand",
+    "validate/rmmz/events",
     "validate/rmmz/system",
   ].map((dir): [string, string] => [
     dir,
