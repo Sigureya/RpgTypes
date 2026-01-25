@@ -17,7 +17,7 @@ import { SCHEMA_SYSTEM_EDITOR_SETTINGS } from "./gameEdit/editorSetting";
 import { SCHEMA_SYSTEM_TEST_BATTLER } from "./gameEdit/testBattle";
 
 export const SCHEMA_DATA_SYSTEM = {
-  additionalProperties: true,
+  additionalProperties: false,
   $defs: {
     Audio: {
       type: "object",
