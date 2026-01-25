@@ -14,8 +14,6 @@ export interface Data_Map<CommandType extends EventCommandUnknown = EventCommand
     parallaxShow: boolean;
     parallaxSx: number;
     parallaxSy: number;
-    x: number;
-    y: number;
     width: number;
     height: number;
     note: string;

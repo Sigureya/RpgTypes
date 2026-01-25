@@ -1,7 +1,7 @@
 export declare const SCHEMA_MAP_EVENT_PAGE: {
     readonly type: "object";
     readonly additionalProperties: false;
-    readonly required: readonly ["conditions", "image", "list", "moveRoute", "directionFix", "priorityType", "moveFrequency"];
+    readonly required: readonly ["conditions", "image", "list", "moveRoute", "directionFix", "priorityType", "moveFrequency", "walkAnime", "stepAnime", "through", "moveSpeed", "moveType", "trigger"];
     readonly properties: {
         readonly priorityType: {
             readonly type: "integer";
@@ -171,6 +171,15 @@ export declare const SCHEMA_MAP_EVENT_PAGE: {
                     };
                 };
             };
+        };
+        readonly moveSpeed: {
+            readonly type: "integer";
+        };
+        readonly moveType: {
+            readonly type: "integer";
+        };
+        readonly trigger: {
+            readonly type: "integer";
         };
     };
 };
