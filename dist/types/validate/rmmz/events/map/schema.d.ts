@@ -72,7 +72,7 @@ export declare const SCHEMA_DATA_MAP: {
                             readonly items: {
                                 readonly type: "object";
                                 readonly additionalProperties: false;
-                                readonly required: readonly ["conditions", "image", "list", "moveRoute", "directionFix", "priorityType", "moveFrequency"];
+                                readonly required: readonly ["conditions", "image", "list", "moveRoute", "directionFix", "priorityType", "moveFrequency", "walkAnime", "stepAnime", "through", "moveSpeed", "moveType", "trigger"];
                                 readonly properties: {
                                     readonly priorityType: {
                                         readonly type: "integer";
@@ -243,6 +243,15 @@ export declare const SCHEMA_DATA_MAP: {
                                             };
                                         };
                                     };
+                                    readonly moveSpeed: {
+                                        readonly type: "integer";
+                                    };
+                                    readonly moveType: {
+                                        readonly type: "integer";
+                                    };
+                                    readonly trigger: {
+                                        readonly type: "integer";
+                                    };
                                 };
                             };
                         };
@@ -251,7 +260,7 @@ export declare const SCHEMA_DATA_MAP: {
             };
         };
     };
-    readonly required: ("note" | "bgm" | "battleback1Name" | "battleback2Name" | "x" | "y" | "bgs" | "data" | "parallaxName" | "specifyBattleback" | "parallaxLoopX" | "parallaxLoopY" | "parallaxShow" | "parallaxSx" | "parallaxSy" | "width" | "height" | "displayName" | "disableDashing" | "autoplayBgm" | "autoplayBgs" | "scrollType" | "tilesetId" | "encounterStep" | "encounterList" | "events")[];
+    readonly required: ("note" | "bgm" | "battleback1Name" | "battleback2Name" | "bgs" | "data" | "parallaxName" | "specifyBattleback" | "parallaxLoopX" | "parallaxLoopY" | "parallaxShow" | "parallaxSx" | "parallaxSy" | "width" | "height" | "displayName" | "disableDashing" | "autoplayBgm" | "autoplayBgs" | "scrollType" | "tilesetId" | "encounterStep" | "encounterList" | "events")[];
     readonly properties: {
         data: {
             type: string;
@@ -285,14 +294,6 @@ export declare const SCHEMA_DATA_MAP: {
         };
         tilesetId: {
             type: string;
-        };
-        x: {
-            type: string;
-            minimum: number;
-        };
-        y: {
-            type: string;
-            minimum: number;
         };
         width: {
             type: string;

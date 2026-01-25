@@ -567,8 +567,6 @@ const Ea = (e) => typeof e.value == "string", mt = (e) => ({
   events: Me(e.events, t),
   data: e.data,
   tilesetId: e.tilesetId,
-  x: e.x,
-  y: e.y,
   encounterStep: e.encounterStep,
   scrollType: e.scrollType,
   specifyBattleback: e.specifyBattleback,
