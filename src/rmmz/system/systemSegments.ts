@@ -14,6 +14,7 @@ import type {
   System_TermsPartial,
   AttackMotion,
   BattleRuleRMMZ,
+  TitleCommandWindow,
 } from "./core";
 import type {
   EditorSettings,
@@ -43,4 +44,5 @@ export interface SystemDataFragments {
   editorTemporary?: Partial<System_EditorTemporary>;
   attackMotion: AttackMotion[];
   battle: Partial<BattleRuleRMMZ>;
+  titleCommandWindow: TitleCommandWindow;
 }

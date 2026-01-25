@@ -7,13 +7,14 @@ import type {
   System_Advanced,
   System_SoundsArray,
   System_Terms,
+  TitleCommandWindow,
 } from "./core";
 import type { TestBattler, EditorSettings } from "./gameEdit";
 
 export interface Data_System {
   // battle
   battleSystem: number;
-  partyMembersArray: number[];
+  partyMembers: number[];
   // サイドビューの際に魔法モーションを取るスキル系統
   magicSkills: number[];
 
@@ -37,6 +38,8 @@ export interface Data_System {
   armorTypes: string[];
   itemCategories: ItemCategoriesArray;
   menuCommands: MenuCommandsEnabledArray;
+  // title command window
+  titleCommandWindow: TitleCommandWindow;
 
   // audioFiles - bgm
   titleBgm: AudioFileParams;
