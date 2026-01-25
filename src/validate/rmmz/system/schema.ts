@@ -126,6 +126,8 @@ export const SCHEMA_DATA_SYSTEM = {
     "versionId",
     "locale",
     "windowTone",
+    "itemCategories",
+    "menuCommands",
   ],
   properties: {
     // Texts
