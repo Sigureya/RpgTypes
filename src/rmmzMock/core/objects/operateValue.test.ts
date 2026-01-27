@@ -12,7 +12,12 @@ import {
   makeCommandVariableFromPartyMembers,
   makeCommandVariableFromPartySteps,
   makeCommandVariableFromPartyGold,
-  makeCommandVariableFromVariable,
+  OPERATION_ADD,
+  OPERATION_SUBTRACT,
+  OPERATION_SET,
+  OPERATION_DIVIDE,
+  OPERATION_MULTIPLY,
+  OPERATION_MOD,
 } from "@RpgTypes/rmmz/eventCommand";
 import type { Rmmz_System, Rmmz_Variables } from "@RpgTypes/rmmzRuntime";
 import type { Rmmz_ActorsTemplate } from "@RpgTypes/rmmzRuntime/objects/core/battler/actors";
@@ -51,7 +56,7 @@ const PARTY_FUNCTION_KEYS = [
 
 const createMockedVariable = (): MockedObject<Rmmz_Variables> => ({
   clear: vi.fn(),
-  value: vi.fn(),
+  value: vi.fn().mockReturnValue(MOCK_OLD_VALUE),
   setValue: vi.fn(),
   onChange: vi.fn(),
 });
@@ -165,6 +170,7 @@ const runTestCase = (testCase: TestCase) => {
       expect(mocks.mockedVariables.value).toHaveBeenCalledWith(
         testCase.setValue.id,
       );
+      expect(mocks.mockedVariables.value).toHaveBeenCalledOnce();
       expect(mocks.mockedVariables.setValue).toHaveBeenCalledWith(
         testCase.setValue.id,
         testCase.setValue.value,
@@ -199,7 +205,7 @@ const testCases: TestCase[] = [
     command: makeCommandVariableFromConstant(
       { startId: 1 },
       { value: 123 },
-      { indent: 0, operation: 0 },
+      { indent: 0, operation: OPERATION_SET },
     ),
     commandLiteral: {
       code: 122,
@@ -207,6 +213,97 @@ const testCases: TestCase[] = [
       parameters: [1, 1, 0, 0, 123],
     },
   },
+  {
+    testName: "constant add",
+    fnCalles: { party: [], systems: [] },
+    setValue: { id: 189, value: MOCK_OLD_VALUE + 123 },
+    command: makeCommandVariableFromConstant(
+      { startId: 189 },
+      { value: 123 },
+      { indent: 0, operation: OPERATION_ADD },
+    ),
+    commandLiteral: {
+      code: 122,
+      indent: 0,
+      parameters: [189, 189, 1, 0, 123],
+    },
+  },
+  {
+    testName: "constant subtract",
+    fnCalles: { party: [], systems: [] },
+    setValue: { id: 189, value: MOCK_OLD_VALUE - 123 },
+    command: makeCommandVariableFromConstant(
+      { startId: 189 },
+      { value: 123 },
+      { indent: 0, operation: OPERATION_SUBTRACT },
+    ),
+    commandLiteral: {
+      code: 122,
+      indent: 0,
+      parameters: [189, 189, 2, 0, 123],
+    },
+  },
+  {
+    testName: "constant multiply",
+    fnCalles: { party: [], systems: [] },
+    setValue: { id: 189, value: MOCK_OLD_VALUE * 3 },
+    command: makeCommandVariableFromConstant(
+      { startId: 189 },
+      { value: 3 },
+      { indent: 0, operation: OPERATION_MULTIPLY },
+    ),
+    commandLiteral: {
+      code: 122,
+      indent: 0,
+      parameters: [189, 189, 3, 0, 3],
+    },
+  },
+  {
+    testName: "constant divide",
+    fnCalles: { party: [], systems: [] },
+    setValue: { id: 189, value: MOCK_OLD_VALUE / 15 },
+    command: makeCommandVariableFromConstant(
+      { startId: 189 },
+      { value: 15 },
+      { indent: 0, operation: OPERATION_DIVIDE },
+    ),
+    commandLiteral: {
+      code: 122,
+      indent: 0,
+      parameters: [189, 189, 4, 0, 15],
+    },
+  },
+  {
+    testName: "constant divide",
+    fnCalles: { party: [], systems: [] },
+    setValue: { id: 189, value: MOCK_OLD_VALUE / 11 },
+    command: makeCommandVariableFromConstant(
+      { startId: 189 },
+      { value: 11 },
+      { indent: 0, operation: OPERATION_DIVIDE },
+    ),
+    commandLiteral: {
+      code: 122,
+      indent: 0,
+      parameters: [189, 189, 4, 0, 11],
+    },
+  },
+  {
+    testName: "constant mod",
+    fnCalles: { party: [], systems: [] },
+    setValue: { id: 189, value: MOCK_OLD_VALUE % 12 },
+    command: makeCommandVariableFromConstant(
+      { startId: 189 },
+      { value: 12 },
+      { indent: 0, operation: OPERATION_MOD },
+    ),
+    commandLiteral: {
+      code: 122,
+      indent: 0,
+      parameters: [189, 189, 5, 0, 12],
+    },
+  },
+
   {
     testName: "mapId",
     fnCalles: { party: [], systems: [] },

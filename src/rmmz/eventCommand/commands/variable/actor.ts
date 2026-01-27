@@ -1,17 +1,18 @@
 import { CONTROL_VARIABLES } from "@RpgTypes/rmmz/rpg";
-import { OPERAND_GAMEDATA } from "./constants";
+import type { VariableOperation } from "./constants";
+import { OPERAND_GAMEDATA, OPERATION_SET } from "./constants";
+import type { MakeOtherParam } from "./otherTypes";
 import type {
   ParamObject_WritingTarget,
   ParamObject_Operand_ActorStatus,
   Operand_ActorStatus,
   Command_ControlVariables,
 } from "./types";
-import type { MakeOtherParam } from "./types/other";
 
 export const toArrayOperandActorStatus = (
   target: ParamObject_WritingTarget,
   value: ParamObject_Operand_ActorStatus,
-  operation: number = 0
+  operation: VariableOperation = OPERATION_SET,
 ): Operand_ActorStatus => [
   target.startId,
   target.endId ?? target.startId,
@@ -25,7 +26,7 @@ export const toArrayOperandActorStatus = (
 export const makeCommandVariableFromActorStatusData = (
   target: ParamObject_WritingTarget,
   value: ParamObject_Operand_ActorStatus,
-  other: MakeOtherParam = {}
+  other: MakeOtherParam = {},
 ): Command_ControlVariables<Operand_ActorStatus> => {
   return {
     code: CONTROL_VARIABLES,
