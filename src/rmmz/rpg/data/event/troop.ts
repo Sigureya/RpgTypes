@@ -14,6 +14,12 @@ export interface BattleEventPage<Command = EventCommandUnknown> {
   span: number;
 }
 
+export interface Troop_BattleEventPageSegment<Command = EventCommandUnknown> {
+  conditions?: Partial<Troop_EventConditions>;
+  span?: number;
+  list?: Command[];
+}
+
 export interface Troop_EventConditions {
   actorHp: number;
   actorId: number;
