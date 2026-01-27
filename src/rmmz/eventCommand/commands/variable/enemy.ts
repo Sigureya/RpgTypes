@@ -7,12 +7,12 @@ import type {
   Operand_EnemyStatus,
 } from "./types";
 import { ENEMY_PARAM_INDEX } from "./types/enemy/dataSource";
-import type { MakeOtherParam } from "./types/other";
+import type { MakeOtherParam } from "./otherTypes";
 
 export const toArrayOperandEnemyStatus = (
   target: ParamObject_WritingTarget,
   value: ParamObject_Operand_Enemy,
-  operation: number = 0
+  operation: number = 0,
 ): Operand_EnemyStatus => [
   target.startId,
   target.endId ?? target.startId,
@@ -26,7 +26,7 @@ export const toArrayOperandEnemyStatus = (
 export const makeCommandVariableFromEnemyData = (
   target: ParamObject_WritingTarget,
   value: ParamObject_Operand_Enemy,
-  other: MakeOtherParam = {}
+  other: MakeOtherParam = {},
 ): Command_ControlVariables<Operand_EnemyStatus> => {
   return {
     code: CONTROL_VARIABLES,

@@ -6,12 +6,12 @@ import type {
   Operand_Script,
   Command_ControlVariables,
 } from "./types";
-import type { MakeOtherParam } from "./types/other";
+import type { MakeOtherParam } from "./otherTypes";
 
 export const toArrayOperandScript = (
   target: ParamObject_WritingTarget,
   value: ParamObject_Operand_Script,
-  operation: number = 0
+  operation: number = 0,
 ): Operand_Script => [
   target.startId,
   target.endId ?? target.startId,
@@ -23,7 +23,7 @@ export const toArrayOperandScript = (
 export const makeCommandVariableFromScript = (
   target: ParamObject_WritingTarget,
   value: ParamObject_Operand_Script,
-  other: MakeOtherParam = {}
+  other: MakeOtherParam = {},
 ): Command_ControlVariables<Operand_Script> => {
   return {
     code: CONTROL_VARIABLES,

@@ -6,12 +6,12 @@ import type {
   ParamObject_Operand_Constant,
   ParamObject_WritingTarget,
 } from "./types";
-import type { MakeOtherParam } from "./types/other";
+import type { MakeOtherParam } from "./otherTypes";
 
 export const toArrayOperandConstant = (
   target: ParamObject_WritingTarget,
   value: ParamObject_Operand_Constant,
-  operation: number = 0
+  operation: number = 0,
 ): Operand_Constatant => [
   target.startId,
   target.endId ?? target.startId,
@@ -23,7 +23,7 @@ export const toArrayOperandConstant = (
 export const makeCommandVariableFromConstant = (
   target: ParamObject_WritingTarget,
   value: ParamObject_Operand_Constant,
-  other: MakeOtherParam = {}
+  other: MakeOtherParam = {},
 ): Command_ControlVariables<Operand_Constatant> => {
   return {
     code: CONTROL_VARIABLES,

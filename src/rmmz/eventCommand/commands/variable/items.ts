@@ -6,12 +6,12 @@ import type {
   Command_ControlVariables,
   Operand_ItemData,
 } from "./types";
-import type { MakeOtherParam } from "./types/other";
+import type { MakeOtherParam } from "./otherTypes";
 
 export const makeCommandVariableFromItemData = (
   target: ParamObject_WritingTarget,
   value: ParamObject_Operand_ItemData,
-  other: MakeOtherParam = {}
+  other: MakeOtherParam = {},
 ): Command_ControlVariables<Operand_ItemData> => {
   return {
     code: CONTROL_VARIABLES,
@@ -23,7 +23,7 @@ export const makeCommandVariableFromItemData = (
 export const toArrayOperandItemData = (
   target: ParamObject_WritingTarget,
   value: ParamObject_Operand_ItemData,
-  operation: number = 0
+  operation: number = 0,
 ): Operand_ItemData => [
   target.startId,
   target.endId ?? target.startId,
