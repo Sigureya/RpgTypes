@@ -10,11 +10,39 @@ import {
   makeCommandSystemEscapeCount,
   makeCommandVariableFromMapId,
   makeCommandVariableFromPartyMembers,
+  makeCommandVariableFromPartySteps,
+  makeCommandVariableFromPartyGold,
 } from "@RpgTypes/rmmz/eventCommand";
 import type { Rmmz_System, Rmmz_Variables } from "@RpgTypes/rmmzRuntime";
 import type { Rmmz_ActorsTemplate } from "@RpgTypes/rmmzRuntime/objects/core/battler/actors";
 import type { FakeActor, FakeMap } from "./fakes/types";
 import { Game_Interpreter, Game_Party } from "./rmmz_objects";
+
+const MOCK_MAP_ID = 123456 as const;
+
+const MOCK_PLAYTIME = 400;
+const MOCK_SAVECOUNT = 600;
+const MOCK_BATTLECOUNT = 700;
+const MOCK_WINCOUNT = 800;
+const MOCK_ESCAPECOUNT = 900;
+
+const MOCK_GOLD = 4980;
+const MOCK_STEPS = 8976;
+
+const SYSTEM_FUNTION_KEYS = [
+  "playtime",
+  "saveCount",
+  "battleCount",
+  "winCount",
+  "escapeCount",
+] as const satisfies (keyof Rmmz_System)[];
+
+const PARTY_FUNCTION_KEYS = [
+  "gold",
+  "steps",
+  "gainGold",
+  "loseGold",
+] as const satisfies (keyof Game_Party)[];
 
 const createMockedVariable = (): MockedObject<Rmmz_Variables> => ({
   clear: vi.fn(),
@@ -27,6 +55,10 @@ const createMockParty = (actorIds: number[]): Game_Party => {
   const party = new Game_Party();
   party._actors = [...actorIds];
   vi.spyOn(party, "members");
+  vi.spyOn(party, "gold").mockReturnValue(MOCK_GOLD);
+  vi.spyOn(party, "gainGold");
+  vi.spyOn(party, "loseGold");
+  vi.spyOn(party, "steps").mockReturnValue(MOCK_STEPS);
   return party;
 };
 type MockedActors = MockedObject<Rmmz_ActorsTemplate<FakeActor>>;
@@ -36,27 +68,11 @@ const makeMockActors = (actor: FakeActor[]): MockedActors => ({
   initialize: vi.fn(),
 });
 
-const MOCK_MAP_ID = 123456 as const;
-
 const makeMockMap = (): FakeMap => ({
   mapId: () => MOCK_MAP_ID,
 });
 
-const SYSTEM_FUNTION_KEYS = [
-  "playtime",
-  "saveCount",
-  "battleCount",
-  "winCount",
-  "escapeCount",
-] as const satisfies (keyof Rmmz_System)[];
-
 type FakeSystem = Pick<Rmmz_System, (typeof SYSTEM_FUNTION_KEYS)[number]>;
-
-const MOCK_PLAYTIME = 400;
-const MOCK_SAVECOUNT = 600;
-const MOCK_BATTLECOUNT = 700;
-const MOCK_WINCOUNT = 800;
-const MOCK_ESCAPECOUNT = 900;
 
 const createMokedSystem = (): MockedObject<FakeSystem> => ({
   playtime: vi.fn<FakeSystem["playtime"]>(() => MOCK_PLAYTIME),
@@ -87,6 +103,7 @@ const createMockedObjects = () => {
 
 interface FunctionKeys {
   systems: (keyof FakeSystem)[];
+  party: (keyof Game_Party)[];
 }
 
 interface TestCase {
@@ -154,8 +171,13 @@ const runTestCase = (testCase: TestCase) => {
       interpreter.executeCommand();
       callTestEx<FakeSystem>(
         mocks.mockedSystem,
-        new Set(testCase.fnCalles.systems),
+        new Set(testCase.fnCalles.systems ?? []),
         SYSTEM_FUNTION_KEYS,
+      );
+      callTestEx<Game_Party>(
+        mocks.mockParty,
+        new Set(testCase.fnCalles.party ?? []),
+        PARTY_FUNCTION_KEYS,
       );
     });
   });
@@ -164,7 +186,7 @@ const runTestCase = (testCase: TestCase) => {
 const testCases: TestCase[] = [
   {
     testName: "constant",
-    fnCalles: { systems: [] },
+    fnCalles: { party: [], systems: [] },
     setValue: { id: 1, value: 123 },
     command: makeCommandVariableFromConstant(
       {
@@ -180,7 +202,7 @@ const testCases: TestCase[] = [
   },
   {
     testName: "mapId",
-    fnCalles: { systems: [] },
+    fnCalles: { party: [], systems: [] },
     setValue: { id: 201, value: MOCK_MAP_ID },
     command: makeCommandVariableFromMapId({ startId: 201 }),
     commandLiteral: {
@@ -191,7 +213,10 @@ const testCases: TestCase[] = [
   },
   {
     testName: "partyMembers",
-    fnCalles: { systems: [] },
+    fnCalles: {
+      party: ["members"],
+      systems: [],
+    },
     setValue: { id: 233, value: 3 },
     command: makeCommandVariableFromPartyMembers({ startId: 233 }),
     commandLiteral: {
@@ -201,8 +226,39 @@ const testCases: TestCase[] = [
     },
   },
   {
+    testName: "gold",
+    fnCalles: {
+      party: ["gold"],
+      systems: [],
+    },
+    setValue: { id: 250, value: MOCK_GOLD },
+    command: makeCommandVariableFromPartyGold({ startId: 250 }),
+    commandLiteral: {
+      code: 122,
+      indent: 0,
+      parameters: [250, 250, 0, 3, 7, 2],
+    },
+  },
+  {
+    testName: "steps",
+    fnCalles: {
+      party: ["steps"],
+      systems: [],
+    },
+    setValue: { id: 0xff6, value: MOCK_STEPS },
+    command: makeCommandVariableFromPartySteps({ startId: 0xff6 }),
+    commandLiteral: {
+      code: 122,
+      indent: 0,
+      parameters: [0xff6, 0xff6, 0, 3, 7, 3],
+    },
+  },
+  {
     testName: "playtime",
-    fnCalles: { systems: ["playtime"] },
+    fnCalles: {
+      systems: ["playtime"],
+      party: [],
+    },
     setValue: { id: 2, value: MOCK_PLAYTIME },
     command: makeCommandVariableFromPlaytime({ startId: 2 }),
     commandLiteral: {
@@ -213,7 +269,7 @@ const testCases: TestCase[] = [
   },
   {
     testName: "saveCount",
-    fnCalles: { systems: ["saveCount"] },
+    fnCalles: { systems: ["saveCount"], party: [] },
     setValue: { id: 47, value: MOCK_SAVECOUNT },
     command: makeCommandSystemSaveCount({ startId: 47 }),
     commandLiteral: {
@@ -224,7 +280,7 @@ const testCases: TestCase[] = [
   },
   {
     testName: "battleCount",
-    fnCalles: { systems: ["battleCount"] },
+    fnCalles: { systems: ["battleCount"], party: [] },
     setValue: { id: 52, value: MOCK_BATTLECOUNT },
     command: makeCommandSystemBattleCount({ startId: 52 }),
     commandLiteral: {
@@ -235,7 +291,7 @@ const testCases: TestCase[] = [
   },
   {
     testName: "winCount",
-    fnCalles: { systems: ["winCount"] },
+    fnCalles: { systems: ["winCount"], party: [] },
     setValue: { id: 63, value: MOCK_WINCOUNT },
     command: makeCommandSystemWinCount({ startId: 63 }),
     commandLiteral: {
@@ -246,7 +302,7 @@ const testCases: TestCase[] = [
   },
   {
     testName: "escapeCount",
-    fnCalles: { systems: ["escapeCount"] },
+    fnCalles: { systems: ["escapeCount"], party: [] },
     setValue: { id: 78, value: MOCK_ESCAPECOUNT },
     command: makeCommandSystemEscapeCount({ startId: 78 }),
     commandLiteral: {
