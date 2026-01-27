@@ -28,27 +28,27 @@ interface MakeMocksResult {
   mockVariables: MockedObject<Rmmz_Variables>;
 }
 
-const each = (mockParty: Game_Party) => {
+const expectPartyMembersCalled = (mockParty: Game_Party) => {
   expect(mockParty.members).toHaveBeenCalledTimes(1);
 };
 
-const single = (mockParty: Game_Party) => {
+const expectPartyMembersNotCalled = (mockParty: Game_Party) => {
   expect(mockParty.members).not.toHaveBeenCalled();
 };
 
 const paramCalledWith = (
   command: Command_ChangeActorHP,
-  interpreter: Game_Interpreter
+  interpreter: Game_Interpreter,
 ) => {
   expect(interpreter.iterateActorEx).toHaveBeenCalledWith(
     command.parameters[0],
     command.parameters[1],
-    expect.any(Function)
+    expect.any(Function),
   );
   expect(interpreter.operateValue).toHaveBeenCalledWith(
     command.parameters[2],
     command.parameters[3],
-    command.parameters[4]
+    command.parameters[4],
   );
   const key: keyof Game_Interpreter = `command${command.code}` as const;
   expect(interpreter[key]).toHaveBeenCalledWith(command.parameters);
@@ -110,7 +110,7 @@ const makeMockMap = (): FakeMap => ({
 });
 
 const makeMockVariables = (
-  values: Record<number, number>
+  values: Record<number, number>,
 ): MockedObject<Rmmz_Variables> => {
   return {
     clear: vi.fn(),
@@ -177,7 +177,7 @@ const runTestCase = (testCase: TestCase) => {
 };
 const testCasesHP: TestCaseTemplate<Command_ChangeActorHP>[] = [
   {
-    caseName: "gain HP actorId=1 value=123 allowDeath=false",
+    caseName: "gain HP actorId = 1 ,value = 123, allowDeath=false",
     command: {
       code: 311,
       indent: 0,
@@ -189,7 +189,7 @@ const testCasesHP: TestCaseTemplate<Command_ChangeActorHP>[] = [
       target: 1,
       operand: { mode: "direct", value: 123 },
     }),
-    members: (party) => single(party),
+    members: (party) => expectPartyMembersNotCalled(party),
     actors: { called: [1], notCalled: [2] },
     changeValue: ([a1, a2]) => {
       expect(a1.gainHp).toHaveBeenCalledWith(123);
@@ -200,7 +200,7 @@ const testCasesHP: TestCaseTemplate<Command_ChangeActorHP>[] = [
     },
   },
   {
-    caseName: "gain HP actorId=1 value=123 allowDeath=true",
+    caseName: "gain HP actorId = 1, value = 123 ,allowDeath = true",
     command: {
       code: 311,
       indent: 0,
@@ -212,7 +212,7 @@ const testCasesHP: TestCaseTemplate<Command_ChangeActorHP>[] = [
       target: 1,
       operand: { mode: "direct", value: 123 },
     }),
-    members: (party) => single(party),
+    members: (party) => expectPartyMembersNotCalled(party),
     actors: { called: [1], notCalled: [2] },
     changeValue: ([a1, a2]) => {
       expect(a1.gainHp).toHaveBeenCalledWith(123);
@@ -223,7 +223,7 @@ const testCasesHP: TestCaseTemplate<Command_ChangeActorHP>[] = [
     },
   },
   {
-    caseName: "gain HP actorId=1 value=V[81]:123 allowDeath=false",
+    caseName: "gain HP actorId = 1, value=V[81]:123 allowDeath=false",
     command: {
       code: 311,
       indent: 0,
@@ -235,7 +235,7 @@ const testCasesHP: TestCaseTemplate<Command_ChangeActorHP>[] = [
       target: 1,
       operand: { mode: "variable", value: 81 },
     }),
-    members: (party) => single(party),
+    members: (party) => expectPartyMembersNotCalled(party),
     actors: { called: [1], notCalled: [2] },
     variableLiteral: { 81: 123 },
     changeValue: ([a1, a2]) => {
@@ -248,7 +248,7 @@ const testCasesHP: TestCaseTemplate<Command_ChangeActorHP>[] = [
     },
   },
   {
-    caseName: "gain HP each value=123 allowDeath=false",
+    caseName: "gain HP each value = 123 allowDeath=false",
     command: {
       code: 311,
       indent: 0,
@@ -259,7 +259,7 @@ const testCasesHP: TestCaseTemplate<Command_ChangeActorHP>[] = [
       targetType: "each",
       operand: { mode: "direct", value: 123 },
     }),
-    members: (party) => each(party),
+    members: (party) => expectPartyMembersCalled(party),
     actors: { called: [1, 2], notCalled: [] },
     changeValue: ([a1, a2]) => {
       expect(a1.gainHp).toHaveBeenCalledWith(123);
@@ -270,7 +270,7 @@ const testCasesHP: TestCaseTemplate<Command_ChangeActorHP>[] = [
     },
   },
   {
-    caseName: "gain HP each value=123 allowDeath=true",
+    caseName: "gain HP each value = 123 allowDeath=true",
     command: {
       code: 311,
       indent: 0,
@@ -281,7 +281,7 @@ const testCasesHP: TestCaseTemplate<Command_ChangeActorHP>[] = [
       targetType: "each",
       operand: { mode: "direct", value: 123 },
     }),
-    members: (party) => each(party),
+    members: (party) => expectPartyMembersCalled(party),
     actors: { called: [1, 2], notCalled: [] },
     changeValue: ([a1, a2]) => {
       expect(a1.gainHp).toHaveBeenCalledWith(123);
@@ -292,7 +292,7 @@ const testCasesHP: TestCaseTemplate<Command_ChangeActorHP>[] = [
     },
   },
   {
-    caseName: "gain HP each value=V[81]:123 allowDeath=true",
+    caseName: "gain HP each value=V[81]:123, allowDeath=true",
     command: {
       code: 311,
       indent: 0,
@@ -303,7 +303,7 @@ const testCasesHP: TestCaseTemplate<Command_ChangeActorHP>[] = [
       targetType: "each",
       operand: { mode: "variable", value: 81 },
     }),
-    members: (party) => each(party),
+    members: (party) => expectPartyMembersCalled(party),
     actors: { called: [1, 2], notCalled: [] },
     variableLiteral: { 81: 123 },
     changeValue: ([a1, a2]) => {
@@ -317,7 +317,7 @@ const testCasesHP: TestCaseTemplate<Command_ChangeActorHP>[] = [
     },
   },
   {
-    caseName: "gain HP actorId=V[80] value=V[81] allowDeath=false",
+    caseName: "gain HP actorId=V[80], value=V[81], allowDeath=false",
     command: {
       code: 311,
       indent: 0,
@@ -329,7 +329,7 @@ const testCasesHP: TestCaseTemplate<Command_ChangeActorHP>[] = [
       target: 80,
       operand: { mode: "variable", value: 81 },
     }),
-    members: (party) => single(party),
+    members: (party) => expectPartyMembersNotCalled(party),
     actors: { called: [2], notCalled: [1] },
     variableLiteral: { 80: 2, 81: 123 },
     changeValue: ([a1, a2]) => {
@@ -345,7 +345,7 @@ const testCasesHP: TestCaseTemplate<Command_ChangeActorHP>[] = [
     },
   },
   {
-    caseName: "gain HP actorId=1 value=V[81]:123 allowDeath=true",
+    caseName: "gain HP actorId = 1, value=V[81]:123 allowDeath=true",
     command: {
       code: 311,
       indent: 0,
@@ -357,7 +357,7 @@ const testCasesHP: TestCaseTemplate<Command_ChangeActorHP>[] = [
       target: 1,
       operand: { mode: "variable", value: 81 },
     }),
-    members: (party) => single(party),
+    members: (party) => expectPartyMembersNotCalled(party),
     actors: { called: [1], notCalled: [2] },
     variableLiteral: { 81: 123 },
     changeValue: ([a1, a2]) => {
@@ -381,7 +381,7 @@ const testCasesHP: TestCaseTemplate<Command_ChangeActorHP>[] = [
       targetType: "each",
       operand: { mode: "variable", value: 81 },
     }),
-    members: (party) => each(party),
+    members: (party) => expectPartyMembersCalled(party),
     actors: { called: [1, 2], notCalled: [] },
     variableLiteral: { 81: 123 },
     changeValue: ([a1, a2]) => {
@@ -396,7 +396,7 @@ const testCasesHP: TestCaseTemplate<Command_ChangeActorHP>[] = [
   },
 
   {
-    caseName: "gain HP actorId=V[80]:2 value=123 allowDeath=true",
+    caseName: "gain HP actorId=V[80]:2, value = 123, allowDeath=true",
     command: {
       code: 311,
       indent: 0,
@@ -408,7 +408,7 @@ const testCasesHP: TestCaseTemplate<Command_ChangeActorHP>[] = [
       target: 80,
       operand: { mode: "direct", value: 123 },
     }),
-    members: (party) => single(party),
+    members: (party) => expectPartyMembersNotCalled(party),
     actors: { called: [2], notCalled: [1] },
     variableLiteral: { 80: 2 },
     changeValue: ([a1, a2]) => {
@@ -423,7 +423,7 @@ const testCasesHP: TestCaseTemplate<Command_ChangeActorHP>[] = [
   },
 
   {
-    caseName: "gain HP actorId=V[80]:2 value=V[81]:123 allowDeath=true",
+    caseName: "gain HP - actorId=V[80]:2, value=V[81]:123, allowDeath = true",
     command: {
       code: 311,
       indent: 0,
@@ -435,7 +435,7 @@ const testCasesHP: TestCaseTemplate<Command_ChangeActorHP>[] = [
       target: 80,
       operand: { mode: "variable", value: 81 },
     }),
-    members: (party) => single(party),
+    members: (party) => expectPartyMembersNotCalled(party),
     actors: { called: [2], notCalled: [1] },
     variableLiteral: { 80: 2, 81: 123 },
     changeValue: ([a1, a2]) => {
@@ -451,7 +451,7 @@ const testCasesHP: TestCaseTemplate<Command_ChangeActorHP>[] = [
     },
   }, // HP: lose（減少）パターン
   {
-    caseName: "lose HP actorId=1 value=123 allowDeath=false",
+    caseName: "lose HP actorId = 1, value = 123, allowDeath = false",
     command: {
       code: 311,
       indent: 0,
@@ -463,7 +463,7 @@ const testCasesHP: TestCaseTemplate<Command_ChangeActorHP>[] = [
       target: 1,
       operand: { mode: "direct", value: 123 },
     }),
-    members: (party) => single(party),
+    members: (party) => expectPartyMembersNotCalled(party),
     actors: { called: [1], notCalled: [2] },
     changeValue: ([a1, a2]) => {
       expect(a1.gainHp).toHaveBeenCalledWith(-123);
@@ -474,7 +474,7 @@ const testCasesHP: TestCaseTemplate<Command_ChangeActorHP>[] = [
     },
   },
   {
-    caseName: "lose HP actorId=V[80]:2 value=V[81]:123 allowDeath=true",
+    caseName: "lose HP actorId=V[80]:2, value=V[81]:123, allowDeath=true",
     command: {
       code: 311,
       indent: 0,
@@ -486,7 +486,7 @@ const testCasesHP: TestCaseTemplate<Command_ChangeActorHP>[] = [
       target: 80,
       operand: { mode: "variable", value: 81 },
     }),
-    members: (party) => single(party),
+    members: (party) => expectPartyMembersNotCalled(party),
     actors: { called: [2], notCalled: [1] },
     variableLiteral: { 80: 2, 81: 123 },
     changeValue: ([a1, a2]) => {
