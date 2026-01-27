@@ -1,3 +1,4 @@
+import type { Data_Item, Data_Weapon, Data_Armor } from "@RpgTypes/rmmz/rpg";
 import type { Rmmz_Actor } from "./core";
 import type { Rmmz_UnitPlayer } from "./core/unit/player";
 import type { Rmmz_Unit } from "./core/unit/unit";
@@ -11,5 +12,9 @@ export declare class Game_Party
   steps(): number;
   gainGold(amount: number): void;
   loseGold(amount: number): void;
+  numItems(
+    item: Data_Item | Data_Weapon | Data_Armor,
+    includeEquip: boolean,
+  ): number;
   _actors: number[];
 }
