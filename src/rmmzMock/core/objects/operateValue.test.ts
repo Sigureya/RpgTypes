@@ -1,7 +1,10 @@
 import type { MockedObject } from "vitest";
 import { describe, expect, test, vi } from "vitest";
 import type { Command_ControlVariables } from "@RpgTypes/rmmz/eventCommand";
-import { makeCommandVariableFromConstant } from "@RpgTypes/rmmz/eventCommand";
+import {
+  makeCommandSystemPlaytime,
+  makeCommandVariableFromConstant,
+} from "@RpgTypes/rmmz/eventCommand";
 import type { Rmmz_System, Rmmz_Variables } from "@RpgTypes/rmmzRuntime";
 import type { FakeMap } from "./fakes/types";
 import { Game_Interpreter } from "./rmmz_objects";
@@ -93,7 +96,7 @@ const runTestCase = (testCase: TestCase) => {
     test("literal equality", () => {
       expect(testCase.command).toEqual(testCase.commandLiteral);
     });
-    test("", () => {
+    test("value set", () => {
       const { mockedMap, mockedSystem, mockedVariables } =
         createMockedObjects();
 
@@ -107,8 +110,13 @@ const runTestCase = (testCase: TestCase) => {
       const interpreter = createMockedInterpreter();
       interpreter.setup([testCase.command], 0);
       interpreter.executeCommand();
+      expect(mockedVariables.value).toHaveBeenCalledWith(testCase.setValue.id);
+      expect(mockedVariables.setValue).toHaveBeenCalledWith(
+        testCase.setValue.id,
+        testCase.setValue.value,
+      );
     });
-    test("", () => {
+    test("function calls", () => {
       const { mockedMap, mockedSystem, mockedVariables } =
         createMockedObjects();
       vi.stubGlobal("$gameMap", mockedMap);
@@ -118,11 +126,6 @@ const runTestCase = (testCase: TestCase) => {
       const interpreter = createMockedInterpreter();
       interpreter.setup([testCase.command], 0);
       interpreter.executeCommand();
-      expect(mockedVariables.value).toHaveBeenCalledWith(testCase.setValue.id);
-      expect(mockedVariables.setValue).toHaveBeenCalledWith(
-        testCase.setValue.id,
-        testCase.setValue.value,
-      );
       callTestEx<FakeSystem>(
         mockedSystem,
         new Set(testCase.fnCalles.systems),
@@ -136,10 +139,7 @@ const testCases: TestCase[] = [
   {
     testName: "constant",
     fnCalles: { systems: [], variables: [] },
-    setValue: {
-      value: 123,
-      id: 1,
-    },
+    setValue: { id: 1, value: 123 },
     command: makeCommandVariableFromConstant(
       {
         startId: 1,
@@ -150,6 +150,17 @@ const testCases: TestCase[] = [
       code: 122,
       indent: 0,
       parameters: [1, 1, 0, 0, 123],
+    },
+  },
+  {
+    testName: "playtime",
+    fnCalles: { systems: ["playtime"], variables: [] },
+    setValue: { id: 2, value: MOCK_PLAYTIME },
+    command: makeCommandSystemPlaytime({ startId: 2 }),
+    commandLiteral: {
+      code: 122,
+      indent: 0,
+      parameters: [2, 2, 0, 3, 7, 4],
     },
   },
 ];
