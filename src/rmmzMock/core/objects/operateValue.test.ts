@@ -12,6 +12,7 @@ import {
   makeCommandVariableFromPartyMembers,
   makeCommandVariableFromPartySteps,
   makeCommandVariableFromPartyGold,
+  makeCommandVariableFromVariable,
 } from "@RpgTypes/rmmz/eventCommand";
 import type { Rmmz_System, Rmmz_Variables } from "@RpgTypes/rmmzRuntime";
 import type { Rmmz_ActorsTemplate } from "@RpgTypes/rmmzRuntime/objects/core/battler/actors";
@@ -29,6 +30,8 @@ const MOCK_ESCAPECOUNT = 900;
 const MOCK_GOLD = 4980;
 const MOCK_STEPS = 8976;
 
+const MOCK_OLD_VALUE = 60;
+
 const SYSTEM_FUNTION_KEYS = [
   "playtime",
   "saveCount",
@@ -42,6 +45,8 @@ const PARTY_FUNCTION_KEYS = [
   "steps",
   "gainGold",
   "loseGold",
+  "members",
+  "numItems",
 ] as const satisfies (keyof Game_Party)[];
 
 const createMockedVariable = (): MockedObject<Rmmz_Variables> => ({
@@ -59,6 +64,7 @@ const createMockParty = (actorIds: number[]): Game_Party => {
   vi.spyOn(party, "gainGold");
   vi.spyOn(party, "loseGold");
   vi.spyOn(party, "steps").mockReturnValue(MOCK_STEPS);
+  vi.spyOn(party, "numItems");
   return party;
 };
 type MockedActors = MockedObject<Rmmz_ActorsTemplate<FakeActor>>;
@@ -109,12 +115,14 @@ interface FunctionKeys {
 interface TestCase {
   testName: string;
   fnCalles: FunctionKeys;
-  command: Command_ControlVariables;
-  commandLiteral: Command_ControlVariables;
   setValue: {
     value: number;
     id: number;
   };
+  // 変数操作コマンド。ここには生成関数の戻り値を置く
+  command: Command_ControlVariables;
+  // 数値直書き。生成関数のバグと値のバグを切り分けるためにある
+  commandLiteral: Command_ControlVariables;
 }
 
 const callTestEx = <T>(
@@ -185,14 +193,13 @@ const runTestCase = (testCase: TestCase) => {
 
 const testCases: TestCase[] = [
   {
-    testName: "constant",
+    testName: "constant set",
     fnCalles: { party: [], systems: [] },
     setValue: { id: 1, value: 123 },
     command: makeCommandVariableFromConstant(
-      {
-        startId: 1,
-      },
+      { startId: 1 },
       { value: 123 },
+      { indent: 0, operation: 0 },
     ),
     commandLiteral: {
       code: 122,
