@@ -21,44 +21,47 @@ import type { Command_ChangeActorProfile } from "./types";
 describe("makeCommandChangeActorName", () => {
   test("should create a command to change actor name", () => {
     const param: ParamObject_ChangeActorName = { actorId: 1, name: "New Name" };
-    const indent = 2;
     const expected: Command_ChangeActorName = {
       code: CHANGE_NAME,
-      parameters: [param.actorId, param.name],
-      indent,
+      parameters: [1, "New Name"],
+      indent: 2,
     };
-    expect(makeCommandChangeActorName(param, indent)).toEqual(expected);
+    const result: Command_ChangeActorName = makeCommandChangeActorName(
+      param,
+      2,
+    );
+    expect(result).toEqual(expected);
   });
 });
 
 describe("makeCommandChangeActorNickName", () => {
   test("should create a command to change actor nickname", () => {
     const param: ParamObject_ChangeActorNickName = {
-      actorId: 2,
+      actorId: 7,
       nickname: "New Nickname",
     };
-    const indent = 3;
     const expected: Command_ChangeActorNickName = {
       code: CHANGE_NICKNAME,
-      parameters: [param.actorId, param.nickname],
-      indent,
+      parameters: [7, "New Nickname"],
+      indent: 3,
     };
-    expect(makeCommandChangeActorNickName(param, indent)).toEqual(expected);
+    const result = makeCommandChangeActorNickName(param, 3);
+    expect(result).toEqual(expected);
   });
 });
 
 describe("makeCommandChangeActorProfile", () => {
   test("should create a command to change actor profile", () => {
     const param: ParamObject_ChangeActorProfile = {
-      actorId: 3,
-      profile: "New Profile",
+      actorId: 5,
+      profile: "New Profile Text",
     };
-    const indent = 4;
     const expected: Command_ChangeActorProfile = {
       code: CHANGE_PROFILE,
-      parameters: [param.actorId, param.profile],
-      indent,
+      parameters: [5, "New Profile Text"],
+      indent: 1,
     };
-    expect(makeCommandChangeActorProfile(param, indent)).toEqual(expected);
+    const result = makeCommandChangeActorProfile(param, 1);
+    expect(result).toEqual(expected);
   });
 });
