@@ -2,12 +2,19 @@ import type { MockedObject } from "vitest";
 import { describe, expect, test, vi } from "vitest";
 import type { Command_ControlVariables } from "@RpgTypes/rmmz/eventCommand";
 import {
-  makeCommandSystemPlaytime,
+  makeCommandVariableFromPlaytime,
   makeCommandVariableFromConstant,
+  makeCommandSystemSaveCount,
+  makeCommandSystemBattleCount,
+  makeCommandSystemWinCount,
+  makeCommandSystemEscapeCount,
+  makeCommandVariableFromMapId,
+  makeCommandVariableFromPartyMembers,
 } from "@RpgTypes/rmmz/eventCommand";
 import type { Rmmz_System, Rmmz_Variables } from "@RpgTypes/rmmzRuntime";
-import type { FakeMap } from "./fakes/types";
-import { Game_Interpreter } from "./rmmz_objects";
+import type { Rmmz_ActorsTemplate } from "@RpgTypes/rmmzRuntime/objects/core/battler/actors";
+import type { FakeActor, FakeMap } from "./fakes/types";
+import { Game_Interpreter, Game_Party } from "./rmmz_objects";
 
 const createMockedVariable = (): MockedObject<Rmmz_Variables> => ({
   clear: vi.fn(),
@@ -16,8 +23,23 @@ const createMockedVariable = (): MockedObject<Rmmz_Variables> => ({
   onChange: vi.fn(),
 });
 
+const createMockParty = (actorIds: number[]): Game_Party => {
+  const party = new Game_Party();
+  party._actors = [...actorIds];
+  vi.spyOn(party, "members");
+  return party;
+};
+type MockedActors = MockedObject<Rmmz_ActorsTemplate<FakeActor>>;
+
+const makeMockActors = (actor: FakeActor[]): MockedActors => ({
+  actor: vi.fn((id: number) => actor.find((a) => a.actorId() === id) || null),
+  initialize: vi.fn(),
+});
+
+const MOCK_MAP_ID = 123456 as const;
+
 const makeMockMap = (): FakeMap => ({
-  mapId: () => 123456,
+  mapId: () => MOCK_MAP_ID,
 });
 
 const SYSTEM_FUNTION_KEYS = [
@@ -58,12 +80,13 @@ const createMockedObjects = () => {
     mockedMap: makeMockMap(),
     mockedVariables: createMockedVariable(),
     mockedSystem: createMokedSystem(),
+    mockParty: createMockParty([1, 2, 3]),
+    mockActors: makeMockActors([]),
   };
 };
 
 interface FunctionKeys {
   systems: (keyof FakeSystem)[];
-  variables: (keyof Rmmz_Variables)[];
 }
 
 interface TestCase {
@@ -91,18 +114,22 @@ const callTestEx = <T>(
   });
 };
 
+const stubGlobal = (mocks: ReturnType<typeof createMockedObjects>) => {
+  vi.stubGlobal("$gameMap", mocks.mockedMap);
+  vi.stubGlobal("$gameVariables", mocks.mockedVariables);
+  vi.stubGlobal("$gameSystem", mocks.mockedSystem);
+  vi.stubGlobal("$gameParty", mocks.mockParty);
+  vi.stubGlobal("$gameActors", mocks.mockActors);
+};
+
 const runTestCase = (testCase: TestCase) => {
   describe(`operateValue Test: ${testCase.testName}`, () => {
     test("literal equality", () => {
       expect(testCase.command).toEqual(testCase.commandLiteral);
     });
     test("value set", () => {
-      const { mockedMap, mockedSystem, mockedVariables } =
-        createMockedObjects();
-
-      vi.stubGlobal("$gameMap", mockedMap);
-      vi.stubGlobal("$gameVariables", mockedVariables);
-      vi.stubGlobal("$gameSystem", mockedSystem);
+      const mocks = createMockedObjects();
+      stubGlobal(mocks);
 
       // @ts-ignore
       Math.randomInt = () => 0;
@@ -110,24 +137,23 @@ const runTestCase = (testCase: TestCase) => {
       const interpreter = createMockedInterpreter();
       interpreter.setup([testCase.command], 0);
       interpreter.executeCommand();
-      expect(mockedVariables.value).toHaveBeenCalledWith(testCase.setValue.id);
-      expect(mockedVariables.setValue).toHaveBeenCalledWith(
+      expect(mocks.mockedVariables.value).toHaveBeenCalledWith(
+        testCase.setValue.id,
+      );
+      expect(mocks.mockedVariables.setValue).toHaveBeenCalledWith(
         testCase.setValue.id,
         testCase.setValue.value,
       );
     });
     test("function calls", () => {
-      const { mockedMap, mockedSystem, mockedVariables } =
-        createMockedObjects();
-      vi.stubGlobal("$gameMap", mockedMap);
-      vi.stubGlobal("$gameVariables", mockedVariables);
-      vi.stubGlobal("$gameSystem", mockedSystem);
+      const mocks = createMockedObjects();
+      stubGlobal(mocks);
 
       const interpreter = createMockedInterpreter();
       interpreter.setup([testCase.command], 0);
       interpreter.executeCommand();
       callTestEx<FakeSystem>(
-        mockedSystem,
+        mocks.mockedSystem,
         new Set(testCase.fnCalles.systems),
         SYSTEM_FUNTION_KEYS,
       );
@@ -138,7 +164,7 @@ const runTestCase = (testCase: TestCase) => {
 const testCases: TestCase[] = [
   {
     testName: "constant",
-    fnCalles: { systems: [], variables: [] },
+    fnCalles: { systems: [] },
     setValue: { id: 1, value: 123 },
     command: makeCommandVariableFromConstant(
       {
@@ -153,14 +179,80 @@ const testCases: TestCase[] = [
     },
   },
   {
+    testName: "mapId",
+    fnCalles: { systems: [] },
+    setValue: { id: 201, value: MOCK_MAP_ID },
+    command: makeCommandVariableFromMapId({ startId: 201 }),
+    commandLiteral: {
+      code: 122,
+      indent: 0,
+      parameters: [201, 201, 0, 3, 7, 0],
+    },
+  },
+  {
+    testName: "partyMembers",
+    fnCalles: { systems: [] },
+    setValue: { id: 233, value: 3 },
+    command: makeCommandVariableFromPartyMembers({ startId: 233 }),
+    commandLiteral: {
+      code: 122,
+      indent: 0,
+      parameters: [233, 233, 0, 3, 7, 1],
+    },
+  },
+  {
     testName: "playtime",
-    fnCalles: { systems: ["playtime"], variables: [] },
+    fnCalles: { systems: ["playtime"] },
     setValue: { id: 2, value: MOCK_PLAYTIME },
-    command: makeCommandSystemPlaytime({ startId: 2 }),
+    command: makeCommandVariableFromPlaytime({ startId: 2 }),
     commandLiteral: {
       code: 122,
       indent: 0,
       parameters: [2, 2, 0, 3, 7, 4],
+    },
+  },
+  {
+    testName: "saveCount",
+    fnCalles: { systems: ["saveCount"] },
+    setValue: { id: 47, value: MOCK_SAVECOUNT },
+    command: makeCommandSystemSaveCount({ startId: 47 }),
+    commandLiteral: {
+      code: 122,
+      indent: 0,
+      parameters: [47, 47, 0, 3, 7, 6],
+    },
+  },
+  {
+    testName: "battleCount",
+    fnCalles: { systems: ["battleCount"] },
+    setValue: { id: 52, value: MOCK_BATTLECOUNT },
+    command: makeCommandSystemBattleCount({ startId: 52 }),
+    commandLiteral: {
+      code: 122,
+      indent: 0,
+      parameters: [52, 52, 0, 3, 7, 7],
+    },
+  },
+  {
+    testName: "winCount",
+    fnCalles: { systems: ["winCount"] },
+    setValue: { id: 63, value: MOCK_WINCOUNT },
+    command: makeCommandSystemWinCount({ startId: 63 }),
+    commandLiteral: {
+      code: 122,
+      indent: 0,
+      parameters: [63, 63, 0, 3, 7, 8],
+    },
+  },
+  {
+    testName: "escapeCount",
+    fnCalles: { systems: ["escapeCount"] },
+    setValue: { id: 78, value: MOCK_ESCAPECOUNT },
+    command: makeCommandSystemEscapeCount({ startId: 78 }),
+    commandLiteral: {
+      code: 122,
+      indent: 0,
+      parameters: [78, 78, 0, 3, 7, 9],
     },
   },
 ];

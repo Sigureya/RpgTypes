@@ -8,15 +8,11 @@ import {
   makeCommandGainActorHP,
   makeCommandLoseActorHP,
 } from "@RpgTypes/rmmz/eventCommand";
-import type { Rmmz_Actor, Rmmz_Variables } from "@RpgTypes/rmmzRuntime";
+import type { Rmmz_Variables } from "@RpgTypes/rmmzRuntime";
 import type { Rmmz_ActorsTemplate } from "@RpgTypes/rmmzRuntime/objects/core/battler/actors";
-import type { FakeMap } from "./fakes/types";
+import type { FakeActor, FakeMap } from "./fakes/types";
 import { Game_Party, Game_Interpreter } from "./rmmz_objects";
 
-type FakeActor = Pick<
-  Rmmz_Actor,
-  "actorId" | "gainHp" | "loseHp" | "isAlive" | "isDead"
->;
 type MockedActors = MockedObject<Rmmz_ActorsTemplate<FakeActor>>;
 
 interface MakeMocksResult {
