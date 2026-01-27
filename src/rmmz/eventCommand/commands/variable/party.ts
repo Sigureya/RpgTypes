@@ -41,6 +41,23 @@ export const makeCommandVariableFromPartyMembers = (
     ],
   };
 };
+export const makeCommandVariableFromPartySteps = (
+  target: ParamObject_WritingTarget,
+  operation: number = 0,
+): Command_ControlVariables<Operand_OtherData> => {
+  return {
+    code: CONTROL_VARIABLES,
+    indent: 0,
+    parameters: [
+      target.startId,
+      target.endId ?? target.startId,
+      operation,
+      3,
+      7,
+      3 satisfies OTHER["STEPS"],
+    ],
+  };
+};
 
 export const makeCommandVariableFromPartyGold = (
   target: ParamObject_WritingTarget,
