@@ -1,4 +1,5 @@
 export * from "./constants";
+export * from "./system";
 export * from "./types";
 export { getActorValue, getEnemyValue } from "./getValue";
 export { isCommandOperandVariables } from "./gameVariable";
@@ -11,11 +12,11 @@ export {
   makeCommandVariableFromConstant,
   toArrayOperandConstant,
 } from "./literal";
+
 export {
   makeCommandVariableFromEnemyData,
   toArrayOperandEnemyStatus,
 } from "./enemy";
-
 export {
   makeCommandVariableFromItemData,
   toArrayOperandItemData,
