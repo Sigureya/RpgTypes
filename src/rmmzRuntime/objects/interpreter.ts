@@ -122,13 +122,14 @@ export declare class Game_Interpreter
   iterateActorEx(
     param1: number,
     param2: number,
-    callback: (actir: Rmmz_Actor) => void
+    callback: (actir: Rmmz_Actor) => void,
   ): void;
   iterateActorId(actorId: number, callBack: (actor: Rmmz_Actor) => void): void;
   iterateEnemyIndex(
     enemyId: number,
-    callBack: (enemy: Rmmz_Enemy) => void
+    callBack: (enemy: Rmmz_Enemy) => void,
   ): void;
+  gameDataOperand(type: number, param1: number, param2: number): number;
 
   command101(showMessage: ParamArray_ShowMessage): boolean;
   command102(setupChoice: ParamArray_SetupChoice): boolean;

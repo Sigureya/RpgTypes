@@ -28,4 +28,5 @@ export interface Rmmz_Interpreter<Coomand> {
   nextEventCode(): EventCode | 0;
   setupItemChoice(params: unknown): void;
   setupNumInput(params: unknown): void;
+  gameDataOperand(type: number, param1: number, param2: number): number;
 }
