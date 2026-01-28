@@ -22,6 +22,7 @@ import {
   makeCommandVariableFromItemData,
   makeCommandVariableFromWeapon,
   makeCommandVariableFromArmor,
+  makeCommandVariableFromTempLastData,
 } from "@RpgTypes/rmmz/eventCommand";
 import type { Rmmz_System, Rmmz_Variables } from "@RpgTypes/rmmzRuntime";
 import type { FakeActor, FakeMap } from "./fakes/types";
@@ -201,28 +202,6 @@ const stubGlobal = (mocks: ReturnType<typeof createMockedObjects>) => {
   vi.stubGlobal("$gameTemp", mocks.mockTemp);
 };
 
-// @ts-ignore
-Math.randomInt = () => 0;
-
-const valueTest = (testCase: TestCase) => {
-  test("value set", () => {
-    const mocks = createMockedObjects();
-    stubGlobal(mocks);
-
-    const interpreter = createMockedInterpreter();
-    interpreter.setup([testCase.command], 0);
-    interpreter.executeCommand();
-    expect(mocks.mockedVariables.value).toHaveBeenCalledWith(
-      testCase.setValue.id,
-    );
-    expect(mocks.mockedVariables.value).toHaveBeenCalledOnce();
-    expect(mocks.mockedVariables.setValue).toHaveBeenCalledWith(
-      testCase.setValue.id,
-      testCase.setValue.value,
-    );
-  });
-};
-
 const itemTest = (testCase: TestCase, item: Data_NamedItem | null) => {
   test("item test", () => {
     const mocks = createMockedObjects();
@@ -246,13 +225,30 @@ const tempTest = (testCase: TestCase, arg: number) => {
     expect(mocks.mockTemp.lastActionData).toHaveBeenCalledOnce();
   });
 };
+// @ts-ignore
+Math.randomInt = () => 0;
 
 const runTestCase = (testCase: TestCase) => {
   describe(`operateValue Test: ${testCase.testName}`, () => {
     test("literal equality", () => {
       expect(testCase.command).toEqual(testCase.commandLiteral);
     });
-    valueTest(testCase);
+    test("value set", () => {
+      const mocks = createMockedObjects();
+      stubGlobal(mocks);
+
+      const interpreter = createMockedInterpreter();
+      interpreter.setup([testCase.command], 0);
+      interpreter.executeCommand();
+      expect(mocks.mockedVariables.value).toHaveBeenCalledWith(
+        testCase.setValue.id,
+      );
+      expect(mocks.mockedVariables.value).toHaveBeenCalledOnce();
+      expect(mocks.mockedVariables.setValue).toHaveBeenCalledWith(
+        testCase.setValue.id,
+        testCase.setValue.value,
+      );
+    });
     test("function calls", () => {
       const mocks = createMockedObjects();
       stubGlobal(mocks);
@@ -265,15 +261,21 @@ const runTestCase = (testCase: TestCase) => {
       );
       callTestEx<FakeSystem>(
         mocks.mockedSystem,
-        new Set(testCase.fnCalles.systems ?? []),
+        new Set(testCase.fnCalles.systems),
         SYSTEM_FUNTION_KEYS,
       );
       callTestEx<Game_Party>(
         mocks.mockParty,
-        new Set(testCase.fnCalles.party ?? []),
+        new Set(testCase.fnCalles.party),
         PARTY_FUNCTION_KEYS,
       );
     });
+    describe.each(testCase.additionalTests ?? [])(
+      "additional tests",
+      (additionalTest) => {
+        additionalTest(testCase);
+      },
+    );
   });
 };
 
@@ -482,6 +484,21 @@ const testCases: TestCase[] = [
       parameters: [170, 170, 0, 3, 1, 2],
     },
     additionalTests: [(testCase) => itemTest(testCase, mockWeapons[2])],
+  },
+  {
+    testName: "temp 2 get last action data",
+    fnCalles: { party: [], systems: [] },
+    setValue: { id: 81, value: MOCK_LAST_VALUE },
+    command: makeCommandVariableFromTempLastData(
+      { startId: 81 },
+      { param: "ACTION_ACTOR_ID" },
+    ),
+    commandLiteral: {
+      code: 122,
+      indent: 0,
+      parameters: [81, 81, 0, 3, 8, 2],
+    },
+    additionalTests: [(testCase) => tempTest(testCase, 2)],
   },
   {
     testName: "mapId",
