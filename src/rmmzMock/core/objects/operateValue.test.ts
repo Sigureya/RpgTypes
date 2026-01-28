@@ -44,6 +44,8 @@ const MOCK_PARTY_MEMBERS = [3, 1, 2] as const;
 
 const MOCK_ITEM_AMOUNT = 99;
 
+const MOCK_LAST_VALUE = 789;
+
 const SYSTEM_FUNTION_KEYS = [
   "playtime",
   "saveCount",
@@ -102,6 +104,14 @@ const createMockParty = (actorIds: number[]): Game_Party => {
   return party;
 };
 
+interface FakeTemp {
+  lastActionData(dataType: number): number;
+}
+
+const createMockTemp = (): MockedObject<FakeTemp> => ({
+  lastActionData: vi.fn().mockReturnValue(MOCK_LAST_VALUE),
+});
+
 interface FakeActors {
   actor(actorId: number): FakeActor | null;
 }
@@ -140,6 +150,7 @@ const createMockedObjects = () => {
     mockedSystem: createMokedSystem(),
     mockParty: createMockParty([...MOCK_PARTY_MEMBERS]),
     mockActors: makeMockActors([]),
+    mockTemp: createMockTemp(),
   };
 };
 
@@ -147,6 +158,7 @@ interface FunctionKeys {
   systems: (keyof FakeSystem)[];
   party: (keyof Game_Party)[];
   actorsCall?: number;
+  tempCallArg?: number;
 }
 
 interface TestCase {
@@ -160,7 +172,7 @@ interface TestCase {
   command: Command_ControlVariables;
   // 数値直書き。生成関数のバグと値のバグを切り分けるためにある
   commandLiteral: Command_ControlVariables;
-  item?: Data_NamedItem | null;
+  additionalTests?: ((testCase: TestCase) => void)[];
 }
 
 const callTestEx = <T>(
@@ -186,32 +198,61 @@ const stubGlobal = (mocks: ReturnType<typeof createMockedObjects>) => {
   vi.stubGlobal("$dataItems", mockItems);
   vi.stubGlobal("$dataWeapons", mockWeapons);
   vi.stubGlobal("$dataArmors", mockArmors);
+  vi.stubGlobal("$gameTemp", mocks.mockTemp);
 };
 
 // @ts-ignore
 Math.randomInt = () => 0;
+
+const valueTest = (testCase: TestCase) => {
+  test("value set", () => {
+    const mocks = createMockedObjects();
+    stubGlobal(mocks);
+
+    const interpreter = createMockedInterpreter();
+    interpreter.setup([testCase.command], 0);
+    interpreter.executeCommand();
+    expect(mocks.mockedVariables.value).toHaveBeenCalledWith(
+      testCase.setValue.id,
+    );
+    expect(mocks.mockedVariables.value).toHaveBeenCalledOnce();
+    expect(mocks.mockedVariables.setValue).toHaveBeenCalledWith(
+      testCase.setValue.id,
+      testCase.setValue.value,
+    );
+  });
+};
+
+const itemTest = (testCase: TestCase, item: Data_NamedItem | null) => {
+  test("item test", () => {
+    const mocks = createMockedObjects();
+    stubGlobal(mocks);
+
+    const interpreter = createMockedInterpreter();
+    interpreter.setup([testCase.command], 0);
+    interpreter.executeCommand();
+    expect(mocks.mockParty.numItems).toHaveBeenCalledWith(item);
+  });
+};
+
+const tempTest = (testCase: TestCase, arg: number) => {
+  test("temp test", () => {
+    const mocks = createMockedObjects();
+    stubGlobal(mocks);
+    const interpreter = createMockedInterpreter();
+    interpreter.setup([testCase.command], 0);
+    interpreter.executeCommand();
+    expect(mocks.mockTemp.lastActionData).toHaveBeenCalledWith(arg);
+    expect(mocks.mockTemp.lastActionData).toHaveBeenCalledOnce();
+  });
+};
 
 const runTestCase = (testCase: TestCase) => {
   describe(`operateValue Test: ${testCase.testName}`, () => {
     test("literal equality", () => {
       expect(testCase.command).toEqual(testCase.commandLiteral);
     });
-    test("value set", () => {
-      const mocks = createMockedObjects();
-      stubGlobal(mocks);
-
-      const interpreter = createMockedInterpreter();
-      interpreter.setup([testCase.command], 0);
-      interpreter.executeCommand();
-      expect(mocks.mockedVariables.value).toHaveBeenCalledWith(
-        testCase.setValue.id,
-      );
-      expect(mocks.mockedVariables.value).toHaveBeenCalledOnce();
-      expect(mocks.mockedVariables.setValue).toHaveBeenCalledWith(
-        testCase.setValue.id,
-        testCase.setValue.value,
-      );
-    });
+    valueTest(testCase);
     test("function calls", () => {
       const mocks = createMockedObjects();
       stubGlobal(mocks);
@@ -232,9 +273,6 @@ const runTestCase = (testCase: TestCase) => {
         new Set(testCase.fnCalles.party ?? []),
         PARTY_FUNCTION_KEYS,
       );
-      if ("item" in testCase) {
-        expect(mocks.mockParty.numItems).toHaveBeenCalledWith(testCase.item);
-      }
     });
   });
 };
@@ -348,7 +386,6 @@ const testCases: TestCase[] = [
   {
     testName: "get item amount :item[0]->null",
     fnCalles: { party: ["numItems"], systems: [] },
-    item: null,
     setValue: { id: 150, value: 0 },
     command: makeCommandVariableFromItemData({ startId: 150 }, { itemId: 0 }),
     commandLiteral: {
@@ -356,11 +393,11 @@ const testCases: TestCase[] = [
       indent: 0,
       parameters: [150, 150, 0, 3, 0, 0],
     },
+    additionalTests: [(testCase) => itemTest(testCase, null)],
   },
   {
     testName: "get item amount :item[1]->Food",
     fnCalles: { party: ["numItems"], systems: [] },
-    item: mockItems[1],
     setValue: { id: 150, value: MOCK_ITEM_AMOUNT },
     command: makeCommandVariableFromItemData(
       { startId: 150 },
@@ -372,11 +409,11 @@ const testCases: TestCase[] = [
       indent: 2,
       parameters: [150, 150, 0, 3, 0, 1],
     },
+    additionalTests: [(testCase) => itemTest(testCase, mockItems[1])],
   },
   {
     testName: "get item amount : item[2]->Treasure",
     fnCalles: { party: ["numItems"], systems: [] },
-    item: mockItems[2],
     setValue: { id: 150, value: MOCK_ITEM_AMOUNT },
     command: makeCommandVariableFromItemData({ startId: 150 }, { itemId: 2 }),
     commandLiteral: {
@@ -384,11 +421,11 @@ const testCases: TestCase[] = [
       indent: 0,
       parameters: [150, 150, 0, 3, 0, 2],
     },
+    additionalTests: [(testCase) => itemTest(testCase, mockItems[2])],
   },
   {
     testName: "get armor amount : armor[0]->null",
     fnCalles: { party: ["numItems"], systems: [] },
-    item: mockArmors[0],
     setValue: { id: 160, value: 0 },
     command: makeCommandVariableFromArmor({ startId: 160 }, { armorId: 0 }),
     commandLiteral: {
@@ -396,11 +433,11 @@ const testCases: TestCase[] = [
       indent: 0,
       parameters: [160, 160, 0, 3, 2, 0],
     },
+    additionalTests: [(testCase) => itemTest(testCase, null)],
   },
   {
     testName: "get armor amount : armor[1]->shield",
     fnCalles: { party: ["numItems"], systems: [] },
-    item: mockArmors[1],
     setValue: { id: 160, value: MOCK_ITEM_AMOUNT },
     command: makeCommandVariableFromArmor({ startId: 160 }, { armorId: 1 }),
     commandLiteral: {
@@ -408,11 +445,11 @@ const testCases: TestCase[] = [
       indent: 0,
       parameters: [160, 160, 0, 3, 2, 1],
     },
+    additionalTests: [(testCase) => itemTest(testCase, mockArmors[1])],
   },
   {
     testName: "get armor amount : armor[2]->helmet",
     fnCalles: { party: ["numItems"], systems: [] },
-    item: mockArmors[2],
     setValue: { id: 160, value: MOCK_ITEM_AMOUNT },
     command: makeCommandVariableFromArmor({ startId: 160 }, { armorId: 2 }),
     commandLiteral: {
@@ -420,11 +457,11 @@ const testCases: TestCase[] = [
       indent: 0,
       parameters: [160, 160, 0, 3, 2, 2],
     },
+    additionalTests: [(testCase) => itemTest(testCase, mockArmors[2])],
   },
   {
     testName: "get weapon amount : weapon[0]->null",
     fnCalles: { party: ["numItems"], systems: [] },
-    item: mockWeapons[0],
     setValue: { id: 170, value: 0 },
     command: makeCommandVariableFromWeapon({ startId: 170 }, { weaponId: 0 }),
     commandLiteral: {
@@ -432,11 +469,11 @@ const testCases: TestCase[] = [
       indent: 0,
       parameters: [170, 170, 0, 3, 1, 0],
     },
+    additionalTests: [(testCase) => itemTest(testCase, null)],
   },
   {
     testName: "get weapon amount : weapon[2]->Bow",
     fnCalles: { party: ["numItems"], systems: [] },
-    item: mockWeapons[2],
     setValue: { id: 170, value: MOCK_ITEM_AMOUNT },
     command: makeCommandVariableFromWeapon({ startId: 170 }, { weaponId: 2 }),
     commandLiteral: {
@@ -444,6 +481,7 @@ const testCases: TestCase[] = [
       indent: 0,
       parameters: [170, 170, 0, 3, 1, 2],
     },
+    additionalTests: [(testCase) => itemTest(testCase, mockWeapons[2])],
   },
   {
     testName: "mapId",
