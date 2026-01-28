@@ -1,10 +1,11 @@
 import type { MockedObject } from "vitest";
 import { describe, expect, test, vi } from "vitest";
+import type { MemberFunctions } from "@RpgTypes/libs";
 import type { EventCommand } from "@RpgTypes/rmmz/eventCommand";
 import {
   makeCommandChangeVehicleImage,
   makeCommandGetOnOffVehicle,
-} from "@RpgTypes/rmmz/eventCommand/commands/vehicle/make";
+} from "@RpgTypes/rmmz/eventCommand";
 import type {
   Rmmz_Map,
   Rmmz_Variables,
@@ -91,14 +92,17 @@ const stubGlobals = (mocks: ReturnType<typeof createMockObjects>) => {
   vi.stubGlobal("$gameMap", mocks.map.map);
   vi.stubGlobal("$gameVariables", mocks.variables);
 };
-
-const callTestEx = <T>(
+const callTestEx2 = <T>(
   mock: T,
-  set: ReadonlySet<string & keyof T>,
+  set: MemberFunctions<T>[],
   allKeys: ReadonlyArray<string & keyof T>,
 ) => {
+  set.forEach((s) => {
+    expect(mock[s.fn]).toHaveBeenCalledWith(...s.arg);
+  });
+  const setKeys = new Set(set.map((s) => s.fn));
   allKeys.forEach((key) => {
-    if (set.has(key)) {
+    if (setKeys.has(key)) {
       expect(mock[key], `call - ${key}`).toHaveBeenCalledTimes(1);
     } else {
       expect(mock[key], `not call - ${key}`).not.toHaveBeenCalled();
@@ -106,14 +110,10 @@ const callTestEx = <T>(
   });
 };
 
-type VehicleFn = {
-  [K in keyof FakeVehicle]: { fn: K; arg: Parameters<FakeVehicle[K]> };
-}[keyof FakeVehicle];
-
 interface FunctionKeys {
-  player: (keyof FakePlayer)[];
-  map: (keyof FakeMap)[];
-  vehicle: VehicleFn[];
+  player: MemberFunctions<FakePlayer>[];
+  map: MemberFunctions<FakeMap>[];
+  vehicle: MemberFunctions<FakeVehicle>[];
 }
 
 interface TestCase {
@@ -135,24 +135,21 @@ const runTestCase = (testCase: TestCase) => {
       const interpreter = new Game_Interpreter();
       interpreter.setup([testCase.commandLiteral], 0);
       interpreter.executeCommand();
-      callTestEx<FakePlayer>(
+      callTestEx2<FakePlayer>(
         mocks.player,
-        new Set(testCase.functionKeys.player),
+        testCase.functionKeys.player,
         FUNCTION_KEYS_PLAYER,
       );
-      callTestEx<FakeMap>(
+      callTestEx2<FakeMap>(
         mocks.map.map,
-        new Set(testCase.functionKeys.map),
+        testCase.functionKeys.map,
         FUNCTION_KEYS_MAP,
       );
-      callTestEx<FakeVehicle>(
+      callTestEx2<FakeVehicle>(
         mocks.map.vehicle,
-        new Set(testCase.functionKeys.vehicle.map((f) => f.fn)),
+        testCase.functionKeys.vehicle,
         FUNCTION_KEYS_VEHICLE,
       );
-      testCase.functionKeys.vehicle.forEach((f) => {
-        expect(mocks.map.vehicle[f.fn]).toHaveBeenCalledWith(...f.arg);
-      });
     });
   });
 };
@@ -168,28 +165,28 @@ const testCases: TestCase[] = [
       parameters: [],
     },
     functionKeys: {
-      player: ["getOnOffVehicle"],
+      player: [{ fn: "getOnOffVehicle", arg: [] }],
       vehicle: [],
       map: [],
     },
   },
   {
-    testName: "",
+    testName: "Boat setLocation",
     commandLiteral: {
       code: 202,
       indent: 1,
-      parameters: [0, 0, 0, 0, 0],
+      parameters: [0, 0, 123, 456, 789],
     },
     command: {
       code: 202,
       indent: 1,
-      parameters: [0, 0, 0, 0, 0],
+      parameters: [0, 0, 123, 456, 789],
     },
     variableIds: [],
     functionKeys: {
       player: [],
-      map: ["vehicle"],
-      vehicle: [{ fn: "setLocation", arg: [0, 0, 0] }],
+      map: [{ fn: "vehicle", arg: [0] }],
+      vehicle: [{ fn: "setLocation", arg: [123, 456, 789] }],
     },
   },
   {
@@ -206,7 +203,7 @@ const testCases: TestCase[] = [
     variableIds: [],
     functionKeys: {
       player: [],
-      map: ["vehicle"],
+      map: [{ fn: "vehicle", arg: [1] }],
       vehicle: [{ fn: "setImage", arg: [MOCK_VHEICLE_NAME, 4] }],
     },
   },
