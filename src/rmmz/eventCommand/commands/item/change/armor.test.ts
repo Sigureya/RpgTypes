@@ -23,8 +23,8 @@ describe("makeCommandGainArmor", () => {
   const param: ParamObject_ChangeArmors = { armorId: 42, value: 5 };
   const expected: Command_ChangeArmors = {
     code: CHANGE_ARMORS,
-    parameters: [OPERATION_GAIN, 42, 5, OPERAND_DIRECT, false],
     indent: 0,
+    parameters: [42, OPERATION_GAIN, OPERAND_DIRECT, 5, false],
   };
   test("creates command with direct operand", () => {
     const result = makeCommandGainArmor(param);
@@ -40,8 +40,8 @@ describe("makeCommandGainArmorByVariable", () => {
   const param: ParamObject_ChangeArmorsV = { armorId: 42, variableId: 7 };
   const expected: Command_ChangeArmors = {
     code: CHANGE_ARMORS,
-    parameters: [OPERATION_GAIN, 42, 7, OPERAND_VARIABLE, false],
     indent: 0,
+    parameters: [42, OPERATION_GAIN, OPERAND_VARIABLE, 7, false],
   };
   test("creates command with variable operand", () => {
     const result = makeCommandGainArmorByVariable(param);
@@ -57,8 +57,8 @@ describe("makeCommandLoseArmor", () => {
   const param: ParamObject_ChangeArmors = { armorId: 88, value: 1 };
   const expected: Command_ChangeArmors = {
     code: CHANGE_ARMORS,
-    parameters: [OPERATION_LOSE, 88, 1, OPERAND_DIRECT, false],
     indent: 0,
+    parameters: [88, OPERATION_LOSE, OPERAND_DIRECT, 1, false],
   };
   test("creates command with direct operand", () => {
     const result = makeCommandLoseArmor(param);
@@ -74,8 +74,8 @@ describe("makeCommandLoseArmorV", () => {
   const param: ParamObject_ChangeArmorsV = { armorId: 55, variableId: 3 };
   const expected: Command_ChangeArmors = {
     code: CHANGE_ARMORS,
-    parameters: [OPERATION_LOSE, 55, 3, OPERAND_VARIABLE, false],
     indent: 5,
+    parameters: [55, OPERATION_LOSE, OPERAND_VARIABLE, 3, false],
   };
   test("creates command with variable operand", () => {
     const result = makeCommandLoseArmorByVariable(param, 5);
