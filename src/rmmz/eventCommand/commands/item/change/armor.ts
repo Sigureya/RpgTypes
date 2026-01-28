@@ -16,7 +16,7 @@ import {
 export const isUsingVaribleCommandChangingItems = (
   command: Command_ChangeArmors,
 ): command is Command_ChangeArmorsByVariable => {
-  return command.parameters[3] === OPERAND_VARIABLE;
+  return command.parameters[2] === OPERAND_VARIABLE;
 };
 
 export const makeCommandGainArmor = (

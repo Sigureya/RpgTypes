@@ -18,7 +18,7 @@ import type {
 export const isCommandChangeWeaponsUsingVariable = (
   command: Command_ChangeWeapons,
 ): command is Command_ChangeWeaponsByVariable => {
-  return command.parameters[3] === OPERAND_VARIABLE;
+  return command.parameters[2] === OPERAND_VARIABLE;
 };
 
 export const fromArrayChangeWeapons = (
