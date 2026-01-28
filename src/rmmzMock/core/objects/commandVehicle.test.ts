@@ -152,8 +152,8 @@ const runTestCase = (testCase: TestCase) => {
     describe("exec", () => {
       test("map", () => {
         const { interpreter, mocks } = createTestWorld(testCase.commandLiteral);
-        interpreter.executeCommand();
         expect(mocks.map.map.mapId).toHaveBeenCalledOnce();
+        interpreter.executeCommand();
         assertExactMemberCalls<FakeMap>(
           mocks.map.map,
           testCase.functionKeys.map,
