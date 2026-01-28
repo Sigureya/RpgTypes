@@ -1,5 +1,5 @@
 import type { Rmmz_Actor, Rmmz_Battler, Rmmz_Map } from "@RpgTypes/rmmzRuntime";
-import type { Rmmz_ActorsTemplate } from "@RpgTypes/rmmzRuntime/objects/core/battler/actors";
+import type { Rmmz_ActorsTemplate } from "@RpgTypes/rmmzRuntime/objects/core/battle/battler/actors";
 
 export type FakeBattler = Pick<Rmmz_Battler, ActorKeys>;
 

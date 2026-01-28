@@ -10,8 +10,10 @@ import {
   makeCommandGainActorTP,
   makeCommandLoseActorTP,
 } from "@RpgTypes/rmmz/eventCommand";
-import type { Rmmz_Variables } from "@RpgTypes/rmmzRuntime";
-import type { Rmmz_ActorsTemplate } from "@RpgTypes/rmmzRuntime/objects/core/battler/actors";
+import type {
+  Rmmz_ActorsTemplate,
+  Rmmz_Variables,
+} from "@RpgTypes/rmmzRuntime";
 import type { FakeBattler, FakeMap } from "./fakes/types";
 import { Game_Party, Game_Interpreter } from "./rmmz_objects";
 
@@ -42,17 +44,17 @@ type CommandTypes =
 
 const paramCalledWith = (
   command: CommandTypes,
-  interpreter: Game_Interpreter
+  interpreter: Game_Interpreter,
 ) => {
   expect(interpreter.iterateActorEx).toHaveBeenCalledWith(
     command.parameters[0],
     command.parameters[1],
-    expect.any(Function)
+    expect.any(Function),
   );
   expect(interpreter.operateValue).toHaveBeenCalledWith(
     command.parameters[2],
     command.parameters[3],
-    command.parameters[4]
+    command.parameters[4],
   );
   const key: keyof Game_Interpreter = `command${command.code}` as const;
   expect(interpreter[key]).toHaveBeenCalledWith(command.parameters);
@@ -99,7 +101,7 @@ const makeMockBattler = (id: number): MockedObject<FakeActor> => {
   };
 };
 const makeMockActors = (
-  actor: ({ actorId(): number } & FakeBattler)[]
+  actor: ({ actorId(): number } & FakeBattler)[],
 ): MockedActors => ({
   actor: vi.fn((id: number) => actor.find((a) => a.actorId() === id) || null),
   initialize: vi.fn(),
@@ -120,7 +122,7 @@ const makeMockMap = (): FakeMap => ({
 });
 
 const makeMockVariables = (
-  values: Record<number, number>
+  values: Record<number, number>,
 ): MockedObject<Rmmz_Variables> => {
   return {
     clear: vi.fn(),

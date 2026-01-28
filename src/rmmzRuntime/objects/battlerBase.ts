@@ -7,7 +7,7 @@ import type {
   Data_Weapon,
   ParamID,
 } from "@RpgTypes/rmmz/rpg";
-import type { Rmmz_BattlerBase } from "./core/battler/base";
+import type { Rmmz_BattlerBase } from "./core";
 
 export declare class Game_BattlerBase implements Rmmz_BattlerBase {
   get mhp(): number;
