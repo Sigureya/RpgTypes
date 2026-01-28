@@ -1,5 +1,6 @@
 import type { MockedObject } from "vitest";
 import { describe, expect, test, vi } from "vitest";
+import type { Data_NamedItem } from "@RpgTypes/libs";
 import type { Command_ControlVariables } from "@RpgTypes/rmmz/eventCommand";
 import {
   makeCommandVariableFromPlaytime,
@@ -20,7 +21,6 @@ import {
   OPERATION_MOD,
 } from "@RpgTypes/rmmz/eventCommand";
 import type { Rmmz_System, Rmmz_Variables } from "@RpgTypes/rmmzRuntime";
-import type { Rmmz_ActorsTemplate } from "@RpgTypes/rmmzRuntime/objects/core/battler/actors";
 import type { FakeActor, FakeMap } from "./fakes/types";
 import { Game_Interpreter, Game_Party } from "./rmmz_objects";
 
@@ -36,6 +36,10 @@ const MOCK_GOLD = 4980;
 const MOCK_STEPS = 8976;
 
 const MOCK_OLD_VALUE = 60;
+
+const MOCK_PARTY_MEMBERS = [3, 1, 2] as const;
+
+const MOCK_ITEM_AMOUNT = 99;
 
 const SYSTEM_FUNTION_KEYS = [
   "playtime",
@@ -54,6 +58,27 @@ const PARTY_FUNCTION_KEYS = [
   "numItems",
 ] as const satisfies (keyof Game_Party)[];
 
+const mockItems: (Data_NamedItem | null)[] = [
+  null,
+  { id: 1, name: "Food" },
+  { id: 2, name: "Treasure" },
+  { id: 3, name: "Blood" },
+];
+
+const mockWeapons: (Data_NamedItem | null)[] = [
+  null,
+  { id: 3, name: "Axe" },
+  { id: 2, name: "Bow" },
+  { id: 1, name: "Sword" },
+];
+
+const mockArmors: (Data_NamedItem | null)[] = [
+  null,
+  { id: 1, name: "shield" },
+  { id: 2, name: "helmet" },
+  { id: 3, name: "armor" },
+];
+
 const createMockedVariable = (): MockedObject<Rmmz_Variables> => ({
   clear: vi.fn(),
   value: vi.fn().mockReturnValue(MOCK_OLD_VALUE),
@@ -69,14 +94,16 @@ const createMockParty = (actorIds: number[]): Game_Party => {
   vi.spyOn(party, "gainGold");
   vi.spyOn(party, "loseGold");
   vi.spyOn(party, "steps").mockReturnValue(MOCK_STEPS);
-  vi.spyOn(party, "numItems");
+  vi.spyOn(party, "numItems").mockReturnValue(MOCK_ITEM_AMOUNT);
   return party;
 };
-type MockedActors = MockedObject<Rmmz_ActorsTemplate<FakeActor>>;
 
-const makeMockActors = (actor: FakeActor[]): MockedActors => ({
-  actor: vi.fn((id: number) => actor.find((a) => a.actorId() === id) || null),
-  initialize: vi.fn(),
+interface FakeActors {
+  actor(actorId: number): FakeActor | null;
+}
+
+const makeMockActors = (actors: FakeActor[]): MockedObject<FakeActors> => ({
+  actor: vi.fn((id: number) => actors.find((a) => a.actorId() === id) || null),
 });
 
 const makeMockMap = (): FakeMap => ({
@@ -107,7 +134,7 @@ const createMockedObjects = () => {
     mockedMap: makeMockMap(),
     mockedVariables: createMockedVariable(),
     mockedSystem: createMokedSystem(),
-    mockParty: createMockParty([1, 2, 3]),
+    mockParty: createMockParty([...MOCK_PARTY_MEMBERS]),
     mockActors: makeMockActors([]),
   };
 };
@@ -115,6 +142,7 @@ const createMockedObjects = () => {
 interface FunctionKeys {
   systems: (keyof FakeSystem)[];
   party: (keyof Game_Party)[];
+  actorsCall?: number;
 }
 
 interface TestCase {
@@ -128,6 +156,7 @@ interface TestCase {
   command: Command_ControlVariables;
   // 数値直書き。生成関数のバグと値のバグを切り分けるためにある
   commandLiteral: Command_ControlVariables;
+  item?: Data_NamedItem | null;
 }
 
 const callTestEx = <T>(
@@ -150,7 +179,13 @@ const stubGlobal = (mocks: ReturnType<typeof createMockedObjects>) => {
   vi.stubGlobal("$gameSystem", mocks.mockedSystem);
   vi.stubGlobal("$gameParty", mocks.mockParty);
   vi.stubGlobal("$gameActors", mocks.mockActors);
+  vi.stubGlobal("$dataItems", mockItems);
+  vi.stubGlobal("$dataWeapons", mockWeapons);
+  vi.stubGlobal("$dataArmors", mockArmors);
 };
+
+// @ts-ignore
+Math.randomInt = () => 0;
 
 const runTestCase = (testCase: TestCase) => {
   describe(`operateValue Test: ${testCase.testName}`, () => {
@@ -160,9 +195,6 @@ const runTestCase = (testCase: TestCase) => {
     test("value set", () => {
       const mocks = createMockedObjects();
       stubGlobal(mocks);
-
-      // @ts-ignore
-      Math.randomInt = () => 0;
 
       const interpreter = createMockedInterpreter();
       interpreter.setup([testCase.command], 0);
@@ -183,6 +215,9 @@ const runTestCase = (testCase: TestCase) => {
       const interpreter = createMockedInterpreter();
       interpreter.setup([testCase.command], 0);
       interpreter.executeCommand();
+      expect(mocks.mockActors.actor).toHaveBeenCalledTimes(
+        testCase.fnCalles.actorsCall ?? 0,
+      );
       callTestEx<FakeSystem>(
         mocks.mockedSystem,
         new Set(testCase.fnCalles.systems ?? []),
@@ -303,7 +338,12 @@ const testCases: TestCase[] = [
       parameters: [189, 189, 5, 0, 12],
     },
   },
-
+  // {
+  //   testName: "get item amount",
+  //   fnCalles: { party: ["numItems"], systems: [] },
+  //   setValues: { id: 150, value: MOCK_ITEM_AMOUNT },
+  //   command: makeCommandVariableFromConstant(
+  // }
   {
     testName: "mapId",
     fnCalles: { party: [], systems: [] },
@@ -320,6 +360,7 @@ const testCases: TestCase[] = [
     fnCalles: {
       party: ["members"],
       systems: [],
+      actorsCall: MOCK_PARTY_MEMBERS.length,
     },
     setValue: { id: 233, value: 3 },
     command: makeCommandVariableFromPartyMembers({ startId: 233 }),
@@ -416,5 +457,6 @@ const testCases: TestCase[] = [
     },
   },
 ];
-
-testCases.forEach(runTestCase);
+describe("operateValue Tests", () => {
+  testCases.forEach(runTestCase);
+});

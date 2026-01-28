@@ -5,7 +5,7 @@ export type FakeBattler = Pick<Rmmz_Battler, ActorKeys>;
 
 export type FakeMap = Pick<Rmmz_Map, "mapId">;
 
-export type FakeActos = Pick<Rmmz_ActorsTemplate<FakeBattler>, "actor">;
+export type FakeActors = Pick<Rmmz_ActorsTemplate<FakeBattler>, "actor">;
 export type ActorKeys =
   | "loseHp"
   | "loseMp"
