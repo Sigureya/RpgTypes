@@ -159,7 +159,6 @@ interface FunctionKeys {
   systems: (keyof FakeSystem)[];
   party: (keyof Game_Party)[];
   actorsCall?: number;
-  tempCallArg?: number;
 }
 
 interface TestCase {
