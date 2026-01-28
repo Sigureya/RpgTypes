@@ -207,6 +207,24 @@ const testCases: TestCase[] = [
       vehicle: [{ fn: "setImage", arg: [MOCK_VHEICLE_NAME, 4] }],
     },
   },
+  {
+    testName: "ChangeVehicleImage",
+    commandLiteral: {
+      code: 323,
+      indent: 3,
+      parameters: [2, MOCK_VHEICLE_NAME, 6],
+    },
+    command: makeCommandChangeVehicleImage(
+      { vehicleId: 2, characterImage: MOCK_VHEICLE_NAME, characterIndex: 6 },
+      3,
+    ),
+    variableIds: [],
+    functionKeys: {
+      player: [],
+      map: [{ fn: "vehicle", arg: [2] }],
+      vehicle: [{ fn: "setImage", arg: [MOCK_VHEICLE_NAME, 6] }],
+    },
+  },
 ];
 
 testCases.forEach((tc) => runTestCase(tc));
