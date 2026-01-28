@@ -12,11 +12,12 @@ import {
   OPERATION_GAIN,
   OPERATION_LOSE,
 } from "./types/constants";
+import { isUsingVariableItemCommand } from "./utils";
 
 export const isUsingVaribleCommandChangingItems = (
   command: Command_ChangeArmors,
 ): command is Command_ChangeArmorsByVariable => {
-  return command.parameters[2] === OPERAND_VARIABLE;
+  return isUsingVariableItemCommand(command);
 };
 
 export const makeCommandGainArmor = (

@@ -14,11 +14,12 @@ import type {
   Command_ChangeWeaponsDirect,
   Command_ChangeWeaponsByVariable,
 } from "./types/weapon";
+import { isUsingVariableItemCommand } from "./utils";
 
 export const isCommandChangeWeaponsUsingVariable = (
   command: Command_ChangeWeapons,
 ): command is Command_ChangeWeaponsByVariable => {
-  return command.parameters[2] === OPERAND_VARIABLE;
+  return isUsingVariableItemCommand(command);
 };
 
 export const fromArrayChangeWeapons = (
