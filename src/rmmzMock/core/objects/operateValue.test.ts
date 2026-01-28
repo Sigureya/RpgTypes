@@ -224,8 +224,6 @@ const tempTest = (testCase: TestCase, arg: number) => {
     expect(mocks.mockTemp.lastActionData).toHaveBeenCalledOnce();
   });
 };
-// @ts-ignore
-Math.randomInt = () => 0;
 
 const runTestCase = (testCase: TestCase) => {
   describe(`operateValue Test: ${testCase.testName}`, () => {
@@ -236,8 +234,12 @@ const runTestCase = (testCase: TestCase) => {
       const mocks = createMockedObjects();
       stubGlobal(mocks);
 
+      const randmomInt: MockedObject<(max: number) => number> = vi.fn(() => 0);
+      // @ts-ignore
+      Math.randomInt = randmomInt;
+
       const interpreter = createMockedInterpreter();
-      interpreter.setup([testCase.command], 0);
+      interpreter.setup([testCase.commandLiteral], 0);
       interpreter.executeCommand();
       expect(mocks.mockedVariables.value).toHaveBeenCalledWith(
         testCase.setValue.id,
@@ -247,6 +249,11 @@ const runTestCase = (testCase: TestCase) => {
         testCase.setValue.id,
         testCase.setValue.value,
       );
+      const randCallCount: number =
+        1 +
+        testCase.commandLiteral.parameters[1] -
+        testCase.commandLiteral.parameters[0];
+      expect(randmomInt).toHaveBeenCalledTimes(randCallCount);
     });
     test("function calls", () => {
       const mocks = createMockedObjects();
