@@ -1,14 +1,13 @@
-export * from "./gold/changeGold";
 export type {
   Command_ChangeGold,
   ParamArray_ChangeGold,
-} from "./gold/changeGold";
+} from "./types/changeGold";
 export type {
   Command_ChangePartyMember,
   ParamArray_ChangePartyMember,
   ParamObject_ChangePartyMember,
-} from "./changeMember/types";
+} from "./types/changeMember";
 export {
   makeCommandAddPartyMember,
   makeCommandRemovePartyMember,
-} from "./changeMember/changeMember";
+} from "./changeMember";

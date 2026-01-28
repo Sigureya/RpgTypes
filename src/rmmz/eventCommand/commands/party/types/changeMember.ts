@@ -8,7 +8,7 @@ export interface Command_ChangePartyMember extends EventCommandLike<129> {
 
 export type ParamArray_ChangePartyMember = [
   operation: ValueOf<Operation_PlusMinus>,
-  actorId: number
+  actorId: number,
 ];
 
 export interface ParamObject_ChangePartyMember {
