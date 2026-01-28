@@ -19,6 +19,9 @@ import {
   OPERATION_DIVIDE,
   OPERATION_MULTIPLY,
   OPERATION_MOD,
+  makeCommandVariableFromItemData,
+  makeCommandVariableFromWeapon,
+  makeCommandVariableFromArmor,
 } from "@RpgTypes/rmmz/eventCommand";
 import type { Rmmz_System, Rmmz_Variables } from "@RpgTypes/rmmzRuntime";
 import type { FakeActor, FakeMap } from "./fakes/types";
@@ -58,26 +61,22 @@ const PARTY_FUNCTION_KEYS = [
   "numItems",
 ] as const satisfies (keyof Game_Party)[];
 
-const mockItems: (Data_NamedItem | null)[] = [
+const mockItems = [
   null,
   { id: 1, name: "Food" },
   { id: 2, name: "Treasure" },
-  { id: 3, name: "Blood" },
-];
+] as const satisfies (Data_NamedItem | null)[];
 
-const mockWeapons: (Data_NamedItem | null)[] = [
+const mockWeapons = [
   null,
   { id: 3, name: "Axe" },
   { id: 2, name: "Bow" },
-  { id: 1, name: "Sword" },
-];
-
-const mockArmors: (Data_NamedItem | null)[] = [
+] as const satisfies (Data_NamedItem | null)[];
+const mockArmors = [
   null,
   { id: 1, name: "shield" },
   { id: 2, name: "helmet" },
-  { id: 3, name: "armor" },
-];
+] as const satisfies (Data_NamedItem | null)[];
 
 const createMockedVariable = (): MockedObject<Rmmz_Variables> => ({
   clear: vi.fn(),
@@ -94,7 +93,12 @@ const createMockParty = (actorIds: number[]): Game_Party => {
   vi.spyOn(party, "gainGold");
   vi.spyOn(party, "loseGold");
   vi.spyOn(party, "steps").mockReturnValue(MOCK_STEPS);
-  vi.spyOn(party, "numItems").mockReturnValue(MOCK_ITEM_AMOUNT);
+  vi.spyOn(party, "numItems").mockImplementation((item) => {
+    if (item === null) {
+      return 0;
+    }
+    return MOCK_ITEM_AMOUNT;
+  });
   return party;
 };
 
@@ -228,6 +232,9 @@ const runTestCase = (testCase: TestCase) => {
         new Set(testCase.fnCalles.party ?? []),
         PARTY_FUNCTION_KEYS,
       );
+      if ("item" in testCase) {
+        expect(mocks.mockParty.numItems).toHaveBeenCalledWith(testCase.item);
+      }
     });
   });
 };
@@ -338,12 +345,106 @@ const testCases: TestCase[] = [
       parameters: [189, 189, 5, 0, 12],
     },
   },
-  // {
-  //   testName: "get item amount",
-  //   fnCalles: { party: ["numItems"], systems: [] },
-  //   setValues: { id: 150, value: MOCK_ITEM_AMOUNT },
-  //   command: makeCommandVariableFromConstant(
-  // }
+  {
+    testName: "get item amount :item[0]->null",
+    fnCalles: { party: ["numItems"], systems: [] },
+    item: null,
+    setValue: { id: 150, value: 0 },
+    command: makeCommandVariableFromItemData({ startId: 150 }, { itemId: 0 }),
+    commandLiteral: {
+      code: 122,
+      indent: 0,
+      parameters: [150, 150, 0, 3, 0, 0],
+    },
+  },
+  {
+    testName: "get item amount :item[1]->Food",
+    fnCalles: { party: ["numItems"], systems: [] },
+    item: mockItems[1],
+    setValue: { id: 150, value: MOCK_ITEM_AMOUNT },
+    command: makeCommandVariableFromItemData(
+      { startId: 150 },
+      { itemId: 1 },
+      { indent: 2 },
+    ),
+    commandLiteral: {
+      code: 122,
+      indent: 2,
+      parameters: [150, 150, 0, 3, 0, 1],
+    },
+  },
+  {
+    testName: "get item amount : item[2]->Treasure",
+    fnCalles: { party: ["numItems"], systems: [] },
+    item: mockItems[2],
+    setValue: { id: 150, value: MOCK_ITEM_AMOUNT },
+    command: makeCommandVariableFromItemData({ startId: 150 }, { itemId: 2 }),
+    commandLiteral: {
+      code: 122,
+      indent: 0,
+      parameters: [150, 150, 0, 3, 0, 2],
+    },
+  },
+  {
+    testName: "get armor amount : armor[0]->null",
+    fnCalles: { party: ["numItems"], systems: [] },
+    item: mockArmors[0],
+    setValue: { id: 160, value: 0 },
+    command: makeCommandVariableFromArmor({ startId: 160 }, { armorId: 0 }),
+    commandLiteral: {
+      code: 122,
+      indent: 0,
+      parameters: [160, 160, 0, 3, 2, 0],
+    },
+  },
+  {
+    testName: "get armor amount : armor[1]->shield",
+    fnCalles: { party: ["numItems"], systems: [] },
+    item: mockArmors[1],
+    setValue: { id: 160, value: MOCK_ITEM_AMOUNT },
+    command: makeCommandVariableFromArmor({ startId: 160 }, { armorId: 1 }),
+    commandLiteral: {
+      code: 122,
+      indent: 0,
+      parameters: [160, 160, 0, 3, 2, 1],
+    },
+  },
+  {
+    testName: "get armor amount : armor[2]->helmet",
+    fnCalles: { party: ["numItems"], systems: [] },
+    item: mockArmors[2],
+    setValue: { id: 160, value: MOCK_ITEM_AMOUNT },
+    command: makeCommandVariableFromArmor({ startId: 160 }, { armorId: 2 }),
+    commandLiteral: {
+      code: 122,
+      indent: 0,
+      parameters: [160, 160, 0, 3, 2, 2],
+    },
+  },
+  {
+    testName: "get weapon amount : weapon[0]->null",
+    fnCalles: { party: ["numItems"], systems: [] },
+    item: mockWeapons[0],
+    setValue: { id: 170, value: 0 },
+    command: makeCommandVariableFromWeapon({ startId: 170 }, { weaponId: 0 }),
+    commandLiteral: {
+      code: 122,
+      indent: 0,
+      parameters: [170, 170, 0, 3, 1, 0],
+    },
+  },
+  {
+    testName: "get weapon amount : weapon[2]->Bow",
+    fnCalles: { party: ["numItems"], systems: [] },
+    item: mockWeapons[2],
+    setValue: { id: 170, value: MOCK_ITEM_AMOUNT },
+    command: makeCommandVariableFromWeapon({ startId: 170 }, { weaponId: 2 }),
+    commandLiteral: {
+      code: 122,
+      indent: 0,
+      parameters: [170, 170, 0, 3, 1, 2],
+    },
+  },
   {
     testName: "mapId",
     fnCalles: { party: [], systems: [] },
