@@ -36,8 +36,8 @@ import type {
 } from "@RpgTypes/rmmz/eventCommand/commands/menu/types";
 import type { Command_SetMovementRoute } from "@RpgTypes/rmmz/eventCommand/commands/movementRoute/command";
 import type { Command_PlayMovie } from "@RpgTypes/rmmz/eventCommand/commands/movie/types";
-import type { Command_ChangePartyMember } from "@RpgTypes/rmmz/eventCommand/commands/party/changeMember/types";
-import type { Command_ChangeGold } from "@RpgTypes/rmmz/eventCommand/commands/party/gold/changeGold";
+import type { Command_ChangeGold } from "@RpgTypes/rmmz/eventCommand/commands/party/types/changeGold";
+import type { Command_ChangePartyMember } from "@RpgTypes/rmmz/eventCommand/commands/party/types/changeMember";
 import type { Command_ErasePicture } from "@RpgTypes/rmmz/eventCommand/commands/picture/erase/types";
 import type { Command_ShakeScreen } from "@RpgTypes/rmmz/eventCommand/commands/screen/shake/types";
 import type { Command_ChangeTileset } from "@RpgTypes/rmmz/eventCommand/commands/tileset/types";

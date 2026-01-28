@@ -113,8 +113,7 @@ import type {
   Command_FadeInScreen,
 } from "./nonParam/types";
 import type { Command_NoOperation } from "./noOperation";
-import type { Command_ChangePartyMember } from "./party/changeMember/types";
-import type { Command_ChangeGold } from "./party/gold/changeGold";
+import type { Command_ChangePartyMember, Command_ChangeGold } from "./party";
 import type {
   Command_MovePicture,
   Command_RotatePicture,
