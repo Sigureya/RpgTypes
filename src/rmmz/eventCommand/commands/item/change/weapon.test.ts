@@ -13,6 +13,7 @@ import type {
   ParamObject_ChangeWeapons,
   ParamObject_ChangeWeaponsV,
 } from "./types/weapon";
+import { getItemIdFromItemCommand } from "./utils";
 import {
   fromArrayChangeWeapons,
   makeCommandChangeWeapons,
@@ -43,7 +44,7 @@ describe("makeCommandChangeWeapons", () => {
 
   test("default indent is 0", () => {
     const param: ParamObject_ChangeWeaponsFullset = {
-      operation: 1,
+      operation: 0,
       weaponId: 2,
       value: 10,
       operand: 1,
@@ -52,7 +53,7 @@ describe("makeCommandChangeWeapons", () => {
     const expected: Command_ChangeWeapons = {
       code: CHANGE_WEAPONS,
       indent: 0,
-      parameters: [2, 1, 1, 10, true],
+      parameters: [2, 0, 1, 10, true],
     };
     const result = makeCommandChangeWeapons(param);
     expect(result).toEqual(expected);
@@ -60,10 +61,10 @@ describe("makeCommandChangeWeapons", () => {
 });
 
 describe("fromArrayChangeWeapons", () => {
-  const arr: ParamArray_ChangeWeapons = [1, 0, 0, 5, false];
+  const arr: ParamArray_ChangeWeapons = [43, 1, 0, 5, false];
   const expected: ParamObject_ChangeWeaponsFullset = {
-    operation: 0,
-    weaponId: 1,
+    operation: 1,
+    weaponId: 43,
     value: 5,
     operand: 0,
     includesEquip: false,
@@ -139,5 +140,10 @@ describe("makeCommandLoseWeaponV", () => {
   test("is using variable", () => {
     const result = makeCommandLoseWeaponV(param);
     expect(result).toSatisfy(isCommandChangeWeaponsUsingVariable);
+  });
+  test("get weaponId from command", () => {
+    const command = makeCommandLoseWeaponV(param);
+    const weaponId = getItemIdFromItemCommand(command);
+    expect(weaponId).toBe(42);
   });
 });

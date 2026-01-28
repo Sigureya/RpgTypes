@@ -8,3 +8,9 @@ export const isUsingVariableItemCommand = (
 ): boolean => {
   return command.parameters[2] === OPERAND_VARIABLE;
 };
+
+export const getItemIdFromItemCommand = (
+  command: Command_ChangeArmors | Command_ChangeItems | Command_ChangeWeapons,
+): number => {
+  return command.parameters[0];
+};

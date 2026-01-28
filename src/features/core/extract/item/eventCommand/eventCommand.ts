@@ -2,6 +2,7 @@ import {
   CHANGE_ARMORS,
   CHANGE_ITEMS,
   CHANGE_WEAPONS,
+  getItemIdFromItemCommand,
   isUsingVariableItemCommand,
 } from "@RpgTypes/rmmz";
 import type {
@@ -26,22 +27,15 @@ export const extractItemCommands = (
   terms: ItemCommandTerms2,
   commandNameFn: (code: ItemCommandCode) => string,
 ): (ItemCommandParameterDirect | ItemCommandParameterVariable)[] => {
-  return list.reduce(
-    (
-      acc: (ItemCommandParameterDirect | ItemCommandParameterVariable)[],
-      command,
-    ) => {
-      if (
+  return list
+    .filter((command) => {
+      return (
         command.code === CHANGE_ARMORS ||
         command.code === CHANGE_ITEMS ||
         command.code === CHANGE_WEAPONS
-      ) {
-        acc.push(extractItemChangeData(command, terms, commandNameFn));
-      }
-      return acc;
-    },
-    [],
-  );
+      );
+    })
+    .map((command) => extractItemChangeData(command, terms, commandNameFn));
 };
 
 const KIND_TABKE = {
@@ -81,7 +75,7 @@ export const extractItemChangeData = (
 
   return {
     itemKind: KIND_TABKE[command.code],
-    dataId: command.parameters[0],
+    dataId: getItemIdFromItemCommand(command),
     code: command.code,
     commandNameMZ: commandNameFn(command.code),
     operation: operation,
