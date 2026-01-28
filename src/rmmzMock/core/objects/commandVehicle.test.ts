@@ -5,7 +5,10 @@ import type { EventCommand } from "@RpgTypes/rmmz/eventCommand";
 import {
   makeCommandChangeVehicleImage,
   makeCommandGetOnOffVehicle,
+  makeCommandSetVehicleLocation,
+  makeCommandSetVehicleLocationFromVariables,
 } from "@RpgTypes/rmmz/eventCommand";
+import { VEHICLE_BOAT } from "@RpgTypes/rmmz/eventCommand/commands/vehicle/types/constants";
 import type {
   Rmmz_Map,
   Rmmz_Variables,
@@ -124,32 +127,61 @@ interface TestCase {
   functionKeys: FunctionKeys;
 }
 
+const createTestWorld = (command: EventCommand) => {
+  const mocks = createMockObjects();
+  stubGlobals(mocks);
+  const interpreter = new Game_Interpreter();
+  interpreter.setup([command], 0);
+  return { interpreter, mocks };
+};
+
 const runTestCase = (testCase: TestCase) => {
   describe(`${testCase.testName} - Code:${testCase.commandLiteral.code}`, () => {
     test("make", () => {
       expect(testCase.command).toEqual(testCase.commandLiteral);
     });
-    test("exec", () => {
-      const mocks = createMockObjects();
-      stubGlobals(mocks);
-      const interpreter = new Game_Interpreter();
-      interpreter.setup([testCase.commandLiteral], 0);
-      interpreter.executeCommand();
-      callTestEx2<FakePlayer>(
-        mocks.player,
-        testCase.functionKeys.player,
-        FUNCTION_KEYS_PLAYER,
-      );
-      callTestEx2<FakeMap>(
-        mocks.map.map,
-        testCase.functionKeys.map,
-        FUNCTION_KEYS_MAP,
-      );
-      callTestEx2<FakeVehicle>(
-        mocks.map.vehicle,
-        testCase.functionKeys.vehicle,
-        FUNCTION_KEYS_VEHICLE,
-      );
+    describe("exec", () => {
+      test("map", () => {
+        const { interpreter, mocks } = createTestWorld(testCase.commandLiteral);
+        interpreter.executeCommand();
+        callTestEx2<FakeMap>(
+          mocks.map.map,
+          testCase.functionKeys.map,
+          FUNCTION_KEYS_MAP,
+        );
+      });
+      test("player", () => {
+        const { interpreter, mocks } = createTestWorld(testCase.commandLiteral);
+        interpreter.executeCommand();
+        callTestEx2<FakePlayer>(
+          mocks.player,
+          testCase.functionKeys.player,
+          FUNCTION_KEYS_PLAYER,
+        );
+      });
+      test("vehicle", () => {
+        const { interpreter, mocks } = createTestWorld(testCase.commandLiteral);
+        interpreter.executeCommand();
+        callTestEx2<FakeVehicle>(
+          mocks.map.vehicle,
+          testCase.functionKeys.vehicle,
+          FUNCTION_KEYS_VEHICLE,
+        );
+      });
+      test("variables", () => {
+        const { interpreter, mocks } = createTestWorld(testCase.commandLiteral);
+        interpreter.executeCommand();
+        expect(mocks.variables.setValue).not.toHaveBeenCalled();
+        expect(mocks.variables.clear).not.toHaveBeenCalled();
+        expect(mocks.variables.onChange).not.toHaveBeenCalled();
+        if (testCase.variableIds.length > 0) {
+          testCase.variableIds.forEach((varId) => {
+            expect(mocks.variables.value).toHaveBeenCalledWith(varId);
+          });
+        } else {
+          expect(mocks.variables.value).not.toHaveBeenCalled();
+        }
+      });
     });
   });
 };
@@ -174,14 +206,15 @@ const testCases: TestCase[] = [
     testName: "Boat setLocation",
     commandLiteral: {
       code: 202,
-      indent: 1,
+      indent: 0,
       parameters: [0, 0, 123, 456, 789],
     },
-    command: {
-      code: 202,
-      indent: 1,
-      parameters: [0, 0, 123, 456, 789],
-    },
+    command: makeCommandSetVehicleLocation({
+      vehicleId: VEHICLE_BOAT,
+      mapId: 123,
+      x: 456,
+      y: 789,
+    }),
     variableIds: [],
     functionKeys: {
       player: [],
@@ -189,6 +222,32 @@ const testCases: TestCase[] = [
       vehicle: [{ fn: "setLocation", arg: [123, 456, 789] }],
     },
   },
+  {
+    testName: "Boat setLocation from variables",
+    commandLiteral: {
+      code: 202,
+      indent: 0,
+      parameters: [VEHICLE_BOAT, 1, 41, 42, 43],
+    },
+    command: makeCommandSetVehicleLocationFromVariables({
+      vehicleId: VEHICLE_BOAT,
+      variableMapId: 41,
+      variableX: 42,
+      variableY: 43,
+    }),
+    variableIds: [41, 42, 43],
+    functionKeys: {
+      player: [],
+      map: [{ fn: "vehicle", arg: [VEHICLE_BOAT] }],
+      vehicle: [
+        {
+          fn: "setLocation",
+          arg: [MOCK_OLD_VALUE, MOCK_OLD_VALUE, MOCK_OLD_VALUE],
+        },
+      ],
+    },
+  },
+
   {
     testName: "ChangeVehicleImage",
     commandLiteral: {
