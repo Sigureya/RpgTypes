@@ -14,3 +14,17 @@ export type ParamArray_SetVehicleLocation = [
   x: number,
   y: number,
 ];
+
+export interface ParamObject_SetVehicleLocation {
+  vehicleId: VehicleType;
+  mapId: number;
+  x: number;
+  y: number;
+}
+
+export interface ParamObject_SetVehicleLocationFromVariables {
+  vehicleId: VehicleType;
+  variableMapId: number;
+  variableX: number;
+  variableY: number;
+}
