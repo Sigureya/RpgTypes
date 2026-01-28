@@ -1,12 +1,12 @@
 import { CONTROL_VARIABLES } from "@RpgTypes/rmmz/rpg";
 import { OPERAND_CONSTANT } from "./constants/operand";
+import type { MakeOtherParam } from "./otherTypes";
 import type {
   Command_ControlVariables,
   Operand_Constatant,
   ParamObject_Operand_Constant,
   ParamObject_WritingTarget,
 } from "./types";
-import type { MakeOtherParam } from "./otherTypes";
 
 export const toArrayOperandConstant = (
   target: ParamObject_WritingTarget,

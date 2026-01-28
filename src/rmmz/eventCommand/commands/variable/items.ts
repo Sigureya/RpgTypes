@@ -1,12 +1,12 @@
 import { CONTROL_VARIABLES } from "@RpgTypes/rmmz/rpg";
 import { OPERAND_GAMEDATA, TYPE_ITEM } from "./constants";
+import type { MakeOtherParam } from "./otherTypes";
 import type {
   ParamObject_WritingTarget,
   ParamObject_Operand_ItemData,
   Command_ControlVariables,
   Operand_ItemData,
 } from "./types";
-import type { MakeOtherParam } from "./otherTypes";
 
 export const makeCommandVariableFromItemData = (
   target: ParamObject_WritingTarget,
