@@ -5,3 +5,12 @@ export type DeepPartial<T> = {
     ? DeepPartial<T[P]>
     : T[P];
 };
+
+export type MemberFunctions<T> = {
+  [K in keyof T]: T[K] extends (...args: unknown[]) => unknown
+    ? {
+        fn: K;
+        arg: Parameters<T[K]>;
+      }
+    : never;
+}[keyof T];
