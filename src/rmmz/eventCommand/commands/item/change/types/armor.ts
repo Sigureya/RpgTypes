@@ -9,19 +9,21 @@ export type Command_ChangeArmors = EventCommandLike<
   ParamArray_ChangeArmors
 >;
 
-export interface Command_ChangeArmorsByVariable
-  extends EventCommandLike<typeof CHANGE_ARMORS> {
+export interface Command_ChangeArmorsByVariable extends EventCommandLike<
+  typeof CHANGE_ARMORS
+> {
   parameters: ParamArray_GainArmorsVariable | ParamArray_LoseArmorVariable;
 }
 
-export interface Command_ChangeArmorsDirect
-  extends EventCommandLike<typeof CHANGE_ARMORS> {
+export interface Command_ChangeArmorsDirect extends EventCommandLike<
+  typeof CHANGE_ARMORS
+> {
   parameters: ParamArray_GainArmorsDirect | ParamArray_LoseArmorsDirect;
 }
 
 export interface ParamObject_ChangeArmorsFullset {
   operation: ValueOf<Operation_PlusMinus>;
-  weaponId: number;
+  armorId: number;
   value: number;
   operand: typeof OPERAND_DIRECT | typeof OPERAND_VARIABLE;
   includesEquip: boolean;
@@ -37,13 +39,13 @@ type ParamArray_ChangeArmorsTemplate<
   T extends {
     operation: ValueOf<Operation_PlusMinus>;
     operand: typeof OPERAND_DIRECT | typeof OPERAND_VARIABLE;
-  }
+  },
 > = [
+  armorId: number,
   operation: T["operation"],
-  weaponId: number,
-  value: number,
   operand: T["operand"],
-  includesEquip: boolean
+  value: number,
+  includesEquip: boolean,
 ];
 
 export type ParamArray_GainArmorsDirect = ParamArray_ChangeArmorsTemplate<{

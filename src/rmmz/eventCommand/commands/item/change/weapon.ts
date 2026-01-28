@@ -16,92 +16,92 @@ import type {
 } from "./types/weapon";
 
 export const isCommandChangeWeaponsUsingVariable = (
-  command: Command_ChangeWeapons
+  command: Command_ChangeWeapons,
 ): command is Command_ChangeWeaponsByVariable => {
   return command.parameters[3] === OPERAND_VARIABLE;
 };
 
 export const fromArrayChangeWeapons = (
-  arr: ParamArray_ChangeWeapons
+  arr: ParamArray_ChangeWeapons,
 ): ParamObject_ChangeWeaponsFullset => ({
-  operation: arr[0],
-  weaponId: arr[1],
-  value: arr[2],
-  operand: arr[3],
+  operation: arr[1],
+  weaponId: arr[0],
+  value: arr[3],
+  operand: arr[2],
   includesEquip: arr[4],
 });
 
 export const makeCommandChangeWeapons = (
   param: ParamObject_ChangeWeaponsFullset,
-  indent: number = 0
+  indent: number = 0,
 ): Command_ChangeWeapons => ({
   code: CHANGE_WEAPONS,
   indent,
   parameters: [
-    param.operation,
     param.weaponId,
-    param.value,
+    param.operation,
     param.operand,
+    param.value,
     param.includesEquip,
   ],
 });
 
 export const makeCommandGainWeapon = (
   param: ParamObject_ChangeWeapons,
-  indent: number = 0
+  indent: number = 0,
 ): Command_ChangeWeaponsDirect => ({
   code: CHANGE_WEAPONS,
   indent,
   parameters: [
-    OPERATION_GAIN,
     param.weaponId,
-    param.value,
+    OPERATION_GAIN,
     OPERAND_DIRECT,
+    param.value,
     false,
   ],
 });
 
 export const makeCommandGainWeaponV = (
   param: ParamObject_ChangeWeaponsV,
-  indent: number = 0
+  indent: number = 0,
 ): Command_ChangeWeaponsByVariable => ({
   code: CHANGE_WEAPONS,
   indent,
   parameters: [
-    OPERATION_GAIN,
     param.weaponId,
-    param.variableId,
+    OPERATION_GAIN,
     OPERAND_VARIABLE,
+    param.variableId,
     false,
   ],
 });
 
 export const makeCommandLoseWeapon = (
   param: ParamObject_ChangeWeapons,
-  indent: number = 0
+  indent: number = 0,
 ): Command_ChangeWeaponsDirect => ({
   code: CHANGE_WEAPONS,
   indent,
   parameters: [
-    OPERATION_LOSE,
     param.weaponId,
-    param.value,
+    OPERATION_LOSE,
     OPERAND_DIRECT,
+    param.value,
     false,
   ],
 });
 
 export const makeCommandLoseWeaponV = (
   param: ParamObject_ChangeWeaponsV,
-  indent: number = 0
+  indent: number = 0,
 ): Command_ChangeWeaponsByVariable => ({
   code: CHANGE_WEAPONS,
   indent,
   parameters: [
-    OPERATION_LOSE,
     param.weaponId,
-    param.variableId,
+    OPERATION_LOSE,
     OPERAND_VARIABLE,
+    param.variableId,
     false,
   ],
 });

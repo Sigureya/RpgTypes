@@ -9,13 +9,15 @@ export type Command_ChangeItems = EventCommandLike<
   ParamArray_ChangeItems
 >;
 
-export interface Command_ChangeItemsByVariable
-  extends EventCommandLike<typeof CHANGE_ITEMS> {
+export interface Command_ChangeItemsByVariable extends EventCommandLike<
+  typeof CHANGE_ITEMS
+> {
   parameters: ParamArray_GainItemsVariable | ParamArray_LoseItemVariable;
 }
 
-export interface Command_ChangeItemsDirect
-  extends EventCommandLike<typeof CHANGE_ITEMS> {
+export interface Command_ChangeItemsDirect extends EventCommandLike<
+  typeof CHANGE_ITEMS
+> {
   parameters: ParamArray_GainItemsDirect | ParamArray_LoseItemsDirect;
 }
 
@@ -36,12 +38,12 @@ export type ParamArray_ChangeItemsTemplate<
   T extends {
     operation: ValueOf<Operation_PlusMinus>;
     operand: typeof OPERAND_DIRECT | typeof OPERAND_VARIABLE;
-  }
+  },
 > = [
-  operation: T["operation"],
   itemId: number,
+  operation: T["operation"],
+  operand: T["operand"],
   value: number,
-  operand: T["operand"]
 ];
 
 export type ParamArray_GainItemsDirect = ParamArray_ChangeItemsTemplate<{
