@@ -1,7 +1,7 @@
 import type { Rmmz_Followers } from "./followers";
 import type { Rmmz_Vehicle } from "./vehicle";
 
-export interface Rmmz_GamePlayer {
+export interface Rmmz_PlayerCharactor {
   // プロパティ
   //   _vehicleType: string;
   //   _vehicleGettingOn: boolean;
@@ -54,7 +54,7 @@ export interface Rmmz_GamePlayer {
   increaseSteps(): void;
   makeEncounterCount(): void;
   makeEncounterTroopId(): number;
-  meetsEncounterConditions(encounter: any): boolean;
+  meetsEncounterConditions(encounter: unknown): boolean;
   executeEncounter(): boolean;
   startMapEvent(
     x: number,
