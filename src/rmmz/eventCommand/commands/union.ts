@@ -137,10 +137,12 @@ import type { Command_Skip } from "./skip/types";
 import type { Command_ChangeTileset } from "./tileset/types";
 import type { Command_ChangeTransparency } from "./transparency/types";
 import type { Command_ControlVariables } from "./variable/types";
-import type { Command_ChangeVehicleBGM } from "./vehicle";
-import type { Command_ChangeVehicleImage } from "./vehicle/changeImage/types";
-import type { Command_SetVehicleLocation } from "./vehicle/setLocation/types";
-import type { Command_GetOnOffVehicle } from "./vehicle/types";
+import type {
+  Command_ChangeVehicleBGM,
+  Command_SetVehicleLocation,
+  Command_GetOnOffVehicle,
+  Command_ChangeVehicleImage,
+} from "./vehicle";
 import type { Command_Wait } from "./wait/types";
 import type { Command_SetWeatherEffect } from "./weather/types";
 import type { Command_ChangeWindowColor } from "./window/changeWindowColor/types";

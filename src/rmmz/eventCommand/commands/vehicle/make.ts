@@ -1,9 +1,9 @@
 import type { CHANGE_VEHICLE_IMAGE } from "@RpgTypes/rmmz/rpg";
+import type { Command_GetOnOffVehicle } from "./types";
 import type {
   Command_ChangeVehicleImage,
   ParamObject_ChangeVehicleImage,
-} from "./changeImage/types";
-import type { Command_GetOnOffVehicle } from "./types";
+} from "./types/changeImage";
 
 export const makeCommandGetOnOffVehicle = (
   indent: number = 0,

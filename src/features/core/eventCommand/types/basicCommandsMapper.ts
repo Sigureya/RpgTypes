@@ -20,10 +20,6 @@ import type { Command_ControlTimer } from "@RpgTypes/rmmz/eventCommand/commands/
 import type { Command_ChangeEncounter } from "@RpgTypes/rmmz/eventCommand/commands/encounter/types";
 import type { Command_ConditionalBranch } from "@RpgTypes/rmmz/eventCommand/commands/flow/branch/commandTypes";
 import type {
-  Command_Label,
-  Command_LabelJump,
-} from "@RpgTypes/rmmz/eventCommand/commands/flow/label/types";
-import type {
   Command_ChangeArmors,
   Command_ChangeWeapons,
 } from "@RpgTypes/rmmz/eventCommand/commands/item/change";
@@ -46,20 +42,17 @@ import type { Command_ErasePicture } from "@RpgTypes/rmmz/eventCommand/commands/
 import type { Command_ShakeScreen } from "@RpgTypes/rmmz/eventCommand/commands/screen/shake/types";
 import type { Command_ChangeTileset } from "@RpgTypes/rmmz/eventCommand/commands/tileset/types";
 import type { Command_ChangeTransparency } from "@RpgTypes/rmmz/eventCommand/commands/transparency/types";
-import type { Command_ChangeVehicleImage } from "@RpgTypes/rmmz/eventCommand/commands/vehicle/changeImage/types";
-import type { Command_SetVehicleLocation } from "@RpgTypes/rmmz/eventCommand/commands/vehicle/setLocation/types";
-import type { Command_GetOnOffVehicle } from "@RpgTypes/rmmz/eventCommand/commands/vehicle/types";
 import type { Command_Wait } from "@RpgTypes/rmmz/eventCommand/commands/wait/types";
 import type { Command_SetWeatherEffect } from "@RpgTypes/rmmz/eventCommand/commands/weather/types";
 import type { Command_ChangeWindowColor } from "@RpgTypes/rmmz/eventCommand/commands/window/changeWindowColor/types";
 
 export type CallBackFunc<
   Command extends RpgTypes.EventCommandUnknown,
-  Reulst = void
+  Reulst = void,
 > = (
   command: Readonly<Command>,
   index: number,
-  list: ReadonlyArray<Readonly<RpgTypes.EventCommand>>
+  list: ReadonlyArray<Readonly<RpgTypes.EventCommand>>,
 ) => Reulst;
 
 export interface FallbackMapper<T> {
@@ -90,8 +83,8 @@ export interface BasicMappingObject<T> extends FallbackMapper<T> {
   changeProfile: CallBackFunc<RpgTypes.Command_ChangeActorProfile, T>;
   changeNickname: CallBackFunc<RpgTypes.Command_ChangeActorNickName, T>;
 
-  label: CallBackFunc<Command_Label, T>;
-  labelJump: CallBackFunc<Command_LabelJump, T>;
+  label: CallBackFunc<RpgTypes.Command_Label, T>;
+  labelJump: CallBackFunc<RpgTypes.Command_LabelJump, T>;
   commonEvent: CallBackFunc<RpgTypes.Command_CommonEvent, T>;
   changeBattleBGM: CallBackFunc<RpgTypes.Command_ChangeBattleBGM, T>;
   changeVictoryME: CallBackFunc<RpgTypes.Command_ChangeVictoryME, T>;
@@ -105,11 +98,11 @@ export interface BasicMappingObject<T> extends FallbackMapper<T> {
 
   showAnimation: CallBackFunc<Command_ShowAnimation, T>;
   transferPlayer: CallBackFunc<Command_TransferPlayer, T>;
-  setVehicleLocation: CallBackFunc<Command_SetVehicleLocation, T>;
+  setVehicleLocation: CallBackFunc<RpgTypes.Command_SetVehicleLocation, T>;
   setEventLocation: CallBackFunc<Command_SetEventLocation, T>;
   scrollMap: CallBackFunc<Command_ScrollMap, T>;
   setMovementRoute: CallBackFunc<Command_SetMovementRoute, T>;
-  gettingOnOffVehicle: CallBackFunc<Command_GetOnOffVehicle, T>;
+  gettingOnOffVehicle: CallBackFunc<RpgTypes.Command_GetOnOffVehicle, T>;
   changeTransparency: CallBackFunc<Command_ChangeTransparency, T>;
   showPicture: CallBackFunc<RpgTypes.Command_ShowPicture, T>;
   movePicture: CallBackFunc<RpgTypes.Command_MovePicture, T>;
@@ -142,7 +135,7 @@ export interface BasicMappingObject<T> extends FallbackMapper<T> {
   changeParallax: CallBackFunc<Command_ChangeParallax, T>;
   getLocationsInfo: CallBackFunc<Command_GetLocationInfo, T>;
 
-  changeVehicleImage: CallBackFunc<Command_ChangeVehicleImage, T>;
+  changeVehicleImage: CallBackFunc<RpgTypes.Command_ChangeVehicleImage, T>;
 
   tintScreen: CallBackFunc<Command_TintScreen, T>;
   flashScreen: CallBackFunc<Command_FlashScreen, T>;

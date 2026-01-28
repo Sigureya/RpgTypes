@@ -11,6 +11,7 @@ import type {
   Command_ChangeActorMP,
   Command_ChangeActorTP,
 } from "./actor/changeValues/types";
+import type { Command_RecoverAll } from "./actor/recoverAll/types";
 import type { Command_ShowAnimation } from "./animation/types";
 import type {
   Command_FadeOutBGM,
@@ -97,7 +98,6 @@ import type {
 import type { Command_NoOperation } from "./noOperation";
 import type { Command_ChangePartyMember } from "./party/changeMember/types";
 import type { Command_ChangeGold } from "./party/gold/changeGold";
-import type { Command_RecoverAll } from "./actor/recoverAll/types";
 import type {
   Command_MovePicture,
   Command_RotatePicture,
@@ -118,12 +118,14 @@ import type {
 } from "./shop/types";
 import type { Command_Skip } from "./skip/types";
 import type { Command_ChangeTileset } from "./tileset/types";
-import type { Command_ChangeTransparency } from "./transparency/types";
-import type { Command_ControlVariables } from "./variable/types";
-import type { Command_ChangeVehicleBGM } from "./vehicle";
-import type { Command_ChangeVehicleImage } from "./vehicle/changeImage/types";
-import type { Command_SetVehicleLocation } from "./vehicle/setLocation/types";
-import type { Command_GetOnOffVehicle } from "./vehicle/types";
+import type { Command_ChangeTransparency } from "./transparency";
+import type { Command_ControlVariables } from "./variable";
+import type {
+  Command_ChangeVehicleBGM,
+  Command_ChangeVehicleImage,
+  Command_SetVehicleLocation,
+  Command_GetOnOffVehicle,
+} from "./vehicle";
 import type { Command_Wait } from "./wait/types";
 import type { Command_SetWeatherEffect } from "./weather/types";
 import type { Command_ChangeWindowColor } from "./window/changeWindowColor/types";
