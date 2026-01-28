@@ -7,7 +7,8 @@ export type DeepPartial<T> = {
 };
 
 export type MemberFunctions<T> = {
-  [K in keyof T]: T[K] extends (...args: unknown[]) => unknown
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  [K in keyof T]: T[K] extends (...args: any[]) => unknown
     ? {
         fn: K;
         arg: Parameters<T[K]>;
