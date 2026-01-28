@@ -1,11 +1,15 @@
-import { CHANGE_ARMORS, CHANGE_ITEMS, CHANGE_WEAPONS } from "@RpgTypes/rmmz";
+import {
+  CHANGE_ARMORS,
+  CHANGE_ITEMS,
+  CHANGE_WEAPONS,
+  isUsingVariableItemCommand,
+} from "@RpgTypes/rmmz";
 import type {
   Command_ChangeArmors,
   Command_ChangeItems,
   Command_ChangeWeapons,
 } from "@RpgTypes/rmmz/eventCommand/commands/item/change";
 import {
-  OPERAND_DIRECT,
   OPERATION_GAIN,
   OPERATION_LOSE,
 } from "@RpgTypes/rmmz/eventCommand/commands/item/change/types/constants";
@@ -20,12 +24,12 @@ import type {
 export const extractItemCommands = (
   list: ReadonlyArray<EventCommand>,
   terms: ItemCommandTerms2,
-  commandNameFn: (code: ItemCommandCode) => string
+  commandNameFn: (code: ItemCommandCode) => string,
 ): (ItemCommandParameterDirect | ItemCommandParameterVariable)[] => {
   return list.reduce(
     (
       acc: (ItemCommandParameterDirect | ItemCommandParameterVariable)[],
-      command
+      command,
     ) => {
       if (
         command.code === CHANGE_ARMORS ||
@@ -36,7 +40,7 @@ export const extractItemCommands = (
       }
       return acc;
     },
-    []
+    [],
   );
 };
 
@@ -49,25 +53,24 @@ const KIND_TABKE = {
 export const extractItemChangeData = (
   command: Command_ChangeArmors | Command_ChangeItems | Command_ChangeWeapons,
   terms: ItemCommandTerms2,
-  commandNameFn: (code: ItemCommandCode) => string
+  commandNameFn: (code: ItemCommandCode) => string,
 ): ItemCommandParameterDirect | ItemCommandParameterVariable => {
-  const operand =
-    command.parameters[3] === OPERAND_DIRECT
-      ? {
-          direct: true as const,
-          value: command.parameters[2],
-        }
-      : {
-          direct: false as const,
-          variableId: command.parameters[2],
-        };
+  const operand = isUsingVariableItemCommand(command)
+    ? {
+        direct: false as const,
+        variableId: command.parameters[3],
+      }
+    : {
+        direct: true as const,
+        value: command.parameters[3],
+      };
 
   const operation =
-    command.parameters[0] === OPERATION_GAIN
+    command.parameters[1] === OPERATION_GAIN
       ? terms.gain
-      : command.parameters[0] === OPERATION_LOSE
-      ? terms.lose
-      : terms.unknown;
+      : command.parameters[1] === OPERATION_LOSE
+        ? terms.lose
+        : terms.unknown;
 
   const includesEquip =
     typeof command.parameters[4] === "boolean"
@@ -78,7 +81,7 @@ export const extractItemChangeData = (
 
   return {
     itemKind: KIND_TABKE[command.code],
-    dataId: command.parameters[1],
+    dataId: command.parameters[0],
     code: command.code,
     commandNameMZ: commandNameFn(command.code),
     operation: operation,

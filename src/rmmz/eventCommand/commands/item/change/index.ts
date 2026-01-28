@@ -46,6 +46,8 @@ export {
   makeCommandLoseWeaponV,
 } from "./weapon";
 
+export { isUsingVariableItemCommand } from "./utils";
+
 export {
   makeCommandGainArmor,
   makeCommandGainArmorByVariable,
