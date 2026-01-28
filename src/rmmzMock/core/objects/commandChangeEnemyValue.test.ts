@@ -12,8 +12,7 @@ import {
   makeCommandLoseEnemyMP,
   makeCommandLoseEnemyTP,
 } from "@RpgTypes/rmmz/eventCommand/commands/enemy/change/change";
-import type { Rmmz_Variables } from "@RpgTypes/rmmzRuntime";
-import type { Rmmz_Unit } from "@RpgTypes/rmmzRuntime/objects/core/unit/unit";
+import type { Rmmz_Unit, Rmmz_Variables } from "@RpgTypes/rmmzRuntime";
 import type { FakeBattler, FakeMap } from "./fakes/types";
 import { Game_Interpreter } from "./rmmz_objects";
 type CommandTypes =
@@ -23,16 +22,16 @@ type CommandTypes =
 
 const paramCalledWith = (
   command: CommandTypes,
-  interpreter: Game_Interpreter
+  interpreter: Game_Interpreter,
 ) => {
   expect(interpreter.iterateEnemyIndex).toHaveBeenCalledWith(
     command.parameters[0],
-    expect.any(Function)
+    expect.any(Function),
   );
   expect(interpreter.operateValue).toHaveBeenCalledWith(
     command.parameters[1],
     command.parameters[2],
-    command.parameters[3]
+    command.parameters[3],
   );
   const key: keyof Game_Interpreter = `command${command.code}`;
   expect(interpreter[key]).toHaveBeenCalledWith(command.parameters);
@@ -40,7 +39,7 @@ const paramCalledWith = (
 
 const variableCallWith = (
   mock: MockedObject<Rmmz_Variables>,
-  record: Record<number, number>
+  record: Record<number, number>,
 ) => {
   Object.entries(record).forEach(([k, v]) => {
     expect(mock.value).toHaveBeenCalledWith(Number(k));
@@ -81,7 +80,7 @@ interface MakeMocksResult {
   mockVariables: MockedObject<Rmmz_Variables>;
 }
 const makeMockVariables = (
-  values: Record<number, number>
+  values: Record<number, number>,
 ): MockedObject<Rmmz_Variables> => {
   return {
     clear: vi.fn(),
@@ -149,7 +148,7 @@ const runTestCase = <T extends CommandTypes>(testCase: TestCase<T>) => {
       paramCalledWith(testCase.expected, interpreter);
       testCase.targets.forEach((i) => {
         expect(mock.enemies[i][testCase.fnName]).toHaveBeenCalledWith(
-          testCase.value
+          testCase.value,
         );
       });
       if (testCase.variables) {

@@ -8,8 +8,10 @@ import {
   makeCommandGainActorHP,
   makeCommandLoseActorHP,
 } from "@RpgTypes/rmmz/eventCommand";
-import type { Rmmz_Variables } from "@RpgTypes/rmmzRuntime";
-import type { Rmmz_ActorsTemplate } from "@RpgTypes/rmmzRuntime/objects/core/battler/actors";
+import type {
+  Rmmz_ActorsTemplate,
+  Rmmz_Variables,
+} from "@RpgTypes/rmmzRuntime";
 import type { FakeActor, FakeMap } from "./fakes/types";
 import { Game_Party, Game_Interpreter } from "./rmmz_objects";
 

@@ -5,7 +5,7 @@ import type {
   Trait,
 } from "@RpgTypes/rmmz/rpg";
 import { Game_Battler } from "./battler";
-import type { Rmmz_Enemy } from "./core/battler/enemy";
+import type { Rmmz_Enemy } from "./core";
 import type { Rmmz_Action } from "./core/types";
 
 export declare class Game_Enemy
@@ -63,7 +63,7 @@ export declare class Game_Enemy
   isActionValid(action: Enemy_Action): boolean;
   selectAction(
     actionList: ReadonlyArray<Enemy_Action>,
-    ratingZero: number
+    ratingZero: number,
   ): void;
   selectAllActions(actionList: ReadonlyArray<Enemy_Action>): void;
   makeActions(): void;

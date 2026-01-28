@@ -1,5 +1,4 @@
-import type { Rmmz_Enemy } from "./core/battler/enemy";
-import type { Rmmz_Troop } from "./core/troop";
+import type { Rmmz_Troop, Rmmz_Enemy } from "./core";
 
 export declare class Game_Troop implements Partial<Rmmz_Troop> {
   members(): Rmmz_Enemy[];

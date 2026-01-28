@@ -1,4 +1,4 @@
-import type { Rmmz_Unit } from "./core/unit/unit";
+import type { Rmmz_Unit } from "./core";
 
 export declare class Game_Unit<Battler> implements Rmmz_Unit<Battler> {
   tpbBaseSpeed(): number;
