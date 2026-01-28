@@ -1,12 +1,12 @@
 import { CONTROL_VARIABLES } from "@RpgTypes/rmmz/rpg";
 import { OPERAND_RANDOM } from "./constants";
+import type { MakeOtherParam } from "./otherTypes";
 import type {
   ParamObject_WritingTarget,
   ParamObject_Operand_Random,
   Operand_Random,
   Command_ControlVariables,
 } from "./types";
-import type { MakeOtherParam } from "./otherTypes";
 
 export const toArrayOperandRandom = (
   target: ParamObject_WritingTarget,
