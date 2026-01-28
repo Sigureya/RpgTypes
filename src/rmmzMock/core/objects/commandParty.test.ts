@@ -157,7 +157,7 @@ const testCases: TestCase[] = [
       indent: 0,
       parameters: [1, 0, 0, 6, false],
     },
-    expected: [{ fn: "gainItem", arg: [mockWeapons[1], 1, false] }],
+    expected: [{ fn: "gainItem", arg: [mockWeapons[1], 6, false] }],
   },
 ];
 
