@@ -1,4 +1,9 @@
-import type { Rmmz_Actor, Rmmz_Battler, Rmmz_Map } from "@RpgTypes/rmmzRuntime";
+import type {
+  Rmmz_Actor,
+  Rmmz_Battler,
+  Rmmz_Map,
+  Rmmz_Variables,
+} from "@RpgTypes/rmmzRuntime";
 import type { Rmmz_ActorsTemplate } from "@RpgTypes/rmmzRuntime/objects/core/battle/battler/actors";
 
 export type FakeBattler = Pick<Rmmz_Battler, ActorKeys>;
@@ -20,3 +25,5 @@ export type FakeActor = Pick<
   Rmmz_Actor,
   "actorId" | "gainHp" | "loseHp" | "isAlive" | "isDead"
 >;
+
+export type FakeVariables = Pick<Rmmz_Variables, "value">;

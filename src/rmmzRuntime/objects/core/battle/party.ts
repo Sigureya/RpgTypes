@@ -11,4 +11,5 @@ export interface Rmmz_Party extends Rmmz_Unit<Rmmz_Actor>, Rmmz_UnitPlayer {
     amount: number,
     includeEquip: boolean,
   ): void;
+  inBattle(): boolean;
 }
