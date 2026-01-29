@@ -1,6 +1,6 @@
 import { Data_AnyGoodsUnion, Enemy_Action, Data_Enemy, Trait } from '../../rmmz/rpg';
 import { Game_Battler } from './battler';
-import { Rmmz_Enemy } from './core/battler/enemy';
+import { Rmmz_Enemy } from './core';
 import { Rmmz_Action } from './core/types';
 export declare class Game_Enemy extends Game_Battler implements Partial<Rmmz_Enemy> {
     constructor(enemyId: number, x: number, y: number);

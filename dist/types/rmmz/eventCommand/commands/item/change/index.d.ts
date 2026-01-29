@@ -3,4 +3,5 @@ export type { Command_ChangeItems, Command_ChangeItemsByVariable, Command_Change
 export type { Command_ChangeWeapons, ParamArray_ChangeWeapons, ParamObject_ChangeWeapons, ParamObject_ChangeWeaponsFullset, ParamObject_ChangeWeaponsV, } from './types/weapon';
 export { fromArrayChangeItems, isUsingVaribleCommandChangingItems, makeCommandChangeItems, makeCommandGainItem, makeCommandGainItemV, makeCommandLoseItem, makeCommandLoseItemV, } from './item';
 export { fromArrayChangeWeapons, makeCommandChangeWeapons, makeCommandGainWeapon, makeCommandGainWeaponV, makeCommandLoseWeapon, makeCommandLoseWeaponV, } from './weapon';
+export { getItemIdFromItemCommand, isUsingVariableItemCommand } from './utils';
 export { makeCommandGainArmor, makeCommandGainArmorByVariable, makeCommandLoseArmor, makeCommandLoseArmorByVariable, } from './armor';

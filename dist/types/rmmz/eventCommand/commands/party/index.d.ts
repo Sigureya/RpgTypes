@@ -1,4 +1,3 @@
-export * from './gold/changeGold';
-export type { Command_ChangeGold, ParamArray_ChangeGold, } from './gold/changeGold';
-export type { Command_ChangePartyMember, ParamArray_ChangePartyMember, ParamObject_ChangePartyMember, } from './changeMember/types';
-export { makeCommandAddPartyMember, makeCommandRemovePartyMember, } from './changeMember/changeMember';
+export type { Command_ChangeGold, ParamArray_ChangeGold, } from './types/changeGold';
+export type { Command_ChangePartyMember, ParamArray_ChangePartyMember, ParamObject_ChangePartyMember, } from './types/changeMember';
+export { makeCommandAddPartyMember, makeCommandGainGold, makeCommandGainGoldByVariable, makeCommandLoseGold, makeCommandLoseGoldByVariable, makeCommandRemovePartyMember, } from './changeMember';

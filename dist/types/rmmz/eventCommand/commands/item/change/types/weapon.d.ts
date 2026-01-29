@@ -21,10 +21,10 @@ export type ParamArray_ChangeWeaponsTemplate<T extends {
     operation: Operation_PlusMinus["PLUS"] | Operation_PlusMinus["MINUS"];
     operand: typeof OPERAND_DIRECT | typeof OPERAND_VARIABLE;
 }> = [
-    operation: T["operation"],
     weaponId: number,
-    value: number,
+    operation: T["operation"],
     operand: T["operand"],
+    value: number,
     includesEquip: boolean
 ];
 export type ParamArray_GainWeaponsDirect = ParamArray_ChangeWeaponsTemplate<{
