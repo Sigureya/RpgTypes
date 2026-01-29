@@ -3,8 +3,10 @@ import { describe, expect, test, vi } from "vitest";
 import type { MemberFunctions } from "@RpgTypes/libs";
 import type { EventCommand } from "@RpgTypes/rmmz/eventCommand";
 import {
+  makeCommandGainGold,
   makeCommandGainItem,
   makeCommandGainWeapon,
+  makeCommandLoseGold,
 } from "@RpgTypes/rmmz/eventCommand";
 import type { Data_Armor, Data_Item, Data_Weapon } from "@RpgTypes/rmmz/rpg";
 import {
@@ -127,12 +129,38 @@ const runTestCase = (tc: TestCase) => {
     });
   });
 };
+
 const testCases: TestCase[] = [
-  //   {
-  //     name: "Change Gold",
-  //     command: makeCommandChangeGold({ value: 50 }),
-  //     expected: [{ fn: "gainGold", arg: [50] }],
-  //   },
+  {
+    name: "gain gold",
+    command: makeCommandGainGold({ value: 50 }),
+    commandLiteral: {
+      code: 125,
+      indent: 0,
+      parameters: [0, 0, 50],
+    },
+    expected: [{ fn: "gainGold", arg: [50] }],
+  },
+  {
+    name: "lose gold",
+    command: makeCommandLoseGold({ value: 128 }),
+    commandLiteral: {
+      code: 125,
+      indent: 0,
+      parameters: [1, 0, 128],
+    },
+    expected: [{ fn: "gainGold", arg: [-128] }],
+  },
+  {
+    name: "lose gold (negative value)",
+    command: makeCommandGainGold({ value: -64 }),
+    commandLiteral: {
+      code: 125,
+      indent: 0,
+      parameters: [0, 0, -64],
+    },
+    expected: [{ fn: "gainGold", arg: [-64] }],
+  },
   {
     name: "gain Item",
     command: makeCommandGainItem({
