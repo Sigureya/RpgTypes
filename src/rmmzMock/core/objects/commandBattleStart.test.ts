@@ -6,7 +6,7 @@ import {
   makeCommandBattleProcessingDirect,
   makeCommandBattleProcessingEncount,
   makeCommandBattleProcessingVariable,
-} from "@RpgTypes/rmmz/eventCommand/commands/battle/battleProcessing";
+} from "@RpgTypes/rmmz/eventCommand";
 import { BATTLE_PROCESSING } from "@RpgTypes/rmmz/rpg";
 import type { Rmmz_Party, Rmmz_PlayerCharactor } from "@RpgTypes/rmmzRuntime";
 import type { Rmmz_BattleManager } from "@RpgTypes/rmmzRuntime/managers/battle";
@@ -100,7 +100,7 @@ const testExecuteInBattle = (command: Command_BattleProcessing) => {
   interpreter.executeCommand();
   expect(mocks.party.inBattle).toHaveBeenCalledOnce();
   expect(mocks.variables.value).not.toHaveBeenCalled();
-  expect(mocks.player.makeEncounterTroopId).not.toHaveBeenCalledOnce();
+  expect(mocks.player.makeEncounterTroopId).not.toHaveBeenCalled();
   expect(mocks.sceneManager.push).not.toHaveBeenCalled();
   expect(mocks.sceneManager.goto).not.toHaveBeenCalled();
   expect(mocks.battleManager.setup).not.toHaveBeenCalled();
@@ -135,7 +135,7 @@ describe("command 301 (Battle Start)", () => {
       expect(mocks.battleManager.setup).toHaveBeenCalledOnce();
       expect(mocks.party.inBattle).toHaveBeenCalledOnce();
       expect(mocks.variables.value).not.toHaveBeenCalled();
-      expect(mocks.player.makeEncounterTroopId).not.toHaveBeenCalledOnce();
+      expect(mocks.player.makeEncounterTroopId).not.toHaveBeenCalled();
       expect(mocks.sceneManager.push).toHaveBeenCalledOnce();
       expect(mocks.sceneManager.push).toHaveBeenCalledWith(MOCK_SCENE_BATTLE);
       expect(mocks.battleManager.setEventCallback).toHaveBeenCalledOnce();
@@ -165,11 +165,11 @@ describe("command 301 (Battle Start)", () => {
       interpreter.setup([command], 0);
       interpreter.executeCommand();
       expect(mocks.battleManager.setup).not.toHaveBeenCalled();
-      expect(mocks.battleManager.setEventCallback).not.toHaveBeenCalledOnce();
+      expect(mocks.battleManager.setEventCallback).not.toHaveBeenCalled();
 
       expect(mocks.party.inBattle).toHaveBeenCalledOnce();
       expect(mocks.variables.value).not.toHaveBeenCalled();
-      expect(mocks.player.makeEncounterTroopId).not.toHaveBeenCalledOnce();
+      expect(mocks.player.makeEncounterTroopId).not.toHaveBeenCalled();
       expect(mocks.sceneManager.push).not.toHaveBeenCalled();
       expect(mocks.sceneManager.goto).not.toHaveBeenCalled();
     });
@@ -235,7 +235,7 @@ describe("command 301 (Battle Start)", () => {
       interpreter.executeCommand();
       expect(mocks.party.inBattle).toHaveBeenCalledOnce();
       expect(mocks.variables.value).toHaveBeenCalledOnce();
-      expect(mocks.player.makeEncounterTroopId).not.toHaveBeenCalledOnce();
+      expect(mocks.player.makeEncounterTroopId).not.toHaveBeenCalled();
       expect(mocks.sceneManager.push).toHaveBeenCalledOnce();
       expect(mocks.sceneManager.push).toHaveBeenCalledWith(MOCK_SCENE_BATTLE);
       expect(mocks.battleManager.setup).toHaveBeenCalledOnce();
