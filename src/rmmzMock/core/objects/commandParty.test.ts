@@ -3,8 +3,12 @@ import { describe, expect, test, vi } from "vitest";
 import type { MemberFunctions } from "@RpgTypes/libs";
 import type { EventCommand } from "@RpgTypes/rmmz/eventCommand";
 import {
+  makeCommandGainGold,
+  makeCommandGainGoldByVariable,
   makeCommandGainItem,
   makeCommandGainWeapon,
+  makeCommandLoseGold,
+  makeCommandLoseGoldByVariable,
 } from "@RpgTypes/rmmz/eventCommand";
 import type { Data_Armor, Data_Item, Data_Weapon } from "@RpgTypes/rmmz/rpg";
 import {
@@ -12,7 +16,7 @@ import {
   makeItemData,
   makeWeaponData,
 } from "@RpgTypes/rmmz/rpg";
-import type { Rmmz_UnitPlayer } from "@RpgTypes/rmmzRuntime";
+import type { Rmmz_UnitPlayer, Rmmz_Variables } from "@RpgTypes/rmmzRuntime";
 import type { FakeMap } from "./fakes/types";
 import { Game_Interpreter } from "./rmmz_objects";
 
@@ -24,14 +28,18 @@ type FakeParty = Pick<
   Rmmz_UnitPlayer,
   "gold" | "gainGold" | "loseGold" | "gainItem" | "loseItem"
 >;
+const MOCK_OLD_VALUE = 60;
 
 const PARTY_METHOD_KEYS = [
   "gold",
   "gainGold",
   "loseGold",
   "gainItem",
-  "loseItem",
 ] as const satisfies (keyof FakeParty)[];
+
+const VARIABLE_METHOD_KEYS = [
+  "value",
+] as const satisfies (keyof Rmmz_Variables)[];
 
 const mockItems = [
   null,
@@ -56,6 +64,13 @@ const createMockParty = (): MockedObject<FakeParty> => ({
   loseGold: vi.fn(),
   gainItem: vi.fn(),
   loseItem: vi.fn(),
+});
+
+const createMockedVariable = (): MockedObject<Rmmz_Variables> => ({
+  clear: vi.fn(),
+  value: vi.fn().mockReturnValue(MOCK_OLD_VALUE),
+  setValue: vi.fn(),
+  onChange: vi.fn(),
 });
 
 const makeMockMap = (): FakeMap => ({
@@ -85,34 +100,49 @@ const assertExactMemberCalls = <T>(
   });
 };
 
+const createMockObjects = () => {
+  return {
+    map: makeMockMap(),
+    variables: createMockedVariable(),
+    party: createMockParty(),
+  };
+};
+
 /* ----------------------------------------
  * テスト実行環境構築
  * ------------------------------------- */
 
-const setupInterpreter = (command: EventCommand) => {
+const setupInterpreter = (
+  command: EventCommand,
+  { map, party, variables }: ReturnType<typeof createMockObjects>,
+) => {
   vi.stubGlobal("$dataItems", mockItems);
   vi.stubGlobal("$dataWeapons", mockWeapons);
   vi.stubGlobal("$dataArmors", mockArmors);
 
-  const party = createMockParty();
   vi.stubGlobal("$gameParty", party);
-  const map = makeMockMap();
   vi.stubGlobal("$gameMap", map);
+  vi.stubGlobal("$gameVariables", variables);
   const interpreter = new Game_Interpreter();
   interpreter.setup([command], 0);
 
-  return { interpreter, party };
+  return interpreter;
 };
 
 /* ----------------------------------------
  * テストケース定義
  * ------------------------------------- */
 
+interface MethodCalls {
+  party: MemberFunctions<FakeParty>[];
+  variables: MemberFunctions<Rmmz_Variables>[];
+}
+
 interface TestCase {
   name: string;
   command: EventCommand;
   commandLiteral: EventCommand;
-  expected: MemberFunctions<FakeParty>[];
+  calls: MethodCalls;
 }
 
 const runTestCase = (tc: TestCase) => {
@@ -120,19 +150,111 @@ const runTestCase = (tc: TestCase) => {
     test("make", () => {
       expect(tc.command).toEqual(tc.commandLiteral);
     });
-    test("exec", () => {
-      const { interpreter, party } = setupInterpreter(tc.commandLiteral);
-      interpreter.executeCommand();
-      assertExactMemberCalls(party, tc.expected, PARTY_METHOD_KEYS);
+    describe("exec", () => {
+      test("party", () => {
+        const mock = createMockObjects();
+        const interpreter = setupInterpreter(tc.commandLiteral, mock);
+        interpreter.executeCommand();
+        expect(mock.party.loseGold).not.toHaveBeenCalled();
+        expect(mock.party.loseItem).not.toHaveBeenCalled();
+        assertExactMemberCalls(mock.party, tc.calls.party, PARTY_METHOD_KEYS);
+      });
+      test("variables", () => {
+        const mock = createMockObjects();
+        const interpreter = setupInterpreter(tc.commandLiteral, mock);
+        interpreter.executeCommand();
+        expect(mock.variables.clear).not.toHaveBeenCalled();
+        expect(mock.variables.setValue).not.toHaveBeenCalled();
+        expect(mock.variables.onChange).not.toHaveBeenCalled();
+        assertExactMemberCalls(
+          mock.variables,
+          tc.calls.variables,
+          VARIABLE_METHOD_KEYS,
+        );
+      });
     });
   });
 };
+
 const testCases: TestCase[] = [
-  //   {
-  //     name: "Change Gold",
-  //     command: makeCommandChangeGold({ value: 50 }),
-  //     expected: [{ fn: "gainGold", arg: [50] }],
-  //   },
+  {
+    name: "gain gold",
+    command: makeCommandGainGold({ value: 50 }),
+    commandLiteral: {
+      code: 125,
+      indent: 0,
+      parameters: [0, 0, 50],
+    },
+    calls: {
+      variables: [],
+      party: [{ fn: "gainGold", arg: [50] }],
+    },
+  },
+  {
+    name: "gain gold (negative value)",
+    command: makeCommandLoseGold({ value: -30 }),
+    commandLiteral: {
+      code: 125,
+      indent: 0,
+      parameters: [1, 0, -30],
+    },
+    calls: {
+      variables: [],
+      party: [{ fn: "gainGold", arg: [30] }],
+    },
+  },
+  {
+    name: "gain gold by variable",
+    command: makeCommandGainGoldByVariable({ variableId: 5 }),
+    commandLiteral: {
+      code: 125,
+      indent: 0,
+      parameters: [0, 1, 5],
+    },
+    calls: {
+      variables: [{ fn: "value", arg: [5] }],
+      party: [{ fn: "gainGold", arg: [MOCK_OLD_VALUE] }],
+    },
+  },
+  {
+    name: "lose gold",
+    command: makeCommandLoseGold({ value: 128 }),
+    commandLiteral: {
+      code: 125,
+      indent: 0,
+      parameters: [1, 0, 128],
+    },
+    calls: {
+      variables: [],
+      party: [{ fn: "gainGold", arg: [-128] }],
+    },
+  },
+  {
+    name: "lose gold (negative value)",
+    command: makeCommandGainGold({ value: -64 }),
+    commandLiteral: {
+      code: 125,
+      indent: 0,
+      parameters: [0, 0, -64],
+    },
+    calls: {
+      variables: [],
+      party: [{ fn: "gainGold", arg: [-64] }],
+    },
+  },
+  {
+    name: "lose gold by variable",
+    command: makeCommandLoseGoldByVariable({ variableId: 10 }),
+    commandLiteral: {
+      code: 125,
+      indent: 0,
+      parameters: [1, 1, 10],
+    },
+    calls: {
+      variables: [{ fn: "value", arg: [10] }],
+      party: [{ fn: "gainGold", arg: [-MOCK_OLD_VALUE] }],
+    },
+  },
   {
     name: "gain Item",
     command: makeCommandGainItem({
@@ -144,7 +266,10 @@ const testCases: TestCase[] = [
       indent: 0,
       parameters: [1, 0, 0, 3],
     },
-    expected: [{ fn: "gainItem", arg: [mockItems[1], 3] }],
+    calls: {
+      variables: [],
+      party: [{ fn: "gainItem", arg: [mockItems[1], 3] }],
+    },
   },
   {
     name: "gain Weapon",
@@ -157,12 +282,15 @@ const testCases: TestCase[] = [
       indent: 0,
       parameters: [1, 0, 0, 6, false],
     },
-    expected: [{ fn: "gainItem", arg: [mockWeapons[1], 6, false] }],
+    calls: {
+      variables: [],
+      party: [{ fn: "gainItem", arg: [mockWeapons[1], 6, false] }],
+    },
   },
 ];
 
 /* ----------------------------------------
- * テスト定義
+ * テスト実行
  * ------------------------------------- */
 
 testCases.forEach(runTestCase);

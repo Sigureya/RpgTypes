@@ -9,5 +9,9 @@ export type {
 } from "./types/changeMember";
 export {
   makeCommandAddPartyMember,
+  makeCommandGainGold,
+  makeCommandGainGoldByVariable,
+  makeCommandLoseGold,
+  makeCommandLoseGoldByVariable,
   makeCommandRemovePartyMember,
 } from "./changeMember";
