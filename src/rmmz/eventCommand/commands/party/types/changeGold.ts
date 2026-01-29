@@ -16,7 +16,9 @@ export type ParamArray_ChangeGold = [
 ];
 
 export interface ParamObject_ChangeGold {
-  operation: ValueOf<Operation_PlusMinus>;
-  operandType: number;
-  operand: number;
+  value: number;
+}
+
+export interface ParamObject_ChangeGoldV {
+  variableId: number;
 }
