@@ -13,4 +13,5 @@ export interface Rmmz_Vehicle {
     setBgm(bgm: AudioFileParams): void;
     playBgm(): void;
     isLandOk(x: number, y: number, d: Direction8): boolean;
+    setImage(characterImage: string, characterIndex: number): void;
 }

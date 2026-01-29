@@ -1,5 +1,5 @@
 import { Command_ChangeArmors, Command_ChangeItems, Command_ChangeWeapons } from './commands/item/change';
-import { Command_ChangeGold } from './commands/party/gold/changeGold';
+import { Command_ChangeGold } from './commands/party/types/changeGold';
 import { OperateValueHandlers } from './runtime/operateValue/types';
 export declare const OPERATION_POSITIVE: 0;
 export declare const operateValue: <Result, T>(operation: number, operandType: number, operand: number, handlers: OperateValueHandlers<Result, T>) => Result;

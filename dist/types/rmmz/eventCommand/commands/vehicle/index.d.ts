@@ -1,4 +1,3 @@
-export * from './changeBGM/types';
-export * from './changeImage/types';
-export * from './setLocation/types';
+export * from './make';
 export * from './types';
+export * from './types/constants';

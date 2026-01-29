@@ -1,5 +1,5 @@
 import { Data_Armor, Data_Equipment, Data_Skill, Data_State, Data_UsableItem, Data_Weapon, ParamID } from '../../rmmz/rpg';
-import { Rmmz_BattlerBase } from './core/battler/base';
+import { Rmmz_BattlerBase } from './core';
 export declare class Game_BattlerBase implements Rmmz_BattlerBase {
     get mhp(): number;
     get mmp(): number;

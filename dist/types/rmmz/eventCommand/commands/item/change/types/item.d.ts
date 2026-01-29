@@ -21,10 +21,10 @@ export type ParamArray_ChangeItemsTemplate<T extends {
     operation: ValueOf<Operation_PlusMinus>;
     operand: typeof OPERAND_DIRECT | typeof OPERAND_VARIABLE;
 }> = [
-    operation: T["operation"],
     itemId: number,
-    value: number,
-    operand: T["operand"]
+    operation: T["operation"],
+    operand: T["operand"],
+    value: number
 ];
 export type ParamArray_GainItemsDirect = ParamArray_ChangeItemsTemplate<{
     operation: Operation_PlusMinus["PLUS"];
