@@ -1,7 +1,13 @@
 import type { MockedObject } from "vitest";
 import { describe, expect, test, vi } from "vitest";
-import type { Command_ShowAnimation } from "@RpgTypes/rmmz/eventCommand";
-import { makeCommandShowAnimation } from "@RpgTypes/rmmz/eventCommand";
+import type {
+  Command_ShowAnimation,
+  Command_ShowBalloonIcon,
+} from "@RpgTypes/rmmz/eventCommand";
+import {
+  makeCommandShowAnimation,
+  makeCommandShowBalloonIcon,
+} from "@RpgTypes/rmmz/eventCommand";
 import { SHOW_ANIMATION } from "@RpgTypes/rmmz/rpg";
 import type { Rmmz_InterpreterListener } from "@RpgTypes/rmmzRuntime/objects/core/temp/interpreterListener";
 import type { FakeMap } from "./fakes/types";
@@ -75,6 +81,7 @@ describe("commandShowAnimation", () => {
           mockAnimationId,
         );
         expect(interpreter.setWaitMode).toHaveBeenCalledOnce();
+        expect(mocks.temp.requestBalloon).not.toHaveBeenCalled();
       });
     });
   });
@@ -114,6 +121,7 @@ describe("commandShowAnimation", () => {
         interpreter.executeCommand();
         expect(mocks.temp.requestAnimation).not.toHaveBeenCalled();
         expect(interpreter.setWaitMode).not.toHaveBeenCalled();
+        expect(mocks.temp.requestBalloon).not.toHaveBeenCalled();
       });
       test("should request animation for the character without waiting", () => {
         const mocks = createMockObjects();
@@ -128,7 +136,24 @@ describe("commandShowAnimation", () => {
           mockAnimationId,
         );
         expect(interpreter.setWaitMode).not.toHaveBeenCalled();
+        expect(mocks.temp.requestBalloon).not.toHaveBeenCalled();
       });
     });
+  });
+});
+
+describe("commandBalloon", () => {
+  const command: Command_ShowBalloonIcon = {
+    code: 213,
+    indent: 0,
+    parameters: [3, 4, true],
+  };
+  test("make", () => {
+    const result: Command_ShowBalloonIcon = makeCommandShowBalloonIcon({
+      characterId: 3,
+      balloonId: 4,
+      waiting: true,
+    });
+    expect(result).toEqual(command);
   });
 });
