@@ -13,9 +13,7 @@ import type { Rmmz_InterpreterListener } from "@RpgTypes/rmmzRuntime/objects/cor
 import type { FakeMap } from "./fakes/types";
 import { Game_Interpreter } from "./rmmz_objects";
 
-const MOCK_CHARACTER = {
-  name: "mock character",
-};
+const MOCK_CHARACTER = {};
 
 const makeMockMap = (): FakeMap => ({
   mapId: () => 1,
@@ -65,6 +63,7 @@ describe("commandShowAnimation", () => {
         vi.spyOn(interpreter, "setWaitMode");
         interpreter.setup([command], 0);
         interpreter.executeCommand();
+        expect(interpreter.character).toHaveBeenCalledOnce();
         expect(mocks.temp.requestAnimation).not.toHaveBeenCalled();
         expect(interpreter.setWaitMode).not.toHaveBeenCalled();
       });
@@ -76,6 +75,7 @@ describe("commandShowAnimation", () => {
         vi.spyOn(interpreter, "setWaitMode");
         interpreter.setup([command], 0);
         interpreter.executeCommand();
+        expect(interpreter.character).toHaveBeenCalledOnce();
         expect(mocks.temp.requestAnimation).toHaveBeenCalledWith(
           [MOCK_CHARACTER],
           mockAnimationId,
@@ -119,6 +119,7 @@ describe("commandShowAnimation", () => {
         vi.spyOn(interpreter, "setWaitMode");
         interpreter.setup([command], 0);
         interpreter.executeCommand();
+        expect(interpreter.character).toHaveBeenCalledOnce();
         expect(mocks.temp.requestAnimation).not.toHaveBeenCalled();
         expect(interpreter.setWaitMode).not.toHaveBeenCalled();
         expect(mocks.temp.requestBalloon).not.toHaveBeenCalled();
@@ -131,6 +132,7 @@ describe("commandShowAnimation", () => {
         vi.spyOn(interpreter, "setWaitMode");
         interpreter.setup([command], 0);
         interpreter.executeCommand();
+        expect(interpreter.character).toHaveBeenCalledOnce();
         expect(mocks.temp.requestAnimation).toHaveBeenCalledWith(
           [MOCK_CHARACTER],
           mockAnimationId,
@@ -143,17 +145,49 @@ describe("commandShowAnimation", () => {
 });
 
 describe("commandBalloon", () => {
+  const balloonId = 4;
   const command: Command_ShowBalloonIcon = {
     code: 213,
     indent: 0,
-    parameters: [3, 4, true],
+    parameters: [3, balloonId, true],
   };
   test("make", () => {
     const result: Command_ShowBalloonIcon = makeCommandShowBalloonIcon({
       characterId: 3,
-      balloonId: 4,
+      balloonId: balloonId,
       waiting: true,
     });
     expect(result).toEqual(command);
+  });
+  describe("exec", () => {
+    test("should not request balloon if character is null", () => {
+      const mocks = createMockObjects();
+      stubGlobalObjects(mocks);
+      const interpreter = new Game_Interpreter();
+      vi.spyOn(interpreter, "character").mockReturnValue(null);
+      vi.spyOn(interpreter, "setWaitMode");
+      interpreter.setup([command], 0);
+      interpreter.executeCommand();
+      expect(interpreter.character).toHaveBeenCalledOnce();
+      expect(mocks.temp.requestAnimation).not.toHaveBeenCalled();
+      expect(interpreter.setWaitMode).not.toHaveBeenCalled();
+      expect(mocks.temp.requestBalloon).not.toHaveBeenCalled();
+    });
+    test("should not request balloon if character is null", () => {
+      const mocks = createMockObjects();
+      stubGlobalObjects(mocks);
+      const interpreter = new Game_Interpreter();
+      vi.spyOn(interpreter, "character").mockReturnValue(MOCK_CHARACTER);
+      vi.spyOn(interpreter, "setWaitMode");
+      interpreter.setup([command], 0);
+      interpreter.executeCommand();
+      expect(interpreter.character).toHaveBeenCalledOnce();
+      expect(mocks.temp.requestBalloon).toHaveBeenCalledWith(
+        MOCK_CHARACTER,
+        balloonId,
+      );
+      expect(interpreter.setWaitMode).toHaveBeenCalledOnce();
+      expect(mocks.temp.requestAnimation).not.toHaveBeenCalled();
+    });
   });
 });
