@@ -6,5 +6,12 @@ export interface Command_ShowBalloonIcon extends EventCommandLike<213> {
 
 export type ParamArray_ShowBalloonIcon = [
   characterId: number,
-  balloonId: number
+  balloonId: number,
+  waiting: boolean,
 ];
+
+export interface ParamObject_ShowBalloonIcon {
+  characterId: number;
+  balloonId: number;
+  waiting: boolean;
+}

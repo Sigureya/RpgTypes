@@ -1,5 +1,3 @@
-import type { ValueOf } from "@RpgTypes/libs/templates/valueOf";
-import type { Toggle } from "@RpgTypes/rmmz/utils";
 import type { EventCommandLike } from "../../frame";
 
 export interface Command_ShowAnimation extends EventCommandLike<212> {
@@ -9,5 +7,11 @@ export interface Command_ShowAnimation extends EventCommandLike<212> {
 export type ParamArray_ShowAnimation = [
   characterId: number,
   animationId: number,
-  waiting: ValueOf<Toggle>
+  waiting: boolean,
 ];
+
+export interface ParamObject_ShowAnimation {
+  characterId: number;
+  animationId: number;
+  waiting: boolean;
+}
