@@ -119,6 +119,7 @@ export declare class Game_Interpreter
   nextEventCode(): EventCode | 0;
   setupItemChoice(params: unknown): void;
   setupNumInput(params: unknown): void;
+  character(characterId: number): unknown;
   iterateActorEx(
     param1: number,
     param2: number,
