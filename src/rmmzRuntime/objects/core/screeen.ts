@@ -52,7 +52,7 @@ export interface Rmmz_Screen {
   maxPictures(): number;
   startFadeOut(duration: number): void;
   startFadeIn(duration: number): void;
-  startTint(tone: number[], duration: number): void;
+  startTint(tone: ReadonlyArray<number>, duration: number): void;
   startFlash(color: ColorRGBA, duration: number): void;
   startShake(power: number, speed: number, duration: number): void;
   startZoom(x: number, y: number, scale: number, duration: number): void;
