@@ -104,11 +104,11 @@ import type {
   Command_TintPicture,
 } from "./picture";
 import type { Command_ErasePicture } from "./picture/erase/types";
-import type { Command_ShakeScreen } from "./screen/shake/types";
 import type {
   Command_FlashScreen,
   Command_TintScreen,
   Command_FadeOutScreen,
+  Command_ShakeScreen,
 } from "./screen/types";
 import type { Command_ScriptBody, Command_ScriptHeader } from "./script/types";
 import type {
