@@ -1,4 +1,4 @@
-export * from "./fadeout";
+export * from "./fade";
 export * from "./flash";
 export * from "./shake";
 export * from "./tint";
