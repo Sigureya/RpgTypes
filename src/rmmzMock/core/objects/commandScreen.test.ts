@@ -1,8 +1,18 @@
 import type { MockedObject } from "vitest";
 import { describe, expect, test, vi } from "vitest";
-import type { MemberFunctions } from "@RpgTypes/libs";
-import type { EventCommand } from "@RpgTypes/rmmz/eventCommand";
-import { makeCommandSetWeatherEffect } from "@RpgTypes/rmmz/eventCommand";
+import type { ColorRGBA } from "@RpgTypes/libs";
+import type {
+  Command_FadeInScreen,
+  Command_FadeOutScreen,
+  Command_SetWeatherEffect,
+  Command_TintScreen,
+  EventCommand,
+} from "@RpgTypes/rmmz/eventCommand";
+import {
+  makeCommandFadeInScreen,
+  makeCommandFadeOutScreen,
+  makeCommandSetWeatherEffect,
+} from "@RpgTypes/rmmz/eventCommand";
 import type { Rmmz_Message, Rmmz_Party } from "@RpgTypes/rmmzRuntime";
 import type { Rmmz_Screen } from "@RpgTypes/rmmzRuntime/objects/core/screeen";
 import type { FakeMap } from "./fakes/types";
@@ -11,10 +21,19 @@ import { Game_Interpreter } from "./rmmz_objects";
 type FakeParty = Pick<Rmmz_Party, "inBattle">;
 type FakeMessage = Pick<Rmmz_Message, "isBusy">;
 
-type FakeScreen = Pick<
-  Rmmz_Screen,
-  "changeWeather" | "startFlash" | "startShake"
->;
+type FakeScreen = Pick<Rmmz_Screen, (typeof SCREEN_KEYS)[number]>;
+
+const SCREEN_KEYS = [
+  "changeWeather",
+  "startFlash",
+  "startShake",
+  "startTint",
+  "startFadeOut",
+  "startFadeIn",
+] as const satisfies (keyof Rmmz_Screen & string)[];
+
+const MOCK_FADE_SPEED = 123 as const;
+const Color: ColorRGBA = [68, 68, 68, 128];
 
 const createFakeMap = (): FakeMap => ({
   mapId: () => 1,
@@ -32,6 +51,9 @@ const createMockScreen = (): MockedObject<FakeScreen> => ({
   changeWeather: vi.fn(),
   startFlash: vi.fn(),
   startShake: vi.fn(),
+  startTint: vi.fn(),
+  startFadeOut: vi.fn(),
+  startFadeIn: vi.fn(),
 });
 
 interface MockedObjects {
@@ -66,123 +88,140 @@ const stubGlobal = (objects: MockedObjects) => {
   vi.stubGlobal("$gameScreen", objects.screen);
 };
 
-const assertExactMemberCalls = <T>(
-  mock: T,
-  expected: MemberFunctions<T>[],
-  allKeys: readonly (keyof T & string)[],
-) => {
-  expected.forEach((e) => {
-    expect(mock[e.fn]).toHaveBeenCalledWith(...e.arg);
-  });
-
-  const called = new Set(expected.map((e) => e.fn));
-  allKeys.forEach((key) => {
-    if (called.has(key)) {
-      expect(mock[key]).toHaveBeenCalledTimes(1);
-    } else {
-      expect(mock[key]).not.toHaveBeenCalled();
-    }
-  });
+const setupInterpreter = (command: EventCommand) => {
+  const interpreter = new Game_Interpreter();
+  interpreter.setup([command], 0);
+  vi.spyOn(interpreter, "fadeSpeed").mockReturnValue(MOCK_FADE_SPEED);
+  return interpreter;
 };
 
-interface TestCase {
-  name: string;
-  command: EventCommand;
-  commandLiteral: EventCommand;
-  args: MockArgs;
-  fn: {
-    screen: MemberFunctions<FakeScreen>[];
-    message: MemberFunctions<FakeMessage>[];
-    party: MemberFunctions<FakeParty>[];
+describe("weather commands", () => {
+  const command: Command_SetWeatherEffect = {
+    code: 236,
+    indent: 0,
+    parameters: ["rain", 5, 10, true],
   };
-}
-
-const runTestCase = (testCase: TestCase) => {
-  describe(`command ${testCase.commandLiteral.code}${testCase.name}`, () => {
-    test("make", () => {
-      expect(testCase.command).toEqual(testCase.commandLiteral);
+  test("make", () => {
+    const result = makeCommandSetWeatherEffect({
+      type: "rain",
+      power: 5,
+      duration: 10,
+      wait: true,
     });
-
-    test("exec", () => {
-      const mocks = createObjects(testCase.args);
+    expect(result).toEqual(command);
+  });
+  describe("exec", () => {
+    test("message not busy and not in battle", () => {
+      const mocks = createObjects({
+        partyInBattle: false,
+        messageIsBusy: false,
+      });
       stubGlobal(mocks);
-      const interpreter = new Game_Interpreter();
-      interpreter.setup([testCase.commandLiteral], 0);
+      const interpreter = setupInterpreter(command);
       interpreter.executeCommand();
-      assertExactMemberCalls(mocks.screen, testCase.fn.screen, [
-        "changeWeather",
-        "startFlash",
-        "startShake",
-      ]);
-      assertExactMemberCalls(mocks.message, testCase.fn.message, ["isBusy"]);
-      assertExactMemberCalls(mocks.party, testCase.fn.party, ["inBattle"]);
+      expect(mocks.party.inBattle).toHaveBeenCalledOnce();
+      expect(mocks.message.isBusy).not.toHaveBeenCalled();
+      expect(mocks.screen.changeWeather).toHaveBeenCalledWith("rain", 5, 10);
+    });
+    test("message busy and not in battle", () => {
+      const mocks = createObjects({
+        partyInBattle: true,
+        messageIsBusy: false,
+      });
+      stubGlobal(mocks);
+      const interpreter = setupInterpreter(command);
+      interpreter.executeCommand();
+      expect(mocks.party.inBattle).toHaveBeenCalledOnce();
+      expect(mocks.message.isBusy).not.toHaveBeenCalled();
+      expect(mocks.screen.changeWeather).not.toHaveBeenCalled();
     });
   });
-};
+});
 
-const testCases: TestCase[] = [
-  {
-    name: " Set Weather Effect",
-    args: { messageIsBusy: false, partyInBattle: false },
-    command: makeCommandSetWeatherEffect({
-      type: "rain",
-      power: 5,
-      duration: 10,
-      wait: true,
-    }),
-    commandLiteral: {
-      code: 236,
-      indent: 0,
-      parameters: ["rain", 5, 10, true],
-    },
-    fn: {
-      message: [],
-      party: [{ fn: "inBattle", arg: [] }],
-      screen: [{ fn: "changeWeather", arg: ["rain", 5, 10] }],
-    },
-  },
-  {
-    name: " Set Weather Effect",
-    args: { messageIsBusy: false, partyInBattle: true },
-    command: makeCommandSetWeatherEffect({
-      type: "rain",
-      power: 5,
-      duration: 10,
-      wait: true,
-    }),
-    commandLiteral: {
-      code: 236,
-      indent: 0,
-      parameters: ["rain", 5, 10, true],
-    },
-    fn: {
-      message: [],
-      party: [{ fn: "inBattle", arg: [] }],
-      screen: [],
-    },
-  },
-  {
-    name: " Set Weather Effect without waiting",
-    command: makeCommandSetWeatherEffect({
-      type: "storm",
-      power: 8,
-      duration: 20,
-      wait: false,
-    }),
-    commandLiteral: {
-      code: 236,
-      indent: 0,
-      parameters: ["storm", 8, 20, false],
-    },
-    args: { messageIsBusy: false, partyInBattle: false },
-    fn: {
-      message: [],
-      party: [{ fn: "inBattle", arg: [] }],
-      screen: [{ fn: "changeWeather", arg: ["storm", 8, 20] }],
-    },
-  },
-];
+describe("fade in screen", () => {
+  const command: Command_FadeInScreen = {
+    code: 222,
+    indent: 0,
+    parameters: [],
+  };
+  test("make", () => {
+    const result: Command_FadeInScreen = makeCommandFadeInScreen(0);
+    expect(result).toEqual(command);
+  });
+  describe("exec", () => {
+    test("message not busy", () => {
+      const mocks = createObjects({
+        partyInBattle: true,
+        messageIsBusy: false,
+      });
+      stubGlobal(mocks);
+      const interpreter = setupInterpreter(command);
+      interpreter.executeCommand();
+      expect(mocks.party.inBattle).not.toHaveBeenCalled();
+      expect(mocks.message.isBusy).toHaveBeenCalledOnce();
+      expect(mocks.screen.startFadeIn).toHaveBeenCalledWith(MOCK_FADE_SPEED);
+      expect(interpreter.fadeSpeed).toHaveBeenCalled();
+    });
+    test("message busy", () => {
+      const mocks = createObjects({
+        partyInBattle: true,
+        messageIsBusy: true,
+      });
+      stubGlobal(mocks);
+      const interpreter = setupInterpreter(command);
+      interpreter.executeCommand();
+      expect(mocks.party.inBattle).not.toHaveBeenCalled();
+      expect(mocks.message.isBusy).toHaveBeenCalledOnce();
+      expect(mocks.screen.startFadeIn).not.toHaveBeenCalled();
+      expect(interpreter.fadeSpeed).not.toHaveBeenCalled();
+    });
+  });
+});
 
-testCases.forEach((testCase) => {
-  runTestCase(testCase);
+describe("fade out screen", () => {
+  const command: Command_FadeOutScreen = {
+    code: 221,
+    indent: 4,
+    parameters: [],
+  };
+  test("make", () => {
+    const reulst: Command_FadeOutScreen = makeCommandFadeOutScreen(4);
+    expect(reulst).toEqual(command);
+  });
+  describe("exec", () => {
+    test("message not busy", () => {
+      const mocks = createObjects({
+        partyInBattle: true,
+        messageIsBusy: false,
+      });
+      stubGlobal(mocks);
+      const interpreter = setupInterpreter(command);
+      interpreter.executeCommand();
+      expect(mocks.party.inBattle).not.toHaveBeenCalled();
+      expect(mocks.message.isBusy).toHaveBeenCalledOnce();
+      expect(mocks.screen.startFadeOut).toHaveBeenCalledWith(MOCK_FADE_SPEED);
+      expect(interpreter.fadeSpeed).toHaveBeenCalled();
+    });
+    test("message busy", () => {
+      const mocks = createObjects({
+        partyInBattle: true,
+        messageIsBusy: true,
+      });
+      stubGlobal(mocks);
+      const interpreter = setupInterpreter(command);
+      interpreter.executeCommand();
+      expect(mocks.party.inBattle).not.toHaveBeenCalled();
+      expect(mocks.message.isBusy).toHaveBeenCalledOnce();
+      expect(mocks.screen.startFadeOut).not.toHaveBeenCalled();
+      expect(interpreter.fadeSpeed).not.toHaveBeenCalled();
+    });
+  });
+});
+
+describe("screen tint", () => {
+  const command: Command_TintScreen = {
+    code: 223,
+    indent: 0,
+    parameters: [Color, 60, true],
+  };
 });
