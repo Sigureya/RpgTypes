@@ -72,7 +72,7 @@ import type {
   ParamArray_TintScreen,
   ParamArray_TransferPlayer,
   ParamArray_Wait,
-  ParamArray_WeatherEffect,
+  ParamArray_SetWeatherEffect,
   ParamsArray_MovePicture,
   ParamsArray_ShowPicture,
 } from "@RpgTypes/rmmz/eventCommand";
@@ -193,7 +193,7 @@ export declare class Game_Interpreter
   command233(params: ParamArray_RotatePicture): boolean;
   command234(params: ParamArray_TintPicture): boolean;
   command235(params: ParamArray_ErasePicture): boolean;
-  command236(params: ParamArray_WeatherEffect): boolean;
+  command236(params: ParamArray_SetWeatherEffect): boolean;
 
   command241(playBgm: [AudioFileParams]): boolean;
   command242(fadeoutBgm: ParamArray_FadeOutAudio): boolean;

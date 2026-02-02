@@ -126,7 +126,7 @@ import type {
   Command_TintScreen,
   Command_FadeOutScreen,
   Command_ShakeScreen,
-  Command_Weather,
+  Command_SetWeatherEffect,
 } from "./screen/types";
 import type { Command_ScriptBody, Command_ScriptHeader } from "./script/types";
 import type {
@@ -144,7 +144,6 @@ import type {
   Command_ChangeVehicleImage,
 } from "./vehicle";
 import type { Command_Wait } from "./wait/types";
-import type { Command_SetWeatherEffect } from "./weather/types";
 import type { Command_ChangeWindowColor } from "./window/changeWindowColor/types";
 
 export type EventCommand = NormalizedEventCommand | Command_ScriptBody;

@@ -2,6 +2,7 @@ import type { Command_ShowMessageHeader } from "@RpgTypes/rmmz";
 import type * as RpgTypes from "@RpgTypes/rmmz";
 import type {
   Command_FlashScreen,
+  Command_SetWeatherEffect,
   Command_ShowChoices,
   Command_StopSE,
   Command_TintScreen,
@@ -43,7 +44,6 @@ import type { Command_ShakeScreen } from "@RpgTypes/rmmz/eventCommand/commands/s
 import type { Command_ChangeTileset } from "@RpgTypes/rmmz/eventCommand/commands/tileset/types";
 import type { Command_ChangeTransparency } from "@RpgTypes/rmmz/eventCommand/commands/transparency/types";
 import type { Command_Wait } from "@RpgTypes/rmmz/eventCommand/commands/wait/types";
-import type { Command_SetWeatherEffect } from "@RpgTypes/rmmz/eventCommand/commands/weather/types";
 import type { Command_ChangeWindowColor } from "@RpgTypes/rmmz/eventCommand/commands/window/changeWindowColor/types";
 
 export type CallBackFunc<
