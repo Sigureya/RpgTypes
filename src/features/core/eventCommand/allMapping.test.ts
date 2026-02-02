@@ -81,14 +81,14 @@ import type { Command_ChangeActorImages } from "@RpgTypes/rmmz/eventCommand/comm
 import type { Command_FadeOutBGM } from "@RpgTypes/rmmz/eventCommand/commands/audio/other/types";
 import type { Command_TransferPlayer } from "@RpgTypes/rmmz/eventCommand/commands/mapPlayer/transferPlayer/types";
 import type { Command_ErasePicture } from "@RpgTypes/rmmz/eventCommand/commands/picture/erase/types";
-import type { Command_ShakeScreen } from "@RpgTypes/rmmz/eventCommand/commands/screen/shake/types";
+import type { Command_ShakeScreen } from "@RpgTypes/rmmz/eventCommand/commands/screen/types/shake";
 import type { Command_ChangeTransparency } from "@RpgTypes/rmmz/eventCommand/commands/transparency/types";
 import type { Command_ChangeWindowColor } from "@RpgTypes/rmmz/eventCommand/commands/window/changeWindowColor/types";
 import { mappingCommand } from "./allMapping";
 import type { BasicMappingObject } from "./types/basicCommandsMapper";
 
 const createMockMapper = <Key extends string & keyof BasicMappingObject<void>>(
-  targetKey: Key
+  targetKey: Key,
 ) => {
   return {
     [targetKey]: vi.fn<BasicMappingObject<void>[Key]>(),
@@ -98,7 +98,7 @@ const createMockMapper = <Key extends string & keyof BasicMappingObject<void>>(
 
 const testMapping = <Command extends EventCommand>(
   key: keyof BasicMappingObject<void>,
-  command: Command
+  command: Command,
 ) => {
   test(`${key} should be called with correct arguments`, () => {
     const mapper = createMockMapper(key);
@@ -129,11 +129,11 @@ describe("mappingCommand", () => {
   });
   testMapping<Command_ChangeBattleBGM>(
     "changeBattleBGM",
-    makeCommandChangeBattleBGM(makeAudioFileParams())
+    makeCommandChangeBattleBGM(makeAudioFileParams()),
   );
   testMapping<Command_ChangeVictoryME>(
     "changeVictoryME",
-    makeCommandChangeVictoryME(makeAudioFileParams())
+    makeCommandChangeVictoryME(makeAudioFileParams()),
   );
   testMapping<Command_ChangeActorName>("changeName", {
     code: CHANGE_NAME,
@@ -162,7 +162,7 @@ describe("mappingCommand", () => {
   });
   testMapping<Command_ChangeActorImages>(
     "changeActorImages",
-    makeCommandChangeActorImages({})
+    makeCommandChangeActorImages({}),
   );
   testMapping<Command_ChangeWindowColor>("changeWindowColor", {
     code: CHANGE_WINDOW_COLOR,
@@ -177,7 +177,7 @@ describe("mappingCommand", () => {
   testMapping<Command_ShowAnimation>("showAnimation", {
     code: SHOW_ANIMATION,
     indent: 0,
-    parameters: [0, 0, 0],
+    parameters: [0, 0, false],
   });
 
   testMapping<Command_TransferPlayer>("transferPlayer", {
@@ -264,7 +264,7 @@ describe("mappingCommand", () => {
       blendMode: 0,
       wait: false,
       easingType: 0,
-    })
+    }),
   );
   testMapping<Command_RotatePicture>("rotatePicture", {
     code: ROTATE_PICTURE,
@@ -288,7 +288,7 @@ describe("mappingCommand", () => {
   });
   testMapping<Command_PlayBGM>(
     "playBGM",
-    makeCommandPlayBGM(makeAudioFileParams())
+    makeCommandPlayBGM(makeAudioFileParams()),
   );
   testMapping<Command_FadeOutBGM>("fadeOutBGM", {
     code: FADEOUT_BGM,
@@ -297,7 +297,7 @@ describe("mappingCommand", () => {
   });
   testMapping<Command_PlaySE>(
     "playSE",
-    makeCommandPlaySE(makeAudioFileParams())
+    makeCommandPlaySE(makeAudioFileParams()),
   );
   testMapping<Command_StopSE>("stopSE", {
     code: STOP_SE,
