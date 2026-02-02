@@ -93,7 +93,6 @@ import type {
   Command_GameOver,
   Command_GatherFollowers,
   Command_ReturnToTitleScreen,
-  Command_FadeInScreen,
 } from "./nonParam/types";
 import type { Command_NoOperation } from "./noOperation";
 import type { Command_ChangeGold, Command_ChangePartyMember } from "./party";
@@ -110,6 +109,7 @@ import type {
   Command_FadeOutScreen,
   Command_ShakeScreen,
   Command_SetWeatherEffect,
+  Command_FadeInScreen,
 } from "./screen/types";
 import type { Command_ScriptBody, Command_ScriptHeader } from "./script/types";
 import type {

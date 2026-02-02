@@ -14,7 +14,7 @@ export type ParamArray_SetWeatherEffect = [
   wait: boolean,
 ];
 
-export interface ParamObject_Weather {
+export interface ParamObject_SetWeatherEffect {
   type: string;
   power: number;
   duration: number;
