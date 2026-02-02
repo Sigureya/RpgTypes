@@ -166,6 +166,7 @@ describe("fade in screen", () => {
       expect(mocks.message.isBusy).toHaveBeenCalledOnce();
       expect(mocks.screen.startFadeIn).toHaveBeenCalledWith(MOCK_FADE_SPEED);
       expect(interpreter.fadeSpeed).toHaveBeenCalled();
+      expect(interpreter.wait).toHaveBeenCalledWith(MOCK_FADE_SPEED);
     });
     test("message busy", () => {
       const mocks = createObjects({
@@ -179,6 +180,7 @@ describe("fade in screen", () => {
       expect(mocks.message.isBusy).toHaveBeenCalledOnce();
       expect(mocks.screen.startFadeIn).not.toHaveBeenCalled();
       expect(interpreter.fadeSpeed).not.toHaveBeenCalled();
+      expect(interpreter.wait).not.toHaveBeenCalled();
     });
   });
 });
@@ -224,6 +226,34 @@ describe("fade out screen", () => {
 });
 
 describe("screen tint", () => {
+  describe("wait", () => {
+    const command: Command_TintScreen = {
+      code: 223,
+      indent: 0,
+      parameters: [Color, 60, true],
+    };
+    test("make", () => {
+      const result = makeCommandTintScreen({
+        color: Color,
+        duration: 60,
+        wait: true,
+      });
+      expect(result).toEqual(command);
+    });
+    test("exec", () => {
+      const mocks = createObjects({
+        partyInBattle: true,
+        messageIsBusy: true,
+      });
+      stubGlobal(mocks);
+      const interpreter = setupInterpreter(command);
+      interpreter.executeCommand();
+      expect(mocks.party.inBattle).not.toHaveBeenCalled();
+      expect(mocks.message.isBusy).not.toHaveBeenCalled();
+      expect(mocks.screen.startTint).toHaveBeenCalledWith(Color, 60);
+      expect(interpreter.wait).toHaveBeenCalledWith(60);
+    });
+  });
   describe("no wait", () => {
     const command: Command_TintScreen = {
       code: 223,
