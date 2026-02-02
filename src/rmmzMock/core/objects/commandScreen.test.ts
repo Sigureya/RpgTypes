@@ -12,6 +12,7 @@ import {
   makeCommandFadeInScreen,
   makeCommandFadeOutScreen,
   makeCommandSetWeatherEffect,
+  makeCommandTintScreen,
 } from "@RpgTypes/rmmz/eventCommand";
 import type { Rmmz_Message, Rmmz_Party } from "@RpgTypes/rmmzRuntime";
 import type { Rmmz_Screen } from "@RpgTypes/rmmzRuntime/objects/core/screeen";
@@ -21,16 +22,15 @@ import { Game_Interpreter } from "./rmmz_objects";
 type FakeParty = Pick<Rmmz_Party, "inBattle">;
 type FakeMessage = Pick<Rmmz_Message, "isBusy">;
 
-type FakeScreen = Pick<Rmmz_Screen, (typeof SCREEN_KEYS)[number]>;
-
-const SCREEN_KEYS = [
-  "changeWeather",
-  "startFlash",
-  "startShake",
-  "startTint",
-  "startFadeOut",
-  "startFadeIn",
-] as const satisfies (keyof Rmmz_Screen & string)[];
+type FakeScreen = Pick<
+  Rmmz_Screen,
+  | "changeWeather"
+  | "startFlash"
+  | "startShake"
+  | "startTint"
+  | "startFadeOut"
+  | "startFadeIn"
+>;
 
 const MOCK_FADE_SPEED = 123 as const;
 const Color: ColorRGBA = [68, 68, 68, 128];
@@ -219,9 +219,31 @@ describe("fade out screen", () => {
 });
 
 describe("screen tint", () => {
-  const command: Command_TintScreen = {
-    code: 223,
-    indent: 0,
-    parameters: [Color, 60, true],
-  };
+  describe("no wait", () => {
+    const command: Command_TintScreen = {
+      code: 223,
+      indent: 0,
+      parameters: [Color, 60, true],
+    };
+    test("make", () => {
+      const result = makeCommandTintScreen({
+        color: Color,
+        duration: 60,
+        wait: true,
+      });
+      expect(result).toEqual(command);
+    });
+    test("exec", () => {
+      const mocks = createObjects({
+        partyInBattle: false,
+        messageIsBusy: false,
+      });
+      stubGlobal(mocks);
+      const interpreter = setupInterpreter(command);
+      interpreter.executeCommand();
+      expect(mocks.party.inBattle).not.toHaveBeenCalled();
+      expect(mocks.message.isBusy).not.toHaveBeenCalled();
+      expect(mocks.screen.startTint).toHaveBeenCalledWith(Color, 60);
+    });
+  });
 });
