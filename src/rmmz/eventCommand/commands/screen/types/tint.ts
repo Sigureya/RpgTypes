@@ -13,3 +13,9 @@ export type ParamArray_TintScreen = [
   duration: number,
   wait: boolean,
 ];
+
+export interface ParamObject_TintScreen {
+  color: ColorRGBA;
+  duration: number;
+  wait: boolean;
+}
