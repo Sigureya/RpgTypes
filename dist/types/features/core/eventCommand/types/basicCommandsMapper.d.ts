@@ -1,5 +1,5 @@
 import { Command_ShowMessageHeader } from '../../../../rmmz';
-import { Command_FlashScreen, Command_ShowChoices, Command_StopSE, Command_TintScreen } from '../../../../rmmz/eventCommand';
+import { Command_FlashScreen, Command_SetWeatherEffect, Command_ShowChoices, Command_StopSE, Command_TintScreen } from '../../../../rmmz/eventCommand';
 import { Command_ChangeActorImages } from '../../../../rmmz/eventCommand/commands/actor/changeImages/types';
 import { Command_ShowAnimation } from '../../../../rmmz/eventCommand/commands/animation/types';
 import { Command_FadeOutBGM, Command_FadeOutBGS, Command_ResumeBGM, Command_SaveBGM } from '../../../../rmmz/eventCommand/commands/audio/other/types';
@@ -21,11 +21,10 @@ import { Command_PlayMovie } from '../../../../rmmz/eventCommand/commands/movie/
 import { Command_ChangeGold } from '../../../../rmmz/eventCommand/commands/party/types/changeGold';
 import { Command_ChangePartyMember } from '../../../../rmmz/eventCommand/commands/party/types/changeMember';
 import { Command_ErasePicture } from '../../../../rmmz/eventCommand/commands/picture/erase/types';
-import { Command_ShakeScreen } from '../../../../rmmz/eventCommand/commands/screen/shake/types';
+import { Command_ShakeScreen } from '../../../../rmmz/eventCommand/commands/screen/types/shake';
 import { Command_ChangeTileset } from '../../../../rmmz/eventCommand/commands/tileset/types';
 import { Command_ChangeTransparency } from '../../../../rmmz/eventCommand/commands/transparency/types';
 import { Command_Wait } from '../../../../rmmz/eventCommand/commands/wait/types';
-import { Command_SetWeatherEffect } from '../../../../rmmz/eventCommand/commands/weather/types';
 import { Command_ChangeWindowColor } from '../../../../rmmz/eventCommand/commands/window/changeWindowColor/types';
 import type * as RpgTypes from "@RpgTypes/rmmz";
 export type CallBackFunc<Command extends RpgTypes.EventCommandUnknown, Reulst = void> = (command: Readonly<Command>, index: number, list: ReadonlyArray<Readonly<RpgTypes.EventCommand>>) => Reulst;

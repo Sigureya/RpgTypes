@@ -42,13 +42,12 @@ import { Command_ShowMessageBody, Command_ShowMessageHeader } from './message/sh
 import { Command_SetMovementRoute } from './movementRoute/command';
 import { Command_PlayMovie } from './movie/types';
 import { Command_PluginCommandMV } from './mv/pluginCommandMV';
-import { Command_GameOver, Command_GatherFollowers, Command_ReturnToTitleScreen, Command_FadeInScreen } from './nonParam/types';
+import { Command_GameOver, Command_GatherFollowers, Command_ReturnToTitleScreen } from './nonParam/types';
 import { Command_NoOperation } from './noOperation';
 import { Command_ChangeGold, Command_ChangePartyMember } from './party';
 import { Command_MovePicture, Command_RotatePicture, Command_ShowPicture, Command_TintPicture } from './picture';
 import { Command_ErasePicture } from './picture/erase/types';
-import { Command_ShakeScreen } from './screen/shake/types';
-import { Command_FlashScreen, Command_TintScreen, Command_FadeOutScreen } from './screen/types';
+import { Command_FlashScreen, Command_TintScreen, Command_FadeOutScreen, Command_ShakeScreen, Command_SetWeatherEffect, Command_FadeInScreen } from './screen/types';
 import { Command_ScriptBody, Command_ScriptHeader } from './script/types';
 import { Command_ShopProcessing, Command_ShopProcessingBody } from './shop/types';
 import { Command_Skip } from './skip/types';
@@ -57,7 +56,6 @@ import { Command_ChangeTransparency } from './transparency';
 import { Command_ControlVariables } from './variable';
 import { Command_ChangeVehicleBGM, Command_ChangeVehicleImage, Command_SetVehicleLocation, Command_GetOnOffVehicle } from './vehicle';
 import { Command_Wait } from './wait/types';
-import { Command_SetWeatherEffect } from './weather/types';
 import { Command_ChangeWindowColor } from './window/changeWindowColor/types';
 export interface EventCommandTable {
     noOperation: Command_NoOperation;

@@ -8,3 +8,9 @@ export type ParamArray_ShakeScreen = [
     duration: number,
     wait: boolean
 ];
+export interface ParamObject_ShakeScreen {
+    power: number;
+    speed: number;
+    duration: number;
+    wait: boolean;
+}

@@ -6,4 +6,5 @@ export interface Rmmz_Party extends Rmmz_Unit<Rmmz_Actor>, Rmmz_UnitPlayer {
     canInput(): boolean;
     gainItem(goods: Data_AnyGoodsUnion, amount: number): void;
     gainItem(goods: Data_AnyGoodsUnion, amount: number, includeEquip: boolean): void;
+    inBattle(): boolean;
 }
