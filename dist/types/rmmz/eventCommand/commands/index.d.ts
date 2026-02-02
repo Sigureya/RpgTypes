@@ -32,7 +32,6 @@ export * from './union';
 export * from './variable';
 export * from './vehicle';
 export * from './wait';
-export * from './weather';
 export type { CommandParamaterType, ExtractCommandByCode, ExtractCommandByParam, } from './extractType';
 export type { Command_ChangeWindowColor } from './window/changeWindowColor/types';
 export type { Command_NoOperation } from './noOperation';
