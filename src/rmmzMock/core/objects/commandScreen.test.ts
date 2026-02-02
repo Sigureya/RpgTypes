@@ -6,6 +6,8 @@ import type {
   Command_FadeOutScreen,
   Command_SetWeatherEffect,
   Command_TintScreen,
+  Command_FlashScreen,
+  Command_ShakeScreen,
   EventCommand,
 } from "@RpgTypes/rmmz/eventCommand";
 import {
@@ -13,7 +15,9 @@ import {
   makeCommandFadeOutScreen,
   makeCommandSetWeatherEffect,
   makeCommandTintScreen,
-} from "@RpgTypes/rmmz/eventCommand";
+  makeCommandFlashScreen,
+  makeCommandShakeScreen,
+} from "@RpgTypes/rmmz/eventCommand/commands/screen/make";
 import type { Rmmz_Message, Rmmz_Party } from "@RpgTypes/rmmzRuntime";
 import type { Rmmz_Screen } from "@RpgTypes/rmmzRuntime/objects/core/screeen";
 import type { FakeMap } from "./fakes/types";
@@ -92,6 +96,7 @@ const setupInterpreter = (command: EventCommand) => {
   const interpreter = new Game_Interpreter();
   interpreter.setup([command], 0);
   vi.spyOn(interpreter, "fadeSpeed").mockReturnValue(MOCK_FADE_SPEED);
+  vi.spyOn(interpreter, "wait");
   return interpreter;
 };
 
@@ -223,13 +228,13 @@ describe("screen tint", () => {
     const command: Command_TintScreen = {
       code: 223,
       indent: 0,
-      parameters: [Color, 60, true],
+      parameters: [Color, 60, false],
     };
     test("make", () => {
       const result = makeCommandTintScreen({
         color: Color,
         duration: 60,
-        wait: true,
+        wait: false,
       });
       expect(result).toEqual(command);
     });
@@ -244,6 +249,70 @@ describe("screen tint", () => {
       expect(mocks.party.inBattle).not.toHaveBeenCalled();
       expect(mocks.message.isBusy).not.toHaveBeenCalled();
       expect(mocks.screen.startTint).toHaveBeenCalledWith(Color, 60);
+      expect(interpreter.wait).not.toHaveBeenCalled();
+    });
+  });
+});
+
+describe("screen flash", () => {
+  describe("no wait", () => {
+    const command: Command_FlashScreen = {
+      code: 224,
+      indent: 0,
+      parameters: [Color, 60, false],
+    };
+    test("make", () => {
+      const result = makeCommandFlashScreen({
+        color: Color,
+        duration: 60,
+        wait: false,
+      });
+      expect(result).toEqual(command);
+    });
+    test("exec", () => {
+      const mocks = createObjects({
+        partyInBattle: false,
+        messageIsBusy: false,
+      });
+      stubGlobal(mocks);
+      const interpreter = setupInterpreter(command);
+      interpreter.executeCommand();
+      expect(mocks.party.inBattle).not.toHaveBeenCalled();
+      expect(mocks.message.isBusy).not.toHaveBeenCalled();
+      expect(mocks.screen.startFlash).toHaveBeenCalledWith(Color, 60);
+      expect(interpreter.wait).not.toHaveBeenCalled();
+    });
+  });
+});
+
+describe("screen shake", () => {
+  describe("no wait", () => {
+    const command: Command_ShakeScreen = {
+      code: 225,
+      indent: 0,
+      parameters: [5, 10, 60, false],
+    };
+    test("make", () => {
+      const result = makeCommandShakeScreen({
+        power: 5,
+        speed: 10,
+        duration: 60,
+        wait: false,
+      });
+      expect(result).toEqual(command);
+    });
+    test("exec", () => {
+      const mocks = createObjects({
+        partyInBattle: false,
+        messageIsBusy: false,
+      });
+      stubGlobal(mocks);
+      const interpreter = setupInterpreter(command);
+      interpreter.executeCommand();
+      expect(mocks.party.inBattle).not.toHaveBeenCalled();
+      expect(mocks.message.isBusy).not.toHaveBeenCalled();
+      expect(mocks.screen.startShake).toHaveBeenCalledWith(5, 10, 60);
+      expect(interpreter.wait).not.toHaveBeenCalled();
     });
   });
 });
