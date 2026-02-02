@@ -39,7 +39,7 @@ import type { Command_PlayMovie } from "@RpgTypes/rmmz/eventCommand/commands/mov
 import type { Command_ChangeGold } from "@RpgTypes/rmmz/eventCommand/commands/party/types/changeGold";
 import type { Command_ChangePartyMember } from "@RpgTypes/rmmz/eventCommand/commands/party/types/changeMember";
 import type { Command_ErasePicture } from "@RpgTypes/rmmz/eventCommand/commands/picture/erase/types";
-import type { Command_ShakeScreen } from "@RpgTypes/rmmz/eventCommand/commands/screen/shake/types";
+import type { Command_ShakeScreen } from "@RpgTypes/rmmz/eventCommand/commands/screen/types/shake";
 import type { Command_ChangeTileset } from "@RpgTypes/rmmz/eventCommand/commands/tileset/types";
 import type { Command_ChangeTransparency } from "@RpgTypes/rmmz/eventCommand/commands/transparency/types";
 import type { Command_Wait } from "@RpgTypes/rmmz/eventCommand/commands/wait/types";
