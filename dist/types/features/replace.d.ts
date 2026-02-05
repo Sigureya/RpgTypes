@@ -6,5 +6,8 @@ export interface ReplaceTextHandlers {
 }
 export declare const replaceEventCommandTexts: (commandList: ReadonlyArray<EventCommand>, handlers: ReplaceTextHandlers) => NormalizedEventCommand[];
 export declare const replaceTroopData: (troop: Data_TroopUnknonw<EventCommand>, handlers: ReplaceTextHandlers) => Data_TroopUnknonw<NormalizedEventCommand>;
+export declare const replaceTroopTexts: (troop: Data_TroopUnknonw<EventCommand>, fn: (key: string) => string | undefined) => Data_TroopUnknonw<NormalizedEventCommand>;
 export declare const replaceCommonEventData: (commonEvent: Data_CommonEventUnknown<EventCommand>, handlers: ReplaceTextHandlers) => Data_CommonEventUnknown<NormalizedEventCommand>;
+export declare const replaceCommonEventTexts: (commonEvent: Data_CommonEventUnknown<EventCommand>, fn: (key: string) => string | undefined) => Data_CommonEventUnknown<NormalizedEventCommand>;
+export declare const replaceMapTexts: (mapData: Data_Map<EventCommand>, fn: (key: string) => string | undefined) => Data_Map<NormalizedEventCommand>;
 export declare const replaceMapData: (mapData: Data_Map<EventCommand>, handlers: ReplaceTextHandlers) => Data_Map<NormalizedEventCommand>;
