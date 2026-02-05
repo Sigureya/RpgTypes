@@ -60,6 +60,30 @@ export const replaceTroopData = (
   };
 };
 
+export const replaceTroopTexts = (
+  troop: Data_TroopUnknonw<EventCommand>,
+  fn: (key: string) => string | undefined,
+): Data_TroopUnknonw<NormalizedEventCommand> => {
+  const handlers: ReplaceTextHandlers = {
+    pluginCommand: (command) => command,
+    scriptCommand: (command) => command,
+    text: fn,
+  };
+
+  return {
+    members: troop.members,
+    id: troop.id,
+    name: replaceTextByFunction(troop.name, fn),
+    pages: troop.pages.map(
+      (page): BattleEventPage<NormalizedEventCommand> => ({
+        conditions: page.conditions,
+        span: page.span,
+        list: replaceEventCommandTexts(page.list, handlers),
+      }),
+    ),
+  };
+};
+
 export const replaceCommonEventData = (
   commonEvent: Data_CommonEventUnknown<EventCommand>,
   handlers: ReplaceTextHandlers,
@@ -71,6 +95,39 @@ export const replaceCommonEventData = (
     switchId: commonEvent.switchId,
     list: replaceEventCommandTexts(commonEvent.list, handlers),
   };
+};
+
+export const replaceCommonEventTexts = (
+  commonEvent: Data_CommonEventUnknown<EventCommand>,
+  fn: (key: string) => string | undefined,
+): Data_CommonEventUnknown<NormalizedEventCommand> => {
+  return {
+    id: commonEvent.id,
+    name: replaceTextByFunction(commonEvent.name, fn),
+    trigger: commonEvent.trigger,
+    switchId: commonEvent.switchId,
+    list: replaceEventCommandTexts(commonEvent.list, {
+      pluginCommand: (command) => command,
+      scriptCommand: (command) => command,
+      text: fn,
+    }),
+  };
+};
+
+export const replaceMapTexts = (
+  mapData: Data_Map<EventCommand>,
+  fn: (key: string) => string | undefined,
+): Data_Map<NormalizedEventCommand> => {
+  return replaceMapDataTextsCore(
+    mapData,
+    fn,
+    (commandList: ReadonlyArray<EventCommand>) =>
+      replaceEventCommandTexts(commandList, {
+        pluginCommand: (command) => command,
+        scriptCommand: (command) => command,
+        text: fn,
+      }),
+  );
 };
 
 export const replaceMapData = (
