@@ -1,4 +1,4 @@
-import type { MockedFunction } from "vitest";
+import type { MockedFunction, MockedObject } from "vitest";
 import { describe, expect, test, vi } from "vitest";
 import type {
   Data_Actor,
@@ -7,6 +7,8 @@ import type {
   Data_Item,
   Data_Skill,
   Data_State,
+  NoteReadResult,
+  NoteReplaceHandlers,
 } from "@RpgTypes/rmmz";
 import {
   makeActorData,
@@ -17,19 +19,33 @@ import {
   makeStateData,
 } from "@RpgTypes/rmmz";
 import {
-  replaceActorText,
-  replaceClassText,
+  replaceActorText2,
+  replaceClassText2,
   replaceEnemyText,
-  replaceItemText,
-  replaceSkillText,
+  replaceItemText2,
+  replaceSkillText2,
   replaceStateText,
 } from "./rpgData";
 
 const createMockFn = (
-  map: ReadonlyMap<string, string>
+  map: ReadonlyMap<string, string>,
 ): MockedFunction<(key: string) => string | undefined> => {
   return vi.fn((key: string) => map.get(key));
 };
+
+const createHandler = (
+  map: ReadonlyMap<string, string>,
+): NoteReplaceHandlers => ({
+  replaceText: (text: string) => map.get(text),
+  isReplaceTargetNote: () => true,
+});
+
+const createMockHandler2 = (
+  map: ReadonlyMap<string, string>,
+): MockedObject<NoteReplaceHandlers> => ({
+  replaceText: vi.fn((text: string) => map.get(text)),
+  isReplaceTargetNote: vi.fn().mockRejectedValue(true),
+});
 
 describe("replaceActorText", () => {
   const actor: Data_Actor = makeActorData({
@@ -48,25 +64,36 @@ describe("replaceActorText", () => {
     ["foo", "bar"],
   ]);
   test("replaces actor text fields according to the translation map", () => {
-    const result = replaceActorText(actor, (key: string) => map.get(key));
+    const handlers = createMockHandler2(map);
+    const result = replaceActorText2(actor, handlers);
     expect(result.name).toBe("Champion");
     expect(result.nickname).toBe("Valiant");
     expect(result.profile).toBe("A valiant champion.");
     expect(result.note).toContain("bar");
   });
   test("preserves all actor fields without adding or removing properties", () => {
-    const result = replaceActorText(actor, (key: string) => map.get(key));
+    const handlers = createMockHandler2(map);
+    const result = replaceActorText2(actor, handlers);
     const keys = new Set(Object.keys(actor));
     const expectedKeys = new Set(Object.keys(result));
     expect(expectedKeys).toEqual(keys);
   });
   test("invokes the mapper for each translatable actor text value", () => {
-    const mockFn = createMockFn(map);
-    replaceActorText(actor, mockFn);
+    const mockFn: MockedFunction<(key: string) => string | undefined> = vi.fn(
+      (key: string) => map.get(key),
+    );
+    const mockFn2: MockedFunction<(item: NoteReadResult) => boolean> = vi
+      .fn()
+      .mockReturnValue(true);
+    replaceActorText2(actor, {
+      replaceText: mockFn,
+      isReplaceTargetNote: mockFn2,
+    });
+    expect(mockFn).toHaveBeenCalledWith("foo");
+    expect(mockFn2).toBeCalledTimes(1);
     expect(mockFn).toHaveBeenCalledWith(actor.name);
     expect(mockFn).toHaveBeenCalledWith(actor.nickname);
     expect(mockFn).toHaveBeenCalledWith(actor.profile);
-    expect(mockFn).toHaveBeenCalledWith("foo");
     expect(mockFn).not.toHaveBeenCalledWith(actor.battlerName);
     expect(mockFn).not.toHaveBeenCalledWith(actor.characterName);
     expect(mockFn).not.toHaveBeenCalledWith(actor.faceName);
@@ -115,24 +142,24 @@ describe("replaceClassText", () => {
     ["sword", "blade"],
   ]);
   test("replaces class fields using map", () => {
-    const result: Data_Class = replaceClassText(data, (key: string) =>
-      map.get(key)
-    );
+    const handlers = createHandler(map);
+    const result: Data_Class = replaceClassText2(data, handlers);
     expect(result.name).toBe("Fighter");
     expect(result.note).toContain("blade");
   });
   test("preserves all class fields without adding or removing properties", () => {
-    const result = replaceClassText(data, (key: string) => map.get(key));
+    const handlers = createHandler(map);
+    const result = replaceClassText2(data, handlers);
     const keys = new Set(Object.keys(data));
     const expectedKeys = new Set(Object.keys(result));
     expect(expectedKeys).toEqual(keys);
   });
   test("invokes the mapper for each translatable class text value", () => {
-    const mockFn = createMockFn(map);
-    replaceClassText(data, mockFn);
-    expect(mockFn).toHaveBeenCalledWith(data.name);
-    expect(mockFn).toHaveBeenCalledWith("sword");
-    expect(mockFn).toHaveBeenCalledTimes(2);
+    const handlers = createMockHandler2(map);
+    replaceClassText2(data, handlers);
+    expect(handlers.replaceText).toHaveBeenCalledWith(data.name);
+    expect(handlers.replaceText).toHaveBeenCalledWith("sword");
+    expect(handlers.replaceText).toHaveBeenCalledTimes(2);
   });
 });
 
@@ -152,9 +179,8 @@ describe("replaceSkillText", () => {
     ["hot", "heat"],
   ]);
   test("replaces skill fields using map", () => {
-    const result: Data_Skill = replaceSkillText(skill, (key: string) =>
-      map.get(key)
-    );
+    const handlers = createHandler(map);
+    const result: Data_Skill = replaceSkillText2(skill, handlers);
     expect(result.name).toBe("Flame");
     expect(result.description).toBe("Scorches foe.");
     expect(result.message1).toBe("Cast Flame!");
@@ -162,7 +188,8 @@ describe("replaceSkillText", () => {
     expect(result.note).toContain("heat");
   });
   test("preserves all skill fields without adding or removing properties", () => {
-    const result = replaceSkillText(skill, (key: string) => map.get(key));
+    const handlers = createHandler(map);
+    const result = replaceSkillText2(skill, handlers);
     const keys = new Set(Object.keys(skill));
     const expectedKeys = new Set(Object.keys(result));
     expect(expectedKeys).toEqual(keys);
@@ -181,24 +208,26 @@ describe("replaceItemText", () => {
     ["heal", "restore"],
   ]);
   test("replaces item fields using map", () => {
-    const result = replaceItemText(item, (key: string) => map.get(key));
+    const handlers = createHandler(map);
+    const result = replaceItemText2(item, handlers);
     expect(result.name).toBe("Elixir");
     expect(result.description).toBe("Recovers health.");
     expect(result.note).toContain("restore");
   });
   test("preserves all item fields without adding or removing properties", () => {
-    const result = replaceItemText(item, (key: string) => map.get(key));
+    const handlers = createHandler(map);
+    const result = replaceItemText2(item, handlers);
     const keys = new Set(Object.keys(item));
     const expectedKeys = new Set(Object.keys(result));
     expect(expectedKeys).toEqual(keys);
   });
   test("invokes the mapper for each translatable item text value", () => {
-    const mockFn = createMockFn(map);
-    replaceItemText(item, mockFn);
-    expect(mockFn).toHaveBeenCalledWith(item.name);
-    expect(mockFn).toHaveBeenCalledWith(item.description);
-    expect(mockFn).toHaveBeenCalledWith("heal");
-    expect(mockFn).toHaveBeenCalledTimes(3);
+    const handlers = createMockHandler2(map);
+    replaceItemText2(item, handlers);
+    expect(handlers.replaceText).toHaveBeenCalledWith(item.name);
+    expect(handlers.replaceText).toHaveBeenCalledWith(item.description);
+    expect(handlers.replaceText).toHaveBeenCalledWith("heal");
+    expect(handlers.replaceText).toHaveBeenCalledTimes(3);
   });
 });
 
