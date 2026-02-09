@@ -3,10 +3,11 @@ import type {
   Data_Map,
   EventCommand,
   NormalizedEventCommand,
+  NoteReplaceHandlers,
 } from "@RpgTypes/rmmz";
 import { makeMapData, makeMapEvent } from "@RpgTypes/rmmz";
 import { replaceNoteTextByMap } from "./core/replace/text";
-import type { ReplaceTextHandlers } from "./replace";
+import type { ReplaceEventTextHandlers } from "./replace";
 import { replaceMapData } from "./replace";
 
 const dictionary = new Map<string, string>([
@@ -17,11 +18,12 @@ const dictionary = new Map<string, string>([
 ]);
 
 const createReplaceHandlers = (
-  map: ReadonlyMap<string, string>
-): ReplaceTextHandlers => ({
+  map: ReadonlyMap<string, string>,
+): ReplaceEventTextHandlers & NoteReplaceHandlers => ({
   pluginCommand: (c) => c,
   scriptCommand: (c) => c,
-  text: (key: string) => map.get(key),
+  replaceText: (text: string) => map.get(text),
+  isReplaceTargetNote: () => true,
 });
 
 describe("replaceMapDataTexts", () => {
@@ -75,7 +77,7 @@ const runTestCase = (testCase: TestCase) => {
   test(testCase.caseName, () => {
     const result = replaceMapData(
       testCase.input,
-      createReplaceHandlers(dictionary)
+      createReplaceHandlers(dictionary),
     );
     expect(result).toEqual(testCase.expected);
   });
