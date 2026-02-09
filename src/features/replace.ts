@@ -12,13 +12,16 @@ import type {
 } from "@RpgTypes/rmmz";
 import {
   PLUGIN_COMMAND_MZ,
+  replaceNoteWithHandlers,
   repleaceMapEventCommands,
   SCRIPT_EVAL,
 } from "@RpgTypes/rmmz";
 import { normalizeEventCommands } from "./core/eventCommand/normalize";
-import { replaceNoteTextByFunction } from "./core/replace/text";
 import { replaceBasicEventCommandTexts } from "./core/replace/text/eventCommand";
-import { replaceTextByFunction } from "./core/replace/text/utils";
+import {
+  replaceTextByFunction,
+  replaceTextByHandlers,
+} from "./core/replace/text/utils";
 
 export interface ReplaceEventTextHandlers extends TextReplaceHandlers {
   pluginCommand: (command: Command_PluginCommandMZ) => Command_PluginCommandMZ;
@@ -120,42 +123,32 @@ export const replaceMapTexts = (
   mapData: Data_Map<EventCommand>,
   fn: (key: string) => string | undefined,
 ): Data_Map<NormalizedEventCommand> => {
-  return replaceMapDataTextsCore(
-    mapData,
-    fn,
-    (commandList: ReadonlyArray<EventCommand>) =>
-      replaceEventCommandTexts(commandList, {
-        pluginCommand: (command) => command,
-        scriptCommand: (command) => command,
-        replaceText: fn,
-      }),
-  );
+  return replaceMapDataTextsCore(mapData, {
+    pluginCommand: (c) => c,
+    scriptCommand: (c) => c,
+    replaceText: fn,
+    isReplaceTargetNote: () => false,
+  });
 };
 
 export const replaceMapData = (
   mapData: Data_Map<EventCommand>,
   handlers: ReplaceEventTextHandlers & NoteReplaceHandlers,
 ): Data_Map<NormalizedEventCommand> => {
-  return replaceMapDataTextsCore(
-    mapData,
-    (key: string) => handlers.replaceText(key),
-    (commandList: ReadonlyArray<EventCommand>) =>
-      replaceEventCommandTexts(commandList, handlers),
-  );
+  return replaceMapDataTextsCore(mapData, handlers);
 };
 
 const replaceMapDataTextsCore = (
   mapData: Data_Map<EventCommand>,
-  fn: (key: string) => string | undefined,
-  commandFn: (
-    commands: ReadonlyArray<EventCommand>,
-  ) => NormalizedEventCommand[],
+  handlers: ReplaceEventTextHandlers & NoteReplaceHandlers,
 ): Data_Map<NormalizedEventCommand> => {
   // スプレッド構文だと型チェックを通れないので、全て手動でコピー
   return {
-    note: replaceNoteTextByFunction(mapData, fn),
-    displayName: replaceTextByFunction(mapData.displayName, fn),
-    events: repleaceMapEventCommands(mapData.events, commandFn),
+    note: replaceNoteWithHandlers(mapData.note, handlers),
+    displayName: replaceTextByHandlers(mapData.displayName, handlers),
+    events: repleaceMapEventCommands(mapData.events, (commands) =>
+      replaceEventCommandTexts(commands, handlers),
+    ),
     data: mapData.data,
     tilesetId: mapData.tilesetId,
     encounterStep: mapData.encounterStep,
