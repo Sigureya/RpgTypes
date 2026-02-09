@@ -15,16 +15,6 @@ import { replaceTextByFunction, replaceTextByHandlers } from "./utils";
 
 export const replaceActorText = <Actor extends PickByType<Data_Actor, string>>(
   actor: Actor,
-  fn: (text: string) => string | undefined,
-) => {
-  return replaceActorText2(actor, {
-    replaceText: (text: string) => fn(text),
-    isReplaceTargetNote: () => true,
-  });
-};
-
-export const replaceActorText2 = <Actor extends PickByType<Data_Actor, string>>(
-  actor: Actor,
   handlers: NoteReplaceHandlers,
 ) => {
   const fn = (key: string): string | undefined => {
@@ -45,15 +35,6 @@ export const replaceActorText2 = <Actor extends PickByType<Data_Actor, string>>(
 
 export const replaceEnemyText = <Enemy extends PickByType<Data_Enemy, string>>(
   enemy: Enemy,
-  fn: (key: string) => string | undefined,
-) => {
-  return replaceEnemyText2(enemy, {
-    replaceText: (text: string) => fn(text),
-    isReplaceTargetNote: () => true,
-  });
-};
-export const replaceEnemyText2 = <Enemy extends PickByType<Data_Enemy, string>>(
-  enemy: Enemy,
   handlers: NoteReplaceHandlers,
 ) => {
   const note: string = replaceNoteWithHandlers(enemy.note, handlers);
@@ -67,16 +48,6 @@ export const replaceEnemyText2 = <Enemy extends PickByType<Data_Enemy, string>>(
 
 export const replaceClassText = <Class extends PickByType<Data_Class, string>>(
   data: Class,
-  fn: (key: string) => string | undefined,
-) => {
-  return replaceClassText2(data, {
-    replaceText: (text: string) => fn(text),
-    isReplaceTargetNote: () => true,
-  });
-};
-
-export const replaceClassText2 = <Class extends PickByType<Data_Class, string>>(
-  data: Class,
   handlers: NoteReplaceHandlers,
 ) => {
   const note: string = replaceNoteWithHandlers(data.note, handlers);
@@ -88,7 +59,7 @@ export const replaceClassText2 = <Class extends PickByType<Data_Class, string>>(
   };
 };
 
-export const replaceSkillText2 = <Skill extends PickByType<Data_Skill, string>>(
+export const replaceSkillText = <Skill extends PickByType<Data_Skill, string>>(
   skill: Skill,
   handlers: NoteReplaceHandlers,
 ) => {
@@ -110,19 +81,7 @@ export const replaceSkillText2 = <Skill extends PickByType<Data_Skill, string>>(
   };
 };
 
-export const replaceSkillText = <Skill extends PickByType<Data_Skill, string>>(
-  skill: Skill,
-  fn: (key: string) => string | undefined,
-) => {
-  return replaceSkillText2(skill, {
-    replaceText: (text: string) => fn(text),
-    isReplaceTargetNote: () => true,
-  });
-};
-
-export const replaceItemText2 = <
-  T extends Data_Item | Data_Weapon | Data_Armor,
->(
+export const replaceItemText = <T extends Data_Item | Data_Weapon | Data_Armor>(
   item: T,
   handlers: NoteReplaceHandlers,
 ) => {
@@ -137,17 +96,7 @@ export const replaceItemText2 = <
   };
 };
 
-export const replaceItemText = <T extends Data_Item | Data_Weapon | Data_Armor>(
-  item: T,
-  fn: (key: string) => string | undefined,
-) => {
-  return replaceItemText2(item, {
-    replaceText: (text: string) => fn(text),
-    isReplaceTargetNote: () => true,
-  });
-};
-
-export const replaceStateText2 = <State extends PickByType<Data_State, string>>(
+export const replaceStateText = <State extends PickByType<Data_State, string>>(
   state: State,
   handlers: NoteReplaceHandlers,
 ) => {
@@ -166,14 +115,4 @@ export const replaceStateText2 = <State extends PickByType<Data_State, string>>(
     message4: message4,
     note: note,
   };
-};
-
-export const replaceStateText = <State extends PickByType<Data_State, string>>(
-  state: State,
-  fn: (key: string) => string | undefined,
-) => {
-  return replaceStateText2(state, {
-    replaceText: (text: string) => fn(text),
-    isReplaceTargetNote: () => true,
-  });
 };
