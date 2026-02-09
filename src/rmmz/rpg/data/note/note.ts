@@ -1,6 +1,10 @@
 import { buildNoteFromNormalized, normalizeNote } from "./normarize";
 import { makeRegex } from "./read";
-import type { NormalizedNote, NoteReadResult } from "./types";
+import type {
+  NormalizedNote,
+  NoteReadResult,
+  NoteReplaceHandlers,
+} from "./types";
 
 export const createNoteEntity = (key: string, value: string): string => {
   return `<${key}:${value}>`;
@@ -15,31 +19,63 @@ export const createNoteEntity = (key: string, value: string): string => {
 export const replaceNote = (
   note: string,
   transformFunction: (item: NoteReadResult) => string,
-  sep = "\n"
+  sep = "\n",
 ): string => {
   const normalized: NormalizedNote = normalizeNote(note);
   const newItems = normalized.items.map(
     (item): NoteReadResult => ({
       key: item.key,
       value: transformFunction(item),
-    })
+    }),
   );
   return buildNoteFromNormalized(
     {
       note: normalized.note,
       items: newItems,
     },
-    sep
+    sep,
+  );
+};
+
+const xxx = (
+  item: NoteReadResult,
+  handlers: NoteReplaceHandlers,
+): NoteReadResult => {
+  if (handlers.isReplaceTargetNote(item)) {
+    const newValue = handlers.replaceText(item.value);
+    return {
+      key: item.key,
+      value: newValue ?? item.value,
+    };
+  }
+  return item;
+};
+
+export const replaceNoteWithHandlers = (
+  note: string,
+  handlers: NoteReplaceHandlers,
+  sep: string = `\n`,
+): string => {
+  const normalized: NormalizedNote = normalizeNote(note);
+  const newItems = normalized.items.map((item): NoteReadResult => {
+    return xxx(item, handlers);
+  });
+  return buildNoteFromNormalized(
+    {
+      note: normalized.note,
+      items: newItems,
+    },
+    sep,
   );
 };
 
 export const getNoteValue = (
   note: string,
-  targetKey: string
+  targetKey: string,
 ): string | undefined => {
   const regex = makeRegex();
   const match = Array.from(note.matchAll(regex)).find(
-    (m) => m[1] === targetKey
+    (m) => m[1] === targetKey,
   );
   return match ? match[2] : undefined;
 };
@@ -47,7 +83,7 @@ export const getNoteValue = (
 export const setNoteValue = (
   note: string,
   targetKey: string,
-  newValue: string
+  newValue: string,
 ): string => {
   const regex = makeRegex();
 

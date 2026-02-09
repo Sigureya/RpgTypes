@@ -12,3 +12,8 @@ export interface NormalizedNote {
   note: string;
   items: NoteReadResult[];
 }
+
+export interface NoteReplaceHandlers {
+  replaceText: (text: string) => string | undefined;
+  isReplaceTargetNote: (item: NoteReadResult) => boolean;
+}

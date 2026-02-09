@@ -8,19 +8,22 @@ import type {
   Data_Skill,
   Data_State,
   Data_Weapon,
+  NoteReplaceHandlers,
 } from "@RpgTypes/rmmz";
-import { replaceNoteTextByFunction } from "./note";
-import { replaceTextByFunction } from "./utils";
+import { replaceNoteWithHandlers } from "@RpgTypes/rmmz";
+import { replaceTextByFunction, replaceTextByHandlers } from "./utils";
 
 export const replaceActorText = <Actor extends PickByType<Data_Actor, string>>(
   actor: Actor,
-  fn: (key: string) => string | undefined
+  handlers: NoteReplaceHandlers,
 ) => {
-  const note: string = replaceNoteTextByFunction(actor, fn);
+  const fn = (key: string): string | undefined => {
+    return handlers.replaceText(key);
+  };
+  const note: string = replaceNoteWithHandlers(actor.note, handlers);
   const name: string = replaceTextByFunction(actor.name, fn);
   const nickname: string = replaceTextByFunction(actor.nickname, fn);
   const profile: string = replaceTextByFunction(actor.profile, fn);
-
   return {
     ...actor,
     name: name,
@@ -32,10 +35,10 @@ export const replaceActorText = <Actor extends PickByType<Data_Actor, string>>(
 
 export const replaceEnemyText = <Enemy extends PickByType<Data_Enemy, string>>(
   enemy: Enemy,
-  fn: (key: string) => string | undefined
+  handlers: NoteReplaceHandlers,
 ) => {
-  const note: string = replaceNoteTextByFunction(enemy, fn);
-  const name: string = replaceTextByFunction(enemy.name, fn);
+  const note: string = replaceNoteWithHandlers(enemy.note, handlers);
+  const name: string = replaceTextByHandlers(enemy.name, handlers);
   return {
     ...enemy,
     name: name,
@@ -45,10 +48,10 @@ export const replaceEnemyText = <Enemy extends PickByType<Data_Enemy, string>>(
 
 export const replaceClassText = <Class extends PickByType<Data_Class, string>>(
   data: Class,
-  fn: (key: string) => string | undefined
+  handlers: NoteReplaceHandlers,
 ) => {
-  const note: string = replaceNoteTextByFunction(data, fn);
-  const name: string = replaceTextByFunction(data.name, fn);
+  const note: string = replaceNoteWithHandlers(data.note, handlers);
+  const name: string = replaceTextByHandlers(data.name, handlers);
   return {
     ...data,
     name: name,
@@ -58,14 +61,16 @@ export const replaceClassText = <Class extends PickByType<Data_Class, string>>(
 
 export const replaceSkillText = <Skill extends PickByType<Data_Skill, string>>(
   skill: Skill,
-  fn: (key: string) => string | undefined
+  handlers: NoteReplaceHandlers,
 ) => {
-  const note: string = replaceNoteTextByFunction(skill, fn);
-  const name: string = replaceTextByFunction(skill.name, fn);
-  const description: string = replaceTextByFunction(skill.description, fn);
-  const message1: string = replaceTextByFunction(skill.message1, fn);
-  const message2: string = replaceTextByFunction(skill.message2, fn);
-
+  const note: string = replaceNoteWithHandlers(skill.note, handlers);
+  const name: string = replaceTextByHandlers(skill.name, handlers);
+  const description: string = replaceTextByHandlers(
+    skill.description,
+    handlers,
+  );
+  const message1: string = replaceTextByHandlers(skill.message1, handlers);
+  const message2: string = replaceTextByHandlers(skill.message2, handlers);
   return {
     ...skill,
     name: name,
@@ -78,30 +83,29 @@ export const replaceSkillText = <Skill extends PickByType<Data_Skill, string>>(
 
 export const replaceItemText = <T extends Data_Item | Data_Weapon | Data_Armor>(
   item: T,
-  fn: (key: string) => string | undefined
+  handlers: NoteReplaceHandlers,
 ) => {
-  const note: string = replaceNoteTextByFunction(item, fn);
-  const name: string = replaceTextByFunction(item.name, fn);
-  const description: string = replaceTextByFunction(item.description, fn);
+  const note: string = replaceNoteWithHandlers(item.note, handlers);
+  const name: string = replaceTextByHandlers(item.name, handlers);
+  const description: string = replaceTextByHandlers(item.description, handlers);
   return {
     ...item,
     name: name,
     description: description,
     note: note,
-  } satisfies T;
+  };
 };
 
 export const replaceStateText = <State extends PickByType<Data_State, string>>(
   state: State,
-  fn: (key: string) => string | undefined
+  handlers: NoteReplaceHandlers,
 ) => {
-  const note: string = replaceNoteTextByFunction(state, fn);
-  const name: string = replaceTextByFunction(state.name, fn);
-  const message1: string = replaceTextByFunction(state.message1, fn);
-  const message2: string = replaceTextByFunction(state.message2, fn);
-  const message3: string = replaceTextByFunction(state.message3, fn);
-  const message4: string = replaceTextByFunction(state.message4, fn);
-
+  const note: string = replaceNoteWithHandlers(state.note, handlers);
+  const name: string = replaceTextByHandlers(state.name, handlers);
+  const message1: string = replaceTextByHandlers(state.message1, handlers);
+  const message2: string = replaceTextByHandlers(state.message2, handlers);
+  const message3: string = replaceTextByHandlers(state.message3, handlers);
+  const message4: string = replaceTextByHandlers(state.message4, handlers);
   return {
     ...state,
     name: name,
