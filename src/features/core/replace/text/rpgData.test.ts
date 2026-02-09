@@ -1,4 +1,4 @@
-import type { MockedFunction, MockedObject } from "vitest";
+import type { MockedObject } from "vitest";
 import { describe, expect, test, vi } from "vitest";
 import type {
   Data_Actor,
@@ -73,25 +73,26 @@ describe("replaceActorText", () => {
     expect(expectedKeys).toEqual(keys);
   });
   test("invokes the mapper for each translatable actor text value", () => {
-    const mockFn: MockedFunction<(key: string) => string | undefined> = vi.fn(
-      (key: string) => map.get(key),
-    );
-    const mockFn2: MockedFunction<(item: NoteReadResult) => boolean> = vi
-      .fn()
-      .mockReturnValue(true);
-    replaceActorText(actor, {
-      replaceText: mockFn,
-      isReplaceTargetNote: mockFn2,
-    });
-    expect(mockFn).toHaveBeenCalledWith("foo");
-    expect(mockFn2).toBeCalledTimes(1);
-    expect(mockFn).toHaveBeenCalledWith(actor.name);
-    expect(mockFn).toHaveBeenCalledWith(actor.nickname);
-    expect(mockFn).toHaveBeenCalledWith(actor.profile);
-    expect(mockFn).not.toHaveBeenCalledWith(actor.battlerName);
-    expect(mockFn).not.toHaveBeenCalledWith(actor.characterName);
-    expect(mockFn).not.toHaveBeenCalledWith(actor.faceName);
-    expect(mockFn).toHaveBeenCalledTimes(4);
+    const handlers = createMockHandler2(map);
+    const noteItem: NoteReadResult = {
+      key: "test",
+      value: "foo",
+    };
+    replaceActorText(actor, handlers);
+    expect(handlers.replaceText).toHaveBeenCalledWith(actor.name);
+    expect(handlers.replaceText).toHaveBeenCalledWith(actor.nickname);
+    expect(handlers.replaceText).toHaveBeenCalledWith(actor.profile);
+    expect(handlers.replaceText).toHaveBeenCalledWith("foo");
+    expect(handlers.replaceText).toHaveBeenCalledTimes(4);
+    expect(handlers.isReplaceTargetNote).toBeCalledTimes(1);
+    expect(handlers.isReplaceTargetNote).toHaveBeenCalledWith(noteItem);
+  });
+  test("does not invoke", () => {
+    const handlers = createMockHandler2(map);
+    replaceActorText(actor, handlers);
+    expect(handlers.replaceText).not.toHaveBeenCalledWith(actor.battlerName);
+    expect(handlers.replaceText).not.toHaveBeenCalledWith(actor.characterName);
+    expect(handlers.replaceText).not.toHaveBeenCalledWith(actor.faceName);
   });
 });
 
@@ -120,10 +121,21 @@ describe("replaceEnemyText", () => {
   });
   test("invokes the mapper for each translatable enemy text value", () => {
     const handlers = createMockHandler2(map);
+    const noteItem: NoteReadResult = {
+      key: "test",
+      value: "goo",
+    };
     replaceEnemyText(enemy, handlers);
     expect(handlers.replaceText).toHaveBeenCalledWith(enemy.name);
     expect(handlers.replaceText).toHaveBeenCalledWith("goo");
     expect(handlers.replaceText).toHaveBeenCalledTimes(2);
+    expect(handlers.isReplaceTargetNote).toBeCalledTimes(1);
+    expect(handlers.isReplaceTargetNote).toHaveBeenCalledWith(noteItem);
+  });
+  test("does not invoke", () => {
+    const handlers = createMockHandler2(map);
+    replaceEnemyText(enemy, handlers);
+    expect(handlers.replaceText).not.toHaveBeenCalledWith(enemy.battlerName);
   });
 });
 
@@ -151,10 +163,16 @@ describe("replaceClassText", () => {
   });
   test("invokes the mapper for each translatable class text value", () => {
     const handlers = createMockHandler2(map);
+    const noteItem: NoteReadResult = {
+      key: "test",
+      value: "sword",
+    };
     replaceClassText(data, handlers);
     expect(handlers.replaceText).toHaveBeenCalledWith(data.name);
     expect(handlers.replaceText).toHaveBeenCalledWith("sword");
     expect(handlers.replaceText).toHaveBeenCalledTimes(2);
+    expect(handlers.isReplaceTargetNote).toBeCalledTimes(1);
+    expect(handlers.isReplaceTargetNote).toHaveBeenCalledWith(noteItem);
   });
 });
 
@@ -189,6 +207,22 @@ describe("replaceSkillText", () => {
     const expectedKeys = new Set(Object.keys(result));
     expect(expectedKeys).toEqual(keys);
   });
+  test("invokes the mapper for each translatable skill text value", () => {
+    const handlers = createMockHandler2(map);
+    const noteItem: NoteReadResult = {
+      key: "test",
+      value: "hot",
+    };
+    replaceSkillText(skill, handlers);
+    expect(handlers.replaceText).toHaveBeenCalledWith(skill.name);
+    expect(handlers.replaceText).toHaveBeenCalledWith(skill.description);
+    expect(handlers.replaceText).toHaveBeenCalledWith(skill.message1);
+    expect(handlers.replaceText).toHaveBeenCalledWith(skill.message2);
+    expect(handlers.replaceText).toHaveBeenCalledWith("hot");
+    expect(handlers.replaceText).toHaveBeenCalledTimes(5);
+    expect(handlers.isReplaceTargetNote).toBeCalledTimes(1);
+    expect(handlers.isReplaceTargetNote).toHaveBeenCalledWith(noteItem);
+  });
 });
 
 describe("replaceItemText", () => {
@@ -218,11 +252,17 @@ describe("replaceItemText", () => {
   });
   test("invokes the mapper for each translatable item text value", () => {
     const handlers = createMockHandler2(map);
+    const noteItem: NoteReadResult = {
+      key: "test",
+      value: "heal",
+    };
     replaceItemText(item, handlers);
     expect(handlers.replaceText).toHaveBeenCalledWith(item.name);
     expect(handlers.replaceText).toHaveBeenCalledWith(item.description);
     expect(handlers.replaceText).toHaveBeenCalledWith("heal");
     expect(handlers.replaceText).toHaveBeenCalledTimes(3);
+    expect(handlers.isReplaceTargetNote).toBeCalledTimes(1);
+    expect(handlers.isReplaceTargetNote).toHaveBeenCalledWith(noteItem);
   });
 });
 
@@ -262,6 +302,11 @@ describe("replaceStateText", () => {
   });
   test("invokes the mapper for each translatable state text value", () => {
     const handlers = createMockHandler2(map);
+
+    const noteItem: NoteReadResult = {
+      key: "test",
+      value: "toxic",
+    };
     replaceStateText(state, handlers);
     expect(handlers.replaceText).toHaveBeenCalledWith(state.name);
     expect(handlers.replaceText).toHaveBeenCalledWith(state.message1);
@@ -270,5 +315,7 @@ describe("replaceStateText", () => {
     expect(handlers.replaceText).toHaveBeenCalledWith(state.message4);
     expect(handlers.replaceText).toHaveBeenCalledWith("toxic");
     expect(handlers.replaceText).toHaveBeenCalledTimes(6);
+    expect(handlers.isReplaceTargetNote).toBeCalledTimes(1);
+    expect(handlers.isReplaceTargetNote).toHaveBeenCalledWith(noteItem);
   });
 });
