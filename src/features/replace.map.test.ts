@@ -1,5 +1,7 @@
-import { describe, expect, test } from "vitest";
+import type { MockedObject } from "vitest";
+import { describe, expect, test, vi } from "vitest";
 import type {
+  Command_PluginCommandMZ,
   Data_Map,
   EventCommand,
   NormalizedEventCommand,
@@ -19,11 +21,11 @@ const dictionary = new Map<string, string>([
 
 const createReplaceHandlers = (
   map: ReadonlyMap<string, string>,
-): ReplaceEventTextHandlers & NoteReplaceHandlers => ({
-  pluginCommand: (c) => c,
-  scriptCommand: (c) => c,
-  replaceText: (text: string) => map.get(text),
-  isReplaceTargetNote: () => true,
+): MockedObject<ReplaceEventTextHandlers & NoteReplaceHandlers> => ({
+  pluginCommand: vi.fn((c: Command_PluginCommandMZ) => c),
+  scriptCommand: vi.fn((c) => c),
+  replaceText: vi.fn((text: string) => map.get(text)),
+  isReplaceTargetNote: vi.fn().mockReturnValue(true),
 });
 
 describe("replaceMapDataTexts", () => {
@@ -46,9 +48,17 @@ describe("replaceMapDataTexts", () => {
       ["foo", "bar"],
       ["baz", "qux"],
     ]);
-    const result = replaceMapData(mapData, createReplaceHandlers(map));
+    const handlers = createReplaceHandlers(map);
+    const result = replaceMapData(mapData, handlers);
     const expectedNote = replaceNoteTextByMap({ note: mapData.note }, map);
     expect(result.note).toBe(expectedNote);
+    expect(handlers.pluginCommand).not.toHaveBeenCalled();
+    expect(handlers.scriptCommand).not.toHaveBeenCalled();
+    expect(handlers.isReplaceTargetNote).toHaveBeenCalledTimes(3);
+    expect(handlers.replaceText).toHaveBeenCalledTimes(3);
+    expect(handlers.replaceText).toHaveBeenNthCalledWith(1, "bar");
+    expect(handlers.replaceText).toHaveBeenNthCalledWith(2, "qux");
+    expect(handlers.replaceText).toHaveBeenNthCalledWith(3, "nochange");
   });
 });
 
