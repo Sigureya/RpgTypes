@@ -2,6 +2,7 @@ import type { MockedObject } from "vitest";
 import { describe, expect, test, vi } from "vitest";
 import type {
   Command_PluginCommandMZ,
+  Command_ScriptBody,
   Command_ScriptHeader,
   Data_CommonEvent,
   EventCommand,
@@ -9,6 +10,7 @@ import type {
 import {
   makeBattleEventPage,
   makeCommandPluginCommandMZ,
+  makeCommandScriptBody,
   makeCommandScriptHeader,
   makeTroopData,
 } from "@RpgTypes/rmmz";
@@ -87,6 +89,21 @@ describe("replaceEventCommandTexts", () => {
     expect(result).toEqual([command]);
     expect(handlers.pluginCommand).not.toHaveBeenCalled();
     expect(handlers.scriptCommand).toHaveBeenCalledWith(command);
+    expect(handlers.scriptCommand).toHaveBeenCalledOnce();
+    expect(handlers.replaceText).not.toHaveBeenCalled();
+  });
+  test("merges script header and body", () => {
+    const head: Command_ScriptHeader = makeCommandScriptHeader("script");
+    const body: Command_ScriptBody = makeCommandScriptBody("body");
+    const marged: Command_ScriptHeader = makeCommandScriptHeader(
+      ["script", "body"].join("\n"),
+    );
+
+    const handlers = createReplaceHandlers();
+    const result = replaceEventCommandTexts([head, body], handlers);
+    expect(result).toEqual([marged]);
+    expect(handlers.pluginCommand).not.toHaveBeenCalled();
+    expect(handlers.scriptCommand).toHaveBeenCalledWith(marged);
     expect(handlers.scriptCommand).toHaveBeenCalledOnce();
     expect(handlers.replaceText).not.toHaveBeenCalled();
   });
