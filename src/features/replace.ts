@@ -9,11 +9,12 @@ import type {
   Data_CommonEventUnknown,
   NoteReplaceHandlers,
   TextReplaceHandlers,
+  MapEvent,
+  MapEventPage,
 } from "@RpgTypes/rmmz";
 import {
   PLUGIN_COMMAND_MZ,
   replaceNoteWithHandlers,
-  repleaceMapEventCommands,
   SCRIPT_EVAL,
 } from "@RpgTypes/rmmz";
 import { normalizeEventCommands } from "./core/eventCommand/normalize";
@@ -138,6 +139,25 @@ export const replaceMapData = (
   return replaceMapDataTextsCore(mapData, handlers);
 };
 
+const replaceMapEventTexts = (
+  mapEvent: MapEvent<EventCommand>,
+  handlers: ReplaceEventTextHandlers & NoteReplaceHandlers,
+): MapEvent<NormalizedEventCommand> => {
+  return {
+    id: mapEvent.id,
+    name: mapEvent.name,
+    x: mapEvent.x,
+    y: mapEvent.y,
+    note: replaceNoteWithHandlers(mapEvent.note, handlers),
+    pages: mapEvent.pages.map(
+      (page): MapEventPage<NormalizedEventCommand> => ({
+        ...page,
+        list: replaceEventCommandTexts(page.list, handlers),
+      }),
+    ),
+  };
+};
+
 const replaceMapDataTextsCore = (
   mapData: Data_Map<EventCommand>,
   handlers: ReplaceEventTextHandlers & NoteReplaceHandlers,
@@ -146,8 +166,8 @@ const replaceMapDataTextsCore = (
   return {
     note: replaceNoteWithHandlers(mapData.note, handlers),
     displayName: replaceTextByHandlers(mapData.displayName, handlers),
-    events: repleaceMapEventCommands(mapData.events, (commands) =>
-      replaceEventCommandTexts(commands, handlers),
+    events: mapData.events.map((event) =>
+      event ? replaceMapEventTexts(event, handlers) : null,
     ),
     data: mapData.data,
     tilesetId: mapData.tilesetId,
