@@ -37,7 +37,7 @@ export const replaceNote = (
   );
 };
 
-const xxx = (
+const updateNoteIfNeeded = (
   item: NoteReadResult,
   handlers: NoteReplaceHandlers,
 ): NoteReadResult => {
@@ -58,7 +58,7 @@ export const replaceNoteWithHandlers = (
 ): string => {
   const normalized: NormalizedNote = normalizeNote(note);
   const newItems = normalized.items.map((item): NoteReadResult => {
-    return xxx(item, handlers);
+    return updateNoteIfNeeded(item, handlers);
   });
   return buildNoteFromNormalized(
     {
