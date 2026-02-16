@@ -109,6 +109,44 @@ interface TestCase {
   expectedReplaceTextArgs: string[];
 }
 
+const runTestCase = (testCase: TestCase) => {
+  describe(testCase.caseName, () => {
+    test(testCase.caseName, () => {
+      const result = replaceMapData(
+        testCase.input,
+        createReplaceHandlers(dictionary),
+      );
+      expect(result).toEqual(testCase.expected);
+    });
+    test("calls isReplaceTargetNote for each note item", () => {
+      const handlers = createReplaceHandlers(dictionary, true);
+      replaceMapData(testCase.input, handlers);
+      expect(handlers.replaceText).toHaveBeenCalledTimes(
+        testCase.expectedReplaceTextArgs.length + testCase.noteItems.length,
+      );
+      expect(handlers.isReplaceTargetNote).toHaveBeenCalledTimes(
+        testCase.noteItems.length,
+      );
+      testCase.noteItems.forEach((item: NoteReadResult) => {
+        expect(handlers.isReplaceTargetNote).toHaveBeenCalledWith(item);
+        expect(handlers.replaceText).toHaveBeenCalledWith(item.value);
+      });
+    });
+    test("does not replace note when isReplaceTargetNote returns false", () => {
+      const handlers = createReplaceHandlers(dictionary, false);
+      replaceMapData(testCase.input, handlers);
+      expect(handlers.replaceText).toHaveBeenCalledTimes(
+        testCase.expectedReplaceTextArgs.length,
+      );
+      expect(handlers.isReplaceTargetNote).toHaveBeenCalledTimes(
+        testCase.noteItems.length,
+      );
+      testCase.noteItems.forEach((item: NoteReadResult) => {
+        expect(handlers.isReplaceTargetNote).toHaveBeenCalledWith(item);
+      });
+    });
+  });
+};
 const testCases: TestCase[] = [
   {
     caseName: "does not replace when there are no matching keys",
@@ -124,39 +162,52 @@ const testCases: TestCase[] = [
     noteItems: [],
     expectedReplaceTextArgs: ["  "],
   },
-  // {
-  //   caseName: "replaces displayName and note",
-  //   input: makeMapData({
-  //     displayName: "Hello",
-  //     note: ["<test:foo> ", "<test:baz>", "<test:nochange>"].join("\n"),
-  //   }),
-  //   expected: makeMapData({
-  //     displayName: "Hi",
-  //     note: ["<test:bar>", "<test:qux>", "<test:nochange>"].join("\n"),
-  //   }),
-  //   noteItems: [
-  //     { key: "test", value: "foo" },
-  //     { key: "test", value: "baz" },
-  //     { key: "test", value: "nochange" },
-  //   ],
-  //   expectedReplaceTextArgs: ["Hello"],
-  // },
+  {
+    caseName: "replaces displayName and note",
+    input: makeMapData({
+      displayName: "Hello",
+      note: ["<test:foo> ", "<test:baz>", "<test:nochange>"].join("\n"),
+    }),
+    expected: makeMapData({
+      displayName: "Hi",
+      note: ["<test:bar>", "<test:qux>", "<test:nochange>"].join("\n"),
+    }),
+    noteItems: [
+      { key: "test", value: "foo" },
+      { key: "test", value: "baz" },
+      { key: "test", value: "nochange" },
+    ],
+    expectedReplaceTextArgs: ["Hello"],
+  },
+  {
+    caseName: "does not replace event name",
+    input: makeMapData({
+      displayName: "MapName",
+      events: [makeMapEvent({ name: "foo" })],
+    }),
+    expected: makeMapData({
+      displayName: "MapName",
+      events: [makeMapEvent({ name: "foo" })],
+    }),
+    noteItems: [],
+    expectedReplaceTextArgs: ["MapName"],
+  },
   {
     caseName: "does not replace when there are no matching keys",
     input: makeMapData({
       displayName: "MapName",
       events: [
-        makeMapEvent({ note: "<Mock:foo>", name: "foo" }),
-        makeMapEvent({ note: "<Mock:bar>", name: "Event2" }),
-        makeMapEvent({ note: "<Mock:baz>", name: "Event3" }),
+        makeMapEvent({ note: "<Mock:foo>" }),
+        makeMapEvent({ note: "<Mock:bar>" }),
+        makeMapEvent({ note: "<Mock:baz>" }),
       ],
     }),
     expected: makeMapData({
       displayName: "MapName",
       events: [
-        makeMapEvent({ note: "<Mock:bar>", name: "foo" }),
-        makeMapEvent({ note: "<Mock:bar>", name: "Event2" }),
-        makeMapEvent({ note: "<Mock:qux>", name: "Event3" }),
+        makeMapEvent({ note: "<Mock:bar>" }),
+        makeMapEvent({ note: "<Mock:bar>" }),
+        makeMapEvent({ note: "<Mock:qux>" }),
       ],
     }),
     noteItems: [
@@ -202,45 +253,6 @@ const testCases: TestCase[] = [
   },
 ];
 
-const runTestCase = (testCase: TestCase) => {
-  describe(testCase.caseName, () => {
-    test(testCase.caseName, () => {
-      const result = replaceMapData(
-        testCase.input,
-        createReplaceHandlers(dictionary),
-      );
-      expect(result).toEqual(testCase.expected);
-    });
-    test("calls isReplaceTargetNote for each note item", () => {
-      const handlers = createReplaceHandlers(dictionary, true);
-      replaceMapData(testCase.input, handlers);
-      expect(handlers.replaceText).toHaveBeenCalledTimes(
-        testCase.expectedReplaceTextArgs.length + testCase.noteItems.length,
-      );
-      expect(handlers.isReplaceTargetNote).toHaveBeenCalledTimes(
-        testCase.noteItems.length,
-      );
-      testCase.noteItems.forEach((item: NoteReadResult) => {
-        expect(handlers.isReplaceTargetNote).toHaveBeenCalledWith(item);
-        expect(handlers.replaceText).toHaveBeenCalledWith(item.value);
-      });
-    });
-    test("does not replace note when isReplaceTargetNote returns false", () => {
-      const handlers = createReplaceHandlers(dictionary, false);
-      replaceMapData(testCase.input, handlers);
-      expect(handlers.replaceText).toHaveBeenCalledTimes(
-        testCase.expectedReplaceTextArgs.length,
-      );
-      expect(handlers.isReplaceTargetNote).toHaveBeenCalledTimes(
-        testCase.noteItems.length,
-      );
-      testCase.noteItems.forEach((item: NoteReadResult) => {
-        expect(handlers.isReplaceTargetNote).toHaveBeenCalledWith(item);
-      });
-    });
-  });
-};
-
-describe("replaceActorText", () => {
+describe("replaceMapData", () => {
   testCases.forEach((testCase) => runTestCase(testCase));
 });
