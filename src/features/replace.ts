@@ -7,28 +7,34 @@ import type {
   Data_TroopUnknonw,
   BattleEventPage,
   Data_CommonEventUnknown,
+  NoteReplaceHandlers,
+  TextReplaceHandlers,
+  MapEvent,
+  MapEventPage,
 } from "@RpgTypes/rmmz";
 import {
   PLUGIN_COMMAND_MZ,
-  repleaceMapEventCommands,
+  replaceNoteWithHandlers,
   SCRIPT_EVAL,
 } from "@RpgTypes/rmmz";
 import { normalizeEventCommands } from "./core/eventCommand/normalize";
-import { replaceNoteTextByFunction } from "./core/replace/text";
 import { replaceBasicEventCommandTexts } from "./core/replace/text/eventCommand";
-import { replaceTextByFunction } from "./core/replace/text/utils";
+import {
+  replaceTextByFunction,
+  replaceTextByHandlers,
+} from "./core/replace/text/utils";
 
-export interface ReplaceTextHandlers {
+export interface ReplaceEventTextHandlers extends TextReplaceHandlers {
   pluginCommand: (command: Command_PluginCommandMZ) => Command_PluginCommandMZ;
   scriptCommand: (command: Command_ScriptHeader) => Command_ScriptHeader;
-  text: (key: string) => string | undefined;
+  replaceText: (key: string) => string | undefined;
 }
 
 export const replaceEventCommandTexts = (
   commandList: ReadonlyArray<EventCommand>,
-  handlers: ReplaceTextHandlers,
+  handlers: ReplaceEventTextHandlers,
 ): NormalizedEventCommand[] => {
-  const textFn = (key: string): string | undefined => handlers.text(key);
+  const textFn = (key: string): string | undefined => handlers.replaceText(key);
   return normalizeEventCommands(commandList).map(
     (command: NormalizedEventCommand): NormalizedEventCommand => {
       if (command.code === PLUGIN_COMMAND_MZ) {
@@ -44,7 +50,7 @@ export const replaceEventCommandTexts = (
 
 export const replaceTroopData = (
   troop: Data_TroopUnknonw<EventCommand>,
-  handlers: ReplaceTextHandlers,
+  handlers: ReplaceEventTextHandlers,
 ): Data_TroopUnknonw<NormalizedEventCommand> => {
   return {
     members: troop.members,
@@ -64,10 +70,10 @@ export const replaceTroopTexts = (
   troop: Data_TroopUnknonw<EventCommand>,
   fn: (key: string) => string | undefined,
 ): Data_TroopUnknonw<NormalizedEventCommand> => {
-  const handlers: ReplaceTextHandlers = {
+  const handlers: ReplaceEventTextHandlers = {
     pluginCommand: (command) => command,
     scriptCommand: (command) => command,
-    text: fn,
+    replaceText: fn,
   };
 
   return {
@@ -86,7 +92,7 @@ export const replaceTroopTexts = (
 
 export const replaceCommonEventData = (
   commonEvent: Data_CommonEventUnknown<EventCommand>,
-  handlers: ReplaceTextHandlers,
+  handlers: ReplaceEventTextHandlers,
 ): Data_CommonEventUnknown<NormalizedEventCommand> => {
   return {
     id: commonEvent.id,
@@ -109,7 +115,7 @@ export const replaceCommonEventTexts = (
     list: replaceEventCommandTexts(commonEvent.list, {
       pluginCommand: (command) => command,
       scriptCommand: (command) => command,
-      text: fn,
+      replaceText: fn,
     }),
   };
 };
@@ -118,42 +124,51 @@ export const replaceMapTexts = (
   mapData: Data_Map<EventCommand>,
   fn: (key: string) => string | undefined,
 ): Data_Map<NormalizedEventCommand> => {
-  return replaceMapDataTextsCore(
-    mapData,
-    fn,
-    (commandList: ReadonlyArray<EventCommand>) =>
-      replaceEventCommandTexts(commandList, {
-        pluginCommand: (command) => command,
-        scriptCommand: (command) => command,
-        text: fn,
-      }),
-  );
+  return replaceMapDataTextsCore(mapData, {
+    pluginCommand: (c) => c,
+    scriptCommand: (c) => c,
+    replaceText: fn,
+    isReplaceTargetNote: () => false,
+  });
 };
 
 export const replaceMapData = (
   mapData: Data_Map<EventCommand>,
-  handlers: ReplaceTextHandlers,
+  handlers: ReplaceEventTextHandlers & NoteReplaceHandlers,
 ): Data_Map<NormalizedEventCommand> => {
-  return replaceMapDataTextsCore(
-    mapData,
-    (key: string) => handlers.text(key),
-    (commandList: ReadonlyArray<EventCommand>) =>
-      replaceEventCommandTexts(commandList, handlers),
-  );
+  return replaceMapDataTextsCore(mapData, handlers);
+};
+
+const replaceMapEventTexts = (
+  mapEvent: MapEvent<EventCommand>,
+  handlers: ReplaceEventTextHandlers & NoteReplaceHandlers,
+): MapEvent<NormalizedEventCommand> => {
+  return {
+    id: mapEvent.id,
+    name: mapEvent.name,
+    x: mapEvent.x,
+    y: mapEvent.y,
+    note: replaceNoteWithHandlers(mapEvent.note, handlers),
+    pages: mapEvent.pages.map(
+      (page): MapEventPage<NormalizedEventCommand> => ({
+        ...page,
+        list: replaceEventCommandTexts(page.list, handlers),
+      }),
+    ),
+  };
 };
 
 const replaceMapDataTextsCore = (
   mapData: Data_Map<EventCommand>,
-  fn: (key: string) => string | undefined,
-  commandFn: (
-    commands: ReadonlyArray<EventCommand>,
-  ) => NormalizedEventCommand[],
+  handlers: ReplaceEventTextHandlers & NoteReplaceHandlers,
 ): Data_Map<NormalizedEventCommand> => {
   // スプレッド構文だと型チェックを通れないので、全て手動でコピー
   return {
-    note: replaceNoteTextByFunction(mapData, fn),
-    displayName: replaceTextByFunction(mapData.displayName, fn),
-    events: repleaceMapEventCommands(mapData.events, commandFn),
+    note: replaceNoteWithHandlers(mapData.note, handlers),
+    displayName: replaceTextByHandlers(mapData.displayName, handlers),
+    events: mapData.events.map((event) =>
+      event ? replaceMapEventTexts(event, handlers) : null,
+    ),
     data: mapData.data,
     tilesetId: mapData.tilesetId,
     encounterStep: mapData.encounterStep,
