@@ -19,10 +19,7 @@ import {
 } from "@RpgTypes/rmmz";
 import { normalizeEventCommands } from "./core/eventCommand/normalize";
 import { replaceBasicEventCommandTexts } from "./core/replace/text/eventCommand";
-import {
-  replaceTextByFunction,
-  replaceTextByHandlers,
-} from "./core/replace/text/utils";
+import { replaceTextByHandlers } from "./core/replace/text/utils";
 
 export interface ReplaceEventTextHandlers extends TextReplaceHandlers {
   pluginCommand: (command: Command_PluginCommandMZ) => Command_PluginCommandMZ;
@@ -79,7 +76,7 @@ export const replaceTroopTexts = (
   return {
     members: troop.members,
     id: troop.id,
-    name: replaceTextByFunction(troop.name, fn),
+    name: troop.name,
     pages: troop.pages.map(
       (page): BattleEventPage<NormalizedEventCommand> => ({
         conditions: page.conditions,
@@ -109,7 +106,7 @@ export const replaceCommonEventTexts = (
 ): Data_CommonEventUnknown<NormalizedEventCommand> => {
   return {
     id: commonEvent.id,
-    name: replaceTextByFunction(commonEvent.name, fn),
+    name: commonEvent.name,
     trigger: commonEvent.trigger,
     switchId: commonEvent.switchId,
     list: replaceEventCommandTexts(commonEvent.list, {
