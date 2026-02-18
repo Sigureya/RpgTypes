@@ -11,7 +11,7 @@ export type MemberFunctions<T> = {
   [K in keyof T]: T[K] extends (...args: any[]) => unknown
     ? {
         fn: K;
-        arg: Parameters<T[K]>;
+        args: Parameters<T[K]>;
       }
     : never;
 }[keyof T];
