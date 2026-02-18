@@ -107,13 +107,13 @@ export interface Rmmz_Map {
   updateVehicles(): void;
   updateParallax(): void;
   changeTileset(tilesetId: number): void;
-  changeBattleback(battleback1Name: null, battleback2Name: null): void;
+  changeBattleback(battleback1Name: string, battleback2Name: string): void;
   changeParallax(
     name: string,
     loopX: boolean,
     loopY: boolean,
     sx: number,
-    sy: number
+    sy: number,
   ): void;
   updateInterpreter(): void;
   unlockEvent(eventId: number): void;
