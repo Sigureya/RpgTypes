@@ -80,6 +80,7 @@ import type {
   ParamArray_SetWeatherEffect,
   ParamsArray_MovePicture,
   ParamsArray_ShowPicture,
+  ParamArray_ChangeEquip,
 } from "@RpgTypes/rmmz/eventCommand";
 import type { ParamArray_ChangeEnemyHP } from "@RpgTypes/rmmz/eventCommand/commands/enemy/change/types";
 import type { EventCode } from "@RpgTypes/rmmz/rpg";
@@ -198,6 +199,7 @@ export interface InterpreterMapper extends CommandTypeAssert {
   command316(changeLevel: ParamArray_ChangeActorLevel): boolean;
   command317(params: ParamArray_ChangeParam): boolean;
   command318(params: ParamArray_ChangeSkill): boolean;
+  command319(params: ParamArray_ChangeEquip): boolean;
   command320(params: [number, string]): boolean;
   command321(params: ParamArray_ChangeClass): boolean;
   command322(params: ParamArray_ChangeActorImages): boolean;

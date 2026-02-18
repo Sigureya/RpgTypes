@@ -7,9 +7,11 @@ import {
   makeCommandChangeActorNickName,
   makeCommandChangeActorProfile,
   makeCommandChangeClass,
+  makeCommandChangeEquip,
 } from "@RpgTypes/rmmz/eventCommand";
 import {
   CHANGE_CLASS,
+  CHANGE_EQUIP,
   CHANGE_NAME,
   CHANGE_NICKNAME,
   CHANGE_PROFILE,
@@ -193,6 +195,23 @@ const testCases: TestCase[] = [
     calls: {
       actorId: 5,
       actor: [{ fn: "setProfile", args: ["new profile"] }],
+    },
+  },
+  {
+    name: "change equip by id",
+    commandLiteral: {
+      code: CHANGE_EQUIP,
+      indent: 0,
+      parameters: [6, 2, 10],
+    },
+    command: makeCommandChangeEquip({
+      actorId: 6,
+      equipType: 2,
+      equipId: 10,
+    }),
+    calls: {
+      actorId: 6,
+      actor: [{ fn: "changeEquipById", args: [2, 10] }],
     },
   },
 ];

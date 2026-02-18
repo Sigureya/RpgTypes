@@ -3,6 +3,7 @@ import type {
   Command_ChangeActorLevel,
   Command_ChangeActorState,
   Command_ChangeClaass,
+  Command_ChangeEquip,
   Command_ChangeExp,
   Command_ChangeParam,
   Command_ChangeSkill,
@@ -266,4 +267,5 @@ export type NormalizedEventCommand =
   | Command_PluginCommandMZ
   | Command_BranchElse
   | Command_ChangeEnemyTP
-  | Command_NameInputProcessing;
+  | Command_NameInputProcessing
+  | Command_ChangeEquip;
