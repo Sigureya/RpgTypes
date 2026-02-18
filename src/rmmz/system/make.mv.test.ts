@@ -7,7 +7,7 @@ import {
   makeTermsMessages,
   makeVehicleData,
 } from "./core";
-import { makeSystemData, makeSystemDataFromMV } from "./make";
+import { makeSystemDataFromMV } from "./make";
 import type { Data_SystemMV } from "./systemMV";
 
 const mockMVData: Data_SystemMV = {
@@ -60,16 +60,38 @@ const mockMVData: Data_SystemMV = {
   versionId: 12345,
   testBattlers: [{ actorId: 1, level: 1, equips: [1, 2, 3, 4] }],
   terms: {
-    basic: makeTermsBasic({}),
-    params: makeParamNamesArray({}),
+    basic: makeTermsBasic({
+      exp: "EXP",
+      hp: "HP",
+      level: "Level",
+      mp: "MP",
+      tp: "TP",
+      experience: "Experience",
+      hpA: "HP A",
+      levelA: "Level A",
+      mpA: "MP A",
+      tpA: "TP A",
+    }),
+    params: makeParamNamesArray({
+      hit: "Hit",
+      agi: "Agi",
+      eva: "Eva",
+      mhp: "MHP",
+      mmp: "MMP",
+      atk: "Atk",
+      def: "Def",
+      mat: "Mat",
+      mdf: "Mdf",
+      luk: "Luk",
+    }),
     messages: makeTermsMessages({}),
     commands: makeTermsCommandArray({}),
   },
 };
 
 describe("makeSystemDataFromMV", () => {
-  test("", () => {
-    const systemMZ = makeSystemDataFromMV(mockMVData);
+  test("should correctly convert Data_SystemMV to Data_System with matching properties", () => {
+    const systemMZ: Data_SystemMV = makeSystemDataFromMV(mockMVData);
     expect(systemMZ).toMatchObject(mockMVData);
   });
 });
