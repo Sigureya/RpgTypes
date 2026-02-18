@@ -1,6 +1,51 @@
 {
   "additionalProperties": false,
   "$defs": {
+    "Advanced": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "gameId": { "type": "integer" },
+        "screenWidth": { "type": "integer" },
+        "screenHeight": { "type": "integer" },
+        "uiAreaWidth": { "type": "integer" },
+        "uiAreaHeight": { "type": "integer" },
+        "windowOpacity": { "type": "integer" },
+        "screenScale": { "type": "number" },
+
+        "numberFontFilename": { "type": "string" },
+        "mainFontFilename": { "type": "string" },
+        "fallbackFonts": { "type": "string" },
+        "fontSize": { "type": "integer" },
+        "picturesUpperLimit": {
+          "nullable": true,
+          "type": "integer"
+        }
+      },
+      "required": [
+        "gameId",
+        "screenWidth",
+        "screenHeight",
+        "uiAreaWidth",
+        "uiAreaHeight",
+        "windowOpacity",
+        "screenScale",
+        "numberFontFilename",
+        "mainFontFilename",
+        "fallbackFonts",
+        "fontSize"
+      ]
+    },
+    "Editor": {
+      "additionalProperties": false,
+      "type": "object",
+      "required": ["messageWidth1", "messageWidth2", "jsonFormatLevel"],
+      "properties": {
+        "messageWidth1": { "type": "integer", "minimum": 0, "maximum": 1000 },
+        "messageWidth2": { "type": "integer", "minimum": 0, "maximum": 1000 },
+        "jsonFormatLevel": { "type": "integer", "minimum": 0, "maximum": 4 }
+      }
+    },
     "Audio": {
       "type": "object",
       "required": ["name", "volume", "pitch", "pan"],
@@ -42,41 +87,6 @@
         "startY": { "type": "integer", "minimum": 0 }
       }
     },
-    "Advanced": {
-      "additionalProperties": false,
-      "type": "object",
-      "properties": {
-        "gameId": { "type": "integer" },
-        "screenWidth": { "type": "integer" },
-        "screenHeight": { "type": "integer" },
-        "uiAreaWidth": { "type": "integer" },
-        "uiAreaHeight": { "type": "integer" },
-        "windowOpacity": { "type": "integer" },
-        "screenScale": { "type": "number" },
-
-        "numberFontFilename": { "type": "string" },
-        "mainFontFilename": { "type": "string" },
-        "fallbackFonts": { "type": "string" },
-        "fontSize": { "type": "integer" },
-        "picturesUpperLimit": {
-          "nullable": true,
-          "type": "integer"
-        }
-      },
-      "required": [
-        "gameId",
-        "screenWidth",
-        "screenHeight",
-        "uiAreaWidth",
-        "uiAreaHeight",
-        "windowOpacity",
-        "screenScale",
-        "numberFontFilename",
-        "mainFontFilename",
-        "fallbackFonts",
-        "fontSize"
-      ]
-    },
     "AttackMotion": {
       "additionalProperties": false,
       "properties": {
@@ -112,16 +122,6 @@
       },
       "required": ["actorId", "level", "equips"],
       "type": "object"
-    },
-    "Editor": {
-      "additionalProperties": false,
-      "type": "object",
-      "required": ["messageWidth1", "messageWidth2", "jsonFormatLevel"],
-      "properties": {
-        "messageWidth1": { "type": "integer", "minimum": 0, "maximum": 1000 },
-        "messageWidth2": { "type": "integer", "minimum": 0, "maximum": 1000 },
-        "jsonFormatLevel": { "type": "integer", "minimum": 0, "maximum": 4 }
-      }
     },
     "MenuCommands": {
       "type": "array",
