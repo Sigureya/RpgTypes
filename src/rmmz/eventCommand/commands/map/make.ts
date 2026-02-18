@@ -5,6 +5,8 @@ import type {
   ParamObject_ScrollMap,
   Command_HideMapNameDisplay,
   Command_ShowMapNameDisplay,
+  Command_ChangeTileset,
+  ParamObject_ChangeTileset,
 } from "./types";
 
 export const makeCommandChangeParallax = (
@@ -45,4 +47,13 @@ export const makeCommandHideMapName = (
   code: 281,
   indent,
   parameters: [1],
+});
+
+export const makeCommandChangeTileset = (
+  params: Partial<ParamObject_ChangeTileset> = {},
+  indent: number = 0,
+): Command_ChangeTileset => ({
+  code: 282,
+  indent,
+  parameters: [params.tilesetId ?? 0],
 });

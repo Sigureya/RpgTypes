@@ -78,6 +78,7 @@ import type {
   Command_ChangeMapNameDisplay,
   Command_ChangeParallax,
   Command_ScrollMap,
+  Command_ChangeTileset,
 } from "./map";
 import type { Command_EraseEvent } from "./mapEvent/eraseEvent/types";
 import type { Command_GetLocationInfo } from "./mapEvent/getLocationInfo/types";
@@ -139,7 +140,6 @@ import type {
   Command_ShopProcessingBody,
 } from "./shop/types";
 import type { Command_Skip } from "./skip/types";
-import type { Command_ChangeTileset } from "./tileset/types";
 import type { Command_ChangeTransparency } from "./transparency/types";
 import type { Command_ControlVariables } from "./variable/types";
 import type {

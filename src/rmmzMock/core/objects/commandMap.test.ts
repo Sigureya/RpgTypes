@@ -23,10 +23,10 @@ const MAP_METHOD_NAMES = [
   "eraseEvent",
   "changeBattleback",
   "changeParallax",
-  "changeTileset",
   "enableNameDisplay",
   "disableNameDisplay",
 ] as const satisfies (keyof Rmmz_Map)[];
+const EVENT_ID = 24 as const;
 
 type FakeMap = Pick<Rmmz_Map, "mapId" | (typeof MAP_METHOD_NAMES)[number]>;
 
@@ -43,7 +43,6 @@ const createMockedMap = ({
     mapId: vi.fn().mockReturnValue(mapId),
     changeBattleback: vi.fn(),
     changeParallax: vi.fn(),
-    changeTileset: vi.fn(),
     disableNameDisplay: vi.fn(),
     enableNameDisplay: vi.fn(),
     eraseEvent: vi.fn(),
@@ -73,7 +72,7 @@ const runTestCase = (testCase: TestCase) => {
       const map = createMockedMap({});
       vi.stubGlobal("$gameMap", map);
       const interpreter = new Game_Interpreter();
-      interpreter.setup([testCase.command], 0);
+      interpreter.setup([testCase.command], EVENT_ID);
       interpreter.executeCommand();
       testCase.calls.map.forEach(({ fn, args }) => {
         expect(map[fn]).toHaveBeenCalledWith(...args);
@@ -85,7 +84,7 @@ const runTestCase = (testCase: TestCase) => {
       const map = createMockedMap({});
       vi.stubGlobal("$gameMap", map);
       const interpreter = new Game_Interpreter();
-      interpreter.setup([testCase.command], 0);
+      interpreter.setup([testCase.commandLiteral], EVENT_ID);
       interpreter.executeCommand();
       keys.forEach((k) => {
         expect(map[k]).not.toHaveBeenCalled();
@@ -153,6 +152,22 @@ const testCases: TestCase[] = [
     command: makeCommandHideMapName(),
     calls: {
       map: [{ fn: "disableNameDisplay", args: [] }],
+    },
+  },
+  {
+    name: "erase event",
+    commandLiteral: {
+      code: 214,
+      indent: 0,
+      parameters: [],
+    },
+    command: {
+      code: 214,
+      indent: 0,
+      parameters: [],
+    },
+    calls: {
+      map: [{ fn: "eraseEvent", args: [EVENT_ID] }],
     },
   },
 ];
