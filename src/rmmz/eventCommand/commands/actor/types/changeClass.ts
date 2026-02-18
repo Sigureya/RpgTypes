@@ -7,5 +7,11 @@ export interface Command_ChangeClaass extends EventCommandLike<321> {
 export type ParamArray_ChangeClass = [
   actorId: number,
   classId: number,
-  keepExp: boolean
+  keepExp: boolean,
 ];
+
+export interface ParamObject_ChangeClass {
+  actorId: number;
+  classId: number;
+  keepExp: boolean;
+}

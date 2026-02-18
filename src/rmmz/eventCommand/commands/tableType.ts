@@ -1,4 +1,4 @@
-import type { Command_ChangeClaass } from "./actor/changeClass/types";
+import type { Command_ChangeClaass } from "./actor";
 import type { Command_ChangeExp } from "./actor/changeExp/types";
 import type { Command_ChangeActorImages } from "./actor/changeImages/types";
 import type {
@@ -12,23 +12,21 @@ import type {
   Command_ChangeActorTP,
 } from "./actor/changeValues/types";
 import type { Command_RecoverAll } from "./actor/recoverAll/types";
-import type { Command_ShowAnimation } from "./animation/types";
-import type {
-  Command_FadeOutBGM,
-  Command_FadeOutBGS,
-  Command_ResumeBGM,
-  Command_SaveBGM,
-} from "./audio/other/types";
+import type { Command_ShowAnimation } from "./animation";
 import type {
   Command_ChangeBattleBGM,
   Command_ChangeDefeatME,
   Command_ChangeVictoryME,
+  Command_SaveBGM,
+  Command_ResumeBGM,
   Command_PlayBGM,
   Command_PlayBGS,
   Command_PlayME,
   Command_PlaySE,
-} from "./audio/play/types";
-import type { Command_StopSE } from "./audio/stop";
+  Command_FadeOutBGM,
+  Command_FadeOutBGS,
+  Command_StopSE,
+} from "./audio";
 import type { Command_ShowBalloonIcon } from "./balloon/types";
 import type { Command_ChangeBattleBackground } from "./battle/background/types";
 import type { Command_BattleProcessing } from "./battle/battleProcessing/types";
