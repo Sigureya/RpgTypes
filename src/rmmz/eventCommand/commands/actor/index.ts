@@ -25,7 +25,7 @@ export type {
   Command_ChangeActorImages,
   ParamArray_ChangeActorImages,
   ParamObject_ChangeActorImages,
-} from "./changeImages/types";
+} from "./types/changeImage";
 export type {
   Command_ChangeActorState,
   ParamArray_ChangeActorState,
@@ -46,7 +46,6 @@ export type {
   Command_NameInputProcessing,
   ParamArray_NameInputProcessing,
 } from "./nameInput/types";
-export { makeCommandChangeActorImages } from "./changeImages/make";
 export {
   makeCommandChangeActorName,
   makeCommandChangeActorNickName,

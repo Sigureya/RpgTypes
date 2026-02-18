@@ -6,7 +6,7 @@ export type ParamArray_ChangeActorImages = [
   characterIndex: number,
   faceImage: string,
   faceIndex: number,
-  battlerImage: string
+  battlerImage: string,
 ];
 
 export interface ParamObject_ChangeActorImages {
