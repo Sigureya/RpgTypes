@@ -2,8 +2,17 @@ import type { MockedObject } from "vitest";
 import { describe, expect, test, vi } from "vitest";
 import type { MemberFunctions } from "@RpgTypes/libs";
 import type { EventCommand } from "@RpgTypes/rmmz/eventCommand";
-import { makeCommandChangeBattleBackground } from "@RpgTypes/rmmz/eventCommand";
-import { CHANGE_BATTLE_BACKGROUND } from "@RpgTypes/rmmz/rpg";
+import {
+  makeCommandChangeBattleBackground,
+  makeCommandChangeParallax,
+  makeCommandHideMapName,
+  makeCommandShowMapName,
+} from "@RpgTypes/rmmz/eventCommand";
+import {
+  CHANGE_BATTLE_BACKGROUND,
+  CHANGE_MAP_NAME_DISPLAY,
+  CHANGE_PARALLAX,
+} from "@RpgTypes/rmmz/rpg";
 import type { Rmmz_Map } from "@RpgTypes/rmmzRuntime";
 import { Game_Interpreter } from "./rmmz_objects";
 
@@ -99,6 +108,51 @@ const testCases: TestCase[] = [
     },
     calls: {
       map: [{ fn: "changeBattleback", args: ["bg1", "bg2"] }],
+    },
+  },
+  {
+    name: "change parallax",
+    command: makeCommandChangeParallax(
+      {
+        parallaxName: "parallax1",
+        loopX: true,
+        loopY: false,
+        sx: 5,
+        sy: 10,
+      },
+      0,
+    ),
+    commandLiteral: {
+      code: CHANGE_PARALLAX,
+      indent: 0,
+      parameters: ["parallax1", true, false, 5, 10],
+    },
+    calls: {
+      map: [{ fn: "changeParallax", args: ["parallax1", true, false, 5, 10] }],
+    },
+  },
+  {
+    name: "show name display",
+    commandLiteral: {
+      code: CHANGE_MAP_NAME_DISPLAY,
+      indent: 0,
+      parameters: [0],
+    },
+    command: makeCommandShowMapName(),
+    calls: {
+      map: [{ fn: "enableNameDisplay", args: [] }],
+    },
+  },
+  {
+    name: "hide name display",
+    commandLiteral: {
+      code: CHANGE_MAP_NAME_DISPLAY,
+      indent: 0,
+      parameters: [1],
+    },
+    command: makeCommandHideMapName(),
+    calls: {
+      map: [{ fn: "disableNameDisplay", args: [] }],
     },
   },
 ];
