@@ -110,7 +110,7 @@ const assertExactMemberCalls = <T>(
   allKeys: ReadonlyArray<string & keyof T>,
 ) => {
   set.forEach((s) => {
-    expect(mock[s.fn]).toHaveBeenCalledWith(...s.arg);
+    expect(mock[s.fn]).toHaveBeenCalledWith(...s.args);
   });
   const setKeys = new Set(set.map((s) => s.fn));
   allKeys.forEach((key) => {
@@ -207,7 +207,7 @@ const testCases: TestCase[] = [
       parameters: [],
     },
     functionKeys: {
-      player: [{ fn: "getOnOffVehicle", arg: [] }],
+      player: [{ fn: "getOnOffVehicle", args: [] }],
       vehicle: [],
       map: [],
     },
@@ -228,8 +228,8 @@ const testCases: TestCase[] = [
     variableIds: [],
     functionKeys: {
       player: [],
-      map: [{ fn: "vehicle", arg: [0] }],
-      vehicle: [{ fn: "setLocation", arg: [123, 456, 789] }],
+      map: [{ fn: "vehicle", args: [0] }],
+      vehicle: [{ fn: "setLocation", args: [123, 456, 789] }],
     },
   },
   {
@@ -248,11 +248,11 @@ const testCases: TestCase[] = [
     variableIds: [41, 42, 43],
     functionKeys: {
       player: [],
-      map: [{ fn: "vehicle", arg: [VEHICLE_BOAT] }],
+      map: [{ fn: "vehicle", args: [VEHICLE_BOAT] }],
       vehicle: [
         {
           fn: "setLocation",
-          arg: [MOCK_OLD_VALUE, MOCK_OLD_VALUE, MOCK_OLD_VALUE],
+          args: [MOCK_OLD_VALUE, MOCK_OLD_VALUE, MOCK_OLD_VALUE],
         },
       ],
     },
@@ -273,8 +273,8 @@ const testCases: TestCase[] = [
     variableIds: [],
     functionKeys: {
       player: [],
-      map: [{ fn: "vehicle", arg: [VEHICLE_SHIP] }],
-      vehicle: [{ fn: "setLocation", arg: [217, 231, 235] }],
+      map: [{ fn: "vehicle", args: [VEHICLE_SHIP] }],
+      vehicle: [{ fn: "setLocation", args: [217, 231, 235] }],
     },
   },
   {
@@ -293,11 +293,11 @@ const testCases: TestCase[] = [
     variableIds: [51, 52, 53],
     functionKeys: {
       player: [],
-      map: [{ fn: "vehicle", arg: [VEHICLE_SHIP] }],
+      map: [{ fn: "vehicle", args: [VEHICLE_SHIP] }],
       vehicle: [
         {
           fn: "setLocation",
-          arg: [MOCK_OLD_VALUE, MOCK_OLD_VALUE, MOCK_OLD_VALUE],
+          args: [MOCK_OLD_VALUE, MOCK_OLD_VALUE, MOCK_OLD_VALUE],
         },
       ],
     },
@@ -317,8 +317,8 @@ const testCases: TestCase[] = [
     variableIds: [],
     functionKeys: {
       player: [],
-      map: [{ fn: "vehicle", arg: [VEHICLE_BOAT] }],
-      vehicle: [{ fn: "setBgm", arg: [MOCK_AUDIO] }],
+      map: [{ fn: "vehicle", args: [VEHICLE_BOAT] }],
+      vehicle: [{ fn: "setBgm", args: [MOCK_AUDIO] }],
     },
   },
   {
@@ -335,8 +335,8 @@ const testCases: TestCase[] = [
     variableIds: [],
     functionKeys: {
       player: [],
-      map: [{ fn: "vehicle", arg: [1] }],
-      vehicle: [{ fn: "setImage", arg: [MOCK_VHEICLE_NAME, 4] }],
+      map: [{ fn: "vehicle", args: [1] }],
+      vehicle: [{ fn: "setImage", args: [MOCK_VHEICLE_NAME, 4] }],
     },
   },
   {
@@ -353,8 +353,8 @@ const testCases: TestCase[] = [
     variableIds: [],
     functionKeys: {
       player: [],
-      map: [{ fn: "vehicle", arg: [2] }],
-      vehicle: [{ fn: "setImage", arg: [MOCK_VHEICLE_NAME, 6] }],
+      map: [{ fn: "vehicle", args: [2] }],
+      vehicle: [{ fn: "setImage", args: [MOCK_VHEICLE_NAME, 6] }],
     },
   },
 ];

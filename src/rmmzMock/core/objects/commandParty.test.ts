@@ -95,7 +95,7 @@ const assertExactMemberCalls = <T>(
   allKeys: readonly (keyof T & string)[],
 ) => {
   expected.forEach((e) => {
-    expect(mock[e.fn]).toHaveBeenCalledWith(...e.arg);
+    expect(mock[e.fn]).toHaveBeenCalledWith(...e.args);
   });
 
   const called = new Set(expected.map((e) => e.fn));
@@ -196,7 +196,7 @@ const testCases: TestCase[] = [
     },
     calls: {
       variables: [],
-      party: [{ fn: "gainGold", arg: [50] }],
+      party: [{ fn: "gainGold", args: [50] }],
     },
   },
   {
@@ -209,7 +209,7 @@ const testCases: TestCase[] = [
     },
     calls: {
       variables: [],
-      party: [{ fn: "gainGold", arg: [30] }],
+      party: [{ fn: "gainGold", args: [30] }],
     },
   },
   {
@@ -221,8 +221,8 @@ const testCases: TestCase[] = [
       parameters: [0, 1, 5],
     },
     calls: {
-      variables: [{ fn: "value", arg: [5] }],
-      party: [{ fn: "gainGold", arg: [MOCK_OLD_VALUE] }],
+      variables: [{ fn: "value", args: [5] }],
+      party: [{ fn: "gainGold", args: [MOCK_OLD_VALUE] }],
     },
   },
   {
@@ -235,7 +235,7 @@ const testCases: TestCase[] = [
     },
     calls: {
       variables: [],
-      party: [{ fn: "gainGold", arg: [-128] }],
+      party: [{ fn: "gainGold", args: [-128] }],
     },
   },
   {
@@ -248,7 +248,7 @@ const testCases: TestCase[] = [
     },
     calls: {
       variables: [],
-      party: [{ fn: "gainGold", arg: [-64] }],
+      party: [{ fn: "gainGold", args: [-64] }],
     },
   },
   {
@@ -260,8 +260,8 @@ const testCases: TestCase[] = [
       parameters: [1, 1, 10],
     },
     calls: {
-      variables: [{ fn: "value", arg: [10] }],
-      party: [{ fn: "gainGold", arg: [-MOCK_OLD_VALUE] }],
+      variables: [{ fn: "value", args: [10] }],
+      party: [{ fn: "gainGold", args: [-MOCK_OLD_VALUE] }],
     },
   },
   {
@@ -277,7 +277,7 @@ const testCases: TestCase[] = [
     },
     calls: {
       variables: [],
-      party: [{ fn: "gainItem", arg: [mockItems[1], 3] }],
+      party: [{ fn: "gainItem", args: [mockItems[1], 3] }],
     },
   },
   {
@@ -293,7 +293,7 @@ const testCases: TestCase[] = [
     },
     calls: {
       variables: [],
-      party: [{ fn: "gainItem", arg: [mockItems[2], -4] }],
+      party: [{ fn: "gainItem", args: [mockItems[2], -4] }],
     },
   },
   {
@@ -308,8 +308,8 @@ const testCases: TestCase[] = [
       parameters: [1, 0, 1, 7],
     },
     calls: {
-      variables: [{ fn: "value", arg: [7] }],
-      party: [{ fn: "gainItem", arg: [mockItems[1], MOCK_OLD_VALUE] }],
+      variables: [{ fn: "value", args: [7] }],
+      party: [{ fn: "gainItem", args: [mockItems[1], MOCK_OLD_VALUE] }],
     },
   },
   {
@@ -325,7 +325,7 @@ const testCases: TestCase[] = [
     },
     calls: {
       variables: [],
-      party: [{ fn: "gainItem", arg: [mockItems[2], -9] }],
+      party: [{ fn: "gainItem", args: [mockItems[2], -9] }],
     },
   },
   {
@@ -341,7 +341,7 @@ const testCases: TestCase[] = [
     },
     calls: {
       variables: [],
-      party: [{ fn: "gainItem", arg: [mockItems[1], 2] }],
+      party: [{ fn: "gainItem", args: [mockItems[1], 2] }],
     },
   },
   {
@@ -356,8 +356,8 @@ const testCases: TestCase[] = [
       parameters: [2, 1, 1, 12],
     },
     calls: {
-      variables: [{ fn: "value", arg: [12] }],
-      party: [{ fn: "gainItem", arg: [mockItems[2], -MOCK_OLD_VALUE] }],
+      variables: [{ fn: "value", args: [12] }],
+      party: [{ fn: "gainItem", args: [mockItems[2], -MOCK_OLD_VALUE] }],
     },
   },
   {
@@ -373,7 +373,7 @@ const testCases: TestCase[] = [
     },
     calls: {
       variables: [],
-      party: [{ fn: "gainItem", arg: [mockWeapons[1], 6, false] }],
+      party: [{ fn: "gainItem", args: [mockWeapons[1], 6, false] }],
     },
   },
   {
@@ -388,8 +388,10 @@ const testCases: TestCase[] = [
       parameters: [2, 0, 1, 8, false],
     },
     calls: {
-      variables: [{ fn: "value", arg: [8] }],
-      party: [{ fn: "gainItem", arg: [mockWeapons[2], MOCK_OLD_VALUE, false] }],
+      variables: [{ fn: "value", args: [8] }],
+      party: [
+        { fn: "gainItem", args: [mockWeapons[2], MOCK_OLD_VALUE, false] },
+      ],
     },
   },
   {
@@ -405,7 +407,7 @@ const testCases: TestCase[] = [
     },
     calls: {
       variables: [],
-      party: [{ fn: "gainItem", arg: [mockArmors[1], 7, false] }],
+      party: [{ fn: "gainItem", args: [mockArmors[1], 7, false] }],
     },
   },
   {
@@ -420,8 +422,8 @@ const testCases: TestCase[] = [
       parameters: [2, 0, 1, 9, false],
     },
     calls: {
-      variables: [{ fn: "value", arg: [9] }],
-      party: [{ fn: "gainItem", arg: [mockArmors[2], MOCK_OLD_VALUE, false] }],
+      variables: [{ fn: "value", args: [9] }],
+      party: [{ fn: "gainItem", args: [mockArmors[2], MOCK_OLD_VALUE, false] }],
     },
   },
   {
@@ -437,7 +439,7 @@ const testCases: TestCase[] = [
     },
     calls: {
       variables: [],
-      party: [{ fn: "gainItem", arg: [mockArmors[1], -11, false] }],
+      party: [{ fn: "gainItem", args: [mockArmors[1], -11, false] }],
     },
   },
   {
@@ -452,8 +454,10 @@ const testCases: TestCase[] = [
       parameters: [2, 1, 1, 15, false],
     },
     calls: {
-      variables: [{ fn: "value", arg: [15] }],
-      party: [{ fn: "gainItem", arg: [mockArmors[2], -MOCK_OLD_VALUE, false] }],
+      variables: [{ fn: "value", args: [15] }],
+      party: [
+        { fn: "gainItem", args: [mockArmors[2], -MOCK_OLD_VALUE, false] },
+      ],
     },
   },
 ];

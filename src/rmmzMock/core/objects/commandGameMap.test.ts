@@ -72,7 +72,7 @@ const testCases: TestCase[] = [
       parameters: ["", ""],
     },
     calls: {
-      map: [{ fn: "changeBattleback", arg: ["", ""] }],
+      map: [{ fn: "changeBattleback", args: ["", ""] }],
     },
   },
 ];
