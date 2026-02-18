@@ -2,8 +2,18 @@ import type { MockedObject } from "vitest";
 import { describe, expect, test, vi } from "vitest";
 import type { MemberFunctions } from "@RpgTypes/libs";
 import type { EventCommand } from "@RpgTypes/rmmz/eventCommand";
-import { makeCommandChangeClass } from "@RpgTypes/rmmz/eventCommand";
-import { CHANGE_CLASS } from "@RpgTypes/rmmz/rpg";
+import {
+  makeCommandChangeActorName,
+  makeCommandChangeActorNickName,
+  makeCommandChangeActorProfile,
+  makeCommandChangeClass,
+} from "@RpgTypes/rmmz/eventCommand";
+import {
+  CHANGE_CLASS,
+  CHANGE_NAME,
+  CHANGE_NICKNAME,
+  CHANGE_PROFILE,
+} from "@RpgTypes/rmmz/rpg";
 import type {
   Rmmz_Actor,
   Rmmz_Actors,
@@ -23,8 +33,8 @@ const KEYS = [
   "setFaceImage",
   "setName",
   "changeClass",
-  "chnageNickname",
-  "changeProfile",
+  "setNickname",
+  "setProfile",
 ] as const satisfies Exclude<keyof Rmmz_Actor, keyof Rmmz_Battler>[];
 
 const createFakeMap = (): FakeMap => ({
@@ -38,8 +48,8 @@ const createMockedActor = (): MockedObject<FakeActor> => ({
   setFaceImage: vi.fn(),
   setName: vi.fn(),
   changeClass: vi.fn(),
-  chnageNickname: vi.fn(),
-  changeProfile: vi.fn(),
+  setNickname: vi.fn(),
+  setProfile: vi.fn(),
 });
 
 const mockDataClasses = [null, { id: 1 }, { id: 2 }, { id: 3 }] as const;
@@ -121,7 +131,7 @@ const testCases: TestCase[] = [
     },
   },
   {
-    name: "Change Actor Class",
+    name: "Change Actor Class with dataClass is null",
     command: makeCommandChangeClass({
       actorId: 7,
       classId: 0,
@@ -135,6 +145,54 @@ const testCases: TestCase[] = [
     calls: {
       actorId: 7,
       actor: [],
+    },
+  },
+  {
+    name: "change actor name",
+    commandLiteral: {
+      code: CHANGE_NAME,
+      indent: 0,
+      parameters: [3, "new name"],
+    },
+    command: makeCommandChangeActorName({
+      actorId: 3,
+      name: "new name",
+    }),
+    calls: {
+      actorId: 3,
+      actor: [{ fn: "setName", args: ["new name"] }],
+    },
+  },
+  {
+    name: "change actor nickname",
+    commandLiteral: {
+      code: CHANGE_NICKNAME,
+      indent: 0,
+      parameters: [4, "new nickname"],
+    },
+    command: makeCommandChangeActorNickName({
+      actorId: 4,
+      nickname: "new nickname",
+    }),
+    calls: {
+      actorId: 4,
+      actor: [{ fn: "setNickname", args: ["new nickname"] }],
+    },
+  },
+  {
+    name: "change actor profile",
+    commandLiteral: {
+      code: CHANGE_PROFILE,
+      indent: 0,
+      parameters: [5, "new profile"],
+    },
+    command: makeCommandChangeActorProfile({
+      actorId: 5,
+      profile: "new profile",
+    }),
+    calls: {
+      actorId: 5,
+      actor: [{ fn: "setProfile", args: ["new profile"] }],
     },
   },
 ];
