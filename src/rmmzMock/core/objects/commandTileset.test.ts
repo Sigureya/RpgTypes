@@ -22,7 +22,7 @@ const makeMockMap = (): MockedObject<FakeMap> => ({
 });
 
 const mockBitmap = (filename: string): FakeBitmap => ({
-  isReady: () => filename === "ok",
+  isReady: () => filename === "ok" || filename === "good",
 });
 
 const mockImageManager = (): MockedObject<FakeImageManager> => ({
@@ -43,9 +43,9 @@ const createMocks = (): MockBundle => {
 
 const mockTilesets: (FakeTileset | null)[] = [
   null,
-  { tilesetNames: ["ok"] },
+  { tilesetNames: ["ok", "good"] },
   { tilesetNames: ["ok", "bad"] },
-  { tilesetNames: ["bad1", "bad2"] },
+  { tilesetNames: ["bad1", "bad2", "bad3"] },
 ];
 
 const setupGloablMocks = (bundle: MockBundle): void => {
@@ -74,6 +74,8 @@ describe("", () => {
       expect(result).toBe(true);
       expect(mocks.map.mapId).toHaveBeenCalledOnce();
       expect(mocks.imageManager.loadTileset).toHaveBeenCalledWith("ok");
+      expect(mocks.imageManager.loadTileset).toHaveBeenCalledWith("good");
+      expect(mocks.imageManager.loadTileset).toHaveBeenCalledTimes(2);
       expect(mocks.map.changeTileset).toHaveBeenCalledWith(1);
       expect(mocks.map.changeTileset).toHaveBeenCalledOnce();
     });
@@ -118,6 +120,53 @@ describe("", () => {
       interpreter.setup([command], 0);
       expect(() => interpreter.executeCommand()).toThrow();
       expect(mocks.imageManager.loadTileset).not.toHaveBeenCalled();
+      expect(mocks.map.changeTileset).not.toHaveBeenCalled();
+    });
+  });
+  describe("fails to change tileset when bitmap is not ready", () => {
+    const command: Command_ChangeTileset = {
+      code: 282,
+      indent: 0,
+      parameters: [2],
+    };
+    test("make", () => {
+      const newCommand = makeCommandChangeTileset({ tilesetId: 2 });
+      expect(newCommand).toEqual(command);
+    });
+    test("exec", () => {
+      const mocks = createMocks();
+      setupGloablMocks(mocks);
+      const interpreter = new Game_Interpreter();
+      interpreter.setup([command], 0);
+      const reuslt = interpreter.executeCommand();
+      expect(reuslt).toBe(false);
+      expect(mocks.imageManager.loadTileset).toHaveBeenCalledWith("ok");
+      expect(mocks.imageManager.loadTileset).toHaveBeenCalledWith("bad");
+      expect(mocks.imageManager.loadTileset).toHaveBeenCalledTimes(2);
+      expect(mocks.map.changeTileset).not.toHaveBeenCalled();
+    });
+  });
+  describe("fails to change tileset when multiple bitmaps are not ready and throws after checking all of them", () => {
+    const command: Command_ChangeTileset = {
+      code: 282,
+      indent: 0,
+      parameters: [3],
+    };
+    test("make", () => {
+      const newCommand = makeCommandChangeTileset({ tilesetId: 3 });
+      expect(newCommand).toEqual(command);
+    });
+    test("exec", () => {
+      const mocks = createMocks();
+      setupGloablMocks(mocks);
+      const interpreter = new Game_Interpreter();
+      interpreter.setup([command], 0);
+      const reuslt = interpreter.executeCommand();
+      expect(reuslt).toBe(false);
+      expect(mocks.imageManager.loadTileset).toHaveBeenCalledWith("bad1");
+      expect(mocks.imageManager.loadTileset).toHaveBeenCalledWith("bad2");
+      expect(mocks.imageManager.loadTileset).toHaveBeenCalledWith("bad3");
+      expect(mocks.imageManager.loadTileset).toHaveBeenCalledTimes(3);
       expect(mocks.map.changeTileset).not.toHaveBeenCalled();
     });
   });
