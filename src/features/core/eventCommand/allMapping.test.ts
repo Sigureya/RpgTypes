@@ -44,6 +44,7 @@ import {
 } from "@RpgTypes/rmmz";
 import type {
   Command_BattleProcessing,
+  Command_ChangeActorImages,
   Command_ChangeActorName,
   Command_ChangeActorNickName,
   Command_ChangeActorProfile,
@@ -77,7 +78,6 @@ import type {
   Command_Wait,
   EventCommand,
 } from "@RpgTypes/rmmz/eventCommand";
-import type { Command_ChangeActorImages } from "@RpgTypes/rmmz/eventCommand/commands/actor/changeImages/types";
 import type { Command_FadeOutBGM } from "@RpgTypes/rmmz/eventCommand/commands/audio/other/types";
 import type { Command_TransferPlayer } from "@RpgTypes/rmmz/eventCommand/commands/mapPlayer/transferPlayer/types";
 import type { Command_ErasePicture } from "@RpgTypes/rmmz/eventCommand/commands/picture/erase/types";
