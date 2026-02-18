@@ -1,3 +1,4 @@
+export * from "./make";
 export * from "./recoverAll/index";
 export * from "./types";
 export type {
