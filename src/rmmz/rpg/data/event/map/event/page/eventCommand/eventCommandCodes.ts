@@ -100,6 +100,7 @@ export const CHANGE_ACTOR_STATE = 313 as const;
 export const CHANGE_PARAMETER = 317 as const;
 
 export const CHANGE_SKILL = 318 as const;
+export const CHANGE_EQUIP = 319 as const;
 
 export const CHANGE_NAME = 320 as const;
 export const CHANGE_CLASS = 321 as const;
