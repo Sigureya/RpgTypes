@@ -1,3 +1,2 @@
-export type * from "./changeMapNameDisplay/types";
-export type * from "./parallax/types";
-export type * from "./scroll/types";
+export * from "./make";
+export * from "./types";
