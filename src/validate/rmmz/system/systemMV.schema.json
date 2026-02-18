@@ -1,0 +1,483 @@
+{
+  "$defs": {
+    "Audio": {
+      "type": "object",
+      "required": ["name", "volume", "pitch", "pan"],
+      "additionalProperties": false,
+      "properties": {
+        "name": { "type": "string" },
+        "volume": { "type": "integer" },
+        "pitch": { "type": "integer" },
+        "pan": { "type": "integer" }
+      }
+    },
+    "Vehicle": {
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "characterIndex",
+        "characterName",
+        "bgm",
+        "startMapId",
+        "startX",
+        "startY"
+      ],
+      "properties": {
+        "characterIndex": { "type": "integer", "minimum": 0, "maximum": 7 },
+        "characterName": { "type": "string" },
+        "bgm": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["name", "volume", "pitch", "pan"],
+          "properties": {
+            "name": { "type": "string" },
+            "volume": { "type": "integer" },
+            "pitch": { "type": "integer" },
+            "pan": { "type": "integer" }
+          }
+        },
+        "startMapId": { "type": "integer", "minimum": 0 },
+        "startX": { "type": "integer", "minimum": 0 },
+        "startY": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "AttackMotion": {
+      "additionalProperties": false,
+      "properties": {
+        "type": { "type": "number" },
+        "weaponImageId": { "type": "number" }
+      },
+      "required": ["type", "weaponImageId"],
+      "type": "object"
+    },
+    "TestBattler": {
+      "additionalProperties": false,
+      "properties": {
+        "actorId": {
+          "minimum": 0,
+          "type": "integer"
+        },
+        "equips": {
+          "items": {
+            "type": "integer"
+          },
+          "type": "array"
+        },
+        "level": {
+          "minimum": 0,
+          "type": "integer"
+        }
+      },
+      "required": ["actorId", "level", "equips"],
+      "type": "object"
+    },
+    "MenuCommands": {
+      "type": "array",
+      "maxItems": 6,
+      "minItems": 6,
+      "items": {
+        "type": "boolean"
+      }
+    },
+    "TermsBasic": {
+      "items": { "type": "string" },
+      "maxItems": 10,
+      "minItems": 10,
+      "type": "array"
+    },
+    "TermsParams": {
+      "items": {
+        "minLength": 0,
+        "type": "string"
+      },
+      "maxItems": 10,
+      "minItems": 10,
+      "type": "array"
+    },
+    "TermsCommands": {
+      "maxItems": 26,
+      "minItems": 26,
+      "type": "array",
+      "items": [
+        { "type": "string" },
+        { "type": "string" },
+        { "type": "string" },
+        { "type": "string" },
+        { "type": "string" },
+        { "type": "string" },
+        { "type": "string" },
+        { "type": "string" },
+        { "type": "string" },
+        { "type": "string" },
+        { "type": "string" },
+        { "type": "string" },
+        { "type": "string" },
+        { "type": "string" },
+        { "type": "string" },
+        { "type": "string" },
+        { "type": "string" },
+        { "type": "string" },
+        { "type": "string" },
+        { "type": "string" },
+        { "type": "string", "nullable": true },
+        { "type": "string" },
+        { "type": "string" },
+        { "type": "string", "nullable": true },
+        { "type": "string" },
+        { "type": "string" }
+      ]
+    },
+    "TermsMessages": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "actionFailure",
+        "actorDamage",
+        "actorDrain",
+        "actorGain",
+        "actorLoss",
+        "actorNoDamage",
+        "actorNoHit",
+        "actorRecovery",
+        "alwaysDash",
+        "bgmVolume",
+        "bgsVolume",
+        "buffAdd",
+        "buffRemove",
+        "commandRemember",
+        "counterAttack",
+        "criticalToActor",
+        "criticalToEnemy",
+        "debuffAdd",
+        "defeat",
+        "emerge",
+        "enemyDamage",
+        "enemyDrain",
+        "enemyGain",
+        "enemyLoss",
+        "enemyNoDamage",
+        "enemyNoHit",
+        "enemyRecovery",
+        "escapeFailure",
+        "escapeStart",
+        "evasion",
+        "expNext",
+        "expTotal",
+        "file",
+        "levelUp",
+        "loadMessage",
+        "magicEvasion",
+        "magicReflection",
+        "meVolume",
+        "obtainExp",
+        "obtainGold",
+        "obtainItem",
+        "obtainSkill",
+        "partyName",
+        "possession",
+        "preemptive",
+        "saveMessage",
+        "seVolume",
+        "substitute",
+        "surprise",
+        "useItem",
+        "victory"
+      ],
+      "properties": {
+        "actionFailure": { "type": "string" },
+        "actorDamage": { "type": "string" },
+        "actorDrain": { "type": "string" },
+        "actorGain": { "type": "string" },
+        "actorLoss": { "type": "string" },
+        "actorNoDamage": { "type": "string" },
+        "actorNoHit": { "type": "string" },
+        "actorRecovery": { "type": "string" },
+        "alwaysDash": { "type": "string" },
+        "bgmVolume": { "type": "string" },
+        "bgsVolume": { "type": "string" },
+        "buffAdd": { "type": "string" },
+        "buffRemove": { "type": "string" },
+        "commandRemember": { "type": "string" },
+        "counterAttack": { "type": "string" },
+        "criticalToActor": { "type": "string" },
+        "criticalToEnemy": { "type": "string" },
+        "debuffAdd": { "type": "string" },
+        "defeat": { "type": "string" },
+        "emerge": { "type": "string" },
+        "enemyDamage": { "type": "string" },
+        "enemyDrain": { "type": "string" },
+        "enemyGain": { "type": "string" },
+        "enemyLoss": { "type": "string" },
+        "enemyNoDamage": { "type": "string" },
+        "enemyNoHit": { "type": "string" },
+        "enemyRecovery": { "type": "string" },
+        "escapeFailure": { "type": "string" },
+        "escapeStart": { "type": "string" },
+        "evasion": { "type": "string" },
+        "expNext": { "type": "string" },
+        "expTotal": { "type": "string" },
+        "file": { "type": "string" },
+        "levelUp": { "type": "string" },
+        "loadMessage": { "type": "string" },
+        "magicEvasion": { "type": "string" },
+        "magicReflection": { "type": "string" },
+        "meVolume": { "type": "string" },
+        "obtainExp": { "type": "string" },
+        "obtainGold": { "type": "string" },
+        "obtainItem": { "type": "string" },
+        "obtainSkill": { "type": "string" },
+        "partyName": { "type": "string" },
+        "possession": { "type": "string" },
+        "preemptive": { "type": "string" },
+        "saveMessage": { "type": "string" },
+        "seVolume": { "type": "string" },
+        "substitute": { "type": "string" },
+        "surprise": { "type": "string" },
+        "useItem": { "type": "string" },
+        "victory": { "type": "string" }
+      }
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "airship": {
+      "$ref": "#/$defs/Vehicle"
+    },
+    "armorTypes": {
+      "items": { "type": "string" },
+      "type": "array"
+    },
+    "attackMotions": {
+      "items": {
+        "$ref": "#/$defs/AttackMotion"
+      },
+      "type": "array"
+    },
+    "battleBgm": {
+      "$ref": "#/$defs/Audio"
+    },
+    "battleback1Name": { "type": "string" },
+    "battleback2Name": { "type": "string" },
+    "battlerHue": { "type": "integer" },
+    "battlerName": { "type": "string" },
+    "boat": { "$ref": "#/$defs/Vehicle" },
+    "currencyUnit": {
+      "type": "string"
+    },
+    "defeatMe": {
+      "$ref": "#/$defs/Audio"
+    },
+    "editMapId": {
+      "minimum": 0,
+      "type": "integer"
+    },
+    "elements": {
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "equipTypes": {
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "gameTitle": {
+      "type": "string"
+    },
+    "gameoverMe": {
+      "$ref": "#/$defs/Audio"
+    },
+    "locale": {
+      "type": "string"
+    },
+    "magicSkills": {
+      "items": {
+        "type": "integer"
+      },
+      "type": "array"
+    },
+    "menuCommands": {
+      "$ref": "#/$defs/MenuCommands"
+    },
+    "optDisplayTp": {
+      "type": "boolean"
+    },
+    "optDrawTitle": {
+      "type": "boolean"
+    },
+    "optExtraExp": {
+      "type": "boolean"
+    },
+    "optFloorDeath": {
+      "type": "boolean"
+    },
+    "optFollowers": {
+      "type": "boolean"
+    },
+    "optSideView": {
+      "type": "boolean"
+    },
+    "optSlipDeath": {
+      "type": "boolean"
+    },
+    "optTransparent": {
+      "type": "boolean"
+    },
+    "partyMembers": {
+      "items": {
+        "type": "integer"
+      },
+      "type": "array"
+    },
+    "ship": {
+      "$ref": "#/$defs/Vehicle"
+    },
+    "skillTypes": {
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "sounds": {
+      "items": {
+        "$ref": "#/$defs/Audio"
+      },
+      "maxItems": 24,
+      "minItems": 24,
+      "type": "array"
+    },
+    "startMapId": {
+      "minimum": 0,
+      "type": "integer"
+    },
+    "startX": {
+      "minimum": 0,
+      "type": "integer"
+    },
+    "startY": {
+      "minimum": 0,
+      "type": "integer"
+    },
+    "switches": {
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "terms": {
+      "additionalProperties": false,
+      "properties": {
+        "basic": {
+          "$ref": "#/$defs/TermsBasic"
+        },
+        "commands": {
+          "$ref": "#/$defs/TermsCommands"
+        },
+        "messages": {
+          "$ref": "#/$defs/TermsMessages"
+        },
+        "params": {
+          "$ref": "#/$defs/TermsParams"
+        }
+      },
+      "required": ["messages", "commands", "basic", "params"],
+      "type": "object"
+    },
+    "testBattlers": {
+      "items": {
+        "$ref": "#/$defs/TestBattler"
+      },
+      "type": "array"
+    },
+    "testTroopId": {
+      "minimum": 0,
+      "type": "integer"
+    },
+    "title1Name": {
+      "type": "string"
+    },
+    "title2Name": {
+      "type": "string"
+    },
+    "titleBgm": {
+      "$ref": "#/$defs/Audio"
+    },
+    "variables": {
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "versionId": {
+      "type": "integer"
+    },
+    "victoryMe": {
+      "$ref": "#/$defs/Audio"
+    },
+    "weaponTypes": {
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "windowTone": {
+      "items": {
+        "maximum": 255,
+        "minimum": 0,
+        "type": "integer"
+      },
+      "type": "array"
+    }
+  },
+  "required": [
+    "gameTitle",
+    "currencyUnit",
+    "terms",
+    "ship",
+    "boat",
+    "airship",
+    "titleBgm",
+    "battleBgm",
+    "gameoverMe",
+    "victoryMe",
+    "defeatMe",
+    "attackMotions",
+    "optDisplayTp",
+    "optFloorDeath",
+    "optFollowers",
+    "optSideView",
+    "optSlipDeath",
+    "optTransparent",
+    "optDrawTitle",
+    "optExtraExp",
+    "startMapId",
+    "startX",
+    "startY",
+    "elements",
+    "weaponTypes",
+    "armorTypes",
+    "equipTypes",
+    "skillTypes",
+    "switches",
+    "variables",
+    "magicSkills",
+    "battleback1Name",
+    "battleback2Name",
+    "testTroopId",
+    "partyMembers",
+    "testBattlers",
+    "editMapId",
+    "battlerHue",
+    "battlerName",
+    "sounds",
+    "title1Name",
+    "title2Name",
+    "versionId",
+    "locale",
+    "windowTone",
+    "menuCommands"
+  ],
+  "type": "object"
+}
