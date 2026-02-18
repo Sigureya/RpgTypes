@@ -106,7 +106,7 @@ export declare class Game_Map implements Rmmz_Map {
   updateVehicles(): void;
   updateParallax(): void;
   changeTileset(tilesetId: number): void;
-  changeBattleback(battleback1Name: null, battleback2Name: null): void;
+  changeBattleback(battleback1Name: string, battleback2Name: string): void;
   changeParallax(
     name: string,
     loopX: boolean,
