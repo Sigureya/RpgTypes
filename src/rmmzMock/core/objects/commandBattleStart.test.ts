@@ -211,14 +211,15 @@ describe("command 301 (Battle Start)", () => {
     });
   });
   describe("Variable troop encounter", () => {
+    const variableId = 77 as const;
     const command: Command_BattleProcessing = {
       code: 301,
       indent: 0,
-      parameters: [1, 6, false, false],
+      parameters: [1, variableId, false, false],
     };
     test("make", () => {
       const result = makeCommandBattleProcessingVariable({
-        variableId: 6,
+        variableId: variableId,
         canEscape: false,
         canLose: false,
       });
@@ -235,6 +236,7 @@ describe("command 301 (Battle Start)", () => {
       interpreter.executeCommand();
       expect(mocks.party.inBattle).toHaveBeenCalledOnce();
       expect(mocks.variables.value).toHaveBeenCalledOnce();
+      expect(mocks.variables.value).toHaveBeenCalledWith(variableId);
       expect(mocks.player.makeEncounterTroopId).not.toHaveBeenCalled();
       expect(mocks.sceneManager.push).toHaveBeenCalledOnce();
       expect(mocks.sceneManager.push).toHaveBeenCalledWith(MOCK_SCENE_BATTLE);
