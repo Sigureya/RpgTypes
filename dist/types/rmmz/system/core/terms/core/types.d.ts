@@ -1,10 +1,16 @@
 import { Terms_Basic, Terms_BasicArray } from './basic/types';
 import { Terms_CommandArray, Terms_GameCommands } from './commands/types';
-import { Terms_Messages } from './messages/types';
+import { Terms_Messages, Terms_MessagesMV } from './messages/types';
 import { SystemLabels_TermsParamNames, Terms_ParamNamesArray } from './paramArray/types';
 export interface System_Terms {
     messages: Terms_Messages;
     commands: Terms_CommandArray;
+    params: Terms_ParamNamesArray;
+    basic: Terms_BasicArray;
+}
+export interface System_TermsMV {
+    messages: Terms_MessagesMV;
+    commands: Terms_CommandArray<null | "">;
     params: Terms_ParamNamesArray;
     basic: Terms_BasicArray;
 }

@@ -16,7 +16,12 @@ const validateEntryPoints = () => {
     dir,
     path.resolve(srcDir, `${dir}/index.ts`),
   ]);
-  return Object.fromEntries(entries);
+
+  const validateSystemMV = [
+    "validate/rmmz/systemMV",
+    path.resolve(srcDir, "validate/rmmz/systemMV.ts"),
+  ] as const;
+  return Object.fromEntries([...entries, validateSystemMV]);
 };
 
 const rmmzModules = () => ({});
