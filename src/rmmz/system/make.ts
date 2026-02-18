@@ -1,30 +1,29 @@
 import type { AudioFileParams } from "@RpgTypes/libs";
 import { makeAudioFileParams } from "@RpgTypes/libs";
-import {
-  createMenuCommandState,
-  makeBooleanOptions,
-  makeItemCategories,
-  makeMenuCommandsEnabled,
-  makeParamNamesArray,
-  makeSoundsArray,
-  makeSoundsObject,
-  makeSystemAdvanced,
-  makeTermsBasic,
-  makeTermsCommandArray,
-  makeTermsMessages,
-  makeTitleCommandWindow,
-  makeVehicleData,
-} from "./core";
 import type {
   System_BooleanGameOptions,
-  System_ImageSize,
   System_Terms,
   System_TermsPartial,
   Terms_Messages,
+  System_ImageSize,
 } from "./core";
-import type { EditorSettings } from "./gameEdit";
+import {
+  createMenuCommandState,
+  makeSoundsObject,
+  makeBooleanOptions,
+  makeTitleCommandWindow,
+  makeSoundsArray,
+  makeSystemAdvanced,
+  makeVehicleData,
+  makeItemCategories,
+  makeMenuCommandsEnabled,
+  makeTermsBasic,
+  makeTermsCommandArray,
+  makeParamNamesArray,
+  makeTermsMessages,
+} from "./core";
+import type { EditorSettings, TestBattler } from "./gameEdit";
 import { makeEditorSetting } from "./gameEdit";
-import type { TestBattler } from "./gameEdit/testPlay/testBattler/types";
 import type { Data_System } from "./system";
 import type { Data_SystemMV } from "./systemMV";
 import type { SystemDataFragments } from "./systemSegments";
