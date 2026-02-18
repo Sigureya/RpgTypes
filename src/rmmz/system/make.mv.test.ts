@@ -84,8 +84,16 @@ const mockMVData: Data_SystemMV = {
       mdf: "Mdf",
       luk: "Luk",
     }),
-    messages: makeTermsMessages({}),
-    commands: makeTermsCommandArray({}),
+    messages: makeTermsMessages({ actionFailure: "Action failed." }),
+    commands: makeTermsCommandArray({
+      armor: "Armor",
+      item: "Item",
+      skill: "Skill",
+      equip: "Equip",
+      status: "Status",
+      formation: "Formation",
+      attack: "Attack",
+    }),
   },
 };
 
