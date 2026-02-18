@@ -45,5 +45,5 @@ export interface SystemDataFragments {
   attackMotion: AttackMotion[];
   battle: Partial<BattleRuleRMMZ>;
   titleCommandWindow: TitleCommandWindow;
-  vesionId: number;
+  versionId: number;
 }

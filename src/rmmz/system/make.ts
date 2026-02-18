@@ -31,7 +31,7 @@ import type { SystemDataFragments } from "./systemSegments";
 
 export const makeSystemDataFromMV = (data: Data_SystemMV): Data_System => {
   return makeSystemData({
-    vesionId: data.versionId,
+    versionId: data.versionId,
 
     menuCommands: createMenuCommandState(data),
     locale: data.locale,
@@ -126,7 +126,7 @@ export const makeSystemData = (
     tileSize: size.tileSize,
     faceSize: size.faceSize,
     iconSize: size.iconSize,
-    versionId: fragments.vesionId ?? 1,
+    versionId: fragments.versionId ?? 1,
     attackMotions: fragments.attackMotion ? [...fragments.attackMotion] : [],
     battleback1Name: fragments.battleTest?.battleback1Name ?? "",
     battleback2Name: fragments.battleTest?.battleback2Name ?? "",
