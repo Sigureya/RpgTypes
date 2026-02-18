@@ -4,13 +4,12 @@ import type {
   Data_Vehicle,
   MenuCommandsEnabledArray,
   System_SoundsArray,
-  System_Terms,
 } from "./core";
+import type { System_TermsMV } from "./core/terms/core/types";
 import type { TestBattler } from "./gameEdit";
 
 export interface Data_SystemMV {
   // battle
-  battleSystem: number;
   partyMembers: number[];
   // サイドビューの際に魔法モーションを取るスキル系統
   magicSkills: number[];
@@ -23,7 +22,7 @@ export interface Data_SystemMV {
   gameTitle: string;
   currencyUnit: string;
 
-  terms: System_Terms;
+  terms: System_TermsMV;
 
   // DataTypeNames
   weaponTypes: string[];
@@ -51,18 +50,14 @@ export interface Data_SystemMV {
   airship: Data_Vehicle;
 
   // options
-  optAutosave: boolean;
   optDisplayTp: boolean;
   optDrawTitle: boolean;
   optExtraExp: boolean;
   optFloorDeath: boolean;
   optFollowers: boolean;
-  optKeyItemsNumber: boolean;
   optSideView: boolean;
   optSlipDeath: boolean;
   optTransparent: boolean;
-  optSplashScreen: boolean;
-  optMessageSkip: boolean;
 
   // initial data
   startMapId: number;
@@ -84,7 +79,4 @@ export interface Data_SystemMV {
   attackMotions: AttackMotion[];
   locale: string;
   versionId: number;
-  tileSize: number;
-  faceSize: number;
-  iconSize: number;
 }

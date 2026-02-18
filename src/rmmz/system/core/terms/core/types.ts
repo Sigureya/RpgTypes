@@ -1,6 +1,6 @@
 import type { Terms_Basic, Terms_BasicArray } from "./basic/types";
 import type { Terms_CommandArray, Terms_GameCommands } from "./commands/types";
-import type { Terms_Messages } from "./messages/types";
+import type { Terms_Messages, Terms_MessagesMV } from "./messages/types";
 import type {
   SystemLabels_TermsParamNames,
   Terms_ParamNamesArray,
@@ -9,6 +9,13 @@ import type {
 export interface System_Terms {
   messages: Terms_Messages;
   commands: Terms_CommandArray;
+  params: Terms_ParamNamesArray;
+  basic: Terms_BasicArray;
+}
+
+export interface System_TermsMV {
+  messages: Terms_MessagesMV;
+  commands: Terms_CommandArray<null | "">;
   params: Terms_ParamNamesArray;
   basic: Terms_BasicArray;
 }
