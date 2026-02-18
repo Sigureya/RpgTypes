@@ -1,11 +1,11 @@
 var fe = Object.defineProperty;
 var be = (e, a, t) => a in e ? fe(e, a, { enumerable: !0, configurable: !0, writable: !0, value: t }) : e[a] = t;
 var O = (e, a, t) => be(e, typeof a != "symbol" ? a + "" : a, t);
-import { i as xe, c_ as Ne, c$ as ve, g as Te, D as Y, A as X, B as Z, cH as I, aL as U, aK as J, aG as q, j as S, k as D, C as j, b as C, c as E, S as H, m as we, cG as Ie, a$ as Q, a_ as $, h as W, b1 as P, cC as ee, cD as ke, cT as Ae, cZ as Se, cY as Ce, cV as Be, b3 as Ee, b2 as $e, cR as Me, r as De, cm as Pe } from "./make.es2.js";
+import { i as xe, c$ as Ne, d0 as ve, g as Te, D as X, A as Y, B as Q, cH as I, aL as U, aK as J, aG as q, j as S, k as D, C as j, b as C, c as E, S as H, m as we, cG as Ie, a$ as W, a_ as $, h as Z, b1 as P, cC as ee, cD as ke, cV as Ae, cT as Se, c_ as Ce, cX as Be, b3 as Ee, b2 as $e, cR as Me, r as De, cm as Pe } from "./commands.es.js";
 import { JSONPathJS as je } from "jsonpath-js";
 import { parseDeepRecord as Re } from "@sigureya/rmmz-plugin-schema";
 import { m as ae } from "./mergeItemsSource.es.js";
-const te = (e, a, t) => e.filter((r) => r.code === Y || r.code === X || r.code === Z).map((r) => Le(r, a, t)), _e = { [Z]: "weapon", [Y]: "armor", [X]: "item" }, Le = (e, a, t) => {
+const te = (e, a, t) => e.filter((r) => r.code === X || r.code === Y || r.code === Q).map((r) => Le(r, a, t)), _e = { [Q]: "weapon", [X]: "armor", [Y]: "item" }, Le = (e, a, t) => {
   const r = xe(e) ? {
     direct: !1,
     variableId: e.parameters[3]
@@ -35,19 +35,19 @@ const te = (e, a, t) => e.filter((r) => r.code === Y || r.code === X || r.code =
 }, g = (e, a) => {
   const t = e.trimEnd(), r = a.replaceText(t);
   return r ? r.trimEnd() : t;
-}, Ya = (e, a) => {
+}, Xa = (e, a) => {
   const t = (o) => a.replaceText(o), r = I(e.note, a), s = p(e.name, t), n = p(e.nickname, t), m = p(e.profile, t);
   return { ...e, name: s, nickname: n, profile: m, note: r };
-}, Xa = (e, a) => {
-  const t = I(e.note, a), r = g(e.name, a);
-  return { ...e, name: r, note: t };
-}, Za = (e, a) => {
+}, Ya = (e, a) => {
   const t = I(e.note, a), r = g(e.name, a);
   return { ...e, name: r, note: t };
 }, Qa = (e, a) => {
+  const t = I(e.note, a), r = g(e.name, a);
+  return { ...e, name: r, note: t };
+}, Wa = (e, a) => {
   const t = I(e.note, a), r = g(e.name, a), s = g(e.description, a), n = g(e.message1, a), m = g(e.message2, a);
   return { ...e, name: r, description: s, message1: n, message2: m, note: t };
-}, Wa = (e, a) => {
+}, Za = (e, a) => {
   const t = I(e.note, a), r = g(e.name, a), s = g(e.description, a);
   return { ...e, name: r, description: s, note: t };
 }, et = (e, a) => {
@@ -100,11 +100,11 @@ const te = (e, a, t) => e.filter((r) => r.code === Y || r.code === X || r.code =
 }, at = (e, a, t = `
 `) => Oe(e, (r) => a.get(r), t), Oe = (e, a, t = `
 `) => Ie(e.note, (r) => p(r.value, a), t), tt = (e, a) => ne(e, (t) => Ue(t, a)), ne = (e, a) => ({
-  params: Xe(e.params, (t) => p(t, a)),
-  messages: Ze(e.messages, (t) => p(t, a)),
+  params: Ye(e.params, (t) => p(t, a)),
+  messages: Qe(e.messages, (t) => p(t, a)),
   basic: Ke(e.basic, (t) => p(t, a)),
-  commands: Ye(e.commands, (t) => p(t, a))
-}), Ke = (e, a) => [a(e[0]), a(e[1]), a(e[2]), a(e[3]), a(e[4]), a(e[5]), a(e[6]), a(e[7]), a(e[8]), a(e[9])], Ye = (e, a) => [a(e[0]), a(e[1]), a(e[2]), a(e[3]), a(e[4]), a(e[5]), a(e[6]), a(e[7]), a(e[8]), a(e[9]), a(e[10]), a(e[11]), a(e[12]), a(e[13]), a(e[14]), a(e[15]), a(e[16]), a(e[17]), a(e[18]), a(e[19]), "", a(e[21]), a(e[22]), "", a(e[24]), a(e[25])], Xe = (e, a) => [a(e[0]), a(e[1]), a(e[2]), a(e[3]), a(e[4]), a(e[5]), a(e[6]), a(e[7]), a(e[8]), a(e[9])], Ze = (e, a) => ({
+  commands: Xe(e.commands, (t) => p(t, a))
+}), Ke = (e, a) => [a(e[0]), a(e[1]), a(e[2]), a(e[3]), a(e[4]), a(e[5]), a(e[6]), a(e[7]), a(e[8]), a(e[9])], Xe = (e, a) => [a(e[0]), a(e[1]), a(e[2]), a(e[3]), a(e[4]), a(e[5]), a(e[6]), a(e[7]), a(e[8]), a(e[9]), a(e[10]), a(e[11]), a(e[12]), a(e[13]), a(e[14]), a(e[15]), a(e[16]), a(e[17]), a(e[18]), a(e[19]), "", a(e[21]), a(e[22]), "", a(e[24]), a(e[25])], Ye = (e, a) => [a(e[0]), a(e[1]), a(e[2]), a(e[3]), a(e[4]), a(e[5]), a(e[6]), a(e[7]), a(e[8]), a(e[9])], Qe = (e, a) => ({
   actionFailure: a(e.actionFailure),
   actorDamage: a(e.actorDamage),
   actorDrain: a(e.actorDrain),
@@ -219,23 +219,23 @@ const R = (e, a, t, r) => {
     n.push(o);
   }
   return { header: s, bodies: n };
-}, Qe = (e, a) => {
+}, We = (e, a) => {
   const { bodies: t, header: r } = ((s, n) => R(s, n, (m) => m.code === j, (m) => m.code === D))(e, a);
-  return We(r) ? new z(D, r, t) : new oe(r, t);
-}, We = (e) => e.parameters[0] === "選択肢ヘルプ", ea = (e, a) => {
+  return Ze(r) ? new z(D, r, t) : new oe(r, t);
+}, Ze = (e) => e.parameters[0] === "選択肢ヘルプ", ea = (e, a) => {
   const { bodies: t, header: r } = ((s, n) => R(s, n, (m) => m.code === H, (m) => m.code === C))(e, a);
   return new z(C, r, t);
 }, aa = (e, a) => {
-  const { bodies: t, header: r } = ((s, n) => R(s, n, (m) => m.code === $, (m) => m.code === Q))(e, a);
+  const { bodies: t, header: r } = ((s, n) => R(s, n, (m) => m.code === $, (m) => m.code === W))(e, a);
   return new oe(r, t);
 }, ta = (e, a) => {
-  const { bodies: t, header: r } = ((s, n) => R(s, n, (m) => m.code === W, (m) => m.code === S))(e, a);
+  const { bodies: t, header: r } = ((s, n) => R(s, n, (m) => m.code === Z, (m) => m.code === S))(e, a);
   return new z(S, r, t);
 }, ra = {
   [H]: (e, a, t) => t.showMessage(ea(e, a), a, e),
   [$]: (e, a, t) => t.script(aa(e, a), a, e),
-  [j]: (e, a, t) => t.comment(Qe(e, a), a, e),
-  [W]: (e, a, t) => t.showScrollingText(ta(e, a), a, e)
+  [j]: (e, a, t) => t.comment(We(e, a), a, e),
+  [Z]: (e, a, t) => t.showScrollingText(ta(e, a), a, e)
 }, ce = (e) => ra[e], sa = (e) => ((a, t) => ({
   code: a.code,
   paramIndex: t,
@@ -518,7 +518,7 @@ const Da = (e) => typeof e.value == "string", ct = (e) => ({
 }, ja = (e, a, t, r) => {
   if (e.code === C || e.code === S || e.code === D) return;
   const s = ce(e.code);
-  return s ? s(t, a, r) : e.code === E ? Ra(e) : e.code === q || e.code === J || e.code === U ? _a(e) : e.code !== Q ? e : void 0;
+  return s ? s(t, a, r) : e.code === E ? Ra(e) : e.code === q || e.code === J || e.code === U ? _a(e) : e.code !== W ? e : void 0;
 }, Ra = (e) => ({
   code: E,
   indent: e.indent,
@@ -625,10 +625,10 @@ export {
   Oa as c,
   Ka as d,
   Ma as e,
-  Wa as f,
-  Za as g,
-  Xa as h,
-  Qa as i,
+  Za as f,
+  Qa as g,
+  Ya as h,
+  Wa as i,
   et as j,
   Je as k,
   Oe as l,
@@ -637,7 +637,7 @@ export {
   rt as o,
   Ue as p,
   ca as q,
-  Ya as r,
+  Xa as r,
   oa as s,
   ia as t,
   st as u,
