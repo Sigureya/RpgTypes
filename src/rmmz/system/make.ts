@@ -21,12 +21,74 @@ import {
   makeTermsCommandArray,
   makeParamNamesArray,
   makeTermsMessages,
+  convertTermsMessageMZtoMV,
+  makeTermsBasicFromArray,
+  makeTermsCommandFromArray,
+  makeParamNamesFromArray,
 } from "./core";
 import type { EditorSettings, TestBattler } from "./gameEdit";
 import { makeEditorSetting } from "./gameEdit";
 import type { Data_System } from "./system";
 import type { Data_SystemMV } from "./systemMV";
 import type { SystemDataFragments } from "./systemSegments";
+
+export const makeSystemDataMVFromMZ = (
+  data: Data_System = makeSystemData({}),
+): Data_SystemMV => {
+  return {
+    versionId: data.versionId,
+    menuCommands: data.menuCommands,
+    locale: data.locale,
+    startMapId: data.startMapId,
+    startX: data.startX,
+    startY: data.startY,
+    partyMembers: data.partyMembers,
+    magicSkills: data.magicSkills,
+    title1Name: data.title1Name,
+    title2Name: data.title2Name,
+    gameTitle: data.gameTitle,
+    currencyUnit: data.currencyUnit,
+    windowTone: data.windowTone,
+    battleback1Name: data.battleback1Name,
+    battleback2Name: data.battleback2Name,
+    testTroopId: data.testTroopId,
+    testBattlers: data.testBattlers,
+    attackMotions: data.attackMotions,
+    battlerHue: data.battlerHue,
+    battlerName: data.battlerName,
+    airship: data.airship,
+    boat: data.boat,
+    ship: data.ship,
+    defeatMe: data.defeatMe,
+    gameoverMe: data.gameoverMe,
+    optDisplayTp: data.optDisplayTp,
+    optDrawTitle: data.optDrawTitle,
+    optExtraExp: data.optExtraExp,
+    optFloorDeath: data.optFloorDeath,
+    optSideView: data.optSideView,
+    optFollowers: data.optFollowers,
+    optSlipDeath: data.optSlipDeath,
+    optTransparent: data.optTransparent,
+    skillTypes: data.skillTypes,
+    weaponTypes: data.weaponTypes,
+    armorTypes: data.armorTypes,
+    elements: data.elements,
+    equipTypes: data.equipTypes,
+    switches: data.switches,
+    variables: data.variables,
+    titleBgm: data.titleBgm,
+    battleBgm: data.battleBgm,
+    victoryMe: data.victoryMe,
+    editMapId: data.editMapId,
+    sounds: data.sounds,
+    terms: {
+      basic: data.terms.basic,
+      commands: data.terms.commands,
+      params: data.terms.params,
+      messages: convertTermsMessageMZtoMV(data.terms.messages),
+    },
+  };
+};
 
 export const makeSystemDataFromMV = (data: Data_SystemMV): Data_System => {
   return makeSystemData({
@@ -74,11 +136,20 @@ export const makeSystemDataFromMV = (data: Data_SystemMV): Data_System => {
       switches: data.switches,
       variables: data.variables,
     },
-    texts: { currencyUnit: data.currencyUnit, gameTitle: data.gameTitle },
+    texts: {
+      currencyUnit: data.currencyUnit,
+      gameTitle: data.gameTitle,
+    },
     editorTemporary: {
       editMapId: data.editMapId,
       battlerName: data.battlerName,
       battlerHue: data.battlerHue,
+    },
+    terms: {
+      basic: makeTermsBasicFromArray(data.terms.basic),
+      commands: makeTermsCommandFromArray(data.terms.commands),
+      params: makeParamNamesFromArray(data.terms.params),
+      messages: data.terms.messages,
     },
   });
 };
