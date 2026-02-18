@@ -32,7 +32,7 @@ import type { Data_System } from "./system";
 import type { Data_SystemMV } from "./systemMV";
 import type { SystemDataFragments } from "./systemSegments";
 
-export const makeSystemDataMVFromMZ = (
+export const makeSystemDataMV = (
   data: Data_System = makeSystemData({}),
 ): Data_SystemMV => {
   return {
