@@ -3,6 +3,7 @@ import { describe, expect, test, vi } from "vitest";
 import type { MemberFunctions } from "@RpgTypes/libs";
 import type { EventCommand } from "@RpgTypes/rmmz/eventCommand";
 import {
+  makeCommandChangeActorImages,
   makeCommandChangeActorName,
   makeCommandChangeActorNickName,
   makeCommandChangeActorProfile,
@@ -10,6 +11,7 @@ import {
   makeCommandChangeEquip,
 } from "@RpgTypes/rmmz/eventCommand";
 import {
+  CHANGE_ACTOR_IMAGES,
   CHANGE_CLASS,
   CHANGE_EQUIP,
   CHANGE_NAME,
@@ -20,14 +22,14 @@ import type {
   Rmmz_Actor,
   Rmmz_Actors,
   Rmmz_Battler,
+  Rmmz_PlayerCharactor,
 } from "@RpgTypes/rmmzRuntime";
 import type { FakeMap } from "./fakes/types";
 import { Game_Interpreter } from "./rmmz_objects";
 
 type FakeActors = Pick<Rmmz_Actors, "actor">;
-
 type FakeActor = Pick<Rmmz_Actor, (typeof KEYS)[number]>;
-
+type FakePlayer = Pick<Rmmz_PlayerCharactor, "refresh">;
 const KEYS = [
   "changeEquipById",
   "changeClass",
@@ -41,6 +43,10 @@ const KEYS = [
 
 const createFakeMap = (): FakeMap => ({
   mapId: () => 653,
+});
+
+const createFakePlayer = (): FakePlayer => ({
+  refresh: () => {},
 });
 
 const createMockedActor = (): MockedObject<FakeActor> => ({
@@ -60,6 +66,7 @@ const stubGlobal = (actors: MockedObject<FakeActors>) => {
   vi.stubGlobal("$gameActors", actors);
   vi.stubGlobal("$gameMap", createFakeMap());
   vi.stubGlobal("$dataClasses", mockDataClasses);
+  vi.stubGlobal("$gamePlayer", createFakePlayer());
 };
 
 interface MethodCalls {
@@ -212,6 +219,30 @@ const testCases: TestCase[] = [
     calls: {
       actorId: 6,
       actor: [{ fn: "changeEquipById", args: [2, 10] }],
+    },
+  },
+  {
+    name: "change actor images",
+    commandLiteral: {
+      code: CHANGE_ACTOR_IMAGES,
+      indent: 0,
+      parameters: [7, "Character", 1, "Face", 2, "Battler"],
+    },
+    command: makeCommandChangeActorImages({
+      actorId: 7,
+      characterName: "Character",
+      characterIndex: 1,
+      faceName: "Face",
+      faceIndex: 2,
+      battlerName: "Battler",
+    }),
+    calls: {
+      actorId: 7,
+      actor: [
+        { fn: "setCharacterImage", args: ["Character", 1] },
+        { fn: "setFaceImage", args: ["Face", 2] },
+        { fn: "setBattlerImage", args: ["Battler"] },
+      ],
     },
   },
 ];
