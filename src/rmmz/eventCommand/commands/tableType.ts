@@ -57,8 +57,7 @@ import type {
   Command_ChangeWeapons,
 } from "./item/change";
 import type { Command_SelectItem } from "./item/select/types";
-import type { Command_ChangeParallax } from "./map/parallax/types";
-import type { Command_ScrollMap } from "./map/scroll/types";
+import type { Command_ChangeParallax, Command_ScrollMap } from "./map";
 import type { Command_EraseEvent } from "./mapEvent/eraseEvent/types";
 import type { Command_GetLocationInfo } from "./mapEvent/getLocationInfo/types";
 import type { Command_SetEventLocation } from "./mapEvent/setLocation/types";

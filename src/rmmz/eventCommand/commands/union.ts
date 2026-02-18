@@ -1,10 +1,13 @@
-import type { Command_ChangeSkill, Command_NameInputProcessing } from "./actor";
-import type { Command_ChangeClaass } from "./actor/changeClass/types";
-import type { Command_ChangeExp } from "./actor/changeExp/types";
-import type { Command_ChangeActorImages } from "./actor/changeImages/types";
-import type { Command_ChangeActorLevel } from "./actor/changeLevel/types";
-import type { Command_ChangeParam } from "./actor/changeParam/types";
-import type { Command_ChangeActorState } from "./actor/changeState/types";
+import type {
+  Command_ChangeActorImages,
+  Command_ChangeActorLevel,
+  Command_ChangeActorState,
+  Command_ChangeClaass,
+  Command_ChangeExp,
+  Command_ChangeParam,
+  Command_ChangeSkill,
+  Command_NameInputProcessing,
+} from "./actor";
 import type {
   Command_ChangeActorName,
   Command_ChangeActorNickName,
@@ -71,9 +74,11 @@ import type {
   Command_ChangeWeapons,
 } from "./item/change";
 import type { Command_SelectItem } from "./item/select/types";
-import type { Command_ChangeParallax } from "./map";
-import type { Command_ChangeMapNameDisplay } from "./map/changeMapNameDisplay/types";
-import type { Command_ScrollMap } from "./map/scroll/types";
+import type {
+  Command_ChangeMapNameDisplay,
+  Command_ChangeParallax,
+  Command_ScrollMap,
+} from "./map";
 import type { Command_EraseEvent } from "./mapEvent/eraseEvent/types";
 import type { Command_GetLocationInfo } from "./mapEvent/getLocationInfo/types";
 import type { Command_SetEventLocation } from "./mapEvent/setLocation/types";
