@@ -1,11 +1,11 @@
-import type { Terms_Messages } from "./types";
+import type { Terms_Messages, Terms_MessagesMV } from "./types";
 
 const validate = (msg: unknown, fallback: string): string => {
   return typeof msg === "string" ? msg : fallback;
 };
 
 export const makeTermsMessages = (
-  msg: Partial<Terms_Messages>
+  msg: Partial<Terms_Messages>,
 ): Terms_Messages => {
   return {
     actionFailure: validate(msg.actionFailure, "Action failed."),
@@ -63,3 +63,59 @@ export const makeTermsMessages = (
     victory: validate(msg.victory, "Victory!"),
   };
 };
+
+export const convertTermsMessageMZtoMV = (
+  message: Terms_Messages,
+): Terms_MessagesMV => ({
+  actionFailure: message.actionFailure,
+  actorDamage: message.actorDamage,
+  actorRecovery: message.actorRecovery,
+  actorGain: message.actorGain,
+  actorLoss: message.actorLoss,
+  actorDrain: message.actorDrain,
+  actorNoDamage: message.actorNoDamage,
+  actorNoHit: message.actorNoHit,
+  alwaysDash: message.alwaysDash,
+  bgmVolume: message.bgmVolume,
+  bgsVolume: message.bgsVolume,
+  commandRemember: message.commandRemember,
+  criticalToActor: message.criticalToActor,
+  criticalToEnemy: message.criticalToEnemy,
+  counterAttack: message.counterAttack,
+  debuffAdd: message.debuffAdd,
+  defeat: message.defeat,
+  enemyDamage: message.enemyDamage,
+  enemyDrain: message.enemyDrain,
+  enemyGain: message.enemyGain,
+  enemyLoss: message.enemyLoss,
+  enemyNoDamage: message.enemyNoDamage,
+  enemyNoHit: message.enemyNoHit,
+  enemyRecovery: message.enemyRecovery,
+  evasion: message.evasion,
+  escapeFailure: message.escapeFailure,
+  escapeStart: message.escapeStart,
+  emerge: message.emerge,
+  expNext: message.expNext,
+  expTotal: message.expTotal,
+  file: message.file,
+  buffAdd: message.buffAdd,
+  buffRemove: message.buffRemove,
+  obtainExp: message.obtainExp,
+  obtainGold: message.obtainGold,
+  obtainItem: message.obtainItem,
+  obtainSkill: message.obtainSkill,
+  levelUp: message.levelUp,
+  partyName: message.partyName,
+  loadMessage: message.loadMessage,
+  meVolume: message.meVolume,
+  possession: message.possession,
+  magicEvasion: message.magicEvasion,
+  magicReflection: message.magicReflection,
+  substitute: message.substitute,
+  surprise: message.surprise,
+  useItem: message.useItem,
+  victory: message.victory,
+  preemptive: message.preemptive,
+  saveMessage: message.saveMessage,
+  seVolume: message.seVolume,
+});

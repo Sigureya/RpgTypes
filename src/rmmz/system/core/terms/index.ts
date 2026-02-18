@@ -15,6 +15,10 @@ export type {
 } from "./core/types";
 export type { Terms_Basic, Terms_BasicArray } from "./core/basic/types";
 export type { Terms_Messages, Terms_MessagesMV } from "./core/messages/types";
+export {
+  convertTermsMessageMZtoMV,
+  makeTermsMessages,
+} from "./core/messages/make";
 export { getParamNames } from "./terms";
 export {
   makeParamNamesArray,
@@ -26,4 +30,3 @@ export {
   makeTermsCommandArrayWithNulls,
   makeTermsCommandFromArray,
 } from "./core/commands/commands";
-export { makeTermsMessages } from "./core/messages/make";
