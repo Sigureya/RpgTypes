@@ -6,5 +6,10 @@ export interface Command_ChangeBattleBackground extends EventCommandLike<283> {
 
 export type ParamArray_ChangeBattleBackground = [
   background1: string,
-  background2: string
+  background2: string,
 ];
+
+export interface ParamObject_ChangeBattleBackground {
+  background1: string;
+  background2: string;
+}
