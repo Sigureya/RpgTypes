@@ -31,7 +31,7 @@ export const makeCommandScrollMap = (
   parameters: [params.direction, params.distance, params.speed, params.waiting],
 });
 
-export const makeCommandShowMapNameDisplay = (
+export const makeCommandShowMapName = (
   indent: number = 0,
 ): Command_ShowMapNameDisplay => ({
   code: 281,
@@ -39,7 +39,7 @@ export const makeCommandShowMapNameDisplay = (
   parameters: [0],
 });
 
-export const makeCommandHideMapNameDisplay = (
+export const makeCommandHideMapName = (
   indent: number = 0,
 ): Command_HideMapNameDisplay => ({
   code: 281,
