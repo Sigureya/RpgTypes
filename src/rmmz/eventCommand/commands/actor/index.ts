@@ -1,4 +1,5 @@
 export * from "./recoverAll/index";
+export * from "./types";
 export type {
   CommandUnion_ChangeActorText,
   Command_ChangeActorName,
@@ -25,17 +26,9 @@ export type {
   ParamObject_ChangeActorImages,
 } from "./changeImages/types";
 export type {
-  Command_ChangeActorLevel,
-  ParamArray_ChangeActorLevel,
-} from "./changeLevel/types";
-export type {
   Command_ChangeActorState,
   ParamArray_ChangeActorState,
 } from "./changeState/types";
-export type {
-  Command_ChangeClaass,
-  ParamArray_ChangeClass,
-} from "./changeClass/types";
 export type {
   Command_ChangeExp,
   ParamArray_ChangeExp,
