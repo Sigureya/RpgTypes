@@ -5,7 +5,7 @@ import {
 } from "@RpgTypes/rmmz/rpg";
 import type {
   ParamObject_ChangeActorName,
-  Command_ChangeActorName as Command_ChangeActorName,
+  Command_ChangeActorName,
   Command_ChangeActorNickName,
   Command_ChangeActorProfile,
   ParamObject_ChangeActorNickName,
@@ -14,7 +14,7 @@ import type {
 
 export const makeCommandChangeActorName = (
   param: ParamObject_ChangeActorName,
-  indent: number = 0
+  indent: number = 0,
 ): Command_ChangeActorName => ({
   code: CHANGE_NAME,
   parameters: [param.actorId, param.name],
@@ -23,7 +23,7 @@ export const makeCommandChangeActorName = (
 
 export const makeCommandChangeActorNickName = (
   param: ParamObject_ChangeActorNickName,
-  indent: number = 0
+  indent: number = 0,
 ): Command_ChangeActorNickName => ({
   code: CHANGE_NICKNAME,
   parameters: [param.actorId, param.nickname],
@@ -32,7 +32,7 @@ export const makeCommandChangeActorNickName = (
 
 export const makeCommandChangeActorProfile = (
   param: ParamObject_ChangeActorProfile,
-  indent: number = 0
+  indent: number = 0,
 ): Command_ChangeActorProfile => ({
   code: CHANGE_PROFILE,
   parameters: [param.actorId, param.profile],
