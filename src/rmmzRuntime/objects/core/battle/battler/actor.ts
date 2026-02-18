@@ -8,6 +8,6 @@ export interface Rmmz_Actor extends Rmmz_Battler {
   setFaceImage(faceName: string, faceIndex: number): void;
   setBattlerImage(battlerName: string): void;
   changeClass(classId: number, keepExp: boolean): void;
-  chnageNickname(nickname: string): void;
-  changeProfile(profile: string): void;
+  setNickname(nickname: string): void;
+  setProfile(profile: string): void;
 }
