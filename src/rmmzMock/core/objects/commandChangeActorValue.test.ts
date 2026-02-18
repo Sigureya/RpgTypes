@@ -201,6 +201,9 @@ const runTestCase = (testCase: TestCase) => {
       expect(mock.mockVariables.value).toHaveBeenCalledTimes(
         testCase.calls.variable.length,
       );
+      if (testCase.calls.variable.length === 0) {
+        expect(mock.mockVariables.value).not.toHaveBeenCalled();
+      }
       testCase.calls.variable.forEach((call) => {
         expect(mock.mockVariables.value).toHaveBeenCalledWith(call.args[0]);
       });
