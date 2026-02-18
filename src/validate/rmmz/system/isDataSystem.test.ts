@@ -1,12 +1,13 @@
 import { describe, test, expect } from "vitest";
-import type { Data_System, Terms_Messages } from "@RpgTypes/rmmz";
+import type {
+  Data_System,
+  Data_SystemMV,
+  Terms_Messages,
+} from "@RpgTypes/rmmz";
 import { makeSystemData } from "@RpgTypes/rmmz";
+import { makeSystemDataMV } from "@RpgTypes/rmmz/system/make";
 import { SCHEMA_DATA_SYSTEM } from "./schema";
 const validate = require("./systemValidate.cjs");
-
-const isDataSystem = (data: unknown): data is Data_System => {
-  return validate(data);
-};
 
 const mockSystem: Data_System = {
   optAutosave: true,
@@ -245,6 +246,13 @@ const mockSystem: Data_System = {
     messageWidth2: 816,
   },
 };
+describe("isDataSystem", () => {
+  test("should invalidate an incorrect Data_System object with missing required properties", () => {
+    const result = validate(mockSystem);
+    expect(validate.errors).toBeNull();
+    expect(result).toBe(true);
+  });
+});
 
 describe("makeSystemData", () => {
   test("should create a Data_System object with default values", () => {
@@ -253,14 +261,17 @@ describe("makeSystemData", () => {
     const keys2 = new Set(Object.keys(mockSystem));
     expect(keys1).toEqual(keys2);
   });
-  test("should invalidate an incorrect Data_System object", () => {
-    const data = makeSystemData({});
-    expect(data).toSatisfy(isDataSystem);
+  test("should create a Data_System object with provided values and default values for missing properties", () => {
+    const data: Data_System = makeSystemData({});
+    const result = validate(data);
+    expect(validate.errors).toBeNull();
+    expect(result).toBe(true);
   });
-});
-describe("isDataSystem", () => {
-  test("should validate a correct Data_System object", () => {
-    expect(mockSystem).toSatisfy(isDataSystem);
+  test("should invalidate a Data_System object created from MV data that has properties not matching the MZ schema", () => {
+    const data: Data_SystemMV = makeSystemDataMV();
+    const result = validate(data);
+    expect(validate.errors).not.toBeNull();
+    expect(result).toBe(false);
   });
 });
 

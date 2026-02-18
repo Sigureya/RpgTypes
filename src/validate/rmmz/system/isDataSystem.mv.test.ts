@@ -1,5 +1,6 @@
 import { describe, test, expect } from "vitest";
-import type { Data_SystemMV } from "@RpgTypes/rmmz";
+import type { Data_System, Data_SystemMV } from "@RpgTypes/rmmz";
+import { makeSystemData, makeSystemDataMV } from "@RpgTypes/rmmz/system";
 const validate = require("./systemMVValidate.cjs");
 
 const mockDataSystem: Data_SystemMV = {
@@ -246,10 +247,23 @@ const mockDataSystem: Data_SystemMV = {
 
 describe("isDataSystemMV", () => {
   test("should validate a correct Data_SystemMV object", () => {
-    validate(mockDataSystem);
+    const result = validate(mockDataSystem);
     expect(validate.errors).toBeNull();
+    expect(result).toBe(true);
   });
-  test("should return true for a valid Data_SystemMV object", () => {
-    expect(validate(mockDataSystem)).toBe(true);
+  test("should invalidate a Data_SystemMV object created from MZ data that has properties not matching the MV schema", () => {
+    const data: Data_System = makeSystemData({});
+    const result = validate(data);
+    expect(validate.errors).not.toBeNull();
+    expect(result).toBe(false);
+  });
+});
+
+describe("makeSystemDataMV", () => {
+  test("should create a Data_SystemMV object with default values and validate it successfully", () => {
+    const data: Data_SystemMV = makeSystemDataMV();
+    const result = validate(data);
+    expect(validate.errors).toBeNull();
+    expect(result).toBe(true);
   });
 });
