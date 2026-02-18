@@ -40,13 +40,13 @@ describe("extractScrollTextGroup - Validation Tests", () => {
     expect(extractScrollTextGroup(mockCommands, 0)).toEqual(expected);
   });
 
-  const result = extractScrollTextGroup(mockCommands, 0);
-
   test("should extract the correct header", () => {
+    const result = extractScrollTextGroup(mockCommands, 0);
     expect(result.header).toEqual(expected.header);
   });
 
   test("should extract the correct bodies", () => {
+    const result = extractScrollTextGroup(mockCommands, 0);
     expect(result.bodies).toEqual(expected.bodies);
   });
 });
@@ -66,11 +66,12 @@ describe("createScrollTextGroup - SimpleEventCommandGroup Creation", () => {
 
     test("should return correct merged body", () => {
       const mergedBody: Command_ScrollTextBody = result.mergedBody();
-      expect(mergedBody).toEqual({
+      const expected: Command_ScrollTextBody = {
         code: SHOW_SCROLLING_TEXT_BODY,
         indent: 0,
         parameters: [expectedBodyText],
-      } satisfies Command_ScrollTextBody);
+      };
+      expect(mergedBody).toEqual(expected);
     });
 
     test("should return normalized commands", () => {
