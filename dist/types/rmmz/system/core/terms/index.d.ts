@@ -3,8 +3,8 @@ export type { SystemLabels_TermsParamNames, Terms_ParamNamesArray, } from './cor
 export type { System_Terms, System_TermsPartial, System_Terms_Params, System_TextBundle, } from './core/types';
 export type { Terms_Basic, Terms_BasicArray } from './core/basic/types';
 export type { Terms_Messages, Terms_MessagesMV } from './core/messages/types';
+export { convertTermsMessageMZtoMV, makeTermsMessages, } from './core/messages/make';
 export { getParamNames } from './terms';
 export { makeParamNamesArray, makeParamNamesFromArray, } from './core/paramArray/paramArray';
 export { makeTermsBasic, makeTermsBasicFromArray } from './core/basic/make';
 export { makeTermsCommandArray, makeTermsCommandArrayWithNulls, makeTermsCommandFromArray, } from './core/commands/commands';
-export { makeTermsMessages } from './core/messages/make';
