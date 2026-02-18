@@ -28,13 +28,13 @@ type FakeActor = Pick<Rmmz_Actor, (typeof KEYS)[number]>;
 
 const KEYS = [
   "changeEquipById",
+  "changeClass",
+  "setName",
+  "setNickname",
+  "setProfile",
   "setBattlerImage",
   "setCharacterImage",
   "setFaceImage",
-  "setName",
-  "changeClass",
-  "setNickname",
-  "setProfile",
 ] as const satisfies Exclude<keyof Rmmz_Actor, keyof Rmmz_Battler>[];
 
 const createFakeMap = (): FakeMap => ({
