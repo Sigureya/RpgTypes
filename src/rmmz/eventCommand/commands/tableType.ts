@@ -1,6 +1,5 @@
-import type { Command_ChangeClaass } from "./actor";
+import type { Command_ChangeActorImages, Command_ChangeClaass } from "./actor";
 import type { Command_ChangeExp } from "./actor/changeExp/types";
-import type { Command_ChangeActorImages } from "./actor/changeImages/types";
 import type {
   Command_ChangeActorName,
   Command_ChangeActorNickName,
