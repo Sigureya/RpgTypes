@@ -1,5 +1,6 @@
 import type { MockedObject } from "vitest";
 import { describe, expect, test, vi } from "vitest";
+import type { MemberFunctions } from "@RpgTypes/libs";
 import type {
   Command_ChangeActorHP,
   Command_ChangeActorMP,
@@ -155,6 +156,10 @@ const setupGlobal = (mocks: MakeMocksResult) => {
   vi.stubGlobal("$gameVariables", mocks.mockVariables);
 };
 
+interface MethodCalls {
+  variable: MemberFunctions<Rmmz_Variables>[];
+}
+
 interface TestCaseTemplate<Command> {
   caseName: string;
   command: Command;
@@ -163,7 +168,7 @@ interface TestCaseTemplate<Command> {
   members: (party: Game_Party) => void;
   actors: ActorsCalledWith;
   changeValue: (battlers: MockedObject<FakeActor>[]) => void;
-  usingVariables: (v: MockedObject<Rmmz_Variables>) => void;
+  calls: MethodCalls;
 }
 
 type TestCase =
@@ -185,8 +190,23 @@ const runTestCase = (testCase: TestCase) => {
       testCase.members(mock.mockParty);
       paramCalledWith(testCase.command, interpreter);
       actorsCalled(mock.mockActors, testCase.actors);
-      testCase.usingVariables(mock.mockVariables);
       testCase.changeValue([mock.mockBattler1, mock.mockBattler2]);
+    });
+    test("using variables", () => {
+      const mock = makeMocks({ variables: testCase.variableLiteral });
+      setupGlobal(mock);
+      const interpreter = makeInterpreter(testCase.command);
+      const result: boolean = interpreter.executeCommand();
+      expect(result).toBe(true);
+      expect(mock.mockVariables.value).toHaveBeenCalledTimes(
+        testCase.calls.variable.length,
+      );
+      if (testCase.calls.variable.length === 0) {
+        expect(mock.mockVariables.value).not.toHaveBeenCalled();
+      }
+      testCase.calls.variable.forEach((call) => {
+        expect(mock.mockVariables.value).toHaveBeenCalledWith(call.args[0]);
+      });
     });
   });
 };
@@ -210,8 +230,8 @@ const testCasesTP: TestCaseTemplate<Command_ChangeActorTP>[] = [
       expect(a1.gainTp).toHaveBeenCalledWith(123);
       expect(a2.gainTp).not.toHaveBeenCalled();
     },
-    usingVariables: (v) => {
-      expect(v.value).not.toHaveBeenCalled();
+    calls: {
+      variable: [],
     },
   },
   {
@@ -233,10 +253,8 @@ const testCasesTP: TestCaseTemplate<Command_ChangeActorTP>[] = [
       expect(a2.gainTp).toHaveBeenCalledWith(123);
       expect(a1.gainTp).not.toHaveBeenCalled();
     },
-    usingVariables: (v) => {
-      expect(v.value).toBeCalledTimes(1);
-      expect(v.value).toBeCalledWith(88);
-      expect(v.value).toReturnWith(2);
+    calls: {
+      variable: [{ fn: "value", args: [88] }],
     },
   },
   {
@@ -258,9 +276,8 @@ const testCasesTP: TestCaseTemplate<Command_ChangeActorTP>[] = [
       expect(a2.gainTp).not.toHaveBeenCalled();
     },
     variableLiteral: { 64: 231 },
-    usingVariables: (v) => {
-      expect(v.value).toHaveBeenCalledWith(64);
-      expect(v.value).toReturnWith(231);
+    calls: {
+      variable: [{ fn: "value", args: [64] }],
     },
   },
   {
@@ -280,8 +297,8 @@ const testCasesTP: TestCaseTemplate<Command_ChangeActorTP>[] = [
       expect(a1.gainTp).toHaveBeenCalledWith(123);
       expect(a2.gainTp).toHaveBeenCalledWith(123);
     },
-    usingVariables: (v) => {
-      expect(v.value).not.toHaveBeenCalled();
+    calls: {
+      variable: [],
     },
   },
   {
@@ -302,10 +319,8 @@ const testCasesTP: TestCaseTemplate<Command_ChangeActorTP>[] = [
       expect(a2.gainTp).toHaveBeenCalledWith(231);
     },
     variableLiteral: { 72: 231 },
-    usingVariables: (v) => {
-      expect(v.value).toHaveBeenCalledTimes(1);
-      expect(v.value).toHaveBeenCalledWith(72);
-      expect(v.value).toReturnWith(231);
+    calls: {
+      variable: [{ fn: "value", args: [72] }],
     },
   },
   {
@@ -327,12 +342,11 @@ const testCasesTP: TestCaseTemplate<Command_ChangeActorTP>[] = [
       expect(a1.gainTp).not.toHaveBeenCalled();
       expect(a2.gainTp).toHaveBeenCalledWith(88);
     },
-    usingVariables: (v) => {
-      expect(v.value).toHaveBeenCalledTimes(2);
-      expect(v.value).toHaveBeenCalledWith(99);
-      expect(v.value).toHaveBeenCalledWith(100);
-      expect(v.value).toHaveReturnedWith(2);
-      expect(v.value).toHaveReturnedWith(88);
+    calls: {
+      variable: [
+        { fn: "value", args: [99] },
+        { fn: "value", args: [100] },
+      ],
     },
   },
   {
@@ -353,8 +367,8 @@ const testCasesTP: TestCaseTemplate<Command_ChangeActorTP>[] = [
       expect(a1.gainTp).toHaveBeenCalledWith(-123);
       expect(a2.gainTp).not.toHaveBeenCalled();
     },
-    usingVariables: (v) => {
-      expect(v.value).not.toHaveBeenCalled();
+    calls: {
+      variable: [],
     },
   },
   {
@@ -376,12 +390,11 @@ const testCasesTP: TestCaseTemplate<Command_ChangeActorTP>[] = [
       expect(a1.gainTp).not.toHaveBeenCalled();
       expect(a2.gainTp).toHaveBeenCalledWith(-88);
     },
-    usingVariables: (v) => {
-      expect(v.value).toHaveBeenCalledTimes(2);
-      expect(v.value).toHaveBeenCalledWith(99);
-      expect(v.value).toHaveBeenCalledWith(100);
-      expect(v.value).toHaveReturnedWith(2);
-      expect(v.value).toHaveReturnedWith(88);
+    calls: {
+      variable: [
+        { fn: "value", args: [99] },
+        { fn: "value", args: [100] },
+      ],
     },
   },
 ];

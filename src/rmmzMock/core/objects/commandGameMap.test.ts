@@ -2,11 +2,12 @@ import type { MockedObject } from "vitest";
 import { describe, expect, test, vi } from "vitest";
 import type { MemberFunctions } from "@RpgTypes/libs";
 import type { EventCommand } from "@RpgTypes/rmmz/eventCommand";
-import { makeCommandChangeBattleBackground } from "@RpgTypes/rmmz/eventCommand/commands/battle/background/make";
+import { makeCommandChangeBattleBackground } from "@RpgTypes/rmmz/eventCommand";
 import { CHANGE_BATTLE_BACKGROUND } from "@RpgTypes/rmmz/rpg";
 import type { Rmmz_Map } from "@RpgTypes/rmmzRuntime";
+import { Game_Interpreter } from "./rmmz_objects";
 
-const KEYS = [
+const MAP_METHOD_NAMES = [
   "isScrolling",
   "startScroll",
   "refreshIfNeeded",
@@ -18,7 +19,7 @@ const KEYS = [
   "disableNameDisplay",
 ] as const satisfies (keyof Rmmz_Map)[];
 
-type FakeMap = Pick<Rmmz_Map, "mapId" | (typeof KEYS)[number]>;
+type FakeMap = Pick<Rmmz_Map, "mapId" | (typeof MAP_METHOD_NAMES)[number]>;
 
 interface MapInitialArgs {
   isScrolling?: boolean;
@@ -59,20 +60,45 @@ const runTestCase = (testCase: TestCase) => {
     test("make", () => {
       expect(testCase.command).toEqual(testCase.commandLiteral);
     });
+    test("execute with relevant map calls", () => {
+      const map = createMockedMap({});
+      vi.stubGlobal("$gameMap", map);
+      const interpreter = new Game_Interpreter();
+      interpreter.setup([testCase.command], 0);
+      interpreter.executeCommand();
+      testCase.calls.map.forEach(({ fn, args }) => {
+        expect(map[fn]).toHaveBeenCalledWith(...args);
+      });
+    });
+    test("execute with irrelevant map calls", () => {
+      const set = new Set(testCase.calls.map.map((c) => c.fn));
+      const keys = MAP_METHOD_NAMES.filter((k) => !set.has(k));
+      const map = createMockedMap({});
+      vi.stubGlobal("$gameMap", map);
+      const interpreter = new Game_Interpreter();
+      interpreter.setup([testCase.command], 0);
+      interpreter.executeCommand();
+      keys.forEach((k) => {
+        expect(map[k]).not.toHaveBeenCalled();
+      });
+    });
   });
 };
 
 const testCases: TestCase[] = [
   {
     name: "Change Battle Background",
-    command: makeCommandChangeBattleBackground({}),
+    command: makeCommandChangeBattleBackground({
+      background1: "bg1",
+      background2: "bg2",
+    }),
     commandLiteral: {
       code: CHANGE_BATTLE_BACKGROUND,
       indent: 0,
-      parameters: ["", ""],
+      parameters: ["bg1", "bg2"],
     },
     calls: {
-      map: [{ fn: "changeBattleback", args: ["", ""] }],
+      map: [{ fn: "changeBattleback", args: ["bg1", "bg2"] }],
     },
   },
 ];
