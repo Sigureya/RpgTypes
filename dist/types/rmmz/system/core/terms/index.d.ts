@@ -2,7 +2,7 @@ export type { SystemLabels_GameCommands, Terms_CommandArray, Terms_GameCommands,
 export type { SystemLabels_TermsParamNames, Terms_ParamNamesArray, } from './core/paramArray/types';
 export type { System_Terms, System_TermsPartial, System_Terms_Params, System_TextBundle, } from './core/types';
 export type { Terms_Basic, Terms_BasicArray } from './core/basic/types';
-export type { Terms_Messages } from './core/messages/types';
+export type { Terms_Messages, Terms_MessagesMV } from './core/messages/types';
 export { getParamNames } from './terms';
 export { makeParamNamesArray, makeParamNamesFromArray, } from './core/paramArray/paramArray';
 export { makeTermsBasic, makeTermsBasicFromArray } from './core/basic/make';

@@ -1,0 +1,1 @@
+"use strict";var o,r={};exports.requireUcs2length=function(){if(o)return r;function n(u){const c=u.length;let e,i=0,t=0;for(;t<c;)i++,e=u.charCodeAt(t++),e>=55296&&e<=56319&&t<c&&(e=u.charCodeAt(t),(64512&e)==56320&&t++);return i}return o=1,Object.defineProperty(r,"__esModule",{value:!0}),r.default=n,n.code='require("ajv/dist/runtime/ucs2length").default',r};
