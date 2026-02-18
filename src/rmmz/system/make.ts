@@ -33,7 +33,7 @@ export const makeSystemDataFromMV = (data: Data_SystemMV): Data_System => {
   return makeSystemData({
     vesionId: data.versionId,
 
-    menuComamnds: createMenuCommandState(data),
+    menuCommands: createMenuCommandState(data),
     locale: data.locale,
     gameInit: {
       startMapId: data.startMapId,
@@ -151,7 +151,7 @@ export const makeSystemData = (
     partyMembers: cloneValueArray(fragments.gameInit?.partyMembers),
     battlerHue: 0,
     menuCommands: makeMenuCommandsEnabled(
-      fragments.menuComamnds,
+      fragments.menuCommands,
     ) satisfies boolean[],
   };
 };

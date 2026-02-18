@@ -40,7 +40,7 @@ export interface SystemDataFragments {
   itemCategories: Partial<ItemCategories>;
   size: Partial<System_ImageSize>;
   terms: System_TermsPartial;
-  menuComamnds: Partial<MenuCommandsEnabled>;
+  menuCommands: Partial<MenuCommandsEnabled>;
   editorTemporary?: Partial<System_EditorTemporary>;
   attackMotion: AttackMotion[];
   battle: Partial<BattleRuleRMMZ>;

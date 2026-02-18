@@ -672,7 +672,7 @@ describe("makeSystemData", () => {
         battlerHue: 0,
         editMapId: 956,
       },
-      menuComamnds: {
+      menuCommands: {
         item: true,
         skill: true,
         equip: true,
