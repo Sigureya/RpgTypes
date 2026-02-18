@@ -14,7 +14,7 @@ export type {
   System_TextBundle,
 } from "./core/types";
 export type { Terms_Basic, Terms_BasicArray } from "./core/basic/types";
-export type { Terms_Messages } from "./core/messages/types";
+export type { Terms_Messages, Terms_MessagesMV } from "./core/messages/types";
 export { getParamNames } from "./terms";
 export {
   makeParamNamesArray,

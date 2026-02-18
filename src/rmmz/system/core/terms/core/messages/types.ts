@@ -1,7 +1,11 @@
-export interface Terms_Messages {
+export interface Terms_Messages extends Terms_MessagesMV {
+  touchUI: string;
+  autosave: string;
+}
+
+export interface Terms_MessagesMV {
   alwaysDash: string;
   commandRemember: string;
-  touchUI: string;
   bgmVolume: string;
   bgsVolume: string;
   meVolume: string;
@@ -12,7 +16,6 @@ export interface Terms_Messages {
   saveMessage: string;
   loadMessage: string;
   file: string;
-  autosave: string;
   partyName: string;
   emerge: string;
   preemptive: string;

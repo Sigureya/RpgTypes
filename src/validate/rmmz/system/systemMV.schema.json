@@ -1,51 +1,5 @@
 {
-  "additionalProperties": false,
   "$defs": {
-    "Advanced": {
-      "additionalProperties": false,
-      "type": "object",
-      "properties": {
-        "gameId": { "type": "integer" },
-        "screenWidth": { "type": "integer" },
-        "screenHeight": { "type": "integer" },
-        "uiAreaWidth": { "type": "integer" },
-        "uiAreaHeight": { "type": "integer" },
-        "windowOpacity": { "type": "integer" },
-        "screenScale": { "type": "number" },
-
-        "numberFontFilename": { "type": "string" },
-        "mainFontFilename": { "type": "string" },
-        "fallbackFonts": { "type": "string" },
-        "fontSize": { "type": "integer" },
-        "picturesUpperLimit": {
-          "nullable": true,
-          "type": "integer"
-        }
-      },
-      "required": [
-        "gameId",
-        "screenWidth",
-        "screenHeight",
-        "uiAreaWidth",
-        "uiAreaHeight",
-        "windowOpacity",
-        "screenScale",
-        "numberFontFilename",
-        "mainFontFilename",
-        "fallbackFonts",
-        "fontSize"
-      ]
-    },
-    "Editor": {
-      "additionalProperties": false,
-      "type": "object",
-      "required": ["messageWidth1", "messageWidth2", "jsonFormatLevel"],
-      "properties": {
-        "messageWidth1": { "type": "integer", "minimum": 0, "maximum": 1000 },
-        "messageWidth2": { "type": "integer", "minimum": 0, "maximum": 1000 },
-        "jsonFormatLevel": { "type": "integer", "minimum": 0, "maximum": 4 }
-      }
-    },
     "Audio": {
       "type": "object",
       "required": ["name", "volume", "pitch", "pan"],
@@ -95,12 +49,6 @@
       },
       "required": ["type", "weaponImageId"],
       "type": "object"
-    },
-    "ItemCategories": {
-      "type": "array",
-      "maxItems": 4,
-      "minItems": 4,
-      "items": { "type": "boolean" }
     },
     "TestBattler": {
       "additionalProperties": false,
@@ -192,7 +140,6 @@
         "actorNoHit",
         "actorRecovery",
         "alwaysDash",
-        "autosave",
         "bgmVolume",
         "bgsVolume",
         "buffAdd",
@@ -233,7 +180,6 @@
         "seVolume",
         "substitute",
         "surprise",
-        "touchUI",
         "useItem",
         "victory"
       ],
@@ -247,7 +193,6 @@
         "actorNoHit": { "type": "string" },
         "actorRecovery": { "type": "string" },
         "alwaysDash": { "type": "string" },
-        "autosave": { "type": "string" },
         "bgmVolume": { "type": "string" },
         "bgsVolume": { "type": "string" },
         "buffAdd": { "type": "string" },
@@ -288,24 +233,204 @@
         "seVolume": { "type": "string" },
         "substitute": { "type": "string" },
         "surprise": { "type": "string" },
-        "touchUI": { "type": "string" },
         "useItem": { "type": "string" },
         "victory": { "type": "string" }
       }
-    },
-    "TitleCommandWindow": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": ["background", "offsetX", "offsetY"],
-      "properties": {
-        "background": { "type": "integer" },
-        "offsetX": { "type": "integer" },
-        "offsetY": { "type": "integer" }
-      }
     }
   },
-
-  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "airship": {
+      "$ref": "#/$defs/Vehicle"
+    },
+    "armorTypes": {
+      "items": { "type": "string" },
+      "type": "array"
+    },
+    "attackMotions": {
+      "items": {
+        "$ref": "#/$defs/AttackMotion"
+      },
+      "type": "array"
+    },
+    "battleBgm": {
+      "$ref": "#/$defs/Audio"
+    },
+    "battleback1Name": { "type": "string" },
+    "battleback2Name": { "type": "string" },
+    "battlerHue": { "type": "integer" },
+    "battlerName": { "type": "string" },
+    "boat": { "$ref": "#/$defs/Vehicle" },
+    "currencyUnit": {
+      "type": "string"
+    },
+    "defeatMe": {
+      "$ref": "#/$defs/Audio"
+    },
+    "editMapId": {
+      "minimum": 0,
+      "type": "integer"
+    },
+    "elements": {
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "equipTypes": {
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "gameTitle": {
+      "type": "string"
+    },
+    "gameoverMe": {
+      "$ref": "#/$defs/Audio"
+    },
+    "locale": {
+      "type": "string"
+    },
+    "magicSkills": {
+      "items": {
+        "type": "integer"
+      },
+      "type": "array"
+    },
+    "menuCommands": {
+      "$ref": "#/$defs/MenuCommands"
+    },
+    "optDisplayTp": {
+      "type": "boolean"
+    },
+    "optDrawTitle": {
+      "type": "boolean"
+    },
+    "optExtraExp": {
+      "type": "boolean"
+    },
+    "optFloorDeath": {
+      "type": "boolean"
+    },
+    "optFollowers": {
+      "type": "boolean"
+    },
+    "optSideView": {
+      "type": "boolean"
+    },
+    "optSlipDeath": {
+      "type": "boolean"
+    },
+    "optTransparent": {
+      "type": "boolean"
+    },
+    "partyMembers": {
+      "items": {
+        "type": "integer"
+      },
+      "type": "array"
+    },
+    "ship": {
+      "$ref": "#/$defs/Vehicle"
+    },
+    "skillTypes": {
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "sounds": {
+      "items": {
+        "$ref": "#/$defs/Audio"
+      },
+      "maxItems": 24,
+      "minItems": 24,
+      "type": "array"
+    },
+    "startMapId": {
+      "minimum": 0,
+      "type": "integer"
+    },
+    "startX": {
+      "minimum": 0,
+      "type": "integer"
+    },
+    "startY": {
+      "minimum": 0,
+      "type": "integer"
+    },
+    "switches": {
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "terms": {
+      "additionalProperties": false,
+      "properties": {
+        "basic": {
+          "$ref": "#/$defs/TermsBasic"
+        },
+        "commands": {
+          "$ref": "#/$defs/TermsCommands"
+        },
+        "messages": {
+          "$ref": "#/$defs/TermsMessages"
+        },
+        "params": {
+          "$ref": "#/$defs/TermsParams"
+        }
+      },
+      "required": ["messages", "commands", "basic", "params"],
+      "type": "object"
+    },
+    "testBattlers": {
+      "items": {
+        "$ref": "#/$defs/TestBattler"
+      },
+      "type": "array"
+    },
+    "testTroopId": {
+      "minimum": 0,
+      "type": "integer"
+    },
+    "title1Name": {
+      "type": "string"
+    },
+    "title2Name": {
+      "type": "string"
+    },
+    "titleBgm": {
+      "$ref": "#/$defs/Audio"
+    },
+    "variables": {
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "versionId": {
+      "type": "integer"
+    },
+    "victoryMe": {
+      "$ref": "#/$defs/Audio"
+    },
+    "weaponTypes": {
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "windowTone": {
+      "items": {
+        "maximum": 255,
+        "minimum": 0,
+        "type": "integer"
+      },
+      "type": "array"
+    }
+  },
   "required": [
     "gameTitle",
     "currencyUnit",
@@ -313,32 +438,23 @@
     "ship",
     "boat",
     "airship",
-    "advanced",
     "titleBgm",
     "battleBgm",
     "gameoverMe",
     "victoryMe",
     "defeatMe",
     "attackMotions",
-    "optAutosave",
     "optDisplayTp",
     "optFloorDeath",
     "optFollowers",
-    "optKeyItemsNumber",
     "optSideView",
     "optSlipDeath",
     "optTransparent",
-    "optSplashScreen",
     "optDrawTitle",
     "optExtraExp",
-    "optMessageSkip",
     "startMapId",
     "startX",
     "startY",
-    "faceSize",
-    "tileSize",
-    "iconSize",
-    "battleSystem",
     "elements",
     "weaponTypes",
     "armorTypes",
@@ -351,7 +467,6 @@
     "battleback2Name",
     "testTroopId",
     "partyMembers",
-    "editor",
     "testBattlers",
     "editMapId",
     "battlerHue",
@@ -362,100 +477,7 @@
     "versionId",
     "locale",
     "windowTone",
-    "itemCategories",
-    "menuCommands",
-    "titleCommandWindow"
+    "menuCommands"
   ],
-  "properties": {
-    "gameTitle": { "type": "string" },
-    "currencyUnit": { "type": "string" },
-    "editor": { "$ref": "#/$defs/Editor" },
-    "advanced": {
-      "$ref": "#/$defs/Advanced"
-    },
-    "attackMotions": {
-      "items": { "$ref": "#/$defs/AttackMotion" },
-      "type": "array"
-    },
-    "titleBgm": { "$ref": "#/$defs/Audio" },
-    "battleBgm": { "$ref": "#/$defs/Audio" },
-    "gameoverMe": { "$ref": "#/$defs/Audio" },
-    "victoryMe": { "$ref": "#/$defs/Audio" },
-    "defeatMe": { "$ref": "#/$defs/Audio" },
-    "sounds": {
-      "type": "array",
-      "maxItems": 24,
-      "minItems": 24,
-      "items": { "$ref": "#/$defs/Audio" }
-    },
-    "itemCategories": { "$ref": "#/$defs/ItemCategories" },
-    "menuCommands": { "$ref": "#/$defs/MenuCommands" },
-    "ship": { "$ref": "#/$defs/Vehicle" },
-    "boat": { "$ref": "#/$defs/Vehicle" },
-    "airship": { "$ref": "#/$defs/Vehicle" },
-    "testBattlers": {
-      "type": "array",
-      "items": {
-        "$ref": "#/$defs/TestBattler"
-      }
-    },
-    "terms": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": ["messages", "commands", "basic", "params"],
-      "properties": {
-        "messages": { "$ref": "#/$defs/TermsMessages" },
-        "commands": { "$ref": "#/$defs/TermsCommands" },
-        "basic": { "$ref": "#/$defs/TermsBasic" },
-        "params": { "$ref": "#/$defs/TermsParams" }
-      }
-    },
-    "optAutosave": { "type": "boolean" },
-    "optDisplayTp": { "type": "boolean" },
-    "optFloorDeath": { "type": "boolean" },
-    "optFollowers": { "type": "boolean" },
-    "optKeyItemsNumber": { "type": "boolean" },
-    "optSideView": { "type": "boolean" },
-    "optSlipDeath": { "type": "boolean" },
-    "optTransparent": { "type": "boolean" },
-    "optSplashScreen": { "type": "boolean" },
-    "optDrawTitle": { "type": "boolean" },
-    "optExtraExp": { "type": "boolean" },
-    "optMessageSkip": { "type": "boolean" },
-    "startMapId": { "type": "integer", "minimum": 0 },
-    "startX": { "type": "integer", "minimum": 0 },
-    "startY": { "type": "integer", "minimum": 0 },
-    "faceSize": { "type": "integer", "minimum": 0 },
-    "tileSize": { "type": "integer", "minimum": 0 },
-    "iconSize": { "type": "integer", "minimum": 0 },
-    "battleSystem": { "type": "integer", "minimum": 0, "maximum": 2 },
-    "elements": { "type": "array", "items": { "type": "string" } },
-    "weaponTypes": { "type": "array", "items": { "type": "string" } },
-    "armorTypes": { "type": "array", "items": { "type": "string" } },
-    "equipTypes": { "type": "array", "items": { "type": "string" } },
-    "skillTypes": { "type": "array", "items": { "type": "string" } },
-    "switches": { "type": "array", "items": { "type": "string" } },
-    "variables": { "type": "array", "items": { "type": "string" } },
-    "magicSkills": { "type": "array", "items": { "type": "integer" } },
-    "battleback1Name": { "type": "string" },
-    "battleback2Name": { "type": "string" },
-    "testTroopId": { "type": "integer", "minimum": 0 },
-    "partyMembers": {
-      "type": "array",
-      "items": { "type": "integer" }
-    },
-
-    "editMapId": { "type": "integer", "minimum": 0 },
-    "battlerHue": { "type": "integer" },
-    "battlerName": { "type": "string" },
-    "title1Name": { "type": "string" },
-    "title2Name": { "type": "string" },
-    "versionId": { "type": "integer" },
-    "locale": { "type": "string" },
-    "windowTone": {
-      "type": "array",
-      "items": { "type": "integer", "minimum": 0, "maximum": 255 }
-    },
-    "titleCommandWindow": { "$ref": "#/$defs/TitleCommandWindow" }
-  }
+  "type": "object"
 }
