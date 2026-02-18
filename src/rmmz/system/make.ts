@@ -1,11 +1,13 @@
 import type { AudioFileParams } from "@RpgTypes/libs";
 import { makeAudioFileParams } from "@RpgTypes/libs";
 import {
+  createMenuCommandState,
   makeBooleanOptions,
   makeItemCategories,
   makeMenuCommandsEnabled,
   makeParamNamesArray,
   makeSoundsArray,
+  makeSoundsObject,
   makeSystemAdvanced,
   makeTermsBasic,
   makeTermsCommandArray,
@@ -24,7 +26,63 @@ import type { EditorSettings } from "./gameEdit";
 import { makeEditorSetting } from "./gameEdit";
 import type { TestBattler } from "./gameEdit/testPlay/testBattler/types";
 import type { Data_System } from "./system";
+import type { Data_SystemMV } from "./systemMV";
 import type { SystemDataFragments } from "./systemSegments";
+
+export const makeSystemDataFromMV = (data: Data_SystemMV): Data_System => {
+  return makeSystemData({
+    vesionId: data.versionId,
+
+    menuComamnds: createMenuCommandState(data),
+    locale: data.locale,
+    gameInit: {
+      startMapId: data.startMapId,
+      startX: data.startX,
+      startY: data.startY,
+      partyMembers: data.partyMembers,
+    },
+    battle: { magicSkills: data.magicSkills },
+    bgm: {
+      titleBgm: data.titleBgm,
+      battleBgm: data.battleBgm,
+    },
+    options: data,
+    vehicles: {
+      airship: data.airship,
+      boat: data.boat,
+      ship: data.ship,
+    },
+    images: { title1Name: data.title1Name, title2Name: data.title2Name },
+    me: {
+      defeatMe: data.defeatMe,
+      gameoverMe: data.gameoverMe,
+      victoryMe: data.victoryMe,
+    },
+    battleTest: {
+      battleback1Name: data.battleback1Name,
+      battleback2Name: data.battleback2Name,
+      testTroopId: data.testTroopId,
+      testBattlers: data.testBattlers,
+    },
+    attackMotion: data.attackMotions,
+    sounds: makeSoundsObject(data.sounds),
+    dataNames: {
+      skillTypes: data.skillTypes,
+      weaponTypes: data.weaponTypes,
+      armorTypes: data.armorTypes,
+      elements: data.elements,
+      equipTypes: data.equipTypes,
+      switches: data.switches,
+      variables: data.variables,
+    },
+    texts: { currencyUnit: data.currencyUnit, gameTitle: data.gameTitle },
+    editorTemporary: {
+      editMapId: data.editMapId,
+      battlerName: data.battlerName,
+      battlerHue: data.battlerHue,
+    },
+  });
+};
 
 export const makeSystemData = (
   fragments: Partial<SystemDataFragments>,
@@ -68,7 +126,7 @@ export const makeSystemData = (
     tileSize: size.tileSize,
     faceSize: size.faceSize,
     iconSize: size.iconSize,
-    versionId: 1,
+    versionId: fragments.vesionId ?? 1,
     attackMotions: fragments.attackMotion ? [...fragments.attackMotion] : [],
     battleback1Name: fragments.battleTest?.battleback1Name ?? "",
     battleback2Name: fragments.battleTest?.battleback2Name ?? "",
