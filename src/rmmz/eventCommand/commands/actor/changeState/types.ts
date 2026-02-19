@@ -5,3 +5,8 @@ export interface Command_ChangeActorState extends EventCommandLike<313> {
 }
 
 export type ParamArray_ChangeActorState = [actorId: number, stateId: number];
+
+export interface ParamObject_ChangeActorState {
+  actorId: number;
+  stateId: number;
+}
