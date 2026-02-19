@@ -13,6 +13,8 @@ export interface Rmmz_Stateable {
   sortStates(): number;
   restriction(): number;
   addNewState(stateId: number): void;
+  addState(stateId: number): void;
+  removeState(stateId: number): void;
 
   stateMotionIndex(): number;
   stateOverlayIndex(): number;
