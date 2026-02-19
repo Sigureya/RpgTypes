@@ -1,5 +1,4 @@
 import { describe, test, expect } from "vitest";
-import type { AudioFileParams } from "src/libs";
 import type {
   Command_ChangeBattleBGM,
   Command_ChangeDefeatME,
@@ -8,16 +7,17 @@ import type {
   Command_PlayBGS,
   Command_PlayME,
   Command_PlaySE,
-} from "src/rmmz/eventCommand";
+} from "@RpgTypes/rmmz";
 import {
+  makeCommandChangeBattleBGM,
+  makeCommandChangeDefeatME,
+  makeCommandChangeVictoryME,
   makeCommandPlayBGM,
   makeCommandPlayBGS,
   makeCommandPlayME,
   makeCommandPlaySE,
-  makeCommandChangeBattleBGM,
-  makeCommandChangeVictoryME,
-  makeCommandChangeDefeatME,
-} from "src/rmmz/eventCommand";
+} from "@RpgTypes/rmmz";
+import type { AudioFileParams } from "src/libs";
 const validate = require("./playAudioValidate.cjs");
 const isCommandAudio = (x: unknown): boolean => {
   return validate(x);
