@@ -1,3 +1,4 @@
+import { CHANGE_EXP } from "@RpgTypes/rmmz/rpg";
 import type {
   ParamObject_ChangeExp,
   Command_ChangeExp,
@@ -12,7 +13,7 @@ export const makeCommandGainExp = (
   param: ParamObject_ChangeExp,
   indent: number = 0,
 ): Command_ChangeExp => ({
-  code: 315,
+  code: CHANGE_EXP,
   indent,
   parameters: [
     0,
@@ -28,7 +29,7 @@ export const makeCommandLoseExp = (
   param: ParamObject_ChangeExp,
   indent: number = 0,
 ): Command_ChangeExp => ({
-  code: 315,
+  code: CHANGE_EXP,
   indent,
   parameters: [
     0,
@@ -44,7 +45,7 @@ export const makeCommandGainExpVariable = (
   param: ParamObject_ChangeExpFromVariable,
   indent: number = 0,
 ): Command_ChangeExp => ({
-  code: 315,
+  code: CHANGE_EXP,
   indent,
   parameters: [
     0,
@@ -60,7 +61,7 @@ export const makeCommandLoseExpVariable = (
   param: ParamObject_ChangeExpFromVariable,
   indent: number = 0,
 ): Command_ChangeExp => ({
-  code: 315,
+  code: CHANGE_EXP,
   indent,
   parameters: [
     0,
