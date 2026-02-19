@@ -1,3 +1,4 @@
+export * from "./changeState";
 export * from "./make";
 export * from "./recoverAll/index";
 export * from "./types";
@@ -26,10 +27,6 @@ export type {
   ParamArray_ChangeActorImages,
   ParamObject_ChangeActorImages,
 } from "./types/changeImage";
-export type {
-  Command_ChangeActorState,
-  ParamArray_ChangeActorState,
-} from "./changeState/types";
 export type {
   Command_ChangeExp,
   ParamArray_ChangeExp,
