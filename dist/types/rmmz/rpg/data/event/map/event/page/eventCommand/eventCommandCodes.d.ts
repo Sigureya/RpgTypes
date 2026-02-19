@@ -87,6 +87,7 @@ export declare const CHANGE_EXP: 315;
 export declare const CHANGE_ACTOR_STATE: 313;
 export declare const CHANGE_PARAMETER: 317;
 export declare const CHANGE_SKILL: 318;
+export declare const CHANGE_EQUIP: 319;
 export declare const CHANGE_NAME: 320;
 export declare const CHANGE_CLASS: 321;
 export declare const CHANGE_ACTOR_IMAGES: 322;

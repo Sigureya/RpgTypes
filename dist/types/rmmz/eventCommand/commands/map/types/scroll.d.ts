@@ -10,3 +10,9 @@ export type ParamArray_ScrollMap = [
     speed: number,
     waiting: boolean
 ];
+export interface ParamObject_ScrollMap {
+    direction: Direction8;
+    distance: number;
+    speed: number;
+    waiting: boolean;
+}
