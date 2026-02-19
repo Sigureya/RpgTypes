@@ -5,17 +5,25 @@ import type { EventCommand } from "@RpgTypes/rmmz/eventCommand";
 import {
   makeCommandAddActorStateEach,
   makeCommandAddActorStateTarget,
+  makeCommandAddActorStateVariable,
   makeCommandRemoveActorStateEach,
   makeCommandRemoveActorStateTarget,
+  makeCommandRemoveActorStateVariable,
 } from "@RpgTypes/rmmz/eventCommand";
 import { CHANGE_ACTOR_STATE } from "@RpgTypes/rmmz/rpg";
-import type { Rmmz_Actor, Rmmz_Party } from "@RpgTypes/rmmzRuntime";
+import type {
+  Rmmz_Actor,
+  Rmmz_Party,
+  Rmmz_Variables,
+} from "@RpgTypes/rmmzRuntime";
 import type { FakeActors, FakeMap } from "./fakes/types";
 import { Game_Interpreter } from "./rmmz_objects";
 
 type FakeParty = Pick<Rmmz_Party, "members">;
 
 type FakeActor = Pick<Rmmz_Actor, "isDead" | (typeof KEYS)[number]>;
+
+type FakeVariable = Pick<Rmmz_Variables, "value">;
 
 const KEYS = [
   "addState",
@@ -46,6 +54,11 @@ const createMockedActorsContainer = (
   actor: vi.fn().mockReturnValue(actor),
 });
 
+const MOCK_VALUE = 42;
+const createMockedVarible = (): MockedObject<FakeVariable> => ({
+  value: vi.fn().mockReturnValue(MOCK_VALUE),
+});
+
 const createMockedActor = (): MockedObject<FakeActor> => ({
   addState: vi.fn(),
   removeState: vi.fn(),
@@ -67,6 +80,7 @@ interface MockObjects {
   party: MockedObject<FakeParty>;
   actorsContainer: MockedObject<FakeActors>;
   map: FakeMap;
+  variable: MockedObject<FakeVariable>;
 }
 
 const createMockObjects = (): MockObjects => {
@@ -75,14 +89,22 @@ const createMockObjects = (): MockObjects => {
   const member2 = createMockedActor();
   const party = createMockParty([member1, member2]);
   const actorsContainer = createMockedActorsContainer(actor);
-  const map = createFakeMap();
-  return { actor, member1, member2, party, actorsContainer, map };
+  return {
+    actor,
+    member1,
+    member2,
+    party,
+    actorsContainer,
+    map: createFakeMap(),
+    variable: createMockedVarible(),
+  };
 };
 
 const stubGlobal = (objects: MockObjects) => {
   vi.stubGlobal("$gameActors", objects.actorsContainer);
   vi.stubGlobal("$gameParty", objects.party);
   vi.stubGlobal("$gameMap", objects.map);
+  vi.stubGlobal("$gameVariables", objects.variable);
 };
 
 interface MethodCalls {
@@ -91,6 +113,7 @@ interface MethodCalls {
   member2: MemberFunctions<FakeActor>[];
   actorId: number | undefined;
   members: boolean;
+  variableId?: number;
 }
 
 interface TestCase {
@@ -137,18 +160,25 @@ const runTestCase = (testCase: TestCase) => {
         const interpreter = new Game_Interpreter();
         interpreter.setup([testCase.commandLiteral], 0);
         interpreter.executeCommand();
+        expect(objects.party.members).toHaveBeenCalledTimes(
+          testCase.calls.members ? 1 : 0,
+        );
         if (testCase.calls.actorId === undefined) {
           expect(objects.actorsContainer.actor).not.toHaveBeenCalled();
         } else {
+          expect(objects.actorsContainer.actor).toHaveBeenCalledOnce();
           expect(objects.actorsContainer.actor).toHaveBeenCalledWith(
             testCase.calls.actorId,
           );
-          expect(objects.actorsContainer.actor).toHaveBeenCalledOnce();
         }
-        if (testCase.calls.members) {
-          expect(objects.party.members).toHaveBeenCalledOnce();
+
+        if (testCase.calls.variableId === undefined) {
+          expect(objects.variable.value).not.toHaveBeenCalled();
         } else {
-          expect(objects.party.members).not.toHaveBeenCalled();
+          expect(objects.variable.value).toHaveBeenCalledOnce();
+          expect(objects.variable.value).toHaveBeenCalledWith(
+            testCase.calls.variableId,
+          );
         }
       });
     });
@@ -236,6 +266,52 @@ const testCases: TestCase[] = [
       ],
       actorId: undefined,
       members: true,
+    },
+  },
+  {
+    name: "Add Actor State Variable",
+    commandLiteral: {
+      code: CHANGE_ACTOR_STATE,
+      parameters: [1, 5, 0, 3],
+      indent: 0,
+    },
+    command: makeCommandAddActorStateVariable({
+      actorIdVariable: 5,
+      stateId: 3,
+    }),
+    calls: {
+      actor: [
+        { fn: "addState", args: [3] },
+        { fn: "clearResult", args: [] },
+      ],
+      member1: [],
+      member2: [],
+      actorId: MOCK_VALUE,
+      members: false,
+      variableId: 5,
+    },
+  },
+  {
+    name: "Remove Actor State Variable",
+    commandLiteral: {
+      code: CHANGE_ACTOR_STATE,
+      parameters: [1, 8, 1, 2],
+      indent: 0,
+    },
+    command: makeCommandRemoveActorStateVariable({
+      actorIdVariable: 8,
+      stateId: 2,
+    }),
+    calls: {
+      actor: [
+        { fn: "removeState", args: [2] },
+        { fn: "clearResult", args: [] },
+      ],
+      member1: [],
+      member2: [],
+      actorId: MOCK_VALUE,
+      members: false,
+      variableId: 8,
     },
   },
 ];
