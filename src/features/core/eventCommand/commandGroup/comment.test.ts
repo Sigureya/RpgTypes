@@ -84,30 +84,26 @@ describe("createCommentGroup - SimpleEventCommandGroup Creation", () => {
 
   test("SimpleEventCommandGroup instance validation", () => {
     const group: EventCommandGroup_Comment = createCommentGroup(commands, 0);
-    describe("should create an instance of SimpleEventCommandGroup", () => {
-      expect(group).toBeInstanceOf(SimpleEventCommandGroup);
-    });
+    expect(group).toBeInstanceOf(SimpleEventCommandGroup);
 
-    describe("should return correct body text", () => {
-      expect(group.getBodyText()).toBe("Help text");
-    });
+    expect(group.getBodyText()).toBe("Help text");
 
-    describe("should return correct merged body", () => {
-      const mergedBody = group.mergedBody();
-      expect(mergedBody).toEqual({
-        code: 408 satisfies typeof COMMENT_BODY,
-        indent: 0,
-        parameters: ["Help text"],
-      } satisfies Command_CommentBody);
-    });
-    describe("should return normalized commands", () => {
-      const normalizedCommands = group.normalizedCommands();
-      const expectedCommands = [
-        makeCommandCommentHeader(CHOICE_HELP_TEXT),
-        makeCommandCommentBody("Help text"),
-      ] satisfies [Command_CommentHeader, Command_CommentBody];
-      expect(normalizedCommands).toEqual(expectedCommands);
-    });
+    const expectedCommand: Command_CommentBody = {
+      code: 408 satisfies typeof COMMENT_BODY,
+      indent: 0,
+      parameters: ["Help text"],
+    };
+    const mergedBody = group.mergedBody();
+    expect(mergedBody).toEqual(expectedCommand);
+  });
+  test("should return normalized commands", () => {
+    const group: EventCommandGroup_Comment = createCommentGroup(commands, 0);
+    const normalizedCommands = group.normalizedCommands();
+    const expectedCommands: [Command_CommentHeader, Command_CommentBody] = [
+      makeCommandCommentHeader(CHOICE_HELP_TEXT),
+      makeCommandCommentBody("Help text"),
+    ];
+    expect(normalizedCommands).toEqual(expectedCommands);
   });
 });
 
