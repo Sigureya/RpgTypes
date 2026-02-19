@@ -1,4 +1,4 @@
-import { EventCommandUnknown } from '../../../eventCommand';
+import { EventCommandUnknown } from '../../../../libs/eventCommand';
 export interface Data_TroopUnknonw<Command = EventCommandUnknown> {
     members: Troop_Member[];
     pages: BattleEventPage<Command>[];

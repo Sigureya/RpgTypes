@@ -1,6 +1,6 @@
-import { EventCommandLike } from '../..';
+import { EventCommandLike, CONTROL_TIMER } from '../../../../libs/eventCommand';
 import { ValueOf } from 'src/libs/templates/valueOf';
-export interface Command_ControlTimer extends EventCommandLike<124> {
+export interface Command_ControlTimer extends EventCommandLike<typeof CONTROL_TIMER> {
     parameters: [operation: ValueOf<Operation_PlusMinus>, time: number];
 }
 export type Operation_PlusMinus = {

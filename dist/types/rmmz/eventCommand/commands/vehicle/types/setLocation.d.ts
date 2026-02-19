@@ -1,5 +1,5 @@
+import { EventCommandLike } from '../../../../../libs/eventCommand';
 import { ValueOf } from '../../../../../libs/templates/valueOf';
-import { EventCommandLike } from '../../../frame';
 import { Designation } from '../../../../utils';
 import { VehicleType } from './constants';
 export interface Command_SetVehicleLocation extends EventCommandLike<202> {

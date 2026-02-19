@@ -1,4 +1,5 @@
-import { EventCommand, EventCommandUnknown } from '../../../rmmz';
+import { EventCommandUnknown } from '../../../libs/eventCommand';
+import { EventCommand } from '../../../rmmz';
 import { Data_CommonEventUnknown, Data_TroopUnknonw, MapEventContainer } from '../../../rmmz/rpg';
 import { CommandContainer } from './map/';
 import { ReplaceableEventPage } from './types';

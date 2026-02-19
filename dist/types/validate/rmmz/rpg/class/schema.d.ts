@@ -74,7 +74,7 @@ export declare const SCHEMA_DATA_CLASS: {
                         type: "integer";
                     };
                 };
-                required: ("value" | "code" | "dataId")[];
+                required: ("code" | "value" | "dataId")[];
                 additionalProperties: false;
             };
         };

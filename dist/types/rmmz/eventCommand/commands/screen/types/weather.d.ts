@@ -1,5 +1,4 @@
-import { EventCommandLike } from '../../../frame';
-import { SET_WEATHER_EFFECT } from '../../../../rpg';
+import { EventCommandLike, SET_WEATHER_EFFECT } from '../../../../../libs/eventCommand';
 export interface Command_SetWeatherEffect extends EventCommandLike<typeof SET_WEATHER_EFFECT> {
     parameters: ParamArray_SetWeatherEffect;
 }

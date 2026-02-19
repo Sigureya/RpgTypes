@@ -1,6 +1,6 @@
-import { EventCommandLike } from '../../../frame';
+import { EventCommandLike, TRANSFER_PLAYER } from '../../../../../libs/eventCommand';
 import { Designation, Direction8 } from '../../../../utils';
-export interface Command_TransferPlayer extends EventCommandLike<201> {
+export interface Command_TransferPlayer extends EventCommandLike<typeof TRANSFER_PLAYER> {
     parameters: ParamArray_TransferPlayer;
 }
 export type ParamArray_TransferPlayer = ParamArray_TransferPlayerDirect | ParamArray_TransferPlayerVariable;

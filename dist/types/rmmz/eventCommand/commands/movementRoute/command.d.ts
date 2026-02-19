@@ -1,6 +1,6 @@
+import { EventCommandLike, SET_MOVEMENT_ROUTE } from '../../../../libs/eventCommand';
 import { MoveRouteData } from '../../../rpg';
-import { EventCommandLike } from '../../frame';
-export interface Command_SetMovementRoute extends EventCommandLike<205> {
+export interface Command_SetMovementRoute extends EventCommandLike<typeof SET_MOVEMENT_ROUTE> {
     parameters: [characterId: number, movement: MoveRouteData];
 }
 export type ParamArray_MovementRoute = [

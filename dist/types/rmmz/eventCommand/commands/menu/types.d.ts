@@ -1,6 +1,5 @@
+import { EventCommandLike, CHANGE_MENU_ACCESS, CHANGE_SAVE_ACCESS, CHANGE_FORMATION_ACCESS } from '../../../../libs/eventCommand';
 import { ValueOf } from '../../../../libs/templates/valueOf';
-import { EventCommandLike } from '../../frame';
-import { CHANGE_MENU_ACCESS, CHANGE_SAVE_ACCESS, CHANGE_FORMATION_ACCESS } from '../../../rpg';
 import { Toggle } from '../../../utils';
 export type ParamArray_ChangeEnabled = [value: ValueOf<Toggle>];
 export interface Command_ChangeMenuAccess extends EventCommandLike<typeof CHANGE_MENU_ACCESS> {

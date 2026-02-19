@@ -4,7 +4,7 @@ declare const SCHEMA_COMMAND_TEXT_BODY: {
     readonly properties: {
         readonly code: {
             readonly type: "integer";
-            readonly enum: (108 | 408 | 405 | 401 | 355 | 655)[];
+            readonly enum: (401 | 405 | 108 | 408 | 355 | 655)[];
         };
         readonly indent: {
             readonly type: "integer";

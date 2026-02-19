@@ -1,6 +1,7 @@
+import { EventCommandLike, CONTROL_SWITCHES } from '../../../../../libs/eventCommand';
 import { ValueOf } from '../../../../../libs/templates/valueOf';
-import { EventCommandLike, Toggle } from '../../../..';
-export interface Command_ControlSwitches extends EventCommandLike<121> {
+import { Toggle } from '../../../../utils';
+export interface Command_ControlSwitches extends EventCommandLike<typeof CONTROL_SWITCHES> {
     parameters: ParamArray_ControlSwitches;
 }
 export type ParamArray_ControlSwitches = [

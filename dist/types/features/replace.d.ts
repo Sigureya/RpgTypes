@@ -1,4 +1,4 @@
-import { Data_Map, EventCommand, NormalizedEventCommand, Command_PluginCommandMZ, Command_ScriptHeader, Data_TroopUnknonw, Data_CommonEventUnknown, NoteReplaceHandlers, TextReplaceHandlers } from '../rmmz';
+import { Command_PluginCommandMZ, Command_ScriptHeader, Data_CommonEventUnknown, Data_Map, Data_TroopUnknonw, EventCommand, NormalizedEventCommand, NoteReplaceHandlers, TextReplaceHandlers } from '../rmmz';
 export interface ReplaceEventTextHandlers extends TextReplaceHandlers {
     pluginCommand: (command: Command_PluginCommandMZ) => Command_PluginCommandMZ;
     scriptCommand: (command: Command_ScriptHeader) => Command_ScriptHeader;

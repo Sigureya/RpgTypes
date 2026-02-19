@@ -1,5 +1,4 @@
-import { EventCommandLike } from '../../../frame';
-import { SHOW_BATTLE_ANIMATION } from '../../../../rpg';
+import { EventCommandLike, SHOW_BATTLE_ANIMATION } from '../../../../../libs/eventCommand';
 export interface Command_ShowBattleAnimation extends EventCommandLike<typeof SHOW_BATTLE_ANIMATION> {
     parameters: ParamArray_ShowBattleAnimation;
 }

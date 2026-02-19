@@ -1,5 +1,5 @@
-import { EventCommandLike } from '../..';
-export interface Command_PluginCommandMV extends EventCommandLike<356> {
+import { EventCommandLike, PLUGIN_COMMAND_MV } from '../../../../libs/eventCommand';
+export interface Command_PluginCommandMV extends EventCommandLike<typeof PLUGIN_COMMAND_MV> {
     parameters: ParamArray_PluginCommandMV;
 }
 export type ParamArray_PluginCommandMV = [nameAndArg: string];

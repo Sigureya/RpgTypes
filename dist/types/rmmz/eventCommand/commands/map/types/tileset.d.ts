@@ -1,5 +1,4 @@
-import { EventCommandLike } from '../../../frame';
-import { CHANGE_TILESET } from '../../../../rpg';
+import { EventCommandLike, CHANGE_TILESET } from '../../../../../libs/eventCommand';
 export interface Command_ChangeTileset extends EventCommandLike<typeof CHANGE_TILESET, ParamArray_ChangeTileset> {
     parameters: ParamArray_ChangeTileset;
 }

@@ -1,6 +1,5 @@
 import { AudioFileParams } from '../../../../../libs';
-import { EventCommandLike } from '../../../frame';
-import { CHANGE_VEHICLE_BGM } from '../../../../rpg';
+import { EventCommandLike, CHANGE_VEHICLE_BGM } from '../../../../../libs/eventCommand';
 import { VehicleType } from './constants';
 export interface Command_ChangeVehicleBGM extends EventCommandLike<typeof CHANGE_VEHICLE_BGM> {
     parameters: ParamArray_ChangeVehicleBGM;

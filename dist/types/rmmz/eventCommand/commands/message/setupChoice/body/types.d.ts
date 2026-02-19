@@ -1,4 +1,4 @@
-import { EventCommandLike } from '../../../..';
+import { EventCommandLike, SHOW_CHOICES } from '../../../../../../libs/eventCommand';
 export type ParamArray_SetupChoice = [
     choices: string[],
     cancelType: number,
@@ -13,6 +13,6 @@ export interface ParamObject_SetupChoice {
     positionType: number;
     background: number;
 }
-export interface Command_ShowChoices extends EventCommandLike<102> {
+export interface Command_ShowChoices extends EventCommandLike<typeof SHOW_CHOICES> {
     parameters: ParamArray_SetupChoice;
 }

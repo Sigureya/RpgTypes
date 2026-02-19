@@ -1,6 +1,5 @@
+import { EventCommandLike, CHANGE_ITEMS } from '../../../../../../libs/eventCommand';
 import { ValueOf } from '../../../../../../libs/templates/valueOf';
-import { EventCommandLike } from '../../../../frame';
-import { CHANGE_ITEMS } from '../../../../../rpg';
 import { Operation_PlusMinus } from '../../../../../utils';
 import { OPERAND_DIRECT, OPERAND_VARIABLE } from './constants';
 export type Command_ChangeItems = EventCommandLike<typeof CHANGE_ITEMS, ParamArray_ChangeItems>;

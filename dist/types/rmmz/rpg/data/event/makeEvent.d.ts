@@ -1,4 +1,4 @@
-import { EventCommandUnknown } from '../../../eventCommand';
+import { EventCommandUnknown } from '../../../../libs/eventCommand';
 import { Data_CommonEventUnknown } from './commonEvent';
 import { BattleEventPage, Data_TroopUnknonw, Troop_BattleEventPageSegment, Troop_EventConditions, Troop_Member } from './troop';
 export declare const makeCommonEventData: <Command extends EventCommandUnknown>(data?: Partial<Data_CommonEventUnknown<Command>>) => Data_CommonEventUnknown<Command>;

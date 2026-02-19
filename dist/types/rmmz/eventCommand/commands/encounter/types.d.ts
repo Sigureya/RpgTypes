@@ -1,6 +1,6 @@
+import { CHANGE_ENCOUNTER, EventCommandLike } from '../../../../libs/eventCommand';
 import { ValueOf } from '../../../../libs/templates/valueOf';
 import { Toggle } from '../../../utils';
-import { EventCommandLike } from '../../frame';
-export interface Command_ChangeEncounter extends EventCommandLike<136> {
+export interface Command_ChangeEncounter extends EventCommandLike<typeof CHANGE_ENCOUNTER> {
     parameters: [value: ValueOf<Toggle>];
 }

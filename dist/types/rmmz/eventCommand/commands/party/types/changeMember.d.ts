@@ -1,7 +1,7 @@
+import { EventCommandLike, CHANGE_PARTY_MEMBER } from '../../../../../libs/eventCommand';
 import { ValueOf } from '../../../../../libs/templates/valueOf';
-import { EventCommandLike } from '../../../frame';
 import { Operation_PlusMinus } from '../../../../utils';
-export interface Command_ChangePartyMember extends EventCommandLike<129> {
+export interface Command_ChangePartyMember extends EventCommandLike<typeof CHANGE_PARTY_MEMBER> {
     parameters: ParamArray_ChangePartyMember;
 }
 export type ParamArray_ChangePartyMember = [

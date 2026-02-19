@@ -1,5 +1,4 @@
-import { EventCommandLike } from '../../../frame';
-import { CHANGE_VEHICLE_IMAGE } from '../../../../rpg';
+import { EventCommandLike, CHANGE_VEHICLE_IMAGE } from '../../../../../libs/eventCommand';
 import { VehicleType } from './constants';
 export interface Command_ChangeVehicleImage extends EventCommandLike<typeof CHANGE_VEHICLE_IMAGE> {
     parameters: ParamArray_ChangeVehicleImage;

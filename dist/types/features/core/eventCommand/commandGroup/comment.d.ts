@@ -1,4 +1,5 @@
-import { Command_CommentHeader, Command_CommentBody, EventCommand, EventCommandLike } from '../../../../rmmz';
+import { EventCommandLike } from '../../../../libs/eventCommand';
+import { EventCommand, Command_CommentHeader, Command_CommentBody } from '../../../../rmmz';
 import { EventCommandGroup_Comment } from './core';
 export declare const extractCommentGroup: (list: ReadonlyArray<EventCommand>, index: number) => {
     header: Command_CommentHeader;

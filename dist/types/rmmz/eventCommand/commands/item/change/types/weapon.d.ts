@@ -1,5 +1,4 @@
-import { EventCommandLike } from '../../../../frame';
-import { CHANGE_WEAPONS } from '../../../../../rpg';
+import { EventCommandLike, CHANGE_WEAPONS } from '../../../../../../libs/eventCommand';
 import { Operation_PlusMinus } from '../../../../../utils';
 import { OPERAND_DIRECT, OPERAND_VARIABLE } from './constants';
 export type Command_ChangeWeapons = EventCommandLike<typeof CHANGE_WEAPONS, ParamArray_ChangeWeapons>;

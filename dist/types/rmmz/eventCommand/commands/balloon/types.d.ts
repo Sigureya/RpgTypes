@@ -1,5 +1,5 @@
-import { EventCommandLike } from '../../frame';
-export interface Command_ShowBalloonIcon extends EventCommandLike<213> {
+import { EventCommandLike, SHOW_BALLOON_ICON } from '../../../../libs/eventCommand';
+export interface Command_ShowBalloonIcon extends EventCommandLike<typeof SHOW_BALLOON_ICON> {
     parameters: ParamArray_ShowBalloonIcon;
 }
 export type ParamArray_ShowBalloonIcon = [

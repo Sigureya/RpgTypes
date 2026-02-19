@@ -1,6 +1,5 @@
 import { ColorRGBA } from '../../../../../libs';
-import { EventCommandLike } from '../../../frame';
-import { FLASH_SCREEN } from '../../../../rpg';
+import { EventCommandLike, FLASH_SCREEN } from '../../../../../libs/eventCommand';
 export interface Command_FlashScreen extends EventCommandLike<typeof FLASH_SCREEN> {
     parameters: ParamArray_FlashScreen;
 }

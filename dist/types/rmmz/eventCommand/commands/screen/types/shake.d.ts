@@ -1,4 +1,4 @@
-import { EventCommandLike, SHAKE_SCREEN } from '../../../..';
+import { EventCommandLike, SHAKE_SCREEN } from '../../../../../libs/eventCommand';
 export interface Command_ShakeScreen extends EventCommandLike<typeof SHAKE_SCREEN> {
     parameters: ParamArray_ShakeScreen;
 }

@@ -1,4 +1,5 @@
-import { Command_CommentBody, Command_CommentHeader, Command_ScriptBody, Command_ScriptHeader, Command_ScrollTextBody, Command_ScrollTextHeader, Command_ShowMessageBody, Command_ShowMessageHeader, EventCommand, SHOW_MESSAGE_BODY } from '../../../../../../rmmz';
+import { SHOW_MESSAGE_BODY } from '../../../../../../libs/eventCommand';
+import { Command_CommentBody, Command_CommentHeader, Command_ScriptBody, Command_ScriptHeader, Command_ScrollTextBody, Command_ScrollTextHeader, Command_ShowMessageBody, Command_ShowMessageHeader, EventCommand } from '../../../../../../rmmz';
 import { ExtractCommandByParam } from '../../../../../../rmmz/eventCommand/commands/extractType';
 export interface EventCommandGroupBase<Header extends EventCommand, Body extends ExtractCommandByParam<[string]>> {
     header: Header;

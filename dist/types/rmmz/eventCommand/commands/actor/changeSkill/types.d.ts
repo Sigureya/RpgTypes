@@ -1,5 +1,5 @@
-import { EventCommandLike } from '../../../frame';
-export interface Command_ChangeSkill extends EventCommandLike<318> {
+import { EventCommandLike, CHANGE_SKILL } from '../../../../../libs/eventCommand';
+export interface Command_ChangeSkill extends EventCommandLike<typeof CHANGE_SKILL> {
     parameters: ParamArray_ChangeSkill;
 }
 export type ParamArray_ChangeSkill = [

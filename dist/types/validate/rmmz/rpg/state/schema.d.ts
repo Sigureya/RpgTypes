@@ -88,7 +88,7 @@ export declare const SCHEMA_DATA_STATE: {
                         type: "integer";
                     };
                 };
-                required: ("value" | "code" | "dataId")[];
+                required: ("code" | "value" | "dataId")[];
             };
         };
     };

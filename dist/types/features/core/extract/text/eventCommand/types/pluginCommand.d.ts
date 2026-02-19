@@ -1,4 +1,4 @@
-import { PLUGIN_COMMAND_MZ } from '../../../../../../rmmz';
+import { PLUGIN_COMMAND_MZ } from '../../../../../../libs/eventCommand';
 import { CommandParameter } from '../../../../../../rmmz/eventCommand/pickCommandParam';
 export interface PluginCommandMzParameter extends CommandParameter<string, typeof PLUGIN_COMMAND_MZ> {
     paramIndex: 3;

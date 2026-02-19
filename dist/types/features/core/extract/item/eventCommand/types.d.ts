@@ -1,4 +1,4 @@
-import { CHANGE_ARMORS, CHANGE_ITEMS, CHANGE_WEAPONS, CONDITIONAL_BRANCH } from '../../../../../rmmz';
+import { CHANGE_ITEMS, CHANGE_WEAPONS, CHANGE_ARMORS, CONDITIONAL_BRANCH } from '../../../../../libs/eventCommand';
 export type ItemCommandCode = typeof CHANGE_ITEMS | typeof CHANGE_WEAPONS | typeof CHANGE_ARMORS | typeof CONDITIONAL_BRANCH;
 export type ItemKind = "item" | "weapon" | "armor";
 export interface ItemCommandParameter {

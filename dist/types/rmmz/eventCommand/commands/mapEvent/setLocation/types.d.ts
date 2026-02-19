@@ -1,6 +1,6 @@
-import { EventCommandLike } from '../../../frame';
+import { EventCommandLike, SET_EVENT_LOCATION } from '../../../../../libs/eventCommand';
 import { Direction8 } from '../../../../utils';
-export interface Command_SetEventLocation extends EventCommandLike<203> {
+export interface Command_SetEventLocation extends EventCommandLike<typeof SET_EVENT_LOCATION> {
     parameters: ParamArray_SetEventLocation;
 }
 export type ParamArray_SetEventLocation = [

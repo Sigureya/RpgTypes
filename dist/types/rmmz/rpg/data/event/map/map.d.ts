@@ -1,4 +1,5 @@
-import { EventCommand, EventCommandUnknown } from '../../../../eventCommand';
+import { EventCommandUnknown } from '../../../../../libs/eventCommand';
+import { EventCommand } from '../../../../eventCommand';
 import { AudioFileParams } from 'src/libs';
 import { MapEvent } from './event';
 import { Encounter } from './types/encounter';

@@ -1,10 +1,9 @@
-import { EventCommandLike } from '../../../frame';
-import { CHANGE_ENEMY_TP } from '../../../../rpg';
+import { EventCommandLike, CHANGE_ENEMY_TP, CHANGE_ENEMY_MP, CHANGE_ENEMY_HP } from '../../../../../libs/eventCommand';
 import { Designation, Operation_AddSub } from '../../../../utils';
-export interface Command_ChangeEnemyHP extends EventCommandLike<331> {
+export interface Command_ChangeEnemyHP extends EventCommandLike<typeof CHANGE_ENEMY_HP> {
     parameters: ParamArray_ChangeEnemyHP;
 }
-export interface Command_ChangeEnemyMP extends EventCommandLike<332> {
+export interface Command_ChangeEnemyMP extends EventCommandLike<typeof CHANGE_ENEMY_MP> {
     parameters: ParamArray_ChangeEnemyValue;
 }
 export interface Command_ChangeEnemyTP extends EventCommandLike<typeof CHANGE_ENEMY_TP> {

@@ -1,4 +1,4 @@
-import { CHANGE_NAME, CHANGE_NICKNAME, CHANGE_PROFILE, COMMENT_HEAD, SCRIPT_EVAL, SHOW_CHOICES, SHOW_MESSAGE_BODY, SHOW_SCROLLING_TEXT_BODY } from '../../../../../../rmmz';
+import { CHANGE_NICKNAME, CHANGE_PROFILE, CHANGE_NAME, SHOW_SCROLLING_TEXT_BODY, SHOW_CHOICES, SCRIPT_EVAL, COMMENT_HEAD, SHOW_MESSAGE_BODY } from '../../../../../../libs/eventCommand';
 import { CommandParameter } from '../../../../../../rmmz/eventCommand/pickCommandParam';
 import { PluginCommandMzParameter } from './pluginCommand';
 import { TextCommandParameter } from './union';

@@ -1,5 +1,4 @@
-import { EventCommandLike } from '../../frame';
-import { INPUT_NUMBER } from '../../../rpg';
+import { EventCommandLike, INPUT_NUMBER } from '../../../../libs/eventCommand';
 export interface Command_InputNumber extends EventCommandLike<typeof INPUT_NUMBER> {
     parameters: ParamArray_InputNumber;
 }
