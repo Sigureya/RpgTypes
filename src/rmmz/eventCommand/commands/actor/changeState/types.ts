@@ -42,3 +42,7 @@ export interface ParamObject_ChangeActorState {
   actorId: number;
   stateId: number;
 }
+
+export interface ParamObject_ChangeActorStateEach {
+  stateId: number;
+}

@@ -5,6 +5,7 @@ import type {
   ParamArray_RemoveActorStateEach,
   ParamArray_RemoveActorStateTarget,
   ParamObject_ChangeActorState,
+  ParamObject_ChangeActorStateEach,
 } from "./types";
 
 export const makeCommandAddActorStateTarget = (
@@ -36,7 +37,7 @@ export const makeCommandRemoveActorStateTarget = (
 });
 
 export const makeCommandAddActorStateEach = (
-  param: ParamObject_ChangeActorState,
+  param: ParamObject_ChangeActorStateEach,
   indent: number = 0,
 ): Command_ChangeActorState => ({
   code: 313,
@@ -45,7 +46,7 @@ export const makeCommandAddActorStateEach = (
 });
 
 export const makeCommandRemoveActorStateEach = (
-  param: ParamObject_ChangeActorState,
+  param: ParamObject_ChangeActorStateEach,
   indent: number = 0,
 ): Command_ChangeActorState => ({
   code: 313,
