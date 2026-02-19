@@ -1,4 +1,7 @@
-import { SHOP_PROCESSING, SHOP_PROCESSING_BODY } from "@RpgTypes/rmmz/rpg";
+import {
+  SHOP_PROCESSING,
+  SHOP_PROCESSING_BODY,
+} from "@RpgTypes/libs/eventCommand";
 import { CUSTOM_PRICE, NORMAL_PRICE } from "./constants";
 import type {
   Command_ShopProcessing,
@@ -19,7 +22,7 @@ const isCustomPrice = (goods: ParamObject_ShopGoods): boolean =>
 
 export const makeCommandShopProcessing = (
   { goods, buyOnly = false }: ParamObject_ShopProcessing,
-  indent: number = 0
+  indent: number = 0,
 ): (Command_ShopProcessing | Command_ShopProcessingBody)[] => {
   return goods.map(
     (item, index): Command_ShopProcessing | Command_ShopProcessingBody => {
@@ -48,6 +51,6 @@ export const makeCommandShopProcessing = (
               item.customPrice ?? 0,
             ],
           } satisfies Command_ShopProcessingBody);
-    }
+    },
   );
 };

@@ -1,11 +1,8 @@
 import { describe, test, expect } from "vitest";
 import { createScriptGroup } from "@RpgTypes/features/core/eventCommand/commandGroup";
+import { SCRIPT_EVAL } from "@RpgTypes/libs/eventCommand";
 import type { EventCommand } from "@RpgTypes/rmmz";
-import {
-  makeCommandScriptBody,
-  makeCommandScriptHeader,
-  SCRIPT_EVAL,
-} from "@RpgTypes/rmmz";
+import { makeCommandScriptBody, makeCommandScriptHeader } from "@RpgTypes/rmmz";
 import type { TextCommandParameter } from "./extract/text/eventCommand/types";
 import { extractTextParamFromScript } from "./extractGroupText";
 

@@ -1,16 +1,16 @@
 import { describe, expect, test } from "vitest";
+import {
+  SHOW_CHOICES,
+  SHOW_MESSAGE_BODY,
+  CHANGE_NAME,
+  CHANGE_PROFILE,
+  CHANGE_NICKNAME,
+} from "@RpgTypes/libs/eventCommand";
 import type {
   Command_CommentBody,
   Command_CommentHeader,
   Command_ShowChoices,
   EventCommand,
-} from "@RpgTypes/rmmz";
-import {
-  CHANGE_NAME,
-  CHANGE_NICKNAME,
-  CHANGE_PROFILE,
-  SHOW_CHOICES,
-  SHOW_MESSAGE_BODY,
 } from "@RpgTypes/rmmz";
 import { normalizeEventCommands } from "./normalize";
 

@@ -1,5 +1,6 @@
 import type { MockedObject } from "vitest";
 import { describe, expect, test, vi } from "vitest";
+import { SHOW_ANIMATION } from "@RpgTypes/libs/eventCommand";
 import type {
   Command_ShowAnimation,
   Command_ShowBalloonIcon,
@@ -8,7 +9,6 @@ import {
   makeCommandShowAnimation,
   makeCommandShowBalloonIcon,
 } from "@RpgTypes/rmmz/eventCommand";
-import { SHOW_ANIMATION } from "@RpgTypes/rmmz/rpg";
 import type { Rmmz_InterpreterListener } from "@RpgTypes/rmmzRuntime/objects/core/temp/interpreterListener";
 import type { FakeMap } from "./fakes/types";
 import { Game_Interpreter } from "./rmmz_objects";

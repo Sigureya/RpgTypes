@@ -1,4 +1,4 @@
-import { CHANGE_MP, CHANGE_TP, CHANGE_HP } from "@RpgTypes/rmmz/rpg";
+import { CHANGE_HP, CHANGE_TP, CHANGE_MP } from "@RpgTypes/libs/eventCommand";
 import { OPERATION_MINUS, OPERATION_PLUS } from "./constants";
 import type {
   Command_ChangeActorHP,
@@ -19,7 +19,7 @@ type Operation = typeof OPERATION_PLUS | typeof OPERATION_MINUS;
 
 export const makeCommandGainActorHP = (
   params: ParamObject_ChangeActorHP,
-  indent: number = 0
+  indent: number = 0,
 ): Command_ChangeActorHP => {
   return {
     code: CHANGE_HP,
@@ -30,7 +30,7 @@ export const makeCommandGainActorHP = (
 
 export const makeCommandLoseActorHP = (
   params: ParamObject_ChangeActorHP,
-  indent: number = 0
+  indent: number = 0,
 ): Command_ChangeActorHP => {
   return {
     code: CHANGE_HP,
@@ -41,7 +41,7 @@ export const makeCommandLoseActorHP = (
 
 export const makeCommandGainActorTP = (
   params: ParamObject_ChangeActorValue,
-  indent: number = 0
+  indent: number = 0,
 ): Command_ChangeActorTP => {
   return {
     code: CHANGE_TP,
@@ -52,7 +52,7 @@ export const makeCommandGainActorTP = (
 
 export const makeCommandLoseActorTP = (
   params: ParamObject_ChangeActorValue,
-  indent: number = 0
+  indent: number = 0,
 ): Command_ChangeActorTP => {
   return {
     code: CHANGE_TP,
@@ -63,7 +63,7 @@ export const makeCommandLoseActorTP = (
 
 export const makeCommandGainActorMP = (
   params: ParamObject_ChangeActorValue,
-  indent: number = 0
+  indent: number = 0,
 ): Command_ChangeActorMP => {
   return {
     code: CHANGE_MP,
@@ -74,7 +74,7 @@ export const makeCommandGainActorMP = (
 
 export const makeCommandLoseActorMP = (
   params: ParamObject_ChangeActorValue,
-  indent: number = 0
+  indent: number = 0,
 ): Command_ChangeActorMP => {
   return {
     code: CHANGE_MP,
@@ -85,7 +85,7 @@ export const makeCommandLoseActorMP = (
 
 const changeValueSingleDirect = (
   operation: Operation,
-  params: ParamObject_ChangeActorValue
+  params: ParamObject_ChangeActorValue,
 ): ParamArray_ChangeActorValue => {
   return [
     params.targetType === "variable" ? OPERAND.variable : OPERAND.direct,
@@ -98,7 +98,7 @@ const changeValueSingleDirect = (
 
 const changeHpSingleDirect = (
   operation: Operation,
-  params: ParamObject_ChangeActorHP
+  params: ParamObject_ChangeActorHP,
 ): ParamArray_ChangeActorHP => {
   return [
     params.targetType === "variable" ? OPERAND.variable : OPERAND.direct,

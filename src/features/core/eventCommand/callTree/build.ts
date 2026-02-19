@@ -1,10 +1,10 @@
-import type { EventCommand } from "@RpgTypes/rmmz";
-import { COMMON_EVENT, type Data_CommonEvent } from "@RpgTypes/rmmz";
+import { COMMON_EVENT } from "@RpgTypes/libs/eventCommand";
+import type { Data_CommonEvent, EventCommand } from "@RpgTypes/rmmz";
 import { extractCalledCommonEventIds } from "./fromRoots";
 import type { CommonEventDependencies, CommonEventNode } from "./types";
 
 export const buildCommonEventDependencyMap = (
-  events: ReadonlyArray<Data_CommonEvent>
+  events: ReadonlyArray<Data_CommonEvent>,
 ): Map<number, CommonEventDependencies> => {
   const maped = events.map((ev): [number, CommonEventDependencies] => [
     ev.id,
@@ -19,7 +19,7 @@ export const buildCommonEventDependencyMap = (
 
 export const extractCalledCommonEventNodes = (
   list: ReadonlyArray<EventCommand>,
-  events: ReadonlyArray<Data_CommonEvent>
+  events: ReadonlyArray<Data_CommonEvent>,
 ): CommonEventNode[] => {
   return list.reduce((result: CommonEventNode[], cmd) => {
     if (cmd.code !== COMMON_EVENT) {
@@ -39,7 +39,7 @@ export const extractCalledCommonEventNodes = (
 
 const findCommonEventById = (
   id: number,
-  events: ReadonlyArray<Data_CommonEvent>
+  events: ReadonlyArray<Data_CommonEvent>,
 ): Data_CommonEvent | undefined => {
   return events.find((ev) => ev.id === id);
 };

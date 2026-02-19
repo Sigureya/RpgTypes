@@ -1,4 +1,4 @@
-import { CONTROL_VARIABLES } from "@RpgTypes/rmmz/rpg";
+import { CONTROL_VARIABLES } from "@RpgTypes/libs/eventCommand";
 import { OPERAND_GAMEDATA, TYPE_WEAPON } from "./constants";
 import type {
   ParamObject_WritingTarget,
@@ -10,7 +10,7 @@ import type {
 export const toArrayOperandWeaponData = (
   target: ParamObject_WritingTarget,
   value: ParamObject_Operand_WeaponData,
-  operation: number = 0
+  operation: number = 0,
 ): Operand_WeaponData => [
   target.startId,
   target.endId ?? target.startId,
@@ -22,7 +22,7 @@ export const toArrayOperandWeaponData = (
 
 export const makeCommandVariableFromWeapon = (
   target: ParamObject_WritingTarget,
-  value: ParamObject_Operand_WeaponData
+  value: ParamObject_Operand_WeaponData,
 ): Command_ControlVariables<Operand_WeaponData> => {
   return {
     code: CONTROL_VARIABLES,

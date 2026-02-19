@@ -1,8 +1,11 @@
-import type { EventCommandLike } from "@RpgTypes/rmmz/eventCommand/frame";
-import type { INPUT_NUMBER } from "@RpgTypes/rmmz/rpg";
+import type {
+  EventCommandLike,
+  INPUT_NUMBER,
+} from "@RpgTypes/libs/eventCommand";
 
-export interface Command_InputNumber
-  extends EventCommandLike<typeof INPUT_NUMBER> {
+export interface Command_InputNumber extends EventCommandLike<
+  typeof INPUT_NUMBER
+> {
   parameters: ParamArray_InputNumber;
 }
 

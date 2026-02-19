@@ -1,4 +1,4 @@
-import type { EventCommandUnknown } from "@RpgTypes/rmmz";
+import type { EventCommandUnknown } from "@RpgTypes/libs/eventCommand";
 
 export interface CommandContainer<Command extends EventCommandUnknown> {
   list: ReadonlyArray<Command>;

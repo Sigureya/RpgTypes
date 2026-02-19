@@ -1,15 +1,15 @@
-import type { EventCommand } from "@RpgTypes/rmmz";
 import {
-  CHANGE_NAME,
-  CHANGE_NICKNAME,
-  CHANGE_PROFILE,
+  SHOW_MESSAGE,
+  SHOW_SCROLLING_TEXT,
   COMMENT_HEAD,
   SCRIPT_EVAL,
   SHOW_CHOICES,
   SHOW_CHOICES_ITEM,
-  SHOW_MESSAGE,
-  SHOW_SCROLLING_TEXT,
-} from "@RpgTypes/rmmz";
+  CHANGE_NAME,
+  CHANGE_PROFILE,
+  CHANGE_NICKNAME,
+} from "@RpgTypes/libs/eventCommand";
+import type { EventCommand } from "@RpgTypes/rmmz";
 import {
   createMessageGroup,
   createScrollTextGroup,
@@ -21,7 +21,7 @@ import type { TextCommandMapper } from "./textCommandMapper";
 export const handlerDispatch = <T>(
   array: ReadonlyArray<EventCommand>,
   index: number,
-  table: TextCommandMapper<T>
+  table: TextCommandMapper<T>,
 ): T => {
   const command = array[index];
   switch (command.code) {
@@ -52,9 +52,9 @@ export const handlerDispatch = <T>(
 
 export const mapTextCommand = <T>(
   list: ReadonlyArray<EventCommand>,
-  table: TextCommandMapper<T>
+  table: TextCommandMapper<T>,
 ): T[] => {
   return list.map<T>((command, index, array) =>
-    handlerDispatch(array, index, table)
+    handlerDispatch(array, index, table),
   );
 };

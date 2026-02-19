@@ -3,7 +3,7 @@ import {
   CHANGE_NAME,
   CHANGE_NICKNAME,
   CHANGE_PROFILE,
-} from "@RpgTypes/rmmz/rpg";
+} from "@RpgTypes/libs/eventCommand";
 import {
   makeCommandChangeActorName,
   makeCommandChangeActorNickName,

@@ -1,15 +1,16 @@
 import { describe, test, expect } from "vitest";
+import { SHOW_SCROLLING_TEXT_BODY } from "@RpgTypes/libs/eventCommand";
 import type {
   Command_ScrollTextBody,
   Command_ScrollTextHeader,
   EventCommand,
 } from "@RpgTypes/rmmz";
-import { SHOW_SCROLLING_TEXT_BODY } from "@RpgTypes/rmmz";
 import {
   makeCommandScrollingTextHeader,
   makeCommandScrollingTextBody,
 } from "@RpgTypes/rmmz/eventCommand/commands/message/scrollText/scrollText";
-import { SimpleEventCommandGroup, type EventCommandGroupBase } from "./core";
+import type { EventCommandGroupBase } from "./core";
+import { SimpleEventCommandGroup } from "./core";
 import { createScrollTextGroup, extractScrollTextGroup } from "./scrollText";
 
 const mockCommands: EventCommand[] = [

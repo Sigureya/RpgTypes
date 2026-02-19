@@ -1,6 +1,7 @@
 import type { MockedObject } from "vitest";
 import { describe, expect, test, vi } from "vitest";
 import type { AudioFileParams, MemberFunctions } from "@RpgTypes/libs";
+import { SET_VEHICLE_LOCATION } from "@RpgTypes/libs/eventCommand";
 import type { EventCommand } from "@RpgTypes/rmmz/eventCommand";
 import {
   makeCommandChangeVehicleImage,
@@ -11,7 +12,6 @@ import {
   VEHICLE_BOAT,
   VEHICLE_SHIP,
 } from "@RpgTypes/rmmz/eventCommand/commands/vehicle";
-import { SET_VEHICLE_LOCATION } from "@RpgTypes/rmmz/rpg";
 import type {
   Rmmz_Map,
   Rmmz_Variables,

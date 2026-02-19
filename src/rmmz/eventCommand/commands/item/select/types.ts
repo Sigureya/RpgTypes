@@ -1,8 +1,11 @@
-import type { EventCommandLike } from "@RpgTypes/rmmz/eventCommand/frame";
-import type { SELECT_ITEM } from "@RpgTypes/rmmz/rpg";
+import type {
+  EventCommandLike,
+  SELECT_ITEM,
+} from "@RpgTypes/libs/eventCommand";
 
-export interface Command_SelectItem
-  extends EventCommandLike<typeof SELECT_ITEM> {
+export interface Command_SelectItem extends EventCommandLike<
+  typeof SELECT_ITEM
+> {
   parameters: ParamArray_SelectItem;
 }
 

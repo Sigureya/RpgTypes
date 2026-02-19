@@ -1,6 +1,11 @@
-import type { EventCommandLike } from "../../frame";
+import type {
+  EventCommandLike,
+  SHOW_ANIMATION,
+} from "@RpgTypes/libs/eventCommand";
 
-export interface Command_ShowAnimation extends EventCommandLike<212> {
+export interface Command_ShowAnimation extends EventCommandLike<
+  typeof SHOW_ANIMATION
+> {
   parameters: ParamArray_ShowAnimation;
 }
 

@@ -1,5 +1,8 @@
-import type { EventCommandLike } from "@RpgTypes/rmmz/eventCommand/frame";
-import type { CHANGE_MAP_NAME_DISPLAY } from "@RpgTypes/rmmz/rpg";
+import type {
+  EventCommandLike,
+  CHANGE_MAP_NAME_DISPLAY,
+} from "@RpgTypes/libs/eventCommand";
+
 export type Command_ChangeMapNameDisplay =
   | Command_ShowMapNameDisplay
   | Command_HideMapNameDisplay;

@@ -1,6 +1,8 @@
 import type { ColorRGBA } from "@RpgTypes/libs";
-import type { EventCommandLike } from "@RpgTypes/rmmz/eventCommand/frame";
-import type { FLASH_SCREEN } from "@RpgTypes/rmmz/rpg";
+import type {
+  EventCommandLike,
+  FLASH_SCREEN,
+} from "@RpgTypes/libs/eventCommand";
 
 export interface Command_FlashScreen extends EventCommandLike<
   typeof FLASH_SCREEN

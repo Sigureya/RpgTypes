@@ -1,11 +1,13 @@
 import { describe, test, expect } from "vitest";
-import type { EventCommand } from "@RpgTypes/rmmz";
 import {
-  COMMENT_BODY,
+  SHOW_MESSAGE_BODY,
   COMMENT_HEAD,
+  COMMENT_BODY,
   SCRIPT_EVAL,
   SCRIPT_EVAL_BODY,
-  SHOW_MESSAGE_BODY,
+} from "@RpgTypes/libs/eventCommand";
+import type { EventCommand } from "@RpgTypes/rmmz";
+import {
   makeCommandShowMessage,
   makeCommandShowMessageBody,
 } from "@RpgTypes/rmmz";

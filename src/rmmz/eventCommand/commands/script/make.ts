@@ -1,9 +1,9 @@
-import { SCRIPT_EVAL, SCRIPT_EVAL_BODY } from "@RpgTypes/rmmz";
+import { SCRIPT_EVAL, SCRIPT_EVAL_BODY } from "@RpgTypes/libs/eventCommand";
 import type { Command_ScriptBody, Command_ScriptHeader } from "./types";
 
 export const makeCommandScriptHeader = (
   script: string,
-  indent: number = 0
+  indent: number = 0,
 ): Command_ScriptHeader => {
   return {
     code: SCRIPT_EVAL,
@@ -14,7 +14,7 @@ export const makeCommandScriptHeader = (
 
 export const makeCommandScriptBody = (
   script: string,
-  indent: number = 0
+  indent: number = 0,
 ): Command_ScriptBody => {
   return {
     code: SCRIPT_EVAL_BODY,
@@ -24,11 +24,11 @@ export const makeCommandScriptBody = (
 };
 export const makeCommandScriptArray = (
   lines: ReadonlyArray<string>,
-  indent: number = 0
+  indent: number = 0,
 ) => {
   return lines.map((line, index) =>
     index === 0
       ? makeCommandScriptHeader(line, indent)
-      : makeCommandScriptBody(line, indent)
+      : makeCommandScriptBody(line, indent),
   ) as [Command_ScriptHeader, ...Command_ScriptBody[]];
 };

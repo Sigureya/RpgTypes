@@ -1,5 +1,7 @@
-import type { EventCommandLike } from "@RpgTypes/rmmz/eventCommand/frame";
-import type { CHANGE_VEHICLE_IMAGE } from "@RpgTypes/rmmz/rpg";
+import type {
+  EventCommandLike,
+  CHANGE_VEHICLE_IMAGE,
+} from "@RpgTypes/libs/eventCommand";
 import type { VehicleType } from "./constants";
 
 export interface Command_ChangeVehicleImage extends EventCommandLike<

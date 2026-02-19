@@ -1,11 +1,14 @@
-import type { EventCommandLike } from "@RpgTypes/rmmz/eventCommand";
+import type {
+  EventCommandLike,
+  SHOW_MESSAGE,
+} from "@RpgTypes/libs/eventCommand";
 
 export type ParamArray_ShowMessage = [
   facename: string,
   faceIndex: number,
   background: number,
   positionType: number,
-  speakerName: string | undefined
+  speakerName: string | undefined,
 ];
 
 export interface ParamObject_ShowMessage {
@@ -16,7 +19,9 @@ export interface ParamObject_ShowMessage {
   speakerName: string;
 }
 
-export interface Command_ShowMessageHeader extends EventCommandLike<101> {
+export interface Command_ShowMessageHeader extends EventCommandLike<
+  typeof SHOW_MESSAGE
+> {
   parameters: ParamArray_ShowMessage;
 }
 
@@ -28,11 +33,13 @@ export interface Command2_ShowMessage_MV extends EventCommandLike<101> {
     facename: string,
     faceIndex: number,
     background: number,
-    positionType: number
+    positionType: number,
   ];
 }
 
-export interface Command_ShowMessageBody
-  extends EventCommandLike<401, [string]> {
+export interface Command_ShowMessageBody extends EventCommandLike<
+  401,
+  [string]
+> {
   parameters: [text: string];
 }

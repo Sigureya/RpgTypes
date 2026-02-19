@@ -1,4 +1,4 @@
-import { CONTROL_VARIABLES } from "@RpgTypes/rmmz/rpg";
+import { CONTROL_VARIABLES } from "@RpgTypes/libs/eventCommand";
 import type {
   ParamObject_WritingTarget,
   Command_ControlVariables,

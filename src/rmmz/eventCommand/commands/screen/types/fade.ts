@@ -1,5 +1,8 @@
-import type { EventCommandLike } from "@RpgTypes/rmmz/eventCommand/frame";
-import type { FADEIN_SCREEN, FADEOUT_SCREEN } from "@RpgTypes/rmmz/rpg";
+import type {
+  EventCommandLike,
+  FADEOUT_SCREEN,
+  FADEIN_SCREEN,
+} from "@RpgTypes/libs/eventCommand";
 
 export interface Command_FadeOutScreen extends EventCommandLike<
   typeof FADEOUT_SCREEN

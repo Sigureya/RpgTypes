@@ -1,6 +1,8 @@
+import type {
+  EventCommandLike,
+  CHANGE_ARMORS,
+} from "@RpgTypes/libs/eventCommand";
 import type { ValueOf } from "@RpgTypes/libs/templates/valueOf";
-import type { EventCommandLike } from "@RpgTypes/rmmz/eventCommand/frame";
-import type { CHANGE_ARMORS } from "@RpgTypes/rmmz/rpg";
 import type { Operation_PlusMinus } from "@RpgTypes/rmmz/utils";
 import type { OPERAND_DIRECT, OPERAND_VARIABLE } from "./constants";
 

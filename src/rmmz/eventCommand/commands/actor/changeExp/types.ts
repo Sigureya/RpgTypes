@@ -1,5 +1,4 @@
-import type { EventCommandLike } from "@RpgTypes/rmmz/eventCommand/frame";
-import type { CHANGE_EXP } from "@RpgTypes/rmmz/rpg";
+import type { CHANGE_EXP, EventCommandLike } from "@RpgTypes/libs/eventCommand";
 
 export interface Command_ChangeExp extends EventCommandLike<typeof CHANGE_EXP> {
   parameters: ParamArray_ChangeExp;

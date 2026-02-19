@@ -1,10 +1,10 @@
+import type { EventCommandLike } from "@RpgTypes/libs/eventCommand";
+import { COMMENT_HEAD, COMMENT_BODY } from "@RpgTypes/libs/eventCommand";
 import type {
+  EventCommand,
   Command_CommentHeader,
   Command_CommentBody,
-  EventCommand,
-  EventCommandLike,
 } from "@RpgTypes/rmmz";
-import { COMMENT_BODY, COMMENT_HEAD } from "@RpgTypes/rmmz";
 import type { EventCommandGroup_Comment } from "./core";
 import {
   SimpleEventCommandGroup,
@@ -14,7 +14,7 @@ import {
 
 export const extractCommentGroup = (
   list: ReadonlyArray<EventCommand>,
-  index: number
+  index: number,
 ): {
   header: Command_CommentHeader;
   bodies: Command_CommentBody[];
@@ -23,13 +23,13 @@ export const extractCommentGroup = (
     list,
     index,
     (a) => a.code === COMMENT_HEAD,
-    (b) => b.code === COMMENT_BODY
+    (b) => b.code === COMMENT_BODY,
   );
 };
 
 export const createCommentGroup = (
   list: ReadonlyArray<EventCommand>,
-  index: number
+  index: number,
 ): EventCommandGroup_Comment => {
   const { bodies, header } = extractCommentGroup(list, index);
   if (isChoiceHelp(header)) {
@@ -51,7 +51,7 @@ export interface CommandEX_ChoiceHelp extends EventCommandLike<108> {
 }
 
 export const isChoiceHelp = (
-  command: Command_CommentHeader
+  command: Command_CommentHeader,
 ): command is Command_CommentHeader & CommandEX_ChoiceHelp => {
   return command.parameters[0] === CHOICE_HELP_TEXT;
 };

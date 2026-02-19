@@ -1,6 +1,14 @@
 import type { MockedObject } from "vitest";
 import { describe, expect, test, vi } from "vitest";
 import type { MemberFunctions } from "@RpgTypes/libs";
+import {
+  CHANGE_CLASS,
+  CHANGE_NAME,
+  CHANGE_NICKNAME,
+  CHANGE_PROFILE,
+  CHANGE_EQUIP,
+  CHANGE_ACTOR_IMAGES,
+} from "@RpgTypes/libs/eventCommand";
 import type { EventCommand } from "@RpgTypes/rmmz/eventCommand";
 import {
   makeCommandChangeActorImages,
@@ -10,14 +18,6 @@ import {
   makeCommandChangeClass,
   makeCommandChangeEquip,
 } from "@RpgTypes/rmmz/eventCommand";
-import {
-  CHANGE_ACTOR_IMAGES,
-  CHANGE_CLASS,
-  CHANGE_EQUIP,
-  CHANGE_NAME,
-  CHANGE_NICKNAME,
-  CHANGE_PROFILE,
-} from "@RpgTypes/rmmz/rpg";
 import type {
   Rmmz_Actor,
   Rmmz_Actors,

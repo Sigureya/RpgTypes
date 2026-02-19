@@ -1,3 +1,15 @@
+import {
+  PLUGIN_COMMAND_MZ,
+  SHOW_MESSAGE_BODY,
+  SHOW_SCROLLING_TEXT_BODY,
+  COMMENT_BODY,
+  SHOW_CHOICES,
+  CHANGE_NAME,
+  CHANGE_NICKNAME,
+  CHANGE_PROFILE,
+  SCRIPT_EVAL_BODY,
+  SCRIPT_EVAL,
+} from "@RpgTypes/libs/eventCommand";
 import type {
   Command_ShowChoices,
   Command_PluginCommandMZ,
@@ -9,18 +21,6 @@ import type {
   Command_ScriptHeader,
   Command_ScrollTextBody,
 } from "@RpgTypes/rmmz";
-import {
-  CHANGE_NAME,
-  CHANGE_NICKNAME,
-  CHANGE_PROFILE,
-  COMMENT_BODY,
-  PLUGIN_COMMAND_MZ,
-  SCRIPT_EVAL,
-  SCRIPT_EVAL_BODY,
-  SHOW_CHOICES,
-  SHOW_MESSAGE_BODY,
-  SHOW_SCROLLING_TEXT_BODY,
-} from "@RpgTypes/rmmz";
 import type {
   EventCommandGroup_Message,
   EventCommandGroup_Script,
@@ -30,7 +30,7 @@ import type {
 import { getGroupHandlingFunc } from "./commandGroup/mapping";
 
 export const normalizeEventCommands = (
-  commands: ReadonlyArray<EventCommand>
+  commands: ReadonlyArray<EventCommand>,
 ): NormalizedEventCommand[] => {
   const mapper: GroopMapper<NormalizedEventCommand[] | NormalizedEventCommand> =
     {
@@ -54,7 +54,7 @@ const forCommand = (
   command: Exclude<EventCommand, Command_PluginCommandMZ>,
   index: number,
   list: ReadonlyArray<EventCommand>,
-  groupMapper: GroopMapper<NormalizedEventCommand[] | NormalizedEventCommand>
+  groupMapper: GroopMapper<NormalizedEventCommand[] | NormalizedEventCommand>,
 ): NormalizedEventCommand[] | NormalizedEventCommand | undefined => {
   if (
     command.code === SHOW_MESSAGE_BODY ||
@@ -87,7 +87,7 @@ const forCommand = (
 };
 
 const normalizeChoiceCommand = (
-  command: Readonly<Command_ShowChoices>
+  command: Readonly<Command_ShowChoices>,
 ): Command_ShowChoices => {
   return {
     code: SHOW_CHOICES,
@@ -105,7 +105,7 @@ const normalizeChoiceCommand = (
 const normalizePluginCommand = (
   command: ExtractCommandByCode<
     typeof CHANGE_NICKNAME | typeof CHANGE_PROFILE | typeof CHANGE_NAME
-  >
+  >,
 ): ExtractCommandByCode<
   typeof CHANGE_NICKNAME | typeof CHANGE_PROFILE | typeof CHANGE_NAME
 > => {
@@ -117,7 +117,7 @@ const normalizePluginCommand = (
 };
 
 const normalizeScript = (
-  script: EventCommandGroup_Script
+  script: EventCommandGroup_Script,
 ): Command_ScriptHeader => {
   return {
     code: SCRIPT_EVAL,
@@ -127,7 +127,7 @@ const normalizeScript = (
 };
 
 const normalizeMessage = (
-  g: EventCommandGroup_Message
+  g: EventCommandGroup_Message,
 ): NormalizedEventCommand[] => {
   const nexText = g.getBodyText().trimEnd();
   const newBody: Command_ShowMessageBody = {
@@ -139,7 +139,7 @@ const normalizeMessage = (
 };
 
 const normalizeScrollText = (
-  g: EventCommandGroup_ScrollingText
+  g: EventCommandGroup_ScrollingText,
 ): NormalizedEventCommand[] => {
   const nexText = g.getBodyText().trimEnd();
   const newBody: Command_ScrollTextBody = {
@@ -151,7 +151,7 @@ const normalizeScrollText = (
 };
 
 const messageHeader = (
-  commahd: Command_ShowMessageHeader
+  commahd: Command_ShowMessageHeader,
 ): Command_ShowMessageHeader => {
   const speaker = commahd.parameters[4] ? commahd.parameters[4].trimEnd() : "";
   return {

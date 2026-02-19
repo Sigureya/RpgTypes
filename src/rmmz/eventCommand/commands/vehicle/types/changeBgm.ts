@@ -1,6 +1,8 @@
 import type { AudioFileParams } from "@RpgTypes/libs";
-import type { EventCommandLike } from "@RpgTypes/rmmz/eventCommand/frame";
-import type { CHANGE_VEHICLE_BGM } from "@RpgTypes/rmmz/rpg";
+import type {
+  EventCommandLike,
+  CHANGE_VEHICLE_BGM,
+} from "@RpgTypes/libs/eventCommand";
 import type { VehicleType } from "./constants";
 
 export interface Command_ChangeVehicleBGM extends EventCommandLike<

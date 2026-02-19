@@ -1,9 +1,9 @@
 import type {
-  CHANGE_ARMORS,
   CHANGE_ITEMS,
   CHANGE_WEAPONS,
+  CHANGE_ARMORS,
   CONDITIONAL_BRANCH,
-} from "@RpgTypes/rmmz";
+} from "@RpgTypes/libs/eventCommand";
 
 export type ItemCommandCode =
   | typeof CHANGE_ITEMS

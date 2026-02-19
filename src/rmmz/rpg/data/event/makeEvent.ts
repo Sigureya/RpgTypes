@@ -1,4 +1,4 @@
-import type { EventCommandUnknown } from "@RpgTypes/rmmz/eventCommand";
+import type { EventCommandUnknown } from "@RpgTypes/libs/eventCommand";
 import type { Data_CommonEventUnknown } from "./commonEvent";
 import type {
   BattleEventPage,

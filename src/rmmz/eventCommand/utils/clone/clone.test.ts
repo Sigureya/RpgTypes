@@ -1,8 +1,6 @@
 import { describe, test, expect } from "vitest";
-import type {
-  Command_CommonEvent,
-  EventCommandLike,
-} from "@RpgTypes/rmmz/eventCommand";
+import type { EventCommandLike } from "@RpgTypes/libs/eventCommand";
+import type { Command_CommonEvent } from "@RpgTypes/rmmz/eventCommand";
 import { makeCommandCommonEvent } from "@RpgTypes/rmmz/eventCommand";
 import {
   cloneEventCommand,
@@ -12,7 +10,7 @@ import {
 
 const testCloneEventCommand = <P extends Array<number | boolean | string>>(
   command: EventCommandLike<number, P>,
-  expected: EventCommandLike<number, P>
+  expected: EventCommandLike<number, P>,
 ) => {
   test("should be cloneable (isCloneableCommand returns true)", () => {
     expect(isCloneableCommand(command)).toBe(true);
@@ -57,7 +55,7 @@ describe("cloneEventCommand utility functions", () => {
       {
         eventId: 6,
       },
-      9
+      9,
     );
     testCloneEventCommand(command, {
       code: 117,

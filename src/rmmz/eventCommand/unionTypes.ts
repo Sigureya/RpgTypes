@@ -1,5 +1,5 @@
+import type { EventCommandLike } from "@RpgTypes/libs/eventCommand";
 import type { ExtractCommandByParam } from "./commands/extractType";
-import type { EventCommandLike } from "./frame";
 
 export type CommandUnion_TextBody = EventCommandLike<
   | 108 // comment

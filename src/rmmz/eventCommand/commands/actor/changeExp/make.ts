@@ -1,4 +1,4 @@
-import { CHANGE_EXP } from "@RpgTypes/rmmz/rpg";
+import { CHANGE_EXP } from "@RpgTypes/libs/eventCommand";
 import type {
   ParamObject_ChangeExp,
   Command_ChangeExp,

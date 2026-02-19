@@ -1,6 +1,11 @@
-import type { EventCommandLike } from "../../frame";
+import type {
+  EventCommandLike,
+  SHOW_BALLOON_ICON,
+} from "@RpgTypes/libs/eventCommand";
 
-export interface Command_ShowBalloonIcon extends EventCommandLike<213> {
+export interface Command_ShowBalloonIcon extends EventCommandLike<
+  typeof SHOW_BALLOON_ICON
+> {
   parameters: ParamArray_ShowBalloonIcon;
 }
 

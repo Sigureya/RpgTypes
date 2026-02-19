@@ -1,4 +1,4 @@
-import { COMMENT_BODY, COMMENT_HEAD } from "@RpgTypes/rmmz";
+import { COMMENT_HEAD, COMMENT_BODY } from "@RpgTypes/libs/eventCommand";
 import type {
   ParamArray_Comment,
   ParamObject_Comment,
@@ -11,14 +11,14 @@ export const makeCommentArray = (comment: string): ParamArray_Comment => {
 };
 
 export const convertCommentArrayToObject = (
-  paramArray: ParamArray_Comment
+  paramArray: ParamArray_Comment,
 ): ParamObject_Comment => ({
   comment: paramArray[0],
 });
 
 export const makeCommandCommentHeader = (
   comment: string,
-  indent: number = 0
+  indent: number = 0,
 ): Command_CommentHeader => ({
   code: COMMENT_HEAD,
   indent,
@@ -27,7 +27,7 @@ export const makeCommandCommentHeader = (
 
 export const makeCommandCommentBody = (
   comment: string,
-  indent: number = 0
+  indent: number = 0,
 ): Command_CommentBody => ({
   code: COMMENT_BODY,
   indent,
@@ -36,11 +36,11 @@ export const makeCommandCommentBody = (
 
 export const makeCommentCommandArray = (
   comments: ReadonlyArray<string>,
-  indent: number = 0
+  indent: number = 0,
 ) => {
   return comments.map((comment, index) =>
     index === 0
       ? makeCommandCommentHeader(comment, indent)
-      : makeCommandCommentBody(comment, indent)
+      : makeCommandCommentBody(comment, indent),
   ) as [Command_CommentHeader, ...Command_CommentBody[]];
 };

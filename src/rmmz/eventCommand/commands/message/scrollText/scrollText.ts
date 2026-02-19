@@ -1,4 +1,7 @@
-import { SHOW_SCROLLING_TEXT, SHOW_SCROLLING_TEXT_BODY } from "@RpgTypes/rmmz";
+import {
+  SHOW_SCROLLING_TEXT,
+  SHOW_SCROLLING_TEXT_BODY,
+} from "@RpgTypes/libs/eventCommand";
 import type {
   ParamArray_ScrollTextBody,
   ParamObject_ScrollTextBody,
@@ -11,13 +14,13 @@ import type {
 } from "./head/types";
 
 export const toArrayScrollingTextHeader = (
-  param: Partial<ParamObject_ScrollTextHeader> = {}
+  param: Partial<ParamObject_ScrollTextHeader> = {},
 ): ParamArray_ScrollTextHeader => {
   return [param?.speed ?? 4, param?.skip ?? false];
 };
 
 export const fromArrayScrollingTextHeader = (
-  array: ParamArray_ScrollTextHeader
+  array: ParamArray_ScrollTextHeader,
 ): ParamObject_ScrollTextHeader => {
   return {
     speed: array[0],
@@ -27,7 +30,7 @@ export const fromArrayScrollingTextHeader = (
 
 export const makeCommandScrollingTextHeader = (
   param: Partial<ParamObject_ScrollTextHeader> = {},
-  indent: number = 0
+  indent: number = 0,
 ): Command_ScrollTextHeader => {
   return {
     code: SHOW_SCROLLING_TEXT,
@@ -37,13 +40,13 @@ export const makeCommandScrollingTextHeader = (
 };
 
 export const toArrayScrollingTextBody = (
-  text: string = ""
+  text: string = "",
 ): ParamArray_ScrollTextBody => {
   return [text];
 };
 
 export const fromArrayScrollingTextBody = (
-  array: ParamArray_ScrollTextBody
+  array: ParamArray_ScrollTextBody,
 ): ParamObject_ScrollTextBody => {
   return {
     content: array[0],
@@ -51,7 +54,7 @@ export const fromArrayScrollingTextBody = (
 };
 export const makeCommandScrollingTextBody = (
   text: string = "",
-  indent: number = 0
+  indent: number = 0,
 ): Command_ScrollTextBody => {
   return {
     code: SHOW_SCROLLING_TEXT_BODY,

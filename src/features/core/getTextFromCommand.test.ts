@@ -1,15 +1,15 @@
 import { describe, test, expect } from "vitest";
-import type {
-  Command_ChangeActorProfile,
-  Command_ShowChoices,
-  Command_ChangeActorName,
-  Command_ChangeActorNickName,
-} from "@RpgTypes/rmmz";
 import {
   CHANGE_NAME,
   CHANGE_NICKNAME,
   CHANGE_PROFILE,
   SHOW_CHOICES,
+} from "@RpgTypes/libs/eventCommand";
+import type {
+  Command_ChangeActorProfile,
+  Command_ShowChoices,
+  Command_ChangeActorName,
+  Command_ChangeActorNickName,
 } from "@RpgTypes/rmmz";
 import type { CommandParameter } from "@RpgTypes/rmmz/eventCommand/pickCommandParam";
 import { extractTextFromEventCommands } from "./getTextFromCommand";

@@ -1,4 +1,4 @@
-import type { EventCommandUnknown } from "@RpgTypes/rmmz/eventCommand";
+import type { EventCommandUnknown } from "@RpgTypes/libs/eventCommand";
 import { makeEventPageCondition } from "./condition";
 import type { MapEvent_Image } from "./image/types";
 import type { MapEvent } from "./mapEvent";

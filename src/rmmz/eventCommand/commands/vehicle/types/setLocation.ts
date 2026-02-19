@@ -1,5 +1,5 @@
+import type { EventCommandLike } from "@RpgTypes/libs/eventCommand";
 import type { ValueOf } from "@RpgTypes/libs/templates/valueOf";
-import type { EventCommandLike } from "@RpgTypes/rmmz/eventCommand/frame";
 import type { Designation } from "@RpgTypes/rmmz/utils";
 import type { VehicleType } from "./constants";
 

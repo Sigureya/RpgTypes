@@ -1,3 +1,3 @@
-import type { EventCommandLike } from "@RpgTypes/rmmz/eventCommand/frame";
+import type { EventCommandLike } from "@RpgTypes/libs/eventCommand";
 
 export interface Command_GetOnOffVehicle extends EventCommandLike<206, []> {}

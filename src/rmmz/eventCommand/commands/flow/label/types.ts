@@ -1,9 +1,13 @@
-import type { EventCommandLike } from "@RpgTypes/rmmz/eventCommand/frame";
+import type {
+  EventCommandLike,
+  LABEL,
+  LABEL_JUMP,
+} from "@RpgTypes/libs/eventCommand";
 
-export interface Command_Label extends EventCommandLike<118> {
+export interface Command_Label extends EventCommandLike<typeof LABEL> {
   parameters: [label: string];
 }
-export interface Command_LabelJump extends EventCommandLike<119> {
+export interface Command_LabelJump extends EventCommandLike<typeof LABEL_JUMP> {
   parameters: [label: string];
 }
 

@@ -1,13 +1,17 @@
-import type { EventCommandLike } from "@RpgTypes/rmmz/eventCommand/frame";
-import type { ENEMY_RECOVER_ALL } from "@RpgTypes/rmmz/rpg";
+import type {
+  EventCommandLike,
+  ENEMY_RECOVER_ALL,
+} from "@RpgTypes/libs/eventCommand";
 
-export interface Command_EnemyRecoverAll
-  extends EventCommandLike<typeof ENEMY_RECOVER_ALL> {
+export interface Command_EnemyRecoverAll extends EventCommandLike<
+  typeof ENEMY_RECOVER_ALL
+> {
   parameters: ParamArray_EnemyRecoverAll;
 }
 
-export interface Command_EnemyRecoverAllEach
-  extends EventCommandLike<typeof ENEMY_RECOVER_ALL> {
+export interface Command_EnemyRecoverAllEach extends EventCommandLike<
+  typeof ENEMY_RECOVER_ALL
+> {
   parameters: [0];
 }
 

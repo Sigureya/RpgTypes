@@ -1,4 +1,4 @@
-import type { EventCommandUnknown } from "@RpgTypes/rmmz/eventCommand";
+import type { EventCommandUnknown } from "@RpgTypes/libs/eventCommand";
 import type { MapEvent, MapEventPage } from "./event";
 
 export const repleaceMapEventCommands = <

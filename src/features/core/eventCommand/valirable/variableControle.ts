@@ -1,13 +1,14 @@
+import { CONTROL_VARIABLES } from "@RpgTypes/libs/eventCommand";
 import type {
   Command_ControlVariables,
   Operand_Variable,
 } from "@RpgTypes/rmmz";
-import { CONTROL_VARIABLES, isCommandOperandVariables } from "@RpgTypes/rmmz";
+import { isCommandOperandVariables } from "@RpgTypes/rmmz";
 import type { VariableParam, VVV } from "./types";
 
 const rangeEx = <T>(
   command: Command_ControlVariables,
-  fn: (variableId: number) => T
+  fn: (variableId: number) => T,
 ): T[] => {
   const [startId, endId] = [command.parameters[0], command.parameters[1]];
   if (startId > endId) {
@@ -17,7 +18,7 @@ const rangeEx = <T>(
 };
 
 export const extractVariableFromControlVariables = (
-  command: Command_ControlVariables
+  command: Command_ControlVariables,
 ): VVV => {
   return isCommandOperandVariables(command)
     ? fromVariable(command)
@@ -33,12 +34,12 @@ const writeTargets = (command: Command_ControlVariables): VariableParam[] => {
     (id): VariableParam => ({
       code: CONTROL_VARIABLES,
       variableId: id,
-    })
+    }),
   );
 };
 
 const fromVariable = (
-  command: Command_ControlVariables<Operand_Variable>
+  command: Command_ControlVariables<Operand_Variable>,
 ): VVV => {
   return {
     write: writeTargets(command),
