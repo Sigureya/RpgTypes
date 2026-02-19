@@ -1,5 +1,7 @@
-import type { EventCommandLike } from "@RpgTypes/rmmz/eventCommand/frame";
-import type { RECOVER_ALL } from "@RpgTypes/rmmz/rpg";
+import type {
+  EventCommandLike,
+  RECOVER_ALL,
+} from "@RpgTypes/libs/eventCommand";
 
 export interface Command_RecoverAll extends EventCommandLike<
   typeof RECOVER_ALL

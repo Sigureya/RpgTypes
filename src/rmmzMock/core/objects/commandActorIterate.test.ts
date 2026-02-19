@@ -1,6 +1,7 @@
 import type { MockedObject } from "vitest";
 import { describe, expect, test, vi } from "vitest";
 import type { MemberFunctions } from "@RpgTypes/libs";
+import { CHANGE_ACTOR_STATE } from "@RpgTypes/libs/eventCommand";
 import type { EventCommand } from "@RpgTypes/rmmz/eventCommand";
 import {
   makeCommandAddActorStateEach,
@@ -13,7 +14,6 @@ import {
   makeCommandRemoveActorStateVariable,
   makeCommandTargetActorRecoverAll,
 } from "@RpgTypes/rmmz/eventCommand";
-import { CHANGE_ACTOR_STATE } from "@RpgTypes/rmmz/rpg";
 import type {
   Rmmz_Actor,
   Rmmz_Party,

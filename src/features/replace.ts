@@ -1,22 +1,19 @@
+import { PLUGIN_COMMAND_MZ, SCRIPT_EVAL } from "@RpgTypes/libs/eventCommand";
 import type {
-  Data_Map,
-  EventCommand,
-  NormalizedEventCommand,
+  BattleEventPage,
   Command_PluginCommandMZ,
   Command_ScriptHeader,
-  Data_TroopUnknonw,
-  BattleEventPage,
   Data_CommonEventUnknown,
-  NoteReplaceHandlers,
-  TextReplaceHandlers,
+  Data_Map,
+  Data_TroopUnknonw,
+  EventCommand,
   MapEvent,
   MapEventPage,
+  NormalizedEventCommand,
+  NoteReplaceHandlers,
+  TextReplaceHandlers,
 } from "@RpgTypes/rmmz";
-import {
-  PLUGIN_COMMAND_MZ,
-  replaceNoteWithHandlers,
-  SCRIPT_EVAL,
-} from "@RpgTypes/rmmz";
+import { replaceNoteWithHandlers } from "@RpgTypes/rmmz";
 import { normalizeEventCommands } from "./core/eventCommand/normalize";
 import { replaceBasicEventCommandTexts } from "./core/replace/text/eventCommand";
 import { replaceTextByHandlers } from "./core/replace/text/utils";

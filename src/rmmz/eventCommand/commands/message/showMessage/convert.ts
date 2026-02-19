@@ -1,4 +1,4 @@
-import { SHOW_MESSAGE, SHOW_MESSAGE_BODY } from "@RpgTypes/rmmz/rpg";
+import { SHOW_MESSAGE, SHOW_MESSAGE_BODY } from "@RpgTypes/libs/eventCommand";
 import type {
   Command_ShowMessageBody,
   Command_ShowMessageHeader,
@@ -8,7 +8,7 @@ import type {
 
 export const makeCommandShowMessage = (
   param: Partial<ParamObject_ShowMessage> | undefined,
-  indent: number = 0
+  indent: number = 0,
 ): Command_ShowMessageHeader => ({
   code: SHOW_MESSAGE,
   indent,
@@ -22,7 +22,7 @@ export const makeCommandShowMessage = (
 });
 
 export const fromArrayShowMessageHeader = (
-  array: ParamArray_ShowMessage
+  array: ParamArray_ShowMessage,
 ): ParamObject_ShowMessage => {
   return {
     facename: array[0],
@@ -34,7 +34,7 @@ export const fromArrayShowMessageHeader = (
 };
 
 export const toArrayShowMessageHeader = (
-  object: ParamObject_ShowMessage
+  object: ParamObject_ShowMessage,
 ): ParamArray_ShowMessage => {
   return [
     object.facename,
@@ -47,7 +47,7 @@ export const toArrayShowMessageHeader = (
 
 export const makeCommandShowMessageBody = (
   text: string,
-  indent: number = 0
+  indent: number = 0,
 ): Command_ShowMessageBody => ({
   code: SHOW_MESSAGE_BODY,
   indent,

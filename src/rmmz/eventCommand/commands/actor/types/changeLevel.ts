@@ -1,4 +1,4 @@
-import type { EventCommandLike } from "@RpgTypes/rmmz/eventCommand/frame";
+import type { EventCommandLike } from "@RpgTypes/libs/eventCommand";
 
 export interface Command_ChangeActorLevel extends EventCommandLike<316> {
   parameters: ParamArray_ChangeActorLevel;

@@ -1,9 +1,9 @@
 import {
-  COMMENT_HEAD,
-  SCRIPT_EVAL,
   SHOW_MESSAGE_BODY,
+  SCRIPT_EVAL,
   SHOW_SCROLLING_TEXT_BODY,
-} from "@RpgTypes/rmmz";
+  COMMENT_HEAD,
+} from "@RpgTypes/libs/eventCommand";
 import type {
   EventCommandGroup_Comment,
   EventCommandGroup_Message,
@@ -14,7 +14,7 @@ import type { TextCommandParameter } from "./extract/text/eventCommand";
 import { pickSpeakerName } from "./extract/text/eventCommand/speaker";
 
 export const extractTextParamFromMessage = (
-  messageCommand: EventCommandGroup_Message
+  messageCommand: EventCommandGroup_Message,
 ): Required<TextCommandParameter> => {
   return {
     code: SHOW_MESSAGE_BODY,
@@ -25,7 +25,7 @@ export const extractTextParamFromMessage = (
 };
 
 export const extractTextParamFromScript = (
-  group: EventCommandGroup_Script
+  group: EventCommandGroup_Script,
 ): TextCommandParameter => {
   return {
     code: SCRIPT_EVAL,
@@ -35,7 +35,7 @@ export const extractTextParamFromScript = (
 };
 
 export const extractTextParamFromShowScrollingText = (
-  group: EventCommandGroup_ScrollingText
+  group: EventCommandGroup_ScrollingText,
 ): TextCommandParameter => {
   return {
     code: SHOW_SCROLLING_TEXT_BODY,
@@ -45,7 +45,7 @@ export const extractTextParamFromShowScrollingText = (
 };
 
 export const extractTextParamFromComment = (
-  group: EventCommandGroup_Comment
+  group: EventCommandGroup_Comment,
 ): TextCommandParameter => {
   return {
     code: COMMENT_HEAD,

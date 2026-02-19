@@ -1,5 +1,4 @@
-import type { PLAY_MOVIE } from "@RpgTypes/rmmz/rpg";
-import type { EventCommandLike } from "../../frame";
+import type { EventCommandLike, PLAY_MOVIE } from "@RpgTypes/libs/eventCommand";
 
 export interface Command_PlayMovie extends EventCommandLike<typeof PLAY_MOVIE> {
   parameters: ParamArray_PlayMovie;

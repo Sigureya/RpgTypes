@@ -1,5 +1,9 @@
 import { test, expect, describe } from "vitest";
-import { CHANGE_ARMORS, CHANGE_ITEMS, CHANGE_WEAPONS } from "@RpgTypes/rmmz";
+import {
+  CHANGE_ARMORS,
+  CHANGE_ITEMS,
+  CHANGE_WEAPONS,
+} from "@RpgTypes/libs/eventCommand";
 import type {
   Command_ChangeArmors,
   Command_ChangeItems,
@@ -119,7 +123,7 @@ describe("extractItemChangeData", () => {
         const result = extractItemChangeData(
           command,
           TERMS,
-          (code) => commandNameTable[code]
+          (code) => commandNameTable[code],
         );
         expect(result).toEqual(expected);
       });
@@ -127,7 +131,7 @@ describe("extractItemChangeData", () => {
         const result = extractItemCommands(
           [command],
           TERMS,
-          (code) => commandNameTable[code]
+          (code) => commandNameTable[code],
         );
         expect(result).toEqual([expected]);
       });

@@ -1,5 +1,5 @@
+import * as Code from "@RpgTypes/libs/eventCommand/eventCommandCodes";
 import type { EventCommand } from "@RpgTypes/rmmz";
-import * as Code from "@RpgTypes/rmmz";
 import {
   createMessageGroup,
   createScrollTextGroup,
@@ -14,7 +14,7 @@ export const callHandler = <T, Command extends EventCommand>(
   index: number,
   array: ReadonlyArray<EventCommand>,
   handler: CallBackFunc<Command, T> | undefined,
-  fallback: CallBackFunc<Code.EventCommand, T>
+  fallback: CallBackFunc<EventCommand, T>,
 ): T => {
   return handler
     ? handler(command, index, array)
@@ -23,14 +23,14 @@ export const callHandler = <T, Command extends EventCommand>(
 
 export const mappingCommandList = <T>(
   array: ReadonlyArray<EventCommand>,
-  table: PartialMappingObject<T>
+  table: PartialMappingObject<T>,
 ): T[] => {
   return array.map<T>((command, index) => mappingCommand(array, index, table));
 };
 
 export const flatMappingCommandList = <T>(
   array: ReadonlyArray<EventCommand>,
-  table: PartialMappingObject<T[]>
+  table: PartialMappingObject<T[]>,
 ): T[] => {
   return array.flatMap((command, index) => mappingCommand(array, index, table));
 };
@@ -38,7 +38,7 @@ export const flatMappingCommandList = <T>(
 export const mappingCommand = <T>(
   array: ReadonlyArray<EventCommand>,
   index: number,
-  table: PartialMappingObject<T>
+  table: PartialMappingObject<T>,
 ): T => {
   const command: EventCommand = array[index];
   switch (command.code) {
@@ -53,14 +53,14 @@ export const mappingCommand = <T>(
         index,
         array,
         table.showMessageBody,
-        table.other
+        table.other,
       );
     case Code.SHOW_SCROLLING_TEXT:
       return table.showScrollingText
         ? table.showScrollingText(
             createScrollTextGroup(array, index),
             index,
-            array
+            array,
           )
         : table.other(command, index, array);
     case Code.SHOW_SCROLLING_TEXT_BODY:
@@ -69,7 +69,7 @@ export const mappingCommand = <T>(
         index,
         array,
         table.showScrollingTextBody,
-        table.other
+        table.other,
       );
     case Code.SHOW_CHOICES:
       return callHandler(command, index, array, table.showChoices, table.other);
@@ -97,7 +97,7 @@ export const mappingCommand = <T>(
         index,
         array,
         table.conditionalBranch,
-        table.other
+        table.other,
       );
     case Code.CONTROL_SWITCHES:
       return callHandler(
@@ -105,7 +105,7 @@ export const mappingCommand = <T>(
         index,
         array,
         table.controlSwitch,
-        table.other
+        table.other,
       );
     case Code.CONTROL_VARIABLES:
       return callHandler(
@@ -113,7 +113,7 @@ export const mappingCommand = <T>(
         index,
         array,
         table.controlVariable,
-        table.other
+        table.other,
       );
     case Code.CONTROL_SELF_SWITCH:
       return callHandler(
@@ -121,7 +121,7 @@ export const mappingCommand = <T>(
         index,
         array,
         table.controlSelfSwitch,
-        table.other
+        table.other,
       );
     case Code.CONTROL_TIMER:
       return callHandler(
@@ -129,7 +129,7 @@ export const mappingCommand = <T>(
         index,
         array,
         table.controlTimer,
-        table.other
+        table.other,
       );
 
     case Code.COMMON_EVENT:
@@ -141,7 +141,7 @@ export const mappingCommand = <T>(
         index,
         array,
         table.changeSaveAccess,
-        table.other
+        table.other,
       );
     case Code.CHANGE_MENU_ACCESS:
       return callHandler(
@@ -149,7 +149,7 @@ export const mappingCommand = <T>(
         index,
         array,
         table.changeMenuAccess,
-        table.other
+        table.other,
       );
     case Code.CHANGE_ENCOUNTER:
       return callHandler(
@@ -157,7 +157,7 @@ export const mappingCommand = <T>(
         index,
         array,
         table.changeEncounter,
-        table.other
+        table.other,
       );
     case Code.CHANGE_FORMATION_ACCESS:
       return callHandler(
@@ -165,7 +165,7 @@ export const mappingCommand = <T>(
         index,
         array,
         table.changeFormationAccess,
-        table.other
+        table.other,
       );
 
     // キャラクター情報変更
@@ -177,7 +177,7 @@ export const mappingCommand = <T>(
         index,
         array,
         table.changeProfile,
-        table.other
+        table.other,
       );
     case Code.CHANGE_NICKNAME:
       return callHandler(
@@ -185,7 +185,7 @@ export const mappingCommand = <T>(
         index,
         array,
         table.changeNickname,
-        table.other
+        table.other,
       );
     case Code.CHANGE_ACTOR_IMAGES:
       return callHandler(
@@ -193,7 +193,7 @@ export const mappingCommand = <T>(
         index,
         array,
         table.changeActorImages,
-        table.other
+        table.other,
       );
     case Code.CHANGE_VEHICLE_IMAGE:
       return callHandler(
@@ -201,7 +201,7 @@ export const mappingCommand = <T>(
         index,
         array,
         table.changeVehicleImage,
-        table.other
+        table.other,
       );
 
     // BGM・音楽関連
@@ -211,7 +211,7 @@ export const mappingCommand = <T>(
         index,
         array,
         table.changeBattleBGM,
-        table.other
+        table.other,
       );
     case Code.CHANGE_VICTORY_ME:
       return callHandler(
@@ -219,7 +219,7 @@ export const mappingCommand = <T>(
         index,
         array,
         table.changeVictoryME,
-        table.other
+        table.other,
       );
     case Code.CHANGE_DEFEAT_ME:
       return callHandler(
@@ -227,7 +227,7 @@ export const mappingCommand = <T>(
         index,
         array,
         table.changeDefeatME,
-        table.other
+        table.other,
       );
 
     case Code.PLAY_BGM:
@@ -254,7 +254,7 @@ export const mappingCommand = <T>(
         index,
         array,
         table.changeWindowColor,
-        table.other
+        table.other,
       );
     case Code.TINT_SCREEN:
       return callHandler(command, index, array, table.tintScreen, table.other);
@@ -274,7 +274,7 @@ export const mappingCommand = <T>(
         index,
         array,
         table.rotatePicture,
-        table.other
+        table.other,
       );
     case Code.TINT_PICTURE:
       return callHandler(command, index, array, table.tintPicture, table.other);
@@ -284,7 +284,7 @@ export const mappingCommand = <T>(
         index,
         array,
         table.erasePicture,
-        table.other
+        table.other,
       );
 
     // ゲーム進行
@@ -294,7 +294,7 @@ export const mappingCommand = <T>(
         index,
         array,
         table.battleProcessing,
-        table.other
+        table.other,
       );
     case Code.WAIT:
       return callHandler(command, index, array, table.wait, table.other);
@@ -308,7 +308,7 @@ export const mappingCommand = <T>(
         index,
         array,
         table.changeParallax,
-        table.other
+        table.other,
       );
     case Code.CHANGE_BATTLE_BACKGROUND:
       return callHandler(
@@ -316,7 +316,7 @@ export const mappingCommand = <T>(
         index,
         array,
         table.changeBattleBackground,
-        table.other
+        table.other,
       );
 
     case Code.PLAY_MOVIE:
@@ -327,7 +327,7 @@ export const mappingCommand = <T>(
         index,
         array,
         table.changeTransparency,
-        table.other
+        table.other,
       );
     case Code.SET_WEATHER_EFFECT:
       return callHandler(
@@ -335,7 +335,7 @@ export const mappingCommand = <T>(
         index,
         array,
         table.setWeatherEffects,
-        table.other
+        table.other,
       );
 
     case Code.CHANGE_GOLD:
@@ -346,7 +346,7 @@ export const mappingCommand = <T>(
         index,
         array,
         table.showAnimation,
-        table.other
+        table.other,
       );
     case Code.TRANSFER_PLAYER:
       return callHandler(
@@ -354,7 +354,7 @@ export const mappingCommand = <T>(
         index,
         array,
         table.transferPlayer,
-        table.other
+        table.other,
       );
     case Code.SET_VEHICLE_LOCATION:
       return callHandler(
@@ -362,7 +362,7 @@ export const mappingCommand = <T>(
         index,
         array,
         table.setVehicleLocation,
-        table.other
+        table.other,
       );
     case Code.SET_EVENT_LOCATION:
       return callHandler(
@@ -370,7 +370,7 @@ export const mappingCommand = <T>(
         index,
         array,
         table.setEventLocation,
-        table.other
+        table.other,
       );
 
     default:

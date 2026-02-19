@@ -1,4 +1,4 @@
-import { CHANGE_ARMORS } from "@RpgTypes/rmmz/rpg";
+import { CHANGE_ARMORS } from "@RpgTypes/libs/eventCommand";
 import type {
   ParamObject_ChangeArmors,
   ParamObject_ChangeArmorsV,

@@ -1,8 +1,8 @@
+import type { EventCommandUnknown } from "@RpgTypes/libs/eventCommand";
 import type {
   BattleEventPage,
   Data_CommonEventUnknown,
   Data_TroopUnknonw,
-  EventCommandUnknown,
   MapEventContainer,
 } from "@RpgTypes/rmmz";
 import type { MapEventContext } from "./types";
@@ -32,7 +32,7 @@ const isValidEvent = <T>(event: T | null | undefined): event is T => {
 export const createEventContext = <T>(
   commands: T,
   eventId: number,
-  pageIndex: number
+  pageIndex: number,
 ): MapEventContext<T> => ({
   data: commands,
   eventId,
@@ -49,7 +49,7 @@ export const createEventContext = <T>(
 export const createCommandContext = <Command>(
   page: { list: ReadonlyArray<Command> },
   pageIndex: number,
-  event: { id: number }
+  event: { id: number },
 ) => {
   return page.list.map<MapEventContext<Command>>((command) => ({
     data: command,
@@ -66,17 +66,17 @@ export const createCommandContext = <Command>(
  */
 export const processEventPages = <
   Result,
-  PageContainer extends { readonly pages: ReadonlyArray<unknown> }
+  PageContainer extends { readonly pages: ReadonlyArray<unknown> },
 >(
   container: PageContainer,
   func: (
     page: PageContainer["pages"][number],
     pageIndex: number,
-    container: PageContainer
-  ) => Result
+    container: PageContainer,
+  ) => Result,
 ): Result[] => {
   return container.pages.map((page, pageIndex) =>
-    func(page, pageIndex, container)
+    func(page, pageIndex, container),
   );
 };
 
@@ -91,8 +91,10 @@ export const processMapEvents = <Result, Command, Event extends object>(
   fn: (
     page: NonNullable<(typeof map)["events"][number]>["pages"][number],
     pageIndex: number,
-    container: NonNullable<Event & { id: number; pages: { list: Command[] }[] }>
-  ) => Result
+    container: NonNullable<
+      Event & { id: number; pages: { list: Command[] }[] }
+    >,
+  ) => Result,
 ): Result[][] => {
   return map.events
     .filter(isValidEvent)
@@ -104,8 +106,8 @@ export const collectMapEvents = <Result, Command, Event extends { id: number }>(
   fn: (
     page: NonNullable<(typeof map)["events"][number]>["pages"][number],
     pageIndex: number,
-    container: NonNullable<(typeof map)["events"][number]>
-  ) => Result
+    container: NonNullable<(typeof map)["events"][number]>,
+  ) => Result,
 ): Result[] => {
   return map.events
     .filter(isValidEvent)
@@ -123,8 +125,8 @@ export const processTroopEvents = <Result, Command>(
   func: (
     page: BattleEventPage<Command>,
     pageIndex: number,
-    container: Data_TroopUnknonw<Command>
-  ) => Result
+    container: Data_TroopUnknonw<Command>,
+  ) => Result,
 ): Result[][] => {
   return list.map((troop) => processEventPages(troop, func));
 };
@@ -134,8 +136,8 @@ export const correctTroopEvents = <Result, Command>(
   func: (
     page: BattleEventPage<Command>,
     pageIndex: number,
-    container: Data_TroopUnknonw<Command>
-  ) => Result
+    container: Data_TroopUnknonw<Command>,
+  ) => Result,
 ): Result[] => {
   return list.flatMap((troop) => processEventPages(troop, func));
 };
@@ -151,8 +153,8 @@ export const processCommonEvents = <T, Command extends EventCommandUnknown>(
   func: (
     common: Readonly<Data_CommonEventUnknown<Command>>,
     index: number,
-    common2: Readonly<Data_CommonEventUnknown<Command>>
-  ) => T
+    common2: Readonly<Data_CommonEventUnknown<Command>>,
+  ) => T,
 ): T[] => {
   return events.map((common) => func(common, 0, common));
 };
@@ -164,13 +166,13 @@ export const processCommonEvents = <T, Command extends EventCommandUnknown>(
  */
 export const gatherEventCommandContext = <
   Command,
-  Event extends EventContainer<Command> = EventContainer<Command>
+  Event extends EventContainer<Command> = EventContainer<Command>,
 >(
-  map: MapEventContainer<Command, Event>
+  map: MapEventContainer<Command, Event>,
 ): MapEventContext<Command>[] => {
   const list: MapEventContext<Command>[][][] = processMapEvents(
     map,
-    createCommandContext
+    createCommandContext,
   );
   return list.flat(2);
 };

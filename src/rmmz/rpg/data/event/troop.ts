@@ -1,4 +1,4 @@
-import type { EventCommandUnknown } from "@RpgTypes/rmmz/eventCommand";
+import type { EventCommandUnknown } from "@RpgTypes/libs/eventCommand";
 
 export interface Data_TroopUnknonw<Command = EventCommandUnknown> {
   members: Troop_Member[];

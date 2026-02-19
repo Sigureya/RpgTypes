@@ -1,6 +1,7 @@
 import { describe, test, expect } from "vitest";
+import { SHOW_CHOICES } from "@RpgTypes/libs/eventCommand";
 import type { Command_ShowChoices } from "@RpgTypes/rmmz";
-import { makeCommandSetupChoice, SHOW_CHOICES } from "@RpgTypes/rmmz";
+import { makeCommandSetupChoice } from "@RpgTypes/rmmz";
 import type { CommandParameter } from "@RpgTypes/rmmz/eventCommand/pickCommandParam";
 import { extractTextParamsFromChoice } from "./extractText";
 

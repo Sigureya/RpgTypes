@@ -1,3 +1,4 @@
+import { PLUGIN_COMMAND_MZ } from "@RpgTypes/libs/eventCommand";
 import type {
   Command_PluginCommandMZ,
   Data_CommonEvent,
@@ -5,7 +6,6 @@ import type {
   Data_Troop,
   EventCommand,
 } from "@RpgTypes/rmmz";
-import { PLUGIN_COMMAND_MZ } from "@RpgTypes/rmmz";
 import type { PluginMinimumSchema } from "@sigureya/rmmz-plugin-schema";
 import type {
   CommandMapKey,
@@ -32,7 +32,7 @@ import {
 import { extractTextFromEventCommandsEx } from "./getTextFromCommand";
 
 export const createTextDataExtractorFromCommandItems = (
-  commands: ReadonlyArray<[CommandMapKey, CommandArgExtractors]>
+  commands: ReadonlyArray<[CommandMapKey, CommandArgExtractors]>,
 ): GameDataExtractor => {
   type MapType = ReadonlyMap<CommandMapKey, CommandArgExtractors>;
   const map: MapType = new Map(commands);
@@ -44,10 +44,10 @@ export const createTextDataExtractor = (): GameDataExtractor => {
 };
 
 export const createTextDataExtractorFromSchemas = (
-  schemas: ReadonlyArray<PluginMinimumSchema>
+  schemas: ReadonlyArray<PluginMinimumSchema>,
 ): GameDataExtractor => {
   const list: CommandExtractorEntry[] = schemas.flatMap((schema) =>
-    createPluginCommandExtractor(schema, (path) => new JSONPathJS(path))
+    createPluginCommandExtractor(schema, (path) => new JSONPathJS(path)),
   );
   return new GameDataExtractorClass(new Map(list));
 };
@@ -68,13 +68,13 @@ class GameDataExtractorClass implements GameDataExtractor {
   }
   extractBattleText(troop: Data_Troop): ExtractedBattleEventText[] {
     return extractBattleEventTexts(troop, (command) =>
-      this.extractArgs(command)
+      this.extractArgs(command),
     );
   }
 
   extractCommonEventText(commons: Data_CommonEvent): ExtractedCommonEventText {
     return extractCommonEventTexts(commons, (command) =>
-      this.extractArgs(command)
+      this.extractArgs(command),
     );
   }
 
@@ -89,14 +89,14 @@ class GameDataExtractorClass implements GameDataExtractor {
         argTitle: v.param.attr.text ?? v.param.name,
         commandName: entries.commandName,
         pluginName: entries.pluginName,
-      })
+      }),
     );
   }
   extractCommandTexts(
-    commands: ReadonlyArray<EventCommand>
+    commands: ReadonlyArray<EventCommand>,
   ): TextCommandParameter[] {
     return extractTextFromEventCommandsEx(commands, (command) =>
-      this.extractArgs(command)
+      this.extractArgs(command),
     );
   }
 }

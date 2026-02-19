@@ -1,12 +1,10 @@
 import { test, expect, describe } from "vitest";
-import type { Command_PluginCommandMZ, Data_Map } from "@RpgTypes/rmmz";
 import {
-  makeMapData,
-  makeMapEvent,
-  makeMapEventPage,
   PLUGIN_COMMAND_MZ,
   SHOW_SCROLLING_TEXT_BODY,
-} from "@RpgTypes/rmmz";
+} from "@RpgTypes/libs/eventCommand";
+import type { Command_PluginCommandMZ, Data_Map } from "@RpgTypes/rmmz";
+import { makeMapData, makeMapEvent, makeMapEventPage } from "@RpgTypes/rmmz";
 import {
   makeCommandScrollingTextBody,
   makeCommandScrollingTextHeader,
@@ -111,7 +109,7 @@ describe("GameDataExtractor", () => {
                   },
                   makeCommandScrollingTextHeader({}),
                   makeCommandScrollingTextBody(
-                    "A long time ago in a galaxy far, far away...."
+                    "A long time ago in a galaxy far, far away....",
                   ),
                 ],
               }),

@@ -1,4 +1,5 @@
-import type { EventCommand, EventCommandUnknown } from "@RpgTypes/rmmz";
+import type { EventCommandUnknown } from "@RpgTypes/libs/eventCommand";
+import type { EventCommand } from "@RpgTypes/rmmz";
 import type {
   Data_CommonEventUnknown,
   Data_TroopUnknonw,
@@ -8,15 +9,15 @@ import type { CommandContainer } from "./map/";
 import type { ReplaceableEventPage } from "./types";
 
 type EventCommandReplaceFunc = <Command extends EventCommandUnknown>(
-  list: ReadonlyArray<Command>
+  list: ReadonlyArray<Command>,
 ) => Command[];
 
 export const replaceEventCommands = <
   Command extends EventCommandUnknown,
-  T extends CommandContainer<Command> = CommandContainer<Command>
+  T extends CommandContainer<Command> = CommandContainer<Command>,
 >(
   data: T,
-  fn: EventCommandReplaceFunc
+  fn: EventCommandReplaceFunc,
 ): T => {
   const newList = fn(data.list);
   return {
@@ -27,7 +28,7 @@ export const replaceEventCommands = <
 
 export const replacePages = <Pages extends ReplaceableEventPage<EventCommand>>(
   container: Pages,
-  fn: EventCommandReplaceFunc
+  fn: EventCommandReplaceFunc,
 ): Pages => {
   return {
     ...container,
@@ -37,7 +38,7 @@ export const replacePages = <Pages extends ReplaceableEventPage<EventCommand>>(
 
 export const replaceMapEvents = <Map extends MapEventContainer<EventCommand>>(
   map: Map,
-  fn: EventCommandReplaceFunc
+  fn: EventCommandReplaceFunc,
 ): Map => {
   return {
     ...map,
@@ -52,14 +53,14 @@ export const replaceMapEvents = <Map extends MapEventContainer<EventCommand>>(
 
 export const replaceCommonEvents = (
   events: ReadonlyArray<Data_CommonEventUnknown<EventCommand>>,
-  fn: EventCommandReplaceFunc
+  fn: EventCommandReplaceFunc,
 ): Data_CommonEventUnknown<EventCommand>[] => {
   return events.map((commonEvent) => replaceEventCommands(commonEvent, fn));
 };
 
 export const replaceTroops = (
   list: ReadonlyArray<Data_TroopUnknonw<EventCommand>>,
-  fn: EventCommandReplaceFunc
+  fn: EventCommandReplaceFunc,
 ): Data_TroopUnknonw<EventCommand>[] => {
   return list.map((troop) => replacePages(troop, fn));
 };

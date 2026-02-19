@@ -1,6 +1,11 @@
 import type { MockedObject } from "vitest";
 import { describe, expect, test, vi } from "vitest";
 import type { MemberFunctions } from "@RpgTypes/libs";
+import {
+  CHANGE_BATTLE_BACKGROUND,
+  CHANGE_PARALLAX,
+  CHANGE_MAP_NAME_DISPLAY,
+} from "@RpgTypes/libs/eventCommand";
 import type { EventCommand } from "@RpgTypes/rmmz/eventCommand";
 import {
   makeCommandChangeBattleBackground,
@@ -8,11 +13,6 @@ import {
   makeCommandHideMapName,
   makeCommandShowMapName,
 } from "@RpgTypes/rmmz/eventCommand";
-import {
-  CHANGE_BATTLE_BACKGROUND,
-  CHANGE_MAP_NAME_DISPLAY,
-  CHANGE_PARALLAX,
-} from "@RpgTypes/rmmz/rpg";
 import type { Rmmz_Map } from "@RpgTypes/rmmzRuntime";
 import { Game_Interpreter } from "./rmmz_objects";
 

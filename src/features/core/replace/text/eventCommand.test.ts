@@ -1,4 +1,12 @@
 import { describe, expect, test } from "vitest";
+import {
+  SHOW_MESSAGE_BODY,
+  SHOW_MESSAGE,
+  CHANGE_NAME,
+  CHANGE_NICKNAME,
+  CHANGE_PROFILE,
+  SHOW_CHOICES,
+} from "@RpgTypes/libs/eventCommand";
 import type {
   Command_ShowMessageHeader,
   Command_ChangeActorName,
@@ -7,15 +15,7 @@ import type {
   Command_ShowMessageBody,
   Command_ShowChoices,
 } from "@RpgTypes/rmmz";
-import {
-  CHANGE_NAME,
-  CHANGE_NICKNAME,
-  CHANGE_PROFILE,
-  makeCommandShowMessage,
-  SHOW_CHOICES,
-  SHOW_MESSAGE,
-  SHOW_MESSAGE_BODY,
-} from "@RpgTypes/rmmz";
+import { makeCommandShowMessage } from "@RpgTypes/rmmz";
 import { replaceBasicEventCommandTexts } from "./eventCommand";
 
 describe("replaceTextForCommand2", () => {
@@ -27,7 +27,7 @@ describe("replaceTextForCommand2", () => {
       parameters: ["foo"],
     };
     const result = replaceBasicEventCommandTexts(command, (key) =>
-      map.get(key)
+      map.get(key),
     );
     expect(result.parameters[0]).toBe("bar");
   });
@@ -44,7 +44,7 @@ describe("replaceTextForCommandShowMessage", () => {
         positionType: 2,
         speakerName: "Speaker",
       },
-      0
+      0,
     );
     const expected: Command_ShowMessageHeader = {
       code: SHOW_MESSAGE,
@@ -52,7 +52,7 @@ describe("replaceTextForCommandShowMessage", () => {
       parameters: ["face", 1, 0, 2, "Narrator"],
     };
     const result = replaceBasicEventCommandTexts(command, (key) =>
-      map.get(key)
+      map.get(key),
     );
     expect(result).toEqual(expected);
   });
@@ -74,7 +74,7 @@ describe("replaceTextForCommandActor", () => {
     };
 
     const result = replaceBasicEventCommandTexts(command, (key) =>
-      map.get(key)
+      map.get(key),
     );
     expect(result).toEqual(expected);
   });
@@ -93,7 +93,7 @@ describe("replaceTextForCommandActor", () => {
     };
 
     const result = replaceBasicEventCommandTexts(command, (key) =>
-      map.get(key)
+      map.get(key),
     );
     expect(result).toEqual(expected);
   });
@@ -112,7 +112,7 @@ describe("replaceTextForCommandActor", () => {
     };
 
     const result = replaceBasicEventCommandTexts(command, (key) =>
-      map.get(key)
+      map.get(key),
     );
     expect(result).toEqual(expected);
   });
@@ -132,7 +132,7 @@ describe("replaceTextForCommandShowChoices", () => {
       parameters: [["OptionA", "Choice2"], 0, 0, 0, 0],
     };
     const result = replaceBasicEventCommandTexts(command, (key) =>
-      map.get(key)
+      map.get(key),
     );
     expect(result).toEqual(expected);
   });

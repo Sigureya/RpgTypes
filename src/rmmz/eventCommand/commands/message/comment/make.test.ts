@@ -1,5 +1,5 @@
 import { describe, test, expect } from "vitest";
-import { COMMENT_HEAD, COMMENT_BODY } from "@RpgTypes/rmmz/rpg";
+import { COMMENT_HEAD, COMMENT_BODY } from "@RpgTypes/libs/eventCommand";
 import {
   makeCommentArray,
   convertCommentArrayToObject,
@@ -34,7 +34,7 @@ describe("makeCommandCommentHeader", () => {
     const indent = 2;
     const result: Command_CommentHeader = makeCommandCommentHeader(
       comment,
-      indent
+      indent,
     );
 
     expect(result).toEqual({

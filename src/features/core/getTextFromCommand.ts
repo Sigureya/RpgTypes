@@ -1,11 +1,11 @@
-import type { Command_PluginCommandMZ, EventCommand } from "@RpgTypes/rmmz";
 import {
-  CHANGE_NAME,
+  SHOW_CHOICES,
   CHANGE_NICKNAME,
+  CHANGE_NAME,
   CHANGE_PROFILE,
   PLUGIN_COMMAND_MZ,
-  SHOW_CHOICES,
-} from "@RpgTypes/rmmz";
+} from "@RpgTypes/libs/eventCommand";
+import type { Command_PluginCommandMZ, EventCommand } from "@RpgTypes/rmmz";
 import type { GroopMapper } from "./eventCommand/commandGroup";
 import { getGroupHandlingFunc } from "./eventCommand/commandGroup/mapping";
 import type {
@@ -24,32 +24,32 @@ import {
 } from "./extractGroupText";
 
 export const extractTextFromEventCommands = (
-  list: ReadonlyArray<EventCommand>
+  list: ReadonlyArray<EventCommand>,
 ): TextCommandParameter[] => {
   return extractTextFromEventCommandsCore(list, () => []);
 };
 
 export const extractTextFromEventCommandsEx = <
-  T extends PluginCommandMzParameter
+  T extends PluginCommandMzParameter,
 >(
   list: ReadonlyArray<EventCommand>,
-  pluginCommandFn: (command: Command_PluginCommandMZ) => T[]
+  pluginCommandFn: (command: Command_PluginCommandMZ) => T[],
 ): (TextCommandParameter | T)[] => {
   return extractTextFromEventCommandsCore(list, pluginCommandFn);
 };
 
 const extractTextFromEventCommandsCore = <T extends PluginCommandMzParameter>(
   list: ReadonlyArray<EventCommand>,
-  pluginCommandFn: (command: Command_PluginCommandMZ) => T[]
+  pluginCommandFn: (command: Command_PluginCommandMZ) => T[],
 ): (TextCommandParameter | T)[] => {
   return list
     .flatMap(
       (
         command,
-        index
+        index,
       ): null | TextCommandParameter[] | TextCommandParameter => {
         return forCommand(command, index, list, pluginCommandFn);
-      }
+      },
     )
     .filter((v) => v !== null);
 };
@@ -58,7 +58,7 @@ const forCommand = <T extends PluginCommandMzParameter>(
   command: EventCommand,
   index: number,
   list: ReadonlyArray<EventCommand>,
-  pluginCommandFn: (command: Command_PluginCommandMZ) => T[]
+  pluginCommandFn: (command: Command_PluginCommandMZ) => T[],
 ) => {
   if (command.code === SHOW_CHOICES) {
     return extractTextParamsFromChoice(command);
@@ -68,7 +68,7 @@ const forCommand = <T extends PluginCommandMzParameter>(
     const textCommand = fn<TextCommandParameter | undefined>(
       list,
       index,
-      groupMapper
+      groupMapper,
     );
     if (textCommand !== undefined) {
       return [textCommand];

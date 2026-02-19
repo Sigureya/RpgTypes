@@ -1,6 +1,11 @@
-import type { EventCommandLike } from "@RpgTypes/rmmz/eventCommand/frame";
+import type {
+  EventCommandLike,
+  CHANGE_BATTLE_BACKGROUND,
+} from "@RpgTypes/libs/eventCommand";
 
-export interface Command_ChangeBattleBackground extends EventCommandLike<283> {
+export interface Command_ChangeBattleBackground extends EventCommandLike<
+  typeof CHANGE_BATTLE_BACKGROUND
+> {
   parameters: ParamArray_ChangeBattleBackground;
 }
 

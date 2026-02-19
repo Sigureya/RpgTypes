@@ -1,4 +1,4 @@
-import { CONTROL_VARIABLES } from "@RpgTypes/rmmz/rpg";
+import { CONTROL_VARIABLES } from "@RpgTypes/libs/eventCommand";
 import type {
   Command_ControlVariables,
   Operand_OtherData,

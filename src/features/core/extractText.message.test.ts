@@ -1,5 +1,6 @@
 import { test, expect, describe } from "vitest";
 import { createMessageGroup } from "@RpgTypes/features/core/eventCommand/commandGroup";
+import { SHOW_MESSAGE_BODY } from "@RpgTypes/libs/eventCommand";
 import type {
   Command_ShowMessageBody,
   Command_ShowMessageHeader,
@@ -7,7 +8,6 @@ import type {
 import {
   makeCommandShowMessage,
   makeCommandShowMessageBody,
-  SHOW_MESSAGE_BODY,
 } from "@RpgTypes/rmmz";
 import type { TextCommandParameter } from "./extract/text/eventCommand/types";
 import { extractTextParamFromMessage } from "./extractGroupText";

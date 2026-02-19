@@ -1,4 +1,7 @@
-import type { EventCommandLike, SHAKE_SCREEN } from "@RpgTypes/rmmz";
+import type {
+  EventCommandLike,
+  SHAKE_SCREEN,
+} from "@RpgTypes/libs/eventCommand";
 
 export interface Command_ShakeScreen extends EventCommandLike<
   typeof SHAKE_SCREEN

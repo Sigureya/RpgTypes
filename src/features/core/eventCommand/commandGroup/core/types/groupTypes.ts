@@ -1,3 +1,4 @@
+import type { SHOW_MESSAGE_BODY } from "@RpgTypes/libs/eventCommand";
 import type {
   Command_CommentBody,
   Command_CommentHeader,
@@ -8,13 +9,12 @@ import type {
   Command_ShowMessageBody,
   Command_ShowMessageHeader,
   EventCommand,
-  SHOW_MESSAGE_BODY,
 } from "@RpgTypes/rmmz";
 import type { ExtractCommandByParam } from "@RpgTypes/rmmz/eventCommand/commands/extractType";
 
 export interface EventCommandGroupBase<
   Header extends EventCommand,
-  Body extends ExtractCommandByParam<[string]>
+  Body extends ExtractCommandByParam<[string]>,
 > {
   header: Header;
   bodies: Body[];
@@ -22,7 +22,7 @@ export interface EventCommandGroupBase<
 
 export interface EventCommandGroup<
   Header extends EventCommand,
-  Body extends ExtractCommandByParam<[string]>
+  Body extends ExtractCommandByParam<[string]>,
 > extends EventCommandGroupBase<Header, Body> {
   /**
    * Merges all body commands into a single command.

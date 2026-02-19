@@ -1,4 +1,9 @@
-import type { EventCommandLike } from "@RpgTypes/rmmz/eventCommand/frame";
+import type {
+  CHANGE_NAME,
+  CHANGE_NICKNAME,
+  CHANGE_PROFILE,
+  EventCommandLike,
+} from "@RpgTypes/libs/eventCommand";
 
 export type ParamArray_ChangeActorText = [actorId: number, text: string];
 
@@ -16,18 +21,25 @@ export interface ParamObject_ChangeActorProfile {
   profile: string;
 }
 
-export interface CommandUnion_ChangeActorText
-  extends EventCommandLike<320 | 324 | 325> {
+export interface CommandUnion_ChangeActorText extends EventCommandLike<
+  320 | 324 | 325
+> {
   parameters: ParamArray_ChangeActorText;
 }
 
-export interface Command_ChangeActorName extends EventCommandLike<320> {
+export interface Command_ChangeActorName extends EventCommandLike<
+  typeof CHANGE_NAME
+> {
   parameters: [actorId: number, name: string];
 }
-export interface Command_ChangeActorNickName extends EventCommandLike<324> {
+export interface Command_ChangeActorNickName extends EventCommandLike<
+  typeof CHANGE_NICKNAME
+> {
   parameters: [actorId: number, nickname: string];
 }
 
-export interface Command_ChangeActorProfile extends EventCommandLike<325> {
+export interface Command_ChangeActorProfile extends EventCommandLike<
+  typeof CHANGE_PROFILE
+> {
   parameters: [actorId: number, profile: string];
 }

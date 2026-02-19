@@ -1,7 +1,7 @@
 import { describe, test, expect } from "vitest";
+import { COMMENT_HEAD } from "@RpgTypes/libs/eventCommand";
 import Ajv from "ajv";
 import { makeTroopData, makeTroopEventConditions } from "./makeEvent";
-import { COMMENT_HEAD } from "./map/event/page";
 import SCHEMA_DATA_TROOP from "./schema";
 import type { Data_TroopUnknonw } from "./troop";
 

@@ -1,6 +1,8 @@
 import type { ColorRGBA } from "@RpgTypes/libs";
-import type { EventCommandLike } from "@RpgTypes/rmmz/eventCommand/frame";
-import type { TINT_SCREEN } from "@RpgTypes/rmmz/rpg";
+import type {
+  EventCommandLike,
+  TINT_SCREEN,
+} from "@RpgTypes/libs/eventCommand";
 
 export interface Command_TintScreen extends EventCommandLike<
   typeof TINT_SCREEN

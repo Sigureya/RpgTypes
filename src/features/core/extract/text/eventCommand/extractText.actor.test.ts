@@ -1,5 +1,9 @@
 import { describe, test, expect } from "vitest";
-import { CHANGE_NAME, CHANGE_NICKNAME, CHANGE_PROFILE } from "@RpgTypes/rmmz";
+import {
+  CHANGE_NAME,
+  CHANGE_NICKNAME,
+  CHANGE_PROFILE,
+} from "@RpgTypes/libs/eventCommand";
 import type {
   Command_ChangeActorName,
   Command_ChangeActorNickName,

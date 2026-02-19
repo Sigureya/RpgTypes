@@ -1,10 +1,8 @@
+import type { EventCommandUnknown } from "@RpgTypes/libs/eventCommand";
 import type { Command_ShowMessageHeader } from "@RpgTypes/rmmz";
 import type * as RpgTypes from "@RpgTypes/rmmz";
 
-export type CallBackFunc<
-  Command extends RpgTypes.EventCommandUnknown,
-  Reulst = void,
-> = (
+export type CallBackFunc<Command extends EventCommandUnknown, Reulst = void> = (
   command: Readonly<Command>,
   index: number,
   list: ReadonlyArray<Readonly<RpgTypes.EventCommand>>,

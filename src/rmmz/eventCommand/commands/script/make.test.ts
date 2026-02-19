@@ -1,10 +1,11 @@
 import { describe, test, expect } from "vitest";
-import { SCRIPT_EVAL, SCRIPT_EVAL_BODY } from "@RpgTypes/rmmz/rpg";
+import { SCRIPT_EVAL, SCRIPT_EVAL_BODY } from "@RpgTypes/libs/eventCommand";
 import {
   makeCommandScriptHeader,
   makeCommandScriptBody,
   makeCommandScriptArray,
 } from "./make";
+import type { Command_ScriptBody, Command_ScriptHeader } from "./types";
 
 describe("makeCommentScriptHeader", () => {
   test("should create a Command2_CommentHeader with the correct structure", () => {
@@ -12,11 +13,12 @@ describe("makeCommentScriptHeader", () => {
     const indent = 2;
     const result = makeCommandScriptHeader(script, indent);
 
-    expect(result).toEqual({
+    const expected: Command_ScriptHeader = {
       code: SCRIPT_EVAL,
       indent,
       parameters: [script],
-    });
+    };
+    expect(result).toEqual(expected);
   });
 
   test("should default indent to 0 if not provided", () => {
@@ -33,11 +35,12 @@ describe("makeCommentScriptBody", () => {
     const indent = 3;
     const result = makeCommandScriptBody(script, indent);
 
-    expect(result).toEqual({
+    const expected: Command_ScriptBody = {
       code: SCRIPT_EVAL_BODY,
       indent,
       parameters: [script],
-    });
+    };
+    expect(result).toEqual(expected);
   });
 
   test("should default indent to 0 if not provided", () => {

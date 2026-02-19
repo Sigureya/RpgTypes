@@ -1,4 +1,5 @@
 import { describe, test, expect } from "vitest";
+import type { COMMENT_BODY } from "@RpgTypes/libs/eventCommand";
 import type {
   Command_CommentBody,
   Command_CommentHeader,
@@ -8,7 +9,6 @@ import {
   makeCommandCommentHeader,
   makeCommandCommonEvent,
 } from "@RpgTypes/rmmz/eventCommand";
-import type { COMMENT_BODY } from "@RpgTypes/rmmz/rpg";
 import {
   createCommentGroup,
   extractCommentGroup,

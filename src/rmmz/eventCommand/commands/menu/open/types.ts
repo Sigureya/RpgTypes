@@ -1,8 +1,11 @@
-import type { EventCommandLike } from "@RpgTypes/rmmz/eventCommand/frame";
-import type { OPEN_MENU_SCREEN } from "@RpgTypes/rmmz/rpg";
+import type {
+  EventCommandLike,
+  OPEN_MENU_SCREEN,
+} from "@RpgTypes/libs/eventCommand";
 
-export interface Command_OpenMenu
-  extends EventCommandLike<typeof OPEN_MENU_SCREEN> {
+export interface Command_OpenMenu extends EventCommandLike<
+  typeof OPEN_MENU_SCREEN
+> {
   parameters: ParamArray_OpenMenu;
 }
 

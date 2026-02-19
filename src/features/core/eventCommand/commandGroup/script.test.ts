@@ -1,11 +1,14 @@
 import { describe, test, expect } from "vitest";
-import type { Command_ScriptHeader, EventCommand } from "@RpgTypes/rmmz";
+import { SCRIPT_EVAL } from "@RpgTypes/libs/eventCommand";
+import type {
+  Command_ScriptHeader,
+  EventCommand,
+  Command_ScriptBody,
+} from "@RpgTypes/rmmz";
 import {
   makeCommandCommonEvent,
   makeCommandScriptBody,
   makeCommandScriptHeader,
-  SCRIPT_EVAL,
-  type Command_ScriptBody,
 } from "@RpgTypes/rmmz";
 import { CombinedEventCommandGroup } from "./core";
 import { createScriptGroup, extractScriptGroup } from "./script";

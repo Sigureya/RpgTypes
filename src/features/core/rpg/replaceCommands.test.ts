@@ -1,8 +1,8 @@
 import { describe, expect, test } from "vitest";
+import type { EventCommandUnknown } from "@RpgTypes/libs/eventCommand";
 import type {
   Data_CommonEventUnknown,
   EventCommand,
-  EventCommandUnknown,
   ExtractCommandByParam,
   MapEventContainer,
 } from "@RpgTypes/rmmz";
@@ -17,7 +17,7 @@ import type { ReplaceableEventPage } from "./types";
 
 // Helper function to create a mock EventCommand
 const createMockCommand = (
-  code: ExtractCommandByParam<[], EventCommand>["code"]
+  code: ExtractCommandByParam<[], EventCommand>["code"],
 ): ExtractCommandByParam<[]> => ({
   code,
   indent: 0,
@@ -26,7 +26,7 @@ const createMockCommand = (
 
 // Simple transformation function: increments command code
 const mockTransform = <Command extends EventCommandUnknown>(
-  commands: ReadonlyArray<Command>
+  commands: ReadonlyArray<Command>,
 ): Command[] =>
   commands.map((cmd) => ({
     ...cmd,
@@ -92,7 +92,7 @@ describe("replaceMapEvents", () => {
     };
     const result: MapEventContainer<EventCommand> = replaceMapEvents(
       map,
-      mockTransform
+      mockTransform,
     );
 
     const expected: MapEventContainer<EventCommand> = {

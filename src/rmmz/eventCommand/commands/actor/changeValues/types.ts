@@ -1,19 +1,26 @@
-import type { EventCommandLike } from "@RpgTypes/rmmz/eventCommand/frame";
-import type { CHANGE_HP, CHANGE_MP, CHANGE_TP } from "@RpgTypes/rmmz/rpg";
+import type {
+  EventCommandLike,
+  CHANGE_HP,
+  CHANGE_MP,
+  CHANGE_TP,
+} from "@RpgTypes/libs/eventCommand";
 import type { TARGET_DIRECT, TARGET_VARIABLE } from "./constants";
 
-export interface Command_ChangeActorHP
-  extends EventCommandLike<typeof CHANGE_HP> {
+export interface Command_ChangeActorHP extends EventCommandLike<
+  typeof CHANGE_HP
+> {
   parameters: ParamArray_ChangeActorHP;
 }
 
-export interface Command_ChangeActorMP
-  extends EventCommandLike<typeof CHANGE_MP> {
+export interface Command_ChangeActorMP extends EventCommandLike<
+  typeof CHANGE_MP
+> {
   parameters: ParamArray_ChangeActorMP;
 }
 
-export interface Command_ChangeActorTP
-  extends EventCommandLike<typeof CHANGE_TP> {
+export interface Command_ChangeActorTP extends EventCommandLike<
+  typeof CHANGE_TP
+> {
   parameters: ParamArray_ChangeActorTP;
 }
 
@@ -22,7 +29,7 @@ export type ParamArray_ChangeActorValue = [
   index: number,
   operation: number,
   valueType: number,
-  value: number
+  value: number,
 ];
 
 export type ParamArray_ChangeActorMP = ParamArray_ChangeActorValue;
@@ -34,7 +41,7 @@ export type ParamArray_ChangeActorHP = [
   operation: number,
   valueType: number,
   value: number,
-  allowDeath: boolean
+  allowDeath: boolean,
 ];
 
 export type ParamObject_ChangeActorValue =

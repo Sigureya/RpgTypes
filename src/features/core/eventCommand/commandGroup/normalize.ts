@@ -1,14 +1,14 @@
-import type { EventCommand } from "@RpgTypes/rmmz";
 import {
-  COMMENT_HEAD,
-  COMMENT_BODY,
-  SHOW_MESSAGE,
-  SHOW_SCROLLING_TEXT_BODY,
-  SCRIPT_EVAL,
-  SHOW_SCROLLING_TEXT,
-  SHOW_MESSAGE_BODY,
   SCRIPT_EVAL_BODY,
-} from "@RpgTypes/rmmz";
+  COMMENT_BODY,
+  SHOW_MESSAGE_BODY,
+  SHOW_SCROLLING_TEXT_BODY,
+  COMMENT_HEAD,
+  SHOW_MESSAGE,
+  SHOW_SCROLLING_TEXT,
+  SCRIPT_EVAL,
+} from "@RpgTypes/libs/eventCommand";
+import type { EventCommand } from "@RpgTypes/rmmz";
 import { createCommentGroup } from "./comment";
 import { createMessageGroup } from "./message";
 import { createScriptGroup } from "./script";
@@ -32,8 +32,8 @@ const xxxDetail = (
     acc: ReadonlyArray<EventCommand>,
     command: unknown,
     index: number,
-    input: ReadonlyArray<EventCommand>
-  ) => EventCommand[]
+    input: ReadonlyArray<EventCommand>,
+  ) => EventCommand[],
 ): EventCommand[] => {
   const FUNCTION_TABLE: Record<
     number,
@@ -41,7 +41,7 @@ const xxxDetail = (
       acc: EventCommand[],
       command: EventCommand,
       index: number,
-      input: ReadonlyArray<EventCommand>
+      input: ReadonlyArray<EventCommand>,
     ) => EventCommand[]
   > = {
     [SCRIPT_EVAL_BODY]: bodyFn,
@@ -70,7 +70,7 @@ const processComment = (
   acc: ReadonlyArray<EventCommand>,
   command: unknown,
   index: number,
-  input: ReadonlyArray<EventCommand>
+  input: ReadonlyArray<EventCommand>,
 ): EventCommand[] => {
   const group = createCommentGroup(input, index);
   return [...acc, ...group.normalizedCommands()];
@@ -79,7 +79,7 @@ const processScroolText = (
   acc: ReadonlyArray<EventCommand>,
   command: unknown,
   index: number,
-  input: ReadonlyArray<EventCommand>
+  input: ReadonlyArray<EventCommand>,
 ): EventCommand[] => {
   const group = createScrollTextGroup(input, index);
   return [...acc, ...group.normalizedCommands()];
@@ -89,7 +89,7 @@ const processScript = (
   acc: ReadonlyArray<EventCommand>,
   command: unknown,
   index: number,
-  input: ReadonlyArray<EventCommand>
+  input: ReadonlyArray<EventCommand>,
 ): EventCommand[] => {
   const group = createScriptGroup(input, index);
   return [...acc, ...group.normalizedCommands()];
@@ -99,7 +99,7 @@ const messaege = (
   acc: ReadonlyArray<EventCommand>,
   command: unknown,
   index: number,
-  input: ReadonlyArray<EventCommand>
+  input: ReadonlyArray<EventCommand>,
 ) => {
   const group = createMessageGroup(input, index);
   return [...acc, ...group.normalizedCommands()];

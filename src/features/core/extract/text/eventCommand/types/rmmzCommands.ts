@@ -1,13 +1,13 @@
 import type {
-  CHANGE_NAME,
   CHANGE_NICKNAME,
   CHANGE_PROFILE,
-  COMMENT_HEAD,
-  SCRIPT_EVAL,
-  SHOW_CHOICES,
-  SHOW_MESSAGE_BODY,
+  CHANGE_NAME,
   SHOW_SCROLLING_TEXT_BODY,
-} from "@RpgTypes/rmmz";
+  SHOW_CHOICES,
+  SCRIPT_EVAL,
+  COMMENT_HEAD,
+  SHOW_MESSAGE_BODY,
+} from "@RpgTypes/libs/eventCommand";
 import type { CommandParameter } from "@RpgTypes/rmmz/eventCommand/pickCommandParam";
 import type { PluginCommandMzParameter } from "./pluginCommand";
 import type { TextCommandParameter } from "./union";
@@ -21,16 +21,20 @@ type BaseCode =
   | typeof SCRIPT_EVAL
   | typeof COMMENT_HEAD;
 
-export interface GenericCommandParameter
-  extends CommandParameter<string, BaseCode> {
+export interface GenericCommandParameter extends CommandParameter<
+  string,
+  BaseCode
+> {
   paramIndex: number;
   value: string;
   code: BaseCode;
   speaker?: string;
 }
 
-export interface MessageCommandParameter
-  extends CommandParameter<string, typeof SHOW_MESSAGE_BODY> {
+export interface MessageCommandParameter extends CommandParameter<
+  string,
+  typeof SHOW_MESSAGE_BODY
+> {
   speaker: string;
   paramIndex: number;
   value: string;
@@ -38,7 +42,7 @@ export interface MessageCommandParameter
 }
 
 export interface ExtractedEventText<
-  P extends PluginCommandMzParameter = PluginCommandMzParameter
+  P extends PluginCommandMzParameter = PluginCommandMzParameter,
 > {
   eventId: number;
   pageIndex: number;

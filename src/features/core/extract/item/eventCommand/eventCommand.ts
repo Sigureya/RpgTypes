@@ -2,13 +2,15 @@ import {
   CHANGE_ARMORS,
   CHANGE_ITEMS,
   CHANGE_WEAPONS,
-  getItemIdFromItemCommand,
-  isUsingVariableItemCommand,
-} from "@RpgTypes/rmmz";
+} from "@RpgTypes/libs/eventCommand";
 import type {
   Command_ChangeArmors,
   Command_ChangeItems,
   Command_ChangeWeapons,
+} from "@RpgTypes/rmmz/eventCommand/commands/item/change";
+import {
+  getItemIdFromItemCommand,
+  isUsingVariableItemCommand,
 } from "@RpgTypes/rmmz/eventCommand/commands/item/change";
 import {
   OPERATION_GAIN,

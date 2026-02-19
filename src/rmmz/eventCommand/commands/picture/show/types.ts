@@ -1,4 +1,20 @@
-import type { EventCommandLike } from "@RpgTypes/rmmz";
+import type {
+  EventCommandLike,
+  MOVE_PICTURE,
+  SHOW_PICTURE,
+} from "@RpgTypes/libs/eventCommand";
+
+export interface Command_ShowPicture extends EventCommandLike<
+  typeof SHOW_PICTURE
+> {
+  parameters: ParamsArray_ShowPicture;
+}
+
+export interface Command_MovePicture extends EventCommandLike<
+  typeof MOVE_PICTURE
+> {
+  parameters: ParamsArray_MovePicture;
+}
 
 export type PicutureBlendModeV2 = 0 | 1 | 2 | 3;
 
@@ -11,7 +27,7 @@ export type ParamsArray_ShowPicture = [
   scaleX: number,
   scaleY: number,
   opacity: number,
-  blendMode: PicutureBlendModeV2
+  blendMode: PicutureBlendModeV2,
 ];
 
 export type ParamsArray_MovePicture = [
@@ -24,7 +40,7 @@ export type ParamsArray_MovePicture = [
   opacity: number,
   blendMode: PicutureBlendModeV2,
   wait: boolean,
-  easingType: number
+  easingType: number,
 ];
 
 export interface ParamObject_ParamsShowPicture {
@@ -50,12 +66,4 @@ export interface ParamObject_ParamsMovePicture {
   blendMode: PicutureBlendModeV2;
   wait: boolean;
   easingType: number;
-}
-
-export interface Command_ShowPicture extends EventCommandLike<231> {
-  parameters: ParamsArray_ShowPicture;
-}
-
-export interface Command_MovePicture extends EventCommandLike<232> {
-  parameters: ParamsArray_MovePicture;
 }

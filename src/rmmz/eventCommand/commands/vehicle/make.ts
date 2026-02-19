@@ -1,5 +1,5 @@
 import { makeAudioFileParams } from "@RpgTypes/libs";
-import type { CHANGE_VEHICLE_IMAGE } from "@RpgTypes/rmmz/rpg";
+import type { CHANGE_VEHICLE_IMAGE } from "@RpgTypes/libs/eventCommand";
 import type {
   Command_ChangeVehicleBGM,
   Command_GetOnOffVehicle,

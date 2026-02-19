@@ -1,8 +1,10 @@
 import type {
+  SHOW_CHOICES_ITEM,
+  SHOW_CHOICES,
+} from "@RpgTypes/libs/eventCommand";
+import type {
   ParamArray_SetupChoice,
   ParamObject_SetupChoice,
-  SHOW_CHOICES,
-  SHOW_CHOICES_ITEM,
 } from "@RpgTypes/rmmz";
 import type { Command_ShowChoices } from "./body/types";
 import type {
@@ -13,7 +15,7 @@ import type {
 
 export const makeCommandShowChoiceItem = (
   param: Partial<ParamObject_ShowChoiceWhen> | undefined,
-  indent: number = 0
+  indent: number = 0,
 ): Command_ShowChoiceWhen => ({
   code: 402 satisfies typeof SHOW_CHOICES_ITEM,
   indent,
@@ -21,18 +23,18 @@ export const makeCommandShowChoiceItem = (
 });
 
 export const fromArraySetupChoiceItem = (
-  array: ParamArray_ShowChoiceWhen
+  array: ParamArray_ShowChoiceWhen,
 ): ParamObject_ShowChoiceWhen => ({
   index: array[0],
   name: array[1],
 });
 
 export const toArraySetupChoiceItem = (
-  object: Partial<ParamObject_ShowChoiceWhen>
+  object: Partial<ParamObject_ShowChoiceWhen>,
 ): ParamArray_ShowChoiceWhen => [object.index ?? 0, object.name ?? ""];
 
 export const fromArraySetupChoice = (
-  array: ParamArray_SetupChoice
+  array: ParamArray_SetupChoice,
 ): ParamObject_SetupChoice => ({
   choices: array[0],
   cancelType: array[1],
@@ -42,7 +44,7 @@ export const fromArraySetupChoice = (
 });
 
 export const toArraySetupChoice = (
-  object: Partial<ParamObject_SetupChoice>
+  object: Partial<ParamObject_SetupChoice>,
 ): ParamArray_SetupChoice => [
   object.choices ?? [],
   object.cancelType ?? 0,
@@ -53,7 +55,7 @@ export const toArraySetupChoice = (
 
 export const makeCommandSetupChoice = (
   param: Partial<ParamObject_SetupChoice> | undefined,
-  indent: number = 0
+  indent: number = 0,
 ): Command_ShowChoices => ({
   code: 102 satisfies typeof SHOW_CHOICES,
   indent,
@@ -67,7 +69,7 @@ export const makeCommandSetupChoice = (
 });
 
 export const cloneChoices = (
-  command: Command_ShowChoices
+  command: Command_ShowChoices,
 ): Command_ShowChoices => {
   return {
     code: command.code,

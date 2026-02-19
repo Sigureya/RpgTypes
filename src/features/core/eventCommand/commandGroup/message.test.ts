@@ -1,12 +1,11 @@
 import { describe, test, expect } from "vitest";
+import { SHOW_MESSAGE_BODY, SHOW_MESSAGE } from "@RpgTypes/libs/eventCommand";
 import type {
   Command_ShowMessageBody,
   Command_ShowMessageHeader,
   EventCommand,
 } from "@RpgTypes/rmmz";
 import {
-  SHOW_MESSAGE_BODY,
-  SHOW_MESSAGE,
   makeCommandShowMessage,
   makeCommandCommonEvent,
   makeCommandShowMessageBody,

@@ -1,6 +1,11 @@
-import type { EventCommandLike } from "@RpgTypes/rmmz/eventCommand/frame";
+import type {
+  CONDITIONAL_BRANCH_ELSE,
+  EventCommandLike,
+} from "@RpgTypes/libs/eventCommand";
 
-export interface Command_BranchElse extends EventCommandLike<411> {
+export interface Command_BranchElse extends EventCommandLike<
+  typeof CONDITIONAL_BRANCH_ELSE
+> {
   parameters: [];
 }
 

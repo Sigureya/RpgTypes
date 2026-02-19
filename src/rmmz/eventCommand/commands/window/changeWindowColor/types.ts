@@ -1,6 +1,11 @@
 import type { ColorRGBA } from "@RpgTypes/libs";
-import type { EventCommandLike } from "@RpgTypes/rmmz/eventCommand/frame";
+import type {
+  CHANGE_WINDOW_COLOR,
+  EventCommandLike,
+} from "@RpgTypes/libs/eventCommand";
 
-export interface Command_ChangeWindowColor extends EventCommandLike<138> {
+export interface Command_ChangeWindowColor extends EventCommandLike<
+  typeof CHANGE_WINDOW_COLOR
+> {
   parameters: [color: ColorRGBA];
 }

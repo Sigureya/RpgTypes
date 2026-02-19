@@ -1,7 +1,12 @@
-import type { EventCommandLike } from "@RpgTypes/rmmz/eventCommand/frame";
+import type {
+  EventCommandLike,
+  SET_EVENT_LOCATION,
+} from "@RpgTypes/libs/eventCommand";
 import type { Direction8 } from "@RpgTypes/rmmz/utils";
 
-export interface Command_SetEventLocation extends EventCommandLike<203> {
+export interface Command_SetEventLocation extends EventCommandLike<
+  typeof SET_EVENT_LOCATION
+> {
   parameters: ParamArray_SetEventLocation;
 }
 
@@ -10,5 +15,5 @@ export type ParamArray_SetEventLocation = [
   eventId: number,
   x: number,
   y: number,
-  direction: Direction8
+  direction: Direction8,
 ];

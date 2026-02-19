@@ -1,6 +1,11 @@
-import type { EventCommandLike } from "@RpgTypes/rmmz/eventCommand/frame";
+import type {
+  EventCommandLike,
+  CHANGE_EQUIP,
+} from "@RpgTypes/libs/eventCommand";
 
-export interface Command_ChangeEquip extends EventCommandLike<319> {
+export interface Command_ChangeEquip extends EventCommandLike<
+  typeof CHANGE_EQUIP
+> {
   parameters: ParamArray_ChangeEquip;
 }
 

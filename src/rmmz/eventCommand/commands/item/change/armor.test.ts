@@ -1,5 +1,5 @@
 import { describe, test, expect } from "vitest";
-import { CHANGE_ARMORS } from "@RpgTypes/rmmz/rpg";
+import { CHANGE_ARMORS } from "@RpgTypes/libs/eventCommand";
 import {
   makeCommandGainArmor,
   makeCommandGainArmorByVariable,

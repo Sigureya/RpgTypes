@@ -1,6 +1,6 @@
 import { describe, test, expect } from "vitest";
+import { SCRIPT_EVAL, SCRIPT_EVAL_BODY } from "@RpgTypes/libs/eventCommand";
 import type { Command_ScriptBody, Command_ScriptHeader } from "@RpgTypes/rmmz";
-import { SCRIPT_EVAL, SCRIPT_EVAL_BODY } from "@RpgTypes/rmmz";
 import { CombinedEventCommandGroup } from "./combined";
 
 const createScriptHeader = (text: string): Command_ScriptHeader => {

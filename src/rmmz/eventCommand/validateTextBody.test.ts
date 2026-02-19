@@ -6,7 +6,7 @@ import {
   COMMENT_HEAD,
   SCRIPT_EVAL_BODY,
   SCRIPT_EVAL,
-} from "../rpg/data/event/map/event/page";
+} from "@RpgTypes/libs/eventCommand";
 import {
   makeCommandShowMessageBody,
   makeCommandCommentHeader,

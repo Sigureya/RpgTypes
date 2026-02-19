@@ -1,16 +1,12 @@
 import { test, expect, describe, vi } from "vitest";
+import { PLUGIN_COMMAND_MZ } from "@RpgTypes/libs/eventCommand";
 import type {
   Command_PluginCommandMZ,
   Data_Map,
   EventCommand,
   MapEvent,
 } from "@RpgTypes/rmmz";
-import {
-  makeEventPageCondition,
-  makeMapData,
-  PLUGIN_COMMAND_MZ,
-  readNote,
-} from "@RpgTypes/rmmz";
+import { makeEventPageCondition, makeMapData, readNote } from "@RpgTypes/rmmz";
 import type {
   ExtractedMapEventTexts,
   PluginCommandMzParameter,

@@ -1,5 +1,7 @@
-import type { EventCommandLike } from "@RpgTypes/rmmz/eventCommand/frame";
-import type { SET_WEATHER_EFFECT } from "@RpgTypes/rmmz/rpg";
+import type {
+  EventCommandLike,
+  SET_WEATHER_EFFECT,
+} from "@RpgTypes/libs/eventCommand";
 
 export interface Command_SetWeatherEffect extends EventCommandLike<
   typeof SET_WEATHER_EFFECT

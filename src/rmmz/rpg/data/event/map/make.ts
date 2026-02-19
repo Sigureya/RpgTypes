@@ -1,4 +1,4 @@
-import type { EventCommandUnknown } from "@RpgTypes/rmmz/eventCommand";
+import type { EventCommandUnknown } from "@RpgTypes/libs/eventCommand";
 import type { Data_Map } from "./map";
 import type { MapFileInfo } from "./mapFileInfo";
 import type { Data_MapInfo } from "./mapInfo";

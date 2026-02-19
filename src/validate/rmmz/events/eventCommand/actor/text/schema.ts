@@ -3,7 +3,7 @@ import type {
   CHANGE_PROFILE,
   CHANGE_NICKNAME,
   CHANGE_NAME,
-} from "@RpgTypes/rmmz";
+} from "@RpgTypes/libs/eventCommand";
 import type { JSONSchemaType } from "ajv";
 
 export const SCHEMA_COMMAND_ACTOR = {

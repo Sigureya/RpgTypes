@@ -1,13 +1,13 @@
 import type { MockedObject } from "vitest";
 import { describe, expect, test, vi } from "vitest";
 import type { Data_NamedItem } from "@RpgTypes/libs";
+import { BATTLE_PROCESSING } from "@RpgTypes/libs/eventCommand";
 import type { Command_BattleProcessing } from "@RpgTypes/rmmz/eventCommand";
 import {
   makeCommandBattleProcessingDirect,
   makeCommandBattleProcessingEncount,
   makeCommandBattleProcessingVariable,
 } from "@RpgTypes/rmmz/eventCommand";
-import { BATTLE_PROCESSING } from "@RpgTypes/rmmz/rpg";
 import type { Rmmz_Party, Rmmz_PlayerCharactor } from "@RpgTypes/rmmzRuntime";
 import type { Rmmz_BattleManager } from "@RpgTypes/rmmzRuntime/managers/battle";
 import type { Rmmz_SceneManager } from "@RpgTypes/rmmzRuntime/managers/sceneManager";

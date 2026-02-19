@@ -1,4 +1,4 @@
-import { BATTLE_PROCESSING } from "@RpgTypes/rmmz/rpg";
+import { BATTLE_PROCESSING } from "@RpgTypes/libs/eventCommand";
 import { BATTLE_DIRECT, BATTLE_ENCOUNT, BATTLE_VARIABLE } from "./constants";
 import type {
   ParamObject_BattleProcessing_Direct,
@@ -11,7 +11,7 @@ import type {
 } from "./types";
 
 export const isCommandBattleProcessingVariable = (
-  command: Command_BattleProcessing
+  command: Command_BattleProcessing,
 ): command is Command_BattleProcessing_Variable => {
   return command.parameters[0] === BATTLE_VARIABLE;
 };
@@ -22,7 +22,7 @@ export const makeCommandBattleProcessingDirect = (
     canEscape = false,
     canLose = false,
   }: Partial<ParamObject_BattleProcessing_Direct>,
-  indent: number = 0
+  indent: number = 0,
 ): Command_BattleProcessing => ({
   code: BATTLE_PROCESSING,
   indent: indent,
@@ -40,7 +40,7 @@ export const makeCommandBattleProcessingVariable = (
     canEscape = false,
     canLose = false,
   }: Partial<ParamObject_BattleProcessing_Variable>,
-  indent: number = 0
+  indent: number = 0,
 ): Command_BattleProcessing_Variable => ({
   code: BATTLE_PROCESSING,
   indent: indent,
@@ -49,7 +49,7 @@ export const makeCommandBattleProcessingVariable = (
 
 export const makeCommandBattleProcessingEncount = (
   { canEscape = false, canLose = false }: Partial<ParamObject_BattleBase>,
-  indent: number = 0
+  indent: number = 0,
 ): Command_BattleProcessing => ({
   code: BATTLE_PROCESSING,
   indent: indent,

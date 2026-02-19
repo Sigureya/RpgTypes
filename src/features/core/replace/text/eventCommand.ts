@@ -1,29 +1,29 @@
+import {
+  SHOW_MESSAGE,
+  SHOW_CHOICES,
+  SHOW_MESSAGE_BODY,
+  COMMENT_HEAD,
+  COMMENT_BODY,
+  SHOW_SCROLLING_TEXT_BODY,
+  CHANGE_NAME,
+  CHANGE_NICKNAME,
+  CHANGE_PROFILE,
+} from "@RpgTypes/libs/eventCommand";
 import type {
+  NormalizedEventCommand,
+  Command_PluginCommandMZ,
+  Command_ScriptHeader,
+  Command_ShowMessageBody,
+  Command_CommentHeader,
+  Command_CommentBody,
+  Command_ScrollTextBody,
   Command_ShowMessageHeader,
   Command_ChangeActorName,
   Command_ChangeActorProfile,
   Command_ChangeActorNickName,
-  Command_ShowMessageBody,
   Command_ShowChoices,
-  Command_CommentHeader,
-  Command_CommentBody,
-  Command_ScrollTextBody,
-  Command_PluginCommandMZ,
-  NormalizedEventCommand,
-  Command_ScriptHeader,
 } from "@RpgTypes/rmmz";
-import {
-  CHANGE_NAME,
-  CHANGE_NICKNAME,
-  CHANGE_PROFILE,
-  COMMENT_BODY,
-  COMMENT_HEAD,
-  makeCommandShowMessage,
-  SHOW_CHOICES,
-  SHOW_MESSAGE,
-  SHOW_MESSAGE_BODY,
-  SHOW_SCROLLING_TEXT_BODY,
-} from "@RpgTypes/rmmz";
+import { makeCommandShowMessage } from "@RpgTypes/rmmz";
 import { replaceTextByFunction } from "./utils";
 
 export const replaceBasicEventCommandTexts = (
@@ -31,7 +31,7 @@ export const replaceBasicEventCommandTexts = (
     NormalizedEventCommand,
     Command_PluginCommandMZ | Command_ScriptHeader
   >,
-  fn: (key: string) => string | undefined
+  fn: (key: string) => string | undefined,
 ): NormalizedEventCommand => {
   switch (command.code) {
     case SHOW_MESSAGE:
@@ -57,10 +57,10 @@ const replaceTextForCommand = <
     | Command_ShowMessageBody
     | Command_CommentHeader
     | Command_CommentBody
-    | Command_ScrollTextBody
+    | Command_ScrollTextBody,
 >(
   command: Command,
-  fn: (key: string) => string | undefined
+  fn: (key: string) => string | undefined,
 ) => {
   const newText: string = replaceTextByFunction(command.parameters[0], fn);
   return {
@@ -76,7 +76,7 @@ const replaceTextForCommand = <
 
 const replaceTextForCommandShowMessage = (
   command: Command_ShowMessageHeader,
-  fn: (key: string) => string | undefined
+  fn: (key: string) => string | undefined,
 ): Command_ShowMessageHeader => {
   const newText: string = command.parameters[4]
     ? replaceTextByFunction(command.parameters[4], fn)
@@ -89,7 +89,7 @@ const replaceTextForCommandShowMessage = (
       positionType: command.parameters[3],
       speakerName: newText,
     },
-    command.indent
+    command.indent,
   );
 };
 
@@ -97,10 +97,10 @@ const replaceTextForCommandActor = <
   Command extends
     | Command_ChangeActorName
     | Command_ChangeActorProfile
-    | Command_ChangeActorNickName
+    | Command_ChangeActorNickName,
 >(
   command: Command,
-  fn: (key: string) => string | undefined
+  fn: (key: string) => string | undefined,
 ) => {
   const newName = replaceTextByFunction(command.parameters[1], fn);
   return {
@@ -115,10 +115,10 @@ const replaceTextForCommandActor = <
 
 const replaceTextForCommandShowChoices = (
   command: Command_ShowChoices,
-  fn: (key: string) => string | undefined
+  fn: (key: string) => string | undefined,
 ): Command_ShowChoices => {
   const newChoices: string[] = command.parameters[0].map((choice) =>
-    replaceTextByFunction(choice, fn)
+    replaceTextByFunction(choice, fn),
   );
   return {
     code: SHOW_CHOICES,

@@ -1,4 +1,4 @@
-import { CHANGE_WEAPONS } from "@RpgTypes/rmmz/rpg";
+import { CHANGE_WEAPONS } from "@RpgTypes/libs/eventCommand";
 import {
   OPERAND_DIRECT,
   OPERAND_VARIABLE,

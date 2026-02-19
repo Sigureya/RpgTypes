@@ -1,6 +1,11 @@
-import type { EventCommandLike } from "@RpgTypes/rmmz/eventCommand/frame";
+import type {
+  EventCommandLike,
+  CHANGE_SKILL,
+} from "@RpgTypes/libs/eventCommand";
 
-export interface Command_ChangeSkill extends EventCommandLike<318> {
+export interface Command_ChangeSkill extends EventCommandLike<
+  typeof CHANGE_SKILL
+> {
   parameters: ParamArray_ChangeSkill;
 }
 
@@ -8,5 +13,5 @@ export type ParamArray_ChangeSkill = [
   actorId: number,
   unk: number,
   operation: 0 | 1,
-  skillId: number
+  skillId: number,
 ];

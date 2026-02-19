@@ -1,7 +1,5 @@
-import type {
-  EventCommand,
-  EventCommandUnknown,
-} from "@RpgTypes/rmmz/eventCommand";
+import type { EventCommandUnknown } from "@RpgTypes/libs/eventCommand";
+import type { EventCommand } from "@RpgTypes/rmmz/eventCommand";
 import type { AudioFileParams } from "src/libs";
 import type { MapEvent } from "./event";
 import type { Encounter } from "./types/encounter";

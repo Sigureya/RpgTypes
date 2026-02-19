@@ -1,20 +1,20 @@
 import type {
   EventCommandLike,
   EventCommandUnknown,
-} from "@RpgTypes/rmmz/eventCommand";
+} from "@RpgTypes/libs/eventCommand";
 
 export const cloneParameters = <
-  Param extends ReadonlyArray<number | boolean | string>
+  Param extends ReadonlyArray<number | boolean | string>,
 >(
-  param: Param
+  param: Param,
 ): Param => {
   return [...param] as unknown as Param;
 };
 
 export const cloneEventCommand = <
-  Param extends Array<number | boolean | string>
+  Param extends Array<number | boolean | string>,
 >(
-  command: EventCommandLike<number, Param>
+  command: EventCommandLike<number, Param>,
 ) => {
   return {
     code: command.code,
@@ -29,7 +29,7 @@ const isPrimitive = (value: unknown): value is string | number | boolean =>
   typeof value === "boolean";
 
 export const isCloneableCommand = (
-  value: EventCommandUnknown
+  value: EventCommandUnknown,
 ): value is EventCommandLike<number, (string | number | boolean)[]> => {
   return value.parameters.every(isPrimitive);
 };
