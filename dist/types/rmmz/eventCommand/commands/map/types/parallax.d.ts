@@ -9,3 +9,10 @@ export type ParamArray_ChangeParallax = [
     sx: number,
     sy: number
 ];
+export interface ParamObject_ChangeParallax {
+    parallaxName: string;
+    loopX: boolean;
+    loopY: boolean;
+    sx: number;
+    sy: number;
+}

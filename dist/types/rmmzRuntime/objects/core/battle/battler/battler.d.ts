@@ -6,4 +6,7 @@ export interface Rmmz_Battler extends Rmmz_BattlerBase {
     loseHp(value: number): void;
     loseMp(value: number): void;
     loseTp(value: number): void;
+    performCollapse(): void;
+    clearResult(): void;
+    recoverAll(): void;
 }

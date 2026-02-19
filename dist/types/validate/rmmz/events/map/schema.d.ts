@@ -260,7 +260,7 @@ export declare const SCHEMA_DATA_MAP: {
             };
         };
     };
-    readonly required: ("note" | "bgm" | "battleback1Name" | "battleback2Name" | "bgs" | "data" | "parallaxName" | "specifyBattleback" | "parallaxLoopX" | "parallaxLoopY" | "parallaxShow" | "parallaxSx" | "parallaxSy" | "width" | "height" | "displayName" | "disableDashing" | "autoplayBgm" | "autoplayBgs" | "scrollType" | "tilesetId" | "encounterStep" | "encounterList" | "events")[];
+    readonly required: ("note" | "bgm" | "battleback1Name" | "battleback2Name" | "tilesetId" | "bgs" | "data" | "parallaxName" | "specifyBattleback" | "parallaxLoopX" | "parallaxLoopY" | "parallaxShow" | "parallaxSx" | "parallaxSy" | "width" | "height" | "displayName" | "disableDashing" | "autoplayBgm" | "autoplayBgs" | "scrollType" | "encounterStep" | "encounterList" | "events")[];
     readonly properties: {
         data: {
             type: string;

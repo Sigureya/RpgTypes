@@ -12,6 +12,8 @@ export declare class Game_BattlerBase implements Rmmz_BattlerBase {
     get hp(): number;
     get mp(): number;
     get tp(): number;
+    addState(stateId: number): void;
+    removeState(stateId: number): void;
     canEquip(item: Data_Equipment): boolean;
     canEquipWeapon(weapon: Data_Weapon): boolean;
     canEquipArmor(armor: Data_Armor): boolean;

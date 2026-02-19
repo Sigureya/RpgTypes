@@ -7,3 +7,8 @@ export type ParamArray_ChangeClass = [
     classId: number,
     keepExp: boolean
 ];
+export interface ParamObject_ChangeClass {
+    actorId: number;
+    classId: number;
+    keepExp: boolean;
+}
