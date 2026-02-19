@@ -96,7 +96,7 @@
   "homepage": "https://github.com/Sigureya/RpgTypes#readme",
   "dependencies": {
     "@sigureya/rmmz-plugin-schema": "github:Sigureya/RmmzPluginSchema",
-    "ajv": "^8.17.1",
+    "ajv": "^8.18.0",
     "jsonpath-js": "^0.3.0",
     "jsonschema": "^1.5.0"
   }
