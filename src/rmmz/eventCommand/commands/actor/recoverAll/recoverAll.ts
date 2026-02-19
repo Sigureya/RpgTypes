@@ -1,30 +1,40 @@
 import type {
   Command_RecoverAll,
-  Command_RecoverAllTargetVariable,
-  RecoverTarget,
+  ParamArray_EachActorRecoverAll,
+  ParamArray_RecoverAllTargetVariable,
+  ParamArray_TargetActorRecoverAll,
 } from "./types";
 
-export const isCommandRecoverAllUsingVariable = (
-  command: Command_RecoverAll
-): command is Command_RecoverAllTargetVariable => {
-  return command.parameters[0] === 1;
-};
-
-export const makeCommandRecoverAll = (
-  indent: number = 0
+export const makeCommandEachActorRecoverAll = (
+  indent: number = 0,
 ): Command_RecoverAll => ({
   code: 314,
   indent,
-  parameters: [0 satisfies RecoverTarget["EACH_MEMBER"], 0],
+  parameters: [0, 0] satisfies ParamArray_EachActorRecoverAll,
 });
 
-export const makeCommandRecoverAllTarget = (
+export const makeCommandTargetActorRecoverAll = (
+  param: { targetActorId: number },
+  indent: number = 0,
+): Command_RecoverAll => ({
+  code: 314,
+  indent,
+  parameters: [
+    0,
+    param.targetActorId,
+  ] satisfies ParamArray_TargetActorRecoverAll,
+});
+
+export const makeCommandTargetActorRecoverAllSelectV = (
   param: {
     targetSelectVariableId: number;
   },
-  indent: number = 0
-): Command_RecoverAllTargetVariable => ({
+  indent: number = 0,
+): Command_RecoverAll => ({
   code: 314,
   indent,
-  parameters: [1, param.targetSelectVariableId],
+  parameters: [
+    1,
+    param.targetSelectVariableId,
+  ] satisfies ParamArray_RecoverAllTargetVariable,
 });

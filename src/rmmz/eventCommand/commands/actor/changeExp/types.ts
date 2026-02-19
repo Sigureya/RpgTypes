@@ -11,5 +11,23 @@ export type ParamArray_ChangeExp = [
   operation: number,
   valueType: number,
   value: number,
-  showMessaage: boolean
+  showMessaage: boolean,
+];
+
+export type ParamArray_GainExp_Direct = [
+  targetDirect: 0,
+  actorId: number,
+  operationPlus: 0,
+  operandDirect: 0,
+  value: number,
+  showMessaage: boolean,
+];
+
+export type ParamArray_LoseExp_Direct = [
+  targetDirect: 0,
+  actorId: number,
+  operationMinus: 1,
+  operandDirect: 0,
+  value: number,
+  showMessaage: boolean,
 ];

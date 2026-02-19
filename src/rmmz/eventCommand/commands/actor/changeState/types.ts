@@ -8,7 +8,9 @@ export type ParamArray_ChangeActorState =
   | ParamArray_AddActorStateTarget
   | ParamArray_RemoveActorStateTarget
   | ParamArray_AddActorStateEach
-  | ParamArray_RemoveActorStateEach;
+  | ParamArray_RemoveActorStateEach
+  | ParamArray_AddActorStateVariable
+  | ParamArray_RemoveActorStateVariable;
 
 export type ParamArray_AddActorStateTarget = [
   modeDirect: 0,
@@ -38,11 +40,30 @@ export type ParamArray_RemoveActorStateEach = [
   stateId: number,
 ];
 
+export type ParamArray_AddActorStateVariable = [
+  modeVariable: 1,
+  actorIdVariable: number,
+  add: 0,
+  stateId: number,
+];
+
+export type ParamArray_RemoveActorStateVariable = [
+  modeVariable: 1,
+  actorIdVariable: number,
+  remove: 1,
+  stateId: number,
+];
+
 export interface ParamObject_ChangeActorState {
   actorId: number;
   stateId: number;
 }
 
 export interface ParamObject_ChangeActorStateEach {
+  stateId: number;
+}
+
+export interface ParamObject_ChangeActorStateVariable {
+  actorIdVariable: number;
   stateId: number;
 }

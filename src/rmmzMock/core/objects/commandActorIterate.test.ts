@@ -5,11 +5,20 @@ import type { EventCommand } from "@RpgTypes/rmmz/eventCommand";
 import {
   makeCommandAddActorStateEach,
   makeCommandAddActorStateTarget,
+  makeCommandAddActorStateVariable,
+  makeCommandEachActorRecoverAll,
+  makeCommandTargetActorRecoverAllSelectV,
   makeCommandRemoveActorStateEach,
   makeCommandRemoveActorStateTarget,
+  makeCommandRemoveActorStateVariable,
+  makeCommandTargetActorRecoverAll,
 } from "@RpgTypes/rmmz/eventCommand";
 import { CHANGE_ACTOR_STATE } from "@RpgTypes/rmmz/rpg";
-import type { Rmmz_Actor, Rmmz_Party } from "@RpgTypes/rmmzRuntime";
+import type {
+  Rmmz_Actor,
+  Rmmz_Party,
+  Rmmz_Variables,
+} from "@RpgTypes/rmmzRuntime";
 import type { FakeActors, FakeMap } from "./fakes/types";
 import { Game_Interpreter } from "./rmmz_objects";
 
@@ -17,14 +26,14 @@ type FakeParty = Pick<Rmmz_Party, "members">;
 
 type FakeActor = Pick<Rmmz_Actor, "isDead" | (typeof KEYS)[number]>;
 
+type FakeVariable = Pick<Rmmz_Variables, "value">;
+
 const KEYS = [
   "addState",
   "removeState",
   "performCollapse",
   "clearResult",
   "recoverAll",
-  "changeExp",
-  "changeLevel",
   "addParam",
   "learnSkill",
   "forgetSkill",
@@ -46,14 +55,17 @@ const createMockedActorsContainer = (
   actor: vi.fn().mockReturnValue(actor),
 });
 
+const MOCK_VALUE = 42;
+const createMockedVarible = (): MockedObject<FakeVariable> => ({
+  value: vi.fn().mockReturnValue(MOCK_VALUE),
+});
+
 const createMockedActor = (): MockedObject<FakeActor> => ({
   addState: vi.fn(),
   removeState: vi.fn(),
   performCollapse: vi.fn(),
   clearResult: vi.fn(),
   recoverAll: vi.fn(),
-  changeExp: vi.fn(),
-  changeLevel: vi.fn(),
   addParam: vi.fn(),
   learnSkill: vi.fn(),
   forgetSkill: vi.fn(),
@@ -67,6 +79,7 @@ interface MockObjects {
   party: MockedObject<FakeParty>;
   actorsContainer: MockedObject<FakeActors>;
   map: FakeMap;
+  variable: MockedObject<FakeVariable>;
 }
 
 const createMockObjects = (): MockObjects => {
@@ -75,38 +88,50 @@ const createMockObjects = (): MockObjects => {
   const member2 = createMockedActor();
   const party = createMockParty([member1, member2]);
   const actorsContainer = createMockedActorsContainer(actor);
-  const map = createFakeMap();
-  return { actor, member1, member2, party, actorsContainer, map };
+  return {
+    actor,
+    member1,
+    member2,
+    party,
+    actorsContainer,
+    map: createFakeMap(),
+    variable: createMockedVarible(),
+  };
 };
 
 const stubGlobal = (objects: MockObjects) => {
   vi.stubGlobal("$gameActors", objects.actorsContainer);
   vi.stubGlobal("$gameParty", objects.party);
   vi.stubGlobal("$gameMap", objects.map);
+  vi.stubGlobal("$gameVariables", objects.variable);
 };
 
 interface MethodCalls {
   actor: MemberFunctions<FakeActor>[];
-  member1: MemberFunctions<FakeActor>[];
-  member2: MemberFunctions<FakeActor>[];
-  actorId: number | undefined;
-  members: boolean;
 }
 
-interface TestCase {
-  name: string;
-  command: EventCommand;
-  commandLiteral: EventCommand;
-  calls: MethodCalls;
-}
+const runEvent = (command: EventCommand) => {
+  const objects = createMockObjects();
+  stubGlobal(objects);
+  const interpreter = new Game_Interpreter();
+  interpreter.setup([command], 0);
+  interpreter.executeCommand();
+  return objects;
+};
+
+const notCall = (actor: MockedObject<FakeActor>) => {
+  KEYS.forEach((key) => {
+    expect(actor[key], `called:${key}`).not.toHaveBeenCalled();
+  });
+};
 
 const verifyMethodCalls = (
   mock: MockedObject<FakeActor>,
   expectedCalls: MemberFunctions<FakeActor>[],
 ) => {
   expectedCalls.forEach((c) => {
-    expect(mock[c.fn]).toHaveBeenCalledWith(...c.args);
     expect(mock[c.fn]).toHaveBeenCalledOnce();
+    expect(mock[c.fn]).toHaveBeenCalledWith(...c.args);
   });
   KEYS.filter((key) => expectedCalls.every((c) => c.fn !== key)).forEach(
     (key) => {
@@ -115,47 +140,105 @@ const verifyMethodCalls = (
   );
 };
 
-const runTestCase = (testCase: TestCase) => {
+interface TestCaseEachActor {
+  name: string;
+  command: EventCommand;
+  commandLiteral: EventCommand;
+  calls: MethodCalls;
+}
+
+const runTestCaseM = (testCase: TestCaseEachActor) => {
   describe(testCase.name, () => {
     test("make", () => {
       expect(testCase.command).toEqual(testCase.commandLiteral);
     });
     describe("executeCommand", () => {
-      test("exec1: check if correct methods are called with correct arguments", () => {
-        const objects = createMockObjects();
-        stubGlobal(objects);
-        const interpreter = new Game_Interpreter();
-        interpreter.setup([testCase.commandLiteral], 0);
-        interpreter.executeCommand();
-        verifyMethodCalls(objects.actor, testCase.calls.actor);
-        verifyMethodCalls(objects.member1, testCase.calls.member1);
-        verifyMethodCalls(objects.member2, testCase.calls.member2);
+      test("actor method calls", () => {
+        const mockObjects = runEvent(testCase.commandLiteral);
+        notCall(mockObjects.actor);
+        verifyMethodCalls(mockObjects.member1, testCase.calls.actor);
+        verifyMethodCalls(mockObjects.member2, testCase.calls.actor);
       });
-      test("exec2: check if correct actor and members are retrieved", () => {
-        const objects = createMockObjects();
-        stubGlobal(objects);
-        const interpreter = new Game_Interpreter();
-        interpreter.setup([testCase.commandLiteral], 0);
-        interpreter.executeCommand();
-        if (testCase.calls.actorId === undefined) {
-          expect(objects.actorsContainer.actor).not.toHaveBeenCalled();
-        } else {
-          expect(objects.actorsContainer.actor).toHaveBeenCalledWith(
-            testCase.calls.actorId,
-          );
-          expect(objects.actorsContainer.actor).toHaveBeenCalledOnce();
-        }
-        if (testCase.calls.members) {
-          expect(objects.party.members).toHaveBeenCalledOnce();
-        } else {
-          expect(objects.party.members).not.toHaveBeenCalled();
-        }
+      test("called $gameParty.members and not called $gameActors.actor and $gameVariables.value", () => {
+        const mockObjects = runEvent(testCase.commandLiteral);
+        expect(mockObjects.actorsContainer.actor).not.toHaveBeenCalled();
+        expect(mockObjects.party.members).toHaveBeenCalledOnce();
+        expect(mockObjects.variable.value).not.toHaveBeenCalled();
       });
     });
   });
 };
 
-const testCases: TestCase[] = [
+interface TestCaseTargetActor {
+  name: string;
+  command: EventCommand;
+  commandLiteral: EventCommand;
+  calls: MethodCalls;
+  actorId: number;
+}
+
+const runTestCaseA = (testCase: TestCaseTargetActor) => {
+  describe(testCase.name, () => {
+    test("make", () => {
+      expect(testCase.command).toEqual(testCase.commandLiteral);
+    });
+    describe("executeCommand", () => {
+      test("actor method calls", () => {
+        const mockObjects = runEvent(testCase.commandLiteral);
+        notCall(mockObjects.member1);
+        notCall(mockObjects.member2);
+        verifyMethodCalls(mockObjects.actor, testCase.calls.actor);
+      });
+      test("called $gameActors.actor with actorId and not called $gameParty.members and $gameVariables.value", () => {
+        const mockObjects = runEvent(testCase.commandLiteral);
+        expect(mockObjects.actorsContainer.actor).toHaveBeenCalledOnce();
+        expect(mockObjects.actorsContainer.actor).toHaveBeenCalledWith(
+          testCase.actorId,
+        );
+        expect(mockObjects.party.members).not.toHaveBeenCalled();
+        expect(mockObjects.variable.value).not.toHaveBeenCalled();
+      });
+    });
+  });
+};
+
+interface TestCaseV {
+  name: string;
+  command: EventCommand;
+  commandLiteral: EventCommand;
+  variableId: number;
+  calls: MethodCalls;
+}
+
+const runTestCaseV = (testCase: TestCaseV) => {
+  describe(testCase.name, () => {
+    test("make", () => {
+      expect(testCase.command).toEqual(testCase.commandLiteral);
+    });
+    describe("executeCommand", () => {
+      test("actor method calls", () => {
+        const mockObjects = runEvent(testCase.commandLiteral);
+        notCall(mockObjects.member1);
+        notCall(mockObjects.member2);
+        verifyMethodCalls(mockObjects.actor, testCase.calls.actor);
+      });
+      test("called variable.value and $gameActors.actor with variable value", () => {
+        const mockObjects = runEvent(testCase.commandLiteral);
+        expect(mockObjects.party.members).not.toHaveBeenCalled();
+        expect(mockObjects.variable.value).toHaveBeenCalledOnce();
+        expect(mockObjects.variable.value).toHaveBeenCalledWith(
+          testCase.variableId,
+        );
+        expect(mockObjects.actorsContainer.actor).toHaveBeenCalledWith(
+          MOCK_VALUE,
+        );
+        expect(mockObjects.actorsContainer.actor).toHaveBeenCalledOnce();
+      });
+    });
+  });
+};
+
+const testCasesA: TestCaseTargetActor[] = [
   {
     name: "Add Actor State Target",
     commandLiteral: {
@@ -163,16 +246,13 @@ const testCases: TestCase[] = [
       parameters: [0, 6, 0, 4],
       indent: 0,
     },
+    actorId: 6,
     command: makeCommandAddActorStateTarget({ actorId: 6, stateId: 4 }),
     calls: {
       actor: [
         { fn: "addState", args: [4] },
         { fn: "clearResult", args: [] },
       ],
-      member1: [],
-      member2: [],
-      actorId: 6,
-      members: false,
     },
   },
   {
@@ -183,39 +263,86 @@ const testCases: TestCase[] = [
       parameters: [0, 12, 1, 9],
     },
     command: makeCommandRemoveActorStateTarget({ actorId: 12, stateId: 9 }),
+    actorId: 12,
     calls: {
       actor: [
         { fn: "removeState", args: [9] },
         { fn: "clearResult", args: [] },
       ],
-      member1: [],
-      member2: [],
-      actorId: 12,
-      members: false,
     },
   },
   {
-    name: "Remove Actor State Each",
+    name: "Recover All Target Actor",
     commandLiteral: {
-      code: CHANGE_ACTOR_STATE,
-      parameters: [0, 0, 1, 7],
+      code: 314,
+      parameters: [0, 3],
       indent: 0,
     },
-    command: makeCommandRemoveActorStateEach({ stateId: 7 }),
+    command: makeCommandTargetActorRecoverAll({ targetActorId: 3 }),
+    actorId: 3,
     calls: {
-      actor: [],
-      member1: [
-        { fn: "removeState", args: [7] },
-        { fn: "clearResult", args: [] },
-      ],
-      member2: [
-        { fn: "removeState", args: [7] },
-        { fn: "clearResult", args: [] },
-      ],
-      actorId: undefined,
-      members: true,
+      actor: [{ fn: "recoverAll", args: [] }],
     },
   },
+];
+
+const testCasesV: TestCaseV[] = [
+  {
+    name: "Add Actor State Variable",
+    commandLiteral: {
+      code: CHANGE_ACTOR_STATE,
+      parameters: [1, 5, 0, 4],
+      indent: 0,
+    },
+    command: makeCommandAddActorStateVariable({
+      actorIdVariable: 5,
+      stateId: 4,
+    }),
+    variableId: 5,
+    calls: {
+      actor: [
+        { fn: "addState", args: [4] },
+        { fn: "clearResult", args: [] },
+      ],
+    },
+  },
+  {
+    name: "Remove Actor State Variable",
+    commandLiteral: {
+      code: CHANGE_ACTOR_STATE,
+      parameters: [1, 8, 1, 9],
+      indent: 0,
+    },
+    command: makeCommandRemoveActorStateVariable({
+      actorIdVariable: 8,
+      stateId: 9,
+    }),
+    variableId: 8,
+    calls: {
+      actor: [
+        { fn: "removeState", args: [9] },
+        { fn: "clearResult", args: [] },
+      ],
+    },
+  },
+  {
+    name: "Recover All Target Variable",
+    commandLiteral: {
+      code: 314,
+      parameters: [1, 7],
+      indent: 0,
+    },
+    command: makeCommandTargetActorRecoverAllSelectV({
+      targetSelectVariableId: 7,
+    }),
+    variableId: 7,
+    calls: {
+      actor: [{ fn: "recoverAll", args: [] }],
+    },
+  },
+];
+
+const testCasesM: TestCaseEachActor[] = [
   {
     name: "Add Actor State Each",
     commandLiteral: {
@@ -225,21 +352,51 @@ const testCases: TestCase[] = [
     },
     command: makeCommandAddActorStateEach({ stateId: 4 }),
     calls: {
-      actor: [],
-      member1: [
+      actor: [
         { fn: "addState", args: [4] },
         { fn: "clearResult", args: [] },
       ],
-      member2: [
-        { fn: "addState", args: [4] },
+    },
+  },
+  {
+    name: "Remove Actor State Each",
+    commandLiteral: {
+      code: CHANGE_ACTOR_STATE,
+      parameters: [0, 0, 1, 9],
+      indent: 0,
+    },
+    command: makeCommandRemoveActorStateEach({ stateId: 9 }),
+    calls: {
+      actor: [
+        { fn: "removeState", args: [9] },
         { fn: "clearResult", args: [] },
       ],
-      actorId: undefined,
-      members: true,
+    },
+  },
+  {
+    name: "Recover All Each",
+    commandLiteral: {
+      code: 314,
+      parameters: [0, 0],
+      indent: 0,
+    },
+    command: makeCommandEachActorRecoverAll(),
+    calls: {
+      actor: [{ fn: "recoverAll", args: [] }],
     },
   },
 ];
 
-describe("Command Actor Iterate", () => {
-  testCases.forEach(runTestCase);
+describe("Command Each Actor", () => {
+  testCasesM.forEach((tc) => {
+    runTestCaseM(tc);
+  });
+});
+
+describe("Command Variable Actor", () => {
+  testCasesV.forEach(runTestCaseV);
+});
+
+describe("Command Target Actor", () => {
+  testCasesA.forEach(runTestCaseA);
 });
