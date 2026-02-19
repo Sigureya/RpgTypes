@@ -1,5 +1,5 @@
-import { EventCommandLike } from '../../frame';
-export interface Command_ShowAnimation extends EventCommandLike<212> {
+import { EventCommandLike, SHOW_ANIMATION } from '../../../../libs/eventCommand';
+export interface Command_ShowAnimation extends EventCommandLike<typeof SHOW_ANIMATION> {
     parameters: ParamArray_ShowAnimation;
 }
 export type ParamArray_ShowAnimation = [

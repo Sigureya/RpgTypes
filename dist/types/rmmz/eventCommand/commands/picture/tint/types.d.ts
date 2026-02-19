@@ -1,6 +1,5 @@
 import { ColorRGBA } from '../../../../../libs';
-import { EventCommandLike } from '../../../frame';
-import { TINT_PICTURE } from '../../../../rpg';
+import { EventCommandLike, TINT_PICTURE } from '../../../../../libs/eventCommand';
 export interface Command_TintPicture extends EventCommandLike<typeof TINT_PICTURE> {
     parameters: ParamArray_TintPicture;
 }

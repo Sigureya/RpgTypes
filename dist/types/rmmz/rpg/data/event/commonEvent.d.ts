@@ -1,4 +1,4 @@
-import { EventCommandUnknown } from '../../../eventCommand';
+import { EventCommandUnknown } from '../../../../libs/eventCommand';
 export interface Data_CommonEventUnknown<Command extends EventCommandUnknown = EventCommandUnknown> extends Data_CommonEventLike {
     trigger: number;
     id: number;

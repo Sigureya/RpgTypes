@@ -1,5 +1,4 @@
-import { EventCommandLike } from '../../../frame';
-import { BATTLE_PROCESSING } from '../../../../rpg';
+import { EventCommandLike, BATTLE_PROCESSING } from '../../../../../libs/eventCommand';
 import { BATTLE_DIRECT, BATTLE_ENCOUNT, BATTLE_VARIABLE } from './constants';
 export interface Command_BattleProcessing extends EventCommandLike<typeof BATTLE_PROCESSING> {
     parameters: ParamArray_BattleProcessing;

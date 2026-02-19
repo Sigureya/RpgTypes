@@ -1,8 +1,8 @@
-import { EventCommandLike } from '../../../frame';
-export interface Command_ChangeActorState extends EventCommandLike<313> {
+import { EventCommandLike, CHANGE_ACTOR_STATE } from '../../../../../libs/eventCommand';
+export interface Command_ChangeActorState extends EventCommandLike<typeof CHANGE_ACTOR_STATE> {
     parameters: ParamArray_ChangeActorState;
 }
-export type ParamArray_ChangeActorState = ParamArray_AddActorStateTarget | ParamArray_RemoveActorStateTarget | ParamArray_AddActorStateEach | ParamArray_RemoveActorStateEach;
+export type ParamArray_ChangeActorState = ParamArray_AddActorStateTarget | ParamArray_RemoveActorStateTarget | ParamArray_AddActorStateEach | ParamArray_RemoveActorStateEach | ParamArray_AddActorStateVariable | ParamArray_RemoveActorStateVariable;
 export type ParamArray_AddActorStateTarget = [
     modeDirect: 0,
     actorId: number,
@@ -27,10 +27,26 @@ export type ParamArray_RemoveActorStateEach = [
     remove: 1,
     stateId: number
 ];
+export type ParamArray_AddActorStateVariable = [
+    modeVariable: 1,
+    actorIdVariable: number,
+    add: 0,
+    stateId: number
+];
+export type ParamArray_RemoveActorStateVariable = [
+    modeVariable: 1,
+    actorIdVariable: number,
+    remove: 1,
+    stateId: number
+];
 export interface ParamObject_ChangeActorState {
     actorId: number;
     stateId: number;
 }
 export interface ParamObject_ChangeActorStateEach {
+    stateId: number;
+}
+export interface ParamObject_ChangeActorStateVariable {
+    actorIdVariable: number;
     stateId: number;
 }

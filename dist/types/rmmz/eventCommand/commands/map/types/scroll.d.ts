@@ -1,5 +1,4 @@
-import { EventCommandLike } from '../../../frame';
-import { SCROLL_MAP } from '../../../../rpg';
+import { EventCommandLike, SCROLL_MAP } from '../../../../../libs/eventCommand';
 import { Direction8 } from '../../../../utils';
 export interface Command_ScrollMap extends EventCommandLike<typeof SCROLL_MAP> {
     parameters: ParamArray_ScrollMap;

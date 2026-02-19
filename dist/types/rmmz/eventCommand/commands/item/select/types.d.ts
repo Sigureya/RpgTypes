@@ -1,5 +1,4 @@
-import { EventCommandLike } from '../../../frame';
-import { SELECT_ITEM } from '../../../../rpg';
+import { EventCommandLike, SELECT_ITEM } from '../../../../../libs/eventCommand';
 export interface Command_SelectItem extends EventCommandLike<typeof SELECT_ITEM> {
     parameters: ParamArray_SelectItem;
 }

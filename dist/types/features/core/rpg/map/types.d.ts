@@ -1,4 +1,4 @@
-import { EventCommandUnknown } from '../../../../rmmz';
+import { EventCommandUnknown } from '../../../../libs/eventCommand';
 export interface CommandContainer<Command extends EventCommandUnknown> {
     list: ReadonlyArray<Command>;
 }

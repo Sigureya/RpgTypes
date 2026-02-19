@@ -1,4 +1,4 @@
-import { EventCommandLike, EventCommandUnknown } from '../..';
+import { EventCommandLike, EventCommandUnknown } from '../../../../libs/eventCommand';
 export declare const cloneParameters: <Param extends ReadonlyArray<number | boolean | string>>(param: Param) => Param;
 export declare const cloneEventCommand: <Param extends Array<number | boolean | string>>(command: EventCommandLike<number, Param>) => {
     code: number;

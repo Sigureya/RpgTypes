@@ -1,6 +1,6 @@
 import { g as be } from "../../shared/_commonjsHelpers.es.js";
 var ke, he = { exports: {} };
-const Fe = be(function() {
+const Fe = be((function() {
   if (ke) return he.exports;
   ke = 1, he.exports = u, he.exports.default = u;
   const J = { properties: {
@@ -114,9 +114,9 @@ const Fe = be(function() {
     return u.errors = null, !0;
   }
   return he.exports;
-}()), Se = (J) => Fe(J);
+})()), Se = (J) => Fe(J);
 var Ne, fe = { exports: {} };
-const Ae = be(function() {
+const Ae = be((function() {
   if (Ne) return fe.exports;
   Ne = 1, fe.exports = u, fe.exports.default = u;
   const J = { properties: { code: { enum: [132, 133, 139, 241, 245, 249, 250] } } };
@@ -284,11 +284,11 @@ const Ae = be(function() {
     return u.errors = null, !0;
   }
   return fe.exports;
-}()), Ve = (J) => Ae(J);
+})()), Ve = (J) => Ae(J);
 var Oe, ue = {
   exports: {}
 };
-const Me = be(function() {
+const Me = be((function() {
   if (Oe) return ue.exports;
   Oe = 1, ue.exports = n, ue.exports.default = n;
   const J = {
@@ -2220,7 +2220,7 @@ const Me = be(function() {
     return n.errors = t, e === 0;
   }
   return ue.exports;
-}()), je = (J) => Me(J);
+})()), je = (J) => Me(J);
 export {
   Se as isActorTextCommand,
   Ve as isAudioCommand,

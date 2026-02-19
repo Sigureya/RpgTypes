@@ -1,5 +1,4 @@
-import { PLAY_MOVIE } from '../../../rpg';
-import { EventCommandLike } from '../../frame';
+import { EventCommandLike, PLAY_MOVIE } from '../../../../libs/eventCommand';
 export interface Command_PlayMovie extends EventCommandLike<typeof PLAY_MOVIE> {
     parameters: ParamArray_PlayMovie;
 }

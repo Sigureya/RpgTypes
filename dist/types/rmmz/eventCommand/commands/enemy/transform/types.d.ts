@@ -1,5 +1,4 @@
-import { EventCommandLike } from '../../../frame';
-import { ENEMY_TRANSFORM } from '../../../../rpg';
+import { EventCommandLike, ENEMY_TRANSFORM } from '../../../../../libs/eventCommand';
 export interface Command_EnemyTransform extends EventCommandLike<typeof ENEMY_TRANSFORM> {
     parameters: ParamArray_EnemyTransfrom;
 }

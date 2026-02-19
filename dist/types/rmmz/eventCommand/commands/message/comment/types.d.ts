@@ -1,11 +1,11 @@
-import { EventCommandLike } from '../../../frame';
+import { COMMENT_BODY, COMMENT_HEAD, EventCommandLike } from '../../../../../libs/eventCommand';
 export type ParamArray_Comment = [comment: string];
 export interface ParamObject_Comment {
     comment: string;
 }
-export interface Command_CommentHeader extends EventCommandLike<108, ParamArray_Comment> {
+export interface Command_CommentHeader extends EventCommandLike<typeof COMMENT_HEAD, ParamArray_Comment> {
     parameters: [string];
 }
-export interface Command_CommentBody extends EventCommandLike<408, ParamArray_Comment> {
+export interface Command_CommentBody extends EventCommandLike<typeof COMMENT_BODY, ParamArray_Comment> {
     parameters: [string];
 }

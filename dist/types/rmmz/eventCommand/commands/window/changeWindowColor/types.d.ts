@@ -1,5 +1,5 @@
 import { ColorRGBA } from '../../../../../libs';
-import { EventCommandLike } from '../../../frame';
-export interface Command_ChangeWindowColor extends EventCommandLike<138> {
+import { CHANGE_WINDOW_COLOR, EventCommandLike } from '../../../../../libs/eventCommand';
+export interface Command_ChangeWindowColor extends EventCommandLike<typeof CHANGE_WINDOW_COLOR> {
     parameters: [color: ColorRGBA];
 }

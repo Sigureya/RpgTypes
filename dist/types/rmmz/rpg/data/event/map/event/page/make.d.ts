@@ -1,4 +1,4 @@
-import { EventCommandUnknown } from '../../../../../../eventCommand';
+import { EventCommandUnknown } from '../../../../../../../libs/eventCommand';
 import { MapEvent_Image } from './image/types';
 import { MapEvent } from './mapEvent';
 import { MapEventPage } from './page';

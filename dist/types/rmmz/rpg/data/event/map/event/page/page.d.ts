@@ -1,4 +1,4 @@
-import { EventCommandUnknown } from '../../../../../../eventCommand';
+import { EventCommandUnknown } from '../../../../../../../libs/eventCommand';
 import { MapEvent_PageCondition } from './condition';
 import { MoveRouteDataUnkwnown } from './eventCommand/moveRoute';
 import { MapEvent_Image } from './image/types';

@@ -1,4 +1,5 @@
-import { BattleEventPage, Data_CommonEventUnknown, Data_TroopUnknonw, EventCommandUnknown, MapEventContainer } from '../../../../rmmz';
+import { EventCommandUnknown } from '../../../../libs/eventCommand';
+import { BattleEventPage, Data_CommonEventUnknown, Data_TroopUnknonw, MapEventContainer } from '../../../../rmmz';
 import { MapEventContext } from './types';
 interface EventContainer<Command> {
     id: number;

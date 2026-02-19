@@ -1,5 +1,5 @@
-import { EventCommandLike } from '../../../frame';
-export interface Command_ChangeParallax extends EventCommandLike<284> {
+import { EventCommandLike, CHANGE_PARALLAX } from '../../../../../libs/eventCommand';
+export interface Command_ChangeParallax extends EventCommandLike<typeof CHANGE_PARALLAX> {
     parameters: ParamArray_ChangeParallax;
 }
 export type ParamArray_ChangeParallax = [

@@ -1,4 +1,4 @@
-import { EventCommandLike } from '../../..';
+import { EventCommandLike, SHOW_MESSAGE } from '../../../../../libs/eventCommand';
 export type ParamArray_ShowMessage = [
     facename: string,
     faceIndex: number,
@@ -13,7 +13,7 @@ export interface ParamObject_ShowMessage {
     positionType: number;
     speakerName: string;
 }
-export interface Command_ShowMessageHeader extends EventCommandLike<101> {
+export interface Command_ShowMessageHeader extends EventCommandLike<typeof SHOW_MESSAGE> {
     parameters: ParamArray_ShowMessage;
 }
 /**
@@ -27,6 +27,8 @@ export interface Command2_ShowMessage_MV extends EventCommandLike<101> {
         positionType: number
     ];
 }
-export interface Command_ShowMessageBody extends EventCommandLike<401, [string]> {
+export interface Command_ShowMessageBody extends EventCommandLike<401, [
+    string
+]> {
     parameters: [text: string];
 }

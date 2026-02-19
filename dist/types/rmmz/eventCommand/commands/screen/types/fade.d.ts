@@ -1,5 +1,4 @@
-import { EventCommandLike } from '../../../frame';
-import { FADEIN_SCREEN, FADEOUT_SCREEN } from '../../../../rpg';
+import { EventCommandLike, FADEOUT_SCREEN, FADEIN_SCREEN } from '../../../../../libs/eventCommand';
 export interface Command_FadeOutScreen extends EventCommandLike<typeof FADEOUT_SCREEN> {
     parameters: [];
 }

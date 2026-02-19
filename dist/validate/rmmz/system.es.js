@@ -1,7 +1,7 @@
 import { g as L } from "../../shared/_commonjsHelpers.es.js";
 import { r as I } from "../../shared/ucs2length.es.js";
 var X, B = { exports: {} };
-const U = L(function() {
+const U = L((function() {
   if (X) return B.exports;
   X = 1, B.exports = r, B.exports.default = r;
   const W = { properties: {
@@ -3732,7 +3732,7 @@ const U = L(function() {
     return r.errors = null, !0;
   }
   return B.exports;
-}()), _ = (W) => U(W);
+})()), _ = (W) => U(W);
 export {
   _ as isDataSystem
 };

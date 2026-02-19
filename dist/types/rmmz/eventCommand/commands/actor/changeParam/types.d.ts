@@ -1,4 +1,4 @@
-import { EventCommandLike } from '../../../frame';
+import { EventCommandLike } from '../../../../../libs/eventCommand';
 export interface Command_ChangeParam extends EventCommandLike<317> {
     parameters: ParamArray_ChangeParam;
 }

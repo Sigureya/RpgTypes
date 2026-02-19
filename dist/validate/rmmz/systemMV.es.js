@@ -1,7 +1,7 @@
 import { g as R } from "../../shared/_commonjsHelpers.es.js";
 import { r as O } from "../../shared/ucs2length.es.js";
 var C, q = { exports: {} };
-const G = R(function() {
+const G = R((function() {
   if (C) return q.exports;
   C = 1, q.exports = r, q.exports.default = r;
   const B = { properties: {
@@ -3112,7 +3112,7 @@ const G = R(function() {
     return r.errors = null, !0;
   }
   return q.exports;
-}()), K = (B) => G(B);
+})()), K = (B) => G(B);
 export {
   K as isDataSystemMV
 };

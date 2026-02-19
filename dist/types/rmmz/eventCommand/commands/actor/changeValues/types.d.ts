@@ -1,5 +1,4 @@
-import { EventCommandLike } from '../../../frame';
-import { CHANGE_HP, CHANGE_MP, CHANGE_TP } from '../../../../rpg';
+import { EventCommandLike, CHANGE_HP, CHANGE_MP, CHANGE_TP } from '../../../../../libs/eventCommand';
 import { TARGET_DIRECT, TARGET_VARIABLE } from './constants';
 export interface Command_ChangeActorHP extends EventCommandLike<typeof CHANGE_HP> {
     parameters: ParamArray_ChangeActorHP;

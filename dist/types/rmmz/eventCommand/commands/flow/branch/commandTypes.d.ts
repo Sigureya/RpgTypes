@@ -1,9 +1,8 @@
-import { EventCommandLike } from '../../..';
-import { CONDITIONAL_BRANCH } from '../../../../rpg';
+import { EventCommandLike, CONDITIONAL_BRANCH, CONDITIONAL_BRANCH_ELSE } from '../../../../../libs/eventCommand';
 import { BranchParameters } from './types/branchParams';
 export interface Command_ConditionalBranch extends EventCommandLike<typeof CONDITIONAL_BRANCH> {
     parameters: BranchParameters;
 }
-export interface Command_ConditionalBranchElse extends EventCommandLike<411> {
+export interface Command_ConditionalBranchElse extends EventCommandLike<typeof CONDITIONAL_BRANCH_ELSE> {
     parameters: [];
 }
