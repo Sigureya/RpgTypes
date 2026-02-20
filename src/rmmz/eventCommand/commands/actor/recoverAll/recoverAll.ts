@@ -27,7 +27,7 @@ export const makeCommandTargetActorRecoverAll = (
 
 export const makeCommandTargetActorRecoverAllSelectV = (
   param: {
-    targetSelectVariableId: number;
+    variableId: number;
   },
   indent: number = 0,
 ): Command_RecoverAll => ({
@@ -35,6 +35,6 @@ export const makeCommandTargetActorRecoverAllSelectV = (
   indent,
   parameters: [
     1,
-    param.targetSelectVariableId,
+    param.variableId,
   ] satisfies ParamArray_RecoverAllTargetVariable,
 });
