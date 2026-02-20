@@ -94,6 +94,7 @@ export const CHANGE_MP = 312 as const;
 export const CHANGE_TP = 326 as const;
 export const RECOVER_ALL = 314 as const;
 export const CHANGE_EXP = 315 as const;
+export const CHANGE_LEVEL = 316 as const;
 
 export const CHANGE_ACTOR_STATE = 313 as const;
 
