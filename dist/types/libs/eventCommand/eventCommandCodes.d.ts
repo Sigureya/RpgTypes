@@ -84,6 +84,7 @@ export declare const CHANGE_MP: 312;
 export declare const CHANGE_TP: 326;
 export declare const RECOVER_ALL: 314;
 export declare const CHANGE_EXP: 315;
+export declare const CHANGE_LEVEL: 316;
 export declare const CHANGE_ACTOR_STATE: 313;
 export declare const CHANGE_PARAMETER: 317;
 export declare const CHANGE_SKILL: 318;
