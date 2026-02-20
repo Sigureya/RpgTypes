@@ -2,7 +2,12 @@ import type { MockedObject } from "vitest";
 import { describe, expect, test, vi } from "vitest";
 import type { MemberFunctions } from "@RpgTypes/libs";
 import type { EventCommand } from "@RpgTypes/rmmz/eventCommand";
-import { makeCommandGainExp } from "@RpgTypes/rmmz/eventCommand/commands/actor/changeExp/make";
+import {
+  makeCommandGainExp,
+  makeCommandGainExpVariable,
+  makeCommandLoseExp,
+  makeCommandLoseExpVariable,
+} from "@RpgTypes/rmmz/eventCommand/commands/actor/changeExp/make";
 import type {
   Rmmz_Actor,
   Rmmz_Party,
@@ -21,6 +26,8 @@ const KEYS = [
   "addParam",
   "changeExp",
   "changeLevel",
+  "currentExp",
+  "currentLevel",
 ] as const satisfies (keyof Rmmz_Actor)[];
 
 const createFakeMap = (): FakeMap => ({
@@ -47,6 +54,8 @@ const MOCK_INDEX_B = 233;
 
 const MOCK_VALUE_C = 811;
 
+const MOCK_CURRENT_EXP_VALUE = 120000;
+
 const createMockedVarible = (): MockedObject<FakeVariable> => ({
   value: vi.fn((x: number) => {
     if (x === MOCK_INDEX_A) {
@@ -63,6 +72,8 @@ const createMockedActor = (): MockedObject<FakeActor> => ({
   addParam: vi.fn(),
   changeExp: vi.fn(),
   changeLevel: vi.fn(),
+  currentExp: vi.fn().mockReturnValue(MOCK_CURRENT_EXP_VALUE),
+  currentLevel: vi.fn(),
 });
 
 interface MockObjects {
@@ -108,17 +119,34 @@ const runEvent = (command: EventCommand): MockObjects => {
   return mocks;
 };
 
+interface MethodCalls {
+  variableCall: number[];
+  member: MemberFunctions<FakeActor>[];
+  actor: MemberFunctions<FakeActor>[];
+}
+
 interface TestCase {
   name: string;
   command: EventCommand;
   commandLiteral: EventCommand;
-  variableCall: number[];
+  calls: MethodCalls;
 }
 
 const runTestCase = (testCase: TestCase) => {
   describe(testCase.name, () => {
     test("command structure", () => {
       expect(testCase.command).toEqual(testCase.commandLiteral);
+    });
+    describe("command execution", () => {
+      test("variable calls", () => {
+        const mocks = runEvent(testCase.commandLiteral);
+        expect(mocks.variable.value).toHaveBeenCalledTimes(
+          testCase.calls.variableCall.length,
+        );
+        testCase.calls.variableCall.forEach((variableId) => {
+          expect(mocks.variable.value).toHaveBeenCalledWith(variableId);
+        });
+      });
     });
   });
 };
@@ -135,7 +163,80 @@ const testCases: TestCase[] = [
       indent: 0,
       parameters: [0, 1, 0, 0, 100, true],
     },
-    variableCall: [],
+    calls: {
+      variableCall: [],
+      member: [],
+      actor: [{ fn: "changeExp", args: [100 + MOCK_CURRENT_EXP_VALUE, true] }],
+    },
+  },
+  {
+    name: "loseExp",
+    command: makeCommandLoseExp({
+      actorId: 1,
+      value: 719,
+      showMessaage: true,
+    }),
+    commandLiteral: {
+      code: 315,
+      indent: 0,
+      parameters: [0, 1, 1, 0, 719, true],
+    },
+    calls: {
+      variableCall: [],
+      member: [],
+      actor: [
+        {
+          fn: "changeExp",
+          args: [MOCK_CURRENT_EXP_VALUE - 719, true],
+        },
+      ],
+    },
+  },
+  {
+    name: "addExp with variable",
+    command: makeCommandGainExpVariable({
+      actorId: 1,
+      variableId: MOCK_INDEX_A,
+      showMessaage: true,
+    }),
+    commandLiteral: {
+      code: 315,
+      indent: 0,
+      parameters: [0, 1, 0, 1, MOCK_INDEX_A, true],
+    },
+    calls: {
+      variableCall: [MOCK_INDEX_A],
+      member: [],
+      actor: [
+        {
+          fn: "changeExp",
+          args: [MOCK_VALUE_C + MOCK_CURRENT_EXP_VALUE, true],
+        },
+      ],
+    },
+  },
+  {
+    name: "loseExp with variable",
+    commandLiteral: {
+      code: 315,
+      indent: 0,
+      parameters: [0, 1, 1, 1, MOCK_INDEX_B, true],
+    },
+    command: makeCommandLoseExpVariable({
+      actorId: 1,
+      variableId: MOCK_INDEX_B,
+      showMessaage: true,
+    }),
+    calls: {
+      variableCall: [MOCK_INDEX_B],
+      member: [],
+      actor: [
+        {
+          fn: "changeExp",
+          args: [MOCK_CURRENT_EXP_VALUE - MOCK_VALUE_B, true],
+        },
+      ],
+    },
   },
 ];
 
