@@ -13,7 +13,9 @@ export type ParamArray_ChangeSkill =
   | ParamArray_LearnSkill
   | ParamArray_ForgetSkill
   | ParamArray_LearnSkillEach
-  | ParamArray_ForgetSkillEach;
+  | ParamArray_ForgetSkillEach
+  | ParamArray_LearnSkillVariable
+  | ParamArray_ForgetSkillVariable;
 
 export type ParamArray_LearnSkill = [
   modeDirect: 0,
@@ -39,6 +41,20 @@ export type ParamArray_LearnSkillEach = [
 export type ParamArray_ForgetSkillEach = [
   modeDirect: 0,
   each: 0,
+  operationLearn: 1,
+  skillId: number,
+];
+
+export type ParamArray_LearnSkillVariable = [
+  modeVariable: 1,
+  actorIdVariable: number,
+  operationLearn: 0,
+  skillId: number,
+];
+
+export type ParamArray_ForgetSkillVariable = [
+  modeVariable: 1,
+  actorIdVariable: number,
   operationLearn: 1,
   skillId: number,
 ];
