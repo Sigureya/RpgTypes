@@ -1,3 +1,4 @@
+export * from "./changeExp";
 export * from "./changeState";
 export * from "./make";
 export * from "./recoverAll/index";
