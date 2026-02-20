@@ -1,12 +1,15 @@
 import { CHANGE_LEVEL } from "@RpgTypes/libs/eventCommand";
 import type {
-  ParamObject_ChangeLevel,
   Command_ChangeActorLevel,
-  ParamArray_LevelUpDirect,
-  ParamArray_LevelDownDirect,
-  ParamObject_ChangeLevelByVariable,
-  ParamArray_LevelUpByVariable,
   ParamArray_LevelDownByVariable,
+  ParamArray_LevelDownDirect,
+  ParamArray_LevelDownEach,
+  ParamArray_LevelUpByVariable,
+  ParamArray_LevelUpDirect,
+  ParamArray_LevelUpEach,
+  ParamObject_ChangeLevel,
+  ParamObject_ChangeLevelByVariable,
+  ParamObject_ChangeLevelEach,
 } from "./types";
 
 export const makeCommandActorLevelUp = (
@@ -71,4 +74,36 @@ export const makeCommandActorLevelDownByVariable = (
     param.variableId,
     param.showMessaage,
   ] satisfies ParamArray_LevelDownByVariable,
+});
+
+export const makeCommandActorLevelUpEach = (
+  param: ParamObject_ChangeLevelEach,
+  indent: number = 0,
+): Command_ChangeActorLevel => ({
+  code: CHANGE_LEVEL,
+  indent,
+  parameters: [
+    1,
+    0,
+    0,
+    0,
+    param.level,
+    param.showMessaage,
+  ] satisfies ParamArray_LevelUpEach,
+});
+
+export const makeCommandActorLevelDownEach = (
+  param: ParamObject_ChangeLevelEach,
+  indent: number = 0,
+): Command_ChangeActorLevel => ({
+  code: CHANGE_LEVEL,
+  indent,
+  parameters: [
+    1,
+    0,
+    1,
+    0,
+    param.level,
+    param.showMessaage,
+  ] satisfies ParamArray_LevelDownEach,
 });

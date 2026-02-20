@@ -10,7 +10,9 @@ export type ParamArray_ChangeActorLevel =
   | ParamArray_LevelUpDirect
   | ParamArray_LevelDownDirect
   | ParamArray_LevelUpByVariable
-  | ParamArray_LevelDownByVariable;
+  | ParamArray_LevelDownByVariable
+  | ParamArray_LevelUpEach
+  | ParamArray_LevelDownEach;
 
 export type ParamArray_LevelUpDirect = [
   targetDirect: 0,
@@ -48,6 +50,24 @@ export type ParamArray_LevelDownByVariable = [
   showMessaage: boolean,
 ];
 
+export type ParamArray_LevelUpEach = [
+  targetEach: 1,
+  each: 0,
+  operationPlus: 0,
+  operandDirect: 0,
+  level: number,
+  showMessaage: boolean,
+];
+
+export type ParamArray_LevelDownEach = [
+  targetEach: 1,
+  each: 0,
+  operationMinus: 1,
+  operandDirect: 0,
+  level: number,
+  showMessaage: boolean,
+];
+
 export interface ParamObject_ChangeLevel {
   actorId: number;
   level: number;
@@ -57,5 +77,10 @@ export interface ParamObject_ChangeLevel {
 export interface ParamObject_ChangeLevelByVariable {
   actorId: number;
   variableId: number;
+  showMessaage: boolean;
+}
+
+export interface ParamObject_ChangeLevelEach {
+  level: number;
   showMessaage: boolean;
 }
