@@ -51,7 +51,7 @@ export type ParamArray_LevelDownByVariable = [
 ];
 
 export type ParamArray_LevelUpEach = [
-  targetEach: 1,
+  targetDirect: 0,
   each: 0,
   operationPlus: 0,
   operandDirect: 0,
@@ -60,7 +60,7 @@ export type ParamArray_LevelUpEach = [
 ];
 
 export type ParamArray_LevelDownEach = [
-  targetEach: 1,
+  targetDirect: 0,
   each: 0,
   operationMinus: 1,
   operandDirect: 0,

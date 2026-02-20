@@ -83,7 +83,7 @@ export const makeCommandActorLevelUpEach = (
   code: CHANGE_LEVEL,
   indent,
   parameters: [
-    1,
+    0,
     0,
     0,
     0,
@@ -99,7 +99,7 @@ export const makeCommandActorLevelDownEach = (
   code: CHANGE_LEVEL,
   indent,
   parameters: [
-    1,
+    0,
     0,
     1,
     0,
