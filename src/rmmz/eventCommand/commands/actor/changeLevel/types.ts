@@ -53,3 +53,9 @@ export interface ParamObject_ChangeLevel {
   level: number;
   showMessaage: boolean;
 }
+
+export interface ParamObject_ChangeLevelByVariable {
+  actorId: number;
+  variableId: number;
+  showMessaage: boolean;
+}
