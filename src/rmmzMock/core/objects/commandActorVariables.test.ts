@@ -132,6 +132,21 @@ interface TestCase {
   calls: MethodCalls;
 }
 
+const verifyMethodCalls = (
+  mock: MockedObject<FakeActor>,
+  expectedCalls: MemberFunctions<FakeActor>[],
+) => {
+  expectedCalls.forEach((c) => {
+    expect(mock[c.fn]).toHaveBeenCalledOnce();
+    expect(mock[c.fn]).toHaveBeenCalledWith(...c.args);
+  });
+  KEYS.filter((key) => expectedCalls.every((c) => c.fn !== key)).forEach(
+    (key) => {
+      expect(mock[key], `called:${key}`).not.toHaveBeenCalled();
+    },
+  );
+};
+
 const runTestCase = (testCase: TestCase) => {
   describe(testCase.name, () => {
     test("command structure", () => {
@@ -146,6 +161,12 @@ const runTestCase = (testCase: TestCase) => {
         testCase.calls.variableCall.forEach((variableId) => {
           expect(mocks.variable.value).toHaveBeenCalledWith(variableId);
         });
+      });
+      test("actor member calls", () => {
+        const mocks = runEvent(testCase.commandLiteral);
+        verifyMethodCalls(mocks.actor, testCase.calls.actor);
+        verifyMethodCalls(mocks.member1, testCase.calls.member);
+        verifyMethodCalls(mocks.member2, testCase.calls.member);
       });
     });
   });
@@ -166,7 +187,13 @@ const testCases: TestCase[] = [
     calls: {
       variableCall: [],
       member: [],
-      actor: [{ fn: "changeExp", args: [100 + MOCK_CURRENT_EXP_VALUE, true] }],
+      actor: [
+        { fn: "currentExp", args: [] },
+        {
+          fn: "changeExp",
+          args: [100 + MOCK_CURRENT_EXP_VALUE, true],
+        },
+      ],
     },
   },
   {
@@ -185,6 +212,7 @@ const testCases: TestCase[] = [
       variableCall: [],
       member: [],
       actor: [
+        { fn: "currentExp", args: [] },
         {
           fn: "changeExp",
           args: [MOCK_CURRENT_EXP_VALUE - 719, true],
@@ -208,9 +236,10 @@ const testCases: TestCase[] = [
       variableCall: [MOCK_INDEX_A],
       member: [],
       actor: [
+        { fn: "currentExp", args: [] },
         {
           fn: "changeExp",
-          args: [MOCK_VALUE_C + MOCK_CURRENT_EXP_VALUE, true],
+          args: [MOCK_VALUE_A + MOCK_CURRENT_EXP_VALUE, true],
         },
       ],
     },
@@ -231,6 +260,7 @@ const testCases: TestCase[] = [
       variableCall: [MOCK_INDEX_B],
       member: [],
       actor: [
+        { fn: "currentExp", args: [] },
         {
           fn: "changeExp",
           args: [MOCK_CURRENT_EXP_VALUE - MOCK_VALUE_B, true],
