@@ -3,20 +3,20 @@ import { describe, expect, test, vi } from "vitest";
 import type { MemberFunctions } from "@RpgTypes/libs";
 import type { EventCommand } from "@RpgTypes/rmmz/eventCommand";
 import {
+  CHANGE_EXP,
+  CHANGE_LEVEL,
   makeCommandActorLevelDown,
+  makeCommandActorLevelDownByVariable,
+  makeCommandActorLevelDownEach,
   makeCommandActorLevelUp,
+  makeCommandActorLevelUpByVariable,
+  makeCommandActorLevelUpEach,
   makeCommandGainExpByVariable,
   makeCommandGainExpDirect,
   makeCommandGainExpTargetAndOperandVariable,
-  makeCommandActorLevelUpByVariable,
   makeCommandLoseExpByVariable,
   makeCommandLoseExpDirect,
   makeCommandLoseExpTargetAndOperandVariable,
-  CHANGE_LEVEL,
-  CHANGE_EXP,
-  makeCommandActorLevelDownByVariable,
-  makeCommandActorLevelUpEach,
-  makeCommandActorLevelDownEach,
 } from "@RpgTypes/rmmz/eventCommand";
 import type {
   Rmmz_Actor,
@@ -136,6 +136,7 @@ interface MethodCalls {
   variableCall: number[];
   member: MemberFunctions<FakeActor>[];
   actor: MemberFunctions<FakeActor>[];
+  actorId: number[];
 }
 
 interface TestCase {
@@ -167,8 +168,8 @@ const runTestCase = (testCase: TestCase) => {
       expect(testCase.command).toEqual(testCase.commandLiteral);
     });
     describe("command execution", () => {
+      const mocks = runEvent(testCase.commandLiteral);
       test("variable calls", () => {
-        const mocks = runEvent(testCase.commandLiteral);
         expect(mocks.variable.value).toHaveBeenCalledTimes(
           testCase.calls.variableCall.length,
         );
@@ -176,8 +177,23 @@ const runTestCase = (testCase: TestCase) => {
           expect(mocks.variable.value).toHaveBeenCalledWith(variableId);
         });
       });
-      test("actor member calls", () => {
-        const mocks = runEvent(testCase.commandLiteral);
+      test("member calls", () => {
+        if (testCase.calls.member.length > 0) {
+          expect(mocks.party.members).toHaveBeenCalledOnce();
+        } else {
+          expect(mocks.party.members).not.toHaveBeenCalled();
+        }
+      });
+      test("actorId calls", () => {
+        expect(mocks.actorsContainer.actor).toHaveBeenCalledTimes(
+          testCase.calls.actorId.length,
+        );
+        testCase.calls.actorId.forEach((actorId) => {
+          expect(mocks.actorsContainer.actor).toHaveBeenCalledWith(actorId);
+        });
+      });
+
+      test("actor method calls", () => {
         verifyMethodCalls(mocks.actor, testCase.calls.actor);
         verifyMethodCalls(mocks.member1, testCase.calls.member);
         verifyMethodCalls(mocks.member2, testCase.calls.member);
@@ -211,21 +227,23 @@ const testCases: TestCase[] = [
           args: [100 + MOCK_CURRENT_EXP_VALUE, true],
         },
       ],
+      actorId: [1],
     },
   },
   {
     name: "loseExp",
     command: makeCommandLoseExpDirect({
-      actorId: 1,
+      actorId: 5,
       exp: 719,
       showMessaage: true,
     }),
     commandLiteral: {
       code: 315,
       indent: 0,
-      parameters: [0, 1, 1, 0, 719, true],
+      parameters: [0, 5, 1, 0, 719, true],
     },
     calls: {
+      actorId: [5],
       variableCall: [],
       member: [],
       actor: [
@@ -240,14 +258,14 @@ const testCases: TestCase[] = [
   {
     name: "addExp with variable",
     command: makeCommandGainExpByVariable({
-      actorId: 1,
+      actorId: 6,
       variableId: MOCK_INDEX_A,
       showMessaage: false,
     }),
     commandLiteral: {
       code: 315,
       indent: 0,
-      parameters: [0, 1, 0, 1, MOCK_INDEX_A, false],
+      parameters: [0, 6, 0, 1, MOCK_INDEX_A, false],
     },
     calls: {
       variableCall: [MOCK_INDEX_A],
@@ -259,6 +277,7 @@ const testCases: TestCase[] = [
           args: [MOCK_CURRENT_EXP_VALUE + MOCK_VALUE_A, false],
         },
       ],
+      actorId: [6],
     },
   },
   {
@@ -266,16 +285,17 @@ const testCases: TestCase[] = [
     commandLiteral: {
       code: 315,
       indent: 0,
-      parameters: [0, 1, 1, 1, MOCK_INDEX_B, true],
+      parameters: [0, 9, 1, 1, MOCK_INDEX_B, true],
     },
     command: makeCommandLoseExpByVariable({
-      actorId: 1,
+      actorId: 9,
       variableId: MOCK_INDEX_B,
       showMessaage: true,
     }),
     calls: {
       variableCall: [MOCK_INDEX_B],
       member: [],
+      actorId: [9],
       actor: [
         { fn: "currentExp", args: [] },
         {
@@ -300,6 +320,7 @@ const testCases: TestCase[] = [
     calls: {
       variableCall: [MOCK_INDEX_A, MOCK_INDEX_B],
       member: [],
+      actorId: [MOCK_VALUE_A],
       actor: [
         { fn: "currentExp", args: [] },
         {
@@ -324,6 +345,7 @@ const testCases: TestCase[] = [
     calls: {
       variableCall: [MOCK_INDEX_A, MOCK_INDEX_B],
       member: [],
+      actorId: [MOCK_VALUE_A],
       actor: [
         { fn: "currentExp", args: [] },
         {
@@ -338,17 +360,18 @@ const testCases: TestCase[] = [
     commandLiteral: {
       code: CHANGE_LEVEL,
       indent: 0,
-      parameters: [0, 1, 0, 0, 5, true],
+      parameters: [0, 12, 0, 0, 5, true],
     },
     command: makeCommandActorLevelUp(
       {
-        actorId: 1,
+        actorId: 12,
         level: 5,
         showMessaage: true,
       },
       0,
     ),
     calls: {
+      actorId: [12],
       variableCall: [],
       member: [],
       actor: [
@@ -364,14 +387,15 @@ const testCases: TestCase[] = [
     commandLiteral: {
       code: CHANGE_LEVEL,
       indent: 0,
-      parameters: [0, 1, 1, 0, 3, false],
+      parameters: [0, 12, 1, 0, 3, false],
     },
     command: makeCommandActorLevelDown({
-      actorId: 1,
+      actorId: 12,
       level: 3,
       showMessaage: false,
     }),
     calls: {
+      actorId: [12],
       variableCall: [],
       member: [],
       actor: [{ fn: "changeLevel", args: [MOCK_LEVEL_VALUE - 3, false] }],
@@ -389,6 +413,7 @@ const testCases: TestCase[] = [
       parameters: [0, 0, 0, 0, 5, true],
     },
     calls: {
+      actorId: [],
       variableCall: [],
       member: [{ fn: "changeLevel", args: [5 + MOCK_LEVEL_VALUE, true] }],
       actor: [],
@@ -406,6 +431,7 @@ const testCases: TestCase[] = [
       parameters: [0, 0, 1, 0, 3, false],
     },
     calls: {
+      actorId: [],
       variableCall: [],
       member: [{ fn: "changeLevel", args: [MOCK_LEVEL_VALUE - 3, false] }],
       actor: [],
@@ -416,14 +442,15 @@ const testCases: TestCase[] = [
     commandLiteral: {
       code: CHANGE_LEVEL,
       indent: 0,
-      parameters: [0, 1, 0, 1, MOCK_INDEX_A, false],
+      parameters: [0, 8, 0, 1, MOCK_INDEX_A, false],
     },
     command: makeCommandActorLevelUpByVariable({
-      actorId: 1,
+      actorId: 8,
       variableId: MOCK_INDEX_A,
       showMessaage: false,
     }),
     calls: {
+      actorId: [8],
       variableCall: [MOCK_INDEX_A],
       member: [],
       actor: [
@@ -439,14 +466,15 @@ const testCases: TestCase[] = [
     commandLiteral: {
       code: CHANGE_LEVEL,
       indent: 0,
-      parameters: [0, 1, 1, 1, MOCK_INDEX_B, true],
+      parameters: [0, 6, 1, 1, MOCK_INDEX_B, true],
     },
     command: makeCommandActorLevelDownByVariable({
-      actorId: 1,
+      actorId: 6,
       variableId: MOCK_INDEX_B,
       showMessaage: true,
     }),
     calls: {
+      actorId: [6],
       variableCall: [MOCK_INDEX_B],
       member: [],
       actor: [
