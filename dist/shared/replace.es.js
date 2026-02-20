@@ -1,5 +1,5 @@
 import { aP as ha, be as ba, bf as fa, aJ as xa, b6 as I, aQ as Na, b5 as va, b0 as Q, b1 as Ta, aT as wa, aZ as Ia, aY as ka, aV as Aa, ay as Sa, au as Ca, av as Ea, b7 as Ba, b8 as $a } from "./commands.es.js";
-import { b as Y, q as K, M as X, D as U, v as q, u as G, aR as S, O as P, P as j, aO as C, aL as B, aN as O, ay as Z, ax as $, aQ as W, ar as D } from "./eventCommandCodes.es.js";
+import { b as Y, q as K, N as X, E as U, w as q, v as G, aS as S, P, Q as j, aP as C, aM as B, aO as z, az as Z, ay as $, aR as W, as as D } from "./eventCommandCodes.es.js";
 import { JSONPathJS as Ma } from "jsonpath-js";
 import { parseDeepRecord as Pa } from "@sigureya/rmmz-plugin-schema";
 import { m as aa } from "./mergeItemsSource.es.js";
@@ -11,12 +11,12 @@ const ea = (a, e, t) => a.filter(((r) => r.code === Y || r.code === K || r.code 
     includesEquip: a.parameters[4]
   } : {};
   return { itemKind: Da[a.code], dataId: xa(a), code: a.code, commandNameMZ: t(a.code), operation: s, ...n, ...r };
-}, Ra = (a) => !!a, ta = (a, e) => a.pages.map(((t, r) => e(t, r, a))), ra = (a, e) => a.events.filter(Ra).flatMap(((t) => ta(t, e))), Oe = (a, e, t) => ra(a.map, ((r, s, n) => ({
+}, Ra = (a) => !!a, ta = (a, e) => a.pages.map(((t, r) => e(t, r, a))), ra = (a, e) => a.events.filter(Ra).flatMap(((t) => ta(t, e))), ze = (a, e, t) => ra(a.map, ((r, s, n) => ({
   ...La(r),
   commands: ea(r.list, e, t),
   eventName: n.name,
   pageIndex: s
-}))), La = (a) => a.conditions.itemId > 0 && a.conditions.itemValid ? { pageCondition: { itemId: a.conditions.itemId } } : {}, ze = (a, e, t) => {
+}))), La = (a) => a.conditions.itemId > 0 && a.conditions.itemValid ? { pageCondition: { itemId: a.conditions.itemId } } : {}, Fe = (a, e, t) => {
   return r = (s, n, m) => ({
     commands: ea(s.list, e, t),
     eventName: m.name,
@@ -33,10 +33,10 @@ const ea = (a, e, t) => a.filter(((r) => r.code === Y || r.code === K || r.code 
 }, g = (a, e) => {
   const t = a.trimEnd(), r = e.replaceText(t);
   return r ? r.trimEnd() : t;
-}, Fe = (a, e) => {
+}, He = (a, e) => {
   const t = (o) => e.replaceText(o), r = I(a.note, e), s = p(a.name, t), n = p(a.nickname, t), m = p(a.profile, t);
   return { ...a, name: s, nickname: n, profile: m, note: r };
-}, He = (a, e) => {
+}, Oe = (a, e) => {
   const t = I(a.note, e), r = g(a.name, e);
   return { ...a, name: r, note: t };
 }, Qe = (a, e) => {
@@ -53,7 +53,7 @@ const ea = (a, e, t) => a.filter(((r) => r.code === Y || r.code === K || r.code 
   return { ...a, name: r, message1: s, message2: n, message3: m, message4: o, note: t };
 }, _a = (a, e) => {
   switch (a.code) {
-    case O:
+    case z:
       return Ua(a, e);
     case B:
       return Ga(a, e);
@@ -96,13 +96,13 @@ const ea = (a, e, t) => a.filter(((r) => r.code === Y || r.code === K || r.code 
     parameters: [t, a.parameters[1], a.parameters[2], a.parameters[3], a.parameters[4]]
   };
 }, Ze = (a, e, t = `
-`) => Oa(a, ((r) => e.get(r)), t), Oa = (a, e, t = `
+`) => za(a, ((r) => e.get(r)), t), za = (a, e, t = `
 `) => va(a.note, ((r) => p(r.value, e)), t), We = (a, e) => sa(a, ((t) => Va(t, e))), sa = (a, e) => ({
-  params: Ha(a.params, ((t) => p(t, e))),
+  params: Oa(a.params, ((t) => p(t, e))),
   messages: Qa(a.messages, ((t) => p(t, e))),
-  basic: za(a.basic, ((t) => p(t, e))),
-  commands: Fa(a.commands, ((t) => p(t, e)))
-}), za = (a, e) => [e(a[0]), e(a[1]), e(a[2]), e(a[3]), e(a[4]), e(a[5]), e(a[6]), e(a[7]), e(a[8]), e(a[9])], Fa = (a, e) => [e(a[0]), e(a[1]), e(a[2]), e(a[3]), e(a[4]), e(a[5]), e(a[6]), e(a[7]), e(a[8]), e(a[9]), e(a[10]), e(a[11]), e(a[12]), e(a[13]), e(a[14]), e(a[15]), e(a[16]), e(a[17]), e(a[18]), e(a[19]), "", e(a[21]), e(a[22]), "", e(a[24]), e(a[25])], Ha = (a, e) => [e(a[0]), e(a[1]), e(a[2]), e(a[3]), e(a[4]), e(a[5]), e(a[6]), e(a[7]), e(a[8]), e(a[9])], Qa = (a, e) => ({
+  basic: Fa(a.basic, ((t) => p(t, e))),
+  commands: Ha(a.commands, ((t) => p(t, e)))
+}), Fa = (a, e) => [e(a[0]), e(a[1]), e(a[2]), e(a[3]), e(a[4]), e(a[5]), e(a[6]), e(a[7]), e(a[8]), e(a[9])], Ha = (a, e) => [e(a[0]), e(a[1]), e(a[2]), e(a[3]), e(a[4]), e(a[5]), e(a[6]), e(a[7]), e(a[8]), e(a[9]), e(a[10]), e(a[11]), e(a[12]), e(a[13]), e(a[14]), e(a[15]), e(a[16]), e(a[17]), e(a[18]), e(a[19]), "", e(a[21]), e(a[22]), "", e(a[24]), e(a[25])], Oa = (a, e) => [e(a[0]), e(a[1]), e(a[2]), e(a[3]), e(a[4]), e(a[5]), e(a[6]), e(a[7]), e(a[8]), e(a[9])], Qa = (a, e) => ({
   actionFailure: e(a.actionFailure),
   actorDamage: e(a.actorDamage),
   actorDrain: e(a.actorDrain),
@@ -185,7 +185,7 @@ class ma {
     return [this.mergedBody()];
   }
 }
-class z {
+class F {
   constructor(e, t, r) {
     this.bodyCode = e, this.header = t, this.bodies = r;
   }
@@ -219,18 +219,18 @@ const R = (a, e, t, r) => {
   return { header: s, bodies: n };
 }, Ya = (a, e) => {
   const { bodies: t, header: r } = ((s, n) => R(s, n, ((m) => m.code === j), ((m) => m.code === P)))(a, e);
-  return Ka(r) ? new z(P, r, t) : new ma(r, t);
+  return Ka(r) ? new F(P, r, t) : new ma(r, t);
 }, Ka = (a) => a.parameters[0] === "選択肢ヘルプ", Xa = (a, e) => {
-  const { bodies: t, header: r } = ((s, n) => R(s, n, ((m) => m.code === O), ((m) => m.code === C)))(a, e);
-  return new z(C, r, t);
+  const { bodies: t, header: r } = ((s, n) => R(s, n, ((m) => m.code === z), ((m) => m.code === C)))(a, e);
+  return new F(C, r, t);
 }, Za = (a, e) => {
   const { bodies: t, header: r } = ((s, n) => R(s, n, ((m) => m.code === $), ((m) => m.code === Z)))(a, e);
   return new ma(r, t);
 }, Wa = (a, e) => {
   const { bodies: t, header: r } = ((s, n) => R(s, n, ((m) => m.code === W), ((m) => m.code === S)))(a, e);
-  return new z(S, r, t);
+  return new F(S, r, t);
 }, ae = {
-  [O]: (a, e, t) => t.showMessage(Xa(a, e), e, a),
+  [z]: (a, e, t) => t.showMessage(Xa(a, e), e, a),
   [$]: (a, e, t) => t.script(Za(a, e), e, a),
   [j]: (a, e, t) => t.comment(Ya(a, e), e, a),
   [W]: (a, e, t) => t.showScrollingText(Wa(a, e), e, a)
@@ -423,10 +423,10 @@ const ye = (a, e, t, r = ua) => ga(a.attr.struct, `${e}["${a.name}"]`, t, r), he
     }))))(o, i, c, N.schema) : ce(f) ? ((l, v, y, u) => v.filter(((d) => typeof d == "number")).map(((d) => ({ rootName: l.rootName, rootType: l.rootCategory, value: d, structName: y, param: u }))))(o, i, c, N.schema) : [];
   })(a, r, e, m)));
   return [s, n].flat(2);
-}, _ = (a, e) => a.scalarsPath ? { bundleName: a.name, arrays: H(a.scalarArrays, a.name, e), scalar: Ie(a.scalarsPath, a.objectSchema, e) } : {
+}, _ = (a, e) => a.scalarsPath ? { bundleName: a.name, arrays: O(a.scalarArrays, a.name, e), scalar: Ie(a.scalarsPath, a.objectSchema, e) } : {
   bundleName: a.name,
-  arrays: H(a.scalarArrays, a.name, e)
-}, H = (a, e, t) => a.map(((r) => ({ jsonPathJS: t(r.path), schema: r.param, parentType: e }))), Ie = (a, e, t) => ({ jsonPathJS: t(a), record: e }), ke = (a, e, t, r) => ({
+  arrays: O(a.scalarArrays, a.name, e)
+}, O = (a, e, t) => a.map(((r) => ({ jsonPathJS: t(r.path), schema: r.param, parentType: e }))), Ie = (a, e, t) => ({ jsonPathJS: t(a), record: e }), ke = (a, e, t, r) => ({
   pluginName: a,
   commandName: e.command,
   desc: e.desc ?? "",
@@ -449,12 +449,12 @@ const ye = (a, e, t, r = ua) => ga(a.attr.struct, `${e}["${a.name}"]`, t, r), he
   return n ? ((m, o) => ({ pluginName: o.pluginName, commandName: o.commandName, args: Te(m, o.extractors) }))(Pa(a.parameters[3]), n) : { pluginName: t, commandName: r, args: [] };
 }, tt = (a) => {
   const e = new Map(a);
-  return new F(e);
-}, rt = () => new F(/* @__PURE__ */ new Map()), st = (a) => {
+  return new H(e);
+}, rt = () => new H(/* @__PURE__ */ new Map()), st = (a) => {
   const e = a.flatMap(((t) => Se(t, ((r) => new Ma(r)))));
-  return new F(new Map(e));
+  return new H(new Map(e));
 };
-class F {
+class H {
   _commandMap;
   constructor(e) {
     this._commandMap = e;
@@ -599,17 +599,17 @@ export {
   gt as A,
   yt as B,
   lt as C,
-  Fe as D,
+  He as D,
   Ke as E,
   _a as F,
   Qe as G,
   vt as H,
   Tt as I,
-  He as J,
+  Oe as J,
   M as K,
   It as L,
   wt as M,
-  Oa as N,
+  za as N,
   Ze as O,
   Ye as P,
   Xe as Q,
@@ -630,8 +630,8 @@ export {
   nt as j,
   ja as k,
   ea as l,
-  Oe as m,
-  ze as n,
+  ze as m,
+  Fe as n,
   me as o,
   $e as p,
   Ee as q,

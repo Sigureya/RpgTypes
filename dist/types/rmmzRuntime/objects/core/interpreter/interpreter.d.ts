@@ -1,4 +1,4 @@
-import { EventCode } from '../../../../rmmz/rpg';
+import { EventCode } from '../../../../libs/eventCommand';
 import { WaitMode } from './constants/types';
 export interface Rmmz_Interpreter<Coomand> {
     checkOverflow(): void;

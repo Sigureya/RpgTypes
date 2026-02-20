@@ -1,5 +1,9 @@
-import { ParamObject_ChangeExp, Command_ChangeExp, ParamObject_ChangeExpFromVariable } from './types';
-export declare const makeCommandGainExp: (param: ParamObject_ChangeExp, indent?: number) => Command_ChangeExp;
-export declare const makeCommandLoseExp: (param: ParamObject_ChangeExp, indent?: number) => Command_ChangeExp;
-export declare const makeCommandGainExpVariable: (param: ParamObject_ChangeExpFromVariable, indent?: number) => Command_ChangeExp;
-export declare const makeCommandLoseExpVariable: (param: ParamObject_ChangeExpFromVariable, indent?: number) => Command_ChangeExp;
+import { ParamObject_ChangeExp, Command_ChangeExp, ParamObject_ChangeExpFromVariable, Paramobject_ChangeExpV2, Paramobject_ChangeExpVV } from './types';
+export declare const makeCommandGainExpDirect: (param: ParamObject_ChangeExp, indent?: number) => Command_ChangeExp;
+export declare const makeCommandLoseExpDirect: (param: ParamObject_ChangeExp, indent?: number) => Command_ChangeExp;
+export declare const makeCommandGainExpByVariable: (param: ParamObject_ChangeExpFromVariable, indent?: number) => Command_ChangeExp;
+export declare const makeCommandLoseExpByVariable: (param: ParamObject_ChangeExpFromVariable, indent?: number) => Command_ChangeExp;
+export declare const makeCommandGainExpTargetVariable: (param: Paramobject_ChangeExpV2, indent?: number) => Command_ChangeExp;
+export declare const makeCommandLoseExpTargetVariable: (param: Paramobject_ChangeExpV2, indent?: number) => Command_ChangeExp;
+export declare const makeCommandGainExpTargetAndOperandVariable: (param: Paramobject_ChangeExpVV, indent?: number) => Command_ChangeExp;
+export declare const makeCommandLoseExpTargetAndOperandVariable: (param: Paramobject_ChangeExpVV, indent?: number) => Command_ChangeExp;
