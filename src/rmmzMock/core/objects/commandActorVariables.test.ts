@@ -1,7 +1,6 @@
 import type { MockedObject } from "vitest";
 import { describe, expect, test, vi } from "vitest";
 import type { MemberFunctions } from "@RpgTypes/libs";
-import { CHANGE_LEVEL } from "@RpgTypes/libs";
 import type { EventCommand } from "@RpgTypes/rmmz/eventCommand";
 import {
   makeCommandActorLevelDown,
@@ -13,6 +12,11 @@ import {
   makeCommandLoseExpByVariable,
   makeCommandLoseExpDirect,
   makeCommandLoseExpTargetAndOperandVariable,
+  CHANGE_LEVEL,
+  CHANGE_EXP,
+  makeCommandActorLevelDownByVariable,
+  makeCommandActorLevelUpEach,
+  makeCommandActorLevelDownEach,
 } from "@RpgTypes/rmmz/eventCommand";
 import type {
   Rmmz_Actor,
@@ -193,7 +197,7 @@ const testCases: TestCase[] = [
       0,
     ),
     commandLiteral: {
-      code: 315,
+      code: CHANGE_EXP,
       indent: 0,
       parameters: [0, 1, 0, 0, 100, true],
     },
@@ -374,16 +378,50 @@ const testCases: TestCase[] = [
     },
   },
   {
+    name: "actor Level up each",
+    command: makeCommandActorLevelUpEach({
+      level: 5,
+      showMessaage: true,
+    }),
+    commandLiteral: {
+      code: CHANGE_LEVEL,
+      indent: 0,
+      parameters: [0, 0, 0, 0, 5, true],
+    },
+    calls: {
+      variableCall: [],
+      member: [{ fn: "changeLevel", args: [5 + MOCK_LEVEL_VALUE, true] }],
+      actor: [],
+    },
+  },
+  {
+    name: "actor Level down each",
+    command: makeCommandActorLevelDownEach({
+      level: 3,
+      showMessaage: false,
+    }),
+    commandLiteral: {
+      code: CHANGE_LEVEL,
+      indent: 0,
+      parameters: [0, 0, 1, 0, 3, false],
+    },
+    calls: {
+      variableCall: [],
+      member: [{ fn: "changeLevel", args: [MOCK_LEVEL_VALUE - 3, false] }],
+      actor: [],
+    },
+  },
+  {
     name: "actor level up with variable",
     commandLiteral: {
       code: CHANGE_LEVEL,
       indent: 0,
-      parameters: [0, 1, 0, 1, MOCK_INDEX_A, true],
+      parameters: [0, 1, 0, 1, MOCK_INDEX_A, false],
     },
     command: makeCommandActorLevelUpByVariable({
       actorId: 1,
       variableId: MOCK_INDEX_A,
-      showMessaage: true,
+      showMessaage: false,
     }),
     calls: {
       variableCall: [MOCK_INDEX_A],
@@ -391,8 +429,28 @@ const testCases: TestCase[] = [
       actor: [
         {
           fn: "changeLevel",
-          args: [MOCK_VALUE_A + MOCK_LEVEL_VALUE, true],
+          args: [MOCK_VALUE_A + MOCK_LEVEL_VALUE, false],
         },
+      ],
+    },
+  },
+  {
+    name: "actor level down with variable",
+    commandLiteral: {
+      code: CHANGE_LEVEL,
+      indent: 0,
+      parameters: [0, 1, 1, 1, MOCK_INDEX_B, true],
+    },
+    command: makeCommandActorLevelDownByVariable({
+      actorId: 1,
+      variableId: MOCK_INDEX_B,
+      showMessaage: true,
+    }),
+    calls: {
+      variableCall: [MOCK_INDEX_B],
+      member: [],
+      actor: [
+        { fn: "changeLevel", args: [MOCK_LEVEL_VALUE - MOCK_VALUE_B, true] },
       ],
     },
   },
