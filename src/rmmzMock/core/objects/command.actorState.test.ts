@@ -34,9 +34,6 @@ const KEYS = [
   "performCollapse",
   "clearResult",
   "recoverAll",
-  "addParam",
-  "learnSkill",
-  "forgetSkill",
 ] as const satisfies (keyof Rmmz_Actor)[];
 
 const createFakeMap = (): FakeMap => ({
@@ -66,9 +63,6 @@ const createMockedActor = (): MockedObject<FakeActor> => ({
   performCollapse: vi.fn(),
   clearResult: vi.fn(),
   recoverAll: vi.fn(),
-  addParam: vi.fn(),
-  learnSkill: vi.fn(),
-  forgetSkill: vi.fn(),
   isDead: vi.fn().mockReturnValue(false),
 });
 
@@ -333,7 +327,7 @@ const testCasesV: TestCaseV[] = [
       indent: 0,
     },
     command: makeCommandTargetActorRecoverAllSelectV({
-      targetSelectVariableId: 7,
+      variableId: 7,
     }),
     variableId: 7,
     calls: {
