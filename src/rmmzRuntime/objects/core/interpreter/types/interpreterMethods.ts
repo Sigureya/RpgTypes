@@ -81,9 +81,9 @@ import type {
   ParamsArray_MovePicture,
   ParamsArray_ShowPicture,
   ParamArray_ChangeEquip,
+  EventCode,
 } from "@RpgTypes/rmmz/eventCommand";
 import type { ParamArray_ChangeEnemyHP } from "@RpgTypes/rmmz/eventCommand/commands/enemy/change/types";
-import type { EventCode } from "@RpgTypes/rmmz/rpg";
 
 type SubCommands =
   | Command_ShopProcessingBody

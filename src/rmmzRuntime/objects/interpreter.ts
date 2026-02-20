@@ -1,4 +1,5 @@
 import type { AudioFileParams, ColorRGBA } from "@RpgTypes/libs";
+import type { EventCode } from "@RpgTypes/libs/eventCommand";
 import type {
   BranchParameters,
   EventCommand,
@@ -77,7 +78,6 @@ import type {
   ParamsArray_ShowPicture,
   ParamArray_ChangeEquip,
 } from "@RpgTypes/rmmz/eventCommand";
-import type { EventCode } from "@RpgTypes/rmmz/rpg";
 import type {
   InterpreterMapper,
   Rmmz_Actor,
