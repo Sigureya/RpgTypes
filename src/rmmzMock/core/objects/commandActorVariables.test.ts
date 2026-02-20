@@ -1,7 +1,9 @@
 import type { MockedObject } from "vitest";
 import { describe, expect, test, vi } from "vitest";
-import type { MemberFunctions } from "@RpgTypes/libs";
+import { CHANGE_LEVEL, type MemberFunctions } from "@RpgTypes/libs";
 import {
+  makeCommandActorLevelDown,
+  makeCommandActorLevelUp,
   makeCommandGainExpByVariable,
   makeCommandGainExpDirect,
   makeCommandGainExpTargetAndOperandVariable,
@@ -20,7 +22,7 @@ import { Game_Interpreter } from "./rmmz_objects";
 
 type FakeParty = Pick<Rmmz_Party, "members">;
 
-type FakeActor = Pick<Rmmz_Actor, (typeof KEYS)[number]>;
+type FakeActor = Pick<Rmmz_Actor, (typeof KEYS)[number] | "level">;
 
 type FakeVariable = Pick<Rmmz_Variables, "value">;
 
@@ -29,7 +31,6 @@ const KEYS = [
   "changeExp",
   "changeLevel",
   "currentExp",
-  "currentLevel",
 ] as const satisfies (keyof Rmmz_Actor)[];
 
 const createFakeMap = (): FakeMap => ({
@@ -58,6 +59,8 @@ const MOCK_VALUE_C = 811;
 
 const MOCK_CURRENT_EXP_VALUE = 120000;
 
+const MOCK_LEVEL_VALUE = 13;
+
 const createMockedVarible = (): MockedObject<FakeVariable> => ({
   value: vi.fn((x: number) => {
     if (x === MOCK_INDEX_A) {
@@ -75,7 +78,9 @@ const createMockedActor = (): MockedObject<FakeActor> => ({
   changeExp: vi.fn(),
   changeLevel: vi.fn(),
   currentExp: vi.fn().mockReturnValue(MOCK_CURRENT_EXP_VALUE),
-  currentLevel: vi.fn(),
+  get level() {
+    return MOCK_LEVEL_VALUE;
+  },
 });
 
 interface MockObjects {
@@ -139,8 +144,9 @@ const verifyMethodCalls = (
   expectedCalls: MemberFunctions<FakeActor>[],
 ) => {
   expectedCalls.forEach((c) => {
-    expect(mock[c.fn]).toHaveBeenCalledOnce();
-    expect(mock[c.fn]).toHaveBeenCalledWith(...c.args);
+    const msg = `called:${c.fn}`;
+    expect(mock[c.fn], msg).toHaveBeenCalled();
+    expect(mock[c.fn], msg).toHaveBeenCalledWith(...c.args);
   });
   KEYS.filter((key) => expectedCalls.every((c) => c.fn !== key)).forEach(
     (key) => {
@@ -176,11 +182,14 @@ const runTestCase = (testCase: TestCase) => {
 const testCases: TestCase[] = [
   {
     name: "addExp",
-    command: makeCommandGainExpDirect({
-      actorId: 1,
-      exp: 100,
-      showMessaage: true,
-    }),
+    command: makeCommandGainExpDirect(
+      {
+        actorId: 1,
+        exp: 100,
+        showMessaage: true,
+      },
+      0,
+    ),
     commandLiteral: {
       code: 315,
       indent: 0,
@@ -316,6 +325,50 @@ const testCases: TestCase[] = [
           args: [MOCK_CURRENT_EXP_VALUE - MOCK_VALUE_B, false],
         },
       ],
+    },
+  },
+  {
+    name: "actor level up",
+    commandLiteral: {
+      code: CHANGE_LEVEL,
+      indent: 0,
+      parameters: [0, 1, 0, 0, 5, true],
+    },
+    command: makeCommandActorLevelUp(
+      {
+        actorId: 1,
+        level: 5,
+        showMessaage: true,
+      },
+      0,
+    ),
+    calls: {
+      variableCall: [],
+      member: [],
+      actor: [
+        {
+          fn: "changeLevel",
+          args: [5 + MOCK_LEVEL_VALUE, true],
+        },
+      ],
+    },
+  },
+  {
+    name: "actor level down",
+    commandLiteral: {
+      code: CHANGE_LEVEL,
+      indent: 0,
+      parameters: [0, 1, 1, 0, 3, false],
+    },
+    command: makeCommandActorLevelDown({
+      actorId: 1,
+      level: 3,
+      showMessaage: false,
+    }),
+    calls: {
+      variableCall: [],
+      member: [],
+      actor: [{ fn: "changeLevel", args: [MOCK_LEVEL_VALUE - 3, false] }],
     },
   },
 ];
