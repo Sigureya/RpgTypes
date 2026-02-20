@@ -9,6 +9,7 @@ import type {
   ParamObject_ChangeSkillEach,
   ParamArray_ForgetSkillVariable,
   ParamArray_LearnSkillVariable,
+  ParamObject_ChangeSkillVariable,
 } from "./types";
 
 export const makeCommandLearnSkill = (
@@ -58,28 +59,28 @@ export const makeCommandForgetSkillEach = (
 });
 
 export const makeCommandLearnSkillByVariable = (
-  param: ParamObject_ChangeSkillDirect,
+  param: ParamObject_ChangeSkillVariable,
   indent: number = 0,
 ): Command_ChangeSkill => ({
   code: CHANGE_SKILL,
   indent,
   parameters: [
     1,
-    param.actorId,
+    param.variableId,
     0,
     param.skillId,
   ] satisfies ParamArray_LearnSkillVariable,
 });
 
 export const makeCommandForgetSkillByVariable = (
-  param: ParamObject_ChangeSkillDirect,
+  param: ParamObject_ChangeSkillVariable,
   indent: number = 0,
 ): Command_ChangeSkill => ({
   code: CHANGE_SKILL,
   indent,
   parameters: [
     1,
-    param.actorId,
+    param.variableId,
     1,
     param.skillId,
   ] satisfies ParamArray_ForgetSkillVariable,

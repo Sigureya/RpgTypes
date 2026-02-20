@@ -67,3 +67,8 @@ export interface ParamObject_ChangeSkillDirect {
 export interface ParamObject_ChangeSkillEach {
   skillId: number;
 }
+
+export interface ParamObject_ChangeSkillVariable {
+  variableId: number;
+  skillId: number;
+}

@@ -1,5 +1,6 @@
 export * from "./changeExp";
 export * from "./changeLevel";
+export * from "./changeSkill";
 export * from "./changeState";
 export * from "./make";
 export * from "./recoverAll/index";
@@ -37,10 +38,6 @@ export type {
   Command_ChangeParam,
   ParamArray_ChangeParam,
 } from "./changeParam/types";
-export type {
-  Command_ChangeSkill,
-  ParamArray_ChangeSkill,
-} from "./changeSkill/types";
 export type {
   Command_NameInputProcessing,
   ParamArray_NameInputProcessing,
