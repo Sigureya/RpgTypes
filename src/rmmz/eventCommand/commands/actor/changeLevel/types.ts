@@ -1,4 +1,7 @@
-import type { CHANGE_LEVEL, EventCommandLike } from "@RpgTypes/libs";
+import type {
+  CHANGE_LEVEL,
+  EventCommandLike,
+} from "@RpgTypes/libs/eventCommand";
 
 export interface Command_ChangeActorLevel extends EventCommandLike<
   typeof CHANGE_LEVEL

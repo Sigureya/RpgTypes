@@ -1,4 +1,4 @@
-import type { EventCode } from "@RpgTypes/rmmz/rpg";
+import type { EventCode } from "@RpgTypes/libs/eventCommand";
 import type { WaitMode } from "./constants/types";
 
 export interface Rmmz_Interpreter<Coomand> {
