@@ -8,7 +8,11 @@ export type ParamArray_ChangeExp =
   | ParamArray_GainExp_Direct
   | ParamArray_LoseExp_Direct
   | ParamArray_GainExp_Variable
-  | ParamArray_LoseExp_Variable;
+  | ParamArray_LoseExp_Variable
+  | ParamArray_GainExp_TargetAndOperandVariable
+  | ParamArray_LoseExp_TargetAndOperandVariable
+  | ParamArray_GainExp_TargetVariable
+  | ParamArray_LoseExp_TargetVariable;
 
 export type ParamArray_GainExp_Direct = [
   targetDirect: 0,
@@ -46,8 +50,44 @@ export type ParamArray_LoseExp_Variable = [
   showMessaage: boolean,
 ];
 
+export type ParamArray_GainExp_TargetVariable = [
+  targetVariable: 1,
+  targetVariableId: number,
+  operationPlus: 0,
+  operandVariable: 0,
+  value: number,
+  showMessaage: boolean,
+];
+
+export type ParamArray_LoseExp_TargetVariable = [
+  targetVariable: 1,
+  targetVariableId: number,
+  operationMinus: 1,
+  operandVariable: 0,
+  value: number,
+  showMessaage: boolean,
+];
+
+export type ParamArray_GainExp_TargetAndOperandVariable = [
+  targetVariable: 1,
+  targetVariableId: number,
+  operationPlus: 0,
+  operandVariable: 1,
+  valueVariableId: number,
+  showMessaage: boolean,
+];
+
+export type ParamArray_LoseExp_TargetAndOperandVariable = [
+  targetVariable: 1,
+  targetVariableId: number,
+  operationMinus: 1,
+  operandVariable: 1,
+  valueVariableId: number,
+  showMessaage: boolean,
+];
+
 export interface ParamObject_ChangeExp {
-  value: number;
+  exp: number;
   showMessaage: boolean;
   actorId: number;
 }
@@ -56,4 +96,16 @@ export interface ParamObject_ChangeExpFromVariable {
   variableId: number;
   showMessaage: boolean;
   actorId: number;
+}
+
+export interface Paramobject_ChangeExpV2 {
+  targetVariableId: number;
+  value: number;
+  showMessaage: boolean;
+}
+
+export interface Paramobject_ChangeExpVV {
+  targetVariableId: number;
+  operandVariableId: number;
+  showMessaage: boolean;
 }

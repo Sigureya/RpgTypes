@@ -1,8 +1,15 @@
 import type { MockedObject } from "vitest";
 import { describe, expect, test, vi } from "vitest";
 import type { MemberFunctions } from "@RpgTypes/libs";
-import type { EventCommand } from "@RpgTypes/rmmz/eventCommand";
-import { makeCommandGainExp } from "@RpgTypes/rmmz/eventCommand/commands/actor/changeExp/make";
+import {
+  makeCommandGainExpByVariable,
+  makeCommandGainExpDirect,
+  makeCommandGainExpTargetAndOperandVariable,
+  makeCommandLoseExpByVariable,
+  makeCommandLoseExpDirect,
+  makeCommandLoseExpTargetAndOperandVariable,
+  type EventCommand,
+} from "@RpgTypes/rmmz/eventCommand";
 import type {
   Rmmz_Actor,
   Rmmz_Party,
@@ -21,6 +28,8 @@ const KEYS = [
   "addParam",
   "changeExp",
   "changeLevel",
+  "currentExp",
+  "currentLevel",
 ] as const satisfies (keyof Rmmz_Actor)[];
 
 const createFakeMap = (): FakeMap => ({
@@ -47,6 +56,8 @@ const MOCK_INDEX_B = 233;
 
 const MOCK_VALUE_C = 811;
 
+const MOCK_CURRENT_EXP_VALUE = 120000;
+
 const createMockedVarible = (): MockedObject<FakeVariable> => ({
   value: vi.fn((x: number) => {
     if (x === MOCK_INDEX_A) {
@@ -63,6 +74,8 @@ const createMockedActor = (): MockedObject<FakeActor> => ({
   addParam: vi.fn(),
   changeExp: vi.fn(),
   changeLevel: vi.fn(),
+  currentExp: vi.fn().mockReturnValue(MOCK_CURRENT_EXP_VALUE),
+  currentLevel: vi.fn(),
 });
 
 interface MockObjects {
@@ -108,26 +121,64 @@ const runEvent = (command: EventCommand): MockObjects => {
   return mocks;
 };
 
+interface MethodCalls {
+  variableCall: number[];
+  member: MemberFunctions<FakeActor>[];
+  actor: MemberFunctions<FakeActor>[];
+}
+
 interface TestCase {
   name: string;
   command: EventCommand;
   commandLiteral: EventCommand;
-  variableCall: number[];
+  calls: MethodCalls;
 }
+
+const verifyMethodCalls = (
+  mock: MockedObject<FakeActor>,
+  expectedCalls: MemberFunctions<FakeActor>[],
+) => {
+  expectedCalls.forEach((c) => {
+    expect(mock[c.fn]).toHaveBeenCalledOnce();
+    expect(mock[c.fn]).toHaveBeenCalledWith(...c.args);
+  });
+  KEYS.filter((key) => expectedCalls.every((c) => c.fn !== key)).forEach(
+    (key) => {
+      expect(mock[key], `called:${key}`).not.toHaveBeenCalled();
+    },
+  );
+};
 
 const runTestCase = (testCase: TestCase) => {
   describe(testCase.name, () => {
     test("command structure", () => {
       expect(testCase.command).toEqual(testCase.commandLiteral);
     });
+    describe("command execution", () => {
+      test("variable calls", () => {
+        const mocks = runEvent(testCase.commandLiteral);
+        expect(mocks.variable.value).toHaveBeenCalledTimes(
+          testCase.calls.variableCall.length,
+        );
+        testCase.calls.variableCall.forEach((variableId) => {
+          expect(mocks.variable.value).toHaveBeenCalledWith(variableId);
+        });
+      });
+      test("actor member calls", () => {
+        const mocks = runEvent(testCase.commandLiteral);
+        verifyMethodCalls(mocks.actor, testCase.calls.actor);
+        verifyMethodCalls(mocks.member1, testCase.calls.member);
+        verifyMethodCalls(mocks.member2, testCase.calls.member);
+      });
+    });
   });
 };
 const testCases: TestCase[] = [
   {
     name: "addExp",
-    command: makeCommandGainExp({
+    command: makeCommandGainExpDirect({
       actorId: 1,
-      value: 100,
+      exp: 100,
       showMessaage: true,
     }),
     commandLiteral: {
@@ -135,7 +186,137 @@ const testCases: TestCase[] = [
       indent: 0,
       parameters: [0, 1, 0, 0, 100, true],
     },
-    variableCall: [],
+    calls: {
+      variableCall: [],
+      member: [],
+      actor: [
+        { fn: "currentExp", args: [] },
+        {
+          fn: "changeExp",
+          args: [100 + MOCK_CURRENT_EXP_VALUE, true],
+        },
+      ],
+    },
+  },
+  {
+    name: "loseExp",
+    command: makeCommandLoseExpDirect({
+      actorId: 1,
+      exp: 719,
+      showMessaage: true,
+    }),
+    commandLiteral: {
+      code: 315,
+      indent: 0,
+      parameters: [0, 1, 1, 0, 719, true],
+    },
+    calls: {
+      variableCall: [],
+      member: [],
+      actor: [
+        { fn: "currentExp", args: [] },
+        {
+          fn: "changeExp",
+          args: [MOCK_CURRENT_EXP_VALUE - 719, true],
+        },
+      ],
+    },
+  },
+  {
+    name: "addExp with variable",
+    command: makeCommandGainExpByVariable({
+      actorId: 1,
+      variableId: MOCK_INDEX_A,
+      showMessaage: false,
+    }),
+    commandLiteral: {
+      code: 315,
+      indent: 0,
+      parameters: [0, 1, 0, 1, MOCK_INDEX_A, false],
+    },
+    calls: {
+      variableCall: [MOCK_INDEX_A],
+      member: [],
+      actor: [
+        { fn: "currentExp", args: [] },
+        {
+          fn: "changeExp",
+          args: [MOCK_CURRENT_EXP_VALUE + MOCK_VALUE_A, false],
+        },
+      ],
+    },
+  },
+  {
+    name: "loseExp with variable",
+    commandLiteral: {
+      code: 315,
+      indent: 0,
+      parameters: [0, 1, 1, 1, MOCK_INDEX_B, true],
+    },
+    command: makeCommandLoseExpByVariable({
+      actorId: 1,
+      variableId: MOCK_INDEX_B,
+      showMessaage: true,
+    }),
+    calls: {
+      variableCall: [MOCK_INDEX_B],
+      member: [],
+      actor: [
+        { fn: "currentExp", args: [] },
+        {
+          fn: "changeExp",
+          args: [MOCK_CURRENT_EXP_VALUE - MOCK_VALUE_B, true],
+        },
+      ],
+    },
+  },
+  {
+    name: "addExp with variable to variable",
+    commandLiteral: {
+      code: 315,
+      indent: 0,
+      parameters: [1, MOCK_INDEX_A, 0, 1, MOCK_INDEX_B, true],
+    },
+    command: makeCommandGainExpTargetAndOperandVariable({
+      targetVariableId: MOCK_INDEX_A,
+      operandVariableId: MOCK_INDEX_B,
+      showMessaage: true,
+    }),
+    calls: {
+      variableCall: [MOCK_INDEX_A, MOCK_INDEX_B],
+      member: [],
+      actor: [
+        { fn: "currentExp", args: [] },
+        {
+          fn: "changeExp",
+          args: [MOCK_CURRENT_EXP_VALUE + MOCK_VALUE_B, true],
+        },
+      ],
+    },
+  },
+  {
+    name: "loseExp with variable to variable",
+    commandLiteral: {
+      code: 315,
+      indent: 0,
+      parameters: [1, MOCK_INDEX_A, 1, 1, MOCK_INDEX_B, false],
+    },
+    command: makeCommandLoseExpTargetAndOperandVariable({
+      targetVariableId: MOCK_INDEX_A,
+      operandVariableId: MOCK_INDEX_B,
+      showMessaage: false,
+    }),
+    calls: {
+      variableCall: [MOCK_INDEX_A, MOCK_INDEX_B],
+      member: [],
+      actor: [
+        { fn: "currentExp", args: [] },
+        {
+          fn: "changeExp",
+          args: [MOCK_CURRENT_EXP_VALUE - MOCK_VALUE_B, false],
+        },
+      ],
+    },
   },
 ];
 
