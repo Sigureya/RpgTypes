@@ -41,7 +41,7 @@ export const makeCommandActorLevelDown = (
   ] satisfies ParamArray_LevelDownDirect,
 });
 
-export const makeCommandLevelUpByVariable = (
+export const makeCommandActorLevelUpByVariable = (
   param: ParamObject_ChangeLevelByVariable,
   indent: number = 0,
 ): Command_ChangeActorLevel => ({
@@ -57,7 +57,7 @@ export const makeCommandLevelUpByVariable = (
   ] satisfies ParamArray_LevelUpByVariable,
 });
 
-export const makeCommandLevelDownByVariable = (
+export const makeCommandActorLevelDownByVariable = (
   param: ParamObject_ChangeLevelByVariable,
   indent: number = 0,
 ): Command_ChangeActorLevel => ({

@@ -1,16 +1,18 @@
 import type { MockedObject } from "vitest";
 import { describe, expect, test, vi } from "vitest";
-import { CHANGE_LEVEL, type MemberFunctions } from "@RpgTypes/libs";
+import type { MemberFunctions } from "@RpgTypes/libs";
+import { CHANGE_LEVEL } from "@RpgTypes/libs";
+import type { EventCommand } from "@RpgTypes/rmmz/eventCommand";
 import {
   makeCommandActorLevelDown,
   makeCommandActorLevelUp,
   makeCommandGainExpByVariable,
   makeCommandGainExpDirect,
   makeCommandGainExpTargetAndOperandVariable,
+  makeCommandActorLevelUpByVariable,
   makeCommandLoseExpByVariable,
   makeCommandLoseExpDirect,
   makeCommandLoseExpTargetAndOperandVariable,
-  type EventCommand,
 } from "@RpgTypes/rmmz/eventCommand";
 import type {
   Rmmz_Actor,
@@ -369,6 +371,29 @@ const testCases: TestCase[] = [
       variableCall: [],
       member: [],
       actor: [{ fn: "changeLevel", args: [MOCK_LEVEL_VALUE - 3, false] }],
+    },
+  },
+  {
+    name: "actor level up with variable",
+    commandLiteral: {
+      code: CHANGE_LEVEL,
+      indent: 0,
+      parameters: [0, 1, 0, 1, MOCK_INDEX_A, true],
+    },
+    command: makeCommandActorLevelUpByVariable({
+      actorId: 1,
+      variableId: MOCK_INDEX_A,
+      showMessaage: true,
+    }),
+    calls: {
+      variableCall: [MOCK_INDEX_A],
+      member: [],
+      actor: [
+        {
+          fn: "changeLevel",
+          args: [MOCK_VALUE_A + MOCK_LEVEL_VALUE, true],
+        },
+      ],
     },
   },
 ];
