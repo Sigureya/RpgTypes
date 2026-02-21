@@ -5,7 +5,7 @@ import type {
   ParamArray_TargetActorRecoverAll,
 } from "./types";
 
-export const makeCommandEachActorRecoverAll = (
+export const makeCommandRecoverAllEachActors = (
   indent: number = 0,
 ): Command_RecoverAll => ({
   code: 314,
@@ -13,7 +13,7 @@ export const makeCommandEachActorRecoverAll = (
   parameters: [0, 0] satisfies ParamArray_EachActorRecoverAll,
 });
 
-export const makeCommandTargetActorRecoverAll = (
+export const makeCommandRecoverAllTargetActor = (
   param: { targetActorId: number },
   indent: number = 0,
 ): Command_RecoverAll => ({
@@ -25,7 +25,7 @@ export const makeCommandTargetActorRecoverAll = (
   ] satisfies ParamArray_TargetActorRecoverAll,
 });
 
-export const makeCommandTargetActorRecoverAllSelectV = (
+export const makeCommandRecoverAllTargetActorByVariable = (
   param: {
     variableId: number;
   },

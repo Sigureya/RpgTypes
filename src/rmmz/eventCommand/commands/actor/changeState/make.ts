@@ -11,7 +11,7 @@ import type {
   ParamObject_ChangeActorStateVariable,
 } from "./types";
 
-export const makeCommandAddActorStateTarget = (
+export const makeCommandAddStateTargetActor = (
   param: ParamObject_ChangeActorState,
   indent: number = 0,
 ): Command_ChangeActorState => ({
@@ -25,7 +25,7 @@ export const makeCommandAddActorStateTarget = (
   ] satisfies ParamArray_AddActorStateTarget,
 });
 
-export const makeCommandRemoveActorStateTarget = (
+export const makeCommandRemoveActorTargetState = (
   param: ParamObject_ChangeActorState,
   indent: number = 0,
 ): Command_ChangeActorState => ({
@@ -39,7 +39,7 @@ export const makeCommandRemoveActorStateTarget = (
   ] satisfies ParamArray_RemoveActorStateTarget,
 });
 
-export const makeCommandAddActorStateEach = (
+export const makeCommandAddStateEachActor = (
   param: ParamObject_ChangeActorStateEach,
   indent: number = 0,
 ): Command_ChangeActorState => ({
@@ -48,7 +48,7 @@ export const makeCommandAddActorStateEach = (
   parameters: [0, 0, 0, param.stateId] satisfies ParamArray_AddActorStateEach,
 });
 
-export const makeCommandRemoveActorStateEach = (
+export const makeCommandRemoveStateEachActors = (
   param: ParamObject_ChangeActorStateEach,
   indent: number = 0,
 ): Command_ChangeActorState => ({
@@ -62,7 +62,7 @@ export const makeCommandRemoveActorStateEach = (
   ] satisfies ParamArray_RemoveActorStateEach,
 });
 
-export const makeCommandAddActorStateVariable = (
+export const makeCommandAddStateByVariable = (
   param: ParamObject_ChangeActorStateVariable,
   indent: number = 0,
 ): Command_ChangeActorState => ({
@@ -76,7 +76,7 @@ export const makeCommandAddActorStateVariable = (
   ] satisfies ParamArray_AddActorStateVariable,
 });
 
-export const makeCommandRemoveActorStateVariable = (
+export const makeCommandRemoveStateByVariable = (
   param: ParamObject_ChangeActorStateVariable,
   indent: number = 0,
 ): Command_ChangeActorState => ({

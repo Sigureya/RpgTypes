@@ -40,7 +40,7 @@ export const makeCommandForgetSkill = (
   ] satisfies ParamArray_ForgetSkill,
 });
 
-export const makeCommandLearnSkillEach = (
+export const makeCommandLearnSkillEachActor = (
   param: ParamObject_ChangeSkillEach,
   indent: number = 0,
 ): Command_ChangeSkill => ({
@@ -49,7 +49,7 @@ export const makeCommandLearnSkillEach = (
   parameters: [0, 0, 0, param.skillId] satisfies ParamArray_LearnSkillEach,
 });
 
-export const makeCommandForgetSkillEach = (
+export const makeCommandForgetSkillEachActor = (
   param: ParamObject_ChangeSkillEach,
   indent: number = 0,
 ): Command_ChangeSkill => ({
