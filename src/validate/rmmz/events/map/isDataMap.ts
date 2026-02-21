@@ -8,6 +8,8 @@ export const isDataMap = (data: unknown): data is Data_Map => {
   return validate(data);
 };
 
-export const xxxMap = (data: unknown): ValidateResult<Data_Map> => {
+export const validateMapWithErrors = (
+  data: unknown,
+): ValidateResult<Data_Map> => {
   return validateWithErros(data, validate as ValidateFunction<Data_Map>);
 };
