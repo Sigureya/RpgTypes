@@ -13,13 +13,15 @@ export const SCHEMA_MOVEROUTE_DATA = {
     list: {
       type: "array",
       items: {
-        additionalProperties: false,
+        // MV版でindent:nullという謎パラメータが混入しているので対策
+        additionalProperties: true,
         type: "object",
-        required: ["code", "parameters"],
+        required: ["code"],
         properties: {
           code: { type: "integer" },
           parameters: {
             type: "array",
+            nullable: true,
             items: {
               oneOf: [
                 { type: "string" },
