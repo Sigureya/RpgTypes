@@ -1,4 +1,5 @@
 import type { EventCommandUnknown } from "@RpgTypes/libs/eventCommand";
+import type { MoveRouteCommandUnknown } from "@RpgTypes/rmmz/eventCommand";
 import { makeEventPageCondition } from "./condition";
 import type { MapEvent_Image } from "./image/types";
 import type { MapEvent } from "./mapEvent";
@@ -38,7 +39,10 @@ export const makeMapEventIamge = ({
   };
 };
 
-export const makeMapEventPage = <Command extends EventCommandUnknown>({
+export const makeMapEventPage = <
+  Command extends EventCommandUnknown,
+  M extends MoveRouteCommandUnknown,
+>({
   list = [],
   conditions = makeEventPageCondition(),
   image = makeMapEventIamge(),
@@ -57,7 +61,7 @@ export const makeMapEventPage = <Command extends EventCommandUnknown>({
   moveSpeed = 3,
   moveType = 0,
   trigger = 0,
-}: Partial<MapEventPage<Command>> = {}): MapEventPage<Command> => {
+}: Partial<MapEventPage<Command, M>> = {}): MapEventPage<Command> => {
   return {
     walkAnime: walkAnime,
     stepAnime: stepAnime,
