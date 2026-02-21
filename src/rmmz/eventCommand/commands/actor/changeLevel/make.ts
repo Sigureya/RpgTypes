@@ -12,7 +12,7 @@ import type {
   ParamObject_ChangeLevelEach,
 } from "./types";
 
-export const makeCommandActorLevelUp = (
+export const makeCommandLevelUpActor = (
   param: ParamObject_ChangeLevel,
   indent: number = 0,
 ): Command_ChangeActorLevel => ({
@@ -28,7 +28,7 @@ export const makeCommandActorLevelUp = (
   ] satisfies ParamArray_LevelUpDirect,
 });
 
-export const makeCommandActorLevelDown = (
+export const makeCommandLevelDownActor = (
   param: ParamObject_ChangeLevel,
   indent: number = 0,
 ): Command_ChangeActorLevel => ({
@@ -44,7 +44,7 @@ export const makeCommandActorLevelDown = (
   ] satisfies ParamArray_LevelDownDirect,
 });
 
-export const makeCommandActorLevelUpByVariable = (
+export const makeCommandLevelUpActorByVariable = (
   param: ParamObject_ChangeLevelByVariable,
   indent: number = 0,
 ): Command_ChangeActorLevel => ({
@@ -60,7 +60,7 @@ export const makeCommandActorLevelUpByVariable = (
   ] satisfies ParamArray_LevelUpByVariable,
 });
 
-export const makeCommandActorLevelDownByVariable = (
+export const makeCommandLevelDownActorByVariable = (
   param: ParamObject_ChangeLevelByVariable,
   indent: number = 0,
 ): Command_ChangeActorLevel => ({
@@ -76,7 +76,7 @@ export const makeCommandActorLevelDownByVariable = (
   ] satisfies ParamArray_LevelDownByVariable,
 });
 
-export const makeCommandActorLevelUpEach = (
+export const makeCommandLevelUpEachActors = (
   param: ParamObject_ChangeLevelEach,
   indent: number = 0,
 ): Command_ChangeActorLevel => ({
@@ -92,7 +92,7 @@ export const makeCommandActorLevelUpEach = (
   ] satisfies ParamArray_LevelUpEach,
 });
 
-export const makeCommandActorLevelDownEach = (
+export const makeCommandLevelDownEachActors = (
   param: ParamObject_ChangeLevelEach,
   indent: number = 0,
 ): Command_ChangeActorLevel => ({

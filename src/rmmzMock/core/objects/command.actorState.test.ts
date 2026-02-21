@@ -4,15 +4,15 @@ import type { MemberFunctions } from "@RpgTypes/libs";
 import { CHANGE_ACTOR_STATE } from "@RpgTypes/libs/eventCommand";
 import type { EventCommand } from "@RpgTypes/rmmz/eventCommand";
 import {
-  makeCommandAddActorStateEach,
-  makeCommandAddActorStateTarget,
-  makeCommandAddActorStateVariable,
-  makeCommandEachActorRecoverAll,
-  makeCommandTargetActorRecoverAllSelectV,
-  makeCommandRemoveActorStateEach,
-  makeCommandRemoveActorStateTarget,
-  makeCommandRemoveActorStateVariable,
-  makeCommandTargetActorRecoverAll,
+  makeCommandAddStateEachActor,
+  makeCommandAddStateTargetActor,
+  makeCommandAddStateByVariable,
+  makeCommandRecoverAllEachActors,
+  makeCommandRecoverAllTargetActorByVariable,
+  makeCommandRemoveStateEachActors,
+  makeCommandRemoveActorTargetState,
+  makeCommandRemoveStateByVariable,
+  makeCommandRecoverAllTargetActor,
 } from "@RpgTypes/rmmz/eventCommand";
 import type {
   Rmmz_Actor,
@@ -241,7 +241,7 @@ const testCasesA: TestCaseTargetActor[] = [
       indent: 0,
     },
     actorId: 6,
-    command: makeCommandAddActorStateTarget({ actorId: 6, stateId: 4 }),
+    command: makeCommandAddStateTargetActor({ actorId: 6, stateId: 4 }),
     calls: {
       actor: [
         { fn: "addState", args: [4] },
@@ -256,7 +256,7 @@ const testCasesA: TestCaseTargetActor[] = [
       indent: 0,
       parameters: [0, 12, 1, 9],
     },
-    command: makeCommandRemoveActorStateTarget({ actorId: 12, stateId: 9 }),
+    command: makeCommandRemoveActorTargetState({ actorId: 12, stateId: 9 }),
     actorId: 12,
     calls: {
       actor: [
@@ -272,7 +272,7 @@ const testCasesA: TestCaseTargetActor[] = [
       parameters: [0, 3],
       indent: 0,
     },
-    command: makeCommandTargetActorRecoverAll({ targetActorId: 3 }),
+    command: makeCommandRecoverAllTargetActor({ targetActorId: 3 }),
     actorId: 3,
     calls: {
       actor: [{ fn: "recoverAll", args: [] }],
@@ -288,7 +288,7 @@ const testCasesV: TestCaseV[] = [
       parameters: [1, 5, 0, 4],
       indent: 0,
     },
-    command: makeCommandAddActorStateVariable({
+    command: makeCommandAddStateByVariable({
       actorIdVariable: 5,
       stateId: 4,
     }),
@@ -307,7 +307,7 @@ const testCasesV: TestCaseV[] = [
       parameters: [1, 8, 1, 9],
       indent: 0,
     },
-    command: makeCommandRemoveActorStateVariable({
+    command: makeCommandRemoveStateByVariable({
       actorIdVariable: 8,
       stateId: 9,
     }),
@@ -326,7 +326,7 @@ const testCasesV: TestCaseV[] = [
       parameters: [1, 7],
       indent: 0,
     },
-    command: makeCommandTargetActorRecoverAllSelectV({
+    command: makeCommandRecoverAllTargetActorByVariable({
       variableId: 7,
     }),
     variableId: 7,
@@ -344,7 +344,7 @@ const testCasesM: TestCaseEachActor[] = [
       parameters: [0, 0, 0, 4],
       indent: 0,
     },
-    command: makeCommandAddActorStateEach({ stateId: 4 }),
+    command: makeCommandAddStateEachActor({ stateId: 4 }),
     calls: {
       actor: [
         { fn: "addState", args: [4] },
@@ -359,7 +359,7 @@ const testCasesM: TestCaseEachActor[] = [
       parameters: [0, 0, 1, 9],
       indent: 0,
     },
-    command: makeCommandRemoveActorStateEach({ stateId: 9 }),
+    command: makeCommandRemoveStateEachActors({ stateId: 9 }),
     calls: {
       actor: [
         { fn: "removeState", args: [9] },
@@ -374,7 +374,7 @@ const testCasesM: TestCaseEachActor[] = [
       parameters: [0, 0],
       indent: 0,
     },
-    command: makeCommandEachActorRecoverAll(),
+    command: makeCommandRecoverAllEachActors(),
     calls: {
       actor: [{ fn: "recoverAll", args: [] }],
     },

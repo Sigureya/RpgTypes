@@ -5,12 +5,12 @@ import type { EventCommand } from "@RpgTypes/rmmz/eventCommand";
 import {
   CHANGE_EXP,
   CHANGE_LEVEL,
-  makeCommandActorLevelDown,
-  makeCommandActorLevelDownByVariable,
-  makeCommandActorLevelDownEach,
-  makeCommandActorLevelUp,
-  makeCommandActorLevelUpByVariable,
-  makeCommandActorLevelUpEach,
+  makeCommandLevelDownActor,
+  makeCommandLevelDownActorByVariable,
+  makeCommandLevelDownEachActors,
+  makeCommandLevelUpActor,
+  makeCommandLevelUpActorByVariable,
+  makeCommandLevelUpEachActors,
   makeCommandGainExpByVariable,
   makeCommandGainExpDirect,
   makeCommandGainExpTargetAndOperandVariable,
@@ -362,7 +362,7 @@ const testCases: TestCase[] = [
       indent: 0,
       parameters: [0, 12, 0, 0, 5, true],
     },
-    command: makeCommandActorLevelUp(
+    command: makeCommandLevelUpActor(
       {
         actorId: 12,
         level: 5,
@@ -389,7 +389,7 @@ const testCases: TestCase[] = [
       indent: 0,
       parameters: [0, 12, 1, 0, 3, false],
     },
-    command: makeCommandActorLevelDown({
+    command: makeCommandLevelDownActor({
       actorId: 12,
       level: 3,
       showMessaage: false,
@@ -403,7 +403,7 @@ const testCases: TestCase[] = [
   },
   {
     name: "actor Level up each",
-    command: makeCommandActorLevelUpEach({
+    command: makeCommandLevelUpEachActors({
       level: 5,
       showMessaage: true,
     }),
@@ -421,7 +421,7 @@ const testCases: TestCase[] = [
   },
   {
     name: "actor Level down each",
-    command: makeCommandActorLevelDownEach({
+    command: makeCommandLevelDownEachActors({
       level: 3,
       showMessaage: false,
     }),
@@ -444,7 +444,7 @@ const testCases: TestCase[] = [
       indent: 0,
       parameters: [0, 8, 0, 1, MOCK_INDEX_A, false],
     },
-    command: makeCommandActorLevelUpByVariable({
+    command: makeCommandLevelUpActorByVariable({
       actorId: 8,
       variableId: MOCK_INDEX_A,
       showMessaage: false,
@@ -468,7 +468,7 @@ const testCases: TestCase[] = [
       indent: 0,
       parameters: [0, 6, 1, 1, MOCK_INDEX_B, true],
     },
-    command: makeCommandActorLevelDownByVariable({
+    command: makeCommandLevelDownActorByVariable({
       actorId: 6,
       variableId: MOCK_INDEX_B,
       showMessaage: true,

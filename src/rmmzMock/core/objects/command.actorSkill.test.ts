@@ -6,10 +6,10 @@ import {
   CHANGE_SKILL,
   makeCommandForgetSkill,
   makeCommandForgetSkillByVariable,
-  makeCommandForgetSkillEach,
+  makeCommandForgetSkillEachActor,
   makeCommandLearnSkill,
   makeCommandLearnSkillByVariable,
-  makeCommandLearnSkillEach,
+  makeCommandLearnSkillEachActor,
 } from "@RpgTypes/rmmz/eventCommand";
 import type {
   Rmmz_Actor,
@@ -222,7 +222,7 @@ const testCases: TestCase[] = [
   },
   {
     name: "learn skill each",
-    command: makeCommandLearnSkillEach({
+    command: makeCommandLearnSkillEachActor({
       skillId: 43,
     }),
     commandLiteral: {
@@ -239,7 +239,7 @@ const testCases: TestCase[] = [
   },
   {
     name: "forget skill each",
-    command: makeCommandForgetSkillEach({
+    command: makeCommandForgetSkillEachActor({
       skillId: 143,
     }),
     commandLiteral: {
