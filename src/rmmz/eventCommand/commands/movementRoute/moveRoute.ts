@@ -2,7 +2,7 @@ import type { AudioFileParams } from "src/libs/utils";
 
 export interface MoveRouteCommandUnknown {
   code: number;
-  parameters: (string | number | AudioFileParams)[];
+  parameters?: (string | number | AudioFileParams)[];
 }
 
 export interface MoveRouteDataUnkwnown {

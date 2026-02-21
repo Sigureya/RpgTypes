@@ -158,12 +158,14 @@
                       "properties": {
                         "list": {
                           "items": {
-                            "additionalProperties": false,
+                            "additionalProperties": true,
                             "properties": {
                               "code": {
                                 "type": "integer"
                               },
                               "parameters": {
+                                "nullable": true,
+                                "type": "array",
                                 "items": {
                                   "oneOf": [
                                     {
@@ -189,11 +191,10 @@
                                       "type": "object"
                                     }
                                   ]
-                                },
-                                "type": "array"
+                                }
                               }
                             },
-                            "required": ["code", "parameters"],
+                            "required": ["code"],
                             "type": "object"
                           },
                           "type": "array"
