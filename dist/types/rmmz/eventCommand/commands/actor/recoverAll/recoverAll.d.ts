@@ -1,8 +1,8 @@
 import { Command_RecoverAll } from './types';
-export declare const makeCommandEachActorRecoverAll: (indent?: number) => Command_RecoverAll;
-export declare const makeCommandTargetActorRecoverAll: (param: {
+export declare const makeCommandRecoverAllEachActors: (indent?: number) => Command_RecoverAll;
+export declare const makeCommandRecoverAllTargetActor: (param: {
     targetActorId: number;
 }, indent?: number) => Command_RecoverAll;
-export declare const makeCommandTargetActorRecoverAllSelectV: (param: {
-    targetSelectVariableId: number;
+export declare const makeCommandRecoverAllTargetActorByVariable: (param: {
+    variableId: number;
 }, indent?: number) => Command_RecoverAll;
