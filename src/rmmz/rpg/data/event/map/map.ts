@@ -1,5 +1,8 @@
 import type { EventCommandUnknown } from "@RpgTypes/libs/eventCommand";
-import type { EventCommand } from "@RpgTypes/rmmz/eventCommand";
+import type {
+  EventCommand,
+  MoveRouteCommandUnknown,
+} from "@RpgTypes/rmmz/eventCommand";
 import type { AudioFileParams } from "src/libs";
 import type { MapEvent } from "./event";
 import type { Encounter } from "./types/encounter";
@@ -7,6 +10,7 @@ import type { MapEventContainer } from "./types/mapEventContainer";
 
 export interface Data_Map<
   CommandType extends EventCommandUnknown = EventCommand,
+  MoveRoute extends MoveRouteCommandUnknown = MoveRouteCommandUnknown,
 > extends MapEventContainer<CommandType> {
   data: number[];
   battleback1Name: string;
@@ -35,7 +39,7 @@ export interface Data_Map<
   tilesetId: number;
   encounterStep: number;
   encounterList: Encounter[];
-  events: Array<MapEvent<CommandType> | null>;
+  events: Array<MapEvent<CommandType, MoveRoute> | null>;
 }
 
 export type Map_ImageFiles = Pick<

@@ -5,14 +5,20 @@ import type { MapEvent_Image } from "./image/types";
 import type { MapEvent } from "./mapEvent";
 import type { MapEventPage } from "./page";
 
-export const makeMapEvent = <Command extends EventCommandUnknown>({
+export const makeMapEvent = <
+  Command extends EventCommandUnknown,
+  MoveRoute extends MoveRouteCommandUnknown,
+>({
   id = 1,
   name = "",
   pages = [],
   note = "",
   x = 0,
   y = 0,
-}: Partial<MapEvent<Command>> = {}): MapEvent<Command> => {
+}: Partial<MapEvent<Command, MoveRoute>> = {}): MapEvent<
+  Command,
+  MoveRoute
+> => {
   return {
     id: id,
     name: name,
@@ -61,7 +67,7 @@ export const makeMapEventPage = <
   moveSpeed = 3,
   moveType = 0,
   trigger = 0,
-}: Partial<MapEventPage<Command, M>> = {}): MapEventPage<Command> => {
+}: Partial<MapEventPage<Command, M>> = {}): MapEventPage<Command, M> => {
   return {
     walkAnime: walkAnime,
     stepAnime: stepAnime,
@@ -75,7 +81,6 @@ export const makeMapEventPage = <
     moveSpeed: moveSpeed,
     moveType: moveType,
     trigger: trigger,
-
     moveRoute: {
       list: moveRoute.list,
       repeat: moveRoute.repeat,

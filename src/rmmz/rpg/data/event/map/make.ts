@@ -1,4 +1,5 @@
 import type { EventCommandUnknown } from "@RpgTypes/libs/eventCommand";
+import type { MoveRouteCommandUnknown } from "@RpgTypes/rmmz/eventCommand";
 import type { Data_Map } from "./map";
 import type { MapFileInfo } from "./mapFileInfo";
 import type { Data_MapInfo } from "./mapInfo";
@@ -13,10 +14,11 @@ export const makeMapFileInfo = <T>(
 });
 
 export const makeMapData = <
-  Command extends EventCommandUnknown = EventCommandUnknown,
+  Command extends EventCommandUnknown,
+  MoveRoute extends MoveRouteCommandUnknown,
 >(
-  map: Partial<Data_Map<Command>> = {},
-): Data_Map<Command> => {
+  map: Partial<Data_Map<Command, MoveRoute>> = {},
+): Data_Map<Command, MoveRoute> => {
   return {
     tilesetId: map.tilesetId ?? 1,
     data: map.data ?? [],
