@@ -15,15 +15,16 @@ export declare const SCHEMA_MOVEROUTE_DATA: {
         readonly list: {
             readonly type: "array";
             readonly items: {
-                readonly additionalProperties: false;
+                readonly additionalProperties: true;
                 readonly type: "object";
-                readonly required: readonly ["code", "parameters"];
+                readonly required: readonly ["code"];
                 readonly properties: {
                     readonly code: {
                         readonly type: "integer";
                     };
                     readonly parameters: {
                         readonly type: "array";
+                        readonly nullable: true;
                         readonly items: {
                             readonly oneOf: readonly [{
                                 readonly type: "string";

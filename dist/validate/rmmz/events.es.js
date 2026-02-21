@@ -1,11 +1,11 @@
-import { v as Ae } from "../../shared/validateWithErrors.es.js";
-import { g as be } from "../../shared/_commonjsHelpers.es.js";
-var ke, he = { exports: {} };
-const Me = be((function() {
-  if (ke) return he.exports;
-  ke = 1, he.exports = u, he.exports.default = u;
+import { v as Fe } from "../../shared/validateWithErrors.es.js";
+import { g as ve } from "../../shared/_commonjsHelpers.es.js";
+var we, ye = { exports: {} };
+const Ae = ve((function() {
+  if (we) return ye.exports;
+  we = 1, ye.exports = u, ye.exports.default = u;
   const C = { properties: { code: { enum: [320, 324, 325] } } };
-  function u(P, { instancePath: n = "", parentData: l, parentDataProperty: s, rootData: Pe = P } = {}) {
+  function u(P, { instancePath: n = "", parentData: l, parentDataProperty: s, rootData: be = P } = {}) {
     if (!P || typeof P != "object" || Array.isArray(P)) return u.errors = [{ instancePath: n, schemaPath: "#/type", keyword: "type", params: { type: "object" }, message: "must be object" }], !1;
     {
       let t;
@@ -106,14 +106,14 @@ const Me = be((function() {
     }
     return u.errors = null, !0;
   }
-  return he.exports;
-})()), je = (C) => Me(C);
-var Ne, fe = { exports: {} };
-const qe = be((function() {
-  if (Ne) return fe.exports;
-  Ne = 1, fe.exports = u, fe.exports.default = u;
+  return ye.exports;
+})()), Ve = (C) => Ae(C);
+var ke, he = { exports: {} };
+const Me = ve((function() {
+  if (ke) return he.exports;
+  ke = 1, he.exports = u, he.exports.default = u;
   const C = { properties: { code: { enum: [132, 133, 139, 241, 245, 249, 250] } } };
-  function u(P, { instancePath: n = "", parentData: l, parentDataProperty: s, rootData: Pe = P } = {}) {
+  function u(P, { instancePath: n = "", parentData: l, parentDataProperty: s, rootData: be = P } = {}) {
     if (!P || typeof P != "object" || Array.isArray(P)) return u.errors = [{
       instancePath: n,
       schemaPath: "#/type",
@@ -231,7 +231,7 @@ const qe = be((function() {
               if (D) {
                 if (k.volume !== void 0) {
                   let w = k.volume;
-                  const A = 0;
+                  const F = 0;
                   if (typeof w != "number" || w % 1 || isNaN(w) || !isFinite(w)) return u.errors = [{
                     instancePath: n + "/parameters/0/volume",
                     schemaPath: "#/properties/parameters/items/0/properties/volume/type",
@@ -239,12 +239,12 @@ const qe = be((function() {
                     params: { type: "integer" },
                     message: "must be integer"
                   }], !1;
-                  D = A === 0;
+                  D = F === 0;
                 } else D = !0;
                 if (D) {
                   if (k.pitch !== void 0) {
                     let w = k.pitch;
-                    const A = 0;
+                    const F = 0;
                     if (typeof w != "number" || w % 1 || isNaN(w) || !isFinite(w)) return u.errors = [{
                       instancePath: n + "/parameters/0/pitch",
                       schemaPath: "#/properties/parameters/items/0/properties/pitch/type",
@@ -252,11 +252,11 @@ const qe = be((function() {
                       params: { type: "integer" },
                       message: "must be integer"
                     }], !1;
-                    D = A === 0;
+                    D = F === 0;
                   } else D = !0;
                   if (D) if (k.pan !== void 0) {
                     let w = k.pan;
-                    const A = 0;
+                    const F = 0;
                     if (typeof w != "number" || w % 1 || isNaN(w) || !isFinite(w)) return u.errors = [{
                       instancePath: n + "/parameters/0/pan",
                       schemaPath: "#/properties/parameters/items/0/properties/pan/type",
@@ -264,7 +264,7 @@ const qe = be((function() {
                       params: { type: "integer" },
                       message: "must be integer"
                     }], !1;
-                    D = A === 0;
+                    D = F === 0;
                   } else D = !0;
                 }
               }
@@ -276,14 +276,14 @@ const qe = be((function() {
     }
     return u.errors = null, !0;
   }
-  return fe.exports;
-})()), Re = (C) => qe(C);
-var Oe, ue = {
+  return he.exports;
+})()), je = (C) => Me(C);
+var Ne, fe = {
   exports: {}
 };
-const $e = be((function() {
-  if (Oe) return ue.exports;
-  Oe = 1, ue.exports = n, ue.exports.default = n;
+const Oe = ve((function() {
+  if (Ne) return fe.exports;
+  Ne = 1, fe.exports = n, fe.exports.default = n;
   const C = {
     properties: {
       autoplayBgm: { type: "boolean" },
@@ -358,19 +358,26 @@ const $e = be((function() {
         moveFrequency: { type: "integer" },
         moveRoute: {
           additionalProperties: !1,
-          properties: { list: { items: { additionalProperties: !1, properties: { code: { type: "integer" }, parameters: { items: { oneOf: [{ type: "string" }, { type: "number" }, {
-            additionalProperties: !1,
-            properties: { name: { type: "string" }, pan: { type: "integer" }, pitch: { type: "integer" }, volume: { type: "integer" } },
-            required: ["name", "pan", "pitch", "volume"],
-            type: "object"
-          }] }, type: "array" } }, required: ["code", "parameters"], type: "object" }, type: "array" }, repeat: { type: "boolean" }, skippable: { type: "boolean" }, wait: { type: "boolean" } },
+          properties: {
+            list: { items: { additionalProperties: !0, properties: { code: { type: "integer" }, parameters: { nullable: !0, type: "array", items: { oneOf: [{ type: "string" }, {
+              type: "number"
+            }, {
+              additionalProperties: !1,
+              properties: { name: { type: "string" }, pan: { type: "integer" }, pitch: { type: "integer" }, volume: { type: "integer" } },
+              required: ["name", "pan", "pitch", "volume"],
+              type: "object"
+            }] } } }, required: ["code"], type: "object" }, type: "array" },
+            repeat: { type: "boolean" },
+            skippable: { type: "boolean" },
+            wait: { type: "boolean" }
+          },
           required: ["wait", "repeat", "skippable", "list"],
           type: "object"
         }
       }
     }
   }, x: { type: "integer" }, y: { type: "integer" } } }] } }, P = Object.prototype.hasOwnProperty;
-  function n(l, { instancePath: s = "", parentData: Pe, parentDataProperty: L, rootData: D = l } = {}) {
+  function n(l, { instancePath: s = "", parentData: be, parentDataProperty: L, rootData: D = l } = {}) {
     let t = null, e = 0;
     if (e === 0) {
       if (!l || typeof l != "object" || Array.isArray(l)) return n.errors = [{
@@ -381,16 +388,16 @@ const $e = be((function() {
         message: "must be object"
       }], !1;
       {
-        let $;
-        if (l.battleback1Name === void 0 && ($ = "battleback1Name") || l.battleback2Name === void 0 && ($ = "battleback2Name") || l.note === void 0 && ($ = "note") || l.width === void 0 && ($ = "width") || l.height === void 0 && ($ = "height") || l.parallaxSy === void 0 && ($ = "parallaxSy") || l.parallaxSx === void 0 && ($ = "parallaxSx") || l.parallaxLoopY === void 0 && ($ = "parallaxLoopY") || l.parallaxLoopX === void 0 && ($ = "parallaxLoopX") || l.disableDashing === void 0 && ($ = "disableDashing") || l.parallaxName === void 0 && ($ = "parallaxName") || l.parallaxShow === void 0 && ($ = "parallaxShow") || l.displayName === void 0 && ($ = "displayName") || l.data === void 0 && ($ = "data") || l.autoplayBgm === void 0 && ($ = "autoplayBgm") || l.bgm === void 0 && ($ = "bgm") || l.autoplayBgs === void 0 && ($ = "autoplayBgs") || l.bgs === void 0 && ($ = "bgs") || l.tilesetId === void 0 && ($ = "tilesetId") || l.encounterList === void 0 && ($ = "encounterList") || l.events === void 0 && ($ = "events") || l.encounterStep === void 0 && ($ = "encounterStep") || l.scrollType === void 0 && ($ = "scrollType") || l.specifyBattleback === void 0 && ($ = "specifyBattleback")) return n.errors = [{
+        let O;
+        if (l.battleback1Name === void 0 && (O = "battleback1Name") || l.battleback2Name === void 0 && (O = "battleback2Name") || l.note === void 0 && (O = "note") || l.width === void 0 && (O = "width") || l.height === void 0 && (O = "height") || l.parallaxSy === void 0 && (O = "parallaxSy") || l.parallaxSx === void 0 && (O = "parallaxSx") || l.parallaxLoopY === void 0 && (O = "parallaxLoopY") || l.parallaxLoopX === void 0 && (O = "parallaxLoopX") || l.disableDashing === void 0 && (O = "disableDashing") || l.parallaxName === void 0 && (O = "parallaxName") || l.parallaxShow === void 0 && (O = "parallaxShow") || l.displayName === void 0 && (O = "displayName") || l.data === void 0 && (O = "data") || l.autoplayBgm === void 0 && (O = "autoplayBgm") || l.bgm === void 0 && (O = "bgm") || l.autoplayBgs === void 0 && (O = "autoplayBgs") || l.bgs === void 0 && (O = "bgs") || l.tilesetId === void 0 && (O = "tilesetId") || l.encounterList === void 0 && (O = "encounterList") || l.events === void 0 && (O = "events") || l.encounterStep === void 0 && (O = "encounterStep") || l.scrollType === void 0 && (O = "scrollType") || l.specifyBattleback === void 0 && (O = "specifyBattleback")) return n.errors = [{
           instancePath: s,
           schemaPath: "#/required",
           keyword: "required",
-          params: { missingProperty: $ },
-          message: "must have required property '" + $ + "'"
+          params: { missingProperty: O },
+          message: "must have required property '" + O + "'"
         }], !1;
         {
-          const xe = e;
+          const $e = e;
           for (const r in l) if (!P.call(C.properties, r)) return n.errors = [{
             instancePath: s,
             schemaPath: "#/additionalProperties",
@@ -398,7 +405,7 @@ const $e = be((function() {
             params: { additionalProperty: r },
             message: "must NOT have additional properties"
           }], !1;
-          if (xe === e) {
+          if ($e === e) {
             if (l.autoplayBgm !== void 0) {
               const r = e;
               if (typeof l.autoplayBgm != "boolean") return n.errors = [{
@@ -449,7 +456,7 @@ const $e = be((function() {
                   if (m) {
                     if (l.bgm !== void 0) {
                       let r = l.bgm;
-                      const x = e;
+                      const $ = e;
                       if (e === e) {
                         if (!r || typeof r != "object" || Array.isArray(r)) return n.errors = [{
                           instancePath: s + "/bgm",
@@ -532,12 +539,12 @@ const $e = be((function() {
                           }
                         }
                       }
-                      m = x === e;
+                      m = $ === e;
                     } else m = !0;
                     if (m) {
                       if (l.bgs !== void 0) {
                         let r = l.bgs;
-                        const x = e;
+                        const $ = e;
                         if (e === e) {
                           if (!r || typeof r != "object" || Array.isArray(r)) return n.errors = [{
                             instancePath: s + "/bgs",
@@ -620,13 +627,13 @@ const $e = be((function() {
                             }
                           }
                         }
-                        m = x === e;
+                        m = $ === e;
                       } else m = !0;
                       if (m) {
                         if (l.data !== void 0) {
                           let r = l.data;
-                          const x = e;
-                          if (e === x) {
+                          const $ = e;
+                          if (e === $) {
                             if (!Array.isArray(r)) return n.errors = [{ instancePath: s + "/data", schemaPath: "#/properties/data/type", keyword: "type", params: {
                               type: "array"
                             }, message: "must be array" }], !1;
@@ -646,7 +653,7 @@ const $e = be((function() {
                               }
                             }
                           }
-                          m = x === e;
+                          m = $ === e;
                         } else m = !0;
                         if (m) {
                           if (l.disableDashing !== void 0) {
@@ -675,7 +682,7 @@ const $e = be((function() {
                             if (m) {
                               if (l.encounterList !== void 0) {
                                 let r = l.encounterList;
-                                const x = e;
+                                const $ = e;
                                 if (e === e) {
                                   if (!Array.isArray(r)) return n.errors = [{
                                     instancePath: s + "/encounterList",
@@ -728,12 +735,12 @@ const $e = be((function() {
                                                     message: "must be array"
                                                   }], !1;
                                                   {
-                                                    const le = E.length;
-                                                    for (let M = 0; M < le; M++) {
-                                                      let N = E[M];
+                                                    const me = E.length;
+                                                    for (let A = 0; A < me; A++) {
+                                                      let N = E[A];
                                                       const B = e;
                                                       if (typeof N != "number" || N % 1 || isNaN(N) || !isFinite(N)) return n.errors = [{
-                                                        instancePath: s + "/encounterList/" + o + "/regionSet/" + M,
+                                                        instancePath: s + "/encounterList/" + o + "/regionSet/" + A,
                                                         schemaPath: "#/$defs/EncounterList/items/properties/regionSet/items/type",
                                                         keyword: "type",
                                                         params: { type: "integer" },
@@ -779,12 +786,12 @@ const $e = be((function() {
                                     }
                                   }
                                 }
-                                m = x === e;
+                                m = $ === e;
                               } else m = !0;
                               if (m) {
                                 if (l.events !== void 0) {
                                   let r = l.events;
-                                  const x = e;
+                                  const $ = e;
                                   if (e === e) {
                                     if (!Array.isArray(r)) return n.errors = [{
                                       instancePath: s + "/events",
@@ -801,26 +808,26 @@ const $e = be((function() {
                                         let re = !1, E = null;
                                         const ee = e;
                                         if (p !== null) {
-                                          const M = {
+                                          const A = {
                                             instancePath: s + "/events/" + o,
                                             schemaPath: "#/$defs/MapEvents/items/oneOf/0/type",
                                             keyword: "type",
                                             params: { type: "null" },
                                             message: "must be null"
                                           };
-                                          t === null ? t = [M] : t.push(M), e++;
+                                          t === null ? t = [A] : t.push(A), e++;
                                         }
-                                        (ge = ee === e) && (re = !0, E = 0);
-                                        const le = e;
-                                        if (e === le) if (p && typeof p == "object" && !Array.isArray(p)) {
-                                          let M;
-                                          if (p.id === void 0 && (M = "id") || p.name === void 0 && (M = "name") || p.x === void 0 && (M = "x") || p.y === void 0 && (M = "y") || p.pages === void 0 && (M = "pages") || p.note === void 0 && (M = "note")) {
+                                        (ue = ee === e) && (re = !0, E = 0);
+                                        const me = e;
+                                        if (e === me) if (p && typeof p == "object" && !Array.isArray(p)) {
+                                          let A;
+                                          if (p.id === void 0 && (A = "id") || p.name === void 0 && (A = "name") || p.x === void 0 && (A = "x") || p.y === void 0 && (A = "y") || p.pages === void 0 && (A = "pages") || p.note === void 0 && (A = "note")) {
                                             const N = {
                                               instancePath: s + "/events/" + o,
                                               schemaPath: "#/$defs/MapEvents/items/oneOf/1/required",
                                               keyword: "required",
-                                              params: { missingProperty: M },
-                                              message: "must have required property '" + M + "'"
+                                              params: { missingProperty: A },
+                                              message: "must have required property '" + A + "'"
                                             };
                                             t === null ? t = [N] : t.push(N), e++;
                                           } else {
@@ -837,9 +844,9 @@ const $e = be((function() {
                                                 };
                                                 t === null ? t = [Y] : t.push(Y), e++;
                                               }
-                                              var A = B === e;
-                                            } else A = !0;
-                                            if (A) {
+                                              var F = B === e;
+                                            } else F = !0;
+                                            if (F) {
                                               if (p.name !== void 0) {
                                                 const N = e;
                                                 if (typeof p.name != "string") {
@@ -852,18 +859,18 @@ const $e = be((function() {
                                                   };
                                                   t === null ? t = [B] : t.push(B), e++;
                                                 }
-                                                A = N === e;
-                                              } else A = !0;
-                                              if (A) {
+                                                F = N === e;
+                                              } else F = !0;
+                                              if (F) {
                                                 if (p.note !== void 0) {
                                                   const N = e;
                                                   if (typeof p.note != "string") {
                                                     const B = { instancePath: s + "/events/" + o + "/note", schemaPath: "#/$defs/MapEvents/items/oneOf/1/properties/note/type", keyword: "type", params: { type: "string" }, message: "must be string" };
                                                     t === null ? t = [B] : t.push(B), e++;
                                                   }
-                                                  A = N === e;
-                                                } else A = !0;
-                                                if (A) {
+                                                  F = N === e;
+                                                } else F = !0;
+                                                if (F) {
                                                   if (p.pages !== void 0) {
                                                     let N = p.pages;
                                                     const B = e;
@@ -871,20 +878,20 @@ const $e = be((function() {
                                                       const Y = N.length;
                                                       for (let c = 0; c < Y; c++) {
                                                         let f = N[c];
-                                                        const we = e;
-                                                        if (e === we) if (f && typeof f == "object" && !Array.isArray(f)) {
+                                                        const Pe = e;
+                                                        if (e === Pe) if (f && typeof f == "object" && !Array.isArray(f)) {
                                                           let T;
                                                           if (f.conditions === void 0 && (T = "conditions") || f.image === void 0 && (T = "image") || f.list === void 0 && (T = "list") || f.moveRoute === void 0 && (T = "moveRoute") || f.directionFix === void 0 && (T = "directionFix") || f.priorityType === void 0 && (T = "priorityType") || f.moveFrequency === void 0 && (T = "moveFrequency") || f.walkAnime === void 0 && (T = "walkAnime") || f.stepAnime === void 0 && (T = "stepAnime") || f.through === void 0 && (T = "through") || f.moveSpeed === void 0 && (T = "moveSpeed") || f.moveType === void 0 && (T = "moveType") || f.trigger === void 0 && (T = "trigger")) {
-                                                            const ce = {
+                                                            const le = {
                                                               instancePath: s + "/events/" + o + "/pages/" + c,
                                                               schemaPath: "#/$defs/MapEvents/items/oneOf/1/properties/pages/items/required",
                                                               keyword: "required",
                                                               params: { missingProperty: T },
                                                               message: "must have required property '" + T + "'"
                                                             };
-                                                            t === null ? t = [ce] : t.push(ce), e++;
+                                                            t === null ? t = [le] : t.push(le), e++;
                                                           } else {
-                                                            const ce = e;
+                                                            const le = e;
                                                             for (const a in f) if (!P.call(u.items.oneOf[1].properties.pages.items.properties, a)) {
                                                               const b = { instancePath: s + "/events/" + o + "/pages/" + c, schemaPath: "#/$defs/MapEvents/items/oneOf/1/properties/pages/items/additionalProperties", keyword: "additionalProperties", params: {
                                                                 additionalProperty: a
@@ -892,7 +899,7 @@ const $e = be((function() {
                                                               t === null ? t = [b] : t.push(b), e++;
                                                               break;
                                                             }
-                                                            if (ce === e) {
+                                                            if (le === e) {
                                                               if (f.stepAnime !== void 0) {
                                                                 const a = e;
                                                                 if (typeof f.stepAnime != "boolean") {
@@ -1472,7 +1479,7 @@ const $e = be((function() {
                                                                                         if (e === d) if (i && typeof i == "object" && !Array.isArray(i)) {
                                                                                           let y;
                                                                                           if (i.code === void 0 && (y = "code") || i.parameters === void 0 && (y = "parameters") || i.indent === void 0 && (y = "indent")) {
-                                                                                            const F = {
+                                                                                            const M = {
                                                                                               instancePath: s + "/events/" + o + "/pages/" + c + "/list/" + I,
                                                                                               schemaPath: "#/$defs/MapEvents/items/oneOf/1/properties/pages/items/properties/list/items/required",
                                                                                               keyword: "required",
@@ -1481,55 +1488,55 @@ const $e = be((function() {
                                                                                               },
                                                                                               message: "must have required property '" + y + "'"
                                                                                             };
-                                                                                            t === null ? t = [F] : t.push(F), e++;
+                                                                                            t === null ? t = [M] : t.push(M), e++;
                                                                                           } else {
-                                                                                            const F = e;
-                                                                                            for (const O in i) if (O !== "code" && O !== "indent" && O !== "parameters") {
+                                                                                            const M = e;
+                                                                                            for (const x in i) if (x !== "code" && x !== "indent" && x !== "parameters") {
                                                                                               const G = {
                                                                                                 instancePath: s + "/events/" + o + "/pages/" + c + "/list/" + I,
                                                                                                 schemaPath: "#/$defs/MapEvents/items/oneOf/1/properties/pages/items/properties/list/items/additionalProperties",
                                                                                                 keyword: "additionalProperties",
-                                                                                                params: { additionalProperty: O },
+                                                                                                params: { additionalProperty: x },
                                                                                                 message: "must NOT have additional properties"
                                                                                               };
                                                                                               t === null ? t = [G] : t.push(G), e++;
                                                                                               break;
                                                                                             }
-                                                                                            if (F === e) {
+                                                                                            if (M === e) {
                                                                                               if (i.code !== void 0) {
-                                                                                                let O = i.code;
+                                                                                                let x = i.code;
                                                                                                 const G = e;
-                                                                                                if (typeof O != "number" || O % 1 || isNaN(O) || !isFinite(O)) {
-                                                                                                  const W = {
+                                                                                                if (typeof x != "number" || x % 1 || isNaN(x) || !isFinite(x)) {
+                                                                                                  const H = {
                                                                                                     instancePath: s + "/events/" + o + "/pages/" + c + "/list/" + I + "/code",
                                                                                                     schemaPath: "#/$defs/MapEvents/items/oneOf/1/properties/pages/items/properties/list/items/properties/code/type",
                                                                                                     keyword: "type",
                                                                                                     params: { type: "integer" },
                                                                                                     message: "must be integer"
                                                                                                   };
-                                                                                                  t === null ? t = [W] : t.push(W), e++;
+                                                                                                  t === null ? t = [H] : t.push(H), e++;
                                                                                                 }
                                                                                                 var ae = G === e;
                                                                                               } else ae = !0;
                                                                                               if (ae) {
                                                                                                 if (i.indent !== void 0) {
-                                                                                                  let O = i.indent;
+                                                                                                  let x = i.indent;
                                                                                                   const G = e;
-                                                                                                  if (typeof O != "number" || O % 1 || isNaN(O) || !isFinite(O)) {
-                                                                                                    const W = {
+                                                                                                  if (typeof x != "number" || x % 1 || isNaN(x) || !isFinite(x)) {
+                                                                                                    const H = {
                                                                                                       instancePath: s + "/events/" + o + "/pages/" + c + "/list/" + I + "/indent",
                                                                                                       schemaPath: "#/$defs/MapEvents/items/oneOf/1/properties/pages/items/properties/list/items/properties/indent/type",
                                                                                                       keyword: "type",
                                                                                                       params: { type: "integer" },
                                                                                                       message: "must be integer"
                                                                                                     };
-                                                                                                    t === null ? t = [W] : t.push(W), e++;
+                                                                                                    t === null ? t = [H] : t.push(H), e++;
                                                                                                   }
                                                                                                   ae = G === e;
                                                                                                 } else ae = !0;
                                                                                                 if (ae) if (i.parameters !== void 0) {
-                                                                                                  const O = e;
-                                                                                                  if (e === O && !Array.isArray(i.parameters)) {
+                                                                                                  const x = e;
+                                                                                                  if (e === x && !Array.isArray(i.parameters)) {
                                                                                                     const G = {
                                                                                                       instancePath: s + "/events/" + o + "/pages/" + c + "/list/" + I + "/parameters",
                                                                                                       schemaPath: "#/$defs/MapEvents/items/oneOf/1/properties/pages/items/properties/list/items/properties/parameters/type",
@@ -1539,7 +1546,7 @@ const $e = be((function() {
                                                                                                     };
                                                                                                     t === null ? t = [G] : t.push(G), e++;
                                                                                                   }
-                                                                                                  ae = O === e;
+                                                                                                  ae = x === e;
                                                                                                 } else ae = !0;
                                                                                               }
                                                                                             }
@@ -1621,138 +1628,149 @@ const $e = be((function() {
                                                                                               const d = e;
                                                                                               if (e === d) if (Array.isArray(i)) {
                                                                                                 const y = i.length;
-                                                                                                for (let F = 0; F < y; F++) {
-                                                                                                  let O = i[F];
+                                                                                                for (let M = 0; M < y; M++) {
+                                                                                                  let x = i[M];
                                                                                                   const G = e;
-                                                                                                  if (e === G) if (O && typeof O == "object" && !Array.isArray(O)) {
-                                                                                                    let W;
-                                                                                                    if (O.code === void 0 && (W = "code") || O.parameters === void 0 && (W = "parameters")) {
-                                                                                                      const de = {
-                                                                                                        instancePath: s + "/events/" + o + "/pages/" + c + "/moveRoute/list/" + F,
+                                                                                                  if (e === G) if (x && typeof x == "object" && !Array.isArray(x)) {
+                                                                                                    let H;
+                                                                                                    if (x.code === void 0 && (H = "code")) {
+                                                                                                      const W = {
+                                                                                                        instancePath: s + "/events/" + o + "/pages/" + c + "/moveRoute/list/" + M,
                                                                                                         schemaPath: "#/$defs/MapEvents/items/oneOf/1/properties/pages/items/properties/moveRoute/properties/list/items/required",
                                                                                                         keyword: "required",
-                                                                                                        params: { missingProperty: W },
-                                                                                                        message: "must have required property '" + W + "'"
+                                                                                                        params: { missingProperty: H },
+                                                                                                        message: "must have required property '" + H + "'"
                                                                                                       };
-                                                                                                      t === null ? t = [de] : t.push(de), e++;
+                                                                                                      t === null ? t = [W] : t.push(W), e++;
                                                                                                     } else {
-                                                                                                      const de = e;
-                                                                                                      for (const H in O) if (H !== "code" && H !== "parameters") {
-                                                                                                        const oe = {
-                                                                                                          instancePath: s + "/events/" + o + "/pages/" + c + "/moveRoute/list/" + F,
-                                                                                                          schemaPath: "#/$defs/MapEvents/items/oneOf/1/properties/pages/items/properties/moveRoute/properties/list/items/additionalProperties",
-                                                                                                          keyword: "additionalProperties",
-                                                                                                          params: {
-                                                                                                            additionalProperty: H
-                                                                                                          },
-                                                                                                          message: "must NOT have additional properties"
-                                                                                                        };
-                                                                                                        t === null ? t = [oe] : t.push(oe), e++;
-                                                                                                        break;
-                                                                                                      }
-                                                                                                      if (de === e) {
-                                                                                                        if (O.code !== void 0) {
-                                                                                                          let H = O.code;
-                                                                                                          const oe = e;
-                                                                                                          if (typeof H != "number" || H % 1 || isNaN(H) || !isFinite(H)) {
-                                                                                                            const pe = {
-                                                                                                              instancePath: s + "/events/" + o + "/pages/" + c + "/moveRoute/list/" + F + "/code",
-                                                                                                              schemaPath: "#/$defs/MapEvents/items/oneOf/1/properties/pages/items/properties/moveRoute/properties/list/items/properties/code/type",
-                                                                                                              keyword: "type",
-                                                                                                              params: { type: "integer" },
-                                                                                                              message: "must be integer"
-                                                                                                            };
-                                                                                                            t === null ? t = [pe] : t.push(pe), e++;
-                                                                                                          }
-                                                                                                          var me = oe === e;
-                                                                                                        } else me = !0;
-                                                                                                        if (me) if (O.parameters !== void 0) {
-                                                                                                          let H = O.parameters;
-                                                                                                          const oe = e;
-                                                                                                          if (e === oe) if (Array.isArray(H)) {
-                                                                                                            const pe = H.length;
-                                                                                                            for (let z = 0; z < pe; z++) {
-                                                                                                              let j = H[z];
-                                                                                                              const Ee = e, ve = e;
-                                                                                                              let te = !1, se = null;
-                                                                                                              const Ie = e;
-                                                                                                              if (typeof j != "string") {
-                                                                                                                const J = {
-                                                                                                                  instancePath: s + "/events/" + o + "/pages/" + c + "/moveRoute/list/" + F + "/parameters/" + z,
-                                                                                                                  schemaPath: "#/$defs/MapEvents/items/oneOf/1/properties/pages/items/properties/moveRoute/properties/list/items/properties/parameters/items/oneOf/0/type",
-                                                                                                                  keyword: "type",
-                                                                                                                  params: {
-                                                                                                                    type: "string"
-                                                                                                                  },
-                                                                                                                  message: "must be string"
-                                                                                                                };
-                                                                                                                t === null ? t = [J] : t.push(J), e++;
-                                                                                                              }
-                                                                                                              (ne = Ie === e) && (te = !0, se = 0);
-                                                                                                              const Fe = e;
-                                                                                                              if (typeof j != "number" || !isFinite(j)) {
-                                                                                                                const J = {
-                                                                                                                  instancePath: s + "/events/" + o + "/pages/" + c + "/moveRoute/list/" + F + "/parameters/" + z,
-                                                                                                                  schemaPath: "#/$defs/MapEvents/items/oneOf/1/properties/pages/items/properties/moveRoute/properties/list/items/properties/parameters/items/oneOf/1/type",
-                                                                                                                  keyword: "type",
-                                                                                                                  params: {
-                                                                                                                    type: "number"
-                                                                                                                  },
-                                                                                                                  message: "must be number"
-                                                                                                                };
-                                                                                                                t === null ? t = [J] : t.push(J), e++;
-                                                                                                              }
-                                                                                                              if ((ne = Fe === e) && te) te = !1, se = [se, 1];
-                                                                                                              else {
-                                                                                                                ne && (te = !0, se = 1);
-                                                                                                                const J = e;
-                                                                                                                if (e === J) if (j && typeof j == "object" && !Array.isArray(j)) {
-                                                                                                                  let _;
-                                                                                                                  if (j.name === void 0 && (_ = "name") || j.pan === void 0 && (_ = "pan") || j.pitch === void 0 && (_ = "pitch") || j.volume === void 0 && (_ = "volume")) {
-                                                                                                                    const ye = {
-                                                                                                                      instancePath: s + "/events/" + o + "/pages/" + c + "/moveRoute/list/" + F + "/parameters/" + z,
-                                                                                                                      schemaPath: "#/$defs/MapEvents/items/oneOf/1/properties/pages/items/properties/moveRoute/properties/list/items/properties/parameters/items/oneOf/2/required",
-                                                                                                                      keyword: "required",
-                                                                                                                      params: { missingProperty: _ },
-                                                                                                                      message: "must have required property '" + _ + "'"
+                                                                                                      if (x.code !== void 0) {
+                                                                                                        let W = x.code;
+                                                                                                        const ce = e;
+                                                                                                        if (typeof W != "number" || W % 1 || isNaN(W) || !isFinite(W)) {
+                                                                                                          const oe = {
+                                                                                                            instancePath: s + "/events/" + o + "/pages/" + c + "/moveRoute/list/" + M + "/code",
+                                                                                                            schemaPath: "#/$defs/MapEvents/items/oneOf/1/properties/pages/items/properties/moveRoute/properties/list/items/properties/code/type",
+                                                                                                            keyword: "type",
+                                                                                                            params: { type: "integer" },
+                                                                                                            message: "must be integer"
+                                                                                                          };
+                                                                                                          t === null ? t = [oe] : t.push(oe), e++;
+                                                                                                        }
+                                                                                                        var ne = ce === e;
+                                                                                                      } else ne = !0;
+                                                                                                      if (ne) if (x.parameters !== void 0) {
+                                                                                                        let W = x.parameters;
+                                                                                                        const ce = e;
+                                                                                                        if (!Array.isArray(W) && W !== null) {
+                                                                                                          const oe = {
+                                                                                                            instancePath: s + "/events/" + o + "/pages/" + c + "/moveRoute/list/" + M + "/parameters",
+                                                                                                            schemaPath: "#/$defs/MapEvents/items/oneOf/1/properties/pages/items/properties/moveRoute/properties/list/items/properties/parameters/type",
+                                                                                                            keyword: "type",
+                                                                                                            params: { type: "array" },
+                                                                                                            message: "must be array"
+                                                                                                          };
+                                                                                                          t === null ? t = [oe] : t.push(oe), e++;
+                                                                                                        }
+                                                                                                        if (e === ce && Array.isArray(W)) {
+                                                                                                          const oe = W.length;
+                                                                                                          for (let z = 0; z < oe; z++) {
+                                                                                                            let j = W[z];
+                                                                                                            const xe = e, ge = e;
+                                                                                                            let te = !1, se = null;
+                                                                                                            const Ee = e;
+                                                                                                            if (typeof j != "string") {
+                                                                                                              const J = {
+                                                                                                                instancePath: s + "/events/" + o + "/pages/" + c + "/moveRoute/list/" + M + "/parameters/" + z,
+                                                                                                                schemaPath: "#/$defs/MapEvents/items/oneOf/1/properties/pages/items/properties/moveRoute/properties/list/items/properties/parameters/items/oneOf/0/type",
+                                                                                                                keyword: "type",
+                                                                                                                params: {
+                                                                                                                  type: "string"
+                                                                                                                },
+                                                                                                                message: "must be string"
+                                                                                                              };
+                                                                                                              t === null ? t = [J] : t.push(J), e++;
+                                                                                                            }
+                                                                                                            (pe = Ee === e) && (te = !0, se = 0);
+                                                                                                            const Ie = e;
+                                                                                                            if (typeof j != "number" || !isFinite(j)) {
+                                                                                                              const J = {
+                                                                                                                instancePath: s + "/events/" + o + "/pages/" + c + "/moveRoute/list/" + M + "/parameters/" + z,
+                                                                                                                schemaPath: "#/$defs/MapEvents/items/oneOf/1/properties/pages/items/properties/moveRoute/properties/list/items/properties/parameters/items/oneOf/1/type",
+                                                                                                                keyword: "type",
+                                                                                                                params: {
+                                                                                                                  type: "number"
+                                                                                                                },
+                                                                                                                message: "must be number"
+                                                                                                              };
+                                                                                                              t === null ? t = [J] : t.push(J), e++;
+                                                                                                            }
+                                                                                                            if ((pe = Ie === e) && te) te = !1, se = [se, 1];
+                                                                                                            else {
+                                                                                                              pe && (te = !0, se = 1);
+                                                                                                              const J = e;
+                                                                                                              if (e === J) if (j && typeof j == "object" && !Array.isArray(j)) {
+                                                                                                                let _;
+                                                                                                                if (j.name === void 0 && (_ = "name") || j.pan === void 0 && (_ = "pan") || j.pitch === void 0 && (_ = "pitch") || j.volume === void 0 && (_ = "volume")) {
+                                                                                                                  const de = {
+                                                                                                                    instancePath: s + "/events/" + o + "/pages/" + c + "/moveRoute/list/" + M + "/parameters/" + z,
+                                                                                                                    schemaPath: "#/$defs/MapEvents/items/oneOf/1/properties/pages/items/properties/moveRoute/properties/list/items/properties/parameters/items/oneOf/2/required",
+                                                                                                                    keyword: "required",
+                                                                                                                    params: { missingProperty: _ },
+                                                                                                                    message: "must have required property '" + _ + "'"
+                                                                                                                  };
+                                                                                                                  t === null ? t = [de] : t.push(de), e++;
+                                                                                                                } else {
+                                                                                                                  const de = e;
+                                                                                                                  for (const q in j) if (q !== "name" && q !== "pan" && q !== "pitch" && q !== "volume") {
+                                                                                                                    const K = {
+                                                                                                                      instancePath: s + "/events/" + o + "/pages/" + c + "/moveRoute/list/" + M + "/parameters/" + z,
+                                                                                                                      schemaPath: "#/$defs/MapEvents/items/oneOf/1/properties/pages/items/properties/moveRoute/properties/list/items/properties/parameters/items/oneOf/2/additionalProperties",
+                                                                                                                      keyword: "additionalProperties",
+                                                                                                                      params: { additionalProperty: q },
+                                                                                                                      message: "must NOT have additional properties"
                                                                                                                     };
-                                                                                                                    t === null ? t = [ye] : t.push(ye), e++;
-                                                                                                                  } else {
-                                                                                                                    const ye = e;
-                                                                                                                    for (const q in j) if (q !== "name" && q !== "pan" && q !== "pitch" && q !== "volume") {
-                                                                                                                      const K = {
-                                                                                                                        instancePath: s + "/events/" + o + "/pages/" + c + "/moveRoute/list/" + F + "/parameters/" + z,
-                                                                                                                        schemaPath: "#/$defs/MapEvents/items/oneOf/1/properties/pages/items/properties/moveRoute/properties/list/items/properties/parameters/items/oneOf/2/additionalProperties",
-                                                                                                                        keyword: "additionalProperties",
-                                                                                                                        params: { additionalProperty: q },
-                                                                                                                        message: "must NOT have additional properties"
-                                                                                                                      };
-                                                                                                                      t === null ? t = [K] : t.push(K), e++;
-                                                                                                                      break;
-                                                                                                                    }
-                                                                                                                    if (ye === e) {
-                                                                                                                      if (j.name !== void 0) {
-                                                                                                                        const q = e;
-                                                                                                                        if (typeof j.name != "string") {
-                                                                                                                          const K = {
-                                                                                                                            instancePath: s + "/events/" + o + "/pages/" + c + "/moveRoute/list/" + F + "/parameters/" + z + "/name",
-                                                                                                                            schemaPath: "#/$defs/MapEvents/items/oneOf/1/properties/pages/items/properties/moveRoute/properties/list/items/properties/parameters/items/oneOf/2/properties/name/type",
+                                                                                                                    t === null ? t = [K] : t.push(K), e++;
+                                                                                                                    break;
+                                                                                                                  }
+                                                                                                                  if (de === e) {
+                                                                                                                    if (j.name !== void 0) {
+                                                                                                                      const q = e;
+                                                                                                                      if (typeof j.name != "string") {
+                                                                                                                        const K = {
+                                                                                                                          instancePath: s + "/events/" + o + "/pages/" + c + "/moveRoute/list/" + M + "/parameters/" + z + "/name",
+                                                                                                                          schemaPath: "#/$defs/MapEvents/items/oneOf/1/properties/pages/items/properties/moveRoute/properties/list/items/properties/parameters/items/oneOf/2/properties/name/type",
+                                                                                                                          keyword: "type",
+                                                                                                                          params: { type: "string" },
+                                                                                                                          message: "must be string"
+                                                                                                                        };
+                                                                                                                        t === null ? t = [K] : t.push(K), e++;
+                                                                                                                      }
+                                                                                                                      var Q = q === e;
+                                                                                                                    } else Q = !0;
+                                                                                                                    if (Q) {
+                                                                                                                      if (j.pan !== void 0) {
+                                                                                                                        let q = j.pan;
+                                                                                                                        const K = e;
+                                                                                                                        if (typeof q != "number" || q % 1 || isNaN(q) || !isFinite(q)) {
+                                                                                                                          const ie = {
+                                                                                                                            instancePath: s + "/events/" + o + "/pages/" + c + "/moveRoute/list/" + M + "/parameters/" + z + "/pan",
+                                                                                                                            schemaPath: "#/$defs/MapEvents/items/oneOf/1/properties/pages/items/properties/moveRoute/properties/list/items/properties/parameters/items/oneOf/2/properties/pan/type",
                                                                                                                             keyword: "type",
-                                                                                                                            params: { type: "string" },
-                                                                                                                            message: "must be string"
+                                                                                                                            params: { type: "integer" },
+                                                                                                                            message: "must be integer"
                                                                                                                           };
-                                                                                                                          t === null ? t = [K] : t.push(K), e++;
+                                                                                                                          t === null ? t = [ie] : t.push(ie), e++;
                                                                                                                         }
-                                                                                                                        var Q = q === e;
+                                                                                                                        Q = K === e;
                                                                                                                       } else Q = !0;
                                                                                                                       if (Q) {
-                                                                                                                        if (j.pan !== void 0) {
-                                                                                                                          let q = j.pan;
+                                                                                                                        if (j.pitch !== void 0) {
+                                                                                                                          let q = j.pitch;
                                                                                                                           const K = e;
                                                                                                                           if (typeof q != "number" || q % 1 || isNaN(q) || !isFinite(q)) {
                                                                                                                             const ie = {
-                                                                                                                              instancePath: s + "/events/" + o + "/pages/" + c + "/moveRoute/list/" + F + "/parameters/" + z + "/pan",
-                                                                                                                              schemaPath: "#/$defs/MapEvents/items/oneOf/1/properties/pages/items/properties/moveRoute/properties/list/items/properties/parameters/items/oneOf/2/properties/pan/type",
+                                                                                                                              instancePath: s + "/events/" + o + "/pages/" + c + "/moveRoute/list/" + M + "/parameters/" + z + "/pitch",
+                                                                                                                              schemaPath: "#/$defs/MapEvents/items/oneOf/1/properties/pages/items/properties/moveRoute/properties/list/items/properties/parameters/items/oneOf/2/properties/pitch/type",
                                                                                                                               keyword: "type",
                                                                                                                               params: { type: "integer" },
                                                                                                                               message: "must be integer"
@@ -1761,94 +1779,68 @@ const $e = be((function() {
                                                                                                                           }
                                                                                                                           Q = K === e;
                                                                                                                         } else Q = !0;
-                                                                                                                        if (Q) {
-                                                                                                                          if (j.pitch !== void 0) {
-                                                                                                                            let q = j.pitch;
-                                                                                                                            const K = e;
-                                                                                                                            if (typeof q != "number" || q % 1 || isNaN(q) || !isFinite(q)) {
-                                                                                                                              const ie = {
-                                                                                                                                instancePath: s + "/events/" + o + "/pages/" + c + "/moveRoute/list/" + F + "/parameters/" + z + "/pitch",
-                                                                                                                                schemaPath: "#/$defs/MapEvents/items/oneOf/1/properties/pages/items/properties/moveRoute/properties/list/items/properties/parameters/items/oneOf/2/properties/pitch/type",
-                                                                                                                                keyword: "type",
-                                                                                                                                params: { type: "integer" },
-                                                                                                                                message: "must be integer"
-                                                                                                                              };
-                                                                                                                              t === null ? t = [ie] : t.push(ie), e++;
-                                                                                                                            }
-                                                                                                                            Q = K === e;
-                                                                                                                          } else Q = !0;
-                                                                                                                          if (Q) if (j.volume !== void 0) {
-                                                                                                                            let q = j.volume;
-                                                                                                                            const K = e;
-                                                                                                                            if (typeof q != "number" || q % 1 || isNaN(q) || !isFinite(q)) {
-                                                                                                                              const ie = {
-                                                                                                                                instancePath: s + "/events/" + o + "/pages/" + c + "/moveRoute/list/" + F + "/parameters/" + z + "/volume",
-                                                                                                                                schemaPath: "#/$defs/MapEvents/items/oneOf/1/properties/pages/items/properties/moveRoute/properties/list/items/properties/parameters/items/oneOf/2/properties/volume/type",
-                                                                                                                                keyword: "type",
-                                                                                                                                params: { type: "integer" },
-                                                                                                                                message: "must be integer"
-                                                                                                                              };
-                                                                                                                              t === null ? t = [ie] : t.push(ie), e++;
-                                                                                                                            }
-                                                                                                                            Q = K === e;
-                                                                                                                          } else Q = !0;
-                                                                                                                        }
+                                                                                                                        if (Q) if (j.volume !== void 0) {
+                                                                                                                          let q = j.volume;
+                                                                                                                          const K = e;
+                                                                                                                          if (typeof q != "number" || q % 1 || isNaN(q) || !isFinite(q)) {
+                                                                                                                            const ie = {
+                                                                                                                              instancePath: s + "/events/" + o + "/pages/" + c + "/moveRoute/list/" + M + "/parameters/" + z + "/volume",
+                                                                                                                              schemaPath: "#/$defs/MapEvents/items/oneOf/1/properties/pages/items/properties/moveRoute/properties/list/items/properties/parameters/items/oneOf/2/properties/volume/type",
+                                                                                                                              keyword: "type",
+                                                                                                                              params: { type: "integer" },
+                                                                                                                              message: "must be integer"
+                                                                                                                            };
+                                                                                                                            t === null ? t = [ie] : t.push(ie), e++;
+                                                                                                                          }
+                                                                                                                          Q = K === e;
+                                                                                                                        } else Q = !0;
                                                                                                                       }
                                                                                                                     }
                                                                                                                   }
-                                                                                                                } else {
-                                                                                                                  const _ = {
-                                                                                                                    instancePath: s + "/events/" + o + "/pages/" + c + "/moveRoute/list/" + F + "/parameters/" + z,
-                                                                                                                    schemaPath: "#/$defs/MapEvents/items/oneOf/1/properties/pages/items/properties/moveRoute/properties/list/items/properties/parameters/items/oneOf/2/type",
-                                                                                                                    keyword: "type",
-                                                                                                                    params: {
-                                                                                                                      type: "object"
-                                                                                                                    },
-                                                                                                                    message: "must be object"
-                                                                                                                  };
-                                                                                                                  t === null ? t = [_] : t.push(_), e++;
                                                                                                                 }
-                                                                                                                var ne;
-                                                                                                                (ne = J === e) && te ? (te = !1, se = [se, 2]) : ne && (te = !0, se = 2);
-                                                                                                              }
-                                                                                                              if (te) e = ve, t !== null && (ve ? t.length = ve : t = null);
-                                                                                                              else {
-                                                                                                                const J = {
-                                                                                                                  instancePath: s + "/events/" + o + "/pages/" + c + "/moveRoute/list/" + F + "/parameters/" + z,
-                                                                                                                  schemaPath: "#/$defs/MapEvents/items/oneOf/1/properties/pages/items/properties/moveRoute/properties/list/items/properties/parameters/items/oneOf",
-                                                                                                                  keyword: "oneOf",
+                                                                                                              } else {
+                                                                                                                const _ = {
+                                                                                                                  instancePath: s + "/events/" + o + "/pages/" + c + "/moveRoute/list/" + M + "/parameters/" + z,
+                                                                                                                  schemaPath: "#/$defs/MapEvents/items/oneOf/1/properties/pages/items/properties/moveRoute/properties/list/items/properties/parameters/items/oneOf/2/type",
+                                                                                                                  keyword: "type",
                                                                                                                   params: {
-                                                                                                                    passingSchemas: se
+                                                                                                                    type: "object"
                                                                                                                   },
-                                                                                                                  message: "must match exactly one schema in oneOf"
+                                                                                                                  message: "must be object"
                                                                                                                 };
-                                                                                                                t === null ? t = [J] : t.push(J), e++;
+                                                                                                                t === null ? t = [_] : t.push(_), e++;
                                                                                                               }
-                                                                                                              if (Ee !== e) break;
+                                                                                                              var pe;
+                                                                                                              (pe = J === e) && te ? (te = !1, se = [se, 2]) : pe && (te = !0, se = 2);
                                                                                                             }
-                                                                                                          } else {
-                                                                                                            const pe = {
-                                                                                                              instancePath: s + "/events/" + o + "/pages/" + c + "/moveRoute/list/" + F + "/parameters",
-                                                                                                              schemaPath: "#/$defs/MapEvents/items/oneOf/1/properties/pages/items/properties/moveRoute/properties/list/items/properties/parameters/type",
-                                                                                                              keyword: "type",
-                                                                                                              params: { type: "array" },
-                                                                                                              message: "must be array"
-                                                                                                            };
-                                                                                                            t === null ? t = [pe] : t.push(pe), e++;
+                                                                                                            if (te) e = ge, t !== null && (ge ? t.length = ge : t = null);
+                                                                                                            else {
+                                                                                                              const J = {
+                                                                                                                instancePath: s + "/events/" + o + "/pages/" + c + "/moveRoute/list/" + M + "/parameters/" + z,
+                                                                                                                schemaPath: "#/$defs/MapEvents/items/oneOf/1/properties/pages/items/properties/moveRoute/properties/list/items/properties/parameters/items/oneOf",
+                                                                                                                keyword: "oneOf",
+                                                                                                                params: {
+                                                                                                                  passingSchemas: se
+                                                                                                                },
+                                                                                                                message: "must match exactly one schema in oneOf"
+                                                                                                              };
+                                                                                                              t === null ? t = [J] : t.push(J), e++;
+                                                                                                            }
+                                                                                                            if (xe !== e) break;
                                                                                                           }
-                                                                                                          me = oe === e;
-                                                                                                        } else me = !0;
-                                                                                                      }
+                                                                                                        }
+                                                                                                        ne = ce === e;
+                                                                                                      } else ne = !0;
                                                                                                     }
                                                                                                   } else {
-                                                                                                    const W = {
-                                                                                                      instancePath: s + "/events/" + o + "/pages/" + c + "/moveRoute/list/" + F,
+                                                                                                    const H = {
+                                                                                                      instancePath: s + "/events/" + o + "/pages/" + c + "/moveRoute/list/" + M,
                                                                                                       schemaPath: "#/$defs/MapEvents/items/oneOf/1/properties/pages/items/properties/moveRoute/properties/list/items/type",
                                                                                                       keyword: "type",
                                                                                                       params: { type: "object" },
                                                                                                       message: "must be object"
                                                                                                     };
-                                                                                                    t === null ? t = [W] : t.push(W), e++;
+                                                                                                    t === null ? t = [H] : t.push(H), e++;
                                                                                                   }
                                                                                                   if (G !== e) break;
                                                                                                 }
@@ -1917,7 +1909,9 @@ const $e = be((function() {
                                                                                           instancePath: s + "/events/" + o + "/pages/" + c + "/moveRoute",
                                                                                           schemaPath: "#/$defs/MapEvents/items/oneOf/1/properties/pages/items/properties/moveRoute/type",
                                                                                           keyword: "type",
-                                                                                          params: { type: "object" },
+                                                                                          params: {
+                                                                                            type: "object"
+                                                                                          },
                                                                                           message: "must be object"
                                                                                         };
                                                                                         t === null ? t = [h] : t.push(h), e++;
@@ -1947,7 +1941,7 @@ const $e = be((function() {
                                                           };
                                                           t === null ? t = [T] : t.push(T), e++;
                                                         }
-                                                        if (we !== e) break;
+                                                        if (Pe !== e) break;
                                                       }
                                                     } else {
                                                       const Y = {
@@ -1959,9 +1953,9 @@ const $e = be((function() {
                                                       };
                                                       t === null ? t = [Y] : t.push(Y), e++;
                                                     }
-                                                    A = B === e;
-                                                  } else A = !0;
-                                                  if (A) {
+                                                    F = B === e;
+                                                  } else F = !0;
+                                                  if (F) {
                                                     if (p.x !== void 0) {
                                                       let N = p.x;
                                                       const B = e;
@@ -1975,9 +1969,9 @@ const $e = be((function() {
                                                         };
                                                         t === null ? t = [Y] : t.push(Y), e++;
                                                       }
-                                                      A = B === e;
-                                                    } else A = !0;
-                                                    if (A) if (p.y !== void 0) {
+                                                      F = B === e;
+                                                    } else F = !0;
+                                                    if (F) if (p.y !== void 0) {
                                                       let N = p.y;
                                                       const B = e;
                                                       if (typeof N != "number" || N % 1 || isNaN(N) || !isFinite(N)) {
@@ -1990,40 +1984,40 @@ const $e = be((function() {
                                                         };
                                                         t === null ? t = [Y] : t.push(Y), e++;
                                                       }
-                                                      A = B === e;
-                                                    } else A = !0;
+                                                      F = B === e;
+                                                    } else F = !0;
                                                   }
                                                 }
                                               }
                                             }
                                           }
                                         } else {
-                                          const M = { instancePath: s + "/events/" + o, schemaPath: "#/$defs/MapEvents/items/oneOf/1/type", keyword: "type", params: {
+                                          const A = { instancePath: s + "/events/" + o, schemaPath: "#/$defs/MapEvents/items/oneOf/1/type", keyword: "type", params: {
                                             type: "object"
                                           }, message: "must be object" };
-                                          t === null ? t = [M] : t.push(M), e++;
+                                          t === null ? t = [A] : t.push(A), e++;
                                         }
-                                        var ge;
-                                        if ((ge = le === e) && re ? (re = !1, E = [E, 1]) : ge && (re = !0, E = 1), !re) {
-                                          const M = {
+                                        var ue;
+                                        if ((ue = me === e) && re ? (re = !1, E = [E, 1]) : ue && (re = !0, E = 1), !re) {
+                                          const A = {
                                             instancePath: s + "/events/" + o,
                                             schemaPath: "#/$defs/MapEvents/items/oneOf",
                                             keyword: "oneOf",
                                             params: { passingSchemas: E },
                                             message: "must match exactly one schema in oneOf"
                                           };
-                                          return t === null ? t = [M] : t.push(M), e++, n.errors = t, !1;
+                                          return t === null ? t = [A] : t.push(A), e++, n.errors = t, !1;
                                         }
                                         if (e = Z, t !== null && (Z ? t.length = Z : t = null), R !== e) break;
                                       }
                                     }
                                   }
-                                  m = x === e;
+                                  m = $ === e;
                                 } else m = !0;
                                 if (m) {
                                   if (l.width !== void 0) {
                                     let r = l.width;
-                                    const x = e;
+                                    const $ = e;
                                     if (typeof r != "number" || r % 1 || isNaN(r) || !isFinite(r)) return n.errors = [{
                                       instancePath: s + "/width",
                                       schemaPath: "#/properties/width/type",
@@ -2031,19 +2025,19 @@ const $e = be((function() {
                                       params: { type: "integer" },
                                       message: "must be integer"
                                     }], !1;
-                                    if (e === x && typeof r == "number" && isFinite(r) && (r < 0 || isNaN(r))) return n.errors = [{
+                                    if (e === $ && typeof r == "number" && isFinite(r) && (r < 0 || isNaN(r))) return n.errors = [{
                                       instancePath: s + "/width",
                                       schemaPath: "#/properties/width/minimum",
                                       keyword: "minimum",
                                       params: { comparison: ">=", limit: 0 },
                                       message: "must be >= 0"
                                     }], !1;
-                                    m = x === e;
+                                    m = $ === e;
                                   } else m = !0;
                                   if (m) {
                                     if (l.height !== void 0) {
                                       let r = l.height;
-                                      const x = e;
+                                      const $ = e;
                                       if (typeof r != "number" || r % 1 || isNaN(r) || !isFinite(r)) return n.errors = [{
                                         instancePath: s + "/height",
                                         schemaPath: "#/properties/height/type",
@@ -2051,14 +2045,14 @@ const $e = be((function() {
                                         params: { type: "integer" },
                                         message: "must be integer"
                                       }], !1;
-                                      if (e === x && typeof r == "number" && isFinite(r) && (r < 0 || isNaN(r))) return n.errors = [{
+                                      if (e === $ && typeof r == "number" && isFinite(r) && (r < 0 || isNaN(r))) return n.errors = [{
                                         instancePath: s + "/height",
                                         schemaPath: "#/properties/height/minimum",
                                         keyword: "minimum",
                                         params: { comparison: ">=", limit: 0 },
                                         message: "must be >= 0"
                                       }], !1;
-                                      m = x === e;
+                                      m = $ === e;
                                     } else m = !0;
                                     if (m) {
                                       if (l.note !== void 0) {
@@ -2119,7 +2113,7 @@ const $e = be((function() {
                                               if (m) {
                                                 if (l.parallaxSx !== void 0) {
                                                   let r = l.parallaxSx;
-                                                  const x = e;
+                                                  const $ = e;
                                                   if (typeof r != "number" || r % 1 || isNaN(r) || !isFinite(r)) return n.errors = [{
                                                     instancePath: s + "/parallaxSx",
                                                     schemaPath: "#/properties/parallaxSx/type",
@@ -2127,12 +2121,12 @@ const $e = be((function() {
                                                     params: { type: "integer" },
                                                     message: "must be integer"
                                                   }], !1;
-                                                  m = x === e;
+                                                  m = $ === e;
                                                 } else m = !0;
                                                 if (m) {
                                                   if (l.parallaxSy !== void 0) {
                                                     let r = l.parallaxSy;
-                                                    const x = e;
+                                                    const $ = e;
                                                     if (typeof r != "number" || r % 1 || isNaN(r) || !isFinite(r)) return n.errors = [{
                                                       instancePath: s + "/parallaxSy",
                                                       schemaPath: "#/properties/parallaxSy/type",
@@ -2140,30 +2134,30 @@ const $e = be((function() {
                                                       params: { type: "integer" },
                                                       message: "must be integer"
                                                     }], !1;
-                                                    m = x === e;
+                                                    m = $ === e;
                                                   } else m = !0;
                                                   if (m) {
                                                     if (l.tilesetId !== void 0) {
                                                       let r = l.tilesetId;
-                                                      const x = e;
+                                                      const $ = e;
                                                       if (typeof r != "number" || r % 1 || isNaN(r) || !isFinite(r)) return n.errors = [{ instancePath: s + "/tilesetId", schemaPath: "#/properties/tilesetId/type", keyword: "type", params: {
                                                         type: "integer"
                                                       }, message: "must be integer" }], !1;
-                                                      m = x === e;
+                                                      m = $ === e;
                                                     } else m = !0;
                                                     if (m) {
                                                       if (l.encounterStep !== void 0) {
                                                         let r = l.encounterStep;
-                                                        const x = e;
+                                                        const $ = e;
                                                         if (typeof r != "number" || r % 1 || isNaN(r) || !isFinite(r)) return n.errors = [{ instancePath: s + "/encounterStep", schemaPath: "#/properties/encounterStep/type", keyword: "type", params: {
                                                           type: "integer"
                                                         }, message: "must be integer" }], !1;
-                                                        m = x === e;
+                                                        m = $ === e;
                                                       } else m = !0;
                                                       if (m) {
                                                         if (l.scrollType !== void 0) {
                                                           let r = l.scrollType;
-                                                          const x = e;
+                                                          const $ = e;
                                                           if (typeof r != "number" || r % 1 || isNaN(r) || !isFinite(r)) return n.errors = [{
                                                             instancePath: s + "/scrollType",
                                                             schemaPath: "#/properties/scrollType/type",
@@ -2171,7 +2165,7 @@ const $e = be((function() {
                                                             params: { type: "integer" },
                                                             message: "must be integer"
                                                           }], !1;
-                                                          m = x === e;
+                                                          m = $ === e;
                                                         } else m = !0;
                                                         if (m) if (l.specifyBattleback !== void 0) {
                                                           const r = e;
@@ -2212,11 +2206,11 @@ const $e = be((function() {
     }
     return n.errors = t, e === 0;
   }
-  return ue.exports;
-})()), Te = (C) => $e(C), Le = (C) => Ae(C, $e);
+  return fe.exports;
+})()), Re = (C) => Oe(C), Te = (C) => Fe(C, Oe);
 export {
-  je as isActorTextCommand,
-  Re as isAudioCommand,
-  Te as isDataMap,
-  Le as validateMapWithErrors
+  Ve as isActorTextCommand,
+  je as isAudioCommand,
+  Re as isDataMap,
+  Te as validateMapWithErrors
 };

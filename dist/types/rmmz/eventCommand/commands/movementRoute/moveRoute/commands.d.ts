@@ -1,0 +1,34 @@
+import { ROUTE_END, ROUTE_MOVE_AWAY, ROUTE_MOVE_BACKWARD, ROUTE_MOVE_DOWN, ROUTE_MOVE_FORWARD, ROUTE_MOVE_LEFT, ROUTE_MOVE_LOWER_L, ROUTE_MOVE_LOWER_R, ROUTE_MOVE_RANDOM, ROUTE_MOVE_RIGHT, ROUTE_MOVE_TOWARD, ROUTE_MOVE_UP, ROUTE_MOVE_UPPER_L, ROUTE_MOVE_UPPER_R, ROUTE_TURN_180D, ROUTE_TURN_90D_L, ROUTE_TURN_90D_R, ROUTE_TURN_90D_R_L, ROUTE_TURN_AWAY, ROUTE_TURN_DOWN, ROUTE_TURN_LEFT, ROUTE_TURN_RANDOM, ROUTE_TURN_RIGHT, ROUTE_TURN_TOWARD, ROUTE_TURN_UP } from './constants';
+export interface MoveCommand_Basic {
+    code: MoveRouteEnum_Move | MoveRouteEnum_Direction;
+}
+type MoveRouteEnum_Move = [
+    typeof ROUTE_END,
+    typeof ROUTE_MOVE_DOWN,
+    typeof ROUTE_MOVE_LEFT,
+    typeof ROUTE_MOVE_RIGHT,
+    typeof ROUTE_MOVE_UP,
+    typeof ROUTE_MOVE_LOWER_L,
+    typeof ROUTE_MOVE_LOWER_R,
+    typeof ROUTE_MOVE_UPPER_L,
+    typeof ROUTE_MOVE_UPPER_R,
+    typeof ROUTE_MOVE_RANDOM,
+    typeof ROUTE_MOVE_TOWARD,
+    typeof ROUTE_MOVE_AWAY,
+    typeof ROUTE_MOVE_FORWARD,
+    typeof ROUTE_MOVE_BACKWARD
+][number];
+type MoveRouteEnum_Direction = [
+    typeof ROUTE_TURN_DOWN,
+    typeof ROUTE_TURN_LEFT,
+    typeof ROUTE_TURN_RIGHT,
+    typeof ROUTE_TURN_UP,
+    typeof ROUTE_TURN_90D_R,
+    typeof ROUTE_TURN_90D_L,
+    typeof ROUTE_TURN_180D,
+    typeof ROUTE_TURN_90D_R_L,
+    typeof ROUTE_TURN_RANDOM,
+    typeof ROUTE_TURN_TOWARD,
+    typeof ROUTE_TURN_AWAY
+][number];
+export {};

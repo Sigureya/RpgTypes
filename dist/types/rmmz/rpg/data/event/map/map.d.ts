@@ -1,10 +1,10 @@
 import { EventCommandUnknown } from '../../../../../libs/eventCommand';
-import { EventCommand } from '../../../../eventCommand';
+import { EventCommand, MoveRouteCommandUnknown } from '../../../../eventCommand';
 import { AudioFileParams } from 'src/libs';
 import { MapEvent } from './event';
 import { Encounter } from './types/encounter';
 import { MapEventContainer } from './types/mapEventContainer';
-export interface Data_Map<CommandType extends EventCommandUnknown = EventCommand> extends MapEventContainer<CommandType> {
+export interface Data_Map<CommandType extends EventCommandUnknown = EventCommand, MoveRoute extends MoveRouteCommandUnknown = MoveRouteCommandUnknown> extends MapEventContainer<CommandType> {
     data: number[];
     battleback1Name: string;
     battleback2Name: string;
@@ -28,7 +28,7 @@ export interface Data_Map<CommandType extends EventCommandUnknown = EventCommand
     tilesetId: number;
     encounterStep: number;
     encounterList: Encounter[];
-    events: Array<MapEvent<CommandType> | null>;
+    events: Array<MapEvent<CommandType, MoveRoute> | null>;
 }
 export type Map_ImageFiles = Pick<Data_Map, "battleback1Name" | "battleback2Name" | "parallaxName">;
 export type Map_Parallax = Pick<Data_Map, "parallaxLoopX" | "parallaxLoopY" | "parallaxShow" | "parallaxSx" | "parallaxSy">;
