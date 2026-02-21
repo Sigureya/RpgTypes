@@ -1,11 +1,12 @@
 import { AudioFileParams } from 'src/libs/utils';
 export interface MoveRouteCommandUnknown {
     code: number;
-    parameters: (string | number | AudioFileParams)[];
+    parameters?: (string | number | AudioFileParams)[];
 }
-export interface MoveRouteDataUnkwnown {
+export interface MoveRouteData<T extends MoveRouteCommandUnknown = MoveRouteCommandUnknown> {
     wait: boolean;
     repeat: boolean;
     skippable: boolean;
-    list: MoveRouteCommandUnknown[];
+    list: T[];
 }
+export type MoveRouteDataUnkwnown = MoveRouteData<MoveRouteCommandUnknown>;
