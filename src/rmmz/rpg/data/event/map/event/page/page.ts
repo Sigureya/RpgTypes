@@ -1,18 +1,21 @@
 import type { EventCommandUnknown } from "@RpgTypes/libs/eventCommand";
-import type { MoveRouteDataUnkwnown } from "@RpgTypes/rmmz/eventCommand";
+import type {
+  MoveRouteCommandUnknown,
+  MoveRouteData,
+} from "@RpgTypes/rmmz/eventCommand";
 import type { MapEvent_PageCondition } from "./condition";
 import type { MapEvent_Image } from "./image/types";
 
 export interface MapEventPage<
-  T extends EventCommandUnknown = EventCommandUnknown,
-  R extends MoveRouteDataUnkwnown = MoveRouteDataUnkwnown,
+  EC extends EventCommandUnknown = EventCommandUnknown,
+  MRC extends MoveRouteCommandUnknown = MoveRouteCommandUnknown,
 > {
   conditions: MapEvent_PageCondition;
-  list: T[];
+  list: EC[];
   directionFix: boolean;
   image: MapEvent_Image;
   moveFrequency: number;
-  moveRoute: R;
+  moveRoute: MoveRouteData<MRC>;
   priorityType: number;
   walkAnime: boolean;
   stepAnime: boolean;

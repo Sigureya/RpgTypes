@@ -1,10 +1,10 @@
-import type { EventCommandUnknown } from "@RpgTypes/libs/eventCommand";
-import type { MoveRouteDataUnkwnown } from "@RpgTypes/rmmz/eventCommand";
+import type { EventCommandUnknown } from "@RpgTypes/libs";
+import type { MoveRouteCommandUnknown } from "@RpgTypes/rmmz/eventCommand";
 import type { MapEventPage } from "./page";
 
 export interface MapEvent<
   T extends EventCommandUnknown = EventCommandUnknown,
-  R extends MoveRouteDataUnkwnown = MoveRouteDataUnkwnown,
+  R extends MoveRouteCommandUnknown = MoveRouteCommandUnknown,
 > {
   id: number;
   name: string;

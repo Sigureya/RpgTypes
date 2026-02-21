@@ -1,5 +1,8 @@
-import type { EventCommand } from "@RpgTypes/rmmz/eventCommand";
-import type { MapEventPage, MoveRouteCommand } from "@RpgTypes/rmmz/rpg";
+import type {
+  EventCommand,
+  MoveRouteCommandUnknown,
+} from "@RpgTypes/rmmz/eventCommand";
+import type { MapEventPage } from "@RpgTypes/rmmz/rpg";
 
 export interface Rmmz_Event {
   isStarting(): boolean;
@@ -7,7 +10,7 @@ export interface Rmmz_Event {
   clearStartingFlag(): void;
   eventId(): number;
   list(): ReadonlyArray<EventCommand>;
-  forceMoveRoute(route: ReadonlyArray<MoveRouteCommand>): void;
-  page(): MapEventPage;
+  forceMoveRoute(route: ReadonlyArray<MoveRouteCommandUnknown>): void;
+  page(): MapEventPage<EventCommand, MoveRouteCommandUnknown> | null;
   lock(): void;
 }
