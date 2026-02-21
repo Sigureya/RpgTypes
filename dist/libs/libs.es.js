@@ -1,44 +1,45 @@
-import { A as c, B, C as p, a as V, b as i, c as F, d as U, e as Y, f as g, g as u, h as D, i as W, j as d, k as h, l as f, m as x, n as b, o as y, p as K, q as X, r as k, s as z, t as Z, u as j, v, w as J, x as Q, y as q, z as w, D as $, E as aa, F as Ea, G as sa, H as _a, I as Aa, J as Na, K as Ca, L as Oa, M as Ta, N as Sa, O as ea, P as Ra, Q as La, R as ra, S as Ha, T as Ma, U as Ia, V as Ga, W as ta, X as Pa, Y as oa, Z as ma, _ as na, $ as la, a0 as ca, a1 as Ba, a2 as pa, a3 as Va, a4 as ia, a5 as Fa, a6 as Ua, a7 as Ya, a8 as ga, a9 as ua, aa as Da, ab as Wa, ac as da, ad as ha, ae as fa, af as xa, ag as ba, ah as ya, ai as Ka, aj as Xa, ak as ka, al as za, am as Za, an as ja, ao as va, ap as Ja, aq as Qa, ar as qa, as as wa, at as $a, au as aE, av as EE, aw as sE, ax as _E, ay as AE, az as NE, aA as CE, aB as OE, aC as TE, aD as SE, aE as eE, aF as RE, aG as LE, aH as rE, aI as HE, aJ as ME, aK as IE, aL as GE, aM as tE, aN as PE, aO as oE, aP as mE, aQ as nE, aR as lE, aS as cE, aT as BE, aU as pE, aV as VE, aW as iE, aX as FE, aY as UE } from "../shared/eventCommandCodes.es.js";
+import { A as c, B, C as p, a as i, b as V, c as F, d as U, e as Y, f as g, g as W, h as u, i as D, j as d, k as h, l as f, m as x, n as b, o as y, p as K, q as X, r as k, s as v, t as z, u as Z, v as j, w as J, x as Q, y as q, z as w, D as $, E as aa, F as Ea, G as sa, H as _a, I as Aa, J as Na, K as Ca, L as Oa, M as Ta, N as Sa, O as ea, P as ra, Q as Ra, R as La, S as Ha, T as Ma, U as Ia, V as Ga, W as ta, X as oa, Y as Pa, Z as ma, _ as na, $ as la, a0 as ca, a1 as Ba, a2 as pa, a3 as ia, a4 as Va, a5 as Fa, a6 as Ua, a7 as Ya, a8 as ga, a9 as Wa, aa as ua, ab as Da, ac as da, ad as ha, ae as fa, af as xa, ag as ba, ah as ya, ai as Ka, aj as Xa, ak as ka, al as va, am as za, an as Za, ao as ja, ap as Ja, aq as Qa, ar as qa, as as wa, at as $a, au as aE, av as EE, aw as sE, ax as _E, ay as AE, az as NE, aA as CE, aB as OE, aC as TE, aD as SE, aE as eE, aF as rE, aG as RE, aH as LE, aI as HE, aJ as ME, aK as IE, aL as GE, aM as tE, aN as oE, aO as PE, aP as mE, aQ as nE, aR as lE, aS as cE, aT as BE, aU as pE, aV as iE, aW as VE, aX as FE, aY as UE } from "../shared/eventCommandCodes.es.js";
 import { g as S, b as e } from "../shared/make.es.js";
-import { a as gE, c as uE, m as DE } from "../shared/make.es.js";
+import { a as gE, c as WE, m as uE } from "../shared/make.es.js";
 import { m as dE } from "../shared/mergeItemsSource.es.js";
-const I = "rmmz", G = "colors", t = (a, E, s, _ = {
-  placeHolderMaxLength: 50,
-  formatMaxLength: 200
-}) => a.pattern.length >= _.formatMaxLength ? { formatLabel: a.label, syntaxErrors: [{ message: s.formatVeryLong, reason: a.pattern.slice(0, _.formatMaxLength) }], semanticErrors: [] } : {
+import { v as fE } from "../shared/validateWithErrors.es.js";
+const I = "rmmz", G = "colors", t = (a, E, s, _ = { placeHolderMaxLength: 50, formatMaxLength: 200 }) => a.pattern.length >= _.formatMaxLength ? { formatLabel: a.label, syntaxErrors: [{
+  message: s.formatVeryLong,
+  reason: a.pattern.slice(0, _.formatMaxLength)
+}], semanticErrors: [] } : {
   formatLabel: a.label,
-  semanticErrors: L(a, E, s),
-  syntaxErrors: R(a.pattern, E, s, _.placeHolderMaxLength)
-}, R = (a, E, s, _) => {
+  semanticErrors: R(a, E, s),
+  syntaxErrors: r(a.pattern, E, s, _.placeHolderMaxLength)
+}, r = (a, E, s, _) => {
   const A = Array.from(a.matchAll(/\{([.a-zA-Z0-9]+)\}/g)), O = S(E);
   return A.reduce(((N, T) => {
     const C = T[1];
-    return C.length === 0 ? N : C.length > _ ? (N.push({ message: s.longPlaceHolder, reason: C.slice(0, _) }), N) : (O.has(C) || N.push({
-      message: s.extraPlaceHolder,
-      reason: C
-    }), N);
+    return C.length === 0 ? N : C.length > _ ? (N.push({ message: s.longPlaceHolder, reason: C.slice(0, _) }), N) : (O.has(C) || N.push({ message: s.extraPlaceHolder, reason: C }), N);
   }), []);
-}, L = (a, E, s) => e(E).reduce(((_, A) => {
-  const O = r(a, A, s);
+}, R = (a, E, s) => e(E).reduce(((_, A) => {
+  const O = L(a, A, s);
   return O && _.push(O), _;
-}), []), r = (a, E, s) => {
+}), []), L = (a, E, s) => {
   const _ = a.pattern.includes(E.placeHolder), A = !!a.dataSource;
-  return !_ && A ? { message: s.missingName, reason: E.placeHolder } : _ && !A ? { message: s.missingSourceId, reason: E.placeHolder } : void 0;
-}, P = (a) => Object.entries(a).map((([, E]) => E.title)), H = (a, E, s) => E.map(((_) => s(_, a[_], a))), o = (a, E, s) => H(a, E, s), m = (a) => typeof a == "number" && !Number.isNaN(a);
+  return !_ && A ? {
+    message: s.missingName,
+    reason: E.placeHolder
+  } : _ && !A ? { message: s.missingSourceId, reason: E.placeHolder } : void 0;
+}, o = (a) => Object.entries(a).map((([, E]) => E.title)), H = (a, E, s) => E.map(((_) => s(_, a[_], a))), P = (a, E, s) => H(a, E, s), m = (a) => typeof a == "number" && !Number.isNaN(a);
 export {
   c as ABORT_BATTLE,
   I as AUTHOR_RMMZ,
   B as BATTLE_PROCESSING,
   p as CHANGE_ACTOR_IMAGES,
-  V as CHANGE_ACTOR_STATE,
-  i as CHANGE_ARMORS,
+  i as CHANGE_ACTOR_STATE,
+  V as CHANGE_ARMORS,
   F as CHANGE_BATTLE_BACKGROUND,
   U as CHANGE_BATTLE_BGM,
   Y as CHANGE_CLASS,
   g as CHANGE_DEFEAT_ME,
-  u as CHANGE_ENCOUNTER,
-  D as CHANGE_ENEMY_HP,
-  W as CHANGE_ENEMY_MP,
+  W as CHANGE_ENCOUNTER,
+  u as CHANGE_ENEMY_HP,
+  D as CHANGE_ENEMY_MP,
   d as CHANGE_ENEMY_STATE,
   h as CHANGE_ENEMY_TP,
   f as CHANGE_EQUIP,
@@ -48,10 +49,10 @@ export {
   K as CHANGE_HP,
   X as CHANGE_ITEMS,
   k as CHANGE_LEVEL,
-  z as CHANGE_MAP_NAME_DISPLAY,
-  Z as CHANGE_MENU_ACCESS,
-  j as CHANGE_MP,
-  v as CHANGE_NAME,
+  v as CHANGE_MAP_NAME_DISPLAY,
+  z as CHANGE_MENU_ACCESS,
+  Z as CHANGE_MP,
+  j as CHANGE_NAME,
   J as CHANGE_NICKNAME,
   Q as CHANGE_PARALLAX,
   q as CHANGE_PARAMETER,
@@ -68,31 +69,31 @@ export {
   Ta as CHANGE_VICTORY_ME,
   Sa as CHANGE_WEAPONS,
   ea as CHANGE_WINDOW_COLOR,
-  Ra as COMMENT_BODY,
-  La as COMMENT_HEAD,
-  ra as COMMON_EVENT,
+  ra as COMMENT_BODY,
+  Ra as COMMENT_HEAD,
+  La as COMMON_EVENT,
   Ha as CONDITIONAL_BRANCH,
   Ma as CONDITIONAL_BRANCH_ELSE,
   Ia as CONTROL_SELF_SWITCH,
   Ga as CONTROL_SWITCHES,
   ta as CONTROL_TIMER,
-  Pa as CONTROL_VARIABLES,
-  oa as ENEMY_APPEAR,
+  oa as CONTROL_VARIABLES,
+  Pa as ENEMY_APPEAR,
   ma as ENEMY_RECOVER_ALL,
   na as ENEMY_TRANSFORM,
   la as ERASE_EVENT,
   ca as ERASE_PICTURE,
   Ba as EXIT_EVENT_PROCESSING,
   pa as FADEIN_SCREEN,
-  Va as FADEOUT_BGM,
-  ia as FADEOUT_BGS,
+  ia as FADEOUT_BGM,
+  Va as FADEOUT_BGS,
   Fa as FADEOUT_SCREEN,
   Ua as FLASH_SCREEN,
   Ya as FORCE_ACTION,
   ga as GAME_OVER,
-  ua as GATHER_FOLLOWERS,
-  Da as GET_LOCATION_INFO,
-  Wa as GET_ONOFF_VEHICLE,
+  Wa as GATHER_FOLLOWERS,
+  ua as GET_LOCATION_INFO,
+  Da as GET_ONOFF_VEHICLE,
   da as INPUT_NUMBER,
   ha as LABEL,
   fa as LABEL_JUMP,
@@ -102,10 +103,10 @@ export {
   Ka as NAME_INPUT_PROCESSING,
   Xa as NO_OPERATION,
   ka as OPEN_MENU_SCREEN,
-  za as OPEN_SAVE_SCREEN,
-  Za as PLAY_BGM,
-  ja as PLAY_BGS,
-  va as PLAY_ME,
+  va as OPEN_SAVE_SCREEN,
+  za as PLAY_BGM,
+  Za as PLAY_BGS,
+  ja as PLAY_ME,
   Ja as PLAY_MOVIE,
   Qa as PLAY_SE,
   qa as PLUGIN_COMMAND_MV,
@@ -122,16 +123,16 @@ export {
   TE as SET_EVENT_LOCATION,
   SE as SET_MOVEMENT_ROUTE,
   eE as SET_VEHICLE_LOCATION,
-  RE as SET_WEATHER_EFFECT,
-  LE as SHAKE_SCREEN,
-  rE as SHOP_PROCESSING,
+  rE as SET_WEATHER_EFFECT,
+  RE as SHAKE_SCREEN,
+  LE as SHOP_PROCESSING,
   HE as SHOP_PROCESSING_BODY,
   ME as SHOW_ANIMATION,
   IE as SHOW_BALLOON_ICON,
   GE as SHOW_BATTLE_ANIMATION,
   tE as SHOW_CHOICES,
-  PE as SHOW_CHOICES_ITEM,
-  oE as SHOW_MESSAGE,
+  oE as SHOW_CHOICES_ITEM,
+  PE as SHOW_MESSAGE,
   mE as SHOW_MESSAGE_BODY,
   nE as SHOW_PICTURE,
   lE as SHOW_SCROLLING_TEXT,
@@ -139,17 +140,18 @@ export {
   BE as SKIP,
   G as SRC_COLOR,
   pE as STOP_SE,
-  VE as TINT_PICTURE,
-  iE as TINT_SCREEN,
+  iE as TINT_PICTURE,
+  VE as TINT_SCREEN,
   FE as TRANSFER_PLAYER,
   UE as WAIT,
   gE as applyFormatRule,
-  uE as compileFormatRule,
+  WE as compileFormatRule,
   t as detectFormatErrors,
-  P as domainNames,
+  o as domainNames,
   m as isValidNumber,
-  DE as makeAudioFileParams,
+  uE as makeAudioFileParams,
   dE as mergeItemsSource,
   H as pickPropertys,
-  o as pickString
+  P as pickString,
+  fE as validateWithErros
 };
