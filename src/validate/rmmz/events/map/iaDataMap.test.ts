@@ -1,6 +1,6 @@
 import { describe, test, expect } from "vitest";
 import type { EventCommandUnknown } from "@RpgTypes/libs/eventCommand";
-import type { EventCommand } from "@RpgTypes/rmmz";
+import type { EventCommand, MoveRouteCommandUnknown } from "@RpgTypes/rmmz";
 import {
   makeCommandShowMessage,
   makeCommandShowMessageBody,
@@ -12,7 +12,8 @@ import {
   makeMapEvent,
   makeMapEventPage,
 } from "@RpgTypes/rmmz/rpg";
-const validate = require("./mapValidate.cjs");
+import type { ValidateFunction } from "ajv";
+const validate: ValidateFunction = require("./mapValidate.cjs");
 const isDataMap = (data: unknown): data is Data_Map => {
   return validate(data);
 };
@@ -132,4 +133,37 @@ describe("isDataMap", () => {
       });
     });
   });
+});
+
+test("allows unknown move route commands at schema level", () => {
+  interface BlokenMvMove extends MoveRouteCommandUnknown {
+    indent?: null;
+  }
+  const mvEvent = makeMapEvent({
+    pages: [
+      makeMapEventPage<EventCommandUnknown, BlokenMvMove>({
+        moveRoute: {
+          wait: true,
+          repeat: true,
+          skippable: true,
+          list: [
+            { code: 0 },
+            { code: 1, indent: null, parameters: [] },
+            { code: 2, parameters: [] },
+            {
+              code: 2,
+              parameters: [{ name: "audio", pan: 0, pitch: 0, volume: 0 }],
+            },
+          ],
+        },
+      }),
+    ],
+  });
+
+  const dataMapMv = makeMapData({
+    events: [null, mvEvent, null],
+  });
+  const result = validate(dataMapMv);
+  expect(validate.errors).toBeNull();
+  expect(result).toBe(true);
 });
