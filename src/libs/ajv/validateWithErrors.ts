@@ -4,6 +4,7 @@ export type ValidateResult<T> = ValidateFailed | ValidateSuccessed<T>;
 export interface ValidateSuccessed<T> {
   data: T;
   ok: true;
+  errors: [];
 }
 
 export interface ValidateFailed {
@@ -18,12 +19,13 @@ export const validateWithErros = <T>(
   const valid = fn(data);
   if (valid) {
     return {
+      errors: [],
       data,
       ok: true,
     };
   }
   return {
     ok: false,
-    errors: [],
+    errors: fn.errors || [],
   };
 };

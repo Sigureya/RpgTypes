@@ -1,4 +1,4 @@
-const a = (o, r) => r(o) ? { data: o, ok: !0 } : { ok: !1, errors: [] };
+const s = (r, o) => o(r) ? { errors: [], data: r, ok: !0 } : { ok: !1, errors: o.errors || [] };
 export {
-  a as v
+  s as v
 };

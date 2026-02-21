@@ -3,6 +3,7 @@ export type ValidateResult<T> = ValidateFailed | ValidateSuccessed<T>;
 export interface ValidateSuccessed<T> {
     data: T;
     ok: true;
+    errors: [];
 }
 export interface ValidateFailed {
     errors: ErrorObject[];
