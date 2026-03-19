@@ -66,18 +66,46 @@ describe("makeClassDataEx", () => {
           luk: 376,
         },
       ],
+      name: "Test Class",
+      id: 333,
+      expParams: [1, 2, 3],
+      learnings: [{ level: 0, skillId: 0, note: "" }],
+      note: "N",
+      traits: [{ code: 0, dataId: 123, value: 456 }],
     });
-    const params: ClassParamGlowTable = [
-      [80], // maxhp
-      [192], // maxmp
-      [135], // atk
-      [130], // def
-      [95], // mat
-      [90], // mdf
-      [70], // agi
-      [376], // luk
-    ];
-    expect(classData.params).toEqual(params);
+
+    const expected: Data_Class = {
+      params: [
+        [80], // maxhp
+        [192], // maxmp
+        [135], // atk
+        [130], // def
+        [95], // mat
+        [90], // mdf
+        [70], // agi
+        [376], // luk
+      ],
+      name: "Test Class",
+      id: 333,
+      expParams: [1, 2, 3],
+      learnings: [
+        {
+          level: 0,
+          skillId: 0,
+          note: "",
+        },
+      ],
+      traits: [
+        {
+          code: 0,
+          dataId: 123,
+          value: 456,
+        },
+      ],
+      note: "N",
+    };
+    expect(classData.params).toEqual(expected.params);
+    expect(classData).toEqual(expected);
   });
   test("with glowing params", () => {
     const classData: Data_Class = makeClassDataEx({

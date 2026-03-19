@@ -10,7 +10,7 @@ export const makeClassData = (data: Partial<Data_Class> = {}): Data_Class => ({
   id: data.id ?? 0,
   traits: [],
   note: data.note ?? "",
-  params: [[0], [0], [0], [0], [0], [0], [0], [0]],
+  params: data.params ?? createEmptyParams(),
   learnings: data.learnings ?? [],
   expParams: data.expParams ?? [],
 });
@@ -18,13 +18,16 @@ export const makeClassData = (data: Partial<Data_Class> = {}): Data_Class => ({
 export const makeClassDataEx = (data: Partial<Data_ClassEx>): Data_Class => ({
   name: data.name ?? "",
   id: data.id ?? 0,
-  traits: [],
+  traits: data.traits ?? [],
   note: data.note ?? "",
-  params: makeParamGlowTable(data.params ?? []),
+  params: data.params ? makeParamGlowTable(data.params) : createEmptyParams(),
   learnings: data.learnings ?? [],
   expParams: data.expParams ?? [],
 });
 
+const createEmptyParams = (): ClassParamGlowTable => {
+  return [[0], [0], [0], [0], [0], [0], [0], [0]];
+};
 const makeParamGlowTable = (
   list: ReadonlyArray<ClassParamGlowing>,
 ): ClassParamGlowTable => {
