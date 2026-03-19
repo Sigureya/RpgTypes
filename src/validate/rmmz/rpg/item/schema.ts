@@ -45,9 +45,9 @@ export const SCHEMA_DATA_ITEM = {
         type: "object",
         properties: {
           code: { type: "integer" },
-          dataId: { type: "integer", minimum: 0 },
-          value1: { type: "integer" },
-          value2: { type: "integer" },
+          dataId: { type: "integer" },
+          value1: { type: "number" },
+          value2: { type: "number" },
         },
         required: ["code", "dataId", "value1", "value2"],
         additionalProperties: false,
