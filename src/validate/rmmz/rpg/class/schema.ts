@@ -25,18 +25,18 @@ export const SCHEMA_DATA_CLASS = {
     params: {
       type: "array",
       items: [
-        { type: "integer" }, // mhp
-        { type: "integer" }, // mmp
-        { type: "integer" }, // atk
-        { type: "integer" }, // def
-        { type: "integer" }, // mat
-        { type: "integer" }, // mdf
-        { type: "integer" }, // agi
-        { type: "integer" }, // luk
+        { type: "array", items: { type: "integer" } },
+        { type: "array", items: { type: "integer" } },
+        { type: "array", items: { type: "integer" } },
+        { type: "array", items: { type: "integer" } },
+        { type: "array", items: { type: "integer" } },
+        { type: "array", items: { type: "integer" } },
+        { type: "array", items: { type: "integer" } },
+        { type: "array", items: { type: "integer" } },
       ],
       minItems: 8,
       maxItems: 8,
-    } satisfies JSONSchemaType<Data_Class["params"]>,
+    },
     learnings: {
       type: "array",
       items: {
