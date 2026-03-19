@@ -1,6 +1,6 @@
 export declare const SCHEMA_DATA_SKILL: {
     readonly type: "object";
-    readonly required: readonly ["name", "id", "description", "iconIndex", "message1", "message2", "messageType", "mpCost", "requiredWtypeId1", "requiredWtypeId2", "stypeId", "tpCost", "animationId", "hitType", "occasion", "repeats", "scope", "speed", "successRate", "tpGain", "note", "effects"];
+    readonly required: readonly ["name", "id", "description", "iconIndex", "message1", "message2", "mpCost", "requiredWtypeId1", "requiredWtypeId2", "stypeId", "tpCost", "animationId", "hitType", "occasion", "repeats", "scope", "speed", "successRate", "tpGain", "note", "effects"];
     readonly properties: {
         readonly name: {
             readonly type: "string";
@@ -21,10 +21,6 @@ export declare const SCHEMA_DATA_SKILL: {
         };
         readonly message2: {
             readonly type: "string";
-        };
-        readonly messageType: {
-            readonly type: "integer";
-            readonly minimum: 0;
         };
         readonly mpCost: {
             readonly type: "integer";
@@ -120,6 +116,10 @@ export declare const SCHEMA_DATA_SKILL: {
             readonly required: readonly ["type", "elementId", "formula", "variance", "critical"];
             readonly additionalProperties: false;
         };
+        readonly messageType: {
+            readonly type: "integer";
+            readonly nullable: true;
+        };
     };
-    readonly additionalProperties: false;
+    readonly additionalProperties: true;
 };

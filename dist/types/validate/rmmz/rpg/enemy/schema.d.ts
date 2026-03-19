@@ -7,22 +7,18 @@ export declare const SCHEMA_DATA_ENEMY: {
         };
         readonly id: {
             readonly type: "integer";
-            readonly minimum: 0;
         };
         readonly battlerHue: {
             readonly type: "integer";
-            readonly minimum: 0;
         };
         readonly battlerName: {
             readonly type: "string";
         };
         readonly exp: {
             readonly type: "integer";
-            readonly minimum: 0;
         };
         readonly gold: {
             readonly type: "integer";
-            readonly minimum: 0;
         };
         readonly note: {
             readonly type: "string";
@@ -104,7 +100,6 @@ export declare const SCHEMA_DATA_ENEMY: {
                     };
                     denominator: {
                         type: "integer";
-                        minimum: number;
                     };
                     rate: {
                         type: string;
