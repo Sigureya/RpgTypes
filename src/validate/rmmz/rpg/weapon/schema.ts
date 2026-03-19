@@ -1,5 +1,5 @@
+import type { Data_Weapon } from "@RpgTypes/rmmz/rpg";
 import type { JSONSchemaType } from "ajv";
-import type { Data_Weapon } from "../../../../rmmz/rpg/data/main/traitContainers/weapon/weapon";
 
 export const SCHEMA_DATA_WEAPON = {
   type: "object",

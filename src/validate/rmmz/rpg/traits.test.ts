@@ -1,11 +1,12 @@
 import { describe, expect, test } from "vitest";
-import { SCHEMA_DATA_WEAPON, type Trait } from "@RpgTypes/rmmz";
+import type { Trait } from "@RpgTypes/rmmz";
 import type { JSONSchemaType } from "ajv";
 import { SCHEMA_DATA_ACTOR } from "./actor/schema";
 import { SCHEMA_DATA_ARMMOR } from "./armor/schema";
 import { SCHEMA_DATA_CLASS } from "./class/schema";
 import { SCHEMA_DATA_ENEMY } from "./enemy/schema";
 import { SCHEMA_DATA_STATE } from "./state/schema";
+import { SCHEMA_DATA_WEAPON } from "./weapon/schema";
 
 const traitsSchema: JSONSchemaType<Trait[]> = {
   type: "array",
