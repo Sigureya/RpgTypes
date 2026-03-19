@@ -57,6 +57,7 @@ export declare const SCHEMA_DATA_ARMMOR: {
             readonly type: "array";
             readonly items: {
                 readonly type: "object";
+                readonly additionalProperties: false;
                 readonly properties: {
                     readonly code: {
                         readonly type: "integer";
@@ -65,7 +66,7 @@ export declare const SCHEMA_DATA_ARMMOR: {
                         readonly type: "integer";
                     };
                     readonly value: {
-                        readonly type: "integer";
+                        readonly type: "number";
                     };
                 };
                 readonly required: readonly ["code", "dataId", "value"];

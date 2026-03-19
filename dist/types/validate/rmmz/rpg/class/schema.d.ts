@@ -95,7 +95,7 @@ export declare const SCHEMA_DATA_CLASS: {
                         type: "integer";
                     };
                     value: {
-                        type: "integer";
+                        type: "number";
                     };
                 };
                 required: ("code" | "value" | "dataId")[];
