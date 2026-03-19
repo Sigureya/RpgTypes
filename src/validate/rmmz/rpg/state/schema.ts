@@ -26,7 +26,6 @@ export const SCHEMA_DATA_STATE = {
     "stepsToRemove",
     "note",
   ],
-
   properties: {
     name: { type: "string" },
     id: { type: "integer", minimum: 0 },
@@ -63,10 +62,12 @@ export const SCHEMA_DATA_STATE = {
       type: "array",
       items: {
         type: "object",
+        additionalProperties: false,
+
         properties: {
           code: { type: "integer" },
           dataId: { type: "integer" },
-          value: { type: "integer" },
+          value: { type: "number" },
         },
         required: ["code", "dataId", "value"],
       },

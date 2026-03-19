@@ -16,7 +16,7 @@ describe("isDataArmor", () => {
     etypeId: 1,
     atypeId: 1,
     params: [0, 5, 0, 0, 0, 0, 0, 0],
-    traits: [{ code: 11, dataId: 2, value: 10 }],
+    traits: [{ code: 11, dataId: 2, value: 10.5 }],
   };
   test("should return true for valid Data_Armor", () => {
     expect(armor).toSatisfy(isDataArmor);

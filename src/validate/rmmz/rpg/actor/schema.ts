@@ -35,11 +35,13 @@ export const SCHEMA_DATA_ACTOR = {
     traits: {
       type: "array",
       items: {
+        additionalProperties: false,
+
         type: "object",
         properties: {
           code: { type: "integer" },
           dataId: { type: "integer" },
-          value: { type: "integer" },
+          value: { type: "number" },
         },
         required: ["code", "dataId", "value"],
       },
