@@ -738,9 +738,9 @@ const rs = (a) => ({ enemyId: a[0], newEnemyId: a[1] }), ms = (a, e = 0) => ({ c
       minimum: 0
     }, elementId: { type: "integer", minimum: 0 }, formula: { type: "string" }, variance: { type: "integer", minimum: 0, maximum: 100 }, critical: { type: "boolean", default: !1 } },
     required: ["type", "elementId", "formula", "variance", "critical"]
-  }, traits: { type: "array", items: { type: "object", properties: { code: { type: "integer" }, dataId: { type: "integer" }, value: {
+  }, traits: { type: "array", items: { type: "object", additionalProperties: !1, properties: { code: { type: "integer" }, dataId: {
     type: "integer"
-  } }, required: ["code", "dataId", "value"] } } }
+  }, value: { type: "number" } }, required: ["code", "dataId", "value"] } } }
 }, Eo = {
   title: "武器",
   options: { weaponTypeId: "武器タイプID" }

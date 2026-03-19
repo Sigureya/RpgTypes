@@ -77,6 +77,7 @@ export declare const SCHEMA_DATA_STATE: {
             type: "array";
             items: {
                 type: "object";
+                additionalProperties: false;
                 properties: {
                     code: {
                         type: "integer";
@@ -85,7 +86,7 @@ export declare const SCHEMA_DATA_STATE: {
                         type: "integer";
                     };
                     value: {
-                        type: "integer";
+                        type: "number";
                     };
                 };
                 required: ("code" | "value" | "dataId")[];

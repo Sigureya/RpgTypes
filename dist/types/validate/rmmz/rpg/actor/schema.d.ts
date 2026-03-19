@@ -55,6 +55,7 @@ export declare const SCHEMA_DATA_ACTOR: {
         readonly traits: {
             readonly type: "array";
             readonly items: {
+                readonly additionalProperties: false;
                 readonly type: "object";
                 readonly properties: {
                     readonly code: {
@@ -64,7 +65,7 @@ export declare const SCHEMA_DATA_ACTOR: {
                         readonly type: "integer";
                     };
                     readonly value: {
-                        readonly type: "integer";
+                        readonly type: "number";
                     };
                 };
                 readonly required: readonly ["code", "dataId", "value"];

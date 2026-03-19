@@ -72,6 +72,7 @@ export declare const SCHEMA_DATA_ENEMY: {
         readonly traits: {
             type: "array";
             items: {
+                additionalProperties: false;
                 type: "object";
                 properties: {
                     code: {
@@ -81,7 +82,7 @@ export declare const SCHEMA_DATA_ENEMY: {
                         type: "integer";
                     };
                     value: {
-                        type: "integer";
+                        type: "number";
                     };
                 };
                 required: ("code" | "value" | "dataId")[];
