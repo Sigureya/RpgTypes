@@ -31,6 +31,11 @@ describe("isDataState", () => {
           dataId: 1,
           value: 2,
         },
+        {
+          code: 1,
+          dataId: 0,
+          value: 0.98,
+        },
       ],
       note: "This is a test note.",
       motion: 0,

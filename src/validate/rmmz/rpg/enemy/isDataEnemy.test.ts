@@ -30,6 +30,11 @@ describe("isDataEnemy", () => {
           dataId: 1,
           value: 2,
         },
+        {
+          code: 1,
+          dataId: 0,
+          value: 3.14,
+        },
       ],
       actions: [
         {

@@ -22,6 +22,11 @@ describe("isDataWeapon", () => {
           dataId: 181,
           value: 500,
         },
+        {
+          code: 1,
+          dataId: 0,
+          value: 0.1,
+        },
       ],
       wtypeId: 1,
       animationId: 1,

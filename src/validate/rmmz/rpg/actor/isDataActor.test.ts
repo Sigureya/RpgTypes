@@ -24,7 +24,7 @@ test("validate actor data", () => {
     profile: "A brave hero who fights for justice.",
     traits: [
       { code: 11, dataId: 1, value: 10 },
-      { code: 12, dataId: 2, value: 20 },
+      { code: 12, dataId: 2, value: 20.8 },
     ],
   };
   expect(actor).toSatisfy(isDataActor);

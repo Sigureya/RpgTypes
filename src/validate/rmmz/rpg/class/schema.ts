@@ -57,7 +57,7 @@ export const SCHEMA_DATA_CLASS = {
         properties: {
           code: { type: "integer" },
           dataId: { type: "integer" },
-          value: { type: "integer" },
+          value: { type: "number" },
         },
         required: ["code", "dataId", "value"],
         additionalProperties: false,
