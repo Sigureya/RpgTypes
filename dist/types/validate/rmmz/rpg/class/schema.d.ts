@@ -21,21 +21,45 @@ export declare const SCHEMA_DATA_CLASS: {
         params: {
             type: "array";
             items: [{
-                type: "integer";
+                type: "array";
+                items: {
+                    type: "integer";
+                };
             }, {
-                type: "integer";
+                type: "array";
+                items: {
+                    type: "integer";
+                };
             }, {
-                type: "integer";
+                type: "array";
+                items: {
+                    type: "integer";
+                };
             }, {
-                type: "integer";
+                type: "array";
+                items: {
+                    type: "integer";
+                };
             }, {
-                type: "integer";
+                type: "array";
+                items: {
+                    type: "integer";
+                };
             }, {
-                type: "integer";
+                type: "array";
+                items: {
+                    type: "integer";
+                };
             }, {
-                type: "integer";
+                type: "array";
+                items: {
+                    type: "integer";
+                };
             }, {
-                type: "integer";
+                type: "array";
+                items: {
+                    type: "integer";
+                };
             }];
             minItems: 8;
             maxItems: 8;

@@ -1,2 +1,2 @@
 export * from './types';
-export { makeClassData } from './class';
+export { makeClassData, makeClassDataEx } from './class';
