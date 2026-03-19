@@ -10,7 +10,7 @@ export interface Data_Skill extends Data_UsableItem {
   message1: string;
   message2: string;
 
-  messageType: number;
+  messageType?: number;
   mpCost: number;
   requiredWtypeId1: number;
   requiredWtypeId2: number;
