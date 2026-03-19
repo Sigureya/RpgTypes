@@ -32,7 +32,10 @@ describe("isDataClass", () => {
       name: "wizard",
       expParams: [],
       note: "This is a test note.",
-      traits: [{ code: 0, dataId: 1, value: 2 }],
+      traits: [
+        { code: 0, dataId: 1, value: 2 },
+        { code: 1, dataId: 0, value: 3.14 },
+      ],
       learnings: [{ level: 1, skillId: 1, note: "skill note." }],
     });
     expect(class_).toSatisfy(isDataClass);
