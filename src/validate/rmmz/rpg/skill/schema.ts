@@ -10,7 +10,6 @@ export const SCHEMA_DATA_SKILL = {
     "iconIndex",
     "message1",
     "message2",
-    "messageType",
     "mpCost",
     "requiredWtypeId1",
     "requiredWtypeId2",
@@ -36,7 +35,6 @@ export const SCHEMA_DATA_SKILL = {
     message1: { type: "string" },
     message2: { type: "string" },
 
-    messageType: { type: "integer", minimum: 0 },
     mpCost: { type: "integer" },
     requiredWtypeId1: { type: "integer", minimum: 0 },
     requiredWtypeId2: { type: "integer", minimum: 0 },
@@ -80,7 +78,8 @@ export const SCHEMA_DATA_SKILL = {
       required: ["type", "elementId", "formula", "variance", "critical"],
       additionalProperties: false,
     },
+    messageType: { type: "integer", nullable: true },
   },
 
-  additionalProperties: false,
+  additionalProperties: true,
 } as const satisfies JSONSchemaType<Data_Skill>;
