@@ -56,10 +56,12 @@ export const SCHEMA_DATA_WEAPON = {
       type: "array",
       items: {
         type: "object",
+        additionalProperties: false,
+
         properties: {
           code: { type: "integer" },
           dataId: { type: "integer" },
-          value: { type: "integer" },
+          value: { type: "number" },
         },
         required: ["code", "dataId", "value"],
       },

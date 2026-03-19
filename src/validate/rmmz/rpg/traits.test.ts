@@ -1,5 +1,5 @@
 import { describe, expect, test } from "vitest";
-import type { Trait } from "@RpgTypes/rmmz";
+import { SCHEMA_DATA_WEAPON, type Trait } from "@RpgTypes/rmmz";
 import type { JSONSchemaType } from "ajv";
 import { SCHEMA_DATA_ACTOR } from "./actor/schema";
 import { SCHEMA_DATA_ARMMOR } from "./armor/schema";
@@ -36,5 +36,8 @@ describe("traitsSchema", () => {
   });
   test("state", () => {
     expect(SCHEMA_DATA_STATE.properties.traits).toEqual(traitsSchema);
+  });
+  test("weapon", () => {
+    expect(SCHEMA_DATA_WEAPON.properties.traits).toEqual(traitsSchema);
   });
 });
