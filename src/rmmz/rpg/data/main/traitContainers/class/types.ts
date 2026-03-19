@@ -1,23 +1,25 @@
 import type { Data_TraitContainer, Trait } from "../trait";
 
-export type ClassParamGlowTable = [
-  number[], // maxhp
-  number[], // maxmp
-  number[], // atk
-  number[], // def
-  number[], // mat
-  number[], // mdf
-  number[], // agi
-  number[], // luk
-];
-
-export interface Data_Class extends Data_TraitContainer {
+export interface Data_Class extends Data_ClassBase {
   name: string;
   id: number;
   note: string;
 
   expParams: number[];
+  learnings: Learning[];
+  traits: Trait[];
   params: ClassParamGlowTable;
+}
+
+export interface Data_ClassEx extends Data_ClassBase {
+  params: ClassParamGlowing[];
+}
+
+export interface Data_ClassBase extends Data_TraitContainer {
+  name: string;
+  id: number;
+  note: string;
+  expParams: number[];
   learnings: Learning[];
   traits: Trait[];
 }
@@ -32,4 +34,26 @@ export interface ClassLabels {
   params: string;
   learnings: string;
   expParams: string;
+}
+
+export type ClassParamGlowTable = [
+  number[], // maxhp
+  number[], // maxmp
+  number[], // atk
+  number[], // def
+  number[], // mat
+  number[], // mdf
+  number[], // agi
+  number[], // luk
+];
+
+export interface ClassParamGlowing {
+  atk: number;
+  def: number;
+  mat: number;
+  mdf: number;
+  agi: number;
+  luk: number;
+  mhp: number;
+  mmp: number;
 }
