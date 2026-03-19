@@ -18,7 +18,7 @@ import type {
 
 export const extractTextData = <T extends { note: string; id: number }>(
   data: T & { id: number },
-  keys: PickByTypeKeys<T, string>[]
+  keys: PickByTypeKeys<T, string>[],
 ) => {
   return {
     note: extractNoteText(data),
@@ -40,32 +40,34 @@ export const extractNoteText = (data: {
       key: key,
       text: value,
       id: data.id,
-    })
+    }),
   );
 };
 
 export const extractTextFromActor = (
-  actor: TextExtractable<Data_Actor>
+  actor: TextExtractable<Data_Actor>,
 ): ExtractedText<Data_Actor> => {
   return extractTextData(actor, ["name", "nickname", "profile"]);
 };
 
 export const extractTextFromEnemy = (
-  enemy: TextExtractable<Data_Enemy>
+  enemy: TextExtractable<Data_Enemy>,
 ): ExtractedText<Data_Enemy> => {
   return extractTextData(enemy, ["name"]);
 };
 
 export const extractTextFromClass = (
-  item: TextExtractable<Data_Class>
+  item: TextExtractable<Data_Class>,
 ): ExtractedText<Data_Class> => {
   return extractTextData(item, ["name"]);
 };
 
 export const extractTextFromSkill = (
-  skill: TextExtractable<Data_Skill>
+  skill: TextExtractable<Data_Skill>,
 ): ExtractedText<Data_Skill> => {
-  return extractTextData(skill, [
+  type SkillTextKeys = "name" | "description" | "message1" | "message2";
+  type S = Pick<Data_Skill, "note" | "id" | SkillTextKeys>;
+  return extractTextData<S>(skill, [
     "name",
     "description",
     "message1",
@@ -74,24 +76,24 @@ export const extractTextFromSkill = (
 };
 
 export const extractTextFromItem = (
-  item: TextExtractable<Data_Item>
+  item: TextExtractable<Data_Item>,
 ): ExtractedText<Data_Item> => {
   return extractTextData(item, ["name", "description"]);
 };
 export const extractTextFromWeapon = (
-  weapon: TextExtractable<Data_Weapon>
+  weapon: TextExtractable<Data_Weapon>,
 ): ExtractedText<Data_Weapon> => {
   return extractTextData(weapon, ["name", "description"]);
 };
 
 export const extractTextFromArmor = (
-  armor: TextExtractable<Data_Armor>
+  armor: TextExtractable<Data_Armor>,
 ): ExtractedText<Data_Armor> => {
   return extractTextData(armor, ["name", "description"]);
 };
 
 export const extractTextFromState = (
-  state: TextExtractable<Data_State>
+  state: TextExtractable<Data_State>,
 ): ExtractedText<Data_State> => {
   return extractTextData(state, [
     "name",
