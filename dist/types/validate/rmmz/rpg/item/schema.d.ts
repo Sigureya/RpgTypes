@@ -65,13 +65,12 @@ export declare const SCHEMA_DATA_ITEM: {
                     };
                     readonly dataId: {
                         readonly type: "integer";
-                        readonly minimum: 0;
                     };
                     readonly value1: {
-                        readonly type: "integer";
+                        readonly type: "number";
                     };
                     readonly value2: {
-                        readonly type: "integer";
+                        readonly type: "number";
                     };
                 };
                 readonly required: readonly ["code", "dataId", "value1", "value2"];
