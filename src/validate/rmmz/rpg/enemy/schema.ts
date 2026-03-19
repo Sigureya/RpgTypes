@@ -25,11 +25,11 @@ export const SCHEMA_DATA_ENEMY = {
 
   properties: {
     name: { type: "string" },
-    id: { type: "integer", minimum: 0 },
-    battlerHue: { type: "integer", minimum: 0 },
+    id: { type: "integer" },
+    battlerHue: { type: "integer" },
     battlerName: { type: "string" },
-    exp: { type: "integer", minimum: 0 },
-    gold: { type: "integer", minimum: 0 },
+    exp: { type: "integer" },
+    gold: { type: "integer" },
     note: { type: "string" },
 
     params: {
@@ -89,7 +89,7 @@ export const SCHEMA_DATA_ENEMY = {
         properties: {
           kind: { type: "integer" },
           dataId: { type: "integer" },
-          denominator: { type: "integer", minimum: 0 },
+          denominator: { type: "integer" },
           rate: { type: "number" },
         },
         required: ["kind", "dataId", "denominator"],

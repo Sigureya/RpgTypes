@@ -15,7 +15,7 @@ export const makeMapFileInfo = <T>(
 
 export const makeMapData = <
   Command extends EventCommandUnknown,
-  MoveRoute extends MoveRouteCommandUnknown,
+  MoveRoute extends MoveRouteCommandUnknown = MoveRouteCommandUnknown,
 >(
   map: Partial<Data_Map<Command, MoveRoute>> = {},
 ): Data_Map<Command, MoveRoute> => {
