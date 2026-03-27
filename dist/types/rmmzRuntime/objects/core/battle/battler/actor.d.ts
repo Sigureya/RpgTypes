@@ -1,6 +1,7 @@
+import { Rmmz_ActorTexts } from './actorBase/text';
 import { Rmmz_Level } from './base/level';
 import { Rmmz_Battler } from './battler';
-export interface Rmmz_Actor extends Rmmz_Battler, Rmmz_Level {
+export interface Rmmz_Actor extends Rmmz_Battler, Rmmz_Level, Rmmz_ActorTexts {
     actorId(): number;
     changeEquipById(etypeId: number, itemId: number): void;
     setName(name: string): void;
