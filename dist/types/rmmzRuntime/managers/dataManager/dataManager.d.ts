@@ -32,6 +32,7 @@ export interface Rmmz_DataManager {
     latestSavefileId(): number;
     earliestSavefileId(): number;
     emptySavefileId(): number;
+    correctDataErrors(): void;
     loadGame(savefileId: number): Promise<number>;
     saveGame(savefileId: number): Promise<void>;
 }
