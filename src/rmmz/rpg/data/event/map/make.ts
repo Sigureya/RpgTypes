@@ -1,5 +1,6 @@
 import type { EventCommandUnknown } from "@RpgTypes/libs/eventCommand";
 import type { MoveRouteCommandUnknown } from "@RpgTypes/rmmz/eventCommand";
+import { makeMapEvent, makeMapEventPage } from "./event";
 import type { Data_Map } from "./map";
 import type { MapFileInfo } from "./mapFileInfo";
 import type { Data_MapInfo } from "./mapInfo";
@@ -12,6 +13,18 @@ export const makeMapFileInfo = <T>(
   filename: `Map${info.id.toString().padStart(3, "0")}` as `Map${string}`,
   editingName: info.name,
 });
+
+export const makeMapDataFromSingleEvent = <T extends EventCommandUnknown>(
+  commandKist: T[],
+): Data_Map<T> => {
+  return makeMapData({
+    events: [
+      makeMapEvent({
+        pages: [makeMapEventPage({ list: commandKist })],
+      }),
+    ],
+  });
+};
 
 export const makeMapData = <
   Command extends EventCommandUnknown,
