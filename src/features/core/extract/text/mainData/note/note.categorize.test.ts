@@ -24,15 +24,15 @@ const testCases: TestCase[] = [
   {
     name: "singleCategory",
     input: [
-      { key: "category1", value: "value1" },
-      { key: "category1", value: "value2" },
+      { key: "category1", text: "value1" },
+      { key: "category1", text: "value2" },
     ],
-    expected: new Map([
+    expected: new Map<string, XX[]>([
       [
         "category1",
         [
-          { key: "category1", value: "value1" },
-          { key: "category1", value: "value2" },
+          { key: "category1", text: "value1" },
+          { key: "category1", text: "value2" },
         ],
       ],
     ]),
