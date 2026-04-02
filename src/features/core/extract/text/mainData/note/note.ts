@@ -16,6 +16,15 @@ export const isNoteNumber = (note: string): boolean => {
   return /^\d+\.?\d*$/.test(trimed);
 };
 
+export const stringLikeNoteKeys = (
+  list: ReadonlyArray<SummarizedNote>,
+): Set<string> => {
+  const ss: string[] = list
+    .filter((item) => item.kinds.length === 0)
+    .map((item): string => item.key);
+  return new Set(ss);
+};
+
 export const summarizeNoteKinds = (
   items: readonly XX[],
   audioFiles: AudioFilesSet,
@@ -34,7 +43,7 @@ export const summarizeNoteKinds = (
     return {
       key,
       kinds,
-      values: mapedItems.map((i) => i.value),
+      values: mapedItems.map((i) => i.text),
     };
   });
 };
@@ -68,6 +77,7 @@ const extractNoteKinds = (state: KindState) => {
       state.isSvBattler ? "svBattlers" : null,
       state.isEnemy ? "enmies" : null,
       state.isTileset ? "tilesets" : null,
+      state.isMovie ? "movies" : null,
     ] as const
   ).filter((k) => k !== null);
 };
@@ -97,23 +107,23 @@ const detectNoteKindState = (
 ): KindState => {
   return items.reduce((acc: KindState, item): KindState => {
     return {
-      isBoolean: acc.isBoolean && isNoteBoolean(item.value),
-      isNumber: acc.isNumber && isNoteNumber(item.value),
+      isBoolean: acc.isBoolean && isNoteBoolean(item.text),
+      isNumber: acc.isNumber && isNoteNumber(item.text),
 
-      isBgm: acc.isBgm && audioFiles.bgm.has(item.value),
-      isBgs: acc.isBgs && audioFiles.bgs.has(item.value),
-      isMe: acc.isMe && audioFiles.me.has(item.value),
-      isSe: acc.isSe && audioFiles.se.has(item.value),
+      isBgm: acc.isBgm && audioFiles.bgm.has(item.text),
+      isBgs: acc.isBgs && audioFiles.bgs.has(item.text),
+      isMe: acc.isMe && audioFiles.me.has(item.text),
+      isSe: acc.isSe && audioFiles.se.has(item.text),
 
-      isPicture: acc.isPicture && imageFiles.picutures.has(item.value),
-      isCharacter: acc.isCharacter && imageFiles.characters.has(item.value),
-      isFaceset: acc.isFaceset && imageFiles.faces.has(item.value),
-      isBattler: acc.isBattler && imageFiles.svEnemy.has(item.value),
-      isSvBattler: acc.isSvBattler && imageFiles.svActors.has(item.value),
-      isEnemy: acc.isEnemy && imageFiles.enemies.has(item.value),
-      isTileset: acc.isTileset && imageFiles.tilesets.has(item.value),
+      isPicture: acc.isPicture && imageFiles.picutures.has(item.text),
+      isCharacter: acc.isCharacter && imageFiles.characters.has(item.text),
+      isFaceset: acc.isFaceset && imageFiles.faces.has(item.text),
+      isBattler: acc.isBattler && imageFiles.svEnemy.has(item.text),
+      isSvBattler: acc.isSvBattler && imageFiles.svActors.has(item.text),
+      isEnemy: acc.isEnemy && imageFiles.enemies.has(item.text),
+      isTileset: acc.isTileset && imageFiles.tilesets.has(item.text),
 
-      isMovie: acc.isMovie && otherFiles.movies.has(item.value),
+      isMovie: acc.isMovie && otherFiles.movies.has(item.text),
     };
   }, createEmptyKindState());
 };
