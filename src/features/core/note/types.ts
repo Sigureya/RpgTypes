@@ -23,11 +23,15 @@ export interface NoteSchema {
 }
 
 export interface ImageFilesSet {
-  character: ReadonlySet<string>;
-  faceset: ReadonlySet<string>;
-  battler: ReadonlySet<string>;
-  svBattler: ReadonlySet<string>;
-  enemy: ReadonlySet<string>;
-  picuture: ReadonlySet<string>;
-  tileset: ReadonlySet<string>;
+  characters: ReadonlySet<string>;
+  faces: ReadonlySet<string>;
+  svEnemy: ReadonlySet<string>;
+  svActors: ReadonlySet<string>;
+  enemies: ReadonlySet<string>;
+  picutures: ReadonlySet<string>;
+  tilesets: ReadonlySet<string>;
+}
+
+export interface OtherFilesSet {
+  movies: ReadonlySet<string>;
 }

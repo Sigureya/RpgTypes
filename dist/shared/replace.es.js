@@ -41,26 +41,27 @@ const ta = (a, e, t) => a.filter(((s) => s.code === X || s.code === Z || s.code 
 }, Ga = (a) => {
   const e = a.trim();
   return /^\d+\.?\d*$/.test(e);
-}, ct = (a, e, t) => {
-  const s = za(a);
-  return Array.from(s.entries()).map((([r, n]) => {
-    const m = Oa(n, e, t);
-    return { key: r, kinds: Ha(m), values: n.map(((o) => o.value)) };
+}, ct = (a, e, t, s) => {
+  const r = za(a);
+  return Array.from(r.entries()).map((([n, m]) => {
+    const o = Oa(m, e, t, s);
+    return { key: n, kinds: Ha(o), values: m.map(((i) => i.value)) };
   }));
-}, za = (a) => a.reduce(((e, t) => (e.has(t.key) || e.set(t.key, a.filter(((s) => s.key === t.key))), e)), /* @__PURE__ */ new Map()), Ha = (a) => [a.isBoolean ? "boolean" : null, a.isNumber ? "number" : null, a.isBgm ? "bgm" : null, a.isBgs ? "bgs" : null, a.isMe ? "me" : null, a.isSe ? "se" : null, a.isPicture ? "picutures" : null, a.isCharacter ? "characters" : null, a.isFaceset ? "faces" : null, a.isBattler ? "battlers" : null, a.isSvBattler ? "svBattlers" : null, a.isEnemy ? "enmies" : null, a.isTileset ? "tilesets" : null].filter(((e) => e !== null)), Oa = (a, e, t) => a.reduce(((s, r) => ({
-  isBoolean: s.isBoolean && qa(r.value),
-  isNumber: s.isNumber && Ga(r.value),
-  isBgm: s.isBgm && e.bgm.has(r.value),
-  isBgs: s.isBgs && e.bgs.has(r.value),
-  isMe: s.isMe && e.me.has(r.value),
-  isSe: s.isSe && e.se.has(r.value),
-  isPicture: s.isPicture && t.picuture.has(r.value),
-  isCharacter: s.isCharacter && t.character.has(r.value),
-  isFaceset: s.isFaceset && t.faceset.has(r.value),
-  isBattler: s.isBattler && t.battler.has(r.value),
-  isSvBattler: s.isSvBattler && t.svBattler.has(r.value),
-  isEnemy: s.isEnemy && t.enemy.has(r.value),
-  isTileset: s.isTileset && t.tileset.has(r.value)
+}, za = (a) => a.reduce(((e, t) => (e.has(t.key) || e.set(t.key, a.filter(((s) => s.key === t.key))), e)), /* @__PURE__ */ new Map()), Ha = (a) => [a.isBoolean ? "boolean" : null, a.isNumber ? "number" : null, a.isBgm ? "bgm" : null, a.isBgs ? "bgs" : null, a.isMe ? "me" : null, a.isSe ? "se" : null, a.isPicture ? "picutures" : null, a.isCharacter ? "characters" : null, a.isFaceset ? "faces" : null, a.isBattler ? "battlers" : null, a.isSvBattler ? "svBattlers" : null, a.isEnemy ? "enmies" : null, a.isTileset ? "tilesets" : null].filter(((e) => e !== null)), Oa = (a, e, t, s) => a.reduce(((r, n) => ({
+  isBoolean: r.isBoolean && qa(n.value),
+  isNumber: r.isNumber && Ga(n.value),
+  isBgm: r.isBgm && e.bgm.has(n.value),
+  isBgs: r.isBgs && e.bgs.has(n.value),
+  isMe: r.isMe && e.me.has(n.value),
+  isSe: r.isSe && e.se.has(n.value),
+  isPicture: r.isPicture && t.picutures.has(n.value),
+  isCharacter: r.isCharacter && t.characters.has(n.value),
+  isFaceset: r.isFaceset && t.faces.has(n.value),
+  isBattler: r.isBattler && t.svEnemy.has(n.value),
+  isSvBattler: r.isSvBattler && t.svActors.has(n.value),
+  isEnemy: r.isEnemy && t.enemies.has(n.value),
+  isTileset: r.isTileset && t.tilesets.has(n.value),
+  isMovie: r.isMovie && s.movies.has(n.value)
 })), {
   isBoolean: !0,
   isNumber: !0,
@@ -74,7 +75,8 @@ const ta = (a, e, t) => a.filter(((s) => s.code === X || s.code === Z || s.code 
   isSvBattler: !0,
   isEnemy: !0,
   isPicture: !0,
-  isTileset: !0
+  isTileset: !0,
+  isMovie: !0
 }), Ya = (a, e) => {
   const t = a.trimEnd(), s = e.get(t);
   return s ? s.trimEnd() : t;
@@ -86,23 +88,13 @@ const ta = (a, e, t) => a.filter(((s) => s.code === X || s.code === Z || s.code 
   return s ? s.trimEnd() : t;
 }, dt = (a, e) => {
   const t = (o) => e.replaceText(o), s = w(a.note, e), r = l(a.name, t), n = l(a.nickname, t), m = l(a.profile, t);
-  return {
-    ...a,
-    name: r,
-    nickname: n,
-    profile: m,
-    note: s
-  };
+  return { ...a, name: r, nickname: n, profile: m, note: s };
 }, lt = (a, e) => {
   const t = w(a.note, e), s = g(a.name, e);
   return { ...a, name: s, note: t };
 }, pt = (a, e) => {
   const t = w(a.note, e), s = g(a.name, e);
-  return {
-    ...a,
-    name: s,
-    note: t
-  };
+  return { ...a, name: s, note: t };
 }, ut = (a, e) => {
   const t = w(a.note, e), s = g(a.name, e), r = g(a.description, e), n = g(a.message1, e), m = g(a.message2, e);
   return { ...a, name: s, description: r, message1: n, message2: m, note: t };

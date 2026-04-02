@@ -1,7 +1,12 @@
 import { test, expect, describe } from "vitest";
 import type { NoteReadResult } from "@RpgTypes/rmmz";
 import { summarizeNoteKinds, isNoteBoolean, isNoteNumber } from "./note";
-import type { AudioFilesSet, ImageFilesSet, SummarizedNote } from "./types";
+import type {
+  AudioFilesSet,
+  ImageFilesSet,
+  OtherFilesSet,
+  SummarizedNote,
+} from "./types";
 
 interface TestCase {
   name: string;
@@ -86,9 +91,15 @@ const runTestCases = (
   testCase: TestCase,
   imageFileSet: ImageFilesSet,
   audioFiles: AudioFilesSet,
+  other: OtherFilesSet,
 ) => {
   test(testCase.name, () => {
-    const result = summarizeNoteKinds(testCase.items, audioFiles, imageFileSet);
+    const result = summarizeNoteKinds(
+      testCase.items,
+      audioFiles,
+      imageFileSet,
+      other,
+    );
     expect(result).toEqual(testCase.expected);
   });
 };
@@ -256,16 +267,18 @@ describe("summarizeNoteKinds", () => {
   };
 
   const imageFiles: ImageFilesSet = {
-    character: new Set([CHARACTER_NUMBER, CHARACTER_FILE, IMAGE_FILE]),
-    faceset: new Set([FACE_NUMBER, FACE_FILE, IMAGE_FILE]),
-    battler: new Set([BATTLE_NUMBER, BATTLE_FILE, IMAGE_FILE]),
-    svBattler: new Set([SV_BATTLE_NUMBER, SV_BATTLE_FILE, IMAGE_FILE]),
-    enemy: new Set([ENEMY_NUMBER, ENEMY_FILE, IMAGE_FILE]),
-    picuture: new Set([PICTURE_NUMBER, PICTURE_FILE, IMAGE_FILE]),
-    tileset: new Set([TILESET_NUMBER, TILESET_FILE, IMAGE_FILE]),
+    characters: new Set([CHARACTER_NUMBER, CHARACTER_FILE, IMAGE_FILE]),
+    faces: new Set([FACE_NUMBER, FACE_FILE, IMAGE_FILE]),
+    svEnemy: new Set([BATTLE_NUMBER, BATTLE_FILE, IMAGE_FILE]),
+    svActors: new Set([SV_BATTLE_NUMBER, SV_BATTLE_FILE, IMAGE_FILE]),
+    enemies: new Set([ENEMY_NUMBER, ENEMY_FILE, IMAGE_FILE]),
+    picutures: new Set([PICTURE_NUMBER, PICTURE_FILE, IMAGE_FILE]),
+    tilesets: new Set([TILESET_NUMBER, TILESET_FILE, IMAGE_FILE]),
   };
 
   testCases.forEach((testCase) =>
-    runTestCases(testCase, imageFiles, audioFiles),
+    runTestCases(testCase, imageFiles, audioFiles, {
+      movies: new Set(),
+    }),
   );
 });
