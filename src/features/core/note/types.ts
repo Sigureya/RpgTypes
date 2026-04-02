@@ -16,6 +16,12 @@ export interface SummarizedNote {
   values: string[];
 }
 
+export interface NoteSchema {
+  key: string;
+  kinds: string;
+  source: string;
+}
+
 export interface ImageFilesSet {
   character: ReadonlySet<string>;
   faceset: ReadonlySet<string>;
