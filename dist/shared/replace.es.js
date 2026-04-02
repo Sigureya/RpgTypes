@@ -38,13 +38,16 @@ const ta = (a, e, t) => a.filter(((s) => s.code === X || s.code === Z || s.code 
 }))), qa = (a) => {
   const e = a.trim().toLowerCase();
   return e === "true" || e === "false";
-}, Ga = (a) => /^\s*\d+\.?\d*\s*$/.test(a), ct = (a, e, t) => {
+}, Ga = (a) => {
+  const e = a.trim();
+  return /^\d+\.?\d*$/.test(e);
+}, ct = (a, e, t) => {
   const s = za(a);
   return Array.from(s.entries()).map((([r, n]) => {
     const m = Oa(n, e, t);
     return { key: r, kinds: Ha(m), values: n.map(((o) => o.value)) };
   }));
-}, za = (a) => a.reduce(((e, t) => (e.has(t.key) || e.set(t.key, a.filter(((s) => s.key === t.key))), e)), /* @__PURE__ */ new Map()), Ha = (a) => [a.isBoolean ? "boolean" : null, a.isNumber ? "number" : null, a.isBgm ? "bgm" : null, a.isBgs ? "bgs" : null, a.isMe ? "me" : null, a.isSe ? "se" : null, a.isPicture ? "picture" : null, a.isCharacter ? "character" : null, a.isFaceset ? "faceset" : null, a.isBattler ? "battler" : null, a.isSvBattler ? "svBattler" : null, a.isEnemy ? "enemy" : null, a.isTileset ? "tileset" : null].filter(((e) => e !== null)), Oa = (a, e, t) => a.reduce(((s, r) => ({
+}, za = (a) => a.reduce(((e, t) => (e.has(t.key) || e.set(t.key, a.filter(((s) => s.key === t.key))), e)), /* @__PURE__ */ new Map()), Ha = (a) => [a.isBoolean ? "boolean" : null, a.isNumber ? "number" : null, a.isBgm ? "bgm" : null, a.isBgs ? "bgs" : null, a.isMe ? "me" : null, a.isSe ? "se" : null, a.isPicture ? "picutures" : null, a.isCharacter ? "characters" : null, a.isFaceset ? "faces" : null, a.isBattler ? "battlers" : null, a.isSvBattler ? "svBattlers" : null, a.isEnemy ? "enmies" : null, a.isTileset ? "tilesets" : null].filter(((e) => e !== null)), Oa = (a, e, t) => a.reduce(((s, r) => ({
   isBoolean: s.isBoolean && qa(r.value),
   isNumber: s.isNumber && Ga(r.value),
   isBgm: s.isBgm && e.bgm.has(r.value),
