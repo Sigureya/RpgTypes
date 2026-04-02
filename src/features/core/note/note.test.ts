@@ -13,6 +13,7 @@ const BGS_NUMBER = "1002";
 const ME_NUMBER = "1003";
 const SE_NUMBER = "1004";
 
+const AUDIIO_FILE = "audio-file";
 const BGM_FILE = "bgm-file";
 const BGS_FILE = "bgs-file";
 const ME_FILE = "me-file";
@@ -26,6 +27,7 @@ const ENEMY_NUMBER = "2005";
 const PICTURE_NUMBER = "2006";
 const TILESET_NUMBER = "2007";
 
+const IMAGE_FILE = "image-file";
 const FACE_FILE = "face-file";
 const CHARACTER_FILE = "character-file";
 const BATTLE_FILE = "battler-file";
@@ -182,7 +184,37 @@ const testCases: TestCase[] = [
       {
         key: "X",
         kinds: [],
-        values: [BGM_NUMBER, BGM_FILE, "not found"],
+        values: [BGM_NUMBER, BGM_FILE, "123", "not found"],
+      },
+    ],
+  },
+  {
+    name: "audio",
+    items: [{ key: "Audio", value: AUDIIO_FILE }],
+    expected: [
+      {
+        key: "Audio",
+        kinds: ["bgm", "bgs", "me", "se"],
+        values: [AUDIIO_FILE],
+      },
+    ],
+  },
+  {
+    name: "image",
+    items: [{ key: "Image", value: IMAGE_FILE }],
+    expected: [
+      {
+        key: "Image",
+        kinds: [
+          "character",
+          "faceset",
+          "battler",
+          "svBattler",
+          "enemy",
+          "picuture",
+          "tileset",
+        ],
+        values: [IMAGE_FILE],
       },
     ],
   },
@@ -190,20 +222,20 @@ const testCases: TestCase[] = [
 
 describe("summarizeNoteKinds", () => {
   const audioFiles: AudioFilesSet = {
-    bgm: new Set([BGM_NUMBER, BGM_FILE]),
-    bgs: new Set([BGS_NUMBER, BGS_FILE]),
-    me: new Set([ME_NUMBER, ME_FILE]),
-    se: new Set([SE_NUMBER, SE_FILE]),
+    bgm: new Set([BGM_NUMBER, BGM_FILE, AUDIIO_FILE]),
+    bgs: new Set([BGS_NUMBER, BGS_FILE, AUDIIO_FILE]),
+    me: new Set([ME_NUMBER, ME_FILE, AUDIIO_FILE]),
+    se: new Set([SE_NUMBER, SE_FILE, AUDIIO_FILE]),
   };
 
   const imageFiles: ImageFilesSet = {
-    character: new Set([CHARACTER_NUMBER, CHARACTER_FILE]),
-    faceset: new Set([FACE_NUMBER, FACE_FILE]),
-    battler: new Set([BATTLE_NUMBER, BATTLE_FILE]),
-    svBattler: new Set([SV_BATTLE_NUMBER, SV_BATTLE_FILE]),
-    enemy: new Set([ENEMY_NUMBER, ENEMY_FILE]),
-    picuture: new Set([PICTURE_NUMBER, PICTURE_FILE]),
-    tileset: new Set([TILESET_NUMBER, TILESET_FILE]),
+    character: new Set([CHARACTER_NUMBER, CHARACTER_FILE, IMAGE_FILE]),
+    faceset: new Set([FACE_NUMBER, FACE_FILE, IMAGE_FILE]),
+    battler: new Set([BATTLE_NUMBER, BATTLE_FILE, IMAGE_FILE]),
+    svBattler: new Set([SV_BATTLE_NUMBER, SV_BATTLE_FILE, IMAGE_FILE]),
+    enemy: new Set([ENEMY_NUMBER, ENEMY_FILE, IMAGE_FILE]),
+    picuture: new Set([PICTURE_NUMBER, PICTURE_FILE, IMAGE_FILE]),
+    tileset: new Set([TILESET_NUMBER, TILESET_FILE, IMAGE_FILE]),
   };
 
   testCases.forEach((testCase) =>
