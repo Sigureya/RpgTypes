@@ -1,24 +1,24 @@
 import type { NoteReadResult } from "@RpgTypes/rmmz";
-import type { AudioFilesSet, ImageFilesSet, TypeXX } from "./types";
+import type { AudioFilesSet, ImageFilesSet, SummarizedNote } from "./types";
 
-export const isBooleanNote = (note: string): boolean => {
+export const isNoteBoolean = (note: string): boolean => {
   const text = note.trim().toLowerCase();
   return text === "true" || text === "false";
 };
 
-export const isNumberNote = (note: string): boolean => {
-  return note.match(/^\s*\d+\.?\d*\s*$/) !== null;
+export const isNoteNumber = (note: string): boolean => {
+  return /^\s*\d+\.?\d*\s*$/.test(note);
 };
 
-export const fff = (
+export const summarizeNoteKinds = (
   items: readonly NoteReadResult[],
   audioFiles: AudioFilesSet,
   imageFiles: ImageFilesSet,
-) => {
+): SummarizedNote[] => {
   const map = categorizeNote(items);
-  return Array.from(map.entries()).map(([key, mapedItems]): TypeXX => {
-    const kindState = kindXX(mapedItems, audioFiles, imageFiles);
-    const kinds = kindGG(kindState);
+  return Array.from(map.entries()).map(([key, mapedItems]): SummarizedNote => {
+    const kindState = detectNoteKindState(mapedItems, audioFiles, imageFiles);
+    const kinds = extractNoteKinds(kindState);
     return {
       key,
       kinds,
@@ -42,7 +42,7 @@ export const categorizeNote = (
   }, new Map<string, NoteReadResult[]>());
 };
 
-const kindGG = (state: KindState) => {
+const extractNoteKinds = (state: KindState) => {
   return (
     [
       state.isBoolean ? "boolean" : null,
@@ -62,47 +62,46 @@ const kindGG = (state: KindState) => {
   ).filter((k) => k !== null);
 };
 
-const kindXX = (
-  items: readonly NoteReadResult[],
+const createEmptyKindState = (): KindState => ({
+  isBoolean: true,
+  isNumber: true,
+  isBgm: true,
+  isBgs: true,
+  isMe: true,
+  isSe: true,
+  isBattler: true,
+  isCharacter: true,
+  isFaceset: true,
+  isSvBattler: true,
+  isEnemy: true,
+  isPicture: true,
+  isTileset: true,
+});
+
+const detectNoteKindState = (
+  items: ReadonlyArray<NoteReadResult>,
   audioFiles: AudioFilesSet,
   imageFiles: ImageFilesSet,
 ): KindState => {
-  return items.reduce(
-    (acc: KindState, item): KindState => {
-      return {
-        isBoolean: acc.isBoolean && isBooleanNote(item.value),
-        isNumber: acc.isNumber && isNumberNote(item.value),
+  return items.reduce((acc: KindState, item): KindState => {
+    return {
+      isBoolean: acc.isBoolean && isNoteBoolean(item.value),
+      isNumber: acc.isNumber && isNoteNumber(item.value),
 
-        isBgm: acc.isBgm && audioFiles.bgm.has(item.value),
-        isBgs: acc.isBgs && audioFiles.bgs.has(item.value),
-        isMe: acc.isMe && audioFiles.me.has(item.value),
-        isSe: acc.isSe && audioFiles.se.has(item.value),
+      isBgm: acc.isBgm && audioFiles.bgm.has(item.value),
+      isBgs: acc.isBgs && audioFiles.bgs.has(item.value),
+      isMe: acc.isMe && audioFiles.me.has(item.value),
+      isSe: acc.isSe && audioFiles.se.has(item.value),
 
-        isPicture: acc.isPicture && imageFiles.picuture.has(item.value),
-        isCharacter: acc.isCharacter && imageFiles.character.has(item.value),
-        isFaceset: acc.isFaceset && imageFiles.faceset.has(item.value),
-        isBattler: acc.isBattler && imageFiles.battler.has(item.value),
-        isSvBattler: acc.isSvBattler && imageFiles.svBattler.has(item.value),
-        isEnemy: acc.isEnemy && imageFiles.enemy.has(item.value),
-        isTileset: acc.isTileset && imageFiles.tileset.has(item.value),
-      };
-    },
-    {
-      isBoolean: true,
-      isNumber: true,
-      isBgm: true,
-      isBgs: true,
-      isMe: true,
-      isSe: true,
-      isBattler: true,
-      isCharacter: true,
-      isFaceset: true,
-      isSvBattler: true,
-      isEnemy: true,
-      isPicture: true,
-      isTileset: true,
-    } satisfies KindState,
-  );
+      isPicture: acc.isPicture && imageFiles.picuture.has(item.value),
+      isCharacter: acc.isCharacter && imageFiles.character.has(item.value),
+      isFaceset: acc.isFaceset && imageFiles.faceset.has(item.value),
+      isBattler: acc.isBattler && imageFiles.battler.has(item.value),
+      isSvBattler: acc.isSvBattler && imageFiles.svBattler.has(item.value),
+      isEnemy: acc.isEnemy && imageFiles.enemy.has(item.value),
+      isTileset: acc.isTileset && imageFiles.tileset.has(item.value),
+    };
+  }, createEmptyKindState());
 };
 
 interface KindState {

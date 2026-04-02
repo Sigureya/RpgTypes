@@ -10,7 +10,7 @@ export interface AudioFilesSet {
   se: ReadonlySet<string>;
 }
 
-export interface TypeXX {
+export interface SummarizedNote {
   key: string;
   kinds: string[];
   values: string[];
