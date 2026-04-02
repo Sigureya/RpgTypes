@@ -1,9 +1,9 @@
-import type { NoteReadResult } from "@RpgTypes/rmmz";
 import type {
   AudioFilesSet,
   ImageFilesSet,
   OtherFilesSet,
   SummarizedNote,
+  XX,
 } from "./types";
 
 export const isNoteBoolean = (note: string): boolean => {
@@ -17,7 +17,7 @@ export const isNoteNumber = (note: string): boolean => {
 };
 
 export const summarizeNoteKinds = (
-  items: readonly NoteReadResult[],
+  items: readonly XX[],
   audioFiles: AudioFilesSet,
   imageFiles: ImageFilesSet,
   other: OtherFilesSet,
@@ -39,9 +39,7 @@ export const summarizeNoteKinds = (
   });
 };
 
-export const categorizeNote = (
-  items: readonly NoteReadResult[],
-): Map<string, NoteReadResult[]> => {
+export const categorizeNote = (items: readonly XX[]): Map<string, XX[]> => {
   return items.reduce((acc, item) => {
     if (acc.has(item.key)) {
       return acc;
@@ -51,7 +49,7 @@ export const categorizeNote = (
       items.filter((i) => i.key === item.key),
     );
     return acc;
-  }, new Map<string, NoteReadResult[]>());
+  }, new Map<string, XX[]>());
 };
 
 const extractNoteKinds = (state: KindState) => {
@@ -92,7 +90,7 @@ const createEmptyKindState = (): KindState => ({
 });
 
 const detectNoteKindState = (
-  items: ReadonlyArray<NoteReadResult>,
+  items: ReadonlyArray<XX>,
   audioFiles: AudioFilesSet,
   imageFiles: ImageFilesSet,
   otherFiles: OtherFilesSet,

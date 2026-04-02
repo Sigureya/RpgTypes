@@ -1,16 +1,16 @@
 import { test, expect, describe } from "vitest";
-import type { NoteReadResult } from "@RpgTypes/rmmz";
 import { summarizeNoteKinds, isNoteBoolean, isNoteNumber } from "./note";
 import type {
   AudioFilesSet,
   ImageFilesSet,
   OtherFilesSet,
   SummarizedNote,
+  XX,
 } from "./types";
 
 interface TestCase {
   name: string;
-  items: NoteReadResult[];
+  items: XX[];
   expected: SummarizedNote[];
 }
 const BGM_NUMBER = "1001";
