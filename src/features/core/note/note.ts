@@ -7,7 +7,8 @@ export const isNoteBoolean = (note: string): boolean => {
 };
 
 export const isNoteNumber = (note: string): boolean => {
-  return /^\s*\d+\.?\d*\s*$/.test(note);
+  const trimed = note.trim();
+  return /^\d+\.?\d*$/.test(trimed);
 };
 
 export const summarizeNoteKinds = (
@@ -51,13 +52,13 @@ const extractNoteKinds = (state: KindState) => {
       state.isBgs ? "bgs" : null,
       state.isMe ? "me" : null,
       state.isSe ? "se" : null,
-      state.isPicture ? "picture" : null,
-      state.isCharacter ? "character" : null,
-      state.isFaceset ? "faceset" : null,
-      state.isBattler ? "battler" : null,
-      state.isSvBattler ? "svBattler" : null,
-      state.isEnemy ? "enemy" : null,
-      state.isTileset ? "tileset" : null,
+      state.isPicture ? "picutures" : null,
+      state.isCharacter ? "characters" : null,
+      state.isFaceset ? "faces" : null,
+      state.isBattler ? "battlers" : null,
+      state.isSvBattler ? "svBattlers" : null,
+      state.isEnemy ? "enmies" : null,
+      state.isTileset ? "tilesets" : null,
     ] as const
   ).filter((k) => k !== null);
 };

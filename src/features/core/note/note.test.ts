@@ -62,6 +62,18 @@ describe("isNoteNumber", () => {
   test("integer", () => {
     expect("123").toSatisfy(isNoteNumber);
   });
+  test("number with spaces", () => {
+    expect("  123.45  ").toSatisfy(isNoteNumber);
+  });
+  test("number with leading and trailing spaces", () => {
+    expect("123.45  ").toSatisfy(isNoteNumber);
+  });
+  test("number with leading spaces", () => {
+    expect("  123.45").toSatisfy(isNoteNumber);
+  });
+  test("number with leading zeros", () => {
+    expect("000123.45").toSatisfy(isNoteNumber);
+  });
   test("not number", () => {
     expect("true").not.toSatisfy(isNoteNumber);
   });
@@ -200,19 +212,34 @@ const testCases: TestCase[] = [
     ],
   },
   {
+    name: "picture",
+    items: [{ key: "P", value: PICTURE_FILE }],
+    expected: [{ key: "P", kinds: ["picutures"], values: [PICTURE_FILE] }],
+  },
+  {
+    name: "character",
+    items: [{ key: "C", value: CHARACTER_FILE }],
+    expected: [{ key: "C", kinds: ["characters"], values: [CHARACTER_FILE] }],
+  },
+  {
+    name: "faces",
+    items: [{ key: "F", value: FACE_FILE }],
+    expected: [{ key: "F", kinds: ["faces"], values: [FACE_FILE] }],
+  },
+  {
     name: "image",
     items: [{ key: "Image", value: IMAGE_FILE }],
     expected: [
       {
         key: "Image",
         kinds: [
-          "character",
-          "faceset",
-          "battler",
-          "svBattler",
-          "enemy",
-          "picuture",
-          "tileset",
+          "picutures",
+          "characters",
+          "faces",
+          "battlers",
+          "svBattlers",
+          "enmies",
+          "tilesets",
         ],
         values: [IMAGE_FILE],
       },
