@@ -12,7 +12,7 @@ export interface AudioFilesSet {
 
 export interface XX {
   key: string;
-  value: string;
+  text: string;
 }
 
 export interface SummarizedNote {
