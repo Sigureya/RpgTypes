@@ -1,68 +1,81 @@
 import { test, expect, describe } from "vitest";
 import type { NoteReadResult } from "@RpgTypes/rmmz";
-import { fff, isBooleanNote, isNumberNote } from "./note";
-import type { AudioFilesSet, ImageFilesSet, TypeXX } from "./types";
+import { summarizeNoteKinds, isNoteBoolean, isNoteNumber } from "./note";
+import type { AudioFilesSet, ImageFilesSet, SummarizedNote } from "./types";
 
 interface TestCase {
   name: string;
   items: NoteReadResult[];
-  expected: TypeXX[];
+  expected: SummarizedNote[];
 }
 const BGM_NUMBER = "1001";
 const BGS_NUMBER = "1002";
 const ME_NUMBER = "1003";
 const SE_NUMBER = "1004";
 
-const audioFiles: AudioFilesSet = {
-  bgm: new Set([BGM_NUMBER]),
-  bgs: new Set([BGS_NUMBER]),
-  me: new Set([ME_NUMBER]),
-  se: new Set([SE_NUMBER]),
-};
+const BGM_FILE = "bgm-file";
+const BGS_FILE = "bgs-file";
+const ME_FILE = "me-file";
+const SE_FILE = "se-file";
 
-const emptyImageFiles: ImageFilesSet = {
-  character: new Set(),
-  faceset: new Set(),
-  battler: new Set(),
-  svBattler: new Set(),
-  enemy: new Set(),
-  picuture: new Set(),
-  tileset: new Set(),
-};
+const FACE_NUMBER = "2001";
+const CHARACTER_NUMBER = "2002";
+const BATTLE_NUMBER = "2003";
+const SV_BATTLE_NUMBER = "2004";
+const ENEMY_NUMBER = "2005";
+const PICTURE_NUMBER = "2006";
+const TILESET_NUMBER = "2007";
 
-describe("isBooleanNote", () => {
+const FACE_FILE = "face-file";
+const CHARACTER_FILE = "character-file";
+const BATTLE_FILE = "battler-file";
+const SV_BATTLE_FILE = "svBattler-file";
+const ENEMY_FILE = "enemy-file";
+const PICTURE_FILE = "picture-file";
+const TILESET_FILE = "tileset-file";
+
+describe("isNoteBoolean", () => {
   test("true", () => {
-    expect(isBooleanNote("true")).toBe(true);
+    expect("true").toSatisfy(isNoteBoolean);
   });
   test("false", () => {
-    expect(isBooleanNote("false")).toBe(true);
+    expect("false").toSatisfy(isNoteBoolean);
   });
+  test("TRUE", () => {
+    expect("TRUE").toSatisfy(isNoteBoolean);
+  });
+  test("FALSE", () => {
+    expect("FALSE").toSatisfy(isNoteBoolean);
+  });
+
   test("not boolean", () => {
-    expect(isBooleanNote("123")).toBe(false);
+    expect("123").not.toSatisfy(isNoteBoolean);
   });
 });
 
-describe("isNumberNote", () => {
+describe("isNoteNumber", () => {
   test("number", () => {
-    expect(isNumberNote("123.45")).toBe(true);
+    expect("123.45").toSatisfy(isNoteNumber);
   });
   test("integer", () => {
-    expect(isNumberNote("123")).toBe(true);
+    expect("123").toSatisfy(isNoteNumber);
   });
   test("not number", () => {
-    expect(isNumberNote("abc")).toBe(false);
+    expect("true").not.toSatisfy(isNoteNumber);
   });
-  test("", () => {
-    expect(isNumberNote(BGM_NUMBER)).toBe(true);
+  test("bgm filename as number", () => {
+    expect(BGM_NUMBER).toSatisfy(isNoteNumber);
   });
 });
 
-const runTestCases = (testCase: TestCase) => {
-  describe(testCase.name, () => {
-    test("", () => {
-      const result = fff(testCase.items, audioFiles, emptyImageFiles);
-      expect(result).toEqual(testCase.expected);
-    });
+const runTestCases = (
+  testCase: TestCase,
+  imageFileSet: ImageFilesSet,
+  audioFiles: AudioFilesSet,
+) => {
+  test(testCase.name, () => {
+    const result = summarizeNoteKinds(testCase.items, audioFiles, imageFileSet);
+    expect(result).toEqual(testCase.expected);
   });
 };
 
@@ -97,27 +110,103 @@ const testCases: TestCase[] = [
     ],
   },
   {
-    name: "",
+    name: "bgm filename as number",
     items: [{ key: "M", value: BGM_NUMBER }],
     expected: [{ key: "M", kinds: ["number", "bgm"], values: [BGM_NUMBER] }],
   },
   {
-    name: "",
+    name: "bgs filename as number",
     items: [{ key: "S", value: BGS_NUMBER }],
     expected: [{ key: "S", kinds: ["number", "bgs"], values: [BGS_NUMBER] }],
   },
   {
-    name: "",
+    name: "me filename as number",
     items: [{ key: "ME", value: ME_NUMBER }],
     expected: [{ key: "ME", kinds: ["number", "me"], values: [ME_NUMBER] }],
   },
   {
-    name: "",
+    name: "se filename as number",
     items: [{ key: "SE", value: SE_NUMBER }],
     expected: [{ key: "SE", kinds: ["number", "se"], values: [SE_NUMBER] }],
   },
+  {
+    name: "multiple audio files as number",
+    items: [
+      { key: "Audio", value: BGM_NUMBER },
+      { key: "Audio", value: BGS_NUMBER },
+    ],
+    expected: [
+      { key: "Audio", kinds: ["number"], values: [BGM_NUMBER, BGS_NUMBER] },
+    ],
+  },
+  {
+    name: "multiple audio files as filename",
+    items: [
+      { key: "BGM", value: BGM_FILE },
+      { key: "BGS", value: BGS_FILE },
+      { key: "ME", value: ME_FILE },
+      { key: "SE", value: SE_FILE },
+    ],
+    expected: [
+      { key: "BGM", kinds: ["bgm"], values: [BGM_FILE] },
+      { key: "BGS", kinds: ["bgs"], values: [BGS_FILE] },
+      { key: "ME", kinds: ["me"], values: [ME_FILE] },
+      { key: "SE", kinds: ["se"], values: [SE_FILE] },
+    ],
+  },
+  {
+    name: "multiple audio files as number 2",
+    items: [
+      { key: "Audio", value: BGM_NUMBER },
+      { key: "Audio", value: BGS_NUMBER },
+      { key: "Audio", value: ME_NUMBER },
+      { key: "Audio", value: SE_NUMBER },
+    ],
+    expected: [
+      {
+        key: "Audio",
+        kinds: ["number"],
+        values: [BGM_NUMBER, BGS_NUMBER, ME_NUMBER, SE_NUMBER],
+      },
+    ],
+  },
+  {
+    name: "unknown audio file",
+    items: [
+      { key: "X", value: BGM_NUMBER },
+      { key: "X", value: BGM_FILE },
+      { key: "X", value: "123" },
+      { key: "X", value: "not found" },
+    ],
+    expected: [
+      {
+        key: "X",
+        kinds: [],
+        values: [BGM_NUMBER, BGM_FILE, "not found"],
+      },
+    ],
+  },
 ];
 
-describe("fff", () => {
-  testCases.forEach(runTestCases);
+describe("summarizeNoteKinds", () => {
+  const audioFiles: AudioFilesSet = {
+    bgm: new Set([BGM_NUMBER, BGM_FILE]),
+    bgs: new Set([BGS_NUMBER, BGS_FILE]),
+    me: new Set([ME_NUMBER, ME_FILE]),
+    se: new Set([SE_NUMBER, SE_FILE]),
+  };
+
+  const imageFiles: ImageFilesSet = {
+    character: new Set([CHARACTER_NUMBER, CHARACTER_FILE]),
+    faceset: new Set([FACE_NUMBER, FACE_FILE]),
+    battler: new Set([BATTLE_NUMBER, BATTLE_FILE]),
+    svBattler: new Set([SV_BATTLE_NUMBER, SV_BATTLE_FILE]),
+    enemy: new Set([ENEMY_NUMBER, ENEMY_FILE]),
+    picuture: new Set([PICTURE_NUMBER, PICTURE_FILE]),
+    tileset: new Set([TILESET_NUMBER, TILESET_FILE]),
+  };
+
+  testCases.forEach((testCase) =>
+    runTestCases(testCase, imageFiles, audioFiles),
+  );
 });
