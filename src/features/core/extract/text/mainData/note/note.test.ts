@@ -252,20 +252,39 @@ const testCases: TestCase[] = [
   },
   {
     name: "picture",
-    items: [{ key: "P", text: PICTURE_FILE }],
-    expected: [{ key: "P", kinds: ["picutures"], values: [PICTURE_FILE] }],
+    items: [
+      { key: "P", text: PICTURE_FILE },
+      { key: "P", text: PICTURE_NUMBER },
+    ],
+    expected: [
+      { key: "P", kinds: ["pictures"], values: [PICTURE_FILE, PICTURE_NUMBER] },
+    ],
     set: new Set(),
   },
   {
     name: "character",
-    items: [{ key: "C", text: CHARACTER_FILE }],
-    expected: [{ key: "C", kinds: ["characters"], values: [CHARACTER_FILE] }],
+    items: [
+      { key: "C", text: CHARACTER_FILE },
+      { key: "C", text: CHARACTER_NUMBER },
+    ],
+    expected: [
+      {
+        key: "C",
+        kinds: ["characters"],
+        values: [CHARACTER_FILE, CHARACTER_NUMBER],
+      },
+    ],
     set: new Set(),
   },
   {
     name: "faces",
-    items: [{ key: "F", text: FACE_FILE }],
-    expected: [{ key: "F", kinds: ["faces"], values: [FACE_FILE] }],
+    items: [
+      { key: "F", text: FACE_FILE },
+      { key: "F", text: FACE_NUMBER },
+    ],
+    expected: [
+      { key: "F", kinds: ["faces"], values: [FACE_FILE, FACE_NUMBER] },
+    ],
     set: new Set(),
   },
   {
@@ -276,12 +295,12 @@ const testCases: TestCase[] = [
       {
         key: "Image",
         kinds: [
-          "picutures",
+          "pictures",
           "characters",
           "faces",
           "battlers",
           "svBattlers",
-          "enmies",
+          "enemies",
           "tilesets",
         ],
         values: [IMAGE_FILE],
