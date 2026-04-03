@@ -33,14 +33,18 @@ export const rrr = <T>(
   set: ReadonlySet<string>,
 ): ExtractedText<T>[] => {
   return list
-    .map((item) => {
+    .map((item): ExtractedText<T> => {
       const filteredNote = item.note.filter((note) => set.has(note.key));
       return {
         main: item.main,
         note: filteredNote,
       };
     })
-    .filter((item) => item.note.length > 0 || item.main.length > 0);
+    .filter(hasData);
+};
+
+const hasData = <T>(item: ExtractedText<T>): boolean => {
+  return item.note.length > 0 || item.main.length > 0;
 };
 
 const ggg = (bundle: ExtractedDataBundle): ExtractedTextItem[] => {
