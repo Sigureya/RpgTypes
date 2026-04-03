@@ -1,7 +1,7 @@
 import { test, expect, describe } from "vitest";
+import type { ExtractedDataBundle } from "./mainData/types";
 import type { AudioFilesSet, ImageFilesSet, OtherFilesSet } from "./note/types";
-import { ddd } from "./noteNormarize";
-import type { ExtractedDataBundle } from "./types";
+import { normalizeBundleNoteTexts } from "./noteNormarize";
 
 const BGM1 = "bgm1";
 const BGM2 = "bgm2";
@@ -127,11 +127,23 @@ const bundle2: ExtractedDataBundle = {
   ],
   weapons: [
     {
-      main: [{ id: 5, key: "name", text: "Weapon1" }],
+      main: [
+        { id: 5, key: "name", text: "Weapon1" },
+        { id: 5, key: "description", text: "This is a powerful weapon." },
+      ],
       note: [{ id: 5, key: "special", text: "xyz" }],
     },
   ],
-  armors: [],
+  armors: [
+    {
+      main: [
+        { id: 6, key: "name", text: "Armor1" },
+        { id: 6, key: "description", text: "This is a sturdy armor." },
+      ],
+      note: [{ id: 6, key: "special", text: "abc" }],
+    },
+  ],
+
   skills: [],
   states: [],
   items: [],
@@ -139,8 +151,13 @@ const bundle2: ExtractedDataBundle = {
 };
 
 describe("ddd", () => {
-  test("ddd", () => {
-    const result = ddd(bundle, audioFiles, imageFiles, ohterFiles);
+  test("no matching kinds", () => {
+    const result = normalizeBundleNoteTexts(
+      bundle,
+      audioFiles,
+      imageFiles,
+      ohterFiles,
+    );
     const expected: ExtractedDataBundle = {
       actors: [],
       enemies: [],
@@ -153,8 +170,13 @@ describe("ddd", () => {
     };
     expect(result).toEqual(expected);
   });
-  test("", () => {
-    const result = ddd(bundle2, audioFiles, imageFiles, ohterFiles);
+  test("matching kinds and values are filtered correctly", () => {
+    const result = normalizeBundleNoteTexts(
+      bundle2,
+      audioFiles,
+      imageFiles,
+      ohterFiles,
+    );
     expect(result).toEqual(bundle2);
   });
 });
