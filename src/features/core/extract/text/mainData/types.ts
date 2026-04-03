@@ -26,13 +26,13 @@ export interface ExtractedText<T> extends ExtractedNoteList {
 
 export interface ExtractedTextItem {
   key: string;
-  text: string;
+  value: string;
   id: number;
 }
 
-export interface ExtractedTextProperty<T> {
-  key: PickByTypeKeys<T, string>;
-  text: string;
+export interface ExtractedTextProperty<T> extends ExtractedTextItem {
+  key: PickByTypeKeys<T, string> & string;
+  value: string;
   id: number;
 }
 

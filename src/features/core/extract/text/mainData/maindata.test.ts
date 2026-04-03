@@ -31,9 +31,9 @@ import type { TextExtractable, ExtractedText } from "./types";
 describe("extractTextFromActor", () => {
   const expected: ExtractedText<Data_Actor> = {
     main: [
-      { key: "name", text: "アクター", id: 1 },
-      { key: "nickname", text: "ニックネーム", id: 1 },
-      { key: "profile", text: "プロフィール", id: 1 },
+      { key: "name", value: "アクター", id: 1 },
+      { key: "nickname", value: "ニックネーム", id: 1 },
+      { key: "profile", value: "プロフィール", id: 1 },
     ],
     note: [],
   };
@@ -55,7 +55,7 @@ describe("extractTextFromEnemy", () => {
     id: 2,
   });
   const expected: ExtractedText<Data_Enemy> = {
-    main: [{ key: "name", text: "エネミー", id: 2 }],
+    main: [{ key: "name", value: "エネミー", id: 2 }],
     note: [],
   };
   test("extract", () => {
@@ -72,8 +72,8 @@ describe("extractTextFromArmor", () => {
   });
   const expected: ExtractedText<Data_Armor> = {
     main: [
-      { key: "name", text: "アーマー", id: 3 },
-      { key: "description", text: "アーマー説明", id: 3 },
+      { key: "name", value: "アーマー", id: 3 },
+      { key: "description", value: "アーマー説明", id: 3 },
     ],
     note: [],
   };
@@ -103,8 +103,8 @@ describe("extractTextFromWeapon", () => {
     });
     const expected: ExtractedText<Data_Weapon> = {
       main: [
-        { key: "name", text: "ウェポン", id: 4 },
-        { key: "description", text: "ウェポン説明", id: 4 },
+        { key: "name", value: "ウェポン", id: 4 },
+        { key: "description", value: "ウェポン説明", id: 4 },
       ],
       note: [],
     };
@@ -128,8 +128,8 @@ describe("extractTextFromItem", () => {
   });
   const expected: ExtractedText<Data_Item> = {
     main: [
-      { key: "name", text: "アイテム", id: 5 },
-      { key: "description", text: "アイテム説明", id: 5 },
+      { key: "name", value: "アイテム", id: 5 },
+      { key: "description", value: "アイテム説明", id: 5 },
     ],
     note: [],
   };
@@ -154,10 +154,10 @@ describe("extractTextFromSkill", () => {
   });
   const expected: ExtractedText<Data_Skill> = {
     main: [
-      { key: "name", text: "スキル", id: 6 },
-      { key: "description", text: "スキル説明", id: 6 },
-      { key: "message1", text: "msg1", id: 6 },
-      { key: "message2", text: "msg2", id: 6 },
+      { key: "name", value: "スキル", id: 6 },
+      { key: "description", value: "スキル説明", id: 6 },
+      { key: "message1", value: "msg1", id: 6 },
+      { key: "message2", value: "msg2", id: 6 },
     ],
     note: [],
   };
@@ -187,11 +187,11 @@ describe("extractTextFromState", () => {
   });
   const expected: ExtractedText<Data_State> = {
     main: [
-      { key: "name", text: "ステート", id: 7 },
-      { key: "message1", text: "msg1", id: 7 },
-      { key: "message2", text: "msg2", id: 7 },
-      { key: "message3", text: "msg3", id: 7 },
-      { key: "message4", text: "msg4", id: 7 },
+      { key: "name", value: "ステート", id: 7 },
+      { key: "message1", value: "msg1", id: 7 },
+      { key: "message2", value: "msg2", id: 7 },
+      { key: "message3", value: "msg3", id: 7 },
+      { key: "message4", value: "msg4", id: 7 },
     ],
     note: [],
   };

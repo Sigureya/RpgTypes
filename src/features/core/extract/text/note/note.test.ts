@@ -129,23 +129,23 @@ const testCases: TestCase[] = [
   {
     name: "boolean",
     items: [
-      { key: "key1", text: "true" },
-      { key: "key1", text: "false" },
+      { key: "key1", value: "true" },
+      { key: "key1", value: "false" },
     ],
     expected: [{ key: "key1", kinds: ["boolean"], values: ["true", "false"] }],
     set: new Set(),
   },
   {
     name: "number",
-    items: [{ key: "key1", text: "123.45" }],
+    items: [{ key: "key1", value: "123.45" }],
     expected: [{ key: "key1", kinds: ["number"], values: ["123.45"] }],
     set: new Set(),
   },
   {
     name: "multipleKeys",
     items: [
-      { key: "A", text: "123" },
-      { key: "B", text: "456" },
+      { key: "A", value: "123" },
+      { key: "B", value: "456" },
     ],
     expected: [
       { key: "A", kinds: ["number"], values: ["123"] },
@@ -155,33 +155,33 @@ const testCases: TestCase[] = [
   },
   {
     name: "bgm filename as number",
-    items: [{ key: "M", text: BGM_NUMBER }],
+    items: [{ key: "M", value: BGM_NUMBER }],
     expected: [{ key: "M", kinds: ["number", "bgm"], values: [BGM_NUMBER] }],
     set: new Set(),
   },
   {
     name: "bgs filename as number",
-    items: [{ key: "S", text: BGS_NUMBER }],
+    items: [{ key: "S", value: BGS_NUMBER }],
     expected: [{ key: "S", kinds: ["number", "bgs"], values: [BGS_NUMBER] }],
     set: new Set(),
   },
   {
     name: "me filename as number",
-    items: [{ key: "ME", text: ME_NUMBER }],
+    items: [{ key: "ME", value: ME_NUMBER }],
     expected: [{ key: "ME", kinds: ["number", "me"], values: [ME_NUMBER] }],
     set: new Set(),
   },
   {
     name: "se filename as number",
-    items: [{ key: "SE", text: SE_NUMBER }],
+    items: [{ key: "SE", value: SE_NUMBER }],
     expected: [{ key: "SE", kinds: ["number", "se"], values: [SE_NUMBER] }],
     set: new Set(),
   },
   {
     name: "multiple audio files as number",
     items: [
-      { key: "Audio", text: BGM_NUMBER },
-      { key: "Audio", text: BGS_NUMBER },
+      { key: "Audio", value: BGM_NUMBER },
+      { key: "Audio", value: BGS_NUMBER },
     ],
     expected: [
       { key: "Audio", kinds: ["number"], values: [BGM_NUMBER, BGS_NUMBER] },
@@ -191,10 +191,10 @@ const testCases: TestCase[] = [
   {
     name: "multiple audio files as filename",
     items: [
-      { key: "BGM", text: BGM_FILE },
-      { key: "BGS", text: BGS_FILE },
-      { key: "ME", text: ME_FILE },
-      { key: "SE", text: SE_FILE },
+      { key: "BGM", value: BGM_FILE },
+      { key: "BGS", value: BGS_FILE },
+      { key: "ME", value: ME_FILE },
+      { key: "SE", value: SE_FILE },
     ],
     expected: [
       { key: "BGM", kinds: ["bgm"], values: [BGM_FILE] },
@@ -207,10 +207,10 @@ const testCases: TestCase[] = [
   {
     name: "multiple audio files as number 2",
     items: [
-      { key: "Audio", text: BGM_NUMBER },
-      { key: "Audio", text: BGS_NUMBER },
-      { key: "Audio", text: ME_NUMBER },
-      { key: "Audio", text: SE_NUMBER },
+      { key: "Audio", value: BGM_NUMBER },
+      { key: "Audio", value: BGS_NUMBER },
+      { key: "Audio", value: ME_NUMBER },
+      { key: "Audio", value: SE_NUMBER },
     ],
     expected: [
       {
@@ -224,10 +224,10 @@ const testCases: TestCase[] = [
   {
     name: "unknown audio file",
     items: [
-      { key: "X", text: BGM_NUMBER },
-      { key: "X", text: BGM_FILE },
-      { key: "X", text: "123" },
-      { key: "X", text: "not found" },
+      { key: "X", value: BGM_NUMBER },
+      { key: "X", value: BGM_FILE },
+      { key: "X", value: "123" },
+      { key: "X", value: "not found" },
     ],
     expected: [
       {
@@ -240,7 +240,7 @@ const testCases: TestCase[] = [
   },
   {
     name: "audio",
-    items: [{ key: "Audio", text: AUDIIO_FILE }],
+    items: [{ key: "Audio", value: AUDIIO_FILE }],
     expected: [
       {
         key: "Audio",
@@ -253,8 +253,8 @@ const testCases: TestCase[] = [
   {
     name: "picture",
     items: [
-      { key: "P", text: PICTURE_FILE },
-      { key: "P", text: PICTURE_NUMBER },
+      { key: "P", value: PICTURE_FILE },
+      { key: "P", value: PICTURE_NUMBER },
     ],
     expected: [
       { key: "P", kinds: ["pictures"], values: [PICTURE_FILE, PICTURE_NUMBER] },
@@ -264,8 +264,8 @@ const testCases: TestCase[] = [
   {
     name: "character",
     items: [
-      { key: "C", text: CHARACTER_FILE },
-      { key: "C", text: CHARACTER_NUMBER },
+      { key: "C", value: CHARACTER_FILE },
+      { key: "C", value: CHARACTER_NUMBER },
     ],
     expected: [
       {
@@ -279,8 +279,8 @@ const testCases: TestCase[] = [
   {
     name: "faces",
     items: [
-      { key: "F", text: FACE_FILE },
-      { key: "F", text: FACE_NUMBER },
+      { key: "F", value: FACE_FILE },
+      { key: "F", value: FACE_NUMBER },
     ],
     expected: [
       { key: "F", kinds: ["faces"], values: [FACE_FILE, FACE_NUMBER] },
@@ -290,7 +290,7 @@ const testCases: TestCase[] = [
   {
     name: "image",
     set: new Set(),
-    items: [{ key: "Image", text: IMAGE_FILE }],
+    items: [{ key: "Image", value: IMAGE_FILE }],
     expected: [
       {
         key: "Image",
@@ -309,7 +309,7 @@ const testCases: TestCase[] = [
   },
   {
     name: "movie",
-    items: [{ key: "Movie", text: MOVIE_FILE }],
+    items: [{ key: "Movie", value: MOVIE_FILE }],
     expected: [{ key: "Movie", kinds: ["movies"], values: [MOVIE_FILE] }],
     set: new Set(),
   },

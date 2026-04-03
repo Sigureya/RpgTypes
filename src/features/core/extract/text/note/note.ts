@@ -43,7 +43,7 @@ export const summarizeNoteKinds = (
     return {
       key,
       kinds,
-      values: mapedItems.map((i) => i.text),
+      values: mapedItems.map((i) => i.value),
     };
   });
 };
@@ -107,23 +107,23 @@ const detectNoteKindState = (
 ): KindState => {
   return items.reduce((acc: KindState, item): KindState => {
     return {
-      isBoolean: acc.isBoolean && isNoteBoolean(item.text),
-      isNumber: acc.isNumber && isNoteNumber(item.text),
+      isBoolean: acc.isBoolean && isNoteBoolean(item.value),
+      isNumber: acc.isNumber && isNoteNumber(item.value),
 
-      isBgm: acc.isBgm && audioFiles.bgm.has(item.text),
-      isBgs: acc.isBgs && audioFiles.bgs.has(item.text),
-      isMe: acc.isMe && audioFiles.me.has(item.text),
-      isSe: acc.isSe && audioFiles.se.has(item.text),
+      isBgm: acc.isBgm && audioFiles.bgm.has(item.value),
+      isBgs: acc.isBgs && audioFiles.bgs.has(item.value),
+      isMe: acc.isMe && audioFiles.me.has(item.value),
+      isSe: acc.isSe && audioFiles.se.has(item.value),
 
-      isPicture: acc.isPicture && imageFiles.picutures.has(item.text),
-      isCharacter: acc.isCharacter && imageFiles.characters.has(item.text),
-      isFaceset: acc.isFaceset && imageFiles.faces.has(item.text),
-      isBattler: acc.isBattler && imageFiles.svEnemy.has(item.text),
-      isSvBattler: acc.isSvBattler && imageFiles.svActors.has(item.text),
-      isEnemy: acc.isEnemy && imageFiles.enemies.has(item.text),
-      isTileset: acc.isTileset && imageFiles.tilesets.has(item.text),
+      isPicture: acc.isPicture && imageFiles.picutures.has(item.value),
+      isCharacter: acc.isCharacter && imageFiles.characters.has(item.value),
+      isFaceset: acc.isFaceset && imageFiles.faces.has(item.value),
+      isBattler: acc.isBattler && imageFiles.svEnemy.has(item.value),
+      isSvBattler: acc.isSvBattler && imageFiles.svActors.has(item.value),
+      isEnemy: acc.isEnemy && imageFiles.enemies.has(item.value),
+      isTileset: acc.isTileset && imageFiles.tilesets.has(item.value),
 
-      isMovie: acc.isMovie && otherFiles.movies.has(item.text),
+      isMovie: acc.isMovie && otherFiles.movies.has(item.value),
     };
   }, createEmptyKindState());
 };
