@@ -13,7 +13,7 @@ export const isNoteBoolean = (note: string): boolean => {
 
 export const isNoteNumber = (note: string): boolean => {
   const trimed = note.trim();
-  return /^\d+\.?\d*$/.test(trimed);
+  return /^\d{1,16}\.?\d{0,16}$/.test(trimed);
 };
 
 export const stringLikeNoteKeys = (
