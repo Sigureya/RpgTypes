@@ -1,7 +1,8 @@
 import { test, expect, describe } from "vitest";
+import type { ExtractedMapTexts } from "./eventCommand";
 import type { ExtractedDataBundle } from "./mainData/types";
 import type { AudioFilesSet, ImageFilesSet, OtherFilesSet } from "./note/types";
-import { normalizeBundleNoteTexts } from "./noteNormarize";
+import { normalizeBundleNoteTexts, normalizeMapNotes } from "./noteNormarize";
 
 const BGM1 = "bgm1";
 const BGM2 = "bgm2";
@@ -50,8 +51,6 @@ const ohterFiles: OtherFilesSet = {
   movies: new Set([MOVIE1]),
 };
 
-const MESSAGE1 = "message1";
-
 const KEY_POWER = "power";
 
 const bundle: ExtractedDataBundle = {
@@ -81,12 +80,7 @@ const bundle: ExtractedDataBundle = {
       ],
     },
   ],
-  items: [
-    {
-      main: [],
-      note: [{ id: 7, key: "message", value: MESSAGE1 }],
-    },
-  ],
+  items: [],
   classes: [{ main: [], note: [] }],
 };
 
@@ -144,8 +138,21 @@ const bundle2: ExtractedDataBundle = {
     },
   ],
 
-  skills: [],
-  states: [],
+  skills: [
+    {
+      main: [
+        { id: 6, key: "name", value: "skill6" },
+        { id: 6, key: "description", value: "This is a sturdy armor." },
+      ],
+      note: [{ id: 6, key: "special", value: "abc" }],
+    },
+  ],
+  states: [
+    {
+      main: [{ id: 6, key: "name", value: "skill6" }],
+      note: [{ id: 6, key: "special", value: "abc" }],
+    },
+  ],
   items: [],
   classes: [],
 };
@@ -178,5 +185,54 @@ describe("ddd", () => {
       ohterFiles,
     );
     expect(result).toEqual(bundle2);
+  });
+});
+
+describe("ddd2", () => {
+  test("normalizeMapNotes", () => {
+    const map: ExtractedMapTexts = {
+      displayedName: "map1",
+      note: "dummy note",
+      noteItems: [],
+      events: [
+        {
+          commands: [],
+          eventId: 1,
+          name: "event1",
+          pageIndex: 0,
+          note: "dummy event note",
+          noteItems: [
+            { key: "power", value: "12345" },
+            { key: "face", value: FACE1 },
+            { key: "b", value: "true" },
+          ],
+        },
+      ],
+    };
+    const result = normalizeMapNotes([map], audioFiles, imageFiles, ohterFiles);
+    expect(result[0].noteItems).toEqual([]);
+    expect(result.length).toBe(1);
+  });
+  test("", () => {
+    const map: ExtractedMapTexts = {
+      displayedName: "map1",
+      note: "dummy note",
+      noteItems: [{ key: "msg", value: "message text" }],
+      events: [
+        {
+          commands: [{ code: 102, value: "abc", paramIndex: 0 }],
+          eventId: 1,
+          name: "event1",
+          pageIndex: 0,
+          note: "dummy event note",
+          noteItems: [
+            { key: "desc", value: "it is enemy" },
+            { key: "trait", value: "xyz" },
+          ],
+        },
+      ],
+    };
+    const result = normalizeMapNotes([map], audioFiles, imageFiles, ohterFiles);
+    expect(result).toEqual([map]);
   });
 });

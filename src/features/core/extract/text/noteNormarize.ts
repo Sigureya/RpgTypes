@@ -1,6 +1,4 @@
-import type { NoteReadResult } from "@RpgTypes/rmmz";
 import type {
-  ExtractedMapEventTexts,
   ExtractedMapTexts,
   PluginCommandMzParameter,
 } from "./eventCommand";
@@ -22,15 +20,15 @@ import type {
   SummarizedNote,
 } from "./note/types";
 
-export const mmmm = <Command extends PluginCommandMzParameter>(
+export const normalizeMapNotes = <Command extends PluginCommandMzParameter>(
   map: readonly ExtractedMapTexts<Command>[],
   audioFiles: AudioFilesSet,
   imageFiles: ImageFilesSet,
   other: OtherFilesSet,
 ): ExtractedMapTexts<Command>[] => {
   const list = extractAllMapNotes(map);
-  const s = summarizeNoteKinds(list, audioFiles, imageFiles, other);
-  const keysSet: Set<string> = stringLikeNoteKeys(s);
+  const summarized = summarizeNoteKinds(list, audioFiles, imageFiles, other);
+  const keysSet: Set<string> = stringLikeNoteKeys(summarized);
   return map.map((m) =>
     filterNoteFromMapTexts(m, (note) => keysSet.has(note.key)),
   );
