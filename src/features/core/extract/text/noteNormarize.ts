@@ -6,10 +6,10 @@ import {
   extractAllMapNotes,
   filterNoteFromMapTexts,
 } from "./eventCommand/note";
+import { filterNotesInExtractedText } from "./mainData/note";
 import type {
   ExtractedDataBundle,
   ExtractedNoteList,
-  ExtractedText,
   ExtractedTextItem,
 } from "./mainData/types";
 import { stringLikeNoteKeys, summarizeNoteKinds } from "./note/note";
@@ -48,35 +48,17 @@ export const normalizeBundleNoteTexts = (
     other,
   );
   const keysSet: Set<string> = stringLikeNoteKeys(summarized);
+  const fn = (note: ExtractedTextItem): boolean => keysSet.has(note.key);
   return {
-    actors: filterNotesInExtractedText(bundle.actors, keysSet),
-    enemies: filterNotesInExtractedText(bundle.enemies, keysSet),
-    weapons: filterNotesInExtractedText(bundle.weapons, keysSet),
-    armors: filterNotesInExtractedText(bundle.armors, keysSet),
-    skills: filterNotesInExtractedText(bundle.skills, keysSet),
-    states: filterNotesInExtractedText(bundle.states, keysSet),
-    items: filterNotesInExtractedText(bundle.items, keysSet),
-    classes: filterNotesInExtractedText(bundle.classes, keysSet),
+    actors: filterNotesInExtractedText(bundle.actors, fn),
+    enemies: filterNotesInExtractedText(bundle.enemies, fn),
+    weapons: filterNotesInExtractedText(bundle.weapons, fn),
+    armors: filterNotesInExtractedText(bundle.armors, fn),
+    skills: filterNotesInExtractedText(bundle.skills, fn),
+    states: filterNotesInExtractedText(bundle.states, fn),
+    items: filterNotesInExtractedText(bundle.items, fn),
+    classes: filterNotesInExtractedText(bundle.classes, fn),
   };
-};
-
-const filterNotesInExtractedText = <T>(
-  list: readonly ExtractedText<T>[],
-  set: ReadonlySet<string>,
-): ExtractedText<T>[] => {
-  return list
-    .map((item): ExtractedText<T> => {
-      const filteredNote = item.note.filter((note) => set.has(note.key));
-      return {
-        main: item.main,
-        note: filteredNote,
-      };
-    })
-    .filter(hasData);
-};
-
-const hasData = <T>(item: ExtractedText<T>): boolean => {
-  return item.note.length > 0 || item.main.length > 0;
 };
 
 const flattenAllBundleNotes = (
