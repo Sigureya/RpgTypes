@@ -1,11 +1,11 @@
 import { test, expect, describe } from "vitest";
-import type { NoteReadResult } from "@RpgTypes/rmmz";
 import { categorizeNote } from "./note";
+import type { XX } from "./types";
 
 interface TestCase {
   name: string;
-  input: NoteReadResult[];
-  expected: Map<string, NoteReadResult[]>;
+  input: XX[];
+  expected: Map<string, XX[]>;
 }
 
 const runTestCases = (testCase: TestCase) => {
@@ -27,7 +27,7 @@ const testCases: TestCase[] = [
       { key: "category1", value: "value1" },
       { key: "category1", value: "value2" },
     ],
-    expected: new Map([
+    expected: new Map<string, XX[]>([
       [
         "category1",
         [

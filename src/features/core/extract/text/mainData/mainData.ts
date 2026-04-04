@@ -22,11 +22,14 @@ export const extractTextData = <T extends { note: string; id: number }>(
 ) => {
   return {
     note: extractNoteText(data),
-    main: keys.map((k) => ({
-      key: k,
-      text: data[k],
-      id: data.id,
-    })),
+    main: keys.map(
+      (k) =>
+        ({
+          key: k,
+          value: data[k],
+          id: data.id,
+        }) satisfies Record<keyof ExtractedTextItem, unknown>,
+    ),
   };
 };
 
@@ -38,7 +41,7 @@ export const extractNoteText = (data: {
     data.note,
     (key, value): ExtractedTextItem => ({
       key: key,
-      text: value,
+      value: value,
       id: data.id,
     }),
   );
