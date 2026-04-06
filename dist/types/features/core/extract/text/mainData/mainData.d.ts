@@ -10,7 +10,7 @@ export declare const extractTextData: <T extends {
     note: ExtractedTextItem[];
     main: {
         key: Extract<{ [K in keyof T]: T[K] extends string ? K : never; }[keyof T], string>;
-        text: (T & {
+        value: (T & {
             id: number;
         })[Extract<{ [K in keyof T]: T[K] extends string ? K : never; }[keyof T], string>];
         id: number;
