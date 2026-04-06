@@ -1,8 +1,8 @@
 import { test, expect, describe } from "vitest";
-import type { ExtractedMapTexts } from "./eventCommand";
-import type { ExtractedDataBundle } from "./mainData/types";
 import type { AudioFilesSet, ImageFilesSet, OtherFilesSet } from "./note/types";
 import { normalizeBundleNoteTexts, normalizeMapNotes } from "./noteNormarize";
+import type { ExtractedMapTexts } from "./text/eventCommand";
+import type { ExtractedDataBundle } from "./text/mainData/types";
 
 const BGM1 = "bgm1";
 const BGM2 = "bgm2";
@@ -157,7 +157,7 @@ const bundle2: ExtractedDataBundle = {
   classes: [],
 };
 
-describe("ddd", () => {
+describe("normalizeBundleNoteTexts", () => {
   test("no matching kinds", () => {
     const result = normalizeBundleNoteTexts(
       bundle,
@@ -188,7 +188,7 @@ describe("ddd", () => {
   });
 });
 
-describe("ddd2", () => {
+describe("normalizeMapNotes", () => {
   test("normalizeMapNotes", () => {
     const map: ExtractedMapTexts = {
       displayedName: "map1",
@@ -213,7 +213,7 @@ describe("ddd2", () => {
     expect(result[0].noteItems).toEqual([]);
     expect(result.length).toBe(1);
   });
-  test("", () => {
+  test("normalizeMapNotes leaves map unchanged when notes contain only non-file values", () => {
     const map: ExtractedMapTexts = {
       displayedName: "map1",
       note: "dummy note",
