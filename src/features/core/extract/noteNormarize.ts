@@ -1,17 +1,3 @@
-import type {
-  ExtractedMapTexts,
-  PluginCommandMzParameter,
-} from "./eventCommand";
-import {
-  extractAllMapNotes,
-  filterNoteFromMapTexts,
-} from "./eventCommand/note";
-import { filterNotesInExtractedText } from "./mainData/note";
-import type {
-  ExtractedDataBundle,
-  ExtractedNoteList,
-  ExtractedTextItem,
-} from "./mainData/types";
 import { stringLikeNoteKeys, summarizeNoteKinds } from "./note/note";
 import type {
   AudioFilesSet,
@@ -19,6 +5,20 @@ import type {
   OtherFilesSet,
   SummarizedNote,
 } from "./note/types";
+import type {
+  ExtractedMapTexts,
+  PluginCommandMzParameter,
+} from "./text/eventCommand";
+import {
+  extractAllMapNotes,
+  filterNoteFromMapTexts,
+} from "./text/eventCommand/note";
+import { filterNotesInExtractedText } from "./text/mainData/note";
+import type {
+  ExtractedDataBundle,
+  ExtractedNoteList,
+  ExtractedTextItem,
+} from "./text/mainData/types";
 
 export const normalizeMapNotes = <Command extends PluginCommandMzParameter>(
   map: readonly ExtractedMapTexts<Command>[],
@@ -34,12 +34,12 @@ export const normalizeMapNotes = <Command extends PluginCommandMzParameter>(
   );
 };
 
-export const normalizeBundleNoteTexts = (
+export const nonTextNoteKeys = (
   bundle: ExtractedDataBundle,
   audioFiles: AudioFilesSet,
   imageFiles: ImageFilesSet,
   other: OtherFilesSet,
-): ExtractedDataBundle => {
+): Set<string> => {
   const list = flattenAllBundleNotes(bundle);
   const summarized: SummarizedNote[] = summarizeNoteKinds(
     list,
@@ -47,7 +47,16 @@ export const normalizeBundleNoteTexts = (
     imageFiles,
     other,
   );
-  const keysSet: Set<string> = stringLikeNoteKeys(summarized);
+  return stringLikeNoteKeys(summarized);
+};
+
+export const normalizeBundleNoteTexts = (
+  bundle: ExtractedDataBundle,
+  audioFiles: AudioFilesSet,
+  imageFiles: ImageFilesSet,
+  other: OtherFilesSet,
+): ExtractedDataBundle => {
+  const keysSet = nonTextNoteKeys(bundle, audioFiles, imageFiles, other);
   const fn = (note: ExtractedTextItem): boolean => keysSet.has(note.key);
   return {
     actors: filterNotesInExtractedText(bundle.actors, fn),

@@ -1,8 +1,8 @@
 import { test, expect, describe } from "vitest";
-import type { ExtractedMapTexts } from "./eventCommand";
-import type { ExtractedDataBundle } from "./mainData/types";
 import type { AudioFilesSet, ImageFilesSet, OtherFilesSet } from "./note/types";
 import { normalizeBundleNoteTexts, normalizeMapNotes } from "./noteNormarize";
+import type { ExtractedMapTexts } from "./text/eventCommand";
+import type { ExtractedDataBundle } from "./text/mainData/types";
 
 const BGM1 = "bgm1";
 const BGM2 = "bgm2";
