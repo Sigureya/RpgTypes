@@ -157,7 +157,7 @@ const bundle2: ExtractedDataBundle = {
   classes: [],
 };
 
-describe("ddd", () => {
+describe("normalizeBundleNoteTexts", () => {
   test("no matching kinds", () => {
     const result = normalizeBundleNoteTexts(
       bundle,
@@ -188,7 +188,7 @@ describe("ddd", () => {
   });
 });
 
-describe("ddd2", () => {
+describe("normalizeMapNotes", () => {
   test("normalizeMapNotes", () => {
     const map: ExtractedMapTexts = {
       displayedName: "map1",
@@ -213,7 +213,7 @@ describe("ddd2", () => {
     expect(result[0].noteItems).toEqual([]);
     expect(result.length).toBe(1);
   });
-  test("", () => {
+  test("normalizeMapNotes leaves map unchanged when notes contain only non-file values", () => {
     const map: ExtractedMapTexts = {
       displayedName: "map1",
       note: "dummy note",
