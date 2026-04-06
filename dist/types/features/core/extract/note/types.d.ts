@@ -8,6 +8,10 @@ export interface AudioFilesSet {
     me: ReadonlySet<string>;
     se: ReadonlySet<string>;
 }
+export interface XX {
+    key: string;
+    value: string;
+}
 export interface SummarizedNote {
     key: string;
     kinds: string[];
