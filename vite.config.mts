@@ -42,6 +42,7 @@ export default defineConfig(({ mode }) => {
     features: path.resolve(srcDir, "features/index.ts"),
     libs: path.resolve(srcDir, "libs/index.ts"),
     rmmz: path.resolve(srcDir, "rmmz/index.ts"),
+    mock: path.resolve(srcDir, "mock/index.ts"),
   };
 
   return {

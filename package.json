@@ -39,6 +39,11 @@
     },
     "./rmmzRuntime": {
       "types": "./dist/types/rmmzRuntime/index.d.ts"
+    },
+    "./mock": {
+      "types": "./dist/types/mock/index.d.ts",
+      "import": "./dist/mock/mock.es.js",
+      "require": "./dist/mock/mock.cjs.js"
     }
   },
   "files": [
