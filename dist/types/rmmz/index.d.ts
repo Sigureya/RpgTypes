@@ -2,6 +2,7 @@ export * from './eventCommand';
 export * from './folderNames';
 export * from './rpg';
 export * from './system';
+export type * from './types';
 export * from './utils';
 export type { Data_CommonEvent, Data_Troop } from './events';
 export { extractFileName } from './utils/pluginName';
