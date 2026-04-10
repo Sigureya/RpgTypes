@@ -11,6 +11,18 @@ export const extractAllMapNotes = (
   return map.map(n2).flat(4);
 };
 
+export const extractAllMapNotesEx = <T>(
+  map: ReadonlyArray<T>,
+  fn: (map: T) => ExtractedMapTexts,
+): NoteReadResult[] => {
+  return map
+    .map((m) => {
+      const mm = fn(m);
+      return n2(mm);
+    })
+    .flat(4);
+};
+
 const n2 = (
   map: ExtractedMapTexts,
 ): [body: NoteReadResult[], events: NoteReadResult[][]] => {
