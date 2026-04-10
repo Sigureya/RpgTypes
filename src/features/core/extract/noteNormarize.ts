@@ -1,4 +1,4 @@
-import type { NoteReadResult } from "@RpgTypes/rmmz";
+import type { MapFileInfo, NoteReadResult } from "@RpgTypes/rmmz";
 import { stringLikeNoteKeys, summarizeNoteKinds } from "./note/note";
 import type {
   AudioFilesSet,
@@ -21,30 +21,39 @@ import type {
   ExtractedTextItem,
 } from "./text/mainData/types";
 
-export const normalizeMapNotes = <Command extends PluginCommandMzParameter>(
-  map: readonly ExtractedMapTexts<Command>[],
-  audioFiles: AudioFilesSet,
-  imageFiles: ImageFilesSet,
-  other: OtherFilesSet,
-): ExtractedMapTexts<Command>[] => {
-  return normalizeMapNotesEx(map, audioFiles, imageFiles, other, (m) => m);
-};
-
-export const normalizeMapNotesEx = <
-  T,
+export const summarizeNoteKindsFromMapFiles = <
   Command extends PluginCommandMzParameter,
 >(
-  map: ReadonlyArray<T>,
+  mapList: readonly MapFileInfo<ExtractedMapTexts<Command>>[],
   audioFiles: AudioFilesSet,
   imageFiles: ImageFilesSet,
   other: OtherFilesSet,
-  fn: (map: T) => ExtractedMapTexts<Command>,
-): ExtractedMapTexts<Command>[] => {
-  const list: NoteReadResult[] = extractAllMapNotesEx(map, fn);
-  const summarized = summarizeNoteKinds(list, audioFiles, imageFiles, other);
+): SummarizedNote[] => {
+  const list: NoteReadResult[] = extractAllMapNotesEx(mapList, (m) => m.map);
+  return summarizeNoteKinds(list, audioFiles, imageFiles, other);
+};
+
+export const normalizeNoteFromMapFiles = <
+  Command extends PluginCommandMzParameter,
+>(
+  mapList: readonly MapFileInfo<ExtractedMapTexts<Command>>[],
+  audioFiles: AudioFilesSet,
+  imageFiles: ImageFilesSet,
+  other: OtherFilesSet,
+): MapFileInfo<ExtractedMapTexts<Command>>[] => {
+  const summarized = summarizeNoteKindsFromMapFiles(
+    mapList,
+    audioFiles,
+    imageFiles,
+    other,
+  );
   const keysSet: Set<string> = stringLikeNoteKeys(summarized);
-  return map.map((m) =>
-    filterNoteFromMapTexts(fn(m), (note) => keysSet.has(note.key)),
+  return mapList.map(
+    (mapData): MapFileInfo<ExtractedMapTexts<Command>> => ({
+      filename: mapData.filename,
+      editingName: mapData.editingName,
+      map: filterNoteFromMapTexts(mapData.map, (note) => keysSet.has(note.key)),
+    }),
   );
 };
 
