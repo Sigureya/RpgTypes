@@ -11,7 +11,7 @@ const ra = (a, e, t) => a.filter(((s) => s.code === K || s.code === W || s.code 
     includesEquip: a.parameters[4]
   } : {};
   return { itemKind: Ja[a.code], dataId: Ba(a), code: a.code, commandNameMZ: t(a.code), operation: r, ...n, ...s };
-}, na = (a) => !!a, ct = (a, e, t) => ({
+}, na = (a) => !!a, lt = (a, e, t) => ({
   data: a,
   eventId: e,
   pageIndex: t
@@ -19,18 +19,18 @@ const ra = (a, e, t) => a.filter(((s) => s.code === K || s.code === W || s.code 
   data: s,
   eventId: t.id,
   pageIndex: e
-}))), _ = (a, e) => a.pages.map(((t, s) => e(t, s, a))), Ga = (a, e) => a.events.filter(na).map(((t) => _(t, e))), ma = (a, e) => a.events.filter(na).flatMap(((t) => _(t, e))), lt = (a, e) => a.map(((t) => _(t, e))), za = (a, e) => a.flatMap(((t) => _(t, e))), dt = (a, e) => a.map(((t) => e(t, 0, t))), pt = (a) => Ga(a, qa).flat(2), oa = (a, e) => {
+}))), _ = (a, e) => a.pages.map(((t, s) => e(t, s, a))), Ga = (a, e) => a.events.filter(na).map(((t) => _(t, e))), ma = (a, e) => a.events.filter(na).flatMap(((t) => _(t, e))), dt = (a, e) => a.map(((t) => _(t, e))), za = (a, e) => a.flatMap(((t) => _(t, e))), pt = (a, e) => a.map(((t) => e(t, 0, t))), ut = (a) => Ga(a, qa).flat(2), oa = (a, e) => {
   const t = e(a.list);
   return { ...a, list: t };
-}, ia = (a, e) => ({ ...a, pages: a.pages.map(((t) => oa(t, e))) }), ut = (a, e) => ({
+}, ia = (a, e) => ({ ...a, pages: a.pages.map(((t) => oa(t, e))) }), gt = (a, e) => ({
   ...a,
   events: a.events.map(((t) => t ? ia(t, e) : null))
-}), gt = (a, e) => a.map(((t) => oa(t, e))), ht = (a, e) => a.map(((t) => ia(t, e))), yt = (a, e, t) => ma(a.map, ((s, r, n) => ({
+}), ht = (a, e) => a.map(((t) => oa(t, e))), yt = (a, e) => a.map(((t) => ia(t, e))), ft = (a, e, t) => ma(a.map, ((s, r, n) => ({
   ...Ha(s),
   commands: ra(s.list, e, t),
   eventName: n.name,
   pageIndex: r
-}))), Ha = (a) => a.conditions.itemId > 0 && a.conditions.itemValid ? { pageCondition: { itemId: a.conditions.itemId } } : {}, ft = (a, e, t) => za(a, ((s, r, n) => ({
+}))), Ha = (a) => a.conditions.itemId > 0 && a.conditions.itemValid ? { pageCondition: { itemId: a.conditions.itemId } } : {}, bt = (a, e, t) => za(a, ((s, r, n) => ({
   commands: ra(s.list, e, t),
   eventName: n.name,
   troopId: n.id,
@@ -94,19 +94,22 @@ const ra = (a, e, t) => a.filter(((s) => s.code === K || s.code === W || s.code 
 }), w = (a, e) => a.map(((t) => {
   const s = t.note.filter(e);
   return { main: t.main, note: s };
-})).filter(ae), ae = (a) => a.note.length > 0 || a.main.length > 0, bt = (a, e, t, s) => {
-  const r = ((o) => o.map(Ka).flat(4))(a), n = la(r, e, t, s), m = ca(n);
-  return a.map(((o) => ((i, f) => ({
-    displayedName: i.displayedName,
-    note: i.note,
-    noteItems: i.noteItems.filter(f),
-    events: i.events.map(((v) => Wa(v, f)))
-  }))(o, ((i) => m.has(i.key)))));
-}, ee = (a, e, t, s) => {
-  const r = te(a), n = la(r, e, t, s);
+})).filter(ae), ae = (a) => a.note.length > 0 || a.main.length > 0, vt = (a, e, t, s) => ee(a, e, t, s, ((r) => r)), ee = (a, e, t, s, r) => {
+  const n = ((i, l) => i.map(((u) => {
+    const c = l(u);
+    return Ka(c);
+  })).flat(4))(a, r), m = la(n, e, t, s), o = ca(m);
+  return a.map(((i) => ((l, u) => ({
+    displayedName: l.displayedName,
+    note: l.note,
+    noteItems: l.noteItems.filter(u),
+    events: l.events.map(((c) => Wa(c, u)))
+  }))(r(i), ((l) => o.has(l.key)))));
+}, te = (a, e, t, s) => {
+  const r = se(a), n = la(r, e, t, s);
   return ca(n);
-}, vt = (a, e, t, s) => {
-  const r = ee(a, e, t, s), n = (m) => r.has(m.key);
+}, xt = (a, e, t, s) => {
+  const r = te(a, e, t, s), n = (m) => r.has(m.key);
   return {
     actors: w(a.actors, n),
     enemies: w(a.enemies, n),
@@ -117,39 +120,39 @@ const ra = (a, e, t) => a.filter(((s) => s.code === K || s.code === W || s.code 
     items: w(a.items, n),
     classes: w(a.classes, n)
   };
-}, te = (a) => [k(a.actors), k(a.skills), k(a.items), k(a.weapons), k(a.armors), k(a.classes), k(a.states), k(a.enemies)].flat(3), k = (a) => a.map(((e) => e.note)), S = (a, e) => ({
-  note: se(a),
+}, se = (a) => [k(a.actors), k(a.skills), k(a.items), k(a.weapons), k(a.armors), k(a.classes), k(a.states), k(a.enemies)].flat(3), k = (a) => a.map(((e) => e.note)), S = (a, e) => ({
+  note: re(a),
   main: e.map(((t) => ({ key: t, value: a[t], id: a.id })))
-}), se = (a) => Sa(a.note, ((e, t) => ({
+}), re = (a) => Sa(a.note, ((e, t) => ({
   key: e,
   value: t,
   id: a.id
-}))), xt = (a) => S(a, ["name", "nickname", "profile"]), Nt = (a) => S(a, ["name"]), Tt = (a) => S(a, ["name"]), It = (a) => S(a, ["name", "description", "message1", "message2"]), wt = (a) => S(a, ["name", "description"]), kt = (a) => S(a, ["name", "description"]), Bt = (a) => S(a, ["name", "description"]), St = (a) => S(a, ["name", "message1", "message2", "message3", "message4"]), re = (a, e) => {
+}))), Nt = (a) => S(a, ["name", "nickname", "profile"]), Tt = (a) => S(a, ["name"]), It = (a) => S(a, ["name"]), wt = (a) => S(a, ["name", "description", "message1", "message2"]), kt = (a) => S(a, ["name", "description"]), Bt = (a) => S(a, ["name", "description"]), St = (a) => S(a, ["name", "description"]), At = (a) => S(a, ["name", "message1", "message2", "message3", "message4"]), ne = (a, e) => {
   const t = a.trimEnd(), s = e.get(t);
   return s ? s.trimEnd() : t;
-}, d = (a, e) => {
+}, p = (a, e) => {
   const t = a.trimEnd(), s = e(t);
   return s ? s.trimEnd() : t;
-}, g = (a, e) => {
+}, y = (a, e) => {
   const t = a.trimEnd(), s = e.replaceText(t);
   return s ? s.trimEnd() : t;
-}, At = (a, e) => {
-  const t = (o) => e.replaceText(o), s = B(a.note, e), r = d(a.name, t), n = d(a.nickname, t), m = d(a.profile, t);
-  return { ...a, name: r, nickname: n, profile: m, note: s };
 }, Ct = (a, e) => {
-  const t = B(a.note, e), s = g(a.name, e);
-  return { ...a, name: s, note: t };
+  const t = (o) => e.replaceText(o), s = B(a.note, e), r = p(a.name, t), n = p(a.nickname, t), m = p(a.profile, t);
+  return { ...a, name: r, nickname: n, profile: m, note: s };
 }, Et = (a, e) => {
-  const t = B(a.note, e), s = g(a.name, e);
+  const t = B(a.note, e), s = y(a.name, e);
   return { ...a, name: s, note: t };
 }, Mt = (a, e) => {
-  const t = B(a.note, e), s = g(a.name, e), r = g(a.description, e), n = g(a.message1, e), m = g(a.message2, e);
-  return { ...a, name: s, description: r, message1: n, message2: m, note: t };
+  const t = B(a.note, e), s = y(a.name, e);
+  return { ...a, name: s, note: t };
 }, $t = (a, e) => {
-  const t = B(a.note, e), s = g(a.name, e), r = g(a.description, e);
-  return { ...a, name: s, description: r, note: t };
+  const t = B(a.note, e), s = y(a.name, e), r = y(a.description, e), n = y(a.message1, e), m = y(a.message2, e);
+  return { ...a, name: s, description: r, message1: n, message2: m, note: t };
 }, Pt = (a, e) => {
-  const t = B(a.note, e), s = g(a.name, e), r = g(a.message1, e), n = g(a.message2, e), m = g(a.message3, e), o = g(a.message4, e);
+  const t = B(a.note, e), s = y(a.name, e), r = y(a.description, e);
+  return { ...a, name: s, description: r, note: t };
+}, Dt = (a, e) => {
+  const t = B(a.note, e), s = y(a.name, e), r = y(a.message1, e), n = y(a.message2, e), m = y(a.message3, e), o = y(a.message4, e);
   return {
     ...a,
     name: s,
@@ -159,29 +162,29 @@ const ra = (a, e, t) => a.filter(((s) => s.code === K || s.code === W || s.code 
     message4: o,
     note: t
   };
-}, ne = (a, e) => {
+}, me = (a, e) => {
   switch (a.code) {
     case O:
-      return oe(a, e);
+      return ie(a, e);
     case $:
-      return ce(a, e);
+      return le(a, e);
     case E:
     case L:
     case j:
     case C:
-      return me(a, e);
+      return oe(a, e);
     case H:
     case z:
     case G:
-      return ie(a, e);
+      return ce(a, e);
     default:
       return a;
   }
-}, me = (a, e) => {
-  const t = d(a.parameters[0], e);
-  return { code: a.code, indent: a.indent, parameters: [t] };
 }, oe = (a, e) => {
-  const t = a.parameters[4] ? d(a.parameters[4], e) : "";
+  const t = p(a.parameters[0], e);
+  return { code: a.code, indent: a.indent, parameters: [t] };
+}, ie = (a, e) => {
+  const t = a.parameters[4] ? p(a.parameters[4], e) : "";
   return Aa({
     facename: a.parameters[0],
     faceIndex: a.parameters[1],
@@ -189,24 +192,24 @@ const ra = (a, e, t) => a.filter(((s) => s.code === K || s.code === W || s.code 
     positionType: a.parameters[3],
     speakerName: t
   }, a.indent);
-}, ie = (a, e) => {
-  const t = d(a.parameters[1], e);
-  return { code: a.code, indent: a.indent, parameters: [a.parameters[0], t] };
 }, ce = (a, e) => {
-  const t = a.parameters[0].map(((s) => d(s, e)));
+  const t = p(a.parameters[1], e);
+  return { code: a.code, indent: a.indent, parameters: [a.parameters[0], t] };
+}, le = (a, e) => {
+  const t = a.parameters[0].map(((s) => p(s, e)));
   return {
     code: $,
     indent: a.indent,
     parameters: [t, a.parameters[1], a.parameters[2], a.parameters[3], a.parameters[4]]
   };
-}, Dt = (a, e, t = `
-`) => le(a, ((s) => e.get(s)), t), le = (a, e, t = `
-`) => Ca(a.note, ((s) => d(s.value, e)), t), jt = (a, e) => da(a, ((t) => re(t, e))), da = (a, e) => ({
-  params: ue(a.params, ((t) => d(t, e))),
-  messages: ge(a.messages, ((t) => d(t, e))),
-  basic: de(a.basic, ((t) => d(t, e))),
-  commands: pe(a.commands, ((t) => d(t, e)))
-}), de = (a, e) => [e(a[0]), e(a[1]), e(a[2]), e(a[3]), e(a[4]), e(a[5]), e(a[6]), e(a[7]), e(a[8]), e(a[9])], pe = (a, e) => [e(a[0]), e(a[1]), e(a[2]), e(a[3]), e(a[4]), e(a[5]), e(a[6]), e(a[7]), e(a[8]), e(a[9]), e(a[10]), e(a[11]), e(a[12]), e(a[13]), e(a[14]), e(a[15]), e(a[16]), e(a[17]), e(a[18]), e(a[19]), "", e(a[21]), e(a[22]), "", e(a[24]), e(a[25])], ue = (a, e) => [e(a[0]), e(a[1]), e(a[2]), e(a[3]), e(a[4]), e(a[5]), e(a[6]), e(a[7]), e(a[8]), e(a[9])], ge = (a, e) => ({
+}, jt = (a, e, t = `
+`) => de(a, ((s) => e.get(s)), t), de = (a, e, t = `
+`) => Ca(a.note, ((s) => p(s.value, e)), t), Rt = (a, e) => da(a, ((t) => ne(t, e))), da = (a, e) => ({
+  params: ge(a.params, ((t) => p(t, e))),
+  messages: he(a.messages, ((t) => p(t, e))),
+  basic: pe(a.basic, ((t) => p(t, e))),
+  commands: ue(a.commands, ((t) => p(t, e)))
+}), pe = (a, e) => [e(a[0]), e(a[1]), e(a[2]), e(a[3]), e(a[4]), e(a[5]), e(a[6]), e(a[7]), e(a[8]), e(a[9])], ue = (a, e) => [e(a[0]), e(a[1]), e(a[2]), e(a[3]), e(a[4]), e(a[5]), e(a[6]), e(a[7]), e(a[8]), e(a[9]), e(a[10]), e(a[11]), e(a[12]), e(a[13]), e(a[14]), e(a[15]), e(a[16]), e(a[17]), e(a[18]), e(a[19]), "", e(a[21]), e(a[22]), "", e(a[24]), e(a[25])], ge = (a, e) => [e(a[0]), e(a[1]), e(a[2]), e(a[3]), e(a[4]), e(a[5]), e(a[6]), e(a[7]), e(a[8]), e(a[9])], he = (a, e) => ({
   actionFailure: e(a.actionFailure),
   actorDamage: e(a.actorDamage),
   actorDrain: e(a.actorDrain),
@@ -260,17 +263,17 @@ const ra = (a, e, t) => a.filter(((s) => s.code === K || s.code === W || s.code 
   touchUI: e(a.touchUI),
   useItem: e(a.useItem),
   victory: e(a.victory)
-}), Rt = (a, e) => ({
+}), Lt = (a, e) => ({
   ...a,
-  gameTitle: d(a.gameTitle, e),
-  currencyUnit: d(a.currencyUnit, e),
+  gameTitle: p(a.gameTitle, e),
+  currencyUnit: p(a.currencyUnit, e),
   elements: M(a.elements, e),
   skillTypes: M(a.skillTypes, e),
   weaponTypes: M(a.weaponTypes, e),
   armorTypes: M(a.armorTypes, e),
   equipTypes: M(a.equipTypes, e),
   terms: da(a.terms, e)
-}), M = (a, e) => a.map(((t) => d(t, e))), pa = (a) => a.map(((e) => e.parameters[0].trimEnd())).join(`
+}), M = (a, e) => a.map(((t) => p(t, e))), pa = (a) => a.map(((e) => e.parameters[0].trimEnd())).join(`
 `).trimEnd();
 class ua {
   constructor(e, t) {
@@ -321,36 +324,36 @@ const V = (a, e, t, s) => {
     n.push(o);
   }
   return { header: r, bodies: n };
-}, he = (a, e) => {
+}, ye = (a, e) => {
   const { bodies: t, header: s } = ((r, n) => V(r, n, ((m) => m.code === L), ((m) => m.code === j)))(a, e);
-  return ye(s) ? new Y(j, s, t) : new ua(s, t);
-}, ye = (a) => a.parameters[0] === "選択肢ヘルプ", fe = (a, e) => {
+  return fe(s) ? new Y(j, s, t) : new ua(s, t);
+}, fe = (a) => a.parameters[0] === "選択肢ヘルプ", be = (a, e) => {
   const { bodies: t, header: s } = ((r, n) => V(r, n, ((m) => m.code === O), ((m) => m.code === E)))(a, e);
   return new Y(E, s, t);
-}, be = (a, e) => {
+}, ve = (a, e) => {
   const { bodies: t, header: s } = ((r, n) => V(r, n, ((m) => m.code === P), ((m) => m.code === ea)))(a, e);
   return new ua(s, t);
-}, ve = (a, e) => {
+}, xe = (a, e) => {
   const { bodies: t, header: s } = ((r, n) => V(r, n, ((m) => m.code === ta), ((m) => m.code === C)))(a, e);
   return new Y(C, s, t);
-}, xe = {
-  [O]: (a, e, t) => t.showMessage(fe(a, e), e, a),
-  [P]: (a, e, t) => t.script(be(a, e), e, a),
-  [L]: (a, e, t) => t.comment(he(a, e), e, a),
-  [ta]: (a, e, t) => t.showScrollingText(ve(a, e), e, a)
-}, ga = (a) => xe[a], Ne = (a) => ((e, t) => ({
+}, Ne = {
+  [O]: (a, e, t) => t.showMessage(be(a, e), e, a),
+  [P]: (a, e, t) => t.script(ve(a, e), e, a),
+  [L]: (a, e, t) => t.comment(ye(a, e), e, a),
+  [ta]: (a, e, t) => t.showScrollingText(xe(a, e), e, a)
+}, ga = (a) => Ne[a], Te = (a) => ((e, t) => ({
   code: e.code,
   paramIndex: t,
   value: e.parameters[t]
-}))(a, 1), Lt = (a) => ha(a, (() => [])), F = (a, e) => ha(a, e), ha = (a, e) => a.flatMap(((t, s) => Te(t, s, a, e))).filter(((t) => t !== null)), Te = (a, e, t, s) => {
+}))(a, 1), _t = (a) => ha(a, (() => [])), F = (a, e) => ha(a, e), ha = (a, e) => a.flatMap(((t, s) => Ie(t, s, a, e))).filter(((t) => t !== null)), Ie = (a, e, t, s) => {
   if (a.code === $) return ((n) => n.parameters[0].map(((m, o) => ({ code: 102, paramIndex: o, value: m }))))(a);
   const r = ga(a.code);
   if (r) {
-    const n = r(t, e, Ie);
+    const n = r(t, e, we);
     if (n !== void 0) return [n];
   }
-  return a.code === z || a.code === H || a.code === G ? Ne(a) : a.code === R ? s(a) : null;
-}, Ie = {
+  return a.code === z || a.code === H || a.code === G ? Te(a) : a.code === R ? s(a) : null;
+}, we = {
   comment: (a) => ({ code: L, paramIndex: 0, value: a.getBodyText() }),
   showMessage: (a) => {
     return {
@@ -363,36 +366,36 @@ const V = (a, e, t, s) => {
   },
   script: (a) => ((e) => ({ code: P, paramIndex: 0, value: e.getBodyText() }))(a),
   showScrollingText: (a) => ((e) => ({ code: C, paramIndex: 0, value: e.getBodyText() }))(a)
-}, we = (a, e = () => []) => ({ eventId: a.id, commands: F(a.list, e) }), ke = (a, e = () => []) => a.pages.map(((t, s) => ({
+}, ke = (a, e = () => []) => ({ eventId: a.id, commands: F(a.list, e) }), Be = (a, e = () => []) => a.pages.map(((t, s) => ({
   eventId: a.id,
   pageIndex: s,
   commands: F(t.list, e)
-}))), Be = (a, e = () => []) => ({ note: a.note, noteItems: Z(a.note), displayedName: a.displayName, events: Se(a, e) }), Se = (a, e) => ma(a, ((t, s, r) => ({
+}))), Se = (a, e = () => []) => ({ note: a.note, noteItems: Z(a.note), displayedName: a.displayName, events: Ae(a, e) }), Ae = (a, e) => ma(a, ((t, s, r) => ({
   eventId: r.id,
   pageIndex: s,
   commands: F(t.list, e),
   note: r.note,
   noteItems: Z(r.note),
   name: r.name
-}))), ya = (a) => ((e) => e.kind.endsWith("[]"))(a.attr), fa = (a) => a.kind === "struct", ba = (a) => a.attr.kind === "struct[]", Ae = (a) => va[a.kind.replace("[]", "")].type === "number", Ce = (a) => va[a.kind.replace("[]", "")].type === "string", A = {
+}))), ya = (a) => ((e) => e.kind.endsWith("[]"))(a.attr), fa = (a) => a.kind === "struct", ba = (a) => a.attr.kind === "struct[]", Ce = (a) => va[a.kind.replace("[]", "")].type === "number", Ee = (a) => va[a.kind.replace("[]", "")].type === "string", A = {
   type: "string",
   hasText: !0
-}, b = { type: "number", hasText: !1 }, y = { type: "number", hasText: !1 }, va = {
+}, v = { type: "number", hasText: !1 }, b = { type: "number", hasText: !1 }, va = {
   string: A,
   number: { type: "number", hasText: !1 },
   boolean: { type: "boolean" },
-  armor: b,
-  actor: b,
-  class: b,
-  enemy: b,
-  skill: b,
-  state: b,
-  item: b,
-  weapon: b,
-  common_event: b,
-  switch: b,
-  variable: b,
-  troop: b,
+  armor: v,
+  actor: v,
+  class: v,
+  enemy: v,
+  skill: v,
+  state: v,
+  item: v,
+  weapon: v,
+  common_event: v,
+  switch: v,
+  variable: v,
+  troop: v,
   multiline_string: A,
   file: { type: "string", hasText: !1 },
   "file[]": {
@@ -405,24 +408,24 @@ const V = (a, e, t, s) => {
   select: A,
   any: A,
   struct: { type: "struct" },
-  "actor[]": y,
-  "enemy[]": y,
-  "class[]": y,
-  "skill[]": y,
-  "state[]": y,
-  "item[]": y,
-  "weapon[]": y,
-  "common_event[]": y,
-  "troop[]": y,
-  "armor[]": y,
-  "switch[]": y,
-  "variable[]": y,
-  "number[]": y
+  "actor[]": b,
+  "enemy[]": b,
+  "class[]": b,
+  "skill[]": b,
+  "state[]": b,
+  "item[]": b,
+  "weapon[]": b,
+  "common_event[]": b,
+  "troop[]": b,
+  "armor[]": b,
+  "switch[]": b,
+  "variable[]": b,
+  "number[]": b
 };
-function Ee(a) {
-  return Me(a, ((e) => !0), ((e) => !0));
+function Me(a) {
+  return $e(a, ((e) => !0), ((e) => !0));
 }
-const Me = (a, e, t) => {
+const $e = (a, e, t) => {
   const s = [], r = [], n = [], m = [];
   return a.forEach(((o) => {
     if (fa(o.attr)) s.push({ name: o.name, attr: o.attr });
@@ -432,50 +435,50 @@ const Me = (a, e, t) => {
     } else e(o) && n.push(o);
   })), { structs: s, structArrays: r, scalars: n, scalarArrays: m };
 };
-function $e(a) {
+function Pe(a) {
   const e = a.map(((t) => [t.name, t.attr]));
   return Object.fromEntries(e);
 }
-const Pe = (a, e) => {
+const De = (a, e) => {
   if (a.length !== 0) return `${e}[${a.map(((t) => `"${t.name}"`)).join(",")}]`;
-}, De = (a, e) => a.map(((t) => ({ path: `${e}["${t.name}"][*]`, param: t }))), xa = {
+}, je = (a, e) => a.map(((t) => ({ path: `${e}["${t.name}"][*]`, param: t }))), xa = {
   undefinedStruct: "undefined_struct",
   cyclicStruct: "cyclic_struct"
 };
 function Na(a, e, t, s) {
   const r = { items: [], errs: [], frames: [{ schemaName: a, basePath: e, ancestry: [] }] }, n = Math.max(1, 3 * t.size + 5), m = Array.from({
     length: n
-  }).reduce(((o) => o.frames.length === 0 ? o : (function(i, f, v) {
+  }).reduce(((o) => o.frames.length === 0 ? o : (function(i, l, u) {
     if (i.frames.length === 0) return i;
     const c = i.frames[i.frames.length - 1], x = i.frames.slice(0, -1);
-    if (c.ancestry.includes(c.schemaName)) return { frames: x, items: i.items, errs: [...i.errs, { code: v.cyclicStruct, path: c.basePath }] };
-    const p = f.get(c.schemaName);
-    if (!p) return {
+    if (c.ancestry.includes(c.schemaName)) return { frames: x, items: i.items, errs: [...i.errs, { code: u.cyclicStruct, path: c.basePath }] };
+    const g = l.get(c.schemaName);
+    if (!g) return {
       frames: x,
       items: i.items,
-      errs: [...i.errs, { code: v.undefinedStruct, path: c.basePath }]
+      errs: [...i.errs, { code: u.undefinedStruct, path: c.basePath }]
     };
-    const N = (function(h, u) {
-      const l = h.ancestry.concat(h.schemaName), T = h.basePath;
-      return [...u.structs.map(((I) => ({
+    const N = (function(f, h) {
+      const d = f.ancestry.concat(f.schemaName), T = f.basePath;
+      return [...h.structs.map(((I) => ({
         schemaName: I.attr.struct,
         basePath: `${T}["${I.name}"]`,
-        ancestry: l
-      }))), ...u.structArrays.map(((I) => ({ schemaName: I.attr.struct, basePath: `${T}["${I.name}"][*]`, ancestry: l })))].reverse();
-    })(c, p);
-    if (p.scalars.length > 0 || p.scalarArrays.length > 0) {
-      const h = (function(u, { path: l, structName: T }) {
+        ancestry: d
+      }))), ...h.structArrays.map(((I) => ({ schemaName: I.attr.struct, basePath: `${T}["${I.name}"][*]`, ancestry: d })))].reverse();
+    })(c, g);
+    if (g.scalars.length > 0 || g.scalarArrays.length > 0) {
+      const f = (function(h, { path: d, structName: T }) {
         return {
           category: "struct",
-          objectSchema: $e(u.scalars),
+          objectSchema: Pe(h.scalars),
           name: T,
-          scalarArrays: De(u.scalarArrays, l),
-          scalarsPath: u.scalars.length > 0 ? Pe(u.scalars, l) : void 0
+          scalarArrays: je(h.scalarArrays, d),
+          scalarsPath: h.scalars.length > 0 ? De(h.scalars, d) : void 0
         };
-      })(p, { path: c.basePath, structName: c.schemaName });
+      })(g, { path: c.basePath, structName: c.schemaName });
       return x.push(...N), {
         frames: x,
-        items: [...i.items, h],
+        items: [...i.items, f],
         errs: i.errs
       };
     }
@@ -483,7 +486,7 @@ function Na(a, e, t, s) {
   })(o, t, s)), r);
   return { items: m.items, errors: m.errs };
 }
-const je = (a, e, t, s = xa) => Na(a.attr.struct, `${e}["${a.name}"]`, t, s), Re = (a, e, t, s = xa) => Na(a.attr.struct, `${e}["${a.name}"][*]`, t, s), Le = (a, e, t, s) => ((r) => fa(r.attr))(t) ? Fe(a, t, s) : ba(t) ? Je(a, t, s) : ya(t) ? _e(a, e, t) : Ve(a, e, t), _e = (a, e, t) => ({
+const Re = (a, e, t, s = xa) => Na(a.attr.struct, `${e}["${a.name}"]`, t, s), Le = (a, e, t, s = xa) => Na(a.attr.struct, `${e}["${a.name}"][*]`, t, s), _e = (a, e, t, s) => ((r) => fa(r.attr))(t) ? Je(a, t, s) : ba(t) ? Ue(a, t, s) : ya(t) ? Ve(a, e, t) : Fe(a, e, t), Ve = (a, e, t) => ({
   rootCategory: a,
   rootName: e,
   scalars: { name: "", objectSchema: {}, scalarsPath: void 0, scalarArrays: [{ path: `$["${t.name}"][*]`, param: t }] },
@@ -492,52 +495,52 @@ const je = (a, e, t, s = xa) => Na(a.attr.struct, `${e}["${a.name}"]`, t, s), Re
     items: [],
     errors: []
   }
-}), Ve = (a, e, t) => ({ rootCategory: a, rootName: e, scalars: { name: t.attr.kind, objectSchema: { [t.name]: t.attr }, scalarsPath: `$["${t.name}"]`, scalarArrays: [] }, structArrays: {
+}), Fe = (a, e, t) => ({ rootCategory: a, rootName: e, scalars: { name: t.attr.kind, objectSchema: { [t.name]: t.attr }, scalarsPath: `$["${t.name}"]`, scalarArrays: [] }, structArrays: {
   items: [],
   errors: []
-}, structs: { items: [], errors: [] } }), Fe = (a, e, t) => ({
+}, structs: { items: [], errors: [] } }), Je = (a, e, t) => ({
   rootName: e.name,
   rootCategory: a,
   scalars: void 0,
   structArrays: { items: [], errors: [] },
-  structs: je(e, "$", t)
-}), Je = (a, e, t) => ({
-  structArrays: Re(e, "$", t),
+  structs: Re(e, "$", t)
+}), Ue = (a, e, t) => ({
+  structArrays: Le(e, "$", t),
   rootName: e.name,
   rootCategory: a,
   scalars: void 0,
   structs: { items: [], errors: [] }
-}), Ue = (a, e) => e.map(((t) => qe(a, t))).flat(3), qe = (a, e) => [e.top ? J(e, a, e.top, "") : [], e.structs.map(((t) => J(e, a, t))), e.structArrays.map(((t) => J(e, a, t)))], J = (a, e, t, s = t.bundleName) => {
-  const r = t.scalar ? ((m, o, i, f, v) => f.pathSegments(i).map((({ value: c, segments: x }) => ((p, N, h, u, l) => {
-    if (typeof h == "object" || h === null) return null;
-    const T = u[u.length - 1];
+}), qe = (a, e) => e.map(((t) => Ge(a, t))).flat(3), Ge = (a, e) => [e.top ? J(e, a, e.top, "") : [], e.structs.map(((t) => J(e, a, t))), e.structArrays.map(((t) => J(e, a, t)))], J = (a, e, t, s = t.bundleName) => {
+  const r = t.scalar ? ((m, o, i, l, u) => l.pathSegments(i).map((({ value: c, segments: x }) => ((g, N, f, h, d) => {
+    if (typeof f == "object" || f === null) return null;
+    const T = h[h.length - 1];
     if (typeof T == "number") return null;
-    const I = l[T];
-    return I ? { rootName: p.rootName, rootType: p.rootCategory, structName: N, value: h, param: { name: T, attr: I } } : null;
-  })(m, o, c, x, v))).filter(((c) => c !== null)))(a, s, e, t.scalar.jsonPathJS, t.scalar.record) : [], n = t.arrays.map(((m) => ((o, i, f, v) => {
-    const c = v.jsonPathJS.find(f);
+    const I = d[T];
+    return I ? { rootName: g.rootName, rootType: g.rootCategory, structName: N, value: f, param: { name: T, attr: I } } : null;
+  })(m, o, c, x, u))).filter(((c) => c !== null)))(a, s, e, t.scalar.jsonPathJS, t.scalar.record) : [], n = t.arrays.map(((m) => ((o, i, l, u) => {
+    const c = u.jsonPathJS.find(l);
     if (!Array.isArray(c)) return [];
-    const x = v.schema.attr;
-    return Ce(x) ? ((p, N, h, u) => N.filter(((l) => typeof l == "string")).map(((l) => ({
-      rootName: p.rootName,
-      rootType: p.rootCategory,
-      value: l,
-      structName: h,
-      param: u
-    }))))(o, c, i, v.schema) : Ae(x) ? ((p, N, h, u) => N.filter(((l) => typeof l == "number")).map(((l) => ({ rootName: p.rootName, rootType: p.rootCategory, value: l, structName: h, param: u }))))(o, c, i, v.schema) : [];
+    const x = u.schema.attr;
+    return Ee(x) ? ((g, N, f, h) => N.filter(((d) => typeof d == "string")).map(((d) => ({
+      rootName: g.rootName,
+      rootType: g.rootCategory,
+      value: d,
+      structName: f,
+      param: h
+    }))))(o, c, i, u.schema) : Ce(x) ? ((g, N, f, h) => N.filter(((d) => typeof d == "number")).map(((d) => ({ rootName: g.rootName, rootType: g.rootCategory, value: d, structName: f, param: h }))))(o, c, i, u.schema) : [];
   })(a, s, e, m)));
   return [r, n].flat(2);
-}, U = (a, e) => a.scalarsPath ? { bundleName: a.name, arrays: X(a.scalarArrays, a.name, e), scalar: Ge(a.scalarsPath, a.objectSchema, e) } : {
+}, U = (a, e) => a.scalarsPath ? { bundleName: a.name, arrays: X(a.scalarArrays, a.name, e), scalar: ze(a.scalarsPath, a.objectSchema, e) } : {
   bundleName: a.name,
   arrays: X(a.scalarArrays, a.name, e)
-}, X = (a, e, t) => a.map(((s) => ({ jsonPathJS: t(s.path), schema: s.param, parentType: e }))), Ge = (a, e, t) => ({ jsonPathJS: t(a), record: e }), ze = (a, e, t, s) => ({
+}, X = (a, e, t) => a.map(((s) => ({ jsonPathJS: t(s.path), schema: s.param, parentType: e }))), ze = (a, e, t) => ({ jsonPathJS: t(a), record: e }), He = (a, e, t, s) => ({
   pluginName: a,
   commandName: e.command,
   desc: e.desc ?? "",
   text: e.text ?? "",
-  extractors: He(e, t, s)
-}), He = (a, e, t) => a.args.map(((s) => ((r, n) => {
-  const m = r.scalars ? U(r.scalars, n) : void 0, o = r.structs.items.map(((f) => U(f, n))), i = r.structArrays.items.map(((f) => U(f, n)));
+  extractors: Oe(e, t, s)
+}), Oe = (a, e, t) => a.args.map(((s) => ((r, n) => {
+  const m = r.scalars ? U(r.scalars, n) : void 0, o = r.structs.items.map(((l) => U(l, n))), i = r.structArrays.items.map(((l) => U(l, n)));
   return {
     rootCategory: r.rootCategory,
     rootName: r.rootName,
@@ -545,17 +548,17 @@ const je = (a, e, t, s = xa) => Na(a.attr.struct, `${e}["${a.name}"]`, t, s), Re
     structs: o,
     structArrays: i
   };
-})(Le("args", a.command, s, e), t))), Oe = (a, e) => {
-  const t = ((s) => new Map(s.map(((r) => [r.struct, Ee(r.params)]))))(a.schema.structs);
-  return Ye(a.pluginName, a.schema.commands, t, e);
-}, Ye = (a, e, t, s) => e.map(((r) => [`${a}:${r.command}`, ze(a, r, t, s)])), Qe = (a, e) => {
+})(_e("args", a.command, s, e), t))), Ye = (a, e) => {
+  const t = ((s) => new Map(s.map(((r) => [r.struct, Me(r.params)]))))(a.schema.structs);
+  return Qe(a.pluginName, a.schema.commands, t, e);
+}, Qe = (a, e, t, s) => e.map(((r) => [`${a}:${r.command}`, He(a, r, t, s)])), Xe = (a, e) => {
   const [t, s] = a.parameters, r = `${t}:${s}`, n = e.get(r);
-  return n ? ((m, o) => ({ pluginName: o.pluginName, commandName: o.commandName, args: Ue(m, o.extractors) }))(Fa(a.parameters[3]), n) : { pluginName: t, commandName: s, args: [] };
-}, _t = (a) => {
+  return n ? ((m, o) => ({ pluginName: o.pluginName, commandName: o.commandName, args: qe(m, o.extractors) }))(Fa(a.parameters[3]), n) : { pluginName: t, commandName: s, args: [] };
+}, Vt = (a) => {
   const e = new Map(a);
   return new Q(e);
-}, Vt = () => new Q(/* @__PURE__ */ new Map()), Ft = (a) => {
-  const e = a.flatMap(((t) => Oe(t, ((s) => new Va(s)))));
+}, Ft = () => new Q(/* @__PURE__ */ new Map()), Jt = (a) => {
+  const e = a.flatMap(((t) => Ye(t, ((s) => new Va(s)))));
   return new Q(new Map(e));
 };
 class Q {
@@ -567,17 +570,17 @@ class Q {
     return Array.from(this._commandMap.keys());
   }
   extractMapTexts(e) {
-    return Be(e, ((t) => this.extractArgs(t)));
+    return Se(e, ((t) => this.extractArgs(t)));
   }
   extractBattleText(e) {
-    return ke(e, ((t) => this.extractArgs(t)));
+    return Be(e, ((t) => this.extractArgs(t)));
   }
   extractCommonEventText(e) {
-    return we(e, ((t) => this.extractArgs(t)));
+    return ke(e, ((t) => this.extractArgs(t)));
   }
   extractArgs(e) {
-    const t = Qe(e, this._commandMap);
-    return t.args.filter(Xe).map(((s) => ({
+    const t = Xe(e, this._commandMap);
+    return t.args.filter(Ze).map(((s) => ({
       code: R,
       value: s.value,
       paramIndex: 3,
@@ -591,11 +594,11 @@ class Q {
     return F(e, ((t) => this.extractArgs(t)));
   }
 }
-const Xe = (a) => typeof a.value == "string", Jt = (a) => ({
+const Ze = (a) => typeof a.value == "string", Ut = (a) => ({
   key: "battlerName",
   image: a.battlerName,
   id: a.id
-}), q = (a, e, t) => ({ folder: t, key: e, image: a[e], id: a.id }), Ut = (a) => [q(a, "faceName", "faces"), q(a, "characterName", "characters"), q(a, "battlerName", "sv_actors")], qt = (a) => ({
+}), q = (a, e, t) => ({ folder: t, key: e, image: a[e], id: a.id }), qt = (a) => [q(a, "faceName", "faces"), q(a, "characterName", "characters"), q(a, "battlerName", "sv_actors")], Gt = (a) => ({
   gameTitle: a.gameTitle,
   currencyUnit: a.currencyUnit,
   equipTypes: [...a.equipTypes],
@@ -607,65 +610,65 @@ const Xe = (a) => typeof a.value == "string", Jt = (a) => ({
     messages: Ma(a.terms.messages),
     params: Ea(a.terms.params)
   }
-}), Gt = (a, e, t, s, r, n) => [...Da(t, s), ...ja(a, e), ...Ra(r, n)], zt = (a, e) => sa(_a(e), a), Ht = (a, e, t) => {
+}), zt = (a, e, t, s, r, n) => [...Da(t, s), ...ja(a, e), ...Ra(r, n)], Ht = (a, e) => sa(_a(e), a), Ot = (a, e, t) => {
   const s = La(e);
   return sa(t ? [...s, ...t] : s, a);
-}, Ze = (a, e, t, s) => {
+}, Ke = (a, e, t, s) => {
   if (a.code === E || a.code === C || a.code === j) return;
   const r = ga(a.code);
-  return r ? r(t, e, s) : a.code === $ ? Ke(a) : a.code === H || a.code === z || a.code === G ? We(a) : a.code !== ea ? a : void 0;
-}, Ke = (a) => ({
+  return r ? r(t, e, s) : a.code === $ ? We(a) : a.code === H || a.code === z || a.code === G ? at(a) : a.code !== ea ? a : void 0;
+}, We = (a) => ({
   code: $,
   indent: a.indent,
   parameters: [a.parameters[0].map(((e) => e.trimEnd())), a.parameters[1], a.parameters[2], a.parameters[3], a.parameters[4]]
-}), We = (a) => ({
+}), at = (a) => ({
   code: a.code,
   indent: a.indent,
   parameters: [a.parameters[0], a.parameters[1].trimEnd()]
-}), at = (a) => ({ code: P, indent: a.header.indent, parameters: [a.getBodyText().trimEnd()] }), et = (a) => {
+}), et = (a) => ({ code: P, indent: a.header.indent, parameters: [a.getBodyText().trimEnd()] }), tt = (a) => {
   const e = a.getBodyText().trimEnd(), t = {
     code: E,
     indent: a.header.indent,
     parameters: [e]
   };
-  return [st(a.header), t];
-}, tt = (a) => {
+  return [rt(a.header), t];
+}, st = (a) => {
   const e = a.getBodyText().trimEnd(), t = { code: C, indent: a.header.indent, parameters: [e] };
   return [a.header, t];
-}, st = (a) => {
+}, rt = (a) => {
   const e = a.parameters[4] ? a.parameters[4].trimEnd() : "";
   return { code: a.code, indent: a.indent, parameters: [a.parameters[0], a.parameters[1], a.parameters[2], a.parameters[3], e] };
 }, D = (a, e) => {
   const t = (s) => e.replaceText(s);
   return ((s) => {
-    const r = { comment: (n) => n.normalizedCommands(), script: at, showMessage: et, showScrollingText: tt };
-    return s.map(((n, m) => n.code === R ? n : Ze(n, m, s, r))).filter(((n) => n !== void 0)).flat();
-  })(a).map(((s) => s.code === R ? e.pluginCommand(s) : s.code === P ? e.scriptCommand(s) : ne(s, t)));
-}, Ot = (a, e) => ({
+    const r = { comment: (n) => n.normalizedCommands(), script: et, showMessage: tt, showScrollingText: st };
+    return s.map(((n, m) => n.code === R ? n : Ke(n, m, s, r))).filter(((n) => n !== void 0)).flat();
+  })(a).map(((s) => s.code === R ? e.pluginCommand(s) : s.code === P ? e.scriptCommand(s) : me(s, t)));
+}, Yt = (a, e) => ({
   members: a.members,
   id: a.id,
   name: a.name,
   pages: a.pages.map(((t) => ({ conditions: t.conditions, span: t.span, list: D(t.list, e) })))
-}), Yt = (a, e) => {
+}), Qt = (a, e) => {
   const t = {
     pluginCommand: (s) => s,
     scriptCommand: (s) => s,
     replaceText: e
   };
   return { members: a.members, id: a.id, name: a.name, pages: a.pages.map(((s) => ({ conditions: s.conditions, span: s.span, list: D(s.list, t) }))) };
-}, Qt = (a, e) => ({
+}, Xt = (a, e) => ({
   id: a.id,
   name: a.name,
   trigger: a.trigger,
   switchId: a.switchId,
   list: D(a.list, e)
-}), Xt = (a, e) => ({ id: a.id, name: a.name, trigger: a.trigger, switchId: a.switchId, list: D(a.list, {
+}), Zt = (a, e) => ({ id: a.id, name: a.name, trigger: a.trigger, switchId: a.switchId, list: D(a.list, {
   pluginCommand: (t) => t,
   scriptCommand: (t) => t,
   replaceText: e
-}) }), Zt = (a, e) => Ta(a, { pluginCommand: (t) => t, scriptCommand: (t) => t, replaceText: e, isReplaceTargetNote: () => !1 }), Kt = (a, e) => Ta(a, e), Ta = (a, e) => ({
+}) }), Kt = (a, e) => Ta(a, { pluginCommand: (t) => t, scriptCommand: (t) => t, replaceText: e, isReplaceTargetNote: () => !1 }), Wt = (a, e) => Ta(a, e), Ta = (a, e) => ({
   note: B(a.note, e),
-  displayName: g(a.displayName, e),
+  displayName: y(a.displayName, e),
   events: a.events.map(((t) => t ? ((s, r) => ({ id: s.id, name: s.name, x: s.x, y: s.y, note: B(s.note, r), pages: s.pages.map(((n) => ({
     ...n,
     list: D(n.list, r)
@@ -693,74 +696,75 @@ const Xe = (a) => typeof a.value == "string", Jt = (a) => ({
   parallaxSy: a.parallaxSy
 });
 export {
-  oa as $,
-  Nt as A,
-  Lt as B,
+  D as $,
+  Tt as A,
+  _t as B,
   F as C,
-  wt as D,
-  It as E,
-  St as F,
-  qt as G,
-  kt as H,
-  pt as I,
+  kt as D,
+  wt as E,
+  At as F,
+  Gt as G,
+  Bt as H,
+  ut as I,
   Oa as J,
   Ya as K,
-  ee as L,
-  vt as M,
-  bt as N,
-  dt as O,
-  _ as P,
-  Ga as Q,
-  lt as R,
-  At as S,
-  $t as T,
-  ne as U,
-  Et as V,
-  Qt as W,
+  te as L,
+  xt as M,
+  vt as N,
+  ee as O,
+  pt as P,
+  _ as Q,
+  Ga as R,
+  dt as S,
+  Ct as T,
+  Pt as U,
+  me as V,
+  Mt as W,
   Xt as X,
-  gt as Y,
-  Ct as Z,
-  D as _,
+  Zt as Y,
+  ht as Z,
+  Et as _,
   ma as a,
-  Kt as a0,
-  ut as a1,
-  Zt as a2,
-  le as a3,
-  Dt as a4,
-  ia as a5,
-  Mt as a6,
-  Pt as a7,
-  jt as a8,
+  oa as a0,
+  Wt as a1,
+  gt as a2,
+  Kt as a3,
+  de as a4,
+  jt as a5,
+  ia as a6,
+  $t as a7,
+  Dt as a8,
   Rt as a9,
-  re as aa,
-  Ot as ab,
+  Lt as aa,
+  ne as ab,
   Yt as ac,
-  ht as ad,
-  ca as ae,
-  la as af,
-  Gt as b,
+  Qt as ad,
+  yt as ae,
+  ca as af,
+  la as ag,
+  zt as b,
   Qa as c,
-  Ht as d,
-  zt as e,
+  Ot as d,
+  Ht as e,
   za as f,
   qa as g,
-  ct as h,
-  Vt as i,
-  _t as j,
-  Ft as k,
-  ke as l,
-  we as m,
-  Ut as n,
-  Jt as o,
+  lt as h,
+  Ft as i,
+  Vt as j,
+  Jt as k,
+  Be as l,
+  ke as m,
+  qt as n,
+  Ut as o,
   Ua as p,
   ra as q,
-  yt as r,
-  ft as s,
-  Be as t,
-  se as u,
-  Qe as v,
+  ft as r,
+  bt as s,
+  Se as t,
+  re as u,
+  Xe as v,
   S as w,
-  xt as x,
-  Bt as y,
-  Tt as z
+  Nt as x,
+  St as y,
+  It as z
 };
