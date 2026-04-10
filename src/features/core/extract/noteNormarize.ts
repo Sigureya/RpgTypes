@@ -1,3 +1,4 @@
+import type { NoteReadResult } from "@RpgTypes/rmmz";
 import { stringLikeNoteKeys, summarizeNoteKinds } from "./note/note";
 import type {
   AudioFilesSet,
@@ -10,7 +11,7 @@ import type {
   PluginCommandMzParameter,
 } from "./text/eventCommand";
 import {
-  extractAllMapNotes,
+  extractAllMapNotesEx,
   filterNoteFromMapTexts,
 } from "./text/eventCommand/note";
 import { filterNotesInExtractedText } from "./text/mainData/note";
@@ -26,11 +27,24 @@ export const normalizeMapNotes = <Command extends PluginCommandMzParameter>(
   imageFiles: ImageFilesSet,
   other: OtherFilesSet,
 ): ExtractedMapTexts<Command>[] => {
-  const list = extractAllMapNotes(map);
+  return normalizeMapNotesEx(map, audioFiles, imageFiles, other, (m) => m);
+};
+
+export const normalizeMapNotesEx = <
+  T,
+  Command extends PluginCommandMzParameter,
+>(
+  map: ReadonlyArray<T>,
+  audioFiles: AudioFilesSet,
+  imageFiles: ImageFilesSet,
+  other: OtherFilesSet,
+  fn: (map: T) => ExtractedMapTexts<Command>,
+): ExtractedMapTexts<Command>[] => {
+  const list: NoteReadResult[] = extractAllMapNotesEx(map, fn);
   const summarized = summarizeNoteKinds(list, audioFiles, imageFiles, other);
   const keysSet: Set<string> = stringLikeNoteKeys(summarized);
   return map.map((m) =>
-    filterNoteFromMapTexts(m, (note) => keysSet.has(note.key)),
+    filterNoteFromMapTexts(fn(m), (note) => keysSet.has(note.key)),
   );
 };
 
