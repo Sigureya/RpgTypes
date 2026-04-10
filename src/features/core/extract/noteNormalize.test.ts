@@ -1,6 +1,10 @@
 import { test, expect, describe } from "vitest";
+import type { MapFileInfo } from "@RpgTypes/rmmz";
 import type { AudioFilesSet, ImageFilesSet, OtherFilesSet } from "./note/types";
-import { normalizeBundleNoteTexts, normalizeMapNotes } from "./noteNormarize";
+import {
+  normalizeBundleNoteTexts,
+  normalizeNoteFromMapFiles,
+} from "./noteNormarize";
 import type { ExtractedMapTexts } from "./text/eventCommand";
 import type { ExtractedDataBundle } from "./text/mainData/types";
 
@@ -209,30 +213,65 @@ describe("normalizeMapNotes", () => {
         },
       ],
     };
-    const result = normalizeMapNotes([map], audioFiles, imageFiles, ohterFiles);
-    expect(result[0].noteItems).toEqual([]);
-    expect(result.length).toBe(1);
+    const expected: typeof result = [
+      {
+        editingName: "map1",
+        filename: "Map001.json",
+        map: {
+          displayedName: "map1",
+          events: [
+            {
+              commands: [],
+              eventId: 1,
+              name: "event1",
+              note: "dummy event note",
+              noteItems: [],
+              pageIndex: 0,
+            },
+          ],
+          note: "dummy note",
+          noteItems: [],
+        },
+      },
+    ];
+    const result = normalizeNoteFromMapFiles(
+      [{ editingName: "map1", filename: "Map001.json", map }],
+      audioFiles,
+      imageFiles,
+      ohterFiles,
+    );
+    expect(result).toEqual(expected);
   });
   test("normalizeMapNotes leaves map unchanged when notes contain only non-file values", () => {
-    const map: ExtractedMapTexts = {
-      displayedName: "map1",
-      note: "dummy note",
-      noteItems: [{ key: "msg", value: "message text" }],
-      events: [
-        {
-          commands: [{ code: 102, value: "abc", paramIndex: 0 }],
-          eventId: 1,
-          name: "event1",
-          pageIndex: 0,
-          note: "dummy event note",
-          noteItems: [
-            { key: "desc", value: "it is enemy" },
-            { key: "trait", value: "xyz" },
-          ],
-        },
-      ],
+    const map: MapFileInfo<ExtractedMapTexts> = {
+      editingName: "map1",
+      filename: "Map001.json",
+      map: {
+        displayedName: "map1",
+        note: "dummy note",
+        noteItems: [{ key: "msg", value: "message text" }],
+        events: [
+          {
+            commands: [{ code: 102, value: "abc", paramIndex: 0 }],
+            eventId: 1,
+            name: "event1",
+            pageIndex: 0,
+            note: "dummy event note",
+            noteItems: [
+              { key: "desc", value: "it is enemy" },
+              { key: "trait", value: "xyz" },
+            ],
+          },
+        ],
+      },
     };
-    const result = normalizeMapNotes([map], audioFiles, imageFiles, ohterFiles);
+    type Result = MapFileInfo<ExtractedMapTexts>[];
+    const result: Result = normalizeNoteFromMapFiles(
+      [map],
+      audioFiles,
+      imageFiles,
+      ohterFiles,
+    );
     expect(result).toEqual([map]);
   });
 });
