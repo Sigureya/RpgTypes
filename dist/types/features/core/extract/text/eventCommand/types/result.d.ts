@@ -1,7 +1,8 @@
 import { Command_PluginCommandMZ, Data_CommonEvent, Data_Map, Data_Troop, EventCommand, NoteReadResult } from '../../../../../../rmmz';
 import { PluginCommandMzParameter } from './pluginCommand';
 import { TextCommandParameter } from './union';
-export interface GameDataExtractor {
+export type GameDataExtractor = EventContainerExtractor & EventCommandExtractor;
+export interface EventContainerExtractor {
     extractMapTexts(rpgMap: Data_Map): ExtractedMapTexts;
     extractBattleText(troop: Data_Troop): ExtractedBattleEventText[];
     extractCommonEventText(commons: Data_CommonEvent): ExtractedCommonEventText;
