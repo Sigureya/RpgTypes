@@ -54,7 +54,7 @@ import type {
   MoveRouteCommand_SwitchOn,
   MoveRouteCommand_Wait,
 } from "./types/paramedCommands";
-import type { MoveRouteCommandV2 } from "./types/union";
+import type { MoveRouteCommandBasic } from "./types/union";
 
 export const makeMoveCommandMove = (
   key: keyof MoveRouteLabels2,
@@ -72,7 +72,7 @@ export const makeMoveCommandDirection = (
 
 export const makeMoveCommandSingleEx = (
   key: keyof MoveRouteLabels3 | keyof MoveRouteLabels2,
-): MoveRouteCommandV2 => {
+): MoveRouteCommandBasic => {
   return {
     code: TABLE2[key],
   };
@@ -80,9 +80,9 @@ export const makeMoveCommandSingleEx = (
 
 export const makeMoveCommandsSimple = (
   keys: (keyof MoveRouteLabels2 | keyof MoveRouteLabels3)[],
-): MoveRouteCommandV2[] => {
+): MoveRouteCommandBasic[] => {
   return keys.map(
-    (key): MoveRouteCommandV2 => ({
+    (key): MoveRouteCommandBasic => ({
       code: TABLE2[key],
     }),
   );
