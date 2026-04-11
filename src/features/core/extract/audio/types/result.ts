@@ -1,5 +1,6 @@
 import type { AudioFileParams } from "@RpgTypes/libs";
 import type {
+  CommandParameter,
   CommandUnion_AnyAudio,
   Data_CommonEvent,
   Data_Map,
@@ -7,7 +8,6 @@ import type {
   EventCommand,
   NoteReadResult,
 } from "@RpgTypes/rmmz";
-import type { CommandParameter } from "@RpgTypes/rmmz/eventCommand/pickCommandParam";
 
 export type AudioCommandParameter = CommandParameter<
   AudioFileParams,
