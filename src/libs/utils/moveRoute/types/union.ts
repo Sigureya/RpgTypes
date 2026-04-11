@@ -12,6 +12,7 @@ import type {
   MoveRouteCommand_SwitchOff,
   MoveRouteCommand_SwitchOn,
   MoveRouteCommand_Wait,
+  MoveRouteCommand_Script,
 } from "./paramedCommands";
 
 export type MoveRouteCommandV2 =
@@ -25,4 +26,5 @@ export type MoveRouteCommandV2 =
   | MoveRouteCommand_Jump
   | MoveRouteCommand_SwitchOff
   | MoveRouteCommand_SwitchOn
-  | MoveRouteCommand_Wait;
+  | MoveRouteCommand_Wait
+  | MoveRouteCommand_Script;
