@@ -27,21 +27,22 @@ import {
 } from "./moveRoute/types/constants";
 import type { MoveRouteMakeExArray } from "./moveRoute/types/makeEx";
 import type { MoveRouteCommand_PlaySE } from "./moveRoute/types/paramedCommands";
-import type { MoveRouteCommandV2 } from "./moveRoute/types/union";
+import type { MoveRouteCommandBasic } from "./moveRoute/types/union";
 import type { AudioFileParams } from "./types";
+
+export type MoveRouteCommand =
+  | MoveRouteCommandBasic
+  | MoveRouteCommand_PlaySE<AudioFileParams>;
 
 export const makeMoveCommands = (
   list: readonly MoveRouteMakeExArray<AudioFileParams>[],
-): (MoveRouteCommandV2 | MoveRouteCommand_PlaySE<AudioFileParams>)[] => {
+): MoveRouteCommand[] => {
   return list.flatMap((entry) => forData(entry));
 };
 
 const forData = (
   data: MoveRouteMakeExArray<AudioFileParams>,
-):
-  | MoveRouteCommand_PlaySE<AudioFileParams>
-  | MoveRouteCommandV2
-  | MoveRouteCommandV2[] => {
+): MoveRouteCommand | MoveRouteCommandBasic[] => {
   const code = data[0];
   if (code === ROUTE_PLAY_SE || code === "playSe") {
     const se = data[1];

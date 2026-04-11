@@ -15,7 +15,7 @@ import type {
   MoveRouteCommand_Script,
 } from "./paramedCommands";
 
-export type MoveRouteCommandV2 =
+export type MoveRouteCommandBasic =
   | MoveCommand_Move
   | MoveCommand_Direction
   | MoveRouteCommand_ChangeBlendMode
