@@ -8,7 +8,7 @@ import type {
   COMMENT_HEAD,
   SHOW_MESSAGE_BODY,
 } from "@RpgTypes/libs/eventCommand";
-import type { CommandParameter } from "@RpgTypes/rmmz/eventCommand/pickCommandParam";
+import type { CommandParameter } from "@RpgTypes/rmmz";
 import type { PluginCommandMzParameter } from "./pluginCommand";
 import type { TextCommandParameter } from "./union";
 

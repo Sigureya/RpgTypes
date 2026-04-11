@@ -1,10 +1,12 @@
 import type { PLUGIN_COMMAND_MZ } from "@RpgTypes/libs/eventCommand";
-import type { CommandParameter } from "@RpgTypes/rmmz/eventCommand/pickCommandParam";
+import type { PluginCommandParameter } from "@RpgTypes/rmmz";
 
-export interface PluginCommandMzParameter extends CommandParameter<
-  string,
-  typeof PLUGIN_COMMAND_MZ
-> {
+// /**
+//  * @deprecated Use TextPluginCommandParameter instead
+//  */
+// export type PluginCommandMzParameter = TextPluginCommandParameter;
+
+export interface PluginCommandMzParameter extends PluginCommandParameter<string> {
   paramIndex: 3;
   value: string;
   code: typeof PLUGIN_COMMAND_MZ;

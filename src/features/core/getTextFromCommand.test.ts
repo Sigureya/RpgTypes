@@ -10,8 +10,8 @@ import type {
   Command_ShowChoices,
   Command_ChangeActorName,
   Command_ChangeActorNickName,
+  CommandParameter,
 } from "@RpgTypes/rmmz";
-import type { CommandParameter } from "@RpgTypes/rmmz/eventCommand/pickCommandParam";
 import { extractTextFromEventCommands } from "./getTextFromCommand";
 
 describe("extractTextFromEventCommands", () => {
