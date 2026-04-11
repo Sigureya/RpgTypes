@@ -1,9 +1,4 @@
-import type { AudioFileParams } from "src/libs/utils";
-
-export interface MoveRouteCommandUnknown {
-  code: number;
-  parameters?: (string | number | AudioFileParams)[];
-}
+import type { MoveRouteCommandUnknown } from "src/libs/utils";
 
 export interface MoveRouteData<
   T extends MoveRouteCommandUnknown = MoveRouteCommandUnknown,
