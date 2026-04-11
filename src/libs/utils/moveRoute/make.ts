@@ -24,6 +24,16 @@ import {
   ROUTE_TURN_TOWARD,
   ROUTE_TURN_UP,
   ROUTE_JUMP,
+  ROUTE_WAIT,
+  ROUTE_SWITCH_ON,
+  ROUTE_SWITCH_OFF,
+  ROUTE_CHANGE_SPEED,
+  ROUTE_CHANGE_FREQ,
+  ROUTE_CHANGE_IMAGE,
+  ROUTE_CHANGE_OPACITY,
+  ROUTE_CHANGE_BLEND_MODE,
+  ROUTE_PLAY_SE,
+  ROUTE_SCRIPT,
 } from "./types";
 import type { MoveRouteCommandBase } from "./types/base";
 import type { MoveRouteLabels2, MoveRouteLabels3 } from "./types/labels";
@@ -31,7 +41,19 @@ import type {
   MoveCommand_Direction,
   MoveCommand_Move,
 } from "./types/nonParamCommnads";
-import type { MoveRouteCommand_Jump } from "./types/paramedCommands";
+import type {
+  MoveRouteCommand_ChangeBlendMode,
+  MoveRouteCommand_ChangeFrequency,
+  MoveRouteCommand_ChangeImage,
+  MoveRouteCommand_ChangeOpacity,
+  MoveRouteCommand_ChangeSpeed,
+  MoveRouteCommand_Jump,
+  MoveRouteCommand_PlaySE,
+  MoveRouteCommand_Script,
+  MoveRouteCommand_SwitchOff,
+  MoveRouteCommand_SwitchOn,
+  MoveRouteCommand_Wait,
+} from "./types/paramedCommands";
 import type { MoveRouteCommandV2 } from "./types/union";
 
 export const makeMoveCommandMove = (
@@ -58,12 +80,81 @@ export const makeMoveCommandsSimple = (
   );
 };
 
+export const makeMoveCommandPlaySE = <SoundParamType>(
+  soundParams: SoundParamType,
+): MoveRouteCommand_PlaySE<SoundParamType> => ({
+  code: ROUTE_PLAY_SE,
+  parameters: [soundParams],
+});
+
 export const makeMoveCommandJump = (
   x: number,
   y: number,
 ): MoveRouteCommand_Jump => ({
   code: ROUTE_JUMP,
   parameters: [x, y],
+});
+
+export const makeMoveCommandWait = (frames: number): MoveRouteCommand_Wait => ({
+  code: ROUTE_WAIT,
+  parameters: [frames],
+});
+
+export const makeMoveCommandSwitchOn = (
+  switchId: number,
+): MoveRouteCommand_SwitchOn => ({
+  code: ROUTE_SWITCH_ON,
+  parameters: [switchId],
+});
+
+export const makeMoveCommandSwitchOff = (
+  switchId: number,
+): MoveRouteCommand_SwitchOff => ({
+  code: ROUTE_SWITCH_OFF,
+  parameters: [switchId],
+});
+
+export const makeMoveCommandChangeSpeed = (
+  speed: number,
+): MoveRouteCommand_ChangeSpeed => ({
+  code: ROUTE_CHANGE_SPEED,
+  parameters: [speed],
+});
+
+export const makeMoveCommandChangeFrequency = (
+  frequency: number,
+): MoveRouteCommand_ChangeFrequency => ({
+  code: ROUTE_CHANGE_FREQ,
+  parameters: [frequency],
+});
+
+export const makeMoveCommandChangeImage = (
+  characterName: string,
+  characterIndex: number,
+): MoveRouteCommand_ChangeImage => ({
+  code: ROUTE_CHANGE_IMAGE,
+  parameters: [characterName, characterIndex],
+});
+
+export const makeMoveCommandChangeOpacity = (
+  opacity: number,
+): MoveRouteCommand_ChangeOpacity => ({
+  code: ROUTE_CHANGE_OPACITY,
+  parameters: [opacity],
+});
+
+export const makeMoveCommandChangeBlendMode = (
+  blendMode: number,
+): MoveRouteCommand_ChangeBlendMode => ({
+  code: ROUTE_CHANGE_BLEND_MODE,
+  parameters: [blendMode],
+});
+
+export const makeMoveCommandScript = (
+  script: string,
+): MoveRouteCommand_Script => ({
+  code: ROUTE_SCRIPT,
+  parameters: [script],
 });
 
 const TABLE2 = {
