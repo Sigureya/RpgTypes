@@ -23,13 +23,16 @@ import {
   ROUTE_TURN_RIGHT,
   ROUTE_TURN_TOWARD,
   ROUTE_TURN_UP,
+  ROUTE_JUMP,
 } from "./types";
 import type { MoveRouteCommandBase } from "./types/base";
+import type { MoveRouteLabels2, MoveRouteLabels3 } from "./types/labels";
 import type {
   MoveCommand_Direction,
   MoveCommand_Move,
-} from "./types/commandType";
-import type { MoveRouteLabels2, MoveRouteLabels3 } from "./types/labels";
+} from "./types/nonParamCommnads";
+import type { MoveRouteCommand_Jump } from "./types/paramedCommands";
+import type { MoveRouteCommandV2 } from "./types/union";
 
 export const makeMoveCommandMove = (
   key: keyof MoveRouteLabels2,
@@ -42,8 +45,26 @@ export const makeMoveCommandDirection = (
   key: keyof MoveRouteLabels3,
 ): MoveCommand_Direction =>
   ({
-    code: TABLE3[key],
+    code: TABLE2[key],
   }) satisfies MoveRouteCommandBase;
+
+export const makeMoveCommandsSimple = (
+  keys: (keyof MoveRouteLabels2 | keyof MoveRouteLabels3)[],
+): MoveRouteCommandV2[] => {
+  return keys.map(
+    (key): MoveRouteCommandV2 => ({
+      code: TABLE2[key],
+    }),
+  );
+};
+
+export const makeMoveCommandJump = (
+  x: number,
+  y: number,
+): MoveRouteCommand_Jump => ({
+  code: ROUTE_JUMP,
+  parameters: [x, y],
+});
 
 const TABLE2 = {
   moveDown: ROUTE_MOVE_DOWN,
@@ -59,9 +80,6 @@ const TABLE2 = {
   moveAway: ROUTE_MOVE_AWAY,
   moveForward: ROUTE_MOVE_FORWARD,
   moveBackward: ROUTE_MOVE_BACKWARD,
-} as const satisfies Record<keyof MoveRouteLabels2, MoveCommand_Move["code"]>;
-
-const TABLE3 = {
   turnDown: ROUTE_TURN_DOWN,
   turnLeft: ROUTE_TURN_LEFT,
   turnRight: ROUTE_TURN_RIGHT,
@@ -73,7 +91,11 @@ const TABLE3 = {
   turnRandom: ROUTE_TURN_RANDOM,
   turnToward: ROUTE_TURN_TOWARD,
   turnAway: ROUTE_TURN_AWAY,
-} as const satisfies Record<
+} as const satisfies DirectionTable & MoveTable;
+
+type DirectionTable = Record<
   keyof MoveRouteLabels3,
   MoveCommand_Direction["code"]
 >;
+
+type MoveTable = Record<keyof MoveRouteLabels2, MoveCommand_Move["code"]>;
