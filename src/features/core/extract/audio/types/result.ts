@@ -10,6 +10,7 @@ import type {
   NoteReadResult,
 } from "@RpgTypes/rmmz";
 import type { ExtractedAudioBase } from "./base";
+import type { AudioPluginCommandParameter } from "./pluginCommand";
 
 export interface AudioCommandParameter
   extends
@@ -34,22 +35,22 @@ export interface EventCommandAudioExtractor {
 }
 
 export interface ExtractedBattleEventAudio<
-  T extends AudioCommandParameter = AudioCommandParameter,
+  T extends AudioPluginCommandParameter = AudioPluginCommandParameter,
 > {
   eventId: number;
-  commands: T[];
+  commands: (T | AudioCommandParameter)[];
   pageIndex: number;
 }
 
 export interface ExtractedCommonEventAudio<
-  T extends AudioCommandParameter = AudioCommandParameter,
+  T extends AudioPluginCommandParameter = AudioPluginCommandParameter,
 > {
   eventId: number;
-  commands: T[];
+  commands: (T | AudioCommandParameter)[];
 }
 
 export interface ExtractedMapAudios<
-  T extends AudioCommandParameter = AudioCommandParameter,
+  T extends AudioPluginCommandParameter = AudioPluginCommandParameter,
 > {
   events: ExtractedMapEventAudios<T>[];
   note: string;
@@ -59,12 +60,12 @@ export interface ExtractedMapAudios<
 }
 
 export interface ExtractedMapEventAudios<
-  T extends AudioCommandParameter = AudioCommandParameter,
+  T extends AudioPluginCommandParameter = AudioPluginCommandParameter,
 > {
   eventId: number;
   name: string;
   pageIndex: number;
-  commands: T[];
+  commands: (T | AudioCommandParameter)[];
   note: string;
   noteItems: NoteReadResult[];
 }
