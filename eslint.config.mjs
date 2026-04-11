@@ -150,4 +150,9 @@ export default [
     files: ["src/**/*index.ts", "src/**/*.d.ts"],
     rules: { "sort-exports/sort-exports": ["error", { sortDir: "asc" }] },
   },
+  {
+    files: ["src/validate/**/*.test.ts"],
+    // requireを使うので、警告を抑制する
+    rules: { "@typescript-eslint/ban-ts-comment": "off" },
+  },
 ];
