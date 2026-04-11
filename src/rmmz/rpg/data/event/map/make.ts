@@ -1,5 +1,5 @@
+import type { MoveRouteCommandUnknown } from "@RpgTypes/libs";
 import type { EventCommandUnknown } from "@RpgTypes/libs/eventCommand";
-import type { MoveRouteCommandUnknown } from "@RpgTypes/rmmz/eventCommand";
 import { makeMapEvent, makeMapEventPage } from "./event";
 import type { Data_Map } from "./map";
 import type { MapFileInfo } from "./mapFileInfo";

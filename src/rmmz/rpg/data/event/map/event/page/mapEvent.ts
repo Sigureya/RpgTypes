@@ -1,5 +1,7 @@
-import type { EventCommandUnknown } from "@RpgTypes/libs";
-import type { MoveRouteCommandUnknown } from "@RpgTypes/rmmz/eventCommand";
+import type {
+  EventCommandUnknown,
+  MoveRouteCommandUnknown,
+} from "@RpgTypes/libs";
 import type { MapEventPage } from "./page";
 
 export interface MapEvent<
