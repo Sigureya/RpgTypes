@@ -70,6 +70,14 @@ export const makeMoveCommandDirection = (
     code: TABLE2[key],
   }) satisfies MoveRouteCommandBase;
 
+export const makeMoveCommandSingleEx = (
+  key: keyof MoveRouteLabels3 | keyof MoveRouteLabels2,
+): MoveRouteCommandV2 => {
+  return {
+    code: TABLE2[key],
+  };
+};
+
 export const makeMoveCommandsSimple = (
   keys: (keyof MoveRouteLabels2 | keyof MoveRouteLabels3)[],
 ): MoveRouteCommandV2[] => {
