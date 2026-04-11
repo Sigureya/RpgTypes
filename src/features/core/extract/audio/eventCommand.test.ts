@@ -92,7 +92,7 @@ describe("extractAudioCommands", () => {
     const result = extractAudioCommands([command]);
     expect(result).toEqual([]);
   });
-  describe("", () => {
+  describe("uses plugin command", () => {
     const audio: AudioFileParams = {
       name: "field",
       volume: 80,
@@ -118,13 +118,13 @@ describe("extractAudioCommands", () => {
         directory: "bgm",
       },
     ];
-    test("", () => {
+    test("calls plugin command evaluator with plugin command", () => {
       const evaluator = vi.fn(() => pluginResult);
       extractAudioCommands([bgs, command], evaluator);
       expect(evaluator).toHaveBeenCalledOnce();
       expect(evaluator).toHaveBeenCalledWith(command);
     });
-    test("uses plugin command evaluator and preserves order", () => {
+    test("returns audio from both event command and plugin command", () => {
       const expected: typeof result = [
         {
           code: bgs.code,
