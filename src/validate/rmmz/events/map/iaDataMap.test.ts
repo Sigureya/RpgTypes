@@ -1,6 +1,7 @@
 import { describe, test, expect } from "vitest";
+import type { MoveRouteCommandUnknown } from "@RpgTypes/libs";
 import type { EventCommandUnknown } from "@RpgTypes/libs/eventCommand";
-import type { EventCommand, MoveRouteCommandUnknown } from "@RpgTypes/rmmz";
+import type { EventCommand } from "@RpgTypes/rmmz";
 import {
   makeCommandShowMessage,
   makeCommandShowMessageBody,
@@ -13,6 +14,7 @@ import {
   makeMapEventPage,
 } from "@RpgTypes/rmmz/rpg";
 import type { ValidateFunction } from "ajv";
+// @ts-ignore - importing compiled schema validator
 const validate: ValidateFunction = require("./mapValidate.cjs");
 const isDataMap = (data: unknown): data is Data_Map => {
   return validate(data);

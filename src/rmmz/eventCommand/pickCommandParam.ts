@@ -1,6 +1,6 @@
 import type { AudioFileParams } from "@RpgTypes/libs";
+import type { CommandParameter } from "./utils";
 import type { IndexOfCommandParameter } from "./utils/pickParam";
-import { CommandParameter } from "./utils";
 
 export const pickCommandParamString = <
   Params extends unknown[],
