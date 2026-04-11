@@ -1,6 +1,8 @@
-import type { MoveRouteDataUnkwnown } from "@RpgTypes/rmmz/eventCommand/commands/movementRoute/moveRoute";
 import type { JSONSchemaType } from "ajv";
-import type { AudioFileParams } from "src/libs/utils/types";
+import type {
+  AudioFileParams,
+  MoveRouteDataUnkwnown,
+} from "src/libs/utils/types";
 
 export const SCHEMA_MOVEROUTE_DATA = {
   type: "object",
