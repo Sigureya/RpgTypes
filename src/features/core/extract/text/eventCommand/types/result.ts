@@ -9,7 +9,9 @@ import type {
 import type { PluginCommandMzParameter } from "./pluginCommand";
 import type { TextCommandParameter } from "./union";
 
-export interface GameDataExtractor {
+export type GameDataExtractor = EventContainerExtractor & EventCommandExtractor;
+
+export interface EventContainerExtractor {
   extractMapTexts(rpgMap: Data_Map): ExtractedMapTexts;
   extractBattleText(troop: Data_Troop): ExtractedBattleEventText[];
   extractCommonEventText(commons: Data_CommonEvent): ExtractedCommonEventText;

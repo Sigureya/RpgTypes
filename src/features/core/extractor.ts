@@ -23,7 +23,6 @@ import type {
   ExtractedMapTexts,
   TextCommandParameter,
   GameDataExtractor,
-  EventCommandExtractor,
 } from "./extract/text/eventCommand";
 import {
   extractBattleEventTexts,
@@ -46,16 +45,14 @@ export const createTextDataExtractor = (): GameDataExtractor => {
 
 export const createTextDataExtractorFromSchemas = (
   schemas: ReadonlyArray<PluginMinimumSchema>,
-): GameDataExtractor & EventCommandExtractor => {
+): GameDataExtractor => {
   const list: CommandExtractorEntry[] = schemas.flatMap((schema) =>
     createPluginCommandExtractor(schema, (path) => new JSONPathJS(path)),
   );
   return new GameDataExtractorClass(new Map(list));
 };
 
-class GameDataExtractorClass
-  implements GameDataExtractor, EventCommandExtractor
-{
+class GameDataExtractorClass implements GameDataExtractor {
   private readonly _commandMap: ReadonlyMap<
     CommandMapKey,
     CommandArgExtractors
