@@ -1,7 +1,9 @@
 import type { PLUGIN_COMMAND_MZ } from "@RpgTypes/libs";
-import type { PluginCommandParameter } from "@RpgTypes/rmmz";
+import type { AudioFolders, PluginCommandParameter } from "@RpgTypes/rmmz";
+import type { ExtractedAudioBase } from "./base";
 
-export interface AudioPluginCommandParameter extends PluginCommandParameter<string> {
+export interface AudioPluginCommandParameter
+  extends PluginCommandParameter<string>, ExtractedAudioBase {
   paramIndex: 3;
   value: string;
   code: typeof PLUGIN_COMMAND_MZ;
@@ -9,4 +11,5 @@ export interface AudioPluginCommandParameter extends PluginCommandParameter<stri
   commandName: string;
   argName: string;
   argTitle: string;
+  directory: AudioFolders;
 }

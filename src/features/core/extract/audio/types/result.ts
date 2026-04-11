@@ -8,11 +8,10 @@ import type {
   EventCommand,
   NoteReadResult,
 } from "@RpgTypes/rmmz";
+import type { ExtractedAudioBase } from "./base";
 
-export type AudioCommandParameter = CommandParameter<
-  AudioFileParams,
-  CommandUnion_AnyAudio["code"]
->;
+export type AudioCommandParameter = ExtractedAudioBase &
+  CommandParameter<AudioFileParams, CommandUnion_AnyAudio["code"]>;
 
 export type GameDataAudioExtractor = EventContainerAudioExtractor &
   EventCommandAudioExtractor;

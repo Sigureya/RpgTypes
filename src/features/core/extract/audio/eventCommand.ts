@@ -4,18 +4,21 @@ import type {
   CommandUnion_AnyAudio,
   EventCommand,
 } from "@RpgTypes/rmmz/eventCommand";
-import { isCommandAnyAudio } from "@RpgTypes/rmmz/eventCommand";
-import type { TextPluginCommandParameter } from "../text/eventCommand";
+import {
+  assetDirectoryName,
+  isCommandAnyAudio,
+} from "@RpgTypes/rmmz/eventCommand";
+import type { AudioPluginCommandParameter } from "./types";
 import type { AudioCommandParameter } from "./types/result";
 
-export const extractAudioCommands = <T extends TextPluginCommandParameter>(
+export const extractAudioCommands = <T extends AudioPluginCommandParameter>(
   commands: ReadonlyArray<EventCommand>,
   pluginCommandEvaltor: (command: Command_PluginCommandMZ) => T[] = () => [],
 ): (AudioCommandParameter | T)[] => {
   return extractAudioCommandsCore(commands, pluginCommandEvaltor);
 };
 
-const extractAudioCommandsCore = <T extends TextPluginCommandParameter>(
+const extractAudioCommandsCore = <T extends AudioPluginCommandParameter>(
   commands: ReadonlyArray<EventCommand>,
   pluginCommandEvaltor: (command: Command_PluginCommandMZ) => T[],
 ): (AudioCommandParameter | T)[] => {
@@ -31,9 +34,7 @@ const extractAudioCommandsCore = <T extends TextPluginCommandParameter>(
     });
 };
 
-const isPluginCommandOrAudioCommand = (
-  command: EventCommand,
-): command is CommandUnion_AnyAudio | Command_PluginCommandMZ => {
+const isPluginCommandOrAudioCommand = (command: EventCommand) => {
   return command.code === PLUGIN_COMMAND_MZ || isCommandAnyAudio(command);
 };
 
@@ -43,4 +44,5 @@ const pickAudioParam = (
   code: command.code,
   paramIndex: 0,
   value: makeAudioFileParams(command.parameters[0]),
+  directory: assetDirectoryName(command.code),
 });
