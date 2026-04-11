@@ -61,6 +61,7 @@ describe("extractAudioCommands", () => {
       pan: 20,
     };
     const audioCommand = makeCommandPlayBGS(audio);
+    const fn = vi.fn();
     const expected: AudioCommandParameter[] = [
       {
         code: PLAY_BGS,
@@ -69,13 +70,16 @@ describe("extractAudioCommands", () => {
         directory: "bgs",
       },
     ];
-    const result = extractAudioCommands([
-      makeCommandSetupChoice({ choices: ["yes", "no"] }),
-      makeCommandFadeOutBGM({ duration: 60 }),
-      audioCommand,
-    ]);
-
+    const result = extractAudioCommands(
+      [
+        makeCommandSetupChoice({ choices: ["yes", "no"] }),
+        makeCommandFadeOutBGM({ duration: 60 }),
+        audioCommand,
+      ],
+      fn,
+    );
     expect(result).toEqual(expected);
+    expect(fn).not.toHaveBeenCalled();
   });
 
   test("plugin command is ignored by default evaluator", () => {
