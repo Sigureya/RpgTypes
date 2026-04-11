@@ -1,5 +1,5 @@
+import { MoveRouteCommandUnknown, MoveRouteData } from '../../../../../../../libs';
 import { EventCommandUnknown } from '../../../../../../../libs/eventCommand';
-import { MoveRouteCommandUnknown, MoveRouteData } from '../../../../../../eventCommand';
 import { MapEvent_PageCondition } from './condition';
 import { MapEvent_Image } from './image/types';
 export interface MapEventPage<EC extends EventCommandUnknown = EventCommandUnknown, MRC extends MoveRouteCommandUnknown = MoveRouteCommandUnknown> {

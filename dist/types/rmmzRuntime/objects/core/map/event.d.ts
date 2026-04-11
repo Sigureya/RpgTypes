@@ -1,4 +1,5 @@
-import { EventCommand, MoveRouteCommandUnknown } from '../../../../rmmz/eventCommand';
+import { MoveRouteCommandUnknown } from '../../../../libs';
+import { EventCommand } from '../../../../rmmz/eventCommand';
 import { MapEventPage } from '../../../../rmmz/rpg';
 export interface Rmmz_Event {
     isStarting(): boolean;

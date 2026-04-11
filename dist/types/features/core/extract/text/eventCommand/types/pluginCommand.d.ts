@@ -1,6 +1,10 @@
 import { PLUGIN_COMMAND_MZ } from '../../../../../../libs/eventCommand';
-import { CommandParameter } from '../../../../../../rmmz/eventCommand/pickCommandParam';
-export interface PluginCommandMzParameter extends CommandParameter<string, typeof PLUGIN_COMMAND_MZ> {
+import { PluginCommandParameter } from '../../../../../../rmmz';
+/**
+ * @deprecated Use TextPluginCommandParameter instead
+ */
+export type PluginCommandMzParameter = TextPluginCommandParameter;
+export interface TextPluginCommandParameter extends PluginCommandParameter<string> {
     paramIndex: 3;
     value: string;
     code: typeof PLUGIN_COMMAND_MZ;

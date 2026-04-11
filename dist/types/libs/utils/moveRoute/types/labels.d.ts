@@ -1,4 +1,32 @@
-export interface MoveRouteLabels {
+export interface MoveRouteLabels2 {
+    moveDown: string;
+    moveLeft: string;
+    moveRight: string;
+    moveUp: string;
+    moveLowerLeft: string;
+    moveLowerRight: string;
+    moveUpperLeft: string;
+    moveUpperRight: string;
+    moveRandom: string;
+    moveToward: string;
+    moveAway: string;
+    moveForward: string;
+    moveBackward: string;
+}
+export interface MoveRouteLabels3 {
+    turnDown: string;
+    turnLeft: string;
+    turnRight: string;
+    turnUp: string;
+    turn90DegreesRight: string;
+    turn90DegreesLeft: string;
+    turn180Degrees: string;
+    turn90DegreesRightOrLeft: string;
+    turnRandom: string;
+    turnToward: string;
+    turnAway: string;
+}
+export interface MoveRouteLabels extends MoveRouteLabels2, MoveRouteLabels3 {
     end: string;
     moveDown: string;
     moveLeft: string;

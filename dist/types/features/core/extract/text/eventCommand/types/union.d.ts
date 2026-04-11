@@ -1,3 +1,3 @@
-import { PluginCommandMzParameter } from './pluginCommand';
+import { TextPluginCommandParameter } from './pluginCommand';
 import { GenericCommandParameter, MessageCommandParameter } from './rmmzCommands';
-export type TextCommandParameter = GenericCommandParameter | MessageCommandParameter | PluginCommandMzParameter;
+export type TextCommandParameter = GenericCommandParameter | MessageCommandParameter | TextPluginCommandParameter;

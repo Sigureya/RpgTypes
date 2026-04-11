@@ -1,6 +1,11 @@
+import { MoveRouteCommandBase } from './base';
 import { ROUTE_END, ROUTE_MOVE_AWAY, ROUTE_MOVE_BACKWARD, ROUTE_MOVE_DOWN, ROUTE_MOVE_FORWARD, ROUTE_MOVE_LEFT, ROUTE_MOVE_LOWER_L, ROUTE_MOVE_LOWER_R, ROUTE_MOVE_RANDOM, ROUTE_MOVE_RIGHT, ROUTE_MOVE_TOWARD, ROUTE_MOVE_UP, ROUTE_MOVE_UPPER_L, ROUTE_MOVE_UPPER_R, ROUTE_TURN_180D, ROUTE_TURN_90D_L, ROUTE_TURN_90D_R, ROUTE_TURN_90D_R_L, ROUTE_TURN_AWAY, ROUTE_TURN_DOWN, ROUTE_TURN_LEFT, ROUTE_TURN_RANDOM, ROUTE_TURN_RIGHT, ROUTE_TURN_TOWARD, ROUTE_TURN_UP } from './constants';
-export interface MoveCommand_Basic {
-    code: MoveRouteEnum_Move | MoveRouteEnum_Direction;
+export type MoveCommand_Basic = MoveCommand_Move | MoveCommand_Direction;
+export interface MoveCommand_Move extends MoveRouteCommandBase {
+    code: MoveRouteEnum_Move;
+}
+export interface MoveCommand_Direction extends MoveRouteCommandBase {
+    code: MoveRouteEnum_Direction;
 }
 type MoveRouteEnum_Move = [
     typeof ROUTE_END,
