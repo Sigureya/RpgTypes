@@ -19,7 +19,7 @@ export interface GameDataExtractor {
   extractCommonEventText(commons: Data_CommonEvent): ExtractedCommonEventText;
   extractArgs(command: Command_PluginCommandMZ): PluginCommandMzParameter[];
   extractCommandTexts(
-    commands: ReadonlyArray<EventCommand>
+    commands: ReadonlyArray<EventCommand>,
   ): TextCommandParameter[];
-  keys(): string[];
+  pluginCommandKeys(): string[];
 }
