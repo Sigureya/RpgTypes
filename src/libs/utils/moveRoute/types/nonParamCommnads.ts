@@ -1,3 +1,4 @@
+import type { MoveRouteCommandBase } from "./base";
 import type {
   ROUTE_END,
   ROUTE_MOVE_AWAY,
@@ -26,8 +27,14 @@ import type {
   ROUTE_TURN_UP,
 } from "./constants";
 
-export interface MoveCommand_Basic {
-  code: MoveRouteEnum_Move | MoveRouteEnum_Direction;
+export type MoveCommand_Basic = MoveCommand_Move | MoveCommand_Direction;
+
+export interface MoveCommand_Move extends MoveRouteCommandBase {
+  code: MoveRouteEnum_Move;
+}
+
+export interface MoveCommand_Direction extends MoveRouteCommandBase {
+  code: MoveRouteEnum_Direction;
 }
 
 type MoveRouteEnum_Move = [
