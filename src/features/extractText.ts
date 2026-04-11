@@ -26,6 +26,7 @@ export type {
   ExtractedMapTexts,
   GameDataExtractor,
   EventCommandExtractor,
+  EventContainerExtractor,
 } from "./core/extract/text/eventCommand";
 export type {
   ExtractedActorImage,
