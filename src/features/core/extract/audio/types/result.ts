@@ -1,4 +1,6 @@
+import type { AudioFileParams } from "@RpgTypes/libs";
 import type {
+  CommandUnion_AnyAudio,
   Data_CommonEvent,
   Data_Map,
   Data_Troop,
@@ -7,10 +9,10 @@ import type {
 } from "@RpgTypes/rmmz";
 import type { CommandParameter } from "@RpgTypes/rmmz/eventCommand/pickCommandParam";
 
-export interface AudioCommandParameter<
-  T = unknown,
-  Code extends number = number,
-> extends CommandParameter<T, Code> {}
+export type AudioCommandParameter = CommandParameter<
+  AudioFileParams,
+  CommandUnion_AnyAudio["code"]
+>;
 
 export type GameDataAudioExtractor = EventContainerAudioExtractor &
   EventCommandAudioExtractor;
