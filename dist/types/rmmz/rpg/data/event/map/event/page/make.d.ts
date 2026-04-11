@@ -1,5 +1,5 @@
+import { MoveRouteCommandUnknown } from '../../../../../../../libs';
 import { EventCommandUnknown } from '../../../../../../../libs/eventCommand';
-import { MoveRouteCommandUnknown } from '../../../../../../eventCommand';
 import { MapEvent_Image } from './image/types';
 import { MapEvent } from './mapEvent';
 import { MapEventPage } from './page';

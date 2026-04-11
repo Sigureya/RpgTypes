@@ -1,10 +1,6 @@
 import { AudioFileParams } from '../../libs';
+import { CommandParameter } from './utils';
 import { IndexOfCommandParameter } from './utils/pickParam';
-export interface CommandParameter<T, Code extends number = number> {
-    code: Code;
-    paramIndex: number;
-    value: T;
-}
 export declare const pickCommandParamString: <Params extends unknown[], Index extends IndexOfCommandParameter<{
     code: number;
     parameters: Params;

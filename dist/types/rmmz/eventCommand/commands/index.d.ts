@@ -34,3 +34,4 @@ export * from './wait';
 export type { CommandParamaterType, ExtractCommandByCode, ExtractCommandByParam, } from './extractType';
 export type { Command_ChangeWindowColor } from './window/changeWindowColor/types';
 export type { Command_NoOperation } from './noOperation';
+export { isCommandAnyAudio } from './isAnyAudio';
