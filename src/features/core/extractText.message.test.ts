@@ -4,6 +4,7 @@ import { SHOW_MESSAGE_BODY } from "@RpgTypes/libs/eventCommand";
 import type {
   Command_ShowMessageBody,
   Command_ShowMessageHeader,
+  EventCommand,
 } from "@RpgTypes/rmmz";
 import {
   makeCommandShowMessage,
@@ -31,7 +32,7 @@ describe("extractTextParamFromMessage", () => {
     expect(result).toEqual(expected);
   });
   test("mulit body", () => {
-    const commands = [
+    const commands: EventCommand[] = [
       makeCommandShowMessage({
         speakerName: "abc",
       }),
@@ -49,7 +50,7 @@ describe("extractTextParamFromMessage", () => {
     expect(result).toEqual(expected);
   });
   test("text include nl", () => {
-    const commands = [
+    const commands: EventCommand[] = [
       makeCommandShowMessage({
         speakerName: "abc",
       }),
@@ -78,6 +79,6 @@ describe("extractTextParamFromMessage", () => {
       paramIndex: 0,
     };
     const result = extractTextParamFromMessage(group);
-    expect(result).toEqual(expected satisfies typeof result);
+    expect(result).toEqual(expected);
   });
 });
