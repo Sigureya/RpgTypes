@@ -4,8 +4,11 @@ import type {
   CHANGE_NAME,
   SHOW_CHOICES,
 } from "@RpgTypes/libs/eventCommand";
-import type { ExtractCommandByCode, Command_ShowChoices } from "@RpgTypes/rmmz";
-import type { CommandParameter } from "@RpgTypes/rmmz/eventCommand/pickCommandParam";
+import type {
+  ExtractCommandByCode,
+  Command_ShowChoices,
+  CommandParameter,
+} from "@RpgTypes/rmmz";
 import { pickCommandParamString } from "@RpgTypes/rmmz/eventCommand/pickCommandParam";
 
 export const extractTextFromActorCommand = (

@@ -1,8 +1,7 @@
 import { describe, test, expect } from "vitest";
 import { COMMENT_HEAD } from "@RpgTypes/libs/eventCommand";
-import type { Command_CommentHeader } from "@RpgTypes/rmmz";
+import type { Command_CommentHeader, CommandParameter } from "@RpgTypes/rmmz";
 import { makeCommandCommentHeader } from "@RpgTypes/rmmz";
-import type { CommandParameter } from "@RpgTypes/rmmz/eventCommand/pickCommandParam";
 import { extractTextFromEventCommands } from "./getTextFromCommand";
 
 describe("extractTextFromEventCommands", () => {
