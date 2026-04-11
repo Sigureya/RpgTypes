@@ -1,5 +1,6 @@
 import type { AudioFileParams } from "@RpgTypes/libs";
 import type {
+  AudioFolders,
   CommandParameter,
   CommandUnion_AnyAudio,
   Data_CommonEvent,
@@ -10,8 +11,12 @@ import type {
 } from "@RpgTypes/rmmz";
 import type { ExtractedAudioBase } from "./base";
 
-export type AudioCommandParameter = ExtractedAudioBase &
-  CommandParameter<AudioFileParams, CommandUnion_AnyAudio["code"]>;
+export interface AudioCommandParameter
+  extends
+    ExtractedAudioBase,
+    CommandParameter<AudioFileParams, CommandUnion_AnyAudio["code"]> {
+  directory: AudioFolders;
+}
 
 export type GameDataAudioExtractor = EventContainerAudioExtractor &
   EventCommandAudioExtractor;
