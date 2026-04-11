@@ -8,7 +8,7 @@ import type {
 } from "./note/types";
 import type {
   ExtractedMapTexts,
-  PluginCommandMzParameter,
+  TextPluginCommandParameter,
 } from "./text/eventCommand";
 import {
   extractAllMapNotesEx,
@@ -22,7 +22,7 @@ import type {
 } from "./text/mainData/types";
 
 export const summarizeNoteKindsFromMapFiles = <
-  Command extends PluginCommandMzParameter,
+  Command extends TextPluginCommandParameter,
 >(
   mapList: readonly MapFileInfo<ExtractedMapTexts<Command>>[],
   audioFiles: AudioFilesSet,
@@ -34,7 +34,7 @@ export const summarizeNoteKindsFromMapFiles = <
 };
 
 export const normalizeNoteFromMapFiles = <
-  Command extends PluginCommandMzParameter,
+  Command extends TextPluginCommandParameter,
 >(
   mapList: readonly MapFileInfo<ExtractedMapTexts<Command>>[],
   audioFiles: AudioFilesSet,

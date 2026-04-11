@@ -16,11 +16,11 @@ import {
 } from "@RpgTypes/rmmz";
 import type {
   ExtractedMapEventTexts,
-  PluginCommandMzParameter,
+  TextPluginCommandParameter,
 } from "./extract/text/eventCommand";
 import { extractMapText } from "./extractEventText";
 
-const dummyPluginResult: PluginCommandMzParameter = {
+const dummyPluginResult: TextPluginCommandParameter = {
   code: PLUGIN_COMMAND_MZ,
   value: "PluginCommand",
   paramIndex: 3,
@@ -30,15 +30,15 @@ const dummyPluginResult: PluginCommandMzParameter = {
   argTitle: "Argument 1",
 };
 
-interface ParameterAdditional extends PluginCommandMzParameter {
+interface ParameterAdditional extends TextPluginCommandParameter {
   additionalInfo: string;
 }
 
-const evalutePluginCommand = (): PluginCommandMzParameter[] => [
+const evalutePluginCommand = (): TextPluginCommandParameter[] => [
   dummyPluginResult,
 ];
 interface TestCase<
-  T extends PluginCommandMzParameter = PluginCommandMzParameter,
+  T extends TextPluginCommandParameter = TextPluginCommandParameter,
 > {
   caseName: string;
   input: Data_Map<EventCommand>;
@@ -46,7 +46,7 @@ interface TestCase<
   expectedCalls: Command_PluginCommandMZ[];
 }
 
-const runTestCase = <T extends PluginCommandMzParameter>(
+const runTestCase = <T extends TextPluginCommandParameter>(
   testCase: TestCase<T>,
 ) => {
   describe(testCase.caseName, () => {

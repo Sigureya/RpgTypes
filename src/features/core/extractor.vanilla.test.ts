@@ -8,7 +8,7 @@ import {
 import type {
   ExtractedCommonEventText,
   ExtractedMapTexts,
-  PluginCommandMzParameter,
+  TextPluginCommandParameter,
 } from "./extract/text/eventCommand";
 import { extractCommonEventTexts, extractMapText } from "./extractEventText";
 import { createTextDataExtractorFromSchemas } from "./extractor";
@@ -29,7 +29,7 @@ describe("GameDataExtractor", () => {
     trigger: 0,
   };
   test("", () => {
-    const mockFn = vi.fn((): PluginCommandMzParameter[] => []);
+    const mockFn = vi.fn((): TextPluginCommandParameter[] => []);
     extractCommonEventTexts(mockCommonEvents, mockFn);
     expect(mockFn).not.toBeCalled();
   });
@@ -54,7 +54,7 @@ describe("extractMapTexts", () => {
     makeMapDataFromSingleEvent(mockCommands),
   );
   test("does not call pluginCommandTextExtractor when there are no plugin commands", () => {
-    const mockFn = vi.fn((): PluginCommandMzParameter[] => []);
+    const mockFn = vi.fn((): TextPluginCommandParameter[] => []);
     extractMapText(mockMap, mockFn);
     expect(mockFn).not.toBeCalled();
   });

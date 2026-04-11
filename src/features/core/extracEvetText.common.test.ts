@@ -8,7 +8,7 @@ import {
 } from "@RpgTypes/rmmz";
 import type {
   ExtractedCommonEventText,
-  PluginCommandMzParameter,
+  TextPluginCommandParameter,
 } from "./extract/text/eventCommand";
 import { extractCommonEventTexts } from "./extractEventText";
 
@@ -24,7 +24,7 @@ const mockPluginCommand2: Command_PluginCommandMZ = {
   parameters: ["PluginCommand", "argA", "argB", { key: "attr" }],
 };
 
-const duumyPluginResult: PluginCommandMzParameter = {
+const duumyPluginResult: TextPluginCommandParameter = {
   argName: "arg1",
   argTitle: "Argument 1",
   code: 357,
@@ -34,10 +34,10 @@ const duumyPluginResult: PluginCommandMzParameter = {
   value: "dummy",
 };
 
-const fn2 = (): PluginCommandMzParameter[] => {
+const fn2 = (): TextPluginCommandParameter[] => {
   return [duumyPluginResult];
 };
-interface ParameterAdditional extends PluginCommandMzParameter {
+interface ParameterAdditional extends TextPluginCommandParameter {
   additionalInfo: string;
 }
 

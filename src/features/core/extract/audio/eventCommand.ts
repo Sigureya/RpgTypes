@@ -5,17 +5,17 @@ import type {
   EventCommand,
 } from "@RpgTypes/rmmz/eventCommand";
 import { isCommandAnyAudio } from "@RpgTypes/rmmz/eventCommand";
-import type { PluginCommandMzParameter } from "../text/eventCommand";
+import type { TextPluginCommandParameter } from "../text/eventCommand";
 import type { AudioCommandParameter } from "./types/result";
 
-export const extractAudioCommands = <T extends PluginCommandMzParameter>(
+export const extractAudioCommands = <T extends TextPluginCommandParameter>(
   commands: ReadonlyArray<EventCommand>,
   pluginCommandEvaltor: (command: Command_PluginCommandMZ) => T[] = () => [],
 ): (AudioCommandParameter | T)[] => {
   return extractAudioCommandsCore(commands, pluginCommandEvaltor);
 };
 
-const extractAudioCommandsCore = <T extends PluginCommandMzParameter>(
+const extractAudioCommandsCore = <T extends TextPluginCommandParameter>(
   commands: ReadonlyArray<EventCommand>,
   pluginCommandEvaltor: (command: Command_PluginCommandMZ) => T[],
 ): (AudioCommandParameter | T)[] => {

@@ -9,7 +9,7 @@ import type {
   SHOW_MESSAGE_BODY,
 } from "@RpgTypes/libs/eventCommand";
 import type { CommandParameter } from "@RpgTypes/rmmz";
-import type { PluginCommandMzParameter } from "./pluginCommand";
+import type { TextPluginCommandParameter } from "./pluginCommand";
 import type { TextCommandParameter } from "./union";
 
 type BaseCode =
@@ -42,7 +42,7 @@ export interface MessageCommandParameter extends CommandParameter<
 }
 
 export interface ExtractedEventText<
-  P extends PluginCommandMzParameter = PluginCommandMzParameter,
+  P extends TextPluginCommandParameter = TextPluginCommandParameter,
 > {
   eventId: number;
   pageIndex: number;

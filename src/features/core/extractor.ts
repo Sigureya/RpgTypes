@@ -17,7 +17,7 @@ import { createPluginCommandExtractor } from "@sigureya/rmmz-plugin-schema/featu
 import { JSONPathJS } from "jsonpath-js";
 import { extractPluginCommandMzArgs } from "./extract/plugin/pluginCommand";
 import type {
-  PluginCommandMzParameter,
+  TextPluginCommandParameter,
   ExtractedBattleEventText,
   ExtractedCommonEventText,
   ExtractedMapTexts,
@@ -78,10 +78,10 @@ class GameDataExtractorClass implements GameDataExtractor {
     );
   }
 
-  extractArgs(command: Command_PluginCommandMZ): PluginCommandMzParameter[] {
+  extractArgs(command: Command_PluginCommandMZ): TextPluginCommandParameter[] {
     const entries = extractPluginCommandMzArgs(command, this._commandMap);
     return entries.args.filter(isSSS).map(
-      (v): PluginCommandMzParameter => ({
+      (v): TextPluginCommandParameter => ({
         code: PLUGIN_COMMAND_MZ,
         value: v.value,
         paramIndex: 3,
