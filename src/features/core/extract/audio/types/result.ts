@@ -50,6 +50,8 @@ export interface ExtractedMapAudios<
   events: ExtractedMapEventAudios<T>[];
   note: string;
   noteItems: NoteReadResult[];
+  bgm: AudioFileParams;
+  bgs: AudioFileParams;
 }
 
 export interface ExtractedMapEventAudios<
