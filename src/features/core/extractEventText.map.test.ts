@@ -235,6 +235,32 @@ const testCases: TestCase[] = [
     expectedCalls: [mockPluginCommandA],
   },
   {
+    caseName: "single event with note",
+    input: makeMapData({
+      note: "",
+      events: [
+        null,
+        makeMapEvent({
+          id: 1,
+          name: "Event1",
+          note: "<eventNote:abc>",
+          pages: [makeMapEventPage({ list: [] })],
+        }),
+      ],
+    }),
+    expectedCalls: [],
+    expectedEvents: [
+      {
+        eventId: 1,
+        name: "Event1",
+        pageIndex: 0,
+        commands: [],
+        note: "<eventNote:abc>",
+        noteItems: [{ key: "eventNote", value: "abc" }],
+      },
+    ],
+  },
+  {
     caseName: "singleEventMultiplePages",
     input: makeMapData({
       note: "",
@@ -287,7 +313,12 @@ const testCases: TestCase[] = [
         null,
         createEvent({ id: 20, name: "EventA", list: [[mockPluginCommandA]] }),
         createEvent({ id: 21, name: "EventB", list: [[mockPluginCommandB]] }),
-        createEvent({ id: 22, name: "EventC", list: [[mockPluginCommandC]] }),
+        createEvent({
+          id: 22,
+          name: "EventC",
+          list: [[mockPluginCommandC]],
+          note: "<eventNote:xyz>",
+        }),
       ],
     }),
     expectedEvents: [
@@ -312,8 +343,8 @@ const testCases: TestCase[] = [
         name: "EventC",
         pageIndex: 0,
         commands: [dummyPluginResult],
-        note: "",
-        noteItems: [],
+        note: "<eventNote:xyz>",
+        noteItems: [{ key: "eventNote", value: "xyz" }],
       },
     ],
     expectedCalls: [mockPluginCommandA, mockPluginCommandB, mockPluginCommandC],
