@@ -19,12 +19,13 @@ export {
   createTextDataExtractorFromCommandItems,
   createTextDataExtractor,
 } from "./core/extractor";
-export type { GameDataExtractor } from "./core/extract/types";
 export type {
   ExtractedBattleEventText,
   ExtractedCommonEventText,
   ExtractedMapEventTexts,
   ExtractedMapTexts,
+  GameDataExtractor,
+  EventCommandExtractor,
 } from "./core/extract/text/eventCommand";
 export type {
   ExtractedActorImage,

@@ -1,9 +1,30 @@
-import type { NoteReadResult } from "@RpgTypes/rmmz";
+import type {
+  Command_PluginCommandMZ,
+  Data_CommonEvent,
+  Data_Map,
+  Data_Troop,
+  EventCommand,
+  NoteReadResult,
+} from "@RpgTypes/rmmz";
 import type { PluginCommandMzParameter } from "./pluginCommand";
 import type { TextCommandParameter } from "./union";
 
+export interface GameDataExtractor {
+  extractMapTexts(rpgMap: Data_Map): ExtractedMapTexts;
+  extractBattleText(troop: Data_Troop): ExtractedBattleEventText[];
+  extractCommonEventText(commons: Data_CommonEvent): ExtractedCommonEventText;
+}
+
+export interface EventCommandExtractor {
+  extractArgs(command: Command_PluginCommandMZ): PluginCommandMzParameter[];
+  extractCommandTexts(
+    commands: ReadonlyArray<EventCommand>,
+  ): TextCommandParameter[];
+  pluginCommandKeys(): string[];
+}
+
 export interface ExtractedBattleEventText<
-  T extends PluginCommandMzParameter = PluginCommandMzParameter
+  T extends PluginCommandMzParameter = PluginCommandMzParameter,
 > {
   eventId: number;
   commands: (TextCommandParameter | T)[];
@@ -11,14 +32,14 @@ export interface ExtractedBattleEventText<
 }
 
 export interface ExtractedCommonEventText<
-  T extends PluginCommandMzParameter = PluginCommandMzParameter
+  T extends PluginCommandMzParameter = PluginCommandMzParameter,
 > {
   eventId: number;
   commands: (TextCommandParameter | T)[];
 }
 
 export interface ExtractedMapTexts<
-  T extends PluginCommandMzParameter = PluginCommandMzParameter
+  T extends PluginCommandMzParameter = PluginCommandMzParameter,
 > {
   events: ExtractedMapEventTexts<T>[];
   note: string;
@@ -27,7 +48,7 @@ export interface ExtractedMapTexts<
 }
 
 export interface ExtractedMapEventTexts<
-  T extends PluginCommandMzParameter = PluginCommandMzParameter
+  T extends PluginCommandMzParameter = PluginCommandMzParameter,
 > {
   eventId: number;
   name: string;
