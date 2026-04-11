@@ -12,7 +12,7 @@ import {
 import type { PluginSchema } from "@sigureya/rmmz-plugin-schema";
 import type {
   ExtractedMapTexts,
-  PluginCommandMzParameter,
+  TextPluginCommandParameter,
 } from "./extract/text/eventCommand";
 import { createTextDataExtractorFromSchemas } from "./extractor";
 
@@ -56,7 +56,7 @@ describe("GameDataExtractor", () => {
           { text: "test message" },
         ],
       };
-      const expected: PluginCommandMzParameter[] = [
+      const expected: TextPluginCommandParameter[] = [
         {
           code: PLUGIN_COMMAND_MZ,
           value: "test message",

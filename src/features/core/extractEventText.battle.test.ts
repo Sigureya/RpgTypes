@@ -4,7 +4,7 @@ import type { Command_PluginCommandMZ, Data_Troop } from "@RpgTypes/rmmz";
 import { makeTroopEventConditions } from "@RpgTypes/rmmz";
 import type {
   ExtractedBattleEventText,
-  PluginCommandMzParameter,
+  TextPluginCommandParameter,
 } from "./extract/text/eventCommand";
 import { extractBattleEventTexts } from "./extractEventText";
 
@@ -20,7 +20,7 @@ const mockPluginCommand2: Command_PluginCommandMZ = {
   parameters: ["PluginCommand", "argA", "argB", { key: "value2" }],
 };
 
-const dummyPluginResult: PluginCommandMzParameter = {
+const dummyPluginResult: TextPluginCommandParameter = {
   argName: "arg1",
   argTitle: "Argument 1",
   code: PLUGIN_COMMAND_MZ,
@@ -30,11 +30,11 @@ const dummyPluginResult: PluginCommandMzParameter = {
   value: "dummy",
 };
 
-const pluginEvaluator = (): PluginCommandMzParameter[] => {
+const pluginEvaluator = (): TextPluginCommandParameter[] => {
   return [dummyPluginResult];
 };
 
-interface ParameterAdditional extends PluginCommandMzParameter {
+interface ParameterAdditional extends TextPluginCommandParameter {
   additionalInfo: string;
 }
 

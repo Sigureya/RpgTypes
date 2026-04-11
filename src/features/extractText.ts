@@ -6,6 +6,7 @@ export {
 
 export type {
   TextCommandParameter,
+  TextPluginCommandParameter,
   PluginCommandMzParameter,
   GenericCommandParameter,
   MessageCommandParameter,

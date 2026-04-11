@@ -6,7 +6,7 @@ import type {
   EventCommand,
   NoteReadResult,
 } from "@RpgTypes/rmmz";
-import type { PluginCommandMzParameter } from "./pluginCommand";
+import type { TextPluginCommandParameter } from "./pluginCommand";
 import type { TextCommandParameter } from "./union";
 
 export type GameDataExtractor = EventContainerExtractor & EventCommandExtractor;
@@ -18,7 +18,7 @@ export interface EventContainerExtractor {
 }
 
 export interface EventCommandExtractor {
-  extractArgs(command: Command_PluginCommandMZ): PluginCommandMzParameter[];
+  extractArgs(command: Command_PluginCommandMZ): TextPluginCommandParameter[];
   extractCommandTexts(
     commands: ReadonlyArray<EventCommand>,
   ): TextCommandParameter[];
@@ -26,7 +26,7 @@ export interface EventCommandExtractor {
 }
 
 export interface ExtractedBattleEventText<
-  T extends PluginCommandMzParameter = PluginCommandMzParameter,
+  T extends TextPluginCommandParameter = TextPluginCommandParameter,
 > {
   eventId: number;
   commands: (TextCommandParameter | T)[];
@@ -34,14 +34,14 @@ export interface ExtractedBattleEventText<
 }
 
 export interface ExtractedCommonEventText<
-  T extends PluginCommandMzParameter = PluginCommandMzParameter,
+  T extends TextPluginCommandParameter = TextPluginCommandParameter,
 > {
   eventId: number;
   commands: (TextCommandParameter | T)[];
 }
 
 export interface ExtractedMapTexts<
-  T extends PluginCommandMzParameter = PluginCommandMzParameter,
+  T extends TextPluginCommandParameter = TextPluginCommandParameter,
 > {
   events: ExtractedMapEventTexts<T>[];
   note: string;
@@ -50,7 +50,7 @@ export interface ExtractedMapTexts<
 }
 
 export interface ExtractedMapEventTexts<
-  T extends PluginCommandMzParameter = PluginCommandMzParameter,
+  T extends TextPluginCommandParameter = TextPluginCommandParameter,
 > {
   eventId: number;
   name: string;

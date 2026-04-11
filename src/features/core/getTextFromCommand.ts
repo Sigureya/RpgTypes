@@ -9,7 +9,7 @@ import type { Command_PluginCommandMZ, EventCommand } from "@RpgTypes/rmmz";
 import type { GroopMapper } from "./eventCommand/commandGroup";
 import { getGroupHandlingFunc } from "./eventCommand/commandGroup/mapping";
 import type {
-  PluginCommandMzParameter,
+  TextPluginCommandParameter,
   TextCommandParameter,
 } from "./extract/text/eventCommand";
 import {
@@ -30,7 +30,7 @@ export const extractTextFromEventCommands = (
 };
 
 export const extractTextFromEventCommandsEx = <
-  T extends PluginCommandMzParameter,
+  T extends TextPluginCommandParameter,
 >(
   list: ReadonlyArray<EventCommand>,
   pluginCommandFn: (command: Command_PluginCommandMZ) => T[],
@@ -38,7 +38,7 @@ export const extractTextFromEventCommandsEx = <
   return extractTextFromEventCommandsCore(list, pluginCommandFn);
 };
 
-const extractTextFromEventCommandsCore = <T extends PluginCommandMzParameter>(
+const extractTextFromEventCommandsCore = <T extends TextPluginCommandParameter>(
   list: ReadonlyArray<EventCommand>,
   pluginCommandFn: (command: Command_PluginCommandMZ) => T[],
 ): (TextCommandParameter | T)[] => {
@@ -54,7 +54,7 @@ const extractTextFromEventCommandsCore = <T extends PluginCommandMzParameter>(
     .filter((v) => v !== null);
 };
 
-const forCommand = <T extends PluginCommandMzParameter>(
+const forCommand = <T extends TextPluginCommandParameter>(
   command: EventCommand,
   index: number,
   list: ReadonlyArray<EventCommand>,

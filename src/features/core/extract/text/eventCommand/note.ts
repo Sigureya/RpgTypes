@@ -2,7 +2,7 @@ import type { NoteReadResult } from "@RpgTypes/rmmz";
 import type {
   ExtractedMapEventTexts,
   ExtractedMapTexts,
-  PluginCommandMzParameter,
+  TextPluginCommandParameter,
 } from "./types";
 
 export const extractAllMapNotes = (
@@ -30,7 +30,7 @@ const n2 = (
 };
 
 export const filterNoteFromMapTexts = <
-  Command extends PluginCommandMzParameter,
+  Command extends TextPluginCommandParameter,
 >(
   map: ExtractedMapTexts<Command>,
   fn: (noteItem: NoteReadResult) => boolean,
@@ -43,7 +43,7 @@ export const filterNoteFromMapTexts = <
   };
 };
 
-const e3 = <Command extends PluginCommandMzParameter>(
+const e3 = <Command extends TextPluginCommandParameter>(
   mapEvent: ExtractedMapEventTexts<Command>,
   fn: (noteItem: NoteReadResult, index: number) => boolean,
 ): ExtractedMapEventTexts<Command> => {
