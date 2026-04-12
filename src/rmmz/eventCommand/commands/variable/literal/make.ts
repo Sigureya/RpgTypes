@@ -5,7 +5,7 @@ import type {
   ParamObject_VariableFromConstant,
 } from "./types";
 
-export const makeCommandVariableFromConstant2 = (
+export const makeCommandVariableFromConstant = (
   params: ParamObject_VariableFromConstant,
   indent: number = 0,
 ): Command_ControlVariables_FromConstant => {
