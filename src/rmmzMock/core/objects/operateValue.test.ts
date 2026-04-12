@@ -8,7 +8,6 @@ import {
   makeCommandVariableFromMapId,
   makeCommandVariableFromRandom,
   makeCommandVariableFromVariable,
-  OPERAND_VARIABLE,
   OPERATION_SET,
 } from "@RpgTypes/rmmz/eventCommand";
 import type { Rmmz_Variables } from "@RpgTypes/rmmzRuntime";
@@ -116,15 +115,15 @@ const testCases: TestCase[] = [
     testName: "variable operand set",
     valueCallCount: 2,
     setValues: [{ id: 33, value: MOCK_OLD_VALUE }],
-    command: makeCommandVariableFromVariable(
-      { startId: 33 },
-      { variableId: 17, operand: OPERAND_VARIABLE },
-      { operation: OPERATION_SET },
-    ),
+    command: makeCommandVariableFromVariable({
+      startId: 33,
+      operation: OPERATION_SET,
+      variableId: 36,
+    }),
     commandLiteral: {
       code: 122,
       indent: 0,
-      parameters: [33, 33, 0, 1, 17],
+      parameters: [33, 33, 0, 1, 36],
     },
   },
   {
