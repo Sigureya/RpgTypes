@@ -21,10 +21,16 @@ export interface Command_ControlVariables_FromMapCharactor extends EventCommandL
   parameters: ParamArray_VariableFromMapCharactor;
 }
 
+export interface ParamObject_VariableFromMapPlayer {
+  startId: number;
+  endId?: number;
+  operation?: VariableOperation;
+}
+
 export interface ParamObject_VariableFromMapCharactor {
   startId: number;
   endId?: number;
-  charactorId: number;
+  charactorId?: number;
   operation?: VariableOperation;
 }
 
