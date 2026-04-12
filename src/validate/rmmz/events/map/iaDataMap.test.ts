@@ -23,7 +23,10 @@ const isDataMap = (data: unknown): data is Data_Map => {
 const mockEventCommands: EventCommand[] = [
   makeCommandShowMessage({ speakerName: "Hero" }),
   makeCommandShowMessageBody("abc"),
-  makeCommandVariableFromConstant({ startId: 1 }, { value: 123 }),
+  makeCommandVariableFromConstant({
+    startId: 1,
+    value: 5,
+  }),
 ];
 
 const makeMapWithEvents = <T extends EventCommandUnknown>(

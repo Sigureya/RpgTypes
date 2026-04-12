@@ -39,12 +39,10 @@ const testCases: TestCase[] = [
   {
     caseName: "fromConstant",
     command: {
-      input: makeCommandVariableFromConstant(
-        {
-          startId: 1,
-        },
-        { value: 5 }
-      ) satisfies Command_ControlVariables<Operand_Constatant>,
+      input: makeCommandVariableFromConstant({
+        startId: 1,
+        value: 5,
+      }) satisfies Command_ControlVariables<Operand_Constatant>,
       expected: {
         code: 122,
         indent: 0,
@@ -58,7 +56,7 @@ const testCases: TestCase[] = [
     command: {
       input: makeCommandVariableFromEnemyData(
         { startId: 46, endId: 48 },
-        { index: 22, param: "ATK" }
+        { index: 22, param: "ATK" },
       ),
       expected: {
         code: 122,
@@ -81,7 +79,7 @@ const testCases: TestCase[] = [
       input: makeCommandVariableFromItemData(
         { startId: 10, endId: 10 },
         { itemId: 321 },
-        { indent: 6 }
+        { indent: 6 },
       ),
       expected: {
         code: 122,
