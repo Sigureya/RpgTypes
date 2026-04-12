@@ -6,7 +6,7 @@ import {
   makeCommandVariableFromVariable,
   OPERATION_SET,
 } from "@RpgTypes/rmmz/eventCommand";
-import type { Command_ControlVariables2 } from "@RpgTypes/rmmz/eventCommand/commands/variable/unionType";
+import type { Command_ControlVariables } from "@RpgTypes/rmmz/eventCommand/commands/variable/unionType";
 import type { Rmmz_Variables } from "@RpgTypes/rmmzRuntime";
 import type { FakeMap } from "./fakes/types";
 import { Game_Interpreter } from "./rmmz_objects";
@@ -50,9 +50,9 @@ interface TestCase {
     id: number;
   }[];
   // 変数操作コマンド。ここには生成関数の戻り値を置く
-  command: Command_ControlVariables2;
+  command: Command_ControlVariables;
   // 数値直書き。生成関数のバグと値のバグを切り分けるためにある
-  commandLiteral: Command_ControlVariables2;
+  commandLiteral: Command_ControlVariables;
   additionalTests?: ((testCase: TestCase) => void)[];
 }
 
