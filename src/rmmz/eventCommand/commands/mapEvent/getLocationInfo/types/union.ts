@@ -1,9 +1,28 @@
-import type { Command_GetEventIdXY } from "./eventXY";
-import type { Command_GetRegionId } from "./getRegionId";
-import type { Command_GetTileId } from "./getTileId";
-import type { Command_GetTerrainTag } from "./getTrarainTag";
+import type {
+  Command_GetEventIdXY,
+  Command_GetEventIdXyDirect,
+} from "./eventXY";
+import type {
+  Command_GetRegionId,
+  Command_GetRegionIdDirect,
+} from "./getRegionId";
+import type { Command_GetTileId, Command_GetTileIdDirect } from "./getTileId";
+import type {
+  Command_GetTerrainTag,
+  Command_GetTerrainTagDirect,
+} from "./getTrarainTag";
 
 export type Command_GetLocationInfo =
+  | Command_GetLocationInfoV
+  | Command_GetLocationInfoDirect;
+
+export type Command_GetLocationInfoDirect =
+  | Command_GetEventIdXyDirect
+  | Command_GetRegionIdDirect
+  | Command_GetTerrainTagDirect
+  | Command_GetTileIdDirect;
+
+export type Command_GetLocationInfoV =
   | Command_GetEventIdXY
   | Command_GetRegionId
   | Command_GetTerrainTag

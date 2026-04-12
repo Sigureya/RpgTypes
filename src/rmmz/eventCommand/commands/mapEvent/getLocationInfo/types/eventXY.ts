@@ -1,8 +1,31 @@
 import type { EventCommandLike, GET_LOCATION_INFO } from "@RpgTypes/libs";
 
-export type Command_GetEventIdXY = EventCommandLike<
+export interface Command_GetEventIdXY extends EventCommandLike<
   typeof GET_LOCATION_INFO,
-  [variableId: number, modeEventId: 1, designation: 0 | 1, x: number, y: number]
->;
+  ParamArray_GetEventIdXY
+> {
+  parameters: ParamArray_GetEventIdXY;
+}
 
-export type ParamArray_GetEventIdXY = Command_GetEventIdXY["parameters"];
+export interface Command_GetEventIdXyDirect extends EventCommandLike<
+  typeof GET_LOCATION_INFO,
+  ParamArray_GetEventIdXyDirect
+> {
+  parameters: ParamArray_GetEventIdXyDirect;
+}
+
+export type ParamArray_GetEventIdXY = [
+  variableId: number,
+  modeEventId: 1,
+  designationVariable: 1,
+  x: number,
+  y: number,
+];
+
+export type ParamArray_GetEventIdXyDirect = [
+  variableId: number,
+  modeEventId: 1,
+  designationDirect: 0,
+  x: number,
+  y: number,
+];

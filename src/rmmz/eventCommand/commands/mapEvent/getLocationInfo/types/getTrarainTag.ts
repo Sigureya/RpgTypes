@@ -1,14 +1,29 @@
 import type { EventCommandLike, GET_LOCATION_INFO } from "@RpgTypes/libs";
 
-export type Command_GetTerrainTag = EventCommandLike<
-  typeof GET_LOCATION_INFO,
-  ParamArray_GetTerrainTag
->;
+export interface Command_GetTerrainTag extends EventCommandLike<
+  typeof GET_LOCATION_INFO
+> {
+  parameters: ParamArray_GetTerrainTag;
+}
+
+export interface Command_GetTerrainTagDirect extends EventCommandLike<
+  typeof GET_LOCATION_INFO
+> {
+  parameters: ParamArray_GetTerrainTagDirect;
+}
 
 export type ParamArray_GetTerrainTag = [
   variableId: number,
   modeTerrainTag: 0,
-  designation: 0 | 1,
+  designationVariable: 1,
+  x: number,
+  y: number,
+];
+
+export type ParamArray_GetTerrainTagDirect = [
+  variableId: number,
+  modeTerrainTag: 0,
+  designationDirect: 0,
   x: number,
   y: number,
 ];
