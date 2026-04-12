@@ -1,6 +1,9 @@
 import type { MockedObject } from "vitest";
 import { describe, expect, test, vi } from "vitest";
-import type { Command_ControlVariables } from "@RpgTypes/rmmz/eventCommand";
+import type {
+  Command_ControlVariables2,
+  EventCommand,
+} from "@RpgTypes/rmmz/eventCommand";
 import { makeCommandVariableFromConstant } from "@RpgTypes/rmmz/eventCommand";
 import type { Rmmz_Variables } from "@RpgTypes/rmmzRuntime";
 import { Game_Interpreter } from "./rmmz_objects";
@@ -24,8 +27,8 @@ const createMockedMap = (): FakeMap => ({
 
 interface TestCase {
   description: string;
-  command: Command_ControlVariables;
-  commandLiteral: Command_ControlVariables;
+  command: Command_ControlVariables2;
+  commandLiteral: Command_ControlVariables2;
   setValues: { id: number; value: number }[];
 }
 
@@ -46,7 +49,7 @@ const runTestCase = (testCase: TestCase) => {
       Math.randomInt = randomInt;
 
       const interpreter = new Game_Interpreter();
-      interpreter.setup([testCase.commandLiteral], 0);
+      interpreter.setup([testCase.commandLiteral as EventCommand], 0);
       interpreter.executeCommand();
 
       testCase.setValues.forEach((entry) => {
