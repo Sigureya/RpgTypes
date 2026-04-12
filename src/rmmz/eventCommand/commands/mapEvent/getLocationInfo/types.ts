@@ -11,6 +11,12 @@ export interface Command_GetLocationInfo extends EventCommandLike<
   parameters: ParamArray_GetLocationInfo;
 }
 
+export interface ParamObject_GetLocationInfo {
+  variableId: number;
+  x: number;
+  y: number;
+}
+
 export type ParamArray_GetLocationInfo = [
   variableId: number,
   mode: number,

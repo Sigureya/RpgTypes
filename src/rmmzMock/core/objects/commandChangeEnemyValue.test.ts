@@ -11,7 +11,7 @@ import {
   makeCommandGainEnemyTP,
   makeCommandLoseEnemyMP,
   makeCommandLoseEnemyTP,
-} from "@RpgTypes/rmmz/eventCommand/commands/enemy/change/change";
+} from "@RpgTypes/rmmz/eventCommand/commands/enemy/change/make";
 import type { Rmmz_Unit, Rmmz_Variables } from "@RpgTypes/rmmzRuntime";
 import type { FakeBattler, FakeMap } from "./fakes/types";
 import { Game_Interpreter } from "./rmmz_objects";

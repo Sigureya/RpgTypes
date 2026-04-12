@@ -37,8 +37,8 @@ export {
   makeCommandAddEnemyState,
   makeCommandRemoveEachEnemyState,
   makeCommandRemoveEnemyState,
-} from "./state/state";
+} from "./state/make";
 export {
   makeCommandEnemyRecoverAll,
   makeCommandEnemyRecoverAllEach,
-} from "./recoverAll/recoverAll";
+} from "./recoverAll/make";
