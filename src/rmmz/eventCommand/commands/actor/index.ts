@@ -3,6 +3,7 @@ export * from "./changeLevel";
 export * from "./changeSkill";
 export * from "./changeState";
 export * from "./make";
+export * from "./nameInput";
 export * from "./recoverAll/index";
 export * from "./types";
 export type {
@@ -38,15 +39,15 @@ export type {
   Command_ChangeParam,
   ParamArray_ChangeParam,
 } from "./changeParam/types";
-export type {
-  Command_NameInputProcessing,
-  ParamArray_NameInputProcessing,
-} from "./nameInput/types";
 export {
   makeCommandChangeActorName,
   makeCommandChangeActorNickName,
   makeCommandChangeActorProfile,
 } from "./changeText/make";
+export {
+  makeCommandDecreaseActorParam,
+  makeCommandIncreaseActorParam,
+} from "./changeParam/make";
 export {
   makeCommandGainActorHP,
   makeCommandGainActorMP,
