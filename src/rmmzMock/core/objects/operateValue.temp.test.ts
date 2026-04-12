@@ -6,12 +6,12 @@ import type {
   EventCommand,
 } from "@RpgTypes/rmmz/eventCommand";
 import {
-  makeCommandVariableFromLastDataLastActorId,
-  makeCommandVariableFromLastDataLastEnemyIndex,
-  makeCommandVariableFromLastDataLastTargetActorId,
-  makeCommandVariableFromLastDataLastTargetEnemyIndex,
-  makeCommandVariableFromLastDataLastUsedItemId,
-  makeCommandVariableFromLastDataLastUsedSkillId,
+  makeCommandVariableDataLastActorId,
+  makeCommandVariableFromLastEnemyIndex,
+  makeCommandVariableFromLastTargetActorId,
+  makeCommandVariableFromLastTargetEnemyIndex,
+  makeCommandVariableFromLastUsedItemId,
+  makeCommandVariableFromLastUsedSkillId,
 } from "@RpgTypes/rmmz/eventCommand";
 import { VARIABLE_SRC_LAST } from "@RpgTypes/rmmz/eventCommand/commands/variable/types/last/dataSource";
 import type { Rmmz_Variables } from "@RpgTypes/rmmzRuntime";
@@ -129,7 +129,7 @@ const runTestCase = (testCase: TestCase) => {
 const testCases: TestCase[] = [
   {
     description: "USED_SKILL_ID",
-    command: makeCommandVariableFromLastDataLastUsedSkillId({ startId: 11 }),
+    command: makeCommandVariableFromLastUsedSkillId({ startId: 11 }),
     commandLiteral: {
       code: 122,
       indent: 0,
@@ -140,7 +140,7 @@ const testCases: TestCase[] = [
   },
   {
     description: "USED_ITEM_ID",
-    command: makeCommandVariableFromLastDataLastUsedItemId({ startId: 12 }),
+    command: makeCommandVariableFromLastUsedItemId({ startId: 12 }),
     commandLiteral: {
       code: 122,
       indent: 0,
@@ -151,7 +151,7 @@ const testCases: TestCase[] = [
   },
   {
     description: "ACTION_ACTOR_ID",
-    command: makeCommandVariableFromLastDataLastActorId({ startId: 13 }),
+    command: makeCommandVariableDataLastActorId({ startId: 13 }),
     commandLiteral: {
       code: 122,
       indent: 0,
@@ -162,7 +162,7 @@ const testCases: TestCase[] = [
   },
   {
     description: "ACTION_ENEMY_INDEX",
-    command: makeCommandVariableFromLastDataLastEnemyIndex({ startId: 14 }),
+    command: makeCommandVariableFromLastEnemyIndex({ startId: 14 }),
     commandLiteral: {
       code: 122,
       indent: 0,
@@ -173,7 +173,7 @@ const testCases: TestCase[] = [
   },
   {
     description: "TARGET_ACTOR_ID",
-    command: makeCommandVariableFromLastDataLastTargetActorId({ startId: 15 }),
+    command: makeCommandVariableFromLastTargetActorId({ startId: 15 }),
     commandLiteral: {
       code: 122,
       indent: 0,
@@ -184,7 +184,7 @@ const testCases: TestCase[] = [
   },
   {
     description: "TARGET_ENEMY_INDEX",
-    command: makeCommandVariableFromLastDataLastTargetEnemyIndex({
+    command: makeCommandVariableFromLastTargetEnemyIndex({
       startId: 16,
     }),
     commandLiteral: {
@@ -197,7 +197,7 @@ const testCases: TestCase[] = [
   },
   {
     description: "range write for ACTION_ACTOR_ID",
-    command: makeCommandVariableFromLastDataLastActorId({
+    command: makeCommandVariableDataLastActorId({
       startId: 20,
       endId: 22,
     }),

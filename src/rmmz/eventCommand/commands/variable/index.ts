@@ -4,7 +4,7 @@ export * from "./constants";
 export * from "./gameVariable";
 export * from "./party";
 export * from "./system";
-export * from "./templLastData2";
+export * from "./templLastData";
 export * from "./types";
 export { getActorValue, getEnemyValue } from "./getValue";
 export { isCommandOperandVariables } from "./gameVariable";
