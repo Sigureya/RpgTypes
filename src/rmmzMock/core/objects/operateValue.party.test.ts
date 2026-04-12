@@ -216,7 +216,7 @@ const testCases: TestCase[] = [
     testName: "get item amount :item[0]->null",
     fnCalls: { party: ["numItems"] },
     setValues: [{ id: 150, value: 0 }],
-    command: makeCommandVariableFromItemData({ startId: 150 }, { itemId: 0 }),
+    command: makeCommandVariableFromItemData({ startId: 150, itemId: 0 }),
     commandLiteral: {
       code: 122,
       indent: 0,
@@ -228,11 +228,7 @@ const testCases: TestCase[] = [
     testName: "get item amount :item[1]->Food",
     fnCalls: { party: ["numItems"] },
     setValues: [{ id: 150, value: MOCK_ITEM_AMOUNT }],
-    command: makeCommandVariableFromItemData(
-      { startId: 150 },
-      { itemId: 1 },
-      { indent: 2 },
-    ),
+    command: makeCommandVariableFromItemData({ startId: 150, itemId: 1 }, 2),
     commandLiteral: {
       code: 122,
       indent: 2,
@@ -244,7 +240,7 @@ const testCases: TestCase[] = [
     testName: "get item amount : item[2]->Treasure",
     fnCalls: { party: ["numItems"] },
     setValues: [{ id: 150, value: MOCK_ITEM_AMOUNT }],
-    command: makeCommandVariableFromItemData({ startId: 150 }, { itemId: 2 }),
+    command: makeCommandVariableFromItemData({ startId: 150, itemId: 2 }),
     commandLiteral: {
       code: 122,
       indent: 0,
@@ -256,7 +252,7 @@ const testCases: TestCase[] = [
     testName: "get armor amount : armor[0]->null",
     fnCalls: { party: ["numItems"] },
     setValues: [{ id: 160, value: 0 }],
-    command: makeCommandVariableFromArmor({ startId: 160 }, { armorId: 0 }),
+    command: makeCommandVariableFromArmor({ startId: 160, armorId: 0 }),
     commandLiteral: {
       code: 122,
       indent: 0,
@@ -268,7 +264,7 @@ const testCases: TestCase[] = [
     testName: "get armor amount : armor[1]->shield",
     fnCalls: { party: ["numItems"] },
     setValues: [{ id: 160, value: MOCK_ITEM_AMOUNT }],
-    command: makeCommandVariableFromArmor({ startId: 160 }, { armorId: 1 }),
+    command: makeCommandVariableFromArmor({ startId: 160, armorId: 1 }),
     commandLiteral: {
       code: 122,
       indent: 0,
@@ -280,7 +276,7 @@ const testCases: TestCase[] = [
     testName: "get armor amount : armor[2]->helmet",
     fnCalls: { party: ["numItems"] },
     setValues: [{ id: 160, value: MOCK_ITEM_AMOUNT }],
-    command: makeCommandVariableFromArmor({ startId: 160 }, { armorId: 2 }),
+    command: makeCommandVariableFromArmor({ startId: 160, armorId: 2 }),
     commandLiteral: {
       code: 122,
       indent: 0,
@@ -292,7 +288,7 @@ const testCases: TestCase[] = [
     testName: "get weapon amount : weapon[0]->null",
     fnCalls: { party: ["numItems"] },
     setValues: [{ id: 170, value: 0 }],
-    command: makeCommandVariableFromWeapon({ startId: 170 }, { weaponId: 0 }),
+    command: makeCommandVariableFromWeapon({ startId: 170, weaponId: 0 }),
     commandLiteral: {
       code: 122,
       indent: 0,
@@ -304,7 +300,7 @@ const testCases: TestCase[] = [
     testName: "get weapon amount : weapon[2]->Bow",
     fnCalls: { party: ["numItems"] },
     setValues: [{ id: 170, value: MOCK_ITEM_AMOUNT }],
-    command: makeCommandVariableFromWeapon({ startId: 170 }, { weaponId: 2 }),
+    command: makeCommandVariableFromWeapon({ startId: 170, weaponId: 2 }),
     commandLiteral: {
       code: 122,
       indent: 0,

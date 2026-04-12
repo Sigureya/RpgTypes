@@ -78,9 +78,8 @@ const testCases: TestCase[] = [
     caseName: "fromItem",
     command: {
       input: makeCommandVariableFromItemData(
-        { startId: 10, endId: 10 },
-        { itemId: 321 },
-        { indent: 6 },
+        { startId: 10, endId: 10, itemId: 321 },
+        6,
       ),
       expected: {
         code: 122,
