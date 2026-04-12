@@ -6,7 +6,10 @@ import {
   OPERATION_SUBTRACT,
   OPERATION_MULTIPLY,
 } from "@RpgTypes/libs";
-import type { EventCommand } from "@RpgTypes/rmmz/eventCommand";
+import type {
+  Command_ControlVariables_FromActor,
+  EventCommand,
+} from "@RpgTypes/rmmz/eventCommand";
 import {
   makeCommandVariableFromActorAgi,
   makeCommandVariableFromActorAtk,
@@ -22,8 +25,7 @@ import {
   makeCommandVariableFromActorMaxMp,
   makeCommandVariableFromActorMdf,
 } from "@RpgTypes/rmmz/eventCommand";
-import type { Command_ControlVariables_FromActor } from "@RpgTypes/rmmz/eventCommand/commands/variable/actor/types";
-import { STATUS } from "@RpgTypes/rmmz/eventCommand/commands/variable/types/actor/dataSource";
+import { ACTOR_STATUS } from "@RpgTypes/rmmz/eventCommand/commands/variable/actor/dataSource";
 import type { Rmmz_Actor } from "@RpgTypes/rmmzRuntime";
 import type { Rmmz_Variables } from "@RpgTypes/rmmzRuntime";
 import type { FakeMap } from "./fakes/types";
@@ -185,7 +187,15 @@ const testCases: TestCase[] = [
     commandLiteral: {
       code: 122,
       indent: 0,
-      parameters: [VAR_ID, VAR_ID, OPERATION_SET, 3, 3, ACTOR_ID, STATUS.LEVEL],
+      parameters: [
+        VAR_ID,
+        VAR_ID,
+        OPERATION_SET,
+        3,
+        3,
+        ACTOR_ID,
+        ACTOR_STATUS.LEVEL,
+      ],
     },
     whenActorNullValue: 0,
   },
@@ -199,7 +209,15 @@ const testCases: TestCase[] = [
     commandLiteral: {
       code: 122,
       indent: 2,
-      parameters: [VAR_ID, VAR_ID, OPERATION_ADD, 3, 3, ACTOR_ID, STATUS.EXP],
+      parameters: [
+        VAR_ID,
+        VAR_ID,
+        OPERATION_ADD,
+        3,
+        3,
+        ACTOR_ID,
+        ACTOR_STATUS.EXP,
+      ],
     },
     setValues: [{ id: VAR_ID, value: MOCK_ACTOR_EXP + MOCK_OLD_VALUE }],
     whenActorNullValue: 0 + MOCK_OLD_VALUE,
@@ -222,7 +240,7 @@ const testCases: TestCase[] = [
         3,
         3,
         ACTOR_ID,
-        STATUS.HP,
+        ACTOR_STATUS.HP,
       ],
     },
     setValues: [{ id: VAR_ID, value: MOCK_OLD_VALUE - MOCK_ACTOR_HP }],
@@ -246,7 +264,7 @@ const testCases: TestCase[] = [
         3,
         3,
         ACTOR_ID,
-        STATUS.MP,
+        ACTOR_STATUS.MP,
       ],
     },
     setValues: [{ id: VAR_ID, value: MOCK_OLD_VALUE * MOCK_ACTOR_MP }],
@@ -262,7 +280,7 @@ const testCases: TestCase[] = [
     commandLiteral: {
       code: 122,
       indent: 0,
-      parameters: [VAR_ID, VAR_ID, 0, 3, 3, ACTOR_ID, STATUS.TP],
+      parameters: [VAR_ID, VAR_ID, 0, 3, 3, ACTOR_ID, ACTOR_STATUS.TP],
     },
     setValues: [{ id: VAR_ID, value: MOCK_ACTOR_TP }],
     whenActorNullValue: 0,
@@ -278,7 +296,7 @@ const testCases: TestCase[] = [
     commandLiteral: {
       code: 122,
       indent: 0,
-      parameters: [VAR_ID, VAR_ID, 0, 3, 3, ACTOR_ID, STATUS.MAX_HP],
+      parameters: [VAR_ID, VAR_ID, 0, 3, 3, ACTOR_ID, ACTOR_STATUS.MAX_HP],
     },
     setValues: [{ id: VAR_ID, value: MOCK_ACTOR_PARAM_VALUE }],
     whenActorNullValue: 0,
@@ -294,7 +312,7 @@ const testCases: TestCase[] = [
     commandLiteral: {
       code: 122,
       indent: 0,
-      parameters: [VAR_ID, VAR_ID, 0, 3, 3, ACTOR_ID, STATUS.MAX_MP],
+      parameters: [VAR_ID, VAR_ID, 0, 3, 3, ACTOR_ID, ACTOR_STATUS.MAX_MP],
     },
     setValues: [{ id: VAR_ID, value: MOCK_ACTOR_PARAM_VALUE }],
     whenActorNullValue: 0,
@@ -310,7 +328,7 @@ const testCases: TestCase[] = [
     commandLiteral: {
       code: 122,
       indent: 0,
-      parameters: [VAR_ID, VAR_ID, 0, 3, 3, ACTOR_ID, STATUS.ATK],
+      parameters: [VAR_ID, VAR_ID, 0, 3, 3, ACTOR_ID, ACTOR_STATUS.ATK],
     },
     setValues: [{ id: VAR_ID, value: MOCK_ACTOR_PARAM_VALUE }],
     whenActorNullValue: 0,
@@ -326,7 +344,7 @@ const testCases: TestCase[] = [
     commandLiteral: {
       code: 122,
       indent: 0,
-      parameters: [VAR_ID, VAR_ID, 0, 3, 3, ACTOR_ID, STATUS.DEF],
+      parameters: [VAR_ID, VAR_ID, 0, 3, 3, ACTOR_ID, ACTOR_STATUS.DEF],
     },
     setValues: [{ id: VAR_ID, value: MOCK_ACTOR_PARAM_VALUE }],
     whenActorNullValue: 0,
@@ -342,7 +360,7 @@ const testCases: TestCase[] = [
     commandLiteral: {
       code: 122,
       indent: 0,
-      parameters: [VAR_ID, VAR_ID, 0, 3, 3, ACTOR_ID, STATUS.MAT],
+      parameters: [VAR_ID, VAR_ID, 0, 3, 3, ACTOR_ID, ACTOR_STATUS.MAT],
     },
     setValues: [{ id: VAR_ID, value: MOCK_ACTOR_PARAM_VALUE }],
     whenActorNullValue: 0,
@@ -358,7 +376,7 @@ const testCases: TestCase[] = [
     commandLiteral: {
       code: 122,
       indent: 0,
-      parameters: [VAR_ID, VAR_ID, 0, 3, 3, ACTOR_ID, STATUS.MDF],
+      parameters: [VAR_ID, VAR_ID, 0, 3, 3, ACTOR_ID, ACTOR_STATUS.MDF],
     },
     setValues: [{ id: VAR_ID, value: MOCK_ACTOR_PARAM_VALUE }],
     whenActorNullValue: 0,
@@ -374,7 +392,7 @@ const testCases: TestCase[] = [
     commandLiteral: {
       code: 122,
       indent: 0,
-      parameters: [VAR_ID, VAR_ID, 0, 3, 3, ACTOR_ID, STATUS.AGI],
+      parameters: [VAR_ID, VAR_ID, 0, 3, 3, ACTOR_ID, ACTOR_STATUS.AGI],
     },
     setValues: [{ id: VAR_ID, value: MOCK_ACTOR_PARAM_VALUE }],
     whenActorNullValue: 0,
@@ -390,7 +408,7 @@ const testCases: TestCase[] = [
     commandLiteral: {
       code: 122,
       indent: 0,
-      parameters: [VAR_ID, VAR_ID, 0, 3, 3, ACTOR_ID, STATUS.LUK],
+      parameters: [VAR_ID, VAR_ID, 0, 3, 3, ACTOR_ID, ACTOR_STATUS.LUK],
     },
     setValues: [{ id: VAR_ID, value: MOCK_ACTOR_PARAM_VALUE }],
     whenActorNullValue: 0,
