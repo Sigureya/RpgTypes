@@ -128,16 +128,17 @@ const testCases: TestCase[] = [
   },
   {
     testName: "random operand set",
-    setValues: [{ id: 34, value: 2 }],
-    command: makeCommandVariableFromRandom(
-      { startId: 34 },
-      { min: 2, max: 5 },
-      { operation: OPERATION_SET },
-    ),
+    setValues: [{ id: 34, value: 11 }],
+    command: makeCommandVariableFromRandom({
+      startId: 34,
+      min: 11,
+      max: 14,
+      operation: OPERATION_SET,
+    }),
     commandLiteral: {
       code: 122,
       indent: 0,
-      parameters: [34, 34, 0, 2, 2, 5],
+      parameters: [34, 34, 0, 2, 11, 14],
     },
   },
 
