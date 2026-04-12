@@ -1,4 +1,5 @@
 export * from "./actor";
+export * from "./actor2";
 export * from "./constants";
 export * from "./gameVariable";
 export * from "./party";

@@ -1,9 +1,26 @@
 import type { MockedObject } from "vitest";
 import { describe, expect, test, vi } from "vitest";
-import type { Command_ControlVariables } from "@RpgTypes/rmmz/eventCommand";
+import type {
+  Command_ControlVariables,
+  Command_ControlVariables_FromActor,
+  EventCommand,
+} from "@RpgTypes/rmmz/eventCommand";
 import {
-  makeCommandVariableFromActorStatusData,
-  makeCommandVaribaleFromActorMaxHp,
+  makeCommandVariableFromActorAgi,
+  makeCommandVariableFromActorAtk,
+  makeCommandVariableFromActorCurrentExp,
+  makeCommandVariableFromActorCurrentHp,
+  makeCommandVariableFromActorCurrentLevel,
+  makeCommandVariableFromActorCurrentMp,
+  makeCommandVariableFromActorCurrentTp,
+  makeCommandVariableFromActorDef,
+  makeCommandVariableFromActorLuk,
+  makeCommandVariableFromActorMat,
+  makeCommandVariableFromActorMaxHp4,
+  makeCommandVariableFromActorMaxMp,
+  makeCommandVariableFromActorMdf,
+  OPERATION_ADD,
+  OPERATION_SET,
 } from "@RpgTypes/rmmz/eventCommand";
 import { STATUS } from "@RpgTypes/rmmz/eventCommand/commands/variable/types/actor/dataSource";
 import type { Rmmz_Actor } from "@RpgTypes/rmmzRuntime";
@@ -14,14 +31,14 @@ import { Game_Interpreter } from "./rmmz_objects";
 const ACTOR_ID = 7;
 const VAR_ID = 10;
 
-const MOCK_ACTOR_HP = 1234;
-const MOCK_ACTOR_MP = 5678;
-const MOCK_ACTOR_TP = 9012;
-const MOCK_ACTOR_LEVEL = 99;
-const MOCK_ACTOR_EXP = 3456789;
-const MOCK_ACTOR_PARAM_VALUE = 42;
+const MOCK_ACTOR_HP = 2000;
+const MOCK_ACTOR_MP = 1000;
+const MOCK_ACTOR_TP = 500;
+const MOCK_ACTOR_LEVEL = 10;
+const MOCK_ACTOR_EXP = 16000;
+const MOCK_ACTOR_PARAM_VALUE = 30;
 
-const MOCK_VALUE = 60;
+const MOCK_OLD_VALUE = 24;
 
 type FakeActor = Pick<
   Rmmz_Actor,
@@ -36,7 +53,7 @@ const createFakeMap = (): FakeMap => ({
   mapId: () => 1,
 });
 const createMockedActors = (
-  actor: MockedObject<FakeActor> | null,
+  actor: FakeActor | null,
 ): MockedObject<FakeActors> => ({
   actor: vi.fn().mockReturnValue(actor),
 });
@@ -52,7 +69,7 @@ const createMockedActor = (): MockedObject<FakeActor> => ({
 
 const createMockedVariable = (): MockedObject<Rmmz_Variables> => ({
   clear: vi.fn(),
-  value: vi.fn().mockReturnValue(MOCK_VALUE),
+  value: vi.fn().mockReturnValue(MOCK_OLD_VALUE),
   setValue: vi.fn(),
   onChange: vi.fn(),
 });
@@ -60,8 +77,8 @@ const createMockedVariable = (): MockedObject<Rmmz_Variables> => ({
 interface TestCase {
   actorId: number;
   description: string;
-  command: Command_ControlVariables;
-  commandLiteral: Command_ControlVariables;
+  command: Command_ControlVariables | Command_ControlVariables_FromActor;
+  commandLiteral: Command_ControlVariables | Command_ControlVariables_FromActor;
   setValues: { id: number; value: number }[];
 }
 
@@ -83,7 +100,7 @@ const runTestCase = (testCase: TestCase) => {
       Math.randomInt = randomInt;
 
       const interpreter = new Game_Interpreter();
-      interpreter.setup([testCase.commandLiteral], 0);
+      interpreter.setup([testCase.commandLiteral as EventCommand], 0);
       interpreter.executeCommand();
 
       expect(mockedActors.actor).toHaveBeenCalledWith(testCase.actorId);
@@ -109,38 +126,39 @@ const testCases: TestCase[] = [
   {
     actorId: ACTOR_ID,
     description: "Actor Level",
-    command: makeCommandVariableFromActorStatusData(
-      { startId: VAR_ID },
-      { index: ACTOR_ID, param: STATUS.LEVEL },
-    ),
+    command: makeCommandVariableFromActorCurrentLevel({
+      actorId: ACTOR_ID,
+      startId: VAR_ID,
+    }),
+    setValues: [{ id: VAR_ID, value: MOCK_ACTOR_LEVEL }],
     commandLiteral: {
       code: 122,
       indent: 0,
-      parameters: [VAR_ID, VAR_ID, 0, 3, 3, ACTOR_ID, STATUS.LEVEL],
+      parameters: [VAR_ID, VAR_ID, OPERATION_SET, 3, 3, ACTOR_ID, STATUS.LEVEL],
     },
-    setValues: [{ id: VAR_ID, value: MOCK_ACTOR_LEVEL }],
   },
   {
     actorId: ACTOR_ID,
     description: "Actor EXP",
-    command: makeCommandVariableFromActorStatusData(
-      { startId: VAR_ID },
-      { index: ACTOR_ID, param: STATUS.EXP },
-    ),
+    command: makeCommandVariableFromActorCurrentExp({
+      actorId: ACTOR_ID,
+      startId: VAR_ID,
+      operation: OPERATION_ADD,
+    }),
     commandLiteral: {
       code: 122,
       indent: 0,
-      parameters: [VAR_ID, VAR_ID, 0, 3, 3, ACTOR_ID, STATUS.EXP],
+      parameters: [VAR_ID, VAR_ID, OPERATION_ADD, 3, 3, ACTOR_ID, STATUS.EXP],
     },
-    setValues: [{ id: VAR_ID, value: MOCK_ACTOR_EXP }],
+    setValues: [{ id: VAR_ID, value: MOCK_ACTOR_EXP + MOCK_OLD_VALUE }],
   },
   {
     actorId: ACTOR_ID,
     description: "Actor HP",
-    command: makeCommandVariableFromActorStatusData(
-      { startId: VAR_ID },
-      { index: ACTOR_ID, param: STATUS.HP },
-    ),
+    command: makeCommandVariableFromActorCurrentHp({
+      actorId: ACTOR_ID,
+      startId: VAR_ID,
+    }),
     commandLiteral: {
       code: 122,
       indent: 0,
@@ -151,10 +169,10 @@ const testCases: TestCase[] = [
   {
     actorId: ACTOR_ID,
     description: "Actor MP",
-    command: makeCommandVariableFromActorStatusData(
-      { startId: VAR_ID },
-      { index: ACTOR_ID, param: STATUS.MP },
-    ),
+    command: makeCommandVariableFromActorCurrentMp({
+      startId: VAR_ID,
+      actorId: ACTOR_ID,
+    }),
     commandLiteral: {
       code: 122,
       indent: 0,
@@ -165,10 +183,10 @@ const testCases: TestCase[] = [
   {
     actorId: ACTOR_ID,
     description: "Actor TP",
-    command: makeCommandVariableFromActorStatusData(
-      { startId: VAR_ID },
-      { index: ACTOR_ID, param: STATUS.TP },
-    ),
+    command: makeCommandVariableFromActorCurrentTp({
+      startId: VAR_ID,
+      actorId: ACTOR_ID,
+    }),
     commandLiteral: {
       code: 122,
       indent: 0,
@@ -179,7 +197,10 @@ const testCases: TestCase[] = [
   {
     actorId: ACTOR_ID,
     description: "Actor MAX_HP (param 0)",
-    command: makeCommandVaribaleFromActorMaxHp({ startId: VAR_ID }),
+    command: makeCommandVariableFromActorMaxHp4({
+      startId: VAR_ID,
+      actorId: ACTOR_ID,
+    }),
     commandLiteral: {
       code: 122,
       indent: 0,
@@ -190,10 +211,10 @@ const testCases: TestCase[] = [
   {
     actorId: ACTOR_ID,
     description: "Actor MAX_MP (param 1)",
-    command: makeCommandVariableFromActorStatusData(
-      { startId: VAR_ID },
-      { index: ACTOR_ID, param: STATUS.MAX_MP },
-    ),
+    command: makeCommandVariableFromActorMaxMp({
+      startId: VAR_ID,
+      actorId: ACTOR_ID,
+    }),
     commandLiteral: {
       code: 122,
       indent: 0,
@@ -204,10 +225,10 @@ const testCases: TestCase[] = [
   {
     actorId: ACTOR_ID,
     description: "Actor ATK (param 2)",
-    command: makeCommandVariableFromActorStatusData(
-      { startId: VAR_ID },
-      { index: ACTOR_ID, param: STATUS.ATK },
-    ),
+    command: makeCommandVariableFromActorAtk({
+      startId: VAR_ID,
+      actorId: ACTOR_ID,
+    }),
     commandLiteral: {
       code: 122,
       indent: 0,
@@ -218,10 +239,10 @@ const testCases: TestCase[] = [
   {
     actorId: ACTOR_ID,
     description: "Actor DEF (param 3)",
-    command: makeCommandVariableFromActorStatusData(
-      { startId: VAR_ID },
-      { index: ACTOR_ID, param: STATUS.DEF },
-    ),
+    command: makeCommandVariableFromActorDef({
+      startId: VAR_ID,
+      actorId: ACTOR_ID,
+    }),
     commandLiteral: {
       code: 122,
       indent: 0,
@@ -232,10 +253,10 @@ const testCases: TestCase[] = [
   {
     actorId: ACTOR_ID,
     description: "Actor MAT (param 4)",
-    command: makeCommandVariableFromActorStatusData(
-      { startId: VAR_ID },
-      { index: ACTOR_ID, param: STATUS.MAT },
-    ),
+    command: makeCommandVariableFromActorMat({
+      startId: VAR_ID,
+      actorId: ACTOR_ID,
+    }),
     commandLiteral: {
       code: 122,
       indent: 0,
@@ -246,10 +267,10 @@ const testCases: TestCase[] = [
   {
     actorId: ACTOR_ID,
     description: "Actor MDF (param 5)",
-    command: makeCommandVariableFromActorStatusData(
-      { startId: VAR_ID },
-      { index: ACTOR_ID, param: STATUS.MDF },
-    ),
+    command: makeCommandVariableFromActorMdf({
+      startId: VAR_ID,
+      actorId: ACTOR_ID,
+    }),
     commandLiteral: {
       code: 122,
       indent: 0,
@@ -260,10 +281,10 @@ const testCases: TestCase[] = [
   {
     actorId: ACTOR_ID,
     description: "Actor AGI (param 6)",
-    command: makeCommandVariableFromActorStatusData(
-      { startId: VAR_ID },
-      { index: ACTOR_ID, param: STATUS.AGI },
-    ),
+    command: makeCommandVariableFromActorAgi({
+      startId: VAR_ID,
+      actorId: ACTOR_ID,
+    }),
     commandLiteral: {
       code: 122,
       indent: 0,
@@ -274,10 +295,10 @@ const testCases: TestCase[] = [
   {
     actorId: ACTOR_ID,
     description: "Actor LUK (param 7)",
-    command: makeCommandVariableFromActorStatusData(
-      { startId: VAR_ID },
-      { index: ACTOR_ID, param: STATUS.LUK },
-    ),
+    command: makeCommandVariableFromActorLuk({
+      startId: VAR_ID,
+      actorId: ACTOR_ID,
+    }),
     commandLiteral: {
       code: 122,
       indent: 0,
