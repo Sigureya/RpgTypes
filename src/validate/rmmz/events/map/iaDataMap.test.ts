@@ -5,8 +5,8 @@ import type { EventCommand } from "@RpgTypes/rmmz";
 import {
   makeCommandShowMessage,
   makeCommandShowMessageBody,
+  makeCommandVariableFromConstant,
 } from "@RpgTypes/rmmz";
-import { makeCommandVariableFromConstant2 } from "@RpgTypes/rmmz/eventCommand/commands/variable/literal/make";
 import type { Data_Map, MapEvent } from "@RpgTypes/rmmz/rpg";
 import {
   makeMapData,
@@ -23,7 +23,7 @@ const isDataMap = (data: unknown): data is Data_Map => {
 const mockEventCommands: EventCommand[] = [
   makeCommandShowMessage({ speakerName: "Hero" }),
   makeCommandShowMessageBody("abc"),
-  makeCommandVariableFromConstant2({
+  makeCommandVariableFromConstant({
     startId: 1,
     value: 5,
   }),
