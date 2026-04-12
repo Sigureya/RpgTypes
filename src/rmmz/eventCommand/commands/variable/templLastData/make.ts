@@ -5,7 +5,7 @@ import type {
   ParamObject_VariableFromLastData,
 } from "./types";
 
-export const makeCommandVariableFromLastDataLastUsedSkillId = (
+export const makeCommandVariableFromLastUsedSkillId = (
   params: ParamObject_VariableFromLastData,
   indent: number = 0,
 ): Command_ControlVariables_FromLastData => {
@@ -16,7 +16,7 @@ export const makeCommandVariableFromLastDataLastUsedSkillId = (
   };
 };
 
-export const makeCommandVariableFromLastDataLastUsedItemId = (
+export const makeCommandVariableFromLastUsedItemId = (
   params: ParamObject_VariableFromLastData,
   indent: number = 0,
 ): Command_ControlVariables_FromLastData => {
@@ -27,7 +27,7 @@ export const makeCommandVariableFromLastDataLastUsedItemId = (
   };
 };
 
-export const makeCommandVariableFromLastDataLastActorId = (
+export const makeCommandVariableDataLastActorId = (
   params: ParamObject_VariableFromLastData,
   indent: number = 0,
 ): Command_ControlVariables_FromLastData => {
@@ -38,7 +38,7 @@ export const makeCommandVariableFromLastDataLastActorId = (
   };
 };
 
-export const makeCommandVariableFromLastDataLastEnemyIndex = (
+export const makeCommandVariableFromLastEnemyIndex = (
   params: ParamObject_VariableFromLastData,
   indent: number = 0,
 ): Command_ControlVariables_FromLastData => {
@@ -49,7 +49,7 @@ export const makeCommandVariableFromLastDataLastEnemyIndex = (
   };
 };
 
-export const makeCommandVariableFromLastDataLastTargetActorId = (
+export const makeCommandVariableFromLastTargetActorId = (
   params: ParamObject_VariableFromLastData,
   indent: number = 0,
 ): Command_ControlVariables_FromLastData => {
@@ -60,7 +60,7 @@ export const makeCommandVariableFromLastDataLastTargetActorId = (
   };
 };
 
-export const makeCommandVariableFromLastDataLastTargetEnemyIndex = (
+export const makeCommandVariableFromLastTargetEnemyIndex = (
   params: ParamObject_VariableFromLastData,
   indent: number = 0,
 ): Command_ControlVariables_FromLastData => {
