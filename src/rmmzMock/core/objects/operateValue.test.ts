@@ -43,6 +43,7 @@ const MOCK_ESCAPECOUNT = 900;
 
 const MOCK_GOLD = 4980;
 const MOCK_STEPS = 8976;
+const MOCK_PARTY_SIZE = 16;
 
 const MOCK_OLD_VALUE = 60;
 
@@ -101,7 +102,7 @@ type FakeParty = Pick<Game_Party, (typeof PARTY_FUNCTION_KEYS)[number]>;
 const createMockParty = (actorIds: number[]): MockedObject<FakeParty> => ({
   gainGold: vi.fn(),
   loseGold: vi.fn(),
-  size: vi.fn().mockReturnValue(actorIds.length),
+  size: vi.fn().mockReturnValue(MOCK_PARTY_SIZE),
   gold: vi.fn().mockReturnValue(MOCK_GOLD),
   steps: vi.fn().mockReturnValue(MOCK_STEPS),
   members: vi.fn().mockReturnValue(actorIds.map((id) => ({ id }))),
@@ -670,9 +671,8 @@ const testCases: TestCase[] = [
     fnCalls: {
       party: ["size"],
       systems: [],
-      //      actorsCall: MOCK_PARTY_MEMBERS.length,
     },
-    setValues: [{ id: 233, value: 3 }],
+    setValues: [{ id: 233, value: MOCK_PARTY_SIZE }],
     command: makeCommandVariableFromPartyMembers({ startId: 233 }),
     commandLiteral: {
       code: 122,
