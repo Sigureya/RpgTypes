@@ -6,10 +6,7 @@ import {
   OPERATION_SUBTRACT,
   OPERATION_MULTIPLY,
 } from "@RpgTypes/libs";
-import type {
-  Command_ControlVariables,
-  EventCommand,
-} from "@RpgTypes/rmmz/eventCommand";
+import type { EventCommand } from "@RpgTypes/rmmz/eventCommand";
 import {
   makeCommandVariableFromActorAgi,
   makeCommandVariableFromActorAtk,
@@ -83,8 +80,8 @@ interface TestCase {
   description: string;
   paramIndex?: number;
   whenActorNullValue: number;
-  command: Command_ControlVariables | Command_ControlVariables_FromActor;
-  commandLiteral: Command_ControlVariables | Command_ControlVariables_FromActor;
+  command: Command_ControlVariables_FromActor;
+  commandLiteral: Command_ControlVariables_FromActor;
   setValues: { id: number; value: number }[];
 }
 

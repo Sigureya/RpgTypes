@@ -1,6 +1,7 @@
 import type { MockedObject } from "vitest";
 import { describe, expect, test, vi } from "vitest";
 import type { Data_NamedItem } from "@RpgTypes/libs";
+import type { Command_ControlVariables } from "@RpgTypes/rmmz/eventCommand";
 import {
   makeCommandVariableFromArmor,
   makeCommandVariableFromItemData,
@@ -8,7 +9,6 @@ import {
   makeCommandVariableFromPartyMembers,
   makeCommandVariableFromPartySteps,
   makeCommandVariableFromWeapon,
-  type Command_ControlVariables,
 } from "@RpgTypes/rmmz/eventCommand";
 import type { Rmmz_Variables } from "@RpgTypes/rmmzRuntime";
 import type { FakeMap } from "./fakes/types";

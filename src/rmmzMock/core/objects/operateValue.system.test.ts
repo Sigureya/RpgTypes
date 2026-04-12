@@ -1,7 +1,6 @@
 import type { MockedObject } from "vitest";
 import { describe, expect, test, vi } from "vitest";
 import type {
-  Command_ControlVariables,
   Command_ControlVariables_FromSystem,
   EventCommand,
 } from "@RpgTypes/rmmz/eventCommand";
@@ -86,8 +85,8 @@ const stubGlobal = (mocks: ReturnType<typeof createMockedObjects>) => {
 
 interface TestCase {
   description: string;
-  command: Command_ControlVariables | Command_ControlVariables_FromSystem;
-  commandLiteral: Command_ControlVariables;
+  command: Command_ControlVariables_FromSystem;
+  commandLiteral: Command_ControlVariables_FromSystem;
   setValues: { id: number; value: number }[];
   systemCalls: (keyof FakeSystem)[];
   timerCalls: number;
