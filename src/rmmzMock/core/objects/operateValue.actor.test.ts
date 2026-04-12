@@ -1,8 +1,13 @@
 import type { MockedObject } from "vitest";
-import { describe, expect, test, vi } from "vitest";
+import { vi, describe, test, expect } from "vitest";
+import {
+  OPERATION_SET,
+  OPERATION_ADD,
+  OPERATION_SUBTRACT,
+  OPERATION_MULTIPLY,
+} from "@RpgTypes/libs";
 import type {
   Command_ControlVariables,
-  Command_ControlVariables_FromActor,
   EventCommand,
 } from "@RpgTypes/rmmz/eventCommand";
 import {
@@ -19,11 +24,8 @@ import {
   makeCommandVariableFromActorMaxHp4,
   makeCommandVariableFromActorMaxMp,
   makeCommandVariableFromActorMdf,
-  OPERATION_ADD,
-  OPERATION_MULTIPLY,
-  OPERATION_SET,
-  OPERATION_SUBTRACT,
 } from "@RpgTypes/rmmz/eventCommand";
+import type { Command_ControlVariables_FromActor } from "@RpgTypes/rmmz/eventCommand/commands/variable/actor/types";
 import { STATUS } from "@RpgTypes/rmmz/eventCommand/commands/variable/types/actor/dataSource";
 import type { Rmmz_Actor } from "@RpgTypes/rmmzRuntime";
 import type { Rmmz_Variables } from "@RpgTypes/rmmzRuntime";
