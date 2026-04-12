@@ -7,7 +7,7 @@ import type {
 } from "@RpgTypes/rmmz";
 import {
   makeCommandVariableFromConstant,
-  makeCommandVariableFromEnemyData,
+  makeCommandVariableFromEnemyAtk,
   makeCommandVariableFromItemData,
 } from "@RpgTypes/rmmz";
 import { ENEMY_PARAM_INDEX } from "@RpgTypes/rmmz/eventCommand/commands/variable/types/enemy/dataSource";
@@ -54,10 +54,11 @@ const testCases: TestCase[] = [
   {
     caseName: "fromEnemy",
     command: {
-      input: makeCommandVariableFromEnemyData(
-        { startId: 46, endId: 48 },
-        { index: 22, param: "ATK" },
-      ),
+      input: makeCommandVariableFromEnemyAtk({
+        startId: 46,
+        endId: 48,
+        enemyIndex: 22,
+      }),
       expected: {
         code: 122,
         indent: 0,

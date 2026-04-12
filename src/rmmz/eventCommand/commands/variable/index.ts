@@ -1,5 +1,6 @@
 export * from "./actor";
 export * from "./constants";
+export * from "./enemy/make";
 export * from "./gameVariable";
 export * from "./literal";
 export * from "./party";
