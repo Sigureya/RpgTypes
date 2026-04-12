@@ -14,5 +14,6 @@ export declare class Game_Party
     item: Data_Item | Data_Weapon | Data_Armor,
     includeEquip: boolean,
   ): number;
+  size(): number;
   _actors: number[];
 }
