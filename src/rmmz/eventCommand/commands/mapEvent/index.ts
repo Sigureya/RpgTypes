@@ -1,3 +1,3 @@
 export * from "./eraseEvent/types";
 export * from "./getLocationInfo";
-export * from "./setLocation/types";
+export * from "./setLocation";
