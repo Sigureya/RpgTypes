@@ -16,4 +16,4 @@ export {
   makeCommandBattleProcessingDirect,
   makeCommandBattleProcessingEncount,
   makeCommandBattleProcessingVariable,
-} from "./battleProcessing";
+} from "./make";
