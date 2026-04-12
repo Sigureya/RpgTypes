@@ -5,10 +5,12 @@ import type {
 } from "@RpgTypes/libs";
 
 export interface Command_ControlVariables_FromConstant extends EventCommandLike<
-  typeof CONTROL_VARIABLES
+  typeof CONTROL_VARIABLES,
+  ParamArray_VariableFromConstant
 > {
   code: typeof CONTROL_VARIABLES;
   indent: number;
+  parameters: ParamArray_VariableFromConstant;
 }
 
 export interface ParamObject_VariableFromConstant {
