@@ -77,6 +77,7 @@ const createMockedVariable = (): MockedObject<Rmmz_Variables> => ({
 interface TestCase {
   actorId: number;
   description: string;
+  paramIndex?: number;
   command: Command_ControlVariables | Command_ControlVariables_FromActor;
   commandLiteral: Command_ControlVariables | Command_ControlVariables_FromActor;
   setValues: { id: number; value: number }[];
@@ -86,6 +87,30 @@ const runTestCase = (testCase: TestCase) => {
   describe(testCase.description, () => {
     test("literal equality", () => {
       expect(testCase.command).toEqual(testCase.commandLiteral);
+    });
+
+    test("call test", () => {
+      const mockBattler = createMockedActor();
+      const mockedActors = createMockedActors(mockBattler);
+      const mockedVariables = createMockedVariable();
+      vi.stubGlobal("$gameActors", mockedActors);
+      vi.stubGlobal("$gameVariables", mockedVariables);
+      vi.stubGlobal("$gameMap", createFakeMap());
+
+      const randomInt: MockedObject<(max: number) => number> = vi.fn(() => 0);
+      // @ts-ignore
+      Math.randomInt = randomInt;
+
+      const interpreter = new Game_Interpreter();
+      interpreter.setup([testCase.commandLiteral as EventCommand], 0);
+      interpreter.executeCommand();
+      expect(mockedActors.actor).toHaveBeenCalledWith(testCase.actorId);
+      if (testCase.paramIndex === undefined) {
+        expect(mockBattler.param).not.toHaveBeenCalled();
+      } else {
+        expect(mockBattler.param).toHaveBeenCalledOnce();
+        expect(mockBattler.param).toHaveBeenCalledWith(testCase.paramIndex);
+      }
     });
 
     test("set variable value", () => {
@@ -103,7 +128,6 @@ const runTestCase = (testCase: TestCase) => {
       interpreter.setup([testCase.commandLiteral as EventCommand], 0);
       interpreter.executeCommand();
 
-      expect(mockedActors.actor).toHaveBeenCalledWith(testCase.actorId);
       testCase.setValues.forEach((entry) => {
         expect(mockedVariables.value).toHaveBeenCalledWith(entry.id);
         expect(mockedVariables.setValue).toHaveBeenCalledWith(
@@ -197,6 +221,7 @@ const testCases: TestCase[] = [
   {
     actorId: ACTOR_ID,
     description: "Actor MAX_HP (param 0)",
+    paramIndex: 0,
     command: makeCommandVariableFromActorMaxHp4({
       startId: VAR_ID,
       actorId: ACTOR_ID,
@@ -211,6 +236,7 @@ const testCases: TestCase[] = [
   {
     actorId: ACTOR_ID,
     description: "Actor MAX_MP (param 1)",
+    paramIndex: 1,
     command: makeCommandVariableFromActorMaxMp({
       startId: VAR_ID,
       actorId: ACTOR_ID,
@@ -225,6 +251,7 @@ const testCases: TestCase[] = [
   {
     actorId: ACTOR_ID,
     description: "Actor ATK (param 2)",
+    paramIndex: 2,
     command: makeCommandVariableFromActorAtk({
       startId: VAR_ID,
       actorId: ACTOR_ID,
@@ -239,6 +266,7 @@ const testCases: TestCase[] = [
   {
     actorId: ACTOR_ID,
     description: "Actor DEF (param 3)",
+    paramIndex: 3,
     command: makeCommandVariableFromActorDef({
       startId: VAR_ID,
       actorId: ACTOR_ID,
@@ -253,6 +281,7 @@ const testCases: TestCase[] = [
   {
     actorId: ACTOR_ID,
     description: "Actor MAT (param 4)",
+    paramIndex: 4,
     command: makeCommandVariableFromActorMat({
       startId: VAR_ID,
       actorId: ACTOR_ID,
@@ -267,6 +296,7 @@ const testCases: TestCase[] = [
   {
     actorId: ACTOR_ID,
     description: "Actor MDF (param 5)",
+    paramIndex: 5,
     command: makeCommandVariableFromActorMdf({
       startId: VAR_ID,
       actorId: ACTOR_ID,
@@ -281,6 +311,7 @@ const testCases: TestCase[] = [
   {
     actorId: ACTOR_ID,
     description: "Actor AGI (param 6)",
+    paramIndex: 6,
     command: makeCommandVariableFromActorAgi({
       startId: VAR_ID,
       actorId: ACTOR_ID,
@@ -295,6 +326,7 @@ const testCases: TestCase[] = [
   {
     actorId: ACTOR_ID,
     description: "Actor LUK (param 7)",
+    paramIndex: 7,
     command: makeCommandVariableFromActorLuk({
       startId: VAR_ID,
       actorId: ACTOR_ID,
