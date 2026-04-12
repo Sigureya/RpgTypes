@@ -1,5 +1,4 @@
-import { CONTROL_VARIABLES } from "@RpgTypes/libs/eventCommand";
-import { OPERATION_SET } from "./constants";
+import { CONTROL_VARIABLES, OPERATION_SET } from "@RpgTypes/libs/eventCommand";
 import type { MakeOtherParam } from "./otherTypes";
 import type {
   Command_ControlVariables,

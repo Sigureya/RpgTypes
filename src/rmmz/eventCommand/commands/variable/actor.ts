@@ -1,6 +1,6 @@
-import { CONTROL_VARIABLES } from "@RpgTypes/libs/eventCommand";
-import type { VariableOperation } from "./constants";
-import { OPERAND_GAMEDATA, OPERATION_SET } from "./constants";
+import type { VariableOperation } from "@RpgTypes/libs/eventCommand";
+import { CONTROL_VARIABLES, OPERATION_SET } from "@RpgTypes/libs/eventCommand";
+import { OPERAND_GAMEDATA } from "./constants";
 import type { MakeOtherParam } from "./otherTypes";
 import type {
   ParamObject_WritingTarget,
