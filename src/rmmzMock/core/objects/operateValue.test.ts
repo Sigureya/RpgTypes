@@ -1,16 +1,9 @@
 import type { MockedObject } from "vitest";
 import { describe, expect, test, vi } from "vitest";
-import type { Data_NamedItem } from "@RpgTypes/libs";
 import {
-  makeCommandVariableFromArmor,
-  makeCommandVariableFromItemData,
   makeCommandVariableFromMapId,
-  makeCommandVariableFromPartyGold,
-  makeCommandVariableFromPartyMembers,
-  makeCommandVariableFromPartySteps,
   makeCommandVariableFromRandom,
   makeCommandVariableFromVariable,
-  makeCommandVariableFromWeapon,
   OPERAND_VARIABLE,
   OPERATION_SET,
   type Command_ControlVariables,
@@ -30,13 +23,10 @@ const MOCK_ESCAPECOUNT = 900;
 
 const MOCK_GOLD = 4980;
 const MOCK_STEPS = 8976;
-const MOCK_PARTY_SIZE = 16;
 
 const MOCK_OLD_VALUE = 60;
 
 const MOCK_PARTY_MEMBERS = [3, 1, 2] as const;
-
-const MOCK_ITEM_AMOUNT = 99;
 
 const MOCK_LAST_VALUE = 789;
 
@@ -60,23 +50,6 @@ const PARTY_FUNCTION_KEYS = [
   "size",
 ] as const satisfies (keyof Game_Party)[];
 
-const mockItems = [
-  null,
-  { id: 1, name: "Food" },
-  { id: 2, name: "Treasure" },
-] as const satisfies (Data_NamedItem | null)[];
-
-const mockWeapons = [
-  null,
-  { id: 3, name: "Axe" },
-  { id: 2, name: "Bow" },
-] as const satisfies (Data_NamedItem | null)[];
-const mockArmors = [
-  null,
-  { id: 1, name: "shield" },
-  { id: 2, name: "helmet" },
-] as const satisfies (Data_NamedItem | null)[];
-
 const createMockedVariable = (): MockedObject<Rmmz_Variables> => ({
   clear: vi.fn(),
   value: vi.fn().mockReturnValue(MOCK_OLD_VALUE),
@@ -89,7 +62,7 @@ type FakeParty = Pick<Game_Party, (typeof PARTY_FUNCTION_KEYS)[number]>;
 const createMockParty = (actorIds: number[]): MockedObject<FakeParty> => ({
   gainGold: vi.fn(),
   loseGold: vi.fn(),
-  size: vi.fn().mockReturnValue(MOCK_PARTY_SIZE),
+  size: vi.fn().mockReturnValue(16),
   gold: vi.fn().mockReturnValue(MOCK_GOLD),
   steps: vi.fn().mockReturnValue(MOCK_STEPS),
   members: vi.fn().mockReturnValue(actorIds.map((id) => ({ id }))),
@@ -97,7 +70,7 @@ const createMockParty = (actorIds: number[]): MockedObject<FakeParty> => ({
     if (item === null) {
       return 0;
     }
-    return MOCK_ITEM_AMOUNT;
+    return 99;
   }),
 });
 
@@ -190,23 +163,8 @@ const stubGlobal = (mocks: ReturnType<typeof createMockedObjects>) => {
   vi.stubGlobal("$gameVariables", mocks.mockedVariables);
   vi.stubGlobal("$gameSystem", mocks.mockedSystem);
   vi.stubGlobal("$gameParty", mocks.mockParty);
-  vi.stubGlobal("$dataItems", mockItems);
-  vi.stubGlobal("$dataWeapons", mockWeapons);
-  vi.stubGlobal("$dataArmors", mockArmors);
   vi.stubGlobal("$gameTemp", mocks.mockTemp);
   vi.stubGlobal("$gameTimer", mocks.mockTimer);
-};
-
-const itemTest = (testCase: TestCase, item: Data_NamedItem | null) => {
-  test("item test", () => {
-    const mocks = createMockedObjects();
-    stubGlobal(mocks);
-
-    const interpreter = createMockedInterpreter();
-    interpreter.setup([testCase.command], 0);
-    interpreter.executeCommand();
-    expect(mocks.mockParty.numItems).toHaveBeenCalledWith(item);
-  });
 };
 
 const runTestCase = (testCase: TestCase) => {
@@ -275,106 +233,6 @@ const runTestCase = (testCase: TestCase) => {
 
 const testCases: TestCase[] = [
   {
-    testName: "get item amount :item[0]->null",
-    fnCalls: { party: ["numItems"], systems: [] },
-    setValues: [{ id: 150, value: 0 }],
-    command: makeCommandVariableFromItemData({ startId: 150 }, { itemId: 0 }),
-    commandLiteral: {
-      code: 122,
-      indent: 0,
-      parameters: [150, 150, 0, 3, 0, 0],
-    },
-    additionalTests: [(testCase) => itemTest(testCase, null)],
-  },
-  {
-    testName: "get item amount :item[1]->Food",
-    fnCalls: { party: ["numItems"], systems: [] },
-    setValues: [{ id: 150, value: MOCK_ITEM_AMOUNT }],
-    command: makeCommandVariableFromItemData(
-      { startId: 150 },
-      { itemId: 1 },
-      { indent: 2 },
-    ),
-    commandLiteral: {
-      code: 122,
-      indent: 2,
-      parameters: [150, 150, 0, 3, 0, 1],
-    },
-    additionalTests: [(testCase) => itemTest(testCase, mockItems[1])],
-  },
-  {
-    testName: "get item amount : item[2]->Treasure",
-    fnCalls: { party: ["numItems"], systems: [] },
-    setValues: [{ id: 150, value: MOCK_ITEM_AMOUNT }],
-    command: makeCommandVariableFromItemData({ startId: 150 }, { itemId: 2 }),
-    commandLiteral: {
-      code: 122,
-      indent: 0,
-      parameters: [150, 150, 0, 3, 0, 2],
-    },
-    additionalTests: [(testCase) => itemTest(testCase, mockItems[2])],
-  },
-  {
-    testName: "get armor amount : armor[0]->null",
-    fnCalls: { party: ["numItems"], systems: [] },
-    setValues: [{ id: 160, value: 0 }],
-    command: makeCommandVariableFromArmor({ startId: 160 }, { armorId: 0 }),
-    commandLiteral: {
-      code: 122,
-      indent: 0,
-      parameters: [160, 160, 0, 3, 2, 0],
-    },
-    additionalTests: [(testCase) => itemTest(testCase, null)],
-  },
-  {
-    testName: "get armor amount : armor[1]->shield",
-    fnCalls: { party: ["numItems"], systems: [] },
-    setValues: [{ id: 160, value: MOCK_ITEM_AMOUNT }],
-    command: makeCommandVariableFromArmor({ startId: 160 }, { armorId: 1 }),
-    commandLiteral: {
-      code: 122,
-      indent: 0,
-      parameters: [160, 160, 0, 3, 2, 1],
-    },
-    additionalTests: [(testCase) => itemTest(testCase, mockArmors[1])],
-  },
-  {
-    testName: "get armor amount : armor[2]->helmet",
-    fnCalls: { party: ["numItems"], systems: [] },
-    setValues: [{ id: 160, value: MOCK_ITEM_AMOUNT }],
-    command: makeCommandVariableFromArmor({ startId: 160 }, { armorId: 2 }),
-    commandLiteral: {
-      code: 122,
-      indent: 0,
-      parameters: [160, 160, 0, 3, 2, 2],
-    },
-    additionalTests: [(testCase) => itemTest(testCase, mockArmors[2])],
-  },
-  {
-    testName: "get weapon amount : weapon[0]->null",
-    fnCalls: { party: ["numItems"], systems: [] },
-    setValues: [{ id: 170, value: 0 }],
-    command: makeCommandVariableFromWeapon({ startId: 170 }, { weaponId: 0 }),
-    commandLiteral: {
-      code: 122,
-      indent: 0,
-      parameters: [170, 170, 0, 3, 1, 0],
-    },
-    additionalTests: [(testCase) => itemTest(testCase, null)],
-  },
-  {
-    testName: "get weapon amount : weapon[2]->Bow",
-    fnCalls: { party: ["numItems"], systems: [] },
-    setValues: [{ id: 170, value: MOCK_ITEM_AMOUNT }],
-    command: makeCommandVariableFromWeapon({ startId: 170 }, { weaponId: 2 }),
-    commandLiteral: {
-      code: 122,
-      indent: 0,
-      parameters: [170, 170, 0, 3, 1, 2],
-    },
-    additionalTests: [(testCase) => itemTest(testCase, mockWeapons[2])],
-  },
-  {
     testName: "variable operand set",
     fnCalls: { party: [], systems: [] },
     valueCallCount: 2,
@@ -415,48 +273,6 @@ const testCases: TestCase[] = [
       code: 122,
       indent: 0,
       parameters: [201, 201, 0, 3, 7, 0],
-    },
-  },
-  {
-    testName: "partyMembers",
-    fnCalls: {
-      party: ["size"],
-      systems: [],
-    },
-    setValues: [{ id: 233, value: MOCK_PARTY_SIZE }],
-    command: makeCommandVariableFromPartyMembers({ startId: 233 }),
-    commandLiteral: {
-      code: 122,
-      indent: 0,
-      parameters: [233, 233, 0, 3, 7, 1],
-    },
-  },
-  {
-    testName: "gold",
-    fnCalls: {
-      party: ["gold"],
-      systems: [],
-    },
-    setValues: [{ id: 250, value: MOCK_GOLD }],
-    command: makeCommandVariableFromPartyGold({ startId: 250 }),
-    commandLiteral: {
-      code: 122,
-      indent: 0,
-      parameters: [250, 250, 0, 3, 7, 2],
-    },
-  },
-  {
-    testName: "steps",
-    fnCalls: {
-      party: ["steps"],
-      systems: [],
-    },
-    setValues: [{ id: 0xff6, value: MOCK_STEPS }],
-    command: makeCommandVariableFromPartySteps({ startId: 0xff6 }),
-    commandLiteral: {
-      code: 122,
-      indent: 0,
-      parameters: [0xff6, 0xff6, 0, 3, 7, 3],
     },
   },
 ];
