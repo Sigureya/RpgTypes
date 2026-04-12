@@ -1,4 +1,8 @@
-import type { CONTROL_VARIABLES, EventCommandLike } from "@RpgTypes/libs";
+import type {
+  CONTROL_VARIABLES,
+  EventCommandLike,
+  VariableOperation,
+} from "@RpgTypes/libs";
 
 export interface Command_ControlVariables_FromEnemy extends EventCommandLike<
   typeof CONTROL_VARIABLES
@@ -12,13 +16,13 @@ export interface ParamObject_VariableFromEnemy {
   startId: number;
   endId?: number;
   enemyIndex: number;
-  operation?: number;
+  operation?: VariableOperation;
 }
 
 export type ParamArray_VariableFromEnemyStatus = [
   rangeStartId: number,
   rangeEndId: number,
-  operation: number,
+  operation: VariableOperation,
   operandGameData: 3,
   typeEnemy: 4,
   enemyIndex: number,
