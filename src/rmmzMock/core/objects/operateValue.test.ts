@@ -29,7 +29,7 @@ import {
   OPERAND_VARIABLE,
 } from "@RpgTypes/rmmz/eventCommand";
 import type { Rmmz_System, Rmmz_Variables } from "@RpgTypes/rmmzRuntime";
-import type { FakeActor, FakeMap } from "./fakes/types";
+import type { FakeMap } from "./fakes/types";
 import type { Game_Party } from "./rmmz_objects";
 import { Game_Interpreter } from "./rmmz_objects";
 
@@ -129,14 +129,6 @@ const createMockTimer = (): MockedObject<FakeTimer> => ({
   seconds: vi.fn().mockReturnValue(MOCK_TIMER_VALUE),
 });
 
-interface FakeActors {
-  actor(actorId: number): FakeActor | null;
-}
-
-const makeMockActors = (actors: FakeActor[]): MockedObject<FakeActors> => ({
-  actor: vi.fn((id: number) => actors.find((a) => a.actorId() === id) || null),
-});
-
 const makeMockMap = (): FakeMap => ({
   mapId: () => MOCK_MAP_ID,
 });
@@ -166,7 +158,6 @@ const createMockedObjects = () => {
     mockedVariables: createMockedVariable(),
     mockedSystem: createMokedSystem(),
     mockParty: createMockParty([...MOCK_PARTY_MEMBERS]),
-    mockActors: makeMockActors([]),
     mockTemp: createMockTemp(),
     mockTimer: createMockTimer(),
   };
@@ -211,7 +202,6 @@ const stubGlobal = (mocks: ReturnType<typeof createMockedObjects>) => {
   vi.stubGlobal("$gameVariables", mocks.mockedVariables);
   vi.stubGlobal("$gameSystem", mocks.mockedSystem);
   vi.stubGlobal("$gameParty", mocks.mockParty);
-  vi.stubGlobal("$gameActors", mocks.mockActors);
   vi.stubGlobal("$dataItems", mockItems);
   vi.stubGlobal("$dataWeapons", mockWeapons);
   vi.stubGlobal("$dataArmors", mockArmors);
