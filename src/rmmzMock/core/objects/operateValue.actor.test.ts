@@ -3,6 +3,7 @@ import { describe, expect, test, vi } from "vitest";
 import type {
   Command_ControlVariables,
   Command_ControlVariables_FromActor,
+  EventCommand,
 } from "@RpgTypes/rmmz/eventCommand";
 import {
   makeCommandVariableFromActorAgi,
@@ -99,7 +100,7 @@ const runTestCase = (testCase: TestCase) => {
       Math.randomInt = randomInt;
 
       const interpreter = new Game_Interpreter();
-      interpreter.setup([testCase.commandLiteral], 0);
+      interpreter.setup([testCase.commandLiteral as EventCommand], 0);
       interpreter.executeCommand();
 
       expect(mockedActors.actor).toHaveBeenCalledWith(testCase.actorId);
