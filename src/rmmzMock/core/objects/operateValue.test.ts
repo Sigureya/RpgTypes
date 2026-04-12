@@ -5,6 +5,7 @@ import type { Command_ControlVariables } from "@RpgTypes/rmmz/eventCommand";
 import {
   makeCommandVariableFromPlaytime,
   makeCommandVariableFromConstant,
+  makeCommandSystemTimer,
   makeCommandSystemSaveCount,
   makeCommandSystemBattleCount,
   makeCommandSystemWinCount,
@@ -23,6 +24,9 @@ import {
   makeCommandVariableFromWeapon,
   makeCommandVariableFromArmor,
   makeCommandVariableFromTempLastData,
+  makeCommandVariableFromVariable,
+  makeCommandVariableFromRandom,
+  OPERAND_VARIABLE,
 } from "@RpgTypes/rmmz/eventCommand";
 import type { Rmmz_System, Rmmz_Variables } from "@RpgTypes/rmmzRuntime";
 import type { FakeActor, FakeMap } from "./fakes/types";
@@ -46,6 +50,8 @@ const MOCK_PARTY_MEMBERS = [3, 1, 2] as const;
 const MOCK_ITEM_AMOUNT = 99;
 
 const MOCK_LAST_VALUE = 789;
+
+const MOCK_TIMER_VALUE = 321;
 
 const SYSTEM_FUNTION_KEYS = [
   "playtime",
@@ -109,8 +115,16 @@ interface FakeTemp {
   lastActionData(dataType: number): number;
 }
 
+interface FakeTimer {
+  seconds(): number;
+}
+
 const createMockTemp = (): MockedObject<FakeTemp> => ({
   lastActionData: vi.fn().mockReturnValue(MOCK_LAST_VALUE),
+});
+
+const createMockTimer = (): MockedObject<FakeTimer> => ({
+  seconds: vi.fn().mockReturnValue(MOCK_TIMER_VALUE),
 });
 
 interface FakeActors {
@@ -152,6 +166,7 @@ const createMockedObjects = () => {
     mockParty: createMockParty([...MOCK_PARTY_MEMBERS]),
     mockActors: makeMockActors([]),
     mockTemp: createMockTemp(),
+    mockTimer: createMockTimer(),
   };
 };
 
@@ -164,6 +179,7 @@ interface FunctionKeys {
 interface TestCase {
   testName: string;
   fnCalls: FunctionKeys;
+  valueCallCount?: number;
   setValue: {
     value: number;
     id: number;
@@ -199,6 +215,7 @@ const stubGlobal = (mocks: ReturnType<typeof createMockedObjects>) => {
   vi.stubGlobal("$dataWeapons", mockWeapons);
   vi.stubGlobal("$dataArmors", mockArmors);
   vi.stubGlobal("$gameTemp", mocks.mockTemp);
+  vi.stubGlobal("$gameTimer", mocks.mockTimer);
 };
 
 const itemTest = (testCase: TestCase, item: Data_NamedItem | null) => {
@@ -225,6 +242,17 @@ const tempTest = (testCase: TestCase, arg: number) => {
   });
 };
 
+const timerTest = (testCase: TestCase) => {
+  test("timer test", () => {
+    const mocks = createMockedObjects();
+    stubGlobal(mocks);
+    const interpreter = createMockedInterpreter();
+    interpreter.setup([testCase.command], 0);
+    interpreter.executeCommand();
+    expect(mocks.mockTimer.seconds).toHaveBeenCalledOnce();
+  });
+};
+
 const runTestCase = (testCase: TestCase) => {
   describe(`operateValue Test: ${testCase.testName}`, () => {
     test("literal equality", () => {
@@ -244,7 +272,9 @@ const runTestCase = (testCase: TestCase) => {
       expect(mocks.mockedVariables.value).toHaveBeenCalledWith(
         testCase.setValue.id,
       );
-      expect(mocks.mockedVariables.value).toHaveBeenCalledOnce();
+      expect(mocks.mockedVariables.value).toHaveBeenCalledTimes(
+        testCase.valueCallCount ?? 1,
+      );
       expect(mocks.mockedVariables.setValue).toHaveBeenCalledWith(
         testCase.setValue.id,
         testCase.setValue.value,
@@ -299,6 +329,22 @@ const testCases: TestCase[] = [
       code: 122,
       indent: 0,
       parameters: [1, 1, 0, 0, 123],
+    },
+  },
+  {
+    testName: "constant set range",
+    fnCalls: { party: [], systems: [] },
+    valueCallCount: 3,
+    setValue: { id: 10, value: 123 },
+    command: makeCommandVariableFromConstant(
+      { startId: 10, endId: 12 },
+      { value: 123 },
+      { indent: 0, operation: OPERATION_SET },
+    ),
+    commandLiteral: {
+      code: 122,
+      indent: 0,
+      parameters: [10, 12, 0, 0, 123],
     },
   },
   {
@@ -492,6 +538,37 @@ const testCases: TestCase[] = [
     additionalTests: [(testCase) => itemTest(testCase, mockWeapons[2])],
   },
   {
+    testName: "variable operand set",
+    fnCalls: { party: [], systems: [] },
+    valueCallCount: 2,
+    setValue: { id: 33, value: MOCK_OLD_VALUE },
+    command: makeCommandVariableFromVariable(
+      { startId: 33 },
+      { variableId: 17, operand: OPERAND_VARIABLE },
+      { operation: OPERATION_SET },
+    ),
+    commandLiteral: {
+      code: 122,
+      indent: 0,
+      parameters: [33, 33, 0, 1, 17],
+    },
+  },
+  {
+    testName: "random operand set",
+    fnCalls: { party: [], systems: [] },
+    setValue: { id: 34, value: 2 },
+    command: makeCommandVariableFromRandom(
+      { startId: 34 },
+      { min: 2, max: 5 },
+      { operation: OPERATION_SET },
+    ),
+    commandLiteral: {
+      code: 122,
+      indent: 0,
+      parameters: [34, 34, 0, 2, 2, 5],
+    },
+  },
+  {
     testName: "temp 2 get last action data",
     fnCalls: { party: [], systems: [] },
     setValue: { id: 81, value: MOCK_LAST_VALUE },
@@ -505,6 +582,81 @@ const testCases: TestCase[] = [
       parameters: [81, 81, 0, 3, 8, 2],
     },
     additionalTests: [(testCase) => tempTest(testCase, 2)],
+  },
+  {
+    testName: "temp 0 get last used skill id",
+    fnCalls: { party: [], systems: [] },
+    setValue: { id: 82, value: MOCK_LAST_VALUE },
+    command: makeCommandVariableFromTempLastData(
+      { startId: 82 },
+      { param: "USED_SKILL_ID" },
+    ),
+    commandLiteral: {
+      code: 122,
+      indent: 0,
+      parameters: [82, 82, 0, 3, 8, 0],
+    },
+    additionalTests: [(testCase) => tempTest(testCase, 0)],
+  },
+  {
+    testName: "temp 1 get last used item id",
+    fnCalls: { party: [], systems: [] },
+    setValue: { id: 83, value: MOCK_LAST_VALUE },
+    command: makeCommandVariableFromTempLastData(
+      { startId: 83 },
+      { param: "USED_ITEM_ID" },
+    ),
+    commandLiteral: {
+      code: 122,
+      indent: 0,
+      parameters: [83, 83, 0, 3, 8, 1],
+    },
+    additionalTests: [(testCase) => tempTest(testCase, 1)],
+  },
+  {
+    testName: "temp 3 get last action enemy index",
+    fnCalls: { party: [], systems: [] },
+    setValue: { id: 84, value: MOCK_LAST_VALUE },
+    command: makeCommandVariableFromTempLastData(
+      { startId: 84 },
+      { param: "ACTION_ENEMY_INDEX" },
+    ),
+    commandLiteral: {
+      code: 122,
+      indent: 0,
+      parameters: [84, 84, 0, 3, 8, 3],
+    },
+    additionalTests: [(testCase) => tempTest(testCase, 3)],
+  },
+  {
+    testName: "temp 4 get last target actor id",
+    fnCalls: { party: [], systems: [] },
+    setValue: { id: 85, value: MOCK_LAST_VALUE },
+    command: makeCommandVariableFromTempLastData(
+      { startId: 85 },
+      { param: "TARGET_ACTOR_ID" },
+    ),
+    commandLiteral: {
+      code: 122,
+      indent: 0,
+      parameters: [85, 85, 0, 3, 8, 4],
+    },
+    additionalTests: [(testCase) => tempTest(testCase, 4)],
+  },
+  {
+    testName: "temp 5 get last target enemy index",
+    fnCalls: { party: [], systems: [] },
+    setValue: { id: 86, value: MOCK_LAST_VALUE },
+    command: makeCommandVariableFromTempLastData(
+      { startId: 86 },
+      { param: "TARGET_ENEMY_INDEX" },
+    ),
+    commandLiteral: {
+      code: 122,
+      indent: 0,
+      parameters: [86, 86, 0, 3, 8, 5],
+    },
+    additionalTests: [(testCase) => tempTest(testCase, 5)],
   },
   {
     testName: "mapId",
@@ -573,6 +725,18 @@ const testCases: TestCase[] = [
       indent: 0,
       parameters: [2, 2, 0, 3, 7, 4],
     },
+  },
+  {
+    testName: "timer",
+    fnCalls: { systems: [], party: [] },
+    setValue: { id: 3, value: MOCK_TIMER_VALUE },
+    command: makeCommandSystemTimer({ startId: 3 }),
+    commandLiteral: {
+      code: 122,
+      indent: 0,
+      parameters: [3, 3, 0, 3, 7, 5],
+    },
+    additionalTests: [(testCase) => timerTest(testCase)],
   },
   {
     testName: "saveCount",
