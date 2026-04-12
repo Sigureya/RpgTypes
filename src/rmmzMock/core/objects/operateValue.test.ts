@@ -180,10 +180,10 @@ interface TestCase {
   testName: string;
   fnCalls: FunctionKeys;
   valueCallCount?: number;
-  setValue: {
+  setValues: {
     value: number;
     id: number;
-  };
+  }[];
   // 変数操作コマンド。ここには生成関数の戻り値を置く
   command: Command_ControlVariables;
   // 数値直書き。生成関数のバグと値のバグを切り分けるためにある
@@ -269,16 +269,21 @@ const runTestCase = (testCase: TestCase) => {
       const interpreter = createMockedInterpreter();
       interpreter.setup([testCase.commandLiteral], 0);
       interpreter.executeCommand();
-      expect(mocks.mockedVariables.value).toHaveBeenCalledWith(
-        testCase.setValue.id,
-      );
+      testCase.setValues.forEach((entry) => {
+        expect(mocks.mockedVariables.value).toHaveBeenCalledWith(entry.id);
+      });
       expect(mocks.mockedVariables.value).toHaveBeenCalledTimes(
-        testCase.valueCallCount ?? 1,
+        testCase.valueCallCount ?? testCase.setValues.length,
       );
-      expect(mocks.mockedVariables.setValue).toHaveBeenCalledWith(
-        testCase.setValue.id,
-        testCase.setValue.value,
+      expect(mocks.mockedVariables.setValue).toHaveBeenCalledTimes(
+        testCase.setValues.length,
       );
+      testCase.setValues.forEach((entry) => {
+        expect(mocks.mockedVariables.setValue).toHaveBeenCalledWith(
+          entry.id,
+          entry.value,
+        );
+      });
       const randCallCount: number =
         1 +
         testCase.commandLiteral.parameters[1] -
@@ -319,7 +324,7 @@ const testCases: TestCase[] = [
   {
     testName: "constant set",
     fnCalls: { party: [], systems: [] },
-    setValue: { id: 1, value: 123 },
+    setValues: [{ id: 1, value: 123 }],
     command: makeCommandVariableFromConstant(
       { startId: 1 },
       { value: 123 },
@@ -334,8 +339,11 @@ const testCases: TestCase[] = [
   {
     testName: "constant set range",
     fnCalls: { party: [], systems: [] },
-    valueCallCount: 3,
-    setValue: { id: 10, value: 123 },
+    setValues: [
+      { id: 10, value: 123 },
+      { id: 11, value: 123 },
+      { id: 12, value: 123 },
+    ],
     command: makeCommandVariableFromConstant(
       { startId: 10, endId: 12 },
       { value: 123 },
@@ -350,7 +358,7 @@ const testCases: TestCase[] = [
   {
     testName: "constant add",
     fnCalls: { party: [], systems: [] },
-    setValue: { id: 189, value: MOCK_OLD_VALUE + 123 },
+    setValues: [{ id: 189, value: MOCK_OLD_VALUE + 123 }],
     command: makeCommandVariableFromConstant(
       { startId: 189 },
       { value: 123 },
@@ -365,7 +373,7 @@ const testCases: TestCase[] = [
   {
     testName: "constant subtract",
     fnCalls: { party: [], systems: [] },
-    setValue: { id: 189, value: MOCK_OLD_VALUE - 123 },
+    setValues: [{ id: 189, value: MOCK_OLD_VALUE - 123 }],
     command: makeCommandVariableFromConstant(
       { startId: 189 },
       { value: 123 },
@@ -380,7 +388,7 @@ const testCases: TestCase[] = [
   {
     testName: "constant multiply",
     fnCalls: { party: [], systems: [] },
-    setValue: { id: 189, value: MOCK_OLD_VALUE * 3 },
+    setValues: [{ id: 189, value: MOCK_OLD_VALUE * 3 }],
     command: makeCommandVariableFromConstant(
       { startId: 189 },
       { value: 3 },
@@ -395,7 +403,7 @@ const testCases: TestCase[] = [
   {
     testName: "constant divide",
     fnCalls: { party: [], systems: [] },
-    setValue: { id: 189, value: MOCK_OLD_VALUE / 15 },
+    setValues: [{ id: 189, value: MOCK_OLD_VALUE / 15 }],
     command: makeCommandVariableFromConstant(
       { startId: 189 },
       { value: 15 },
@@ -410,7 +418,7 @@ const testCases: TestCase[] = [
   {
     testName: "constant divide",
     fnCalls: { party: [], systems: [] },
-    setValue: { id: 189, value: MOCK_OLD_VALUE / 11 },
+    setValues: [{ id: 189, value: MOCK_OLD_VALUE / 11 }],
     command: makeCommandVariableFromConstant(
       { startId: 189 },
       { value: 11 },
@@ -425,7 +433,7 @@ const testCases: TestCase[] = [
   {
     testName: "constant mod",
     fnCalls: { party: [], systems: [] },
-    setValue: { id: 189, value: MOCK_OLD_VALUE % 12 },
+    setValues: [{ id: 189, value: MOCK_OLD_VALUE % 12 }],
     command: makeCommandVariableFromConstant(
       { startId: 189 },
       { value: 12 },
@@ -440,7 +448,7 @@ const testCases: TestCase[] = [
   {
     testName: "get item amount :item[0]->null",
     fnCalls: { party: ["numItems"], systems: [] },
-    setValue: { id: 150, value: 0 },
+    setValues: [{ id: 150, value: 0 }],
     command: makeCommandVariableFromItemData({ startId: 150 }, { itemId: 0 }),
     commandLiteral: {
       code: 122,
@@ -452,7 +460,7 @@ const testCases: TestCase[] = [
   {
     testName: "get item amount :item[1]->Food",
     fnCalls: { party: ["numItems"], systems: [] },
-    setValue: { id: 150, value: MOCK_ITEM_AMOUNT },
+    setValues: [{ id: 150, value: MOCK_ITEM_AMOUNT }],
     command: makeCommandVariableFromItemData(
       { startId: 150 },
       { itemId: 1 },
@@ -468,7 +476,7 @@ const testCases: TestCase[] = [
   {
     testName: "get item amount : item[2]->Treasure",
     fnCalls: { party: ["numItems"], systems: [] },
-    setValue: { id: 150, value: MOCK_ITEM_AMOUNT },
+    setValues: [{ id: 150, value: MOCK_ITEM_AMOUNT }],
     command: makeCommandVariableFromItemData({ startId: 150 }, { itemId: 2 }),
     commandLiteral: {
       code: 122,
@@ -480,7 +488,7 @@ const testCases: TestCase[] = [
   {
     testName: "get armor amount : armor[0]->null",
     fnCalls: { party: ["numItems"], systems: [] },
-    setValue: { id: 160, value: 0 },
+    setValues: [{ id: 160, value: 0 }],
     command: makeCommandVariableFromArmor({ startId: 160 }, { armorId: 0 }),
     commandLiteral: {
       code: 122,
@@ -492,7 +500,7 @@ const testCases: TestCase[] = [
   {
     testName: "get armor amount : armor[1]->shield",
     fnCalls: { party: ["numItems"], systems: [] },
-    setValue: { id: 160, value: MOCK_ITEM_AMOUNT },
+    setValues: [{ id: 160, value: MOCK_ITEM_AMOUNT }],
     command: makeCommandVariableFromArmor({ startId: 160 }, { armorId: 1 }),
     commandLiteral: {
       code: 122,
@@ -504,7 +512,7 @@ const testCases: TestCase[] = [
   {
     testName: "get armor amount : armor[2]->helmet",
     fnCalls: { party: ["numItems"], systems: [] },
-    setValue: { id: 160, value: MOCK_ITEM_AMOUNT },
+    setValues: [{ id: 160, value: MOCK_ITEM_AMOUNT }],
     command: makeCommandVariableFromArmor({ startId: 160 }, { armorId: 2 }),
     commandLiteral: {
       code: 122,
@@ -516,7 +524,7 @@ const testCases: TestCase[] = [
   {
     testName: "get weapon amount : weapon[0]->null",
     fnCalls: { party: ["numItems"], systems: [] },
-    setValue: { id: 170, value: 0 },
+    setValues: [{ id: 170, value: 0 }],
     command: makeCommandVariableFromWeapon({ startId: 170 }, { weaponId: 0 }),
     commandLiteral: {
       code: 122,
@@ -528,7 +536,7 @@ const testCases: TestCase[] = [
   {
     testName: "get weapon amount : weapon[2]->Bow",
     fnCalls: { party: ["numItems"], systems: [] },
-    setValue: { id: 170, value: MOCK_ITEM_AMOUNT },
+    setValues: [{ id: 170, value: MOCK_ITEM_AMOUNT }],
     command: makeCommandVariableFromWeapon({ startId: 170 }, { weaponId: 2 }),
     commandLiteral: {
       code: 122,
@@ -541,7 +549,7 @@ const testCases: TestCase[] = [
     testName: "variable operand set",
     fnCalls: { party: [], systems: [] },
     valueCallCount: 2,
-    setValue: { id: 33, value: MOCK_OLD_VALUE },
+    setValues: [{ id: 33, value: MOCK_OLD_VALUE }],
     command: makeCommandVariableFromVariable(
       { startId: 33 },
       { variableId: 17, operand: OPERAND_VARIABLE },
@@ -556,7 +564,7 @@ const testCases: TestCase[] = [
   {
     testName: "random operand set",
     fnCalls: { party: [], systems: [] },
-    setValue: { id: 34, value: 2 },
+    setValues: [{ id: 34, value: 2 }],
     command: makeCommandVariableFromRandom(
       { startId: 34 },
       { min: 2, max: 5 },
@@ -571,7 +579,7 @@ const testCases: TestCase[] = [
   {
     testName: "temp 2 get last action data",
     fnCalls: { party: [], systems: [] },
-    setValue: { id: 81, value: MOCK_LAST_VALUE },
+    setValues: [{ id: 81, value: MOCK_LAST_VALUE }],
     command: makeCommandVariableFromTempLastData(
       { startId: 81 },
       { param: "ACTION_ACTOR_ID" },
@@ -586,7 +594,7 @@ const testCases: TestCase[] = [
   {
     testName: "temp 0 get last used skill id",
     fnCalls: { party: [], systems: [] },
-    setValue: { id: 82, value: MOCK_LAST_VALUE },
+    setValues: [{ id: 82, value: MOCK_LAST_VALUE }],
     command: makeCommandVariableFromTempLastData(
       { startId: 82 },
       { param: "USED_SKILL_ID" },
@@ -601,7 +609,7 @@ const testCases: TestCase[] = [
   {
     testName: "temp 1 get last used item id",
     fnCalls: { party: [], systems: [] },
-    setValue: { id: 83, value: MOCK_LAST_VALUE },
+    setValues: [{ id: 83, value: MOCK_LAST_VALUE }],
     command: makeCommandVariableFromTempLastData(
       { startId: 83 },
       { param: "USED_ITEM_ID" },
@@ -616,7 +624,7 @@ const testCases: TestCase[] = [
   {
     testName: "temp 3 get last action enemy index",
     fnCalls: { party: [], systems: [] },
-    setValue: { id: 84, value: MOCK_LAST_VALUE },
+    setValues: [{ id: 84, value: MOCK_LAST_VALUE }],
     command: makeCommandVariableFromTempLastData(
       { startId: 84 },
       { param: "ACTION_ENEMY_INDEX" },
@@ -631,7 +639,7 @@ const testCases: TestCase[] = [
   {
     testName: "temp 4 get last target actor id",
     fnCalls: { party: [], systems: [] },
-    setValue: { id: 85, value: MOCK_LAST_VALUE },
+    setValues: [{ id: 85, value: MOCK_LAST_VALUE }],
     command: makeCommandVariableFromTempLastData(
       { startId: 85 },
       { param: "TARGET_ACTOR_ID" },
@@ -646,7 +654,7 @@ const testCases: TestCase[] = [
   {
     testName: "temp 5 get last target enemy index",
     fnCalls: { party: [], systems: [] },
-    setValue: { id: 86, value: MOCK_LAST_VALUE },
+    setValues: [{ id: 86, value: MOCK_LAST_VALUE }],
     command: makeCommandVariableFromTempLastData(
       { startId: 86 },
       { param: "TARGET_ENEMY_INDEX" },
@@ -661,7 +669,7 @@ const testCases: TestCase[] = [
   {
     testName: "mapId",
     fnCalls: { party: [], systems: [] },
-    setValue: { id: 201, value: MOCK_MAP_ID },
+    setValues: [{ id: 201, value: MOCK_MAP_ID }],
     command: makeCommandVariableFromMapId({ startId: 201 }),
     commandLiteral: {
       code: 122,
@@ -676,7 +684,7 @@ const testCases: TestCase[] = [
       systems: [],
       actorsCall: MOCK_PARTY_MEMBERS.length,
     },
-    setValue: { id: 233, value: 3 },
+    setValues: [{ id: 233, value: 3 }],
     command: makeCommandVariableFromPartyMembers({ startId: 233 }),
     commandLiteral: {
       code: 122,
@@ -690,7 +698,7 @@ const testCases: TestCase[] = [
       party: ["gold"],
       systems: [],
     },
-    setValue: { id: 250, value: MOCK_GOLD },
+    setValues: [{ id: 250, value: MOCK_GOLD }],
     command: makeCommandVariableFromPartyGold({ startId: 250 }),
     commandLiteral: {
       code: 122,
@@ -704,7 +712,7 @@ const testCases: TestCase[] = [
       party: ["steps"],
       systems: [],
     },
-    setValue: { id: 0xff6, value: MOCK_STEPS },
+    setValues: [{ id: 0xff6, value: MOCK_STEPS }],
     command: makeCommandVariableFromPartySteps({ startId: 0xff6 }),
     commandLiteral: {
       code: 122,
@@ -718,7 +726,7 @@ const testCases: TestCase[] = [
       systems: ["playtime"],
       party: [],
     },
-    setValue: { id: 2, value: MOCK_PLAYTIME },
+    setValues: [{ id: 2, value: MOCK_PLAYTIME }],
     command: makeCommandVariableFromPlaytime({ startId: 2 }),
     commandLiteral: {
       code: 122,
@@ -729,7 +737,7 @@ const testCases: TestCase[] = [
   {
     testName: "timer",
     fnCalls: { systems: [], party: [] },
-    setValue: { id: 3, value: MOCK_TIMER_VALUE },
+    setValues: [{ id: 3, value: MOCK_TIMER_VALUE }],
     command: makeCommandSystemTimer({ startId: 3 }),
     commandLiteral: {
       code: 122,
@@ -741,7 +749,7 @@ const testCases: TestCase[] = [
   {
     testName: "saveCount",
     fnCalls: { systems: ["saveCount"], party: [] },
-    setValue: { id: 47, value: MOCK_SAVECOUNT },
+    setValues: [{ id: 47, value: MOCK_SAVECOUNT }],
     command: makeCommandSystemSaveCount({ startId: 47 }),
     commandLiteral: {
       code: 122,
@@ -752,7 +760,7 @@ const testCases: TestCase[] = [
   {
     testName: "battleCount",
     fnCalls: { systems: ["battleCount"], party: [] },
-    setValue: { id: 52, value: MOCK_BATTLECOUNT },
+    setValues: [{ id: 52, value: MOCK_BATTLECOUNT }],
     command: makeCommandSystemBattleCount({ startId: 52 }),
     commandLiteral: {
       code: 122,
@@ -763,7 +771,7 @@ const testCases: TestCase[] = [
   {
     testName: "winCount",
     fnCalls: { systems: ["winCount"], party: [] },
-    setValue: { id: 63, value: MOCK_WINCOUNT },
+    setValues: [{ id: 63, value: MOCK_WINCOUNT }],
     command: makeCommandSystemWinCount({ startId: 63 }),
     commandLiteral: {
       code: 122,
@@ -774,7 +782,7 @@ const testCases: TestCase[] = [
   {
     testName: "escapeCount",
     fnCalls: { systems: ["escapeCount"], party: [] },
-    setValue: { id: 78, value: MOCK_ESCAPECOUNT },
+    setValues: [{ id: 78, value: MOCK_ESCAPECOUNT }],
     command: makeCommandSystemEscapeCount({ startId: 78 }),
     commandLiteral: {
       code: 122,
