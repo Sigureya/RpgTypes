@@ -12,7 +12,7 @@ import {
   makeCommandVariableFromArmor,
   makeCommandVariableFromItemData,
   makeCommandVariableFromPartyGold,
-  makeCommandVariableFromPartyMembers,
+  makeCommandVariableFromPartySize,
   makeCommandVariableFromPartySteps,
   makeCommandVariableFromWeapon,
 } from "@RpgTypes/rmmz/eventCommand";
@@ -221,6 +221,45 @@ const runTestCase = (testCase: TestCase) => {
 
 const testCases: TestCase[] = [
   {
+    testName: "partyMembers",
+    fnCalls: {
+      party: ["size"],
+    },
+    setValues: [{ id: 233, value: MOCK_PARTY_SIZE }],
+    command: makeCommandVariableFromPartySize({ startId: 233 }),
+    commandLiteral: {
+      code: 122,
+      indent: 0,
+      parameters: [233, 233, 0, 3, 7, 1],
+    },
+  },
+  {
+    testName: "gold",
+    fnCalls: {
+      party: ["gold"],
+    },
+    setValues: [{ id: 250, value: MOCK_GOLD }],
+    command: makeCommandVariableFromPartyGold({ startId: 250 }),
+    commandLiteral: {
+      code: 122,
+      indent: 0,
+      parameters: [250, 250, 0, 3, 7, 2],
+    },
+  },
+  {
+    testName: "steps",
+    fnCalls: {
+      party: ["steps"],
+    },
+    setValues: [{ id: 0xff6, value: MOCK_STEPS }],
+    command: makeCommandVariableFromPartySteps({ startId: 0xff6 }),
+    commandLiteral: {
+      code: 122,
+      indent: 0,
+      parameters: [0xff6, 0xff6, 0, 3, 7, 3],
+    },
+  },
+  {
     testName: "get item amount :item[0]->null",
     fnCalls: { party: ["numItems"] },
     setValues: [{ id: 150, value: 0 }],
@@ -315,45 +354,6 @@ const testCases: TestCase[] = [
       parameters: [170, 170, 0, 3, 1, 2],
     },
     additionalTests: [(testCase) => itemTest(testCase, mockWeapons[2])],
-  },
-  {
-    testName: "partyMembers",
-    fnCalls: {
-      party: ["size"],
-    },
-    setValues: [{ id: 233, value: MOCK_PARTY_SIZE }],
-    command: makeCommandVariableFromPartyMembers({ startId: 233 }),
-    commandLiteral: {
-      code: 122,
-      indent: 0,
-      parameters: [233, 233, 0, 3, 7, 1],
-    },
-  },
-  {
-    testName: "gold",
-    fnCalls: {
-      party: ["gold"],
-    },
-    setValues: [{ id: 250, value: MOCK_GOLD }],
-    command: makeCommandVariableFromPartyGold({ startId: 250 }),
-    commandLiteral: {
-      code: 122,
-      indent: 0,
-      parameters: [250, 250, 0, 3, 7, 2],
-    },
-  },
-  {
-    testName: "steps",
-    fnCalls: {
-      party: ["steps"],
-    },
-    setValues: [{ id: 0xff6, value: MOCK_STEPS }],
-    command: makeCommandVariableFromPartySteps({ startId: 0xff6 }),
-    commandLiteral: {
-      code: 122,
-      indent: 0,
-      parameters: [0xff6, 0xff6, 0, 3, 7, 3],
-    },
   },
 ];
 describe("operateValue Party Tests", () => {
