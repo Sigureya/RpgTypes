@@ -1,6 +1,9 @@
 import type { MockedObject } from "vitest";
 import { describe, expect, test, vi } from "vitest";
-import type { Command_ControlVariables } from "@RpgTypes/rmmz/eventCommand";
+import type {
+  Command_ControlVariables,
+  Command_ControlVariables_FromParty,
+} from "@RpgTypes/rmmz/eventCommand";
 import {
   makeCommandVariableFromMapId,
   makeCommandVariableFromRandom,
@@ -51,7 +54,7 @@ interface TestCase {
     id: number;
   }[];
   // 変数操作コマンド。ここには生成関数の戻り値を置く
-  command: Command_ControlVariables;
+  command: Command_ControlVariables | Command_ControlVariables_FromParty;
   // 数値直書き。生成関数のバグと値のバグを切り分けるためにある
   commandLiteral: Command_ControlVariables;
   additionalTests?: ((testCase: TestCase) => void)[];

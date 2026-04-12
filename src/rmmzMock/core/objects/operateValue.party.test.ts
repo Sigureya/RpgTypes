@@ -1,7 +1,11 @@
 import type { MockedObject } from "vitest";
 import { describe, expect, test, vi } from "vitest";
 import type { Data_NamedItem } from "@RpgTypes/libs";
-import type { Command_ControlVariables } from "@RpgTypes/rmmz/eventCommand";
+import type {
+  Command_ControlVariables,
+  Command_ControlVariables_FromParty,
+  EventCommand,
+} from "@RpgTypes/rmmz/eventCommand";
 import {
   makeCommandVariableFromArmor,
   makeCommandVariableFromItemData,
@@ -106,7 +110,7 @@ interface TestCase {
     id: number;
   }[];
   // 変数操作コマンド。ここには生成関数の戻り値を置く
-  command: Command_ControlVariables;
+  command: Command_ControlVariables | Command_ControlVariables_FromParty;
   // 数値直書き。生成関数のバグと値のバグを切り分けるためにある
   commandLiteral: Command_ControlVariables;
   additionalTests?: ((testCase: TestCase) => void)[];
@@ -141,7 +145,7 @@ const itemTest = (testCase: TestCase, item: Data_NamedItem | null) => {
     stubGlobal(mocks);
 
     const interpreter = createMockedInterpreter();
-    interpreter.setup([testCase.command], 0);
+    interpreter.setup([testCase.command as EventCommand], 0);
     interpreter.executeCommand();
     expect(mocks.mockParty.numItems).toHaveBeenCalledWith(item);
   });
