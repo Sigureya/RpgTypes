@@ -145,7 +145,6 @@ const runTestCase = (testCase: TestCase) => {
       vi.stubGlobal("$gameVariables", mockedVariables);
       vi.stubGlobal("$gameMap", mockedMap);
       vi.stubGlobal("$gameParty", mockedParty);
-      vi.stubGlobal("$gamePlayer", mockedCharacter);
       const randomInt: MockedObject<(max: number) => number> = vi.fn(() => 0);
       // @ts-ignore
       Math.randomInt = randomInt;
@@ -170,7 +169,6 @@ const runTestCase = (testCase: TestCase) => {
       vi.stubGlobal("$gameVariables", mockedVariables);
       vi.stubGlobal("$gameMap", mockedMap);
       vi.stubGlobal("$gameParty", mockedParty);
-      vi.stubGlobal("$gamePlayer", mockedCharacter);
 
       const randomInt: MockedObject<(max: number) => number> = vi.fn(() => 0);
       // @ts-ignore
@@ -334,7 +332,6 @@ const testCases: TestCase[] = [
     eventId: SRC_EVENT_ID,
     command: makeCommandVariableFromMapCharactorX({
       startId: TARGET_ID,
-      charactorId: 0,
     }),
     commandLiteral: {
       code: 122,
@@ -352,6 +349,31 @@ const testCases: TestCase[] = [
     setValues: [{ id: TARGET_ID, value: MOCK_X }],
     additionalChecks: (character) => {
       expect(character.x).toBe(MOCK_X);
+    },
+  },
+  {
+    description: "event self",
+    eventId: SRC_EVENT_ID,
+    command: makeCommandVariableFromMapCharactorY({
+      startId: TARGET_ID,
+      charactorId: 0,
+    }),
+    commandLiteral: {
+      code: 122,
+      indent: 0,
+      parameters: [
+        TARGET_ID,
+        TARGET_ID,
+        OPERATION_SET,
+        3,
+        5,
+        0,
+        MAP_CHARACTOR_PARAM.Y,
+      ],
+    },
+    setValues: [{ id: TARGET_ID, value: MOCK_Y }],
+    additionalChecks: (character) => {
+      expect(character.y).toBe(MOCK_Y);
     },
   },
 ];
