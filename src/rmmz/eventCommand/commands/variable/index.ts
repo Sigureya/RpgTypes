@@ -4,6 +4,7 @@ export * from "./enemy";
 export * from "./gameVariable2";
 export * from "./goods";
 export * from "./literal";
+export * from "./mapCharactor";
 export * from "./party";
 export * from "./random";
 export * from "./script";
