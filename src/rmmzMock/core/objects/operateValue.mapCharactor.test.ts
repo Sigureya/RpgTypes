@@ -18,6 +18,8 @@ const MOCK_OLD_VALUE = 60;
 const EVENT_ID = 1;
 const TARGET_ID = 41;
 
+const SRC_EVENT_ID = 18;
+
 const MOCK_X = 12;
 const MOCK_Y = 34;
 const MOCK_DIRECTION = 8;
@@ -26,7 +28,7 @@ const MOCK_SCREEN_Y = 456;
 
 interface FakeMap {
   mapId(): number;
-  event(id: number): FakeCharacter;
+  event(id: number): FakeCharacter | null;
 }
 
 interface FakeParty {
@@ -56,14 +58,11 @@ const createMockCharacter = (): MockedObject<FakeCharacter> => ({
   screenY: vi.fn(() => MOCK_SCREEN_Y),
 });
 
-const createMockMap = (character: FakeCharacter): MockedObject<FakeMap> => ({
+const createMockMap = (
+  character: FakeCharacter | null,
+): MockedObject<FakeMap> => ({
   mapId: vi.fn(() => 1234),
-  event: vi.fn((id: number) => {
-    if (id !== EVENT_ID) {
-      throw new Error("unexpected event id");
-    }
-    return character;
-  }),
+  event: vi.fn(() => character),
 });
 
 const createMockParty = (): MockedObject<FakeParty> => ({
@@ -75,16 +74,91 @@ interface TestCase {
   command: Command_ControlVariables_FromMapCharactor;
   commandLiteral: Command_ControlVariables_FromMapCharactor;
   setValues: { id: number; value: number }[];
+  eventId: number;
   additionalChecks?: (
     character: MockedObject<FakeCharacter>,
     map: MockedObject<FakeMap>,
   ) => void;
 }
 
+const testCallXX = (
+  testCase: TestCase,
+  party: MockedObject<FakeParty>,
+  variable: MockedObject<Rmmz_Variables>,
+) => {
+  expect(party.inBattle).toHaveBeenCalledOnce();
+  expect(variable.value).toHaveBeenCalledTimes(testCase.setValues.length);
+  expect(variable.setValue).toHaveBeenCalledTimes(testCase.setValues.length);
+};
+
+const testCallEventNull = (
+  testCase: TestCase,
+  mockedCharacter: MockedObject<FakeCharacter>,
+  mockedVariables: MockedObject<Rmmz_Variables>,
+) => {
+  expect(mockedCharacter.direction).not.toHaveBeenCalled();
+  expect(mockedCharacter.screenX).not.toHaveBeenCalled();
+  expect(mockedCharacter.screenY).not.toHaveBeenCalled();
+  expect(mockedVariables.value).toHaveBeenCalledWith(TARGET_ID);
+  testCase.setValues.forEach((entry) => {
+    expect(mockedVariables.setValue).toHaveBeenCalledWith(
+      entry.id,
+      expect.any(Number),
+    );
+  });
+};
+
 const runTestCase = (testCase: TestCase) => {
   describe(testCase.description, () => {
     test("literal equality", () => {
       expect(testCase.command).toEqual(testCase.commandLiteral);
+    });
+    test("event not found", () => {
+      const mockedMap = createMockMap(null);
+      const mockedVariables = createMockedVariable();
+      const mockedCharacter = createMockCharacter();
+      const mockedParty = createMockParty();
+      vi.stubGlobal("$gameParty", mockedParty);
+      vi.stubGlobal("$gameMap", mockedMap);
+      vi.stubGlobal("$gameVariables", mockedVariables);
+      const randomInt: MockedObject<(max: number) => number> = vi.fn(() => 0);
+      // @ts-ignore
+      Math.randomInt = randomInt;
+
+      const interpreter = new Game_Interpreter();
+      interpreter.setup([testCase.commandLiteral], SRC_EVENT_ID);
+      interpreter.executeCommand();
+      testCallXX(testCase, mockedParty, mockedVariables);
+      expect(randomInt).toHaveBeenCalledTimes(testCase.setValues.length);
+      expect(mockedVariables.setValue).toHaveBeenCalledTimes(
+        testCase.setValues.length,
+      );
+      testCallEventNull(testCase, mockedCharacter, mockedVariables);
+    });
+    test("inBattle is true", () => {
+      const mockedParty: MockedObject<FakeParty> = {
+        inBattle: vi.fn(() => true),
+      };
+      const mockedVariables = createMockedVariable();
+      const mockedCharacter = createMockCharacter();
+      const mockedMap = createMockMap(mockedCharacter);
+      vi.stubGlobal("$gameVariables", mockedVariables);
+      vi.stubGlobal("$gameMap", mockedMap);
+      vi.stubGlobal("$gameParty", mockedParty);
+      vi.stubGlobal("$gamePlayer", mockedCharacter);
+      const randomInt: MockedObject<(max: number) => number> = vi.fn(() => 0);
+      // @ts-ignore
+      Math.randomInt = randomInt;
+
+      const interpreter = new Game_Interpreter();
+      interpreter.setup([testCase.commandLiteral], SRC_EVENT_ID);
+      interpreter.executeCommand();
+      testCallXX(testCase, mockedParty, mockedVariables);
+      expect(randomInt).toHaveBeenCalledTimes(testCase.setValues.length);
+      expect(mockedVariables.setValue).toHaveBeenCalledTimes(
+        testCase.setValues.length,
+      );
+      testCallEventNull(testCase, mockedCharacter, mockedVariables);
     });
 
     test("set variable value", () => {
@@ -103,22 +177,19 @@ const runTestCase = (testCase: TestCase) => {
       Math.randomInt = randomInt;
 
       const interpreter = new Game_Interpreter();
-      interpreter.setup([testCase.commandLiteral], EVENT_ID);
+      interpreter.setup([testCase.commandLiteral], testCase.eventId);
       interpreter.executeCommand();
+      testCallXX(testCase, mockedParty, mockedVariables);
+      expect(mockedMap.event).toHaveBeenCalledWith(testCase.eventId);
+      expect(mockedMap.event).toHaveBeenCalledOnce();
 
-      testCase.setValues.forEach((entry) => {
+      testCase.setValues.forEach((entry, index: number) => {
         expect(mockedVariables.value).toHaveBeenCalledWith(entry.id);
-        expect(mockedVariables.setValue).toHaveBeenCalledWith(
-          entry.id,
-          entry.value,
-        );
+        expect(
+          mockedVariables.setValue,
+          `index of ${index}`,
+        ).toHaveBeenCalledWith(entry.id, entry.value);
       });
-      expect(mockedVariables.value).toHaveBeenCalledTimes(
-        testCase.setValues.length,
-      );
-      expect(mockedVariables.setValue).toHaveBeenCalledTimes(
-        testCase.setValues.length,
-      );
       expect(randomInt).toHaveBeenCalledTimes(testCase.setValues.length);
 
       testCase.additionalChecks?.(mockedCharacter, mockedMap);
@@ -129,6 +200,7 @@ const runTestCase = (testCase: TestCase) => {
 const testCases: TestCase[] = [
   {
     description: "map charactor x set",
+    eventId: EVENT_ID,
     command: makeCommandVariableFromMapCharactorX({
       startId: TARGET_ID,
       charactorId: EVENT_ID,
@@ -153,8 +225,10 @@ const testCases: TestCase[] = [
   },
   {
     description: "map charactor y set",
+    eventId: EVENT_ID,
     command: makeCommandVariableFromMapCharactorY({
       startId: TARGET_ID,
+      endId: TARGET_ID + 2,
       charactorId: EVENT_ID,
       operation: OPERATION_SET,
     }),
@@ -163,7 +237,7 @@ const testCases: TestCase[] = [
       indent: 0,
       parameters: [
         TARGET_ID,
-        TARGET_ID,
+        TARGET_ID + 2,
         OPERATION_SET,
         3,
         5,
@@ -171,10 +245,15 @@ const testCases: TestCase[] = [
         MAP_CHARACTOR_PARAM.Y,
       ],
     },
-    setValues: [{ id: TARGET_ID, value: MOCK_Y }],
+    setValues: [
+      { id: TARGET_ID, value: MOCK_Y },
+      { id: TARGET_ID + 1, value: MOCK_Y },
+      { id: TARGET_ID + 2, value: MOCK_Y },
+    ],
   },
   {
     description: "map charactor direction set",
+    eventId: EVENT_ID,
     command: makeCommandVariableFromMapCharactorDirection({
       startId: TARGET_ID,
       charactorId: EVENT_ID,
@@ -200,6 +279,7 @@ const testCases: TestCase[] = [
   },
   {
     description: "map charactor screenX set",
+    eventId: EVENT_ID,
     command: makeCommandVariableFromMapCharactorScreenX({
       startId: TARGET_ID,
       charactorId: EVENT_ID,
@@ -225,6 +305,7 @@ const testCases: TestCase[] = [
   },
   {
     description: "map charactor screenY add",
+    eventId: EVENT_ID,
     command: makeCommandVariableFromMapCharactorScreenY({
       startId: TARGET_ID,
       charactorId: EVENT_ID,
@@ -246,6 +327,31 @@ const testCases: TestCase[] = [
     setValues: [{ id: TARGET_ID, value: MOCK_OLD_VALUE + MOCK_SCREEN_Y }],
     additionalChecks: (character) => {
       expect(character.screenY).toHaveBeenCalledTimes(1);
+    },
+  },
+  {
+    description: "event self",
+    eventId: SRC_EVENT_ID,
+    command: makeCommandVariableFromMapCharactorX({
+      startId: TARGET_ID,
+      charactorId: 0,
+    }),
+    commandLiteral: {
+      code: 122,
+      indent: 0,
+      parameters: [
+        TARGET_ID,
+        TARGET_ID,
+        OPERATION_SET,
+        3,
+        5,
+        0,
+        MAP_CHARACTOR_PARAM.X,
+      ],
+    },
+    setValues: [{ id: TARGET_ID, value: MOCK_X }],
+    additionalChecks: (character) => {
+      expect(character.x).toBe(MOCK_X);
     },
   },
 ];
