@@ -172,7 +172,7 @@ const testCases: TestCase[] = [
     commandLiteral: {
       code: 122,
       indent: 0,
-      parameters: [189, 189, OPERATION_SUBTRACT, 0, 12],
+      parameters: [189, 189, OPERATION_MULTIPLY, 0, 12],
     },
     setValues: [{ id: 189, value: MOCK_OLD_VALUE * 12 }],
   },
