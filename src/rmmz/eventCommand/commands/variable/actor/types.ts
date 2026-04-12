@@ -3,6 +3,8 @@ import type {
   EventCommandLike,
   VariableOperation,
 } from "@RpgTypes/libs";
+import type { ValueOf } from "src/libs/templates/valueOf";
+import type { ACTOR_STATUS } from "./dataSource";
 
 export interface Command_ControlVariables_FromActor extends EventCommandLike<
   typeof CONTROL_VARIABLES
@@ -26,5 +28,5 @@ export type ParamArray_VariableFromActorStatus = [
   operandGameData: 3,
   typeActor: 3,
   actorId: number,
-  param: number,
+  param: ValueOf<typeof ACTOR_STATUS>,
 ];

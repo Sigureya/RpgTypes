@@ -1,4 +1,6 @@
 import { CONTROL_VARIABLES } from "@RpgTypes/libs";
+import type { ValueOf } from "src/libs/templates/valueOf";
+import type { ACTOR_STATUS } from "./dataSource";
 import type {
   Command_ControlVariables_FromActor,
   ParamArray_VariableFromActorStatus,
@@ -150,7 +152,7 @@ export const makeCommandVariableFromActorLuk = (
 
 const paramToArray = (
   params: ParamObject_VariableFromActor,
-  actorParamId: number,
+  actorParamId: ValueOf<typeof ACTOR_STATUS>,
 ): ParamArray_VariableFromActorStatus => [
   params.startId,
   params.endId ?? params.startId,
