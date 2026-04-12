@@ -1,56 +1,58 @@
 import { GET_LOCATION_INFO } from "@RpgTypes/libs/eventCommand";
+import type { Command_GetEventIdXY } from "./types/eventXY";
+import type { ParamObject_GetLocationInfo } from "./types/getLocation";
+import type { Command_GetRegionId } from "./types/getRegionId";
 import type {
-  Command_GetLocationInfo,
-  ParamArray_GetLocationInfo,
-  ParamObject_GetLocationInfo,
-  ParamArray_GetLocationInfoV,
+  Command_GetTileId,
   ParamObject_GetTileId,
-} from "./types";
+} from "./types/getTileId";
+import type { Command_GetTerrainTag } from "./types/getTrarainTag";
 
 export const makeCommandGetTerrainTag = (
   param: ParamObject_GetLocationInfo,
   indent: number = 0,
-): Command_GetLocationInfo => ({
+): Command_GetTerrainTag => ({
   code: GET_LOCATION_INFO,
   indent,
-  parameters: toArrayGetLocationInfo(param, 0, 1),
+  parameters: [param.variableId, 0, 0, param.x, param.y],
 });
 
 export const makeCommandGetEventIdXY = (
   param: ParamObject_GetLocationInfo,
   indent: number = 0,
-): Command_GetLocationInfo => ({
+): Command_GetEventIdXY => ({
   code: GET_LOCATION_INFO,
   indent,
-  parameters: toArrayGetLocationInfo(param, 1, 1),
+  parameters: [param.variableId, 1, 0, param.x, param.y],
 });
 
 export const makeCommandGetRegionId = (
   param: ParamObject_GetLocationInfo,
   indent: number = 0,
-): Command_GetLocationInfo => ({
+): Command_GetRegionId => ({
   code: GET_LOCATION_INFO,
   indent,
-  parameters: toArrayGetLocationInfo(param, 6, 1),
+  parameters: [param.variableId, 6, 0, param.x, param.y],
 });
 
 export const makeCommandGetTileId = (
   param: ParamObject_GetTileId,
   indent: number = 0,
-): Command_GetLocationInfo => ({
+): Command_GetTileId => ({
   code: GET_LOCATION_INFO,
   indent,
-  parameters: [param.variableId, param.layer + 1, 0, param.x, param.y],
+  parameters: [
+    param.variableId,
+    LAYER_TABLE[param.layer] ?? 2,
+    0,
+    param.x,
+    param.y,
+  ],
 });
 
-const toArrayGetLocationInfo = (
-  param: Partial<ParamObject_GetLocationInfo>,
-  mode: number,
-  designation: 0 | 1,
-): ParamArray_GetLocationInfo | ParamArray_GetLocationInfoV => [
-  param.variableId ?? 0,
-  mode,
-  designation,
-  param.x ?? 0,
-  param.y ?? 0,
-];
+const LAYER_TABLE = {
+  1: 2,
+  2: 3,
+  3: 4,
+  4: 5,
+} as const;
