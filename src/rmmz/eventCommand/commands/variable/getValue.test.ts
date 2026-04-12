@@ -1,8 +1,18 @@
 import type { MockedObject } from "vitest";
 import { describe, test, expect, vi } from "vitest";
 import type { ParamArray } from "@RpgTypes/rmmz/rpg";
-import { toArrayOperandActorStatus } from "./actor";
-import { toArrayOperandEnemyStatus } from "./enemy";
+import { makeCommandVariableFromActorCurrentLevel } from "./actor/make";
+import {
+  makeCommandVariableFromEnemyAtk,
+  makeCommandVariableFromEnemyCurrentHp,
+  makeCommandVariableFromEnemyCurrentMp,
+  makeCommandVariableFromEnemyCurrentTp,
+  makeCommandVariableFromEnemyDef,
+  makeCommandVariableFromEnemyMat,
+  makeCommandVariableFromEnemyMaxHp,
+  makeCommandVariableFromEnemyMaxMp,
+  makeCommandVariableFromEnemyMdf,
+} from "./enemy/make";
 import { getActorValue, getEnemyValue } from "./getValue";
 import type { DataOperand_Enemy } from "./types";
 
@@ -32,10 +42,10 @@ describe("getActorValue", () => {
   });
   test("should return level value", () => {
     const mockActor = makeMockActor();
-    const param = toArrayOperandActorStatus(
-      { startId: 1 },
-      { index: 1, param: 0 }
-    );
+    const param = makeCommandVariableFromActorCurrentLevel({
+      startId: 1,
+      actorId: 1,
+    }).parameters as Parameters<typeof getActorValue>[1];
     expect(getActorValue(mockActor, param)).toBe(48);
     expect(mockActor.param).toHaveBeenCalledTimes(0);
     expect(mockActor.currentExp).toHaveBeenCalledTimes(0);
@@ -55,82 +65,82 @@ describe("getEnemyValue", () => {
   });
   test("should return hp value", () => {
     const mockEnemy = makeMockEnemy();
-    const param = toArrayOperandEnemyStatus(
-      { startId: 1 },
-      { index: 1, param: "HP" }
-    );
+    const param = makeCommandVariableFromEnemyCurrentHp({
+      startId: 1,
+      enemyIndex: 1,
+    }).parameters;
     expect(getEnemyValue(mockEnemy, param)).toBe(100);
     expect(mockEnemy.param).toHaveBeenCalledTimes(0);
   });
   test("should return mp value", () => {
     const mockEnemy = makeMockEnemy();
-    const param = toArrayOperandEnemyStatus(
-      { startId: 1 },
-      { index: 1, param: "MP" }
-    );
+    const param = makeCommandVariableFromEnemyCurrentMp({
+      startId: 1,
+      enemyIndex: 1,
+    }).parameters;
     expect(getEnemyValue(mockEnemy, param)).toBe(50);
     expect(mockEnemy.param).toHaveBeenCalledTimes(0);
   });
   test("should return tp value", () => {
     const mockEnemy = makeMockEnemy();
-    const param = toArrayOperandEnemyStatus(
-      { startId: 1 },
-      { index: 1, param: "TP" }
-    );
+    const param = makeCommandVariableFromEnemyCurrentTp({
+      startId: 1,
+      enemyIndex: 1,
+    }).parameters;
     expect(getEnemyValue(mockEnemy, param)).toBe(20);
     expect(mockEnemy.param).toHaveBeenCalledTimes(0);
   });
   test("should return mhp value", () => {
     const mockEnemy = makeMockEnemy();
-    const param = toArrayOperandEnemyStatus(
-      { startId: 1 },
-      { index: 1, param: "MHP" }
-    );
+    const param = makeCommandVariableFromEnemyMaxHp({
+      startId: 1,
+      enemyIndex: 1,
+    }).parameters;
     expect(getEnemyValue(mockEnemy, param)).toBe(108);
     expect(mockEnemy.param).toHaveBeenCalledTimes(1);
   });
   test("should return mmp value", () => {
     const mockEnemy = makeMockEnemy();
-    const param = toArrayOperandEnemyStatus(
-      { startId: 1 },
-      { index: 1, param: "MMP" }
-    );
+    const param = makeCommandVariableFromEnemyMaxMp({
+      startId: 1,
+      enemyIndex: 1,
+    }).parameters;
     expect(getEnemyValue(mockEnemy, param)).toBe(10);
     expect(mockEnemy.param).toHaveBeenCalledTimes(1);
   });
   test("should return atk value", () => {
     const mockEnemy = makeMockEnemy();
-    const param = toArrayOperandEnemyStatus(
-      { startId: 1 },
-      { index: 1, param: "ATK" }
-    );
+    const param = makeCommandVariableFromEnemyAtk({
+      startId: 1,
+      enemyIndex: 1,
+    }).parameters;
     expect(getEnemyValue(mockEnemy, param)).toBe(130);
     expect(mockEnemy.param).toHaveBeenCalledTimes(1);
   });
   test("should return def value", () => {
     const mockEnemy = makeMockEnemy();
-    const param = toArrayOperandEnemyStatus(
-      { startId: 1 },
-      { index: 1, param: "DEF" }
-    );
+    const param = makeCommandVariableFromEnemyDef({
+      startId: 1,
+      enemyIndex: 1,
+    }).parameters;
     expect(getEnemyValue(mockEnemy, param)).toBe(95);
     expect(mockEnemy.param).toHaveBeenCalledTimes(1);
   });
   test("should return matk value", () => {
     const mockEnemy = makeMockEnemy();
-    const param = toArrayOperandEnemyStatus(
-      { startId: 1 },
-      { index: 1, param: "MAT" }
-    );
+    const param = makeCommandVariableFromEnemyMat({
+      startId: 1,
+      enemyIndex: 1,
+    }).parameters;
     expect(getEnemyValue(mockEnemy, param)).toBe(80);
     expect(mockEnemy.param).toHaveBeenCalledTimes(1);
   });
   test("should return mdef value", () => {
     const mockEnemy = makeMockEnemy();
-    const param = toArrayOperandEnemyStatus(
-      { startId: 1 },
-      { index: 1, param: "MDF" }
-    );
+    const param = makeCommandVariableFromEnemyMdf({
+      startId: 1,
+      enemyIndex: 1,
+    }).parameters;
     expect(getEnemyValue(mockEnemy, param)).toBe(85);
     expect(mockEnemy.param).toHaveBeenCalledTimes(1);
   });

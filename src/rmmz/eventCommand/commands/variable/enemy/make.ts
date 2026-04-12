@@ -27,6 +27,17 @@ export const makeCommandVariableFromEnemyCurrentMp = (
   };
 };
 
+export const makeCommandVariableFromEnemyCurrentTp = (
+  params: ParamObject_VariableFromEnemy,
+  indent: number = 0,
+): Command_ControlVariables_FromEnemy => {
+  return {
+    code: CONTROL_VARIABLES,
+    indent,
+    parameters: paramToArray(params, 10),
+  };
+};
+
 export const makeCommandVariableFromEnemyMaxHp = (
   params: ParamObject_VariableFromEnemy,
   indent: number = 0,

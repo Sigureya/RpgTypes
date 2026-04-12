@@ -1,10 +1,8 @@
 export * from "./actor";
-export * from "./actor2";
 export * from "./constants";
 export * from "./gameVariable";
 export * from "./party";
 export * from "./system";
-export * from "./system2";
 export * from "./templLastData";
 export * from "./types";
 export { getActorValue, getEnemyValue } from "./getValue";
