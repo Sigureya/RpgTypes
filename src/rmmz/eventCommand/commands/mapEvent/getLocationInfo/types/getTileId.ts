@@ -1,6 +1,7 @@
 import type { EventCommandLike, GET_LOCATION_INFO } from "@RpgTypes/libs";
+import type { ParamObject_GetLocationInfo } from "./getLocation";
 
-export interface ParamObject_GetTileId {
+export interface ParamObject_GetTileId extends ParamObject_GetLocationInfo {
   variableId: number;
   layer: 1 | 2 | 3 | 4;
   x: number;
@@ -9,15 +10,30 @@ export interface ParamObject_GetTileId {
 
 export type TileLayer = 2 | 3 | 4 | 5;
 
-export type Command_GetTileId = EventCommandLike<
-  typeof GET_LOCATION_INFO,
-  ParamArray_GetTileId
->;
+export interface Command_GetTileId extends EventCommandLike<
+  typeof GET_LOCATION_INFO
+> {
+  parameters: ParamArray_GetTileId;
+}
+
+export interface Command_GetTileIdDirect extends EventCommandLike<
+  typeof GET_LOCATION_INFO
+> {
+  parameters: ParamArray_GetTileIdDirect;
+}
 
 export type ParamArray_GetTileId = [
   variableId: number,
   modeTile: TileLayer,
-  designation: 0 | 1,
+  designationVariable: 1,
+  x: number,
+  y: number,
+];
+
+export type ParamArray_GetTileIdDirect = [
+  variableId: number,
+  modeTile: TileLayer,
+  designationDirect: 0,
   x: number,
   y: number,
 ];
