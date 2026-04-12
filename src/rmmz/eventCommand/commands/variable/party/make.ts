@@ -1,11 +1,9 @@
 import { CONTROL_VARIABLES } from "@RpgTypes/libs";
-import type { ValueOf } from "src/libs/templates/valueOf";
 import type {
   Command_ControlVariables_FromParty,
   ParamArray_VariableFromParty,
   ParamObject_VariableFromParty,
 } from "./types";
-import type { OTHER } from "../types/operand";
 
 export const makeCommandVariableFromMapId = (
   params: ParamObject_VariableFromParty,
@@ -53,7 +51,7 @@ export const makeCommandVariableFromPartySteps = (
 
 const paramToArray = (
   params: ParamObject_VariableFromParty,
-  param: ValueOf<OTHER>,
+  param: number,
 ): ParamArray_VariableFromParty => [
   params.startId,
   params.endId ?? params.startId,

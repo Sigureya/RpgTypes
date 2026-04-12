@@ -5,7 +5,7 @@ import type {
   ParamArray_VariableFromLastData,
   ParamObject_VariableFromLastData,
 } from "./types";
-import type { VARIABLE_SRC_LAST } from "../types/last/dataSource";
+import type { VARIABLE_SRC_LAST } from "./dataSource";
 
 export const makeCommandVariableFromLastUsedSkillId = (
   params: ParamObject_VariableFromLastData,

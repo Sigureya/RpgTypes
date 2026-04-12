@@ -4,7 +4,6 @@ import type {
   VariableOperation,
 } from "@RpgTypes/libs";
 import type { ValueOf } from "src/libs/templates/valueOf";
-import type { OTHER } from "../types/operand";
 
 export interface Command_ControlVariables_FromParty extends EventCommandLike<
   typeof CONTROL_VARIABLES
@@ -26,5 +25,5 @@ export type ParamArray_VariableFromParty = [
   operation: VariableOperation,
   operandGameData: 3,
   typeSystem: 7,
-  param: ValueOf<OTHER>,
+  param: number,
 ];

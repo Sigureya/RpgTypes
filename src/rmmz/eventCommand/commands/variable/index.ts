@@ -11,4 +11,4 @@ export * from "./script";
 export * from "./system";
 export * from "./templLastData";
 export * from "./types";
-export { getActorValue, getEnemyValue } from "./getValue";
+export * from "./unionType";

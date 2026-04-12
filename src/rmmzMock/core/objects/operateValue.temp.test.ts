@@ -13,7 +13,7 @@ import {
   makeCommandVariableFromLastUsedItemId,
   makeCommandVariableFromLastUsedSkillId,
 } from "@RpgTypes/rmmz/eventCommand";
-import { VARIABLE_SRC_LAST } from "@RpgTypes/rmmz/eventCommand/commands/variable/types/last/dataSource";
+import { VARIABLE_SRC_LAST } from "@RpgTypes/rmmz/eventCommand/commands/variable/templLastData/dataSource";
 import type { Rmmz_Variables } from "@RpgTypes/rmmzRuntime";
 import { Game_Interpreter } from "./rmmz_objects";
 

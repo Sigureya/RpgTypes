@@ -4,7 +4,7 @@ import type {
   VariableOperation,
 } from "@RpgTypes/libs";
 import type { ValueOf } from "src/libs/templates/valueOf";
-import type { VARIABLE_SRC_LAST } from "../types/last/dataSource";
+import type { VARIABLE_SRC_LAST } from "./dataSource";
 
 export interface Command_ControlVariables_FromLastData extends EventCommandLike<
   typeof CONTROL_VARIABLES
