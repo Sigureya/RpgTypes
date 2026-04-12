@@ -1,4 +1,4 @@
-import type { VariableOperation } from "./constants";
+import type { VariableOperation } from "@RpgTypes/libs";
 
 export interface MakeOtherParam {
   indent?: number;

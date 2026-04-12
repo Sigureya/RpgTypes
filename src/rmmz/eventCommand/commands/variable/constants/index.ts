@@ -1,4 +1,3 @@
-export * from "./operation";
 export {
   OPERAND_CONSTANT,
   OPERAND_GAMEDATA,
