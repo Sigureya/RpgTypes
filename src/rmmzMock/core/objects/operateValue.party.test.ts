@@ -23,8 +23,6 @@ const MOCK_PARTY_SIZE = 16;
 
 const MOCK_OLD_VALUE = 60;
 
-const MOCK_PARTY_MEMBERS = [3, 1, 2] as const;
-
 const MOCK_ITEM_AMOUNT = 99;
 
 const PARTY_FUNCTION_KEYS = [
@@ -32,7 +30,6 @@ const PARTY_FUNCTION_KEYS = [
   "steps",
   "gainGold",
   "loseGold",
-  "members",
   "numItems",
   "size",
 ] as const satisfies (keyof Game_Party)[];
@@ -63,13 +60,12 @@ const createMockedVariable = (): MockedObject<Rmmz_Variables> => ({
 
 type FakeParty = Pick<Game_Party, (typeof PARTY_FUNCTION_KEYS)[number]>;
 
-const createMockParty = (actorIds: number[]): MockedObject<FakeParty> => ({
+const createMockParty = (): MockedObject<FakeParty> => ({
   gainGold: vi.fn(),
   loseGold: vi.fn(),
   size: vi.fn().mockReturnValue(MOCK_PARTY_SIZE),
   gold: vi.fn().mockReturnValue(MOCK_GOLD),
   steps: vi.fn().mockReturnValue(MOCK_STEPS),
-  members: vi.fn().mockReturnValue(actorIds.map((id) => ({ id }))),
   numItems: vi.fn().mockImplementation((item) => {
     if (item === null) {
       return 0;
@@ -94,7 +90,7 @@ const createMockedObjects = () => {
   return {
     mockedMap: makeMockMap(),
     mockedVariables: createMockedVariable(),
-    mockParty: createMockParty([...MOCK_PARTY_MEMBERS]),
+    mockParty: createMockParty(),
   };
 };
 
