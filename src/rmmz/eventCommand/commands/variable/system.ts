@@ -6,6 +6,9 @@ import type {
   ParamObject_WritingTarget,
 } from "./types";
 
+/**
+ * @deprecated
+ */
 export const makeCommandVariableFromPlaytime = (
   target: ParamObject_WritingTarget,
   operation: number = 0,
@@ -24,6 +27,9 @@ export const makeCommandVariableFromPlaytime = (
   };
 };
 
+/**
+ * @deprecated
+ */
 export const makeCommandSystemTimer = (
   target: ParamObject_WritingTarget,
   operation: number = 0,
@@ -42,6 +48,9 @@ export const makeCommandSystemTimer = (
   };
 };
 
+/**
+ * @deprecated
+ */
 export const makeCommandSystemSaveCount = (
   target: ParamObject_WritingTarget,
   operation: number = 0,
@@ -60,6 +69,9 @@ export const makeCommandSystemSaveCount = (
   };
 };
 
+/**
+ * @deprecated
+ */
 export const makeCommandSystemBattleCount = (
   target: ParamObject_WritingTarget,
   operation: number = 0,
@@ -78,6 +90,9 @@ export const makeCommandSystemBattleCount = (
   };
 };
 
+/**
+ * @deprecated
+ */
 export const makeCommandSystemWinCount = (
   target: ParamObject_WritingTarget,
   operation: number = 0,
@@ -96,6 +111,9 @@ export const makeCommandSystemWinCount = (
   };
 };
 
+/**
+ * @deprecated
+ */
 export const makeCommandSystemEscapeCount = (
   target: ParamObject_WritingTarget,
   operation: number = 0,
