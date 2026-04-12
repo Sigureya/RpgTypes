@@ -4,7 +4,10 @@ import type { Command_ControlVariables_FromConstant } from "@RpgTypes/rmmz/event
 import {
   makeCommandVariableFromConstant,
   OPERATION_ADD,
+  OPERATION_DIVIDE,
+  OPERATION_MOD,
   OPERATION_MULTIPLY,
+  OPERATION_SET,
   OPERATION_SUBTRACT,
 } from "@RpgTypes/rmmz/eventCommand";
 import type { Rmmz_Variables } from "@RpgTypes/rmmzRuntime";
@@ -76,13 +79,13 @@ const testCases: TestCase[] = [
   {
     description: "constant set single variable",
     command: makeCommandVariableFromConstant(
-      { startId: 1, value: 123, operation: 0 },
+      { startId: 1, value: 123, operation: OPERATION_SET },
       0,
     ),
     commandLiteral: {
       code: 122,
       indent: 0,
-      parameters: [1, 1, 0, 0, 123],
+      parameters: [1, 1, OPERATION_SET, 0, 123],
     },
     setValues: [{ id: 1, value: 123 }],
   },
@@ -95,7 +98,7 @@ const testCases: TestCase[] = [
     commandLiteral: {
       code: 122,
       indent: 0,
-      parameters: [10, 12, 0, 0, 123],
+      parameters: [10, 12, OPERATION_SET, 0, 123],
     },
     setValues: [
       { id: 10, value: 123 },
@@ -196,26 +199,26 @@ const testCases: TestCase[] = [
   {
     description: "constant divide single variable",
     command: makeCommandVariableFromConstant(
-      { startId: 189, value: 15, operation: 4 },
+      { startId: 189, value: 15, operation: OPERATION_DIVIDE },
       0,
     ),
     commandLiteral: {
       code: 122,
       indent: 0,
-      parameters: [189, 189, 4, 0, 15],
+      parameters: [189, 189, OPERATION_DIVIDE, 0, 15],
     },
     setValues: [{ id: 189, value: Math.floor(MOCK_OLD_VALUE / 15) }],
   },
   {
     description: "constant divide range [80, 82]",
     command: makeCommandVariableFromConstant(
-      { startId: 80, endId: 82, value: 6, operation: 4 },
+      { startId: 80, endId: 82, value: 6, operation: OPERATION_DIVIDE },
       0,
     ),
     commandLiteral: {
       code: 122,
       indent: 0,
-      parameters: [80, 82, 4, 0, 6],
+      parameters: [80, 82, OPERATION_DIVIDE, 0, 6],
     },
     setValues: [
       { id: 80, value: Math.floor(MOCK_OLD_VALUE / 6) },
@@ -226,26 +229,26 @@ const testCases: TestCase[] = [
   {
     description: "constant mod single variable",
     command: makeCommandVariableFromConstant(
-      { startId: 189, value: 12, operation: 5 },
+      { startId: 189, value: 12, operation: OPERATION_MOD },
       0,
     ),
     commandLiteral: {
       code: 122,
       indent: 0,
-      parameters: [189, 189, 5, 0, 12],
+      parameters: [189, 189, OPERATION_MOD, 0, 12],
     },
     setValues: [{ id: 189, value: MOCK_OLD_VALUE % 12 }],
   },
   {
     description: "constant mod range [90, 92]",
     command: makeCommandVariableFromConstant(
-      { startId: 90, endId: 92, value: 7, operation: 5 },
+      { startId: 90, endId: 92, value: 7, operation: OPERATION_MOD },
       0,
     ),
     commandLiteral: {
       code: 122,
       indent: 0,
-      parameters: [90, 92, 5, 0, 7],
+      parameters: [90, 92, OPERATION_MOD, 0, 7],
     },
     setValues: [
       { id: 90, value: MOCK_OLD_VALUE % 7 },
@@ -256,13 +259,13 @@ const testCases: TestCase[] = [
   {
     description: "constant set with indent level 2",
     command: makeCommandVariableFromConstant(
-      { startId: 2, value: 999, operation: 0 },
+      { startId: 2, value: 999, operation: OPERATION_SET },
       2,
     ),
     commandLiteral: {
       code: 122,
       indent: 2,
-      parameters: [2, 2, 0, 0, 999],
+      parameters: [2, 2, OPERATION_SET, 0, 999],
     },
     setValues: [{ id: 2, value: 999 }],
   },
