@@ -21,7 +21,7 @@ import {
   makeCommandVariableFromActorDef,
   makeCommandVariableFromActorLuk,
   makeCommandVariableFromActorMat,
-  makeCommandVariableFromActorMaxHp4,
+  makeCommandVariableFromActorMaxHp,
   makeCommandVariableFromActorMaxMp,
   makeCommandVariableFromActorMdf,
 } from "@RpgTypes/rmmz/eventCommand";
@@ -274,7 +274,7 @@ const testCases: TestCase[] = [
     actorId: ACTOR_ID,
     description: "Actor MAX_HP (param 0)",
     paramIndex: 0,
-    command: makeCommandVariableFromActorMaxHp4({
+    command: makeCommandVariableFromActorMaxHp({
       startId: VAR_ID,
       actorId: ACTOR_ID,
     }),
