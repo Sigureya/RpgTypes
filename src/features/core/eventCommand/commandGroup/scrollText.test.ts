@@ -8,7 +8,7 @@ import type {
 import {
   makeCommandScrollingTextHeader,
   makeCommandScrollingTextBody,
-} from "@RpgTypes/rmmz/eventCommand/commands/message/scrollText/scrollText";
+} from "@RpgTypes/rmmz/eventCommand/commands/message/scrollText/make";
 import type { EventCommandGroupBase } from "./core";
 import { SimpleEventCommandGroup } from "./core";
 import { createScrollTextGroup, extractScrollTextGroup } from "./scrollText";
