@@ -1,3 +1,4 @@
+import type { ParamID } from "@RpgTypes/rmmz/rpg";
 import type { Rmmz_BattlerBase } from "./base";
 
 export interface Rmmz_Battler extends Rmmz_BattlerBase {
@@ -10,4 +11,5 @@ export interface Rmmz_Battler extends Rmmz_BattlerBase {
   performCollapse(): void;
   clearResult(): void;
   recoverAll(): void;
+  param(paramId: ParamID): number;
 }

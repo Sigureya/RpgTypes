@@ -34,3 +34,14 @@ export const makeCommandVariableFromActorStatusData = (
     parameters: toArrayOperandActorStatus(target, value, other.operation ?? 0),
   };
 };
+
+export const makeCommandVaribaleFromActorMaxHp = (
+  target: ParamObject_WritingTarget,
+  other: MakeOtherParam = {},
+): Command_ControlVariables<Operand_ActorStatus> => {
+  return makeCommandVariableFromActorStatusData(
+    target,
+    { index: 0, param: 0 },
+    other,
+  );
+};

@@ -1,3 +1,4 @@
+export * from "./actor";
 export * from "./constants";
 export * from "./gameVariable";
 export * from "./party";
@@ -6,10 +7,6 @@ export * from "./tempLastData";
 export * from "./types";
 export { getActorValue, getEnemyValue } from "./getValue";
 export { isCommandOperandVariables } from "./gameVariable";
-export {
-  makeCommandVariableFromActorStatusData,
-  toArrayOperandActorStatus,
-} from "./actor";
 export { makeCommandVariableFromArmor, toArrayOperandArmorData } from "./armor";
 export {
   makeCommandVariableFromConstant,
