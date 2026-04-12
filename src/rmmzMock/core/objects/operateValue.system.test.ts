@@ -1,13 +1,17 @@
 import type { MockedObject } from "vitest";
 import { describe, expect, test, vi } from "vitest";
-import type { Command_ControlVariables } from "@RpgTypes/rmmz/eventCommand";
+import type {
+  Command_ControlVariables,
+  Command_ControlVariables_FromSystem,
+  EventCommand,
+} from "@RpgTypes/rmmz/eventCommand";
 import {
-  makeCommandSystemBattleCount,
-  makeCommandSystemEscapeCount,
-  makeCommandSystemSaveCount,
-  makeCommandSystemTimer,
-  makeCommandSystemWinCount,
-  makeCommandVariableFromPlaytime,
+  makeCommandVariableFromSystemBattleCount,
+  makeCommandVariableFromSystemEscapeCount,
+  makeCommandVariableFromSystemPlayTime,
+  makeCommandVariableFromSystemSaveCount,
+  makeCommandVariableFromSystemTimer,
+  makeCommandVariableFromSystemWinCount,
 } from "@RpgTypes/rmmz/eventCommand";
 import type { Rmmz_System, Rmmz_Variables } from "@RpgTypes/rmmzRuntime";
 import { Game_Interpreter } from "./rmmz_objects";
@@ -82,7 +86,7 @@ const stubGlobal = (mocks: ReturnType<typeof createMockedObjects>) => {
 
 interface TestCase {
   description: string;
-  command: Command_ControlVariables;
+  command: Command_ControlVariables | Command_ControlVariables_FromSystem;
   commandLiteral: Command_ControlVariables;
   setValues: { id: number; value: number }[];
   systemCalls: (keyof FakeSystem)[];
@@ -118,7 +122,7 @@ const runTestCase = (testCase: TestCase) => {
       Math.randomInt = randomInt;
 
       const interpreter = new Game_Interpreter();
-      interpreter.setup([testCase.commandLiteral], 0);
+      interpreter.setup([testCase.commandLiteral as EventCommand], 0);
       interpreter.executeCommand();
 
       testCase.setValues.forEach((entry) => {
@@ -142,7 +146,7 @@ const runTestCase = (testCase: TestCase) => {
       stubGlobal(mocks);
 
       const interpreter = new Game_Interpreter();
-      interpreter.setup([testCase.command], 0);
+      interpreter.setup([testCase.command as EventCommand], 0);
       interpreter.executeCommand();
 
       assertCalls(
@@ -160,7 +164,7 @@ const runTestCase = (testCase: TestCase) => {
 const testCases: TestCase[] = [
   {
     description: "playtime",
-    command: makeCommandVariableFromPlaytime({ startId: 2 }),
+    command: makeCommandVariableFromSystemPlayTime({ startId: 2 }),
     commandLiteral: {
       code: 122,
       indent: 0,
@@ -172,7 +176,7 @@ const testCases: TestCase[] = [
   },
   {
     description: "timer",
-    command: makeCommandSystemTimer({ startId: 3 }),
+    command: makeCommandVariableFromSystemTimer({ startId: 3 }),
     commandLiteral: {
       code: 122,
       indent: 0,
@@ -184,7 +188,7 @@ const testCases: TestCase[] = [
   },
   {
     description: "save count",
-    command: makeCommandSystemSaveCount({ startId: 47 }),
+    command: makeCommandVariableFromSystemSaveCount({ startId: 47 }),
     commandLiteral: {
       code: 122,
       indent: 0,
@@ -196,7 +200,7 @@ const testCases: TestCase[] = [
   },
   {
     description: "battle count",
-    command: makeCommandSystemBattleCount({ startId: 52 }),
+    command: makeCommandVariableFromSystemBattleCount({ startId: 52 }),
     commandLiteral: {
       code: 122,
       indent: 0,
@@ -208,7 +212,7 @@ const testCases: TestCase[] = [
   },
   {
     description: "win count",
-    command: makeCommandSystemWinCount({ startId: 63 }),
+    command: makeCommandVariableFromSystemWinCount({ startId: 63 }),
     commandLiteral: {
       code: 122,
       indent: 0,
@@ -220,7 +224,7 @@ const testCases: TestCase[] = [
   },
   {
     description: "escape count",
-    command: makeCommandSystemEscapeCount({ startId: 78 }),
+    command: makeCommandVariableFromSystemEscapeCount({ startId: 78 }),
     commandLiteral: {
       code: 122,
       indent: 0,
@@ -232,7 +236,7 @@ const testCases: TestCase[] = [
   },
   {
     description: "playtime range write",
-    command: makeCommandVariableFromPlaytime({ startId: 90, endId: 92 }),
+    command: makeCommandVariableFromSystemPlayTime({ startId: 90, endId: 92 }),
     commandLiteral: {
       code: 122,
       indent: 0,
