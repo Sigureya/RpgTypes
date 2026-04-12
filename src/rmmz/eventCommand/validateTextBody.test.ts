@@ -14,7 +14,7 @@ import {
   makeCommandScriptHeader,
   makeCommandScriptBody,
 } from "./commands";
-import { makeCommandScrollingTextBody } from "./commands/message/scrollText/scrollText";
+import { makeCommandScrollingTextBody } from "./commands/message/scrollText/make";
 import { isCommandTextBody } from "./validate";
 import {
   isCommandShowMessageBody,

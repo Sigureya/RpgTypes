@@ -4,12 +4,10 @@ import {
   makeCommandSetupChoice,
   makeCommandShowChoiceItem,
 } from "./commands/message/setupChoice";
-import { makeCommandShowMessage } from "./commands/message/showMessage/convert";
 import {
   isCommandCommonEvent,
   isCommandShowChoiceItem,
   isCommandShowChoices,
-  isCommandShowMessage,
 } from "./validate";
 
 const testInvalidPattern = (fn: (data: unknown) => boolean) => {
@@ -55,17 +53,4 @@ describe("isCommandShowChoiceItem", () => {
   });
 
   testInvalidPattern(isCommandShowChoiceItem);
-});
-
-describe("isCommandShowMessage", () => {
-  test("Valid command", () => {
-    const command = makeCommandShowMessage({
-      positionType: 0,
-      facename: "Face",
-      faceIndex: 0,
-    });
-    expect(command).toSatisfy(isCommandShowMessage);
-  });
-
-  testInvalidPattern(isCommandShowMessage);
 });
