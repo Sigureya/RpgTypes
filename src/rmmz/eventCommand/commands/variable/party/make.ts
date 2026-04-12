@@ -16,7 +16,7 @@ export const makeCommandVariableFromMapId = (
   };
 };
 
-export const makeCommandVariableFromPartyMembers = (
+export const makeCommandVariableFromPartySize = (
   params: ParamObject_VariableFromParty,
   indent: number = 0,
 ): Command_ControlVariables_FromParty => {
