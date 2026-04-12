@@ -31,7 +31,7 @@ export type {
 export {
   fromArrayEnemyTransform,
   makeCommandEnemyTransform,
-} from "./transform/transfrom";
+} from "./transform/make";
 export {
   makeCommandAddEachEnemyState,
   makeCommandAddEnemyState,

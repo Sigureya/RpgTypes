@@ -8,7 +8,7 @@ import { makeMapData, makeMapEvent, makeMapEventPage } from "@RpgTypes/rmmz";
 import {
   makeCommandScrollingTextBody,
   makeCommandScrollingTextHeader,
-} from "@RpgTypes/rmmz/eventCommand/commands/message/scrollText/scrollText";
+} from "@RpgTypes/rmmz/eventCommand/commands/message/scrollText/make";
 import type { PluginSchema } from "@sigureya/rmmz-plugin-schema";
 import type {
   ExtractedMapTexts,

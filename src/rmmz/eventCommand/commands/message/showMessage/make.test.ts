@@ -1,8 +1,5 @@
 import { describe, test, expect } from "vitest";
-import {
-  fromArrayShowMessageHeader,
-  toArrayShowMessageHeader,
-} from "./convert";
+import { fromArrayShowMessageHeader, toArrayShowMessageHeader } from "./make";
 import type { ParamArray_ShowMessage, ParamObject_ShowMessage } from "./types";
 
 describe("ShowMessageConverter", () => {

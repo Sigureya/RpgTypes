@@ -4,7 +4,7 @@ import {
   makeCommandBattleProcessingDirect,
   makeCommandBattleProcessingEncount,
   makeCommandBattleProcessingVariable,
-} from "./battleProcessing";
+} from "./make";
 import type {
   Command_BattleProcessing,
   Command_BattleProcessing_Variable,
