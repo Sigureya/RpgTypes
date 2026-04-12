@@ -9,4 +9,12 @@ export interface Command_NameInputProcessing extends EventCommandLike<
   parameters: ParamArray_NameInputProcessing;
 }
 
-export type ParamArray_NameInputProcessing = [actorId: number, param1: unknown];
+export type ParamArray_NameInputProcessing = [
+  actorId: number,
+  maxLength: number,
+];
+
+export interface ParamObject_NameInputProcessing {
+  actorId: number;
+  maxLength: number;
+}
