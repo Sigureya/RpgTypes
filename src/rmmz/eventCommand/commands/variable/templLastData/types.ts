@@ -3,6 +3,8 @@ import type {
   EventCommandLike,
   VariableOperation,
 } from "@RpgTypes/libs";
+import type { ValueOf } from "src/libs/templates/valueOf";
+import type { VARIABLE_SRC_LAST } from "../types/last/dataSource";
 
 export interface Command_ControlVariables_FromLastData extends EventCommandLike<
   typeof CONTROL_VARIABLES
@@ -24,5 +26,5 @@ export type ParamArray_VariableFromLastData = [
   operation: VariableOperation,
   operandGameData: 3,
   typeLastData: 8,
-  index: number,
+  index: ValueOf<typeof VARIABLE_SRC_LAST>,
 ];

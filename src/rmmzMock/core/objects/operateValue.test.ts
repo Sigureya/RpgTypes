@@ -1,15 +1,12 @@
 import type { MockedObject } from "vitest";
 import { describe, expect, test, vi } from "vitest";
-import type {
-  Command_ControlVariables,
-  Command_ControlVariables_FromParty,
-} from "@RpgTypes/rmmz/eventCommand";
 import {
   makeCommandVariableFromMapId,
   makeCommandVariableFromRandom,
   makeCommandVariableFromVariable,
   OPERATION_SET,
 } from "@RpgTypes/rmmz/eventCommand";
+import type { Command_ControlVariables2 } from "@RpgTypes/rmmz/eventCommand/commands/variable/unionType";
 import type { Rmmz_Variables } from "@RpgTypes/rmmzRuntime";
 import type { FakeMap } from "./fakes/types";
 import { Game_Interpreter } from "./rmmz_objects";
@@ -53,9 +50,9 @@ interface TestCase {
     id: number;
   }[];
   // 変数操作コマンド。ここには生成関数の戻り値を置く
-  command: Command_ControlVariables | Command_ControlVariables_FromParty;
+  command: Command_ControlVariables2;
   // 数値直書き。生成関数のバグと値のバグを切り分けるためにある
-  commandLiteral: Command_ControlVariables;
+  commandLiteral: Command_ControlVariables2;
   additionalTests?: ((testCase: TestCase) => void)[];
 }
 

@@ -142,7 +142,7 @@ import type {
 } from "./shop/types";
 import type { Command_Skip } from "./skip/types";
 import type { Command_ChangeTransparency } from "./transparency/types";
-import type { Command_ControlVariables } from "./variable/types";
+import type { Command_ControlVariables2 } from "./variable/unionType";
 import type {
   Command_ChangeVehicleBGM,
   Command_SetVehicleLocation,
@@ -240,7 +240,7 @@ export type NormalizedEventCommand =
   | Command_ShopProcessing
   | Command_ShopProcessingBody
   | Command_Skip
-  | Command_ControlVariables
+  | Command_ControlVariables2
   | Command_SetVehicleLocation
   | Command_GetOnOffVehicle
   | Command_Wait

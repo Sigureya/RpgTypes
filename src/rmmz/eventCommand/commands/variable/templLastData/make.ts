@@ -1,9 +1,11 @@
 import { CONTROL_VARIABLES } from "@RpgTypes/libs";
+import type { ValueOf } from "src/libs/templates/valueOf";
 import type {
   Command_ControlVariables_FromLastData,
   ParamArray_VariableFromLastData,
   ParamObject_VariableFromLastData,
 } from "./types";
+import type { VARIABLE_SRC_LAST } from "../types/last/dataSource";
 
 export const makeCommandVariableFromLastUsedSkillId = (
   params: ParamObject_VariableFromLastData,
@@ -73,7 +75,7 @@ export const makeCommandVariableFromLastTargetEnemyIndex = (
 
 const paramToArray = (
   params: ParamObject_VariableFromLastData,
-  index: number,
+  index: ValueOf<typeof VARIABLE_SRC_LAST>,
 ): ParamArray_VariableFromLastData => [
   params.startId,
   params.endId ?? params.startId,

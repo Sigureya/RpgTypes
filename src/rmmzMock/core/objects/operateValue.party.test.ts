@@ -2,8 +2,10 @@ import type { MockedObject } from "vitest";
 import { describe, expect, test, vi } from "vitest";
 import type { Data_NamedItem } from "@RpgTypes/libs";
 import type {
-  Command_ControlVariables,
+  Command_ControlVariables_FromArmor,
+  Command_ControlVariables_FromItem,
   Command_ControlVariables_FromParty,
+  Command_ControlVariables_FromWeapon,
   EventCommand,
 } from "@RpgTypes/rmmz/eventCommand";
 import {
@@ -102,6 +104,12 @@ interface FunctionKeys {
   party: (keyof FakeParty)[];
 }
 
+type Command_GoodsUnion =
+  | Command_ControlVariables_FromItem
+  | Command_ControlVariables_FromWeapon
+  | Command_ControlVariables_FromArmor
+  | Command_ControlVariables_FromParty;
+
 interface TestCase {
   testName: string;
   fnCalls: FunctionKeys;
@@ -110,9 +118,9 @@ interface TestCase {
     id: number;
   }[];
   // 変数操作コマンド。ここには生成関数の戻り値を置く
-  command: Command_ControlVariables | Command_ControlVariables_FromParty;
+  command: Command_GoodsUnion;
   // 数値直書き。生成関数のバグと値のバグを切り分けるためにある
-  commandLiteral: Command_ControlVariables;
+  commandLiteral: Command_GoodsUnion;
   additionalTests?: ((testCase: TestCase) => void)[];
 }
 

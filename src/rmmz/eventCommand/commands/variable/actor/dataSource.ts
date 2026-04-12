@@ -1,4 +1,4 @@
-export const STATUS = {
+export const ACTOR_STATUS = {
   LEVEL: 0,
   EXP: 1,
   HP: 2,
