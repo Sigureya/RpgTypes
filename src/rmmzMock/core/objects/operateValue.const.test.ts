@@ -1,10 +1,12 @@
 import type { MockedObject } from "vitest";
 import { describe, expect, test, vi } from "vitest";
-import type {
-  Command_ControlVariables2,
-  EventCommand,
+import type { Command_ControlVariables_FromConstant } from "@RpgTypes/rmmz/eventCommand";
+import {
+  makeCommandVariableFromConstant,
+  OPERATION_ADD,
+  OPERATION_MULTIPLY,
+  OPERATION_SUBTRACT,
 } from "@RpgTypes/rmmz/eventCommand";
-import { makeCommandVariableFromConstant } from "@RpgTypes/rmmz/eventCommand";
 import type { Rmmz_Variables } from "@RpgTypes/rmmzRuntime";
 import { Game_Interpreter } from "./rmmz_objects";
 
@@ -27,8 +29,8 @@ const createMockedMap = (): FakeMap => ({
 
 interface TestCase {
   description: string;
-  command: Command_ControlVariables2;
-  commandLiteral: Command_ControlVariables2;
+  command: Command_ControlVariables_FromConstant;
+  commandLiteral: Command_ControlVariables_FromConstant;
   setValues: { id: number; value: number }[];
 }
 
@@ -49,7 +51,7 @@ const runTestCase = (testCase: TestCase) => {
       Math.randomInt = randomInt;
 
       const interpreter = new Game_Interpreter();
-      interpreter.setup([testCase.commandLiteral as EventCommand], 0);
+      interpreter.setup([testCase.commandLiteral], 0);
       interpreter.executeCommand();
 
       testCase.setValues.forEach((entry) => {
@@ -104,26 +106,26 @@ const testCases: TestCase[] = [
   {
     description: "constant add single variable",
     command: makeCommandVariableFromConstant(
-      { startId: 189, value: 123, operation: 1 },
+      { startId: 189, value: 123, operation: OPERATION_ADD },
       0,
     ),
     commandLiteral: {
       code: 122,
       indent: 0,
-      parameters: [189, 189, 1, 0, 123],
+      parameters: [189, 189, OPERATION_ADD, 0, 123],
     },
     setValues: [{ id: 189, value: MOCK_OLD_VALUE + 123 }],
   },
   {
     description: "constant add range [50, 52]",
     command: makeCommandVariableFromConstant(
-      { startId: 50, endId: 52, value: 50, operation: 1 },
+      { startId: 50, endId: 52, value: 50, operation: OPERATION_ADD },
       0,
     ),
     commandLiteral: {
       code: 122,
       indent: 0,
-      parameters: [50, 52, 1, 0, 50],
+      parameters: [50, 52, OPERATION_ADD, 0, 50],
     },
     setValues: [
       { id: 50, value: MOCK_OLD_VALUE + 50 },
@@ -134,26 +136,26 @@ const testCases: TestCase[] = [
   {
     description: "constant subtract single variable",
     command: makeCommandVariableFromConstant(
-      { startId: 189, value: 123, operation: 2 },
+      { startId: 189, value: 123, operation: OPERATION_SUBTRACT },
       0,
     ),
     commandLiteral: {
       code: 122,
       indent: 0,
-      parameters: [189, 189, 2, 0, 123],
+      parameters: [189, 189, OPERATION_SUBTRACT, 0, 123],
     },
     setValues: [{ id: 189, value: MOCK_OLD_VALUE - 123 }],
   },
   {
     description: "constant subtract range [60, 62]",
     command: makeCommandVariableFromConstant(
-      { startId: 60, endId: 62, value: 10, operation: 2 },
+      { startId: 60, endId: 62, value: 10, operation: OPERATION_SUBTRACT },
       0,
     ),
     commandLiteral: {
       code: 122,
       indent: 0,
-      parameters: [60, 62, 2, 0, 10],
+      parameters: [60, 62, OPERATION_SUBTRACT, 0, 10],
     },
     setValues: [
       { id: 60, value: MOCK_OLD_VALUE - 10 },
@@ -164,26 +166,26 @@ const testCases: TestCase[] = [
   {
     description: "constant multiply single variable",
     command: makeCommandVariableFromConstant(
-      { startId: 189, value: 3, operation: 3 },
+      { startId: 189, value: 12, operation: OPERATION_MULTIPLY },
       0,
     ),
     commandLiteral: {
       code: 122,
       indent: 0,
-      parameters: [189, 189, 3, 0, 3],
+      parameters: [189, 189, OPERATION_SUBTRACT, 0, 12],
     },
-    setValues: [{ id: 189, value: MOCK_OLD_VALUE * 3 }],
+    setValues: [{ id: 189, value: MOCK_OLD_VALUE * 12 }],
   },
   {
     description: "constant multiply range [70, 72]",
     command: makeCommandVariableFromConstant(
-      { startId: 70, endId: 72, value: 2, operation: 3 },
+      { startId: 70, endId: 72, value: 2, operation: OPERATION_MULTIPLY },
       0,
     ),
     commandLiteral: {
       code: 122,
       indent: 0,
-      parameters: [70, 72, 3, 0, 2],
+      parameters: [70, 72, OPERATION_MULTIPLY, 0, 2],
     },
     setValues: [
       { id: 70, value: MOCK_OLD_VALUE * 2 },
@@ -267,13 +269,13 @@ const testCases: TestCase[] = [
   {
     description: "constant add with indent level 3",
     command: makeCommandVariableFromConstant(
-      { startId: 100, value: 456, operation: 1 },
+      { startId: 100, value: 456, operation: OPERATION_ADD },
       3,
     ),
     commandLiteral: {
       code: 122,
       indent: 3,
-      parameters: [100, 100, 1, 0, 456],
+      parameters: [100, 100, OPERATION_ADD, 0, 456],
     },
     setValues: [{ id: 100, value: MOCK_OLD_VALUE + 456 }],
   },
