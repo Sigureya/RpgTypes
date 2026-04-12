@@ -1,7 +1,18 @@
 import type { MockedObject } from "vitest";
 import { describe, expect, test, vi } from "vitest";
-import type { Command_ControlVariables } from "@RpgTypes/rmmz/eventCommand";
-import { makeCommandVariableFromTempLastData } from "@RpgTypes/rmmz/eventCommand";
+import type {
+  Command_ControlVariables,
+  Command_ControlVariables_FromLastData,
+  EventCommand,
+} from "@RpgTypes/rmmz/eventCommand";
+import {
+  makeCommandVariableFromLastDataLastActorId,
+  makeCommandVariableFromLastDataLastEnemyIndex,
+  makeCommandVariableFromLastDataLastTargetActorId,
+  makeCommandVariableFromLastDataLastTargetEnemyIndex,
+  makeCommandVariableFromLastDataLastUsedItemId,
+  makeCommandVariableFromLastDataLastUsedSkillId,
+} from "@RpgTypes/rmmz/eventCommand";
 import { VARIABLE_SRC_LAST } from "@RpgTypes/rmmz/eventCommand/commands/variable/types/last/dataSource";
 import type { Rmmz_Variables } from "@RpgTypes/rmmzRuntime";
 import { Game_Interpreter } from "./rmmz_objects";
@@ -53,9 +64,11 @@ const stubGlobal = (mocks: ReturnType<typeof createMockedObjects>) => {
 interface TestCase {
   description: string;
   // 変数操作コマンド。ここには生成関数の戻り値を置く
-  command: Command_ControlVariables;
+  command: Command_ControlVariables | Command_ControlVariables_FromLastData;
   // 数値直書き。生成関数のバグと値のバグを切り分けるためにある
-  commandLiteral: Command_ControlVariables;
+  commandLiteral:
+    | Command_ControlVariables
+    | Command_ControlVariables_FromLastData;
   setValues: {
     value: number;
     id: number;
@@ -78,7 +91,7 @@ const runTestCase = (testCase: TestCase) => {
       Math.randomInt = randomInt;
 
       const interpreter = createMockedInterpreter();
-      interpreter.setup([testCase.commandLiteral], 0);
+      interpreter.setup([testCase.commandLiteral as EventCommand], 0);
       interpreter.executeCommand();
 
       testCase.setValues.forEach((entry) => {
@@ -102,7 +115,7 @@ const runTestCase = (testCase: TestCase) => {
       stubGlobal(mocks);
 
       const interpreter = createMockedInterpreter();
-      interpreter.setup([testCase.command], 0);
+      interpreter.setup([testCase.command as EventCommand], 0);
       interpreter.executeCommand();
 
       expect(mocks.mockTemp.lastActionData).toHaveBeenCalledWith(
@@ -116,10 +129,7 @@ const runTestCase = (testCase: TestCase) => {
 const testCases: TestCase[] = [
   {
     description: "USED_SKILL_ID",
-    command: makeCommandVariableFromTempLastData(
-      { startId: 11 },
-      { param: "USED_SKILL_ID" },
-    ),
+    command: makeCommandVariableFromLastDataLastUsedSkillId({ startId: 11 }),
     commandLiteral: {
       code: 122,
       indent: 0,
@@ -130,10 +140,7 @@ const testCases: TestCase[] = [
   },
   {
     description: "USED_ITEM_ID",
-    command: makeCommandVariableFromTempLastData(
-      { startId: 12 },
-      { param: "USED_ITEM_ID" },
-    ),
+    command: makeCommandVariableFromLastDataLastUsedItemId({ startId: 12 }),
     commandLiteral: {
       code: 122,
       indent: 0,
@@ -144,10 +151,7 @@ const testCases: TestCase[] = [
   },
   {
     description: "ACTION_ACTOR_ID",
-    command: makeCommandVariableFromTempLastData(
-      { startId: 13 },
-      { param: "ACTION_ACTOR_ID" },
-    ),
+    command: makeCommandVariableFromLastDataLastActorId({ startId: 13 }),
     commandLiteral: {
       code: 122,
       indent: 0,
@@ -158,10 +162,7 @@ const testCases: TestCase[] = [
   },
   {
     description: "ACTION_ENEMY_INDEX",
-    command: makeCommandVariableFromTempLastData(
-      { startId: 14 },
-      { param: "ACTION_ENEMY_INDEX" },
-    ),
+    command: makeCommandVariableFromLastDataLastEnemyIndex({ startId: 14 }),
     commandLiteral: {
       code: 122,
       indent: 0,
@@ -172,10 +173,7 @@ const testCases: TestCase[] = [
   },
   {
     description: "TARGET_ACTOR_ID",
-    command: makeCommandVariableFromTempLastData(
-      { startId: 15 },
-      { param: "TARGET_ACTOR_ID" },
-    ),
+    command: makeCommandVariableFromLastDataLastTargetActorId({ startId: 15 }),
     commandLiteral: {
       code: 122,
       indent: 0,
@@ -186,10 +184,9 @@ const testCases: TestCase[] = [
   },
   {
     description: "TARGET_ENEMY_INDEX",
-    command: makeCommandVariableFromTempLastData(
-      { startId: 16 },
-      { param: "TARGET_ENEMY_INDEX" },
-    ),
+    command: makeCommandVariableFromLastDataLastTargetEnemyIndex({
+      startId: 16,
+    }),
     commandLiteral: {
       code: 122,
       indent: 0,
@@ -200,10 +197,10 @@ const testCases: TestCase[] = [
   },
   {
     description: "range write for ACTION_ACTOR_ID",
-    command: makeCommandVariableFromTempLastData(
-      { startId: 20, endId: 22 },
-      { param: "ACTION_ACTOR_ID" },
-    ),
+    command: makeCommandVariableFromLastDataLastActorId({
+      startId: 20,
+      endId: 22,
+    }),
     commandLiteral: {
       code: 122,
       indent: 0,
