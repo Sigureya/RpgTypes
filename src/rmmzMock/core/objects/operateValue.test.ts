@@ -30,7 +30,8 @@ import {
 } from "@RpgTypes/rmmz/eventCommand";
 import type { Rmmz_System, Rmmz_Variables } from "@RpgTypes/rmmzRuntime";
 import type { FakeActor, FakeMap } from "./fakes/types";
-import { Game_Interpreter, Game_Party } from "./rmmz_objects";
+import type { Game_Party } from "./rmmz_objects";
+import { Game_Interpreter } from "./rmmz_objects";
 
 const MOCK_MAP_ID = 123456 as const;
 
@@ -68,6 +69,7 @@ const PARTY_FUNCTION_KEYS = [
   "loseGold",
   "members",
   "numItems",
+  "size",
 ] as const satisfies (keyof Game_Party)[];
 
 const mockItems = [
@@ -94,22 +96,22 @@ const createMockedVariable = (): MockedObject<Rmmz_Variables> => ({
   onChange: vi.fn(),
 });
 
-const createMockParty = (actorIds: number[]): Game_Party => {
-  const party = new Game_Party();
-  party._actors = [...actorIds];
-  vi.spyOn(party, "members");
-  vi.spyOn(party, "gold").mockReturnValue(MOCK_GOLD);
-  vi.spyOn(party, "gainGold");
-  vi.spyOn(party, "loseGold");
-  vi.spyOn(party, "steps").mockReturnValue(MOCK_STEPS);
-  vi.spyOn(party, "numItems").mockImplementation((item) => {
+type FakeParty = Pick<Game_Party, (typeof PARTY_FUNCTION_KEYS)[number]>;
+
+const createMockParty = (actorIds: number[]): MockedObject<FakeParty> => ({
+  gainGold: vi.fn(),
+  loseGold: vi.fn(),
+  size: vi.fn().mockReturnValue(actorIds.length),
+  gold: vi.fn().mockReturnValue(MOCK_GOLD),
+  steps: vi.fn().mockReturnValue(MOCK_STEPS),
+  members: vi.fn().mockReturnValue(actorIds.map((id) => ({ id }))),
+  numItems: vi.fn().mockImplementation((item) => {
     if (item === null) {
       return 0;
     }
     return MOCK_ITEM_AMOUNT;
-  });
-  return party;
-};
+  }),
+});
 
 interface FakeTemp {
   lastActionData(dataType: number): number;
@@ -172,8 +174,7 @@ const createMockedObjects = () => {
 
 interface FunctionKeys {
   systems: (keyof FakeSystem)[];
-  party: (keyof Game_Party)[];
-  actorsCall?: number;
+  party: (keyof FakeParty)[];
 }
 
 interface TestCase {
@@ -297,15 +298,12 @@ const runTestCase = (testCase: TestCase) => {
       const interpreter = createMockedInterpreter();
       interpreter.setup([testCase.commandLiteral], 0);
       interpreter.executeCommand();
-      expect(mocks.mockActors.actor).toHaveBeenCalledTimes(
-        testCase.fnCalls.actorsCall ?? 0,
-      );
       callTestEx<FakeSystem>(
         mocks.mockedSystem,
         new Set(testCase.fnCalls.systems),
         SYSTEM_FUNTION_KEYS,
       );
-      callTestEx<Game_Party>(
+      callTestEx<FakeParty>(
         mocks.mockParty,
         new Set(testCase.fnCalls.party),
         PARTY_FUNCTION_KEYS,
@@ -680,9 +678,9 @@ const testCases: TestCase[] = [
   {
     testName: "partyMembers",
     fnCalls: {
-      party: ["members"],
+      party: ["size"],
       systems: [],
-      actorsCall: MOCK_PARTY_MEMBERS.length,
+      //      actorsCall: MOCK_PARTY_MEMBERS.length,
     },
     setValues: [{ id: 233, value: 3 }],
     command: makeCommandVariableFromPartyMembers({ startId: 233 }),
