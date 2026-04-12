@@ -75,7 +75,7 @@ export const makeCommandVariableFromMapPlayerX = (
         startId: params.startId,
         endId: params.endId,
         operation: params.operation,
-        charactorId: 0,
+        charactorId: -1,
       },
       MAP_CHARACTOR_PARAM.X,
     ),
