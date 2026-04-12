@@ -36,7 +36,7 @@ interface TestCase {
   description: string;
   command: Command_ControlVariables_FromVariable;
   commandLiteral: Command_ControlVariables_FromVariable;
-  expectedValue: number;
+  setValues: { id: number; value: number }[];
 }
 
 const runTestCase = (testCase: TestCase) => {
@@ -63,11 +63,16 @@ const runTestCase = (testCase: TestCase) => {
       expect(mockedVariables.value).toHaveBeenCalledWith(SOURCE_ID);
       expect(mockedVariables.value).toHaveBeenCalledTimes(2);
 
-      expect(mockedVariables.setValue).toHaveBeenCalledWith(
-        TARGET_ID,
-        testCase.expectedValue,
+      testCase.setValues.forEach((entry) => {
+        expect(mockedVariables.setValue).toHaveBeenCalledWith(
+          entry.id,
+          entry.value,
+        );
+        expect(mockedVariables.value).toHaveBeenCalledWith(entry.id);
+      });
+      expect(mockedVariables.setValue).toHaveBeenCalledTimes(
+        testCase.setValues.length,
       );
-      expect(mockedVariables.setValue).toHaveBeenCalledTimes(1);
 
       expect(randomInt).toHaveBeenCalledTimes(1);
     });
@@ -87,7 +92,7 @@ const testCases: TestCase[] = [
       indent: 0,
       parameters: [TARGET_ID, TARGET_ID, OPERATION_SET, 1, SOURCE_ID],
     },
-    expectedValue: MOCK_VARIABLE_VALUE,
+    setValues: [{ id: TARGET_ID, value: MOCK_VARIABLE_VALUE }],
   },
   {
     description: "variable operand add",
@@ -101,7 +106,9 @@ const testCases: TestCase[] = [
       indent: 0,
       parameters: [TARGET_ID, TARGET_ID, OPERATION_ADD, 1, SOURCE_ID],
     },
-    expectedValue: MOCK_VARIABLE_VALUE + MOCK_VARIABLE_VALUE,
+    setValues: [
+      { id: TARGET_ID, value: MOCK_VARIABLE_VALUE + MOCK_VARIABLE_VALUE },
+    ],
   },
   {
     description: "variable operand subtract",
@@ -115,7 +122,9 @@ const testCases: TestCase[] = [
       indent: 0,
       parameters: [TARGET_ID, TARGET_ID, OPERATION_SUBTRACT, 1, SOURCE_ID],
     },
-    expectedValue: MOCK_VARIABLE_VALUE - MOCK_VARIABLE_VALUE,
+    setValues: [
+      { id: TARGET_ID, value: MOCK_VARIABLE_VALUE - MOCK_VARIABLE_VALUE },
+    ],
   },
   {
     description: "variable operand multiply",
@@ -129,7 +138,9 @@ const testCases: TestCase[] = [
       indent: 0,
       parameters: [TARGET_ID, TARGET_ID, OPERATION_MULTIPLY, 1, SOURCE_ID],
     },
-    expectedValue: MOCK_VARIABLE_VALUE * MOCK_VARIABLE_VALUE,
+    setValues: [
+      { id: TARGET_ID, value: MOCK_VARIABLE_VALUE * MOCK_VARIABLE_VALUE },
+    ],
   },
   {
     description: "variable operand divide",
@@ -143,7 +154,12 @@ const testCases: TestCase[] = [
       indent: 0,
       parameters: [TARGET_ID, TARGET_ID, OPERATION_DIVIDE, 1, SOURCE_ID],
     },
-    expectedValue: Math.floor(MOCK_VARIABLE_VALUE / MOCK_VARIABLE_VALUE),
+    setValues: [
+      {
+        id: TARGET_ID,
+        value: Math.floor(MOCK_VARIABLE_VALUE / MOCK_VARIABLE_VALUE),
+      },
+    ],
   },
   {
     description: "variable operand mod",
@@ -157,7 +173,9 @@ const testCases: TestCase[] = [
       indent: 0,
       parameters: [TARGET_ID, TARGET_ID, OPERATION_MOD, 1, SOURCE_ID],
     },
-    expectedValue: MOCK_VARIABLE_VALUE % MOCK_VARIABLE_VALUE,
+    setValues: [
+      { id: TARGET_ID, value: MOCK_VARIABLE_VALUE % MOCK_VARIABLE_VALUE },
+    ],
   },
 ];
 
