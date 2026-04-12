@@ -60,7 +60,7 @@ export const makeCommandVariableFromActorCurrentTp = (
   };
 };
 
-export const makeCommandVariableFromActorMaxHp4 = (
+export const makeCommandVariableFromActorMaxHp = (
   params: ParamObject_VariableFromActor,
   indent: number = 0,
 ): Command_ControlVariables_FromActor => {
