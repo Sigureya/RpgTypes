@@ -1,3 +1,3 @@
-export * from "./recoverAll";
+export * from "./make";
 
 export type * from "./types";

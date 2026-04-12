@@ -54,4 +54,4 @@ export {
   makeCommandLoseActorHP,
   makeCommandLoseActorMP,
   makeCommandLoseActorTP,
-} from "./changeValues/changeValues";
+} from "./changeValues/make";

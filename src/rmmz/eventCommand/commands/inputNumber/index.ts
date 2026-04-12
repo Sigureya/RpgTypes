@@ -3,4 +3,4 @@ export {
   fromArrayInputNumber,
   makeCommandInputNumber,
   toArrayInputNumber,
-} from "./inputNumber";
+} from "./make";
