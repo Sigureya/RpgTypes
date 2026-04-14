@@ -17,7 +17,7 @@ export interface ParamObject_ChangeEnemyHp extends ParamObject_ChangeEnemyValueB
 export type ParamArray_ChangeEnemyHP = [
   index: number,
   operation: 1 | 0,
-  valueType: number,
+  valueType: 1 | 0,
   value: number,
   allowDeath: boolean,
 ];

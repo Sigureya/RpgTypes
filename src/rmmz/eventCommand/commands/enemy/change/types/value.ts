@@ -11,7 +11,7 @@ export type ParamObject_ChangeEnemyValue = ParamObject_ChangeEnemyValueBase;
 export type ParamArray_ChangeEnemyValueBase = [
   index: number,
   operation: Operation_AddSub["ADD"] | Operation_AddSub["SUB"],
-  valueType: number,
+  operand: 1 | 0,
   value: number,
 ];
 
