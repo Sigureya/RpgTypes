@@ -1,0 +1,14 @@
+import { Command_ControlVariables_FromActor, ParamObject_VariableFromActor } from './types';
+export declare const makeCommandVariableFromActorCurrentLevel: (params: ParamObject_VariableFromActor, indent?: number) => Command_ControlVariables_FromActor;
+export declare const makeCommandVariableFromActorCurrentExp: (params: ParamObject_VariableFromActor, indent?: number) => Command_ControlVariables_FromActor;
+export declare const makeCommandVariableFromActorCurrentHp: (params: ParamObject_VariableFromActor, indent?: number) => Command_ControlVariables_FromActor;
+export declare const makeCommandVariableFromActorCurrentMp: (params: ParamObject_VariableFromActor, indent?: number) => Command_ControlVariables_FromActor;
+export declare const makeCommandVariableFromActorCurrentTp: (params: ParamObject_VariableFromActor, indent?: number) => Command_ControlVariables_FromActor;
+export declare const makeCommandVariableFromActorMaxHp: (params: ParamObject_VariableFromActor, indent?: number) => Command_ControlVariables_FromActor;
+export declare const makeCommandVariableFromActorMaxMp: (params: ParamObject_VariableFromActor, indent?: number) => Command_ControlVariables_FromActor;
+export declare const makeCommandVariableFromActorAtk: (params: ParamObject_VariableFromActor, indent?: number) => Command_ControlVariables_FromActor;
+export declare const makeCommandVariableFromActorDef: (params: ParamObject_VariableFromActor, indent?: number) => Command_ControlVariables_FromActor;
+export declare const makeCommandVariableFromActorMat: (params: ParamObject_VariableFromActor, indent?: number) => Command_ControlVariables_FromActor;
+export declare const makeCommandVariableFromActorMdf: (params: ParamObject_VariableFromActor, indent?: number) => Command_ControlVariables_FromActor;
+export declare const makeCommandVariableFromActorAgi: (params: ParamObject_VariableFromActor, indent?: number) => Command_ControlVariables_FromActor;
+export declare const makeCommandVariableFromActorLuk: (params: ParamObject_VariableFromActor, indent?: number) => Command_ControlVariables_FromActor;

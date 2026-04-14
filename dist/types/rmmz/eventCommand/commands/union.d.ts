@@ -50,7 +50,7 @@ import { Command_ScriptBody, Command_ScriptHeader } from './script/types';
 import { Command_ShopProcessing, Command_ShopProcessingBody } from './shop/types';
 import { Command_Skip } from './skip/types';
 import { Command_ChangeTransparency } from './transparency/types';
-import { Command_ControlVariables } from './variable/types';
+import { Command_ControlVariables } from './variable/unionType';
 import { Command_ChangeVehicleBGM, Command_SetVehicleLocation, Command_GetOnOffVehicle, Command_ChangeVehicleImage } from './vehicle';
 import { Command_Wait } from './wait/types';
 import { Command_ChangeWindowColor } from './window/changeWindowColor/types';

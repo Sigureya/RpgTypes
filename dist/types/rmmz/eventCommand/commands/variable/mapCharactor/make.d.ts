@@ -1,0 +1,11 @@
+import { Command_ControlVariables_FromMapCharactor, ParamObject_VariableFromMapCharactor, ParamObject_VariableFromMapPlayer } from './types';
+export declare const makeCommandVariableFromMapCharactorX: (params: ParamObject_VariableFromMapCharactor, indent?: number) => Command_ControlVariables_FromMapCharactor;
+export declare const makeCommandVariableFromMapCharactorY: (params: ParamObject_VariableFromMapCharactor, indent?: number) => Command_ControlVariables_FromMapCharactor;
+export declare const makeCommandVariableFromMapCharactorDirection: (params: ParamObject_VariableFromMapCharactor, indent?: number) => Command_ControlVariables_FromMapCharactor;
+export declare const makeCommandVariableFromMapCharactorScreenX: (params: ParamObject_VariableFromMapCharactor, indent?: number) => Command_ControlVariables_FromMapCharactor;
+export declare const makeCommandVariableFromMapCharactorScreenY: (params: ParamObject_VariableFromMapCharactor, indent?: number) => Command_ControlVariables_FromMapCharactor;
+export declare const makeCommandVariableFromMapPlayerX: (params: ParamObject_VariableFromMapPlayer, indent?: number) => Command_ControlVariables_FromMapCharactor;
+export declare const makeCommandVariableFromMapPlayerY: (params: ParamObject_VariableFromMapPlayer, indent?: number) => Command_ControlVariables_FromMapCharactor;
+export declare const makeCommandVariableFromMapPlayerDirection: (params: ParamObject_VariableFromMapPlayer, indent?: number) => Command_ControlVariables_FromMapCharactor;
+export declare const makeCommandVariableFromMapPlayerScreenX: (params: ParamObject_VariableFromMapPlayer, indent?: number) => Command_ControlVariables_FromMapCharactor;
+export declare const makeCommandVariableFromMapPlayerScreenY: (params: ParamObject_VariableFromMapPlayer, indent?: number) => Command_ControlVariables_FromMapCharactor;

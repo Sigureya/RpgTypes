@@ -1,0 +1,12 @@
+import { Command_ControlVariables_FromEnemy, ParamObject_VariableFromEnemy } from './types';
+export declare const makeCommandVariableFromEnemyCurrentHp: (params: ParamObject_VariableFromEnemy, indent?: number) => Command_ControlVariables_FromEnemy;
+export declare const makeCommandVariableFromEnemyCurrentMp: (params: ParamObject_VariableFromEnemy, indent?: number) => Command_ControlVariables_FromEnemy;
+export declare const makeCommandVariableFromEnemyCurrentTp: (params: ParamObject_VariableFromEnemy, indent?: number) => Command_ControlVariables_FromEnemy;
+export declare const makeCommandVariableFromEnemyMaxHp: (params: ParamObject_VariableFromEnemy, indent?: number) => Command_ControlVariables_FromEnemy;
+export declare const makeCommandVariableFromEnemyMaxMp: (params: ParamObject_VariableFromEnemy, indent?: number) => Command_ControlVariables_FromEnemy;
+export declare const makeCommandVariableFromEnemyAtk: (params: ParamObject_VariableFromEnemy, indent?: number) => Command_ControlVariables_FromEnemy;
+export declare const makeCommandVariableFromEnemyDef: (params: ParamObject_VariableFromEnemy, indent?: number) => Command_ControlVariables_FromEnemy;
+export declare const makeCommandVariableFromEnemyMat: (params: ParamObject_VariableFromEnemy, indent?: number) => Command_ControlVariables_FromEnemy;
+export declare const makeCommandVariableFromEnemyMdf: (params: ParamObject_VariableFromEnemy, indent?: number) => Command_ControlVariables_FromEnemy;
+export declare const makeCommandVariableFromEnemyAgi: (params: ParamObject_VariableFromEnemy, indent?: number) => Command_ControlVariables_FromEnemy;
+export declare const makeCommandVariableFromEnemyLuk: (params: ParamObject_VariableFromEnemy, indent?: number) => Command_ControlVariables_FromEnemy;
