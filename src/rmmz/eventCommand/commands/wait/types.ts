@@ -5,3 +5,7 @@ export interface Command_Wait extends EventCommandLike<230> {
 }
 
 export type ParamArray_Wait = [duration: number];
+
+export interface ParamObject_Wait {
+  duration: number;
+}
