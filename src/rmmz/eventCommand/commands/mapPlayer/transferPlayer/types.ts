@@ -4,10 +4,28 @@ import type {
 } from "@RpgTypes/libs/eventCommand";
 import type { Designation, Direction8 } from "@RpgTypes/rmmz/utils";
 
-export interface Command_TransferPlayer extends EventCommandLike<
+export type Command_TransferPlayer =
+  | Command_TransferPlayerDirect
+  | Command_TransferPlayerVariable;
+
+export interface Command_TransferPlayerDirect extends EventCommandLike<
   typeof TRANSFER_PLAYER
 > {
-  parameters: ParamArray_TransferPlayer;
+  parameters: ParamArray_TransferPlayerDirect;
+}
+
+export interface Command_TransferPlayerVariable extends EventCommandLike<
+  typeof TRANSFER_PLAYER
+> {
+  parameters: ParamArray_TransferPlayerVariable;
+}
+
+export interface ParamObject_TransferPlayer {
+  mapId: number;
+  x: number;
+  y: number;
+  direction: Direction8;
+  fadeType: number;
 }
 
 export type ParamArray_TransferPlayer =
