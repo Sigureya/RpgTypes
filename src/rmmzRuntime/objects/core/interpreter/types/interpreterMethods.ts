@@ -130,8 +130,8 @@ export interface InterpreterMapper extends CommandTypeAssert {
   command128(params: ParamArray_ChangeArmors): boolean;
   command129(params: ParamArray_ChangePartyMember): boolean;
 
-  command132(params: [AudioFileParams]): boolean;
-  command133(params: [AudioFileParams]): boolean;
+  command132(params: [battleBgm: AudioFileParams]): boolean;
+  command133(params: [victoryMe: AudioFileParams]): boolean;
   command134(params: ParamArray_ChangeEnabled): boolean;
   command135(params: ParamArray_ChangeEnabled): boolean;
   command136(params: ParamArray_ChangeEnabled): boolean;
@@ -189,6 +189,7 @@ export interface InterpreterMapper extends CommandTypeAssert {
   command301(params: ParamArray_BattleProcessing): boolean;
   command302(params: ParamArray_ShopProcessing): boolean;
   command303(params: ParamArray_NameInputProcessing): boolean;
+
   command311(params: ParamArray_ChangeActorHP): boolean;
   command312(changeMP: ParamArray_ChangeActorMP): boolean;
   command326(changeTP: ParamArray_ChangeActorTP): boolean;
