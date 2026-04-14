@@ -2,8 +2,11 @@ import type {
   EventCommandLike,
   CHANGE_ENEMY_MP,
 } from "@RpgTypes/libs/eventCommand";
-import type { Operation_AddSub } from "@RpgTypes/rmmz/utils";
-import type { Operand } from "./operand";
+import type {
+  ParamArray_ChangeEnemyValueBase,
+  ParamObject_ChangeEnemyValueBase,
+  ParamObject_ChangeEnemyValueVV,
+} from "./value";
 
 export interface Command_ChangeEnemyMP extends EventCommandLike<
   typeof CHANGE_ENEMY_MP
@@ -11,19 +14,12 @@ export interface Command_ChangeEnemyMP extends EventCommandLike<
   parameters: ParamArray_ChangeEnemyMP;
 }
 
-export interface ParamObject_ChangeEnemyMp {
-  targetIndex?: number;
-  operand: Operand;
-}
+export interface ParamObject_ChangeEnemyMpDirect {}
 
-export interface ParamObject_ChangeEnemyMp2 {
-  operandVariableId: number;
-  targetVariableId: number;
-}
+export type ParamObject_ChangeEnemyMp = ParamObject_ChangeEnemyValueBase;
 
-export type ParamArray_ChangeEnemyMP = [
-  index: number,
-  operation: Operation_AddSub["ADD"] | Operation_AddSub["SUB"],
-  valueType: number,
-  value: number,
-];
+export type ParamObject_ChangeEnemyMp2 = ParamObject_ChangeEnemyValueVV;
+
+export type ParamArray_ChangeEnemyMP = ParamArray_ChangeEnemyValueBase;
+
+export type ParamArray_GainEnemyMP = ParamArray_ChangeEnemyMP;

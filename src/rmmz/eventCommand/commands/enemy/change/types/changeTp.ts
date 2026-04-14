@@ -2,8 +2,11 @@ import type {
   EventCommandLike,
   CHANGE_ENEMY_TP,
 } from "@RpgTypes/libs/eventCommand";
-import type { Operation_AddSub } from "@RpgTypes/rmmz/utils";
-import type { Operand } from "./operand";
+import type {
+  ParamArray_ChangeEnemyValueBase,
+  ParamObject_ChangeEnemyValueBase,
+  ParamObject_ChangeEnemyValueVV,
+} from "./value";
 
 export interface Command_ChangeEnemyTP extends EventCommandLike<
   typeof CHANGE_ENEMY_TP
@@ -11,14 +14,8 @@ export interface Command_ChangeEnemyTP extends EventCommandLike<
   parameters: ParamArray_ChangeEnemyTP;
 }
 
-export interface ParamObject_ChangeEnemyTp {
-  targetIndex?: number;
-  operand: Operand;
-}
+export type ParamObject_ChangeEnemyTp = ParamObject_ChangeEnemyValueBase;
 
-export type ParamArray_ChangeEnemyTP = [
-  index: number,
-  operation: Operation_AddSub["ADD"] | Operation_AddSub["SUB"],
-  valueType: number,
-  value: number,
-];
+export type ParamArray_ChangeEnemyTP = ParamArray_ChangeEnemyValueBase;
+
+export type ParamObject_ChangeEnemyTp2 = ParamObject_ChangeEnemyValueVV;
