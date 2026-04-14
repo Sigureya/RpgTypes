@@ -1,2 +1,2 @@
 export * from './types';
-export { fromArrayInputNumber, makeCommandInputNumber, toArrayInputNumber, } from './inputNumber';
+export { fromArrayInputNumber, makeCommandInputNumber, toArrayInputNumber, } from './make';

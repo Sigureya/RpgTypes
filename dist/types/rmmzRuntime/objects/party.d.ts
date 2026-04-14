@@ -7,5 +7,6 @@ export declare class Game_Party extends Game_Unit<Rmmz_Actor> implements Partial
     gainGold(amount: number): void;
     loseGold(amount: number): void;
     numItems(item: Data_Item | Data_Weapon | Data_Armor, includeEquip: boolean): number;
+    size(): number;
     _actors: number[];
 }

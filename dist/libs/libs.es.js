@@ -1,9 +1,9 @@
-import { A as Va, B as Wa, C as va, a as Ba, b as fa, c as Ya, d as ka, e as ya, f as wa, g as xa, h as ba, i as Ka, j as Xa, k as Ja, l as ja, m as qa, n as za, o as Qa, p as Za, q as $a, r as aE, s as EE, t as _E, u as sE, v as eE, w as OE, x as TE, y as RE, z as AE, D as NE, E as rE, F as CE, G as oE, H as mE, I as tE, J as ME, K as SE, L as nE, M as LE, N as UE, O as HE, P as IE, Q as GE, R as PE, S as cE, T as dE, U as pE, V as iE, W as lE, X as gE, Y as DE, Z as FE, _ as uE, $ as hE, a0 as VE, a1 as WE, a2 as vE, a3 as BE, a4 as fE, a5 as YE, a6 as kE, a7 as yE, a8 as wE, a9 as xE, aa as bE, ab as KE, ac as XE, ad as JE, ae as jE, af as qE, ag as zE, ah as QE, ai as ZE, aj as $E, ak as a_, al as E_, am as __, an as s_, ao as e_, ap as O_, aq as T_, ar as R_, as as A_, at as N_, au as r_, av as C_, aw as o_, ax as m_, ay as t_, az as M_, aA as S_, aB as n_, aC as L_, aD as U_, aE as H_, aF as I_, aG as G_, aH as P_, aI as c_, aJ as d_, aK as p_, aL as i_, aM as l_, aN as g_, aO as D_, aP as F_, aQ as u_, aR as h_, aS as V_, aT as W_, aU as v_, aV as B_, aW as f_, aX as Y_, aY as k_ } from "../shared/eventCommandCodes.es.js";
-import { g as r, b as C } from "../shared/make.es.js";
-import { a as w_, c as x_, m as b_ } from "../shared/make.es.js";
-import { m as X_ } from "../shared/mergeItemsSource.es.js";
-import { v as j_ } from "../shared/validateWithErrors.es.js";
-const D = "rmmz", F = "colors", u = (a, E, _, s = { placeHolderMaxLength: 50, formatMaxLength: 200 }) => a.pattern.length >= s.formatMaxLength ? { formatLabel: a.label, syntaxErrors: [{
+import { A as Va, B as Wa, C as va, a as Ba, b as fa, c as Ya, d as ka, e as ya, f as wa, g as xa, h as ba, i as Ka, j as Xa, k as Ja, l as ja, m as qa, n as za, o as Qa, p as Za, q as $a, r as aE, s as EE, t as _E, u as sE, v as eE, w as OE, x as TE, y as RE, z as AE, D as NE, E as rE, F as CE, G as oE, H as mE, I as tE, J as ME, K as SE, L as nE, M as LE, N as IE, O as UE, P as HE, Q as PE, R as GE, S as cE, T as dE, U as pE, V as iE, W as lE, X as DE, Y as gE, Z as FE, _ as hE, $ as uE, a0 as VE, a1 as WE, a2 as vE, a3 as BE, a4 as fE, a5 as YE, a6 as kE, a7 as yE, a8 as wE, a9 as xE, aa as bE, ab as KE, ac as XE, ad as JE, ae as jE, af as qE, ag as zE, ah as QE, ai as ZE, aj as $E, ak as a_, al as E_, am as __, an as s_, ao as e_, ap as O_, aq as T_, ar as R_, as as A_, at as N_, au as r_, av as C_, aw as o_, ax as m_, ay as t_, az as M_, aA as S_, aB as n_, aC as L_, aD as I_, aE as U_, aF as H_, aG as P_, aH as G_, aI as c_, aJ as d_, aK as p_, aL as i_, aM as l_, aN as D_, aO as g_, aP as F_, aQ as h_, aR as u_, aS as V_, aT as W_, aU as v_, aV as B_, aW as f_, aX as Y_, aY as k_ } from "../shared/eventCommandCodes.es.js";
+import { h as r, i as C } from "../shared/make.es.js";
+import { O as w_, a as x_, b as b_, c as K_, d as X_, e as J_, f as j_, g as q_, m as z_ } from "../shared/make.es.js";
+import { m as Z_ } from "../shared/mergeItemsSource.es.js";
+import { v as as } from "../shared/validateWithErrors.es.js";
+const g = "rmmz", F = "colors", h = (a, E, _, s = { placeHolderMaxLength: 50, formatMaxLength: 200 }) => a.pattern.length >= s.formatMaxLength ? { formatLabel: a.label, syntaxErrors: [{
   message: _.formatVeryLong,
   reason: a.pattern.slice(0, s.formatMaxLength)
 }], semanticErrors: [] } : {
@@ -25,12 +25,12 @@ const D = "rmmz", F = "colors", u = (a, E, _, s = { placeHolderMaxLength: 50, fo
     message: _.missingName,
     reason: E.placeHolder
   } : s && !e ? { message: _.missingSourceId, reason: E.placeHolder } : void 0;
-}, h = (a) => Object.entries(a).map((([, E]) => E.title)), M = (a, E, _) => E.map(((s) => _(s, a[s], a))), V = (a, E, _) => M(a, E, _), W = (a) => typeof a == "number" && !Number.isNaN(a), v = 0, B = 1, f = 2, Y = 3, k = 4, y = 5, w = 6, x = 7, b = 8, K = 9, X = 10, J = 11, j = 12, q = 13, z = 14, Q = 15, Z = 16, $ = 17, aa = 18, Ea = 19, _a = 20, sa = 21, ea = 22, Oa = 23, Ta = 24, Ra = 25, Aa = 26, Na = 27, ra = 28, Ca = 29, oa = 30, ma = 31, ta = 32, Ma = 33, Sa = 34, na = 35, La = 36, Ua = 37, Ha = 38, Ia = 39, Ga = 40, Pa = 41, ca = 42, da = 43, pa = 44, ia = 45, la = (a) => ({
+}, u = (a) => Object.entries(a).map((([, E]) => E.title)), M = (a, E, _) => E.map(((s) => _(s, a[s], a))), V = (a, E, _) => M(a, E, _), W = (a) => typeof a == "number" && !Number.isNaN(a), v = 0, B = 1, f = 2, Y = 3, k = 4, y = 5, w = 6, x = 7, b = 8, K = 9, X = 10, J = 11, j = 12, q = 13, z = 14, Q = 15, Z = 16, $ = 17, aa = 18, Ea = 19, _a = 20, sa = 21, ea = 22, Oa = 23, Ta = 24, Ra = 25, Aa = 26, Na = 27, ra = 28, Ca = 29, oa = 30, ma = 31, ta = 32, Ma = 33, Sa = 34, na = 35, La = 36, Ia = 37, Ua = 38, Ha = 39, Pa = 40, Ga = 41, ca = 42, da = 43, pa = 44, ia = 45, la = (a) => ({
   code: A[a]
-}), ga = (a) => ({ code: A[a] }), S = (a) => ({ code: A[a] }), Da = (a) => a.map(((E) => ({ code: A[E] }))), n = (a) => ({ code: 44, parameters: [a] }), L = (a, E) => ({ code: 14, parameters: [a, E] }), U = (a) => ({
+}), Da = (a) => ({ code: A[a] }), S = (a) => ({ code: A[a] }), ga = (a) => a.map(((E) => ({ code: A[E] }))), n = (a) => ({ code: 44, parameters: [a] }), L = (a, E) => ({ code: 14, parameters: [a, E] }), I = (a) => ({
   code: 15,
   parameters: [a]
-}), H = (a) => ({ code: 27, parameters: [a] }), I = (a) => ({ code: 28, parameters: [a] }), G = (a) => ({ code: 29, parameters: [a] }), P = (a) => ({ code: 30, parameters: [a] }), c = (a, E) => ({
+}), U = (a) => ({ code: 27, parameters: [a] }), H = (a) => ({ code: 28, parameters: [a] }), P = (a) => ({ code: 29, parameters: [a] }), G = (a) => ({ code: 30, parameters: [a] }), c = (a, E) => ({
   code: 41,
   parameters: [a, E]
 }), d = (a) => ({ code: 42, parameters: [a] }), p = (a) => ({ code: 43, parameters: [a] }), i = (a) => ({ code: 45, parameters: [a] }), A = {
@@ -64,13 +64,13 @@ const D = "rmmz", F = "colors", u = (a, E, _, s = { placeHolderMaxLength: 50, fo
     const _ = a[1];
     return n({ name: _.name, volume: _.volume, pitch: _.pitch, pan: _.pan });
   }
-  return E === 41 || E === "changeImage" ? c(a[1], a[2]) : E === 45 || E === "script" ? i(a[1]) : E === 14 || E === "jump" ? L(a[1], a[2]) : E === 15 || E === "wait" ? U(a[1]) : E === 27 || E === "switchOn" ? H(a[1]) : E === 28 || E === "switchOff" ? I(a[1]) : E === 29 || E === "changeSpeed" ? G(a[1]) : E === 30 || E === "changeFrequency" ? P(a[1]) : E === 42 || E === "changeOpacity" ? d(a[1]) : E === 43 || E === "changeBlendMode" ? p(a[1]) : typeof E == "number" ? Array.from({
+  return E === 41 || E === "changeImage" ? c(a[1], a[2]) : E === 45 || E === "script" ? i(a[1]) : E === 14 || E === "jump" ? L(a[1], a[2]) : E === 15 || E === "wait" ? I(a[1]) : E === 27 || E === "switchOn" ? U(a[1]) : E === 28 || E === "switchOff" ? H(a[1]) : E === 29 || E === "changeSpeed" ? P(a[1]) : E === 30 || E === "changeFrequency" ? G(a[1]) : E === 42 || E === "changeOpacity" ? d(a[1]) : E === 43 || E === "changeBlendMode" ? p(a[1]) : typeof E == "number" ? Array.from({
     length: a[1]
   }, (() => ({ code: E }))) : typeof E == "string" ? Array.from({ length: a[1] }, (() => S(E))) : [];
 };
 export {
   Va as ABORT_BATTLE,
-  D as AUTHOR_RMMZ,
+  g as AUTHOR_RMMZ,
   Wa as BATTLE_PROCESSING,
   va as CHANGE_ACTOR_IMAGES,
   Ba as CHANGE_ACTOR_STATE,
@@ -109,21 +109,21 @@ export {
   SE as CHANGE_VEHICLE_BGM,
   nE as CHANGE_VEHICLE_IMAGE,
   LE as CHANGE_VICTORY_ME,
-  UE as CHANGE_WEAPONS,
-  HE as CHANGE_WINDOW_COLOR,
-  IE as COMMENT_BODY,
-  GE as COMMENT_HEAD,
-  PE as COMMON_EVENT,
+  IE as CHANGE_WEAPONS,
+  UE as CHANGE_WINDOW_COLOR,
+  HE as COMMENT_BODY,
+  PE as COMMENT_HEAD,
+  GE as COMMON_EVENT,
   cE as CONDITIONAL_BRANCH,
   dE as CONDITIONAL_BRANCH_ELSE,
   pE as CONTROL_SELF_SWITCH,
   iE as CONTROL_SWITCHES,
   lE as CONTROL_TIMER,
-  gE as CONTROL_VARIABLES,
-  DE as ENEMY_APPEAR,
+  DE as CONTROL_VARIABLES,
+  gE as ENEMY_APPEAR,
   FE as ENEMY_RECOVER_ALL,
-  uE as ENEMY_TRANSFORM,
-  hE as ERASE_EVENT,
+  hE as ENEMY_TRANSFORM,
+  uE as ERASE_EVENT,
   VE as ERASE_PICTURE,
   WE as EXIT_EVENT_PROCESSING,
   vE as FADEIN_SCREEN,
@@ -146,6 +146,12 @@ export {
   $E as NO_OPERATION,
   a_ as OPEN_MENU_SCREEN,
   E_ as OPEN_SAVE_SCREEN,
+  w_ as OPERATION_ADD,
+  x_ as OPERATION_DIVIDE,
+  b_ as OPERATION_MOD,
+  K_ as OPERATION_MULTIPLY,
+  X_ as OPERATION_SET,
+  J_ as OPERATION_SUBTRACT,
   __ as PLAY_BGM,
   s_ as PLAY_BGS,
   e_ as PLAY_ME,
@@ -159,7 +165,7 @@ export {
   o_ as ROTATE_PICTURE,
   da as ROUTE_CHANGE_BLEND_MODE,
   oa as ROUTE_CHANGE_FREQ,
-  Pa as ROUTE_CHANGE_IMAGE,
+  Ga as ROUTE_CHANGE_IMAGE,
   ca as ROUTE_CHANGE_OPACITY,
   Ca as ROUTE_CHANGE_SPEED,
   La as ROUTE_DIR_FIX_OFF,
@@ -185,10 +191,10 @@ export {
   Ma as ROUTE_STEP_ANIME_ON,
   ra as ROUTE_SWITCH_OFF,
   Na as ROUTE_SWITCH_ON,
-  Ha as ROUTE_THROUGH_OFF,
-  Ua as ROUTE_THROUGH_ON,
-  Ga as ROUTE_TRANSPARENT_OFF,
-  Ia as ROUTE_TRANSPARENT_ON,
+  Ua as ROUTE_THROUGH_OFF,
+  Ia as ROUTE_THROUGH_ON,
+  Pa as ROUTE_TRANSPARENT_OFF,
+  Ha as ROUTE_TRANSPARENT_ON,
   ea as ROUTE_TURN_180D,
   sa as ROUTE_TURN_90D_L,
   _a as ROUTE_TURN_90D_R,
@@ -209,21 +215,21 @@ export {
   S_ as SCROLL_MAP,
   n_ as SELECT_ITEM,
   L_ as SET_EVENT_LOCATION,
-  U_ as SET_MOVEMENT_ROUTE,
-  H_ as SET_VEHICLE_LOCATION,
-  I_ as SET_WEATHER_EFFECT,
-  G_ as SHAKE_SCREEN,
-  P_ as SHOP_PROCESSING,
+  I_ as SET_MOVEMENT_ROUTE,
+  U_ as SET_VEHICLE_LOCATION,
+  H_ as SET_WEATHER_EFFECT,
+  P_ as SHAKE_SCREEN,
+  G_ as SHOP_PROCESSING,
   c_ as SHOP_PROCESSING_BODY,
   d_ as SHOW_ANIMATION,
   p_ as SHOW_BALLOON_ICON,
   i_ as SHOW_BATTLE_ANIMATION,
   l_ as SHOW_CHOICES,
-  g_ as SHOW_CHOICES_ITEM,
-  D_ as SHOW_MESSAGE,
+  D_ as SHOW_CHOICES_ITEM,
+  g_ as SHOW_MESSAGE,
   F_ as SHOW_MESSAGE_BODY,
-  u_ as SHOW_PICTURE,
-  h_ as SHOW_SCROLLING_TEXT,
+  h_ as SHOW_PICTURE,
+  u_ as SHOW_SCROLLING_TEXT,
   V_ as SHOW_SCROLLING_TEXT_BODY,
   W_ as SKIP,
   F as SRC_COLOR,
@@ -232,30 +238,30 @@ export {
   f_ as TINT_SCREEN,
   Y_ as TRANSFER_PLAYER,
   k_ as WAIT,
-  w_ as applyFormatRule,
-  x_ as compileFormatRule,
-  u as detectFormatErrors,
-  h as domainNames,
+  j_ as applyFormatRule,
+  q_ as compileFormatRule,
+  h as detectFormatErrors,
+  u as domainNames,
   W as isValidNumber,
-  b_ as makeAudioFileParams,
+  z_ as makeAudioFileParams,
   p as makeMoveCommandChangeBlendMode,
-  P as makeMoveCommandChangeFrequency,
+  G as makeMoveCommandChangeFrequency,
   c as makeMoveCommandChangeImage,
   d as makeMoveCommandChangeOpacity,
-  G as makeMoveCommandChangeSpeed,
-  ga as makeMoveCommandDirection,
+  P as makeMoveCommandChangeSpeed,
+  Da as makeMoveCommandDirection,
   L as makeMoveCommandJump,
   la as makeMoveCommandMove,
   n as makeMoveCommandPlaySE,
   i as makeMoveCommandScript,
   S as makeMoveCommandSingleEx,
-  I as makeMoveCommandSwitchOff,
-  H as makeMoveCommandSwitchOn,
-  U as makeMoveCommandWait,
+  H as makeMoveCommandSwitchOff,
+  U as makeMoveCommandSwitchOn,
+  I as makeMoveCommandWait,
   Fa as makeMoveCommands,
-  Da as makeMoveCommandsSimple,
-  X_ as mergeItemsSource,
+  ga as makeMoveCommandsSimple,
+  Z_ as mergeItemsSource,
   M as pickPropertys,
   V as pickString,
-  j_ as validateWithErros
+  as as validateWithErros
 };

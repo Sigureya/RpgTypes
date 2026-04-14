@@ -1,0 +1,11 @@
+import { Command_ControlVariables_FromSystem, ParamObject_VariableFromSystem } from './types';
+export declare const makeCommandVariableFromSystemMapId: (params: ParamObject_VariableFromSystem, indent?: number) => Command_ControlVariables_FromSystem;
+export declare const makeCommandVariableFromSystemPartyMemberCount: (params: ParamObject_VariableFromSystem, indent?: number) => Command_ControlVariables_FromSystem;
+export declare const makeCommandVariableFromSystemGold: (params: ParamObject_VariableFromSystem, indent?: number) => Command_ControlVariables_FromSystem;
+export declare const makeCommandVariableFromSystemSteps: (params: ParamObject_VariableFromSystem, indent?: number) => Command_ControlVariables_FromSystem;
+export declare const makeCommandVariableFromSystemPlayTime: (params: ParamObject_VariableFromSystem, indent?: number) => Command_ControlVariables_FromSystem;
+export declare const makeCommandVariableFromSystemTimer: (params: ParamObject_VariableFromSystem, indent?: number) => Command_ControlVariables_FromSystem;
+export declare const makeCommandVariableFromSystemSaveCount: (params: ParamObject_VariableFromSystem, indent?: number) => Command_ControlVariables_FromSystem;
+export declare const makeCommandVariableFromSystemBattleCount: (params: ParamObject_VariableFromSystem, indent?: number) => Command_ControlVariables_FromSystem;
+export declare const makeCommandVariableFromSystemWinCount: (params: ParamObject_VariableFromSystem, indent?: number) => Command_ControlVariables_FromSystem;
+export declare const makeCommandVariableFromSystemEscapeCount: (params: ParamObject_VariableFromSystem, indent?: number) => Command_ControlVariables_FromSystem;

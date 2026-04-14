@@ -1,3 +1,4 @@
+import { ParamID } from '../../../../../rmmz/rpg';
 import { Rmmz_BattlerBase } from './base';
 export interface Rmmz_Battler extends Rmmz_BattlerBase {
     gainHp(value: number, allowDeath?: boolean): void;
@@ -9,4 +10,5 @@ export interface Rmmz_Battler extends Rmmz_BattlerBase {
     performCollapse(): void;
     clearResult(): void;
     recoverAll(): void;
+    param(paramId: ParamID): number;
 }
