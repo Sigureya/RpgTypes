@@ -1,14 +1,16 @@
 import { OPERATION_MINUS } from "./constants";
 import { OPERATION_PLUS } from "./constants";
 import type {
-  Command_ChangeEnemyHP,
   Command_ChangeEnemyTP,
   Command_ChangeEnemyMP,
-  ParamArray_ChangeEnemyValue,
-  ParamObject_ChangeEnemyValue,
-  ParamObject_ChangeEnemyHP,
-  ParamArray_ChangeEnemyHP,
+  ParamObject_ChangeEnemyTp,
+  ParamArray_ChangeEnemyTP,
 } from "./types";
+import type {
+  ParamArray_ChangeEnemyMP,
+  ParamObject_ChangeEnemyMp,
+  ParamObject_ChangeEnemyMp2,
+} from "./types/changeMp";
 
 type Operation = typeof OPERATION_PLUS | typeof OPERATION_MINUS;
 const OPERAND = {
@@ -48,10 +50,23 @@ const ENEMY_EACH = -1 as const;
 //     params.allowDeath,
 //   ];
 // };
+export const makeCommandGainEnemyMP2 = (
+  param: ParamObject_ChangeEnemyMp2,
+  indent: number = 0,
+): Command_ChangeEnemyMP => ({
+  code: 332,
+  indent,
+  parameters: [
+    param.targetVariableId,
+    OPERATION_PLUS,
+    OPERAND.variable,
+    param.operandVariableId,
+  ],
+});
 
 export const makeCommandGainEnemyMP = (
-  param: ParamObject_ChangeEnemyValue,
-  indent: number = 0
+  param: ParamObject_ChangeEnemyMp,
+  indent: number = 0,
 ): Command_ChangeEnemyMP => ({
   code: 332,
   indent,
@@ -59,8 +74,8 @@ export const makeCommandGainEnemyMP = (
 });
 
 export const makeCommandLoseEnemyMP = (
-  param: ParamObject_ChangeEnemyValue,
-  indent: number = 0
+  param: ParamObject_ChangeEnemyMp,
+  indent: number = 0,
 ): Command_ChangeEnemyMP => ({
   code: 332,
   indent,
@@ -68,8 +83,8 @@ export const makeCommandLoseEnemyMP = (
 });
 
 export const makeCommandGainEnemyTP = (
-  param: ParamObject_ChangeEnemyValue,
-  indent: number = 0
+  param: ParamObject_ChangeEnemyTp,
+  indent: number = 0,
 ): Command_ChangeEnemyTP => ({
   code: 342,
   indent,
@@ -77,8 +92,8 @@ export const makeCommandGainEnemyTP = (
 });
 
 export const makeCommandLoseEnemyTP = (
-  param: ParamObject_ChangeEnemyValue,
-  indent: number = 0
+  param: ParamObject_ChangeEnemyTp,
+  indent: number = 0,
 ): Command_ChangeEnemyTP => ({
   code: 342,
   indent,
@@ -87,8 +102,8 @@ export const makeCommandLoseEnemyTP = (
 
 const changeValueSingleDirect = (
   operation: Operation,
-  params: ParamObject_ChangeEnemyValue
-): ParamArray_ChangeEnemyValue => {
+  params: ParamObject_ChangeEnemyMp | ParamObject_ChangeEnemyTp,
+): ParamArray_ChangeEnemyMP | ParamArray_ChangeEnemyTP => {
   return [
     params.targetIndex ?? ENEMY_EACH,
     operation,
