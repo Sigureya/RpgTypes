@@ -41,6 +41,7 @@ import type { Command_ShowBalloonIcon } from "./balloon/types";
 import type { Command_AbortBattle } from "./battle/abort/types";
 import type { Command_ChangeBattleBackground } from "./battle/background/types";
 import type { Command_BattleProcessing } from "./battle/battleProcessing/types";
+import type { Command_ForceAction } from "./battle/forceAction/types/union";
 import type { Command_ShowBattleAnimation } from "./battle/showAnimation/types";
 import type { Command_ControlTimer } from "./controlTimer/types";
 import type { Command_ChangeEncounter } from "./encounter/types";
@@ -268,4 +269,5 @@ export type NormalizedEventCommand =
   | Command_BranchElse
   | Command_ChangeEnemyTP
   | Command_NameInputProcessing
-  | Command_ChangeEquip;
+  | Command_ChangeEquip
+  | Command_ForceAction;
