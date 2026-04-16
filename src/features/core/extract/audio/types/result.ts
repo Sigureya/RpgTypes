@@ -1,6 +1,6 @@
+import type { AudioFolders } from "@RpgTypes/fileIO";
 import type { AudioFileParams } from "@RpgTypes/libs";
 import type {
-  AudioFolders,
   CommandParameter,
   CommandUnion_AnyAudio,
   Data_CommonEvent,

@@ -1,4 +1,5 @@
-import type { Data_Actor, Data_Enemy, ImageFolders } from "@RpgTypes/rmmz";
+import type { ImageFolders } from "@RpgTypes/fileIO/image/constants/enum";
+import type { Data_Actor, Data_Enemy } from "@RpgTypes/rmmz/rpg";
 
 export interface ExtractedEnemyImage {
   key: string;
@@ -19,7 +20,7 @@ export type ImageExtractableActor = Pick<
 >;
 
 export const extractImageFromEnemy = (
-  enemy: Pick<Data_Enemy, "id" | "battlerName">
+  enemy: Pick<Data_Enemy, "id" | "battlerName">,
 ): ExtractedEnemyImage => {
   return {
     key: "battlerName",
@@ -31,7 +32,7 @@ export const extractImageFromEnemy = (
 const extractActorImage = (
   actor: ImageExtractableActor,
   key: Exclude<keyof typeof actor, "id">,
-  folder: ImageFolders
+  folder: ImageFolders,
 ): ExtractedActorImage => ({
   folder: folder,
   key,
@@ -40,7 +41,7 @@ const extractActorImage = (
 });
 
 export const extractImageFromActor = (
-  actor: ImageExtractableActor
+  actor: ImageExtractableActor,
 ): ExtractedActorImage[] => {
   return [
     extractActorImage(actor, "faceName", "faces"),

@@ -1,5 +1,6 @@
+import type { AudioFolders } from "@RpgTypes/fileIO";
 import type { PLUGIN_COMMAND_MZ } from "@RpgTypes/libs";
-import type { AudioFolders, PluginCommandParameter } from "@RpgTypes/rmmz";
+import type { PluginCommandParameter } from "@RpgTypes/rmmz";
 import type { ExtractedAudioBase } from "./base";
 
 export interface AudioPluginCommandParameter

@@ -1,5 +1,4 @@
 import { describe, test, expect } from "vitest";
-import type { RpgDataBundle } from "@RpgTypes/rmmz";
 import {
   FILENAME_ACTORS,
   FILENAME_ANIMATIONS,
@@ -15,6 +14,8 @@ import {
   FILENAME_TILESET,
   FILENAME_TROOPS,
   FILENAME_WEAPONS,
+} from "@RpgTypes/fileIO";
+import {
   makeActorData,
   makeArmorData,
   makeClassData,
@@ -26,6 +27,7 @@ import {
   makeSystemData,
   makeTroopData,
   makeWeaponData,
+  type RpgDataBundle,
 } from "@RpgTypes/rmmz";
 import { fakeFileRead } from "./fakeFs";
 
