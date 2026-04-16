@@ -1,0 +1,8 @@
+import { MapFileNameWithExt } from './map';
+import { RpgDataReadHandlers, ValidateFunctionsOfReadRpgData } from './reader/handlers';
+import { RowGameData, ReadAllGameDataResult, ReadAllGameDataResultWithNullFallback } from './resultType';
+import { TermsOfReadAllData } from './terms';
+import { DataFileNames } from './types';
+export declare const readAllRowGameData: (readFileFn: (filename: DataFileNames | MapFileNameWithExt) => Promise<string>, validateFunctions: ValidateFunctionsOfReadRpgData, terms: TermsOfReadAllData) => Promise<RowGameData>;
+export declare const readAllGameDataAsArrayFallback: <Commmon, Map, System, Actor, Skill, Item, Weapon, Armor, Enemy, Class, State, Troop>(terms: TermsOfReadAllData, readFileFn: (filename: DataFileNames | MapFileNameWithExt) => Promise<string>, validateFunctions: ValidateFunctionsOfReadRpgData, handles: RpgDataReadHandlers<Commmon[], Map, System, Actor[], Skill[], Item[], Weapon[], Armor[], Enemy[], Class[], State[], Troop[]>) => Promise<ReadAllGameDataResult<Commmon[], Map, System, Actor[], Skill[], Item[], Weapon[], Armor[], Enemy[], Class[], State[], Troop[]>>;
+export declare const readAllGameDataAsNullFallback: <Commmon, Map, System, Actor, Skill, Item, Weapon, Armor, Enemy, Class, State, Troop>(terms: TermsOfReadAllData, readFileFn: (filename: DataFileNames | MapFileNameWithExt) => Promise<string>, validateFunctions: ValidateFunctionsOfReadRpgData, handles: RpgDataReadHandlers<Commmon, Map, System, Actor, Skill, Item, Weapon, Armor, Enemy, Class, State, Troop>) => Promise<ReadAllGameDataResultWithNullFallback<Commmon, Map, System, Actor, Skill, Item, Weapon, Armor, Enemy, Class, State, Troop>>;
