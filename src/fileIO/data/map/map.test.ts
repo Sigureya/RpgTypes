@@ -60,7 +60,6 @@ describe("readMapFileFromInfo", () => {
       message: "file not found",
       filename: "Map001",
       editingName: "FirstMap",
-      mapId: 1,
     };
 
     const result = await readMapFileFromInfo(
@@ -82,7 +81,6 @@ describe("readMapFileFromInfo", () => {
       message: "json parse error",
       filename: "Map001",
       editingName: "FirstMap",
-      mapId: 1,
     };
 
     const result = await readMapFileFromInfo(
@@ -106,7 +104,6 @@ describe("readMapFileFromInfo", () => {
       message: "invalid structure",
       filename: "Map001",
       editingName: "FirstMap",
-      mapId: 1,
     };
     const result = await readMapFileFromInfo(
       info,

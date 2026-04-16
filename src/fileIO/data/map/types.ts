@@ -28,7 +28,6 @@ export interface MapReadFailed {
   map: null;
   message: string;
   filename: string;
-  mapId: number;
   editingName: string;
 }
 
