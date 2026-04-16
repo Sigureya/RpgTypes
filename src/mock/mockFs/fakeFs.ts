@@ -1,20 +1,20 @@
-import type { Data_Map, RpgDataBundle } from "@RpgTypes/rmmz";
 import {
-  FILENAME_ACTORS,
-  FILENAME_CLASSES,
-  FILENAME_ENEMIES,
   FILENAME_MAP_INFOS,
+  FILENAME_ACTORS,
+  FILENAME_ENEMIES,
   FILENAME_WEAPONS,
-  FILENAME_ANIMATIONS,
+  FILENAME_CLASSES,
+  FILENAME_ARMORS,
   FILENAME_ITEMS,
+  FILENAME_TROOPS,
+  FILENAME_COMMON_EVENTS,
   FILENAME_SKILLS,
   FILENAME_STATES,
+  FILENAME_ANIMATIONS,
   FILENAME_SYSTEM,
-  FILENAME_ARMORS,
-  FILENAME_COMMON_EVENTS,
-  FILENAME_TROOPS,
   FILENAME_TILESET,
-} from "@RpgTypes/rmmz";
+} from "@RpgTypes/fileIO";
+import type { Data_Map, RpgDataBundle } from "@RpgTypes/rmmz";
 
 export const fakeFileRead = (
   filename: string,

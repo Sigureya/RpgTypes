@@ -1,4 +1,5 @@
 import { describe, test, expect } from "vitest";
+import type { AudioFolders } from "@RpgTypes/fileIO";
 import {
   PLAY_BGM,
   PLAY_BGS,
@@ -8,9 +9,8 @@ import {
   CHANGE_VICTORY_ME,
   CHANGE_DEFEAT_ME,
 } from "@RpgTypes/libs/eventCommand";
-import type { AudioFolders } from "@RpgTypes/rmmz/folderNames";
 import { assetDirectoryName } from "./anyAudio";
-import type { CommandUnion_AnyAudio } from ".";
+import type { CommandUnion_AnyAudio } from "./types";
 
 interface TestCase {
   name: string;
