@@ -14,12 +14,13 @@ import {
   readWeaponData,
 } from "./arrayData";
 import type {
-  RpgDataReadHandlersA,
+  RpgDataReadHandlers,
   ValidateFunctionsOfReadRpgData,
 } from "./reader/handlers";
 import type {
   ReadAllArrayDataResult,
   ReadAllGameDataResult,
+  ReadAllGameDataResultWithNullFallback,
   ReadHandledResult,
 } from "./resultType";
 import { FILENAME_SYSTEM, readSystemData } from "./system";
@@ -31,31 +32,142 @@ export const readAllRowGameData = async (
   validateFunctions: ValidateFunctionsOfReadRpgData,
   terms: TermsOfReadAllData,
 ): Promise<ReadAllArrayDataResult> => {
-  return readAllGameDataCore(
+  return readAllGameDataWithFallback(
     terms,
     readFileFn,
     {
-      readActor: dtx,
-      readArmor: dtx,
-      readClass: dtx,
-      readCommonEvent: dtx,
-      readEnemy: dtx,
-      readItem: dtx,
-      readMap: dtx,
-      readSkill: dtx,
-      readState: dtx,
-      readSystem: dtx,
-      readTroop: dtx,
-      readWeapon: dtx,
+      readActors: identity,
+      readArmors: identity,
+      readClasss: identity,
+      readCommonEvents: identity,
+      readEnemys: identity,
+      readItems: identity,
+      readMap: identity,
+      readSkills: identity,
+      readStates: identity,
+      readSystem: identity,
+      readTroops: identity,
+      readWeapons: identity,
     },
     validateFunctions,
     () => [],
   );
 };
 
-const dtx = <T>(data: T): T => data;
+const identity = <T>(data: T): T => data;
 
-const readAllGameDataCore = async <
+export const readAllGameDataAsArrayFallback = <
+  Commmon,
+  Map,
+  System,
+  Actor,
+  Skill,
+  Item,
+  Weapon,
+  Armor,
+  Enemy,
+  Class,
+  State,
+  Troop,
+>(
+  readFileFn: (filename: string) => Promise<string>,
+  validateFunctions: ValidateFunctionsOfReadRpgData,
+  terms: TermsOfReadAllData,
+  handles: RpgDataReadHandlers<
+    Commmon[],
+    Map,
+    System,
+    Actor[],
+    Skill[],
+    Item[],
+    Weapon[],
+    Armor[],
+    Enemy[],
+    Class[],
+    State[],
+    Troop[]
+  >,
+): Promise<
+  ReadAllGameDataResult<
+    Commmon[],
+    System,
+    Actor[],
+    Skill[],
+    Item[],
+    Weapon[],
+    Armor[],
+    Enemy[],
+    Class[],
+    State[],
+    Troop[]
+  >
+> => {
+  return readAllGameDataWithFallback(
+    terms,
+    readFileFn,
+    handles,
+    validateFunctions,
+    () => [],
+  );
+};
+
+export const readAllGameDataAsNullFallback = <
+  Commmon,
+  Map,
+  System,
+  Actor,
+  Skill,
+  Item,
+  Weapon,
+  Armor,
+  Enemy,
+  Class,
+  State,
+  Troop,
+>(
+  readFileFn: (filename: string) => Promise<string>,
+  validateFunctions: ValidateFunctionsOfReadRpgData,
+  terms: TermsOfReadAllData,
+  handles: RpgDataReadHandlers<
+    Commmon,
+    Map,
+    System,
+    Actor,
+    Skill,
+    Item,
+    Weapon,
+    Armor,
+    Enemy,
+    Class,
+    State,
+    Troop
+  >,
+): Promise<
+  ReadAllGameDataResultWithNullFallback<
+    Commmon,
+    System,
+    Actor,
+    Skill,
+    Item,
+    Weapon,
+    Armor,
+    Enemy,
+    Class,
+    State,
+    Troop
+  >
+> => {
+  return readAllGameDataWithFallback(
+    terms,
+    readFileFn,
+    handles,
+    validateFunctions,
+    () => null,
+  );
+};
+
+const readAllGameDataWithFallback = async <
+  N,
   Commmon,
   Map,
   System,
@@ -71,7 +183,7 @@ const readAllGameDataCore = async <
 >(
   terms: TermsOfReadAllData,
   readFileFn: (filename: string) => Promise<string>,
-  handles: RpgDataReadHandlersA<
+  handles: RpgDataReadHandlers<
     Commmon,
     Map,
     System,
@@ -86,22 +198,9 @@ const readAllGameDataCore = async <
     Troop
   >,
   validateFunctions: ValidateFunctionsOfReadRpgData,
-  makeEmptyValue: () => [],
-): Promise<
-  ReadAllGameDataResult<
-    Commmon,
-    System,
-    Actor,
-    Skill,
-    Item,
-    Weapon,
-    Armor,
-    Enemy,
-    Class,
-    State,
-    Troop
-  >
-> => {
+  makeEmptyValue: () => N,
+) => {
+  // この関数の戻り値の型は非常に複雑なので、型推論で解決するため意図的に省略している
   const [
     actor,
     classes,
@@ -136,35 +235,39 @@ const readAllGameDataCore = async <
       validateSystemMv: validateFunctions.validateSystemMV,
     }),
   ]);
-
   return {
-    actor: convertIfSuccess(actor, terms, handles.readActor, makeEmptyValue),
-    armor: convertIfSuccess(armor, terms, handles.readArmor, makeEmptyValue),
+    actor: convertIfSuccess(actor, terms, handles.readActors, makeEmptyValue),
+    armor: convertIfSuccess(armor, terms, handles.readArmors, makeEmptyValue),
     classes: convertIfSuccess(
       classes,
       terms,
-      handles.readClass,
+      handles.readClasss,
       makeEmptyValue,
     ),
     commonEvent: convertIfSuccess(
       commonEvent,
       terms,
-      handles.readCommonEvent,
+      handles.readCommonEvents,
       makeEmptyValue,
     ),
     enemies: convertIfSuccess(
       enemies,
       terms,
-      handles.readEnemy,
+      handles.readEnemys,
       makeEmptyValue,
     ),
-    item: convertIfSuccess(item, terms, handles.readItem, makeEmptyValue),
+    item: convertIfSuccess(item, terms, handles.readItems, makeEmptyValue),
     mapInfo,
-    skill: convertIfSuccess(skill, terms, handles.readSkill, makeEmptyValue),
-    state: convertIfSuccess(state, terms, handles.readState, makeEmptyValue),
+    skill: convertIfSuccess(skill, terms, handles.readSkills, makeEmptyValue),
+    state: convertIfSuccess(state, terms, handles.readStates, makeEmptyValue),
     system: convertSystemIfSuccess(system, terms, handles.readSystem),
-    troop: convertIfSuccess(troop, terms, handles.readTroop, makeEmptyValue),
-    weapon: convertIfSuccess(weapon, terms, handles.readWeapon, makeEmptyValue),
+    troop: convertIfSuccess(troop, terms, handles.readTroops, makeEmptyValue),
+    weapon: convertIfSuccess(
+      weapon,
+      terms,
+      handles.readWeapons,
+      makeEmptyValue,
+    ),
   };
 };
 
@@ -192,12 +295,12 @@ const convertSystemIfSuccess = <R>(
   }
 };
 
-const convertIfSuccess = <T, R>(
+const convertIfSuccess = <T, R, N>(
   result: ReadArrayResult<T>,
   terms: TermsOfReadAllData,
   fn: (data: T[], filename: string) => R,
-  makeEmptyValue: () => R extends unknown[] ? [] : null,
-): ReadHandledResult<R> => {
+  makeEmptyValue: () => N,
+): ReadHandledResult<R, N> => {
   if (!result.succcess) {
     return {
       fileName: result.fileName,

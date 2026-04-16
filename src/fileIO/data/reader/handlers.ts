@@ -26,8 +26,6 @@ export interface RpgDataReadHandlersBase {
   readState(state: Data_State[], filename: string): unknown;
   readActor(actor: Data_Actor[], filename: string): unknown;
   readCommonEvent(event: Data_CommonEvent[], filename: string): unknown;
-  readSystem(system: Data_System, filename: string): unknown;
-  readMap(map: MapFileInfo): unknown;
   readTroop(troops: Data_Troop[], filename: string): unknown;
 }
 
@@ -45,46 +43,18 @@ export interface RpgDataReadHandlers<
   State,
   Troop,
 > {
-  readSkill(skill: Data_Skill[], filePath: string): Skill;
-  readItem(item: Data_Item[], filePath: string): Item;
-  readWeapon(weapon: Data_Weapon[], filePath: string): Weapon;
-  readArmor(armor: Data_Armor[], filePath: string): Armor;
-  readEnemy(enemy: Data_Enemy[], filePath: string): Enemy;
-  readClass(cls: Data_Class[], filePath: string): Class;
-  readState(state: Data_State[], filePath: string): State;
-  readActor(actors: Data_Actor[], filePath: string): Actor;
-  readCommonEvent(events: Data_CommonEvent[], filePath: string): Commmon;
+  readSkills(skill: Data_Skill[], filePath: string): Skill;
+  readItems(item: Data_Item[], filePath: string): Item;
+  readWeapons(weapon: Data_Weapon[], filePath: string): Weapon;
+  readArmors(armor: Data_Armor[], filePath: string): Armor;
+  readEnemys(enemy: Data_Enemy[], filePath: string): Enemy;
+  readClasss(cls: Data_Class[], filePath: string): Class;
+  readStates(state: Data_State[], filePath: string): State;
+  readActors(actors: Data_Actor[], filePath: string): Actor;
+  readCommonEvents(events: Data_CommonEvent[], filePath: string): Commmon;
   readSystem(system: Data_System, filePath: string): System;
   readMap(map: MapFileInfo): Map;
-  readTroop(troops: Data_Troop[], filePath: string): Troop;
-}
-
-export interface RpgDataReadHandlersA<
-  Commmon,
-  Map,
-  System,
-  Actor,
-  Skill,
-  Item,
-  Weapon,
-  Armor,
-  Enemy,
-  Class,
-  State,
-  Troop,
-> extends RpgDataReadHandlersBase {
-  readSkill(skill: Data_Skill[], filePath: string): Skill[];
-  readItem(item: Data_Item[], filePath: string): Item[];
-  readWeapon(weapon: Data_Weapon[], filePath: string): Weapon[];
-  readArmor(armor: Data_Armor[], filePath: string): Armor[];
-  readEnemy(enemy: Data_Enemy[], filePath: string): Enemy[];
-  readClass(cls: Data_Class[], filePath: string): Class[];
-  readState(state: Data_State[], filePath: string): State[];
-  readActor(actors: Data_Actor[], filePath: string): Actor[];
-  readCommonEvent(events: Data_CommonEvent[], filePath: string): Commmon[];
-  readSystem(system: Data_System, filePath: string): System;
-  readMap(map: MapFileInfo): Map;
-  readTroop(troops: Data_Troop[], filePath: string): Troop[];
+  readTroops(troops: Data_Troop[], filePath: string): Troop;
 }
 
 export interface ValidateFunctionsOfReadRpgData {
