@@ -13,11 +13,7 @@ export interface TermsOfReadSystemData {
   validateFunctionError: string;
 }
 
-export interface ReadSystemResult {
-  system: Data_System | null;
-  message: string;
-}
-export interface ReadSystemResultEx<T> {
+export interface ReadSystemResult<T = Data_System> {
   system: T | null;
   message: string;
 }
