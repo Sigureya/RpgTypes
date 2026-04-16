@@ -88,7 +88,33 @@ const runTestCase = (testCase: TestCase) => {
       expect(result.invalidMaps).toEqual(expectedInvalidMaps);
     });
 
-    test("validateが常に失敗", () => {});
+    test("validateが常に失敗", async () => {
+      const validateFn: MockedFunction<(data: unknown) => boolean> = vi.fn(
+        () => false,
+      );
+      const mockMapFileFn = vi.fn(
+        async (): Promise<string> => JSON.stringify(map1),
+      );
+      const convertFn = vi.fn(mockConvertFn);
+
+      const result = await readMapFilesFromInfoEx(
+        testCase.infos,
+        terms,
+        mockMapFileFn,
+        (d): d is Data_Map => validateFn(d),
+        convertFn,
+      );
+
+      expect(mockMapFileFn).toHaveBeenCalledTimes(testCase.infos.length);
+      expect(validateFn).toHaveBeenCalledTimes(testCase.infos.length);
+      expect(convertFn).not.toHaveBeenCalled();
+      expect(result.validMaps).toEqual([]);
+
+      const expectedInvalidMaps = testCase.infos.map((info) => {
+        return infoToFailed(info, terms.invalidStructure);
+      });
+      expect(result.invalidMaps).toEqual(expectedInvalidMaps);
+    });
     test("通常処理", async () => {
       const validateFn: MockedFunction<(data: unknown) => boolean> = vi.fn(
         () => true,
@@ -132,8 +158,34 @@ const testCases: TestCase[] = [
     },
   },
   {
+    caseName:
+      "複数のマップ情報があるとき、すべてのマップ読み込みに成功するケース",
+    infos: [
+      makeMapInfoData({ id: 1, name: "Map1" }),
+      makeMapInfoData({ id: 2, name: "Map2" }),
+    ],
+    failedIds: [],
+    expected: {
+      info: { success: true },
+      invalidMaps: [],
+      validMaps: [
+        {
+          map: { mockDisplayName: "Map1" },
+          filename: "Map001",
+          editingName: "Map1",
+        },
+        {
+          map: { mockDisplayName: "Map2" },
+          filename: "Map002",
+          editingName: "Map2",
+        },
+      ],
+    },
+  },
+  {
     caseName: "存在しないマップを読み込むと、失敗する",
     infos: [makeMapInfoData({ id: 999, name: "NonExistentMap" })],
+    failedIds: [],
     expected: {
       info: { success: true },
       validMaps: [],
@@ -146,7 +198,6 @@ const testCases: TestCase[] = [
         },
       ],
     },
-    failedIds: [],
   },
   {
     caseName:
