@@ -1,9 +1,9 @@
 import type { TermsOfReadArrayData, ReadArrayResult } from "./types";
 
-export const readArrayData = async <T>(
+export const readArrayData = async <T, F extends string>(
   terms: TermsOfReadArrayData,
-  filename: string,
-  readFileFn: (filename: string) => Promise<string>,
+  filename: F,
+  readFileFn: (filename: F) => Promise<string>,
   validateItemFn: (item: unknown) => item is T,
 ): Promise<ReadArrayResult<T>> => {
   return readFileFn(filename)
