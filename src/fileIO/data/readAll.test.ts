@@ -56,6 +56,7 @@ import type {
   ValidateFunctionsOfReadRpgData,
 } from "./reader/handlers";
 import type { ReadAllDataResultFields, RowGameData } from "./resultType";
+import { FILENAME_SYSTEM } from "./system";
 import type { TermsOfReadAllData } from "./terms";
 import type { DataFileNames } from "./types";
 
@@ -212,32 +213,21 @@ const baseData = {
   },
 } as const satisfies RowGameData;
 
-const createBaseFileMap = (): Record<DataFileNames, string | Error> => ({
-  [FILENAME_ACTORS]: JSON.stringify([{ id: 1, name: "A" }]),
-  [FILENAME_CLASSES]: JSON.stringify([{ id: 1, name: "C" }]),
-  "Skills.json": JSON.stringify([{ id: 1, name: "S" }]),
-  "Items.json": JSON.stringify([{ id: 1, name: "I" }]),
-  "Weapons.json": JSON.stringify([{ id: 1, name: "W" }]),
-  "Armors.json": JSON.stringify([{ id: 1, name: "R" }]),
-  "Enemies.json": JSON.stringify([{ id: 1, name: "E" }]),
-  "Troops.json": JSON.stringify([{ id: 1, name: "T" }]),
-  "States.json": JSON.stringify([{ id: 1, name: "ST" }]),
-  "CommonEvents.json": JSON.stringify([{ id: 1, name: "CE" }]),
-  "MapInfos.json": JSON.stringify([
-    {
-      id: 1,
-      name: "Map1",
-      expanded: false,
-      order: 0,
-      parentId: 0,
-      scrollX: 0,
-      scrollY: 0,
-    },
-  ]),
-  "System.json": JSON.stringify({ gameTitle: "RPG" }),
-  "Animations.json": JSON.stringify([{ id: 1, name: "AN" }]),
-  "Tilesets.json": JSON.stringify([{ id: 1, name: "TS" }]),
-});
+const baseFileMap: Record<string, string | Error> = {
+  [baseData.actor.fileName]: JSON.stringify(baseData.actor.data),
+  [baseData.armor.fileName]: JSON.stringify(baseData.armor.data),
+  [baseData.classes.fileName]: JSON.stringify(baseData.classes.data),
+  [baseData.commonEvent.fileName]: JSON.stringify(baseData.commonEvent.data),
+  [baseData.enemies.fileName]: JSON.stringify(baseData.enemies.data),
+  [baseData.item.fileName]: JSON.stringify(baseData.item.data),
+  [baseData.mapInfo.fileName]: JSON.stringify(baseData.mapInfo.data),
+  [baseData.skill.fileName]: JSON.stringify(baseData.skill.data),
+  [baseData.state.fileName]: JSON.stringify(baseData.state.data),
+  [baseData.troop.fileName]: JSON.stringify(baseData.troop.data),
+  [baseData.weapon.fileName]: JSON.stringify(baseData.weapon.data),
+  [FILENAME_SYSTEM]: JSON.stringify(baseData.system.system),
+  "Map001.json": JSON.stringify(baseData.mapFiles.validMaps[0].map),
+};
 
 type ConvertHandlers = RpgDataReadHandlers<
   unknown[],
@@ -341,11 +331,7 @@ describe("readAllGameDataAsArrayFallback", () => {
   });
 
   test("正常系で各データを変換して返す", async () => {
-    const fileMap: Record<string, string | Error> = {
-      ...createBaseFileMap(),
-      ["Map001.json"]: JSON.stringify({ displayName: "Map1" }),
-    };
-    const fileReadFn = createReadFileFn(fileMap);
+    const fileReadFn = createReadFileFn(baseFileMap);
     const convHandlers = createIdentityHandlers();
     const mockedValidators = createMockedValidateFunctions(true);
 
@@ -356,37 +342,27 @@ describe("readAllGameDataAsArrayFallback", () => {
       convHandlers,
     );
 
-    expect(result.actor.succcess).toBe(true);
-    expect(result.actor.data).toEqual([{ id: 1, name: "A" }]);
-    expect(result.classes.succcess).toBe(true);
-    expect(result.skill.succcess).toBe(true);
-    expect(result.item.succcess).toBe(true);
-    expect(result.weapon.succcess).toBe(true);
-    expect(result.armor.succcess).toBe(true);
-    expect(result.enemies.succcess).toBe(true);
-    expect(result.troop.succcess).toBe(true);
-    expect(result.state.succcess).toBe(true);
-    expect(result.commonEvent.succcess).toBe(true);
-    expect(result.mapInfo.succcess).toBe(true);
-    expect(result.system.message).toBe("");
-    expect(result.system.system).toEqual({ gameTitle: "RPG" });
-    expect(result.mapFiles.info.success).toBe(true);
-    expect(result.mapFiles.validMaps).toHaveLength(1);
-    expect(result.mapFiles.validMaps[0]?.filename).toBe("Map001");
-    expect(result.mapFiles.validMaps[0]?.editingName).toBe("Map1");
-    expect(result.mapFiles.invalidMaps).toHaveLength(0);
+    expect(result.actor).toEqual(baseData.actor);
+    expect(result.armor).toEqual(baseData.armor);
+    expect(result.classes).toEqual(baseData.classes);
+    expect(result.commonEvent).toEqual(baseData.commonEvent);
+    expect(result.enemies).toEqual(baseData.enemies);
+    expect(result.item).toEqual(baseData.item);
+    expect(result.mapInfo).toEqual(baseData.mapInfo);
+    expect(result.skill).toEqual(baseData.skill);
+    expect(result.state).toEqual(baseData.state);
+    expect(result.system).toEqual(baseData.system);
+    expect(result.troop).toEqual(baseData.troop);
+    expect(result.weapon).toEqual(baseData.weapon);
+    expect(result.mapFiles).toEqual(baseData.mapFiles);
     expect(convHandlers.readSystem).toHaveBeenCalledWith(
-      { gameTitle: "RPG" },
-      "System.json",
+      baseData.system.system,
+      FILENAME_SYSTEM,
     );
   });
 
   test("変換で失敗したら配列フォールバックになる", async () => {
-    const fileMap: Record<string, string | Error> = {
-      ...createBaseFileMap(),
-      ["Map001.json"]: JSON.stringify({ displayName: "Map1" }),
-    };
-    const fileReadFn = createReadFileFn(fileMap);
+    const fileReadFn = createReadFileFn(baseFileMap);
     const mockedValidators = createMockedValidateFunctions(true);
     const convHandlers = createIdentityHandlers();
     convHandlers.readActors.mockImplementation(errorFunc);
@@ -404,9 +380,8 @@ describe("readAllGameDataAsArrayFallback", () => {
   });
 
   test("mapInfo 読み込み失敗時は mapFiles.info が失敗になる", async () => {
-    const base = createBaseFileMap();
     const fileMap: Record<string, string | Error> = {
-      ...base,
+      ...baseFileMap,
       [FILENAME_MAP_INFOS]: JSON.stringify({ id: 1 }),
     };
     const fileReadFn = createReadFileFn(fileMap);
@@ -443,11 +418,7 @@ describe("readAllGameDataAsNullFallback", () => {
   });
 
   test("変換で失敗したら null フォールバックになる", async () => {
-    const fileMap: Record<string, string | Error> = {
-      ...createBaseFileMap(),
-      ["Map001.json"]: JSON.stringify({ displayName: "Map1" }),
-    };
-    const fileReadFn = createReadFileFn(fileMap);
+    const fileReadFn = createReadFileFn(baseFileMap);
     const mockedValidators = createMockedValidateFunctions(true);
     const convHandlers = createIdentityHandlers();
     convHandlers.readActors.mockImplementation(errorFunc);
@@ -467,11 +438,7 @@ describe("readAllGameDataAsNullFallback", () => {
 
 describe("readAllRowGameData", () => {
   test("生データをそのまま返す", async () => {
-    const fileMap: Record<string, string | Error> = {
-      ...createBaseFileMap(),
-      ["Map001.json"]: JSON.stringify({ displayName: "Map1" }),
-    };
-    const fileReadFn = createReadFileFn(fileMap);
+    const fileReadFn = createReadFileFn(baseFileMap);
     const mockedValidators = createMockedValidateFunctions(true);
 
     const result = await readAllRowGameData(
@@ -480,11 +447,6 @@ describe("readAllRowGameData", () => {
       terms,
     );
 
-    expect(result.actor.succcess).toBe(true);
-    expect(result.actor.fileName).toBe(FILENAME_ACTORS);
-    expect(result.actor.data).toEqual([{ id: 1, name: "A" }]);
-    expect(result.system.message).toBe("");
-    expect(result.system.system).toEqual({ gameTitle: "RPG" });
-    expect(result.mapFiles.info.success).toBe(true);
+    expect(result).toEqual(baseData);
   });
 });
