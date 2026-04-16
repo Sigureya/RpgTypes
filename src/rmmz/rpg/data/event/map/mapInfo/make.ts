@@ -1,11 +1,11 @@
 import type { Data_MapInfo } from "./mapInfo";
 
-const makeMapName = (mapId: number) => {
+export const makeMapName = (mapId: number) => {
   return mapId.toString().padStart(3, "0");
 };
 
 export const makeMapInfoData = (
-  info: { id: number } & Partial<Data_MapInfo> = { id: 0 }
+  info: { id: number } & Partial<Data_MapInfo> = { id: 0 },
 ): Data_MapInfo => {
   return {
     name: info.name ?? makeMapName(info.id),
