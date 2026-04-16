@@ -40,7 +40,20 @@ export interface ReadAllDataResultFields {
   mapFiles: MapFiles<unknown>;
   system: unknown;
 }
-
+export type ReadAllGameDataResultUnknown = ReadAllGameDataResult<
+  unknown,
+  unknown,
+  unknown,
+  unknown,
+  unknown,
+  unknown,
+  unknown,
+  unknown,
+  unknown,
+  unknown,
+  unknown,
+  unknown
+>;
 export interface ReadAllGameDataResult<
   Commmon,
   Map,
