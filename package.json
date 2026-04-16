@@ -44,6 +44,11 @@
       "types": "./dist/types/mock/index.d.ts",
       "import": "./dist/mock/mock.es.js",
       "require": "./dist/mock/mock.cjs.js"
+    },
+    "./fileio": {
+      "types": "./dist/types/fileio/index.d.ts",
+      "import": "./dist/fileio/fileio.es.js",
+      "require": "./dist/fileio/fileio.cjs.js"
     }
   },
   "files": [
