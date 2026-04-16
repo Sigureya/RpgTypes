@@ -1,2 +1,2 @@
-export * from './audio';
+export * from './enum';
 export * from './images';

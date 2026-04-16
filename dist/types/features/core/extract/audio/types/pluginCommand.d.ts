@@ -1,5 +1,6 @@
+import { AudioFolders } from '../../../../../fileIO';
 import { PLUGIN_COMMAND_MZ } from '../../../../../libs';
-import { AudioFolders, PluginCommandParameter } from '../../../../../rmmz';
+import { PluginCommandParameter } from '../../../../../rmmz';
 import { ExtractedAudioBase } from './base';
 export interface AudioPluginCommandParameter extends PluginCommandParameter<string>, ExtractedAudioBase {
     paramIndex: 3;

@@ -1,5 +1,6 @@
+import { AudioFolders } from '../../../../../fileIO';
 import { AudioFileParams } from '../../../../../libs';
-import { AudioFolders, CommandParameter, CommandUnion_AnyAudio, Data_CommonEvent, Data_Map, Data_Troop, EventCommand, NoteReadResult } from '../../../../../rmmz';
+import { CommandParameter, CommandUnion_AnyAudio, Data_CommonEvent, Data_Map, Data_Troop, EventCommand, NoteReadResult } from '../../../../../rmmz';
 import { ExtractedAudioBase } from './base';
 import { AudioPluginCommandParameter } from './pluginCommand';
 export interface AudioCommandParameter extends ExtractedAudioBase, CommandParameter<AudioFileParams, CommandUnion_AnyAudio["code"]> {

@@ -1,5 +1,4 @@
 export * from './eventCommand';
-export * from './folderNames';
 export * from './rpg';
 export * from './system';
 export type * from './types';

@@ -1,4 +1,5 @@
-import { Data_Actor, Data_Enemy, ImageFolders } from '../../../../rmmz';
+import { ImageFolders } from '../../../../fileIO/image/constants/enum';
+import { Data_Actor, Data_Enemy } from '../../../../rmmz/rpg';
 export interface ExtractedEnemyImage {
     key: string;
     image: string;

@@ -8,8 +8,6 @@ export interface Rmmz_Interpreter<Coomand> {
     eventId(): number;
     isOnCurrentMap(): boolean;
     setupReservedCommonEvent(): boolean;
-    operateValue(operation: number, operandType: number, operand: number): number;
-    changeHp(target: unknown, value: number, allowDeath: boolean): void;
     isRunning(): boolean;
     update(): void;
     updateChild(): boolean;
@@ -27,5 +25,6 @@ export interface Rmmz_Interpreter<Coomand> {
     nextEventCode(): EventCode | 0;
     setupItemChoice(params: unknown): void;
     setupNumInput(params: unknown): void;
+    operateValue(operation: number, operandType: number, operand: number): number;
     gameDataOperand(type: number, param1: number, param2: number): number;
 }
