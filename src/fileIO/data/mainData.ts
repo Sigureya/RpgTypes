@@ -6,7 +6,6 @@ import type {
   Data_Skill,
   Data_State,
   Data_Armor,
-  Data_MapInfo,
   Data_Animation,
 } from "@RpgTypes/rmmz/rpg";
 import { readArrayData } from "./arrayData";
@@ -17,7 +16,6 @@ import {
   FILENAME_ARMORS,
   FILENAME_ENEMIES,
   FILENAME_ITEMS,
-  FILENAME_MAP_INFOS,
   FILENAME_SKILLS,
   FILENAME_STATES,
 } from "./constants";
@@ -85,12 +83,4 @@ export const readAnimationData = (
   validateFn: (item: unknown) => item is Data_Animation,
 ): Promise<ReadArrayResult<Data_Animation>> => {
   return readArrayData(terms, FILENAME_ANIMATIONS, readFileFn, validateFn);
-};
-
-export const readMapInfoData = (
-  terms: TermsOfReadArrayData,
-  readFileFn: (filename: string) => Promise<string>,
-  validateFn: (item: unknown) => item is Data_MapInfo,
-): Promise<ReadArrayResult<Data_MapInfo>> => {
-  return readArrayData(terms, FILENAME_MAP_INFOS, readFileFn, validateFn);
 };
