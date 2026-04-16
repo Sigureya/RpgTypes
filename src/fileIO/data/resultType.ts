@@ -12,6 +12,7 @@ import type {
   Data_Weapon,
 } from "@RpgTypes/rmmz";
 import type { ReadArrayResult } from "./arrayData";
+import type { MapFiles } from "./map";
 import type { ReadSystemResult } from "./system";
 
 export interface ReadHandledResult<T, N = T extends unknown[] ? [] : null> {
@@ -35,6 +36,8 @@ export interface ReadAllDataResultFields {
   state: unknown;
   troop: unknown;
   weapon: unknown;
+  mapFiles: MapFiles<unknown>;
+  system: unknown;
 }
 
 export interface ReadAllGameDataResult<
