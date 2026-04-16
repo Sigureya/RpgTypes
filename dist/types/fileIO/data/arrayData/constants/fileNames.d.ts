@@ -1,4 +1,3 @@
-export declare const FILENAME_SYSTEM = "System.json";
 export declare const FILENAME_ACTORS = "Actors.json";
 export declare const FILENAME_CLASSES = "Classes.json";
 export declare const FILENAME_SKILLS = "Skills.json";

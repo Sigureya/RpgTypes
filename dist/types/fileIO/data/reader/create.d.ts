@@ -1,0 +1,2 @@
+import { RpgDataReadHandlers } from './handlers';
+export declare const createGameDataReadHandlers: <Commmon, Map, System, Actor, Skill, Item, Weapon, Armor, Enemy, Class, State, Troop>(readers: RpgDataReadHandlers<Commmon, Map, System, Actor, Skill, Item, Weapon, Armor, Enemy, Class, State, Troop>) => RpgDataReadHandlers<Commmon, Map, System, Actor, Skill, Item, Weapon, Armor, Enemy, Class, State, Troop>;

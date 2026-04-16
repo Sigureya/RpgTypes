@@ -1,64 +1,265 @@
-const x = 0, g = 1, M = 2, v = 3, F = 4, $ = 5, i = (a) => a.map(((r) => ({ dataKey: r, placeHolder: `{${r}}` }))), b = (a) => ({
-  dataKey: a.dataIdKey,
-  placeHolder: `{${a.dataIdKey}}`,
-  sourceId: {
-    author: a.sourceId.author,
-    kind: a.sourceId.kind,
-    module: a.sourceId.module
+import { m as e } from "./make.es2.js";
+import { a as m, g as r, d as l, c as p, h as n, m as c, e as d, b } from "./commands.es.js";
+const g = (a = {}) => ({
+  gameId: a.gameId ?? 0,
+  screenWidth: a.screenWidth ?? 0,
+  screenHeight: a.screenHeight ?? 0,
+  uiAreaWidth: a.uiAreaWidth ?? 0,
+  uiAreaHeight: a.uiAreaHeight ?? 0,
+  windowOpacity: a.windowOpacity ?? 0,
+  screenScale: a.screenScale ?? 1,
+  numberFontFilename: a.numberFontFilename ?? "",
+  mainFontFilename: a.mainFontFilename ?? "",
+  fallbackFonts: a.fallbackFonts ?? "",
+  fontSize: a.fontSize ?? 28,
+  picturesUpperLimit: a.picturesUpperLimit ?? 100
+}), y = (a = {}) => [e(a.cursor), e(a.ok), e(a.cancel), e(a.buzzer), e(a.equip), e(a.save), e(a.load), e(a.battleStart), e(a.escape), e(a.enemyAttack), e(a.enemyDamage), e(a.enemyCollapse), e(a.bossCollapes1), e(a.bossCollapes2), e(a.actorDamage), e(a.actorCollapse), e(a.playRecovery), e(a.playMiss), e(a.playEvasion), e(a.playMagicEvasion), e(a.playReflection), e(a.shop), e(a.useItem), e(a.useSkill)], u = (a) => ({
+  cursor: a[0],
+  ok: a[1],
+  cancel: a[2],
+  buzzer: a[3],
+  equip: a[4],
+  save: a[5],
+  load: a[6],
+  battleStart: a[7],
+  escape: a[8],
+  enemyAttack: a[9],
+  enemyDamage: a[10],
+  enemyCollapse: a[11],
+  bossCollapes1: a[12],
+  bossCollapes2: a[13],
+  actorDamage: a[14],
+  actorCollapse: a[15],
+  playRecovery: a[16],
+  playMiss: a[17],
+  playEvasion: a[18],
+  playMagicEvasion: a[19],
+  playReflection: a[20],
+  shop: a[21],
+  useItem: a[22],
+  useSkill: a[23]
+}), T = (a) => ({
+  item: h(a),
+  skill: M(a),
+  equip: v(a),
+  status: k(a),
+  formation: S(a),
+  save: I(a)
+}), h = (a) => a.menuCommands[0], M = (a) => a.menuCommands[1], v = (a) => a.menuCommands[2], k = (a) => a.menuCommands[3], S = (a) => a.menuCommands[4], I = (a) => a.menuCommands[5], W = (a) => a.itemCategories[0], X = (a) => a.itemCategories[1], Y = (a) => a.itemCategories[2], H = (a) => a.itemCategories[3], N = (a = {}) => [a.item ?? !0, a.weapon ?? !0, a.armor ?? !0, a.keyItem ?? !0], U = (a) => ({
+  item: a[0],
+  weapon: a[1],
+  armor: a[2],
+  keyItem: a[3]
+}), w = (a = {}) => [a.item ?? !0, a.skill ?? !0, a.equip ?? !0, a.status ?? !0, a.formation ?? !0, a.save ?? !0], A = (a) => ({
+  item: a[0],
+  skill: a[1],
+  equip: a[2],
+  status: a[3],
+  formation: a[4],
+  save: a[5]
+}), f = (a = {}) => ({
+  optAutosave: a.optAutosave ?? !0,
+  optDisplayTp: a.optDisplayTp ?? !0,
+  optDrawTitle: a.optDrawTitle ?? !0,
+  optExtraExp: a.optExtraExp ?? !0,
+  optFloorDeath: a.optFloorDeath ?? !0,
+  optFollowers: a.optFollowers ?? !0,
+  optKeyItemsNumber: a.optKeyItemsNumber ?? !0,
+  optSideView: a.optSideView ?? !0,
+  optSlipDeath: a.optSlipDeath ?? !0,
+  optTransparent: a.optTransparent ?? !0,
+  optMessageSkip: a.optMessageSkip ?? !0,
+  optSplashScreen: a.optSplashScreen ?? !0
+}), C = (a) => ({
+  background: a.background ?? 0,
+  offsetX: a.offsetX ?? 0,
+  offsetY: a.offsetY ?? 0
+}), i = (a = {}) => ({
+  characterIndex: a.characterIndex ?? 0,
+  characterName: a.characterName ?? "",
+  bgm: e(a.bgm ?? {}),
+  startMapId: a.startMapId ?? 0,
+  startX: a.startX ?? 0,
+  startY: a.startY ?? 0
+}), z = (a = {}) => ({ jsonFormatLevel: a.jsonFormatLevel ?? 0, messageWidth1: a.messageWidth1 ?? 816, messageWidth2: a.messageWidth2 ?? 816 }), L = (a = o({})) => ({
+  versionId: a.versionId,
+  menuCommands: a.menuCommands,
+  locale: a.locale,
+  startMapId: a.startMapId,
+  startX: a.startX,
+  startY: a.startY,
+  partyMembers: a.partyMembers,
+  magicSkills: a.magicSkills,
+  title1Name: a.title1Name,
+  title2Name: a.title2Name,
+  gameTitle: a.gameTitle,
+  currencyUnit: a.currencyUnit,
+  windowTone: a.windowTone,
+  battleback1Name: a.battleback1Name,
+  battleback2Name: a.battleback2Name,
+  testTroopId: a.testTroopId,
+  testBattlers: a.testBattlers,
+  attackMotions: a.attackMotions,
+  battlerHue: a.battlerHue,
+  battlerName: a.battlerName,
+  airship: a.airship,
+  boat: a.boat,
+  ship: a.ship,
+  defeatMe: a.defeatMe,
+  gameoverMe: a.gameoverMe,
+  optDisplayTp: a.optDisplayTp,
+  optDrawTitle: a.optDrawTitle,
+  optExtraExp: a.optExtraExp,
+  optFloorDeath: a.optFloorDeath,
+  optSideView: a.optSideView,
+  optFollowers: a.optFollowers,
+  optSlipDeath: a.optSlipDeath,
+  optTransparent: a.optTransparent,
+  skillTypes: a.skillTypes,
+  weaponTypes: a.weaponTypes,
+  armorTypes: a.armorTypes,
+  elements: a.elements,
+  equipTypes: a.equipTypes,
+  switches: a.switches,
+  variables: a.variables,
+  titleBgm: a.titleBgm,
+  battleBgm: a.battleBgm,
+  victoryMe: a.victoryMe,
+  editMapId: a.editMapId,
+  sounds: a.sounds,
+  terms: { basic: a.terms.basic, commands: a.terms.commands, params: a.terms.params, messages: p(a.terms.messages) }
+}), R = (a) => o({
+  versionId: a.versionId,
+  menuCommands: T(a),
+  locale: a.locale,
+  gameInit: { startMapId: a.startMapId, startX: a.startX, startY: a.startY, partyMembers: a.partyMembers },
+  battle: { magicSkills: a.magicSkills },
+  bgm: {
+    titleBgm: a.titleBgm,
+    battleBgm: a.battleBgm
+  },
+  options: a,
+  vehicles: { airship: a.airship, boat: a.boat, ship: a.ship },
+  images: { title1Name: a.title1Name, title2Name: a.title2Name },
+  me: {
+    defeatMe: a.defeatMe,
+    gameoverMe: a.gameoverMe,
+    victoryMe: a.victoryMe
+  },
+  battleTest: {
+    battleback1Name: a.battleback1Name,
+    battleback2Name: a.battleback2Name,
+    testTroopId: a.testTroopId,
+    testBattlers: a.testBattlers
+  },
+  attackMotion: a.attackMotions,
+  sounds: u(a.sounds),
+  dataNames: {
+    skillTypes: a.skillTypes,
+    weaponTypes: a.weaponTypes,
+    armorTypes: a.armorTypes,
+    elements: a.elements,
+    equipTypes: a.equipTypes,
+    switches: a.switches,
+    variables: a.variables
+  },
+  texts: { currencyUnit: a.currencyUnit, gameTitle: a.gameTitle },
+  editorTemporary: {
+    editMapId: a.editMapId,
+    battlerName: a.battlerName,
+    battlerHue: a.battlerHue
+  },
+  terms: {
+    basic: l(a.terms.basic),
+    commands: r(a.terms.commands),
+    params: m(a.terms.params),
+    messages: a.terms.messages
   }
-}), h = (a) => /* @__PURE__ */ new Set([...a.placeHolder?.numbers ?? [], ...a.itemMapper ? [a.itemMapper.placeHolder] : [], ...a.itemMappers?.map(((r) => r.placeHolder)) ?? [], ...a.placeHolder?.strings ?? [], ...a.arrayIndex?.map(((r) => r.dataIdKey)) ?? []]), I = (a) => {
-  const r = a.itemMappers ?? [];
-  return a.itemMapper ? [...r, a.itemMapper] : [...r];
-}, w = (a, r = []) => {
+}), o = (a) => {
+  const s = F(a.size);
   return {
-    itemMappers: [...I(a), ...r].map(k),
-    fallbackFormat: { text: H(a), label: f(a) },
-    properties: (e = a.placeHolder ?? {}, { numbers: e.numbers ? i(e.numbers) : [], strings: e.strings ? i(e.strings) : [] }),
-    arrayIndex: a.arrayIndex ? a.arrayIndex.map(b) : []
+    ...f(a.options),
+    titleCommandWindow: C(a.titleCommandWindow ?? {}),
+    currencyUnit: a.texts?.currencyUnit ?? "",
+    gameTitle: a.texts?.gameTitle ?? "",
+    sounds: y(a.sounds),
+    editor: z(a.editing),
+    advanced: g(a.advanced),
+    title1Name: a.images?.title1Name ?? "",
+    title2Name: a.images?.title2Name ?? "",
+    armorTypes: t(a.dataNames?.armorTypes),
+    equipTypes: t(a.dataNames?.equipTypes),
+    elements: t(a.dataNames?.elements),
+    skillTypes: t(a.dataNames?.skillTypes),
+    weaponTypes: t(a.dataNames?.weaponTypes),
+    switches: t(a.dataNames?.switches),
+    variables: t(a.dataNames?.variables),
+    magicSkills: t(a.battle?.magicSkills),
+    battleSystem: a.battle?.battleSystem ?? 0,
+    airship: i(a.vehicles?.airship),
+    boat: i(a.vehicles?.boat),
+    ship: i(a.vehicles?.ship),
+    defeatMe: e(a.me?.defeatMe),
+    gameoverMe: e(a.me?.gameoverMe),
+    titleBgm: e(a.bgm?.titleBgm),
+    tileSize: s.tileSize,
+    faceSize: s.faceSize,
+    iconSize: s.iconSize,
+    versionId: a.versionId ?? 1,
+    attackMotions: a.attackMotion ? [...a.attackMotion] : [],
+    battleback1Name: a.battleTest?.battleback1Name ?? "",
+    battleback2Name: a.battleTest?.battleback2Name ?? "",
+    testTroopId: a.battleTest?.testTroopId ?? 0,
+    testBattlers: B(a.battleTest?.testBattlers, q),
+    battleBgm: e(a.bgm?.battleBgm),
+    victoryMe: e(a.me?.victoryMe),
+    editMapId: a.editorTemporary?.editMapId ?? 0,
+    battlerName: a.editorTemporary?.battlerName ?? "",
+    locale: a.locale ?? "en-US",
+    startMapId: a.gameInit?.startMapId ?? 0,
+    startX: a.gameInit?.startX ?? 0,
+    startY: a.gameInit?.startY ?? 0,
+    windowTone: [0, 0, 0, 0],
+    terms: D(a.terms ?? {}),
+    itemCategories: N(a.itemCategories),
+    partyMembers: t(a.gameInit?.partyMembers),
+    battlerHue: 0,
+    menuCommands: w(a.menuCommands)
   };
-  var e;
-}, k = (a) => ({
-  placeHolder: `{${a.placeHolder}}`,
-  kindKey: a.kindKey,
-  dataIdKey: a.dataIdKey
-}), H = (a) => {
-  if (a.fallbackFormat && a.fallbackFormat.text !== void 0) return a.fallbackFormat.text;
-  const r = ((e) => /* @__PURE__ */ new Set([...e.placeHolder?.numbers ?? [], ...e.placeHolder?.strings ?? [], ...e.arrayIndex?.map(((t) => t.dataIdKey)) ?? []]))(a);
-  return r.size === 0 ? "value not found" : Array.from(r).map(((e) => `${e}:{${e}}`)).join(", ");
-}, f = (a) => a.fallbackFormat?.label !== void 0 ? a.fallbackFormat.label : "unknown key:{key}", u = (a, r, e) => {
-  const t = r[e.dataKey];
-  return t == null ? a : a.replaceAll(e.placeHolder, String(t));
-}, A = (a, r, e, t, m) => {
-  const c = ((s, n, o) => {
-    const p = o.properties.numbers.reduce(((d, l) => u(d, n, l)), s);
-    return o.properties.strings.reduce(((d, l) => u(d, n, l)), p);
-  })(t, a, e);
-  return r ? K(c, a, e, r, m) : c;
-}, K = (a, r, e, t, m) => {
-  const c = ((s, n) => {
-    const o = ((p, d) => {
-      const l = d[p];
-      return l && l.id === p ? l : d.find(((y) => y.id === p));
-    })(n, s);
-    return o ? o.name : `?data[${n}]`;
-  })(t, m(r));
-  return e.itemMappers.reduce(((s, n) => s.replaceAll(n.placeHolder, c)), a);
-}, S = (a = {}) => ({
-  name: a.name ?? "",
-  volume: a.volume ?? 100,
-  pitch: a.pitch ?? 100,
-  pan: a.pan ?? 0
-});
+}, D = (a) => ({
+  basic: b(a.basic ?? {}),
+  commands: d(a.commands ?? {}),
+  params: c(a.params ?? {}),
+  messages: n(a.messages ?? {})
+}), t = (a) => a ? [...a] : [], F = (a) => a ? {
+  tileSize: a.tileSize ?? 48,
+  faceSize: a.faceSize ?? 144,
+  iconSize: a.iconSize ?? 32
+} : { tileSize: 48, faceSize: 144, iconSize: 32 }, B = (a, s) => a ? a.map(s) : [], q = (a) => a ? { actorId: a.actorId, equips: t(a.equips), level: a.level } : { actorId: 0, equips: [], level: 1 };
 export {
-  g as O,
-  F as a,
-  $ as b,
-  v as c,
-  x as d,
-  M as e,
-  A as f,
-  w as g,
-  h,
-  I as i,
-  S as m
+  v as a,
+  S as b,
+  T as c,
+  W as d,
+  h as e,
+  H as f,
+  Y as g,
+  I as h,
+  M as i,
+  k as j,
+  X as k,
+  z as l,
+  f as m,
+  N as n,
+  U as o,
+  w as p,
+  A as q,
+  y as r,
+  u as s,
+  g as t,
+  o as u,
+  R as v,
+  L as w,
+  C as x,
+  i as y
 };

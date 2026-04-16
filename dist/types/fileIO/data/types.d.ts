@@ -1,12 +1,3 @@
-import type * as Name from "./constants/fileNames";
-export type FileNames = (typeof Name)[keyof typeof Name];
-export interface TermsOfReadArrayData {
-    jsonParseError: string;
-    notArray: string;
-}
-export interface ReadArrayResult<T> {
-    succcess: boolean;
-    fileName: string;
-    data: T[];
-    error: string;
-}
+import { FILENAME_SYSTEM } from './system';
+import type * as Name from "./arrayData/constants/fileNames";
+export type DataFileNames = (typeof Name)[keyof typeof Name] | typeof FILENAME_SYSTEM;

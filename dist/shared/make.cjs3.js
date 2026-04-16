@@ -1,0 +1,1 @@
+"use strict";const d=e=>e.toString().padStart(3,"0");exports.makeMapInfoData=(e={id:0})=>({name:e.name??d(e.id),id:e.id,expanded:e.expanded??!1,order:e.order??0,parentId:e.parentId??0,scrollX:e.scrollX??0,scrollY:e.scrollY??0}),exports.makeMapName=d;
