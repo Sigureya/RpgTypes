@@ -10,10 +10,11 @@ import type {
 export const readMapFileFromInfo = (
   info: Data_MapInfo,
   terms: MapReadTerms,
-  fn: (info: Data_MapInfo) => Promise<string>,
+  fn: (filename: string) => Promise<string>,
   validate: (data: unknown) => data is Data_Map,
 ): Promise<MapReadSuccess<Data_Map> | MapReadFailed> => {
-  return fn(info)
+  const filename = mapNameWithExt(info);
+  return fn(filename)
     .then((json) => readMapThen(json, info, terms, validate))
     .catch((): MapReadFailed => makeError(info, terms.fileNotFound));
 };
@@ -40,6 +41,10 @@ const readMapThen = <T>(
   }
 };
 
+const mapNameWithExt = (info: Data_MapInfo) => {
+  return `Map${makeMapName(info.id)}.json`;
+};
+
 const makeMapNameXX = (info: Data_MapInfo) =>
   `Map${makeMapName(info.id)}` as const;
 
@@ -53,7 +58,7 @@ const makeError = (info: Data_MapInfo, message: string): MapReadFailed => ({
 export const readMapFilesFromInfo = (
   infos: ReadonlyArray<Data_MapInfo>,
   terms: MapReadTerms,
-  readMapFile: (info: Data_MapInfo) => Promise<string>,
+  readMapFile: (info: string) => Promise<string>,
   validateMapData: (data: unknown) => data is Data_Map,
 ): Promise<MapFiles<Data_Map>> => {
   return readMapFilesFromInfoEx(
@@ -68,7 +73,7 @@ export const readMapFilesFromInfo = (
 export const readMapFilesFromInfoEx = async <T>(
   infos: ReadonlyArray<Data_MapInfo>,
   terms: MapReadTerms,
-  readMapFile: (info: Data_MapInfo) => Promise<string>,
+  readMapFile: (info: string) => Promise<string>,
   validateMapData: (data: unknown) => data is Data_Map,
   convFn: (data: MapReadSuccess<Data_Map>) => T,
 ): Promise<MapFiles<T>> => {
@@ -83,7 +88,7 @@ export const readMapFilesFromInfoEx = async <T>(
 const mmm = async <T>(
   info: Data_MapInfo,
   terms: MapReadTerms,
-  readMapFile: (info: Data_MapInfo) => Promise<string>,
+  readMapFile: (info: string) => Promise<string>,
   convFn: (data: MapReadSuccess<Data_Map>) => T,
   validateMapData: (data: unknown) => data is Data_Map,
 ): Promise<MapReadFailed | MapReadSuccess<T>> => {

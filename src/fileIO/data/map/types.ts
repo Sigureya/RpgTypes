@@ -3,6 +3,7 @@ import type { MapFileInfo } from "@RpgTypes/rmmz";
 export interface MapInfoReadResult {
   message: string;
   filename: string;
+  success: false;
 }
 
 export interface MapFiles<T> {

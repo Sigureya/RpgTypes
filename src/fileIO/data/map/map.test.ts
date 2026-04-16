@@ -44,7 +44,7 @@ describe("readMapFileFromInfo", () => {
       (d): d is Data_Map => validate(d),
     );
 
-    expect(readFileFn).toHaveBeenCalledWith(info);
+    expect(readFileFn).toHaveBeenCalledWith("Map001.json");
     expect(validate).toHaveBeenCalledTimes(1);
     expect(result).toEqual(expected);
   });
