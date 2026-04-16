@@ -1,0 +1,51 @@
+import type { TermsOfReadArrayData, ReadArrayResult } from "./types";
+
+export const readArrayData = async <T>(
+  terms: TermsOfReadArrayData,
+  filename: string,
+  readFileFn: (filename: string) => Promise<string>,
+  validateItemFn: (item: unknown) => item is T,
+): Promise<ReadArrayResult<T>> => {
+  return readFileFn(filename)
+    .then((json) => parseXX(json, filename, terms, validateItemFn))
+    .catch(
+      (): ReadArrayResult<T> => ({
+        succcess: false,
+        fileName: filename,
+        data: [],
+        error: terms.jsonParseError,
+      }),
+    );
+};
+
+const parseXX = <T>(
+  json: string,
+  filename: string,
+  terms: TermsOfReadArrayData,
+  validateItemFn: (item: unknown) => item is T,
+): ReadArrayResult<T> => {
+  try {
+    const data = JSON.parse(json);
+    if (!Array.isArray(data)) {
+      return {
+        succcess: false,
+        fileName: filename,
+        data: [],
+        error: terms.notArray,
+      };
+    }
+    return {
+      succcess: true,
+      fileName: filename,
+      data: data.filter(validateItemFn),
+      error: "",
+    };
+  } catch {
+    return {
+      succcess: false,
+      fileName: filename,
+      data: [],
+      error: terms.jsonParseError,
+    };
+  }
+};
