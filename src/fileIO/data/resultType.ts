@@ -5,6 +5,7 @@ import type {
   Data_CommonEvent,
   Data_Enemy,
   Data_Item,
+  Data_Map,
   Data_MapInfo,
   Data_Skill,
   Data_State,
@@ -94,7 +95,7 @@ export interface ReadAllGameDataResultWithNullFallback<
   weapon: ReadHandledResult<Weapon, null>;
 }
 
-export interface ReadAllArrayDataResult extends ReadAllDataResultFields {
+export interface RowGameData extends ReadAllDataResultFields {
   actor: ReadArrayResult<Data_Actor>;
   armor: ReadArrayResult<Data_Armor>;
   classes: ReadArrayResult<Data_Class>;
@@ -107,4 +108,5 @@ export interface ReadAllArrayDataResult extends ReadAllDataResultFields {
   system: ReadSystemResult;
   troop: ReadArrayResult<Data_Troop>;
   weapon: ReadArrayResult<Data_Weapon>;
+  mapFiles: MapFiles<Data_Map>;
 }
