@@ -6,8 +6,8 @@ import type {
   Data_Skill,
   Data_State,
   Data_Armor,
-  Data_MapInfo,
   Data_Animation,
+  Data_MapInfo,
 } from "@RpgTypes/rmmz/rpg";
 import { readArrayData } from "./arrayData";
 import {
@@ -17,9 +17,9 @@ import {
   FILENAME_ARMORS,
   FILENAME_ENEMIES,
   FILENAME_ITEMS,
-  FILENAME_MAP_INFOS,
   FILENAME_SKILLS,
   FILENAME_STATES,
+  FILENAME_MAP_INFOS,
 } from "./constants";
 import type { ReadArrayResult, TermsOfReadArrayData } from "./types";
 
