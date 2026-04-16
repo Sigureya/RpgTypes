@@ -1,5 +1,22 @@
 import type { MockedObject } from "vitest";
 import { describe, expect, test, vi } from "vitest";
+import type {
+  Data_Actor,
+  Data_Armor,
+  Data_Class,
+  Data_CommonEvent,
+  Data_Enemy,
+  Data_Item,
+  Data_Map,
+  Data_MapInfo,
+  Data_Skill,
+  Data_State,
+  Data_System,
+  Data_SystemMV,
+  Data_Troop,
+  Data_Weapon,
+  MapFileInfo,
+} from "@RpgTypes/rmmz";
 import {
   makeActorData,
   makeArmorData,
@@ -14,25 +31,9 @@ import {
   makeSystemData,
   makeTroopData,
   makeWeaponData,
-  type Data_Actor,
-  type Data_Armor,
-  type Data_Class,
-  type Data_CommonEvent,
-  type Data_Enemy,
-  type Data_Item,
-  type Data_Map,
-  type Data_MapInfo,
-  type Data_Skill,
-  type Data_State,
-  type Data_System,
-  type Data_SystemMV,
-  type Data_Troop,
-  type Data_Weapon,
-  type MapFileInfo,
 } from "@RpgTypes/rmmz";
 import {
   FILENAME_ACTORS,
-  FILENAME_ANIMATIONS,
   FILENAME_ARMORS,
   FILENAME_CLASSES,
   FILENAME_COMMON_EVENTS,
@@ -287,7 +288,6 @@ const createConvertErrorHandlers = (): MockedObject<ConvertHandlers> => ({
 });
 
 const runTest = (
-  name: string,
   fn: (
     fileReadFn: (
       filename: DataFileNames | MapFileNameWithExt,
@@ -296,66 +296,51 @@ const runTest = (
     mockedValidators: ValidateFunctionsOfReadRpgData,
   ) => Promise<ReadAllDataResultFields>,
 ) => {
-  describe(name, () => {
-    test("", async () => {
-      const fileReadFn = vi.fn(() => Promise.reject());
-      const convHandlers = createConvertErrorHandlers();
-      const mockedValidators = createMockedValidateFunctions(true);
-      const handlers = lapXX(mockedValidators);
-      await fn(fileReadFn, convHandlers, handlers);
-      expect(convHandlers.readActors).not.toHaveBeenCalled();
-      expect(convHandlers.readArmors).not.toHaveBeenCalled();
-      expect(convHandlers.readClasss).not.toHaveBeenCalled();
-      expect(convHandlers.readCommonEvents).not.toHaveBeenCalled();
-      expect(convHandlers.readEnemys).not.toHaveBeenCalled();
-      expect(convHandlers.readItems).not.toHaveBeenCalled();
-      expect(convHandlers.readMap).not.toHaveBeenCalled();
-      expect(convHandlers.readSkills).not.toHaveBeenCalled();
-      expect(convHandlers.readStates).not.toHaveBeenCalled();
-      expect(convHandlers.readSystem).not.toHaveBeenCalled();
-      expect(convHandlers.readTroops).not.toHaveBeenCalled();
-      expect(convHandlers.readWeapons).not.toHaveBeenCalled();
-      expect(mockedValidators.validateActor).not.toHaveBeenCalled();
-      expect(mockedValidators.validateArmor).not.toHaveBeenCalled();
-      expect(mockedValidators.validateClass).not.toHaveBeenCalled();
-      expect(mockedValidators.validateCommonEvent).not.toHaveBeenCalled();
-      expect(mockedValidators.validateEnemy).not.toHaveBeenCalled();
-      expect(mockedValidators.validateItem).not.toHaveBeenCalled();
-      expect(mockedValidators.validateMap).not.toHaveBeenCalled();
-      expect(mockedValidators.validateMapInfo).not.toHaveBeenCalled();
-      expect(mockedValidators.validateSkill).not.toHaveBeenCalled();
-      expect(mockedValidators.validateState).not.toHaveBeenCalled();
-      expect(mockedValidators.validateSystem).not.toHaveBeenCalled();
-      expect(mockedValidators.validateTroop).not.toHaveBeenCalled();
-      expect(mockedValidators.validateWeapon).not.toHaveBeenCalled();
-    });
+  test("読み込み失敗時は converter と validator を呼ばない", async () => {
+    const fileReadFn = vi.fn(() => Promise.reject());
+    const convHandlers = createConvertErrorHandlers();
+    const mockedValidators = createMockedValidateFunctions(true);
+    const handlers = lapXX(mockedValidators);
+    await fn(fileReadFn, convHandlers, handlers);
+    expect(convHandlers.readActors).not.toHaveBeenCalled();
+    expect(convHandlers.readArmors).not.toHaveBeenCalled();
+    expect(convHandlers.readClasss).not.toHaveBeenCalled();
+    expect(convHandlers.readCommonEvents).not.toHaveBeenCalled();
+    expect(convHandlers.readEnemys).not.toHaveBeenCalled();
+    expect(convHandlers.readItems).not.toHaveBeenCalled();
+    expect(convHandlers.readMap).not.toHaveBeenCalled();
+    expect(convHandlers.readSkills).not.toHaveBeenCalled();
+    expect(convHandlers.readStates).not.toHaveBeenCalled();
+    expect(convHandlers.readSystem).not.toHaveBeenCalled();
+    expect(convHandlers.readTroops).not.toHaveBeenCalled();
+    expect(convHandlers.readWeapons).not.toHaveBeenCalled();
+    expect(mockedValidators.validateActor).not.toHaveBeenCalled();
+    expect(mockedValidators.validateArmor).not.toHaveBeenCalled();
+    expect(mockedValidators.validateClass).not.toHaveBeenCalled();
+    expect(mockedValidators.validateCommonEvent).not.toHaveBeenCalled();
+    expect(mockedValidators.validateEnemy).not.toHaveBeenCalled();
+    expect(mockedValidators.validateItem).not.toHaveBeenCalled();
+    expect(mockedValidators.validateMap).not.toHaveBeenCalled();
+    expect(mockedValidators.validateMapInfo).not.toHaveBeenCalled();
+    expect(mockedValidators.validateSkill).not.toHaveBeenCalled();
+    expect(mockedValidators.validateState).not.toHaveBeenCalled();
+    expect(mockedValidators.validateSystem).not.toHaveBeenCalled();
+    expect(mockedValidators.validateTroop).not.toHaveBeenCalled();
+    expect(mockedValidators.validateWeapon).not.toHaveBeenCalled();
   });
 };
-describe("", () => {
-  runTest(
-    "readAllGameDataAsArrayFallback",
-    async (fileReadFn, convHandlers, mockedValidators) => {
-      return readAllGameDataAsArrayFallback(
-        terms,
-        fileReadFn,
-        mockedValidators,
-        convHandlers,
-      );
-    },
-  );
-  runTest(
-    "readAllGameDataAsNullFallback",
-    async (fileReadFn, convHandlers, mockedValidators) => {
-      return readAllGameDataAsNullFallback(
-        terms,
-        fileReadFn,
-        mockedValidators,
-        convHandlers,
-      );
-    },
-  );
 
-  test("readAllGameDataAsArrayFallback: 正常系で各データを変換して返す", async () => {
+describe("readAllGameDataAsArrayFallback", () => {
+  runTest(async (fileReadFn, convHandlers, mockedValidators) => {
+    return readAllGameDataAsArrayFallback(
+      terms,
+      fileReadFn,
+      mockedValidators,
+      convHandlers,
+    );
+  });
+
+  test("正常系で各データを変換して返す", async () => {
     const fileMap: Record<string, string | Error> = {
       ...createBaseFileMap(),
       ["Map001.json"]: JSON.stringify({ displayName: "Map1" }),
@@ -396,7 +381,7 @@ describe("", () => {
     );
   });
 
-  test("readAllGameDataAsArrayFallback: 変換で失敗したら配列フォールバックになる", async () => {
+  test("変換で失敗したら配列フォールバックになる", async () => {
     const fileMap: Record<string, string | Error> = {
       ...createBaseFileMap(),
       ["Map001.json"]: JSON.stringify({ displayName: "Map1" }),
@@ -418,29 +403,7 @@ describe("", () => {
     expect(result.actor.data).toEqual([]);
   });
 
-  test("readAllGameDataAsNullFallback: 変換で失敗したら null フォールバックになる", async () => {
-    const fileMap: Record<string, string | Error> = {
-      ...createBaseFileMap(),
-      ["Map001.json"]: JSON.stringify({ displayName: "Map1" }),
-    };
-    const fileReadFn = createReadFileFn(fileMap);
-    const mockedValidators = createMockedValidateFunctions(true);
-    const convHandlers = createIdentityHandlers();
-    convHandlers.readActors.mockImplementation(errorFunc);
-
-    const result = await readAllGameDataAsNullFallback(
-      terms,
-      fileReadFn,
-      lapXX(mockedValidators),
-      convHandlers,
-    );
-
-    expect(result.actor.succcess).toBe(false);
-    expect(result.actor.error).toBe(terms.dataConvertError);
-    expect(result.actor.data).toBeNull();
-  });
-
-  test("readAllGameDataAsArrayFallback: mapInfo 読み込み失敗時は mapFiles.info が失敗になる", async () => {
+  test("mapInfo 読み込み失敗時は mapFiles.info が失敗になる", async () => {
     const base = createBaseFileMap();
     const fileMap: Record<string, string | Error> = {
       ...base,
@@ -467,8 +430,43 @@ describe("", () => {
     }
     expect(convHandlers.readMap).not.toHaveBeenCalled();
   });
+});
 
-  test("readAllRowGameData: 生データをそのまま返す", async () => {
+describe("readAllGameDataAsNullFallback", () => {
+  runTest(async (fileReadFn, convHandlers, mockedValidators) => {
+    return readAllGameDataAsNullFallback(
+      terms,
+      fileReadFn,
+      mockedValidators,
+      convHandlers,
+    );
+  });
+
+  test("変換で失敗したら null フォールバックになる", async () => {
+    const fileMap: Record<string, string | Error> = {
+      ...createBaseFileMap(),
+      ["Map001.json"]: JSON.stringify({ displayName: "Map1" }),
+    };
+    const fileReadFn = createReadFileFn(fileMap);
+    const mockedValidators = createMockedValidateFunctions(true);
+    const convHandlers = createIdentityHandlers();
+    convHandlers.readActors.mockImplementation(errorFunc);
+
+    const result = await readAllGameDataAsNullFallback(
+      terms,
+      fileReadFn,
+      lapXX(mockedValidators),
+      convHandlers,
+    );
+
+    expect(result.actor.succcess).toBe(false);
+    expect(result.actor.error).toBe(terms.dataConvertError);
+    expect(result.actor.data).toBeNull();
+  });
+});
+
+describe("readAllRowGameData", () => {
+  test("生データをそのまま返す", async () => {
     const fileMap: Record<string, string | Error> = {
       ...createBaseFileMap(),
       ["Map001.json"]: JSON.stringify({ displayName: "Map1" }),
