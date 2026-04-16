@@ -18,14 +18,14 @@ import {
   readTroopData,
   readWeaponData,
 } from "./arrayData";
-import type { MapFiles } from "./map";
+import type { MapFileNameWithExt, MapFiles } from "./map";
 import { readMapFilesFromInfoEx } from "./map";
 import type {
   RpgDataReadHandlers,
   ValidateFunctionsOfReadRpgData,
 } from "./reader/handlers";
 import type {
-  ReadAllArrayDataResult,
+  RowGameData,
   ReadAllDataResultFields,
   ReadAllGameDataResult,
   ReadAllGameDataResultWithNullFallback,
@@ -37,21 +37,21 @@ import type { TermsOfReadAllData } from "./terms";
 import type { DataFileNames } from "./types";
 
 export const readAllRowGameData = async (
-  readFileFn: (filename: DataFileNames) => Promise<string>,
+  readFileFn: (filename: DataFileNames | MapFileNameWithExt) => Promise<string>,
   validateFunctions: ValidateFunctionsOfReadRpgData,
   terms: TermsOfReadAllData,
-): Promise<ReadAllArrayDataResult> => {
+): Promise<RowGameData> => {
   return readAllGameDataWithFallback(
     terms,
     readFileFn,
     {
+      readMap: (m): Data_Map => m.map,
       readActors: identity,
       readArmors: identity,
       readClasss: identity,
       readCommonEvents: identity,
       readEnemys: identity,
       readItems: identity,
-      readMap: identity,
       readSkills: identity,
       readStates: identity,
       readSystem: identity,
@@ -79,9 +79,9 @@ export const readAllGameDataAsArrayFallback = <
   State,
   Troop,
 >(
-  readFileFn: (filename: string) => Promise<string>,
-  validateFunctions: ValidateFunctionsOfReadRpgData,
   terms: TermsOfReadAllData,
+  readFileFn: (filename: DataFileNames | MapFileNameWithExt) => Promise<string>,
+  validateFunctions: ValidateFunctionsOfReadRpgData,
   handles: RpgDataReadHandlers<
     Commmon[],
     Map,
@@ -134,9 +134,9 @@ export const readAllGameDataAsNullFallback = <
   State,
   Troop,
 >(
-  readFileFn: (filename: string) => Promise<string>,
-  validateFunctions: ValidateFunctionsOfReadRpgData,
   terms: TermsOfReadAllData,
+  readFileFn: (filename: DataFileNames | MapFileNameWithExt) => Promise<string>,
+  validateFunctions: ValidateFunctionsOfReadRpgData,
   handles: RpgDataReadHandlers<
     Commmon,
     Map,
@@ -191,7 +191,7 @@ const readAllGameDataWithFallback = async <
   Troop,
 >(
   terms: TermsOfReadAllData,
-  readFileFn: (filename: DataFileNames) => Promise<string>,
+  readFileFn: (filename: DataFileNames | MapFileNameWithExt) => Promise<string>,
   handles: RpgDataReadHandlers<
     Commmon,
     Map,
@@ -253,7 +253,7 @@ const readAllGameDataWithFallback = async <
           readFileFn,
           validateFunctions.validateMap,
         )
-      : mapInfosFailed(mapInfo),
+      : mapInfosFailed<Map>(mapInfo),
     actor: convertIfSuccess(actor, terms, handles.readActors, makeEmptyValue),
     armor: convertIfSuccess(armor, terms, handles.readArmors, makeEmptyValue),
     classes: convertIfSuccess(
@@ -308,7 +308,7 @@ const convertMapData = async <T>(
   mapInfos: Data_MapInfo[],
   terms: TermsOfReadAllData,
   handles: MapReader<T>,
-  readFileFn: (filename: DataFileNames) => Promise<string>,
+  readFileFn: (filename: MapFileNameWithExt) => Promise<string>,
   validateFn: (item: unknown) => item is Data_Map,
 ): Promise<MapFiles<T>> => {
   return await readMapFilesFromInfoEx(
@@ -316,7 +316,7 @@ const convertMapData = async <T>(
     terms,
     async (filename) => readFileFn(filename),
     validateFn,
-    (data) => handles.readMap(data),
+    (data): T => handles.readMap(data),
   );
 };
 
