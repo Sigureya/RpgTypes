@@ -2,13 +2,13 @@ import type { MockedFunction } from "vitest";
 import { describe, expect, test, vi } from "vitest";
 import type { Data_Map, Data_MapInfo } from "@RpgTypes/rmmz";
 import { makeMapData, makeMapInfoData } from "@RpgTypes/rmmz";
+import { readMapFilesFromInfoEx } from "./map";
 import type {
   MapFiles,
-  MapReadFailed,
-  MapReadSuccess,
   MapReadTerms,
-} from "./map";
-import { readMapFilesFromInfoEx } from "./map";
+  MapReadSuccess,
+  MapReadFailed,
+} from "./types";
 
 interface TestCase {
   caseName: string;
