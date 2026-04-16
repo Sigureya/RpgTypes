@@ -1,5 +1,7 @@
+import type { Data_CommonEvent, Data_Troop } from "@RpgTypes/rmmz";
 import type {
   Data_Actor,
+  Data_Weapon,
   Data_Class,
   Data_Enemy,
   Data_Item,
@@ -8,7 +10,9 @@ import type {
   Data_Armor,
   Data_Animation,
   Data_MapInfo,
+  Data_Tileset,
 } from "@RpgTypes/rmmz/rpg";
+import { readArrayData } from "./arrayData";
 import {
   FILENAME_ACTORS,
   FILENAME_CLASSES,
@@ -19,13 +23,16 @@ import {
   FILENAME_STATES,
   FILENAME_ANIMATIONS,
   FILENAME_MAP_INFOS,
-} from "@sigureya/rmmz-plugin-schema";
-import { readArrayData } from "./arrayData";
+  FILENAME_COMMON_EVENTS,
+  FILENAME_TILESET,
+  FILENAME_TROOPS,
+  FILENAME_WEAPONS,
+} from "./constants";
 import type { ReadArrayResult, TermsOfReadArrayData } from "./types";
 
 export const readActorData = (
   terms: TermsOfReadArrayData,
-  readFileFn: (filename: string) => Promise<string>,
+  readFileFn: (filename: typeof FILENAME_ACTORS) => Promise<string>,
   validateFn: (item: unknown) => item is Data_Actor,
 ): Promise<ReadArrayResult<Data_Actor>> => {
   return readArrayData(terms, FILENAME_ACTORS, readFileFn, validateFn);
@@ -33,7 +40,7 @@ export const readActorData = (
 
 export const readClassData = (
   terms: TermsOfReadArrayData,
-  readFileFn: (filename: string) => Promise<string>,
+  readFileFn: (filename: typeof FILENAME_CLASSES) => Promise<string>,
   validateFn: (item: unknown) => item is Data_Class,
 ): Promise<ReadArrayResult<Data_Class>> => {
   return readArrayData(terms, FILENAME_CLASSES, readFileFn, validateFn);
@@ -41,7 +48,7 @@ export const readClassData = (
 
 export const readSkillData = (
   terms: TermsOfReadArrayData,
-  readFileFn: (filename: string) => Promise<string>,
+  readFileFn: (filename: typeof FILENAME_SKILLS) => Promise<string>,
   validateFn: (item: unknown) => item is Data_Skill,
 ): Promise<ReadArrayResult<Data_Skill>> => {
   return readArrayData(terms, FILENAME_SKILLS, readFileFn, validateFn);
@@ -49,15 +56,23 @@ export const readSkillData = (
 
 export const readItemData = (
   terms: TermsOfReadArrayData,
-  readFileFn: (filename: string) => Promise<string>,
+  readFileFn: (filename: typeof FILENAME_ITEMS) => Promise<string>,
   validateFn: (item: unknown) => item is Data_Item,
 ): Promise<ReadArrayResult<Data_Item>> => {
   return readArrayData(terms, FILENAME_ITEMS, readFileFn, validateFn);
 };
 
+export const readWeaponData = (
+  terms: TermsOfReadArrayData,
+  readFileFn: (filename: typeof FILENAME_WEAPONS) => Promise<string>,
+  validateFn: (item: unknown) => item is Data_Weapon,
+): Promise<ReadArrayResult<Data_Weapon>> => {
+  return readArrayData(terms, FILENAME_WEAPONS, readFileFn, validateFn);
+};
+
 export const readArmorData = (
   terms: TermsOfReadArrayData,
-  readFileFn: (filename: string) => Promise<string>,
+  readFileFn: (filename: typeof FILENAME_ARMORS) => Promise<string>,
   validateFn: (item: unknown) => item is Data_Armor,
 ): Promise<ReadArrayResult<Data_Armor>> => {
   return readArrayData(terms, FILENAME_ARMORS, readFileFn, validateFn);
@@ -65,15 +80,23 @@ export const readArmorData = (
 
 export const readEnemyData = (
   terms: TermsOfReadArrayData,
-  readFileFn: (filename: string) => Promise<string>,
+  readFileFn: (filename: typeof FILENAME_ENEMIES) => Promise<string>,
   validateFn: (item: unknown) => item is Data_Enemy,
 ): Promise<ReadArrayResult<Data_Enemy>> => {
   return readArrayData(terms, FILENAME_ENEMIES, readFileFn, validateFn);
 };
 
+export const readTroopData = (
+  terms: TermsOfReadArrayData,
+  readFileFn: (filename: typeof FILENAME_TROOPS) => Promise<string>,
+  validateFn: (item: unknown) => item is Data_Troop,
+): Promise<ReadArrayResult<Data_Troop>> => {
+  return readArrayData(terms, FILENAME_TROOPS, readFileFn, validateFn);
+};
+
 export const readStateData = (
   terms: TermsOfReadArrayData,
-  readFileFn: (filename: string) => Promise<string>,
+  readFileFn: (filename: typeof FILENAME_STATES) => Promise<string>,
   validateFn: (item: unknown) => item is Data_State,
 ): Promise<ReadArrayResult<Data_State>> => {
   return readArrayData(terms, FILENAME_STATES, readFileFn, validateFn);
@@ -81,15 +104,31 @@ export const readStateData = (
 
 export const readAnimationData = (
   terms: TermsOfReadArrayData,
-  readFileFn: (filename: string) => Promise<string>,
+  readFileFn: (filename: typeof FILENAME_ANIMATIONS) => Promise<string>,
   validateFn: (item: unknown) => item is Data_Animation,
 ): Promise<ReadArrayResult<Data_Animation>> => {
   return readArrayData(terms, FILENAME_ANIMATIONS, readFileFn, validateFn);
 };
 
+export const readTilesetData = (
+  terms: TermsOfReadArrayData,
+  readFileFn: (filename: typeof FILENAME_TILESET) => Promise<string>,
+  validateFn: (item: unknown) => item is Data_Tileset,
+): Promise<ReadArrayResult<Data_Tileset>> => {
+  return readArrayData(terms, FILENAME_TILESET, readFileFn, validateFn);
+};
+
+export const readCommonEventData = (
+  terms: TermsOfReadArrayData,
+  readFileFn: (filename: typeof FILENAME_COMMON_EVENTS) => Promise<string>,
+  validateFn: (item: unknown) => item is Data_CommonEvent,
+): Promise<ReadArrayResult<Data_CommonEvent>> => {
+  return readArrayData(terms, FILENAME_COMMON_EVENTS, readFileFn, validateFn);
+};
+
 export const readMapInfoData = (
   terms: TermsOfReadArrayData,
-  readFileFn: (filename: string) => Promise<string>,
+  readFileFn: (filename: typeof FILENAME_MAP_INFOS) => Promise<string>,
   validateFn: (item: unknown) => item is Data_MapInfo,
 ): Promise<ReadArrayResult<Data_MapInfo>> => {
   return readArrayData(terms, FILENAME_MAP_INFOS, readFileFn, validateFn);
