@@ -9,18 +9,18 @@ import type {
   Data_Animation,
   Data_MapInfo,
 } from "@RpgTypes/rmmz/rpg";
-import { readArrayData } from "./arrayData";
 import {
   FILENAME_ACTORS,
   FILENAME_CLASSES,
-  FILENAME_ANIMATIONS,
+  FILENAME_SKILLS,
+  FILENAME_ITEMS,
   FILENAME_ARMORS,
   FILENAME_ENEMIES,
-  FILENAME_ITEMS,
-  FILENAME_SKILLS,
   FILENAME_STATES,
+  FILENAME_ANIMATIONS,
   FILENAME_MAP_INFOS,
-} from "./constants";
+} from "@sigureya/rmmz-plugin-schema";
+import { readArrayData } from "./arrayData";
 import type { ReadArrayResult, TermsOfReadArrayData } from "./types";
 
 export const readActorData = (

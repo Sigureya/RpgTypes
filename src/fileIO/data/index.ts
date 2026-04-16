@@ -1,4 +1,2 @@
-export * from "./constants";
-export * from "./mainData";
+export * from "./arrayData";
 export * from "./map";
-export * from "./types";
