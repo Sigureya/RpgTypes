@@ -9,7 +9,7 @@ export const FILENAME_SYSTEM = "System.json";
 
 export const readSystemData = async (
   terms: TermsOfReadSystemData,
-  fileReadFn: (filename: string) => Promise<string>,
+  fileReadFn: (filename: typeof FILENAME_SYSTEM) => Promise<string>,
   handlers: HandlerOfReadSystemData,
 ): Promise<ReadSystemResult> => {
   try {
