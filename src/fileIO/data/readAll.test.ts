@@ -15,7 +15,6 @@ import type {
   Data_SystemMV,
   Data_Troop,
   Data_Weapon,
-  MapFileInfo,
 } from "@RpgTypes/rmmz";
 import {
   makeActorData,
@@ -231,7 +230,7 @@ const baseFileMap: Record<string, string | Error> = {
 
 type ConvertHandlers = RpgDataReadHandlers<
   unknown[],
-  MapFileInfo,
+  Data_Map,
   Data_System,
   unknown[],
   unknown[],
@@ -251,7 +250,7 @@ const createIdentityHandlers = (): MockedObject<ConvertHandlers> => ({
   readCommonEvents: vi.fn((data) => data),
   readEnemys: vi.fn((data) => data),
   readItems: vi.fn((data) => data),
-  readMap: vi.fn((data) => data),
+  readMap: vi.fn((data) => data.map),
   readSkills: vi.fn((data) => data),
   readStates: vi.fn((data) => data),
   readSystem: vi.fn((data) => data),
@@ -277,6 +276,43 @@ const createConvertErrorHandlers = (): MockedObject<ConvertHandlers> => ({
   readWeapons: vi.fn(errorFunc),
 });
 
+const expectConvertHandlersNotCalled = (
+  convHandlers: MockedObject<ConvertHandlers>,
+) => {
+  expect(convHandlers.readActors).not.toHaveBeenCalled();
+  expect(convHandlers.readArmors).not.toHaveBeenCalled();
+  expect(convHandlers.readClasss).not.toHaveBeenCalled();
+  expect(convHandlers.readCommonEvents).not.toHaveBeenCalled();
+  expect(convHandlers.readEnemys).not.toHaveBeenCalled();
+  expect(convHandlers.readItems).not.toHaveBeenCalled();
+  expect(convHandlers.readMap).not.toHaveBeenCalled();
+  expect(convHandlers.readSkills).not.toHaveBeenCalled();
+  expect(convHandlers.readStates).not.toHaveBeenCalled();
+  expect(convHandlers.readSystem).not.toHaveBeenCalled();
+  expect(convHandlers.readTroops).not.toHaveBeenCalled();
+  expect(convHandlers.readWeapons).not.toHaveBeenCalled();
+};
+
+const expectValidateFunctionsNotCalled = (
+  mockedValidators: MockedObject<
+    Record<keyof ValidateFunctionsOfReadRpgData, (data: unknown) => boolean>
+  >,
+) => {
+  expect(mockedValidators.validateActor).not.toHaveBeenCalled();
+  expect(mockedValidators.validateArmor).not.toHaveBeenCalled();
+  expect(mockedValidators.validateClass).not.toHaveBeenCalled();
+  expect(mockedValidators.validateCommonEvent).not.toHaveBeenCalled();
+  expect(mockedValidators.validateEnemy).not.toHaveBeenCalled();
+  expect(mockedValidators.validateItem).not.toHaveBeenCalled();
+  expect(mockedValidators.validateMap).not.toHaveBeenCalled();
+  expect(mockedValidators.validateMapInfo).not.toHaveBeenCalled();
+  expect(mockedValidators.validateSkill).not.toHaveBeenCalled();
+  expect(mockedValidators.validateState).not.toHaveBeenCalled();
+  expect(mockedValidators.validateSystem).not.toHaveBeenCalled();
+  expect(mockedValidators.validateTroop).not.toHaveBeenCalled();
+  expect(mockedValidators.validateWeapon).not.toHaveBeenCalled();
+};
+
 const runTest = (
   fn: (
     fileReadFn: (
@@ -292,31 +328,8 @@ const runTest = (
     const mockedValidators = createMockedValidateFunctions(true);
     const handlers = lapXX(mockedValidators);
     await fn(fileReadFn, convHandlers, handlers);
-    expect(convHandlers.readActors).not.toHaveBeenCalled();
-    expect(convHandlers.readArmors).not.toHaveBeenCalled();
-    expect(convHandlers.readClasss).not.toHaveBeenCalled();
-    expect(convHandlers.readCommonEvents).not.toHaveBeenCalled();
-    expect(convHandlers.readEnemys).not.toHaveBeenCalled();
-    expect(convHandlers.readItems).not.toHaveBeenCalled();
-    expect(convHandlers.readMap).not.toHaveBeenCalled();
-    expect(convHandlers.readSkills).not.toHaveBeenCalled();
-    expect(convHandlers.readStates).not.toHaveBeenCalled();
-    expect(convHandlers.readSystem).not.toHaveBeenCalled();
-    expect(convHandlers.readTroops).not.toHaveBeenCalled();
-    expect(convHandlers.readWeapons).not.toHaveBeenCalled();
-    expect(mockedValidators.validateActor).not.toHaveBeenCalled();
-    expect(mockedValidators.validateArmor).not.toHaveBeenCalled();
-    expect(mockedValidators.validateClass).not.toHaveBeenCalled();
-    expect(mockedValidators.validateCommonEvent).not.toHaveBeenCalled();
-    expect(mockedValidators.validateEnemy).not.toHaveBeenCalled();
-    expect(mockedValidators.validateItem).not.toHaveBeenCalled();
-    expect(mockedValidators.validateMap).not.toHaveBeenCalled();
-    expect(mockedValidators.validateMapInfo).not.toHaveBeenCalled();
-    expect(mockedValidators.validateSkill).not.toHaveBeenCalled();
-    expect(mockedValidators.validateState).not.toHaveBeenCalled();
-    expect(mockedValidators.validateSystem).not.toHaveBeenCalled();
-    expect(mockedValidators.validateTroop).not.toHaveBeenCalled();
-    expect(mockedValidators.validateWeapon).not.toHaveBeenCalled();
+    expectConvertHandlersNotCalled(convHandlers);
+    expectValidateFunctionsNotCalled(mockedValidators);
   });
 };
 
@@ -329,38 +342,93 @@ describe("readAllGameDataAsArrayFallback", () => {
       convHandlers,
     );
   });
+  describe("正常系", () => {
+    test("ハンドラが適切に呼び出されている", async () => {
+      const fileReadFn = createReadFileFn(baseFileMap);
+      const convHandlers = createIdentityHandlers();
+      const mockedValidators = createMockedValidateFunctions(true);
 
-  test("正常系で各データを変換して返す", async () => {
-    const fileReadFn = createReadFileFn(baseFileMap);
-    const convHandlers = createIdentityHandlers();
-    const mockedValidators = createMockedValidateFunctions(true);
+      await readAllGameDataAsArrayFallback(
+        terms,
+        fileReadFn,
+        lapXX(mockedValidators),
+        convHandlers,
+      );
+    });
+    test("各データを変換して返す", async () => {
+      const fileReadFn = createReadFileFn(baseFileMap);
+      const convHandlers = createIdentityHandlers();
+      const mockedValidators = createMockedValidateFunctions(true);
 
-    const result = await readAllGameDataAsArrayFallback(
-      terms,
-      fileReadFn,
-      lapXX(mockedValidators),
-      convHandlers,
-    );
+      const result = await readAllGameDataAsArrayFallback(
+        terms,
+        fileReadFn,
+        lapXX(mockedValidators),
+        convHandlers,
+      );
 
-    expect(result.actor).toEqual(baseData.actor);
-    expect(result.armor).toEqual(baseData.armor);
-    expect(result.classes).toEqual(baseData.classes);
-    expect(result.commonEvent).toEqual(baseData.commonEvent);
-    expect(result.enemies).toEqual(baseData.enemies);
-    expect(result.item).toEqual(baseData.item);
-    expect(result.mapInfo).toEqual(baseData.mapInfo);
-    expect(result.skill).toEqual(baseData.skill);
-    expect(result.state).toEqual(baseData.state);
-    expect(result.system).toEqual(baseData.system);
-    expect(result.troop).toEqual(baseData.troop);
-    expect(result.weapon).toEqual(baseData.weapon);
-    expect(result.mapFiles).toEqual(baseData.mapFiles);
-    expect(convHandlers.readSystem).toHaveBeenCalledWith(
-      baseData.system.system,
-      FILENAME_SYSTEM,
-    );
+      expect(result.actor).toEqual(baseData.actor);
+      expect(result.armor).toEqual(baseData.armor);
+      expect(result.classes).toEqual(baseData.classes);
+      expect(result.commonEvent).toEqual(baseData.commonEvent);
+      expect(result.enemies).toEqual(baseData.enemies);
+      expect(result.item).toEqual(baseData.item);
+      expect(result.mapInfo).toEqual(baseData.mapInfo);
+      expect(result.skill).toEqual(baseData.skill);
+      expect(result.state).toEqual(baseData.state);
+      expect(result.system).toEqual(baseData.system);
+      expect(result.troop).toEqual(baseData.troop);
+      expect(result.weapon).toEqual(baseData.weapon);
+      expect(result.mapFiles).toEqual(baseData.mapFiles);
+      expect(convHandlers.readSystem).toHaveBeenCalledWith(
+        baseData.system.system,
+        FILENAME_SYSTEM,
+      );
+    });
+
+    test("map handler が MapFileInfo を返す実装でもネストした map を許容する", async () => {
+      const fileReadFn = createReadFileFn(baseFileMap);
+      const mockedValidators = createMockedValidateFunctions(true);
+      const convHandlers: RpgDataReadHandlers<
+        unknown[],
+        Data_Map,
+        Data_System,
+        unknown[],
+        unknown[],
+        unknown[],
+        unknown[],
+        unknown[],
+        unknown[],
+        unknown[],
+        unknown[],
+        unknown[]
+      > = {
+        readActors: (data) => data,
+        readArmors: (data) => data,
+        readClasss: (data) => data,
+        readCommonEvents: (data) => data,
+        readEnemys: (data) => data,
+        readItems: (data) => data,
+        readMap: (data) => data.map,
+        readSkills: (data) => data,
+        readStates: (data) => data,
+        readSystem: (data) => data,
+        readTroops: (data) => data,
+        readWeapons: (data) => data,
+      };
+
+      const expectedMaps = baseData.mapFiles.validMaps;
+      const result = await readAllGameDataAsArrayFallback(
+        terms,
+        fileReadFn,
+        lapXX(mockedValidators),
+        convHandlers,
+      );
+
+      expect(result.mapFiles.validMaps).toHaveLength(1);
+      expect(result.mapFiles.validMaps).toEqual(expectedMaps);
+    });
   });
-
   test("変換で失敗したら配列フォールバックになる", async () => {
     const fileReadFn = createReadFileFn(baseFileMap);
     const mockedValidators = createMockedValidateFunctions(true);
@@ -448,5 +516,11 @@ describe("readAllRowGameData", () => {
     );
 
     expect(result).toEqual(baseData);
+  });
+  test("全てのファイル読み込みを失敗させ、validateは呼ばれない", async () => {
+    const fileReadFn = vi.fn(() => Promise.reject());
+    const mockedValidators = createMockedValidateFunctions(true);
+    await readAllRowGameData(fileReadFn, lapXX(mockedValidators), terms);
+    expectValidateFunctionsNotCalled(mockedValidators);
   });
 });

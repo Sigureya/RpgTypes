@@ -43,6 +43,7 @@ export interface ReadAllDataResultFields {
 
 export interface ReadAllGameDataResult<
   Commmon,
+  Map,
   System,
   Actor,
   Skill,
@@ -66,10 +67,12 @@ export interface ReadAllGameDataResult<
   system: ReadSystemResult<System>;
   troop: ReadHandledResult<Troop>;
   weapon: ReadHandledResult<Weapon>;
+  mapFiles: MapFiles<Map>;
 }
 
 export interface ReadAllGameDataResultWithNullFallback<
   Commmon,
+  Map,
   System,
   Actor,
   Skill,
@@ -93,6 +96,7 @@ export interface ReadAllGameDataResultWithNullFallback<
   system: ReadSystemResult<System>;
   troop: ReadHandledResult<Troop, null>;
   weapon: ReadHandledResult<Weapon, null>;
+  mapFiles: MapFiles<Map>;
 }
 
 export interface RowGameData extends ReadAllDataResultFields {

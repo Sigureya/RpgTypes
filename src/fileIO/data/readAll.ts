@@ -45,7 +45,7 @@ export const readAllRowGameData = async (
     terms,
     readFileFn,
     {
-      readMap: (m): Data_Map => m.map,
+      readMap: pickMapData,
       readActors: identity,
       readArmors: identity,
       readClasss: identity,
@@ -62,6 +62,8 @@ export const readAllRowGameData = async (
     () => [],
   );
 };
+
+const pickMapData = (map: MapFileInfo<Data_Map>): Data_Map => map.map;
 
 const identity = <T>(data: T): T => data;
 
@@ -99,6 +101,7 @@ export const readAllGameDataAsArrayFallback = <
 ): Promise<
   ReadAllGameDataResult<
     Commmon[],
+    Map,
     System,
     Actor[],
     Skill[],
@@ -154,6 +157,7 @@ export const readAllGameDataAsNullFallback = <
 ): Promise<
   ReadAllGameDataResultWithNullFallback<
     Commmon,
+    Map,
     System,
     Actor,
     Skill,
