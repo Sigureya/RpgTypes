@@ -44,13 +44,14 @@ const vvv = (
   handlers: HandlerOfReadSystemData,
 ): ReadSystemResult => {
   try {
-    if (handlers.validateMz(data)) {
+    if (handlers.validateSystemMz(data)) {
       return {
         system: data,
         message: "",
       };
     }
-    if (handlers.validateMv(data)) {
+
+    if (handlers.validateSystemMv && handlers.validateSystemMv(data)) {
       return {
         system: makeSystemDataFromMV(data),
         message: terms.mvAsMz,
