@@ -12,7 +12,7 @@ import type {
   Data_Weapon,
 } from "@RpgTypes/rmmz";
 import type { ReadArrayResult } from "./arrayData";
-import type { ReadSystemResult, ReadSystemResultEx } from "./system";
+import type { ReadSystemResult } from "./system";
 
 export interface ReadHandledResult<T> {
   succcess: boolean;
@@ -45,7 +45,7 @@ export interface ReadAllGameDataResult<
   mapInfo: ReadArrayResult<Data_MapInfo>;
   skill: ReadHandledArrayResult<Skill>;
   state: ReadHandledArrayResult<State>;
-  system: ReadSystemResultEx<System>;
+  system: ReadSystemResult<System>;
   troop: ReadHandledArrayResult<Troop>;
   weapon: ReadHandledArrayResult<Weapon>;
 }
