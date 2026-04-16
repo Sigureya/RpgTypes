@@ -28,8 +28,8 @@ const mvData: Data_SystemMV = makeSystemDataMV(mzData);
 const makeHandlers = (
   overrides: Partial<HandlerOfReadSystemData> = {},
 ): HandlerOfReadSystemData => ({
-  validateMz: (item): item is Data_System => false,
-  validateMv: (item): item is Data_SystemMV => false,
+  validateSystemMz: (item): item is Data_System => false,
+  validateSystemMv: (item): item is Data_SystemMV => false,
   ...overrides,
 });
 
@@ -71,7 +71,7 @@ describe("readSystemData", () => {
   test("MZ バリデーション成功時は system を返し message は空文字", async () => {
     const fileReadFn = vi.fn(async () => JSON.stringify(mzData));
     const handlers = makeHandlers({
-      validateMz: (item): item is Data_System => true,
+      validateSystemMz: (item): item is Data_System => true,
     });
 
     const expected: ReadSystemResult = { system: mzData, message: "" };
@@ -85,8 +85,8 @@ describe("readSystemData", () => {
     const validateMz = vi.fn((_: unknown): _ is Data_System => false);
     const validateMv = vi.fn((_: unknown): _ is Data_SystemMV => true);
     const handlers = makeHandlers({
-      validateMv: (v): v is Data_SystemMV => validateMv(v),
-      validateMz: (v): v is Data_System => validateMz(v),
+      validateSystemMv: (v): v is Data_SystemMV => validateMv(v),
+      validateSystemMz: (v): v is Data_System => validateMz(v),
     });
 
     const expected: ReadSystemResult = {
@@ -116,7 +116,7 @@ describe("readSystemData", () => {
   test("バリデーション関数が例外を投げた場合は validateFunctionError を返す", async () => {
     const fileReadFn = vi.fn(async () => JSON.stringify(mzData));
     const handlers = makeHandlers({
-      validateMz: (v): v is Data_System => {
+      validateSystemMz: (v): v is Data_System => {
         throw new Error("unexpected");
       },
     });

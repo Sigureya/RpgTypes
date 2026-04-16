@@ -1,8 +1,8 @@
 import type { Data_System, Data_SystemMV } from "@RpgTypes/rmmz";
 
 export interface HandlerOfReadSystemData {
-  validateMz: (item: unknown) => item is Data_System;
-  validateMv: (item: unknown) => item is Data_SystemMV;
+  validateSystemMz: (item: unknown) => item is Data_System;
+  validateSystemMv?: (item: unknown) => item is Data_SystemMV;
 }
 
 export interface TermsOfReadSystemData {
@@ -13,7 +13,7 @@ export interface TermsOfReadSystemData {
   validateFunctionError: string;
 }
 
-export interface ReadSystemResult {
-  system: Data_System | null;
+export interface ReadSystemResult<T = Data_System> {
+  system: T | null;
   message: string;
 }

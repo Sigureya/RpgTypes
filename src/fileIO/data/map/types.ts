@@ -1,8 +1,11 @@
 import type { MapFileInfo } from "@RpgTypes/rmmz";
 
+export type MapFileNameWithExt = `Map${string}.json`;
+
 export interface MapInfoReadResult {
   message: string;
   filename: string;
+  success: false;
 }
 
 export interface MapFiles<T> {
