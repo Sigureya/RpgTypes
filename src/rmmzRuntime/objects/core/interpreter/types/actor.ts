@@ -3,7 +3,8 @@ export interface Rmmz_InterpreterBattler<Actor, Enemy> {
   iterateActorEx(
     mode: number,
     dataId: number,
-    callBack: (actor: Actor) => void
+    callBack: (actor: Actor) => void,
   ): void;
   iterateEnemyIndex(enemyId: number, callBack: (enemy: Enemy) => void): void;
+  changeHp(target: Actor | Enemy, value: number, allowDeath: boolean): void;
 }
