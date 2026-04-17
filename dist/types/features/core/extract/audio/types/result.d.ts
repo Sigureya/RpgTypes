@@ -1,4 +1,4 @@
-import { AudioFolders } from '../../../../../fileIO';
+import { AudioFolders } from '../../../../../fileio';
 import { AudioFileParams } from '../../../../../libs';
 import { CommandParameter, CommandUnion_AnyAudio, Data_CommonEvent, Data_Map, Data_Troop, EventCommand, NoteReadResult } from '../../../../../rmmz';
 import { ExtractedAudioBase } from './base';

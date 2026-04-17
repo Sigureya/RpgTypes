@@ -1,4 +1,4 @@
-import { ImageFolders } from '../../../../fileIO/image';
+import { ImageFolders } from '../../../../fileio';
 import { Data_System, Data_Vehicle } from '../../../../rmmz/system';
 export interface ExtractedSystemImage {
     folder: ImageFolders;

@@ -1,4 +1,4 @@
-import { AudioFolders } from '../../../../../fileIO';
+import { AudioFolders } from '../../../../../fileio';
 import { PLUGIN_COMMAND_MZ } from '../../../../../libs';
 import { PluginCommandParameter } from '../../../../../rmmz';
 import { ExtractedAudioBase } from './base';
