@@ -1,3 +1,7 @@
+import type * as Name from "./constants";
+
+export type MainDataFileNames = (typeof Name)[keyof typeof Name];
+
 export interface TermsOfReadArrayData {
   jsonParseError: string;
   notArray: string;

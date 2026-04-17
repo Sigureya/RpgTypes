@@ -2,6 +2,7 @@ import type { MockedObject } from "vitest";
 import { describe, expect, test, vi } from "vitest";
 import type {
   Data_Actor,
+  Data_Animation,
   Data_Armor,
   Data_Class,
   Data_CommonEvent,
@@ -13,6 +14,7 @@ import type {
   Data_State,
   Data_System,
   Data_SystemMV,
+  Data_Tileset,
   Data_Troop,
   Data_Weapon,
 } from "@RpgTypes/rmmz";
@@ -88,6 +90,8 @@ const createMockedValidateFunctions = (
   validateSystemMV: vi.fn(() => value),
   validateTroop: vi.fn(() => value),
   validateWeapon: vi.fn(() => value),
+  validateAnimation: vi.fn(() => value),
+  validateTileset: vi.fn(() => value),
 });
 
 const lapXX = (
@@ -111,6 +115,9 @@ const lapXX = (
     mocked.validateSystemMV ? mocked.validateSystemMV(item) : false,
   validateTroop: (item): item is Data_Troop => mocked.validateTroop(item),
   validateWeapon: (item): item is Data_Weapon => mocked.validateWeapon(item),
+  validateAnimation: (item): item is Data_Animation =>
+    mocked.validateAnimation(item),
+  validateTileset: (item): item is Data_Tileset => mocked.validateTileset(item),
 });
 
 const createReadFileFn = (
@@ -210,9 +217,21 @@ const baseData = {
     ],
     invalidMaps: [],
   },
+  animations: {
+    succcess: true,
+    fileName: "Animations.json",
+    error: "",
+    data: [],
+  },
+  tilesets: {
+    succcess: true,
+    fileName: "Tilesets.json",
+    error: "",
+    data: [],
+  },
 } as const satisfies RowGameData;
 
-const baseFileMap: Record<string, string | Error> = {
+const baseFileMap: Record<string, string> = {
   [baseData.actor.fileName]: JSON.stringify(baseData.actor.data),
   [baseData.armor.fileName]: JSON.stringify(baseData.armor.data),
   [baseData.classes.fileName]: JSON.stringify(baseData.classes.data),
@@ -225,6 +244,8 @@ const baseFileMap: Record<string, string | Error> = {
   [baseData.troop.fileName]: JSON.stringify(baseData.troop.data),
   [baseData.weapon.fileName]: JSON.stringify(baseData.weapon.data),
   [FILENAME_SYSTEM]: JSON.stringify(baseData.system.system),
+  [baseData.animations.fileName]: JSON.stringify(baseData.animations.data),
+  [baseData.tilesets.fileName]: JSON.stringify(baseData.tilesets.data),
   "Map001.json": JSON.stringify(baseData.mapFiles.validMaps[0].map),
 };
 
@@ -232,6 +253,8 @@ type ConvertHandlers = RpgDataReadHandlers<
   unknown[],
   Data_Map,
   Data_System,
+  unknown[],
+  unknown[],
   unknown[],
   unknown[],
   unknown[],
@@ -256,6 +279,8 @@ const createIdentityHandlers = (): MockedObject<ConvertHandlers> => ({
   readSystem: vi.fn((data) => data),
   readTroops: vi.fn((data) => data),
   readWeapons: vi.fn((data) => data),
+  readAnimations: vi.fn((data) => data),
+  readTilesets: vi.fn((data) => data),
 });
 
 const errorFunc = () => {
@@ -274,6 +299,8 @@ const createConvertErrorHandlers = (): MockedObject<ConvertHandlers> => ({
   readSystem: vi.fn(errorFunc),
   readTroops: vi.fn(errorFunc),
   readWeapons: vi.fn(errorFunc),
+  readAnimations: vi.fn(errorFunc),
+  readTilesets: vi.fn(errorFunc),
 });
 
 const expectConvertHandlersNotCalled = (
@@ -401,6 +428,8 @@ describe("readAllGameDataAsArrayFallback", () => {
         unknown[],
         unknown[],
         unknown[],
+        unknown[],
+        unknown[],
         unknown[]
       > = {
         readActors: (data) => data,
@@ -415,6 +444,8 @@ describe("readAllGameDataAsArrayFallback", () => {
         readSystem: (data) => data,
         readTroops: (data) => data,
         readWeapons: (data) => data,
+        readAnimations: (data) => data,
+        readTilesets: (data) => data,
       };
 
       const expectedMaps = baseData.mapFiles.validMaps;

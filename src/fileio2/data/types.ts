@@ -1,9 +1,7 @@
-import type * as Name from "./arrayData/constants/fileNames";
+import type { MainDataFileNames } from "./arrayData";
 import type { FILENAME_SYSTEM } from "./system";
 
-export type DataFileNames =
-  | (typeof Name)[keyof typeof Name]
-  | typeof FILENAME_SYSTEM;
+export type DataFileNames = MainDataFileNames | typeof FILENAME_SYSTEM;
 
 export interface ErrorItem {
   fileName: string;
