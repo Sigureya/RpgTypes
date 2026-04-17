@@ -67,7 +67,7 @@ const pickMapData = (map: MapFileInfo<Data_Map>): Data_Map => map.map;
 
 const identity = <T>(data: T): T => data;
 
-export const readAllGameDataAsArrayFallback = <
+export const readAllGameDataWithArrayFallback = <
   Common,
   Map,
   System,
@@ -129,7 +129,7 @@ export const readAllGameDataAsArrayFallback = <
   );
 };
 
-export const readAllGameDataAsNullFallback = <
+export const readAllGameDataWithNullFallback = <
   Common,
   Map,
   System,
@@ -270,14 +270,14 @@ const readAllGameDataWithFallback = async <
   ]);
   return {
     mapFiles: mapInfo.success
-      ? await convertMapData(
+      ? await readMapBatchData(
           mapInfo.data,
           terms,
           handles,
           readFileFn,
           validateFunctions.validateMap,
         )
-      : mapInfosFailed<Map>(mapInfo),
+      : createFailedMapBatchResult<Map>(mapInfo),
     actor: convertIfSuccess(actor, terms, handles.readActors, makeEmptyValue),
     armor: convertIfSuccess(armor, terms, handles.readArmors, makeEmptyValue),
     classes: convertIfSuccess(
@@ -328,7 +328,7 @@ interface MapReader<T> {
   readMap(map: MapFileInfo): T;
 }
 
-const mapInfosFailed = <T>(
+const createFailedMapBatchResult = <T>(
   infos: ReadArrayResult<Data_MapInfo>,
 ): MapBatchReadResult<T> => ({
   info: {
@@ -340,7 +340,7 @@ const mapInfosFailed = <T>(
   invalidMaps: [],
 });
 
-const convertMapData = async <T>(
+const readMapBatchData = async <T>(
   mapInfos: Data_MapInfo[],
   terms: ReadAllDataErrorMessages,
   handles: MapReader<T>,

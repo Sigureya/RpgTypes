@@ -1,6 +1,6 @@
 import type { RpgDataReadHandlers } from "./handlers";
 
-export const createGameDataReadHandlers = <
+export const defineGameDataReadHandlers = <
   Common,
   Map,
   System,

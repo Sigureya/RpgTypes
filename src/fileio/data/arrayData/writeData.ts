@@ -16,7 +16,7 @@ import {
 } from "./constants/fileNames";
 import type { MainDataIdentifiedItems, MainDataFileNames } from "./types";
 
-const writeData = <T>(
+const writeMainDataFile = <T>(
   filename: MainDataFileNames,
   items: IdentifiedItems<T>,
   fileWriteFn: (filename: MainDataFileNames, json: string) => Promise<void>,
@@ -30,18 +30,18 @@ export const writeMainData = (
   fileWriteFn: (filename: MainDataFileNames, json: string) => Promise<void>,
 ): Promise<void[]> => {
   return Promise.all([
-    writeData(FILENAME_ACTORS, data.actors, fileWriteFn),
-    writeData(FILENAME_CLASSES, data.classes, fileWriteFn),
-    writeData(FILENAME_SKILLS, data.skills, fileWriteFn),
-    writeData(FILENAME_ITEMS, data.items, fileWriteFn),
-    writeData(FILENAME_WEAPONS, data.weapons, fileWriteFn),
-    writeData(FILENAME_ARMORS, data.armors, fileWriteFn),
-    writeData(FILENAME_ENEMIES, data.enemies, fileWriteFn),
-    writeData(FILENAME_TROOPS, data.troops, fileWriteFn),
-    writeData(FILENAME_STATES, data.states, fileWriteFn),
-    writeData(FILENAME_ANIMATIONS, data.animations, fileWriteFn),
-    writeData(FILENAME_TILESET, data.tilesets, fileWriteFn),
-    writeData(FILENAME_COMMON_EVENTS, data.commonEvents, fileWriteFn),
-    writeData(FILENAME_MAP_INFOS, data.mapInfos, fileWriteFn),
+    writeMainDataFile(FILENAME_ACTORS, data.actors, fileWriteFn),
+    writeMainDataFile(FILENAME_CLASSES, data.classes, fileWriteFn),
+    writeMainDataFile(FILENAME_SKILLS, data.skills, fileWriteFn),
+    writeMainDataFile(FILENAME_ITEMS, data.items, fileWriteFn),
+    writeMainDataFile(FILENAME_WEAPONS, data.weapons, fileWriteFn),
+    writeMainDataFile(FILENAME_ARMORS, data.armors, fileWriteFn),
+    writeMainDataFile(FILENAME_ENEMIES, data.enemies, fileWriteFn),
+    writeMainDataFile(FILENAME_TROOPS, data.troops, fileWriteFn),
+    writeMainDataFile(FILENAME_STATES, data.states, fileWriteFn),
+    writeMainDataFile(FILENAME_ANIMATIONS, data.animations, fileWriteFn),
+    writeMainDataFile(FILENAME_TILESET, data.tilesets, fileWriteFn),
+    writeMainDataFile(FILENAME_COMMON_EVENTS, data.commonEvents, fileWriteFn),
+    writeMainDataFile(FILENAME_MAP_INFOS, data.mapInfos, fileWriteFn),
   ]);
 };

@@ -3,7 +3,7 @@ import type { DataReadErrors, DataReadErrorItem } from "./types";
 
 export const correctErrors = (data: ReadGameDataUnknown): DataReadErrors => {
   return {
-    main: mainError(data),
+    main: mainReadErrors(data),
     map: data.mapFiles.invalidMaps.map(
       (m): DataReadErrorItem => ({
         fileName: m.filename,
@@ -13,7 +13,7 @@ export const correctErrors = (data: ReadGameDataUnknown): DataReadErrors => {
   };
 };
 
-const mainError = (data: ReadGameDataUnknown): DataReadErrorItem[] => {
+const mainReadErrors = (data: ReadGameDataUnknown): DataReadErrorItem[] => {
   const main: DataReadErrorItem[] = [
     data.actor,
     data.armor,

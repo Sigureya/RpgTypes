@@ -48,8 +48,8 @@ import {
 } from "./arrayData";
 import type { MapFileNameWithExt } from "./map";
 import {
-  readAllGameDataAsArrayFallback,
-  readAllGameDataAsNullFallback,
+  readAllGameDataWithArrayFallback,
+  readAllGameDataWithNullFallback,
   readAllRawGameData,
 } from "./readAll";
 import type { RpgDataReadHandlers, RpgDataValidators } from "./reader/handlers";
@@ -359,7 +359,7 @@ const runTest = (
 
 describe("readAllGameDataAsArrayFallback", () => {
   runTest(async (fileReadFn, convHandlers, mockedValidators) => {
-    return readAllGameDataAsArrayFallback(
+    return readAllGameDataWithArrayFallback(
       terms,
       fileReadFn,
       mockedValidators,
@@ -372,7 +372,7 @@ describe("readAllGameDataAsArrayFallback", () => {
       const convHandlers = createIdentityHandlers();
       const mockedValidators = createMockedValidateFunctions(true);
 
-      await readAllGameDataAsArrayFallback(
+      await readAllGameDataWithArrayFallback(
         terms,
         fileReadFn,
         createValidateFunctions(mockedValidators),
@@ -384,7 +384,7 @@ describe("readAllGameDataAsArrayFallback", () => {
       const convHandlers = createIdentityHandlers();
       const mockedValidators = createMockedValidateFunctions(true);
 
-      const result = await readAllGameDataAsArrayFallback(
+      const result = await readAllGameDataWithArrayFallback(
         terms,
         fileReadFn,
         createValidateFunctions(mockedValidators),
@@ -446,7 +446,7 @@ describe("readAllGameDataAsArrayFallback", () => {
       };
 
       const expectedMaps = baseData.mapFiles.validMaps;
-      const result = await readAllGameDataAsArrayFallback(
+      const result = await readAllGameDataWithArrayFallback(
         terms,
         fileReadFn,
         createValidateFunctions(mockedValidators),
@@ -463,7 +463,7 @@ describe("readAllGameDataAsArrayFallback", () => {
     const convHandlers = createIdentityHandlers();
     convHandlers.readActors.mockImplementation(errorFunc);
 
-    const result = await readAllGameDataAsArrayFallback(
+    const result = await readAllGameDataWithArrayFallback(
       terms,
       fileReadFn,
       createValidateFunctions(mockedValidators),
@@ -484,7 +484,7 @@ describe("readAllGameDataAsArrayFallback", () => {
     const convHandlers = createIdentityHandlers();
     const mockedValidators = createMockedValidateFunctions(true);
 
-    const result = await readAllGameDataAsArrayFallback(
+    const result = await readAllGameDataWithArrayFallback(
       terms,
       fileReadFn,
       createValidateFunctions(mockedValidators),
@@ -505,7 +505,7 @@ describe("readAllGameDataAsArrayFallback", () => {
 
 describe("readAllGameDataAsNullFallback", () => {
   runTest(async (fileReadFn, convHandlers, mockedValidators) => {
-    return readAllGameDataAsNullFallback(
+    return readAllGameDataWithNullFallback(
       terms,
       fileReadFn,
       mockedValidators,
@@ -519,7 +519,7 @@ describe("readAllGameDataAsNullFallback", () => {
     const convHandlers = createIdentityHandlers();
     convHandlers.readActors.mockImplementation(errorFunc);
 
-    const result = await readAllGameDataAsNullFallback(
+    const result = await readAllGameDataWithNullFallback(
       terms,
       fileReadFn,
       createValidateFunctions(mockedValidators),
