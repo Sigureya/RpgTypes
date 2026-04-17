@@ -112,6 +112,8 @@ export interface ReadGameDataResultNullable<
   Class,
   State,
   Troop,
+  Animation,
+  Tileset,
 > extends ReadAllDataFields {
   actor: ReadHandledResult<Actor, null>;
   armor: ReadHandledResult<Armor, null>;
@@ -126,6 +128,8 @@ export interface ReadGameDataResultNullable<
   troop: ReadHandledResult<Troop, null>;
   weapon: ReadHandledResult<Weapon, null>;
   mapFiles: MapBatchReadResult<Map>;
+  animations: ReadHandledResult<Animation, null>;
+  tilesets: ReadHandledResult<Tileset, null>;
 }
 
 export interface RawGameData extends ReadAllDataFields {

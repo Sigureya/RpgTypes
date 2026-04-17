@@ -53,7 +53,7 @@ import {
   readAllRawGameData,
 } from "./readAll";
 import type { RpgDataReadHandlers, RpgDataValidators } from "./reader/handlers";
-import type { ReadAllDataFields, RawGameData } from "./resultType";
+import type { RawGameData, ReadAllDataFields } from "./resultType";
 import { FILENAME_SYSTEM } from "./system";
 import type { ReadAllDataErrorMessages } from "./terms";
 import type { DataFileNames } from "./types";

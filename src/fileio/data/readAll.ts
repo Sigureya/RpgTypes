@@ -25,7 +25,6 @@ import { readMapFilesFromInfoEx } from "./map";
 import type { RpgDataReadHandlers, RpgDataValidators } from "./reader/handlers";
 import type {
   RawGameData,
-  ReadAllDataFields,
   ReadGameDataResult,
   ReadGameDataResultNullable,
   ReadHandledResult,
@@ -178,7 +177,9 @@ export const readAllGameDataAsNullFallback = <
     Enemy,
     Class,
     State,
-    Troop
+    Troop,
+    Animation,
+    Tileset
   >
 > => {
   return readAllGameDataWithFallback(
@@ -321,7 +322,7 @@ const readAllGameDataWithFallback = async <
       handles.readTilesets,
       makeEmptyValue,
     ),
-  } satisfies Record<keyof ReadAllDataFields, unknown>;
+  } satisfies Record<keyof RawGameData, unknown>;
 };
 interface MapReader<T> {
   readMap(map: MapFileInfo): T;
