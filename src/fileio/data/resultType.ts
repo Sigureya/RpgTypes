@@ -20,7 +20,7 @@ import type { ReadSystemResult } from "./system";
 
 export interface ReadHandledResult<
   T,
-  NullValue = T extends unknown[] ? [] : null,
+  NullValue = T extends unknown[] ? [] : T extends object ? null : never,
 > {
   success: boolean;
   fileName: string;
@@ -48,7 +48,7 @@ export interface ReadAllDataFields {
   animations: unknown;
 }
 
-export interface ReadAllDataFields3 {
+export interface ReadGameDataUnknown extends ReadAllDataFields {
   actor: ReadHandledResult<unknown>;
   armor: ReadHandledResult<unknown>;
   classes: ReadHandledResult<unknown>;
@@ -65,8 +65,6 @@ export interface ReadAllDataFields3 {
   animations: ReadHandledResult<unknown>;
   tilesets: ReadHandledResult<unknown>;
 }
-
-export type ReadGameDataUnknown = ReadAllDataFields3;
 
 export interface ReadGameDataResult<
   Common,
