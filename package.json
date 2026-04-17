@@ -13,27 +13,27 @@
       "require": "./dist/main/main.cjs.js"
     },
     "./features": {
-      "types": "./dist/features/index.d.ts",
+      "types": "./dist/types/features/index.d.ts",
       "import": "./dist/features/features.es.js",
       "require": "./dist/features/features.cjs.js"
     },
     "./libs": {
-      "types": "./dist/libs/index.d.ts",
+      "types": "./dist/types/libs/index.d.ts",
       "import": "./dist/libs/libs.es.js",
       "require": "./dist/libs/libs.cjs.js"
     },
     "./rmmz": {
-      "types": "./dist/rmmz/index.d.ts",
+      "types": "./dist/types/rmmz/index.d.ts",
       "import": "./dist/rmmz/rmmz.es.js",
       "require": "./dist/rmmz/rmmz.cjs.js"
     },
     "./rmmz/plugin": {
-      "types": "./dist/rmmz/plugin/index.d.ts",
+      "types": "./dist/types/rmmz/plugin/index.d.ts",
       "import": "./dist/rmmz/plugin.es.js",
       "require": "./dist/rmmz/plugin.cjs.js"
     },
     "./validate": {
-      "types": "./dist/validate/index.d.ts",
+      "types": "./dist/types/validate/index.d.ts",
       "import": "./dist/validate/validate.es.js",
       "require": "./dist/validate/validate.cjs.js"
     },
