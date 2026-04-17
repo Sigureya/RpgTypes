@@ -1,5 +1,5 @@
-import { TermsOfReadArrayData } from './arrayData';
-import { TermsOfReadSystemData } from './system';
-export interface TermsOfReadAllData extends TermsOfReadArrayData, TermsOfReadSystemData {
+import { ArrayDataErrorMessages } from './arrayData';
+import { SystemDataErrorMessages } from './system';
+export interface ReadAllDataErrorMessages extends ArrayDataErrorMessages, SystemDataErrorMessages {
     dataConvertError: string;
 }

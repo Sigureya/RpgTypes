@@ -1,35 +1,24 @@
 import { MapFileInfo } from '../../../rmmz';
 export type MapFileNameWithExt = `Map${string}.json`;
-export interface MapInfoReadResult {
+export interface MapInfoReadFailure {
     message: string;
     filename: string;
     success: false;
 }
-export interface MapFiles<T> {
-    info: MapInfoReadResult | {
+export interface MapBatchReadResult<T> {
+    info: MapInfoReadFailure | {
         success: true;
     };
     validMaps: MapFileInfo<T>[];
-    invalidMaps: MapReadFailed[];
+    invalidMaps: SingleMapReadFailure[];
 }
-export interface MapInfoReadFailed {
-    success: false;
-    mapId: number;
-    message: string;
-    filename: string;
-}
-export interface MapReadSuccess<T> {
-    map: T;
-    filename: MapFileInfo["filename"];
-    editingName: string;
-}
-export interface MapReadFailed {
+export interface SingleMapReadFailure {
     map: null;
     message: string;
     filename: string;
     editingName: string;
 }
-export interface MapReadTerms {
+export interface MapReadErrorMessages {
     jsonParseError: string;
     invalidStructure: string;
     fileNotFound: string;

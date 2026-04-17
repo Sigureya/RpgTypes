@@ -1,3 +1,3 @@
-import { ReadAllGameDataResultUnknown } from './resultType';
+import { ReadGameDataUnknown } from './resultType';
 import { DataReadErrors } from './types';
-export declare const correctError: (data: ReadAllGameDataResultUnknown) => DataReadErrors;
+export declare const summarizeReadErrors: (data: ReadGameDataUnknown) => DataReadErrors;
