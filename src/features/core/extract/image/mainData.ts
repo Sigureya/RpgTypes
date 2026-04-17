@@ -1,4 +1,4 @@
-import type { ImageFolders } from "@RpgTypes/fileio4";
+import type { ImageFolders } from "@RpgTypes/fileio";
 import type { Data_Actor, Data_Enemy } from "@RpgTypes/rmmz/rpg";
 
 export interface ExtractedEnemyImage {

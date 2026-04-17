@@ -13,8 +13,8 @@ import {
   FILENAME_TILESET,
   FILENAME_TROOPS,
   FILENAME_WEAPONS,
-} from "@RpgTypes/fileio4";
-import { FILENAME_SYSTEM } from "@RpgTypes/fileio4/data/system";
+  FILENAME_SYSTEM,
+} from "@RpgTypes/fileio";
 import {
   makeActorData,
   makeArmorData,
