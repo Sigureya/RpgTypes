@@ -15,7 +15,7 @@ import type {
   Data_Weapon,
 } from "@RpgTypes/rmmz";
 import type { ReadArrayResult } from "./arrayData";
-import type { MapFiles } from "./map";
+import type { MapBatchReadResult } from "./map";
 import type { ReadSystemResult } from "./system";
 
 export interface ReadHandledResult<
@@ -42,7 +42,7 @@ export interface ReadAllDataResultFields {
   state: unknown;
   troop: unknown;
   weapon: unknown;
-  mapFiles: MapFiles<unknown>;
+  mapFiles: MapBatchReadResult<unknown>;
   system: unknown;
   tilesets: unknown;
   animations: unknown;
@@ -91,7 +91,7 @@ export interface ReadAllGameDataResult<
   system: ReadSystemResult<System>;
   troop: ReadHandledResult<Troop>;
   weapon: ReadHandledResult<Weapon>;
-  mapFiles: MapFiles<Map>;
+  mapFiles: MapBatchReadResult<Map>;
   animations: ReadHandledResult<Animation>;
   tilesets: ReadHandledResult<Tileset>;
 }
@@ -122,7 +122,7 @@ export interface ReadAllGameDataResultWithNullFallback<
   system: ReadSystemResult<System>;
   troop: ReadHandledResult<Troop, null>;
   weapon: ReadHandledResult<Weapon, null>;
-  mapFiles: MapFiles<Map>;
+  mapFiles: MapBatchReadResult<Map>;
 }
 
 export interface RawGameData extends ReadAllDataResultFields {
@@ -140,5 +140,5 @@ export interface RawGameData extends ReadAllDataResultFields {
   weapon: ReadArrayResult<Data_Weapon>;
   tilesets: ReadArrayResult<Data_Tileset>;
   animations: ReadArrayResult<Data_Animation>;
-  mapFiles: MapFiles<Data_Map>;
+  mapFiles: MapBatchReadResult<Data_Map>;
 }

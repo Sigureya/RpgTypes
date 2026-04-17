@@ -1,8 +1,9 @@
 import type { MockedFunction } from "vitest";
 import { describe, expect, test, vi } from "vitest";
 import type { Data_Map, Data_MapInfo } from "@RpgTypes/rmmz";
+import type { MapFileInfo } from "@RpgTypes/rmmz";
 import { readMapFileFromInfo } from "./map";
-import type { MapReadFailed, MapReadSuccess, MapReadTerms } from "./types";
+import type { MapReadTerms, SingleMapReadFailure } from "./types";
 
 const terms: MapReadTerms = {
   jsonParseError: "json parse error",
@@ -31,7 +32,7 @@ describe("readMapFileFromInfo", () => {
       return typeof data === "object" && data !== null;
     });
 
-    const expected: MapReadSuccess<MockMap> = {
+    const expected: MapFileInfo<MockMap> = {
       map,
       filename: "Map001",
       editingName: "FirstMap",
@@ -55,7 +56,7 @@ describe("readMapFileFromInfo", () => {
     });
     const validate: MockedValidateFn = vi.fn(() => true);
 
-    const expected: MapReadFailed = {
+    const expected: SingleMapReadFailure = {
       map: null,
       message: "file not found",
       filename: "Map001",
@@ -76,7 +77,7 @@ describe("readMapFileFromInfo", () => {
   test("JSON が壊れていると jsonParseError を返す", async () => {
     const readFileFn = vi.fn(async () => "{ bad json }");
     const validate: MockedValidateFn = vi.fn(() => true);
-    const expected: MapReadFailed = {
+    const expected: SingleMapReadFailure = {
       map: null,
       message: "json parse error",
       filename: "Map001",
@@ -99,7 +100,7 @@ describe("readMapFileFromInfo", () => {
     const readFileFn = vi.fn(async () => JSON.stringify(data));
     const validate: MockedValidateFn = vi.fn(() => false);
 
-    const expected: MapReadFailed = {
+    const expected: SingleMapReadFailure = {
       map: null,
       message: "invalid structure",
       filename: "Map001",

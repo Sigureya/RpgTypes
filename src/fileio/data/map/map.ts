@@ -1,10 +1,10 @@
-import type { Data_Map, Data_MapInfo } from "@RpgTypes/rmmz";
 import { makeMapName } from "@RpgTypes/rmmz";
+import type { Data_Map, Data_MapInfo } from "@RpgTypes/rmmz";
+import type { MapFileInfo } from "@RpgTypes/rmmz";
 import type {
   MapFileNameWithExt,
-  MapFiles,
-  MapReadFailed,
-  MapReadSuccess,
+  MapBatchReadResult,
+  SingleMapReadFailure,
   MapReadTerms,
 } from "./types";
 
@@ -13,11 +13,13 @@ export const readMapFileFromInfo = (
   terms: MapReadTerms,
   fn: (filename: MapFileNameWithExt) => Promise<string>,
   validate: (data: unknown) => data is Data_Map,
-): Promise<MapReadSuccess<Data_Map> | MapReadFailed> => {
+): Promise<MapFileInfo<Data_Map> | SingleMapReadFailure> => {
   const filename = toMapFileNameWithExt(info);
   return fn(filename)
     .then((json) => parseMapJson(json, info, terms, validate))
-    .catch((): MapReadFailed => makeMapReadError(info, terms.fileNotFound));
+    .catch(
+      (): SingleMapReadFailure => makeMapReadError(info, terms.fileNotFound),
+    );
 };
 
 const parseMapJson = <T>(
@@ -25,13 +27,13 @@ const parseMapJson = <T>(
   info: Data_MapInfo,
   terms: MapReadTerms,
   validate: (data: unknown) => data is T,
-): MapReadSuccess<T> | MapReadFailed => {
+): MapFileInfo<T> | SingleMapReadFailure => {
   try {
     const data = JSON.parse(json);
     if (!validate(data)) {
       return makeMapReadError(info, terms.invalidStructure);
     }
-    const result: MapReadSuccess<T> = {
+    const result: MapFileInfo<T> = {
       map: data,
       filename: toMapFileName(info),
       editingName: info.name,
@@ -52,7 +54,7 @@ const toMapFileName = (info: Data_MapInfo) =>
 const makeMapReadError = (
   info: Data_MapInfo,
   message: string,
-): MapReadFailed => ({
+): SingleMapReadFailure => ({
   map: null,
   message,
   filename: toMapFileName(info),
@@ -64,7 +66,7 @@ export const readMapFilesFromInfo = (
   terms: MapReadTerms,
   readMapFile: (info: string) => Promise<string>,
   validateMapData: (data: unknown) => data is Data_Map,
-): Promise<MapFiles<Data_Map>> => {
+): Promise<MapBatchReadResult<Data_Map>> => {
   return readMapFilesFromInfoEx(
     infos,
     terms,
@@ -79,10 +81,10 @@ export const readMapFilesFromInfoEx = async <T>(
   terms: MapReadTerms,
   readMapFile: (info: MapFileNameWithExt) => Promise<string>,
   validateMapData: (data: unknown) => data is Data_Map,
-  convFn: (data: MapReadSuccess<Data_Map>) => T,
-): Promise<MapFiles<T>> => {
+  convFn: (data: MapFileInfo<Data_Map>) => T,
+): Promise<MapBatchReadResult<T>> => {
   const maps = await Promise.all(
-    infos.map(async (info): Promise<MapReadFailed | MapReadSuccess<T>> => {
+    infos.map(async (info): Promise<SingleMapReadFailure | MapFileInfo<T>> => {
       return readAndConvertMapFile(
         info,
         terms,
@@ -99,9 +101,9 @@ const readAndConvertMapFile = async <T>(
   info: Data_MapInfo,
   terms: MapReadTerms,
   readMapFile: (info: MapFileNameWithExt) => Promise<string>,
-  convFn: (data: MapReadSuccess<Data_Map>) => T,
+  convFn: (data: MapFileInfo<Data_Map>) => T,
   validateMapData: (data: unknown) => data is Data_Map,
-): Promise<MapReadFailed | MapReadSuccess<T>> => {
+): Promise<SingleMapReadFailure | MapFileInfo<T>> => {
   const map = await readMapFileFromInfo(
     info,
     terms,
@@ -119,15 +121,15 @@ const readAndConvertMapFile = async <T>(
 };
 
 const buildMapFilesResult = <T>(
-  files: (MapReadSuccess<T> | MapReadFailed)[],
-): MapFiles<T> => {
+  files: (MapFileInfo<T> | SingleMapReadFailure)[],
+): MapBatchReadResult<T> => {
   return {
     info: { success: true },
-    validMaps: files.filter((f): f is MapReadSuccess<T> => f.map !== null),
+    validMaps: files.filter((f): f is MapFileInfo<T> => f.map !== null),
     invalidMaps: files
-      .filter((f): f is MapReadFailed => f.map === null)
+      .filter((f): f is SingleMapReadFailure => f.map === null)
       .map(
-        (f): MapReadFailed => ({
+        (f): SingleMapReadFailure => ({
           filename: f.filename,
           message: f.message,
           map: null,

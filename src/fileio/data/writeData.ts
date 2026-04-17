@@ -2,7 +2,7 @@ import type { IdentifiedItems } from "@RpgTypes/libs";
 import type { Data_Map, RpgDataBundle } from "@RpgTypes/rmmz";
 import type { MainDataIdentifiedItems } from "./arrayData";
 import { writeMainData } from "./arrayData";
-import type { MapFileNameWithExt, MapFiles } from "./map";
+import type { MapBatchReadResult, MapFileNameWithExt } from "./map";
 import { writeMapFiles } from "./map";
 import type { RawGameData } from "./resultType";
 import { FILENAME_SYSTEM } from "./system";
@@ -20,7 +20,7 @@ export const writeSystemData = (
 
 export const writeAllData = (
   bundle: RpgDataBundle,
-  map: MapFiles<Data_Map>,
+  map: MapBatchReadResult<Data_Map>,
   fn: (
     filename: DataFileNames | MapFileNameWithExt,
     json: string,
