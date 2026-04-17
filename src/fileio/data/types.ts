@@ -3,11 +3,11 @@ import type { FILENAME_SYSTEM } from "./system";
 
 export type DataFileNames = MainDataFileNames | typeof FILENAME_SYSTEM;
 
-export interface DataReadErrorIte {
+export interface DataReadErrorItem {
   fileName: string;
   error: string;
 }
 export interface DataReadErrors {
-  main: DataReadErrorIte[];
-  map: DataReadErrorIte[];
+  main: DataReadErrorItem[];
+  map: DataReadErrorItem[];
 }

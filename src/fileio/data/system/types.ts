@@ -1,11 +1,11 @@
 import type { Data_System, Data_SystemMV } from "@RpgTypes/rmmz";
 
-export interface HandlerOfReadSystemData {
+export interface SystemDataReadHandler {
   validateSystemMz: (item: unknown) => item is Data_System;
   validateSystemMv?: (item: unknown) => item is Data_SystemMV;
 }
 
-export interface TermsOfReadSystemData {
+export interface SystemDataErrorMessages {
   jsonParseError: string;
   invalidStructure: string;
   fileNotFound: string;

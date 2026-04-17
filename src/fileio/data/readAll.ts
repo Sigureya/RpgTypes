@@ -26,8 +26,8 @@ import type { RpgDataReadHandlers, RpgDataValidators } from "./reader/handlers";
 import type {
   RawGameData,
   ReadAllDataFields,
-  ReadAllGameDataResult,
-  ReadAllGameDataResultWithNullFallback,
+  ReadGameDataResult,
+  ReadGameDataResultNullable,
   ReadHandledResult,
 } from "./resultType";
 import { FILENAME_SYSTEM, readSystemData } from "./system";
@@ -104,7 +104,7 @@ export const readAllGameDataAsArrayFallback = <
     Tileset[]
   >,
 ): Promise<
-  ReadAllGameDataResult<
+  ReadGameDataResult<
     Common[],
     Map,
     System,
@@ -166,7 +166,7 @@ export const readAllGameDataAsNullFallback = <
     Tileset
   >,
 ): Promise<
-  ReadAllGameDataResultWithNullFallback<
+  ReadGameDataResultNullable<
     Common,
     Map,
     System,

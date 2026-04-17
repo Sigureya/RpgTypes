@@ -47,23 +47,28 @@ export interface ReadAllDataFields {
   tilesets: unknown;
   animations: unknown;
 }
-export type ReadAllDataFieldsUnknown = ReadAllGameDataResult<
-  unknown,
-  unknown,
-  unknown,
-  unknown,
-  unknown,
-  unknown,
-  unknown,
-  unknown,
-  unknown,
-  unknown,
-  unknown,
-  unknown,
-  unknown,
-  unknown
->;
-export interface ReadAllGameDataResult<
+
+export interface ReadAllDataFields3 {
+  actor: ReadHandledResult<unknown>;
+  armor: ReadHandledResult<unknown>;
+  classes: ReadHandledResult<unknown>;
+  commonEvent: ReadHandledResult<unknown>;
+  enemies: ReadHandledResult<unknown>;
+  item: ReadHandledResult<unknown>;
+  mapInfo: ReadArrayResult<Data_MapInfo>;
+  skill: ReadHandledResult<unknown>;
+  state: ReadHandledResult<unknown>;
+  system: ReadSystemResult<unknown>;
+  troop: ReadHandledResult<unknown>;
+  weapon: ReadHandledResult<unknown>;
+  mapFiles: MapBatchReadResult<unknown>;
+  animations: ReadHandledResult<unknown>;
+  tilesets: ReadHandledResult<unknown>;
+}
+
+export type ReadGameDataUnknown = ReadAllDataFields3;
+
+export interface ReadGameDataResult<
   Common,
   Map,
   System,
@@ -96,7 +101,7 @@ export interface ReadAllGameDataResult<
   tilesets: ReadHandledResult<Tileset>;
 }
 
-export interface ReadAllGameDataResultWithNullFallback<
+export interface ReadGameDataResultNullable<
   Common,
   Map,
   System,

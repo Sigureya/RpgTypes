@@ -1,7 +1,7 @@
 import type { ArrayDataErrorMessages } from "./arrayData";
-import type { TermsOfReadSystemData } from "./system";
+import type { SystemDataErrorMessages } from "./system";
 
 export interface ReadAllDataErrorMessages
-  extends ArrayDataErrorMessages, TermsOfReadSystemData {
+  extends ArrayDataErrorMessages, SystemDataErrorMessages {
   dataConvertError: string;
 }
