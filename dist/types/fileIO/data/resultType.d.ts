@@ -1,4 +1,4 @@
-import { Data_Actor, Data_Armor, Data_Class, Data_CommonEvent, Data_Enemy, Data_Item, Data_Map, Data_MapInfo, Data_Skill, Data_State, Data_Troop, Data_Weapon } from '../../rmmz';
+import { Data_Actor, Data_Animation, Data_Armor, Data_Class, Data_CommonEvent, Data_Enemy, Data_Item, Data_Map, Data_MapInfo, Data_Skill, Data_State, Data_Tileset, Data_Troop, Data_Weapon } from '../../rmmz';
 import { ReadArrayResult } from './arrayData';
 import { MapFiles } from './map';
 import { ReadSystemResult } from './system';
@@ -23,8 +23,11 @@ export interface ReadAllDataResultFields {
     weapon: unknown;
     mapFiles: MapFiles<unknown>;
     system: unknown;
+    tilesets: unknown;
+    animations: unknown;
 }
-export interface ReadAllGameDataResult<Commmon, Map, System, Actor, Skill, Item, Weapon, Armor, Enemy, Class, State, Troop> extends ReadAllDataResultFields {
+export type ReadAllGameDataResultUnknown = ReadAllGameDataResult<unknown, unknown, unknown, unknown, unknown, unknown, unknown, unknown, unknown, unknown, unknown, unknown, unknown, unknown>;
+export interface ReadAllGameDataResult<Commmon, Map, System, Actor, Skill, Item, Weapon, Armor, Enemy, Class, State, Troop, Animation, Tileset> extends ReadAllDataResultFields {
     actor: ReadHandledResult<Actor>;
     armor: ReadHandledResult<Armor>;
     classes: ReadHandledResult<Class>;
@@ -38,6 +41,8 @@ export interface ReadAllGameDataResult<Commmon, Map, System, Actor, Skill, Item,
     troop: ReadHandledResult<Troop>;
     weapon: ReadHandledResult<Weapon>;
     mapFiles: MapFiles<Map>;
+    animations: ReadHandledResult<Animation>;
+    tilesets: ReadHandledResult<Tileset>;
 }
 export interface ReadAllGameDataResultWithNullFallback<Commmon, Map, System, Actor, Skill, Item, Weapon, Armor, Enemy, Class, State, Troop> extends ReadAllDataResultFields {
     actor: ReadHandledResult<Actor, null>;
@@ -67,5 +72,7 @@ export interface RowGameData extends ReadAllDataResultFields {
     system: ReadSystemResult;
     troop: ReadArrayResult<Data_Troop>;
     weapon: ReadArrayResult<Data_Weapon>;
+    tilesets: ReadArrayResult<Data_Tileset>;
+    animations: ReadArrayResult<Data_Animation>;
     mapFiles: MapFiles<Data_Map>;
 }
