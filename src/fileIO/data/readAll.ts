@@ -7,6 +7,7 @@ import type {
 import type { ReadArrayResult } from "./arrayData";
 import {
   readActorData,
+  readAnimationData,
   readArmorData,
   readClassData,
   readCommonEventData,
@@ -15,6 +16,7 @@ import {
   readMapInfoData,
   readSkillData,
   readStateData,
+  readTilesetData,
   readTroopData,
   readWeaponData,
 } from "./arrayData";
@@ -57,6 +59,8 @@ export const readAllRowGameData = async (
       readSystem: identity,
       readTroops: identity,
       readWeapons: identity,
+      readAnimations: identity,
+      readTilesets: identity,
     },
     validateFunctions,
     () => [],
@@ -80,6 +84,8 @@ export const readAllGameDataAsArrayFallback = <
   Class,
   State,
   Troop,
+  Animation,
+  Tileset,
 >(
   terms: TermsOfReadAllData,
   readFileFn: (filename: DataFileNames | MapFileNameWithExt) => Promise<string>,
@@ -96,7 +102,9 @@ export const readAllGameDataAsArrayFallback = <
     Enemy[],
     Class[],
     State[],
-    Troop[]
+    Troop[],
+    Animation[],
+    Tileset[]
   >,
 ): Promise<
   ReadAllGameDataResult<
@@ -111,7 +119,9 @@ export const readAllGameDataAsArrayFallback = <
     Enemy[],
     Class[],
     State[],
-    Troop[]
+    Troop[],
+    Animation[],
+    Tileset[]
   >
 > => {
   return readAllGameDataWithFallback(
@@ -136,6 +146,8 @@ export const readAllGameDataAsNullFallback = <
   Class,
   State,
   Troop,
+  Animation,
+  Tileset,
 >(
   terms: TermsOfReadAllData,
   readFileFn: (filename: DataFileNames | MapFileNameWithExt) => Promise<string>,
@@ -152,7 +164,9 @@ export const readAllGameDataAsNullFallback = <
     Enemy,
     Class,
     State,
-    Troop
+    Troop,
+    Animation,
+    Tileset
   >,
 ): Promise<
   ReadAllGameDataResultWithNullFallback<
@@ -193,6 +207,8 @@ const readAllGameDataWithFallback = async <
   Class,
   State,
   Troop,
+  Animation,
+  Tileset,
 >(
   terms: TermsOfReadAllData,
   readFileFn: (filename: DataFileNames | MapFileNameWithExt) => Promise<string>,
@@ -208,40 +224,46 @@ const readAllGameDataWithFallback = async <
     Enemy,
     Class,
     State,
-    Troop
+    Troop,
+    Animation,
+    Tileset
   >,
   validateFunctions: ValidateFunctionsOfReadRpgData,
   makeEmptyValue: () => N,
 ) => {
   // この関数の戻り値の型は非常に複雑なので、型推論で解決するため意図的に省略している
   const [
-    actor,
+    commonEvent,
+    troop,
+    enemies,
     classes,
     skill,
     item,
     weapon,
     armor,
-    enemies,
-    troop,
     state,
-    commonEvent,
+    actor,
+    animation,
+    tileset,
     mapInfo,
     system,
   ] = await Promise.all([
-    readActorData(terms, readFileFn, validateFunctions.validateActor),
-    readClassData(terms, readFileFn, validateFunctions.validateClass),
-    readSkillData(terms, readFileFn, validateFunctions.validateSkill),
-    readItemData(terms, readFileFn, validateFunctions.validateItem),
-    readWeaponData(terms, readFileFn, validateFunctions.validateWeapon),
-    readArmorData(terms, readFileFn, validateFunctions.validateArmor),
-    readEnemyData(terms, readFileFn, validateFunctions.validateEnemy),
-    readTroopData(terms, readFileFn, validateFunctions.validateTroop),
-    readStateData(terms, readFileFn, validateFunctions.validateState),
     readCommonEventData(
       terms,
       readFileFn,
       validateFunctions.validateCommonEvent,
     ),
+    readTroopData(terms, readFileFn, validateFunctions.validateTroop),
+    readEnemyData(terms, readFileFn, validateFunctions.validateEnemy),
+    readClassData(terms, readFileFn, validateFunctions.validateClass),
+    readSkillData(terms, readFileFn, validateFunctions.validateSkill),
+    readItemData(terms, readFileFn, validateFunctions.validateItem),
+    readWeaponData(terms, readFileFn, validateFunctions.validateWeapon),
+    readArmorData(terms, readFileFn, validateFunctions.validateArmor),
+    readStateData(terms, readFileFn, validateFunctions.validateState),
+    readActorData(terms, readFileFn, validateFunctions.validateActor),
+    readAnimationData(terms, readFileFn, validateFunctions.validateAnimation),
+    readTilesetData(terms, readFileFn, validateFunctions.validateTileset),
     readMapInfoData(terms, readFileFn, validateFunctions.validateMapInfo),
     readSystemData(terms, readFileFn, {
       validateSystemMz: validateFunctions.validateSystem,
@@ -288,6 +310,18 @@ const readAllGameDataWithFallback = async <
       weapon,
       terms,
       handles.readWeapons,
+      makeEmptyValue,
+    ),
+    animations: convertIfSuccess(
+      animation,
+      terms,
+      handles.readAnimations,
+      makeEmptyValue,
+    ),
+    tilesets: convertIfSuccess(
+      tileset,
+      terms,
+      handles.readTilesets,
       makeEmptyValue,
     ),
   } satisfies Record<keyof ReadAllDataResultFields, unknown>;

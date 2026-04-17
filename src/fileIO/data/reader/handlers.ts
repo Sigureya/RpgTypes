@@ -14,6 +14,8 @@ import type {
   MapFileInfo,
   Data_Troop,
   Data_Map,
+  Data_Animation,
+  Data_Tileset,
 } from "@RpgTypes/rmmz";
 
 export interface RpgDataReadHandlersBase {
@@ -27,6 +29,10 @@ export interface RpgDataReadHandlersBase {
   readActor(actor: Data_Actor[], filename: string): unknown;
   readCommonEvent(event: Data_CommonEvent[], filename: string): unknown;
   readTroop(troops: Data_Troop[], filename: string): unknown;
+  readSystem(system: Data_System, filename: string): unknown;
+  readMap(map: MapFileInfo): unknown;
+  readAnimation(animation: Data_Animation[], filename: string): unknown;
+  readTileset(tileset: Data_Tileset[], filename: string): unknown;
 }
 
 export interface RpgDataReadHandlers<
@@ -42,6 +48,8 @@ export interface RpgDataReadHandlers<
   Class,
   State,
   Troop,
+  Animation,
+  Tileset,
 > {
   readSkills(skill: Data_Skill[], filePath: string): Skill;
   readItems(item: Data_Item[], filePath: string): Item;
@@ -55,6 +63,8 @@ export interface RpgDataReadHandlers<
   readSystem(system: Data_System, filePath: string): System;
   readMap(map: MapFileInfo): Map;
   readTroops(troops: Data_Troop[], filePath: string): Troop;
+  readAnimations(animations: Data_Animation[], filePath: string): Animation;
+  readTilesets(tilesets: Data_Tileset[], filePath: string): Tileset;
 }
 
 export interface ValidateFunctionsOfReadRpgData {
@@ -72,4 +82,6 @@ export interface ValidateFunctionsOfReadRpgData {
   validateSystemMV?(item: unknown): item is Data_SystemMV;
   validateTroop(item: unknown): item is Data_Troop;
   validateMap(item: unknown): item is Data_Map;
+  validateAnimation(item: unknown): item is Data_Animation;
+  validateTileset(item: unknown): item is Data_Tileset;
 }

@@ -1,5 +1,6 @@
 import type {
   Data_Actor,
+  Data_Animation,
   Data_Armor,
   Data_Class,
   Data_CommonEvent,
@@ -9,6 +10,7 @@ import type {
   Data_MapInfo,
   Data_Skill,
   Data_State,
+  Data_Tileset,
   Data_Troop,
   Data_Weapon,
 } from "@RpgTypes/rmmz";
@@ -39,8 +41,12 @@ export interface ReadAllDataResultFields {
   weapon: unknown;
   mapFiles: MapFiles<unknown>;
   system: unknown;
+  tilesets: unknown;
+  animations: unknown;
 }
 export type ReadAllGameDataResultUnknown = ReadAllGameDataResult<
+  unknown,
+  unknown,
   unknown,
   unknown,
   unknown,
@@ -67,6 +73,8 @@ export interface ReadAllGameDataResult<
   Class,
   State,
   Troop,
+  Animation,
+  Tileset,
 > extends ReadAllDataResultFields {
   actor: ReadHandledResult<Actor>;
   armor: ReadHandledResult<Armor>;
@@ -81,6 +89,8 @@ export interface ReadAllGameDataResult<
   troop: ReadHandledResult<Troop>;
   weapon: ReadHandledResult<Weapon>;
   mapFiles: MapFiles<Map>;
+  animations: ReadHandledResult<Animation>;
+  tilesets: ReadHandledResult<Tileset>;
 }
 
 export interface ReadAllGameDataResultWithNullFallback<
@@ -125,5 +135,7 @@ export interface RowGameData extends ReadAllDataResultFields {
   system: ReadSystemResult;
   troop: ReadArrayResult<Data_Troop>;
   weapon: ReadArrayResult<Data_Weapon>;
+  tilesets: ReadArrayResult<Data_Tileset>;
+  animations: ReadArrayResult<Data_Animation>;
   mapFiles: MapFiles<Data_Map>;
 }
