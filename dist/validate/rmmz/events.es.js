@@ -1,5 +1,5 @@
-import { v as je } from "../../shared/validateWithErrors.es.js";
 import { g as ce } from "../../shared/_commonjsHelpers.es.js";
+import { v as je } from "../../shared/validateWithErrors.es.js";
 var Oe, ge = { exports: {} };
 const Ve = ce((function() {
   if (Oe) return ge.exports;
@@ -281,102 +281,241 @@ const Se = ce((function() {
 var Fe, be = {
   exports: {}
 };
-const $e = ce((function() {
+const Re = ce((function() {
   if (Fe) return be.exports;
-  Fe = 1, be.exports = d, be.exports.default = d;
-  const h = {
-    properties: {
-      autoplayBgm: { type: "boolean" },
-      autoplayBgs: { type: "boolean" },
-      battleback1Name: { type: "string" },
-      battleback2Name: { type: "string" },
-      bgm: { $ref: "#/$defs/AudioFileParams" },
-      bgs: { $ref: "#/$defs/AudioFileParams" },
-      data: {
-        items: { type: "integer" },
-        type: "array"
-      },
-      disableDashing: { type: "boolean" },
-      displayName: { type: "string" },
-      encounterList: { $ref: "#/$defs/EncounterList" },
-      events: { $ref: "#/$defs/MapEvents" },
-      width: { minimum: 0, type: "integer" },
-      height: { minimum: 0, type: "integer" },
-      note: { type: "string" },
-      parallaxLoopX: { type: "boolean" },
-      parallaxLoopY: { type: "boolean" },
-      parallaxName: { type: "string" },
-      parallaxShow: { type: "boolean" },
-      parallaxSx: { type: "integer" },
-      parallaxSy: { type: "integer" },
-      tilesetId: { type: "integer" },
-      encounterStep: { type: "integer" },
-      scrollType: { type: "integer" },
-      specifyBattleback: { type: "boolean" }
-    }
-  }, l = { items: { oneOf: [{ type: "null" }, { required: ["id", "name", "x", "y", "pages", "note"], type: "object", properties: { id: { type: "integer" }, name: { type: "string" }, note: { type: "string" }, pages: {
-    type: "array",
-    items: {
-      additionalProperties: !1,
-      required: ["conditions", "image", "list", "moveRoute", "directionFix", "priorityType", "moveFrequency", "walkAnime", "stepAnime", "through", "moveSpeed", "moveType", "trigger"],
-      type: "object",
-      properties: {
-        stepAnime: { type: "boolean" },
-        walkAnime: { type: "boolean" },
-        through: { type: "boolean" },
-        priorityType: { type: "integer" },
-        moveSpeed: { type: "integer" },
-        moveType: { type: "integer" },
-        trigger: { type: "integer" },
-        conditions: {
-          additionalProperties: !1,
-          type: "object",
-          required: ["switch1Id", "switch1Valid", "switch2Id", "switch2Valid", "variableId", "variableValid", "selfSwitchCh", "selfSwitchValid", "variableValue", "itemId", "itemValid", "actorId", "actorValid"],
-          properties: { switch1Id: { type: "integer", minimum: 0 }, switch1Valid: { type: "boolean" }, switch2Id: { type: "integer", minimum: 0 }, switch2Valid: { type: "boolean" }, variableId: {
-            type: "integer",
-            minimum: 0
-          }, variableValid: { type: "boolean" }, selfSwitchCh: { type: "string" }, selfSwitchValid: { type: "boolean" }, variableValue: { type: "integer" }, itemId: { type: "integer", minimum: 0 }, itemValid: {
-            type: "boolean"
-          }, actorId: { type: "integer" }, actorValid: { type: "boolean" } }
-        },
-        directionFix: { type: "boolean" },
-        image: {
-          additionalProperties: !1,
-          properties: { characterIndex: {
-            minimum: 0,
-            type: "integer"
-          }, characterName: { type: "string" }, direction: { enum: [2, 4, 6, 8], type: "integer" }, pattern: { type: "integer" }, tileId: { type: "integer" } },
-          required: ["characterIndex", "characterName", "direction", "pattern", "tileId"],
-          type: "object"
-        },
-        list: { type: "array", items: {
-          additionalProperties: !1,
-          type: "object",
-          required: ["code", "parameters", "indent"],
-          properties: { code: { type: "integer" }, indent: { type: "integer" }, parameters: { type: "array", items: {} } }
-        } },
-        moveFrequency: { type: "integer" },
-        moveRoute: {
-          additionalProperties: !1,
-          properties: {
-            list: { items: { additionalProperties: !0, properties: { code: { type: "integer" }, parameters: { nullable: !0, type: "array", items: { oneOf: [{ type: "string" }, {
-              type: "number"
-            }, {
-              additionalProperties: !1,
-              properties: { name: { type: "string" }, pan: { type: "integer" }, pitch: { type: "integer" }, volume: { type: "integer" } },
-              required: ["name", "pan", "pitch", "volume"],
-              type: "object"
-            }] } } }, required: ["code"], type: "object" }, type: "array" },
-            repeat: { type: "boolean" },
-            skippable: { type: "boolean" },
-            wait: { type: "boolean" }
-          },
-          required: ["wait", "repeat", "skippable", "list"],
-          type: "object"
+  function h(l, { instancePath: m = "", parentData: d, parentDataProperty: y, rootData: s = l } = {}) {
+    if (!l || typeof l != "object" || Array.isArray(l)) return h.errors = [{ instancePath: m, schemaPath: "#/type", keyword: "type", params: { type: "object" }, message: "must be object" }], !1;
+    {
+      let $;
+      if (l.trigger === void 0 && ($ = "trigger") || l.id === void 0 && ($ = "id") || l.name === void 0 && ($ = "name") || l.list === void 0 && ($ = "list") || l.switchId === void 0 && ($ = "switchId")) return h.errors = [{
+        instancePath: m,
+        schemaPath: "#/required",
+        keyword: "required",
+        params: { missingProperty: $ },
+        message: "must have required property '" + $ + "'"
+      }], !1;
+      if (l.trigger !== void 0) {
+        let t = l.trigger;
+        const e = 0;
+        if (typeof t != "number" || t % 1 || isNaN(t) || !isFinite(t)) return h.errors = [{ instancePath: m + "/trigger", schemaPath: "#/properties/trigger/type", keyword: "type", params: {
+          type: "integer"
+        }, message: "must be integer" }], !1;
+        if (typeof t == "number" && isFinite(t) && (t < 0 || isNaN(t))) return h.errors = [{
+          instancePath: m + "/trigger",
+          schemaPath: "#/properties/trigger/minimum",
+          keyword: "minimum",
+          params: { comparison: ">=", limit: 0 },
+          message: "must be >= 0"
+        }], !1;
+        var j = e === 0;
+      } else j = !0;
+      if (j) {
+        if (l.id !== void 0) {
+          let t = l.id;
+          const e = 0;
+          if (typeof t != "number" || t % 1 || isNaN(t) || !isFinite(t)) return h.errors = [{
+            instancePath: m + "/id",
+            schemaPath: "#/properties/id/type",
+            keyword: "type",
+            params: { type: "integer" },
+            message: "must be integer"
+          }], !1;
+          if (typeof t == "number" && isFinite(t) && (t < 0 || isNaN(t))) return h.errors = [{
+            instancePath: m + "/id",
+            schemaPath: "#/properties/id/minimum",
+            keyword: "minimum",
+            params: { comparison: ">=", limit: 0 },
+            message: "must be >= 0"
+          }], !1;
+          j = e === 0;
+        } else j = !0;
+        if (j) {
+          if (l.name !== void 0) {
+            if (typeof l.name != "string") return h.errors = [{
+              instancePath: m + "/name",
+              schemaPath: "#/properties/name/type",
+              keyword: "type",
+              params: { type: "string" },
+              message: "must be string"
+            }], !1;
+            j = !0;
+          } else j = !0;
+          if (j) {
+            if (l.list !== void 0) {
+              let t = l.list;
+              const e = 0;
+              if (!Array.isArray(t)) return h.errors = [{
+                instancePath: m + "/list",
+                schemaPath: "#/properties/list/type",
+                keyword: "type",
+                params: { type: "array" },
+                message: "must be array"
+              }], !1;
+              {
+                const p = t.length;
+                for (let P = 0; P < p; P++) {
+                  let x = t[P];
+                  const F = 0;
+                  if (!x || typeof x != "object" || Array.isArray(x)) return h.errors = [{
+                    instancePath: m + "/list/" + P,
+                    schemaPath: "#/properties/list/items/type",
+                    keyword: "type",
+                    params: { type: "object" },
+                    message: "must be object"
+                  }], !1;
+                  {
+                    let g;
+                    if (x.code === void 0 && (g = "code") || x.indent === void 0 && (g = "indent") || x.parameters === void 0 && (g = "parameters")) return h.errors = [{
+                      instancePath: m + "/list/" + P,
+                      schemaPath: "#/properties/list/items/required",
+                      keyword: "required",
+                      params: { missingProperty: g },
+                      message: "must have required property '" + g + "'"
+                    }], !1;
+                    if (x.code !== void 0) {
+                      let c = x.code;
+                      const N = 0;
+                      if (typeof c != "number" || c % 1 || isNaN(c) || !isFinite(c)) return h.errors = [{
+                        instancePath: m + "/list/" + P + "/code",
+                        schemaPath: "#/properties/list/items/properties/code/type",
+                        keyword: "type",
+                        params: { type: "integer" },
+                        message: "must be integer"
+                      }], !1;
+                      var I = N === 0;
+                    } else I = !0;
+                    if (I) {
+                      if (x.indent !== void 0) {
+                        let c = x.indent;
+                        const N = 0;
+                        if (typeof c != "number" || c % 1 || isNaN(c) || !isFinite(c)) return h.errors = [{
+                          instancePath: m + "/list/" + P + "/indent",
+                          schemaPath: "#/properties/list/items/properties/indent/type",
+                          keyword: "type",
+                          params: { type: "integer" },
+                          message: "must be integer"
+                        }], !1;
+                        I = N === 0;
+                      } else I = !0;
+                      if (I) if (x.parameters !== void 0) {
+                        if (!Array.isArray(x.parameters)) return h.errors = [{
+                          instancePath: m + "/list/" + P + "/parameters",
+                          schemaPath: "#/properties/list/items/properties/parameters/type",
+                          keyword: "type",
+                          params: { type: "array" },
+                          message: "must be array"
+                        }], !1;
+                        I = !0;
+                      } else I = !0;
+                    }
+                  }
+                  if (F !== 0) break;
+                }
+              }
+              j = e === 0;
+            } else j = !0;
+            if (j) if (l.switchId !== void 0) {
+              let t = l.switchId;
+              const e = 0;
+              if (typeof t != "number" || t % 1 || isNaN(t) || !isFinite(t)) return h.errors = [{
+                instancePath: m + "/switchId",
+                schemaPath: "#/properties/switchId/type",
+                keyword: "type",
+                params: { type: "integer" },
+                message: "must be integer"
+              }], !1;
+              if (typeof t == "number" && isFinite(t) && (t < 0 || isNaN(t))) return h.errors = [{ instancePath: m + "/switchId", schemaPath: "#/properties/switchId/minimum", keyword: "minimum", params: {
+                comparison: ">=",
+                limit: 0
+              }, message: "must be >= 0" }], !1;
+              j = e === 0;
+            } else j = !0;
+          }
         }
       }
     }
-  }, x: { type: "integer" }, y: { type: "integer" } } }] } }, m = Object.prototype.hasOwnProperty;
+    return h.errors = null, !0;
+  }
+  return Fe = 1, be.exports = h, be.exports.default = h, be.exports;
+})());
+var Ae, Pe = { exports: {} };
+const $e = ce((function() {
+  if (Ae) return Pe.exports;
+  Ae = 1, Pe.exports = d, Pe.exports.default = d;
+  const h = { properties: { autoplayBgm: { type: "boolean" }, autoplayBgs: { type: "boolean" }, battleback1Name: {
+    type: "string"
+  }, battleback2Name: { type: "string" }, bgm: { $ref: "#/$defs/AudioFileParams" }, bgs: { $ref: "#/$defs/AudioFileParams" }, data: { items: { type: "integer" }, type: "array" }, disableDashing: {
+    type: "boolean"
+  }, displayName: { type: "string" }, encounterList: { $ref: "#/$defs/EncounterList" }, events: { $ref: "#/$defs/MapEvents" }, width: { minimum: 0, type: "integer" }, height: {
+    minimum: 0,
+    type: "integer"
+  }, note: { type: "string" }, parallaxLoopX: { type: "boolean" }, parallaxLoopY: { type: "boolean" }, parallaxName: { type: "string" }, parallaxShow: { type: "boolean" }, parallaxSx: {
+    type: "integer"
+  }, parallaxSy: { type: "integer" }, tilesetId: { type: "integer" }, encounterStep: { type: "integer" }, scrollType: { type: "integer" }, specifyBattleback: { type: "boolean" } } }, l = { items: {
+    oneOf: [{ type: "null" }, { required: ["id", "name", "x", "y", "pages", "note"], type: "object", properties: { id: { type: "integer" }, name: { type: "string" }, note: { type: "string" }, pages: {
+      type: "array",
+      items: {
+        additionalProperties: !1,
+        required: ["conditions", "image", "list", "moveRoute", "directionFix", "priorityType", "moveFrequency", "walkAnime", "stepAnime", "through", "moveSpeed", "moveType", "trigger"],
+        type: "object",
+        properties: {
+          stepAnime: { type: "boolean" },
+          walkAnime: { type: "boolean" },
+          through: { type: "boolean" },
+          priorityType: { type: "integer" },
+          moveSpeed: { type: "integer" },
+          moveType: { type: "integer" },
+          trigger: { type: "integer" },
+          conditions: {
+            additionalProperties: !1,
+            type: "object",
+            required: ["switch1Id", "switch1Valid", "switch2Id", "switch2Valid", "variableId", "variableValid", "selfSwitchCh", "selfSwitchValid", "variableValue", "itemId", "itemValid", "actorId", "actorValid"],
+            properties: { switch1Id: { type: "integer", minimum: 0 }, switch1Valid: { type: "boolean" }, switch2Id: { type: "integer", minimum: 0 }, switch2Valid: { type: "boolean" }, variableId: {
+              type: "integer",
+              minimum: 0
+            }, variableValid: { type: "boolean" }, selfSwitchCh: { type: "string" }, selfSwitchValid: { type: "boolean" }, variableValue: { type: "integer" }, itemId: { type: "integer", minimum: 0 }, itemValid: {
+              type: "boolean"
+            }, actorId: { type: "integer" }, actorValid: { type: "boolean" } }
+          },
+          directionFix: { type: "boolean" },
+          image: {
+            additionalProperties: !1,
+            properties: { characterIndex: {
+              minimum: 0,
+              type: "integer"
+            }, characterName: { type: "string" }, direction: { enum: [2, 4, 6, 8], type: "integer" }, pattern: { type: "integer" }, tileId: { type: "integer" } },
+            required: ["characterIndex", "characterName", "direction", "pattern", "tileId"],
+            type: "object"
+          },
+          list: { type: "array", items: {
+            additionalProperties: !1,
+            type: "object",
+            required: ["code", "parameters", "indent"],
+            properties: { code: { type: "integer" }, indent: { type: "integer" }, parameters: { type: "array", items: {} } }
+          } },
+          moveFrequency: { type: "integer" },
+          moveRoute: {
+            additionalProperties: !1,
+            properties: {
+              list: { items: { additionalProperties: !0, properties: { code: { type: "integer" }, parameters: { nullable: !0, type: "array", items: { oneOf: [{ type: "string" }, {
+                type: "number"
+              }, {
+                additionalProperties: !1,
+                properties: { name: { type: "string" }, pan: { type: "integer" }, pitch: { type: "integer" }, volume: { type: "integer" } },
+                required: ["name", "pan", "pitch", "volume"],
+                type: "object"
+              }] } } }, required: ["code"], type: "object" }, type: "array" },
+              repeat: { type: "boolean" },
+              skippable: { type: "boolean" },
+              wait: { type: "boolean" }
+            },
+            required: ["wait", "repeat", "skippable", "list"],
+            type: "object"
+          }
+        }
+      }
+    }, x: { type: "integer" }, y: { type: "integer" } } }]
+  } }, m = Object.prototype.hasOwnProperty;
   function d(y, { instancePath: s = "", parentData: j, parentDataProperty: I, rootData: $ = y } = {}) {
     let t = null, e = 0;
     if (e === 0) {
@@ -2206,11 +2345,11 @@ const $e = ce((function() {
     }
     return d.errors = t, e === 0;
   }
-  return be.exports;
-})()), He = (h) => $e(h), Xe = (h) => je(h, $e);
-var Ae, Pe = { exports: {} };
-const Re = ce((function() {
-  if (Ae) return Pe.exports;
+  return Pe.exports;
+})());
+var Ie, we = { exports: {} };
+const Te = ce((function() {
+  if (Ie) return we.exports;
   function h(l, { instancePath: m = "", parentData: d, parentDataProperty: y, rootData: s = l } = {}) {
     if (!l || typeof l != "object" || Array.isArray(l)) return h.errors = [{
       instancePath: m,
@@ -2219,166 +2358,6 @@ const Re = ce((function() {
       params: { type: "object" },
       message: "must be object"
     }], !1;
-    {
-      let $;
-      if (l.trigger === void 0 && ($ = "trigger") || l.id === void 0 && ($ = "id") || l.name === void 0 && ($ = "name") || l.list === void 0 && ($ = "list") || l.switchId === void 0 && ($ = "switchId")) return h.errors = [{
-        instancePath: m,
-        schemaPath: "#/required",
-        keyword: "required",
-        params: { missingProperty: $ },
-        message: "must have required property '" + $ + "'"
-      }], !1;
-      if (l.trigger !== void 0) {
-        let t = l.trigger;
-        const e = 0;
-        if (typeof t != "number" || t % 1 || isNaN(t) || !isFinite(t)) return h.errors = [{ instancePath: m + "/trigger", schemaPath: "#/properties/trigger/type", keyword: "type", params: {
-          type: "integer"
-        }, message: "must be integer" }], !1;
-        if (typeof t == "number" && isFinite(t) && (t < 0 || isNaN(t))) return h.errors = [{
-          instancePath: m + "/trigger",
-          schemaPath: "#/properties/trigger/minimum",
-          keyword: "minimum",
-          params: { comparison: ">=", limit: 0 },
-          message: "must be >= 0"
-        }], !1;
-        var j = e === 0;
-      } else j = !0;
-      if (j) {
-        if (l.id !== void 0) {
-          let t = l.id;
-          const e = 0;
-          if (typeof t != "number" || t % 1 || isNaN(t) || !isFinite(t)) return h.errors = [{
-            instancePath: m + "/id",
-            schemaPath: "#/properties/id/type",
-            keyword: "type",
-            params: { type: "integer" },
-            message: "must be integer"
-          }], !1;
-          if (typeof t == "number" && isFinite(t) && (t < 0 || isNaN(t))) return h.errors = [{
-            instancePath: m + "/id",
-            schemaPath: "#/properties/id/minimum",
-            keyword: "minimum",
-            params: { comparison: ">=", limit: 0 },
-            message: "must be >= 0"
-          }], !1;
-          j = e === 0;
-        } else j = !0;
-        if (j) {
-          if (l.name !== void 0) {
-            if (typeof l.name != "string") return h.errors = [{
-              instancePath: m + "/name",
-              schemaPath: "#/properties/name/type",
-              keyword: "type",
-              params: { type: "string" },
-              message: "must be string"
-            }], !1;
-            j = !0;
-          } else j = !0;
-          if (j) {
-            if (l.list !== void 0) {
-              let t = l.list;
-              const e = 0;
-              if (!Array.isArray(t)) return h.errors = [{
-                instancePath: m + "/list",
-                schemaPath: "#/properties/list/type",
-                keyword: "type",
-                params: { type: "array" },
-                message: "must be array"
-              }], !1;
-              {
-                const p = t.length;
-                for (let P = 0; P < p; P++) {
-                  let x = t[P];
-                  const F = 0;
-                  if (!x || typeof x != "object" || Array.isArray(x)) return h.errors = [{
-                    instancePath: m + "/list/" + P,
-                    schemaPath: "#/properties/list/items/type",
-                    keyword: "type",
-                    params: { type: "object" },
-                    message: "must be object"
-                  }], !1;
-                  {
-                    let g;
-                    if (x.code === void 0 && (g = "code") || x.indent === void 0 && (g = "indent") || x.parameters === void 0 && (g = "parameters")) return h.errors = [{
-                      instancePath: m + "/list/" + P,
-                      schemaPath: "#/properties/list/items/required",
-                      keyword: "required",
-                      params: { missingProperty: g },
-                      message: "must have required property '" + g + "'"
-                    }], !1;
-                    if (x.code !== void 0) {
-                      let c = x.code;
-                      const N = 0;
-                      if (typeof c != "number" || c % 1 || isNaN(c) || !isFinite(c)) return h.errors = [{
-                        instancePath: m + "/list/" + P + "/code",
-                        schemaPath: "#/properties/list/items/properties/code/type",
-                        keyword: "type",
-                        params: { type: "integer" },
-                        message: "must be integer"
-                      }], !1;
-                      var I = N === 0;
-                    } else I = !0;
-                    if (I) {
-                      if (x.indent !== void 0) {
-                        let c = x.indent;
-                        const N = 0;
-                        if (typeof c != "number" || c % 1 || isNaN(c) || !isFinite(c)) return h.errors = [{
-                          instancePath: m + "/list/" + P + "/indent",
-                          schemaPath: "#/properties/list/items/properties/indent/type",
-                          keyword: "type",
-                          params: { type: "integer" },
-                          message: "must be integer"
-                        }], !1;
-                        I = N === 0;
-                      } else I = !0;
-                      if (I) if (x.parameters !== void 0) {
-                        if (!Array.isArray(x.parameters)) return h.errors = [{
-                          instancePath: m + "/list/" + P + "/parameters",
-                          schemaPath: "#/properties/list/items/properties/parameters/type",
-                          keyword: "type",
-                          params: { type: "array" },
-                          message: "must be array"
-                        }], !1;
-                        I = !0;
-                      } else I = !0;
-                    }
-                  }
-                  if (F !== 0) break;
-                }
-              }
-              j = e === 0;
-            } else j = !0;
-            if (j) if (l.switchId !== void 0) {
-              let t = l.switchId;
-              const e = 0;
-              if (typeof t != "number" || t % 1 || isNaN(t) || !isFinite(t)) return h.errors = [{
-                instancePath: m + "/switchId",
-                schemaPath: "#/properties/switchId/type",
-                keyword: "type",
-                params: { type: "integer" },
-                message: "must be integer"
-              }], !1;
-              if (typeof t == "number" && isFinite(t) && (t < 0 || isNaN(t))) return h.errors = [{ instancePath: m + "/switchId", schemaPath: "#/properties/switchId/minimum", keyword: "minimum", params: {
-                comparison: ">=",
-                limit: 0
-              }, message: "must be >= 0" }], !1;
-              j = e === 0;
-            } else j = !0;
-          }
-        }
-      }
-    }
-    return h.errors = null, !0;
-  }
-  return Ae = 1, Pe.exports = h, Pe.exports.default = h, Pe.exports;
-})()), Ye = (h) => Re(h);
-var Ie, we = {
-  exports: {}
-};
-const Te = ce((function() {
-  if (Ie) return we.exports;
-  function h(l, { instancePath: m = "", parentData: d, parentDataProperty: y, rootData: s = l } = {}) {
-    if (!l || typeof l != "object" || Array.isArray(l)) return h.errors = [{ instancePath: m, schemaPath: "#/type", keyword: "type", params: { type: "object" }, message: "must be object" }], !1;
     {
       let p;
       if (l.id === void 0 && (p = "id") || l.name === void 0 && (p = "name") || l.members === void 0 && (p = "members") || l.pages === void 0 && (p = "pages")) return h.errors = [{
@@ -2752,12 +2731,12 @@ const Te = ce((function() {
     return h.errors = null, !0;
   }
   return Ie = 1, we.exports = h, we.exports.default = h, we.exports;
-})()), We = (h) => Te(h);
+})()), He = (h) => Te(h), Xe = (h) => $e(h), Ye = (h) => Re(h), We = (h) => je(h, $e);
 export {
   Be as isActorTextCommand,
   Ce as isAudioCommand,
   Ye as isDataCommonEvent,
-  He as isDataMap,
-  We as isDataTroop,
-  Xe as validateMapWithErrors
+  Xe as isDataMap,
+  He as isDataTroop,
+  We as validateMapWithErrors
 };

@@ -1,4 +1,4 @@
-import { Data_Actor, Data_Enemy, Data_Class, Data_Item, Data_Weapon, Data_Armor, Data_Animation, Data_Skill, Data_MapInfo, Data_State } from '../../../rmmz/rpg';
+import { Data_Actor, Data_Enemy, Data_Class, Data_Item, Data_Weapon, Data_Armor, Data_Animation, Data_Skill, Data_MapInfo, Data_State, Data_Tileset } from '../../../rmmz/rpg';
 export declare const isDataActor: (data: unknown) => data is Data_Actor;
 export declare const isDataAnimation: (data: unknown) => data is Data_Animation;
 export declare const isDataArmor: (data: unknown) => data is Data_Armor;
@@ -9,3 +9,4 @@ export declare const isDataMapInfo: (data: unknown) => data is Data_MapInfo;
 export declare const isDataSkill: (data: unknown) => data is Data_Skill;
 export declare const isDataState: (data: unknown) => data is Data_State;
 export declare const isDataWeapon: (data: unknown) => data is Data_Weapon;
+export declare const isDataTileset: (data: unknown) => data is Data_Tileset;
