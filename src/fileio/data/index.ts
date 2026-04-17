@@ -5,5 +5,6 @@ export * from "./readAll";
 export * from "./reader";
 export * from "./resultType";
 export * from "./system";
+export * from "./terms";
 export * from "./types";
 export * from "./writeData";
