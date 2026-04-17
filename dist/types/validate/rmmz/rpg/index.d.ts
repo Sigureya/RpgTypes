@@ -2,7 +2,6 @@ export { isDataActor } from './actor/isDataActor';
 export { isDataAnimation } from './animation/isDataAnimation';
 export { isDataArmor } from './armor/isDataArmor';
 export { isDataClass } from './class/isDataClass';
-export { isDataCommonEvent } from './commonEvent/isDataCommonEvent';
 export { isDataEnemy } from './enemy/isDataEnemy';
 export { isDataItem } from './item/isDataItem';
 export { isDataMapInfo } from './mapinfo/isDataMapInfo';
