@@ -6,7 +6,7 @@ import { FILENAME_ACTORS, FILENAME_MAP_INFOS } from "./arrayData";
 import type { MapBatchReadResult } from "./map";
 import type { RawGameData } from "./resultType";
 import { FILENAME_SYSTEM } from "./system";
-import { writeAllData, writeGameData } from "./writeData";
+import { writeBundleData, writeRawGameData } from "./writeData";
 
 const createArrayResult = <T>(data: T[]): ReadArrayResult<T> => ({
   success: true,
@@ -69,7 +69,7 @@ describe("writeAllData", () => {
   test("main data, system, map data をまとめて書き込む", async () => {
     const fileWriteFn = vi.fn(async () => undefined);
 
-    await writeAllData(bundle, mapFiles, fileWriteFn);
+    await writeBundleData(bundle, mapFiles, fileWriteFn);
 
     expect(fileWriteFn).toHaveBeenCalledWith(
       FILENAME_ACTORS,
@@ -94,7 +94,7 @@ describe("writeGameData", () => {
   test("RawGameData を下位書き込み関数へ委譲する", async () => {
     const fileWriteFn = vi.fn(async () => undefined);
 
-    await writeGameData(rawGameData, fileWriteFn);
+    await writeRawGameData(rawGameData, fileWriteFn);
 
     expect(fileWriteFn).toHaveBeenCalledWith(
       FILENAME_ACTORS,
@@ -113,7 +113,7 @@ describe("writeGameData", () => {
   test("system が null の場合は System.json を書き込まない", async () => {
     const fileWriteFn = vi.fn(async () => undefined);
 
-    await writeGameData(
+    await writeRawGameData(
       {
         ...rawGameData,
         system: { system: null, message: "missing" },

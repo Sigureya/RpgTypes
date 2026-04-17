@@ -18,7 +18,7 @@ export const writeSystemData = (
   return fn(FILENAME_SYSTEM, JSON.stringify(system));
 };
 
-export const writeAllData = (
+export const writeBundleData = (
   bundle: RpgDataBundle,
   map: MapBatchReadResult<Data_Map>,
   fn: (
@@ -33,7 +33,7 @@ export const writeAllData = (
   ]).then(() => undefined);
 };
 
-export const writeGameData = (
+export const writeRawGameData = (
   data: RawGameData,
   fileWriteFn: (
     filename: DataFileNames | MapFileNameWithExt,
