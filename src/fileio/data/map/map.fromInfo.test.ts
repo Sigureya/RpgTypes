@@ -3,13 +3,13 @@ import { describe, expect, test, vi } from "vitest";
 import type { Data_Map, Data_MapInfo, MapFileInfo } from "@RpgTypes/rmmz";
 import { makeMapData, makeMapInfoData } from "@RpgTypes/rmmz";
 import { readMapFilesFromInfo, readMapFilesFromInfoEx } from "./map";
-import type { MapReadTerms, SingleMapReadFailure } from "./types";
+import type { MapReadErrorMessages, SingleMapReadFailure } from "./types";
 
 interface ConvertedMap {
   mockDisplayName: string;
 }
 
-const terms: MapReadTerms = {
+const terms: MapReadErrorMessages = {
   jsonParseError: "json parse error",
   invalidStructure: "invalid structure",
   fileNotFound: "file not found",

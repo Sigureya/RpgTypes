@@ -2,14 +2,14 @@ import type { MapFileInfo } from "@RpgTypes/rmmz";
 
 export type MapFileNameWithExt = `Map${string}.json`;
 
-export interface MapInfoReadResult {
+export interface MapInfoReadFailure {
   message: string;
   filename: string;
   success: false;
 }
 
 export interface MapBatchReadResult<T> {
-  info: MapInfoReadResult | { success: true };
+  info: MapInfoReadFailure | { success: true };
   validMaps: MapFileInfo<T>[];
   invalidMaps: SingleMapReadFailure[];
 }
@@ -21,7 +21,7 @@ export interface SingleMapReadFailure {
   editingName: string;
 }
 
-export interface MapReadTerms {
+export interface MapReadErrorMessages {
   jsonParseError: string;
   invalidStructure: string;
   fileNotFound: string;

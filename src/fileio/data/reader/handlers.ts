@@ -67,7 +67,7 @@ export interface RpgDataReadHandlers<
   readTilesets(tilesets: Data_Tileset[], filePath: string): Tileset;
 }
 
-export interface ValidateFunctionsOfReadRpgData {
+export interface RpgDataValidators {
   validateSkill(item: unknown): item is Data_Skill;
   validateItem(item: unknown): item is Data_Item;
   validateMapInfo(item: unknown): item is Data_MapInfo;

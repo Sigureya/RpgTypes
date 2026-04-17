@@ -5,12 +5,12 @@ import type {
   MapFileNameWithExt,
   MapBatchReadResult,
   SingleMapReadFailure,
-  MapReadTerms,
+  MapReadErrorMessages,
 } from "./types";
 
 export const readMapFileFromInfo = (
   info: Data_MapInfo,
-  terms: MapReadTerms,
+  terms: MapReadErrorMessages,
   fn: (filename: MapFileNameWithExt) => Promise<string>,
   validate: (data: unknown) => data is Data_Map,
 ): Promise<MapFileInfo<Data_Map> | SingleMapReadFailure> => {
@@ -25,7 +25,7 @@ export const readMapFileFromInfo = (
 const parseMapJson = <T>(
   json: string,
   info: Data_MapInfo,
-  terms: MapReadTerms,
+  terms: MapReadErrorMessages,
   validate: (data: unknown) => data is T,
 ): MapFileInfo<T> | SingleMapReadFailure => {
   try {
@@ -63,7 +63,7 @@ const makeMapReadError = (
 
 export const readMapFilesFromInfo = (
   infos: ReadonlyArray<Data_MapInfo>,
-  terms: MapReadTerms,
+  terms: MapReadErrorMessages,
   readMapFile: (info: string) => Promise<string>,
   validateMapData: (data: unknown) => data is Data_Map,
 ): Promise<MapBatchReadResult<Data_Map>> => {
@@ -78,7 +78,7 @@ export const readMapFilesFromInfo = (
 
 export const readMapFilesFromInfoEx = async <T>(
   infos: ReadonlyArray<Data_MapInfo>,
-  terms: MapReadTerms,
+  terms: MapReadErrorMessages,
   readMapFile: (info: MapFileNameWithExt) => Promise<string>,
   validateMapData: (data: unknown) => data is Data_Map,
   convFn: (data: MapFileInfo<Data_Map>) => T,
@@ -99,7 +99,7 @@ export const readMapFilesFromInfoEx = async <T>(
 
 const readAndConvertMapFile = async <T>(
   info: Data_MapInfo,
-  terms: MapReadTerms,
+  terms: MapReadErrorMessages,
   readMapFile: (info: MapFileNameWithExt) => Promise<string>,
   convFn: (data: MapFileInfo<Data_Map>) => T,
   validateMapData: (data: unknown) => data is Data_Map,

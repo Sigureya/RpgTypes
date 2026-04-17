@@ -7,12 +7,12 @@ import {
 } from "@RpgTypes/rmmz";
 import { readSystemData, FILENAME_SYSTEM } from "./system";
 import type {
-  HandlerOfReadSystemData,
+  SystemDataReadHandler,
   ReadSystemResult,
-  TermsOfReadSystemData,
+  SystemDataErrorMessages,
 } from "./types";
 
-const terms: TermsOfReadSystemData = {
+const terms: SystemDataErrorMessages = {
   jsonParseError: "json parse error",
   invalidStructure: "invalid structure",
   fileNotFound: "file not found",
@@ -26,8 +26,8 @@ const mzData: Data_System = makeSystemData({
 const mvData: Data_SystemMV = makeSystemDataMV(mzData);
 
 const makeHandlers = (
-  overrides: Partial<HandlerOfReadSystemData> = {},
-): HandlerOfReadSystemData => ({
+  overrides: Partial<SystemDataReadHandler> = {},
+): SystemDataReadHandler => ({
   validateSystemMz: (item): item is Data_System => false,
   validateSystemMv: (item): item is Data_SystemMV => false,
   ...overrides,

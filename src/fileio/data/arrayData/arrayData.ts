@@ -1,7 +1,7 @@
-import type { TermsOfReadArrayData, ReadArrayResult } from "./types";
+import type { ArrayDataErrorMessages, ReadArrayResult } from "./types";
 
 export const readArrayData = async <T, F extends string>(
-  terms: TermsOfReadArrayData,
+  terms: ArrayDataErrorMessages,
   filename: F,
   readFileFn: (filename: F) => Promise<string>,
   validateItemFn: (item: unknown) => item is T,
@@ -21,7 +21,7 @@ export const readArrayData = async <T, F extends string>(
 const parseArrayJson = <T>(
   json: string,
   filename: string,
-  terms: TermsOfReadArrayData,
+  terms: ArrayDataErrorMessages,
   validateItemFn: (item: unknown) => item is T,
 ): ReadArrayResult<T> => {
   try {

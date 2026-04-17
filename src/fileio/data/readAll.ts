@@ -22,26 +22,22 @@ import {
 } from "./arrayData";
 import type { MapBatchReadResult, MapFileNameWithExt } from "./map";
 import { readMapFilesFromInfoEx } from "./map";
-import type {
-  RpgDataReadHandlers,
-  ValidateFunctionsOfReadRpgData,
-} from "./reader/handlers";
+import type { RpgDataReadHandlers, RpgDataValidators } from "./reader/handlers";
 import type {
   RawGameData,
-  ReadAllDataResultFields,
-  ReadAllGameDataResult,
-  ReadAllGameDataResultWithNullFallback,
+  ReadGameDataResult,
+  ReadGameDataResultNullable,
   ReadHandledResult,
 } from "./resultType";
 import { FILENAME_SYSTEM, readSystemData } from "./system";
 import type { ReadSystemResult } from "./system";
-import type { TermsOfReadAllData } from "./terms";
+import type { ReadAllDataErrorMessages } from "./terms";
 import type { DataFileNames } from "./types";
 
 export const readAllRawGameData = async (
   readFileFn: (filename: DataFileNames | MapFileNameWithExt) => Promise<string>,
-  validateFunctions: ValidateFunctionsOfReadRpgData,
-  terms: TermsOfReadAllData,
+  validateFunctions: RpgDataValidators,
+  terms: ReadAllDataErrorMessages,
 ): Promise<RawGameData> => {
   return readAllGameDataWithFallback(
     terms,
@@ -87,9 +83,9 @@ export const readAllGameDataAsArrayFallback = <
   Animation,
   Tileset,
 >(
-  terms: TermsOfReadAllData,
+  terms: ReadAllDataErrorMessages,
   readFileFn: (filename: DataFileNames | MapFileNameWithExt) => Promise<string>,
-  validateFunctions: ValidateFunctionsOfReadRpgData,
+  validateFunctions: RpgDataValidators,
   handles: RpgDataReadHandlers<
     Common[],
     Map,
@@ -107,7 +103,7 @@ export const readAllGameDataAsArrayFallback = <
     Tileset[]
   >,
 ): Promise<
-  ReadAllGameDataResult<
+  ReadGameDataResult<
     Common[],
     Map,
     System,
@@ -149,9 +145,9 @@ export const readAllGameDataAsNullFallback = <
   Animation,
   Tileset,
 >(
-  terms: TermsOfReadAllData,
+  terms: ReadAllDataErrorMessages,
   readFileFn: (filename: DataFileNames | MapFileNameWithExt) => Promise<string>,
-  validateFunctions: ValidateFunctionsOfReadRpgData,
+  validateFunctions: RpgDataValidators,
   handles: RpgDataReadHandlers<
     Common,
     Map,
@@ -169,7 +165,7 @@ export const readAllGameDataAsNullFallback = <
     Tileset
   >,
 ): Promise<
-  ReadAllGameDataResultWithNullFallback<
+  ReadGameDataResultNullable<
     Common,
     Map,
     System,
@@ -181,7 +177,9 @@ export const readAllGameDataAsNullFallback = <
     Enemy,
     Class,
     State,
-    Troop
+    Troop,
+    Animation,
+    Tileset
   >
 > => {
   return readAllGameDataWithFallback(
@@ -210,7 +208,7 @@ const readAllGameDataWithFallback = async <
   Animation,
   Tileset,
 >(
-  terms: TermsOfReadAllData,
+  terms: ReadAllDataErrorMessages,
   readFileFn: (filename: DataFileNames | MapFileNameWithExt) => Promise<string>,
   handles: RpgDataReadHandlers<
     Common,
@@ -228,7 +226,7 @@ const readAllGameDataWithFallback = async <
     Animation,
     Tileset
   >,
-  validateFunctions: ValidateFunctionsOfReadRpgData,
+  validateFunctions: RpgDataValidators,
   makeEmptyValue: () => N,
 ) => {
   // この関数の戻り値の型は非常に複雑なので、型推論で解決するため意図的に省略している
@@ -324,7 +322,7 @@ const readAllGameDataWithFallback = async <
       handles.readTilesets,
       makeEmptyValue,
     ),
-  } satisfies Record<keyof ReadAllDataResultFields, unknown>;
+  } satisfies Record<keyof RawGameData, unknown>;
 };
 interface MapReader<T> {
   readMap(map: MapFileInfo): T;
@@ -344,7 +342,7 @@ const mapInfosFailed = <T>(
 
 const convertMapData = async <T>(
   mapInfos: Data_MapInfo[],
-  terms: TermsOfReadAllData,
+  terms: ReadAllDataErrorMessages,
   handles: MapReader<T>,
   readFileFn: (filename: MapFileNameWithExt) => Promise<string>,
   validateFn: (item: unknown) => item is Data_Map,
@@ -360,7 +358,7 @@ const convertMapData = async <T>(
 
 const convertSystemIfSuccess = <R>(
   result: ReadSystemResult,
-  terms: TermsOfReadAllData,
+  terms: ReadAllDataErrorMessages,
   fn: (system: Data_System, filename: string) => R,
 ): ReadSystemResult<R> => {
   if (result.system === null) {
@@ -384,7 +382,7 @@ const convertSystemIfSuccess = <R>(
 
 const convertIfSuccess = <T, R, N>(
   result: ReadArrayResult<T>,
-  terms: TermsOfReadAllData,
+  terms: ReadAllDataErrorMessages,
   fn: (data: T[], filename: string) => R,
   makeEmptyValue: () => N,
 ): ReadHandledResult<R, N> => {
