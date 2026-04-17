@@ -1,4 +1,4 @@
-import type { AudioFolders } from "@RpgTypes/fileIO";
+import type { AudioFolders } from "@RpgTypes/fileio4";
 import type { AudioFileParams } from "@RpgTypes/libs";
 import type {
   CommandParameter,

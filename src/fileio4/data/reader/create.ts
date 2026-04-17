@@ -13,6 +13,8 @@ export const createGameDataReadHandlers = <
   Class,
   State,
   Troop,
+  Animation,
+  Tileset,
 >(
   readers: RpgDataReadHandlers<
     Commmon,
@@ -26,7 +28,9 @@ export const createGameDataReadHandlers = <
     Enemy,
     Class,
     State,
-    Troop
+    Troop,
+    Animation,
+    Tileset
   >,
 ): RpgDataReadHandlers<
   Commmon,
@@ -40,7 +44,9 @@ export const createGameDataReadHandlers = <
   Enemy,
   Class,
   State,
-  Troop
+  Troop,
+  Animation,
+  Tileset
 > => {
   return readers;
 };

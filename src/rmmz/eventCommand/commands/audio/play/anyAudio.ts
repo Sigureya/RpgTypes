@@ -1,4 +1,4 @@
-import type { AudioFolders } from "@RpgTypes/fileIO";
+import type { AudioFolders } from "@RpgTypes/fileio4/index";
 import type { CommandUnion_AnyAudio } from ".";
 
 const TABLE = {

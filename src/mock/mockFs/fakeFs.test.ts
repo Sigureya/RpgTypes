@@ -10,11 +10,11 @@ import {
   FILENAME_MAP_INFOS,
   FILENAME_SKILLS,
   FILENAME_STATES,
-  FILENAME_SYSTEM,
   FILENAME_TILESET,
   FILENAME_TROOPS,
   FILENAME_WEAPONS,
-} from "@RpgTypes/fileIO";
+} from "@RpgTypes/fileio4";
+import { FILENAME_SYSTEM } from "@RpgTypes/fileio4/data/system";
 import {
   makeActorData,
   makeArmorData,

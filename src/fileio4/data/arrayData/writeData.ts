@@ -28,7 +28,7 @@ import {
   FILENAME_TILESET,
   FILENAME_TROOPS,
   FILENAME_WEAPONS,
-} from "./constants";
+} from "./constants/fileNames";
 import type { MainDataFileNames } from "./types";
 
 export interface DDDD {

@@ -1,4 +1,4 @@
-import type * as Name from "./constants";
+import type * as Name from "./constants/index";
 
 export type MainDataFileNames = (typeof Name)[keyof typeof Name];
 
