@@ -9,6 +9,7 @@ import type {
   Data_Skill,
   Data_MapInfo,
   Data_State,
+  Data_Tileset,
 } from "@RpgTypes/rmmz/rpg";
 import validateActor from "./actor/actorValidate";
 import validateAnimation from "./animation/animationValidate";
@@ -19,6 +20,7 @@ import validateItem from "./item/itemValidate";
 import validateMapInfo from "./mapinfo/mapinfoValidate";
 import validateSkill from "./skill/skillValidate";
 import validateState from "./state/stateValidate";
+import validateTileset from "./tileset/tilesetValidate";
 import validateWeapon from "./weapon/weaponValidate";
 
 export const isDataActor = (data: unknown): data is Data_Actor => {
@@ -59,4 +61,8 @@ export const isDataState = (data: unknown): data is Data_State => {
 
 export const isDataWeapon = (data: unknown): data is Data_Weapon => {
   return validateWeapon(data);
+};
+
+export const isDataTileset = (data: unknown): data is Data_Tileset => {
+  return validateTileset(data);
 };
