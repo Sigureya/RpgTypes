@@ -132,14 +132,14 @@ const createReadFileFn = (
   });
 };
 
-const baseData = {
-  actor: {
+const baseData: RawGameData = {
+  actors: {
     success: true,
     fileName: FILENAME_ACTORS,
     error: "",
     data: [makeActorData({ id: 1, name: "A" })],
   },
-  armor: {
+  armors: {
     success: true,
     fileName: FILENAME_ARMORS,
     error: "",
@@ -151,7 +151,7 @@ const baseData = {
     error: "",
     data: [makeClassData({ id: 1, name: "C" })],
   },
-  commonEvent: {
+  commonEvents: {
     success: true,
     fileName: FILENAME_COMMON_EVENTS,
     error: "",
@@ -163,37 +163,37 @@ const baseData = {
     error: "",
     data: [makeEnemyData({ id: 1, name: "E" })],
   },
-  item: {
+  items: {
     success: true,
     fileName: FILENAME_ITEMS,
     error: "",
     data: [makeItemData({ id: 1, name: "I" })],
   },
-  mapInfo: {
+  mapInfos: {
     success: true,
     fileName: FILENAME_MAP_INFOS,
     error: "",
     data: [makeMapInfoData({ id: 1, name: "Map1" })],
   },
-  skill: {
+  skills: {
     success: true,
     fileName: FILENAME_SKILLS,
     error: "",
     data: [makeSkillData({ id: 1, name: "S" })],
   },
-  state: {
+  states: {
     success: true,
     fileName: FILENAME_STATES,
     error: "",
     data: [makeStateData({ id: 1, name: "ST" })],
   },
-  troop: {
+  troops: {
     success: true,
     fileName: FILENAME_TROOPS,
     error: "",
     data: [makeTroopData({ id: 1, name: "T" })],
   },
-  weapon: {
+  weapons: {
     success: true,
     fileName: FILENAME_WEAPONS,
     error: "",
@@ -226,20 +226,20 @@ const baseData = {
     error: "",
     data: [],
   },
-} as const satisfies RawGameData;
+};
 
 const baseFileMap: Record<string, string> = {
-  [baseData.actor.fileName]: JSON.stringify(baseData.actor.data),
-  [baseData.armor.fileName]: JSON.stringify(baseData.armor.data),
+  [baseData.actors.fileName]: JSON.stringify(baseData.actors.data),
+  [baseData.armors.fileName]: JSON.stringify(baseData.armors.data),
   [baseData.classes.fileName]: JSON.stringify(baseData.classes.data),
-  [baseData.commonEvent.fileName]: JSON.stringify(baseData.commonEvent.data),
+  [baseData.commonEvents.fileName]: JSON.stringify(baseData.commonEvents.data),
   [baseData.enemies.fileName]: JSON.stringify(baseData.enemies.data),
-  [baseData.item.fileName]: JSON.stringify(baseData.item.data),
-  [baseData.mapInfo.fileName]: JSON.stringify(baseData.mapInfo.data),
-  [baseData.skill.fileName]: JSON.stringify(baseData.skill.data),
-  [baseData.state.fileName]: JSON.stringify(baseData.state.data),
-  [baseData.troop.fileName]: JSON.stringify(baseData.troop.data),
-  [baseData.weapon.fileName]: JSON.stringify(baseData.weapon.data),
+  [baseData.items.fileName]: JSON.stringify(baseData.items.data),
+  [baseData.mapInfos.fileName]: JSON.stringify(baseData.mapInfos.data),
+  [baseData.skills.fileName]: JSON.stringify(baseData.skills.data),
+  [baseData.states.fileName]: JSON.stringify(baseData.states.data),
+  [baseData.troops.fileName]: JSON.stringify(baseData.troops.data),
+  [baseData.weapons.fileName]: JSON.stringify(baseData.weapons.data),
   [FILENAME_SYSTEM]: JSON.stringify(baseData.system.system),
   [baseData.animations.fileName]: JSON.stringify(baseData.animations.data),
   [baseData.tilesets.fileName]: JSON.stringify(baseData.tilesets.data),
@@ -391,18 +391,18 @@ describe("readAllGameDataAsArrayFallback", () => {
         convHandlers,
       );
 
-      expect(result.actor).toEqual(baseData.actor);
-      expect(result.armor).toEqual(baseData.armor);
+      expect(result.actors).toEqual(baseData.actors);
+      expect(result.armors).toEqual(baseData.armors);
       expect(result.classes).toEqual(baseData.classes);
-      expect(result.commonEvent).toEqual(baseData.commonEvent);
+      expect(result.commonEvents).toEqual(baseData.commonEvents);
       expect(result.enemies).toEqual(baseData.enemies);
-      expect(result.item).toEqual(baseData.item);
-      expect(result.mapInfo).toEqual(baseData.mapInfo);
-      expect(result.skill).toEqual(baseData.skill);
-      expect(result.state).toEqual(baseData.state);
+      expect(result.items).toEqual(baseData.items);
+      expect(result.mapInfos).toEqual(baseData.mapInfos);
+      expect(result.skills).toEqual(baseData.skills);
+      expect(result.states).toEqual(baseData.states);
       expect(result.system).toEqual(baseData.system);
-      expect(result.troop).toEqual(baseData.troop);
-      expect(result.weapon).toEqual(baseData.weapon);
+      expect(result.troops).toEqual(baseData.troops);
+      expect(result.weapons).toEqual(baseData.weapons);
       expect(result.mapFiles).toEqual(baseData.mapFiles);
       expect(convHandlers.readSystem).toHaveBeenCalledWith(
         baseData.system.system,
@@ -470,9 +470,9 @@ describe("readAllGameDataAsArrayFallback", () => {
       convHandlers,
     );
 
-    expect(result.actor.success).toBe(false);
-    expect(result.actor.error).toBe(terms.dataConvertError);
-    expect(result.actor.data).toEqual([]);
+    expect(result.actors.success).toBe(false);
+    expect(result.actors.error).toBe(terms.dataConvertError);
+    expect(result.actors.data).toEqual([]);
   });
 
   test("mapInfo 読み込み失敗時は mapFiles.info が失敗になる", async () => {
@@ -491,9 +491,9 @@ describe("readAllGameDataAsArrayFallback", () => {
       convHandlers,
     );
 
-    expect(result.mapInfo.success).toBe(false);
-    expect(result.mapInfo.fileName).toBe(FILENAME_MAP_INFOS);
-    expect(result.mapInfo.error).toBe(terms.notArray);
+    expect(result.mapInfos.success).toBe(false);
+    expect(result.mapInfos.fileName).toBe(FILENAME_MAP_INFOS);
+    expect(result.mapInfos.error).toBe(terms.notArray);
     expect(result.mapFiles.info.success).toBe(false);
     if (!result.mapFiles.info.success) {
       expect(result.mapFiles.info.filename).toBe(FILENAME_MAP_INFOS);
@@ -526,9 +526,9 @@ describe("readAllGameDataAsNullFallback", () => {
       convHandlers,
     );
 
-    expect(result.actor.success).toBe(false);
-    expect(result.actor.error).toBe(terms.dataConvertError);
-    expect(result.actor.data).toBeNull();
+    expect(result.actors.success).toBe(false);
+    expect(result.actors.error).toBe(terms.dataConvertError);
+    expect(result.actors.data).toBeNull();
   });
 });
 
@@ -538,9 +538,9 @@ describe("readAllRawGameData", () => {
     const mockedValidators = createMockedValidateFunctions(true);
 
     const result = await readAllRawGameData(
+      terms,
       fileReadFn,
       createValidateFunctions(mockedValidators),
-      terms,
     );
 
     expect(result).toEqual(baseData);
@@ -549,9 +549,9 @@ describe("readAllRawGameData", () => {
     const fileReadFn = vi.fn(() => Promise.reject());
     const mockedValidators = createMockedValidateFunctions(true);
     await readAllRawGameData(
+      terms,
       fileReadFn,
       createValidateFunctions(mockedValidators),
-      terms,
     );
     expectValidateFunctionsNotCalled(mockedValidators);
   });

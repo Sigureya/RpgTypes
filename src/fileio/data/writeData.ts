@@ -76,18 +76,18 @@ const bundleToMainData = (bundle: RpgDataBundle): MainDataIdentifiedItems => {
 
 const rawGameDataToMainData = (data: RawGameData): MainDataIdentifiedItems => {
   return {
-    actors: toIdentifiedItems(data.actor.data),
+    actors: toIdentifiedItems(data.actors.data),
     classes: toIdentifiedItems(data.classes.data),
-    skills: toIdentifiedItems(data.skill.data),
-    items: toIdentifiedItems(data.item.data),
-    weapons: toIdentifiedItems(data.weapon.data),
-    armors: toIdentifiedItems(data.armor.data),
+    skills: toIdentifiedItems(data.skills.data),
+    items: toIdentifiedItems(data.items.data),
+    weapons: toIdentifiedItems(data.weapons.data),
+    armors: toIdentifiedItems(data.armors.data),
     enemies: toIdentifiedItems(data.enemies.data),
-    troops: toIdentifiedItems(data.troop.data),
-    states: toIdentifiedItems(data.state.data),
+    troops: toIdentifiedItems(data.troops.data),
+    states: toIdentifiedItems(data.states.data),
     animations: toIdentifiedItems(data.animations.data),
     tilesets: toIdentifiedItems(data.tilesets.data),
-    commonEvents: toIdentifiedItems(data.commonEvent.data),
-    mapInfos: toIdentifiedItems(data.mapInfo.data),
+    commonEvents: toIdentifiedItems(data.commonEvents.data),
+    mapInfos: toIdentifiedItems(data.mapInfos.data),
   };
 };

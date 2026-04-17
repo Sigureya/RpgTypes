@@ -35,12 +35,12 @@ import type { ReadAllDataErrorMessages } from "./terms";
 import type { DataFileNames } from "./types";
 
 export const readAllRawGameData = async (
+  errorMessages: ReadAllDataErrorMessages,
   readFileFn: (filename: DataFileNames | MapFileNameWithExt) => Promise<string>,
   validateFunctions: RpgDataValidators,
-  terms: ReadAllDataErrorMessages,
 ): Promise<RawGameData> => {
   return readAllGameDataWithFallback(
-    terms,
+    errorMessages,
     readFileFn,
     {
       readMap: pickMapData,
@@ -83,7 +83,7 @@ export const readAllGameDataWithArrayFallback = <
   Animation,
   Tileset,
 >(
-  terms: ReadAllDataErrorMessages,
+  errorMessages: ReadAllDataErrorMessages,
   readFileFn: (filename: DataFileNames | MapFileNameWithExt) => Promise<string>,
   validateFunctions: RpgDataValidators,
   handles: RpgDataReadHandlers<
@@ -121,7 +121,7 @@ export const readAllGameDataWithArrayFallback = <
   >
 > => {
   return readAllGameDataWithFallback(
-    terms,
+    errorMessages,
     readFileFn,
     handles,
     validateFunctions,
@@ -145,7 +145,7 @@ export const readAllGameDataWithNullFallback = <
   Animation,
   Tileset,
 >(
-  terms: ReadAllDataErrorMessages,
+  errorMessages: ReadAllDataErrorMessages,
   readFileFn: (filename: DataFileNames | MapFileNameWithExt) => Promise<string>,
   validateFunctions: RpgDataValidators,
   handles: RpgDataReadHandlers<
@@ -183,7 +183,7 @@ export const readAllGameDataWithNullFallback = <
   >
 > => {
   return readAllGameDataWithFallback(
-    terms,
+    errorMessages,
     readFileFn,
     handles,
     validateFunctions,
@@ -208,7 +208,7 @@ const readAllGameDataWithFallback = async <
   Animation,
   Tileset,
 >(
-  terms: ReadAllDataErrorMessages,
+  errorMessages: ReadAllDataErrorMessages,
   readFileFn: (filename: DataFileNames | MapFileNameWithExt) => Promise<string>,
   handles: RpgDataReadHandlers<
     Common,
@@ -246,25 +246,47 @@ const readAllGameDataWithFallback = async <
     mapInfo,
     system,
   ] = await Promise.all([
-    readCommonEventData(
-      terms,
-      readFileFn,
-      validateFunctions.validateCommonEvent,
+    readCommonEventData(errorMessages, readFileFn, (c) =>
+      validateFunctions.validateCommonEvent(c),
     ),
-    readTroopData(terms, readFileFn, validateFunctions.validateTroop),
-    readEnemyData(terms, readFileFn, validateFunctions.validateEnemy),
-    readClassData(terms, readFileFn, validateFunctions.validateClass),
-    readSkillData(terms, readFileFn, validateFunctions.validateSkill),
-    readItemData(terms, readFileFn, validateFunctions.validateItem),
-    readWeaponData(terms, readFileFn, validateFunctions.validateWeapon),
-    readArmorData(terms, readFileFn, validateFunctions.validateArmor),
-    readStateData(terms, readFileFn, validateFunctions.validateState),
-    readActorData(terms, readFileFn, validateFunctions.validateActor),
-    readAnimationData(terms, readFileFn, validateFunctions.validateAnimation),
-    readTilesetData(terms, readFileFn, validateFunctions.validateTileset),
-    readMapInfoData(terms, readFileFn, validateFunctions.validateMapInfo),
-    readSystemData(terms, readFileFn, {
-      validateSystemMz: validateFunctions.validateSystem,
+    readTroopData(errorMessages, readFileFn, (c) =>
+      validateFunctions.validateTroop(c),
+    ),
+    readEnemyData(errorMessages, readFileFn, (c) =>
+      validateFunctions.validateEnemy(c),
+    ),
+    readClassData(errorMessages, readFileFn, (c) =>
+      validateFunctions.validateClass(c),
+    ),
+    readSkillData(errorMessages, readFileFn, (c) =>
+      validateFunctions.validateSkill(c),
+    ),
+    readItemData(errorMessages, readFileFn, (c) =>
+      validateFunctions.validateItem(c),
+    ),
+    readWeaponData(errorMessages, readFileFn, (c) =>
+      validateFunctions.validateWeapon(c),
+    ),
+    readArmorData(errorMessages, readFileFn, (c) =>
+      validateFunctions.validateArmor(c),
+    ),
+    readStateData(errorMessages, readFileFn, (c) =>
+      validateFunctions.validateState(c),
+    ),
+    readActorData(errorMessages, readFileFn, (c) =>
+      validateFunctions.validateActor(c),
+    ),
+    readAnimationData(errorMessages, readFileFn, (c) =>
+      validateFunctions.validateAnimation(c),
+    ),
+    readTilesetData(errorMessages, readFileFn, (c) =>
+      validateFunctions.validateTileset(c),
+    ),
+    readMapInfoData(errorMessages, readFileFn, (c) =>
+      validateFunctions.validateMapInfo(c),
+    ),
+    readSystemData(errorMessages, readFileFn, {
+      validateSystemMz: (c) => validateFunctions.validateSystem(c),
       validateSystemMv: validateFunctions.validateSystemMV,
     }),
   ]);
@@ -272,53 +294,83 @@ const readAllGameDataWithFallback = async <
     mapFiles: mapInfo.success
       ? await readMapBatchData(
           mapInfo.data,
-          terms,
+          errorMessages,
           handles,
           readFileFn,
           validateFunctions.validateMap,
         )
       : createFailedMapBatchResult<Map>(mapInfo),
-    actor: convertIfSuccess(actor, terms, handles.readActors, makeEmptyValue),
-    armor: convertIfSuccess(armor, terms, handles.readArmors, makeEmptyValue),
+    actors: convertIfSuccess(
+      actor,
+      errorMessages,
+      handles.readActors,
+      makeEmptyValue,
+    ),
+    armors: convertIfSuccess(
+      armor,
+      errorMessages,
+      handles.readArmors,
+      makeEmptyValue,
+    ),
     classes: convertIfSuccess(
       classes,
-      terms,
+      errorMessages,
       handles.readClasses,
       makeEmptyValue,
     ),
-    commonEvent: convertIfSuccess(
+    commonEvents: convertIfSuccess(
       commonEvent,
-      terms,
+      errorMessages,
       handles.readCommonEvents,
       makeEmptyValue,
     ),
     enemies: convertIfSuccess(
       enemies,
-      terms,
+      errorMessages,
       handles.readEnemies,
       makeEmptyValue,
     ),
-    item: convertIfSuccess(item, terms, handles.readItems, makeEmptyValue),
-    mapInfo,
-    skill: convertIfSuccess(skill, terms, handles.readSkills, makeEmptyValue),
-    state: convertIfSuccess(state, terms, handles.readStates, makeEmptyValue),
-    system: convertSystemIfSuccess(system, terms, handles.readSystem),
-    troop: convertIfSuccess(troop, terms, handles.readTroops, makeEmptyValue),
-    weapon: convertIfSuccess(
+    items: convertIfSuccess(
+      item,
+      errorMessages,
+      handles.readItems,
+      makeEmptyValue,
+    ),
+    mapInfos: mapInfo,
+    skills: convertIfSuccess(
+      skill,
+      errorMessages,
+      handles.readSkills,
+      makeEmptyValue,
+    ),
+    states: convertIfSuccess(
+      state,
+      errorMessages,
+      handles.readStates,
+      makeEmptyValue,
+    ),
+    system: convertSystemIfSuccess(system, errorMessages, handles.readSystem),
+    troops: convertIfSuccess(
+      troop,
+      errorMessages,
+      handles.readTroops,
+      makeEmptyValue,
+    ),
+    weapons: convertIfSuccess(
       weapon,
-      terms,
+      errorMessages,
       handles.readWeapons,
       makeEmptyValue,
     ),
     animations: convertIfSuccess(
       animation,
-      terms,
+      errorMessages,
       handles.readAnimations,
       makeEmptyValue,
     ),
     tilesets: convertIfSuccess(
       tileset,
-      terms,
+      errorMessages,
       handles.readTilesets,
       makeEmptyValue,
     ),
