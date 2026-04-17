@@ -17,17 +17,17 @@ export const summarizeReadErrors = (
 
 const mainReadErrors = (data: ReadGameDataUnknown): DataReadErrorItem[] => {
   const main: DataReadErrorItem[] = [
-    data.actor,
-    data.armor,
+    data.actors,
+    data.armors,
     data.classes,
-    data.commonEvent,
+    data.commonEvents,
     data.enemies,
-    data.item,
-    data.skill,
-    data.state,
-    data.troop,
-    data.weapon,
-    data.mapInfo,
+    data.items,
+    data.skills,
+    data.states,
+    data.troops,
+    data.weapons,
+    data.mapInfos,
   ]
     .filter((item: ReadHandledResult<unknown, null>) => !item.success)
     .map(

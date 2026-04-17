@@ -35,9 +35,9 @@ import type { ReadAllDataErrorMessages } from "./terms";
 import type { DataFileNames } from "./types";
 
 export const readAllRawGameData = async (
+  terms: ReadAllDataErrorMessages,
   readFileFn: (filename: DataFileNames | MapFileNameWithExt) => Promise<string>,
   validateFunctions: RpgDataValidators,
-  terms: ReadAllDataErrorMessages,
 ): Promise<RawGameData> => {
   return readAllGameDataWithFallback(
     terms,
@@ -278,15 +278,15 @@ const readAllGameDataWithFallback = async <
           validateFunctions.validateMap,
         )
       : createFailedMapBatchResult<Map>(mapInfo),
-    actor: convertIfSuccess(actor, terms, handles.readActors, makeEmptyValue),
-    armor: convertIfSuccess(armor, terms, handles.readArmors, makeEmptyValue),
+    actors: convertIfSuccess(actor, terms, handles.readActors, makeEmptyValue),
+    armors: convertIfSuccess(armor, terms, handles.readArmors, makeEmptyValue),
     classes: convertIfSuccess(
       classes,
       terms,
       handles.readClasses,
       makeEmptyValue,
     ),
-    commonEvent: convertIfSuccess(
+    commonEvents: convertIfSuccess(
       commonEvent,
       terms,
       handles.readCommonEvents,
@@ -298,13 +298,13 @@ const readAllGameDataWithFallback = async <
       handles.readEnemies,
       makeEmptyValue,
     ),
-    item: convertIfSuccess(item, terms, handles.readItems, makeEmptyValue),
-    mapInfo,
-    skill: convertIfSuccess(skill, terms, handles.readSkills, makeEmptyValue),
-    state: convertIfSuccess(state, terms, handles.readStates, makeEmptyValue),
+    items: convertIfSuccess(item, terms, handles.readItems, makeEmptyValue),
+    mapInfos: mapInfo,
+    skills: convertIfSuccess(skill, terms, handles.readSkills, makeEmptyValue),
+    states: convertIfSuccess(state, terms, handles.readStates, makeEmptyValue),
     system: convertSystemIfSuccess(system, terms, handles.readSystem),
-    troop: convertIfSuccess(troop, terms, handles.readTroops, makeEmptyValue),
-    weapon: convertIfSuccess(
+    troops: convertIfSuccess(troop, terms, handles.readTroops, makeEmptyValue),
+    weapons: convertIfSuccess(
       weapon,
       terms,
       handles.readWeapons,
