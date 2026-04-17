@@ -360,13 +360,14 @@ const U = (a, e, t, s) => {
   paramIndex: t,
   value: e.parameters[t]
 }))(a, 1), Ut = (a) => ha(a, (() => [])), V = (a, e) => ha(a, e), ha = (a, e) => a.flatMap(((t, s) => Ie(t, s, a, e))).filter(((t) => t !== null)), Ie = (a, e, t, s) => {
+  if (a.code === R) return s(a);
   if (a.code === $) return ((n) => n.parameters[0].map(((m, o) => ({ code: 102, paramIndex: o, value: m }))))(a);
   const r = ga(a.code);
   if (r) {
     const n = r(t, e, we);
     if (n !== void 0) return [n];
   }
-  return a.code === z || a.code === O || a.code === G ? Te(a) : a.code === R ? s(a) : null;
+  return a.code === z || a.code === O || a.code === G ? Te(a) : null;
 }, we = {
   comment: (a) => ({ code: _, paramIndex: 0, value: a.getBodyText() }),
   showMessage: (a) => {
