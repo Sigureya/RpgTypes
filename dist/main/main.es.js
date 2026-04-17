@@ -6,14 +6,14 @@ import { O as jC, a as qC, b as ZC, c as JC, d as $C, e as aT, f as eT, g as mT 
 import { b as rT, c as ET, a as tT, d as sT, e as AT, f as nT, g as CT, h as TT, i as _T, j as dT, k as RT, l as iT, m as ST, n as lT, o as kT, p as cT, q as OT, r as MT, s as IT, t as NT, u as LT, v as PT, w as FT, x as pT, y as DT, z as yT, A as VT, B as GT, C as bT, D as UT, E as gT, F as BT, G as xT, H as HT, I as vT, J as hT, K as uT, L as fT, M as YT, N as WT, O as KT, P as XT, Q as wT, R as zT, S as QT, T as jT, U as qT, V as ZT, W as JT, X as $T, Y as a_, Z as e_, _ as m_, $ as o_, T as r_, a0 as E_, a1 as t_, a2 as s_, a3 as A_, a4 as n_, a5 as C_, a6 as T_, a7 as __, a8 as d_, a9 as R_, aa as i_, ab as S_, ac as l_, ad as k_, T as c_, ae as O_, af as M_, ag as I_ } from "../shared/replace.es.js";
 import { c as L_, m as P_, a as F_, b as p_, d as D_, e as y_, f as V_, g as G_, h as b_ } from "../shared/commands.es.js";
 import { c as g_, g as B_, a as x_, b as H_, d as v_, e as h_, f as u_, h as f_, i as Y_, j as W_, k as K_, m as X_, l as w_, n as z_, o as Q_, p as j_, q as q_, r as Z_, s as J_, t as $_, u as ad, v as ed, w as md, x as od, y as rd } from "../shared/make.es.js";
-import { isActorTextCommand as td, isAudioCommand as sd, isDataMap as Ad, validateMapWithErrors as nd } from "../validate/rmmz/events.es.js";
-import { isDataActor as Td, isDataAnimation as _d, isDataArmor as dd, isDataClass as Rd, isDataCommonEvent as id, isDataEnemy as Sd, isDataItem as ld, isDataMapInfo as kd, isDataSkill as cd, isDataState as Od, isDataWeapon as Md } from "../validate/rmmz/rpg.es.js";
-import { isDataSystem as Nd } from "../validate/rmmz/system.es.js";
-import { isDataSystemMV as Pd } from "../validate/rmmz/systemMV.es.js";
-import { m as pd } from "../shared/make.es2.js";
-import { m as yd, a as Vd } from "../shared/make.es3.js";
-import { m as bd } from "../shared/mergeItemsSource.es.js";
-import { v as gd } from "../shared/validateWithErrors.es.js";
+import { isActorTextCommand as td, isAudioCommand as sd, isDataCommonEvent as Ad, isDataMap as nd, isDataTroop as Cd, validateMapWithErrors as Td } from "../validate/rmmz/events.es.js";
+import { isDataActor as dd, isDataAnimation as Rd, isDataArmor as id, isDataClass as Sd, isDataEnemy as ld, isDataItem as kd, isDataMapInfo as cd, isDataSkill as Od, isDataState as Md, isDataWeapon as Id } from "../validate/rmmz/rpg.es.js";
+import { isDataSystem as Ld } from "../validate/rmmz/system.es.js";
+import { isDataSystemMV as Fd } from "../validate/rmmz/systemMV.es.js";
+import { m as Dd } from "../shared/make.es2.js";
+import { m as Vd, a as Gd } from "../shared/make.es3.js";
+import { m as Ud } from "../shared/mergeItemsSource.es.js";
+import { v as Bd } from "../shared/validateWithErrors.es.js";
 export {
   m as ABORT_BATTLE,
   Ce as AUTHOR_RMMZ,
@@ -421,20 +421,21 @@ export {
   qo as isCommandAnyAudio,
   Zo as isCommandBattleProcessingVariable,
   Jo as isCommandOperandVariables,
-  Td as isDataActor,
-  _d as isDataAnimation,
-  dd as isDataArmor,
-  Rd as isDataClass,
-  id as isDataCommonEvent,
-  Sd as isDataEnemy,
-  ld as isDataItem,
-  Ad as isDataMap,
-  kd as isDataMapInfo,
-  cd as isDataSkill,
-  Od as isDataState,
-  Nd as isDataSystem,
-  Pd as isDataSystemMV,
-  Md as isDataWeapon,
+  dd as isDataActor,
+  Rd as isDataAnimation,
+  id as isDataArmor,
+  Sd as isDataClass,
+  Ad as isDataCommonEvent,
+  ld as isDataEnemy,
+  kd as isDataItem,
+  nd as isDataMap,
+  cd as isDataMapInfo,
+  Od as isDataSkill,
+  Md as isDataState,
+  Ld as isDataSystem,
+  Fd as isDataSystemMV,
+  Cd as isDataTroop,
+  Id as isDataWeapon,
   hT as isNoteBoolean,
   uT as isNoteNumber,
   yC as isUsingVariableItemCommand,
@@ -444,7 +445,7 @@ export {
   er as makeActorData,
   mr as makeArmorData,
   or as makeAudioCommand,
-  pd as makeAudioFileParams,
+  Dd as makeAudioFileParams,
   rr as makeBattleEventPage,
   X_ as makeBooleanOptions,
   Er as makeClassData,
@@ -676,8 +677,8 @@ export {
   CA as makeMapEventIamge,
   TA as makeMapEventPage,
   _A as makeMapFileInfo,
-  yd as makeMapInfoData,
-  Vd as makeMapName,
+  Vd as makeMapInfoData,
+  Gd as makeMapName,
   j_ as makeMenuCommandsEnabled,
   q_ as makeMenuCommandsEnabledFromArray,
   sm as makeMoveCommandChangeBlendMode,
@@ -719,7 +720,7 @@ export {
   kA as makeTroopMember,
   rd as makeVehicleData,
   cA as makeWeaponData,
-  bd as mergeItemsSource,
+  Ud as mergeItemsSource,
   fT as nonTextNoteKeys,
   YT as normalizeBundleNoteTexts,
   OA as normalizeDataActor,
@@ -785,6 +786,6 @@ export {
   yA as toArraySetupChoice,
   VA as toArraySetupChoiceItem,
   zC as toArrayShowMessageHeader,
-  nd as validateMapWithErrors,
-  gd as validateWithErros
+  Td as validateMapWithErrors,
+  Bd as validateWithErros
 };
