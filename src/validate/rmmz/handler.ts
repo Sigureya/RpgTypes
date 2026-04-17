@@ -10,10 +10,13 @@ import {
   isDataMapInfo,
   isDataSkill,
   isDataState,
+  isDataTileset,
   isDataWeapon,
 } from "./rpg";
+import { isDataSystem } from "./system";
+import { isDataSystemMV } from "./systemMV";
 
-export const createRpgValidator = (): Partial<RpgDataValidators> => ({
+export const createRpgValidator = (): Required<RpgDataValidators> => ({
   validateActor(data) {
     return isDataActor(data);
   },
@@ -52,5 +55,14 @@ export const createRpgValidator = (): Partial<RpgDataValidators> => ({
   },
   validateTroop(data) {
     return isDataTroop(data);
+  },
+  validateSystemMV(data) {
+    return isDataSystemMV(data);
+  },
+  validateSystem(data) {
+    return isDataSystem(data);
+  },
+  validateTileset(data) {
+    return isDataTileset(data);
   },
 });
