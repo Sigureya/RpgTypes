@@ -12,8 +12,8 @@ import {
   FILENAME_TILESET,
   FILENAME_TROOPS,
   FILENAME_WEAPONS,
-} from "@RpgTypes/fileio4/data/arrayData/constants";
-import { FILENAME_SYSTEM } from "@RpgTypes/fileio4/data/system";
+  FILENAME_SYSTEM,
+} from "@RpgTypes/fileio";
 import type { Data_Map, RpgDataBundle } from "@RpgTypes/rmmz";
 
 export const fakeFileRead = (

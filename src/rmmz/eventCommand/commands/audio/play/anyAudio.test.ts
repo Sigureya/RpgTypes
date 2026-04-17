@@ -1,5 +1,5 @@
 import { describe, test, expect } from "vitest";
-import type { AudioFolders } from "@RpgTypes/fileio4";
+import type { AudioFolders } from "@RpgTypes/fileio";
 import {
   PLAY_BGM,
   PLAY_BGS,
