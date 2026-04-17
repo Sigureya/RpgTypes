@@ -1,34 +1,93 @@
 import type { IdentifiedItems } from "@RpgTypes/libs";
-import {
-  FILENAME_ACTORS,
-  FILENAME_ARMORS,
-} from "./arrayData/constants/fileNames";
-import type { MapFileNameWithExt } from "./map";
+import type { Data_Map, RpgDataBundle } from "@RpgTypes/rmmz";
+import type { DDDD } from "./arrayData";
+import { writeMainData } from "./arrayData";
+import type { MapFileNameWithExt, MapFiles } from "./map";
+import { writeMapFiles } from "./map";
 import type { RowGameData } from "./resultType";
+import { FILENAME_SYSTEM } from "./system";
 import type { DataFileNames } from "./types";
 
-const writeGameData = (
+export const writeSystemData = (
+  system: RpgDataBundle["system"],
+  fn: (
+    filename: DataFileNames | MapFileNameWithExt,
+    json: string,
+  ) => Promise<void>,
+): Promise<void> => {
+  return fn(FILENAME_SYSTEM, JSON.stringify(system));
+};
+
+export const writeAllData = (
+  bundle: RpgDataBundle,
+  map: MapFiles<Data_Map>,
+  fn: (
+    filename: DataFileNames | MapFileNameWithExt,
+    json: string,
+  ) => Promise<void>,
+): Promise<void> => {
+  return Promise.all([
+    writeMainData(bundleToMainData(bundle), fn),
+    writeSystemData(bundle.system, fn),
+    writeMapFiles(map.validMaps, fn),
+  ]).then(() => undefined);
+};
+
+export const writeGameData = (
   data: RowGameData,
   fileWriteFn: (
     filename: DataFileNames | MapFileNameWithExt,
     json: string,
   ) => Promise<void>,
-) => {
-  return [
-    xxx(FILENAME_ACTORS, data.actor.data, fileWriteFn),
-    xxx(FILENAME_ARMORS, data.armor.data, fileWriteFn),
+): Promise<void> => {
+  const writes: Promise<unknown>[] = [
+    writeMainData(rowGameDataToMainData(data), fileWriteFn),
+    writeMapFiles(data.mapFiles.validMaps, fileWriteFn),
   ];
+
+  if (data.system.system) {
+    writes.push(writeSystemData(data.system.system, fileWriteFn));
+  }
+
+  return Promise.all(writes).then(() => undefined);
 };
 
-const xxx = <T>(
-  filename: DataFileNames,
-  list: ReadonlyArray<T>,
-  fileWriteFn: (
-    filename: DataFileNames | MapFileNameWithExt,
-    json: string,
-  ) => Promise<void>,
-): Promise<void> => {
-  const items: IdentifiedItems<T> = [null, ...list];
-  const json = JSON.stringify(items);
-  return fileWriteFn(filename, json);
+const toIdentifiedItems = <T>(list: readonly T[]): IdentifiedItems<T> => {
+  return [null, ...list];
+};
+
+const bundleToMainData = (bundle: RpgDataBundle): DDDD => {
+  return {
+    actors: toIdentifiedItems(bundle.actors),
+    classes: toIdentifiedItems(bundle.classes),
+    skills: toIdentifiedItems(bundle.skills),
+    items: toIdentifiedItems(bundle.items),
+    weapons: toIdentifiedItems(bundle.weapons),
+    armors: toIdentifiedItems(bundle.armors),
+    enemies: toIdentifiedItems(bundle.enemies),
+    troops: toIdentifiedItems(bundle.troops),
+    states: toIdentifiedItems(bundle.states),
+    animations: toIdentifiedItems(bundle.animations),
+    tilesets: toIdentifiedItems(bundle.tilesets),
+    commonEvents: toIdentifiedItems(bundle.commonEvents),
+    mapInfos: toIdentifiedItems(bundle.mapInfos),
+  };
+};
+
+const rowGameDataToMainData = (data: RowGameData): DDDD => {
+  return {
+    actors: toIdentifiedItems(data.actor.data),
+    classes: toIdentifiedItems(data.classes.data),
+    skills: toIdentifiedItems(data.skill.data),
+    items: toIdentifiedItems(data.item.data),
+    weapons: toIdentifiedItems(data.weapon.data),
+    armors: toIdentifiedItems(data.armor.data),
+    enemies: toIdentifiedItems(data.enemies.data),
+    troops: toIdentifiedItems(data.troop.data),
+    states: toIdentifiedItems(data.state.data),
+    animations: toIdentifiedItems(data.animations.data),
+    tilesets: toIdentifiedItems(data.tilesets.data),
+    commonEvents: toIdentifiedItems(data.commonEvent.data),
+    mapInfos: toIdentifiedItems(data.mapInfo.data),
+  };
 };

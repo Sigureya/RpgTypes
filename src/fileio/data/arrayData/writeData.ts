@@ -1,19 +1,4 @@
 import type { IdentifiedItems } from "@RpgTypes/libs";
-import type {
-  Data_Actor,
-  Data_Animation,
-  Data_Armor,
-  Data_Class,
-  Data_CommonEvent,
-  Data_Enemy,
-  Data_Item,
-  Data_MapInfo,
-  Data_Skill,
-  Data_State,
-  Data_Tileset,
-  Data_Troop,
-  Data_Weapon,
-} from "@RpgTypes/rmmz";
 import {
   FILENAME_ACTORS,
   FILENAME_ANIMATIONS,
@@ -29,25 +14,9 @@ import {
   FILENAME_TROOPS,
   FILENAME_WEAPONS,
 } from "./constants/fileNames";
-import type { MainDataFileNames } from "./types";
+import type { DDDD, MainDataFileNames } from "./types";
 
-export interface DDDD {
-  actors: IdentifiedItems<Data_Actor>;
-  classes: IdentifiedItems<Data_Class>;
-  skills: IdentifiedItems<Data_Skill>;
-  items: IdentifiedItems<Data_Item>;
-  weapons: IdentifiedItems<Data_Weapon>;
-  armors: IdentifiedItems<Data_Armor>;
-  enemies: IdentifiedItems<Data_Enemy>;
-  troops: IdentifiedItems<Data_Troop>;
-  states: IdentifiedItems<Data_State>;
-  animations: IdentifiedItems<Data_Animation>;
-  tilesets: IdentifiedItems<Data_Tileset>;
-  commonEvents: IdentifiedItems<Data_CommonEvent>;
-  mapInfos: IdentifiedItems<Data_MapInfo>;
-}
-
-export const writeData = <T>(
+const writeData = <T>(
   filename: MainDataFileNames,
   items: IdentifiedItems<T>,
   fileWriteFn: (filename: MainDataFileNames, json: string) => Promise<void>,
