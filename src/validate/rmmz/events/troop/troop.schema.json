@@ -1,0 +1,53 @@
+{
+  "type": "object",
+  "required": ["id", "name", "members", "pages"],
+  "properties": {
+    "id": { "type": "integer", "minimum": 0 },
+    "name": { "type": "string" },
+    "members": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["enemyId", "x", "y", "hidden"],
+        "properties": {
+          "enemyId": { "type": "integer", "minimum": 0 },
+          "x": { "type": "integer" },
+          "y": { "type": "integer" },
+          "hidden": { "type": "boolean" }
+        }
+      }
+    },
+    "pages": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["conditions", "list", "span"],
+        "properties": {
+          "conditions": {
+            "type": "object",
+            "required": ["actorHp", "actorId", "enemyValid", "switchValid"],
+            "properties": {
+              "actorHp": { "type": "integer", "minimum": 0 },
+              "actorId": { "type": "integer", "minimum": 0 },
+              "enemyValid": { "type": "integer", "minimum": 0 },
+              "switchValid": { "type": "integer", "minimum": 0 }
+            }
+          },
+          "list": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["code", "indent", "parameters"],
+              "properties": {
+                "code": { "type": "integer" },
+                "indent": { "type": "integer" },
+                "parameters": { "type": "array" }
+              }
+            }
+          },
+          "span": { "type": "integer", "minimum": 0 }
+        }
+      }
+    }
+  }
+}
