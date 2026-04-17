@@ -31,7 +31,7 @@ describe("readArrayData", () => {
     });
 
     const expected: ReadArrayResult<TestItem> = {
-      succcess: true,
+      success: true,
       fileName: filename,
       data: [{ id: 1 }, { id: 2 }],
       error: "",
@@ -59,7 +59,7 @@ describe("readArrayData", () => {
     });
 
     const expected: ReadArrayResult<TestItem> = {
-      succcess: false,
+      success: false,
       fileName: filename,
       data: [],
       error: terms.notArray,
@@ -86,7 +86,7 @@ describe("readArrayData", () => {
     });
 
     const expected: ReadArrayResult<TestItem> = {
-      succcess: false,
+      success: false,
       fileName: filename,
       data: [],
       error: terms.jsonParseError,
@@ -113,7 +113,7 @@ describe("readArrayData", () => {
     });
 
     const expected: ReadArrayResult<TestItem> = {
-      succcess: false,
+      success: false,
       fileName: filename,
       data: [],
       error: terms.jsonParseError,

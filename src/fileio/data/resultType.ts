@@ -18,10 +18,13 @@ import type { ReadArrayResult } from "./arrayData";
 import type { MapFiles } from "./map";
 import type { ReadSystemResult } from "./system";
 
-export interface ReadHandledResult<T, N = T extends unknown[] ? [] : null> {
-  succcess: boolean;
+export interface ReadHandledResult<
+  T,
+  NullValue = T extends unknown[] ? [] : null,
+> {
+  success: boolean;
   fileName: string;
-  data: T | N;
+  data: T | NullValue;
   error: string;
 }
 
@@ -61,7 +64,7 @@ export type ReadAllGameDataResultUnknown = ReadAllGameDataResult<
   unknown
 >;
 export interface ReadAllGameDataResult<
-  Commmon,
+  Common,
   Map,
   System,
   Actor,
@@ -79,7 +82,7 @@ export interface ReadAllGameDataResult<
   actor: ReadHandledResult<Actor>;
   armor: ReadHandledResult<Armor>;
   classes: ReadHandledResult<Class>;
-  commonEvent: ReadHandledResult<Commmon>;
+  commonEvent: ReadHandledResult<Common>;
   enemies: ReadHandledResult<Enemy>;
   item: ReadHandledResult<Item>;
   mapInfo: ReadArrayResult<Data_MapInfo>;
@@ -94,7 +97,7 @@ export interface ReadAllGameDataResult<
 }
 
 export interface ReadAllGameDataResultWithNullFallback<
-  Commmon,
+  Common,
   Map,
   System,
   Actor,
@@ -110,7 +113,7 @@ export interface ReadAllGameDataResultWithNullFallback<
   actor: ReadHandledResult<Actor, null>;
   armor: ReadHandledResult<Armor, null>;
   classes: ReadHandledResult<Class, null>;
-  commonEvent: ReadHandledResult<Commmon, null>;
+  commonEvent: ReadHandledResult<Common, null>;
   enemies: ReadHandledResult<Enemy, null>;
   item: ReadHandledResult<Item, null>;
   mapInfo: ReadArrayResult<Data_MapInfo>;
@@ -122,7 +125,7 @@ export interface ReadAllGameDataResultWithNullFallback<
   mapFiles: MapFiles<Map>;
 }
 
-export interface RowGameData extends ReadAllDataResultFields {
+export interface RawGameData extends ReadAllDataResultFields {
   actor: ReadArrayResult<Data_Actor>;
   armor: ReadArrayResult<Data_Armor>;
   classes: ReadArrayResult<Data_Class>;

@@ -24,13 +24,13 @@ export interface TermsOfReadArrayData {
 }
 
 export interface ReadArrayResult<T> {
-  succcess: boolean;
+  success: boolean;
   fileName: string;
   data: T[];
   error: string;
 }
 
-export interface DDDD {
+export interface MainDataIdentifiedItems {
   actors: IdentifiedItems<Data_Actor>;
   classes: IdentifiedItems<Data_Class>;
   skills: IdentifiedItems<Data_Skill>;

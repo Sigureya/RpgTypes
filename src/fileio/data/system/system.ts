@@ -14,7 +14,7 @@ export const readSystemData = async (
 ): Promise<ReadSystemResult> => {
   try {
     const content = await fileReadFn(FILENAME_SYSTEM);
-    return then(content, terms, handlers);
+    return parseSystemJson(content, terms, handlers);
   } catch {
     return makeErrorResult(terms.fileNotFound);
   }
@@ -25,20 +25,20 @@ const makeErrorResult = (message: string): ReadSystemResult => ({
   message,
 });
 
-const then = (
+const parseSystemJson = (
   json: string,
   terms: TermsOfReadSystemData,
   handlers: HandlerOfReadSystemData,
 ): ReadSystemResult => {
   try {
     const data = JSON.parse(json);
-    return vvv(data, terms, handlers);
+    return validateSystemData(data, terms, handlers);
   } catch {
     return makeErrorResult(terms.jsonParseError);
   }
 };
 
-const vvv = (
+const validateSystemData = (
   data: unknown,
   terms: TermsOfReadSystemData,
   handlers: HandlerOfReadSystemData,
