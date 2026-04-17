@@ -3,9 +3,9 @@ import { describe, expect, test, vi } from "vitest";
 import type { Data_Map, Data_MapInfo } from "@RpgTypes/rmmz";
 import type { MapFileInfo } from "@RpgTypes/rmmz";
 import { readMapFileFromInfo } from "./map";
-import type { MapReadTerms, SingleMapReadFailure } from "./types";
+import type { MapReadErrorMessages, SingleMapReadFailure } from "./types";
 
-const terms: MapReadTerms = {
+const terms: MapReadErrorMessages = {
   jsonParseError: "json parse error",
   invalidStructure: "invalid structure",
   fileNotFound: "file not found",

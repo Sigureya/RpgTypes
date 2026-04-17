@@ -30,7 +30,7 @@ export interface ReadHandledResult<
 
 export type ReadHandledArrayResult<T> = ReadHandledResult<T[]>;
 
-export interface ReadAllDataResultFields {
+export interface ReadAllDataFields {
   actor: unknown;
   armor: unknown;
   classes: unknown;
@@ -47,7 +47,7 @@ export interface ReadAllDataResultFields {
   tilesets: unknown;
   animations: unknown;
 }
-export type ReadAllGameDataResultUnknown = ReadAllGameDataResult<
+export type ReadAllDataFieldsUnknown = ReadAllGameDataResult<
   unknown,
   unknown,
   unknown,
@@ -78,7 +78,7 @@ export interface ReadAllGameDataResult<
   Troop,
   Animation,
   Tileset,
-> extends ReadAllDataResultFields {
+> extends ReadAllDataFields {
   actor: ReadHandledResult<Actor>;
   armor: ReadHandledResult<Armor>;
   classes: ReadHandledResult<Class>;
@@ -109,7 +109,7 @@ export interface ReadAllGameDataResultWithNullFallback<
   Class,
   State,
   Troop,
-> extends ReadAllDataResultFields {
+> extends ReadAllDataFields {
   actor: ReadHandledResult<Actor, null>;
   armor: ReadHandledResult<Armor, null>;
   classes: ReadHandledResult<Class, null>;
@@ -125,7 +125,7 @@ export interface ReadAllGameDataResultWithNullFallback<
   mapFiles: MapBatchReadResult<Map>;
 }
 
-export interface RawGameData extends ReadAllDataResultFields {
+export interface RawGameData extends ReadAllDataFields {
   actor: ReadArrayResult<Data_Actor>;
   armor: ReadArrayResult<Data_Armor>;
   classes: ReadArrayResult<Data_Class>;

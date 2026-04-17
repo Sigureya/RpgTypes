@@ -52,16 +52,13 @@ import {
   readAllGameDataAsNullFallback,
   readAllRawGameData,
 } from "./readAll";
-import type {
-  RpgDataReadHandlers,
-  ValidateFunctionsOfReadRpgData,
-} from "./reader/handlers";
-import type { ReadAllDataResultFields, RawGameData } from "./resultType";
+import type { RpgDataReadHandlers, RpgDataValidators } from "./reader/handlers";
+import type { ReadAllDataFields, RawGameData } from "./resultType";
 import { FILENAME_SYSTEM } from "./system";
-import type { TermsOfReadAllData } from "./terms";
+import type { ReadAllDataErrorMessages } from "./terms";
 import type { DataFileNames } from "./types";
 
-const terms: TermsOfReadAllData = {
+const terms: ReadAllDataErrorMessages = {
   jsonParseError: "json parse error",
   notArray: "not array",
   invalidStructure: "invalid structure",
@@ -74,7 +71,7 @@ const terms: TermsOfReadAllData = {
 const createMockedValidateFunctions = (
   value: boolean,
 ): MockedObject<
-  Record<keyof ValidateFunctionsOfReadRpgData, (data: unknown) => boolean>
+  Record<keyof RpgDataValidators, (data: unknown) => boolean>
 > => ({
   validateActor: vi.fn(() => value),
   validateArmor: vi.fn(() => value),
@@ -96,9 +93,9 @@ const createMockedValidateFunctions = (
 
 const createValidateFunctions = (
   mocked: MockedObject<
-    Record<keyof ValidateFunctionsOfReadRpgData, (data: unknown) => boolean>
+    Record<keyof RpgDataValidators, (data: unknown) => boolean>
   >,
-): ValidateFunctionsOfReadRpgData => ({
+): RpgDataValidators => ({
   validateActor: (item): item is Data_Actor => mocked.validateActor(item),
   validateArmor: (item): item is Data_Armor => mocked.validateArmor(item),
   validateClass: (item): item is Data_Class => mocked.validateClass(item),
@@ -322,7 +319,7 @@ const expectConvertHandlersNotCalled = (
 
 const expectValidateFunctionsNotCalled = (
   mockedValidators: MockedObject<
-    Record<keyof ValidateFunctionsOfReadRpgData, (data: unknown) => boolean>
+    Record<keyof RpgDataValidators, (data: unknown) => boolean>
   >,
 ) => {
   expect(mockedValidators.validateActor).not.toHaveBeenCalled();
@@ -346,8 +343,8 @@ const runTest = (
       filename: DataFileNames | MapFileNameWithExt,
     ) => Promise<string>,
     convHandlers: ConvertHandlers,
-    mockedValidators: ValidateFunctionsOfReadRpgData,
-  ) => Promise<ReadAllDataResultFields>,
+    mockedValidators: RpgDataValidators,
+  ) => Promise<ReadAllDataFields>,
 ) => {
   test("when read rejected,do not call convert and validate", async () => {
     const fileReadFn = vi.fn(() => Promise.reject());

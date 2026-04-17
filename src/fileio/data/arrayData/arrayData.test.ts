@@ -1,7 +1,7 @@
 import type { MockedFunction } from "vitest";
 import { describe, expect, test, vi } from "vitest";
 import { readArrayData } from "./arrayData";
-import type { TermsOfReadArrayData, ReadArrayResult } from "./types";
+import type { ArrayDataErrorMessages, ReadArrayResult } from "./types";
 
 interface TestItem {
   id: number;
@@ -9,7 +9,7 @@ interface TestItem {
 
 type MockedValidateFn = MockedFunction<(item: unknown) => boolean>;
 
-const terms: TermsOfReadArrayData = {
+const terms: ArrayDataErrorMessages = {
   jsonParseError: "json parse error",
   notArray: "not array",
 };

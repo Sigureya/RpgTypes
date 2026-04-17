@@ -21,7 +21,7 @@ export interface SingleMapReadFailure {
   editingName: string;
 }
 
-export interface MapReadTerms {
+export interface MapReadErrorMessages {
   jsonParseError: string;
   invalidStructure: string;
   fileNotFound: string;

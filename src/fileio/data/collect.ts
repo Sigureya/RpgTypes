@@ -1,16 +1,13 @@
-import type {
-  ReadAllGameDataResultUnknown,
-  ReadHandledResult,
-} from "./resultType";
-import type { DataReadErrors, ErrorItem } from "./types";
+import type { ReadAllDataFieldsUnknown, ReadHandledResult } from "./resultType";
+import type { DataReadErrors, DataReadErrorIte } from "./types";
 
 export const correctErrors = (
-  data: ReadAllGameDataResultUnknown,
+  data: ReadAllDataFieldsUnknown,
 ): DataReadErrors => {
   return {
     main: mainError(data),
     map: data.mapFiles.invalidMaps.map(
-      (m): ErrorItem => ({
+      (m): DataReadErrorIte => ({
         fileName: m.filename,
         error: m.message,
       }),
@@ -18,8 +15,8 @@ export const correctErrors = (
   };
 };
 
-const mainError = (data: ReadAllGameDataResultUnknown): ErrorItem[] => {
-  const main: ErrorItem[] = [
+const mainError = (data: ReadAllDataFieldsUnknown): DataReadErrorIte[] => {
+  const main: DataReadErrorIte[] = [
     data.actor,
     data.armor,
     data.classes,
@@ -33,10 +30,15 @@ const mainError = (data: ReadAllGameDataResultUnknown): ErrorItem[] => {
     data.mapInfo,
   ]
     .filter((item: ReadHandledResult<unknown, null>) => !item.success)
-    .map((item): ErrorItem => ({ fileName: item.fileName, error: item.error }));
+    .map(
+      (item): DataReadErrorIte => ({
+        fileName: item.fileName,
+        error: item.error,
+      }),
+    );
 
   if (data.system.system === null) {
-    const system: ErrorItem = {
+    const system: DataReadErrorIte = {
       fileName: data.system.message,
       error: data.system.message,
     };
