@@ -27,7 +27,7 @@ import type {
   ValidateFunctionsOfReadRpgData,
 } from "./reader/handlers";
 import type {
-  RowGameData,
+  RawGameData,
   ReadAllDataResultFields,
   ReadAllGameDataResult,
   ReadAllGameDataResultWithNullFallback,
@@ -38,11 +38,11 @@ import type { ReadSystemResult } from "./system";
 import type { TermsOfReadAllData } from "./terms";
 import type { DataFileNames } from "./types";
 
-export const readAllRowGameData = async (
+export const readAllRawGameData = async (
   readFileFn: (filename: DataFileNames | MapFileNameWithExt) => Promise<string>,
   validateFunctions: ValidateFunctionsOfReadRpgData,
   terms: TermsOfReadAllData,
-): Promise<RowGameData> => {
+): Promise<RawGameData> => {
   return readAllGameDataWithFallback(
     terms,
     readFileFn,

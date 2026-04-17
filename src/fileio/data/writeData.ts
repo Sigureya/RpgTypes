@@ -4,7 +4,7 @@ import type { MainDataIdentifiedItems } from "./arrayData";
 import { writeMainData } from "./arrayData";
 import type { MapFileNameWithExt, MapFiles } from "./map";
 import { writeMapFiles } from "./map";
-import type { RowGameData } from "./resultType";
+import type { RawGameData } from "./resultType";
 import { FILENAME_SYSTEM } from "./system";
 import type { DataFileNames } from "./types";
 
@@ -34,14 +34,14 @@ export const writeAllData = (
 };
 
 export const writeGameData = (
-  data: RowGameData,
+  data: RawGameData,
   fileWriteFn: (
     filename: DataFileNames | MapFileNameWithExt,
     json: string,
   ) => Promise<void>,
 ): Promise<void> => {
   const writes: Promise<unknown>[] = [
-    writeMainData(rowGameDataToMainData(data), fileWriteFn),
+    writeMainData(rawGameDataToMainData(data), fileWriteFn),
     writeMapFiles(data.mapFiles.validMaps, fileWriteFn),
   ];
 
@@ -74,7 +74,7 @@ const bundleToMainData = (bundle: RpgDataBundle): MainDataIdentifiedItems => {
   };
 };
 
-const rowGameDataToMainData = (data: RowGameData): MainDataIdentifiedItems => {
+const rawGameDataToMainData = (data: RawGameData): MainDataIdentifiedItems => {
   return {
     actors: toIdentifiedItems(data.actor.data),
     classes: toIdentifiedItems(data.classes.data),

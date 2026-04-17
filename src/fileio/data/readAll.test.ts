@@ -50,13 +50,13 @@ import type { MapFileNameWithExt } from "./map";
 import {
   readAllGameDataAsArrayFallback,
   readAllGameDataAsNullFallback,
-  readAllRowGameData,
+  readAllRawGameData,
 } from "./readAll";
 import type {
   RpgDataReadHandlers,
   ValidateFunctionsOfReadRpgData,
 } from "./reader/handlers";
-import type { ReadAllDataResultFields, RowGameData } from "./resultType";
+import type { ReadAllDataResultFields, RawGameData } from "./resultType";
 import { FILENAME_SYSTEM } from "./system";
 import type { TermsOfReadAllData } from "./terms";
 import type { DataFileNames } from "./types";
@@ -229,7 +229,7 @@ const baseData = {
     error: "",
     data: [],
   },
-} as const satisfies RowGameData;
+} as const satisfies RawGameData;
 
 const baseFileMap: Record<string, string> = {
   [baseData.actor.fileName]: JSON.stringify(baseData.actor.data),
@@ -535,12 +535,12 @@ describe("readAllGameDataAsNullFallback", () => {
   });
 });
 
-describe("readAllRowGameData", () => {
+describe("readAllRawGameData", () => {
   test("生データをそのまま返す", async () => {
     const fileReadFn = createReadFileFn(baseFileMap);
     const mockedValidators = createMockedValidateFunctions(true);
 
-    const result = await readAllRowGameData(
+    const result = await readAllRawGameData(
       fileReadFn,
       createValidateFunctions(mockedValidators),
       terms,
@@ -551,7 +551,7 @@ describe("readAllRowGameData", () => {
   test("全てのファイル読み込みを失敗させ、validateは呼ばれない", async () => {
     const fileReadFn = vi.fn(() => Promise.reject());
     const mockedValidators = createMockedValidateFunctions(true);
-    await readAllRowGameData(
+    await readAllRawGameData(
       fileReadFn,
       createValidateFunctions(mockedValidators),
       terms,

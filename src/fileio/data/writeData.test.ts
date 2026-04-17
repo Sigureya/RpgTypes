@@ -4,7 +4,7 @@ import { makeMapData, makeSystemData } from "@RpgTypes/rmmz";
 import type { ReadArrayResult } from "./arrayData";
 import { FILENAME_ACTORS, FILENAME_MAP_INFOS } from "./arrayData";
 import type { MapFiles } from "./map";
-import type { RowGameData } from "./resultType";
+import type { RawGameData } from "./resultType";
 import { FILENAME_SYSTEM } from "./system";
 import { writeAllData, writeGameData } from "./writeData";
 
@@ -47,7 +47,7 @@ const mapFiles: MapFiles<Data_Map> = {
   invalidMaps: [],
 };
 
-const rowGameData: RowGameData = {
+const rawGameData: RawGameData = {
   actor: createArrayResult(bundle.actors),
   armor: createArrayResult(bundle.armors),
   classes: createArrayResult(bundle.classes),
@@ -91,10 +91,10 @@ describe("writeAllData", () => {
 });
 
 describe("writeGameData", () => {
-  test("RowGameData を下位書き込み関数へ委譲する", async () => {
+  test("RawGameData を下位書き込み関数へ委譲する", async () => {
     const fileWriteFn = vi.fn(async () => undefined);
 
-    await writeGameData(rowGameData, fileWriteFn);
+    await writeGameData(rawGameData, fileWriteFn);
 
     expect(fileWriteFn).toHaveBeenCalledWith(
       FILENAME_ACTORS,
@@ -115,7 +115,7 @@ describe("writeGameData", () => {
 
     await writeGameData(
       {
-        ...rowGameData,
+        ...rawGameData,
         system: { system: null, message: "missing" },
       },
       fileWriteFn,

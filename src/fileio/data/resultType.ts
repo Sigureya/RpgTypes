@@ -125,7 +125,7 @@ export interface ReadAllGameDataResultWithNullFallback<
   mapFiles: MapFiles<Map>;
 }
 
-export interface RowGameData extends ReadAllDataResultFields {
+export interface RawGameData extends ReadAllDataResultFields {
   actor: ReadArrayResult<Data_Actor>;
   armor: ReadArrayResult<Data_Armor>;
   classes: ReadArrayResult<Data_Class>;
