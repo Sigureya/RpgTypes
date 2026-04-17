@@ -1,11 +1,7 @@
+import type { AudioFilesSet, ImageFilesSet } from "@RpgTypes/fileio";
 import type { MapFileInfo, NoteReadResult } from "@RpgTypes/rmmz";
 import { stringLikeNoteKeys, summarizeNoteKinds } from "./note/note";
-import type {
-  AudioFilesSet,
-  ImageFilesSet,
-  OtherFilesSet,
-  SummarizedNote,
-} from "./note/types";
+import type { OtherFilesSet, SummarizedNote } from "./note/types";
 import type {
   ExtractedMapTexts,
   TextPluginCommandParameter,
