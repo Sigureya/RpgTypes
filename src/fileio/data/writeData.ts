@@ -1,6 +1,6 @@
 import type { IdentifiedItems } from "@RpgTypes/libs";
 import type { Data_Map, RpgDataBundle } from "@RpgTypes/rmmz";
-import type { DDDD } from "./arrayData";
+import type { MainDataIdentifiedItems } from "./arrayData";
 import { writeMainData } from "./arrayData";
 import type { MapFileNameWithExt, MapFiles } from "./map";
 import { writeMapFiles } from "./map";
@@ -56,7 +56,7 @@ const toIdentifiedItems = <T>(list: readonly T[]): IdentifiedItems<T> => {
   return [null, ...list];
 };
 
-const bundleToMainData = (bundle: RpgDataBundle): DDDD => {
+const bundleToMainData = (bundle: RpgDataBundle): MainDataIdentifiedItems => {
   return {
     actors: toIdentifiedItems(bundle.actors),
     classes: toIdentifiedItems(bundle.classes),
@@ -74,7 +74,7 @@ const bundleToMainData = (bundle: RpgDataBundle): DDDD => {
   };
 };
 
-const rowGameDataToMainData = (data: RowGameData): DDDD => {
+const rowGameDataToMainData = (data: RowGameData): MainDataIdentifiedItems => {
   return {
     actors: toIdentifiedItems(data.actor.data),
     classes: toIdentifiedItems(data.classes.data),

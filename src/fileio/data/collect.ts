@@ -4,7 +4,7 @@ import type {
 } from "./resultType";
 import type { DataReadErrors, ErrorItem } from "./types";
 
-export const correctError = (
+export const correctErrors = (
   data: ReadAllGameDataResultUnknown,
 ): DataReadErrors => {
   return {

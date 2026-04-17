@@ -52,7 +52,7 @@ export const readAllRowGameData = async (
       readArmors: identity,
       readClasss: identity,
       readCommonEvents: identity,
-      readEnemys: identity,
+      readEnemies: identity,
       readItems: identity,
       readSkills: identity,
       readStates: identity,
@@ -297,7 +297,7 @@ const readAllGameDataWithFallback = async <
     enemies: convertIfSuccess(
       enemies,
       terms,
-      handles.readEnemys,
+      handles.readEnemies,
       makeEmptyValue,
     ),
     item: convertIfSuccess(item, terms, handles.readItems, makeEmptyValue),

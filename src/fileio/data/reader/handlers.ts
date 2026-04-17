@@ -55,7 +55,7 @@ export interface RpgDataReadHandlers<
   readItems(item: Data_Item[], filePath: string): Item;
   readWeapons(weapon: Data_Weapon[], filePath: string): Weapon;
   readArmors(armor: Data_Armor[], filePath: string): Armor;
-  readEnemys(enemy: Data_Enemy[], filePath: string): Enemy;
+  readEnemies(enemy: Data_Enemy[], filePath: string): Enemy;
   readClasss(cls: Data_Class[], filePath: string): Class;
   readStates(state: Data_State[], filePath: string): State;
   readActors(actors: Data_Actor[], filePath: string): Actor;

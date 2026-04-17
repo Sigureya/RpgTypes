@@ -94,7 +94,7 @@ const createMockedValidateFunctions = (
   validateTileset: vi.fn(() => value),
 });
 
-const lapXX = (
+const createValidateFunctions = (
   mocked: MockedObject<
     Record<keyof ValidateFunctionsOfReadRpgData, (data: unknown) => boolean>
   >,
@@ -271,7 +271,7 @@ const createIdentityHandlers = (): MockedObject<ConvertHandlers> => ({
   readArmors: vi.fn((data) => data),
   readClasss: vi.fn((data) => data),
   readCommonEvents: vi.fn((data) => data),
-  readEnemys: vi.fn((data) => data),
+  readEnemies: vi.fn((data) => data),
   readItems: vi.fn((data) => data),
   readMap: vi.fn((data) => data.map),
   readSkills: vi.fn((data) => data),
@@ -291,7 +291,7 @@ const createConvertErrorHandlers = (): MockedObject<ConvertHandlers> => ({
   readArmors: vi.fn(errorFunc),
   readClasss: vi.fn(errorFunc),
   readCommonEvents: vi.fn(errorFunc),
-  readEnemys: vi.fn(errorFunc),
+  readEnemies: vi.fn(errorFunc),
   readItems: vi.fn(errorFunc),
   readMap: vi.fn(errorFunc),
   readSkills: vi.fn(errorFunc),
@@ -310,7 +310,7 @@ const expectConvertHandlersNotCalled = (
   expect(convHandlers.readArmors).not.toHaveBeenCalled();
   expect(convHandlers.readClasss).not.toHaveBeenCalled();
   expect(convHandlers.readCommonEvents).not.toHaveBeenCalled();
-  expect(convHandlers.readEnemys).not.toHaveBeenCalled();
+  expect(convHandlers.readEnemies).not.toHaveBeenCalled();
   expect(convHandlers.readItems).not.toHaveBeenCalled();
   expect(convHandlers.readMap).not.toHaveBeenCalled();
   expect(convHandlers.readSkills).not.toHaveBeenCalled();
@@ -353,7 +353,7 @@ const runTest = (
     const fileReadFn = vi.fn(() => Promise.reject());
     const convHandlers = createConvertErrorHandlers();
     const mockedValidators = createMockedValidateFunctions(true);
-    const handlers = lapXX(mockedValidators);
+    const handlers = createValidateFunctions(mockedValidators);
     await fn(fileReadFn, convHandlers, handlers);
     expectConvertHandlersNotCalled(convHandlers);
     expectValidateFunctionsNotCalled(mockedValidators);
@@ -378,7 +378,7 @@ describe("readAllGameDataAsArrayFallback", () => {
       await readAllGameDataAsArrayFallback(
         terms,
         fileReadFn,
-        lapXX(mockedValidators),
+        createValidateFunctions(mockedValidators),
         convHandlers,
       );
     });
@@ -390,7 +390,7 @@ describe("readAllGameDataAsArrayFallback", () => {
       const result = await readAllGameDataAsArrayFallback(
         terms,
         fileReadFn,
-        lapXX(mockedValidators),
+        createValidateFunctions(mockedValidators),
         convHandlers,
       );
 
@@ -436,7 +436,7 @@ describe("readAllGameDataAsArrayFallback", () => {
         readArmors: (data) => data,
         readClasss: (data) => data,
         readCommonEvents: (data) => data,
-        readEnemys: (data) => data,
+        readEnemies: (data) => data,
         readItems: (data) => data,
         readMap: (data) => data.map,
         readSkills: (data) => data,
@@ -452,7 +452,7 @@ describe("readAllGameDataAsArrayFallback", () => {
       const result = await readAllGameDataAsArrayFallback(
         terms,
         fileReadFn,
-        lapXX(mockedValidators),
+        createValidateFunctions(mockedValidators),
         convHandlers,
       );
 
@@ -469,7 +469,7 @@ describe("readAllGameDataAsArrayFallback", () => {
     const result = await readAllGameDataAsArrayFallback(
       terms,
       fileReadFn,
-      lapXX(mockedValidators),
+      createValidateFunctions(mockedValidators),
       convHandlers,
     );
 
@@ -490,7 +490,7 @@ describe("readAllGameDataAsArrayFallback", () => {
     const result = await readAllGameDataAsArrayFallback(
       terms,
       fileReadFn,
-      lapXX(mockedValidators),
+      createValidateFunctions(mockedValidators),
       convHandlers,
     );
 
@@ -525,7 +525,7 @@ describe("readAllGameDataAsNullFallback", () => {
     const result = await readAllGameDataAsNullFallback(
       terms,
       fileReadFn,
-      lapXX(mockedValidators),
+      createValidateFunctions(mockedValidators),
       convHandlers,
     );
 
@@ -542,7 +542,7 @@ describe("readAllRowGameData", () => {
 
     const result = await readAllRowGameData(
       fileReadFn,
-      lapXX(mockedValidators),
+      createValidateFunctions(mockedValidators),
       terms,
     );
 
@@ -551,7 +551,11 @@ describe("readAllRowGameData", () => {
   test("全てのファイル読み込みを失敗させ、validateは呼ばれない", async () => {
     const fileReadFn = vi.fn(() => Promise.reject());
     const mockedValidators = createMockedValidateFunctions(true);
-    await readAllRowGameData(fileReadFn, lapXX(mockedValidators), terms);
+    await readAllRowGameData(
+      fileReadFn,
+      createValidateFunctions(mockedValidators),
+      terms,
+    );
     expectValidateFunctionsNotCalled(mockedValidators);
   });
 });

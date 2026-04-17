@@ -7,7 +7,7 @@ export const readArrayData = async <T, F extends string>(
   validateItemFn: (item: unknown) => item is T,
 ): Promise<ReadArrayResult<T>> => {
   return readFileFn(filename)
-    .then((json) => parseXX(json, filename, terms, validateItemFn))
+    .then((json) => parseArrayJson(json, filename, terms, validateItemFn))
     .catch(
       (): ReadArrayResult<T> => ({
         succcess: false,
@@ -18,7 +18,7 @@ export const readArrayData = async <T, F extends string>(
     );
 };
 
-const parseXX = <T>(
+const parseArrayJson = <T>(
   json: string,
   filename: string,
   terms: TermsOfReadArrayData,

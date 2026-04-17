@@ -30,7 +30,7 @@ export interface ReadArrayResult<T> {
   error: string;
 }
 
-export interface DDDD {
+export interface MainDataIdentifiedItems {
   actors: IdentifiedItems<Data_Actor>;
   classes: IdentifiedItems<Data_Class>;
   skills: IdentifiedItems<Data_Skill>;

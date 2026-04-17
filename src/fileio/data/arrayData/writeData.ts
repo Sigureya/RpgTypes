@@ -14,7 +14,7 @@ import {
   FILENAME_TROOPS,
   FILENAME_WEAPONS,
 } from "./constants/fileNames";
-import type { DDDD, MainDataFileNames } from "./types";
+import type { MainDataIdentifiedItems, MainDataFileNames } from "./types";
 
 const writeData = <T>(
   filename: MainDataFileNames,
@@ -26,7 +26,7 @@ const writeData = <T>(
 };
 
 export const writeMainData = (
-  data: DDDD,
+  data: MainDataIdentifiedItems,
   fileWriteFn: (filename: MainDataFileNames, json: string) => Promise<void>,
 ): Promise<void[]> => {
   return Promise.all([
