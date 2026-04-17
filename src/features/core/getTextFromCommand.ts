@@ -60,6 +60,9 @@ const forCommand = <T extends TextPluginCommandParameter>(
   list: ReadonlyArray<EventCommand>,
   pluginCommandFn: (command: Command_PluginCommandMZ) => T[],
 ) => {
+  if (command.code === PLUGIN_COMMAND_MZ) {
+    return pluginCommandFn(command);
+  }
   if (command.code === SHOW_CHOICES) {
     return extractTextParamsFromChoice(command);
   }
@@ -82,10 +85,6 @@ const forCommand = <T extends TextPluginCommandParameter>(
   }
   if (command.code === CHANGE_PROFILE) {
     return extractTextFromActorCommand(command);
-  }
-
-  if (command.code === PLUGIN_COMMAND_MZ) {
-    return pluginCommandFn(command);
   }
   return null;
 };
