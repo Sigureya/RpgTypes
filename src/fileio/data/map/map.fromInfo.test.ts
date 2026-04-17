@@ -1,14 +1,9 @@
 import type { MockedFunction } from "vitest";
 import { describe, expect, test, vi } from "vitest";
-import type { Data_Map, Data_MapInfo } from "@RpgTypes/rmmz";
+import type { Data_Map, Data_MapInfo, MapFileInfo } from "@RpgTypes/rmmz";
 import { makeMapData, makeMapInfoData } from "@RpgTypes/rmmz";
 import { readMapFilesFromInfo, readMapFilesFromInfoEx } from "./map";
-import type {
-  MapFiles,
-  MapReadTerms,
-  MapReadSuccess,
-  MapReadFailed,
-} from "./types";
+import type { MapReadTerms, SingleMapReadFailure } from "./types";
 
 interface ConvertedMap {
   mockDisplayName: string;
@@ -40,11 +35,14 @@ const readMapFile = (filename: string): Promise<string> => {
   return Promise.reject(new Error("file not found"));
 };
 
-const mockConvertFn = (data: MapReadSuccess<Data_Map>): ConvertedMap => ({
+const mockConvertFn = (data: MapFileInfo<Data_Map>): ConvertedMap => ({
   mockDisplayName: data.map.displayName,
 });
 
-const infoToFailed = (info: Data_MapInfo, message: string): MapReadFailed => ({
+const infoToFailed = (
+  info: Data_MapInfo,
+  message: string,
+): SingleMapReadFailure => ({
   map: null,
   message,
   filename: mapName(info.id),

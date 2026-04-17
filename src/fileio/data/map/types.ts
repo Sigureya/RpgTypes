@@ -8,26 +8,13 @@ export interface MapInfoReadResult {
   success: false;
 }
 
-export interface MapFiles<T> {
+export interface MapBatchReadResult<T> {
   info: MapInfoReadResult | { success: true };
   validMaps: MapFileInfo<T>[];
-  invalidMaps: MapReadFailed[];
+  invalidMaps: SingleMapReadFailure[];
 }
 
-export interface MapInfoReadFailed {
-  success: false;
-  mapId: number;
-  message: string;
-  filename: string;
-}
-
-export interface MapReadSuccess<T> {
-  map: T;
-  filename: MapFileInfo["filename"];
-  editingName: string;
-}
-
-export interface MapReadFailed {
+export interface SingleMapReadFailure {
   map: null;
   message: string;
   filename: string;

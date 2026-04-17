@@ -3,7 +3,7 @@ import type { Data_Map, RpgDataBundle } from "@RpgTypes/rmmz";
 import { makeMapData, makeSystemData } from "@RpgTypes/rmmz";
 import type { ReadArrayResult } from "./arrayData";
 import { FILENAME_ACTORS, FILENAME_MAP_INFOS } from "./arrayData";
-import type { MapFiles } from "./map";
+import type { MapBatchReadResult } from "./map";
 import type { RawGameData } from "./resultType";
 import { FILENAME_SYSTEM } from "./system";
 import { writeAllData, writeGameData } from "./writeData";
@@ -35,7 +35,7 @@ const bundle: RpgDataBundle = {
   system: systemData,
 };
 
-const mapFiles: MapFiles<Data_Map> = {
+const mapFiles: MapBatchReadResult<Data_Map> = {
   info: { success: true },
   validMaps: [
     {

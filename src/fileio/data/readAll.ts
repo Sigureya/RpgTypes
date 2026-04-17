@@ -20,7 +20,7 @@ import {
   readTroopData,
   readWeaponData,
 } from "./arrayData";
-import type { MapFileNameWithExt, MapFiles } from "./map";
+import type { MapBatchReadResult, MapFileNameWithExt } from "./map";
 import { readMapFilesFromInfoEx } from "./map";
 import type {
   RpgDataReadHandlers,
@@ -332,7 +332,7 @@ interface MapReader<T> {
 
 const mapInfosFailed = <T>(
   infos: ReadArrayResult<Data_MapInfo>,
-): MapFiles<T> => ({
+): MapBatchReadResult<T> => ({
   info: {
     filename: infos.fileName,
     message: infos.error,
@@ -348,7 +348,7 @@ const convertMapData = async <T>(
   handles: MapReader<T>,
   readFileFn: (filename: MapFileNameWithExt) => Promise<string>,
   validateFn: (item: unknown) => item is Data_Map,
-): Promise<MapFiles<T>> => {
+): Promise<MapBatchReadResult<T>> => {
   return await readMapFilesFromInfoEx(
     mapInfos,
     terms,
