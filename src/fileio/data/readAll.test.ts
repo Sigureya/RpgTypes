@@ -137,67 +137,67 @@ const createReadFileFn = (
 
 const baseData = {
   actor: {
-    succcess: true,
+    success: true,
     fileName: FILENAME_ACTORS,
     error: "",
     data: [makeActorData({ id: 1, name: "A" })],
   },
   armor: {
-    succcess: true,
+    success: true,
     fileName: FILENAME_ARMORS,
     error: "",
     data: [makeArmorData({ id: 1, name: "R" })],
   },
   classes: {
-    succcess: true,
+    success: true,
     fileName: FILENAME_CLASSES,
     error: "",
     data: [makeClassData({ id: 1, name: "C" })],
   },
   commonEvent: {
-    succcess: true,
+    success: true,
     fileName: FILENAME_COMMON_EVENTS,
     error: "",
     data: [makeCommonEventData({ id: 1, name: "CE" })],
   },
   enemies: {
-    succcess: true,
+    success: true,
     fileName: FILENAME_ENEMIES,
     error: "",
     data: [makeEnemyData({ id: 1, name: "E" })],
   },
   item: {
-    succcess: true,
+    success: true,
     fileName: FILENAME_ITEMS,
     error: "",
     data: [makeItemData({ id: 1, name: "I" })],
   },
   mapInfo: {
-    succcess: true,
+    success: true,
     fileName: FILENAME_MAP_INFOS,
     error: "",
     data: [makeMapInfoData({ id: 1, name: "Map1" })],
   },
   skill: {
-    succcess: true,
+    success: true,
     fileName: FILENAME_SKILLS,
     error: "",
     data: [makeSkillData({ id: 1, name: "S" })],
   },
   state: {
-    succcess: true,
+    success: true,
     fileName: FILENAME_STATES,
     error: "",
     data: [makeStateData({ id: 1, name: "ST" })],
   },
   troop: {
-    succcess: true,
+    success: true,
     fileName: FILENAME_TROOPS,
     error: "",
     data: [makeTroopData({ id: 1, name: "T" })],
   },
   weapon: {
-    succcess: true,
+    success: true,
     fileName: FILENAME_WEAPONS,
     error: "",
     data: [makeWeaponData({ id: 1, name: "W" })],
@@ -218,13 +218,13 @@ const baseData = {
     invalidMaps: [],
   },
   animations: {
-    succcess: true,
+    success: true,
     fileName: "Animations.json",
     error: "",
     data: [],
   },
   tilesets: {
-    succcess: true,
+    success: true,
     fileName: "Tilesets.json",
     error: "",
     data: [],
@@ -269,7 +269,7 @@ type ConvertHandlers = RpgDataReadHandlers<
 const createIdentityHandlers = (): MockedObject<ConvertHandlers> => ({
   readActors: vi.fn((data) => data),
   readArmors: vi.fn((data) => data),
-  readClasss: vi.fn((data) => data),
+  readClasses: vi.fn((data) => data),
   readCommonEvents: vi.fn((data) => data),
   readEnemies: vi.fn((data) => data),
   readItems: vi.fn((data) => data),
@@ -289,7 +289,7 @@ const errorFunc = () => {
 const createConvertErrorHandlers = (): MockedObject<ConvertHandlers> => ({
   readActors: vi.fn(errorFunc),
   readArmors: vi.fn(errorFunc),
-  readClasss: vi.fn(errorFunc),
+  readClasses: vi.fn(errorFunc),
   readCommonEvents: vi.fn(errorFunc),
   readEnemies: vi.fn(errorFunc),
   readItems: vi.fn(errorFunc),
@@ -308,7 +308,7 @@ const expectConvertHandlersNotCalled = (
 ) => {
   expect(convHandlers.readActors).not.toHaveBeenCalled();
   expect(convHandlers.readArmors).not.toHaveBeenCalled();
-  expect(convHandlers.readClasss).not.toHaveBeenCalled();
+  expect(convHandlers.readClasses).not.toHaveBeenCalled();
   expect(convHandlers.readCommonEvents).not.toHaveBeenCalled();
   expect(convHandlers.readEnemies).not.toHaveBeenCalled();
   expect(convHandlers.readItems).not.toHaveBeenCalled();
@@ -349,7 +349,7 @@ const runTest = (
     mockedValidators: ValidateFunctionsOfReadRpgData,
   ) => Promise<ReadAllDataResultFields>,
 ) => {
-  test("読み込み失敗時は converter と validator を呼ばない", async () => {
+  test("when read rejected,do not call convert and validate", async () => {
     const fileReadFn = vi.fn(() => Promise.reject());
     const convHandlers = createConvertErrorHandlers();
     const mockedValidators = createMockedValidateFunctions(true);
@@ -369,7 +369,7 @@ describe("readAllGameDataAsArrayFallback", () => {
       convHandlers,
     );
   });
-  describe("正常系", () => {
+  describe("normal case", () => {
     test("ハンドラが適切に呼び出されている", async () => {
       const fileReadFn = createReadFileFn(baseFileMap);
       const convHandlers = createIdentityHandlers();
@@ -382,7 +382,7 @@ describe("readAllGameDataAsArrayFallback", () => {
         convHandlers,
       );
     });
-    test("各データを変換して返す", async () => {
+    test("sholed return value", async () => {
       const fileReadFn = createReadFileFn(baseFileMap);
       const convHandlers = createIdentityHandlers();
       const mockedValidators = createMockedValidateFunctions(true);
@@ -434,7 +434,7 @@ describe("readAllGameDataAsArrayFallback", () => {
       > = {
         readActors: (data) => data,
         readArmors: (data) => data,
-        readClasss: (data) => data,
+        readClasses: (data) => data,
         readCommonEvents: (data) => data,
         readEnemies: (data) => data,
         readItems: (data) => data,
@@ -473,7 +473,7 @@ describe("readAllGameDataAsArrayFallback", () => {
       convHandlers,
     );
 
-    expect(result.actor.succcess).toBe(false);
+    expect(result.actor.success).toBe(false);
     expect(result.actor.error).toBe(terms.dataConvertError);
     expect(result.actor.data).toEqual([]);
   });
@@ -494,7 +494,7 @@ describe("readAllGameDataAsArrayFallback", () => {
       convHandlers,
     );
 
-    expect(result.mapInfo.succcess).toBe(false);
+    expect(result.mapInfo.success).toBe(false);
     expect(result.mapInfo.fileName).toBe(FILENAME_MAP_INFOS);
     expect(result.mapInfo.error).toBe(terms.notArray);
     expect(result.mapFiles.info.success).toBe(false);
@@ -529,7 +529,7 @@ describe("readAllGameDataAsNullFallback", () => {
       convHandlers,
     );
 
-    expect(result.actor.succcess).toBe(false);
+    expect(result.actor.success).toBe(false);
     expect(result.actor.error).toBe(terms.dataConvertError);
     expect(result.actor.data).toBeNull();
   });

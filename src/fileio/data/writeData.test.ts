@@ -9,7 +9,7 @@ import { FILENAME_SYSTEM } from "./system";
 import { writeAllData, writeGameData } from "./writeData";
 
 const createArrayResult = <T>(data: T[]): ReadArrayResult<T> => ({
-  succcess: true,
+  success: true,
   fileName: "test.json",
   data,
   error: "",

@@ -10,7 +10,7 @@ export const readArrayData = async <T, F extends string>(
     .then((json) => parseArrayJson(json, filename, terms, validateItemFn))
     .catch(
       (): ReadArrayResult<T> => ({
-        succcess: false,
+        success: false,
         fileName: filename,
         data: [],
         error: terms.jsonParseError,
@@ -28,21 +28,21 @@ const parseArrayJson = <T>(
     const data = JSON.parse(json);
     if (!Array.isArray(data)) {
       return {
-        succcess: false,
+        success: false,
         fileName: filename,
         data: [],
         error: terms.notArray,
       };
     }
     return {
-      succcess: true,
+      success: true,
       fileName: filename,
       data: data.filter(validateItemFn),
       error: "",
     };
   } catch {
     return {
-      succcess: false,
+      success: false,
       fileName: filename,
       data: [],
       error: terms.jsonParseError,

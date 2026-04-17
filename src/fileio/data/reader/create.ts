@@ -1,7 +1,7 @@
 import type { RpgDataReadHandlers } from "./handlers";
 
 export const createGameDataReadHandlers = <
-  Commmon,
+  Common,
   Map,
   System,
   Actor,
@@ -17,7 +17,7 @@ export const createGameDataReadHandlers = <
   Tileset,
 >(
   readers: RpgDataReadHandlers<
-    Commmon,
+    Common,
     Map,
     System,
     Actor,
@@ -33,7 +33,7 @@ export const createGameDataReadHandlers = <
     Tileset
   >,
 ): RpgDataReadHandlers<
-  Commmon,
+  Common,
   Map,
   System,
   Actor,

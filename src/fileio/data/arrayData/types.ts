@@ -24,7 +24,7 @@ export interface TermsOfReadArrayData {
 }
 
 export interface ReadArrayResult<T> {
-  succcess: boolean;
+  success: boolean;
   fileName: string;
   data: T[];
   error: string;

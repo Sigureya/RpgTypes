@@ -50,7 +50,7 @@ export const readAllRowGameData = async (
       readMap: pickMapData,
       readActors: identity,
       readArmors: identity,
-      readClasss: identity,
+      readClasses: identity,
       readCommonEvents: identity,
       readEnemies: identity,
       readItems: identity,
@@ -72,7 +72,7 @@ const pickMapData = (map: MapFileInfo<Data_Map>): Data_Map => map.map;
 const identity = <T>(data: T): T => data;
 
 export const readAllGameDataAsArrayFallback = <
-  Commmon,
+  Common,
   Map,
   System,
   Actor,
@@ -91,7 +91,7 @@ export const readAllGameDataAsArrayFallback = <
   readFileFn: (filename: DataFileNames | MapFileNameWithExt) => Promise<string>,
   validateFunctions: ValidateFunctionsOfReadRpgData,
   handles: RpgDataReadHandlers<
-    Commmon[],
+    Common[],
     Map,
     System,
     Actor[],
@@ -108,7 +108,7 @@ export const readAllGameDataAsArrayFallback = <
   >,
 ): Promise<
   ReadAllGameDataResult<
-    Commmon[],
+    Common[],
     Map,
     System,
     Actor[],
@@ -134,7 +134,7 @@ export const readAllGameDataAsArrayFallback = <
 };
 
 export const readAllGameDataAsNullFallback = <
-  Commmon,
+  Common,
   Map,
   System,
   Actor,
@@ -153,7 +153,7 @@ export const readAllGameDataAsNullFallback = <
   readFileFn: (filename: DataFileNames | MapFileNameWithExt) => Promise<string>,
   validateFunctions: ValidateFunctionsOfReadRpgData,
   handles: RpgDataReadHandlers<
-    Commmon,
+    Common,
     Map,
     System,
     Actor,
@@ -170,7 +170,7 @@ export const readAllGameDataAsNullFallback = <
   >,
 ): Promise<
   ReadAllGameDataResultWithNullFallback<
-    Commmon,
+    Common,
     Map,
     System,
     Actor,
@@ -195,7 +195,7 @@ export const readAllGameDataAsNullFallback = <
 
 const readAllGameDataWithFallback = async <
   N,
-  Commmon,
+  Common,
   Map,
   System,
   Actor,
@@ -213,7 +213,7 @@ const readAllGameDataWithFallback = async <
   terms: TermsOfReadAllData,
   readFileFn: (filename: DataFileNames | MapFileNameWithExt) => Promise<string>,
   handles: RpgDataReadHandlers<
-    Commmon,
+    Common,
     Map,
     System,
     Actor,
@@ -271,7 +271,7 @@ const readAllGameDataWithFallback = async <
     }),
   ]);
   return {
-    mapFiles: mapInfo.succcess
+    mapFiles: mapInfo.success
       ? await convertMapData(
           mapInfo.data,
           terms,
@@ -285,7 +285,7 @@ const readAllGameDataWithFallback = async <
     classes: convertIfSuccess(
       classes,
       terms,
-      handles.readClasss,
+      handles.readClasses,
       makeEmptyValue,
     ),
     commonEvent: convertIfSuccess(
@@ -388,10 +388,10 @@ const convertIfSuccess = <T, R, N>(
   fn: (data: T[], filename: string) => R,
   makeEmptyValue: () => N,
 ): ReadHandledResult<R, N> => {
-  if (!result.succcess) {
+  if (!result.success) {
     return {
       fileName: result.fileName,
-      succcess: false,
+      success: false,
       error: result.error,
       data: makeEmptyValue(),
     };
@@ -399,14 +399,14 @@ const convertIfSuccess = <T, R, N>(
   try {
     return {
       fileName: result.fileName,
-      succcess: true,
+      success: true,
       error: "",
       data: fn(result.data, result.fileName),
     };
   } catch {
     return {
       fileName: result.fileName,
-      succcess: false,
+      success: false,
       error: terms.dataConvertError,
       data: makeEmptyValue(),
     };

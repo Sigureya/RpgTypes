@@ -36,7 +36,7 @@ export interface RpgDataReadHandlersBase {
 }
 
 export interface RpgDataReadHandlers<
-  Commmon,
+  Common,
   Map,
   System,
   Actor,
@@ -56,10 +56,10 @@ export interface RpgDataReadHandlers<
   readWeapons(weapon: Data_Weapon[], filePath: string): Weapon;
   readArmors(armor: Data_Armor[], filePath: string): Armor;
   readEnemies(enemy: Data_Enemy[], filePath: string): Enemy;
-  readClasss(cls: Data_Class[], filePath: string): Class;
+  readClasses(cls: Data_Class[], filePath: string): Class;
   readStates(state: Data_State[], filePath: string): State;
   readActors(actors: Data_Actor[], filePath: string): Actor;
-  readCommonEvents(events: Data_CommonEvent[], filePath: string): Commmon;
+  readCommonEvents(events: Data_CommonEvent[], filePath: string): Common;
   readSystem(system: Data_System, filePath: string): System;
   readMap(map: MapFileInfo): Map;
   readTroops(troops: Data_Troop[], filePath: string): Troop;

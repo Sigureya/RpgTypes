@@ -32,7 +32,7 @@ const mainError = (data: ReadAllGameDataResultUnknown): ErrorItem[] => {
     data.weapon,
     data.mapInfo,
   ]
-    .filter((item: ReadHandledResult<unknown, null>) => !item.succcess)
+    .filter((item: ReadHandledResult<unknown, null>) => !item.success)
     .map((item): ErrorItem => ({ fileName: item.fileName, error: item.error }));
 
   if (data.system.system === null) {
