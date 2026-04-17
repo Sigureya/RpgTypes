@@ -2,14 +2,7 @@ import type { IdentifiedItems } from "@RpgTypes/libs";
 import {
   FILENAME_ACTORS,
   FILENAME_ARMORS,
-  FILENAME_ANIMATIONS,
-  FILENAME_CLASSES,
-  FILENAME_COMMON_EVENTS,
-  FILENAME_ENEMIES,
-  FILENAME_ITEMS,
-  FILENAME_SKILLS,
-  FILENAME_STATES,
-} from "./arrayData/constants";
+} from "./arrayData/constants/fileNames";
 import type { MapFileNameWithExt } from "./map";
 import type { RowGameData } from "./resultType";
 import type { DataFileNames } from "./types";

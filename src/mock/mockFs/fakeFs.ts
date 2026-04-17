@@ -1,19 +1,19 @@
 import {
-  FILENAME_MAP_INFOS,
   FILENAME_ACTORS,
-  FILENAME_ENEMIES,
-  FILENAME_WEAPONS,
-  FILENAME_CLASSES,
+  FILENAME_ANIMATIONS,
   FILENAME_ARMORS,
-  FILENAME_ITEMS,
-  FILENAME_TROOPS,
+  FILENAME_CLASSES,
   FILENAME_COMMON_EVENTS,
+  FILENAME_ENEMIES,
+  FILENAME_ITEMS,
+  FILENAME_MAP_INFOS,
   FILENAME_SKILLS,
   FILENAME_STATES,
-  FILENAME_ANIMATIONS,
-  FILENAME_SYSTEM,
   FILENAME_TILESET,
-} from "@RpgTypes/fileIO";
+  FILENAME_TROOPS,
+  FILENAME_WEAPONS,
+} from "@RpgTypes/fileio4/data/arrayData/constants";
+import { FILENAME_SYSTEM } from "@RpgTypes/fileio4/data/system";
 import type { Data_Map, RpgDataBundle } from "@RpgTypes/rmmz";
 
 export const fakeFileRead = (

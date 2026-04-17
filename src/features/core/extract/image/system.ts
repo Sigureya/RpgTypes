@@ -1,4 +1,4 @@
-import type { ImageFolders } from "@RpgTypes/fileIO/image";
+import type { ImageFolders } from "@RpgTypes/fileio4";
 import type { PickByType } from "@RpgTypes/libs";
 import type { Data_System, Data_Vehicle } from "@RpgTypes/rmmz/system";
 
