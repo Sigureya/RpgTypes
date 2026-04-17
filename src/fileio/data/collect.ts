@@ -1,7 +1,9 @@
 import type { ReadGameDataUnknown, ReadHandledResult } from "./resultType";
 import type { DataReadErrors, DataReadErrorItem } from "./types";
 
-export const correctErrors = (data: ReadGameDataUnknown): DataReadErrors => {
+export const summarizeReadErrors = (
+  data: ReadGameDataUnknown,
+): DataReadErrors => {
   return {
     main: mainReadErrors(data),
     map: data.mapFiles.invalidMaps.map(
