@@ -1,7 +1,7 @@
 import { g as v } from "../../shared/_commonjsHelpers.es.js";
-var O, F = { exports: {} };
-const J = v((function() {
-  if (O) return F.exports;
+var L, F = { exports: {} };
+const K = v((function() {
+  if (L) return F.exports;
   function t(e, { instancePath: i = "", parentData: N, parentDataProperty: k, rootData: w = e } = {}) {
     if (!e || typeof e != "object" || Array.isArray(e)) return t.errors = [{
       instancePath: i,
@@ -11,13 +11,13 @@ const J = v((function() {
       message: "must be object"
     }], !1;
     {
-      let d;
-      if (e.name === void 0 && (d = "name") || e.id === void 0 && (d = "id") || e.nickname === void 0 && (d = "nickname") || e.battlerName === void 0 && (d = "battlerName") || e.characterName === void 0 && (d = "characterName") || e.characterIndex === void 0 && (d = "characterIndex") || e.faceName === void 0 && (d = "faceName") || e.faceIndex === void 0 && (d = "faceIndex") || e.classId === void 0 && (d = "classId") || e.initialLevel === void 0 && (d = "initialLevel") || e.maxLevel === void 0 && (d = "maxLevel")) return t.errors = [{
+      let c;
+      if (e.name === void 0 && (c = "name") || e.id === void 0 && (c = "id") || e.nickname === void 0 && (c = "nickname") || e.battlerName === void 0 && (c = "battlerName") || e.characterName === void 0 && (c = "characterName") || e.characterIndex === void 0 && (c = "characterIndex") || e.faceName === void 0 && (c = "faceName") || e.faceIndex === void 0 && (c = "faceIndex") || e.classId === void 0 && (c = "classId") || e.initialLevel === void 0 && (c = "initialLevel") || e.maxLevel === void 0 && (c = "maxLevel")) return t.errors = [{
         instancePath: i,
         schemaPath: "#/required",
         keyword: "required",
-        params: { missingProperty: d },
-        message: "must have required property '" + d + "'"
+        params: { missingProperty: c },
+        message: "must have required property '" + c + "'"
       }], !1;
       if (e.name !== void 0) {
         if (typeof e.name != "string") return t.errors = [{ instancePath: i + "/name", schemaPath: "#/properties/name/type", keyword: "type", params: { type: "string" }, message: "must be string" }], !1;
@@ -47,9 +47,9 @@ const J = v((function() {
           } else s = !0;
           if (s) {
             if (e.characterIndex !== void 0) {
-              let n = e.characterIndex;
+              let o = e.characterIndex;
               const r = 0;
-              if (typeof n != "number" || n % 1 || isNaN(n) || !isFinite(n)) return t.errors = [{ instancePath: i + "/characterIndex", schemaPath: "#/properties/characterIndex/type", keyword: "type", params: {
+              if (typeof o != "number" || o % 1 || isNaN(o) || !isFinite(o)) return t.errors = [{ instancePath: i + "/characterIndex", schemaPath: "#/properties/characterIndex/type", keyword: "type", params: {
                 type: "integer"
               }, message: "must be integer" }], !1;
               s = r === 0;
@@ -67,24 +67,24 @@ const J = v((function() {
               } else s = !0;
               if (s) {
                 if (e.faceIndex !== void 0) {
-                  let n = e.faceIndex;
+                  let o = e.faceIndex;
                   const r = 0;
-                  if (typeof n != "number" || n % 1 || isNaN(n) || !isFinite(n)) return t.errors = [{
+                  if (typeof o != "number" || o % 1 || isNaN(o) || !isFinite(o)) return t.errors = [{
                     instancePath: i + "/faceIndex",
                     schemaPath: "#/properties/faceIndex/type",
                     keyword: "type",
                     params: { type: "integer" },
                     message: "must be integer"
                   }], !1;
-                  if (typeof n == "number" && isFinite(n)) {
-                    if (n > 7 || isNaN(n)) return t.errors = [{
+                  if (typeof o == "number" && isFinite(o)) {
+                    if (o > 7 || isNaN(o)) return t.errors = [{
                       instancePath: i + "/faceIndex",
                       schemaPath: "#/properties/faceIndex/maximum",
                       keyword: "maximum",
                       params: { comparison: "<=", limit: 7 },
                       message: "must be <= 7"
                     }], !1;
-                    if (n < 0 || isNaN(n)) return t.errors = [{
+                    if (o < 0 || isNaN(o)) return t.errors = [{
                       instancePath: i + "/faceIndex",
                       schemaPath: "#/properties/faceIndex/minimum",
                       keyword: "minimum",
@@ -96,16 +96,16 @@ const J = v((function() {
                 } else s = !0;
                 if (s) {
                   if (e.id !== void 0) {
-                    let n = e.id;
+                    let o = e.id;
                     const r = 0;
-                    if (typeof n != "number" || n % 1 || isNaN(n) || !isFinite(n)) return t.errors = [{
+                    if (typeof o != "number" || o % 1 || isNaN(o) || !isFinite(o)) return t.errors = [{
                       instancePath: i + "/id",
                       schemaPath: "#/properties/id/type",
                       keyword: "type",
                       params: { type: "integer" },
                       message: "must be integer"
                     }], !1;
-                    if (typeof n == "number" && isFinite(n) && (n < 0 || isNaN(n))) return t.errors = [{
+                    if (typeof o == "number" && isFinite(o) && (o < 0 || isNaN(o))) return t.errors = [{
                       instancePath: i + "/id",
                       schemaPath: "#/properties/id/minimum",
                       keyword: "minimum",
@@ -132,16 +132,16 @@ const J = v((function() {
                       } else s = !0;
                       if (s) {
                         if (e.initialLevel !== void 0) {
-                          let n = e.initialLevel;
+                          let o = e.initialLevel;
                           const r = 0;
-                          if (typeof n != "number" || n % 1 || isNaN(n) || !isFinite(n)) return t.errors = [{
+                          if (typeof o != "number" || o % 1 || isNaN(o) || !isFinite(o)) return t.errors = [{
                             instancePath: i + "/initialLevel",
                             schemaPath: "#/properties/initialLevel/type",
                             keyword: "type",
                             params: { type: "integer" },
                             message: "must be integer"
                           }], !1;
-                          if (typeof n == "number" && isFinite(n) && (n < 0 || isNaN(n))) return t.errors = [{ instancePath: i + "/initialLevel", schemaPath: "#/properties/initialLevel/minimum", keyword: "minimum", params: {
+                          if (typeof o == "number" && isFinite(o) && (o < 0 || isNaN(o))) return t.errors = [{ instancePath: i + "/initialLevel", schemaPath: "#/properties/initialLevel/minimum", keyword: "minimum", params: {
                             comparison: ">=",
                             limit: 0
                           }, message: "must be >= 0" }], !1;
@@ -149,9 +149,9 @@ const J = v((function() {
                         } else s = !0;
                         if (s) {
                           if (e.maxLevel !== void 0) {
-                            let n = e.maxLevel;
+                            let o = e.maxLevel;
                             const r = 0;
-                            if (typeof n != "number" || n % 1 || isNaN(n) || !isFinite(n)) return t.errors = [{
+                            if (typeof o != "number" || o % 1 || isNaN(o) || !isFinite(o)) return t.errors = [{
                               instancePath: i + "/maxLevel",
                               schemaPath: "#/properties/maxLevel/type",
                               keyword: "type",
@@ -162,16 +162,16 @@ const J = v((function() {
                           } else s = !0;
                           if (s) {
                             if (e.classId !== void 0) {
-                              let n = e.classId;
+                              let o = e.classId;
                               const r = 0;
-                              if (typeof n != "number" || n % 1 || isNaN(n) || !isFinite(n)) return t.errors = [{
+                              if (typeof o != "number" || o % 1 || isNaN(o) || !isFinite(o)) return t.errors = [{
                                 instancePath: i + "/classId",
                                 schemaPath: "#/properties/classId/type",
                                 keyword: "type",
                                 params: { type: "integer" },
                                 message: "must be integer"
                               }], !1;
-                              if (typeof n == "number" && isFinite(n) && (n < 0 || isNaN(n))) return t.errors = [{ instancePath: i + "/classId", schemaPath: "#/properties/classId/minimum", keyword: "minimum", params: {
+                              if (typeof o == "number" && isFinite(o) && (o < 0 || isNaN(o))) return t.errors = [{ instancePath: i + "/classId", schemaPath: "#/properties/classId/minimum", keyword: "minimum", params: {
                                 comparison: ">=",
                                 limit: 0
                               }, message: "must be >= 0" }], !1;
@@ -179,9 +179,9 @@ const J = v((function() {
                             } else s = !0;
                             if (s) {
                               if (e.equips !== void 0) {
-                                let n = e.equips;
+                                let o = e.equips;
                                 const r = 0;
-                                if (!Array.isArray(n)) return t.errors = [{
+                                if (!Array.isArray(o)) return t.errors = [{
                                   instancePath: i + "/equips",
                                   schemaPath: "#/properties/equips/type",
                                   keyword: "type",
@@ -189,14 +189,14 @@ const J = v((function() {
                                   message: "must be array"
                                 }], !1;
                                 {
-                                  const a = n.length;
+                                  const a = o.length;
                                   for (let y = 0; y < a; y++) {
-                                    let p = n[y];
-                                    const o = 0;
+                                    let p = o[y];
+                                    const n = 0;
                                     if (typeof p != "number" || p % 1 || isNaN(p) || !isFinite(p)) return t.errors = [{ instancePath: i + "/equips/" + y, schemaPath: "#/properties/equips/items/type", keyword: "type", params: {
                                       type: "integer"
                                     }, message: "must be integer" }], !1;
-                                    if (o !== 0) break;
+                                    if (n !== 0) break;
                                   }
                                 }
                                 s = r === 0;
@@ -213,9 +213,9 @@ const J = v((function() {
                                   s = !0;
                                 } else s = !0;
                                 if (s) if (e.traits !== void 0) {
-                                  let n = e.traits;
+                                  let o = e.traits;
                                   const r = 0;
-                                  if (!Array.isArray(n)) return t.errors = [{
+                                  if (!Array.isArray(o)) return t.errors = [{
                                     instancePath: i + "/traits",
                                     schemaPath: "#/properties/traits/type",
                                     keyword: "type",
@@ -223,10 +223,10 @@ const J = v((function() {
                                     message: "must be array"
                                   }], !1;
                                   {
-                                    const a = n.length;
+                                    const a = o.length;
                                     for (let y = 0; y < a; y++) {
-                                      let p = n[y];
-                                      const o = 0;
+                                      let p = o[y];
+                                      const n = 0;
                                       if (!p || typeof p != "object" || Array.isArray(p)) return t.errors = [{
                                         instancePath: i + "/traits/" + y,
                                         schemaPath: "#/properties/traits/items/type",
@@ -243,17 +243,17 @@ const J = v((function() {
                                           params: { missingProperty: m },
                                           message: "must have required property '" + m + "'"
                                         }], !1;
-                                        for (const c in p) if (c !== "code" && c !== "dataId" && c !== "value") return t.errors = [{
+                                        for (const d in p) if (d !== "code" && d !== "dataId" && d !== "value") return t.errors = [{
                                           instancePath: i + "/traits/" + y,
                                           schemaPath: "#/properties/traits/items/additionalProperties",
                                           keyword: "additionalProperties",
-                                          params: { additionalProperty: c },
+                                          params: { additionalProperty: d },
                                           message: "must NOT have additional properties"
                                         }], !1;
                                         if (p.code !== void 0) {
-                                          let c = p.code;
+                                          let d = p.code;
                                           const f = 0;
-                                          if (typeof c != "number" || c % 1 || isNaN(c) || !isFinite(c)) return t.errors = [{
+                                          if (typeof d != "number" || d % 1 || isNaN(d) || !isFinite(d)) return t.errors = [{
                                             instancePath: i + "/traits/" + y + "/code",
                                             schemaPath: "#/properties/traits/items/properties/code/type",
                                             keyword: "type",
@@ -264,9 +264,9 @@ const J = v((function() {
                                         } else g = !0;
                                         if (g) {
                                           if (p.dataId !== void 0) {
-                                            let c = p.dataId;
+                                            let d = p.dataId;
                                             const f = 0;
-                                            if (typeof c != "number" || c % 1 || isNaN(c) || !isFinite(c)) return t.errors = [{
+                                            if (typeof d != "number" || d % 1 || isNaN(d) || !isFinite(d)) return t.errors = [{
                                               instancePath: i + "/traits/" + y + "/dataId",
                                               schemaPath: "#/properties/traits/items/properties/dataId/type",
                                               keyword: "type",
@@ -276,16 +276,16 @@ const J = v((function() {
                                             g = f === 0;
                                           } else g = !0;
                                           if (g) if (p.value !== void 0) {
-                                            let c = p.value;
+                                            let d = p.value;
                                             const f = 0;
-                                            if (typeof c != "number" || !isFinite(c)) return t.errors = [{ instancePath: i + "/traits/" + y + "/value", schemaPath: "#/properties/traits/items/properties/value/type", keyword: "type", params: {
+                                            if (typeof d != "number" || !isFinite(d)) return t.errors = [{ instancePath: i + "/traits/" + y + "/value", schemaPath: "#/properties/traits/items/properties/value/type", keyword: "type", params: {
                                               type: "number"
                                             }, message: "must be number" }], !1;
                                             g = f === 0;
                                           } else g = !0;
                                         }
                                       }
-                                      if (o !== 0) break;
+                                      if (n !== 0) break;
                                     }
                                   }
                                   s = r === 0;
@@ -306,11 +306,11 @@ const J = v((function() {
     }
     return t.errors = null, !0;
   }
-  return O = 1, F.exports = t, F.exports.default = t, F.exports;
+  return L = 1, F.exports = t, F.exports.default = t, F.exports;
 })());
-var L, x = { exports: {} };
-const K = v((function() {
-  if (L) return x.exports;
+var C, x = { exports: {} };
+const Q = v((function() {
+  if (C) return x.exports;
   function t(e, { instancePath: i = "", parentData: N, parentDataProperty: k, rootData: w = e } = {}) {
     if (!e || typeof e != "object" || Array.isArray(e)) return t.errors = [{
       instancePath: i,
@@ -436,17 +436,17 @@ const K = v((function() {
                         message: "must be object"
                       }], !1;
                       {
-                        let o;
-                        if (y.x === void 0 && (o = "x") || y.y === void 0 && (o = "y") || y.z === void 0 && (o = "z")) return t.errors = [{
+                        let n;
+                        if (y.x === void 0 && (n = "x") || y.y === void 0 && (n = "y") || y.z === void 0 && (n = "z")) return t.errors = [{
                           instancePath: i + "/rotation",
                           schemaPath: "#/properties/rotation/required",
                           keyword: "required",
-                          params: { missingProperty: o },
-                          message: "must have required property '" + o + "'"
+                          params: { missingProperty: n },
+                          message: "must have required property '" + n + "'"
                         }], !1;
                         if (y.x !== void 0) {
                           let m = y.x;
-                          const c = 0;
+                          const d = 0;
                           if (typeof m != "number" || !isFinite(m)) return t.errors = [{
                             instancePath: i + "/rotation/x",
                             schemaPath: "#/properties/rotation/properties/x/type",
@@ -454,12 +454,12 @@ const K = v((function() {
                             params: { type: "number" },
                             message: "must be number"
                           }], !1;
-                          var g = c === 0;
+                          var g = d === 0;
                         } else g = !0;
                         if (g) {
                           if (y.y !== void 0) {
                             let m = y.y;
-                            const c = 0;
+                            const d = 0;
                             if (typeof m != "number" || !isFinite(m)) return t.errors = [{
                               instancePath: i + "/rotation/y",
                               schemaPath: "#/properties/rotation/properties/y/type",
@@ -467,11 +467,11 @@ const K = v((function() {
                               params: { type: "number" },
                               message: "must be number"
                             }], !1;
-                            g = c === 0;
+                            g = d === 0;
                           } else g = !0;
                           if (g) if (y.z !== void 0) {
                             let m = y.z;
-                            const c = 0;
+                            const d = 0;
                             if (typeof m != "number" || !isFinite(m)) return t.errors = [{
                               instancePath: i + "/rotation/z",
                               schemaPath: "#/properties/rotation/properties/z/type",
@@ -479,7 +479,7 @@ const K = v((function() {
                               params: { type: "number" },
                               message: "must be number"
                             }], !1;
-                            g = c === 0;
+                            g = d === 0;
                           } else g = !0;
                         }
                       }
@@ -511,11 +511,11 @@ const K = v((function() {
                           const p = 0;
                           if (!Array.isArray(y)) return t.errors = [{ instancePath: i + "/flashTimings", schemaPath: "#/properties/flashTimings/type", keyword: "type", params: { type: "array" }, message: "must be array" }], !1;
                           {
-                            const o = y.length;
-                            for (let m = 0; m < o; m++) {
-                              let c = y[m];
+                            const n = y.length;
+                            for (let m = 0; m < n; m++) {
+                              let d = y[m];
                               const f = 0;
-                              if (!c || typeof c != "object" || Array.isArray(c)) return t.errors = [{
+                              if (!d || typeof d != "object" || Array.isArray(d)) return t.errors = [{
                                 instancePath: i + "/flashTimings/" + m,
                                 schemaPath: "#/properties/flashTimings/items/type",
                                 keyword: "type",
@@ -524,15 +524,15 @@ const K = v((function() {
                               }], !1;
                               {
                                 let u;
-                                if (c.color === void 0 && (u = "color") || c.duration === void 0 && (u = "duration") || c.frame === void 0 && (u = "frame")) return t.errors = [{
+                                if (d.color === void 0 && (u = "color") || d.duration === void 0 && (u = "duration") || d.frame === void 0 && (u = "frame")) return t.errors = [{
                                   instancePath: i + "/flashTimings/" + m,
                                   schemaPath: "#/properties/flashTimings/items/required",
                                   keyword: "required",
                                   params: { missingProperty: u },
                                   message: "must have required property '" + u + "'"
                                 }], !1;
-                                if (c.color !== void 0) {
-                                  let h = c.color;
+                                if (d.color !== void 0) {
+                                  let h = d.color;
                                   const l = 0;
                                   if (!Array.isArray(h)) return t.errors = [{
                                     instancePath: i + "/flashTimings/" + m + "/color",
@@ -555,7 +555,7 @@ const K = v((function() {
                                     const I = h.length;
                                     for (let P = 0; P < I; P++) {
                                       let b = h[P];
-                                      const M = 0;
+                                      const J = 0;
                                       if (typeof b != "number" || b % 1 || isNaN(b) || !isFinite(b)) return t.errors = [{
                                         instancePath: i + "/flashTimings/" + m + "/color/" + P,
                                         schemaPath: "#/properties/flashTimings/items/properties/color/items/type",
@@ -579,14 +579,14 @@ const K = v((function() {
                                           message: "must be >= 0"
                                         }], !1;
                                       }
-                                      if (M !== 0) break;
+                                      if (J !== 0) break;
                                     }
                                   }
-                                  var d = l === 0;
-                                } else d = !0;
-                                if (d) {
-                                  if (c.duration !== void 0) {
-                                    let h = c.duration;
+                                  var c = l === 0;
+                                } else c = !0;
+                                if (c) {
+                                  if (d.duration !== void 0) {
+                                    let h = d.duration;
                                     const l = 0;
                                     if (typeof h != "number" || h % 1 || isNaN(h) || !isFinite(h)) return t.errors = [{
                                       instancePath: i + "/flashTimings/" + m + "/duration",
@@ -595,10 +595,10 @@ const K = v((function() {
                                       params: { type: "integer" },
                                       message: "must be integer"
                                     }], !1;
-                                    d = l === 0;
-                                  } else d = !0;
-                                  if (d) if (c.frame !== void 0) {
-                                    let h = c.frame;
+                                    c = l === 0;
+                                  } else c = !0;
+                                  if (c) if (d.frame !== void 0) {
+                                    let h = d.frame;
                                     const l = 0;
                                     if (typeof h != "number" || h % 1 || isNaN(h) || !isFinite(h)) return t.errors = [{
                                       instancePath: i + "/flashTimings/" + m + "/frame",
@@ -607,8 +607,8 @@ const K = v((function() {
                                       params: { type: "integer" },
                                       message: "must be integer"
                                     }], !1;
-                                    d = l === 0;
-                                  } else d = !0;
+                                    c = l === 0;
+                                  } else c = !0;
                                 }
                               }
                               if (f !== 0) break;
@@ -627,11 +627,11 @@ const K = v((function() {
                             message: "must be array"
                           }], !1;
                           {
-                            const o = y.length;
-                            for (let m = 0; m < o; m++) {
-                              let c = y[m];
+                            const n = y.length;
+                            for (let m = 0; m < n; m++) {
+                              let d = y[m];
                               const f = 0;
-                              if (!c || typeof c != "object" || Array.isArray(c)) return t.errors = [{
+                              if (!d || typeof d != "object" || Array.isArray(d)) return t.errors = [{
                                 instancePath: i + "/soundTimings/" + m,
                                 schemaPath: "#/properties/soundTimings/items/type",
                                 keyword: "type",
@@ -640,15 +640,15 @@ const K = v((function() {
                               }], !1;
                               {
                                 let u;
-                                if (c.se === void 0 && (u = "se") || c.frame === void 0 && (u = "frame")) return t.errors = [{
+                                if (d.se === void 0 && (u = "se") || d.frame === void 0 && (u = "frame")) return t.errors = [{
                                   instancePath: i + "/soundTimings/" + m,
                                   schemaPath: "#/properties/soundTimings/items/required",
                                   keyword: "required",
                                   params: { missingProperty: u },
                                   message: "must have required property '" + u + "'"
                                 }], !1;
-                                if (c.frame !== void 0) {
-                                  let h = c.frame;
+                                if (d.frame !== void 0) {
+                                  let h = d.frame;
                                   const l = 0;
                                   if (typeof h != "number" || h % 1 || isNaN(h) || !isFinite(h)) return t.errors = [{
                                     instancePath: i + "/soundTimings/" + m + "/frame",
@@ -657,10 +657,10 @@ const K = v((function() {
                                     params: { type: "integer" },
                                     message: "must be integer"
                                   }], !1;
-                                  var n = l === 0;
-                                } else n = !0;
-                                if (n) if (c.se !== void 0) {
-                                  let h = c.se;
+                                  var o = l === 0;
+                                } else o = !0;
+                                if (o) if (d.se !== void 0) {
+                                  let h = d.se;
                                   const l = 0;
                                   if (!h || typeof h != "object" || Array.isArray(h)) return t.errors = [{
                                     instancePath: i + "/soundTimings/" + m + "/se",
@@ -729,8 +729,8 @@ const K = v((function() {
                                       }
                                     }
                                   }
-                                  n = l === 0;
-                                } else n = !0;
+                                  o = l === 0;
+                                } else o = !0;
                               }
                               if (f !== 0) break;
                             }
@@ -749,11 +749,11 @@ const K = v((function() {
     }
     return t.errors = null, !0;
   }
-  return L = 1, x.exports = t, x.exports.default = t, x.exports;
+  return C = 1, x.exports = t, x.exports.default = t, x.exports;
 })());
-var C, T = { exports: {} };
-const Q = v((function() {
-  if (C) return T.exports;
+var G, T = { exports: {} };
+const U = v((function() {
+  if (G) return T.exports;
   function t(e, { instancePath: i = "", parentData: N, parentDataProperty: k, rootData: w = e } = {}) {
     if (!e || typeof e != "object" || Array.isArray(e)) return t.errors = [{
       instancePath: i,
@@ -763,13 +763,13 @@ const Q = v((function() {
       message: "must be object"
     }], !1;
     {
-      let n;
-      if (e.name === void 0 && (n = "name") || e.id === void 0 && (n = "id") || e.description === void 0 && (n = "description") || e.iconIndex === void 0 && (n = "iconIndex") || e.price === void 0 && (n = "price") || e.params === void 0 && (n = "params") || e.traits === void 0 && (n = "traits") || e.note === void 0 && (n = "note") || e.etypeId === void 0 && (n = "etypeId") || e.atypeId === void 0 && (n = "atypeId")) return t.errors = [{
+      let o;
+      if (e.name === void 0 && (o = "name") || e.id === void 0 && (o = "id") || e.description === void 0 && (o = "description") || e.iconIndex === void 0 && (o = "iconIndex") || e.price === void 0 && (o = "price") || e.params === void 0 && (o = "params") || e.traits === void 0 && (o = "traits") || e.note === void 0 && (o = "note") || e.etypeId === void 0 && (o = "etypeId") || e.atypeId === void 0 && (o = "atypeId")) return t.errors = [{
         instancePath: i,
         schemaPath: "#/required",
         keyword: "required",
-        params: { missingProperty: n },
-        message: "must have required property '" + n + "'"
+        params: { missingProperty: o },
+        message: "must have required property '" + o + "'"
       }], !1;
       if (e.name !== void 0) {
         if (typeof e.name != "string") return t.errors = [{ instancePath: i + "/name", schemaPath: "#/properties/name/type", keyword: "type", params: { type: "string" }, message: "must be string" }], !1;
@@ -922,7 +922,7 @@ const Q = v((function() {
                           const y = r.length;
                           if (y > 0) {
                             let p = r[0];
-                            const o = 0;
+                            const n = 0;
                             if (typeof p != "number" || p % 1 || isNaN(p) || !isFinite(p)) return t.errors = [{
                               instancePath: i + "/params/0",
                               schemaPath: "#/properties/params/items/0/type",
@@ -930,21 +930,21 @@ const Q = v((function() {
                               params: { type: "integer" },
                               message: "must be integer"
                             }], !1;
-                            var g = o === 0;
+                            var g = n === 0;
                           }
                           if (g) {
                             if (y > 1) {
                               let p = r[1];
-                              const o = 0;
+                              const n = 0;
                               if (typeof p != "number" || p % 1 || isNaN(p) || !isFinite(p)) return t.errors = [{ instancePath: i + "/params/1", schemaPath: "#/properties/params/items/1/type", keyword: "type", params: {
                                 type: "integer"
                               }, message: "must be integer" }], !1;
-                              g = o === 0;
+                              g = n === 0;
                             }
                             if (g) {
                               if (y > 2) {
                                 let p = r[2];
-                                const o = 0;
+                                const n = 0;
                                 if (typeof p != "number" || p % 1 || isNaN(p) || !isFinite(p)) return t.errors = [{
                                   instancePath: i + "/params/2",
                                   schemaPath: "#/properties/params/items/2/type",
@@ -952,21 +952,21 @@ const Q = v((function() {
                                   params: { type: "integer" },
                                   message: "must be integer"
                                 }], !1;
-                                g = o === 0;
+                                g = n === 0;
                               }
                               if (g) {
                                 if (y > 3) {
                                   let p = r[3];
-                                  const o = 0;
+                                  const n = 0;
                                   if (typeof p != "number" || p % 1 || isNaN(p) || !isFinite(p)) return t.errors = [{ instancePath: i + "/params/3", schemaPath: "#/properties/params/items/3/type", keyword: "type", params: {
                                     type: "integer"
                                   }, message: "must be integer" }], !1;
-                                  g = o === 0;
+                                  g = n === 0;
                                 }
                                 if (g) {
                                   if (y > 4) {
                                     let p = r[4];
-                                    const o = 0;
+                                    const n = 0;
                                     if (typeof p != "number" || p % 1 || isNaN(p) || !isFinite(p)) return t.errors = [{
                                       instancePath: i + "/params/4",
                                       schemaPath: "#/properties/params/items/4/type",
@@ -974,21 +974,21 @@ const Q = v((function() {
                                       params: { type: "integer" },
                                       message: "must be integer"
                                     }], !1;
-                                    g = o === 0;
+                                    g = n === 0;
                                   }
                                   if (g) {
                                     if (y > 5) {
                                       let p = r[5];
-                                      const o = 0;
+                                      const n = 0;
                                       if (typeof p != "number" || p % 1 || isNaN(p) || !isFinite(p)) return t.errors = [{ instancePath: i + "/params/5", schemaPath: "#/properties/params/items/5/type", keyword: "type", params: {
                                         type: "integer"
                                       }, message: "must be integer" }], !1;
-                                      g = o === 0;
+                                      g = n === 0;
                                     }
                                     if (g) {
                                       if (y > 6) {
                                         let p = r[6];
-                                        const o = 0;
+                                        const n = 0;
                                         if (typeof p != "number" || p % 1 || isNaN(p) || !isFinite(p)) return t.errors = [{
                                           instancePath: i + "/params/6",
                                           schemaPath: "#/properties/params/items/6/type",
@@ -996,15 +996,15 @@ const Q = v((function() {
                                           params: { type: "integer" },
                                           message: "must be integer"
                                         }], !1;
-                                        g = o === 0;
+                                        g = n === 0;
                                       }
                                       if (g && y > 7) {
                                         let p = r[7];
-                                        const o = 0;
+                                        const n = 0;
                                         if (typeof p != "number" || p % 1 || isNaN(p) || !isFinite(p)) return t.errors = [{ instancePath: i + "/params/7", schemaPath: "#/properties/params/items/7/type", keyword: "type", params: {
                                           type: "integer"
                                         }, message: "must be integer" }], !1;
-                                        g = o === 0;
+                                        g = n === 0;
                                       }
                                     }
                                   }
@@ -1028,29 +1028,29 @@ const Q = v((function() {
                         {
                           const y = r.length;
                           for (let p = 0; p < y; p++) {
-                            let o = r[p];
+                            let n = r[p];
                             const m = 0;
-                            if (!o || typeof o != "object" || Array.isArray(o)) return t.errors = [{ instancePath: i + "/traits/" + p, schemaPath: "#/properties/traits/items/type", keyword: "type", params: {
+                            if (!n || typeof n != "object" || Array.isArray(n)) return t.errors = [{ instancePath: i + "/traits/" + p, schemaPath: "#/properties/traits/items/type", keyword: "type", params: {
                               type: "object"
                             }, message: "must be object" }], !1;
                             {
-                              let c;
-                              if (o.code === void 0 && (c = "code") || o.dataId === void 0 && (c = "dataId") || o.value === void 0 && (c = "value")) return t.errors = [{
+                              let d;
+                              if (n.code === void 0 && (d = "code") || n.dataId === void 0 && (d = "dataId") || n.value === void 0 && (d = "value")) return t.errors = [{
                                 instancePath: i + "/traits/" + p,
                                 schemaPath: "#/properties/traits/items/required",
                                 keyword: "required",
-                                params: { missingProperty: c },
-                                message: "must have required property '" + c + "'"
+                                params: { missingProperty: d },
+                                message: "must have required property '" + d + "'"
                               }], !1;
-                              for (const f in o) if (f !== "code" && f !== "dataId" && f !== "value") return t.errors = [{
+                              for (const f in n) if (f !== "code" && f !== "dataId" && f !== "value") return t.errors = [{
                                 instancePath: i + "/traits/" + p,
                                 schemaPath: "#/properties/traits/items/additionalProperties",
                                 keyword: "additionalProperties",
                                 params: { additionalProperty: f },
                                 message: "must NOT have additional properties"
                               }], !1;
-                              if (o.code !== void 0) {
-                                let f = o.code;
+                              if (n.code !== void 0) {
+                                let f = n.code;
                                 const u = 0;
                                 if (typeof f != "number" || f % 1 || isNaN(f) || !isFinite(f)) return t.errors = [{
                                   instancePath: i + "/traits/" + p + "/code",
@@ -1059,11 +1059,11 @@ const Q = v((function() {
                                   params: { type: "integer" },
                                   message: "must be integer"
                                 }], !1;
-                                var d = u === 0;
-                              } else d = !0;
-                              if (d) {
-                                if (o.dataId !== void 0) {
-                                  let f = o.dataId;
+                                var c = u === 0;
+                              } else c = !0;
+                              if (c) {
+                                if (n.dataId !== void 0) {
+                                  let f = n.dataId;
                                   const u = 0;
                                   if (typeof f != "number" || f % 1 || isNaN(f) || !isFinite(f)) return t.errors = [{
                                     instancePath: i + "/traits/" + p + "/dataId",
@@ -1072,16 +1072,16 @@ const Q = v((function() {
                                     params: { type: "integer" },
                                     message: "must be integer"
                                   }], !1;
-                                  d = u === 0;
-                                } else d = !0;
-                                if (d) if (o.value !== void 0) {
-                                  let f = o.value;
+                                  c = u === 0;
+                                } else c = !0;
+                                if (c) if (n.value !== void 0) {
+                                  let f = n.value;
                                   const u = 0;
                                   if (typeof f != "number" || !isFinite(f)) return t.errors = [{ instancePath: i + "/traits/" + p + "/value", schemaPath: "#/properties/traits/items/properties/value/type", keyword: "type", params: {
                                     type: "number"
                                   }, message: "must be number" }], !1;
-                                  d = u === 0;
-                                } else d = !0;
+                                  c = u === 0;
+                                } else c = !0;
                               }
                             }
                             if (m !== 0) break;
@@ -1100,11 +1100,11 @@ const Q = v((function() {
     }
     return t.errors = null, !0;
   }
-  return C = 1, T.exports = t, T.exports.default = t, T.exports;
+  return G = 1, T.exports = t, T.exports.default = t, T.exports;
 })());
-var G, A = { exports: {} };
-const U = v((function() {
-  if (G) return A.exports;
+var X, A = { exports: {} };
+const V = v((function() {
+  if (X) return A.exports;
   function t(e, { instancePath: i = "", parentData: N, parentDataProperty: k, rootData: w = e } = {}) {
     if (!e || typeof e != "object" || Array.isArray(e)) return t.errors = [{ instancePath: i, schemaPath: "#/type", keyword: "type", params: { type: "object" }, message: "must be object" }], !1;
     {
@@ -1171,13 +1171,13 @@ const U = v((function() {
               }], !1;
               {
                 const p = a.length;
-                for (let o = 0; o < p; o++) {
-                  let m = a[o];
-                  const c = 0;
-                  if (typeof m != "number" || m % 1 || isNaN(m) || !isFinite(m)) return t.errors = [{ instancePath: i + "/expParams/" + o, schemaPath: "#/properties/expParams/items/type", keyword: "type", params: {
+                for (let n = 0; n < p; n++) {
+                  let m = a[n];
+                  const d = 0;
+                  if (typeof m != "number" || m % 1 || isNaN(m) || !isFinite(m)) return t.errors = [{ instancePath: i + "/expParams/" + n, schemaPath: "#/properties/expParams/items/type", keyword: "type", params: {
                     type: "integer"
                   }, message: "must be integer" }], !1;
-                  if (c !== 0) break;
+                  if (d !== 0) break;
                 }
               }
               s = y === 0;
@@ -1210,9 +1210,9 @@ const U = v((function() {
                 {
                   const p = a.length;
                   if (p > 0) {
-                    let o = a[0];
+                    let n = a[0];
                     const m = 0;
-                    if (!Array.isArray(o)) return t.errors = [{
+                    if (!Array.isArray(n)) return t.errors = [{
                       instancePath: i + "/params/0",
                       schemaPath: "#/properties/params/items/0/type",
                       keyword: "type",
@@ -1220,9 +1220,9 @@ const U = v((function() {
                       message: "must be array"
                     }], !1;
                     {
-                      const c = o.length;
-                      for (let f = 0; f < c; f++) {
-                        let u = o[f];
+                      const d = n.length;
+                      for (let f = 0; f < d; f++) {
+                        let u = n[f];
                         const h = 0;
                         if (typeof u != "number" || u % 1 || isNaN(u) || !isFinite(u)) return t.errors = [{
                           instancePath: i + "/params/0/" + f,
@@ -1238,9 +1238,9 @@ const U = v((function() {
                   }
                   if (g) {
                     if (p > 1) {
-                      let o = a[1];
+                      let n = a[1];
                       const m = 0;
-                      if (!Array.isArray(o)) return t.errors = [{
+                      if (!Array.isArray(n)) return t.errors = [{
                         instancePath: i + "/params/1",
                         schemaPath: "#/properties/params/items/1/type",
                         keyword: "type",
@@ -1248,9 +1248,9 @@ const U = v((function() {
                         message: "must be array"
                       }], !1;
                       {
-                        const c = o.length;
-                        for (let f = 0; f < c; f++) {
-                          let u = o[f];
+                        const d = n.length;
+                        for (let f = 0; f < d; f++) {
+                          let u = n[f];
                           const h = 0;
                           if (typeof u != "number" || u % 1 || isNaN(u) || !isFinite(u)) return t.errors = [{
                             instancePath: i + "/params/1/" + f,
@@ -1266,15 +1266,15 @@ const U = v((function() {
                     }
                     if (g) {
                       if (p > 2) {
-                        let o = a[2];
+                        let n = a[2];
                         const m = 0;
-                        if (!Array.isArray(o)) return t.errors = [{ instancePath: i + "/params/2", schemaPath: "#/properties/params/items/2/type", keyword: "type", params: {
+                        if (!Array.isArray(n)) return t.errors = [{ instancePath: i + "/params/2", schemaPath: "#/properties/params/items/2/type", keyword: "type", params: {
                           type: "array"
                         }, message: "must be array" }], !1;
                         {
-                          const c = o.length;
-                          for (let f = 0; f < c; f++) {
-                            let u = o[f];
+                          const d = n.length;
+                          for (let f = 0; f < d; f++) {
+                            let u = n[f];
                             const h = 0;
                             if (typeof u != "number" || u % 1 || isNaN(u) || !isFinite(u)) return t.errors = [{
                               instancePath: i + "/params/2/" + f,
@@ -1290,15 +1290,15 @@ const U = v((function() {
                       }
                       if (g) {
                         if (p > 3) {
-                          let o = a[3];
+                          let n = a[3];
                           const m = 0;
-                          if (!Array.isArray(o)) return t.errors = [{ instancePath: i + "/params/3", schemaPath: "#/properties/params/items/3/type", keyword: "type", params: {
+                          if (!Array.isArray(n)) return t.errors = [{ instancePath: i + "/params/3", schemaPath: "#/properties/params/items/3/type", keyword: "type", params: {
                             type: "array"
                           }, message: "must be array" }], !1;
                           {
-                            const c = o.length;
-                            for (let f = 0; f < c; f++) {
-                              let u = o[f];
+                            const d = n.length;
+                            for (let f = 0; f < d; f++) {
+                              let u = n[f];
                               const h = 0;
                               if (typeof u != "number" || u % 1 || isNaN(u) || !isFinite(u)) return t.errors = [{
                                 instancePath: i + "/params/3/" + f,
@@ -1314,15 +1314,15 @@ const U = v((function() {
                         }
                         if (g) {
                           if (p > 4) {
-                            let o = a[4];
+                            let n = a[4];
                             const m = 0;
-                            if (!Array.isArray(o)) return t.errors = [{ instancePath: i + "/params/4", schemaPath: "#/properties/params/items/4/type", keyword: "type", params: {
+                            if (!Array.isArray(n)) return t.errors = [{ instancePath: i + "/params/4", schemaPath: "#/properties/params/items/4/type", keyword: "type", params: {
                               type: "array"
                             }, message: "must be array" }], !1;
                             {
-                              const c = o.length;
-                              for (let f = 0; f < c; f++) {
-                                let u = o[f];
+                              const d = n.length;
+                              for (let f = 0; f < d; f++) {
+                                let u = n[f];
                                 const h = 0;
                                 if (typeof u != "number" || u % 1 || isNaN(u) || !isFinite(u)) return t.errors = [{
                                   instancePath: i + "/params/4/" + f,
@@ -1338,15 +1338,15 @@ const U = v((function() {
                           }
                           if (g) {
                             if (p > 5) {
-                              let o = a[5];
+                              let n = a[5];
                               const m = 0;
-                              if (!Array.isArray(o)) return t.errors = [{ instancePath: i + "/params/5", schemaPath: "#/properties/params/items/5/type", keyword: "type", params: {
+                              if (!Array.isArray(n)) return t.errors = [{ instancePath: i + "/params/5", schemaPath: "#/properties/params/items/5/type", keyword: "type", params: {
                                 type: "array"
                               }, message: "must be array" }], !1;
                               {
-                                const c = o.length;
-                                for (let f = 0; f < c; f++) {
-                                  let u = o[f];
+                                const d = n.length;
+                                for (let f = 0; f < d; f++) {
+                                  let u = n[f];
                                   const h = 0;
                                   if (typeof u != "number" || u % 1 || isNaN(u) || !isFinite(u)) return t.errors = [{
                                     instancePath: i + "/params/5/" + f,
@@ -1362,15 +1362,15 @@ const U = v((function() {
                             }
                             if (g) {
                               if (p > 6) {
-                                let o = a[6];
+                                let n = a[6];
                                 const m = 0;
-                                if (!Array.isArray(o)) return t.errors = [{ instancePath: i + "/params/6", schemaPath: "#/properties/params/items/6/type", keyword: "type", params: {
+                                if (!Array.isArray(n)) return t.errors = [{ instancePath: i + "/params/6", schemaPath: "#/properties/params/items/6/type", keyword: "type", params: {
                                   type: "array"
                                 }, message: "must be array" }], !1;
                                 {
-                                  const c = o.length;
-                                  for (let f = 0; f < c; f++) {
-                                    let u = o[f];
+                                  const d = n.length;
+                                  for (let f = 0; f < d; f++) {
+                                    let u = n[f];
                                     const h = 0;
                                     if (typeof u != "number" || u % 1 || isNaN(u) || !isFinite(u)) return t.errors = [{
                                       instancePath: i + "/params/6/" + f,
@@ -1385,15 +1385,15 @@ const U = v((function() {
                                 g = m === 0;
                               }
                               if (g && p > 7) {
-                                let o = a[7];
+                                let n = a[7];
                                 const m = 0;
-                                if (!Array.isArray(o)) return t.errors = [{ instancePath: i + "/params/7", schemaPath: "#/properties/params/items/7/type", keyword: "type", params: {
+                                if (!Array.isArray(n)) return t.errors = [{ instancePath: i + "/params/7", schemaPath: "#/properties/params/items/7/type", keyword: "type", params: {
                                   type: "array"
                                 }, message: "must be array" }], !1;
                                 {
-                                  const c = o.length;
-                                  for (let f = 0; f < c; f++) {
-                                    let u = o[f];
+                                  const d = n.length;
+                                  for (let f = 0; f < d; f++) {
+                                    let u = n[f];
                                     const h = 0;
                                     if (typeof u != "number" || u % 1 || isNaN(u) || !isFinite(u)) return t.errors = [{
                                       instancePath: i + "/params/7/" + f,
@@ -1429,11 +1429,11 @@ const U = v((function() {
                   }], !1;
                   {
                     const p = a.length;
-                    for (let o = 0; o < p; o++) {
-                      let m = a[o];
-                      const c = 0;
+                    for (let n = 0; n < p; n++) {
+                      let m = a[n];
+                      const d = 0;
                       if (!m || typeof m != "object" || Array.isArray(m)) return t.errors = [{
-                        instancePath: i + "/learnings/" + o,
+                        instancePath: i + "/learnings/" + n,
                         schemaPath: "#/properties/learnings/items/type",
                         keyword: "type",
                         params: { type: "object" },
@@ -1442,14 +1442,14 @@ const U = v((function() {
                       {
                         let f;
                         if (m.level === void 0 && (f = "level") || m.skillId === void 0 && (f = "skillId")) return t.errors = [{
-                          instancePath: i + "/learnings/" + o,
+                          instancePath: i + "/learnings/" + n,
                           schemaPath: "#/properties/learnings/items/required",
                           keyword: "required",
                           params: { missingProperty: f },
                           message: "must have required property '" + f + "'"
                         }], !1;
                         for (const u in m) if (u !== "level" && u !== "skillId" && u !== "note") return t.errors = [{
-                          instancePath: i + "/learnings/" + o,
+                          instancePath: i + "/learnings/" + n,
                           schemaPath: "#/properties/learnings/items/additionalProperties",
                           keyword: "additionalProperties",
                           params: { additionalProperty: u },
@@ -1459,40 +1459,40 @@ const U = v((function() {
                           let u = m.level;
                           const h = 0;
                           if (typeof u != "number" || u % 1 || isNaN(u) || !isFinite(u)) return t.errors = [{
-                            instancePath: i + "/learnings/" + o + "/level",
+                            instancePath: i + "/learnings/" + n + "/level",
                             schemaPath: "#/properties/learnings/items/properties/level/type",
                             keyword: "type",
                             params: { type: "integer" },
                             message: "must be integer"
                           }], !1;
-                          var d = h === 0;
-                        } else d = !0;
-                        if (d) {
+                          var c = h === 0;
+                        } else c = !0;
+                        if (c) {
                           if (m.skillId !== void 0) {
                             let u = m.skillId;
                             const h = 0;
                             if (typeof u != "number" || u % 1 || isNaN(u) || !isFinite(u)) return t.errors = [{
-                              instancePath: i + "/learnings/" + o + "/skillId",
+                              instancePath: i + "/learnings/" + n + "/skillId",
                               schemaPath: "#/properties/learnings/items/properties/skillId/type",
                               keyword: "type",
                               params: { type: "integer" },
                               message: "must be integer"
                             }], !1;
-                            d = h === 0;
-                          } else d = !0;
-                          if (d) if (m.note !== void 0) {
+                            c = h === 0;
+                          } else c = !0;
+                          if (c) if (m.note !== void 0) {
                             if (typeof m.note != "string") return t.errors = [{
-                              instancePath: i + "/learnings/" + o + "/note",
+                              instancePath: i + "/learnings/" + n + "/note",
                               schemaPath: "#/properties/learnings/items/properties/note/type",
                               keyword: "type",
                               params: { type: "string" },
                               message: "must be string"
                             }], !1;
-                            d = !0;
-                          } else d = !0;
+                            c = !0;
+                          } else c = !0;
                         }
                       }
-                      if (c !== 0) break;
+                      if (d !== 0) break;
                     }
                   }
                   s = y === 0;
@@ -1509,11 +1509,11 @@ const U = v((function() {
                   }], !1;
                   {
                     const p = a.length;
-                    for (let o = 0; o < p; o++) {
-                      let m = a[o];
-                      const c = 0;
+                    for (let n = 0; n < p; n++) {
+                      let m = a[n];
+                      const d = 0;
                       if (!m || typeof m != "object" || Array.isArray(m)) return t.errors = [{
-                        instancePath: i + "/traits/" + o,
+                        instancePath: i + "/traits/" + n,
                         schemaPath: "#/properties/traits/items/type",
                         keyword: "type",
                         params: { type: "object" },
@@ -1522,14 +1522,14 @@ const U = v((function() {
                       {
                         let f;
                         if (m.code === void 0 && (f = "code") || m.dataId === void 0 && (f = "dataId") || m.value === void 0 && (f = "value")) return t.errors = [{
-                          instancePath: i + "/traits/" + o,
+                          instancePath: i + "/traits/" + n,
                           schemaPath: "#/properties/traits/items/required",
                           keyword: "required",
                           params: { missingProperty: f },
                           message: "must have required property '" + f + "'"
                         }], !1;
                         for (const u in m) if (u !== "code" && u !== "dataId" && u !== "value") return t.errors = [{
-                          instancePath: i + "/traits/" + o,
+                          instancePath: i + "/traits/" + n,
                           schemaPath: "#/properties/traits/items/additionalProperties",
                           keyword: "additionalProperties",
                           params: { additionalProperty: u },
@@ -1539,38 +1539,38 @@ const U = v((function() {
                           let u = m.code;
                           const h = 0;
                           if (typeof u != "number" || u % 1 || isNaN(u) || !isFinite(u)) return t.errors = [{
-                            instancePath: i + "/traits/" + o + "/code",
+                            instancePath: i + "/traits/" + n + "/code",
                             schemaPath: "#/properties/traits/items/properties/code/type",
                             keyword: "type",
                             params: { type: "integer" },
                             message: "must be integer"
                           }], !1;
-                          var n = h === 0;
-                        } else n = !0;
-                        if (n) {
+                          var o = h === 0;
+                        } else o = !0;
+                        if (o) {
                           if (m.dataId !== void 0) {
                             let u = m.dataId;
                             const h = 0;
                             if (typeof u != "number" || u % 1 || isNaN(u) || !isFinite(u)) return t.errors = [{
-                              instancePath: i + "/traits/" + o + "/dataId",
+                              instancePath: i + "/traits/" + n + "/dataId",
                               schemaPath: "#/properties/traits/items/properties/dataId/type",
                               keyword: "type",
                               params: { type: "integer" },
                               message: "must be integer"
                             }], !1;
-                            n = h === 0;
-                          } else n = !0;
-                          if (n) if (m.value !== void 0) {
+                            o = h === 0;
+                          } else o = !0;
+                          if (o) if (m.value !== void 0) {
                             let u = m.value;
                             const h = 0;
-                            if (typeof u != "number" || !isFinite(u)) return t.errors = [{ instancePath: i + "/traits/" + o + "/value", schemaPath: "#/properties/traits/items/properties/value/type", keyword: "type", params: {
+                            if (typeof u != "number" || !isFinite(u)) return t.errors = [{ instancePath: i + "/traits/" + n + "/value", schemaPath: "#/properties/traits/items/properties/value/type", keyword: "type", params: {
                               type: "number"
                             }, message: "must be number" }], !1;
-                            n = h === 0;
-                          } else n = !0;
+                            o = h === 0;
+                          } else o = !0;
                         }
                       }
-                      if (c !== 0) break;
+                      if (d !== 0) break;
                     }
                   }
                   s = y === 0;
@@ -1583,11 +1583,11 @@ const U = v((function() {
     }
     return t.errors = null, !0;
   }
-  return G = 1, A.exports = t, A.exports.default = t, A.exports;
+  return X = 1, A.exports = t, A.exports.default = t, A.exports;
 })());
-var X, q = { exports: {} };
-const V = v((function() {
-  if (X) return q.exports;
+var Y, q = { exports: {} };
+const Z = v((function() {
+  if (Y) return q.exports;
   function t(e, { instancePath: i = "", parentData: N, parentDataProperty: k, rootData: w = e } = {}) {
     if (!e || typeof e != "object" || Array.isArray(e)) return t.errors = [{ instancePath: i, schemaPath: "#/type", keyword: "type", params: { type: "object" }, message: "must be object" }], !1;
     {
@@ -1687,10 +1687,10 @@ const V = v((function() {
                         message: "must NOT have fewer than 8 items"
                       }], !1;
                       {
-                        const o = y.length;
-                        if (o > 0) {
+                        const n = y.length;
+                        if (n > 0) {
                           let m = y[0];
-                          const c = 0;
+                          const d = 0;
                           if (typeof m != "number" || m % 1 || isNaN(m) || !isFinite(m)) return t.errors = [{
                             instancePath: i + "/params/0",
                             schemaPath: "#/properties/params/items/0/type",
@@ -1698,21 +1698,21 @@ const V = v((function() {
                             params: { type: "integer" },
                             message: "must be integer"
                           }], !1;
-                          var g = c === 0;
+                          var g = d === 0;
                         }
                         if (g) {
-                          if (o > 1) {
+                          if (n > 1) {
                             let m = y[1];
-                            const c = 0;
+                            const d = 0;
                             if (typeof m != "number" || m % 1 || isNaN(m) || !isFinite(m)) return t.errors = [{ instancePath: i + "/params/1", schemaPath: "#/properties/params/items/1/type", keyword: "type", params: {
                               type: "integer"
                             }, message: "must be integer" }], !1;
-                            g = c === 0;
+                            g = d === 0;
                           }
                           if (g) {
-                            if (o > 2) {
+                            if (n > 2) {
                               let m = y[2];
-                              const c = 0;
+                              const d = 0;
                               if (typeof m != "number" || m % 1 || isNaN(m) || !isFinite(m)) return t.errors = [{
                                 instancePath: i + "/params/2",
                                 schemaPath: "#/properties/params/items/2/type",
@@ -1720,21 +1720,21 @@ const V = v((function() {
                                 params: { type: "integer" },
                                 message: "must be integer"
                               }], !1;
-                              g = c === 0;
+                              g = d === 0;
                             }
                             if (g) {
-                              if (o > 3) {
+                              if (n > 3) {
                                 let m = y[3];
-                                const c = 0;
+                                const d = 0;
                                 if (typeof m != "number" || m % 1 || isNaN(m) || !isFinite(m)) return t.errors = [{ instancePath: i + "/params/3", schemaPath: "#/properties/params/items/3/type", keyword: "type", params: {
                                   type: "integer"
                                 }, message: "must be integer" }], !1;
-                                g = c === 0;
+                                g = d === 0;
                               }
                               if (g) {
-                                if (o > 4) {
+                                if (n > 4) {
                                   let m = y[4];
-                                  const c = 0;
+                                  const d = 0;
                                   if (typeof m != "number" || m % 1 || isNaN(m) || !isFinite(m)) return t.errors = [{
                                     instancePath: i + "/params/4",
                                     schemaPath: "#/properties/params/items/4/type",
@@ -1742,21 +1742,21 @@ const V = v((function() {
                                     params: { type: "integer" },
                                     message: "must be integer"
                                   }], !1;
-                                  g = c === 0;
+                                  g = d === 0;
                                 }
                                 if (g) {
-                                  if (o > 5) {
+                                  if (n > 5) {
                                     let m = y[5];
-                                    const c = 0;
+                                    const d = 0;
                                     if (typeof m != "number" || m % 1 || isNaN(m) || !isFinite(m)) return t.errors = [{ instancePath: i + "/params/5", schemaPath: "#/properties/params/items/5/type", keyword: "type", params: {
                                       type: "integer"
                                     }, message: "must be integer" }], !1;
-                                    g = c === 0;
+                                    g = d === 0;
                                   }
                                   if (g) {
-                                    if (o > 6) {
+                                    if (n > 6) {
                                       let m = y[6];
-                                      const c = 0;
+                                      const d = 0;
                                       if (typeof m != "number" || m % 1 || isNaN(m) || !isFinite(m)) return t.errors = [{
                                         instancePath: i + "/params/6",
                                         schemaPath: "#/properties/params/items/6/type",
@@ -1764,15 +1764,15 @@ const V = v((function() {
                                         params: { type: "integer" },
                                         message: "must be integer"
                                       }], !1;
-                                      g = c === 0;
+                                      g = d === 0;
                                     }
-                                    if (g && o > 7) {
+                                    if (g && n > 7) {
                                       let m = y[7];
-                                      const c = 0;
+                                      const d = 0;
                                       if (typeof m != "number" || m % 1 || isNaN(m) || !isFinite(m)) return t.errors = [{ instancePath: i + "/params/7", schemaPath: "#/properties/params/items/7/type", keyword: "type", params: {
                                         type: "integer"
                                       }, message: "must be integer" }], !1;
-                                      g = c === 0;
+                                      g = d === 0;
                                     }
                                   }
                                 }
@@ -1795,24 +1795,24 @@ const V = v((function() {
                           message: "must be array"
                         }], !1;
                         {
-                          const o = y.length;
-                          for (let m = 0; m < o; m++) {
-                            let c = y[m];
+                          const n = y.length;
+                          for (let m = 0; m < n; m++) {
+                            let d = y[m];
                             const f = 0;
-                            if (!c || typeof c != "object" || Array.isArray(c)) return t.errors = [{ instancePath: i + "/actions/" + m, schemaPath: "#/properties/actions/items/type", keyword: "type", params: {
+                            if (!d || typeof d != "object" || Array.isArray(d)) return t.errors = [{ instancePath: i + "/actions/" + m, schemaPath: "#/properties/actions/items/type", keyword: "type", params: {
                               type: "object"
                             }, message: "must be object" }], !1;
                             {
                               let u;
-                              if (c.conditionParam1 === void 0 && (u = "conditionParam1") || c.conditionParam2 === void 0 && (u = "conditionParam2") || c.conditionType === void 0 && (u = "conditionType") || c.skillId === void 0 && (u = "skillId") || c.rating === void 0 && (u = "rating")) return t.errors = [{
+                              if (d.conditionParam1 === void 0 && (u = "conditionParam1") || d.conditionParam2 === void 0 && (u = "conditionParam2") || d.conditionType === void 0 && (u = "conditionType") || d.skillId === void 0 && (u = "skillId") || d.rating === void 0 && (u = "rating")) return t.errors = [{
                                 instancePath: i + "/actions/" + m,
                                 schemaPath: "#/properties/actions/items/required",
                                 keyword: "required",
                                 params: { missingProperty: u },
                                 message: "must have required property '" + u + "'"
                               }], !1;
-                              if (c.conditionParam1 !== void 0) {
-                                let h = c.conditionParam1;
+                              if (d.conditionParam1 !== void 0) {
+                                let h = d.conditionParam1;
                                 const l = 0;
                                 if (typeof h != "number" || h % 1 || isNaN(h) || !isFinite(h)) return t.errors = [{
                                   instancePath: i + "/actions/" + m + "/conditionParam1",
@@ -1821,11 +1821,11 @@ const V = v((function() {
                                   params: { type: "integer" },
                                   message: "must be integer"
                                 }], !1;
-                                var d = l === 0;
-                              } else d = !0;
-                              if (d) {
-                                if (c.conditionParam2 !== void 0) {
-                                  let h = c.conditionParam2;
+                                var c = l === 0;
+                              } else c = !0;
+                              if (c) {
+                                if (d.conditionParam2 !== void 0) {
+                                  let h = d.conditionParam2;
                                   const l = 0;
                                   if (typeof h != "number" || h % 1 || isNaN(h) || !isFinite(h)) return t.errors = [{
                                     instancePath: i + "/actions/" + m + "/conditionParam2",
@@ -1834,11 +1834,11 @@ const V = v((function() {
                                     params: { type: "integer" },
                                     message: "must be integer"
                                   }], !1;
-                                  d = l === 0;
-                                } else d = !0;
-                                if (d) {
-                                  if (c.conditionType !== void 0) {
-                                    let h = c.conditionType;
+                                  c = l === 0;
+                                } else c = !0;
+                                if (c) {
+                                  if (d.conditionType !== void 0) {
+                                    let h = d.conditionType;
                                     const l = 0;
                                     if (typeof h != "number" || h % 1 || isNaN(h) || !isFinite(h)) return t.errors = [{
                                       instancePath: i + "/actions/" + m + "/conditionType",
@@ -1847,11 +1847,11 @@ const V = v((function() {
                                       params: { type: "integer" },
                                       message: "must be integer"
                                     }], !1;
-                                    d = l === 0;
-                                  } else d = !0;
-                                  if (d) {
-                                    if (c.skillId !== void 0) {
-                                      let h = c.skillId;
+                                    c = l === 0;
+                                  } else c = !0;
+                                  if (c) {
+                                    if (d.skillId !== void 0) {
+                                      let h = d.skillId;
                                       const l = 0;
                                       if (typeof h != "number" || h % 1 || isNaN(h) || !isFinite(h)) return t.errors = [{
                                         instancePath: i + "/actions/" + m + "/skillId",
@@ -1860,10 +1860,10 @@ const V = v((function() {
                                         params: { type: "integer" },
                                         message: "must be integer"
                                       }], !1;
-                                      d = l === 0;
-                                    } else d = !0;
-                                    if (d) if (c.rating !== void 0) {
-                                      let h = c.rating;
+                                      c = l === 0;
+                                    } else c = !0;
+                                    if (c) if (d.rating !== void 0) {
+                                      let h = d.rating;
                                       const l = 0;
                                       if (typeof h != "number" || h % 1 || isNaN(h) || !isFinite(h)) return t.errors = [{
                                         instancePath: i + "/actions/" + m + "/rating",
@@ -1872,8 +1872,8 @@ const V = v((function() {
                                         params: { type: "integer" },
                                         message: "must be integer"
                                       }], !1;
-                                      d = l === 0;
-                                    } else d = !0;
+                                      c = l === 0;
+                                    } else c = !0;
                                   }
                                 }
                               }
@@ -1895,11 +1895,11 @@ const V = v((function() {
                             message: "must be array"
                           }], !1;
                           {
-                            const o = y.length;
-                            for (let m = 0; m < o; m++) {
-                              let c = y[m];
+                            const n = y.length;
+                            for (let m = 0; m < n; m++) {
+                              let d = y[m];
                               const f = 0;
-                              if (!c || typeof c != "object" || Array.isArray(c)) return t.errors = [{
+                              if (!d || typeof d != "object" || Array.isArray(d)) return t.errors = [{
                                 instancePath: i + "/traits/" + m,
                                 schemaPath: "#/properties/traits/items/type",
                                 keyword: "type",
@@ -1908,22 +1908,22 @@ const V = v((function() {
                               }], !1;
                               {
                                 let u;
-                                if (c.code === void 0 && (u = "code") || c.dataId === void 0 && (u = "dataId") || c.value === void 0 && (u = "value")) return t.errors = [{
+                                if (d.code === void 0 && (u = "code") || d.dataId === void 0 && (u = "dataId") || d.value === void 0 && (u = "value")) return t.errors = [{
                                   instancePath: i + "/traits/" + m,
                                   schemaPath: "#/properties/traits/items/required",
                                   keyword: "required",
                                   params: { missingProperty: u },
                                   message: "must have required property '" + u + "'"
                                 }], !1;
-                                for (const h in c) if (h !== "code" && h !== "dataId" && h !== "value") return t.errors = [{
+                                for (const h in d) if (h !== "code" && h !== "dataId" && h !== "value") return t.errors = [{
                                   instancePath: i + "/traits/" + m,
                                   schemaPath: "#/properties/traits/items/additionalProperties",
                                   keyword: "additionalProperties",
                                   params: { additionalProperty: h },
                                   message: "must NOT have additional properties"
                                 }], !1;
-                                if (c.code !== void 0) {
-                                  let h = c.code;
+                                if (d.code !== void 0) {
+                                  let h = d.code;
                                   const l = 0;
                                   if (typeof h != "number" || h % 1 || isNaN(h) || !isFinite(h)) return t.errors = [{
                                     instancePath: i + "/traits/" + m + "/code",
@@ -1932,11 +1932,11 @@ const V = v((function() {
                                     params: { type: "integer" },
                                     message: "must be integer"
                                   }], !1;
-                                  var n = l === 0;
-                                } else n = !0;
-                                if (n) {
-                                  if (c.dataId !== void 0) {
-                                    let h = c.dataId;
+                                  var o = l === 0;
+                                } else o = !0;
+                                if (o) {
+                                  if (d.dataId !== void 0) {
+                                    let h = d.dataId;
                                     const l = 0;
                                     if (typeof h != "number" || h % 1 || isNaN(h) || !isFinite(h)) return t.errors = [{
                                       instancePath: i + "/traits/" + m + "/dataId",
@@ -1945,16 +1945,16 @@ const V = v((function() {
                                       params: { type: "integer" },
                                       message: "must be integer"
                                     }], !1;
-                                    n = l === 0;
-                                  } else n = !0;
-                                  if (n) if (c.value !== void 0) {
-                                    let h = c.value;
+                                    o = l === 0;
+                                  } else o = !0;
+                                  if (o) if (d.value !== void 0) {
+                                    let h = d.value;
                                     const l = 0;
                                     if (typeof h != "number" || !isFinite(h)) return t.errors = [{ instancePath: i + "/traits/" + m + "/value", schemaPath: "#/properties/traits/items/properties/value/type", keyword: "type", params: {
                                       type: "number"
                                     }, message: "must be number" }], !1;
-                                    n = l === 0;
-                                  } else n = !0;
+                                    o = l === 0;
+                                  } else o = !0;
                                 }
                               }
                               if (f !== 0) break;
@@ -1967,11 +1967,11 @@ const V = v((function() {
                           const p = 0;
                           if (!Array.isArray(y)) return t.errors = [{ instancePath: i + "/dropItems", schemaPath: "#/properties/dropItems/type", keyword: "type", params: { type: "array" }, message: "must be array" }], !1;
                           {
-                            const o = y.length;
-                            for (let m = 0; m < o; m++) {
-                              let c = y[m];
+                            const n = y.length;
+                            for (let m = 0; m < n; m++) {
+                              let d = y[m];
                               const f = 0;
-                              if (!c || typeof c != "object" || Array.isArray(c)) return t.errors = [{
+                              if (!d || typeof d != "object" || Array.isArray(d)) return t.errors = [{
                                 instancePath: i + "/dropItems/" + m,
                                 schemaPath: "#/properties/dropItems/items/type",
                                 keyword: "type",
@@ -1980,15 +1980,15 @@ const V = v((function() {
                               }], !1;
                               {
                                 let u;
-                                if (c.kind === void 0 && (u = "kind") || c.dataId === void 0 && (u = "dataId") || c.denominator === void 0 && (u = "denominator")) return t.errors = [{
+                                if (d.kind === void 0 && (u = "kind") || d.dataId === void 0 && (u = "dataId") || d.denominator === void 0 && (u = "denominator")) return t.errors = [{
                                   instancePath: i + "/dropItems/" + m,
                                   schemaPath: "#/properties/dropItems/items/required",
                                   keyword: "required",
                                   params: { missingProperty: u },
                                   message: "must have required property '" + u + "'"
                                 }], !1;
-                                if (c.kind !== void 0) {
-                                  let h = c.kind;
+                                if (d.kind !== void 0) {
+                                  let h = d.kind;
                                   const l = 0;
                                   if (typeof h != "number" || h % 1 || isNaN(h) || !isFinite(h)) return t.errors = [{
                                     instancePath: i + "/dropItems/" + m + "/kind",
@@ -2000,8 +2000,8 @@ const V = v((function() {
                                   var r = l === 0;
                                 } else r = !0;
                                 if (r) {
-                                  if (c.dataId !== void 0) {
-                                    let h = c.dataId;
+                                  if (d.dataId !== void 0) {
+                                    let h = d.dataId;
                                     const l = 0;
                                     if (typeof h != "number" || h % 1 || isNaN(h) || !isFinite(h)) return t.errors = [{
                                       instancePath: i + "/dropItems/" + m + "/dataId",
@@ -2013,8 +2013,8 @@ const V = v((function() {
                                     r = l === 0;
                                   } else r = !0;
                                   if (r) {
-                                    if (c.denominator !== void 0) {
-                                      let h = c.denominator;
+                                    if (d.denominator !== void 0) {
+                                      let h = d.denominator;
                                       const l = 0;
                                       if (typeof h != "number" || h % 1 || isNaN(h) || !isFinite(h)) return t.errors = [{
                                         instancePath: i + "/dropItems/" + m + "/denominator",
@@ -2025,8 +2025,8 @@ const V = v((function() {
                                       }], !1;
                                       r = l === 0;
                                     } else r = !0;
-                                    if (r) if (c.rate !== void 0) {
-                                      let h = c.rate;
+                                    if (r) if (d.rate !== void 0) {
+                                      let h = d.rate;
                                       const l = 0;
                                       if (typeof h != "number" || !isFinite(h)) return t.errors = [{
                                         instancePath: i + "/dropItems/" + m + "/rate",
@@ -2057,11 +2057,11 @@ const V = v((function() {
     }
     return t.errors = null, !0;
   }
-  return X = 1, q.exports = t, q.exports.default = t, q.exports;
+  return Y = 1, q.exports = t, q.exports.default = t, q.exports;
 })());
-var Y, j = { exports: {} };
-const Z = v((function() {
-  if (Y) return j.exports;
+var E, j = { exports: {} };
+const $ = v((function() {
+  if (E) return j.exports;
   function t(e, { instancePath: i = "", parentData: N, parentDataProperty: k, rootData: w = e } = {}) {
     if (!e || typeof e != "object" || Array.isArray(e)) return t.errors = [{
       instancePath: i,
@@ -2071,13 +2071,13 @@ const Z = v((function() {
       message: "must be object"
     }], !1;
     {
-      let n;
-      if (e.name === void 0 && (n = "name") || e.id === void 0 && (n = "id") || e.description === void 0 && (n = "description") || e.iconIndex === void 0 && (n = "iconIndex") || e.note === void 0 && (n = "note") || e.animationId === void 0 && (n = "animationId") || e.hitType === void 0 && (n = "hitType") || e.occasion === void 0 && (n = "occasion") || e.repeats === void 0 && (n = "repeats") || e.scope === void 0 && (n = "scope") || e.speed === void 0 && (n = "speed") || e.successRate === void 0 && (n = "successRate") || e.tpGain === void 0 && (n = "tpGain") || e.consumable === void 0 && (n = "consumable") || e.price === void 0 && (n = "price") || e.effects === void 0 && (n = "effects")) return t.errors = [{
+      let o;
+      if (e.name === void 0 && (o = "name") || e.id === void 0 && (o = "id") || e.description === void 0 && (o = "description") || e.iconIndex === void 0 && (o = "iconIndex") || e.note === void 0 && (o = "note") || e.animationId === void 0 && (o = "animationId") || e.hitType === void 0 && (o = "hitType") || e.occasion === void 0 && (o = "occasion") || e.repeats === void 0 && (o = "repeats") || e.scope === void 0 && (o = "scope") || e.speed === void 0 && (o = "speed") || e.successRate === void 0 && (o = "successRate") || e.tpGain === void 0 && (o = "tpGain") || e.consumable === void 0 && (o = "consumable") || e.price === void 0 && (o = "price") || e.effects === void 0 && (o = "effects")) return t.errors = [{
         instancePath: i,
         schemaPath: "#/required",
         keyword: "required",
-        params: { missingProperty: n },
-        message: "must have required property '" + n + "'"
+        params: { missingProperty: o },
+        message: "must have required property '" + o + "'"
       }], !1;
       if (e.name !== void 0) {
         if (typeof e.name != "string") return t.errors = [{ instancePath: i + "/name", schemaPath: "#/properties/name/type", keyword: "type", params: { type: "string" }, message: "must be string" }], !1;
@@ -2307,9 +2307,9 @@ const Z = v((function() {
                                         {
                                           const y = r.length;
                                           for (let p = 0; p < y; p++) {
-                                            let o = r[p];
+                                            let n = r[p];
                                             const m = 0;
-                                            if (!o || typeof o != "object" || Array.isArray(o)) return t.errors = [{
+                                            if (!n || typeof n != "object" || Array.isArray(n)) return t.errors = [{
                                               instancePath: i + "/effects/" + p,
                                               schemaPath: "#/properties/effects/items/type",
                                               keyword: "type",
@@ -2317,23 +2317,23 @@ const Z = v((function() {
                                               message: "must be object"
                                             }], !1;
                                             {
-                                              let c;
-                                              if (o.code === void 0 && (c = "code") || o.dataId === void 0 && (c = "dataId") || o.value1 === void 0 && (c = "value1") || o.value2 === void 0 && (c = "value2")) return t.errors = [{
+                                              let d;
+                                              if (n.code === void 0 && (d = "code") || n.dataId === void 0 && (d = "dataId") || n.value1 === void 0 && (d = "value1") || n.value2 === void 0 && (d = "value2")) return t.errors = [{
                                                 instancePath: i + "/effects/" + p,
                                                 schemaPath: "#/properties/effects/items/required",
                                                 keyword: "required",
-                                                params: { missingProperty: c },
-                                                message: "must have required property '" + c + "'"
+                                                params: { missingProperty: d },
+                                                message: "must have required property '" + d + "'"
                                               }], !1;
-                                              for (const f in o) if (f !== "code" && f !== "dataId" && f !== "value1" && f !== "value2") return t.errors = [{
+                                              for (const f in n) if (f !== "code" && f !== "dataId" && f !== "value1" && f !== "value2") return t.errors = [{
                                                 instancePath: i + "/effects/" + p,
                                                 schemaPath: "#/properties/effects/items/additionalProperties",
                                                 keyword: "additionalProperties",
                                                 params: { additionalProperty: f },
                                                 message: "must NOT have additional properties"
                                               }], !1;
-                                              if (o.code !== void 0) {
-                                                let f = o.code;
+                                              if (n.code !== void 0) {
+                                                let f = n.code;
                                                 const u = 0;
                                                 if (typeof f != "number" || f % 1 || isNaN(f) || !isFinite(f)) return t.errors = [{
                                                   instancePath: i + "/effects/" + p + "/code",
@@ -2345,8 +2345,8 @@ const Z = v((function() {
                                                 var g = u === 0;
                                               } else g = !0;
                                               if (g) {
-                                                if (o.dataId !== void 0) {
-                                                  let f = o.dataId;
+                                                if (n.dataId !== void 0) {
+                                                  let f = n.dataId;
                                                   const u = 0;
                                                   if (typeof f != "number" || f % 1 || isNaN(f) || !isFinite(f)) return t.errors = [{
                                                     instancePath: i + "/effects/" + p + "/dataId",
@@ -2358,8 +2358,8 @@ const Z = v((function() {
                                                   g = u === 0;
                                                 } else g = !0;
                                                 if (g) {
-                                                  if (o.value1 !== void 0) {
-                                                    let f = o.value1;
+                                                  if (n.value1 !== void 0) {
+                                                    let f = n.value1;
                                                     const u = 0;
                                                     if (typeof f != "number" || !isFinite(f)) return t.errors = [{
                                                       instancePath: i + "/effects/" + p + "/value1",
@@ -2370,8 +2370,8 @@ const Z = v((function() {
                                                     }], !1;
                                                     g = u === 0;
                                                   } else g = !0;
-                                                  if (g) if (o.value2 !== void 0) {
-                                                    let f = o.value2;
+                                                  if (g) if (n.value2 !== void 0) {
+                                                    let f = n.value2;
                                                     const u = 0;
                                                     if (typeof f != "number" || !isFinite(f)) return t.errors = [{
                                                       instancePath: i + "/effects/" + p + "/value2",
@@ -2418,7 +2418,7 @@ const Z = v((function() {
                                           }], !1;
                                           if (r.type !== void 0) {
                                             let p = r.type;
-                                            const o = 0;
+                                            const n = 0;
                                             if (typeof p != "number" || p % 1 || isNaN(p) || !isFinite(p)) return t.errors = [{
                                               instancePath: i + "/damage/type",
                                               schemaPath: "#/properties/damage/properties/type/type",
@@ -2426,12 +2426,12 @@ const Z = v((function() {
                                               params: { type: "integer" },
                                               message: "must be integer"
                                             }], !1;
-                                            var d = o === 0;
-                                          } else d = !0;
-                                          if (d) {
+                                            var c = n === 0;
+                                          } else c = !0;
+                                          if (c) {
                                             if (r.elementId !== void 0) {
                                               let p = r.elementId;
-                                              const o = 0;
+                                              const n = 0;
                                               if (typeof p != "number" || p % 1 || isNaN(p) || !isFinite(p)) return t.errors = [{
                                                 instancePath: i + "/damage/elementId",
                                                 schemaPath: "#/properties/damage/properties/elementId/type",
@@ -2446,9 +2446,9 @@ const Z = v((function() {
                                                 params: { comparison: ">=", limit: 0 },
                                                 message: "must be >= 0"
                                               }], !1;
-                                              d = o === 0;
-                                            } else d = !0;
-                                            if (d) {
+                                              c = n === 0;
+                                            } else c = !0;
+                                            if (c) {
                                               if (r.formula !== void 0) {
                                                 if (typeof r.formula != "string") return t.errors = [{
                                                   instancePath: i + "/damage/formula",
@@ -2457,12 +2457,12 @@ const Z = v((function() {
                                                   params: { type: "string" },
                                                   message: "must be string"
                                                 }], !1;
-                                                d = !0;
-                                              } else d = !0;
-                                              if (d) {
+                                                c = !0;
+                                              } else c = !0;
+                                              if (c) {
                                                 if (r.variance !== void 0) {
                                                   let p = r.variance;
-                                                  const o = 0;
+                                                  const n = 0;
                                                   if (typeof p != "number" || p % 1 || isNaN(p) || !isFinite(p)) return t.errors = [{
                                                     instancePath: i + "/damage/variance",
                                                     schemaPath: "#/properties/damage/properties/variance/type",
@@ -2470,9 +2470,9 @@ const Z = v((function() {
                                                     params: { type: "integer" },
                                                     message: "must be integer"
                                                   }], !1;
-                                                  d = o === 0;
-                                                } else d = !0;
-                                                if (d) if (r.critical !== void 0) {
+                                                  c = n === 0;
+                                                } else c = !0;
+                                                if (c) if (r.critical !== void 0) {
                                                   if (typeof r.critical != "boolean") return t.errors = [{
                                                     instancePath: i + "/damage/critical",
                                                     schemaPath: "#/properties/damage/properties/critical/type",
@@ -2480,8 +2480,8 @@ const Z = v((function() {
                                                     params: { type: "boolean" },
                                                     message: "must be boolean"
                                                   }], !1;
-                                                  d = !0;
-                                                } else d = !0;
+                                                  c = !0;
+                                                } else c = !0;
                                               }
                                             }
                                           }
@@ -2507,11 +2507,11 @@ const Z = v((function() {
     }
     return t.errors = null, !0;
   }
-  return Y = 1, j.exports = t, j.exports.default = t, j.exports;
+  return E = 1, j.exports = t, j.exports.default = t, j.exports;
 })());
-var E, D = { exports: {} };
-const _ = v((function() {
-  if (E) return D.exports;
+var z, D = { exports: {} };
+const ee = v((function() {
+  if (z) return D.exports;
   function t(e, { instancePath: i = "", parentData: N, parentDataProperty: k, rootData: w = e } = {}) {
     if (!e || typeof e != "object" || Array.isArray(e)) return t.errors = [{
       instancePath: i,
@@ -2530,23 +2530,23 @@ const _ = v((function() {
         message: "must have required property '" + g + "'"
       }], !1;
       if (e.id !== void 0) {
-        let d = e.id;
-        const n = 0;
-        if (typeof d != "number" || d % 1 || isNaN(d) || !isFinite(d)) return t.errors = [{
+        let c = e.id;
+        const o = 0;
+        if (typeof c != "number" || c % 1 || isNaN(c) || !isFinite(c)) return t.errors = [{
           instancePath: i + "/id",
           schemaPath: "#/properties/id/type",
           keyword: "type",
           params: { type: "integer" },
           message: "must be integer"
         }], !1;
-        if (typeof d == "number" && isFinite(d) && (d < 0 || isNaN(d))) return t.errors = [{
+        if (typeof c == "number" && isFinite(c) && (c < 0 || isNaN(c))) return t.errors = [{
           instancePath: i + "/id",
           schemaPath: "#/properties/id/minimum",
           keyword: "minimum",
           params: { comparison: ">=", limit: 0 },
           message: "must be >= 0"
         }], !1;
-        var s = n === 0;
+        var s = o === 0;
       } else s = !0;
       if (s) {
         if (e.name !== void 0) {
@@ -2572,16 +2572,16 @@ const _ = v((function() {
           } else s = !0;
           if (s) {
             if (e.order !== void 0) {
-              let d = e.order;
-              const n = 0;
-              if (typeof d != "number" || d % 1 || isNaN(d) || !isFinite(d)) return t.errors = [{
+              let c = e.order;
+              const o = 0;
+              if (typeof c != "number" || c % 1 || isNaN(c) || !isFinite(c)) return t.errors = [{
                 instancePath: i + "/order",
                 schemaPath: "#/properties/order/type",
                 keyword: "type",
                 params: { type: "integer" },
                 message: "must be integer"
               }], !1;
-              s = n === 0;
+              s = o === 0;
             } else s = !0;
             if (s) {
               if (e.expanded !== void 0) {
@@ -2596,44 +2596,44 @@ const _ = v((function() {
               } else s = !0;
               if (s) {
                 if (e.scrollX !== void 0) {
-                  let d = e.scrollX;
-                  const n = 0;
-                  if (typeof d != "number" || !isFinite(d)) return t.errors = [{
+                  let c = e.scrollX;
+                  const o = 0;
+                  if (typeof c != "number" || !isFinite(c)) return t.errors = [{
                     instancePath: i + "/scrollX",
                     schemaPath: "#/properties/scrollX/type",
                     keyword: "type",
                     params: { type: "number" },
                     message: "must be number"
                   }], !1;
-                  s = n === 0;
+                  s = o === 0;
                 } else s = !0;
                 if (s) {
                   if (e.scrollY !== void 0) {
-                    let d = e.scrollY;
-                    const n = 0;
-                    if (typeof d != "number" || !isFinite(d)) return t.errors = [{ instancePath: i + "/scrollY", schemaPath: "#/properties/scrollY/type", keyword: "type", params: {
+                    let c = e.scrollY;
+                    const o = 0;
+                    if (typeof c != "number" || !isFinite(c)) return t.errors = [{ instancePath: i + "/scrollY", schemaPath: "#/properties/scrollY/type", keyword: "type", params: {
                       type: "number"
                     }, message: "must be number" }], !1;
-                    s = n === 0;
+                    s = o === 0;
                   } else s = !0;
                   if (s) if (e.parentId !== void 0) {
-                    let d = e.parentId;
-                    const n = 0;
-                    if (typeof d != "number" || d % 1 || isNaN(d) || !isFinite(d)) return t.errors = [{
+                    let c = e.parentId;
+                    const o = 0;
+                    if (typeof c != "number" || c % 1 || isNaN(c) || !isFinite(c)) return t.errors = [{
                       instancePath: i + "/parentId",
                       schemaPath: "#/properties/parentId/type",
                       keyword: "type",
                       params: { type: "integer" },
                       message: "must be integer"
                     }], !1;
-                    if (typeof d == "number" && isFinite(d) && (d < 0 || isNaN(d))) return t.errors = [{
+                    if (typeof c == "number" && isFinite(c) && (c < 0 || isNaN(c))) return t.errors = [{
                       instancePath: i + "/parentId",
                       schemaPath: "#/properties/parentId/minimum",
                       keyword: "minimum",
                       params: { comparison: ">=", limit: 0 },
                       message: "must be >= 0"
                     }], !1;
-                    s = n === 0;
+                    s = o === 0;
                   } else s = !0;
                 }
               }
@@ -2644,21 +2644,21 @@ const _ = v((function() {
     }
     return t.errors = null, !0;
   }
-  return E = 1, D.exports = t, D.exports.default = t, D.exports;
+  return z = 1, D.exports = t, D.exports.default = t, D.exports;
 })());
-var z, B = { exports: {} };
-const $ = v((function() {
-  if (z) return B.exports;
+var H, B = { exports: {} };
+const te = v((function() {
+  if (H) return B.exports;
   function t(e, { instancePath: i = "", parentData: N, parentDataProperty: k, rootData: w = e } = {}) {
     if (!e || typeof e != "object" || Array.isArray(e)) return t.errors = [{ instancePath: i, schemaPath: "#/type", keyword: "type", params: { type: "object" }, message: "must be object" }], !1;
     {
-      let n;
-      if (e.name === void 0 && (n = "name") || e.id === void 0 && (n = "id") || e.description === void 0 && (n = "description") || e.iconIndex === void 0 && (n = "iconIndex") || e.message1 === void 0 && (n = "message1") || e.message2 === void 0 && (n = "message2") || e.mpCost === void 0 && (n = "mpCost") || e.requiredWtypeId1 === void 0 && (n = "requiredWtypeId1") || e.requiredWtypeId2 === void 0 && (n = "requiredWtypeId2") || e.stypeId === void 0 && (n = "stypeId") || e.tpCost === void 0 && (n = "tpCost") || e.animationId === void 0 && (n = "animationId") || e.hitType === void 0 && (n = "hitType") || e.occasion === void 0 && (n = "occasion") || e.repeats === void 0 && (n = "repeats") || e.scope === void 0 && (n = "scope") || e.speed === void 0 && (n = "speed") || e.successRate === void 0 && (n = "successRate") || e.tpGain === void 0 && (n = "tpGain") || e.note === void 0 && (n = "note") || e.effects === void 0 && (n = "effects")) return t.errors = [{
+      let o;
+      if (e.name === void 0 && (o = "name") || e.id === void 0 && (o = "id") || e.description === void 0 && (o = "description") || e.iconIndex === void 0 && (o = "iconIndex") || e.message1 === void 0 && (o = "message1") || e.message2 === void 0 && (o = "message2") || e.mpCost === void 0 && (o = "mpCost") || e.requiredWtypeId1 === void 0 && (o = "requiredWtypeId1") || e.requiredWtypeId2 === void 0 && (o = "requiredWtypeId2") || e.stypeId === void 0 && (o = "stypeId") || e.tpCost === void 0 && (o = "tpCost") || e.animationId === void 0 && (o = "animationId") || e.hitType === void 0 && (o = "hitType") || e.occasion === void 0 && (o = "occasion") || e.repeats === void 0 && (o = "repeats") || e.scope === void 0 && (o = "scope") || e.speed === void 0 && (o = "speed") || e.successRate === void 0 && (o = "successRate") || e.tpGain === void 0 && (o = "tpGain") || e.note === void 0 && (o = "note") || e.effects === void 0 && (o = "effects")) return t.errors = [{
         instancePath: i,
         schemaPath: "#/required",
         keyword: "required",
-        params: { missingProperty: n },
-        message: "must have required property '" + n + "'"
+        params: { missingProperty: o },
+        message: "must have required property '" + o + "'"
       }], !1;
       if (e.name !== void 0) {
         if (typeof e.name != "string") return t.errors = [{ instancePath: i + "/name", schemaPath: "#/properties/name/type", keyword: "type", params: { type: "string" }, message: "must be string" }], !1;
@@ -2952,9 +2952,9 @@ const $ = v((function() {
                                                 {
                                                   const y = r.length;
                                                   for (let p = 0; p < y; p++) {
-                                                    let o = r[p];
+                                                    let n = r[p];
                                                     const m = 0;
-                                                    if (!o || typeof o != "object" || Array.isArray(o)) return t.errors = [{
+                                                    if (!n || typeof n != "object" || Array.isArray(n)) return t.errors = [{
                                                       instancePath: i + "/effects/" + p,
                                                       schemaPath: "#/properties/effects/items/type",
                                                       keyword: "type",
@@ -2962,23 +2962,23 @@ const $ = v((function() {
                                                       message: "must be object"
                                                     }], !1;
                                                     {
-                                                      let c;
-                                                      if (o.code === void 0 && (c = "code") || o.dataId === void 0 && (c = "dataId") || o.value1 === void 0 && (c = "value1") || o.value2 === void 0 && (c = "value2")) return t.errors = [{
+                                                      let d;
+                                                      if (n.code === void 0 && (d = "code") || n.dataId === void 0 && (d = "dataId") || n.value1 === void 0 && (d = "value1") || n.value2 === void 0 && (d = "value2")) return t.errors = [{
                                                         instancePath: i + "/effects/" + p,
                                                         schemaPath: "#/properties/effects/items/required",
                                                         keyword: "required",
-                                                        params: { missingProperty: c },
-                                                        message: "must have required property '" + c + "'"
+                                                        params: { missingProperty: d },
+                                                        message: "must have required property '" + d + "'"
                                                       }], !1;
-                                                      for (const f in o) if (f !== "code" && f !== "dataId" && f !== "value1" && f !== "value2") return t.errors = [{
+                                                      for (const f in n) if (f !== "code" && f !== "dataId" && f !== "value1" && f !== "value2") return t.errors = [{
                                                         instancePath: i + "/effects/" + p,
                                                         schemaPath: "#/properties/effects/items/additionalProperties",
                                                         keyword: "additionalProperties",
                                                         params: { additionalProperty: f },
                                                         message: "must NOT have additional properties"
                                                       }], !1;
-                                                      if (o.code !== void 0) {
-                                                        let f = o.code;
+                                                      if (n.code !== void 0) {
+                                                        let f = n.code;
                                                         const u = 0;
                                                         if (typeof f != "number" || f % 1 || isNaN(f) || !isFinite(f)) return t.errors = [{
                                                           instancePath: i + "/effects/" + p + "/code",
@@ -2990,8 +2990,8 @@ const $ = v((function() {
                                                         var g = u === 0;
                                                       } else g = !0;
                                                       if (g) {
-                                                        if (o.dataId !== void 0) {
-                                                          let f = o.dataId;
+                                                        if (n.dataId !== void 0) {
+                                                          let f = n.dataId;
                                                           const u = 0;
                                                           if (typeof f != "number" || f % 1 || isNaN(f) || !isFinite(f)) return t.errors = [{
                                                             instancePath: i + "/effects/" + p + "/dataId",
@@ -3003,8 +3003,8 @@ const $ = v((function() {
                                                           g = u === 0;
                                                         } else g = !0;
                                                         if (g) {
-                                                          if (o.value1 !== void 0) {
-                                                            let f = o.value1;
+                                                          if (n.value1 !== void 0) {
+                                                            let f = n.value1;
                                                             const u = 0;
                                                             if (typeof f != "number" || !isFinite(f)) return t.errors = [{
                                                               instancePath: i + "/effects/" + p + "/value1",
@@ -3015,8 +3015,8 @@ const $ = v((function() {
                                                             }], !1;
                                                             g = u === 0;
                                                           } else g = !0;
-                                                          if (g) if (o.value2 !== void 0) {
-                                                            let f = o.value2;
+                                                          if (g) if (n.value2 !== void 0) {
+                                                            let f = n.value2;
                                                             const u = 0;
                                                             if (typeof f != "number" || !isFinite(f)) return t.errors = [{
                                                               instancePath: i + "/effects/" + p + "/value2",
@@ -3064,7 +3064,7 @@ const $ = v((function() {
                                                     }], !1;
                                                     if (r.type !== void 0) {
                                                       let p = r.type;
-                                                      const o = 0;
+                                                      const n = 0;
                                                       if (typeof p != "number" || p % 1 || isNaN(p) || !isFinite(p)) return t.errors = [{
                                                         instancePath: i + "/damage/type",
                                                         schemaPath: "#/properties/damage/properties/type/type",
@@ -3072,12 +3072,12 @@ const $ = v((function() {
                                                         params: { type: "integer" },
                                                         message: "must be integer"
                                                       }], !1;
-                                                      var d = o === 0;
-                                                    } else d = !0;
-                                                    if (d) {
+                                                      var c = n === 0;
+                                                    } else c = !0;
+                                                    if (c) {
                                                       if (r.elementId !== void 0) {
                                                         let p = r.elementId;
-                                                        const o = 0;
+                                                        const n = 0;
                                                         if (typeof p != "number" || p % 1 || isNaN(p) || !isFinite(p)) return t.errors = [{
                                                           instancePath: i + "/damage/elementId",
                                                           schemaPath: "#/properties/damage/properties/elementId/type",
@@ -3092,9 +3092,9 @@ const $ = v((function() {
                                                           params: { comparison: ">=", limit: 0 },
                                                           message: "must be >= 0"
                                                         }], !1;
-                                                        d = o === 0;
-                                                      } else d = !0;
-                                                      if (d) {
+                                                        c = n === 0;
+                                                      } else c = !0;
+                                                      if (c) {
                                                         if (r.formula !== void 0) {
                                                           if (typeof r.formula != "string") return t.errors = [{
                                                             instancePath: i + "/damage/formula",
@@ -3103,12 +3103,12 @@ const $ = v((function() {
                                                             params: { type: "string" },
                                                             message: "must be string"
                                                           }], !1;
-                                                          d = !0;
-                                                        } else d = !0;
-                                                        if (d) {
+                                                          c = !0;
+                                                        } else c = !0;
+                                                        if (c) {
                                                           if (r.variance !== void 0) {
                                                             let p = r.variance;
-                                                            const o = 0;
+                                                            const n = 0;
                                                             if (typeof p != "number" || p % 1 || isNaN(p) || !isFinite(p)) return t.errors = [{
                                                               instancePath: i + "/damage/variance",
                                                               schemaPath: "#/properties/damage/properties/variance/type",
@@ -3116,9 +3116,9 @@ const $ = v((function() {
                                                               params: { type: "integer" },
                                                               message: "must be integer"
                                                             }], !1;
-                                                            d = o === 0;
-                                                          } else d = !0;
-                                                          if (d) if (r.critical !== void 0) {
+                                                            c = n === 0;
+                                                          } else c = !0;
+                                                          if (c) if (r.critical !== void 0) {
                                                             if (typeof r.critical != "boolean") return t.errors = [{
                                                               instancePath: i + "/damage/critical",
                                                               schemaPath: "#/properties/damage/properties/critical/type",
@@ -3126,8 +3126,8 @@ const $ = v((function() {
                                                               params: { type: "boolean" },
                                                               message: "must be boolean"
                                                             }], !1;
-                                                            d = !0;
-                                                          } else d = !0;
+                                                            c = !0;
+                                                          } else c = !0;
                                                         }
                                                       }
                                                     }
@@ -3170,11 +3170,11 @@ const $ = v((function() {
     }
     return t.errors = null, !0;
   }
-  return z = 1, B.exports = t, B.exports.default = t, B.exports;
+  return H = 1, B.exports = t, B.exports.default = t, B.exports;
 })());
-var H, R = { exports: {} };
-const ee = v((function() {
-  if (H) return R.exports;
+var S, R = { exports: {} };
+const se = v((function() {
+  if (S) return R.exports;
   function t(e, { instancePath: i = "", parentData: N, parentDataProperty: k, rootData: w = e } = {}) {
     if (!e || typeof e != "object" || Array.isArray(e)) return t.errors = [{
       instancePath: i,
@@ -3184,13 +3184,13 @@ const ee = v((function() {
       message: "must be object"
     }], !1;
     {
-      let d;
-      if (e.name === void 0 && (d = "name") || e.id === void 0 && (d = "id") || e.iconIndex === void 0 && (d = "iconIndex") || e.message1 === void 0 && (d = "message1") || e.message2 === void 0 && (d = "message2") || e.message3 === void 0 && (d = "message3") || e.message4 === void 0 && (d = "message4") || e.restriction === void 0 && (d = "restriction") || e.priority === void 0 && (d = "priority") || e.motion === void 0 && (d = "motion") || e.overlay === void 0 && (d = "overlay") || e.removeAtBattleEnd === void 0 && (d = "removeAtBattleEnd") || e.removeByDamage === void 0 && (d = "removeByDamage") || e.removeByWalking === void 0 && (d = "removeByWalking") || e.removeByRestriction === void 0 && (d = "removeByRestriction") || e.autoRemovalTiming === void 0 && (d = "autoRemovalTiming") || e.minTurns === void 0 && (d = "minTurns") || e.maxTurns === void 0 && (d = "maxTurns") || e.chanceByDamage === void 0 && (d = "chanceByDamage") || e.stepsToRemove === void 0 && (d = "stepsToRemove") || e.note === void 0 && (d = "note")) return t.errors = [{
+      let c;
+      if (e.name === void 0 && (c = "name") || e.id === void 0 && (c = "id") || e.iconIndex === void 0 && (c = "iconIndex") || e.message1 === void 0 && (c = "message1") || e.message2 === void 0 && (c = "message2") || e.message3 === void 0 && (c = "message3") || e.message4 === void 0 && (c = "message4") || e.restriction === void 0 && (c = "restriction") || e.priority === void 0 && (c = "priority") || e.motion === void 0 && (c = "motion") || e.overlay === void 0 && (c = "overlay") || e.removeAtBattleEnd === void 0 && (c = "removeAtBattleEnd") || e.removeByDamage === void 0 && (c = "removeByDamage") || e.removeByWalking === void 0 && (c = "removeByWalking") || e.removeByRestriction === void 0 && (c = "removeByRestriction") || e.autoRemovalTiming === void 0 && (c = "autoRemovalTiming") || e.minTurns === void 0 && (c = "minTurns") || e.maxTurns === void 0 && (c = "maxTurns") || e.chanceByDamage === void 0 && (c = "chanceByDamage") || e.stepsToRemove === void 0 && (c = "stepsToRemove") || e.note === void 0 && (c = "note")) return t.errors = [{
         instancePath: i,
         schemaPath: "#/required",
         keyword: "required",
-        params: { missingProperty: d },
-        message: "must have required property '" + d + "'"
+        params: { missingProperty: c },
+        message: "must have required property '" + c + "'"
       }], !1;
       if (e.name !== void 0) {
         if (typeof e.name != "string") return t.errors = [{ instancePath: i + "/name", schemaPath: "#/properties/name/type", keyword: "type", params: { type: "string" }, message: "must be string" }], !1;
@@ -3198,16 +3198,16 @@ const ee = v((function() {
       } else s = !0;
       if (s) {
         if (e.id !== void 0) {
-          let n = e.id;
+          let o = e.id;
           const r = 0;
-          if (typeof n != "number" || n % 1 || isNaN(n) || !isFinite(n)) return t.errors = [{
+          if (typeof o != "number" || o % 1 || isNaN(o) || !isFinite(o)) return t.errors = [{
             instancePath: i + "/id",
             schemaPath: "#/properties/id/type",
             keyword: "type",
             params: { type: "integer" },
             message: "must be integer"
           }], !1;
-          if (typeof n == "number" && isFinite(n) && (n < 0 || isNaN(n))) return t.errors = [{
+          if (typeof o == "number" && isFinite(o) && (o < 0 || isNaN(o))) return t.errors = [{
             instancePath: i + "/id",
             schemaPath: "#/properties/id/minimum",
             keyword: "minimum",
@@ -3218,16 +3218,16 @@ const ee = v((function() {
         } else s = !0;
         if (s) {
           if (e.iconIndex !== void 0) {
-            let n = e.iconIndex;
+            let o = e.iconIndex;
             const r = 0;
-            if (typeof n != "number" || n % 1 || isNaN(n) || !isFinite(n)) return t.errors = [{
+            if (typeof o != "number" || o % 1 || isNaN(o) || !isFinite(o)) return t.errors = [{
               instancePath: i + "/iconIndex",
               schemaPath: "#/properties/iconIndex/type",
               keyword: "type",
               params: { type: "integer" },
               message: "must be integer"
             }], !1;
-            if (typeof n == "number" && isFinite(n) && (n < 0 || isNaN(n))) return t.errors = [{ instancePath: i + "/iconIndex", schemaPath: "#/properties/iconIndex/minimum", keyword: "minimum", params: {
+            if (typeof o == "number" && isFinite(o) && (o < 0 || isNaN(o))) return t.errors = [{ instancePath: i + "/iconIndex", schemaPath: "#/properties/iconIndex/minimum", keyword: "minimum", params: {
               comparison: ">=",
               limit: 0
             }, message: "must be >= 0" }], !1;
@@ -3275,9 +3275,9 @@ const ee = v((function() {
                   } else s = !0;
                   if (s) {
                     if (e.restriction !== void 0) {
-                      let n = e.restriction;
+                      let o = e.restriction;
                       const r = 0;
-                      if (typeof n != "number" || n % 1 || isNaN(n) || !isFinite(n)) return t.errors = [{
+                      if (typeof o != "number" || o % 1 || isNaN(o) || !isFinite(o)) return t.errors = [{
                         instancePath: i + "/restriction",
                         schemaPath: "#/properties/restriction/type",
                         keyword: "type",
@@ -3288,9 +3288,9 @@ const ee = v((function() {
                     } else s = !0;
                     if (s) {
                       if (e.priority !== void 0) {
-                        let n = e.priority;
+                        let o = e.priority;
                         const r = 0;
-                        if (typeof n != "number" || n % 1 || isNaN(n) || !isFinite(n)) return t.errors = [{
+                        if (typeof o != "number" || o % 1 || isNaN(o) || !isFinite(o)) return t.errors = [{
                           instancePath: i + "/priority",
                           schemaPath: "#/properties/priority/type",
                           keyword: "type",
@@ -3301,9 +3301,9 @@ const ee = v((function() {
                       } else s = !0;
                       if (s) {
                         if (e.motion !== void 0) {
-                          let n = e.motion;
+                          let o = e.motion;
                           const r = 0;
-                          if (typeof n != "number" || n % 1 || isNaN(n) || !isFinite(n)) return t.errors = [{
+                          if (typeof o != "number" || o % 1 || isNaN(o) || !isFinite(o)) return t.errors = [{
                             instancePath: i + "/motion",
                             schemaPath: "#/properties/motion/type",
                             keyword: "type",
@@ -3314,9 +3314,9 @@ const ee = v((function() {
                         } else s = !0;
                         if (s) {
                           if (e.overlay !== void 0) {
-                            let n = e.overlay;
+                            let o = e.overlay;
                             const r = 0;
-                            if (typeof n != "number" || n % 1 || isNaN(n) || !isFinite(n)) return t.errors = [{
+                            if (typeof o != "number" || o % 1 || isNaN(o) || !isFinite(o)) return t.errors = [{
                               instancePath: i + "/overlay",
                               schemaPath: "#/properties/overlay/type",
                               keyword: "type",
@@ -3367,9 +3367,9 @@ const ee = v((function() {
                                   } else s = !0;
                                   if (s) {
                                     if (e.messageType !== void 0) {
-                                      let n = e.messageType;
+                                      let o = e.messageType;
                                       const r = 0;
-                                      if (typeof n != "number" || n % 1 || isNaN(n) || !isFinite(n)) return t.errors = [{
+                                      if (typeof o != "number" || o % 1 || isNaN(o) || !isFinite(o)) return t.errors = [{
                                         instancePath: i + "/messageType",
                                         schemaPath: "#/properties/messageType/type",
                                         keyword: "type",
@@ -3391,18 +3391,18 @@ const ee = v((function() {
                                       } else s = !0;
                                       if (s) {
                                         if (e.autoRemovalTiming !== void 0) {
-                                          let n = e.autoRemovalTiming;
+                                          let o = e.autoRemovalTiming;
                                           const r = 0;
-                                          if (typeof n != "number" || n % 1 || isNaN(n) || !isFinite(n)) return t.errors = [{ instancePath: i + "/autoRemovalTiming", schemaPath: "#/properties/autoRemovalTiming/type", keyword: "type", params: {
+                                          if (typeof o != "number" || o % 1 || isNaN(o) || !isFinite(o)) return t.errors = [{ instancePath: i + "/autoRemovalTiming", schemaPath: "#/properties/autoRemovalTiming/type", keyword: "type", params: {
                                             type: "integer"
                                           }, message: "must be integer" }], !1;
                                           s = r === 0;
                                         } else s = !0;
                                         if (s) {
                                           if (e.minTurns !== void 0) {
-                                            let n = e.minTurns;
+                                            let o = e.minTurns;
                                             const r = 0;
-                                            if (typeof n != "number" || n % 1 || isNaN(n) || !isFinite(n)) return t.errors = [{
+                                            if (typeof o != "number" || o % 1 || isNaN(o) || !isFinite(o)) return t.errors = [{
                                               instancePath: i + "/minTurns",
                                               schemaPath: "#/properties/minTurns/type",
                                               keyword: "type",
@@ -3413,9 +3413,9 @@ const ee = v((function() {
                                           } else s = !0;
                                           if (s) {
                                             if (e.maxTurns !== void 0) {
-                                              let n = e.maxTurns;
+                                              let o = e.maxTurns;
                                               const r = 0;
-                                              if (typeof n != "number" || n % 1 || isNaN(n) || !isFinite(n)) return t.errors = [{
+                                              if (typeof o != "number" || o % 1 || isNaN(o) || !isFinite(o)) return t.errors = [{
                                                 instancePath: i + "/maxTurns",
                                                 schemaPath: "#/properties/maxTurns/type",
                                                 keyword: "type",
@@ -3426,9 +3426,9 @@ const ee = v((function() {
                                             } else s = !0;
                                             if (s) {
                                               if (e.chanceByDamage !== void 0) {
-                                                let n = e.chanceByDamage;
+                                                let o = e.chanceByDamage;
                                                 const r = 0;
-                                                if (typeof n != "number" || n % 1 || isNaN(n) || !isFinite(n)) return t.errors = [{
+                                                if (typeof o != "number" || o % 1 || isNaN(o) || !isFinite(o)) return t.errors = [{
                                                   instancePath: i + "/chanceByDamage",
                                                   schemaPath: "#/properties/chanceByDamage/type",
                                                   keyword: "type",
@@ -3439,9 +3439,9 @@ const ee = v((function() {
                                               } else s = !0;
                                               if (s) {
                                                 if (e.stepsToRemove !== void 0) {
-                                                  let n = e.stepsToRemove;
+                                                  let o = e.stepsToRemove;
                                                   const r = 0;
-                                                  if (typeof n != "number" || n % 1 || isNaN(n) || !isFinite(n)) return t.errors = [{
+                                                  if (typeof o != "number" || o % 1 || isNaN(o) || !isFinite(o)) return t.errors = [{
                                                     instancePath: i + "/stepsToRemove",
                                                     schemaPath: "#/properties/stepsToRemove/type",
                                                     keyword: "type",
@@ -3462,9 +3462,9 @@ const ee = v((function() {
                                                     s = !0;
                                                   } else s = !0;
                                                   if (s) if (e.traits !== void 0) {
-                                                    let n = e.traits;
+                                                    let o = e.traits;
                                                     const r = 0;
-                                                    if (!Array.isArray(n)) return t.errors = [{
+                                                    if (!Array.isArray(o)) return t.errors = [{
                                                       instancePath: i + "/traits",
                                                       schemaPath: "#/properties/traits/type",
                                                       keyword: "type",
@@ -3472,10 +3472,10 @@ const ee = v((function() {
                                                       message: "must be array"
                                                     }], !1;
                                                     {
-                                                      const a = n.length;
+                                                      const a = o.length;
                                                       for (let y = 0; y < a; y++) {
-                                                        let p = n[y];
-                                                        const o = 0;
+                                                        let p = o[y];
+                                                        const n = 0;
                                                         if (!p || typeof p != "object" || Array.isArray(p)) return t.errors = [{
                                                           instancePath: i + "/traits/" + y,
                                                           schemaPath: "#/properties/traits/items/type",
@@ -3492,17 +3492,17 @@ const ee = v((function() {
                                                             params: { missingProperty: m },
                                                             message: "must have required property '" + m + "'"
                                                           }], !1;
-                                                          for (const c in p) if (c !== "code" && c !== "dataId" && c !== "value") return t.errors = [{
+                                                          for (const d in p) if (d !== "code" && d !== "dataId" && d !== "value") return t.errors = [{
                                                             instancePath: i + "/traits/" + y,
                                                             schemaPath: "#/properties/traits/items/additionalProperties",
                                                             keyword: "additionalProperties",
-                                                            params: { additionalProperty: c },
+                                                            params: { additionalProperty: d },
                                                             message: "must NOT have additional properties"
                                                           }], !1;
                                                           if (p.code !== void 0) {
-                                                            let c = p.code;
+                                                            let d = p.code;
                                                             const f = 0;
-                                                            if (typeof c != "number" || c % 1 || isNaN(c) || !isFinite(c)) return t.errors = [{
+                                                            if (typeof d != "number" || d % 1 || isNaN(d) || !isFinite(d)) return t.errors = [{
                                                               instancePath: i + "/traits/" + y + "/code",
                                                               schemaPath: "#/properties/traits/items/properties/code/type",
                                                               keyword: "type",
@@ -3513,9 +3513,9 @@ const ee = v((function() {
                                                           } else g = !0;
                                                           if (g) {
                                                             if (p.dataId !== void 0) {
-                                                              let c = p.dataId;
+                                                              let d = p.dataId;
                                                               const f = 0;
-                                                              if (typeof c != "number" || c % 1 || isNaN(c) || !isFinite(c)) return t.errors = [{
+                                                              if (typeof d != "number" || d % 1 || isNaN(d) || !isFinite(d)) return t.errors = [{
                                                                 instancePath: i + "/traits/" + y + "/dataId",
                                                                 schemaPath: "#/properties/traits/items/properties/dataId/type",
                                                                 keyword: "type",
@@ -3525,16 +3525,16 @@ const ee = v((function() {
                                                               g = f === 0;
                                                             } else g = !0;
                                                             if (g) if (p.value !== void 0) {
-                                                              let c = p.value;
+                                                              let d = p.value;
                                                               const f = 0;
-                                                              if (typeof c != "number" || !isFinite(c)) return t.errors = [{ instancePath: i + "/traits/" + y + "/value", schemaPath: "#/properties/traits/items/properties/value/type", keyword: "type", params: {
+                                                              if (typeof d != "number" || !isFinite(d)) return t.errors = [{ instancePath: i + "/traits/" + y + "/value", schemaPath: "#/properties/traits/items/properties/value/type", keyword: "type", params: {
                                                                 type: "number"
                                                               }, message: "must be number" }], !1;
                                                               g = f === 0;
                                                             } else g = !0;
                                                           }
                                                         }
-                                                        if (o !== 0) break;
+                                                        if (n !== 0) break;
                                                       }
                                                     }
                                                     s = r === 0;
@@ -3564,11 +3564,11 @@ const ee = v((function() {
     }
     return t.errors = null, !0;
   }
-  return H = 1, R.exports = t, R.exports.default = t, R.exports;
+  return S = 1, R.exports = t, R.exports.default = t, R.exports;
 })());
-var S, W = { exports: {} };
-const te = v((function() {
-  if (S) return W.exports;
+var M, W = { exports: {} };
+const re = v((function() {
+  if (M) return W.exports;
   function t(e, { instancePath: i = "", parentData: N, parentDataProperty: k, rootData: w = e } = {}) {
     if (!e || typeof e != "object" || Array.isArray(e)) return t.errors = [{
       instancePath: i,
@@ -3577,6 +3577,136 @@ const te = v((function() {
       params: { type: "object" },
       message: "must be object"
     }], !1;
+    {
+      let g;
+      if (e.name === void 0 && (g = "name") || e.id === void 0 && (g = "id") || e.note === void 0 && (g = "note") || e.flags === void 0 && (g = "flags") || e.mode === void 0 && (g = "mode") || e.tilesetNames === void 0 && (g = "tilesetNames")) return t.errors = [{
+        instancePath: i,
+        schemaPath: "#/required",
+        keyword: "required",
+        params: { missingProperty: g },
+        message: "must have required property '" + g + "'"
+      }], !1;
+      if (e.name !== void 0) {
+        if (typeof e.name != "string") return t.errors = [{ instancePath: i + "/name", schemaPath: "#/properties/name/type", keyword: "type", params: { type: "string" }, message: "must be string" }], !1;
+        var s = !0;
+      } else s = !0;
+      if (s) {
+        if (e.id !== void 0) {
+          let c = e.id;
+          const o = 0;
+          if (typeof c != "number" || c % 1 || isNaN(c) || !isFinite(c)) return t.errors = [{
+            instancePath: i + "/id",
+            schemaPath: "#/properties/id/type",
+            keyword: "type",
+            params: { type: "integer" },
+            message: "must be integer"
+          }], !1;
+          if (typeof c == "number" && isFinite(c) && (c < 0 || isNaN(c))) return t.errors = [{
+            instancePath: i + "/id",
+            schemaPath: "#/properties/id/minimum",
+            keyword: "minimum",
+            params: { comparison: ">=", limit: 0 },
+            message: "must be >= 0"
+          }], !1;
+          s = o === 0;
+        } else s = !0;
+        if (s) {
+          if (e.note !== void 0) {
+            if (typeof e.note != "string") return t.errors = [{
+              instancePath: i + "/note",
+              schemaPath: "#/properties/note/type",
+              keyword: "type",
+              params: { type: "string" },
+              message: "must be string"
+            }], !1;
+            s = !0;
+          } else s = !0;
+          if (s) {
+            if (e.flags !== void 0) {
+              let c = e.flags;
+              const o = 0;
+              if (!Array.isArray(c)) return t.errors = [{
+                instancePath: i + "/flags",
+                schemaPath: "#/properties/flags/type",
+                keyword: "type",
+                params: { type: "array" },
+                message: "must be array"
+              }], !1;
+              {
+                const r = c.length;
+                for (let a = 0; a < r; a++) {
+                  let y = c[a];
+                  const p = 0;
+                  if (typeof y != "number" || y % 1 || isNaN(y) || !isFinite(y)) return t.errors = [{
+                    instancePath: i + "/flags/" + a,
+                    schemaPath: "#/properties/flags/items/type",
+                    keyword: "type",
+                    params: { type: "integer" },
+                    message: "must be integer"
+                  }], !1;
+                  if (typeof y == "number" && isFinite(y) && (y < 0 || isNaN(y))) return t.errors = [{
+                    instancePath: i + "/flags/" + a,
+                    schemaPath: "#/properties/flags/items/minimum",
+                    keyword: "minimum",
+                    params: { comparison: ">=", limit: 0 },
+                    message: "must be >= 0"
+                  }], !1;
+                  if (p !== 0) break;
+                }
+              }
+              s = o === 0;
+            } else s = !0;
+            if (s) {
+              if (e.mode !== void 0) {
+                let c = e.mode;
+                const o = 0;
+                if (typeof c != "number" || c % 1 || isNaN(c) || !isFinite(c)) return t.errors = [{
+                  instancePath: i + "/mode",
+                  schemaPath: "#/properties/mode/type",
+                  keyword: "type",
+                  params: { type: "integer" },
+                  message: "must be integer"
+                }], !1;
+                if (typeof c == "number" && isFinite(c) && (c < 0 || isNaN(c))) return t.errors = [{
+                  instancePath: i + "/mode",
+                  schemaPath: "#/properties/mode/minimum",
+                  keyword: "minimum",
+                  params: { comparison: ">=", limit: 0 },
+                  message: "must be >= 0"
+                }], !1;
+                s = o === 0;
+              } else s = !0;
+              if (s) if (e.tilesetNames !== void 0) {
+                let c = e.tilesetNames;
+                const o = 0;
+                if (!Array.isArray(c)) return t.errors = [{ instancePath: i + "/tilesetNames", schemaPath: "#/properties/tilesetNames/type", keyword: "type", params: { type: "array" }, message: "must be array" }], !1;
+                {
+                  const r = c.length;
+                  for (let a = 0; a < r; a++)
+                    if (typeof c[a] != "string") return t.errors = [{
+                      instancePath: i + "/tilesetNames/" + a,
+                      schemaPath: "#/properties/tilesetNames/items/type",
+                      keyword: "type",
+                      params: { type: "string" },
+                      message: "must be string"
+                    }], !1;
+                }
+                s = o === 0;
+              } else s = !0;
+            }
+          }
+        }
+      }
+    }
+    return t.errors = null, !0;
+  }
+  return M = 1, W.exports = t, W.exports.default = t, W.exports;
+})());
+var _, O = { exports: {} };
+const ie = v((function() {
+  if (_) return O.exports;
+  function t(e, { instancePath: i = "", parentData: N, parentDataProperty: k, rootData: w = e } = {}) {
+    if (!e || typeof e != "object" || Array.isArray(e)) return t.errors = [{ instancePath: i, schemaPath: "#/type", keyword: "type", params: { type: "object" }, message: "must be object" }], !1;
     {
       let r;
       if (e.name === void 0 && (r = "name") || e.id === void 0 && (r = "id") || e.description === void 0 && (r = "description") || e.iconIndex === void 0 && (r = "iconIndex") || e.price === void 0 && (r = "price") || e.params === void 0 && (r = "params") || e.traits === void 0 && (r = "traits") || e.note === void 0 && (r = "note") || e.etypeId === void 0 && (r = "etypeId") || e.animationId === void 0 && (r = "animationId")) return t.errors = [{
@@ -3756,9 +3886,9 @@ const te = v((function() {
                           {
                             const p = a.length;
                             if (p > 0) {
-                              let o = a[0];
+                              let n = a[0];
                               const m = 0;
-                              if (typeof o != "number" || o % 1 || isNaN(o) || !isFinite(o)) return t.errors = [{
+                              if (typeof n != "number" || n % 1 || isNaN(n) || !isFinite(n)) return t.errors = [{
                                 instancePath: i + "/params/0",
                                 schemaPath: "#/properties/params/items/0/type",
                                 keyword: "type",
@@ -3769,18 +3899,18 @@ const te = v((function() {
                             }
                             if (g) {
                               if (p > 1) {
-                                let o = a[1];
+                                let n = a[1];
                                 const m = 0;
-                                if (typeof o != "number" || o % 1 || isNaN(o) || !isFinite(o)) return t.errors = [{ instancePath: i + "/params/1", schemaPath: "#/properties/params/items/1/type", keyword: "type", params: {
+                                if (typeof n != "number" || n % 1 || isNaN(n) || !isFinite(n)) return t.errors = [{ instancePath: i + "/params/1", schemaPath: "#/properties/params/items/1/type", keyword: "type", params: {
                                   type: "integer"
                                 }, message: "must be integer" }], !1;
                                 g = m === 0;
                               }
                               if (g) {
                                 if (p > 2) {
-                                  let o = a[2];
+                                  let n = a[2];
                                   const m = 0;
-                                  if (typeof o != "number" || o % 1 || isNaN(o) || !isFinite(o)) return t.errors = [{
+                                  if (typeof n != "number" || n % 1 || isNaN(n) || !isFinite(n)) return t.errors = [{
                                     instancePath: i + "/params/2",
                                     schemaPath: "#/properties/params/items/2/type",
                                     keyword: "type",
@@ -3791,18 +3921,18 @@ const te = v((function() {
                                 }
                                 if (g) {
                                   if (p > 3) {
-                                    let o = a[3];
+                                    let n = a[3];
                                     const m = 0;
-                                    if (typeof o != "number" || o % 1 || isNaN(o) || !isFinite(o)) return t.errors = [{ instancePath: i + "/params/3", schemaPath: "#/properties/params/items/3/type", keyword: "type", params: {
+                                    if (typeof n != "number" || n % 1 || isNaN(n) || !isFinite(n)) return t.errors = [{ instancePath: i + "/params/3", schemaPath: "#/properties/params/items/3/type", keyword: "type", params: {
                                       type: "integer"
                                     }, message: "must be integer" }], !1;
                                     g = m === 0;
                                   }
                                   if (g) {
                                     if (p > 4) {
-                                      let o = a[4];
+                                      let n = a[4];
                                       const m = 0;
-                                      if (typeof o != "number" || o % 1 || isNaN(o) || !isFinite(o)) return t.errors = [{
+                                      if (typeof n != "number" || n % 1 || isNaN(n) || !isFinite(n)) return t.errors = [{
                                         instancePath: i + "/params/4",
                                         schemaPath: "#/properties/params/items/4/type",
                                         keyword: "type",
@@ -3813,18 +3943,18 @@ const te = v((function() {
                                     }
                                     if (g) {
                                       if (p > 5) {
-                                        let o = a[5];
+                                        let n = a[5];
                                         const m = 0;
-                                        if (typeof o != "number" || o % 1 || isNaN(o) || !isFinite(o)) return t.errors = [{ instancePath: i + "/params/5", schemaPath: "#/properties/params/items/5/type", keyword: "type", params: {
+                                        if (typeof n != "number" || n % 1 || isNaN(n) || !isFinite(n)) return t.errors = [{ instancePath: i + "/params/5", schemaPath: "#/properties/params/items/5/type", keyword: "type", params: {
                                           type: "integer"
                                         }, message: "must be integer" }], !1;
                                         g = m === 0;
                                       }
                                       if (g) {
                                         if (p > 6) {
-                                          let o = a[6];
+                                          let n = a[6];
                                           const m = 0;
-                                          if (typeof o != "number" || o % 1 || isNaN(o) || !isFinite(o)) return t.errors = [{
+                                          if (typeof n != "number" || n % 1 || isNaN(n) || !isFinite(n)) return t.errors = [{
                                             instancePath: i + "/params/6",
                                             schemaPath: "#/properties/params/items/6/type",
                                             keyword: "type",
@@ -3834,9 +3964,9 @@ const te = v((function() {
                                           g = m === 0;
                                         }
                                         if (g && p > 7) {
-                                          let o = a[7];
+                                          let n = a[7];
                                           const m = 0;
-                                          if (typeof o != "number" || o % 1 || isNaN(o) || !isFinite(o)) return t.errors = [{ instancePath: i + "/params/7", schemaPath: "#/properties/params/items/7/type", keyword: "type", params: {
+                                          if (typeof n != "number" || n % 1 || isNaN(n) || !isFinite(n)) return t.errors = [{ instancePath: i + "/params/7", schemaPath: "#/properties/params/items/7/type", keyword: "type", params: {
                                             type: "integer"
                                           }, message: "must be integer" }], !1;
                                           g = m === 0;
@@ -3871,45 +4001,45 @@ const te = v((function() {
                                 message: "must have required property '" + p + "'"
                               }], !1;
                               if (a.type !== void 0) {
-                                let o = a.type;
+                                let n = a.type;
                                 const m = 0;
-                                if (typeof o != "number" || o % 1 || isNaN(o) || !isFinite(o)) return t.errors = [{
+                                if (typeof n != "number" || n % 1 || isNaN(n) || !isFinite(n)) return t.errors = [{
                                   instancePath: i + "/damage/type",
                                   schemaPath: "#/properties/damage/properties/type/type",
                                   keyword: "type",
                                   params: { type: "integer" },
                                   message: "must be integer"
                                 }], !1;
-                                if (typeof o == "number" && isFinite(o) && (o < 0 || isNaN(o))) return t.errors = [{
+                                if (typeof n == "number" && isFinite(n) && (n < 0 || isNaN(n))) return t.errors = [{
                                   instancePath: i + "/damage/type",
                                   schemaPath: "#/properties/damage/properties/type/minimum",
                                   keyword: "minimum",
                                   params: { comparison: ">=", limit: 0 },
                                   message: "must be >= 0"
                                 }], !1;
-                                var d = m === 0;
-                              } else d = !0;
-                              if (d) {
+                                var c = m === 0;
+                              } else c = !0;
+                              if (c) {
                                 if (a.elementId !== void 0) {
-                                  let o = a.elementId;
+                                  let n = a.elementId;
                                   const m = 0;
-                                  if (typeof o != "number" || o % 1 || isNaN(o) || !isFinite(o)) return t.errors = [{
+                                  if (typeof n != "number" || n % 1 || isNaN(n) || !isFinite(n)) return t.errors = [{
                                     instancePath: i + "/damage/elementId",
                                     schemaPath: "#/properties/damage/properties/elementId/type",
                                     keyword: "type",
                                     params: { type: "integer" },
                                     message: "must be integer"
                                   }], !1;
-                                  if (typeof o == "number" && isFinite(o) && (o < 0 || isNaN(o))) return t.errors = [{
+                                  if (typeof n == "number" && isFinite(n) && (n < 0 || isNaN(n))) return t.errors = [{
                                     instancePath: i + "/damage/elementId",
                                     schemaPath: "#/properties/damage/properties/elementId/minimum",
                                     keyword: "minimum",
                                     params: { comparison: ">=", limit: 0 },
                                     message: "must be >= 0"
                                   }], !1;
-                                  d = m === 0;
-                                } else d = !0;
-                                if (d) {
+                                  c = m === 0;
+                                } else c = !0;
+                                if (c) {
                                   if (a.formula !== void 0) {
                                     if (typeof a.formula != "string") return t.errors = [{
                                       instancePath: i + "/damage/formula",
@@ -3918,28 +4048,28 @@ const te = v((function() {
                                       params: { type: "string" },
                                       message: "must be string"
                                     }], !1;
-                                    d = !0;
-                                  } else d = !0;
-                                  if (d) {
+                                    c = !0;
+                                  } else c = !0;
+                                  if (c) {
                                     if (a.variance !== void 0) {
-                                      let o = a.variance;
+                                      let n = a.variance;
                                       const m = 0;
-                                      if (typeof o != "number" || o % 1 || isNaN(o) || !isFinite(o)) return t.errors = [{
+                                      if (typeof n != "number" || n % 1 || isNaN(n) || !isFinite(n)) return t.errors = [{
                                         instancePath: i + "/damage/variance",
                                         schemaPath: "#/properties/damage/properties/variance/type",
                                         keyword: "type",
                                         params: { type: "integer" },
                                         message: "must be integer"
                                       }], !1;
-                                      if (typeof o == "number" && isFinite(o)) {
-                                        if (o > 100 || isNaN(o)) return t.errors = [{
+                                      if (typeof n == "number" && isFinite(n)) {
+                                        if (n > 100 || isNaN(n)) return t.errors = [{
                                           instancePath: i + "/damage/variance",
                                           schemaPath: "#/properties/damage/properties/variance/maximum",
                                           keyword: "maximum",
                                           params: { comparison: "<=", limit: 100 },
                                           message: "must be <= 100"
                                         }], !1;
-                                        if (o < 0 || isNaN(o)) return t.errors = [{
+                                        if (n < 0 || isNaN(n)) return t.errors = [{
                                           instancePath: i + "/damage/variance",
                                           schemaPath: "#/properties/damage/properties/variance/minimum",
                                           keyword: "minimum",
@@ -3947,9 +4077,9 @@ const te = v((function() {
                                           message: "must be >= 0"
                                         }], !1;
                                       }
-                                      d = m === 0;
-                                    } else d = !0;
-                                    if (d) if (a.critical !== void 0) {
+                                      c = m === 0;
+                                    } else c = !0;
+                                    if (c) if (a.critical !== void 0) {
                                       if (typeof a.critical != "boolean") return t.errors = [{
                                         instancePath: i + "/damage/critical",
                                         schemaPath: "#/properties/damage/properties/critical/type",
@@ -3957,8 +4087,8 @@ const te = v((function() {
                                         params: { type: "boolean" },
                                         message: "must be boolean"
                                       }], !1;
-                                      d = !0;
-                                    } else d = !0;
+                                      c = !0;
+                                    } else c = !0;
                                   }
                                 }
                               }
@@ -3973,11 +4103,11 @@ const te = v((function() {
                             }, message: "must be array" }], !1;
                             {
                               const p = a.length;
-                              for (let o = 0; o < p; o++) {
-                                let m = a[o];
-                                const c = 0;
+                              for (let n = 0; n < p; n++) {
+                                let m = a[n];
+                                const d = 0;
                                 if (!m || typeof m != "object" || Array.isArray(m)) return t.errors = [{
-                                  instancePath: i + "/traits/" + o,
+                                  instancePath: i + "/traits/" + n,
                                   schemaPath: "#/properties/traits/items/type",
                                   keyword: "type",
                                   params: { type: "object" },
@@ -3986,14 +4116,14 @@ const te = v((function() {
                                 {
                                   let f;
                                   if (m.code === void 0 && (f = "code") || m.dataId === void 0 && (f = "dataId") || m.value === void 0 && (f = "value")) return t.errors = [{
-                                    instancePath: i + "/traits/" + o,
+                                    instancePath: i + "/traits/" + n,
                                     schemaPath: "#/properties/traits/items/required",
                                     keyword: "required",
                                     params: { missingProperty: f },
                                     message: "must have required property '" + f + "'"
                                   }], !1;
                                   for (const u in m) if (u !== "code" && u !== "dataId" && u !== "value") return t.errors = [{
-                                    instancePath: i + "/traits/" + o,
+                                    instancePath: i + "/traits/" + n,
                                     schemaPath: "#/properties/traits/items/additionalProperties",
                                     keyword: "additionalProperties",
                                     params: { additionalProperty: u },
@@ -4003,38 +4133,38 @@ const te = v((function() {
                                     let u = m.code;
                                     const h = 0;
                                     if (typeof u != "number" || u % 1 || isNaN(u) || !isFinite(u)) return t.errors = [{
-                                      instancePath: i + "/traits/" + o + "/code",
+                                      instancePath: i + "/traits/" + n + "/code",
                                       schemaPath: "#/properties/traits/items/properties/code/type",
                                       keyword: "type",
                                       params: { type: "integer" },
                                       message: "must be integer"
                                     }], !1;
-                                    var n = h === 0;
-                                  } else n = !0;
-                                  if (n) {
+                                    var o = h === 0;
+                                  } else o = !0;
+                                  if (o) {
                                     if (m.dataId !== void 0) {
                                       let u = m.dataId;
                                       const h = 0;
                                       if (typeof u != "number" || u % 1 || isNaN(u) || !isFinite(u)) return t.errors = [{
-                                        instancePath: i + "/traits/" + o + "/dataId",
+                                        instancePath: i + "/traits/" + n + "/dataId",
                                         schemaPath: "#/properties/traits/items/properties/dataId/type",
                                         keyword: "type",
                                         params: { type: "integer" },
                                         message: "must be integer"
                                       }], !1;
-                                      n = h === 0;
-                                    } else n = !0;
-                                    if (n) if (m.value !== void 0) {
+                                      o = h === 0;
+                                    } else o = !0;
+                                    if (o) if (m.value !== void 0) {
                                       let u = m.value;
                                       const h = 0;
-                                      if (typeof u != "number" || !isFinite(u)) return t.errors = [{ instancePath: i + "/traits/" + o + "/value", schemaPath: "#/properties/traits/items/properties/value/type", keyword: "type", params: {
+                                      if (typeof u != "number" || !isFinite(u)) return t.errors = [{ instancePath: i + "/traits/" + n + "/value", schemaPath: "#/properties/traits/items/properties/value/type", keyword: "type", params: {
                                         type: "number"
                                       }, message: "must be number" }], !1;
-                                      n = h === 0;
-                                    } else n = !0;
+                                      o = h === 0;
+                                    } else o = !0;
                                   }
                                 }
-                                if (c !== 0) break;
+                                if (d !== 0) break;
                               }
                             }
                             s = y === 0;
@@ -4052,17 +4182,18 @@ const te = v((function() {
     }
     return t.errors = null, !0;
   }
-  return S = 1, W.exports = t, W.exports.default = t, W.exports;
-})()), re = (t) => J(t), ie = (t) => K(t), ae = (t) => Q(t), oe = (t) => U(t), ne = (t) => V(t), pe = (t) => Z(t), me = (t) => _(t), ye = (t) => $(t), ce = (t) => ee(t), de = (t) => te(t);
+  return _ = 1, O.exports = t, O.exports.default = t, O.exports;
+})()), oe = (t) => K(t), ne = (t) => Q(t), pe = (t) => U(t), me = (t) => V(t), ye = (t) => Z(t), ce = (t) => $(t), de = (t) => ee(t), ue = (t) => te(t), fe = (t) => se(t), he = (t) => ie(t), ge = (t) => re(t);
 export {
-  re as isDataActor,
-  ie as isDataAnimation,
-  ae as isDataArmor,
-  oe as isDataClass,
-  ne as isDataEnemy,
-  pe as isDataItem,
-  me as isDataMapInfo,
-  ye as isDataSkill,
-  ce as isDataState,
-  de as isDataWeapon
+  oe as isDataActor,
+  ne as isDataAnimation,
+  pe as isDataArmor,
+  me as isDataClass,
+  ye as isDataEnemy,
+  ce as isDataItem,
+  de as isDataMapInfo,
+  ue as isDataSkill,
+  fe as isDataState,
+  ge as isDataTileset,
+  he as isDataWeapon
 };
