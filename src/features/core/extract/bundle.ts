@@ -1,9 +1,11 @@
 import type {
+  DataReadErrorItem,
   MapBatchReadResult,
   RawGameData,
   ReadArrayResult,
   ReadSystemResult,
 } from "@RpgTypes/fileio";
+import { FILENAME_SYSTEM } from "@RpgTypes/fileio";
 import type {
   Data_Armor,
   Data_CommonEvent,
@@ -31,35 +33,72 @@ import {
 import type { ExtractedSystemTexts } from "./text/system";
 import { extractTextFromSystem } from "./text/system";
 
-export interface ExtractedRawGameDataTexts {
+export interface ExtractedRawGameDataTextValue {
   mainData: ExtractedDataBundle;
-  commonEvents: ReadArrayResult<ExtractedCommonEventText>;
-  troops: ReadArrayResult<ExtractedBattleEventText[]>;
+  eventData: {
+    commonEvents: ExtractedCommonEventText[];
+    troops: ExtractedBattleEventText[];
+  };
   mapFiles: MapBatchReadResult<ExtractedMapTexts>;
   system: ReadSystemResult<ExtractedSystemTexts>;
+}
+
+export interface ExtractedRawGameDataTexts {
+  value: ExtractedRawGameDataTextValue;
+  errors: DataReadErrorItem[];
 }
 
 export const extractTextFromRawGameData = (
   data: RawGameData,
   extractor: EventContainerExtractor,
 ): ExtractedRawGameDataTexts => {
-  const mainData: ExtractedDataBundle = {
-    actors: mapReadArrayResult(data.actors, extractTextFromActor).data,
-    armors: extractArmors(data.armors).data,
-    classes: mapReadArrayResult(data.classes, extractTextFromClass).data,
-    enemies: mapReadArrayResult(data.enemies, extractTextFromEnemy).data,
-    items: mapReadArrayResult(data.items, extractTextFromItem).data,
-    skills: mapReadArrayResult(data.skills, extractTextFromSkill).data,
-    states: mapReadArrayResult(data.states, extractTextFromState).data,
-    weapons: mapReadArrayResult(data.weapons, extractTextFromWeapon).data,
-  };
+  const actors = mapReadArrayResult(data.actors, extractTextFromActor);
+  const armors = extractArmors(data.armors);
+  const classes = mapReadArrayResult(data.classes, extractTextFromClass);
+  const enemies = mapReadArrayResult(data.enemies, extractTextFromEnemy);
+  const items = mapReadArrayResult(data.items, extractTextFromItem);
+  const mapInfos = mapReadArrayResult(data.mapInfos, (item) => item);
+  const skills = mapReadArrayResult(data.skills, extractTextFromSkill);
+  const states = mapReadArrayResult(data.states, extractTextFromState);
+  const weapons = mapReadArrayResult(data.weapons, extractTextFromWeapon);
+  const commonEventResult = extractCommonEvents(data.commonEvents, extractor);
+  const troopResult = extractTroops(data.troops, extractor);
+  const mapFiles = extractMapFiles(data.mapFiles, extractor);
+  const system = systemXX(data.system);
+  const errors = collectDataReadErrors([
+    actors,
+    armors,
+    classes,
+    enemies,
+    items,
+    mapInfos,
+    skills,
+    states,
+    weapons,
+    commonEventResult,
+    troopResult,
+  ]).concat(collectMapAndSystemErrors(data.mapFiles, data.system));
 
   return {
-    mainData,
-    commonEvents: extractCommonEvents(data.commonEvents, extractor),
-    troops: extractTroops(data.troops, extractor),
-    mapFiles: extractMapFiles(data.mapFiles, extractor),
-    system: systemXX(data.system),
+    value: {
+      eventData: {
+        commonEvents: commonEventResult.data,
+        troops: troopResult.data.flat(),
+      },
+      mapFiles,
+      system,
+      mainData: {
+        actors: actors.data,
+        armors: armors.data,
+        classes: classes.data,
+        enemies: enemies.data,
+        items: items.data,
+        skills: skills.data,
+        states: states.data,
+        weapons: weapons.data,
+      },
+    },
+    errors,
   };
 };
 
@@ -80,8 +119,47 @@ const mapReadArrayResult = <T, R>(
     error: data.error,
     fileName: data.fileName,
     success: data.success,
-    data: data.data.map(mapper),
+    data: data.success ? data.data.map(mapper) : [],
   };
+};
+
+const collectDataReadErrors = (
+  list: ReadonlyArray<ReadArrayResult<unknown>>,
+): DataReadErrorItem[] => {
+  return list
+    .filter((result) => !result.success)
+    .map(
+      (result): DataReadErrorItem => ({
+        fileName: result.fileName,
+        error: result.error,
+      }),
+    );
+};
+
+const collectMapAndSystemErrors = (
+  mapFiles: RawGameData["mapFiles"],
+  system: RawGameData["system"],
+): DataReadErrorItem[] => {
+  const mapInfoErrors: DataReadErrorItem[] =
+    mapFiles.info.success === false
+      ? [
+          {
+            fileName: mapFiles.info.filename,
+            error: mapFiles.info.message,
+          },
+        ]
+      : [];
+  const mapFileErrors: DataReadErrorItem[] = mapFiles.invalidMaps.map(
+    (item): DataReadErrorItem => ({
+      fileName: item.filename,
+      error: item.message,
+    }),
+  );
+  const systemErrors: DataReadErrorItem[] =
+    system.system === null
+      ? [{ fileName: FILENAME_SYSTEM, error: system.message }]
+      : [];
+  return [...mapInfoErrors, ...mapFileErrors, ...systemErrors];
 };
 
 const extractArmors = (
