@@ -13,7 +13,6 @@ import type {
   MapFileInfo,
 } from "@RpgTypes/rmmz";
 import type {
-  ExtractedDataBundle,
   ExtractedCommonEventText,
   ExtractedBattleEventText,
   ExtractedMapTexts,
@@ -32,21 +31,7 @@ import {
 } from "./text";
 import type { ExtractedSystemTexts } from "./text/system";
 import { extractTextFromSystem } from "./text/system";
-
-export interface ExtractedRawGameDataTextValue {
-  mainData: ExtractedDataBundle;
-  eventData: {
-    commonEvents: ExtractedCommonEventText[];
-    troops: ExtractedBattleEventText[];
-  };
-  mapFiles: MapBatchReadResult<ExtractedMapTexts>;
-  system: ReadSystemResult<ExtractedSystemTexts>;
-}
-
-export interface ExtractedRawGameDataTexts {
-  value: ExtractedRawGameDataTextValue;
-  errors: DataReadErrorItem[];
-}
+import type { ExtractedRawGameDataTexts } from "./types";
 
 export const extractTextFromRawGameData = (
   data: RawGameData,
@@ -75,8 +60,8 @@ export const extractTextFromRawGameData = (
     skills,
     states,
     weapons,
-    commonEventResult,
     troopResult,
+    commonEventResult,
   ]).concat(collectMapAndSystemErrors(data.mapFiles, data.system));
 
   return {
