@@ -1,42 +1,32 @@
-import { v as o } from "./make.es.js";
-const c = "Actors.json", l = "Classes.json", u = "Skills.json", y = "Items.json", v = "Weapons.json", S = "Armors.json", d = "Enemies.json", p = "Troops.json", M = "States.json", f = "Animations.json", g = "Tilesets.json", h = "CommonEvents.json", A = "MapInfos.json", r = "System.json", E = async (s, t, n) => {
+import { y as n } from "./make.es.js";
+const m = "System.json", u = async (t, r, s) => {
   try {
-    const e = await t(r);
-    return m(e, s, n);
+    const a = await r(m);
+    return o(a, t, s);
   } catch {
-    return a(s.fileNotFound);
+    return e(t.fileNotFound);
   }
-}, a = (s) => ({ system: null, message: s }), m = (s, t, n) => {
+}, e = (t) => ({
+  system: null,
+  message: t
+}), o = (t, r, s) => {
   try {
-    const e = JSON.parse(s);
-    return i(e, t, n);
+    const a = JSON.parse(t);
+    return c(a, r, s);
   } catch {
-    return a(t.jsonParseError);
+    return e(r.jsonParseError);
   }
-}, i = (s, t, n) => {
+}, c = (t, r, s) => {
   try {
-    return n.validateSystemMz(s) ? { system: s, message: "" } : n.validateSystemMv && n.validateSystemMv(s) ? {
-      system: o(s),
-      message: t.mvAsMz
-    } : a(t.invalidStructure);
+    return s.validateSystemMz(t) ? {
+      system: t,
+      message: ""
+    } : s.validateSystemMv && s.validateSystemMv(t) ? { system: n(t), message: r.mvAsMz } : e(r.invalidStructure);
   } catch {
-    return a(t.validateFunctionError);
+    return e(r.validateFunctionError);
   }
 };
 export {
-  A as F,
-  c as a,
-  d as b,
-  v as c,
-  l as d,
-  S as e,
-  y as f,
-  p as g,
-  h,
-  u as i,
-  M as j,
-  f as k,
-  r as l,
-  g as m,
-  E as r
+  m as F,
+  u as r
 };

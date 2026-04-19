@@ -10,12 +10,12 @@ import type {
   ImageFilesSet,
   OtherFilesSet,
   SummarizedNote,
-  XX,
+  KeyValuePair,
 } from "./types";
 
 interface TestCase {
   name: string;
-  items: XX[];
+  items: KeyValuePair[];
   expected: SummarizedNote[];
   set: ReadonlySet<string>;
 }

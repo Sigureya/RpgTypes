@@ -1,11 +1,11 @@
 import { test, expect, describe } from "vitest";
 import { categorizeNote } from "./note";
-import type { XX } from "./types";
+import type { KeyValuePair } from "./types";
 
 interface TestCase {
   name: string;
-  input: XX[];
-  expected: Map<string, XX[]>;
+  input: KeyValuePair[];
+  expected: Map<string, KeyValuePair[]>;
 }
 
 const runTestCases = (testCase: TestCase) => {
@@ -27,7 +27,7 @@ const testCases: TestCase[] = [
       { key: "category1", value: "value1" },
       { key: "category1", value: "value2" },
     ],
-    expected: new Map<string, XX[]>([
+    expected: new Map<string, KeyValuePair[]>([
       [
         "category1",
         [

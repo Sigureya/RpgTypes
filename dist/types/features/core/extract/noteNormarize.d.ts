@@ -1,5 +1,6 @@
+import { AudioFilesSet, ImageFilesSet } from '../../../fileio';
 import { MapFileInfo } from '../../../rmmz';
-import { AudioFilesSet, ImageFilesSet, OtherFilesSet, SummarizedNote } from './note/types';
+import { OtherFilesSet, SummarizedNote } from './note/types';
 import { ExtractedMapTexts, TextPluginCommandParameter } from './text/eventCommand';
 import { ExtractedDataBundle } from './text/mainData/types';
 export declare const summarizeNoteKindsFromMapFiles: <Command extends TextPluginCommandParameter>(mapList: readonly MapFileInfo<ExtractedMapTexts<Command>>[], audioFiles: AudioFilesSet, imageFiles: ImageFilesSet, other: OtherFilesSet) => SummarizedNote[];
