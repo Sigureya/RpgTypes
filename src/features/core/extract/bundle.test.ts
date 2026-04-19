@@ -207,8 +207,8 @@ describe("extractTextFromRawGameData", () => {
 
     expect(result.errors).toEqual<DataReadErrorItem[]>([
       { fileName: FILENAME_ACTORS, error: "actors read failed" },
-      { fileName: FILENAME_COMMON_EVENTS, error: "common read failed" },
       { fileName: FILENAME_TROOPS, error: "troops read failed" },
+      { fileName: FILENAME_COMMON_EVENTS, error: "common read failed" },
       { fileName: FILENAME_MAP_INFOS, error: "map info read failed" },
       { fileName: "Map999.json", error: "invalid map" },
       { fileName: FILENAME_SYSTEM, error: "system read failed" },
