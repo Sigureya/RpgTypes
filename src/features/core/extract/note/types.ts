@@ -3,7 +3,7 @@ export interface NoteSchema {
   kind: string;
 }
 
-export interface XX {
+export interface KeyValuePair {
   key: string;
   value: string;
 }

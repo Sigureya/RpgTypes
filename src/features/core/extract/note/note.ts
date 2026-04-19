@@ -1,10 +1,5 @@
-import type {
-  AudioFilesSet,
-  ImageFilesSet,
-  OtherFilesSet,
-  SummarizedNote,
-  XX,
-} from "./types";
+import type { AudioFilesSet, ImageFilesSet } from "@RpgTypes/fileio";
+import type { SummarizedNote, KeyValuePair, OtherFilesSet } from "./types";
 
 export const isNoteBoolean = (note: string): boolean => {
   const text = note.trim().toLowerCase();
@@ -26,7 +21,7 @@ export const stringLikeNoteKeys = (
 };
 
 export const summarizeNoteKinds = (
-  items: readonly XX[],
+  items: readonly KeyValuePair[],
   audioFiles: AudioFilesSet,
   imageFiles: ImageFilesSet,
   other: OtherFilesSet,
@@ -48,7 +43,9 @@ export const summarizeNoteKinds = (
   });
 };
 
-export const categorizeNote = (items: readonly XX[]): Map<string, XX[]> => {
+export const categorizeNote = (
+  items: readonly KeyValuePair[],
+): Map<string, KeyValuePair[]> => {
   return items.reduce((acc, item) => {
     if (acc.has(item.key)) {
       return acc;
@@ -58,7 +55,7 @@ export const categorizeNote = (items: readonly XX[]): Map<string, XX[]> => {
       items.filter((i) => i.key === item.key),
     );
     return acc;
-  }, new Map<string, XX[]>());
+  }, new Map<string, KeyValuePair[]>());
 };
 
 const extractNoteKinds = (state: KindState) => {
@@ -100,7 +97,7 @@ const createEmptyKindState = (): KindState => ({
 });
 
 const detectNoteKindState = (
-  items: ReadonlyArray<XX>,
+  items: ReadonlyArray<KeyValuePair>,
   audioFiles: AudioFilesSet,
   imageFiles: ImageFilesSet,
   otherFiles: OtherFilesSet,
