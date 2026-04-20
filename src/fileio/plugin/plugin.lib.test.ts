@@ -29,8 +29,8 @@ const createParseHandlers = (): MockedObject<DeepJSONParserHandlers> => ({
   parseStringArray: vi.fn(),
 });
 
-describe("", () => {
-  const s: PluginSchema = {
+describe("Plugin Annotation Generation and Parsing", () => {
+  const schema: PluginSchema = {
     pluginName: "TestPlugin",
     target: "MZ",
     locale: "en",
@@ -44,7 +44,21 @@ describe("", () => {
       orderAfter: ["after2"],
       orderBefore: ["before3"],
     },
-    schema: { commands: [], structs: [], params: [] },
+    schema: {
+      commands: [],
+      structs: [
+        {
+          struct: "Person",
+          params: [
+            {
+              name: "name",
+              attr: { kind: "string", default: "abc" },
+            },
+          ],
+        },
+      ],
+      params: [],
+    },
   };
   const lines: PluginAnnotationLines = {
     body: [
@@ -60,11 +74,20 @@ describe("", () => {
       "",
       "*/",
     ],
-    structs: [],
+    structs: [
+      [
+        "/*~struct~Person:en",
+        "@param name",
+        "@type string",
+        "@default abc",
+        "",
+        "*/",
+      ],
+    ],
   };
   test("generates annotation lines", () => {
     const handlers = createMockedHandlers();
-    const result = generatePluginAnnotationLines(s, handlers);
+    const result = generatePluginAnnotationLines(schema, handlers);
     expect(result).toEqual(lines);
     expect(handlers.numberArray).toHaveBeenCalledTimes(0);
     expect(handlers.stringArray).toHaveBeenCalledTimes(0);
@@ -75,13 +98,13 @@ describe("", () => {
     const handlers = createParseHandlers();
     const result = pluginSourceToArraySchema(
       {
-        pluginName: s.pluginName,
-        locale: s.locale,
-        source: [...lines.body, ...lines.structs].join("\n"),
+        pluginName: schema.pluginName,
+        locale: schema.locale,
+        source: [...lines.body, ...lines.structs].flat(2).join("\n"),
       },
       handlers,
     );
-    expect(result).toEqual(s);
+    expect(result).toEqual(schema);
     expect(handlers.parseObject).toHaveBeenCalledTimes(0);
     expect(handlers.parseObjectArray).toHaveBeenCalledTimes(0);
     expect(handlers.parseStringArray).toHaveBeenCalledTimes(0);
