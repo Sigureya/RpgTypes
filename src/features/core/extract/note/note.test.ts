@@ -5,6 +5,7 @@ import {
   isNoteBoolean,
   isNoteNumber,
   stringLikeNoteKeys,
+  categorizeNote,
 } from "./note";
 import type { OtherFilesSet, SummarizedNote, KeyValuePair } from "./types";
 
@@ -13,7 +14,12 @@ interface TestCase {
   items: KeyValuePair[];
   expected: SummarizedNote[];
   set: ReadonlySet<string>;
+  categorized: Map<string, KeyValuePair[]>;
 }
+
+const categorized = (
+  entries: Array<[string, KeyValuePair[]]>,
+): Map<string, KeyValuePair[]> => new Map(entries);
 
 const BGM_NUMBER = "1001";
 const BGS_NUMBER = "1002";
@@ -104,12 +110,17 @@ const runTestCases = (
         audioFiles,
         imageFileSet,
         other,
+        testCase.categorized,
       );
       expect(result).toEqual(testCase.expected);
     });
     test("stringLikeNoteKeys", () => {
       const result: Set<string> = stringLikeNoteKeys(testCase.expected);
       expect(result).toEqual(testCase.set);
+    });
+    test("categorizeNote", () => {
+      const map = categorizeNote(testCase.items);
+      expect(map).toEqual(testCase.categorized);
     });
   });
 };
@@ -120,6 +131,7 @@ const testCases: TestCase[] = [
     items: [],
     expected: [],
     set: new Set(),
+    categorized: new Map(),
   },
   {
     name: "boolean",
@@ -129,12 +141,22 @@ const testCases: TestCase[] = [
     ],
     expected: [{ key: "key1", kinds: ["boolean"], values: ["true", "false"] }],
     set: new Set(),
+    categorized: categorized([
+      [
+        "key1",
+        [
+          { key: "key1", value: "true" },
+          { key: "key1", value: "false" },
+        ],
+      ],
+    ]),
   },
   {
     name: "number",
     items: [{ key: "key1", value: "123.45" }],
     expected: [{ key: "key1", kinds: ["number"], values: ["123.45"] }],
     set: new Set(),
+    categorized: categorized([["key1", [{ key: "key1", value: "123.45" }]]]),
   },
   {
     name: "multipleKeys",
@@ -147,30 +169,38 @@ const testCases: TestCase[] = [
       { key: "B", kinds: ["number"], values: ["456"] },
     ],
     set: new Set(),
+    categorized: categorized([
+      ["A", [{ key: "A", value: "123" }]],
+      ["B", [{ key: "B", value: "456" }]],
+    ]),
   },
   {
     name: "bgm filename as number",
     items: [{ key: "M", value: BGM_NUMBER }],
     expected: [{ key: "M", kinds: ["number", "bgm"], values: [BGM_NUMBER] }],
     set: new Set(),
+    categorized: categorized([["M", [{ key: "M", value: BGM_NUMBER }]]]),
   },
   {
     name: "bgs filename as number",
     items: [{ key: "S", value: BGS_NUMBER }],
     expected: [{ key: "S", kinds: ["number", "bgs"], values: [BGS_NUMBER] }],
     set: new Set(),
+    categorized: categorized([["S", [{ key: "S", value: BGS_NUMBER }]]]),
   },
   {
     name: "me filename as number",
     items: [{ key: "ME", value: ME_NUMBER }],
     expected: [{ key: "ME", kinds: ["number", "me"], values: [ME_NUMBER] }],
     set: new Set(),
+    categorized: categorized([["ME", [{ key: "ME", value: ME_NUMBER }]]]),
   },
   {
     name: "se filename as number",
     items: [{ key: "SE", value: SE_NUMBER }],
     expected: [{ key: "SE", kinds: ["number", "se"], values: [SE_NUMBER] }],
     set: new Set(),
+    categorized: categorized([["SE", [{ key: "SE", value: SE_NUMBER }]]]),
   },
   {
     name: "multiple audio files as number",
@@ -182,6 +212,15 @@ const testCases: TestCase[] = [
       { key: "Audio", kinds: ["number"], values: [BGM_NUMBER, BGS_NUMBER] },
     ],
     set: new Set(),
+    categorized: categorized([
+      [
+        "Audio",
+        [
+          { key: "Audio", value: BGM_NUMBER },
+          { key: "Audio", value: BGS_NUMBER },
+        ],
+      ],
+    ]),
   },
   {
     name: "multiple audio files as filename",
@@ -198,6 +237,12 @@ const testCases: TestCase[] = [
       { key: "SE", kinds: ["se"], values: [SE_FILE] },
     ],
     set: new Set(),
+    categorized: categorized([
+      ["BGM", [{ key: "BGM", value: BGM_FILE }]],
+      ["BGS", [{ key: "BGS", value: BGS_FILE }]],
+      ["ME", [{ key: "ME", value: ME_FILE }]],
+      ["SE", [{ key: "SE", value: SE_FILE }]],
+    ]),
   },
   {
     name: "multiple audio files as number 2",
@@ -215,6 +260,17 @@ const testCases: TestCase[] = [
       },
     ],
     set: new Set(),
+    categorized: categorized([
+      [
+        "Audio",
+        [
+          { key: "Audio", value: BGM_NUMBER },
+          { key: "Audio", value: BGS_NUMBER },
+          { key: "Audio", value: ME_NUMBER },
+          { key: "Audio", value: SE_NUMBER },
+        ],
+      ],
+    ]),
   },
   {
     name: "unknown audio file",
@@ -232,6 +288,17 @@ const testCases: TestCase[] = [
       },
     ],
     set: new Set(["X"]),
+    categorized: categorized([
+      [
+        "X",
+        [
+          { key: "X", value: BGM_NUMBER },
+          { key: "X", value: BGM_FILE },
+          { key: "X", value: "123" },
+          { key: "X", value: "not found" },
+        ],
+      ],
+    ]),
   },
   {
     name: "audio",
@@ -244,6 +311,9 @@ const testCases: TestCase[] = [
       },
     ],
     set: new Set(),
+    categorized: categorized([
+      ["Audio", [{ key: "Audio", value: AUDIIO_FILE }]],
+    ]),
   },
   {
     name: "picture",
@@ -255,6 +325,15 @@ const testCases: TestCase[] = [
       { key: "P", kinds: ["pictures"], values: [PICTURE_FILE, PICTURE_NUMBER] },
     ],
     set: new Set(),
+    categorized: categorized([
+      [
+        "P",
+        [
+          { key: "P", value: PICTURE_FILE },
+          { key: "P", value: PICTURE_NUMBER },
+        ],
+      ],
+    ]),
   },
   {
     name: "character",
@@ -270,6 +349,15 @@ const testCases: TestCase[] = [
       },
     ],
     set: new Set(),
+    categorized: categorized([
+      [
+        "C",
+        [
+          { key: "C", value: CHARACTER_FILE },
+          { key: "C", value: CHARACTER_NUMBER },
+        ],
+      ],
+    ]),
   },
   {
     name: "faces",
@@ -281,6 +369,15 @@ const testCases: TestCase[] = [
       { key: "F", kinds: ["faces"], values: [FACE_FILE, FACE_NUMBER] },
     ],
     set: new Set(),
+    categorized: categorized([
+      [
+        "F",
+        [
+          { key: "F", value: FACE_FILE },
+          { key: "F", value: FACE_NUMBER },
+        ],
+      ],
+    ]),
   },
   {
     name: "image",
@@ -301,12 +398,18 @@ const testCases: TestCase[] = [
         values: [IMAGE_FILE],
       },
     ],
+    categorized: categorized([
+      ["Image", [{ key: "Image", value: IMAGE_FILE }]],
+    ]),
   },
   {
     name: "movie",
     items: [{ key: "Movie", value: MOVIE_FILE }],
     expected: [{ key: "Movie", kinds: ["movies"], values: [MOVIE_FILE] }],
     set: new Set(),
+    categorized: categorized([
+      ["Movie", [{ key: "Movie", value: MOVIE_FILE }]],
+    ]),
   },
 ];
 
