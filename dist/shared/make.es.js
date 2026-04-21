@@ -1,4 +1,4 @@
-import { m as e } from "./make.es2.js";
+import { m as e } from "./makeAudio.es.js";
 const r = (a = {}) => ({
   gameId: a.gameId ?? 0,
   screenWidth: a.screenWidth ?? 0,
@@ -69,7 +69,7 @@ const r = (a = {}) => ({
   optTransparent: a.optTransparent ?? !0,
   optMessageSkip: a.optMessageSkip ?? !0,
   optSplashScreen: a.optSplashScreen ?? !0
-}), t = (a, s) => typeof a == "string" ? a : s, h = (a) => ({
+}), t = (a, o) => typeof a == "string" ? a : o, h = (a) => ({
   actionFailure: t(a.actionFailure, "Action failed."),
   actorDamage: t(a.actorDamage, "%1 took %2 damage."),
   actorRecovery: t(a.actorRecovery, "%1 recovered %2 HP."),
@@ -197,7 +197,7 @@ const r = (a = {}) => ({
   tpA: a[7],
   experience: a[8],
   exp: a[9]
-}), w = (a) => D(a, ""), D = (a, s) => [a.fight ?? "Fight", a.escape ?? "Escape", a.attack ?? "Attack", a.guard ?? "Guard", a.item ?? "Item", a.skill ?? "Skill", a.equip ?? "Equip", a.status ?? "Status", a.formation ?? "Formation", a.save ?? "Save", a.gameEnd ?? "Game End", a.options ?? "Options", a.weapon ?? "Weapon", a.armor ?? "Armor", a.keyItem ?? "Key Item", a.equip2 ?? "Equip2", a.optimize ?? "Optimize", a.clear ?? "Clear", a.newGame ?? "New Game", a.continueGame ?? "Continue", s, a.toTitle ?? "To Title", a.cancel ?? "Cancel", s, a.buy ?? "Buy", a.sell ?? "Sell"], E = (a) => ({
+}), w = (a) => D(a, ""), D = (a, o) => [a.fight ?? "Fight", a.escape ?? "Escape", a.attack ?? "Attack", a.guard ?? "Guard", a.item ?? "Item", a.skill ?? "Skill", a.equip ?? "Equip", a.status ?? "Status", a.formation ?? "Formation", a.save ?? "Save", a.gameEnd ?? "Game End", a.options ?? "Options", a.weapon ?? "Weapon", a.armor ?? "Armor", a.keyItem ?? "Key Item", a.equip2 ?? "Equip2", a.optimize ?? "Optimize", a.clear ?? "Clear", a.newGame ?? "New Game", a.continueGame ?? "Continue", o, a.toTitle ?? "To Title", a.cancel ?? "Cancel", o, a.buy ?? "Buy", a.sell ?? "Sell"], A = (a) => ({
   fight: a[0],
   escape: a[1],
   attack: a[2],
@@ -222,7 +222,7 @@ const r = (a = {}) => ({
   cancel: a[22],
   buy: a[24],
   sell: a[25]
-}), A = (a) => ({
+}), E = (a) => ({
   background: a.background ?? 0,
   offsetX: a.offsetX ?? 0,
   offsetY: a.offsetY ?? 0
@@ -317,15 +317,15 @@ const r = (a = {}) => ({
   editorTemporary: { editMapId: a.editMapId, battlerName: a.battlerName, battlerHue: a.battlerHue },
   terms: {
     basic: I(a.terms.basic),
-    commands: E(a.terms.commands),
+    commands: A(a.terms.commands),
     params: M(a.terms.params),
     messages: a.terms.messages
   }
 }), m = (a) => {
-  const s = F(a.size);
+  const o = F(a.size);
   return {
     ...T(a.options),
-    titleCommandWindow: A(a.titleCommandWindow ?? {}),
+    titleCommandWindow: E(a.titleCommandWindow ?? {}),
     currencyUnit: a.texts?.currencyUnit ?? "",
     gameTitle: a.texts?.gameTitle ?? "",
     sounds: l(a.sounds),
@@ -333,14 +333,14 @@ const r = (a = {}) => ({
     advanced: r(a.advanced),
     title1Name: a.images?.title1Name ?? "",
     title2Name: a.images?.title2Name ?? "",
-    armorTypes: o(a.dataNames?.armorTypes),
-    equipTypes: o(a.dataNames?.equipTypes),
-    elements: o(a.dataNames?.elements),
-    skillTypes: o(a.dataNames?.skillTypes),
-    weaponTypes: o(a.dataNames?.weaponTypes),
-    switches: o(a.dataNames?.switches),
-    variables: o(a.dataNames?.variables),
-    magicSkills: o(a.battle?.magicSkills),
+    armorTypes: s(a.dataNames?.armorTypes),
+    equipTypes: s(a.dataNames?.equipTypes),
+    elements: s(a.dataNames?.elements),
+    skillTypes: s(a.dataNames?.skillTypes),
+    weaponTypes: s(a.dataNames?.weaponTypes),
+    switches: s(a.dataNames?.switches),
+    variables: s(a.dataNames?.variables),
+    magicSkills: s(a.battle?.magicSkills),
     battleSystem: a.battle?.battleSystem ?? 0,
     airship: i(a.vehicles?.airship),
     boat: i(a.vehicles?.boat),
@@ -348,9 +348,9 @@ const r = (a = {}) => ({
     defeatMe: e(a.me?.defeatMe),
     gameoverMe: e(a.me?.gameoverMe),
     titleBgm: e(a.bgm?.titleBgm),
-    tileSize: s.tileSize,
-    faceSize: s.faceSize,
-    iconSize: s.iconSize,
+    tileSize: o.tileSize,
+    faceSize: o.faceSize,
+    iconSize: o.iconSize,
     versionId: a.versionId ?? 1,
     attackMotions: a.attackMotion ? [...a.attackMotion] : [],
     battleback1Name: a.battleTest?.battleback1Name ?? "",
@@ -368,7 +368,7 @@ const r = (a = {}) => ({
     windowTone: [0, 0, 0, 0],
     terms: C(a.terms ?? {}),
     itemCategories: v(a.itemCategories),
-    partyMembers: o(a.gameInit?.partyMembers),
+    partyMembers: s(a.gameInit?.partyMembers),
     battlerHue: 0,
     menuCommands: f(a.menuCommands)
   };
@@ -377,19 +377,19 @@ const r = (a = {}) => ({
   commands: w(a.commands ?? {}),
   params: N(a.params ?? {}),
   messages: h(a.messages ?? {})
-}), o = (a) => a ? [...a] : [], F = (a) => a ? {
+}), s = (a) => a ? [...a] : [], F = (a) => a ? {
   tileSize: a.tileSize ?? 48,
   faceSize: a.faceSize ?? 144,
   iconSize: a.iconSize ?? 32
-} : { tileSize: 48, faceSize: 144, iconSize: 32 }, z = (a, s) => a ? a.map(s) : [], H = (a) => a ? { actorId: a.actorId, equips: o(a.equips), level: a.level } : { actorId: 0, equips: [], level: 1 };
+} : { tileSize: 48, faceSize: 144, iconSize: 32 }, z = (a, o) => a ? a.map(o) : [], H = (a) => a ? { actorId: a.actorId, equips: s(a.equips), level: a.level } : { actorId: 0, equips: [], level: 1 };
 export {
   S as A,
   I as B,
   w as C,
   D,
-  E,
+  A as E,
   h as F,
-  A as G,
+  E as G,
   i as H,
   p as a,
   u as b,

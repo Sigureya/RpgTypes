@@ -1,2 +1,2 @@
 export * from './audioFileParams';
-export * from './make';
+export * from './makeAudio';
