@@ -4,8 +4,7 @@ import type {
   Data_SystemMV,
   Terms_Messages,
 } from "@RpgTypes/rmmz";
-import { makeSystemData } from "@RpgTypes/rmmz";
-import { makeSystemDataMV } from "@RpgTypes/rmmz/system/make";
+import { makeSystemData, makeSystemDataMV } from "@RpgTypes/rmmz";
 import { SCHEMA_DATA_SYSTEM } from "./schema";
 const validate = require("./systemValidate.cjs");
 
