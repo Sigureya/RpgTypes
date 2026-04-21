@@ -10,8 +10,8 @@ import { isDataTileset as m, isDataWeapon as o, isDataState as r, isDataSkill as
 import { isDataSystem as d } from "../validate/rmmz/system.es.js";
 import { isDataTroop as i, isDataMap as R, isDataCommonEvent as l } from "../validate/rmmz/events.es.js";
 import { isActorTextCommand as Vd, isAudioCommand as Gd, validateMapWithErrors as bd } from "../validate/rmmz/events.es.js";
-import { m as gd } from "../shared/make.es2.js";
-import { m as Bd, a as Hd } from "../shared/make.es3.js";
+import { m as gd } from "../shared/makeAudio.es.js";
+import { m as Bd, a as Hd } from "../shared/make.es2.js";
 import { m as hd } from "../shared/mergeItemsSource.es.js";
 import { v as fd } from "../shared/validateWithErrors.es.js";
 const O = () => ({
