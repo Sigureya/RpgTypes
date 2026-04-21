@@ -3,6 +3,8 @@ import { MapFileInfo } from '../../../rmmz';
 import { OtherFilesSet, SummarizedNote } from './note/types';
 import { ExtractedMapTexts, TextPluginCommandParameter } from './text/eventCommand';
 import { ExtractedDataBundle } from './text/mainData/types';
+import { ExtractedRawGameDataTexts, NormalizeRawGameDataNoteTextsResult } from './types';
+export declare const normalizeRawGameDataNoteTexts: (data: ExtractedRawGameDataTexts, audioFiles: AudioFilesSet, imageFiles: ImageFilesSet, other: OtherFilesSet) => NormalizeRawGameDataNoteTextsResult;
 export declare const summarizeNoteKindsFromMapFiles: <Command extends TextPluginCommandParameter>(mapList: readonly MapFileInfo<ExtractedMapTexts<Command>>[], audioFiles: AudioFilesSet, imageFiles: ImageFilesSet, other: OtherFilesSet) => SummarizedNote[];
 export declare const normalizeNoteFromMapFiles: <Command extends TextPluginCommandParameter>(mapList: readonly MapFileInfo<ExtractedMapTexts<Command>>[], audioFiles: AudioFilesSet, imageFiles: ImageFilesSet, other: OtherFilesSet) => MapFileInfo<ExtractedMapTexts<Command>>[];
 export declare const nonTextNoteKeys: (bundle: ExtractedDataBundle, audioFiles: AudioFilesSet, imageFiles: ImageFilesSet, other: OtherFilesSet) => Set<string>;
