@@ -6,9 +6,11 @@ import {
   nonTextNoteKeys,
   normalizeBundleNoteTexts,
   normalizeNoteFromMapFiles,
+  buildRawGameDataNoteNormalization,
 } from "./noteNormarize";
 import type { ExtractedMapTexts } from "./text/eventCommand";
 import type { ExtractedDataBundle } from "./text/mainData/types";
+import type { ExtractedRawGameDataTexts } from "./types";
 
 const BGM1 = "bgm1";
 const BGM2 = "bgm2";
@@ -288,5 +290,75 @@ describe("normalizeMapNotes", () => {
       ohterFiles,
     );
     expect(result).toEqual([map]);
+  });
+});
+
+describe("normalizeRawGameDataNoteTexts", () => {
+  test("returns normalized data with reusable note metadata", () => {
+    const map: MapFileInfo<ExtractedMapTexts> = {
+      editingName: "map1",
+      filename: "Map001.json",
+      map: {
+        displayedName: "map1",
+        note: "dummy note",
+        noteItems: [],
+        events: [
+          {
+            commands: [],
+            eventId: 1,
+            name: "event1",
+            pageIndex: 0,
+            note: "dummy event note",
+            noteItems: [
+              { key: "power", value: "12345" },
+              { key: "face", value: FACE1 },
+              { key: "b", value: "true" },
+            ],
+          },
+        ],
+      },
+    };
+    const rawData: ExtractedRawGameDataTexts = {
+      errors: [],
+      value: {
+        mainData: bundle2,
+        eventData: {
+          commonEvents: [],
+          troops: [],
+        },
+        mapFiles: {
+          info: { success: true },
+          invalidMaps: [],
+          validMaps: [map],
+        },
+        system: {
+          message: "",
+          system: null,
+        },
+      },
+    };
+
+    const result = buildRawGameDataNoteNormalization(
+      rawData,
+      audioFiles,
+      imageFiles,
+      ohterFiles,
+    );
+
+    expect(result.dataNoteSummary.size).toBe(8);
+    expect(result.mapNoteSummary.size).toBe(1);
+    expect(result.mapNoteSummary.get("Map001.json")?.map((s) => s.key)).toEqual(
+      ["power", "face", "b"],
+    );
+    expect(result.nonTextNoteKeys).toEqual(
+      new Set(["desc", "ex-name", "ex-profile", "special"]),
+    );
+
+    expect(result.data.value.mainData).toEqual(
+      normalizeBundleNoteTexts(bundle2, audioFiles, imageFiles, ohterFiles),
+    );
+    expect(result.data.value.mapFiles.validMaps).toEqual(
+      normalizeNoteFromMapFiles([map], audioFiles, imageFiles, ohterFiles),
+    );
   });
 });
