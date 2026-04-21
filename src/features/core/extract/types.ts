@@ -3,6 +3,7 @@ import type {
   ReadSystemResult,
   DataReadErrorItem,
 } from "@RpgTypes/fileio";
+import type { SummarizedNote } from "./note";
 import type {
   ExtractedDataBundle,
   ExtractedCommonEventText,
@@ -29,4 +30,6 @@ export interface ExtractedRawGameDataTexts {
 export interface NormalizeRawGameDataNoteTextsResult {
   nonTextNoteKeys: Set<string>;
   data: ExtractedRawGameDataTexts;
+  mapNoteSummary: Map<string, SummarizedNote[]>;
+  dataNoteSummary: Map<string, SummarizedNote[]>;
 }
