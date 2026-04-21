@@ -27,7 +27,7 @@ export interface ExtractedRawGameDataTexts {
   errors: DataReadErrorItem[];
 }
 
-export interface NormalizeRawGameDataNoteTextsResult {
+export interface RawGameDataNoteNormalization {
   nonTextNoteKeys: Set<string>;
   data: ExtractedRawGameDataTexts;
   mapNoteSummary: Map<string, SummarizedNote[]>;
