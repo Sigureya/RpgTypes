@@ -19,6 +19,7 @@ import { createTextDataExtractorFromSchemas } from "./extractor";
 const messagePluginSchema: PluginSchema = {
   pluginName: "MessagePlugin",
   target: "MZ",
+  locale: "",
   meta: {},
   dependencies: { base: [], orderAfter: [], orderBefore: [] },
   schema: {
