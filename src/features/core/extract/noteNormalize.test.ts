@@ -3,6 +3,7 @@ import type { AudioFilesSet, ImageFilesSet } from "@RpgTypes/fileio";
 import type { MapFileInfo } from "@RpgTypes/rmmz";
 import type { OtherFilesSet } from "./note/types";
 import {
+  nonTextNoteKeys,
   normalizeBundleNoteTexts,
   normalizeNoteFromMapFiles,
 } from "./noteNormarize";
@@ -190,6 +191,19 @@ describe("normalizeBundleNoteTexts", () => {
       ohterFiles,
     );
     expect(result).toEqual(bundle2);
+  });
+});
+
+describe("nonTextNoteKeys", () => {
+  test("returns empty set when no note keys match non-text file kinds", () => {
+    const result = nonTextNoteKeys(bundle, audioFiles, imageFiles, ohterFiles);
+    const expected = new Set([]);
+    expect(result).toEqual(expected);
+  });
+  test("returns set of note keys that match non-text file kinds regardless of value", () => {
+    const result = nonTextNoteKeys(bundle2, audioFiles, imageFiles, ohterFiles);
+    const expected = new Set(["desc", "ex-name", "ex-profile", "special"]);
+    expect(result).toEqual(expected);
   });
 });
 

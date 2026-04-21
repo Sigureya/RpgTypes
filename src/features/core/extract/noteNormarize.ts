@@ -16,6 +16,51 @@ import type {
   ExtractedNoteList,
   ExtractedTextItem,
 } from "./text/mainData/types";
+import type {
+  ExtractedRawGameDataTexts,
+  NormalizeRawGameDataNoteTextsResult,
+} from "./types";
+
+export const normalizeRawGameDataNoteTexts = (
+  data: ExtractedRawGameDataTexts,
+  audioFiles: AudioFilesSet,
+  imageFiles: ImageFilesSet,
+  other: OtherFilesSet,
+): NormalizeRawGameDataNoteTextsResult => {
+  const validMaps = normalizeNoteFromMapFiles(
+    data.value.mapFiles.validMaps,
+    audioFiles,
+    imageFiles,
+    other,
+  );
+  const mainData = normalizeBundleNoteTexts(
+    data.value.mainData,
+    audioFiles,
+    imageFiles,
+    other,
+  );
+  return {
+    nonTextNoteKeys: nonTextNoteKeys(
+      data.value.mainData,
+      audioFiles,
+      imageFiles,
+      other,
+    ),
+    data: {
+      errors: data.errors,
+      value: {
+        mainData: mainData,
+        mapFiles: {
+          info: data.value.mapFiles.info,
+          invalidMaps: data.value.mapFiles.invalidMaps,
+          validMaps,
+        },
+        eventData: data.value.eventData,
+        system: data.value.system,
+      },
+    },
+  };
+};
 
 export const summarizeNoteKindsFromMapFiles = <
   Command extends TextPluginCommandParameter,
