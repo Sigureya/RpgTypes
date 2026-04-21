@@ -1,16 +1,19 @@
 import type { MockedObject } from "vitest";
 import { describe, expect, test, vi } from "vitest";
-import type {
-  DeepJSONParserHandlers,
-  PluginAnnotationLines,
-  PluginSchema,
-  SchemaStringifyHandlers,
-} from "@sigureya/rmmz-plugin-schema";
 import {
   generatePluginAnnotationLines,
   pluginSourceToArraySchema,
+  parsePluginByLocale,
+  compilePluginAsArraySchema,
 } from "@sigureya/rmmz-plugin-schema";
-
+import type {
+  DeepJSONParserHandlers,
+  ParsedPlugin,
+  PluginAnnotationLines,
+  PluginSchema,
+  PluginSchemaArray,
+  SchemaStringifyHandlers,
+} from "@sigureya/rmmz-plugin-schema";
 const MOCK_NUMBER_ARRAY_RESULT = "numberArrayResult";
 const MOCK_STRING_ARRAY_RESULT = "stringArrayResult";
 const MOCK_STRUCT_RESULT = "structResult";
@@ -28,63 +31,64 @@ const createParseHandlers = (): MockedObject<DeepJSONParserHandlers> => ({
   parseObjectArray: vi.fn(),
   parseStringArray: vi.fn(),
 });
-
-describe("Plugin Annotation Generation and Parsing", () => {
-  const schema: PluginSchema = {
-    pluginName: "TestPlugin",
-    target: "MZ",
-    locale: "en",
-    meta: {
-      author: "Test Author",
-      plugindesc: "Test Plugin Description",
-      url: "test-url",
-    },
-    dependencies: {
-      base: ["base1"],
-      orderAfter: ["after2"],
-      orderBefore: ["before3"],
-    },
-    schema: {
-      commands: [],
-      structs: [
-        {
-          struct: "Person",
-          params: [
-            {
-              name: "name",
-              attr: { kind: "string", default: "abc" },
-            },
-          ],
-        },
-      ],
-      params: [],
-    },
-  };
-  const lines: PluginAnnotationLines = {
-    body: [
-      "/*:en",
-      "@target MZ",
-      "@author Test Author",
-      "@plugindesc Test Plugin Description",
-      "@url test-url",
-      "",
-      "@base base1",
-      "@orderBefore before3",
-      "@orderAfter after2",
+const schema: PluginSchema = {
+  pluginName: "TestPlugin",
+  target: "MZ",
+  locale: "en",
+  meta: {
+    author: "Test Author",
+    plugindesc: "Test Plugin Description",
+    url: "test-url",
+  },
+  dependencies: {
+    base: ["base1"],
+    orderAfter: ["after2"],
+    orderBefore: ["before3"],
+  },
+  schema: {
+    commands: [],
+    structs: [
+      {
+        struct: "Person",
+        params: [
+          {
+            name: "name",
+            attr: { kind: "string", default: "abc" },
+          },
+        ],
+      },
+    ],
+    params: [],
+  },
+};
+const lines: PluginAnnotationLines = {
+  body: [
+    "/*:en",
+    "@target MZ",
+    "@author Test Author",
+    "@plugindesc Test Plugin Description",
+    "@url test-url",
+    "",
+    "@base base1",
+    "@orderBefore before3",
+    "@orderAfter after2",
+    "",
+    "*/",
+  ],
+  structs: [
+    [
+      "/*~struct~Person:en",
+      "@param name",
+      "@type string",
+      "@default abc",
       "",
       "*/",
     ],
-    structs: [
-      [
-        "/*~struct~Person:en",
-        "@param name",
-        "@type string",
-        "@default abc",
-        "",
-        "*/",
-      ],
-    ],
-  };
+  ],
+};
+const sourceText = [...lines.body, ...lines.structs].flat(2).join("\n");
+
+describe("Plugin Annotation Generation and Parsing", () => {
   test("generates annotation lines", () => {
     const handlers = createMockedHandlers();
     const result = generatePluginAnnotationLines(schema, handlers);
@@ -100,7 +104,7 @@ describe("Plugin Annotation Generation and Parsing", () => {
       {
         pluginName: schema.pluginName,
         locale: schema.locale,
-        source: [...lines.body, ...lines.structs].flat(2).join("\n"),
+        source: sourceText,
       },
       handlers,
     );
@@ -108,5 +112,54 @@ describe("Plugin Annotation Generation and Parsing", () => {
     expect(handlers.parseObject).toHaveBeenCalledTimes(0);
     expect(handlers.parseObjectArray).toHaveBeenCalledTimes(0);
     expect(handlers.parseStringArray).toHaveBeenCalledTimes(0);
+  });
+
+  test("parses by locale then compiles to array schema", () => {
+    const handlers = createParseHandlers();
+    const parsed = parsePluginByLocale(sourceText, schema.locale);
+    const result = compilePluginAsArraySchema(parsed, handlers);
+    expect(result).toEqual(schema.schema);
+    expect(handlers.parseObject).toHaveBeenCalledTimes(0);
+    expect(handlers.parseObjectArray).toHaveBeenCalledTimes(0);
+    expect(handlers.parseStringArray).toHaveBeenCalledTimes(0);
+  });
+  describe("", () => {
+    const expecedParsed: ParsedPlugin = {
+      commands: [],
+      dependencies: {
+        base: ["base1"],
+        orderAfter: ["after2"],
+        orderBefore: ["before3"],
+      },
+      helpLines: [],
+      locale: "en",
+      meta: {
+        author: "Test Author",
+        plugindesc: "Test Plugin Description",
+        url: "test-url",
+      },
+      params: [],
+      structs: [
+        {
+          name: "Person",
+          params: [{ attr: { default: "abc", kind: "string" }, name: "name" }],
+        },
+      ],
+    };
+    test("parsePluginByLocale", () => {
+      const result: ParsedPlugin = parsePluginByLocale(
+        sourceText,
+        schema.locale,
+      );
+      expect(result).toEqual(expecedParsed);
+    });
+    test("compilePluginAsArraySchema", () => {
+      const handlers = createParseHandlers();
+      const result: PluginSchemaArray = compilePluginAsArraySchema(
+        expecedParsed,
+        handlers,
+      );
+      expect(result).toEqual<PluginSchemaArray>(schema.schema);
+    });
   });
 });
