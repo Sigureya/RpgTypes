@@ -1,4 +1,7 @@
-import type { PluginParamsRecord } from "@sigureya/rmmz-plugin-schema";
+import type {
+  PluginParamsRecord,
+  PluginSchemaArray,
+} from "@sigureya/rmmz-plugin-schema";
 
 export interface ErrorMessage {
   fileNotFound: string;
@@ -14,4 +17,10 @@ export interface ResultOfReadPluginInfos {
 
 export interface PluginReadOptions {
   locale: string;
+}
+
+export interface ParsePluginResult {
+  success: boolean;
+  message: string;
+  data: PluginSchemaArray;
 }
