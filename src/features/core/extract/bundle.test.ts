@@ -60,6 +60,7 @@ const ng = <T>(fileName: string, error: string): ReadArrayResult<T> => ({
 const createExtractor = (): MockedObject<EventContainerExtractor> => ({
   extractCommonEventText: vi.fn((common: Data_CommonEvent) => ({
     eventId: common.id,
+    name: common.name,
     commands: [],
   })),
   extractBattleText: vi.fn((troop: Data_Troop): ExtractedBattleEventText[] => [
@@ -143,8 +144,8 @@ describe("extractTextFromRawGameData", () => {
       expect(result.value.eventData.commonEvents).toEqual<
         ExtractedCommonEventText[]
       >([
-        { eventId: 1, commands: [] },
-        { eventId: 2, commands: [] },
+        { eventId: 1, name: "CommonA", commands: [] },
+        { eventId: 2, name: "CommonB", commands: [] },
       ]);
       expect(result.value.eventData.troops).toEqual<ExtractedBattleEventText[]>(
         [

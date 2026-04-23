@@ -36,6 +36,7 @@ describe("GameDataExtractor", () => {
   test("returns the same result as extractCommonEventTexts with pluginCommandTextExtractor that returns empty array", () => {
     const expected: ExtractedCommonEventText = {
       eventId: 1,
+      name: "testCommonEvent",
       commands: [
         {
           code: 401,

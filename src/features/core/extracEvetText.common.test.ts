@@ -65,7 +65,11 @@ describe("extractCommonEventTexts", () => {
       mockFn,
     );
     expect(mockFn).not.toHaveBeenCalled();
-    const expected: ExtractedCommonEventText = { eventId: 1, commands: [] };
+    const expected: ExtractedCommonEventText = {
+      eventId: 1,
+      name: "Common Event 1",
+      commands: [],
+    };
     expect(result).toEqual(expected);
   });
   describe("commonEventWithPluginCommands", () => {
@@ -87,6 +91,7 @@ describe("extractCommonEventTexts", () => {
       const result = extractCommonEventTexts(mock, fn2);
       const expected: ExtractedCommonEventText = {
         eventId: 2,
+        name: "Common Event 2",
         commands: [duumyPluginResult, duumyPluginResult],
       };
       expect(result).toEqual(expected);
@@ -96,6 +101,7 @@ describe("extractCommonEventTexts", () => {
       const result: Result = extractCommonEventTexts(mock, fn3);
       const expected: Result = {
         eventId: 2,
+        name: "Common Event 2",
         commands: [
           {
             ...duumyPluginResult,
@@ -127,6 +133,7 @@ describe("extractCommonEventTexts", () => {
       const result = extractCommonEventTexts(mock, mockFn);
       const expected: ExtractedCommonEventText = {
         eventId: 3,
+        name: "Common Event 3",
         commands: [
           { code: showChoices.code, value: "yes", paramIndex: 0 },
           { code: showChoices.code, value: "no", paramIndex: 1 },
@@ -161,6 +168,7 @@ describe("extractCommonEventTexts", () => {
       const result = extractCommonEventTexts(mock, mockFn);
       const expected: ExtractedCommonEventText = {
         eventId: 4,
+        name: "Common Event 4",
         commands: [
           { code: changeName.code, value: "Hero", paramIndex: 1 },
           { code: changeNickname.code, value: "Brave", paramIndex: 1 },
