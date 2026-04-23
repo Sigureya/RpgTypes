@@ -458,6 +458,7 @@ const q = (a, e, t, s) => {
   var e, t;
 }, script: (a) => ((e) => ({ code: F, paramIndex: 0, value: e.getBodyText() }))(a), showScrollingText: (a) => ((e) => ({ code: C, paramIndex: 0, value: e.getBodyText() }))(a) }, Ze = (a, e = () => []) => ({
   eventId: a.id,
+  name: a.name,
   commands: G(a.list, e)
 }), Qe = (a, e = () => []) => a.pages.map(((t, s) => ({ eventId: a.id, pageIndex: s, commands: G(t.list, e) }))), We = (a, e = () => []) => ({
   note: a.note,

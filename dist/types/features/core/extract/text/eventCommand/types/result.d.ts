@@ -19,6 +19,7 @@ export interface ExtractedBattleEventText<T extends TextPluginCommandParameter =
 }
 export interface ExtractedCommonEventText<T extends TextPluginCommandParameter = TextPluginCommandParameter> {
     eventId: number;
+    name: string;
     commands: (TextCommandParameter | T)[];
 }
 export interface ExtractedMapTexts<T extends TextPluginCommandParameter = TextPluginCommandParameter> {
