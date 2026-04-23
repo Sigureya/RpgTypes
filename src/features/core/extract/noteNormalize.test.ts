@@ -345,11 +345,13 @@ describe("normalizeRawGameDataNoteTexts", () => {
       ohterFiles,
     );
 
-    expect(result.dataNoteSummary.size).toBe(8);
-    expect(result.mapNoteSummary.size).toBe(1);
-    expect(result.mapNoteSummary.get("Map001.json")?.map((s) => s.key)).toEqual(
-      ["power", "face", "b"],
-    );
+    expect(result.dataNoteSummary).toHaveLength(4);
+    expect(result.mapNoteSummary).toHaveLength(3);
+    expect(result.mapNoteSummary.map((s) => s.key)).toEqual([
+      "power",
+      "face",
+      "b",
+    ]);
     expect(result.nonTextNoteKeys).toEqual(
       new Set(["desc", "ex-name", "ex-profile", "special"]),
     );
