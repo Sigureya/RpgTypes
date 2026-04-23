@@ -22,6 +22,7 @@ export const extractCommonEventTexts = <T extends TextPluginCommandParameter>(
 ): ExtractedCommonEventText<T> => {
   return {
     eventId: commons.id,
+    name: commons.name,
     commands: extractTextFromEventCommandsEx(
       commons.list,
       pluginCommandEvaltor,

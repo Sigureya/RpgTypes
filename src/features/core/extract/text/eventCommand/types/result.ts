@@ -37,6 +37,7 @@ export interface ExtractedCommonEventText<
   T extends TextPluginCommandParameter = TextPluginCommandParameter,
 > {
   eventId: number;
+  name: string;
   commands: (TextCommandParameter | T)[];
 }
 
