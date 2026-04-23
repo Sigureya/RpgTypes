@@ -30,6 +30,6 @@ export interface ExtractedRawGameDataTexts {
 export interface RawGameDataNoteNormalization {
   nonTextNoteKeys: Set<string>;
   data: ExtractedRawGameDataTexts;
-  mapNoteSummary: Map<string, SummarizedNote[]>;
-  dataNoteSummary: Map<string, SummarizedNote[]>;
+  mapNoteSummary: SummarizedNote[];
+  dataNoteSummary: SummarizedNote[];
 }
