@@ -22,7 +22,7 @@ const validateEntryPoints = () => {
       "validate/rmmz/systemMV",
       path.resolve(srcDir, "validate/rmmz/systemMV.ts"),
     ],
-    ["validate/rmmz/handler", path.resolve(srcDir, "validate/rmmz/handler.ts")],
+    //    ["validate/rmmz/handler", path.resolve(srcDir, "validate/rmmz/handler.ts")],
   ] as const;
   return Object.fromEntries([...entries, ...validateSystemMV]);
 };
