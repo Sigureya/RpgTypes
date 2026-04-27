@@ -3,7 +3,7 @@ import type {
   Data_Animation,
   Data_Armor,
   Data_Class,
-  Data_CommonEvent,
+  Data_CommonEventUnknown,
   Data_Enemy,
   Data_Item,
   Data_Map,
@@ -11,8 +11,10 @@ import type {
   Data_Skill,
   Data_State,
   Data_Tileset,
-  Data_Troop,
+  Data_TroopUnknonw,
   Data_Weapon,
+  EventCommand,
+  EventCommandUnknown,
 } from "@RpgTypes/rmmz";
 import type { ReadArrayResult } from "./arrayData";
 import type { MapBatchReadResult } from "./map";
@@ -132,20 +134,22 @@ export interface ReadGameDataResultNullable<
   tilesets: ReadHandledResult<Tileset, null>;
 }
 
-export interface RawGameData extends ReadAllDataFields {
+export interface RawGameData<
+  Command extends EventCommandUnknown = EventCommand,
+> extends ReadAllDataFields {
   actors: ReadArrayResult<Data_Actor>;
   armors: ReadArrayResult<Data_Armor>;
   classes: ReadArrayResult<Data_Class>;
-  commonEvents: ReadArrayResult<Data_CommonEvent>;
+  commonEvents: ReadArrayResult<Data_CommonEventUnknown<Command>>;
   enemies: ReadArrayResult<Data_Enemy>;
   items: ReadArrayResult<Data_Item>;
   mapInfos: ReadArrayResult<Data_MapInfo>;
   skills: ReadArrayResult<Data_Skill>;
   states: ReadArrayResult<Data_State>;
   system: ReadSystemResult;
-  troops: ReadArrayResult<Data_Troop>;
+  troops: ReadArrayResult<Data_TroopUnknonw<Command>>;
   weapons: ReadArrayResult<Data_Weapon>;
   tilesets: ReadArrayResult<Data_Tileset>;
   animations: ReadArrayResult<Data_Animation>;
-  mapFiles: MapBatchReadResult<Data_Map>;
+  mapFiles: MapBatchReadResult<Data_Map<Command>>;
 }
