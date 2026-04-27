@@ -1,8 +1,6 @@
 import { PLUGIN_COMMAND_MZ, SCRIPT_EVAL } from "@RpgTypes/libs/eventCommand";
 import type {
   BattleEventPage,
-  Command_PluginCommandMZ,
-  Command_ScriptHeader,
   Data_CommonEventUnknown,
   Data_Map,
   Data_TroopUnknonw,
@@ -11,21 +9,15 @@ import type {
   MapEventPage,
   NormalizedEventCommand,
   NoteReplaceHandlers,
-  TextReplaceHandlers,
 } from "@RpgTypes/rmmz";
 import { replaceNoteWithHandlers } from "@RpgTypes/rmmz";
 import { normalizeEventCommands } from "./core/eventCommand/normalize";
 import { replaceBasicEventCommandTexts } from "./core/replace/text/eventCommand";
 import { replaceTextByHandlers } from "./core/replace/text/utils";
-
-export interface ReplaceEventTextHandlers extends TextReplaceHandlers {
-  pluginCommand: (command: Command_PluginCommandMZ) => Command_PluginCommandMZ;
-  scriptCommand: (command: Command_ScriptHeader) => Command_ScriptHeader;
-  replaceText: (key: string) => string | undefined;
-}
-
-export type MapDataReplaceHandlers = ReplaceEventTextHandlers &
-  NoteReplaceHandlers;
+import type {
+  ReplaceEventTextHandlers,
+  MapDataReplaceHandlers,
+} from "./core/replace/types";
 
 export const replaceEventCommandTexts = (
   commandList: ReadonlyArray<EventCommand>,
