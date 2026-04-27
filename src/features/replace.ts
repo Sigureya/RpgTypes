@@ -24,6 +24,9 @@ export interface ReplaceEventTextHandlers extends TextReplaceHandlers {
   replaceText: (key: string) => string | undefined;
 }
 
+export type MapDataReplaceHandlers = ReplaceEventTextHandlers &
+  NoteReplaceHandlers;
+
 export const replaceEventCommandTexts = (
   commandList: ReadonlyArray<EventCommand>,
   handlers: ReplaceEventTextHandlers,
@@ -128,14 +131,14 @@ export const replaceMapTexts = (
 
 export const replaceMapData = (
   mapData: Data_Map<EventCommand>,
-  handlers: ReplaceEventTextHandlers & NoteReplaceHandlers,
+  handlers: MapDataReplaceHandlers,
 ): Data_Map<NormalizedEventCommand> => {
   return replaceMapDataTextsCore(mapData, handlers);
 };
 
 const replaceMapEventTexts = (
   mapEvent: MapEvent<EventCommand>,
-  handlers: ReplaceEventTextHandlers & NoteReplaceHandlers,
+  handlers: MapDataReplaceHandlers,
 ): MapEvent<NormalizedEventCommand> => {
   return {
     id: mapEvent.id,
