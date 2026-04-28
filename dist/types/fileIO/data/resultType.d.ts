@@ -1,4 +1,4 @@
-import { Data_Actor, Data_Animation, Data_Armor, Data_Class, Data_CommonEvent, Data_Enemy, Data_Item, Data_Map, Data_MapInfo, Data_Skill, Data_State, Data_Tileset, Data_Troop, Data_Weapon } from '../../rmmz';
+import { Data_Actor, Data_Animation, Data_Armor, Data_Class, Data_CommonEventUnknown, Data_Enemy, Data_Item, Data_Map, Data_MapInfo, Data_Skill, Data_State, Data_Tileset, Data_TroopUnknonw, Data_Weapon, EventCommand, EventCommandUnknown } from '../../rmmz';
 import { ReadArrayResult } from './arrayData';
 import { MapBatchReadResult } from './map';
 import { ReadSystemResult } from './system';
@@ -77,20 +77,20 @@ export interface ReadGameDataResultNullable<Common, Map, System, Actor, Skill, I
     animations: ReadHandledResult<Animation, null>;
     tilesets: ReadHandledResult<Tileset, null>;
 }
-export interface RawGameData extends ReadAllDataFields {
+export interface RawGameData<Command extends EventCommandUnknown = EventCommand> extends ReadAllDataFields {
     actors: ReadArrayResult<Data_Actor>;
     armors: ReadArrayResult<Data_Armor>;
     classes: ReadArrayResult<Data_Class>;
-    commonEvents: ReadArrayResult<Data_CommonEvent>;
+    commonEvents: ReadArrayResult<Data_CommonEventUnknown<Command>>;
     enemies: ReadArrayResult<Data_Enemy>;
     items: ReadArrayResult<Data_Item>;
     mapInfos: ReadArrayResult<Data_MapInfo>;
     skills: ReadArrayResult<Data_Skill>;
     states: ReadArrayResult<Data_State>;
     system: ReadSystemResult;
-    troops: ReadArrayResult<Data_Troop>;
+    troops: ReadArrayResult<Data_TroopUnknonw<Command>>;
     weapons: ReadArrayResult<Data_Weapon>;
     tilesets: ReadArrayResult<Data_Tileset>;
     animations: ReadArrayResult<Data_Animation>;
-    mapFiles: MapBatchReadResult<Data_Map>;
+    mapFiles: MapBatchReadResult<Data_Map<Command>>;
 }

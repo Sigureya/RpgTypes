@@ -5,4 +5,6 @@ export * from './system';
 export * from './systemLabels';
 export * from './systemMV';
 export * from './systemSegments';
-export { makeSystemData, makeSystemDataFromMV, makeSystemDataMV, } from './makeSystem';
+export * from './types';
+export { makeSystemData } from './makeSystem';
+export { makeSystemDataFromMV, makeSystemDataMV, makeTestSystemData, } from './makeSystemEx';
