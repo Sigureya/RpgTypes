@@ -305,7 +305,7 @@ const hx = (
     return handlers.replaceText(key);
   },
   isReplaceTargetNote(item): boolean {
-    if (ssx.has(item.key)) {
+    if (!ssx.has(item.key)) {
       return false;
     }
     return handlers.isReplaceTargetNote(item);
