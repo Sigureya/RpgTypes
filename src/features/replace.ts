@@ -268,12 +268,12 @@ const mapReadArrayResult = <T, R>(
   };
 };
 
-export const gff = (
+export const replaceRawDataWithAutoNoteFilter = (
   data: RawGameData,
   assetBundle: AssetFilesBundle,
   extractor: EventContainerExtractor,
   handlers: MapDataReplaceHandlers,
-) => {
+): RawGameData<NormalizedEventCommand> => {
   // まずテキストを抽出し
   const e = extractTextFromRawGameData(data, extractor);
   // 正規化済みノートを取得
@@ -285,13 +285,13 @@ export const gff = (
   );
   // ハンドラを微修正。
   // noteから自動算出した非テキストノートキーをisReplaceTargetNoteで弾くようにする
-  const h2 = hx(n.nonTextNoteKeys, handlers);
+  const h2 = lapHandlers(n.nonTextNoteKeys, handlers);
 
   // 置換処理を実行
   return replaceRawDataBundle(data, h2);
 };
 
-const hx = (
+const lapHandlers = (
   ssx: ReadonlySet<string>,
   handlers: MapDataReplaceHandlers,
 ): MapDataReplaceHandlers => ({

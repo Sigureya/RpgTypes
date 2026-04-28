@@ -25,9 +25,14 @@ import type {
   ExtractedBattleEventText,
   ExtractedMapTexts,
 } from "./extractText";
-import { replaceRawDataBundle, gff } from "./replace";
+import {
+  replaceRawDataBundle,
+  replaceRawDataWithAutoNoteFilter,
+} from "./replace";
 
 const IMAGE_NAME = "ImageName";
+const VALIABLE_TEXT = "Variables";
+const SWITCHES_TEXT = "Switches";
 
 const MSG_FILEREAD_SUCCESS = "File read successfully";
 
@@ -151,8 +156,8 @@ const makeMockDataBundle = ({ text, image, note }: PPP): RawGameData => {
         text,
         image,
         audio: "AudioName",
-        switches: "Switches",
-        variables: "Variables",
+        switches: SWITCHES_TEXT,
+        variables: VALIABLE_TEXT,
       }),
       message: MSG_FILEREAD_SUCCESS,
     },
@@ -243,6 +248,7 @@ describe("replaceRawDataBundle", () => {
       newText: "BBB",
     });
     const result = replaceRawDataBundle(baseData, handlers);
+    // エラーが長くなるので1個ずつ比較
     expect(result.actors).toEqual(expectedData.actors);
     expect(result.armors).toEqual(expectedData.armors);
     expect(result.classes).toEqual(expectedData.classes);
@@ -251,7 +257,10 @@ describe("replaceRawDataBundle", () => {
     expect(result.skills).toEqual(expectedData.skills);
     expect(result.states).toEqual(expectedData.states);
     expect(result.system).toEqual(expectedData.system);
+    expect(result.troops).toEqual(baseData.troops);
+    expect(result.commonEvents).toEqual(baseData.commonEvents);
 
+    // メンバ漏れが無いか検証するために全体を比較
     expect(result).toEqual(expectedData);
   });
   test("handlers", () => {
@@ -261,6 +270,10 @@ describe("replaceRawDataBundle", () => {
     replaceRawDataBundle(baseData, handlers);
     expect(handlers.replaceText).toHaveBeenCalledWith("AAA");
     expect(handlers.replaceText).not.toHaveBeenCalledWith(noteText);
+    expect(handlers.replaceText).not.toHaveBeenCalledWith(IMAGE_NAME);
+    expect(handlers.replaceText).not.toHaveBeenCalledWith("AudioName");
+    expect(handlers.replaceText).not.toHaveBeenCalledWith(VALIABLE_TEXT);
+    expect(handlers.replaceText).not.toHaveBeenCalledWith(SWITCHES_TEXT);
   });
 });
 
@@ -281,10 +294,11 @@ describe("gff", () => {
       image: IMAGE_NAME,
       note: newNote,
     });
-    const result = gff(
+    const extractor = createExtractor();
+    const result = replaceRawDataWithAutoNoteFilter(
       baseData,
       createAssetBundle(),
-      createExtractor(),
+      extractor,
       handlers,
     );
     expect(result.actors).toEqual(expectedData.actors);
@@ -295,5 +309,35 @@ describe("gff", () => {
     expect(result.skills).toEqual(expectedData.skills);
     expect(result.states).toEqual(expectedData.states);
     expect(result.system).toEqual(expectedData.system);
+  });
+  test("handlers", () => {
+    const handlers = createHandlers({
+      newText: "BBB",
+    });
+    const extractor = createExtractor();
+    replaceRawDataWithAutoNoteFilter(
+      baseData,
+      createAssetBundle(),
+      extractor,
+      handlers,
+    );
+    baseData.commonEvents.data.forEach((common) => {
+      expect(extractor.extractCommonEventText).toHaveBeenCalledWith(common);
+    });
+    expect(extractor.extractCommonEventText).toHaveBeenCalledTimes(
+      baseData.commonEvents.data.length,
+    );
+    baseData.troops.data.forEach((troop) => {
+      expect(extractor.extractBattleText).toHaveBeenCalledWith(troop);
+    });
+    expect(extractor.extractBattleText).toHaveBeenCalledTimes(
+      baseData.troops.data.length,
+    );
+    baseData.mapFiles.validMaps.forEach((mapFile) => {
+      expect(extractor.extractMapTexts).toHaveBeenCalledWith(mapFile.map);
+    });
+    expect(extractor.extractMapTexts).toHaveBeenCalledTimes(
+      baseData.mapFiles.validMaps.length,
+    );
   });
 });
