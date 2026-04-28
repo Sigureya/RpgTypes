@@ -1,4 +1,4 @@
-import type { TestDataSource, TestDataSourceWithNote } from "@RpgTypes/libs";
+import type { TestDataSourceWithNote } from "@RpgTypes/libs";
 import type {
   Data_Actor,
   Data_Armor,
@@ -33,50 +33,50 @@ export const makeActorDataFromTestSoruce = (
 };
 
 export const makeClassDataFromTestSoruce = (
-  soruce: TestDataSource,
+  soruce: TestDataSourceWithNote,
 ): Data_Class => {
   return makeClassData({
     name: soruce.text,
-    note: soruce.text,
+    note: soruce.note,
   });
 };
 
 export const makeWeaponDataFromTestSoruce = (
-  soruce: TestDataSource,
+  soruce: TestDataSourceWithNote,
 ): Data_Weapon => {
   return makeWeaponData({
     name: soruce.text,
-    note: soruce.text,
+    note: soruce.note,
     description: soruce.text,
   });
 };
 
 export const makeArmorDataFromTestSoruce = (
-  soruce: TestDataSource,
+  soruce: TestDataSourceWithNote,
 ): Data_Armor => {
   return makeArmorData({
     name: soruce.text,
-    note: soruce.text,
+    note: soruce.note,
     description: soruce.text,
   });
 };
 
 export const makeEnemyDataFromTestSoruce = (
-  soruce: TestDataSource,
+  soruce: TestDataSourceWithNote,
 ): Data_Enemy => {
   return makeEnemyData({
     name: soruce.text,
-    note: soruce.text,
+    note: soruce.note,
     battlerName: soruce.image,
   });
 };
 
 export const makeStateDataFromTestSoruce = (
-  soruce: TestDataSource,
+  soruce: TestDataSourceWithNote,
 ): Data_State => {
   return makeStateData({
     name: soruce.text,
-    note: soruce.text,
+    note: soruce.note,
     message1: soruce.text,
     message2: soruce.text,
     message3: soruce.text,
@@ -85,11 +85,11 @@ export const makeStateDataFromTestSoruce = (
 };
 
 export const makeSkillDataFromTestSoruce = (
-  soruce: TestDataSource,
+  soruce: TestDataSourceWithNote,
 ): Data_Skill => {
   return makeSkillData({
     name: soruce.text,
-    note: soruce.text,
+    note: soruce.note,
     iconIndex: 0,
     description: soruce.text,
     message1: soruce.text,
@@ -98,11 +98,11 @@ export const makeSkillDataFromTestSoruce = (
 };
 
 export const makeItemDataFromTestSoruce = (
-  soruce: TestDataSource,
+  soruce: TestDataSourceWithNote,
 ): Data_Item => {
   return makeItemData({
     name: soruce.text,
-    note: soruce.text,
+    note: soruce.note,
     iconIndex: 0,
     description: soruce.text,
   });

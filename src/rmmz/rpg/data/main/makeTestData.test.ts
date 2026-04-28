@@ -33,31 +33,31 @@ describe("makeTestData", () => {
   test("makeClassDataFromTestSoruce", () => {
     const result = makeClassDataFromTestSoruce(source);
     expect(result.name).toBe(source.text);
-    expect(result.note).toBe(source.text);
+    expect(result.note).toBe(source.note);
   });
 
   test("makeWeaponDataFromTestSoruce", () => {
     const result = makeWeaponDataFromTestSoruce(source);
     expect(result.name).toBe(source.text);
-    expect(result.note).toBe(source.text);
+    expect(result.note).toBe(source.note);
     expect(result.description).toBe(source.text);
   });
   test("makeArmorDataFromTestSoruce", () => {
     const result = makeArmorDataFromTestSoruce(source);
     expect(result.name).toBe(source.text);
-    expect(result.note).toBe(source.text);
+    expect(result.note).toBe(source.note);
     expect(result.description).toBe(source.text);
   });
   test("makeEnemyDataFromTestSoruce", () => {
     const result = makeEnemyDataFromTestSoruce(source);
     expect(result.name).toBe(source.text);
-    expect(result.note).toBe(source.text);
+    expect(result.note).toBe(source.note);
     expect(result.battlerName).toBe(source.image);
   });
   test("makeStateDataFromTestSoruce", () => {
     const result = makeStateDataFromTestSoruce(source);
     expect(result.name).toBe(source.text);
-    expect(result.note).toBe(source.text);
+    expect(result.note).toBe(source.note);
     expect(result.message1).toBe(source.text);
     expect(result.message2).toBe(source.text);
     expect(result.message3).toBe(source.text);
@@ -66,13 +66,13 @@ describe("makeTestData", () => {
   test("makeSkillDataFromTestSoruce", () => {
     const result = makeSkillDataFromTestSoruce(source);
     expect(result.name).toBe(source.text);
-    expect(result.note).toBe(source.text);
+    expect(result.note).toBe(source.note);
     expect(result.description).toBe(source.text);
   });
   test("makeItemDataFromTestSoruce", () => {
     const result = makeItemDataFromTestSoruce(source);
     expect(result.name).toBe(source.text);
-    expect(result.note).toBe(source.text);
+    expect(result.note).toBe(source.note);
     expect(result.description).toBe(source.text);
   });
 });
