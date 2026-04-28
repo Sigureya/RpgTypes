@@ -155,7 +155,7 @@ describe("replaceRawDataBundle", () => {
   });
 });
 
-describe("gff", () => {
+describe("replaceRawDataWithAutoNoteFilter", () => {
   const noteText = makeNoteText("AAA", "456");
   const baseData = makeMockDataBundle({
     text: "AAA",
@@ -204,23 +204,30 @@ describe("gff", () => {
       extractor,
       handlers,
     );
-    baseData.commonEvents.data.forEach((common) => {
-      expect(extractor.extractCommonEventText).toHaveBeenCalledWith(common);
-    });
+    expect(handlers.replaceText).toHaveBeenCalledWith("AAA");
+    expect(handlers.replaceText).not.toHaveBeenCalledWith(noteText);
+    expect(handlers.replaceText).not.toHaveBeenCalledWith(IMAGE_NAME);
+    expect(handlers.replaceText).not.toHaveBeenCalledWith("AudioName");
+    expect(handlers.replaceText).not.toHaveBeenCalledWith(VALIABLE_TEXT);
+    expect(handlers.replaceText).not.toHaveBeenCalledWith(SWITCHES_TEXT);
+    expect(handlers.replaceText).not.toHaveBeenCalledWith("456");
     expect(extractor.extractCommonEventText).toHaveBeenCalledTimes(
       baseData.commonEvents.data.length,
     );
-    baseData.troops.data.forEach((troop) => {
-      expect(extractor.extractBattleText).toHaveBeenCalledWith(troop);
-    });
     expect(extractor.extractBattleText).toHaveBeenCalledTimes(
       baseData.troops.data.length,
     );
-    baseData.mapFiles.validMaps.forEach((mapFile) => {
-      expect(extractor.extractMapTexts).toHaveBeenCalledWith(mapFile.map);
-    });
     expect(extractor.extractMapTexts).toHaveBeenCalledTimes(
       baseData.mapFiles.validMaps.length,
     );
+    baseData.commonEvents.data.forEach((common) => {
+      expect(extractor.extractCommonEventText).toHaveBeenCalledWith(common);
+    });
+    baseData.troops.data.forEach((troop) => {
+      expect(extractor.extractBattleText).toHaveBeenCalledWith(troop);
+    });
+    baseData.mapFiles.validMaps.forEach((mapFile) => {
+      expect(extractor.extractMapTexts).toHaveBeenCalledWith(mapFile.map);
+    });
   });
 });
