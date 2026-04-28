@@ -1,5 +1,6 @@
 export * from "./arrayData";
 export * from "./collect";
+export * from "./makeTestData";
 export * from "./map";
 export * from "./readAll";
 export * from "./reader";

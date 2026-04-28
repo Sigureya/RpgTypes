@@ -1,3 +1,7 @@
+import type {
+  SystemTestDataSource,
+  TestDataSourceWithNote,
+} from "@RpgTypes/libs";
 import type { MainDataFileNames } from "./arrayData";
 import type { FILENAME_SYSTEM } from "./system";
 
@@ -10,4 +14,10 @@ export interface DataReadErrorItem {
 export interface DataReadErrors {
   main: DataReadErrorItem[];
   map: DataReadErrorItem[];
+}
+
+export interface TestRawDataSource
+  extends SystemTestDataSource, TestDataSourceWithNote {
+  message: string;
+  nonReplaceableText: string;
 }

@@ -1,3 +1,4 @@
+import type { SystemTestDataSource } from "@RpgTypes/libs";
 import { makeAudioFileParams } from "@RpgTypes/libs";
 import type { System_SoundsObject } from "./core";
 import {
@@ -12,7 +13,6 @@ import {
 import { makeSystemData } from "./makeSystem";
 import type { Data_System } from "./system";
 import type { Data_SystemMV } from "./systemMV";
-import type { SystemTestDataSource } from "./types/testDataSoruce";
 
 export const makeSystemDataMV = (
   data: Data_System = makeSystemData({}),
