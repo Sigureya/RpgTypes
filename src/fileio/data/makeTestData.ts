@@ -14,25 +14,24 @@ import {
 import type { ReadArrayResult } from "./arrayData";
 import {
   FILENAME_ACTORS,
+  FILENAME_ANIMATIONS,
   FILENAME_ARMORS,
   FILENAME_CLASSES,
   FILENAME_COMMON_EVENTS,
   FILENAME_ENEMIES,
   FILENAME_ITEMS,
+  FILENAME_MAP_INFOS,
   FILENAME_SKILLS,
   FILENAME_STATES,
+  FILENAME_TILESET,
   FILENAME_TROOPS,
   FILENAME_WEAPONS,
 } from "./arrayData";
 import type { RawGameData } from "./resultType";
 import type { TestRawDataSource } from "./types";
 
-const NON_REPLACEABLE_TEXT = "";
-const VALIABLE_TEXT = "Variables";
-const SWITCHES_TEXT = "Switches";
-
 export const makeMockDataBundle = (soruce: TestRawDataSource): RawGameData => {
-  const { text, image, message } = soruce;
+  const { message } = soruce;
   return {
     actors: makeReadResult(
       makeActorDataFromTestSoruce(soruce),
@@ -77,7 +76,7 @@ export const makeMockDataBundle = (soruce: TestRawDataSource): RawGameData => {
     troops: makeReadResult(
       makeTroopData({
         id: 1,
-        name: NON_REPLACEABLE_TEXT,
+        name: soruce.nonReplaceableText,
       }),
       message,
       FILENAME_TROOPS,
@@ -85,22 +84,16 @@ export const makeMockDataBundle = (soruce: TestRawDataSource): RawGameData => {
     commonEvents: makeReadResult(
       makeCommonEventData({
         id: 1,
-        name: NON_REPLACEABLE_TEXT,
+        name: soruce.nonReplaceableText,
       }),
       message,
       FILENAME_COMMON_EVENTS,
     ),
-    mapInfos: makeEmptyReadResult(),
-    animations: makeEmptyReadResult(),
-    tilesets: makeEmptyReadResult(),
+    mapInfos: makeEmptyReadResult(message, FILENAME_MAP_INFOS),
+    animations: makeEmptyReadResult(message, FILENAME_ANIMATIONS),
+    tilesets: makeEmptyReadResult(message, FILENAME_TILESET),
     system: {
-      system: makeTestSystemData({
-        text,
-        image,
-        audio: "AudioName",
-        switches: SWITCHES_TEXT,
-        variables: VALIABLE_TEXT,
-      }),
+      system: makeTestSystemData(soruce),
       message: message,
     },
     mapFiles: {
@@ -111,10 +104,13 @@ export const makeMockDataBundle = (soruce: TestRawDataSource): RawGameData => {
   };
 };
 
-const makeEmptyReadResult = <T>(): ReadArrayResult<T> => ({
+const makeEmptyReadResult = <T>(
+  msg: string,
+  filename: string,
+): ReadArrayResult<T> => ({
   data: [],
-  error: "",
-  fileName: "mockFile",
+  error: msg,
+  fileName: filename,
   success: true,
 });
 
