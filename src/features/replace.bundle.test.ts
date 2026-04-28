@@ -5,18 +5,19 @@ import type {
   RawGameData,
   ReadArrayResult,
 } from "@RpgTypes/fileio";
+import type { TestDataSourceWithNote } from "@RpgTypes/libs";
 import {
-  makeActorData,
-  makeArmorData,
-  makeClassData,
-  makeWeaponData,
-  makeItemData,
-  makeEnemyData,
-  makeSkillData,
-  makeStateData,
   makeTroopData,
   makeCommonEventData,
   makeTestSystemData,
+  makeClassDataFromTestSoruce,
+  makeActorDataFromTestSoruce,
+  makeArmorDataFromTestSoruce,
+  makeWeaponDataFromTestSoruce,
+  makeItemDataFromTestSoruce,
+  makeEnemyDataFromTestSoruce,
+  makeSkillDataFromTestSoruce,
+  makeStateDataFromTestSoruce,
 } from "@RpgTypes/rmmz";
 import type { Data_CommonEvent, Data_Map, Data_Troop } from "@RpgTypes/rmmz";
 import type { MapDataReplaceHandlers } from "./core/replace";
@@ -56,86 +57,17 @@ const makeEmptyReadResult = <T>(): ReadArrayResult<T> => ({
   success: true,
 });
 
-interface PPP {
-  text: string;
-  image: string;
-  note: string;
-}
-
-const makeMockDataBundle = ({ text, image, note }: PPP): RawGameData => {
+const makeMockDataBundle = (soruce: TestDataSourceWithNote): RawGameData => {
+  const { text, image } = soruce;
   return {
-    actors: makeReadResult(
-      makeActorData({
-        id: 1,
-        name: text,
-        nickname: text,
-        profile: text,
-        battlerName: image,
-        characterName: image,
-        faceName: image,
-        note: note,
-      }),
-    ),
-    classes: makeReadResult(
-      makeClassData({
-        id: 1,
-        name: text,
-        note: note,
-      }),
-    ),
-    armors: makeReadResult(
-      makeArmorData({
-        id: 1,
-        name: text,
-        description: text,
-        note: note,
-      }),
-    ),
-    weapons: makeReadResult(
-      makeWeaponData({
-        id: 1,
-        name: text,
-        description: text,
-        note: note,
-      }),
-    ),
-    items: makeReadResult(
-      makeItemData({
-        id: 1,
-        name: text,
-        description: text,
-        note: note,
-      }),
-    ),
-    enemies: makeReadResult(
-      makeEnemyData({
-        id: 1,
-        name: text,
-        battlerName: image,
-        note: note,
-      }),
-    ),
-    skills: makeReadResult(
-      makeSkillData({
-        id: 1,
-        name: text,
-        description: text,
-        message1: text,
-        message2: text,
-        note: note,
-      }),
-    ),
-    states: makeReadResult(
-      makeStateData({
-        id: 1,
-        name: text,
-        message1: text,
-        message2: text,
-        message3: text,
-        message4: text,
-        note: note,
-      }),
-    ),
+    actors: makeReadResult(makeActorDataFromTestSoruce(soruce)),
+    classes: makeReadResult(makeClassDataFromTestSoruce(soruce)),
+    armors: makeReadResult(makeArmorDataFromTestSoruce(soruce)),
+    weapons: makeReadResult(makeWeaponDataFromTestSoruce(soruce)),
+    items: makeReadResult(makeItemDataFromTestSoruce(soruce)),
+    enemies: makeReadResult(makeEnemyDataFromTestSoruce(soruce)),
+    skills: makeReadResult(makeSkillDataFromTestSoruce(soruce)),
+    states: makeReadResult(makeStateDataFromTestSoruce(soruce)),
     troops: makeReadResult(
       makeTroopData({
         id: 1,
@@ -237,11 +169,13 @@ describe("replaceRawDataBundle", () => {
     text: "AAA",
     image: IMAGE_NAME,
     note: noteText,
+    audio: "AudioName",
   });
   const expectedData = makeMockDataBundle({
     text: "BBB",
     image: IMAGE_NAME,
     note: makeNoteText("BBB", "BBB"),
+    audio: "AudioName",
   });
   test("result", () => {
     const handlers = createHandlers({
@@ -283,6 +217,7 @@ describe("gff", () => {
     text: "AAA",
     image: IMAGE_NAME,
     note: noteText,
+    audio: "AudioName",
   });
   test("result", () => {
     const handlers = createHandlers({
@@ -293,6 +228,7 @@ describe("gff", () => {
       text: "BBB",
       image: IMAGE_NAME,
       note: newNote,
+      audio: "AudioName",
     });
     const extractor = createExtractor();
     const result = replaceRawDataWithAutoNoteFilter(
