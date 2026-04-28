@@ -2,7 +2,7 @@ import { describe, test, expect } from "vitest";
 import { makeTestSystemData } from "./makeSystemEx";
 import type { Data_System } from "./system";
 
-const expected: Data_System = {
+const expected = {
   advanced: {
     fallbackFonts: "",
     fontSize: 28,
@@ -30,7 +30,7 @@ const expected: Data_System = {
     startX: 0,
     startY: 0,
   },
-  armorTypes: ["text"],
+  armorTypes: ["text", "text"],
   attackMotions: [],
   battleBgm: {
     name: "audio",
@@ -69,8 +69,8 @@ const expected: Data_System = {
     messageWidth1: 816,
     messageWidth2: 816,
   },
-  elements: ["text"],
-  equipTypes: ["text"],
+  elements: ["text", "text"],
+  equipTypes: ["text", "text"],
   faceSize: 144,
   gameTitle: "text",
   gameoverMe: {
@@ -110,7 +110,7 @@ const expected: Data_System = {
     startX: 0,
     startY: 0,
   },
-  skillTypes: ["text"],
+  skillTypes: ["text", "text"],
   sounds: [
     {
       name: "audio",
@@ -260,7 +260,7 @@ const expected: Data_System = {
   startMapId: 0,
   startX: 0,
   startY: 0,
-  switches: ["text"],
+  switches: ["switches", "switches"],
   terms: {
     basic: [
       "text",
@@ -386,7 +386,7 @@ const expected: Data_System = {
     offsetX: 0,
     offsetY: 0,
   },
-  variables: ["text"],
+  variables: ["variables", "variables"],
   versionId: 1,
   victoryMe: {
     name: "audio",
@@ -394,16 +394,17 @@ const expected: Data_System = {
     pitch: 100,
     volume: 100,
   },
-  weaponTypes: ["text"],
+  weaponTypes: ["text", "text"],
   windowTone: [0, 0, 0, 0],
 };
-
 describe("makeTestSystemData", () => {
   test("returns expected structure", () => {
     const result: Data_System = makeTestSystemData({
       audio: "audio",
       image: "image",
       text: "text",
+      switches: "switches",
+      variables: "variables",
     });
     expect(result).toEqual(expected);
   });

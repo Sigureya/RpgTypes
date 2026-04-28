@@ -83,6 +83,10 @@ describe("replaceActorText", () => {
     expect(handlers.replaceText).toHaveBeenCalledWith(actor.nickname);
     expect(handlers.replaceText).toHaveBeenCalledWith(actor.profile);
     expect(handlers.replaceText).toHaveBeenCalledWith("foo");
+    expect(handlers.replaceText).not.toHaveBeenCalledWith(actor.note);
+    expect(handlers.replaceText).not.toHaveBeenCalledWith(actor.battlerName);
+    expect(handlers.replaceText).not.toHaveBeenCalledWith(actor.characterName);
+    expect(handlers.replaceText).not.toHaveBeenCalledWith(actor.faceName);
     expect(handlers.replaceText).toHaveBeenCalledTimes(4);
     expect(handlers.isReplaceTargetNote).toBeCalledTimes(1);
     expect(handlers.isReplaceTargetNote).toHaveBeenCalledWith(noteItem);
@@ -129,6 +133,8 @@ describe("replaceEnemyText", () => {
     expect(handlers.replaceText).toHaveBeenCalledWith(enemy.name);
     expect(handlers.replaceText).toHaveBeenCalledWith("goo");
     expect(handlers.replaceText).toHaveBeenCalledTimes(2);
+    expect(handlers.replaceText).not.toHaveBeenCalledWith(enemy.note);
+    expect(handlers.replaceText).not.toHaveBeenCalledWith(enemy.battlerName);
     expect(handlers.isReplaceTargetNote).toBeCalledTimes(1);
     expect(handlers.isReplaceTargetNote).toHaveBeenCalledWith(noteItem);
   });
@@ -170,6 +176,7 @@ describe("replaceClassText", () => {
     replaceClassText(data, handlers);
     expect(handlers.replaceText).toHaveBeenCalledWith(data.name);
     expect(handlers.replaceText).toHaveBeenCalledWith("sword");
+    expect(handlers.replaceText).not.toHaveBeenCalledWith(data.note);
     expect(handlers.replaceText).toHaveBeenCalledTimes(2);
     expect(handlers.isReplaceTargetNote).toBeCalledTimes(1);
     expect(handlers.isReplaceTargetNote).toHaveBeenCalledWith(noteItem);
@@ -218,6 +225,7 @@ describe("replaceSkillText", () => {
     expect(handlers.replaceText).toHaveBeenCalledWith(skill.description);
     expect(handlers.replaceText).toHaveBeenCalledWith(skill.message1);
     expect(handlers.replaceText).toHaveBeenCalledWith(skill.message2);
+    expect(handlers.replaceText).not.toHaveBeenCalledWith(skill.note);
     expect(handlers.replaceText).toHaveBeenCalledWith("hot");
     expect(handlers.replaceText).toHaveBeenCalledTimes(5);
     expect(handlers.isReplaceTargetNote).toBeCalledTimes(1);
@@ -260,6 +268,7 @@ describe("replaceItemText", () => {
     expect(handlers.replaceText).toHaveBeenCalledWith(item.name);
     expect(handlers.replaceText).toHaveBeenCalledWith(item.description);
     expect(handlers.replaceText).toHaveBeenCalledWith("heal");
+    expect(handlers.replaceText).not.toHaveBeenCalledWith(item.note);
     expect(handlers.replaceText).toHaveBeenCalledTimes(3);
     expect(handlers.isReplaceTargetNote).toBeCalledTimes(1);
     expect(handlers.isReplaceTargetNote).toHaveBeenCalledWith(noteItem);
@@ -314,6 +323,7 @@ describe("replaceStateText", () => {
     expect(handlers.replaceText).toHaveBeenCalledWith(state.message3);
     expect(handlers.replaceText).toHaveBeenCalledWith(state.message4);
     expect(handlers.replaceText).toHaveBeenCalledWith("toxic");
+    expect(handlers.replaceText).not.toHaveBeenCalledWith(state.note);
     expect(handlers.replaceText).toHaveBeenCalledTimes(6);
     expect(handlers.isReplaceTargetNote).toBeCalledTimes(1);
     expect(handlers.isReplaceTargetNote).toHaveBeenCalledWith(noteItem);

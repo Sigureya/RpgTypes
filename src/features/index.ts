@@ -1,6 +1,6 @@
 export * from "./core/extract";
 export * from "./core/extract/item/index";
-export * from "./core/replace/text";
+export * from "./core/replace/index";
 export * from "./core/rpg";
 export * from "./extractText";
 export * from "./format/trait/formatTraits";
