@@ -3,22 +3,10 @@ import { describe, expect, test, vi } from "vitest";
 import type {
   AssetFilesBundle,
   RawGameData,
-  ReadArrayResult,
+  TestRawDataSource,
 } from "@RpgTypes/fileio";
+import { makeRawTestDataBundle } from "@RpgTypes/fileio";
 import type { TestDataSourceWithNote } from "@RpgTypes/libs";
-import {
-  makeTroopData,
-  makeCommonEventData,
-  makeTestSystemData,
-  makeClassDataFromTestSoruce,
-  makeActorDataFromTestSoruce,
-  makeArmorDataFromTestSoruce,
-  makeWeaponDataFromTestSoruce,
-  makeItemDataFromTestSoruce,
-  makeEnemyDataFromTestSoruce,
-  makeSkillDataFromTestSoruce,
-  makeStateDataFromTestSoruce,
-} from "@RpgTypes/rmmz";
 import type { Data_CommonEvent, Data_Map, Data_Troop } from "@RpgTypes/rmmz";
 import type { MapDataReplaceHandlers } from "./core/replace";
 import type {
@@ -43,62 +31,18 @@ const makeNoteText = (text: string, value: string): string => {
   return [`<Text:${text}>`, `<Number:${value}>`].join("\n");
 };
 
-const makeReadResult = <T>(data: T): ReadArrayResult<T> => ({
-  data: [data],
-  error: MSG_FILEREAD_SUCCESS,
-  fileName: "mockFile",
-  success: true,
-});
-
-const makeEmptyReadResult = <T>(): ReadArrayResult<T> => ({
-  data: [],
-  error: "",
-  fileName: "mockFile",
-  success: true,
-});
-
-const makeMockDataBundle = (soruce: TestDataSourceWithNote): RawGameData => {
-  const { text, image } = soruce;
-  return {
-    actors: makeReadResult(makeActorDataFromTestSoruce(soruce)),
-    classes: makeReadResult(makeClassDataFromTestSoruce(soruce)),
-    armors: makeReadResult(makeArmorDataFromTestSoruce(soruce)),
-    weapons: makeReadResult(makeWeaponDataFromTestSoruce(soruce)),
-    items: makeReadResult(makeItemDataFromTestSoruce(soruce)),
-    enemies: makeReadResult(makeEnemyDataFromTestSoruce(soruce)),
-    skills: makeReadResult(makeSkillDataFromTestSoruce(soruce)),
-    states: makeReadResult(makeStateDataFromTestSoruce(soruce)),
-    troops: makeReadResult(
-      makeTroopData({
-        id: 1,
-        name: NON_REPLACEABLE_TEXT,
-      }),
-    ),
-    commonEvents: makeReadResult(
-      makeCommonEventData({
-        id: 1,
-        name: NON_REPLACEABLE_TEXT,
-      }),
-    ),
-    mapInfos: makeEmptyReadResult(),
-    animations: makeEmptyReadResult(),
-    tilesets: makeEmptyReadResult(),
-    system: {
-      system: makeTestSystemData({
-        text,
-        image,
-        audio: "AudioName",
-        switches: SWITCHES_TEXT,
-        variables: VALIABLE_TEXT,
-      }),
-      message: MSG_FILEREAD_SUCCESS,
-    },
-    mapFiles: {
-      info: { success: true },
-      validMaps: [],
-      invalidMaps: [],
-    },
+const makeMockDataBundle = (src: TestDataSourceWithNote): RawGameData => {
+  const soruce: TestRawDataSource = {
+    text: src.text,
+    image: src.image,
+    audio: src.audio,
+    note: src.note,
+    message: MSG_FILEREAD_SUCCESS,
+    nonReplaceableText: NON_REPLACEABLE_TEXT,
+    switches: SWITCHES_TEXT,
+    variables: VALIABLE_TEXT,
   };
+  return makeRawTestDataBundle(soruce);
 };
 
 interface HHH {

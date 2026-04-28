@@ -1,3 +1,8 @@
+import type {
+  Data_Map,
+  MapFileInfo,
+  NormalizedEventCommand,
+} from "@RpgTypes/rmmz";
 import {
   makeActorDataFromTestSoruce,
   makeArmorDataFromTestSoruce,
@@ -11,6 +16,7 @@ import {
   makeTroopData,
   makeWeaponDataFromTestSoruce,
 } from "@RpgTypes/rmmz";
+import { makeMapDataFromTestDataSource } from "@RpgTypes/rmmz/makeTestData";
 import type { ReadArrayResult } from "./arrayData";
 import {
   FILENAME_ACTORS,
@@ -30,7 +36,9 @@ import {
 import type { RawGameData } from "./resultType";
 import type { TestRawDataSource } from "./types";
 
-export const makeMockDataBundle = (soruce: TestRawDataSource): RawGameData => {
+export const makeRawTestDataBundle = (
+  soruce: TestRawDataSource,
+): RawGameData => {
   const { message } = soruce;
   return {
     actors: makeReadResult(
@@ -98,9 +106,19 @@ export const makeMockDataBundle = (soruce: TestRawDataSource): RawGameData => {
     },
     mapFiles: {
       info: { success: true },
-      validMaps: [],
       invalidMaps: [],
+      validMaps: [mmmx(soruce)],
     },
+  };
+};
+
+const mmmx = (
+  soruce: TestRawDataSource,
+): MapFileInfo<Data_Map<NormalizedEventCommand>> => {
+  return {
+    filename: "Map001",
+    editingName: "Test Map",
+    map: makeMapDataFromTestDataSource(soruce),
   };
 };
 
