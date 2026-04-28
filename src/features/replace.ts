@@ -1,3 +1,4 @@
+import type { RawGameData, ReadArrayResult } from "@RpgTypes/fileio";
 import { PLUGIN_COMMAND_MZ, SCRIPT_EVAL } from "@RpgTypes/libs/eventCommand";
 import type {
   BattleEventPage,
@@ -12,6 +13,15 @@ import type {
 } from "@RpgTypes/rmmz";
 import { replaceNoteWithHandlers } from "@RpgTypes/rmmz";
 import { normalizeEventCommands } from "./core/eventCommand/normalize";
+import {
+  replaceActorText,
+  replaceItemText,
+  replaceClassText,
+  replaceEnemyText,
+  replaceSkillText,
+  replaceStateText,
+  replaceSystemText,
+} from "./core/replace";
 import { replaceBasicEventCommandTexts } from "./core/replace/text/eventCommand";
 import { replaceTextByHandlers } from "./core/replace/text/utils";
 import type {
@@ -179,5 +189,73 @@ const replaceMapDataTextsCore = (
     parallaxShow: mapData.parallaxShow,
     parallaxSx: mapData.parallaxSx,
     parallaxSy: mapData.parallaxSy,
+  };
+};
+
+export const replaceRawDataBundle = (
+  data: RawGameData,
+  handlers: MapDataReplaceHandlers,
+): RawGameData<NormalizedEventCommand> => {
+  return {
+    tilesets: data.tilesets,
+    animations: data.animations,
+    actors: mapReadArrayResult(data.actors, (actor) =>
+      replaceActorText(actor, handlers),
+    ),
+    armors: mapReadArrayResult(data.armors, (armor) =>
+      replaceItemText(armor, handlers),
+    ),
+    classes: mapReadArrayResult(data.classes, (item) =>
+      replaceClassText(item, handlers),
+    ),
+    commonEvents: mapReadArrayResult(data.commonEvents, (item) =>
+      replaceCommonEventData(item, handlers),
+    ),
+    enemies: mapReadArrayResult(data.enemies, (item) =>
+      replaceEnemyText(item, handlers),
+    ),
+    items: mapReadArrayResult(data.items, (item) =>
+      replaceItemText(item, handlers),
+    ),
+    mapInfos: data.mapInfos,
+    skills: mapReadArrayResult(data.skills, (item) =>
+      replaceSkillText(item, handlers),
+    ),
+    states: mapReadArrayResult(data.states, (item) =>
+      replaceStateText(item, handlers),
+    ),
+    system: {
+      message: data.system.message,
+      system: data.system.system
+        ? replaceSystemText(data.system.system, handlers.replaceText)
+        : null,
+    },
+    troops: mapReadArrayResult(data.troops, (item) =>
+      replaceTroopData(item, handlers),
+    ),
+    weapons: mapReadArrayResult(data.weapons, (item) =>
+      replaceItemText(item, handlers),
+    ),
+    mapFiles: {
+      info: data.mapFiles.info,
+      invalidMaps: data.mapFiles.invalidMaps,
+      validMaps: data.mapFiles.validMaps.map((item) => ({
+        filename: item.filename,
+        editingName: item.editingName,
+        map: replaceMapData(item.map, handlers),
+      })),
+    },
+  };
+};
+
+const mapReadArrayResult = <T, R>(
+  data: ReadArrayResult<T>,
+  mapper: (value: T) => R,
+): ReadArrayResult<R> => {
+  return {
+    success: data.success,
+    fileName: data.fileName,
+    error: data.error,
+    data: data.success ? data.data.map(mapper) : [],
   };
 };
