@@ -1,4 +1,8 @@
-import type { RawGameData, ReadArrayResult } from "@RpgTypes/fileio";
+import type {
+  AssetFilesBundle,
+  RawGameData,
+  ReadArrayResult,
+} from "@RpgTypes/fileio";
 import { PLUGIN_COMMAND_MZ, SCRIPT_EVAL } from "@RpgTypes/libs/eventCommand";
 import type {
   BattleEventPage,
@@ -9,10 +13,13 @@ import type {
   MapEvent,
   MapEventPage,
   NormalizedEventCommand,
-  NoteReplaceHandlers,
 } from "@RpgTypes/rmmz";
 import { replaceNoteWithHandlers } from "@RpgTypes/rmmz";
 import { normalizeEventCommands } from "./core/eventCommand/normalize";
+import {
+  extractTextFromRawGameData,
+  buildRawGameDataNoteNormalization,
+} from "./core/extract";
 import {
   replaceActorText,
   replaceItemText,
@@ -28,6 +35,7 @@ import type {
   ReplaceEventTextHandlers,
   MapDataReplaceHandlers,
 } from "./core/replace/types";
+import type { EventContainerExtractor } from "./extractText";
 
 export const replaceEventCommandTexts = (
   commandList: ReadonlyArray<EventCommand>,
@@ -159,7 +167,7 @@ const replaceMapEventTexts = (
 
 const replaceMapDataTextsCore = (
   mapData: Data_Map<EventCommand>,
-  handlers: ReplaceEventTextHandlers & NoteReplaceHandlers,
+  handlers: MapDataReplaceHandlers,
 ): Data_Map<NormalizedEventCommand> => {
   // スプレッド構文だと型チェックを通れないので、全て手動でコピー
   return {
@@ -259,3 +267,47 @@ const mapReadArrayResult = <T, R>(
     data: data.success ? data.data.map(mapper) : [],
   };
 };
+
+export const gff = (
+  data: RawGameData,
+  assetBundle: AssetFilesBundle,
+  extractor: EventContainerExtractor,
+  handlers: MapDataReplaceHandlers,
+) => {
+  // まずテキストを抽出し
+  const e = extractTextFromRawGameData(data, extractor);
+  // 正規化済みノートを取得
+  const n = buildRawGameDataNoteNormalization(
+    e,
+    assetBundle.audioFiles,
+    assetBundle.imageFiles,
+    assetBundle.otherFiles,
+  );
+  // ハンドラを微修正。
+  // noteから自動算出した非テキストノートキーをisReplaceTargetNoteで弾くようにする
+  const h2 = hx(n.nonTextNoteKeys, handlers);
+
+  // 置換処理を実行
+  return replaceRawDataBundle(data, h2);
+};
+
+const hx = (
+  ssx: ReadonlySet<string>,
+  handlers: MapDataReplaceHandlers,
+): MapDataReplaceHandlers => ({
+  pluginCommand(command) {
+    return handlers.pluginCommand(command);
+  },
+  scriptCommand(command) {
+    return handlers.scriptCommand(command);
+  },
+  replaceText(key) {
+    return handlers.replaceText(key);
+  },
+  isReplaceTargetNote(item): boolean {
+    if (ssx.has(item.key)) {
+      return false;
+    }
+    return handlers.isReplaceTargetNote(item);
+  },
+});
