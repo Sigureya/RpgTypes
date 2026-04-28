@@ -59,7 +59,10 @@ export const makeStateDataFromTestSoruce = (soruce: TestDataSource) => {
   return makeStateData({
     name: soruce.text,
     note: soruce.text,
-    iconIndex: 0,
+    message1: soruce.text,
+    message2: soruce.text,
+    message3: soruce.text,
+    message4: soruce.text,
   });
 };
 
@@ -69,6 +72,8 @@ export const makeSkillDataFromTestSoruce = (soruce: TestDataSource) => {
     note: soruce.text,
     iconIndex: 0,
     description: soruce.text,
+    message1: soruce.text,
+    message2: soruce.text,
   });
 };
 
