@@ -218,6 +218,7 @@ describe("replaceSkillText", () => {
     expect(handlers.replaceText).toHaveBeenCalledWith(skill.description);
     expect(handlers.replaceText).toHaveBeenCalledWith(skill.message1);
     expect(handlers.replaceText).toHaveBeenCalledWith(skill.message2);
+    expect(handlers.replaceText).not.toHaveBeenCalledWith(skill.note);
     expect(handlers.replaceText).toHaveBeenCalledWith("hot");
     expect(handlers.replaceText).toHaveBeenCalledTimes(5);
     expect(handlers.isReplaceTargetNote).toBeCalledTimes(1);
@@ -260,6 +261,7 @@ describe("replaceItemText", () => {
     expect(handlers.replaceText).toHaveBeenCalledWith(item.name);
     expect(handlers.replaceText).toHaveBeenCalledWith(item.description);
     expect(handlers.replaceText).toHaveBeenCalledWith("heal");
+    expect(handlers.replaceText).not.toHaveBeenCalledWith(item.note);
     expect(handlers.replaceText).toHaveBeenCalledTimes(3);
     expect(handlers.isReplaceTargetNote).toBeCalledTimes(1);
     expect(handlers.isReplaceTargetNote).toHaveBeenCalledWith(noteItem);
