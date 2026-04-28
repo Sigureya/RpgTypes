@@ -1,13 +1,18 @@
-const a = (d) => d.toString().padStart(3, "0"), e = (d = { id: 0 }) => ({
-  name: d.name ?? a(d.id),
-  id: d.id,
-  expanded: d.expanded ?? !1,
-  order: d.order ?? 0,
-  parentId: d.parentId ?? 0,
-  scrollX: d.scrollX ?? 0,
-  scrollY: d.scrollY ?? 0
-});
+import { aO as n, aP as o } from "./eventCommandCodes.es.js";
+const p = (a, e = 0) => ({
+  code: n,
+  indent: e,
+  parameters: [a?.facename ?? "", a?.faceIndex ?? 0, a?.background ?? 0, a?.positionType ?? 2, a?.speakerName ?? ""]
+}), r = (a) => ({
+  facename: a[0],
+  faceIndex: a[1],
+  background: a[2],
+  positionType: a[3],
+  speakerName: a[4] ?? ""
+}), c = (a) => [a.facename, a.faceIndex, a.background, a.positionType, a.speakerName], m = (a, e = 0) => ({ code: o, indent: e, parameters: [a] });
 export {
-  a,
-  e as m
+  m as a,
+  r as f,
+  p as m,
+  c as t
 };

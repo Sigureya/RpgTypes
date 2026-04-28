@@ -1,3 +1,4 @@
 import { TestDataSourceWithNote } from '../libs';
 import { NormalizedEventCommand } from './eventCommand';
-export declare const makeMapDataFromTestDataSource: (soruce: TestDataSourceWithNote) => import('.').Data_Map<NormalizedEventCommand, import('../libs').MoveRouteCommandUnknown>;
+import { Data_Map } from './rpg/data/event';
+export declare const makeMapDataFromTestDataSource: (soruce: TestDataSourceWithNote) => Data_Map<NormalizedEventCommand>;

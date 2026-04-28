@@ -9,3 +9,10 @@ export interface TestDataSourceWithNote extends TestDataSource {
     audio: string;
     note: string;
 }
+export interface SystemTestDataSource extends TestDataSource {
+    text: string;
+    image: string;
+    audio: string;
+    switches: string;
+    variables: string;
+}
