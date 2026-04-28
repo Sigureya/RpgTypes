@@ -245,6 +245,9 @@ describe("gff", () => {
     expect(result.skills).toEqual(expectedData.skills);
     expect(result.states).toEqual(expectedData.states);
     expect(result.system).toEqual(expectedData.system);
+    expect(result.troops).toEqual(baseData.troops);
+    expect(result.commonEvents).toEqual(baseData.commonEvents);
+    expect(result).toEqual(expectedData);
   });
   test("handlers", () => {
     const handlers = createHandlers({
