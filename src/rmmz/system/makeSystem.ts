@@ -154,6 +154,40 @@ export const makeSystemDataFromMV = (data: Data_SystemMV): Data_System => {
   });
 };
 
+export const makeTestSystemData = ({
+  audio,
+  image,
+  text,
+}: {
+  text: string;
+  image: string;
+  audio: string;
+}): Data_System => {
+  return makeSystemData({
+    dataNames: {
+      armorTypes: [text],
+      equipTypes: [text],
+      elements: [text],
+      skillTypes: [text],
+      weaponTypes: [text],
+      switches: [text],
+      variables: [text],
+    },
+    bgm: {
+      titleBgm: makeAudioFileParams({ name: audio, volume: 90, pitch: 100 }),
+      battleBgm: makeAudioFileParams({ name: audio, volume: 90, pitch: 100 }),
+    },
+    images: {
+      title1Name: image,
+      title2Name: image,
+    },
+    texts: {
+      gameTitle: text,
+      currencyUnit: text,
+    },
+  });
+};
+
 export const makeSystemData = (
   fragments: Partial<SystemDataFragments>,
 ): Data_System => {

@@ -9,4 +9,5 @@ export {
   makeSystemData,
   makeSystemDataFromMV,
   makeSystemDataMV,
+  makeTestSystemData,
 } from "./makeSystem";
