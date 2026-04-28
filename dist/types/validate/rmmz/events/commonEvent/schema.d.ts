@@ -1,6 +1,6 @@
 export declare const SCHEMA_DATA_COMMON_EVENT: {
     readonly type: "object";
-    readonly required: ("name" | "id" | "list" | "trigger" | "switchId")[];
+    readonly required: ("name" | "id" | "trigger" | "list" | "switchId")[];
     readonly properties: {
         readonly trigger: {
             readonly type: "integer";

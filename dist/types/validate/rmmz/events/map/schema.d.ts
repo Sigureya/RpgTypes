@@ -261,7 +261,7 @@ export declare const SCHEMA_DATA_MAP: {
             };
         };
     };
-    readonly required: ("data" | "note" | "bgm" | "battleback1Name" | "battleback2Name" | "bgs" | "tilesetId" | "parallaxName" | "specifyBattleback" | "parallaxLoopX" | "parallaxLoopY" | "parallaxShow" | "parallaxSx" | "parallaxSy" | "width" | "height" | "displayName" | "disableDashing" | "autoplayBgm" | "autoplayBgs" | "scrollType" | "encounterStep" | "encounterList" | "events")[];
+    readonly required: ("data" | "note" | "bgm" | "battleback1Name" | "battleback2Name" | "bgs" | "tilesetId" | "events" | "parallaxName" | "specifyBattleback" | "parallaxLoopX" | "parallaxLoopY" | "parallaxShow" | "parallaxSx" | "parallaxSy" | "width" | "height" | "displayName" | "disableDashing" | "autoplayBgm" | "autoplayBgs" | "scrollType" | "encounterStep" | "encounterList")[];
     readonly properties: {
         data: {
             type: string;

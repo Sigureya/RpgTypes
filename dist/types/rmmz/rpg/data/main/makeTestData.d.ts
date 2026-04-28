@@ -1,0 +1,11 @@
+import { TestDataSourceWithNote } from '../../../../libs';
+import { Data_Actor, Data_Armor, Data_Class, Data_Enemy, Data_State, Data_Weapon } from './traitContainers';
+import { Data_Item, Data_Skill } from './usableItems';
+export declare const makeActorDataFromTestSoruce: (soruce: TestDataSourceWithNote) => Data_Actor;
+export declare const makeClassDataFromTestSoruce: (soruce: TestDataSourceWithNote) => Data_Class;
+export declare const makeWeaponDataFromTestSoruce: (soruce: TestDataSourceWithNote) => Data_Weapon;
+export declare const makeArmorDataFromTestSoruce: (soruce: TestDataSourceWithNote) => Data_Armor;
+export declare const makeEnemyDataFromTestSoruce: (soruce: TestDataSourceWithNote) => Data_Enemy;
+export declare const makeStateDataFromTestSoruce: (soruce: TestDataSourceWithNote) => Data_State;
+export declare const makeSkillDataFromTestSoruce: (soruce: TestDataSourceWithNote) => Data_Skill;
+export declare const makeItemDataFromTestSoruce: (soruce: TestDataSourceWithNote) => Data_Item;
