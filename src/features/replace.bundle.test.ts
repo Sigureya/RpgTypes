@@ -14,22 +14,15 @@ import {
   makeEnemyData,
   makeSkillData,
   makeStateData,
-  makeSystemData,
   makeTroopData,
   makeCommonEventData,
+  makeTestSystemData,
 } from "@RpgTypes/rmmz";
-import type {
-  Data_CommonEvent,
-  Data_Map,
-  Data_System,
-  Data_Troop,
-} from "@RpgTypes/rmmz";
-import * as ExtractModule from "./core/extract";
+import type { Data_CommonEvent, Data_Map, Data_Troop } from "@RpgTypes/rmmz";
 import type { MapDataReplaceHandlers } from "./core/replace";
 import type {
   EventContainerExtractor,
   ExtractedBattleEventText,
-  ExtractedCommonEventText,
   ExtractedMapTexts,
 } from "./extractText";
 import { replaceRawDataBundle, gff } from "./replace";
@@ -154,14 +147,12 @@ const makeMockDataBundle = ({ text, image, note }: PPP): RawGameData => {
     animations: makeEmptyReadResult(),
     tilesets: makeEmptyReadResult(),
     system: {
-      system: makeSystemData({
-        texts: {
-          gameTitle: text,
-          currencyUnit: text,
-        },
-        terms: {
-          basic: {},
-        },
+      system: makeTestSystemData({
+        text,
+        image,
+        audio: "AudioName",
+        switches: "Switches",
+        variables: "Variables",
       }),
       message: MSG_FILEREAD_SUCCESS,
     },
@@ -245,13 +236,22 @@ describe("replaceRawDataBundle", () => {
   const expectedData = makeMockDataBundle({
     text: "BBB",
     image: IMAGE_NAME,
-    note: makeNoteText("BBB", "123"),
+    note: makeNoteText("BBB", "BBB"),
   });
   test("result", () => {
     const handlers = createHandlers({
       newText: "BBB",
     });
     const result = replaceRawDataBundle(baseData, handlers);
+    expect(result.actors).toEqual(expectedData.actors);
+    expect(result.armors).toEqual(expectedData.armors);
+    expect(result.classes).toEqual(expectedData.classes);
+    expect(result.enemies).toEqual(expectedData.enemies);
+    expect(result.items).toEqual(expectedData.items);
+    expect(result.skills).toEqual(expectedData.skills);
+    expect(result.states).toEqual(expectedData.states);
+    expect(result.system).toEqual(expectedData.system);
+
     expect(result).toEqual(expectedData);
   });
   test("handlers", () => {
@@ -287,6 +287,13 @@ describe("gff", () => {
       createExtractor(),
       handlers,
     );
-    expect(result).toEqual(expectedData);
+    expect(result.actors).toEqual(expectedData.actors);
+    expect(result.armors).toEqual(expectedData.armors);
+    expect(result.classes).toEqual(expectedData.classes);
+    expect(result.enemies).toEqual(expectedData.enemies);
+    expect(result.items).toEqual(expectedData.items);
+    expect(result.skills).toEqual(expectedData.skills);
+    expect(result.states).toEqual(expectedData.states);
+    expect(result.system).toEqual(expectedData.system);
   });
 });
