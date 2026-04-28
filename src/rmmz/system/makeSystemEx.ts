@@ -12,6 +12,7 @@ import {
 import { makeSystemData } from "./makeSystem";
 import type { Data_System } from "./system";
 import type { Data_SystemMV } from "./systemMV";
+import type { SystemTestDataSource } from "./types/testDataSoruce";
 
 export const makeSystemDataMV = (
   data: Data_System = makeSystemData({}),
@@ -139,11 +140,9 @@ export const makeTestSystemData = ({
   audio,
   image,
   text,
-}: {
-  text: string;
-  image: string;
-  audio: string;
-}): Data_System => {
+  switches,
+  variables,
+}: SystemTestDataSource): Data_System => {
   return makeSystemData({
     me: {
       defeatMe: makeAudioFileParams({ name: audio, volume: 90, pitch: 100 }),
@@ -151,13 +150,13 @@ export const makeTestSystemData = ({
       victoryMe: makeAudioFileParams({ name: audio, volume: 100, pitch: 100 }),
     },
     dataNames: {
-      armorTypes: [text],
-      equipTypes: [text],
-      elements: [text],
-      skillTypes: [text],
-      weaponTypes: [text],
-      switches: [text],
-      variables: [text],
+      armorTypes: [text, text],
+      equipTypes: [text, text],
+      elements: [text, text],
+      skillTypes: [text, text],
+      weaponTypes: [text, text],
+      switches: [switches, switches],
+      variables: [variables, variables],
     },
     bgm: {
       titleBgm: makeAudioFileParams({ name: audio, volume: 90, pitch: 100 }),
