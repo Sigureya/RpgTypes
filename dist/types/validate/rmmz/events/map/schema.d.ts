@@ -50,7 +50,7 @@ export declare const SCHEMA_DATA_MAP: {
                     readonly type: "null";
                 }, {
                     readonly type: "object";
-                    readonly required: ("name" | "id" | "note" | "x" | "y" | "pages")[];
+                    readonly required: ("name" | "id" | "note" | "pages" | "x" | "y")[];
                     readonly properties: {
                         readonly id: {
                             readonly type: "integer";
@@ -261,7 +261,7 @@ export declare const SCHEMA_DATA_MAP: {
             };
         };
     };
-    readonly required: ("data" | "note" | "bgm" | "battleback1Name" | "battleback2Name" | "bgs" | "tilesetId" | "events" | "parallaxName" | "specifyBattleback" | "parallaxLoopX" | "parallaxLoopY" | "parallaxShow" | "parallaxSx" | "parallaxSy" | "width" | "height" | "displayName" | "disableDashing" | "autoplayBgm" | "autoplayBgs" | "scrollType" | "encounterStep" | "encounterList")[];
+    readonly required: ("data" | "note" | "bgm" | "battleback1Name" | "battleback2Name" | "bgs" | "parallaxName" | "specifyBattleback" | "parallaxLoopX" | "parallaxLoopY" | "parallaxShow" | "parallaxSx" | "parallaxSy" | "width" | "height" | "displayName" | "disableDashing" | "autoplayBgm" | "autoplayBgs" | "scrollType" | "tilesetId" | "encounterStep" | "encounterList" | "events")[];
     readonly properties: {
         data: {
             type: string;
