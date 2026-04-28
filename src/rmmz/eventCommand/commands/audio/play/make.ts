@@ -20,6 +20,22 @@ import type {
   CommandUnion_AnyAudio,
 } from "./types";
 
+export const makeTestAudioCommands = ({
+  audio,
+}: {
+  audio: string;
+}): CommandUnion_AnyAudio[] => {
+  return [
+    makeCommandPlayBGM(makeAudioFileParams({ name: audio })),
+    makeCommandPlayBGS(makeAudioFileParams({ name: audio })),
+    makeCommandPlayME(makeAudioFileParams({ name: audio })),
+    makeCommandPlaySE(makeAudioFileParams({ name: audio })),
+    makeCommandChangeBattleBGM(makeAudioFileParams({ name: audio })),
+    makeCommandChangeVictoryME(makeAudioFileParams({ name: audio })),
+    makeCommandChangeDefeatME(makeAudioFileParams({ name: audio })),
+  ];
+};
+
 export const makeAudioCommand = <Code extends CommandUnion_AnyAudio["code"]>(
   code: Code,
   filename: string,

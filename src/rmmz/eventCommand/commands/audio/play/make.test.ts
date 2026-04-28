@@ -17,6 +17,7 @@ import {
   makeCommandPlayBGS,
   makeCommandPlayME,
   makeCommandPlaySE,
+  makeTestAudioCommands,
 } from "./make";
 
 describe("makeCommandAudioAny", () => {
@@ -97,5 +98,16 @@ describe("makeCommandChangeDefeatME", () => {
     expect(command.code).toBe(CHANGE_DEFEAT_ME);
     expect(command.parameters).toEqual([audio]);
     expect(command.parameters[0]).not.toBe(audio);
+  });
+});
+
+describe("makeTestAudioCommands", () => {
+  test("should create a set of audio commands with the given filename", () => {
+    const filename = "test_audio";
+    const commands = makeTestAudioCommands({ audio: filename });
+    commands.forEach((command) => {
+      expect(command.parameters[0].name).toBe(filename);
+      expect(command.parameters[0]).not.toBe(filename);
+    });
   });
 });
