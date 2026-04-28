@@ -14,7 +14,7 @@ import {
   makeCommandScriptHeader,
   makeTroopData,
 } from "@RpgTypes/rmmz";
-import type { ReplaceEventTextHandlers } from "./replace";
+import type { ReplaceEventTextHandlers } from "./core/replace";
 import {
   replaceCommonEventData,
   replaceTroopData,
