@@ -6,12 +6,12 @@ import type {
   Data_Troop,
   EventCommand,
 } from "@RpgTypes/rmmz";
-import type { CommandContainer } from "./rpg";
+import type { CommandContainer } from "./map";
 import {
   collectMapEvents,
   processCommonEvents,
   processTroopEvents,
-} from "./rpg";
+} from "./map";
 
 export const extractActorTexts = (
   actors: ReadonlyArray<Data_Actor>,
