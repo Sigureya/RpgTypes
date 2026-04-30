@@ -10,8 +10,9 @@ import type { PluginMinimumSchema } from "@sigureya/rmmz-plugin-schema";
 import type {
   CommandMapKey,
   CommandArgExtractors,
-  PluginValues,
+  PluginExtractedValue,
   CommandExtractorEntry,
+  PluginStringValue,
 } from "@sigureya/rmmz-plugin-schema/features";
 import { createPluginCommandExtractor } from "@sigureya/rmmz-plugin-schema/features";
 import { JSONPathJS } from "jsonpath-js";
@@ -81,7 +82,7 @@ class GameDataExtractorClass implements GameDataExtractor {
   extractArgs(command: Command_PluginCommandMZ): TextPluginCommandParameter[] {
     const entries = extractPluginCommandMzArgs(command, this._commandMap);
     return entries.args.filter(isSSS).map(
-      (v): TextPluginCommandParameter => ({
+      (v: PluginStringValue): TextPluginCommandParameter => ({
         code: PLUGIN_COMMAND_MZ,
         value: v.value,
         paramIndex: 3,
@@ -101,6 +102,6 @@ class GameDataExtractorClass implements GameDataExtractor {
   }
 }
 
-const isSSS = (v: PluginValues): v is PluginValues & { value: string } => {
+const isSSS = (v: PluginExtractedValue) => {
   return typeof v.value === "string";
 };
