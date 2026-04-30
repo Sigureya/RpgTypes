@@ -1,5 +1,6 @@
 import type { AudioFilesSet, ImageFilesSet } from "@RpgTypes/fileio";
-import type { SummarizedNote, KeyValuePair, OtherFilesSet } from "./types";
+import type { KeyValuePair } from "@RpgTypes/libs";
+import type { SummarizedNote, OtherFilesSet } from "./types";
 
 export const isNoteBoolean = (note: string): boolean => {
   const text = note.trim().toLowerCase();

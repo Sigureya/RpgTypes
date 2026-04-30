@@ -2,10 +2,6 @@ export interface NoteSchema {
     name: string;
     kind: string;
 }
-export interface KeyValuePair {
-    key: string;
-    value: string;
-}
 export interface SummarizedNote {
     key: string;
     kinds: string[];

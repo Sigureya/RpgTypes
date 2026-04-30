@@ -1,6 +1,6 @@
 import { test, expect, describe } from "vitest";
+import type { KeyValuePair } from "@RpgTypes/libs";
 import { categorizeNote } from "./note";
-import type { KeyValuePair } from "./types";
 
 interface TestCase {
   name: string;
