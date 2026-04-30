@@ -1,5 +1,6 @@
 import { test, expect, describe } from "vitest";
 import type { AudioFilesSet, ImageFilesSet } from "@RpgTypes/fileio";
+import type { KeyValuePair } from "@RpgTypes/libs";
 import {
   summarizeNoteKinds,
   isNoteBoolean,
@@ -7,7 +8,7 @@ import {
   stringLikeNoteKeys,
   categorizeNote,
 } from "./note";
-import type { OtherFilesSet, SummarizedNote, KeyValuePair } from "./types";
+import type { OtherFilesSet, SummarizedNote } from "./types";
 
 interface TestCase {
   name: string;

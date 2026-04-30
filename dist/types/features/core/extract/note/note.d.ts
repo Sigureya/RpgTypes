@@ -1,5 +1,6 @@
 import { AudioFilesSet, ImageFilesSet } from '../../../../fileio';
-import { SummarizedNote, KeyValuePair, OtherFilesSet } from './types';
+import { KeyValuePair } from '../../../../libs';
+import { SummarizedNote, OtherFilesSet } from './types';
 export declare const isNoteBoolean: (note: string) => boolean;
 export declare const isNoteNumber: (note: string) => boolean;
 export declare const stringLikeNoteKeys: (list: ReadonlyArray<SummarizedNote>) => Set<string>;
