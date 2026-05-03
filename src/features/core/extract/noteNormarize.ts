@@ -65,19 +65,6 @@ export const buildRawGameDataNoteNormalization = (
   };
 };
 
-const normalizeMainDataNotes = (
-  mainData: ExtractedDataBundle,
-  asset: AssetFilesBundle,
-): ResultOfMain => {
-  const noteSummary = summarizeBundleNoteKinds(mainData, asset);
-  const nonTextNoteKeys = stringLikeNoteKeys(noteSummary);
-  return {
-    noteSummary,
-    nonTextNoteKeys,
-    mainData: normalizeBundleNoteTextsWithKeys(mainData, nonTextNoteKeys),
-  };
-};
-
 const normalizeBundleNoteTextsWithKeys = (
   bundle: ExtractedDataBundle,
   keysSet: ReadonlySet<string>,
@@ -93,6 +80,17 @@ const normalizeBundleNoteTextsWithKeys = (
     items: filterNotesInExtractedText(bundle.items, fn),
     classes: filterNotesInExtractedText(bundle.classes, fn),
   };
+};
+
+export const normalizeNoteFromMapFiles = <
+  Command extends TextPluginCommandParameter,
+>(
+  mapList: readonly MapFileInfo<ExtractedMapTexts<Command>>[],
+  asset: AssetFilesBundle,
+): MapFileInfo<ExtractedMapTexts<Command>>[] => {
+  const summarized = summarizeNoteKindsFromMapFiles(mapList, asset);
+  const keysSet: Set<string> = stringLikeNoteKeys(summarized);
+  return normalizeNoteFromMapFilesWithKeys(mapList, keysSet);
 };
 
 export const nonTextNoteKeys = (
@@ -167,17 +165,6 @@ export const summarizeNoteKindsFromMapFiles = <
   return summarizeNoteKinds(ppx, asset);
 };
 
-export const normalizeNoteFromMapFiles = <
-  Command extends TextPluginCommandParameter,
->(
-  mapList: readonly MapFileInfo<ExtractedMapTexts<Command>>[],
-  asset: AssetFilesBundle,
-): MapFileInfo<ExtractedMapTexts<Command>>[] => {
-  const summarized = summarizeNoteKindsFromMapFiles(mapList, asset);
-  const keysSet: Set<string> = stringLikeNoteKeys(summarized);
-  return normalizeNoteFromMapFilesWithKeys(mapList, keysSet);
-};
-
 interface ResultOfMain {
   noteSummary: SummarizedNote<SummarizedNoteValue>[];
   nonTextNoteKeys: Set<string>;
@@ -188,6 +175,19 @@ interface ResultOfMap {
   noteSummary: SummarizedNote<SummarizedNoteValue>[];
   validMaps: MapFileInfo<ExtractedMapTexts<TextPluginCommandParameter>>[];
 }
+
+const normalizeMainDataNotes = (
+  mainData: ExtractedDataBundle,
+  asset: AssetFilesBundle,
+): ResultOfMain => {
+  const noteSummary = summarizeBundleNoteKinds(mainData, asset);
+  const nonTextNoteKeys = stringLikeNoteKeys(noteSummary);
+  return {
+    noteSummary,
+    nonTextNoteKeys,
+    mainData: normalizeBundleNoteTextsWithKeys(mainData, nonTextNoteKeys),
+  };
+};
 
 const normalizeMapFileNotes = (
   mapList: readonly MapFileInfo<
