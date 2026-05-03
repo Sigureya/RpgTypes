@@ -18,7 +18,7 @@ import { replaceNoteWithHandlers } from "@RpgTypes/rmmz";
 import { normalizeEventCommands } from "./core/eventCommand/normalize";
 import {
   extractTextFromRawGameData,
-  buildRawGameDataNoteNormalization2,
+  buildRawGameDataNoteNormalization,
 } from "./core/extract";
 import {
   replaceActorText,
@@ -277,7 +277,7 @@ export const replaceRawDataWithAutoNoteFilter = (
   // まずテキストを抽出し
   const e = extractTextFromRawGameData(data, extractor);
   // 正規化済みノートを取得
-  const n = buildRawGameDataNoteNormalization2(e, {
+  const n = buildRawGameDataNoteNormalization(e, {
     audioFiles: assetBundle.audioFiles,
     imageFiles: assetBundle.imageFiles,
     otherFiles: assetBundle.otherFiles,

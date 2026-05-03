@@ -3,10 +3,9 @@ import type { AudioFilesSet, ImageFilesSet } from "@RpgTypes/fileio";
 import type { MapFileInfo } from "@RpgTypes/rmmz";
 import type { OtherFilesSet } from "./note/types";
 import {
-  buildRawGameDataNoteNormalization2,
-  nonTextNoteKeys2,
+  buildRawGameDataNoteNormalization,
+  nonTextNoteKeys,
   normalizeBundleNoteTexts,
-  normalizeNoteFromMapFiles,
   normalizeNoteFromMapFiles2,
 } from "./noteNormarize";
 import type { ExtractedMapTexts } from "./text/eventCommand";
@@ -168,12 +167,11 @@ const bundle2: ExtractedDataBundle = {
 
 describe("normalizeBundleNoteTexts", () => {
   test("no matching kinds", () => {
-    const result = normalizeBundleNoteTexts(
-      bundle,
-      audioFiles,
-      imageFiles,
-      ohterFiles,
-    );
+    const result = normalizeBundleNoteTexts(bundle, {
+      audioFiles: audioFiles,
+      imageFiles: imageFiles,
+      otherFiles: ohterFiles,
+    });
     const expected: ExtractedDataBundle = {
       actors: [],
       enemies: [],
@@ -187,19 +185,18 @@ describe("normalizeBundleNoteTexts", () => {
     expect(result).toEqual(expected);
   });
   test("matching kinds and values are filtered correctly", () => {
-    const result = normalizeBundleNoteTexts(
-      bundle2,
-      audioFiles,
-      imageFiles,
-      ohterFiles,
-    );
+    const result = normalizeBundleNoteTexts(bundle2, {
+      audioFiles: audioFiles,
+      imageFiles: imageFiles,
+      otherFiles: ohterFiles,
+    });
     expect(result).toEqual(bundle2);
   });
 });
 
 describe("nonTextNoteKeys", () => {
   test("returns empty set when no note keys match non-text file kinds", () => {
-    const result = nonTextNoteKeys2(bundle, {
+    const result = nonTextNoteKeys(bundle, {
       audioFiles: audioFiles,
       imageFiles: imageFiles,
       otherFiles: ohterFiles,
@@ -208,7 +205,7 @@ describe("nonTextNoteKeys", () => {
     expect(result).toEqual(expected);
   });
   test("returns set of note keys that match non-text file kinds regardless of value", () => {
-    const result = nonTextNoteKeys2(bundle2, {
+    const result = nonTextNoteKeys(bundle2, {
       audioFiles: audioFiles,
       imageFiles: imageFiles,
       otherFiles: ohterFiles,
@@ -348,7 +345,7 @@ describe("normalizeRawGameDataNoteTexts", () => {
       },
     };
 
-    const result = buildRawGameDataNoteNormalization2(rawData, {
+    const result = buildRawGameDataNoteNormalization(rawData, {
       audioFiles: audioFiles,
       imageFiles: imageFiles,
       otherFiles: ohterFiles,
@@ -366,10 +363,18 @@ describe("normalizeRawGameDataNoteTexts", () => {
     );
 
     expect(result.data.value.mainData).toEqual(
-      normalizeBundleNoteTexts(bundle2, audioFiles, imageFiles, ohterFiles),
+      normalizeBundleNoteTexts(bundle2, {
+        audioFiles: audioFiles,
+        imageFiles: imageFiles,
+        otherFiles: ohterFiles,
+      }),
     );
     expect(result.data.value.mapFiles.validMaps).toEqual(
-      normalizeNoteFromMapFiles([map], audioFiles, imageFiles, ohterFiles),
+      normalizeNoteFromMapFiles2([map], {
+        audioFiles: audioFiles,
+        imageFiles: imageFiles,
+        otherFiles: ohterFiles,
+      }),
     );
   });
 });
