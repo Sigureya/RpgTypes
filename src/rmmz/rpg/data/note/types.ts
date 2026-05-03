@@ -11,7 +11,7 @@ export interface NoteReadResult {
 export interface NoteReadResultEx extends NoteReadResult {
   dataId: number;
 }
-export interface PaX {
+export interface NoteReadResultsWithSource {
   source: string;
   notes: NoteReadResultEx[];
 }

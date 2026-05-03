@@ -4,7 +4,10 @@ import type {
   ImageFilesSet,
 } from "@RpgTypes/fileio";
 import type { KeyValuePair } from "@RpgTypes/libs";
-import type { NoteReadResultEx, PaX } from "@RpgTypes/rmmz";
+import type {
+  NoteReadResultEx,
+  NoteReadResultsWithSource,
+} from "@RpgTypes/rmmz";
 import type {
   SummarizedNote,
   OtherFilesSet,
@@ -23,7 +26,7 @@ export const isNoteNumber = (note: string): boolean => {
 };
 
 export const stringLikeNoteKeys = (
-  list: ReadonlyArray<SummarizedNote>,
+  list: ReadonlyArray<SummarizedNote<unknown>>,
 ): Set<string> => {
   const ss: string[] = list
     .filter((item) => item.kinds.length === 0)
@@ -55,7 +58,7 @@ export const summarizeNoteKinds = (
 };
 
 export const summarizeNoteKinds2 = (
-  items: readonly PaX[],
+  items: readonly NoteReadResultsWithSource[],
   { audioFiles, imageFiles, otherFiles: other }: AssetFilesBundle,
 ): SummarizedNote2[] => {
   const flattened: Array<NoteReadResultEx & { soruce: string }> = items.flatMap(

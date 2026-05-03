@@ -2,7 +2,7 @@ import type {
   MapFileInfo,
   NoteReadResult,
   NoteReadResultEx,
-  PaX,
+  NoteReadResultsWithSource,
 } from "@RpgTypes/rmmz";
 import type {
   ExtractedMapEventTexts,
@@ -18,7 +18,7 @@ export const extractAllMapNotes = (
 
 export const extractAllMapNotesEx2 = (
   map: MapFileInfo<ExtractedMapTexts>,
-): PaX => {
+): NoteReadResultsWithSource => {
   return {
     source: map.filename,
     notes: [...map.map.noteItems.map(mmx), ...map.map.events.map(eex).flat()],
