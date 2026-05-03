@@ -44,7 +44,7 @@ export const buildRawGameDataNoteNormalization = (
   asset: AssetFilesBundle,
 ): RawGameDataNoteNormalization2 => {
   const normalizedMainData = normalizeMainDataNotes(data.value.mainData, asset);
-  const normalizedMapFiles = normalizeMapFileNotes2(
+  const normalizedMapFiles = normalizeMapFileNotes(
     data.value.mapFiles.validMaps,
     asset,
   );
@@ -185,7 +185,7 @@ interface ResultOfMap2 {
   validMaps: MapFileInfo<ExtractedMapTexts<TextPluginCommandParameter>>[];
 }
 
-const normalizeMapFileNotes2 = (
+const normalizeMapFileNotes = (
   mapList: readonly MapFileInfo<
     ExtractedMapTexts<TextPluginCommandParameter>
   >[],
