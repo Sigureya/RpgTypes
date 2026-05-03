@@ -1,15 +1,14 @@
-import { test, expect, describe } from "vitest";
+import { describe, test, expect } from "vitest";
 import type { AudioFilesSet, ImageFilesSet } from "@RpgTypes/fileio";
 import type { MapFileInfo } from "@RpgTypes/rmmz";
 import type { OtherFilesSet } from "./note/types";
 import {
-  buildRawGameDataNoteNormalization,
-  nonTextNoteKeys,
   normalizeBundleNoteTexts,
+  nonTextNoteKeys,
   normalizeNoteFromMapFiles2,
+  buildRawGameDataNoteNormalization,
 } from "./noteNormarize";
-import type { ExtractedMapTexts } from "./text/eventCommand";
-import type { ExtractedDataBundle } from "./text/mainData/types";
+import type { ExtractedDataBundle, ExtractedMapTexts } from "./text";
 import type { ExtractedRawGameDataTexts } from "./types";
 
 const BGM1 = "bgm1";
