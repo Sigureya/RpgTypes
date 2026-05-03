@@ -32,7 +32,7 @@ import type {
 } from "./text/mainData/types";
 import type {
   ExtractedRawGameDataTexts,
-  RawGameDataNoteNormalization2,
+  RawGameDataNoteNormalization,
 } from "./types";
 
 export const normalizeBundleNoteTexts = (
@@ -46,7 +46,7 @@ export const normalizeBundleNoteTexts = (
 export const buildRawGameDataNoteNormalization = (
   data: ExtractedRawGameDataTexts,
   asset: AssetFilesBundle,
-): RawGameDataNoteNormalization2 => {
+): RawGameDataNoteNormalization => {
   const normalizedMainData = normalizeMainDataNotes(data.value.mainData, asset);
   const normalizedMapFiles = normalizeMapFileNotes(
     data.value.mapFiles.validMaps,
