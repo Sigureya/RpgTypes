@@ -34,7 +34,7 @@ export const stringLikeNoteKeys = (
   return new Set(ss);
 };
 
-export const summarizeNoteKinds2 = (
+export const summarizeNoteKinds = (
   items: readonly NoteReadResultsWithSource[],
   { audioFiles, imageFiles, otherFiles: other }: AssetFilesBundle,
 ): SummarizedNote2[] => {
@@ -65,12 +65,6 @@ export const summarizeNoteKinds2 = (
       };
     },
   );
-};
-
-export const categorizeNote = (
-  items: readonly KeyValuePair[],
-): Map<string, KeyValuePair[]> => {
-  return categorizeNoteEx(items);
 };
 
 const categorizeNoteEx = <T extends KeyValuePair>(

@@ -1,25 +1,20 @@
 import { test, expect, describe } from "vitest";
 import type { AudioFilesSet, ImageFilesSet } from "@RpgTypes/fileio";
-import type { KeyValuePair } from "@RpgTypes/libs";
+import type { NoteReadResultsWithSource } from "@RpgTypes/rmmz";
 import {
   isNoteBoolean,
   isNoteNumber,
   stringLikeNoteKeys,
-  categorizeNote,
+  summarizeNoteKinds,
 } from "./note";
-import type { OtherFilesSet, SummarizedNote } from "./types";
+import type { OtherFilesSet, SummarizedNote2 } from "./types";
 
-interface TestCase {
+interface TestCase2 {
   name: string;
-  items: KeyValuePair[];
-  expected: SummarizedNote[];
+  sources: NoteReadResultsWithSource[];
+  expected: SummarizedNote2[];
   set: ReadonlySet<string>;
-  categorized: Map<string, KeyValuePair[]>;
 }
-
-const categorized = (
-  entries: Array<[string, KeyValuePair[]]>,
-): Map<string, KeyValuePair[]> => new Map(entries);
 
 const BGM_NUMBER = "1001";
 const BGS_NUMBER = "1002";
@@ -97,282 +92,193 @@ describe("isNoteNumber", () => {
   });
 });
 
-const runTestCases = (
-  testCase: TestCase,
+const runTestCases2 = (
+  testCase: TestCase2,
   imageFileSet: ImageFilesSet,
   audioFiles: AudioFilesSet,
   other: OtherFilesSet,
 ) => {
   describe(testCase.name, () => {
+    test("summarizeNoteKinds2", () => {
+      const result = summarizeNoteKinds(testCase.sources, {
+        audioFiles,
+        imageFiles: imageFileSet,
+        otherFiles: other,
+      });
+      expect(result).toEqual(testCase.expected);
+    });
     test("stringLikeNoteKeys", () => {
       const result: Set<string> = stringLikeNoteKeys(testCase.expected);
       expect(result).toEqual(testCase.set);
     });
-    test("categorizeNote", () => {
-      const map = categorizeNote(testCase.items);
-      expect(map).toEqual(testCase.categorized);
-    });
   });
 };
 
-const testCases: TestCase[] = [
+const testCases2: TestCase2[] = [
   {
     name: "emptyInput",
-    items: [],
+    sources: [],
     expected: [],
     set: new Set(),
-    categorized: new Map(),
   },
   {
-    name: "boolean",
-    items: [
-      { key: "key1", value: "true" },
-      { key: "key1", value: "false" },
-    ],
-    expected: [{ key: "key1", kinds: ["boolean"], values: ["true", "false"] }],
-    set: new Set(),
-    categorized: categorized([
-      [
-        "key1",
-        [
-          { key: "key1", value: "true" },
-          { key: "key1", value: "false" },
+    name: "boolean with source",
+    sources: [
+      {
+        source: "actors",
+        notes: [
+          { key: "key1", value: "true", dataId: 1 },
+          { key: "key1", value: "false", dataId: 2 },
         ],
-      ],
-    ]),
-  },
-  {
-    name: "number",
-    items: [{ key: "key1", value: "123.45" }],
-    expected: [{ key: "key1", kinds: ["number"], values: ["123.45"] }],
-    set: new Set(),
-    categorized: categorized([["key1", [{ key: "key1", value: "123.45" }]]]),
-  },
-  {
-    name: "multipleKeys",
-    items: [
-      { key: "A", value: "123" },
-      { key: "B", value: "456" },
-    ],
-    expected: [
-      { key: "A", kinds: ["number"], values: ["123"] },
-      { key: "B", kinds: ["number"], values: ["456"] },
-    ],
-    set: new Set(),
-    categorized: categorized([
-      ["A", [{ key: "A", value: "123" }]],
-      ["B", [{ key: "B", value: "456" }]],
-    ]),
-  },
-  {
-    name: "bgm filename as number",
-    items: [{ key: "M", value: BGM_NUMBER }],
-    expected: [{ key: "M", kinds: ["number", "bgm"], values: [BGM_NUMBER] }],
-    set: new Set(),
-    categorized: categorized([["M", [{ key: "M", value: BGM_NUMBER }]]]),
-  },
-  {
-    name: "bgs filename as number",
-    items: [{ key: "S", value: BGS_NUMBER }],
-    expected: [{ key: "S", kinds: ["number", "bgs"], values: [BGS_NUMBER] }],
-    set: new Set(),
-    categorized: categorized([["S", [{ key: "S", value: BGS_NUMBER }]]]),
-  },
-  {
-    name: "me filename as number",
-    items: [{ key: "ME", value: ME_NUMBER }],
-    expected: [{ key: "ME", kinds: ["number", "me"], values: [ME_NUMBER] }],
-    set: new Set(),
-    categorized: categorized([["ME", [{ key: "ME", value: ME_NUMBER }]]]),
-  },
-  {
-    name: "se filename as number",
-    items: [{ key: "SE", value: SE_NUMBER }],
-    expected: [{ key: "SE", kinds: ["number", "se"], values: [SE_NUMBER] }],
-    set: new Set(),
-    categorized: categorized([["SE", [{ key: "SE", value: SE_NUMBER }]]]),
-  },
-  {
-    name: "multiple audio files as number",
-    items: [
-      { key: "Audio", value: BGM_NUMBER },
-      { key: "Audio", value: BGS_NUMBER },
-    ],
-    expected: [
-      { key: "Audio", kinds: ["number"], values: [BGM_NUMBER, BGS_NUMBER] },
-    ],
-    set: new Set(),
-    categorized: categorized([
-      [
-        "Audio",
-        [
-          { key: "Audio", value: BGM_NUMBER },
-          { key: "Audio", value: BGS_NUMBER },
-        ],
-      ],
-    ]),
-  },
-  {
-    name: "multiple audio files as filename",
-    items: [
-      { key: "BGM", value: BGM_FILE },
-      { key: "BGS", value: BGS_FILE },
-      { key: "ME", value: ME_FILE },
-      { key: "SE", value: SE_FILE },
-    ],
-    expected: [
-      { key: "BGM", kinds: ["bgm"], values: [BGM_FILE] },
-      { key: "BGS", kinds: ["bgs"], values: [BGS_FILE] },
-      { key: "ME", kinds: ["me"], values: [ME_FILE] },
-      { key: "SE", kinds: ["se"], values: [SE_FILE] },
-    ],
-    set: new Set(),
-    categorized: categorized([
-      ["BGM", [{ key: "BGM", value: BGM_FILE }]],
-      ["BGS", [{ key: "BGS", value: BGS_FILE }]],
-      ["ME", [{ key: "ME", value: ME_FILE }]],
-      ["SE", [{ key: "SE", value: SE_FILE }]],
-    ]),
-  },
-  {
-    name: "multiple audio files as number 2",
-    items: [
-      { key: "Audio", value: BGM_NUMBER },
-      { key: "Audio", value: BGS_NUMBER },
-      { key: "Audio", value: ME_NUMBER },
-      { key: "Audio", value: SE_NUMBER },
+      },
     ],
     expected: [
       {
-        key: "Audio",
+        key: "key1",
+        kinds: ["boolean"],
+        values: [
+          { value: "true", dataId: 1, soruce: "actors" },
+          { value: "false", dataId: 2, soruce: "actors" },
+        ],
+      },
+    ],
+    set: new Set(),
+  },
+  {
+    name: "mixed sources",
+    sources: [
+      {
+        source: "actors",
+        notes: [{ key: "A", value: "123", dataId: 1 }],
+      },
+      {
+        source: "skills",
+        notes: [{ key: "A", value: "456", dataId: 3 }],
+      },
+    ],
+    expected: [
+      {
+        key: "A",
         kinds: ["number"],
-        values: [BGM_NUMBER, BGS_NUMBER, ME_NUMBER, SE_NUMBER],
+        values: [
+          { value: "123", dataId: 1, soruce: "actors" },
+          { value: "456", dataId: 3, soruce: "skills" },
+        ],
       },
     ],
     set: new Set(),
-    categorized: categorized([
-      [
-        "Audio",
-        [
-          { key: "Audio", value: BGM_NUMBER },
-          { key: "Audio", value: BGS_NUMBER },
-          { key: "Audio", value: ME_NUMBER },
-          { key: "Audio", value: SE_NUMBER },
-        ],
-      ],
-    ]),
   },
   {
-    name: "unknown audio file",
-    items: [
-      { key: "X", value: BGM_NUMBER },
-      { key: "X", value: BGM_FILE },
-      { key: "X", value: "123" },
-      { key: "X", value: "not found" },
-    ],
-    expected: [
+    name: "audio with source",
+    sources: [
       {
-        key: "X",
-        kinds: [],
-        values: [BGM_NUMBER, BGM_FILE, "123", "not found"],
+        source: "actors",
+        notes: [{ key: "Audio", value: AUDIIO_FILE, dataId: 1 }],
       },
     ],
-    set: new Set(["X"]),
-    categorized: categorized([
-      [
-        "X",
-        [
-          { key: "X", value: BGM_NUMBER },
-          { key: "X", value: BGM_FILE },
-          { key: "X", value: "123" },
-          { key: "X", value: "not found" },
-        ],
-      ],
-    ]),
-  },
-  {
-    name: "audio",
-    items: [{ key: "Audio", value: AUDIIO_FILE }],
     expected: [
       {
         key: "Audio",
         kinds: ["bgm", "bgs", "me", "se"],
-        values: [AUDIIO_FILE],
+        values: [{ value: AUDIIO_FILE, dataId: 1, soruce: "actors" }],
       },
     ],
     set: new Set(),
-    categorized: categorized([
-      ["Audio", [{ key: "Audio", value: AUDIIO_FILE }]],
-    ]),
   },
   {
-    name: "picture",
-    items: [
-      { key: "P", value: PICTURE_FILE },
-      { key: "P", value: PICTURE_NUMBER },
+    name: "bgm filename with source",
+    sources: [
+      {
+        source: "actors",
+        notes: [{ key: "BGM", value: BGM_FILE, dataId: 1 }],
+      },
     ],
     expected: [
-      { key: "P", kinds: ["pictures"], values: [PICTURE_FILE, PICTURE_NUMBER] },
+      {
+        key: "BGM",
+        kinds: ["bgm"],
+        values: [{ value: BGM_FILE, dataId: 1, soruce: "actors" }],
+      },
     ],
     set: new Set(),
-    categorized: categorized([
-      [
-        "P",
-        [
-          { key: "P", value: PICTURE_FILE },
-          { key: "P", value: PICTURE_NUMBER },
-        ],
-      ],
-    ]),
   },
   {
-    name: "character",
-    items: [
-      { key: "C", value: CHARACTER_FILE },
-      { key: "C", value: CHARACTER_NUMBER },
+    name: "picture with source",
+    sources: [
+      {
+        source: "items",
+        notes: [
+          { key: "P", value: PICTURE_FILE, dataId: 1 },
+          { key: "P", value: PICTURE_NUMBER, dataId: 2 },
+        ],
+      },
+    ],
+    expected: [
+      {
+        key: "P",
+        kinds: ["pictures"],
+        values: [
+          { value: PICTURE_FILE, dataId: 1, soruce: "items" },
+          { value: PICTURE_NUMBER, dataId: 2, soruce: "items" },
+        ],
+      },
+    ],
+    set: new Set(),
+  },
+  {
+    name: "character with source",
+    sources: [
+      {
+        source: "actors",
+        notes: [
+          { key: "C", value: CHARACTER_FILE, dataId: 1 },
+          { key: "C", value: CHARACTER_NUMBER, dataId: 2 },
+        ],
+      },
     ],
     expected: [
       {
         key: "C",
         kinds: ["characters"],
-        values: [CHARACTER_FILE, CHARACTER_NUMBER],
+        values: [
+          { value: CHARACTER_FILE, dataId: 1, soruce: "actors" },
+          { value: CHARACTER_NUMBER, dataId: 2, soruce: "actors" },
+        ],
       },
     ],
     set: new Set(),
-    categorized: categorized([
-      [
-        "C",
-        [
-          { key: "C", value: CHARACTER_FILE },
-          { key: "C", value: CHARACTER_NUMBER },
-        ],
-      ],
-    ]),
   },
   {
-    name: "faces",
-    items: [
-      { key: "F", value: FACE_FILE },
-      { key: "F", value: FACE_NUMBER },
+    name: "faces with source",
+    sources: [
+      {
+        source: "actors",
+        notes: [
+          { key: "F", value: FACE_FILE, dataId: 1 },
+          { key: "F", value: FACE_NUMBER, dataId: 2 },
+        ],
+      },
     ],
     expected: [
-      { key: "F", kinds: ["faces"], values: [FACE_FILE, FACE_NUMBER] },
+      {
+        key: "F",
+        kinds: ["faces"],
+        values: [
+          { value: FACE_FILE, dataId: 1, soruce: "actors" },
+          { value: FACE_NUMBER, dataId: 2, soruce: "actors" },
+        ],
+      },
     ],
     set: new Set(),
-    categorized: categorized([
-      [
-        "F",
-        [
-          { key: "F", value: FACE_FILE },
-          { key: "F", value: FACE_NUMBER },
-        ],
-      ],
-    ]),
   },
   {
-    name: "image",
-    set: new Set(),
-    items: [{ key: "Image", value: IMAGE_FILE }],
+    name: "image with source",
+    sources: [
+      {
+        source: "items",
+        notes: [{ key: "Image", value: IMAGE_FILE, dataId: 1 }],
+      },
+    ],
     expected: [
       {
         key: "Image",
@@ -385,25 +291,213 @@ const testCases: TestCase[] = [
           "enemies",
           "tilesets",
         ],
-        values: [IMAGE_FILE],
+        values: [{ value: IMAGE_FILE, dataId: 1, soruce: "items" }],
       },
     ],
-    categorized: categorized([
-      ["Image", [{ key: "Image", value: IMAGE_FILE }]],
-    ]),
+    set: new Set(),
   },
   {
-    name: "movie",
-    items: [{ key: "Movie", value: MOVIE_FILE }],
-    expected: [{ key: "Movie", kinds: ["movies"], values: [MOVIE_FILE] }],
+    name: "movie with source",
+    sources: [
+      {
+        source: "system",
+        notes: [{ key: "Movie", value: MOVIE_FILE, dataId: 0 }],
+      },
+    ],
+    expected: [
+      {
+        key: "Movie",
+        kinds: ["movies"],
+        values: [{ value: MOVIE_FILE, dataId: 0, soruce: "system" }],
+      },
+    ],
     set: new Set(),
-    categorized: categorized([
-      ["Movie", [{ key: "Movie", value: MOVIE_FILE }]],
-    ]),
+  },
+  {
+    name: "bgs filename as number with source",
+    sources: [
+      {
+        source: "actors",
+        notes: [{ key: "S", value: BGS_NUMBER, dataId: 1 }],
+      },
+    ],
+    expected: [
+      {
+        key: "S",
+        kinds: ["number", "bgs"],
+        values: [{ value: BGS_NUMBER, dataId: 1, soruce: "actors" }],
+      },
+    ],
+    set: new Set(),
+  },
+  {
+    name: "me filename as number with source",
+    sources: [
+      {
+        source: "items",
+        notes: [{ key: "ME", value: ME_NUMBER, dataId: 5 }],
+      },
+    ],
+    expected: [
+      {
+        key: "ME",
+        kinds: ["number", "me"],
+        values: [{ value: ME_NUMBER, dataId: 5, soruce: "items" }],
+      },
+    ],
+    set: new Set(),
+  },
+  {
+    name: "se filename as number with source",
+    sources: [
+      {
+        source: "skills",
+        notes: [{ key: "SE", value: SE_NUMBER, dataId: 10 }],
+      },
+    ],
+    expected: [
+      {
+        key: "SE",
+        kinds: ["number", "se"],
+        values: [{ value: SE_NUMBER, dataId: 10, soruce: "skills" }],
+      },
+    ],
+    set: new Set(),
+  },
+  {
+    name: "multiple audio files as filename with source",
+    sources: [
+      {
+        source: "actors",
+        notes: [
+          { key: "BGM", value: BGM_FILE, dataId: 1 },
+          { key: "BGS", value: BGS_FILE, dataId: 1 },
+          { key: "ME", value: ME_FILE, dataId: 1 },
+          { key: "SE", value: SE_FILE, dataId: 1 },
+        ],
+      },
+    ],
+    expected: [
+      {
+        key: "BGM",
+        kinds: ["bgm"],
+        values: [{ value: BGM_FILE, dataId: 1, soruce: "actors" }],
+      },
+      {
+        key: "BGS",
+        kinds: ["bgs"],
+        values: [{ value: BGS_FILE, dataId: 1, soruce: "actors" }],
+      },
+      {
+        key: "ME",
+        kinds: ["me"],
+        values: [{ value: ME_FILE, dataId: 1, soruce: "actors" }],
+      },
+      {
+        key: "SE",
+        kinds: ["se"],
+        values: [{ value: SE_FILE, dataId: 1, soruce: "actors" }],
+      },
+    ],
+    set: new Set(),
+  },
+  {
+    name: "multiple audio files as number with source",
+    sources: [
+      {
+        source: "items",
+        notes: [
+          { key: "Audio", value: BGM_NUMBER, dataId: 1 },
+          { key: "Audio", value: BGS_NUMBER, dataId: 1 },
+        ],
+      },
+    ],
+    expected: [
+      {
+        key: "Audio",
+        kinds: ["number"],
+        values: [
+          { value: BGM_NUMBER, dataId: 1, soruce: "items" },
+          { value: BGS_NUMBER, dataId: 1, soruce: "items" },
+        ],
+      },
+    ],
+    set: new Set(),
+  },
+  {
+    name: "multiple audio files as number 2 with source",
+    sources: [
+      {
+        source: "skills",
+        notes: [
+          { key: "Audio", value: BGM_NUMBER, dataId: 1 },
+          { key: "Audio", value: BGS_NUMBER, dataId: 1 },
+          { key: "Audio", value: ME_NUMBER, dataId: 1 },
+          { key: "Audio", value: SE_NUMBER, dataId: 1 },
+        ],
+      },
+    ],
+    expected: [
+      {
+        key: "Audio",
+        kinds: ["number"],
+        values: [
+          { value: BGM_NUMBER, dataId: 1, soruce: "skills" },
+          { value: BGS_NUMBER, dataId: 1, soruce: "skills" },
+          { value: ME_NUMBER, dataId: 1, soruce: "skills" },
+          { value: SE_NUMBER, dataId: 1, soruce: "skills" },
+        ],
+      },
+    ],
+    set: new Set(),
+  },
+  {
+    name: "unknown audio file with source",
+    sources: [
+      {
+        source: "weapons",
+        notes: [
+          { key: "X", value: BGM_NUMBER, dataId: 1 },
+          { key: "X", value: BGM_FILE, dataId: 1 },
+          { key: "X", value: "123", dataId: 1 },
+          { key: "X", value: "not found", dataId: 1 },
+        ],
+      },
+    ],
+    expected: [
+      {
+        key: "X",
+        kinds: [],
+        values: [
+          { value: BGM_NUMBER, dataId: 1, soruce: "weapons" },
+          { value: BGM_FILE, dataId: 1, soruce: "weapons" },
+          { value: "123", dataId: 1, soruce: "weapons" },
+          { value: "not found", dataId: 1, soruce: "weapons" },
+        ],
+      },
+    ],
+    set: new Set(["X"]),
+  },
+  {
+    name: "unknown file with source",
+    sources: [
+      {
+        source: "items",
+        notes: [{ key: "X", value: "unknown", dataId: 1 }],
+      },
+    ],
+    expected: [
+      {
+        key: "X",
+        kinds: [],
+        values: [{ value: "unknown", dataId: 1, soruce: "items" }],
+      },
+    ],
+    set: new Set(["X"]),
   },
 ];
 
-describe("summarizeNoteKinds", () => {
+describe("summarizeNoteKinds2", () => {
   const audioFiles: AudioFilesSet = {
     bgm: new Set([BGM_NUMBER, BGM_FILE, AUDIIO_FILE]),
     bgs: new Set([BGS_NUMBER, BGS_FILE, AUDIIO_FILE]),
@@ -421,8 +515,8 @@ describe("summarizeNoteKinds", () => {
     tilesets: new Set([TILESET_NUMBER, TILESET_FILE, IMAGE_FILE]),
   };
 
-  testCases.forEach((testCase) =>
-    runTestCases(testCase, imageFiles, audioFiles, {
+  testCases2.forEach((testCase) =>
+    runTestCases2(testCase, imageFiles, audioFiles, {
       movies: new Set([MOVIE_FILE]),
     }),
   );
