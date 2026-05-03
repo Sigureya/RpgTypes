@@ -8,16 +8,10 @@ import {
   FILENAME_SKILLS,
   FILENAME_STATES,
   FILENAME_WEAPONS,
-  FILENAME_COMMON_EVENTS,
-  FILENAME_TROOPS,
 } from "@RpgTypes/fileio";
-import type { MapFileInfo } from "@RpgTypes/rmmz";
-import {
-  stringLikeNoteKeys,
-  summarizeNoteKinds,
-  summarizeNoteKinds2,
-} from "./note/note";
-import type { SummarizedNote, SummarizedNote2 } from "./note/types";
+import type { MapFileInfo, NoteReadResultsWithSource } from "@RpgTypes/rmmz";
+import { stringLikeNoteKeys, summarizeNoteKinds2 } from "./note/note";
+import type { SummarizedNote2 } from "./note/types";
 import type { TextPluginCommandParameter, ExtractedMapTexts } from "./text";
 import {
   extractAllMapNotesEx2,
@@ -107,31 +101,32 @@ const summarizeBundleNoteKinds2 = (
   bundle: ExtractedDataBundle,
   asset: AssetFilesBundle,
 ): SummarizedNote2[] => {
-  const list = flattenAllBundleNotes2(bundle);
+  const list = bundleToPaXList(bundle);
   return summarizeNoteKinds2(list, asset);
 };
 
-const flattenAllBundleNotes2 = (
+const bundleToPaXList = (
   bundle: ExtractedDataBundle,
-): ExtractedTextItem[] => {
-  const noteItems: ExtractedTextItem[][][] = [
-    extractNoteArraysFromList2(bundle.actors),
-    extractNoteArraysFromList2(bundle.skills),
-    extractNoteArraysFromList2(bundle.items),
-    extractNoteArraysFromList2(bundle.weapons),
-    extractNoteArraysFromList2(bundle.armors),
-    extractNoteArraysFromList2(bundle.classes),
-    extractNoteArraysFromList2(bundle.states),
-    extractNoteArraysFromList2(bundle.enemies),
-  ];
-  return noteItems.flat(3);
-};
+): NoteReadResultsWithSource[] => [
+  notesToPaX(FILENAME_ACTORS, bundle.actors),
+  notesToPaX(FILENAME_SKILLS, bundle.skills),
+  notesToPaX(FILENAME_ITEMS, bundle.items),
+  notesToPaX(FILENAME_WEAPONS, bundle.weapons),
+  notesToPaX(FILENAME_ARMORS, bundle.armors),
+  notesToPaX(FILENAME_CLASSES, bundle.classes),
+  notesToPaX(FILENAME_STATES, bundle.states),
+  notesToPaX(FILENAME_ENEMIES, bundle.enemies),
+];
 
-const extractNoteArraysFromList2 = (
-  note: readonly ExtractedNoteList[],
-): ExtractedTextItem[][] => {
-  return note.map((item) => item.note);
-};
+const notesToPaX = (
+  source: string,
+  list: readonly ExtractedNoteList[],
+): NoteReadResultsWithSource => ({
+  source,
+  notes: list.flatMap((item) =>
+    item.note.map((n) => ({ key: n.key, value: n.value, dataId: n.id })),
+  ),
+});
 
 export const summarizeNoteKindsFromMapFiles2 = <
   Command extends TextPluginCommandParameter,
