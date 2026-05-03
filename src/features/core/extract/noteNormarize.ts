@@ -9,7 +9,11 @@ import {
   FILENAME_STATES,
   FILENAME_WEAPONS,
 } from "@RpgTypes/fileio";
-import type { MapFileInfo, NoteReadResultsWithSource } from "@RpgTypes/rmmz";
+import type {
+  MapFileInfo,
+  NoteReadResultEx,
+  NoteReadResultsWithSource,
+} from "@RpgTypes/rmmz";
 import { stringLikeNoteKeys, summarizeNoteKinds } from "./note/note";
 import type {
   SummarizedNote,
@@ -151,7 +155,14 @@ const notesToPaX = (
 ): NoteReadResultsWithSource => ({
   source,
   notes: list.flatMap((item) =>
-    item.note.map((n) => ({ key: n.key, value: n.value, dataId: n.id })),
+    item.note.map(
+      (n): NoteReadResultEx => ({
+        key: n.key,
+        value: n.value,
+        dataId: n.id,
+        name: "",
+      }),
+    ),
   ),
 });
 

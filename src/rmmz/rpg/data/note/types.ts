@@ -10,6 +10,7 @@ export interface NoteReadResult {
 
 export interface NoteReadResultEx extends NoteReadResult {
   dataId: number;
+  name: string;
 }
 export interface NoteReadResultsWithSource {
   source: string;

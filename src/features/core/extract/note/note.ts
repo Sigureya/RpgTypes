@@ -60,6 +60,7 @@ export const summarizeNoteKinds = (
             value: i.value,
             dataId: i.dataId,
             soruce: i.soruce,
+            name: i.name,
           }),
         ),
       };

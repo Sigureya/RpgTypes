@@ -46,6 +46,8 @@ const TILESET_FILE = "tileset-file";
 
 const MOVIE_FILE = "movie-file";
 
+const DATA_NAME = "Test Data";
+
 describe("isNoteBoolean", () => {
   test("true", () => {
     expect("true").toSatisfy(isNoteBoolean);
@@ -127,8 +129,8 @@ const testCases2: TestCase2[] = [
       {
         source: "actors",
         notes: [
-          { key: "key1", value: "true", dataId: 1 },
-          { key: "key1", value: "false", dataId: 2 },
+          { key: "key1", value: "true", dataId: 1, name: DATA_NAME },
+          { key: "key1", value: "false", dataId: 2, name: DATA_NAME },
         ],
       },
     ],
@@ -137,8 +139,8 @@ const testCases2: TestCase2[] = [
         key: "key1",
         kinds: ["boolean"],
         values: [
-          { value: "true", dataId: 1, soruce: "actors" },
-          { value: "false", dataId: 2, soruce: "actors" },
+          { value: "true", dataId: 1, soruce: "actors", name: DATA_NAME },
+          { value: "false", dataId: 2, soruce: "actors", name: DATA_NAME },
         ],
       },
     ],
@@ -149,11 +151,11 @@ const testCases2: TestCase2[] = [
     sources: [
       {
         source: "actors",
-        notes: [{ key: "A", value: "123", dataId: 1 }],
+        notes: [{ key: "A", value: "123", dataId: 1, name: DATA_NAME }],
       },
       {
         source: "skills",
-        notes: [{ key: "A", value: "456", dataId: 3 }],
+        notes: [{ key: "A", value: "456", dataId: 3, name: DATA_NAME }],
       },
     ],
     expected: [
@@ -161,8 +163,8 @@ const testCases2: TestCase2[] = [
         key: "A",
         kinds: ["number"],
         values: [
-          { value: "123", dataId: 1, soruce: "actors" },
-          { value: "456", dataId: 3, soruce: "skills" },
+          { value: "123", dataId: 1, soruce: "actors", name: DATA_NAME },
+          { value: "456", dataId: 3, soruce: "skills", name: DATA_NAME },
         ],
       },
     ],
@@ -173,14 +175,18 @@ const testCases2: TestCase2[] = [
     sources: [
       {
         source: "actors",
-        notes: [{ key: "Audio", value: AUDIIO_FILE, dataId: 1 }],
+        notes: [
+          { key: "Audio", value: AUDIIO_FILE, dataId: 1, name: DATA_NAME },
+        ],
       },
     ],
     expected: [
       {
         key: "Audio",
         kinds: ["bgm", "bgs", "me", "se"],
-        values: [{ value: AUDIIO_FILE, dataId: 1, soruce: "actors" }],
+        values: [
+          { value: AUDIIO_FILE, dataId: 1, soruce: "actors", name: DATA_NAME },
+        ],
       },
     ],
     set: new Set(),
@@ -190,14 +196,16 @@ const testCases2: TestCase2[] = [
     sources: [
       {
         source: "actors",
-        notes: [{ key: "BGM", value: BGM_FILE, dataId: 1 }],
+        notes: [{ key: "BGM", value: BGM_FILE, dataId: 1, name: DATA_NAME }],
       },
     ],
     expected: [
       {
         key: "BGM",
         kinds: ["bgm"],
-        values: [{ value: BGM_FILE, dataId: 1, soruce: "actors" }],
+        values: [
+          { value: BGM_FILE, dataId: 1, soruce: "actors", name: DATA_NAME },
+        ],
       },
     ],
     set: new Set(),
@@ -208,8 +216,8 @@ const testCases2: TestCase2[] = [
       {
         source: "items",
         notes: [
-          { key: "P", value: PICTURE_FILE, dataId: 1 },
-          { key: "P", value: PICTURE_NUMBER, dataId: 2 },
+          { key: "P", value: PICTURE_FILE, dataId: 1, name: DATA_NAME },
+          { key: "P", value: PICTURE_NUMBER, dataId: 2, name: DATA_NAME },
         ],
       },
     ],
@@ -218,8 +226,13 @@ const testCases2: TestCase2[] = [
         key: "P",
         kinds: ["pictures"],
         values: [
-          { value: PICTURE_FILE, dataId: 1, soruce: "items" },
-          { value: PICTURE_NUMBER, dataId: 2, soruce: "items" },
+          { value: PICTURE_FILE, dataId: 1, soruce: "items", name: DATA_NAME },
+          {
+            value: PICTURE_NUMBER,
+            dataId: 2,
+            soruce: "items",
+            name: DATA_NAME,
+          },
         ],
       },
     ],
@@ -231,8 +244,8 @@ const testCases2: TestCase2[] = [
       {
         source: "actors",
         notes: [
-          { key: "C", value: CHARACTER_FILE, dataId: 1 },
-          { key: "C", value: CHARACTER_NUMBER, dataId: 2 },
+          { key: "C", value: CHARACTER_FILE, dataId: 1, name: DATA_NAME },
+          { key: "C", value: CHARACTER_NUMBER, dataId: 2, name: DATA_NAME },
         ],
       },
     ],
@@ -241,8 +254,18 @@ const testCases2: TestCase2[] = [
         key: "C",
         kinds: ["characters"],
         values: [
-          { value: CHARACTER_FILE, dataId: 1, soruce: "actors" },
-          { value: CHARACTER_NUMBER, dataId: 2, soruce: "actors" },
+          {
+            value: CHARACTER_FILE,
+            dataId: 1,
+            soruce: "actors",
+            name: DATA_NAME,
+          },
+          {
+            value: CHARACTER_NUMBER,
+            dataId: 2,
+            soruce: "actors",
+            name: DATA_NAME,
+          },
         ],
       },
     ],
@@ -254,8 +277,8 @@ const testCases2: TestCase2[] = [
       {
         source: "actors",
         notes: [
-          { key: "F", value: FACE_FILE, dataId: 1 },
-          { key: "F", value: FACE_NUMBER, dataId: 2 },
+          { key: "F", value: FACE_FILE, dataId: 1, name: DATA_NAME },
+          { key: "F", value: FACE_NUMBER, dataId: 2, name: DATA_NAME },
         ],
       },
     ],
@@ -264,8 +287,8 @@ const testCases2: TestCase2[] = [
         key: "F",
         kinds: ["faces"],
         values: [
-          { value: FACE_FILE, dataId: 1, soruce: "actors" },
-          { value: FACE_NUMBER, dataId: 2, soruce: "actors" },
+          { value: FACE_FILE, dataId: 1, soruce: "actors", name: DATA_NAME },
+          { value: FACE_NUMBER, dataId: 2, soruce: "actors", name: DATA_NAME },
         ],
       },
     ],
@@ -276,7 +299,9 @@ const testCases2: TestCase2[] = [
     sources: [
       {
         source: "items",
-        notes: [{ key: "Image", value: IMAGE_FILE, dataId: 1 }],
+        notes: [
+          { key: "Image", value: IMAGE_FILE, dataId: 1, name: DATA_NAME },
+        ],
       },
     ],
     expected: [
@@ -291,7 +316,9 @@ const testCases2: TestCase2[] = [
           "enemies",
           "tilesets",
         ],
-        values: [{ value: IMAGE_FILE, dataId: 1, soruce: "items" }],
+        values: [
+          { value: IMAGE_FILE, dataId: 1, soruce: "items", name: DATA_NAME },
+        ],
       },
     ],
     set: new Set(),
@@ -301,14 +328,18 @@ const testCases2: TestCase2[] = [
     sources: [
       {
         source: "system",
-        notes: [{ key: "Movie", value: MOVIE_FILE, dataId: 0 }],
+        notes: [
+          { key: "Movie", value: MOVIE_FILE, dataId: 0, name: DATA_NAME },
+        ],
       },
     ],
     expected: [
       {
         key: "Movie",
         kinds: ["movies"],
-        values: [{ value: MOVIE_FILE, dataId: 0, soruce: "system" }],
+        values: [
+          { value: MOVIE_FILE, dataId: 0, soruce: "system", name: DATA_NAME },
+        ],
       },
     ],
     set: new Set(),
@@ -318,14 +349,16 @@ const testCases2: TestCase2[] = [
     sources: [
       {
         source: "actors",
-        notes: [{ key: "S", value: BGS_NUMBER, dataId: 1 }],
+        notes: [{ key: "S", value: BGS_NUMBER, dataId: 1, name: DATA_NAME }],
       },
     ],
     expected: [
       {
         key: "S",
         kinds: ["number", "bgs"],
-        values: [{ value: BGS_NUMBER, dataId: 1, soruce: "actors" }],
+        values: [
+          { value: BGS_NUMBER, dataId: 1, soruce: "actors", name: DATA_NAME },
+        ],
       },
     ],
     set: new Set(),
@@ -335,14 +368,16 @@ const testCases2: TestCase2[] = [
     sources: [
       {
         source: "items",
-        notes: [{ key: "ME", value: ME_NUMBER, dataId: 5 }],
+        notes: [{ key: "ME", value: ME_NUMBER, dataId: 5, name: DATA_NAME }],
       },
     ],
     expected: [
       {
         key: "ME",
         kinds: ["number", "me"],
-        values: [{ value: ME_NUMBER, dataId: 5, soruce: "items" }],
+        values: [
+          { value: ME_NUMBER, dataId: 5, soruce: "items", name: DATA_NAME },
+        ],
       },
     ],
     set: new Set(),
@@ -352,14 +387,16 @@ const testCases2: TestCase2[] = [
     sources: [
       {
         source: "skills",
-        notes: [{ key: "SE", value: SE_NUMBER, dataId: 10 }],
+        notes: [{ key: "SE", value: SE_NUMBER, dataId: 10, name: DATA_NAME }],
       },
     ],
     expected: [
       {
         key: "SE",
         kinds: ["number", "se"],
-        values: [{ value: SE_NUMBER, dataId: 10, soruce: "skills" }],
+        values: [
+          { value: SE_NUMBER, dataId: 10, soruce: "skills", name: DATA_NAME },
+        ],
       },
     ],
     set: new Set(),
@@ -370,10 +407,10 @@ const testCases2: TestCase2[] = [
       {
         source: "actors",
         notes: [
-          { key: "BGM", value: BGM_FILE, dataId: 1 },
-          { key: "BGS", value: BGS_FILE, dataId: 1 },
-          { key: "ME", value: ME_FILE, dataId: 1 },
-          { key: "SE", value: SE_FILE, dataId: 1 },
+          { key: "BGM", value: BGM_FILE, dataId: 1, name: DATA_NAME },
+          { key: "BGS", value: BGS_FILE, dataId: 1, name: DATA_NAME },
+          { key: "ME", value: ME_FILE, dataId: 1, name: DATA_NAME },
+          { key: "SE", value: SE_FILE, dataId: 1, name: DATA_NAME },
         ],
       },
     ],
@@ -381,22 +418,30 @@ const testCases2: TestCase2[] = [
       {
         key: "BGM",
         kinds: ["bgm"],
-        values: [{ value: BGM_FILE, dataId: 1, soruce: "actors" }],
+        values: [
+          { value: BGM_FILE, dataId: 1, soruce: "actors", name: DATA_NAME },
+        ],
       },
       {
         key: "BGS",
         kinds: ["bgs"],
-        values: [{ value: BGS_FILE, dataId: 1, soruce: "actors" }],
+        values: [
+          { value: BGS_FILE, dataId: 1, soruce: "actors", name: DATA_NAME },
+        ],
       },
       {
         key: "ME",
         kinds: ["me"],
-        values: [{ value: ME_FILE, dataId: 1, soruce: "actors" }],
+        values: [
+          { value: ME_FILE, dataId: 1, soruce: "actors", name: DATA_NAME },
+        ],
       },
       {
         key: "SE",
         kinds: ["se"],
-        values: [{ value: SE_FILE, dataId: 1, soruce: "actors" }],
+        values: [
+          { value: SE_FILE, dataId: 1, soruce: "actors", name: DATA_NAME },
+        ],
       },
     ],
     set: new Set(),
@@ -407,8 +452,8 @@ const testCases2: TestCase2[] = [
       {
         source: "items",
         notes: [
-          { key: "Audio", value: BGM_NUMBER, dataId: 1 },
-          { key: "Audio", value: BGS_NUMBER, dataId: 1 },
+          { key: "Audio", value: BGM_NUMBER, dataId: 1, name: DATA_NAME },
+          { key: "Audio", value: BGS_NUMBER, dataId: 1, name: DATA_NAME },
         ],
       },
     ],
@@ -417,8 +462,8 @@ const testCases2: TestCase2[] = [
         key: "Audio",
         kinds: ["number"],
         values: [
-          { value: BGM_NUMBER, dataId: 1, soruce: "items" },
-          { value: BGS_NUMBER, dataId: 1, soruce: "items" },
+          { value: BGM_NUMBER, dataId: 1, soruce: "items", name: DATA_NAME },
+          { value: BGS_NUMBER, dataId: 1, soruce: "items", name: DATA_NAME },
         ],
       },
     ],
@@ -430,10 +475,10 @@ const testCases2: TestCase2[] = [
       {
         source: "skills",
         notes: [
-          { key: "Audio", value: BGM_NUMBER, dataId: 1 },
-          { key: "Audio", value: BGS_NUMBER, dataId: 1 },
-          { key: "Audio", value: ME_NUMBER, dataId: 1 },
-          { key: "Audio", value: SE_NUMBER, dataId: 1 },
+          { key: "Audio", value: BGM_NUMBER, dataId: 1, name: DATA_NAME },
+          { key: "Audio", value: BGS_NUMBER, dataId: 1, name: DATA_NAME },
+          { key: "Audio", value: ME_NUMBER, dataId: 1, name: DATA_NAME },
+          { key: "Audio", value: SE_NUMBER, dataId: 1, name: DATA_NAME },
         ],
       },
     ],
@@ -442,10 +487,10 @@ const testCases2: TestCase2[] = [
         key: "Audio",
         kinds: ["number"],
         values: [
-          { value: BGM_NUMBER, dataId: 1, soruce: "skills" },
-          { value: BGS_NUMBER, dataId: 1, soruce: "skills" },
-          { value: ME_NUMBER, dataId: 1, soruce: "skills" },
-          { value: SE_NUMBER, dataId: 1, soruce: "skills" },
+          { value: BGM_NUMBER, dataId: 1, soruce: "skills", name: DATA_NAME },
+          { value: BGS_NUMBER, dataId: 1, soruce: "skills", name: DATA_NAME },
+          { value: ME_NUMBER, dataId: 1, soruce: "skills", name: DATA_NAME },
+          { value: SE_NUMBER, dataId: 1, soruce: "skills", name: DATA_NAME },
         ],
       },
     ],
@@ -457,10 +502,10 @@ const testCases2: TestCase2[] = [
       {
         source: "weapons",
         notes: [
-          { key: "X", value: BGM_NUMBER, dataId: 1 },
-          { key: "X", value: BGM_FILE, dataId: 1 },
-          { key: "X", value: "123", dataId: 1 },
-          { key: "X", value: "not found", dataId: 1 },
+          { key: "X", value: BGM_NUMBER, dataId: 1, name: DATA_NAME },
+          { key: "X", value: BGM_FILE, dataId: 1, name: DATA_NAME },
+          { key: "X", value: "123", dataId: 1, name: DATA_NAME },
+          { key: "X", value: "not found", dataId: 1, name: DATA_NAME },
         ],
       },
     ],
@@ -469,10 +514,10 @@ const testCases2: TestCase2[] = [
         key: "X",
         kinds: [],
         values: [
-          { value: BGM_NUMBER, dataId: 1, soruce: "weapons" },
-          { value: BGM_FILE, dataId: 1, soruce: "weapons" },
-          { value: "123", dataId: 1, soruce: "weapons" },
-          { value: "not found", dataId: 1, soruce: "weapons" },
+          { value: BGM_NUMBER, dataId: 1, soruce: "weapons", name: DATA_NAME },
+          { value: BGM_FILE, dataId: 1, soruce: "weapons", name: DATA_NAME },
+          { value: "123", dataId: 1, soruce: "weapons", name: DATA_NAME },
+          { value: "not found", dataId: 1, soruce: "weapons", name: DATA_NAME },
         ],
       },
     ],
@@ -483,14 +528,16 @@ const testCases2: TestCase2[] = [
     sources: [
       {
         source: "items",
-        notes: [{ key: "X", value: "unknown", dataId: 1 }],
+        notes: [{ key: "X", value: "unknown", dataId: 1, name: DATA_NAME }],
       },
     ],
     expected: [
       {
         key: "X",
         kinds: [],
-        values: [{ value: "unknown", dataId: 1, soruce: "items" }],
+        values: [
+          { value: "unknown", dataId: 1, soruce: "items", name: DATA_NAME },
+        ],
       },
     ],
     set: new Set(["X"]),

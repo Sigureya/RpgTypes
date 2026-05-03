@@ -13,6 +13,7 @@ export interface SummarizedNoteValue {
   value: string;
   dataId: number;
   soruce: string;
+  name: string;
 }
 
 export type SummarizedNote2 = SummarizedNote<SummarizedNoteValue>;

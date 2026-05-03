@@ -25,6 +25,7 @@ const eex = (e: ExtractedMapEventTexts): NoteReadResultEx[] => {
       dataId: e.eventId,
       key: n.key,
       value: n.value,
+      name: e.name,
     }),
   );
 };
@@ -33,6 +34,7 @@ const mmx = (item: NoteReadResult): NoteReadResultEx => ({
   dataId: 0,
   key: item.key,
   value: item.value,
+  name: "",
 });
 
 export const filterNoteFromMapTexts = <

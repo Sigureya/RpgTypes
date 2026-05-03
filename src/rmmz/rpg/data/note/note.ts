@@ -107,6 +107,7 @@ export const readNoteEx2 = (
       key: m[1],
       value: m[2],
       dataId: data.id,
+      name: data.name,
     }),
   );
 };
