@@ -1,11 +1,11 @@
-import { AudioFilesSet, ImageFilesSet } from '../../../fileio';
+import { AssetFilesBundle } from '../../../fileio';
 import { MapFileInfo } from '../../../rmmz';
-import { OtherFilesSet, SummarizedNote } from './note/types';
+import { SummarizedNote2 } from './note/types';
 import { ExtractedMapTexts, TextPluginCommandParameter } from './text/eventCommand';
 import { ExtractedDataBundle } from './text/mainData/types';
 import { ExtractedRawGameDataTexts, RawGameDataNoteNormalization } from './types';
-export declare const buildRawGameDataNoteNormalization: (data: ExtractedRawGameDataTexts, audioFiles: AudioFilesSet, imageFiles: ImageFilesSet, other: OtherFilesSet) => RawGameDataNoteNormalization;
-export declare const summarizeNoteKindsFromMapFiles: <Command extends TextPluginCommandParameter>(mapList: readonly MapFileInfo<ExtractedMapTexts<Command>>[], audioFiles: AudioFilesSet, imageFiles: ImageFilesSet, other: OtherFilesSet) => SummarizedNote[];
-export declare const normalizeNoteFromMapFiles: <Command extends TextPluginCommandParameter>(mapList: readonly MapFileInfo<ExtractedMapTexts<Command>>[], audioFiles: AudioFilesSet, imageFiles: ImageFilesSet, other: OtherFilesSet) => MapFileInfo<ExtractedMapTexts<Command>>[];
-export declare const nonTextNoteKeys: (bundle: ExtractedDataBundle, audioFiles: AudioFilesSet, imageFiles: ImageFilesSet, other: OtherFilesSet) => Set<string>;
-export declare const normalizeBundleNoteTexts: (bundle: ExtractedDataBundle, audioFiles: AudioFilesSet, imageFiles: ImageFilesSet, other: OtherFilesSet) => ExtractedDataBundle;
+export declare const buildRawGameDataNoteNormalization: (data: ExtractedRawGameDataTexts, asset: AssetFilesBundle) => RawGameDataNoteNormalization;
+export declare const normalizeNoteFromMapFiles: <Command extends TextPluginCommandParameter>(mapList: readonly MapFileInfo<ExtractedMapTexts<Command>>[], asset: AssetFilesBundle) => MapFileInfo<ExtractedMapTexts<Command>>[];
+export declare const nonTextNoteKeys: (bundle: ExtractedDataBundle, asset: AssetFilesBundle) => Set<string>;
+export declare const normalizeBundleNoteTexts: (bundle: ExtractedDataBundle, asset: AssetFilesBundle) => ExtractedDataBundle;
+export declare const summarizeNoteKindsFromMapFiles: <Command extends TextPluginCommandParameter>(mapList: readonly MapFileInfo<ExtractedMapTexts<Command>>[], asset: AssetFilesBundle) => SummarizedNote2[];
