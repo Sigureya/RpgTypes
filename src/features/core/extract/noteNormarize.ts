@@ -21,7 +21,7 @@ import type {
   TextPluginCommandParameter,
 } from "./text/eventCommand";
 import {
-  extractAllMapNotesEx2,
+  extractAllMapNotesEx,
   filterNoteFromMapTexts,
 } from "./text/eventCommand/note";
 import { filterNotesInExtractedText } from "./text/mainData/note";
@@ -169,11 +169,11 @@ export const summarizeNoteKindsFromMapFiles = <
   mapList: readonly MapFileInfo<ExtractedMapTexts<Command>>[],
   asset: AssetFilesBundle,
 ): SummarizedNote2[] => {
-  const ppx = mapList.map(extractAllMapNotesEx2);
+  const ppx = mapList.map(extractAllMapNotesEx);
   return summarizeNoteKinds(ppx, asset);
 };
 
-export const normalizeNoteFromMapFiles2 = <
+export const normalizeNoteFromMapFiles = <
   Command extends TextPluginCommandParameter,
 >(
   mapList: readonly MapFileInfo<ExtractedMapTexts<Command>>[],

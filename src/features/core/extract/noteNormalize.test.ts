@@ -5,7 +5,7 @@ import type { OtherFilesSet } from "./note/types";
 import {
   normalizeBundleNoteTexts,
   nonTextNoteKeys,
-  normalizeNoteFromMapFiles2,
+  normalizeNoteFromMapFiles,
   buildRawGameDataNoteNormalization,
 } from "./noteNormarize";
 import type { ExtractedDataBundle, ExtractedMapTexts } from "./text";
@@ -256,7 +256,7 @@ describe("normalizeMapNotes", () => {
         },
       },
     ];
-    const result = normalizeNoteFromMapFiles2(
+    const result = normalizeNoteFromMapFiles(
       [{ editingName: "map1", filename: "Map001.json", map }],
       {
         audioFiles: audioFiles,
@@ -290,7 +290,7 @@ describe("normalizeMapNotes", () => {
       },
     };
     type Result = MapFileInfo<ExtractedMapTexts>[];
-    const result: Result = normalizeNoteFromMapFiles2([map], {
+    const result: Result = normalizeNoteFromMapFiles([map], {
       audioFiles: audioFiles,
       imageFiles: imageFiles,
       otherFiles: ohterFiles,
@@ -369,7 +369,7 @@ describe("normalizeRawGameDataNoteTexts", () => {
       }),
     );
     expect(result.data.value.mapFiles.validMaps).toEqual(
-      normalizeNoteFromMapFiles2([map], {
+      normalizeNoteFromMapFiles([map], {
         audioFiles: audioFiles,
         imageFiles: imageFiles,
         otherFiles: ohterFiles,
