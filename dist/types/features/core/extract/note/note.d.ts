@@ -1,8 +1,7 @@
-import { AudioFilesSet, ImageFilesSet } from '../../../../fileio';
-import { KeyValuePair } from '../../../../libs';
-import { SummarizedNote, OtherFilesSet } from './types';
+import { AssetFilesBundle } from '../../../../fileio';
+import { NoteReadResultsWithSource } from '../../../../rmmz';
+import { SummarizedNote, SummarizedNote2 } from './types';
 export declare const isNoteBoolean: (note: string) => boolean;
 export declare const isNoteNumber: (note: string) => boolean;
-export declare const stringLikeNoteKeys: (list: ReadonlyArray<SummarizedNote>) => Set<string>;
-export declare const summarizeNoteKinds: (items: readonly KeyValuePair[], audioFiles: AudioFilesSet, imageFiles: ImageFilesSet, other: OtherFilesSet, map?: ReadonlyMap<string, KeyValuePair[]>) => SummarizedNote[];
-export declare const categorizeNote: (items: readonly KeyValuePair[]) => Map<string, KeyValuePair[]>;
+export declare const stringLikeNoteKeys: (list: ReadonlyArray<SummarizedNote<unknown>>) => Set<string>;
+export declare const summarizeNoteKinds: (items: readonly NoteReadResultsWithSource[], { audioFiles, imageFiles, otherFiles: other }: AssetFilesBundle) => SummarizedNote2[];

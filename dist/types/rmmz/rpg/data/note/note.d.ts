@@ -1,4 +1,5 @@
-import { NoteReadResult, NoteReplaceHandlers } from './types';
+import { Data_NamedItem } from '../../../../libs';
+import { NoteReadResult, NoteReadResultEx, NoteReplaceHandlers } from './types';
 export declare const createNoteEntity: (key: string, value: string) => string;
 /**
  *
@@ -10,3 +11,6 @@ export declare const replaceNote: (note: string, transformFunction: (item: NoteR
 export declare const replaceNoteWithHandlers: (note: string, handlers: NoteReplaceHandlers, sep?: string) => string;
 export declare const getNoteValue: (note: string, targetKey: string) => string | undefined;
 export declare const setNoteValue: (note: string, targetKey: string, newValue: string) => string;
+export declare const readNoteEx2: (data: Data_NamedItem & {
+    note: string;
+}) => NoteReadResultEx[];
