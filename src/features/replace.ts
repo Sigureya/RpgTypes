@@ -18,7 +18,7 @@ import { replaceNoteWithHandlers } from "@RpgTypes/rmmz";
 import { normalizeEventCommands } from "./core/eventCommand/normalize";
 import {
   extractTextFromRawGameData,
-  buildRawGameDataNoteNormalization,
+  buildRawGameDataNoteNormalization2,
 } from "./core/extract";
 import {
   replaceActorText,
@@ -277,12 +277,11 @@ export const replaceRawDataWithAutoNoteFilter = (
   // まずテキストを抽出し
   const e = extractTextFromRawGameData(data, extractor);
   // 正規化済みノートを取得
-  const n = buildRawGameDataNoteNormalization(
-    e,
-    assetBundle.audioFiles,
-    assetBundle.imageFiles,
-    assetBundle.otherFiles,
-  );
+  const n = buildRawGameDataNoteNormalization2(e, {
+    audioFiles: assetBundle.audioFiles,
+    imageFiles: assetBundle.imageFiles,
+    otherFiles: assetBundle.otherFiles,
+  });
   // ハンドラを微修正。
   // noteから自動算出した非テキストノートキーをisReplaceTargetNoteで弾くようにする
   const h2 = lapHandlers(n.nonTextNoteKeys, handlers);

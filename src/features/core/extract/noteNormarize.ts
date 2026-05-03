@@ -1,13 +1,40 @@
-import type { AudioFilesSet, ImageFilesSet } from "@RpgTypes/fileio";
-import type { MapFileInfo, NoteReadResult } from "@RpgTypes/rmmz";
-import { stringLikeNoteKeys, summarizeNoteKinds } from "./note/note";
-import type { OtherFilesSet, SummarizedNote } from "./note/types";
+import type {
+  AssetFilesBundle,
+  AudioFilesSet,
+  ImageFilesSet,
+} from "@RpgTypes/fileio";
+import {
+  FILENAME_ACTORS,
+  FILENAME_ARMORS,
+  FILENAME_CLASSES,
+  FILENAME_ENEMIES,
+  FILENAME_ITEMS,
+  FILENAME_SKILLS,
+  FILENAME_STATES,
+  FILENAME_WEAPONS,
+} from "@RpgTypes/fileio";
+import type {
+  MapFileInfo,
+  NoteReadResult,
+  NoteReadResultsWithSource,
+} from "@RpgTypes/rmmz";
+import {
+  stringLikeNoteKeys,
+  summarizeNoteKinds,
+  summarizeNoteKinds2,
+} from "./note/note";
+import type {
+  OtherFilesSet,
+  SummarizedNote,
+  SummarizedNote2,
+} from "./note/types";
 import type {
   ExtractedMapTexts,
   TextPluginCommandParameter,
 } from "./text/eventCommand";
 import {
   extractAllMapNotesEx,
+  extractAllMapNotesEx2,
   filterNoteFromMapTexts,
 } from "./text/eventCommand/note";
 import { filterNotesInExtractedText } from "./text/mainData/note";
@@ -18,47 +45,8 @@ import type {
 } from "./text/mainData/types";
 import type {
   ExtractedRawGameDataTexts,
-  RawGameDataNoteNormalization,
+  RawGameDataNoteNormalization2,
 } from "./types";
-
-export const buildRawGameDataNoteNormalization = (
-  data: ExtractedRawGameDataTexts,
-  audioFiles: AudioFilesSet,
-  imageFiles: ImageFilesSet,
-  other: OtherFilesSet,
-): RawGameDataNoteNormalization => {
-  const normalizedMainData = normalizeMainDataNotes(
-    data.value.mainData,
-    audioFiles,
-    imageFiles,
-    other,
-  );
-  const normalizedMapFiles = normalizeMapFileNotes(
-    data.value.mapFiles.validMaps,
-    audioFiles,
-    imageFiles,
-    other,
-  );
-
-  return {
-    dataNoteSummary: normalizedMainData.noteSummary,
-    mapNoteSummary: normalizedMapFiles.noteSummary,
-    nonTextNoteKeys: normalizedMainData.nonTextNoteKeys,
-    data: {
-      errors: data.errors,
-      value: {
-        mainData: normalizedMainData.mainData,
-        mapFiles: {
-          info: data.value.mapFiles.info,
-          invalidMaps: data.value.mapFiles.invalidMaps,
-          validMaps: normalizedMapFiles.validMaps,
-        },
-        eventData: data.value.eventData,
-        system: data.value.system,
-      },
-    },
-  };
-};
 
 export const summarizeNoteKindsFromMapFiles = <
   Command extends TextPluginCommandParameter,
@@ -80,14 +68,11 @@ export const normalizeNoteFromMapFiles = <
   imageFiles: ImageFilesSet,
   other: OtherFilesSet,
 ): MapFileInfo<ExtractedMapTexts<Command>>[] => {
-  const summarized = summarizeNoteKindsFromMapFiles(
-    mapList,
-    audioFiles,
-    imageFiles,
-    other,
-  );
-  const keysSet: Set<string> = stringLikeNoteKeys(summarized);
-  return normalizeNoteFromMapFilesWithKeys(mapList, keysSet);
+  return normalizeNoteFromMapFiles2(mapList, {
+    audioFiles: audioFiles,
+    imageFiles: imageFiles,
+    otherFiles: other,
+  });
 };
 
 export const nonTextNoteKeys = (
@@ -96,13 +81,11 @@ export const nonTextNoteKeys = (
   imageFiles: ImageFilesSet,
   other: OtherFilesSet,
 ): Set<string> => {
-  const summarized: SummarizedNote[] = summarizeBundleNoteKinds(
-    bundle,
-    audioFiles,
-    imageFiles,
-    other,
-  );
-  return stringLikeNoteKeys(summarized);
+  return nonTextNoteKeys2(bundle, {
+    audioFiles: audioFiles,
+    imageFiles: imageFiles,
+    otherFiles: other,
+  });
 };
 
 export const normalizeBundleNoteTexts = (
@@ -132,6 +115,83 @@ const normalizeBundleNoteTextsWithKeys = (
   };
 };
 
+export const buildRawGameDataNoteNormalization2 = (
+  data: ExtractedRawGameDataTexts,
+  asset: AssetFilesBundle,
+): RawGameDataNoteNormalization2 => {
+  const normalizedMainData = normalizeMainDataNotes2(
+    data.value.mainData,
+    asset,
+  );
+  const normalizedMapFiles = normalizeMapFileNotes2(
+    data.value.mapFiles.validMaps,
+    asset,
+  );
+
+  return {
+    nonTextNoteKeys: normalizedMainData.nonTextNoteKeys,
+    dataNoteSummary: normalizedMainData.noteSummary,
+    mapNoteSummary: normalizedMapFiles.noteSummary,
+    data: {
+      errors: data.errors,
+      value: {
+        mainData: normalizedMainData.mainData,
+        mapFiles: {
+          info: data.value.mapFiles.info,
+          invalidMaps: data.value.mapFiles.invalidMaps,
+          validMaps: normalizedMapFiles.validMaps,
+        },
+        eventData: data.value.eventData,
+        system: data.value.system,
+      },
+    },
+  };
+};
+
+interface ResultOfMain2 {
+  noteSummary: SummarizedNote2[];
+  nonTextNoteKeys: Set<string>;
+  mainData: ExtractedDataBundle;
+}
+
+const normalizeMainDataNotes2 = (
+  mainData: ExtractedDataBundle,
+  asset: AssetFilesBundle,
+): ResultOfMain2 => {
+  const noteSummary = summarizeBundleNoteKinds2(mainData, asset);
+  const nonTextNoteKeys = stringLikeNoteKeys(noteSummary);
+  return {
+    noteSummary,
+    nonTextNoteKeys,
+    mainData: normalizeBundleNoteTextsWithKeys2(mainData, nonTextNoteKeys),
+  };
+};
+
+const normalizeBundleNoteTextsWithKeys2 = (
+  bundle: ExtractedDataBundle,
+  keysSet: ReadonlySet<string>,
+): ExtractedDataBundle => {
+  const fn = (note: ExtractedTextItem): boolean => keysSet.has(note.key);
+  return {
+    actors: filterNotesInExtractedText(bundle.actors, fn),
+    enemies: filterNotesInExtractedText(bundle.enemies, fn),
+    weapons: filterNotesInExtractedText(bundle.weapons, fn),
+    armors: filterNotesInExtractedText(bundle.armors, fn),
+    skills: filterNotesInExtractedText(bundle.skills, fn),
+    states: filterNotesInExtractedText(bundle.states, fn),
+    items: filterNotesInExtractedText(bundle.items, fn),
+    classes: filterNotesInExtractedText(bundle.classes, fn),
+  };
+};
+
+export const nonTextNoteKeys2 = (
+  bundle: ExtractedDataBundle,
+  asset: AssetFilesBundle,
+): Set<string> => {
+  const summarized = summarizeBundleNoteKinds2(bundle, asset);
+  return stringLikeNoteKeys(summarized);
+};
+
 const normalizeNoteFromMapFilesWithKeys = <
   Command extends TextPluginCommandParameter,
 >(
@@ -147,83 +207,70 @@ const normalizeNoteFromMapFilesWithKeys = <
   );
 };
 
-const summarizeBundleNoteKinds = (
+const summarizeBundleNoteKinds2 = (
   bundle: ExtractedDataBundle,
-  audioFiles: AudioFilesSet,
-  imageFiles: ImageFilesSet,
-  other: OtherFilesSet,
-): SummarizedNote[] => {
-  const list = flattenAllBundleNotes(bundle);
-  return summarizeNoteKinds(list, audioFiles, imageFiles, other);
+  asset: AssetFilesBundle,
+): SummarizedNote2[] => {
+  const list = bundleToPaXList(bundle);
+  return summarizeNoteKinds2(list, asset);
 };
 
-const flattenAllBundleNotes = (
+const bundleToPaXList = (
   bundle: ExtractedDataBundle,
-): ExtractedTextItem[] => {
-  const noteItems: ExtractedTextItem[][][] = [
-    extractNoteArraysFromList(bundle.actors),
-    extractNoteArraysFromList(bundle.skills),
-    extractNoteArraysFromList(bundle.items),
-    extractNoteArraysFromList(bundle.weapons),
-    extractNoteArraysFromList(bundle.armors),
-    extractNoteArraysFromList(bundle.classes),
-    extractNoteArraysFromList(bundle.states),
-    extractNoteArraysFromList(bundle.enemies),
-  ];
-  return noteItems.flat(3);
+): NoteReadResultsWithSource[] => [
+  notesToPaX(FILENAME_ACTORS, bundle.actors),
+  notesToPaX(FILENAME_SKILLS, bundle.skills),
+  notesToPaX(FILENAME_ITEMS, bundle.items),
+  notesToPaX(FILENAME_WEAPONS, bundle.weapons),
+  notesToPaX(FILENAME_ARMORS, bundle.armors),
+  notesToPaX(FILENAME_CLASSES, bundle.classes),
+  notesToPaX(FILENAME_STATES, bundle.states),
+  notesToPaX(FILENAME_ENEMIES, bundle.enemies),
+];
+
+const notesToPaX = (
+  source: string,
+  list: readonly ExtractedNoteList[],
+): NoteReadResultsWithSource => ({
+  source,
+  notes: list.flatMap((item) =>
+    item.note.map((n) => ({ key: n.key, value: n.value, dataId: n.id })),
+  ),
+});
+
+export const summarizeNoteKindsFromMapFiles2 = <
+  Command extends TextPluginCommandParameter,
+>(
+  mapList: readonly MapFileInfo<ExtractedMapTexts<Command>>[],
+  asset: AssetFilesBundle,
+): SummarizedNote2[] => {
+  const ppx = mapList.map(extractAllMapNotesEx2);
+  return summarizeNoteKinds2(ppx, asset);
 };
 
-const extractNoteArraysFromList = (
-  note: readonly ExtractedNoteList[],
-): ExtractedTextItem[][] => {
-  return note.map((item) => item.note);
+export const normalizeNoteFromMapFiles2 = <
+  Command extends TextPluginCommandParameter,
+>(
+  mapList: readonly MapFileInfo<ExtractedMapTexts<Command>>[],
+  asset: AssetFilesBundle,
+): MapFileInfo<ExtractedMapTexts<Command>>[] => {
+  const summarized = summarizeNoteKindsFromMapFiles2(mapList, asset);
+  const keysSet: Set<string> = stringLikeNoteKeys(summarized);
+  return normalizeNoteFromMapFilesWithKeys(mapList, keysSet);
 };
 
-interface ResultOfMain {
-  noteSummary: SummarizedNote[];
-  nonTextNoteKeys: Set<string>;
-  mainData: ExtractedDataBundle;
-}
-
-interface ResultOfMap {
-  noteSummary: SummarizedNote[];
+interface ResultOfMap2 {
+  noteSummary: SummarizedNote2[];
   validMaps: MapFileInfo<ExtractedMapTexts<TextPluginCommandParameter>>[];
 }
 
-const normalizeMainDataNotes = (
-  mainData: ExtractedDataBundle,
-  audioFiles: AudioFilesSet,
-  imageFiles: ImageFilesSet,
-  other: OtherFilesSet,
-): ResultOfMain => {
-  const noteSummary = summarizeBundleNoteKinds(
-    mainData,
-    audioFiles,
-    imageFiles,
-    other,
-  );
-  const nonTextNoteKeys = stringLikeNoteKeys(noteSummary);
-  return {
-    noteSummary,
-    nonTextNoteKeys,
-    mainData: normalizeBundleNoteTextsWithKeys(mainData, nonTextNoteKeys),
-  };
-};
-
-const normalizeMapFileNotes = (
+const normalizeMapFileNotes2 = (
   mapList: readonly MapFileInfo<
     ExtractedMapTexts<TextPluginCommandParameter>
   >[],
-  audioFiles: AudioFilesSet,
-  imageFiles: ImageFilesSet,
-  other: OtherFilesSet,
-): ResultOfMap => {
-  const noteSummary = summarizeNoteKindsFromMapFiles(
-    mapList,
-    audioFiles,
-    imageFiles,
-    other,
-  );
+  asset: AssetFilesBundle,
+): ResultOfMap2 => {
+  const noteSummary = summarizeNoteKindsFromMapFiles2(mapList, asset);
   const keys = stringLikeNoteKeys(noteSummary);
   return {
     noteSummary,

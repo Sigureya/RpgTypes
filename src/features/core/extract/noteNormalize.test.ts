@@ -3,10 +3,11 @@ import type { AudioFilesSet, ImageFilesSet } from "@RpgTypes/fileio";
 import type { MapFileInfo } from "@RpgTypes/rmmz";
 import type { OtherFilesSet } from "./note/types";
 import {
-  nonTextNoteKeys,
+  buildRawGameDataNoteNormalization2,
+  nonTextNoteKeys2,
   normalizeBundleNoteTexts,
   normalizeNoteFromMapFiles,
-  buildRawGameDataNoteNormalization,
+  normalizeNoteFromMapFiles2,
 } from "./noteNormarize";
 import type { ExtractedMapTexts } from "./text/eventCommand";
 import type { ExtractedDataBundle } from "./text/mainData/types";
@@ -198,12 +199,20 @@ describe("normalizeBundleNoteTexts", () => {
 
 describe("nonTextNoteKeys", () => {
   test("returns empty set when no note keys match non-text file kinds", () => {
-    const result = nonTextNoteKeys(bundle, audioFiles, imageFiles, ohterFiles);
+    const result = nonTextNoteKeys2(bundle, {
+      audioFiles: audioFiles,
+      imageFiles: imageFiles,
+      otherFiles: ohterFiles,
+    });
     const expected = new Set([]);
     expect(result).toEqual(expected);
   });
   test("returns set of note keys that match non-text file kinds regardless of value", () => {
-    const result = nonTextNoteKeys(bundle2, audioFiles, imageFiles, ohterFiles);
+    const result = nonTextNoteKeys2(bundle2, {
+      audioFiles: audioFiles,
+      imageFiles: imageFiles,
+      otherFiles: ohterFiles,
+    });
     const expected = new Set(["desc", "ex-name", "ex-profile", "special"]);
     expect(result).toEqual(expected);
   });
@@ -251,11 +260,13 @@ describe("normalizeMapNotes", () => {
         },
       },
     ];
-    const result = normalizeNoteFromMapFiles(
+    const result = normalizeNoteFromMapFiles2(
       [{ editingName: "map1", filename: "Map001.json", map }],
-      audioFiles,
-      imageFiles,
-      ohterFiles,
+      {
+        audioFiles: audioFiles,
+        imageFiles: imageFiles,
+        otherFiles: ohterFiles,
+      },
     );
     expect(result).toEqual(expected);
   });
@@ -283,12 +294,11 @@ describe("normalizeMapNotes", () => {
       },
     };
     type Result = MapFileInfo<ExtractedMapTexts>[];
-    const result: Result = normalizeNoteFromMapFiles(
-      [map],
-      audioFiles,
-      imageFiles,
-      ohterFiles,
-    );
+    const result: Result = normalizeNoteFromMapFiles2([map], {
+      audioFiles: audioFiles,
+      imageFiles: imageFiles,
+      otherFiles: ohterFiles,
+    });
     expect(result).toEqual([map]);
   });
 });
@@ -338,12 +348,11 @@ describe("normalizeRawGameDataNoteTexts", () => {
       },
     };
 
-    const result = buildRawGameDataNoteNormalization(
-      rawData,
-      audioFiles,
-      imageFiles,
-      ohterFiles,
-    );
+    const result = buildRawGameDataNoteNormalization2(rawData, {
+      audioFiles: audioFiles,
+      imageFiles: imageFiles,
+      otherFiles: ohterFiles,
+    });
 
     expect(result.dataNoteSummary).toHaveLength(4);
     expect(result.mapNoteSummary).toHaveLength(3);
