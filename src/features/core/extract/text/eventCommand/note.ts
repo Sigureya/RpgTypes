@@ -10,13 +10,7 @@ import type {
   TextPluginCommandParameter,
 } from "./types";
 
-export const extractAllMapNotes = (
-  map: readonly ExtractedMapTexts[],
-): NoteReadResult[] => {
-  return map.map(n2).flat(4);
-};
-
-export const extractAllMapNotesEx2 = (
+export const extractAllMapNotesEx = (
   map: MapFileInfo<ExtractedMapTexts>,
 ): NoteReadResultsWithSource => {
   return {
@@ -40,24 +34,6 @@ const mmx = (item: NoteReadResult): NoteReadResultEx => ({
   key: item.key,
   value: item.value,
 });
-
-export const extractAllMapNotesEx = <T>(
-  map: ReadonlyArray<T>,
-  fn: (map: T) => ExtractedMapTexts,
-): NoteReadResult[] => {
-  return map
-    .map((m) => {
-      const mm = fn(m);
-      return n2(mm);
-    })
-    .flat(4);
-};
-
-const n2 = (
-  map: ExtractedMapTexts,
-): [body: NoteReadResult[], events: NoteReadResult[][]] => {
-  return [map.noteItems, map.events.map((e) => e.noteItems)];
-};
 
 export const filterNoteFromMapTexts = <
   Command extends TextPluginCommandParameter,
