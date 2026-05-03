@@ -35,14 +35,6 @@ import type {
   RawGameDataNoteNormalization,
 } from "./types";
 
-export const normalizeBundleNoteTexts = (
-  bundle: ExtractedDataBundle,
-  asset: AssetFilesBundle,
-): ExtractedDataBundle => {
-  const keysSet = nonTextNoteKeys(bundle, asset);
-  return normalizeBundleNoteTextsWithKeys(bundle, keysSet);
-};
-
 export const buildRawGameDataNoteNormalization = (
   data: ExtractedRawGameDataTexts,
   asset: AssetFilesBundle,
@@ -109,6 +101,14 @@ export const nonTextNoteKeys = (
 ): Set<string> => {
   const summarized = summarizeBundleNoteKinds(bundle, asset);
   return stringLikeNoteKeys(summarized);
+};
+
+export const normalizeBundleNoteTexts = (
+  bundle: ExtractedDataBundle,
+  asset: AssetFilesBundle,
+): ExtractedDataBundle => {
+  const keysSet = nonTextNoteKeys(bundle, asset);
+  return normalizeBundleNoteTextsWithKeys(bundle, keysSet);
 };
 
 const normalizeNoteFromMapFilesWithKeys = <
