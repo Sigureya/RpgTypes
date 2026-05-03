@@ -73,12 +73,6 @@ export const buildRawGameDataNoteNormalization = (
   };
 };
 
-interface ResultOfMain {
-  noteSummary: SummarizedNote<SummarizedNoteValue>[];
-  nonTextNoteKeys: Set<string>;
-  mainData: ExtractedDataBundle;
-}
-
 const normalizeMainDataNotes = (
   mainData: ExtractedDataBundle,
   asset: AssetFilesBundle,
@@ -184,7 +178,13 @@ export const normalizeNoteFromMapFiles = <
   return normalizeNoteFromMapFilesWithKeys(mapList, keysSet);
 };
 
-interface ResultOfMap2 {
+interface ResultOfMain {
+  noteSummary: SummarizedNote<SummarizedNoteValue>[];
+  nonTextNoteKeys: Set<string>;
+  mainData: ExtractedDataBundle;
+}
+
+interface ResultOfMap {
   noteSummary: SummarizedNote<SummarizedNoteValue>[];
   validMaps: MapFileInfo<ExtractedMapTexts<TextPluginCommandParameter>>[];
 }
@@ -194,7 +194,7 @@ const normalizeMapFileNotes = (
     ExtractedMapTexts<TextPluginCommandParameter>
   >[],
   asset: AssetFilesBundle,
-): ResultOfMap2 => {
+): ResultOfMap => {
   const noteSummary = summarizeNoteKindsFromMapFiles(mapList, asset);
   const keys = stringLikeNoteKeys(noteSummary);
   return {
