@@ -1,13 +1,26 @@
-import type { AudioFilesSet, ImageFilesSet } from "@RpgTypes/fileio";
+import type {
+  AssetFilesBundle,
+  AudioFilesSet,
+  ImageFilesSet,
+} from "@RpgTypes/fileio";
 import type { MapFileInfo, NoteReadResult } from "@RpgTypes/rmmz";
-import { stringLikeNoteKeys, summarizeNoteKinds } from "./note/note";
-import type { OtherFilesSet, SummarizedNote } from "./note/types";
+import {
+  stringLikeNoteKeys,
+  summarizeNoteKinds,
+  summarizeNoteKinds2,
+} from "./note/note";
+import type {
+  OtherFilesSet,
+  SummarizedNote,
+  SummarizedNote2,
+} from "./note/types";
 import type {
   ExtractedMapTexts,
   TextPluginCommandParameter,
 } from "./text/eventCommand";
 import {
   extractAllMapNotesEx,
+  extractAllMapNotesEx2,
   filterNoteFromMapTexts,
 } from "./text/eventCommand/note";
 import { filterNotesInExtractedText } from "./text/mainData/note";
@@ -58,6 +71,16 @@ export const buildRawGameDataNoteNormalization = (
       },
     },
   };
+};
+
+export const summarizeNoteKindsFromMapFiles2 = <
+  Command extends TextPluginCommandParameter,
+>(
+  mapList: readonly MapFileInfo<ExtractedMapTexts<Command>>[],
+  asset: AssetFilesBundle,
+): SummarizedNote2[] => {
+  const ppx = mapList.map(extractAllMapNotesEx2);
+  return summarizeNoteKinds2(ppx, asset);
 };
 
 export const summarizeNoteKindsFromMapFiles = <

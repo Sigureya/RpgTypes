@@ -1,4 +1,9 @@
-import type { NoteReadResult } from "@RpgTypes/rmmz";
+import type {
+  MapFileInfo,
+  NoteReadResult,
+  NoteReadResultEx,
+  PaX,
+} from "@RpgTypes/rmmz";
 import type {
   ExtractedMapEventTexts,
   ExtractedMapTexts,
@@ -10,6 +15,31 @@ export const extractAllMapNotes = (
 ): NoteReadResult[] => {
   return map.map(n2).flat(4);
 };
+
+export const extractAllMapNotesEx2 = (
+  map: MapFileInfo<ExtractedMapTexts>,
+): PaX => {
+  return {
+    source: map.filename,
+    notes: [...map.map.noteItems.map(mmx), ...map.map.events.map(eex).flat()],
+  };
+};
+
+const eex = (e: ExtractedMapEventTexts): NoteReadResultEx[] => {
+  return e.noteItems.map(
+    (n): NoteReadResultEx => ({
+      dataId: e.eventId,
+      key: n.key,
+      value: n.value,
+    }),
+  );
+};
+
+const mmx = (item: NoteReadResult): NoteReadResultEx => ({
+  dataId: 0,
+  key: item.key,
+  value: item.value,
+});
 
 export const extractAllMapNotesEx = <T>(
   map: ReadonlyArray<T>,

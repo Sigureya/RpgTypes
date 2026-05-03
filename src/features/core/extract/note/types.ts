@@ -9,6 +9,18 @@ export interface SummarizedNote {
   values: string[];
 }
 
+export interface SummarizedNoteValue {
+  value: string;
+  dataId: number;
+  soruce: string;
+}
+
+export interface SummarizedNote2 {
+  key: string;
+  kinds: string[];
+  values: SummarizedNoteValue[];
+}
+
 export interface NoteSchema {
   key: string;
   kinds: string;
