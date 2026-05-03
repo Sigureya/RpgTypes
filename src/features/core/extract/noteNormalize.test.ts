@@ -1,15 +1,14 @@
-import { test, expect, describe } from "vitest";
+import { describe, test, expect } from "vitest";
 import type { AudioFilesSet, ImageFilesSet } from "@RpgTypes/fileio";
 import type { MapFileInfo } from "@RpgTypes/rmmz";
 import type { OtherFilesSet } from "./note/types";
 import {
-  nonTextNoteKeys,
   normalizeBundleNoteTexts,
+  nonTextNoteKeys,
   normalizeNoteFromMapFiles,
   buildRawGameDataNoteNormalization,
 } from "./noteNormarize";
-import type { ExtractedMapTexts } from "./text/eventCommand";
-import type { ExtractedDataBundle } from "./text/mainData/types";
+import type { ExtractedDataBundle, ExtractedMapTexts } from "./text";
 import type { ExtractedRawGameDataTexts } from "./types";
 
 const BGM1 = "bgm1";
@@ -167,12 +166,11 @@ const bundle2: ExtractedDataBundle = {
 
 describe("normalizeBundleNoteTexts", () => {
   test("no matching kinds", () => {
-    const result = normalizeBundleNoteTexts(
-      bundle,
-      audioFiles,
-      imageFiles,
-      ohterFiles,
-    );
+    const result = normalizeBundleNoteTexts(bundle, {
+      audioFiles: audioFiles,
+      imageFiles: imageFiles,
+      otherFiles: ohterFiles,
+    });
     const expected: ExtractedDataBundle = {
       actors: [],
       enemies: [],
@@ -186,24 +184,31 @@ describe("normalizeBundleNoteTexts", () => {
     expect(result).toEqual(expected);
   });
   test("matching kinds and values are filtered correctly", () => {
-    const result = normalizeBundleNoteTexts(
-      bundle2,
-      audioFiles,
-      imageFiles,
-      ohterFiles,
-    );
+    const result = normalizeBundleNoteTexts(bundle2, {
+      audioFiles: audioFiles,
+      imageFiles: imageFiles,
+      otherFiles: ohterFiles,
+    });
     expect(result).toEqual(bundle2);
   });
 });
 
 describe("nonTextNoteKeys", () => {
   test("returns empty set when no note keys match non-text file kinds", () => {
-    const result = nonTextNoteKeys(bundle, audioFiles, imageFiles, ohterFiles);
+    const result = nonTextNoteKeys(bundle, {
+      audioFiles: audioFiles,
+      imageFiles: imageFiles,
+      otherFiles: ohterFiles,
+    });
     const expected = new Set([]);
     expect(result).toEqual(expected);
   });
   test("returns set of note keys that match non-text file kinds regardless of value", () => {
-    const result = nonTextNoteKeys(bundle2, audioFiles, imageFiles, ohterFiles);
+    const result = nonTextNoteKeys(bundle2, {
+      audioFiles: audioFiles,
+      imageFiles: imageFiles,
+      otherFiles: ohterFiles,
+    });
     const expected = new Set(["desc", "ex-name", "ex-profile", "special"]);
     expect(result).toEqual(expected);
   });
@@ -253,9 +258,11 @@ describe("normalizeMapNotes", () => {
     ];
     const result = normalizeNoteFromMapFiles(
       [{ editingName: "map1", filename: "Map001.json", map }],
-      audioFiles,
-      imageFiles,
-      ohterFiles,
+      {
+        audioFiles: audioFiles,
+        imageFiles: imageFiles,
+        otherFiles: ohterFiles,
+      },
     );
     expect(result).toEqual(expected);
   });
@@ -283,12 +290,11 @@ describe("normalizeMapNotes", () => {
       },
     };
     type Result = MapFileInfo<ExtractedMapTexts>[];
-    const result: Result = normalizeNoteFromMapFiles(
-      [map],
-      audioFiles,
-      imageFiles,
-      ohterFiles,
-    );
+    const result: Result = normalizeNoteFromMapFiles([map], {
+      audioFiles: audioFiles,
+      imageFiles: imageFiles,
+      otherFiles: ohterFiles,
+    });
     expect(result).toEqual([map]);
   });
 });
@@ -338,12 +344,11 @@ describe("normalizeRawGameDataNoteTexts", () => {
       },
     };
 
-    const result = buildRawGameDataNoteNormalization(
-      rawData,
-      audioFiles,
-      imageFiles,
-      ohterFiles,
-    );
+    const result = buildRawGameDataNoteNormalization(rawData, {
+      audioFiles: audioFiles,
+      imageFiles: imageFiles,
+      otherFiles: ohterFiles,
+    });
 
     expect(result.dataNoteSummary).toHaveLength(4);
     expect(result.mapNoteSummary).toHaveLength(3);
@@ -357,10 +362,18 @@ describe("normalizeRawGameDataNoteTexts", () => {
     );
 
     expect(result.data.value.mainData).toEqual(
-      normalizeBundleNoteTexts(bundle2, audioFiles, imageFiles, ohterFiles),
+      normalizeBundleNoteTexts(bundle2, {
+        audioFiles: audioFiles,
+        imageFiles: imageFiles,
+        otherFiles: ohterFiles,
+      }),
     );
     expect(result.data.value.mapFiles.validMaps).toEqual(
-      normalizeNoteFromMapFiles([map], audioFiles, imageFiles, ohterFiles),
+      normalizeNoteFromMapFiles([map], {
+        audioFiles: audioFiles,
+        imageFiles: imageFiles,
+        otherFiles: ohterFiles,
+      }),
     );
   });
 });

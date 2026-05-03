@@ -8,6 +8,14 @@ export interface NoteReadResult {
   value: string;
 }
 
+export interface NoteReadResultEx extends NoteReadResult {
+  dataId: number;
+}
+export interface NoteReadResultsWithSource {
+  source: string;
+  notes: NoteReadResultEx[];
+}
+
 export interface NormalizedNote {
   note: string;
   items: NoteReadResult[];

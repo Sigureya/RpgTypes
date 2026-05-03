@@ -1,6 +1,19 @@
-import type { AudioFilesSet, ImageFilesSet } from "@RpgTypes/fileio";
+import type {
+  AssetFilesBundle,
+  AudioFilesSet,
+  ImageFilesSet,
+} from "@RpgTypes/fileio";
 import type { KeyValuePair } from "@RpgTypes/libs";
-import type { SummarizedNote, OtherFilesSet } from "./types";
+import type {
+  NoteReadResultEx,
+  NoteReadResultsWithSource,
+} from "@RpgTypes/rmmz";
+import type {
+  SummarizedNote,
+  OtherFilesSet,
+  SummarizedNote2,
+  SummarizedNoteValue,
+} from "./types";
 
 export const isNoteBoolean = (note: string): boolean => {
   const text = note.trim().toLowerCase();
@@ -13,7 +26,7 @@ export const isNoteNumber = (note: string): boolean => {
 };
 
 export const stringLikeNoteKeys = (
-  list: ReadonlyArray<SummarizedNote>,
+  list: ReadonlyArray<SummarizedNote<unknown>>,
 ): Set<string> => {
   const ss: string[] = list
     .filter((item) => item.kinds.length === 0)
@@ -22,31 +35,41 @@ export const stringLikeNoteKeys = (
 };
 
 export const summarizeNoteKinds = (
-  items: readonly KeyValuePair[],
-  audioFiles: AudioFilesSet,
-  imageFiles: ImageFilesSet,
-  other: OtherFilesSet,
-  map: ReadonlyMap<string, KeyValuePair[]> = categorizeNote(items),
-): SummarizedNote[] => {
-  return Array.from(map.entries()).map(([key, mapedItems]): SummarizedNote => {
-    const kindState = detectNoteKindState(
-      mapedItems,
-      audioFiles,
-      imageFiles,
-      other,
-    );
-    const kinds = extractNoteKinds(kindState);
-    return {
-      key,
-      kinds,
-      values: mapedItems.map((i) => i.value),
-    };
-  });
+  items: readonly NoteReadResultsWithSource[],
+  { audioFiles, imageFiles, otherFiles: other }: AssetFilesBundle,
+): SummarizedNote2[] => {
+  const flattened: Array<NoteReadResultEx & { soruce: string }> = items.flatMap(
+    (paX) => paX.notes.map((note) => ({ ...note, soruce: paX.source })),
+  );
+  const map = categorizeNoteEx(flattened);
+
+  return Array.from(map.entries()).map(
+    ([key, mappedItems]): SummarizedNote2 => {
+      const kindState = detectNoteKindState(
+        mappedItems,
+        audioFiles,
+        imageFiles,
+        other,
+      );
+      const kinds = extractNoteKinds(kindState);
+      return {
+        key,
+        kinds,
+        values: mappedItems.map(
+          (i): SummarizedNoteValue => ({
+            value: i.value,
+            dataId: i.dataId,
+            soruce: i.soruce,
+          }),
+        ),
+      };
+    },
+  );
 };
 
-export const categorizeNote = (
-  items: readonly KeyValuePair[],
-): Map<string, KeyValuePair[]> => {
+const categorizeNoteEx = <T extends KeyValuePair>(
+  items: readonly T[],
+): Map<string, T[]> => {
   return items.reduce((acc, item) => {
     if (acc.has(item.key)) {
       return acc;
@@ -56,7 +79,7 @@ export const categorizeNote = (
       items.filter((i) => i.key === item.key),
     );
     return acc;
-  }, new Map<string, KeyValuePair[]>());
+  }, new Map<string, T[]>());
 };
 
 const extractNoteKinds = (state: KindState) => {

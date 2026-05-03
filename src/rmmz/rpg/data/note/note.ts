@@ -1,8 +1,10 @@
+import type { Data_NamedItem } from "@RpgTypes/libs";
 import { buildNoteFromNormalized, normalizeNote } from "./normarize";
 import { makeRegex } from "./read";
 import type {
   NormalizedNote,
   NoteReadResult,
+  NoteReadResultEx,
   NoteReplaceHandlers,
 } from "./types";
 
@@ -93,4 +95,18 @@ export const setNoteValue = (
     }
     return match; // 対象外はそのまま
   });
+};
+
+export const readNoteEx2 = (
+  data: Data_NamedItem & { note: string },
+): NoteReadResultEx[] => {
+  const regex = makeRegex();
+  const matches = Array.from(data.note.matchAll(regex));
+  return matches.map(
+    (m): NoteReadResultEx => ({
+      key: m[1],
+      value: m[2],
+      dataId: data.id,
+    }),
+  );
 };

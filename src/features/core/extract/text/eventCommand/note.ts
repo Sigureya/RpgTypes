@@ -1,33 +1,39 @@
-import type { NoteReadResult } from "@RpgTypes/rmmz";
+import type {
+  MapFileInfo,
+  NoteReadResult,
+  NoteReadResultEx,
+  NoteReadResultsWithSource,
+} from "@RpgTypes/rmmz";
 import type {
   ExtractedMapEventTexts,
   ExtractedMapTexts,
   TextPluginCommandParameter,
 } from "./types";
 
-export const extractAllMapNotes = (
-  map: readonly ExtractedMapTexts[],
-): NoteReadResult[] => {
-  return map.map(n2).flat(4);
+export const extractAllMapNotesEx = (
+  map: MapFileInfo<ExtractedMapTexts>,
+): NoteReadResultsWithSource => {
+  return {
+    source: map.filename,
+    notes: [...map.map.noteItems.map(mmx), ...map.map.events.map(eex).flat()],
+  };
 };
 
-export const extractAllMapNotesEx = <T>(
-  map: ReadonlyArray<T>,
-  fn: (map: T) => ExtractedMapTexts,
-): NoteReadResult[] => {
-  return map
-    .map((m) => {
-      const mm = fn(m);
-      return n2(mm);
-    })
-    .flat(4);
+const eex = (e: ExtractedMapEventTexts): NoteReadResultEx[] => {
+  return e.noteItems.map(
+    (n): NoteReadResultEx => ({
+      dataId: e.eventId,
+      key: n.key,
+      value: n.value,
+    }),
+  );
 };
 
-const n2 = (
-  map: ExtractedMapTexts,
-): [body: NoteReadResult[], events: NoteReadResult[][]] => {
-  return [map.noteItems, map.events.map((e) => e.noteItems)];
-};
+const mmx = (item: NoteReadResult): NoteReadResultEx => ({
+  dataId: 0,
+  key: item.key,
+  value: item.value,
+});
 
 export const filterNoteFromMapTexts = <
   Command extends TextPluginCommandParameter,

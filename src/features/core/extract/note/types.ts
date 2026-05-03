@@ -3,11 +3,19 @@ export interface NoteSchema {
   kind: string;
 }
 
-export interface SummarizedNote {
+export interface SummarizedNote<T = string> {
   key: string;
   kinds: string[];
-  values: string[];
+  values: T[];
 }
+
+export interface SummarizedNoteValue {
+  value: string;
+  dataId: number;
+  soruce: string;
+}
+
+export type SummarizedNote2 = SummarizedNote<SummarizedNoteValue>;
 
 export interface NoteSchema {
   key: string;
