@@ -2,7 +2,6 @@ import { test, expect, describe } from "vitest";
 import type { AudioFilesSet, ImageFilesSet } from "@RpgTypes/fileio";
 import type { KeyValuePair } from "@RpgTypes/libs";
 import {
-  summarizeNoteKinds,
   isNoteBoolean,
   isNoteNumber,
   stringLikeNoteKeys,
@@ -105,16 +104,6 @@ const runTestCases = (
   other: OtherFilesSet,
 ) => {
   describe(testCase.name, () => {
-    test("summarizeNoteKinds", () => {
-      const result = summarizeNoteKinds(
-        testCase.items,
-        audioFiles,
-        imageFileSet,
-        other,
-        testCase.categorized,
-      );
-      expect(result).toEqual(testCase.expected);
-    });
     test("stringLikeNoteKeys", () => {
       const result: Set<string> = stringLikeNoteKeys(testCase.expected);
       expect(result).toEqual(testCase.set);

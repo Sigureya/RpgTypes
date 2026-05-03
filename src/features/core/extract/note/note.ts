@@ -34,29 +34,6 @@ export const stringLikeNoteKeys = (
   return new Set(ss);
 };
 
-export const summarizeNoteKinds = (
-  items: readonly KeyValuePair[],
-  audioFiles: AudioFilesSet,
-  imageFiles: ImageFilesSet,
-  other: OtherFilesSet,
-  map: ReadonlyMap<string, KeyValuePair[]> = categorizeNote(items),
-): SummarizedNote[] => {
-  return Array.from(map.entries()).map(([key, mapedItems]): SummarizedNote => {
-    const kindState = detectNoteKindState(
-      mapedItems,
-      audioFiles,
-      imageFiles,
-      other,
-    );
-    const kinds = extractNoteKinds(kindState);
-    return {
-      key,
-      kinds,
-      values: mapedItems.map((i) => i.value),
-    };
-  });
-};
-
 export const summarizeNoteKinds2 = (
   items: readonly NoteReadResultsWithSource[],
   { audioFiles, imageFiles, otherFiles: other }: AssetFilesBundle,
