@@ -10,8 +10,12 @@ import {
   FILENAME_WEAPONS,
 } from "@RpgTypes/fileio";
 import type { MapFileInfo, NoteReadResultsWithSource } from "@RpgTypes/rmmz";
-import { stringLikeNoteKeys, summarizeNoteKinds2 } from "./note/note";
-import type { SummarizedNote2 } from "./note/types";
+import { stringLikeNoteKeys, summarizeNoteKinds } from "./note/note";
+import type {
+  SummarizedNote,
+  SummarizedNote2,
+  SummarizedNoteValue,
+} from "./note/types";
 import type {
   ExtractedMapTexts,
   TextPluginCommandParameter,
@@ -69,8 +73,8 @@ export const buildRawGameDataNoteNormalization = (
   };
 };
 
-interface ResultOfMain2 {
-  noteSummary: SummarizedNote2[];
+interface ResultOfMain {
+  noteSummary: SummarizedNote<SummarizedNoteValue>[];
   nonTextNoteKeys: Set<string>;
   mainData: ExtractedDataBundle;
 }
@@ -78,7 +82,7 @@ interface ResultOfMain2 {
 const normalizeMainDataNotes = (
   mainData: ExtractedDataBundle,
   asset: AssetFilesBundle,
-): ResultOfMain2 => {
+): ResultOfMain => {
   const noteSummary = summarizeBundleNoteKinds(mainData, asset);
   const nonTextNoteKeys = stringLikeNoteKeys(noteSummary);
   return {
@@ -133,7 +137,7 @@ const summarizeBundleNoteKinds = (
   asset: AssetFilesBundle,
 ): SummarizedNote2[] => {
   const list = bundleToPaXList(bundle);
-  return summarizeNoteKinds2(list, asset);
+  return summarizeNoteKinds(list, asset);
 };
 
 const bundleToPaXList = (
@@ -166,7 +170,7 @@ export const summarizeNoteKindsFromMapFiles = <
   asset: AssetFilesBundle,
 ): SummarizedNote2[] => {
   const ppx = mapList.map(extractAllMapNotesEx2);
-  return summarizeNoteKinds2(ppx, asset);
+  return summarizeNoteKinds(ppx, asset);
 };
 
 export const normalizeNoteFromMapFiles2 = <
@@ -181,7 +185,7 @@ export const normalizeNoteFromMapFiles2 = <
 };
 
 interface ResultOfMap2 {
-  noteSummary: SummarizedNote2[];
+  noteSummary: SummarizedNote<SummarizedNoteValue>[];
   validMaps: MapFileInfo<ExtractedMapTexts<TextPluginCommandParameter>>[];
 }
 

@@ -3,7 +3,7 @@ import type {
   ReadSystemResult,
   DataReadErrorItem,
 } from "@RpgTypes/fileio";
-import type { SummarizedNote, SummarizedNote2 } from "./note";
+import type { SummarizedNote, SummarizedNoteValue } from "./note";
 import type {
   ExtractedDataBundle,
   ExtractedCommonEventText,
@@ -27,16 +27,9 @@ export interface ExtractedRawGameDataTexts {
   errors: DataReadErrorItem[];
 }
 
-export interface RawGameDataNoteNormalization {
-  nonTextNoteKeys: Set<string>;
-  data: ExtractedRawGameDataTexts;
-  mapNoteSummary: SummarizedNote[];
-  dataNoteSummary: SummarizedNote[];
-}
-
 export interface RawGameDataNoteNormalization2 {
   nonTextNoteKeys: Set<string>;
   data: ExtractedRawGameDataTexts;
-  dataNoteSummary: SummarizedNote2[];
-  mapNoteSummary: SummarizedNote2[];
+  dataNoteSummary: SummarizedNote<SummarizedNoteValue>[];
+  mapNoteSummary: SummarizedNote<SummarizedNoteValue>[];
 }
