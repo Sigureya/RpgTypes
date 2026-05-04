@@ -10,11 +10,12 @@ const re = (a) => ((e, s) => ({
   code: e.code,
   paramIndex: s,
   value: e.parameters[s]
-}))(a, 1), ne = (a) => a.parameters[0].map(((e, s) => ({ code: 102, paramIndex: s, value: e }))), C = (a, e) => ({ note: me(a), main: e.map(((s) => ({
-  key: s,
-  value: a[s],
-  id: a.id
-}))) }), me = (a) => Aa(a.note, ((e, s) => ({
+}))(a, 1), ne = (a) => a.parameters[0].map(((e, s) => ({ code: 102, paramIndex: s, value: e }))), C = (a, e) => ({
+  id: a.id,
+  name: a.name,
+  note: me(a),
+  main: e.map(((s) => ({ key: s, value: a[s], id: a.id })))
+}), me = (a) => Aa(a.note, ((e, s) => ({
   key: e,
   value: s,
   id: a.id
@@ -160,7 +161,12 @@ const re = (a) => ((e, s) => ({
   noteItems: a.noteItems.filter(e)
 }), M = (a, e) => a.map(((s) => {
   const t = s.note.filter(e);
-  return { main: s.main, note: t };
+  return {
+    main: s.main,
+    note: t,
+    id: s.id,
+    name: s.name
+  };
 })).filter(ze), ze = (a) => a.note.length > 0 || a.main.length > 0, He = (a, e) => {
   const s = Ye(a.value.mainData, e), t = Qe(a.value.mapFiles.validMaps, e);
   return {
@@ -211,7 +217,7 @@ const re = (a) => ((e, s) => ({
   return ga(s, e);
 }, Xe = (a) => [B(Ya, a.actors), B(Qa, a.skills), B(Wa, a.items), B(Za, a.weapons), B(ae, a.armors), B(ee, a.classes), B(se, a.states), B(te, a.enemies)], B = (a, e) => ({
   source: a,
-  notes: e.flatMap(((s) => s.note.map(((t) => ({ key: t.key, value: t.value, dataId: t.id, name: "" })))))
+  notes: e.flatMap(((s) => s.note.map(((t) => ({ key: t.key, value: t.value, dataId: t.id, name: s.name })))))
 }), va = (a, e) => {
   const s = a.map(Je);
   return ga(s, e);

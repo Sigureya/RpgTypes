@@ -5,11 +5,14 @@ export type TextExtractable<T> = PickByType<T, string> & {
     note: string;
 };
 export interface ExtractedNoteList {
+    name: string;
     note: ExtractedTextItem[];
 }
 export interface ExtractedText<T> extends ExtractedNoteList {
     main: ExtractedTextProperty<T>[];
     note: ExtractedTextItem[];
+    id: number;
+    name: string;
 }
 export interface ExtractedTextItem {
     key: string;
