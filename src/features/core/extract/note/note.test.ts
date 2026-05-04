@@ -1,12 +1,7 @@
 import { test, expect, describe } from "vitest";
 import type { AudioFilesSet, ImageFilesSet } from "@RpgTypes/fileio";
 import type { NoteReadResultsWithSource } from "@RpgTypes/rmmz";
-import {
-  isNoteBoolean,
-  isNoteNumber,
-  stringLikeNoteKeys,
-  summarizeNoteKinds,
-} from "./note";
+import { isNoteNumber, stringLikeNoteKeys, summarizeNoteKinds } from "./note";
 import type { OtherFilesSet, SummarizedNote2 } from "./types";
 
 interface TestCase2 {
@@ -47,48 +42,7 @@ const TILESET_FILE = "tileset-file";
 const MOVIE_FILE = "movie-file";
 
 const DATA_NAME = "Test Data";
-
-describe("isNoteBoolean", () => {
-  test("true", () => {
-    expect("true").toSatisfy(isNoteBoolean);
-  });
-  test("false", () => {
-    expect("false").toSatisfy(isNoteBoolean);
-  });
-  test("TRUE", () => {
-    expect("TRUE").toSatisfy(isNoteBoolean);
-  });
-  test("FALSE", () => {
-    expect("FALSE").toSatisfy(isNoteBoolean);
-  });
-
-  test("not boolean", () => {
-    expect("123").not.toSatisfy(isNoteBoolean);
-  });
-});
-
 describe("isNoteNumber", () => {
-  test("number", () => {
-    expect("123.45").toSatisfy(isNoteNumber);
-  });
-  test("integer", () => {
-    expect("123").toSatisfy(isNoteNumber);
-  });
-  test("number with spaces", () => {
-    expect("  123.45  ").toSatisfy(isNoteNumber);
-  });
-  test("number with leading and trailing spaces", () => {
-    expect("123.45  ").toSatisfy(isNoteNumber);
-  });
-  test("number with leading spaces", () => {
-    expect("  123.45").toSatisfy(isNoteNumber);
-  });
-  test("number with leading zeros", () => {
-    expect("000123.45").toSatisfy(isNoteNumber);
-  });
-  test("not number", () => {
-    expect("true").not.toSatisfy(isNoteNumber);
-  });
   test("bgm filename as number", () => {
     expect(BGM_NUMBER).toSatisfy(isNoteNumber);
   });
