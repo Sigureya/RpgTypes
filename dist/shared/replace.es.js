@@ -101,7 +101,7 @@ const re = (a) => ((e, s) => ({
   return e === "true" || e === "false";
 }, Le = (a) => {
   const e = a.trim();
-  return /^\d{1,16}\.?\d{0,16}$/.test(e);
+  return /^-?\d{1,16}\.?\d{0,16}$/.test(e);
 }, G = (a) => {
   const e = a.filter(((s) => s.kinds.length === 0)).map(((s) => s.key));
   return new Set(e);
