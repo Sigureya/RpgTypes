@@ -160,7 +160,7 @@ const notesToPaX = (
         key: n.key,
         value: n.value,
         dataId: n.id,
-        name: "",
+        name: item.name,
       }),
     ),
   ),

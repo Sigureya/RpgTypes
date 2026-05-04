@@ -62,12 +62,19 @@ const KEY_POWER = "power";
 
 const bundle: ExtractedDataBundle = {
   actors: [
-    { main: [], note: [{ id: 1, key: "sv", value: SV_BATTLE1 }] },
-    { main: [], note: [{ id: 2, key: "b", value: "true" }] },
-    { main: [], note: [{ id: 3, key: "b", value: "false" }] },
+    {
+      id: 1,
+      name: "",
+      main: [],
+      note: [{ id: 1, key: "sv", value: SV_BATTLE1 }],
+    },
+    { id: 2, name: "", main: [], note: [{ id: 2, key: "b", value: "true" }] },
+    { id: 3, name: "", main: [], note: [{ id: 3, key: "b", value: "false" }] },
   ],
   enemies: [
     {
+      id: 4,
+      name: "",
       main: [],
       note: [
         { id: 4, key: "image", value: ENEMY1 },
@@ -75,11 +82,34 @@ const bundle: ExtractedDataBundle = {
       ],
     },
   ],
-  weapons: [{ main: [], note: [{ id: 5, key: KEY_POWER, value: "10" }] }],
-  armors: [{ main: [], note: [{ id: 6, key: KEY_POWER, value: "15" }] }],
-  skills: [{ main: [], note: [{ id: 8, key: "movie", value: MOVIE1 }] }],
+  weapons: [
+    {
+      id: 5,
+      name: "",
+      main: [],
+      note: [{ id: 5, key: KEY_POWER, value: "10" }],
+    },
+  ],
+  armors: [
+    {
+      id: 6,
+      name: "",
+      main: [],
+      note: [{ id: 6, key: KEY_POWER, value: "15" }],
+    },
+  ],
+  skills: [
+    {
+      id: 8,
+      name: "",
+      main: [],
+      note: [{ id: 8, key: "movie", value: MOVIE1 }],
+    },
+  ],
   states: [
     {
+      id: 9,
+      name: "",
       main: [],
       note: [
         { id: 9, key: "face", value: FACE1 },
@@ -88,12 +118,14 @@ const bundle: ExtractedDataBundle = {
     },
   ],
   items: [],
-  classes: [{ main: [], note: [] }],
+  classes: [{ id: 1, name: "", main: [], note: [] }],
 };
 
 const bundle2: ExtractedDataBundle = {
   actors: [
     {
+      id: 1,
+      name: "Actor1",
       main: [
         { id: 1, key: "name", value: "Actor1" },
         { id: 1, key: "nickname", value: "A1" },
@@ -105,6 +137,8 @@ const bundle2: ExtractedDataBundle = {
       ],
     },
     {
+      id: 2,
+      name: "Actor1",
       main: [
         { id: 2, key: "name", value: "Actor1" },
         { id: 2, key: "nickname", value: "A1" },
@@ -118,16 +152,22 @@ const bundle2: ExtractedDataBundle = {
   ],
   enemies: [
     {
+      id: 3,
+      name: "Enemy1",
       main: [{ id: 3, key: "name", value: "Enemy1" }],
       note: [{ id: 3, key: "desc", value: "it is enemy" }],
     },
     {
+      id: 4,
+      name: "Enemy2",
       main: [{ id: 4, key: "name", value: "Enemy2" }],
       note: [{ id: 4, key: "desc", value: "12345" }],
     },
   ],
   weapons: [
     {
+      id: 5,
+      name: "Weapon1",
       main: [
         { id: 5, key: "name", value: "Weapon1" },
         { id: 5, key: "description", value: "This is a powerful weapon." },
@@ -137,6 +177,8 @@ const bundle2: ExtractedDataBundle = {
   ],
   armors: [
     {
+      id: 6,
+      name: "Armor1",
       main: [
         { id: 6, key: "name", value: "Armor1" },
         { id: 6, key: "description", value: "This is a sturdy armor." },
@@ -147,6 +189,8 @@ const bundle2: ExtractedDataBundle = {
 
   skills: [
     {
+      id: 6,
+      name: "skill6",
       main: [
         { id: 6, key: "name", value: "skill6" },
         { id: 6, key: "description", value: "This is a sturdy armor." },
@@ -156,6 +200,8 @@ const bundle2: ExtractedDataBundle = {
   ],
   states: [
     {
+      id: 6,
+      name: "skill6",
       main: [{ id: 6, key: "name", value: "skill6" }],
       note: [{ id: 6, key: "special", value: "abc" }],
     },

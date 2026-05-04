@@ -16,12 +16,15 @@ export type TextExtractable<T> = PickByType<T, string> & {
 };
 
 export interface ExtractedNoteList {
+  name: string;
   note: ExtractedTextItem[];
 }
 
 export interface ExtractedText<T> extends ExtractedNoteList {
   main: ExtractedTextProperty<T>[];
   note: ExtractedTextItem[];
+  id: number;
+  name: string;
 }
 
 export interface ExtractedTextItem {
