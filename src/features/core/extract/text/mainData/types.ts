@@ -22,6 +22,8 @@ export interface ExtractedNoteList {
 export interface ExtractedText<T> extends ExtractedNoteList {
   main: ExtractedTextProperty<T>[];
   note: ExtractedTextItem[];
+  id: number;
+  name: string;
 }
 
 export interface ExtractedTextItem {

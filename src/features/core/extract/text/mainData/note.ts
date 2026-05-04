@@ -10,6 +10,8 @@ export const filterNotesInExtractedText = <T>(
       return {
         main: item.main,
         note: filteredNote,
+        id: item.id,
+        name: item.name,
       };
     })
     .filter(hasData);
