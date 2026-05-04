@@ -16,6 +16,7 @@ export type TextExtractable<T> = PickByType<T, string> & {
 };
 
 export interface ExtractedNoteList {
+  name: string;
   note: ExtractedTextItem[];
 }
 
