@@ -11,11 +11,9 @@ import type { ExtractedActorTexts } from "./actor";
 import type { ExtractedCommandItem, ExtractedTroopTextItem } from "./command";
 import type { ExtractedTextBundle, ExtractedTextItemG } from "./mainData";
 import type { ExtractedPluginItem } from "./plugin";
-import type { SystemTexts } from "./system";
 
-export interface ExtractedTextFinal<UUID> {
+export interface ExtractedTextMainDataFinal<UUID> {
   map: ExtractedTextItemG<UUID>[];
-  system: SystemTexts<UUID>;
   actors: ExtractedActorTexts<UUID>;
   items: ExtractedTextBundle<Data_Item, UUID>[];
   weapons: ExtractedTextBundle<Data_Weapon, UUID>[];
