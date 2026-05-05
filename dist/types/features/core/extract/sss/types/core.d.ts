@@ -17,12 +17,12 @@ export type ExtractedDataArray<UUID> = [
     speaker: string,
     baseText: string
 ];
-export interface ExtractedText {
+export interface ExtractedTextG2 {
     filename: string;
     texts: ConvertedTextItem[];
 }
 export interface GameTextExtractionResult {
-    items: ExtractedText[];
+    items: ExtractedTextG2[];
     gameTitle: string;
     controlChars: ControlCharInfo[];
 }
