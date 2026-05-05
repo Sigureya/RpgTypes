@@ -27,7 +27,7 @@ import type { SummarizedNote, SummarizedNoteValue } from "./note";
 import { buildRawGameDataNoteNormalization } from "./noteNormarize";
 import type {
   SystemKinds,
-  Terms,
+  RmmzTextPropertys,
   ExtractedTextFinal,
   SystemTexts,
   ExtractedTextItemG,
@@ -43,7 +43,7 @@ import type { RawGameDataNoteNormalization } from "./types";
 export const buildExtractResult2 = <UUID>(
   kinds: SystemKinds,
   bundle: FileReadBundle,
-  terms: Terms,
+  terms: RmmzTextPropertys,
   uuidGen: (text: string) => UUID,
   commandNameFn: (command: TextCommandParameter) => string,
   extractor: EventContainerExtractor,
@@ -74,7 +74,7 @@ const buildSuccessData = <UUID>(
   actors: ReadonlyArray<Data_Actor>,
   normalizedData: RawGameDataNoteNormalization,
   kinds: SystemKinds,
-  terms: Terms,
+  terms: RmmzTextPropertys,
   uuidGen: (text: string) => UUID,
   commandNameFn: (command: TextCommandParameter) => string,
 ): ExtractedTextFinal<UUID, SummarizedNote<SummarizedNoteValue>> => {

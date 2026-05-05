@@ -1,4 +1,4 @@
-import { Data_System, SystemLabels_TermsParamNames, Terms_Basic, Terms_GameCommands, Terms_Messages } from '../../../../rmmz/system';
+import { Data_System, SystemLabels_TermsParamNames, Terms_Basic, Terms_GameCommands, Terms_Messages } from '../../../../../rmmz/system';
 export interface ExtractedSystemTexts {
     gameTitle: string;
     currencyUnit: string;
