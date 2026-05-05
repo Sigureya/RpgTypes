@@ -1,8 +1,4 @@
-import type {
-  AssetFilesBundle,
-  AudioFilesSet,
-  ImageFilesSet,
-} from "@RpgTypes/fileio";
+import type { AssetFilesBundle } from "@RpgTypes/fileio";
 import type { KeyValuePair } from "@RpgTypes/libs";
 import type {
   NoteReadResultEx,
@@ -10,7 +6,6 @@ import type {
 } from "@RpgTypes/rmmz";
 import type {
   SummarizedNote,
-  OtherFilesSet,
   SummarizedNote2,
   SummarizedNoteValue,
 } from "./types";
@@ -36,7 +31,7 @@ export const stringLikeNoteKeys = (
 
 export const summarizeNoteKinds = (
   items: readonly NoteReadResultsWithSource[],
-  { audioFiles, imageFiles, otherFiles: other }: AssetFilesBundle,
+  assets: AssetFilesBundle,
 ): SummarizedNote2[] => {
   const flattened: Array<NoteReadResultEx & { soruce: string }> = items.flatMap(
     (paX) => paX.notes.map((note) => ({ ...note, soruce: paX.source })),
@@ -45,12 +40,7 @@ export const summarizeNoteKinds = (
 
   return Array.from(map.entries()).map(
     ([key, mappedItems]): SummarizedNote2 => {
-      const kindState = detectNoteKindState(
-        mappedItems,
-        audioFiles,
-        imageFiles,
-        other,
-      );
+      const kindState = detectNoteKindState(mappedItems, assets);
       const kinds = extractNoteKinds(kindState);
       return {
         key,
@@ -123,9 +113,7 @@ const createEmptyKindState = (): KindState => ({
 
 const detectNoteKindState = (
   items: ReadonlyArray<KeyValuePair>,
-  audioFiles: AudioFilesSet,
-  imageFiles: ImageFilesSet,
-  otherFiles: OtherFilesSet,
+  { audioFiles, imageFiles, otherFiles }: AssetFilesBundle,
 ): KindState => {
   return items.reduce((acc: KindState, item): KindState => {
     return {

@@ -1,7 +1,10 @@
 import { describe, test, expect } from "vitest";
-import type { AudioFilesSet, ImageFilesSet } from "@RpgTypes/fileio";
+import type {
+  AudioFilesSet,
+  ImageFilesSet,
+  OtherFilesSet,
+} from "@RpgTypes/fileio";
 import type { MapFileInfo } from "@RpgTypes/rmmz";
-import type { OtherFilesSet } from "./note/types";
 import {
   normalizeBundleNoteTexts,
   nonTextNoteKeys,
