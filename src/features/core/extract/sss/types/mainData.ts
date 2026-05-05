@@ -9,10 +9,10 @@ export interface ExtractedTextItemBase<UUID> {
   dataKey: string;
 }
 
-export interface ExtractedTextItem<
+export interface ExtractedTextItemG<
   UUID,
   Key extends string = string,
-  Other extends string[] = string[]
+  Other extends string[] = string[],
 > extends ExtractedTextItemBase<UUID> {
   filename: string;
   id: number;
@@ -25,16 +25,16 @@ export interface ExtractedTextItem<
 }
 
 export type ExtractedTextBundle<T, UUID = string> = {
-  main: ExtractedTextItem<UUID, Extract<keyof T, string>>[];
+  main: ExtractedTextItemG<UUID, Extract<keyof T, string>>[];
   note: ExtractedNoteItem<UUID>[];
 };
 
 export type ExtractedNoteItem<
   UUID,
-  Other extends string[] = [string]
-> = ExtractedTextItem<UUID, "note", Other> & { otherData: Other };
+  Other extends string[] = [string],
+> = ExtractedTextItemG<UUID, "note", Other> & { otherData: Other };
 
-export type ExtractedPropertyItem<UUID, T extends object> = ExtractedTextItem<
+export type ExtractedPropertyItem<UUID, T extends object> = ExtractedTextItemG<
   UUID,
   Extract<keyof T, string>
 >;

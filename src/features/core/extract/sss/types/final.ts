@@ -9,12 +9,12 @@ import type {
 } from "@RpgTypes/rmmz";
 import type { ExtractedActorTexts } from "./actor";
 import type { ExtractedCommandItem, ExtractedTroopTextItem } from "./command";
-import type { ExtractedTextBundle, ExtractedTextItem } from "./mainData";
+import type { ExtractedTextBundle, ExtractedTextItemG } from "./mainData";
 import type { ExtractedPluginItem } from "./plugin";
 import type { SystemTexts } from "./system";
 
-export interface ExtractedTextFinal<UUID, NoteData> {
-  map: ExtractedTextItem<UUID>[];
+export interface ExtractedTextFinal<UUID, NoteData = unknown> {
+  map: ExtractedTextItemG<UUID>[];
   system: SystemTexts<UUID>;
   actors: ExtractedActorTexts<UUID>;
   items: ExtractedTextBundle<Data_Item, UUID>[];

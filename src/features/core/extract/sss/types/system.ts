@@ -4,11 +4,11 @@ import type {
   Terms_GameCommands,
   Terms_Messages,
 } from "@RpgTypes/rmmz";
-import type { ExtractedTextItem } from "./mainData";
+import type { ExtractedTextItemG } from "./mainData";
 
 export interface SystemTexts<UUID = string> {
   gameTitle: string;
-  texts: ExtractedTextItem<UUID>[];
+  texts: ExtractedTextItemG<UUID>[];
   filename: string;
 }
 
@@ -32,28 +32,28 @@ export interface KindHandlers {
   params: (key: keyof SystemLabels_TermsParamNames) => string;
 }
 
-export type ExtractedGameCommandsTextItem<UUID> = ExtractedTextItem<
+export type ExtractedGameCommandsTextItem<UUID> = ExtractedTextItemG<
   UUID,
   SystemTermsKeyType<"commands", Terms_GameCommands>
 >;
 
-export type ExtractedSystemMessageItem<UUID> = ExtractedTextItem<
+export type ExtractedSystemMessageItem<UUID> = ExtractedTextItemG<
   UUID,
   SystemTermsKeyType<"messages", Terms_Messages>
 >;
 
-export type ExtractedBasicTermsTextItem<UUID> = ExtractedTextItem<
+export type ExtractedBasicTermsTextItem<UUID> = ExtractedTextItemG<
   UUID,
   SystemTermsKeyType<"basic", Terms_Basic>
 >;
 
-export type ExtractedParamsTextItem<UUID> = ExtractedTextItem<
+export type ExtractedParamsTextItem<UUID> = ExtractedTextItemG<
   UUID,
   SystemTermsKeyType<"params", SystemLabels_TermsParamNames>
 >;
 
 export type ExtractedSystemTextItem<UUID = string> =
-  | ExtractedTextItem<UUID, keyof SystemKinds>
+  | ExtractedTextItemG<UUID, keyof SystemKinds>
   | ExtractedGameCommandsTextItem<UUID>
   | ExtractedSystemMessageItem<UUID>
   | ExtractedBasicTermsTextItem<UUID>
