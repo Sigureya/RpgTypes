@@ -1,33 +1,16 @@
-import type {
-  CHANGE_NICKNAME,
-  CHANGE_PROFILE,
-  CHANGE_NAME,
-  SHOW_SCROLLING_TEXT_BODY,
-  SHOW_CHOICES,
-  SCRIPT_EVAL,
-  COMMENT_HEAD,
-  SHOW_MESSAGE_BODY,
-} from "@RpgTypes/libs/eventCommand";
+import type { SHOW_MESSAGE_BODY } from "@RpgTypes/libs/eventCommand";
+import type { TextCommandCodeUnion } from "@RpgTypes/libs/eventCommand/codeUnion";
 import type { CommandParameter } from "@RpgTypes/rmmz";
 import type { TextPluginCommandParameter } from "./pluginCommand";
 import type { TextCommandParameter } from "./union";
 
-type BaseCode =
-  | typeof CHANGE_NICKNAME
-  | typeof CHANGE_PROFILE
-  | typeof CHANGE_NAME
-  | typeof SHOW_SCROLLING_TEXT_BODY
-  | typeof SHOW_CHOICES
-  | typeof SCRIPT_EVAL
-  | typeof COMMENT_HEAD;
-
 export interface GenericCommandParameter extends CommandParameter<
   string,
-  BaseCode
+  TextCommandCodeUnion
 > {
   paramIndex: number;
   value: string;
-  code: BaseCode;
+  code: TextCommandCodeUnion;
   speaker?: string;
 }
 
