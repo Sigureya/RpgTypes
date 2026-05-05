@@ -19,7 +19,7 @@ import {
 import type { Data_Actor, MapFileInfo } from "@RpgTypes/rmmz";
 import { createActorControlChars } from "@RpgTypes/rmmz";
 import { extractTextFromRawGameData } from "./bundle";
-import { ccedFromList, ctx } from "./commonEvent";
+import { convertCommonEvents, convertBattleEvents } from "./commonEvent";
 import { extractMapEventTexts } from "./map";
 import type { SummarizedNote, SummarizedNoteValue } from "./note";
 import { buildRawGameDataNoteNormalization } from "./noteNormarize";
@@ -39,8 +39,8 @@ import type {
 } from "./types";
 
 export const buildExtractResultWithNotes = <UUID>(
-  kinds: SystemKinds,
   bundle: FileReadBundle,
+  kinds: SystemKinds,
   terms: RmmzTextPropertys,
   uuidGen: (text: string) => UUID,
   commandNameFn: (command: TextCommandParameter) => string,
@@ -81,13 +81,18 @@ const buildFinalExtractedResult = <UUID>(
     noteSummaries: collectAllNoteSummaries(normalizedData),
     pluginParams: [],
     map: flattenMapTexts(mapFiles, uuidGen, commandNameFn),
-    commonEvents: ccedFromList(
+    commonEvents: convertCommonEvents(
       FILENAME_COMMON_EVENTS,
       eventData.commonEvents,
       uuidGen,
       commandNameFn,
     ),
-    troops: ctx(eventData.troops, FILENAME_TROOPS, commandNameFn, uuidGen),
+    troops: convertBattleEvents(
+      eventData.troops,
+      FILENAME_TROOPS,
+      commandNameFn,
+      uuidGen,
+    ),
     armors: convertDataList(mainData.armors, FILENAME_ARMORS, terms, uuidGen),
     system: buildSystemTexts(system, uuidGen, kinds),
     actors: {
