@@ -18,6 +18,7 @@ import type {
   ExtractedMapTexts,
   EventContainerExtractor,
   ExtractedText,
+  ExtractedSystemTexts,
 } from "./text";
 import {
   extractTextFromActor,
@@ -28,9 +29,8 @@ import {
   extractTextFromState,
   extractTextFromWeapon,
   extractTextFromArmor,
+  extractTextFromSystem,
 } from "./text";
-import type { ExtractedSystemTexts } from "./text/system";
-import { extractTextFromSystem } from "./text/system";
 import type { ExtractedRawGameDataTexts } from "./types";
 
 export const extractTextFromRawGameData = (

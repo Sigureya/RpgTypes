@@ -1,13 +1,13 @@
 import { normarizeText } from "@RpgTypes/libs";
-import type { SystemKinds, ExtractedTextItemG } from "dist/types";
 import type { ExtractedSystemTexts } from "./system";
+import type { ExtractedSystemKinds, SystemKinds } from "./types";
 
 export const convertSystemTypes = <UUID>(
   system: ExtractedSystemTexts,
   filename: string,
   kinds: SystemKinds,
   uuidGen: (text: string) => UUID,
-): ExtractedTextItemG<UUID, keyof SystemKinds>[] => {
+): ExtractedSystemKinds<UUID>[] => {
   return [
     {
       filename,
@@ -55,10 +55,10 @@ const dataTypes = <UUID>(
   key: keyof SystemKinds,
   kind: string,
   uuidGen: (text: string) => UUID,
-): ExtractedTextItemG<UUID, keyof SystemKinds>[] => {
+): ExtractedSystemKinds<UUID>[] => {
   return list
     .filter((item) => item.length > 0)
-    .map((item, index): ExtractedTextItemG<UUID, keyof SystemKinds> => {
+    .map((item, index): ExtractedSystemKinds<UUID> => {
       const normarizedText = normarizeText(item);
       return {
         filename: filename,
