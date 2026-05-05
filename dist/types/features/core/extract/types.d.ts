@@ -1,8 +1,8 @@
 import { MapBatchReadResult, ReadSystemResult, DataReadErrorItem } from '../../../fileio';
 import { SummarizedNote, SummarizedNoteValue } from './note';
-import { ExtractedTextFinal } from './sss';
+import { ExtractedTextMainDataFinal } from './sss';
 import { ExtractedDataBundle, ExtractedCommonEventText, ExtractedBattleEventText, ExtractedMapTexts } from './text';
-import { ExtractedSystemTexts } from './text/system';
+import { ExtractedSystemTexts, SystemTexts } from './text/system';
 export interface ExtractedRawGameDataTextValue {
     mainData: ExtractedDataBundle;
     eventData: {
@@ -22,6 +22,7 @@ export interface RawGameDataNoteNormalization {
     dataNoteSummary: SummarizedNote<SummarizedNoteValue>[];
     mapNoteSummary: SummarizedNote<SummarizedNoteValue>[];
 }
-export interface ExtractedTextFinalWithNotes<UUID> extends ExtractedTextFinal<UUID> {
+export interface ExtractedTextFinalWithNotes<UUID> extends ExtractedTextMainDataFinal<UUID> {
     noteSummaries: SummarizedNote<SummarizedNoteValue>[];
+    system: SystemTexts<UUID>;
 }

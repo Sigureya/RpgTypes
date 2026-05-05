@@ -3,10 +3,8 @@ import { ExtractedActorTexts } from './actor';
 import { ExtractedCommandItem, ExtractedTroopTextItem } from './command';
 import { ExtractedTextBundle, ExtractedTextItemG } from './mainData';
 import { ExtractedPluginItem } from './plugin';
-import { SystemTexts } from './system';
-export interface ExtractedTextFinal<UUID> {
+export interface ExtractedTextMainDataFinal<UUID> {
     map: ExtractedTextItemG<UUID>[];
-    system: SystemTexts<UUID>;
     actors: ExtractedActorTexts<UUID>;
     items: ExtractedTextBundle<Data_Item, UUID>[];
     weapons: ExtractedTextBundle<Data_Weapon, UUID>[];
