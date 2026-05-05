@@ -1,5 +1,4 @@
 import type {
-  ReadAllDataErrorMessages,
   MapBatchReadResult,
   ReadSystemResult,
   FileReadBundle,
@@ -40,16 +39,6 @@ import type {
 } from "./text";
 import { convertSystemTypes } from "./text/system/conv";
 import type { RawGameDataNoteNormalization } from "./types";
-
-const READ_ERROR_MESSAGES: ReadAllDataErrorMessages = {
-  dataConvertError: "データの変換に失敗しました。",
-  fileNotFound: "ファイルが見つかりませんでした。",
-  jsonParseError: "JSONの解析に失敗しました。",
-  notArray: "データが配列ではありません。",
-  invalidStructure: "データの構造が正しくありません。",
-  mvAsMz: "RPGツクールMVのプロジェクトはサポートされていません。",
-  validateFunctionError: "データの検証中にエラーが発生しました。",
-};
 
 export const buildExtractResult2 = <UUID>(
   kinds: SystemKinds,
