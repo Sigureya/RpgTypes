@@ -19,6 +19,3 @@ export interface NoteSchema {
     kinds: string;
     source: string;
 }
-export interface OtherFilesSet {
-    movies: ReadonlySet<string>;
-}
