@@ -1,5 +1,5 @@
 import { FileReadBundle } from '../../../fileio';
-import { SummarizedNote, SummarizedNoteValue } from './note';
-import { SystemKinds, RmmzTextPropertys, ExtractedTextFinal } from './sss/types';
+import { SystemKinds, RmmzTextPropertys } from './sss/types';
 import { TextCommandParameter, EventContainerExtractor } from './text';
-export declare const buildExtractResult2: <UUID>(kinds: SystemKinds, bundle: FileReadBundle, terms: RmmzTextPropertys, uuidGen: (text: string) => UUID, commandNameFn: (command: TextCommandParameter) => string, extractor: EventContainerExtractor) => ExtractedTextFinal<UUID, SummarizedNote<SummarizedNoteValue>>;
+import { ExtractedTextFinalWithNotes } from './types';
+export declare const buildExtractResultWithNotes: <UUID>(kinds: SystemKinds, bundle: FileReadBundle, terms: RmmzTextPropertys, uuidGen: (text: string) => UUID, commandNameFn: (command: TextCommandParameter) => string, extractor: EventContainerExtractor) => ExtractedTextFinalWithNotes<UUID>;

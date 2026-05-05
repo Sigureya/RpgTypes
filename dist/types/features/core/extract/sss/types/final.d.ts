@@ -4,7 +4,7 @@ import { ExtractedCommandItem, ExtractedTroopTextItem } from './command';
 import { ExtractedTextBundle, ExtractedTextItemG } from './mainData';
 import { ExtractedPluginItem } from './plugin';
 import { SystemTexts } from './system';
-export interface ExtractedTextFinal<UUID, NoteData = unknown> {
+export interface ExtractedTextFinal<UUID> {
     map: ExtractedTextItemG<UUID>[];
     system: SystemTexts<UUID>;
     actors: ExtractedActorTexts<UUID>;
@@ -18,5 +18,4 @@ export interface ExtractedTextFinal<UUID, NoteData = unknown> {
     commonEvents: ExtractedCommandItem<UUID>[];
     pluginParams: ExtractedPluginItem<UUID>[];
     troops: ExtractedTroopTextItem<UUID>[];
-    noteX: NoteData[];
 }
