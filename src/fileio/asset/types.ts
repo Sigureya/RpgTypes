@@ -12,12 +12,26 @@ export interface AssetFilesBundle {
   otherFiles: OtherFilesSet;
 }
 
-export interface ImgXX {
+export interface AssetDirBase {
+  asset: string;
+  subDir: string;
+}
+
+export interface ImageDir extends AssetDirBase {
   asset: typeof FOLDER_IMG;
   subDir: ImageFolders;
 }
 
-export interface AudioXX {
+export interface ImageAsset extends ImageDir {
+  symbol: string;
+}
+export interface AudioDir extends AssetDirBase {
   asset: typeof FOLDER_AUDIO;
   subDir: AudioFolders;
+}
+
+export interface RmmzAsset {
+  asset: string;
+  subDir: string;
+  symbol: string;
 }
