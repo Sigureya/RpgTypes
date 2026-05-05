@@ -1,20 +1,26 @@
-const Wa = 0, Ga = 1, Ja = 0, Ka = 1, Oa = (a) => a.parameters[2] === 1, Qa = (a) => a.parameters[0], Ua = (a, e) => [R(a.skills, e), g(a.actors, e), z(a.states, e), S(a.armors, e), v(a.classes, e), I(a.enemies, e), T(a.items, e), w(a.weapons, e), A(a.commonEvents, e)], R = (a, e) => ({
+const Wa = 0, Ga = 1, Ja = 0, Ka = 1, Oa = (a) => a.parameters[2] === 1, Qa = (a) => a.parameters[0], n = (a, e) => `\\${a}[${e}]`, Ua = (a, e) => e.map(((t, r) => ({ text: t, controlChar: n(a, r) }))), Xa = (a) => a.map(((e) => ({
+  text: e.name,
+  controlChar: n("N", e.id)
+}))), Ya = (a) => a.variables.map(((e, t) => ({
+  text: e || "",
+  controlChar: n("V", t)
+}))).filter(((e) => e.text !== "")), Za = (a, e) => [g(a.skills, e), z(a.actors, e), S(a.states, e), v(a.armors, e), I(a.classes, e), T(a.enemies, e), x(a.items, e), w(a.weapons, e), A(a.commonEvents, e)], g = (a, e) => ({
   label: e.skill.title,
   items: a,
   source: { author: "rmmz", module: "data", kind: "skill" }
-}), g = (a, e) => ({
+}), z = (a, e) => ({
   items: a,
   label: e.actor.title,
   source: { author: "rmmz", module: "data", kind: "actor" }
-}), z = (a, e) => ({ items: a, label: e.state.title, source: { author: "rmmz", module: "data", kind: "state" } }), S = (a, e) => ({ items: a, label: e.armor.title, source: {
+}), S = (a, e) => ({ items: a, label: e.state.title, source: { author: "rmmz", module: "data", kind: "state" } }), v = (a, e) => ({ items: a, label: e.armor.title, source: {
   author: "rmmz",
   kind: "armor",
   module: "data"
-} }), v = (a, e) => ({ items: a, label: e.class.title, source: { author: "rmmz", module: "data", kind: "class" } }), I = (a, e) => ({ items: a, label: e.enemy.title, source: {
+} }), I = (a, e) => ({ items: a, label: e.class.title, source: { author: "rmmz", module: "data", kind: "class" } }), T = (a, e) => ({ items: a, label: e.enemy.title, source: {
   author: "rmmz",
   module: "data",
   kind: "enemy"
-} }), T = (a, e) => ({ items: a, label: e.item.title, source: { author: "rmmz", module: "data", kind: "item" } }), w = (a, e) => ({ items: a, label: e.weapon.title, source: {
+} }), x = (a, e) => ({ items: a, label: e.item.title, source: { author: "rmmz", module: "data", kind: "item" } }), w = (a, e) => ({ items: a, label: e.weapon.title, source: {
   author: "rmmz",
   module: "data",
   kind: "weapon"
@@ -22,20 +28,20 @@ const Wa = 0, Ga = 1, Ja = 0, Ka = 1, Oa = (a) => a.parameters[2] === 1, Qa = (a
   items: a,
   label: e.commonEvent.title,
   source: { author: "rmmz", module: "data", kind: "common_event" }
-}), Va = 11, Xa = 12, Ya = 13, Za = 14, ae = 21, ee = 22, te = 23, re = 31, se = 32, me = 33, ie = 34, oe = 35, le = 41, ne = 42, de = 43, ue = 44, ce = 51, pe = 52, ke = 53, be = 54, he = 55, fe = 61, ye = 62, Re = 63, ge = 64, ze = 0, Se = 1, ve = 2, Ie = 3, x = (a, e) => ({
-  items: E(a.options, e),
+}), ae = 11, ee = 12, te = 13, re = 14, se = 21, me = 22, ie = 23, oe = 31, le = 32, ne = 33, de = 34, ue = 35, ce = 41, pe = 42, ke = 43, be = 44, he = 51, fe = 52, ye = 53, Re = 54, ge = 55, ze = 61, Se = 62, ve = 63, Ie = 64, Te = 0, xe = 1, we = 2, Ae = 3, E = (a, e) => ({
+  items: C(a.options, e),
   label: a.title,
   source: { author: "rmmz", module: "trait", kind: "collaps" }
-}), E = (a, e) => [{ id: 0, name: e.normal }, { id: 1, name: a.bossCollaps }, { id: 2, name: a.instantCollaps }, {
+}), C = (a, e) => [{ id: 0, name: e.normal }, { id: 1, name: a.bossCollaps }, { id: 2, name: a.instantCollaps }, {
   id: 3,
   name: a.noneCollaps
-}], Te = 0, we = 1, Ae = 2, xe = 3, Ee = 4, De = 5, Pe = 6, qe = 7, Ce = 8, $e = 9, D = (a) => ({ items: P(a.options), label: a.title, source: { author: "rmmz", module: "trait", kind: "xparams" } }), P = (a) => [{ id: 0, name: a.hitRate }, {
+}], Ee = 0, Ce = 1, De = 2, Pe = 3, $e = 4, qe = 5, Ne = 6, He = 7, Be = 8, Me = 9, D = (a) => ({ items: P(a.options), label: a.title, source: { author: "rmmz", module: "trait", kind: "xparams" } }), P = (a) => [{ id: 0, name: a.hitRate }, {
   id: 1,
   name: a.evasionRate
-}, { id: 2, name: a.criticalRate }, { id: 3, name: a.criticalEvasionRate }, { id: 4, name: a.magicEvasionRate }, { id: 5, name: a.magicReflectionRate }, { id: 6, name: a.counterAttackRate }, {
-  id: 7,
-  name: a.hpRegenerationRate
-}, { id: 8, name: a.mpRegenerationRate }, { id: 9, name: a.tpRegenerationRate }], He = (a, e) => {
+}, { id: 2, name: a.criticalRate }, { id: 3, name: a.criticalEvasionRate }, { id: 4, name: a.magicEvasionRate }, { id: 5, name: a.magicReflectionRate }, {
+  id: 6,
+  name: a.counterAttackRate
+}, { id: 7, name: a.hpRegenerationRate }, { id: 8, name: a.mpRegenerationRate }, { id: 9, name: a.tpRegenerationRate }], Fe = (a, e) => {
   switch (a) {
     case 3:
       return e.criticalEvasionRate;
@@ -59,14 +65,10 @@ const Wa = 0, Ga = 1, Ja = 0, Ka = 1, Oa = (a) => a.parameters[2] === 1, Qa = (a
       return e.tpRegenerationRate;
   }
   return `?xparams[${a}]`;
-}, Ne = 0, Be = 1, Me = 2, Fe = 3, _e = 4, je = 5, Le = 6, We = 7, q = (a) => ({
-  items: C(a.options),
-  label: a.title,
-  source: { author: "rmmz", module: "trait", kind: "params" }
-}), C = (a) => [{ id: 0, name: a.maxHp }, { id: 1, name: a.maxMp }, { id: 2, name: a.atk }, { id: 3, name: a.def }, {
-  id: 4,
-  name: a.matk
-}, { id: 5, name: a.mdef }, { id: 6, name: a.agi }, { id: 7, name: a.luk }], Ge = (a, e) => {
+}, _e = 0, je = 1, Le = 2, Ve = 3, We = 4, Ge = 5, Je = 6, Ke = 7, $ = (a) => ({ items: q(a.options), label: a.title, source: { author: "rmmz", module: "trait", kind: "params" } }), q = (a) => [{ id: 0, name: a.maxHp }, {
+  id: 1,
+  name: a.maxMp
+}, { id: 2, name: a.atk }, { id: 3, name: a.def }, { id: 4, name: a.matk }, { id: 5, name: a.mdef }, { id: 6, name: a.agi }, { id: 7, name: a.luk }], Oe = (a, e) => {
   switch (a) {
     case 0:
       return e.maxHp;
@@ -87,17 +89,13 @@ const Wa = 0, Ga = 1, Ja = 0, Ka = 1, Oa = (a) => a.parameters[2] === 1, Qa = (a
     default:
       return `?rparams[${a}]`;
   }
-}, Je = 0, Ke = 1, Oe = 2, Qe = 3, Ue = 4, Ve = 5, Xe = 6, Ye = 7, Ze = 8, at = 9, $ = (a) => ({
-  items: H(a.options),
-  label: a.title,
-  source: { author: "rmmz", module: "trait", kind: "sparams" }
-}), H = (a) => [{ id: 0, name: a.targetRate }, { id: 1, name: a.guardEffectRate }, {
-  id: 2,
-  name: a.recoveryEffectRate
-}, { id: 3, name: a.pharmacology }, { id: 4, name: a.mpCostRate }, { id: 5, name: a.tpChargeRate }, { id: 6, name: a.physicalDamageRate }, { id: 7, name: a.magicDamageRate }, {
-  id: 8,
-  name: a.floorDamageRate
-}, { id: 9, name: a.experienceRate }], et = (a, e) => {
+}, Qe = 0, Ue = 1, Xe = 2, Ye = 3, Ze = 4, at = 5, et = 6, tt = 7, rt = 8, st = 9, N = (a) => ({ items: H(a.options), label: a.title, source: { author: "rmmz", module: "trait", kind: "sparams" } }), H = (a) => [{
+  id: 0,
+  name: a.targetRate
+}, { id: 1, name: a.guardEffectRate }, { id: 2, name: a.recoveryEffectRate }, { id: 3, name: a.pharmacology }, { id: 4, name: a.mpCostRate }, { id: 5, name: a.tpChargeRate }, { id: 6, name: a.physicalDamageRate }, {
+  id: 7,
+  name: a.magicDamageRate
+}, { id: 8, name: a.floorDamageRate }, { id: 9, name: a.experienceRate }], mt = (a, e) => {
   switch (a) {
     case 9:
       return e.experienceRate;
@@ -121,26 +119,26 @@ const Wa = 0, Ga = 1, Ja = 0, Ka = 1, Oa = (a) => a.parameters[2] === 1, Qa = (a
       return e.recoveryEffectRate;
   }
   return `?sparams[${a}]`;
-}, tt = 0, rt = 1, st = 2, mt = 3, it = 4, ot = 5, N = (a) => ({ items: B(a.options), label: a.title, source: {
+}, it = 0, ot = 1, lt = 2, nt = 3, dt = 4, ut = 5, B = (a) => ({ items: M(a.options), label: a.title, source: {
   author: "rmmz",
   module: "trait",
   kind: "partyAbility"
-} }), B = (a) => [{ id: 0, name: a.encounterHalf }, { id: 1, name: a.encounterNone }, { id: 2, name: a.cancelSurprise }, { id: 3, name: a.raisePreemptive }, { id: 4, name: a.goldDouble }, {
-  id: 5,
-  name: a.dropItemDouble
-}], lt = 0, nt = 1, dt = 2, ut = 3, M = (a) => ({ items: F(a.options), label: a.title, source: { author: "rmmz", module: "trait", kind: "sflag" } }), F = (a) => [{ id: 0, name: a.autoBattle }, {
-  id: 1,
-  name: a.guard
-}, { id: 2, name: a.substitute }, {
+} }), M = (a) => [{ id: 0, name: a.encounterHalf }, { id: 1, name: a.encounterNone }, { id: 2, name: a.cancelSurprise }, { id: 3, name: a.raisePreemptive }, {
+  id: 4,
+  name: a.goldDouble
+}, { id: 5, name: a.dropItemDouble }], ct = 0, pt = 1, kt = 2, bt = 3, F = (a) => ({ items: _(a.options), label: a.title, source: { author: "rmmz", module: "trait", kind: "sflag" } }), _ = (a) => [{
+  id: 0,
+  name: a.autoBattle
+}, { id: 1, name: a.guard }, { id: 2, name: a.substitute }, {
   id: 3,
   name: a.preventEscape
-}], ct = (a, e) => [q(a.regularParam), D(a.extraParam), $(a.specialParam), x(a.collaps, e), M(a.specialFlag), N(a.partyAbility)], pt = 11, kt = 12, bt = 13, ht = 21, ft = 22, yt = 31, Rt = 32, gt = 33, zt = 34, St = 41, vt = 42, It = 43, Tt = 44, wt = (a) => [j(a), L(a), W(a), G(a), J(a), K(a), O(a), Q(a), U(a), _(a), V(a), X(a), Y(a)], s = (a, e, t) => ({
+}], ht = (a, e) => [$(a.regularParam), D(a.extraParam), N(a.specialParam), E(a.collaps, e), F(a.specialFlag), B(a.partyAbility)], ft = 11, yt = 12, Rt = 13, gt = 21, zt = 22, St = 31, vt = 32, It = 33, Tt = 34, xt = 41, wt = 42, At = 43, Et = 44, Ct = (a) => [L(a), V(a), W(a), G(a), J(a), K(a), O(a), Q(a), U(a), j(a), X(a), Y(a), Z(a)], s = (a, e, t) => ({
   kindId: a,
   label: e.domainName,
   pattern: e.format,
   description: e.desc,
   dataSource: t
-}), _ = (a) => s(41, a.special), j = (a) => s(11, a.recoverHp), L = (a) => s(12, a.recoverMp), W = (a) => s(13, a.gainTp), G = (a) => s(21, a.addState, {
+}), j = (a) => s(41, a.special), L = (a) => s(11, a.recoverHp), V = (a) => s(12, a.recoverMp), W = (a) => s(13, a.gainTp), G = (a) => s(21, a.addState, {
   author: "rmmz",
   module: "data",
   kind: "state"
@@ -152,255 +150,259 @@ const Wa = 0, Ga = 1, Ja = 0, Ka = 1, Oa = (a) => a.parameters[2] === 1, Qa = (a
   author: "rmmz",
   module: "trait",
   kind: "params"
-}), V = (a) => s(42, a.grow, { author: "rmmz", module: "trait", kind: "params" }), X = (a) => s(43, a.learnSkill, { author: "rmmz", module: "data", kind: "skill" }), Y = (a) => s(44, a.commonEvent, {
+}), X = (a) => s(42, a.grow, { author: "rmmz", module: "trait", kind: "params" }), Y = (a) => s(43, a.learnSkill, { author: "rmmz", module: "data", kind: "skill" }), Z = (a) => s(44, a.commonEvent, {
   author: "rmmz",
   module: "data",
   kind: "common_event"
-}), At = (a, e) => p(a.note, ((t, r) => e(t, r, a))), Z = (a) => p(a, ((e, t) => ({ key: e, value: t }))), p = (a, e) => {
+}), Dt = (a, e) => k(a.note, ((t, r) => e(t, r, a))), aa = (a) => k(a, ((e, t) => ({ key: e, value: t }))), k = (a, e) => {
   const t = /<([^<>:]{1,100}):([^>]{1,1000})>/g;
   return Array.from(a.matchAll(t), ((r) => e(r[1], r[2])));
-}, k = (a, e = `
-`) => [...a.items.map(((t) => `<${t.key}:${t.value}>`)), a.note].join(e).trim(), b = (a) => ({ note: aa(a), items: Z(a) }), aa = (a) => {
+}, b = (a, e = `
+`) => [...a.items.map(((t) => `<${t.key}:${t.value}>`)), a.note].join(e).trim(), h = (a) => ({ note: ea(a), items: aa(a) }), ea = (a) => {
   if (a.length >= 3e4) throw new Error("Note text is too long. Please shorten it.");
   return a.replaceAll(/<([^<>:]{1,100}):([^>]{1,1000})>/g, "");
-}, ea = (a, e) => `<${a}:${e}>`, xt = (a, e, t = `
+}, ta = (a, e) => `<${a}:${e}>`, Pt = (a, e, t = `
 `) => {
-  const r = b(a), m = r.items.map(((i) => ({ key: i.key, value: e(i) })));
-  return k({ note: r.note, items: m }, t);
-}, Et = (a, e, t = `
+  const r = h(a), m = r.items.map(((i) => ({ key: i.key, value: e(i) })));
+  return b({ note: r.note, items: m }, t);
+}, $t = (a, e, t = `
 `) => {
-  const r = b(a), m = r.items.map(((i) => ((l, c) => {
-    if (c.isReplaceTargetNote(l)) {
-      const y = c.replaceText(l.value);
-      return { key: l.key, value: y ?? l.value };
+  const r = h(a), m = r.items.map(((i) => ((l, p) => {
+    if (p.isReplaceTargetNote(l)) {
+      const R = p.replaceText(l.value);
+      return { key: l.key, value: R ?? l.value };
     }
     return l;
   })(i, e)));
-  return k({
+  return b({
     note: r.note,
     items: m
   }, t);
-}, Dt = (a, e) => {
+}, qt = (a, e) => {
   const t = /<([^<>:]{1,100}):([^>]{1,1000})>/g, r = Array.from(a.matchAll(t)).find(((m) => m[1] === e));
   return r ? r[2] : void 0;
-}, Pt = (a, e, t) => {
+}, Nt = (a, e, t) => {
   const r = /<([^<>:]{1,100}):([^>]{1,1000})>/g;
-  return a.replace(r, ((m, i) => i === e ? ea(i, t) : m));
-}, qt = (a) => {
+  return a.replace(r, ((m, i) => i === e ? ta(i, t) : m));
+}, Ht = (a) => {
   const e = /<([^<>:]{1,100}):([^>]{1,1000})>/g;
   return Array.from(a.note.matchAll(e)).map(((t) => ({ key: t[1], value: t[2], dataId: a.id, name: a.name })));
-}, Ct = (a) => [ta(a.elementRate), ra(a.debuffRate), sa(a.stateRate), ma(a.stateResist), ia(a.regularParam), oa(a.extraParam), la(a.specialParam), na(a.attackElement), da(a.attackState), ua(a.attackSpeed), ca(a.attackTimes), pa(a.attackSkill), ka(a.skillTypeAdd), ba(a.skillTypeSeal), ha(a.skillAdd), fa(a.skillSeal), ya(a.equipWeaponType), Ra(a.equipArmorType), ga(a.equipLock), za(a.equipSeal), Sa(a.slotType), va(a.actionPlus), Ia(a.specialFlag), Ta(a.collaps), wa(a.partyAbility)], ta = (a) => ({
+}, Bt = (a) => [ra(a.elementRate), sa(a.debuffRate), ma(a.stateRate), ia(a.stateResist), oa(a.regularParam), la(a.extraParam), na(a.specialParam), da(a.attackElement), ua(a.attackState), ca(a.attackSpeed), pa(a.attackTimes), ka(a.attackSkill), ba(a.skillTypeAdd), ha(a.skillTypeSeal), fa(a.skillAdd), ya(a.skillSeal), Ra(a.equipWeaponType), ga(a.equipArmorType), za(a.equipLock), Sa(a.equipSeal), va(a.slotType), Ia(a.actionPlus), Ta(a.specialFlag), xa(a.collaps), wa(a.partyAbility)], ra = (a) => ({
   pattern: a.format,
   label: a.title,
   kindId: 11,
-  dataSource: h()
-}), ra = (a) => ({ pattern: a.format, label: a.title, kindId: 12, dataSource: { author: "rmmz", module: "trait", kind: "params" } }), sa = (a) => ({
+  dataSource: f()
+}), sa = (a) => ({ pattern: a.format, label: a.title, kindId: 12, dataSource: { author: "rmmz", module: "trait", kind: "params" } }), ma = (a) => ({
   pattern: a.format,
   label: a.title,
   kindId: 13,
-  dataSource: n()
-}), ma = (a) => ({ pattern: a.format, label: a.title, kindId: 14, dataSource: n() }), ia = (a) => ({
+  dataSource: d()
+}), ia = (a) => ({ pattern: a.format, label: a.title, kindId: 14, dataSource: d() }), oa = (a) => ({
   pattern: a.format,
   label: a.title,
   kindId: 21,
   dataSource: { author: "rmmz", module: "trait", kind: "params" }
-}), oa = (a) => ({ pattern: a.format, label: a.title, kindId: 22, dataSource: { author: "rmmz", module: "trait", kind: "xparams" } }), la = (a) => ({
+}), la = (a) => ({ pattern: a.format, label: a.title, kindId: 22, dataSource: { author: "rmmz", module: "trait", kind: "xparams" } }), na = (a) => ({
   pattern: a.format,
   label: a.title,
   kindId: 23,
   dataSource: { author: "rmmz", module: "trait", kind: "sparams" }
-}), na = (a) => ({ pattern: a.format, label: a.title, kindId: 31, dataSource: h() }), da = (a) => ({
+}), da = (a) => ({ pattern: a.format, label: a.title, kindId: 31, dataSource: f() }), ua = (a) => ({
   pattern: a.format,
   label: a.title,
   kindId: 32,
-  dataSource: n()
-}), ua = (a) => ({ pattern: a.format, label: a.title, kindId: 33 }), ca = (a) => ({ pattern: a.format, label: a.title, kindId: 34 }), pa = (a) => ({
+  dataSource: d()
+}), ca = (a) => ({ pattern: a.format, label: a.title, kindId: 33 }), pa = (a) => ({ pattern: a.format, label: a.title, kindId: 34 }), ka = (a) => ({
   pattern: a.format,
   label: a.title,
   kindId: 35,
-  dataSource: d()
-}), ka = (a) => ({ pattern: a.format, label: a.title, kindId: 41, dataSource: f() }), ba = (a) => ({
+  dataSource: u()
+}), ba = (a) => ({ pattern: a.format, label: a.title, kindId: 41, dataSource: y() }), ha = (a) => ({
   pattern: a.format,
   label: a.title,
   kindId: 42,
-  dataSource: f()
-}), ha = (a) => ({ pattern: a.format, label: a.title, kindId: 43, dataSource: d() }), fa = (a) => ({ pattern: a.format, label: a.title, kindId: 44, dataSource: d() }), ya = (a) => ({
+  dataSource: y()
+}), fa = (a) => ({ pattern: a.format, label: a.title, kindId: 43, dataSource: u() }), ya = (a) => ({ pattern: a.format, label: a.title, kindId: 44, dataSource: u() }), Ra = (a) => ({
   pattern: a.format,
   label: a.title,
   kindId: 51,
   dataSource: Aa()
-}), Ra = (a) => ({ pattern: a.format, label: a.title, kindId: 52, dataSource: xa() }), ga = (a) => ({
+}), ga = (a) => ({ pattern: a.format, label: a.title, kindId: 52, dataSource: Ea() }), za = (a) => ({
   pattern: a.format,
   label: a.title,
   kindId: 53,
-  dataSource: u()
-}), za = (a) => ({ pattern: a.format, label: a.title, kindId: 54, dataSource: u() }), Sa = (a) => ({ pattern: a.format, label: a.title, kindId: 55, dataSource: u() }), va = (a) => ({
+  dataSource: c()
+}), Sa = (a) => ({ pattern: a.format, label: a.title, kindId: 54, dataSource: c() }), va = (a) => ({ pattern: a.format, label: a.title, kindId: 55, dataSource: c() }), Ia = (a) => ({
   pattern: a.format,
   label: a.title,
   kindId: 61
-}), Ia = (a) => ({ pattern: a.format, label: a.title, kindId: 62, dataSource: { author: "rmmz", module: "trait", kind: "sflag" } }), Ta = (a) => ({ pattern: a.format, label: a.title, kindId: 63, dataSource: {
+}), Ta = (a) => ({ pattern: a.format, label: a.title, kindId: 62, dataSource: { author: "rmmz", module: "trait", kind: "sflag" } }), xa = (a) => ({ pattern: a.format, label: a.title, kindId: 63, dataSource: {
   author: "rmmz",
   module: "trait",
   kind: "collaps"
-} }), wa = (a) => ({ pattern: a.format, label: a.title, kindId: 64, dataSource: { author: "rmmz", module: "trait", kind: "partyAbility" } }), n = () => ({
+} }), wa = (a) => ({ pattern: a.format, label: a.title, kindId: 64, dataSource: { author: "rmmz", module: "trait", kind: "partyAbility" } }), d = () => ({
   author: "rmmz",
   module: "data",
   kind: "state"
-}), d = () => ({ author: "rmmz", module: "data", kind: "skill" }), h = () => ({ author: "rmmz", module: "system", kind: "elements" }), f = () => ({
+}), u = () => ({ author: "rmmz", module: "data", kind: "skill" }), f = () => ({ author: "rmmz", module: "system", kind: "elements" }), y = () => ({
   author: "rmmz",
   module: "system",
   kind: "skillTypes"
-}), Aa = () => ({ author: "rmmz", module: "system", kind: "weaponTypes" }), xa = () => ({ author: "rmmz", module: "system", kind: "armorTypes" }), u = () => ({
+}), Aa = () => ({ author: "rmmz", module: "system", kind: "weaponTypes" }), Ea = () => ({ author: "rmmz", module: "system", kind: "armorTypes" }), c = () => ({
   author: "rmmz",
   module: "system",
   kind: "equipTypes"
 }), o = (a, e) => ({
   name: a,
   id: e
-}), Ea = (a) => a.variables.map(o), Da = (a) => a.elements.map(o), Pa = (a) => a.equipTypes.map(o), qa = (a) => a.skillTypes.map(o), Ca = (a) => a.weaponTypes.map(o), $a = (a) => a.armorTypes.map(o), Ha = (a) => a.switches.map(o), $t = (a, e) => [Ba(a, e), Ma(a, e), La(a, e), Fa(a, e), Na(a, e), _a(a, e), ja(a, e)], Na = (a, e) => ({
-  items: $a(a),
+}), Ca = (a) => a.variables.map(o), Da = (a) => a.elements.map(o), Pa = (a) => a.equipTypes.map(o), $a = (a) => a.skillTypes.map(o), qa = (a) => a.weaponTypes.map(o), Na = (a) => a.armorTypes.map(o), Ha = (a) => a.switches.map(o), Mt = (a, e) => [Ma(a, e), Fa(a, e), Va(a, e), _a(a, e), Ba(a, e), ja(a, e), La(a, e)], Ba = (a, e) => ({
+  items: Na(a),
   label: e.options.armorTypes,
   source: { author: "rmmz", module: "system", kind: "armorTypes" }
-}), Ba = (a, e) => ({ items: Da(a), label: e.options.elements, source: {
+}), Ma = (a, e) => ({ items: Da(a), label: e.options.elements, source: {
   author: "rmmz",
   module: "system",
   kind: "elements"
-} }), Ma = (a, e) => ({ items: Pa(a), label: e.options.equipTypes, source: { author: "rmmz", module: "system", kind: "equipTypes" } }), Fa = (a, e) => ({
-  items: qa(a),
+} }), Fa = (a, e) => ({ items: Pa(a), label: e.options.equipTypes, source: { author: "rmmz", module: "system", kind: "equipTypes" } }), _a = (a, e) => ({
+  items: $a(a),
   label: e.options.skillTypes,
   source: { author: "rmmz", module: "system", kind: "skillTypes" }
-}), _a = (a, e) => ({ items: Ea(a), label: e.options.variables, source: {
+}), ja = (a, e) => ({ items: Ca(a), label: e.options.variables, source: {
   author: "rmmz",
   module: "system",
   kind: "variable"
-} }), ja = (a, e) => ({ items: Ha(a), label: e.options.switches, source: { author: "rmmz", module: "system", kind: "switch" } }), La = (a, e) => ({
-  items: Ca(a),
+} }), La = (a, e) => ({ items: Ha(a), label: e.options.switches, source: { author: "rmmz", module: "system", kind: "switch" } }), Va = (a, e) => ({
+  items: qa(a),
   label: e.options.weaponTypes,
   source: { author: "rmmz", module: "system", kind: "weaponTypes" }
 });
 export {
-  Ve as $,
-  ut as A,
-  dt as B,
-  Se as C,
-  ot as D,
-  yt as E,
-  lt as F,
-  tt as G,
-  rt as H,
-  it as I,
-  mt as J,
-  Me as K,
-  Fe as L,
-  We as M,
-  _e as N,
-  Ne as O,
-  st as P,
-  Be as Q,
-  Le as R,
-  je as S,
-  at as T,
-  Ze as U,
-  Ke as V,
-  Ue as W,
-  Ye as X,
-  Xe as Y,
-  Qe as Z,
-  Oe as _,
-  ve as a,
-  F as a$,
-  Je as a0,
-  fe as a1,
-  re as a2,
-  oe as a3,
-  me as a4,
-  se as a5,
-  ie as a6,
-  Re as a7,
-  Xa as a8,
-  Va as a9,
-  M as aA,
-  $ as aB,
-  He as aC,
-  P as aD,
-  $a as aE,
-  Da as aF,
-  Pa as aG,
-  Qa as aH,
-  Dt as aI,
-  qa as aJ,
-  Ha as aK,
-  Ea as aL,
-  Ca as aM,
-  Oa as aN,
-  b as aO,
-  B as aP,
-  Z as aQ,
-  p as aR,
-  qt as aS,
-  At as aT,
-  Ge as aU,
-  C as aV,
-  xt as aW,
-  Et as aX,
-  wt as aY,
-  Ct as aZ,
+  at as $,
+  bt as A,
+  kt as B,
+  xe as C,
+  ut as D,
+  St as E,
+  ct as F,
+  it as G,
+  ot as H,
+  dt as I,
+  nt as J,
+  Le as K,
+  Ve as L,
+  Ke as M,
+  We as N,
+  _e as O,
+  lt as P,
+  je as Q,
+  Je as R,
+  Ge as S,
+  st as T,
+  rt as U,
+  Ue as V,
+  Ze as W,
+  tt as X,
+  et as Y,
+  Ye as Z,
+  Xe as _,
+  we as a,
+  $t as a$,
+  Qe as a0,
+  ze as a1,
+  oe as a2,
+  ue as a3,
+  ne as a4,
+  le as a5,
+  de as a6,
+  ve as a7,
+  ee as a8,
+  ae as a9,
+  ht as aA,
+  B as aB,
+  $ as aC,
+  F as aD,
+  N as aE,
+  Fe as aF,
+  P as aG,
+  Ua as aH,
+  Na as aI,
+  Da as aJ,
+  Pa as aK,
+  Qa as aL,
+  qt as aM,
+  $a as aN,
+  Ha as aO,
+  Ca as aP,
+  qa as aQ,
+  Oa as aR,
+  h as aS,
+  M as aT,
+  aa as aU,
+  k as aV,
+  Ht as aW,
+  Dt as aX,
+  Oe as aY,
+  q as aZ,
   Pt as a_,
-  pe as aa,
-  ke as ab,
-  be as ac,
-  ce as ad,
-  ae,
-  ge as af,
-  de as ag,
-  ue as ah,
-  le as ai,
-  ne as aj,
-  he as ak,
-  te as al,
-  ye as am,
-  Ya as an,
-  Za as ao,
-  ee as ap,
-  k as aq,
-  E as ar,
-  ea as as,
-  Ua as at,
-  $t as au,
-  x as av,
-  D as aw,
-  ct as ax,
-  N as ay,
-  q as az,
-  Ie as b,
-  et as b0,
-  H as b1,
-  Ja as b2,
-  Ka as b3,
-  Wa as b4,
-  Ga as b5,
-  ze as c,
-  Rt as d,
-  ht as e,
-  Tt as f,
-  bt as g,
-  vt as h,
-  It as i,
-  pt as j,
-  kt as k,
-  gt as l,
-  zt as m,
-  ft as n,
-  St as o,
-  xe as p,
-  Pe as q,
-  Ae as r,
-  we as s,
-  Te as t,
-  qe as u,
-  Ee as v,
-  De as w,
-  Ce as x,
-  $e as y,
-  nt as z
+  fe as aa,
+  ye as ab,
+  Re as ac,
+  he as ad,
+  se as ae,
+  Ie as af,
+  ke as ag,
+  be as ah,
+  ce as ai,
+  pe as aj,
+  ge as ak,
+  ie as al,
+  Se as am,
+  te as an,
+  re as ao,
+  me as ap,
+  b as aq,
+  C as ar,
+  Xa as as,
+  n as at,
+  ta as au,
+  Ya as av,
+  Za as aw,
+  Mt as ax,
+  E as ay,
+  D as az,
+  Ae as b,
+  Ct as b0,
+  Bt as b1,
+  Nt as b2,
+  _ as b3,
+  mt as b4,
+  H as b5,
+  Ja as b6,
+  Ka as b7,
+  Wa as b8,
+  Ga as b9,
+  Te as c,
+  vt as d,
+  gt as e,
+  Et as f,
+  Rt as g,
+  wt as h,
+  At as i,
+  ft as j,
+  yt as k,
+  It as l,
+  Tt as m,
+  zt as n,
+  xt as o,
+  Pe as p,
+  Ne as q,
+  De as r,
+  Ce as s,
+  Ee as t,
+  He as u,
+  $e as v,
+  qe as w,
+  Be as x,
+  Me as y,
+  pt as z
 };
