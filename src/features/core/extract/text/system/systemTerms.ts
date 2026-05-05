@@ -4,14 +4,14 @@ import type {
   Terms_Messages,
   Terms_Basic,
   SystemLabels_TermsParamNames,
-} from "@sigureya/rpgtypes";
+} from "@RpgTypes/rmmz";
 import type {
-  SystemTermsKeyType,
-  ExtractedGameCommandsTextItem,
-  ExtractedSystemMessageItem,
   ExtractedBasicTermsTextItem,
+  ExtractedGameCommandsTextItem,
   ExtractedParamsTextItem,
-} from "../../sss/types";
+  ExtractedSystemMessageItem,
+  SystemTermsKeyType,
+} from "./types";
 
 const createItem = <P extends string, T, UUID, Key extends string & keyof T>(
   prefix: P,
