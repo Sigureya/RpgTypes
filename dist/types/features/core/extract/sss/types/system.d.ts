@@ -13,7 +13,7 @@ export interface SystemKinds {
     armorTypes: string;
     weaponTypes: string;
 }
-export interface KindHandlers {
+export interface SystemKindHandlers {
     basic: (key: keyof Terms_Basic) => string;
     commands: (key: keyof Terms_GameCommands) => string;
     messages: (key: keyof Terms_Messages) => string;
