@@ -1,5 +1,5 @@
 import type { PLUGIN_COMMAND_MZ, TextCommandCodeUnion } from "@RpgTypes/libs";
-import type { ExtractedTextItemG } from "../../../sss";
+import type { ExtractedTextItemG } from "../../mainData";
 
 export type PluginCommandCodeFormat =
   `code:${typeof PLUGIN_COMMAND_MZ}-${string}`;

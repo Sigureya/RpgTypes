@@ -4,8 +4,8 @@ import type {
   Terms_Basic,
   SystemLabels_TermsParamNames,
 } from "@RpgTypes/rmmz";
-import type { ExtractedTextItemG } from "../../../sss";
-import type { SystemKinds } from "./meta";
+import type { ExtractedTextItemG } from "../../mainData";
+import type { ExtractedSystemKinds } from "./kinds";
 
 export type SystemTermsKeyType<
   Prefix extends string,
@@ -33,7 +33,7 @@ export type ExtractedParamsTextItem<UUID> = ExtractedTextItemG<
 >;
 
 export type ExtractedSystemTextItem<UUID = string> =
-  | ExtractedTextItemG<UUID, keyof SystemKinds>
+  | ExtractedSystemKinds<UUID>
   | ExtractedGameCommandsTextItem<UUID>
   | ExtractedSystemMessageItem<UUID>
   | ExtractedBasicTermsTextItem<UUID>

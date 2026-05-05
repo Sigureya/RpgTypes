@@ -1,11 +1,8 @@
 import { normarizeText } from "@RpgTypes/libs";
-import type {
-  ExtractedText,
-  Data_State,
-  ExtractedTextItem as NoteEntry,
-} from "@sigureya/rpgtypes";
+import type { Data_State } from "@RpgTypes/rmmz";
 import type {
   ExtractedNoteItem,
+  ExtractedText,
   ExtractedTextBundle,
   ExtractedTextItemG,
   RmmzTextPropertys,
@@ -17,6 +14,12 @@ export type KeyRecord<T> = Record<
 > & {
   note: string;
 };
+
+interface NoteX {
+  key: string;
+  value: string;
+  id: number;
+}
 
 export const convertStateData = <UUID>(
   extracted: readonly ExtractedText<Data_State>[],
@@ -73,11 +76,9 @@ export const convertData = <T, UUID>(
 };
 
 const convertNoteData = <UUID>(
-  list: ReadonlyArray<NoteEntry>,
+  list: ReadonlyArray<NoteX>,
   filename: string,
-  terms: {
-    note: string;
-  },
+  terms: { note: string },
   uuidGen: (text: string) => UUID,
 ): ExtractedNoteItem<UUID>[] => {
   return list.map((note) => ({

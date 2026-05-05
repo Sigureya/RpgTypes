@@ -1,19 +1,19 @@
 import type {
+  FileReadBundle,
   MapBatchReadResult,
   ReadSystemResult,
-  FileReadBundle,
 } from "@RpgTypes/fileio";
 import {
+  FILENAME_COMMON_EVENTS,
+  FILENAME_TROOPS,
   FILENAME_ARMORS,
   FILENAME_ACTORS,
   FILENAME_CLASSES,
-  FILENAME_COMMON_EVENTS,
   FILENAME_ENEMIES,
   FILENAME_ITEMS,
   FILENAME_SKILLS,
   FILENAME_STATES,
   FILENAME_WEAPONS,
-  FILENAME_TROOPS,
   FILENAME_SYSTEM,
 } from "@RpgTypes/fileio";
 import type { Data_Actor, MapFileInfo } from "@RpgTypes/rmmz";
@@ -23,16 +23,18 @@ import { convertCommonEvents, convertBattleEvents } from "./commonEvent";
 import { extractMapEventTexts } from "./map";
 import type { SummarizedNote, SummarizedNoteValue } from "./note";
 import { buildRawGameDataNoteNormalization } from "./noteNormarize";
-import type { ExtractedTextItemG, RmmzTextPropertys } from "./sss";
-import { convertDataList, convertStateData } from "./sss";
 import type {
+  SystemKinds,
+  RmmzTextPropertys,
   TextCommandParameter,
   EventContainerExtractor,
   ExtractedMapTexts,
+  ExtractedTextItemG,
+  ExtractedSystemTexts,
+  SystemTexts,
 } from "./text";
-import type { ExtractedSystemTexts } from "./text/system";
+import { convertDataList, convertStateData } from "./text";
 import { convertSystemTypes } from "./text/system/conv";
-import type { SystemKinds, SystemTexts } from "./text/system/types";
 import type {
   ExtractedTextFinalWithNotes,
   RawGameDataNoteNormalization,

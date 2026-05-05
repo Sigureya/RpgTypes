@@ -4,12 +4,12 @@ import type {
   DataReadErrorItem,
 } from "@RpgTypes/fileio";
 import type { SummarizedNote, SummarizedNoteValue } from "./note";
-import type { ExtractedTextMainDataFinal } from "./sss";
 import type {
   ExtractedDataBundle,
   ExtractedCommonEventText,
   ExtractedBattleEventText,
   ExtractedMapTexts,
+  ExtractedTextMainDataFinal,
 } from "./text";
 import type { ExtractedEventDataBundle } from "./text/eventCommand/types/bundle";
 import type { ExtractedSystemTexts, SystemTexts } from "./text/system";
