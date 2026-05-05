@@ -18,7 +18,6 @@ import {
 } from "@RpgTypes/fileio";
 import type { Data_Actor, MapFileInfo } from "@RpgTypes/rmmz";
 import { createActorControlChars } from "@RpgTypes/rmmz";
-import type { ExtractedSystemTexts } from "dist/types";
 import { extractTextFromRawGameData } from "./bundle";
 import { ccedFromList, ctx } from "./commonEvent";
 import { extractMapEventTexts } from "./map";
@@ -36,6 +35,7 @@ import type {
   EventContainerExtractor,
   ExtractedMapTexts,
 } from "./text";
+import type { ExtractedSystemTexts } from "./text/system";
 import { convertSystemTypes } from "./text/system/conv";
 import type {
   ExtractedTextFinalWithNotes,
