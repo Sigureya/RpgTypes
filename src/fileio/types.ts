@@ -15,3 +15,9 @@ export interface FileReadBundle extends AssetFilesBundle {
   otherFiles: OtherFilesSet;
   data: RawGameData;
 }
+
+export interface FileReadFailed {
+  success: false;
+  message: string;
+  filename: string;
+}
