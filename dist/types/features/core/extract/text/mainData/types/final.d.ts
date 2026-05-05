@@ -1,6 +1,5 @@
-import { Data_Enemy, Data_Skill, Data_Armor, Data_Class, Data_Item, Data_Weapon, Data_State } from '../../../../../rmmz';
+import { Data_Enemy, Data_Skill, Data_Armor, Data_Class, Data_Item, Data_Weapon, Data_State } from '../../../../../../rmmz';
 import { ExtractedActorTexts } from './actor';
-import { ExtractedCommandItem, ExtractedTroopTextItem } from './command';
 import { ExtractedTextBundle, ExtractedTextItemG } from './mainData';
 import { ExtractedPluginItem } from './plugin';
 export interface ExtractedTextMainDataFinal<UUID> {
@@ -13,7 +12,5 @@ export interface ExtractedTextMainDataFinal<UUID> {
     enemies: ExtractedTextBundle<Data_Enemy, UUID>[];
     classes: ExtractedTextBundle<Data_Class, UUID>[];
     states: ExtractedTextBundle<Data_State, UUID>[];
-    commonEvents: ExtractedCommandItem<UUID>[];
     pluginParams: ExtractedPluginItem<UUID>[];
-    troops: ExtractedTroopTextItem<UUID>[];
 }

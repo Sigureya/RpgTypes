@@ -1,13 +1,4 @@
-export interface ExtractedTextItemBase<UUID> {
-    filename: string;
-    id: number;
-    uuid: UUID;
-    speaker?: string;
-    baseText: string;
-    otherData?: string[];
-    kind: string;
-    dataKey: string;
-}
+import { ExtractedTextItemBase } from '../../../../../../libs';
 export interface ExtractedTextItemG<UUID, Key extends string = string, Other extends string[] = string[]> extends ExtractedTextItemBase<UUID> {
     filename: string;
     id: number;

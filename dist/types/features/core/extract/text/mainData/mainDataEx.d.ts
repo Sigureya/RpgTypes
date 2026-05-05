@@ -1,5 +1,5 @@
-import { ExtractedText, Data_State } from '@sigureya/rpgtypes';
-import { ExtractedTextBundle, RmmzTextPropertys } from './types';
+import { Data_State } from '../../../../../rmmz';
+import { ExtractedText, ExtractedTextBundle, RmmzTextPropertys } from './types';
 export type KeyRecord<T> = Record<ExtractedText<T>["main"][number]["key"], string> & {
     note: string;
 };

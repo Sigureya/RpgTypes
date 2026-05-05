@@ -1,5 +1,5 @@
-import { PickByType, PickByTypeKeys } from '../../../../../libs/templates';
-import { Data_Actor, Data_Enemy, Data_Weapon, Data_Armor, Data_Skill, Data_State, Data_Item, Data_Class } from '../../../../../rmmz';
+import { PickByType, PickByTypeKeys } from '../../../../../../libs/templates';
+import { Data_Actor, Data_Enemy, Data_Weapon, Data_Armor, Data_Skill, Data_State, Data_Item, Data_Class } from '../../../../../../rmmz';
 export type TextExtractable<T> = PickByType<T, string> & {
     id: number;
     note: string;

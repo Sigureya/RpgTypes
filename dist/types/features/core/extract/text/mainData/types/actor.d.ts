@@ -1,4 +1,4 @@
-import { ControlCharInfo, Data_Actor } from '../../../../../rmmz';
+import { ControlCharInfo, Data_Actor } from '../../../../../../rmmz';
 import { ExtractedTextBundle } from './mainData';
 export interface ExtractedActorTexts<UUID> {
     controlChars: ControlCharInfo[];

@@ -1,5 +1,5 @@
+import { ExtractedTextItemBase } from '../../../../../../libs';
 import { RootTypeCategory } from '@sigureya/rmmz-plugin-schema';
-import { ExtractedTextItemBase } from './mainData';
 export interface ExtractedPluginItem<UUID> extends ExtractedTextItemBase<UUID> {
     id: 0;
     uuid: UUID;
