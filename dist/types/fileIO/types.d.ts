@@ -1,4 +1,4 @@
-import { OtherFilesSet } from '../features';
+import { OtherFilesSet } from './asset';
 import { AudioFilesSet } from './audio';
 import { ImageFilesSet } from './image';
 export interface AssetFilesBundle {
