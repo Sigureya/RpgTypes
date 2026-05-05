@@ -1,18 +1,10 @@
 import type {
   ReadAllDataErrorMessages,
-  AudioFilesSet,
-  ImageFilesSet,
-  OtherFilesSet,
-  RawGameData,
-  DataReadErrors,
-  DataReadErrorItem,
   MapBatchReadResult,
   ReadSystemResult,
-  FileReadFailed,
   FileReadBundle,
 } from "@RpgTypes/fileio";
 import {
-  summarizeReadErrors,
   FILENAME_ARMORS,
   FILENAME_ACTORS,
   FILENAME_CLASSES,
@@ -59,11 +51,6 @@ const READ_ERROR_MESSAGES: ReadAllDataErrorMessages = {
   validateFunctionError: "データの検証中にエラーが発生しました。",
 };
 
-const readErrors2 = (data: RawGameData) => {
-  const readErrors: DataReadErrors = summarizeReadErrors(data);
-  return toFileReadFailedList(readErrors);
-};
-
 export const buildExtractResult2 = <UUID>(
   kinds: SystemKinds,
   bundle: FileReadBundle,
@@ -71,7 +58,7 @@ export const buildExtractResult2 = <UUID>(
   uuidGen: (text: string) => UUID,
   commandNameFn: (command: TextCommandParameter) => string,
   extractor: EventContainerExtractor,
-): ExtractedTextFinal<UUID> => {
+): ExtractedTextFinal<UUID, SummarizedNote<SummarizedNoteValue>> => {
   const extractedRawData = extractTextFromRawGameData(bundle.data, extractor);
   const normalizeNote = buildRawGameDataNoteNormalization(
     extractedRawData,
@@ -88,19 +75,6 @@ export const buildExtractResult2 = <UUID>(
   );
 };
 
-const toFileReadFailedList = (readErrors: DataReadErrors): FileReadFailed[] => {
-  return [
-    ...readErrors.main.map(toFileReadFailedItem),
-    ...readErrors.map.map(toFileReadFailedItem),
-  ].flat();
-};
-
-const toFileReadFailedItem = (item: DataReadErrorItem): FileReadFailed => ({
-  success: false,
-  message: item.error,
-  filename: item.fileName,
-});
-
 const ggn = (
   normalizedData: RawGameDataNoteNormalization,
 ): SummarizedNote<SummarizedNoteValue>[] => {
@@ -114,7 +88,7 @@ const buildSuccessData = <UUID>(
   terms: Terms,
   uuidGen: (text: string) => UUID,
   commandNameFn: (command: TextCommandParameter) => string,
-): ExtractedTextFinal<UUID> => {
+): ExtractedTextFinal<UUID, SummarizedNote<SummarizedNoteValue>> => {
   const { eventData, mainData, mapFiles, system } = normalizedData.data.value;
   return {
     noteX: ggn(normalizedData),
