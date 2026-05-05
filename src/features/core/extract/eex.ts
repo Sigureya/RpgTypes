@@ -23,13 +23,8 @@ import { ccedFromList, ctx } from "./commonEvent";
 import { extractMapEventTexts } from "./map";
 import type { SummarizedNote, SummarizedNoteValue } from "./note";
 import { buildRawGameDataNoteNormalization } from "./noteNormarize";
+import type { ExtractedTextItemG, RmmzTextPropertys } from "./sss";
 import { convertDataList, convertStateData } from "./sss";
-import type {
-  SystemKinds,
-  RmmzTextPropertys,
-  SystemTexts,
-  ExtractedTextItemG,
-} from "./sss/types";
 import type {
   TextCommandParameter,
   EventContainerExtractor,
@@ -37,6 +32,7 @@ import type {
 } from "./text";
 import type { ExtractedSystemTexts } from "./text/system";
 import { convertSystemTypes } from "./text/system/conv";
+import type { SystemKinds, SystemTexts } from "./text/system/types";
 import type {
   ExtractedTextFinalWithNotes,
   RawGameDataNoteNormalization,

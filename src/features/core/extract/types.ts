@@ -4,14 +4,14 @@ import type {
   DataReadErrorItem,
 } from "@RpgTypes/fileio";
 import type { SummarizedNote, SummarizedNoteValue } from "./note";
-import type { ExtractedTextFinal } from "./sss";
+import type { ExtractedTextMainDataFinal } from "./sss";
 import type {
   ExtractedDataBundle,
   ExtractedCommonEventText,
   ExtractedBattleEventText,
   ExtractedMapTexts,
 } from "./text";
-import type { ExtractedSystemTexts } from "./text/system";
+import type { ExtractedSystemTexts, SystemTexts } from "./text/system";
 
 export interface ExtractedRawGameDataTextValue {
   mainData: ExtractedDataBundle;
@@ -37,6 +37,7 @@ export interface RawGameDataNoteNormalization {
 
 export interface ExtractedTextFinalWithNotes<
   UUID,
-> extends ExtractedTextFinal<UUID> {
+> extends ExtractedTextMainDataFinal<UUID> {
   noteSummaries: SummarizedNote<SummarizedNoteValue>[];
+  system: SystemTexts<UUID>;
 }
