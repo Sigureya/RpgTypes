@@ -1,53 +1,6 @@
 import { normarizeText } from "@RpgTypes/libs";
-import type { Data_System } from "@RpgTypes/rmmz";
-import type {
-  ExtractedSystemTextItem,
-  ExtractedTextItemG,
-  SystemKindHandlers,
-  SystemKinds,
-} from "../../sss/types";
+import type { SystemKinds, ExtractedTextItemG } from "dist/types";
 import type { ExtractedSystemTexts } from "./system";
-import { extractTextFromSystem } from "./system";
-import {
-  basicTerms,
-  gameCommands,
-  systemMessages,
-  systemParams,
-} from "./systemTerms";
-
-const HANDLERS = {
-  basic: (key) => `basic.${key}`,
-  commands: (key) => `commands.${key}`,
-  messages: (key) => `messages.${key}`,
-  params: (key) => `params.${key}`,
-} as const satisfies SystemKindHandlers;
-
-export const convertSystemTexts = <UUID>(
-  system: Data_System,
-  filename: string,
-  uuidGen: (text: string) => UUID,
-  kinds: SystemKinds,
-  handlers: SystemKindHandlers = HANDLERS,
-): ExtractedSystemTextItem<UUID>[] => {
-  const extracted = extractTextFromSystem(system);
-  return [
-    ...convertSystemTypes(extracted, filename, kinds, uuidGen),
-    ...basicTerms(extracted.terms.basic, filename, uuidGen, handlers.basic),
-    ...systemParams(extracted.terms.params, filename, uuidGen, handlers.params),
-    ...gameCommands(
-      extracted.terms.commands,
-      filename,
-      uuidGen,
-      handlers.commands,
-    ),
-    ...systemMessages(
-      extracted.terms.messages,
-      filename,
-      uuidGen,
-      handlers.messages,
-    ),
-  ];
-};
 
 export const convertSystemTypes = <UUID>(
   system: ExtractedSystemTexts,
