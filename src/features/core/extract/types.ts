@@ -11,6 +11,7 @@ import type {
   ExtractedBattleEventText,
   ExtractedMapTexts,
 } from "./text";
+import type { ExtractedEventDataBundle } from "./text/eventCommand/types/bundle";
 import type { ExtractedSystemTexts, SystemTexts } from "./text/system";
 
 export interface ExtractedRawGameDataTextValue {
@@ -35,9 +36,8 @@ export interface RawGameDataNoteNormalization {
   mapNoteSummary: SummarizedNote<SummarizedNoteValue>[];
 }
 
-export interface ExtractedTextFinalWithNotes<
-  UUID,
-> extends ExtractedTextMainDataFinal<UUID> {
+export interface ExtractedTextFinalWithNotes<UUID>
+  extends ExtractedTextMainDataFinal<UUID>, ExtractedEventDataBundle<UUID> {
   noteSummaries: SummarizedNote<SummarizedNoteValue>[];
   system: SystemTexts<UUID>;
 }

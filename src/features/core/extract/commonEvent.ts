@@ -1,12 +1,15 @@
-import type { ExtractedCommandItem, ExtractedTroopTextItem } from "./sss/types";
 import type {
   TextCommandParameter,
   ExtractedCommonEventText,
   ExtractedBattleEventText,
 } from "./text";
 import { convertCommandInfo } from "./text/eventCommand/conv";
+import type {
+  ExtractedCommandItem,
+  ExtractedTroopTextItem,
+} from "./text/eventCommand/types/extracted";
 
-export const ccedFromList = <UUID>(
+export const convertCommonEvents = <UUID>(
   filename: string,
   cc: ReadonlyArray<ExtractedCommonEventText>,
   uuidGenFunc: (text: string) => UUID,
@@ -36,8 +39,8 @@ const cced = <UUID>(
     );
 };
 
-export const ctx = <UUID>(
-  texts: ExtractedBattleEventText[],
+export const convertBattleEvents = <UUID>(
+  texts: ReadonlyArray<ExtractedBattleEventText>,
   filename: string,
   commandNameFn: (command: TextCommandParameter) => string,
   uuidGenFunc: (text: string) => UUID,

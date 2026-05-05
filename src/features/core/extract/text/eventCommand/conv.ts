@@ -1,10 +1,10 @@
 import { normarizeText, PLUGIN_COMMAND_MZ } from "@RpgTypes/libs";
+import type { TextCommandParameter, TextPluginCommandParameter } from "./types";
 import type {
   CommandCodeFormat,
   ExtractedCommandItem,
   ExtractedPluginCommandItem,
-} from "../../sss/types";
-import type { TextCommandParameter, TextPluginCommandParameter } from "./types";
+} from "./types/extracted";
 
 export const convertCommandInfo = <UUID, Other extends string[]>(
   command: TextCommandParameter,

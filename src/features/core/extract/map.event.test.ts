@@ -1,8 +1,12 @@
 import { test, describe, expect, vi } from "vitest";
 import { CHANGE_NAME, CHANGE_PROFILE, SHOW_MESSAGE_BODY } from "@RpgTypes/libs";
 import { extractMapEventTexts } from "./map";
-import type { ExtractedCommandItem, ExtractedMapEventNode } from "./sss/types";
-import type { ExtractedMapEventTexts, TextCommandParameter } from "./text";
+import type { ExtractedMapEventNode } from "./sss/types";
+import type {
+  ExtractedCommandItem,
+  ExtractedMapEventTexts,
+  TextCommandParameter,
+} from "./text";
 
 const MockFileName = "Map001" as const;
 

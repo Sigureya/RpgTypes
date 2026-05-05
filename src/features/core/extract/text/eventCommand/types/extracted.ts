@@ -1,5 +1,5 @@
 import type { PLUGIN_COMMAND_MZ, TextCommandCodeUnion } from "@RpgTypes/libs";
-import type { ExtractedTextItemG } from "./mainData";
+import type { ExtractedTextItemG } from "../../../sss";
 
 export type PluginCommandCodeFormat =
   `code:${typeof PLUGIN_COMMAND_MZ}-${string}`;
@@ -15,7 +15,12 @@ export type ExtractedTroopTextItem<UUID> =
   | ExtractedCommandItem<UUID, [`page:${number}`]>
   | ExtractedPluginCommandItem<UUID>;
 
-export type ExtractedPluginCommandItem<UUID> = ExtractedTextItemG<
-  UUID,
-  PluginCommandCodeFormat
->;
+export interface ExtractedPluginCommandItem<UUID> {
+  uuid: UUID;
+  kind: string;
+  baseText: string;
+  otherData: string[];
+  filename: string;
+  id: number;
+  dataKey: PluginCommandCodeFormat;
+}

@@ -5,7 +5,6 @@ import type {
   MapTerms,
   ExtractedNoteItem,
   ExtractedMapEventNode,
-  ExtractedCommandItem,
   ExtractedTextItemG,
 } from "./sss/types";
 import type {
@@ -15,6 +14,7 @@ import type {
   ExtractedMapEventTexts,
 } from "./text";
 import { convertCommandInfo } from "./text/eventCommand/conv";
+import type { ExtractedCommandItem } from "./text/eventCommand/types/extracted";
 
 export const extractMapTexts = <UUID>(
   map: MapFileInfo,

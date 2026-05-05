@@ -8,7 +8,6 @@ import type {
   Data_State,
 } from "@RpgTypes/rmmz";
 import type { ExtractedActorTexts } from "./actor";
-import type { ExtractedCommandItem, ExtractedTroopTextItem } from "./command";
 import type { ExtractedTextBundle, ExtractedTextItemG } from "./mainData";
 import type { ExtractedPluginItem } from "./plugin";
 
@@ -22,7 +21,5 @@ export interface ExtractedTextMainDataFinal<UUID> {
   enemies: ExtractedTextBundle<Data_Enemy, UUID>[];
   classes: ExtractedTextBundle<Data_Class, UUID>[];
   states: ExtractedTextBundle<Data_State, UUID>[];
-  commonEvents: ExtractedCommandItem<UUID>[];
   pluginParams: ExtractedPluginItem<UUID>[];
-  troops: ExtractedTroopTextItem<UUID>[];
 }
