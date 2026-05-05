@@ -119,6 +119,14 @@ const buildSuccessData = <UUID>(
   return {
     noteX: ggn(normalizedData),
     pluginParams: [],
+    map: flattenMapTexts(mapFiles, uuidGen, commandNameFn),
+    commonEvents: ccedFromList(
+      FILENAME_COMMON_EVENTS,
+      eventData.commonEvents,
+      uuidGen,
+      commandNameFn,
+    ),
+    troops: ctx(eventData.troops, FILENAME_TROOPS, commandNameFn, uuidGen),
     armors: convertDataList(mainData.armors, FILENAME_ARMORS, terms, uuidGen),
     system: buildSystemTexts(system, uuidGen, kinds),
     actors: {
@@ -130,12 +138,6 @@ const buildSuccessData = <UUID>(
       FILENAME_CLASSES,
       terms,
       uuidGen,
-    ),
-    commonEvents: ccedFromList(
-      FILENAME_COMMON_EVENTS,
-      eventData.commonEvents,
-      uuidGen,
-      commandNameFn,
     ),
     enemies: convertDataList(
       mainData.enemies,
@@ -152,8 +154,6 @@ const buildSuccessData = <UUID>(
       terms,
       uuidGen,
     ),
-    troops: ctx(eventData.troops, FILENAME_TROOPS, commandNameFn, uuidGen),
-    map: flattenMapTexts(mapFiles, uuidGen, commandNameFn),
   };
 };
 
