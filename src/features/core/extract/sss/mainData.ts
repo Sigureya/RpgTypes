@@ -9,7 +9,7 @@ import type {
   ExtractedTextBundle,
   ExtractedTextItemG,
   RmmzTextPropertys,
-} from "./sss/types";
+} from "./types";
 
 export type KeyRecord<T> = Record<
   ExtractedText<T>["main"][number]["key"],

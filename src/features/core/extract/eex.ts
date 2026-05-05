@@ -21,14 +21,13 @@ import { createActorControlChars } from "@RpgTypes/rmmz";
 import type { ExtractedSystemTexts } from "dist/types";
 import { extractTextFromRawGameData } from "./bundle";
 import { ccedFromList, ctx } from "./commonEvent";
-import { convertDataList, convertStateData } from "./mainData";
 import { extractMapEventTexts } from "./map";
 import type { SummarizedNote, SummarizedNoteValue } from "./note";
 import { buildRawGameDataNoteNormalization } from "./noteNormarize";
+import { convertDataList, convertStateData } from "./sss";
 import type {
   SystemKinds,
   RmmzTextPropertys,
-  ExtractedTextFinal,
   SystemTexts,
   ExtractedTextItemG,
 } from "./sss/types";
@@ -38,23 +37,26 @@ import type {
   ExtractedMapTexts,
 } from "./text";
 import { convertSystemTypes } from "./text/system/conv";
-import type { RawGameDataNoteNormalization } from "./types";
+import type {
+  ExtractedTextFinalWithNotes,
+  RawGameDataNoteNormalization,
+} from "./types";
 
-export const buildExtractResult2 = <UUID>(
+export const buildExtractResultWithNotes = <UUID>(
   kinds: SystemKinds,
   bundle: FileReadBundle,
   terms: RmmzTextPropertys,
   uuidGen: (text: string) => UUID,
   commandNameFn: (command: TextCommandParameter) => string,
   extractor: EventContainerExtractor,
-): ExtractedTextFinal<UUID, SummarizedNote<SummarizedNoteValue>> => {
+): ExtractedTextFinalWithNotes<UUID> => {
   const extractedRawData = extractTextFromRawGameData(bundle.data, extractor);
   const normalizeNote = buildRawGameDataNoteNormalization(
     extractedRawData,
     bundle,
   );
 
-  return buildSuccessData(
+  return buildFinalExtractedResult(
     bundle.data.actors.data,
     normalizeNote,
     kinds,
@@ -64,23 +66,23 @@ export const buildExtractResult2 = <UUID>(
   );
 };
 
-const ggn = (
+const collectAllNoteSummaries = (
   normalizedData: RawGameDataNoteNormalization,
 ): SummarizedNote<SummarizedNoteValue>[] => {
   return [...normalizedData.dataNoteSummary, ...normalizedData.mapNoteSummary];
 };
 
-const buildSuccessData = <UUID>(
+const buildFinalExtractedResult = <UUID>(
   actors: ReadonlyArray<Data_Actor>,
   normalizedData: RawGameDataNoteNormalization,
   kinds: SystemKinds,
   terms: RmmzTextPropertys,
   uuidGen: (text: string) => UUID,
   commandNameFn: (command: TextCommandParameter) => string,
-): ExtractedTextFinal<UUID, SummarizedNote<SummarizedNoteValue>> => {
+): ExtractedTextFinalWithNotes<UUID> => {
   const { eventData, mainData, mapFiles, system } = normalizedData.data.value;
   return {
-    noteX: ggn(normalizedData),
+    noteSummaries: collectAllNoteSummaries(normalizedData),
     pluginParams: [],
     map: flattenMapTexts(mapFiles, uuidGen, commandNameFn),
     commonEvents: ccedFromList(

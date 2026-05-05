@@ -3,7 +3,7 @@ import type { Data_System } from "@RpgTypes/rmmz";
 import type {
   ExtractedSystemTextItem,
   ExtractedTextItemG,
-  KindHandlers,
+  SystemKindHandlers,
   SystemKinds,
 } from "../../sss/types";
 import type { ExtractedSystemTexts } from "./system";
@@ -20,14 +20,14 @@ const HANDLERS = {
   commands: (key) => `commands.${key}`,
   messages: (key) => `messages.${key}`,
   params: (key) => `params.${key}`,
-} as const satisfies KindHandlers;
+} as const satisfies SystemKindHandlers;
 
 export const convertSystemTexts = <UUID>(
   system: Data_System,
   filename: string,
   uuidGen: (text: string) => UUID,
   kinds: SystemKinds,
-  handlers: KindHandlers = HANDLERS,
+  handlers: SystemKindHandlers = HANDLERS,
 ): ExtractedSystemTextItem<UUID>[] => {
   const extracted = extractTextFromSystem(system);
   return [
