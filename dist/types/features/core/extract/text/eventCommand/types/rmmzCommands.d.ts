@@ -1,12 +1,12 @@
-import { CHANGE_NICKNAME, CHANGE_PROFILE, CHANGE_NAME, SHOW_SCROLLING_TEXT_BODY, SHOW_CHOICES, SCRIPT_EVAL, COMMENT_HEAD, SHOW_MESSAGE_BODY } from '../../../../../../libs/eventCommand';
+import { SHOW_MESSAGE_BODY } from '../../../../../../libs/eventCommand';
+import { TextCommandCodeUnion } from '../../../../../../libs/eventCommand/codeUnion';
 import { CommandParameter } from '../../../../../../rmmz';
 import { TextPluginCommandParameter } from './pluginCommand';
 import { TextCommandParameter } from './union';
-type BaseCode = typeof CHANGE_NICKNAME | typeof CHANGE_PROFILE | typeof CHANGE_NAME | typeof SHOW_SCROLLING_TEXT_BODY | typeof SHOW_CHOICES | typeof SCRIPT_EVAL | typeof COMMENT_HEAD;
-export interface GenericCommandParameter extends CommandParameter<string, BaseCode> {
+export interface GenericCommandParameter extends CommandParameter<string, TextCommandCodeUnion> {
     paramIndex: number;
     value: string;
-    code: BaseCode;
+    code: TextCommandCodeUnion;
     speaker?: string;
 }
 export interface MessageCommandParameter extends CommandParameter<string, typeof SHOW_MESSAGE_BODY> {
@@ -20,4 +20,3 @@ export interface ExtractedEventText<P extends TextPluginCommandParameter = TextP
     pageIndex: number;
     commands: (TextCommandParameter | P)[];
 }
-export {};

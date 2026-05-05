@@ -8,7 +8,7 @@ import type {
   ExtractedNoteItem,
   ExtractedTextBundle,
   ExtractedTextItemG,
-  Terms,
+  RmmzTextPropertys,
 } from "./sss/types";
 
 export type KeyRecord<T> = Record<
@@ -21,7 +21,7 @@ export type KeyRecord<T> = Record<
 export const convertStateData = <UUID>(
   extracted: readonly ExtractedText<Data_State>[],
   filename: string,
-  terms: Terms,
+  terms: RmmzTextPropertys,
   uuidGen: (text: string) => UUID,
 ): ExtractedTextBundle<Data_State, UUID>[] => {
   return convertDataList(

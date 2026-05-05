@@ -1,4 +1,4 @@
-export interface Terms {
+export interface RmmzTextPropertys {
   description: string;
   name: string;
   displayName: string;
