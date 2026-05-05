@@ -1,24 +1,7 @@
-import { SystemLabels_TermsParamNames, Terms_Basic, Terms_GameCommands, Terms_Messages } from '../../../../../rmmz';
-import { ExtractedTextItemG } from './mainData';
-export interface SystemTexts<UUID = string> {
-    gameTitle: string;
-    texts: ExtractedTextItemG<UUID>[];
-    filename: string;
-}
+import { Terms_GameCommands, Terms_Messages, Terms_Basic, SystemLabels_TermsParamNames } from '../../../../../../rmmz';
+import { ExtractedTextItemG } from '../../../sss';
+import { SystemKinds } from './meta';
 export type SystemTermsKeyType<Prefix extends string, T> = `${Prefix}.${Extract<keyof T, string>}`;
-export interface SystemKinds {
-    gameTitle: string;
-    currencyUnit: string;
-    equipTypes: string;
-    armorTypes: string;
-    weaponTypes: string;
-}
-export interface SystemKindHandlers {
-    basic: (key: keyof Terms_Basic) => string;
-    commands: (key: keyof Terms_GameCommands) => string;
-    messages: (key: keyof Terms_Messages) => string;
-    params: (key: keyof SystemLabels_TermsParamNames) => string;
-}
 export type ExtractedGameCommandsTextItem<UUID> = ExtractedTextItemG<UUID, SystemTermsKeyType<"commands", Terms_GameCommands>>;
 export type ExtractedSystemMessageItem<UUID> = ExtractedTextItemG<UUID, SystemTermsKeyType<"messages", Terms_Messages>>;
 export type ExtractedBasicTermsTextItem<UUID> = ExtractedTextItemG<UUID, SystemTermsKeyType<"basic", Terms_Basic>>;
