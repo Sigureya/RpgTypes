@@ -1,5 +1,5 @@
+import type { ExtractedTextItemBase } from "@RpgTypes/libs";
 import type { RootTypeCategory } from "@sigureya/rmmz-plugin-schema";
-import type { ExtractedTextItemBase } from "./mainData";
 
 export interface ExtractedPluginItem<UUID> extends ExtractedTextItemBase<UUID> {
   id: 0;
@@ -14,7 +14,7 @@ export interface ExtractedPluginItem<UUID> extends ExtractedTextItemBase<UUID> {
 
 export type PluginOtherData = [
   root: `${string}:${RootTypeCategory}` | `command<${string}>`,
-  type: "" | `struct<${string}>`
+  type: "" | `struct<${string}>`,
 ];
 
 export interface PluginExtractTerms {

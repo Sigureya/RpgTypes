@@ -1,9 +1,9 @@
 import { test, describe, expect, vi } from "vitest";
 import { CHANGE_NAME, CHANGE_PROFILE, SHOW_MESSAGE_BODY } from "@RpgTypes/libs";
 import { extractMapEventTexts } from "./map";
-import type { ExtractedMapEventNode } from "./sss/types";
 import type {
   ExtractedCommandItem,
+  ExtractedMapEventNode,
   ExtractedMapEventTexts,
   TextCommandParameter,
 } from "./text";

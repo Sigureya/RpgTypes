@@ -4,7 +4,7 @@ import type {
   Terms_Basic,
   SystemLabels_TermsParamNames,
 } from "@RpgTypes/rmmz";
-import type { ExtractedTextItemG } from "../../../sss";
+import type { ExtractedTextItemG } from "../../mainData";
 import type { SystemKinds } from "./meta";
 
 export type SystemTermsKeyType<

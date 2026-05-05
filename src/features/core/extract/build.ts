@@ -23,13 +23,14 @@ import { convertCommonEvents, convertBattleEvents } from "./commonEvent";
 import { extractMapEventTexts } from "./map";
 import type { SummarizedNote, SummarizedNoteValue } from "./note";
 import { buildRawGameDataNoteNormalization } from "./noteNormarize";
-import type { ExtractedTextItemG, RmmzTextPropertys } from "./sss";
-import { convertDataList, convertStateData } from "./sss";
 import type {
   TextCommandParameter,
   EventContainerExtractor,
   ExtractedMapTexts,
+  RmmzTextPropertys,
+  ExtractedTextItemG,
 } from "./text";
+import { convertDataList, convertStateData } from "./text/mainData/mainDataEx";
 import type { ExtractedSystemTexts } from "./text/system";
 import { convertSystemTypes } from "./text/system/conv";
 import type { SystemKinds, SystemTexts } from "./text/system/types";

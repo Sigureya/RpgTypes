@@ -2,16 +2,14 @@ import { normarizeText } from "@RpgTypes/libs";
 import type { MapFileInfo, Data_Map } from "@RpgTypes/rmmz";
 import { isValidCommandText } from "./commonEvent";
 import type {
-  MapTerms,
-  ExtractedNoteItem,
-  ExtractedMapEventNode,
-  ExtractedTextItemG,
-} from "./sss/types";
-import type {
   TextCommandParameter,
   GameDataExtractor,
   ExtractedMapTexts,
   ExtractedMapEventTexts,
+  ExtractedMapEventNode,
+  ExtractedNoteItem,
+  ExtractedTextItemG,
+  MapTerms,
 } from "./text";
 import { convertCommandInfo } from "./text/eventCommand/conv";
 import type { ExtractedCommandItem } from "./text/eventCommand/types/extracted";
