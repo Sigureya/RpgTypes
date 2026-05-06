@@ -1,5 +1,6 @@
 export * from './eventCommand';
 export * from './rpg';
+export * from './script';
 export * from './system';
 export type * from './types';
 export * from './utils';
