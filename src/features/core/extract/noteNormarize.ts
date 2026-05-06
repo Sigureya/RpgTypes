@@ -159,7 +159,7 @@ const notesToPaX = (
       (n): NoteReadResultEx => ({
         key: n.key,
         value: n.value,
-        dataId: n.id,
+        id: n.id,
         name: item.name,
       }),
     ),

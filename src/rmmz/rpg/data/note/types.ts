@@ -9,7 +9,7 @@ export interface NoteReadResult {
 }
 
 export interface NoteReadResultEx extends NoteReadResult {
-  dataId: number;
+  id: number;
   name: string;
 }
 export interface NoteReadResultsWithSource {

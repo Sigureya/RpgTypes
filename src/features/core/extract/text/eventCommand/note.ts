@@ -22,7 +22,7 @@ export const extractAllMapNotesEx = (
 const eex = (e: ExtractedMapEventTexts): NoteReadResultEx[] => {
   return e.noteItems.map(
     (n): NoteReadResultEx => ({
-      dataId: e.eventId,
+      id: e.eventId,
       key: n.key,
       value: n.value,
       name: e.name,
@@ -31,7 +31,7 @@ const eex = (e: ExtractedMapEventTexts): NoteReadResultEx[] => {
 };
 
 const mmx = (item: NoteReadResult): NoteReadResultEx => ({
-  dataId: 0,
+  id: 0,
   key: item.key,
   value: item.value,
   name: "",

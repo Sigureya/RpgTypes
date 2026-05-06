@@ -4,6 +4,7 @@ import type {
   NoteReadResultEx,
   NoteReadResultsWithSource,
 } from "@RpgTypes/rmmz";
+import { isScript } from "@RpgTypes/rmmz";
 import type {
   SummarizedNote,
   SummarizedNote2,
@@ -58,7 +59,7 @@ const groupBy = (
       (note): SSS2 => ({
         key: note.key,
         value: note.value,
-        dataId: note.dataId,
+        id: note.id,
         name: note.name,
         soruce: sourceNotes.source,
       }),
@@ -70,7 +71,7 @@ const groupBy = (
 const gggg = (ss: SSS2): SummarizedNoteValue => {
   return {
     value: ss.value,
-    dataId: ss.dataId,
+    id: ss.id,
     soruce: ss.soruce,
     name: ss.name,
   };
@@ -113,7 +114,7 @@ const createEmptyKindState = (): KindState => ({
   isPicture: true,
   isTileset: true,
   isMovie: true,
-  isScript: false,
+  isScript: true,
 });
 
 const detectNoteKindState = (
@@ -139,7 +140,7 @@ const detectNoteKindState = (
       isTileset: acc.isTileset && imageFiles.tilesets.has(item.value),
 
       isMovie: acc.isMovie && otherFiles.movies.has(item.value),
-      isScript: acc.isScript,
+      isScript: acc.isScript && isScript(item.value),
     };
   }, createEmptyKindState());
 };

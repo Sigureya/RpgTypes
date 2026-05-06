@@ -11,7 +11,7 @@ export interface SummarizedNote<T = string> {
 
 export interface SummarizedNoteValue {
   value: string;
-  dataId: number;
+  id: number;
   soruce: string;
   name: string;
 }
