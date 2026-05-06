@@ -4,7 +4,10 @@ import type {
   ImageFilesSet,
   OtherFilesSet,
 } from "@RpgTypes/fileio";
-import type { NoteReadResultsWithSource } from "@RpgTypes/rmmz";
+import {
+  KEYWORD_GAME_VALIABLES,
+  type NoteReadResultsWithSource,
+} from "@RpgTypes/rmmz";
 import { isNoteNumber, stringLikeNoteKeys, summarizeNoteKinds } from "./note";
 import type { SummarizedNote2 } from "./types";
 
@@ -12,6 +15,9 @@ interface TestCase2 {
   name: string;
   sources: NoteReadResultsWithSource[];
   expected: SummarizedNote2[];
+  /**
+   * noteのvalueがstringになっている箇所一覧
+   */
   set: ReadonlySet<string>;
 }
 
@@ -46,6 +52,9 @@ const TILESET_FILE = "tileset-file";
 const MOVIE_FILE = "movie-file";
 
 const DATA_NAME = "Test Data";
+
+const KEY_SCRIPT = "Script";
+
 describe("isNoteNumber", () => {
   test("bgm filename as number", () => {
     expect(BGM_NUMBER).toSatisfy(isNoteNumber);
@@ -479,6 +488,33 @@ const testCases2: TestCase2[] = [
       },
     ],
     set: new Set(["X"]),
+  },
+  {
+    name: "script key with source",
+    sources: [
+      {
+        source: "actors",
+        notes: KEYWORD_GAME_VALIABLES.map((expr: string, index) => ({
+          key: KEY_SCRIPT,
+          value: expr,
+          id: index + 1,
+          name: DATA_NAME,
+        })),
+      },
+    ],
+    expected: [
+      {
+        key: KEY_SCRIPT,
+        kinds: ["script"],
+        values: KEYWORD_GAME_VALIABLES.map((expr, index) => ({
+          value: expr,
+          id: index + 1,
+          soruce: "actors",
+          name: DATA_NAME,
+        })),
+      },
+    ],
+    set: new Set([]),
   },
 ];
 
