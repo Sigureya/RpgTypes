@@ -1,0 +1,13 @@
+import { PluginMeta } from '../../libs';
+export declare const PLUGIN_EFFECT_CONDITIONS: PluginMeta;
+export declare const PLUGIN_ENEMY_REWARD_RATE: PluginMeta;
+export declare const PLUGIN_EQUIP_CONDITION_EXTEND: PluginMeta;
+export declare const PLUGIN_EQUIP_SLOT_INVALIDATE: PluginMeta;
+export declare const PLUGIN_EVASION_IGNORE: PluginMeta;
+export declare const PLUGIN_EVENT_INTERCEPTOR: PluginMeta;
+export declare const PLUGIN_EVENT_LABEL: PluginMeta;
+export declare const PLUGIN_EVENT_MOVABLE_LIMITATION: PluginMeta;
+export declare const PLUGIN_EVENT_NO_LOCK: PluginMeta;
+export declare const PLUGIN_EVENT_RE_SPAWN: PluginMeta;
+export declare const PLUGIN_EVENT_START_SE: PluginMeta;
+export declare const PLUGIN_EXP_FOR_OUTSIDE_PARTY: PluginMeta;

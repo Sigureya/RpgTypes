@@ -1,0 +1,11 @@
+import { PluginMeta } from '../../libs';
+export declare const PLUGIN_CHARACTER_GRAPHIC_MANAGER: PluginMeta;
+export declare const PLUGIN_CHARGE_TIME_CONTROL: PluginMeta;
+export declare const PLUGIN_COMMAND_SKILL: PluginMeta;
+export declare const PLUGIN_CONDITIONAL_STATE: PluginMeta;
+export declare const PLUGIN_CONDITIONAL_XPARAM: PluginMeta;
+export declare const PLUGIN_COUNTER_EXTEND: PluginMeta;
+export declare const PLUGIN_CURSED_ACTION: PluginMeta;
+export declare const PLUGIN_CUSTOMIZE_ATTACK_GUARD: PluginMeta;
+export declare const PLUGIN_CUSTOMIZE_CRITICAL: PluginMeta;
+export declare const PLUGIN_CUSTOMIZE_FAILURE_MESSAGE: PluginMeta;

@@ -49,6 +49,11 @@
       "types": "./dist/types/fileio/index.d.ts",
       "import": "./dist/fileio/fileio.es.js",
       "require": "./dist/fileio/fileio.cjs.js"
+    },
+    "./plugin": {
+      "types": "./dist/types/plugin/index.d.ts",
+      "import": "./dist/plugin/plugin.es.js",
+      "require": "./dist/plugin/plugin.cjs.js"
     }
   },
   "files": [

@@ -1,0 +1,12 @@
+import { PluginMeta } from '../../libs';
+export declare const PLUGIN_DAMAGE_LIMIATION: PluginMeta;
+export declare const PLUGIN_DEATH_LOST_MP_TP: PluginMeta;
+export declare const PLUGIN_DESCRIPTION_EXTEND: PluginMeta;
+export declare const PLUGIN_DESCRIPTION_TEMPLATE: PluginMeta;
+export declare const PLUGIN_DESTINATION_WINDOW: PluginMeta;
+export declare const PLUGIN_DIRECTLY_ATTACK_EFFECT: PluginMeta;
+export declare const PLUGIN_DRAIN_EXTEND: PluginMeta;
+export declare const PLUGIN_DYNAMIC_ACTOR_GRAPHIC: PluginMeta;
+export declare const PLUGIN_DYNAMIC_BATTLER_PARAM: PluginMeta;
+export declare const PLUGIN_DYNAMIC_DATABASE: PluginMeta;
+export declare const PLUGIN_DYNAMIC_EQUIP_PARAM: PluginMeta;
