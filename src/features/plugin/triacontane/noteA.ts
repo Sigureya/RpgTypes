@@ -1,6 +1,6 @@
 import type { PluginMeta } from "@RpgTypes/libs";
 
-const PLUGIN_ACCUMULATE_STATE: PluginMeta = {
+export const PLUGIN_ACCUMULATE_STATE = {
   author: "triacontane",
   pluginName: "AccumulateState",
   noteSchema: [
@@ -21,13 +21,15 @@ const PLUGIN_ACCUMULATE_STATE: PluginMeta = {
     { valueType: "number", key: "蓄積ステータスゲージY", script: false },
     { valueType: "number", key: "AccumulateStatusGaugeY", script: false },
   ],
-};
-const PLUGIN_ACTION_EFFECT_EXTEND: PluginMeta = {
+} as const satisfies PluginMeta;
+
+export const PLUGIN_ACTION_EFFECT_EXTEND = {
   author: "triacontane",
   pluginName: "ActionEffectExtend",
   noteSchema: [{ valueType: "string", key: "effect", script: false }],
-};
-const PLUGIN_ADDITIONAL_DESCRIPTION: PluginMeta = {
+} as const satisfies PluginMeta;
+
+export const PLUGIN_ADDITIONAL_DESCRIPTION = {
   author: "triacontane",
   pluginName: "AdditionalDescription",
   noteSchema: [
@@ -36,31 +38,36 @@ const PLUGIN_ADDITIONAL_DESCRIPTION: PluginMeta = {
     { valueType: "string", key: "ADスクリプト", script: true },
     { valueType: "string", key: "ADScript", script: true },
   ],
-};
-const PLUGIN_ADDITIONAL_SKILL_MESSAGE: PluginMeta = {
+} as const satisfies PluginMeta;
+
+export const PLUGIN_ADDITIONAL_SKILL_MESSAGE = {
   author: "triacontane",
   pluginName: "AdditionalSkillMessage",
   noteSchema: [
     { valueType: "string", key: "ASM_メッセージ*", script: false },
     { valueType: "string", key: "ASM_Message*", script: false },
   ],
-};
-const PLUGIN_ANIMATION_BY_SUBJECT: PluginMeta = {
+} as const satisfies PluginMeta;
+
+export const PLUGIN_ANIMATION_BY_SUBJECT = {
   author: "triacontane",
   pluginName: "AnimationBySubject",
   noteSchema: [],
-};
-const PLUGIN_AIRSHIP_EVENT: PluginMeta = {
-  author: "s.f.",
+} as const satisfies PluginMeta;
+
+export const PLUGIN_AIRSHIP_EVENT = {
+  author: "triacontane",
   pluginName: "AirshipEvent",
   noteSchema: [{ valueType: "boolean", key: "AirEvent", script: false }],
-};
-const PLUGIN_AUTO_SELF_SWITCH: PluginMeta = {
+} as const satisfies PluginMeta;
+
+export const PLUGIN_AUTO_SELF_SWITCH = {
   author: "triacontane",
   pluginName: "AutoSelfSwitch",
   noteSchema: [],
-};
-const PLUGIN_AUTO_RAISE: PluginMeta = {
+} as const satisfies PluginMeta;
+
+export const PLUGIN_AUTO_RAISE = {
   author: "triacontane",
   pluginName: "AutoRaise",
   noteSchema: [
@@ -79,8 +86,9 @@ const PLUGIN_AUTO_RAISE: PluginMeta = {
     { valueType: "boolean", key: "蘇生ロスト", script: false },
     { valueType: "boolean", key: "RaiseLost", script: false },
   ],
-};
-const PLUGIN_AUTOMATIC_STATE: PluginMeta = {
+} as const satisfies PluginMeta;
+
+export const PLUGIN_AUTOMATIC_STATE = {
   author: "triacontane",
   pluginName: "AutomaticState",
   noteSchema: [
@@ -98,9 +106,10 @@ const PLUGIN_AUTOMATIC_STATE: PluginMeta = {
     { valueType: "number", key: "AS防具装備", script: false },
     { valueType: "number", key: "AS並び順", script: false },
   ],
-};
-const PLUGIN_ATTACK_CHAIN: PluginMeta = {
+} as const satisfies PluginMeta;
+
+export const PLUGIN_ATTACK_CHAIN = {
   author: "triacontane",
   pluginName: "AttackChain",
   noteSchema: [{ valueType: "boolean", key: "Combo", script: false }],
-};
+} as const satisfies PluginMeta;

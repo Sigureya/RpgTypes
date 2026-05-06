@@ -1,5 +1,5 @@
 import type { PluginMeta } from "@RpgTypes/libs";
-const PLUGIN_BALLOON_POSITION: PluginMeta = {
+export const PLUGIN_BALLOON_POSITION: PluginMeta = {
   author: "triacontane",
   pluginName: "BalloonPosition",
   noteSchema: [
@@ -7,7 +7,7 @@ const PLUGIN_BALLOON_POSITION: PluginMeta = {
     { valueType: "number", key: "BalloonY", script: false },
   ],
 };
-const PLUGIN_BATTLE_BALLOON: PluginMeta = {
+export const PLUGIN_BATTLE_BALLOON: PluginMeta = {
   author: "Triacontane",
   pluginName: "BattleBalloon",
   noteSchema: [
@@ -21,7 +21,7 @@ const PLUGIN_BATTLE_BALLOON: PluginMeta = {
     { valueType: "number", key: "使用時フキダシ", script: false },
   ],
 };
-const PLUGIN_BATTLE_FORMATION_CUSTOMIZE: PluginMeta = {
+export const PLUGIN_BATTLE_FORMATION_CUSTOMIZE: PluginMeta = {
   author: "トリアコンタン",
   pluginName: "BattleFormationCustomize",
   noteSchema: [
@@ -31,7 +31,7 @@ const PLUGIN_BATTLE_FORMATION_CUSTOMIZE: PluginMeta = {
     { valueType: "string", key: "BFC_DeltaPos", script: false },
   ],
 };
-const PLUGIN_BATTLER_GRAPHIC_EXTEND: PluginMeta = {
+export const PLUGIN_BATTLER_GRAPHIC_EXTEND: PluginMeta = {
   author: "トリアコンタン",
   pluginName: "BattlerGraphicExtend",
   noteSchema: [
@@ -55,7 +55,7 @@ const PLUGIN_BATTLER_GRAPHIC_EXTEND: PluginMeta = {
     { valueType: "number", key: "BGEMotionRate", script: false },
   ],
 };
-const PLUGIN_BATTLE_SPECIAL_COMMAND: PluginMeta = {
+export const PLUGIN_BATTLE_SPECIAL_COMMAND: PluginMeta = {
   author: "triacontane",
   pluginName: "BattleSpecialCommand",
   noteSchema: [
@@ -115,7 +115,7 @@ const PLUGIN_BATTLE_SPECIAL_COMMAND: PluginMeta = {
     { valueType: "string", key: "BSCItemCondScript", script: false },
   ],
 };
-const PLUGIN_BIG_ENEMY: PluginMeta = {
+export const PLUGIN_BIG_ENEMY: PluginMeta = {
   author: "トリアコンタン",
   pluginName: "BigEnemy",
   noteSchema: [{ valueType: "boolean", key: "BigEnemy", script: false }],
