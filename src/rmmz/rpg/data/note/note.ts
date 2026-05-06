@@ -106,7 +106,7 @@ export const readNoteEx2 = (
     (m): NoteReadResultEx => ({
       key: m[1],
       value: m[2],
-      dataId: data.id,
+      id: data.id,
       name: data.name,
     }),
   );
