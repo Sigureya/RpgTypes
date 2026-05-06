@@ -29,48 +29,51 @@ export const stringLikeNoteKeys = (
   return new Set(ss);
 };
 
+interface SSS2 extends NoteReadResultEx {
+  soruce: string;
+}
+
 export const summarizeNoteKinds = (
   items: readonly NoteReadResultsWithSource[],
   assets: AssetFilesBundle,
 ): SummarizedNote2[] => {
-  const flattened: Array<NoteReadResultEx & { soruce: string }> = items.flatMap(
-    (paX) => paX.notes.map((note) => ({ ...note, soruce: paX.source })),
-  );
-  const map = categorizeNoteEx(flattened);
+  const groupedByKey: ReadonlyMap<string, readonly SSS2[]> = groupBy(items);
 
-  return Array.from(map.entries()).map(
-    ([key, mappedItems]): SummarizedNote2 => {
-      const kindState = detectNoteKindState(mappedItems, assets);
-      const kinds = extractNoteKinds(kindState);
-      return {
-        key,
-        kinds,
-        values: mappedItems.map(
-          (i): SummarizedNoteValue => ({
-            value: i.value,
-            dataId: i.dataId,
-            soruce: i.soruce,
-            name: i.name,
-          }),
-        ),
-      };
-    },
-  );
+  return Array.from(groupedByKey.entries()).map(([key, mappedItems]) => {
+    const kindState = detectNoteKindState(mappedItems, assets);
+    const kinds = extractNoteKinds(kindState);
+    return {
+      key,
+      kinds,
+      values: mappedItems.map(gggg),
+    };
+  });
 };
 
-const categorizeNoteEx = <T extends KeyValuePair>(
-  items: readonly T[],
-): Map<string, T[]> => {
-  return items.reduce((acc, item) => {
-    if (acc.has(item.key)) {
-      return acc;
-    }
-    acc.set(
-      item.key,
-      items.filter((i) => i.key === item.key),
-    );
-    return acc;
-  }, new Map<string, T[]>());
+const groupBy = (
+  items: ReadonlyArray<NoteReadResultsWithSource>,
+): Map<string, SSS2[]> => {
+  const list: SSS2[] = items.flatMap((sourceNotes) =>
+    sourceNotes.notes.map(
+      (note): SSS2 => ({
+        key: note.key,
+        value: note.value,
+        dataId: note.dataId,
+        name: note.name,
+        soruce: sourceNotes.source,
+      }),
+    ),
+  );
+  return Map.groupBy(list, (note) => note.key);
+};
+
+const gggg = (ss: SSS2): SummarizedNoteValue => {
+  return {
+    value: ss.value,
+    dataId: ss.dataId,
+    soruce: ss.soruce,
+    name: ss.name,
+  };
 };
 
 const extractNoteKinds = (state: KindState) => {
@@ -90,6 +93,7 @@ const extractNoteKinds = (state: KindState) => {
       state.isEnemy ? "enemies" : null,
       state.isTileset ? "tilesets" : null,
       state.isMovie ? "movies" : null,
+      state.isScript ? "script" : null,
     ] as const
   ).filter((k) => k !== null);
 };
@@ -109,6 +113,7 @@ const createEmptyKindState = (): KindState => ({
   isPicture: true,
   isTileset: true,
   isMovie: true,
+  isScript: false,
 });
 
 const detectNoteKindState = (
@@ -134,6 +139,7 @@ const detectNoteKindState = (
       isTileset: acc.isTileset && imageFiles.tilesets.has(item.value),
 
       isMovie: acc.isMovie && otherFiles.movies.has(item.value),
+      isScript: acc.isScript,
     };
   }, createEmptyKindState());
 };
@@ -153,4 +159,5 @@ interface KindState {
   isEnemy: boolean;
   isTileset: boolean;
   isMovie: boolean;
+  isScript: boolean;
 }
