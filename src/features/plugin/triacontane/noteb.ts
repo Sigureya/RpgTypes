@@ -1,0 +1,122 @@
+import type { PluginMeta } from "@RpgTypes/libs";
+const PLUGIN_BALLOON_POSITION: PluginMeta = {
+  author: "triacontane",
+  pluginName: "BalloonPosition",
+  noteSchema: [
+    { valueType: "number", key: "BalloonX", script: false },
+    { valueType: "number", key: "BalloonY", script: false },
+  ],
+};
+const PLUGIN_BATTLE_BALLOON: PluginMeta = {
+  author: "Triacontane",
+  pluginName: "BattleBalloon",
+  noteSchema: [
+    { valueType: "number", key: "BalloonX", script: false },
+    { valueType: "number", key: "フキダシX", script: false },
+    { valueType: "number", key: "BalloonY", script: false },
+    { valueType: "number", key: "フキダシY", script: false },
+    { valueType: "number", key: "BalloonInput", script: false },
+    { valueType: "number", key: "決定時フキダシ", script: false },
+    { valueType: "number", key: "BalloonUsing", script: false },
+    { valueType: "number", key: "使用時フキダシ", script: false },
+  ],
+};
+const PLUGIN_BATTLE_FORMATION_CUSTOMIZE: PluginMeta = {
+  author: "トリアコンタン",
+  pluginName: "BattleFormationCustomize",
+  noteSchema: [
+    { valueType: "string", key: "BFC_座標", script: false },
+    { valueType: "string", key: "BFC_Pos", script: false },
+    { valueType: "string", key: "BFC_相対座標", script: false },
+    { valueType: "string", key: "BFC_DeltaPos", script: false },
+  ],
+};
+const PLUGIN_BATTLER_GRAPHIC_EXTEND: PluginMeta = {
+  author: "トリアコンタン",
+  pluginName: "BattlerGraphicExtend",
+  noteSchema: [
+    { valueType: "number", key: "BGE高度", script: false },
+    { valueType: "number", key: "BGEAltitude", script: false },
+    { valueType: "number", key: "BGE不透明度", script: false },
+    { valueType: "number", key: "BGEOpacity", script: false },
+    { valueType: "string", key: "BGE色調", script: false },
+    { valueType: "string", key: "BGETone", script: false },
+    { valueType: "string", key: "BGEフラッシュ", script: false },
+    { valueType: "string", key: "BGEFlash", script: false },
+    { valueType: "number", key: "BGEフラッシュ間隔", script: false },
+    { valueType: "number", key: "BGEFlashInterval", script: false },
+    { valueType: "number", key: "BGE合成方法", script: false },
+    { valueType: "number", key: "BGEBlendMode", script: false },
+    { valueType: "number", key: "BGE拡大率X", script: false },
+    { valueType: "number", key: "BGEScaleX", script: false },
+    { valueType: "number", key: "BGE拡大率Y", script: false },
+    { valueType: "number", key: "BGEScaleY", script: false },
+    { valueType: "number", key: "BGEモーション倍率", script: false },
+    { valueType: "number", key: "BGEMotionRate", script: false },
+  ],
+};
+const PLUGIN_BATTLE_SPECIAL_COMMAND: PluginMeta = {
+  author: "triacontane",
+  pluginName: "BattleSpecialCommand",
+  noteSchema: [
+    { valueType: "boolean", key: "BSC特殊コマンド", script: false },
+    { valueType: "boolean", key: "BSCSpecialCommand", script: false },
+    { valueType: "string", key: "BSC追加位置", script: false },
+    { valueType: "string", key: "BSCAddPosition", script: false },
+    { valueType: "number", key: "BSC条件ステート有効", script: true },
+    { valueType: "number", key: "BSCCondStateValid", script: true },
+    { valueType: "number", key: "BSC条件ステート無効", script: true },
+    { valueType: "number", key: "BSCCondStateInvalid", script: true },
+    { valueType: "number", key: "BSC条件スイッチON", script: true },
+    { valueType: "number", key: "BSCCondSwitchOn", script: true },
+    { valueType: "number", key: "BSC条件スイッチOFF", script: true },
+    { valueType: "number", key: "BSCCondSwitchOff", script: true },
+    { valueType: "string", key: "BSC条件スクリプト", script: false },
+    { valueType: "string", key: "BSCCondScript", script: false },
+    {
+      valueType: "number",
+      key: "BSCスキルタイプ*条件ステート有効",
+      script: true,
+    },
+    { valueType: "number", key: "BSCSkillType*CondStateValid", script: true },
+    {
+      valueType: "number",
+      key: "BSCスキルタイプ*条件ステート無効",
+      script: true,
+    },
+    { valueType: "number", key: "BSCSkillType*CondStateInvalid", script: true },
+    {
+      valueType: "number",
+      key: "BSCスキルタイプ*条件スイッチON",
+      script: true,
+    },
+    { valueType: "number", key: "BSCSkillType*CondSwitchOn", script: true },
+    {
+      valueType: "number",
+      key: "BSCスキルタイプ*条件スイッチOFF",
+      script: true,
+    },
+    { valueType: "number", key: "BSCSkillType*CondSwitchOff", script: true },
+    {
+      valueType: "string",
+      key: "BSCスキルタイプ*条件スクリプト",
+      script: false,
+    },
+    { valueType: "string", key: "BSCSkillType*CondScript", script: false },
+    { valueType: "number", key: "BSCアイテム条件ステート有効", script: true },
+    { valueType: "number", key: "BSCItemCondStateValid", script: true },
+    { valueType: "number", key: "BSCアイテム条件ステート無効", script: true },
+    { valueType: "number", key: "BSCItemCondStateInvalid", script: true },
+    { valueType: "number", key: "BSCアイテム条件スイッチON", script: true },
+    { valueType: "number", key: "BSCItemCondSwitchOn", script: true },
+    { valueType: "number", key: "BSCアイテム条件スイッチOFF", script: true },
+    { valueType: "number", key: "BSCItemCondSwitchOff", script: true },
+    { valueType: "string", key: "BSCアイテム条件スクリプト", script: false },
+    { valueType: "string", key: "BSCItemCondScript", script: false },
+  ],
+};
+const PLUGIN_BIG_ENEMY: PluginMeta = {
+  author: "トリアコンタン",
+  pluginName: "BigEnemy",
+  noteSchema: [{ valueType: "boolean", key: "BigEnemy", script: false }],
+};

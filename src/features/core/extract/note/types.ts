@@ -1,8 +1,3 @@
-export interface NoteSchema {
-  name: string;
-  kind: string;
-}
-
 export interface SummarizedNote<T = string> {
   key: string;
   kinds: string[];
@@ -17,9 +12,3 @@ export interface SummarizedNoteValue {
 }
 
 export type SummarizedNote2 = SummarizedNote<SummarizedNoteValue>;
-
-export interface NoteSchema {
-  key: string;
-  kinds: string;
-  source: string;
-}
