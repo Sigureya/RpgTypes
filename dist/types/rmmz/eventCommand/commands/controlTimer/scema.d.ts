@@ -16,7 +16,7 @@ declare const SCHEMA_COMMAND_CONTROL_TIMER: {
             maxItems: 2;
             items: [{
                 type: "number";
-                enum: (0 | 1)[];
+                enum: number[];
             }, {
                 type: "number";
                 minimum: number;

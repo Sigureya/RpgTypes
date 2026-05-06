@@ -50,7 +50,7 @@ export declare const SCHEMA_DATA_MAP: {
                     readonly type: "null";
                 }, {
                     readonly type: "object";
-                    readonly required: ("name" | "id" | "note" | "pages" | "x" | "y")[];
+                    readonly required: ("note" | "id" | "name" | "pages" | "x" | "y")[];
                     readonly properties: {
                         readonly id: {
                             readonly type: "integer";
@@ -221,19 +221,19 @@ export declare const SCHEMA_DATA_MAP: {
                                                                 }, {
                                                                     type: "object";
                                                                     additionalProperties: false;
-                                                                    required: ("name" | "volume" | "pitch" | "pan")[];
+                                                                    required: string[];
                                                                     properties: {
                                                                         name: {
-                                                                            type: "string";
+                                                                            type: string;
                                                                         };
                                                                         pan: {
-                                                                            type: "integer";
+                                                                            type: string;
                                                                         };
                                                                         pitch: {
-                                                                            type: "integer";
+                                                                            type: string;
                                                                         };
                                                                         volume: {
-                                                                            type: "integer";
+                                                                            type: string;
                                                                         };
                                                                     };
                                                                 }];

@@ -13,25 +13,7 @@ export declare const SCHEMA_COMMAND_ANY_AUDIO: {
             readonly type: "array";
             readonly minItems: 1;
             readonly maxItems: 1;
-            readonly items: readonly [{
-                type: "object";
-                properties: {
-                    name: {
-                        type: "string";
-                    };
-                    volume: {
-                        type: "integer";
-                    };
-                    pitch: {
-                        type: "integer";
-                    };
-                    pan: {
-                        type: "integer";
-                    };
-                };
-                required: ["name", "volume", "pitch", "pan"];
-                additionalProperties: false;
-            }];
+            readonly items: readonly [any];
         };
     };
     readonly additionalProperties: false;
