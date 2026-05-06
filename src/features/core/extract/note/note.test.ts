@@ -4,10 +4,7 @@ import type {
   ImageFilesSet,
   OtherFilesSet,
 } from "@RpgTypes/fileio";
-import {
-  KEYWORD_GAME_VALIABLES,
-  type NoteReadResultsWithSource,
-} from "@RpgTypes/rmmz";
+import type { NoteReadResultsWithSource } from "@RpgTypes/rmmz";
 import { isNoteNumber, stringLikeNoteKeys, summarizeNoteKinds } from "./note";
 import type { SummarizedNote2 } from "./types";
 
@@ -54,6 +51,8 @@ const MOVIE_FILE = "movie-file";
 const DATA_NAME = "Test Data";
 
 const KEY_SCRIPT = "Script";
+
+const SCRIPT_EXPR = "$gameVariables.value(1)";
 
 describe("isNoteNumber", () => {
   test("bgm filename as number", () => {
@@ -494,24 +493,18 @@ const testCases2: TestCase2[] = [
     sources: [
       {
         source: "actors",
-        notes: KEYWORD_GAME_VALIABLES.map((expr: string, index) => ({
-          key: KEY_SCRIPT,
-          value: expr,
-          id: index + 1,
-          name: DATA_NAME,
-        })),
+        notes: [
+          { key: KEY_SCRIPT, value: SCRIPT_EXPR, id: 1, name: DATA_NAME },
+        ],
       },
     ],
     expected: [
       {
         key: KEY_SCRIPT,
         kinds: ["script"],
-        values: KEYWORD_GAME_VALIABLES.map((expr, index) => ({
-          value: expr,
-          id: index + 1,
-          soruce: "actors",
-          name: DATA_NAME,
-        })),
+        values: [
+          { value: SCRIPT_EXPR, id: 1, soruce: "actors", name: DATA_NAME },
+        ],
       },
     ],
     set: new Set([]),
