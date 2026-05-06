@@ -33,19 +33,19 @@ export declare const SCHEMA_MOVEROUTE_DATA: {
                             }, {
                                 type: "object";
                                 additionalProperties: false;
-                                required: ("name" | "volume" | "pitch" | "pan")[];
+                                required: string[];
                                 properties: {
                                     name: {
-                                        type: "string";
+                                        type: string;
                                     };
                                     pan: {
-                                        type: "integer";
+                                        type: string;
                                     };
                                     pitch: {
-                                        type: "integer";
+                                        type: string;
                                     };
                                     volume: {
-                                        type: "integer";
+                                        type: string;
                                     };
                                 };
                             }];

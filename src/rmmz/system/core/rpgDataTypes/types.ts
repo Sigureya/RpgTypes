@@ -1,4 +1,4 @@
-import type { DomainName } from "src/libs";
+import type { DomainName } from "@RpgTypes/libs";
 
 export interface System_RPG_DataNames {
   weaponTypes: string[];

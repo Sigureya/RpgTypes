@@ -11,10 +11,9 @@
     "skipLibCheck": true,
     "noEmit": false,
     "emitDeclarationOnly": true,
-    "baseUrl": "./",
     "rootDir": "src",
     "paths": {
-      "@RpgTypes/*": ["src/*"]
+      "@RpgTypes/*": ["./src/*"]
     },
     "types": ["node"]
   },
