@@ -4,7 +4,8 @@ export interface PluginMeta {
     noteSchema: NoteSchema2[];
 }
 export interface NoteSchema2 {
-    valueType: string;
+    valueType: NoteValueType;
     key: string;
     script: boolean;
 }
+export type NoteValueType = "number" | "boolean" | "not text" | "text" | "string";
