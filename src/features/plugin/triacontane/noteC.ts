@@ -1,5 +1,6 @@
 import type { PluginMeta } from "@RpgTypes/libs";
-const PLUGIN_CHARACTER_GRAPHIC_MANAGER: PluginMeta = {
+
+export const PLUGIN_CHARACTER_GRAPHIC_MANAGER: PluginMeta = {
   author: "トリアコンタン",
   pluginName: "CharacterGraphicManager",
   noteSchema: [
@@ -7,7 +8,8 @@ const PLUGIN_CHARACTER_GRAPHIC_MANAGER: PluginMeta = {
     { valueType: "string", key: "CGM耐久*", script: true },
   ],
 };
-const PLUGIN_CHARGE_TIME_CONTROL: PluginMeta = {
+
+export const PLUGIN_CHARGE_TIME_CONTROL: PluginMeta = {
   author: "トリアコンタン",
   pluginName: "ChargeTimeControl",
   noteSchema: [
@@ -17,7 +19,8 @@ const PLUGIN_CHARGE_TIME_CONTROL: PluginMeta = {
     { valueType: "number", key: "ChargeTimeMinusRate", script: false },
   ],
 };
-const PLUGIN_COMMAND_SKILL: PluginMeta = {
+
+export const PLUGIN_COMMAND_SKILL: PluginMeta = {
   author: "トリアコンタン",
   pluginName: "CommandSkill",
   noteSchema: [
@@ -27,7 +30,8 @@ const PLUGIN_COMMAND_SKILL: PluginMeta = {
     { valueType: "boolean", key: "隠しコマンドスキル", script: false },
   ],
 };
-const PLUGIN_CONDITIONAL_STATE: PluginMeta = {
+
+export const PLUGIN_CONDITIONAL_STATE: PluginMeta = {
   author: "トリアコンタン",
   pluginName: "ConditionalState",
   noteSchema: [
@@ -57,7 +61,8 @@ const PLUGIN_CONDITIONAL_STATE: PluginMeta = {
     { valueType: "string", key: "CS_LowerTpValue", script: false },
   ],
 };
-const PLUGIN_CONDITIONAL_XPARAM: PluginMeta = {
+
+export const PLUGIN_CONDITIONAL_XPARAM: PluginMeta = {
   author: "トリアコンタン",
   pluginName: "ConditionalXparam",
   noteSchema: [
@@ -68,7 +73,8 @@ const PLUGIN_CONDITIONAL_XPARAM: PluginMeta = {
     },
   ],
 };
-const PLUGIN_COUNTER_EXTEND: PluginMeta = {
+
+export const PLUGIN_COUNTER_EXTEND: PluginMeta = {
   author: "トリアコンタン",
   pluginName: "CounterExtend",
   noteSchema: [
@@ -88,7 +94,8 @@ const PLUGIN_COUNTER_EXTEND: PluginMeta = {
     },
   ],
 };
-const PLUGIN_CURSED_ACTION: PluginMeta = {
+
+export const PLUGIN_CURSED_ACTION: PluginMeta = {
   author: "トリアコンタン",
   pluginName: "CursedAction",
   noteSchema: [
@@ -96,7 +103,7 @@ const PLUGIN_CURSED_ACTION: PluginMeta = {
     { valueType: "string", key: "呪い行動", script: false },
   ],
 };
-const PLUGIN_CUSTOMIZE_ATTACK_GUARD: PluginMeta = {
+export const PLUGIN_CUSTOMIZE_ATTACK_GUARD: PluginMeta = {
   author: "トリアコンタン",
   pluginName: "CustomizeAttackGuard",
   noteSchema: [
@@ -106,7 +113,8 @@ const PLUGIN_CUSTOMIZE_ATTACK_GUARD: PluginMeta = {
     { valueType: "number", key: "CAG防御", script: false },
   ],
 };
-const PLUGIN_CUSTOMIZE_CRITICAL: PluginMeta = {
+
+export const PLUGIN_CUSTOMIZE_CRITICAL: PluginMeta = {
   author: "トリアコンタン",
   pluginName: "CustomizeCritical",
   noteSchema: [
@@ -124,7 +132,8 @@ const PLUGIN_CUSTOMIZE_CRITICAL: PluginMeta = {
     { valueType: "string", key: "CCMessage", script: false },
   ],
 };
-const PLUGIN_CUSTOMIZE_FAILURE_MESSAGE: PluginMeta = {
+
+export const PLUGIN_CUSTOMIZE_FAILURE_MESSAGE: PluginMeta = {
   author: "トリアコンタン",
   pluginName: "CustomizeFailureMessage",
   noteSchema: [
