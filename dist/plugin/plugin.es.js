@@ -1,4 +1,4 @@
-const e = { author: "CutieVirus", pluginName: "MZ3D", noteSchema: [{ script: !1, key: "mz3d", valueType: "not text" }, { script: !1, key: "TE", valueType: "not text" }] }, t = {
+const p = { author: "CutieVirus", pluginName: "MZ3D", noteSchema: [{ script: !1, key: "mz3d", valueType: "not text" }, { script: !1, key: "TE", valueType: "not text" }] }, a = {
   author: "triacontane",
   pluginName: "AccumulateState",
   noteSchema: [{ valueType: "boolean", key: "蓄積型", script: !1 }, { valueType: "boolean", key: "Accumulate", script: !1 }, { valueType: "number", script: !1, key: "蓄積ゲージステート" }, {
@@ -18,11 +18,11 @@ const e = { author: "CutieVirus", pluginName: "MZ3D", noteSchema: [{ script: !1,
     key: "AccumulateStatusGaugeX",
     script: !1
   }, { valueType: "number", key: "蓄積ステータスゲージY", script: !1 }, { valueType: "number", key: "AccumulateStatusGaugeY", script: !1 }]
-}, p = {
+}, r = {
   author: "triacontane",
   pluginName: "ActionEffectExtend",
   noteSchema: [{ valueType: "string", key: "effect", script: !1 }]
-}, a = { author: "triacontane", pluginName: "AdditionalDescription", noteSchema: [{
+}, i = { author: "triacontane", pluginName: "AdditionalDescription", noteSchema: [{
   valueType: "string",
   key: "AD説明",
   script: !1
@@ -30,15 +30,15 @@ const e = { author: "CutieVirus", pluginName: "MZ3D", noteSchema: [{ script: !1,
   valueType: "string",
   key: "ADScript",
   script: !0
-}] }, r = { author: "triacontane", pluginName: "AdditionalSkillMessage", noteSchema: [{ valueType: "string", key: "ASM_メッセージ*", script: !1 }, {
+}] }, u = { author: "triacontane", pluginName: "AdditionalSkillMessage", noteSchema: [{ valueType: "string", key: "ASM_メッセージ*", script: !1 }, {
   valueType: "string",
   key: "ASM_Message*",
   script: !1
-}] }, i = { author: "triacontane", pluginName: "AnimationBySubject", noteSchema: [] }, u = { author: "triacontane", pluginName: "AirshipEvent", noteSchema: [{
+}] }, y = { author: "triacontane", pluginName: "AnimationBySubject", noteSchema: [] }, n = { author: "triacontane", pluginName: "AirshipEvent", noteSchema: [{
   valueType: "boolean",
   key: "AirEvent",
   script: !1
-}] }, y = { author: "triacontane", pluginName: "AutoSelfSwitch", noteSchema: [] }, n = { author: "triacontane", pluginName: "AutoRaise", noteSchema: [{
+}] }, s = { author: "triacontane", pluginName: "AutoSelfSwitch", noteSchema: [] }, l = { author: "triacontane", pluginName: "AutoRaise", noteSchema: [{
   valueType: "number",
   key: "自動蘇生",
   script: !1
@@ -54,7 +54,7 @@ const e = { author: "CutieVirus", pluginName: "MZ3D", noteSchema: [{ script: !1,
   valueType: "number",
   key: "RaiseTpCost",
   script: !1
-}, { valueType: "boolean", key: "蘇生ロスト", script: !1 }, { valueType: "boolean", key: "RaiseLost", script: !1 }] }, s = {
+}, { valueType: "boolean", key: "蘇生ロスト", script: !1 }, { valueType: "boolean", key: "RaiseLost", script: !1 }] }, c = {
   author: "triacontane",
   pluginName: "AutomaticState",
   noteSchema: [{ valueType: "number", key: "ASスイッチ", script: !1 }, { valueType: "string", key: "AS計算式", script: !0 }, { valueType: "number", key: "AS上限HP", script: !1 }, {
@@ -70,11 +70,11 @@ const e = { author: "CutieVirus", pluginName: "MZ3D", noteSchema: [{ script: !1,
     key: "AS防具装備",
     script: !1
   }, { valueType: "number", key: "AS並び順", script: !1 }]
-}, l = { author: "triacontane", pluginName: "AttackChain", noteSchema: [{ valueType: "boolean", key: "Combo", script: !1 }] }, c = {
+}, T = { author: "triacontane", pluginName: "AttackChain", noteSchema: [{ valueType: "boolean", key: "Combo", script: !1 }] }, o = {
   author: "triacontane",
   pluginName: "BalloonPosition",
   noteSchema: [{ valueType: "number", key: "BalloonX", script: !1 }, { valueType: "number", key: "BalloonY", script: !1 }]
-}, T = {
+}, k = {
   author: "Triacontane",
   pluginName: "BattleBalloon",
   noteSchema: [{ valueType: "number", key: "BalloonX", script: !1 }, { valueType: "number", key: "フキダシX", script: !1 }, { valueType: "number", key: "BalloonY", script: !1 }, {
@@ -86,11 +86,11 @@ const e = { author: "CutieVirus", pluginName: "MZ3D", noteSchema: [{ script: !1,
     key: "BalloonUsing",
     script: !1
   }, { valueType: "number", key: "使用時フキダシ", script: !1 }]
-}, o = { author: "トリアコンタン", pluginName: "BattleFormationCustomize", noteSchema: [{ valueType: "string", key: "BFC_座標", script: !1 }, {
+}, v = { author: "トリアコンタン", pluginName: "BattleFormationCustomize", noteSchema: [{ valueType: "string", key: "BFC_座標", script: !1 }, {
   valueType: "string",
   key: "BFC_Pos",
   script: !1
-}, { valueType: "string", key: "BFC_相対座標", script: !1 }, { valueType: "string", key: "BFC_DeltaPos", script: !1 }] }, k = {
+}, { valueType: "string", key: "BFC_相対座標", script: !1 }, { valueType: "string", key: "BFC_DeltaPos", script: !1 }] }, m = {
   author: "トリアコンタン",
   pluginName: "BattlerGraphicExtend",
   noteSchema: [{ valueType: "number", key: "BGE高度", script: !1 }, { valueType: "number", key: "BGEAltitude", script: !1 }, {
@@ -114,7 +114,7 @@ const e = { author: "CutieVirus", pluginName: "MZ3D", noteSchema: [{ script: !1,
     key: "BGEMotionRate",
     script: !1
   }]
-}, v = { author: "triacontane", pluginName: "BattleSpecialCommand", noteSchema: [{ valueType: "boolean", key: "BSC特殊コマンド", script: !1 }, {
+}, g = { author: "triacontane", pluginName: "BattleSpecialCommand", noteSchema: [{ valueType: "boolean", key: "BSC特殊コマンド", script: !1 }, {
   valueType: "boolean",
   key: "BSCSpecialCommand",
   script: !1
@@ -158,19 +158,19 @@ const e = { author: "CutieVirus", pluginName: "MZ3D", noteSchema: [{ script: !1,
   valueType: "string",
   key: "BSCアイテム条件スクリプト",
   script: !1
-}, { valueType: "string", key: "BSCItemCondScript", script: !1 }] }, m = { author: "トリアコンタン", pluginName: "BigEnemy", noteSchema: [{
+}, { valueType: "string", key: "BSCItemCondScript", script: !1 }] }, S = { author: "トリアコンタン", pluginName: "BigEnemy", noteSchema: [{
   valueType: "boolean",
   key: "BigEnemy",
   script: !1
-}] }, g = { author: "トリアコンタン", pluginName: "CharacterGraphicManager", noteSchema: [{ valueType: "string", key: "CGMノーマル", script: !0 }, {
+}] }, b = { author: "トリアコンタン", pluginName: "CharacterGraphicManager", noteSchema: [{ valueType: "string", key: "CGMノーマル", script: !0 }, {
   valueType: "string",
   key: "CGM耐久*",
   script: !0
-}] }, S = { author: "トリアコンタン", pluginName: "ChargeTimeControl", noteSchema: [{ valueType: "number", key: "ChargeTime", script: !1 }, {
+}] }, C = { author: "トリアコンタン", pluginName: "ChargeTimeControl", noteSchema: [{ valueType: "number", key: "ChargeTime", script: !1 }, {
   valueType: "string",
   key: "ChargeTimeJs",
   script: !0
-}, { valueType: "number", key: "ChargeTimePlusRate", script: !1 }, { valueType: "number", key: "ChargeTimeMinusRate", script: !1 }] }, b = {
+}, { valueType: "number", key: "ChargeTimePlusRate", script: !1 }, { valueType: "number", key: "ChargeTimeMinusRate", script: !1 }] }, E = {
   author: "トリアコンタン",
   pluginName: "CommandSkill",
   noteSchema: [{ valueType: "string", key: "CommandSkill", script: !1 }, { valueType: "string", key: "コマンドスキル", script: !1 }, {
@@ -178,7 +178,7 @@ const e = { author: "CutieVirus", pluginName: "MZ3D", noteSchema: [{ script: !1,
     key: "HiddenCommandSkill",
     script: !1
   }, { valueType: "boolean", key: "隠しコマンドスキル", script: !1 }]
-}, C = { author: "トリアコンタン", pluginName: "ConditionalState", noteSchema: [{ valueType: "string", key: "CS_上限HP", script: !1 }, {
+}, A = { author: "トリアコンタン", pluginName: "ConditionalState", noteSchema: [{ valueType: "string", key: "CS_上限HP", script: !1 }, {
   valueType: "string",
   key: "CS_UpperHp",
   script: !1
@@ -206,11 +206,11 @@ const e = { author: "CutieVirus", pluginName: "MZ3D", noteSchema: [{ script: !1,
   valueType: "string",
   key: "CS_下限TP値",
   script: !1
-}, { valueType: "string", key: "CS_LowerTpValue", script: !1 }] }, E = { author: "トリアコンタン", pluginName: "ConditionalXparam", noteSchema: [{
+}, { valueType: "string", key: "CS_LowerTpValue", script: !1 }] }, h = { author: "トリアコンタン", pluginName: "ConditionalXparam", noteSchema: [{
   valueType: "boolean",
   key: "<xparamList.tagで指定した任意タグ>",
   script: !1
-}] }, A = { author: "トリアコンタン", pluginName: "CounterExtend", noteSchema: [{ valueType: "string", key: "CounterExtend", script: !1 }, {
+}] }, _ = { author: "トリアコンタン", pluginName: "CounterExtend", noteSchema: [{ valueType: "string", key: "CounterExtend", script: !1 }, {
   valueType: "string",
   key: "反撃拡張",
   script: !1
@@ -218,15 +218,15 @@ const e = { author: "CutieVirus", pluginName: "MZ3D", noteSchema: [{ script: !1,
   valueType: "number",
   key: "<SkillList.FrequencyTagで指定した任意タグ>",
   script: !1
-}, { valueType: "boolean", key: "<SkillList.MemoTagConditionで指定した任意タグ>", script: !1 }] }, h = { author: "トリアコンタン", pluginName: "CursedAction", noteSchema: [{
+}, { valueType: "boolean", key: "<SkillList.MemoTagConditionで指定した任意タグ>", script: !1 }] }, N = { author: "トリアコンタン", pluginName: "CursedAction", noteSchema: [{
   valueType: "string",
   key: "CursedAction",
   script: !1
-}, { valueType: "string", key: "呪い行動", script: !1 }] }, _ = { author: "トリアコンタン", pluginName: "CustomizeAttackGuard", noteSchema: [{
+}, { valueType: "string", key: "呪い行動", script: !1 }] }, D = { author: "トリアコンタン", pluginName: "CustomizeAttackGuard", noteSchema: [{
   valueType: "number",
   key: "CAGAttack",
   script: !1
-}, { valueType: "number", key: "CAG攻撃", script: !1 }, { valueType: "number", key: "CAGGuard", script: !1 }, { valueType: "number", key: "CAG防御", script: !1 }] }, N = {
+}, { valueType: "number", key: "CAG攻撃", script: !1 }, { valueType: "number", key: "CAGGuard", script: !1 }, { valueType: "number", key: "CAG防御", script: !1 }] }, P = {
   author: "トリアコンタン",
   pluginName: "CustomizeCritical",
   noteSchema: [{ valueType: "string", key: "CC計算式", script: !0 }, { valueType: "string", key: "CCFormula", script: !0 }, { valueType: "number", key: "CC確率加算", script: !1 }, {
@@ -242,31 +242,31 @@ const e = { author: "CutieVirus", pluginName: "MZ3D", noteSchema: [{ script: !1,
     key: "CCメッセージ",
     script: !1
   }, { valueType: "string", key: "CCMessage", script: !1 }]
-}, D = { author: "トリアコンタン", pluginName: "CustomizeFailureMessage", noteSchema: [{
+}, d = { author: "トリアコンタン", pluginName: "CustomizeFailureMessage", noteSchema: [{
   valueType: "string",
   key: "FailureMessage",
   script: !1
-}, { valueType: "string", key: "失敗メッセージ", script: !1 }] }, P = { author: "トリアコンタン", pluginName: "DamageLimitation", noteSchema: [{
+}, { valueType: "string", key: "失敗メッセージ", script: !1 }] }, B = { author: "トリアコンタン", pluginName: "DamageLimitation", noteSchema: [{
   valueType: "number",
   key: "MaxInflicted",
   script: !1
-}, { valueType: "number", key: "最大与ダメージ", script: !1 }, { valueType: "number", key: "MaxReceived", script: !1 }, { valueType: "number", key: "最大被ダメージ", script: !1 }] }, B = {
+}, { valueType: "number", key: "最大与ダメージ", script: !1 }, { valueType: "number", key: "MaxReceived", script: !1 }, { valueType: "number", key: "最大被ダメージ", script: !1 }] }, I = {
   author: "トリアコンタン",
   pluginName: "DeathLostMpTp",
   noteSchema: [{ valueType: "number", key: "DeathLostMp", script: !1 }, { valueType: "number", key: "DeathLostTp", script: !1 }]
-}, d = {
+}, L = {
   author: "トリアコンタン",
   pluginName: "DescriptionExtend",
   noteSchema: [{ valueType: "string", key: "ExtendDesc", script: !1 }, { valueType: "string", key: "拡張説明", script: !1 }]
-}, I = {
+}, G = {
   author: "トリアコンタン",
   pluginName: "DescriptionTemplate",
   noteSchema: [{ valueType: "number", key: "TemplateIndex", script: !1 }, { valueType: "boolean", key: "NoDescTemplate", script: !1 }]
-}, L = {
+}, M = {
   author: "トリアコンタン",
   pluginName: "DestinationWindow",
   noteSchema: [{ valueType: "boolean", key: "noDestinationWindow", script: !1 }]
-}, G = { author: "triacontane", pluginName: "DirectlyAttackEffect", noteSchema: [{
+}, U = { author: "triacontane", pluginName: "DirectlyAttackEffect", noteSchema: [{
   valueType: "string",
   key: "DAE攻撃",
   script: !1
@@ -310,19 +310,19 @@ const e = { author: "CutieVirus", pluginName: "MZ3D", noteSchema: [{ script: !1,
   valueType: "boolean",
   key: "DAEVanish",
   script: !1
-}, { valueType: "boolean", key: "DAE消滅", script: !1 }] }, M = { author: "トリアコンタン", pluginName: "DrainExtend", noteSchema: [{
+}, { valueType: "boolean", key: "DAE消滅", script: !1 }] }, O = { author: "トリアコンタン", pluginName: "DrainExtend", noteSchema: [{
   valueType: "string",
   key: "DrainEx",
   script: !1
-}, { valueType: "string", key: "吸収拡張", script: !1 }, { valueType: "string", key: "DrainRate", script: !0 }, { valueType: "string", key: "吸収有効率", script: !0 }] }, U = {
+}, { valueType: "string", key: "吸収拡張", script: !1 }, { valueType: "string", key: "DrainRate", script: !0 }, { valueType: "string", key: "吸収有効率", script: !0 }] }, R = {
   author: "トリアコンタン",
   pluginName: "DynamicActorGraphic",
   noteSchema: [{ valueType: "boolean", key: "<list.tagで指定した任意タグ>", script: !1 }]
-}, O = { author: "トリアコンタン", pluginName: "DynamicBattlerParam", noteSchema: [] }, R = {
+}, f = { author: "トリアコンタン", pluginName: "DynamicBattlerParam", noteSchema: [] }, F = {
   author: "トリアコンタン",
   pluginName: "DynamicDatabase",
   noteSchema: [{ valueType: "string", key: "DD<項目名>", script: !0 }]
-}, F = { author: "トリアコンタン", pluginName: "DynamicEquipParam", noteSchema: [{
+}, H = { author: "トリアコンタン", pluginName: "DynamicEquipParam", noteSchema: [{
   valueType: "string",
   key: "DEP_最大HP",
   script: !0
@@ -342,7 +342,7 @@ const e = { author: "CutieVirus", pluginName: "MZ3D", noteSchema: [{ script: !1,
   valueType: "string",
   key: "DEP_Luk",
   script: !0
-}, { valueType: "number", key: "<計算式中 a.special('tag') で参照する任意タグ>", script: !1 }] }, H = { author: "トリアコンタン", pluginName: "EffectConditions", noteSchema: [] }, f = {
+}, { valueType: "number", key: "<計算式中 a.special('tag') で参照する任意タグ>", script: !1 }] }, x = { author: "トリアコンタン", pluginName: "EffectConditions", noteSchema: [] }, q = {
   author: "トリアコンタン",
   pluginName: "EnemyRewardRate",
   noteSchema: [{ valueType: "number", key: "経験値倍率", script: !1 }, { valueType: "number", key: "ExpRate", script: !1 }, { valueType: "number", key: "金額倍率", script: !1 }, {
@@ -350,7 +350,7 @@ const e = { author: "CutieVirus", pluginName: "MZ3D", noteSchema: [{ script: !1,
     key: "GoldRate",
     script: !1
   }]
-}, q = { author: "トリアコンタン", pluginName: "EquipConditionExtend", noteSchema: [{ valueType: "string", key: "装備条件スキル", script: !1 }, {
+}, w = { author: "トリアコンタン", pluginName: "EquipConditionExtend", noteSchema: [{ valueType: "string", key: "装備条件スキル", script: !1 }, {
   valueType: "string",
   key: "EquipCondSkill",
   script: !1
@@ -386,15 +386,15 @@ const e = { author: "CutieVirus", pluginName: "MZ3D", noteSchema: [{ script: !1,
   valueType: "boolean",
   key: "装備条件反転",
   script: !1
-}] }, x = { author: "トリアコンタン", pluginName: "EquipSlotInvalidate", noteSchema: [{ valueType: "number", key: "装備無効", script: !1 }, {
+}] }, X = { author: "トリアコンタン", pluginName: "EquipSlotInvalidate", noteSchema: [{ valueType: "number", key: "装備無効", script: !1 }, {
   valueType: "number",
   key: "EquipInvalid",
   script: !1
-}] }, w = { author: "トリアコンタン", pluginName: "EvasionIgnore", noteSchema: [{ valueType: "boolean", key: "回避無視", script: !1 }, {
+}] }, Y = { author: "トリアコンタン", pluginName: "EvasionIgnore", noteSchema: [{ valueType: "boolean", key: "回避無視", script: !1 }, {
   valueType: "boolean",
   key: "EvasionIgnore",
   script: !1
-}] }, X = { author: "トリアコンタン", pluginName: "EventInterceptor", noteSchema: [] }, Y = { author: "triacontane", pluginName: "EventLabel", noteSchema: [{ valueType: "string", key: "LB", script: !1 }, {
+}] }, V = { author: "トリアコンタン", pluginName: "EventInterceptor", noteSchema: [] }, Z = { author: "triacontane", pluginName: "EventLabel", noteSchema: [{ valueType: "string", key: "LB", script: !1 }, {
   valueType: "boolean",
   key: "LB_No",
   script: !1
@@ -402,19 +402,19 @@ const e = { author: "CutieVirus", pluginName: "MZ3D", noteSchema: [{ script: !1,
   valueType: "string",
   key: "LB_S",
   script: !1
-}, { valueType: "boolean", key: "LB_T", script: !1 }] }, V = { author: "トリアコンタン", pluginName: "EventMovableLimitation", noteSchema: [{
+}, { valueType: "boolean", key: "LB_T", script: !1 }] }, z = { author: "トリアコンタン", pluginName: "EventMovableLimitation", noteSchema: [{
   valueType: "string",
   key: "移動制限",
   script: !1
-}, { valueType: "string", key: "Movable", script: !1 }] }, Z = { author: "トリアコンタン", pluginName: "EventNoLock", noteSchema: [{ valueType: "boolean", key: "ロック無効", script: !1 }, {
+}, { valueType: "string", key: "Movable", script: !1 }] }, K = { author: "トリアコンタン", pluginName: "EventNoLock", noteSchema: [{ valueType: "boolean", key: "ロック無効", script: !1 }, {
   valueType: "boolean",
   key: "DisableLock",
   script: !1
-}] }, z = { author: "トリアコンタン", pluginName: "EventReSpawn", noteSchema: [{ valueType: "number", key: "CP", script: !1 }] }, W = {
+}] }, W = { author: "トリアコンタン", pluginName: "EventReSpawn", noteSchema: [{ valueType: "number", key: "CP", script: !1 }] }, J = {
   author: "トリアコンタン",
   pluginName: "EventStartSe",
   noteSchema: [{ valueType: "string", key: "StartSe", script: !1 }]
-}, K = {
+}, j = {
   author: "トリアコンタン",
   pluginName: "ExpForOutsideParty",
   noteSchema: [{
@@ -422,34 +422,35 @@ const e = { author: "CutieVirus", pluginName: "MZ3D", noteSchema: [{ script: !1,
     key: "OutsidePartyExpRate",
     script: !1
   }, { valueType: "number", key: "パーティ外経験値レート", script: !1 }]
-}, J = () => [e, t, p, a, r, u, i, l, s, n, y, c, T, o, k, v, m, g, S, b, C, E, A, h, _, N, D, P, B, d, I, L, G, M, U, O, R, F, H, f, q, x, w, X, Y, V, Z, z, W, K];
+}, $ = () => [p, a, r, i, u, n, y, T, c, l, s, o, k, v, m, g, S, b, C, E, A, h, _, N, D, P, d, B, I, L, G, M, U, O, R, f, F, H, x, q, w, X, Y, V, Z, z, K, W, J, j], ee = (e) => e.flatMap(Q), Q = (e) => e.noteSchema.filter(((t) => t.valueType === "text")).map(((t) => t.key));
 export {
-  t as PLUGIN_ACCUMULATE_STATE,
-  p as PLUGIN_ACTION_EFFECT_EXTEND,
-  a as PLUGIN_ADDITIONAL_DESCRIPTION,
-  r as PLUGIN_ADDITIONAL_SKILL_MESSAGE,
-  u as PLUGIN_AIRSHIP_EVENT,
-  i as PLUGIN_ANIMATION_BY_SUBJECT,
-  l as PLUGIN_ATTACK_CHAIN,
-  s as PLUGIN_AUTOMATIC_STATE,
-  n as PLUGIN_AUTO_RAISE,
-  y as PLUGIN_AUTO_SELF_SWITCH,
-  c as PLUGIN_BALLOON_POSITION,
-  k as PLUGIN_BATTLER_GRAPHIC_EXTEND,
-  T as PLUGIN_BATTLE_BALLOON,
-  o as PLUGIN_BATTLE_FORMATION_CUSTOMIZE,
-  v as PLUGIN_BATTLE_SPECIAL_COMMAND,
-  m as PLUGIN_BIG_ENEMY,
-  g as PLUGIN_CHARACTER_GRAPHIC_MANAGER,
-  S as PLUGIN_CHARGE_TIME_CONTROL,
-  b as PLUGIN_COMMAND_SKILL,
-  C as PLUGIN_CONDITIONAL_STATE,
-  E as PLUGIN_CONDITIONAL_XPARAM,
-  A as PLUGIN_COUNTER_EXTEND,
-  h as PLUGIN_CURSED_ACTION,
-  _ as PLUGIN_CUSTOMIZE_ATTACK_GUARD,
-  N as PLUGIN_CUSTOMIZE_CRITICAL,
-  D as PLUGIN_CUSTOMIZE_FAILURE_MESSAGE,
-  e as PLUGIN_MZ3D,
-  J as allNoteSchemas
+  a as PLUGIN_ACCUMULATE_STATE,
+  r as PLUGIN_ACTION_EFFECT_EXTEND,
+  i as PLUGIN_ADDITIONAL_DESCRIPTION,
+  u as PLUGIN_ADDITIONAL_SKILL_MESSAGE,
+  n as PLUGIN_AIRSHIP_EVENT,
+  y as PLUGIN_ANIMATION_BY_SUBJECT,
+  T as PLUGIN_ATTACK_CHAIN,
+  c as PLUGIN_AUTOMATIC_STATE,
+  l as PLUGIN_AUTO_RAISE,
+  s as PLUGIN_AUTO_SELF_SWITCH,
+  o as PLUGIN_BALLOON_POSITION,
+  m as PLUGIN_BATTLER_GRAPHIC_EXTEND,
+  k as PLUGIN_BATTLE_BALLOON,
+  v as PLUGIN_BATTLE_FORMATION_CUSTOMIZE,
+  g as PLUGIN_BATTLE_SPECIAL_COMMAND,
+  S as PLUGIN_BIG_ENEMY,
+  b as PLUGIN_CHARACTER_GRAPHIC_MANAGER,
+  C as PLUGIN_CHARGE_TIME_CONTROL,
+  E as PLUGIN_COMMAND_SKILL,
+  A as PLUGIN_CONDITIONAL_STATE,
+  h as PLUGIN_CONDITIONAL_XPARAM,
+  _ as PLUGIN_COUNTER_EXTEND,
+  N as PLUGIN_CURSED_ACTION,
+  D as PLUGIN_CUSTOMIZE_ATTACK_GUARD,
+  P as PLUGIN_CUSTOMIZE_CRITICAL,
+  d as PLUGIN_CUSTOMIZE_FAILURE_MESSAGE,
+  p as PLUGIN_MZ3D,
+  $ as allNoteSchemas,
+  ee as definedTextKeys
 };
