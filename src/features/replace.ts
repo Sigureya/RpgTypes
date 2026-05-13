@@ -36,6 +36,7 @@ import type {
   MapDataReplaceHandlers,
 } from "./core/replace/types";
 import type { EventContainerExtractor } from "./extractText";
+import type { ReplaceRawDataContext } from "./types/replace";
 
 export const replaceEventCommandTexts = (
   commandList: ReadonlyArray<EventCommand>,
@@ -268,6 +269,28 @@ const mapReadArrayResult = <T, R>(
   };
 };
 
+export const replaceRawDataWithContext = (
+  { assetBundle, data, dictionary, textKeys }: ReplaceRawDataContext,
+  extractor: EventContainerExtractor,
+): RawGameData<NormalizedEventCommand> => {
+  const handlers: MapDataReplaceHandlers = {
+    replaceText(text) {
+      return dictionary.get(text);
+    },
+    pluginCommand: (command) => command,
+    scriptCommand: (command) => command,
+    isReplaceTargetNote(item) {
+      return textKeys.has(item.key);
+    },
+  };
+  return replaceRawDataWithAutoNoteFilter(
+    data,
+    assetBundle,
+    extractor,
+    handlers,
+  );
+};
+
 export const replaceRawDataWithAutoNoteFilter = (
   data: RawGameData,
   assetBundle: AssetFilesBundle,
@@ -277,14 +300,14 @@ export const replaceRawDataWithAutoNoteFilter = (
   // まずテキストを抽出し
   const e = extractTextFromRawGameData(data, extractor);
   // 正規化済みノートを取得
-  const n = buildRawGameDataNoteNormalization(e, {
+  const normalizedNote = buildRawGameDataNoteNormalization(e, {
     audioFiles: assetBundle.audioFiles,
     imageFiles: assetBundle.imageFiles,
     otherFiles: assetBundle.otherFiles,
   });
   // ハンドラを微修正。
   // noteから自動算出した非テキストノートキーをisReplaceTargetNoteで弾くようにする
-  const h2 = lapHandlers(n.nonTextNoteKeys, handlers);
+  const h2 = lapHandlers(normalizedNote.nonTextNoteKeys, handlers);
 
   // 置換処理を実行
   return replaceRawDataBundle(data, h2);
