@@ -1,12 +1,45 @@
 import type { IdentifiedItems } from "@RpgTypes/libs";
 import type { Data_Map, RpgDataBundle } from "@RpgTypes/rmmz";
-import type { MainDataIdentifiedItems } from "./arrayData";
-import { writeMainData } from "./arrayData";
+import type { MainDataFileEntry, MainDataIdentifiedItems } from "./arrayData";
+import {
+  FILENAME_ACTORS,
+  FILENAME_ARMORS,
+  FILENAME_CLASSES,
+  FILENAME_COMMON_EVENTS,
+  FILENAME_ENEMIES,
+  FILENAME_ITEMS,
+  FILENAME_MAP_INFOS,
+  FILENAME_SKILLS,
+  FILENAME_STATES,
+  FILENAME_TILESET,
+  FILENAME_TROOPS,
+  FILENAME_WEAPONS,
+  writeMainData,
+} from "./arrayData";
 import type { MapBatchReadResult, MapFileNameWithExt } from "./map";
 import { writeMapFiles } from "./map";
 import type { RawGameData } from "./resultType";
 import { FILENAME_SYSTEM } from "./system";
 import type { DataFileNames } from "./types";
+
+export const rawGameDataToMainDataFileEntries = (
+  data: RawGameData,
+): MainDataFileEntry[] => {
+  return [
+    { filename: FILENAME_ACTORS, data: data.actors.data },
+    { filename: FILENAME_ARMORS, data: data.armors.data },
+    { filename: FILENAME_CLASSES, data: data.classes.data },
+    { filename: FILENAME_COMMON_EVENTS, data: data.commonEvents.data },
+    { filename: FILENAME_ENEMIES, data: data.enemies.data },
+    { filename: FILENAME_ITEMS, data: data.items.data },
+    { filename: FILENAME_SKILLS, data: data.skills.data },
+    { filename: FILENAME_STATES, data: data.states.data },
+    { filename: FILENAME_TROOPS, data: data.troops.data },
+    { filename: FILENAME_WEAPONS, data: data.weapons.data },
+    { filename: FILENAME_TILESET, data: data.tilesets.data },
+    { filename: FILENAME_MAP_INFOS, data: data.mapInfos.data },
+  ];
+};
 
 export const writeSystemData = (
   system: RpgDataBundle["system"],
