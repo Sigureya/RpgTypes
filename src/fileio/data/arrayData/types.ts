@@ -45,3 +45,21 @@ export interface MainDataIdentifiedItems {
   commonEvents: IdentifiedItems<Data_CommonEvent>;
   mapInfos: IdentifiedItems<Data_MapInfo>;
 }
+
+export interface MainDataFileEntry {
+  filename: MainDataFileNames;
+  data:
+    | Data_Actor[]
+    | Data_Class[]
+    | Data_Skill[]
+    | Data_Item[]
+    | Data_Weapon[]
+    | Data_Armor[]
+    | Data_Enemy[]
+    | Data_Troop[]
+    | Data_State[]
+    | Data_Animation[]
+    | Data_Tileset[]
+    | Data_CommonEvent[]
+    | Data_MapInfo[];
+}
