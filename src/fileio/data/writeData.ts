@@ -3,6 +3,7 @@ import type { Data_Map, RpgDataBundle } from "@RpgTypes/rmmz";
 import type {
   MainDataFileEntry,
   MainDataFileNames,
+  MainDataFileUnion,
   MainDataIdentifiedItems,
 } from "./arrayData";
 import {
@@ -29,7 +30,7 @@ import type { DataFileNames } from "./types";
 
 export const rawGameDataToMainDataFileEntries = (
   data: RawGameData,
-): MainDataFileEntry<object>[] => {
+): MainDataFileUnion[] => {
   return [
     xxxx(FILENAME_ACTORS, data.actors.data),
     xxxx(FILENAME_CLASSES, data.classes.data),
