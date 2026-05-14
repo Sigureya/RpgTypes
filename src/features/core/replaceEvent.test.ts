@@ -14,12 +14,12 @@ import {
   makeCommandScriptHeader,
   makeTroopData,
 } from "@RpgTypes/rmmz";
-import type { ReplaceEventTextHandlers } from "./core/replace";
+import type { ReplaceEventTextHandlers } from "./replace";
 import {
-  replaceCommonEventData,
   replaceTroopData,
+  replaceCommonEventData,
   replaceEventCommandTexts,
-} from "./replace";
+} from "./replaceEvent";
 
 const MOCK_NEW_TEXT = "MOCK_NEW_TEXT";
 
