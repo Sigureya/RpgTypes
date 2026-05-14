@@ -1,8 +1,13 @@
 import type { IdentifiedItems } from "@RpgTypes/libs";
 import type { Data_Map, RpgDataBundle } from "@RpgTypes/rmmz";
-import type { MainDataFileEntry, MainDataIdentifiedItems } from "./arrayData";
+import type {
+  MainDataFileEntry,
+  MainDataFileNames,
+  MainDataIdentifiedItems,
+} from "./arrayData";
 import {
   FILENAME_ACTORS,
+  FILENAME_ANIMATIONS,
   FILENAME_ARMORS,
   FILENAME_CLASSES,
   FILENAME_COMMON_EVENTS,
@@ -24,21 +29,32 @@ import type { DataFileNames } from "./types";
 
 export const rawGameDataToMainDataFileEntries = (
   data: RawGameData,
-): MainDataFileEntry[] => {
+): MainDataFileEntry<object>[] => {
   return [
-    { filename: FILENAME_ACTORS, data: data.actors.data },
-    { filename: FILENAME_ARMORS, data: data.armors.data },
-    { filename: FILENAME_CLASSES, data: data.classes.data },
-    { filename: FILENAME_COMMON_EVENTS, data: data.commonEvents.data },
-    { filename: FILENAME_ENEMIES, data: data.enemies.data },
-    { filename: FILENAME_ITEMS, data: data.items.data },
-    { filename: FILENAME_SKILLS, data: data.skills.data },
-    { filename: FILENAME_STATES, data: data.states.data },
-    { filename: FILENAME_TROOPS, data: data.troops.data },
-    { filename: FILENAME_WEAPONS, data: data.weapons.data },
-    { filename: FILENAME_TILESET, data: data.tilesets.data },
-    { filename: FILENAME_MAP_INFOS, data: data.mapInfos.data },
+    xxxx(FILENAME_ACTORS, data.actors.data),
+    xxxx(FILENAME_CLASSES, data.classes.data),
+    xxxx(FILENAME_SKILLS, data.skills.data),
+    xxxx(FILENAME_ITEMS, data.items.data),
+    xxxx(FILENAME_WEAPONS, data.weapons.data),
+    xxxx(FILENAME_ARMORS, data.armors.data),
+    xxxx(FILENAME_ENEMIES, data.enemies.data),
+    xxxx(FILENAME_TROOPS, data.troops.data),
+    xxxx(FILENAME_STATES, data.states.data),
+    xxxx(FILENAME_ANIMATIONS, data.animations.data),
+    xxxx(FILENAME_TILESET, data.tilesets.data),
+    xxxx(FILENAME_COMMON_EVENTS, data.commonEvents.data),
+    xxxx(FILENAME_MAP_INFOS, data.mapInfos.data),
   ];
+};
+
+const xxxx = <T>(
+  filename: MainDataFileNames,
+  data: ReadonlyArray<T>,
+): MainDataFileEntry<T> => {
+  return {
+    filename,
+    data: [null, ...data],
+  };
 };
 
 export const writeSystemData = (
