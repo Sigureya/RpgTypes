@@ -31,3 +31,4 @@ export interface MainDataFileEntry<T> {
     filename: MainDataFileNames;
     data: IdentifiedItems<T>;
 }
+export type MainDataFileUnion = MainDataFileEntry<Data_Actor> | MainDataFileEntry<Data_Class> | MainDataFileEntry<Data_Skill> | MainDataFileEntry<Data_Item> | MainDataFileEntry<Data_Weapon> | MainDataFileEntry<Data_Armor> | MainDataFileEntry<Data_Enemy> | MainDataFileEntry<Data_Troop> | MainDataFileEntry<Data_State> | MainDataFileEntry<Data_Animation> | MainDataFileEntry<Data_Tileset> | MainDataFileEntry<Data_CommonEvent> | MainDataFileEntry<Data_MapInfo>;
