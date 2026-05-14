@@ -23,8 +23,37 @@ import {
   replaceMapData,
   replaceTroopData,
 } from "./core/replaceEvent";
+import { createActorTextDictionary } from "./core/rpg";
 import type { EventContainerExtractor } from "./extractText";
-import type { ReplaceRawDataContext } from "./types/replace";
+import type {
+  ReplaceRawDataContext,
+  GameDataReplaceOutput,
+} from "./types/replace";
+
+export const replaceGameDataWithAuxiliaryData = (
+  data: RawGameData,
+  assetBundle: AssetFilesBundle,
+  extractor: EventContainerExtractor,
+  handlers: MapDataReplaceHandlers,
+): GameDataReplaceOutput => {
+  return {
+    main: replaceRawDataWithAutoNoteFilter(
+      data,
+      assetBundle,
+      extractor,
+      handlers,
+    ),
+    aux: {
+      actorTextDictionary: createActorTextDictionary(
+        data.actors.data,
+        data.commonEvents.data,
+        data.troops.data,
+        data.mapFiles.validMaps.map((m) => m.map),
+        (text) => handlers.replaceText(text) ?? text,
+      ),
+    },
+  };
+};
 
 export const replaceRawDataBundle = (
   data: RawGameData,

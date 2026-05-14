@@ -17,3 +17,8 @@ export interface ReplaceRawDataContext {
   dictionary: ReadonlyMap<string, string>;
   textKeys: ReadonlySet<string>;
 }
+
+export interface GameDataReplaceOutput {
+  main: RawGameData<NormalizedEventCommand>;
+  aux: ReplaceAuxiliaryData;
+}
