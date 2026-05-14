@@ -30,12 +30,13 @@ import type {
   GameDataReplaceOutput,
 } from "./types/replace";
 
-export const replaceGameDataWithAuxiliaryData = (
+export const replaceGameDataWithAuxiliaryData = <T>(
   data: RawGameData,
   assetBundle: AssetFilesBundle,
   extractor: EventContainerExtractor,
   handlers: MapDataReplaceHandlers,
-): GameDataReplaceOutput => {
+  hashFn: (text: string) => T,
+): GameDataReplaceOutput<T> => {
   return {
     main: replaceRawDataWithAutoNoteFilter(
       data,
@@ -49,7 +50,10 @@ export const replaceGameDataWithAuxiliaryData = (
         data.commonEvents.data,
         data.troops.data,
         data.mapFiles.validMaps.map((m) => m.map),
-        (text) => handlers.replaceText(text) ?? text,
+        {
+          newText: (text) => handlers.replaceText(text) ?? text,
+          hashText: (text) => hashFn(text),
+        },
       ),
     },
   };

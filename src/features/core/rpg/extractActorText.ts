@@ -14,21 +14,34 @@ import {
   processTroopEvents,
 } from "./map";
 
+export interface HandlresCreateActorTextDictionary<T> {
+  newText: (text: string) => string;
+  hashText: (text: string) => T;
+}
+
 export const createActorTextDictionary = <T>(
   actors: ReadonlyArray<Data_Actor>,
   commons: ReadonlyArray<Data_CommonEvent>,
   troops: ReadonlyArray<Data_Troop>,
   maps: ReadonlyArray<Data_Map>,
-  hashFn: (text: string) => T,
+  handlers: HandlresCreateActorTextDictionary<T>,
 ): KeyValuePairEx<T, string>[] => {
   const set = extractActorTexts(actors, commons, troops, maps);
   const list = Array.from(set);
-  return list.map(
+  const baseTexts = list.map(
     (text): KeyValuePairEx<T, string> => ({
-      key: hashFn(text),
+      key: handlers.hashText(text),
       value: text,
     }),
   );
+  const newTexts = baseTexts.map((pair): KeyValuePairEx<T, string> => {
+    const t2 = handlers.newText(pair.value);
+    return {
+      key: handlers.hashText(t2),
+      value: t2,
+    };
+  });
+  return [...baseTexts, ...newTexts];
 };
 
 export const extractActorTexts = (
