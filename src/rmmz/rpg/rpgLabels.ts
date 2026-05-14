@@ -1,4 +1,4 @@
-import type { DomainLabel } from "src/libs/templates/domainLabel";
+import type { DomainLabel } from "@RpgTypes/libs";
 import type {
   DataLabels,
   TraitLabelSet,

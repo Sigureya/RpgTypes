@@ -1,4 +1,4 @@
-import type { DomainLabel } from "src/libs/templates";
+import type { DomainLabel } from "@RpgTypes/libs";
 import type { DamageLabels } from "./damageLabels";
 
 export const DEFAULT_DAMAGE_LABELS = {

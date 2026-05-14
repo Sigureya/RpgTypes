@@ -1,5 +1,8 @@
-import type { Data_NamedItem, NamedItemSource } from "@RpgTypes/libs";
-import type { DomainLabel } from "src/libs/templates";
+import type {
+  Data_NamedItem,
+  DomainLabel,
+  NamedItemSource,
+} from "@RpgTypes/libs";
 import type { SourceId_TraitPartyAbility } from "../sourceIdTypes";
 import {
   PARTY_ABILITY_ENCOUNTER_HALF,
@@ -12,7 +15,7 @@ import {
 import type { PartyAbilityOptionLabels } from "./labels";
 
 export const defineTraitPartyAbility = (
-  options: DomainLabel<PartyAbilityOptionLabels>
+  options: DomainLabel<PartyAbilityOptionLabels>,
 ): NamedItemSource => ({
   items: partyAbilityToArray(options.options),
   label: options.title,
@@ -24,7 +27,7 @@ export const defineTraitPartyAbility = (
 });
 
 export const partyAbilityToArray = (
-  options: PartyAbilityOptionLabels
+  options: PartyAbilityOptionLabels,
 ): Data_NamedItem[] => {
   return [
     {

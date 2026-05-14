@@ -1,11 +1,11 @@
 import { CONTROL_VARIABLES } from "@RpgTypes/libs";
-import type { ValueOf } from "src/libs/templates/valueOf";
+import type { ValueOf } from "@RpgTypes/libs/templates/valueOf";
+import type { VARIABLE_SRC_LAST } from "./dataSource";
 import type {
+  ParamObject_VariableFromLastData,
   Command_ControlVariables_FromLastData,
   ParamArray_VariableFromLastData,
-  ParamObject_VariableFromLastData,
 } from "./types";
-import type { VARIABLE_SRC_LAST } from "./dataSource";
 
 export const makeCommandVariableFromLastUsedSkillId = (
   params: ParamObject_VariableFromLastData,

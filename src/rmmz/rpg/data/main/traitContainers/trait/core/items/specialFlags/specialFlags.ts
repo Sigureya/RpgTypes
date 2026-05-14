@@ -1,5 +1,8 @@
-import type { Data_NamedItem, NamedItemSource } from "@RpgTypes/libs";
-import type { DomainLabel } from "src/libs/templates";
+import type {
+  Data_NamedItem,
+  DomainLabel,
+  NamedItemSource,
+} from "@RpgTypes/libs";
 import type { SourceId_TraitSpecialFlag } from "../sourceIdTypes";
 import {
   FLAG_ID_AUTO_BATTLE,
@@ -10,7 +13,7 @@ import {
 import type { SpecialFlagOptions } from "./labels";
 
 export const defineTraitSpecialFlag = (
-  label: DomainLabel<SpecialFlagOptions>
+  label: DomainLabel<SpecialFlagOptions>,
 ): NamedItemSource => ({
   items: specialFlagToArray(label.options),
   label: label.title,
@@ -22,7 +25,7 @@ export const defineTraitSpecialFlag = (
 });
 
 export const specialFlagToArray = (
-  label: SpecialFlagOptions
+  label: SpecialFlagOptions,
 ): Data_NamedItem[] => {
   return [
     {

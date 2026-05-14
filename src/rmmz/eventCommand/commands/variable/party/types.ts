@@ -3,7 +3,6 @@ import type {
   EventCommandLike,
   VariableOperation,
 } from "@RpgTypes/libs";
-import type { ValueOf } from "src/libs/templates/valueOf";
 
 export interface Command_ControlVariables_FromParty extends EventCommandLike<
   typeof CONTROL_VARIABLES

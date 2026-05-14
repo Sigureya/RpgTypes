@@ -3,7 +3,7 @@ import type {
   SHOP_PROCESSING,
   SHOP_PROCESSING_BODY,
 } from "@RpgTypes/libs/eventCommand";
-import type { ValueOf } from "src/libs/templates/valueOf";
+import type { ValueOf } from "@RpgTypes/libs/templates/valueOf";
 import type { CUSTOM_PRICE, NORMAL_PRICE } from "./constants";
 
 export type GoodsType = {

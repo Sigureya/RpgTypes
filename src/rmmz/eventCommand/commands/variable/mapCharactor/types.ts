@@ -3,7 +3,7 @@ import type {
   EventCommandLike,
   VariableOperation,
 } from "@RpgTypes/libs";
-import type { ValueOf } from "src/libs/templates/valueOf";
+import type { ValueOf } from "@RpgTypes/libs/templates/valueOf";
 
 export const MAP_CHARACTOR_PARAM = {
   X: 0,

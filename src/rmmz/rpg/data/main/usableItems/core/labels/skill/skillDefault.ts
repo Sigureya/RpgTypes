@@ -1,4 +1,4 @@
-import type { DomainLabel } from "src/libs/templates";
+import type { DomainLabel } from "@RpgTypes/libs";
 import type { SkillLabels } from "./skillLabels";
 
 export const DEFAULT_SKILL_LABELS = {

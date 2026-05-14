@@ -1,5 +1,5 @@
 import { CONTROL_VARIABLES } from "@RpgTypes/libs";
-import type { ValueOf } from "src/libs/templates/valueOf";
+import type { ValueOf } from "@RpgTypes/libs/templates/valueOf";
 import type { ACTOR_STATUS } from "./dataSource";
 import type {
   Command_ControlVariables_FromActor,

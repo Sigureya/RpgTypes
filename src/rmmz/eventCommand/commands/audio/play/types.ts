@@ -1,3 +1,4 @@
+import type { AudioFileParams } from "@RpgTypes/libs";
 import type {
   CHANGE_BATTLE_BGM,
   CHANGE_DEFEAT_ME,
@@ -8,7 +9,6 @@ import type {
   PLAY_ME,
   PLAY_SE,
 } from "@RpgTypes/libs/eventCommand";
-import type { AudioFileParams } from "src/libs/utils";
 
 export interface AudioCommandBase<
   Code extends number,

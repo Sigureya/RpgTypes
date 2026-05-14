@@ -3,7 +3,7 @@ import type {
   EventCommandLike,
   VariableOperation,
 } from "@RpgTypes/libs";
-import type { ValueOf } from "src/libs/templates/valueOf";
+import type { ValueOf } from "@RpgTypes/libs/templates/valueOf";
 import type { ACTOR_STATUS } from "./dataSource";
 
 export interface Command_ControlVariables_FromActor extends EventCommandLike<

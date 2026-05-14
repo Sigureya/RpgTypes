@@ -1,6 +1,5 @@
 import { describe, test, expect } from "vitest";
-import type { NamedItemSource } from "@RpgTypes/libs";
-import type { DomainName } from "src/libs/templates";
+import type { DomainName, NamedItemSource } from "@RpgTypes/libs";
 import { defineGameDataSources } from "./gameData";
 import type { GameData } from "./gameDataTypes";
 import type { DataLabels, SourceId_Data } from "./main";
@@ -37,7 +36,7 @@ const kindOf = (list: NamedItemSource[], target: string) => {
     (item) =>
       item.source.author === key.author &&
       item.source.kind === key.kind &&
-      item.source.module === key.module
+      item.source.module === key.module,
   );
 };
 
@@ -51,7 +50,7 @@ const runTestCases = ({ caseName, data, dataLabels }: TestCase) => {
   const result: NamedItemSource[] = defineGameDataSources(data, dataLabels);
   describe(caseName, () => {
     const labelsSet: ReadonlySet<string> = new Set(
-      Object.values<DomainName>(LABEL_SET_DATA).map((item) => item.title)
+      Object.values<DomainName>(LABEL_SET_DATA).map((item) => item.title),
     );
     const itemIsInSet = (label: string) => {
       return labelsSet.has(label);
@@ -61,7 +60,7 @@ const runTestCases = ({ caseName, data, dataLabels }: TestCase) => {
       `label "%s" is included in the expected set`,
       (label) => {
         expect(label).toSatisfy(itemIsInSet);
-      }
+      },
     );
 
     test(`sources are unique`, () => {

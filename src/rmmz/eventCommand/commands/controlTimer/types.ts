@@ -2,7 +2,7 @@ import type {
   EventCommandLike,
   CONTROL_TIMER,
 } from "@RpgTypes/libs/eventCommand";
-import type { ValueOf } from "src/libs/templates/valueOf";
+import type { ValueOf } from "@RpgTypes/libs/templates/valueOf";
 
 export interface Command_ControlTimer extends EventCommandLike<
   typeof CONTROL_TIMER

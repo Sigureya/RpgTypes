@@ -1,4 +1,4 @@
-import type { AudioFileParams } from "src/libs/utils";
+import type { AudioFileParams } from "@RpgTypes/libs";
 import type { System_SoundsArray } from "./soundArray";
 
 export interface System_Me {
