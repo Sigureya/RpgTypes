@@ -16,12 +16,12 @@ import {
 
 export const createActorTextDictionary = <T>(
   actors: ReadonlyArray<Data_Actor>,
-  maps: ReadonlyArray<Data_Map>,
   commons: ReadonlyArray<Data_CommonEvent>,
   troops: ReadonlyArray<Data_Troop>,
+  maps: ReadonlyArray<Data_Map>,
   hashFn: (text: string) => T,
 ): KeyValuePairEx<T, string>[] => {
-  const set = extractActorTexts(actors, maps, commons, troops);
+  const set = extractActorTexts(actors, commons, troops, maps);
   const list = Array.from(set);
   return list.map(
     (text): KeyValuePairEx<T, string> => ({
@@ -33,9 +33,9 @@ export const createActorTextDictionary = <T>(
 
 export const extractActorTexts = (
   actors: ReadonlyArray<Data_Actor>,
-  maps: ReadonlyArray<Data_Map>,
   commons: ReadonlyArray<Data_CommonEvent>,
   troops: ReadonlyArray<Data_Troop>,
+  maps: ReadonlyArray<Data_Map>,
 ): Set<string> => {
   const actorTexts = extractActorTexts2(actors);
   const mapTexts = maps.map(extractActorTextFromMapEvent);

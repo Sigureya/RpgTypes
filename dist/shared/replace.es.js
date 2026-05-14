@@ -305,7 +305,7 @@ const ye = (a) => ((e, s) => ({
   const n = vs(a, e, s, t);
   return Array.from(n).map(((m) => ({ key: r(m), value: m })));
 }, vs = (a, e, s, t) => {
-  const r = bs(a), n = e.map(xs), m = Ns(s), o = Ts(t);
+  const r = bs(a), n = t.map(xs), m = Ns(e), o = Ts(s);
   return new Set([r, m, o, n].flat(4));
 }, bs = (a) => a.map(((e) => [e.name, e.nickname, e.profile])), xs = (a) => ta(a, ra), Ns = (a) => fs(a, ra), Ts = (a) => ys(a, ra), ra = ({ list: a }) => a.filter(ks).map(((e) => e.parameters[1])), ks = (a) => a.code === _ || a.code === q || a.code === V, Da = (a, e) => {
   const s = e(a.list);
