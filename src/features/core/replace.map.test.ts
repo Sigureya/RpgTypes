@@ -16,9 +16,9 @@ import {
   makeMapEvent,
   makeMapEventPage,
 } from "@RpgTypes/rmmz";
-import type { MapDataReplaceHandlers } from "./core/replace";
-import { replaceNoteTextByMap } from "./core/replace/text";
-import { replaceMapData } from "./replace";
+import type { MapDataReplaceHandlers } from "./replace";
+import { replaceNoteTextByMap } from "./replace/text";
+import { replaceMapData } from "./replaceEvent";
 
 const dictionary = new Map<string, string>([
   ["Hello", "Hi"],
