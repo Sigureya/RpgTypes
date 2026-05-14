@@ -68,9 +68,9 @@ describe("extractActorTexts", () => {
   test("should extract actor name, nickname, profile", () => {
     const result: Set<string> = extractActorTexts(
       [mockActor],
-      [mockMap],
       [mockCommonEvent],
       [mockTroop],
+      [mockMap],
     );
     const expected = new Set([
       MOCK_NAME,
@@ -89,9 +89,9 @@ describe("createActorTextDictionary", () => {
     const fn = vi.fn(mockHashFn);
     const result = createActorTextDictionary(
       [mockActor],
-      [mockMap],
       [mockCommonEvent],
       [mockTroop],
+      [mockMap],
       fn,
     );
     expect(fn).toHaveBeenCalledTimes(result.length);
