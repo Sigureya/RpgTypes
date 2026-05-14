@@ -1,5 +1,5 @@
 import { EventCommandLike, SHOP_PROCESSING, SHOP_PROCESSING_BODY } from '../../../../libs/eventCommand';
-import { ValueOf } from 'src/libs/templates/valueOf';
+import { ValueOf } from '../../../../libs/templates/valueOf';
 import { CUSTOM_PRICE, NORMAL_PRICE } from './constants';
 export type GoodsType = {
     item: 0;

@@ -1,15 +1,89 @@
-import { ActorLabels, ArmorLabels, ClassLabels, EnemyLabels, StateLabels, WeaponLabels } from './traitContainers';
-import { ItemLabels, SkillLabels, UsableItemLabels } from './usableItems';
 export declare const LABEL_SET_DATA: {
-    readonly actor: DomainLabel<ActorLabels>;
-    readonly class: DomainLabel<ClassLabels>;
-    readonly armor: DomainLabel<ArmorLabels>;
-    readonly enemy: DomainLabel<EnemyLabels>;
-    readonly item: DomainLabel<ItemLabels>;
-    readonly skill: DomainLabel<SkillLabels>;
-    readonly state: DomainLabel<StateLabels>;
-    readonly weapon: DomainLabel<WeaponLabels>;
-    readonly usableItem: DomainLabel<UsableItemLabels>;
+    readonly actor: {
+        readonly title: "アクター";
+        readonly options: {
+            readonly initialEquipments: "初期装備";
+            readonly faceImage: "顔画像";
+            readonly characterImage: "キャラクター画像";
+            readonly svBattlerImage: "SVバトラー画像";
+            readonly nickname: "ニックネーム";
+            readonly profile: "プロフィール";
+            readonly classId: "職業ID";
+            readonly initialLevel: "初期レベル";
+            readonly maxLevel: "最大レベル";
+        };
+    };
+    readonly class: {
+        readonly title: "職業";
+        readonly options: {
+            readonly params: "パラメータ";
+            readonly learnings: "習得スキル";
+            readonly expParams: "経験値パラメータ";
+        };
+    };
+    readonly armor: {
+        readonly title: "防具";
+        readonly options: {
+            readonly armorTypeId: "防具タイプID";
+            readonly slotTypeId: "スロットタイプID";
+        };
+    };
+    readonly enemy: {
+        readonly title: "敵キャラ";
+        readonly options: {
+            readonly dropItems: "ドロップアイテム";
+            readonly battlerHue: "バトラーヒュー";
+            readonly battlerName: "バトラー名";
+            readonly gold: "ゴールド";
+        };
+    };
+    readonly item: {
+        readonly title: "アイテム";
+        readonly options: {
+            readonly consumable: "消耗品";
+        };
+    };
+    readonly skill: {
+        readonly title: "スキル";
+        readonly options: {
+            readonly requiredWeaponTypeId1: "必要武器タイプ1";
+            readonly requiredWeaponTypeId2: "必要武器タイプ2";
+            readonly mpCost: "MP消費";
+            readonly tpCost: "TP消費";
+        };
+    };
+    readonly state: {
+        readonly title: "ステート";
+        readonly options: {
+            readonly restriction: "制約";
+            readonly priority: "優先度";
+            readonly motion: "モーション";
+            readonly overlay: "オーバーレイ";
+            readonly removeAtBattleEnd: "戦闘終了時解除";
+            readonly removeByRestriction: "制約による解除";
+            readonly autoRemovalTiming: "自動解除タイミング";
+            readonly minTurns: "最小ターン数";
+            readonly maxTurns: "最大ターン数";
+            readonly removeByDamage: "ダメージによる解除";
+            readonly chanceByDamage: "ダメージによる解除確率";
+            readonly removeByWalking: "歩行による解除";
+            readonly stepsToRemove: "解除までの歩数";
+        };
+    };
+    readonly weapon: {
+        readonly title: "武器";
+        readonly options: {
+            readonly weaponTypeId: "武器タイプID";
+        };
+    };
+    readonly usableItem: {
+        readonly title: "";
+        readonly options: {
+            readonly scope: "範囲";
+            readonly speed: "速度補正";
+            readonly successRate: "成功率";
+        };
+    };
     readonly commonEvent: {
         readonly title: "コモンイベント";
         readonly options: {

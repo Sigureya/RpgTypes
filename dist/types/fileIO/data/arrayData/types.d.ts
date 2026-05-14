@@ -27,3 +27,7 @@ export interface MainDataIdentifiedItems {
     commonEvents: IdentifiedItems<Data_CommonEvent>;
     mapInfos: IdentifiedItems<Data_MapInfo>;
 }
+export interface MainDataFileEntry<T> {
+    filename: MainDataFileNames;
+    data: IdentifiedItems<T>;
+}

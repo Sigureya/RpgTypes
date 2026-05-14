@@ -1,2 +1,6 @@
-import { ItemLabels } from './itemLabels';
-export declare const DEFAULT_ITEM_LABELS: DomainLabel<ItemLabels>;
+export declare const DEFAULT_ITEM_LABELS: {
+    readonly title: "アイテム";
+    readonly options: {
+        readonly consumable: "消耗品";
+    };
+};

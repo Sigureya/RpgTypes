@@ -1,4 +1,4 @@
-import { DomainLabel } from 'src/libs/templates/domainLabel';
+import { DomainLabel } from '../../../../libs';
 import { Data_CommonEventUnknown } from '../event';
 import { WeaponLabels, ArmorLabels, EnemyLabels, ActorLabels, ClassLabels, StateLabels } from './traitContainers';
 import { ItemLabels, SkillLabels, UsableItemLabels } from './usableItems';
