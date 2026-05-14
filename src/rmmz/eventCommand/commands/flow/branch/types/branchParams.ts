@@ -1,83 +1,83 @@
+import type { ValueOf } from "@RpgTypes/libs/templates/valueOf";
 import type { Toggle, Operation_PlusMinus } from "@RpgTypes/rmmz/utils";
-import type { ValueOf } from "src/libs/templates/valueOf";
 import type { BranchCodeTable } from "./branch";
 
 export type BranchParam_Switch = [
   branchCode: BranchCodeTable["SWITCH"],
   switchId: number,
-  switchValue: ValueOf<Toggle>
+  switchValue: ValueOf<Toggle>,
 ];
 
 export type BranchParam_Variable = [
   branchCode: BranchCodeTable["VARIABLE"],
   variableId: number,
   operand: number,
-  value: number
+  value: number,
 ];
 
 export type BranchParam_SelfSwitch = [
   branchCode: BranchCodeTable["SELF_SWITCH"],
   selfSwitchId: string,
-  value: ValueOf<Toggle>
+  value: ValueOf<Toggle>,
 ];
 
 export type BranchParam_Timer = [
   branchCode: BranchCodeTable["TIMER"],
   time: number,
-  operation: ValueOf<Operation_PlusMinus>
+  operation: ValueOf<Operation_PlusMinus>,
 ];
 
 export type BranchParam_Actor = [
   branchCode: BranchCodeTable["ACTOR"],
   actorId: number,
   operand: number,
-  value: number
+  value: number,
 ];
 
 export type BranchParam_Enemy = [
   branchCode: BranchCodeTable["ENEMY"],
-  enemyId: number
+  enemyId: number,
 ];
 
 export type BranchParam_Character = [
   branchCode: BranchCodeTable["CHARACTER"],
-  characterId: number
+  characterId: number,
 ];
 
 export type BranchParam_Gold = [
   branchCode: BranchCodeTable["GOLD"],
   value: number,
-  compair: 0 | 1 | 2
+  compair: 0 | 1 | 2,
 ];
 
 export type BranchParam_Item = [
   branchCode: BranchCodeTable["ITEM"],
-  itemId: number
+  itemId: number,
 ];
 
 export type BranchParam_Weapon = [
   branchCode: BranchCodeTable["WEAPON"],
-  weaponId: number
+  weaponId: number,
 ];
 
 export type BranchParam_Armor = [
   branchCode: BranchCodeTable["ARMOR"],
-  armorId: number
+  armorId: number,
 ];
 
 export type BranchParam_Button = [
   branchCode: BranchCodeTable["BUTTON"],
-  buttonId: number
+  buttonId: number,
 ];
 
 export type BranchParam_Script = [
   branchCode: BranchCodeTable["SCRIPT"],
-  script: string
+  script: string,
 ];
 
 export type BranchParam_Vehicle = [
   branchCode: BranchCodeTable["VEHICLE"],
-  vehicleId: number
+  vehicleId: number,
 ];
 
 export type BranchParameters =

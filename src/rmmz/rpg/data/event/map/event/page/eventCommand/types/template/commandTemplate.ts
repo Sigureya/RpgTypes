@@ -1,4 +1,4 @@
-import type { PickByType } from "src/libs";
+import type { PickByType } from "@RpgTypes/libs";
 import type { MapRecordToCode } from "./mapRecord";
 /**
  * Defines a simplified command template type.
@@ -13,14 +13,14 @@ export interface CommandTemplateSimple<
   CommandParameterMapping extends Record<
     keyof CommandCodeMapping,
     ParameterObject
-  >
+  >,
 > extends CommandTemplate<
-    CommandCodeMapping,
-    { code: ValueOf<CommandCodeMapping>; parameters: object },
-    "code",
-    "parameters",
-    CommandParameterMapping
-  > {}
+  CommandCodeMapping,
+  { code: ValueOf<CommandCodeMapping>; parameters: object },
+  "code",
+  "parameters",
+  CommandParameterMapping
+> {}
 
 /**
  * Defines a command template for structured type mappings.
@@ -42,25 +42,25 @@ export interface CommandTemplate<
   CommandParameterMapping extends Record<
     keyof CommandCodeMapping,
     Command[ParameterPropertyKey] & object
-  >
+  >,
 > extends CommandTemplateWrapper<
-    CommandCodeMapping,
-    CommandParameterMapping,
-    {
-      // Using `keyof Table` enables editor-friendly navigation to parameter definitions.
-      // If `keyof CommandCodeMapping` were used, navigation would lead to constant definitions, which is less practical.
-      // Additionally, the `extends keyof CommandCodeMapping` condition removes irrelevant types.
-      [Key in keyof CommandParameterMapping]: Key extends keyof CommandCodeMapping
-        ? {
-            [Prop in keyof Command]: Prop extends ParameterPropertyKey
-              ? CommandParameterMapping[Key]
-              : Prop extends CodePropertyKey
+  CommandCodeMapping,
+  CommandParameterMapping,
+  {
+    // Using `keyof Table` enables editor-friendly navigation to parameter definitions.
+    // If `keyof CommandCodeMapping` were used, navigation would lead to constant definitions, which is less practical.
+    // Additionally, the `extends keyof CommandCodeMapping` condition removes irrelevant types.
+    [Key in keyof CommandParameterMapping]: Key extends keyof CommandCodeMapping
+      ? {
+          [Prop in keyof Command]: Prop extends ParameterPropertyKey
+            ? CommandParameterMapping[Key]
+            : Prop extends CodePropertyKey
               ? CommandCodeMapping[Key]
               : Command[Prop];
-          }
-        : never;
-    }
-  > {}
+        }
+      : never;
+  }
+> {}
 
 export interface CommandTemplateWrapper<
   CommandCodeMapping extends Record<PropertyKey, string | number> = Record<
@@ -74,7 +74,7 @@ export interface CommandTemplateWrapper<
   CommandObjectMapping extends Record<PropertyKey, object> = Record<
     PropertyKey,
     object
-  >
+  >,
 > {
   /**
    * @description A lookup table for commands by their code values.

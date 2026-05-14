@@ -1,4 +1,4 @@
-import type { DefineLable } from "src/libs/templates";
+import type { DefineLable } from "@RpgTypes/libs";
 
 export interface EditorSettings {
   messageWidth1: number;

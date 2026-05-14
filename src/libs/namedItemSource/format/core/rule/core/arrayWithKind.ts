@@ -1,4 +1,4 @@
-import type { PickByTypeKeys } from "src/libs/templates";
+import type { PickByTypeKeys } from "@RpgTypes/libs/templates";
 
 export interface FormatItemMapper<T> {
   placeHolder: string;

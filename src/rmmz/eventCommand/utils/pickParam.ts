@@ -1,4 +1,4 @@
-import type { AsRecord, PickByType } from "src/libs/templates";
+import type { AsRecord, PickByType } from "@RpgTypes/libs";
 
 export type IndexOfParameter<T extends unknown[], V> = AsNumber<
   keyof PickByType<AsRecord<T>, V>
@@ -24,7 +24,7 @@ interface IndexToNumericKeyMap {
 
 export type IndexOfCommandParameter<
   Command extends { parameters: unknown[] },
-  T
+  T,
 > = IndexOfParameter<Command["parameters"], T>;
 
 export interface CommandParameter<T> {

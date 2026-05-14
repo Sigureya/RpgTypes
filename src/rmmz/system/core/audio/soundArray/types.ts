@@ -1,4 +1,4 @@
-import type { AudioFileParams } from "src/libs/utils";
+import type { AudioFileParams } from "@RpgTypes/libs";
 
 export type System_SoundsArray = [
   cursor: AudioFileParams,
@@ -24,7 +24,7 @@ export type System_SoundsArray = [
   playReflection: AudioFileParams,
   shop: AudioFileParams,
   useItem: AudioFileParams,
-  useSkill: AudioFileParams
+  useSkill: AudioFileParams,
 ];
 
 export interface System_SoundsObject {

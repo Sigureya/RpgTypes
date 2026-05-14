@@ -1,4 +1,4 @@
-import type { DomainLabel } from "src/libs";
+import type { DomainLabel } from "@RpgTypes/libs";
 import type { DataLabels } from "./dataLabels";
 import type {
   ActorLabels,

@@ -1,4 +1,4 @@
-import type { ValueOf } from "src/libs/templates/valueOf";
+import type { ValueOf } from "@RpgTypes/libs/templates/valueOf";
 
 export type BranchCodeTable = {
   SWITCH: 0;
@@ -16,4 +16,5 @@ export type BranchCodeTable = {
   SCRIPT: 12;
   VEHICLE: 13;
 };
+
 export type BranchCode = ValueOf<BranchCodeTable>;
