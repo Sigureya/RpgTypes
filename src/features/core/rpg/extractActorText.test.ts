@@ -1,4 +1,4 @@
-import { describe, test, expect } from "vitest";
+import { describe, test, expect, vi } from "vitest";
 import type {
   Data_Map,
   EventCommand,
@@ -16,7 +16,10 @@ import {
   makeCommandChangeActorProfile,
   makeActorData,
 } from "@RpgTypes/rmmz";
-import { extractActorTexts } from "./extractActorText";
+import {
+  extractActorTexts,
+  createActorTextDictionary,
+} from "./extractActorText";
 
 const MOCK_NAME = "name";
 const MOCK_NICKNAME = "nickname";
@@ -57,6 +60,10 @@ const mockActor: Data_Actor = makeActorData({
   profile: MOCK_PROFILE,
 });
 
+const mockHashFn = (text: string): string => {
+  return `hashed_${text}`;
+};
+
 describe("extractActorTexts", () => {
   test("should extract actor name, nickname, profile", () => {
     const result: Set<string> = extractActorTexts(
@@ -74,5 +81,29 @@ describe("extractActorTexts", () => {
       MOCK_PROFILE_TROOP,
     ]);
     expect(result).toEqual(expected);
+  });
+});
+
+describe("createActorTextDictionary", () => {
+  test("", () => {
+    const fn = vi.fn(mockHashFn);
+    const result = createActorTextDictionary(
+      [mockActor],
+      [mockMap],
+      [mockCommonEvent],
+      [mockTroop],
+      fn,
+    );
+    expect(fn).toHaveBeenCalledTimes(result.length);
+    [
+      MOCK_NAME,
+      MOCK_NICKNAME,
+      MOCK_PROFILE,
+      MOCK_NAME_MAP,
+      MOCK_NICKNAME_COMMON,
+      MOCK_PROFILE_TROOP,
+    ].forEach((text) => {
+      expect(fn).toHaveBeenCalledWith(text);
+    });
   });
 });

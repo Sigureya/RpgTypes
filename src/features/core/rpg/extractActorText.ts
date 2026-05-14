@@ -1,3 +1,4 @@
+import type { KeyValuePairEx } from "@RpgTypes/libs";
 import { CHANGE_NAME, CHANGE_PROFILE, CHANGE_NICKNAME } from "@RpgTypes/libs";
 import type {
   Data_Actor,
@@ -12,6 +13,23 @@ import {
   processCommonEvents,
   processTroopEvents,
 } from "./map";
+
+export const createActorTextDictionary = <T>(
+  actors: ReadonlyArray<Data_Actor>,
+  maps: ReadonlyArray<Data_Map>,
+  commons: ReadonlyArray<Data_CommonEvent>,
+  troops: ReadonlyArray<Data_Troop>,
+  hashFn: (text: string) => T,
+): KeyValuePairEx<T, string>[] => {
+  const set = extractActorTexts(actors, maps, commons, troops);
+  const list = Array.from(set);
+  return list.map(
+    (text): KeyValuePairEx<T, string> => ({
+      key: hashFn(text),
+      value: text,
+    }),
+  );
+};
 
 export const extractActorTexts = (
   actors: ReadonlyArray<Data_Actor>,
