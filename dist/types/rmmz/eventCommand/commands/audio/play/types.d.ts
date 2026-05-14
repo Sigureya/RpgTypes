@@ -1,5 +1,5 @@
+import { AudioFileParams } from '../../../../../libs';
 import { CHANGE_BATTLE_BGM, CHANGE_DEFEAT_ME, CHANGE_VICTORY_ME, EventCommandLike, PLAY_BGM, PLAY_BGS, PLAY_ME, PLAY_SE } from '../../../../../libs/eventCommand';
-import { AudioFileParams } from 'src/libs/utils';
 export interface AudioCommandBase<Code extends number> extends EventCommandLike<Code> {
     code: Code;
     parameters: [AudioFileParams];

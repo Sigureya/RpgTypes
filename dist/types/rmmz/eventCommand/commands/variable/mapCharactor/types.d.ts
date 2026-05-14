@@ -1,5 +1,5 @@
 import { CONTROL_VARIABLES, EventCommandLike, VariableOperation } from '../../../../../libs';
-import { ValueOf } from 'src/libs/templates/valueOf';
+import { ValueOf } from '../../../../../libs/templates/valueOf';
 export declare const MAP_CHARACTOR_PARAM: {
     readonly X: 0;
     readonly Y: 1;

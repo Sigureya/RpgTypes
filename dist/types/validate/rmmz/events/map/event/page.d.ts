@@ -150,19 +150,19 @@ export declare const SCHEMA_MAP_EVENT_PAGE: {
                                     }, {
                                         type: "object";
                                         additionalProperties: false;
-                                        required: string[];
+                                        required: ("name" | "volume" | "pitch" | "pan")[];
                                         properties: {
                                             name: {
-                                                type: string;
+                                                type: "string";
                                             };
                                             pan: {
-                                                type: string;
+                                                type: "integer";
                                             };
                                             pitch: {
-                                                type: string;
+                                                type: "integer";
                                             };
                                             volume: {
-                                                type: string;
+                                                type: "integer";
                                             };
                                         };
                                     }];

@@ -1,6 +1,6 @@
+import { MoveRouteCommandUnknown, AudioFileParams } from '../../../../../libs';
 import { EventCommandUnknown } from '../../../../../libs/eventCommand';
 import { EventCommand } from '../../../../eventCommand';
-import { AudioFileParams, MoveRouteCommandUnknown } from 'src/libs';
 import { MapEvent } from './event';
 import { Encounter } from './types/encounter';
 import { MapEventContainer } from './types/mapEventContainer';

@@ -1,4 +1,4 @@
-import { DomainLabel } from 'src/libs/templates/domainLabel';
+import { DomainLabel } from '../../libs';
 import { DataLabels, TraitLabelSet, ItemEffectLabelSet, DamageLabels } from './data';
 export interface RpgLabels {
     data: DataLabels;

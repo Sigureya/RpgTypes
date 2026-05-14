@@ -1,4 +1,4 @@
-import { Command_ControlVariables_FromLastData, ParamObject_VariableFromLastData } from './types';
+import { ParamObject_VariableFromLastData, Command_ControlVariables_FromLastData } from './types';
 export declare const makeCommandVariableFromLastUsedSkillId: (params: ParamObject_VariableFromLastData, indent?: number) => Command_ControlVariables_FromLastData;
 export declare const makeCommandVariableFromLastUsedItemId: (params: ParamObject_VariableFromLastData, indent?: number) => Command_ControlVariables_FromLastData;
 export declare const makeCommandVariableDataLastActorId: (params: ParamObject_VariableFromLastData, indent?: number) => Command_ControlVariables_FromLastData;

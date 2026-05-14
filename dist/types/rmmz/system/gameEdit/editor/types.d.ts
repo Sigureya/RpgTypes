@@ -1,4 +1,4 @@
-import { DefineLable } from 'src/libs/templates';
+import { DefineLable } from '../../../../libs';
 export interface EditorSettings {
     messageWidth1: number;
     messageWidth2: number;

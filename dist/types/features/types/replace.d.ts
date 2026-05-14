@@ -1,10 +1,16 @@
-import { RawGameData } from '../../fileio';
+import { AssetFilesBundle, RawGameData } from '../../fileio';
 import { KeyValuePair } from '../../libs';
 import { NormalizedEventCommand } from '../../rmmz';
-export interface XXX {
+export interface ReplaceRawDataInput {
     basicData: RawGameData<NormalizedEventCommand>;
-    adtionalData: YYY;
+    adtionalData: ReplaceAuxiliaryData;
 }
-export interface YYY {
+export interface ReplaceAuxiliaryData {
     actorTextDictionary: KeyValuePair[];
+}
+export interface ReplaceRawDataContext {
+    data: RawGameData;
+    assetBundle: AssetFilesBundle;
+    dictionary: ReadonlyMap<string, string>;
+    textKeys: ReadonlySet<string>;
 }

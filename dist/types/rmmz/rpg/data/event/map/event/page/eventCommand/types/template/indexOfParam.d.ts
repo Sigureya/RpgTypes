@@ -1,4 +1,4 @@
-import { AsRecord, PickByType } from 'src/libs/templates';
+import { AsRecord, PickByType } from '../../../../../../../../../../libs';
 export type IndexOfParameter<T extends unknown[], V> = AsNumber<keyof PickByType<AsRecord<T>, V>>;
 export type AsNumber<T extends `${number}`> = IndexToNumericKeyMap[Extract<T, keyof IndexToNumericKeyMap>];
 interface IndexToNumericKeyMap {

@@ -1,5 +1,5 @@
 import { CONTROL_VARIABLES, EventCommandLike, VariableOperation } from '../../../../../libs';
-import { ValueOf } from 'src/libs/templates/valueOf';
+import { ValueOf } from '../../../../../libs/templates/valueOf';
 import { VARIABLE_SRC_LAST } from './dataSource';
 export interface Command_ControlVariables_FromLastData extends EventCommandLike<typeof CONTROL_VARIABLES> {
     code: typeof CONTROL_VARIABLES;
