@@ -60,10 +60,6 @@ const mockActor: Data_Actor = makeActorData({
   profile: MOCK_PROFILE,
 });
 
-const mockHashFn = (text: string): string => {
-  return `hashed_${text}`;
-};
-
 describe("extractActorTexts", () => {
   test("should extract actor name, nickname, profile", () => {
     const result: Set<string> = extractActorTexts(
@@ -85,25 +81,121 @@ describe("extractActorTexts", () => {
 });
 
 describe("createActorTextDictionary", () => {
-  test("", () => {
-    const fn = vi.fn(mockHashFn);
+  test("should create dictionary with both original and translated texts", () => {
+    const mockHashFn = (text: string): string => {
+      return `hash_${text}`;
+    };
+
+    const mockTranslateFn = (text: string): string => {
+      return `[JP] ${text}`;
+    };
+
     const result = createActorTextDictionary(
       [mockActor],
       [mockCommonEvent],
       [mockTroop],
       [mockMap],
-      fn,
+      {
+        hashText: mockHashFn,
+        newText: mockTranslateFn,
+      },
     );
-    expect(fn).toHaveBeenCalledTimes(result.length);
-    [
+
+    // Extract expected texts
+    const allTexts = new Set([
       MOCK_NAME,
       MOCK_NICKNAME,
       MOCK_PROFILE,
       MOCK_NAME_MAP,
       MOCK_NICKNAME_COMMON,
       MOCK_PROFILE_TROOP,
-    ].forEach((text) => {
-      expect(fn).toHaveBeenCalledWith(text);
+    ]);
+
+    // Should have both original and translated entries
+    expect(result).toHaveLength(allTexts.size * 2);
+
+    // Check original texts are in the result
+    allTexts.forEach((text) => {
+      const originalEntry = result.find(
+        (entry) => entry.key === mockHashFn(text) && entry.value === text,
+      );
+      expect(originalEntry).toBeDefined();
+    });
+
+    // Check translated texts are in the result
+    allTexts.forEach((text) => {
+      const translatedText = mockTranslateFn(text);
+      const translatedEntry = result.find(
+        (entry) =>
+          entry.key === mockHashFn(translatedText) &&
+          entry.value === translatedText,
+      );
+      expect(translatedEntry).toBeDefined();
+    });
+  });
+
+  test("should call hash and newText handlers correctly", () => {
+    const mockHashFn = vi.fn((text: string): string => {
+      return `hash_${text}`;
+    });
+
+    const mockTranslateFn = vi.fn((text: string): string => {
+      return `translated_${text}`;
+    });
+
+    const allTexts = new Set([MOCK_NAME, MOCK_NICKNAME, MOCK_PROFILE]);
+
+    createActorTextDictionary([mockActor], [], [], [], {
+      hashText: mockHashFn,
+      newText: mockTranslateFn,
+    });
+
+    // hashText should be called for each original and translated text
+    expect(mockHashFn).toHaveBeenCalledTimes(allTexts.size * 2);
+
+    // newText should be called for each original text
+    expect(mockTranslateFn).toHaveBeenCalledTimes(allTexts.size);
+
+    // Verify all original texts were hashed
+    allTexts.forEach((text) => {
+      expect(mockHashFn).toHaveBeenCalledWith(text);
+    });
+  });
+
+  test("should handle empty input arrays", () => {
+    const mockHashFn = (text: string): string => `hash_${text}`;
+    const mockTranslateFn = (text: string): string => `[JP] ${text}`;
+
+    const result = createActorTextDictionary([], [], [], [], {
+      hashText: mockHashFn,
+      newText: mockTranslateFn,
+    });
+
+    expect(result).toEqual([]);
+  });
+
+  test("should preserve order: base texts before translated texts", () => {
+    const mockHashFn = (text: string): string => `hash_${text}`;
+    const mockTranslateFn = (text: string): string => `[JP] ${text}`;
+
+    const result = createActorTextDictionary([mockActor], [], [], [], {
+      hashText: mockHashFn,
+      newText: mockTranslateFn,
+    });
+
+    // Split into base and translated sections
+    const allTexts = [MOCK_NAME, MOCK_NICKNAME, MOCK_PROFILE];
+    const baseTexts = result.slice(0, allTexts.length);
+    const translatedTexts = result.slice(allTexts.length);
+
+    // All base texts should come first
+    baseTexts.forEach((entry) => {
+      expect(entry.value).not.toMatch(/^\[JP\]/);
+    });
+
+    // All translated texts should come last
+    translatedTexts.forEach((entry) => {
+      expect(entry.value).toMatch(/^\[JP\]/);
     });
   });
 });
