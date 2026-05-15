@@ -5,7 +5,10 @@ import type { MapDataReplaceHandlers } from "./core/replace/types";
 import { replaceRawDataWithAutoNoteFilter } from "./core/replaceBundle";
 import { createActorTextDictionary } from "./core/rpg";
 import type { EventContainerExtractor } from "./extractText";
-import type { ReplaceRawDataContext } from "./types/replace";
+import type {
+  GameDataReplaceOutput,
+  ReplaceRawDataContext,
+} from "./types/replace";
 
 export const replaceDataDirect = (
   { assetBundle, data, dictionary, textKeys }: ReplaceRawDataContext,
@@ -33,7 +36,7 @@ export const replaceDataWithHash = <T extends string>(
   { assetBundle, data, dictionary, textKeys }: ReplaceRawDataContext,
   extractor: EventContainerExtractor,
   hashFn: (text: string) => T,
-) => {
+): GameDataReplaceOutput<T> => {
   const handlers: MapDataReplaceHandlers = {
     replaceText(text) {
       return hashFn(text);
@@ -44,14 +47,13 @@ export const replaceDataWithHash = <T extends string>(
       return textKeys.has(item.key);
     },
   };
-  const newData = replaceRawDataWithAutoNoteFilter(
-    data,
-    assetBundle,
-    extractor,
-    handlers,
-  );
   return {
-    main: newData,
+    main: replaceRawDataWithAutoNoteFilter(
+      data,
+      assetBundle,
+      extractor,
+      handlers,
+    ),
     aux: {
       actorTextDictionary: ccaa2(data, dictionary, hashFn),
       newTextDictionary: createNewDictionary(dictionary, hashFn),
