@@ -1,5 +1,326 @@
-import { m as i } from "./makeAudio.es.js";
-const p = (a = {}) => ({
+import { v as k, w as T, E as f, d as N, f as w, M as S, am as M, an as B, ao as C, aq as D, P as q, Q as F } from "./eventCommandCodes.es.js";
+import { m as s } from "./makeAudio.es.js";
+import { k as z, b as A, h as R, e as E, d as L, j as V, g as W, c as H } from "./commands.es.js";
+const La = (a, t = 0) => ({
+  code: 321,
+  parameters: [a.actorId, a.classId, a.keepExp],
+  indent: t
+}), Va = (a, t = 0) => ({
+  code: 319,
+  parameters: [a.actorId, a.equipType, a.equipId],
+  indent: t
+}), Wa = ({ actorId: a = 1, faceIndex: t = 0, faceName: e = "", characterIndex: m = 0, characterName: o = "", battlerName: r = "" } = {}, p = 0) => ({ code: 322, indent: p, parameters: [a, o, m, e, t, r] }), Ha = (a, t = 0) => ({
+  code: k,
+  parameters: [a.actorId, a.name],
+  indent: t
+}), Xa = (a, t = 0) => ({ code: T, parameters: [a.actorId, a.nickname], indent: t }), Ya = (a, t = 0) => ({
+  code: f,
+  parameters: [a.actorId, a.profile],
+  indent: t
+}), Ua = ({ audio: a }) => [X(s({ name: a })), Y(s({ name: a })), U(s({ name: a })), G(s({ name: a })), P(s({ name: a })), j(s({ name: a })), K(s({ name: a }))], Ga = (a, t) => l(a, s({ name: t })), l = (a, t, e = 0) => ({
+  code: a,
+  parameters: [s(t)],
+  indent: e
+}), X = (a, t = 0) => l(M, a, t), Y = (a, t = 0) => l(B, a, t), U = (a, t = 0) => l(C, a, t), G = (a, t = 0) => l(D, a, t), P = (a, t = 0) => l(N, a, t), j = (a, t = 0) => l(S, a, t), K = (a, t = 0) => l(w, a, t), b = (a) => [a], Pa = (a) => ({
+  comment: a[0]
+}), O = (a, t = 0) => ({ code: F, indent: t, parameters: b(a) }), Q = (a, t = 0) => ({ code: q, indent: t, parameters: b(a) }), ja = (a, t = 0) => a.map(((e, m) => m === 0 ? O(e, t) : Q(e, t))), Ka = (a = {}) => ({
+  id: a.id ?? 0,
+  name: a.name ?? "",
+  trigger: a.trigger ?? 0,
+  list: a.list ?? [],
+  switchId: a.switchId ?? 0
+}), Oa = (a = {}) => ({ id: a.id ?? 0, name: a.name ?? "", members: a.members ?? [], pages: a.pages ?? [] }), Qa = (a) => ({
+  span: a.span ?? 0,
+  conditions: $(a.conditions ?? {}),
+  list: a.list ?? []
+}), $a = (a = {}) => ({ enemyId: a.enemyId ?? 0, x: a.x ?? 0, y: a.y ?? 0, hidden: a.hidden ?? !1 }), $ = (a = {}) => ({
+  actorHp: a.actorHp ?? 0,
+  actorId: a.actorId ?? 0,
+  enemyValid: a.enemyValid ?? 0,
+  switchValid: a.switchValid ?? 0
+}), J = (a = {}) => ({
+  switch1Id: a.switch1Id ?? 0,
+  switch1Valid: a.switch1Id !== void 0,
+  switch2Id: a.switch2Id ?? 0,
+  switch2Valid: a.switch2Id !== void 0,
+  variableId: a.variableId ?? 0,
+  variableValid: a.variableId !== void 0,
+  variableValue: a.variableValue ?? 0,
+  selfSwitchCh: a.selfSwitchCh ?? "A",
+  selfSwitchValid: a.selfSwitchCh !== void 0,
+  itemId: a.itemId ?? 0,
+  itemValid: a.itemId !== void 0,
+  actorId: a.actorId ?? 0,
+  actorValid: a.actorId !== void 0
+}), Z = ({ id: a = 1, name: t = "", pages: e = [], note: m = "", x: o = 0, y: r = 0 } = {}) => ({
+  id: a,
+  name: t,
+  pages: e,
+  note: m,
+  x: o,
+  y: r
+}), _ = ({ characterIndex: a = 0, characterName: t = "", direction: e = 2, pattern: m = 0, tileId: o = 0 } = {}) => ({
+  characterIndex: a,
+  characterName: t,
+  direction: e,
+  pattern: m,
+  tileId: o
+}), aa = ({ list: a = [], conditions: t = J(), image: e = _(), moveFrequency: m = 5, directionFix: o = !1, moveRoute: r = {
+  list: [],
+  repeat: !1,
+  skippable: !1,
+  wait: !1
+}, priorityType: p = 1, stepAnime: i = !1, through: d = !1, walkAnime: I = !1, moveSpeed: h = 3, moveType: v = 0, trigger: x = 0 } = {}) => ({
+  walkAnime: I,
+  stepAnime: i,
+  through: d,
+  conditions: t,
+  list: a,
+  directionFix: o,
+  image: e,
+  priorityType: p,
+  moveFrequency: m,
+  moveSpeed: h,
+  moveType: v,
+  trigger: x,
+  moveRoute: { list: r.list, repeat: r.repeat, skippable: r.skippable, wait: r.wait }
+}), Ja = (a, t) => ({
+  map: t,
+  filename: `Map${a.id.toString().padStart(3, "0")}`,
+  editingName: a.name
+}), Za = (a) => ea({ events: [Z({ pages: [aa({ list: a })] })] }), ea = (a = {}) => ({
+  tilesetId: a.tilesetId ?? 1,
+  data: a.data ?? [],
+  battleback1Name: a.battleback1Name ?? "",
+  battleback2Name: a.battleback2Name ?? "",
+  autoplayBgm: a.autoplayBgm ?? !1,
+  autoplayBgs: a.autoplayBgs ?? !1,
+  parallaxLoopX: a.parallaxLoopX ?? !1,
+  parallaxLoopY: a.parallaxLoopY ?? !1,
+  parallaxName: a.parallaxName ?? "",
+  parallaxShow: a.parallaxShow ?? !1,
+  parallaxSx: a.parallaxSx ?? 0,
+  parallaxSy: a.parallaxSy ?? 0,
+  encounterStep: a.encounterStep ?? 30,
+  scrollType: a.scrollType ?? 0,
+  specifyBattleback: a.specifyBattleback ?? !1,
+  width: a.width ?? 0,
+  height: a.height ?? 0,
+  note: a.note ?? "",
+  bgm: a.bgm ?? {
+    name: "",
+    pan: 0,
+    pitch: 100,
+    volume: 100
+  },
+  bgs: a.bgs ?? { name: "", pan: 0, pitch: 100, volume: 100 },
+  disableDashing: a.disableDashing ?? !1,
+  displayName: a.displayName ?? "",
+  encounterList: a.encounterList ?? [],
+  events: a.events ?? []
+}), ta = (a) => a.toString().padStart(3, "0"), _a = (a = { id: 0 }) => ({
+  name: a.name ?? ta(a.id),
+  id: a.id,
+  expanded: a.expanded ?? !1,
+  order: a.order ?? 0,
+  parentId: a.parentId ?? 0,
+  scrollX: a.scrollX ?? 0,
+  scrollY: a.scrollY ?? 0
+}), sa = (a = {}) => ({
+  name: a.name ?? "",
+  id: a.id ?? 0,
+  battlerName: a.battlerName ?? "",
+  characterName: a.characterName ?? "",
+  characterIndex: a.characterIndex ?? 0,
+  faceName: a.faceName ?? "",
+  faceIndex: a.faceIndex ?? 0,
+  traits: [],
+  note: a.note ?? "",
+  classId: a.classId ?? 0,
+  nickname: a.nickname ?? "",
+  profile: a.profile ?? "",
+  equips: [],
+  initialLevel: a.initialLevel ?? 0,
+  maxLevel: a.maxLevel ?? 0
+}), ae = (a) => ({
+  name: a.name ?? "",
+  id: a.id ?? 0,
+  battlerName: a.battlerName ?? "",
+  characterName: a.characterName ?? "",
+  characterIndex: a.characterIndex ?? 0,
+  faceName: a.faceName ?? "",
+  faceIndex: a.faceIndex ?? 0,
+  traits: [],
+  note: a.note ?? "",
+  classId: a.classId ?? 0,
+  nickname: a.nickname ?? "",
+  profile: a.profile ?? "",
+  equips: [],
+  initialLevel: a.initialLevel ?? 0,
+  maxLevel: a.maxLevel ?? 0
+}), ia = (a = {}) => ({
+  id: a.id ?? 0,
+  name: a.name ?? "",
+  iconIndex: a.iconIndex ?? 0,
+  description: a.description ?? "",
+  traits: a.traits ?? [],
+  note: a.note ?? "",
+  atypeId: a.atypeId ?? 0,
+  params: a.params ?? [0, 0, 0, 0, 0, 0, 0, 0],
+  etypeId: a.etypeId ?? 0,
+  price: a.price ?? 0
+}), ma = (a = {}) => ({
+  name: a.name ?? "",
+  id: a.id ?? 0,
+  traits: [],
+  note: a.note ?? "",
+  params: a.params ?? u(),
+  learnings: a.learnings ?? [],
+  expParams: a.expParams ?? []
+}), ee = (a) => ({
+  name: a.name ?? "",
+  id: a.id ?? 0,
+  traits: a.traits ?? [],
+  note: a.note ?? "",
+  params: a.params ? oa(a.params) : u(),
+  learnings: a.learnings ?? [],
+  expParams: a.expParams ?? []
+}), u = () => [[0], [0], [0], [0], [0], [0], [0], [0]], oa = (a) => {
+  const t = a.map(((i) => i.atk)), e = a.map(((i) => i.def)), m = a.map(((i) => i.mat)), o = a.map(((i) => i.mdf)), r = a.map(((i) => i.agi)), p = a.map(((i) => i.luk));
+  return [a.map(((i) => i.mhp)), a.map(((i) => i.mmp)), t, e, m, o, r, p];
+}, ra = ({ mhp: a = 0, mmp: t = 0, atk: e = 0, def: m = 0, mat: o = 0, mdf: r = 0, agi: p = 0, luk: i = 0 }) => [a, t, e, m, o, r, p, i], te = (a) => {
+  const [t, e, m, o, r, p, i, d] = a;
+  return { mhp: t, mmp: e, atk: m, def: o, mat: r, mdf: p, agi: i, luk: d };
+}, na = (a = {}) => ({ dataId: a.dataId ?? 0, denominator: a.denominator ?? 0, kind: a.kind ?? 0 }), se = (a = {}) => ({
+  conditionParam1: a.conditionParam1 ?? 0,
+  conditionParam2: a.conditionParam2 ?? 0,
+  conditionType: a.conditionType ?? 0,
+  rating: a.rating ?? 0,
+  skillId: a.skillId ?? 0
+}), pa = (a = {}) => ({
+  name: a.name ?? "",
+  id: a.id ?? 0,
+  battlerName: a.battlerName ?? "",
+  battlerHue: a.battlerHue ?? 0,
+  dropItems: a.dropItems?.map((() => na())) ?? [],
+  exp: a.exp ?? 0,
+  gold: a.gold ?? 0,
+  traits: [],
+  note: a.note ?? "",
+  params: a.params ? [...a.params] : ra({ mhp: 0, mmp: 0, atk: 0, def: 0, mat: 0, mdf: 0, agi: 0, luk: 0 }),
+  actions: []
+}), la = (a = {}) => ({
+  name: a.name ?? "",
+  id: a.id ?? 0,
+  iconIndex: a.iconIndex ?? 0,
+  message1: a.message1 ?? "",
+  message2: a.message2 ?? "",
+  message3: a.message3 ?? "",
+  message4: a.message4 ?? "",
+  traits: [],
+  note: a.note ?? "",
+  messageType: a.messageType ?? 0,
+  releaseByDamage: a.releaseByDamage ?? !1,
+  restriction: a.restriction ?? 0,
+  priority: a.priority ?? 0,
+  motion: a.motion ?? 0,
+  overlay: a.overlay ?? 0,
+  removeAtBattleEnd: a.removeAtBattleEnd ?? !1,
+  removeByRestriction: a.removeByRestriction ?? !1,
+  autoRemovalTiming: a.autoRemovalTiming ?? 0,
+  minTurns: a.minTurns ?? 0,
+  maxTurns: a.maxTurns ?? 0,
+  removeByDamage: a.removeByDamage ?? !1,
+  chanceByDamage: a.chanceByDamage ?? 0,
+  removeByWalking: a.removeByWalking ?? !1,
+  stepsToRemove: a.stepsToRemove ?? 0
+}), g = (a = {}) => ({
+  type: a.type ?? 0,
+  elementId: a.elementId ?? 0,
+  formula: a.formula ?? "",
+  variance: a.variance ?? 0,
+  critical: a.critical ?? !1
+}), ca = (a = {}) => ({
+  id: a.id ?? 0,
+  name: a.name ?? "",
+  iconIndex: a.iconIndex ?? 0,
+  description: a.description ?? "",
+  traits: a.traits ?? [],
+  note: a.note ?? "",
+  animationId: a.animationId ?? 0,
+  params: a.params ?? [0, 0, 0, 0, 0, 0, 0, 0],
+  etypeId: a.etypeId ?? 0,
+  price: a.price ?? 0,
+  damage: g(a.damage ?? {}),
+  wtypeId: a.wtypeId ?? 0
+}), da = (a = {}) => ({
+  animationId: a.animationId ?? 0,
+  id: a.id ?? 0,
+  name: a.name ?? "",
+  iconIndex: a.iconIndex ?? 0,
+  description: a.description ?? "",
+  itypeId: a.itypeId ?? 0,
+  note: a.note ?? "",
+  consumable: a.consumable ?? !1,
+  scope: a.scope ?? 0,
+  occasion: a.occasion ?? 0,
+  speed: a.speed ?? 0,
+  successRate: a.successRate ?? 0,
+  repeats: a.repeats ?? 0,
+  tpGain: a.tpGain ?? 0,
+  hitType: a.hitType ?? 0,
+  damage: g(a.damage ?? {}),
+  effects: [],
+  price: 0
+}), ga = (a = {}) => ({
+  stypeId: a.stypeId ?? 0,
+  requiredWtypeId1: a.requiredWtypeId1 ?? 0,
+  requiredWtypeId2: a.requiredWtypeId2 ?? 0,
+  animationId: a.animationId ?? 0,
+  damage: g(a.damage ?? {}),
+  description: a.description ?? "",
+  effects: [],
+  hitType: a.hitType ?? 0,
+  iconIndex: a.iconIndex ?? 0,
+  id: a.id ?? 0,
+  message1: a.message1 ?? "",
+  message2: a.message2 ?? "",
+  messageType: a.messageType ?? 0,
+  name: a.name ?? "",
+  note: a.note ?? "",
+  mpCost: a.mpCost ?? 0,
+  occasion: a.occasion ?? 0,
+  repeats: a.repeats ?? 0,
+  scope: a.scope ?? 0,
+  speed: a.speed ?? 0,
+  successRate: a.successRate ?? 0,
+  tpCost: a.tpCost ?? 0,
+  tpGain: a.tpGain ?? 0
+}), ie = (a) => sa({
+  battlerName: a.image,
+  characterName: a.image,
+  faceName: a.image,
+  name: a.text,
+  profile: a.text,
+  nickname: a.text,
+  note: a.note
+}), me = (a) => ma({ name: a.text, note: a.note }), oe = (a) => ca({ name: a.text, note: a.note, description: a.text }), re = (a) => ia({
+  name: a.text,
+  note: a.note,
+  description: a.text
+}), ne = (a) => pa({ name: a.text, note: a.note, battlerName: a.image }), pe = (a) => la({
+  name: a.text,
+  note: a.note,
+  message1: a.text,
+  message2: a.text,
+  message3: a.text,
+  message4: a.text
+}), le = (a) => ga({ name: a.text, note: a.note, iconIndex: 0, description: a.text, message1: a.text, message2: a.text }), ce = (a) => da({
+  name: a.text,
+  note: a.note,
+  iconIndex: 0,
+  description: a.text
+}), ya = (a = {}) => ({
   gameId: a.gameId ?? 0,
   screenWidth: a.screenWidth ?? 0,
   screenHeight: a.screenHeight ?? 0,
@@ -12,7 +333,7 @@ const p = (a = {}) => ({
   fallbackFonts: a.fallbackFonts ?? "",
   fontSize: a.fontSize ?? 28,
   picturesUpperLimit: a.picturesUpperLimit ?? 100
-}), c = (a = {}) => [i(a.cursor), i(a.ok), i(a.cancel), i(a.buzzer), i(a.equip), i(a.save), i(a.load), i(a.battleStart), i(a.escape), i(a.enemyAttack), i(a.enemyDamage), i(a.enemyCollapse), i(a.bossCollapes1), i(a.bossCollapes2), i(a.actorDamage), i(a.actorCollapse), i(a.playRecovery), i(a.playMiss), i(a.playEvasion), i(a.playMagicEvasion), i(a.playReflection), i(a.shop), i(a.useItem), i(a.useSkill)], d = (a) => ({
+}), ba = (a = {}) => [s(a.cursor), s(a.ok), s(a.cancel), s(a.buzzer), s(a.equip), s(a.save), s(a.load), s(a.battleStart), s(a.escape), s(a.enemyAttack), s(a.enemyDamage), s(a.enemyCollapse), s(a.bossCollapes1), s(a.bossCollapes2), s(a.actorDamage), s(a.actorCollapse), s(a.playRecovery), s(a.playMiss), s(a.playEvasion), s(a.playMagicEvasion), s(a.playReflection), s(a.shop), s(a.useItem), s(a.useSkill)], ua = (a) => ({
   cursor: a[0],
   ok: a[1],
   cancel: a[2],
@@ -37,26 +358,26 @@ const p = (a = {}) => ({
   shop: a[21],
   useItem: a[22],
   useSkill: a[23]
-}), u = (a) => ({
-  item: b(a),
-  skill: g(a),
-  equip: y(a),
-  status: v(a),
-  formation: h(a),
-  save: f(a)
-}), b = (a) => a.menuCommands[0], g = (a) => a.menuCommands[1], y = (a) => a.menuCommands[2], v = (a) => a.menuCommands[3], h = (a) => a.menuCommands[4], f = (a) => a.menuCommands[5], U = (a) => a.itemCategories[0], L = (a) => a.itemCategories[1], P = (a) => a.itemCategories[2], X = (a) => a.itemCategories[3], T = (a = {}) => [a.item ?? !0, a.weapon ?? !0, a.armor ?? !0, a.keyItem ?? !0], W = (a) => ({
+}), Ia = (a) => ({
+  item: ha(a),
+  skill: va(a),
+  equip: xa(a),
+  status: ka(a),
+  formation: Ta(a),
+  save: fa(a)
+}), ha = (a) => a.menuCommands[0], va = (a) => a.menuCommands[1], xa = (a) => a.menuCommands[2], ka = (a) => a.menuCommands[3], Ta = (a) => a.menuCommands[4], fa = (a) => a.menuCommands[5], de = (a) => a.itemCategories[0], ge = (a) => a.itemCategories[1], ye = (a) => a.itemCategories[2], be = (a) => a.itemCategories[3], Na = (a = {}) => [a.item ?? !0, a.weapon ?? !0, a.armor ?? !0, a.keyItem ?? !0], ue = (a) => ({
   item: a[0],
   weapon: a[1],
   armor: a[2],
   keyItem: a[3]
-}), k = (a = {}) => [a.item ?? !0, a.skill ?? !0, a.equip ?? !0, a.status ?? !0, a.formation ?? !0, a.save ?? !0], Y = (a) => ({
+}), wa = (a = {}) => [a.item ?? !0, a.skill ?? !0, a.equip ?? !0, a.status ?? !0, a.formation ?? !0, a.save ?? !0], Ie = (a) => ({
   item: a[0],
   skill: a[1],
   equip: a[2],
   status: a[3],
   formation: a[4],
   save: a[5]
-}), N = (a = {}) => ({
+}), Sa = (a = {}) => ({
   optAutosave: a.optAutosave ?? !0,
   optDisplayTp: a.optDisplayTp ?? !0,
   optDrawTitle: a.optDrawTitle ?? !0,
@@ -69,208 +390,55 @@ const p = (a = {}) => ({
   optTransparent: a.optTransparent ?? !0,
   optMessageSkip: a.optMessageSkip ?? !0,
   optSplashScreen: a.optSplashScreen ?? !0
-}), t = (a, o) => typeof a == "string" ? a : o, M = (a) => ({
-  actionFailure: t(a.actionFailure, "Action failed."),
-  actorDamage: t(a.actorDamage, "%1 took %2 damage."),
-  actorRecovery: t(a.actorRecovery, "%1 recovered %2 HP."),
-  actorGain: t(a.actorGain, "%1 gained %2."),
-  actorLoss: t(a.actorLoss, "%1 lost %2."),
-  actorDrain: t(a.actorDrain, "%1 drained %2 HP."),
-  actorNoDamage: t(a.actorNoDamage, "%1 was not damaged."),
-  actorNoHit: t(a.actorNoHit, "%1 was not hit."),
-  alwaysDash: t(a.alwaysDash, "Always dash."),
-  bgmVolume: t(a.bgmVolume, "BGM volume"),
-  bgsVolume: t(a.bgsVolume, "BGS volume"),
-  commandRemember: t(a.commandRemember, "Command remember."),
-  criticalToActor: t(a.criticalToActor, "%1 dealt %2 damage to %3."),
-  criticalToEnemy: t(a.criticalToEnemy, "%1 dealt %2 damage to %3."),
-  counterAttack: t(a.counterAttack, "%1 countered!"),
-  debuffAdd: t(a.debuffAdd, "%1's %2 was lowered."),
-  defeat: t(a.defeat, "Defeat."),
-  enemyDamage: t(a.enemyDamage, "%1 took %2 damage."),
-  enemyDrain: t(a.enemyDrain, "%1 drained %2 HP."),
-  enemyGain: t(a.enemyGain, "%1 gained %2."),
-  enemyLoss: t(a.enemyLoss, "%1 lost %2."),
-  enemyNoDamage: t(a.enemyNoDamage, "%1 was not damaged."),
-  enemyNoHit: t(a.enemyNoHit, "%1 was not hit."),
-  enemyRecovery: t(a.enemyRecovery, "%1 recovered %2 HP."),
-  evasion: t(a.evasion, "%1 evaded the attack!"),
-  autosave: t(a.autosave, "Autosave"),
-  escapeFailure: t(a.escapeFailure, "Escape failed."),
-  escapeStart: t(a.escapeStart, "%1 started to escape!"),
-  emerge: t(a.emerge, "%1 appeared!"),
-  expNext: t(a.expNext, "Next level in %1 EXP."),
-  expTotal: t(a.expTotal, "Total EXP: %1"),
-  file: t(a.file, "File"),
-  buffAdd: t(a.buffAdd, "%1's %2 was raised."),
-  buffRemove: t(a.buffRemove, "%1's %2 was lowered."),
-  obtainExp: t(a.obtainExp, "%1 EXP obtained."),
-  obtainGold: t(a.obtainGold, "%1 gold obtained."),
-  obtainItem: t(a.obtainItem, "%1 obtained %2."),
-  obtainSkill: t(a.obtainSkill, "%1 learned %2."),
-  levelUp: t(a.levelUp, "%1 leveled up!"),
-  partyName: t(a.partyName, "Party"),
-  loadMessage: t(a.loadMessage, "Load %1?"),
-  meVolume: t(a.meVolume, "ME volume"),
-  possession: t(a.possession, "Possession"),
-  preemptive: t(a.preemptive, "%1 attacked first!"),
-  saveMessage: t(a.saveMessage, "Save %1?"),
-  seVolume: t(a.seVolume, "SE volume"),
-  magicEvasion: t(a.magicEvasion, "%1 evaded the magic!"),
-  magicReflection: t(a.magicReflection, "%1 reflected the magic!"),
-  substitute: t(a.substitute, "%1 took the hit!"),
-  surprise: t(a.surprise, "%1 surprised the enemy!"),
-  touchUI: t(a.touchUI, "Touch UI"),
-  useItem: t(a.useItem, "%1 used %2."),
-  victory: t(a.victory, "Victory!")
-}), I = (a) => ({
-  actionFailure: a.actionFailure,
-  actorDamage: a.actorDamage,
-  actorRecovery: a.actorRecovery,
-  actorGain: a.actorGain,
-  actorLoss: a.actorLoss,
-  actorDrain: a.actorDrain,
-  actorNoDamage: a.actorNoDamage,
-  actorNoHit: a.actorNoHit,
-  alwaysDash: a.alwaysDash,
-  bgmVolume: a.bgmVolume,
-  bgsVolume: a.bgsVolume,
-  commandRemember: a.commandRemember,
-  criticalToActor: a.criticalToActor,
-  criticalToEnemy: a.criticalToEnemy,
-  counterAttack: a.counterAttack,
-  debuffAdd: a.debuffAdd,
-  defeat: a.defeat,
-  enemyDamage: a.enemyDamage,
-  enemyDrain: a.enemyDrain,
-  enemyGain: a.enemyGain,
-  enemyLoss: a.enemyLoss,
-  enemyNoDamage: a.enemyNoDamage,
-  enemyNoHit: a.enemyNoHit,
-  enemyRecovery: a.enemyRecovery,
-  evasion: a.evasion,
-  escapeFailure: a.escapeFailure,
-  escapeStart: a.escapeStart,
-  emerge: a.emerge,
-  expNext: a.expNext,
-  expTotal: a.expTotal,
-  file: a.file,
-  buffAdd: a.buffAdd,
-  buffRemove: a.buffRemove,
-  obtainExp: a.obtainExp,
-  obtainGold: a.obtainGold,
-  obtainItem: a.obtainItem,
-  obtainSkill: a.obtainSkill,
-  levelUp: a.levelUp,
-  partyName: a.partyName,
-  loadMessage: a.loadMessage,
-  meVolume: a.meVolume,
-  possession: a.possession,
-  magicEvasion: a.magicEvasion,
-  magicReflection: a.magicReflection,
-  substitute: a.substitute,
-  surprise: a.surprise,
-  useItem: a.useItem,
-  victory: a.victory,
-  preemptive: a.preemptive,
-  saveMessage: a.saveMessage,
-  seVolume: a.seVolume
-}), S = (a) => [a.mhp ?? "", a.mmp ?? "", a.atk ?? "", a.def ?? "", a.mat ?? "", a.mdf ?? "", a.agi ?? "", a.luk ?? "", a.hit ?? "", a.eva ?? ""], w = (a) => ({
-  mhp: a[0],
-  mmp: a[1],
-  atk: a[2],
-  def: a[3],
-  mat: a[4],
-  mdf: a[5],
-  agi: a[6],
-  luk: a[7],
-  hit: a[8],
-  eva: a[9]
-}), D = (a) => [a.level ?? "Level", a.levelA ?? "Level", a.hp ?? "HP", a.hpA ?? "HP", a.mp ?? "MP", a.mpA ?? "MP", a.tp ?? "TP", a.tpA ?? "TP", a.experience ?? "EXP", a.exp ?? "EXP"], A = (a) => ({
-  level: a[0],
-  levelA: a[1],
-  hp: a[2],
-  hpA: a[3],
-  mp: a[4],
-  mpA: a[5],
-  tp: a[6],
-  tpA: a[7],
-  experience: a[8],
-  exp: a[9]
-}), x = (a) => E(a, ""), E = (a, o) => [a.fight ?? "Fight", a.escape ?? "Escape", a.attack ?? "Attack", a.guard ?? "Guard", a.item ?? "Item", a.skill ?? "Skill", a.equip ?? "Equip", a.status ?? "Status", a.formation ?? "Formation", a.save ?? "Save", a.gameEnd ?? "Game End", a.options ?? "Options", a.weapon ?? "Weapon", a.armor ?? "Armor", a.keyItem ?? "Key Item", a.equip2 ?? "Equip2", a.optimize ?? "Optimize", a.clear ?? "Clear", a.newGame ?? "New Game", a.continueGame ?? "Continue", o, a.toTitle ?? "To Title", a.cancel ?? "Cancel", o, a.buy ?? "Buy", a.sell ?? "Sell"], C = (a) => ({
-  fight: a[0],
-  escape: a[1],
-  attack: a[2],
-  guard: a[3],
-  item: a[4],
-  skill: a[5],
-  equip: a[6],
-  status: a[7],
-  formation: a[8],
-  save: a[9],
-  gameEnd: a[10],
-  options: a[11],
-  weapon: a[12],
-  armor: a[13],
-  keyItem: a[14],
-  equip2: a[15],
-  optimize: a[16],
-  clear: a[17],
-  newGame: a[18],
-  continueGame: a[19],
-  toTitle: a[21],
-  cancel: a[22],
-  buy: a[24],
-  sell: a[25]
-}), F = (a) => ({
+}), Ma = (a) => ({
   background: a.background ?? 0,
   offsetX: a.offsetX ?? 0,
   offsetY: a.offsetY ?? 0
-}), s = (a = {}) => ({
+}), c = (a = {}) => ({
   characterIndex: a.characterIndex ?? 0,
   characterName: a.characterName ?? "",
-  bgm: i(a.bgm ?? {}),
+  bgm: s(a.bgm ?? {}),
   startMapId: a.startMapId ?? 0,
   startX: a.startX ?? 0,
   startY: a.startY ?? 0
-}), R = (a = {}) => ({ jsonFormatLevel: a.jsonFormatLevel ?? 0, messageWidth1: a.messageWidth1 ?? 816, messageWidth2: a.messageWidth2 ?? 816 }), r = (a) => {
-  const o = G(a.size);
+}), Ba = (a = {}) => ({ jsonFormatLevel: a.jsonFormatLevel ?? 0, messageWidth1: a.messageWidth1 ?? 816, messageWidth2: a.messageWidth2 ?? 816 }), y = (a) => {
+  const t = Da(a.size);
   return {
-    ...N(a.options),
-    titleCommandWindow: F(a.titleCommandWindow ?? {}),
+    ...Sa(a.options),
+    titleCommandWindow: Ma(a.titleCommandWindow ?? {}),
     currencyUnit: a.texts?.currencyUnit ?? "",
     gameTitle: a.texts?.gameTitle ?? "",
-    sounds: c(a.sounds),
-    editor: R(a.editing),
-    advanced: p(a.advanced),
+    sounds: ba(a.sounds),
+    editor: Ba(a.editing),
+    advanced: ya(a.advanced),
     title1Name: a.images?.title1Name ?? "",
     title2Name: a.images?.title2Name ?? "",
-    armorTypes: m(a.dataNames?.armorTypes),
-    equipTypes: m(a.dataNames?.equipTypes),
-    elements: m(a.dataNames?.elements),
-    skillTypes: m(a.dataNames?.skillTypes),
-    weaponTypes: m(a.dataNames?.weaponTypes),
-    switches: m(a.dataNames?.switches),
-    variables: m(a.dataNames?.variables),
-    magicSkills: m(a.battle?.magicSkills),
+    armorTypes: n(a.dataNames?.armorTypes),
+    equipTypes: n(a.dataNames?.equipTypes),
+    elements: n(a.dataNames?.elements),
+    skillTypes: n(a.dataNames?.skillTypes),
+    weaponTypes: n(a.dataNames?.weaponTypes),
+    switches: n(a.dataNames?.switches),
+    variables: n(a.dataNames?.variables),
+    magicSkills: n(a.battle?.magicSkills),
     battleSystem: a.battle?.battleSystem ?? 0,
-    airship: s(a.vehicles?.airship),
-    boat: s(a.vehicles?.boat),
-    ship: s(a.vehicles?.ship),
-    defeatMe: i(a.me?.defeatMe),
-    gameoverMe: i(a.me?.gameoverMe),
-    titleBgm: i(a.bgm?.titleBgm),
-    tileSize: o.tileSize,
-    faceSize: o.faceSize,
-    iconSize: o.iconSize,
+    airship: c(a.vehicles?.airship),
+    boat: c(a.vehicles?.boat),
+    ship: c(a.vehicles?.ship),
+    defeatMe: s(a.me?.defeatMe),
+    gameoverMe: s(a.me?.gameoverMe),
+    titleBgm: s(a.bgm?.titleBgm),
+    tileSize: t.tileSize,
+    faceSize: t.faceSize,
+    iconSize: t.iconSize,
     versionId: a.versionId ?? 1,
     attackMotions: a.attackMotion ? [...a.attackMotion] : [],
     battleback1Name: a.battleTest?.battleback1Name ?? "",
     battleback2Name: a.battleTest?.battleback2Name ?? "",
     testTroopId: a.battleTest?.testTroopId ?? 0,
-    testBattlers: H(a.battleTest?.testBattlers, q),
-    battleBgm: i(a.bgm?.battleBgm),
-    victoryMe: i(a.me?.victoryMe),
+    testBattlers: qa(a.battleTest?.testBattlers, Fa),
+    battleBgm: s(a.bgm?.battleBgm),
+    victoryMe: s(a.me?.victoryMe),
     editMapId: a.editorTemporary?.editMapId ?? 0,
     battlerName: a.editorTemporary?.battlerName ?? "",
     locale: a.locale ?? "en-US",
@@ -278,21 +446,21 @@ const p = (a = {}) => ({
     startX: a.gameInit?.startX ?? 0,
     startY: a.gameInit?.startY ?? 0,
     windowTone: [0, 0, 0, 0],
-    terms: z(a.terms ?? {}),
-    itemCategories: T(a.itemCategories),
-    partyMembers: m(a.gameInit?.partyMembers),
+    terms: Ca(a.terms ?? {}),
+    itemCategories: Na(a.itemCategories),
+    partyMembers: n(a.gameInit?.partyMembers),
     battlerHue: 0,
-    menuCommands: k(a.menuCommands)
+    menuCommands: wa(a.menuCommands)
   };
-}, z = (a) => ({ basic: D(a.basic ?? {}), commands: x(a.commands ?? {}), params: S(a.params ?? {}), messages: M(a.messages ?? {}) }), m = (a) => a ? [...a] : [], G = (a) => a ? {
+}, Ca = (a) => ({ basic: E(a.basic ?? {}), commands: R(a.commands ?? {}), params: A(a.params ?? {}), messages: z(a.messages ?? {}) }), n = (a) => a ? [...a] : [], Da = (a) => a ? {
   tileSize: a.tileSize ?? 48,
   faceSize: a.faceSize ?? 144,
   iconSize: a.iconSize ?? 32
-} : { tileSize: 48, faceSize: 144, iconSize: 32 }, H = (a, o) => a ? a.map(o) : [], q = (a) => a ? {
+} : { tileSize: 48, faceSize: 144, iconSize: 32 }, qa = (a, t) => a ? a.map(t) : [], Fa = (a) => a ? {
   actorId: a.actorId,
-  equips: m(a.equips),
+  equips: n(a.equips),
   level: a.level
-} : { actorId: 0, equips: [], level: 1 }, O = (a = r({})) => ({
+} : { actorId: 0, equips: [], level: 1 }, he = (a = y({})) => ({
   versionId: a.versionId,
   menuCommands: a.menuCommands,
   locale: a.locale,
@@ -342,11 +510,11 @@ const p = (a = {}) => ({
     basic: a.terms.basic,
     commands: a.terms.commands,
     params: a.terms.params,
-    messages: I(a.terms.messages)
+    messages: H(a.terms.messages)
   }
-}), j = (a) => r({
+}), ve = (a) => y({
   versionId: a.versionId,
-  menuCommands: u(a),
+  menuCommands: Ia(a),
   locale: a.locale,
   gameInit: {
     startMapId: a.startMapId,
@@ -357,16 +525,16 @@ const p = (a = {}) => ({
   battle: { magicSkills: a.magicSkills },
   bgm: { titleBgm: a.titleBgm, battleBgm: a.battleBgm },
   options: a,
-  vehicles: {
-    airship: a.airship,
-    boat: a.boat,
-    ship: a.ship
-  },
+  vehicles: { airship: a.airship, boat: a.boat, ship: a.ship },
   images: { title1Name: a.title1Name, title2Name: a.title2Name },
-  me: { defeatMe: a.defeatMe, gameoverMe: a.gameoverMe, victoryMe: a.victoryMe },
+  me: {
+    defeatMe: a.defeatMe,
+    gameoverMe: a.gameoverMe,
+    victoryMe: a.victoryMe
+  },
   battleTest: { battleback1Name: a.battleback1Name, battleback2Name: a.battleback2Name, testTroopId: a.testTroopId, testBattlers: a.testBattlers },
   attackMotion: a.attackMotions,
-  sounds: d(a.sounds),
+  sounds: ua(a.sounds),
   dataNames: {
     skillTypes: a.skillTypes,
     weaponTypes: a.weaponTypes,
@@ -379,34 +547,33 @@ const p = (a = {}) => ({
   texts: { currencyUnit: a.currencyUnit, gameTitle: a.gameTitle },
   editorTemporary: { editMapId: a.editMapId, battlerName: a.battlerName, battlerHue: a.battlerHue },
   terms: {
-    basic: A(a.terms.basic),
-    commands: C(a.terms.commands),
-    params: w(a.terms.params),
+    basic: W(a.terms.basic),
+    commands: V(a.terms.commands),
+    params: L(a.terms.params),
     messages: a.terms.messages
   }
-}), K = ({ audio: a, image: o, text: e, switches: l, variables: n }) => r({
-  me: { defeatMe: i({
-    name: a,
-    volume: 90,
-    pitch: 100
-  }), gameoverMe: i({ name: a, volume: 90, pitch: 100 }), victoryMe: i({ name: a, volume: 100, pitch: 100 }) },
-  dataNames: {
-    armorTypes: [e, e],
-    equipTypes: [e, e],
-    elements: [e, e],
-    skillTypes: [e, e],
-    weaponTypes: [e, e],
-    switches: [l, l],
-    variables: [n, n]
-  },
-  bgm: { titleBgm: i({ name: a, volume: 90, pitch: 100 }), battleBgm: i({ name: a, volume: 90, pitch: 100 }) },
-  vehicles: { airship: s({
-    bgm: i({ name: a, volume: 90, pitch: 100 }),
-    characterName: o
-  }), boat: s({ bgm: i({ name: a, volume: 90, pitch: 100 }), characterName: o }), ship: s({ bgm: i({ name: a, volume: 90, pitch: 100 }), characterName: o }) },
-  images: { title1Name: o, title2Name: o },
-  texts: { gameTitle: e, currencyUnit: e },
-  terms: { basic: { exp: e, experience: e, hp: e, mp: e, hpA: e, mpA: e, level: e, levelA: e, tp: e, tpA: e }, messages: {
+}), xe = ({ audio: a, image: t, text: e, switches: m, variables: o }) => y({ me: { defeatMe: s({
+  name: a,
+  volume: 90,
+  pitch: 100
+}), gameoverMe: s({ name: a, volume: 90, pitch: 100 }), victoryMe: s({ name: a, volume: 100, pitch: 100 }) }, dataNames: {
+  armorTypes: [e, e],
+  equipTypes: [e, e],
+  elements: [e, e],
+  skillTypes: [e, e],
+  weaponTypes: [e, e],
+  switches: [m, m],
+  variables: [o, o]
+}, bgm: { titleBgm: s({ name: a, volume: 90, pitch: 100 }), battleBgm: s({ name: a, volume: 90, pitch: 100 }) }, vehicles: {
+  airship: c({
+    bgm: s({ name: a, volume: 90, pitch: 100 }),
+    characterName: t
+  }),
+  boat: c({ bgm: s({ name: a, volume: 90, pitch: 100 }), characterName: t }),
+  ship: c({ bgm: s({ name: a, volume: 90, pitch: 100 }), characterName: t })
+}, images: { title1Name: t, title2Name: t }, texts: { gameTitle: e, currencyUnit: e }, terms: {
+  basic: { exp: e, experience: e, hp: e, mp: e, hpA: e, mpA: e, level: e, levelA: e, tp: e, tpA: e },
+  messages: {
     actionFailure: e,
     actorDamage: e,
     actorDrain: e,
@@ -460,18 +627,9 @@ const p = (a = {}) => ({
     touchUI: e,
     seVolume: e,
     substitute: e
-  }, params: {
-    agi: e,
-    atk: e,
-    def: e,
-    mat: e,
-    mdf: e,
-    luk: e,
-    eva: e,
-    hit: e,
-    mhp: e,
-    mmp: e
-  }, commands: {
+  },
+  params: { agi: e, atk: e, def: e, mat: e, mdf: e, luk: e, eva: e, hit: e, mhp: e, mmp: e },
+  commands: {
     armor: e,
     item: e,
     skill: e,
@@ -496,71 +654,123 @@ const p = (a = {}) => ({
     keyItem: e,
     optimize: e,
     weapon: e
-  } },
-  sounds: V(a)
-}), V = (a) => {
-  const o = i({ name: a, volume: 90, pitch: 100 });
+  }
+}, sounds: za(a) }), za = (a) => {
+  const t = s({
+    name: a,
+    volume: 90,
+    pitch: 100
+  });
   return {
-    cursor: o,
-    actorCollapse: o,
-    actorDamage: o,
-    battleStart: o,
-    buzzer: o,
-    enemyAttack: o,
-    bossCollapes1: o,
-    bossCollapes2: o,
-    enemyCollapse: o,
-    enemyDamage: o,
-    escape: o,
-    playEvasion: o,
-    playMagicEvasion: o,
-    playMiss: o,
-    playRecovery: o,
-    save: o,
-    shop: o,
-    cancel: o,
-    useItem: o,
-    useSkill: o,
-    load: o,
-    equip: o,
-    ok: o,
-    playReflection: o
+    cursor: t,
+    actorCollapse: t,
+    actorDamage: t,
+    battleStart: t,
+    buzzer: t,
+    enemyAttack: t,
+    bossCollapes1: t,
+    bossCollapes2: t,
+    enemyCollapse: t,
+    enemyDamage: t,
+    escape: t,
+    playEvasion: t,
+    playMagicEvasion: t,
+    playMiss: t,
+    playRecovery: t,
+    save: t,
+    shop: t,
+    cancel: t,
+    useItem: t,
+    useSkill: t,
+    load: t,
+    equip: t,
+    ok: t,
+    playReflection: t
   };
 };
 export {
-  D as A,
-  A as B,
-  x as C,
-  E as D,
-  C as E,
-  M as F,
-  K as G,
-  F as H,
-  s as I,
-  u as a,
-  y as b,
-  I as c,
-  h as d,
-  U as e,
-  b as f,
-  P as g,
-  X as h,
-  f as i,
-  g as j,
-  v as k,
-  L as l,
-  N as m,
-  R as n,
-  T as o,
-  W as p,
-  k as q,
-  Y as r,
-  S as s,
-  w as t,
-  c as u,
-  d as v,
-  p as w,
-  r as x,
-  j as y,
-  O as z
+  Za as $,
+  Ya as A,
+  P as B,
+  La as C,
+  K as D,
+  Va as E,
+  j as F,
+  Q as G,
+  O as H,
+  X as I,
+  Y as J,
+  U as K,
+  G as L,
+  b as M,
+  ja as N,
+  Ka as O,
+  g as P,
+  na as Q,
+  Ba as R,
+  se as S,
+  pa as T,
+  ne as U,
+  J as V,
+  Na as W,
+  ue as X,
+  da as Y,
+  ce as Z,
+  ea as _,
+  Ia as a,
+  Z as a0,
+  _ as a1,
+  aa as a2,
+  Ja as a3,
+  _a as a4,
+  ta as a5,
+  wa as a6,
+  Ie as a7,
+  ra as a8,
+  ga as a9,
+  le as aa,
+  ba as ab,
+  ua as ac,
+  la as ad,
+  pe as ae,
+  ya as af,
+  y as ag,
+  ve as ah,
+  he as ai,
+  Ua as aj,
+  xe as ak,
+  Ma as al,
+  Oa as am,
+  $ as an,
+  $a as ao,
+  c as ap,
+  ca as aq,
+  oe as ar,
+  ae as as,
+  te as at,
+  xa as b,
+  Pa as c,
+  Ta as d,
+  de as e,
+  ha as f,
+  ye as g,
+  be as h,
+  fa as i,
+  va as j,
+  ka as k,
+  ge as l,
+  sa as m,
+  ie as n,
+  ia as o,
+  re as p,
+  Ga as q,
+  Qa as r,
+  Sa as s,
+  ma as t,
+  ee as u,
+  me as v,
+  l as w,
+  Wa as x,
+  Ha as y,
+  Xa as z
 };

@@ -1,5 +1,5 @@
 import { IdentifiedItems } from '../../../libs';
-import { Data_Actor, Data_Class, Data_Skill, Data_Item, Data_Weapon, Data_Armor, Data_Enemy, Data_Troop, Data_State, Data_Animation, Data_Tileset, Data_CommonEvent, Data_MapInfo } from '../../../rmmz';
+import { Data_Actor, Data_Class, Data_Skill, Data_Item, Data_Weapon, Data_Armor, Data_Enemy, Data_Troop, Data_State, Data_Animation, Data_Tileset, Data_CommonEvent, Data_MapInfo, Data_Map } from '../../../rmmz';
 import type * as Name from "./constants/index";
 export type MainDataFileNames = (typeof Name)[keyof typeof Name];
 export interface ArrayDataErrorMessages {
@@ -31,4 +31,8 @@ export interface MainDataFileEntry<T> {
     filename: MainDataFileNames;
     data: IdentifiedItems<T>;
 }
-export type MainDataFileUnion = MainDataFileEntry<Data_Actor> | MainDataFileEntry<Data_Class> | MainDataFileEntry<Data_Skill> | MainDataFileEntry<Data_Item> | MainDataFileEntry<Data_Weapon> | MainDataFileEntry<Data_Armor> | MainDataFileEntry<Data_Enemy> | MainDataFileEntry<Data_Troop> | MainDataFileEntry<Data_State> | MainDataFileEntry<Data_Animation> | MainDataFileEntry<Data_Tileset> | MainDataFileEntry<Data_CommonEvent> | MainDataFileEntry<Data_MapInfo>;
+export interface MapDataFileEntry {
+    filename: `Map${string}.json`;
+    data: Data_Map;
+}
+export type MainDataFileUnion = MainDataFileEntry<Data_Actor> | MainDataFileEntry<Data_Class> | MainDataFileEntry<Data_Skill> | MainDataFileEntry<Data_Item> | MainDataFileEntry<Data_Weapon> | MainDataFileEntry<Data_Armor> | MainDataFileEntry<Data_Enemy> | MainDataFileEntry<Data_Troop> | MainDataFileEntry<Data_State> | MainDataFileEntry<Data_Animation> | MainDataFileEntry<Data_Tileset> | MainDataFileEntry<Data_CommonEvent> | MainDataFileEntry<Data_MapInfo> | MapDataFileEntry;
