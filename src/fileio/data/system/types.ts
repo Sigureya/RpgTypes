@@ -19,6 +19,13 @@ export interface ReadSystemResult<T = Data_System> {
   message: string;
 }
 
+export interface ReadSystemResultSuccess<
+  T = Data_System,
+> extends ReadSystemResult<T> {
+  system: T;
+  message: string;
+}
+
 export interface SystemDataFileEntry {
   filename: typeof FILENAME_SYSTEM;
   data: Data_System;

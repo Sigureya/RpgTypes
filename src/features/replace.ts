@@ -1,4 +1,10 @@
-import type { RawGameData } from "@RpgTypes/fileio";
+import type { FileEntry } from "@RpgTypes/fileio";
+import {
+  FILANEME_AUX_ACTOR_TEXTS,
+  FILENAME_AUX_DICTIONARY,
+  rawGameDataToMainDataFileEntries,
+  type RawGameData,
+} from "@RpgTypes/fileio";
 import type { KeyValuePairEx } from "@RpgTypes/libs";
 import type { NormalizedEventCommand } from "@RpgTypes/rmmz";
 import type { MapDataReplaceHandlers } from "./core/replace/types";
@@ -7,12 +13,21 @@ import { createActorTextDictionary } from "./core/rpg";
 import type {
   ReplaceRawDataContext,
   GameDataReplaceOutput,
+  ReplaceAuxiliaryData,
 } from "./core/types/replace";
 import type { EventContainerExtractor } from "./extractText";
 export {
   replaceRawDataBundle,
   replaceRawDataWithAutoNoteFilter,
 } from "./core/replaceBundle";
+
+export const replaceDataDirectToFileEntries = (
+  context: ReplaceRawDataContext,
+  extractor: EventContainerExtractor,
+): FileEntry[] => {
+  const output = replaceDataDirect(context, extractor);
+  return rawGameDataToMainDataFileEntries(output);
+};
 
 export const replaceDataDirect = (
   { assetBundle, data, dictionary, textKeys }: ReplaceRawDataContext,
@@ -34,6 +49,22 @@ export const replaceDataDirect = (
     extractor,
     handlers,
   );
+};
+
+export const replaceDataWithHashToFileEntries = <T extends string>(
+  context: ReplaceRawDataContext,
+  extractor: EventContainerExtractor,
+  hashFn: (text: string) => T,
+): FileEntry[] => {
+  const output = replaceDataWithHash(context, extractor, hashFn);
+  return [...rawGameDataToMainDataFileEntries(output.main), ...oox(output.aux)];
+};
+
+const oox = <T>(data: ReplaceAuxiliaryData<T>): FileEntry[] => {
+  return [
+    { data: data.actorTextDictionary, filename: FILANEME_AUX_ACTOR_TEXTS },
+    { data: data.newTextDictionary, filename: FILENAME_AUX_DICTIONARY },
+  ];
 };
 
 export const replaceDataWithHash = <T extends string>(

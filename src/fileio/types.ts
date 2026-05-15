@@ -17,3 +17,8 @@ export interface FileReadFailed {
   message: string;
   filename: string;
 }
+
+export interface FileEntry {
+  filename: string;
+  data: object;
+}
