@@ -10,6 +10,7 @@ import type {
   Data_MapInfo,
   Data_Skill,
   Data_State,
+  Data_System,
   Data_Tileset,
   Data_TroopUnknonw,
   Data_Weapon,
@@ -136,6 +137,7 @@ export interface ReadGameDataResultNullable<
 
 export interface RawGameData<
   Command extends EventCommandUnknown = EventCommand,
+  System = Data_System,
 > extends ReadAllDataFields {
   actors: ReadArrayResult<Data_Actor>;
   armors: ReadArrayResult<Data_Armor>;
@@ -146,7 +148,7 @@ export interface RawGameData<
   mapInfos: ReadArrayResult<Data_MapInfo>;
   skills: ReadArrayResult<Data_Skill>;
   states: ReadArrayResult<Data_State>;
-  system: ReadSystemResult;
+  system: ReadSystemResult<System>;
   troops: ReadArrayResult<Data_TroopUnknonw<Command>>;
   weapons: ReadArrayResult<Data_Weapon>;
   tilesets: ReadArrayResult<Data_Tileset>;

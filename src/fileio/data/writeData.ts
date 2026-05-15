@@ -1,5 +1,11 @@
 import type { IdentifiedItems } from "@RpgTypes/libs";
-import type { Data_Map, MapFileInfo, RpgDataBundle } from "@RpgTypes/rmmz";
+import type { Data_System } from "@RpgTypes/rmmz";
+import {
+  makeSystemData,
+  type Data_Map,
+  type MapFileInfo,
+  type RpgDataBundle,
+} from "@RpgTypes/rmmz";
 import type {
   MainDataFileEntry,
   MainDataFileNames,
@@ -26,13 +32,19 @@ import {
 import type { MapBatchReadResult, MapFileNameWithExt } from "./map";
 import { writeMapFiles } from "./map";
 import type { RawGameData } from "./resultType";
+import type { SystemDataFileEntry } from "./system";
 import { FILENAME_SYSTEM } from "./system";
 import type { DataFileNames } from "./types";
 
 export const rawGameDataToMainDataFileEntries = (
   data: RawGameData,
-): MainDataFileUnion[] => {
+  makeSystemDataFn: () => Data_System = () => makeSystemData({}),
+): (MainDataFileUnion | SystemDataFileEntry)[] => {
   return [
+    {
+      filename: FILENAME_SYSTEM,
+      data: data.system.system ? data.system.system : makeSystemDataFn(),
+    },
     xxxx(FILENAME_ACTORS, data.actors.data),
     xxxx(FILENAME_CLASSES, data.classes.data),
     xxxx(FILENAME_SKILLS, data.skills.data),
