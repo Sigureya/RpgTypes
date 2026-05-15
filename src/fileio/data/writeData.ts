@@ -1,10 +1,11 @@
 import type { IdentifiedItems } from "@RpgTypes/libs";
-import type { Data_Map, RpgDataBundle } from "@RpgTypes/rmmz";
+import type { Data_Map, MapFileInfo, RpgDataBundle } from "@RpgTypes/rmmz";
 import type {
   MainDataFileEntry,
   MainDataFileNames,
   MainDataFileUnion,
   MainDataIdentifiedItems,
+  MapDataFileEntry,
 } from "./arrayData";
 import {
   FILENAME_ACTORS,
@@ -45,7 +46,15 @@ export const rawGameDataToMainDataFileEntries = (
     xxxx(FILENAME_TILESET, data.tilesets.data),
     xxxx(FILENAME_COMMON_EVENTS, data.commonEvents.data),
     xxxx(FILENAME_MAP_INFOS, data.mapInfos.data),
+    ...mmmm(data.mapFiles.validMaps),
   ];
+};
+
+const mmmm = (maps: ReadonlyArray<MapFileInfo>): MapDataFileEntry[] => {
+  return maps.map((map) => ({
+    filename: `${map.filename}.json`,
+    data: map.map,
+  }));
 };
 
 const xxxx = <T>(

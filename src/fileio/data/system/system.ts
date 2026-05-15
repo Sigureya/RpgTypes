@@ -1,11 +1,10 @@
 import { makeSystemDataFromMV } from "@RpgTypes/rmmz";
+import { FILENAME_SYSTEM } from "./constants";
 import type {
   SystemDataErrorMessages,
   SystemDataReadHandler,
   ReadSystemResult,
 } from "./types";
-
-export const FILENAME_SYSTEM = "System.json";
 
 export const readSystemData = async (
   terms: SystemDataErrorMessages,

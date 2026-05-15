@@ -13,6 +13,7 @@ import type {
   Data_Tileset,
   Data_CommonEvent,
   Data_MapInfo,
+  Data_Map,
 } from "@RpgTypes/rmmz";
 import type * as Name from "./constants/index";
 
@@ -51,6 +52,11 @@ export interface MainDataFileEntry<T> {
   data: IdentifiedItems<T>;
 }
 
+export interface MapDataFileEntry {
+  filename: `Map${string}.json`;
+  data: Data_Map;
+}
+
 export type MainDataFileUnion =
   | MainDataFileEntry<Data_Actor>
   | MainDataFileEntry<Data_Class>
@@ -64,4 +70,5 @@ export type MainDataFileUnion =
   | MainDataFileEntry<Data_Animation>
   | MainDataFileEntry<Data_Tileset>
   | MainDataFileEntry<Data_CommonEvent>
-  | MainDataFileEntry<Data_MapInfo>;
+  | MainDataFileEntry<Data_MapInfo>
+  | MapDataFileEntry;
