@@ -7,6 +7,7 @@ export interface ReplaceRawDataInput {
 }
 export interface ReplaceAuxiliaryData<T> {
     actorTextDictionary: KeyValuePairEx<T, string>[];
+    newTextDictionary: KeyValuePairEx<T, string>[];
 }
 export interface ReplaceRawDataContext {
     data: RawGameData;
