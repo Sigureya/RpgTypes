@@ -8,16 +8,16 @@ import type {
 import { makeRawTestDataBundle } from "@RpgTypes/fileio";
 import type { TestDataSourceWithNote } from "@RpgTypes/libs";
 import type { Data_CommonEvent, Data_Map, Data_Troop } from "@RpgTypes/rmmz";
-import type { MapDataReplaceHandlers } from "./core/replace";
 import type {
   EventContainerExtractor,
   ExtractedBattleEventText,
   ExtractedMapTexts,
-} from "./extractText";
+} from "./extract";
+import type { MapDataReplaceHandlers } from "./replace";
 import {
   replaceRawDataBundle,
   replaceRawDataWithAutoNoteFilter,
-} from "./replace";
+} from "./replaceBundle";
 
 const IMAGE_NAME = "ImageName";
 const VALIABLE_TEXT = "Variables";
