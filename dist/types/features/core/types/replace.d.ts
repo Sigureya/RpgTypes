@@ -1,6 +1,6 @@
-import { AssetFilesBundle, RawGameData } from '../../fileio';
-import { KeyValuePairEx } from '../../libs';
-import { NormalizedEventCommand } from '../../rmmz';
+import { AssetFilesBundle, RawGameData } from '../../../fileio';
+import { KeyValuePairEx } from '../../../libs';
+import { NormalizedEventCommand } from '../../../rmmz';
 export interface ReplaceRawDataInput {
     basicData: RawGameData<NormalizedEventCommand>;
     adtionalData: ReplaceAuxiliaryData<string>;
