@@ -2,17 +2,17 @@ import type { RawGameData } from "@RpgTypes/fileio";
 import type { KeyValuePairEx } from "@RpgTypes/libs";
 import type { NormalizedEventCommand } from "@RpgTypes/rmmz";
 import type { MapDataReplaceHandlers } from "./core/replace/types";
-import {
-  replaceRawDataBundle,
-  replaceRawDataWithAutoNoteFilter,
-} from "./core/replaceBundle";
+import { replaceRawDataWithAutoNoteFilter } from "./core/replaceBundle";
 import { createActorTextDictionary } from "./core/rpg";
 import type { EventContainerExtractor } from "./extractText";
 import type {
   GameDataReplaceOutput,
   ReplaceRawDataContext,
 } from "./types/replace";
-export { replaceRawDataBundle };
+export {
+  replaceRawDataBundle,
+  replaceRawDataWithAutoNoteFilter,
+} from "./core/replaceBundle";
 
 export const replaceDataDirect = (
   { assetBundle, data, dictionary, textKeys }: ReplaceRawDataContext,
