@@ -4,11 +4,11 @@ import type { NormalizedEventCommand } from "@RpgTypes/rmmz";
 import type { MapDataReplaceHandlers } from "./core/replace/types";
 import { replaceRawDataWithAutoNoteFilter } from "./core/replaceBundle";
 import { createActorTextDictionary } from "./core/rpg";
-import type { EventContainerExtractor } from "./extractText";
 import type {
-  GameDataReplaceOutput,
   ReplaceRawDataContext,
-} from "./types/replace";
+  GameDataReplaceOutput,
+} from "./core/types/replace";
+import type { EventContainerExtractor } from "./extractText";
 export {
   replaceRawDataBundle,
   replaceRawDataWithAutoNoteFilter,
