@@ -1,54 +1,50 @@
-import { d as N, h as D, b as f, f as A, F as S, i as _, j as v, m as F, g as y, c as g, a as L, e as O, k as u, r as q, l as k } from "../shared/system.es.js";
-import { m as Q, a as aa } from "../shared/make.es.js";
-import { k as sa, l as ea, n as ta, v as ra, L as ma, P as w, Y as ia, C as na, Z as oa, X as la, V as da, H as ca, K as Ea, a1 as pa, d as Ia, i as Ma, a as Na, S as G } from "../shared/makeTestData.es.js";
-import { G as Da } from "../shared/makeSystemEx.es.js";
-const as = "bgm", ss = "se", es = "me", ts = "bgs", rs = "img", ms = "audio", is = (a) => [...I(a.bgm, { asset: "audio", subDir: "bgm" }), ...I(a.bgs, {
+import { d as f, h as y, b as D, f as v, F as S, i as A, j as _, m as F, g, c as u, a as L, e as O, k as T, l as w } from "../shared/constants.es.js";
+import { m as X, a as aa } from "../shared/commands.es.js";
+import { x as ea, y as sa, z as ta, H as ra, _ as ma, a2 as G, aj as ia, ak as na, O as la, am as oa, ae as da, aa as ca, U as pa, Z as Ea, ar as Ia, p as Ma, v as Na, n as fa, a5 as C, ah as ya } from "../shared/makeSystemEx.es.js";
+const re = "bgm", me = "se", ie = "me", ne = "bgs", le = "img", oe = "audio", de = (a) => [...I(a.bgm, { asset: "audio", subDir: "bgm" }), ...I(a.bgs, { asset: "audio", subDir: "bgs" }), ...I(a.me, {
   asset: "audio",
-  subDir: "bgs"
-}), ...I(a.me, { asset: "audio", subDir: "me" }), ...I(a.se, { asset: "audio", subDir: "se" })], ns = (a) => [...I(a.characters, { asset: "img", subDir: "characters" }), ...I(a.faces, {
+  subDir: "me"
+}), ...I(a.se, { asset: "audio", subDir: "se" })], ce = (a) => [...I(a.characters, { asset: "img", subDir: "characters" }), ...I(a.faces, { asset: "img", subDir: "faces" }), ...I(a.svEnemy, {
   asset: "img",
-  subDir: "faces"
-}), ...I(a.svEnemy, { asset: "img", subDir: "sv_enemies" }), ...I(a.svActors, { asset: "img", subDir: "sv_actors" }), ...I(a.enemies, {
-  asset: "img",
-  subDir: "enemies"
-})], I = (a, s) => Array.from(a).sort().map(((e) => ({
-  asset: s.asset,
-  subDir: s.subDir,
-  symbol: e
-}))), os = "battlebacks1", ls = "battlebacks2", ds = "characters", cs = "enemies", Es = "faces", ps = "parallaxes", Is = "pictures", Ms = "sv_actors", Ns = "sv_enemies", Ds = "system", fs = "tilesets", As = "titles1", Ss = "titles2", c = async (a, s, e, t) => e(s).then(((r) => fa(r, s, a, t))).catch((() => ({
+  subDir: "sv_enemies"
+}), ...I(a.svActors, { asset: "img", subDir: "sv_actors" }), ...I(a.enemies, { asset: "img", subDir: "enemies" })], I = (a, e) => Array.from(a).sort().map(((s) => ({
+  asset: e.asset,
+  subDir: e.subDir,
+  symbol: s
+}))), pe = "battlebacks1", Ee = "battlebacks2", Ie = "characters", Me = "enemies", Ne = "faces", fe = "parallaxes", ye = "pictures", De = "sv_actors", ve = "sv_enemies", Se = "system", Ae = "tilesets", _e = "titles1", Fe = "titles2", c = async (a, e, s, t) => s(e).then(((r) => Da(r, e, a, t))).catch((() => ({
   success: !1,
-  fileName: s,
+  fileName: e,
   data: [],
   error: a.jsonParseError
-}))), fa = (a, s, e, t) => {
+}))), Da = (a, e, s, t) => {
   try {
     const r = JSON.parse(a);
-    return Array.isArray(r) ? { success: !0, fileName: s, data: r.filter(t), error: "" } : {
+    return Array.isArray(r) ? { success: !0, fileName: e, data: r.filter(t), error: "" } : {
       success: !1,
-      fileName: s,
+      fileName: e,
       data: [],
-      error: e.notArray
+      error: s.notArray
     };
   } catch {
-    return { success: !1, fileName: s, data: [], error: e.jsonParseError };
+    return { success: !1, fileName: e, data: [], error: s.jsonParseError };
   }
-}, Aa = (a, s, e) => c(a, L, s, e), Sa = (a, s, e) => c(a, N, s, e), _a = (a, s, e) => c(a, _, s, e), va = (a, s, e) => c(a, A, s, e), Fa = (a, s, e) => c(a, g, s, e), ya = (a, s, e) => c(a, O, s, e), ga = (a, s, e) => c(a, f, s, e), La = (a, s, e) => c(a, y, s, e), Oa = (a, s, e) => c(a, v, s, e), ua = (a, s, e) => c(a, u, s, e), Ta = (a, s, e) => c(a, F, s, e), Ra = (a, s, e) => c(a, D, s, e), ba = (a, s, e) => c(a, S, s, e), o = (a, s, e) => e(a, JSON.stringify(s)), C = (a, s) => Promise.all([o(L, a.actors, s), o(N, a.classes, s), o(_, a.skills, s), o(A, a.items, s), o(g, a.weapons, s), o(O, a.armors, s), o(f, a.enemies, s), o(y, a.troops, s), o(v, a.states, s), o(u, a.animations, s), o(F, a.tilesets, s), o(D, a.commonEvents, s), o(S, a.mapInfos, s)]), _s = (a) => ({
-  main: ha(a),
-  map: a.mapFiles.invalidMaps.map(((s) => ({ fileName: s.filename, error: s.message })))
-}), ha = (a) => {
-  const s = [a.actors, a.armors, a.classes, a.commonEvents, a.enemies, a.items, a.skills, a.states, a.troops, a.weapons, a.mapInfos].filter(((e) => !e.success)).map(((e) => ({
-    fileName: e.fileName,
-    error: e.error
+}, va = (a, e, s) => c(a, L, e, s), Sa = (a, e, s) => c(a, f, e, s), Aa = (a, e, s) => c(a, A, e, s), _a = (a, e, s) => c(a, v, e, s), Fa = (a, e, s) => c(a, u, e, s), ga = (a, e, s) => c(a, O, e, s), ua = (a, e, s) => c(a, D, e, s), La = (a, e, s) => c(a, g, e, s), Oa = (a, e, s) => c(a, _, e, s), Ta = (a, e, s) => c(a, T, e, s), Ra = (a, e, s) => c(a, F, e, s), ba = (a, e, s) => c(a, y, e, s), ha = (a, e, s) => c(a, S, e, s), l = (a, e, s) => s(a, JSON.stringify(e)), x = (a, e) => Promise.all([l(L, a.actors, e), l(f, a.classes, e), l(A, a.skills, e), l(v, a.items, e), l(u, a.weapons, e), l(O, a.armors, e), l(D, a.enemies, e), l(g, a.troops, e), l(_, a.states, e), l(T, a.animations, e), l(F, a.tilesets, e), l(y, a.commonEvents, e), l(S, a.mapInfos, e)]), ge = (a) => ({
+  main: wa(a),
+  map: a.mapFiles.invalidMaps.map(((e) => ({ fileName: e.filename, error: e.message })))
+}), wa = (a) => {
+  const e = [a.actors, a.armors, a.classes, a.commonEvents, a.enemies, a.items, a.skills, a.states, a.troops, a.weapons, a.mapInfos].filter(((s) => !s.success)).map(((s) => ({
+    fileName: s.fileName,
+    error: s.error
   })));
-  return a.system.system === null ? [{ fileName: a.system.message, error: a.system.message }, ...s] : s;
-}, ka = (a) => [Q({
+  return a.system.system === null ? [{ fileName: a.system.message, error: a.system.message }, ...e] : e;
+}, ka = (a) => [X({
   facename: a.image,
   faceIndex: 0,
   speakerName: a.text
-}), aa(a.text), sa({ actorId: 1, characterName: a.image, characterIndex: 0, battlerName: a.image, faceName: a.image, faceIndex: 0 }), ea({ name: a.text, actorId: 1 }), ta({
+}), aa(a.text), ea({ actorId: 1, characterName: a.image, characterIndex: 0, battlerName: a.image, faceName: a.image, faceIndex: 0 }), sa({ name: a.text, actorId: 1 }), ta({
   nickname: a.text,
   actorId: 1
-}), ra(a.text)], wa = (a) => ma({
+}), ra(a.text)], Ga = (a) => ma({
   note: a.note,
   displayName: a.text,
   bgm: { name: a.audio, pan: 0, pitch: 100, volume: 100 },
@@ -56,138 +52,160 @@ const as = "bgm", ss = "se", es = "me", ts = "bgs", rs = "img", ms = "audio", is
   battleback1Name: a.image,
   battleback2Name: a.image,
   parallaxName: a.image,
-  events: [null, { id: 1, name: "", note: a.note, x: 0, y: 0, pages: [Ga(a), Ca(a)] }]
-}), Ga = (a) => w({ image: {
+  events: [null, { id: 1, name: "", note: a.note, x: 0, y: 0, pages: [Ca(a), xa(a)] }]
+}), Ca = (a) => G({ image: {
   characterName: a.image,
   tileId: 0,
   characterIndex: 0,
   direction: 2,
   pattern: 0
-}, list: ia(a) }), Ca = (a) => w({ image: { characterIndex: 0, characterName: a.image, tileId: 0, direction: 4, pattern: 0 }, list: ka(a) }), vs = (a) => {
-  const { message: s } = a;
+}, list: ia(a) }), xa = (a) => G({ image: { characterIndex: 0, characterName: a.image, tileId: 0, direction: 4, pattern: 0 }, list: ka(a) }), ue = (a) => {
+  const { message: e } = a;
   return {
-    actors: p(Na(a), s, L),
-    classes: p(Ma(a), s, N),
-    armors: p(Ia(a), s, O),
-    weapons: p(pa(a), s, g),
-    items: p(Ea(a), s, A),
-    enemies: p(ca(a), s, f),
-    skills: p(da(a), s, _),
-    states: p(la(a), s, v),
-    troops: p(oa({
+    actors: E(fa(a), e, L),
+    classes: E(Na(a), e, f),
+    armors: E(Ma(a), e, O),
+    weapons: E(Ia(a), e, u),
+    items: E(Ea(a), e, v),
+    enemies: E(pa(a), e, D),
+    skills: E(ca(a), e, A),
+    states: E(da(a), e, _),
+    troops: E(oa({
       id: 1,
       name: a.nonReplaceableText
-    }), s, y),
-    commonEvents: p(na({ id: 1, name: a.nonReplaceableText }), s, D),
-    mapInfos: R(s, S),
-    animations: R(s, u),
-    tilesets: R(s, F),
-    system: { system: Da(a), message: s },
-    mapFiles: { info: { success: !0 }, invalidMaps: [], validMaps: [xa(a)] }
+    }), e, g),
+    commonEvents: E(la({ id: 1, name: a.nonReplaceableText }), e, y),
+    mapInfos: b(e, S),
+    animations: b(e, T),
+    tilesets: b(e, F),
+    system: { system: na(a), message: e },
+    mapFiles: { info: { success: !0 }, invalidMaps: [], validMaps: [Pa(a)] }
   };
-}, xa = (a) => ({ filename: "Map001", editingName: "Test Map", map: wa(a) }), R = (a, s) => ({
+}, Pa = (a) => ({ filename: "Map001", editingName: "Test Map", map: Ga(a) }), b = (a, e) => ({
   data: [],
   error: a,
-  fileName: s,
+  fileName: e,
   success: !0
-}), p = (a, s, e) => ({ data: [a], error: s, fileName: e, success: !0 }), Pa = (a, s, e, t) => e(ja(a)).then(((r) => Ba(r, a, s, t))).catch((() => b(a, s.fileNotFound))), Ba = (a, s, e, t) => {
+}), E = (a, e, s) => ({ data: [a], error: e, fileName: s, success: !0 }), ja = (a, e, s, t) => s(Ja(a)).then(((r) => Ba(r, a, e, t))).catch((() => h(a, e.fileNotFound))), Ba = (a, e, s, t) => {
   try {
     const r = JSON.parse(a);
-    return t(r) ? { map: r, filename: x(s), editingName: s.name } : b(s, e.invalidStructure);
+    return t(r) ? { map: r, filename: P(e), editingName: e.name } : h(e, s.invalidStructure);
   } catch {
-    return b(s, e.jsonParseError);
+    return h(e, s.jsonParseError);
   }
-}, ja = (a) => `Map${G(a.id)}.json`, x = (a) => `Map${G(a.id)}`, b = (a, s) => ({ map: null, message: s, filename: x(a), editingName: a.name }), Fs = (a, s, e, t) => P(a, s, e, t, ((r) => r.map)), P = async (a, s, e, t, r) => {
-  const n = await Promise.all(a.map((async (T) => Wa(T, s, e, r, t))));
-  return Ja(n);
-}, Wa = async (a, s, e, t, r) => {
-  const n = await Pa(a, s, e, r);
+}, Ja = (a) => `Map${C(a.id)}.json`, P = (a) => `Map${C(a.id)}`, h = (a, e) => ({ map: null, message: e, filename: P(a), editingName: a.name }), Le = (a, e, s, t) => j(a, e, s, t, ((r) => r.map)), j = async (a, e, s, t, r) => {
+  const n = await Promise.all(a.map((async (R) => Ua(R, e, s, r, t))));
+  return Wa(n);
+}, Ua = async (a, e, s, t, r) => {
+  const n = await ja(a, e, s, r);
   return n.map === null ? n : {
     editingName: n.editingName,
     filename: n.filename,
     map: t(n)
   };
-}, Ja = (a) => ({
-  info: { success: !0 },
-  validMaps: a.filter(((s) => s.map !== null)),
-  invalidMaps: a.filter(((s) => s.map === null)).map(((s) => ({
-    filename: s.filename,
-    message: s.message,
-    map: null,
-    editingName: s.editingName
-  })))
-}), Ua = (a, s) => s(`${a.filename}.json`, JSON.stringify(a.map)), B = (a, s) => Promise.all(a.map(((e) => Ua(e, s)))), ys = async (a, s, e) => h(a, s, {
-  readMap: Va,
-  readActors: l,
-  readArmors: l,
-  readClasses: l,
-  readCommonEvents: l,
-  readEnemies: l,
-  readItems: l,
-  readSkills: l,
-  readStates: l,
-  readSystem: l,
-  readTroops: l,
-  readWeapons: l,
-  readAnimations: l,
-  readTilesets: l
-}, e, (() => [])), Va = (a) => a.map, l = (a) => a, gs = (a, s, e, t) => h(a, s, t, e, (() => [])), Ls = (a, s, e, t) => h(a, s, t, e, (() => null)), h = async (a, s, e, t, r) => {
-  const [n, T, W, J, U, V, K, H, Y, $, z, X, M, Z] = await Promise.all([Ra(a, s, ((m) => t.validateCommonEvent(m))), La(a, s, ((m) => t.validateTroop(m))), ga(a, s, ((m) => t.validateEnemy(m))), Sa(a, s, ((m) => t.validateClass(m))), _a(a, s, ((m) => t.validateSkill(m))), va(a, s, ((m) => t.validateItem(m))), Fa(a, s, ((m) => t.validateWeapon(m))), ya(a, s, ((m) => t.validateArmor(m))), Oa(a, s, ((m) => t.validateState(m))), Aa(a, s, ((m) => t.validateActor(m))), ua(a, s, ((m) => t.validateAnimation(m))), Ta(a, s, ((m) => t.validateTileset(m))), ba(a, s, ((m) => t.validateMapInfo(m))), q(a, s, {
+}, Wa = (a) => ({ info: { success: !0 }, validMaps: a.filter(((e) => e.map !== null)), invalidMaps: a.filter(((e) => e.map === null)).map(((e) => ({
+  filename: e.filename,
+  message: e.message,
+  map: null,
+  editingName: e.editingName
+}))) }), za = (a, e) => e(`${a.filename}.json`, JSON.stringify(a.map)), B = (a, e) => Promise.all(a.map(((s) => za(s, e)))), Va = async (a, e, s) => {
+  try {
+    const t = await e(w);
+    return $a(t, a, s);
+  } catch {
+    return N(a.fileNotFound);
+  }
+}, N = (a) => ({ system: null, message: a }), $a = (a, e, s) => {
+  try {
+    const t = JSON.parse(a);
+    return Ha(t, e, s);
+  } catch {
+    return N(e.jsonParseError);
+  }
+}, Ha = (a, e, s) => {
+  try {
+    return s.validateSystemMz(a) ? { system: a, message: "" } : s.validateSystemMv && s.validateSystemMv(a) ? {
+      system: ya(a),
+      message: e.mvAsMz
+    } : N(e.invalidStructure);
+  } catch {
+    return N(e.validateFunctionError);
+  }
+}, Oe = async (a, e, s) => k(a, e, {
+  readMap: Ka,
+  readActors: o,
+  readArmors: o,
+  readClasses: o,
+  readCommonEvents: o,
+  readEnemies: o,
+  readItems: o,
+  readSkills: o,
+  readStates: o,
+  readSystem: o,
+  readTroops: o,
+  readWeapons: o,
+  readAnimations: o,
+  readTilesets: o
+}, s, (() => [])), Ka = (a) => a.map, o = (a) => a, Te = (a, e, s, t) => k(a, e, t, s, (() => [])), Re = (a, e, s, t) => k(a, e, t, s, (() => null)), k = async (a, e, s, t, r) => {
+  const [n, R, U, W, z, V, $, H, K, Y, Z, q, M, Q] = await Promise.all([ba(a, e, ((m) => t.validateCommonEvent(m))), La(a, e, ((m) => t.validateTroop(m))), ua(a, e, ((m) => t.validateEnemy(m))), Sa(a, e, ((m) => t.validateClass(m))), Aa(a, e, ((m) => t.validateSkill(m))), _a(a, e, ((m) => t.validateItem(m))), Fa(a, e, ((m) => t.validateWeapon(m))), ga(a, e, ((m) => t.validateArmor(m))), Oa(a, e, ((m) => t.validateState(m))), va(a, e, ((m) => t.validateActor(m))), Ta(a, e, ((m) => t.validateAnimation(m))), Ra(a, e, ((m) => t.validateTileset(m))), ha(a, e, ((m) => t.validateMapInfo(m))), Va(a, e, {
     validateSystemMz: (m) => t.validateSystem(m),
     validateSystemMv: t.validateSystemMV
   })]);
   return {
-    mapFiles: M.success ? await Ha(M.data, a, e, s, t.validateMap) : Ka(M),
-    actors: E($, a, e.readActors, r),
-    armors: E(H, a, e.readArmors, r),
-    classes: E(J, a, e.readClasses, r),
-    commonEvents: E(n, a, e.readCommonEvents, r),
-    enemies: E(W, a, e.readEnemies, r),
-    items: E(V, a, e.readItems, r),
+    mapFiles: M.success ? await Za(M.data, a, s, e, t.validateMap) : Ya(M),
+    actors: p(Y, a, s.readActors, r),
+    armors: p(H, a, s.readArmors, r),
+    classes: p(W, a, s.readClasses, r),
+    commonEvents: p(n, a, s.readCommonEvents, r),
+    enemies: p(U, a, s.readEnemies, r),
+    items: p(V, a, s.readItems, r),
     mapInfos: M,
-    skills: E(U, a, e.readSkills, r),
-    states: E(Y, a, e.readStates, r),
-    system: Ya(Z, a, e.readSystem),
-    troops: E(T, a, e.readTroops, r),
-    weapons: E(K, a, e.readWeapons, r),
-    animations: E(z, a, e.readAnimations, r),
-    tilesets: E(X, a, e.readTilesets, r)
+    skills: p(z, a, s.readSkills, r),
+    states: p(K, a, s.readStates, r),
+    system: qa(Q, a, s.readSystem),
+    troops: p(R, a, s.readTroops, r),
+    weapons: p($, a, s.readWeapons, r),
+    animations: p(Z, a, s.readAnimations, r),
+    tilesets: p(q, a, s.readTilesets, r)
   };
-}, Ka = (a) => ({
+}, Ya = (a) => ({
   info: { filename: a.fileName, message: a.error, success: !1 },
   validMaps: [],
   invalidMaps: []
-}), Ha = async (a, s, e, t, r) => await P(a, s, (async (n) => t(n)), r, ((n) => e.readMap(n))), Ya = (a, s, e) => {
+}), Za = async (a, e, s, t, r) => await j(a, e, (async (n) => t(n)), r, ((n) => s.readMap(n))), qa = (a, e, s) => {
   if (a.system === null) return { message: a.message, system: null };
   try {
     return {
       message: a.message,
-      system: e(a.system, k)
+      system: s(a.system, w)
     };
   } catch {
-    return { message: s.dataConvertError, system: null };
+    return { message: e.dataConvertError, system: null };
   }
-}, E = (a, s, e, t) => {
+}, p = (a, e, s, t) => {
   if (!a.success) return { fileName: a.fileName, success: !1, error: a.error, data: t() };
   try {
     return {
       fileName: a.fileName,
       success: !0,
       error: "",
-      data: e(a.data, a.fileName)
+      data: s(a.data, a.fileName)
     };
   } catch {
-    return { fileName: a.fileName, success: !1, error: s.dataConvertError, data: t() };
+    return { fileName: a.fileName, success: !1, error: e.dataConvertError, data: t() };
   }
-}, Os = (a) => a, us = (a) => [d(L, a.actors.data), d(N, a.classes.data), d(_, a.skills.data), d(A, a.items.data), d(g, a.weapons.data), d(O, a.armors.data), d(f, a.enemies.data), d(y, a.troops.data), d(v, a.states.data), d(u, a.animations.data), d(F, a.tilesets.data), d(D, a.commonEvents.data), d(S, a.mapInfos.data)], d = (a, s) => ({
+}, be = (a) => a, he = (a) => [d(L, a.actors.data), d(f, a.classes.data), d(A, a.skills.data), d(v, a.items.data), d(u, a.weapons.data), d(O, a.armors.data), d(D, a.enemies.data), d(g, a.troops.data), d(_, a.states.data), d(T, a.animations.data), d(F, a.tilesets.data), d(y, a.commonEvents.data), d(S, a.mapInfos.data), ...Qa(a.mapFiles.validMaps)], Qa = (a) => a.map(((e) => ({
+  filename: `${e.filename}.json`,
+  data: e.map
+}))), d = (a, e) => ({
   filename: a,
-  data: [null, ...s]
-}), j = (a, s) => s(k, JSON.stringify(a)), Ts = (a, s, e) => Promise.all([C($a(a), e), j(a.system, e), B(s.validMaps, e)]).then((() => {
-})), Rs = (a, s) => {
-  const e = [C(za(a), s), B(a.mapFiles.validMaps, s)];
-  return a.system.system && e.push(j(a.system.system, s)), Promise.all(e).then((() => {
+  data: [null, ...e]
+}), J = (a, e) => e(w, JSON.stringify(a)), we = (a, e, s) => Promise.all([x(Xa(a), s), J(a.system, s), B(e.validMaps, s)]).then((() => {
+})), ke = (a, e) => {
+  const s = [x(ae(a), e), B(a.mapFiles.validMaps, e)];
+  return a.system.system && s.push(J(a.system.system, e)), Promise.all(s).then((() => {
   }));
-}, i = (a) => [null, ...a], $a = (a) => ({
+}, i = (a) => [null, ...a], Xa = (a) => ({
   actors: i(a.actors),
   classes: i(a.classes),
   skills: i(a.skills),
@@ -201,7 +219,7 @@ const as = "bgm", ss = "se", es = "me", ts = "bgs", rs = "img", ms = "audio", is
   tilesets: i(a.tilesets),
   commonEvents: i(a.commonEvents),
   mapInfos: i(a.mapInfos)
-}), za = (a) => ({
+}), ae = (a) => ({
   actors: i(a.actors.data),
   classes: i(a.classes.data),
   skills: i(a.skills.data),
@@ -215,74 +233,74 @@ const as = "bgm", ss = "se", es = "me", ts = "bgs", rs = "img", ms = "audio", is
   tilesets: i(a.tilesets.data),
   commonEvents: i(a.commonEvents.data),
   mapInfos: i(a.mapInfos.data)
-}), bs = "data", hs = "js";
+}), Ge = "data", Ce = "js";
 export {
   L as FILENAME_ACTORS,
-  u as FILENAME_ANIMATIONS,
+  T as FILENAME_ANIMATIONS,
   O as FILENAME_ARMORS,
-  N as FILENAME_CLASSES,
-  D as FILENAME_COMMON_EVENTS,
-  f as FILENAME_ENEMIES,
-  A as FILENAME_ITEMS,
+  f as FILENAME_CLASSES,
+  y as FILENAME_COMMON_EVENTS,
+  D as FILENAME_ENEMIES,
+  v as FILENAME_ITEMS,
   S as FILENAME_MAP_INFOS,
-  _ as FILENAME_SKILLS,
-  v as FILENAME_STATES,
-  k as FILENAME_SYSTEM,
+  A as FILENAME_SKILLS,
+  _ as FILENAME_STATES,
+  w as FILENAME_SYSTEM,
   F as FILENAME_TILESET,
-  y as FILENAME_TROOPS,
-  g as FILENAME_WEAPONS,
-  ms as FOLDER_AUDIO,
-  as as FOLDER_AUDIO_BGM,
-  ts as FOLDER_AUDIO_BGS,
-  es as FOLDER_AUDIO_ME,
-  ss as FOLDER_AUDIO_SE,
-  bs as FOLDER_DATA,
-  rs as FOLDER_IMG,
-  os as FOLDER_IMG_BATTLEBACK1,
-  ls as FOLDER_IMG_BATTLEBACK2,
-  ds as FOLDER_IMG_CHACTERS,
-  cs as FOLDER_IMG_ENEMIES,
-  Es as FOLDER_IMG_FACES,
-  ps as FOLDER_IMG_PARALLACES,
-  Is as FOLDER_IMG_PICTURES,
-  Ms as FOLDER_IMG_SV_ACTORS,
-  Ns as FOLDER_IMG_SV_ENEMIES,
-  Ds as FOLDER_IMG_SYSTEM,
-  fs as FOLDER_IMG_TILESETS,
-  As as FOLDER_IMG_TITLES1,
-  Ss as FOLDER_IMG_TITLES2,
-  hs as FOLDER_JS,
-  Os as defineGameDataReadHandlers,
-  is as flattenAudioFiles,
-  ns as flattenImageFiles,
-  vs as makeRawTestDataBundle,
-  us as rawGameDataToMainDataFileEntries,
-  Aa as readActorData,
-  gs as readAllGameDataWithArrayFallback,
-  Ls as readAllGameDataWithNullFallback,
-  ys as readAllRawGameData,
-  ua as readAnimationData,
-  ya as readArmorData,
+  g as FILENAME_TROOPS,
+  u as FILENAME_WEAPONS,
+  oe as FOLDER_AUDIO,
+  re as FOLDER_AUDIO_BGM,
+  ne as FOLDER_AUDIO_BGS,
+  ie as FOLDER_AUDIO_ME,
+  me as FOLDER_AUDIO_SE,
+  Ge as FOLDER_DATA,
+  le as FOLDER_IMG,
+  pe as FOLDER_IMG_BATTLEBACK1,
+  Ee as FOLDER_IMG_BATTLEBACK2,
+  Ie as FOLDER_IMG_CHACTERS,
+  Me as FOLDER_IMG_ENEMIES,
+  Ne as FOLDER_IMG_FACES,
+  fe as FOLDER_IMG_PARALLACES,
+  ye as FOLDER_IMG_PICTURES,
+  De as FOLDER_IMG_SV_ACTORS,
+  ve as FOLDER_IMG_SV_ENEMIES,
+  Se as FOLDER_IMG_SYSTEM,
+  Ae as FOLDER_IMG_TILESETS,
+  _e as FOLDER_IMG_TITLES1,
+  Fe as FOLDER_IMG_TITLES2,
+  Ce as FOLDER_JS,
+  be as defineGameDataReadHandlers,
+  de as flattenAudioFiles,
+  ce as flattenImageFiles,
+  ue as makeRawTestDataBundle,
+  he as rawGameDataToMainDataFileEntries,
+  va as readActorData,
+  Te as readAllGameDataWithArrayFallback,
+  Re as readAllGameDataWithNullFallback,
+  Oe as readAllRawGameData,
+  Ta as readAnimationData,
+  ga as readArmorData,
   c as readArrayData,
   Sa as readClassData,
-  Ra as readCommonEventData,
-  ga as readEnemyData,
-  va as readItemData,
-  Pa as readMapFileFromInfo,
-  Fs as readMapFilesFromInfo,
-  P as readMapFilesFromInfoEx,
-  ba as readMapInfoData,
-  _a as readSkillData,
+  ba as readCommonEventData,
+  ua as readEnemyData,
+  _a as readItemData,
+  ja as readMapFileFromInfo,
+  Le as readMapFilesFromInfo,
+  j as readMapFilesFromInfoEx,
+  ha as readMapInfoData,
+  Aa as readSkillData,
   Oa as readStateData,
-  q as readSystemData,
-  Ta as readTilesetData,
+  Va as readSystemData,
+  Ra as readTilesetData,
   La as readTroopData,
   Fa as readWeaponData,
-  _s as summarizeReadErrors,
-  Ts as writeBundleData,
-  C as writeMainData,
-  Ua as writeMapData,
+  ge as summarizeReadErrors,
+  we as writeBundleData,
+  x as writeMainData,
+  za as writeMapData,
   B as writeMapFiles,
-  Rs as writeRawGameData,
-  j as writeSystemData
+  ke as writeRawGameData,
+  J as writeSystemData
 };
