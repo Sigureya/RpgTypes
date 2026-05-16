@@ -1,0 +1,77 @@
+import { describe, expect, test } from "vitest";
+import type { TestDataSourceBundle } from "@RpgTypes/libs";
+import type { RpgDataBundleHasText } from "@RpgTypes/rmmz";
+import {
+  makeActorDataFromTestSoruce,
+  makeArmorDataFromTestSoruce,
+  makeClassDataFromTestSoruce,
+  makeEnemyDataFromTestSoruce,
+  makeItemDataFromTestSoruce,
+  makeSkillDataFromTestSoruce,
+  makeStateDataFromTestSoruce,
+  makeTestSystemData,
+  makeWeaponDataFromTestSoruce,
+} from "@RpgTypes/rmmz";
+import {
+  makeTestCommonEventData,
+  makeTestTroopData,
+} from "@RpgTypes/rmmz/makeTestData";
+import type { RuntimeDictionaryData } from "./core/extract";
+import { replaceRuntimeData } from "./replace";
+
+const AUDIO_NAME = "AudioName";
+const IMAGE_NAME = "ImageName";
+const TEXT = "Text";
+const SWITCHES_TEXT = "Switches";
+const VARIABLES_TEXT = "Variables";
+const NON_REPLACEABLE_TEXT = "NonReplaceableText";
+const MESSAGE_TEXT = "Message";
+const NOTE_TEXT = "<Hexproof:呪禁><Target:Text>";
+const NEW_NOTE_TEXT = ["<Hexproof:呪禁>", "<Target:New-Text>"].join("\n");
+const NEW_TEXT = "New-Text";
+
+const makeTestData = (src: TestDataSourceBundle): RpgDataBundleHasText => ({
+  system: makeTestSystemData(src),
+  actors: [makeActorDataFromTestSoruce(src)],
+  enemies: [makeEnemyDataFromTestSoruce(src)],
+  weapons: [makeWeaponDataFromTestSoruce(src)],
+  armors: [makeArmorDataFromTestSoruce(src)],
+  classes: [makeClassDataFromTestSoruce(src)],
+  items: [makeItemDataFromTestSoruce(src)],
+  troops: [makeTestTroopData(src)],
+  commonEvents: [makeTestCommonEventData(src)],
+  skills: [makeSkillDataFromTestSoruce(src)],
+  states: [makeStateDataFromTestSoruce(src)],
+});
+
+describe("replaceRuntimeData", () => {
+  test("", () => {
+    const input = makeTestData({
+      text: TEXT,
+      image: IMAGE_NAME,
+      audio: AUDIO_NAME,
+      switches: SWITCHES_TEXT,
+      variables: VARIABLES_TEXT,
+      message: MESSAGE_TEXT,
+      nonReplaceableText: NON_REPLACEABLE_TEXT,
+      note: NOTE_TEXT,
+    });
+    const runtimeDictionaryData: RuntimeDictionaryData<string> = {
+      dictionary: [{ key: TEXT, value: NEW_TEXT }],
+      targetNoteKeys: ["Target"],
+    };
+
+    const result = replaceRuntimeData(input, runtimeDictionaryData);
+    const expected: RpgDataBundleHasText = makeTestData({
+      text: NEW_TEXT,
+      image: IMAGE_NAME,
+      audio: AUDIO_NAME,
+      switches: SWITCHES_TEXT,
+      variables: VARIABLES_TEXT,
+      message: MESSAGE_TEXT,
+      nonReplaceableText: NON_REPLACEABLE_TEXT,
+      note: NEW_NOTE_TEXT,
+    });
+    expect(result).toEqual(expected);
+  });
+});
