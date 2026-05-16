@@ -127,7 +127,7 @@ describe("replaceDataWithHash", () => {
 
   test("aux に actorTextDictionary と newTextDictionary を返す", () => {
     const expectedDictionary: RuntimeDictionaryData<string> = {
-      targetNoteKeys: ["Text", "Number"],
+      targetNoteKeys: ["Text"],
       dictionary: [
         { key: "hash_AAA", value: "BBB" },
         { key: "hash_CCC", value: "DDD" },

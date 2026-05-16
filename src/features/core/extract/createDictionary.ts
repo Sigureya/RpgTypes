@@ -1,12 +1,10 @@
 import type { KeyValuePairEx } from "@RpgTypes/libs";
+import type { SummarizedNote, SummarizedNoteValue } from "./note";
 import { stringLikeNoteKeys } from "./note";
-import type {
-  RawGameDataNoteNormalization,
-  RuntimeDictionaryData,
-} from "./types";
+import type { RuntimeDictionaryData } from "./types";
 
 export const createRuntimeDictionaryData = <T>(
-  noteNormalization: RawGameDataNoteNormalization,
+  noteNormalization: readonly SummarizedNote<SummarizedNoteValue>[],
   dictionary: ReadonlyMap<string, string>,
   hashFn: (text: string) => T,
 ): RuntimeDictionaryData<T> => {
@@ -26,11 +24,8 @@ const createNewDictionary = <T>(
 };
 
 const textKeys = (
-  noteNormalization: RawGameDataNoteNormalization,
+  noteNormalization: readonly SummarizedNote<SummarizedNoteValue>[],
 ): string[] => {
-  const set: Set<string> = stringLikeNoteKeys([
-    ...noteNormalization.dataNoteSummary,
-    ...noteNormalization.mapNoteSummary,
-  ]);
+  const set: Set<string> = stringLikeNoteKeys(noteNormalization);
   return Array.from(set);
 };

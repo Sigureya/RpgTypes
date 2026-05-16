@@ -20,6 +20,7 @@ import type {
   SummarizedNote2,
   SummarizedNoteValue,
 } from "./note/types";
+import type { ExtractedRawGameDataTexts } from "./text";
 import type {
   ExtractedMapTexts,
   TextPluginCommandParameter,
@@ -34,10 +35,7 @@ import type {
   ExtractedNoteList,
   ExtractedTextItem,
 } from "./text/mainData/types";
-import type {
-  ExtractedRawGameDataTexts,
-  RawGameDataNoteNormalization,
-} from "./types";
+import type { RawGameDataNoteNormalization } from "./types";
 
 export const buildRawGameDataNoteNormalization = (
   data: ExtractedRawGameDataTexts,

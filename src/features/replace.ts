@@ -95,7 +95,10 @@ export const replaceDataWithHash = <T extends string>(
         hashFn,
       ),
       dictionary: createRuntimeDictionaryData(
-        replaceResult.note,
+        [
+          ...replaceResult.note.dataNoteSummary,
+          ...replaceResult.note.mapNoteSummary,
+        ],
         dictionary,
         hashFn,
       ),
