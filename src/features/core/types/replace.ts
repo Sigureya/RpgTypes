@@ -1,6 +1,6 @@
 import type { AssetFilesBundle, RawGameData } from "@RpgTypes/fileio";
-import type { KeyValuePairEx } from "@RpgTypes/libs";
 import type { NormalizedEventCommand } from "@RpgTypes/rmmz";
+import type { ReplaceAuxiliaryData } from "../extract";
 
 export interface ReplaceRawDataInput {
   basicData: RawGameData<NormalizedEventCommand>;
@@ -10,16 +10,6 @@ export interface ReplaceRawDataInput {
 export interface GameDataReplaceOutput<Hash> {
   main: RawGameData<NormalizedEventCommand>;
   aux: ReplaceAuxiliaryData<Hash>;
-}
-
-export interface ReplaceAuxiliaryData<T> {
-  actorTextDictionary: KeyValuePairEx<T, string>[];
-  dictionary: RuntimeDictionaryData<T>;
-}
-
-export interface RuntimeDictionaryData<Hash> {
-  targetNoteKeys: string[];
-  dictionary: KeyValuePairEx<Hash, string>[];
 }
 
 export interface ReplaceRawDataContext {
