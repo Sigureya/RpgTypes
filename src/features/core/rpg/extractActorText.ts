@@ -14,7 +14,7 @@ import {
   processTroopEvents,
 } from "./map";
 
-export interface HandlresCreateActorTextDictionary<T> {
+export interface ActorTextDictionaryHandlers<T> {
   newText: (text: string) => string;
   hashText: (text: string) => T;
 }
@@ -24,7 +24,7 @@ export const createActorTextDictionary = <T>(
   commons: ReadonlyArray<Data_CommonEvent>,
   troops: ReadonlyArray<Data_Troop>,
   maps: ReadonlyArray<Data_Map>,
-  handlers: HandlresCreateActorTextDictionary<T>,
+  handlers: ActorTextDictionaryHandlers<T>,
 ): KeyValuePairEx<T, string>[] => {
   const set = extractActorTexts(actors, commons, troops, maps);
   const list = Array.from(set);
@@ -50,14 +50,16 @@ export const extractActorTexts = (
   troops: ReadonlyArray<Data_Troop>,
   maps: ReadonlyArray<Data_Map>,
 ): Set<string> => {
-  const actorTexts = extractActorTexts2(actors);
+  const actorTexts = extractActorTextsFromActors(actors);
   const mapTexts = maps.map(extractActorTextFromMapEvent);
   const commonEventTexts = extractActorTextFromCommonEvents(commons);
   const troopTexts = extractActorTextFromTroops(troops);
   return new Set([actorTexts, commonEventTexts, troopTexts, mapTexts].flat(4));
 };
 
-const extractActorTexts2 = (actors: ReadonlyArray<Data_Actor>): string[][] => {
+const extractActorTextsFromActors = (
+  actors: ReadonlyArray<Data_Actor>,
+): string[][] => {
   return actors.map((actor): string[] => [
     actor.name,
     actor.nickname,
@@ -68,22 +70,24 @@ const extractActorTexts2 = (actors: ReadonlyArray<Data_Actor>): string[][] => {
 const extractActorTextFromMapEvent = (
   map: Data_Map<EventCommand>,
 ): string[][] => {
-  return collectMapEvents(map, cmdEx);
+  return collectMapEvents(map, extractActorTextFromCommandContainer);
 };
 
 const extractActorTextFromCommonEvents = (
   commons: ReadonlyArray<Data_CommonEvent>,
 ): string[][] => {
-  return processCommonEvents(commons, cmdEx);
+  return processCommonEvents(commons, extractActorTextFromCommandContainer);
 };
 
 const extractActorTextFromTroops = (
   troops: readonly Data_Troop[],
 ): string[][][] => {
-  return processTroopEvents(troops, cmdEx);
+  return processTroopEvents(troops, extractActorTextFromCommandContainer);
 };
 
-const cmdEx = ({ list }: CommandContainer<EventCommand>): string[] => {
+const extractActorTextFromCommandContainer = ({
+  list,
+}: CommandContainer<EventCommand>): string[] => {
   return list.filter(isActorTextCommand).map((c): string => c.parameters[1]);
 };
 

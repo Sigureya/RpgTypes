@@ -18,7 +18,10 @@ import type {
 } from "./core/types/replace";
 import type { EventContainerExtractor } from "./extractText";
 import type { RawGameDataNoteNormalization } from "./types";
-export { replaceRawDataBundle } from "./core/replaceBundle";
+export {
+  replaceRawDataBundle,
+  replaceRawDataWithAutoNoteFilter,
+} from "./core/replaceBundle";
 
 export const replaceDataDirectToFileEntries = (
   context: ReplaceRawDataContext,
@@ -58,7 +61,10 @@ export const replaceDataWithHashToFileEntries = <T extends string>(
   hashFn: (text: string) => T,
 ): FileEntry[] => {
   const output = replaceDataWithHash(context, extractor, hashFn);
-  return [...rawGameDataToMainDataFileEntries(output.main), ...oox(output.aux)];
+  return [
+    ...rawGameDataToMainDataFileEntries(output.main),
+    ...auxiliaryDataToFileEntries(output.aux),
+  ];
 };
 
 export const replaceDataWithHash = <T extends string>(
@@ -76,46 +82,56 @@ export const replaceDataWithHash = <T extends string>(
       return textKeys.has(item.key);
     },
   };
-  const hhhh = replaceRawDataWithAutoNoteFilter(
+  const replaceResult = replaceRawDataWithAutoNoteFilter(
     data,
     assetBundle,
     extractor,
     handlers,
   );
   return {
-    main: hhhh.data,
+    main: replaceResult.data,
     aux: {
-      actorTextDictionary: ccaa2(data, dictionary, hashFn),
-      dictionary: noteXXX(hhhh.note, dictionary, hashFn),
+      actorTextDictionary: createActorTextDictionaryEntries(
+        data,
+        dictionary,
+        hashFn,
+      ),
+      dictionary: createRuntimeDictionaryData(
+        replaceResult.note,
+        dictionary,
+        hashFn,
+      ),
     },
   };
 };
 
-const oox = <T>(data: ReplaceAuxiliaryData<T>): FileEntry[] => {
+const auxiliaryDataToFileEntries = <T>(
+  data: ReplaceAuxiliaryData<T>,
+): FileEntry[] => {
   return [
     { data: data.actorTextDictionary, filename: FILANEME_AUX_ACTOR_TEXTS },
     { data: data.dictionary, filename: FILENAME_AUX_DICTIONARY },
   ];
 };
 
-const noteXXX = <T>(
-  noteX: RawGameDataNoteNormalization,
+const createRuntimeDictionaryData = <T>(
+  noteNormalization: RawGameDataNoteNormalization,
   dictionary: ReadonlyMap<string, string>,
   hashFn: (text: string) => T,
 ): RuntimeDictionaryData<T> => {
-  const s2 = new Set([
-    ...noteX.dataNoteSummary.map((s): string => s.key),
-    ...noteX.mapNoteSummary.map((s): string => s.key),
+  const targetNoteKeySet = new Set([
+    ...noteNormalization.dataNoteSummary.map((summary): string => summary.key),
+    ...noteNormalization.mapNoteSummary.map((summary): string => summary.key),
   ]);
   return {
     dictionary: createNewDictionary(dictionary, hashFn),
-    targetNoteKeys: Array.from(s2),
+    targetNoteKeys: Array.from(targetNoteKeySet),
   };
 };
 
-const ccaa2 = <T>(
+const createActorTextDictionaryEntries = <T>(
   data: RawGameData,
-  dic: ReadonlyMap<string, string>,
+  dictionary: ReadonlyMap<string, string>,
   hashFn: (text: string) => T,
 ): KeyValuePairEx<T, string>[] => {
   return createActorTextDictionary(
@@ -124,7 +140,7 @@ const ccaa2 = <T>(
     data.troops.data,
     data.mapFiles.validMaps.map((m) => m.map),
     {
-      newText: (text) => dic.get(text) ?? text,
+      newText: (text) => dictionary.get(text) ?? text,
       hashText: (text) => hashFn(text),
     },
   );
