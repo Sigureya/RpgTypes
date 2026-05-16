@@ -4,7 +4,10 @@ import type {
   ReadArrayResult,
 } from "@RpgTypes/fileio";
 import type { NormalizedEventCommand } from "@RpgTypes/rmmz";
-import type { EventContainerExtractor } from "./extract";
+import type {
+  EventContainerExtractor,
+  RawGameDataNoteNormalization,
+} from "./extract";
 import {
   extractTextFromRawGameData,
   buildRawGameDataNoteNormalization,
@@ -98,7 +101,10 @@ export const replaceRawDataWithAutoNoteFilter = (
   assetBundle: AssetFilesBundle,
   extractor: EventContainerExtractor,
   handlers: MapDataReplaceHandlers,
-): RawGameData<NormalizedEventCommand> => {
+): {
+  data: RawGameData<NormalizedEventCommand>;
+  note: RawGameDataNoteNormalization;
+} => {
   // まずテキストを抽出し
   const e = extractTextFromRawGameData(data, extractor);
   // 正規化済みノートを取得
@@ -112,7 +118,10 @@ export const replaceRawDataWithAutoNoteFilter = (
   const h2 = lapHandlers(normalizedNote.nonTextNoteKeys, handlers);
 
   // 置換処理を実行
-  return replaceRawDataBundle(data, h2);
+  return {
+    data: replaceRawDataBundle(data, h2),
+    note: normalizedNote,
+  };
 };
 
 const lapHandlers = (
