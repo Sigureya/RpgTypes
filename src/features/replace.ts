@@ -6,18 +6,16 @@ import {
 } from "@RpgTypes/fileio";
 import type { KeyValuePairEx } from "@RpgTypes/libs";
 import type { NormalizedEventCommand } from "@RpgTypes/rmmz";
-import { stringLikeNoteKeys } from "./core/extract";
+import { createRuntimeDictionaryData } from "./core/extract/createDictionary";
 import type { MapDataReplaceHandlers } from "./core/replace/types";
 import { replaceRawDataWithAutoNoteFilter } from "./core/replaceBundle";
 import { createActorTextDictionary } from "./core/rpg";
+import type { EventContainerExtractor } from "./extractText";
 import type {
   ReplaceRawDataContext,
   GameDataReplaceOutput,
   ReplaceAuxiliaryData,
-  RuntimeDictionaryData,
-} from "./core/types/replace";
-import type { EventContainerExtractor } from "./extractText";
-import type { RawGameDataNoteNormalization } from "./types";
+} from "./types";
 export {
   replaceRawDataBundle,
   replaceRawDataWithAutoNoteFilter,
@@ -97,7 +95,10 @@ export const replaceDataWithHash = <T extends string>(
         hashFn,
       ),
       dictionary: createRuntimeDictionaryData(
-        replaceResult.note,
+        [
+          ...replaceResult.note.dataNoteSummary,
+          ...replaceResult.note.mapNoteSummary,
+        ],
         dictionary,
         hashFn,
       ),
@@ -114,27 +115,6 @@ const auxiliaryDataToFileEntries = <T>(
   ];
 };
 
-const textKeys = (
-  noteNormalization: RawGameDataNoteNormalization,
-): string[] => {
-  const set: Set<string> = stringLikeNoteKeys([
-    ...noteNormalization.dataNoteSummary,
-    ...noteNormalization.mapNoteSummary,
-  ]);
-  return Array.from(set);
-};
-
-const createRuntimeDictionaryData = <T>(
-  noteNormalization: RawGameDataNoteNormalization,
-  dictionary: ReadonlyMap<string, string>,
-  hashFn: (text: string) => T,
-): RuntimeDictionaryData<T> => {
-  return {
-    dictionary: createNewDictionary(dictionary, hashFn),
-    targetNoteKeys: textKeys(noteNormalization),
-  };
-};
-
 const createActorTextDictionaryEntries = <T>(
   data: RawGameData,
   dictionary: ReadonlyMap<string, string>,
@@ -149,14 +129,5 @@ const createActorTextDictionaryEntries = <T>(
       newText: (text) => dictionary.get(text) ?? text,
       hashText: (text) => hashFn(text),
     },
-  );
-};
-
-const createNewDictionary = <T>(
-  dictionary: ReadonlyMap<string, string>,
-  hashFn: (text: string) => T,
-): KeyValuePairEx<T, string>[] => {
-  return Array.from(dictionary.entries()).map(
-    ([k, v]): KeyValuePairEx<T, string> => ({ key: hashFn(k), value: v }),
   );
 };
