@@ -1,12 +1,37 @@
-import type { TestDataSourceWithNote } from "@RpgTypes/libs";
+import type {
+  TestDataSourceWithNote,
+  TestEventDataSource,
+} from "@RpgTypes/libs";
 import type {
   CommandUnion_AnyAudio,
   NormalizedEventCommand,
 } from "./eventCommand";
 import { makeTestAudioCommands } from "./eventCommand";
 import { makeTestCommands } from "./eventCommand/makeTestCommands";
+import type { Data_CommonEvent, Data_Troop } from "./events";
 import type { Data_Map, MapEventPage } from "./rpg/data/event";
 import { makeMapData, makeMapEventPage } from "./rpg/data/event";
+
+export const makeTestTroopData = (source: TestEventDataSource): Data_Troop => {
+  return {
+    id: 1,
+    name: source.nonReplaceableText,
+    members: [],
+    pages: [],
+  };
+};
+
+export const makeTestCommonEventData = (
+  soruce: TestEventDataSource,
+): Data_CommonEvent => {
+  return {
+    id: 1,
+    name: soruce.nonReplaceableText,
+    trigger: 0,
+    list: [],
+    switchId: 0,
+  };
+};
 
 export const makeMapDataFromTestDataSource = (
   soruce: TestDataSourceWithNote,
