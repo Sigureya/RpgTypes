@@ -14,12 +14,11 @@ import type {
   ReplaceRawDataContext,
   GameDataReplaceOutput,
   ReplaceAuxiliaryData,
+  RuntimeDictionaryData,
 } from "./core/types/replace";
 import type { EventContainerExtractor } from "./extractText";
-export {
-  replaceRawDataBundle,
-  replaceRawDataWithAutoNoteFilter,
-} from "./core/replaceBundle";
+import type { RawGameDataNoteNormalization } from "./types";
+export { replaceRawDataBundle } from "./core/replaceBundle";
 
 export const replaceDataDirectToFileEntries = (
   context: ReplaceRawDataContext,
@@ -43,12 +42,14 @@ export const replaceDataDirect = (
       return textKeys.has(item.key);
     },
   };
-  return replaceRawDataWithAutoNoteFilter(
+
+  const result = replaceRawDataWithAutoNoteFilter(
     data,
     assetBundle,
     extractor,
     handlers,
   );
+  return result.data;
 };
 
 export const replaceDataWithHashToFileEntries = <T extends string>(
@@ -58,13 +59,6 @@ export const replaceDataWithHashToFileEntries = <T extends string>(
 ): FileEntry[] => {
   const output = replaceDataWithHash(context, extractor, hashFn);
   return [...rawGameDataToMainDataFileEntries(output.main), ...oox(output.aux)];
-};
-
-const oox = <T>(data: ReplaceAuxiliaryData<T>): FileEntry[] => {
-  return [
-    { data: data.actorTextDictionary, filename: FILANEME_AUX_ACTOR_TEXTS },
-    { data: data.newTextDictionary, filename: FILENAME_AUX_DICTIONARY },
-  ];
 };
 
 export const replaceDataWithHash = <T extends string>(
@@ -82,17 +76,40 @@ export const replaceDataWithHash = <T extends string>(
       return textKeys.has(item.key);
     },
   };
+  const hhhh = replaceRawDataWithAutoNoteFilter(
+    data,
+    assetBundle,
+    extractor,
+    handlers,
+  );
   return {
-    main: replaceRawDataWithAutoNoteFilter(
-      data,
-      assetBundle,
-      extractor,
-      handlers,
-    ),
+    main: hhhh.data,
     aux: {
       actorTextDictionary: ccaa2(data, dictionary, hashFn),
-      newTextDictionary: createNewDictionary(dictionary, hashFn),
+      dictionary: noteXXX(hhhh.note, dictionary, hashFn),
     },
+  };
+};
+
+const oox = <T>(data: ReplaceAuxiliaryData<T>): FileEntry[] => {
+  return [
+    { data: data.actorTextDictionary, filename: FILANEME_AUX_ACTOR_TEXTS },
+    { data: data.dictionary, filename: FILENAME_AUX_DICTIONARY },
+  ];
+};
+
+const noteXXX = <T>(
+  noteX: RawGameDataNoteNormalization,
+  dictionary: ReadonlyMap<string, string>,
+  hashFn: (text: string) => T,
+): RuntimeDictionaryData<T> => {
+  const s2 = new Set([
+    ...noteX.dataNoteSummary.map((s): string => s.key),
+    ...noteX.mapNoteSummary.map((s): string => s.key),
+  ]);
+  return {
+    dictionary: createNewDictionary(dictionary, hashFn),
+    targetNoteKeys: Array.from(s2),
   };
 };
 

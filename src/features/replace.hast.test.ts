@@ -14,6 +14,7 @@ import type {
   ExtractedMapTexts,
 } from "./extractText";
 import { replaceDataWithHash } from "./replace";
+import type { RuntimeDictionaryData } from "./types";
 
 const IMAGE_NAME = "ImageName";
 const VARIABLE_TEXT = "Variables";
@@ -125,6 +126,14 @@ describe("replaceDataWithHash", () => {
   });
 
   test("aux に actorTextDictionary と newTextDictionary を返す", () => {
+    const expectedDictionary: RuntimeDictionaryData<string> = {
+      targetNoteKeys: ["Text", "Number"],
+      dictionary: [
+        { key: "hash_AAA", value: "BBB" },
+        { key: "hash_CCC", value: "DDD" },
+      ],
+    };
+
     const result = replaceDataWithHash(
       {
         data: makeMockDataBundle({
@@ -144,10 +153,7 @@ describe("replaceDataWithHash", () => {
       createHash,
     );
 
-    expect(result.aux.newTextDictionary).toEqual([
-      { key: "hash_AAA", value: "BBB" },
-      { key: "hash_CCC", value: "DDD" },
-    ]);
+    expect(result.aux.dictionary).toEqual(expectedDictionary);
     expect(result.aux.actorTextDictionary).toContainEqual({
       key: "hash_AAA",
       value: "AAA",

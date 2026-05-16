@@ -5,7 +5,8 @@ import {
   makeSystemDataFromMV,
   makeSystemDataMV,
 } from "@RpgTypes/rmmz";
-import { readSystemData, FILENAME_SYSTEM } from "./system";
+import { FILENAME_SYSTEM } from "./constants";
+import { readSystemData } from "./system";
 import type {
   SystemDataReadHandler,
   ReadSystemResult,

@@ -7,9 +7,19 @@ export interface ReplaceRawDataInput {
   adtionalData: ReplaceAuxiliaryData<string>;
 }
 
+export interface GameDataReplaceOutput<Hash> {
+  main: RawGameData<NormalizedEventCommand>;
+  aux: ReplaceAuxiliaryData<Hash>;
+}
+
 export interface ReplaceAuxiliaryData<T> {
   actorTextDictionary: KeyValuePairEx<T, string>[];
-  newTextDictionary: KeyValuePairEx<T, string>[];
+  dictionary: RuntimeDictionaryData<T>;
+}
+
+export interface RuntimeDictionaryData<Hash> {
+  targetNoteKeys: string[];
+  dictionary: KeyValuePairEx<Hash, string>[];
 }
 
 export interface ReplaceRawDataContext {
@@ -17,9 +27,4 @@ export interface ReplaceRawDataContext {
   assetBundle: AssetFilesBundle;
   dictionary: ReadonlyMap<string, string>;
   textKeys: ReadonlySet<string>;
-}
-
-export interface GameDataReplaceOutput<Hash> {
-  main: RawGameData<NormalizedEventCommand>;
-  aux: ReplaceAuxiliaryData<Hash>;
 }

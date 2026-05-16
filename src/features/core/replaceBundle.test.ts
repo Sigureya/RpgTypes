@@ -175,7 +175,7 @@ describe("replaceRawDataWithAutoNoteFilter", () => {
       audio: "AudioName",
     });
     const extractor = createExtractor();
-    const result = replaceRawDataWithAutoNoteFilter(
+    const { data: result } = replaceRawDataWithAutoNoteFilter(
       baseData,
       createAssetBundle(),
       extractor,
