@@ -11,11 +11,13 @@ import type {
 
 export const convertCommonEvents = <UUID>(
   filename: string,
-  cc: ReadonlyArray<ExtractedCommonEventText>,
+  eventTexts: ReadonlyArray<ExtractedCommonEventText>,
   uuidGenFunc: (text: string) => UUID,
   commandNameFn: (command: TextCommandParameter) => string,
 ): ExtractedCommandItem<UUID>[] => {
-  return cc.flatMap((c) => cced(filename, c, uuidGenFunc, commandNameFn));
+  return eventTexts.flatMap((c) =>
+    cced(filename, c, uuidGenFunc, commandNameFn),
+  );
 };
 
 const cced = <UUID>(
