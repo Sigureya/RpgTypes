@@ -1,4 +1,6 @@
+import type { RawGameData } from "@RpgTypes/fileio";
 import type { KeyValuePairEx } from "@RpgTypes/libs";
+import type { NormalizedEventCommand } from "@RpgTypes/rmmz";
 import type { SummarizedNote, SummarizedNoteValue } from "./note";
 import type {
   ExtractedRawGameDataTexts,
@@ -28,4 +30,14 @@ export interface RuntimeDictionaryData<Hash> {
 export interface ReplaceAuxiliaryData<T> {
   actorTextDictionary: KeyValuePairEx<T, string>[];
   dictionary: RuntimeDictionaryData<T>;
+}
+
+export interface GameDataReplaceOutput<Hash> {
+  main: RawGameData<NormalizedEventCommand>;
+  aux: ReplaceAuxiliaryData<Hash>;
+}
+
+export interface ReplaceRawDataInput {
+  basicData: RawGameData<NormalizedEventCommand>;
+  additionalData: ReplaceAuxiliaryData<string>;
 }
