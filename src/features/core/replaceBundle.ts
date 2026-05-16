@@ -3,10 +3,14 @@ import type {
   RawGameData,
   ReadArrayResult,
 } from "@RpgTypes/fileio";
-import type { NormalizedEventCommand } from "@RpgTypes/rmmz";
+import type {
+  NormalizedEventCommand,
+  RpgDataBundleHasText,
+} from "@RpgTypes/rmmz";
 import type {
   EventContainerExtractor,
   RawGameDataNoteNormalization,
+  RuntimeDictionaryData,
 } from "./extract";
 import {
   extractTextFromRawGameData,
@@ -20,6 +24,8 @@ import {
   replaceSkillText,
   replaceStateText,
   replaceSystemText,
+  replaceArmorText,
+  replaceWeaponText,
 } from "./replace/text";
 import type { MapDataReplaceHandlers } from "./replace/types";
 import {
@@ -27,6 +33,61 @@ import {
   replaceTroopData,
   replaceMapData,
 } from "./replaceEvent";
+
+export const replaceRuntimeData = (
+  data: RpgDataBundleHasText,
+  dic: RuntimeDictionaryData<string>,
+): RpgDataBundleHasText => {
+  const map: Map<string, string> = new Map(
+    dic.dictionary.map(({ key, value }) => [key, value]),
+  );
+  const set: ReadonlySet<string> = new Set(dic.targetNoteKeys);
+  const handlers: MapDataReplaceHandlers = {
+    replaceText(text) {
+      return map.get(text);
+    },
+    pluginCommand: (command) => command,
+    scriptCommand: (command) => command,
+    isReplaceTargetNote(item) {
+      return set.has(item.key);
+    },
+  };
+  return {
+    actors: data.actors.map((actor) => {
+      return replaceActorText(actor, handlers);
+    }),
+    armors: data.armors.map((armor) => {
+      return replaceArmorText(armor, handlers);
+    }),
+    classes: data.classes.map((item) => {
+      return replaceClassText(item, handlers);
+    }),
+    enemies: data.enemies.map((item) => {
+      return replaceEnemyText(item, handlers);
+    }),
+    items: data.items.map((item) => {
+      return replaceItemText(item, handlers);
+    }),
+    skills: data.skills.map((item) => {
+      return replaceSkillText(item, handlers);
+    }),
+    states: data.states.map((item) => {
+      return replaceStateText(item, handlers);
+    }),
+    troops: data.troops.map((item) => {
+      return item;
+    }),
+    weapons: data.weapons.map((item) => {
+      return replaceWeaponText(item, handlers);
+    }),
+    system: replaceSystemText(data.system, (text) => {
+      return map.get(text);
+    }),
+    commonEvents: data.commonEvents.map((item) => {
+      return replaceCommonEventData(item, handlers);
+    }),
+  };
+};
 
 export const replaceRawDataBundle = (
   data: RawGameData,
