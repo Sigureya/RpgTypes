@@ -1,9 +1,10 @@
 import { AssetFilesBundle } from '../../../fileio';
 import { MapFileInfo } from '../../../rmmz';
 import { SummarizedNote2 } from './note/types';
+import { ExtractedRawGameDataTexts } from './text';
 import { ExtractedMapTexts, TextPluginCommandParameter } from './text/eventCommand';
 import { ExtractedDataBundle } from './text/mainData/types';
-import { ExtractedRawGameDataTexts, RawGameDataNoteNormalization } from './types';
+import { RawGameDataNoteNormalization } from './types';
 export declare const buildRawGameDataNoteNormalization: (data: ExtractedRawGameDataTexts, asset: AssetFilesBundle) => RawGameDataNoteNormalization;
 export declare const normalizeNoteFromMapFiles: <Command extends TextPluginCommandParameter>(mapList: readonly MapFileInfo<ExtractedMapTexts<Command>>[], asset: AssetFilesBundle) => MapFileInfo<ExtractedMapTexts<Command>>[];
 export declare const nonTextNoteKeys: (bundle: ExtractedDataBundle, asset: AssetFilesBundle) => Set<string>;

@@ -32,10 +32,12 @@ import type {
   ReplaceAuxiliaryData,
   RuntimeDictionaryData,
 } from "./types";
+
 export {
   replaceRawDataBundle,
   replaceRawDataWithAutoNoteFilter,
 } from "./core/replaceBundle";
+
 export const replaceRuntimeData = (
   data: RpgDataBundleHasText,
   dic: RuntimeDictionaryData<string>,
