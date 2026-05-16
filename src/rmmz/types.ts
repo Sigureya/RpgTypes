@@ -30,3 +30,17 @@ export interface RpgDataBundle {
   tilesets: Data_Tileset[];
   system: Data_System;
 }
+
+export interface RpgDataBundleHasText {
+  actors: Data_Actor[];
+  enemies: Data_Enemy[];
+  weapons: Data_Weapon[];
+  armors: Data_Armor[];
+  classes: Data_Class[];
+  items: Data_Item[];
+  troops: Data_Troop[];
+  commonEvents: Data_CommonEvent[];
+  skills: Data_Skill[];
+  states: Data_State[];
+  system: Data_System;
+}
