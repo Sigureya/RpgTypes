@@ -1,12 +1,12 @@
-import type { FileEntry } from "@RpgTypes/fileio";
+import type { FileEntry, RawGameData } from "@RpgTypes/fileio";
 import {
   FILANEME_AUX_ACTOR_TEXTS,
   FILENAME_AUX_DICTIONARY,
   rawGameDataToMainDataFileEntries,
-  type RawGameData,
 } from "@RpgTypes/fileio";
 import type { KeyValuePairEx } from "@RpgTypes/libs";
 import type { NormalizedEventCommand } from "@RpgTypes/rmmz";
+import { stringLikeNoteKeys } from "./core/extract";
 import type { MapDataReplaceHandlers } from "./core/replace/types";
 import { replaceRawDataWithAutoNoteFilter } from "./core/replaceBundle";
 import { createActorTextDictionary } from "./core/rpg";
@@ -114,18 +114,24 @@ const auxiliaryDataToFileEntries = <T>(
   ];
 };
 
+const textKeys = (
+  noteNormalization: RawGameDataNoteNormalization,
+): string[] => {
+  const set: Set<string> = stringLikeNoteKeys([
+    ...noteNormalization.dataNoteSummary,
+    ...noteNormalization.mapNoteSummary,
+  ]);
+  return Array.from(set);
+};
+
 const createRuntimeDictionaryData = <T>(
   noteNormalization: RawGameDataNoteNormalization,
   dictionary: ReadonlyMap<string, string>,
   hashFn: (text: string) => T,
 ): RuntimeDictionaryData<T> => {
-  const targetNoteKeySet = new Set([
-    ...noteNormalization.dataNoteSummary.map((summary): string => summary.key),
-    ...noteNormalization.mapNoteSummary.map((summary): string => summary.key),
-  ]);
   return {
     dictionary: createNewDictionary(dictionary, hashFn),
-    targetNoteKeys: Array.from(targetNoteKeySet),
+    targetNoteKeys: textKeys(noteNormalization),
   };
 };
 
