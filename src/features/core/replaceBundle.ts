@@ -106,26 +106,29 @@ export const replaceRawDataWithAutoNoteFilter = (
   note: RawGameDataNoteNormalization;
 } => {
   // まずテキストを抽出し
-  const e = extractTextFromRawGameData(data, extractor);
+  const extractedText = extractTextFromRawGameData(data, extractor);
   // 正規化済みノートを取得
-  const normalizedNote = buildRawGameDataNoteNormalization(e, {
+  const normalizedNote = buildRawGameDataNoteNormalization(extractedText, {
     audioFiles: assetBundle.audioFiles,
     imageFiles: assetBundle.imageFiles,
     otherFiles: assetBundle.otherFiles,
   });
   // ハンドラを微修正。
   // noteから自動算出した非テキストノートキーをisReplaceTargetNoteで弾くようにする
-  const h2 = lapHandlers(normalizedNote.nonTextNoteKeys, handlers);
+  const filteredHandlers = createNoteFilteredHandlers(
+    normalizedNote.nonTextNoteKeys,
+    handlers,
+  );
 
   // 置換処理を実行
   return {
-    data: replaceRawDataBundle(data, h2),
+    data: replaceRawDataBundle(data, filteredHandlers),
     note: normalizedNote,
   };
 };
 
-const lapHandlers = (
-  ssx: ReadonlySet<string>,
+const createNoteFilteredHandlers = (
+  nonTextNoteKeys: ReadonlySet<string>,
   handlers: MapDataReplaceHandlers,
 ): MapDataReplaceHandlers => ({
   pluginCommand(command) {
@@ -138,7 +141,7 @@ const lapHandlers = (
     return handlers.replaceText(key);
   },
   isReplaceTargetNote(item): boolean {
-    if (!ssx.has(item.key)) {
+    if (!nonTextNoteKeys.has(item.key)) {
       return false;
     }
     return handlers.isReplaceTargetNote(item);

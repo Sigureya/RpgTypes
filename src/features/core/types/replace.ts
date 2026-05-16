@@ -4,7 +4,7 @@ import type { NormalizedEventCommand } from "@RpgTypes/rmmz";
 
 export interface ReplaceRawDataInput {
   basicData: RawGameData<NormalizedEventCommand>;
-  adtionalData: ReplaceAuxiliaryData<string>;
+  additionalData: ReplaceAuxiliaryData<string>;
 }
 
 export interface GameDataReplaceOutput<Hash> {
