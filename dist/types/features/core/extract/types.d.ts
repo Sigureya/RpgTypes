@@ -1,21 +1,8 @@
-import { MapBatchReadResult, ReadSystemResult, DataReadErrorItem } from '../../../fileio';
+import { RawGameData } from '../../../fileio';
+import { KeyValuePairEx } from '../../../libs';
+import { NormalizedEventCommand } from '../../../rmmz';
 import { SummarizedNote, SummarizedNoteValue } from './note';
-import { ExtractedDataBundle, ExtractedCommonEventText, ExtractedBattleEventText, ExtractedMapTexts, ExtractedTextMainDataFinal } from './text';
-import { ExtractedEventDataBundle } from './text/eventCommand/types/bundle';
-import { ExtractedSystemTexts, SystemTexts } from './text/system';
-export interface ExtractedRawGameDataTextValue {
-    mainData: ExtractedDataBundle;
-    eventData: {
-        commonEvents: ExtractedCommonEventText[];
-        troops: ExtractedBattleEventText[];
-    };
-    mapFiles: MapBatchReadResult<ExtractedMapTexts>;
-    system: ReadSystemResult<ExtractedSystemTexts>;
-}
-export interface ExtractedRawGameDataTexts {
-    value: ExtractedRawGameDataTextValue;
-    errors: DataReadErrorItem[];
-}
+import { ExtractedRawGameDataTexts, ExtractedTextMainDataFinal, ExtractedEventDataBundle, SystemTexts } from './text';
 export interface RawGameDataNoteNormalization {
     nonTextNoteKeys: Set<string>;
     data: ExtractedRawGameDataTexts;
@@ -25,4 +12,20 @@ export interface RawGameDataNoteNormalization {
 export interface ExtractedTextFinalWithNotes<UUID> extends ExtractedTextMainDataFinal<UUID>, ExtractedEventDataBundle<UUID> {
     noteSummaries: SummarizedNote<SummarizedNoteValue>[];
     system: SystemTexts<UUID>;
+}
+export interface RuntimeDictionaryData<Hash> {
+    targetNoteKeys: string[];
+    dictionary: KeyValuePairEx<Hash, string>[];
+}
+export interface ReplaceAuxiliaryData<T> {
+    actorTextDictionary: KeyValuePairEx<T, string>[];
+    dictionary: RuntimeDictionaryData<T>;
+}
+export interface GameDataReplaceOutput<Hash> {
+    main: RawGameData<NormalizedEventCommand>;
+    aux: ReplaceAuxiliaryData<Hash>;
+}
+export interface ReplaceRawDataInput {
+    basicData: RawGameData<NormalizedEventCommand>;
+    additionalData: ReplaceAuxiliaryData<string>;
 }

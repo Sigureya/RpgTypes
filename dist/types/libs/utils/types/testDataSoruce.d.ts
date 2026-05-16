@@ -16,3 +16,11 @@ export interface SystemTestDataSource extends TestDataSource {
     switches: string;
     variables: string;
 }
+export interface TestEventDataSource extends TestDataSource {
+    text: string;
+    image: string;
+    audio: string;
+    message: string;
+    nonReplaceableText: string;
+}
+export type TestDataSourceBundle = TestDataSourceWithNote & SystemTestDataSource & TestEventDataSource;
