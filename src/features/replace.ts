@@ -111,23 +111,23 @@ export const replaceDataDirectToFileEntries = (
 };
 
 export const replaceDataDirect = (
-  { assetBundle, data, dictionary, textKeys }: ReplaceRawDataContext,
+  context: ReplaceRawDataContext,
   extractor: EventContainerExtractor,
 ): RawGameData<NormalizedEventCommand> => {
   const handlers: MapDataReplaceHandlers = {
     replaceText(text) {
-      return dictionary.get(text);
+      return context.dictionary.get(text);
     },
     pluginCommand: (command) => command,
     scriptCommand: (command) => command,
     isReplaceTargetNote(item) {
-      return textKeys.has(item.key);
+      return context.textKeys.has(item.key);
     },
   };
 
   const result = replaceRawDataWithAutoNoteFilter(
-    data,
-    assetBundle,
+    context.data,
+    context.assetBundle,
     extractor,
     handlers,
   );
