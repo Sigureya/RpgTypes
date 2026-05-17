@@ -1,16 +1,13 @@
 import type { FileEntry, RawGameData } from "@RpgTypes/fileio";
-import {
-  FILANEME_AUX_ACTOR_TEXTS,
-  FILENAME_AUX_DICTIONARY,
-  rawGameDataToMainDataFileEntries,
-} from "@RpgTypes/fileio";
-import type { KeyValuePairEx } from "@RpgTypes/libs";
+import { rawGameDataToMainDataFileEntries } from "@RpgTypes/fileio";
 import type {
   NormalizedEventCommand,
   RpgDataBundleHasText,
 } from "@RpgTypes/rmmz";
-import { createActorTextDictionary } from "./core/extract";
-import { createRuntimeDictionaryData } from "./core/extract/createDictionary";
+import {
+  createRuntimeDictionaryData,
+  fileEntriesFromDictionary,
+} from "./core/extract/createDictionary";
 import {
   replaceActorText,
   replaceArmorText,
@@ -29,7 +26,6 @@ import type { EventContainerExtractor } from "./extractText";
 import type {
   ReplaceRawDataContext,
   GameDataReplaceOutput,
-  ReplaceAuxiliaryData,
   RuntimeDictionaryData,
 } from "./types";
 
@@ -43,7 +39,7 @@ export const replaceRuntimeData = (
   dic: RuntimeDictionaryData<string>,
 ): RpgDataBundleHasText => {
   const map: Map<string, string> = new Map(
-    dic.dictionary.map(({ key, value }) => [key, value]),
+    dic.textDictionary.map(({ key, value }) => [key, value]),
   );
   const set: ReadonlySet<string> = new Set(dic.targetNoteKeys);
   const handlers: MapDataReplaceHandlers = {
@@ -133,7 +129,7 @@ export const replaceDataWithHashToFileEntries = <T extends string>(
   const output = replaceDataWithHash(context, extractor, hashFn);
   return [
     ...rawGameDataToMainDataFileEntries(output.main),
-    ...auxiliaryDataToFileEntries(output.aux),
+    ...fileEntriesFromDictionary(output.aux),
   ];
 };
 
@@ -160,46 +156,14 @@ export const replaceDataWithHash = <T extends string>(
   );
   return {
     main: replaceResult.data,
-    aux: {
-      actorTextDictionary: createActorTextDictionaryEntries(
-        data,
-        dictionary,
-        hashFn,
-      ),
-      dictionary: createRuntimeDictionaryData(
-        [
-          ...replaceResult.note.dataNoteSummary,
-          ...replaceResult.note.mapNoteSummary,
-        ],
-        dictionary,
-        hashFn,
-      ),
-    },
+    aux: createRuntimeDictionaryData(
+      data.actors.data,
+      data.commonEvents.data,
+      data.troops.data,
+      data.mapFiles.validMaps.map((m) => m.map),
+      replaceResult.note.dataNoteSummary,
+      dictionary,
+      hashFn,
+    ),
   };
-};
-
-const auxiliaryDataToFileEntries = <T>(
-  data: ReplaceAuxiliaryData<T>,
-): FileEntry[] => {
-  return [
-    { data: data.actorTextDictionary, filename: FILANEME_AUX_ACTOR_TEXTS },
-    { data: data.dictionary, filename: FILENAME_AUX_DICTIONARY },
-  ];
-};
-
-const createActorTextDictionaryEntries = <T>(
-  data: RawGameData,
-  dictionary: ReadonlyMap<string, string>,
-  hashFn: (text: string) => T,
-): KeyValuePairEx<string, T>[] => {
-  return createActorTextDictionary(
-    data.actors.data,
-    data.commonEvents.data,
-    data.troops.data,
-    data.mapFiles.validMaps.map((m) => m.map),
-    {
-      newText: (text) => dictionary.get(text) ?? text,
-      hashText: (text) => hashFn(text),
-    },
-  );
 };

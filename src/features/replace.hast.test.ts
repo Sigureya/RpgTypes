@@ -14,7 +14,7 @@ import type {
   ExtractedMapTexts,
 } from "./extractText";
 import { replaceDataWithHash } from "./replace";
-import type { RuntimeDictionaryData } from "./types";
+import type { GameDataReplaceOutput, ReplaceRawDataContext } from "./types";
 
 const IMAGE_NAME = "ImageName";
 const VARIABLE_TEXT = "Variables";
@@ -125,42 +125,59 @@ describe("replaceDataWithHash", () => {
     );
   });
 
-  test("aux に actorTextDictionary と newTextDictionary を返す", () => {
-    const expectedDictionary: RuntimeDictionaryData<string> = {
+  describe("補助データ", () => {
+    const input: ReplaceRawDataContext = {
+      data: makeMockDataBundle({
+        text: "AAA",
+        image: IMAGE_NAME,
+        note: makeNoteText("AAA", 456),
+        audio: "AudioName",
+      }),
+      assetBundle: createAssetBundle(),
+      dictionary: new Map([
+        ["AAA", "BBB"],
+        ["CCC", "DDD"],
+      ]),
+      textKeys: new Set(["Text"]),
+    };
+    const expectedDictionary: GameDataReplaceOutput<string>["aux"] = {
       targetNoteKeys: ["Text"],
-      dictionary: [
+      textDictionary: [
         { key: "hash_AAA", value: "BBB" },
         { key: "hash_CCC", value: "DDD" },
       ],
+      actorTexts: [
+        { key: "AAA", value: "hash_AAA" },
+        { key: "BBB", value: "hash_BBB" },
+      ],
     };
-
-    const result = replaceDataWithHash(
-      {
-        data: makeMockDataBundle({
-          text: "AAA",
-          image: IMAGE_NAME,
-          note: makeNoteText("AAA", 456),
-          audio: "AudioName",
-        }),
-        assetBundle: createAssetBundle(),
-        dictionary: new Map([
-          ["AAA", "BBB"],
-          ["CCC", "DDD"],
-        ]),
-        textKeys: new Set(["Text"]),
-      },
-      createExtractor(),
-      createHash,
-    );
-
-    expect(result.aux.dictionary).toEqual(expectedDictionary);
-    expect(result.aux.actorTextDictionary).toContainEqual({
-      value: "hash_AAA",
-      key: "AAA",
+    test("書き換え対象のnoteを正しく列挙できているか", () => {
+      const result: GameDataReplaceOutput<string> = replaceDataWithHash(
+        input,
+        createExtractor(),
+        createHash,
+      );
+      expect(result.aux.targetNoteKeys).toEqual(
+        expectedDictionary.targetNoteKeys,
+      );
     });
-    expect(result.aux.actorTextDictionary).toContainEqual({
-      value: "hash_BBB",
-      key: "BBB",
+    test("辞書データが正しく構築できているか", () => {
+      const result: GameDataReplaceOutput<string> = replaceDataWithHash(
+        input,
+        createExtractor(),
+        createHash,
+      );
+      expect(result.aux.textDictionary).toEqual(
+        expectedDictionary.textDictionary,
+      );
+    });
+    test("アクター用の逆引き辞書が正しく構築できているか", () => {
+      const result: GameDataReplaceOutput<string> = replaceDataWithHash(
+        input,
+        createExtractor(),
+        createHash,
+      );
+      expect(result.aux.actorTexts).toEqual(expectedDictionary.actorTexts);
     });
   });
 });
