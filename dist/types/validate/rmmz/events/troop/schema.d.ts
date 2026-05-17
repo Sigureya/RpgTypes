@@ -1,6 +1,6 @@
 export declare const SCHEMA_DATA_TROOP: {
     readonly type: "object";
-    readonly required: ("id" | "name" | "members" | "pages")[];
+    readonly required: ("id" | "name" | "pages" | "members")[];
     readonly properties: {
         readonly id: {
             readonly type: "integer";
