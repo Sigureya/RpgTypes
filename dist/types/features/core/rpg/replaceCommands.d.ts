@@ -1,7 +1,6 @@
 import { EventCommandUnknown } from '../../../libs/eventCommand';
 import { EventCommand } from '../../../rmmz';
-import { Data_CommonEventUnknown, Data_TroopUnknonw, MapEventContainer } from '../../../rmmz/rpg';
-import { CommandContainer } from './map/';
+import { CommandContainer, Data_CommonEventUnknown, Data_TroopUnknonw, MapEventContainer } from '../../../rmmz/rpg';
 import { ReplaceableEventPage } from './types';
 type EventCommandReplaceFunc = <Command extends EventCommandUnknown>(list: ReadonlyArray<Command>) => Command[];
 export declare const replaceEventCommands: <Command extends EventCommandUnknown, T extends CommandContainer<Command> = CommandContainer<Command>>(data: T, fn: EventCommandReplaceFunc) => T;

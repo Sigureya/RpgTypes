@@ -1,9 +1,11 @@
 import { FileEntry, RawGameData } from '../fileio';
-import { NormalizedEventCommand, RpgDataBundleHasText } from '../rmmz';
+import { Data_Map, NormalizedEventCommand, RpgDataBundleHasText } from '../rmmz';
 import { EventContainerExtractor } from './extractText';
-import { ReplaceRawDataContext, GameDataReplaceOutput, RuntimeDictionaryData } from './types';
+import { ReplaceRawDataContext, GameDataReplaceOutput, RuntimeDictionary } from './types';
 export { replaceRawDataBundle, replaceRawDataWithAutoNoteFilter, } from './core/replaceBundle';
-export declare const replaceRuntimeData: (data: RpgDataBundleHasText, dic: RuntimeDictionaryData<string>) => RpgDataBundleHasText;
+export { buildRuntimeDictionary } from './core/extract/dictionary';
+export declare const replaceRuntimeMapData: (map: Data_Map, dic: RuntimeDictionary<string>) => Data_Map<NormalizedEventCommand>;
+export declare const replaceRuntimeData: (data: RpgDataBundleHasText, dic: RuntimeDictionary<string>) => RpgDataBundleHasText;
 export declare const replaceDataDirectToFileEntries: (context: ReplaceRawDataContext, extractor: EventContainerExtractor) => FileEntry[];
 export declare const replaceDataDirect: ({ assetBundle, data, dictionary, textKeys }: ReplaceRawDataContext, extractor: EventContainerExtractor) => RawGameData<NormalizedEventCommand>;
 export declare const replaceDataWithHashToFileEntries: <T extends string>(context: ReplaceRawDataContext, extractor: EventContainerExtractor, hashFn: (text: string) => T) => FileEntry[];

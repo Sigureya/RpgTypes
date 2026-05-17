@@ -15,17 +15,15 @@ export interface ExtractedTextFinalWithNotes<UUID> extends ExtractedTextMainData
 }
 export interface RuntimeDictionaryData<Hash> {
     targetNoteKeys: string[];
-    dictionary: KeyValuePairEx<Hash, string>[];
+    textDictionary: KeyValuePairEx<Hash, string>[];
+    actorTexts: KeyValuePairEx<string, Hash>[];
 }
-export interface ReplaceAuxiliaryData<T> {
-    actorTextDictionary: KeyValuePairEx<T, string>[];
-    dictionary: RuntimeDictionaryData<T>;
+export interface RuntimeDictionary<Hash> {
+    targetNoteKeys: ReadonlySet<string>;
+    textDictionary: ReadonlyMap<Hash, string>;
+    actorTextDictionary: ReadonlyMap<string, Hash>;
 }
 export interface GameDataReplaceOutput<Hash> {
     main: RawGameData<NormalizedEventCommand>;
-    aux: ReplaceAuxiliaryData<Hash>;
-}
-export interface ReplaceRawDataInput {
-    basicData: RawGameData<NormalizedEventCommand>;
-    additionalData: ReplaceAuxiliaryData<string>;
+    aux: RuntimeDictionaryData<Hash>;
 }

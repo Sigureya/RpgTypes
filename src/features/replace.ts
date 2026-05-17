@@ -1,6 +1,7 @@
 import type { FileEntry, RawGameData } from "@RpgTypes/fileio";
 import { rawGameDataToMainDataFileEntries } from "@RpgTypes/fileio";
 import type {
+  Data_Map,
   NormalizedEventCommand,
   RpgDataBundleHasText,
 } from "@RpgTypes/rmmz";
@@ -21,7 +22,11 @@ import {
 } from "./core/replace";
 import type { MapDataReplaceHandlers } from "./core/replace/types";
 import { replaceRawDataWithAutoNoteFilter } from "./core/replaceBundle";
-import { replaceCommonEventData, replaceTroopData } from "./core/replaceEvent";
+import {
+  replaceCommonEventData,
+  replaceMapData,
+  replaceTroopData,
+} from "./core/replaceEvent";
 import type { EventContainerExtractor } from "./extractText";
 import type {
   ReplaceRawDataContext,
@@ -35,6 +40,23 @@ export {
 } from "./core/replaceBundle";
 
 export { buildRuntimeDictionary } from "./core/extract/dictionary";
+
+export const replaceRuntimeMapData = (
+  map: Data_Map,
+  dic: RuntimeDictionary<string>,
+): Data_Map<NormalizedEventCommand> => {
+  const handlers: MapDataReplaceHandlers = {
+    replaceText(text) {
+      return dic.textDictionary.get(text);
+    },
+    pluginCommand: (command) => command,
+    scriptCommand: (command) => command,
+    isReplaceTargetNote(item) {
+      return dic.targetNoteKeys.has(item.key);
+    },
+  };
+  return replaceMapData(map, handlers);
+};
 
 export const replaceRuntimeData = (
   data: RpgDataBundleHasText,
