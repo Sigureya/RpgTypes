@@ -1,17 +1,17 @@
 import { describe, expect, test } from "vitest";
 import type { KeyValuePair } from "@RpgTypes/libs";
-import type { CC } from "./normalize";
-import { gg } from "./normalize";
+import { normalizeDictionaryItems } from "./normalize";
+import type { DictionaryNormalizationResult } from "./types";
 
 interface TestCase {
   name: string;
   input: KeyValuePair[];
-  expected: CC;
+  expected: DictionaryNormalizationResult;
 }
 
 const runTestCase = (testCase: TestCase) => {
   test(testCase.name, () => {
-    const result = gg(testCase.input);
+    const result = normalizeDictionaryItems(testCase.input);
     expect(result).toEqual(testCase.expected);
   });
 };
@@ -103,6 +103,6 @@ const testCases: TestCase[] = [
   },
 ];
 
-describe("gg", () => {
+describe("normalizeDictionaryItems", () => {
   testCases.forEach(runTestCase);
 });

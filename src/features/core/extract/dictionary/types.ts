@@ -1,5 +1,5 @@
 import type { RawGameData } from "@RpgTypes/fileio";
-import type { KeyValuePairEx } from "@RpgTypes/libs";
+import type { KeyValuePair, KeyValuePairEx } from "@RpgTypes/libs";
 import type { NormalizedEventCommand } from "@RpgTypes/rmmz";
 
 export interface RuntimeDictionaryData<Hash> {
@@ -17,4 +17,9 @@ export interface RuntimeDictionary<Hash> {
 export interface GameDataReplaceOutput<Hash> {
   main: RawGameData<NormalizedEventCommand>;
   aux: RuntimeDictionaryData<Hash>;
+}
+
+export interface DictionaryNormalizationResult {
+  errorItems: KeyValuePair[];
+  items: KeyValuePair[];
 }

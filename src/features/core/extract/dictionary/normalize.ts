@@ -1,46 +1,60 @@
 import type { KeyValuePair } from "@RpgTypes/libs";
+import type { DictionaryNormalizationResult } from "./types";
 
-export interface CC {
-  errorItems: KeyValuePair[];
-  items: KeyValuePair[];
+interface NormalizedEntry {
+  source: KeyValuePair;
+  normalized: KeyValuePair;
 }
 
-export const gg = (source: ReadonlyArray<KeyValuePair>): CC => {
-  const normalizedWithSource = source.map((item, index) => ({
-    source: item,
-    normalized: nnn(item),
-    index,
-  }));
-  const validEntries = normalizedWithSource.filter(({ normalized }) => {
-    return normalized.key.length > 0 && normalized.value.length > 0;
-  });
-  const hasKeyWithTrailingSpace = (key: string): boolean => /\s$/.test(key);
-  const conflictIndexes = new Set(
-    validEntries
-      .map(({ source, index }) => ({ item: source, index }))
-      .filter(({ item }) => hasKeyWithTrailingSpace(item.key))
-      .filter(({ item, index }) => {
-        const normalizedKey = item.key.trimEnd();
-        return validEntries.some(
-          ({ source: candidate, index: candidateIndex }) => {
-            return candidateIndex !== index && candidate.key === normalizedKey;
-          },
-        );
-      })
-      .map(({ index }) => index),
-  );
+interface PreprocessedEntries {
+  validEntries: NormalizedEntry[];
+  rawKeys: Set<string>;
+}
 
-  return {
-    errorItems: validEntries
-      .filter(({ index }) => conflictIndexes.has(index))
-      .map(({ source: item }) => item),
-    items: validEntries
-      .filter(({ index }) => !conflictIndexes.has(index))
-      .map(({ normalized }) => normalized),
-  };
+export const normalizeDictionaryItems = (
+  source: ReadonlyArray<KeyValuePair>,
+): DictionaryNormalizationResult => {
+  const preprocessed = preprocessEntries(source);
+  return classifyEntries(preprocessed);
 };
 
-const nnn = (item: KeyValuePair): KeyValuePair => {
+const preprocessEntries = (
+  source: ReadonlyArray<KeyValuePair>,
+): PreprocessedEntries => {
+  return source.reduce<PreprocessedEntries>(
+    (acc, item) => {
+      const normalized = normalizeKeyValuePair(item);
+      if (normalized.key.length === 0 || normalized.value.length === 0) {
+        return acc;
+      }
+      acc.validEntries.push({ source: item, normalized });
+      acc.rawKeys.add(item.key);
+      return acc;
+    },
+    { validEntries: [], rawKeys: new Set<string>() },
+  );
+};
+
+const classifyEntries = (
+  preprocessed: PreprocessedEntries,
+): DictionaryNormalizationResult => {
+  return preprocessed.validEntries.reduce<DictionaryNormalizationResult>(
+    (acc, entry) => {
+      if (
+        /\s$/.test(entry.source.key) &&
+        preprocessed.rawKeys.has(entry.normalized.key)
+      ) {
+        acc.errorItems.push(entry.source);
+      } else {
+        acc.items.push(entry.normalized);
+      }
+      return acc;
+    },
+    { errorItems: [], items: [] },
+  );
+};
+
+const normalizeKeyValuePair = (item: KeyValuePair): KeyValuePair => {
   return {
     key: item.key.trimEnd(),
     value: item.value.trimEnd(),
