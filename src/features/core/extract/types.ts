@@ -24,21 +24,11 @@ export interface ExtractedTextFinalWithNotes<UUID>
 
 export interface RuntimeDictionaryData<Hash> {
   targetNoteKeys: string[];
-  dictionary: KeyValuePairEx<Hash, string>[];
-  actorTextDictionary?: KeyValuePairEx<string, Hash>[];
-}
-
-export interface ReplaceAuxiliaryData<T> {
-  actorTextDictionary: KeyValuePairEx<string, T>[];
-  dictionary: RuntimeDictionaryData<T>;
+  textDictionary: KeyValuePairEx<Hash, string>[];
+  actorTexts: KeyValuePairEx<string, Hash>[];
 }
 
 export interface GameDataReplaceOutput<Hash> {
   main: RawGameData<NormalizedEventCommand>;
-  aux: ReplaceAuxiliaryData<Hash>;
-}
-
-export interface ReplaceRawDataInput {
-  basicData: RawGameData<NormalizedEventCommand>;
-  additionalData: ReplaceAuxiliaryData<string>;
+  aux: RuntimeDictionaryData<Hash>;
 }
