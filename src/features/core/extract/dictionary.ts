@@ -13,6 +13,18 @@ import type { ActorTextDictionaryHandlers } from "./text";
 import { createActorTextDictionary } from "./text";
 import type { RuntimeDictionary, RuntimeDictionaryData } from "./types";
 
+export const findActorText = <T>(
+  text: string,
+  dic: RuntimeDictionary<T>,
+): string => {
+  const value: T | undefined = dic.actorTextDictionary.get(text);
+  if (!value) {
+    return text;
+  }
+  const newText = dic.textDictionary.get(value);
+  return newText ?? text;
+};
+
 export const buildRuntimeDictionary = <T>(
   dic: RuntimeDictionaryData<T>,
 ): RuntimeDictionary<T> => ({

@@ -7,7 +7,7 @@ import type {
 import {
   createRuntimeDictionaryData,
   fileEntriesFromDictionary,
-} from "./core/extract/createDictionary";
+} from "./core/extract/dictionary";
 import {
   replaceActorText,
   replaceArmorText,
@@ -34,7 +34,7 @@ export {
   replaceRawDataWithAutoNoteFilter,
 } from "./core/replaceBundle";
 
-export { buildRuntimeDictionary } from "./core/extract/createDictionary";
+export { buildRuntimeDictionary } from "./core/extract/dictionary";
 
 export const replaceRuntimeData = (
   data: RpgDataBundleHasText,
