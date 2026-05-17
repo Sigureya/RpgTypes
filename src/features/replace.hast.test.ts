@@ -22,6 +22,7 @@ const SWITCHES_TEXT = "Switches";
 const MSG_FILEREAD_SUCCESS = "File read successfully";
 const NON_REPLACEABLE_TEXT = "Non replaceable text";
 
+const AUDIO_NAME = "AudioName";
 const makeNoteText = (text: string, value: number): string => {
   return [`<Text:${text}>`, `<Number:${value}>`].join("\n");
 };
@@ -92,7 +93,7 @@ describe("replaceDataWithHash", () => {
       text: "AAA",
       image: IMAGE_NAME,
       note: makeNoteText("AAA", 456),
-      audio: "AudioName",
+      audio: AUDIO_NAME,
     });
     const extractor = createExtractor();
     const result = replaceDataWithHash(
@@ -178,6 +179,48 @@ describe("replaceDataWithHash", () => {
         createHash,
       );
       expect(result.aux.actorTexts).toEqual(expectedDictionary.actorTexts);
+    });
+  });
+  describe.skip("末尾に空白がある場合の対応", () => {
+    const extractor = createExtractor();
+    const input: ReplaceRawDataContext = {
+      assetBundle: createAssetBundle(),
+      data: makeMockDataBundle({
+        text: "AAA ",
+        image: IMAGE_NAME,
+        note: makeNoteText("AAA ", 456),
+        audio: AUDIO_NAME,
+      }),
+      textKeys: new Set(["Text"]),
+      dictionary: new Map([["AAA ", "BBB "]]),
+    };
+    test("末尾の空白を除去した上でハッシュ化すること", () => {
+      const fn = vi.fn((text: string) => `hash_${text}`);
+      replaceDataWithHash(input, extractor, fn);
+      expect(fn).not.toHaveBeenCalledWith("AAA ");
+      expect(fn).not.toHaveBeenCalledWith("BBB ");
+      expect(fn).toHaveBeenCalledWith("AAA");
+      expect(fn).toHaveBeenCalledWith("BBB");
+    });
+  });
+  describe("先頭に空白がある場合は維持", () => {
+    const extractor = createExtractor();
+    const input: ReplaceRawDataContext = {
+      assetBundle: createAssetBundle(),
+      data: makeMockDataBundle({
+        text: " AAA",
+        image: IMAGE_NAME,
+        note: "",
+        audio: AUDIO_NAME,
+      }),
+      textKeys: new Set([]),
+      dictionary: new Map([[" AAA", " BBB"]]),
+    };
+    test("先頭の空白を維持してハッシュ化すること", () => {
+      const fn = vi.fn((text: string) => `hash_${text}`);
+      replaceDataWithHash(input, extractor, fn);
+      expect(fn).toHaveBeenCalledWith(" AAA");
+      expect(fn).toHaveBeenCalledWith(" BBB");
     });
   });
 });
