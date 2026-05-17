@@ -16,13 +16,13 @@ import type { RuntimeDictionary, RuntimeDictionaryData } from "./types";
 export const findActorText = <T>(
   text: string,
   dic: RuntimeDictionary<T>,
-): string => {
+): string | undefined => {
   const value: T | undefined = dic.actorTextDictionary.get(text);
   if (!value) {
-    return text;
+    return undefined;
   }
   const newText = dic.textDictionary.get(value);
-  return newText ?? text;
+  return newText;
 };
 
 export const buildRuntimeDictionary = <T>(
