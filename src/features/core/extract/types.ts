@@ -25,6 +25,7 @@ export interface ExtractedTextFinalWithNotes<UUID>
 export interface RuntimeDictionaryData<Hash> {
   targetNoteKeys: string[];
   dictionary: KeyValuePairEx<Hash, string>[];
+  actorTextDictionary?: KeyValuePairEx<string, Hash>[];
 }
 
 export interface ReplaceAuxiliaryData<T> {

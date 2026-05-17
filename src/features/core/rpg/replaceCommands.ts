@@ -1,11 +1,11 @@
 import type { EventCommandUnknown } from "@RpgTypes/libs/eventCommand";
 import type { EventCommand } from "@RpgTypes/rmmz";
 import type {
+  CommandContainer,
   Data_CommonEventUnknown,
   Data_TroopUnknonw,
   MapEventContainer,
 } from "@RpgTypes/rmmz/rpg";
-import type { CommandContainer } from "./map/";
 import type { ReplaceableEventPage } from "./types";
 
 type EventCommandReplaceFunc = <Command extends EventCommandUnknown>(

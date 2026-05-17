@@ -1,7 +1,7 @@
 import type { Data_Map, MapEventPage, MapFileInfo } from "@RpgTypes/rmmz";
+import { collectMapEvents, correctTroopEvents } from "@RpgTypes/rmmz";
 import type { EventCommand } from "@RpgTypes/rmmz/eventCommand/commands/union";
 import type { Data_Troop } from "@RpgTypes/rmmz/events";
-import { collectMapEvents, correctTroopEvents } from "../../rpg";
 import { extractItemCommands } from "./eventCommand/eventCommand";
 import type { ItemCommandCode, ItemCommandTerms2 } from "./eventCommand/types";
 import type { ExtractedMapEventItems, ExtractedTroopEventItems } from "./types";
@@ -9,7 +9,7 @@ import type { ExtractedMapEventItems, ExtractedTroopEventItems } from "./types";
 export const extractItemFromMap = (
   map: MapFileInfo<Data_Map<EventCommand>>,
   terms: ItemCommandTerms2,
-  commandNameFn: (code: ItemCommandCode) => string
+  commandNameFn: (code: ItemCommandCode) => string,
 ): ExtractedMapEventItems[] => {
   return collectMapEvents(
     map.map,
@@ -18,7 +18,7 @@ export const extractItemFromMap = (
       commands: extractItemCommands(page.list, terms, commandNameFn),
       eventName: event.name,
       pageIndex: index,
-    })
+    }),
   );
 };
 
@@ -31,7 +31,7 @@ const conditionXX = (page: MapEventPage<EventCommand>) => {
 export const extractItemFromTroop = (
   troopList: ReadonlyArray<Data_Troop>,
   terms: ItemCommandTerms2,
-  commandNameFn: (code: ItemCommandCode) => string
+  commandNameFn: (code: ItemCommandCode) => string,
 ): ExtractedTroopEventItems[] => {
   return correctTroopEvents(
     troopList,
@@ -40,6 +40,6 @@ export const extractItemFromTroop = (
       eventName: troop.name,
       troopId: troop.id,
       pageIndex: index,
-    })
+    }),
   );
 };

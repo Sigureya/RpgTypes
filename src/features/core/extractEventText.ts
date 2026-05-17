@@ -5,7 +5,7 @@ import type {
   EventCommand,
   Command_PluginCommandMZ,
 } from "@RpgTypes/rmmz";
-import { readNote } from "@RpgTypes/rmmz";
+import { collectMapEvents, readNote } from "@RpgTypes/rmmz";
 import type { TextPluginCommandParameter } from "./extract/text/eventCommand";
 import type {
   ExtractedBattleEventText,
@@ -14,7 +14,6 @@ import type {
   ExtractedMapTexts,
 } from "./extract/text/eventCommand";
 import { extractTextFromEventCommandsEx } from "./getTextFromCommand";
-import { collectMapEvents } from "./rpg";
 
 export const extractCommonEventTexts = <T extends TextPluginCommandParameter>(
   commons: Data_CommonEvent,
