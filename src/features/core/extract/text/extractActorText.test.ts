@@ -198,4 +198,22 @@ describe("createActorTextDictionary", () => {
       expect(entry.key).toMatch(/^\[JP\]/);
     });
   });
+  test("should not include entries for empty or whitespace-only texts and should not call handlers for them", () => {
+    const mockHashFn = vi.fn((text: string): string => `hash_${text}`);
+    const mockTranslateFn = vi.fn((text: string): string => `[JP] ${text}`);
+
+    const mockActor = makeActorData({
+      name: "",
+      nickname: "  ",
+      profile: "\n",
+    });
+
+    const result = createActorTextDictionary([mockActor], [], [], [], {
+      hashText: mockHashFn,
+      newText: mockTranslateFn,
+    });
+    expect(result).toEqual([]);
+    expect(mockHashFn).not.toHaveBeenCalled();
+    expect(mockTranslateFn).not.toHaveBeenCalled();
+  });
 });
