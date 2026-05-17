@@ -1,4 +1,5 @@
 export type { Rmmz_Actor } from "./actor";
+export type { Rmmz_ActorTexts } from "./actorBase/text";
 export type { Rmmz_Actors, Rmmz_ActorsTemplate } from "./actors";
 export type { Rmmz_Battler } from "./battler";
 export type { Rmmz_BattlerBase } from "./base";

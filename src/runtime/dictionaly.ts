@@ -1,0 +1,3 @@
+class RuntimeDictionary {
+  constructor() {}
+}
