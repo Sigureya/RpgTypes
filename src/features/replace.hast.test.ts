@@ -155,12 +155,12 @@ describe("replaceDataWithHash", () => {
 
     expect(result.aux.dictionary).toEqual(expectedDictionary);
     expect(result.aux.actorTextDictionary).toContainEqual({
-      key: "hash_AAA",
-      value: "AAA",
+      value: "hash_AAA",
+      key: "AAA",
     });
     expect(result.aux.actorTextDictionary).toContainEqual({
-      key: "hash_BBB",
-      value: "BBB",
+      value: "hash_BBB",
+      key: "BBB",
     });
   });
 });

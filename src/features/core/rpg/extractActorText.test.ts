@@ -117,7 +117,7 @@ describe("createActorTextDictionary", () => {
     // Check original texts are in the result
     allTexts.forEach((text) => {
       const originalEntry = result.find(
-        (entry) => entry.key === mockHashFn(text) && entry.value === text,
+        (entry) => entry.value === mockHashFn(text) && entry.key === text,
       );
       expect(originalEntry).toBeDefined();
     });
@@ -127,8 +127,8 @@ describe("createActorTextDictionary", () => {
       const translatedText = mockTranslateFn(text);
       const translatedEntry = result.find(
         (entry) =>
-          entry.key === mockHashFn(translatedText) &&
-          entry.value === translatedText,
+          entry.value === mockHashFn(translatedText) &&
+          entry.key === translatedText,
       );
       expect(translatedEntry).toBeDefined();
     });
@@ -190,12 +190,12 @@ describe("createActorTextDictionary", () => {
 
     // All base texts should come first
     baseTexts.forEach((entry) => {
-      expect(entry.value).not.toMatch(/^\[JP\]/);
+      expect(entry.key).not.toMatch(/^\[JP\]/);
     });
 
     // All translated texts should come last
     translatedTexts.forEach((entry) => {
-      expect(entry.value).toMatch(/^\[JP\]/);
+      expect(entry.key).toMatch(/^\[JP\]/);
     });
   });
 });
