@@ -1,6 +1,12 @@
 import { describe, expect, test, vi } from "vitest";
+import { FILENAME_AUX_DICTIONARY } from "@RpgTypes/fileio";
 import type { KeyValuePairEx } from "@RpgTypes/libs";
-import { createRuntimeDictionaryData, findActorText } from "./dictionary";
+import {
+  buildRuntimeDictionary,
+  createRuntimeDictionaryData,
+  fileEntriesFromDictionary,
+  findActorText,
+} from "./dictionary";
 import type { SummarizedNote, SummarizedNoteValue } from "./note";
 import type { RuntimeDictionary, RuntimeDictionaryData } from "./types";
 
@@ -105,5 +111,39 @@ describe("findActorText", () => {
   test("存在しない文字にはundefinedを返す", () => {
     const result3 = findActorText("text", dic);
     expect(result3).toBeUndefined();
+  });
+});
+
+describe("buildRuntimeDictionary", () => {
+  test("配列形式の辞書を Set/Map へ変換する", () => {
+    const input: RuntimeDictionaryData<string> = {
+      targetNoteKeys: ["Target", "Target", "Description"],
+      textDictionary: [{ key: "hash_A", value: "AAA" }],
+      actorTexts: [{ key: "AAA", value: "hash_A" }],
+    };
+
+    const result = buildRuntimeDictionary(input);
+
+    expect(result.targetNoteKeys).toEqual(new Set(["Target", "Description"]));
+    expect(result.textDictionary.get("hash_A")).toBe("AAA");
+    expect(result.actorTextDictionary.get("AAA")).toBe("hash_A");
+  });
+});
+
+describe("fileEntriesFromDictionary", () => {
+  test("Dictionary.json の FileEntry を1件返す", () => {
+    const dic: RuntimeDictionaryData<string> = {
+      targetNoteKeys: ["Target"],
+      textDictionary: [{ key: "hash_AAA", value: "BBB" }],
+      actorTexts: [{ key: "AAA", value: "hash_AAA" }],
+    };
+
+    const result = fileEntriesFromDictionary(dic);
+
+    expect(result).toHaveLength(1);
+    expect(result[0]).toEqual({
+      filename: FILENAME_AUX_DICTIONARY,
+      data: dic,
+    });
   });
 });
