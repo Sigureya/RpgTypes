@@ -11,7 +11,19 @@ import type { SummarizedNote, SummarizedNoteValue } from "./note";
 import { stringLikeNoteKeys } from "./note";
 import type { ActorTextDictionaryHandlers } from "./text";
 import { createActorTextDictionary } from "./text";
-import type { RuntimeDictionaryData } from "./types";
+import type { RuntimeDictionary, RuntimeDictionaryData } from "./types";
+
+export const buildRuntimeDictionary = <T>(
+  dic: RuntimeDictionaryData<T>,
+): RuntimeDictionary<T> => ({
+  targetNoteKeys: new Set(dic.targetNoteKeys),
+  textDictionary: new Map(
+    dic.textDictionary.map(({ key, value }) => [key, value]),
+  ),
+  actorTextDictionary: new Map(
+    dic.actorTexts.map(({ key, value }) => [key, value]),
+  ),
+});
 
 export const fileEntriesFromDictionary = (
   dic: RuntimeDictionaryData<unknown>,

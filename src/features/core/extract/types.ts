@@ -28,6 +28,12 @@ export interface RuntimeDictionaryData<Hash> {
   actorTexts: KeyValuePairEx<string, Hash>[];
 }
 
+export interface RuntimeDictionary<Hash> {
+  targetNoteKeys: ReadonlySet<string>;
+  textDictionary: ReadonlyMap<Hash, string>;
+  actorTextDictionary: ReadonlyMap<string, Hash>;
+}
+
 export interface GameDataReplaceOutput<Hash> {
   main: RawGameData<NormalizedEventCommand>;
   aux: RuntimeDictionaryData<Hash>;

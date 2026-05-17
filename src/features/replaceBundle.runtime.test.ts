@@ -16,7 +16,7 @@ import {
   makeTestCommonEventData,
   makeTestTroopData,
 } from "@RpgTypes/rmmz/makeTestData";
-import type { RuntimeDictionaryData } from "./core/extract";
+import type { RuntimeDictionary } from "./core/extract";
 import { replaceRuntimeData } from "./replace";
 
 const AUDIO_NAME = "AudioName";
@@ -56,10 +56,10 @@ describe("replaceRuntimeData", () => {
       nonReplaceableText: NON_REPLACEABLE_TEXT,
       note: NOTE_TEXT,
     });
-    const runtimeDictionaryData: RuntimeDictionaryData<string> = {
-      textDictionary: [{ key: TEXT, value: NEW_TEXT }],
-      targetNoteKeys: ["Target"],
-      actorTexts: [],
+    const runtimeDictionaryData: RuntimeDictionary<string> = {
+      targetNoteKeys: new Set(["Target"]),
+      textDictionary: new Map([[TEXT, NEW_TEXT]]),
+      actorTextDictionary: new Map(),
     };
 
     const result = replaceRuntimeData(input, runtimeDictionaryData);
