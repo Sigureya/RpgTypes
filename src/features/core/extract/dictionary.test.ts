@@ -102,9 +102,8 @@ describe("findActorText", () => {
     const result2 = findActorText("こんにちは", dic);
     expect(result2).toBe("Hello");
   });
-  test("存在しない文字はそのまま返す", () => {
-    const text = "text";
-    const result3 = findActorText(text, dic);
-    expect(result3).toBe(text);
+  test("存在しない文字にはundefinedを返す", () => {
+    const result3 = findActorText("text", dic);
+    expect(result3).toBeUndefined();
   });
 });
