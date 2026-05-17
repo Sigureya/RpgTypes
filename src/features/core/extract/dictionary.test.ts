@@ -1,14 +1,17 @@
 import { describe, expect, test, vi } from "vitest";
 import { FILENAME_AUX_DICTIONARY } from "@RpgTypes/fileio";
 import type { KeyValuePairEx } from "@RpgTypes/libs";
+import { createRuntimeDictionaryData } from "./createDictionary";
 import {
-  buildRuntimeDictionary,
-  createRuntimeDictionaryData,
-  fileEntriesFromDictionary,
   findActorText,
-} from "./dictionary";
+  buildRuntimeDictionary,
+  fileEntriesFromDictionary,
+} from "./dictionary/dic";
+import type {
+  RuntimeDictionaryData,
+  RuntimeDictionary,
+} from "./dictionary/types";
 import type { SummarizedNote, SummarizedNoteValue } from "./note";
-import type { RuntimeDictionary, RuntimeDictionaryData } from "./types";
 
 const noteValue = (value: string, id: number): SummarizedNoteValue => ({
   value,

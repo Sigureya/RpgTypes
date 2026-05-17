@@ -28,17 +28,18 @@ export const createActorTextDictionary = <T>(
 ): KeyValuePairEx<string, T>[] => {
   const baseTexts = Array.from(
     extractActorTexts(actors, commons, troops, maps),
-  ).map(
-    (text: string): KeyValuePairEx<string, T> => ({
-      key: text,
-      value: handlers.hashText(text),
-    }),
-  );
+  ).map((text: string): KeyValuePairEx<string, T> => {
+    const trimmedText = text.trimEnd();
+    return {
+      key: trimmedText,
+      value: handlers.hashText(trimmedText),
+    };
+  });
   const newTexts = baseTexts.map((pair): KeyValuePairEx<string, T> => {
     const t2 = handlers.newText(pair.key);
     return {
       key: t2,
-      value: handlers.hashText(t2),
+      value: handlers.hashText(t2.trimEnd()),
     };
   });
   return [...baseTexts, ...newTexts];
