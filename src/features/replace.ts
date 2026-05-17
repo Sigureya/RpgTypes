@@ -5,10 +5,12 @@ import type {
   NormalizedEventCommand,
   RpgDataBundleHasText,
 } from "@RpgTypes/rmmz";
-import {
-  createRuntimeDictionaryData,
-  fileEntriesFromDictionary,
-} from "./core/extract/dictionary";
+import { fileEntriesFromDictionary } from "./core/extract/dic/dic";
+import type {
+  RuntimeDictionary,
+  GameDataReplaceOutput,
+} from "./core/extract/dic/types";
+import { createRuntimeDictionaryData } from "./core/extract/dictionary";
 import {
   replaceActorText,
   replaceArmorText,
@@ -28,18 +30,12 @@ import {
   replaceTroopData,
 } from "./core/replaceEvent";
 import type { EventContainerExtractor } from "./extractText";
-import type {
-  ReplaceRawDataContext,
-  GameDataReplaceOutput,
-  RuntimeDictionary,
-} from "./types";
+import type { ReplaceRawDataContext } from "./types";
 
 export {
   replaceRawDataBundle,
   replaceRawDataWithAutoNoteFilter,
 } from "./core/replaceBundle";
-
-export { buildRuntimeDictionary } from "./core/extract/dictionary";
 
 export const replaceRuntimeMapData = (
   map: Data_Map,
