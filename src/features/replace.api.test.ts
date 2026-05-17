@@ -20,6 +20,7 @@ import type {
   Data_Troop,
   EventCommand,
 } from "@RpgTypes/rmmz";
+import type { GameDataReplaceOutput, RuntimeDictionary } from "./core/extract";
 import type {
   EventContainerExtractor,
   ExtractedBattleEventText,
@@ -32,11 +33,7 @@ import {
   replaceDataWithHashToFileEntries,
   replaceRuntimeMapData,
 } from "./replace";
-import type {
-  GameDataReplaceOutput,
-  ReplaceRawDataContext,
-  RuntimeDictionary,
-} from "./types";
+import type { ReplaceRawDataContext } from "./types";
 
 const IMAGE_NAME = "ImageName";
 const VARIABLE_TEXT = "Variables";
