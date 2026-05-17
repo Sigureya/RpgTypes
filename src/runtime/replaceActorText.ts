@@ -8,7 +8,7 @@ const replaceRuntimeActorText = <T>(
   actorTextDictionary: readonly KeyValuePairEx<string, T>[],
 ) => {
   const map: Map<T, string> = new Map(
-    dicitionay.dictionary.map(({ key, value }) => [key, value]),
+    dicitionay.textDictionary.map(({ key, value }) => [key, value]),
   );
 };
 

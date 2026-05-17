@@ -26,10 +26,10 @@ export const createActorTextDictionary = <T>(
   maps: ReadonlyArray<Data_Map>,
   handlers: ActorTextDictionaryHandlers<T>,
 ): KeyValuePairEx<string, T>[] => {
-  const set = extractActorTexts(actors, commons, troops, maps);
-  const list = Array.from(set);
-  const baseTexts = list.map(
-    (text): KeyValuePairEx<string, T> => ({
+  const baseTexts = Array.from(
+    extractActorTexts(actors, commons, troops, maps),
+  ).map(
+    (text: string): KeyValuePairEx<string, T> => ({
       key: text,
       value: handlers.hashText(text),
     }),
