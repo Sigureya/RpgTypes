@@ -28,7 +28,7 @@ export interface RuntimeDictionaryData<Hash> {
 }
 
 export interface ReplaceAuxiliaryData<T> {
-  actorTextDictionary: KeyValuePairEx<T, string>[];
+  actorTextDictionary: KeyValuePairEx<string, T>[];
   dictionary: RuntimeDictionaryData<T>;
 }
 

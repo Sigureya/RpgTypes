@@ -191,7 +191,7 @@ const createActorTextDictionaryEntries = <T>(
   data: RawGameData,
   dictionary: ReadonlyMap<string, string>,
   hashFn: (text: string) => T,
-): KeyValuePairEx<T, string>[] => {
+): KeyValuePairEx<string, T>[] => {
   return createActorTextDictionary(
     data.actors.data,
     data.commonEvents.data,

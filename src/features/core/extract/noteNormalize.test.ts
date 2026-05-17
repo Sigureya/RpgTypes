@@ -11,8 +11,11 @@ import {
   normalizeNoteFromMapFiles,
   buildRawGameDataNoteNormalization,
 } from "./noteNormarize";
-import type { ExtractedDataBundle, ExtractedMapTexts } from "./text";
-import type { ExtractedRawGameDataTexts } from "./types";
+import type {
+  ExtractedDataBundle,
+  ExtractedMapTexts,
+  ExtractedRawGameDataTexts,
+} from "./text";
 
 const BGM1 = "bgm1";
 const BGM2 = "bgm2";
