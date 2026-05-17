@@ -9,6 +9,7 @@ import type {
   NormalizedEventCommand,
   RpgDataBundleHasText,
 } from "@RpgTypes/rmmz";
+import { createActorTextDictionary } from "./core/extract";
 import { createRuntimeDictionaryData } from "./core/extract/createDictionary";
 import {
   replaceActorText,
@@ -24,7 +25,6 @@ import {
 import type { MapDataReplaceHandlers } from "./core/replace/types";
 import { replaceRawDataWithAutoNoteFilter } from "./core/replaceBundle";
 import { replaceCommonEventData } from "./core/replaceEvent";
-import { createActorTextDictionary } from "./core/rpg";
 import type { EventContainerExtractor } from "./extractText";
 import type {
   ReplaceRawDataContext,
