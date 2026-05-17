@@ -1,12 +1,7 @@
 import type { Data_NamedItem } from "@RpgTypes/libs";
 import { buildNoteFromNormalized, normalizeNote } from "./normarize";
 import { makeRegex } from "./read";
-import type {
-  NormalizedNote,
-  NoteReadResult,
-  NoteReadResultEx,
-  NoteReplaceHandlers,
-} from "./types";
+import type { NormalizedNote, NoteReadResult, NoteReadResultEx } from "./types";
 
 export const createNoteEntity = (key: string, value: string): string => {
   return `<${key}:${value}>`;
@@ -30,38 +25,6 @@ export const replaceNote = (
       value: transformFunction(item),
     }),
   );
-  return buildNoteFromNormalized(
-    {
-      note: normalized.note,
-      items: newItems,
-    },
-    sep,
-  );
-};
-
-const updateNoteIfNeeded = (
-  item: NoteReadResult,
-  handlers: NoteReplaceHandlers,
-): NoteReadResult => {
-  if (handlers.isReplaceTargetNote(item)) {
-    const newValue = handlers.replaceText(item.value);
-    return {
-      key: item.key,
-      value: newValue ?? item.value,
-    };
-  }
-  return item;
-};
-
-export const replaceNoteWithHandlers = (
-  note: string,
-  handlers: NoteReplaceHandlers,
-  sep: string = `\n`,
-): string => {
-  const normalized: NormalizedNote = normalizeNote(note);
-  const newItems = normalized.items.map((item): NoteReadResult => {
-    return updateNoteIfNeeded(item, handlers);
-  });
   return buildNoteFromNormalized(
     {
       note: normalized.note,
