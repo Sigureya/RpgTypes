@@ -8,7 +8,7 @@ import type {
 import { makeRawTestDataBundle } from "@RpgTypes/fileio";
 import type { TestDataSourceWithNote } from "@RpgTypes/libs";
 import type { Data_CommonEvent, Data_Map, Data_Troop } from "@RpgTypes/rmmz";
-import type { GameDataReplaceOutput } from "./core/extract/dic/types";
+import type { GameDataReplaceOutput } from "./core/extract";
 import type {
   EventContainerExtractor,
   ExtractedBattleEventText,

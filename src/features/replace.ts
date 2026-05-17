@@ -5,12 +5,9 @@ import type {
   NormalizedEventCommand,
   RpgDataBundleHasText,
 } from "@RpgTypes/rmmz";
-import { fileEntriesFromDictionary } from "./core/extract/dic/dic";
-import type {
-  RuntimeDictionary,
-  GameDataReplaceOutput,
-} from "./core/extract/dic/types";
-import { createRuntimeDictionaryData } from "./core/extract/dictionary";
+import type { RuntimeDictionary, GameDataReplaceOutput } from "./core/extract";
+import { fileEntriesFromDictionary } from "./core/extract";
+import { createRuntimeDictionaryData } from "./core/extract/createDictionary";
 import {
   replaceActorText,
   replaceArmorText,

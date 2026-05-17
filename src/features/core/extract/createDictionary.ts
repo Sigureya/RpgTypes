@@ -5,7 +5,7 @@ import type {
   Data_Troop,
   Data_Map,
 } from "@RpgTypes/rmmz";
-import type { RuntimeDictionaryData } from "./dic/types";
+import type { RuntimeDictionaryData } from "./dictionary";
 import type { SummarizedNote, SummarizedNoteValue } from "./note";
 import { stringLikeNoteKeys } from "./note";
 import type { ActorTextDictionaryHandlers } from "./text";

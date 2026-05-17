@@ -16,7 +16,7 @@ import {
   makeTestCommonEventData,
   makeTestTroopData,
 } from "@RpgTypes/rmmz/makeTestData";
-import type { RuntimeDictionary } from "./core/extract/dic/types";
+import type { RuntimeDictionary } from "./core/extract";
 import { replaceRuntimeData } from "./replace";
 
 const AUDIO_NAME = "AudioName";
