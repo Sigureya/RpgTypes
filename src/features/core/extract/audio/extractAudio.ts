@@ -1,4 +1,3 @@
-import { collectMapEvents } from "@RpgTypes/features/core/rpg";
 import type {
   Command_PluginCommandMZ,
   Data_CommonEvent,
@@ -6,7 +5,7 @@ import type {
   Data_Troop,
   EventCommand,
 } from "@RpgTypes/rmmz";
-import { readNote } from "@RpgTypes/rmmz";
+import { collectMapEvents, readNote } from "@RpgTypes/rmmz";
 import { extractAudioCommands } from "./eventCommand";
 import type { AudioPluginCommandParameter } from "./types";
 import type {

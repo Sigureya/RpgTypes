@@ -6,13 +6,13 @@ import type {
   Data_CommonEvent,
   Data_Troop,
   EventCommand,
+  CommandContainer,
 } from "@RpgTypes/rmmz";
-import type { CommandContainer } from "./map";
 import {
   collectMapEvents,
   processCommonEvents,
   processTroopEvents,
-} from "./map";
+} from "@RpgTypes/rmmz";
 
 export interface ActorTextDictionaryHandlers<T> {
   newText: (text: string) => string;

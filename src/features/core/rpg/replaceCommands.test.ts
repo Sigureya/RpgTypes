@@ -1,12 +1,12 @@
 import { describe, expect, test } from "vitest";
 import type { EventCommandUnknown } from "@RpgTypes/libs/eventCommand";
 import type {
+  CommandContainer,
   Data_CommonEventUnknown,
   EventCommand,
   ExtractCommandByParam,
   MapEventContainer,
 } from "@RpgTypes/rmmz";
-import type { CommandContainer } from "./map";
 import {
   replaceEventCommands,
   replacePages,

@@ -59,6 +59,7 @@ describe("replaceRuntimeData", () => {
     const runtimeDictionaryData: RuntimeDictionaryData<string> = {
       dictionary: [{ key: TEXT, value: NEW_TEXT }],
       targetNoteKeys: ["Target"],
+      actorTextDictionary: [],
     };
 
     const result = replaceRuntimeData(input, runtimeDictionaryData);
