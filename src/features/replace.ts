@@ -21,12 +21,12 @@ import {
 } from "./core/replace";
 import type { MapDataReplaceHandlers } from "./core/replace/types";
 import { replaceRawDataWithAutoNoteFilter } from "./core/replaceBundle";
-import { replaceCommonEventData } from "./core/replaceEvent";
+import { replaceCommonEventData, replaceTroopData } from "./core/replaceEvent";
 import type { EventContainerExtractor } from "./extractText";
 import type {
   ReplaceRawDataContext,
   GameDataReplaceOutput,
-  RuntimeDictionaryData,
+  RuntimeDictionary,
 } from "./types";
 
 export {
@@ -34,22 +34,20 @@ export {
   replaceRawDataWithAutoNoteFilter,
 } from "./core/replaceBundle";
 
+export { buildRuntimeDictionary } from "./core/extract/createDictionary";
+
 export const replaceRuntimeData = (
   data: RpgDataBundleHasText,
-  dic: RuntimeDictionaryData<string>,
+  dic: RuntimeDictionary<string>,
 ): RpgDataBundleHasText => {
-  const map: Map<string, string> = new Map(
-    dic.textDictionary.map(({ key, value }) => [key, value]),
-  );
-  const set: ReadonlySet<string> = new Set(dic.targetNoteKeys);
   const handlers: MapDataReplaceHandlers = {
     replaceText(text) {
-      return map.get(text);
+      return dic.textDictionary.get(text);
     },
     pluginCommand: (command) => command,
     scriptCommand: (command) => command,
     isReplaceTargetNote(item) {
-      return set.has(item.key);
+      return dic.targetNoteKeys.has(item.key);
     },
   };
   return {
@@ -75,13 +73,13 @@ export const replaceRuntimeData = (
       return replaceStateText(item, handlers);
     }),
     troops: data.troops.map((item) => {
-      return item;
+      return replaceTroopData(item, handlers);
     }),
     weapons: data.weapons.map((item) => {
       return replaceWeaponText(item, handlers);
     }),
     system: replaceSystemText(data.system, (text) => {
-      return map.get(text);
+      return dic.textDictionary.get(text);
     }),
     commonEvents: data.commonEvents.map((item) => {
       return replaceCommonEventData(item, handlers);

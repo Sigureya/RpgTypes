@@ -1,5 +1,6 @@
 export * from "./build";
 export * from "./bundle";
+export * from "./createDictionary";
 export * from "./item";
 export * from "./note";
 export * from "./noteNormarize";
