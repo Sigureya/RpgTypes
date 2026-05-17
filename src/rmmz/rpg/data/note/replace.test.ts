@@ -1,7 +1,7 @@
 import type { MockedObject } from "vitest";
 import { describe, test, expect, vi } from "vitest";
 import { buildNoteFromNormalized } from "./normarize";
-import { replaceV2 } from "./replace";
+import { replaceNoteWithHandlers } from "./replace";
 import type { NormalizedNote, NoteReplaceHandlers } from "./types";
 
 interface TestCase {
@@ -24,7 +24,7 @@ const runTestCase = (testCase: TestCase) => {
   const input = buildNoteFromNormalized(testCase.note);
   describe(testCase.name, () => {
     test("a", () => {
-      const result: string = replaceV2(input, {
+      const result: string = replaceNoteWithHandlers(input, {
         isReplaceTargetNote: () => false,
         replaceText: () => undefined,
       });
@@ -32,7 +32,7 @@ const runTestCase = (testCase: TestCase) => {
     });
     test("b", () => {
       const handlers = createEmptyHandlers();
-      replaceV2(input, handlers);
+      replaceNoteWithHandlers(input, handlers);
       expect(handlers.replaceText).not.toBeCalled();
       expect(handlers.isReplaceTargetNote).toBeCalledTimes(
         testCase.note.items.length,
@@ -48,7 +48,7 @@ const runTestCase = (testCase: TestCase) => {
         ),
         replaceText: vi.fn(replaceText),
       };
-      const result: string = replaceV2(input, handlers);
+      const result: string = replaceNoteWithHandlers(input, handlers);
       expect(result).toBe(testCase.expected);
     });
   });
@@ -72,7 +72,7 @@ describe("replaceV2", () => {
   test("XML likeノートを破壊しない", () => {
     const handlers = createEmptyHandlers();
     const note = ["<Data:123></Data>", "<Text:abc>"].join("\n");
-    const result = replaceV2(note, handlers);
+    const result = replaceNoteWithHandlers(note, handlers);
     expect(result).toBe(note);
     expect(handlers.replaceText).not.toBeCalled();
   });
@@ -84,7 +84,7 @@ describe("replaceV2", () => {
       "<Data:456></Data>",
       "<Text:abc>",
     ].join("\n");
-    const result = replaceV2(note, handlers);
+    const result = replaceNoteWithHandlers(note, handlers);
     expect(result).toBe(note);
     expect(handlers.replaceText).not.toBeCalled();
   });
