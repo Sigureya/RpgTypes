@@ -32,11 +32,7 @@ const se = (e, a, t, s, r, n) => {
   const n = Array.from($a(e, a, t, s)).map(((o) => {
     const i = o.trimEnd();
     return i.length === 0 ? null : { key: i, value: r.hashText(i) };
-  })), m = n.map(((o) => {
-    if (o === null) return null;
-    const i = r.newText(o.key).trimEnd();
-    return { key: i, value: r.hashText(i) };
-  }));
+  })), m = n.map(((o) => o === null ? null : { key: r.newText(o.key).trimEnd(), value: o.value }));
   return [...n, ...m].filter(Aa);
 }, Aa = (e) => e !== null && e.key.length > 0, $a = (e, a, t, s) => {
   const r = Fa(e), n = s.map(Pa), m = Ka(a), o = Ra(t);
