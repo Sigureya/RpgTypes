@@ -13,6 +13,7 @@ export interface Rmmz_DataManager {
     loadMapData(mapId: number): void;
     makeEmptyMap(): void;
     isMapLoaded(): boolean;
+    onXhrLoad(xhr: XMLHttpRequest, name: string, src: string, url: string): void;
     onLoad(object: RpgDataTypes): void;
     isMapObject(data: RpgDataTypes): data is Data_Map;
     extractArrayMetadata(list: unknown): void;
