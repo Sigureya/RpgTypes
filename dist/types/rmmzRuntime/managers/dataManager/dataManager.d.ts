@@ -16,9 +16,9 @@ export interface Rmmz_DataManager {
     onXhrLoad(xhr: XMLHttpRequest, name: string, src: string, url: string): void;
     onLoad(object: RpgDataTypes): void;
     isMapObject(data: RpgDataTypes): data is Data_Map;
-    extractArrayMetadata(list: {
+    extractArrayMetadata(list: (null | {
         note: string;
-    }[]): void;
+    })[]): void;
     extractMetadata(data: {
         note: string;
     }): void;
