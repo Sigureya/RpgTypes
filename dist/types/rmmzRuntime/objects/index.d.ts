@@ -1,10 +1,10 @@
+export * from './actors';
 export * from './core';
-export { Game_Actors } from './actors';
-export { Game_Enemy } from './enemy';
-export { Game_Interpreter } from './interpreter';
-export { Game_Message } from './message';
-export { Game_Party } from './party';
-export { Game_System } from './system';
-export { Game_Troop } from './troop';
+export * from './enemy';
+export * from './interpreter';
+export * from './message';
+export * from './party';
+export * from './system';
+export * from './troop';
 export { Game_Unit } from './unit';
 export { Game_Variables } from './variables';
