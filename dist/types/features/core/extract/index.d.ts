@@ -2,6 +2,7 @@ export * from './build';
 export * from './bundle';
 export * from './createDictionary';
 export * from './dictionary';
+export * from './flat';
 export * from './item';
 export * from './note';
 export * from './noteNormarize';
