@@ -5,6 +5,6 @@ export { createTextDataExtractorFromSchemas, createTextDataExtractorFromCommandI
 export type { ExtractedBattleEventText, ExtractedCommonEventText, ExtractedMapEventTexts, ExtractedMapTexts, GameDataExtractor, EventCommandExtractor, EventContainerExtractor, } from './core/extract/text/eventCommand';
 export type { ExtractedActorImage, ExtractedEnemyImage, ImageExtractableActor, } from './core/extract/image/mainData';
 export { extractImageFromActor, extractImageFromEnemy, } from './core/extract/image/mainData';
-export type { ExtractedText, ExtractedTextProperty, ExtractedTextItem, } from './core/extract/text/mainData/types';
+export type { ExtractedText, ExtractedTextProperty, ExtractedTextEntry, } from './core/extract/text/mainData/types';
 export { extractNoteText, extractTextData, extractTextFromActor, extractTextFromArmor, extractTextFromClass, extractTextFromEnemy, extractTextFromItem, extractTextFromSkill, extractTextFromState, extractTextFromWeapon, } from './core/extract/text/mainData';
 export { type ExtractedSystemTexts, extractTextFromSystem, } from './core/extract/text/system';

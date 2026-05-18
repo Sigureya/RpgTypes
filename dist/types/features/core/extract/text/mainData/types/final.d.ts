@@ -1,9 +1,10 @@
+import { ExtractedTextItem } from '../../../../../../libs';
 import { Data_Enemy, Data_Skill, Data_Armor, Data_Class, Data_Item, Data_Weapon, Data_State } from '../../../../../../rmmz';
 import { ExtractedActorTexts } from './actor';
-import { ExtractedTextBundle, ExtractedTextItemG } from './mainData';
+import { ExtractedTextBundle } from './mainData';
 import { ExtractedPluginItem } from './plugin';
 export interface ExtractedTextMainDataFinal<UUID> {
-    map: ExtractedTextItemG<UUID>[];
+    map: ExtractedTextItem<UUID>[];
     actors: ExtractedActorTexts<UUID>;
     items: ExtractedTextBundle<Data_Item, UUID>[];
     weapons: ExtractedTextBundle<Data_Weapon, UUID>[];
