@@ -45,7 +45,7 @@ export const createActorTextDictionary = <T>(
     const t2: string = handlers.newText(pair.key).trimEnd();
     return {
       key: t2,
-      value: handlers.hashText(t2),
+      value: pair.value,
     };
   });
   return [...baseTexts, ...newTexts].filter(isXX);
