@@ -12,7 +12,7 @@ import type {
 import { replaceNoteWithHandlers } from "@RpgTypes/rmmz";
 import { normalizeEventCommands } from "./eventCommand/normalize";
 import type {
-  MapDataReplaceHandlers,
+  RpgDataReplaceHandlers,
   ReplaceEventTextHandlers,
 } from "./replace";
 import { replaceBasicEventCommandTexts } from "./replace";
@@ -97,14 +97,14 @@ export const replaceMapTexts = (
 
 export const replaceMapData = (
   mapData: Data_Map<EventCommand>,
-  handlers: MapDataReplaceHandlers,
+  handlers: RpgDataReplaceHandlers,
 ): Data_Map<NormalizedEventCommand> => {
   return replaceMapDataTextsCore(mapData, handlers);
 };
 
 const replaceMapEventTexts = (
   mapEvent: MapEvent<EventCommand>,
-  handlers: MapDataReplaceHandlers,
+  handlers: RpgDataReplaceHandlers,
 ): MapEvent<NormalizedEventCommand> => {
   return {
     id: mapEvent.id,
@@ -123,7 +123,7 @@ const replaceMapEventTexts = (
 
 const replaceMapDataTextsCore = (
   mapData: Data_Map<EventCommand>,
-  handlers: MapDataReplaceHandlers,
+  handlers: RpgDataReplaceHandlers,
 ): Data_Map<NormalizedEventCommand> => {
   // スプレッド構文だと型チェックを通れないので、全て手動でコピー
   return {

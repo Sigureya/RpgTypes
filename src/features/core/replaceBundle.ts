@@ -21,7 +21,7 @@ import {
   replaceStateText,
   replaceSystemText,
 } from "./replace/text";
-import type { MapDataReplaceHandlers } from "./replace/types";
+import type { RpgDataReplaceHandlers } from "./replace/types";
 import {
   replaceCommonEventData,
   replaceTroopData,
@@ -30,7 +30,7 @@ import {
 
 export const replaceRawDataBundle = (
   data: RawGameData,
-  handlers: MapDataReplaceHandlers,
+  handlers: RpgDataReplaceHandlers,
 ): RawGameData<NormalizedEventCommand> => {
   return {
     tilesets: data.tilesets,
@@ -100,7 +100,7 @@ export const replaceRawDataWithAutoNoteFilter = (
   data: RawGameData,
   assetBundle: AssetFilesBundle,
   extractor: EventContainerExtractor,
-  handlers: MapDataReplaceHandlers,
+  handlers: RpgDataReplaceHandlers,
 ): {
   data: RawGameData<NormalizedEventCommand>;
   note: RawGameDataNoteNormalization;
@@ -129,8 +129,8 @@ export const replaceRawDataWithAutoNoteFilter = (
 
 const createNoteFilteredHandlers = (
   nonTextNoteKeys: ReadonlySet<string>,
-  handlers: MapDataReplaceHandlers,
-): MapDataReplaceHandlers => ({
+  handlers: RpgDataReplaceHandlers,
+): RpgDataReplaceHandlers => ({
   pluginCommand(command) {
     return handlers.pluginCommand(command);
   },
