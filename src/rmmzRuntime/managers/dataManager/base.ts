@@ -4,20 +4,17 @@ import type {
   Data_Weapon,
   Data_Armor,
 } from "@RpgTypes/rmmz/rpg";
-import type { RpgDataTypes } from "./dataTypes";
 import type { DataFileInfo } from "./types";
 
 export interface RpgMakerDataManagerBase {
   get _databaseFiles(): DataFileInfo[];
-  loadGlobalInfo(): void;
-  saveGlobalInfo(): void;
   loadDatabase(): void;
   loadDataFile(name: string, src: string): void;
   isDatabaseLoaded(): boolean;
   loadMapData(mapId: number): void;
   makeEmptyMap(): void;
   isMapLoaded(): boolean;
-  onLoad(object: RpgDataTypes): void;
+  onLoad(object: object): void;
   extractMetadata(data: { note: string }): void;
   isBattleTest(): boolean;
   isEventTest(): boolean;
@@ -33,5 +30,5 @@ export interface RpgMakerDataManagerBase {
   latestSavefileId(): number;
 
   loadGame(savefileId: number): Promise<number>;
-  saveGame(savefileId: number): Promise<void>;
+  saveGame(savefileId: number): Promise<number>;
 }

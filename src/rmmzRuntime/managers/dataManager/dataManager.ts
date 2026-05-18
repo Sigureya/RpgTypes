@@ -12,4 +12,5 @@ export interface Rmmz_DataManager extends RpgMakerDataManagerBase {
   earliestSavefileId(): number;
   emptySavefileId(): number;
   correctDataErrors(): void;
+  loadGlobalInfo(): void;
 }
