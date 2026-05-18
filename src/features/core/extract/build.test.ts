@@ -1,3 +1,4 @@
+import type { MockedObject } from "vitest";
 import { describe, expect, test, vi } from "vitest";
 import { FILENAME_SYSTEM, makeRawTestDataBundle } from "@RpgTypes/fileio";
 import type { FileReadBundle, TestRawDataSource } from "@RpgTypes/fileio";
@@ -9,6 +10,7 @@ import type {
   EventContainerExtractor,
   RmmzTextPropertys,
   SystemKinds,
+  SystemTexts,
 } from "./text";
 
 const TEST_SOURCE: TestRawDataSource = {
@@ -46,64 +48,43 @@ const createBundle = (): FileReadBundle => {
   };
 };
 
-interface ExtractorWithSpies {
-  extractor: EventContainerExtractor;
-  spies: Pick<
-    EventContainerExtractor,
-    "extractMapTexts" | "extractBattleText" | "extractCommonEventText"
-  >;
-}
-
-const createExtractor = (): ExtractorWithSpies => {
-  const extractMapTexts = vi.fn((map: Data_Map): ExtractedMapTexts => {
-    const events = map.events.flatMap((event) => {
-      if (!event) {
-        return [];
-      }
-      return [
-        {
-          eventId: event.id,
-          name: event.name,
-          pageIndex: 0,
-          commands: [],
-          note: event.note,
-          noteItems: readNote(event.note),
-        },
-      ];
-    });
-    return {
-      displayedName: map.displayName,
-      note: map.note,
-      noteItems: readNote(map.note),
-      events,
-    };
-  });
-
-  const extractBattleText = vi.fn((troop: Data_Troop) => [
-    {
-      eventId: troop.id,
-      pageIndex: 0,
-      commands: [],
-    },
-  ]);
-
-  const extractCommonEventText = vi.fn((common: Data_CommonEvent) => ({
-    eventId: common.id,
-    name: common.name,
-    commands: [],
-  }));
-
+const createExtractor2 = (): MockedObject<EventContainerExtractor> => {
   return {
-    extractor: {
-      extractMapTexts,
-      extractBattleText,
-      extractCommonEventText,
-    },
-    spies: {
-      extractMapTexts,
-      extractBattleText,
-      extractCommonEventText,
-    },
+    extractMapTexts: vi.fn((map: Data_Map): ExtractedMapTexts => {
+      const events = map.events.flatMap((event) => {
+        if (!event) {
+          return [];
+        }
+        return [
+          {
+            eventId: event.id,
+            name: event.name,
+            pageIndex: 0,
+            commands: [],
+            note: event.note,
+            noteItems: readNote(event.note),
+          },
+        ];
+      });
+      return {
+        displayedName: map.displayName,
+        note: map.note,
+        noteItems: readNote(map.note),
+        events,
+      };
+    }),
+    extractBattleText: vi.fn((troop: Data_Troop) => [
+      {
+        pageIndex: 0,
+        eventId: troop.id,
+        commands: [],
+      },
+    ]),
+    extractCommonEventText: vi.fn((common: Data_CommonEvent) => ({
+      eventId: common.id,
+      name: common.name,
+      commands: [],
+    })),
   };
 };
 
@@ -151,7 +132,7 @@ describe("buildExtractResultWithNotes", () => {
     const terms = createTerms();
     const uuidGen = (text: string) => `uuid:${text}`;
     const commandNameFn = () => "command-name";
-    const { extractor, spies } = createExtractor();
+    const extractor = createExtractor2();
 
     const result = buildExtractResultWithNotes(
       bundle,
@@ -160,16 +141,6 @@ describe("buildExtractResultWithNotes", () => {
       uuidGen,
       commandNameFn,
       extractor,
-    );
-
-    expect(spies.extractMapTexts).toHaveBeenCalledTimes(
-      bundle.data.mapFiles.validMaps.length,
-    );
-    expect(spies.extractBattleText).toHaveBeenCalledTimes(
-      bundle.data.troops.data.length,
-    );
-    expect(spies.extractCommonEventText).toHaveBeenCalledTimes(
-      bundle.data.commonEvents.data.length,
     );
 
     expect(result.map.some((item) => item.dataKey === "note")).toBe(true);
@@ -187,6 +158,41 @@ describe("buildExtractResultWithNotes", () => {
       controlChars: createActorControlChars(bundle.data.actors.data),
     });
   });
+  test("", () => {
+    const bundle = createBundle();
+    const kinds = createKinds();
+    const terms = createTerms();
+    const uuidGen = (text: string) => `uuid:${text}`;
+    const commandNameFn = () => "command-name";
+    const extractor = createExtractor2();
+
+    buildExtractResultWithNotes(
+      bundle,
+      kinds,
+      terms,
+      uuidGen,
+      commandNameFn,
+      extractor,
+    );
+    expect(extractor.extractMapTexts).toHaveBeenCalledTimes(
+      bundle.data.mapFiles.validMaps.length,
+    );
+    bundle.data.mapFiles.validMaps.forEach((mapFile) => {
+      expect(extractor.extractMapTexts).toHaveBeenCalledWith(mapFile.map);
+    });
+    expect(extractor.extractBattleText).toHaveBeenCalledTimes(
+      bundle.data.troops.data.length,
+    );
+    bundle.data.troops.data.forEach((troop) => {
+      expect(extractor.extractBattleText).toHaveBeenCalledWith(troop);
+    });
+    expect(extractor.extractCommonEventText).toHaveBeenCalledTimes(
+      bundle.data.commonEvents.data.length,
+    );
+    bundle.data.commonEvents.data.forEach((common) => {
+      expect(extractor.extractCommonEventText).toHaveBeenCalledWith(common);
+    });
+  });
 
   test("system が null の場合は空 system を返し convertSystemTypes を呼ばない", () => {
     const bundle = createBundle();
@@ -196,7 +202,13 @@ describe("buildExtractResultWithNotes", () => {
     const terms = createTerms();
     const uuidGen = (text: string) => `uuid:${text}`;
     const commandNameFn = () => "command-name";
-    const { extractor } = createExtractor();
+    const extractor = createExtractor2();
+
+    const expected: SystemTexts<string> = {
+      gameTitle: "",
+      filename: FILENAME_SYSTEM,
+      texts: [],
+    };
 
     const result = buildExtractResultWithNotes(
       bundle,
@@ -206,11 +218,6 @@ describe("buildExtractResultWithNotes", () => {
       commandNameFn,
       extractor,
     );
-
-    expect(result.system).toEqual({
-      gameTitle: "",
-      filename: FILENAME_SYSTEM,
-      texts: [],
-    });
+    expect(result.system).toEqual(expected);
   });
 });
