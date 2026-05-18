@@ -1,6 +1,6 @@
+import type { ExtractedTextItem } from "@RpgTypes/libs";
 import { normarizeText } from "@RpgTypes/libs";
 import type { MapFileInfo, Data_Map } from "@RpgTypes/rmmz";
-import { isValidCommandText } from "./commonEvent";
 import type {
   TextCommandParameter,
   GameDataExtractor,
@@ -8,11 +8,11 @@ import type {
   ExtractedMapEventTexts,
   ExtractedMapEventNode,
   ExtractedNoteItem,
-  ExtractedTextItemG,
   MapTerms,
+  ExtractedCommandItem,
 } from "./text";
+import { isValidCommandText } from "./text/eventCommand/commonEvent";
 import { convertCommandInfo } from "./text/eventCommand/conv";
-import type { ExtractedCommandItem } from "./text/eventCommand/types/extracted";
 
 export const extractMapTexts = <UUID>(
   map: MapFileInfo,
@@ -20,7 +20,7 @@ export const extractMapTexts = <UUID>(
   uuidGen: (text: string) => UUID,
   commandNameFn: (command: TextCommandParameter) => string,
   extractor: GameDataExtractor,
-): ExtractedTextItemG<UUID>[] => {
+): ExtractedTextItem<UUID>[] => {
   const texts: ExtractedMapTexts = extractor.extractMapTexts(map.map);
   return convertExtractedMapTexts(texts, map, terms, uuidGen, commandNameFn);
 };
@@ -33,7 +33,7 @@ export const convertExtractedMapTextsFomMapFiles = <UUID>(
   terms: MapTerms,
   uuidGen: (text: string) => UUID,
   commandNameFn: (command: TextCommandParameter) => string,
-): MapFileInfo<ExtractedTextItemG<UUID>[]> => {
+): MapFileInfo<ExtractedTextItem<UUID>[]> => {
   return {
     filename: map.filename,
     editingName: map.editingName,
@@ -47,7 +47,7 @@ export const convertExtractedMapTexts = <UUID>(
   terms: MapTerms,
   uuidGen: (text: string) => UUID,
   commandNameFn: (command: TextCommandParameter) => string,
-): ExtractedTextItemG<UUID>[] => {
+): ExtractedTextItem<UUID>[] => {
   const events = map.events.map((mapEvent) =>
     extractMapEventTexts(mapEvent, mapInfo, uuidGen, commandNameFn),
   );
@@ -63,7 +63,7 @@ export const convertExtractedMapTexts = <UUID>(
     }),
   );
   const normarizedDisplayName = normarizeText(map.displayedName);
-  const diplayName: ExtractedTextItemG<UUID, keyof Data_Map> = {
+  const diplayName: ExtractedTextItem<UUID, keyof Data_Map> = {
     id: NONE_EVENT_DATA_ID,
     uuid: uuidGen(normarizedDisplayName),
     filename: mapInfo.filename,

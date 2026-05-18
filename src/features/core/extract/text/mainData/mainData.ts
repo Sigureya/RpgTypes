@@ -12,7 +12,7 @@ import type {
 } from "@RpgTypes/rmmz";
 import { readNoteEx } from "@RpgTypes/rmmz";
 import type {
-  ExtractedTextItem,
+  ExtractedTextEntry,
   TextExtractable,
   ExtractedText,
 } from "./types";
@@ -31,7 +31,7 @@ export const extractTextData = <T extends { note: string; id: number }>(
           key: k,
           value: data[k],
           id: data.id,
-        }) satisfies Record<keyof ExtractedTextItem, unknown>,
+        }) satisfies Record<keyof ExtractedTextEntry, unknown>,
     ),
   };
 };
@@ -39,10 +39,10 @@ export const extractTextData = <T extends { note: string; id: number }>(
 export const extractNoteText = (data: {
   note: string;
   id: number;
-}): ExtractedTextItem[] => {
+}): ExtractedTextEntry[] => {
   return readNoteEx(
     data.note,
-    (key, value): ExtractedTextItem => ({
+    (key, value): ExtractedTextEntry => ({
       key: key,
       value: value,
       id: data.id,

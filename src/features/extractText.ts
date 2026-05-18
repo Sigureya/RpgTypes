@@ -42,7 +42,7 @@ export {
 export type {
   ExtractedText,
   ExtractedTextProperty,
-  ExtractedTextItem,
+  ExtractedTextEntry,
 } from "./core/extract/text/mainData/types";
 export {
   extractNoteText,

@@ -17,23 +17,23 @@ export type TextExtractable<T> = PickByType<T, string> & {
 
 export interface ExtractedNoteList {
   name: string;
-  note: ExtractedTextItem[];
+  note: ExtractedTextEntry[];
 }
 
 export interface ExtractedText<T> extends ExtractedNoteList {
   main: ExtractedTextProperty<T>[];
-  note: ExtractedTextItem[];
+  note: ExtractedTextEntry[];
   id: number;
   name: string;
 }
 
-export interface ExtractedTextItem {
+export interface ExtractedTextEntry {
   key: string;
   value: string;
   id: number;
 }
 
-export interface ExtractedTextProperty<T> extends ExtractedTextItem {
+export interface ExtractedTextProperty<T> extends ExtractedTextEntry {
   key: PickByTypeKeys<T, string> & string;
   value: string;
   id: number;

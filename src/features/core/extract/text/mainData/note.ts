@@ -1,8 +1,8 @@
-import type { ExtractedText, ExtractedTextItem } from "./types";
+import type { ExtractedText, ExtractedTextEntry } from "./types";
 
 export const filterNotesInExtractedText = <T>(
   list: readonly ExtractedText<T>[],
-  fn: (note: ExtractedTextItem) => boolean,
+  fn: (note: ExtractedTextEntry) => boolean,
 ): ExtractedText<T>[] => {
   return list
     .map((item): ExtractedText<T> => {

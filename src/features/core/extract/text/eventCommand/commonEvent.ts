@@ -1,13 +1,11 @@
+import { convertCommandInfo } from "./conv";
 import type {
-  TextCommandParameter,
   ExtractedCommonEventText,
-  ExtractedBattleEventText,
-} from "./text";
-import { convertCommandInfo } from "./text/eventCommand/conv";
-import type {
+  TextCommandParameter,
   ExtractedCommandItem,
+  ExtractedBattleEventText,
   ExtractedTroopTextItem,
-} from "./text/eventCommand/types/extracted";
+} from "./types";
 
 export const convertCommonEvents = <UUID>(
   filename: string,

@@ -16,10 +16,10 @@ import {
   FILENAME_WEAPONS,
   FILENAME_SYSTEM,
 } from "@RpgTypes/fileio";
+import type { ExtractedTextItem } from "@RpgTypes/libs";
 import type { Data_Actor, MapFileInfo } from "@RpgTypes/rmmz";
 import { createActorControlChars } from "@RpgTypes/rmmz";
 import { extractTextFromRawGameData } from "./bundle";
-import { convertCommonEvents, convertBattleEvents } from "./commonEvent";
 import { extractMapEventTexts } from "./map";
 import type { SummarizedNote, SummarizedNoteValue } from "./note";
 import { buildRawGameDataNoteNormalization } from "./noteNormarize";
@@ -29,12 +29,16 @@ import type {
   TextCommandParameter,
   EventContainerExtractor,
   ExtractedMapTexts,
-  ExtractedTextItemG,
   ExtractedSystemTexts,
   SystemTexts,
 } from "./text";
-import { convertDataList, convertStateData } from "./text";
-import { convertSystemTypes } from "./text/system/conv";
+import {
+  convertCommonEvents,
+  convertBattleEvents,
+  convertDataList,
+  convertStateData,
+  convertSystemTypes,
+} from "./text";
 import type {
   ExtractedTextFinalWithNotes,
   RawGameDataNoteNormalization,
@@ -129,8 +133,8 @@ const flattenMapTexts = <UUID>(
   mapFiles: MapBatchReadResult<ExtractedMapTexts>,
   uuidGen: (text: string) => UUID,
   commandNameFn: (command: TextCommandParameter) => string,
-): ExtractedTextItemG<UUID>[] => {
-  const mapEventTextGroups: ExtractedTextItemG<UUID>[][][][] =
+): ExtractedTextItem<UUID>[] => {
+  const mapEventTextGroups: ExtractedTextItem<UUID>[][][][] =
     mapFiles.validMaps.map((map) =>
       extractMapTextGroups(map, uuidGen, commandNameFn),
     );
@@ -141,8 +145,8 @@ const extractMapTextGroups = <UUID>(
   map: MapFileInfo<ExtractedMapTexts>,
   uuidGen: (text: string) => UUID,
   commandNameFn: (command: TextCommandParameter) => string,
-): ExtractedTextItemG<UUID>[][][] => {
-  return map.map.events.map((mapEvent): ExtractedTextItemG<UUID>[][] =>
+): ExtractedTextItem<UUID>[][][] => {
+  return map.map.events.map((mapEvent): ExtractedTextItem<UUID>[][] =>
     extractMapEventTexts(mapEvent, map, uuidGen, commandNameFn),
   );
 };
