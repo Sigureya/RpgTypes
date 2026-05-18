@@ -4,4 +4,8 @@ export interface ReplaceEventTextHandlers extends TextReplaceHandlers {
     scriptCommand: (command: Command_ScriptHeader) => Command_ScriptHeader;
     replaceText: (key: string) => string | undefined;
 }
-export type MapDataReplaceHandlers = ReplaceEventTextHandlers & NoteReplaceHandlers;
+/**
+ * @deprecated Use {@link RpgDataReplaceHandlers} instead.
+ */
+export type MapDataReplaceHandlers = RpgDataReplaceHandlers;
+export type RpgDataReplaceHandlers = ReplaceEventTextHandlers & NoteReplaceHandlers;
