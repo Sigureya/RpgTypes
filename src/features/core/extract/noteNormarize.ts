@@ -33,7 +33,7 @@ import { filterNotesInExtractedText } from "./text/mainData/note";
 import type {
   ExtractedDataBundle,
   ExtractedNoteList,
-  ExtractedTextItem,
+  ExtractedTextEntry,
 } from "./text/mainData/types";
 import type { RawGameDataNoteNormalization } from "./types";
 
@@ -71,7 +71,7 @@ const normalizeBundleNoteTextsWithKeys = (
   bundle: ExtractedDataBundle,
   keysSet: ReadonlySet<string>,
 ): ExtractedDataBundle => {
-  const fn = (note: ExtractedTextItem): boolean => keysSet.has(note.key);
+  const fn = (note: ExtractedTextEntry): boolean => keysSet.has(note.key);
   return {
     actors: filterNotesInExtractedText(bundle.actors, fn),
     enemies: filterNotesInExtractedText(bundle.enemies, fn),

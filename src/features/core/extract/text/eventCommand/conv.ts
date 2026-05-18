@@ -1,8 +1,11 @@
 import { normarizeText, PLUGIN_COMMAND_MZ } from "@RpgTypes/libs";
-import type { TextCommandParameter, TextPluginCommandParameter } from "./types";
+import type {
+  ExtractedCommandItem,
+  TextCommandParameter,
+  TextPluginCommandParameter,
+} from "./types";
 import type {
   CommandCodeFormat,
-  ExtractedCommandItem,
   ExtractedPluginCommandItem,
 } from "./types/extracted";
 

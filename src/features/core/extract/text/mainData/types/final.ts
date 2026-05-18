@@ -1,3 +1,4 @@
+import type { ExtractedTextItem } from "@RpgTypes/libs";
 import type {
   Data_Enemy,
   Data_Skill,
@@ -8,11 +9,11 @@ import type {
   Data_State,
 } from "@RpgTypes/rmmz";
 import type { ExtractedActorTexts } from "./actor";
-import type { ExtractedTextBundle, ExtractedTextItemG } from "./mainData";
+import type { ExtractedTextBundle } from "./mainData";
 import type { ExtractedPluginItem } from "./plugin";
 
 export interface ExtractedTextMainDataFinal<UUID> {
-  map: ExtractedTextItemG<UUID>[];
+  map: ExtractedTextItem<UUID>[];
   actors: ExtractedActorTexts<UUID>;
   items: ExtractedTextBundle<Data_Item, UUID>[];
   weapons: ExtractedTextBundle<Data_Weapon, UUID>[];

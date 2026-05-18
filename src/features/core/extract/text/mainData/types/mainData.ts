@@ -1,31 +1,16 @@
-import type { ExtractedTextItemBase } from "@RpgTypes/libs";
-
-export interface ExtractedTextItemG<
-  UUID,
-  Key extends string = string,
-  Other extends string[] = string[],
-> extends ExtractedTextItemBase<UUID> {
-  filename: string;
-  id: number;
-  uuid: UUID;
-  speaker?: string;
-  baseText: string;
-  otherData?: Other;
-  kind: string;
-  dataKey: Key;
-}
+import type { ExtractedTextItem } from "@RpgTypes/libs";
 
 export type ExtractedTextBundle<T, UUID = string> = {
-  main: ExtractedTextItemG<UUID, Extract<keyof T, string>>[];
+  main: ExtractedTextItem<UUID, Extract<keyof T, string>>[];
   note: ExtractedNoteItem<UUID>[];
 };
 
 export type ExtractedNoteItem<
   UUID,
   Other extends string[] = [string],
-> = ExtractedTextItemG<UUID, "note", Other> & { otherData: Other };
+> = ExtractedTextItem<UUID, "note", Other> & { otherData: Other };
 
-export type ExtractedPropertyItem<UUID, T extends object> = ExtractedTextItemG<
+export type ExtractedPropertyItem<UUID, T extends object> = ExtractedTextItem<
   UUID,
   Extract<keyof T, string>
 >;

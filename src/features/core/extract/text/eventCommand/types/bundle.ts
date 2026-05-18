@@ -1,4 +1,4 @@
-import type { ExtractedCommandItem, ExtractedTroopTextItem } from "./extracted";
+import type { ExtractedCommandItem, ExtractedTroopTextItem } from "./union";
 
 export interface ExtractedEventDataBundle<UUID> {
   commonEvents: ExtractedCommandItem<UUID>[];

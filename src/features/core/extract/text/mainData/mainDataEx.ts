@@ -1,10 +1,10 @@
+import type { ExtractedTextItem } from "@RpgTypes/libs";
 import { normarizeText } from "@RpgTypes/libs";
 import type { Data_State } from "@RpgTypes/rmmz";
 import type {
   ExtractedNoteItem,
   ExtractedText,
   ExtractedTextBundle,
-  ExtractedTextItemG,
   RmmzTextPropertys,
 } from "./types";
 
@@ -60,7 +60,7 @@ export const convertData = <T, UUID>(
   return {
     main: extracted.main
       .filter((e) => e.value !== "")
-      .map((data): ExtractedTextItemG<UUID, Extract<keyof T, string>> => {
+      .map((data): ExtractedTextItem<UUID, Extract<keyof T, string>> => {
         const normarizedText = normarizeText(data.value);
         return {
           kind: terms[data.key],
