@@ -1,19 +1,9 @@
-import { ExtractedTextItemBase } from '../../../../../../libs';
-export interface ExtractedTextItemG<UUID, Key extends string = string, Other extends string[] = string[]> extends ExtractedTextItemBase<UUID> {
-    filename: string;
-    id: number;
-    uuid: UUID;
-    speaker?: string;
-    baseText: string;
-    otherData?: Other;
-    kind: string;
-    dataKey: Key;
-}
+import { ExtractedTextItem } from '../../../../../../libs';
 export type ExtractedTextBundle<T, UUID = string> = {
-    main: ExtractedTextItemG<UUID, Extract<keyof T, string>>[];
+    main: ExtractedTextItem<UUID, Extract<keyof T, string>>[];
     note: ExtractedNoteItem<UUID>[];
 };
-export type ExtractedNoteItem<UUID, Other extends string[] = [string]> = ExtractedTextItemG<UUID, "note", Other> & {
+export type ExtractedNoteItem<UUID, Other extends string[] = [string]> = ExtractedTextItem<UUID, "note", Other> & {
     otherData: Other;
 };
-export type ExtractedPropertyItem<UUID, T extends object> = ExtractedTextItemG<UUID, Extract<keyof T, string>>;
+export type ExtractedPropertyItem<UUID, T extends object> = ExtractedTextItem<UUID, Extract<keyof T, string>>;

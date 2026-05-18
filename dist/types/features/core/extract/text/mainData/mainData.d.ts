@@ -1,14 +1,14 @@
 import { Data_NamedItem } from '../../../../../libs';
 import { PickByTypeKeys } from '../../../../../libs/templates';
 import { Data_Actor, Data_Armor, Data_Class, Data_Enemy, Data_Item, Data_Skill, Data_State, Data_Weapon } from '../../../../../rmmz';
-import { ExtractedTextItem, TextExtractable, ExtractedText } from './types';
+import { ExtractedTextEntry, TextExtractable, ExtractedText } from './types';
 export declare const extractTextData: <T extends {
     note: string;
     id: number;
 }>(data: T & Data_NamedItem, keys: PickByTypeKeys<T, string>[]) => {
     id: number;
     name: string;
-    note: ExtractedTextItem[];
+    note: ExtractedTextEntry[];
     main: {
         key: Extract<{ [K in keyof T]: T[K] extends string ? K : never; }[keyof T], string>;
         value: (T & Data_NamedItem)[Extract<{ [K in keyof T]: T[K] extends string ? K : never; }[keyof T], string>];
@@ -18,7 +18,7 @@ export declare const extractTextData: <T extends {
 export declare const extractNoteText: (data: {
     note: string;
     id: number;
-}) => ExtractedTextItem[];
+}) => ExtractedTextEntry[];
 export declare const extractTextFromActor: (actor: TextExtractable<Data_Actor>) => ExtractedText<Data_Actor>;
 export declare const extractTextFromEnemy: (enemy: TextExtractable<Data_Enemy>) => ExtractedText<Data_Enemy>;
 export declare const extractTextFromClass: (item: TextExtractable<Data_Class>) => ExtractedText<Data_Class>;
