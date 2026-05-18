@@ -13,7 +13,12 @@ import type {
   Data_Map,
 } from "@RpgTypes/rmmz/rpg";
 import type { Data_System } from "@RpgTypes/rmmz/system";
-import type { Rmmz_Actors, Rmmz_Map, Rmmz_Message } from "./objects";
+import type {
+  Rmmz_Actors,
+  Rmmz_Map,
+  Rmmz_Message,
+  Rmmz_System,
+} from "./objects";
 
 declare global {
   var $dataActors: IdentifiedItems<Data_Actor>;
@@ -34,6 +39,7 @@ declare global {
   var $gameActors: Rmmz_Actors;
   var $gameMessage: Rmmz_Message;
   var $gameMap: Rmmz_Map;
+  var $gameSystem: Rmmz_System;
 }
 
 export {};
