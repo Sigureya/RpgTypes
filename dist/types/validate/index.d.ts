@@ -1,3 +1,4 @@
+export * from './convert';
 export * from './rmmz/bundle';
 export * from './rmmz/events';
 export * from './rmmz/rpg';

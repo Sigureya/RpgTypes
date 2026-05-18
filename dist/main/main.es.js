@@ -11,8 +11,9 @@ import { isDataTileset as m, isDataWeapon as o, isDataState as t, isDataSkill as
 import { isDataSystem as i } from "../validate/rmmz/system.es.js";
 import { isDataTroop as d, isDataMap as R, isDataCommonEvent as l } from "../validate/rmmz/events.es.js";
 import { isActorTextCommand as Sd, isAudioCommand as cd, validateMapWithErrors as kd } from "../validate/rmmz/events.es.js";
-import { n as Od } from "../shared/normalText.es.js";
-import { v as Nd } from "../shared/validateWithErrors.es.js";
+import { isRuntimeDictionary as Od } from "../validate/convert.es.js";
+import { n as Nd } from "../shared/normalText.es.js";
+import { v as Pd } from "../shared/validateWithErrors.es.js";
 const O = () => ({
   validateActor: (a) => _(a),
   validateAnimation: (a) => T(a),
@@ -475,6 +476,7 @@ export {
   o as isDataWeapon,
   BT as isNoteBoolean,
   vT as isNoteNumber,
+  Od as isRuntimeDictionary,
   OC as isScript,
   IC as isUsingVariableItemCommand,
   As as isUsingVaribleCommandChangingItems,
@@ -776,7 +778,7 @@ export {
   fT as normalizeDictionaryItems,
   NC as normalizeNote,
   WT as normalizeNoteFromMapFiles,
-  Od as normarizeText,
+  Nd as normarizeText,
   Yi as paramArrayToObject,
   fA as partyAbilityToArray,
   zm as pickPropertys,
@@ -846,5 +848,5 @@ export {
   oC as toArraySetupChoiceItem,
   Rd as toArrayShowMessageHeader,
   kd as validateMapWithErrors,
-  Nd as validateWithErros
+  Pd as validateWithErros
 };
