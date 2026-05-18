@@ -13,7 +13,7 @@ import type {
   ExtractedBattleEventText,
   ExtractedMapTexts,
 } from "./extract";
-import type { MapDataReplaceHandlers } from "./replace";
+import type { RpgDataReplaceHandlers } from "./replace";
 import {
   replaceRawDataBundle,
   replaceRawDataWithAutoNoteFilter,
@@ -51,7 +51,7 @@ interface HHH {
 
 const createHandlers = ({
   newText,
-}: HHH): MockedObject<MapDataReplaceHandlers> => ({
+}: HHH): MockedObject<RpgDataReplaceHandlers> => ({
   replaceText: vi.fn((text) => (text !== "" ? newText : text)),
   isReplaceTargetNote: vi.fn().mockReturnValue(true),
   pluginCommand: vi.fn((command) => command),

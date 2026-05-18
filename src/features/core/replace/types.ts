@@ -11,5 +11,10 @@ export interface ReplaceEventTextHandlers extends TextReplaceHandlers {
   replaceText: (key: string) => string | undefined;
 }
 
-export type MapDataReplaceHandlers = ReplaceEventTextHandlers &
+/**
+ * @deprecated Use {@link RpgDataReplaceHandlers} instead.
+ */
+export type MapDataReplaceHandlers = RpgDataReplaceHandlers;
+
+export type RpgDataReplaceHandlers = ReplaceEventTextHandlers &
   NoteReplaceHandlers;

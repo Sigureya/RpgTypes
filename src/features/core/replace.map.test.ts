@@ -16,7 +16,7 @@ import {
   makeMapEvent,
   makeMapEventPage,
 } from "@RpgTypes/rmmz";
-import type { MapDataReplaceHandlers } from "./replace";
+import type { RpgDataReplaceHandlers } from "./replace";
 import { replaceNoteTextByMap } from "./replace/text";
 import { replaceMapData } from "./replaceEvent";
 
@@ -30,7 +30,7 @@ const dictionary = new Map<string, string>([
 const createReplaceHandlers = (
   map: ReadonlyMap<string, string>,
   xxx: boolean = true,
-): MockedObject<MapDataReplaceHandlers> => ({
+): MockedObject<RpgDataReplaceHandlers> => ({
   pluginCommand: vi.fn((c: Command_PluginCommandMZ) => c),
   scriptCommand: vi.fn((c) => c),
   replaceText: vi.fn((text: string) => map.get(text)),

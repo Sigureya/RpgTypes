@@ -19,7 +19,7 @@ import {
   replaceWeaponText,
   replaceSystemText,
 } from "./core/replace";
-import type { MapDataReplaceHandlers } from "./core/replace/types";
+import type { RpgDataReplaceHandlers } from "./core/replace/types";
 import { replaceRawDataWithAutoNoteFilter } from "./core/replaceBundle";
 import {
   replaceCommonEventData,
@@ -38,7 +38,7 @@ export const replaceRuntimeMapData = (
   map: Data_Map,
   dic: RuntimeDictionary<string>,
 ): Data_Map<NormalizedEventCommand> => {
-  const handlers: MapDataReplaceHandlers = {
+  const handlers: RpgDataReplaceHandlers = {
     replaceText(text) {
       return dic.textDictionary.get(text);
     },
@@ -55,7 +55,7 @@ export const replaceRuntimeData = (
   data: RpgDataBundleHasText,
   dic: RuntimeDictionary<string>,
 ): RpgDataBundleHasText => {
-  const handlers: MapDataReplaceHandlers = {
+  const handlers: RpgDataReplaceHandlers = {
     replaceText(text) {
       return dic.textDictionary.get(text);
     },
@@ -114,7 +114,7 @@ export const replaceDataDirect = (
   context: ReplaceRawDataContext,
   extractor: EventContainerExtractor,
 ): RawGameData<NormalizedEventCommand> => {
-  const handlers: MapDataReplaceHandlers = {
+  const handlers: RpgDataReplaceHandlers = {
     replaceText(text) {
       return context.dictionary.get(text);
     },
@@ -151,7 +151,7 @@ export const replaceDataWithHash = <T extends string>(
   extractor: EventContainerExtractor,
   hashFn: (text: string) => T,
 ): GameDataReplaceOutput<T> => {
-  const handlers: MapDataReplaceHandlers = {
+  const handlers: RpgDataReplaceHandlers = {
     replaceText(text) {
       return hashFn(text);
     },
