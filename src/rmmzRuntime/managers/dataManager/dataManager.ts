@@ -23,8 +23,8 @@ export interface Rmmz_DataManager {
   onXhrLoad(xhr: XMLHttpRequest, name: string, src: string, url: string): void;
   onLoad(object: RpgDataTypes): void;
   isMapObject(data: RpgDataTypes): data is Data_Map;
-  extractArrayMetadata(list: unknown): void;
-  extractMetadata(): void;
+  extractArrayMetadata(list: { note: string }[]): void;
+  extractMetadata(data: { note: string }): void;
   isBattleTest(): boolean;
   isEventTest(): boolean;
   isTitleSkip(): boolean;
