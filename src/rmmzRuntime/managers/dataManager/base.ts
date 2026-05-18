@@ -1,33 +1,23 @@
 import type {
-  Data_Armor,
-  Data_Item,
-  Data_Map,
   Data_Skill,
+  Data_Item,
   Data_Weapon,
+  Data_Armor,
 } from "@RpgTypes/rmmz/rpg";
-import type { RpgDataTypes } from "./dataTypes";
 import type { DataFileInfo } from "./types";
 
-export interface Rmmz_DataManager {
+export interface RpgMakerDataManagerBase {
   get _databaseFiles(): DataFileInfo[];
-  loadGlobalInfo(): void;
-  removeInvalidGlobalInfo(): void;
-  saveGlobalInfo(): void;
-  isGlobalInfoLoaded(): boolean;
   loadDatabase(): void;
   loadDataFile(name: string, src: string): void;
   isDatabaseLoaded(): boolean;
   loadMapData(mapId: number): void;
   makeEmptyMap(): void;
   isMapLoaded(): boolean;
-  onXhrLoad(xhr: XMLHttpRequest, name: string, src: string, url: string): void;
-  onLoad(object: RpgDataTypes): void;
-  isMapObject(data: RpgDataTypes): data is Data_Map;
-  extractArrayMetadata(list: (null | { note: string })[]): void;
+  onLoad(object: object): void;
   extractMetadata(data: { note: string }): void;
   isBattleTest(): boolean;
   isEventTest(): boolean;
-  isTitleSkip(): boolean;
   isSkill(data: unknown): data is Data_Skill;
   isItem(data: unknown): data is Data_Item;
   isWeapon(data: unknown): data is Data_Weapon;
@@ -38,10 +28,7 @@ export interface Rmmz_DataManager {
   setupEventTest(): void;
   isAnySavefileExists(): boolean;
   latestSavefileId(): number;
-  earliestSavefileId(): number;
-  emptySavefileId(): number;
-  correctDataErrors(): void;
 
   loadGame(savefileId: number): Promise<number>;
-  saveGame(savefileId: number): Promise<void>;
+  saveGame(savefileId: number): Promise<number>;
 }

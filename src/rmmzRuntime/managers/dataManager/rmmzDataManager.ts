@@ -1,0 +1,16 @@
+import type { Data_Map } from "@RpgTypes/rmmz/rpg";
+import type { RpgMakerDataManagerBase } from "./base";
+import type { RpgDataTypes } from "./dataTypes";
+
+export interface Rmmz_DataManager extends RpgMakerDataManagerBase {
+  onXhrLoad(xhr: XMLHttpRequest, name: string, src: string, url: string): void;
+  removeInvalidGlobalInfo(): void;
+  isGlobalInfoLoaded(): boolean;
+  isMapObject(data: RpgDataTypes): data is Data_Map;
+  extractArrayMetadata(list: (null | { note: string })[]): void;
+  isTitleSkip(): boolean;
+  earliestSavefileId(): number;
+  emptySavefileId(): number;
+  correctDataErrors(): void;
+  loadGlobalInfo(): void;
+}
