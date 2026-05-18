@@ -1,47 +1,15 @@
-import type {
-  Data_Armor,
-  Data_Item,
-  Data_Map,
-  Data_Skill,
-  Data_Weapon,
-} from "@RpgTypes/rmmz/rpg";
+import type { Data_Map } from "@RpgTypes/rmmz/rpg";
+import type { RpgMakerDataManagerBase } from "./base";
 import type { RpgDataTypes } from "./dataTypes";
-import type { DataFileInfo } from "./types";
 
-export interface Rmmz_DataManager {
-  get _databaseFiles(): DataFileInfo[];
-  loadGlobalInfo(): void;
-  removeInvalidGlobalInfo(): void;
-  saveGlobalInfo(): void;
-  isGlobalInfoLoaded(): boolean;
-  loadDatabase(): void;
-  loadDataFile(name: string, src: string): void;
-  isDatabaseLoaded(): boolean;
-  loadMapData(mapId: number): void;
-  makeEmptyMap(): void;
-  isMapLoaded(): boolean;
+export interface Rmmz_DataManager extends RpgMakerDataManagerBase {
   onXhrLoad(xhr: XMLHttpRequest, name: string, src: string, url: string): void;
-  onLoad(object: RpgDataTypes): void;
+  removeInvalidGlobalInfo(): void;
+  isGlobalInfoLoaded(): boolean;
   isMapObject(data: RpgDataTypes): data is Data_Map;
   extractArrayMetadata(list: (null | { note: string })[]): void;
-  extractMetadata(data: { note: string }): void;
-  isBattleTest(): boolean;
-  isEventTest(): boolean;
   isTitleSkip(): boolean;
-  isSkill(data: unknown): data is Data_Skill;
-  isItem(data: unknown): data is Data_Item;
-  isWeapon(data: unknown): data is Data_Weapon;
-  isArmor(data: unknown): data is Data_Armor;
-  createGameObjects(): void;
-  setupNewGame(): void;
-  setupBattleTest(): void;
-  setupEventTest(): void;
-  isAnySavefileExists(): boolean;
-  latestSavefileId(): number;
   earliestSavefileId(): number;
   emptySavefileId(): number;
   correctDataErrors(): void;
-
-  loadGame(savefileId: number): Promise<number>;
-  saveGame(savefileId: number): Promise<void>;
 }
