@@ -1,4 +1,5 @@
 import { describe, test, expect } from "vitest";
+import type { IdentifiedItems } from "@RpgTypes/libs";
 import type {
   Data_Enemy,
   ParamArray,
@@ -44,9 +45,9 @@ const mockEnemies: (Data_Enemy | null)[] = [
 ];
 
 declare global {
-  var $dataEnemies: (Data_Enemy | null)[];
+  var $dataEnemies: IdentifiedItems<Data_Enemy>;
 }
-globalThis.$dataEnemies = mockEnemies;
+globalThis.$dataEnemies = mockEnemies as IdentifiedItems<Data_Enemy>;
 
 const createEnemy = () => new Game_Enemy(2, 64, 139);
 
