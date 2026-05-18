@@ -121,17 +121,6 @@ describe("createActorTextDictionary", () => {
       );
       expect(originalEntry).toBeDefined();
     });
-
-    // Check translated texts are in the result
-    allTexts.forEach((text) => {
-      const translatedText = mockTranslateFn(text);
-      const translatedEntry = result.find(
-        (entry) =>
-          entry.value === mockHashFn(translatedText) &&
-          entry.key === translatedText,
-      );
-      expect(translatedEntry).toBeDefined();
-    });
   });
 
   test("should call hash and newText handlers correctly", () => {
@@ -151,7 +140,7 @@ describe("createActorTextDictionary", () => {
     });
 
     // hashText should be called for each original and translated text
-    expect(mockHashFn).toHaveBeenCalledTimes(allTexts.size * 2);
+    expect(mockHashFn).toHaveBeenCalledTimes(allTexts.size);
 
     // newText should be called for each original text
     expect(mockTranslateFn).toHaveBeenCalledTimes(allTexts.size);

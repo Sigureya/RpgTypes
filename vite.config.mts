@@ -12,6 +12,7 @@ const validateEntryPoints = () => {
     "validate/rmmz/rpg",
     "validate/rmmz/events",
     "validate/rmmz/system",
+    "validate/convert",
   ].map((dir): [string, string] => [
     dir,
     path.resolve(srcDir, `${dir}/index.ts`),

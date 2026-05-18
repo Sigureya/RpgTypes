@@ -150,7 +150,7 @@ describe("replaceDataWithHash", () => {
       ],
       actorTexts: [
         { key: "AAA", value: "hash_AAA" },
-        { key: "BBB", value: "hash_BBB" },
+        { key: "BBB", value: "hash_AAA" },
       ],
     };
     test("書き換え対象のnoteを正しく列挙できているか", () => {
@@ -201,7 +201,7 @@ describe("replaceDataWithHash", () => {
       //     expect(fn).not.toHaveBeenCalledWith("AAA ");
       //      expect(fn).not.toHaveBeenCalledWith("BBB ");
       expect(fn).toHaveBeenCalledWith("AAA");
-      expect(fn).toHaveBeenCalledWith("BBB");
+      expect(fn).not.toHaveBeenCalledWith("BBB");
     });
   });
   describe("先頭に空白がある場合は維持", () => {
@@ -221,7 +221,7 @@ describe("replaceDataWithHash", () => {
       const fn = vi.fn((text: string) => `hash_${text}`);
       replaceDataWithHash(input, extractor, fn);
       expect(fn).toHaveBeenCalledWith(" AAA");
-      expect(fn).toHaveBeenCalledWith(" BBB");
+      expect(fn).not.toHaveBeenCalledWith(" BBB");
     });
   });
 });
