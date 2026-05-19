@@ -1,7 +1,7 @@
 import { describe, expect, test, vi } from "vitest";
 import { FILENAME_AUX_DICTIONARY } from "@RpgTypes/fileio";
 import type { KeyValuePairEx } from "@RpgTypes/libs";
-import { createRuntimeDictionaryData } from "./createDictionary";
+import { createRuntimeDictionaryData, textKeysSN } from "./createDictionary";
 import {
   findActorText,
   buildRuntimeDictionary,
@@ -21,11 +21,10 @@ const noteValue = (value: string, id: number): SummarizedNoteValue => ({
 });
 
 const generateDictionaryData = (
-  notes: readonly SummarizedNote<SummarizedNoteValue>[],
   map: ReadonlyMap<string, string>,
   hashFn: (text: string) => unknown,
 ): RuntimeDictionaryData<unknown> => {
-  return createRuntimeDictionaryData([], [], [], [], notes, map, hashFn);
+  return createRuntimeDictionaryData([], [], [], [], map, hashFn);
 };
 
 describe("createRuntimeDictionaryData", () => {
@@ -41,7 +40,7 @@ describe("createRuntimeDictionaryData", () => {
       { key: "h:world", value: "世界" },
     ];
 
-    const result = generateDictionaryData([], dictionary, hashFn);
+    const result = generateDictionaryData(dictionary, hashFn);
 
     expect(result.textDictionary).toEqual(expected);
     expect(hashFn).toHaveBeenCalledTimes(2);
@@ -78,15 +77,14 @@ describe("createRuntimeDictionaryData", () => {
       },
     ];
 
-    const result = generateDictionaryData(notes, new Map(), (s) => s);
-
-    expect(result.targetNoteKeys).toEqual(["Text", "Description"]);
+    const result = textKeysSN(notes);
+    expect(result).toEqual(["Text", "Description"]);
   });
 
   test("空入力でも安全に空配列を返す", () => {
     const hashFn = vi.fn((text: string) => text.length);
 
-    const result = generateDictionaryData([], new Map(), hashFn);
+    const result = generateDictionaryData(new Map(), hashFn);
 
     expect(result.textDictionary).toEqual([]);
     expect(result.targetNoteKeys).toEqual([]);

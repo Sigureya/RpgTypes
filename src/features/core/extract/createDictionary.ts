@@ -16,7 +16,6 @@ export const createRuntimeDictionaryData = <T>(
   commons: ReadonlyArray<Data_CommonEvent>,
   troops: ReadonlyArray<Data_Troop>,
   maps: ReadonlyArray<Data_Map>,
-  noteNormalization: readonly SummarizedNote<SummarizedNoteValue>[],
   dictionary: ReadonlyMap<string, string>,
   hashFn: (text: string) => T,
 ): RuntimeDictionaryData<T> => {
@@ -26,7 +25,7 @@ export const createRuntimeDictionaryData = <T>(
   };
   return {
     textDictionary: createNewDictionary(dictionary, hashFn),
-    targetNoteKeys: textKeys(noteNormalization),
+    targetNoteKeys: textKeysSN([]),
     actorTexts: createActorTextDictionary(
       actors,
       commons,
@@ -46,7 +45,7 @@ const createNewDictionary = <T>(
   );
 };
 
-const textKeys = (
+export const textKeysSN = (
   noteNormalization: readonly SummarizedNote<SummarizedNoteValue>[],
 ): string[] => {
   const set: Set<string> = stringLikeNoteKeys(noteNormalization);
