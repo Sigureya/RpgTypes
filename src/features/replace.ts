@@ -147,10 +147,11 @@ export const replaceDataWithHashToFileEntries = <T extends string>(
 };
 
 export const replaceDataWithHash = <T extends string>(
-  { assetBundle, data, dictionary, textKeys }: ReplaceRawDataContext,
+  context: ReplaceRawDataContext,
   extractor: EventContainerExtractor,
   hashFn: (text: string) => T,
 ): GameDataReplaceOutput<T> => {
+  const { data, assetBundle, dictionary, textKeys } = context;
   const handlers: RpgDataReplaceHandlers = {
     replaceText(text) {
       const trimmed = text.trimEnd();
@@ -180,7 +181,7 @@ export const replaceDataWithHash = <T extends string>(
       data.mapFiles.validMaps.map((m) => m.map),
       replaceResult.note.dataNoteSummary,
       dictionary,
-      (text) => {
+      (text): T => {
         return hashFn(text.trimEnd());
       },
     ),
