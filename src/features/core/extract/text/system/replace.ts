@@ -5,7 +5,7 @@ import {
   makeMenuCommandsEnabledFromArray,
   makeItemCategoriesFromArray,
 } from "@RpgTypes/rmmz";
-import type { ExtractedSystemTexts } from "./system";
+import type { ExtractedSystemTexts } from "./types";
 
 export const replaceSystemTextEx = (
   system: Data_System,
