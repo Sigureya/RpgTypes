@@ -18,6 +18,8 @@ export interface ExtractedSystemTexts {
   equipTypes: string[];
   armorTypes: string[];
   weaponTypes: string[];
+  elements: string[];
+  skillTypes: string[];
   terms: {
     basic: Terms_Basic;
     commands: Terms_GameCommands;
@@ -27,7 +29,7 @@ export interface ExtractedSystemTexts {
 }
 
 export const extractTextFromSystem = (
-  system: Data_System
+  system: Data_System,
 ): ExtractedSystemTexts => {
   return {
     gameTitle: system.gameTitle,
@@ -35,6 +37,8 @@ export const extractTextFromSystem = (
     equipTypes: [...system.equipTypes],
     armorTypes: [...system.armorTypes],
     weaponTypes: [...system.weaponTypes],
+    elements: [...system.elements],
+    skillTypes: [...system.skillTypes],
     terms: {
       basic: makeTermsBasicFromArray(system.terms.basic),
       commands: makeTermsCommandFromArray(system.terms.commands),
