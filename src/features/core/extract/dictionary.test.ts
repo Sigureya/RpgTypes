@@ -23,7 +23,7 @@ const noteValue = (value: string, id: number): SummarizedNoteValue => ({
 const generateDictionaryData = (
   map: ReadonlyMap<string, string>,
   hashFn: (text: string) => unknown,
-): RuntimeDictionaryData<unknown> => {
+) => {
   return createRuntimeDictionaryData([], [], [], [], map, hashFn);
 };
 
@@ -71,7 +71,6 @@ describe("createRuntimeDictionaryData", () => {
     const result = generateDictionaryData(new Map(), hashFn);
 
     expect(result.textDictionary).toEqual([]);
-    expect(result.targetNoteKeys).toEqual([]);
     expect(hashFn).not.toHaveBeenCalled();
   });
 });
