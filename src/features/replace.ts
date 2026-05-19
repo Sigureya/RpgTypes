@@ -153,7 +153,11 @@ export const replaceDataWithHash = <T extends string>(
 ): GameDataReplaceOutput<T> => {
   const handlers: RpgDataReplaceHandlers = {
     replaceText(text) {
-      return hashFn(text);
+      const trimmed = text.trimEnd();
+      if (trimmed.length === 0) {
+        return "";
+      }
+      return hashFn(trimmed);
     },
     pluginCommand: (command) => command,
     scriptCommand: (command) => command,
@@ -176,7 +180,9 @@ export const replaceDataWithHash = <T extends string>(
       data.mapFiles.validMaps.map((m) => m.map),
       replaceResult.note.dataNoteSummary,
       dictionary,
-      hashFn,
+      (text) => {
+        return hashFn(text.trimEnd());
+      },
     ),
   };
 };
