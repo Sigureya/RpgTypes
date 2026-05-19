@@ -5,13 +5,8 @@ import type {
   NormalizedEventCommand,
   RpgDataBundleHasText,
 } from "@RpgTypes/rmmz";
-import type {
-  RuntimeDictionary,
-  GameDataReplaceOutput,
-  SummarizedNote,
-  SummarizedNoteValue,
-} from "./core/extract";
-import { fileEntriesFromDictionary, stringLikeNoteKeys } from "./core/extract";
+import type { RuntimeDictionary, GameDataReplaceOutput } from "./core/extract";
+import { fileEntriesFromDictionary } from "./core/extract";
 import {
   createRuntimeDictionaryData,
   textKeysSN,
