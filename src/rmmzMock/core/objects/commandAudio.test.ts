@@ -74,7 +74,7 @@ const makeMockedInterpreter = () => {
 
 interface TestCase<T> {
   fn: keyof Rmmz_AudioManager;
-  commandFn: keyof Game_Interpreter;
+  commandFn: string & keyof Game_Interpreter;
   command: T;
   makedCommand: T;
 }
@@ -93,10 +93,10 @@ const runTestCase = <T extends EventCommand>(testCase: TestCase<T>) => {
       interpreter.setup([testCase.command], 0);
       interpreter.executeCommand();
       expect(interpreter[testCase.commandFn]).toHaveBeenCalledWith(
-        testCase.command.parameters
+        testCase.command.parameters,
       );
       expect(audioManager[testCase.fn]).toHaveBeenCalledWith(
-        ...testCase.command.parameters
+        ...testCase.command.parameters,
       );
     });
   });
@@ -202,7 +202,7 @@ const stopSe: TestCase<Command_StopSE> = {
 };
 
 [playBgm, fadeOutBgm, playBgs, fadeOutBgs, playMe, playSe, stopSe].forEach(
-  (c: TestCase<EventCommand>) => runTestCase(c)
+  (c: TestCase<EventCommand>) => runTestCase(c),
 );
 
 describe("BGM Save", () => {
