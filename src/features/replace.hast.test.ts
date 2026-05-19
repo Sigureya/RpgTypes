@@ -182,7 +182,7 @@ describe("replaceDataWithHash", () => {
       expect(result.aux.actorTexts).toEqual(expectedDictionary.actorTexts);
     });
   });
-  describe.skip("末尾に空白がある場合の対応", () => {
+  describe("末尾に空白がある場合の対応", () => {
     const extractor = createExtractor();
     const input: ReplaceRawDataContext = {
       assetBundle: createAssetBundle(),
@@ -198,10 +198,10 @@ describe("replaceDataWithHash", () => {
     test("末尾の空白を除去した上でハッシュ化すること", () => {
       const fn = vi.fn((text: string) => `hash_${text}`);
       replaceDataWithHash(input, extractor, fn);
-      //     expect(fn).not.toHaveBeenCalledWith("AAA ");
-      //      expect(fn).not.toHaveBeenCalledWith("BBB ");
       expect(fn).toHaveBeenCalledWith("AAA");
       expect(fn).not.toHaveBeenCalledWith("BBB");
+      expect(fn).not.toHaveBeenCalledWith("AAA ");
+      expect(fn).not.toHaveBeenCalledWith("BBB ");
     });
   });
   describe("先頭に空白がある場合は維持", () => {
