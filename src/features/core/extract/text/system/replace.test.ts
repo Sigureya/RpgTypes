@@ -132,12 +132,29 @@ const TEXT_DATA: ExtractedSystemTexts = {
 };
 
 describe("replaceSystemTextEx", () => {
-  test("システムテキストが正しく置換されているか", () => {
-    const system = makeTestData();
-    const result = replaceSystemTextEx(system, TEXT_DATA);
-    const e2: ExtractedSystemTexts = extractTextFromSystem(result);
-    expect(e2).toEqual(TEXT_DATA);
+  describe("テキストの正しい置換", () => {
+    test("システムテキストが正しく置換されているか", () => {
+      const system = makeTestData();
+      const result = replaceSystemTextEx(system, TEXT_DATA);
+      const e2: ExtractedSystemTexts = extractTextFromSystem(result);
+      expect(e2).toEqual(TEXT_DATA);
+    });
+    test("システムテキストが正しく置換されているか", () => {
+      const system = makeTestData();
+      const result = replaceSystemTextEx(system, TEXT_DATA);
+      expect(result.elements).toEqual(TEXT_DATA.elements);
+      expect(result.elements).not.toBe(TEXT_DATA.elements);
+      expect(result.equipTypes).toEqual(TEXT_DATA.equipTypes);
+      expect(result.equipTypes).not.toBe(TEXT_DATA.equipTypes);
+      expect(result.armorTypes).toEqual(TEXT_DATA.armorTypes);
+      expect(result.armorTypes).not.toBe(TEXT_DATA.armorTypes);
+      expect(result.weaponTypes).toEqual(TEXT_DATA.weaponTypes);
+      expect(result.weaponTypes).not.toBe(TEXT_DATA.weaponTypes);
+      expect(result.skillTypes).toEqual(TEXT_DATA.skillTypes);
+      expect(result.skillTypes).not.toBe(TEXT_DATA.skillTypes);
+    });
   });
+
   describe("テキスト以外のプロパティの維持", () => {
     test("音声", () => {
       const system = makeTestData();
