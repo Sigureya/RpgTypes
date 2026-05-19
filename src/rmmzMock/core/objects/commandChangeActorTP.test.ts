@@ -104,6 +104,7 @@ const makeMockBattler = (id: number): MockedObject<FakeActor> => {
 const makeMockActors = (
   actor: ({ actorId(): number } & FakeBattler)[],
 ): MockedActors => ({
+  _data: [null, ...actor],
   actor: vi.fn((id: number) => actor.find((a) => a.actorId() === id) || null),
   initialize: vi.fn(),
 });
