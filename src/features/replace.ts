@@ -7,7 +7,10 @@ import type {
 } from "@RpgTypes/rmmz";
 import type { RuntimeDictionary, GameDataReplaceOutput } from "./core/extract";
 import { fileEntriesFromDictionary } from "./core/extract";
-import { createRuntimeDictionaryData } from "./core/extract/createDictionary";
+import {
+  createRuntimeDictionaryData,
+  textKeysSN,
+} from "./core/extract/createDictionary";
 import {
   replaceActorText,
   replaceArmorText,
@@ -172,18 +175,25 @@ export const replaceDataWithHash = <T extends string>(
     extractor,
     handlers,
   );
+  const dicX = createRuntimeDictionaryData(
+    data.actors.data,
+    data.commonEvents.data,
+    data.troops.data,
+    data.mapFiles.validMaps.map((m) => m.map),
+    dictionary,
+    (text): T => {
+      return hashFn(text.trimEnd());
+    },
+  );
   return {
     main: replaceResult.data,
-    aux: createRuntimeDictionaryData(
-      data.actors.data,
-      data.commonEvents.data,
-      data.troops.data,
-      data.mapFiles.validMaps.map((m) => m.map),
-      replaceResult.note.dataNoteSummary,
-      dictionary,
-      (text): T => {
-        return hashFn(text.trimEnd());
-      },
-    ),
+    aux: {
+      actorTexts: dicX.actorTexts,
+      targetNoteKeys: textKeysSN([
+        ...replaceResult.note.dataNoteSummary,
+        ...replaceResult.note.mapNoteSummary,
+      ]),
+      textDictionary: dicX.textDictionary,
+    },
   };
 };

@@ -1,7 +1,7 @@
 import { describe, expect, test, vi } from "vitest";
 import { FILENAME_AUX_DICTIONARY } from "@RpgTypes/fileio";
 import type { KeyValuePairEx } from "@RpgTypes/libs";
-import { createRuntimeDictionaryData } from "./createDictionary";
+import { createRuntimeDictionaryData, textKeysSN } from "./createDictionary";
 import {
   findActorText,
   buildRuntimeDictionary,
@@ -21,15 +21,14 @@ const noteValue = (value: string, id: number): SummarizedNoteValue => ({
 });
 
 const generateDictionaryData = (
-  notes: readonly SummarizedNote<SummarizedNoteValue>[],
   map: ReadonlyMap<string, string>,
   hashFn: (text: string) => unknown,
-): RuntimeDictionaryData<unknown> => {
-  return createRuntimeDictionaryData([], [], [], [], notes, map, hashFn);
+) => {
+  return createRuntimeDictionaryData([], [], [], [], map, hashFn);
 };
 
 describe("createRuntimeDictionaryData", () => {
-  test("hashFn でキーを変換して dictionary を作る", () => {
+  test("hashFn transforms keys and creates dictionary", () => {
     const dictionary = new Map<string, string>([
       ["hello", "こんにちは"],
       ["world", "世界"],
@@ -41,7 +40,7 @@ describe("createRuntimeDictionaryData", () => {
       { key: "h:world", value: "世界" },
     ];
 
-    const result = generateDictionaryData([], dictionary, hashFn);
+    const result = generateDictionaryData(dictionary, hashFn);
 
     expect(result.textDictionary).toEqual(expected);
     expect(hashFn).toHaveBeenCalledTimes(2);
@@ -49,47 +48,29 @@ describe("createRuntimeDictionaryData", () => {
     expect(hashFn).toHaveBeenNthCalledWith(2, "world");
   });
 
-  test("targetNoteKeys は文字列系のみを重複なく返す", () => {
+  test("targetNoteKeys returns unique string keys", () => {
     const notes: SummarizedNote<SummarizedNoteValue>[] = [
-      {
-        key: "Count",
-        kinds: ["number"],
-        values: [noteValue("10", 1)],
-      },
-      {
-        key: "Flag",
-        kinds: ["boolean"],
-        values: [noteValue("true", 2)],
-      },
-      {
-        key: "Text",
-        kinds: [],
-        values: [noteValue("Hello", 3)],
-      },
+      { key: "Count", kinds: ["number"], values: [noteValue("10", 1)] },
+      { key: "Flag", kinds: ["boolean"], values: [noteValue("true", 2)] },
+      { key: "Text", kinds: [], values: [noteValue("Hello", 3)] },
       {
         key: "Description",
         kinds: [],
         values: [noteValue("A test description.", 4)],
       },
-      {
-        key: "Text",
-        kinds: [],
-        values: [noteValue("World", 5)],
-      },
+      { key: "Text", kinds: [], values: [noteValue("World", 5)] },
     ];
 
-    const result = generateDictionaryData(notes, new Map(), (s) => s);
-
-    expect(result.targetNoteKeys).toEqual(["Text", "Description"]);
+    const result = textKeysSN(notes);
+    expect(result).toEqual(["Text", "Description"]);
   });
 
-  test("空入力でも安全に空配列を返す", () => {
+  test("handles empty input safely", () => {
     const hashFn = vi.fn((text: string) => text.length);
 
-    const result = generateDictionaryData([], new Map(), hashFn);
+    const result = generateDictionaryData(new Map(), hashFn);
 
     expect(result.textDictionary).toEqual([]);
-    expect(result.targetNoteKeys).toEqual([]);
     expect(hashFn).not.toHaveBeenCalled();
   });
 });
@@ -103,22 +84,25 @@ describe("findActorText", () => {
     textDictionary: new Map([[1, "Hello"]]),
     targetNoteKeys: new Set(),
   };
-  test("存在するテキストはそのまま返す", () => {
-    const result1 = findActorText("Hello", dic);
-    expect(result1).toBe("Hello");
+
+  test("returns existing text as is", () => {
+    const result = findActorText("Hello", dic);
+    expect(result).toBe("Hello");
   });
-  test("actorTextを基準に対応する文字列を返す", () => {
-    const result2 = findActorText("こんにちは", dic);
-    expect(result2).toBe("Hello");
+
+  test("maps actorText to corresponding string", () => {
+    const result = findActorText("こんにちは", dic);
+    expect(result).toBe("Hello");
   });
-  test("存在しない文字にはundefinedを返す", () => {
-    const result3 = findActorText("text", dic);
-    expect(result3).toBeUndefined();
+
+  test("returns undefined for non-existent text", () => {
+    const result = findActorText("text", dic);
+    expect(result).toBeUndefined();
   });
 });
 
 describe("buildRuntimeDictionary", () => {
-  test("配列形式の辞書を Set/Map へ変換する", () => {
+  test("converts array dictionary to Set/Map", () => {
     const input: RuntimeDictionaryData<string> = {
       targetNoteKeys: ["Target", "Target", "Description"],
       textDictionary: [{ key: "hash_A", value: "AAA" }],
@@ -134,7 +118,7 @@ describe("buildRuntimeDictionary", () => {
 });
 
 describe("fileEntriesFromDictionary", () => {
-  test("Dictionary.json の FileEntry を1件返す", () => {
+  test("returns one FileEntry for Dictionary.json", () => {
     const dic: RuntimeDictionaryData<string> = {
       targetNoteKeys: ["Target"],
       textDictionary: [{ key: "hash_AAA", value: "BBB" }],

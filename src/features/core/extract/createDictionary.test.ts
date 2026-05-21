@@ -1,22 +1,6 @@
 import { describe, expect, test, vi } from "vitest";
 import type { KeyValuePairEx } from "@RpgTypes/libs";
 import { createRuntimeDictionaryData } from "./createDictionary";
-import type { SummarizedNote, SummarizedNoteValue } from "./note";
-
-const noteValue = (value: string, id: number): SummarizedNoteValue => ({
-  value,
-  id,
-  soruce: "test-source",
-  name: "test-name",
-});
-
-const xxxx = (
-  notes: readonly SummarizedNote<SummarizedNoteValue>[],
-  map: ReadonlyMap<string, string>,
-  hashFn: (text: string) => unknown,
-) => {
-  return createRuntimeDictionaryData([], [], [], [], notes, map, hashFn);
-};
 
 describe("createRuntimeDictionaryData", () => {
   test("hashFn でキーを変換して dictionary を作る", () => {
@@ -36,7 +20,6 @@ describe("createRuntimeDictionaryData", () => {
       [],
       [],
       [],
-      [],
       dictionary,
       hashFn,
     );
@@ -47,47 +30,12 @@ describe("createRuntimeDictionaryData", () => {
     expect(hashFn).toHaveBeenNthCalledWith(2, "world");
   });
 
-  test("targetNoteKeys は文字列系のみを重複なく返す", () => {
-    const notes: SummarizedNote<SummarizedNoteValue>[] = [
-      {
-        key: "Count",
-        kinds: ["number"],
-        values: [noteValue("10", 1)],
-      },
-      {
-        key: "Flag",
-        kinds: ["boolean"],
-        values: [noteValue("true", 2)],
-      },
-      {
-        key: "Text",
-        kinds: [],
-        values: [noteValue("Hello", 3)],
-      },
-      {
-        key: "Description",
-        kinds: [],
-        values: [noteValue("A test description.", 4)],
-      },
-      {
-        key: "Text",
-        kinds: [],
-        values: [noteValue("World", 5)],
-      },
-    ];
-
-    const result = xxxx(notes, new Map(), (s) => s);
-
-    expect(result.targetNoteKeys).toEqual(["Text", "Description"]);
-  });
-
   test("空入力でも安全に空配列を返す", () => {
     const hashFn = vi.fn((text: string) => text.length);
 
-    const result = xxxx([], new Map(), hashFn);
+    const result = createRuntimeDictionaryData([], [], [], [], new Map(), hashFn);
 
     expect(result.textDictionary).toEqual([]);
-    expect(result.targetNoteKeys).toEqual([]);
     expect(hashFn).not.toHaveBeenCalled();
   });
 });

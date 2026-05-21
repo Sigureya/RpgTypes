@@ -5,7 +5,6 @@ import type {
   Data_Troop,
   Data_Map,
 } from "@RpgTypes/rmmz";
-import type { RuntimeDictionaryData } from "./dictionary";
 import type { SummarizedNote, SummarizedNoteValue } from "./note";
 import { stringLikeNoteKeys } from "./note";
 import type { ActorTextDictionaryHandlers } from "./text";
@@ -16,17 +15,15 @@ export const createRuntimeDictionaryData = <T>(
   commons: ReadonlyArray<Data_CommonEvent>,
   troops: ReadonlyArray<Data_Troop>,
   maps: ReadonlyArray<Data_Map>,
-  noteNormalization: readonly SummarizedNote<SummarizedNoteValue>[],
   dictionary: ReadonlyMap<string, string>,
   hashFn: (text: string) => T,
-): RuntimeDictionaryData<T> => {
+) => {
   const handlers: ActorTextDictionaryHandlers<T> = {
     hashText: hashFn,
     newText: (text) => dictionary.get(text) ?? text,
   };
   return {
     textDictionary: createNewDictionary(dictionary, hashFn),
-    targetNoteKeys: textKeys(noteNormalization),
     actorTexts: createActorTextDictionary(
       actors,
       commons,
@@ -46,7 +43,7 @@ const createNewDictionary = <T>(
   );
 };
 
-const textKeys = (
+export const textKeysSN = (
   noteNormalization: readonly SummarizedNote<SummarizedNoteValue>[],
 ): string[] => {
   const set: Set<string> = stringLikeNoteKeys(noteNormalization);
