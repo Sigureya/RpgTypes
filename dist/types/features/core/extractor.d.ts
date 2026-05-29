@@ -3,4 +3,7 @@ import { CommandMapKey, CommandArgExtractors } from '@sigureya/rmmz-plugin-schem
 import { GameDataExtractor } from './extract/text/eventCommand';
 export declare const createTextDataExtractorFromCommandItems: (commands: ReadonlyArray<[CommandMapKey, CommandArgExtractors]>) => GameDataExtractor;
 export declare const createTextDataExtractor: () => GameDataExtractor;
+/**
+ * @deprecated
+ */
 export declare const createTextDataExtractorFromSchemas: (schemas: ReadonlyArray<PluginMinimumSchema>) => GameDataExtractor;
