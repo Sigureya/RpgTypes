@@ -12,4 +12,8 @@ export interface PluginCommandExtractor {
   ): PluginCommandParameter<string>[];
 }
 
-export type ExtractedPluginParamItem<UUID> = ExtractedTextItem<UUID, string>;
+export type ExtractedPluginParamItem<UUID> = ExtractedTextItem<
+  UUID,
+  string,
+  [rootName: string, desc: string]
+>;
