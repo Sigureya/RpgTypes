@@ -44,6 +44,9 @@ export const createTextDataExtractor = (): GameDataExtractor => {
   return new GameDataExtractorClass(new Map());
 };
 
+/**
+ * @deprecated
+ */
 export const createTextDataExtractorFromSchemas = (
   schemas: ReadonlyArray<PluginMinimumSchema>,
 ): GameDataExtractor => {
