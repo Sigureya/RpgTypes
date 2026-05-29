@@ -6,7 +6,10 @@ import {
   PLUGIN_COMMAND_MZ,
 } from "@RpgTypes/libs/eventCommand";
 import type { Command_PluginCommandMZ, EventCommand } from "@RpgTypes/rmmz";
-import type { GroopMapper } from "./eventCommand/commandGroup";
+import type {
+  EventCommandGroup_Script,
+  GroopMapper,
+} from "./eventCommand/commandGroup";
 import { getGroupHandlingFunc } from "./eventCommand/commandGroup/mapping";
 import type {
   TextPluginCommandParameter,
@@ -59,7 +62,7 @@ const forCommand = <T extends TextPluginCommandParameter>(
   index: number,
   list: ReadonlyArray<EventCommand>,
   pluginCommandFn: (command: Command_PluginCommandMZ) => T[],
-) => {
+): null | TextCommandParameter[] | TextCommandParameter => {
   if (command.code === PLUGIN_COMMAND_MZ) {
     return pluginCommandFn(command);
   }
@@ -92,6 +95,16 @@ const forCommand = <T extends TextPluginCommandParameter>(
 const groupMapper = {
   comment: (g) => extractTextParamFromComment(g),
   showMessage: (g) => extractTextParamFromMessage(g),
-  script: (group) => extractTextParamFromScript(group),
   showScrollingText: (group) => extractTextParamFromShowScrollingText(group),
+  script: (group) => scriptXXX(group),
 } as const satisfies GroopMapper<TextCommandParameter | undefined>;
+
+const scriptXXX = (group: EventCommandGroup_Script) => {
+  const extracted = extractTextParamFromScript(group);
+  // 文字列が含まれているなら、それはテキストを扱うかもしれない
+  if (/["`']/.test(extracted.value)) {
+    return extracted;
+  }
+  // 含まれていないなら、テキストとは無縁である
+  return undefined;
+};
