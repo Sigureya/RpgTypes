@@ -5,10 +5,7 @@ import type {
   Command_PluginCommandMZ,
   EventCommand,
 } from "@RpgTypes/rmmz";
-import type {
-  PluginCommandExtractor,
-  TextPluginCommandParameter,
-} from "./pluginCommand";
+import type { TextPluginCommandParameter } from "./pluginCommand";
 import type {
   ExtractedMapTexts,
   ExtractedBattleEventText,
@@ -24,7 +21,7 @@ export interface EventContainerExtractor {
   extractCommonEventText(commons: Data_CommonEvent): ExtractedCommonEventText;
 }
 
-export interface EventCommandExtractor extends PluginCommandExtractor {
+export interface EventCommandExtractor {
   extractArgs(command: Command_PluginCommandMZ): TextPluginCommandParameter[];
   extractCommandTexts(
     commands: ReadonlyArray<EventCommand>,

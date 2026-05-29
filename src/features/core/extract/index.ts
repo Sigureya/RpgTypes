@@ -6,5 +6,6 @@ export * from "./flat";
 export * from "./item";
 export * from "./note";
 export * from "./noteNormarize";
+export * from "./plugin";
 export * from "./text";
 export * from "./types";
