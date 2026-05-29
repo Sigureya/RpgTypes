@@ -9,4 +9,5 @@ export interface PluginCommandParameter<T> extends CommandParameter<T, typeof PL
     commandName: string;
     argName: string;
     argTitle: string;
+    paramIndex: 3;
 }
