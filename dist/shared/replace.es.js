@@ -699,12 +699,15 @@ const H = (e, a, t, s) => {
     return { code: P, paramIndex: 0, value: (a = e).getBodyText(), speaker: (t = a.header, t.parameters[4] ? t.parameters[4].trimEnd() : "") };
     var a, t;
   },
-  script: (e) => ((a) => ({ code: U, paramIndex: 0, value: a.getBodyText() }))(e),
-  showScrollingText: (e) => ((a) => ({
-    code: F,
-    paramIndex: 0,
-    value: a.getBodyText()
-  }))(e)
+  showScrollingText: (e) => ((a) => ({ code: F, paramIndex: 0, value: a.getBodyText() }))(e),
+  script: (e) => {
+    const a = ((t) => ({
+      code: U,
+      paramIndex: 0,
+      value: t.getBodyText()
+    }))(e);
+    if (/["`']/.test(a.value)) return a;
+  }
 }, ds = (e, a = () => []) => ({ eventId: e.id, name: e.name, commands: X(e.list, a) }), us = (e, a = () => []) => e.pages.map(((t, s) => ({
   eventId: e.id,
   pageIndex: s,

@@ -96,15 +96,13 @@ const groupMapper = {
   comment: (g) => extractTextParamFromComment(g),
   showMessage: (g) => extractTextParamFromMessage(g),
   showScrollingText: (group) => extractTextParamFromShowScrollingText(group),
-  script: (group) => scriptXXX(group),
+  script: (group: EventCommandGroup_Script) => {
+    const extracted = extractTextParamFromScript(group);
+    // 文字列が含まれているなら、それはテキストを扱うかもしれない
+    if (/["`']/.test(extracted.value)) {
+      return extracted;
+    }
+    // 含まれていないなら、テキストとは無縁である
+    return undefined;
+  },
 } as const satisfies GroopMapper<TextCommandParameter | undefined>;
-
-const scriptXXX = (group: EventCommandGroup_Script) => {
-  const extracted = extractTextParamFromScript(group);
-  // 文字列が含まれているなら、それはテキストを扱うかもしれない
-  if (/["`']/.test(extracted.value)) {
-    return extracted;
-  }
-  // 含まれていないなら、テキストとは無縁である
-  return undefined;
-};
