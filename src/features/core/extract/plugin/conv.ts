@@ -30,16 +30,16 @@ export const isTextParam = (
   if (!isTextParamKind(param)) {
     return false;
   }
+  if (/^[\d\s-\+\*/,.()=><]+$/.test(param.value)) {
+    // 数式っぽい文字列はテキストではないとみなす
+    return false;
+  }
   // JS式の中に文字列が含まれてない
   if (!/["`']/.test(param.value)) {
     if (isScript(param.value)) {
       // JS式の要素が含まれているなら、テキストではない
       return false;
     }
-  }
-  if (/^[\d\s-\+\*/,.()=><]+$/.test(param.value)) {
-    // 数式っぽい文字列はテキストではないとみなす
-    return false;
   }
 
   return true;
