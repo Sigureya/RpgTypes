@@ -27,7 +27,11 @@ export const convertPluginParamItem = <T>(
     baseText: value.value,
     kind: value.param.attr.text || value.param.name,
     dataKey: value.param.name,
-    otherData: [value.rootName, value.param.attr.desc || ""],
+    otherData: [
+      value.rootName,
+      value.param.attr.kind,
+      value.param.attr.desc || "",
+    ],
   };
 };
 
