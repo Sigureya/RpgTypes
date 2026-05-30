@@ -27,7 +27,13 @@ const isTextParam = (f: PluginExtractedValue): f is PluginStringValue => {
   if (!isTextParamKind(f)) {
     return false;
   }
-  return isMessageScript(f.value);
+  // JS式の中に文字列が含まれてない
+  if (!/["`']/.test(f.value)) {
+    // JS式の要素が含まれているなら、テキストではない
+    return !isScript(f.value);
+  }
+
+  return true;
 };
 
 const isTextParamKind = (f: PluginExtractedValue): boolean => {
@@ -39,15 +45,6 @@ const isTextParamKind = (f: PluginExtractedValue): boolean => {
     f.param.attr.kind === "combo" ||
     f.param.attr.kind === "any"
   );
-};
-
-const isMessageScript = (value: string) => {
-  if (/["`']/.test(value)) {
-    // 表示するためのテキストが入っている可能性がある
-    return true;
-  }
-  // JS式はテキストではない
-  return !isScript(value);
 };
 
 export const convertPluginParamItem = <T>(
