@@ -1,6 +1,10 @@
 import { describe, expect, test, vi } from "vitest";
-import type { PluginExtractedValue } from "@sigureya/rmmz-plugin-schema";
+import type {
+  PluginExtractedValue,
+  PluginStringValue,
+} from "@sigureya/rmmz-plugin-schema";
 import { isTextParam, convertPluginParams } from "./conv";
+import type { ExtractedPluginParamItem } from "./types/types";
 
 const nonTextParams: PluginExtractedValue[] = [
   {
@@ -96,24 +100,40 @@ const nonTextParams: PluginExtractedValue[] = [
   },
 ];
 
-const textParams: PluginExtractedValue[] = [
+interface TestCase {
+  param: PluginStringValue;
+  expected: ExtractedPluginParamItem<"hash">;
+}
+
+const testCases: TestCase[] = [
   {
-    value: `$gameVariables.setValue(15,"abc" )`,
     param: {
-      name: "expr",
-      attr: {
-        kind: "string",
-        default: "",
+      value: `$gameVariables.setValue(15,"abc" )`,
+      param: {
+        name: "expr",
+        attr: {
+          kind: "string",
+          default: "",
+        },
       },
+      rootName: "expr",
+      rootType: "param",
+      structName: "Test",
     },
-    rootName: "expr",
-    rootType: "param",
-    structName: "Test",
+    expected: {
+      filename: "Test",
+      id: 0,
+      uuid: "hash",
+      baseText: `$gameVariables.setValue(15,"abc" )`,
+      kind: "expr",
+      dataKey: "expr",
+      otherData: ["expr", "string", ""],
+    },
   },
 ];
 
 describe("isTextParam", () => {
-  textParams.forEach((param) => {
+  testCases.forEach(({ param }) => {
     test(`テキストパラメータはtrueを返す: ${param.value}`, () => {
       expect(isTextParam(param)).toBe(true);
     });
@@ -134,5 +154,16 @@ describe("convertPluginParams", () => {
     );
     expect(result).toEqual([]);
     expect(hashFn).not.toHaveBeenCalled();
+  });
+  testCases.forEach(({ param, expected }) => {
+    test(`テキストパラメータは正しく変換される: ${param.value}`, () => {
+      const hashFn = vi.fn(() => "hash");
+      const result = convertPluginParams(
+        { params: [param], pluginName: "Test" },
+        hashFn,
+      );
+      expect(result).toEqual([expected]);
+      expect(hashFn).toHaveBeenCalledWith(expected.baseText);
+    });
   });
 });
