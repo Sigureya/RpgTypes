@@ -61,7 +61,7 @@ const convertPluginParamItem = <T>(
   if (trimed.length === 0) {
     return undefined;
   }
-  if (/\-*/.test(trimed)) {
+  if (/^\-+$/.test(trimed)) {
     return undefined;
   }
   return {
