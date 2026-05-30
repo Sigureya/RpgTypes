@@ -11,6 +11,7 @@ export const KEYWORD_GAME_VALIABLES = [
   "$gameTroop",
   "$gameMap",
   "$gamePlayer",
+  "$gameTemp",
 ] as const;
 
 export const KEYWORD_GAME_OBJECTS = [
@@ -27,6 +28,6 @@ export const KEYWORD_GAME_OBJECTS = [
   "$dataAnimations",
   "$dataTilesets",
   "$dataCommonEvents",
-];
+] as const;
 
 export const KEYWORD_MATH = ["Math.max", "Math.min"] as const;
