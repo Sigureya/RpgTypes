@@ -1,4 +1,5 @@
 import type { SummarizedNote, SummarizedNoteValue } from "./note";
+import type { ExtractedPluginParamItem } from "./plugin";
 import type {
   ExtractedRawGameDataTexts,
   ExtractedTextMainDataFinal,
@@ -17,4 +18,5 @@ export interface ExtractedTextFinalWithNotes<UUID>
   extends ExtractedTextMainDataFinal<UUID>, ExtractedEventDataBundle<UUID> {
   noteSummaries: SummarizedNote<SummarizedNoteValue>[];
   system: SystemTexts<UUID>;
+  pluginParams: ExtractedPluginParamItem<UUID>[];
 }

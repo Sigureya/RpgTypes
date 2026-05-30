@@ -45,6 +45,28 @@ const createBundle = (): FileReadBundle => {
     otherFiles: {
       movies: new Set<string>(),
     },
+    pluginParams: [
+      {
+        pluginName: "TestPlugin",
+        params: [
+          {
+            value: TEST_SOURCE.text,
+            structName: "",
+            rootName: "",
+            rootType: "param",
+            param: {
+              name: "testParam",
+              attr: {
+                text: "Test Parameter",
+                kind: "string",
+                desc: "A test parameter",
+                default: "",
+              },
+            },
+          },
+        ],
+      },
+    ],
   };
 };
 
@@ -145,7 +167,6 @@ describe("buildExtractResultWithNotes", () => {
 
     expect(result.map.some((item) => item.dataKey === "note")).toBe(true);
     expect(result.noteSummaries.length).toBeGreaterThan(0);
-    expect(result.pluginParams).toEqual([]);
     expect(result.commonEvents).toEqual([]);
     expect(result.troops).toEqual([]);
     expect(result.system).toEqual({
