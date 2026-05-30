@@ -35,7 +35,7 @@ export const flattenExtractedItems = <UUID>(
     ...data.commonEvents,
     ...data.map,
     ...data.troops,
-    ...data.pluginParams.flat(),
+    ...data.pluginParams,
   ];
 };
 
