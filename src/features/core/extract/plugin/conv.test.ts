@@ -47,6 +47,35 @@ const textParams: PluginExtractedValue[] = [
   },
 ];
 
+const invalidTextParams: PluginExtractedValue[] = [
+  {
+    value: "-----",
+    param: {
+      name: "bar",
+      attr: {
+        kind: "string",
+        default: "----",
+      },
+    },
+    rootName: "bar",
+    rootType: "param",
+    structName: "Test",
+  },
+  {
+    value: "   ",
+    param: {
+      name: "empty",
+      attr: {
+        kind: "string",
+        default: "",
+      },
+    },
+    rootName: "baz",
+    rootType: "param",
+    structName: "Test",
+  },
+];
+
 describe("isTextParam", () => {
   textParams.forEach((param) => {
     test(`テキストパラメータはtrueを返す: ${param.value}`, () => {
@@ -65,6 +94,15 @@ describe("convertPluginParams", () => {
     const hashFn = vi.fn((text: string) => text);
     const result = convertPluginParams(
       { params: nonTextParams, pluginName: "Test" },
+      hashFn,
+    );
+    expect(result).toEqual([]);
+    expect(hashFn).not.toHaveBeenCalled();
+  });
+  test("無効なテキストパラメータは除外される", () => {
+    const hashFn = vi.fn((text: string) => text);
+    const result = convertPluginParams(
+      { params: invalidTextParams, pluginName: "Test" },
       hashFn,
     );
     expect(result).toEqual([]);
