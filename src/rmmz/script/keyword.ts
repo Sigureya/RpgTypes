@@ -30,4 +30,12 @@ export const KEYWORD_GAME_OBJECTS = [
   "$dataCommonEvents",
 ] as const;
 
+export const KEYWORD_MANAGER = [
+  "SceneManager",
+  "AudioManager",
+  "ImageManager",
+  "DataManager",
+  "PluginManager",
+] as const;
+
 export const KEYWORD_MATH = ["Math.max", "Math.min"] as const;
