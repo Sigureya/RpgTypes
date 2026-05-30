@@ -1,17 +1,17 @@
 import { createCommandExtractorMapFromPipeline as te, extractPluginCommandWithExtractor as se, parseDeepRecord as re } from "@sigureya/rmmz-plugin-schema";
-import { as as R, v as z, E as V, w as G, b as oa, q as ia, N as ca, aS as F, P as q, Q as J, aP as P, aM as j, aO as ea, az as la, ay as _, aR as pa } from "./makeAudio.es.js";
-import { n as O } from "./normalText.es.js";
+import { as as R, v as V, E as G, w as J, b as oa, q as ia, N as ca, aS as F, P as z, Q as O, aP as P, aM as j, aO as ea, az as la, ay as _, aR as pa } from "./makeAudio.es.js";
+import { n as U } from "./normalText.es.js";
 import { f as ta, u as ne, x as me, z as oe, r as da, h as ie, s as ce, O as le, G as pe, p as de, g as ue, D as C, C as ye, y as ua } from "./isScript.es.js";
-import { l as L, a as ya, i as ga, f as ha, c as fa, e as va, d as xa, j as Na, b as Ta, h as ge, g as he } from "./constants.es.js";
+import { l as q, a as ya, i as ga, f as ha, c as fa, e as va, d as xa, j as Na, b as Ta, h as ge, g as he } from "./constants.es.js";
 import { JSONPathJS as fe } from "jsonpath-js";
 import { k as ve, v as xe, u as Ne, r as Te, a as be } from "./makeSystem.es.js";
 import { a as ke, r as ba } from "./writeData.es.js";
 const sa = (a, e, t, s, r, n) => {
   if (a.code === R) return Ie(a, e, t, r, n);
-  const m = O(a.value);
+  const m = U(a.value);
   return { otherData: n, uuid: r(m), kind: s(a), baseText: m, filename: t, id: e, speaker: a.speaker ?? "", dataKey: we(a) };
 }, we = (a) => `code:${a.code}`, Ie = (a, e, t, s, r) => {
-  const n = O(a.value);
+  const n = U(a.value);
   return { otherData: [a.pluginName, ...r], uuid: s(n), kind: `${Se(a)}`, baseText: n, filename: t, id: e, dataKey: `code:${a.code}-${a.argName}` };
 }, Se = (a) => `${a.commandName}.${a.argTitle}`, Me = (a, e, t, s) => e.flatMap(((r) => Ee(a, r, t, s))), Ee = (a, e, t, s) => e.commands.filter(ka).map(((r) => sa(r, e.eventId, a, s, t, [e.name]))), Be = (a, e, t, s) => a.filter(((r) => r.commands.length > 0)).flatMap(((r) => {
   const n = `page:${r.pageIndex + 1}`;
@@ -29,7 +29,7 @@ const sa = (a, e, t, s, r, n) => {
 }, $e = (a) => a !== null && a.key.length > 0, Fe = (a, e, t, s) => {
   const r = Pe(a), n = s.map(Ke), m = Re(e), o = je(t);
   return new Set([r, m, o, n].flat(4));
-}, Pe = (a) => a.map(((e) => [e.name, e.nickname, e.profile])), Ke = (a) => ta(a, ra), Re = (a) => ne(a, ra), je = (a) => me(a, ra), ra = ({ list: a }) => a.filter(_e).map(((e) => e.parameters[1])), _e = (a) => a.code === z || a.code === V || a.code === G, A = (a, e) => ({
+}, Pe = (a) => a.map(((e) => [e.name, e.nickname, e.profile])), Ke = (a) => ta(a, ra), Re = (a) => ne(a, ra), je = (a) => me(a, ra), ra = ({ list: a }) => a.filter(_e).map(((e) => e.parameters[1])), _e = (a) => a.code === V || a.code === G || a.code === J, A = (a, e) => ({
   id: a.id,
   name: a.name,
   note: Ue(a),
@@ -46,7 +46,7 @@ const sa = (a, e, t, s, r, n) => {
   name: t.name,
   note: t.note
 }, s), B = (a, e, t, s) => a.map(((r) => Xe(r, e, t, s))), Xe = (a, e, t, s) => ({ main: a.main.filter(((r) => r.value !== "")).map(((r) => {
-  const n = O(r.value);
+  const n = U(r.value);
   return {
     kind: t[r.key],
     baseText: n,
@@ -71,7 +71,7 @@ const sa = (a, e, t, s, r, n) => {
   kind: t.currencyUnit,
   dataKey: "currencyUnit"
 }, ...Y(e, a.equipTypes, "equipTypes", t.equipTypes, s), ...Y(e, a.weaponTypes, "weaponTypes", t.weaponTypes, s), ...Y(e, a.armorTypes, "armorTypes", t.armorTypes, s)], Y = (a, e, t, s, r) => e.filter(((n) => n.length > 0)).map(((n, m) => {
-  const o = O(n);
+  const o = U(n);
   return { filename: a, id: m, baseText: o, uuid: r(o), kind: s, dataKey: t };
 })), Ze = (a) => ({
   gameTitle: a.gameTitle,
@@ -108,7 +108,7 @@ const sa = (a, e, t, s, r, n) => {
   fileName: a.info.filename,
   error: a.info.message
 }] : [], ...a.invalidMaps.map(((t) => ({ fileName: t.filename, error: t.message }))), ...e.system === null ? [{
-  fileName: L,
+  fileName: q,
   error: e.message
 }] : []], st = (a) => T(a, Oe), rt = (a, e) => T(a, ((t) => e.extractCommonEventText(t))), nt = (a, e) => T(a, ((t) => e.extractBattleText(t))), mt = (a, e) => {
   const t = a.validMaps.map(((s) => ({
@@ -123,7 +123,7 @@ const sa = (a, e, t, s, r, n) => {
 }, ct = (a) => {
   const e = a.trim();
   return /^-?\d{1,16}\.?\d{0,16}$/.test(e);
-}, U = (a) => {
+}, L = (a) => {
   const e = a.filter(((t) => t.kinds.length === 0)).map(((t) => t.key));
   return new Set(e);
 }, Ia = (a, e) => {
@@ -213,11 +213,11 @@ const sa = (a, e, t, s, r, n) => {
     classes: S(a.classes, t)
   };
 }, sr = (a, e) => {
-  const t = Ca(a, e), s = U(t);
+  const t = Ca(a, e), s = L(t);
   return Ea(a, s);
 }, xt = (a, e) => {
   const t = Ba(a, e);
-  return U(t);
+  return L(t);
 }, rr = (a, e) => {
   const t = xt(a, e);
   return Ma(a, t);
@@ -239,17 +239,17 @@ const sa = (a, e, t, s, r, n) => {
   const t = a.map(yt);
   return Ia(t, e);
 }, Tt = (a, e) => {
-  const t = Ba(a, e), s = U(t);
+  const t = Ba(a, e), s = L(t);
   return {
     noteSummary: t,
     nonTextNoteKeys: s,
     mainData: Ma(a, s)
   };
 }, bt = (a, e) => {
-  const t = Ca(a, e), s = U(t);
+  const t = Ca(a, e), s = L(t);
   return { noteSummary: t, validMaps: Ea(a, s) };
 }, kt = (a, e) => a.params.filter(wt).map(((t) => St(a.pluginName, t, e))).filter(((t) => t !== void 0)), wt = (a) => typeof a.value == "string" && a.value.length !== 0 && !!It(a) && (!!/["`']/.test(a.value) || !da(a.value)), It = (a) => a.param.attr.kind === "string" || a.param.attr.kind === "string[]" || a.param.attr.kind === "multiline_string" || a.param.attr.kind === "multiline_string[]" || a.param.attr.kind === "combo" || a.param.attr.kind === "any", St = (a, e, t) => {
-  const s = e.value.trimEnd();
+  const s = U(e.value);
   if (s.length !== 0 && !/\-*/.test(s)) return {
     filename: a,
     id: 0,
@@ -308,10 +308,10 @@ const sa = (a, e, t, s, r, n) => {
     dataKey: "note",
     otherData: [n.editingName, c, l.key]
   }))), r.commands.filter(ka).map(((l) => sa(l, r.eventId, n.filename, o, m, [n.editingName, c, i])))];
-})(s, a, e, t))), Dt = (a, e, t) => a.system === null ? { gameTitle: "", filename: L, texts: [] } : {
+})(s, a, e, t))), Dt = (a, e, t) => a.system === null ? { gameTitle: "", filename: q, texts: [] } : {
   gameTitle: a.system.gameTitle,
-  filename: L,
-  texts: Qe(a.system, L, t, e)
+  filename: q,
+  texts: Qe(a.system, q, t, e)
 }, $t = (a, e, t, s, r, n) => {
   const m = { hashText: n, newText: (o) => r.get(o) ?? o };
   return {
@@ -319,7 +319,7 @@ const sa = (a, e, t, s, r, n) => {
     actorTexts: De(a, e, t, s, m)
   };
 }, Ft = (a, e) => Array.from(a.entries()).map((([t, s]) => ({ key: e(t), value: s }))), Pt = (a) => {
-  const e = U(a);
+  const e = L(a);
   return Array.from(e);
 }, or = (a, e) => {
   const t = e.actorTextDictionary.get(a);
@@ -428,13 +428,13 @@ const sa = (a, e, t, s, r, n) => {
     case j:
       return Ht(a, e);
     case P:
-    case J:
-    case q:
+    case O:
+    case z:
     case F:
       return Gt(a, e);
-    case z:
-    case G:
     case V:
+    case J:
+    case G:
       return Ot(a, e);
     default:
       return a;
@@ -584,8 +584,8 @@ const H = (a, e, t, s) => {
   }
   return { header: r, bodies: n };
 }, as = (a, e) => {
-  const { bodies: t, header: s } = ((r, n) => H(r, n, ((m) => m.code === J), ((m) => m.code === q)))(a, e);
-  return es(s) ? new na(q, s, t) : new Ua(s, t);
+  const { bodies: t, header: s } = ((r, n) => H(r, n, ((m) => m.code === O), ((m) => m.code === z)))(a, e);
+  return es(s) ? new na(z, s, t) : new Ua(s, t);
 }, es = (a) => a.parameters[0] === "選択肢ヘルプ", ts = (a, e) => {
   const { bodies: t, header: s } = ((r, n) => H(r, n, ((m) => m.code === ea), ((m) => m.code === P)))(a, e);
   return new na(P, s, t);
@@ -598,12 +598,12 @@ const H = (a, e, t, s) => {
 }, ns = {
   [ea]: (a, e, t) => t.showMessage(ts(a, e), e, a),
   [_]: (a, e, t) => t.script(ss(a, e), e, a),
-  [J]: (a, e, t) => t.comment(as(a, e), e, a),
+  [O]: (a, e, t) => t.comment(as(a, e), e, a),
   [pa]: (a, e, t) => t.showScrollingText(rs(a, e), e, a)
 }, La = (a) => ns[a], ms = (a, e, t, s) => {
-  if (a.code === P || a.code === F || a.code === q) return;
+  if (a.code === P || a.code === F || a.code === z) return;
   const r = La(a.code);
-  return r ? r(t, e, s) : a.code === j ? os(a) : a.code === z || a.code === G || a.code === V ? is(a) : a.code !== la ? a : void 0;
+  return r ? r(t, e, s) : a.code === j ? os(a) : a.code === V || a.code === J || a.code === G ? is(a) : a.code !== la ? a : void 0;
 }, os = (a) => ({
   code: j,
   indent: a.indent,
@@ -687,9 +687,9 @@ const H = (a, e, t, s) => {
     const n = r(t, e, ys);
     if (n !== void 0) return [n];
   }
-  return a.code === G || a.code === z || a.code === V ? Ce(a) : null;
+  return a.code === J || a.code === V || a.code === G ? Ce(a) : null;
 }, ys = {
-  comment: (a) => ({ code: J, paramIndex: 0, value: a.getBodyText() }),
+  comment: (a) => ({ code: O, paramIndex: 0, value: a.getBodyText() }),
   showMessage: (a) => {
     return { code: P, paramIndex: 0, value: (e = a).getBodyText(), speaker: (t = e.header, t.parameters[4] ? t.parameters[4].trimEnd() : "") };
     var e, t;
@@ -1057,31 +1057,31 @@ const Vs = (a) => typeof a.value == "string", Ir = (a) => ({ key: "battlerName",
 };
 export {
   rr as $,
-  dr as A,
-  ur as B,
-  fs as C,
-  Ue as D,
-  zs as E,
-  A as F,
-  Le as G,
-  Ce as H,
-  Oe as I,
-  ze as J,
-  qe as K,
-  Tr as L,
-  X as M,
-  Ge as N,
-  wa as O,
-  Ve as P,
-  He as Q,
-  Ze as R,
-  Je as S,
-  Ae as T,
-  Kt as U,
-  or as V,
-  pr as W,
-  it as X,
-  ct as Y,
+  ur as A,
+  fs as B,
+  Ue as C,
+  zs as D,
+  A as E,
+  Le as F,
+  Ce as G,
+  Oe as H,
+  ze as I,
+  qe as J,
+  Tr as K,
+  X as L,
+  Ge as M,
+  wa as N,
+  Ve as O,
+  He as P,
+  Ze as Q,
+  Je as R,
+  Ae as S,
+  Kt as T,
+  or as U,
+  pr as V,
+  it as W,
+  ct as X,
+  wt as Y,
   ka as Z,
   xt as _,
   Mt as a,
@@ -1119,7 +1119,7 @@ export {
   zt as au,
   qa as av,
   Nr as aw,
-  U as ax,
+  L as ax,
   Ia as ay,
   Ca as az,
   mr as b,
@@ -1129,22 +1129,22 @@ export {
   Me as f,
   Xe as g,
   B as h,
-  St as i,
-  kt as j,
-  We as k,
-  Qe as l,
-  De as m,
-  lr as n,
-  nr as o,
-  $t as p,
-  kr as q,
-  br as r,
-  wr as s,
-  Fe as t,
-  hs as u,
-  gs as v,
-  Sr as w,
-  Ir as x,
-  Lt as y,
-  Aa as z
+  kt as i,
+  We as j,
+  Qe as k,
+  De as l,
+  lr as m,
+  nr as n,
+  $t as o,
+  kr as p,
+  br as q,
+  wr as r,
+  Fe as s,
+  hs as t,
+  gs as u,
+  Sr as v,
+  Ir as w,
+  Lt as x,
+  Aa as y,
+  dr as z
 };
