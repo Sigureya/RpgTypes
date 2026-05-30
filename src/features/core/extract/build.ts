@@ -48,6 +48,7 @@ import type {
 
 export const buildExtractResultWithNotes = <UUID>(
   bundle: FileReadBundle,
+  pluginParams: ReadonlyArray<PluginParamExtractionOutput>,
   kinds: SystemKinds,
   terms: RmmzTextPropertys,
   uuidGen: (text: string) => UUID,
@@ -62,7 +63,7 @@ export const buildExtractResultWithNotes = <UUID>(
 
   return buildFinalExtractedResult(
     bundle.data.actors.data,
-    bundle.pluginParams,
+    pluginParams,
     normalizeNote,
     kinds,
     terms,

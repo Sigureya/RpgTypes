@@ -45,28 +45,6 @@ const createBundle = (): FileReadBundle => {
     otherFiles: {
       movies: new Set<string>(),
     },
-    pluginParams: [
-      {
-        pluginName: "TestPlugin",
-        params: [
-          {
-            value: TEST_SOURCE.text,
-            structName: "",
-            rootName: "",
-            rootType: "param",
-            param: {
-              name: "testParam",
-              attr: {
-                text: "Test Parameter",
-                kind: "string",
-                desc: "A test parameter",
-                default: "",
-              },
-            },
-          },
-        ],
-      },
-    ],
   };
 };
 
@@ -158,6 +136,7 @@ describe("buildExtractResultWithNotes", () => {
 
     const result = buildExtractResultWithNotes(
       bundle,
+      [],
       kinds,
       terms,
       uuidGen,
@@ -189,6 +168,7 @@ describe("buildExtractResultWithNotes", () => {
 
     buildExtractResultWithNotes(
       bundle,
+      [],
       kinds,
       terms,
       uuidGen,
@@ -233,6 +213,7 @@ describe("buildExtractResultWithNotes", () => {
 
     const result = buildExtractResultWithNotes(
       bundle,
+      [],
       kinds,
       terms,
       uuidGen,
