@@ -65,9 +65,6 @@ const convertPluginParamItem = <T>(
   if (trimed.length === 0) {
     return undefined;
   }
-  if (/^\-+$/.test(trimed)) {
-    return undefined;
-  }
   return {
     filename: pluginName,
     id: 0,
