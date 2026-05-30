@@ -19,10 +19,12 @@ import {
 import type { ExtractedTextItem } from "@RpgTypes/libs";
 import type { Data_Actor, MapFileInfo } from "@RpgTypes/rmmz";
 import { createActorControlChars } from "@RpgTypes/rmmz";
+import type { PluginParamExtractionOutput } from "@sigureya/rmmz-plugin-schema";
 import { extractTextFromRawGameData } from "./bundle";
 import { extractMapEventTexts } from "./map";
 import type { SummarizedNote, SummarizedNoteValue } from "./note";
 import { buildRawGameDataNoteNormalization } from "./noteNormarize";
+import { convertPluginParams } from "./plugin";
 import type {
   SystemKinds,
   RmmzTextPropertys,
@@ -60,6 +62,7 @@ export const buildExtractResultWithNotes = <UUID>(
 
   return buildFinalExtractedResult(
     bundle.data.actors.data,
+    bundle.pluginParams,
     normalizeNote,
     kinds,
     terms,
@@ -76,6 +79,7 @@ const collectAllNoteSummaries = (
 
 const buildFinalExtractedResult = <UUID>(
   actors: ReadonlyArray<Data_Actor>,
+  pluginParams: ReadonlyArray<PluginParamExtractionOutput>,
   normalizedData: RawGameDataNoteNormalization,
   kinds: SystemKinds,
   terms: RmmzTextPropertys,
@@ -83,9 +87,12 @@ const buildFinalExtractedResult = <UUID>(
   commandNameFn: (command: TextCommandParameter) => string,
 ): ExtractedTextFinalWithNotes<UUID> => {
   const { eventData, mainData, mapFiles, system } = normalizedData.data.value;
+
   return {
     noteSummaries: collectAllNoteSummaries(normalizedData),
-    pluginParams: [],
+    pluginParams: pluginParams.flatMap((param) =>
+      convertPluginParams(param, uuidGen),
+    ),
     map: flattenMapTexts(mapFiles, uuidGen, commandNameFn),
     commonEvents: convertCommonEvents(
       FILENAME_COMMON_EVENTS,
