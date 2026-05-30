@@ -130,6 +130,32 @@ const testCases: TestCase[] = [
       otherData: ["expr", "string", ""],
     },
   },
+  {
+    param: {
+      value: "Hello, World!  ",
+      param: {
+        name: "greeting",
+        attr: {
+          kind: "string",
+          default: "",
+          text: "Greeting Text",
+          desc: "A greeting message to display",
+        },
+      },
+      rootName: "greeting",
+      rootType: "param",
+      structName: "Test",
+    },
+    expected: {
+      filename: "Test",
+      id: 0,
+      uuid: "hash",
+      baseText: "Hello, World!",
+      kind: "Greeting Text",
+      dataKey: "greeting",
+      otherData: ["greeting", "string", "A greeting message to display"],
+    },
+  },
 ];
 
 describe("isTextParam", () => {
