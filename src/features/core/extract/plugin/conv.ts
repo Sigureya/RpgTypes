@@ -1,4 +1,5 @@
 import type { PluginCommandParameter } from "@RpgTypes/rmmz";
+import { isScript } from "@RpgTypes/rmmz";
 import type {
   PluginExtractedValue,
   PluginParamExtractionOutput,
@@ -23,13 +24,18 @@ const isTextParam = (f: PluginExtractedValue): f is PluginStringValue => {
   if (f.value.length === 0) {
     return false;
   }
-  return (
+
+  if (
     f.param.attr.kind === "string" ||
     f.param.attr.kind === "string[]" ||
     f.param.attr.kind === "multiline_string" ||
     f.param.attr.kind === "multiline_string[]" ||
-    f.param.attr.kind === "combo"
-  );
+    f.param.attr.kind === "combo" ||
+    f.param.attr.kind === "any"
+  ) {
+    return !isScript(f.value);
+  }
+  return false;
 };
 
 export const convertPluginParamItem = <T>(
@@ -39,6 +45,9 @@ export const convertPluginParamItem = <T>(
 ): ExtractedPluginParamItem<T> | undefined => {
   const trimed = value.value.trimEnd();
   if (trimed.length === 0) {
+    return undefined;
+  }
+  if (/\-*/.test(trimed)) {
     return undefined;
   }
   return {
