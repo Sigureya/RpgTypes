@@ -10,7 +10,6 @@ import type {
 } from "@RpgTypes/rmmz";
 import type { ExtractedActorTexts } from "./actor";
 import type { ExtractedTextBundle } from "./mainData";
-import type { ExtractedPluginItem } from "./plugin";
 
 export interface ExtractedTextMainDataFinal<UUID> {
   map: ExtractedTextItem<UUID>[];
@@ -22,5 +21,4 @@ export interface ExtractedTextMainDataFinal<UUID> {
   enemies: ExtractedTextBundle<Data_Enemy, UUID>[];
   classes: ExtractedTextBundle<Data_Class, UUID>[];
   states: ExtractedTextBundle<Data_State, UUID>[];
-  pluginParams: ExtractedPluginItem<UUID>[];
 }
