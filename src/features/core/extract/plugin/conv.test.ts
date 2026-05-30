@@ -16,9 +16,43 @@ const nonTextParams: PluginExtractedValue[] = [
     rootType: "param",
     structName: "Test",
   },
+  {
+    value: "$gameVariables.setValue(12, 24)",
+    param: {
+      name: "expr",
+      attr: {
+        kind: "string",
+        default: "",
+      },
+    },
+    rootName: "expr",
+    rootType: "param",
+    structName: "Test",
+  },
+];
+
+const textParams: PluginExtractedValue[] = [
+  {
+    value: `$gameVariables.setValue(15,"abc" )`,
+    param: {
+      name: "expr",
+      attr: {
+        kind: "string",
+        default: "",
+      },
+    },
+    rootName: "expr",
+    rootType: "param",
+    structName: "Test",
+  },
 ];
 
 describe("isTextParam", () => {
+  textParams.forEach((param) => {
+    test(`テキストパラメータはtrueを返す: ${param.value}`, () => {
+      expect(isTextParam(param)).toBe(true);
+    });
+  });
   nonTextParams.forEach((param) => {
     test(`非テキストパラメータはfalseを返す: ${param.value}`, () => {
       expect(isTextParam(param)).toBe(false);

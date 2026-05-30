@@ -32,8 +32,10 @@ export const isTextParam = (
   }
   // JS式の中に文字列が含まれてない
   if (!/["`']/.test(param.value)) {
-    // JS式の要素が含まれているなら、テキストではない
-    return !isScript(param.value);
+    if (isScript(param.value)) {
+      // JS式の要素が含まれているなら、テキストではない
+      return false;
+    }
   }
 
   return true;
