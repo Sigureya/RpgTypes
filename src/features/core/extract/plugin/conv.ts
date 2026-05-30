@@ -24,18 +24,30 @@ const isTextParam = (f: PluginExtractedValue): f is PluginStringValue => {
   if (f.value.length === 0) {
     return false;
   }
+  if (!isTextParamKind(f)) {
+    return false;
+  }
+  return isMessageScript(f.value);
+};
 
-  if (
+const isTextParamKind = (f: PluginExtractedValue): boolean => {
+  return (
     f.param.attr.kind === "string" ||
     f.param.attr.kind === "string[]" ||
     f.param.attr.kind === "multiline_string" ||
     f.param.attr.kind === "multiline_string[]" ||
     f.param.attr.kind === "combo" ||
     f.param.attr.kind === "any"
-  ) {
-    return !isScript(f.value);
+  );
+};
+
+const isMessageScript = (value: string) => {
+  if (/["`']/.test(value)) {
+    // 表示するためのテキストが入っている可能性がある
+    return true;
   }
-  return false;
+  // JS式はテキストではない
+  return !isScript(value);
 };
 
 export const convertPluginParamItem = <T>(
