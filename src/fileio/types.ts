@@ -1,4 +1,3 @@
-import type { PluginParamExtractionOutput } from "@sigureya/rmmz-plugin-schema";
 import type {
   AssetFilesBundle,
   AudioFilesSet,
@@ -12,7 +11,6 @@ export interface FileReadBundle extends AssetFilesBundle {
   imageFiles: ImageFilesSet;
   otherFiles: OtherFilesSet;
   data: RawGameData;
-  pluginParams: PluginParamExtractionOutput[];
 }
 
 export interface FileReadFailed {
