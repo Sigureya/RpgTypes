@@ -37,6 +37,10 @@ export const isTextParam = (
       return false;
     }
   }
+  if (/^[\d\s-\+\*/,.()=><]+$/.test(param.value)) {
+    // 数式っぽい文字列はテキストではないとみなす
+    return false;
+  }
 
   return true;
 };

@@ -29,27 +29,21 @@ const nonTextParams: PluginExtractedValue[] = [
     rootType: "param",
     structName: "Test",
   },
-];
-
-const textParams: PluginExtractedValue[] = [
   {
-    value: `$gameVariables.setValue(15,"abc" )`,
+    value: "-----",
     param: {
-      name: "expr",
+      name: "bar",
       attr: {
-        kind: "string",
-        default: "",
+        kind: "any",
+        default: "----",
       },
     },
-    rootName: "expr",
+    rootName: "bar",
     rootType: "param",
     structName: "Test",
   },
-];
-
-const invalidTextParams: PluginExtractedValue[] = [
   {
-    value: "-----",
+    value: " ----- ",
     param: {
       name: "bar",
       attr: {
@@ -74,6 +68,48 @@ const invalidTextParams: PluginExtractedValue[] = [
     rootType: "param",
     structName: "Test",
   },
+  {
+    value: " 123,456  ",
+    param: {
+      name: "vec2",
+      attr: {
+        kind: "any",
+        default: "123,456",
+      },
+    },
+    rootName: "baz",
+    rootType: "param",
+    structName: "Test",
+  },
+  {
+    value: " 12.3+456-789 ",
+    param: {
+      name: "formula",
+      attr: {
+        kind: "string",
+        default: "",
+      },
+    },
+    rootName: "baz",
+    rootType: "param",
+    structName: "Test",
+  },
+];
+
+const textParams: PluginExtractedValue[] = [
+  {
+    value: `$gameVariables.setValue(15,"abc" )`,
+    param: {
+      name: "expr",
+      attr: {
+        kind: "string",
+        default: "",
+      },
+    },
+    rootName: "expr",
+    rootType: "param",
+    structName: "Test",
+  },
 ];
 
 describe("isTextParam", () => {
@@ -94,15 +130,6 @@ describe("convertPluginParams", () => {
     const hashFn = vi.fn((text: string) => text);
     const result = convertPluginParams(
       { params: nonTextParams, pluginName: "Test" },
-      hashFn,
-    );
-    expect(result).toEqual([]);
-    expect(hashFn).not.toHaveBeenCalled();
-  });
-  test("無効なテキストパラメータは除外される", () => {
-    const hashFn = vi.fn((text: string) => text);
-    const result = convertPluginParams(
-      { params: invalidTextParams, pluginName: "Test" },
       hashFn,
     );
     expect(result).toEqual([]);
