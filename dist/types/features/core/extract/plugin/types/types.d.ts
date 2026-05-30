@@ -6,5 +6,6 @@ export interface PluginCommandExtractor {
 }
 export type ExtractedPluginParamItem<UUID> = ExtractedTextItem<UUID, string, [
     rootName: string,
+    kind: string,
     desc: string
 ]>;
