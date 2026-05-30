@@ -11,20 +11,41 @@ export const convertPluginParams = <T>(
   fn: (text: string) => T,
 ): ExtractedPluginParamItem<T>[] => {
   return list.params
-    .filter((f) => typeof f.value === "string")
-    .map((param) => convertPluginParamItem(list.pluginName, param, fn));
+    .filter(isTextParam)
+    .map((param) => convertPluginParamItem(list.pluginName, param, fn))
+    .filter((item) => item !== undefined);
+};
+
+const isTextParam = (f: PluginExtractedValue): f is PluginStringValue => {
+  if (typeof f.value !== "string") {
+    return false;
+  }
+  if (f.value.length === 0) {
+    return false;
+  }
+  return (
+    f.param.attr.kind === "string" ||
+    f.param.attr.kind === "string[]" ||
+    f.param.attr.kind === "multiline_string" ||
+    f.param.attr.kind === "multiline_string[]" ||
+    f.param.attr.kind === "combo"
+  );
 };
 
 export const convertPluginParamItem = <T>(
   pluginName: string,
   value: PluginStringValue,
   fn: (text: string) => T,
-): ExtractedPluginParamItem<T> => {
+): ExtractedPluginParamItem<T> | undefined => {
+  const trimed = value.value.trimEnd();
+  if (trimed.length === 0) {
+    return undefined;
+  }
   return {
     filename: pluginName,
     id: 0,
-    uuid: fn(value.value),
-    baseText: value.value,
+    uuid: fn(trimed),
+    baseText: trimed,
     kind: value.param.attr.text || value.param.name,
     dataKey: value.param.name,
     otherData: [
