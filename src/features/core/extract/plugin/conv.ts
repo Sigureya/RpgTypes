@@ -1,3 +1,4 @@
+import { normarizeText } from "@RpgTypes/libs";
 import type { PluginCommandParameter } from "@RpgTypes/rmmz";
 import { isScript } from "@RpgTypes/rmmz";
 import type {
@@ -9,28 +10,30 @@ import type { ExtractedPluginParamItem } from "./types/types";
 
 export const convertPluginParams = <T>(
   list: PluginParamExtractionOutput,
-  fn: (text: string) => T,
+  hashFn: (text: string) => T,
 ): ExtractedPluginParamItem<T>[] => {
   return list.params
     .filter(isTextParam)
-    .map((param) => convertPluginParamItem(list.pluginName, param, fn))
+    .map((param) => convertPluginParamItem(list.pluginName, param, hashFn))
     .filter((item) => item !== undefined);
 };
 
-const isTextParam = (f: PluginExtractedValue): f is PluginStringValue => {
-  if (typeof f.value !== "string") {
+export const isTextParam = (
+  param: PluginExtractedValue,
+): param is PluginStringValue => {
+  if (typeof param.value !== "string") {
     return false;
   }
-  if (f.value.length === 0) {
+  if (param.value.length === 0) {
     return false;
   }
-  if (!isTextParamKind(f)) {
+  if (!isTextParamKind(param)) {
     return false;
   }
   // JS式の中に文字列が含まれてない
-  if (!/["`']/.test(f.value)) {
+  if (!/["`']/.test(param.value)) {
     // JS式の要素が含まれているなら、テキストではない
-    return !isScript(f.value);
+    return !isScript(param.value);
   }
 
   return true;
@@ -47,12 +50,12 @@ const isTextParamKind = (f: PluginExtractedValue): boolean => {
   );
 };
 
-export const convertPluginParamItem = <T>(
+const convertPluginParamItem = <T>(
   pluginName: string,
   value: PluginStringValue,
-  fn: (text: string) => T,
+  hashFn: (text: string) => T,
 ): ExtractedPluginParamItem<T> | undefined => {
-  const trimed = value.value.trimEnd();
+  const trimed = normarizeText(value.value);
   if (trimed.length === 0) {
     return undefined;
   }
@@ -62,7 +65,7 @@ export const convertPluginParamItem = <T>(
   return {
     filename: pluginName,
     id: 0,
-    uuid: fn(trimed),
+    uuid: hashFn(trimed),
     baseText: trimed,
     kind: value.param.attr.text || value.param.name,
     dataKey: value.param.name,
