@@ -248,7 +248,7 @@ const sa = (a, e, t, s, r, n) => {
 }, bt = (a, e) => {
   const t = Ca(a, e), s = L(t);
   return { noteSummary: t, validMaps: Ea(a, s) };
-}, kt = (a, e) => a.params.filter(wt).map(((t) => St(a.pluginName, t, e))).filter(((t) => t !== void 0)), wt = (a) => typeof a.value == "string" && a.value.length !== 0 && !!It(a) && (!!/["`']/.test(a.value) || !da(a.value)), It = (a) => a.param.attr.kind === "string" || a.param.attr.kind === "string[]" || a.param.attr.kind === "multiline_string" || a.param.attr.kind === "multiline_string[]" || a.param.attr.kind === "combo" || a.param.attr.kind === "any", St = (a, e, t) => {
+}, kt = (a, e) => a.params.filter(wt).map(((t) => St(a.pluginName, t, e))).filter(((t) => t !== void 0)), wt = (a) => typeof a.value == "string" && a.value.length !== 0 && !!It(a) && !(!/["`']/.test(a.value) && da(a.value)), It = (a) => a.param.attr.kind === "string" || a.param.attr.kind === "string[]" || a.param.attr.kind === "multiline_string" || a.param.attr.kind === "multiline_string[]" || a.param.attr.kind === "combo" || a.param.attr.kind === "any", St = (a, e, t) => {
   const s = U(e.value);
   if (s.length !== 0 && !/\-*/.test(s)) return {
     filename: a,
