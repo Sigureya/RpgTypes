@@ -46,7 +46,8 @@ import type {
   RawGameDataNoteNormalization,
 } from "./types";
 
-export const buildExtractResultWithNotes = <UUID>(
+export { buildExtractResult as buildExtractResultWithNotes };
+export const buildExtractResult = <UUID>(
   bundle: FileReadBundle,
   pluginParams: ReadonlyArray<PluginParamExtractionOutput>,
   kinds: SystemKinds,
