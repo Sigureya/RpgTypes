@@ -6,7 +6,7 @@ import type {
   Data_Troop,
   EventCommand,
 } from "@RpgTypes/rmmz";
-import type { PluginMinimumSchema } from "@sigureya/rmmz-plugin-schema";
+import type { PluginCommandMinimumSchema } from "@sigureya/rmmz-plugin-schema";
 import type {
   CommandMapKey,
   CommandArgExtractors,
@@ -48,7 +48,7 @@ export const createTextDataExtractor = (): GameDataExtractor => {
  * @deprecated
  */
 export const createTextDataExtractorFromSchemas = (
-  schemas: ReadonlyArray<PluginMinimumSchema>,
+  schemas: ReadonlyArray<PluginCommandMinimumSchema>,
 ): GameDataExtractor => {
   const list: CommandExtractorEntry[] = schemas.flatMap((schema) =>
     createPluginCommandExtractor(schema, (path) => new JSONPathJS(path)),
