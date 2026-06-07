@@ -18,6 +18,24 @@ export const convertPluginParams = <T>(
     .filter((item) => item !== undefined);
 };
 
+export const isTextString = (str: string): boolean => {
+  if (str.length === 0) {
+    return false;
+  }
+  if (/^[\d\s-\+\*/,.()=><]+$/.test(str)) {
+    // 数式っぽい文字列はテキストではないとみなす
+    return false;
+  }
+  // JS式の中に文字列が含まれてない
+  if (!/["`']/.test(str)) {
+    if (isScript(str)) {
+      // JS式の要素が含まれているなら、テキストではない
+      return false;
+    }
+  }
+  return true;
+};
+
 export const isTextParam = (
   param: PluginExtractedValue,
 ): param is PluginStringValue => {
@@ -30,16 +48,8 @@ export const isTextParam = (
   if (!isTextParamKind(param)) {
     return false;
   }
-  if (/^[\d\s-\+\*/,.()=><]+$/.test(param.value)) {
-    // 数式っぽい文字列はテキストではないとみなす
+  if (!isTextString(param.value)) {
     return false;
-  }
-  // JS式の中に文字列が含まれてない
-  if (!/["`']/.test(param.value)) {
-    if (isScript(param.value)) {
-      // JS式の要素が含まれているなら、テキストではない
-      return false;
-    }
   }
 
   return true;
