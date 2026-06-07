@@ -4,6 +4,7 @@ export * from "./core/replace/index";
 export * from "./core/replaceEvent";
 export * from "./core/rpg";
 export * from "./extractText";
+export * from "./pluginMap";
 export * from "./replace";
 export * from "./types";
 export { extractPluginCommandMzArgs } from "./core/extract/plugin/pluginCommand";
