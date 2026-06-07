@@ -5,7 +5,12 @@ import type {
   EventCommand,
   Command_PluginCommandMZ,
 } from "@RpgTypes/rmmz";
-import { collectMapEvents, readNote } from "@RpgTypes/rmmz";
+import {
+  collectMapEvents,
+  PLUGIN_COMMAND_MZ,
+  processMapEvents,
+  readNote,
+} from "@RpgTypes/rmmz";
 import type { TextPluginCommandParameter } from "./extract/text/eventCommand";
 import type {
   ExtractedBattleEventText,
@@ -14,6 +19,30 @@ import type {
   ExtractedMapTexts,
 } from "./extract/text/eventCommand";
 import { extractTextFromEventCommandsEx } from "./getTextFromCommand";
+
+export const extractPluginCommandFromCommn = (
+  commons: Data_CommonEvent,
+): Command_PluginCommandMZ[] => {
+  return commons.list.filter(isPluginCommand);
+};
+
+export const extractPluginCommandFromTroop = (
+  troop: Data_Troop,
+): Command_PluginCommandMZ[] => {
+  return troop.pages.flatMap((page) => page.list.filter(isPluginCommand));
+};
+
+export const extractPluginCommandFromMap = (
+  map: Data_Map<EventCommand>,
+): Command_PluginCommandMZ[][][] => {
+  return processMapEvents(map, (page) => {
+    return page.list.filter(isPluginCommand);
+  });
+};
+
+const isPluginCommand = (command: EventCommand) => {
+  return command.code === PLUGIN_COMMAND_MZ;
+};
 
 export const extractCommonEventTexts = <T extends TextPluginCommandParameter>(
   commons: Data_CommonEvent,
