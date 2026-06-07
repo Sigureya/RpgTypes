@@ -3,6 +3,7 @@ export * from "./core/extract/item/index";
 export * from "./core/replace/index";
 export * from "./core/replaceEvent";
 export * from "./core/rpg";
+export * from "./createPluginPath";
 export * from "./extractText";
 export * from "./pluginMap";
 export * from "./replace";

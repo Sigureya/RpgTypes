@@ -104,9 +104,5 @@ export const runtimePipelineToFileEntries = <E, Hash extends string>(
       filename: FILENAME_RUNTIME_HACKED_PLUGINS_JS,
       data: output.hackedPluginsJs,
     },
-    {
-      filename: FILENAME_RUNTIME_DATA_BUILD_JS,
-      data: output.dataBuildJs,
-    },
   ];
 };

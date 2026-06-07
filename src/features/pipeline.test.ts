@@ -264,10 +264,6 @@ describe("features pipeline", () => {
           filename: FILENAME_RUNTIME_HACKED_PLUGINS_JS,
           data: output.hackedPluginsJs,
         },
-        {
-          filename: FILENAME_RUNTIME_DATA_BUILD_JS,
-          data: output.dataBuildJs,
-        },
       ]);
     });
   });
