@@ -135,10 +135,19 @@ export interface ReadGameDataResultNullable<
   tilesets: ReadHandledResult<Tileset, null>;
 }
 
+export interface RawGameEventData<
+  Command extends EventCommandUnknown = EventCommand,
+> {
+  commonEvents: ReadArrayResult<Data_CommonEventUnknown<Command>>;
+  troops: ReadArrayResult<Data_TroopUnknonw<Command>>;
+  mapFiles: MapBatchReadResult<Data_Map<Command>>;
+}
+
 export interface RawGameData<
   Command extends EventCommandUnknown = EventCommand,
   System = Data_System,
-> extends ReadAllDataFields {
+>
+  extends ReadAllDataFields, RawGameEventData<Command> {
   actors: ReadArrayResult<Data_Actor>;
   armors: ReadArrayResult<Data_Armor>;
   classes: ReadArrayResult<Data_Class>;
