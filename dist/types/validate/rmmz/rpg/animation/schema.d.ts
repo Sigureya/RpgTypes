@@ -1,6 +1,6 @@
 export declare const SCHEMA_DATA_ANIMATION: {
     readonly type: "object";
-    readonly required: ("id" | "name" | "offsetX" | "offsetY" | "speed" | "displayType" | "effectName" | "flashTimings" | "rotation" | "scale" | "soundTimings")[];
+    readonly required: ("id" | "name" | "effectName" | "displayType" | "offsetX" | "offsetY" | "scale" | "speed" | "rotation" | "soundTimings" | "flashTimings")[];
     readonly properties: {
         name: {
             type: string;
