@@ -1,0 +1,15 @@
+import { RawGameEventData } from '../fileio';
+import { Command_PluginCommandMZ } from '../rmmz';
+import { AnyStringParam, PluginReplacePathData, PluginSchema, PluginSchemaArray, PrimitiveParam } from '@sigureya/rmmz-plugin-schema';
+export type PluginCommandMapKey = `${string}:${string}`;
+export type PluginTextSource = Pick<PluginSchema, "pluginName" | "schema">;
+export type AnyParamTextPredicate = (param: AnyStringParam, name: string) => boolean;
+export declare const createPluginCommandKey: (pluginName: string, commandName: string) => PluginCommandMapKey;
+export declare const createPluginCommandKeyFromCommand: (command: Command_PluginCommandMZ) => PluginCommandMapKey;
+export declare const collectPluginCommands: (events: RawGameEventData) => Command_PluginCommandMZ[];
+export declare const groupPluginCommandsByKey: (commands: ReadonlyArray<Command_PluginCommandMZ>) => Map<PluginCommandMapKey, Command_PluginCommandMZ[]>;
+export declare const isTextAnyParamStrict: (param: AnyStringParam, _name: string) => boolean;
+export declare const isTextTargetParam: (param: PrimitiveParam, name: string, anyParamFn?: AnyParamTextPredicate) => boolean;
+export declare const filterPluginTextSchema: (schema: PluginSchemaArray, anyParamFn?: AnyParamTextPredicate) => PluginSchemaArray;
+export declare const createPluginTextPathDictionary: (pluginName: string, schema: PluginSchemaArray, anyParamFn?: AnyParamTextPredicate) => PluginReplacePathData;
+export declare const createPluginTextPathDictionaries: (plugins: ReadonlyArray<PluginTextSource>, anyParamFn?: AnyParamTextPredicate) => PluginReplacePathData[];
