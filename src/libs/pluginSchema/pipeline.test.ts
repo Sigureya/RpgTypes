@@ -573,6 +573,7 @@ const createCommandMap = (): ReadonlyMap<CommandMapKey, CommandArgExtractors> =>
 
 const pluginCommand: PluginCommandData = {
   code: 357,
+  indent: 0,
   parameters: ["MockPlugin", "cmd", "test desc", { value: "42", note: "ok" }],
 };
 
