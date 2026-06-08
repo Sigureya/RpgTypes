@@ -1,3 +1,4 @@
+export * from "./core/asJS";
 export * from "./core/extract";
 export * from "./core/extract/item/index";
 export * from "./core/pluginManager";
