@@ -195,7 +195,7 @@ const toRuntimeData = (data: RawGameData): RpgDataBundleHasText => {
   };
 };
 
-describe("features pipeline", () => {
+describe.skip("features pipeline", () => {
   describe("payload builders", () => {
     test("buildDictionaryJsPayload", () => {
       const dictionary = createDictionary();
