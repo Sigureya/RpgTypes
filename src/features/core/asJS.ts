@@ -1,24 +1,32 @@
 /* eslint-disable @functional/no-return-void */
-
+import type { TextFileEntry } from "@RpgTypes/fileio";
 import type { Rmmz_PluginManagerBase } from "@RpgTypes/libs";
 import type {
   PluginReplacePathData,
   PluginParamsObject,
+  PluginParamsRecord,
 } from "@sigureya/rmmz-plugin-schema";
+import { stringifyPluginsJS } from "@sigureya/rmmz-plugin-schema";
 import type { RuntimeDictionaryData } from "./extract";
 import {
-  PLUGIN_NAME_HONYAKU_EX,
   PLUGIN_COMMAND_HONYAKU_SETUP,
   PLUGIN_COMMAND_READ_PLUGINS,
+  PLUGIN_NAME_HONYAKU_EX,
 } from "./pluginManager";
 
-type PluginName = typeof PLUGIN_NAME_HONYAKU_EX;
-
-export interface GGGPair {
+export interface PluginSnapshot {
   paths: PluginReplacePathData;
-  body: PluginParamsObject;
+  parameters: PluginParamsObject;
 }
 
+export interface RuntimePluginBundleOptions {
+  outputDirectory: string;
+  dictionaryName: string;
+  pluginSnapshotName: string;
+  description: string;
+}
+
+type PluginName = typeof PLUGIN_NAME_HONYAKU_EX;
 export interface PluginManager_HonyakuEx extends Rmmz_PluginManagerBase {
   parameters(name: PluginName): unknown;
   registerCommand(
@@ -35,13 +43,13 @@ export interface PluginManager_HonyakuEx extends Rmmz_PluginManagerBase {
   registerCommand(
     pluginName: PluginName,
     commandName: typeof PLUGIN_COMMAND_READ_PLUGINS,
-    func: (args: ReadonlyArray<GGGPair>) => void,
+    func: (args: ReadonlyArray<PluginSnapshot>) => void,
   ): void;
   callCommand(
     self: unknown,
     pluginName: PluginName,
     commandName: typeof PLUGIN_COMMAND_READ_PLUGINS,
-    args: ReadonlyArray<GGGPair>,
+    args: ReadonlyArray<PluginSnapshot>,
   ): void;
 }
 
@@ -60,12 +68,14 @@ export const asDictionaryJS = (data: RuntimeDictionaryData<string>): string => {
   ].join("\n");
 };
 
-export const asHackPluginJS = (code: readonly GGGPair[]): string => {
+export const createPluginImportScript = (
+  params: ReadonlyArray<PluginSnapshot>,
+): string => {
   return [
     "(function(){",
     `"use strict";`,
     "const data = ",
-    `${JSON.stringify(code)};`,
+    `${JSON.stringify(params)};`,
     "PluginManager.callCommand(null,",
     PLUGIN_NAME_HONYAKU_EX,
     PLUGIN_COMMAND_READ_PLUGINS,
@@ -73,4 +83,59 @@ export const asHackPluginJS = (code: readonly GGGPair[]): string => {
     ");",
     "})()",
   ].join("\n");
+};
+
+export const createRuntimePluginFiles = (
+  options: RuntimePluginBundleOptions,
+  dictionaryData: RuntimeDictionaryData<string>,
+  snapshots: ReadonlyArray<PluginSnapshot>,
+): TextFileEntry[] => {
+  const dictionaryFile: TextFileEntry = {
+    text: asDictionaryJS(dictionaryData),
+    filename: `${options.outputDirectory}/${options.dictionaryName}.js`,
+  };
+
+  const pluginSnapshotFile: TextFileEntry = {
+    text: createPluginImportScript(snapshots),
+    filename: `${options.outputDirectory}/${options.pluginSnapshotName}.js`,
+  };
+
+  const pluginsJsFile: TextFileEntry = {
+    text: createPluginsJsText(options),
+    filename: "plugins.js",
+  };
+
+  return [pluginsJsFile, dictionaryFile, pluginSnapshotFile];
+};
+
+export const createPluginsJsText = (
+  options: RuntimePluginBundleOptions,
+): string => {
+  const plugins = createPluginManifest(options);
+  return stringifyPluginsJS(plugins);
+};
+
+export const createPluginManifest = (
+  options: RuntimePluginBundleOptions,
+): PluginParamsRecord[] => {
+  return [
+    {
+      name: `${options.outputDirectory}/${PLUGIN_NAME_HONYAKU_EX}`,
+      description: options.description,
+      status: true,
+      parameters: {},
+    },
+    {
+      name: `${options.outputDirectory}/${options.dictionaryName}`,
+      description: options.description,
+      status: true,
+      parameters: {},
+    },
+    {
+      name: `${options.outputDirectory}/${options.pluginSnapshotName}`,
+      description: options.description,
+      status: true,
+      parameters: {},
+    },
+  ];
 };
