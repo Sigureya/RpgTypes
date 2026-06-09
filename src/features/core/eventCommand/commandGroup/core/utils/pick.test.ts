@@ -30,7 +30,7 @@ const pickEx = (commands: ReadonlyArray<EventCommand>, index: number): Pair => {
     commands,
     index,
     isCommandShowMessage,
-    isCommandShowMessageBody
+    isCommandShowMessageBody,
   );
 };
 
@@ -42,19 +42,19 @@ const makeMockFunctions = () => ({
 const testPickCommands = (
   description: string,
   mockFn: {
-    head: MockedFunction<typeof isCommandShowMessage>;
-    body: MockedFunction<typeof isCommandShowMessageBody>;
+    head: MockedFunction<(command: EventCommand) => boolean>;
+    body: MockedFunction<(command: EventCommand) => boolean>;
   },
   commands: ReadonlyArray<EventCommand>,
   index: number,
-  expected: Pair
+  expected: Pair,
 ) => {
   test(description, () => {
     const result = pickCommands(
       commands,
       index,
       (a): a is EventCommand => mockFn.head(a),
-      (b): b is ExtractCommandByParam<[string]> => mockFn.body(b)
+      (b): b is ExtractCommandByParam<[string]> => mockFn.body(b),
     );
     expect(result.header).toEqual(expected.header);
     expect(result.bodies).toEqual(expected.bodies);
@@ -81,13 +81,14 @@ describe("pickCommands  - should handle a single head and a single body", () => 
     const mockFn = makeMockFunctions();
     testPickCommands(
       "should pick a valid head with a single body",
+
       mockFn,
       commands,
       0,
       {
         header: makeCommandShowMessage({}),
         bodies: [makeCommandShowMessageBody("bbb")],
-      }
+      },
     );
     test("should call head function once with the first command", () => {
       expect(mockFn.head).toHaveBeenCalledTimes(1);
@@ -120,7 +121,7 @@ describe("pickCommands  - should handle a single head and a single body", () => 
           makeCommandShowMessageBody("bbb"),
           makeCommandShowMessageBody("ccc"),
         ],
-      }
+      },
     );
     describe("Function call validation", () => {
       test("should call head function once with the first command", () => {
@@ -163,7 +164,7 @@ describe("pickCommands - Complex Cases", () => {
       {
         header: makeCommandShowMessage({ speakerName: "alice" }),
         bodies: [makeCommandShowMessageBody("bbb")],
-      }
+      },
     );
   });
 
@@ -180,7 +181,7 @@ describe("pickCommands - Complex Cases", () => {
           makeCommandShowMessageBody("xxx"),
           makeCommandShowMessageBody("yyy"),
         ],
-      }
+      },
     );
 
     describe("Function call validation for multiple bodies", () => {
@@ -207,8 +208,8 @@ describe("pickCommands - Edge cases", () => {
           [],
           0,
           (a): a is EventCommand => mockFn.head(a),
-          (b): b is Command_ShowMessageBody => mockFn.body(b)
-        )
+          (b): b is Command_ShowMessageBody => mockFn.body(b),
+        ),
       ).toThrow();
     });
     test("should not call body function when the array is empty", () => {
@@ -232,7 +233,7 @@ describe("pickCommands - Edge cases", () => {
       {
         header: makeCommandShowMessage({}),
         bodies: [],
-      }
+      },
     );
   });
 });
