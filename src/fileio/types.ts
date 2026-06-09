@@ -23,3 +23,8 @@ export interface FileEntry {
   filename: string;
   data: object;
 }
+
+export interface TextFileEntry {
+  filename: string;
+  text: string;
+}

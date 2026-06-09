@@ -1,33 +1,19 @@
 /* eslint-disable @functional/no-return-void */
-import type { TextFileEntry } from "@RpgTypes/fileio";
 import type { Rmmz_PluginManagerBase } from "@RpgTypes/libs";
 import type {
-  PluginReplacePathData,
-  PluginParamsObject,
+  PluginManifestData,
   PluginParamsRecord,
 } from "@sigureya/rmmz-plugin-schema";
-import { stringifyPluginsJS } from "@sigureya/rmmz-plugin-schema";
-import type { RuntimeDictionaryData } from "./extract";
+import type { RuntimePluginBundleOptions } from "./core/asJS";
+import type { RuntimeDictionaryData } from "./core/extract";
 import {
+  PLUGIN_NAME_HONYAKU_EX,
   PLUGIN_COMMAND_HONYAKU_SETUP,
   PLUGIN_COMMAND_READ_PLUGINS,
-  PLUGIN_NAME_HONYAKU_EX,
-} from "./pluginManager";
-
-export interface PluginSnapshot {
-  paths: PluginReplacePathData;
-  parameters: PluginParamsObject;
-}
-
-export interface RuntimePluginBundleOptions {
-  outputDirectory: string;
-  dictionaryName: string;
-  pluginSnapshotName: string;
-  description: string;
-}
+} from "./core/pluginManager";
 
 type PluginName = typeof PLUGIN_NAME_HONYAKU_EX;
-export interface PluginManager_HonyakuEx extends Rmmz_PluginManagerBase {
+export interface PluginManager_HonyakuEx2 extends Rmmz_PluginManagerBase {
   parameters(name: PluginName): unknown;
   registerCommand(
     pluginName: PluginName,
@@ -43,17 +29,17 @@ export interface PluginManager_HonyakuEx extends Rmmz_PluginManagerBase {
   registerCommand(
     pluginName: PluginName,
     commandName: typeof PLUGIN_COMMAND_READ_PLUGINS,
-    func: (args: ReadonlyArray<PluginSnapshot>) => void,
+    func: (args: ReadonlyArray<PluginManifestData>) => void,
   ): void;
   callCommand(
     self: unknown,
     pluginName: PluginName,
     commandName: typeof PLUGIN_COMMAND_READ_PLUGINS,
-    args: ReadonlyArray<PluginSnapshot>,
+    args: ReadonlyArray<PluginManifestData>,
   ): void;
 }
 
-export const createDictionarySetupScript = (
+export const createDictionarySetupScript2 = (
   data: RuntimeDictionaryData<string>,
 ): string => {
   return [
@@ -70,8 +56,8 @@ export const createDictionarySetupScript = (
   ].join("\n");
 };
 
-export const createPluginSnapshotSetupScript = (
-  params: ReadonlyArray<PluginSnapshot>,
+export const createPluginSnapshotSetupScript2 = (
+  params: ReadonlyArray<PluginManifestData>,
 ): string => {
   return [
     "(function(){",
@@ -87,31 +73,7 @@ export const createPluginSnapshotSetupScript = (
   ].join("\n");
 };
 
-export const createRuntimePluginFiles = (
-  options: RuntimePluginBundleOptions,
-  dictionaryData: RuntimeDictionaryData<string>,
-  snapshots: ReadonlyArray<PluginSnapshot>,
-): TextFileEntry[] => {
-  const dictionaryFile: TextFileEntry = {
-    text: createDictionarySetupScript(dictionaryData),
-    filename: `${options.outputDirectory}/${options.dictionaryName}.js`,
-  };
-
-  const pluginSnapshotFile: TextFileEntry = {
-    text: createPluginSnapshotSetupScript(snapshots),
-    filename: `${options.outputDirectory}/${options.pluginSnapshotName}.js`,
-  };
-
-  const manifest = createPluginManifest(options);
-  const pluginsJsFile: TextFileEntry = {
-    text: stringifyPluginsJS(manifest),
-    filename: "plugins.js",
-  };
-
-  return [pluginsJsFile, dictionaryFile, pluginSnapshotFile];
-};
-
-export const createPluginManifest = (
+export const createPluginManifest2 = (
   options: RuntimePluginBundleOptions,
 ): PluginParamsRecord[] => {
   return [
