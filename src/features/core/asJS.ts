@@ -53,7 +53,9 @@ export interface PluginManager_HonyakuEx extends Rmmz_PluginManagerBase {
   ): void;
 }
 
-export const asDictionaryJS = (data: RuntimeDictionaryData<string>): string => {
+export const createDictionrySetupScript = (
+  data: RuntimeDictionaryData<string>,
+): string => {
   return [
     "(function(){",
     `"use strict";`,
@@ -91,7 +93,7 @@ export const createRuntimePluginFiles = (
   snapshots: ReadonlyArray<PluginSnapshot>,
 ): TextFileEntry[] => {
   const dictionaryFile: TextFileEntry = {
-    text: asDictionaryJS(dictionaryData),
+    text: createDictionrySetupScript(dictionaryData),
     filename: `${options.outputDirectory}/${options.dictionaryName}.js`,
   };
 
@@ -100,22 +102,16 @@ export const createRuntimePluginFiles = (
     filename: `${options.outputDirectory}/${options.pluginSnapshotName}.js`,
   };
 
+  const manifest = createPluginManifest(options);
   const pluginsJsFile: TextFileEntry = {
-    text: createPluginsJsText(options),
+    text: stringifyPluginsJS(manifest),
     filename: "plugins.js",
   };
 
   return [pluginsJsFile, dictionaryFile, pluginSnapshotFile];
 };
 
-export const createPluginsJsText = (
-  options: RuntimePluginBundleOptions,
-): string => {
-  const plugins = createPluginManifest(options);
-  return stringifyPluginsJS(plugins);
-};
-
-export const createPluginManifest = (
+const createPluginManifest = (
   options: RuntimePluginBundleOptions,
 ): PluginParamsRecord[] => {
   return [
