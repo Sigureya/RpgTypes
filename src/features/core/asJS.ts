@@ -53,7 +53,7 @@ export interface PluginManager_HonyakuEx extends Rmmz_PluginManagerBase {
   ): void;
 }
 
-export const createDictionrySetupScript = (
+export const createDictionarySetupScript = (
   data: RuntimeDictionaryData<string>,
 ): string => {
   return [
@@ -70,7 +70,7 @@ export const createDictionrySetupScript = (
   ].join("\n");
 };
 
-export const createPluginImportScript = (
+export const createPluginSnapshotSetupScript = (
   params: ReadonlyArray<PluginSnapshot>,
 ): string => {
   return [
@@ -93,12 +93,12 @@ export const createRuntimePluginFiles = (
   snapshots: ReadonlyArray<PluginSnapshot>,
 ): TextFileEntry[] => {
   const dictionaryFile: TextFileEntry = {
-    text: createDictionrySetupScript(dictionaryData),
+    text: createDictionarySetupScript(dictionaryData),
     filename: `${options.outputDirectory}/${options.dictionaryName}.js`,
   };
 
   const pluginSnapshotFile: TextFileEntry = {
-    text: createPluginImportScript(snapshots),
+    text: createPluginSnapshotSetupScript(snapshots),
     filename: `${options.outputDirectory}/${options.pluginSnapshotName}.js`,
   };
 
@@ -111,7 +111,7 @@ export const createRuntimePluginFiles = (
   return [pluginsJsFile, dictionaryFile, pluginSnapshotFile];
 };
 
-const createPluginManifest = (
+export const createPluginManifest = (
   options: RuntimePluginBundleOptions,
 ): PluginParamsRecord[] => {
   return [
