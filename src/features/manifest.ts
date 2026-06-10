@@ -1,8 +1,13 @@
 /* eslint-disable @functional/no-return-void */
 import type { Rmmz_PluginManagerBase } from "@RpgTypes/libs";
 import type {
+  SchemaStringifyHandlers,
   PluginManifestData,
   PluginParamsRecord,
+} from "@sigureya/rmmz-plugin-schema";
+import {
+  generatePluginAnnotationLines,
+  generatePluginAnnotationText,
 } from "@sigureya/rmmz-plugin-schema";
 import type { RuntimePluginBundleOptions } from "./core/asJS";
 import type { RuntimeDictionaryData } from "./core/extract";
@@ -39,10 +44,43 @@ export interface PluginManager_HonyakuEx2 extends Rmmz_PluginManagerBase {
   ): void;
 }
 
+const createHandlers = (): SchemaStringifyHandlers => {
+  return {
+    structArray: (value: object[]) => JSON.stringify(value),
+    struct: (value: object) => JSON.stringify(value),
+    numberArray: (value: number[]) => JSON.stringify(value),
+    stringArray: (value: string[]) => JSON.stringify(value),
+  };
+};
+
+const xxxx = (desc: string): string => {
+  const lines = generatePluginAnnotationLines(
+    {
+      pluginName: "",
+      locale: "",
+      target: "MZ",
+      dependencies: {
+        base: [PLUGIN_NAME_HONYAKU_EX],
+        orderAfter: [PLUGIN_NAME_HONYAKU_EX],
+        orderBefore: [],
+      },
+      schema: {
+        commands: [],
+        params: [],
+        structs: [],
+      },
+      meta: { plugindesc: desc },
+    },
+    createHandlers(),
+  );
+  return generatePluginAnnotationText(lines);
+};
+
 export const createDictionarySetupScript2 = (
   data: RuntimeDictionaryData<string>,
 ): string => {
   return [
+    xxxx("辞書データプラグイン。JSONの代わりです。"),
     "(function(){",
     `"use strict";`,
     "const data = ",
@@ -60,6 +98,7 @@ export const createPluginSnapshotSetupScript2 = (
   params: ReadonlyArray<PluginManifestData>,
 ): string => {
   return [
+    xxxx("プラグインコマンド書き換えプラグイン"),
     "(function(){",
     `"use strict";`,
     "const data = ",
