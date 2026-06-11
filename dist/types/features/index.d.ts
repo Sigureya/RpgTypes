@@ -5,7 +5,6 @@ export * from './core/replaceEvent';
 export * from './core/rpg';
 export * from './createPluginPath';
 export * from './extractText';
-export * from './pluginManager';
 export * from './pluginMap';
 export * from './replace';
 export * from './types';
