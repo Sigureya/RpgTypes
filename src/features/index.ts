@@ -1,7 +1,5 @@
-export * from "./core/asJS";
 export * from "./core/extract";
 export * from "./core/extract/item/index";
-export * from "./core/pluginManager";
 export * from "./core/replace/index";
 export * from "./core/replaceEvent";
 export * from "./core/rpg";
