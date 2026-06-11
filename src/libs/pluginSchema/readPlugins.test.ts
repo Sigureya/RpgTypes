@@ -5,6 +5,7 @@ import type {
   PluginExtractionHandlers,
   ErrorStruct,
   PluginErrorStruct,
+  DeepJSONParserHandlers,
 } from "@sigureya/rmmz-plugin-schema";
 import { runPluginExtractionPipeline } from "@sigureya/rmmz-plugin-schema";
 
@@ -103,7 +104,24 @@ const makeHandlers = (): PluginExtractionHandlers<ErrorInfo> => {
       parseDeepRecord: vi.fn(() => ({})),
     },
     jsonPath: vi.fn((path: string) => ({ query: path }) as never),
-    deepJSON: {} as never,
+    deepJSON: {
+      parseObject: vi.fn<DeepJSONParserHandlers["parseObject"]>(() => ({
+        value: {},
+        errors: [],
+      })),
+      parseStringArray: vi.fn<DeepJSONParserHandlers["parseStringArray"]>(
+        () => ({
+          value: [],
+          errors: [],
+        }),
+      ),
+      parseObjectArray: vi.fn<DeepJSONParserHandlers["parseObjectArray"]>(
+        () => ({
+          value: [],
+          errors: [],
+        }),
+      ),
+    },
     paramBuild: paramBuildErrorHandler,
     commandBuild: commandBuildErrorHandler,
     paramRead: {
