@@ -1,4 +1,5 @@
 /* eslint-disable @functional/no-return-void */
+import type { TextFileEntry } from "@RpgTypes/fileio";
 import type { Rmmz_PluginManagerBase } from "@RpgTypes/libs";
 import type {
   SchemaStringifyHandlers,
@@ -74,6 +75,24 @@ const xxxx = (desc: string): string => {
     createHandlers(),
   );
   return generatePluginAnnotationText(lines);
+};
+
+export const pluginManifestFiles = (
+  data: RuntimeDictionaryData<string>,
+  options: RuntimePluginBundleOptions,
+): TextFileEntry[] => {
+  return [
+    {
+      // 辞書データ
+      filename: `${options.outputDirectory}/${options.outputDirectory}.js`,
+      text: createDictionarySetupScript2(data),
+    },
+    // {
+    //   // パス情報
+    //   filename: `${options.outputDirectory}/${options.pluginSnapshotName}.js`,
+    //   text: createPluginSnapshotSetupScript2(createPluginManifest2(options)),
+    // },
+  ];
 };
 
 export const createDictionarySetupScript2 = (
