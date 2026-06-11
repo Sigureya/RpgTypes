@@ -1,81 +1,27 @@
-/* eslint-disable @functional/no-return-void */
 import type { TextFileEntry } from "@RpgTypes/fileio";
-import type { Rmmz_PluginManagerBase } from "@RpgTypes/libs";
 import type {
   SchemaStringifyHandlers,
   PluginManifestData,
   PluginParamsRecord,
+  PluginManagerTemplate,
 } from "@sigureya/rmmz-plugin-schema";
 import {
   generatePluginAnnotationLines,
   generatePluginAnnotationText,
 } from "@sigureya/rmmz-plugin-schema";
-import type { RuntimeDictionaryData } from "./core/extract";
-import type { RuntimePluginBundleOptions } from "./core/manifest";
+import type { RuntimeDictionaryData } from "./extract";
+import type { RuntimePluginBundleOptions } from "./manifest";
 import {
   PLUGIN_NAME_HONYAKU_EX,
   PLUGIN_COMMAND_HONYAKU_SETUP,
   PLUGIN_COMMAND_READ_PLUGINS,
-} from "./core/manifest";
+} from "./manifest";
 
-type PluginName = typeof PLUGIN_NAME_HONYAKU_EX;
-export interface PluginManager_HonyakuEx2 extends Rmmz_PluginManagerBase {
-  parameters(name: PluginName): unknown;
-  registerCommand(
-    pluginName: PluginName,
-    commandName: typeof PLUGIN_COMMAND_HONYAKU_SETUP,
-    func: (args: RuntimeDictionaryData<string>) => void,
-  ): void;
-  callCommand(
-    self: unknown,
-    pluginName: PluginName,
-    commandName: typeof PLUGIN_COMMAND_HONYAKU_SETUP,
-    args: RuntimeDictionaryData<string>,
-  ): void;
-  registerCommand(
-    pluginName: PluginName,
-    commandName: typeof PLUGIN_COMMAND_READ_PLUGINS,
-    func: (args: ReadonlyArray<PluginManifestData>) => void,
-  ): void;
-  callCommand(
-    self: unknown,
-    pluginName: PluginName,
-    commandName: typeof PLUGIN_COMMAND_READ_PLUGINS,
-    args: ReadonlyArray<PluginManifestData>,
-  ): void;
-}
-
-const createHandlers = (): SchemaStringifyHandlers => {
-  return {
-    structArray: (value: object[]) => JSON.stringify(value),
-    struct: (value: object) => JSON.stringify(value),
-    numberArray: (value: number[]) => JSON.stringify(value),
-    stringArray: (value: string[]) => JSON.stringify(value),
-  };
-};
-
-const xxxx = (desc: string): string => {
-  const lines = generatePluginAnnotationLines(
-    {
-      pluginName: "",
-      locale: "",
-      target: "MZ",
-      dependencies: {
-        base: [PLUGIN_NAME_HONYAKU_EX],
-        orderAfter: [PLUGIN_NAME_HONYAKU_EX],
-        orderBefore: [],
-      },
-      schema: {
-        commands: [],
-        params: [],
-        structs: [],
-      },
-      meta: { plugindesc: desc },
-    },
-    createHandlers(),
-  );
-  return generatePluginAnnotationText(lines);
-};
+export type PluginManager_HonyakuEx2 = PluginManagerTemplate<
+  typeof PLUGIN_NAME_HONYAKU_EX,
+  typeof PLUGIN_COMMAND_HONYAKU_SETUP,
+  RuntimeDictionaryData<string>
+>;
 
 export const pluginManifestFiles = (
   data: RuntimeDictionaryData<string>,
@@ -99,7 +45,7 @@ export const createDictionarySetupScript2 = (
   data: RuntimeDictionaryData<string>,
 ): string => {
   return [
-    xxxx("辞書データプラグイン。JSONの代わりです。"),
+    createAnnotation("辞書データプラグイン。JSONの代わりです。"),
     "(function(){",
     `"use strict";`,
     "const data = ",
@@ -117,7 +63,7 @@ export const createPluginSnapshotSetupScript2 = (
   params: ReadonlyArray<PluginManifestData>,
 ): string => {
   return [
-    xxxx("プラグインコマンド書き換えプラグイン"),
+    createAnnotation("プラグインコマンド書き換えプラグイン"),
     "(function(){",
     `"use strict";`,
     "const data = ",
@@ -154,4 +100,36 @@ export const createPluginManifest2 = (
       parameters: {},
     },
   ];
+};
+
+const createHandlers = (): SchemaStringifyHandlers => {
+  return {
+    structArray: (value: object[]) => JSON.stringify(value),
+    struct: (value: object) => JSON.stringify(value),
+    numberArray: (value: number[]) => JSON.stringify(value),
+    stringArray: (value: string[]) => JSON.stringify(value),
+  };
+};
+
+const createAnnotation = (desc: string): string => {
+  const lines = generatePluginAnnotationLines(
+    {
+      pluginName: "",
+      locale: "",
+      target: "MZ",
+      dependencies: {
+        base: [PLUGIN_NAME_HONYAKU_EX],
+        orderAfter: [PLUGIN_NAME_HONYAKU_EX],
+        orderBefore: [],
+      },
+      schema: {
+        commands: [],
+        params: [],
+        structs: [],
+      },
+      meta: { plugindesc: desc },
+    },
+    createHandlers(),
+  );
+  return generatePluginAnnotationText(lines);
 };
