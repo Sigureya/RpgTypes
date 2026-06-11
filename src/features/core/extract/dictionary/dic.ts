@@ -1,4 +1,5 @@
-import { FILENAME_AUX_DICTIONARY, type FileEntry } from "@RpgTypes/fileio";
+import type { FileEntry } from "@RpgTypes/fileio";
+import { FILENAME_AUX_DICTIONARY } from "@RpgTypes/fileio";
 import type { RuntimeDictionary, RuntimeDictionaryData } from "./types";
 
 export const findActorText = <T>(
