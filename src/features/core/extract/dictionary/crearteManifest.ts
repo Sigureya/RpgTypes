@@ -29,12 +29,12 @@ export const pluginManifestFiles = (
 ): TextFileEntry => {
   return {
     // 辞書データ
-    filename: `${options.outputDirectory}/${options.outputDirectory}.js`,
-    text: createDictionarySetupScript2(data),
+    filename: `${options.outputDirectory}/${options.dictionaryName}.js`,
+    text: createDictionarySetupScript(data),
   };
 };
 
-export const createDictionarySetupScript2 = (
+const createDictionarySetupScript = (
   data: RuntimeDictionaryData<string>,
 ): string => {
   return [
@@ -52,7 +52,7 @@ export const createDictionarySetupScript2 = (
   ].join("\n");
 };
 
-export const createPluginSnapshotSetupScript2 = (
+export const createPluginSnapshotSetupScript = (
   params: ReadonlyArray<PluginManifestData>,
 ): string => {
   return [
