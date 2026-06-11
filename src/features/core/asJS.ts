@@ -9,21 +9,15 @@ import type {
 import { stringifyPluginsJS } from "@sigureya/rmmz-plugin-schema";
 import type { RuntimeDictionaryData } from "./extract";
 import {
+  PLUGIN_NAME_HONYAKU_EX,
   PLUGIN_COMMAND_HONYAKU_SETUP,
   PLUGIN_COMMAND_READ_PLUGINS,
-  PLUGIN_NAME_HONYAKU_EX,
-} from "./pluginManager";
+} from "./manifest";
+import type { RuntimePluginBundleOptions } from "./manifest/types";
 
 export interface PluginSnapshot {
   paths: PluginReplacePathData;
   parameters: PluginParamsObject;
-}
-
-export interface RuntimePluginBundleOptions {
-  outputDirectory: string;
-  dictionaryName: string;
-  pluginSnapshotName: string;
-  description: string;
 }
 
 type PluginName = typeof PLUGIN_NAME_HONYAKU_EX;

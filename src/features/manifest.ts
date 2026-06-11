@@ -10,13 +10,13 @@ import {
   generatePluginAnnotationLines,
   generatePluginAnnotationText,
 } from "@sigureya/rmmz-plugin-schema";
-import type { RuntimePluginBundleOptions } from "./core/asJS";
 import type { RuntimeDictionaryData } from "./core/extract";
+import type { RuntimePluginBundleOptions } from "./core/manifest";
 import {
   PLUGIN_NAME_HONYAKU_EX,
   PLUGIN_COMMAND_HONYAKU_SETUP,
   PLUGIN_COMMAND_READ_PLUGINS,
-} from "./core/pluginManager";
+} from "./core/manifest";
 
 type PluginName = typeof PLUGIN_NAME_HONYAKU_EX;
 export interface PluginManager_HonyakuEx2 extends Rmmz_PluginManagerBase {
