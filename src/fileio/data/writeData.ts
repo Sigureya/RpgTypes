@@ -45,31 +45,33 @@ export const rawGameDataToMainDataFileEntries = (
       filename: FILENAME_SYSTEM,
       data: data.system.system ? data.system.system : makeSystemDataFn(),
     },
-    xxxx(FILENAME_ACTORS, data.actors.data),
-    xxxx(FILENAME_CLASSES, data.classes.data),
-    xxxx(FILENAME_SKILLS, data.skills.data),
-    xxxx(FILENAME_ITEMS, data.items.data),
-    xxxx(FILENAME_WEAPONS, data.weapons.data),
-    xxxx(FILENAME_ARMORS, data.armors.data),
-    xxxx(FILENAME_ENEMIES, data.enemies.data),
-    xxxx(FILENAME_TROOPS, data.troops.data),
-    xxxx(FILENAME_STATES, data.states.data),
-    xxxx(FILENAME_ANIMATIONS, data.animations.data),
-    xxxx(FILENAME_TILESET, data.tilesets.data),
-    xxxx(FILENAME_COMMON_EVENTS, data.commonEvents.data),
-    xxxx(FILENAME_MAP_INFOS, data.mapInfos.data),
-    ...mmmm(data.mapFiles.validMaps),
+    createFilePayload(FILENAME_ACTORS, data.actors.data),
+    createFilePayload(FILENAME_CLASSES, data.classes.data),
+    createFilePayload(FILENAME_SKILLS, data.skills.data),
+    createFilePayload(FILENAME_ITEMS, data.items.data),
+    createFilePayload(FILENAME_WEAPONS, data.weapons.data),
+    createFilePayload(FILENAME_ARMORS, data.armors.data),
+    createFilePayload(FILENAME_ENEMIES, data.enemies.data),
+    createFilePayload(FILENAME_TROOPS, data.troops.data),
+    createFilePayload(FILENAME_STATES, data.states.data),
+    createFilePayload(FILENAME_ANIMATIONS, data.animations.data),
+    createFilePayload(FILENAME_TILESET, data.tilesets.data),
+    createFilePayload(FILENAME_COMMON_EVENTS, data.commonEvents.data),
+    createFilePayload(FILENAME_MAP_INFOS, data.mapInfos.data),
+    ...createMapPayload(data.mapFiles.validMaps),
   ];
 };
 
-const mmmm = (maps: ReadonlyArray<MapFileInfo>): MapDataFileEntry[] => {
+const createMapPayload = (
+  maps: ReadonlyArray<MapFileInfo>,
+): MapDataFileEntry[] => {
   return maps.map((map) => ({
     filename: `${map.filename}.json`,
     data: map.map,
   }));
 };
 
-const xxxx = <T>(
+const createFilePayload = <T>(
   filename: MainDataFileNames,
   data: ReadonlyArray<T>,
 ): MainDataFileEntry<T> => {
