@@ -9,13 +9,13 @@ import {
   generatePluginAnnotationLines,
   generatePluginAnnotationText,
 } from "@sigureya/rmmz-plugin-schema";
-import type { RuntimeDictionaryData } from "./extract";
 import type { RuntimePluginBundleOptions } from "./manifest";
 import {
   PLUGIN_NAME_HONYAKU_EX,
   PLUGIN_COMMAND_HONYAKU_SETUP,
   PLUGIN_COMMAND_READ_PLUGINS,
 } from "./manifest";
+import type { RuntimeDictionaryData } from "./types";
 
 export type PluginManager_HonyakuEx2 = PluginManagerTemplate<
   typeof PLUGIN_NAME_HONYAKU_EX,
@@ -26,19 +26,12 @@ export type PluginManager_HonyakuEx2 = PluginManagerTemplate<
 export const pluginManifestFiles = (
   data: RuntimeDictionaryData<string>,
   options: RuntimePluginBundleOptions,
-): TextFileEntry[] => {
-  return [
-    {
-      // 辞書データ
-      filename: `${options.outputDirectory}/${options.outputDirectory}.js`,
-      text: createDictionarySetupScript2(data),
-    },
-    // {
-    //   // パス情報
-    //   filename: `${options.outputDirectory}/${options.pluginSnapshotName}.js`,
-    //   text: createPluginSnapshotSetupScript2(createPluginManifest2(options)),
-    // },
-  ];
+): TextFileEntry => {
+  return {
+    // 辞書データ
+    filename: `${options.outputDirectory}/${options.outputDirectory}.js`,
+    text: createDictionarySetupScript2(data),
+  };
 };
 
 export const createDictionarySetupScript2 = (
