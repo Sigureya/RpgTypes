@@ -1,7 +1,7 @@
 import type { PluginManagerTemplate } from "@sigureya/rmmz-plugin-schema";
 
 /* eslint-disable @functional/no-return-void */
-export interface Rmmz_PluginManagerBase extends PluginManagerTemplate<
+export interface Rmmz_PluginManager extends PluginManagerTemplate<
   string,
   string,
   object
