@@ -1,6 +1,6 @@
 {
   "name": "@sigureya/rpgtypes",
-  "version": "3.10.0",
+  "version": "3.12.0",
   "description": "A TypeScript library for RpgMakerMZ-related types.",
   "sideEffects": false,
   "main": "./dist/main/main.cjs.js",
