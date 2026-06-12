@@ -17,11 +17,11 @@ import {
 } from "./manifest";
 import type { RuntimeDictionaryData } from "./types";
 
-export type PluginManager_HonyakuEx2 = PluginManagerTemplate<
+export interface Rmmz_PluginManager_Translation extends PluginManagerTemplate<
   typeof PLUGIN_NAME_HONYAKU_EX,
   typeof PLUGIN_COMMAND_HONYAKU_SETUP,
   RuntimeDictionaryData<string>
->;
+> {}
 
 export const pluginManifestFiles = (
   data: RuntimeDictionaryData<string>,
