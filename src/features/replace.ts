@@ -1,12 +1,13 @@
-import type { FileEntry, RawGameData } from "@RpgTypes/fileio";
+import type { FileEntry, FileEntryBundle, RawGameData } from "@RpgTypes/fileio";
 import { rawGameDataToMainDataFileEntries } from "@RpgTypes/fileio";
 import type {
   Data_Map,
   NormalizedEventCommand,
+  NoteReadResult,
   RpgDataBundleHasText,
 } from "@RpgTypes/rmmz";
 import type { RuntimeDictionary, GameDataReplaceOutput } from "./core/extract";
-import { fileEntriesFromDictionary } from "./core/extract";
+import { fileEntriesFromDictionary, pluginManifestFiles } from "./core/extract";
 import {
   createRuntimeDictionaryData,
   textKeysSN,
@@ -137,6 +138,18 @@ export const replaceDataDirect = (
   return result.data;
 };
 
+export const replaceGameFilesWithHash = <T extends string>(
+  context: ReplaceRawDataContext,
+  extractor: EventContainerExtractor,
+  hashFn: (text: string) => T,
+): FileEntryBundle => {
+  const output = replaceDataWithHash(context, extractor, hashFn);
+  return {
+    dataJSON: rawGameDataToMainDataFileEntries(output.main),
+    scriptJS: [pluginManifestFiles(output.aux)],
+  };
+};
+
 export const replaceDataWithHashToFileEntries = <T extends string>(
   context: ReplaceRawDataContext,
   extractor: EventContainerExtractor,
@@ -156,7 +169,7 @@ export const replaceDataWithHash = <T extends string>(
 ): GameDataReplaceOutput<T> => {
   const { data, assetBundle, dictionary, textKeys } = context;
   const handlers: RpgDataReplaceHandlers = {
-    replaceText(text) {
+    replaceText(text: string) {
       const trimmed = text.trimEnd();
       if (trimmed.length === 0) {
         return "";
@@ -165,7 +178,7 @@ export const replaceDataWithHash = <T extends string>(
     },
     pluginCommand: (command) => command,
     scriptCommand: (command) => command,
-    isReplaceTargetNote(item) {
+    isReplaceTargetNote: (item: NoteReadResult) => {
       return textKeys.has(item.key);
     },
   };
