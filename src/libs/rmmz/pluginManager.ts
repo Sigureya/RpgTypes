@@ -1,15 +1,21 @@
+import type { PluginManagerTemplate } from "@sigureya/rmmz-plugin-schema";
+
 /* eslint-disable @functional/no-return-void */
-export interface Rmmz_PluginManagerBase {
+export interface Rmmz_PluginManagerBase extends PluginManagerTemplate<
+  string,
+  string,
+  object
+> {
   parameters(name: string): unknown;
   registerCommand(
     pluginName: string,
     commandName: string,
-    func: () => void,
+    func: (this: unknown, arg: object) => void,
   ): void;
   callCommand(
     self: unknown,
     pluginName: string,
     commandName: string,
-    args: unknown,
+    args: object,
   ): void;
 }

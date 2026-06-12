@@ -1,20 +1,20 @@
 import type { Rmmz_PluginManagerBase } from "@RpgTypes/libs/rmmz/pluginManager";
+import type { EventCommand } from "@RpgTypes/rmmz/eventCommand";
+import type { Rmmz_Interpreter } from "./objects";
 
 export interface Rmmz_PluginManager<
-  InterPreter,
+  CommandArg extends object,
 > extends Rmmz_PluginManagerBase {
-  //  _commands: Record<string, (args: Record<string, string>) => void>;
-
   parameters(name: string): Record<string, string>;
   registerCommand(
     pluginName: string,
     commandName: string,
-    func: (this: InterPreter, args: object) => void,
+    func: (this: CommandArg, args: object) => void,
   ): void;
   callCommand(
-    self: InterPreter,
+    self: Rmmz_Interpreter<EventCommand>,
     pluginName: string,
     commandName: string,
-    args: object,
+    args: CommandArg,
   ): void;
 }
