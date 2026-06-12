@@ -34,7 +34,9 @@ export const pluginManifestFiles = (
 ): TextFileEntry => {
   return {
     // 辞書データ
-    filename: `${options.outputDirectory}/${options.dictionaryName}.js`,
+    dir: "js/plugins",
+    subDir: options.outputDirectory,
+    filename: `${options.dictionaryName}.js`,
     text: createDictionarySetupScript(data),
   };
 };

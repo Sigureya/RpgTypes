@@ -17,6 +17,8 @@ export interface FileEntry {
 }
 export interface TextFileEntry {
     filename: string;
+    dir: string;
+    subDir: string;
     text: string;
 }
 export interface FileEntryBundle {
