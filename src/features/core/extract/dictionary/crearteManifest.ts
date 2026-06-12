@@ -25,7 +25,12 @@ export type PluginManager_HonyakuEx2 = PluginManagerTemplate<
 
 export const pluginManifestFiles = (
   data: RuntimeDictionaryData<string>,
-  options: RuntimePluginBundleOptions,
+  options: RuntimePluginBundleOptions = {
+    description: "書き換え用辞書データ",
+    outputDirectory: "translation",
+    dictionaryName: "TranslationDictionary",
+    pluginSnapshotName: "pluginSnapshot",
+  },
 ): TextFileEntry => {
   return {
     // 辞書データ
