@@ -28,3 +28,8 @@ export interface TextFileEntry {
   filename: string;
   text: string;
 }
+
+export interface FileEntryBundle {
+  dataJSON: FileEntry[];
+  scriptJS: TextFileEntry[];
+}
