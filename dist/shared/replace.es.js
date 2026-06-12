@@ -2,8 +2,8 @@ import { createCommandExtractorMapFromPipeline as pt, extractPluginCommandWithEx
 import { as as F, v as V, E as G, w as H, b as da, q as ua, N as ga, aS as K, P as z, Q, aP as R, aM as _, aO as sa, az as ya, ay as O, aR as ha } from "./makeAudio.es.js";
 import { n as L } from "./normalText.es.js";
 import { f as ra, u as Nt, x as xt, z as Tt, r as fa, h as bt, s as kt, O as St, G as wt, p as Mt, g as It, D as C, C as Et, y as va, w as Bt } from "./isScript.es.js";
-import { l as q, a as Na, i as xa, f as Ta, c as ba, e as ka, d as Sa, j as wa, b as Ma, h as Ct, g as $t } from "./constants.es.js";
-import { JSONPathJS as Dt } from "jsonpath-js";
+import { l as q, a as Na, i as xa, f as Ta, c as ba, e as ka, d as Sa, j as wa, b as Ma, h as Ct, g as Dt } from "./constants.es.js";
+import { JSONPathJS as $t } from "jsonpath-js";
 import { k as At, v as Pt, u as Ft, r as Kt, a as Rt } from "./makeSystem.es.js";
 import { a as jt, r as na } from "./writeData.es.js";
 const ma = (a, t, e, s, r, n) => {
@@ -29,7 +29,7 @@ const ma = (a, t, e, s, r, n) => {
 }, Ht = (a) => a !== null && a.key.length > 0, Qt = (a, t, e, s) => {
   const r = Wt(a), n = s.map(Xt), m = Yt(t), o = Zt(e);
   return new Set([r, m, o, n].flat(4));
-}, Wt = (a) => a.map(((t) => [t.name, t.nickname, t.profile])), Xt = (a) => ra(a, oa), Yt = (a) => Nt(a, oa), Zt = (a) => xt(a, oa), oa = ({ list: a }) => a.filter(ae).map(((t) => t.parameters[1])), ae = (a) => a.code === V || a.code === G || a.code === H, $ = (a, t) => ({
+}, Wt = (a) => a.map(((t) => [t.name, t.nickname, t.profile])), Xt = (a) => ra(a, oa), Yt = (a) => Nt(a, oa), Zt = (a) => xt(a, oa), oa = ({ list: a }) => a.filter(ae).map(((t) => t.parameters[1])), ae = (a) => a.code === V || a.code === G || a.code === H, D = (a, t) => ({
   id: a.id,
   name: a.name,
   note: te(a),
@@ -38,7 +38,7 @@ const ma = (a, t, e, s, r, n) => {
   key: t,
   value: e,
   id: a.id
-}))), ee = (a) => $(a, ["name", "nickname", "profile"]), se = (a) => $(a, ["name"]), re = (a) => $(a, ["name"]), ne = (a) => $(a, ["name", "description", "message1", "message2"]), me = (a) => $(a, ["name", "description"]), oe = (a) => $(a, ["name", "description"]), ie = (a) => $(a, ["name", "description"]), ce = (a) => $(a, ["name", "message1", "message2", "message3", "message4"]), le = (a, t, e, s) => B(a, t, {
+}))), ee = (a) => D(a, ["name", "nickname", "profile"]), se = (a) => D(a, ["name"]), re = (a) => D(a, ["name"]), ne = (a) => D(a, ["name", "description", "message1", "message2"]), me = (a) => D(a, ["name", "description"]), oe = (a) => D(a, ["name", "description"]), ie = (a) => D(a, ["name", "description"]), ce = (a) => D(a, ["name", "message1", "message2", "message3", "message4"]), le = (a, t, e, s) => B(a, t, {
   message1: e.state.message1,
   message2: e.state.message2,
   message3: e.state.message3,
@@ -180,13 +180,13 @@ const ma = (a, t, e, s, r, n) => {
   isScript: !0
 }), Be = (a) => ({
   source: a.filename,
-  notes: [...a.map.noteItems.map($e), ...a.map.events.map(Ce).flat()]
-}), Ce = (a) => a.noteItems.map(((t) => ({ id: a.eventId, key: t.key, value: t.value, name: a.name }))), $e = (a) => ({
+  notes: [...a.map.noteItems.map(De), ...a.map.events.map(Ce).flat()]
+}), Ce = (a) => a.noteItems.map(((t) => ({ id: a.eventId, key: t.key, value: t.value, name: a.name }))), De = (a) => ({
   id: 0,
   key: a.key,
   value: a.value,
   name: ""
-}), De = (a, t) => ({ eventId: a.eventId, name: a.name, pageIndex: a.pageIndex, commands: a.commands, note: a.note, noteItems: a.noteItems.filter(t) }), M = (a, t) => a.map(((e) => {
+}), $e = (a, t) => ({ eventId: a.eventId, name: a.name, pageIndex: a.pageIndex, commands: a.commands, note: a.note, noteItems: a.noteItems.filter(t) }), M = (a, t) => a.map(((e) => {
   const s = e.note.filter(t);
   return { main: e.main, note: s, id: e.id, name: e.name };
 })).filter(Ae), Ae = (a) => a.note.length > 0 || a.main.length > 0, Ca = (a, t) => {
@@ -200,7 +200,7 @@ const ma = (a, t, e, s, r, n) => {
       system: a.value.system
     }
   } };
-}, $a = (a, t) => {
+}, Da = (a, t) => {
   const e = (s) => t.has(s.key);
   return {
     actors: M(a.actors, e),
@@ -214,19 +214,19 @@ const ma = (a, t, e, s, r, n) => {
   };
 }, Cr = (a, t) => {
   const e = Pa(a, t), s = U(e);
-  return Da(a, s);
+  return $a(a, s);
 }, Pe = (a, t) => {
   const e = Aa(a, t);
   return U(e);
-}, $r = (a, t) => {
+}, Dr = (a, t) => {
   const e = Pe(a, t);
-  return $a(a, e);
-}, Da = (a, t) => a.map(((e) => {
+  return Da(a, e);
+}, $a = (a, t) => a.map(((e) => {
   return { filename: e.filename, editingName: e.editingName, map: (s = e.map, r = (n) => t.has(n.key), {
     displayedName: s.displayedName,
     note: s.note,
     noteItems: s.noteItems.filter(r),
-    events: s.events.map(((n) => De(n, r)))
+    events: s.events.map(((n) => $e(n, r)))
   }) };
   var s, r;
 })), Aa = (a, t) => {
@@ -243,11 +243,11 @@ const ma = (a, t, e, s, r, n) => {
   return {
     noteSummary: e,
     nonTextNoteKeys: s,
-    mainData: $a(a, s)
+    mainData: Da(a, s)
   };
 }, Re = (a, t) => {
   const e = Pa(a, t), s = U(e);
-  return { noteSummary: e, validMaps: Da(a, s) };
+  return { noteSummary: e, validMaps: $a(a, s) };
 }, je = (a, t) => a.params.filter(Je).map(((e) => Oe(a.pluginName, e, t))).filter(((e) => e !== void 0)), Fa = (a) => a.length !== 0 && !/^[\d\s-\+\*/,.()=><]+$/.test(a) && !(!/["`']/.test(a) && fa(a)), Je = (a) => typeof a.value == "string" && a.value.length !== 0 && !!_e(a) && !!Fa(a.value), _e = (a) => a.param.attr.kind === "string" || a.param.attr.kind === "string[]" || a.param.attr.kind === "multiline_string" || a.param.attr.kind === "multiline_string[]" || a.param.attr.kind === "combo" || a.param.attr.kind === "any", Oe = (a, t, e) => {
   const s = L(t.value);
   if (s.length !== 0) return {
@@ -267,7 +267,7 @@ const ma = (a, t, e, s, r, n) => {
   value: typeof t.value == "string" ? t.value : "",
   argTitle: t.param.attr.text || t.param.name,
   paramIndex: 3
-}), Dr = (a) => {
+}), $r = (a) => {
   const t = pt(a);
   return { extractArgs(e, s) {
     const r = dt(e, t, s);
@@ -283,7 +283,7 @@ const ma = (a, t, e, s, r, n) => {
     pluginParams: t.flatMap(((p) => je(p, n))),
     map: ze(c, n, m),
     commonEvents: Lt(Ct, o.commonEvents, n, m),
-    troops: qt(o.troops, $t, m, n),
+    troops: qt(o.troops, Dt, m, n),
     armors: B(i.armors, ka, r, n),
     system: Ge(l, n, s),
     actors: {
@@ -327,7 +327,9 @@ const ma = (a, t, e, s, r, n) => {
   dictionaryName: "TranslationDictionary",
   pluginSnapshotName: "pluginSnapshot"
 }) => ({
-  filename: `${t.outputDirectory}/${t.dictionaryName}.js`,
+  dir: "js/plugins",
+  subDir: t.outputDirectory,
+  filename: `${t.dictionaryName}.js`,
   text: as(a)
 }), as = (a) => [Ka("辞書データプラグイン。JSONの代わりです。"), "(function(){", '"use strict";', "const data = ", `${JSON.stringify(a)};`, "PluginManager.callCommand(null,", J, Xe, "data", ");", "})();"].join(`
 `), Pr = (a) => [Ka("プラグインコマンド書き換えプラグイン"), "(function(){", '"use strict";', "const data = ", `${JSON.stringify(a)};`, "PluginManager.callCommand(null,", J, Ye, "data", ");", "})()"].join(`
@@ -650,11 +652,11 @@ const W = (a, t, e, s) => {
     indent: a.header.indent,
     parameters: [t]
   };
-  return [$s(a.header), e];
+  return [Ds(a.header), e];
 }, Cs = (a) => {
   const t = a.getBodyText().trimEnd(), e = { code: K, indent: a.header.indent, parameters: [t] };
   return [a.header, e];
-}, $s = (a) => {
+}, Ds = (a) => {
   const t = a.parameters[4] ? a.parameters[4].trimEnd() : "";
   return { code: a.code, indent: a.indent, parameters: [a.parameters[0], a.parameters[1], a.parameters[2], a.parameters[3], t] };
 }, X = (a, t) => {
@@ -711,7 +713,7 @@ const W = (a, t, e, s) => {
 }, Za = (a, t) => ({ ...a, pages: a.pages.map(((e) => Ya(e, t))) }), Gr = (a, t) => ({
   ...a,
   events: a.events.map(((e) => e ? Za(e, t) : null))
-}), Hr = (a, t) => a.map(((e) => Ya(e, t))), Qr = (a, t) => a.map(((e) => Za(e, t))), Wr = (a) => at(a, (() => [])), Y = (a, t) => at(a, t), at = (a, t) => a.flatMap(((e, s) => Ds(e, s, a, t))).filter(((e) => e !== null)), Ds = (a, t, e, s) => {
+}), Hr = (a, t) => a.map(((e) => Ya(e, t))), Qr = (a, t) => a.map(((e) => Za(e, t))), Wr = (a) => at(a, (() => [])), Y = (a, t) => at(a, t), at = (a, t) => a.flatMap(((e, s) => $s(e, s, a, t))).filter(((e) => e !== null)), $s = (a, t, e, s) => {
   if (a.code === F) return s(a);
   if (a.code === _) return Vt(a);
   const r = Ga(a.code);
@@ -794,11 +796,11 @@ const W = (a, t, e, s) => {
     return { key: i, pluginName: m.pluginName, commandName: o.commandName, argsPath: o.argsPath, commands: r.get(i) ?? [] };
   })))).filter(((m) => m.commands.length > 0));
   return { params: s, commandPaths: n, groupedCommands: r };
-}, st = (a) => ((t) => t.kind.endsWith("[]"))(a.attr), rt = (a) => a.kind === "struct", nt = (a) => a.attr.kind === "struct[]", Gs = (a) => mt[a.kind.replace("[]", "")].type === "number", Hs = (a) => mt[a.kind.replace("[]", "")].type === "string", D = {
+}, st = (a) => ((t) => t.kind.endsWith("[]"))(a.attr), rt = (a) => a.kind === "struct", nt = (a) => a.attr.kind === "struct[]", Gs = (a) => mt[a.kind.replace("[]", "")].type === "number", Hs = (a) => mt[a.kind.replace("[]", "")].type === "string", $ = {
   type: "string",
   hasText: !0
 }, x = { type: "number", hasText: !1 }, N = { type: "number", hasText: !1 }, mt = {
-  string: D,
+  string: $,
   number: { type: "number", hasText: !1 },
   boolean: { type: "boolean" },
   armor: x,
@@ -813,17 +815,17 @@ const W = (a, t, e, s) => {
   switch: x,
   variable: x,
   troop: x,
-  multiline_string: D,
+  multiline_string: $,
   file: { type: "string", hasText: !1 },
   "file[]": {
     type: "string",
     hasText: !1
   },
-  "multiline_string[]": D,
-  "string[]": D,
-  combo: D,
-  select: D,
-  any: D,
+  "multiline_string[]": $,
+  "string[]": $,
+  combo: $,
+  select: $,
+  any: $,
   struct: { type: "struct" },
   "actor[]": N,
   "enemy[]": N,
@@ -1006,7 +1008,7 @@ const ar = (a, t, e, s = ot) => it(a.attr.struct, `${t}["${a.name}"]`, e, s), tr
   const t = new Map(a);
   return new pa(t);
 }, an = () => new pa(/* @__PURE__ */ new Map()), tn = (a) => {
-  const t = a.flatMap(((e) => gr(e, ((s) => new Dt(s)))));
+  const t = a.flatMap(((e) => gr(e, ((s) => new $t(s)))));
   return new pa(new Map(t));
 };
 class pa {
@@ -1157,7 +1159,7 @@ export {
   js as M,
   te as N,
   fr as O,
-  $ as P,
+  D as P,
   ee as Q,
   zt as R,
   ie as S,
@@ -1204,7 +1206,7 @@ export {
   Us as ac,
   Ia as ad,
   Pe as ae,
-  $r as af,
+  Dr as af,
   jr as ag,
   Cr as ah,
   Ze as ai,
@@ -1242,7 +1244,7 @@ export {
   ue as p,
   Gt as q,
   Jr as r,
-  Dr as s,
+  $r as s,
   la as t,
   _s as u,
   Fr as v,
