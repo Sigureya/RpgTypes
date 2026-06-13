@@ -1,6 +1,6 @@
 import { describe, test, expect } from "vitest";
 import type { Data_MapInfo } from "@RpgTypes/rmmz/rpg";
-const validate = require("./mapinfoValidate.cjs");
+const validate = require("./mapinfoValidate.js");
 
 const isDataMapInfo = (data: unknown): data is Data_MapInfo => {
   return validate(data);

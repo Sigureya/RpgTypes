@@ -1,7 +1,7 @@
 import { describe, test, expect } from "vitest";
 import type { Data_Class } from "@RpgTypes/rmmz/rpg";
 import { makeClassData, makeClassDataEx } from "@RpgTypes/rmmz/rpg";
-const validate = require("./classValidate.cjs");
+const validate = require("./classValidate.js");
 
 const isDataClass = (data: unknown): data is Data_Class => {
   return validate(data);
