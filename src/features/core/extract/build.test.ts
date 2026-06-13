@@ -4,7 +4,7 @@ import { FILENAME_SYSTEM, makeRawTestDataBundle } from "@RpgTypes/fileio";
 import type { FileReadBundle, TestRawDataSource } from "@RpgTypes/fileio";
 import type { Data_CommonEvent, Data_Map, Data_Troop } from "@RpgTypes/rmmz";
 import { createActorControlChars, readNote } from "@RpgTypes/rmmz";
-import { buildExtractResultWithNotes } from "./build";
+import { buildExtractResult } from "./build";
 import type {
   ExtractedMapTexts,
   EventContainerExtractor,
@@ -134,7 +134,7 @@ describe("buildExtractResultWithNotes", () => {
     const commandNameFn = () => "command-name";
     const extractor = createExtractor2();
 
-    const result = buildExtractResultWithNotes(
+    const result = buildExtractResult(
       bundle,
       [],
       kinds,
@@ -166,7 +166,7 @@ describe("buildExtractResultWithNotes", () => {
     const commandNameFn = () => "command-name";
     const extractor = createExtractor2();
 
-    buildExtractResultWithNotes(
+    buildExtractResult(
       bundle,
       [],
       kinds,

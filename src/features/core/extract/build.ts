@@ -1,6 +1,7 @@
 import type {
-  FileReadBundle,
+  AssetFilesBundle,
   MapBatchReadResult,
+  RawGameDataNullableSystem,
   ReadSystemResult,
 } from "@RpgTypes/fileio";
 import {
@@ -49,9 +50,8 @@ import type {
   RawGameDataNoteNormalization,
 } from "./types";
 
-export { buildExtractResult as buildExtractResultWithNotes };
 export const buildExtractResult = <UUID>(
-  bundle: FileReadBundle,
+  bundle: AssetFilesBundle & { data: RawGameDataNullableSystem },
   pluginParams: ReadonlyArray<PluginParamExtractionOutput>,
   kinds: SystemKinds,
   terms: RmmzTextPropertys,
@@ -75,7 +75,10 @@ export const buildExtractResult = <UUID>(
     commandNameFn,
   );
 };
-
+/**
+ * @deprecated Use `buildExtractResult` instead. This function will be removed in a future release.
+ */
+export const buildExtractResultWithNotes = buildExtractResult;
 const collectAllNoteSummaries = (
   normalizedData: RawGameDataNoteNormalization,
 ): SummarizedNote<SummarizedNoteValue>[] => {
