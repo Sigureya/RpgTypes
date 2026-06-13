@@ -186,6 +186,11 @@ describe("replaceDataWithHash", () => {
       );
       expect(result.aux.actorTexts).toEqual(expectedDictionary.actorTexts);
     });
+    test("systemはハッシュ化しない", () => {
+      const fn = vi.fn((text: string) => `hash_${text}`);
+      replaceDataWithHash(input, createExtractor(), fn);
+      expect(fn).not.toHaveBeenCalledWith(SYSTEM_TEXT);
+    });
   });
   describe("末尾に空白がある場合の対応", () => {
     const extractor = createExtractor();
@@ -207,6 +212,7 @@ describe("replaceDataWithHash", () => {
       expect(fn).not.toHaveBeenCalledWith("BBB");
       expect(fn).not.toHaveBeenCalledWith("AAA ");
       expect(fn).not.toHaveBeenCalledWith("BBB ");
+      expect(fn).not.toHaveBeenCalledWith(SYSTEM_TEXT);
     });
   });
   describe("先頭に空白がある場合は維持", () => {
