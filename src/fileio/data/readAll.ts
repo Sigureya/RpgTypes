@@ -2,7 +2,6 @@ import type {
   Data_Map,
   Data_MapInfo,
   Data_System,
-  EventCommand,
   MapFileInfo,
 } from "@RpgTypes/rmmz";
 import type { ReadArrayResult } from "./arrayData";
@@ -26,6 +25,7 @@ import { readMapFilesFromInfoEx } from "./map";
 import type { RpgDataReadHandlers, RpgDataValidators } from "./reader/handlers";
 import type {
   RawGameData,
+  RawGameDataNullableSystem,
   ReadGameDataResult,
   ReadGameDataResultNullable,
   ReadHandledResult,
@@ -35,11 +35,17 @@ import type { ReadSystemResult } from "./system";
 import type { ReadAllDataErrorMessages } from "./terms";
 import type { DataFileNames } from "./types";
 
+export const isRawGameDataStrict = (
+  data: RawGameDataNullableSystem,
+): data is RawGameData => {
+  return data.system.system !== null;
+};
+
 export const readAllRawGameData = async (
   errorMessages: ReadAllDataErrorMessages,
   readFileFn: (filename: DataFileNames | MapFileNameWithExt) => Promise<string>,
   validateFunctions: RpgDataValidators,
-): Promise<RawGameData<EventCommand, Data_System | null>> => {
+): Promise<RawGameDataNullableSystem> => {
   return readAllGameDataWithFallback(
     errorMessages,
     readFileFn,

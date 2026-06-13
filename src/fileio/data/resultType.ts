@@ -143,6 +143,10 @@ export interface RawGameEventData<
   mapFiles: MapBatchReadResult<Data_Map<Command>>;
 }
 
+export type RawGameDataNullableSystem<
+  Command extends EventCommandUnknown = EventCommand,
+> = RawGameData<Command, Data_System | null>;
+
 export interface RawGameData<
   Command extends EventCommandUnknown = EventCommand,
   System = Data_System,
