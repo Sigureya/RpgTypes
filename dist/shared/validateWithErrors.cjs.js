@@ -1,1 +1,1 @@
-"use strict";exports.validateWithErros=(r,s)=>s(r)?{errors:[],data:r,ok:!0}:{ok:!1,errors:s.errors||[]};
+var e=(e,t)=>t(e)?{errors:[],data:e,ok:!0}:{ok:!1,errors:t.errors||[]};Object.defineProperty(exports,"t",{enumerable:!0,get:function(){return e}});
