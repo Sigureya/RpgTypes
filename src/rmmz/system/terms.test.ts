@@ -1,4 +1,5 @@
 import { describe, expect, test } from "vitest";
+import type { Data_System } from "@RpgTypes/rmmz";
 import { makeTestSystemData } from "@RpgTypes/rmmz";
 import type { ExtractedSystemTexts } from "./core/types";
 import { extractTextFromSystem, replaceSystemTextEx } from "./terms";
@@ -318,5 +319,10 @@ describe("extractTextFromSystem", () => {
   test("システムテキストが正しく抽出されているか", () => {
     const result = extractTextFromSystem(system);
     expect(result).toEqual(expected);
+  });
+  test("システムテキストが正しく抽出されているか（置換後のデータで確認）", () => {
+    const newSystem: Data_System = replaceSystemTextEx(system, TEXT_DATA);
+    const result: ExtractedSystemTexts = extractTextFromSystem(newSystem);
+    expect(result).toEqual(TEXT_DATA);
   });
 });
