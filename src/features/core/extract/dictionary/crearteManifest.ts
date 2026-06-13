@@ -12,7 +12,10 @@ import {
   PLUGIN_COMMAND_HONYAKU_SETUP,
   PLUGIN_COMMAND_READ_PLUGINS,
 } from "./manifest";
-import type { RuntimeDictionaryData } from "./types";
+import type {
+  RuntimeDictionaryData,
+  RuntimeDictionaryDataWithSystem,
+} from "./types";
 
 export interface Rmmz_PluginManager_Translation extends PluginManagerTemplate<
   typeof PLUGIN_NAME_HONYAKU_EX,
@@ -21,7 +24,7 @@ export interface Rmmz_PluginManager_Translation extends PluginManagerTemplate<
 > {}
 
 export const pluginManifestFiles = (
-  data: RuntimeDictionaryData<string>,
+  data: RuntimeDictionaryDataWithSystem<string>,
   options: RuntimePluginBundleOptions = {
     description: "書き換え用辞書データ",
     outputDirectory: "translation",
@@ -39,7 +42,7 @@ export const pluginManifestFiles = (
 };
 
 const createDictionarySetupScript = (
-  data: RuntimeDictionaryData<string>,
+  data: RuntimeDictionaryDataWithSystem<string>,
 ): string => {
   return [
     createAnnotation("辞書データプラグイン。JSONの代わりです。"),
