@@ -1,6 +1,6 @@
 {
   "name": "@sigureya/rpgtypes",
-  "version": "3.12.0",
+  "version": "3.13.0",
   "description": "A TypeScript library for RpgMakerMZ-related types.",
   "sideEffects": false,
   "main": "./dist/main/main.cjs.js",
@@ -98,7 +98,7 @@
     "eslint-plugin-sort-exports": "^0.9.1",
     "fast-glob": "^3.3.3",
     "typescript": "^5.9.3",
-    "vite": "^7.3.1",
+    "vite": "^8.0.16",
     "vite-plugin-dts": "^4.5.4",
     "vitest": "^4.0.18"
   },
