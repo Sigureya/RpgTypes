@@ -8,7 +8,10 @@ import type {
 import { makeRawTestDataBundle } from "@RpgTypes/fileio";
 import type { TestDataSourceWithNote } from "@RpgTypes/libs";
 import type { Data_CommonEvent, Data_Map, Data_Troop } from "@RpgTypes/rmmz";
-import type { GameDataReplaceOutput } from "./core/extract";
+import type {
+  GameDataReplaceOutput,
+  RuntimeDictionaryData,
+} from "./core/extract";
 import type {
   EventContainerExtractor,
   ExtractedBattleEventText,
@@ -142,7 +145,7 @@ describe("replaceDataWithHash", () => {
       ]),
       textKeys: new Set(["Text"]),
     };
-    const expectedDictionary: GameDataReplaceOutput<string>["aux"] = {
+    const expectedDictionary: RuntimeDictionaryData<string> = {
       targetNoteKeys: ["Text"],
       textDictionary: [
         { key: "hash_AAA", value: "BBB" },
