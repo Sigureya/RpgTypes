@@ -4,13 +4,13 @@ import type {
   ImageFilesSet,
   OtherFilesSet,
 } from "./asset";
-import type { RawGameData } from "./data";
+import type { RawGameDataNullableSystem } from "./data";
 
 export interface FileReadBundle extends AssetFilesBundle {
   audioFiles: AudioFilesSet;
   imageFiles: ImageFilesSet;
   otherFiles: OtherFilesSet;
-  data: RawGameData;
+  data: RawGameDataNullableSystem;
 }
 
 export interface FileReadFailed {
