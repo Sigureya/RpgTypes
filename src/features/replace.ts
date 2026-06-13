@@ -6,7 +6,7 @@ import type {
   NoteReadResult,
   RpgDataBundleHasText,
 } from "@RpgTypes/rmmz";
-import { extractTextFromSystem, replaceSystemTextEx } from "@RpgTypes/rmmz";
+import { extractTextFromSystem } from "@RpgTypes/rmmz";
 import type { RuntimeDictionary, GameDataReplaceOutput } from "./core/extract";
 import { fileEntriesFromDictionary, pluginManifestFiles } from "./core/extract";
 import {
@@ -70,7 +70,6 @@ export const replaceRuntimeData = (
     },
   };
   return {
-    system: replaceSystemTextEx(data.system, dic.systemTexts),
     actors: data.actors.map((actor) => {
       return replaceActorText(actor, handlers);
     }),

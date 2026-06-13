@@ -21,7 +21,6 @@ describe("findActorText", () => {
     ]),
     textDictionary: new Map([[1, "Hello"]]),
     targetNoteKeys: new Set(),
-    systemTexts: EMPTY_SYSTEM_TEXTS,
   };
   test("存在するテキストはそのまま返す", () => {
     const result1 = findActorText("Hello", dic);

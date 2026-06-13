@@ -2,7 +2,6 @@ import { describe, expect, test } from "vitest";
 import type { TestDataSourceBundle } from "@RpgTypes/libs";
 import type { RpgDataBundleHasText } from "@RpgTypes/rmmz";
 import {
-  extractTextFromSystem,
   makeActorDataFromTestSoruce,
   makeArmorDataFromTestSoruce,
   makeClassDataFromTestSoruce,
@@ -63,7 +62,6 @@ describe("replaceRuntimeData", () => {
       targetNoteKeys: new Set(["Target"]),
       textDictionary: new Map([[TEXT, NEW_TEXT]]),
       actorTextDictionary: new Map(),
-      systemTexts: extractTextFromSystem(input.system),
     };
 
     const result = replaceRuntimeData(input, runtimeDictionaryData);
@@ -78,6 +76,14 @@ describe("replaceRuntimeData", () => {
       note: NEW_NOTE_TEXT,
       systemText: SYSTEM_TEXT,
     });
-    expect(result).toEqual(expected);
+    expect(result.actors).toEqual(expected.actors);
+    expect(result.armors).toEqual(expected.armors);
+    expect(result.classes).toEqual(expected.classes);
+    expect(result.enemies).toEqual(expected.enemies);
+    expect(result.items).toEqual(expected.items);
+    expect(result.skills).toEqual(expected.skills);
+    expect(result.states).toEqual(expected.states);
+    expect(result.troops).toEqual(expected.troops);
+    expect(result.commonEvents).toEqual(expected.commonEvents);
   });
 });
