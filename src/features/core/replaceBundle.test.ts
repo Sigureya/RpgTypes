@@ -23,6 +23,7 @@ const IMAGE_NAME = "ImageName";
 const VALIABLE_TEXT = "Variables";
 const SWITCHES_TEXT = "Switches";
 const SYSTEM_TEXT = "SystemText";
+const NEW_SYSTEM_TEXT = "NewSystemText";
 const MSG_FILEREAD_SUCCESS = "File read successfully";
 
 const NON_REPLACEABLE_TEXT = "Non replaceable text";
@@ -31,7 +32,11 @@ const makeNoteText = (text: string, value: string): string => {
   return [`<Text:${text}>`, `<Number:${value}>`].join("\n");
 };
 
-const makeMockDataBundle = (src: TestDataSourceWithNote): RawGameData => {
+const makeMockDataBundle = (
+  src: TestDataSourceWithNote & {
+    systemText: string;
+  },
+): RawGameData => {
   const soruce: TestRawDataSource = {
     text: src.text,
     image: src.image,
@@ -41,7 +46,7 @@ const makeMockDataBundle = (src: TestDataSourceWithNote): RawGameData => {
     nonReplaceableText: NON_REPLACEABLE_TEXT,
     switches: SWITCHES_TEXT,
     variables: VALIABLE_TEXT,
-    systemText: SYSTEM_TEXT,
+    systemText: src.systemText,
   };
   return makeRawTestDataBundle(soruce);
 };
@@ -115,18 +120,23 @@ describe("replaceRawDataBundle", () => {
     image: IMAGE_NAME,
     note: noteText,
     audio: "AudioName",
+    systemText: SYSTEM_TEXT,
   });
   const expectedData = makeMockDataBundle({
     text: "BBB",
     image: IMAGE_NAME,
     note: makeNoteText("BBB", "BBB"),
     audio: "AudioName",
+    systemText: NEW_SYSTEM_TEXT,
   });
   test("result", () => {
     const handlers = createHandlers({
       newText: "BBB",
     });
-    const result = replaceRawDataBundle(baseData, handlers, () => undefined);
+    const result = replaceRawDataBundle(baseData, handlers, (text) => {
+      expect(text).toBe(SYSTEM_TEXT);
+      return NEW_SYSTEM_TEXT;
+    });
     // エラーが長くなるので1個ずつ比較
     expect(result.actors).toEqual(expectedData.actors);
     expect(result.armors).toEqual(expectedData.armors);
@@ -143,16 +153,19 @@ describe("replaceRawDataBundle", () => {
     expect(result).toEqual(expectedData);
   });
   test("handlers", () => {
+    const systemFn = vi.fn((text: string) => text);
     const handlers = createHandlers({
       newText: "BBB",
     });
-    replaceRawDataBundle(baseData, handlers, handlers.replaceText);
+    replaceRawDataBundle(baseData, handlers, systemFn);
     expect(handlers.replaceText).toHaveBeenCalledWith("AAA");
     expect(handlers.replaceText).not.toHaveBeenCalledWith(noteText);
     expect(handlers.replaceText).not.toHaveBeenCalledWith(IMAGE_NAME);
     expect(handlers.replaceText).not.toHaveBeenCalledWith("AudioName");
     expect(handlers.replaceText).not.toHaveBeenCalledWith(VALIABLE_TEXT);
     expect(handlers.replaceText).not.toHaveBeenCalledWith(SWITCHES_TEXT);
+    expect(handlers.replaceText).not.toHaveBeenCalledWith(SYSTEM_TEXT);
+    expect(systemFn).toHaveBeenCalledWith(SYSTEM_TEXT);
   });
 });
 
@@ -163,6 +176,7 @@ describe("replaceRawDataWithAutoNoteFilter", () => {
     image: IMAGE_NAME,
     note: noteText,
     audio: "AudioName",
+    systemText: SYSTEM_TEXT,
   });
   test("result", () => {
     const handlers = createHandlers({
@@ -174,6 +188,7 @@ describe("replaceRawDataWithAutoNoteFilter", () => {
       image: IMAGE_NAME,
       note: newNote,
       audio: "AudioName",
+      systemText: NEW_SYSTEM_TEXT,
     });
     const extractor = createExtractor();
     const { data: result } = replaceRawDataWithAutoNoteFilter(
@@ -181,7 +196,7 @@ describe("replaceRawDataWithAutoNoteFilter", () => {
       createAssetBundle(),
       extractor,
       handlers,
-      () => undefined,
+      () => NEW_SYSTEM_TEXT,
     );
     expect(result.actors).toEqual(expectedData.actors);
     expect(result.armors).toEqual(expectedData.armors);
@@ -196,6 +211,7 @@ describe("replaceRawDataWithAutoNoteFilter", () => {
     expect(result).toEqual(expectedData);
   });
   test("handlers", () => {
+    const systemFn = vi.fn(() => NEW_SYSTEM_TEXT);
     const handlers = createHandlers({
       newText: "BBB",
     });
@@ -205,8 +221,10 @@ describe("replaceRawDataWithAutoNoteFilter", () => {
       createAssetBundle(),
       extractor,
       handlers,
-      handlers.replaceText,
+      systemFn,
     );
+    expect(systemFn).toHaveBeenCalledWith(SYSTEM_TEXT);
+    expect(handlers.replaceText).not.toHaveBeenCalledWith(SYSTEM_TEXT);
     expect(handlers.replaceText).toHaveBeenCalledWith("AAA");
     expect(handlers.replaceText).not.toHaveBeenCalledWith(noteText);
     expect(handlers.replaceText).not.toHaveBeenCalledWith(IMAGE_NAME);
