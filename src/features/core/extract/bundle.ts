@@ -7,18 +7,19 @@ import type {
 } from "@RpgTypes/fileio";
 import { FILENAME_SYSTEM } from "@RpgTypes/fileio";
 import type {
+  ExtractedSystemTexts,
   Data_Armor,
   Data_CommonEvent,
   Data_Troop,
   MapFileInfo,
 } from "@RpgTypes/rmmz";
+import { extractTextFromSystem } from "@RpgTypes/rmmz";
 import type {
   ExtractedCommonEventText,
   ExtractedBattleEventText,
   ExtractedMapTexts,
   EventContainerExtractor,
   ExtractedText,
-  ExtractedSystemTexts,
   ExtractedRawGameDataTexts,
 } from "./text";
 import {
@@ -30,8 +31,8 @@ import {
   extractTextFromState,
   extractTextFromWeapon,
   extractTextFromArmor,
-  extractTextFromSystem,
 } from "./text";
+
 export const extractTextFromRawGameData = (
   data: RawGameData,
   extractor: EventContainerExtractor,

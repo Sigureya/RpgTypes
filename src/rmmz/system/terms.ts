@@ -1,11 +1,35 @@
-import type { Data_System } from "@RpgTypes/rmmz";
 import {
-  makeSystemData,
-  makeSoundsObject,
-  makeMenuCommandsEnabledFromArray,
+  makeTermsBasicFromArray,
+  makeTermsCommandFromArray,
+  makeTermsMessages,
+  makeParamNamesFromArray,
   makeItemCategoriesFromArray,
-} from "@RpgTypes/rmmz";
-import type { ExtractedSystemTexts } from "./types";
+  makeMenuCommandsEnabledFromArray,
+  makeSoundsObject,
+} from "./core";
+import type { ExtractedSystemTexts } from "./core/types";
+import { makeSystemData } from "./makeSystem";
+import type { Data_System } from "./system";
+
+export const extractTextFromSystem = (
+  system: Data_System,
+): ExtractedSystemTexts => {
+  return {
+    gameTitle: system.gameTitle,
+    currencyUnit: system.currencyUnit,
+    equipTypes: [...system.equipTypes],
+    armorTypes: [...system.armorTypes],
+    weaponTypes: [...system.weaponTypes],
+    elements: [...system.elements],
+    skillTypes: [...system.skillTypes],
+    terms: {
+      basic: makeTermsBasicFromArray(system.terms.basic),
+      commands: makeTermsCommandFromArray(system.terms.commands),
+      messages: makeTermsMessages(system.terms.messages),
+      params: makeParamNamesFromArray(system.terms.params),
+    },
+  };
+};
 
 export const replaceSystemTextEx = (
   system: Data_System,

@@ -1,12 +1,13 @@
 import { describe, expect, test } from "vitest";
+import type { Data_System } from "@RpgTypes/rmmz";
 import { makeTestSystemData } from "@RpgTypes/rmmz";
-import { replaceSystemTextEx } from "./replace";
-import { extractTextFromSystem } from "./system";
-import type { ExtractedSystemTexts } from "./types";
+import type { ExtractedSystemTexts } from "./core/types";
+import { extractTextFromSystem, replaceSystemTextEx } from "./terms";
 
+const OLD_TEXT = "Old Text";
 const makeTestData = () => {
   return makeTestSystemData({
-    text: "",
+    text: OLD_TEXT,
     audio: "audio",
     image: "image",
     switches: "switches",
@@ -194,5 +195,134 @@ describe("replaceSystemTextEx", () => {
       expect(result.menuCommands).toEqual(system.menuCommands);
       expect(result.itemCategories).toEqual(system.itemCategories);
     });
+  });
+});
+
+describe("extractTextFromSystem", () => {
+  const expected: ExtractedSystemTexts = {
+    gameTitle: OLD_TEXT,
+    currencyUnit: OLD_TEXT,
+    equipTypes: [OLD_TEXT, OLD_TEXT],
+    armorTypes: [OLD_TEXT, OLD_TEXT],
+    elements: [OLD_TEXT, OLD_TEXT],
+    skillTypes: [OLD_TEXT, OLD_TEXT],
+    weaponTypes: [OLD_TEXT, OLD_TEXT],
+    terms: {
+      params: {
+        hit: OLD_TEXT,
+        agi: OLD_TEXT,
+        eva: OLD_TEXT,
+        atk: OLD_TEXT,
+        def: OLD_TEXT,
+        mat: OLD_TEXT,
+        mdf: OLD_TEXT,
+        luk: OLD_TEXT,
+        mhp: OLD_TEXT,
+        mmp: OLD_TEXT,
+      },
+      basic: {
+        experience: OLD_TEXT,
+        exp: OLD_TEXT,
+        hp: OLD_TEXT,
+        hpA: OLD_TEXT,
+        level: OLD_TEXT,
+        levelA: OLD_TEXT,
+        mp: OLD_TEXT,
+        mpA: OLD_TEXT,
+        tp: OLD_TEXT,
+        tpA: OLD_TEXT,
+      },
+      commands: {
+        attack: OLD_TEXT,
+        guard: OLD_TEXT,
+        item: OLD_TEXT,
+        skill: OLD_TEXT,
+        equip: OLD_TEXT,
+        status: OLD_TEXT,
+        formation: OLD_TEXT,
+        save: OLD_TEXT,
+        gameEnd: OLD_TEXT,
+        options: OLD_TEXT,
+        cancel: OLD_TEXT,
+        armor: OLD_TEXT,
+        keyItem: OLD_TEXT,
+        weapon: OLD_TEXT,
+        buy: OLD_TEXT,
+        sell: OLD_TEXT,
+        clear: OLD_TEXT,
+        newGame: OLD_TEXT,
+        continueGame: OLD_TEXT,
+        equip2: OLD_TEXT,
+        escape: OLD_TEXT,
+        fight: OLD_TEXT,
+        optimize: OLD_TEXT,
+        toTitle: OLD_TEXT,
+      },
+      messages: {
+        actionFailure: OLD_TEXT,
+        actorDamage: OLD_TEXT,
+        actorDrain: OLD_TEXT,
+        actorGain: OLD_TEXT,
+        actorLoss: OLD_TEXT,
+        actorNoDamage: OLD_TEXT,
+        actorNoHit: OLD_TEXT,
+        enemyDamage: OLD_TEXT,
+        enemyDrain: OLD_TEXT,
+        actorRecovery: OLD_TEXT,
+        enemyRecovery: OLD_TEXT,
+        enemyNoDamage: OLD_TEXT,
+        alwaysDash: OLD_TEXT,
+        commandRemember: OLD_TEXT,
+        defeat: OLD_TEXT,
+        autosave: OLD_TEXT,
+        bgmVolume: OLD_TEXT,
+        bgsVolume: OLD_TEXT,
+        meVolume: OLD_TEXT,
+        buffAdd: OLD_TEXT,
+        debuffAdd: OLD_TEXT,
+        buffRemove: OLD_TEXT,
+        counterAttack: OLD_TEXT,
+        magicReflection: OLD_TEXT,
+        substitute: OLD_TEXT,
+        criticalToActor: OLD_TEXT,
+        criticalToEnemy: OLD_TEXT,
+        emerge: OLD_TEXT,
+        preemptive: OLD_TEXT,
+        surprise: OLD_TEXT,
+        enemyGain: OLD_TEXT,
+        enemyLoss: OLD_TEXT,
+        levelUp: OLD_TEXT,
+        enemyNoHit: OLD_TEXT,
+        escapeFailure: OLD_TEXT,
+        escapeStart: OLD_TEXT,
+        evasion: OLD_TEXT,
+        expNext: OLD_TEXT,
+        expTotal: OLD_TEXT,
+        file: OLD_TEXT,
+        loadMessage: OLD_TEXT,
+        saveMessage: OLD_TEXT,
+        victory: OLD_TEXT,
+        magicEvasion: OLD_TEXT,
+        obtainExp: OLD_TEXT,
+        obtainItem: OLD_TEXT,
+        obtainGold: OLD_TEXT,
+        obtainSkill: OLD_TEXT,
+        partyName: OLD_TEXT,
+        possession: OLD_TEXT,
+        seVolume: OLD_TEXT,
+        touchUI: OLD_TEXT,
+        useItem: OLD_TEXT,
+      },
+    },
+  };
+  const system = makeTestData();
+  test("システムテキストが正しく抽出されているか", () => {
+    const result = extractTextFromSystem(system);
+    expect(result).toEqual(expected);
+  });
+  test("システムテキストが正しく抽出されているか（置換後のデータで確認）", () => {
+    const newSystem: Data_System = replaceSystemTextEx(system, TEXT_DATA);
+    const result: ExtractedSystemTexts = extractTextFromSystem(newSystem);
+    expect(result).toEqual(TEXT_DATA);
   });
 });
