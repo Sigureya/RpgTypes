@@ -1,7 +1,6 @@
 import type {
-  AssetFilesBundle,
+  FileReadBundle,
   MapBatchReadResult,
-  RawGameDataNullableSystem,
   ReadSystemResult,
 } from "@RpgTypes/fileio";
 import {
@@ -51,7 +50,7 @@ import type {
 } from "./types";
 
 export const buildExtractResult = <UUID>(
-  bundle: AssetFilesBundle & { data: RawGameDataNullableSystem },
+  bundle: FileReadBundle,
   pluginParams: ReadonlyArray<PluginParamExtractionOutput>,
   kinds: SystemKinds,
   terms: RmmzTextPropertys,
