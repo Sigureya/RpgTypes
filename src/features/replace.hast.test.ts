@@ -26,7 +26,7 @@ const VARIABLE_TEXT = "Variables";
 const SWITCHES_TEXT = "Switches";
 const MSG_FILEREAD_SUCCESS = "File read successfully";
 const NON_REPLACEABLE_TEXT = "Non replaceable text";
-
+const SYSTEM_TEXT = "SystemText";
 const AUDIO_NAME = "AudioName";
 const makeNoteText = (text: string, value: number): string => {
   return [`<Text:${text}>`, `<Number:${value}>`].join("\n");
@@ -35,6 +35,7 @@ const makeNoteText = (text: string, value: number): string => {
 const makeMockDataBundle = (src: TestDataSourceWithNote): RawGameData => {
   const source: TestRawDataSource = {
     text: src.text,
+    systemText: SYSTEM_TEXT,
     image: src.image,
     audio: src.audio,
     note: src.note,
@@ -238,7 +239,7 @@ describe("replaceDataWithHash", () => {
         system: {
           message: "",
           system: makeTestSystemData({
-            text: SYSTEM_TEXT,
+            systemText: SYSTEM_TEXT,
             audio: AUDIO_NAME,
             image: IMAGE_NAME,
             switches: SWITCHES_TEXT,

@@ -126,11 +126,7 @@ describe("replaceRawDataBundle", () => {
     const handlers = createHandlers({
       newText: "BBB",
     });
-    const result = replaceRawDataBundle(
-      baseData,
-      handlers,
-      handlers.replaceText,
-    );
+    const result = replaceRawDataBundle(baseData, handlers, () => undefined);
     // エラーが長くなるので1個ずつ比較
     expect(result.actors).toEqual(expectedData.actors);
     expect(result.armors).toEqual(expectedData.armors);
