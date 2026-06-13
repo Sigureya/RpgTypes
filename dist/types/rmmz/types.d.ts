@@ -28,5 +28,8 @@ export interface RpgDataBundleHasText {
     commonEvents: Data_CommonEvent[];
     skills: Data_Skill[];
     states: Data_State[];
-    system: Data_System;
+    /**
+     * @deprecated systemは別系統で書き換えるので廃止します
+     */
+    system?: Data_System;
 }

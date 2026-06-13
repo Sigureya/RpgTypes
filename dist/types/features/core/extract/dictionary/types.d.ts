@@ -16,7 +16,6 @@ export interface RuntimeDictionary<Hash> {
     targetNoteKeys: ReadonlySet<string>;
     textDictionary: ReadonlyMap<Hash, string>;
     actorTextDictionary: ReadonlyMap<string, Hash>;
-    systemTexts: ExtractedSystemTexts;
 }
 export interface GameDataReplaceOutput<Hash> {
     main: RawGameData<NormalizedEventCommand>;
