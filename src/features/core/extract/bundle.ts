@@ -3,14 +3,17 @@ import type {
   MapBatchReadResult,
   RawGameData,
   ReadArrayResult,
-  ReadSystemResultSuccess,
+  ReadSystemResult,
 } from "@RpgTypes/fileio";
+import { FILENAME_SYSTEM } from "@RpgTypes/fileio";
 import type {
   ExtractedSystemTexts,
   Data_Armor,
   Data_CommonEvent,
   Data_Troop,
   MapFileInfo,
+  Data_System,
+  EventCommand,
 } from "@RpgTypes/rmmz";
 import { extractTextFromSystem } from "@RpgTypes/rmmz";
 import type {
@@ -33,7 +36,7 @@ import {
 } from "./text";
 
 export const extractTextFromRawGameData = (
-  data: RawGameData,
+  data: RawGameData<EventCommand, Data_System | null>,
   extractor: EventContainerExtractor,
 ): ExtractedRawGameDataTexts => {
   const actors = mapReadArrayResult(data.actors, extractTextFromActor);
@@ -61,7 +64,7 @@ export const extractTextFromRawGameData = (
     weapons,
     troopResult,
     commonEventResult,
-  ]).concat(collectMapAndSystemErrors(data.mapFiles));
+  ]).concat(collectMapAndSystemErrors(data.mapFiles, data.system));
 
   return {
     value: {
@@ -87,8 +90,14 @@ export const extractTextFromRawGameData = (
 };
 
 const systemXX = (
-  data: RawGameData["system"],
-): ReadSystemResultSuccess<ExtractedSystemTexts> => {
+  data: ReadSystemResult<Data_System>,
+): ReadSystemResult<ExtractedSystemTexts> => {
+  if (data.system === null) {
+    return {
+      message: data.message,
+      system: null,
+    };
+  }
   return {
     message: data.message,
     system: extractTextFromSystem(data.system),
@@ -122,6 +131,7 @@ const collectDataReadErrors = (
 
 const collectMapAndSystemErrors = (
   mapFiles: RawGameData["mapFiles"],
+  system: ReadSystemResult<Data_System>,
 ): DataReadErrorItem[] => {
   const mapInfoErrors: DataReadErrorItem[] =
     mapFiles.info.success === false
@@ -138,7 +148,11 @@ const collectMapAndSystemErrors = (
       error: item.message,
     }),
   );
-  return [...mapInfoErrors, ...mapFileErrors];
+  const systemErrors: DataReadErrorItem[] =
+    system.system === null
+      ? [{ fileName: FILENAME_SYSTEM, error: system.message }]
+      : [];
+  return [...mapInfoErrors, ...mapFileErrors, ...systemErrors];
 };
 
 const extractArmors = (
