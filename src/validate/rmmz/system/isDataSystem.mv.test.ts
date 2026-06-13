@@ -1,7 +1,7 @@
 import { describe, test, expect } from "vitest";
 import type { Data_System, Data_SystemMV } from "@RpgTypes/rmmz";
 import { makeSystemData, makeSystemDataMV } from "@RpgTypes/rmmz/system";
-const validate = require("./systemMVValidate.cjs");
+const validate = require("./systemMVValidate.js");
 
 const mockDataSystem: Data_SystemMV = {
   airship: {

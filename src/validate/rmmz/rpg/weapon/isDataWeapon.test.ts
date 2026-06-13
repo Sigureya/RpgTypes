@@ -1,6 +1,6 @@
 import { describe, test, expect } from "vitest";
 import type { Data_Weapon } from "@RpgTypes/rmmz";
-const validate = require("./weaponValidate.cjs");
+const validate = require("./weaponValidate.js");
 
 const isDataWeapon = (data: unknown): data is Data_Weapon => {
   return validate(data);

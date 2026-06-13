@@ -1,6 +1,6 @@
 import { describe, test, expect } from "vitest";
 import type { Data_Animation } from "@RpgTypes/rmmz/rpg";
-const validate = require("./animationValidate.cjs");
+const validate = require("./animationValidate.js");
 
 const isDataAnimation = (data: unknown): data is Data_Animation => {
   return validate(data);

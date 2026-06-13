@@ -1,6 +1,6 @@
 import { describe, test, expect } from "vitest";
 import type { Data_Tileset } from "@RpgTypes/rmmz/rpg";
-const validate = require("./tilesetValidate.cjs");
+const validate = require("./tilesetValidate.js");
 
 const isDataTileset = (data: unknown): data is Data_Tileset => {
   return validate(data);

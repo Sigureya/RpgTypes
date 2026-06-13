@@ -1,6 +1,6 @@
 import { test, expect } from "vitest";
 import type { Data_Actor } from "@RpgTypes/rmmz/rpg";
-const validate = require("./actorValidate.cjs"); // Adjust the import based on your setup
+const validate = require("./actorValidate.js"); // Adjust the import based on your setup
 
 const isDataActor = (data: unknown): data is Data_Actor => {
   return validate(data);

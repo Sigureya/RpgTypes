@@ -1,6 +1,6 @@
 import { describe, test, expect } from "vitest";
 import type { Data_Skill } from "@RpgTypes/rmmz/rpg";
-const validate = require("./skillValidate.cjs");
+const validate = require("./skillValidate.js");
 
 const isDataSkill = (data: unknown): data is Data_Skill => {
   return validate(data);

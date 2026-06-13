@@ -4,10 +4,10 @@ import type {
   Command_ChangeActorProfile,
   Command_ChangeActorNickName,
 } from "@RpgTypes/rmmz";
-const validate = require("./chageActorTextValidate.cjs");
+const validate = require("./chageActorTextValidate.js");
 
 const isActorTextCommand = (
-  data: unknown
+  data: unknown,
 ): data is
   | Command_ChangeActorName
   | Command_ChangeActorProfile

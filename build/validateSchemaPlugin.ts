@@ -42,7 +42,7 @@ const build = async (schemaPath: string): Promise<void> => {
     const validate = ajv.compile(schemaJson);
     const standalone: string = standaloneCode(ajv, validate);
 
-    const targetFile = path.join(parsed.dir, `${filename}.cjs`);
+    const targetFile = path.join(parsed.dir, `${filename}.js`);
 
     await fs.writeFile(targetFile, standalone, "utf-8");
   }

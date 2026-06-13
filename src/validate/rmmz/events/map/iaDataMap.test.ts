@@ -15,7 +15,7 @@ import {
 } from "@RpgTypes/rmmz/rpg";
 import type { ValidateFunction } from "ajv";
 // @ts-ignore - importing compiled schema validator
-const validate: ValidateFunction = require("./mapValidate.cjs");
+const validate: ValidateFunction = require("./mapValidate.js");
 const isDataMap = (data: unknown): data is Data_Map => {
   return validate(data);
 };

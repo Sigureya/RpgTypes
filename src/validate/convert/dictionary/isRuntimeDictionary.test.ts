@@ -1,6 +1,6 @@
 import { test, expect } from "vitest";
 import type { RuntimeDictionaryData } from "@RpgTypes/features";
-const validate = require("./dictionaryValidate.cjs");
+const validate = require("./dictionaryValidate.js");
 
 const isRuntimeDictionaryData = (
   data: unknown,
