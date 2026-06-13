@@ -14,7 +14,6 @@ import {
 import { makeRawTestDataBundle } from "@RpgTypes/fileio";
 import type { TestDataSourceWithNote } from "@RpgTypes/libs";
 import { makeMapData } from "@RpgTypes/rmmz";
-import { extractTextFromSystem, makeSystemData } from "@RpgTypes/rmmz";
 import type {
   Data_CommonEvent,
   Data_Map,
@@ -42,8 +41,6 @@ const SWITCHES_TEXT = "Switches";
 const MSG_FILEREAD_SUCCESS = "File read successfully";
 const NON_REPLACEABLE_TEXT = "Non replaceable text";
 const SYSTEM_TEXT = "SystemText";
-const EMPTY_SYSTEM_TEXTS = extractTextFromSystem(makeSystemData({}));
-
 const makeNoteText = (text: string, value: string): string => {
   return [`<Target:${text}>`, `<Number:${value}>`].join("\n");
 };
@@ -132,7 +129,6 @@ describe("replaceRuntimeMapData", () => {
         ["Text", "NewText"],
       ]),
       actorTextDictionary: new Map(),
-      systemTexts: EMPTY_SYSTEM_TEXTS,
     };
 
     const result = replaceRuntimeMapData(map, dic);
@@ -154,7 +150,6 @@ describe("replaceRuntimeMapData", () => {
         ["Text", "NewText"],
       ]),
       actorTextDictionary: new Map(),
-      systemTexts: EMPTY_SYSTEM_TEXTS,
     };
 
     const result = replaceRuntimeMapData(map, dic);
