@@ -2,6 +2,7 @@ import type {
   DataReadErrorItem,
   MapBatchReadResult,
   RawGameData,
+  RawGameDataNullableSystem,
   ReadArrayResult,
   ReadSystemResult,
 } from "@RpgTypes/fileio";
@@ -13,7 +14,6 @@ import type {
   Data_Troop,
   MapFileInfo,
   Data_System,
-  EventCommand,
 } from "@RpgTypes/rmmz";
 import { extractTextFromSystem } from "@RpgTypes/rmmz";
 import type {
@@ -36,7 +36,7 @@ import {
 } from "./text";
 
 export const extractTextFromRawGameData = (
-  data: RawGameData<EventCommand, Data_System | null>,
+  data: RawGameDataNullableSystem,
   extractor: EventContainerExtractor,
 ): ExtractedRawGameDataTexts => {
   const actors = mapReadArrayResult(data.actors, extractTextFromActor);
