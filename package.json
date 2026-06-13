@@ -4,37 +4,37 @@
   "description": "A TypeScript library for RpgMakerMZ-related types.",
   "sideEffects": false,
   "main": "./dist/main/main.cjs.js",
-  "module": "./dist/main/main.es.js",
+  "module": "./dist/main/main.esm.js",
   "types": "./dist/types/index.d.ts",
   "exports": {
     ".": {
       "types": "./dist/types/index.d.ts",
-      "import": "./dist/main/main.es.js",
+      "import": "./dist/main/main.esm.js",
       "require": "./dist/main/main.cjs.js"
     },
     "./features": {
       "types": "./dist/types/features/index.d.ts",
-      "import": "./dist/features/features.es.js",
+      "import": "./dist/features/features.esm.js",
       "require": "./dist/features/features.cjs.js"
     },
     "./libs": {
       "types": "./dist/types/libs/index.d.ts",
-      "import": "./dist/libs/libs.es.js",
+      "import": "./dist/libs/libs.esm.js",
       "require": "./dist/libs/libs.cjs.js"
     },
     "./rmmz": {
       "types": "./dist/types/rmmz/index.d.ts",
-      "import": "./dist/rmmz/rmmz.es.js",
+      "import": "./dist/rmmz/rmmz.esm.js",
       "require": "./dist/rmmz/rmmz.cjs.js"
     },
     "./rmmz/plugin": {
       "types": "./dist/types/rmmz/plugin/index.d.ts",
-      "import": "./dist/rmmz/plugin.es.js",
+      "import": "./dist/rmmz/plugin.esm.js",
       "require": "./dist/rmmz/plugin.cjs.js"
     },
     "./validate": {
       "types": "./dist/types/validate/index.d.ts",
-      "import": "./dist/validate/validate.es.js",
+      "import": "./dist/validate/validate.esm.js",
       "require": "./dist/validate/validate.cjs.js"
     },
     "./rmmzRuntime": {
@@ -42,17 +42,17 @@
     },
     "./mock": {
       "types": "./dist/types/mock/index.d.ts",
-      "import": "./dist/mock/mock.es.js",
+      "import": "./dist/mock/mock.esm.js",
       "require": "./dist/mock/mock.cjs.js"
     },
     "./fileio": {
       "types": "./dist/types/fileio/index.d.ts",
-      "import": "./dist/fileio/fileio.es.js",
+      "import": "./dist/fileio/fileio.esm.js",
       "require": "./dist/fileio/fileio.cjs.js"
     },
     "./plugin": {
       "types": "./dist/types/plugin/index.d.ts",
-      "import": "./dist/plugin/plugin.es.js",
+      "import": "./dist/plugin/plugin.esm.js",
       "require": "./dist/plugin/plugin.cjs.js"
     }
   },
