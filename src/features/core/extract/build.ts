@@ -168,16 +168,16 @@ const buildSystemTexts = <UUID>(
   uuidGen: (text: string) => UUID,
   kinds: SystemKinds,
 ): SystemTexts<UUID> => {
-  if (system.system === null) {
+  if (system.system) {
     return {
-      gameTitle: "",
+      gameTitle: system.system.gameTitle,
       filename: FILENAME_SYSTEM,
-      texts: [],
+      texts: convertSystemTypes(system.system, FILENAME_SYSTEM, kinds, uuidGen),
     };
   }
   return {
-    gameTitle: system.system.gameTitle,
+    gameTitle: "",
     filename: FILENAME_SYSTEM,
-    texts: convertSystemTypes(system.system, FILENAME_SYSTEM, kinds, uuidGen),
+    texts: [],
   };
 };
