@@ -2,6 +2,7 @@ import type {
   Data_Map,
   Data_MapInfo,
   Data_System,
+  EventCommand,
   MapFileInfo,
 } from "@RpgTypes/rmmz";
 import type { ReadArrayResult } from "./arrayData";
@@ -38,7 +39,7 @@ export const readAllRawGameData = async (
   errorMessages: ReadAllDataErrorMessages,
   readFileFn: (filename: DataFileNames | MapFileNameWithExt) => Promise<string>,
   validateFunctions: RpgDataValidators,
-): Promise<RawGameData> => {
+): Promise<RawGameData<EventCommand, Data_System | null>> => {
   return readAllGameDataWithFallback(
     errorMessages,
     readFileFn,
