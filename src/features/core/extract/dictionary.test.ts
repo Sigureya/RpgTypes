@@ -86,7 +86,6 @@ describe("findActorText", () => {
     ]),
     textDictionary: new Map([[1, "Hello"]]),
     targetNoteKeys: new Set(),
-    systemTexts: EMPTY_SYSTEM_TEXTS,
   };
 
   test("returns existing text as is", () => {
