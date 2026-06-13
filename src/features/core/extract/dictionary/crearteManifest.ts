@@ -5,10 +5,7 @@ import type {
   PluginParamsRecord,
   PluginManagerTemplate,
 } from "@sigureya/rmmz-plugin-schema";
-import {
-  generatePluginAnnotationLines,
-  generatePluginAnnotationText,
-} from "@sigureya/rmmz-plugin-schema";
+import { generatePluginAnnotationText } from "@sigureya/rmmz-plugin-schema";
 import type { RuntimePluginBundleOptions } from "./manifest";
 import {
   PLUGIN_NAME_HONYAKU_EX,
@@ -112,7 +109,7 @@ const createHandlers = (): SchemaStringifyHandlers => {
 };
 
 const createAnnotation = (desc: string): string => {
-  const lines = generatePluginAnnotationLines(
+  return generatePluginAnnotationText(
     {
       pluginName: "",
       locale: "",
@@ -131,5 +128,4 @@ const createAnnotation = (desc: string): string => {
     },
     createHandlers(),
   );
-  return generatePluginAnnotationText(lines);
 };
