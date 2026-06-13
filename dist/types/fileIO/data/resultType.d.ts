@@ -1,7 +1,7 @@
 import { Data_Actor, Data_Animation, Data_Armor, Data_Class, Data_CommonEventUnknown, Data_Enemy, Data_Item, Data_Map, Data_MapInfo, Data_Skill, Data_State, Data_System, Data_Tileset, Data_TroopUnknonw, Data_Weapon, EventCommand, EventCommandUnknown } from '../../rmmz';
 import { ReadArrayResult } from './arrayData';
 import { MapBatchReadResult } from './map';
-import { ReadSystemResult } from './system';
+import { ReadSystemResult, ReadSystemResultSuccess } from './system';
 export interface ReadHandledResult<T, NullValue = T extends unknown[] ? [] : T extends object ? null : never> {
     success: boolean;
     fileName: string;
@@ -92,7 +92,7 @@ export interface RawGameData<Command extends EventCommandUnknown = EventCommand,
     mapInfos: ReadArrayResult<Data_MapInfo>;
     skills: ReadArrayResult<Data_Skill>;
     states: ReadArrayResult<Data_State>;
-    system: ReadSystemResult<System>;
+    system: ReadSystemResultSuccess<System>;
     troops: ReadArrayResult<Data_TroopUnknonw<Command>>;
     weapons: ReadArrayResult<Data_Weapon>;
     tilesets: ReadArrayResult<Data_Tileset>;

@@ -1,8 +1,9 @@
+import { Data_System, EventCommand } from '../../rmmz';
 import { MapFileNameWithExt } from './map';
 import { RpgDataReadHandlers, RpgDataValidators } from './reader/handlers';
 import { RawGameData, ReadGameDataResult, ReadGameDataResultNullable } from './resultType';
 import { ReadAllDataErrorMessages } from './terms';
 import { DataFileNames } from './types';
-export declare const readAllRawGameData: (errorMessages: ReadAllDataErrorMessages, readFileFn: (filename: DataFileNames | MapFileNameWithExt) => Promise<string>, validateFunctions: RpgDataValidators) => Promise<RawGameData>;
+export declare const readAllRawGameData: (errorMessages: ReadAllDataErrorMessages, readFileFn: (filename: DataFileNames | MapFileNameWithExt) => Promise<string>, validateFunctions: RpgDataValidators) => Promise<RawGameData<EventCommand, Data_System | null>>;
 export declare const readAllGameDataWithArrayFallback: <Common, Map, System, Actor, Skill, Item, Weapon, Armor, Enemy, Class, State, Troop, Animation, Tileset>(errorMessages: ReadAllDataErrorMessages, readFileFn: (filename: DataFileNames | MapFileNameWithExt) => Promise<string>, validateFunctions: RpgDataValidators, handles: RpgDataReadHandlers<Common[], Map, System, Actor[], Skill[], Item[], Weapon[], Armor[], Enemy[], Class[], State[], Troop[], Animation[], Tileset[]>) => Promise<ReadGameDataResult<Common[], Map, System, Actor[], Skill[], Item[], Weapon[], Armor[], Enemy[], Class[], State[], Troop[], Animation[], Tileset[]>>;
 export declare const readAllGameDataWithNullFallback: <Common, Map, System, Actor, Skill, Item, Weapon, Armor, Enemy, Class, State, Troop, Animation, Tileset>(errorMessages: ReadAllDataErrorMessages, readFileFn: (filename: DataFileNames | MapFileNameWithExt) => Promise<string>, validateFunctions: RpgDataValidators, handles: RpgDataReadHandlers<Common, Map, System, Actor, Skill, Item, Weapon, Armor, Enemy, Class, State, Troop, Animation, Tileset>) => Promise<ReadGameDataResultNullable<Common, Map, System, Actor, Skill, Item, Weapon, Armor, Enemy, Class, State, Troop, Animation, Tileset>>;

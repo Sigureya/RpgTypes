@@ -7,4 +7,3 @@ export type { ExtractedActorImage, ExtractedEnemyImage, ImageExtractableActor, }
 export { extractImageFromActor, extractImageFromEnemy, } from './core/extract/image/mainData';
 export type { ExtractedText, ExtractedTextProperty, ExtractedTextEntry, } from './core/extract/text/mainData/types';
 export { extractNoteText, extractTextData, extractTextFromActor, extractTextFromArmor, extractTextFromClass, extractTextFromEnemy, extractTextFromItem, extractTextFromSkill, extractTextFromState, extractTextFromWeapon, } from './core/extract/text/mainData';
-export { type ExtractedSystemTexts, extractTextFromSystem, } from './core/extract/text/system';
