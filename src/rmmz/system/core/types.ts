@@ -3,7 +3,7 @@ import type {
   Terms_GameCommands,
   Terms_Messages,
   SystemLabels_TermsParamNames,
-} from "@RpgTypes/rmmz";
+} from "./terms";
 
 export interface ExtractedSystemTexts {
   gameTitle: string;

@@ -3,13 +3,13 @@ import type {
   MapBatchReadResult,
   ReadSystemResult,
 } from "@RpgTypes/fileio";
+import type { ExtractedSystemTexts } from "@RpgTypes/rmmz";
 import type {
   ExtractedCommonEventText,
   ExtractedBattleEventText,
   ExtractedMapTexts,
 } from "./eventCommand";
 import type { ExtractedDataBundle } from "./mainData";
-import type { ExtractedSystemTexts } from "./system";
 
 export interface ExtractedRawGameDataTexts {
   value: ExtractedRawGameDataTextValue;

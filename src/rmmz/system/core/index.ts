@@ -9,4 +9,5 @@ export * from "./other";
 export * from "./rpgDataTypes";
 export * from "./terms";
 export * from "./titleCommandWindow";
+export * from "./types";
 export * from "./vehicle";

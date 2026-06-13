@@ -1,8 +1,7 @@
 import { describe, expect, test } from "vitest";
 import { makeTestSystemData } from "@RpgTypes/rmmz";
-import { replaceSystemTextEx } from "./replace";
-import { extractTextFromSystem } from "./system";
-import type { ExtractedSystemTexts } from "./types";
+import type { ExtractedSystemTexts } from "./core/types";
+import { extractTextFromSystem, replaceSystemTextEx } from "./terms";
 
 const makeTestData = () => {
   return makeTestSystemData({

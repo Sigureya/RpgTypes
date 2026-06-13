@@ -5,6 +5,7 @@ export * from "./system";
 export * from "./systemLabels";
 export * from "./systemMV";
 export * from "./systemSegments";
+export * from "./terms";
 export { makeSystemData } from "./makeSystem";
 export {
   makeSystemDataFromMV,
