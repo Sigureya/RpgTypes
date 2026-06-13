@@ -402,7 +402,7 @@ describe("makeTestSystemData", () => {
     const result: Data_System = makeTestSystemData({
       audio: "audio",
       image: "image",
-      text: "text",
+      systemText: "text",
       switches: "switches",
       variables: "variables",
     });
