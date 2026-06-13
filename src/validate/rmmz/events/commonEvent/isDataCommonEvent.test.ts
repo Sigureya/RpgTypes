@@ -1,6 +1,6 @@
 import { describe, test, expect } from "vitest";
 import type { Data_CommonEventLike } from "@RpgTypes/rmmz/rpg";
-const validate = require("./commonEventValidate.cjs");
+const validate = require("./commonEventValidate.js");
 
 const isDataCommonEvent = (data: unknown): data is Data_CommonEventLike => {
   return validate(data);

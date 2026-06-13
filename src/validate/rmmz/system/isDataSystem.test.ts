@@ -6,7 +6,7 @@ import type {
 } from "@RpgTypes/rmmz";
 import { makeSystemData, makeSystemDataMV } from "@RpgTypes/rmmz";
 import { SCHEMA_DATA_SYSTEM } from "./schema";
-const validate = require("./systemValidate.cjs");
+const validate = require("./systemValidate.js");
 
 const mockSystem: Data_System = {
   optAutosave: true,
