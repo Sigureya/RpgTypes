@@ -19,7 +19,7 @@ import type {
 } from "@RpgTypes/rmmz";
 import type { ReadArrayResult } from "./arrayData";
 import type { MapBatchReadResult } from "./map";
-import type { ReadSystemResult } from "./system";
+import type { ReadSystemResult, ReadSystemResultSuccess } from "./system";
 
 export interface ReadHandledResult<
   T,
@@ -157,7 +157,7 @@ export interface RawGameData<
   mapInfos: ReadArrayResult<Data_MapInfo>;
   skills: ReadArrayResult<Data_Skill>;
   states: ReadArrayResult<Data_State>;
-  system: ReadSystemResult<System>;
+  system: ReadSystemResultSuccess<System>;
   troops: ReadArrayResult<Data_TroopUnknonw<Command>>;
   weapons: ReadArrayResult<Data_Weapon>;
   tilesets: ReadArrayResult<Data_Tileset>;

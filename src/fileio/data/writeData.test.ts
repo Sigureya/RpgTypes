@@ -109,21 +109,4 @@ describe("writeGameData", () => {
       JSON.stringify(mapData),
     );
   });
-
-  test("system が null の場合は System.json を書き込まない", async () => {
-    const fileWriteFn = vi.fn(async () => undefined);
-
-    await writeRawGameData(
-      {
-        ...rawGameData,
-        system: { system: null, message: "missing" },
-      },
-      fileWriteFn,
-    );
-
-    expect(fileWriteFn).not.toHaveBeenCalledWith(
-      FILENAME_SYSTEM,
-      expect.any(String),
-    );
-  });
 });

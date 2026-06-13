@@ -10,7 +10,6 @@ import type {
   EventContainerExtractor,
   RmmzTextPropertys,
   SystemKinds,
-  SystemTexts,
 } from "./text";
 
 const TEST_SOURCE: TestRawDataSource = {
@@ -193,33 +192,5 @@ describe("buildExtractResultWithNotes", () => {
     bundle.data.commonEvents.data.forEach((common) => {
       expect(extractor.extractCommonEventText).toHaveBeenCalledWith(common);
     });
-  });
-
-  test("system が null の場合は空 system を返し convertSystemTypes を呼ばない", () => {
-    const bundle = createBundle();
-    bundle.data.system.system = null;
-    bundle.data.system.message = "system missing";
-    const kinds = createKinds();
-    const terms = createTerms();
-    const uuidGen = (text: string) => `uuid:${text}`;
-    const commandNameFn = () => "command-name";
-    const extractor = createExtractor2();
-
-    const expected: SystemTexts<string> = {
-      gameTitle: "",
-      filename: FILENAME_SYSTEM,
-      texts: [],
-    };
-
-    const result = buildExtractResultWithNotes(
-      bundle,
-      [],
-      kinds,
-      terms,
-      uuidGen,
-      commandNameFn,
-      extractor,
-    );
-    expect(result.system).toEqual(expected);
   });
 });

@@ -15,7 +15,6 @@ import {
   FILENAME_MAP_INFOS,
   FILENAME_SKILLS,
   FILENAME_STATES,
-  FILENAME_SYSTEM,
   FILENAME_TROOPS,
   FILENAME_WEAPONS,
 } from "@RpgTypes/fileio";
@@ -193,11 +192,6 @@ describe("extractTextFromRawGameData", () => {
         message: "invalid map",
       },
     ];
-    data.system = {
-      system: null,
-      message: "system read failed",
-    };
-
     const result = extractTextFromRawGameData(data, extractor);
 
     expect(result.value.mainData.actors).toEqual([]);
@@ -212,7 +206,6 @@ describe("extractTextFromRawGameData", () => {
       { fileName: FILENAME_COMMON_EVENTS, error: "common read failed" },
       { fileName: FILENAME_MAP_INFOS, error: "map info read failed" },
       { fileName: "Map999.json", error: "invalid map" },
-      { fileName: FILENAME_SYSTEM, error: "system read failed" },
     ]);
   });
 });

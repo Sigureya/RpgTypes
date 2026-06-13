@@ -17,7 +17,11 @@ import {
   FILENAME_SYSTEM,
 } from "@RpgTypes/fileio";
 import type { ExtractedTextItem } from "@RpgTypes/libs";
-import type { Data_Actor, MapFileInfo } from "@RpgTypes/rmmz";
+import type {
+  Data_Actor,
+  ExtractedSystemTexts,
+  MapFileInfo,
+} from "@RpgTypes/rmmz";
 import { createActorControlChars } from "@RpgTypes/rmmz";
 import type { PluginParamExtractionOutput } from "@sigureya/rmmz-plugin-schema";
 import { extractTextFromRawGameData } from "./bundle";
@@ -31,7 +35,6 @@ import type {
   TextCommandParameter,
   EventContainerExtractor,
   ExtractedMapTexts,
-  ExtractedSystemTexts,
   SystemTexts,
 } from "./text";
 import {
@@ -165,16 +168,16 @@ const buildSystemTexts = <UUID>(
   uuidGen: (text: string) => UUID,
   kinds: SystemKinds,
 ): SystemTexts<UUID> => {
-  if (system.system === null) {
+  if (system.system) {
     return {
-      gameTitle: "",
+      gameTitle: system.system.gameTitle,
       filename: FILENAME_SYSTEM,
-      texts: [],
+      texts: convertSystemTypes(system.system, FILENAME_SYSTEM, kinds, uuidGen),
     };
   }
   return {
-    gameTitle: system.system.gameTitle,
+    gameTitle: "",
     filename: FILENAME_SYSTEM,
-    texts: convertSystemTypes(system.system, FILENAME_SYSTEM, kinds, uuidGen),
+    texts: [],
   };
 };

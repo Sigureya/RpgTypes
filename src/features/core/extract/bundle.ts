@@ -12,6 +12,8 @@ import type {
   Data_CommonEvent,
   Data_Troop,
   MapFileInfo,
+  Data_System,
+  EventCommand,
 } from "@RpgTypes/rmmz";
 import { extractTextFromSystem } from "@RpgTypes/rmmz";
 import type {
@@ -34,7 +36,7 @@ import {
 } from "./text";
 
 export const extractTextFromRawGameData = (
-  data: RawGameData,
+  data: RawGameData<EventCommand, Data_System | null>,
   extractor: EventContainerExtractor,
 ): ExtractedRawGameDataTexts => {
   const actors = mapReadArrayResult(data.actors, extractTextFromActor);
@@ -88,11 +90,17 @@ export const extractTextFromRawGameData = (
 };
 
 const systemXX = (
-  data: RawGameData["system"],
+  data: ReadSystemResult<Data_System>,
 ): ReadSystemResult<ExtractedSystemTexts> => {
+  if (data.system === null) {
+    return {
+      message: data.message,
+      system: null,
+    };
+  }
   return {
     message: data.message,
-    system: data.system ? extractTextFromSystem(data.system) : null,
+    system: extractTextFromSystem(data.system),
   };
 };
 
@@ -123,7 +131,7 @@ const collectDataReadErrors = (
 
 const collectMapAndSystemErrors = (
   mapFiles: RawGameData["mapFiles"],
-  system: RawGameData["system"],
+  system: ReadSystemResult<Data_System>,
 ): DataReadErrorItem[] => {
   const mapInfoErrors: DataReadErrorItem[] =
     mapFiles.info.success === false

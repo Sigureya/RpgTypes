@@ -62,9 +62,7 @@ export const replaceRawDataBundle = (
     ),
     system: {
       message: data.system.message,
-      system: data.system.system
-        ? replaceSystemText(data.system.system, handlers.replaceText)
-        : null,
+      system: replaceSystemText(data.system.system, handlers.replaceText),
     },
     troops: mapReadArrayResult(data.troops, (item) =>
       replaceTroopData(item, handlers),

@@ -1,10 +1,11 @@
 import type { FileEntry, FileEntryBundle, RawGameData } from "@RpgTypes/fileio";
 import { rawGameDataToMainDataFileEntries } from "@RpgTypes/fileio";
-import type {
-  Data_Map,
-  NormalizedEventCommand,
-  NoteReadResult,
-  RpgDataBundleHasText,
+import {
+  extractTextFromSystem,
+  type Data_Map,
+  type NormalizedEventCommand,
+  type NoteReadResult,
+  type RpgDataBundleHasText,
 } from "@RpgTypes/rmmz";
 import type { RuntimeDictionary, GameDataReplaceOutput } from "./core/extract";
 import { fileEntriesFromDictionary, pluginManifestFiles } from "./core/extract";
@@ -207,6 +208,7 @@ export const replaceDataWithHash = <T extends string>(
         ...replaceResult.note.mapNoteSummary,
       ]),
       textDictionary: dicX.textDictionary,
+      systemTexts: extractTextFromSystem(data.system.system),
     },
   };
 };
