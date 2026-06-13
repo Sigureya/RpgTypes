@@ -1,14 +1,17 @@
-import { F as ge, a as Le, r as Te, w as Oe, b as Re, c as be, d as he, e as Ce, f as Ge } from "../shared/writeData.es.js";
-import { d as N, h as f, b as D, f as _, F as S, i as F, j as y, m as v, g, c as L, a as T, e as O, k as R, l as b } from "../shared/constants.es.js";
-import { a as X, b as Y } from "../shared/makeSystem.es.js";
-import { w as H, x as $, y as q, G as Q, W as Z, _ as h, a9 as aa, aa as ea, N as sa, ab as ta, a6 as ra, a4 as ia, S as ma, V as na, af as la, p as oa, u as da, n as ca, a1 as C, a7 as Ea } from "../shared/makeSystemEx.es.js";
-const Ya = "bgm", Ha = "se", $a = "me", qa = "bgs", Qa = "img", Za = "audio", ae = (a) => [...c(a.bgm, { asset: "audio", subDir: "bgm" }), ...c(a.bgs, { asset: "audio", subDir: "bgs" }), ...c(a.me, {
+import { F as Le, a as Te, r as Oe, w as Re, b as be, c as he, d as Ge, e as Ce, f as we } from "../shared/writeData.es.js";
+import { d as N, h as D, b as f, f as _, F as S, i as y, j as F, m as v, g, c as L, a as T, e as O, k as R, l as b } from "../shared/constants.es.js";
+import { w as X, x as Y, y as H, G as $, W as q, _ as h, a9 as Q, aa as Z, N as aa, ab as ea, a6 as sa, a4 as ta, S as ra, V as ia, af as ma, p as na, u as la, n as oa, a1 as G, a7 as da } from "../shared/makeSystemEx.es.js";
+import { a as ca, b as Ea } from "../shared/makeSystem.es.js";
+const Ya = "bgm", Ha = "se", $a = "me", qa = "bgs", Qa = "img", Za = "audio", ae = (a) => [...c(a.bgm, { asset: "audio", subDir: "bgm" }), ...c(a.bgs, {
   asset: "audio",
-  subDir: "me"
-}), ...c(a.se, { asset: "audio", subDir: "se" })], ee = (a) => [...c(a.characters, { asset: "img", subDir: "characters" }), ...c(a.faces, { asset: "img", subDir: "faces" }), ...c(a.svEnemy, {
+  subDir: "bgs"
+}), ...c(a.me, { asset: "audio", subDir: "me" }), ...c(a.se, { asset: "audio", subDir: "se" })], ee = (a) => [...c(a.characters, {
   asset: "img",
-  subDir: "sv_enemies"
-}), ...c(a.svActors, { asset: "img", subDir: "sv_actors" }), ...c(a.enemies, { asset: "img", subDir: "enemies" })], c = (a, e) => Array.from(a).sort().map(((s) => ({
+  subDir: "characters"
+}), ...c(a.faces, { asset: "img", subDir: "faces" }), ...c(a.svEnemy, { asset: "img", subDir: "sv_enemies" }), ...c(a.svActors, { asset: "img", subDir: "sv_actors" }), ...c(a.enemies, {
+  asset: "img",
+  subDir: "enemies"
+})], c = (a, e) => Array.from(a).sort().map(((s) => ({
   asset: e.asset,
   subDir: e.subDir,
   symbol: s
@@ -29,7 +32,7 @@ const Ya = "bgm", Ha = "se", $a = "me", qa = "bgs", Qa = "img", Za = "audio", ae
   } catch {
     return { success: !1, fileName: e, data: [], error: s.jsonParseError };
   }
-}, pa = (a, e, s) => l(a, T, e, s), Ia = (a, e, s) => l(a, N, e, s), Ma = (a, e, s) => l(a, F, e, s), Aa = (a, e, s) => l(a, _, e, s), Na = (a, e, s) => l(a, L, e, s), fa = (a, e, s) => l(a, O, e, s), Da = (a, e, s) => l(a, D, e, s), _a = (a, e, s) => l(a, g, e, s), Sa = (a, e, s) => l(a, y, e, s), Fa = (a, e, s) => l(a, R, e, s), ya = (a, e, s) => l(a, v, e, s), va = (a, e, s) => l(a, f, e, s), ga = (a, e, s) => l(a, S, e, s), Ie = (a) => ({
+}, pa = (a, e, s) => l(a, T, e, s), Ia = (a, e, s) => l(a, N, e, s), Ma = (a, e, s) => l(a, y, e, s), Aa = (a, e, s) => l(a, _, e, s), Na = (a, e, s) => l(a, L, e, s), Da = (a, e, s) => l(a, O, e, s), fa = (a, e, s) => l(a, f, e, s), _a = (a, e, s) => l(a, g, e, s), Sa = (a, e, s) => l(a, F, e, s), ya = (a, e, s) => l(a, R, e, s), Fa = (a, e, s) => l(a, v, e, s), va = (a, e, s) => l(a, D, e, s), ga = (a, e, s) => l(a, S, e, s), Ie = (a) => ({
   main: La(a),
   map: a.mapFiles.invalidMaps.map(((e) => ({ fileName: e.filename, error: e.message })))
 }), La = (a) => {
@@ -38,14 +41,14 @@ const Ya = "bgm", Ha = "se", $a = "me", qa = "bgs", Qa = "img", Za = "audio", ae
     error: s.error
   })));
   return a.system.system === null ? [{ fileName: a.system.message, error: a.system.message }, ...e] : e;
-}, Ta = (a) => [X({
+}, Ta = (a) => [ca({
   facename: a.image,
   faceIndex: 0,
   speakerName: a.text
-}), Y(a.text), H({ actorId: 1, characterName: a.image, characterIndex: 0, battlerName: a.image, faceName: a.image, faceIndex: 0 }), $({ name: a.text, actorId: 1 }), q({
+}), Ea(a.text), X({ actorId: 1, characterName: a.image, characterIndex: 0, battlerName: a.image, faceName: a.image, faceIndex: 0 }), Y({ name: a.text, actorId: 1 }), H({
   nickname: a.text,
   actorId: 1
-}), Q(a.text)], Oa = (a) => Z({
+}), $(a.text)], Oa = (a) => q({
   note: a.note,
   displayName: a.text,
   bgm: { name: a.audio, pan: 0, pitch: 100, volume: 100 },
@@ -60,26 +63,26 @@ const Ya = "bgm", Ha = "se", $a = "me", qa = "bgs", Qa = "img", Za = "audio", ae
   characterIndex: 0,
   direction: 2,
   pattern: 0
-}, list: aa(a) }), ba = (a) => h({ image: { characterIndex: 0, characterName: a.image, tileId: 0, direction: 4, pattern: 0 }, list: Ta(a) }), Me = (a) => {
+}, list: Q(a) }), ba = (a) => h({ image: { characterIndex: 0, characterName: a.image, tileId: 0, direction: 4, pattern: 0 }, list: Ta(a) }), Me = (a) => {
   const { message: e } = a;
   return {
-    actors: d(ca(a), e, T),
-    classes: d(da(a), e, N),
-    armors: d(oa(a), e, O),
-    weapons: d(la(a), e, L),
-    items: d(na(a), e, _),
-    enemies: d(ma(a), e, D),
-    skills: d(ia(a), e, F),
-    states: d(ra(a), e, y),
-    troops: d(ta({
+    actors: d(oa(a), e, T),
+    classes: d(la(a), e, N),
+    armors: d(na(a), e, O),
+    weapons: d(ma(a), e, L),
+    items: d(ia(a), e, _),
+    enemies: d(ra(a), e, f),
+    skills: d(ta(a), e, y),
+    states: d(sa(a), e, F),
+    troops: d(ea({
       id: 1,
       name: a.nonReplaceableText
     }), e, g),
-    commonEvents: d(sa({ id: 1, name: a.nonReplaceableText }), e, f),
+    commonEvents: d(aa({ id: 1, name: a.nonReplaceableText }), e, D),
     mapInfos: I(e, S),
     animations: I(e, R),
     tilesets: I(e, v),
-    system: { system: ea(a), message: e },
+    system: { system: Z(a), message: e },
     mapFiles: { info: { success: !0 }, invalidMaps: [], validMaps: [ha(a)] }
   };
 }, ha = (a) => ({ filename: "Map001", editingName: "Test Map", map: Oa(a) }), I = (a, e) => ({
@@ -87,18 +90,18 @@ const Ya = "bgm", Ha = "se", $a = "me", qa = "bgs", Qa = "img", Za = "audio", ae
   error: a,
   fileName: e,
   success: !0
-}), d = (a, e, s) => ({ data: [a], error: e, fileName: s, success: !0 }), Ca = (a, e, s, t) => s(wa(a)).then(((r) => Ga(r, a, e, t))).catch((() => M(a, e.fileNotFound))), Ga = (a, e, s, t) => {
+}), d = (a, e, s) => ({ data: [a], error: e, fileName: s, success: !0 }), Ga = (a, e, s, t) => s(wa(a)).then(((r) => Ca(r, a, e, t))).catch((() => M(a, e.fileNotFound))), Ca = (a, e, s, t) => {
   try {
     const r = JSON.parse(a);
-    return t(r) ? { map: r, filename: G(e), editingName: e.name } : M(e, s.invalidStructure);
+    return t(r) ? { map: r, filename: C(e), editingName: e.name } : M(e, s.invalidStructure);
   } catch {
     return M(e, s.jsonParseError);
   }
-}, wa = (a) => `Map${C(a.id)}.json`, G = (a) => `Map${C(a.id)}`, M = (a, e) => ({ map: null, message: e, filename: G(a), editingName: a.name }), Ae = (a, e, s, t) => w(a, e, s, t, ((r) => r.map)), w = async (a, e, s, t, r) => {
+}, wa = (a) => `Map${G(a.id)}.json`, C = (a) => `Map${G(a.id)}`, M = (a, e) => ({ map: null, message: e, filename: C(a), editingName: a.name }), Ae = (a, e, s, t) => w(a, e, s, t, ((r) => r.map)), w = async (a, e, s, t, r) => {
   const m = await Promise.all(a.map((async (p) => xa(p, e, s, r, t))));
   return ka(m);
 }, xa = async (a, e, s, t, r) => {
-  const m = await Ca(a, e, s, r);
+  const m = await Ga(a, e, s, r);
   return m.map === null ? m : {
     editingName: m.editingName,
     filename: m.filename,
@@ -131,11 +134,11 @@ const Ya = "bgm", Ha = "se", $a = "me", qa = "bgs", Qa = "img", Za = "audio", ae
     return s.validateSystemMz(a) ? {
       system: a,
       message: ""
-    } : s.validateSystemMv && s.validateSystemMv(a) ? { system: Ea(a), message: e.mvAsMz } : u(e.invalidStructure);
+    } : s.validateSystemMv && s.validateSystemMv(a) ? { system: da(a), message: e.mvAsMz } : u(e.invalidStructure);
   } catch {
     return u(e.validateFunctionError);
   }
-}, Ne = async (a, e, s) => A(a, e, {
+}, Ne = (a) => a.system.system !== null, De = async (a, e, s) => A(a, e, {
   readMap: Wa,
   readActors: n,
   readArmors: n,
@@ -150,8 +153,8 @@ const Ya = "bgm", Ha = "se", $a = "me", qa = "bgs", Qa = "img", Za = "audio", ae
   readWeapons: n,
   readAnimations: n,
   readTilesets: n
-}, s, (() => [])), Wa = (a) => a.map, n = (a) => a, fe = (a, e, s, t) => A(a, e, t, s, (() => [])), De = (a, e, s, t) => A(a, e, t, s, (() => null)), A = async (a, e, s, t, r) => {
-  const [m, p, x, k, P, B, U, W, j, V, z, J, E, K] = await Promise.all([va(a, e, ((i) => t.validateCommonEvent(i))), _a(a, e, ((i) => t.validateTroop(i))), Da(a, e, ((i) => t.validateEnemy(i))), Ia(a, e, ((i) => t.validateClass(i))), Ma(a, e, ((i) => t.validateSkill(i))), Aa(a, e, ((i) => t.validateItem(i))), Na(a, e, ((i) => t.validateWeapon(i))), fa(a, e, ((i) => t.validateArmor(i))), Sa(a, e, ((i) => t.validateState(i))), pa(a, e, ((i) => t.validateActor(i))), Fa(a, e, ((i) => t.validateAnimation(i))), ya(a, e, ((i) => t.validateTileset(i))), ga(a, e, ((i) => t.validateMapInfo(i))), Pa(a, e, {
+}, s, (() => [])), Wa = (a) => a.map, n = (a) => a, fe = (a, e, s, t) => A(a, e, t, s, (() => [])), _e = (a, e, s, t) => A(a, e, t, s, (() => null)), A = async (a, e, s, t, r) => {
+  const [m, p, x, k, P, B, U, W, j, V, z, J, E, K] = await Promise.all([va(a, e, ((i) => t.validateCommonEvent(i))), _a(a, e, ((i) => t.validateTroop(i))), fa(a, e, ((i) => t.validateEnemy(i))), Ia(a, e, ((i) => t.validateClass(i))), Ma(a, e, ((i) => t.validateSkill(i))), Aa(a, e, ((i) => t.validateItem(i))), Na(a, e, ((i) => t.validateWeapon(i))), Da(a, e, ((i) => t.validateArmor(i))), Sa(a, e, ((i) => t.validateState(i))), pa(a, e, ((i) => t.validateActor(i))), ya(a, e, ((i) => t.validateAnimation(i))), Fa(a, e, ((i) => t.validateTileset(i))), ga(a, e, ((i) => t.validateMapInfo(i))), Pa(a, e, {
     validateSystemMz: (i) => t.validateSystem(i),
     validateSystemMv: t.validateSystemMV
   })]);
@@ -198,20 +201,20 @@ const Ya = "bgm", Ha = "se", $a = "me", qa = "bgs", Qa = "img", Za = "audio", ae
   } catch {
     return { fileName: a.fileName, success: !1, error: e.dataConvertError, data: t() };
   }
-}, _e = (a) => a, Se = "data", Fe = "js";
+}, Se = (a) => a, ye = "data", Fe = "js";
 export {
-  ge as FILANEME_AUX_ACTOR_TEXTS,
+  Le as FILANEME_AUX_ACTOR_TEXTS,
   T as FILENAME_ACTORS,
   R as FILENAME_ANIMATIONS,
   O as FILENAME_ARMORS,
-  Le as FILENAME_AUX_DICTIONARY,
+  Te as FILENAME_AUX_DICTIONARY,
   N as FILENAME_CLASSES,
-  f as FILENAME_COMMON_EVENTS,
-  D as FILENAME_ENEMIES,
+  D as FILENAME_COMMON_EVENTS,
+  f as FILENAME_ENEMIES,
   _ as FILENAME_ITEMS,
   S as FILENAME_MAP_INFOS,
-  F as FILENAME_SKILLS,
-  y as FILENAME_STATES,
+  y as FILENAME_SKILLS,
+  F as FILENAME_STATES,
   b as FILENAME_SYSTEM,
   v as FILENAME_TILESET,
   g as FILENAME_TROOPS,
@@ -221,7 +224,7 @@ export {
   qa as FOLDER_AUDIO_BGS,
   $a as FOLDER_AUDIO_ME,
   Ha as FOLDER_AUDIO_SE,
-  Se as FOLDER_DATA,
+  ye as FOLDER_DATA,
   Qa as FOLDER_IMG,
   se as FOLDER_IMG_BATTLEBACK1,
   te as FOLDER_IMG_BATTLEBACK2,
@@ -237,37 +240,38 @@ export {
   ue as FOLDER_IMG_TITLES1,
   pe as FOLDER_IMG_TITLES2,
   Fe as FOLDER_JS,
-  _e as defineGameDataReadHandlers,
+  Se as defineGameDataReadHandlers,
   ae as flattenAudioFiles,
   ee as flattenImageFiles,
+  Ne as isRawGameDataStrict,
   Me as makeRawTestDataBundle,
-  Te as rawGameDataToMainDataFileEntries,
+  Oe as rawGameDataToMainDataFileEntries,
   pa as readActorData,
   fe as readAllGameDataWithArrayFallback,
-  De as readAllGameDataWithNullFallback,
-  Ne as readAllRawGameData,
-  Fa as readAnimationData,
-  fa as readArmorData,
+  _e as readAllGameDataWithNullFallback,
+  De as readAllRawGameData,
+  ya as readAnimationData,
+  Da as readArmorData,
   l as readArrayData,
   Ia as readClassData,
   va as readCommonEventData,
-  Da as readEnemyData,
+  fa as readEnemyData,
   Aa as readItemData,
-  Ca as readMapFileFromInfo,
+  Ga as readMapFileFromInfo,
   Ae as readMapFilesFromInfo,
   w as readMapFilesFromInfoEx,
   ga as readMapInfoData,
   Ma as readSkillData,
   Sa as readStateData,
   Pa as readSystemData,
-  ya as readTilesetData,
+  Fa as readTilesetData,
   _a as readTroopData,
   Na as readWeaponData,
   Ie as summarizeReadErrors,
-  Oe as writeBundleData,
-  Re as writeMainData,
-  be as writeMapData,
-  he as writeMapFiles,
+  Re as writeBundleData,
+  be as writeMainData,
+  he as writeMapData,
+  Ge as writeMapFiles,
   Ce as writeRawGameData,
-  Ge as writeSystemData
+  we as writeSystemData
 };

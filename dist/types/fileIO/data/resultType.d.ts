@@ -82,6 +82,7 @@ export interface RawGameEventData<Command extends EventCommandUnknown = EventCom
     troops: ReadArrayResult<Data_TroopUnknonw<Command>>;
     mapFiles: MapBatchReadResult<Data_Map<Command>>;
 }
+export type RawGameDataNullableSystem<Command extends EventCommandUnknown = EventCommand> = RawGameData<Command, Data_System | null>;
 export interface RawGameData<Command extends EventCommandUnknown = EventCommand, System = Data_System> extends ReadAllDataFields, RawGameEventData<Command> {
     actors: ReadArrayResult<Data_Actor>;
     armors: ReadArrayResult<Data_Armor>;
