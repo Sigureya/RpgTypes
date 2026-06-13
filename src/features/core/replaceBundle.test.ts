@@ -22,7 +22,7 @@ import {
 const IMAGE_NAME = "ImageName";
 const VALIABLE_TEXT = "Variables";
 const SWITCHES_TEXT = "Switches";
-
+const SYSTEM_TEXT = "SystemText";
 const MSG_FILEREAD_SUCCESS = "File read successfully";
 
 const NON_REPLACEABLE_TEXT = "Non replaceable text";
@@ -41,6 +41,7 @@ const makeMockDataBundle = (src: TestDataSourceWithNote): RawGameData => {
     nonReplaceableText: NON_REPLACEABLE_TEXT,
     switches: SWITCHES_TEXT,
     variables: VALIABLE_TEXT,
+    systemText: SYSTEM_TEXT,
   };
   return makeRawTestDataBundle(soruce);
 };
@@ -184,7 +185,7 @@ describe("replaceRawDataWithAutoNoteFilter", () => {
       createAssetBundle(),
       extractor,
       handlers,
-      handlers.replaceText,
+      () => undefined,
     );
     expect(result.actors).toEqual(expectedData.actors);
     expect(result.armors).toEqual(expectedData.armors);
