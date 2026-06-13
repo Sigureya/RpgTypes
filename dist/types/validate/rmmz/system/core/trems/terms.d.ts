@@ -1,7 +1,7 @@
 export declare const SCHEMA_SYSTEM_TERMS_CORE: {
     readonly additionalProperties: false;
     readonly type: "object";
-    readonly required: ("messages" | "params" | "commands" | "basic")[];
+    readonly required: ("basic" | "commands" | "messages" | "params")[];
     readonly properties: {
         messages: {
             readonly type: "object";
@@ -251,7 +251,7 @@ export declare const SCHEMA_SYSTEM_TERMS_CORE: {
 export declare const SCHEMA_SYSTEM_TERMS_CORE_MV: {
     readonly additionalProperties: false;
     readonly type: "object";
-    readonly required: ("messages" | "params" | "commands" | "basic")[];
+    readonly required: ("basic" | "commands" | "messages" | "params")[];
     readonly properties: {
         messages: {
             readonly type: "object";

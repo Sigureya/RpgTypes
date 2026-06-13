@@ -1,7 +1,7 @@
 import { DataReadErrorItem, MapBatchReadResult, ReadSystemResult } from '../../../../fileio';
+import { ExtractedSystemTexts } from '../../../../rmmz';
 import { ExtractedCommonEventText, ExtractedBattleEventText, ExtractedMapTexts } from './eventCommand';
 import { ExtractedDataBundle } from './mainData';
-import { ExtractedSystemTexts } from './system';
 export interface ExtractedRawGameDataTexts {
     value: ExtractedRawGameDataTextValue;
     errors: DataReadErrorItem[];
