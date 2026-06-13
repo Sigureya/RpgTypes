@@ -9,8 +9,9 @@ import { generatePluginAnnotationText } from "@sigureya/rmmz-plugin-schema";
 import type { RuntimePluginBundleOptions } from "./manifest";
 import {
   PLUGIN_NAME_HONYAKU_EX,
-  PLUGIN_COMMAND_HONYAKU_SETUP,
+  PLUGIN_COMMAND_HONYAKU_SETUP_DICTIONARY,
   PLUGIN_COMMAND_READ_PLUGINS,
+  PLUGIN_COMMAND_HONYAKU_SETUP_SYSTEM_TEXTS,
 } from "./manifest";
 import type {
   RuntimeDictionaryData,
@@ -19,7 +20,7 @@ import type {
 
 export interface Rmmz_PluginManager_Translation extends PluginManagerTemplate<
   typeof PLUGIN_NAME_HONYAKU_EX,
-  typeof PLUGIN_COMMAND_HONYAKU_SETUP,
+  typeof PLUGIN_COMMAND_HONYAKU_SETUP_DICTIONARY,
   RuntimeDictionaryData<string>
 > {}
 
@@ -41,20 +42,46 @@ export const pluginManifestFiles = (
   };
 };
 
+const createXXBlock = (
+  pluginName: string,
+  commandName: string,
+  data: object,
+) => {
+  return [
+    "(() => {",
+    "const data = ",
+    `${JSON.stringify(data, null, 2)};`,
+    "PluginManager.callCommand(null,",
+    `"${pluginName}",`,
+    `"${commandName}",`,
+    "data",
+    ");",
+    "})();",
+  ].join("\n");
+};
+
 const createDictionarySetupScript = (
   data: RuntimeDictionaryDataWithSystem<string>,
 ): string => {
+  const dic: RuntimeDictionaryData<string> = {
+    actorTexts: data.actorTexts,
+    textDictionary: data.textDictionary,
+    targetNoteKeys: data.targetNoteKeys,
+  };
   return [
     createAnnotation("辞書データプラグイン。JSONの代わりです。"),
     "(function(){",
     `"use strict";`,
-    "const data = ",
-    `${JSON.stringify(data, null, 2)};`,
-    "PluginManager.callCommand(null,",
-    `"${PLUGIN_NAME_HONYAKU_EX}",`,
-    `"${PLUGIN_COMMAND_HONYAKU_SETUP}",`,
-    "data",
-    ");",
+    createXXBlock(
+      PLUGIN_NAME_HONYAKU_EX,
+      PLUGIN_COMMAND_HONYAKU_SETUP_DICTIONARY,
+      dic,
+    ),
+    createXXBlock(
+      PLUGIN_NAME_HONYAKU_EX,
+      PLUGIN_COMMAND_HONYAKU_SETUP_SYSTEM_TEXTS,
+      data.systemTexts,
+    ),
     "})();",
   ].join("\n");
 };
