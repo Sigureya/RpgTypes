@@ -146,7 +146,7 @@ export const makeSystemDataFromMV = (data: Data_SystemMV): Data_System => {
 export const makeTestSystemData = ({
   audio,
   image,
-  text,
+  systemText,
   switches,
   variables,
 }: SystemTestDataSource): Data_System => {
@@ -157,11 +157,11 @@ export const makeTestSystemData = ({
       victoryMe: makeAudioFileParams({ name: audio, volume: 100, pitch: 100 }),
     },
     dataNames: {
-      armorTypes: [text, text],
-      equipTypes: [text, text],
-      elements: [text, text],
-      skillTypes: [text, text],
-      weaponTypes: [text, text],
+      armorTypes: [systemText, systemText],
+      equipTypes: [systemText, systemText],
+      elements: [systemText, systemText],
+      skillTypes: [systemText, systemText],
+      weaponTypes: [systemText, systemText],
       switches: [switches, switches],
       variables: [variables, variables],
     },
@@ -188,10 +188,10 @@ export const makeTestSystemData = ({
       title2Name: image,
     },
     texts: {
-      gameTitle: text,
-      currencyUnit: text,
+      gameTitle: systemText,
+      currencyUnit: systemText,
     },
-    terms: makeTestTerms(text),
+    terms: makeTestTerms(systemText),
     sounds: makeSoundsEx(audio),
   });
 };

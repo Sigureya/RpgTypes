@@ -18,6 +18,7 @@ const TEST_SOURCE: TestRawDataSource = {
   audio: "Audio",
   note: "<Target:Text>",
   message: "ok",
+  systemText: "SystemText",
   nonReplaceableText: "NON",
   switches: "Switch",
   variables: "Variable",
@@ -148,7 +149,7 @@ describe("buildExtractResultWithNotes", () => {
     expect(result.commonEvents).toEqual([]);
     expect(result.troops).toEqual([]);
     expect(result.system).toEqual({
-      gameTitle: TEST_SOURCE.text,
+      gameTitle: TEST_SOURCE.systemText,
       filename: FILENAME_SYSTEM,
       texts: expect.any(Array),
     });

@@ -21,6 +21,7 @@ const SWITCHES_TEXT = "Switches";
 const MSG_FILEREAD_SUCCESS = "File read successfully";
 const NON_REPLACEABLE_TEXT = "Non replaceable text";
 
+const SYSTEM_TEXT = "SystemText";
 const makeNoteText = (text: string, value: string): string => {
   return [`<Text:${text}>`, `<Number:${value}>`].join("\n");
 };
@@ -31,6 +32,7 @@ const makeMockDataBundle = (src: TestDataSourceWithNote): RawGameData => {
     image: src.image,
     audio: src.audio,
     note: src.note,
+    systemText: SYSTEM_TEXT,
     message: MSG_FILEREAD_SUCCESS,
     nonReplaceableText: NON_REPLACEABLE_TEXT,
     switches: SWITCHES_TEXT,

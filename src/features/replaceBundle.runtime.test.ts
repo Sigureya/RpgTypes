@@ -2,6 +2,7 @@ import { describe, expect, test } from "vitest";
 import type { TestDataSourceBundle } from "@RpgTypes/libs";
 import type { RpgDataBundleHasText } from "@RpgTypes/rmmz";
 import {
+  extractTextFromSystem,
   makeActorDataFromTestSoruce,
   makeArmorDataFromTestSoruce,
   makeClassDataFromTestSoruce,
@@ -29,6 +30,7 @@ const MESSAGE_TEXT = "Message";
 const NOTE_TEXT = "<Hexproof:呪禁><Target:Text>";
 const NEW_NOTE_TEXT = ["<Hexproof:呪禁>", "<Target:New-Text>"].join("\n");
 const NEW_TEXT = "New-Text";
+const SYSTEM_TEXT = "SystemText";
 
 const makeTestData = (src: TestDataSourceBundle): RpgDataBundleHasText => ({
   system: makeTestSystemData(src),
@@ -55,11 +57,13 @@ describe("replaceRuntimeData", () => {
       message: MESSAGE_TEXT,
       nonReplaceableText: NON_REPLACEABLE_TEXT,
       note: NOTE_TEXT,
+      systemText: SYSTEM_TEXT,
     });
     const runtimeDictionaryData: RuntimeDictionary<string> = {
       targetNoteKeys: new Set(["Target"]),
       textDictionary: new Map([[TEXT, NEW_TEXT]]),
       actorTextDictionary: new Map(),
+      systemTexts: extractTextFromSystem(input.system),
     };
 
     const result = replaceRuntimeData(input, runtimeDictionaryData);
@@ -72,6 +76,7 @@ describe("replaceRuntimeData", () => {
       message: MESSAGE_TEXT,
       nonReplaceableText: NON_REPLACEABLE_TEXT,
       note: NEW_NOTE_TEXT,
+      systemText: SYSTEM_TEXT,
     });
     expect(result).toEqual(expected);
   });

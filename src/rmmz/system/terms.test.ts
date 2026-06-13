@@ -7,7 +7,7 @@ import { extractTextFromSystem, replaceSystemTextEx } from "./terms";
 const OLD_TEXT = "Old Text";
 const makeTestData = () => {
   return makeTestSystemData({
-    text: OLD_TEXT,
+    systemText: OLD_TEXT,
     audio: "audio",
     image: "image",
     switches: "switches",

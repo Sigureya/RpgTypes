@@ -1,11 +1,17 @@
 import { describe, expect, test } from "vitest";
 import { FILENAME_AUX_DICTIONARY } from "@RpgTypes/fileio";
+import { extractTextFromSystem, makeSystemData } from "@RpgTypes/rmmz";
 import {
   findActorText,
   buildRuntimeDictionary,
   fileEntriesFromDictionary,
 } from "./dic";
-import type { RuntimeDictionaryData, RuntimeDictionary } from "./types";
+import type {
+  RuntimeDictionary,
+  RuntimeDictionaryDataWithSystem,
+} from "./types";
+
+const EMPTY_SYSTEM_TEXTS = extractTextFromSystem(makeSystemData({}));
 
 describe("findActorText", () => {
   const dic: RuntimeDictionary<number> = {
@@ -15,6 +21,7 @@ describe("findActorText", () => {
     ]),
     textDictionary: new Map([[1, "Hello"]]),
     targetNoteKeys: new Set(),
+    systemTexts: EMPTY_SYSTEM_TEXTS,
   };
   test("存在するテキストはそのまま返す", () => {
     const result1 = findActorText("Hello", dic);
@@ -32,10 +39,11 @@ describe("findActorText", () => {
 
 describe("buildRuntimeDictionary", () => {
   test("配列形式の辞書を Set/Map へ変換する", () => {
-    const input: RuntimeDictionaryData<string> = {
+    const input: RuntimeDictionaryDataWithSystem<string> = {
       targetNoteKeys: ["Target", "Target", "Description"],
       textDictionary: [{ key: "hash_A", value: "AAA" }],
       actorTexts: [{ key: "AAA", value: "hash_A" }],
+      systemTexts: EMPTY_SYSTEM_TEXTS,
     };
 
     const result = buildRuntimeDictionary(input);
@@ -48,10 +56,11 @@ describe("buildRuntimeDictionary", () => {
 
 describe("fileEntriesFromDictionary", () => {
   test("Dictionary.json の FileEntry を1件返す", () => {
-    const dic: RuntimeDictionaryData<string> = {
+    const dic: RuntimeDictionaryDataWithSystem<string> = {
       targetNoteKeys: ["Target"],
       textDictionary: [{ key: "hash_AAA", value: "BBB" }],
       actorTexts: [{ key: "AAA", value: "hash_AAA" }],
+      systemTexts: EMPTY_SYSTEM_TEXTS,
     };
 
     const result = fileEntriesFromDictionary(dic);
