@@ -17,7 +17,11 @@ import {
   FILENAME_SYSTEM,
 } from "@RpgTypes/fileio";
 import type { ExtractedTextItem } from "@RpgTypes/libs";
-import type { Data_Actor, MapFileInfo } from "@RpgTypes/rmmz";
+import type {
+  Data_Actor,
+  ExtractedSystemTexts,
+  MapFileInfo,
+} from "@RpgTypes/rmmz";
 import { createActorControlChars } from "@RpgTypes/rmmz";
 import type { PluginParamExtractionOutput } from "@sigureya/rmmz-plugin-schema";
 import { extractTextFromRawGameData } from "./bundle";
@@ -31,7 +35,6 @@ import type {
   TextCommandParameter,
   EventContainerExtractor,
   ExtractedMapTexts,
-  ExtractedSystemTexts,
   SystemTexts,
 } from "./text";
 import {
