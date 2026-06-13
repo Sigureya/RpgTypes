@@ -27,7 +27,6 @@ export const buildRuntimeDictionary = <T>(
   actorTextDictionary: new Map(
     dic.actorTexts.map(({ key, value }) => [key, value]),
   ),
-  systemTexts: dic.systemTexts,
 });
 
 export const fileEntriesFromDictionary = (
