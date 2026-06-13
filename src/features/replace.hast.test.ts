@@ -8,6 +8,7 @@ import type {
 import { makeRawTestDataBundle } from "@RpgTypes/fileio";
 import type { TestDataSourceWithNote } from "@RpgTypes/libs";
 import type { Data_CommonEvent, Data_Map, Data_Troop } from "@RpgTypes/rmmz";
+import { extractTextFromSystem, makeTestSystemData } from "@RpgTypes/rmmz";
 import type {
   GameDataReplaceOutput,
   RuntimeDictionaryData,
@@ -225,6 +226,62 @@ describe("replaceDataWithHash", () => {
       replaceDataWithHash(input, extractor, fn);
       expect(fn).toHaveBeenCalledWith(" AAA");
       expect(fn).not.toHaveBeenCalledWith(" BBB");
+    });
+  });
+  describe("system のテキスト抽出に対応しているか", () => {
+    const SYSTEM_TEXT = "SystemText";
+    const input: ReplaceRawDataContext = {
+      assetBundle: createAssetBundle(),
+      dictionary: new Map(),
+      textKeys: new Set(),
+      data: {
+        system: {
+          message: "",
+          system: makeTestSystemData({
+            text: SYSTEM_TEXT,
+            audio: AUDIO_NAME,
+            image: IMAGE_NAME,
+            switches: SWITCHES_TEXT,
+            variables: VARIABLE_TEXT,
+          }),
+        },
+        mapFiles: {
+          info: { success: true },
+          validMaps: [],
+          invalidMaps: [],
+        },
+        actors: { data: [], error: "", success: true, fileName: "" },
+        armors: { data: [], error: "", success: true, fileName: "" },
+        classes: { data: [], error: "", success: true, fileName: "" },
+        commonEvents: { data: [], error: "", success: true, fileName: "" },
+        enemies: { data: [], error: "", success: true, fileName: "" },
+        items: { data: [], error: "", success: true, fileName: "" },
+        mapInfos: { data: [], error: "", success: true, fileName: "" },
+        skills: { data: [], error: "", success: true, fileName: "" },
+        states: { data: [], error: "", success: true, fileName: "" },
+        troops: { data: [], error: "", success: true, fileName: "" },
+        weapons: { data: [], error: "", success: true, fileName: "" },
+        tilesets: { data: [], error: "", success: true, fileName: "" },
+        animations: { data: [], error: "", success: true, fileName: "" },
+      },
+    };
+    test.skip("データが空なのでハッシュは呼び出されない", () => {
+      const fn = vi.fn((text: string) => `hash_${text}`);
+      replaceDataWithHash(input, createExtractor(), fn);
+      expect(fn).not.toHaveBeenCalled();
+    });
+    test("イベントコンテナの抽出は動かないこと", () => {
+      const extractor = createExtractor();
+      replaceDataWithHash(input, extractor, createHash);
+      expect(extractor.extractCommonEventText).not.toHaveBeenCalled();
+      expect(extractor.extractBattleText).not.toHaveBeenCalled();
+      expect(extractor.extractMapTexts).not.toHaveBeenCalled();
+    });
+    test("system のテキスト抽出関数が呼び出されること", () => {
+      const expected = extractTextFromSystem(input.data.system.system);
+
+      const result = replaceDataWithHash(input, createExtractor(), createHash);
+      expect(result.aux.systemTexts).toEqual(expected);
     });
   });
 });
