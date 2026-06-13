@@ -265,7 +265,7 @@ describe("replaceDataWithHash", () => {
         animations: { data: [], error: "", success: true, fileName: "" },
       },
     };
-    test.skip("データが空なのでハッシュは呼び出されない", () => {
+    test("データが空なのでハッシュは呼び出されない", () => {
       const fn = vi.fn((text: string) => `hash_${text}`);
       replaceDataWithHash(input, createExtractor(), fn);
       expect(fn).not.toHaveBeenCalled();

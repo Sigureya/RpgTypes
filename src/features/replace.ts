@@ -1,12 +1,12 @@
 import type { FileEntry, FileEntryBundle, RawGameData } from "@RpgTypes/fileio";
 import { rawGameDataToMainDataFileEntries } from "@RpgTypes/fileio";
-import {
-  extractTextFromSystem,
-  type Data_Map,
-  type NormalizedEventCommand,
-  type NoteReadResult,
-  type RpgDataBundleHasText,
+import type {
+  Data_Map,
+  NormalizedEventCommand,
+  NoteReadResult,
+  RpgDataBundleHasText,
 } from "@RpgTypes/rmmz";
+import { extractTextFromSystem, replaceSystemTextEx } from "@RpgTypes/rmmz";
 import type { RuntimeDictionary, GameDataReplaceOutput } from "./core/extract";
 import { fileEntriesFromDictionary, pluginManifestFiles } from "./core/extract";
 import {
@@ -22,7 +22,6 @@ import {
   replaceSkillText,
   replaceStateText,
   replaceWeaponText,
-  replaceSystemText,
 } from "./core/replace";
 import type { RpgDataReplaceHandlers } from "./core/replace/types";
 import { replaceRawDataWithAutoNoteFilter } from "./core/replaceBundle";
@@ -71,6 +70,7 @@ export const replaceRuntimeData = (
     },
   };
   return {
+    system: replaceSystemTextEx(data.system, dic.systemTexts),
     actors: data.actors.map((actor) => {
       return replaceActorText(actor, handlers);
     }),
@@ -97,9 +97,6 @@ export const replaceRuntimeData = (
     }),
     weapons: data.weapons.map((item) => {
       return replaceWeaponText(item, handlers);
-    }),
-    system: replaceSystemText(data.system, (text) => {
-      return dic.textDictionary.get(text);
     }),
     commonEvents: data.commonEvents.map((item) => {
       return replaceCommonEventData(item, handlers);
