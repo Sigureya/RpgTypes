@@ -1,6 +1,7 @@
 import { describe, expect, test, vi } from "vitest";
 import { FILENAME_AUX_DICTIONARY } from "@RpgTypes/fileio";
 import type { KeyValuePairEx } from "@RpgTypes/libs";
+import { extractTextFromSystem, makeSystemData } from "@RpgTypes/rmmz";
 import { createRuntimeDictionaryData, textKeysSN } from "./createDictionary";
 import {
   findActorText,
@@ -8,10 +9,12 @@ import {
   fileEntriesFromDictionary,
 } from "./dictionary/dic";
 import type {
-  RuntimeDictionaryData,
+  RuntimeDictionaryDataWithSystem,
   RuntimeDictionary,
 } from "./dictionary/types";
 import type { SummarizedNote, SummarizedNoteValue } from "./note";
+
+const EMPTY_SYSTEM_TEXTS = extractTextFromSystem(makeSystemData({}));
 
 const noteValue = (value: string, id: number): SummarizedNoteValue => ({
   value,
@@ -83,6 +86,7 @@ describe("findActorText", () => {
     ]),
     textDictionary: new Map([[1, "Hello"]]),
     targetNoteKeys: new Set(),
+    systemTexts: EMPTY_SYSTEM_TEXTS,
   };
 
   test("returns existing text as is", () => {
@@ -103,10 +107,11 @@ describe("findActorText", () => {
 
 describe("buildRuntimeDictionary", () => {
   test("converts array dictionary to Set/Map", () => {
-    const input: RuntimeDictionaryData<string> = {
+    const input: RuntimeDictionaryDataWithSystem<string> = {
       targetNoteKeys: ["Target", "Target", "Description"],
       textDictionary: [{ key: "hash_A", value: "AAA" }],
       actorTexts: [{ key: "AAA", value: "hash_A" }],
+      systemTexts: EMPTY_SYSTEM_TEXTS,
     };
 
     const result = buildRuntimeDictionary(input);
@@ -119,10 +124,11 @@ describe("buildRuntimeDictionary", () => {
 
 describe("fileEntriesFromDictionary", () => {
   test("returns one FileEntry for Dictionary.json", () => {
-    const dic: RuntimeDictionaryData<string> = {
+    const dic: RuntimeDictionaryDataWithSystem<string> = {
       targetNoteKeys: ["Target"],
       textDictionary: [{ key: "hash_AAA", value: "BBB" }],
       actorTexts: [{ key: "AAA", value: "hash_AAA" }],
+      systemTexts: EMPTY_SYSTEM_TEXTS,
     };
 
     const result = fileEntriesFromDictionary(dic);

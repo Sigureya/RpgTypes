@@ -1,6 +1,9 @@
 import type { FileEntry } from "@RpgTypes/fileio";
 import { FILENAME_AUX_DICTIONARY } from "@RpgTypes/fileio";
-import type { RuntimeDictionary, RuntimeDictionaryData } from "./types";
+import type {
+  RuntimeDictionary,
+  RuntimeDictionaryDataWithSystem,
+} from "./types";
 
 export const findActorText = <T>(
   text: string,
@@ -15,7 +18,7 @@ export const findActorText = <T>(
 };
 
 export const buildRuntimeDictionary = <T>(
-  dic: RuntimeDictionaryData<T>,
+  dic: RuntimeDictionaryDataWithSystem<T>,
 ): RuntimeDictionary<T> => ({
   targetNoteKeys: new Set(dic.targetNoteKeys),
   textDictionary: new Map(
@@ -24,10 +27,11 @@ export const buildRuntimeDictionary = <T>(
   actorTextDictionary: new Map(
     dic.actorTexts.map(({ key, value }) => [key, value]),
   ),
+  systemTexts: dic.systemTexts,
 });
 
 export const fileEntriesFromDictionary = (
-  dic: RuntimeDictionaryData<unknown>,
+  dic: RuntimeDictionaryDataWithSystem<unknown>,
 ): FileEntry[] => {
   return [{ data: dic, filename: FILENAME_AUX_DICTIONARY }];
 };

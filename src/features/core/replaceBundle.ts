@@ -31,6 +31,7 @@ import {
 export const replaceRawDataBundle = (
   data: RawGameData,
   handlers: RpgDataReplaceHandlers,
+  systemReplaceFn: (text: string) => string | undefined,
 ): RawGameData<NormalizedEventCommand> => {
   return {
     tilesets: data.tilesets,
@@ -62,7 +63,7 @@ export const replaceRawDataBundle = (
     ),
     system: {
       message: data.system.message,
-      system: replaceSystemText(data.system.system, handlers.replaceText),
+      system: replaceSystemText(data.system.system, systemReplaceFn),
     },
     troops: mapReadArrayResult(data.troops, (item) =>
       replaceTroopData(item, handlers),
@@ -99,6 +100,7 @@ export const replaceRawDataWithAutoNoteFilter = (
   assetBundle: AssetFilesBundle,
   extractor: EventContainerExtractor,
   handlers: RpgDataReplaceHandlers,
+  systemReplaceFn: (text: string) => string | undefined,
 ): {
   data: RawGameData<NormalizedEventCommand>;
   note: RawGameDataNoteNormalization;
@@ -120,7 +122,7 @@ export const replaceRawDataWithAutoNoteFilter = (
 
   // 置換処理を実行
   return {
-    data: replaceRawDataBundle(data, filteredHandlers),
+    data: replaceRawDataBundle(data, filteredHandlers, systemReplaceFn),
     note: normalizedNote,
   };
 };

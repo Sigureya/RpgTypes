@@ -125,7 +125,11 @@ describe("replaceRawDataBundle", () => {
     const handlers = createHandlers({
       newText: "BBB",
     });
-    const result = replaceRawDataBundle(baseData, handlers);
+    const result = replaceRawDataBundle(
+      baseData,
+      handlers,
+      handlers.replaceText,
+    );
     // エラーが長くなるので1個ずつ比較
     expect(result.actors).toEqual(expectedData.actors);
     expect(result.armors).toEqual(expectedData.armors);
@@ -145,7 +149,7 @@ describe("replaceRawDataBundle", () => {
     const handlers = createHandlers({
       newText: "BBB",
     });
-    replaceRawDataBundle(baseData, handlers);
+    replaceRawDataBundle(baseData, handlers, handlers.replaceText);
     expect(handlers.replaceText).toHaveBeenCalledWith("AAA");
     expect(handlers.replaceText).not.toHaveBeenCalledWith(noteText);
     expect(handlers.replaceText).not.toHaveBeenCalledWith(IMAGE_NAME);
@@ -180,6 +184,7 @@ describe("replaceRawDataWithAutoNoteFilter", () => {
       createAssetBundle(),
       extractor,
       handlers,
+      handlers.replaceText,
     );
     expect(result.actors).toEqual(expectedData.actors);
     expect(result.armors).toEqual(expectedData.armors);
@@ -203,6 +208,7 @@ describe("replaceRawDataWithAutoNoteFilter", () => {
       createAssetBundle(),
       extractor,
       handlers,
+      handlers.replaceText,
     );
     expect(handlers.replaceText).toHaveBeenCalledWith("AAA");
     expect(handlers.replaceText).not.toHaveBeenCalledWith(noteText);

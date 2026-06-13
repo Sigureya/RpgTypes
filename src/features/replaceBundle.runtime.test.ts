@@ -2,6 +2,7 @@ import { describe, expect, test } from "vitest";
 import type { TestDataSourceBundle } from "@RpgTypes/libs";
 import type { RpgDataBundleHasText } from "@RpgTypes/rmmz";
 import {
+  extractTextFromSystem,
   makeActorDataFromTestSoruce,
   makeArmorDataFromTestSoruce,
   makeClassDataFromTestSoruce,
@@ -60,6 +61,7 @@ describe("replaceRuntimeData", () => {
       targetNoteKeys: new Set(["Target"]),
       textDictionary: new Map([[TEXT, NEW_TEXT]]),
       actorTextDictionary: new Map(),
+      systemTexts: extractTextFromSystem(input.system),
     };
 
     const result = replaceRuntimeData(input, runtimeDictionaryData);

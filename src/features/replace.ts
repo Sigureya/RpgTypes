@@ -132,6 +132,7 @@ export const replaceDataDirect = (
     context.assetBundle,
     extractor,
     handlers,
+    (text) => context.dictionary.get(text),
   );
   return result.data;
 };
@@ -185,6 +186,7 @@ export const replaceDataWithHash = <T extends string>(
     assetBundle,
     extractor,
     handlers,
+    (text) => text.trimEnd(),
   );
   const dicX = createRuntimeDictionaryData(
     data.actors.data,
