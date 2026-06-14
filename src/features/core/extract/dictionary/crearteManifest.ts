@@ -1,5 +1,5 @@
 import type { TextFileEntry } from "@RpgTypes/fileio";
-import type { ExtractedSystemTexts } from "@RpgTypes/rmmz";
+import type { SystemTexts } from "@RpgTypes/rmmz";
 import type {
   SchemaStringifyHandlers,
   PluginManifestData,
@@ -27,7 +27,7 @@ export type Rmmz_PluginManager_Translation = PluginManagerTemplate<
   PluginManagerTemplate<
     typeof PLUGIN_NAME_HONYAKU_EX,
     typeof PLUGIN_COMMAND_HONYAKU_SETUP_SYSTEM_TEXTS,
-    ExtractedSystemTexts
+    SystemTexts
   >;
 
 export const pluginManifestFiles = (

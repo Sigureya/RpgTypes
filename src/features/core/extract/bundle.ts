@@ -8,7 +8,7 @@ import type {
 } from "@RpgTypes/fileio";
 import { FILENAME_SYSTEM } from "@RpgTypes/fileio";
 import type {
-  ExtractedSystemTexts,
+  SystemTexts,
   Data_Armor,
   Data_CommonEvent,
   Data_Troop,
@@ -91,7 +91,7 @@ export const extractTextFromRawGameData = (
 
 const systemXX = (
   data: ReadSystemResult<Data_System>,
-): ReadSystemResult<ExtractedSystemTexts> => {
+): ReadSystemResult<SystemTexts> => {
   if (data.system === null) {
     return {
       message: data.message,

@@ -1,9 +1,9 @@
 import { normarizeText } from "@RpgTypes/libs";
-import type { ExtractedSystemTexts } from "@RpgTypes/rmmz";
+import type { SystemTexts } from "@RpgTypes/rmmz";
 import type { ExtractedSystemKinds, SystemKinds } from "./types";
 
 export const convertSystemTypes = <UUID>(
-  system: ExtractedSystemTexts,
+  system: SystemTexts,
   filename: string,
   kinds: SystemKinds,
   uuidGen: (text: string) => UUID,

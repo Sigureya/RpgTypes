@@ -5,7 +5,11 @@ import type {
   SystemLabels_TermsParamNames,
 } from "./terms";
 
-export interface ExtractedSystemTexts {
+/**
+ * @deprecated Use SystemTexts instead. This type is only exported for backward compatibility and will be removed in a future major version.
+ */
+export type ExtractedSystemTexts = SystemTexts;
+export interface SystemTexts {
   gameTitle: string;
   currencyUnit: string;
   equipTypes: string[];

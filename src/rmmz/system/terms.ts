@@ -7,13 +7,11 @@ import {
   makeMenuCommandsEnabledFromArray,
   makeSoundsObject,
 } from "./core";
-import type { ExtractedSystemTexts } from "./core/types";
+import type { SystemTexts } from "./core/types";
 import { makeSystemData } from "./makeSystem";
 import type { Data_System } from "./system";
 
-export const extractTextFromSystem = (
-  system: Data_System,
-): ExtractedSystemTexts => {
+export const extractTextFromSystem = (system: Data_System): SystemTexts => {
   return {
     gameTitle: system.gameTitle,
     currencyUnit: system.currencyUnit,
@@ -33,7 +31,7 @@ export const extractTextFromSystem = (
 
 export const replaceSystemTextEx = (
   system: Data_System,
-  texts: ExtractedSystemTexts,
+  texts: SystemTexts,
 ): Data_System => {
   return makeSystemData({
     locale: system.locale,
