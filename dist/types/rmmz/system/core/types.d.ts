@@ -1,5 +1,5 @@
 import { Terms_Basic, Terms_GameCommands, Terms_Messages, SystemLabels_TermsParamNames } from './terms';
-export interface ExtractedSystemTexts {
+export interface SystemTexts {
     gameTitle: string;
     currencyUnit: string;
     equipTypes: string[];
