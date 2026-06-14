@@ -4197,5 +4197,1493 @@ var r = e(t(((e, t) => {
 		}
 		return c.errors = null, !0;
 	}
-}))()), i = (e) => (0, r.default)(e);
-export { i as isDataSystem };
+}))()), i = (e) => (0, r.default)(e), a = e(t(((e, t) => {
+	function n(e, { instancePath: t = "", parentData: r, parentDataProperty: i, rootData: a = e } = {}) {
+		if (!e || typeof e != "object" || Array.isArray(e)) return n.errors = [{
+			instancePath: t,
+			schemaPath: "#/type",
+			keyword: "type",
+			params: { type: "object" },
+			message: "must be object"
+		}], !1;
+		{
+			let r;
+			if (e.gameTitle === void 0 && (r = "gameTitle") || e.currencyUnit === void 0 && (r = "currencyUnit") || e.equipTypes === void 0 && (r = "equipTypes") || e.armorTypes === void 0 && (r = "armorTypes") || e.weaponTypes === void 0 && (r = "weaponTypes") || e.elements === void 0 && (r = "elements") || e.skillTypes === void 0 && (r = "skillTypes") || e.terms === void 0 && (r = "terms")) return n.errors = [{
+				instancePath: t,
+				schemaPath: "#/required",
+				keyword: "required",
+				params: { missingProperty: r },
+				message: "must have required property '" + r + "'"
+			}], !1;
+			if (e.gameTitle !== void 0) {
+				if (typeof e.gameTitle != "string") return n.errors = [{
+					instancePath: t + "/gameTitle",
+					schemaPath: "#/properties/gameTitle/type",
+					keyword: "type",
+					params: { type: "string" },
+					message: "must be string"
+				}], !1;
+				var o = !0;
+			} else o = !0;
+			if (o) {
+				if (e.currencyUnit !== void 0) {
+					if (typeof e.currencyUnit != "string") return n.errors = [{
+						instancePath: t + "/currencyUnit",
+						schemaPath: "#/properties/currencyUnit/type",
+						keyword: "type",
+						params: { type: "string" },
+						message: "must be string"
+					}], !1;
+					o = !0;
+				} else o = !0;
+				if (o) {
+					if (e.equipTypes !== void 0) {
+						let r = e.equipTypes;
+						if (!Array.isArray(r)) return n.errors = [{
+							instancePath: t + "/equipTypes",
+							schemaPath: "#/properties/equipTypes/type",
+							keyword: "type",
+							params: { type: "array" },
+							message: "must be array"
+						}], !1;
+						{
+							let e = r.length;
+							for (let i = 0; i < e; i++) if (typeof r[i] != "string") return n.errors = [{
+								instancePath: t + "/equipTypes/" + i,
+								schemaPath: "#/properties/equipTypes/items/type",
+								keyword: "type",
+								params: { type: "string" },
+								message: "must be string"
+							}], !1;
+						}
+						o = !0;
+					} else o = !0;
+					if (o) {
+						if (e.armorTypes !== void 0) {
+							let r = e.armorTypes;
+							if (!Array.isArray(r)) return n.errors = [{
+								instancePath: t + "/armorTypes",
+								schemaPath: "#/properties/armorTypes/type",
+								keyword: "type",
+								params: { type: "array" },
+								message: "must be array"
+							}], !1;
+							{
+								let e = r.length;
+								for (let i = 0; i < e; i++) if (typeof r[i] != "string") return n.errors = [{
+									instancePath: t + "/armorTypes/" + i,
+									schemaPath: "#/properties/armorTypes/items/type",
+									keyword: "type",
+									params: { type: "string" },
+									message: "must be string"
+								}], !1;
+							}
+							o = !0;
+						} else o = !0;
+						if (o) {
+							if (e.weaponTypes !== void 0) {
+								let r = e.weaponTypes;
+								if (!Array.isArray(r)) return n.errors = [{
+									instancePath: t + "/weaponTypes",
+									schemaPath: "#/properties/weaponTypes/type",
+									keyword: "type",
+									params: { type: "array" },
+									message: "must be array"
+								}], !1;
+								{
+									let e = r.length;
+									for (let i = 0; i < e; i++) if (typeof r[i] != "string") return n.errors = [{
+										instancePath: t + "/weaponTypes/" + i,
+										schemaPath: "#/properties/weaponTypes/items/type",
+										keyword: "type",
+										params: { type: "string" },
+										message: "must be string"
+									}], !1;
+								}
+								o = !0;
+							} else o = !0;
+							if (o) {
+								if (e.elements !== void 0) {
+									let r = e.elements;
+									if (!Array.isArray(r)) return n.errors = [{
+										instancePath: t + "/elements",
+										schemaPath: "#/properties/elements/type",
+										keyword: "type",
+										params: { type: "array" },
+										message: "must be array"
+									}], !1;
+									{
+										let e = r.length;
+										for (let i = 0; i < e; i++) if (typeof r[i] != "string") return n.errors = [{
+											instancePath: t + "/elements/" + i,
+											schemaPath: "#/properties/elements/items/type",
+											keyword: "type",
+											params: { type: "string" },
+											message: "must be string"
+										}], !1;
+									}
+									o = !0;
+								} else o = !0;
+								if (o) {
+									if (e.skillTypes !== void 0) {
+										let r = e.skillTypes;
+										if (!Array.isArray(r)) return n.errors = [{
+											instancePath: t + "/skillTypes",
+											schemaPath: "#/properties/skillTypes/type",
+											keyword: "type",
+											params: { type: "array" },
+											message: "must be array"
+										}], !1;
+										{
+											let e = r.length;
+											for (let i = 0; i < e; i++) if (typeof r[i] != "string") return n.errors = [{
+												instancePath: t + "/skillTypes/" + i,
+												schemaPath: "#/properties/skillTypes/items/type",
+												keyword: "type",
+												params: { type: "string" },
+												message: "must be string"
+											}], !1;
+										}
+										o = !0;
+									} else o = !0;
+									if (o) if (e.terms !== void 0) {
+										let r = e.terms;
+										if (!r || typeof r != "object" || Array.isArray(r)) return n.errors = [{
+											instancePath: t + "/terms",
+											schemaPath: "#/properties/terms/type",
+											keyword: "type",
+											params: { type: "object" },
+											message: "must be object"
+										}], !1;
+										{
+											let e;
+											if (r.basic === void 0 && (e = "basic") || r.commands === void 0 && (e = "commands") || r.messages === void 0 && (e = "messages") || r.params === void 0 && (e = "params")) return n.errors = [{
+												instancePath: t + "/terms",
+												schemaPath: "#/properties/terms/required",
+												keyword: "required",
+												params: { missingProperty: e },
+												message: "must have required property '" + e + "'"
+											}], !1;
+											if (r.basic !== void 0) {
+												let e = r.basic;
+												if (!e || typeof e != "object" || Array.isArray(e)) return n.errors = [{
+													instancePath: t + "/terms/basic",
+													schemaPath: "#/properties/terms/properties/basic/type",
+													keyword: "type",
+													params: { type: "object" },
+													message: "must be object"
+												}], !1;
+												{
+													let r;
+													if (e.level === void 0 && (r = "level") || e.hp === void 0 && (r = "hp") || e.mp === void 0 && (r = "mp") || e.tp === void 0 && (r = "tp") || e.levelA === void 0 && (r = "levelA") || e.hpA === void 0 && (r = "hpA") || e.mpA === void 0 && (r = "mpA") || e.tpA === void 0 && (r = "tpA") || e.experience === void 0 && (r = "experience") || e.exp === void 0 && (r = "exp")) return n.errors = [{
+														instancePath: t + "/terms/basic",
+														schemaPath: "#/properties/terms/properties/basic/required",
+														keyword: "required",
+														params: { missingProperty: r },
+														message: "must have required property '" + r + "'"
+													}], !1;
+													if (e.level !== void 0) {
+														if (typeof e.level != "string") return n.errors = [{
+															instancePath: t + "/terms/basic/level",
+															schemaPath: "#/properties/terms/properties/basic/properties/level/type",
+															keyword: "type",
+															params: { type: "string" },
+															message: "must be string"
+														}], !1;
+														var s = !0;
+													} else s = !0;
+													if (s) {
+														if (e.hp !== void 0) {
+															if (typeof e.hp != "string") return n.errors = [{
+																instancePath: t + "/terms/basic/hp",
+																schemaPath: "#/properties/terms/properties/basic/properties/hp/type",
+																keyword: "type",
+																params: { type: "string" },
+																message: "must be string"
+															}], !1;
+															s = !0;
+														} else s = !0;
+														if (s) {
+															if (e.mp !== void 0) {
+																if (typeof e.mp != "string") return n.errors = [{
+																	instancePath: t + "/terms/basic/mp",
+																	schemaPath: "#/properties/terms/properties/basic/properties/mp/type",
+																	keyword: "type",
+																	params: { type: "string" },
+																	message: "must be string"
+																}], !1;
+																s = !0;
+															} else s = !0;
+															if (s) {
+																if (e.tp !== void 0) {
+																	if (typeof e.tp != "string") return n.errors = [{
+																		instancePath: t + "/terms/basic/tp",
+																		schemaPath: "#/properties/terms/properties/basic/properties/tp/type",
+																		keyword: "type",
+																		params: { type: "string" },
+																		message: "must be string"
+																	}], !1;
+																	s = !0;
+																} else s = !0;
+																if (s) {
+																	if (e.levelA !== void 0) {
+																		if (typeof e.levelA != "string") return n.errors = [{
+																			instancePath: t + "/terms/basic/levelA",
+																			schemaPath: "#/properties/terms/properties/basic/properties/levelA/type",
+																			keyword: "type",
+																			params: { type: "string" },
+																			message: "must be string"
+																		}], !1;
+																		s = !0;
+																	} else s = !0;
+																	if (s) {
+																		if (e.hpA !== void 0) {
+																			if (typeof e.hpA != "string") return n.errors = [{
+																				instancePath: t + "/terms/basic/hpA",
+																				schemaPath: "#/properties/terms/properties/basic/properties/hpA/type",
+																				keyword: "type",
+																				params: { type: "string" },
+																				message: "must be string"
+																			}], !1;
+																			s = !0;
+																		} else s = !0;
+																		if (s) {
+																			if (e.mpA !== void 0) {
+																				if (typeof e.mpA != "string") return n.errors = [{
+																					instancePath: t + "/terms/basic/mpA",
+																					schemaPath: "#/properties/terms/properties/basic/properties/mpA/type",
+																					keyword: "type",
+																					params: { type: "string" },
+																					message: "must be string"
+																				}], !1;
+																				s = !0;
+																			} else s = !0;
+																			if (s) {
+																				if (e.tpA !== void 0) {
+																					if (typeof e.tpA != "string") return n.errors = [{
+																						instancePath: t + "/terms/basic/tpA",
+																						schemaPath: "#/properties/terms/properties/basic/properties/tpA/type",
+																						keyword: "type",
+																						params: { type: "string" },
+																						message: "must be string"
+																					}], !1;
+																					s = !0;
+																				} else s = !0;
+																				if (s) {
+																					if (e.experience !== void 0) {
+																						if (typeof e.experience != "string") return n.errors = [{
+																							instancePath: t + "/terms/basic/experience",
+																							schemaPath: "#/properties/terms/properties/basic/properties/experience/type",
+																							keyword: "type",
+																							params: { type: "string" },
+																							message: "must be string"
+																						}], !1;
+																						s = !0;
+																					} else s = !0;
+																					if (s) if (e.exp !== void 0) {
+																						if (typeof e.exp != "string") return n.errors = [{
+																							instancePath: t + "/terms/basic/exp",
+																							schemaPath: "#/properties/terms/properties/basic/properties/exp/type",
+																							keyword: "type",
+																							params: { type: "string" },
+																							message: "must be string"
+																						}], !1;
+																						s = !0;
+																					} else s = !0;
+																				}
+																			}
+																		}
+																	}
+																}
+															}
+														}
+													}
+												}
+												var c = !0;
+											} else c = !0;
+											if (c) {
+												if (r.commands !== void 0) {
+													let e = r.commands;
+													if (!e || typeof e != "object" || Array.isArray(e)) return n.errors = [{
+														instancePath: t + "/terms/commands",
+														schemaPath: "#/properties/terms/properties/commands/type",
+														keyword: "type",
+														params: { type: "object" },
+														message: "must be object"
+													}], !1;
+													{
+														let r;
+														if (e.fight === void 0 && (r = "fight") || e.escape === void 0 && (r = "escape") || e.attack === void 0 && (r = "attack") || e.guard === void 0 && (r = "guard") || e.item === void 0 && (r = "item") || e.skill === void 0 && (r = "skill") || e.equip === void 0 && (r = "equip") || e.status === void 0 && (r = "status") || e.formation === void 0 && (r = "formation") || e.save === void 0 && (r = "save") || e.gameEnd === void 0 && (r = "gameEnd") || e.options === void 0 && (r = "options") || e.weapon === void 0 && (r = "weapon") || e.armor === void 0 && (r = "armor") || e.cancel === void 0 && (r = "cancel") || e.clear === void 0 && (r = "clear") || e.continueGame === void 0 && (r = "continueGame") || e.toTitle === void 0 && (r = "toTitle") || e.sell === void 0 && (r = "sell") || e.keyItem === void 0 && (r = "keyItem") || e.equip2 === void 0 && (r = "equip2") || e.optimize === void 0 && (r = "optimize") || e.newGame === void 0 && (r = "newGame") || e.buy === void 0 && (r = "buy")) return n.errors = [{
+															instancePath: t + "/terms/commands",
+															schemaPath: "#/properties/terms/properties/commands/required",
+															keyword: "required",
+															params: { missingProperty: r },
+															message: "must have required property '" + r + "'"
+														}], !1;
+														if (e.fight !== void 0) {
+															if (typeof e.fight != "string") return n.errors = [{
+																instancePath: t + "/terms/commands/fight",
+																schemaPath: "#/properties/terms/properties/commands/properties/fight/type",
+																keyword: "type",
+																params: { type: "string" },
+																message: "must be string"
+															}], !1;
+															var l = !0;
+														} else l = !0;
+														if (l) {
+															if (e.escape !== void 0) {
+																if (typeof e.escape != "string") return n.errors = [{
+																	instancePath: t + "/terms/commands/escape",
+																	schemaPath: "#/properties/terms/properties/commands/properties/escape/type",
+																	keyword: "type",
+																	params: { type: "string" },
+																	message: "must be string"
+																}], !1;
+																l = !0;
+															} else l = !0;
+															if (l) {
+																if (e.attack !== void 0) {
+																	if (typeof e.attack != "string") return n.errors = [{
+																		instancePath: t + "/terms/commands/attack",
+																		schemaPath: "#/properties/terms/properties/commands/properties/attack/type",
+																		keyword: "type",
+																		params: { type: "string" },
+																		message: "must be string"
+																	}], !1;
+																	l = !0;
+																} else l = !0;
+																if (l) {
+																	if (e.guard !== void 0) {
+																		if (typeof e.guard != "string") return n.errors = [{
+																			instancePath: t + "/terms/commands/guard",
+																			schemaPath: "#/properties/terms/properties/commands/properties/guard/type",
+																			keyword: "type",
+																			params: { type: "string" },
+																			message: "must be string"
+																		}], !1;
+																		l = !0;
+																	} else l = !0;
+																	if (l) {
+																		if (e.item !== void 0) {
+																			if (typeof e.item != "string") return n.errors = [{
+																				instancePath: t + "/terms/commands/item",
+																				schemaPath: "#/properties/terms/properties/commands/properties/item/type",
+																				keyword: "type",
+																				params: { type: "string" },
+																				message: "must be string"
+																			}], !1;
+																			l = !0;
+																		} else l = !0;
+																		if (l) {
+																			if (e.skill !== void 0) {
+																				if (typeof e.skill != "string") return n.errors = [{
+																					instancePath: t + "/terms/commands/skill",
+																					schemaPath: "#/properties/terms/properties/commands/properties/skill/type",
+																					keyword: "type",
+																					params: { type: "string" },
+																					message: "must be string"
+																				}], !1;
+																				l = !0;
+																			} else l = !0;
+																			if (l) {
+																				if (e.equip !== void 0) {
+																					if (typeof e.equip != "string") return n.errors = [{
+																						instancePath: t + "/terms/commands/equip",
+																						schemaPath: "#/properties/terms/properties/commands/properties/equip/type",
+																						keyword: "type",
+																						params: { type: "string" },
+																						message: "must be string"
+																					}], !1;
+																					l = !0;
+																				} else l = !0;
+																				if (l) {
+																					if (e.status !== void 0) {
+																						if (typeof e.status != "string") return n.errors = [{
+																							instancePath: t + "/terms/commands/status",
+																							schemaPath: "#/properties/terms/properties/commands/properties/status/type",
+																							keyword: "type",
+																							params: { type: "string" },
+																							message: "must be string"
+																						}], !1;
+																						l = !0;
+																					} else l = !0;
+																					if (l) {
+																						if (e.formation !== void 0) {
+																							if (typeof e.formation != "string") return n.errors = [{
+																								instancePath: t + "/terms/commands/formation",
+																								schemaPath: "#/properties/terms/properties/commands/properties/formation/type",
+																								keyword: "type",
+																								params: { type: "string" },
+																								message: "must be string"
+																							}], !1;
+																							l = !0;
+																						} else l = !0;
+																						if (l) {
+																							if (e.save !== void 0) {
+																								if (typeof e.save != "string") return n.errors = [{
+																									instancePath: t + "/terms/commands/save",
+																									schemaPath: "#/properties/terms/properties/commands/properties/save/type",
+																									keyword: "type",
+																									params: { type: "string" },
+																									message: "must be string"
+																								}], !1;
+																								l = !0;
+																							} else l = !0;
+																							if (l) {
+																								if (e.gameEnd !== void 0) {
+																									if (typeof e.gameEnd != "string") return n.errors = [{
+																										instancePath: t + "/terms/commands/gameEnd",
+																										schemaPath: "#/properties/terms/properties/commands/properties/gameEnd/type",
+																										keyword: "type",
+																										params: { type: "string" },
+																										message: "must be string"
+																									}], !1;
+																									l = !0;
+																								} else l = !0;
+																								if (l) {
+																									if (e.options !== void 0) {
+																										if (typeof e.options != "string") return n.errors = [{
+																											instancePath: t + "/terms/commands/options",
+																											schemaPath: "#/properties/terms/properties/commands/properties/options/type",
+																											keyword: "type",
+																											params: { type: "string" },
+																											message: "must be string"
+																										}], !1;
+																										l = !0;
+																									} else l = !0;
+																									if (l) {
+																										if (e.weapon !== void 0) {
+																											if (typeof e.weapon != "string") return n.errors = [{
+																												instancePath: t + "/terms/commands/weapon",
+																												schemaPath: "#/properties/terms/properties/commands/properties/weapon/type",
+																												keyword: "type",
+																												params: { type: "string" },
+																												message: "must be string"
+																											}], !1;
+																											l = !0;
+																										} else l = !0;
+																										if (l) {
+																											if (e.armor !== void 0) {
+																												if (typeof e.armor != "string") return n.errors = [{
+																													instancePath: t + "/terms/commands/armor",
+																													schemaPath: "#/properties/terms/properties/commands/properties/armor/type",
+																													keyword: "type",
+																													params: { type: "string" },
+																													message: "must be string"
+																												}], !1;
+																												l = !0;
+																											} else l = !0;
+																											if (l) {
+																												if (e.cancel !== void 0) {
+																													if (typeof e.cancel != "string") return n.errors = [{
+																														instancePath: t + "/terms/commands/cancel",
+																														schemaPath: "#/properties/terms/properties/commands/properties/cancel/type",
+																														keyword: "type",
+																														params: { type: "string" },
+																														message: "must be string"
+																													}], !1;
+																													l = !0;
+																												} else l = !0;
+																												if (l) {
+																													if (e.clear !== void 0) {
+																														if (typeof e.clear != "string") return n.errors = [{
+																															instancePath: t + "/terms/commands/clear",
+																															schemaPath: "#/properties/terms/properties/commands/properties/clear/type",
+																															keyword: "type",
+																															params: { type: "string" },
+																															message: "must be string"
+																														}], !1;
+																														l = !0;
+																													} else l = !0;
+																													if (l) {
+																														if (e.continueGame !== void 0) {
+																															if (typeof e.continueGame != "string") return n.errors = [{
+																																instancePath: t + "/terms/commands/continueGame",
+																																schemaPath: "#/properties/terms/properties/commands/properties/continueGame/type",
+																																keyword: "type",
+																																params: { type: "string" },
+																																message: "must be string"
+																															}], !1;
+																															l = !0;
+																														} else l = !0;
+																														if (l) {
+																															if (e.toTitle !== void 0) {
+																																if (typeof e.toTitle != "string") return n.errors = [{
+																																	instancePath: t + "/terms/commands/toTitle",
+																																	schemaPath: "#/properties/terms/properties/commands/properties/toTitle/type",
+																																	keyword: "type",
+																																	params: { type: "string" },
+																																	message: "must be string"
+																																}], !1;
+																																l = !0;
+																															} else l = !0;
+																															if (l) {
+																																if (e.sell !== void 0) {
+																																	if (typeof e.sell != "string") return n.errors = [{
+																																		instancePath: t + "/terms/commands/sell",
+																																		schemaPath: "#/properties/terms/properties/commands/properties/sell/type",
+																																		keyword: "type",
+																																		params: { type: "string" },
+																																		message: "must be string"
+																																	}], !1;
+																																	l = !0;
+																																} else l = !0;
+																																if (l) {
+																																	if (e.keyItem !== void 0) {
+																																		if (typeof e.keyItem != "string") return n.errors = [{
+																																			instancePath: t + "/terms/commands/keyItem",
+																																			schemaPath: "#/properties/terms/properties/commands/properties/keyItem/type",
+																																			keyword: "type",
+																																			params: { type: "string" },
+																																			message: "must be string"
+																																		}], !1;
+																																		l = !0;
+																																	} else l = !0;
+																																	if (l) {
+																																		if (e.equip2 !== void 0) {
+																																			if (typeof e.equip2 != "string") return n.errors = [{
+																																				instancePath: t + "/terms/commands/equip2",
+																																				schemaPath: "#/properties/terms/properties/commands/properties/equip2/type",
+																																				keyword: "type",
+																																				params: { type: "string" },
+																																				message: "must be string"
+																																			}], !1;
+																																			l = !0;
+																																		} else l = !0;
+																																		if (l) {
+																																			if (e.optimize !== void 0) {
+																																				if (typeof e.optimize != "string") return n.errors = [{
+																																					instancePath: t + "/terms/commands/optimize",
+																																					schemaPath: "#/properties/terms/properties/commands/properties/optimize/type",
+																																					keyword: "type",
+																																					params: { type: "string" },
+																																					message: "must be string"
+																																				}], !1;
+																																				l = !0;
+																																			} else l = !0;
+																																			if (l) {
+																																				if (e.newGame !== void 0) {
+																																					if (typeof e.newGame != "string") return n.errors = [{
+																																						instancePath: t + "/terms/commands/newGame",
+																																						schemaPath: "#/properties/terms/properties/commands/properties/newGame/type",
+																																						keyword: "type",
+																																						params: { type: "string" },
+																																						message: "must be string"
+																																					}], !1;
+																																					l = !0;
+																																				} else l = !0;
+																																				if (l) if (e.buy !== void 0) {
+																																					if (typeof e.buy != "string") return n.errors = [{
+																																						instancePath: t + "/terms/commands/buy",
+																																						schemaPath: "#/properties/terms/properties/commands/properties/buy/type",
+																																						keyword: "type",
+																																						params: { type: "string" },
+																																						message: "must be string"
+																																					}], !1;
+																																					l = !0;
+																																				} else l = !0;
+																																			}
+																																		}
+																																	}
+																																}
+																															}
+																														}
+																													}
+																												}
+																											}
+																										}
+																									}
+																								}
+																							}
+																						}
+																					}
+																				}
+																			}
+																		}
+																	}
+																}
+															}
+														}
+													}
+													c = !0;
+												} else c = !0;
+												if (c) {
+													if (r.messages !== void 0) {
+														let e = r.messages;
+														if (!e || typeof e != "object" || Array.isArray(e)) return n.errors = [{
+															instancePath: t + "/terms/messages",
+															schemaPath: "#/properties/terms/properties/messages/type",
+															keyword: "type",
+															params: { type: "object" },
+															message: "must be object"
+														}], !1;
+														{
+															let r;
+															if (e.actorDamage === void 0 && (r = "actorDamage") || e.actorGain === void 0 && (r = "actorGain") || e.actorLoss === void 0 && (r = "actorLoss") || e.actorDrain === void 0 && (r = "actorDrain") || e.enemyDamage === void 0 && (r = "enemyDamage") || e.enemyRecovery === void 0 && (r = "enemyRecovery") || e.enemyGain === void 0 && (r = "enemyGain") || e.enemyLoss === void 0 && (r = "enemyLoss") || e.enemyDrain === void 0 && (r = "enemyDrain") || e.touchUI === void 0 && (r = "touchUI") || e.autosave === void 0 && (r = "autosave") || e.alwaysDash === void 0 && (r = "alwaysDash") || e.commandRemember === void 0 && (r = "commandRemember") || e.bgmVolume === void 0 && (r = "bgmVolume") || e.bgsVolume === void 0 && (r = "bgsVolume") || e.meVolume === void 0 && (r = "meVolume") || e.seVolume === void 0 && (r = "seVolume") || e.possession === void 0 && (r = "possession") || e.expTotal === void 0 && (r = "expTotal") || e.expNext === void 0 && (r = "expNext") || e.saveMessage === void 0 && (r = "saveMessage") || e.loadMessage === void 0 && (r = "loadMessage") || e.file === void 0 && (r = "file") || e.partyName === void 0 && (r = "partyName") || e.emerge === void 0 && (r = "emerge") || e.preemptive === void 0 && (r = "preemptive") || e.surprise === void 0 && (r = "surprise") || e.escapeStart === void 0 && (r = "escapeStart") || e.escapeFailure === void 0 && (r = "escapeFailure") || e.victory === void 0 && (r = "victory") || e.defeat === void 0 && (r = "defeat") || e.obtainExp === void 0 && (r = "obtainExp") || e.obtainGold === void 0 && (r = "obtainGold") || e.obtainItem === void 0 && (r = "obtainItem") || e.obtainSkill === void 0 && (r = "obtainSkill") || e.levelUp === void 0 && (r = "levelUp") || e.useItem === void 0 && (r = "useItem") || e.criticalToEnemy === void 0 && (r = "criticalToEnemy") || e.criticalToActor === void 0 && (r = "criticalToActor") || e.actorRecovery === void 0 && (r = "actorRecovery") || e.actorNoDamage === void 0 && (r = "actorNoDamage") || e.actorNoHit === void 0 && (r = "actorNoHit") || e.enemyNoDamage === void 0 && (r = "enemyNoDamage") || e.enemyNoHit === void 0 && (r = "enemyNoHit") || e.evasion === void 0 && (r = "evasion") || e.magicEvasion === void 0 && (r = "magicEvasion") || e.magicReflection === void 0 && (r = "magicReflection") || e.counterAttack === void 0 && (r = "counterAttack") || e.substitute === void 0 && (r = "substitute") || e.buffAdd === void 0 && (r = "buffAdd") || e.debuffAdd === void 0 && (r = "debuffAdd") || e.buffRemove === void 0 && (r = "buffRemove") || e.actionFailure === void 0 && (r = "actionFailure")) return n.errors = [{
+																instancePath: t + "/terms/messages",
+																schemaPath: "#/properties/terms/properties/messages/required",
+																keyword: "required",
+																params: { missingProperty: r },
+																message: "must have required property '" + r + "'"
+															}], !1;
+															if (e.hpRecover !== void 0) {
+																if (typeof e.hpRecover != "string") return n.errors = [{
+																	instancePath: t + "/terms/messages/hpRecover",
+																	schemaPath: "#/properties/terms/properties/messages/properties/hpRecover/type",
+																	keyword: "type",
+																	params: { type: "string" },
+																	message: "must be string"
+																}], !1;
+																var u = !0;
+															} else u = !0;
+															if (u) {
+																if (e.mpRecover !== void 0) {
+																	if (typeof e.mpRecover != "string") return n.errors = [{
+																		instancePath: t + "/terms/messages/mpRecover",
+																		schemaPath: "#/properties/terms/properties/messages/properties/mpRecover/type",
+																		keyword: "type",
+																		params: { type: "string" },
+																		message: "must be string"
+																	}], !1;
+																	u = !0;
+																} else u = !0;
+																if (u) {
+																	if (e.tpRecover !== void 0) {
+																		if (typeof e.tpRecover != "string") return n.errors = [{
+																			instancePath: t + "/terms/messages/tpRecover",
+																			schemaPath: "#/properties/terms/properties/messages/properties/tpRecover/type",
+																			keyword: "type",
+																			params: { type: "string" },
+																			message: "must be string"
+																		}], !1;
+																		u = !0;
+																	} else u = !0;
+																	if (u) {
+																		if (e.actorDamage !== void 0) {
+																			if (typeof e.actorDamage != "string") return n.errors = [{
+																				instancePath: t + "/terms/messages/actorDamage",
+																				schemaPath: "#/properties/terms/properties/messages/properties/actorDamage/type",
+																				keyword: "type",
+																				params: { type: "string" },
+																				message: "must be string"
+																			}], !1;
+																			u = !0;
+																		} else u = !0;
+																		if (u) {
+																			if (e.actorRecover !== void 0) {
+																				if (typeof e.actorRecover != "string") return n.errors = [{
+																					instancePath: t + "/terms/messages/actorRecover",
+																					schemaPath: "#/properties/terms/properties/messages/properties/actorRecover/type",
+																					keyword: "type",
+																					params: { type: "string" },
+																					message: "must be string"
+																				}], !1;
+																				u = !0;
+																			} else u = !0;
+																			if (u) {
+																				if (e.actorGain !== void 0) {
+																					if (typeof e.actorGain != "string") return n.errors = [{
+																						instancePath: t + "/terms/messages/actorGain",
+																						schemaPath: "#/properties/terms/properties/messages/properties/actorGain/type",
+																						keyword: "type",
+																						params: { type: "string" },
+																						message: "must be string"
+																					}], !1;
+																					u = !0;
+																				} else u = !0;
+																				if (u) {
+																					if (e.actorLoss !== void 0) {
+																						if (typeof e.actorLoss != "string") return n.errors = [{
+																							instancePath: t + "/terms/messages/actorLoss",
+																							schemaPath: "#/properties/terms/properties/messages/properties/actorLoss/type",
+																							keyword: "type",
+																							params: { type: "string" },
+																							message: "must be string"
+																						}], !1;
+																						u = !0;
+																					} else u = !0;
+																					if (u) {
+																						if (e.actorDrain !== void 0) {
+																							if (typeof e.actorDrain != "string") return n.errors = [{
+																								instancePath: t + "/terms/messages/actorDrain",
+																								schemaPath: "#/properties/terms/properties/messages/properties/actorDrain/type",
+																								keyword: "type",
+																								params: { type: "string" },
+																								message: "must be string"
+																							}], !1;
+																							u = !0;
+																						} else u = !0;
+																						if (u) {
+																							if (e.enemyDamage !== void 0) {
+																								if (typeof e.enemyDamage != "string") return n.errors = [{
+																									instancePath: t + "/terms/messages/enemyDamage",
+																									schemaPath: "#/properties/terms/properties/messages/properties/enemyDamage/type",
+																									keyword: "type",
+																									params: { type: "string" },
+																									message: "must be string"
+																								}], !1;
+																								u = !0;
+																							} else u = !0;
+																							if (u) {
+																								if (e.enemyRecover !== void 0) {
+																									if (typeof e.enemyRecover != "string") return n.errors = [{
+																										instancePath: t + "/terms/messages/enemyRecover",
+																										schemaPath: "#/properties/terms/properties/messages/properties/enemyRecover/type",
+																										keyword: "type",
+																										params: { type: "string" },
+																										message: "must be string"
+																									}], !1;
+																									u = !0;
+																								} else u = !0;
+																								if (u) {
+																									if (e.enemyGain !== void 0) {
+																										if (typeof e.enemyGain != "string") return n.errors = [{
+																											instancePath: t + "/terms/messages/enemyGain",
+																											schemaPath: "#/properties/terms/properties/messages/properties/enemyGain/type",
+																											keyword: "type",
+																											params: { type: "string" },
+																											message: "must be string"
+																										}], !1;
+																										u = !0;
+																									} else u = !0;
+																									if (u) {
+																										if (e.enemyLoss !== void 0) {
+																											if (typeof e.enemyLoss != "string") return n.errors = [{
+																												instancePath: t + "/terms/messages/enemyLoss",
+																												schemaPath: "#/properties/terms/properties/messages/properties/enemyLoss/type",
+																												keyword: "type",
+																												params: { type: "string" },
+																												message: "must be string"
+																											}], !1;
+																											u = !0;
+																										} else u = !0;
+																										if (u) {
+																											if (e.enemyDrain !== void 0) {
+																												if (typeof e.enemyDrain != "string") return n.errors = [{
+																													instancePath: t + "/terms/messages/enemyDrain",
+																													schemaPath: "#/properties/terms/properties/messages/properties/enemyDrain/type",
+																													keyword: "type",
+																													params: { type: "string" },
+																													message: "must be string"
+																												}], !1;
+																												u = !0;
+																											} else u = !0;
+																											if (u) {
+																												if (e.critical !== void 0) {
+																													if (typeof e.critical != "string") return n.errors = [{
+																														instancePath: t + "/terms/messages/critical",
+																														schemaPath: "#/properties/terms/properties/messages/properties/critical/type",
+																														keyword: "type",
+																														params: { type: "string" },
+																														message: "must be string"
+																													}], !1;
+																													u = !0;
+																												} else u = !0;
+																												if (u) {
+																													if (e.touchUI !== void 0) {
+																														if (typeof e.touchUI != "string") return n.errors = [{
+																															instancePath: t + "/terms/messages/touchUI",
+																															schemaPath: "#/properties/terms/properties/messages/properties/touchUI/type",
+																															keyword: "type",
+																															params: { type: "string" },
+																															message: "must be string"
+																														}], !1;
+																														u = !0;
+																													} else u = !0;
+																													if (u) {
+																														if (e.autosave !== void 0) {
+																															if (typeof e.autosave != "string") return n.errors = [{
+																																instancePath: t + "/terms/messages/autosave",
+																																schemaPath: "#/properties/terms/properties/messages/properties/autosave/type",
+																																keyword: "type",
+																																params: { type: "string" },
+																																message: "must be string"
+																															}], !1;
+																															u = !0;
+																														} else u = !0;
+																														if (u) {
+																															if (e.alwaysDash !== void 0) {
+																																if (typeof e.alwaysDash != "string") return n.errors = [{
+																																	instancePath: t + "/terms/messages/alwaysDash",
+																																	schemaPath: "#/properties/terms/properties/messages/properties/alwaysDash/type",
+																																	keyword: "type",
+																																	params: { type: "string" },
+																																	message: "must be string"
+																																}], !1;
+																																u = !0;
+																															} else u = !0;
+																															if (u) {
+																																if (e.commandRemember !== void 0) {
+																																	if (typeof e.commandRemember != "string") return n.errors = [{
+																																		instancePath: t + "/terms/messages/commandRemember",
+																																		schemaPath: "#/properties/terms/properties/messages/properties/commandRemember/type",
+																																		keyword: "type",
+																																		params: { type: "string" },
+																																		message: "must be string"
+																																	}], !1;
+																																	u = !0;
+																																} else u = !0;
+																																if (u) {
+																																	if (e.bgmVolume !== void 0) {
+																																		if (typeof e.bgmVolume != "string") return n.errors = [{
+																																			instancePath: t + "/terms/messages/bgmVolume",
+																																			schemaPath: "#/properties/terms/properties/messages/properties/bgmVolume/type",
+																																			keyword: "type",
+																																			params: { type: "string" },
+																																			message: "must be string"
+																																		}], !1;
+																																		u = !0;
+																																	} else u = !0;
+																																	if (u) {
+																																		if (e.bgsVolume !== void 0) {
+																																			if (typeof e.bgsVolume != "string") return n.errors = [{
+																																				instancePath: t + "/terms/messages/bgsVolume",
+																																				schemaPath: "#/properties/terms/properties/messages/properties/bgsVolume/type",
+																																				keyword: "type",
+																																				params: { type: "string" },
+																																				message: "must be string"
+																																			}], !1;
+																																			u = !0;
+																																		} else u = !0;
+																																		if (u) {
+																																			if (e.meVolume !== void 0) {
+																																				if (typeof e.meVolume != "string") return n.errors = [{
+																																					instancePath: t + "/terms/messages/meVolume",
+																																					schemaPath: "#/properties/terms/properties/messages/properties/meVolume/type",
+																																					keyword: "type",
+																																					params: { type: "string" },
+																																					message: "must be string"
+																																				}], !1;
+																																				u = !0;
+																																			} else u = !0;
+																																			if (u) {
+																																				if (e.seVolume !== void 0) {
+																																					if (typeof e.seVolume != "string") return n.errors = [{
+																																						instancePath: t + "/terms/messages/seVolume",
+																																						schemaPath: "#/properties/terms/properties/messages/properties/seVolume/type",
+																																						keyword: "type",
+																																						params: { type: "string" },
+																																						message: "must be string"
+																																					}], !1;
+																																					u = !0;
+																																				} else u = !0;
+																																				if (u) {
+																																					if (e.possession !== void 0) {
+																																						if (typeof e.possession != "string") return n.errors = [{
+																																							instancePath: t + "/terms/messages/possession",
+																																							schemaPath: "#/properties/terms/properties/messages/properties/possession/type",
+																																							keyword: "type",
+																																							params: { type: "string" },
+																																							message: "must be string"
+																																						}], !1;
+																																						u = !0;
+																																					} else u = !0;
+																																					if (u) {
+																																						if (e.expTotal !== void 0) {
+																																							if (typeof e.expTotal != "string") return n.errors = [{
+																																								instancePath: t + "/terms/messages/expTotal",
+																																								schemaPath: "#/properties/terms/properties/messages/properties/expTotal/type",
+																																								keyword: "type",
+																																								params: { type: "string" },
+																																								message: "must be string"
+																																							}], !1;
+																																							u = !0;
+																																						} else u = !0;
+																																						if (u) {
+																																							if (e.expNext !== void 0) {
+																																								if (typeof e.expNext != "string") return n.errors = [{
+																																									instancePath: t + "/terms/messages/expNext",
+																																									schemaPath: "#/properties/terms/properties/messages/properties/expNext/type",
+																																									keyword: "type",
+																																									params: { type: "string" },
+																																									message: "must be string"
+																																								}], !1;
+																																								u = !0;
+																																							} else u = !0;
+																																							if (u) {
+																																								if (e.saveMessage !== void 0) {
+																																									if (typeof e.saveMessage != "string") return n.errors = [{
+																																										instancePath: t + "/terms/messages/saveMessage",
+																																										schemaPath: "#/properties/terms/properties/messages/properties/saveMessage/type",
+																																										keyword: "type",
+																																										params: { type: "string" },
+																																										message: "must be string"
+																																									}], !1;
+																																									u = !0;
+																																								} else u = !0;
+																																								if (u) {
+																																									if (e.loadMessage !== void 0) {
+																																										if (typeof e.loadMessage != "string") return n.errors = [{
+																																											instancePath: t + "/terms/messages/loadMessage",
+																																											schemaPath: "#/properties/terms/properties/messages/properties/loadMessage/type",
+																																											keyword: "type",
+																																											params: { type: "string" },
+																																											message: "must be string"
+																																										}], !1;
+																																										u = !0;
+																																									} else u = !0;
+																																									if (u) {
+																																										if (e.file !== void 0) {
+																																											if (typeof e.file != "string") return n.errors = [{
+																																												instancePath: t + "/terms/messages/file",
+																																												schemaPath: "#/properties/terms/properties/messages/properties/file/type",
+																																												keyword: "type",
+																																												params: { type: "string" },
+																																												message: "must be string"
+																																											}], !1;
+																																											u = !0;
+																																										} else u = !0;
+																																										if (u) {
+																																											if (e.partyName !== void 0) {
+																																												if (typeof e.partyName != "string") return n.errors = [{
+																																													instancePath: t + "/terms/messages/partyName",
+																																													schemaPath: "#/properties/terms/properties/messages/properties/partyName/type",
+																																													keyword: "type",
+																																													params: { type: "string" },
+																																													message: "must be string"
+																																												}], !1;
+																																												u = !0;
+																																											} else u = !0;
+																																											if (u) {
+																																												if (e.emerge !== void 0) {
+																																													if (typeof e.emerge != "string") return n.errors = [{
+																																														instancePath: t + "/terms/messages/emerge",
+																																														schemaPath: "#/properties/terms/properties/messages/properties/emerge/type",
+																																														keyword: "type",
+																																														params: { type: "string" },
+																																														message: "must be string"
+																																													}], !1;
+																																													u = !0;
+																																												} else u = !0;
+																																												if (u) {
+																																													if (e.preemptive !== void 0) {
+																																														if (typeof e.preemptive != "string") return n.errors = [{
+																																															instancePath: t + "/terms/messages/preemptive",
+																																															schemaPath: "#/properties/terms/properties/messages/properties/preemptive/type",
+																																															keyword: "type",
+																																															params: { type: "string" },
+																																															message: "must be string"
+																																														}], !1;
+																																														u = !0;
+																																													} else u = !0;
+																																													if (u) {
+																																														if (e.surprise !== void 0) {
+																																															if (typeof e.surprise != "string") return n.errors = [{
+																																																instancePath: t + "/terms/messages/surprise",
+																																																schemaPath: "#/properties/terms/properties/messages/properties/surprise/type",
+																																																keyword: "type",
+																																																params: { type: "string" },
+																																																message: "must be string"
+																																															}], !1;
+																																															u = !0;
+																																														} else u = !0;
+																																														if (u) {
+																																															if (e.escapeStart !== void 0) {
+																																																if (typeof e.escapeStart != "string") return n.errors = [{
+																																																	instancePath: t + "/terms/messages/escapeStart",
+																																																	schemaPath: "#/properties/terms/properties/messages/properties/escapeStart/type",
+																																																	keyword: "type",
+																																																	params: { type: "string" },
+																																																	message: "must be string"
+																																																}], !1;
+																																																u = !0;
+																																															} else u = !0;
+																																															if (u) {
+																																																if (e.escapeFailure !== void 0) {
+																																																	if (typeof e.escapeFailure != "string") return n.errors = [{
+																																																		instancePath: t + "/terms/messages/escapeFailure",
+																																																		schemaPath: "#/properties/terms/properties/messages/properties/escapeFailure/type",
+																																																		keyword: "type",
+																																																		params: { type: "string" },
+																																																		message: "must be string"
+																																																	}], !1;
+																																																	u = !0;
+																																																} else u = !0;
+																																																if (u) {
+																																																	if (e.victory !== void 0) {
+																																																		if (typeof e.victory != "string") return n.errors = [{
+																																																			instancePath: t + "/terms/messages/victory",
+																																																			schemaPath: "#/properties/terms/properties/messages/properties/victory/type",
+																																																			keyword: "type",
+																																																			params: { type: "string" },
+																																																			message: "must be string"
+																																																		}], !1;
+																																																		u = !0;
+																																																	} else u = !0;
+																																																	if (u) {
+																																																		if (e.defeat !== void 0) {
+																																																			if (typeof e.defeat != "string") return n.errors = [{
+																																																				instancePath: t + "/terms/messages/defeat",
+																																																				schemaPath: "#/properties/terms/properties/messages/properties/defeat/type",
+																																																				keyword: "type",
+																																																				params: { type: "string" },
+																																																				message: "must be string"
+																																																			}], !1;
+																																																			u = !0;
+																																																		} else u = !0;
+																																																		if (u) {
+																																																			if (e.obtainExp !== void 0) {
+																																																				if (typeof e.obtainExp != "string") return n.errors = [{
+																																																					instancePath: t + "/terms/messages/obtainExp",
+																																																					schemaPath: "#/properties/terms/properties/messages/properties/obtainExp/type",
+																																																					keyword: "type",
+																																																					params: { type: "string" },
+																																																					message: "must be string"
+																																																				}], !1;
+																																																				u = !0;
+																																																			} else u = !0;
+																																																			if (u) {
+																																																				if (e.obtainGold !== void 0) {
+																																																					if (typeof e.obtainGold != "string") return n.errors = [{
+																																																						instancePath: t + "/terms/messages/obtainGold",
+																																																						schemaPath: "#/properties/terms/properties/messages/properties/obtainGold/type",
+																																																						keyword: "type",
+																																																						params: { type: "string" },
+																																																						message: "must be string"
+																																																					}], !1;
+																																																					u = !0;
+																																																				} else u = !0;
+																																																				if (u) {
+																																																					if (e.obtainItem !== void 0) {
+																																																						if (typeof e.obtainItem != "string") return n.errors = [{
+																																																							instancePath: t + "/terms/messages/obtainItem",
+																																																							schemaPath: "#/properties/terms/properties/messages/properties/obtainItem/type",
+																																																							keyword: "type",
+																																																							params: { type: "string" },
+																																																							message: "must be string"
+																																																						}], !1;
+																																																						u = !0;
+																																																					} else u = !0;
+																																																					if (u) {
+																																																						if (e.obtainSkill !== void 0) {
+																																																							if (typeof e.obtainSkill != "string") return n.errors = [{
+																																																								instancePath: t + "/terms/messages/obtainSkill",
+																																																								schemaPath: "#/properties/terms/properties/messages/properties/obtainSkill/type",
+																																																								keyword: "type",
+																																																								params: { type: "string" },
+																																																								message: "must be string"
+																																																							}], !1;
+																																																							u = !0;
+																																																						} else u = !0;
+																																																						if (u) {
+																																																							if (e.levelUp !== void 0) {
+																																																								if (typeof e.levelUp != "string") return n.errors = [{
+																																																									instancePath: t + "/terms/messages/levelUp",
+																																																									schemaPath: "#/properties/terms/properties/messages/properties/levelUp/type",
+																																																									keyword: "type",
+																																																									params: { type: "string" },
+																																																									message: "must be string"
+																																																								}], !1;
+																																																								u = !0;
+																																																							} else u = !0;
+																																																							if (u) {
+																																																								if (e.useItem !== void 0) {
+																																																									if (typeof e.useItem != "string") return n.errors = [{
+																																																										instancePath: t + "/terms/messages/useItem",
+																																																										schemaPath: "#/properties/terms/properties/messages/properties/useItem/type",
+																																																										keyword: "type",
+																																																										params: { type: "string" },
+																																																										message: "must be string"
+																																																									}], !1;
+																																																									u = !0;
+																																																								} else u = !0;
+																																																								if (u) {
+																																																									if (e.criticalToEnemy !== void 0) {
+																																																										if (typeof e.criticalToEnemy != "string") return n.errors = [{
+																																																											instancePath: t + "/terms/messages/criticalToEnemy",
+																																																											schemaPath: "#/properties/terms/properties/messages/properties/criticalToEnemy/type",
+																																																											keyword: "type",
+																																																											params: { type: "string" },
+																																																											message: "must be string"
+																																																										}], !1;
+																																																										u = !0;
+																																																									} else u = !0;
+																																																									if (u) {
+																																																										if (e.criticalToActor !== void 0) {
+																																																											if (typeof e.criticalToActor != "string") return n.errors = [{
+																																																												instancePath: t + "/terms/messages/criticalToActor",
+																																																												schemaPath: "#/properties/terms/properties/messages/properties/criticalToActor/type",
+																																																												keyword: "type",
+																																																												params: { type: "string" },
+																																																												message: "must be string"
+																																																											}], !1;
+																																																											u = !0;
+																																																										} else u = !0;
+																																																										if (u) {
+																																																											if (e.actorRecovery !== void 0) {
+																																																												if (typeof e.actorRecovery != "string") return n.errors = [{
+																																																													instancePath: t + "/terms/messages/actorRecovery",
+																																																													schemaPath: "#/properties/terms/properties/messages/properties/actorRecovery/type",
+																																																													keyword: "type",
+																																																													params: { type: "string" },
+																																																													message: "must be string"
+																																																												}], !1;
+																																																												u = !0;
+																																																											} else u = !0;
+																																																											if (u) {
+																																																												if (e.actorNoDamage !== void 0) {
+																																																													if (typeof e.actorNoDamage != "string") return n.errors = [{
+																																																														instancePath: t + "/terms/messages/actorNoDamage",
+																																																														schemaPath: "#/properties/terms/properties/messages/properties/actorNoDamage/type",
+																																																														keyword: "type",
+																																																														params: { type: "string" },
+																																																														message: "must be string"
+																																																													}], !1;
+																																																													u = !0;
+																																																												} else u = !0;
+																																																												if (u) {
+																																																													if (e.actorNoHit !== void 0) {
+																																																														if (typeof e.actorNoHit != "string") return n.errors = [{
+																																																															instancePath: t + "/terms/messages/actorNoHit",
+																																																															schemaPath: "#/properties/terms/properties/messages/properties/actorNoHit/type",
+																																																															keyword: "type",
+																																																															params: { type: "string" },
+																																																															message: "must be string"
+																																																														}], !1;
+																																																														u = !0;
+																																																													} else u = !0;
+																																																													if (u) {
+																																																														if (e.enemyNoDamage !== void 0) {
+																																																															if (typeof e.enemyNoDamage != "string") return n.errors = [{
+																																																																instancePath: t + "/terms/messages/enemyNoDamage",
+																																																																schemaPath: "#/properties/terms/properties/messages/properties/enemyNoDamage/type",
+																																																																keyword: "type",
+																																																																params: { type: "string" },
+																																																																message: "must be string"
+																																																															}], !1;
+																																																															u = !0;
+																																																														} else u = !0;
+																																																														if (u) {
+																																																															if (e.enemyNoHit !== void 0) {
+																																																																if (typeof e.enemyNoHit != "string") return n.errors = [{
+																																																																	instancePath: t + "/terms/messages/enemyNoHit",
+																																																																	schemaPath: "#/properties/terms/properties/messages/properties/enemyNoHit/type",
+																																																																	keyword: "type",
+																																																																	params: { type: "string" },
+																																																																	message: "must be string"
+																																																																}], !1;
+																																																																u = !0;
+																																																															} else u = !0;
+																																																															if (u) {
+																																																																if (e.enemyRecovery !== void 0) {
+																																																																	if (typeof e.enemyRecovery != "string") return n.errors = [{
+																																																																		instancePath: t + "/terms/messages/enemyRecovery",
+																																																																		schemaPath: "#/properties/terms/properties/messages/properties/enemyRecovery/type",
+																																																																		keyword: "type",
+																																																																		params: { type: "string" },
+																																																																		message: "must be string"
+																																																																	}], !1;
+																																																																	u = !0;
+																																																																} else u = !0;
+																																																																if (u) {
+																																																																	if (e.evasion !== void 0) {
+																																																																		if (typeof e.evasion != "string") return n.errors = [{
+																																																																			instancePath: t + "/terms/messages/evasion",
+																																																																			schemaPath: "#/properties/terms/properties/messages/properties/evasion/type",
+																																																																			keyword: "type",
+																																																																			params: { type: "string" },
+																																																																			message: "must be string"
+																																																																		}], !1;
+																																																																		u = !0;
+																																																																	} else u = !0;
+																																																																	if (u) {
+																																																																		if (e.magicEvasion !== void 0) {
+																																																																			if (typeof e.magicEvasion != "string") return n.errors = [{
+																																																																				instancePath: t + "/terms/messages/magicEvasion",
+																																																																				schemaPath: "#/properties/terms/properties/messages/properties/magicEvasion/type",
+																																																																				keyword: "type",
+																																																																				params: { type: "string" },
+																																																																				message: "must be string"
+																																																																			}], !1;
+																																																																			u = !0;
+																																																																		} else u = !0;
+																																																																		if (u) {
+																																																																			if (e.magicReflection !== void 0) {
+																																																																				if (typeof e.magicReflection != "string") return n.errors = [{
+																																																																					instancePath: t + "/terms/messages/magicReflection",
+																																																																					schemaPath: "#/properties/terms/properties/messages/properties/magicReflection/type",
+																																																																					keyword: "type",
+																																																																					params: { type: "string" },
+																																																																					message: "must be string"
+																																																																				}], !1;
+																																																																				u = !0;
+																																																																			} else u = !0;
+																																																																			if (u) {
+																																																																				if (e.counterAttack !== void 0) {
+																																																																					if (typeof e.counterAttack != "string") return n.errors = [{
+																																																																						instancePath: t + "/terms/messages/counterAttack",
+																																																																						schemaPath: "#/properties/terms/properties/messages/properties/counterAttack/type",
+																																																																						keyword: "type",
+																																																																						params: { type: "string" },
+																																																																						message: "must be string"
+																																																																					}], !1;
+																																																																					u = !0;
+																																																																				} else u = !0;
+																																																																				if (u) {
+																																																																					if (e.substitute !== void 0) {
+																																																																						if (typeof e.substitute != "string") return n.errors = [{
+																																																																							instancePath: t + "/terms/messages/substitute",
+																																																																							schemaPath: "#/properties/terms/properties/messages/properties/substitute/type",
+																																																																							keyword: "type",
+																																																																							params: { type: "string" },
+																																																																							message: "must be string"
+																																																																						}], !1;
+																																																																						u = !0;
+																																																																					} else u = !0;
+																																																																					if (u) {
+																																																																						if (e.buffAdd !== void 0) {
+																																																																							if (typeof e.buffAdd != "string") return n.errors = [{
+																																																																								instancePath: t + "/terms/messages/buffAdd",
+																																																																								schemaPath: "#/properties/terms/properties/messages/properties/buffAdd/type",
+																																																																								keyword: "type",
+																																																																								params: { type: "string" },
+																																																																								message: "must be string"
+																																																																							}], !1;
+																																																																							u = !0;
+																																																																						} else u = !0;
+																																																																						if (u) {
+																																																																							if (e.debuffAdd !== void 0) {
+																																																																								if (typeof e.debuffAdd != "string") return n.errors = [{
+																																																																									instancePath: t + "/terms/messages/debuffAdd",
+																																																																									schemaPath: "#/properties/terms/properties/messages/properties/debuffAdd/type",
+																																																																									keyword: "type",
+																																																																									params: { type: "string" },
+																																																																									message: "must be string"
+																																																																								}], !1;
+																																																																								u = !0;
+																																																																							} else u = !0;
+																																																																							if (u) {
+																																																																								if (e.buffRemove !== void 0) {
+																																																																									if (typeof e.buffRemove != "string") return n.errors = [{
+																																																																										instancePath: t + "/terms/messages/buffRemove",
+																																																																										schemaPath: "#/properties/terms/properties/messages/properties/buffRemove/type",
+																																																																										keyword: "type",
+																																																																										params: { type: "string" },
+																																																																										message: "must be string"
+																																																																									}], !1;
+																																																																									u = !0;
+																																																																								} else u = !0;
+																																																																								if (u) if (e.actionFailure !== void 0) {
+																																																																									if (typeof e.actionFailure != "string") return n.errors = [{
+																																																																										instancePath: t + "/terms/messages/actionFailure",
+																																																																										schemaPath: "#/properties/terms/properties/messages/properties/actionFailure/type",
+																																																																										keyword: "type",
+																																																																										params: { type: "string" },
+																																																																										message: "must be string"
+																																																																									}], !1;
+																																																																									u = !0;
+																																																																								} else u = !0;
+																																																																							}
+																																																																						}
+																																																																					}
+																																																																				}
+																																																																			}
+																																																																		}
+																																																																	}
+																																																																}
+																																																															}
+																																																														}
+																																																													}
+																																																												}
+																																																											}
+																																																										}
+																																																									}
+																																																								}
+																																																							}
+																																																						}
+																																																					}
+																																																				}
+																																																			}
+																																																		}
+																																																	}
+																																																}
+																																															}
+																																														}
+																																													}
+																																												}
+																																											}
+																																										}
+																																									}
+																																								}
+																																							}
+																																						}
+																																					}
+																																				}
+																																			}
+																																		}
+																																	}
+																																}
+																															}
+																														}
+																													}
+																												}
+																											}
+																										}
+																									}
+																								}
+																							}
+																						}
+																					}
+																				}
+																			}
+																		}
+																	}
+																}
+															}
+														}
+														c = !0;
+													} else c = !0;
+													if (c) if (r.params !== void 0) {
+														let e = r.params;
+														if (!e || typeof e != "object" || Array.isArray(e)) return n.errors = [{
+															instancePath: t + "/terms/params",
+															schemaPath: "#/properties/terms/properties/params/type",
+															keyword: "type",
+															params: { type: "object" },
+															message: "must be object"
+														}], !1;
+														{
+															let r;
+															if (e.mhp === void 0 && (r = "mhp") || e.mmp === void 0 && (r = "mmp") || e.atk === void 0 && (r = "atk") || e.def === void 0 && (r = "def") || e.mat === void 0 && (r = "mat") || e.mdf === void 0 && (r = "mdf") || e.agi === void 0 && (r = "agi") || e.luk === void 0 && (r = "luk") || e.hit === void 0 && (r = "hit") || e.eva === void 0 && (r = "eva")) return n.errors = [{
+																instancePath: t + "/terms/params",
+																schemaPath: "#/properties/terms/properties/params/required",
+																keyword: "required",
+																params: { missingProperty: r },
+																message: "must have required property '" + r + "'"
+															}], !1;
+															if (e.mhp !== void 0) {
+																if (typeof e.mhp != "string") return n.errors = [{
+																	instancePath: t + "/terms/params/mhp",
+																	schemaPath: "#/properties/terms/properties/params/properties/mhp/type",
+																	keyword: "type",
+																	params: { type: "string" },
+																	message: "must be string"
+																}], !1;
+																var d = !0;
+															} else d = !0;
+															if (d) {
+																if (e.mmp !== void 0) {
+																	if (typeof e.mmp != "string") return n.errors = [{
+																		instancePath: t + "/terms/params/mmp",
+																		schemaPath: "#/properties/terms/properties/params/properties/mmp/type",
+																		keyword: "type",
+																		params: { type: "string" },
+																		message: "must be string"
+																	}], !1;
+																	d = !0;
+																} else d = !0;
+																if (d) {
+																	if (e.atk !== void 0) {
+																		if (typeof e.atk != "string") return n.errors = [{
+																			instancePath: t + "/terms/params/atk",
+																			schemaPath: "#/properties/terms/properties/params/properties/atk/type",
+																			keyword: "type",
+																			params: { type: "string" },
+																			message: "must be string"
+																		}], !1;
+																		d = !0;
+																	} else d = !0;
+																	if (d) {
+																		if (e.def !== void 0) {
+																			if (typeof e.def != "string") return n.errors = [{
+																				instancePath: t + "/terms/params/def",
+																				schemaPath: "#/properties/terms/properties/params/properties/def/type",
+																				keyword: "type",
+																				params: { type: "string" },
+																				message: "must be string"
+																			}], !1;
+																			d = !0;
+																		} else d = !0;
+																		if (d) {
+																			if (e.mat !== void 0) {
+																				if (typeof e.mat != "string") return n.errors = [{
+																					instancePath: t + "/terms/params/mat",
+																					schemaPath: "#/properties/terms/properties/params/properties/mat/type",
+																					keyword: "type",
+																					params: { type: "string" },
+																					message: "must be string"
+																				}], !1;
+																				d = !0;
+																			} else d = !0;
+																			if (d) {
+																				if (e.mdf !== void 0) {
+																					if (typeof e.mdf != "string") return n.errors = [{
+																						instancePath: t + "/terms/params/mdf",
+																						schemaPath: "#/properties/terms/properties/params/properties/mdf/type",
+																						keyword: "type",
+																						params: { type: "string" },
+																						message: "must be string"
+																					}], !1;
+																					d = !0;
+																				} else d = !0;
+																				if (d) {
+																					if (e.agi !== void 0) {
+																						if (typeof e.agi != "string") return n.errors = [{
+																							instancePath: t + "/terms/params/agi",
+																							schemaPath: "#/properties/terms/properties/params/properties/agi/type",
+																							keyword: "type",
+																							params: { type: "string" },
+																							message: "must be string"
+																						}], !1;
+																						d = !0;
+																					} else d = !0;
+																					if (d) {
+																						if (e.luk !== void 0) {
+																							if (typeof e.luk != "string") return n.errors = [{
+																								instancePath: t + "/terms/params/luk",
+																								schemaPath: "#/properties/terms/properties/params/properties/luk/type",
+																								keyword: "type",
+																								params: { type: "string" },
+																								message: "must be string"
+																							}], !1;
+																							d = !0;
+																						} else d = !0;
+																						if (d) {
+																							if (e.hit !== void 0) {
+																								if (typeof e.hit != "string") return n.errors = [{
+																									instancePath: t + "/terms/params/hit",
+																									schemaPath: "#/properties/terms/properties/params/properties/hit/type",
+																									keyword: "type",
+																									params: { type: "string" },
+																									message: "must be string"
+																								}], !1;
+																								d = !0;
+																							} else d = !0;
+																							if (d) if (e.eva !== void 0) {
+																								if (typeof e.eva != "string") return n.errors = [{
+																									instancePath: t + "/terms/params/eva",
+																									schemaPath: "#/properties/terms/properties/params/properties/eva/type",
+																									keyword: "type",
+																									params: { type: "string" },
+																									message: "must be string"
+																								}], !1;
+																								d = !0;
+																							} else d = !0;
+																						}
+																					}
+																				}
+																			}
+																		}
+																	}
+																}
+															}
+														}
+														c = !0;
+													} else c = !0;
+												}
+											}
+										}
+										o = !0;
+									} else o = !0;
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+		return n.errors = null, !0;
+	}
+	t.exports = n, t.exports.default = n;
+}))()), o = (e) => (0, a.default)(e);
+export { i as isDataSystem, o as isSystemTexts };

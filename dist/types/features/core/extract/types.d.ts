@@ -1,6 +1,6 @@
 import { SummarizedNote, SummarizedNoteValue } from './note';
 import { ExtractedPluginParamItem } from './plugin';
-import { ExtractedRawGameDataTexts, ExtractedTextMainDataFinal, ExtractedEventDataBundle, SystemTexts } from './text';
+import { ExtractedRawGameDataTexts, ExtractedTextMainDataFinal, ExtractedEventDataBundle, ExtractedSystemTexts } from './text';
 export interface RawGameDataNoteNormalization {
     nonTextNoteKeys: Set<string>;
     data: ExtractedRawGameDataTexts;
@@ -9,6 +9,6 @@ export interface RawGameDataNoteNormalization {
 }
 export interface ExtractedTextFinalWithNotes<UUID> extends ExtractedTextMainDataFinal<UUID>, ExtractedEventDataBundle<UUID> {
     noteSummaries: SummarizedNote<SummarizedNoteValue>[];
-    system: SystemTexts<UUID>;
+    system: ExtractedSystemTexts<UUID>;
     pluginParams: ExtractedPluginParamItem<UUID>[];
 }

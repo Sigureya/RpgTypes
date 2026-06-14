@@ -1,5 +1,5 @@
 import { DataReadErrorItem, MapBatchReadResult, ReadSystemResult } from '../../../../fileio';
-import { ExtractedSystemTexts } from '../../../../rmmz';
+import { SystemTexts } from '../../../../rmmz';
 import { ExtractedCommonEventText, ExtractedBattleEventText, ExtractedMapTexts } from './eventCommand';
 import { ExtractedDataBundle } from './mainData';
 export interface ExtractedRawGameDataTexts {
@@ -13,5 +13,5 @@ export interface ExtractedRawGameDataTextValue {
         troops: ExtractedBattleEventText[];
     };
     mapFiles: MapBatchReadResult<ExtractedMapTexts>;
-    system: ReadSystemResult<ExtractedSystemTexts>;
+    system: ReadSystemResult<SystemTexts>;
 }
