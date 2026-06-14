@@ -1,4 +1,4 @@
-import { Bo as e, Bt as t, Fc as n, Ft as r, It as i, Lt as a, Nt as o, Pt as s, Rt as c, Vo as ee, Xc as l, Zc as u, hi as d, i as f, is as p, l as m, li as h, o as g, rl as _, ui as te, vi as ne, yi as re, zt as ie } from "./rmmz.esm.js";
+import { Bt as e, Ft as t, Ho as n, Ic as r, It as i, Lt as a, Nt as o, Pt as s, Qc as ee, Rt as c, Vo as l, Zc as u, as as d, hi as f, i as p, il as m, l as h, li as g, o as _, ui as te, vi as ne, yi as re, zt as ie } from "./rmmz.esm.js";
 var ae = "bgm", oe = "se", se = "me", ce = "bgs", le = "img", ue = "audio", de = (e) => [
 	...v(e.bgm, {
 		asset: "audio",
@@ -109,30 +109,30 @@ var ae = "bgm", oe = "se", se = "me", ce = "bgs", le = "img", ue = "audio", de =
 		fileName: e.system.message,
 		error: e.system.message
 	}, ...t] : t;
-}, ze = (t) => [
-	e({
-		facename: t.image,
+}, ze = (e) => [
+	l({
+		facename: e.image,
 		faceIndex: 0,
-		speakerName: t.text
+		speakerName: e.text
 	}),
-	ee(t.text),
-	_({
+	n(e.text),
+	m({
 		actorId: 1,
-		characterName: t.image,
+		characterName: e.image,
 		characterIndex: 0,
-		battlerName: t.image,
-		faceName: t.image,
+		battlerName: e.image,
+		faceName: e.image,
 		faceIndex: 0
 	}),
-	l({
-		name: t.text,
-		actorId: 1
-	}),
 	u({
-		nickname: t.text,
+		name: e.text,
 		actorId: 1
 	}),
-	p(t.text)
+	ee({
+		nickname: e.text,
+		actorId: 1
+	}),
+	d(e.text)
 ], Be = (e) => te({
 	note: e.note,
 	displayName: e.text,
@@ -159,7 +159,7 @@ var ae = "bgm", oe = "se", se = "me", ce = "bgs", le = "img", ue = "audio", de =
 		y: 0,
 		pages: [Ve(e), He(e)]
 	}]
-}), Ve = (e) => d({
+}), Ve = (e) => f({
 	image: {
 		characterName: e.image,
 		tileId: 0,
@@ -167,8 +167,8 @@ var ae = "bgm", oe = "se", se = "me", ce = "bgs", le = "img", ue = "audio", de =
 		direction: 2,
 		pattern: 0
 	},
-	list: n(e)
-}), He = (e) => d({
+	list: r(e)
+}), He = (e) => f({
 	image: {
 		characterIndex: 0,
 		characterName: e.image,
@@ -177,36 +177,36 @@ var ae = "bgm", oe = "se", se = "me", ce = "bgs", le = "img", ue = "audio", de =
 		pattern: 0
 	},
 	list: ze(e)
-}), Ue = (e) => {
-	let { message: n } = e;
+}), Ue = (n) => {
+	let { message: r } = n;
 	return {
-		actors: V(o(e), n, b),
-		classes: V(r(e), n, x),
-		armors: V(s(e), n, T),
-		weapons: V(t(e), n, w),
-		items: V(a(e), n, C),
-		enemies: V(i(e), n, E),
-		skills: V(c(e), n, S),
-		states: V(ie(e), n, O),
+		actors: V(o(n), r, b),
+		classes: V(t(n), r, x),
+		armors: V(s(n), r, T),
+		weapons: V(e(n), r, w),
+		items: V(a(n), r, C),
+		enemies: V(i(n), r, E),
+		skills: V(c(n), r, S),
+		states: V(ie(n), r, O),
 		troops: V(re({
 			id: 1,
-			name: e.nonReplaceableText
-		}), n, D),
+			name: n.nonReplaceableText
+		}), r, D),
 		commonEvents: V(ne({
 			id: 1,
-			name: e.nonReplaceableText
-		}), n, j),
-		mapInfos: B(n, M),
-		animations: B(n, k),
-		tilesets: B(n, A),
+			name: n.nonReplaceableText
+		}), r, j),
+		mapInfos: B(r, M),
+		animations: B(r, k),
+		tilesets: B(r, A),
 		system: {
-			system: g(e),
-			message: n
+			system: _(n),
+			message: r
 		},
 		mapFiles: {
 			info: { success: !0 },
 			invalidMaps: [],
-			validMaps: [We(e)]
+			validMaps: [We(n)]
 		}
 	};
 }, We = (e) => ({
@@ -234,7 +234,7 @@ var ae = "bgm", oe = "se", se = "me", ce = "bgs", le = "img", ue = "audio", de =
 	} catch {
 		return H(t, n.jsonParseError);
 	}
-}, qe = (e) => `Map${h(e.id)}.json`, Je = (e) => `Map${h(e.id)}`, H = (e, t) => ({
+}, qe = (e) => `Map${g(e.id)}.json`, Je = (e) => `Map${g(e.id)}`, H = (e, t) => ({
 	map: null,
 	message: t,
 	filename: Je(e),
@@ -276,7 +276,7 @@ var ae = "bgm", oe = "se", se = "me", ce = "bgs", le = "img", ue = "audio", de =
 			system: e,
 			message: ""
 		} : n.validateSystemMv && n.validateSystemMv(e) ? {
-			system: f(e),
+			system: p(e),
 			message: t.mvAsMz
 		} : q(t.invalidStructure);
 	} catch {
@@ -298,7 +298,7 @@ var ae = "bgm", oe = "se", se = "me", ce = "bgs", le = "img", ue = "audio", de =
 	readAnimations: J,
 	readTilesets: J
 }, n, (() => [])), rt = (e) => e.map, J = (e) => e, it = (e, t, n, r) => Y(e, t, r, n, (() => [])), at = (e, t, n, r) => Y(e, t, r, n, (() => null)), Y = async (e, t, n, r, i) => {
-	let [a, o, s, c, ee, l, u, d, f, p, m, h, g, _] = await Promise.all([
+	let [a, o, s, ee, c, l, u, d, f, p, m, h, g, _] = await Promise.all([
 		Fe(e, t, ((e) => r.validateCommonEvent(e))),
 		je(e, t, ((e) => r.validateTroop(e))),
 		Ae(e, t, ((e) => r.validateEnemy(e))),
@@ -321,12 +321,12 @@ var ae = "bgm", oe = "se", se = "me", ce = "bgs", le = "img", ue = "audio", de =
 		mapFiles: g.success ? await st(g.data, e, n, t, r.validateMap) : ot(g),
 		actors: X(p, e, n.readActors, i),
 		armors: X(d, e, n.readArmors, i),
-		classes: X(c, e, n.readClasses, i),
+		classes: X(ee, e, n.readClasses, i),
 		commonEvents: X(a, e, n.readCommonEvents, i),
 		enemies: X(s, e, n.readEnemies, i),
 		items: X(l, e, n.readItems, i),
 		mapInfos: g,
-		skills: X(ee, e, n.readSkills, i),
+		skills: X(c, e, n.readSkills, i),
 		states: X(f, e, n.readStates, i),
 		system: ct(_, e, n.readSystem),
 		troops: X(o, e, n.readTroops, i),
@@ -380,7 +380,7 @@ var ae = "bgm", oe = "se", se = "me", ce = "bgs", le = "img", ue = "audio", de =
 			data: r()
 		};
 	}
-}, lt = (e) => e, ut = (e, t = () => m({})) => [
+}, lt = (e) => e, ut = (e, t = () => h({})) => [
 	{
 		filename: G,
 		data: e.system.system ? e.system.system : t()
