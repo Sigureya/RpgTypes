@@ -2,6 +2,7 @@ import type { FileEntry } from "@RpgTypes/fileio";
 import { FILENAME_AUX_DICTIONARY } from "@RpgTypes/fileio";
 import type {
   RuntimeDictionary,
+  RuntimeDictionaryData,
   RuntimeDictionaryDataWithSystem,
 } from "./types";
 
@@ -18,7 +19,7 @@ export const findActorText = <T>(
 };
 
 export const buildRuntimeDictionary = <T>(
-  dic: RuntimeDictionaryDataWithSystem<T>,
+  dic: RuntimeDictionaryData<T>,
 ): RuntimeDictionary<T> => ({
   targetNoteKeys: new Set(dic.targetNoteKeys),
   textDictionary: new Map(
