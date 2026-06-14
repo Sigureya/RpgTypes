@@ -169,7 +169,6 @@ export const SCHEMA_SYSTEM_TEXTS = {
             "actorNoHit",
             "enemyNoDamage",
             "enemyNoHit",
-            "enemyRecovery",
             "evasion",
             "magicEvasion",
             "magicReflection",
