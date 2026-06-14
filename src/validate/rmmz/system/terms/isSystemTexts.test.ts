@@ -123,4 +123,8 @@ describe("isSystemTexts", () => {
     const result = validate(systemTexts);
     expect(result).toBe(true);
   });
+  test("invalid system texts", () => {
+    const reuslt = validate({});
+    expect(reuslt).toBe(false);
+  });
 });
