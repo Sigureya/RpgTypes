@@ -16,7 +16,15 @@ export interface ExtractedRawGameDataTexts {
   errors: DataReadErrorItem[];
 }
 
-export interface ExtractedRawGameDataTextValue {
+export interface ExtractedRawGameDataEventTexts {
+  eventData: {
+    commonEvents: ExtractedCommonEventText[];
+    troops: ExtractedBattleEventText[];
+  };
+  mapFiles: MapBatchReadResult<ExtractedMapTexts>;
+}
+
+export interface ExtractedRawGameDataTextValue extends ExtractedRawGameDataEventTexts {
   mainData: ExtractedDataBundle;
   eventData: {
     commonEvents: ExtractedCommonEventText[];

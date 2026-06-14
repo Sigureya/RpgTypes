@@ -1,6 +1,11 @@
 import { CTRL_CHAR_ACTOR, CTRL_CHAR_VARIABLE } from "./constants";
 import type { ControlCharInfo } from "./types";
 
+export const isCtrlCharOnly = (text: string): boolean => {
+  const trimed = text.trim();
+  return /^\\[NnVv]\[\d+\]$/.test(trimed);
+};
+
 export const createControlCharFormat = <C extends string>(
   char: C,
   id: number,

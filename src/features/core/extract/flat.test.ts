@@ -63,6 +63,7 @@ const createData = (): ExtractedTextFinalWithNotes<string> => {
   };
 
   return {
+    speakers: [],
     noteSummaries: [],
     system: {
       gameTitle: "game",
