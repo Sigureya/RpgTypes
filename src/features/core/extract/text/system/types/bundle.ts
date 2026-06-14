@@ -1,6 +1,6 @@
 import type { ExtractedSystemTextItem } from "./item";
 
-export interface SystemTexts<UUID> {
+export interface ExtractedSystemTexts<UUID> {
   gameTitle: string;
   filename: string;
   texts: ExtractedSystemTextItem<UUID>[];

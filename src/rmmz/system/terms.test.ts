@@ -1,7 +1,7 @@
 import { describe, expect, test } from "vitest";
 import type { Data_System } from "@RpgTypes/rmmz";
 import { makeTestSystemData } from "@RpgTypes/rmmz";
-import type { ExtractedSystemTexts } from "./core/types";
+import type { SystemTexts } from "./core/types";
 import { extractTextFromSystem, replaceSystemTextEx } from "./terms";
 
 const OLD_TEXT = "Old Text";
@@ -15,7 +15,7 @@ const makeTestData = () => {
   });
 };
 
-const TEXT_DATA: ExtractedSystemTexts = {
+const TEXT_DATA: SystemTexts = {
   gameTitle: "Game Title",
   currencyUnit: "Currency Unit",
   equipTypes: ["Equip Type 1", "Equip Type 2"],
@@ -137,7 +137,7 @@ describe("replaceSystemTextEx", () => {
     test("システムテキストが正しく置換されているか", () => {
       const system = makeTestData();
       const result = replaceSystemTextEx(system, TEXT_DATA);
-      const e2: ExtractedSystemTexts = extractTextFromSystem(result);
+      const e2: SystemTexts = extractTextFromSystem(result);
       expect(e2).toEqual(TEXT_DATA);
     });
     test("システムテキストが正しく置換されているか", () => {
@@ -199,7 +199,7 @@ describe("replaceSystemTextEx", () => {
 });
 
 describe("extractTextFromSystem", () => {
-  const expected: ExtractedSystemTexts = {
+  const expected: SystemTexts = {
     gameTitle: OLD_TEXT,
     currencyUnit: OLD_TEXT,
     equipTypes: [OLD_TEXT, OLD_TEXT],
@@ -322,7 +322,7 @@ describe("extractTextFromSystem", () => {
   });
   test("システムテキストが正しく抽出されているか（置換後のデータで確認）", () => {
     const newSystem: Data_System = replaceSystemTextEx(system, TEXT_DATA);
-    const result: ExtractedSystemTexts = extractTextFromSystem(newSystem);
+    const result: SystemTexts = extractTextFromSystem(newSystem);
     expect(result).toEqual(TEXT_DATA);
   });
 });

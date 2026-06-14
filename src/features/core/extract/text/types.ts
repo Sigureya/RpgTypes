@@ -3,7 +3,7 @@ import type {
   MapBatchReadResult,
   ReadSystemResult,
 } from "@RpgTypes/fileio";
-import type { ExtractedSystemTexts } from "@RpgTypes/rmmz";
+import type { SystemTexts } from "@RpgTypes/rmmz";
 import type {
   ExtractedCommonEventText,
   ExtractedBattleEventText,
@@ -23,5 +23,5 @@ export interface ExtractedRawGameDataTextValue {
     troops: ExtractedBattleEventText[];
   };
   mapFiles: MapBatchReadResult<ExtractedMapTexts>;
-  system: ReadSystemResult<ExtractedSystemTexts>;
+  system: ReadSystemResult<SystemTexts>;
 }

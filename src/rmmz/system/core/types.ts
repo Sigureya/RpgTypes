@@ -5,7 +5,7 @@ import type {
   SystemLabels_TermsParamNames,
 } from "./terms";
 
-export interface ExtractedSystemTexts {
+export interface SystemTexts {
   gameTitle: string;
   currencyUnit: string;
   equipTypes: string[];
