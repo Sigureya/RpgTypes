@@ -32,6 +32,7 @@ export const flattenExtractedItems = <UUID>(
   return [
     ...data.system.texts,
     ...temp.flat(3),
+    ...data.speakers,
     ...data.commonEvents,
     ...data.map,
     ...data.troops,

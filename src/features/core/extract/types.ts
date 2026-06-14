@@ -1,3 +1,4 @@
+import type { ExtractedTextItem } from "@RpgTypes/libs";
 import type { SummarizedNote, SummarizedNoteValue } from "./note";
 import type { ExtractedPluginParamItem } from "./plugin";
 import type {
@@ -19,4 +20,5 @@ export interface ExtractedTextFinalWithNotes<UUID>
   noteSummaries: SummarizedNote<SummarizedNoteValue>[];
   system: ExtractedSystemTexts<UUID>;
   pluginParams: ExtractedPluginParamItem<UUID>[];
+  speakers: ExtractedTextItem<UUID>[];
 }

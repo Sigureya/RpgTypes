@@ -40,6 +40,7 @@ import {
   convertStateData,
   convertSystemTypes,
 } from "./text";
+import { extractSpeakerTexts } from "./text/speaker";
 import type {
   ExtractedTextFinalWithNotes,
   RawGameDataNoteNormalization,
@@ -92,6 +93,7 @@ const buildFinalExtractedResult = <UUID>(
   const { eventData, mainData, mapFiles, system } = normalizedData.data.value;
 
   return {
+    speakers: extractSpeakerTexts(normalizedData.data.value, uuidGen),
     noteSummaries: collectAllNoteSummaries(normalizedData),
     pluginParams: pluginParams.flatMap((param) =>
       convertPluginParams(param, uuidGen),
