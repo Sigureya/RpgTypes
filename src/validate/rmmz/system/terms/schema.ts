@@ -1,7 +1,7 @@
-import type { ExtractedSystemTexts } from "@RpgTypes/rmmz";
+import type { SystemTexts } from "@RpgTypes/rmmz";
 import type { JSONSchemaType } from "ajv";
 
-export const SCHEMA = {
+export const SCHEMA_SYSTEM_TEXTS = {
   type: "object",
   required: [
     "gameTitle",
@@ -70,30 +70,30 @@ export const SCHEMA = {
         commands: {
           type: "object",
           required: [
-            "armor",
+            "fight",
+            "escape",
             "attack",
-            "buy",
+            "guard",
+            "item",
+            "skill",
+            "equip",
+            "status",
+            "formation",
+            "save",
+            "gameEnd",
+            "options",
+            "weapon",
+            "armor",
             "cancel",
             "clear",
             "continueGame",
-            "equip",
-            "equip2",
-            "escape",
-            "fight",
-            "formation",
-            "gameEnd",
-            "options",
-            "save",
-            "skill",
-            "status",
-            "weapon",
             "toTitle",
-            "status",
             "sell",
-            "save",
             "keyItem",
+            "equip2",
             "optimize",
             "newGame",
+            "buy",
           ],
           properties: {
             fight: { type: "string" },
@@ -130,10 +130,10 @@ export const SCHEMA = {
             "actorLoss",
             "actorDrain",
             "enemyDamage",
+            "enemyRecovery",
             "enemyGain",
             "enemyLoss",
             "enemyDrain",
-
             "touchUI",
             "autosave",
             "alwaysDash",
@@ -166,16 +166,10 @@ export const SCHEMA = {
             "criticalToActor",
             "actorRecovery",
             "actorNoDamage",
-            "actorGain",
-            "actorLoss",
-            "actorDrain",
-            "enemyDamage",
-            "enemyGain",
-            "enemyLoss",
-            "enemyDrain",
+            "actorNoHit",
             "enemyNoDamage",
-            "actorRecovery",
             "enemyNoHit",
+            "enemyRecovery",
             "evasion",
             "magicEvasion",
             "magicReflection",
@@ -278,4 +272,4 @@ export const SCHEMA = {
       },
     },
   },
-} as const satisfies JSONSchemaType<ExtractedSystemTexts>;
+} as const satisfies JSONSchemaType<SystemTexts>;
