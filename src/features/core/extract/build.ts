@@ -31,7 +31,7 @@ import type {
   TextCommandParameter,
   EventContainerExtractor,
   ExtractedMapTexts,
-  SystemTexts,
+  ExtractedSystemTexts,
 } from "./text";
 import {
   convertCommonEvents,
@@ -165,7 +165,7 @@ const buildSystemTexts = <UUID>(
   system: ReadSystemResult<SystemTexts>,
   uuidGen: (text: string) => UUID,
   kinds: SystemKinds,
-): SystemTexts<UUID> => {
+): ExtractedSystemTexts<UUID> => {
   if (system.system) {
     return {
       gameTitle: system.system.gameTitle,

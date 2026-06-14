@@ -4,7 +4,7 @@ import type {
   ExtractedRawGameDataTexts,
   ExtractedTextMainDataFinal,
   ExtractedEventDataBundle,
-  SystemTexts,
+  ExtractedSystemTexts,
 } from "./text";
 
 export interface RawGameDataNoteNormalization {
@@ -17,6 +17,6 @@ export interface RawGameDataNoteNormalization {
 export interface ExtractedTextFinalWithNotes<UUID>
   extends ExtractedTextMainDataFinal<UUID>, ExtractedEventDataBundle<UUID> {
   noteSummaries: SummarizedNote<SummarizedNoteValue>[];
-  system: SystemTexts<UUID>;
+  system: ExtractedSystemTexts<UUID>;
   pluginParams: ExtractedPluginParamItem<UUID>[];
 }
