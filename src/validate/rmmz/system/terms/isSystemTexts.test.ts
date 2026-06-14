@@ -1,6 +1,6 @@
 import { describe, test, expect } from "vitest";
 import type { SystemTexts } from "@RpgTypes/rmmz";
-const validate = require("./termsValidate.js");
+import { isSystemTexts } from "./isSystemTexts";
 const systemTexts: SystemTexts = {
   gameTitle: "Test Game",
   currencyUnit: "Gold",
@@ -120,11 +120,11 @@ const systemTexts: SystemTexts = {
 
 describe("isSystemTexts", () => {
   test("valid system texts", () => {
-    const result = validate(systemTexts);
+    const result = isSystemTexts(systemTexts);
     expect(result).toBe(true);
   });
   test("invalid system texts", () => {
-    const reuslt = validate({});
+    const reuslt = isSystemTexts({});
     expect(reuslt).toBe(false);
   });
 });
