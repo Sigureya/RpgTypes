@@ -1,6 +1,7 @@
 import { describe, expect, test, vi } from "vitest";
 import type { SystemTexts } from "@RpgTypes/rmmz";
 import { convertSystemTypes } from "./conv";
+import type { SystemKinds } from "./types";
 
 const data: SystemTexts = {
   gameTitle: "gameTitle",
@@ -134,24 +135,31 @@ const ALL_TEXT = [
 ];
 
 describe("convertSystemTypes", () => {
-  test("", () => {
+  const systemKinds: SystemKinds = {
+    gameTitle: "kinds.gameTitle",
+    currencyUnit: "kinds.currencyUnit",
+    equipTypes: "kinds.equipTypes",
+    armorTypes: "kinds.armorTypes",
+    weaponTypes: "kinds.weaponTypes",
+    elements: "kinds.elements",
+    skillTypes: "kinds.skillTypes",
+  };
+  test("uuidGen に全てのテキストが渡されること", () => {
     const mockUuidGen = vi.fn((text: string) => `uuid-${text}`);
-    convertSystemTypes(
-      data,
-      "filename",
-      {
-        gameTitle: "kinds.gameTitle",
-        currencyUnit: "kinds.currencyUnit",
-        equipTypes: "kinds.equipTypes",
-        armorTypes: "kinds.armorTypes",
-        weaponTypes: "kinds.weaponTypes",
-        elements: "kinds.elements",
-        skillTypes: "kinds.skillTypes",
-      },
-      mockUuidGen,
-    );
+    convertSystemTypes(data, "filename", systemKinds, mockUuidGen);
     ALL_TEXT.forEach((text) => {
       expect(mockUuidGen, text).toHaveBeenCalledWith(text);
     });
+  });
+  test("result", () => {
+    const result = convertSystemTypes(
+      data,
+      "filename",
+      systemKinds,
+      (text) => `uuid-${text}`,
+    );
+    const resultSet: Set<string> = new Set(result.map((item) => item.baseText));
+    const allTextSet = new Set(ALL_TEXT);
+    expect(resultSet).toEqual(allTextSet);
   });
 });
