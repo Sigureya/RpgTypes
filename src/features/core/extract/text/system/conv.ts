@@ -40,6 +40,14 @@ export const convertSystemTypes = <UUID>(
     ),
     ...dataTypes(
       filename,
+      system.elements,
+      "elements",
+
+      kinds.elements,
+      uuidGen,
+    ),
+    ...dataTypes(
+      filename,
       system.equipTypes,
       "equipTypes",
       kinds.equipTypes,
@@ -57,6 +65,13 @@ export const convertSystemTypes = <UUID>(
       system.armorTypes,
       "armorTypes",
       kinds.armorTypes,
+      uuidGen,
+    ),
+    ...dataTypes(
+      filename,
+      system.skillTypes,
+      "skillTypes",
+      kinds.skillTypes,
       uuidGen,
     ),
   ];
