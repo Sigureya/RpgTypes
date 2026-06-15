@@ -32,6 +32,7 @@ export const buildRuntimeDictionary = <T>(
 
 export const fileEntriesFromDictionary = (
   dic: RuntimeDictionaryDataWithSystem<unknown>,
+  filename: string = FILENAME_AUX_DICTIONARY,
 ): FileEntry[] => {
-  return [{ data: dic, filename: FILENAME_AUX_DICTIONARY }];
+  return [{ data: dic, filename: filename }];
 };

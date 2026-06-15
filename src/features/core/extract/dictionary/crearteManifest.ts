@@ -32,12 +32,7 @@ export type Rmmz_PluginManager_Translation = PluginManagerTemplate<
 
 export const pluginManifestFiles = (
   data: RuntimeDictionaryDataWithSystem<string>,
-  options: RuntimePluginBundleOptions = {
-    description: "書き換え用辞書データ",
-    outputDirectory: "translation",
-    dictionaryName: "TranslationDictionary",
-    pluginSnapshotName: "pluginSnapshot",
-  },
+  options: RuntimePluginBundleOptions,
 ): TextFileEntry => {
   return {
     // 辞書データ
@@ -109,7 +104,9 @@ export const createPluginSnapshotSetupScript = (
     "})()",
   ].join("\n");
 };
-
+/**
+ * @deprecated 設計ミスにより削除予定
+ */
 export const createPluginManifest2 = (
   options: RuntimePluginBundleOptions,
 ): PluginParamsRecord[] => {
@@ -126,12 +123,12 @@ export const createPluginManifest2 = (
       status: true,
       parameters: {},
     },
-    {
-      name: `${options.outputDirectory}/${options.pluginSnapshotName}`,
-      description: options.description,
-      status: true,
-      parameters: {},
-    },
+    // {
+    //   name: `${options.outputDirectory}/${options.pluginSnapshotName}`,
+    //   description: options.description,
+    //   status: true,
+    //   parameters: {},
+    // },
   ];
 };
 
