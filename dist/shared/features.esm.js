@@ -1704,7 +1704,7 @@ var Hr = (e, t, n, r = Br) => Vr(e.attr.struct, `${t}["${e.name}"]`, n, r), Ur =
 	let r = Di(e, t, n);
 	return [...d(r.main), ...on(r.aux)];
 }, Di = (e, t, n) => {
-	let { data: r, dictionary: i } = e, a = Oi(e, t, n), o = Array.from(i.values()).map(((e) => [e, e]));
+	let { data: r, dictionary: i } = e, a = Oi(e, t, n), o = Array.from(i.keys()).map(((e) => [e, e]));
 	return {
 		main: a.data,
 		aux: ki(r, a.note, i, n),
