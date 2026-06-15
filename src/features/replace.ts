@@ -10,7 +10,12 @@ import {
   extractTextFromSystem,
   replaceSystemTextDictionary,
 } from "@RpgTypes/rmmz";
-import type { RuntimeDictionary, GameDataReplaceOutput } from "./core/extract";
+import type {
+  RuntimeDictionary,
+  GameDataReplaceOutput,
+  RuntimeDictionaryDataWithSystem,
+  RawGameDataNoteNormalization,
+} from "./core/extract";
 import { fileEntriesFromDictionary, pluginManifestFiles } from "./core/extract";
 import {
   createRuntimeDictionaryData,
@@ -190,6 +195,19 @@ export const replaceDataWithHash = <T extends string>(
     handlers,
     (text) => text.trimEnd(),
   );
+
+  return {
+    main: replaceResult.data,
+    aux: createAux(data, replaceResult.note, dictionary, hashFn),
+  };
+};
+
+const createAux = <T extends string>(
+  data: RawGameData,
+  note: RawGameDataNoteNormalization,
+  dictionary: ReadonlyMap<string, string>,
+  hashFn: (text: string) => T,
+): RuntimeDictionaryDataWithSystem<T> => {
   const dicX = createRuntimeDictionaryData(
     data.actors.data,
     data.commonEvents.data,
@@ -201,20 +219,16 @@ export const replaceDataWithHash = <T extends string>(
     },
   );
   const extractedSystemTexts = extractTextFromSystem(data.system.system);
-
   return {
-    main: replaceResult.data,
-    aux: {
-      systemTexts: replaceSystemTextDictionary(extractedSystemTexts, (text) => {
-        const trimmed = text.trimEnd();
-        return context.dictionary.get(trimmed);
-      }),
-      actorTexts: dicX.actorTexts,
-      targetNoteKeys: textKeysSN([
-        ...replaceResult.note.dataNoteSummary,
-        ...replaceResult.note.mapNoteSummary,
-      ]),
-      textDictionary: dicX.textDictionary,
-    },
+    systemTexts: replaceSystemTextDictionary(extractedSystemTexts, (text) => {
+      const trimmed = text.trimEnd();
+      return dictionary.get(trimmed);
+    }),
+    actorTexts: dicX.actorTexts,
+    targetNoteKeys: textKeysSN([
+      ...note.dataNoteSummary,
+      ...note.mapNoteSummary,
+    ]),
+    textDictionary: dicX.textDictionary,
   };
 };
