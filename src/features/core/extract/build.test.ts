@@ -95,6 +95,8 @@ const createKinds = (): SystemKinds => {
     equipTypes: "kind:equipTypes",
     armorTypes: "kind:armorTypes",
     weaponTypes: "kind:weaponTypes",
+    elements: "kind:elements",
+    skillTypes: "kind:skillTypes",
   };
 };
 

@@ -1,13 +1,18 @@
 import { normarizeText } from "@RpgTypes/libs";
 import type { SystemTexts } from "@RpgTypes/rmmz";
-import type { ExtractedSystemKinds, SystemKinds } from "./types";
+import { convertSystemTerms } from "./systemTerms";
+import type {
+  ExtractedSystemKinds,
+  ExtractedSystemTextItem,
+  SystemKinds,
+} from "./types";
 
 export const convertSystemTypes = <UUID>(
   system: SystemTexts,
   filename: string,
   kinds: SystemKinds,
   uuidGen: (text: string) => UUID,
-): ExtractedSystemKinds<UUID>[] => {
+): ExtractedSystemTextItem<UUID>[] => {
   return [
     {
       filename,
@@ -25,6 +30,22 @@ export const convertSystemTypes = <UUID>(
       kind: kinds.currencyUnit,
       dataKey: "currencyUnit",
     },
+    ...convertSystemTerms(
+      filename,
+      system.terms,
+      uuidGen,
+      (key) => `basic.${key}`,
+      (key) => `commands.${key}`,
+      (key) => `messages.${key}`,
+    ),
+    ...dataTypes(
+      filename,
+      system.elements,
+      "elements",
+
+      kinds.elements,
+      uuidGen,
+    ),
     ...dataTypes(
       filename,
       system.equipTypes,
@@ -44,6 +65,13 @@ export const convertSystemTypes = <UUID>(
       system.armorTypes,
       "armorTypes",
       kinds.armorTypes,
+      uuidGen,
+    ),
+    ...dataTypes(
+      filename,
+      system.skillTypes,
+      "skillTypes",
+      kinds.skillTypes,
       uuidGen,
     ),
   ];
