@@ -35,6 +35,27 @@ const createItem = <P extends string, T, UUID, Key extends string & keyof T>(
   >;
 };
 
+export const convertSystemTerms = <UUID>(
+  filename: string,
+  tersm: {
+    basic: Terms_Basic;
+    commands: Terms_GameCommands;
+    messages: Terms_Messages;
+    params: SystemLabels_TermsParamNames;
+  },
+  uuidGen: (text: string) => UUID,
+  basicKindFn: (key: keyof Terms_Basic) => string,
+  commandsKindFn: (key: keyof Terms_GameCommands) => string,
+  messagesKindFn: (key: keyof Terms_Messages) => string,
+) => {
+  return [
+    ...basicTerms(tersm.basic, filename, uuidGen, basicKindFn),
+    ...gameCommands(tersm.commands, filename, uuidGen, commandsKindFn),
+    ...systemMessages(tersm.messages, filename, uuidGen, messagesKindFn),
+    ...systemParams(tersm.params, filename, uuidGen, (key) => `params.${key}`),
+  ];
+};
+
 export const gameCommands = <UUID>(
   terms: Terms_GameCommands,
   filename: string,
