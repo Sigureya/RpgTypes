@@ -6,7 +6,10 @@ import type {
   NoteReadResult,
   RpgDataBundleHasText,
 } from "@RpgTypes/rmmz";
-import { extractTextFromSystem } from "@RpgTypes/rmmz";
+import {
+  extractTextFromSystem,
+  replaceSystemTextDictionary,
+} from "@RpgTypes/rmmz";
 import type { RuntimeDictionary, GameDataReplaceOutput } from "./core/extract";
 import { fileEntriesFromDictionary, pluginManifestFiles } from "./core/extract";
 import {
@@ -197,16 +200,21 @@ export const replaceDataWithHash = <T extends string>(
       return hashFn(text.trimEnd());
     },
   );
+  const extractedSystemTexts = extractTextFromSystem(data.system.system);
+
   return {
     main: replaceResult.data,
     aux: {
+      systemTexts: replaceSystemTextDictionary(extractedSystemTexts, (text) => {
+        const trimmed = text.trimEnd();
+        return context.dictionary.get(trimmed);
+      }),
       actorTexts: dicX.actorTexts,
       targetNoteKeys: textKeysSN([
         ...replaceResult.note.dataNoteSummary,
         ...replaceResult.note.mapNoteSummary,
       ]),
       textDictionary: dicX.textDictionary,
-      systemTexts: extractTextFromSystem(data.system.system),
     },
   };
 };

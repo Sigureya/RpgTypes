@@ -2,40 +2,40 @@ import type {
   System_Terms,
   Terms_BasicArray,
   Terms_CommandArray,
-  Terms_Messages,
 } from "@RpgTypes/rmmz";
+import { replaceSystemMessages } from "@RpgTypes/rmmz";
 import { replaceTextByFunction, replaceTextByMap } from "./utils";
 
 export const replaceSystemTermsByMap = (
   terms: System_Terms,
-  map: ReadonlyMap<string, string>
+  map: ReadonlyMap<string, string>,
 ): System_Terms => {
   return replaceSystemTerms(terms, (text: string): string =>
-    replaceTextByMap(text, map)
+    replaceTextByMap(text, map),
   );
 };
 
 export const replaceSystemTerms = (
   terms: System_Terms,
-  newTextFn: (text: string) => string | undefined
+  newTextFn: (text: string) => string | undefined,
 ): System_Terms => ({
   params: replaceParams(terms.params, (s) =>
-    replaceTextByFunction(s, newTextFn)
+    replaceTextByFunction(s, newTextFn),
   ),
   messages: replaceSystemMessages(terms.messages, (s) =>
-    replaceTextByFunction(s, newTextFn)
+    replaceTextByFunction(s, newTextFn),
   ),
   basic: replaceBasicTerms(terms.basic, (s) =>
-    replaceTextByFunction(s, newTextFn)
+    replaceTextByFunction(s, newTextFn),
   ),
   commands: replaceCommandsArray(terms.commands, (s) =>
-    replaceTextByFunction(s, newTextFn)
+    replaceTextByFunction(s, newTextFn),
   ),
 });
 
 const replaceBasicTerms = (
   basic: Terms_BasicArray,
-  newTextFn: (text: string) => string
+  newTextFn: (text: string) => string,
 ): Terms_BasicArray => {
   return [
     newTextFn(basic[0]),
@@ -53,7 +53,7 @@ const replaceBasicTerms = (
 
 const replaceCommandsArray = (
   commands: Terms_CommandArray,
-  newTextFn: (text: string) => string
+  newTextFn: (text: string) => string,
 ): Terms_CommandArray => {
   return [
     newTextFn(commands[0]),
@@ -87,7 +87,7 @@ const replaceCommandsArray = (
 
 const replaceParams = (
   params: System_Terms["params"],
-  newTextFn: (text: string) => string
+  newTextFn: (text: string) => string,
 ): System_Terms["params"] => [
   newTextFn(params[0]),
   newTextFn(params[1]),
@@ -100,64 +100,3 @@ const replaceParams = (
   newTextFn(params[8]),
   newTextFn(params[9]),
 ];
-
-const replaceSystemMessages = (
-  messages: Terms_Messages,
-  newTextFn: (text: string) => string
-): Terms_Messages => {
-  return {
-    actionFailure: newTextFn(messages.actionFailure),
-    actorDamage: newTextFn(messages.actorDamage),
-    actorDrain: newTextFn(messages.actorDrain),
-    actorGain: newTextFn(messages.actorGain),
-    actorLoss: newTextFn(messages.actorLoss),
-    actorNoDamage: newTextFn(messages.actorNoDamage),
-    actorNoHit: newTextFn(messages.actorNoHit),
-    actorRecovery: newTextFn(messages.actorRecovery),
-    alwaysDash: newTextFn(messages.alwaysDash),
-    autosave: newTextFn(messages.autosave),
-    bgmVolume: newTextFn(messages.bgmVolume),
-    bgsVolume: newTextFn(messages.bgsVolume),
-    buffAdd: newTextFn(messages.buffAdd),
-    buffRemove: newTextFn(messages.buffRemove),
-    commandRemember: newTextFn(messages.commandRemember),
-    counterAttack: newTextFn(messages.counterAttack),
-    criticalToActor: newTextFn(messages.criticalToActor),
-    criticalToEnemy: newTextFn(messages.criticalToEnemy),
-    defeat: newTextFn(messages.defeat),
-    debuffAdd: newTextFn(messages.debuffAdd),
-    emerge: newTextFn(messages.emerge),
-    enemyDamage: newTextFn(messages.enemyDamage),
-    enemyDrain: newTextFn(messages.enemyDrain),
-    enemyGain: newTextFn(messages.enemyGain),
-    enemyLoss: newTextFn(messages.enemyLoss),
-    enemyNoDamage: newTextFn(messages.enemyNoDamage),
-    enemyNoHit: newTextFn(messages.enemyNoHit),
-    enemyRecovery: newTextFn(messages.enemyRecovery),
-    escapeFailure: newTextFn(messages.escapeFailure),
-    escapeStart: newTextFn(messages.escapeStart),
-    evasion: newTextFn(messages.evasion),
-    expNext: newTextFn(messages.expNext),
-    expTotal: newTextFn(messages.expTotal),
-    file: newTextFn(messages.file),
-    loadMessage: newTextFn(messages.loadMessage),
-    levelUp: newTextFn(messages.levelUp),
-    magicEvasion: newTextFn(messages.magicEvasion),
-    magicReflection: newTextFn(messages.magicReflection),
-    meVolume: newTextFn(messages.meVolume),
-    obtainExp: newTextFn(messages.obtainExp),
-    obtainGold: newTextFn(messages.obtainGold),
-    obtainItem: newTextFn(messages.obtainItem),
-    obtainSkill: newTextFn(messages.obtainSkill),
-    partyName: newTextFn(messages.partyName),
-    possession: newTextFn(messages.possession),
-    preemptive: newTextFn(messages.preemptive),
-    saveMessage: newTextFn(messages.saveMessage),
-    seVolume: newTextFn(messages.seVolume),
-    substitute: newTextFn(messages.substitute),
-    surprise: newTextFn(messages.surprise),
-    touchUI: newTextFn(messages.touchUI),
-    useItem: newTextFn(messages.useItem),
-    victory: newTextFn(messages.victory),
-  };
-};
