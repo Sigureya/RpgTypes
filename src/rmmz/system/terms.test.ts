@@ -2,7 +2,7 @@ import { describe, expect, test } from "vitest";
 import type { Data_System } from "@RpgTypes/rmmz";
 import { makeTestSystemData } from "@RpgTypes/rmmz";
 import type { SystemTexts } from "./core/types";
-import { extractTextFromSystem, replaceSystemTextEx } from "./terms";
+import { extractTextFromSystem, replaceSystemTextData } from "./terms";
 
 const OLD_TEXT = "Old Text";
 const makeTestData = () => {
@@ -136,13 +136,13 @@ describe("replaceSystemTextEx", () => {
   describe("テキストの正しい置換", () => {
     test("システムテキストが正しく置換されているか", () => {
       const system = makeTestData();
-      const result = replaceSystemTextEx(system, TEXT_DATA);
+      const result = replaceSystemTextData(system, TEXT_DATA);
       const e2: SystemTexts = extractTextFromSystem(result);
       expect(e2).toEqual(TEXT_DATA);
     });
     test("システムテキストが正しく置換されているか", () => {
       const system = makeTestData();
-      const result = replaceSystemTextEx(system, TEXT_DATA);
+      const result = replaceSystemTextData(system, TEXT_DATA);
       expect(result.elements).toEqual(TEXT_DATA.elements);
       expect(result.elements).not.toBe(TEXT_DATA.elements);
       expect(result.equipTypes).toEqual(TEXT_DATA.equipTypes);
@@ -159,7 +159,7 @@ describe("replaceSystemTextEx", () => {
   describe("テキスト以外のプロパティの維持", () => {
     test("音声", () => {
       const system = makeTestData();
-      const result = replaceSystemTextEx(system, TEXT_DATA);
+      const result = replaceSystemTextData(system, TEXT_DATA);
       expect(result.battleBgm).toEqual(system.battleBgm);
       expect(result.titleBgm).toEqual(system.titleBgm);
       expect(result.defeatMe).toEqual(system.defeatMe);
@@ -169,7 +169,7 @@ describe("replaceSystemTextEx", () => {
     });
     test("", () => {
       const system = makeTestData();
-      const result = replaceSystemTextEx(system, TEXT_DATA);
+      const result = replaceSystemTextData(system, TEXT_DATA);
       expect(result.locale).toBe(system.locale);
       expect(result.versionId).toBe(system.versionId);
       expect(result.advanced).toEqual(system.advanced);
@@ -177,21 +177,21 @@ describe("replaceSystemTextEx", () => {
     });
     test("乗り物の名称が維持されているか", () => {
       const system = makeTestData();
-      const result = replaceSystemTextEx(system, TEXT_DATA);
+      const result = replaceSystemTextData(system, TEXT_DATA);
       expect(result.boat).toEqual(system.boat);
       expect(result.ship).toEqual(system.ship);
       expect(result.airship).toEqual(system.airship);
     });
     test("サイズ関連のプロパティが維持されているか", () => {
       const system = makeTestData();
-      const result = replaceSystemTextEx(system, TEXT_DATA);
+      const result = replaceSystemTextData(system, TEXT_DATA);
       expect(result.tileSize).toBe(system.tileSize);
       expect(result.faceSize).toBe(system.faceSize);
       expect(result.iconSize).toBe(system.iconSize);
     });
     test("boolean[]なパラメータが維持されるか", () => {
       const system = makeTestData();
-      const result = replaceSystemTextEx(system, TEXT_DATA);
+      const result = replaceSystemTextData(system, TEXT_DATA);
       expect(result.menuCommands).toEqual(system.menuCommands);
       expect(result.itemCategories).toEqual(system.itemCategories);
     });
@@ -321,7 +321,7 @@ describe("extractTextFromSystem", () => {
     expect(result).toEqual(expected);
   });
   test("システムテキストが正しく抽出されているか（置換後のデータで確認）", () => {
-    const newSystem: Data_System = replaceSystemTextEx(system, TEXT_DATA);
+    const newSystem: Data_System = replaceSystemTextData(system, TEXT_DATA);
     const result: SystemTexts = extractTextFromSystem(newSystem);
     expect(result).toEqual(TEXT_DATA);
   });
