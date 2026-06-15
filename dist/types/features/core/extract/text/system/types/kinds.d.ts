@@ -4,6 +4,8 @@ export interface SystemKinds {
     equipTypes: string;
     armorTypes: string;
     weaponTypes: string;
+    elements: string;
+    skillTypes: string;
 }
 export interface ExtractedSystemKinds<UUID> {
     filename: string;
