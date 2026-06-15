@@ -186,10 +186,11 @@ export const replaceDataWithHash = <T extends string>(
 ): GameDataReplaceOutput<T> => {
   const { data, dictionary } = context;
   const replaceResult = createMain(context, extractor, hashFn);
+  const omap = Array.from(dictionary.values()).map((v) => [v, v] as const);
   return {
     main: replaceResult.data,
     aux: createAux(data, replaceResult.note, dictionary, hashFn),
-    originLike: createAux(data, replaceResult.note, new Map(), hashFn),
+    originLike: createAux(data, replaceResult.note, new Map(omap), hashFn),
   };
 };
 
