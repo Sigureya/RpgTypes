@@ -1704,11 +1704,11 @@ var Hr = (e, t, n, r = Br) => Vr(e.attr.struct, `${t}["${e.name}"]`, n, r), Ur =
 	let r = Di(e, t, n);
 	return [...d(r.main), ...on(r.aux)];
 }, Di = (e, t, n) => {
-	let { data: r, dictionary: i } = e, a = Oi(e, t, n);
+	let { data: r, dictionary: i } = e, a = Oi(e, t, n), o = Array.from(i.values()).map(((e) => [e, e]));
 	return {
 		main: a.data,
 		aux: ki(r, a.note, i, n),
-		originLike: ki(r, a.note, /* @__PURE__ */ new Map(), n)
+		originLike: ki(r, a.note, new Map(o), n)
 	};
 }, Oi = (e, t, n) => {
 	let { data: r, assetBundle: i, textKeys: a } = e;
