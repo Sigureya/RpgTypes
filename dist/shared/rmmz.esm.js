@@ -2854,7 +2854,7 @@ var ht = (e) => ({
 }), kc = (e) => {
 	if (e.length >= 3e4) throw Error("Note text is too long. Please shorten it.");
 	return e.replaceAll(/<([^<>:]{1,100}):([^>]{1,1000})>/g, "");
-}, Ac = (e, t) => `<${e}:${t}>`, jc = (e, t, n = "\n") => {
+}, R = (e, t) => `<${e}:${t}>`, Ac = (e, t, n = "\n") => {
 	let r = L(e), i = r.items.map(((e) => ({
 		key: e.key,
 		value: t(e)
@@ -2863,15 +2863,15 @@ var ht = (e) => ({
 		note: r.note,
 		items: i
 	}, n);
-}, Mc = (e, t) => {
+}, jc = (e, t) => {
 	let n = Array.from(e.matchAll(/<([^<>:]{1,100}):([^>]{1,1000})>/g)).find(((e) => e[1] === t));
 	return n ? n[2] : void 0;
-}, Nc = (e, t, n) => e.replace(/<([^<>:]{1,100}):([^>]{1,1000})>/g, ((e, r) => r === t ? Ac(r, n) : e)), Pc = (e) => Array.from(e.note.matchAll(/<([^<>:]{1,100}):([^>]{1,1000})>/g)).map(((t) => ({
+}, Mc = (e, t, n) => e.replace(/<([^<>:]{1,100}):([^>]{1,1000})>/g, ((e, r) => r === t ? R(r, n) : e)), Nc = (e) => Array.from(e.note.matchAll(/<([^<>:]{1,100}):([^>]{1,1000})>/g)).map(((t) => ({
 	key: t[1],
 	value: t[2],
 	id: e.id,
 	name: e.name
-}))), Fc = (e, t, n = "\n") => {
+}))), Pc = (e, t, n = "\n") => {
 	let r = L(e), i = r.items.reduce(((e, n) => {
 		let r = t.isReplaceTargetNote(n), i = r ? {
 			key: n.key,
@@ -2886,38 +2886,38 @@ var ht = (e) => ({
 		note: r.note,
 		items: i.items
 	}, n) : e;
-}, Ic = "data", Lc = "actor", Rc = "map", zc = "enemy", Bc = "state", Vc = "skill", Hc = "item", Uc = "weapon", Wc = "armor", Gc = "class", Kc = "common_event", qc = "troop", Jc = (e) => [
-	Yc(e.elementRate),
-	Xc(e.debuffRate),
-	Zc(e.stateRate),
-	Qc(e.stateResist),
-	$c(e.regularParam),
-	el(e.extraParam),
-	tl(e.specialParam),
-	nl(e.attackElement),
-	rl(e.attackState),
-	il(e.attackSpeed),
-	al(e.attackTimes),
-	ol(e.attackSkill),
-	sl(e.skillTypeAdd),
-	cl(e.skillTypeSeal),
-	ll(e.skillAdd),
-	ul(e.skillSeal),
-	dl(e.equipWeaponType),
-	fl(e.equipArmorType),
-	pl(e.equipLock),
-	ml(e.equipSeal),
-	hl(e.slotType),
-	gl(e.actionPlus),
-	_l(e.specialFlag),
-	vl(e.collaps),
-	yl(e.partyAbility)
-], Yc = (e) => ({
+}, Fc = "data", Ic = "actor", Lc = "map", Rc = "enemy", zc = "state", Bc = "skill", Vc = "item", Hc = "weapon", Uc = "armor", Wc = "class", Gc = "common_event", Kc = "troop", qc = (e) => [
+	Jc(e.elementRate),
+	Yc(e.debuffRate),
+	Xc(e.stateRate),
+	Zc(e.stateResist),
+	Qc(e.regularParam),
+	$c(e.extraParam),
+	el(e.specialParam),
+	tl(e.attackElement),
+	nl(e.attackState),
+	rl(e.attackSpeed),
+	il(e.attackTimes),
+	al(e.attackSkill),
+	ol(e.skillTypeAdd),
+	sl(e.skillTypeSeal),
+	cl(e.skillAdd),
+	ll(e.skillSeal),
+	ul(e.equipWeaponType),
+	dl(e.equipArmorType),
+	fl(e.equipLock),
+	pl(e.equipSeal),
+	ml(e.slotType),
+	hl(e.actionPlus),
+	gl(e.specialFlag),
+	_l(e.collaps),
+	vl(e.partyAbility)
+], Jc = (e) => ({
 	pattern: e.format,
 	label: e.title,
 	kindId: 11,
-	dataSource: bl()
-}), Xc = (e) => ({
+	dataSource: yl()
+}), Yc = (e) => ({
 	pattern: e.format,
 	label: e.title,
 	kindId: 12,
@@ -2926,17 +2926,17 @@ var ht = (e) => ({
 		module: "trait",
 		kind: "params"
 	}
-}), Zc = (e) => ({
+}), Xc = (e) => ({
 	pattern: e.format,
 	label: e.title,
 	kindId: 13,
-	dataSource: R()
-}), Qc = (e) => ({
+	dataSource: z()
+}), Zc = (e) => ({
 	pattern: e.format,
 	label: e.title,
 	kindId: 14,
-	dataSource: R()
-}), $c = (e) => ({
+	dataSource: z()
+}), Qc = (e) => ({
 	pattern: e.format,
 	label: e.title,
 	kindId: 21,
@@ -2945,7 +2945,7 @@ var ht = (e) => ({
 		module: "trait",
 		kind: "params"
 	}
-}), el = (e) => ({
+}), $c = (e) => ({
 	pattern: e.format,
 	label: e.title,
 	kindId: 22,
@@ -2954,7 +2954,7 @@ var ht = (e) => ({
 		module: "trait",
 		kind: "xparams"
 	}
-}), tl = (e) => ({
+}), el = (e) => ({
 	pattern: e.format,
 	label: e.title,
 	kindId: 23,
@@ -2963,79 +2963,79 @@ var ht = (e) => ({
 		module: "trait",
 		kind: "sparams"
 	}
-}), nl = (e) => ({
+}), tl = (e) => ({
 	pattern: e.format,
 	label: e.title,
 	kindId: 31,
-	dataSource: bl()
-}), rl = (e) => ({
+	dataSource: yl()
+}), nl = (e) => ({
 	pattern: e.format,
 	label: e.title,
 	kindId: 32,
-	dataSource: R()
-}), il = (e) => ({
+	dataSource: z()
+}), rl = (e) => ({
 	pattern: e.format,
 	label: e.title,
 	kindId: 33
-}), al = (e) => ({
+}), il = (e) => ({
 	pattern: e.format,
 	label: e.title,
 	kindId: 34
-}), ol = (e) => ({
+}), al = (e) => ({
 	pattern: e.format,
 	label: e.title,
 	kindId: 35,
-	dataSource: z()
-}), sl = (e) => ({
+	dataSource: B()
+}), ol = (e) => ({
 	pattern: e.format,
 	label: e.title,
 	kindId: 41,
-	dataSource: xl()
-}), cl = (e) => ({
+	dataSource: bl()
+}), sl = (e) => ({
 	pattern: e.format,
 	label: e.title,
 	kindId: 42,
-	dataSource: xl()
-}), ll = (e) => ({
+	dataSource: bl()
+}), cl = (e) => ({
 	pattern: e.format,
 	label: e.title,
 	kindId: 43,
-	dataSource: z()
-}), ul = (e) => ({
+	dataSource: B()
+}), ll = (e) => ({
 	pattern: e.format,
 	label: e.title,
 	kindId: 44,
-	dataSource: z()
-}), dl = (e) => ({
+	dataSource: B()
+}), ul = (e) => ({
 	pattern: e.format,
 	label: e.title,
 	kindId: 51,
+	dataSource: xl()
+}), dl = (e) => ({
+	pattern: e.format,
+	label: e.title,
+	kindId: 52,
 	dataSource: Sl()
 }), fl = (e) => ({
 	pattern: e.format,
 	label: e.title,
-	kindId: 52,
-	dataSource: Cl()
+	kindId: 53,
+	dataSource: V()
 }), pl = (e) => ({
 	pattern: e.format,
 	label: e.title,
-	kindId: 53,
-	dataSource: B()
+	kindId: 54,
+	dataSource: V()
 }), ml = (e) => ({
 	pattern: e.format,
 	label: e.title,
-	kindId: 54,
-	dataSource: B()
+	kindId: 55,
+	dataSource: V()
 }), hl = (e) => ({
 	pattern: e.format,
 	label: e.title,
-	kindId: 55,
-	dataSource: B()
-}), gl = (e) => ({
-	pattern: e.format,
-	label: e.title,
 	kindId: 61
-}), _l = (e) => ({
+}), gl = (e) => ({
 	pattern: e.format,
 	label: e.title,
 	kindId: 62,
@@ -3044,7 +3044,7 @@ var ht = (e) => ({
 		module: "trait",
 		kind: "sflag"
 	}
-}), vl = (e) => ({
+}), _l = (e) => ({
 	pattern: e.format,
 	label: e.title,
 	kindId: 63,
@@ -3053,7 +3053,7 @@ var ht = (e) => ({
 		module: "trait",
 		kind: "collaps"
 	}
-}), yl = (e) => ({
+}), vl = (e) => ({
 	pattern: e.format,
 	label: e.title,
 	kindId: 64,
@@ -3062,35 +3062,35 @@ var ht = (e) => ({
 		module: "trait",
 		kind: "partyAbility"
 	}
-}), R = () => ({
-	author: "rmmz",
-	module: "data",
-	kind: "state"
 }), z = () => ({
 	author: "rmmz",
 	module: "data",
+	kind: "state"
+}), B = () => ({
+	author: "rmmz",
+	module: "data",
 	kind: "skill"
-}), bl = () => ({
+}), yl = () => ({
 	author: "rmmz",
 	module: "system",
 	kind: "elements"
-}), xl = () => ({
+}), bl = () => ({
 	author: "rmmz",
 	module: "system",
 	kind: "skillTypes"
-}), Sl = () => ({
+}), xl = () => ({
 	author: "rmmz",
 	module: "system",
 	kind: "weaponTypes"
-}), Cl = () => ({
+}), Sl = () => ({
 	author: "rmmz",
 	module: "system",
 	kind: "armorTypes"
-}), B = () => ({
+}), V = () => ({
 	author: "rmmz",
 	module: "system",
 	kind: "equipTypes"
-}), wl = {
+}), Cl = {
 	id: "識別子",
 	name: "名前",
 	note: "メモ",
@@ -3134,15 +3134,15 @@ var ht = (e) => ({
 	instantCollaps: "即時崩壊",
 	noneCollaps: "崩壊なし",
 	escape: "逃走"
-}, Tl = () => ({
+}, wl = () => ({
 	rpg: {
 		damage: ks,
 		data: Pa,
 		traits: Ts,
 		itemEffect: dc
 	},
-	global: wl
-}), El = [
+	global: Cl
+}), Tl = [
 	"$gameVariables",
 	"$gameSystem",
 	"$gameScreen",
@@ -3156,7 +3156,7 @@ var ht = (e) => ({
 	"$gameMap",
 	"$gamePlayer",
 	"$gameTemp"
-], Dl = [
+], El = [
 	"$dataActors",
 	"$dataClasses",
 	"$dataSkills",
@@ -3170,13 +3170,13 @@ var ht = (e) => ({
 	"$dataAnimations",
 	"$dataTilesets",
 	"$dataCommonEvents"
-], Ol = [
+], Dl = [
 	"SceneManager",
 	"AudioManager",
 	"ImageManager",
 	"DataManager",
 	"PluginManager"
-], kl = ["Math.max", "Math.min"], Al = (e) => V(e, El) || V(e, Dl) || V(e, Ol) || V(e, kl), V = (e, t) => t.some(((t) => e.includes(t))), jl = (e = {}) => ({
+], Ol = ["Math.max", "Math.min"], kl = (e) => H(e, Tl) || H(e, El) || H(e, Dl) || H(e, Ol), H = (e, t) => t.some(((t) => e.includes(t))), Al = (e = {}) => ({
 	gameId: e.gameId ?? 0,
 	screenWidth: e.screenWidth ?? 0,
 	screenHeight: e.screenHeight ?? 0,
@@ -3189,7 +3189,7 @@ var ht = (e) => ({
 	fallbackFonts: e.fallbackFonts ?? "",
 	fontSize: e.fontSize ?? 28,
 	picturesUpperLimit: e.picturesUpperLimit ?? 100
-}), Ml = (e = {}) => [
+}), jl = (e = {}) => [
 	t(e.cursor),
 	t(e.ok),
 	t(e.cancel),
@@ -3214,7 +3214,7 @@ var ht = (e) => ({
 	t(e.shop),
 	t(e.useItem),
 	t(e.useSkill)
-], H = (e) => ({
+], U = (e) => ({
 	cursor: e[0],
 	ok: e[1],
 	cancel: e[2],
@@ -3239,38 +3239,38 @@ var ht = (e) => ({
 	shop: e[21],
 	useItem: e[22],
 	useSkill: e[23]
-}), Nl = (e) => ({
-	item: Pl(e),
-	skill: Fl(e),
-	equip: Il(e),
-	status: Ll(e),
-	formation: Rl(e),
-	save: zl(e)
-}), Pl = (e) => e.menuCommands[0], Fl = (e) => e.menuCommands[1], Il = (e) => e.menuCommands[2], Ll = (e) => e.menuCommands[3], Rl = (e) => e.menuCommands[4], zl = (e) => e.menuCommands[5], Bl = (e) => e.itemCategories[0], Vl = (e) => e.itemCategories[1], Hl = (e) => e.itemCategories[2], Ul = (e) => e.itemCategories[3], Wl = (e = {}) => [
+}), Ml = (e) => ({
+	item: Nl(e),
+	skill: Pl(e),
+	equip: Fl(e),
+	status: Il(e),
+	formation: Ll(e),
+	save: Rl(e)
+}), Nl = (e) => e.menuCommands[0], Pl = (e) => e.menuCommands[1], Fl = (e) => e.menuCommands[2], Il = (e) => e.menuCommands[3], Ll = (e) => e.menuCommands[4], Rl = (e) => e.menuCommands[5], zl = (e) => e.itemCategories[0], Bl = (e) => e.itemCategories[1], Vl = (e) => e.itemCategories[2], Hl = (e) => e.itemCategories[3], Ul = (e = {}) => [
 	e.item ?? !0,
 	e.weapon ?? !0,
 	e.armor ?? !0,
 	e.keyItem ?? !0
-], Gl = (e) => ({
+], Wl = (e) => ({
 	item: e[0],
 	weapon: e[1],
 	armor: e[2],
 	keyItem: e[3]
-}), Kl = (e = {}) => [
+}), Gl = (e = {}) => [
 	e.item ?? !0,
 	e.skill ?? !0,
 	e.equip ?? !0,
 	e.status ?? !0,
 	e.formation ?? !0,
 	e.save ?? !0
-], ql = (e) => ({
+], Kl = (e) => ({
 	item: e[0],
 	skill: e[1],
 	equip: e[2],
 	status: e[3],
 	formation: e[4],
 	save: e[5]
-}), Jl = (e = {}) => ({
+}), ql = (e = {}) => ({
 	optAutosave: e.optAutosave ?? !0,
 	optDisplayTp: e.optDisplayTp ?? !0,
 	optDrawTitle: e.optDrawTitle ?? !0,
@@ -3283,141 +3283,141 @@ var ht = (e) => ({
 	optTransparent: e.optTransparent ?? !0,
 	optMessageSkip: e.optMessageSkip ?? !0,
 	optSplashScreen: e.optSplashScreen ?? !0
-}), Yl = (e = {}) => ({
+}), Jl = (e = {}) => ({
 	startMapId: e.startMapId ?? 0,
 	startX: e.startX ?? 0,
 	startY: e.startY ?? 0,
 	partyMembers: e.partyMembers ? Array.from(e.partyMembers) : [1]
-}), U = (e, t) => ({
+}), W = (e, t) => ({
 	name: e,
 	id: t
-}), Xl = (e) => e.variables.map(U), Zl = (e) => e.elements.map(U), Ql = (e) => e.equipTypes.map(U), $l = (e) => e.skillTypes.map(U), eu = (e) => e.weaponTypes.map(U), tu = (e) => e.armorTypes.map(U), nu = (e) => e.switches.map(U), ru = (e, t) => [
-	au(e, t),
-	ou(e, t),
-	uu(e, t),
-	su(e, t),
+}), Yl = (e) => e.variables.map(W), Xl = (e) => e.elements.map(W), Zl = (e) => e.equipTypes.map(W), Ql = (e) => e.skillTypes.map(W), $l = (e) => e.weaponTypes.map(W), eu = (e) => e.armorTypes.map(W), tu = (e) => e.switches.map(W), nu = (e, t) => [
 	iu(e, t),
-	cu(e, t),
-	lu(e, t)
-], iu = (e, t) => ({
-	items: tu(e),
+	au(e, t),
+	lu(e, t),
+	ou(e, t),
+	ru(e, t),
+	su(e, t),
+	cu(e, t)
+], ru = (e, t) => ({
+	items: eu(e),
 	label: t.options.armorTypes,
 	source: {
 		author: "rmmz",
 		module: "system",
 		kind: "armorTypes"
 	}
-}), au = (e, t) => ({
-	items: Zl(e),
+}), iu = (e, t) => ({
+	items: Xl(e),
 	label: t.options.elements,
 	source: {
 		author: "rmmz",
 		module: "system",
 		kind: "elements"
 	}
-}), ou = (e, t) => ({
-	items: Ql(e),
+}), au = (e, t) => ({
+	items: Zl(e),
 	label: t.options.equipTypes,
 	source: {
 		author: "rmmz",
 		module: "system",
 		kind: "equipTypes"
 	}
-}), su = (e, t) => ({
-	items: $l(e),
+}), ou = (e, t) => ({
+	items: Ql(e),
 	label: t.options.skillTypes,
 	source: {
 		author: "rmmz",
 		module: "system",
 		kind: "skillTypes"
 	}
-}), cu = (e, t) => ({
-	items: Xl(e),
+}), su = (e, t) => ({
+	items: Yl(e),
 	label: t.options.variables,
 	source: {
 		author: "rmmz",
 		module: "system",
 		kind: "variable"
 	}
-}), lu = (e, t) => ({
-	items: nu(e),
+}), cu = (e, t) => ({
+	items: tu(e),
 	label: t.options.switches,
 	source: {
 		author: "rmmz",
 		module: "system",
 		kind: "switch"
 	}
-}), uu = (e, t) => ({
-	items: eu(e),
+}), lu = (e, t) => ({
+	items: $l(e),
 	label: t.options.weaponTypes,
 	source: {
 		author: "rmmz",
 		module: "system",
 		kind: "weaponTypes"
 	}
+}), uu = (e) => ({
+	armorTypes: G(e.armorTypes),
+	elements: G(e.elements),
+	equipTypes: G(e.equipTypes),
+	weaponTypes: G(e.weaponTypes),
+	skillTypes: G(e.skillTypes),
+	variables: G(e.variables),
+	switches: G(e.switches)
+}), G = (e) => e ? [...e] : [], K = (e, t) => typeof e == "string" ? e : t, q = (e) => ({
+	actionFailure: K(e.actionFailure, "Action failed."),
+	actorDamage: K(e.actorDamage, "%1 took %2 damage."),
+	actorRecovery: K(e.actorRecovery, "%1 recovered %2 HP."),
+	actorGain: K(e.actorGain, "%1 gained %2."),
+	actorLoss: K(e.actorLoss, "%1 lost %2."),
+	actorDrain: K(e.actorDrain, "%1 drained %2 HP."),
+	actorNoDamage: K(e.actorNoDamage, "%1 was not damaged."),
+	actorNoHit: K(e.actorNoHit, "%1 was not hit."),
+	alwaysDash: K(e.alwaysDash, "Always dash."),
+	bgmVolume: K(e.bgmVolume, "BGM volume"),
+	bgsVolume: K(e.bgsVolume, "BGS volume"),
+	commandRemember: K(e.commandRemember, "Command remember."),
+	criticalToActor: K(e.criticalToActor, "%1 dealt %2 damage to %3."),
+	criticalToEnemy: K(e.criticalToEnemy, "%1 dealt %2 damage to %3."),
+	counterAttack: K(e.counterAttack, "%1 countered!"),
+	debuffAdd: K(e.debuffAdd, "%1's %2 was lowered."),
+	defeat: K(e.defeat, "Defeat."),
+	enemyDamage: K(e.enemyDamage, "%1 took %2 damage."),
+	enemyDrain: K(e.enemyDrain, "%1 drained %2 HP."),
+	enemyGain: K(e.enemyGain, "%1 gained %2."),
+	enemyLoss: K(e.enemyLoss, "%1 lost %2."),
+	enemyNoDamage: K(e.enemyNoDamage, "%1 was not damaged."),
+	enemyNoHit: K(e.enemyNoHit, "%1 was not hit."),
+	enemyRecovery: K(e.enemyRecovery, "%1 recovered %2 HP."),
+	evasion: K(e.evasion, "%1 evaded the attack!"),
+	autosave: K(e.autosave, "Autosave"),
+	escapeFailure: K(e.escapeFailure, "Escape failed."),
+	escapeStart: K(e.escapeStart, "%1 started to escape!"),
+	emerge: K(e.emerge, "%1 appeared!"),
+	expNext: K(e.expNext, "Next level in %1 EXP."),
+	expTotal: K(e.expTotal, "Total EXP: %1"),
+	file: K(e.file, "File"),
+	buffAdd: K(e.buffAdd, "%1's %2 was raised."),
+	buffRemove: K(e.buffRemove, "%1's %2 was lowered."),
+	obtainExp: K(e.obtainExp, "%1 EXP obtained."),
+	obtainGold: K(e.obtainGold, "%1 gold obtained."),
+	obtainItem: K(e.obtainItem, "%1 obtained %2."),
+	obtainSkill: K(e.obtainSkill, "%1 learned %2."),
+	levelUp: K(e.levelUp, "%1 leveled up!"),
+	partyName: K(e.partyName, "Party"),
+	loadMessage: K(e.loadMessage, "Load %1?"),
+	meVolume: K(e.meVolume, "ME volume"),
+	possession: K(e.possession, "Possession"),
+	preemptive: K(e.preemptive, "%1 attacked first!"),
+	saveMessage: K(e.saveMessage, "Save %1?"),
+	seVolume: K(e.seVolume, "SE volume"),
+	magicEvasion: K(e.magicEvasion, "%1 evaded the magic!"),
+	magicReflection: K(e.magicReflection, "%1 reflected the magic!"),
+	substitute: K(e.substitute, "%1 took the hit!"),
+	surprise: K(e.surprise, "%1 surprised the enemy!"),
+	touchUI: K(e.touchUI, "Touch UI"),
+	useItem: K(e.useItem, "%1 used %2."),
+	victory: K(e.victory, "Victory!")
 }), du = (e) => ({
-	armorTypes: W(e.armorTypes),
-	elements: W(e.elements),
-	equipTypes: W(e.equipTypes),
-	weaponTypes: W(e.weaponTypes),
-	skillTypes: W(e.skillTypes),
-	variables: W(e.variables),
-	switches: W(e.switches)
-}), W = (e) => e ? [...e] : [], G = (e, t) => typeof e == "string" ? e : t, K = (e) => ({
-	actionFailure: G(e.actionFailure, "Action failed."),
-	actorDamage: G(e.actorDamage, "%1 took %2 damage."),
-	actorRecovery: G(e.actorRecovery, "%1 recovered %2 HP."),
-	actorGain: G(e.actorGain, "%1 gained %2."),
-	actorLoss: G(e.actorLoss, "%1 lost %2."),
-	actorDrain: G(e.actorDrain, "%1 drained %2 HP."),
-	actorNoDamage: G(e.actorNoDamage, "%1 was not damaged."),
-	actorNoHit: G(e.actorNoHit, "%1 was not hit."),
-	alwaysDash: G(e.alwaysDash, "Always dash."),
-	bgmVolume: G(e.bgmVolume, "BGM volume"),
-	bgsVolume: G(e.bgsVolume, "BGS volume"),
-	commandRemember: G(e.commandRemember, "Command remember."),
-	criticalToActor: G(e.criticalToActor, "%1 dealt %2 damage to %3."),
-	criticalToEnemy: G(e.criticalToEnemy, "%1 dealt %2 damage to %3."),
-	counterAttack: G(e.counterAttack, "%1 countered!"),
-	debuffAdd: G(e.debuffAdd, "%1's %2 was lowered."),
-	defeat: G(e.defeat, "Defeat."),
-	enemyDamage: G(e.enemyDamage, "%1 took %2 damage."),
-	enemyDrain: G(e.enemyDrain, "%1 drained %2 HP."),
-	enemyGain: G(e.enemyGain, "%1 gained %2."),
-	enemyLoss: G(e.enemyLoss, "%1 lost %2."),
-	enemyNoDamage: G(e.enemyNoDamage, "%1 was not damaged."),
-	enemyNoHit: G(e.enemyNoHit, "%1 was not hit."),
-	enemyRecovery: G(e.enemyRecovery, "%1 recovered %2 HP."),
-	evasion: G(e.evasion, "%1 evaded the attack!"),
-	autosave: G(e.autosave, "Autosave"),
-	escapeFailure: G(e.escapeFailure, "Escape failed."),
-	escapeStart: G(e.escapeStart, "%1 started to escape!"),
-	emerge: G(e.emerge, "%1 appeared!"),
-	expNext: G(e.expNext, "Next level in %1 EXP."),
-	expTotal: G(e.expTotal, "Total EXP: %1"),
-	file: G(e.file, "File"),
-	buffAdd: G(e.buffAdd, "%1's %2 was raised."),
-	buffRemove: G(e.buffRemove, "%1's %2 was lowered."),
-	obtainExp: G(e.obtainExp, "%1 EXP obtained."),
-	obtainGold: G(e.obtainGold, "%1 gold obtained."),
-	obtainItem: G(e.obtainItem, "%1 obtained %2."),
-	obtainSkill: G(e.obtainSkill, "%1 learned %2."),
-	levelUp: G(e.levelUp, "%1 leveled up!"),
-	partyName: G(e.partyName, "Party"),
-	loadMessage: G(e.loadMessage, "Load %1?"),
-	meVolume: G(e.meVolume, "ME volume"),
-	possession: G(e.possession, "Possession"),
-	preemptive: G(e.preemptive, "%1 attacked first!"),
-	saveMessage: G(e.saveMessage, "Save %1?"),
-	seVolume: G(e.seVolume, "SE volume"),
-	magicEvasion: G(e.magicEvasion, "%1 evaded the magic!"),
-	magicReflection: G(e.magicReflection, "%1 reflected the magic!"),
-	substitute: G(e.substitute, "%1 took the hit!"),
-	surprise: G(e.surprise, "%1 surprised the enemy!"),
-	touchUI: G(e.touchUI, "Touch UI"),
-	useItem: G(e.useItem, "%1 used %2."),
-	victory: G(e.victory, "Victory!")
-}), fu = (e) => ({
 	actionFailure: e.actionFailure,
 	actorDamage: e.actorDamage,
 	actorRecovery: e.actorRecovery,
@@ -3469,10 +3469,10 @@ var ht = (e) => ({
 	preemptive: e.preemptive,
 	saveMessage: e.saveMessage,
 	seVolume: e.seVolume
-}), pu = (e) => e.terms.params.map(((e, t) => ({
+}), fu = (e) => e.terms.params.map(((e, t) => ({
 	name: e,
 	id: t
-}))), mu = (e) => [
+}))), pu = (e) => [
 	e.mhp ?? "",
 	e.mmp ?? "",
 	e.atk ?? "",
@@ -3483,7 +3483,7 @@ var ht = (e) => ({
 	e.luk ?? "",
 	e.hit ?? "",
 	e.eva ?? ""
-], q = (e) => ({
+], J = (e) => ({
 	mhp: e[0],
 	mmp: e[1],
 	atk: e[2],
@@ -3494,7 +3494,7 @@ var ht = (e) => ({
 	luk: e[7],
 	hit: e[8],
 	eva: e[9]
-}), J = (e) => [
+}), mu = (e) => [
 	e.level ?? "Level",
 	e.levelA ?? "Level",
 	e.hp ?? "HP",
@@ -3656,13 +3656,13 @@ var ht = (e) => ({
 }, Q = (e) => {
 	let n = wu(e.size);
 	return {
-		...Jl(e.options),
+		...ql(e.options),
 		titleCommandWindow: _u(e.titleCommandWindow ?? {}),
 		currencyUnit: e.texts?.currencyUnit ?? "",
 		gameTitle: e.texts?.gameTitle ?? "",
-		sounds: Ml(e.sounds),
+		sounds: jl(e.sounds),
 		editor: vu(e.editing),
-		advanced: jl(e.advanced),
+		advanced: Al(e.advanced),
 		title1Name: e.images?.title1Name ?? "",
 		title2Name: e.images?.title2Name ?? "",
 		armorTypes: $(e.dataNames?.armorTypes),
@@ -3704,16 +3704,16 @@ var ht = (e) => ({
 			0
 		],
 		terms: Cu(e.terms ?? {}),
-		itemCategories: Wl(e.itemCategories),
+		itemCategories: Ul(e.itemCategories),
 		partyMembers: $(e.gameInit?.partyMembers),
 		battlerHue: 0,
-		menuCommands: Kl(e.menuCommands)
+		menuCommands: Gl(e.menuCommands)
 	};
 }, Cu = (e) => ({
-	basic: J(e.basic ?? {}),
+	basic: mu(e.basic ?? {}),
 	commands: hu(e.commands ?? {}),
-	params: mu(e.params ?? {}),
-	messages: K(e.messages ?? {})
+	params: pu(e.params ?? {}),
+	messages: q(e.messages ?? {})
 }), $ = (e) => e ? [...e] : [], wu = (e) => e ? {
 	tileSize: e.tileSize ?? 48,
 	faceSize: e.faceSize ?? 144,
@@ -3730,7 +3730,71 @@ var ht = (e) => ({
 	actorId: 0,
 	equips: [],
 	level: 1
-}, Du = (e) => ({
+}, Du = (e, t) => {
+	let n = (e) => t(e) ?? e;
+	return {
+		gameTitle: n(e.gameTitle),
+		currencyUnit: n(e.currencyUnit),
+		equipTypes: e.equipTypes.map(n),
+		armorTypes: e.armorTypes.map(n),
+		weaponTypes: e.weaponTypes.map(n),
+		elements: e.elements.map(n),
+		skillTypes: e.skillTypes.map(n),
+		terms: {
+			messages: Nu(e.terms.messages, n),
+			basic: Ou(e.terms.basic, n),
+			params: ku(e.terms.params, n),
+			commands: Au(e.terms.commands, n)
+		}
+	};
+}, Ou = (e, t) => ({
+	level: t(e.level),
+	levelA: t(e.levelA),
+	hp: t(e.hp),
+	hpA: t(e.hpA),
+	mp: t(e.mp),
+	mpA: t(e.mpA),
+	tp: t(e.tp),
+	tpA: t(e.tpA),
+	experience: t(e.experience),
+	exp: t(e.exp)
+}), ku = (e, t) => ({
+	mhp: t(e.mhp),
+	mmp: t(e.mmp),
+	atk: t(e.atk),
+	def: t(e.def),
+	mat: t(e.mat),
+	mdf: t(e.mdf),
+	agi: t(e.agi),
+	luk: t(e.luk),
+	hit: t(e.hit),
+	eva: t(e.eva)
+}), Au = (e, t) => ({
+	item: t(e.item),
+	skill: t(e.skill),
+	equip: t(e.equip),
+	status: t(e.status),
+	formation: t(e.formation),
+	save: t(e.save),
+	gameEnd: t(e.gameEnd),
+	options: t(e.options),
+	weapon: t(e.weapon),
+	armor: t(e.armor),
+	keyItem: t(e.keyItem),
+	equip2: t(e.equip2),
+	optimize: t(e.optimize),
+	clear: t(e.clear),
+	newGame: t(e.newGame),
+	continueGame: t(e.continueGame),
+	toTitle: t(e.toTitle),
+	cancel: t(e.cancel),
+	buy: t(e.buy),
+	sell: t(e.sell),
+	attack: t(e.attack),
+	guard: t(e.guard),
+	escape: t(e.escape),
+	fight: t(e.fight)
+}), ju = (e) => ({
 	gameTitle: e.gameTitle,
 	currencyUnit: e.currencyUnit,
 	equipTypes: [...e.equipTypes],
@@ -3741,17 +3805,17 @@ var ht = (e) => ({
 	terms: {
 		basic: Y(e.terms.basic),
 		commands: X(e.terms.commands),
-		messages: K(e.terms.messages),
-		params: q(e.terms.params)
+		messages: q(e.terms.messages),
+		params: J(e.terms.params)
 	}
-}), Ou = (e, t) => Q({
+}), Mu = (e, t) => Q({
 	locale: e.locale,
 	versionId: e.versionId,
 	options: e,
 	advanced: e.advanced,
 	vehicles: e,
 	editing: e.editor,
-	sounds: H(e.sounds),
+	sounds: U(e.sounds),
 	images: {
 		title1Name: e.title1Name,
 		title2Name: e.title2Name
@@ -3784,8 +3848,8 @@ var ht = (e) => ({
 		messages: t.terms.messages,
 		params: t.terms.params
 	},
-	itemCategories: Gl(e.itemCategories),
-	menuCommands: ql(e.menuCommands),
+	itemCategories: Wl(e.itemCategories),
+	menuCommands: Kl(e.menuCommands),
 	titleCommandWindow: e.titleCommandWindow,
 	size: {
 		tileSize: e.tileSize,
@@ -3813,7 +3877,61 @@ var ht = (e) => ({
 		testBattlers: e.testBattlers,
 		testTroopId: e.testTroopId
 	}
-}), ku = (e = Q({})) => ({
+}), Nu = (e, t) => ({
+	actionFailure: t(e.actionFailure),
+	actorDamage: t(e.actorDamage),
+	actorDrain: t(e.actorDrain),
+	actorGain: t(e.actorGain),
+	actorLoss: t(e.actorLoss),
+	actorNoDamage: t(e.actorNoDamage),
+	actorNoHit: t(e.actorNoHit),
+	actorRecovery: t(e.actorRecovery),
+	alwaysDash: t(e.alwaysDash),
+	autosave: t(e.autosave),
+	bgmVolume: t(e.bgmVolume),
+	bgsVolume: t(e.bgsVolume),
+	buffAdd: t(e.buffAdd),
+	buffRemove: t(e.buffRemove),
+	commandRemember: t(e.commandRemember),
+	counterAttack: t(e.counterAttack),
+	criticalToActor: t(e.criticalToActor),
+	criticalToEnemy: t(e.criticalToEnemy),
+	defeat: t(e.defeat),
+	debuffAdd: t(e.debuffAdd),
+	emerge: t(e.emerge),
+	enemyDamage: t(e.enemyDamage),
+	enemyDrain: t(e.enemyDrain),
+	enemyGain: t(e.enemyGain),
+	enemyLoss: t(e.enemyLoss),
+	enemyNoDamage: t(e.enemyNoDamage),
+	enemyNoHit: t(e.enemyNoHit),
+	enemyRecovery: t(e.enemyRecovery),
+	escapeFailure: t(e.escapeFailure),
+	escapeStart: t(e.escapeStart),
+	evasion: t(e.evasion),
+	expNext: t(e.expNext),
+	expTotal: t(e.expTotal),
+	file: t(e.file),
+	loadMessage: t(e.loadMessage),
+	levelUp: t(e.levelUp),
+	magicEvasion: t(e.magicEvasion),
+	magicReflection: t(e.magicReflection),
+	meVolume: t(e.meVolume),
+	obtainExp: t(e.obtainExp),
+	obtainGold: t(e.obtainGold),
+	obtainItem: t(e.obtainItem),
+	obtainSkill: t(e.obtainSkill),
+	partyName: t(e.partyName),
+	possession: t(e.possession),
+	preemptive: t(e.preemptive),
+	saveMessage: t(e.saveMessage),
+	seVolume: t(e.seVolume),
+	substitute: t(e.substitute),
+	surprise: t(e.surprise),
+	touchUI: t(e.touchUI),
+	useItem: t(e.useItem),
+	victory: t(e.victory)
+}), Pu = (e = Q({})) => ({
 	versionId: e.versionId,
 	menuCommands: e.menuCommands,
 	locale: e.locale,
@@ -3863,11 +3981,11 @@ var ht = (e) => ({
 		basic: e.terms.basic,
 		commands: e.terms.commands,
 		params: e.terms.params,
-		messages: fu(e.terms.messages)
+		messages: du(e.terms.messages)
 	}
-}), Au = (e) => Q({
+}), Fu = (e) => Q({
 	versionId: e.versionId,
-	menuCommands: Nl(e),
+	menuCommands: Ml(e),
 	locale: e.locale,
 	gameInit: {
 		startMapId: e.startMapId,
@@ -3902,7 +4020,7 @@ var ht = (e) => ({
 		testBattlers: e.testBattlers
 	},
 	attackMotion: e.attackMotions,
-	sounds: H(e.sounds),
+	sounds: U(e.sounds),
 	dataNames: {
 		skillTypes: e.skillTypes,
 		weaponTypes: e.weaponTypes,
@@ -3924,10 +4042,10 @@ var ht = (e) => ({
 	terms: {
 		basic: Y(e.terms.basic),
 		commands: X(e.terms.commands),
-		params: q(e.terms.params),
+		params: J(e.terms.params),
 		messages: e.terms.messages
 	}
-}), ju = ({ audio: e, image: n, systemText: r, switches: i, variables: a }) => Q({
+}), Iu = ({ audio: e, image: n, systemText: r, switches: i, variables: a }) => Q({
 	me: {
 		defeatMe: t({
 			name: e,
@@ -4000,9 +4118,9 @@ var ht = (e) => ({
 		gameTitle: r,
 		currencyUnit: r
 	},
-	terms: Mu(r),
-	sounds: Nu(e)
-}), Mu = (e) => ({
+	terms: Lu(r),
+	sounds: Ru(e)
+}), Lu = (e) => ({
 	basic: {
 		exp: e,
 		experience: e,
@@ -4108,7 +4226,7 @@ var ht = (e) => ({
 		optimize: e,
 		weapon: e
 	}
-}), Nu = (e) => {
+}), Ru = (e) => {
 	let n = t({
 		name: e,
 		volume: 90,
@@ -4140,16 +4258,16 @@ var ht = (e) => ({
 		ok: n,
 		playReflection: n
 	};
-}, Pu = (e) => ({
+}, zu = (e) => ({
 	...e.text ? { text: e.text } : {},
 	...e.desc ? { desc: e.desc } : {}
-}), Fu = {
+}), Bu = {
 	LEFT: 4,
 	UP: 8,
 	DOWN: 2,
 	RIGHT: 6
-}, Iu = (e) => {
+}, Vu = (e) => {
 	let t = e.split("/");
 	return t[t.length - 1];
 };
-export { Ml as $, kr as $a, Oe as $c, Ni as $i, Ko as $n, jn as $o, Ua as $r, kt as $s, Js as $t, Zl as A, ci as Aa, et as Ac, sa as Ai, i as Al, ls as An, qn as Ao, Ya as Ar, Zt as As, Oc as At, Wl as B, Pr as Ba, He as Bc, Ki as Bi, es as Bn, Bn as Bo, oo as Br, Wt as Bs, xc as Bt, q as C, oi as Ca, at as Cc, ca as Ci, re as Cl, vs as Cn, rr as Co, go as Cr, un as Cs, Ac as Ct, du as D, ui as Da, qe as Dc, la as Di, l as Dl, gs as Dn, or as Do, no as Dr, tn as Ds, Nc as Dt, K as E, li as Ea, tt as Ec, ua as Ei, r as El, hs as En, ar as Eo, ro as Er, nn as Es, jc as Et, eu as F, Yr as Fa, Ze as Fc, C as Fi, cs as Fn, Jn as Fo, uo as Fr, Yt as Fs, bc as Ft, Rl as G, Vr as Ga, Pe as Gc, Vi as Gi, ts as Gn, Fn as Go, Xa as Gr, jt as Gs, mc as Gt, Nl as H, Ir as Ha, ze as Hc, Ji as Hi, ns as Hn, Hn as Ho, ho as Hr, zt as Hs, _c as Ht, Yl as I, Gr as Ia, Ke as Ic, w as Ii, ss as In, Kn as Io, Qa as Ir, Bt as Is, Cc as It, Ul as J, Hr as Ja, Fe as Jc, Li as Ji, Yo as Jn, Mn as Jo, qa as Jr, Ft as Js, dc as Jt, Bl as K, Lr as Ka, Ne as Kc, Hi as Ki, Xo as Kn, Nn as Ko, Za as Kr, Nt as Ks, pc as Kt, Jl as L, Kr as La, Ge as Lc, Xi as Li, as as Ln, Gn as Lo, yo as Lr, Vt as Ls, Ec as Lt, $l as M, ei as Ma, Je as Mc, ta as Mi, c as Ml, ps as Mn, Zn as Mo, fo as Mr, Kt as Ms, Dc as Mt, nu as N, Xr as Na, Ye as Nc, $i as Ni, fs as Nn, Xn as No, po as Nr, qt as Ns, yc as Nt, ru as O, di as Oa, f as Oc, T as Oi, s as Ol, ds as On, er as Oo, io as Or, $t as Os, I as Ot, Xl as P, Jr as Pa, Xe as Pc, Zi as Pi, os as Pn, Qn as Po, mo as Pr, Jt as Ps, Sc as Pt, Vl as Q, Er as Qa, De as Qc, Mi as Qi, Ho as Qn, Dn as Qo, Ha as Qr, Ot as Qs, zs as Qt, Kl as R, Ur as Ra, Be as Rc, Qi as Ri, is as Rn, Wn as Ro, co as Rr, Ht as Rs, Tc as Rt, mu as S, ai as Sa, rt as Sc, oa as Si, te as Sl, _s as Sn, nr as So, bo as Sr, an as Ss, Fc as St, fu as T, ri as Ta, nt as Tc, ra as Ti, a as Tl, ys as Tn, tr as To, ao as Tr, Qt as Ts, Pc as Tt, Hl as U, Br as Ua, Me as Uc, Wi as Ui, $o as Un, Vn as Uo, eo as Ur, Rt as Us, gc as Ut, Gl as V, Fr as Va, Ve as Vc, Gi as Vi, rs as Vn, zn as Vo, so as Vr, Gt as Vs, vc as Vt, Il as W, Wr as Wa, Ie as Wc, Ui as Wi, Qo as Wn, Rn as Wo, _o as Wr, Mt as Ws, hc as Wt, Fl as X, jr as Xa, ke as Xc, zi as Xi, Go as Xn, Pn as Xo, Ga as Xr, Lt as Xs, Vs as Xt, zl as Y, Nr as Ya, Ae as Yc, Ii as Yi, Jo as Yn, In as Yo, Wa as Yr, It as Ys, Ys as Yt, Ll as Z, Mr as Za, Ee as Zc, Bi as Zi, Vo as Zn, An as Zo, Ka as Zr, At as Zs, Hs as Zt, hu as _, fi as _a, dt as _c, pa as _i, de as _l, Os as _n, ur as _o, To as _r, on as _s, Rc as _t, ku as a, Ei as aa, wt as ac, Pa as ai, ye as al, Us as an, mr as ao, Ro as ar, Cn as as, Ol as at, J as b, hi as ba, lt as bc, ha as bi, ie as bl, xs as bn, cr as bo, So as br, ln as bs, qc as bt, Ou as c, yi as ca, vt as cc, xa as ci, he as cl, Gs as cn, gr as co, Mo as cr, bn as cs, wl as ct, bu as d, Ti as da, _t as dc, va as di, ve as dl, Ps as dn, Tr as do, Eo as dr, xn as ds, Lc as dt, Pi as ea, Tt as ec, Ra as ei, Ce as el, Rs as en, Or as eo, Uo as er, On as es, H as et, xu as f, Si as fa, ht as fc, _a as fi, ge as fl, Ms as fn, Sr as fo, No as fr, _n as fs, Wc as ft, _u as g, gi as ga, ft as gc, ga as gi, se as gl, ks as gn, fr as go, Fo as gr, mn as gs, Hc as gt, Z as h, vi as ha, pt as hc, O as hi, ue as hl, j as hn, Cr as ho, Po as hr, hn as hs, zc as ht, Au as i, ki as ia, St as ic, Ia as ii, xe as il, Ls as in, br as io, Io as ir, wn as is, El as it, Ql as j, v as ja, $e as jc, ea as ji, ee as jl, us as jn, Yn as jo, Ja as jr, Xt as js, F as jt, tu as k, si as ka, Qe as kc, aa as ki, o as kl, ms as kn, $n as ko, vo as kr, en as ks, L as kt, Q as l, bi as la, gt as lc, ba as li, pe as ll, Ns as ln, _r as lo, Oo as lr, gn as ls, Jc as lt, vu as m, Di as ma, p as mc, D as mi, fe as ml, As as mn, yr as mo, jo as mr, pn as ms, Kc as mt, Fu as n, ji as na, Et as nc, La as ni, Te as nl, qs as nn, Dr as no, Bo as nr, En as ns, Al as nt, ju as o, Oi as oa, xt as oc, wa as oi, be as ol, Ws as on, hr as oo, Lo as or, m as os, kl as ot, Su as p, wi as pa, mt as pc, E as pi, ce as pl, js as pn, vr as po, Ao as pr, yn as ps, Gc as pt, Pl as q, Rr as qa, Le as qc, Ri as qi, qo as qn, Ln as qo, $a as qr, Pt as qs, fc as qt, Pu as r, Ai as ra, Ct as rc, Fa as ri, Se as rl, Is as rn, wr as ro, Wo as rr, Sn as rs, Dl as rt, Du as s, xi as sa, bt as sc, Sa as si, _e as sl, Bs as sn, pr as so, ko as sr, Tn as ss, Tl as st, Iu as t, Fi as ta, Dt as tc, za as ti, we as tl, Ks as tn, Ar as to, zo as tr, kn as ts, jl as tt, yu as u, Ci as ua, yt as uc, ya as ui, me as ul, Fs as un, xr as uo, Do as ur, vn as us, Ic as ut, gu as v, mi as va, ot as vc, da as vi, le as vl, Es as vn, dr as vo, wo as vr, sn as vs, Vc as vt, pu as w, ni as wa, it as wc, ia as wi, ae as wl, bs as wn, ir as wo, to as wr, dn as ws, Mc as wt, Y as x, ii as xa, ct as xc, ma as xi, oe as xl, Ss as xn, sr as xo, Co as xr, rn as xs, Uc as xt, X as y, pi as ya, st as yc, fa as yi, ne as yl, Ts as yn, lr as yo, xo as yr, cn as ys, Bc as yt, ql as z, zr as za, Ue as zc, Yi as zi, Zo as zn, Un as zo, lo as zr, Ut as zs, wc as zt };
+export { Il as $, Mr as $a, Ee as $c, Bi as $i, Vo as $n, An as $o, Ka as $r, At as $s, Hs as $t, nu as A, di as Aa, f as Ac, T as Ai, s as Al, ds as An, er as Ao, io as Ar, $t as As, I as At, Gl as B, Ur as Ba, Be as Bc, Qi as Bi, is as Bn, Wn as Bo, co as Br, Ht as Bs, Tc as Bt, Y as C, ii as Ca, ct as Cc, ma as Ci, oe as Cl, Ss as Cn, sr as Co, Co as Cr, rn as Cs, Hc as Ct, du as D, ri as Da, nt as Dc, ra as Di, a as Dl, ys as Dn, tr as Do, ao as Dr, Qt as Ds, Nc as Dt, fu as E, ni as Ea, it as Ec, ia as Ei, ae as El, bs as En, ir as Eo, to as Er, dn as Es, jc as Et, tu as F, Xr as Fa, Ye as Fc, $i as Fi, fs as Fn, Xn as Fo, po as Fr, qt as Fs, yc as Ft, Vl as G, Br as Ga, Me as Gc, Wi as Gi, $o as Gn, Vn as Go, eo as Gr, Rt as Gs, gc as Gt, Ul as H, Pr as Ha, He as Hc, Ki as Hi, es as Hn, Bn as Ho, oo as Hr, Wt as Hs, xc as Ht, Yl as I, Jr as Ia, Xe as Ic, Zi as Ii, os as In, Qn as Io, mo as Ir, Jt as Is, Sc as It, zl as J, Lr as Ja, Ne as Jc, Hi as Ji, Xo as Jn, Nn as Jo, Za as Jr, Nt as Js, pc as Jt, Fl as K, Wr as Ka, Ie as Kc, Ui as Ki, Qo as Kn, Rn as Ko, _o as Kr, Mt as Ks, hc as Kt, $l as L, Yr as La, Ze as Lc, C as Li, cs as Ln, Jn as Lo, uo as Lr, Yt as Ls, bc as Lt, Xl as M, ci as Ma, et as Mc, sa as Mi, i as Ml, ls as Mn, qn as Mo, Ya as Mr, Zt as Ms, Oc as Mt, Zl as N, v as Na, $e as Nc, ea as Ni, ee as Nl, us as Nn, Yn as No, Ja as Nr, Xt as Ns, F as Nt, q as O, li as Oa, tt as Oc, ua as Oi, r as Ol, hs as On, ar as Oo, ro as Or, nn as Os, Ac as Ot, Ql as P, ei as Pa, Je as Pc, ta as Pi, c as Pl, ps as Pn, Zn as Po, fo as Pr, Kt as Ps, Dc as Pt, Pl as Q, jr as Qa, ke as Qc, zi as Qi, Go as Qn, Pn as Qo, Ga as Qr, Lt as Qs, Vs as Qt, Jl as R, Gr as Ra, Ke as Rc, w as Ri, ss as Rn, Kn as Ro, Qa as Rr, Bt as Rs, Cc as Rt, mu as S, hi as Sa, lt as Sc, ha as Si, ie as Sl, xs as Sn, cr as So, So as Sr, ln as Ss, Kc as St, J as T, oi as Ta, at as Tc, ca as Ti, re as Tl, vs as Tn, rr as To, go as Tr, un as Ts, R as Tt, Wl as U, Fr as Ua, Ve as Uc, Gi as Ui, rs as Un, zn as Uo, so as Ur, Gt as Us, vc as Ut, Kl as V, zr as Va, Ue as Vc, Yi as Vi, Zo as Vn, Un as Vo, lo as Vr, Ut as Vs, wc as Vt, Ml as W, Ir as Wa, ze as Wc, Ji as Wi, ns as Wn, Hn as Wo, ho as Wr, zt as Ws, _c as Wt, Hl as X, Hr as Xa, Fe as Xc, Li as Xi, Yo as Xn, Mn as Xo, qa as Xr, Ft as Xs, dc as Xt, Nl as Y, Rr as Ya, Le as Yc, Ri as Yi, qo as Yn, Ln as Yo, $a as Yr, Pt as Ys, fc as Yt, Rl as Z, Nr as Za, Ae as Zc, Ii as Zi, Jo as Zn, In as Zo, Wa as Zr, It as Zs, Ys as Zt, Z as _, vi as _a, pt as _c, O as _i, ue as _l, j as _n, Cr as _o, Po as _r, hn as _s, Rc as _t, Pu as a, Ai as aa, Ct as ac, Fa as ai, Se as al, Is as an, wr as ao, Wo as ar, Sn as as, El as at, gu as b, mi as ba, ot as bc, da as bi, le as bl, Es as bn, dr as bo, wo as br, sn as bs, Bc as bt, Nu as c, Oi as ca, xt as cc, wa as ci, be as cl, Ws as cn, hr as co, Lo as cr, m as cs, Ol as ct, Q as d, bi as da, gt as dc, ba as di, pe as dl, Ns as dn, _r as do, Oo as dr, gn as ds, qc as dt, Mi as ea, Ot as ec, Ha as ei, De as el, zs as en, Er as eo, Ho as er, Dn as es, Bl as et, yu as f, Ci as fa, yt as fc, ya as fi, me as fl, Fs as fn, xr as fo, Do as fr, vn as fs, Fc as ft, vu as g, Di as ga, p as gc, D as gi, fe as gl, As as gn, yr as go, jo as gr, pn as gs, Gc as gt, Su as h, wi as ha, mt as hc, E as hi, ce as hl, js as hn, vr as ho, Ao as hr, yn as hs, Wc as ht, Fu as i, ji as ia, Et as ic, La as ii, Te as il, qs as in, Dr as io, Bo as ir, En as is, kl as it, eu as j, si as ja, Qe as jc, aa as ji, o as jl, ms as jn, $n as jo, vo as jr, en as js, L as jt, uu as k, ui as ka, qe as kc, la as ki, l as kl, gs as kn, or as ko, no as kr, tn as ks, Mc as kt, Mu as l, xi as la, bt as lc, Sa as li, _e as ll, Bs as ln, pr as lo, ko as lr, Tn as ls, wl as lt, xu as m, Si as ma, ht as mc, _a as mi, ge as ml, Ms as mn, Sr as mo, No as mr, _n as ms, Uc as mt, Bu as n, Pi as na, Tt as nc, Ra as ni, Ce as nl, Rs as nn, Or as no, Uo as nr, On as ns, U as nt, Iu as o, ki as oa, St as oc, Ia as oi, xe as ol, Ls as on, br as oo, Io as or, wn as os, Tl as ot, bu as p, Ti as pa, _t as pc, va as pi, ve as pl, Ps as pn, Tr as po, Eo as pr, xn as ps, Ic as pt, Ll as q, Vr as qa, Pe as qc, Vi as qi, ts as qn, Fn as qo, Xa as qr, jt as qs, mc as qt, zu as r, Fi as ra, Dt as rc, za as ri, we as rl, Ks as rn, Ar as ro, zo as rr, kn as rs, Al as rt, ju as s, Ei as sa, wt as sc, Pa as si, ye as sl, Us as sn, mr as so, Ro as sr, Cn as ss, Dl as st, Vu as t, Ni as ta, kt as tc, Ua as ti, Oe as tl, Js as tn, kr as to, Ko as tr, jn as ts, jl as tt, Du as u, yi as ua, vt as uc, xa as ui, he as ul, Gs as un, gr as uo, Mo as ur, bn as us, Cl as ut, _u as v, gi as va, ft as vc, ga as vi, se as vl, ks as vn, fr as vo, Fo as vr, mn as vs, Vc as vt, pu as w, ai as wa, rt as wc, oa as wi, te as wl, _s as wn, nr as wo, bo as wr, an as ws, Pc as wt, X as x, pi as xa, st as xc, fa as xi, ne as xl, Ts as xn, lr as xo, xo as xr, cn as xs, zc as xt, hu as y, fi as ya, dt as yc, pa as yi, de as yl, Os as yn, ur as yo, To as yr, on as ys, Lc as yt, ql as z, Kr as za, Ge as zc, Xi as zi, as as zn, Gn as zo, yo as zr, Vt as zs, Ec as zt };
