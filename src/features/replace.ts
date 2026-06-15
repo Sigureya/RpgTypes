@@ -152,7 +152,18 @@ export const replaceGameFilesWithHash = <T extends string>(
   const output = replaceDataWithHash(context, extractor, hashFn);
   return {
     dataJSON: rawGameDataToMainDataFileEntries(output.main),
-    scriptJS: [pluginManifestFiles(output.aux)],
+    scriptJS: [
+      pluginManifestFiles(output.aux, {
+        description: "書き換え用辞書データ",
+        outputDirectory: "translation",
+        dictionaryName: "TranslationDictionary",
+      }),
+      pluginManifestFiles(output.originLike, {
+        description: "翻訳前のオリジナル辞書データ",
+        outputDirectory: "translation",
+        dictionaryName: "OriginalDictionary",
+      }),
+    ],
   };
 };
 
