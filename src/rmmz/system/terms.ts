@@ -1,4 +1,9 @@
-import type { Terms_GameCommands, Terms_Messages } from "./core";
+import type {
+  SystemLabels_TermsParamNames,
+  Terms_Basic,
+  Terms_GameCommands,
+  Terms_Messages,
+} from "./core";
 import {
   makeTermsBasicFromArray,
   makeTermsCommandFromArray,
@@ -27,10 +32,46 @@ export const replaceSystemTextDictionary = (
     skillTypes: text.skillTypes.map(fn2),
     terms: {
       messages: replaceSystemMessages(text.terms.messages, fn2),
-      basic: text.terms.basic,
-      params: text.terms.params,
+      basic: replaceBasicTerms(text.terms.basic, fn2),
+      params: replaceParams(text.terms.params, fn2),
       commands: replaceCommands(text.terms.commands, fn2),
     },
+  };
+};
+
+const replaceBasicTerms = (
+  basic: Terms_Basic,
+  newTextFn: (text: string) => string,
+): Terms_Basic => {
+  return {
+    level: newTextFn(basic.level),
+    levelA: newTextFn(basic.levelA),
+    hp: newTextFn(basic.hp),
+    hpA: newTextFn(basic.hpA),
+    mp: newTextFn(basic.mp),
+    mpA: newTextFn(basic.mpA),
+    tp: newTextFn(basic.tp),
+    tpA: newTextFn(basic.tpA),
+    experience: newTextFn(basic.experience),
+    exp: newTextFn(basic.exp),
+  };
+};
+
+const replaceParams = (
+  params: SystemLabels_TermsParamNames,
+  fn: (text: string) => string,
+): SystemLabels_TermsParamNames => {
+  return {
+    mhp: fn(params.mhp),
+    mmp: fn(params.mmp),
+    atk: fn(params.atk),
+    def: fn(params.def),
+    mat: fn(params.mat),
+    mdf: fn(params.mdf),
+    agi: fn(params.agi),
+    luk: fn(params.luk),
+    hit: fn(params.hit),
+    eva: fn(params.eva),
   };
 };
 
