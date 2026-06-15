@@ -23,6 +23,7 @@ export interface RuntimeDictionary<Hash> {
 
 export interface GameDataReplaceOutput<Hash> {
   main: RawGameData<NormalizedEventCommand>;
+  originLike: RuntimeDictionaryDataWithSystem<Hash>;
   aux: RuntimeDictionaryDataWithSystem<Hash>;
 }
 

@@ -10,7 +10,12 @@ import {
   extractTextFromSystem,
   replaceSystemTextDictionary,
 } from "@RpgTypes/rmmz";
-import type { RuntimeDictionary, GameDataReplaceOutput } from "./core/extract";
+import type {
+  RuntimeDictionary,
+  RuntimeDictionaryDataWithSystem,
+  RawGameDataNoteNormalization,
+  GameDataReplaceOutput,
+} from "./core/extract";
 import { fileEntriesFromDictionary, pluginManifestFiles } from "./core/extract";
 import {
   createRuntimeDictionaryData,
@@ -168,7 +173,21 @@ export const replaceDataWithHash = <T extends string>(
   extractor: EventContainerExtractor,
   hashFn: (text: string) => T,
 ): GameDataReplaceOutput<T> => {
-  const { data, assetBundle, dictionary, textKeys } = context;
+  const { data, dictionary } = context;
+  const replaceResult = createMain(context, extractor, hashFn);
+  return {
+    main: replaceResult.data,
+    aux: createAux(data, replaceResult.note, dictionary, hashFn),
+    originLike: createAux(data, replaceResult.note, new Map(), hashFn),
+  };
+};
+
+const createMain = <T extends string>(
+  context: ReplaceRawDataContext,
+  extractor: EventContainerExtractor,
+  hashFn: (text: string) => T,
+) => {
+  const { data, assetBundle, textKeys } = context;
   const handlers: RpgDataReplaceHandlers = {
     replaceText(text: string) {
       const trimmed = text.trimEnd();
@@ -183,13 +202,21 @@ export const replaceDataWithHash = <T extends string>(
       return textKeys.has(item.key);
     },
   };
-  const replaceResult = replaceRawDataWithAutoNoteFilter(
+  return replaceRawDataWithAutoNoteFilter(
     data,
     assetBundle,
     extractor,
     handlers,
     (text) => text.trimEnd(),
   );
+};
+
+const createAux = <T extends string>(
+  data: RawGameData,
+  note: RawGameDataNoteNormalization,
+  dictionary: ReadonlyMap<string, string>,
+  hashFn: (text: string) => T,
+): RuntimeDictionaryDataWithSystem<T> => {
   const dicX = createRuntimeDictionaryData(
     data.actors.data,
     data.commonEvents.data,
@@ -201,20 +228,16 @@ export const replaceDataWithHash = <T extends string>(
     },
   );
   const extractedSystemTexts = extractTextFromSystem(data.system.system);
-
   return {
-    main: replaceResult.data,
-    aux: {
-      systemTexts: replaceSystemTextDictionary(extractedSystemTexts, (text) => {
-        const trimmed = text.trimEnd();
-        return context.dictionary.get(trimmed);
-      }),
-      actorTexts: dicX.actorTexts,
-      targetNoteKeys: textKeysSN([
-        ...replaceResult.note.dataNoteSummary,
-        ...replaceResult.note.mapNoteSummary,
-      ]),
-      textDictionary: dicX.textDictionary,
-    },
+    systemTexts: replaceSystemTextDictionary(extractedSystemTexts, (text) => {
+      const trimmed = text.trimEnd();
+      return dictionary.get(trimmed);
+    }),
+    actorTexts: dicX.actorTexts,
+    targetNoteKeys: textKeysSN([
+      ...note.dataNoteSummary,
+      ...note.mapNoteSummary,
+    ]),
+    textDictionary: dicX.textDictionary,
   };
 };
