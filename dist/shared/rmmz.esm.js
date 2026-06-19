@@ -2476,37 +2476,6 @@ var ht = (e) => ({
 	},
 	placeHolder: { numbers: ["value"] }
 }, Os = (t, r, i) => e(r, i, n(Ds), t.pattern, ((e) => e.dataId)), ks = {
-	title: "ダメージ",
-	options: {}
-}, j = (e = {}) => ({
-	type: e.type ?? 0,
-	elementId: e.elementId ?? 0,
-	formula: e.formula ?? "",
-	variance: e.variance ?? 0,
-	critical: e.critical ?? !1
-}), As = (e = {}) => ({
-	id: e.id ?? 0,
-	name: e.name ?? "",
-	iconIndex: e.iconIndex ?? 0,
-	description: e.description ?? "",
-	traits: e.traits ?? [],
-	note: e.note ?? "",
-	animationId: e.animationId ?? 0,
-	params: e.params ?? [
-		0,
-		0,
-		0,
-		0,
-		0,
-		0,
-		0,
-		0
-	],
-	etypeId: e.etypeId ?? 0,
-	price: e.price ?? 0,
-	damage: j(e.damage ?? {}),
-	wtypeId: e.wtypeId ?? 0
-}), js = {
 	type: "object",
 	required: [
 		"name",
@@ -2611,7 +2580,38 @@ var ht = (e) => ({
 			}
 		}
 	}
-}, Ms = {
+}, As = {
+	title: "ダメージ",
+	options: {}
+}, j = (e = {}) => ({
+	type: e.type ?? 0,
+	elementId: e.elementId ?? 0,
+	formula: e.formula ?? "",
+	variance: e.variance ?? 0,
+	critical: e.critical ?? !1
+}), js = (e = {}) => ({
+	id: e.id ?? 0,
+	name: e.name ?? "",
+	iconIndex: e.iconIndex ?? 0,
+	description: e.description ?? "",
+	traits: e.traits ?? [],
+	note: e.note ?? "",
+	animationId: e.animationId ?? 0,
+	params: e.params ?? [
+		0,
+		0,
+		0,
+		0,
+		0,
+		0,
+		0,
+		0
+	],
+	etypeId: e.etypeId ?? 0,
+	price: e.price ?? 0,
+	damage: j(e.damage ?? {}),
+	wtypeId: e.wtypeId ?? 0
+}), Ms = {
 	title: "武器",
 	options: { weaponTypeId: "武器タイプID" }
 }, Ns = 0, Ps = 1, Fs = 2, Is = 11, Ls = 12, Rs = 13, zs = 21, Bs = 22, Vs = 31, Hs = 32, Us = 33, Ws = 34, Gs = 41, Ks = 42, qs = 43, Js = 44, Ys = (e) => [
@@ -2814,7 +2814,7 @@ var ht = (e) => ({
 }), bc = (e) => Ra({
 	name: e.text,
 	note: e.note
-}), xc = (e) => As({
+}), xc = (e) => js({
 	name: e.text,
 	note: e.note,
 	description: e.text
@@ -3136,7 +3136,7 @@ var ht = (e) => ({
 	escape: "逃走"
 }, wl = () => ({
 	rpg: {
-		damage: ks,
+		damage: As,
 		data: Pa,
 		traits: Ts,
 		itemEffect: dc
@@ -4270,4 +4270,4 @@ var ht = (e) => ({
 	let t = e.split("/");
 	return t[t.length - 1];
 };
-export { Il as $, Mr as $a, Ee as $c, Bi as $i, Vo as $n, An as $o, Ka as $r, At as $s, Hs as $t, nu as A, di as Aa, f as Ac, T as Ai, s as Al, ds as An, er as Ao, io as Ar, $t as As, I as At, Gl as B, Ur as Ba, Be as Bc, Qi as Bi, is as Bn, Wn as Bo, co as Br, Ht as Bs, Tc as Bt, Y as C, ii as Ca, ct as Cc, ma as Ci, oe as Cl, Ss as Cn, sr as Co, Co as Cr, rn as Cs, Hc as Ct, du as D, ri as Da, nt as Dc, ra as Di, a as Dl, ys as Dn, tr as Do, ao as Dr, Qt as Ds, Nc as Dt, fu as E, ni as Ea, it as Ec, ia as Ei, ae as El, bs as En, ir as Eo, to as Er, dn as Es, jc as Et, tu as F, Xr as Fa, Ye as Fc, $i as Fi, fs as Fn, Xn as Fo, po as Fr, qt as Fs, yc as Ft, Vl as G, Br as Ga, Me as Gc, Wi as Gi, $o as Gn, Vn as Go, eo as Gr, Rt as Gs, gc as Gt, Ul as H, Pr as Ha, He as Hc, Ki as Hi, es as Hn, Bn as Ho, oo as Hr, Wt as Hs, xc as Ht, Yl as I, Jr as Ia, Xe as Ic, Zi as Ii, os as In, Qn as Io, mo as Ir, Jt as Is, Sc as It, zl as J, Lr as Ja, Ne as Jc, Hi as Ji, Xo as Jn, Nn as Jo, Za as Jr, Nt as Js, pc as Jt, Fl as K, Wr as Ka, Ie as Kc, Ui as Ki, Qo as Kn, Rn as Ko, _o as Kr, Mt as Ks, hc as Kt, $l as L, Yr as La, Ze as Lc, C as Li, cs as Ln, Jn as Lo, uo as Lr, Yt as Ls, bc as Lt, Xl as M, ci as Ma, et as Mc, sa as Mi, i as Ml, ls as Mn, qn as Mo, Ya as Mr, Zt as Ms, Oc as Mt, Zl as N, v as Na, $e as Nc, ea as Ni, ee as Nl, us as Nn, Yn as No, Ja as Nr, Xt as Ns, F as Nt, q as O, li as Oa, tt as Oc, ua as Oi, r as Ol, hs as On, ar as Oo, ro as Or, nn as Os, Ac as Ot, Ql as P, ei as Pa, Je as Pc, ta as Pi, c as Pl, ps as Pn, Zn as Po, fo as Pr, Kt as Ps, Dc as Pt, Pl as Q, jr as Qa, ke as Qc, zi as Qi, Go as Qn, Pn as Qo, Ga as Qr, Lt as Qs, Vs as Qt, Jl as R, Gr as Ra, Ke as Rc, w as Ri, ss as Rn, Kn as Ro, Qa as Rr, Bt as Rs, Cc as Rt, mu as S, hi as Sa, lt as Sc, ha as Si, ie as Sl, xs as Sn, cr as So, So as Sr, ln as Ss, Kc as St, J as T, oi as Ta, at as Tc, ca as Ti, re as Tl, vs as Tn, rr as To, go as Tr, un as Ts, R as Tt, Wl as U, Fr as Ua, Ve as Uc, Gi as Ui, rs as Un, zn as Uo, so as Ur, Gt as Us, vc as Ut, Kl as V, zr as Va, Ue as Vc, Yi as Vi, Zo as Vn, Un as Vo, lo as Vr, Ut as Vs, wc as Vt, Ml as W, Ir as Wa, ze as Wc, Ji as Wi, ns as Wn, Hn as Wo, ho as Wr, zt as Ws, _c as Wt, Hl as X, Hr as Xa, Fe as Xc, Li as Xi, Yo as Xn, Mn as Xo, qa as Xr, Ft as Xs, dc as Xt, Nl as Y, Rr as Ya, Le as Yc, Ri as Yi, qo as Yn, Ln as Yo, $a as Yr, Pt as Ys, fc as Yt, Rl as Z, Nr as Za, Ae as Zc, Ii as Zi, Jo as Zn, In as Zo, Wa as Zr, It as Zs, Ys as Zt, Z as _, vi as _a, pt as _c, O as _i, ue as _l, j as _n, Cr as _o, Po as _r, hn as _s, Rc as _t, Pu as a, Ai as aa, Ct as ac, Fa as ai, Se as al, Is as an, wr as ao, Wo as ar, Sn as as, El as at, gu as b, mi as ba, ot as bc, da as bi, le as bl, Es as bn, dr as bo, wo as br, sn as bs, Bc as bt, Nu as c, Oi as ca, xt as cc, wa as ci, be as cl, Ws as cn, hr as co, Lo as cr, m as cs, Ol as ct, Q as d, bi as da, gt as dc, ba as di, pe as dl, Ns as dn, _r as do, Oo as dr, gn as ds, qc as dt, Mi as ea, Ot as ec, Ha as ei, De as el, zs as en, Er as eo, Ho as er, Dn as es, Bl as et, yu as f, Ci as fa, yt as fc, ya as fi, me as fl, Fs as fn, xr as fo, Do as fr, vn as fs, Fc as ft, vu as g, Di as ga, p as gc, D as gi, fe as gl, As as gn, yr as go, jo as gr, pn as gs, Gc as gt, Su as h, wi as ha, mt as hc, E as hi, ce as hl, js as hn, vr as ho, Ao as hr, yn as hs, Wc as ht, Fu as i, ji as ia, Et as ic, La as ii, Te as il, qs as in, Dr as io, Bo as ir, En as is, kl as it, eu as j, si as ja, Qe as jc, aa as ji, o as jl, ms as jn, $n as jo, vo as jr, en as js, L as jt, uu as k, ui as ka, qe as kc, la as ki, l as kl, gs as kn, or as ko, no as kr, tn as ks, Mc as kt, Mu as l, xi as la, bt as lc, Sa as li, _e as ll, Bs as ln, pr as lo, ko as lr, Tn as ls, wl as lt, xu as m, Si as ma, ht as mc, _a as mi, ge as ml, Ms as mn, Sr as mo, No as mr, _n as ms, Uc as mt, Bu as n, Pi as na, Tt as nc, Ra as ni, Ce as nl, Rs as nn, Or as no, Uo as nr, On as ns, U as nt, Iu as o, ki as oa, St as oc, Ia as oi, xe as ol, Ls as on, br as oo, Io as or, wn as os, Tl as ot, bu as p, Ti as pa, _t as pc, va as pi, ve as pl, Ps as pn, Tr as po, Eo as pr, xn as ps, Ic as pt, Ll as q, Vr as qa, Pe as qc, Vi as qi, ts as qn, Fn as qo, Xa as qr, jt as qs, mc as qt, zu as r, Fi as ra, Dt as rc, za as ri, we as rl, Ks as rn, Ar as ro, zo as rr, kn as rs, Al as rt, ju as s, Ei as sa, wt as sc, Pa as si, ye as sl, Us as sn, mr as so, Ro as sr, Cn as ss, Dl as st, Vu as t, Ni as ta, kt as tc, Ua as ti, Oe as tl, Js as tn, kr as to, Ko as tr, jn as ts, jl as tt, Du as u, yi as ua, vt as uc, xa as ui, he as ul, Gs as un, gr as uo, Mo as ur, bn as us, Cl as ut, _u as v, gi as va, ft as vc, ga as vi, se as vl, ks as vn, fr as vo, Fo as vr, mn as vs, Vc as vt, pu as w, ai as wa, rt as wc, oa as wi, te as wl, _s as wn, nr as wo, bo as wr, an as ws, Pc as wt, X as x, pi as xa, st as xc, fa as xi, ne as xl, Ts as xn, lr as xo, xo as xr, cn as xs, zc as xt, hu as y, fi as ya, dt as yc, pa as yi, de as yl, Os as yn, ur as yo, To as yr, on as ys, Lc as yt, ql as z, Kr as za, Ge as zc, Xi as zi, as as zn, Gn as zo, yo as zr, Vt as zs, Ec as zt };
+export { Il as $, Mr as $a, Ee as $c, Bi as $i, Vo as $n, An as $o, Ka as $r, At as $s, Hs as $t, nu as A, di as Aa, f as Ac, T as Ai, s as Al, ds as An, er as Ao, io as Ar, $t as As, I as At, Gl as B, Ur as Ba, Be as Bc, Qi as Bi, is as Bn, Wn as Bo, co as Br, Ht as Bs, Tc as Bt, Y as C, ii as Ca, ct as Cc, ma as Ci, oe as Cl, Ss as Cn, sr as Co, Co as Cr, rn as Cs, Hc as Ct, du as D, ri as Da, nt as Dc, ra as Di, a as Dl, ys as Dn, tr as Do, ao as Dr, Qt as Ds, Nc as Dt, fu as E, ni as Ea, it as Ec, ia as Ei, ae as El, bs as En, ir as Eo, to as Er, dn as Es, jc as Et, tu as F, Xr as Fa, Ye as Fc, $i as Fi, fs as Fn, Xn as Fo, po as Fr, qt as Fs, yc as Ft, Vl as G, Br as Ga, Me as Gc, Wi as Gi, $o as Gn, Vn as Go, eo as Gr, Rt as Gs, gc as Gt, Ul as H, Pr as Ha, He as Hc, Ki as Hi, es as Hn, Bn as Ho, oo as Hr, Wt as Hs, xc as Ht, Yl as I, Jr as Ia, Xe as Ic, Zi as Ii, os as In, Qn as Io, mo as Ir, Jt as Is, Sc as It, zl as J, Lr as Ja, Ne as Jc, Hi as Ji, Xo as Jn, Nn as Jo, Za as Jr, Nt as Js, pc as Jt, Fl as K, Wr as Ka, Ie as Kc, Ui as Ki, Qo as Kn, Rn as Ko, _o as Kr, Mt as Ks, hc as Kt, $l as L, Yr as La, Ze as Lc, C as Li, cs as Ln, Jn as Lo, uo as Lr, Yt as Ls, bc as Lt, Xl as M, ci as Ma, et as Mc, sa as Mi, i as Ml, ls as Mn, qn as Mo, Ya as Mr, Zt as Ms, Oc as Mt, Zl as N, v as Na, $e as Nc, ea as Ni, ee as Nl, us as Nn, Yn as No, Ja as Nr, Xt as Ns, F as Nt, q as O, li as Oa, tt as Oc, ua as Oi, r as Ol, hs as On, ar as Oo, ro as Or, nn as Os, Ac as Ot, Ql as P, ei as Pa, Je as Pc, ta as Pi, c as Pl, ps as Pn, Zn as Po, fo as Pr, Kt as Ps, Dc as Pt, Pl as Q, jr as Qa, ke as Qc, zi as Qi, Go as Qn, Pn as Qo, Ga as Qr, Lt as Qs, Vs as Qt, Jl as R, Gr as Ra, Ke as Rc, w as Ri, ss as Rn, Kn as Ro, Qa as Rr, Bt as Rs, Cc as Rt, mu as S, hi as Sa, lt as Sc, ha as Si, ie as Sl, xs as Sn, cr as So, So as Sr, ln as Ss, Kc as St, J as T, oi as Ta, at as Tc, ca as Ti, re as Tl, vs as Tn, rr as To, go as Tr, un as Ts, R as Tt, Wl as U, Fr as Ua, Ve as Uc, Gi as Ui, rs as Un, zn as Uo, so as Ur, Gt as Us, vc as Ut, Kl as V, zr as Va, Ue as Vc, Yi as Vi, Zo as Vn, Un as Vo, lo as Vr, Ut as Vs, wc as Vt, Ml as W, Ir as Wa, ze as Wc, Ji as Wi, ns as Wn, Hn as Wo, ho as Wr, zt as Ws, _c as Wt, Hl as X, Hr as Xa, Fe as Xc, Li as Xi, Yo as Xn, Mn as Xo, qa as Xr, Ft as Xs, dc as Xt, Nl as Y, Rr as Ya, Le as Yc, Ri as Yi, qo as Yn, Ln as Yo, $a as Yr, Pt as Ys, fc as Yt, Rl as Z, Nr as Za, Ae as Zc, Ii as Zi, Jo as Zn, In as Zo, Wa as Zr, It as Zs, Ys as Zt, Z as _, vi as _a, pt as _c, O as _i, ue as _l, As as _n, Cr as _o, Po as _r, hn as _s, Rc as _t, Pu as a, Ai as aa, Ct as ac, Fa as ai, Se as al, Is as an, wr as ao, Wo as ar, Sn as as, El as at, gu as b, mi as ba, ot as bc, da as bi, le as bl, Es as bn, dr as bo, wo as br, sn as bs, Bc as bt, Nu as c, Oi as ca, xt as cc, wa as ci, be as cl, Ws as cn, hr as co, Lo as cr, m as cs, Ol as ct, Q as d, bi as da, gt as dc, ba as di, pe as dl, Ns as dn, _r as do, Oo as dr, gn as ds, qc as dt, Mi as ea, Ot as ec, Ha as ei, De as el, zs as en, Er as eo, Ho as er, Dn as es, Bl as et, yu as f, Ci as fa, yt as fc, ya as fi, me as fl, Fs as fn, xr as fo, Do as fr, vn as fs, Fc as ft, vu as g, Di as ga, p as gc, D as gi, fe as gl, j as gn, yr as go, jo as gr, pn as gs, Gc as gt, Su as h, wi as ha, mt as hc, E as hi, ce as hl, js as hn, vr as ho, Ao as hr, yn as hs, Wc as ht, Fu as i, ji as ia, Et as ic, La as ii, Te as il, qs as in, Dr as io, Bo as ir, En as is, kl as it, eu as j, si as ja, Qe as jc, aa as ji, o as jl, ms as jn, $n as jo, vo as jr, en as js, L as jt, uu as k, ui as ka, qe as kc, la as ki, l as kl, gs as kn, or as ko, no as kr, tn as ks, Mc as kt, Mu as l, xi as la, bt as lc, Sa as li, _e as ll, Bs as ln, pr as lo, ko as lr, Tn as ls, wl as lt, xu as m, Si as ma, ht as mc, _a as mi, ge as ml, Ms as mn, Sr as mo, No as mr, _n as ms, Uc as mt, Bu as n, Pi as na, Tt as nc, Ra as ni, Ce as nl, Rs as nn, Or as no, Uo as nr, On as ns, U as nt, Iu as o, ki as oa, St as oc, Ia as oi, xe as ol, Ls as on, br as oo, Io as or, wn as os, Tl as ot, bu as p, Ti as pa, _t as pc, va as pi, ve as pl, Ps as pn, Tr as po, Eo as pr, xn as ps, Ic as pt, Ll as q, Vr as qa, Pe as qc, Vi as qi, ts as qn, Fn as qo, Xa as qr, jt as qs, mc as qt, zu as r, Fi as ra, Dt as rc, za as ri, we as rl, Ks as rn, Ar as ro, zo as rr, kn as rs, Al as rt, ju as s, Ei as sa, wt as sc, Pa as si, ye as sl, Us as sn, mr as so, Ro as sr, Cn as ss, Dl as st, Vu as t, Ni as ta, kt as tc, Ua as ti, Oe as tl, Js as tn, kr as to, Ko as tr, jn as ts, jl as tt, Du as u, yi as ua, vt as uc, xa as ui, he as ul, Gs as un, gr as uo, Mo as ur, bn as us, Cl as ut, _u as v, gi as va, ft as vc, ga as vi, se as vl, ks as vn, fr as vo, Fo as vr, mn as vs, Vc as vt, pu as w, ai as wa, rt as wc, oa as wi, te as wl, _s as wn, nr as wo, bo as wr, an as ws, Pc as wt, X as x, pi as xa, st as xc, fa as xi, ne as xl, Ts as xn, lr as xo, xo as xr, cn as xs, zc as xt, hu as y, fi as ya, dt as yc, pa as yi, de as yl, Os as yn, ur as yo, To as yr, on as ys, Lc as yt, ql as z, Kr as za, Ge as zc, Xi as zi, as as zn, Gn as zo, yo as zr, Vt as zs, Ec as zt };
