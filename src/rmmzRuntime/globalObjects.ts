@@ -1,4 +1,4 @@
-import type { IdentifiedItems } from "@RpgTypes/libs";
+import type { IdentifiedItems, Rmmz_PluginManager } from "@RpgTypes/libs";
 import type { EventCommand } from "@RpgTypes/rmmz/eventCommand";
 import type { Data_CommonEvent, Data_Troop } from "@RpgTypes/rmmz/events";
 import type {
@@ -19,6 +19,7 @@ import type {
   Rmmz_Message,
   Rmmz_System,
 } from "./objects";
+import type { Rmmz_SceneManager } from "./sceneManager";
 
 declare global {
   var $dataActors: IdentifiedItems<Data_Actor>;
@@ -42,4 +43,8 @@ declare global {
   var $gameSystem: Rmmz_System;
 }
 
+declare global {
+  var SceneManager: Rmmz_SceneManager;
+  var PluginManager: Rmmz_PluginManager;
+}
 export {};
