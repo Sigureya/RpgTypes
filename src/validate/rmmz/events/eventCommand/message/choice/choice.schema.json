@@ -1,0 +1,21 @@
+{
+  "type": "object",
+  "required": ["code", "indent", "parameters"],
+  "properties": {
+    "code": { "type": "number", "const": 102 },
+    "indent": { "type": "integer" },
+    "parameters": {
+      "type": "array",
+      "minItems": 5,
+      "maxItems": 5,
+      "items": [
+        { "type": "array", "items": { "type": "string" } },
+        { "type": "integer" },
+        { "type": "integer" },
+        { "type": "integer" },
+        { "type": "integer" }
+      ]
+    }
+  },
+  "additionalProperties": false
+}
