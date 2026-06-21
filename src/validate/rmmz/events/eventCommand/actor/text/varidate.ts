@@ -2,7 +2,7 @@ import type {
   Command_ChangeActorName,
   Command_ChangeActorProfile,
 } from "@RpgTypes/rmmz";
-import validate from "./chageActorTextValidate";
+import validate from "./changeActorTextValidate";
 
 export const isCommandChangeActorText = (
   data: unknown,
