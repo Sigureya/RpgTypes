@@ -1,1 +1,1 @@
-Object.defineProperty(exports,Symbol.toStringTag,{value:`Module`});const e=require("../../shared/events.cjs.js");exports.isActorTextCommand=e.o,exports.isAudioCommand=e.a,exports.isDataCommonEvent=e.n,exports.isDataMap=e.r,exports.isDataTroop=e.i,exports.validateMapWithErrors=e.t;
+Object.defineProperty(exports,Symbol.toStringTag,{value:`Module`});const e=require("../../shared/events.cjs.js");exports.isCommandAudio=e.o,exports.isCommandChangeActorText=e.a,exports.isDataCommonEvent=e.n,exports.isDataMap=e.r,exports.isDataTroop=e.i,exports.validateMapWithErrors=e.t;
