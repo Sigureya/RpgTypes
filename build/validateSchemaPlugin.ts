@@ -12,7 +12,7 @@ interface WriteDtsFileOptions {
   funcName: string;
 }
 
-const writeDtsFile2 = async ({
+const writeDtsFile = async ({
   filename,
   parsed,
   funcName,
@@ -57,8 +57,8 @@ const build = async (schemaPath: string): Promise<void> => {
     await fs.writeFile(targetFile, standalone, "utf-8");
   }
 
-  writeCjsFile();
-  writeDtsFile2({
+  await writeCjsFile();
+  return writeDtsFile({
     filename,
     parsed,
     funcName: fileBase,
@@ -75,9 +75,7 @@ export function validateSchemaPlugin(): PluginOption {
       console.log("バリデーション関数の生成を開始...");
       const schemaPaths = await fg("src/**/!(*.d).schema.json");
 
-      for (const schemaPath of schemaPaths) {
-        build(schemaPath);
-      }
+      await Promise.all(schemaPaths.map(build));
       console.log("バリデーション関数の生成が完了しました。");
     },
   };
