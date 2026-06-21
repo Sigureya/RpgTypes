@@ -1,6 +1,5 @@
 import type { Rmmz_PluginManager } from "@RpgTypes/libs/rmmz/pluginManager";
-import type { EventCommand } from "@RpgTypes/rmmz/eventCommand";
-import type { Rmmz_Interpreter } from "./objects/core/types";
+import type { Rmmz_Interpreter } from "./objects";
 
 export interface Rmmz_PluginManagerEx<
   CommandArg extends object,
