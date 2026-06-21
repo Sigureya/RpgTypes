@@ -13,141 +13,6 @@ var r = e(t(((e, t) => {
 			code: {
 				type: "integer",
 				enum: [
-					320,
-					324,
-					325
-				]
-			},
-			indent: { type: "integer" },
-			parameters: {
-				type: "array",
-				minItems: 2,
-				maxItems: 2,
-				items: [{ type: "number" }, { type: "string" }]
-			}
-		},
-		additionalProperties: !1
-	};
-	function r(e, { instancePath: t = "", parentData: i, parentDataProperty: a, rootData: o = e } = {}) {
-		if (!e || typeof e != "object" || Array.isArray(e)) return r.errors = [{
-			instancePath: t,
-			schemaPath: "#/type",
-			keyword: "type",
-			params: { type: "object" },
-			message: "must be object"
-		}], !1;
-		{
-			let i;
-			if (e.code === void 0 && (i = "code") || e.parameters === void 0 && (i = "parameters") || e.indent === void 0 && (i = "indent")) return r.errors = [{
-				instancePath: t,
-				schemaPath: "#/required",
-				keyword: "required",
-				params: { missingProperty: i },
-				message: "must have required property '" + i + "'"
-			}], !1;
-			for (let n in e) if (n !== "code" && n !== "indent" && n !== "parameters") return r.errors = [{
-				instancePath: t,
-				schemaPath: "#/additionalProperties",
-				keyword: "additionalProperties",
-				params: { additionalProperty: n },
-				message: "must NOT have additional properties"
-			}], !1;
-			if (e.code !== void 0) {
-				let i = e.code;
-				if (typeof i != "number" || i % 1 || isNaN(i) || !isFinite(i)) return r.errors = [{
-					instancePath: t + "/code",
-					schemaPath: "#/properties/code/type",
-					keyword: "type",
-					params: { type: "integer" },
-					message: "must be integer"
-				}], !1;
-				if (i !== 320 && i !== 324 && i !== 325) return r.errors = [{
-					instancePath: t + "/code",
-					schemaPath: "#/properties/code/enum",
-					keyword: "enum",
-					params: { allowedValues: n.properties.code.enum },
-					message: "must be equal to one of the allowed values"
-				}], !1;
-				var s = !0;
-			} else s = !0;
-			if (s) {
-				if (e.indent !== void 0) {
-					let n = e.indent;
-					if (typeof n != "number" || n % 1 || isNaN(n) || !isFinite(n)) return r.errors = [{
-						instancePath: t + "/indent",
-						schemaPath: "#/properties/indent/type",
-						keyword: "type",
-						params: { type: "integer" },
-						message: "must be integer"
-					}], !1;
-					s = !0;
-				} else s = !0;
-				if (s) if (e.parameters !== void 0) {
-					let n = e.parameters;
-					if (!Array.isArray(n)) return r.errors = [{
-						instancePath: t + "/parameters",
-						schemaPath: "#/properties/parameters/type",
-						keyword: "type",
-						params: { type: "array" },
-						message: "must be array"
-					}], !1;
-					if (n.length > 2) return r.errors = [{
-						instancePath: t + "/parameters",
-						schemaPath: "#/properties/parameters/maxItems",
-						keyword: "maxItems",
-						params: { limit: 2 },
-						message: "must NOT have more than 2 items"
-					}], !1;
-					if (n.length < 2) return r.errors = [{
-						instancePath: t + "/parameters",
-						schemaPath: "#/properties/parameters/minItems",
-						keyword: "minItems",
-						params: { limit: 2 },
-						message: "must NOT have fewer than 2 items"
-					}], !1;
-					{
-						let e = n.length;
-						if (e > 0) {
-							let e = n[0];
-							if (typeof e != "number" || !isFinite(e)) return r.errors = [{
-								instancePath: t + "/parameters/0",
-								schemaPath: "#/properties/parameters/items/0/type",
-								keyword: "type",
-								params: { type: "number" },
-								message: "must be number"
-							}], !1;
-							var c = !0;
-						}
-						if (c && e > 1) {
-							if (typeof n[1] != "string") return r.errors = [{
-								instancePath: t + "/parameters/1",
-								schemaPath: "#/properties/parameters/items/1/type",
-								keyword: "type",
-								params: { type: "string" },
-								message: "must be string"
-							}], !1;
-							c = !0;
-						}
-					}
-					s = !0;
-				} else s = !0;
-			}
-		}
-		return r.errors = null, !0;
-	}
-}))()), i = (e) => (0, r.default)(e), a = e(t(((e, t) => {
-	t.exports = r, t.exports.default = r;
-	var n = {
-		type: "object",
-		required: [
-			"code",
-			"parameters",
-			"indent"
-		],
-		properties: {
-			code: {
-				type: "integer",
-				enum: [
 					132,
 					133,
 					139,
@@ -331,6 +196,141 @@ var r = e(t(((e, t) => {
 									} else c = !0;
 								}
 							}
+						}
+					}
+					s = !0;
+				} else s = !0;
+			}
+		}
+		return r.errors = null, !0;
+	}
+}))()), i = (e) => (0, r.default)(e), a = e(t(((e, t) => {
+	t.exports = r, t.exports.default = r;
+	var n = {
+		type: "object",
+		required: [
+			"code",
+			"parameters",
+			"indent"
+		],
+		properties: {
+			code: {
+				type: "integer",
+				enum: [
+					320,
+					324,
+					325
+				]
+			},
+			indent: { type: "integer" },
+			parameters: {
+				type: "array",
+				minItems: 2,
+				maxItems: 2,
+				items: [{ type: "number" }, { type: "string" }]
+			}
+		},
+		additionalProperties: !1
+	};
+	function r(e, { instancePath: t = "", parentData: i, parentDataProperty: a, rootData: o = e } = {}) {
+		if (!e || typeof e != "object" || Array.isArray(e)) return r.errors = [{
+			instancePath: t,
+			schemaPath: "#/type",
+			keyword: "type",
+			params: { type: "object" },
+			message: "must be object"
+		}], !1;
+		{
+			let i;
+			if (e.code === void 0 && (i = "code") || e.parameters === void 0 && (i = "parameters") || e.indent === void 0 && (i = "indent")) return r.errors = [{
+				instancePath: t,
+				schemaPath: "#/required",
+				keyword: "required",
+				params: { missingProperty: i },
+				message: "must have required property '" + i + "'"
+			}], !1;
+			for (let n in e) if (n !== "code" && n !== "indent" && n !== "parameters") return r.errors = [{
+				instancePath: t,
+				schemaPath: "#/additionalProperties",
+				keyword: "additionalProperties",
+				params: { additionalProperty: n },
+				message: "must NOT have additional properties"
+			}], !1;
+			if (e.code !== void 0) {
+				let i = e.code;
+				if (typeof i != "number" || i % 1 || isNaN(i) || !isFinite(i)) return r.errors = [{
+					instancePath: t + "/code",
+					schemaPath: "#/properties/code/type",
+					keyword: "type",
+					params: { type: "integer" },
+					message: "must be integer"
+				}], !1;
+				if (i !== 320 && i !== 324 && i !== 325) return r.errors = [{
+					instancePath: t + "/code",
+					schemaPath: "#/properties/code/enum",
+					keyword: "enum",
+					params: { allowedValues: n.properties.code.enum },
+					message: "must be equal to one of the allowed values"
+				}], !1;
+				var s = !0;
+			} else s = !0;
+			if (s) {
+				if (e.indent !== void 0) {
+					let n = e.indent;
+					if (typeof n != "number" || n % 1 || isNaN(n) || !isFinite(n)) return r.errors = [{
+						instancePath: t + "/indent",
+						schemaPath: "#/properties/indent/type",
+						keyword: "type",
+						params: { type: "integer" },
+						message: "must be integer"
+					}], !1;
+					s = !0;
+				} else s = !0;
+				if (s) if (e.parameters !== void 0) {
+					let n = e.parameters;
+					if (!Array.isArray(n)) return r.errors = [{
+						instancePath: t + "/parameters",
+						schemaPath: "#/properties/parameters/type",
+						keyword: "type",
+						params: { type: "array" },
+						message: "must be array"
+					}], !1;
+					if (n.length > 2) return r.errors = [{
+						instancePath: t + "/parameters",
+						schemaPath: "#/properties/parameters/maxItems",
+						keyword: "maxItems",
+						params: { limit: 2 },
+						message: "must NOT have more than 2 items"
+					}], !1;
+					if (n.length < 2) return r.errors = [{
+						instancePath: t + "/parameters",
+						schemaPath: "#/properties/parameters/minItems",
+						keyword: "minItems",
+						params: { limit: 2 },
+						message: "must NOT have fewer than 2 items"
+					}], !1;
+					{
+						let e = n.length;
+						if (e > 0) {
+							let e = n[0];
+							if (typeof e != "number" || !isFinite(e)) return r.errors = [{
+								instancePath: t + "/parameters/0",
+								schemaPath: "#/properties/parameters/items/0/type",
+								keyword: "type",
+								params: { type: "number" },
+								message: "must be number"
+							}], !1;
+							var c = !0;
+						}
+						if (c && e > 1) {
+							if (typeof n[1] != "string") return r.errors = [{
+								instancePath: t + "/parameters/1",
+								schemaPath: "#/properties/parameters/items/1/type",
+								keyword: "type",
+								params: { type: "string" },
+								message: "must be string"
+							}], !1;
+							c = !0;
 						}
 					}
 					s = !0;

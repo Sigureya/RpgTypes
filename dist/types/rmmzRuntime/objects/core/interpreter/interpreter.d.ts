@@ -1,9 +1,10 @@
 import { EventCode } from '../../../../libs/eventCommand';
+import { ParamArray_InputNumber, ParamArray_SelectItem } from '../../../../rmmz/eventCommand';
 import { WaitMode } from './constants/types';
-export interface Rmmz_Interpreter<Coomand> {
+export interface Rmmz_EventCommandRunner<Command> {
     checkOverflow(): void;
     clear(): void;
-    setup(list: Coomand[], eventId: number): void;
+    setup(list: Command[], eventId: number): void;
     loadImages(): void;
     eventId(): number;
     isOnCurrentMap(): boolean;
@@ -21,10 +22,10 @@ export interface Rmmz_Interpreter<Coomand> {
     checkFreeze(): boolean;
     terminate(): void;
     skipBranch(): void;
-    currentCommand(): Coomand | undefined;
+    currentCommand(): Command | undefined;
     nextEventCode(): EventCode | 0;
-    setupItemChoice(params: unknown): void;
-    setupNumInput(params: unknown): void;
+    setupItemChoice(params: ParamArray_SelectItem): void;
+    setupNumInput(params: ParamArray_InputNumber): void;
     operateValue(operation: number, operandType: number, operand: number): number;
     gameDataOperand(type: number, param1: number, param2: number): number;
 }

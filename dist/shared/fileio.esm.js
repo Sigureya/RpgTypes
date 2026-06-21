@@ -1,52 +1,52 @@
-import { $c as e, Bt as t, Ft as n, Ht as r, It as i, Lt as a, Rc as o, Rt as s, Uo as c, Vt as l, Wo as ee, _i as u, bi as d, d as f, di as p, el as m, fi as h, i as g, o as _, ol as te, ss as ne, xi as re, zt as ie } from "./rmmz.esm.js";
-var ae = "bgm", oe = "se", se = "me", ce = "bgs", le = "img", ue = "audio", de = (e) => [
-	...v(e.bgm, {
+import { $c as e, Bt as t, Ft as n, Ho as r, Ht as i, It as a, Lc as o, Lt as s, Qc as ee, Rt as c, Uo as l, Vt as u, al as d, bi as f, d as p, di as m, gi as h, i as g, o as _, os as te, ui as v, yi as ne, zt as re } from "./rmmz.esm.js";
+var ie = "bgm", ae = "se", oe = "me", se = "bgs", ce = "img", le = "audio", ue = (e) => [
+	...y(e.bgm, {
 		asset: "audio",
 		subDir: "bgm"
 	}),
-	...v(e.bgs, {
+	...y(e.bgs, {
 		asset: "audio",
 		subDir: "bgs"
 	}),
-	...v(e.me, {
+	...y(e.me, {
 		asset: "audio",
 		subDir: "me"
 	}),
-	...v(e.se, {
+	...y(e.se, {
 		asset: "audio",
 		subDir: "se"
 	})
-], fe = (e) => [
-	...v(e.characters, {
+], de = (e) => [
+	...y(e.characters, {
 		asset: "img",
 		subDir: "characters"
 	}),
-	...v(e.faces, {
+	...y(e.faces, {
 		asset: "img",
 		subDir: "faces"
 	}),
-	...v(e.svEnemy, {
+	...y(e.svEnemy, {
 		asset: "img",
 		subDir: "sv_enemies"
 	}),
-	...v(e.svActors, {
+	...y(e.svActors, {
 		asset: "img",
 		subDir: "sv_actors"
 	}),
-	...v(e.enemies, {
+	...y(e.enemies, {
 		asset: "img",
 		subDir: "enemies"
 	})
-], v = (e, t) => Array.from(e).sort().map(((e) => ({
+], y = (e, t) => Array.from(e).sort().map(((e) => ({
 	asset: t.asset,
 	subDir: t.subDir,
 	symbol: e
-}))), pe = "battlebacks1", me = "battlebacks2", he = "characters", ge = "enemies", _e = "faces", ve = "parallaxes", ye = "pictures", be = "sv_actors", xe = "sv_enemies", Se = "system", Ce = "tilesets", we = "titles1", Te = "titles2", Ee = "ActorTexts.json", De = "Dictionary.json", y = async (e, t, n, r) => n(t).then(((n) => Oe(n, t, e, r))).catch((() => ({
+}))), fe = "battlebacks1", pe = "battlebacks2", me = "characters", he = "enemies", ge = "faces", _e = "parallaxes", ve = "pictures", ye = "sv_actors", be = "sv_enemies", xe = "system", Se = "tilesets", Ce = "titles1", we = "titles2", Te = "ActorTexts.json", Ee = "Dictionary.json", b = async (e, t, n, r) => n(t).then(((n) => De(n, t, e, r))).catch((() => ({
 	success: !1,
 	fileName: t,
 	data: [],
 	error: e.jsonParseError
-}))), Oe = (e, t, n, r) => {
+}))), De = (e, t, n, r) => {
 	try {
 		let i = JSON.parse(e);
 		return Array.isArray(i) ? {
@@ -68,20 +68,20 @@ var ae = "bgm", oe = "se", se = "me", ce = "bgs", le = "img", ue = "audio", de =
 			error: n.jsonParseError
 		};
 	}
-}, b = "Actors.json", x = "Classes.json", S = "Skills.json", C = "Items.json", w = "Weapons.json", T = "Armors.json", E = "Enemies.json", D = "Troops.json", O = "States.json", k = "Animations.json", A = "Tilesets.json", j = "CommonEvents.json", M = "MapInfos.json", N = (e, t, n) => y(e, b, t, n), P = (e, t, n) => y(e, x, t, n), F = (e, t, n) => y(e, S, t, n), I = (e, t, n) => y(e, C, t, n), ke = (e, t, n) => y(e, w, t, n), L = (e, t, n) => y(e, T, t, n), Ae = (e, t, n) => y(e, E, t, n), je = (e, t, n) => y(e, D, t, n), Me = (e, t, n) => y(e, O, t, n), Ne = (e, t, n) => y(e, k, t, n), Pe = (e, t, n) => y(e, A, t, n), Fe = (e, t, n) => y(e, j, t, n), Ie = (e, t, n) => y(e, M, t, n), R = (e, t, n) => n(e, JSON.stringify(t)), z = (e, t) => Promise.all([
-	R(b, e.actors, t),
-	R(x, e.classes, t),
-	R(S, e.skills, t),
-	R(C, e.items, t),
-	R(w, e.weapons, t),
-	R(T, e.armors, t),
-	R(E, e.enemies, t),
-	R(D, e.troops, t),
-	R(O, e.states, t),
-	R(k, e.animations, t),
-	R(A, e.tilesets, t),
-	R(j, e.commonEvents, t),
-	R(M, e.mapInfos, t)
+}, x = "Actors.json", S = "Classes.json", C = "Skills.json", w = "Items.json", T = "Weapons.json", E = "Armors.json", D = "Enemies.json", O = "Troops.json", k = "States.json", A = "Animations.json", j = "Tilesets.json", M = "CommonEvents.json", N = "MapInfos.json", P = (e, t, n) => b(e, x, t, n), F = (e, t, n) => b(e, S, t, n), I = (e, t, n) => b(e, C, t, n), Oe = (e, t, n) => b(e, w, t, n), ke = (e, t, n) => b(e, T, t, n), L = (e, t, n) => b(e, E, t, n), Ae = (e, t, n) => b(e, D, t, n), je = (e, t, n) => b(e, O, t, n), Me = (e, t, n) => b(e, k, t, n), Ne = (e, t, n) => b(e, A, t, n), Pe = (e, t, n) => b(e, j, t, n), Fe = (e, t, n) => b(e, M, t, n), Ie = (e, t, n) => b(e, N, t, n), R = (e, t, n) => n(e, JSON.stringify(t)), z = (e, t) => Promise.all([
+	R(x, e.actors, t),
+	R(S, e.classes, t),
+	R(C, e.skills, t),
+	R(w, e.items, t),
+	R(T, e.weapons, t),
+	R(E, e.armors, t),
+	R(D, e.enemies, t),
+	R(O, e.troops, t),
+	R(k, e.states, t),
+	R(A, e.animations, t),
+	R(j, e.tilesets, t),
+	R(M, e.commonEvents, t),
+	R(N, e.mapInfos, t)
 ]), Le = (e) => ({
 	main: Re(e),
 	map: e.mapFiles.invalidMaps.map(((e) => ({
@@ -110,13 +110,13 @@ var ae = "bgm", oe = "se", se = "me", ce = "bgs", le = "img", ue = "audio", de =
 		error: e.system.message
 	}, ...t] : t;
 }, ze = (t) => [
-	c({
+	r({
 		facename: t.image,
 		faceIndex: 0,
 		speakerName: t.text
 	}),
-	ee(t.text),
-	te({
+	l(t.text),
+	d({
 		actorId: 1,
 		characterName: t.image,
 		characterIndex: 0,
@@ -124,16 +124,16 @@ var ae = "bgm", oe = "se", se = "me", ce = "bgs", le = "img", ue = "audio", de =
 		faceName: t.image,
 		faceIndex: 0
 	}),
-	e({
+	ee({
 		name: t.text,
 		actorId: 1
 	}),
-	m({
+	e({
 		nickname: t.text,
 		actorId: 1
 	}),
-	ne(t.text)
-], Be = (e) => h({
+	te(t.text)
+], Be = (e) => m({
 	note: e.note,
 	displayName: e.text,
 	bgm: {
@@ -159,7 +159,7 @@ var ae = "bgm", oe = "se", se = "me", ce = "bgs", le = "img", ue = "audio", de =
 		y: 0,
 		pages: [Ve(e), He(e)]
 	}]
-}), Ve = (e) => u({
+}), Ve = (e) => h({
 	image: {
 		characterName: e.image,
 		tileId: 0,
@@ -168,7 +168,7 @@ var ae = "bgm", oe = "se", se = "me", ce = "bgs", le = "img", ue = "audio", de =
 		pattern: 0
 	},
 	list: o(e)
-}), He = (e) => u({
+}), He = (e) => h({
 	image: {
 		characterIndex: 0,
 		characterName: e.image,
@@ -178,30 +178,30 @@ var ae = "bgm", oe = "se", se = "me", ce = "bgs", le = "img", ue = "audio", de =
 	},
 	list: ze(e)
 }), Ue = (e) => {
-	let { message: o } = e;
+	let { message: r } = e;
 	return {
-		actors: V(n(e), o, b),
-		classes: V(a(e), o, x),
-		armors: V(i(e), o, T),
-		weapons: V(r(e), o, w),
-		items: V(ie(e), o, C),
-		enemies: V(s(e), o, E),
-		skills: V(t(e), o, S),
-		states: V(l(e), o, O),
-		troops: V(re({
+		actors: V(n(e), r, x),
+		classes: V(s(e), r, S),
+		armors: V(a(e), r, E),
+		weapons: V(i(e), r, T),
+		items: V(re(e), r, w),
+		enemies: V(c(e), r, D),
+		skills: V(t(e), r, C),
+		states: V(u(e), r, k),
+		troops: V(f({
 			id: 1,
 			name: e.nonReplaceableText
-		}), o, D),
-		commonEvents: V(d({
+		}), r, O),
+		commonEvents: V(ne({
 			id: 1,
 			name: e.nonReplaceableText
-		}), o, j),
-		mapInfos: B(o, M),
-		animations: B(o, k),
-		tilesets: B(o, A),
+		}), r, M),
+		mapInfos: B(r, N),
+		animations: B(r, A),
+		tilesets: B(r, j),
 		system: {
 			system: _(e),
-			message: o
+			message: r
 		},
 		mapFiles: {
 			info: { success: !0 },
@@ -234,7 +234,7 @@ var ae = "bgm", oe = "se", se = "me", ce = "bgs", le = "img", ue = "audio", de =
 	} catch {
 		return H(t, n.jsonParseError);
 	}
-}, qe = (e) => `Map${p(e.id)}.json`, Je = (e) => `Map${p(e.id)}`, H = (e, t) => ({
+}, qe = (e) => `Map${v(e.id)}.json`, Je = (e) => `Map${v(e.id)}`, H = (e, t) => ({
 	map: null,
 	message: t,
 	filename: Je(e),
@@ -298,17 +298,17 @@ var ae = "bgm", oe = "se", se = "me", ce = "bgs", le = "img", ue = "audio", de =
 	readAnimations: J,
 	readTilesets: J
 }, n, (() => [])), rt = (e) => e.map, J = (e) => e, it = (e, t, n, r) => Y(e, t, r, n, (() => [])), at = (e, t, n, r) => Y(e, t, r, n, (() => null)), Y = async (e, t, n, r, i) => {
-	let [a, o, s, c, l, ee, u, d, f, p, m, h, g, _] = await Promise.all([
+	let [a, o, s, ee, c, l, u, d, f, p, m, h, g, _] = await Promise.all([
 		Fe(e, t, ((e) => r.validateCommonEvent(e))),
 		je(e, t, ((e) => r.validateTroop(e))),
 		Ae(e, t, ((e) => r.validateEnemy(e))),
-		P(e, t, ((e) => r.validateClass(e))),
-		F(e, t, ((e) => r.validateSkill(e))),
-		I(e, t, ((e) => r.validateItem(e))),
+		F(e, t, ((e) => r.validateClass(e))),
+		I(e, t, ((e) => r.validateSkill(e))),
+		Oe(e, t, ((e) => r.validateItem(e))),
 		ke(e, t, ((e) => r.validateWeapon(e))),
 		L(e, t, ((e) => r.validateArmor(e))),
 		Me(e, t, ((e) => r.validateState(e))),
-		N(e, t, ((e) => r.validateActor(e))),
+		P(e, t, ((e) => r.validateActor(e))),
 		Ne(e, t, ((e) => r.validateAnimation(e))),
 		Pe(e, t, ((e) => r.validateTileset(e))),
 		Ie(e, t, ((e) => r.validateMapInfo(e))),
@@ -321,12 +321,12 @@ var ae = "bgm", oe = "se", se = "me", ce = "bgs", le = "img", ue = "audio", de =
 		mapFiles: g.success ? await st(g.data, e, n, t, r.validateMap) : ot(g),
 		actors: X(p, e, n.readActors, i),
 		armors: X(d, e, n.readArmors, i),
-		classes: X(c, e, n.readClasses, i),
+		classes: X(ee, e, n.readClasses, i),
 		commonEvents: X(a, e, n.readCommonEvents, i),
 		enemies: X(s, e, n.readEnemies, i),
-		items: X(ee, e, n.readItems, i),
+		items: X(l, e, n.readItems, i),
 		mapInfos: g,
-		skills: X(l, e, n.readSkills, i),
+		skills: X(c, e, n.readSkills, i),
 		states: X(f, e, n.readStates, i),
 		system: ct(_, e, n.readSystem),
 		troops: X(o, e, n.readTroops, i),
@@ -380,24 +380,24 @@ var ae = "bgm", oe = "se", se = "me", ce = "bgs", le = "img", ue = "audio", de =
 			data: r()
 		};
 	}
-}, lt = (e) => e, ut = (e, t = () => f({})) => [
+}, lt = (e) => e, ut = (e, t = () => p({})) => [
 	{
 		filename: G,
 		data: e.system.system ? e.system.system : t()
 	},
-	Z(b, e.actors.data),
-	Z(x, e.classes.data),
-	Z(S, e.skills.data),
-	Z(C, e.items.data),
-	Z(w, e.weapons.data),
-	Z(T, e.armors.data),
-	Z(E, e.enemies.data),
-	Z(D, e.troops.data),
-	Z(O, e.states.data),
-	Z(k, e.animations.data),
-	Z(A, e.tilesets.data),
-	Z(j, e.commonEvents.data),
-	Z(M, e.mapInfos.data),
+	Z(x, e.actors.data),
+	Z(S, e.classes.data),
+	Z(C, e.skills.data),
+	Z(w, e.items.data),
+	Z(T, e.weapons.data),
+	Z(E, e.armors.data),
+	Z(D, e.enemies.data),
+	Z(O, e.troops.data),
+	Z(k, e.states.data),
+	Z(A, e.animations.data),
+	Z(j, e.tilesets.data),
+	Z(M, e.commonEvents.data),
+	Z(N, e.mapInfos.data),
 	...dt(e.mapFiles.validMaps)
 ], dt = (e) => e.map(((e) => ({
 	filename: `${e.filename}.json`,
@@ -441,4 +441,4 @@ var ae = "bgm", oe = "se", se = "me", ce = "bgs", le = "img", ue = "audio", de =
 	commonEvents: $(e.commonEvents.data),
 	mapInfos: $(e.mapInfos.data)
 }), gt = "data", _t = "js";
-export { he as $, F as A, E as B, Ne as C, Ae as D, Fe as E, b as F, A as G, M as H, k as I, y as J, D as K, T as L, Pe as M, je as N, I as O, ke as P, me as Q, x as R, N as S, P as T, S as U, C as V, O as W, De as X, Ee as Y, pe as Z, Ye as _, oe as _t, pt as a, xe as at, Le as b, tt as c, we as ct, nt as d, fe as dt, ge as et, K as f, ue as ft, Ge as g, se as gt, W as h, ce as ht, ft as i, be as it, Me as j, Ie as k, it as l, Te as lt, Qe as m, ae as mt, _t as n, ve as nt, Q as o, Se as ot, G as p, le as pt, w as q, ut as r, ye as rt, lt as s, Ce as st, gt as t, _e as tt, at as u, de as ut, U as v, L as w, z as x, Ue as y, j as z };
+export { me as $, I as A, D as B, Ne as C, Ae as D, Fe as E, x as F, j as G, N as H, A as I, b as J, O as K, E as L, Pe as M, je as N, Oe as O, ke as P, pe as Q, S as R, P as S, F as T, C as U, w as V, k as W, Ee as X, Te as Y, fe as Z, Ye as _, ae as _t, pt as a, be as at, Le as b, tt as c, Ce as ct, nt as d, de as dt, he as et, K as f, le as ft, Ge as g, oe as gt, W as h, se as ht, ft as i, ye as it, Me as j, Ie as k, it as l, we as lt, Qe as m, ie as mt, _t as n, _e as nt, Q as o, xe as ot, G as p, ce as pt, T as q, ut as r, ve as rt, lt as s, Se as st, gt as t, ge as tt, at as u, ue as ut, U as v, L as w, z as x, Ue as y, M as z };

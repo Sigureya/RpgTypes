@@ -1,11 +1,11 @@
-import { B as e, F as t, K as n, L as r, R as i, U as a, V as o, W as s, X as c, p as l, q as u, r as d, z as ee } from "./fileio.esm.js";
-import { n as f } from "./libs.esm.js";
-import { Gs as p, Mi as m, Mt as h, Ni as te, Nt as ne, Ot as g, Ti as re, Uo as ie, Ws as ae, c as _, it as oe, ji as se, ki as ce, s as le, u as ue, wi as de, wt as v, zi as fe } from "./rmmz.esm.js";
-import { createCommandExtractorMapFromPipeline as pe, createPluginParamDictionary as me, extractPluginCommandWithExtractor as he, filterPluginSchemaByFn as ge, filterPluginSchemaStringParams as _e, generatePluginAnnotationText as ve, parseDeepRecord as ye } from "@sigureya/rmmz-plugin-schema";
-import { JSONPathJS as be } from "jsonpath-js";
-var y = (e, t, n, r, i, a) => {
-	if (e.code === 357) return Se(e, t, n, i, a);
-	let o = f(e.value);
+import { B as e, F as t, K as n, L as r, R as i, U as a, V as o, W as s, X as c, p as l, q as u, r as d, z as f } from "./fileio.esm.js";
+import { n as p } from "./libs.esm.js";
+import { Ai as m, Ci as h, Ho as g, Mi as ee, Mt as _, Nt as v, Oi as te, Ot as ne, Ri as y, Us as re, Ws as ie, c as ae, it as oe, ji as se, s as ce, u as le, wi as ue, wt as b } from "./rmmz.esm.js";
+import { createCommandExtractorMapFromPipeline as de, createPluginParamDictionary as fe, extractPluginCommandWithExtractor as pe, filterPluginSchemaByFn as me, filterPluginSchemaStringParams as he, generatePluginAnnotationText as ge, parseDeepRecord as _e } from "@sigureya/rmmz-plugin-schema";
+import { JSONPathJS as ve } from "jsonpath-js";
+var x = (e, t, n, r, i, a) => {
+	if (e.code === 357) return be(e, t, n, i, a);
+	let o = p(e.value);
 	return {
 		otherData: a,
 		uuid: i(o),
@@ -14,32 +14,32 @@ var y = (e, t, n, r, i, a) => {
 		filename: n,
 		id: t,
 		speaker: e.speaker ?? "",
-		dataKey: xe(e)
+		dataKey: ye(e)
 	};
-}, xe = (e) => `code:${e.code}`, Se = (e, t, n, r, i) => {
-	let a = f(e.value);
+}, ye = (e) => `code:${e.code}`, be = (e, t, n, r, i) => {
+	let a = p(e.value);
 	return {
 		otherData: [e.pluginName, ...i],
 		uuid: r(a),
-		kind: `${Ce(e)}`,
+		kind: `${xe(e)}`,
 		baseText: a,
 		filename: n,
 		id: t,
 		dataKey: `code:${e.code}-${e.argName}`
 	};
-}, Ce = (e) => `${e.commandName}.${e.argTitle}`, we = (e, t, n, r) => t.flatMap(((t) => Te(e, t, n, r))), Te = (e, t, n, r) => t.commands.filter(De).map(((i) => y(i, t.eventId, e, r, n, [t.name]))), Ee = (e, t, n, r) => e.filter(((e) => e.commands.length > 0)).flatMap(((e) => {
+}, xe = (e) => `${e.commandName}.${e.argTitle}`, Se = (e, t, n, r) => t.flatMap(((t) => Ce(e, t, n, r))), Ce = (e, t, n, r) => t.commands.filter(Te).map(((i) => x(i, t.eventId, e, r, n, [t.name]))), we = (e, t, n, r) => e.filter(((e) => e.commands.length > 0)).flatMap(((e) => {
 	let i = `page:${e.pageIndex + 1}`;
-	return e.commands.map(((a) => y(a, e.eventId, t, n, r, [i])));
-})), De = (e) => e.value.length > 0, Oe = (e) => ((e, t) => ({
+	return e.commands.map(((a) => x(a, e.eventId, t, n, r, [i])));
+})), Te = (e) => e.value.length > 0, Ee = (e) => ((e, t) => ({
 	code: e.code,
 	paramIndex: t,
 	value: e.parameters[t]
-}))(e, 1), ke = (e) => e.parameters[0].map(((e, t) => ({
+}))(e, 1), De = (e) => e.parameters[0].map(((e, t) => ({
 	code: 102,
 	paramIndex: t,
 	value: e
-}))), Ae = (e, t, n, r, i) => {
-	let a = Array.from(Me(e, t, n, r)).map(((e) => {
+}))), Oe = (e, t, n, r, i) => {
+	let a = Array.from(Ae(e, t, n, r)).map(((e) => {
 		let t = e.trimEnd();
 		return t.length === 0 ? null : {
 			key: t,
@@ -49,57 +49,57 @@ var y = (e, t, n, r, i, a) => {
 		key: i.newText(e.key).trimEnd(),
 		value: e.value
 	}));
-	return [...a, ...o].filter(je);
-}, je = (e) => e !== null && e.key.length > 0, Me = (e, t, n, r) => {
-	let i = Ne(e), a = r.map(Pe), o = Fe(t), s = Ie(n);
+	return [...a, ...o].filter(ke);
+}, ke = (e) => e !== null && e.key.length > 0, Ae = (e, t, n, r) => {
+	let i = je(e), a = r.map(Me), o = Ne(t), s = Pe(n);
 	return new Set([
 		i,
 		o,
 		s,
 		a
 	].flat(4));
-}, Ne = (e) => e.map(((e) => [
+}, je = (e) => e.map(((e) => [
 	e.name,
 	e.nickname,
 	e.profile
-])), Pe = (e) => de(e, b), Fe = (e) => ce(e, b), Ie = (e) => m(e, b), b = ({ list: e }) => e.filter(Le).map(((e) => e.parameters[1])), Le = (e) => e.code === 320 || e.code === 325 || e.code === 324, x = (e, t) => ({
+])), Me = (e) => h(e, Fe), Ne = (e) => te(e, Fe), Pe = (e) => se(e, Fe), Fe = ({ list: e }) => e.filter(Ie).map(((e) => e.parameters[1])), Ie = (e) => e.code === 320 || e.code === 325 || e.code === 324, S = (e, t) => ({
 	id: e.id,
 	name: e.name,
-	note: Re(e),
+	note: Le(e),
 	main: t.map(((t) => ({
 		key: t,
 		value: e[t],
 		id: e.id
 	})))
-}), Re = (e) => ne(e.note, ((t, n) => ({
+}), Le = (e) => v(e.note, ((t, n) => ({
 	key: t,
 	value: n,
 	id: e.id
-}))), ze = (e) => x(e, [
+}))), Re = (e) => S(e, [
 	"name",
 	"nickname",
 	"profile"
-]), Be = (e) => x(e, ["name"]), Ve = (e) => x(e, ["name"]), He = (e) => x(e, [
+]), ze = (e) => S(e, ["name"]), Be = (e) => S(e, ["name"]), Ve = (e) => S(e, [
 	"name",
 	"description",
 	"message1",
 	"message2"
-]), Ue = (e) => x(e, ["name", "description"]), We = (e) => x(e, ["name", "description"]), Ge = (e) => x(e, ["name", "description"]), Ke = (e) => x(e, [
+]), He = (e) => S(e, ["name", "description"]), Ue = (e) => S(e, ["name", "description"]), We = (e) => S(e, ["name", "description"]), Ge = (e) => S(e, [
 	"name",
 	"message1",
 	"message2",
 	"message3",
 	"message4"
-]), qe = (e, t, n, r) => S(e, t, {
+]), Ke = (e, t, n, r) => C(e, t, {
 	message1: n.state.message1,
 	message2: n.state.message2,
 	message3: n.state.message3,
 	message4: n.state.message4,
 	name: n.name,
 	note: n.note
-}, r), S = (e, t, n, r) => e.map(((e) => Je(e, t, n, r))), Je = (e, t, n, r) => ({
+}, r), C = (e, t, n, r) => e.map(((e) => qe(e, t, n, r))), qe = (e, t, n, r) => ({
 	main: e.main.filter(((e) => e.value !== "")).map(((e) => {
-		let i = f(e.value);
+		let i = p(e.value);
 		return {
 			kind: n[e.key],
 			baseText: i,
@@ -109,8 +109,8 @@ var y = (e, t, n, r, i, a) => {
 			uuid: r(i)
 		};
 	})),
-	note: Ye(e.note, t, n, r)
-}), Ye = (e, t, n, r) => e.map(((e) => ({
+	note: Je(e.note, t, n, r)
+}), Je = (e, t, n, r) => e.map(((e) => ({
 	kind: `${n.note}:${e.key}`,
 	baseText: e.value,
 	filename: t,
@@ -118,8 +118,8 @@ var y = (e, t, n, r, i, a) => {
 	uuid: r(e.value),
 	dataKey: "note",
 	otherData: [e.key]
-}))), C = (e, t, n, r, i, a) => {
-	let o = f(t[r]);
+}))), w = (e, t, n, r, i, a) => {
+	let o = p(t[r]);
 	return {
 		filename: n,
 		id: 0,
@@ -128,12 +128,12 @@ var y = (e, t, n, r, i, a) => {
 		kind: a(r),
 		dataKey: `${e}.${r}`
 	};
-}, Xe = (e, t, n, r, i, a) => [
-	...$e(t.basic, e, n, r),
-	...Ze(t.commands, e, n, i),
-	...Qe(t.messages, e, n, a),
-	...et(t.params, e, n, ((e) => `params.${e}`))
-], Ze = (e, t, n, r) => [
+}, Ye = (e, t, n, r, i, a) => [
+	...Qe(t.basic, e, n, r),
+	...Xe(t.commands, e, n, i),
+	...Ze(t.messages, e, n, a),
+	...$e(t.params, e, n, ((e) => `params.${e}`))
+], Xe = (e, t, n, r) => [
 	"fight",
 	"escape",
 	"attack",
@@ -158,7 +158,7 @@ var y = (e, t, n, r, i, a) => {
 	"cancel",
 	"buy",
 	"sell"
-].filter(((t) => e[t] !== "")).map(((i) => C("commands", e, t, i, n, r))), Qe = (e, t, n, r) => (/* @__PURE__ */ "alwaysDash.commandRemember.touchUI.bgmVolume.bgsVolume.meVolume.seVolume.possession.expTotal.expNext.saveMessage.loadMessage.file.autosave.partyName.emerge.preemptive.surprise.escapeStart.escapeFailure.victory.defeat.obtainExp.obtainGold.obtainItem.levelUp.obtainSkill.useItem.criticalToEnemy.criticalToActor.actorDamage.actorRecovery.actorGain.actorLoss.actorDrain.actorNoDamage.actorNoHit.enemyDamage.enemyRecovery.enemyGain.enemyLoss.enemyDrain.enemyNoDamage.enemyNoHit.evasion.magicEvasion.magicReflection.counterAttack.substitute.buffAdd.debuffAdd.buffRemove.actionFailure".split(".")).filter(((t) => e[t] !== "")).map(((i) => C("messages", e, t, i, n, r))), $e = (e, t, n, r) => [
+].filter(((t) => e[t] !== "")).map(((i) => w("commands", e, t, i, n, r))), Ze = (e, t, n, r) => (/* @__PURE__ */ "alwaysDash.commandRemember.touchUI.bgmVolume.bgsVolume.meVolume.seVolume.possession.expTotal.expNext.saveMessage.loadMessage.file.autosave.partyName.emerge.preemptive.surprise.escapeStart.escapeFailure.victory.defeat.obtainExp.obtainGold.obtainItem.levelUp.obtainSkill.useItem.criticalToEnemy.criticalToActor.actorDamage.actorRecovery.actorGain.actorLoss.actorDrain.actorNoDamage.actorNoHit.enemyDamage.enemyRecovery.enemyGain.enemyLoss.enemyDrain.enemyNoDamage.enemyNoHit.evasion.magicEvasion.magicReflection.counterAttack.substitute.buffAdd.debuffAdd.buffRemove.actionFailure".split(".")).filter(((t) => e[t] !== "")).map(((i) => w("messages", e, t, i, n, r))), Qe = (e, t, n, r) => [
 	"level",
 	"levelA",
 	"hp",
@@ -169,7 +169,7 @@ var y = (e, t, n, r, i, a) => {
 	"tpA",
 	"experience",
 	"exp"
-].filter(((t) => e[t] !== "")).map(((i) => C("basic", e, t, i, n, r))), et = (e, t, n, r) => [
+].filter(((t) => e[t] !== "")).map(((i) => w("basic", e, t, i, n, r))), $e = (e, t, n, r) => [
 	"mhp",
 	"mmp",
 	"atk",
@@ -180,7 +180,7 @@ var y = (e, t, n, r, i, a) => {
 	"luk",
 	"hit",
 	"eva"
-].filter(((t) => e[t] !== "")).map(((i) => C("params", e, t, i, n, r))), tt = (e, t, n, r) => [
+].filter(((t) => e[t] !== "")).map(((i) => w("params", e, t, i, n, r))), et = (e, t, n, r) => [
 	{
 		filename: t,
 		id: 0,
@@ -197,14 +197,14 @@ var y = (e, t, n, r, i, a) => {
 		kind: n.currencyUnit,
 		dataKey: "currencyUnit"
 	},
-	...Xe(t, e.terms, r, ((e) => `basic.${e}`), ((e) => `commands.${e}`), ((e) => `messages.${e}`)),
-	...w(t, e.elements, "elements", n.elements, r),
-	...w(t, e.equipTypes, "equipTypes", n.equipTypes, r),
-	...w(t, e.weaponTypes, "weaponTypes", n.weaponTypes, r),
-	...w(t, e.armorTypes, "armorTypes", n.armorTypes, r),
-	...w(t, e.skillTypes, "skillTypes", n.skillTypes, r)
-], w = (e, t, n, r, i) => t.filter(((e) => e.length > 0)).map(((t, a) => {
-	let o = f(t);
+	...Ye(t, e.terms, r, ((e) => `basic.${e}`), ((e) => `commands.${e}`), ((e) => `messages.${e}`)),
+	...T(t, e.elements, "elements", n.elements, r),
+	...T(t, e.equipTypes, "equipTypes", n.equipTypes, r),
+	...T(t, e.weaponTypes, "weaponTypes", n.weaponTypes, r),
+	...T(t, e.armorTypes, "armorTypes", n.armorTypes, r),
+	...T(t, e.skillTypes, "skillTypes", n.skillTypes, r)
+], T = (e, t, n, r, i) => t.filter(((e) => e.length > 0)).map(((t, a) => {
+	let o = p(t);
 	return {
 		filename: e,
 		id: a,
@@ -213,8 +213,8 @@ var y = (e, t, n, r, i, a) => {
 		kind: r,
 		dataKey: n
 	};
-})), nt = (e, t) => {
-	let n = T(e.actors, ze), r = ot(e.armors), i = T(e.classes, Ve), a = T(e.enemies, Be), o = T(e.items, Ue), s = T(e.mapInfos, ((e) => e)), c = T(e.skills, He), l = T(e.states, Ke), u = T(e.weapons, We), d = st(e.commonEvents, t), ee = ct(e.troops, t), f = lt(e.mapFiles, t), p = rt(e.system), m = it([
+})), tt = (e, t) => {
+	let n = E(e.actors, Re), r = at(e.armors), i = E(e.classes, Be), a = E(e.enemies, ze), o = E(e.items, He), s = E(e.mapInfos, ((e) => e)), c = E(e.skills, Ve), l = E(e.states, Ge), u = E(e.weapons, Ue), d = ot(e.commonEvents, t), f = st(e.troops, t), p = ct(e.mapFiles, t), m = nt(e.system), h = rt([
 		n,
 		r,
 		i,
@@ -224,17 +224,17 @@ var y = (e, t, n, r, i, a) => {
 		c,
 		l,
 		u,
-		ee,
+		f,
 		d
-	]).concat(at(e.mapFiles, e.system));
+	]).concat(it(e.mapFiles, e.system));
 	return {
 		value: {
 			eventData: {
 				commonEvents: d.data,
-				troops: ee.data.flat()
+				troops: f.data.flat()
 			},
-			mapFiles: f,
-			system: p,
+			mapFiles: p,
+			system: m,
 			mainData: {
 				actors: n.data,
 				armors: r.data,
@@ -246,23 +246,23 @@ var y = (e, t, n, r, i, a) => {
 				weapons: u.data
 			}
 		},
-		errors: m
+		errors: h
 	};
-}, rt = (e) => e.system === null ? {
+}, nt = (e) => e.system === null ? {
 	message: e.message,
 	system: null
 } : {
 	message: e.message,
-	system: le(e.system)
-}, T = (e, t) => ({
+	system: ce(e.system)
+}, E = (e, t) => ({
 	error: e.error,
 	fileName: e.fileName,
 	success: e.success,
 	data: e.success ? e.data.map(t) : []
-}), it = (e) => e.filter(((e) => !e.success)).map(((e) => ({
+}), rt = (e) => e.filter(((e) => !e.success)).map(((e) => ({
 	fileName: e.fileName,
 	error: e.error
-}))), at = (e, t) => [
+}))), it = (e, t) => [
 	...!1 === e.info.success ? [{
 		fileName: e.info.filename,
 		error: e.info.message
@@ -275,7 +275,7 @@ var y = (e, t, n, r, i, a) => {
 		fileName: l,
 		error: t.message
 	}] : []
-], ot = (e) => T(e, Ge), st = (e, t) => T(e, ((e) => t.extractCommonEventText(e))), ct = (e, t) => T(e, ((e) => t.extractBattleText(e))), lt = (e, t) => {
+], at = (e) => E(e, We), ot = (e, t) => E(e, ((e) => t.extractCommonEventText(e))), st = (e, t) => E(e, ((e) => t.extractBattleText(e))), ct = (e, t) => {
 	let n = e.validMaps.map(((e) => ({
 		editingName: e.editingName,
 		filename: e.filename,
@@ -286,23 +286,23 @@ var y = (e, t, n, r, i, a) => {
 		invalidMaps: e.invalidMaps,
 		validMaps: n
 	};
-}, ut = (e) => `${e.eventId.toString().padStart(3, "0")}:${e.name}`, dt = (e) => {
+}, lt = (e) => `${e.eventId.toString().padStart(3, "0")}:${e.name}`, ut = (e) => {
 	let t = e.trim().toLowerCase();
 	return t === "true" || t === "false";
-}, ft = (e) => {
+}, dt = (e) => {
 	let t = e.trim();
 	return /^-?\d{1,16}\.?\d{0,16}$/.test(t);
-}, E = (e) => {
+}, D = (e) => {
 	let t = e.filter(((e) => e.kinds.length === 0)).map(((e) => e.key));
 	return new Set(t);
-}, D = (e, t) => {
-	let n = pt(e);
+}, O = (e, t) => {
+	let n = ft(e);
 	return Array.from(n.entries()).map((([e, n]) => ({
 		key: e,
-		kinds: ht(gt(n, t)),
-		values: n.map(mt)
+		kinds: mt(ht(n, t)),
+		values: n.map(pt)
 	})));
-}, pt = (e) => {
+}, ft = (e) => {
 	let t = e.flatMap(((e) => e.notes.map(((t) => ({
 		key: t.key,
 		value: t.value,
@@ -311,12 +311,12 @@ var y = (e, t, n, r, i, a) => {
 		soruce: e.source
 	})))));
 	return Map.groupBy(t, ((e) => e.key));
-}, mt = (e) => ({
+}, pt = (e) => ({
 	value: e.value,
 	id: e.id,
 	soruce: e.soruce,
 	name: e.name
-}), ht = (e) => [
+}), mt = (e) => [
 	e.isBoolean ? "boolean" : null,
 	e.isNumber ? "number" : null,
 	e.isBgm ? "bgm" : null,
@@ -332,9 +332,9 @@ var y = (e, t, n, r, i, a) => {
 	e.isTileset ? "tilesets" : null,
 	e.isMovie ? "movies" : null,
 	e.isScript ? "script" : null
-].filter(((e) => e !== null)), gt = (e, { audioFiles: t, imageFiles: n, otherFiles: r }) => e.reduce(((e, i) => ({
-	isBoolean: e.isBoolean && dt(i.value),
-	isNumber: e.isNumber && ft(i.value),
+].filter(((e) => e !== null)), ht = (e, { audioFiles: t, imageFiles: n, otherFiles: r }) => e.reduce(((e, i) => ({
+	isBoolean: e.isBoolean && ut(i.value),
+	isNumber: e.isNumber && dt(i.value),
 	isBgm: e.isBgm && t.bgm.has(i.value),
 	isBgs: e.isBgs && t.bgs.has(i.value),
 	isMe: e.isMe && t.me.has(i.value),
@@ -364,27 +364,27 @@ var y = (e, t, n, r, i, a) => {
 	isTileset: !0,
 	isMovie: !0,
 	isScript: !0
-}), _t = (e) => ({
+}), gt = (e) => ({
 	source: e.filename,
-	notes: [...e.map.noteItems.map(yt), ...e.map.events.map(vt).flat()]
-}), vt = (e) => e.noteItems.map(((t) => ({
+	notes: [...e.map.noteItems.map(vt), ...e.map.events.map(_t).flat()]
+}), _t = (e) => e.noteItems.map(((t) => ({
 	id: e.eventId,
 	key: t.key,
 	value: t.value,
 	name: e.name
-}))), yt = (e) => ({
+}))), vt = (e) => ({
 	id: 0,
 	key: e.key,
 	value: e.value,
 	name: ""
-}), bt = (e, t) => ({
+}), yt = (e, t) => ({
 	eventId: e.eventId,
 	name: e.name,
 	pageIndex: e.pageIndex,
 	commands: e.commands,
 	note: e.note,
 	noteItems: e.noteItems.filter(t)
-}), O = (e, t) => e.map(((e) => {
+}), k = (e, t) => e.map(((e) => {
 	let n = e.note.filter(t);
 	return {
 		main: e.main,
@@ -392,8 +392,8 @@ var y = (e, t, n, r, i, a) => {
 		id: e.id,
 		name: e.name
 	};
-})).filter(xt), xt = (e) => e.note.length > 0 || e.main.length > 0, k = (e, t) => {
-	let n = At(e.value.mainData, t), r = jt(e.value.mapFiles.validMaps, t);
+})).filter(bt), bt = (e) => e.note.length > 0 || e.main.length > 0, A = (e, t) => {
+	let n = kt(e.value.mainData, t), r = At(e.value.mapFiles.validMaps, t);
 	return {
 		nonTextNoteKeys: n.nonTextNoteKeys,
 		dataNoteSummary: n.noteSummary,
@@ -412,19 +412,19 @@ var y = (e, t, n, r, i, a) => {
 			}
 		}
 	};
-}, St = (e, t) => {
+}, xt = (e, t) => {
 	let n = (e) => t.has(e.key);
 	return {
-		actors: O(e.actors, n),
-		enemies: O(e.enemies, n),
-		weapons: O(e.weapons, n),
-		armors: O(e.armors, n),
-		skills: O(e.skills, n),
-		states: O(e.states, n),
-		items: O(e.items, n),
-		classes: O(e.classes, n)
+		actors: k(e.actors, n),
+		enemies: k(e.enemies, n),
+		weapons: k(e.weapons, n),
+		armors: k(e.armors, n),
+		skills: k(e.skills, n),
+		states: k(e.states, n),
+		items: k(e.items, n),
+		classes: k(e.classes, n)
 	};
-}, Ct = (e, t) => Et(e, E(kt(e, t))), wt = (e, t) => E(Dt(e, t)), Tt = (e, t) => St(e, wt(e, t)), Et = (e, t) => e.map(((e) => {
+}, St = (e, t) => Tt(e, D(Ot(e, t))), Ct = (e, t) => D(Et(e, t)), wt = (e, t) => xt(e, Ct(e, t)), Tt = (e, t) => e.map(((e) => {
 	return {
 		filename: e.filename,
 		editingName: e.editingName,
@@ -432,20 +432,20 @@ var y = (e, t, n, r, i, a) => {
 			displayedName: n.displayedName,
 			note: n.note,
 			noteItems: n.noteItems.filter(r),
-			events: n.events.map(((e) => bt(e, r)))
+			events: n.events.map(((e) => yt(e, r)))
 		})
 	};
 	var n, r;
-})), Dt = (e, t) => D(Ot(e), t), Ot = (n) => [
-	A(t, n.actors),
-	A(a, n.skills),
-	A(o, n.items),
-	A(u, n.weapons),
-	A(r, n.armors),
-	A(i, n.classes),
-	A(s, n.states),
-	A(e, n.enemies)
-], A = (e, t) => ({
+})), Et = (e, t) => O(Dt(e), t), Dt = (n) => [
+	j(t, n.actors),
+	j(a, n.skills),
+	j(o, n.items),
+	j(u, n.weapons),
+	j(r, n.armors),
+	j(i, n.classes),
+	j(s, n.states),
+	j(e, n.enemies)
+], j = (e, t) => ({
 	source: e,
 	notes: t.flatMap(((e) => e.note.map(((t) => ({
 		key: t.key,
@@ -453,21 +453,21 @@ var y = (e, t, n, r, i, a) => {
 		id: t.id,
 		name: e.name
 	})))))
-}), kt = (e, t) => D(e.map(_t), t), At = (e, t) => {
-	let n = Dt(e, t), r = E(n);
+}), Ot = (e, t) => O(e.map(gt), t), kt = (e, t) => {
+	let n = Et(e, t), r = D(n);
 	return {
 		noteSummary: n,
 		nonTextNoteKeys: r,
-		mainData: St(e, r)
+		mainData: xt(e, r)
 	};
-}, jt = (e, t) => {
-	let n = kt(e, t);
+}, At = (e, t) => {
+	let n = Ot(e, t);
 	return {
 		noteSummary: n,
-		validMaps: Et(e, E(n))
+		validMaps: Tt(e, D(n))
 	};
-}, Mt = (e, t) => e.params.filter(Pt).map(((n) => It(e.pluginName, n, t))).filter(((e) => e !== void 0)), Nt = (e) => e.length !== 0 && !/^[\d\s-\+\*/,.()=><]+$/.test(e) && !(!/["`']/.test(e) && oe(e)), Pt = (e) => typeof e.value == "string" && e.value.length !== 0 && !!Ft(e) && !!Nt(e.value), Ft = (e) => e.param.attr.kind === "string" || e.param.attr.kind === "string[]" || e.param.attr.kind === "multiline_string" || e.param.attr.kind === "multiline_string[]" || e.param.attr.kind === "combo" || e.param.attr.kind === "any", It = (e, t, n) => {
-	let r = f(t.value);
+}, jt = (e, t) => e.params.filter(Nt).map(((n) => Ft(e.pluginName, n, t))).filter(((e) => e !== void 0)), Mt = (e) => e.length !== 0 && !/^[\d\s-\+\*/,.()=><]+$/.test(e) && !(!/["`']/.test(e) && oe(e)), Nt = (e) => typeof e.value == "string" && e.value.length !== 0 && !!Pt(e) && !!Mt(e.value), Pt = (e) => e.param.attr.kind === "string" || e.param.attr.kind === "string[]" || e.param.attr.kind === "multiline_string" || e.param.attr.kind === "multiline_string[]" || e.param.attr.kind === "combo" || e.param.attr.kind === "any", Ft = (e, t, n) => {
+	let r = p(t.value);
 	if (r.length !== 0) return {
 		filename: e,
 		id: 0,
@@ -481,7 +481,7 @@ var y = (e, t, n, r, i, a) => {
 			t.param.attr.desc || ""
 		]
 	};
-}, Lt = (e, t) => ({
+}, It = (e, t) => ({
 	code: 357,
 	pluginName: e.pluginName,
 	commandName: e.commandName,
@@ -489,55 +489,55 @@ var y = (e, t, n, r, i, a) => {
 	value: typeof t.value == "string" ? t.value : "",
 	argTitle: t.param.attr.text || t.param.name,
 	paramIndex: 3
-}), Rt = (e) => {
-	let t = pe(e);
+}), Lt = (e) => {
+	let t = de(e);
 	return { extractArgs(e, n) {
-		let r = he(e, t, n);
-		return r.args.map(((e) => Lt(r, e)));
+		let r = pe(e, t, n);
+		return r.args.map(((e) => It(r, e)));
 	} };
-}, zt = (e) => [
+}, Rt = (e) => [
 	...e.eventData.commonEvents.flatMap(((e) => e.commands)),
 	...e.eventData.troops.flatMap(((e) => e.commands)),
 	...e.mapFiles.validMaps.flatMap(((e) => e.map.events.flatMap(((e) => e.commands))))
-], Bt = (e) => {
-	let t = e.filter(Vt).map(((e) => e.speaker.trimEnd()));
+], zt = (e) => {
+	let t = e.filter(Bt).map(((e) => e.speaker.trimEnd()));
 	return Array.from(new Set(t));
-}, Vt = (e) => e.code === 401 && !!e.speaker && !fe(e.speaker), Ht = (e, t, n, r, i, a, o) => {
-	let s = k(nt(e.data, o), e);
-	return Gt(e.data.actors.data, t, s, n, r, i, a);
-}, Ut = Ht, Wt = (e) => [...e.dataNoteSummary, ...e.mapNoteSummary], Gt = (c, l, d, f, p, m, h) => {
-	let { eventData: ne, mainData: g, mapFiles: re, system: ie } = d.data.value;
+}, Bt = (e) => e.code === 401 && !!e.speaker && !y(e.speaker), Vt = (e, t, n, r, i, a, o) => {
+	let s = A(tt(e.data, o), e);
+	return Wt(e.data.actors.data, t, s, n, r, i, a);
+}, Ht = Vt, Ut = (e) => [...e.dataNoteSummary, ...e.mapNoteSummary], Wt = (c, l, d, p, m, h, g) => {
+	let { eventData: _, mainData: v, mapFiles: te, system: ne } = d.data.value;
 	return {
-		speakers: (ae = d.data.value, _ = m, Bt(zt(ae)).map(((e) => ({
+		speakers: (y = d.data.value, re = h, zt(Rt(y)).map(((e) => ({
 			filename: "",
 			id: 0,
-			uuid: _(e),
+			uuid: re(e),
 			baseText: e,
 			kind: "speaker",
 			dataKey: "speaker",
 			otherData: []
 		})))),
-		noteSummaries: Wt(d),
-		pluginParams: l.flatMap(((e) => Mt(e, m))),
-		map: Kt(re, m, h),
-		commonEvents: we(ee, ne.commonEvents, m, h),
-		troops: Ee(ne.troops, n, h, m),
-		armors: S(g.armors, r, p, m),
-		system: Jt(ie, m, f),
+		noteSummaries: Ut(d),
+		pluginParams: l.flatMap(((e) => jt(e, h))),
+		map: Gt(te, h, g),
+		commonEvents: Se(f, _.commonEvents, h, g),
+		troops: we(_.troops, n, g, h),
+		armors: C(v.armors, r, m, h),
+		system: qt(ne, h, p),
 		actors: {
-			texts: S(g.actors, t, p, m),
-			controlChars: te(c)
+			texts: C(v.actors, t, m, h),
+			controlChars: ee(c)
 		},
-		classes: S(g.classes, i, p, m),
-		enemies: S(g.enemies, e, p, m),
-		items: S(g.items, o, p, m),
-		skills: S(g.skills, a, p, m),
-		states: qe(g.states, s, p, m),
-		weapons: S(g.weapons, u, p, m)
+		classes: C(v.classes, i, m, h),
+		enemies: C(v.enemies, e, m, h),
+		items: C(v.items, o, m, h),
+		skills: C(v.skills, a, m, h),
+		states: Ke(v.states, s, m, h),
+		weapons: C(v.weapons, u, m, h)
 	};
-	var ae, _;
-}, Kt = (e, t, n) => e.validMaps.map(((e) => qt(e, t, n))).flat(3), qt = (e, t, n) => e.map.events.map(((r) => ((e, t, n, r) => {
-	let i = `page:${e.pageIndex + 1}`, a = ut(e);
+	var y, re;
+}, Gt = (e, t, n) => e.validMaps.map(((e) => Kt(e, t, n))).flat(3), Kt = (e, t, n) => e.map.events.map(((r) => ((e, t, n, r) => {
+	let i = `page:${e.pageIndex + 1}`, a = lt(e);
 	return [e.noteItems.map(((r) => ({
 		id: e.eventId,
 		filename: t.filename,
@@ -550,35 +550,35 @@ var y = (e, t, n, r, i, a) => {
 			a,
 			r.key
 		]
-	}))), e.commands.filter(De).map(((o) => y(o, e.eventId, t.filename, r, n, [
+	}))), e.commands.filter(Te).map(((o) => x(o, e.eventId, t.filename, r, n, [
 		t.editingName,
 		a,
 		i
 	])))];
-})(r, e, t, n))), Jt = (e, t, n) => e.system ? {
+})(r, e, t, n))), qt = (e, t, n) => e.system ? {
 	gameTitle: e.system.gameTitle,
 	filename: l,
-	texts: tt(e.system, l, n, t)
+	texts: et(e.system, l, n, t)
 } : {
 	gameTitle: "",
 	filename: l,
 	texts: []
-}, Yt = (e, t, n, r, i, a) => {
+}, Jt = (e, t, n, r, i, a) => {
 	let o = {
 		hashText: a,
 		newText: (e) => i.get(e) ?? e
 	};
 	return {
-		textDictionary: Xt(i, a),
-		actorTexts: Ae(e, t, n, r, o)
+		textDictionary: Yt(i, a),
+		actorTexts: Oe(e, t, n, r, o)
 	};
-}, Xt = (e, t) => Array.from(e.entries()).map((([e, n]) => ({
+}, Yt = (e, t) => Array.from(e.entries()).map((([e, n]) => ({
 	key: t(e),
 	value: n
-}))), Zt = (e) => {
-	let t = E(e);
+}))), Xt = (e) => {
+	let t = D(e);
 	return Array.from(t);
-}, j = "HonyakuEx", M = (e, t) => ({
+}, M = "HonyakuEx", Zt = (e, t) => ({
 	dir: "js/plugins",
 	subDir: t.outputDirectory,
 	filename: `${t.dictionaryName}.js`,
@@ -603,8 +603,8 @@ var y = (e, t, n, r, i, a) => {
 		nn("辞書データプラグイン。JSONの代わりです。"),
 		"(function(){",
 		"\"use strict\";",
-		Qt(j, "Setup", t),
-		Qt(j, "SetupSystemTexts", e.systemTexts),
+		Qt(M, "Setup", t),
+		Qt(M, "SetupSystemTexts", e.systemTexts),
 		"})();"
 	].join("\n");
 }, en = (e) => [
@@ -614,13 +614,13 @@ var y = (e, t, n, r, i, a) => {
 	"const data = ",
 	`${JSON.stringify(e)};`,
 	"PluginManager.callCommand(null,",
-	`"${j}",`,
+	`"${M}",`,
 	"\"ReadPlugins\",",
 	"data",
 	");",
 	"})()"
 ].join("\n"), tn = (e) => [{
-	name: `${e.outputDirectory}/${j}`,
+	name: `${e.outputDirectory}/${M}`,
 	description: e.description,
 	status: !0,
 	parameters: {}
@@ -629,13 +629,13 @@ var y = (e, t, n, r, i, a) => {
 	description: e.description,
 	status: !0,
 	parameters: {}
-}], nn = (e) => ve({
+}], nn = (e) => ge({
 	pluginName: "",
 	locale: "",
 	target: "MZ",
 	dependencies: {
-		base: [j],
-		orderAfter: [j],
+		base: [M],
+		orderAfter: [M],
 		orderBefore: []
 	},
 	schema: {
@@ -699,12 +699,12 @@ var y = (e, t, n, r, i, a) => {
 		...e.troops,
 		...e.pluginParams
 	];
-}, N = (e) => e.map(((e) => [e.main, e.note])), P = (e, t, n) => e.filter(((e) => e.code === 128 || e.code === 126 || e.code === 127)).map(((e) => mn(e, t, n))), pn = {
+}, N = (e) => e.map(((e) => [e.main, e.note])), pn = (e, t, n) => e.filter(((e) => e.code === 128 || e.code === 126 || e.code === 127)).map(((e) => hn(e, t, n))), mn = {
 	127: "weapon",
 	128: "armor",
 	126: "item"
-}, mn = (e, t, n) => {
-	let r = p(e) ? {
+}, hn = (e, t, n) => {
+	let r = ie(e) ? {
 		direct: !1,
 		variableId: e.parameters[3]
 	} : {
@@ -712,35 +712,35 @@ var y = (e, t, n, r, i, a) => {
 		value: e.parameters[3]
 	}, i = e.parameters[1] === 0 ? t.gain : e.parameters[1] === 1 ? t.lose : t.unknown, a = typeof e.parameters[4] == "boolean" ? { includesEquip: e.parameters[4] } : {};
 	return {
-		itemKind: pn[e.code],
-		dataId: ae(e),
+		itemKind: mn[e.code],
+		dataId: re(e),
 		code: e.code,
 		commandNameMZ: n(e.code),
 		operation: i,
 		...a,
 		...r
 	};
-}, hn = (e, t, n) => de(e.map, ((e, r, i) => ({
-	...gn(e),
-	commands: P(e.list, t, n),
+}, gn = (e, t, n) => h(e.map, ((e, r, i) => ({
+	..._n(e),
+	commands: pn(e.list, t, n),
 	eventName: i.name,
 	pageIndex: r
-}))), gn = (e) => e.conditions.itemId > 0 && e.conditions.itemValid ? { pageCondition: { itemId: e.conditions.itemId } } : {}, _n = (e, t, n) => re(e, ((e, r, i) => ({
-	commands: P(e.list, t, n),
+}))), _n = (e) => e.conditions.itemId > 0 && e.conditions.itemValid ? { pageCondition: { itemId: e.conditions.itemId } } : {}, vn = (e, t, n) => ue(e, ((e, r, i) => ({
+	commands: pn(e.list, t, n),
 	eventName: i.name,
 	troopId: i.id,
 	pageIndex: r
-}))), vn = (e, t) => {
+}))), yn = (e, t) => {
 	let n = e.trimEnd(), r = t.get(n);
 	return r ? r.trimEnd() : n;
-}, F = (e, t) => {
+}, P = (e, t) => {
 	let n = e.trimEnd(), r = t(n);
 	return r ? r.trimEnd() : n;
-}, I = (e, t) => {
+}, F = (e, t) => {
 	let n = e.trimEnd(), r = t.replaceText(n);
 	return r ? r.trimEnd() : n;
-}, L = (e, t) => {
-	let n = (e) => t.replaceText(e), r = v(e.note, t), i = F(e.name, n), a = F(e.nickname, n), o = F(e.profile, n);
+}, bn = (e, t) => {
+	let n = (e) => t.replaceText(e), r = b(e.note, t), i = P(e.name, n), a = P(e.nickname, n), o = P(e.profile, n);
 	return {
 		...e,
 		name: i,
@@ -748,22 +748,22 @@ var y = (e, t, n, r, i, a) => {
 		profile: o,
 		note: r
 	};
+}, I = (e, t) => {
+	let n = b(e.note, t), r = F(e.name, t);
+	return {
+		...e,
+		name: r,
+		note: n
+	};
+}, L = (e, t) => {
+	let n = b(e.note, t), r = F(e.name, t);
+	return {
+		...e,
+		name: r,
+		note: n
+	};
 }, R = (e, t) => {
-	let n = v(e.note, t), r = I(e.name, t);
-	return {
-		...e,
-		name: r,
-		note: n
-	};
-}, z = (e, t) => {
-	let n = v(e.note, t), r = I(e.name, t);
-	return {
-		...e,
-		name: r,
-		note: n
-	};
-}, B = (e, t) => {
-	let n = v(e.note, t), r = I(e.name, t), i = I(e.description, t), a = I(e.message1, t), o = I(e.message2, t);
+	let n = b(e.note, t), r = F(e.name, t), i = F(e.description, t), a = F(e.message1, t), o = F(e.message2, t);
 	return {
 		...e,
 		name: r,
@@ -772,16 +772,16 @@ var y = (e, t, n, r, i, a) => {
 		message2: o,
 		note: n
 	};
-}, V = (e, t) => {
-	let n = v(e.note, t), r = I(e.name, t), i = I(e.description, t);
+}, z = (e, t) => {
+	let n = b(e.note, t), r = F(e.name, t), i = F(e.description, t);
 	return {
 		...e,
 		name: r,
 		description: i,
 		note: n
 	};
-}, H = (e, t) => {
-	let n = v(e.note, t), r = I(e.name, t), i = I(e.message1, t), a = I(e.message2, t), o = I(e.message3, t), s = I(e.message4, t);
+}, B = (e, t) => {
+	let n = b(e.note, t), r = F(e.name, t), i = F(e.message1, t), a = F(e.message2, t), o = F(e.message3, t), s = F(e.message4, t);
 	return {
 		...e,
 		name: r,
@@ -791,44 +791,44 @@ var y = (e, t, n, r, i, a) => {
 		message4: s,
 		note: n
 	};
-}, yn = (e, t) => {
+}, xn = (e, t) => {
 	switch (e.code) {
-		case 101: return xn(e, t);
-		case 102: return Cn(e, t);
+		case 101: return Cn(e, t);
+		case 102: return Tn(e, t);
 		case 401:
 		case 108:
 		case 408:
-		case 405: return bn(e, t);
+		case 405: return Sn(e, t);
 		case 320:
 		case 324:
-		case 325: return Sn(e, t);
+		case 325: return wn(e, t);
 		default: return e;
 	}
-}, bn = (e, t) => {
-	let n = F(e.parameters[0], t);
+}, Sn = (e, t) => {
+	let n = P(e.parameters[0], t);
 	return {
 		code: e.code,
 		indent: e.indent,
 		parameters: [n]
 	};
-}, xn = (e, t) => {
-	let n = e.parameters[4] ? F(e.parameters[4], t) : "";
-	return ie({
+}, Cn = (e, t) => {
+	let n = e.parameters[4] ? P(e.parameters[4], t) : "";
+	return g({
 		facename: e.parameters[0],
 		faceIndex: e.parameters[1],
 		background: e.parameters[2],
 		positionType: e.parameters[3],
 		speakerName: n
 	}, e.indent);
-}, Sn = (e, t) => {
-	let n = F(e.parameters[1], t);
+}, wn = (e, t) => {
+	let n = P(e.parameters[1], t);
 	return {
 		code: e.code,
 		indent: e.indent,
 		parameters: [e.parameters[0], n]
 	};
-}, Cn = (e, t) => {
-	let n = e.parameters[0].map(((e) => F(e, t)));
+}, Tn = (e, t) => {
+	let n = e.parameters[0].map(((e) => P(e, t)));
 	return {
 		code: 102,
 		indent: e.indent,
@@ -840,12 +840,12 @@ var y = (e, t, n, r, i, a) => {
 			e.parameters[4]
 		]
 	};
-}, wn = (e, t, n = "\n") => Tn(e, ((e) => t.get(e)), n), Tn = (e, t, n = "\n") => g(e.note, ((e) => F(e.value, t)), n), En = (e, t) => Dn(e, ((e) => vn(e, t))), Dn = (e, t) => ({
-	params: An(e.params, ((e) => F(e, t))),
-	messages: _(e.messages, ((e) => F(e, t))),
-	basic: On(e.basic, ((e) => F(e, t))),
-	commands: kn(e.commands, ((e) => F(e, t)))
-}), On = (e, t) => [
+}, En = (e, t, n = "\n") => Dn(e, ((e) => t.get(e)), n), Dn = (e, t, n = "\n") => ne(e.note, ((e) => P(e.value, t)), n), On = (e, t) => kn(e, ((e) => yn(e, t))), kn = (e, t) => ({
+	params: Mn(e.params, ((e) => P(e, t))),
+	messages: ae(e.messages, ((e) => P(e, t))),
+	basic: An(e.basic, ((e) => P(e, t))),
+	commands: jn(e.commands, ((e) => P(e, t)))
+}), An = (e, t) => [
 	t(e[0]),
 	t(e[1]),
 	t(e[2]),
@@ -856,7 +856,7 @@ var y = (e, t, n, r, i, a) => {
 	t(e[7]),
 	t(e[8]),
 	t(e[9])
-], kn = (e, t) => [
+], jn = (e, t) => [
 	t(e[0]),
 	t(e[1]),
 	t(e[2]),
@@ -883,7 +883,7 @@ var y = (e, t, n, r, i, a) => {
 	"",
 	t(e[24]),
 	t(e[25])
-], An = (e, t) => [
+], Mn = (e, t) => [
 	t(e[0]),
 	t(e[1]),
 	t(e[2]),
@@ -894,24 +894,24 @@ var y = (e, t, n, r, i, a) => {
 	t(e[7]),
 	t(e[8]),
 	t(e[9])
-], jn = (e, t) => ({
+], Nn = (e, t) => ({
 	...e,
-	gameTitle: F(e.gameTitle, t),
-	currencyUnit: F(e.currencyUnit, t),
-	elements: U(e.elements, t),
-	skillTypes: U(e.skillTypes, t),
-	weaponTypes: U(e.weaponTypes, t),
-	armorTypes: U(e.armorTypes, t),
-	equipTypes: U(e.equipTypes, t),
-	terms: Dn(e.terms, t)
-}), U = (e, t) => e.map(((e) => F(e, t))), Mn = (e) => e.map(((e) => e.parameters[0].trimEnd())).join("\n").trimEnd(), Nn = class {
+	gameTitle: P(e.gameTitle, t),
+	currencyUnit: P(e.currencyUnit, t),
+	elements: V(e.elements, t),
+	skillTypes: V(e.skillTypes, t),
+	weaponTypes: V(e.weaponTypes, t),
+	armorTypes: V(e.armorTypes, t),
+	equipTypes: V(e.equipTypes, t),
+	terms: kn(e.terms, t)
+}), V = (e, t) => e.map(((e) => P(e, t))), Pn = (e) => e.map(((e) => e.parameters[0].trimEnd())).join("\n").trimEnd(), Fn = class {
 	header;
 	bodies;
 	constructor(e, t) {
 		this.header = e, this.bodies = t;
 	}
 	getBodyText() {
-		return Mn(this.joinCommandBodies());
+		return Pn(this.joinCommandBodies());
 	}
 	mergedBody() {
 		return {
@@ -926,7 +926,7 @@ var y = (e, t, n, r, i, a) => {
 	normalizedCommands() {
 		return [this.mergedBody()];
 	}
-}, W = class {
+}, H = class {
 	bodyCode;
 	header;
 	bodies;
@@ -943,7 +943,7 @@ var y = (e, t, n, r, i, a) => {
 		return this.bodies.length === 0 ? [e] : [e, this.mergedBody()];
 	}
 	getBodyText() {
-		return Mn(this.bodies);
+		return Pn(this.bodies);
 	}
 	joinCommandBodies() {
 		return this.bodies;
@@ -955,7 +955,7 @@ var y = (e, t, n, r, i, a) => {
 			parameters: [this.getBodyText()]
 		};
 	}
-}, G = (e, t, n, r) => {
+}, U = (e, t, n, r) => {
 	let i = e[t];
 	if (!n(i)) throw Error(`Invalid head at index ${t}: ${JSON.stringify(i)}`);
 	let a = [];
@@ -968,28 +968,28 @@ var y = (e, t, n, r, i, a) => {
 		header: i,
 		bodies: a
 	};
-}, Pn = (e, t) => {
-	let { bodies: n, header: r } = ((e, t) => G(e, t, ((e) => e.code === 108), ((e) => e.code === 408)))(e, t);
-	return Fn(r) ? new W(408, r, n) : new Nn(r, n);
-}, Fn = (e) => e.parameters[0] === "選択肢ヘルプ", In = (e, t) => {
-	let { bodies: n, header: r } = ((e, t) => G(e, t, ((e) => e.code === 101), ((e) => e.code === 401)))(e, t);
-	return new W(401, r, n);
-}, Ln = (e, t) => {
-	let { bodies: n, header: r } = ((e, t) => G(e, t, ((e) => e.code === 355), ((e) => e.code === 655)))(e, t);
-	return new Nn(r, n);
-}, Rn = (e, t) => {
-	let { bodies: n, header: r } = ((e, t) => G(e, t, ((e) => e.code === 105), ((e) => e.code === 405)))(e, t);
-	return new W(405, r, n);
-}, zn = {
-	101: (e, t, n) => n.showMessage(In(e, t), t, e),
-	355: (e, t, n) => n.script(Ln(e, t), t, e),
-	108: (e, t, n) => n.comment(Pn(e, t), t, e),
-	105: (e, t, n) => n.showScrollingText(Rn(e, t), t, e)
-}, Bn = (e) => zn[e], Vn = (e, t, n, r) => {
+}, In = (e, t) => {
+	let { bodies: n, header: r } = ((e, t) => U(e, t, ((e) => e.code === 108), ((e) => e.code === 408)))(e, t);
+	return Ln(r) ? new H(408, r, n) : new Fn(r, n);
+}, Ln = (e) => e.parameters[0] === "選択肢ヘルプ", Rn = (e, t) => {
+	let { bodies: n, header: r } = ((e, t) => U(e, t, ((e) => e.code === 101), ((e) => e.code === 401)))(e, t);
+	return new H(401, r, n);
+}, zn = (e, t) => {
+	let { bodies: n, header: r } = ((e, t) => U(e, t, ((e) => e.code === 355), ((e) => e.code === 655)))(e, t);
+	return new Fn(r, n);
+}, Bn = (e, t) => {
+	let { bodies: n, header: r } = ((e, t) => U(e, t, ((e) => e.code === 105), ((e) => e.code === 405)))(e, t);
+	return new H(405, r, n);
+}, Vn = {
+	101: (e, t, n) => n.showMessage(Rn(e, t), t, e),
+	355: (e, t, n) => n.script(zn(e, t), t, e),
+	108: (e, t, n) => n.comment(In(e, t), t, e),
+	105: (e, t, n) => n.showScrollingText(Bn(e, t), t, e)
+}, Hn = (e) => Vn[e], Un = (e, t, n, r) => {
 	if (e.code === 401 || e.code === 405 || e.code === 408) return;
-	let i = Bn(e.code);
-	return i ? i(n, t, r) : e.code === 102 ? Hn(e) : e.code === 320 || e.code === 324 || e.code === 325 ? Un(e) : e.code === 655 ? void 0 : e;
-}, Hn = (e) => ({
+	let i = Hn(e.code);
+	return i ? i(n, t, r) : e.code === 102 ? Wn(e) : e.code === 320 || e.code === 324 || e.code === 325 ? Gn(e) : e.code === 655 ? void 0 : e;
+}, Wn = (e) => ({
 	code: 102,
 	indent: e.indent,
 	parameters: [
@@ -999,29 +999,29 @@ var y = (e, t, n, r, i, a) => {
 		e.parameters[3],
 		e.parameters[4]
 	]
-}), Un = (e) => ({
+}), Gn = (e) => ({
 	code: e.code,
 	indent: e.indent,
 	parameters: [e.parameters[0], e.parameters[1].trimEnd()]
-}), Wn = (e) => ({
+}), Kn = (e) => ({
 	code: 355,
 	indent: e.header.indent,
 	parameters: [e.getBodyText().trimEnd()]
-}), Gn = (e) => {
+}), qn = (e) => {
 	let t = e.getBodyText().trimEnd(), n = {
 		code: 401,
 		indent: e.header.indent,
 		parameters: [t]
 	};
-	return [qn(e.header), n];
-}, Kn = (e) => {
+	return [Yn(e.header), n];
+}, Jn = (e) => {
 	let t = e.getBodyText().trimEnd(), n = {
 		code: 405,
 		indent: e.header.indent,
 		parameters: [t]
 	};
 	return [e.header, n];
-}, qn = (e) => {
+}, Yn = (e) => {
 	let t = e.parameters[4] ? e.parameters[4].trimEnd() : "";
 	return {
 		code: e.code,
@@ -1034,38 +1034,38 @@ var y = (e, t, n, r, i, a) => {
 			t
 		]
 	};
-}, K = (e, t) => {
+}, W = (e, t) => {
 	let n = (e) => t.replaceText(e);
 	return ((e) => {
 		let t = {
 			comment: (e) => e.normalizedCommands(),
-			script: Wn,
-			showMessage: Gn,
-			showScrollingText: Kn
+			script: Kn,
+			showMessage: qn,
+			showScrollingText: Jn
 		};
-		return e.map(((n, r) => n.code === 357 ? n : Vn(n, r, e, t))).filter(((e) => e !== void 0)).flat();
-	})(e).map(((e) => e.code === 357 ? t.pluginCommand(e) : e.code === 355 ? t.scriptCommand(e) : yn(e, n)));
-}, Jn = (e, t) => ({
+		return e.map(((n, r) => n.code === 357 ? n : Un(n, r, e, t))).filter(((e) => e !== void 0)).flat();
+	})(e).map(((e) => e.code === 357 ? t.pluginCommand(e) : e.code === 355 ? t.scriptCommand(e) : xn(e, n)));
+}, G = (e, t) => ({
 	members: e.members,
 	id: e.id,
 	name: e.name,
 	pages: e.pages.map(((e) => ({
 		conditions: e.conditions,
 		span: e.span,
-		list: K(e.list, t)
+		list: W(e.list, t)
 	})))
-}), Yn = (e, t) => ({
+}), K = (e, t) => ({
 	id: e.id,
 	name: e.name,
 	trigger: e.trigger,
 	switchId: e.switchId,
-	list: K(e.list, t)
+	list: W(e.list, t)
 }), Xn = (e, t) => ({
 	id: e.id,
 	name: e.name,
 	trigger: e.trigger,
 	switchId: e.switchId,
-	list: K(e.list, {
+	list: W(e.list, {
 		pluginCommand: (e) => e,
 		scriptCommand: (e) => e,
 		replaceText: t
@@ -1076,17 +1076,17 @@ var y = (e, t, n, r, i, a) => {
 	replaceText: t,
 	isReplaceTargetNote: () => !1
 }), Qn = (e, t) => $n(e, t), $n = (e, t) => ({
-	note: v(e.note, t),
-	displayName: I(e.displayName, t),
+	note: b(e.note, t),
+	displayName: F(e.displayName, t),
 	events: e.events.map(((e) => e ? ((e, t) => ({
 		id: e.id,
 		name: e.name,
 		x: e.x,
 		y: e.y,
-		note: v(e.note, t),
+		note: b(e.note, t),
 		pages: e.pages.map(((e) => ({
 			...e,
-			list: K(e.list, t)
+			list: W(e.list, t)
 		})))
 	}))(e, t) : null)),
 	data: e.data,
@@ -1124,13 +1124,13 @@ var y = (e, t, n, r, i, a) => {
 	events: e.events.map(((e) => e ? tr(e, t) : null))
 }), rr = (e, t) => e.map(((e) => er(e, t))), ir = (e, t) => e.map(((e) => tr(e, t))), ar = (e) => or(e, (() => [])), q = (e, t) => or(e, t), or = (e, t) => e.flatMap(((n, r) => sr(n, r, e, t))).filter(((e) => e !== null)), sr = (e, t, n, r) => {
 	if (e.code === 357) return r(e);
-	if (e.code === 102) return ke(e);
-	let i = Bn(e.code);
+	if (e.code === 102) return De(e);
+	let i = Hn(e.code);
 	if (i) {
 		let e = i(n, t, cr);
 		if (e !== void 0) return [e];
 	}
-	return e.code === 324 || e.code === 320 || e.code === 325 ? Oe(e) : null;
+	return e.code === 324 || e.code === 320 || e.code === 325 ? Ee(e) : null;
 }, cr = {
 	comment: (e) => ({
 		code: 108,
@@ -1169,20 +1169,20 @@ var y = (e, t, n, r, i, a) => {
 	commands: q(n.list, t)
 }))), mr = (e, t = () => []) => ({
 	note: e.note,
-	noteItems: h(e.note),
+	noteItems: _(e.note),
 	displayedName: e.displayName,
 	events: hr(e, t)
-}), hr = (e, t) => de(e, ((e, n, r) => ({
+}), hr = (e, t) => h(e, ((e, n, r) => ({
 	eventId: r.id,
 	pageIndex: n,
 	commands: q(e.list, t),
 	note: r.note,
-	noteItems: h(r.note),
+	noteItems: _(r.note),
 	name: r.name
 }))), J = (e, t) => `${e}:${t}`, gr = (e) => J(e.parameters[0], e.parameters[1]), _r = (e) => [
 	...e.commonEvents.data.flatMap(lr),
 	...e.troops.data.flatMap(ur),
-	...e.mapFiles.validMaps.flatMap(((e) => ((e) => se(e, ((e) => e.list.filter(dr))))(e.map).flat(2)))
+	...e.mapFiles.validMaps.flatMap(((e) => ((e) => m(e, ((e) => e.list.filter(dr))))(e.map).flat(2)))
 ], vr = (e) => {
 	let t = /* @__PURE__ */ new Map();
 	for (let n of e) {
@@ -1190,7 +1190,7 @@ var y = (e, t, n, r, i, a) => {
 		r ? r.push(n) : t.set(e, [n]);
 	}
 	return t;
-}, Y = (e, t) => Nt(e.default), yr = (e, t, n = Y) => {
+}, Y = (e, t) => Mt(e.default), yr = (e, t, n = Y) => {
 	switch (e.kind) {
 		case "string":
 		case "multiline_string":
@@ -1202,7 +1202,7 @@ var y = (e, t, n, r, i, a) => {
 		case "any": return n(e, t);
 		default: return !1;
 	}
-}, br = (e, t = Y) => ge(_e(e), ((e, n) => yr(e, n, t))), xr = (e, t, n = Y) => me(e, br(t, n)), Sr = (e, t = Y) => e.map(((e) => xr(e.pluginName, e.schema, t))), Cr = (e, t = Y) => Sr(e, t), wr = (e, t, n = Y) => {
+}, br = (e, t = Y) => me(he(e), ((e, n) => yr(e, n, t))), xr = (e, t, n = Y) => fe(e, br(t, n)), Sr = (e, t = Y) => e.map(((e) => xr(e.pluginName, e.schema, t))), Cr = (e, t = Y) => Sr(e, t), wr = (e, t, n = Y) => {
 	let r = Cr(t, n), i = Tr(e);
 	return r.flatMap(((e) => e.commands.map(((t) => {
 		let n = J(e.pluginName, t.commandName);
@@ -1557,13 +1557,13 @@ var Hr = (e, t, n, r = Br) => Vr(e.attr.struct, `${t}["${e.name}"]`, n, r), Ur =
 	return si(e.pluginName, e.schema.commands, n, t);
 }, si = (e, t, n, r) => t.map(((t) => [ci(e, t.command), ri(e, t, n, r)])), ci = (e, t) => `${e}:${t}`, li = (e, t) => {
 	let [n, r] = e.parameters, i = `${n}:${r}`, a = t.get(i);
-	return a ? ai(ye(e.parameters[3]), a) : {
+	return a ? ai(_e(e.parameters[3]), a) : {
 		pluginName: n,
 		commandName: r,
 		args: []
 	};
 }, ui = (e) => new pi(new Map(e)), di = () => new pi(/* @__PURE__ */ new Map()), fi = (e) => {
-	let t = e.flatMap(((e) => oi(e, ((e) => new be(e)))));
+	let t = e.flatMap(((e) => oi(e, ((e) => new ve(e)))));
 	return new pi(new Map(t));
 }, pi = class {
 	_commandMap;
@@ -1613,21 +1613,21 @@ var Hr = (e, t, n, r = Br) => Vr(e.attr.struct, `${t}["${e.name}"]`, n, r), Ur =
 ], vi = (e, t, n) => ({
 	tilesets: e.tilesets,
 	animations: e.animations,
-	actors: $(e.actors, ((e) => L(e, t))),
-	armors: $(e.armors, ((e) => V(e, t))),
-	classes: $(e.classes, ((e) => z(e, t))),
-	commonEvents: $(e.commonEvents, ((e) => Yn(e, t))),
-	enemies: $(e.enemies, ((e) => R(e, t))),
-	items: $(e.items, ((e) => V(e, t))),
+	actors: $(e.actors, ((e) => bn(e, t))),
+	armors: $(e.armors, ((e) => z(e, t))),
+	classes: $(e.classes, ((e) => L(e, t))),
+	commonEvents: $(e.commonEvents, ((e) => K(e, t))),
+	enemies: $(e.enemies, ((e) => I(e, t))),
+	items: $(e.items, ((e) => z(e, t))),
 	mapInfos: e.mapInfos,
-	skills: $(e.skills, ((e) => B(e, t))),
-	states: $(e.states, ((e) => H(e, t))),
+	skills: $(e.skills, ((e) => R(e, t))),
+	states: $(e.states, ((e) => B(e, t))),
 	system: {
 		message: e.system.message,
-		system: jn(e.system.system, n)
+		system: Nn(e.system.system, n)
 	},
-	troops: $(e.troops, ((e) => Jn(e, t))),
-	weapons: $(e.weapons, ((e) => V(e, t))),
+	troops: $(e.troops, ((e) => G(e, t))),
+	weapons: $(e.weapons, ((e) => z(e, t))),
 	mapFiles: {
 		info: e.mapFiles.info,
 		invalidMaps: e.mapFiles.invalidMaps,
@@ -1643,7 +1643,7 @@ var Hr = (e, t, n, r = Br) => Vr(e.attr.struct, `${t}["${e.name}"]`, n, r), Ur =
 	error: e.error,
 	data: e.success ? e.data.map(t) : []
 }), yi = (e, t, n, r, i) => {
-	let a = k(nt(e, n), {
+	let a = A(tt(e, n), {
 		audioFiles: t.audioFiles,
 		imageFiles: t.imageFiles,
 		otherFiles: t.otherFiles
@@ -1670,16 +1670,16 @@ var Hr = (e, t, n, r = Br) => Vr(e.attr.struct, `${t}["${e.name}"]`, n, r), Ur =
 		isReplaceTargetNote: (e) => t.targetNoteKeys.has(e.key)
 	};
 	return {
-		actors: e.actors.map(((e) => L(e, n))),
-		armors: e.armors.map(((e) => V(e, n))),
-		classes: e.classes.map(((e) => z(e, n))),
-		enemies: e.enemies.map(((e) => R(e, n))),
-		items: e.items.map(((e) => V(e, n))),
-		skills: e.skills.map(((e) => B(e, n))),
-		states: e.states.map(((e) => H(e, n))),
-		troops: e.troops.map(((e) => Jn(e, n))),
-		weapons: e.weapons.map(((e) => V(e, n))),
-		commonEvents: e.commonEvents.map(((e) => Yn(e, n)))
+		actors: e.actors.map(((e) => bn(e, n))),
+		armors: e.armors.map(((e) => z(e, n))),
+		classes: e.classes.map(((e) => L(e, n))),
+		enemies: e.enemies.map(((e) => I(e, n))),
+		items: e.items.map(((e) => z(e, n))),
+		skills: e.skills.map(((e) => R(e, n))),
+		states: e.states.map(((e) => B(e, n))),
+		troops: e.troops.map(((e) => G(e, n))),
+		weapons: e.weapons.map(((e) => z(e, n))),
+		commonEvents: e.commonEvents.map(((e) => K(e, n)))
 	};
 }, Ci = (e, t) => d(wi(e, t)), wi = (e, t) => yi(e.data, e.assetBundle, t, {
 	replaceText: (t) => e.dictionary.get(t),
@@ -1690,11 +1690,11 @@ var Hr = (e, t, n, r = Br) => Vr(e.attr.struct, `${t}["${e.name}"]`, n, r), Ur =
 	let r = Di(e, t, n);
 	return {
 		dataJSON: d(r.main),
-		scriptJS: [M(r.aux, {
+		scriptJS: [Zt(r.aux, {
 			description: "書き換え用辞書データ",
 			outputDirectory: "translation",
 			dictionaryName: "TranslationDictionary"
-		}), M(r.originLike, {
+		}), Zt(r.originLike, {
 			description: "翻訳前のオリジナル辞書データ",
 			outputDirectory: "translation",
 			dictionaryName: "OriginalDictionary"
@@ -1722,15 +1722,15 @@ var Hr = (e, t, n, r = Br) => Vr(e.attr.struct, `${t}["${e.name}"]`, n, r), Ur =
 		isReplaceTargetNote: (e) => a.has(e.key)
 	}, ((e) => e.trimEnd()));
 }, ki = (e, t, n, r) => {
-	let i = Yt(e.actors.data, e.commonEvents.data, e.troops.data, e.mapFiles.validMaps.map(((e) => e.map)), n, ((e) => r(e.trimEnd())));
+	let i = Jt(e.actors.data, e.commonEvents.data, e.troops.data, e.mapFiles.validMaps.map(((e) => e.map)), n, ((e) => r(e.trimEnd())));
 	return {
-		systemTexts: ue(le(e.system.system), ((e) => {
+		systemTexts: le(ce(e.system.system), ((e) => {
 			let t = e.trimEnd();
 			return n.get(t);
 		})),
 		actorTexts: i.actorTexts,
-		targetNoteKeys: Zt([...t.dataNoteSummary, ...t.mapNoteSummary]),
+		targetNoteKeys: Xt([...t.dataNoteSummary, ...t.mapNoteSummary]),
 		textDictionary: i.textDictionary
 	};
 };
-export { V as $, Ee as $t, fr as A, dt as At, Xn as B, x as Bt, Sr as C, Pt as Ct, Y as D, Tt as Dt, vr as E, wt as Et, er as F, tt as Ft, jn as G, Ue as Gt, Qn as H, Ge as Ht, nr as I, Je as It, wn as J, We as Jt, En as K, He as Kt, tr as L, S as Lt, ar as M, E as Mt, q as N, D as Nt, yr as O, Ct as Ot, rr as P, nt as Pt, R as Q, ke as Qt, ir as R, qe as Rt, gr as S, Mt as St, br as T, k as Tt, Zn as U, Ve as Ut, K as V, ze as Vt, Jn as W, Be as Wt, L as X, Me as Xt, yn as Y, Ae as Yt, z as Z, Oe as Zt, Cr as _, Zt as _t, Ti as a, mn as at, _r as b, Rt as bt, vi as c, fn as ct, hi as d, on as dt, we as en, B as et, di as f, rn as ft, wr as g, Yt as gt, li as h, M as ht, Ei as i, _n as it, mr as j, ft as jt, pr as k, kt, yi as l, sn as lt, fi as m, en as mt, Ci as n, vn as nt, Si as o, P as ot, ui as p, tn as pt, Tn as q, Ke as qt, Di as r, hn as rt, xi as s, dn as st, wi as t, De as tn, H as tt, _i as u, an as ut, Er as v, Ht as vt, xr as w, Nt as wt, J as x, Lt as xt, Tr as y, Ut as yt, Yn as z, Re as zt };
+export { z as $, we as $t, fr as A, ut as At, Xn as B, S as Bt, Sr as C, Nt as Ct, Y as D, wt as Dt, vr as E, Ct as Et, er as F, et as Ft, Nn as G, He as Gt, Qn as H, We as Ht, nr as I, qe as It, En as J, Ue as Jt, On as K, Ve as Kt, tr as L, C as Lt, ar as M, D as Mt, q as N, O as Nt, yr as O, St as Ot, rr as P, tt as Pt, I as Q, De as Qt, ir as R, Ke as Rt, gr as S, jt as St, br as T, A as Tt, Zn as U, Be as Ut, W as V, Re as Vt, G as W, ze as Wt, bn as X, Ae as Xt, xn as Y, Oe as Yt, L as Z, Ee as Zt, Cr as _, Xt as _t, Ti as a, hn as at, _r as b, Lt as bt, vi as c, fn as ct, hi as d, on as dt, Se as en, R as et, di as f, rn as ft, wr as g, Jt as gt, li as h, Zt as ht, Ei as i, vn as it, mr as j, dt as jt, pr as k, Ot as kt, yi as l, sn as lt, fi as m, en as mt, Ci as n, yn as nt, Si as o, pn as ot, ui as p, tn as pt, Dn as q, Ge as qt, Di as r, gn as rt, xi as s, dn as st, wi as t, Te as tn, B as tt, _i as u, an as ut, Er as v, Vt as vt, xr as w, Mt as wt, J as x, It as xt, Tr as y, Ht as yt, K as z, Le as zt };
