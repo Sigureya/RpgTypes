@@ -11,6 +11,7 @@ import {
   TRAIT_ATTACK_ELEMENT,
 } from "@RpgTypes/rmmz/rpg";
 import "@RpgTypes/rmmzMock/prototypeOverwrite";
+import type { Rmmz_Enemy } from "@RpgTypes/rmmzRuntime";
 import { Game_Enemy } from "./rmmz_objects";
 
 const mockDragonParams: StatusParamObject = {
@@ -49,7 +50,7 @@ declare global {
 }
 globalThis.$dataEnemies = mockEnemies as IdentifiedItems<Data_Enemy>;
 
-const createEnemy = () => new Game_Enemy(2, 64, 139);
+const createEnemy = (): Rmmz_Enemy => new Game_Enemy(2, 64, 139);
 
 describe("mockData", () => {
   test("paramValid", () => {
