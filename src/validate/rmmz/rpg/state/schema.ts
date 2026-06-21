@@ -1,5 +1,5 @@
+import type { Data_State } from "@RpgTypes/rmmz";
 import type { JSONSchemaType } from "ajv";
-import type { Data_State } from "../../../../rmmz/rpg/data/main/traitContainers/state/types";
 
 export const SCHEMA_DATA_STATE = {
   type: "object",
