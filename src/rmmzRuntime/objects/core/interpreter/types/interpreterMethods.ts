@@ -82,6 +82,7 @@ import type {
   ParamArray_PluginCommandMV,
   ParamArray_PluginCommandMZ,
   ParamArray_BranchElse,
+  ParamArray_FlashScreen,
 } from "@RpgTypes/rmmz/eventCommand";
 
 type SubCommands =
@@ -157,7 +158,7 @@ export interface InterpreterMapper extends CommandTypeAssert {
   command221(fadeoutScreen: []): boolean;
   command222(fadeinScreen: []): boolean;
   command223(params: ParamArray_TintScreen): boolean;
-  command224(params: ParamArray_TintScreen): boolean;
+  command224(params: ParamArray_FlashScreen): boolean;
   command225(params: ParamArray_ShakeScreen): boolean;
 
   command230(params: ParamArray_Wait): boolean;
