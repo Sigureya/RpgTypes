@@ -4,16 +4,7 @@ import type {
   Command_ChangeActorProfile,
   Command_ChangeActorNickName,
 } from "@RpgTypes/rmmz";
-const validate = require("./chageActorTextValidate.js");
-
-const isActorTextCommand = (
-  data: unknown,
-): data is
-  | Command_ChangeActorName
-  | Command_ChangeActorProfile
-  | Command_ChangeActorNickName => {
-  return validate(data);
-};
+import { isCommandChangeActorText } from "./varidate";
 
 describe("isActorTextCommand", () => {
   test("Change Actor Name", () => {
@@ -22,7 +13,7 @@ describe("isActorTextCommand", () => {
       code: 320,
       parameters: [1, "New Name"],
     };
-    expect(command).toSatisfy(isActorTextCommand);
+    expect(command).toSatisfy(isCommandChangeActorText);
   });
 
   test("Change Actor Profile", () => {
@@ -31,7 +22,7 @@ describe("isActorTextCommand", () => {
       code: 325,
       parameters: [6, "New Profile Text"],
     };
-    expect(command).toSatisfy(isActorTextCommand);
+    expect(command).toSatisfy(isCommandChangeActorText);
   });
 
   test("Change Actor Nickname", () => {
@@ -40,6 +31,6 @@ describe("isActorTextCommand", () => {
       code: 324,
       parameters: [5, "New Nickname"],
     };
-    expect(command).toSatisfy(isActorTextCommand);
+    expect(command).toSatisfy(isCommandChangeActorText);
   });
 });
