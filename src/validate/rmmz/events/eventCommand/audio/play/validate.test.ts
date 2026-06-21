@@ -18,10 +18,7 @@ import {
   makeCommandPlayME,
   makeCommandPlaySE,
 } from "@RpgTypes/rmmz";
-const validate = require("./playAudioValidate.js");
-const isCommandAudio = (x: unknown): boolean => {
-  return validate(x);
-};
+import { isCommandAudio } from "./validate";
 
 describe("isCommandAudio", () => {
   const MockAudio: AudioFileParams = {

@@ -4,8 +4,8 @@ import type {
 } from "@RpgTypes/rmmz";
 import validate from "./chageActorTextValidate";
 
-export const isActorTextCommand = (
-  data: unknown
+export const isCommandChangeActorText = (
+  data: unknown,
 ): data is
   | Command_ChangeActorName
   | Command_ChangeActorProfile
