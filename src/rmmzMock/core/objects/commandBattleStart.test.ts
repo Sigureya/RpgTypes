@@ -10,7 +10,7 @@ import {
 } from "@RpgTypes/rmmz/eventCommand";
 import type { Rmmz_Party, Rmmz_PlayerCharactor } from "@RpgTypes/rmmzRuntime";
 import type { Rmmz_BattleManager } from "@RpgTypes/rmmzRuntime/managers/battle";
-import type { Rmmz_SceneManager } from "@RpgTypes/rmmzRuntime/managers/sceneManager";
+import type { Rmmz_SceneManager } from "@RpgTypes/rmmzRuntime/sceneManager";
 import type { FakeMap, FakeVariables } from "./fakes/types";
 import { Game_Interpreter } from "./rmmz_objects";
 
