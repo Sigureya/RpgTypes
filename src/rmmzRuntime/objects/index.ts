@@ -1,6 +1,5 @@
 export * from "./actors";
 export * from "./core";
-export * from "./enemy";
 export * from "./interpreter";
 export * from "./message";
 export * from "./party";
