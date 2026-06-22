@@ -1,5 +1,9 @@
 import type { Troop_EventConditions } from "@RpgTypes/rmmz";
-import type { Rmmz_ActorsReadonly, Rmmz_Troop } from "@RpgTypes/rmmzRuntime";
+import type {
+  Rmmz_ActorsReadonly,
+  Rmmz_BattlerContainer_Readonly,
+  Rmmz_TroopTurn,
+} from "@RpgTypes/rmmzRuntime";
 import type { Rmmz_BattleManager_State } from "@RpgTypes/rmmzRuntime/managers/battle/interface";
 import type { Rmmz_BattlerBase_Values } from "@RpgTypes/rmmzRuntime/objects/core/battle/battler/base/values";
 import type { Rmmz_Switches } from "@RpgTypes/rmmzRuntime/objects/core/variables";
@@ -9,15 +13,10 @@ export const meetsBattleEventConditions = (
   battleState: Rmmz_BattleManager_State,
   actors: Rmmz_ActorsReadonly<Rmmz_BattlerBase_Values>,
   switches: Rmmz_Switches,
-  troop: Rmmz_Troop,
+  troop: Rmmz_TroopTurn &
+    Rmmz_BattlerContainer_Readonly<Rmmz_BattlerBase_Values>,
 ): boolean => {
-  if (
-    !conditions.turnEnding &&
-    !conditions.turnValid &&
-    !conditions.enemyValid &&
-    !conditions.actorValid &&
-    !conditions.switchValid
-  ) {
+  if (isEmptyConditions(conditions)) {
     return false;
   }
   if (conditions.turnEnding && !battleState.isTurnEnd()) {
@@ -49,9 +48,19 @@ export const meetsBattleEventConditions = (
   return true;
 };
 
+const isEmptyConditions = (conditions: Troop_EventConditions): boolean => {
+  return (
+    !conditions.turnEnding &&
+    !conditions.turnValid &&
+    !conditions.enemyValid &&
+    !conditions.actorValid &&
+    !conditions.switchValid
+  );
+};
+
 const turnEx = (
   conditions: Troop_EventConditions,
-  troop: Rmmz_Troop,
+  troop: Rmmz_TroopTurn,
 ): boolean => {
   const n = troop.turnCount();
   const a = conditions.turnA;
@@ -67,7 +76,7 @@ const turnEx = (
 
 const enemyEx = (
   conditions: Troop_EventConditions,
-  troop: Rmmz_Troop,
+  troop: Rmmz_BattlerContainer_Readonly<Rmmz_BattlerBase_Values>,
 ): boolean => {
   const enemy = troop.members()[conditions.enemyIndex];
   if (!enemy) {
