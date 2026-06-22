@@ -18,7 +18,7 @@ import {
   makeCommandPlayME,
   makeCommandPlaySE,
 } from "@RpgTypes/rmmz";
-import { isCommandAudio } from "./validate";
+import { isCommandAudio } from "./eventCommand";
 
 describe("isCommandAudio", () => {
   const MockAudio: AudioFileParams = {
