@@ -5,7 +5,7 @@ import type { MapEvent } from "./event";
 import type { Encounter } from "./types/encounter";
 import type { MapEventContainer } from "./types/mapEventContainer";
 
-export interface Data_Map<
+export interface Data_MapUnknown<
   CommandType extends EventCommandUnknown = EventCommand,
   MoveRoute extends MoveRouteCommandUnknown = MoveRouteCommandUnknown,
 > extends MapEventContainer<CommandType> {
@@ -40,11 +40,11 @@ export interface Data_Map<
 }
 
 export type Map_ImageFiles = Pick<
-  Data_Map,
+  Data_MapUnknown,
   "battleback1Name" | "battleback2Name" | "parallaxName"
 >;
 export type Map_Parallax = Pick<
-  Data_Map,
+  Data_MapUnknown,
   | "parallaxLoopX"
   | "parallaxLoopY"
   | "parallaxShow"
@@ -52,6 +52,6 @@ export type Map_Parallax = Pick<
   | "parallaxSy"
 >;
 export type Map_Audios = Pick<
-  Data_Map,
+  Data_MapUnknown,
   "bgm" | "bgs" | "autoplayBgm" | "autoplayBgs"
 >;
