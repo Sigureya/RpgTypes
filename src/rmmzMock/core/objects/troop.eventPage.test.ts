@@ -333,4 +333,121 @@ describe("Game_Troop - page", () => {
       expect(mocks.switches.value).toHaveBeenCalledWith(999);
     });
   });
+  describe("turn conditions", () => {
+    test("turnEnding - true", () => {
+      const condition = createCondition({
+        turnEnding: true,
+      });
+
+      const mocks = createMockObjects({
+        actor: null,
+        enemies: [],
+        isTurnEnd: true,
+      });
+
+      stubGlobalObjects(mocks);
+
+      const troop: Rmmz_Troop = new Game_Troop();
+
+      expect(troop.meetsConditions(condition)).toBe(true);
+      expect(mocks.battleManager.isTurnEnd).toHaveBeenCalled();
+    });
+
+    test("turnEnding - false", () => {
+      const condition = createCondition({
+        turnEnding: true,
+      });
+
+      const mocks = createMockObjects({
+        actor: null,
+        enemies: [],
+        isTurnEnd: false,
+      });
+
+      stubGlobalObjects(mocks);
+
+      const troop: Rmmz_Troop = new Game_Troop();
+
+      expect(troop.meetsConditions(condition)).toBe(false);
+      expect(mocks.battleManager.isTurnEnd).toHaveBeenCalled();
+    });
+
+    test("turnValid exact match", () => {
+      const condition = createCondition({
+        turnValid: true,
+        turnA: 3,
+        turnB: 0,
+      });
+
+      const troop = new Game_Troop();
+      troop._turnCount = 3;
+
+      expect(troop.meetsConditions(condition)).toBe(true);
+    });
+
+    test("turnValid exact mismatch", () => {
+      const condition = createCondition({
+        turnValid: true,
+        turnA: 3,
+        turnB: 0,
+      });
+
+      const troop = new Game_Troop();
+      troop._turnCount = 4;
+
+      expect(troop.meetsConditions(condition)).toBe(false);
+    });
+
+    test("turnValid periodic match", () => {
+      const condition = createCondition({
+        turnValid: true,
+        turnA: 2,
+        turnB: 3,
+      });
+
+      const troop = new Game_Troop();
+      troop._turnCount = 5;
+
+      expect(troop.meetsConditions(condition)).toBe(true);
+    });
+
+    test("turnValid periodic mismatch", () => {
+      const condition = createCondition({
+        turnValid: true,
+        turnA: 2,
+        turnB: 3,
+      });
+
+      const troop = new Game_Troop();
+      troop._turnCount = 4;
+
+      expect(troop.meetsConditions(condition)).toBe(false);
+    });
+
+    test("turnValid fails when turn count is less than 1", () => {
+      const condition = createCondition({
+        turnValid: true,
+        turnA: 1,
+        turnB: 2,
+      });
+
+      const troop = new Game_Troop();
+      troop._turnCount = 0;
+
+      expect(troop.meetsConditions(condition)).toBe(false);
+    });
+
+    test("turnValid fails when turn count is less than start turn", () => {
+      const condition = createCondition({
+        turnValid: true,
+        turnA: 5,
+        turnB: 2,
+      });
+
+      const troop = new Game_Troop();
+      troop._turnCount = 4;
+
+      expect(troop.meetsConditions(condition)).toBe(false);
+    });
+  });
 });
