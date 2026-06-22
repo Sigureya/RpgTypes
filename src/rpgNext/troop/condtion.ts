@@ -1,20 +1,19 @@
 import type { Troop_EventConditions } from "@RpgTypes/rmmz";
-import type {
-  Rmmz_ActorsReadonly,
-  Rmmz_BattlerContainer_Readonly,
-  Rmmz_TroopTurn,
-} from "@RpgTypes/rmmzRuntime";
+import type { Rmmz_ActorsReadonly } from "@RpgTypes/rmmzRuntime";
 import type { Rmmz_BattleManager_State } from "@RpgTypes/rmmzRuntime/managers/battle/interface";
-import type { Rmmz_BattlerBase_Values } from "@RpgTypes/rmmzRuntime/objects/core/battle/battler/base/values";
 import type { Rmmz_Switches } from "@RpgTypes/rmmzRuntime/objects/core/variables";
 
+export interface TroopMM {
+  members(): ReadonlyArray<{ hpRate(): number }>;
+  turnCount(): number;
+}
+
 export const meetsBattleEventConditions = (
+  troop: TroopMM,
   conditions: Troop_EventConditions,
   battleState: Rmmz_BattleManager_State,
-  actors: Rmmz_ActorsReadonly<Rmmz_BattlerBase_Values>,
+  actors: Rmmz_ActorsReadonly<{ hpRate(): number }>,
   switches: Rmmz_Switches,
-  troop: Rmmz_TroopTurn &
-    Rmmz_BattlerContainer_Readonly<Rmmz_BattlerBase_Values>,
 ): boolean => {
   if (isEmptyConditions(conditions)) {
     return false;
@@ -58,10 +57,7 @@ const isEmptyConditions = (conditions: Troop_EventConditions): boolean => {
   );
 };
 
-const turnEx = (
-  conditions: Troop_EventConditions,
-  troop: Rmmz_TroopTurn,
-): boolean => {
+const turnEx = (conditions: Troop_EventConditions, troop: TroopMM): boolean => {
   const n = troop.turnCount();
   const a = conditions.turnA;
   const b = conditions.turnB;
@@ -76,7 +72,7 @@ const turnEx = (
 
 const enemyEx = (
   conditions: Troop_EventConditions,
-  troop: Rmmz_BattlerContainer_Readonly<Rmmz_BattlerBase_Values>,
+  troop: TroopMM,
 ): boolean => {
   const enemy = troop.members()[conditions.enemyIndex];
   if (!enemy) {
@@ -90,7 +86,7 @@ const enemyEx = (
 
 const actorEx = (
   conditions: Troop_EventConditions,
-  actors: Rmmz_ActorsReadonly<Rmmz_BattlerBase_Values>,
+  actors: Rmmz_ActorsReadonly<{ hpRate(): number }>,
 ): boolean => {
   const actor = actors.actor(conditions.actorId);
   if (!actor) {
