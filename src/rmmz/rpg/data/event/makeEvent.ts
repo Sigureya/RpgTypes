@@ -49,6 +49,12 @@ export const makeTroopEventConditions = (
 ): Troop_EventConditions => ({
   actorHp: data.actorHp ?? 0,
   actorId: data.actorId ?? 0,
-  enemyValid: data.enemyValid ?? 0,
-  switchValid: data.switchValid ?? 0,
+  enemyValid: data.enemyValid ?? false,
+  switchValid: data.switchValid ?? false,
+  turnEnding: data.turnEnding ?? false,
+  turnValid: data.turnValid ?? false,
+  enemyIndex: data.enemyIndex ?? 0,
+  enemyHp: data.enemyHp ?? 0,
+  actorValid: data.actorValid ?? false,
+  switchId: data.switchId ?? 0,
 });

@@ -2,7 +2,7 @@ import { describe, expect, test } from "vitest";
 import { makeCommandCommonEvent, makeCommandPlayBGM } from "@RpgTypes/rmmz";
 import type { EventCommand } from "@RpgTypes/rmmz/eventCommand";
 import type { Data_Troop } from "@RpgTypes/rmmz/events";
-const validate = require("./troopValidate.js");
+import validate from "./troopValidate";
 
 const isDataTroop = (data: unknown): data is Data_Troop => {
   return validate(data);
@@ -42,8 +42,14 @@ describe("isDataTroop", () => {
             conditions: {
               actorHp: 0,
               actorId: 0,
-              enemyValid: 0,
-              switchValid: 0,
+              enemyValid: false,
+              switchValid: false,
+              actorValid: false,
+              enemyIndex: 0,
+              enemyHp: 0,
+              switchId: 0,
+              turnEnding: false,
+              turnValid: false,
             },
             list: commands,
             span: 0,
