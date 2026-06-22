@@ -1,6 +1,113 @@
-import { Game_BattlerBase } from './battlerBase';
-import { Rmmz_Enemy, Rmmz_Actor } from './core';
-export declare class Game_Battler extends Game_BattlerBase {
-    isEnemy(): this is Rmmz_Enemy;
-    isActor(): this is Rmmz_Actor;
+import { Data_AnyGoodsUnion, Data_Armor, Data_Enemy, Data_Equipment, Data_Skill, Data_State, Data_UsableItem, Data_Weapon, DropItem, ParamID, Trait } from '../../rmmz/rpg';
+import { Rmmz_Enemy, Rmmz_Actor, Rmmz_Battler, Rmmz_BattlerBase } from './core';
+declare global {
+    class Game_BattlerBase implements Rmmz_BattlerBase {
+        get mhp(): number;
+        get mmp(): number;
+        get atk(): number;
+        get def(): number;
+        get mat(): number;
+        get mdf(): number;
+        get agi(): number;
+        get luk(): number;
+        get hp(): number;
+        get mp(): number;
+        get tp(): number;
+        addState(stateId: number): void;
+        removeState(stateId: number): void;
+        canEquip(item: Data_Equipment): boolean;
+        canEquipWeapon(weapon: Data_Weapon): boolean;
+        canEquipArmor(armor: Data_Armor): boolean;
+        paramMin(paramId: ParamID): number;
+        paramMax(paramId: ParamID): number;
+        attackSkillId(): number;
+        guardSkillId(): number;
+        canInput(): boolean;
+        canMove(): boolean;
+        canUse(item: Data_UsableItem): boolean;
+        isConfused(): boolean;
+        confusionLevel(): boolean;
+        isSkillWtypeOk(skill: Data_Skill): boolean;
+        sortStates(): number;
+        restriction(): number;
+        addNewState(stateId: number): void;
+        stateMotionIndex(): number;
+        stateOverlayIndex(): number;
+        isDead(): boolean;
+        isAlive(): boolean;
+        clearStates(): void;
+        eraseState(stateId: number): void;
+        isStateAffected(stateId: number): boolean;
+        isDeathStateAffected(): boolean;
+        deathStateId(): number;
+        resetStateCounts(stateId: number): void;
+        isStateExpired(stateId: number): boolean;
+        updateStateTurns(): void;
+        states(): Data_State[];
+        clearBuffs(): void;
+        eraseBuff(paramId: ParamID): void;
+        buff(paramId: ParamID): number;
+        isBuffAffected(paramId: ParamID): boolean;
+        isDebuffAffected(paramId: ParamID): boolean;
+        isBuffOrDebuffAffected(paramId: ParamID): boolean;
+        isMaxBuffAffected(paramId: ParamID): boolean;
+        isMaxDebuffAffected(paramId: ParamID): boolean;
+        increaseBuff(paramId: ParamID): boolean;
+        decreaseBuff(paramId: ParamID): boolean;
+        overwriteBuffTurns(paramId: ParamID, turns: number): boolean;
+        isBuffExpired(paramId: ParamID): boolean;
+        updateBuffTurns(): void;
+    }
+    class Game_Battler extends Game_BattlerBase implements Rmmz_Battler {
+        isEnemy(): this is Rmmz_Enemy;
+        isActor(): this is Rmmz_Actor;
+        gainHp(value: number, allowDeath?: boolean): void;
+        gainMp(value: number): void;
+        gainTp(value: number): void;
+        loseHp(value: number): void;
+        loseMp(value: number): void;
+        loseTp(value: number): void;
+        performCollapse(): void;
+        clearResult(): void;
+        recoverAll(): void;
+        param(paramId: ParamID): number;
+    }
+    class Game_Enemy extends Game_Battler implements Rmmz_Enemy {
+        makeDropItems(): Data_AnyGoodsUnion[];
+        enemyId(): number;
+        traitObjects(): Trait[];
+        paramBase(paramId: number): number;
+        exp(): number;
+        gold(): number;
+        dropItems(): DropItem[];
+        name(): string;
+        battlerHue(): number;
+        battlerName(): string;
+        originalName(): string;
+        enemy(): Data_Enemy;
+    }
+    class Game_Actor extends Game_Battler implements Rmmz_Actor {
+        get level(): number;
+        currentExp(): number;
+        changeExp(exp: number, show: boolean): void;
+        changeLevel(level: number, show: boolean): void;
+        name(): string;
+        nickname(): string;
+        profile(): string;
+        setName(name: string): void;
+        setNickname(nickname: string): void;
+        setProfile(profile: string): void;
+        actorId(): number;
+        changeEquipById(etypeId: number, itemId: number): void;
+        setName(name: string): void;
+        setCharacterImage(characterName: string, characterIndex: number): void;
+        setFaceImage(faceName: string, faceIndex: number): void;
+        setBattlerImage(battlerName: string): void;
+        changeClass(classId: number, keepExp: boolean): void;
+        setNickname(nickname: string): void;
+        setProfile(profile: string): void;
+        addParam(paramId: number, value: number): void;
+        learnSkill(skillId: number): void;
+        forgetSkill(skillId: number): void;
+    }
 }

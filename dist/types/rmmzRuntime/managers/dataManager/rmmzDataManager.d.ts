@@ -1,4 +1,4 @@
-import { Data_Map } from '../../../rmmz/rpg';
+import { Data_Map } from '../../../rmmz';
 import { RpgMakerDataManagerBase } from './base';
 import { RpgDataTypes } from './dataTypes';
 export interface Rmmz_DataManager extends RpgMakerDataManagerBase {

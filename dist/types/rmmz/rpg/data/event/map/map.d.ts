@@ -4,7 +4,7 @@ import { EventCommand } from '../../../../eventCommand';
 import { MapEvent } from './event';
 import { Encounter } from './types/encounter';
 import { MapEventContainer } from './types/mapEventContainer';
-export interface Data_Map<CommandType extends EventCommandUnknown = EventCommand, MoveRoute extends MoveRouteCommandUnknown = MoveRouteCommandUnknown> extends MapEventContainer<CommandType> {
+export interface Data_MapUnknown<CommandType extends EventCommandUnknown = EventCommand, MoveRoute extends MoveRouteCommandUnknown = MoveRouteCommandUnknown> extends MapEventContainer<CommandType> {
     data: number[];
     battleback1Name: string;
     battleback2Name: string;
@@ -30,6 +30,6 @@ export interface Data_Map<CommandType extends EventCommandUnknown = EventCommand
     encounterList: Encounter[];
     events: Array<MapEvent<CommandType, MoveRoute> | null>;
 }
-export type Map_ImageFiles = Pick<Data_Map, "battleback1Name" | "battleback2Name" | "parallaxName">;
-export type Map_Parallax = Pick<Data_Map, "parallaxLoopX" | "parallaxLoopY" | "parallaxShow" | "parallaxSx" | "parallaxSy">;
-export type Map_Audios = Pick<Data_Map, "bgm" | "bgs" | "autoplayBgm" | "autoplayBgs">;
+export type Map_ImageFiles = Pick<Data_MapUnknown, "battleback1Name" | "battleback2Name" | "parallaxName">;
+export type Map_Parallax = Pick<Data_MapUnknown, "parallaxLoopX" | "parallaxLoopY" | "parallaxShow" | "parallaxSx" | "parallaxSy">;
+export type Map_Audios = Pick<Data_MapUnknown, "bgm" | "bgs" | "autoplayBgm" | "autoplayBgs">;
