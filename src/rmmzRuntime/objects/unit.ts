@@ -1,11 +1,17 @@
-import type { Data_Item, Data_Weapon, Data_Armor } from "@RpgTypes/rmmz/rpg";
+import type { Data_Troop } from "@RpgTypes/rmmz/events";
+import type {
+  Data_Item,
+  Data_Weapon,
+  Data_Armor,
+  BattleEventPage,
+} from "@RpgTypes/rmmz/rpg";
 import type {
   Rmmz_Unit,
   Rmmz_UnitTpb,
   Rmmz_Actor,
-  Rmmz_UnitPlayer,
   Rmmz_Enemy,
   Rmmz_Troop,
+  Rmmz_Party,
 } from "./core";
 
 declare global {
@@ -35,14 +41,27 @@ declare global {
     updateTpb(): void;
   }
 
-  class Game_Party
-    extends Game_Unit<Rmmz_Actor>
-    implements Partial<Rmmz_Unit<Rmmz_Actor> & Rmmz_UnitPlayer>
-  {
+  class Game_Party extends Game_Unit<Rmmz_Actor> implements Rmmz_Party {
     gold(): number;
     steps(): number;
+    canInput(): boolean;
     gainGold(amount: number): void;
     loseGold(amount: number): void;
+    hasItem(
+      item: Data_Item | Data_Weapon | Data_Armor,
+      includeEquip: boolean,
+    ): boolean;
+    gainItem(
+      item: Data_Item | Data_Weapon | Data_Armor,
+      amount: number,
+      includeEquip: boolean,
+    ): void;
+    loseItem(
+      item: Data_Item | Data_Weapon | Data_Armor,
+      amount: number,
+      includeEquip: boolean,
+    ): void;
+
     numItems(
       item: Data_Item | Data_Weapon | Data_Armor,
       includeEquip: boolean,
@@ -51,10 +70,19 @@ declare global {
     _actors: number[];
   }
 
-  class Game_Troop
-    extends Game_Unit<Rmmz_Enemy>
-    implements Partial<Rmmz_Troop>
-  {
+  class Game_Troop extends Game_Unit<Rmmz_Enemy> implements Rmmz_Troop {
+    troop(): Data_Troop | undefined | null;
+    setUp(troopId: number): void;
+    makeUniqueNames(): void;
+    letterTable(): string[];
+    enemyNames(): string[];
+    updatePluralFlags(): void;
+    increaseTurn(): void;
+    turnCount(): number;
+    meetsConditions(page: BattleEventPage): boolean;
+    setupBattleEvent(): void;
+    isEventRunning(): boolean;
+    updateInterpreter(): void;
     members(): Rmmz_Enemy[];
     setup(troopId: number): void;
   }
