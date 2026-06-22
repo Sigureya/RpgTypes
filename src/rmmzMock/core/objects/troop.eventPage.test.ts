@@ -5,13 +5,13 @@ import type {
   Troop_EventConditions,
 } from "@RpgTypes/rmmz/rpg";
 import type { Rmmz_Troop } from "@RpgTypes/rmmzRuntime";
-import type { BattleXX } from "@RpgTypes/rmmzRuntime/managers/battle/interface";
+import type { Rmmz_BattleManager_State } from "@RpgTypes/rmmzRuntime/managers/battle/interface";
 import type { Rmmz_Switches } from "@RpgTypes/rmmzRuntime/objects/core/variables";
 import type { FakeActors, FakeMap } from "./fakes/types";
 import { Game_Troop } from "./rmmz_objects";
 
 interface MockObjects {
-  battleManager: MockedObject<BattleXX>;
+  battleManager: MockedObject<Rmmz_BattleManager_State>;
   actors: MockedObject<FakeActors>;
   switches: MockedObject<Rmmz_Switches>;
   globalTroop: MockedObject<FakeTroop>;
