@@ -4,32 +4,42 @@ import type {
   BattleEventPage,
   Troop_EventConditions,
 } from "@RpgTypes/rmmz/rpg";
-import type { Rmmz_Troop } from "@RpgTypes/rmmzRuntime";
+import type { Rmmz_ActorsReadonly, Rmmz_Troop } from "@RpgTypes/rmmzRuntime";
 import type { Rmmz_BattleManager_State } from "@RpgTypes/rmmzRuntime/managers/battle/interface";
+import type { Rmmz_BattlerBase_Values } from "@RpgTypes/rmmzRuntime/objects/core/battle/battler/base/values";
 import type { Rmmz_Switches } from "@RpgTypes/rmmzRuntime/objects/core/variables";
-import type { FakeActors, FakeMap } from "./fakes/types";
+import type { TroopMM } from "@RpgTypes/rpgNext/troop";
+import { meetsBattleEventConditions } from "@RpgTypes/rpgNext/troop";
+import type { FakeMap } from "./fakes/types";
 import { Game_Troop } from "./rmmz_objects";
 
 interface MockObjects {
   battleManager: MockedObject<Rmmz_BattleManager_State>;
-  actors: MockedObject<FakeActors>;
+  actors: MockedObject<Rmmz_ActorsReadonly<Rmmz_BattlerBase_Values>>;
   switches: MockedObject<Rmmz_Switches>;
-  globalTroop: MockedObject<FakeTroop>;
+  globalTroop: MockedObject<TroopMM>;
 }
 
 interface FakeBattler {
   hpRate(): number;
 }
 
-interface FakeTroop {
-  members(): FakeBattler[];
-}
-
 interface Arg {
   actor: FakeBattler | null;
   enemies: FakeBattler[];
   isTurnEnd: boolean;
+  turnCount?: number;
 }
+
+const createMockBattler = (
+  hpRate: number,
+): MockedObject<Rmmz_BattlerBase_Values> => {
+  return {
+    hpRate: vi.fn().mockReturnValue(hpRate),
+    mpRate: vi.fn().mockThrow(new Error("mpRate not implemented")),
+    tpRate: vi.fn().mockThrow(new Error("tpRate not implemented")),
+  };
+};
 
 const TRUE_SWITCH_ID = 7;
 
@@ -57,7 +67,12 @@ const createCondition = (
   };
 };
 
-const createMockObjects = ({ actor, enemies, isTurnEnd }: Arg): MockObjects => {
+const createMockObjects = ({
+  actor,
+  enemies,
+  isTurnEnd,
+  turnCount,
+}: Arg): MockObjects => {
   return {
     battleManager: {
       canEscape: vi.fn().mockReturnValue(false),
@@ -73,6 +88,7 @@ const createMockObjects = ({ actor, enemies, isTurnEnd }: Arg): MockObjects => {
     },
     globalTroop: {
       members: vi.fn().mockReturnValue(enemies),
+      turnCount: vi.fn().mockReturnValue(turnCount ?? 0),
     },
   };
 };
@@ -105,6 +121,19 @@ const runTest = (testCase: TestCase) => {
       stubGlobalObjects(mocks);
       const troop: Rmmz_Troop = new Game_Troop();
       const result = troop.meetsConditions(condition);
+      expect(result).toBe(testCase.expected);
+      testCase.adtional(mocks, arg);
+    });
+    test("new", () => {
+      const arg = testCase.createArg();
+      const mocks = createMockObjects(arg);
+      const result: boolean = meetsBattleEventConditions(
+        mocks.globalTroop,
+        condition.conditions,
+        mocks.battleManager,
+        mocks.actors,
+        mocks.switches,
+      );
       expect(result).toBe(testCase.expected);
       testCase.adtional(mocks, arg);
     });
@@ -150,18 +179,34 @@ const testCases: TestCase[] = [
     expected: true,
     condition: {
       actorHp: 50,
-      actorId: 4,
+      actorId: 12,
       actorValid: true,
     },
     createArg: () => ({
-      actor: {
-        hpRate: () => 0.4,
-      },
+      actor: createMockBattler(0.4),
       enemies: [],
       isTurnEnd: false,
     }),
-    adtional: (mocks) => {
-      expect(mocks.actors.actor).toHaveBeenCalledWith(4);
+    adtional: (mocks, arg) => {
+      expect(mocks.actors.actor).toHaveBeenCalledWith(12);
+      expect(arg.actor?.hpRate()).toBe(0.4);
+    },
+  },
+  {
+    name: "actor hp above threshold",
+    expected: false,
+    condition: {
+      actorHp: 50,
+      actorId: 2,
+      actorValid: true,
+    },
+    createArg: () => ({
+      actor: createMockBattler(0.6),
+      enemies: [],
+      isTurnEnd: false,
+    }),
+    adtional: (mock) => {
+      expect(mock.actors.actor).toHaveBeenCalledWith(2);
     },
   },
   {
@@ -173,26 +218,7 @@ const testCases: TestCase[] = [
       actorValid: true,
     },
     createArg: () => ({
-      actor: {
-        hpRate: () => 0.6,
-      },
-      enemies: [],
-      isTurnEnd: false,
-    }),
-    adtional: () => {},
-  },
-  {
-    name: "actor hp above threshold",
-    expected: false,
-    condition: {
-      actorHp: 50,
-      actorId: 4,
-      actorValid: true,
-    },
-    createArg: () => ({
-      actor: {
-        hpRate: () => 0.6,
-      },
+      actor: createMockBattler(0.6),
       enemies: [],
       isTurnEnd: false,
     }),
@@ -207,9 +233,7 @@ const testCases: TestCase[] = [
       actorValid: true,
     },
     createArg: () => ({
-      actor: {
-        hpRate: () => 0.5,
-      },
+      actor: createMockBattler(0.5),
       enemies: [],
       isTurnEnd: false,
     }),
@@ -242,11 +266,7 @@ const testCases: TestCase[] = [
     },
     createArg: () => ({
       actor: null,
-      enemies: [
-        {
-          hpRate: () => 0.4,
-        },
-      ],
+      enemies: [createMockBattler(0.4)],
       isTurnEnd: false,
     }),
     adtional: () => {},
@@ -261,11 +281,7 @@ const testCases: TestCase[] = [
     },
     createArg: () => ({
       actor: null,
-      enemies: [
-        {
-          hpRate: () => 0.6,
-        },
-      ],
+      enemies: [createMockBattler(0.6)],
       isTurnEnd: false,
     }),
     adtional: () => {},
@@ -280,11 +296,7 @@ const testCases: TestCase[] = [
     },
     createArg: () => ({
       actor: null,
-      enemies: [
-        {
-          hpRate: () => 0.5,
-        },
-      ],
+      enemies: [createMockBattler(0.5)],
       isTurnEnd: false,
     }),
     adtional: () => {},
