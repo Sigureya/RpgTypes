@@ -1,31 +1,38 @@
 import type { Data_Item, Data_Weapon, Data_Armor } from "@RpgTypes/rmmz/rpg";
 import type {
+  Rmmz_Unit,
+  Rmmz_UnitTpb,
   Rmmz_Actor,
+  Rmmz_UnitPlayer,
   Rmmz_Enemy,
   Rmmz_Troop,
-  Rmmz_Unit,
-  Rmmz_UnitPlayer,
 } from "./core";
 
 declare global {
-  class Game_Unit<Battler> implements Rmmz_Unit<Battler> {
-    tpbBaseSpeed(): number;
-    tpbReferenceTime(): number;
-    updateTpb(): void;
-    substituteBattler(): Battler | null;
-    select(activeMember: Battler): void;
+  class Game_Unit<Battler> implements Rmmz_Unit<Battler>, Rmmz_UnitTpb {
+    inBattle(): boolean;
+    members(): Battler[];
+    aliveMembers(): Battler[];
+    deadMembers(): Battler[];
+    movableMembers(): Battler[];
+    clearActions(): void;
+    agility(): number;
+    tgrSum(): number;
     randomTarget(): Battler | null;
     randomDeadTarget(): Battler | null;
     smoothTarget(): Battler | undefined;
-    deadMembers(): Battler[];
-    movableMembers(): Battler[];
-    aliveMembers(): Battler[];
-    smoothDeadTarget(): Battler | undefined;
-    members(): Battler[];
-    inBattle(): boolean;
-    agility(): boolean;
-    tgrSum(): number;
+    clearResults(): void;
+    onBattleStart(advantageous: unknown): void;
+    onBattleEnd(): void;
+    makeActions(): void;
+    select(activeMember: Battler): void;
     isAllDead(): boolean;
+    substituteBattler(): Battler | null;
+    smoothDeadTarget(): Battler | undefined;
+
+    tpbBaseSpeed(): number;
+    tpbReferenceTime(): number;
+    updateTpb(): void;
   }
 
   class Game_Party
