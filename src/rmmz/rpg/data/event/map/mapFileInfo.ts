@@ -1,6 +1,6 @@
-import type { Data_Map } from "./map";
+import type { Data_MapUnknown } from "./map";
 
-export interface MapFileInfo<Data = Data_Map> {
+export interface MapFileInfo<Data = Data_MapUnknown> {
   map: Data;
   filename: `Map${string}`;
   editingName: string;
