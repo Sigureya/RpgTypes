@@ -6,7 +6,7 @@ export interface Facade {
   onEncounter(): void;
 }
 
-export interface BattleXX {
+export interface Rmmz_BattleManager_State {
   canEscape(): boolean;
   isTurnEnd(): boolean;
   isActionForced(): boolean;
