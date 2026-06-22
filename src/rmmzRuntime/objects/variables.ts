@@ -1,4 +1,4 @@
-import type { Rmmz_Variables } from "./core/variables";
+import type { Rmmz_Variables, Rmmz_Switches } from "./core/variables";
 
 declare global {
   class Game_Variables implements Rmmz_Variables {
@@ -7,5 +7,11 @@ declare global {
     setValue(id: number, value: number): void;
     onChange(): void;
     _data: (number | string)[];
+  }
+
+  class Game_Switches implements Rmmz_Switches {
+    value(switchId: number): boolean;
+    setValue(switchId: number, value: boolean): void;
+    _data: boolean[];
   }
 }
