@@ -1,10 +1,10 @@
+import type { Data_Map } from "@RpgTypes/rmmz/events";
 import type {
   Data_Actor,
   Data_Armor,
   Data_Class,
   Data_Enemy,
   Data_Item,
-  Data_Map,
   Data_MapInfo,
   Data_Skill,
   Data_State,
