@@ -1,6 +1,6 @@
 import { n as e, t } from "./chunk.esm.js";
 import { t as n } from "./validateWithErrors.esm.js";
-var r = e(t(((e, t) => {
+var r = t(((e, t) => {
 	t.exports = r, t.exports.default = r;
 	var n = {
 		type: "object",
@@ -204,7 +204,166 @@ var r = e(t(((e, t) => {
 		}
 		return r.errors = null, !0;
 	}
-}))()), i = (e) => (0, r.default)(e), a = e(t(((e, t) => {
+})), i = t(((e, t) => {
+	function n(e, { instancePath: t = "", parentData: r, parentDataProperty: i, rootData: a = e } = {}) {
+		if (!e || typeof e != "object" || Array.isArray(e)) return n.errors = [{
+			instancePath: t,
+			schemaPath: "#/type",
+			keyword: "type",
+			params: { type: "object" },
+			message: "must be object"
+		}], !1;
+		{
+			let r;
+			if (e.code === void 0 && (r = "code") || e.indent === void 0 && (r = "indent") || e.parameters === void 0 && (r = "parameters")) return n.errors = [{
+				instancePath: t,
+				schemaPath: "#/required",
+				keyword: "required",
+				params: { missingProperty: r },
+				message: "must have required property '" + r + "'"
+			}], !1;
+			for (let r in e) if (r !== "code" && r !== "indent" && r !== "parameters") return n.errors = [{
+				instancePath: t,
+				schemaPath: "#/additionalProperties",
+				keyword: "additionalProperties",
+				params: { additionalProperty: r },
+				message: "must NOT have additional properties"
+			}], !1;
+			if (e.code !== void 0) {
+				let r = e.code;
+				if (typeof r != "number" || !isFinite(r)) return n.errors = [{
+					instancePath: t + "/code",
+					schemaPath: "#/properties/code/type",
+					keyword: "type",
+					params: { type: "number" },
+					message: "must be number"
+				}], !1;
+				if (r !== 102) return n.errors = [{
+					instancePath: t + "/code",
+					schemaPath: "#/properties/code/const",
+					keyword: "const",
+					params: { allowedValue: 102 },
+					message: "must be equal to constant"
+				}], !1;
+				var o = !0;
+			} else o = !0;
+			if (o) {
+				if (e.indent !== void 0) {
+					let r = e.indent;
+					if (typeof r != "number" || r % 1 || isNaN(r) || !isFinite(r)) return n.errors = [{
+						instancePath: t + "/indent",
+						schemaPath: "#/properties/indent/type",
+						keyword: "type",
+						params: { type: "integer" },
+						message: "must be integer"
+					}], !1;
+					o = !0;
+				} else o = !0;
+				if (o) if (e.parameters !== void 0) {
+					let r = e.parameters;
+					if (!Array.isArray(r)) return n.errors = [{
+						instancePath: t + "/parameters",
+						schemaPath: "#/properties/parameters/type",
+						keyword: "type",
+						params: { type: "array" },
+						message: "must be array"
+					}], !1;
+					if (r.length > 5) return n.errors = [{
+						instancePath: t + "/parameters",
+						schemaPath: "#/properties/parameters/maxItems",
+						keyword: "maxItems",
+						params: { limit: 5 },
+						message: "must NOT have more than 5 items"
+					}], !1;
+					if (r.length < 5) return n.errors = [{
+						instancePath: t + "/parameters",
+						schemaPath: "#/properties/parameters/minItems",
+						keyword: "minItems",
+						params: { limit: 5 },
+						message: "must NOT have fewer than 5 items"
+					}], !1;
+					{
+						let e = r.length;
+						if (e > 0) {
+							let e = r[0];
+							if (!Array.isArray(e)) return n.errors = [{
+								instancePath: t + "/parameters/0",
+								schemaPath: "#/properties/parameters/items/0/type",
+								keyword: "type",
+								params: { type: "array" },
+								message: "must be array"
+							}], !1;
+							{
+								let r = e.length;
+								for (let i = 0; i < r; i++) if (typeof e[i] != "string") return n.errors = [{
+									instancePath: t + "/parameters/0/" + i,
+									schemaPath: "#/properties/parameters/items/0/items/type",
+									keyword: "type",
+									params: { type: "string" },
+									message: "must be string"
+								}], !1;
+							}
+							var s = !0;
+						}
+						if (s) {
+							if (e > 1) {
+								let e = r[1];
+								if (typeof e != "number" || e % 1 || isNaN(e) || !isFinite(e)) return n.errors = [{
+									instancePath: t + "/parameters/1",
+									schemaPath: "#/properties/parameters/items/1/type",
+									keyword: "type",
+									params: { type: "integer" },
+									message: "must be integer"
+								}], !1;
+								s = !0;
+							}
+							if (s) {
+								if (e > 2) {
+									let e = r[2];
+									if (typeof e != "number" || e % 1 || isNaN(e) || !isFinite(e)) return n.errors = [{
+										instancePath: t + "/parameters/2",
+										schemaPath: "#/properties/parameters/items/2/type",
+										keyword: "type",
+										params: { type: "integer" },
+										message: "must be integer"
+									}], !1;
+									s = !0;
+								}
+								if (s) {
+									if (e > 3) {
+										let e = r[3];
+										if (typeof e != "number" || e % 1 || isNaN(e) || !isFinite(e)) return n.errors = [{
+											instancePath: t + "/parameters/3",
+											schemaPath: "#/properties/parameters/items/3/type",
+											keyword: "type",
+											params: { type: "integer" },
+											message: "must be integer"
+										}], !1;
+										s = !0;
+									}
+									if (s && e > 4) {
+										let e = r[4];
+										if (typeof e != "number" || e % 1 || isNaN(e) || !isFinite(e)) return n.errors = [{
+											instancePath: t + "/parameters/4",
+											schemaPath: "#/properties/parameters/items/4/type",
+											keyword: "type",
+											params: { type: "integer" },
+											message: "must be integer"
+										}], !1;
+										s = !0;
+									}
+								}
+							}
+						}
+					}
+					o = !0;
+				} else o = !0;
+			}
+		}
+		return n.errors = null, !0;
+	}
+	t.exports = n, t.exports.default = n;
+})), a = e(r()), o = e(i()), s = (e) => (0, o.default)(e), c = (e) => (0, a.default)(e), l = e(t(((e, t) => {
 	t.exports = r, t.exports.default = r;
 	var n = {
 		type: "object",
@@ -339,7 +498,7 @@ var r = e(t(((e, t) => {
 		}
 		return r.errors = null, !0;
 	}
-}))()), o = (e) => (0, a.default)(e), s = t(((e, t) => {
+}))()), u = (e) => (0, l.default)(e), d = t(((e, t) => {
 	function n(e, { instancePath: t = "", parentData: r, parentDataProperty: i, rootData: a = e } = {}) {
 		if (!e || typeof e != "object" || Array.isArray(e)) return n.errors = [{
 			instancePath: t,
@@ -508,7 +667,7 @@ var r = e(t(((e, t) => {
 		return n.errors = null, !0;
 	}
 	t.exports = n, t.exports.default = n;
-})), c = t(((e, t) => {
+})), f = t(((e, t) => {
 	t.exports = a, t.exports.default = a;
 	var n = {
 		type: "object",
@@ -2802,7 +2961,7 @@ var r = e(t(((e, t) => {
 		}
 		return a.errors = l, u === 0;
 	}
-})), l = t(((e, t) => {
+})), p = t(((e, t) => {
 	function n(e, { instancePath: t = "", parentData: r, parentDataProperty: i, rootData: a = e } = {}) {
 		if (!e || typeof e != "object" || Array.isArray(e)) return n.errors = [{
 			instancePath: t,
@@ -3184,5 +3343,5 @@ var r = e(t(((e, t) => {
 		return n.errors = null, !0;
 	}
 	t.exports = n, t.exports.default = n;
-})), u = e(s()), d = e(c()), f = e(l()), p = (e) => (0, f.default)(e), m = (e) => (0, d.default)(e), h = (e) => (0, u.default)(e), g = (e) => n(e, d.default);
-export { o as a, p as i, h as n, i as o, m as r, g as t };
+})), m = e(d()), h = e(f()), g = e(p()), _ = (e) => (0, g.default)(e), v = (e) => (0, h.default)(e), y = (e) => (0, m.default)(e), b = (e) => n(e, h.default);
+export { u as a, _ as i, y as n, c as o, v as r, s, b as t };

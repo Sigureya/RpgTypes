@@ -1,9 +1,9 @@
-import { IdentifiedItems } from '../libs';
-import { EventCommand } from '../rmmz/eventCommand';
-import { Data_CommonEvent, Data_Troop } from '../rmmz/events';
-import { Data_Actor, Data_Armor, Data_Class, Data_Enemy, Data_Item, Data_Skill, Data_State, Data_Weapon, Data_Map } from '../rmmz/rpg';
+import { IdentifiedItems, Rmmz_PluginManager } from '../libs';
+import { Data_CommonEvent, Data_Map, Data_Troop } from '../rmmz/events';
+import { Data_Actor, Data_Armor, Data_Class, Data_Enemy, Data_Item, Data_Skill, Data_State, Data_Weapon } from '../rmmz/rpg';
 import { Data_System } from '../rmmz/system';
 import { Rmmz_Actors, Rmmz_Map, Rmmz_Message, Rmmz_System } from './objects';
+import { Rmmz_SceneManager } from './sceneManager';
 declare global {
     var $dataActors: IdentifiedItems<Data_Actor>;
     var $dataArmors: IdentifiedItems<Data_Armor>;
@@ -16,12 +16,16 @@ declare global {
     var $dataSystem: Data_System;
     var $dataWeapons: IdentifiedItems<Data_Weapon>;
     var $dataTroops: IdentifiedItems<Data_Troop>;
-    var $dataMap: Data_Map<EventCommand>;
+    var $dataMap: Data_Map;
 }
 declare global {
     var $gameActors: Rmmz_Actors;
     var $gameMessage: Rmmz_Message;
     var $gameMap: Rmmz_Map;
     var $gameSystem: Rmmz_System;
+}
+declare global {
+    var SceneManager: Rmmz_SceneManager;
+    var PluginManager: Rmmz_PluginManager;
 }
 export {};

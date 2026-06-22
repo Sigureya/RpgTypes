@@ -1,10 +1,10 @@
 import { FileEntry, FileEntryBundle, RawGameData } from '../fileio';
-import { Data_Map, NormalizedEventCommand, RpgDataBundleHasText } from '../rmmz';
+import { Data_Map, Data_MapUnknown, NormalizedEventCommand, RpgDataBundleHasText } from '../rmmz';
 import { RuntimeDictionary, GameDataReplaceOutput } from './core/extract';
 import { EventContainerExtractor } from './extractText';
 import { ReplaceRawDataContext } from './types';
 export { replaceRawDataBundle, replaceRawDataWithAutoNoteFilter, } from './core/replaceBundle';
-export declare const replaceRuntimeMapData: (map: Data_Map, dic: RuntimeDictionary<string>) => Data_Map<NormalizedEventCommand>;
+export declare const replaceRuntimeMapData: (map: Data_Map, dic: RuntimeDictionary<string>) => Data_MapUnknown<NormalizedEventCommand>;
 export declare const replaceRuntimeData: (data: RpgDataBundleHasText, dic: RuntimeDictionary<string>) => RpgDataBundleHasText;
 export declare const replaceDataDirectToFileEntries: (context: ReplaceRawDataContext, extractor: EventContainerExtractor) => FileEntry[];
 export declare const replaceDataDirect: (context: ReplaceRawDataContext, extractor: EventContainerExtractor) => RawGameData<NormalizedEventCommand>;
