@@ -88,251 +88,275 @@ vi.stubGlobal("$gameMap", {
   mapId: () => 0,
 } satisfies FakeMap);
 
-describe("Game_Troop - page", () => {
-  test("empty", () => {
-    const condition = createCondition({});
-    const mocks = createMockObjects({
+interface TestCase {
+  name: string;
+  condition: Partial<Troop_EventConditions>;
+  expected: boolean;
+  createArg: () => Arg;
+  adtional: (mocks: MockObjects, arg: Arg) => void;
+}
+
+const runTest = (testCase: TestCase) => {
+  describe(testCase.name, () => {
+    const condition = createCondition(testCase.condition);
+    test("original", () => {
+      const arg = testCase.createArg();
+      const mocks = createMockObjects(arg);
+      stubGlobalObjects(mocks);
+      const troop: Rmmz_Troop = new Game_Troop();
+      const result = troop.meetsConditions(condition);
+      expect(result).toBe(testCase.expected);
+      testCase.adtional(mocks, arg);
+    });
+  });
+};
+
+const testCases: TestCase[] = [
+  {
+    name: "empty conditions",
+    expected: false,
+    condition: {},
+    createArg: () => ({
       actor: null,
       enemies: [],
       isTurnEnd: false,
-    });
-    stubGlobalObjects(mocks);
-    const troop: Rmmz_Troop = new Game_Troop();
-    expect(troop.meetsConditions(condition)).toBe(false);
-    expect(mocks.actors.actor).not.toHaveBeenCalled();
-    expect(mocks.globalTroop.members).not.toHaveBeenCalled();
-    expect(mocks.switches.value).not.toHaveBeenCalled();
-    expect(mocks.battleManager.isTurnEnd).not.toHaveBeenCalled();
-  });
-  describe("actor conditions", () => {
-    test("actor not found", () => {
-      const condition = createCondition({
-        actorHp: 50,
-        actorId: 4,
-        actorValid: true,
-      });
-
-      const mocks = createMockObjects({
-        actor: null,
-        enemies: [],
-        isTurnEnd: false,
-      });
-
-      stubGlobalObjects(mocks);
-
-      const troop: Rmmz_Troop = new Game_Troop();
-
-      expect(troop.meetsConditions(condition)).toBe(false);
+    }),
+    adtional: (mocks) => {
+      expect(mocks.actors.actor).not.toHaveBeenCalled();
+      expect(mocks.globalTroop.members).not.toHaveBeenCalled();
+      expect(mocks.switches.value).not.toHaveBeenCalled();
+      expect(mocks.battleManager.isTurnEnd).not.toHaveBeenCalled();
+    },
+  },
+  {
+    name: "actor not found",
+    expected: false,
+    condition: {
+      actorHp: 50,
+      actorId: 4,
+      actorValid: true,
+    },
+    createArg: () => ({
+      actor: null,
+      enemies: [],
+      isTurnEnd: false,
+    }),
+    adtional: (mocks) => {
       expect(mocks.actors.actor).toHaveBeenCalledWith(4);
-    });
-
-    test("actor hp is below threshold", () => {
-      const actor: FakeBattler = {
+    },
+  },
+  {
+    name: "actor hp below threshold",
+    expected: true,
+    condition: {
+      actorHp: 50,
+      actorId: 4,
+      actorValid: true,
+    },
+    createArg: () => ({
+      actor: {
         hpRate: () => 0.4,
-      };
-
-      const condition = createCondition({
-        actorHp: 50,
-        actorId: 4,
-        actorValid: true,
-      });
-
-      const mocks = createMockObjects({
-        actor,
-        enemies: [],
-        isTurnEnd: false,
-      });
-
-      stubGlobalObjects(mocks);
-
-      const troop: Rmmz_Troop = new Game_Troop();
-
-      expect(troop.meetsConditions(condition)).toBe(true);
-    });
-
-    test("actor hp is above threshold", () => {
-      const actor: FakeBattler = {
+      },
+      enemies: [],
+      isTurnEnd: false,
+    }),
+    adtional: (mocks) => {
+      expect(mocks.actors.actor).toHaveBeenCalledWith(4);
+    },
+  },
+  {
+    name: "actor hp above threshold",
+    expected: false,
+    condition: {
+      actorHp: 50,
+      actorId: 4,
+      actorValid: true,
+    },
+    createArg: () => ({
+      actor: {
         hpRate: () => 0.6,
-      };
-
-      const condition = createCondition({
-        actorHp: 50,
-        actorId: 4,
-        actorValid: true,
-      });
-
-      const mocks = createMockObjects({
-        actor,
-        enemies: [],
-        isTurnEnd: false,
-      });
-
-      stubGlobalObjects(mocks);
-
-      const troop: Rmmz_Troop = new Game_Troop();
-
-      expect(troop.meetsConditions(condition)).toBe(false);
-    });
-
-    test("actor hp equal threshold", () => {
-      const actor: FakeBattler = {
+      },
+      enemies: [],
+      isTurnEnd: false,
+    }),
+    adtional: () => {},
+  },
+  {
+    name: "actor hp above threshold",
+    expected: false,
+    condition: {
+      actorHp: 50,
+      actorId: 4,
+      actorValid: true,
+    },
+    createArg: () => ({
+      actor: {
+        hpRate: () => 0.6,
+      },
+      enemies: [],
+      isTurnEnd: false,
+    }),
+    adtional: () => {},
+  },
+  {
+    name: "actor hp equal threshold",
+    expected: true,
+    condition: {
+      actorHp: 50,
+      actorId: 4,
+      actorValid: true,
+    },
+    createArg: () => ({
+      actor: {
         hpRate: () => 0.5,
-      };
-
-      const condition = createCondition({
-        actorHp: 50,
-        actorId: 4,
-        actorValid: true,
-      });
-
-      const mocks = createMockObjects({
-        actor,
-        enemies: [],
-        isTurnEnd: false,
-      });
-
-      stubGlobalObjects(mocks);
-
-      const troop: Rmmz_Troop = new Game_Troop();
-
-      expect(troop.meetsConditions(condition)).toBe(true);
-    });
-  });
-  describe("enemy conditions", () => {
-    test("enemy not found", () => {
-      const condition = createCondition({
-        enemyValid: true,
-        enemyIndex: 0,
-        enemyHp: 50,
-      });
-
-      const mocks = createMockObjects({
-        actor: null,
-        enemies: [],
-        isTurnEnd: false,
-      });
-
-      stubGlobalObjects(mocks);
-
-      const troop = new Game_Troop();
-
-      expect(troop.meetsConditions(condition)).toBe(false);
+      },
+      enemies: [],
+      isTurnEnd: false,
+    }),
+    adtional: () => {},
+  },
+  {
+    name: "enemy not found",
+    expected: false,
+    condition: {
+      enemyValid: true,
+      enemyIndex: 0,
+      enemyHp: 50,
+    },
+    createArg: () => ({
+      actor: null,
+      enemies: [],
+      isTurnEnd: false,
+    }),
+    adtional: (mocks) => {
       expect(mocks.globalTroop.members).toHaveBeenCalled();
-    });
-
-    test("enemy hp below threshold", () => {
-      const condition = createCondition({
-        enemyValid: true,
-        enemyIndex: 0,
-        enemyHp: 50,
-      });
-
-      const mocks = createMockObjects({
-        actor: null,
-        enemies: [
-          {
-            hpRate: () => 0.4,
-          },
-        ],
-        isTurnEnd: false,
-      });
-
-      stubGlobalObjects(mocks);
-
-      const troop = new Game_Troop();
-
-      expect(troop.meetsConditions(condition)).toBe(true);
-    });
-
-    test("enemy hp above threshold", () => {
-      const condition = createCondition({
-        enemyValid: true,
-        enemyIndex: 0,
-        enemyHp: 50,
-      });
-
-      const mocks = createMockObjects({
-        actor: null,
-        enemies: [
-          {
-            hpRate: () => 0.6,
-          },
-        ],
-        isTurnEnd: false,
-      });
-
-      stubGlobalObjects(mocks);
-
-      const troop = new Game_Troop();
-
-      expect(troop.meetsConditions(condition)).toBe(false);
-    });
-
-    test("enemy hp equal threshold", () => {
-      const condition = createCondition({
-        enemyValid: true,
-        enemyIndex: 0,
-        enemyHp: 50,
-      });
-
-      const mocks = createMockObjects({
-        actor: null,
-        enemies: [
-          {
-            hpRate: () => 0.5,
-          },
-        ],
-        isTurnEnd: false,
-      });
-
-      stubGlobalObjects(mocks);
-
-      const troop = new Game_Troop();
-
-      expect(troop.meetsConditions(condition)).toBe(true);
-    });
-  });
-  describe("switch conditions", () => {
-    test("switch on", () => {
-      const condition = createCondition({
-        switchValid: true,
-        switchId: TRUE_SWITCH_ID,
-      });
-
-      const mocks = createMockObjects({
-        actor: null,
-        enemies: [],
-        isTurnEnd: false,
-      });
-
-      stubGlobalObjects(mocks);
-
-      const troop = new Game_Troop();
-
-      expect(troop.meetsConditions(condition)).toBe(true);
+    },
+  },
+  {
+    name: "enemy hp below threshold",
+    expected: true,
+    condition: {
+      enemyValid: true,
+      enemyIndex: 0,
+      enemyHp: 50,
+    },
+    createArg: () => ({
+      actor: null,
+      enemies: [
+        {
+          hpRate: () => 0.4,
+        },
+      ],
+      isTurnEnd: false,
+    }),
+    adtional: () => {},
+  },
+  {
+    name: "enemy hp above threshold",
+    expected: false,
+    condition: {
+      enemyValid: true,
+      enemyIndex: 0,
+      enemyHp: 50,
+    },
+    createArg: () => ({
+      actor: null,
+      enemies: [
+        {
+          hpRate: () => 0.6,
+        },
+      ],
+      isTurnEnd: false,
+    }),
+    adtional: () => {},
+  },
+  {
+    name: "enemy hp equal threshold",
+    expected: true,
+    condition: {
+      enemyValid: true,
+      enemyIndex: 0,
+      enemyHp: 50,
+    },
+    createArg: () => ({
+      actor: null,
+      enemies: [
+        {
+          hpRate: () => 0.5,
+        },
+      ],
+      isTurnEnd: false,
+    }),
+    adtional: () => {},
+  },
+  {
+    name: "switch on",
+    expected: true,
+    condition: {
+      switchValid: true,
+      switchId: TRUE_SWITCH_ID,
+    },
+    createArg: () => ({
+      actor: null,
+      enemies: [],
+      isTurnEnd: false,
+    }),
+    adtional: (mocks) => {
       expect(mocks.switches.value).toHaveBeenCalledWith(TRUE_SWITCH_ID);
-    });
-
-    test("switch off", () => {
-      const condition = createCondition({
-        switchValid: true,
-        switchId: 999,
-      });
-
-      const mocks = createMockObjects({
-        actor: null,
-        enemies: [],
-        isTurnEnd: false,
-      });
-
-      stubGlobalObjects(mocks);
-
-      const troop = new Game_Troop();
-
-      expect(troop.meetsConditions(condition)).toBe(false);
+    },
+  },
+  {
+    name: "switch off",
+    expected: false,
+    condition: {
+      switchValid: true,
+      switchId: 999,
+    },
+    createArg: () => ({
+      actor: null,
+      enemies: [],
+      isTurnEnd: false,
+    }),
+    adtional: (mocks) => {
       expect(mocks.switches.value).toHaveBeenCalledWith(999);
-    });
-  });
+    },
+  },
+  {
+    name: "turnEnding true",
+    expected: true,
+    condition: {
+      turnEnding: true,
+    },
+    createArg: () => ({
+      actor: null,
+      enemies: [],
+      isTurnEnd: true,
+    }),
+    adtional: (mocks) => {
+      expect(mocks.battleManager.isTurnEnd).toHaveBeenCalled();
+    },
+  },
+  {
+    name: "turnEnding false",
+    expected: false,
+    condition: {
+      turnEnding: true,
+    },
+    createArg: () => ({
+      actor: null,
+      enemies: [],
+      isTurnEnd: false,
+    }),
+    adtional: (mocks) => {
+      expect(mocks.battleManager.isTurnEnd).toHaveBeenCalled();
+    },
+  },
+];
+describe("Game_Troop - page", () => {
+  testCases.forEach((testCase) => runTest(testCase));
+});
+
+describe("Game_Troop - pageOld", () => {
   describe("turn conditions", () => {
     test("turnEnding - true", () => {
       const condition = createCondition({
