@@ -2,7 +2,7 @@ import { describe, expect, test } from "vitest";
 import { makeCommandCommonEvent, makeCommandPlayBGM } from "@RpgTypes/rmmz";
 import type { EventCommand } from "@RpgTypes/rmmz/eventCommand";
 import type { Data_Troop } from "@RpgTypes/rmmz/events";
-const validate = require("./troopValidate.js");
+import validate from "./troopValidate";
 
 const isDataTroop = (data: unknown): data is Data_Troop => {
   return validate(data);
