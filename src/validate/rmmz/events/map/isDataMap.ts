@@ -1,11 +1,12 @@
 import type { ValidateResult } from "@RpgTypes/libs/ajv/validateWithErrors";
 import { validateWithErros } from "@RpgTypes/libs/ajv/validateWithErrors";
-import type { Data_Map } from "@RpgTypes/rmmz/rpg";
+import type { Data_Map } from "@RpgTypes/rmmz";
+import type { Data_MapUnknown } from "@RpgTypes/rmmz/rpg";
 import type { ValidateFunction } from "ajv";
 import validate from "./mapValidate";
 
 export const validateMapWithErrors = (
   data: unknown,
 ): ValidateResult<Data_Map> => {
-  return validateWithErros(data, validate as ValidateFunction<Data_Map>);
+  return validateWithErros(data, validate as ValidateFunction<Data_MapUnknown>);
 };

@@ -2,7 +2,7 @@ import type { MockedObject } from "vitest";
 import { describe, expect, test, vi } from "vitest";
 import type {
   Command_PluginCommandMZ,
-  Data_Map,
+  Data_MapUnknown,
   EventCommand,
   MapEvent,
   NormalizedEventCommand,
@@ -102,8 +102,8 @@ describe("replaceMapDataTexts", () => {
 });
 interface TestCase {
   caseName: string;
-  input: Data_Map<EventCommand>;
-  expected: Data_Map<EventCommand>;
+  input: Data_MapUnknown<EventCommand>;
+  expected: Data_MapUnknown<EventCommand>;
   noteItems: NoteReadResult[];
   expectedReplaceTextArgs: string[];
 }
@@ -111,7 +111,8 @@ interface TestCase {
 const runTestCase = (testCase: TestCase) => {
   describe(testCase.caseName, () => {
     test(testCase.caseName, () => {
-      const result = replaceMapData(
+      type MapData = Data_MapUnknown<EventCommand>;
+      const result: MapData = replaceMapData(
         testCase.input,
         createReplaceHandlers(dictionary),
       );

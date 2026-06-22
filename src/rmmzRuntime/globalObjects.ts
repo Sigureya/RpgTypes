@@ -1,6 +1,9 @@
 import type { IdentifiedItems, Rmmz_PluginManager } from "@RpgTypes/libs";
-import type { EventCommand } from "@RpgTypes/rmmz/eventCommand";
-import type { Data_CommonEvent, Data_Troop } from "@RpgTypes/rmmz/events";
+import type {
+  Data_CommonEvent,
+  Data_Map,
+  Data_Troop,
+} from "@RpgTypes/rmmz/events";
 import type {
   Data_Actor,
   Data_Armor,
@@ -10,7 +13,6 @@ import type {
   Data_Skill,
   Data_State,
   Data_Weapon,
-  Data_Map,
 } from "@RpgTypes/rmmz/rpg";
 import type { Data_System } from "@RpgTypes/rmmz/system";
 import type {
@@ -33,7 +35,7 @@ declare global {
   var $dataSystem: Data_System;
   var $dataWeapons: IdentifiedItems<Data_Weapon>;
   var $dataTroops: IdentifiedItems<Data_Troop>;
-  var $dataMap: Data_Map<EventCommand>;
+  var $dataMap: Data_Map;
 }
 
 declare global {

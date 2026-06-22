@@ -1,9 +1,9 @@
 import type {
-  Data_Map,
   Data_CommonEvent,
   Data_Troop,
   EventCommand,
   Command_PluginCommandMZ,
+  Data_Map,
 } from "@RpgTypes/rmmz";
 import {
   collectMapEvents,
@@ -33,7 +33,7 @@ export const extractPluginCommandFromTroop = (
 };
 
 export const extractPluginCommandFromMap = (
-  map: Data_Map<EventCommand>,
+  map: Data_Map,
 ): Command_PluginCommandMZ[][][] => {
   return processMapEvents(map, (page) => {
     return page.list.filter(isPluginCommand);
@@ -72,7 +72,7 @@ export const extractBattleEventTexts = <T extends TextPluginCommandParameter>(
 };
 
 export const extractMapText = <T extends TextPluginCommandParameter>(
-  map: Data_Map<EventCommand>,
+  map: Data_Map,
   pluginCommandEvaltor: (command: Command_PluginCommandMZ) => T[] = () => [],
 ): ExtractedMapTexts<T> => ({
   note: map.note,
@@ -82,7 +82,7 @@ export const extractMapText = <T extends TextPluginCommandParameter>(
 });
 
 const extractMapEventTexts = <T extends TextPluginCommandParameter>(
-  map: Data_Map<EventCommand>,
+  map: Data_Map,
   pluginCommandEvaltor: (command: Command_PluginCommandMZ) => T[],
 ): ExtractedMapEventTexts<T>[] => {
   return collectMapEvents(

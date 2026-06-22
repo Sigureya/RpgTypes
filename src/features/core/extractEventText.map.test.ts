@@ -41,7 +41,7 @@ interface TestCase<
   T extends TextPluginCommandParameter = TextPluginCommandParameter,
 > {
   caseName: string;
-  input: Data_Map<EventCommand>;
+  input: Data_Map;
   expectedEvents: ExtractedMapEventTexts<T>[];
   expectedCalls: Command_PluginCommandMZ[];
 }

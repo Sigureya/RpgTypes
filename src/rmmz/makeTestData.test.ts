@@ -1,6 +1,6 @@
 import { describe, expect, test } from "vitest";
+import type { Data_Map } from "./events";
 import { makeMapDataFromTestDataSource } from "./makeTestData";
-import type { Data_Map } from "./rpg";
 
 describe("makeMapDataFromTestDataSource", () => {
   test("should create Data_Map with correct values from TestDataSourceWithNote", () => {

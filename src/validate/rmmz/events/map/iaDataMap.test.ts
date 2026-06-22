@@ -1,13 +1,13 @@
 import { describe, test, expect } from "vitest";
 import type { MoveRouteCommandUnknown } from "@RpgTypes/libs";
 import type { EventCommandUnknown } from "@RpgTypes/libs/eventCommand";
-import type { EventCommand } from "@RpgTypes/rmmz";
+import type { Data_Map, EventCommand } from "@RpgTypes/rmmz";
 import {
   makeCommandShowMessage,
   makeCommandShowMessageBody,
   makeCommandVariableFromConstant,
 } from "@RpgTypes/rmmz";
-import type { Data_Map, MapEvent } from "@RpgTypes/rmmz/rpg";
+import type { Data_MapUnknown, MapEvent } from "@RpgTypes/rmmz/rpg";
 import {
   makeMapData,
   makeMapEvent,
@@ -31,7 +31,7 @@ const mockEventCommands: EventCommand[] = [
 
 const makeMapWithEvents = <T extends EventCommandUnknown>(
   commands: T[],
-): Data_Map<T> => {
+): Data_MapUnknown<T> => {
   const mapEvent: MapEvent<T> = makeMapEvent({
     pages: [makeMapEventPage({ list: commands })],
   });

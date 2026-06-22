@@ -6,7 +6,7 @@ import type {
   Data_CommonEventUnknown,
   Data_Enemy,
   Data_Item,
-  Data_Map,
+  Data_MapUnknown,
   Data_MapInfo,
   Data_Skill,
   Data_State,
@@ -140,7 +140,7 @@ export interface RawGameEventData<
 > {
   commonEvents: ReadArrayResult<Data_CommonEventUnknown<Command>>;
   troops: ReadArrayResult<Data_TroopUnknonw<Command>>;
-  mapFiles: MapBatchReadResult<Data_Map<Command>>;
+  mapFiles: MapBatchReadResult<Data_MapUnknown<Command>>;
 }
 
 export type RawGameDataNullableSystem<
@@ -166,5 +166,5 @@ export interface RawGameData<
   weapons: ReadArrayResult<Data_Weapon>;
   tilesets: ReadArrayResult<Data_Tileset>;
   animations: ReadArrayResult<Data_Animation>;
-  mapFiles: MapBatchReadResult<Data_Map<Command>>;
+  mapFiles: MapBatchReadResult<Data_MapUnknown<Command>>;
 }

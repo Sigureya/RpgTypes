@@ -80,9 +80,7 @@ const extractActorTextsFromActors = (
   ]);
 };
 
-const extractActorTextFromMapEvent = (
-  map: Data_Map<EventCommand>,
-): string[][] => {
+const extractActorTextFromMapEvent = (map: Data_Map): string[][] => {
   return collectMapEvents(map, extractActorTextFromCommandContainer);
 };
 

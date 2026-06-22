@@ -1,5 +1,5 @@
 import type {
-  Data_Map,
+  Data_MapUnknown,
   MapFileInfo,
   NormalizedEventCommand,
 } from "@RpgTypes/rmmz";
@@ -114,7 +114,7 @@ export const makeRawTestDataBundle = (
 
 const mmmx = (
   soruce: TestRawDataSource,
-): MapFileInfo<Data_Map<NormalizedEventCommand>> => {
+): MapFileInfo<Data_MapUnknown<NormalizedEventCommand>> => {
   return {
     filename: "Map001",
     editingName: "Test Map",

@@ -2,6 +2,7 @@ import type { FileEntry, FileEntryBundle, RawGameData } from "@RpgTypes/fileio";
 import { rawGameDataToMainDataFileEntries } from "@RpgTypes/fileio";
 import type {
   Data_Map,
+  Data_MapUnknown,
   NormalizedEventCommand,
   NoteReadResult,
   RpgDataBundleHasText,
@@ -49,7 +50,7 @@ export {
 export const replaceRuntimeMapData = (
   map: Data_Map,
   dic: RuntimeDictionary<string>,
-): Data_Map<NormalizedEventCommand> => {
+): Data_MapUnknown<NormalizedEventCommand> => {
   const handlers: RpgDataReplaceHandlers = {
     replaceText(text) {
       return dic.textDictionary.get(text);

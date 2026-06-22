@@ -1,4 +1,4 @@
-import type { Data_Map } from "@RpgTypes/rmmz/rpg";
+import type { Data_Map } from "@RpgTypes/rmmz";
 import type { RpgMakerDataManagerBase } from "./base";
 import type { RpgDataTypes } from "./dataTypes";
 

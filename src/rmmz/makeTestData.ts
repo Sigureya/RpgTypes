@@ -9,7 +9,7 @@ import type {
 import { makeTestAudioCommands } from "./eventCommand";
 import { makeTestCommands } from "./eventCommand/makeTestCommands";
 import type { Data_CommonEvent, Data_Troop } from "./events";
-import type { Data_Map, MapEventPage } from "./rpg/data/event";
+import type { Data_MapUnknown, MapEventPage } from "./rpg/data/event";
 import { makeMapData, makeMapEventPage } from "./rpg/data/event";
 
 export const makeTestTroopData = (source: TestEventDataSource): Data_Troop => {
@@ -35,7 +35,7 @@ export const makeTestCommonEventData = (
 
 export const makeMapDataFromTestDataSource = (
   soruce: TestDataSourceWithNote,
-): Data_Map<NormalizedEventCommand> => {
+): Data_MapUnknown<NormalizedEventCommand> => {
   return makeMapData({
     note: soruce.note,
     displayName: soruce.text,
