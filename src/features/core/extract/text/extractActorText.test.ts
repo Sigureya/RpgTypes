@@ -1,10 +1,9 @@
 import { describe, test, expect, vi } from "vitest";
 import type {
-  Data_Map,
-  EventCommand,
   Data_CommonEvent,
   Data_Troop,
   Data_Actor,
+  Data_Map,
 } from "@RpgTypes/rmmz";
 import {
   makeMapDataFromSingleEvent,
@@ -28,7 +27,7 @@ const MOCK_NAME_MAP = "name in map event";
 const MOCK_NICKNAME_COMMON = "nickname in common event";
 const MOCK_PROFILE_TROOP = "profile in troop event";
 
-const mockMap: Data_Map<EventCommand> = makeMapDataFromSingleEvent([
+const mockMap: Data_Map = makeMapDataFromSingleEvent([
   makeCommandChangeActorName({ name: MOCK_NAME_MAP, actorId: 1 }),
 ]);
 

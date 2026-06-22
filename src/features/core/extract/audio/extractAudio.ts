@@ -3,7 +3,6 @@ import type {
   Data_CommonEvent,
   Data_Map,
   Data_Troop,
-  EventCommand,
 } from "@RpgTypes/rmmz";
 import { collectMapEvents, readNote } from "@RpgTypes/rmmz";
 import { extractAudioCommands } from "./eventCommand";
@@ -39,7 +38,7 @@ export const extractBattleAudio = <T extends AudioPluginCommandParameter>(
 };
 
 export const extractMapAudio = <T extends AudioPluginCommandParameter>(
-  map: Data_Map<EventCommand>,
+  map: Data_Map,
   pluginCommandEvaltor: (command: Command_PluginCommandMZ) => T[] = () => [],
 ): ExtractedMapAudios<T> => ({
   note: map.note,
@@ -50,7 +49,7 @@ export const extractMapAudio = <T extends AudioPluginCommandParameter>(
 });
 
 const extractMapEventAudio = <T extends AudioPluginCommandParameter>(
-  map: Data_Map<EventCommand>,
+  map: Data_Map,
   pluginCommandEvaltor: (command: Command_PluginCommandMZ) => T[],
 ): ExtractedMapEventAudios<T>[] => {
   return collectMapEvents(
