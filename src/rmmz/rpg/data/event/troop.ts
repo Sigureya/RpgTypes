@@ -23,6 +23,8 @@ export interface Troop_BattleEventPageSegment<Command = EventCommandUnknown> {
 export interface Troop_EventConditions {
   turnEnding: boolean;
   turnValid: boolean;
+  turnA:number;
+  turnB:number
 
   enemyValid: boolean;
   enemyIndex: number;
