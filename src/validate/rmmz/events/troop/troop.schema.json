@@ -40,7 +40,9 @@
               "switchId",
 
               "turnEnding",
-              "turnValid"
+              "turnValid",
+              "turnA",
+              "turnB"
             ],
             "properties": {
               "actorValid": { "type": "boolean" },
@@ -52,7 +54,9 @@
               "switchValid": { "type": "boolean" },
               "switchId": { "type": "integer", "minimum": 0 },
               "turnEnding": { "type": "boolean" },
-              "turnValid": { "type": "boolean" }
+              "turnValid": { "type": "boolean" },
+              "turnA": { "type": "integer" },
+              "turnB": { "type": "integer" }
             }
           },
           "list": {

@@ -50,6 +50,8 @@ const createCondition = (
       switchId: 0,
       turnEnding: false,
       turnValid: false,
+      turnA: 0,
+      turnB: 0,
       ...args,
     },
   };

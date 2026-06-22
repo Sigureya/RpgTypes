@@ -57,4 +57,6 @@ export const makeTroopEventConditions = (
   enemyHp: data.enemyHp ?? 0,
   actorValid: data.actorValid ?? false,
   switchId: data.switchId ?? 0,
+  turnA: data.turnA ?? 0,
+  turnB: data.turnB ?? 0,
 });

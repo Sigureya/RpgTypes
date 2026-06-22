@@ -37,6 +37,8 @@ const SCHEMA_TROOP_EVENT_CONDITIONS = {
 
     "turnEnding",
     "turnValid",
+    "turnA",
+    "turnB",
   ],
   properties: {
     actorValid: { type: "boolean" },
@@ -49,6 +51,8 @@ const SCHEMA_TROOP_EVENT_CONDITIONS = {
     switchId: { type: "integer", minimum: 0 },
     turnEnding: { type: "boolean" },
     turnValid: { type: "boolean" },
+    turnA: { type: "integer" },
+    turnB: { type: "integer" },
   },
 } satisfies JSONSchemaType<Troop_EventConditions>;
 
