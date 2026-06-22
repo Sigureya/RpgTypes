@@ -1,6 +1,9 @@
 import type { MockedObject } from "vitest";
 import { describe, expect, test, vi } from "vitest";
-import type { BattleEventPage } from "@RpgTypes/rmmz/rpg";
+import type {
+  BattleEventPage,
+  Troop_EventConditions,
+} from "@RpgTypes/rmmz/rpg";
 import type { Rmmz_Troop } from "@RpgTypes/rmmzRuntime";
 import type { BattleXX } from "@RpgTypes/rmmzRuntime/managers/battle/interface";
 import type { Rmmz_Switches } from "@RpgTypes/rmmzRuntime/objects/core/variables";
@@ -29,6 +32,28 @@ interface Arg {
 }
 
 const TRUE_SWITCH_ID = 7;
+
+const createCondition = (
+  args: Partial<Troop_EventConditions>,
+): BattleEventPage => {
+  return {
+    span: 0,
+    list: [],
+    conditions: {
+      actorValid: false,
+      actorHp: 0,
+      actorId: 0,
+      enemyHp: 0,
+      enemyIndex: 0,
+      enemyValid: false,
+      switchValid: false,
+      switchId: 0,
+      turnEnding: false,
+      turnValid: false,
+      ...args,
+    },
+  };
+};
 
 const createMockObjects = ({ actor, enemies, isTurnEnd }: Arg): MockObjects => {
   return {
@@ -63,25 +88,7 @@ vi.stubGlobal("$gameMap", {
 
 describe("Game_Troop - page", () => {
   test("empty", () => {
-    const condition: BattleEventPage = {
-      span: 0,
-      list: [],
-      conditions: {
-        actorValid: false,
-        actorHp: 0,
-        actorId: 0,
-
-        enemyValid: false,
-        enemyIndex: 0,
-        enemyHp: 0,
-
-        switchValid: false,
-        switchId: 0,
-
-        turnEnding: false,
-        turnValid: false,
-      },
-    };
+    const condition = createCondition({});
     const mocks = createMockObjects({
       actor: null,
       enemies: [],
@@ -94,5 +101,99 @@ describe("Game_Troop - page", () => {
     expect(mocks.globalTroop.members).not.toHaveBeenCalled();
     expect(mocks.switches.value).not.toHaveBeenCalled();
     expect(mocks.battleManager.isTurnEnd).not.toHaveBeenCalled();
+  });
+  describe("actor conditions", () => {
+    test("actor not found", () => {
+      const condition = createCondition({
+        actorHp: 50,
+        actorId: 4,
+        actorValid: true,
+      });
+
+      const mocks = createMockObjects({
+        actor: null,
+        enemies: [],
+        isTurnEnd: false,
+      });
+
+      stubGlobalObjects(mocks);
+
+      const troop: Rmmz_Troop = new Game_Troop();
+
+      expect(troop.meetsConditions(condition)).toBe(false);
+      expect(mocks.actors.actor).toHaveBeenCalledWith(4);
+    });
+
+    test("actor hp is below threshold", () => {
+      const actor: FakeBattler = {
+        hpRate: () => 0.4,
+      };
+
+      const condition = createCondition({
+        actorHp: 50,
+        actorId: 4,
+        actorValid: true,
+      });
+
+      const mocks = createMockObjects({
+        actor,
+        enemies: [],
+        isTurnEnd: false,
+      });
+
+      stubGlobalObjects(mocks);
+
+      const troop: Rmmz_Troop = new Game_Troop();
+
+      expect(troop.meetsConditions(condition)).toBe(true);
+    });
+
+    test("actor hp is above threshold", () => {
+      const actor: FakeBattler = {
+        hpRate: () => 0.6,
+      };
+
+      const condition = createCondition({
+        actorHp: 50,
+        actorId: 4,
+        actorValid: true,
+      });
+
+      const mocks = createMockObjects({
+        actor,
+        enemies: [],
+        isTurnEnd: false,
+      });
+
+      stubGlobalObjects(mocks);
+
+      const troop: Rmmz_Troop = new Game_Troop();
+
+      expect(troop.meetsConditions(condition)).toBe(false);
+    });
+
+    test("actor hp equal threshold", () => {
+      const actor: FakeBattler = {
+        hpRate: () => 0.5,
+      };
+
+      const condition = createCondition({
+        actorHp: 50,
+        actorId: 4,
+        actorValid: true,
+      });
+
+      const mocks = createMockObjects({
+        actor,
+        enemies: [],
+        isTurnEnd: false,
+      });
+
+      stubGlobalObjects(mocks);
+
+      const troop: Rmmz_Troop = new Game_Troop();
+
+      expect(troop.meetsConditions(condition)).toBe(true);
+    });
   });
 });
