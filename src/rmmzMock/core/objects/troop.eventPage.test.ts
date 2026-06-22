@@ -3,23 +3,33 @@ import { describe, expect, test, vi } from "vitest";
 import type { BattleEventPage } from "@RpgTypes/rmmz/rpg";
 import type { Rmmz_Troop } from "@RpgTypes/rmmzRuntime";
 import type { BattleXX } from "@RpgTypes/rmmzRuntime/managers/battle/interface";
-import type { FakeMap } from "./fakes/types";
+import type { FakeActors, FakeMap } from "./fakes/types";
 import { Game_Troop } from "./rmmz_objects";
 
 interface MockObjects {
   map: FakeMap;
   battleManager: MockedObject<BattleXX>;
+  actors: MockedObject<FakeActors>;
 }
 
-const createMockObjects = (): MockObjects => {
+interface FakeBattler {
+  hpRate(): number;
+}
+
+const createMockObjects = (
+  actor: MockedObject<FakeBattler> | null,
+): MockObjects => {
   return {
     map: {
       mapId: () => 0,
     },
     battleManager: {
-      canEscape: vi.fn().mockReturnValue(true),
+      canEscape: vi.fn().mockReturnValue(false),
       isTurnEnd: vi.fn().mockReturnValue(false),
       isActionForced: vi.fn().mockReturnValue(false),
+    },
+    actors: {
+      actor: vi.fn().mockReturnValue(actor),
     },
   };
 };
