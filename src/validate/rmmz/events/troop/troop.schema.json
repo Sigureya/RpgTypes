@@ -10,7 +10,7 @@
         "type": "object",
         "required": ["enemyId", "x", "y", "hidden"],
         "properties": {
-          "enemyId": { "type": "integer", "minimum": 0 },
+          "enemyId": { "type": "integer" },
           "x": { "type": "integer" },
           "y": { "type": "integer" },
           "hidden": { "type": "boolean" }
@@ -21,16 +21,38 @@
       "type": "array",
       "items": {
         "type": "object",
-        "required": ["conditions", "list", "span"],
+
+        "additionalProperties": true,
+        "required": ["conditions", "span"],
         "properties": {
           "conditions": {
             "type": "object",
-            "required": ["actorHp", "actorId", "enemyValid", "switchValid"],
+            "required": [
+              "actorHp",
+              "actorId",
+              "actorValid",
+
+              "enemyValid",
+              "enemyIndex",
+              "enemyHp",
+
+              "switchValid",
+              "switchId",
+
+              "turnEnding",
+              "turnValid"
+            ],
             "properties": {
+              "actorValid": { "type": "boolean" },
               "actorHp": { "type": "integer", "minimum": 0 },
               "actorId": { "type": "integer", "minimum": 0 },
-              "enemyValid": { "type": "integer", "minimum": 0 },
-              "switchValid": { "type": "integer", "minimum": 0 }
+              "enemyValid": { "type": "boolean" },
+              "enemyIndex": { "type": "integer", "minimum": 0 },
+              "enemyHp": { "type": "integer", "minimum": 0 },
+              "switchValid": { "type": "boolean" },
+              "switchId": { "type": "integer", "minimum": 0 },
+              "turnEnding": { "type": "boolean" },
+              "turnValid": { "type": "boolean" }
             }
           },
           "list": {

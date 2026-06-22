@@ -45,7 +45,7 @@ const SCHEMA_TROOP_EVENT_CONDITIONS = {
     enemyValid: { type: "boolean" },
     enemyIndex: { type: "integer", minimum: 0 },
     enemyHp: { type: "integer", minimum: 0 },
-    switchValid: { type: "boolean", minimum: 0 },
+    switchValid: { type: "boolean" },
     switchId: { type: "integer", minimum: 0 },
     turnEnding: { type: "boolean" },
     turnValid: { type: "boolean" },
@@ -72,12 +72,11 @@ export const SCHEMA_DATA_TROOP = {
         required: ["conditions", "span"],
         properties: {
           conditions: SCHEMA_TROOP_EVENT_CONDITIONS,
-          span: { type: "number" },
+          span: { type: "integer", minimum: 0 },
           list: {
             type: "array",
             items: {
               type: "object",
-              additionalProperties: true,
               required: [
                 "code",
                 "indent",
