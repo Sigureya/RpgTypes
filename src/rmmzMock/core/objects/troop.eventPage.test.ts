@@ -196,4 +196,139 @@ describe("Game_Troop - page", () => {
       expect(troop.meetsConditions(condition)).toBe(true);
     });
   });
+  describe("enemy conditions", () => {
+    test("enemy not found", () => {
+      const condition = createCondition({
+        enemyValid: true,
+        enemyIndex: 0,
+        enemyHp: 50,
+      });
+
+      const mocks = createMockObjects({
+        actor: null,
+        enemies: [],
+        isTurnEnd: false,
+      });
+
+      stubGlobalObjects(mocks);
+
+      const troop = new Game_Troop();
+
+      expect(troop.meetsConditions(condition)).toBe(false);
+      expect(mocks.globalTroop.members).toHaveBeenCalled();
+    });
+
+    test("enemy hp below threshold", () => {
+      const condition = createCondition({
+        enemyValid: true,
+        enemyIndex: 0,
+        enemyHp: 50,
+      });
+
+      const mocks = createMockObjects({
+        actor: null,
+        enemies: [
+          {
+            hpRate: () => 0.4,
+          },
+        ],
+        isTurnEnd: false,
+      });
+
+      stubGlobalObjects(mocks);
+
+      const troop = new Game_Troop();
+
+      expect(troop.meetsConditions(condition)).toBe(true);
+    });
+
+    test("enemy hp above threshold", () => {
+      const condition = createCondition({
+        enemyValid: true,
+        enemyIndex: 0,
+        enemyHp: 50,
+      });
+
+      const mocks = createMockObjects({
+        actor: null,
+        enemies: [
+          {
+            hpRate: () => 0.6,
+          },
+        ],
+        isTurnEnd: false,
+      });
+
+      stubGlobalObjects(mocks);
+
+      const troop = new Game_Troop();
+
+      expect(troop.meetsConditions(condition)).toBe(false);
+    });
+
+    test("enemy hp equal threshold", () => {
+      const condition = createCondition({
+        enemyValid: true,
+        enemyIndex: 0,
+        enemyHp: 50,
+      });
+
+      const mocks = createMockObjects({
+        actor: null,
+        enemies: [
+          {
+            hpRate: () => 0.5,
+          },
+        ],
+        isTurnEnd: false,
+      });
+
+      stubGlobalObjects(mocks);
+
+      const troop = new Game_Troop();
+
+      expect(troop.meetsConditions(condition)).toBe(true);
+    });
+  });
+  describe("switch conditions", () => {
+    test("switch on", () => {
+      const condition = createCondition({
+        switchValid: true,
+        switchId: TRUE_SWITCH_ID,
+      });
+
+      const mocks = createMockObjects({
+        actor: null,
+        enemies: [],
+        isTurnEnd: false,
+      });
+
+      stubGlobalObjects(mocks);
+
+      const troop = new Game_Troop();
+
+      expect(troop.meetsConditions(condition)).toBe(true);
+      expect(mocks.switches.value).toHaveBeenCalledWith(TRUE_SWITCH_ID);
+    });
+
+    test("switch off", () => {
+      const condition = createCondition({
+        switchValid: true,
+        switchId: 999,
+      });
+
+      const mocks = createMockObjects({
+        actor: null,
+        enemies: [],
+        isTurnEnd: false,
+      });
+
+      stubGlobalObjects(mocks);
+
+      const troop = new Game_Troop();
+
+      expect(troop.meetsConditions(condition)).toBe(false);
+      expect(mocks.switches.value).toHaveBeenCalledWith(999);
+    });
+  });
 });
