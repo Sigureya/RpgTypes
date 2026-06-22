@@ -1,6 +1,5 @@
 import { PLUGIN_COMMAND_MZ, SCRIPT_EVAL } from "@RpgTypes/libs";
 import type {
-  Data_Map,
   MapEvent,
   MapEventPage,
   BattleEventPage,
@@ -8,6 +7,7 @@ import type {
   Data_TroopUnknonw,
   EventCommand,
   NormalizedEventCommand,
+  Data_MapUnknown,
 } from "@RpgTypes/rmmz";
 import { replaceNoteWithHandlers } from "@RpgTypes/rmmz";
 import { normalizeEventCommands } from "./eventCommand/normalize";
@@ -84,9 +84,9 @@ export const replaceCommonEventTexts = (
 };
 
 export const replaceMapTexts = (
-  mapData: Data_Map<EventCommand>,
+  mapData: Data_MapUnknown<EventCommand>,
   fn: (key: string) => string | undefined,
-): Data_Map<NormalizedEventCommand> => {
+): Data_MapUnknown<NormalizedEventCommand> => {
   return replaceMapDataTextsCore(mapData, {
     pluginCommand: (c) => c,
     scriptCommand: (c) => c,
@@ -96,9 +96,9 @@ export const replaceMapTexts = (
 };
 
 export const replaceMapData = (
-  mapData: Data_Map<EventCommand>,
+  mapData: Data_MapUnknown<EventCommand>,
   handlers: RpgDataReplaceHandlers,
-): Data_Map<NormalizedEventCommand> => {
+): Data_MapUnknown<NormalizedEventCommand> => {
   return replaceMapDataTextsCore(mapData, handlers);
 };
 
@@ -122,9 +122,9 @@ const replaceMapEventTexts = (
 };
 
 const replaceMapDataTextsCore = (
-  mapData: Data_Map<EventCommand>,
+  mapData: Data_MapUnknown<EventCommand>,
   handlers: RpgDataReplaceHandlers,
-): Data_Map<NormalizedEventCommand> => {
+): Data_MapUnknown<NormalizedEventCommand> => {
   // スプレッド構文だと型チェックを通れないので、全て手動でコピー
   return {
     note: replaceNoteWithHandlers(mapData.note, handlers),
