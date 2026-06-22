@@ -1,2 +1,2 @@
-export { isCommandAudio } from "./audio/play/validate";
+export * from "./eventCommand";
 export { isCommandChangeActorText } from "./actor/text/varidate";
