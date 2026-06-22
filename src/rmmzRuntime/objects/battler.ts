@@ -20,6 +20,9 @@ import type {
 
 declare global {
   class Game_BattlerBase implements Rmmz_BattlerBase {
+    hpRate(): number;
+    mpRate(): number;
+    tpRate(): number;
     get mhp(): number;
     get mmp(): number;
     get atk(): number;
