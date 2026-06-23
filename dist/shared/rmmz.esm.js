@@ -1596,8 +1596,16 @@ var dt = (e) => ({
 }), da = (e = {}) => ({
 	actorHp: e.actorHp ?? 0,
 	actorId: e.actorId ?? 0,
-	enemyValid: e.enemyValid ?? 0,
-	switchValid: e.switchValid ?? 0
+	enemyValid: e.enemyValid ?? !1,
+	switchValid: e.switchValid ?? !1,
+	turnEnding: e.turnEnding ?? !1,
+	turnValid: e.turnValid ?? !1,
+	enemyIndex: e.enemyIndex ?? 0,
+	enemyHp: e.enemyHp ?? 0,
+	actorValid: e.actorValid ?? !1,
+	switchId: e.switchId ?? 0,
+	turnA: e.turnA ?? 0,
+	turnB: e.turnB ?? 0
 }), fa = (e = {}) => ({
 	switch1Id: e.switch1Id ?? 0,
 	switch1Valid: e.switch1Id !== void 0,

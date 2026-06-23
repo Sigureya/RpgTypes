@@ -2,6 +2,9 @@ import { Data_AnyGoodsUnion, Data_Armor, Data_Enemy, Data_Equipment, Data_Skill,
 import { Rmmz_Enemy, Rmmz_Actor, Rmmz_Battler, Rmmz_BattlerBase } from './core';
 declare global {
     class Game_BattlerBase implements Rmmz_BattlerBase {
+        hpRate(): number;
+        mpRate(): number;
+        tpRate(): number;
         get mhp(): number;
         get mmp(): number;
         get atk(): number;

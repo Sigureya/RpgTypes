@@ -16,10 +16,18 @@ export interface Troop_BattleEventPageSegment<Command = EventCommandUnknown> {
     list?: Command[];
 }
 export interface Troop_EventConditions {
+    turnEnding: boolean;
+    turnValid: boolean;
+    turnA: number;
+    turnB: number;
+    enemyValid: boolean;
+    enemyIndex: number;
+    enemyHp: number;
+    actorValid: boolean;
     actorHp: number;
     actorId: number;
-    enemyValid: number;
-    switchValid: number;
+    switchValid: boolean;
+    switchId: number;
 }
 export interface Troop_Member {
     enemyId: number;

@@ -13,11 +13,9 @@ export declare const SCHEMA_DATA_TROOP: {
             readonly type: "array";
             readonly items: {
                 readonly type: "object";
-                readonly required: readonly ["enemyId", "x", "y", "hidden"];
                 readonly properties: {
                     readonly enemyId: {
                         readonly type: "integer";
-                        readonly minimum: 0;
                     };
                     readonly x: {
                         readonly type: "integer";
@@ -29,57 +27,84 @@ export declare const SCHEMA_DATA_TROOP: {
                         readonly type: "boolean";
                     };
                 };
+                readonly required: readonly ["enemyId", "x", "y", "hidden"];
             };
         };
         readonly pages: {
             readonly type: "array";
             readonly items: {
-                readonly type: "object";
-                readonly required: readonly ["conditions", "list", "span"];
-                readonly properties: {
-                    readonly conditions: {
-                        readonly type: "object";
-                        readonly required: readonly ["actorHp", "actorId", "enemyValid", "switchValid"];
-                        readonly properties: {
-                            readonly actorHp: {
-                                readonly type: "integer";
-                                readonly minimum: 0;
+                type: "object";
+                additionalProperties: true;
+                required: ("conditions" | "span")[];
+                properties: {
+                    conditions: {
+                        type: "object";
+                        required: ("actorId" | "switchId" | "turnEnding" | "turnValid" | "turnA" | "turnB" | "enemyValid" | "enemyIndex" | "enemyHp" | "actorValid" | "actorHp" | "switchValid")[];
+                        properties: {
+                            actorValid: {
+                                type: "boolean";
                             };
-                            readonly actorId: {
-                                readonly type: "integer";
-                                readonly minimum: 0;
+                            actorHp: {
+                                type: "integer";
+                                minimum: number;
                             };
-                            readonly enemyValid: {
-                                readonly type: "integer";
-                                readonly minimum: 0;
+                            actorId: {
+                                type: "integer";
+                                minimum: number;
                             };
-                            readonly switchValid: {
-                                readonly type: "integer";
-                                readonly minimum: 0;
+                            enemyValid: {
+                                type: "boolean";
+                            };
+                            enemyIndex: {
+                                type: "integer";
+                                minimum: number;
+                            };
+                            enemyHp: {
+                                type: "integer";
+                                minimum: number;
+                            };
+                            switchValid: {
+                                type: "boolean";
+                            };
+                            switchId: {
+                                type: "integer";
+                                minimum: number;
+                            };
+                            turnEnding: {
+                                type: "boolean";
+                            };
+                            turnValid: {
+                                type: "boolean";
+                            };
+                            turnA: {
+                                type: "integer";
+                            };
+                            turnB: {
+                                type: "integer";
                             };
                         };
                     };
-                    readonly list: {
-                        readonly type: "array";
-                        readonly items: {
-                            readonly type: "object";
-                            readonly required: readonly ["code", "indent", "parameters"];
-                            readonly properties: {
-                                readonly code: {
-                                    readonly type: "integer";
+                    span: {
+                        type: "integer";
+                        minimum: number;
+                    };
+                    list: {
+                        type: string;
+                        items: {
+                            type: string;
+                            required: ("code" | "indent" | "parameters")[];
+                            properties: {
+                                code: {
+                                    type: string;
                                 };
-                                readonly indent: {
-                                    readonly type: "integer";
+                                indent: {
+                                    type: string;
                                 };
-                                readonly parameters: {
-                                    readonly type: "array";
+                                parameters: {
+                                    type: string;
                                 };
                             };
                         };
-                    };
-                    readonly span: {
-                        readonly type: "integer";
-                        readonly minimum: 0;
                     };
                 };
             };
