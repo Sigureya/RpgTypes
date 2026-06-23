@@ -4,11 +4,15 @@ import type {
   Rmmz_Actor,
   Rmmz_Battler,
   Rmmz_Enemy,
+  Rmmz_Unit,
 } from "./battle";
 import type { InterpreterMapper, Rmmz_EventCommandRunner } from "./interpreter";
 import type { Rmmz_InterpreterBattler } from "./interpreter/types/actor";
 
-export interface Rmmz_Action extends Rmmz_ActionBase<Rmmz_Battler, {}> {}
+export interface Rmmz_Action extends Rmmz_ActionBase<
+  Rmmz_Battler,
+  Rmmz_Unit<Rmmz_Battler>
+> {}
 
 export interface Rmmz_Interpreter
   extends
