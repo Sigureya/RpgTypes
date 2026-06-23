@@ -14,9 +14,11 @@ export interface Rmmz_Item<T = unknown> {
   setObject(object: Data_Item): asserts this is Rmmz_Item<Data_Item>;
   setObject(object: null): asserts this is Rmmz_Item<null>;
   isSkill(): this is Rmmz_Item<Data_Skill>;
+  isItem(): this is Rmmz_Item<Data_Item>;
+  isUseableItem(): this is Rmmz_Item<Data_Skill> | Rmmz_Item<Data_Item>;
   isWeapon(): this is Rmmz_Item<Data_Weapon>;
   isArmor(): this is Rmmz_Item<Data_Armor>;
-  isItem(): this is Rmmz_Item<Data_Item>;
+  isEquipItem(): this is Rmmz_Item<Data_Weapon> | Rmmz_Item<Data_Armor>;
   isNull(): this is Rmmz_Item<null>;
   setEquip(
     isWeapon: boolean,
