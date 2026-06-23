@@ -48,5 +48,4 @@ export interface Rmmz_ActionBase<Battler, Team>
   itemHit(battler: Battler): number;
   itemEva(target: Battler): number;
   itemCri(target: Battler): number;
-  apply(target: Battler): void;
 }

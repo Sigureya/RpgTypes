@@ -12,4 +12,5 @@ export interface Rmmz_Action_Damage<Battler> {
   gainDrainedHp(value: number): void;
   gainDrainedMp(value: number): void;
   makeSuccess(target: Battler): void;
+  apply(target: Battler): void;
 }
