@@ -1,13 +1,9 @@
-import type {
-  Rmmz_Action,
-  Rmmz_Battler,
-  Rmmz_BattlerContainer,
-} from "@RpgTypes/rmmzRuntime";
+import type { Rmmz_Battler } from "@RpgTypes/rmmzRuntime";
 
-export const battlresRandomTarget = (
-  battlers: ReadonlyArray<Rmmz_Battler>,
+export const battlresRandomTarget = <T extends Rmmz_Battler>(
+  battlers: ReadonlyArray<T>,
   randomValue: number,
-): Rmmz_Battler | null => {
+): T | null => {
   const tgrSum = battlers.reduce((r, b) => r + b.tgr, 0);
   // eslint-disable-next-line @functional/no-let
   let targetTgr = randomValue * tgrSum;
@@ -21,44 +17,49 @@ export const battlresRandomTarget = (
   return null;
 };
 
-export const battlersRandomDeadTarget = (
-  battlers: ReadonlyArray<Rmmz_Battler>,
+export const battlersRandomDeadTarget = <T extends Rmmz_Battler>(
+  battlers: ReadonlyArray<T>,
   randomValue: number,
-): Rmmz_Battler | null => {
-  const b2 = battlers.filter((b) => b.isDead());
-  return battlresRandomTarget(b2, randomValue);
+): T | null => {
+  const filted = battlers.filter((b) => b.isDead());
+  return battlresRandomTarget(filted, randomValue);
 };
 
-export const battlersRandomAliveTarget = (
-  battlers: ReadonlyArray<Rmmz_Battler>,
+export const battlersRandomAliveTarget = <T extends Rmmz_Battler>(
+  battlers: ReadonlyArray<T>,
   randomValue: number,
-): Rmmz_Battler | null => {
-  const b2 = battlers.filter((b) => b.isAlive());
-  return battlresRandomTarget(b2, randomValue);
+): T | null => {
+  const filted = battlers.filter((b) => b.isAlive());
+  return battlresRandomTarget(filted, randomValue);
 };
 
-export const actionDecideRandomTarget = <Battler>(
-  action: Rmmz_Action,
-  friendsUnit: Rmmz_BattlerContainer<Battler>,
-  opponentsUnit: Rmmz_BattlerContainer<Battler>,
-): Battler | null => {
-  if (action.isForDeadFriend()) {
-    return friendsUnit.randomDeadTarget();
+export const smoothTarget = <T>(
+  battlers: ReadonlyArray<T>,
+  index: number,
+  fn: (battler: T) => boolean,
+): T | undefined => {
+  if (battlers.length === 0) {
+    return undefined;
   }
-
-  if (action.isForAliveFriend()) {
-    return friendsUnit.randomTarget();
+  const target = battlers[Math.max(0, index)];
+  if (target && fn(target)) {
+    return target;
   }
-
-  return opponentsUnit.randomTarget();
+  return (
+    battlers.find((b, index): boolean => index !== index && fn(b)) ?? undefined
+  );
 };
 
-export const actionTargetsForOpponents = (
-  action: Rmmz_Action,
-): Rmmz_Battler[] => {
-  const unit = action.opponentsUnit();
-  if (action.isForRandom()) {
-    return action.randomTargets(unit);
-  }
-  return action.targetsForAlive(unit);
+export const smoothAliveTarget = <T extends Rmmz_Battler>(
+  battlers: ReadonlyArray<T>,
+  index: number,
+): T | undefined => {
+  return smoothTarget(battlers, index, (b) => b.isAlive());
+};
+
+export const smoothDeadTarget = <T extends Rmmz_Battler>(
+  battlers: ReadonlyArray<T>,
+  index: number,
+): T | undefined => {
+  return smoothTarget(battlers, index, (b) => b.isDead());
 };
