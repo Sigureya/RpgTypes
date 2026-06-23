@@ -4,7 +4,7 @@ import type {
   Data_Armor,
   Data_Item,
 } from "@RpgTypes/rmmz/rpg";
-import type { Rmmz_Item } from "./core/item";
+import type { Rmmz_Item } from "./core/battle/item";
 
 declare global {
   class Game_Item implements Rmmz_Item {
