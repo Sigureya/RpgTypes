@@ -4,3 +4,7 @@ export interface Rmmz_Variables {
     setValue(id: number, value: number): void;
     onChange(): void;
 }
+export interface Rmmz_Switches {
+    value(switchId: number): boolean;
+    setValue(switchId: number, value: boolean): void;
+}

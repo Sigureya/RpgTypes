@@ -3,7 +3,8 @@ import { Rmmz_Equipable } from './equipable';
 import { Rmmz_ItemUser } from './itemUser';
 import { Rmmz_StatusParams } from './param';
 import { Rmmz_Stateable } from './state';
-export interface Rmmz_BattlerBase extends Rmmz_BattlerBuffs, Rmmz_Equipable, Rmmz_ItemUser, Rmmz_Stateable, Rmmz_StatusParams {
+import { Rmmz_BattlerBase_Values } from './values';
+export interface Rmmz_BattlerBase extends Rmmz_BattlerBuffs, Rmmz_Equipable, Rmmz_ItemUser, Rmmz_Stateable, Rmmz_StatusParams, Rmmz_BattlerBase_Values {
     get mhp(): number;
     get mmp(): number;
     get atk(): number;

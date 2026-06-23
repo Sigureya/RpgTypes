@@ -3050,16 +3050,6 @@ var r = t(((e, t) => {
 											params: { type: "integer" },
 											message: "must be integer"
 										}], !1;
-										if (typeof r == "number" && isFinite(r) && (r < 0 || isNaN(r))) return n.errors = [{
-											instancePath: t + "/members/" + i + "/enemyId",
-											schemaPath: "#/properties/members/items/properties/enemyId/minimum",
-											keyword: "minimum",
-											params: {
-												comparison: ">=",
-												limit: 0
-											},
-											message: "must be >= 0"
-										}], !1;
 										var s = !0;
 									} else s = !0;
 									if (s) {
@@ -3125,7 +3115,7 @@ var r = t(((e, t) => {
 								}], !1;
 								{
 									let r;
-									if (e.conditions === void 0 && (r = "conditions") || e.list === void 0 && (r = "list") || e.span === void 0 && (r = "span")) return n.errors = [{
+									if (e.conditions === void 0 && (r = "conditions") || e.span === void 0 && (r = "span")) return n.errors = [{
 										instancePath: t + "/pages/" + i,
 										schemaPath: "#/properties/pages/items/required",
 										keyword: "required",
@@ -3143,47 +3133,36 @@ var r = t(((e, t) => {
 										}], !1;
 										{
 											let e;
-											if (r.actorHp === void 0 && (e = "actorHp") || r.actorId === void 0 && (e = "actorId") || r.enemyValid === void 0 && (e = "enemyValid") || r.switchValid === void 0 && (e = "switchValid")) return n.errors = [{
+											if (r.actorHp === void 0 && (e = "actorHp") || r.actorId === void 0 && (e = "actorId") || r.actorValid === void 0 && (e = "actorValid") || r.enemyValid === void 0 && (e = "enemyValid") || r.enemyIndex === void 0 && (e = "enemyIndex") || r.enemyHp === void 0 && (e = "enemyHp") || r.switchValid === void 0 && (e = "switchValid") || r.switchId === void 0 && (e = "switchId") || r.turnEnding === void 0 && (e = "turnEnding") || r.turnValid === void 0 && (e = "turnValid") || r.turnA === void 0 && (e = "turnA") || r.turnB === void 0 && (e = "turnB")) return n.errors = [{
 												instancePath: t + "/pages/" + i + "/conditions",
 												schemaPath: "#/properties/pages/items/properties/conditions/required",
 												keyword: "required",
 												params: { missingProperty: e },
 												message: "must have required property '" + e + "'"
 											}], !1;
-											if (r.actorHp !== void 0) {
-												let e = r.actorHp;
-												if (typeof e != "number" || e % 1 || isNaN(e) || !isFinite(e)) return n.errors = [{
-													instancePath: t + "/pages/" + i + "/conditions/actorHp",
-													schemaPath: "#/properties/pages/items/properties/conditions/properties/actorHp/type",
+											if (r.actorValid !== void 0) {
+												if (typeof r.actorValid != "boolean") return n.errors = [{
+													instancePath: t + "/pages/" + i + "/conditions/actorValid",
+													schemaPath: "#/properties/pages/items/properties/conditions/properties/actorValid/type",
 													keyword: "type",
-													params: { type: "integer" },
-													message: "must be integer"
-												}], !1;
-												if (typeof e == "number" && isFinite(e) && (e < 0 || isNaN(e))) return n.errors = [{
-													instancePath: t + "/pages/" + i + "/conditions/actorHp",
-													schemaPath: "#/properties/pages/items/properties/conditions/properties/actorHp/minimum",
-													keyword: "minimum",
-													params: {
-														comparison: ">=",
-														limit: 0
-													},
-													message: "must be >= 0"
+													params: { type: "boolean" },
+													message: "must be boolean"
 												}], !1;
 												var c = !0;
 											} else c = !0;
 											if (c) {
-												if (r.actorId !== void 0) {
-													let e = r.actorId;
+												if (r.actorHp !== void 0) {
+													let e = r.actorHp;
 													if (typeof e != "number" || e % 1 || isNaN(e) || !isFinite(e)) return n.errors = [{
-														instancePath: t + "/pages/" + i + "/conditions/actorId",
-														schemaPath: "#/properties/pages/items/properties/conditions/properties/actorId/type",
+														instancePath: t + "/pages/" + i + "/conditions/actorHp",
+														schemaPath: "#/properties/pages/items/properties/conditions/properties/actorHp/type",
 														keyword: "type",
 														params: { type: "integer" },
 														message: "must be integer"
 													}], !1;
 													if (typeof e == "number" && isFinite(e) && (e < 0 || isNaN(e))) return n.errors = [{
-														instancePath: t + "/pages/" + i + "/conditions/actorId",
-														schemaPath: "#/properties/pages/items/properties/conditions/properties/actorId/minimum",
+														instancePath: t + "/pages/" + i + "/conditions/actorHp",
+														schemaPath: "#/properties/pages/items/properties/conditions/properties/actorHp/minimum",
 														keyword: "minimum",
 														params: {
 															comparison: ">=",
@@ -3194,18 +3173,18 @@ var r = t(((e, t) => {
 													c = !0;
 												} else c = !0;
 												if (c) {
-													if (r.enemyValid !== void 0) {
-														let e = r.enemyValid;
+													if (r.actorId !== void 0) {
+														let e = r.actorId;
 														if (typeof e != "number" || e % 1 || isNaN(e) || !isFinite(e)) return n.errors = [{
-															instancePath: t + "/pages/" + i + "/conditions/enemyValid",
-															schemaPath: "#/properties/pages/items/properties/conditions/properties/enemyValid/type",
+															instancePath: t + "/pages/" + i + "/conditions/actorId",
+															schemaPath: "#/properties/pages/items/properties/conditions/properties/actorId/type",
 															keyword: "type",
 															params: { type: "integer" },
 															message: "must be integer"
 														}], !1;
 														if (typeof e == "number" && isFinite(e) && (e < 0 || isNaN(e))) return n.errors = [{
-															instancePath: t + "/pages/" + i + "/conditions/enemyValid",
-															schemaPath: "#/properties/pages/items/properties/conditions/properties/enemyValid/minimum",
+															instancePath: t + "/pages/" + i + "/conditions/actorId",
+															schemaPath: "#/properties/pages/items/properties/conditions/properties/actorId/minimum",
 															keyword: "minimum",
 															params: {
 																comparison: ">=",
@@ -3215,27 +3194,147 @@ var r = t(((e, t) => {
 														}], !1;
 														c = !0;
 													} else c = !0;
-													if (c) if (r.switchValid !== void 0) {
-														let e = r.switchValid;
-														if (typeof e != "number" || e % 1 || isNaN(e) || !isFinite(e)) return n.errors = [{
-															instancePath: t + "/pages/" + i + "/conditions/switchValid",
-															schemaPath: "#/properties/pages/items/properties/conditions/properties/switchValid/type",
-															keyword: "type",
-															params: { type: "integer" },
-															message: "must be integer"
-														}], !1;
-														if (typeof e == "number" && isFinite(e) && (e < 0 || isNaN(e))) return n.errors = [{
-															instancePath: t + "/pages/" + i + "/conditions/switchValid",
-															schemaPath: "#/properties/pages/items/properties/conditions/properties/switchValid/minimum",
-															keyword: "minimum",
-															params: {
-																comparison: ">=",
-																limit: 0
-															},
-															message: "must be >= 0"
-														}], !1;
-														c = !0;
-													} else c = !0;
+													if (c) {
+														if (r.enemyValid !== void 0) {
+															if (typeof r.enemyValid != "boolean") return n.errors = [{
+																instancePath: t + "/pages/" + i + "/conditions/enemyValid",
+																schemaPath: "#/properties/pages/items/properties/conditions/properties/enemyValid/type",
+																keyword: "type",
+																params: { type: "boolean" },
+																message: "must be boolean"
+															}], !1;
+															c = !0;
+														} else c = !0;
+														if (c) {
+															if (r.enemyIndex !== void 0) {
+																let e = r.enemyIndex;
+																if (typeof e != "number" || e % 1 || isNaN(e) || !isFinite(e)) return n.errors = [{
+																	instancePath: t + "/pages/" + i + "/conditions/enemyIndex",
+																	schemaPath: "#/properties/pages/items/properties/conditions/properties/enemyIndex/type",
+																	keyword: "type",
+																	params: { type: "integer" },
+																	message: "must be integer"
+																}], !1;
+																if (typeof e == "number" && isFinite(e) && (e < 0 || isNaN(e))) return n.errors = [{
+																	instancePath: t + "/pages/" + i + "/conditions/enemyIndex",
+																	schemaPath: "#/properties/pages/items/properties/conditions/properties/enemyIndex/minimum",
+																	keyword: "minimum",
+																	params: {
+																		comparison: ">=",
+																		limit: 0
+																	},
+																	message: "must be >= 0"
+																}], !1;
+																c = !0;
+															} else c = !0;
+															if (c) {
+																if (r.enemyHp !== void 0) {
+																	let e = r.enemyHp;
+																	if (typeof e != "number" || e % 1 || isNaN(e) || !isFinite(e)) return n.errors = [{
+																		instancePath: t + "/pages/" + i + "/conditions/enemyHp",
+																		schemaPath: "#/properties/pages/items/properties/conditions/properties/enemyHp/type",
+																		keyword: "type",
+																		params: { type: "integer" },
+																		message: "must be integer"
+																	}], !1;
+																	if (typeof e == "number" && isFinite(e) && (e < 0 || isNaN(e))) return n.errors = [{
+																		instancePath: t + "/pages/" + i + "/conditions/enemyHp",
+																		schemaPath: "#/properties/pages/items/properties/conditions/properties/enemyHp/minimum",
+																		keyword: "minimum",
+																		params: {
+																			comparison: ">=",
+																			limit: 0
+																		},
+																		message: "must be >= 0"
+																	}], !1;
+																	c = !0;
+																} else c = !0;
+																if (c) {
+																	if (r.switchValid !== void 0) {
+																		if (typeof r.switchValid != "boolean") return n.errors = [{
+																			instancePath: t + "/pages/" + i + "/conditions/switchValid",
+																			schemaPath: "#/properties/pages/items/properties/conditions/properties/switchValid/type",
+																			keyword: "type",
+																			params: { type: "boolean" },
+																			message: "must be boolean"
+																		}], !1;
+																		c = !0;
+																	} else c = !0;
+																	if (c) {
+																		if (r.switchId !== void 0) {
+																			let e = r.switchId;
+																			if (typeof e != "number" || e % 1 || isNaN(e) || !isFinite(e)) return n.errors = [{
+																				instancePath: t + "/pages/" + i + "/conditions/switchId",
+																				schemaPath: "#/properties/pages/items/properties/conditions/properties/switchId/type",
+																				keyword: "type",
+																				params: { type: "integer" },
+																				message: "must be integer"
+																			}], !1;
+																			if (typeof e == "number" && isFinite(e) && (e < 0 || isNaN(e))) return n.errors = [{
+																				instancePath: t + "/pages/" + i + "/conditions/switchId",
+																				schemaPath: "#/properties/pages/items/properties/conditions/properties/switchId/minimum",
+																				keyword: "minimum",
+																				params: {
+																					comparison: ">=",
+																					limit: 0
+																				},
+																				message: "must be >= 0"
+																			}], !1;
+																			c = !0;
+																		} else c = !0;
+																		if (c) {
+																			if (r.turnEnding !== void 0) {
+																				if (typeof r.turnEnding != "boolean") return n.errors = [{
+																					instancePath: t + "/pages/" + i + "/conditions/turnEnding",
+																					schemaPath: "#/properties/pages/items/properties/conditions/properties/turnEnding/type",
+																					keyword: "type",
+																					params: { type: "boolean" },
+																					message: "must be boolean"
+																				}], !1;
+																				c = !0;
+																			} else c = !0;
+																			if (c) {
+																				if (r.turnValid !== void 0) {
+																					if (typeof r.turnValid != "boolean") return n.errors = [{
+																						instancePath: t + "/pages/" + i + "/conditions/turnValid",
+																						schemaPath: "#/properties/pages/items/properties/conditions/properties/turnValid/type",
+																						keyword: "type",
+																						params: { type: "boolean" },
+																						message: "must be boolean"
+																					}], !1;
+																					c = !0;
+																				} else c = !0;
+																				if (c) {
+																					if (r.turnA !== void 0) {
+																						let e = r.turnA;
+																						if (typeof e != "number" || e % 1 || isNaN(e) || !isFinite(e)) return n.errors = [{
+																							instancePath: t + "/pages/" + i + "/conditions/turnA",
+																							schemaPath: "#/properties/pages/items/properties/conditions/properties/turnA/type",
+																							keyword: "type",
+																							params: { type: "integer" },
+																							message: "must be integer"
+																						}], !1;
+																						c = !0;
+																					} else c = !0;
+																					if (c) if (r.turnB !== void 0) {
+																						let e = r.turnB;
+																						if (typeof e != "number" || e % 1 || isNaN(e) || !isFinite(e)) return n.errors = [{
+																							instancePath: t + "/pages/" + i + "/conditions/turnB",
+																							schemaPath: "#/properties/pages/items/properties/conditions/properties/turnB/type",
+																							keyword: "type",
+																							params: { type: "integer" },
+																							message: "must be integer"
+																						}], !1;
+																						c = !0;
+																					} else c = !0;
+																				}
+																			}
+																		}
+																	}
+																}
+															}
+														}
+													}
 												}
 											}
 										}
