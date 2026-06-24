@@ -1,5 +1,8 @@
+import type { Rmmz_Action_Constructor } from "@RpgTypes/rmmzRuntime";
+
+export declare var Game_Action: Rmmz_Action_Constructor;
+
 export {
-  Game_Action,
   Game_Actors,
   Game_Enemy,
   Game_Interpreter,
