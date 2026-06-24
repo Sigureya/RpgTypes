@@ -2,19 +2,28 @@ import { describe, expect, test, vi } from "vitest";
 import type { Data_Skill } from "@RpgTypes/rmmz/rpg";
 import {
   makeSkillData,
+  SCOPE_EACH_OPPONENT,
+  SCOPE_TARGET_ALIVE_FRIEND,
   SCOPE_TARGET_OPPONENT,
   scopeForUser,
-  scopeIsForOne,
-  scopeNeedsSelection,
-  scopeIsForOpponent,
-  scopeIsForFriend,
-  scopeIsForDeadFriend,
   scopeIsForAliveFriend,
+  scopeIsForDeadFriend,
   scopeIsForEveryone,
+  scopeIsForFriend,
+  scopeIsForOne,
+  scopeIsForOpponent,
+  scopeNeedsSelection,
 } from "@RpgTypes/rmmz/rpg";
-import type { Rmmz_Action_TargetTrait } from "@RpgTypes/rmmzRuntime/objects/core/battle/action/trait";
+import type {
+  Rmmz_Action,
+  Rmmz_Action_TargetTrait,
+} from "@RpgTypes/rmmzRuntime";
 import { Game_Action } from "./rmmz_objects";
 
+interface FackActor {
+  isActor: () => boolean;
+  actorId: () => number;
+}
 interface TestCase {
   skill: Data_Skill;
   trait: Record<keyof Rmmz_Action_TargetTrait, boolean>;
@@ -24,11 +33,11 @@ const runTestCase = (testCase: TestCase) => {
   describe(`Skill: ${testCase.skill.name}`, () => {
     describe("Rmmz_Action_TargetTrait", () => {
       vi.stubGlobal("$dataSkills", [null, testCase.skill]);
-      const fackActor = {
+      const fackActor: FackActor = {
         isActor: () => true,
         actorId: () => 1,
       };
-      const action = new Game_Action(fackActor);
+      const action: Rmmz_Action<FackActor> = new Game_Action(fackActor);
       vi.spyOn(action, "item").mockReturnValue(testCase.skill);
       test("isForUser", () => {
         expect(action.isForUser()).toBe(testCase.trait.isForUser);
@@ -106,6 +115,42 @@ const testCases: TestCase[] = [
       isForFriend: false,
       isForEveryone: false,
       isForAliveFriend: false,
+      isForAll: false,
+      isForDeadFriend: false,
+      isForUser: false,
+      isForOne: true,
+      isForRandom: false,
+    },
+  },
+  {
+    skill: makeSkillData({
+      name: "scope each opponent",
+      scope: SCOPE_EACH_OPPONENT,
+    }),
+    trait: {
+      needsSelection: false,
+      isForOpponent: true,
+      isForFriend: false,
+      isForEveryone: false,
+      isForAliveFriend: false,
+      isForAll: false,
+      isForDeadFriend: false,
+      isForUser: false,
+      isForOne: false,
+      isForRandom: false,
+    },
+  },
+  {
+    skill: makeSkillData({
+      name: "scopeForFriend",
+      scope: SCOPE_TARGET_ALIVE_FRIEND,
+    }),
+    trait: {
+      needsSelection: true,
+      isForOpponent: false,
+      isForFriend: true,
+      isForEveryone: false,
+      isForAliveFriend: true,
       isForAll: false,
       isForDeadFriend: false,
       isForUser: false,
