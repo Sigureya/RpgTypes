@@ -29,36 +29,59 @@ interface TestCase {
   trait: Record<keyof Rmmz_Action_TargetTrait, boolean>;
 }
 
+const createAction = (skill: Data_Skill) => {
+  const fackActor: FackActor = {
+    isActor: () => true,
+    actorId: () => 1,
+  };
+  const action: Rmmz_Action<FackActor> = new Game_Action(fackActor);
+  vi.spyOn(action, "item").mockReturnValue(skill);
+  return action;
+};
+
 const runTestCase = (testCase: TestCase) => {
   describe(`Skill: ${testCase.skill.name}`, () => {
     describe("Rmmz_Action_TargetTrait", () => {
       vi.stubGlobal("$dataSkills", [null, testCase.skill]);
-      const fackActor: FackActor = {
-        isActor: () => true,
-        actorId: () => 1,
-      };
-      const action: Rmmz_Action<FackActor> = new Game_Action(fackActor);
-      vi.spyOn(action, "item").mockReturnValue(testCase.skill);
       test("isForUser", () => {
+        const action = createAction(testCase.skill);
         expect(action.isForUser()).toBe(testCase.trait.isForUser);
       });
       test("isForOne", () => {
+        const action = createAction(testCase.skill);
         expect(action.isForOne()).toBe(testCase.trait.isForOne);
       });
       test("needsSelection", () => {
+        const action = createAction(testCase.skill);
         expect(action.needsSelection()).toBe(testCase.trait.needsSelection);
       });
       test("isForOpponent", () => {
+        const action = createAction(testCase.skill);
         expect(action.isForOpponent()).toBe(testCase.trait.isForOpponent);
       });
       test("isForFriend", () => {
+        const action = createAction(testCase.skill);
         expect(action.isForFriend()).toBe(testCase.trait.isForFriend);
       });
       test("isForDeadFriend", () => {
+        const action = createAction(testCase.skill);
         expect(action.isForDeadFriend()).toBe(testCase.trait.isForDeadFriend);
       });
       test("isForAliveFriend", () => {
+        const action = createAction(testCase.skill);
         expect(action.isForAliveFriend()).toBe(testCase.trait.isForAliveFriend);
+      });
+      test("isForAll", () => {
+        const action = createAction(testCase.skill);
+        expect(action.isForAll()).toBe(testCase.trait.isForAll);
+      });
+      test("isForEveryone", () => {
+        const action = createAction(testCase.skill);
+        expect(action.isForEveryone()).toBe(testCase.trait.isForEveryone);
+      });
+      test("isForRandom", () => {
+        const action = createAction(testCase.skill);
+        expect(action.isForRandom()).toBe(testCase.trait.isForRandom);
       });
     });
 
@@ -100,6 +123,7 @@ const runTestCase = (testCase: TestCase) => {
         );
       });
     });
+    vi.unstubAllGlobals();
   });
 };
 
@@ -133,7 +157,7 @@ const testCases: TestCase[] = [
       isForFriend: false,
       isForEveryone: false,
       isForAliveFriend: false,
-      isForAll: false,
+      isForAll: true,
       isForDeadFriend: false,
       isForUser: false,
       isForOne: false,
