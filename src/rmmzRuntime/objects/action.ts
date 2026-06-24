@@ -7,6 +7,7 @@ import type { Rmmz_Action, Rmmz_Battler, Rmmz_Unit } from "./core";
 
 declare global {
   class Game_Action implements Rmmz_Action {
+    constructor(subject: Rmmz_Battler);
     clear(): void;
     setSubject(subject: Rmmz_Battler): void;
     subject(): Rmmz_Battler;
