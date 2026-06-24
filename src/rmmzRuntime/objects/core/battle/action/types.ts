@@ -6,12 +6,14 @@ import type {
 import type { Rmmz_Action_Damage } from "./damage";
 import type { Rmmz_Action_ItemEffect } from "./itemEffect";
 import type { Rmmz_Action_Target } from "./target";
-import type { Rmmz_Action_Trait } from "./trait";
+import type { Rmmz_Action_DamageTrait } from "./trait";
+import type { Rmmz_Action_TargetTrait } from "./trait";
 
 export interface Rmmz_ActionBase<Battler, Team>
   extends
     Rmmz_Action_ItemEffect<Battler>,
-    Rmmz_Action_Trait,
+    Rmmz_Action_DamageTrait,
+    Rmmz_Action_TargetTrait,
     Rmmz_Action_Damage<Battler>,
     Rmmz_Action_Target<Battler, Team> {
   // initialize(subject: IBattler, forcing: boolean): void;
