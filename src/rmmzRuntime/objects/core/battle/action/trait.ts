@@ -1,5 +1,4 @@
-export interface Rmmz_Action_Trait {
-  checkItemScope(list: ReadonlyArray<number>): boolean;
+export interface Rmmz_Action_TargetTrait {
   isForOpponent(): boolean;
   isForFriend(): boolean;
   isForEveryone(): boolean;
@@ -10,7 +9,9 @@ export interface Rmmz_Action_Trait {
   isForRandom(): boolean;
   isForAll(): boolean;
   needsSelection(): boolean;
-  numTargets(): number;
+}
+
+export interface Rmmz_Action_DamageTrait {
   checkDamageType(list: ReadonlyArray<number>): boolean;
   isHpEffect(): boolean;
   isMpEffect(): boolean;

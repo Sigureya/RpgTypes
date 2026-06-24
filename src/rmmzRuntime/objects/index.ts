@@ -1,3 +1,4 @@
+export * from "./action";
 export * from "./actors";
 export * from "./core";
 export * from "./interpreter";
