@@ -12,7 +12,6 @@ import {
   scopeIsForAliveFriend,
   scopeIsForEveryone,
 } from "@RpgTypes/rmmz/rpg";
-import type { Rmmz_Action, Rmmz_Battler } from "@RpgTypes/rmmzRuntime";
 import type { Rmmz_Action_TargetTrait } from "@RpgTypes/rmmzRuntime/objects/core/battle/action/trait";
 import { Game_Action } from "./rmmz_objects";
 
@@ -29,9 +28,7 @@ const runTestCase = (testCase: TestCase) => {
         isActor: () => true,
         actorId: () => 1,
       };
-      const action: Rmmz_Action = new Game_Action(
-        fackActor as unknown as Rmmz_Battler,
-      );
+      const action = new Game_Action(fackActor);
       vi.spyOn(action, "item").mockReturnValue(testCase.skill);
       test("isForUser", () => {
         expect(action.isForUser()).toBe(testCase.trait.isForUser);
