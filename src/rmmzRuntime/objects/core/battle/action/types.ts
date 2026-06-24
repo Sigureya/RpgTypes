@@ -18,8 +18,6 @@ export interface Rmmz_ActionBase<Battler, Team>
     Rmmz_Action_Target<Battler, Team> {
   // initialize(subject: IBattler, forcing: boolean): void;
   clear(): void;
-  setSubject(subject: Battler): void;
-  subject(): Battler;
   friendsUnit(): Team;
   opponentsUnit(): Team;
   setEnemyAction(action: Enemy_Action): void;
