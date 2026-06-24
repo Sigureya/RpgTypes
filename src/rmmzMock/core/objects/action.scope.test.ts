@@ -2,18 +2,20 @@ import { describe, expect, test, vi } from "vitest";
 import type { Data_Skill } from "@RpgTypes/rmmz/rpg";
 import {
   makeSkillData,
-  SCOPE_EACH_OPPONENT,
-  SCOPE_TARGET_ALIVE_FRIEND,
   SCOPE_TARGET_OPPONENT,
-  SCOPE_EACH,
-  SCOPE_EACH_ALIVE_FRIEND,
-  SCOPE_EACH_DEAD_FRIEND,
-  SCOPE_EACH_FRIEND,
-  SCOPE_TARGET_DEAD_FRIEND,
+  SCOPE_EACH_OPPONENT,
   SCOPE_RANDOM_OPPONENT_1,
   SCOPE_RANDOM_OPPONENT_2,
   SCOPE_RANDOM_OPPONENT_3,
   SCOPE_RANDOM_OPPONENT_4,
+  SCOPE_TARGET_ALIVE_FRIEND,
+  SCOPE_EACH_ALIVE_FRIEND,
+  SCOPE_TARGET_DEAD_FRIEND,
+  SCOPE_EACH_DEAD_FRIEND,
+  SCOPE_SELF,
+  SCOPE_TARGET_FRIEND,
+  SCOPE_EACH_FRIEND,
+  SCOPE_EACH,
   scopeForUser,
   scopeIsForAliveFriend,
   scopeIsForDeadFriend,
@@ -92,6 +94,7 @@ const runTestCase = (testCase: TestCase) => {
         const action = createAction(testCase.skill);
         expect(action.isForRandom()).toBe(testCase.trait.isForRandom);
       });
+      vi.unstubAllGlobals();
     });
 
     describe("function", () => {
@@ -132,7 +135,6 @@ const runTestCase = (testCase: TestCase) => {
         );
       });
     });
-    //    vi.unstubAllGlobals();
   });
 };
 
@@ -265,6 +267,24 @@ const testCases: TestCase[] = [
   },
   {
     skill: makeSkillData({
+      name: "scopeTargetFriend",
+      scope: SCOPE_TARGET_FRIEND,
+    }),
+    trait: {
+      needsSelection: true,
+      isForOpponent: false,
+      isForFriend: true,
+      isForEveryone: false,
+      isForAliveFriend: false,
+      isForAll: false,
+      isForDeadFriend: false,
+      isForUser: false,
+      isForOne: true,
+      isForRandom: false,
+    },
+  },
+  {
+    skill: makeSkillData({
       name: "scopeForEachFriend",
       scope: SCOPE_EACH_FRIEND,
     }),
@@ -332,6 +352,24 @@ const testCases: TestCase[] = [
       isForDeadFriend: true,
       isForUser: false,
       isForOne: false,
+      isForRandom: false,
+    },
+  },
+  {
+    skill: makeSkillData({
+      name: `scopeForUser`,
+      scope: SCOPE_SELF,
+    }),
+    trait: {
+      needsSelection: false,
+      isForOpponent: false,
+      isForFriend: true,
+      isForEveryone: false,
+      isForAliveFriend: true,
+      isForAll: false,
+      isForDeadFriend: false,
+      isForUser: true,
+      isForOne: true,
       isForRandom: false,
     },
   },
