@@ -1,5 +1,5 @@
 export {
-  Game_Action,
+  Rmmz_Action as Game_Action,
   Game_Actors,
   Game_Enemy,
   Game_Interpreter,
