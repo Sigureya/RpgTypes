@@ -20,12 +20,13 @@ export const scopeForUser = (item: Data_UsableItem): boolean => {
   return item.scope === SCOPE_SELF;
 };
 
-export const scopeIsForOne = (item: Data_UsableItem): boolean => {
+export const scopeIsForOne = ({ scope }: Data_UsableItem): boolean => {
   return (
-    item.scope === SCOPE_TARGET_OPPONENT ||
-    item.scope === SCOPE_TARGET_ALIVE_FRIEND ||
-    item.scope === SCOPE_TARGET_DEAD_FRIEND ||
-    item.scope === SCOPE_TARGET_FRIEND
+    scope === SCOPE_TARGET_OPPONENT ||
+    scope === SCOPE_TARGET_ALIVE_FRIEND ||
+    scope === SCOPE_TARGET_DEAD_FRIEND ||
+    scope === SCOPE_TARGET_FRIEND ||
+    scope === SCOPE_RANDOM_OPPONENT_1
   );
 };
 
@@ -45,7 +46,8 @@ export const scopeIsForOpponent = ({ scope }: Data_UsableItem): boolean => {
     scope === SCOPE_RANDOM_OPPONENT_1 ||
     scope === SCOPE_RANDOM_OPPONENT_2 ||
     scope === SCOPE_RANDOM_OPPONENT_3 ||
-    scope === SCOPE_RANDOM_OPPONENT_4
+    scope === SCOPE_RANDOM_OPPONENT_4 ||
+    scope === SCOPE_EACH
   );
 };
 
@@ -56,7 +58,8 @@ export const scopeIsForFriend = ({ scope }: Data_UsableItem): boolean => {
     scope === SCOPE_TARGET_DEAD_FRIEND ||
     scope === SCOPE_EACH_DEAD_FRIEND ||
     scope === SCOPE_TARGET_FRIEND ||
-    scope === SCOPE_EACH_FRIEND
+    scope === SCOPE_EACH_FRIEND ||
+    scope === SCOPE_EACH
   );
 };
 
@@ -66,7 +69,9 @@ export const scopeIsForDeadFriend = ({ scope }: Data_UsableItem): boolean => {
 
 export const scopeIsForAliveFriend = ({ scope }: Data_UsableItem): boolean => {
   return (
-    scope === SCOPE_TARGET_ALIVE_FRIEND || scope === SCOPE_EACH_ALIVE_FRIEND
+    scope === SCOPE_TARGET_ALIVE_FRIEND ||
+    scope === SCOPE_EACH_ALIVE_FRIEND ||
+    scope === SCOPE_EACH
   );
 };
 
