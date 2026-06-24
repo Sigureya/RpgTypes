@@ -1,4 +1,4 @@
-export * from "./action/types";
+export * from "./action/index";
 export * from "./battler";
 export * from "./item";
 export * from "./unit";
