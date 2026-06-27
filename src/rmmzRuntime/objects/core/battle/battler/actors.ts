@@ -2,10 +2,6 @@ import type { Rmmz_Actor } from "./actor";
 
 export type Rmmz_Actors = Rmmz_ActorsTemplate<Rmmz_Actor>;
 
-export interface Rmmz_Actors_Constructor {
-  new (): Rmmz_Actors;
-}
-
 export interface Rmmz_ActorsReadonly<Actor> {
   actor(actorId: number): Actor | null;
 }
