@@ -96,5 +96,6 @@ declare global {
     updateInterpreter(): void;
     members(): Rmmz_Enemy[];
     setup(troopId: number): void;
+    _turnCount: number;
   }
 }
