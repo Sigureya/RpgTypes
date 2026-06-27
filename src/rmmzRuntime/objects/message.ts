@@ -1,5 +1,9 @@
 import type { Rmmz_Message } from "./core/message";
 
+export interface Rmmz_Message_Constructor {
+  new (): Rmmz_Message;
+}
+
 declare global {
   class Game_Message implements Rmmz_Message {
     clear(): void;

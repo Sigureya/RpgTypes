@@ -1,5 +1,12 @@
 import type { Rmmz_Variables, Rmmz_Switches } from "./core/variables";
 
+export interface Rmmz_Variables_Constructor {
+  new (): Rmmz_Variables;
+}
+export interface Rmmz_Switches_Constructor {
+  new (): Rmmz_Switches;
+}
+
 declare global {
   class Game_Variables implements Rmmz_Variables {
     clear(): void;
