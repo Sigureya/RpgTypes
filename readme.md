@@ -2,7 +2,9 @@ This plugin is a library to assist with plugin development for RPG Maker MZ.
 
 Since the text of the MIT License is identical in all cases, it is included only at the beginning.
 
-# MIT license Librarys
+# List of libraries used
+
+## MIT license Librarys
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of
 this software and associated documentation files (the "Software"), to deal in
@@ -22,19 +24,19 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
-## JSONSchema
+### JSONSchema
 
 jsonschema is licensed under MIT license.
 
 Copyright (C) 2012-2015 Tom de Grunt <tom@degrunt.nl>
 
-## ajv
+### ajv
 
 The MIT License (MIT)
 
 Copyright (c) 2015-2021 Evgeny Poberezkin
 
-## jsonpath-js
+### jsonpath-js
 
 The MIT License (MIT)
 
