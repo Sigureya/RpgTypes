@@ -18,6 +18,18 @@ import type {
   Rmmz_BattlerBase,
 } from "./core";
 
+export interface Rmmz_Enemy_Constructor {
+  new (enemyId: number, x: number, y: number): Rmmz_Enemy;
+}
+
+export interface Rmmz_Actor_Constructor {
+  new (actorId: number): Rmmz_Actor;
+}
+
+export interface Rmmz_Battler_Constructor {
+  new (): Rmmz_Battler;
+}
+
 declare global {
   class Game_BattlerBase implements Rmmz_BattlerBase {
     get tgr(): number;

@@ -15,6 +15,7 @@ export interface Rmmz_Unit<Battler = Rmmz_Battler>
 
 export interface Rmmz_Party extends Rmmz_Unit<Rmmz_Actor>, Rmmz_UnitPlayer {
   canInput(): boolean;
+  _actors: number[];
 }
 
 export interface Rmmz_Troop
@@ -25,4 +26,5 @@ export interface Rmmz_Troop
     Rmmz_BattleEventRunner {
   members(): Rmmz_Enemy[];
   setup(troopId: number): void;
+  _turnCount: number;
 }
