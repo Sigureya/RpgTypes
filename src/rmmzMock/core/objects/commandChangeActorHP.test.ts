@@ -10,6 +10,7 @@ import {
 } from "@RpgTypes/rmmz/eventCommand";
 import type {
   Rmmz_ActorsTemplate,
+  Rmmz_Party,
   Rmmz_Variables,
 } from "@RpgTypes/rmmzRuntime";
 import type { FakeActor, FakeMap } from "./fakes/types";
@@ -22,15 +23,15 @@ interface MakeMocksResult {
   mockBattler2: MockedObject<FakeActor>;
   mockActors: MockedActors;
   mockMap: FakeMap;
-  mockParty: Game_Party;
+  mockParty: Rmmz_Party;
   mockVariables: MockedObject<Rmmz_Variables>;
 }
 
-const expectPartyMembersCalled = (mockParty: Game_Party) => {
+const expectPartyMembersCalled = (mockParty: Rmmz_Party) => {
   expect(mockParty.members).toHaveBeenCalledTimes(1);
 };
 
-const expectPartyMembersNotCalled = (mockParty: Game_Party) => {
+const expectPartyMembersNotCalled = (mockParty: Rmmz_Party) => {
   expect(mockParty.members).not.toHaveBeenCalled();
 };
 
@@ -94,7 +95,7 @@ const makeMockActors = (actor: FakeActor[]): MockedActors => ({
   initialize: vi.fn(),
 });
 
-const makeMockParty = (actorIds: number[]): Game_Party => {
+const makeMockParty = (actorIds: number[]): Rmmz_Party => {
   const party = new Game_Party();
   party._actors = [...actorIds];
   vi.spyOn(party, "members");
@@ -147,7 +148,7 @@ interface TestCaseTemplate<Command> {
   command: Command;
   expected: Command;
   variableLiteral?: Record<number, number>;
-  members: (party: Game_Party) => void;
+  members: (party: Rmmz_Party) => void;
   actors: ActorsCalledWith;
   changeValue: (battlers: MockedObject<FakeActor>[]) => void;
   usingVariables: (v: MockedObject<Rmmz_Variables>) => void;
