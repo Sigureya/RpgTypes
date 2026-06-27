@@ -83,7 +83,7 @@ import type { Rmmz_Actor, Rmmz_Enemy } from "./core";
 import type { WaitMode } from "./core/interpreter/constants/types";
 import type { Rmmz_Interpreter } from "./core/types";
 
-export interface Rmmz_interpreterConstructor {
+export interface Rmmz_InterpreterConstructor {
   new (depth?: number): Rmmz_Interpreter;
 }
 
