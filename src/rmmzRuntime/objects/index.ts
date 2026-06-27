@@ -1,5 +1,6 @@
 export * from "./action";
 export * from "./actors";
+export * from "./battler";
 export * from "./core";
 export * from "./interpreter";
 export * from "./item";
