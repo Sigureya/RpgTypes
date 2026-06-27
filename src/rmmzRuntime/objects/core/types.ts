@@ -21,4 +21,6 @@ export interface Rmmz_Interpreter
   extends
     Rmmz_EventCommandRunner<EventCommand>,
     InterpreterMapper,
-    Rmmz_InterpreterBattler<Rmmz_Actor, Rmmz_Enemy> {}
+    Rmmz_InterpreterBattler<Rmmz_Actor, Rmmz_Enemy> {
+  character(id: number): unknown;
+}

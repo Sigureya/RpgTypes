@@ -83,6 +83,10 @@ import type { Rmmz_Actor, Rmmz_Enemy } from "./core";
 import type { WaitMode } from "./core/interpreter/constants/types";
 import type { Rmmz_Interpreter } from "./core/types";
 
+export interface Rmmz_interpreterConstructor {
+  new (depth?: number): Rmmz_Interpreter;
+}
+
 declare global {
   class Game_Interpreter implements Rmmz_Interpreter {
     constructor(depth?: number);
