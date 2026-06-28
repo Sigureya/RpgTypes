@@ -1,8 +1,10 @@
 import type { Trait } from "@RpgTypes/rmmz";
 import {
+  TRAIT_ATTACK_ELEMENT,
   TRAIT_DEBUFF_RATE,
   TRAIT_ELEMENT_RATE,
   TRAIT_PARAM,
+  TRAIT_STATE_RATE,
 } from "@RpgTypes/rmmz";
 
 export const traitParamRate = (
@@ -24,6 +26,14 @@ export const traitDebuffRate = (
   paramId: number,
 ): number => {
   return traitPi(traits, TRAIT_DEBUFF_RATE, paramId + 8);
+};
+
+export const stateRate = (traits: ReadonlyArray<Trait>, stateId: number) => {
+  return traitPi(traits, TRAIT_STATE_RATE, stateId);
+};
+
+export const traitAttackElements = (traits: ReadonlyArray<Trait>): number[] => {
+  return traitSet(traits, TRAIT_ATTACK_ELEMENT);
 };
 
 export const traitPi = (
@@ -62,4 +72,13 @@ export const traitSumAll = (
     }
     return sum;
   }, 0);
+};
+
+export const traitSet = (
+  traits: ReadonlyArray<Trait>,
+  code: number,
+): number[] => {
+  return traits
+    .filter((trait) => trait.code === code)
+    .map((trait) => trait.dataId);
 };
