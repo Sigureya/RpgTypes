@@ -4,9 +4,15 @@ export interface EventCommandUnknown {
   parameters: unknown[];
 }
 
+export interface EventCommanNoOperation extends EventCommandUnknown {
+  code: 0;
+  indent: number;
+  parameters: [];
+}
+
 export interface EventCommandLike<
   Code extends number,
-  Param extends unknown[] = unknown[]
+  Param extends unknown[] = unknown[],
 > extends EventCommandUnknown {
   code: Code;
   indent: number;
