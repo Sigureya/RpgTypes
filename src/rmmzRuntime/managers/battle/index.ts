@@ -16,5 +16,4 @@ export interface Rmmz_BattleManager
     Rmmz_BattleManager_State {
   _rewards: Battle_Reward;
   setup(troopId: number, canEscape: boolean, canLose: boolean): void;
-  setEventCallback(callback: () => void): void;
 }

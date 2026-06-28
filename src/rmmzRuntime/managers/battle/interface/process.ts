@@ -16,4 +16,5 @@ export interface Process {
   processEscape(): void;
   processVictory(): void;
   endBattle(result: BattleResult): void;
+  setEventCallback(callback: (result: BattleResult) => void): void;
 }
