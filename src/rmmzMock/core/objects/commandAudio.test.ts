@@ -22,7 +22,10 @@ import {
   makeCommandSaveBGM,
   makeCommandResumeBGM,
 } from "@RpgTypes/rmmz/eventCommand";
-import type { Rmmz_AudioManager } from "@RpgTypes/rmmzRuntime";
+import type {
+  Rmmz_AudioManager,
+  Rmmz_Interpreter,
+} from "@RpgTypes/rmmzRuntime";
 import type { Rmmz_System } from "@RpgTypes/rmmzRuntime/objects/core/system/system";
 import type { FakeMap } from "./fakes/types";
 import { Game_Interpreter } from "./rmmz_objects";
@@ -54,7 +57,7 @@ const makeMockedAudio = (): MockedObject<Rmmz_AudioManager> => ({
 });
 
 const makeMockedInterpreter = () => {
-  const keys: (keyof Game_Interpreter)[] = [
+  const keys: (keyof Rmmz_Interpreter)[] = [
     "command241",
     "command242",
     "command243",
@@ -74,7 +77,7 @@ const makeMockedInterpreter = () => {
 
 interface TestCase<T> {
   fn: keyof Rmmz_AudioManager;
-  commandFn: string & keyof Game_Interpreter;
+  commandFn: string & keyof Rmmz_Interpreter;
   command: T;
   makedCommand: T;
 }

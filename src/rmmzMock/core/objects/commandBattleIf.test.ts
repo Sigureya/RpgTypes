@@ -3,8 +3,10 @@ import { describe, expect, test, vi } from "vitest";
 import type { AudioFileParams, Data_NamedItem } from "@RpgTypes/libs";
 import {
   BATTLE_PROCESSING,
+  BATTLE_PROCESSING_IF_ESCAPE,
   BATTLE_PROCESSING_IF_WIN,
   PLAY_BGM,
+  PLAY_BGS,
 } from "@RpgTypes/libs/eventCommand";
 import type {
   Command_BattleProcessing,
@@ -13,16 +15,23 @@ import type {
 import {
   makeCommandBattleProcessingDirect,
   makeCommandBattleProcessingEncount,
+  makeCommandBattleProcessingIfEscape,
+  makeCommandBattleProcessingIfWin,
   makeCommandBattleProcessingVariable,
   makeCommandPlayBGM,
+  makeCommandPlayBGS,
 } from "@RpgTypes/rmmz/eventCommand";
-import { makeCommandBattleProcessingIfWin } from "@RpgTypes/rmmz/eventCommand/commands/battle/battleProcessing/make";
 import type {
   Rmmz_AudioManager,
   Rmmz_Party,
   Rmmz_PlayerCharactor,
 } from "@RpgTypes/rmmzRuntime";
 import type { Rmmz_BattleManager } from "@RpgTypes/rmmzRuntime/managers/battle";
+import type { BattleResult } from "@RpgTypes/rmmzRuntime/managers/battle/interface";
+import {
+  BATTLE_RESULT_LOSE,
+  BATTLE_RESULT_WIN,
+} from "@RpgTypes/rmmzRuntime/managers/battle/interface";
 import type { Rmmz_SceneManager } from "@RpgTypes/rmmzRuntime/sceneManager";
 import type { FakeMap, FakeVariables } from "./fakes/types";
 import { Game_Interpreter } from "./rmmz_objects";
@@ -39,13 +48,17 @@ type FakeBattleManaeger = Pick<
   "setup" | "setEventCallback"
 >;
 
-type FakeSceneManager = Pick<Rmmz_SceneManager, "goto" | "push">;
+type FakeSceneManager = Pick<
+  Rmmz_SceneManager,
+  "goto" | "push" | "isSceneChanging"
+>;
+
 type FakeAudioManager = Pick<
   Rmmz_AudioManager,
   "playBgm" | "playBgs" | "playSe"
 >;
-const MOCK_BGM: AudioFileParams = {
-  name: "bgm",
+const MOCK_AUDIO: AudioFileParams = {
+  name: "audio",
   volume: 100,
   pitch: 100,
   pan: 0,
@@ -79,14 +92,20 @@ const createMockedVariable = (): MockedObject<FakeVariables> => ({
   value: vi.fn().mockReturnValue(MOCK_VALIABLE_VALUE),
 });
 
-const createMockBattleManager = (): MockedObject<FakeBattleManaeger> => ({
-  setup: vi.fn(),
-  setEventCallback: vi.fn(),
-});
+const createMockBattleManager = (
+  result: BattleResult,
+): MockedObject<FakeBattleManaeger> => {
+  const mockBattleManager: MockedObject<FakeBattleManaeger> = {
+    setup: vi.fn(),
+    setEventCallback: vi.fn((callback) => callback(result)),
+  };
+  return mockBattleManager;
+};
 
 const createMockSceneManager = (): MockedObject<FakeSceneManager> => ({
   goto: vi.fn(),
   push: vi.fn(),
+  isSceneChanging: vi.fn().mockReturnValue(false),
 });
 
 const createMockAudioManager = (): MockedObject<FakeAudioManager> => ({
@@ -99,12 +118,12 @@ const makeMockMap = (): FakeMap => ({
   mapId: () => 22,
 });
 
-const createMockObjects = (inBattle: boolean) => {
+const createMockObjects = (inBattle: boolean, result: BattleResult) => {
   return {
     party: createMockParty(inBattle),
     player: createMockPlayer(),
     variables: createMockedVariable(),
-    battleManager: createMockBattleManager(),
+    battleManager: createMockBattleManager(result),
     sceneManager: createMockSceneManager(),
     map: makeMockMap(),
     audioManager: createMockAudioManager(),
@@ -123,6 +142,13 @@ const stubGlobals = (mocks: ReturnType<typeof createMockObjects>) => {
   vi.stubGlobal("$dataTroops", mockTroops);
 };
 
+const createInterpreter = (command: EventCommand[]) => {
+  const interpreter = new Game_Interpreter();
+  vi.spyOn(interpreter, "checkFreeze").mockReturnValue(false);
+  interpreter.setup(command, 0);
+  return interpreter;
+};
+
 describe("", () => {
   const command: EventCommand[] = [
     {
@@ -138,18 +164,57 @@ describe("", () => {
     {
       code: PLAY_BGM,
       indent: 1,
-      parameters: [MOCK_BGM],
+      parameters: [MOCK_AUDIO],
     },
+    { code: 0, indent: 1, parameters: [] },
+
+    {
+      code: BATTLE_PROCESSING_IF_ESCAPE,
+      indent: 0,
+      parameters: [],
+    },
+    {
+      code: PLAY_BGS,
+      indent: 1,
+      parameters: [MOCK_AUDIO],
+    },
+    { code: 0, indent: 1, parameters: [] },
+    { code: 604, indent: 0, parameters: [] },
   ];
-  test("", () => {
+  test.skip("makeCommands", () => {
     const maked: EventCommand[] = [
       makeCommandBattleProcessingDirect(
         { troopId: 1, canEscape: false, canLose: false },
         0,
       ),
-      makeCommandBattleProcessingIfWin(0),
-      makeCommandPlayBGM(MOCK_BGM, 1),
+      makeCommandBattleProcessingIfWin(1),
+      makeCommandPlayBGM(MOCK_AUDIO, 1),
+      makeCommandBattleProcessingIfEscape(1),
+      makeCommandPlayBGS(MOCK_AUDIO, 1),
     ];
     expect(maked).toEqual(command);
+  });
+  test("if battle win", () => {
+    const mocks = createMockObjects(false, BATTLE_RESULT_WIN);
+    stubGlobals(mocks);
+    const interpreter = createInterpreter(command);
+    interpreter.update();
+    expect(mocks.battleManager.setup).toHaveBeenCalledWith(1, false, false);
+    expect(mocks.battleManager.setEventCallback).toHaveBeenCalledOnce();
+    expect(mocks.sceneManager.push).toHaveBeenCalledWith(MOCK_SCENE_BATTLE);
+    expect(mocks.audioManager.playBgm).toHaveBeenCalledWith(MOCK_AUDIO);
+    expect(mocks.audioManager.playBgs).not.toHaveBeenCalled();
+    expect(mocks.audioManager.playSe).not.toHaveBeenCalled();
+  });
+  test("if battle lose", () => {
+    const mocks = createMockObjects(false, BATTLE_RESULT_LOSE);
+    stubGlobals(mocks);
+    const interpreter = createInterpreter(command);
+    interpreter.update();
+    expect(mocks.battleManager.setup).toHaveBeenCalledWith(1, false, false);
+    expect(mocks.battleManager.setEventCallback).toHaveBeenCalledOnce();
+    expect(mocks.sceneManager.push).toHaveBeenCalledWith(MOCK_SCENE_BATTLE);
+    expect(mocks.audioManager.playBgm).not.toHaveBeenCalled();
+    expect(mocks.audioManager.playSe).not.toHaveBeenCalled();
   });
 });

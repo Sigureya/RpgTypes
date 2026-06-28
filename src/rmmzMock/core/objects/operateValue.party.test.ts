@@ -16,7 +16,7 @@ import {
   makeCommandVariableFromPartySteps,
   makeCommandVariableFromWeapon,
 } from "@RpgTypes/rmmz/eventCommand";
-import type { Rmmz_Variables } from "@RpgTypes/rmmzRuntime";
+import type { Rmmz_Interpreter, Rmmz_Variables } from "@RpgTypes/rmmzRuntime";
 import type { FakeMap } from "./fakes/types";
 import type { Game_Party } from "./rmmz_objects";
 import { Game_Interpreter } from "./rmmz_objects";
@@ -85,7 +85,7 @@ const makeMockMap = (): FakeMap => ({
 
 const createMockedInterpreter = () => {
   const inter = new Game_Interpreter();
-  const keys: (keyof Game_Interpreter)[] = ["gameDataOperand"];
+  const keys: (keyof Rmmz_Interpreter)[] = ["gameDataOperand"];
   keys.forEach((key) => {
     vi.spyOn(inter, key);
   });
