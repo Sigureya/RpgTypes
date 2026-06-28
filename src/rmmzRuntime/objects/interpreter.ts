@@ -89,6 +89,9 @@ export interface Rmmz_InterpreterConstructor {
 
 declare global {
   class Game_Interpreter implements Rmmz_Interpreter {
+    command601(ifBattleWin: []): boolean;
+    command602(ifBattleEscape: []): boolean;
+    command603(ifBattleLose: []): boolean;
     constructor(depth?: number);
     checkOverflow(): void;
     clear(): void;

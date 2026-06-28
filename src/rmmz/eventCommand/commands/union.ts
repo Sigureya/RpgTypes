@@ -40,7 +40,10 @@ import type { Command_StopSE } from "./audio/stop";
 import type { Command_ShowBalloonIcon } from "./balloon/types";
 import type { Command_AbortBattle } from "./battle/abort/types";
 import type { Command_ChangeBattleBackground } from "./battle/background/types";
-import type { Command_BattleProcessing } from "./battle/battleProcessing/types";
+import type {
+  Command_BattleProcessing,
+  Command_BattleProcessing_If,
+} from "./battle/battleProcessing/types";
 import type { Command_ForceAction } from "./battle/forceAction/types/union";
 import type { Command_ShowBattleAnimation } from "./battle/showAnimation/types";
 import type { Command_ControlTimer } from "./controlTimer/types";
@@ -184,6 +187,7 @@ export type NormalizedEventCommand =
   | Command_ShowBalloonIcon
   | Command_ChangeBattleBackground
   | Command_BattleProcessing
+  | Command_BattleProcessing_If
   | Command_ControlTimer
   | Command_ChangeEnemyHP
   | Command_ChangeEnemyMP
