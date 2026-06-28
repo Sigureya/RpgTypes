@@ -27,8 +27,8 @@ import type {
   Command_StopSE,
 } from "./audio";
 import type { Command_ShowBalloonIcon } from "./balloon/types";
+import type { Command_BattleProcessing } from "./battle";
 import type { Command_ChangeBattleBackground } from "./battle/background/types";
-import type { Command_BattleProcessing } from "./battle/battleProcessing/types";
 import type { Command_ControlTimer } from "./controlTimer/types";
 import type { Command_ChangeEncounter } from "./encounter/types";
 import type {

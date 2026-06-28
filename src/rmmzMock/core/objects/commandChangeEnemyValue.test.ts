@@ -12,7 +12,11 @@ import {
   makeCommandLoseEnemyMP,
   makeCommandLoseEnemyTP,
 } from "@RpgTypes/rmmz/eventCommand/commands/enemy/change/make";
-import type { Rmmz_Unit, Rmmz_Variables } from "@RpgTypes/rmmzRuntime";
+import type {
+  Rmmz_Interpreter,
+  Rmmz_Unit,
+  Rmmz_Variables,
+} from "@RpgTypes/rmmzRuntime";
 import type { FakeBattler, FakeMap } from "./fakes/types";
 import { Game_Interpreter } from "./rmmz_objects";
 type CommandTypes =
@@ -22,7 +26,7 @@ type CommandTypes =
 
 const paramCalledWith = (
   command: CommandTypes,
-  interpreter: Game_Interpreter,
+  interpreter: Rmmz_Interpreter,
 ) => {
   expect(interpreter.iterateEnemyIndex).toHaveBeenCalledWith(
     command.parameters[0],
@@ -33,7 +37,7 @@ const paramCalledWith = (
     command.parameters[2],
     command.parameters[3],
   );
-  const key: keyof Game_Interpreter = `command${command.code}`;
+  const key: keyof Rmmz_Interpreter = `command${command.code}`;
   expect(interpreter[key]).toHaveBeenCalledWith(command.parameters);
 };
 

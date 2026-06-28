@@ -9,7 +9,10 @@ import {
   makeCommandShowMessageBody,
 } from "@RpgTypes/rmmz/eventCommand";
 import type { Rmmz_ImageManager } from "@RpgTypes/rmmzRuntime";
-import type { Rmmz_Message } from "@RpgTypes/rmmzRuntime/objects";
+import type {
+  Rmmz_Interpreter,
+  Rmmz_Message,
+} from "@RpgTypes/rmmzRuntime/objects";
 import type { FakeMap } from "./fakes/types";
 import { Game_Interpreter } from "./rmmz_objects";
 
@@ -18,7 +21,7 @@ const makeMockMap = (): FakeMap => ({
 });
 
 const makeMockedInterpreter = () => {
-  const keys: (keyof Game_Interpreter)[] = [
+  const keys: (keyof Rmmz_Interpreter)[] = [
     "command101",
     "nextEventCode",
     "loadImages",
@@ -86,21 +89,21 @@ interface TestCase {
 
 const messageToHaveBeenCalled = (
   command: Command_ShowMessageHeader,
-  mockedMessage: FakeMessage
+  mockedMessage: FakeMessage,
 ) => {
   expect(mockedMessage.isBusy).toHaveBeenCalled();
   expect(mockedMessage.setFaceImage).toHaveBeenCalledWith(
     command.parameters[0],
-    command.parameters[1]
+    command.parameters[1],
   );
   expect(mockedMessage.setBackground).toHaveBeenCalledWith(
-    command.parameters[2]
+    command.parameters[2],
   );
   expect(mockedMessage.setPositionType).toHaveBeenCalledWith(
-    command.parameters[3]
+    command.parameters[3],
   );
   expect(mockedMessage.setSpeakerName).toHaveBeenCalledWith(
-    command.parameters[4]
+    command.parameters[4],
   );
 };
 
@@ -144,7 +147,7 @@ describe("", () => {
     interpreter.setup([testCase.hedder, ...testCase.body], 0);
     expect(interpreter.loadImages).toHaveBeenCalledTimes(1);
     expect(imageManager.loadFace).toHaveBeenCalledWith(
-      testCase.hedder.parameters[0]
+      testCase.hedder.parameters[0],
     );
   });
 
@@ -161,7 +164,7 @@ describe("", () => {
     expect(result).toBe(true);
     messageToHaveBeenCalled(testCase.hedder, message);
     expect(interpreter.command101).toHaveBeenCalledWith(
-      testCase.hedder.parameters
+      testCase.hedder.parameters,
     );
 
     testCase.body.forEach((cmd) => {

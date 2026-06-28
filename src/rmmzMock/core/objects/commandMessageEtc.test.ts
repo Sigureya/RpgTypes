@@ -6,7 +6,10 @@ import type {
   ParamArray_SelectItem,
 } from "@RpgTypes/rmmz/eventCommand";
 import { makeCommandInputNumber } from "@RpgTypes/rmmz/eventCommand";
-import type { Rmmz_Message } from "@RpgTypes/rmmzRuntime/objects";
+import type {
+  Rmmz_Interpreter,
+  Rmmz_Message,
+} from "@RpgTypes/rmmzRuntime/objects";
 import { Game_Interpreter } from "./rmmz_objects";
 
 type FakeMessage = Pick<
@@ -15,7 +18,7 @@ type FakeMessage = Pick<
 >;
 
 const makeMockMessage = (
-  param: { busy?: boolean } = {}
+  param: { busy?: boolean } = {},
 ): MockedObject<FakeMessage> => ({
   isBusy: vi.fn(() => param.busy ?? false),
   setNumberInput: vi.fn(),
@@ -23,7 +26,7 @@ const makeMockMessage = (
 });
 
 const makeMockedInterpreter = () => {
-  const keys: (keyof Game_Interpreter)[] = [
+  const keys: (keyof Rmmz_Interpreter)[] = [
     "command103",
     "command104",
     "setupNumInput",

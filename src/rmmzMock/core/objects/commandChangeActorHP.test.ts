@@ -10,6 +10,7 @@ import {
 } from "@RpgTypes/rmmz/eventCommand";
 import type {
   Rmmz_ActorsTemplate,
+  Rmmz_Interpreter,
   Rmmz_Party,
   Rmmz_Variables,
 } from "@RpgTypes/rmmzRuntime";
@@ -37,7 +38,7 @@ const expectPartyMembersNotCalled = (mockParty: Rmmz_Party) => {
 
 const paramCalledWith = (
   command: Command_ChangeActorHP,
-  interpreter: Game_Interpreter,
+  interpreter: Rmmz_Interpreter,
 ) => {
   expect(interpreter.iterateActorEx).toHaveBeenCalledWith(
     command.parameters[0],
@@ -49,7 +50,7 @@ const paramCalledWith = (
     command.parameters[3],
     command.parameters[4],
   );
-  const key: keyof Game_Interpreter = `command${command.code}` as const;
+  const key: keyof Rmmz_Interpreter = `command${command.code}` as const;
   expect(interpreter[key]).toHaveBeenCalledWith(command.parameters);
 };
 

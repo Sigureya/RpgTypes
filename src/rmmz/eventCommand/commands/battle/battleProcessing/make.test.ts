@@ -6,11 +6,11 @@ import {
   makeCommandBattleProcessingVariable,
 } from "./make";
 import type {
+  ParamObject_BattleProcessing_Direct,
   Command_BattleProcessing,
+  ParamObject_BattleProcessing_Variable,
   Command_BattleProcessing_Variable,
   ParamObject_BattleBase,
-  ParamObject_BattleProcessing_Direct,
-  ParamObject_BattleProcessing_Variable,
 } from "./types";
 
 describe("makeCommandBattleProcessingDirect", () => {

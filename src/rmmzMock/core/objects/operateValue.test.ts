@@ -7,7 +7,7 @@ import {
   OPERATION_SET,
 } from "@RpgTypes/rmmz/eventCommand";
 import type { Command_ControlVariables } from "@RpgTypes/rmmz/eventCommand/commands/variable/unionType";
-import type { Rmmz_Variables } from "@RpgTypes/rmmzRuntime";
+import type { Rmmz_Interpreter, Rmmz_Variables } from "@RpgTypes/rmmzRuntime";
 import type { FakeMap } from "./fakes/types";
 import { Game_Interpreter } from "./rmmz_objects";
 
@@ -28,7 +28,7 @@ const makeMockMap = (): FakeMap => ({
 
 const createMockedInterpreter = () => {
   const inter = new Game_Interpreter();
-  const keys: (keyof Game_Interpreter)[] = ["gameDataOperand"];
+  const keys: (keyof Rmmz_Interpreter)[] = ["gameDataOperand"];
   keys.forEach((key) => {
     vi.spyOn(inter, key);
   });
