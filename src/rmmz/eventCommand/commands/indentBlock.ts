@@ -136,10 +136,12 @@ const makeBlockWithHead = <
   if (last.code === NO_OPERATION) {
     return [head, block];
   }
-  return [head, block, makeNope(head.indent)];
+  return [head, block, makeCommandNoOperation(head.indent)];
 };
 
-const makeNope = (indent: number): EventCommanNoOperation => {
+export const makeCommandNoOperation = (
+  indent: number,
+): EventCommanNoOperation => {
   return {
     code: NO_OPERATION,
     indent,
