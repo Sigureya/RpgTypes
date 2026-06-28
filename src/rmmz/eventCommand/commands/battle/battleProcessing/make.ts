@@ -1,3 +1,8 @@
+import {
+  BATTLE_PROCESSING_IF_ESCAPE,
+  BATTLE_PROCESSING_IF_LOSE,
+  BATTLE_PROCESSING_IF_WIN,
+} from "@RpgTypes/libs/eventCommand";
 import { BATTLE_PROCESSING } from "@RpgTypes/libs/eventCommand";
 import { BATTLE_DIRECT, BATTLE_ENCOUNT, BATTLE_VARIABLE } from "./constants";
 import type {
@@ -8,6 +13,7 @@ import type {
   ParamArray_BattleProcessing_Direct,
   ParamArray_BattleProcessing_Encount,
   Command_BattleProcessing_Variable,
+  Command_BattleProcessing_If,
 } from "./types";
 
 export const isCommandBattleProcessingVariable = (
@@ -59,4 +65,28 @@ export const makeCommandBattleProcessingEncount = (
     canEscape,
     canLose,
   ] satisfies ParamArray_BattleProcessing_Encount,
+});
+
+export const makeCommandBattleProcessingIfWin = (
+  indent: number = 0,
+): Command_BattleProcessing_If => ({
+  code: BATTLE_PROCESSING_IF_WIN,
+  indent: indent,
+  parameters: [],
+});
+
+export const makeCommandBattleProcessingIfEscape = (
+  indent: number = 0,
+): Command_BattleProcessing_If => ({
+  code: BATTLE_PROCESSING_IF_ESCAPE,
+  indent: indent,
+  parameters: [],
+});
+
+export const makeCommandBattleProcessingIfLose = (
+  indent: number = 0,
+): Command_BattleProcessing_If => ({
+  code: BATTLE_PROCESSING_IF_LOSE,
+  indent: indent,
+  parameters: [],
 });

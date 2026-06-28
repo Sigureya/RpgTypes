@@ -85,6 +85,9 @@ export const CHANGE_PARALLAX = 284 as const;
 export const GET_LOCATION_INFO = 285 as const;
 
 export const BATTLE_PROCESSING = 301 as const;
+export const BATTLE_PROCESSING_IF_WIN = 601 as const;
+export const BATTLE_PROCESSING_IF_ESCAPE = 602 as const;
+export const BATTLE_PROCESSING_IF_LOSE = 603 as const;
 
 export const SHOP_PROCESSING = 302 as const;
 export const SHOP_PROCESSING_BODY = 605 as const;
