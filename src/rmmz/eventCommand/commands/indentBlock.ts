@@ -7,6 +7,12 @@ import type {
   Command_BattleProcessing,
   Command_BattleProcessing_Variable,
 } from "./battle";
+import {
+  makeCommandBattleProcessingIfEscape,
+  makeCommandBattleProcessingIfLose,
+  makeCommandBattleProcessingIfWin,
+} from "./battle/battleProcessing/make";
+import type { Command_BattleProcessing_If } from "./battle/battleProcessing/types";
 import type { CommnandUnion_Branch } from "./flow/branch/types/command";
 import type { Command_BranchElse } from "./flow/branch/types/else";
 import type {
@@ -22,9 +28,9 @@ export interface ChoiceThenBlock<Command extends EventCommandUnknown> {
 }
 
 export interface BattleBlocks<Command extends EventCommandUnknown> {
-  escape: Command[];
-  lose: Command[];
-  win: Command[];
+  escape?: Command[];
+  lose?: Command[];
+  win?: Command[];
 }
 
 export const makeComamndBlockBranch = <Command extends EventCommandUnknown>(
@@ -48,10 +54,37 @@ export const makeCommandBracnhElse = (indent: number): Command_BranchElse => {
   };
 };
 
-const makeCommandBlockByBattle = <Command extends EventCommandUnknown>(
+export const makeCommandBlockByBattle = <Command extends EventCommandUnknown>(
   battle: Command_BattleProcessing | Command_BattleProcessing_Variable,
   blocks: BattleBlocks<Command>,
-) => {};
+): (
+  | Command
+  | Command_BattleProcessing
+  | Command_BattleProcessing_Variable
+  | Command_BattleProcessing_If
+  | EventCommanNoOperation
+)[] => {
+  const win = blocks.win
+    ? makeBlockWithHead(
+        makeCommandBattleProcessingIfWin(battle.indent),
+        blocks.win,
+      )
+    : [];
+  const escape = blocks.escape
+    ? makeBlockWithHead(
+        makeCommandBattleProcessingIfEscape(battle.indent),
+        blocks.escape,
+      )
+    : [];
+  const lose = blocks.lose
+    ? makeBlockWithHead(
+        makeCommandBattleProcessingIfLose(battle.indent),
+        blocks.lose,
+      )
+    : [];
+
+  return [battle, win, escape, lose].flat(2);
+};
 
 export const makeCommandBlockChoice = <Command extends EventCommandUnknown>(
   indent: number,
@@ -74,7 +107,7 @@ export const makeCommandBlockChoice = <Command extends EventCommandUnknown>(
     },
     indent,
   );
-  return [c, ...xxx(indent, choices), makeNope(indent)];
+  return [c, ...xxx(indent, choices)];
 };
 
 const xxx = <T extends EventCommandUnknown>(
@@ -87,6 +120,23 @@ const xxx = <T extends EventCommandUnknown>(
       ...c.thenBlock,
     ];
   });
+};
+
+const makeBlockWithHead = <
+  Head extends EventCommandUnknown,
+  Command extends EventCommandUnknown,
+>(
+  head: Head,
+  block: readonly Command[],
+): (readonly Command[] | Head | EventCommanNoOperation)[] => {
+  if (block.length === 0) {
+    return [head];
+  }
+  const last = block[block.length - 1];
+  if (last.code === NO_OPERATION) {
+    return [head, block];
+  }
+  return [head, block, makeNope(head.indent)];
 };
 
 const makeNope = (indent: number): EventCommanNoOperation => {
