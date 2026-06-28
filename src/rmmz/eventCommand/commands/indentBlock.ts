@@ -5,6 +5,7 @@ import type {
 import { CONDITIONAL_BRANCH_ELSE, NO_OPERATION } from "@RpgTypes/libs";
 import type {
   Command_BattleProcessing,
+  Command_BattleProcessing_If,
   Command_BattleProcessing_Variable,
 } from "./battle";
 import {
@@ -12,7 +13,6 @@ import {
   makeCommandBattleProcessingIfLose,
   makeCommandBattleProcessingIfWin,
 } from "./battle/battleProcessing/make";
-import type { Command_BattleProcessing_If } from "./battle/battleProcessing/types";
 import type { CommnandUnion_Branch } from "./flow/branch/types/command";
 import type { Command_BranchElse } from "./flow/branch/types/else";
 import type {

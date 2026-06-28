@@ -11,7 +11,7 @@ import type {
   ParamObject_BattleBase,
   ParamObject_BattleProcessing_Direct,
   ParamObject_BattleProcessing_Variable,
-} from "./types";
+} from "./types2/startBattle";
 
 describe("makeCommandBattleProcessingDirect", () => {
   const params: ParamObject_BattleProcessing_Direct = {

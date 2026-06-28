@@ -1,18 +1,18 @@
 import {
+  BATTLE_PROCESSING,
+  BATTLE_PROCESSING_IF_WIN,
   BATTLE_PROCESSING_IF_ESCAPE,
   BATTLE_PROCESSING_IF_LOSE,
-  BATTLE_PROCESSING_IF_WIN,
-} from "@RpgTypes/libs/eventCommand";
-import { BATTLE_PROCESSING } from "@RpgTypes/libs/eventCommand";
-import { BATTLE_DIRECT, BATTLE_ENCOUNT, BATTLE_VARIABLE } from "./constants";
+} from "@RpgTypes/libs";
+import { BATTLE_VARIABLE, BATTLE_DIRECT, BATTLE_ENCOUNT } from "./constants";
 import type {
-  ParamObject_BattleProcessing_Direct,
   Command_BattleProcessing,
+  Command_BattleProcessing_Variable,
+  ParamObject_BattleProcessing_Direct,
+  ParamArray_BattleProcessing_Direct,
   ParamObject_BattleProcessing_Variable,
   ParamObject_BattleBase,
-  ParamArray_BattleProcessing_Direct,
   ParamArray_BattleProcessing_Encount,
-  Command_BattleProcessing_Variable,
   Command_BattleProcessing_If,
 } from "./types";
 
