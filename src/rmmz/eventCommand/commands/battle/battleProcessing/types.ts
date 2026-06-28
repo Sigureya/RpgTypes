@@ -1,12 +1,21 @@
 import type {
   EventCommandLike,
   BATTLE_PROCESSING,
+  BATTLE_PROCESSING_IF_ESCAPE,
+  BATTLE_PROCESSING_IF_LOSE,
+  BATTLE_PROCESSING_IF_WIN,
 } from "@RpgTypes/libs/eventCommand";
 import type {
   BATTLE_DIRECT,
   BATTLE_ENCOUNT,
   BATTLE_VARIABLE,
 } from "./constants";
+
+export interface Command_BattleProcessing_If extends EventCommandLike<
+  | typeof BATTLE_PROCESSING_IF_WIN
+  | typeof BATTLE_PROCESSING_IF_ESCAPE
+  | typeof BATTLE_PROCESSING_IF_LOSE
+> {}
 
 export interface Command_BattleProcessing extends EventCommandLike<
   typeof BATTLE_PROCESSING
