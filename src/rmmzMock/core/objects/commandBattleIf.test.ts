@@ -4,23 +4,22 @@ import type { AudioFileParams, Data_NamedItem } from "@RpgTypes/libs";
 import {
   BATTLE_PROCESSING,
   BATTLE_PROCESSING_IF_ESCAPE,
+  BATTLE_PROCESSING_IF_LOSE,
   BATTLE_PROCESSING_IF_WIN,
   PLAY_BGM,
   PLAY_BGS,
+  PLAY_SE,
 } from "@RpgTypes/libs/eventCommand";
-import type {
-  Command_BattleProcessing,
-  EventCommand,
-} from "@RpgTypes/rmmz/eventCommand";
+import type { EventCommand } from "@RpgTypes/rmmz/eventCommand";
 import {
   makeCommandBattleProcessingBlockEnd,
   makeCommandBattleProcessingDirect,
-  makeCommandBattleProcessingEncount,
   makeCommandBattleProcessingIfEscape,
+  makeCommandBattleProcessingIfLose,
   makeCommandBattleProcessingIfWin,
-  makeCommandBattleProcessingVariable,
   makeCommandPlayBGM,
   makeCommandPlayBGS,
+  makeCommandPlaySE,
 } from "@RpgTypes/rmmz/eventCommand";
 import { makeCommandNoOperation } from "@RpgTypes/rmmz/eventCommand/commands/indentBlock";
 import type {
@@ -31,6 +30,7 @@ import type {
 import type { Rmmz_BattleManager } from "@RpgTypes/rmmzRuntime/managers/battle";
 import type { BattleResult } from "@RpgTypes/rmmzRuntime/managers/battle/interface";
 import {
+  BATTLE_RESULT_ESCAPE,
   BATTLE_RESULT_LOSE,
   BATTLE_RESULT_WIN,
 } from "@RpgTypes/rmmzRuntime/managers/battle/interface";
@@ -160,6 +160,9 @@ describe("commandBattleProcessing", () => {
     { code: BATTLE_PROCESSING_IF_ESCAPE, indent: 0, parameters: [] },
     { code: PLAY_BGS, indent: 1, parameters: [MOCK_AUDIO] },
     { code: 0, indent: 1, parameters: [] },
+    { code: BATTLE_PROCESSING_IF_LOSE, indent: 0, parameters: [] },
+    { code: PLAY_SE, indent: 1, parameters: [MOCK_AUDIO] },
+    { code: 0, indent: 1, parameters: [] },
     { code: 604, indent: 0, parameters: [] },
   ];
   test("makeCommands", () => {
@@ -174,6 +177,9 @@ describe("commandBattleProcessing", () => {
       makeCommandBattleProcessingIfEscape(0),
       makeCommandPlayBGS(MOCK_AUDIO, 1),
       makeCommandNoOperation(1),
+      makeCommandBattleProcessingIfLose(0),
+      makeCommandPlaySE(MOCK_AUDIO, 1),
+      makeCommandNoOperation(1),
       makeCommandBattleProcessingBlockEnd(0),
     ];
     expect(maked).toEqual(command);
@@ -186,8 +192,22 @@ describe("commandBattleProcessing", () => {
     expect(mocks.battleManager.setup).toHaveBeenCalledWith(1, false, false);
     expect(mocks.battleManager.setEventCallback).toHaveBeenCalledOnce();
     expect(mocks.sceneManager.push).toHaveBeenCalledWith(MOCK_SCENE_BATTLE);
+    expect(mocks.audioManager.playBgm).toHaveBeenCalledOnce();
     expect(mocks.audioManager.playBgm).toHaveBeenCalledWith(MOCK_AUDIO);
     expect(mocks.audioManager.playBgs).not.toHaveBeenCalled();
+    expect(mocks.audioManager.playSe).not.toHaveBeenCalled();
+  });
+  test("if battle escape", () => {
+    const mocks = createMockObjects(false, BATTLE_RESULT_ESCAPE);
+    stubGlobals(mocks);
+    const interpreter = createInterpreter(command);
+    interpreter.update();
+    expect(mocks.battleManager.setup).toHaveBeenCalledWith(1, false, false);
+    expect(mocks.battleManager.setEventCallback).toHaveBeenCalledOnce();
+    expect(mocks.sceneManager.push).toHaveBeenCalledWith(MOCK_SCENE_BATTLE);
+    expect(mocks.audioManager.playBgs).toHaveBeenCalledOnce();
+    expect(mocks.audioManager.playBgs).toHaveBeenCalledWith(MOCK_AUDIO);
+    expect(mocks.audioManager.playBgm).not.toHaveBeenCalled();
     expect(mocks.audioManager.playSe).not.toHaveBeenCalled();
   });
   test("if battle lose", () => {
@@ -198,7 +218,9 @@ describe("commandBattleProcessing", () => {
     expect(mocks.battleManager.setup).toHaveBeenCalledWith(1, false, false);
     expect(mocks.battleManager.setEventCallback).toHaveBeenCalledOnce();
     expect(mocks.sceneManager.push).toHaveBeenCalledWith(MOCK_SCENE_BATTLE);
+    expect(mocks.audioManager.playSe).toHaveBeenCalledOnce();
+    expect(mocks.audioManager.playSe).toHaveBeenCalledWith(MOCK_AUDIO);
     expect(mocks.audioManager.playBgm).not.toHaveBeenCalled();
-    expect(mocks.audioManager.playSe).not.toHaveBeenCalled();
+    expect(mocks.audioManager.playBgs).not.toHaveBeenCalled();
   });
 });
