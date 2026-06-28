@@ -18,30 +18,3 @@ export interface Rmmz_BattleManager
   setup(troopId: number, canEscape: boolean, canLose: boolean): void;
   setEventCallback(callback: () => void): void;
 }
-
-declare class T implements Rmmz_BattleManager {
-  _rewards: Battle_Reward;
-  saveBgmAndBgs(): void;
-  playBattleBgm(): void;
-  playDefeatMe(): void;
-  playVictoryMe(): void;
-  replayBgmAndBgs(): void;
-  displayVictoryMessage(): void;
-  displayDefeatMessage(): void;
-  displayEscapeSuccessMessage(): void;
-  displayEscapeFailureMessage(): void;
-  processAbort(): void;
-  rocessPartyEscape(): void;
-  onEscapeFailure(): void;
-  processDefeat(): void;
-  onEscapeSuccess(): void;
-  processEscape(): void;
-  processVictory(): void;
-  canEscape(): boolean;
-  isTurnEnd(): boolean;
-  setup(troopId: number, canEscape: boolean, canLose: boolean): void;
-  abort(): void;
-  onEncounter(): void;
-  isActionForced(): boolean;
-  setEventCallback(callback: () => void): void;
-}
