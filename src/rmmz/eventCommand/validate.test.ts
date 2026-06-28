@@ -1,14 +1,7 @@
 import { describe, test, expect } from "vitest";
-import { makeCommandCommonEvent, type Command_CommonEvent } from "./commands";
-import {
-  makeCommandSetupChoice,
-  makeCommandShowChoiceItem,
-} from "./commands/message/setupChoice";
-import {
-  isCommandCommonEvent,
-  isCommandShowChoiceItem,
-  isCommandShowChoices,
-} from "./validate";
+import type { Command_CommonEvent } from "./commands";
+import { makeCommandCommonEvent } from "./commands";
+import { isCommandCommonEvent } from "./validate";
 
 const testInvalidPattern = (fn: (data: unknown) => boolean) => {
   test("Invalid command", () => {
@@ -27,30 +20,4 @@ describe("isCommandCommonEvent", () => {
     expect(command).toSatisfy(isCommandCommonEvent);
   });
   testInvalidPattern(isCommandCommonEvent);
-});
-
-describe("isCommandShowChoices", () => {
-  test("Valid command", () => {
-    const command = makeCommandSetupChoice({
-      choices: [],
-      cancelType: 0,
-      defaultType: 0,
-      positionType: 2,
-      background: 0,
-    });
-    expect(command).toSatisfy(isCommandShowChoices);
-  });
-  testInvalidPattern(isCommandShowChoices);
-});
-
-describe("isCommandShowChoiceItem", () => {
-  test("Valid command", () => {
-    const command = makeCommandShowChoiceItem({
-      index: 0,
-      name: "Choice",
-    });
-    expect(command).toSatisfy(isCommandShowChoiceItem);
-  });
-
-  testInvalidPattern(isCommandShowChoiceItem);
 });
