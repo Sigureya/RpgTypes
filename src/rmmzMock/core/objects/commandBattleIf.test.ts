@@ -13,6 +13,7 @@ import type {
   EventCommand,
 } from "@RpgTypes/rmmz/eventCommand";
 import {
+  makeCommandBattleProcessingBlockEnd,
   makeCommandBattleProcessingDirect,
   makeCommandBattleProcessingEncount,
   makeCommandBattleProcessingIfEscape,
@@ -21,6 +22,7 @@ import {
   makeCommandPlayBGM,
   makeCommandPlayBGS,
 } from "@RpgTypes/rmmz/eventCommand";
+import { makeCommandNoOperation } from "@RpgTypes/rmmz/eventCommand/commands/indentBlock";
 import type {
   Rmmz_AudioManager,
   Rmmz_Party,
@@ -149,48 +151,30 @@ const createInterpreter = (command: EventCommand[]) => {
   return interpreter;
 };
 
-describe("", () => {
+describe("commandBattleProcessing", () => {
   const command: EventCommand[] = [
-    {
-      code: BATTLE_PROCESSING,
-      indent: 0,
-      parameters: [0, 1, false, false],
-    },
-    {
-      code: BATTLE_PROCESSING_IF_WIN,
-      indent: 0,
-      parameters: [],
-    },
-    {
-      code: PLAY_BGM,
-      indent: 1,
-      parameters: [MOCK_AUDIO],
-    },
+    { code: BATTLE_PROCESSING, indent: 0, parameters: [0, 1, false, false] },
+    { code: BATTLE_PROCESSING_IF_WIN, indent: 0, parameters: [] },
+    { code: PLAY_BGM, indent: 1, parameters: [MOCK_AUDIO] },
     { code: 0, indent: 1, parameters: [] },
-
-    {
-      code: BATTLE_PROCESSING_IF_ESCAPE,
-      indent: 0,
-      parameters: [],
-    },
-    {
-      code: PLAY_BGS,
-      indent: 1,
-      parameters: [MOCK_AUDIO],
-    },
+    { code: BATTLE_PROCESSING_IF_ESCAPE, indent: 0, parameters: [] },
+    { code: PLAY_BGS, indent: 1, parameters: [MOCK_AUDIO] },
     { code: 0, indent: 1, parameters: [] },
     { code: 604, indent: 0, parameters: [] },
   ];
-  test.skip("makeCommands", () => {
+  test("makeCommands", () => {
     const maked: EventCommand[] = [
       makeCommandBattleProcessingDirect(
         { troopId: 1, canEscape: false, canLose: false },
         0,
       ),
-      makeCommandBattleProcessingIfWin(1),
+      makeCommandBattleProcessingIfWin(0),
       makeCommandPlayBGM(MOCK_AUDIO, 1),
-      makeCommandBattleProcessingIfEscape(1),
+      makeCommandNoOperation(1),
+      makeCommandBattleProcessingIfEscape(0),
       makeCommandPlayBGS(MOCK_AUDIO, 1),
+      makeCommandNoOperation(1),
+      makeCommandBattleProcessingBlockEnd(0),
     ];
     expect(maked).toEqual(command);
   });

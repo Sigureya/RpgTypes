@@ -3,6 +3,7 @@ import {
   BATTLE_PROCESSING_IF_WIN,
   BATTLE_PROCESSING_IF_ESCAPE,
   BATTLE_PROCESSING_IF_LOSE,
+  BATTLE_PROCESSING_BLOCK_END,
 } from "@RpgTypes/libs";
 import { BATTLE_VARIABLE, BATTLE_DIRECT, BATTLE_ENCOUNT } from "./constants";
 import type {
@@ -14,6 +15,7 @@ import type {
   ParamObject_BattleBase,
   ParamArray_BattleProcessing_Encount,
   Command_BattleProcessing_If,
+  Command_BattleProcessing_BlockEnd,
 } from "./types";
 
 export const isCommandBattleProcessingVariable = (
@@ -87,6 +89,14 @@ export const makeCommandBattleProcessingIfLose = (
   indent: number = 0,
 ): Command_BattleProcessing_If => ({
   code: BATTLE_PROCESSING_IF_LOSE,
+  indent: indent,
+  parameters: [],
+});
+
+export const makeCommandBattleProcessingBlockEnd = (
+  indent: number = 0,
+): Command_BattleProcessing_BlockEnd => ({
+  code: BATTLE_PROCESSING_BLOCK_END,
   indent: indent,
   parameters: [],
 });
