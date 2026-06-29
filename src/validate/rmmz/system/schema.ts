@@ -210,8 +210,8 @@ export const SCHEMA_DATA_SYSTEM = {
 export const SCHEMA_DATA_SYSTEM_TEXTS = {
   required: ["gameTitle", "currencyUnit", "terms"],
   additionalProperties: true,
+  type: "object",
   properties: {
-    type: "object",
     gameTitle: { type: "string" },
     currencyUnit: { type: "string" },
     terms: {

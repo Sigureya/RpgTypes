@@ -1,5 +1,6 @@
 {
   "additionalProperties": true,
+  "type": "object",
   "properties": {
     "currencyUnit": {
       "type": "string"
@@ -337,8 +338,7 @@
       },
       "required": ["messages", "commands", "basic", "params"],
       "type": "object"
-    },
-    "type": "object"
+    }
   },
   "required": ["gameTitle", "currencyUnit", "terms"]
 }
