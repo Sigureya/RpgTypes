@@ -37,12 +37,5 @@ const mainReadErrors = (data: ReadGameDataUnknown): DataReadErrorItem[] => {
       }),
     );
 
-  if (data.system.system === null) {
-    const system: DataReadErrorItem = {
-      fileName: data.system.message,
-      error: data.system.message,
-    };
-    return [system, ...main];
-  }
   return main;
 };
