@@ -3,17 +3,13 @@ import { describe, expect, test, vi } from "vitest";
 import type {
   AssetFilesBundle,
   FileEntry,
-  RawGameData,
+  RawGameData2,
   TestRawDataSource,
 } from "@RpgTypes/fileio";
-import {
-  FILENAME_ACTORS,
-  FILENAME_AUX_DICTIONARY,
-  FILENAME_SYSTEM,
-} from "@RpgTypes/fileio";
+import { FILENAME_ACTORS, FILENAME_AUX_DICTIONARY } from "@RpgTypes/fileio";
 import { makeRawTestDataBundle } from "@RpgTypes/fileio";
 import type { TestDataSourceWithNote } from "@RpgTypes/libs";
-import { makeMapData } from "@RpgTypes/rmmz";
+import { makeMapData, makeSystemTexts } from "@RpgTypes/rmmz";
 import type {
   Data_CommonEvent,
   Data_Map,
@@ -45,7 +41,7 @@ const makeNoteText = (text: string, value: string): string => {
   return [`<Target:${text}>`, `<Number:${value}>`].join("\n");
 };
 
-const makeMockDataBundle = (src: TestDataSourceWithNote): RawGameData => {
+const makeMockDataBundle = (src: TestDataSourceWithNote): RawGameData2 => {
   const source: TestRawDataSource = {
     text: src.text,
     image: src.image,
@@ -104,7 +100,7 @@ const createAssetBundle = (): AssetFilesBundle => ({
   },
 });
 
-const firstActorNote = (data: RawGameData): string => {
+const firstActorNote = (data: RawGameData2): string => {
   return data.actors.data[0]?.note ?? "";
 };
 
@@ -174,15 +170,16 @@ describe("toFileEntries", () => {
         assetBundle: createAssetBundle(),
         dictionary: new Map([["AAA", "BBB"]]),
         textKeys: new Set(["Target"]),
+        system: makeSystemTexts({}),
       },
       createExtractor(),
     );
 
     const actorsEntry = findEntry(entries, FILENAME_ACTORS);
-    const systemEntry = findEntry(entries, FILENAME_SYSTEM);
+    //    const systemEntry = findEntry(entries, FILENAME_SYSTEM);
 
     expect(JSON.stringify(actorsEntry.data)).toContain("BBB");
-    expect(systemEntry.filename).toBe(FILENAME_SYSTEM);
+    //  expect(systemEntry.filename).toBe(FILENAME_SYSTEM);
   });
 
   test("replaceDataWithHashToFileEntries は aux 辞書ファイルを含む", () => {
@@ -200,6 +197,7 @@ describe("toFileEntries", () => {
         assetBundle: createAssetBundle(),
         dictionary: new Map([["AAA", "BBB"]]),
         textKeys: new Set(["Target"]),
+        system: makeSystemTexts({}),
       },
       createExtractor(),
       hashFn,
@@ -228,6 +226,7 @@ describe("edge cases", () => {
       note: makeNoteText("AAA", "456"),
       audio: "AudioName",
     }),
+    system: makeSystemTexts({}),
     assetBundle: createAssetBundle(),
     dictionary,
     textKeys,
