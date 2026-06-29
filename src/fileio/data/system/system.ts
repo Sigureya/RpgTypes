@@ -1,3 +1,4 @@
+import type { Data_SystemTexts } from "@RpgTypes/rmmz";
 import { makeSystemDataFromMV } from "@RpgTypes/rmmz";
 import { FILENAME_SYSTEM } from "./constants";
 import type {
@@ -10,7 +11,7 @@ export const readSystemData = async (
   terms: SystemDataErrorMessages,
   fileReadFn: (filename: typeof FILENAME_SYSTEM) => Promise<string>,
   handlers: SystemDataReadHandler,
-): Promise<ReadSystemResult> => {
+): Promise<ReadSystemResult<Data_SystemTexts>> => {
   try {
     const content = await fileReadFn(FILENAME_SYSTEM);
     return parseSystemJson(content, terms, handlers);
@@ -28,7 +29,7 @@ const parseSystemJson = (
   json: string,
   terms: SystemDataErrorMessages,
   handlers: SystemDataReadHandler,
-): ReadSystemResult => {
+): ReadSystemResult<Data_SystemTexts> => {
   try {
     const data = JSON.parse(json);
     return validateSystemData(data, terms, handlers);
@@ -41,7 +42,7 @@ const validateSystemData = (
   data: unknown,
   terms: SystemDataErrorMessages,
   handlers: SystemDataReadHandler,
-): ReadSystemResult => {
+): ReadSystemResult<Data_SystemTexts> => {
   try {
     if (handlers.validateSystemMz(data)) {
       return {

@@ -14,6 +14,7 @@ import type {
   Data_State,
   Data_System,
   Data_SystemMV,
+  Data_SystemTexts,
   Data_Tileset,
   Data_Troop,
   Data_Weapon,
@@ -249,7 +250,7 @@ const baseFileMap: Record<string, string> = {
 type ConvertHandlers = RpgDataReadHandlers<
   unknown[],
   Data_Map,
-  Data_System,
+  Data_SystemTexts,
   unknown[],
   unknown[],
   unknown[],
@@ -416,7 +417,7 @@ describe("readAllGameDataAsArrayFallback", () => {
       const convHandlers: RpgDataReadHandlers<
         unknown[],
         Data_Map,
-        Data_System,
+        Data_SystemTexts,
         unknown[],
         unknown[],
         unknown[],

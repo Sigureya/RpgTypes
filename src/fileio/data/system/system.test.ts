@@ -1,5 +1,9 @@
 import { describe, expect, test, vi } from "vitest";
-import type { Data_System, Data_SystemMV } from "@RpgTypes/rmmz";
+import type {
+  Data_System,
+  Data_SystemMV,
+  Data_SystemTexts,
+} from "@RpgTypes/rmmz";
 import {
   makeSystemData,
   makeSystemDataFromMV,
@@ -60,7 +64,7 @@ describe("readSystemData", () => {
       system: null,
       message: terms.jsonParseError,
     };
-    const result: ReadSystemResult = await readSystemData(
+    const result: ReadSystemResult<Data_SystemTexts> = await readSystemData(
       terms,
       fileReadFn,
       handlers,
