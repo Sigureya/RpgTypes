@@ -31,8 +31,13 @@ export type SystemLabels_GameCommands = Record<
   keyof Terms_GameCommands,
   string
 >;
+export type Terms_CommandArray2 = Terms_CommandArray<"">;
 
-export type Terms_CommandArray<Empty extends string | null = ""> = [
+export type Terms_CommandArrayWithNulls = Terms_CommandArray<null>;
+
+export type Terms_CommandArrayWorkaround = Terms_CommandArray<"" | null>;
+
+export type Terms_CommandArray<Empty extends string | null> = [
   fight: string,
   escape: string,
   attack: string,
@@ -58,5 +63,5 @@ export type Terms_CommandArray<Empty extends string | null = ""> = [
   cancel: string,
   notUsed23: Empty,
   buy: string,
-  sell: string
+  sell: string,
 ];

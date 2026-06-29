@@ -6,8 +6,7 @@ import type {
 } from "@RpgTypes/rmmz";
 import { makeSystemData, makeSystemDataMV } from "@RpgTypes/rmmz";
 import { SCHEMA_DATA_SYSTEM } from "./schema";
-const validate = require("./systemValidate.js");
-
+import validate from "./systemValidate";
 const mockSystem: Data_System = {
   optAutosave: true,
   optDisplayTp: false,
@@ -245,11 +244,59 @@ const mockSystem: Data_System = {
     messageWidth2: 816,
   },
 };
+
+const mockSystemWithNull: Data_System = {
+  ...mockSystem,
+  terms: {
+    ...mockSystem.terms,
+    commands: [
+      "fight",
+      "escape",
+      "attack",
+      "guard",
+      "item",
+      "skill",
+      "equip",
+      "status",
+      "formation",
+      "save",
+      "gameEnd",
+      "options",
+      "weapon",
+      "armor",
+      "keyItem",
+      "equip2",
+      "optimize",
+      "clear",
+      "newGame",
+      "continue",
+
+      null,
+      "toTitle",
+      "cancel",
+      null,
+      "buy",
+      "sell",
+    ],
+  },
+};
+
 describe("isDataSystem", () => {
   test("should invalidate an incorrect Data_System object with missing required properties", () => {
     const result = validate(mockSystem);
     expect(validate.errors).toBeNull();
     expect(result).toBe(true);
+  });
+  test("xx", () => {
+    const result = validate(mockSystemWithNull);
+    expect(validate.errors).toBeNull();
+    expect(result).toBe(true);
+  });
+  test("", () => {
+    const badData = {};
+    const result = validate(badData);
+    expect(validate.errors).not.toBeNull();
+    expect(result).toBe(false);
   });
 });
 
