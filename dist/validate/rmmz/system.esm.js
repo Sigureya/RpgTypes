@@ -4197,7 +4197,7 @@ var r = e(t(((e, t) => {
 		}
 		return c.errors = null, !0;
 	}
-}))()), i = (e) => (0, r.default)(e), a = e(t(((e, t) => {
+}))()), i = r.default, a = (e) => (0, r.default)(e), o = e(t(((e, t) => {
 	function n(e, { instancePath: t = "", parentData: r, parentDataProperty: i, rootData: a = e } = {}) {
 		if (!e || typeof e != "object" || Array.isArray(e)) return n.errors = [{
 			instancePath: t,
@@ -5685,5 +5685,5 @@ var r = e(t(((e, t) => {
 		return n.errors = null, !0;
 	}
 	t.exports = n, t.exports.default = n;
-}))()), o = (e) => (0, a.default)(e);
-export { i as isDataSystem, o as isSystemTexts };
+}))()), s = (e) => (0, o.default)(e);
+export { a as isDataSystem, s as isSystemTexts, i as validateSystemData };
