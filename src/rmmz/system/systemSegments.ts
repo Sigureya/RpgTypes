@@ -23,7 +23,13 @@ import type {
 } from "./gameEdit";
 import type { System_Text } from "./subset";
 
-export interface SystemDataFragments {
+export interface SystemTextsFragments {
+  dataNames: Partial<System_RPG_DataNames>;
+  terms: System_TermsPartial;
+  texts: Partial<System_Text>;
+}
+
+export interface SystemDataFragments extends SystemTextsFragments {
   locale: string;
   options: Partial<System_BooleanGameOptions>;
   advanced: Partial<System_Advanced>;
