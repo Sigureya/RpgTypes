@@ -88,28 +88,22 @@ var ne = "bgm", re = "se", ie = "me", ae = "bgs", oe = "img", se = "audio", ce =
 		fileName: e.filename,
 		error: e.message
 	})))
-}), Ie = (e) => {
-	let t = [
-		e.actors,
-		e.armors,
-		e.classes,
-		e.commonEvents,
-		e.enemies,
-		e.items,
-		e.skills,
-		e.states,
-		e.troops,
-		e.weapons,
-		e.mapInfos
-	].filter(((e) => !e.success)).map(((e) => ({
-		fileName: e.fileName,
-		error: e.error
-	})));
-	return e.system.system === null ? [{
-		fileName: e.system.message,
-		error: e.system.message
-	}, ...t] : t;
-}, Le = (e) => [
+}), Ie = (e) => [
+	e.actors,
+	e.armors,
+	e.classes,
+	e.commonEvents,
+	e.enemies,
+	e.items,
+	e.skills,
+	e.states,
+	e.troops,
+	e.weapons,
+	e.mapInfos
+].filter(((e) => !e.success)).map(((e) => ({
+	fileName: e.fileName,
+	error: e.error
+}))), Le = (e) => [
 	p({
 		facename: e.image,
 		faceIndex: 0,

@@ -22,7 +22,6 @@ export interface ReadAllDataFields {
     troops: unknown;
     weapons: unknown;
     mapFiles: MapBatchReadResult<unknown>;
-    system: unknown;
     tilesets: unknown;
     animations: unknown;
 }
@@ -36,7 +35,6 @@ export interface ReadGameDataUnknown extends ReadAllDataFields {
     mapInfos: ReadArrayResult<Data_MapInfo>;
     skills: ReadHandledResult<unknown>;
     states: ReadHandledResult<unknown>;
-    system: ReadSystemResult<unknown>;
     troops: ReadHandledResult<unknown>;
     weapons: ReadHandledResult<unknown>;
     mapFiles: MapBatchReadResult<unknown>;
