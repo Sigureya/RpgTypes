@@ -1,4 +1,4 @@
-import { Data_CommonEvent } from '../../../../rmmz';
+import { Data_CommonEvent } from '../../rmmz';
 /**
  * 指定したrootイベントID群から到達可能な全てのコモンイベントIDを再帰的に列挙します。
  * 再帰とmap/filter/reduceのみで実装（for/while禁止）
