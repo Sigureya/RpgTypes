@@ -22,8 +22,28 @@ import {
 } from "./core";
 import type { EditorSettings, TestBattler } from "./gameEdit";
 import { makeEditorSetting } from "./gameEdit";
-import type { Data_System } from "./system";
-import type { SystemDataFragments } from "./systemSegments";
+import type { Data_System, Data_SystemTexts } from "./system";
+import type {
+  SystemDataFragments,
+  SystemTextsFragments,
+} from "./systemSegments";
+
+export const makeSystemTexts = (
+  frgments: Partial<SystemTextsFragments>,
+): Data_SystemTexts => {
+  return {
+    gameTitle: frgments.texts?.gameTitle ?? "",
+    currencyUnit: frgments.texts?.currencyUnit ?? "",
+    armorTypes: cloneValueArray(frgments.dataNames?.armorTypes),
+    equipTypes: cloneValueArray(frgments.dataNames?.equipTypes),
+    elements: cloneValueArray(frgments.dataNames?.elements),
+    skillTypes: cloneValueArray(frgments.dataNames?.skillTypes),
+    weaponTypes: cloneValueArray(frgments.dataNames?.weaponTypes),
+    switches: cloneValueArray(frgments.dataNames?.switches),
+    variables: cloneValueArray(frgments.dataNames?.variables),
+    terms: makeTerms(frgments.terms ?? {}) satisfies System_Terms,
+  };
+};
 
 export const makeSystemData = (
   fragments: Partial<SystemDataFragments>,

@@ -2,13 +2,17 @@ import type { MockedObject } from "vitest";
 import { describe, expect, test, vi } from "vitest";
 import type {
   AssetFilesBundle,
-  RawGameData,
+  RawGameData2,
   TestRawDataSource,
 } from "@RpgTypes/fileio";
 import { makeRawTestDataBundle } from "@RpgTypes/fileio";
 import type { TestDataSourceWithNote } from "@RpgTypes/libs";
 import type { Data_CommonEvent, Data_Map, Data_Troop } from "@RpgTypes/rmmz";
-import { extractTextFromSystem, makeTestSystemData } from "@RpgTypes/rmmz";
+import {
+  extractTextFromSystem,
+  makeSystemTexts,
+  makeTestSystemData,
+} from "@RpgTypes/rmmz";
 import type {
   GameDataReplaceOutput,
   RuntimeDictionaryData,
@@ -32,7 +36,7 @@ const makeNoteText = (text: string, value: number): string => {
   return [`<Text:${text}>`, `<Number:${value}>`].join("\n");
 };
 
-const makeMockDataBundle = (src: TestDataSourceWithNote): RawGameData => {
+const makeMockDataBundle = (src: TestDataSourceWithNote): RawGameData2 => {
   const source: TestRawDataSource = {
     text: src.text,
     systemText: SYSTEM_TEXT,
@@ -108,6 +112,7 @@ describe("replaceDataWithHash", () => {
         assetBundle: createAssetBundle(),
         dictionary: new Map([["AAA", "BBB"]]),
         textKeys: new Set(["Text", "Number"]),
+        system: makeSystemTexts({}),
       },
       extractor,
       createHash,
@@ -120,7 +125,16 @@ describe("replaceDataWithHash", () => {
       audio: "AudioName",
     });
 
-    expect(result.main).toEqual(expectedData);
+    expect(result.main.actors).toEqual(expectedData.actors);
+    expect(result.main.armors).toEqual(expectedData.armors);
+    expect(result.main.classes).toEqual(expectedData.classes);
+    expect(result.main.enemies).toEqual(expectedData.enemies);
+    expect(result.main.items).toEqual(expectedData.items);
+    expect(result.main.skills).toEqual(expectedData.skills);
+    expect(result.main.states).toEqual(expectedData.states);
+    expect(result.main.troops).toEqual(baseData.troops);
+    expect(result.main.commonEvents).toEqual(baseData.commonEvents);
+
     expect(extractor.extractCommonEventText).toHaveBeenCalledTimes(
       baseData.commonEvents.data.length,
     );
@@ -140,6 +154,7 @@ describe("replaceDataWithHash", () => {
         note: makeNoteText("AAA", 456),
         audio: "AudioName",
       }),
+      system: makeSystemTexts({}),
       assetBundle: createAssetBundle(),
       dictionary: new Map([
         ["AAA", "BBB"],
@@ -202,6 +217,7 @@ describe("replaceDataWithHash", () => {
         note: makeNoteText("AAA ", 456),
         audio: AUDIO_NAME,
       }),
+      system: makeSystemTexts({}),
       textKeys: new Set(["Text"]),
       dictionary: new Map([["AAA ", "BBB "]]),
     };
@@ -225,6 +241,7 @@ describe("replaceDataWithHash", () => {
         note: "",
         audio: AUDIO_NAME,
       }),
+      system: makeSystemTexts({}),
       textKeys: new Set([]),
       dictionary: new Map([[" AAA", " BBB"]]),
     };
@@ -241,17 +258,15 @@ describe("replaceDataWithHash", () => {
       assetBundle: createAssetBundle(),
       dictionary: new Map(),
       textKeys: new Set(),
+      system: makeTestSystemData({
+        systemText: SYSTEM_TEXT,
+        audio: AUDIO_NAME,
+        image: IMAGE_NAME,
+        switches: SWITCHES_TEXT,
+        variables: VARIABLE_TEXT,
+      }),
+
       data: {
-        system: {
-          message: "",
-          system: makeTestSystemData({
-            systemText: SYSTEM_TEXT,
-            audio: AUDIO_NAME,
-            image: IMAGE_NAME,
-            switches: SWITCHES_TEXT,
-            variables: VARIABLE_TEXT,
-          }),
-        },
         mapFiles: {
           info: { success: true },
           validMaps: [],
@@ -285,7 +300,7 @@ describe("replaceDataWithHash", () => {
       expect(extractor.extractMapTexts).not.toHaveBeenCalled();
     });
     test("system のテキスト抽出関数が呼び出されること", () => {
-      const expected = extractTextFromSystem(input.data.system.system);
+      const expected = extractTextFromSystem(input.system);
 
       const result = replaceDataWithHash(input, createExtractor(), createHash);
       expect(result.aux.systemTexts).toEqual(expected);

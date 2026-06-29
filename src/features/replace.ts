@@ -1,8 +1,13 @@
-import type { FileEntry, FileEntryBundle, RawGameData } from "@RpgTypes/fileio";
+import type {
+  FileEntry,
+  FileEntryBundle,
+  RawGameData2,
+} from "@RpgTypes/fileio";
 import { rawGameDataToMainDataFileEntries } from "@RpgTypes/fileio";
 import type {
   Data_Map,
   Data_MapUnknown,
+  Data_SystemTexts,
   NormalizedEventCommand,
   NoteReadResult,
   RpgDataBundleHasText,
@@ -123,7 +128,7 @@ export const replaceDataDirectToFileEntries = (
 export const replaceDataDirect = (
   context: ReplaceRawDataContext,
   extractor: EventContainerExtractor,
-): RawGameData<NormalizedEventCommand> => {
+): RawGameData2<NormalizedEventCommand> => {
   const handlers: RpgDataReplaceHandlers = {
     replaceText(text) {
       return context.dictionary.get(text);
@@ -140,7 +145,6 @@ export const replaceDataDirect = (
     context.assetBundle,
     extractor,
     handlers,
-    (text) => context.dictionary.get(text),
   );
   return result.data;
 };
@@ -185,13 +189,19 @@ export const replaceDataWithHash = <T extends string>(
   extractor: EventContainerExtractor,
   hashFn: (text: string) => T,
 ): GameDataReplaceOutput<T> => {
-  const { data, dictionary } = context;
+  const { data, dictionary, system } = context;
   const replaceResult = createMain(context, extractor, hashFn);
   const omap = Array.from(dictionary.keys()).map((v) => [v, v] as const);
   return {
     main: replaceResult.data,
-    aux: createAux(data, replaceResult.note, dictionary, hashFn),
-    originLike: createAux(data, replaceResult.note, new Map(omap), hashFn),
+    aux: createAux(data, system, replaceResult.note, dictionary, hashFn),
+    originLike: createAux(
+      data,
+      system,
+      replaceResult.note,
+      new Map(omap),
+      hashFn,
+    ),
   };
 };
 
@@ -220,12 +230,12 @@ const createMain = <T extends string>(
     assetBundle,
     extractor,
     handlers,
-    (text) => text.trimEnd(),
   );
 };
 
 const createAux = <T extends string>(
-  data: RawGameData,
+  data: RawGameData2,
+  systemTexts: Data_SystemTexts,
   note: RawGameDataNoteNormalization,
   dictionary: ReadonlyMap<string, string>,
   hashFn: (text: string) => T,
@@ -240,7 +250,7 @@ const createAux = <T extends string>(
       return hashFn(text.trimEnd());
     },
   );
-  const extractedSystemTexts = extractTextFromSystem(data.system.system);
+  const extractedSystemTexts = extractTextFromSystem(systemTexts);
   return {
     systemTexts: replaceSystemTextDictionary(extractedSystemTexts, (text) => {
       const trimmed = text.trimEnd();

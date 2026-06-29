@@ -2,20 +2,16 @@ import type {
   DataReadErrorItem,
   MapBatchReadResult,
   RawGameData,
-  RawGameDataNullableSystem,
+  RawGameData2,
   ReadArrayResult,
-  ReadSystemResult,
 } from "@RpgTypes/fileio";
-import { FILENAME_SYSTEM } from "@RpgTypes/fileio";
 import type {
-  SystemTexts,
   Data_Armor,
   Data_CommonEvent,
   Data_Troop,
   MapFileInfo,
-  Data_SystemTexts,
+  EventCommand,
 } from "@RpgTypes/rmmz";
-import { extractTextFromSystem } from "@RpgTypes/rmmz";
 import type {
   ExtractedCommonEventText,
   ExtractedBattleEventText,
@@ -36,7 +32,7 @@ import {
 } from "./text";
 
 export const extractTextFromRawGameData = (
-  data: RawGameDataNullableSystem,
+  data: RawGameData2<EventCommand>,
   extractor: EventContainerExtractor,
 ): ExtractedRawGameDataTexts => {
   const actors = mapReadArrayResult(data.actors, extractTextFromActor);
@@ -51,7 +47,6 @@ export const extractTextFromRawGameData = (
   const commonEventResult = extractCommonEvents(data.commonEvents, extractor);
   const troopResult = extractTroops(data.troops, extractor);
   const mapFiles = extractMapFiles(data.mapFiles, extractor);
-  const system = systemXX(data.system);
   const errors = collectDataReadErrors([
     actors,
     armors,
@@ -64,7 +59,7 @@ export const extractTextFromRawGameData = (
     weapons,
     troopResult,
     commonEventResult,
-  ]).concat(collectMapAndSystemErrors(data.mapFiles, data.system));
+  ]).concat(collectMapAndSystemErrors(data.mapFiles));
 
   return {
     value: {
@@ -73,7 +68,10 @@ export const extractTextFromRawGameData = (
         troops: troopResult.data.flat(),
       },
       mapFiles,
-      system,
+      system: {
+        message: "",
+        system: null,
+      },
       mainData: {
         actors: actors.data,
         armors: armors.data,
@@ -86,21 +84,6 @@ export const extractTextFromRawGameData = (
       },
     },
     errors,
-  };
-};
-
-const systemXX = (
-  data: ReadSystemResult<Data_SystemTexts>,
-): ReadSystemResult<SystemTexts> => {
-  if (data.system === null) {
-    return {
-      message: data.message,
-      system: null,
-    };
-  }
-  return {
-    message: data.message,
-    system: extractTextFromSystem(data.system),
   };
 };
 
@@ -131,7 +114,6 @@ const collectDataReadErrors = (
 
 const collectMapAndSystemErrors = (
   mapFiles: RawGameData["mapFiles"],
-  system: ReadSystemResult<Data_SystemTexts>,
 ): DataReadErrorItem[] => {
   const mapInfoErrors: DataReadErrorItem[] =
     mapFiles.info.success === false
@@ -148,11 +130,7 @@ const collectMapAndSystemErrors = (
       error: item.message,
     }),
   );
-  const systemErrors: DataReadErrorItem[] =
-    system.system === null
-      ? [{ fileName: FILENAME_SYSTEM, error: system.message }]
-      : [];
-  return [...mapInfoErrors, ...mapFileErrors, ...systemErrors];
+  return [...mapInfoErrors, ...mapFileErrors];
 };
 
 const extractArmors = (
