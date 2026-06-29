@@ -1,4 +1,7 @@
 import { Rmmz_Actor, Rmmz_Actors } from './core';
+export interface Rmmz_Actors_Constructor {
+    new (): Rmmz_Actors;
+}
 declare global {
     class Game_Actors implements Rmmz_Actors {
         _data: [null, ...Rmmz_Actor[]];

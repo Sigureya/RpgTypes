@@ -1,4 +1,5 @@
 export * from './battle';
+export type * from './battle/item';
 export * from './interpreter';
 export type * from './map';
 export * from './message';
