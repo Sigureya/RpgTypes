@@ -1,7 +1,7 @@
-import { Data_System, Data_SystemMV } from '../../../rmmz';
+import { Data_System, Data_SystemMV, Data_SystemTexts } from '../../../rmmz';
 import { FILENAME_SYSTEM } from './constants';
 export interface SystemDataReadHandler {
-    validateSystemMz: (item: unknown) => item is Data_System;
+    validateSystemMz: (item: unknown) => item is Data_SystemTexts;
     validateSystemMv?: (item: unknown) => item is Data_SystemMV;
 }
 export interface SystemDataErrorMessages {

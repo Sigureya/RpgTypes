@@ -1,6 +1,1299 @@
 import { n as e, t } from "../../shared/chunk.esm.js";
 import { t as n } from "../../shared/ucs2length.esm.js";
-var r = e(t(((e, t) => {
+var r = t(((e, t) => {
+	t.exports = o, t.exports.default = o;
+	var r = {
+		additionalProperties: !0,
+		type: "object",
+		properties: {
+			currencyUnit: { type: "string" },
+			gameTitle: { type: "string" },
+			terms: {
+				additionalProperties: !1,
+				properties: {
+					basic: {
+						items: { type: "string" },
+						maxItems: 10,
+						minItems: 10,
+						type: "array"
+					},
+					commands: {
+						items: [
+							{ type: "string" },
+							{ type: "string" },
+							{ type: "string" },
+							{ type: "string" },
+							{ type: "string" },
+							{ type: "string" },
+							{ type: "string" },
+							{ type: "string" },
+							{ type: "string" },
+							{ type: "string" },
+							{ type: "string" },
+							{ type: "string" },
+							{ type: "string" },
+							{ type: "string" },
+							{ type: "string" },
+							{ type: "string" },
+							{ type: "string" },
+							{ type: "string" },
+							{ type: "string" },
+							{ type: "string" },
+							{
+								nullable: !0,
+								type: "string"
+							},
+							{ type: "string" },
+							{ type: "string" },
+							{
+								nullable: !0,
+								type: "string"
+							},
+							{ type: "string" },
+							{ type: "string" }
+						],
+						maxItems: 26,
+						minItems: 26,
+						type: "array"
+					},
+					messages: {
+						additionalProperties: !1,
+						properties: {
+							actionFailure: { type: "string" },
+							actorDamage: { type: "string" },
+							actorDrain: { type: "string" },
+							actorGain: { type: "string" },
+							actorLoss: { type: "string" },
+							actorNoDamage: { type: "string" },
+							actorNoHit: { type: "string" },
+							actorRecovery: { type: "string" },
+							alwaysDash: { type: "string" },
+							autosave: { type: "string" },
+							bgmVolume: { type: "string" },
+							bgsVolume: { type: "string" },
+							buffAdd: { type: "string" },
+							buffRemove: { type: "string" },
+							commandRemember: { type: "string" },
+							counterAttack: { type: "string" },
+							criticalToActor: { type: "string" },
+							criticalToEnemy: { type: "string" },
+							debuffAdd: { type: "string" },
+							defeat: { type: "string" },
+							emerge: { type: "string" },
+							enemyDamage: { type: "string" },
+							enemyDrain: { type: "string" },
+							enemyGain: { type: "string" },
+							enemyLoss: { type: "string" },
+							enemyNoDamage: { type: "string" },
+							enemyNoHit: { type: "string" },
+							enemyRecovery: { type: "string" },
+							escapeFailure: { type: "string" },
+							escapeStart: { type: "string" },
+							evasion: { type: "string" },
+							expNext: { type: "string" },
+							expTotal: { type: "string" },
+							file: { type: "string" },
+							levelUp: { type: "string" },
+							loadMessage: { type: "string" },
+							magicEvasion: { type: "string" },
+							magicReflection: { type: "string" },
+							meVolume: { type: "string" },
+							obtainExp: { type: "string" },
+							obtainGold: { type: "string" },
+							obtainItem: { type: "string" },
+							obtainSkill: { type: "string" },
+							partyName: { type: "string" },
+							possession: { type: "string" },
+							preemptive: { type: "string" },
+							saveMessage: { type: "string" },
+							seVolume: { type: "string" },
+							substitute: { type: "string" },
+							surprise: { type: "string" },
+							touchUI: { type: "string" },
+							useItem: { type: "string" },
+							victory: { type: "string" }
+						},
+						required: /* @__PURE__ */ "actionFailure.actorDamage.actorDrain.actorGain.actorLoss.actorNoDamage.actorNoHit.actorRecovery.alwaysDash.autosave.bgmVolume.bgsVolume.buffAdd.buffRemove.commandRemember.counterAttack.criticalToActor.criticalToEnemy.debuffAdd.defeat.emerge.enemyDamage.enemyDrain.enemyGain.enemyLoss.enemyNoDamage.enemyNoHit.enemyRecovery.escapeFailure.escapeStart.evasion.expNext.expTotal.file.levelUp.loadMessage.magicEvasion.magicReflection.meVolume.obtainExp.obtainGold.obtainItem.obtainSkill.partyName.possession.preemptive.saveMessage.seVolume.substitute.surprise.touchUI.useItem.victory".split("."),
+						type: "object"
+					},
+					params: {
+						items: {
+							minLength: 0,
+							type: "string"
+						},
+						maxItems: 10,
+						minItems: 10,
+						type: "array"
+					}
+				},
+				required: [
+					"messages",
+					"commands",
+					"basic",
+					"params"
+				],
+				type: "object"
+			}
+		},
+		required: [
+			"gameTitle",
+			"currencyUnit",
+			"terms"
+		]
+	}, i = Object.prototype.hasOwnProperty, a = n().default;
+	function o(e, { instancePath: t = "", parentData: n, parentDataProperty: s, rootData: c = e } = {}) {
+		if (!e || typeof e != "object" || Array.isArray(e)) return o.errors = [{
+			instancePath: t,
+			schemaPath: "#/type",
+			keyword: "type",
+			params: { type: "object" },
+			message: "must be object"
+		}], !1;
+		{
+			let n;
+			if (e.gameTitle === void 0 && (n = "gameTitle") || e.currencyUnit === void 0 && (n = "currencyUnit") || e.terms === void 0 && (n = "terms")) return o.errors = [{
+				instancePath: t,
+				schemaPath: "#/required",
+				keyword: "required",
+				params: { missingProperty: n },
+				message: "must have required property '" + n + "'"
+			}], !1;
+			if (e.currencyUnit !== void 0) {
+				if (typeof e.currencyUnit != "string") return o.errors = [{
+					instancePath: t + "/currencyUnit",
+					schemaPath: "#/properties/currencyUnit/type",
+					keyword: "type",
+					params: { type: "string" },
+					message: "must be string"
+				}], !1;
+				var l = !0;
+			} else l = !0;
+			if (l) {
+				if (e.gameTitle !== void 0) {
+					if (typeof e.gameTitle != "string") return o.errors = [{
+						instancePath: t + "/gameTitle",
+						schemaPath: "#/properties/gameTitle/type",
+						keyword: "type",
+						params: { type: "string" },
+						message: "must be string"
+					}], !1;
+					l = !0;
+				} else l = !0;
+				if (l) if (e.terms !== void 0) {
+					let n = e.terms;
+					if (!n || typeof n != "object" || Array.isArray(n)) return o.errors = [{
+						instancePath: t + "/terms",
+						schemaPath: "#/properties/terms/type",
+						keyword: "type",
+						params: { type: "object" },
+						message: "must be object"
+					}], !1;
+					{
+						let e;
+						if (n.messages === void 0 && (e = "messages") || n.commands === void 0 && (e = "commands") || n.basic === void 0 && (e = "basic") || n.params === void 0 && (e = "params")) return o.errors = [{
+							instancePath: t + "/terms",
+							schemaPath: "#/properties/terms/required",
+							keyword: "required",
+							params: { missingProperty: e },
+							message: "must have required property '" + e + "'"
+						}], !1;
+						for (let e in n) if (e !== "basic" && e !== "commands" && e !== "messages" && e !== "params") return o.errors = [{
+							instancePath: t + "/terms",
+							schemaPath: "#/properties/terms/additionalProperties",
+							keyword: "additionalProperties",
+							params: { additionalProperty: e },
+							message: "must NOT have additional properties"
+						}], !1;
+						if (n.basic !== void 0) {
+							let e = n.basic;
+							if (!Array.isArray(e)) return o.errors = [{
+								instancePath: t + "/terms/basic",
+								schemaPath: "#/properties/terms/properties/basic/type",
+								keyword: "type",
+								params: { type: "array" },
+								message: "must be array"
+							}], !1;
+							if (e.length > 10) return o.errors = [{
+								instancePath: t + "/terms/basic",
+								schemaPath: "#/properties/terms/properties/basic/maxItems",
+								keyword: "maxItems",
+								params: { limit: 10 },
+								message: "must NOT have more than 10 items"
+							}], !1;
+							if (e.length < 10) return o.errors = [{
+								instancePath: t + "/terms/basic",
+								schemaPath: "#/properties/terms/properties/basic/minItems",
+								keyword: "minItems",
+								params: { limit: 10 },
+								message: "must NOT have fewer than 10 items"
+							}], !1;
+							{
+								let n = e.length;
+								for (let r = 0; r < n; r++) if (typeof e[r] != "string") return o.errors = [{
+									instancePath: t + "/terms/basic/" + r,
+									schemaPath: "#/properties/terms/properties/basic/items/type",
+									keyword: "type",
+									params: { type: "string" },
+									message: "must be string"
+								}], !1;
+							}
+							var u = !0;
+						} else u = !0;
+						if (u) {
+							if (n.commands !== void 0) {
+								let e = n.commands;
+								if (!Array.isArray(e)) return o.errors = [{
+									instancePath: t + "/terms/commands",
+									schemaPath: "#/properties/terms/properties/commands/type",
+									keyword: "type",
+									params: { type: "array" },
+									message: "must be array"
+								}], !1;
+								if (e.length > 26) return o.errors = [{
+									instancePath: t + "/terms/commands",
+									schemaPath: "#/properties/terms/properties/commands/maxItems",
+									keyword: "maxItems",
+									params: { limit: 26 },
+									message: "must NOT have more than 26 items"
+								}], !1;
+								if (e.length < 26) return o.errors = [{
+									instancePath: t + "/terms/commands",
+									schemaPath: "#/properties/terms/properties/commands/minItems",
+									keyword: "minItems",
+									params: { limit: 26 },
+									message: "must NOT have fewer than 26 items"
+								}], !1;
+								{
+									let n = e.length;
+									if (n > 0) {
+										if (typeof e[0] != "string") return o.errors = [{
+											instancePath: t + "/terms/commands/0",
+											schemaPath: "#/properties/terms/properties/commands/items/0/type",
+											keyword: "type",
+											params: { type: "string" },
+											message: "must be string"
+										}], !1;
+										var d = !0;
+									}
+									if (d) {
+										if (n > 1) {
+											if (typeof e[1] != "string") return o.errors = [{
+												instancePath: t + "/terms/commands/1",
+												schemaPath: "#/properties/terms/properties/commands/items/1/type",
+												keyword: "type",
+												params: { type: "string" },
+												message: "must be string"
+											}], !1;
+											d = !0;
+										}
+										if (d) {
+											if (n > 2) {
+												if (typeof e[2] != "string") return o.errors = [{
+													instancePath: t + "/terms/commands/2",
+													schemaPath: "#/properties/terms/properties/commands/items/2/type",
+													keyword: "type",
+													params: { type: "string" },
+													message: "must be string"
+												}], !1;
+												d = !0;
+											}
+											if (d) {
+												if (n > 3) {
+													if (typeof e[3] != "string") return o.errors = [{
+														instancePath: t + "/terms/commands/3",
+														schemaPath: "#/properties/terms/properties/commands/items/3/type",
+														keyword: "type",
+														params: { type: "string" },
+														message: "must be string"
+													}], !1;
+													d = !0;
+												}
+												if (d) {
+													if (n > 4) {
+														if (typeof e[4] != "string") return o.errors = [{
+															instancePath: t + "/terms/commands/4",
+															schemaPath: "#/properties/terms/properties/commands/items/4/type",
+															keyword: "type",
+															params: { type: "string" },
+															message: "must be string"
+														}], !1;
+														d = !0;
+													}
+													if (d) {
+														if (n > 5) {
+															if (typeof e[5] != "string") return o.errors = [{
+																instancePath: t + "/terms/commands/5",
+																schemaPath: "#/properties/terms/properties/commands/items/5/type",
+																keyword: "type",
+																params: { type: "string" },
+																message: "must be string"
+															}], !1;
+															d = !0;
+														}
+														if (d) {
+															if (n > 6) {
+																if (typeof e[6] != "string") return o.errors = [{
+																	instancePath: t + "/terms/commands/6",
+																	schemaPath: "#/properties/terms/properties/commands/items/6/type",
+																	keyword: "type",
+																	params: { type: "string" },
+																	message: "must be string"
+																}], !1;
+																d = !0;
+															}
+															if (d) {
+																if (n > 7) {
+																	if (typeof e[7] != "string") return o.errors = [{
+																		instancePath: t + "/terms/commands/7",
+																		schemaPath: "#/properties/terms/properties/commands/items/7/type",
+																		keyword: "type",
+																		params: { type: "string" },
+																		message: "must be string"
+																	}], !1;
+																	d = !0;
+																}
+																if (d) {
+																	if (n > 8) {
+																		if (typeof e[8] != "string") return o.errors = [{
+																			instancePath: t + "/terms/commands/8",
+																			schemaPath: "#/properties/terms/properties/commands/items/8/type",
+																			keyword: "type",
+																			params: { type: "string" },
+																			message: "must be string"
+																		}], !1;
+																		d = !0;
+																	}
+																	if (d) {
+																		if (n > 9) {
+																			if (typeof e[9] != "string") return o.errors = [{
+																				instancePath: t + "/terms/commands/9",
+																				schemaPath: "#/properties/terms/properties/commands/items/9/type",
+																				keyword: "type",
+																				params: { type: "string" },
+																				message: "must be string"
+																			}], !1;
+																			d = !0;
+																		}
+																		if (d) {
+																			if (n > 10) {
+																				if (typeof e[10] != "string") return o.errors = [{
+																					instancePath: t + "/terms/commands/10",
+																					schemaPath: "#/properties/terms/properties/commands/items/10/type",
+																					keyword: "type",
+																					params: { type: "string" },
+																					message: "must be string"
+																				}], !1;
+																				d = !0;
+																			}
+																			if (d) {
+																				if (n > 11) {
+																					if (typeof e[11] != "string") return o.errors = [{
+																						instancePath: t + "/terms/commands/11",
+																						schemaPath: "#/properties/terms/properties/commands/items/11/type",
+																						keyword: "type",
+																						params: { type: "string" },
+																						message: "must be string"
+																					}], !1;
+																					d = !0;
+																				}
+																				if (d) {
+																					if (n > 12) {
+																						if (typeof e[12] != "string") return o.errors = [{
+																							instancePath: t + "/terms/commands/12",
+																							schemaPath: "#/properties/terms/properties/commands/items/12/type",
+																							keyword: "type",
+																							params: { type: "string" },
+																							message: "must be string"
+																						}], !1;
+																						d = !0;
+																					}
+																					if (d) {
+																						if (n > 13) {
+																							if (typeof e[13] != "string") return o.errors = [{
+																								instancePath: t + "/terms/commands/13",
+																								schemaPath: "#/properties/terms/properties/commands/items/13/type",
+																								keyword: "type",
+																								params: { type: "string" },
+																								message: "must be string"
+																							}], !1;
+																							d = !0;
+																						}
+																						if (d) {
+																							if (n > 14) {
+																								if (typeof e[14] != "string") return o.errors = [{
+																									instancePath: t + "/terms/commands/14",
+																									schemaPath: "#/properties/terms/properties/commands/items/14/type",
+																									keyword: "type",
+																									params: { type: "string" },
+																									message: "must be string"
+																								}], !1;
+																								d = !0;
+																							}
+																							if (d) {
+																								if (n > 15) {
+																									if (typeof e[15] != "string") return o.errors = [{
+																										instancePath: t + "/terms/commands/15",
+																										schemaPath: "#/properties/terms/properties/commands/items/15/type",
+																										keyword: "type",
+																										params: { type: "string" },
+																										message: "must be string"
+																									}], !1;
+																									d = !0;
+																								}
+																								if (d) {
+																									if (n > 16) {
+																										if (typeof e[16] != "string") return o.errors = [{
+																											instancePath: t + "/terms/commands/16",
+																											schemaPath: "#/properties/terms/properties/commands/items/16/type",
+																											keyword: "type",
+																											params: { type: "string" },
+																											message: "must be string"
+																										}], !1;
+																										d = !0;
+																									}
+																									if (d) {
+																										if (n > 17) {
+																											if (typeof e[17] != "string") return o.errors = [{
+																												instancePath: t + "/terms/commands/17",
+																												schemaPath: "#/properties/terms/properties/commands/items/17/type",
+																												keyword: "type",
+																												params: { type: "string" },
+																												message: "must be string"
+																											}], !1;
+																											d = !0;
+																										}
+																										if (d) {
+																											if (n > 18) {
+																												if (typeof e[18] != "string") return o.errors = [{
+																													instancePath: t + "/terms/commands/18",
+																													schemaPath: "#/properties/terms/properties/commands/items/18/type",
+																													keyword: "type",
+																													params: { type: "string" },
+																													message: "must be string"
+																												}], !1;
+																												d = !0;
+																											}
+																											if (d) {
+																												if (n > 19) {
+																													if (typeof e[19] != "string") return o.errors = [{
+																														instancePath: t + "/terms/commands/19",
+																														schemaPath: "#/properties/terms/properties/commands/items/19/type",
+																														keyword: "type",
+																														params: { type: "string" },
+																														message: "must be string"
+																													}], !1;
+																													d = !0;
+																												}
+																												if (d) {
+																													if (n > 20) {
+																														let n = e[20];
+																														if (typeof n != "string" && n !== null) return o.errors = [{
+																															instancePath: t + "/terms/commands/20",
+																															schemaPath: "#/properties/terms/properties/commands/items/20/type",
+																															keyword: "type",
+																															params: { type: "string" },
+																															message: "must be string"
+																														}], !1;
+																														d = !0;
+																													}
+																													if (d) {
+																														if (n > 21) {
+																															if (typeof e[21] != "string") return o.errors = [{
+																																instancePath: t + "/terms/commands/21",
+																																schemaPath: "#/properties/terms/properties/commands/items/21/type",
+																																keyword: "type",
+																																params: { type: "string" },
+																																message: "must be string"
+																															}], !1;
+																															d = !0;
+																														}
+																														if (d) {
+																															if (n > 22) {
+																																if (typeof e[22] != "string") return o.errors = [{
+																																	instancePath: t + "/terms/commands/22",
+																																	schemaPath: "#/properties/terms/properties/commands/items/22/type",
+																																	keyword: "type",
+																																	params: { type: "string" },
+																																	message: "must be string"
+																																}], !1;
+																																d = !0;
+																															}
+																															if (d) {
+																																if (n > 23) {
+																																	let n = e[23];
+																																	if (typeof n != "string" && n !== null) return o.errors = [{
+																																		instancePath: t + "/terms/commands/23",
+																																		schemaPath: "#/properties/terms/properties/commands/items/23/type",
+																																		keyword: "type",
+																																		params: { type: "string" },
+																																		message: "must be string"
+																																	}], !1;
+																																	d = !0;
+																																}
+																																if (d) {
+																																	if (n > 24) {
+																																		if (typeof e[24] != "string") return o.errors = [{
+																																			instancePath: t + "/terms/commands/24",
+																																			schemaPath: "#/properties/terms/properties/commands/items/24/type",
+																																			keyword: "type",
+																																			params: { type: "string" },
+																																			message: "must be string"
+																																		}], !1;
+																																		d = !0;
+																																	}
+																																	if (d && n > 25) {
+																																		if (typeof e[25] != "string") return o.errors = [{
+																																			instancePath: t + "/terms/commands/25",
+																																			schemaPath: "#/properties/terms/properties/commands/items/25/type",
+																																			keyword: "type",
+																																			params: { type: "string" },
+																																			message: "must be string"
+																																		}], !1;
+																																		d = !0;
+																																	}
+																																}
+																															}
+																														}
+																													}
+																												}
+																											}
+																										}
+																									}
+																								}
+																							}
+																						}
+																					}
+																				}
+																			}
+																		}
+																	}
+																}
+															}
+														}
+													}
+												}
+											}
+										}
+									}
+								}
+								u = !0;
+							} else u = !0;
+							if (u) {
+								if (n.messages !== void 0) {
+									let e = n.messages;
+									if (!e || typeof e != "object" || Array.isArray(e)) return o.errors = [{
+										instancePath: t + "/terms/messages",
+										schemaPath: "#/properties/terms/properties/messages/type",
+										keyword: "type",
+										params: { type: "object" },
+										message: "must be object"
+									}], !1;
+									{
+										let n;
+										if (e.actionFailure === void 0 && (n = "actionFailure") || e.actorDamage === void 0 && (n = "actorDamage") || e.actorDrain === void 0 && (n = "actorDrain") || e.actorGain === void 0 && (n = "actorGain") || e.actorLoss === void 0 && (n = "actorLoss") || e.actorNoDamage === void 0 && (n = "actorNoDamage") || e.actorNoHit === void 0 && (n = "actorNoHit") || e.actorRecovery === void 0 && (n = "actorRecovery") || e.alwaysDash === void 0 && (n = "alwaysDash") || e.autosave === void 0 && (n = "autosave") || e.bgmVolume === void 0 && (n = "bgmVolume") || e.bgsVolume === void 0 && (n = "bgsVolume") || e.buffAdd === void 0 && (n = "buffAdd") || e.buffRemove === void 0 && (n = "buffRemove") || e.commandRemember === void 0 && (n = "commandRemember") || e.counterAttack === void 0 && (n = "counterAttack") || e.criticalToActor === void 0 && (n = "criticalToActor") || e.criticalToEnemy === void 0 && (n = "criticalToEnemy") || e.debuffAdd === void 0 && (n = "debuffAdd") || e.defeat === void 0 && (n = "defeat") || e.emerge === void 0 && (n = "emerge") || e.enemyDamage === void 0 && (n = "enemyDamage") || e.enemyDrain === void 0 && (n = "enemyDrain") || e.enemyGain === void 0 && (n = "enemyGain") || e.enemyLoss === void 0 && (n = "enemyLoss") || e.enemyNoDamage === void 0 && (n = "enemyNoDamage") || e.enemyNoHit === void 0 && (n = "enemyNoHit") || e.enemyRecovery === void 0 && (n = "enemyRecovery") || e.escapeFailure === void 0 && (n = "escapeFailure") || e.escapeStart === void 0 && (n = "escapeStart") || e.evasion === void 0 && (n = "evasion") || e.expNext === void 0 && (n = "expNext") || e.expTotal === void 0 && (n = "expTotal") || e.file === void 0 && (n = "file") || e.levelUp === void 0 && (n = "levelUp") || e.loadMessage === void 0 && (n = "loadMessage") || e.magicEvasion === void 0 && (n = "magicEvasion") || e.magicReflection === void 0 && (n = "magicReflection") || e.meVolume === void 0 && (n = "meVolume") || e.obtainExp === void 0 && (n = "obtainExp") || e.obtainGold === void 0 && (n = "obtainGold") || e.obtainItem === void 0 && (n = "obtainItem") || e.obtainSkill === void 0 && (n = "obtainSkill") || e.partyName === void 0 && (n = "partyName") || e.possession === void 0 && (n = "possession") || e.preemptive === void 0 && (n = "preemptive") || e.saveMessage === void 0 && (n = "saveMessage") || e.seVolume === void 0 && (n = "seVolume") || e.substitute === void 0 && (n = "substitute") || e.surprise === void 0 && (n = "surprise") || e.touchUI === void 0 && (n = "touchUI") || e.useItem === void 0 && (n = "useItem") || e.victory === void 0 && (n = "victory")) return o.errors = [{
+											instancePath: t + "/terms/messages",
+											schemaPath: "#/properties/terms/properties/messages/required",
+											keyword: "required",
+											params: { missingProperty: n },
+											message: "must have required property '" + n + "'"
+										}], !1;
+										for (let n in e) if (!i.call(r.properties.terms.properties.messages.properties, n)) return o.errors = [{
+											instancePath: t + "/terms/messages",
+											schemaPath: "#/properties/terms/properties/messages/additionalProperties",
+											keyword: "additionalProperties",
+											params: { additionalProperty: n },
+											message: "must NOT have additional properties"
+										}], !1;
+										if (e.actionFailure !== void 0) {
+											if (typeof e.actionFailure != "string") return o.errors = [{
+												instancePath: t + "/terms/messages/actionFailure",
+												schemaPath: "#/properties/terms/properties/messages/properties/actionFailure/type",
+												keyword: "type",
+												params: { type: "string" },
+												message: "must be string"
+											}], !1;
+											var f = !0;
+										} else f = !0;
+										if (f) {
+											if (e.actorDamage !== void 0) {
+												if (typeof e.actorDamage != "string") return o.errors = [{
+													instancePath: t + "/terms/messages/actorDamage",
+													schemaPath: "#/properties/terms/properties/messages/properties/actorDamage/type",
+													keyword: "type",
+													params: { type: "string" },
+													message: "must be string"
+												}], !1;
+												f = !0;
+											} else f = !0;
+											if (f) {
+												if (e.actorDrain !== void 0) {
+													if (typeof e.actorDrain != "string") return o.errors = [{
+														instancePath: t + "/terms/messages/actorDrain",
+														schemaPath: "#/properties/terms/properties/messages/properties/actorDrain/type",
+														keyword: "type",
+														params: { type: "string" },
+														message: "must be string"
+													}], !1;
+													f = !0;
+												} else f = !0;
+												if (f) {
+													if (e.actorGain !== void 0) {
+														if (typeof e.actorGain != "string") return o.errors = [{
+															instancePath: t + "/terms/messages/actorGain",
+															schemaPath: "#/properties/terms/properties/messages/properties/actorGain/type",
+															keyword: "type",
+															params: { type: "string" },
+															message: "must be string"
+														}], !1;
+														f = !0;
+													} else f = !0;
+													if (f) {
+														if (e.actorLoss !== void 0) {
+															if (typeof e.actorLoss != "string") return o.errors = [{
+																instancePath: t + "/terms/messages/actorLoss",
+																schemaPath: "#/properties/terms/properties/messages/properties/actorLoss/type",
+																keyword: "type",
+																params: { type: "string" },
+																message: "must be string"
+															}], !1;
+															f = !0;
+														} else f = !0;
+														if (f) {
+															if (e.actorNoDamage !== void 0) {
+																if (typeof e.actorNoDamage != "string") return o.errors = [{
+																	instancePath: t + "/terms/messages/actorNoDamage",
+																	schemaPath: "#/properties/terms/properties/messages/properties/actorNoDamage/type",
+																	keyword: "type",
+																	params: { type: "string" },
+																	message: "must be string"
+																}], !1;
+																f = !0;
+															} else f = !0;
+															if (f) {
+																if (e.actorNoHit !== void 0) {
+																	if (typeof e.actorNoHit != "string") return o.errors = [{
+																		instancePath: t + "/terms/messages/actorNoHit",
+																		schemaPath: "#/properties/terms/properties/messages/properties/actorNoHit/type",
+																		keyword: "type",
+																		params: { type: "string" },
+																		message: "must be string"
+																	}], !1;
+																	f = !0;
+																} else f = !0;
+																if (f) {
+																	if (e.actorRecovery !== void 0) {
+																		if (typeof e.actorRecovery != "string") return o.errors = [{
+																			instancePath: t + "/terms/messages/actorRecovery",
+																			schemaPath: "#/properties/terms/properties/messages/properties/actorRecovery/type",
+																			keyword: "type",
+																			params: { type: "string" },
+																			message: "must be string"
+																		}], !1;
+																		f = !0;
+																	} else f = !0;
+																	if (f) {
+																		if (e.alwaysDash !== void 0) {
+																			if (typeof e.alwaysDash != "string") return o.errors = [{
+																				instancePath: t + "/terms/messages/alwaysDash",
+																				schemaPath: "#/properties/terms/properties/messages/properties/alwaysDash/type",
+																				keyword: "type",
+																				params: { type: "string" },
+																				message: "must be string"
+																			}], !1;
+																			f = !0;
+																		} else f = !0;
+																		if (f) {
+																			if (e.autosave !== void 0) {
+																				if (typeof e.autosave != "string") return o.errors = [{
+																					instancePath: t + "/terms/messages/autosave",
+																					schemaPath: "#/properties/terms/properties/messages/properties/autosave/type",
+																					keyword: "type",
+																					params: { type: "string" },
+																					message: "must be string"
+																				}], !1;
+																				f = !0;
+																			} else f = !0;
+																			if (f) {
+																				if (e.bgmVolume !== void 0) {
+																					if (typeof e.bgmVolume != "string") return o.errors = [{
+																						instancePath: t + "/terms/messages/bgmVolume",
+																						schemaPath: "#/properties/terms/properties/messages/properties/bgmVolume/type",
+																						keyword: "type",
+																						params: { type: "string" },
+																						message: "must be string"
+																					}], !1;
+																					f = !0;
+																				} else f = !0;
+																				if (f) {
+																					if (e.bgsVolume !== void 0) {
+																						if (typeof e.bgsVolume != "string") return o.errors = [{
+																							instancePath: t + "/terms/messages/bgsVolume",
+																							schemaPath: "#/properties/terms/properties/messages/properties/bgsVolume/type",
+																							keyword: "type",
+																							params: { type: "string" },
+																							message: "must be string"
+																						}], !1;
+																						f = !0;
+																					} else f = !0;
+																					if (f) {
+																						if (e.buffAdd !== void 0) {
+																							if (typeof e.buffAdd != "string") return o.errors = [{
+																								instancePath: t + "/terms/messages/buffAdd",
+																								schemaPath: "#/properties/terms/properties/messages/properties/buffAdd/type",
+																								keyword: "type",
+																								params: { type: "string" },
+																								message: "must be string"
+																							}], !1;
+																							f = !0;
+																						} else f = !0;
+																						if (f) {
+																							if (e.buffRemove !== void 0) {
+																								if (typeof e.buffRemove != "string") return o.errors = [{
+																									instancePath: t + "/terms/messages/buffRemove",
+																									schemaPath: "#/properties/terms/properties/messages/properties/buffRemove/type",
+																									keyword: "type",
+																									params: { type: "string" },
+																									message: "must be string"
+																								}], !1;
+																								f = !0;
+																							} else f = !0;
+																							if (f) {
+																								if (e.commandRemember !== void 0) {
+																									if (typeof e.commandRemember != "string") return o.errors = [{
+																										instancePath: t + "/terms/messages/commandRemember",
+																										schemaPath: "#/properties/terms/properties/messages/properties/commandRemember/type",
+																										keyword: "type",
+																										params: { type: "string" },
+																										message: "must be string"
+																									}], !1;
+																									f = !0;
+																								} else f = !0;
+																								if (f) {
+																									if (e.counterAttack !== void 0) {
+																										if (typeof e.counterAttack != "string") return o.errors = [{
+																											instancePath: t + "/terms/messages/counterAttack",
+																											schemaPath: "#/properties/terms/properties/messages/properties/counterAttack/type",
+																											keyword: "type",
+																											params: { type: "string" },
+																											message: "must be string"
+																										}], !1;
+																										f = !0;
+																									} else f = !0;
+																									if (f) {
+																										if (e.criticalToActor !== void 0) {
+																											if (typeof e.criticalToActor != "string") return o.errors = [{
+																												instancePath: t + "/terms/messages/criticalToActor",
+																												schemaPath: "#/properties/terms/properties/messages/properties/criticalToActor/type",
+																												keyword: "type",
+																												params: { type: "string" },
+																												message: "must be string"
+																											}], !1;
+																											f = !0;
+																										} else f = !0;
+																										if (f) {
+																											if (e.criticalToEnemy !== void 0) {
+																												if (typeof e.criticalToEnemy != "string") return o.errors = [{
+																													instancePath: t + "/terms/messages/criticalToEnemy",
+																													schemaPath: "#/properties/terms/properties/messages/properties/criticalToEnemy/type",
+																													keyword: "type",
+																													params: { type: "string" },
+																													message: "must be string"
+																												}], !1;
+																												f = !0;
+																											} else f = !0;
+																											if (f) {
+																												if (e.debuffAdd !== void 0) {
+																													if (typeof e.debuffAdd != "string") return o.errors = [{
+																														instancePath: t + "/terms/messages/debuffAdd",
+																														schemaPath: "#/properties/terms/properties/messages/properties/debuffAdd/type",
+																														keyword: "type",
+																														params: { type: "string" },
+																														message: "must be string"
+																													}], !1;
+																													f = !0;
+																												} else f = !0;
+																												if (f) {
+																													if (e.defeat !== void 0) {
+																														if (typeof e.defeat != "string") return o.errors = [{
+																															instancePath: t + "/terms/messages/defeat",
+																															schemaPath: "#/properties/terms/properties/messages/properties/defeat/type",
+																															keyword: "type",
+																															params: { type: "string" },
+																															message: "must be string"
+																														}], !1;
+																														f = !0;
+																													} else f = !0;
+																													if (f) {
+																														if (e.emerge !== void 0) {
+																															if (typeof e.emerge != "string") return o.errors = [{
+																																instancePath: t + "/terms/messages/emerge",
+																																schemaPath: "#/properties/terms/properties/messages/properties/emerge/type",
+																																keyword: "type",
+																																params: { type: "string" },
+																																message: "must be string"
+																															}], !1;
+																															f = !0;
+																														} else f = !0;
+																														if (f) {
+																															if (e.enemyDamage !== void 0) {
+																																if (typeof e.enemyDamage != "string") return o.errors = [{
+																																	instancePath: t + "/terms/messages/enemyDamage",
+																																	schemaPath: "#/properties/terms/properties/messages/properties/enemyDamage/type",
+																																	keyword: "type",
+																																	params: { type: "string" },
+																																	message: "must be string"
+																																}], !1;
+																																f = !0;
+																															} else f = !0;
+																															if (f) {
+																																if (e.enemyDrain !== void 0) {
+																																	if (typeof e.enemyDrain != "string") return o.errors = [{
+																																		instancePath: t + "/terms/messages/enemyDrain",
+																																		schemaPath: "#/properties/terms/properties/messages/properties/enemyDrain/type",
+																																		keyword: "type",
+																																		params: { type: "string" },
+																																		message: "must be string"
+																																	}], !1;
+																																	f = !0;
+																																} else f = !0;
+																																if (f) {
+																																	if (e.enemyGain !== void 0) {
+																																		if (typeof e.enemyGain != "string") return o.errors = [{
+																																			instancePath: t + "/terms/messages/enemyGain",
+																																			schemaPath: "#/properties/terms/properties/messages/properties/enemyGain/type",
+																																			keyword: "type",
+																																			params: { type: "string" },
+																																			message: "must be string"
+																																		}], !1;
+																																		f = !0;
+																																	} else f = !0;
+																																	if (f) {
+																																		if (e.enemyLoss !== void 0) {
+																																			if (typeof e.enemyLoss != "string") return o.errors = [{
+																																				instancePath: t + "/terms/messages/enemyLoss",
+																																				schemaPath: "#/properties/terms/properties/messages/properties/enemyLoss/type",
+																																				keyword: "type",
+																																				params: { type: "string" },
+																																				message: "must be string"
+																																			}], !1;
+																																			f = !0;
+																																		} else f = !0;
+																																		if (f) {
+																																			if (e.enemyNoDamage !== void 0) {
+																																				if (typeof e.enemyNoDamage != "string") return o.errors = [{
+																																					instancePath: t + "/terms/messages/enemyNoDamage",
+																																					schemaPath: "#/properties/terms/properties/messages/properties/enemyNoDamage/type",
+																																					keyword: "type",
+																																					params: { type: "string" },
+																																					message: "must be string"
+																																				}], !1;
+																																				f = !0;
+																																			} else f = !0;
+																																			if (f) {
+																																				if (e.enemyNoHit !== void 0) {
+																																					if (typeof e.enemyNoHit != "string") return o.errors = [{
+																																						instancePath: t + "/terms/messages/enemyNoHit",
+																																						schemaPath: "#/properties/terms/properties/messages/properties/enemyNoHit/type",
+																																						keyword: "type",
+																																						params: { type: "string" },
+																																						message: "must be string"
+																																					}], !1;
+																																					f = !0;
+																																				} else f = !0;
+																																				if (f) {
+																																					if (e.enemyRecovery !== void 0) {
+																																						if (typeof e.enemyRecovery != "string") return o.errors = [{
+																																							instancePath: t + "/terms/messages/enemyRecovery",
+																																							schemaPath: "#/properties/terms/properties/messages/properties/enemyRecovery/type",
+																																							keyword: "type",
+																																							params: { type: "string" },
+																																							message: "must be string"
+																																						}], !1;
+																																						f = !0;
+																																					} else f = !0;
+																																					if (f) {
+																																						if (e.escapeFailure !== void 0) {
+																																							if (typeof e.escapeFailure != "string") return o.errors = [{
+																																								instancePath: t + "/terms/messages/escapeFailure",
+																																								schemaPath: "#/properties/terms/properties/messages/properties/escapeFailure/type",
+																																								keyword: "type",
+																																								params: { type: "string" },
+																																								message: "must be string"
+																																							}], !1;
+																																							f = !0;
+																																						} else f = !0;
+																																						if (f) {
+																																							if (e.escapeStart !== void 0) {
+																																								if (typeof e.escapeStart != "string") return o.errors = [{
+																																									instancePath: t + "/terms/messages/escapeStart",
+																																									schemaPath: "#/properties/terms/properties/messages/properties/escapeStart/type",
+																																									keyword: "type",
+																																									params: { type: "string" },
+																																									message: "must be string"
+																																								}], !1;
+																																								f = !0;
+																																							} else f = !0;
+																																							if (f) {
+																																								if (e.evasion !== void 0) {
+																																									if (typeof e.evasion != "string") return o.errors = [{
+																																										instancePath: t + "/terms/messages/evasion",
+																																										schemaPath: "#/properties/terms/properties/messages/properties/evasion/type",
+																																										keyword: "type",
+																																										params: { type: "string" },
+																																										message: "must be string"
+																																									}], !1;
+																																									f = !0;
+																																								} else f = !0;
+																																								if (f) {
+																																									if (e.expNext !== void 0) {
+																																										if (typeof e.expNext != "string") return o.errors = [{
+																																											instancePath: t + "/terms/messages/expNext",
+																																											schemaPath: "#/properties/terms/properties/messages/properties/expNext/type",
+																																											keyword: "type",
+																																											params: { type: "string" },
+																																											message: "must be string"
+																																										}], !1;
+																																										f = !0;
+																																									} else f = !0;
+																																									if (f) {
+																																										if (e.expTotal !== void 0) {
+																																											if (typeof e.expTotal != "string") return o.errors = [{
+																																												instancePath: t + "/terms/messages/expTotal",
+																																												schemaPath: "#/properties/terms/properties/messages/properties/expTotal/type",
+																																												keyword: "type",
+																																												params: { type: "string" },
+																																												message: "must be string"
+																																											}], !1;
+																																											f = !0;
+																																										} else f = !0;
+																																										if (f) {
+																																											if (e.file !== void 0) {
+																																												if (typeof e.file != "string") return o.errors = [{
+																																													instancePath: t + "/terms/messages/file",
+																																													schemaPath: "#/properties/terms/properties/messages/properties/file/type",
+																																													keyword: "type",
+																																													params: { type: "string" },
+																																													message: "must be string"
+																																												}], !1;
+																																												f = !0;
+																																											} else f = !0;
+																																											if (f) {
+																																												if (e.levelUp !== void 0) {
+																																													if (typeof e.levelUp != "string") return o.errors = [{
+																																														instancePath: t + "/terms/messages/levelUp",
+																																														schemaPath: "#/properties/terms/properties/messages/properties/levelUp/type",
+																																														keyword: "type",
+																																														params: { type: "string" },
+																																														message: "must be string"
+																																													}], !1;
+																																													f = !0;
+																																												} else f = !0;
+																																												if (f) {
+																																													if (e.loadMessage !== void 0) {
+																																														if (typeof e.loadMessage != "string") return o.errors = [{
+																																															instancePath: t + "/terms/messages/loadMessage",
+																																															schemaPath: "#/properties/terms/properties/messages/properties/loadMessage/type",
+																																															keyword: "type",
+																																															params: { type: "string" },
+																																															message: "must be string"
+																																														}], !1;
+																																														f = !0;
+																																													} else f = !0;
+																																													if (f) {
+																																														if (e.magicEvasion !== void 0) {
+																																															if (typeof e.magicEvasion != "string") return o.errors = [{
+																																																instancePath: t + "/terms/messages/magicEvasion",
+																																																schemaPath: "#/properties/terms/properties/messages/properties/magicEvasion/type",
+																																																keyword: "type",
+																																																params: { type: "string" },
+																																																message: "must be string"
+																																															}], !1;
+																																															f = !0;
+																																														} else f = !0;
+																																														if (f) {
+																																															if (e.magicReflection !== void 0) {
+																																																if (typeof e.magicReflection != "string") return o.errors = [{
+																																																	instancePath: t + "/terms/messages/magicReflection",
+																																																	schemaPath: "#/properties/terms/properties/messages/properties/magicReflection/type",
+																																																	keyword: "type",
+																																																	params: { type: "string" },
+																																																	message: "must be string"
+																																																}], !1;
+																																																f = !0;
+																																															} else f = !0;
+																																															if (f) {
+																																																if (e.meVolume !== void 0) {
+																																																	if (typeof e.meVolume != "string") return o.errors = [{
+																																																		instancePath: t + "/terms/messages/meVolume",
+																																																		schemaPath: "#/properties/terms/properties/messages/properties/meVolume/type",
+																																																		keyword: "type",
+																																																		params: { type: "string" },
+																																																		message: "must be string"
+																																																	}], !1;
+																																																	f = !0;
+																																																} else f = !0;
+																																																if (f) {
+																																																	if (e.obtainExp !== void 0) {
+																																																		if (typeof e.obtainExp != "string") return o.errors = [{
+																																																			instancePath: t + "/terms/messages/obtainExp",
+																																																			schemaPath: "#/properties/terms/properties/messages/properties/obtainExp/type",
+																																																			keyword: "type",
+																																																			params: { type: "string" },
+																																																			message: "must be string"
+																																																		}], !1;
+																																																		f = !0;
+																																																	} else f = !0;
+																																																	if (f) {
+																																																		if (e.obtainGold !== void 0) {
+																																																			if (typeof e.obtainGold != "string") return o.errors = [{
+																																																				instancePath: t + "/terms/messages/obtainGold",
+																																																				schemaPath: "#/properties/terms/properties/messages/properties/obtainGold/type",
+																																																				keyword: "type",
+																																																				params: { type: "string" },
+																																																				message: "must be string"
+																																																			}], !1;
+																																																			f = !0;
+																																																		} else f = !0;
+																																																		if (f) {
+																																																			if (e.obtainItem !== void 0) {
+																																																				if (typeof e.obtainItem != "string") return o.errors = [{
+																																																					instancePath: t + "/terms/messages/obtainItem",
+																																																					schemaPath: "#/properties/terms/properties/messages/properties/obtainItem/type",
+																																																					keyword: "type",
+																																																					params: { type: "string" },
+																																																					message: "must be string"
+																																																				}], !1;
+																																																				f = !0;
+																																																			} else f = !0;
+																																																			if (f) {
+																																																				if (e.obtainSkill !== void 0) {
+																																																					if (typeof e.obtainSkill != "string") return o.errors = [{
+																																																						instancePath: t + "/terms/messages/obtainSkill",
+																																																						schemaPath: "#/properties/terms/properties/messages/properties/obtainSkill/type",
+																																																						keyword: "type",
+																																																						params: { type: "string" },
+																																																						message: "must be string"
+																																																					}], !1;
+																																																					f = !0;
+																																																				} else f = !0;
+																																																				if (f) {
+																																																					if (e.partyName !== void 0) {
+																																																						if (typeof e.partyName != "string") return o.errors = [{
+																																																							instancePath: t + "/terms/messages/partyName",
+																																																							schemaPath: "#/properties/terms/properties/messages/properties/partyName/type",
+																																																							keyword: "type",
+																																																							params: { type: "string" },
+																																																							message: "must be string"
+																																																						}], !1;
+																																																						f = !0;
+																																																					} else f = !0;
+																																																					if (f) {
+																																																						if (e.possession !== void 0) {
+																																																							if (typeof e.possession != "string") return o.errors = [{
+																																																								instancePath: t + "/terms/messages/possession",
+																																																								schemaPath: "#/properties/terms/properties/messages/properties/possession/type",
+																																																								keyword: "type",
+																																																								params: { type: "string" },
+																																																								message: "must be string"
+																																																							}], !1;
+																																																							f = !0;
+																																																						} else f = !0;
+																																																						if (f) {
+																																																							if (e.preemptive !== void 0) {
+																																																								if (typeof e.preemptive != "string") return o.errors = [{
+																																																									instancePath: t + "/terms/messages/preemptive",
+																																																									schemaPath: "#/properties/terms/properties/messages/properties/preemptive/type",
+																																																									keyword: "type",
+																																																									params: { type: "string" },
+																																																									message: "must be string"
+																																																								}], !1;
+																																																								f = !0;
+																																																							} else f = !0;
+																																																							if (f) {
+																																																								if (e.saveMessage !== void 0) {
+																																																									if (typeof e.saveMessage != "string") return o.errors = [{
+																																																										instancePath: t + "/terms/messages/saveMessage",
+																																																										schemaPath: "#/properties/terms/properties/messages/properties/saveMessage/type",
+																																																										keyword: "type",
+																																																										params: { type: "string" },
+																																																										message: "must be string"
+																																																									}], !1;
+																																																									f = !0;
+																																																								} else f = !0;
+																																																								if (f) {
+																																																									if (e.seVolume !== void 0) {
+																																																										if (typeof e.seVolume != "string") return o.errors = [{
+																																																											instancePath: t + "/terms/messages/seVolume",
+																																																											schemaPath: "#/properties/terms/properties/messages/properties/seVolume/type",
+																																																											keyword: "type",
+																																																											params: { type: "string" },
+																																																											message: "must be string"
+																																																										}], !1;
+																																																										f = !0;
+																																																									} else f = !0;
+																																																									if (f) {
+																																																										if (e.substitute !== void 0) {
+																																																											if (typeof e.substitute != "string") return o.errors = [{
+																																																												instancePath: t + "/terms/messages/substitute",
+																																																												schemaPath: "#/properties/terms/properties/messages/properties/substitute/type",
+																																																												keyword: "type",
+																																																												params: { type: "string" },
+																																																												message: "must be string"
+																																																											}], !1;
+																																																											f = !0;
+																																																										} else f = !0;
+																																																										if (f) {
+																																																											if (e.surprise !== void 0) {
+																																																												if (typeof e.surprise != "string") return o.errors = [{
+																																																													instancePath: t + "/terms/messages/surprise",
+																																																													schemaPath: "#/properties/terms/properties/messages/properties/surprise/type",
+																																																													keyword: "type",
+																																																													params: { type: "string" },
+																																																													message: "must be string"
+																																																												}], !1;
+																																																												f = !0;
+																																																											} else f = !0;
+																																																											if (f) {
+																																																												if (e.touchUI !== void 0) {
+																																																													if (typeof e.touchUI != "string") return o.errors = [{
+																																																														instancePath: t + "/terms/messages/touchUI",
+																																																														schemaPath: "#/properties/terms/properties/messages/properties/touchUI/type",
+																																																														keyword: "type",
+																																																														params: { type: "string" },
+																																																														message: "must be string"
+																																																													}], !1;
+																																																													f = !0;
+																																																												} else f = !0;
+																																																												if (f) {
+																																																													if (e.useItem !== void 0) {
+																																																														if (typeof e.useItem != "string") return o.errors = [{
+																																																															instancePath: t + "/terms/messages/useItem",
+																																																															schemaPath: "#/properties/terms/properties/messages/properties/useItem/type",
+																																																															keyword: "type",
+																																																															params: { type: "string" },
+																																																															message: "must be string"
+																																																														}], !1;
+																																																														f = !0;
+																																																													} else f = !0;
+																																																													if (f) if (e.victory !== void 0) {
+																																																														if (typeof e.victory != "string") return o.errors = [{
+																																																															instancePath: t + "/terms/messages/victory",
+																																																															schemaPath: "#/properties/terms/properties/messages/properties/victory/type",
+																																																															keyword: "type",
+																																																															params: { type: "string" },
+																																																															message: "must be string"
+																																																														}], !1;
+																																																														f = !0;
+																																																													} else f = !0;
+																																																												}
+																																																											}
+																																																										}
+																																																									}
+																																																								}
+																																																							}
+																																																						}
+																																																					}
+																																																				}
+																																																			}
+																																																		}
+																																																	}
+																																																}
+																																															}
+																																														}
+																																													}
+																																												}
+																																											}
+																																										}
+																																									}
+																																								}
+																																							}
+																																						}
+																																					}
+																																				}
+																																			}
+																																		}
+																																	}
+																																}
+																															}
+																														}
+																													}
+																												}
+																											}
+																										}
+																									}
+																								}
+																							}
+																						}
+																					}
+																				}
+																			}
+																		}
+																	}
+																}
+															}
+														}
+													}
+												}
+											}
+										}
+									}
+									u = !0;
+								} else u = !0;
+								if (u) if (n.params !== void 0) {
+									let e = n.params;
+									if (!Array.isArray(e)) return o.errors = [{
+										instancePath: t + "/terms/params",
+										schemaPath: "#/properties/terms/properties/params/type",
+										keyword: "type",
+										params: { type: "array" },
+										message: "must be array"
+									}], !1;
+									if (e.length > 10) return o.errors = [{
+										instancePath: t + "/terms/params",
+										schemaPath: "#/properties/terms/properties/params/maxItems",
+										keyword: "maxItems",
+										params: { limit: 10 },
+										message: "must NOT have more than 10 items"
+									}], !1;
+									if (e.length < 10) return o.errors = [{
+										instancePath: t + "/terms/params",
+										schemaPath: "#/properties/terms/properties/params/minItems",
+										keyword: "minItems",
+										params: { limit: 10 },
+										message: "must NOT have fewer than 10 items"
+									}], !1;
+									{
+										let n = e.length;
+										for (let r = 0; r < n; r++) {
+											let n = e[r];
+											if (typeof n != "string") return o.errors = [{
+												instancePath: t + "/terms/params/" + r,
+												schemaPath: "#/properties/terms/properties/params/items/type",
+												keyword: "type",
+												params: { type: "string" },
+												message: "must be string"
+											}], !1;
+											if (a(n) < 0) return o.errors = [{
+												instancePath: t + "/terms/params/" + r,
+												schemaPath: "#/properties/terms/properties/params/items/minLength",
+												keyword: "minLength",
+												params: { limit: 0 },
+												message: "must NOT have fewer than 0 characters"
+											}], !1;
+										}
+									}
+									u = !0;
+								} else u = !0;
+							}
+						}
+					}
+					l = !0;
+				} else l = !0;
+			}
+		}
+		return o.errors = null, !0;
+	}
+})), i = t(((e, t) => {
 	t.exports = c, t.exports.default = c;
 	var r = {
 		additionalProperties: !1,
@@ -4197,7 +5490,7 @@ var r = e(t(((e, t) => {
 		}
 		return c.errors = null, !0;
 	}
-}))()), i = r.default, a = (e) => (0, r.default)(e), o = e(t(((e, t) => {
+})), a = e(r()), o = e(i()), s = o.default, c = (e) => (0, o.default)(e), l = (e) => (0, a.default)(e), u = e(t(((e, t) => {
 	function n(e, { instancePath: t = "", parentData: r, parentDataProperty: i, rootData: a = e } = {}) {
 		if (!e || typeof e != "object" || Array.isArray(e)) return n.errors = [{
 			instancePath: t,
@@ -5685,5 +6978,5 @@ var r = e(t(((e, t) => {
 		return n.errors = null, !0;
 	}
 	t.exports = n, t.exports.default = n;
-}))()), s = (e) => (0, o.default)(e);
-export { a as isDataSystem, s as isSystemTexts, i as validateSystemData };
+}))()), d = (e) => (0, u.default)(e);
+export { c as isDataSystem, l as isDataSystemTexts, d as isSystemTexts, s as validateSystemData };

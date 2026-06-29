@@ -9,7 +9,7 @@ export interface System_BooleanGameOptions {
     optSideView: boolean;
     optSlipDeath: boolean;
     optTransparent: boolean;
-    optSplashScreen: boolean;
+    optSplashScreen?: boolean;
     optMessageSkip: boolean;
 }
 export type SystemLable_BooleanOptionsRMMMZ = Record<keyof System_BooleanGameOptions, string>;

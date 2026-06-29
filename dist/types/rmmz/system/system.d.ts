@@ -1,7 +1,19 @@
 import { AudioFileParams, ColorRGBA } from '../../libs';
 import { AttackMotion, Data_Vehicle, ItemCategoriesArray, MenuCommandsEnabledArray, System_Advanced, System_BooleanGameOptions, System_SoundsArray, System_Terms, System_Vehicles, TitleCommandWindow } from './core';
 import { TestBattler, EditorSettings } from './gameEdit';
-export interface Data_System extends System_BooleanGameOptions, System_Vehicles {
+export interface Data_SystemTexts {
+    gameTitle: string;
+    currencyUnit: string;
+    terms: System_Terms;
+    weaponTypes: string[];
+    skillTypes: string[];
+    elements: string[];
+    variables: string[];
+    equipTypes: string[];
+    switches: string[];
+    armorTypes: string[];
+}
+export interface Data_System extends System_BooleanGameOptions, System_Vehicles, Data_SystemTexts {
     battleSystem: number;
     partyMembers: number[];
     magicSkills: number[];
@@ -39,7 +51,7 @@ export interface Data_System extends System_BooleanGameOptions, System_Vehicles 
     optSideView: boolean;
     optSlipDeath: boolean;
     optTransparent: boolean;
-    optSplashScreen: boolean;
+    optSplashScreen?: boolean;
     optMessageSkip: boolean;
     startMapId: number;
     startX: number;
