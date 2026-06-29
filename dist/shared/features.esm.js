@@ -1,6 +1,6 @@
 import { B as e, F as t, K as n, L as r, R as i, U as a, V as o, W as s, X as c, p as l, q as u, r as d, z as f } from "./fileio.esm.js";
 import { n as p } from "./libs.esm.js";
-import { Ai as m, Ci as h, Ho as g, Mi as ee, Mt as _, Nt as v, Oi as te, Ot as ne, Ri as y, Us as re, Ws as ie, c as ae, it as oe, ji as se, s as ce, u as le, wi as ue, wt as b } from "./rmmz.esm.js";
+import { $i as m, Gi as h, Ki as g, Mt as _, Nt as v, Ot as ee, Qi as te, Xi as y, c as ne, dc as re, ea as ie, fc as ae, it as oe, oa as se, s as ce, u as le, us as ue, wt as b } from "./rmmz.esm.js";
 import { createCommandExtractorMapFromPipeline as de, createPluginParamDictionary as fe, extractPluginCommandWithExtractor as pe, filterPluginSchemaByFn as me, filterPluginSchemaStringParams as he, generatePluginAnnotationText as ge, parseDeepRecord as _e } from "@sigureya/rmmz-plugin-schema";
 import { JSONPathJS as ve } from "jsonpath-js";
 var x = (e, t, n, r, i, a) => {
@@ -62,7 +62,7 @@ var x = (e, t, n, r, i, a) => {
 	e.name,
 	e.nickname,
 	e.profile
-])), Me = (e) => h(e, Fe), Ne = (e) => te(e, Fe), Pe = (e) => se(e, Fe), Fe = ({ list: e }) => e.filter(Ie).map(((e) => e.parameters[1])), Ie = (e) => e.code === 320 || e.code === 325 || e.code === 324, S = (e, t) => ({
+])), Me = (e) => h(e, Fe), Ne = (e) => y(e, Fe), Pe = (e) => m(e, Fe), Fe = ({ list: e }) => e.filter(Ie).map(((e) => e.parameters[1])), Ie = (e) => e.code === 320 || e.code === 325 || e.code === 324, S = (e, t) => ({
 	id: e.id,
 	name: e.name,
 	note: Le(e),
@@ -502,16 +502,16 @@ var x = (e, t, n, r, i, a) => {
 ], zt = (e) => {
 	let t = e.filter(Bt).map(((e) => e.speaker.trimEnd()));
 	return Array.from(new Set(t));
-}, Bt = (e) => e.code === 401 && !!e.speaker && !y(e.speaker), Vt = (e, t, n, r, i, a, o) => {
+}, Bt = (e) => e.code === 401 && !!e.speaker && !se(e.speaker), Vt = (e, t, n, r, i, a, o) => {
 	let s = A(tt(e.data, o), e);
 	return Wt(e.data.actors.data, t, s, n, r, i, a);
 }, Ht = Vt, Ut = (e) => [...e.dataNoteSummary, ...e.mapNoteSummary], Wt = (c, l, d, p, m, h, g) => {
-	let { eventData: _, mainData: v, mapFiles: te, system: ne } = d.data.value;
+	let { eventData: _, mainData: v, mapFiles: ee, system: te } = d.data.value;
 	return {
-		speakers: (y = d.data.value, re = h, zt(Rt(y)).map(((e) => ({
+		speakers: (y = d.data.value, ne = h, zt(Rt(y)).map(((e) => ({
 			filename: "",
 			id: 0,
-			uuid: re(e),
+			uuid: ne(e),
 			baseText: e,
 			kind: "speaker",
 			dataKey: "speaker",
@@ -519,14 +519,14 @@ var x = (e, t, n, r, i, a) => {
 		})))),
 		noteSummaries: Ut(d),
 		pluginParams: l.flatMap(((e) => jt(e, h))),
-		map: Gt(te, h, g),
+		map: Gt(ee, h, g),
 		commonEvents: Se(f, _.commonEvents, h, g),
 		troops: we(_.troops, n, g, h),
 		armors: C(v.armors, r, m, h),
-		system: qt(ne, h, p),
+		system: qt(te, h, p),
 		actors: {
 			texts: C(v.actors, t, m, h),
-			controlChars: ee(c)
+			controlChars: ie(c)
 		},
 		classes: C(v.classes, i, m, h),
 		enemies: C(v.enemies, e, m, h),
@@ -535,7 +535,7 @@ var x = (e, t, n, r, i, a) => {
 		states: Ke(v.states, s, m, h),
 		weapons: C(v.weapons, u, m, h)
 	};
-	var y, re;
+	var y, ne;
 }, Gt = (e, t, n) => e.validMaps.map(((e) => Kt(e, t, n))).flat(3), Kt = (e, t, n) => e.map.events.map(((r) => ((e, t, n, r) => {
 	let i = `page:${e.pageIndex + 1}`, a = lt(e);
 	return [e.noteItems.map(((r) => ({
@@ -704,7 +704,7 @@ var x = (e, t, n, r, i, a) => {
 	128: "armor",
 	126: "item"
 }, hn = (e, t, n) => {
-	let r = ie(e) ? {
+	let r = ae(e) ? {
 		direct: !1,
 		variableId: e.parameters[3]
 	} : {
@@ -725,7 +725,7 @@ var x = (e, t, n, r, i, a) => {
 	commands: pn(e.list, t, n),
 	eventName: i.name,
 	pageIndex: r
-}))), _n = (e) => e.conditions.itemId > 0 && e.conditions.itemValid ? { pageCondition: { itemId: e.conditions.itemId } } : {}, vn = (e, t, n) => ue(e, ((e, r, i) => ({
+}))), _n = (e) => e.conditions.itemId > 0 && e.conditions.itemValid ? { pageCondition: { itemId: e.conditions.itemId } } : {}, vn = (e, t, n) => g(e, ((e, r, i) => ({
 	commands: pn(e.list, t, n),
 	eventName: i.name,
 	troopId: i.id,
@@ -813,7 +813,7 @@ var x = (e, t, n, r, i, a) => {
 	};
 }, Cn = (e, t) => {
 	let n = e.parameters[4] ? P(e.parameters[4], t) : "";
-	return g({
+	return ue({
 		facename: e.parameters[0],
 		faceIndex: e.parameters[1],
 		background: e.parameters[2],
@@ -840,9 +840,9 @@ var x = (e, t, n, r, i, a) => {
 			e.parameters[4]
 		]
 	};
-}, En = (e, t, n = "\n") => Dn(e, ((e) => t.get(e)), n), Dn = (e, t, n = "\n") => ne(e.note, ((e) => P(e.value, t)), n), On = (e, t) => kn(e, ((e) => yn(e, t))), kn = (e, t) => ({
+}, En = (e, t, n = "\n") => Dn(e, ((e) => t.get(e)), n), Dn = (e, t, n = "\n") => ee(e.note, ((e) => P(e.value, t)), n), On = (e, t) => kn(e, ((e) => yn(e, t))), kn = (e, t) => ({
 	params: Mn(e.params, ((e) => P(e, t))),
-	messages: ae(e.messages, ((e) => P(e, t))),
+	messages: ne(e.messages, ((e) => P(e, t))),
 	basic: An(e.basic, ((e) => P(e, t))),
 	commands: jn(e.commands, ((e) => P(e, t)))
 }), An = (e, t) => [
@@ -1182,7 +1182,7 @@ var x = (e, t, n, r, i, a) => {
 }))), J = (e, t) => `${e}:${t}`, gr = (e) => J(e.parameters[0], e.parameters[1]), _r = (e) => [
 	...e.commonEvents.data.flatMap(lr),
 	...e.troops.data.flatMap(ur),
-	...e.mapFiles.validMaps.flatMap(((e) => ((e) => m(e, ((e) => e.list.filter(dr))))(e.map).flat(2)))
+	...e.mapFiles.validMaps.flatMap(((e) => ((e) => te(e, ((e) => e.list.filter(dr))))(e.map).flat(2)))
 ], vr = (e) => {
 	let t = /* @__PURE__ */ new Map();
 	for (let n of e) {
