@@ -16,4 +16,5 @@ export interface Rmmz_BattlerBase extends Rmmz_BattlerBuffs, Rmmz_Equipable, Rmm
     get hp(): number;
     get mp(): number;
     get tp(): number;
+    get tgr(): number;
 }

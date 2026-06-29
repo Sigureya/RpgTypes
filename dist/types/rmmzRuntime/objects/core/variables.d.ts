@@ -8,3 +8,7 @@ export interface Rmmz_Switches {
     value(switchId: number): boolean;
     setValue(switchId: number, value: boolean): void;
 }
+export interface Rmmz_SelfSwitches {
+    value(key: string): boolean;
+    setValue(key: string, value: boolean): void;
+}

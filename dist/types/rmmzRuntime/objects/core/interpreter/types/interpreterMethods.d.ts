@@ -81,6 +81,9 @@ export interface InterpreterMapper extends CommandTypeAssert {
     command284(params: ParamArray_ChangeParallax): boolean;
     command285(params: ParamArray_GetLocationInfo): boolean;
     command301(params: ParamArray_BattleProcessing): boolean;
+    command601(ifBattleWin: []): boolean;
+    command602(ifBattleEscape: []): boolean;
+    command603(ifBattleLose: []): boolean;
     command302(params: ParamArray_ShopProcessing): boolean;
     command303(params: ParamArray_NameInputProcessing): boolean;
     command311(params: ParamArray_ChangeActorHP): boolean;

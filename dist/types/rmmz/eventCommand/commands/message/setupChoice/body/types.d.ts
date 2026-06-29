@@ -6,7 +6,13 @@ export type ParamArray_SetupChoice = [
     positionType: number,
     background: number
 ];
-export interface ParamObject_SetupChoice {
+export interface ParamObject_SetupChoiceOptions {
+    cancelType: number;
+    defaultType: number;
+    positionType: number;
+    background: number;
+}
+export interface ParamObject_SetupChoice extends ParamObject_SetupChoiceOptions {
     choices: string[];
     cancelType: number;
     defaultType: number;

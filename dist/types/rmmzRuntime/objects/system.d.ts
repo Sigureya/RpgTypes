@@ -1,5 +1,8 @@
 import { AudioFileParams, ColorRGBA } from '../../libs';
 import { Rmmz_System } from './core/system/system';
+export interface Rmmz_System_Constructor {
+    new (): Rmmz_System;
+}
 declare global {
     class Game_System implements Rmmz_System {
         isJapanese(): boolean;
