@@ -1,15 +1,15 @@
 import { describe, test, expect } from "vitest";
-import type {
-  Data_System,
-  Terms_CommandArray,
-  Terms_GameCommands,
-} from "@RpgTypes/rmmz";
+import type { Data_System, Terms_GameCommands } from "@RpgTypes/rmmz";
 import {
   makeSystemData,
   makeTermsCommandArray,
   makeTermsCommandArrayWithNulls,
   makeTermsCommandFromArray,
 } from "@RpgTypes/rmmz";
+import type {
+  Terms_CommandArray2,
+  Terms_CommandArrayWorkaround,
+} from "@RpgTypes/rmmz/system/core/terms/core/commands/types";
 import Ajv from "ajv";
 import { SCHEMA_SYSTEM_MEMBERS_TERMS_COMMANDS_ARRAY } from "./commands";
 
@@ -21,7 +21,7 @@ describe("SCHEMA_SYSTEM_MEMBERS_TERMS_COMMANDS_ARRAY", () => {
     expect(validate).toBeTypeOf("function");
   });
   test("makeTermsCommand returns valid Terms_CommandArray with default values", () => {
-    const validTermsCommandArray: Terms_CommandArray = makeTermsCommandArray(
+    const validTermsCommandArray: Terms_CommandArray2 = makeTermsCommandArray(
       {},
     );
     expect(validate(validTermsCommandArray)).toBe(true);
@@ -44,7 +44,7 @@ describe("SCHEMA_SYSTEM_MEMBERS_TERMS_COMMANDS_ARRAY", () => {
   });
   test("", () => {
     const data: Data_System = makeSystemData({});
-    const termsCommandArray: Terms_CommandArray = data.terms.commands;
+    const termsCommandArray: Terms_CommandArrayWorkaround = data.terms.commands;
     expect(termsCommandArray).toSatisfy(validate);
   });
 });
@@ -56,7 +56,7 @@ const testTermsCommandProperty = (
   const terms: Partial<Terms_GameCommands> = {
     [key]: text,
   };
-  const termsArray: Terms_CommandArray = makeTermsCommandArray(terms);
+  const termsArray: Terms_CommandArray2 = makeTermsCommandArray(terms);
   const termsObject: Terms_GameCommands = makeTermsCommandFromArray(termsArray);
   test(`makeTermsCommandFromArray reconstructs ${key} = ${text}`, () => {
     expect(termsObject[key]).toBe(text);
@@ -93,7 +93,7 @@ describe("makeTermsCommand individual property assignment", () => {
 });
 
 describe("makeTermsCommand with all properties set", () => {
-  const termsArray: Terms_CommandArray = makeTermsCommandArray({
+  const termsArray: Terms_CommandArray2 = makeTermsCommandArray({
     fight: "A0",
     escape: "B1",
     attack: "C2",

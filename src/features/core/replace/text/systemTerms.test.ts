@@ -4,7 +4,6 @@ import type {
   Terms_Basic,
   Terms_GameCommands,
   Terms_BasicArray,
-  Terms_CommandArray,
   Terms_Messages,
 } from "@RpgTypes/rmmz";
 import {
@@ -13,6 +12,7 @@ import {
   makeTermsMessages,
   makeParamNamesArray,
 } from "@RpgTypes/rmmz";
+import type { Terms_CommandArray2 } from "@RpgTypes/rmmz/system/core/terms/core/commands/types";
 import { replaceSystemTermsByMap } from "./systemTerms";
 
 const mockBasicTerms = {
@@ -169,7 +169,7 @@ describe("replaceSystemTerms", () => {
     expect(replaced.basic).toEqual(basicArray);
   });
   test("command terms are replaced", () => {
-    const commandArray: Terms_CommandArray = makeTermsCommandArray({
+    const commandArray: Terms_CommandArray2 = makeTermsCommandArray({
       armor: "防具",
       attack: "攻撃",
       buy: "購入",

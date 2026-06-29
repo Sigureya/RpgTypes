@@ -1,5 +1,9 @@
 import type { Terms_Basic, Terms_BasicArray } from "./basic/types";
-import type { Terms_CommandArray, Terms_GameCommands } from "./commands/types";
+import type {
+  Terms_CommandArray,
+  Terms_CommandArrayWorkaround,
+  Terms_GameCommands,
+} from "./commands/types";
 import type { Terms_Messages, Terms_MessagesMV } from "./messages/types";
 import type {
   SystemLabels_TermsParamNames,
@@ -8,7 +12,7 @@ import type {
 
 export interface System_Terms {
   messages: Terms_Messages;
-  commands: Terms_CommandArray;
+  commands: Terms_CommandArrayWorkaround;
   params: Terms_ParamNamesArray;
   basic: Terms_BasicArray;
 }

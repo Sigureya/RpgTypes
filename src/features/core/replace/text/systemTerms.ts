@@ -1,9 +1,6 @@
-import type {
-  System_Terms,
-  Terms_BasicArray,
-  Terms_CommandArray,
-} from "@RpgTypes/rmmz";
+import type { System_Terms, Terms_BasicArray } from "@RpgTypes/rmmz";
 import { replaceSystemMessages } from "@RpgTypes/rmmz";
+import type { Terms_CommandArrayWorkaround } from "@RpgTypes/rmmz/system/core/terms/core/commands/types";
 import { replaceTextByFunction, replaceTextByMap } from "./utils";
 
 export const replaceSystemTermsByMap = (
@@ -52,9 +49,9 @@ const replaceBasicTerms = (
 };
 
 const replaceCommandsArray = (
-  commands: Terms_CommandArray,
+  commands: Terms_CommandArrayWorkaround,
   newTextFn: (text: string) => string,
-): Terms_CommandArray => {
+): Terms_CommandArrayWorkaround => {
   return [
     newTextFn(commands[0]),
     newTextFn(commands[1]),
