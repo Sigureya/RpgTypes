@@ -2,6 +2,7 @@ import type {
   Data_Map,
   Data_MapInfo,
   Data_System,
+  Data_SystemTexts,
   MapFileInfo,
 } from "@RpgTypes/rmmz";
 import type { ReadArrayResult } from "./arrayData";
@@ -415,10 +416,10 @@ const readMapBatchData = async <T>(
   );
 };
 
-const convertSystemIfSuccess = <R>(
-  result: ReadSystemResult,
+const convertSystemIfSuccess = <S extends Data_SystemTexts, R>(
+  result: ReadSystemResult<S>,
   terms: ReadAllDataErrorMessages,
-  fn: (system: Data_System, filename: string) => R,
+  fn: (system: S, filename: string) => R,
 ): ReadSystemResult<R> => {
   if (result.system === null) {
     return {

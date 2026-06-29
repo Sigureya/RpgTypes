@@ -1,8 +1,12 @@
-import type { Data_System, Data_SystemMV } from "@RpgTypes/rmmz";
+import type {
+  Data_System,
+  Data_SystemMV,
+  Data_SystemTexts,
+} from "@RpgTypes/rmmz";
 import type { FILENAME_SYSTEM } from "./constants";
 
 export interface SystemDataReadHandler {
-  validateSystemMz: (item: unknown) => item is Data_System;
+  validateSystemMz: (item: unknown) => item is Data_SystemTexts;
   validateSystemMv?: (item: unknown) => item is Data_SystemMV;
 }
 

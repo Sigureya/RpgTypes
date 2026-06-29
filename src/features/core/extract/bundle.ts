@@ -13,7 +13,7 @@ import type {
   Data_CommonEvent,
   Data_Troop,
   MapFileInfo,
-  Data_System,
+  Data_SystemTexts,
 } from "@RpgTypes/rmmz";
 import { extractTextFromSystem } from "@RpgTypes/rmmz";
 import type {
@@ -90,7 +90,7 @@ export const extractTextFromRawGameData = (
 };
 
 const systemXX = (
-  data: ReadSystemResult<Data_System>,
+  data: ReadSystemResult<Data_SystemTexts>,
 ): ReadSystemResult<SystemTexts> => {
   if (data.system === null) {
     return {
@@ -131,7 +131,7 @@ const collectDataReadErrors = (
 
 const collectMapAndSystemErrors = (
   mapFiles: RawGameData["mapFiles"],
-  system: ReadSystemResult<Data_System>,
+  system: ReadSystemResult<Data_SystemTexts>,
 ): DataReadErrorItem[] => {
   const mapInfoErrors: DataReadErrorItem[] =
     mapFiles.info.success === false

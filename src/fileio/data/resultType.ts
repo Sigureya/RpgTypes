@@ -16,6 +16,7 @@ import type {
   Data_Weapon,
   EventCommand,
   EventCommandUnknown,
+  Data_SystemTexts,
 } from "@RpgTypes/rmmz";
 import type { ReadArrayResult } from "./arrayData";
 import type { MapBatchReadResult } from "./map";
@@ -145,7 +146,7 @@ export interface RawGameEventData<
 
 export type RawGameDataNullableSystem<
   Command extends EventCommandUnknown = EventCommand,
-> = RawGameData<Command, Data_System | null>;
+> = RawGameData<Command, Data_SystemTexts | null>;
 
 export interface RawGameData<
   Command extends EventCommandUnknown = EventCommand,

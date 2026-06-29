@@ -16,6 +16,7 @@ import type {
   Data_Map,
   Data_Animation,
   Data_Tileset,
+  Data_SystemTexts,
 } from "@RpgTypes/rmmz";
 
 export interface RpgDataReadHandlersBase {
@@ -60,7 +61,7 @@ export interface RpgDataReadHandlers<
   readStates(state: Data_State[], filePath: string): State;
   readActors(actors: Data_Actor[], filePath: string): Actor;
   readCommonEvents(events: Data_CommonEvent[], filePath: string): Common;
-  readSystem(system: Data_System, filePath: string): System;
+  readSystem(system: Data_SystemTexts, filePath: string): System;
   readMap(map: MapFileInfo): Map;
   readTroops(troops: Data_Troop[], filePath: string): Troop;
   readAnimations(animations: Data_Animation[], filePath: string): Animation;
