@@ -1,0 +1,344 @@
+{
+  "additionalProperties": true,
+  "properties": {
+    "currencyUnit": {
+      "type": "string"
+    },
+    "gameTitle": {
+      "type": "string"
+    },
+    "terms": {
+      "additionalProperties": false,
+      "properties": {
+        "basic": {
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 10,
+          "minItems": 10,
+          "type": "array"
+        },
+        "commands": {
+          "items": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "string"
+            },
+            {
+              "type": "string"
+            },
+            {
+              "type": "string"
+            },
+            {
+              "type": "string"
+            },
+            {
+              "type": "string"
+            },
+            {
+              "type": "string"
+            },
+            {
+              "type": "string"
+            },
+            {
+              "type": "string"
+            },
+            {
+              "type": "string"
+            },
+            {
+              "type": "string"
+            },
+            {
+              "type": "string"
+            },
+            {
+              "type": "string"
+            },
+            {
+              "type": "string"
+            },
+            {
+              "type": "string"
+            },
+            {
+              "type": "string"
+            },
+            {
+              "type": "string"
+            },
+            {
+              "type": "string"
+            },
+            {
+              "type": "string"
+            },
+            {
+              "type": "string"
+            },
+            {
+              "nullable": true,
+              "type": "string"
+            },
+            {
+              "type": "string"
+            },
+            {
+              "type": "string"
+            },
+            {
+              "nullable": true,
+              "type": "string"
+            },
+            {
+              "type": "string"
+            },
+            {
+              "type": "string"
+            }
+          ],
+          "maxItems": 26,
+          "minItems": 26,
+          "type": "array"
+        },
+        "messages": {
+          "additionalProperties": false,
+          "properties": {
+            "actionFailure": {
+              "type": "string"
+            },
+            "actorDamage": {
+              "type": "string"
+            },
+            "actorDrain": {
+              "type": "string"
+            },
+            "actorGain": {
+              "type": "string"
+            },
+            "actorLoss": {
+              "type": "string"
+            },
+            "actorNoDamage": {
+              "type": "string"
+            },
+            "actorNoHit": {
+              "type": "string"
+            },
+            "actorRecovery": {
+              "type": "string"
+            },
+            "alwaysDash": {
+              "type": "string"
+            },
+            "autosave": {
+              "type": "string"
+            },
+            "bgmVolume": {
+              "type": "string"
+            },
+            "bgsVolume": {
+              "type": "string"
+            },
+            "buffAdd": {
+              "type": "string"
+            },
+            "buffRemove": {
+              "type": "string"
+            },
+            "commandRemember": {
+              "type": "string"
+            },
+            "counterAttack": {
+              "type": "string"
+            },
+            "criticalToActor": {
+              "type": "string"
+            },
+            "criticalToEnemy": {
+              "type": "string"
+            },
+            "debuffAdd": {
+              "type": "string"
+            },
+            "defeat": {
+              "type": "string"
+            },
+            "emerge": {
+              "type": "string"
+            },
+            "enemyDamage": {
+              "type": "string"
+            },
+            "enemyDrain": {
+              "type": "string"
+            },
+            "enemyGain": {
+              "type": "string"
+            },
+            "enemyLoss": {
+              "type": "string"
+            },
+            "enemyNoDamage": {
+              "type": "string"
+            },
+            "enemyNoHit": {
+              "type": "string"
+            },
+            "enemyRecovery": {
+              "type": "string"
+            },
+            "escapeFailure": {
+              "type": "string"
+            },
+            "escapeStart": {
+              "type": "string"
+            },
+            "evasion": {
+              "type": "string"
+            },
+            "expNext": {
+              "type": "string"
+            },
+            "expTotal": {
+              "type": "string"
+            },
+            "file": {
+              "type": "string"
+            },
+            "levelUp": {
+              "type": "string"
+            },
+            "loadMessage": {
+              "type": "string"
+            },
+            "magicEvasion": {
+              "type": "string"
+            },
+            "magicReflection": {
+              "type": "string"
+            },
+            "meVolume": {
+              "type": "string"
+            },
+            "obtainExp": {
+              "type": "string"
+            },
+            "obtainGold": {
+              "type": "string"
+            },
+            "obtainItem": {
+              "type": "string"
+            },
+            "obtainSkill": {
+              "type": "string"
+            },
+            "partyName": {
+              "type": "string"
+            },
+            "possession": {
+              "type": "string"
+            },
+            "preemptive": {
+              "type": "string"
+            },
+            "saveMessage": {
+              "type": "string"
+            },
+            "seVolume": {
+              "type": "string"
+            },
+            "substitute": {
+              "type": "string"
+            },
+            "surprise": {
+              "type": "string"
+            },
+            "touchUI": {
+              "type": "string"
+            },
+            "useItem": {
+              "type": "string"
+            },
+            "victory": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "actionFailure",
+            "actorDamage",
+            "actorDrain",
+            "actorGain",
+            "actorLoss",
+            "actorNoDamage",
+            "actorNoHit",
+            "actorRecovery",
+            "alwaysDash",
+            "autosave",
+            "bgmVolume",
+            "bgsVolume",
+            "buffAdd",
+            "buffRemove",
+            "commandRemember",
+            "counterAttack",
+            "criticalToActor",
+            "criticalToEnemy",
+            "debuffAdd",
+            "defeat",
+            "emerge",
+            "enemyDamage",
+            "enemyDrain",
+            "enemyGain",
+            "enemyLoss",
+            "enemyNoDamage",
+            "enemyNoHit",
+            "enemyRecovery",
+            "escapeFailure",
+            "escapeStart",
+            "evasion",
+            "expNext",
+            "expTotal",
+            "file",
+            "levelUp",
+            "loadMessage",
+            "magicEvasion",
+            "magicReflection",
+            "meVolume",
+            "obtainExp",
+            "obtainGold",
+            "obtainItem",
+            "obtainSkill",
+            "partyName",
+            "possession",
+            "preemptive",
+            "saveMessage",
+            "seVolume",
+            "substitute",
+            "surprise",
+            "touchUI",
+            "useItem",
+            "victory"
+          ],
+          "type": "object"
+        },
+        "params": {
+          "items": {
+            "minLength": 0,
+            "type": "string"
+          },
+          "maxItems": 10,
+          "minItems": 10,
+          "type": "array"
+        }
+      },
+      "required": ["messages", "commands", "basic", "params"],
+      "type": "object"
+    },
+    "type": "object"
+  },
+  "required": ["gameTitle", "currencyUnit", "terms"]
+}
