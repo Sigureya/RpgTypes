@@ -12,7 +12,6 @@ import {
   makeItemDataFromTestSoruce,
   makeSkillDataFromTestSoruce,
   makeStateDataFromTestSoruce,
-  makeTestSystemData,
   makeTroopData,
   makeWeaponDataFromTestSoruce,
 } from "@RpgTypes/rmmz";
@@ -33,12 +32,12 @@ import {
   FILENAME_TROOPS,
   FILENAME_WEAPONS,
 } from "./arrayData";
-import type { RawGameData } from "./resultType";
+import type { RawGameData2 } from "./resultType";
 import type { TestRawDataSource } from "./types";
 
 export const makeRawTestDataBundle = (
   soruce: TestRawDataSource,
-): RawGameData => {
+): RawGameData2 => {
   const { message } = soruce;
   return {
     actors: makeReadResult(
@@ -100,10 +99,6 @@ export const makeRawTestDataBundle = (
     mapInfos: makeEmptyReadResult(message, FILENAME_MAP_INFOS),
     animations: makeEmptyReadResult(message, FILENAME_ANIMATIONS),
     tilesets: makeEmptyReadResult(message, FILENAME_TILESET),
-    system: {
-      system: makeTestSystemData(soruce),
-      message: message,
-    },
     mapFiles: {
       info: { success: true },
       invalidMaps: [],

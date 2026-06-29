@@ -1,11 +1,6 @@
 import type { IdentifiedItems } from "@RpgTypes/libs";
-import type { Data_System } from "@RpgTypes/rmmz";
-import {
-  makeSystemData,
-  type Data_Map,
-  type MapFileInfo,
-  type RpgDataBundle,
-} from "@RpgTypes/rmmz";
+import type { EventCommand } from "@RpgTypes/rmmz";
+import type { Data_Map, MapFileInfo, RpgDataBundle } from "@RpgTypes/rmmz";
 import type {
   MainDataFileEntry,
   MainDataFileNames,
@@ -31,20 +26,19 @@ import {
 } from "./arrayData";
 import type { MapBatchReadResult, MapFileNameWithExt } from "./map";
 import { writeMapFiles } from "./map";
-import type { RawGameData } from "./resultType";
+import type { RawGameData, RawGameData2 } from "./resultType";
 import type { SystemDataFileEntry } from "./system";
 import { FILENAME_SYSTEM } from "./system";
 import type { DataFileNames } from "./types";
 
 export const rawGameDataToMainDataFileEntries = (
-  data: RawGameData,
-  makeSystemDataFn: () => Data_System = () => makeSystemData({}),
+  data: RawGameData2<EventCommand>,
 ): (MainDataFileUnion | SystemDataFileEntry)[] => {
   return [
-    {
-      filename: FILENAME_SYSTEM,
-      data: data.system.system ? data.system.system : makeSystemDataFn(),
-    },
+    // {
+    //   filename: FILENAME_SYSTEM,
+    //   data: data.system.system ? data.system.system : makeSystemDataFn(),
+    // },
     createFilePayload(FILENAME_ACTORS, data.actors.data),
     createFilePayload(FILENAME_CLASSES, data.classes.data),
     createFilePayload(FILENAME_SKILLS, data.skills.data),

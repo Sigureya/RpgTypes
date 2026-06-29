@@ -1,9 +1,9 @@
 import type {
   AssetFilesBundle,
-  RawGameData,
+  RawGameData2,
   ReadArrayResult,
 } from "@RpgTypes/fileio";
-import type { NormalizedEventCommand } from "@RpgTypes/rmmz";
+import type { EventCommand, NormalizedEventCommand } from "@RpgTypes/rmmz";
 import type {
   EventContainerExtractor,
   RawGameDataNoteNormalization,
@@ -19,7 +19,6 @@ import {
   replaceEnemyText,
   replaceSkillText,
   replaceStateText,
-  replaceSystemText,
 } from "./replace/text";
 import type { RpgDataReplaceHandlers } from "./replace/types";
 import {
@@ -29,10 +28,9 @@ import {
 } from "./replaceEvent";
 
 export const replaceRawDataBundle = (
-  data: RawGameData,
+  data: RawGameData2<EventCommand>,
   handlers: RpgDataReplaceHandlers,
-  systemReplaceFn: (text: string) => string | undefined,
-): RawGameData<NormalizedEventCommand> => {
+): RawGameData2<NormalizedEventCommand> => {
   return {
     tilesets: data.tilesets,
     animations: data.animations,
@@ -61,10 +59,6 @@ export const replaceRawDataBundle = (
     states: mapReadArrayResult(data.states, (item) =>
       replaceStateText(item, handlers),
     ),
-    system: {
-      message: data.system.message,
-      system: replaceSystemText(data.system.system, systemReplaceFn),
-    },
     troops: mapReadArrayResult(data.troops, (item) =>
       replaceTroopData(item, handlers),
     ),
@@ -96,13 +90,12 @@ const mapReadArrayResult = <T, R>(
 };
 
 export const replaceRawDataWithAutoNoteFilter = (
-  data: RawGameData,
+  data: RawGameData2<EventCommand>,
   assetBundle: AssetFilesBundle,
   extractor: EventContainerExtractor,
   handlers: RpgDataReplaceHandlers,
-  systemReplaceFn: (text: string) => string | undefined,
 ): {
-  data: RawGameData<NormalizedEventCommand>;
+  data: RawGameData2<NormalizedEventCommand>;
   note: RawGameDataNoteNormalization;
 } => {
   // まずテキストを抽出し
@@ -122,7 +115,7 @@ export const replaceRawDataWithAutoNoteFilter = (
 
   // 置換処理を実行
   return {
-    data: replaceRawDataBundle(data, filteredHandlers, systemReplaceFn),
+    data: replaceRawDataBundle(data, filteredHandlers),
     note: normalizedNote,
   };
 };
