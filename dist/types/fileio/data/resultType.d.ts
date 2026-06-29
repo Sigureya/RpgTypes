@@ -82,7 +82,7 @@ export interface RawGameEventData<Command extends EventCommandUnknown = EventCom
     troops: ReadArrayResult<Data_TroopUnknonw<Command>>;
     mapFiles: MapBatchReadResult<Data_MapUnknown<Command>>;
 }
-export type RawGameDataNullableSystem<Command extends EventCommandUnknown = EventCommand> = RawGameData<Command, Data_SystemTexts | null>;
+export type RawGameDataNullableSystem<Command extends EventCommandUnknown = EventCommand> = RawGameData<Command, Data_SystemTexts | null | undefined>;
 export interface RawGameData<Command extends EventCommandUnknown = EventCommand, System = Data_System> extends ReadAllDataFields, RawGameEventData<Command> {
     actors: ReadArrayResult<Data_Actor>;
     armors: ReadArrayResult<Data_Armor>;
@@ -94,6 +94,22 @@ export interface RawGameData<Command extends EventCommandUnknown = EventCommand,
     skills: ReadArrayResult<Data_Skill>;
     states: ReadArrayResult<Data_State>;
     system: ReadSystemResultSuccess<System>;
+    troops: ReadArrayResult<Data_TroopUnknonw<Command>>;
+    weapons: ReadArrayResult<Data_Weapon>;
+    tilesets: ReadArrayResult<Data_Tileset>;
+    animations: ReadArrayResult<Data_Animation>;
+    mapFiles: MapBatchReadResult<Data_MapUnknown<Command>>;
+}
+export interface RawGameData2<Command extends EventCommandUnknown = EventCommand> extends RawGameEventData<Command> {
+    actors: ReadArrayResult<Data_Actor>;
+    armors: ReadArrayResult<Data_Armor>;
+    classes: ReadArrayResult<Data_Class>;
+    commonEvents: ReadArrayResult<Data_CommonEventUnknown<Command>>;
+    enemies: ReadArrayResult<Data_Enemy>;
+    items: ReadArrayResult<Data_Item>;
+    mapInfos: ReadArrayResult<Data_MapInfo>;
+    skills: ReadArrayResult<Data_Skill>;
+    states: ReadArrayResult<Data_State>;
     troops: ReadArrayResult<Data_TroopUnknonw<Command>>;
     weapons: ReadArrayResult<Data_Weapon>;
     tilesets: ReadArrayResult<Data_Tileset>;

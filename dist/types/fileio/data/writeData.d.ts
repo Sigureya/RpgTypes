@@ -1,10 +1,10 @@
-import { Data_System, Data_Map, RpgDataBundle } from '../../rmmz';
+import { EventCommand, Data_Map, RpgDataBundle } from '../../rmmz';
 import { MainDataFileUnion } from './arrayData';
 import { MapBatchReadResult, MapFileNameWithExt } from './map';
-import { RawGameData } from './resultType';
+import { RawGameData, RawGameData2 } from './resultType';
 import { SystemDataFileEntry } from './system';
 import { DataFileNames } from './types';
-export declare const rawGameDataToMainDataFileEntries: (data: RawGameData, makeSystemDataFn?: () => Data_System) => (MainDataFileUnion | SystemDataFileEntry)[];
+export declare const rawGameDataToMainDataFileEntries: (data: RawGameData2<EventCommand>) => (MainDataFileUnion | SystemDataFileEntry)[];
 export declare const writeSystemData: (system: RpgDataBundle["system"], fn: (filename: DataFileNames | MapFileNameWithExt, json: string) => Promise<void>) => Promise<void>;
 export declare const writeBundleData: (bundle: RpgDataBundle, map: MapBatchReadResult<Data_Map>, fn: (filename: DataFileNames | MapFileNameWithExt, json: string) => Promise<void>) => Promise<void>;
 export declare const writeRawGameData: (data: RawGameData, fileWriteFn: (filename: DataFileNames | MapFileNameWithExt, json: string) => Promise<void>) => Promise<void>;

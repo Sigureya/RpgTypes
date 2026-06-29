@@ -1,10 +1,10 @@
 export * from './core';
 export * from './gameEdit';
+export * from './makeSystem';
 export * from './subset';
 export * from './system';
 export * from './systemLabels';
 export * from './systemMV';
 export * from './systemSegments';
 export * from './terms';
-export { makeSystemData } from './makeSystem';
 export { makeSystemDataFromMV, makeSystemDataMV, makeTestSystemData, } from './makeSystemEx';

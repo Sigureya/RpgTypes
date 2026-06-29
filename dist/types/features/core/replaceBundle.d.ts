@@ -1,9 +1,9 @@
-import { AssetFilesBundle, RawGameData } from '../../fileio';
-import { NormalizedEventCommand } from '../../rmmz';
+import { AssetFilesBundle, RawGameData2 } from '../../fileio';
+import { EventCommand, NormalizedEventCommand } from '../../rmmz';
 import { EventContainerExtractor, RawGameDataNoteNormalization } from './extract';
 import { RpgDataReplaceHandlers } from './replace/types';
-export declare const replaceRawDataBundle: (data: RawGameData, handlers: RpgDataReplaceHandlers, systemReplaceFn: (text: string) => string | undefined) => RawGameData<NormalizedEventCommand>;
-export declare const replaceRawDataWithAutoNoteFilter: (data: RawGameData, assetBundle: AssetFilesBundle, extractor: EventContainerExtractor, handlers: RpgDataReplaceHandlers, systemReplaceFn: (text: string) => string | undefined) => {
-    data: RawGameData<NormalizedEventCommand>;
+export declare const replaceRawDataBundle: (data: RawGameData2<EventCommand>, handlers: RpgDataReplaceHandlers) => RawGameData2<NormalizedEventCommand>;
+export declare const replaceRawDataWithAutoNoteFilter: (data: RawGameData2<EventCommand>, assetBundle: AssetFilesBundle, extractor: EventContainerExtractor, handlers: RpgDataReplaceHandlers) => {
+    data: RawGameData2<NormalizedEventCommand>;
     note: RawGameDataNoteNormalization;
 };

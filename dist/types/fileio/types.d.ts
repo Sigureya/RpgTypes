@@ -1,10 +1,10 @@
 import { AssetFilesBundle, AudioFilesSet, ImageFilesSet, OtherFilesSet } from './asset';
-import { RawGameDataNullableSystem } from './data';
+import { RawGameData2 } from './data';
 export interface FileReadBundle extends AssetFilesBundle {
     audioFiles: AudioFilesSet;
     imageFiles: ImageFilesSet;
     otherFiles: OtherFilesSet;
-    data: RawGameDataNullableSystem;
+    data: RawGameData2;
 }
 export interface FileReadFailed {
     success: false;
