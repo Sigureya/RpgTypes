@@ -1,4 +1,4 @@
-import { RawGameData } from '../../../../fileio';
+import { RawGameData2 } from '../../../../fileio';
 import { KeyValuePair, KeyValuePairEx } from '../../../../libs';
 import { SystemTexts, NormalizedEventCommand } from '../../../../rmmz';
 export interface RuntimeDictionaryData<Hash> {
@@ -18,7 +18,7 @@ export interface RuntimeDictionary<Hash> {
     actorTextDictionary: ReadonlyMap<string, Hash>;
 }
 export interface GameDataReplaceOutput<Hash> {
-    main: RawGameData<NormalizedEventCommand>;
+    main: RawGameData2<NormalizedEventCommand>;
     originLike: RuntimeDictionaryDataWithSystem<Hash>;
     aux: RuntimeDictionaryDataWithSystem<Hash>;
 }

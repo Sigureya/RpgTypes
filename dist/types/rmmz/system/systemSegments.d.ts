@@ -1,7 +1,12 @@
 import { ItemCategories, MenuCommandsEnabled, System_Advanced, System_Bgm, System_BooleanGameOptions, System_RPG_DataNames, System_GameInitial, System_TitleImages, System_ImageSize, System_Me, System_SoundsObject, System_Vehicles, System_TermsPartial, AttackMotion, BattleRuleRMMZ, TitleCommandWindow } from './core';
 import { EditorSettings, System_TestBattle, System_EditorTemporary } from './gameEdit';
 import { System_Text } from './subset';
-export interface SystemDataFragments {
+export interface SystemTextsFragments {
+    dataNames: Partial<System_RPG_DataNames>;
+    terms: System_TermsPartial;
+    texts: Partial<System_Text>;
+}
+export interface SystemDataFragments extends SystemTextsFragments {
     locale: string;
     options: Partial<System_BooleanGameOptions>;
     advanced: Partial<System_Advanced>;
