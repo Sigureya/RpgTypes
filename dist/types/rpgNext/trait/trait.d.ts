@@ -1,0 +1,10 @@
+import { Trait } from '../../rmmz';
+export declare const traitParamRate: (traits: ReadonlyArray<Trait>, paramId: number) => number;
+export declare const traitElementRate: (traits: ReadonlyArray<Trait>, elementId: number) => number;
+export declare const traitDebuffRate: (traits: ReadonlyArray<Trait>, paramId: number) => number;
+export declare const stateRate: (traits: ReadonlyArray<Trait>, stateId: number) => number;
+export declare const traitAttackElements: (traits: ReadonlyArray<Trait>) => number[];
+export declare const traitPi: (traits: ReadonlyArray<Trait>, code: number, id: number) => number;
+export declare const traitSum: (traits: ReadonlyArray<Trait>, code: number, id: number) => number;
+export declare const traitSumAll: (traits: ReadonlyArray<Trait>, code: number) => number;
+export declare const traitSet: (traits: ReadonlyArray<Trait>, code: number) => number[];
