@@ -2,9 +2,11 @@ import { describe, test, expect } from "vitest";
 import type {
   Data_System,
   Data_SystemMV,
+  Data_SystemTexts,
   Terms_Messages,
 } from "@RpgTypes/rmmz";
 import { makeSystemData, makeSystemDataMV } from "@RpgTypes/rmmz";
+import { isDataSystemTexts } from "./isDataSystem";
 import { SCHEMA_DATA_SYSTEM } from "./schema";
 import validate from "./systemValidate";
 const mockSystem: Data_System = {
@@ -281,13 +283,135 @@ const mockSystemWithNull: Data_System = {
   },
 };
 
+const mockSystemTexts: Data_SystemTexts = {
+  gameTitle: "Test Game",
+  currencyUnit: "Gold",
+  armorTypes: ["Armor1", "Armor2"],
+  elements: ["Element1", "Element2"],
+  equipTypes: ["EquipType1", "EquipType2"],
+  weaponTypes: ["WeaponType1", "WeaponType2"],
+  skillTypes: ["SkillType1", "SkillType2"],
+  switches: ["Switch1", "Switch2"],
+  variables: ["Variable1", "Variable2"],
+  terms: {
+    basic: [
+      "level",
+      "levelA",
+      "hp",
+      "hpA",
+      "mp",
+      "mpA",
+      "tp",
+      "tpA",
+      "experience",
+      "exp",
+    ],
+    commands: [
+      "fight",
+      "escape",
+      "attack",
+      "guard",
+      "item",
+      "skill",
+      "equip",
+      "status",
+      "formation",
+      "save",
+      "gameEnd",
+      "options",
+      "weapon",
+      "armor",
+      "keyItem",
+      "equip2",
+      "optimize",
+      "clear",
+      "newGame",
+      "continue",
+      "",
+      "toTitle",
+      "cancel",
+      "",
+      "buy",
+      "sell",
+    ],
+    params: [
+      "mhp",
+      "mmp",
+      "atk",
+      "def",
+      "mat",
+      "mdf",
+      "agi",
+      "luk",
+      "hit",
+      "eva",
+    ],
+    messages: {
+      actionFailure: "Action Failure",
+      actorDamage: "Actor Damage",
+      actorNoDamage: "Actor No Damage",
+      actorRecovery: "Actor Recovery",
+
+      actorNoHit: "Actor No Hit",
+      actorDrain: "Actor Drain",
+      actorGain: "Actor Gain",
+      actorLoss: "Actor Loss",
+      alwaysDash: "Always Dash",
+      autosave: "Autosave",
+      bgmVolume: "BGM Volume",
+      bgsVolume: "BGS Volume",
+      commandRemember: "Command Remember",
+      criticalToActor: "Critical To Actor",
+      criticalToEnemy: "Critical To Enemy",
+      counterAttack: "Counter Attack",
+      debuffAdd: "Debuff Add",
+      defeat: "Defeat",
+      enemyDamage: "Enemy Damage",
+      enemyNoDamage: "Enemy No Damage",
+      enemyRecovery: "Enemy Recovery",
+      enemyDrain: "Enemy Drain",
+      enemyGain: "Enemy Gain",
+      enemyLoss: "Enemy Loss",
+      enemyNoHit: "Enemy No Hit",
+      evasion: "Evasion",
+      escapeFailure: "Escape Failure",
+      escapeStart: "Escape Start",
+      emerge: "Emerge",
+      expNext: "Exp Next",
+      expTotal: "Exp Total",
+      file: "File",
+      buffAdd: "Buff Add",
+      buffRemove: "Buff Remove",
+      obtainExp: "Obtain Exp",
+      obtainGold: "Obtain Gold",
+      obtainItem: "Obtain Item",
+      obtainSkill: "Obtain Skill",
+      levelUp: "Level Up",
+      partyName: "Party Name",
+      loadMessage: "Load Message",
+      meVolume: "ME Volume",
+      possession: "Possession",
+      preemptive: "Preemptive",
+      saveMessage: "Save Message",
+      seVolume: "SE Volume",
+      magicEvasion: "Magic Evasion",
+      magicReflection: "Magic Reflection",
+      substitute: "Substitute",
+      surprise: "Surprise",
+      useItem: "Use Item",
+      touchUI: "Touch UI",
+      victory: "Victory",
+    },
+  },
+};
+
 describe("isDataSystem", () => {
   test("should invalidate an incorrect Data_System object with missing required properties", () => {
     const result = validate(mockSystem);
     expect(validate.errors).toBeNull();
     expect(result).toBe(true);
   });
-  test("xx", () => {
+  test("withNull", () => {
     const result = validate(mockSystemWithNull);
     expect(validate.errors).toBeNull();
     expect(result).toBe(true);
@@ -297,6 +421,15 @@ describe("isDataSystem", () => {
     const result = validate(badData);
     expect(validate.errors).not.toBeNull();
     expect(result).toBe(false);
+  });
+});
+
+describe("isDataSystemTexts", () => {
+  test("fullset system data", () => {
+    expect(isDataSystemTexts(mockSystem)).toBe(true);
+  });
+  test("system textss", () => {
+    expect(isDataSystemTexts(mockSystemTexts)).toBe(true);
   });
 });
 

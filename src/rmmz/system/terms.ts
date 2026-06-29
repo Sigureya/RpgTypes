@@ -15,7 +15,7 @@ import {
 } from "./core";
 import type { SystemTexts } from "./core/types";
 import { makeSystemData } from "./makeSystem";
-import type { Data_System } from "./system";
+import type { Data_System, Data_SystemTexts } from "./system";
 
 export const replaceSystemTextDictionary = (
   text: SystemTexts,
@@ -107,7 +107,9 @@ const replaceCommands = (
   };
 };
 
-export const extractTextFromSystem = (system: Data_System): SystemTexts => {
+export const extractTextFromSystem = (
+  system: Data_SystemTexts,
+): SystemTexts => {
   return {
     gameTitle: system.gameTitle,
     currencyUnit: system.currencyUnit,

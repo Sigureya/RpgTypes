@@ -1,5 +1,4 @@
 import type { ImageFolders } from "@RpgTypes/fileio";
-import type { PickByType } from "@RpgTypes/libs";
 import type { Data_System, Data_Vehicle } from "@RpgTypes/rmmz/system";
 
 export interface ExtractedSystemImage {
@@ -25,24 +24,21 @@ const vehicle = (
     image: system[key].characterName,
   };
 };
-const systemImage = <Key extends keyof PickByType<Data_System, string>>(
-  system: Pick<Data_System, Key>,
-  key: keyof typeof system,
-  folder: ImageFolders,
-): ExtractedSystemImage => {
-  return {
-    folder,
-    key,
-    image: system[key],
-  };
-};
 
 export const extractImageFromSystem = (
   system: Pick<Data_System, "title1Name" | "title2Name"> & SystemVehicles,
 ): ExtractedSystemImage[] => {
   return [
-    systemImage(system, "title1Name", "titles1"),
-    systemImage(system, "title2Name", "titles2"),
+    {
+      key: "title1Name",
+      image: system.title1Name,
+      folder: "titles1",
+    },
+    {
+      key: "title2Name",
+      image: system.title2Name,
+      folder: "titles2",
+    },
     vehicle(system, "boat"),
     vehicle(system, "ship"),
     vehicle(system, "airship"),

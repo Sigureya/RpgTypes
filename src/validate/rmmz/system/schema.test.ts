@@ -1,6 +1,13 @@
 import { test, expect, describe } from "vitest";
-import { SCHEMA_DATA_SYSTEM } from "./schema";
+import { SCHEMA_DATA_SYSTEM, SCHEMA_DATA_SYSTEM_TEXTS } from "./schema";
 import json from "./system.schema.json";
+import textJson from "./systemTexts.schema.json";
+
+describe("SCHEMA_DATA_SYSTEM_TEXTS", () => {
+  test("SCHEMA_DATA_SYSTEM_TEXTS matches JSON schema", () => {
+    expect(SCHEMA_DATA_SYSTEM_TEXTS).toEqual(textJson);
+  });
+});
 
 describe("SCHEMA_DATA_SYSTEM", () => {
   test("SCHEMA_DATA_ITEM matches JSON schema", () => {

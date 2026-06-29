@@ -13,8 +13,25 @@ import type {
 } from "./core";
 import type { TestBattler, EditorSettings } from "./gameEdit";
 
+export interface Data_SystemTexts {
+  // text
+  gameTitle: string;
+  currencyUnit: string;
+
+  terms: System_Terms;
+
+  // DataTypeNames
+  weaponTypes: string[];
+  skillTypes: string[];
+  elements: string[];
+  variables: string[];
+  equipTypes: string[];
+  switches: string[];
+  armorTypes: string[];
+}
+
 export interface Data_System
-  extends System_BooleanGameOptions, System_Vehicles {
+  extends System_BooleanGameOptions, System_Vehicles, Data_SystemTexts {
   // battle
   battleSystem: number;
   partyMembers: number[];
@@ -70,7 +87,7 @@ export interface Data_System
   optSideView: boolean;
   optSlipDeath: boolean;
   optTransparent: boolean;
-  optSplashScreen: boolean;
+  optSplashScreen?: boolean;
   optMessageSkip: boolean;
 
   // initial data

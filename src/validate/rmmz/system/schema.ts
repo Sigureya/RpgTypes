@@ -206,3 +206,24 @@ export const SCHEMA_DATA_SYSTEM = {
     titleCommandWindow: { $ref: "#/$defs/TitleCommandWindow" },
   } satisfies Record<keyof Data_System, Schema>,
 } as const satisfies Schema;
+
+export const SCHEMA_DATA_SYSTEM_TEXTS = {
+  required: ["gameTitle", "currencyUnit", "terms"],
+  additionalProperties: true,
+  type: "object",
+  properties: {
+    gameTitle: { type: "string" },
+    currencyUnit: { type: "string" },
+    terms: {
+      type: "object",
+      required: ["messages", "commands", "basic", "params"],
+      additionalProperties: false,
+      properties: {
+        messages: SCHEMA_SYSTEM_TERMS_MESSAGES,
+        commands: SCHEMA_SYSTEM_MEMBERS_TERMS_COMMANDS_ARRAY,
+        basic: SCHEMA_SYSTEM_MEMBERS_TERMS_BASIC_ARRAY,
+        params: SCHEMA_SYSTEM_PARAM_NAMS_ARRAY,
+      },
+    },
+  },
+} as const satisfies Schema;

@@ -1,8 +1,8 @@
 import type { System_BooleanGameOptions } from "./types";
 
 export const makeBooleanOptions = (
-  options: Partial<System_BooleanGameOptions> = {}
-): System_BooleanGameOptions => {
+  options: Partial<System_BooleanGameOptions> = {},
+): Required<System_BooleanGameOptions> => {
   return {
     optAutosave: options.optAutosave ?? true,
     optDisplayTp: options.optDisplayTp ?? true,
