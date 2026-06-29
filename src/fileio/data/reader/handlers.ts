@@ -79,7 +79,7 @@ export interface RpgDataValidators {
   validateState(item: unknown): item is Data_State;
   validateActor(item: unknown): item is Data_Actor;
   validateCommonEvent(item: unknown): item is Data_CommonEvent;
-  validateSystem(item: unknown): item is Data_System;
+  validateSystem(item: unknown): item is Data_SystemTexts;
   validateSystemMV?(item: unknown): item is Data_SystemMV;
   validateTroop(item: unknown): item is Data_Troop;
   validateMap(item: unknown): item is Data_Map;
