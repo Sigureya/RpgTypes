@@ -1,10 +1,4 @@
-import type {
-  Data_Map,
-  Data_MapInfo,
-  Data_System,
-  Data_SystemTexts,
-  MapFileInfo,
-} from "@RpgTypes/rmmz";
+import type { Data_Map, Data_MapInfo, MapFileInfo } from "@RpgTypes/rmmz";
 import type { ReadArrayResult } from "./arrayData";
 import {
   readActorData,
@@ -26,13 +20,12 @@ import { readMapFilesFromInfoEx } from "./map";
 import type { RpgDataReadHandlers, RpgDataValidators } from "./reader/handlers";
 import type {
   RawGameData,
+  RawGameData2,
   RawGameDataNullableSystem,
   ReadGameDataResult,
   ReadGameDataResultNullable,
   ReadHandledResult,
 } from "./resultType";
-import { FILENAME_SYSTEM, readSystemData } from "./system";
-import type { ReadSystemResult } from "./system";
 import type { ReadAllDataErrorMessages } from "./terms";
 import type { DataFileNames } from "./types";
 
@@ -46,7 +39,7 @@ export const readAllRawGameData = async (
   errorMessages: ReadAllDataErrorMessages,
   readFileFn: (filename: DataFileNames | MapFileNameWithExt) => Promise<string>,
   validateFunctions: RpgDataValidators,
-): Promise<RawGameDataNullableSystem> => {
+): Promise<RawGameData2> => {
   return readAllGameDataWithFallback(
     errorMessages,
     readFileFn,
@@ -60,7 +53,7 @@ export const readAllRawGameData = async (
       readItems: identity,
       readSkills: identity,
       readStates: identity,
-      readSystem: identity,
+      //      readSystem: identity,
       readTroops: identity,
       readWeapons: identity,
       readAnimations: identity,
@@ -78,7 +71,7 @@ const identity = <T>(data: T): T => data;
 export const readAllGameDataWithArrayFallback = <
   Common,
   Map,
-  System,
+  //  System,
   Actor,
   Skill,
   Item,
@@ -97,7 +90,7 @@ export const readAllGameDataWithArrayFallback = <
   handles: RpgDataReadHandlers<
     Common[],
     Map,
-    System,
+    //    System,
     Actor[],
     Skill[],
     Item[],
@@ -114,7 +107,6 @@ export const readAllGameDataWithArrayFallback = <
   ReadGameDataResult<
     Common[],
     Map,
-    System,
     Actor[],
     Skill[],
     Item[],
@@ -140,7 +132,7 @@ export const readAllGameDataWithArrayFallback = <
 export const readAllGameDataWithNullFallback = <
   Common,
   Map,
-  System,
+  //  System,
   Actor,
   Skill,
   Item,
@@ -159,7 +151,7 @@ export const readAllGameDataWithNullFallback = <
   handles: RpgDataReadHandlers<
     Common,
     Map,
-    System,
+    //    System,
     Actor,
     Skill,
     Item,
@@ -176,7 +168,6 @@ export const readAllGameDataWithNullFallback = <
   ReadGameDataResultNullable<
     Common,
     Map,
-    System,
     Actor,
     Skill,
     Item,
@@ -203,7 +194,7 @@ const readAllGameDataWithFallback = async <
   N,
   Common,
   Map,
-  System,
+  //  System,
   Actor,
   Skill,
   Item,
@@ -221,7 +212,7 @@ const readAllGameDataWithFallback = async <
   handles: RpgDataReadHandlers<
     Common,
     Map,
-    System,
+    //    System,
     Actor,
     Skill,
     Item,
@@ -252,7 +243,6 @@ const readAllGameDataWithFallback = async <
     animation,
     tileset,
     mapInfo,
-    system,
   ] = await Promise.all([
     readCommonEventData(errorMessages, readFileFn, (c) =>
       validateFunctions.validateCommonEvent(c),
@@ -293,10 +283,10 @@ const readAllGameDataWithFallback = async <
     readMapInfoData(errorMessages, readFileFn, (c) =>
       validateFunctions.validateMapInfo(c),
     ),
-    readSystemData(errorMessages, readFileFn, {
-      validateSystemMz: (c) => validateFunctions.validateSystem(c),
-      validateSystemMv: validateFunctions.validateSystemMV,
-    }),
+    // readSystemData(errorMessages, readFileFn, {
+    //   validateSystemMz: (c) => validateFunctions.validateSystem(c),
+    //   validateSystemMv: validateFunctions.validateSystemMV,
+    // }),
   ]);
   return {
     mapFiles: mapInfo.success
@@ -357,7 +347,6 @@ const readAllGameDataWithFallback = async <
       handles.readStates,
       makeEmptyValue,
     ),
-    system: convertSystemIfSuccess(system, errorMessages, handles.readSystem),
     troops: convertIfSuccess(
       troop,
       errorMessages,
@@ -382,7 +371,7 @@ const readAllGameDataWithFallback = async <
       handles.readTilesets,
       makeEmptyValue,
     ),
-  } satisfies Record<keyof RawGameData, unknown>;
+  } satisfies Record<keyof RawGameData2, unknown>;
 };
 interface MapReader<T> {
   readMap(map: MapFileInfo): T;
@@ -414,30 +403,6 @@ const readMapBatchData = async <T>(
     validateFn,
     (data): T => handles.readMap(data),
   );
-};
-
-const convertSystemIfSuccess = <S extends Data_SystemTexts, R>(
-  result: ReadSystemResult<S>,
-  terms: ReadAllDataErrorMessages,
-  fn: (system: S, filename: string) => R,
-): ReadSystemResult<R> => {
-  if (result.system === null) {
-    return {
-      message: result.message,
-      system: null,
-    };
-  }
-  try {
-    return {
-      message: result.message,
-      system: fn(result.system, FILENAME_SYSTEM),
-    };
-  } catch {
-    return {
-      message: terms.dataConvertError,
-      system: null,
-    };
-  }
 };
 
 const convertIfSuccess = <T, R, N>(

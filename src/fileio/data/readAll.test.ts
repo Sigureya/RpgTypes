@@ -12,9 +12,6 @@ import type {
   Data_MapInfo,
   Data_Skill,
   Data_State,
-  Data_System,
-  Data_SystemMV,
-  Data_SystemTexts,
   Data_Tileset,
   Data_Troop,
   Data_Weapon,
@@ -30,7 +27,6 @@ import {
   makeMapInfoData,
   makeSkillData,
   makeStateData,
-  makeSystemData,
   makeTroopData,
   makeWeaponData,
 } from "@RpgTypes/rmmz";
@@ -54,8 +50,7 @@ import {
   readAllRawGameData,
 } from "./readAll";
 import type { RpgDataReadHandlers, RpgDataValidators } from "./reader/handlers";
-import type { RawGameData, ReadAllDataFields } from "./resultType";
-import { FILENAME_SYSTEM } from "./system";
+import type { RawGameData2, ReadAllDataFields } from "./resultType";
 import type { ReadAllDataErrorMessages } from "./terms";
 import type { DataFileNames } from "./types";
 
@@ -84,8 +79,8 @@ const createMockedValidateFunctions = (
   validateMapInfo: vi.fn(() => value),
   validateSkill: vi.fn(() => value),
   validateState: vi.fn(() => value),
-  validateSystem: vi.fn(() => value),
-  validateSystemMV: vi.fn(() => value),
+  // validateSystem: vi.fn(() => value),
+  // validateSystemMV: vi.fn(() => value),
   validateTroop: vi.fn(() => value),
   validateWeapon: vi.fn(() => value),
   validateAnimation: vi.fn(() => value),
@@ -108,9 +103,9 @@ const createValidateFunctions = (
   validateMapInfo: (item): item is Data_MapInfo => mocked.validateMapInfo(item),
   validateSkill: (item): item is Data_Skill => mocked.validateSkill(item),
   validateState: (item): item is Data_State => mocked.validateState(item),
-  validateSystem: (item): item is Data_System => mocked.validateSystem(item),
-  validateSystemMV: (item): item is Data_SystemMV =>
-    mocked.validateSystemMV ? mocked.validateSystemMV(item) : false,
+  // validateSystem: (item): item is Data_System => mocked.validateSystem(item),
+  // validateSystemMV: (item): item is Data_SystemMV =>
+  //   mocked.validateSystemMV ? mocked.validateSystemMV(item) : false,
   validateTroop: (item): item is Data_Troop => mocked.validateTroop(item),
   validateWeapon: (item): item is Data_Weapon => mocked.validateWeapon(item),
   validateAnimation: (item): item is Data_Animation =>
@@ -133,7 +128,7 @@ const createReadFileFn = (
   });
 };
 
-const baseData: RawGameData = {
+const baseData: RawGameData2 = {
   actors: {
     success: true,
     fileName: FILENAME_ACTORS,
@@ -200,10 +195,10 @@ const baseData: RawGameData = {
     error: "",
     data: [makeWeaponData({ id: 1, name: "W" })],
   },
-  system: {
-    message: "",
-    system: makeSystemData({ texts: { gameTitle: "RPG" } }),
-  },
+  // system: {
+  //   message: "",
+  //   system: makeSystemData({ texts: { gameTitle: "RPG" } }),
+  // },
   mapFiles: {
     info: { success: true },
     validMaps: [
@@ -241,7 +236,7 @@ const baseFileMap: Record<string, string> = {
   [baseData.states.fileName]: JSON.stringify(baseData.states.data),
   [baseData.troops.fileName]: JSON.stringify(baseData.troops.data),
   [baseData.weapons.fileName]: JSON.stringify(baseData.weapons.data),
-  [FILENAME_SYSTEM]: JSON.stringify(baseData.system.system),
+  // [FILENAME_SYSTEM]: JSON.stringify(baseData.system.system),
   [baseData.animations.fileName]: JSON.stringify(baseData.animations.data),
   [baseData.tilesets.fileName]: JSON.stringify(baseData.tilesets.data),
   "Map001.json": JSON.stringify(baseData.mapFiles.validMaps[0].map),
@@ -250,7 +245,7 @@ const baseFileMap: Record<string, string> = {
 type ConvertHandlers = RpgDataReadHandlers<
   unknown[],
   Data_Map,
-  Data_SystemTexts,
+  //  Data_SystemTexts,
   unknown[],
   unknown[],
   unknown[],
@@ -274,7 +269,7 @@ const createIdentityHandlers = (): MockedObject<ConvertHandlers> => ({
   readMap: vi.fn((data) => data.map),
   readSkills: vi.fn((data) => data),
   readStates: vi.fn((data) => data),
-  readSystem: vi.fn((data) => data),
+  //  readSystem: vi.fn((data) => data),
   readTroops: vi.fn((data) => data),
   readWeapons: vi.fn((data) => data),
   readAnimations: vi.fn((data) => data),
@@ -294,7 +289,7 @@ const createConvertErrorHandlers = (): MockedObject<ConvertHandlers> => ({
   readMap: vi.fn(errorFunc),
   readSkills: vi.fn(errorFunc),
   readStates: vi.fn(errorFunc),
-  readSystem: vi.fn(errorFunc),
+  // readSystem: vi.fn(errorFunc),
   readTroops: vi.fn(errorFunc),
   readWeapons: vi.fn(errorFunc),
   readAnimations: vi.fn(errorFunc),
@@ -313,7 +308,7 @@ const expectConvertHandlersNotCalled = (
   expect(convHandlers.readMap).not.toHaveBeenCalled();
   expect(convHandlers.readSkills).not.toHaveBeenCalled();
   expect(convHandlers.readStates).not.toHaveBeenCalled();
-  expect(convHandlers.readSystem).not.toHaveBeenCalled();
+  //  expect(convHandlers.readSystem).not.toHaveBeenCalled();
   expect(convHandlers.readTroops).not.toHaveBeenCalled();
   expect(convHandlers.readWeapons).not.toHaveBeenCalled();
 };
@@ -333,7 +328,7 @@ const expectValidateFunctionsNotCalled = (
   expect(mockedValidators.validateMapInfo).not.toHaveBeenCalled();
   expect(mockedValidators.validateSkill).not.toHaveBeenCalled();
   expect(mockedValidators.validateState).not.toHaveBeenCalled();
-  expect(mockedValidators.validateSystem).not.toHaveBeenCalled();
+  //  expect(mockedValidators.validateSystem).not.toHaveBeenCalled();
   expect(mockedValidators.validateTroop).not.toHaveBeenCalled();
   expect(mockedValidators.validateWeapon).not.toHaveBeenCalled();
 };
@@ -401,14 +396,14 @@ describe("readAllGameDataAsArrayFallback", () => {
       expect(result.mapInfos).toEqual(baseData.mapInfos);
       expect(result.skills).toEqual(baseData.skills);
       expect(result.states).toEqual(baseData.states);
-      expect(result.system).toEqual(baseData.system);
+      //      expect(result.system).toEqual(baseData.system);
       expect(result.troops).toEqual(baseData.troops);
       expect(result.weapons).toEqual(baseData.weapons);
       expect(result.mapFiles).toEqual(baseData.mapFiles);
-      expect(convHandlers.readSystem).toHaveBeenCalledWith(
-        baseData.system.system,
-        FILENAME_SYSTEM,
-      );
+      // expect(convHandlers.readSystem).toHaveBeenCalledWith(
+      //   baseData.system.system,
+      //   FILENAME_SYSTEM,
+      // );
     });
 
     test("map handler が MapFileInfo を返す実装でもネストした map を許容する", async () => {
@@ -417,7 +412,7 @@ describe("readAllGameDataAsArrayFallback", () => {
       const convHandlers: RpgDataReadHandlers<
         unknown[],
         Data_Map,
-        Data_SystemTexts,
+        //        Data_SystemTexts,
         unknown[],
         unknown[],
         unknown[],
@@ -439,7 +434,7 @@ describe("readAllGameDataAsArrayFallback", () => {
         readMap: (data) => data.map,
         readSkills: (data) => data,
         readStates: (data) => data,
-        readSystem: (data) => data,
+        //        readSystem: (data) => data,
         readTroops: (data) => data,
         readWeapons: (data) => data,
         readAnimations: (data) => data,

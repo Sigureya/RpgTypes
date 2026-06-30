@@ -1,16 +1,18 @@
+import type { Data_SystemTexts } from "@RpgTypes/rmmz";
 import type {
   AssetFilesBundle,
   AudioFilesSet,
   ImageFilesSet,
   OtherFilesSet,
 } from "./asset";
-import type { RawGameData2 } from "./data";
+import type { RawGameData2, ReadSystemResult } from "./data";
 
 export interface FileReadBundle extends AssetFilesBundle {
   audioFiles: AudioFilesSet;
   imageFiles: ImageFilesSet;
   otherFiles: OtherFilesSet;
   data: RawGameData2;
+  system: ReadSystemResult<Data_SystemTexts>;
 }
 
 export interface FileReadFailed {
