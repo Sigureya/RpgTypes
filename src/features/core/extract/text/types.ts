@@ -1,9 +1,4 @@
-import type {
-  DataReadErrorItem,
-  MapBatchReadResult,
-  ReadSystemResult,
-} from "@RpgTypes/fileio";
-import type { SystemTexts } from "@RpgTypes/rmmz";
+import type { DataReadErrorItem, MapBatchReadResult } from "@RpgTypes/fileio";
 import type {
   ExtractedCommonEventText,
   ExtractedBattleEventText,
@@ -31,5 +26,4 @@ export interface ExtractedRawGameDataTextValue extends ExtractedRawGameDataEvent
     troops: ExtractedBattleEventText[];
   };
   mapFiles: MapBatchReadResult<ExtractedMapTexts>;
-  system: ReadSystemResult<SystemTexts>;
 }
