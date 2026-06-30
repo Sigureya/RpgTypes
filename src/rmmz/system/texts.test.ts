@@ -6,7 +6,7 @@ import {
   extractTextFromSystem,
   replaceSystemTextData,
   replaceSystemTextDictionary,
-} from "./terms";
+} from "./texts";
 
 const OLD_TEXT = "Old Text";
 const NEW_TEXT = "New Text";

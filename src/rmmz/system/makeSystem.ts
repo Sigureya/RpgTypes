@@ -22,11 +22,11 @@ import {
 } from "./core";
 import type { EditorSettings, TestBattler } from "./gameEdit";
 import { makeEditorSetting } from "./gameEdit";
-import type { Data_System, Data_SystemTexts } from "./system";
 import type {
   SystemDataFragments,
   SystemTextsFragments,
 } from "./systemSegments";
+import type { Data_System, Data_SystemTexts } from "./types";
 
 export const makeSystemTexts = (
   frgments: Partial<SystemTextsFragments>,
