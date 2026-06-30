@@ -1,9 +1,13 @@
 import type { MockedObject } from "vitest";
 import { describe, expect, test, vi } from "vitest";
-import { makeRawTestDataBundle } from "@RpgTypes/fileio";
+import { FILENAME_SYSTEM, makeRawTestDataBundle } from "@RpgTypes/fileio";
 import type { FileReadBundle, TestRawDataSource } from "@RpgTypes/fileio";
 import type { Data_CommonEvent, Data_Map, Data_Troop } from "@RpgTypes/rmmz";
-import { createActorControlChars, readNote } from "@RpgTypes/rmmz";
+import {
+  createActorControlChars,
+  makeTestSystemData,
+  readNote,
+} from "@RpgTypes/rmmz";
 import { buildExtractResult } from "./build";
 import type {
   ExtractedMapTexts,
@@ -47,7 +51,7 @@ const createBundle = (): FileReadBundle => {
     },
     system: {
       message: TEST_SOURCE.systemText,
-      system: null,
+      system: makeTestSystemData(TEST_SOURCE),
     },
   };
 };
@@ -154,11 +158,11 @@ describe("buildExtractResultWithNotes", () => {
     expect(result.noteSummaries.length).toBeGreaterThan(0);
     expect(result.commonEvents).toEqual([]);
     expect(result.troops).toEqual([]);
-    // expect(result.system).toEqual({
-    //   gameTitle: TEST_SOURCE.systemText,
-    //   filename: FILENAME_SYSTEM,
-    //   texts: expect.any(Array),
-    // });
+    expect(result.system).toEqual({
+      gameTitle: TEST_SOURCE.systemText,
+      filename: FILENAME_SYSTEM,
+      texts: expect.any(Array),
+    });
     expect(result.actors).toEqual({
       texts: expect.any(Array),
       controlChars: createActorControlChars(bundle.data.actors.data),
@@ -181,6 +185,7 @@ describe("buildExtractResultWithNotes", () => {
       commandNameFn,
       extractor,
     );
+
     expect(extractor.extractMapTexts).toHaveBeenCalledTimes(
       bundle.data.mapFiles.validMaps.length,
     );
