@@ -1,6 +1,6 @@
 import { describe, test, expect } from "vitest";
 import { makeTestSystemData } from "./makeSystemEx";
-import type { Data_System } from "./system";
+import type { Data_System } from "./types";
 
 const expected = {
   advanced: {

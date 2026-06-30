@@ -15,7 +15,7 @@ import {
 } from "./core";
 import type { SystemTexts } from "./core/types";
 import { makeSystemData } from "./makeSystem";
-import type { Data_System, Data_SystemTexts } from "./system";
+import type { Data_System, Data_SystemTexts } from "./types";
 
 export const replaceSystemTextDictionary = (
   text: SystemTexts,

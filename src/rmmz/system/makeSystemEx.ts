@@ -18,8 +18,8 @@ import {
   makeVehicleData,
 } from "./core";
 import { makeSystemData } from "./makeSystem";
-import type { Data_System } from "./system";
 import type { Data_SystemMV } from "./systemMV";
+import type { Data_System } from "./types";
 
 export const makeSystemDataMV = (
   data: Data_System = makeSystemData({}),
