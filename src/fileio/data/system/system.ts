@@ -7,6 +7,36 @@ import type {
   ReadSystemResult,
 } from "./types";
 
+export const readSystemDataTexts = async (
+  terms: SystemDataErrorMessages,
+  fileReadFn: (filename: typeof FILENAME_SYSTEM) => Promise<string>,
+  validateFn: (item: unknown) => item is Data_SystemTexts,
+) => {
+  try {
+    const content = await fileReadFn(FILENAME_SYSTEM);
+    return parseSystemJsonTexts(content, terms, validateFn);
+  } catch {
+    return makeErrorResult(terms.fileNotFound);
+  }
+};
+
+const parseSystemJsonTexts = (
+  json: string,
+  terms: SystemDataErrorMessages,
+  validateFn: (item: unknown) => item is Data_SystemTexts,
+): ReadSystemResult<Data_SystemTexts> => {
+  try {
+    const data = JSON.parse(json);
+    if (validateFn(data)) {
+      return {
+        system: data,
+        message: "",
+      };
+    }
+  } catch {}
+  return makeErrorResult(terms.jsonParseError);
+};
+
 export const readSystemData = async (
   terms: SystemDataErrorMessages,
   fileReadFn: (filename: typeof FILENAME_SYSTEM) => Promise<string>,
