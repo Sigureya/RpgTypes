@@ -1,4 +1,5 @@
 import type {
+  AssetFilesBundle,
   FileEntry,
   FileEntryBundle,
   RawGameData2,
@@ -21,6 +22,7 @@ import type {
   RuntimeDictionaryDataWithSystem,
   RawGameDataNoteNormalization,
   GameDataReplaceOutput,
+  GameDataReplaceOutput2,
 } from "./core/extract";
 import { fileEntriesFromDictionary, pluginManifestFiles } from "./core/extract";
 import {
@@ -45,7 +47,7 @@ import {
   replaceTroopData,
 } from "./core/replaceEvent";
 import type { EventContainerExtractor } from "./extractText";
-import type { ReplaceRawDataContext } from "./types";
+import type { ReplaceRawDataContext, ReplaceRawDataContext2 } from "./types";
 
 export {
   replaceRawDataBundle,
@@ -149,6 +151,35 @@ export const replaceDataDirect = (
   return result.data;
 };
 
+export const replaceGameFilesFtomMulitDictionaries = <T extends string>(
+  context: ReplaceRawDataContext2,
+  extractor: EventContainerExtractor,
+  hashFn: (text: string) => T,
+): GameDataReplaceOutput2<T> => {
+  const mainData = createMain(
+    context.data,
+    context.assetBundle,
+    context.textKeys,
+    extractor,
+    hashFn,
+  );
+  const newDic = context.dictionary.map((dic) => {
+    return {
+      locale: dic.locale,
+      dictionary: createAux(
+        context.data,
+        context.system,
+        mainData.note,
+        dic.dictionary,
+        hashFn,
+      ),
+    };
+  });
+  return {
+    main: mainData.data,
+    dictionaries: newDic,
+  };
+};
 export const replaceGameFilesWithHash = <T extends string>(
   context: ReplaceRawDataContext,
   extractor: EventContainerExtractor,
@@ -190,7 +221,13 @@ export const replaceDataWithHash = <T extends string>(
   hashFn: (text: string) => T,
 ): GameDataReplaceOutput<T> => {
   const { data, dictionary, system } = context;
-  const replaceResult = createMain(context, extractor, hashFn);
+  const replaceResult = createMain(
+    data,
+    context.assetBundle,
+    context.textKeys,
+    extractor,
+    hashFn,
+  );
   const omap = Array.from(dictionary.keys()).map((v) => [v, v] as const);
   return {
     main: replaceResult.data,
@@ -206,11 +243,12 @@ export const replaceDataWithHash = <T extends string>(
 };
 
 const createMain = <T extends string>(
-  context: ReplaceRawDataContext,
+  data: RawGameData2,
+  assetBundle: AssetFilesBundle,
+  textKeys: ReadonlySet<string>,
   extractor: EventContainerExtractor,
   hashFn: (text: string) => T,
 ) => {
-  const { data, assetBundle, textKeys } = context;
   const handlers: RpgDataReplaceHandlers = {
     replaceText(text: string) {
       const trimmed = text.trimEnd();

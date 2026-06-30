@@ -27,6 +27,14 @@ export interface GameDataReplaceOutput<Hash> {
   aux: RuntimeDictionaryDataWithSystem<Hash>;
 }
 
+export interface GameDataReplaceOutput2<Hash> {
+  main: RawGameData2<NormalizedEventCommand>;
+  dictionaries: {
+    locale: string;
+    dictionary: RuntimeDictionaryDataWithSystem<Hash>;
+  }[];
+}
+
 export interface DictionaryNormalizationResult {
   errorItems: KeyValuePair[];
   items: KeyValuePair[];
