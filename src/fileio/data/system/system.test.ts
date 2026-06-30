@@ -10,7 +10,7 @@ import {
   makeSystemDataMV,
 } from "@RpgTypes/rmmz";
 import { FILENAME_SYSTEM } from "./constants";
-import { readSystemData } from "./system";
+import { readSystemData, readSystemDataTexts } from "./system";
 import type {
   SystemDataReadHandler,
   ReadSystemResult,
@@ -132,6 +132,24 @@ describe("readSystemData", () => {
     };
     const result = await readSystemData(terms, fileReadFn, handlers);
 
+    expect(result).toEqual(expected);
+  });
+});
+
+describe("readSystemDataTexts", () => {
+  test("MZ バリデーション成功時は system を返し message は空文字", async () => {
+    const json: string = JSON.stringify(mzData);
+    const fileReadFn = vi.fn(async () => json);
+    const validateMz = vi.fn((_: unknown): _ is Data_SystemTexts => true);
+    const expected: ReadSystemResult = { system: mzData, message: "" };
+    const result = await readSystemDataTexts(
+      terms,
+      fileReadFn,
+      (data): data is Data_SystemTexts => validateMz(data),
+    );
+    expect(validateMz).toHaveBeenCalledOnce();
+    expect(validateMz).toHaveBeenCalledWith(mzData);
+    expect(fileReadFn).toHaveBeenCalledWith(FILENAME_SYSTEM);
     expect(result).toEqual(expected);
   });
 });

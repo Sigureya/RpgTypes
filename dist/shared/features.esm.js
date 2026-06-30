@@ -1,4 +1,4 @@
-import { B as e, F as t, K as n, L as r, R as i, U as a, V as o, W as s, X as c, c as l, q as u, r as d, z as ee } from "./fileio.esm.js";
+import { B as e, G as t, H as n, I as r, J as i, R as a, V as o, W as s, Z as c, l, q as ee, r as u, z as d } from "./fileio.esm.js";
 import { n as f } from "./libs.esm.js";
 import { $i as p, Ki as m, Nt as h, Pt as te, Tt as g, Zi as ne, at as re, c as _, ds as v, ea as ie, fc as ae, kt as oe, pc as se, qi as ce, s as le, sa as ue, ta as de, u as fe } from "./rmmz.esm.js";
 import { createCommandExtractorMapFromPipeline as pe, createPluginParamDictionary as me, extractPluginCommandWithExtractor as he, filterPluginSchemaByFn as ge, filterPluginSchemaStringParams as _e, generatePluginAnnotationText as ve, parseDeepRecord as ye } from "@sigureya/rmmz-plugin-schema";
@@ -214,7 +214,7 @@ var y = (e, t, n, r, i, a) => {
 		dataKey: n
 	};
 })), T = (e, t) => {
-	let n = E(e.actors, ze), r = it(e.armors), i = E(e.classes, Ve), a = E(e.enemies, Be), o = E(e.items, Ue), s = E(e.mapInfos, ((e) => e)), c = E(e.skills, He), l = E(e.states, Ke), u = E(e.weapons, We), d = at(e.commonEvents, t), ee = ot(e.troops, t), f = st(e.mapFiles, t), p = nt([
+	let n = E(e.actors, ze), r = it(e.armors), i = E(e.classes, Ve), a = E(e.enemies, Be), o = E(e.items, Ue), s = E(e.mapInfos, ((e) => e)), c = E(e.skills, He), l = E(e.states, Ke), ee = E(e.weapons, We), u = at(e.commonEvents, t), d = ot(e.troops, t), f = st(e.mapFiles, t), p = nt([
 		n,
 		r,
 		i,
@@ -223,15 +223,15 @@ var y = (e, t, n, r, i, a) => {
 		s,
 		c,
 		l,
-		u,
 		ee,
-		d
+		d,
+		u
 	]).concat(rt(e.mapFiles));
 	return {
 		value: {
 			eventData: {
-				commonEvents: d.data,
-				troops: ee.data.flat()
+				commonEvents: u.data,
+				troops: d.data.flat()
 			},
 			mapFiles: f,
 			system: {
@@ -246,7 +246,7 @@ var y = (e, t, n, r, i, a) => {
 				items: o.data,
 				skills: c.data,
 				states: l.data,
-				weapons: u.data
+				weapons: ee.data
 			}
 		},
 		errors: p
@@ -426,15 +426,15 @@ var y = (e, t, n, r, i, a) => {
 		})
 	};
 	var n, r;
-})), Et = (e, t) => O(Dt(e), t), Dt = (n) => [
-	A(t, n.actors),
-	A(a, n.skills),
-	A(o, n.items),
-	A(u, n.weapons),
-	A(r, n.armors),
-	A(i, n.classes),
-	A(s, n.states),
-	A(e, n.enemies)
+})), Et = (e, t) => O(Dt(e), t), Dt = (e) => [
+	A(r, e.actors),
+	A(s, e.skills),
+	A(n, e.items),
+	A(i, e.weapons),
+	A(a, e.armors),
+	A(d, e.classes),
+	A(t, e.states),
+	A(o, e.enemies)
 ], A = (e, t) => ({
 	source: e,
 	notes: t.flatMap(((e) => e.note.map(((t) => ({
@@ -495,10 +495,10 @@ var y = (e, t, n, r, i, a) => {
 }, Bt = (e) => e.code === 401 && !!e.speaker && !ue(e.speaker), Vt = (e, t, n, r, i, a, o) => {
 	let s = bt(T(e.data, o), e);
 	return Wt(e.data.actors.data, t, s, n, r, i, a);
-}, Ht = Vt, Ut = (e) => [...e.dataNoteSummary, ...e.mapNoteSummary], Wt = (c, l, d, f, p, m, h) => {
-	let { eventData: te, mainData: g, mapFiles: ne, system: re } = d.data.value;
+}, Ht = Vt, Ut = (e) => [...e.dataNoteSummary, ...e.mapNoteSummary], Wt = (c, l, u, f, p, m, h) => {
+	let { eventData: te, mainData: g, mapFiles: ne, system: re } = u.data.value;
 	return {
-		speakers: (_ = d.data.value, v = m, zt(Rt(_)).map(((e) => ({
+		speakers: (_ = u.data.value, v = m, zt(Rt(_)).map(((e) => ({
 			filename: "",
 			id: 0,
 			uuid: v(e),
@@ -507,23 +507,23 @@ var y = (e, t, n, r, i, a) => {
 			dataKey: "speaker",
 			otherData: []
 		})))),
-		noteSummaries: Ut(d),
+		noteSummaries: Ut(u),
 		pluginParams: l.flatMap(((e) => jt(e, m))),
 		map: Gt(ne, m, h),
-		commonEvents: we(ee, te.commonEvents, m, h),
-		troops: Ee(te.troops, n, h, m),
-		armors: S(g.armors, r, p, m),
+		commonEvents: we(e, te.commonEvents, m, h),
+		troops: Ee(te.troops, ee, h, m),
+		armors: S(g.armors, a, p, m),
 		system: qt(re, m, f),
 		actors: {
-			texts: S(g.actors, t, p, m),
+			texts: S(g.actors, r, p, m),
 			controlChars: de(c)
 		},
-		classes: S(g.classes, i, p, m),
-		enemies: S(g.enemies, e, p, m),
-		items: S(g.items, o, p, m),
-		skills: S(g.skills, a, p, m),
-		states: qe(g.states, s, p, m),
-		weapons: S(g.weapons, u, p, m)
+		classes: S(g.classes, d, p, m),
+		enemies: S(g.enemies, o, p, m),
+		items: S(g.items, n, p, m),
+		skills: S(g.skills, s, p, m),
+		states: qe(g.states, t, p, m),
+		weapons: S(g.weapons, i, p, m)
 	};
 	var _, v;
 }, Gt = (e, t, n) => e.validMaps.map(((e) => Kt(e, t, n))).flat(3), Kt = (e, t, n) => e.map.events.map(((r) => ((e, t, n, r) => {
@@ -1667,7 +1667,7 @@ var Hr = (e, t, n, r = Br) => Vr(e.attr.struct, `${t}["${e.name}"]`, n, r), Ur =
 		weapons: e.weapons.map(((e) => z(e, n))),
 		commonEvents: e.commonEvents.map(((e) => Yn(e, n)))
 	};
-}, Si = (e, t) => d(Ci(e, t)), Ci = (e, t) => vi(e.data, e.assetBundle, t, {
+}, Si = (e, t) => u(Ci(e, t)), Ci = (e, t) => vi(e.data, e.assetBundle, t, {
 	replaceText: (t) => e.dictionary.get(t),
 	pluginCommand: (e) => e,
 	scriptCommand: (e) => e,
@@ -1675,7 +1675,7 @@ var Hr = (e, t, n, r = Br) => Vr(e.attr.struct, `${t}["${e.name}"]`, n, r), Ur =
 }).data, wi = (e, t, n) => {
 	let r = Ei(e, t, n);
 	return {
-		dataJSON: d(r.main),
+		dataJSON: u(r.main),
 		scriptJS: [Zt(r.aux, {
 			description: "書き換え用辞書データ",
 			outputDirectory: "translation",
@@ -1688,7 +1688,7 @@ var Hr = (e, t, n, r = Br) => Vr(e.attr.struct, `${t}["${e.name}"]`, n, r), Ur =
 	};
 }, Ti = (e, t, n) => {
 	let r = Ei(e, t, n);
-	return [...d(r.main), ...on(r.aux)];
+	return [...u(r.main), ...on(r.aux)];
 }, Ei = (e, t, n) => {
 	let { data: r, dictionary: i, system: a } = e, o = Di(e, t, n), s = Array.from(i.keys()).map(((e) => [e, e]));
 	return {
