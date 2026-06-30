@@ -1,7 +1,7 @@
 import { Data_Actor, Data_Animation, Data_Armor, Data_Class, Data_CommonEventUnknown, Data_Enemy, Data_Item, Data_MapUnknown, Data_MapInfo, Data_Skill, Data_State, Data_System, Data_Tileset, Data_TroopUnknonw, Data_Weapon, EventCommand, EventCommandUnknown, Data_SystemTexts } from '../../rmmz';
 import { ReadArrayResult } from './arrayData';
 import { MapBatchReadResult } from './map';
-import { ReadSystemResult, ReadSystemResultSuccess } from './system';
+import { ReadSystemResultSuccess } from './system';
 export interface ReadHandledResult<T, NullValue = T extends unknown[] ? [] : T extends object ? null : never> {
     success: boolean;
     fileName: string;
@@ -41,7 +41,7 @@ export interface ReadGameDataUnknown extends ReadAllDataFields {
     animations: ReadHandledResult<unknown>;
     tilesets: ReadHandledResult<unknown>;
 }
-export interface ReadGameDataResult<Common, Map, System, Actor, Skill, Item, Weapon, Armor, Enemy, Class, State, Troop, Animation, Tileset> extends ReadAllDataFields {
+export interface ReadGameDataResult<Common, Map, Actor, Skill, Item, Weapon, Armor, Enemy, Class, State, Troop, Animation, Tileset> extends ReadAllDataFields {
     actors: ReadHandledResult<Actor>;
     armors: ReadHandledResult<Armor>;
     classes: ReadHandledResult<Class>;
@@ -51,14 +51,13 @@ export interface ReadGameDataResult<Common, Map, System, Actor, Skill, Item, Wea
     mapInfos: ReadArrayResult<Data_MapInfo>;
     skills: ReadHandledResult<Skill>;
     states: ReadHandledResult<State>;
-    system: ReadSystemResult<System>;
     troops: ReadHandledResult<Troop>;
     weapons: ReadHandledResult<Weapon>;
     mapFiles: MapBatchReadResult<Map>;
     animations: ReadHandledResult<Animation>;
     tilesets: ReadHandledResult<Tileset>;
 }
-export interface ReadGameDataResultNullable<Common, Map, System, Actor, Skill, Item, Weapon, Armor, Enemy, Class, State, Troop, Animation, Tileset> extends ReadAllDataFields {
+export interface ReadGameDataResultNullable<Common, Map, Actor, Skill, Item, Weapon, Armor, Enemy, Class, State, Troop, Animation, Tileset> extends ReadAllDataFields {
     actors: ReadHandledResult<Actor, null>;
     armors: ReadHandledResult<Armor, null>;
     classes: ReadHandledResult<Class, null>;
@@ -68,7 +67,6 @@ export interface ReadGameDataResultNullable<Common, Map, System, Actor, Skill, I
     mapInfos: ReadArrayResult<Data_MapInfo>;
     skills: ReadHandledResult<Skill, null>;
     states: ReadHandledResult<State, null>;
-    system: ReadSystemResult<System>;
     troops: ReadHandledResult<Troop, null>;
     weapons: ReadHandledResult<Weapon, null>;
     mapFiles: MapBatchReadResult<Map>;
@@ -91,6 +89,9 @@ export interface RawGameData<Command extends EventCommandUnknown = EventCommand,
     mapInfos: ReadArrayResult<Data_MapInfo>;
     skills: ReadArrayResult<Data_Skill>;
     states: ReadArrayResult<Data_State>;
+    /**
+     * @deprecated
+     */
     system: ReadSystemResultSuccess<System>;
     troops: ReadArrayResult<Data_TroopUnknonw<Command>>;
     weapons: ReadArrayResult<Data_Weapon>;
