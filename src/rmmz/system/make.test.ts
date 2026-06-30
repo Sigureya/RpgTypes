@@ -1,8 +1,8 @@
 import { describe, test, expect } from "vitest";
-import type { System_SoundsObject, Terms_Messages } from "./core";
+import type { Terms_Messages, System_SoundsObject } from "./core";
 import { makeSystemData } from "./makeSystem";
-import type { Data_System } from "./types";
 import type { SystemDataFragments } from "./systemSegments";
+import type { Data_System } from "./types";
 
 const fullFragments = {
   options: {
