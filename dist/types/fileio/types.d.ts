@@ -1,10 +1,12 @@
+import { Data_SystemTexts } from '../rmmz';
 import { AssetFilesBundle, AudioFilesSet, ImageFilesSet, OtherFilesSet } from './asset';
-import { RawGameData2 } from './data';
+import { RawGameData2, ReadSystemResult } from './data';
 export interface FileReadBundle extends AssetFilesBundle {
     audioFiles: AudioFilesSet;
     imageFiles: ImageFilesSet;
     otherFiles: OtherFilesSet;
     data: RawGameData2;
+    system: ReadSystemResult<Data_SystemTexts>;
 }
 export interface FileReadFailed {
     success: false;

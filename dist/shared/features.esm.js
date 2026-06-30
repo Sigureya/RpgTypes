@@ -1,4 +1,4 @@
-import { B as e, F as t, K as n, L as r, R as i, U as a, V as o, W as s, X as c, p as l, q as u, r as d, z as ee } from "./fileio.esm.js";
+import { B as e, F as t, K as n, L as r, R as i, U as a, V as o, W as s, X as c, c as l, q as u, r as d, z as ee } from "./fileio.esm.js";
 import { n as f } from "./libs.esm.js";
 import { $i as p, Ki as m, Nt as h, Pt as te, Tt as g, Zi as ne, at as re, c as _, ds as v, ea as ie, fc as ae, kt as oe, pc as se, qi as ce, s as le, sa as ue, ta as de, u as fe } from "./rmmz.esm.js";
 import { createCommandExtractorMapFromPipeline as pe, createPluginParamDictionary as me, extractPluginCommandWithExtractor as he, filterPluginSchemaByFn as ge, filterPluginSchemaStringParams as _e, generatePluginAnnotationText as ve, parseDeepRecord as ye } from "@sigureya/rmmz-plugin-schema";
