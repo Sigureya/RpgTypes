@@ -17,8 +17,13 @@ import {
   FILENAME_SYSTEM,
 } from "@RpgTypes/fileio";
 import type { ExtractedTextItem } from "@RpgTypes/libs";
-import type { Data_Actor, SystemTexts, MapFileInfo } from "@RpgTypes/rmmz";
-import { createActorControlChars } from "@RpgTypes/rmmz";
+import type {
+  Data_Actor,
+  SystemTexts,
+  MapFileInfo,
+  Data_SystemTexts,
+} from "@RpgTypes/rmmz";
+import { createActorControlChars, extractTextFromSystem } from "@RpgTypes/rmmz";
 import type { PluginParamExtractionOutput } from "@sigureya/rmmz-plugin-schema";
 import { extractTextFromRawGameData } from "./bundle";
 import { extractMapEventTexts } from "./map";
@@ -63,6 +68,7 @@ export const buildExtractResult = <UUID>(
 
   return buildFinalExtractedResult(
     bundle.data.actors.data,
+    bundle.system,
     pluginParams,
     normalizeNote,
     kinds,
@@ -83,6 +89,7 @@ const collectAllNoteSummaries = (
 
 const buildFinalExtractedResult = <UUID>(
   actors: ReadonlyArray<Data_Actor>,
+  system: ReadSystemResult<Data_SystemTexts>,
   pluginParams: ReadonlyArray<PluginParamExtractionOutput>,
   normalizedData: RawGameDataNoteNormalization,
   kinds: SystemKinds,
@@ -90,7 +97,7 @@ const buildFinalExtractedResult = <UUID>(
   uuidGen: (text: string) => UUID,
   commandNameFn: (command: TextCommandParameter) => string,
 ): ExtractedTextFinalWithNotes<UUID> => {
-  const { eventData, mainData, mapFiles, system } = normalizedData.data.value;
+  const { eventData, mainData, mapFiles } = normalizedData.data.value;
 
   return {
     speakers: extractSpeakerTexts(normalizedData.data.value, uuidGen),
@@ -164,15 +171,16 @@ const extractMapTextGroups = <UUID>(
 };
 
 const buildSystemTexts = <UUID>(
-  system: ReadSystemResult<SystemTexts>,
+  system: ReadSystemResult<Data_SystemTexts>,
   uuidGen: (text: string) => UUID,
   kinds: SystemKinds,
 ): ExtractedSystemTexts<UUID> => {
   if (system.system) {
+    const extracted: SystemTexts = extractTextFromSystem(system.system);
     return {
       gameTitle: system.system.gameTitle,
       filename: FILENAME_SYSTEM,
-      texts: convertSystemTypes(system.system, FILENAME_SYSTEM, kinds, uuidGen),
+      texts: convertSystemTypes(extracted, FILENAME_SYSTEM, kinds, uuidGen),
     };
   }
   return {

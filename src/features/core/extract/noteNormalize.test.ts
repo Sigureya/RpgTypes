@@ -389,10 +389,6 @@ describe("normalizeRawGameDataNoteTexts", () => {
           invalidMaps: [],
           validMaps: [map],
         },
-        system: {
-          message: "",
-          system: null,
-        },
       },
     };
 

@@ -1,9 +1,13 @@
 import type { MockedObject } from "vitest";
 import { describe, expect, test, vi } from "vitest";
-import { makeRawTestDataBundle } from "@RpgTypes/fileio";
+import { FILENAME_SYSTEM, makeRawTestDataBundle } from "@RpgTypes/fileio";
 import type { FileReadBundle, TestRawDataSource } from "@RpgTypes/fileio";
 import type { Data_CommonEvent, Data_Map, Data_Troop } from "@RpgTypes/rmmz";
-import { createActorControlChars, readNote } from "@RpgTypes/rmmz";
+import {
+  createActorControlChars,
+  makeTestSystemData,
+  readNote,
+} from "@RpgTypes/rmmz";
 import { buildExtractResult } from "./build";
 import type {
   ExtractedMapTexts,
@@ -47,7 +51,7 @@ const createBundle = (): FileReadBundle => {
     },
     system: {
       message: TEST_SOURCE.systemText,
-      system: null,
+      system: makeTestSystemData(TEST_SOURCE),
     },
   };
 };
@@ -131,40 +135,57 @@ const createTerms = (): RmmzTextPropertys => {
   };
 };
 
-describe("buildExtractResultWithNotes", () => {
-  test("実依存で結果を組み立てる (vi.mock 不使用)", () => {
+describe("buildExtractResult", () => {
+  describe("result", () => {
     const bundle = createBundle();
     const kinds = createKinds();
     const terms = createTerms();
-    const uuidGen = (text: string) => `uuid:${text}`;
-    const commandNameFn = () => "command-name";
-    const extractor = createExtractor2();
+    test("main", () => {
+      const uuidGen = (text: string) => `uuid:${text}`;
+      const commandNameFn = () => "command-name";
+      const extractor = createExtractor2();
 
-    const result = buildExtractResult(
-      bundle,
-      [],
-      kinds,
-      terms,
-      uuidGen,
-      commandNameFn,
-      extractor,
-    );
+      const result = buildExtractResult(
+        bundle,
+        [],
+        kinds,
+        terms,
+        uuidGen,
+        commandNameFn,
+        extractor,
+      );
 
-    expect(result.map.some((item) => item.dataKey === "note")).toBe(true);
-    expect(result.noteSummaries.length).toBeGreaterThan(0);
-    expect(result.commonEvents).toEqual([]);
-    expect(result.troops).toEqual([]);
-    // expect(result.system).toEqual({
-    //   gameTitle: TEST_SOURCE.systemText,
-    //   filename: FILENAME_SYSTEM,
-    //   texts: expect.any(Array),
-    // });
-    expect(result.actors).toEqual({
-      texts: expect.any(Array),
-      controlChars: createActorControlChars(bundle.data.actors.data),
+      expect(result.map.some((item) => item.dataKey === "note")).toBe(true);
+      expect(result.noteSummaries.length).toBeGreaterThan(0);
+      expect(result.commonEvents).toEqual([]);
+      expect(result.troops).toEqual([]);
+      expect(result.actors).toEqual({
+        texts: expect.any(Array),
+        controlChars: createActorControlChars(bundle.data.actors.data),
+      });
+    });
+    test("system", () => {
+      const uuidGen = (text: string) => `uuid:${text}`;
+      const commandNameFn = () => "command-name";
+      const extractor = createExtractor2();
+
+      const result = buildExtractResult(
+        bundle,
+        [],
+        kinds,
+        terms,
+        uuidGen,
+        commandNameFn,
+        extractor,
+      );
+      expect(result.system.filename).toBe(FILENAME_SYSTEM);
+      expect(result.system.gameTitle).toBe(TEST_SOURCE.systemText);
+      result.system.texts.forEach((item) => {
+        expect(item.baseText).toBe(TEST_SOURCE.systemText);
+      });
     });
   });
-  test("", () => {
+  test("call", () => {
     const bundle = createBundle();
     const kinds = createKinds();
     const terms = createTerms();
@@ -181,6 +202,7 @@ describe("buildExtractResultWithNotes", () => {
       commandNameFn,
       extractor,
     );
+
     expect(extractor.extractMapTexts).toHaveBeenCalledTimes(
       bundle.data.mapFiles.validMaps.length,
     );

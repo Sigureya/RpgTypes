@@ -68,10 +68,6 @@ export const extractTextFromRawGameData = (
         troops: troopResult.data.flat(),
       },
       mapFiles,
-      system: {
-        message: "",
-        system: null,
-      },
       mainData: {
         actors: actors.data,
         armors: armors.data,

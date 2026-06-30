@@ -61,7 +61,6 @@ export const buildRawGameDataNoteNormalization = (
           validMaps: normalizedMapFiles.validMaps,
         },
         eventData: data.value.eventData,
-        system: data.value.system,
       },
     },
   };

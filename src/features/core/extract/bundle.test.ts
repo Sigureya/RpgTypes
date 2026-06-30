@@ -156,7 +156,6 @@ describe("extractTextFromRawGameData", () => {
       );
       expect(result.value.mapFiles.validMaps).toHaveLength(2);
       expect(result.value.mapFiles.validMaps[0].map.displayedName).toBe("MapA");
-      expect(result.value.system.message).toBe("");
     });
     test("extractTextFromRawGameData 内で extractor の各抽出関数が呼び出される", () => {
       const extractor = createExtractor();
