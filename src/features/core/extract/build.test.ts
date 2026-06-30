@@ -1,6 +1,6 @@
 import type { MockedObject } from "vitest";
 import { describe, expect, test, vi } from "vitest";
-import { FILENAME_SYSTEM, makeRawTestDataBundle } from "@RpgTypes/fileio";
+import { makeRawTestDataBundle } from "@RpgTypes/fileio";
 import type { FileReadBundle, TestRawDataSource } from "@RpgTypes/fileio";
 import type { Data_CommonEvent, Data_Map, Data_Troop } from "@RpgTypes/rmmz";
 import { createActorControlChars, readNote } from "@RpgTypes/rmmz";
@@ -44,6 +44,10 @@ const createBundle = (): FileReadBundle => {
     },
     otherFiles: {
       movies: new Set<string>(),
+    },
+    system: {
+      message: TEST_SOURCE.systemText,
+      system: null,
     },
   };
 };

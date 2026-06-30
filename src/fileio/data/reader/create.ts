@@ -3,7 +3,7 @@ import type { RpgDataReadHandlers } from "./handlers";
 export const defineGameDataReadHandlers = <
   Common,
   Map,
-  System,
+  //  System,
   Actor,
   Skill,
   Item,
@@ -19,7 +19,7 @@ export const defineGameDataReadHandlers = <
   readers: RpgDataReadHandlers<
     Common,
     Map,
-    System,
+    //    System,
     Actor,
     Skill,
     Item,
@@ -35,7 +35,7 @@ export const defineGameDataReadHandlers = <
 ): RpgDataReadHandlers<
   Common,
   Map,
-  System,
+  //  System,
   Actor,
   Skill,
   Item,

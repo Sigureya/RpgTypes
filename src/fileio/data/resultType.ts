@@ -20,7 +20,7 @@ import type {
 } from "@RpgTypes/rmmz";
 import type { ReadArrayResult } from "./arrayData";
 import type { MapBatchReadResult } from "./map";
-import type { ReadSystemResult, ReadSystemResultSuccess } from "./system";
+import type { ReadSystemResultSuccess } from "./system";
 
 export interface ReadHandledResult<
   T,
@@ -73,7 +73,6 @@ export interface ReadGameDataUnknown extends ReadAllDataFields {
 export interface ReadGameDataResult<
   Common,
   Map,
-  System,
   Actor,
   Skill,
   Item,
@@ -95,7 +94,6 @@ export interface ReadGameDataResult<
   mapInfos: ReadArrayResult<Data_MapInfo>;
   skills: ReadHandledResult<Skill>;
   states: ReadHandledResult<State>;
-  system: ReadSystemResult<System>;
   troops: ReadHandledResult<Troop>;
   weapons: ReadHandledResult<Weapon>;
   mapFiles: MapBatchReadResult<Map>;
@@ -106,7 +104,6 @@ export interface ReadGameDataResult<
 export interface ReadGameDataResultNullable<
   Common,
   Map,
-  System,
   Actor,
   Skill,
   Item,
@@ -128,7 +125,6 @@ export interface ReadGameDataResultNullable<
   mapInfos: ReadArrayResult<Data_MapInfo>;
   skills: ReadHandledResult<Skill, null>;
   states: ReadHandledResult<State, null>;
-  system: ReadSystemResult<System>;
   troops: ReadHandledResult<Troop, null>;
   weapons: ReadHandledResult<Weapon, null>;
   mapFiles: MapBatchReadResult<Map>;
@@ -162,6 +158,9 @@ export interface RawGameData<
   mapInfos: ReadArrayResult<Data_MapInfo>;
   skills: ReadArrayResult<Data_Skill>;
   states: ReadArrayResult<Data_State>;
+  /**
+   * @deprecated
+   */
   system: ReadSystemResultSuccess<System>;
   troops: ReadArrayResult<Data_TroopUnknonw<Command>>;
   weapons: ReadArrayResult<Data_Weapon>;

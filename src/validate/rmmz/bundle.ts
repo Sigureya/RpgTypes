@@ -13,8 +13,6 @@ import {
   isDataWeapon,
   isDataTileset,
 } from "./rpg";
-import { isDataSystemTexts } from "./system";
-import { isDataSystemMV } from "./systemMV";
 
 export const createRpgValidator = (): Required<RpgDataValidators> => ({
   validateActor(data) {
@@ -56,12 +54,12 @@ export const createRpgValidator = (): Required<RpgDataValidators> => ({
   validateTroop(data) {
     return isDataTroop(data);
   },
-  validateSystemMV(data) {
-    return isDataSystemMV(data);
-  },
-  validateSystem(data) {
-    return isDataSystemTexts(data);
-  },
+  // validateSystemMV(data) {
+  //   return isDataSystemMV(data);
+  // },
+  // validateSystem(data) {
+  //   return isDataSystemTexts(data);
+  // },
   validateTileset(data) {
     return isDataTileset(data);
   },
