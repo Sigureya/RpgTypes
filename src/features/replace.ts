@@ -6,6 +6,7 @@ import type {
 } from "@RpgTypes/fileio";
 import { rawGameDataToMainDataFileEntries } from "@RpgTypes/fileio";
 import type {
+  Command_PluginCommandMZ,
   Data_Map,
   Data_MapUnknown,
   Data_SystemTexts,
@@ -17,6 +18,12 @@ import {
   extractTextFromSystem,
   replaceSystemTextDictionary,
 } from "@RpgTypes/rmmz";
+import type { PluginSchema } from "@sigureya/rmmz-plugin-schema";
+import {
+  createPluginCommandMap,
+  createTextParamDictionary,
+  replaceRuntimePluginCommand,
+} from "@sigureya/rmmz-plugin-schema";
 import type {
   RuntimeDictionary,
   RuntimeDictionaryDataWithSystem,
@@ -24,7 +31,11 @@ import type {
   GameDataReplaceOutput,
   GameDataReplaceOutput2,
 } from "./core/extract";
-import { fileEntriesFromDictionary, pluginManifestFiles } from "./core/extract";
+import {
+  fileEntriesFromDictionary,
+  isTextString,
+  pluginManifestFiles,
+} from "./core/extract";
 import {
   createRuntimeDictionaryData,
   textKeysSN,
@@ -151,6 +162,20 @@ export const replaceDataDirect = (
   return result.data;
 };
 
+const xxxx = (plugin: PluginSchema) => {
+  return createTextParamDictionary(plugin, (param) => {
+    if (param.default.length === 0) {
+      return true;
+    }
+    return isTextString(param.default);
+  });
+};
+
+const ggg = (plugin: readonly PluginSchema[]) => {
+  const x = plugin.map(xxxx);
+  return createPluginCommandMap(x);
+};
+
 export const replaceGameFilesFtomMulitDictionaries = <T extends string>(
   context: ReplaceRawDataContext2,
   extractor: EventContainerExtractor,
@@ -180,6 +205,7 @@ export const replaceGameFilesFtomMulitDictionaries = <T extends string>(
     dictionaries: newDic,
   };
 };
+
 export const replaceGameFilesWithHash = <T extends string>(
   context: ReplaceRawDataContext,
   extractor: EventContainerExtractor,
@@ -240,6 +266,41 @@ export const replaceDataWithHash = <T extends string>(
       hashFn,
     ),
   };
+};
+
+const createMain2 = <T extends string>(
+  data: RawGameData2,
+  assetBundle: AssetFilesBundle,
+  textKeys: ReadonlySet<string>,
+  plugin: readonly PluginSchema[],
+  extractor: EventContainerExtractor,
+  hashFn: (text: string) => T,
+) => {
+  const paths = ggg(plugin);
+  const handlers: RpgDataReplaceHandlers = {
+    replaceText(text: string) {
+      const trimmed = text.trimEnd();
+      if (trimmed.length === 0) {
+        return "";
+      }
+      return hashFn(trimmed);
+    },
+    isReplaceTargetNote(item: NoteReadResult) {
+      return textKeys.has(item.key);
+    },
+    pluginCommand: (command): Command_PluginCommandMZ => {
+      return replaceRuntimePluginCommand(command, paths, hashFn);
+    },
+    scriptCommand: (command) => {
+      return command;
+    },
+  };
+  return replaceRawDataWithAutoNoteFilter(
+    data,
+    assetBundle,
+    extractor,
+    handlers,
+  );
 };
 
 const createMain = <T extends string>(
