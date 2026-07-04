@@ -181,10 +181,11 @@ export const replaceGameFilesFtomMulitDictionaries = <T extends string>(
   extractor: EventContainerExtractor,
   hashFn: (text: string) => T,
 ): GameDataReplaceOutput2<T> => {
-  const mainData = createMain(
+  const mainData = createMain2(
     context.data,
     context.assetBundle,
     context.textKeys,
+    [],
     extractor,
     hashFn,
   );
@@ -247,10 +248,11 @@ export const replaceDataWithHash = <T extends string>(
   hashFn: (text: string) => T,
 ): GameDataReplaceOutput<T> => {
   const { data, dictionary, system } = context;
-  const replaceResult = createMain(
+  const replaceResult = createMain2(
     data,
     context.assetBundle,
     context.textKeys,
+    [],
     extractor,
     hashFn,
   );
@@ -293,35 +295,6 @@ const createMain2 = <T extends string>(
     },
     scriptCommand: (command) => {
       return command;
-    },
-  };
-  return replaceRawDataWithAutoNoteFilter(
-    data,
-    assetBundle,
-    extractor,
-    handlers,
-  );
-};
-
-const createMain = <T extends string>(
-  data: RawGameData2,
-  assetBundle: AssetFilesBundle,
-  textKeys: ReadonlySet<string>,
-  extractor: EventContainerExtractor,
-  hashFn: (text: string) => T,
-) => {
-  const handlers: RpgDataReplaceHandlers = {
-    replaceText(text: string) {
-      const trimmed = text.trimEnd();
-      if (trimmed.length === 0) {
-        return "";
-      }
-      return hashFn(trimmed);
-    },
-    pluginCommand: (command) => command,
-    scriptCommand: (command) => command,
-    isReplaceTargetNote: (item: NoteReadResult) => {
-      return textKeys.has(item.key);
     },
   };
   return replaceRawDataWithAutoNoteFilter(
