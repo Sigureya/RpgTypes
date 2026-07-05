@@ -18,8 +18,10 @@ export const convertEscapeCharactersMzStyle = (
   }>,
   variables: Rmmz_Variables,
 ): string => {
-  return convertEscapeCharacters(text, (ctrl, value) =>
-    rmmzObjectsHandling(ctrl, value, actors, variables, party),
+  return convertEscapeCharacters(
+    text,
+    (value) => variables.value(value),
+    (ctrl, value) => rmmzObjectsHandling(ctrl, value, actors, variables, party),
   );
 };
 
@@ -48,11 +50,12 @@ const rmmzObjectsHandling = (
 
 export const convertEscapeCharacters = (
   text: string,
-  fn: (ctrl: string, value: number) => string | undefined,
+  variableFn: (valiableId: number) => string | number,
+  textFn: (ctrl: string, value: number) => string | undefined,
 ): string => {
   const ttx = text.replace(/\\/g, "\x1b").replace(/\x1b\x1b/g, "\\");
-  const vex = replaceVariableText(ttx, fn);
-  return replaceName(vex, fn);
+  const vex = replaceVariableText(ttx, variableFn);
+  return replaceName(vex, textFn);
 };
 
 const replaceName = (
@@ -73,14 +76,11 @@ const replaceName = (
 
 const replaceVariableText = (
   text: string,
-  fn: (key: string, value: number) => string | undefined,
+  fn: (value: number) => string | number,
 ): string => {
   return text.matchAll(/\x1bV\[(\d+)\]/gi).reduce((acc, match): string => {
     const p1 = parseInt(match[1]);
-    const vText = fn("V", p1);
-    if (vText === undefined) {
-      return acc;
-    }
-    return acc.replaceAll(match[0], vText);
+    const vText = fn(p1);
+    return acc.replaceAll(match[0], `${vText}`);
   }, text);
 };
