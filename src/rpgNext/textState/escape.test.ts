@@ -45,9 +45,10 @@ const mockParty: Rmmz_Members<{ name: () => string }> = {
   members: () => [{ name: () => "Bob" }, { name: () => "Alice" }],
 };
 
-const vex = (value: number): string | number => {
+const resolveVariable = (value: number): string | number => {
   return value * 2;
 };
+
 const newTextFn = (ctrl: string, value: number): string | undefined => {
   if (ctrl === "V") {
     return `${value * 2}`;
@@ -61,24 +62,40 @@ const newTextFn = (ctrl: string, value: number): string | undefined => {
     }
   }
 };
+
 const runTestCase = (testCases: TestCase) => {
   describe(testCases.input, () => {
     test("calls", () => {
-      const vvfn = vi.fn((id) => `!${id}`);
       const fn = vi.fn((ctrl, value) => `@${ctrl}:${value}`);
-      const result = convertEscapeCharacters(testCases.input, vvfn, fn);
+      const result = convertEscapeCharacters(
+        testCases.input,
+        resolveVariable,
+        fn,
+      );
       testCases.calls.forEach((call) => {
         const msg = `${call.ctrl}(${call.value}) should be called`;
         expect(fn, msg).toHaveBeenCalledWith(call.ctrl, call.value);
       });
-      testCases.usedValiableIds.forEach((id) => {
-        const msg = `V(${id}) should be called`;
-        expect(vvfn, msg).toHaveBeenCalledWith(id);
-      });
       expect(result).toBe(testCases.expected2);
     });
+    test("calls v", () => {
+      const vfn = vi.fn(resolveVariable);
+      convertEscapeCharacters(testCases.input, vfn, () => "");
+      testCases.usedValiableIds.forEach((id) => {
+        const msg = `V(${id}) should be called`;
+        expect(vfn, msg).toHaveBeenCalledWith(id);
+      });
+      const set = new Set(vfn.mock.calls.flat());
+      const expectedSet = new Set(testCases.usedValiableIds);
+      expect(set).toEqual(expectedSet);
+    });
+
     test("should convert escape characters correctly", () => {
-      const result = convertEscapeCharacters(testCases.input, vex, newTextFn);
+      const result = convertEscapeCharacters(
+        testCases.input,
+        resolveVariable,
+        newTextFn,
+      );
       expect(result).toBe(testCases.expected);
     });
     test("mz style", () => {
@@ -112,16 +129,23 @@ const testCases: TestCase[] = [
   {
     input: "price is \\V[124] gold",
     expected: "price is 248 gold",
-    expected2: "price is !124 gold",
+    expected2: "price is 248 gold",
     calls: [],
     usedValiableIds: [124],
   },
   {
     input: "price is \\v[321] gold",
     expected: "price is 642 gold",
-    expected2: "price is !321 gold",
+    expected2: "price is 642 gold",
     calls: [],
     usedValiableIds: [321],
+  },
+  {
+    input: "\\v[\\v[1]]",
+    calls: [],
+    usedValiableIds: [1, 2],
+    expected: "4",
+    expected2: "4",
   },
 ];
 
