@@ -4,3 +4,4 @@ export * from "./objects";
 export * from "./pluginManager";
 export * from "./scene";
 export * from "./sceneManager";
+export * from "./windows";
