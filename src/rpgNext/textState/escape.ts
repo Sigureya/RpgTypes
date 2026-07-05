@@ -54,7 +54,7 @@ export const convertEscapeCharacters = (
   textFn: (ctrl: string, value: number) => string | undefined,
 ): string => {
   const ttx = text.replace(/\\/g, "\x1b").replace(/\x1b\x1b/g, "\\");
-  const vex = replaceVariableText(ttx, variableFn);
+  const vex = replaceVariableTextFixedTwice(ttx, variableFn);
   return replaceName(vex, textFn);
 };
 
@@ -63,9 +63,9 @@ const replaceName = (
   fn: (key: string, value: number) => string | undefined,
 ): string => {
   return text
-    .matchAll(/\x1b([A-Z]{1,16})\[(\d+)\]/gi)
+    .matchAll(/\x1b(?!V\b)([A-Z]{1,16})\[(\d+)\]/gi)
     .reduce((acc, match): string => {
-      const p1 = parseInt(match[2]);
+      const p1 = parseInt(match[2], 10);
       const vText = fn(match[1], p1);
       if (vText === undefined) {
         return acc;
@@ -74,13 +74,22 @@ const replaceName = (
     }, text);
 };
 
-const replaceVariableText = (
+const replaceVariableTextOnce = (
   text: string,
   fn: (value: number) => string | number,
 ): string => {
   return text.matchAll(/\x1bV\[(\d+)\]/gi).reduce((acc, match): string => {
-    const p1 = parseInt(match[1]);
+    const p1 = parseInt(match[1], 10);
     const vText = fn(p1);
     return acc.replaceAll(match[0], `${vText}`);
   }, text);
+};
+
+const replaceVariableTextFixedTwice = (
+  text: string,
+  fn: (value: number) => string | number,
+): string => {
+  const t1 = replaceVariableTextOnce(text, fn);
+  const t2 = replaceVariableTextOnce(t1, fn);
+  return t2;
 };
