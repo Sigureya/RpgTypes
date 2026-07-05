@@ -60,6 +60,16 @@ const newTextFn = (ctrl: string, value: number): string | undefined => {
     if (value === 2) {
       return "Bob";
     }
+    return "";
+  }
+  if (ctrl === "P") {
+    if (value === 1) {
+      return "Bob";
+    }
+    if (value === 2) {
+      return "Alice";
+    }
+    return "";
   }
 };
 
@@ -119,18 +129,59 @@ const testCases: TestCase[] = [
     usedValiableIds: [],
   },
   {
+    input: "\\\\",
+    expected: "\\",
+    calls: [],
+    usedValiableIds: [],
+    expected2: "\\",
+  },
+  {
+    input: "Text Position \\X[20]",
+    calls: [{ ctrl: "X", value: 20 }],
+    expected: "Text Position \\X[20]",
+    expected2: "Text Position @X:20",
+    usedValiableIds: [],
+  },
+  {
     input: "My name is \\N[1]",
     expected: "My name is Alice",
     expected2: "My name is @N:1",
-
     calls: [{ ctrl: "N", value: 1 }],
     usedValiableIds: [],
   },
   {
-    calls: [{ ctrl: "N", value: 2 }],
     input: "My name is \\n[2]",
     expected: "My name is Bob",
     expected2: "My name is @N:2",
+    usedValiableIds: [],
+    calls: [{ ctrl: "N", value: 2 }],
+  },
+  {
+    input: "My name is \\n[3].",
+    expected: "My name is .",
+    expected2: "My name is @N:3.",
+    usedValiableIds: [],
+    calls: [{ ctrl: "N", value: 3 }],
+  },
+  {
+    input: "Member name is \\P[1]",
+    expected: "Member name is Bob",
+    expected2: "Member name is @P:1",
+    calls: [{ ctrl: "P", value: 1 }],
+    usedValiableIds: [],
+  },
+  {
+    input: "Member name is \\p[2]",
+    expected: "Member name is Alice",
+    expected2: "Member name is @P:2",
+    calls: [{ ctrl: "P", value: 2 }],
+    usedValiableIds: [],
+  },
+  {
+    input: "Member name is \\p[3]",
+    expected: "Member name is ",
+    expected2: "Member name is @P:3",
+    calls: [{ ctrl: "P", value: 3 }],
     usedValiableIds: [],
   },
   {
