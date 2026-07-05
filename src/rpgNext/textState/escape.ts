@@ -55,7 +55,7 @@ export const convertEscapeCharacters = (
 ): string => {
   const ttx = text.replace(/\\/g, "\x1b").replace(/\x1b\x1b/g, "\\");
   const vex = replaceVariableTextFixedTwice(ttx, variableFn);
-  return replaceName(vex, textFn);
+  return replaceName(vex, textFn).replace(/\x1b/g, "\\");
 };
 
 const replaceName = (
