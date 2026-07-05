@@ -53,9 +53,14 @@ export const convertEscapeCharacters = (
   variableFn: (valiableId: number) => string | number,
   textFn: (ctrl: string, value: number) => string | undefined,
 ): string => {
-  const ttx = text.replace(/\\/g, "\x1b").replace(/\x1b\x1b/g, "\\");
-  const vex = replaceVariableTextFixedTwice(ttx, variableFn);
-  return replaceName(vex, textFn).replace(/\x1b/g, "\\");
+  const backSlashEscaped: string = text
+    .replace(/\\/g, "\x1b")
+    .replace(/\x1b\x1b/g, "\\");
+  const variableConverted = replaceVariableTextFixedTwice(
+    backSlashEscaped,
+    variableFn,
+  );
+  return replaceName(variableConverted, textFn).replace(/\x1b/g, "\\");
 };
 
 const replaceName = (
@@ -90,6 +95,5 @@ const replaceVariableTextFixedTwice = (
   fn: (value: number) => string | number,
 ): string => {
   const t1 = replaceVariableTextOnce(text, fn);
-  const t2 = replaceVariableTextOnce(t1, fn);
-  return t2;
+  return replaceVariableTextOnce(t1, fn);
 };
