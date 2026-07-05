@@ -66,7 +66,7 @@ const replaceName = (
     .matchAll(/\x1b(?!V\b)([A-Z]{1,16})\[(\d+)\]/gi)
     .reduce((acc, match): string => {
       const p1 = parseInt(match[2], 10);
-      const vText = fn(match[1], p1);
+      const vText = fn(match[1].toUpperCase(), p1);
       if (vText === undefined) {
         return acc;
       }
