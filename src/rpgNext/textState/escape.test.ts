@@ -64,7 +64,7 @@ const newTextFn = (ctrl: string, value: number): string | undefined => {
 };
 
 const runTestCase = (testCases: TestCase) => {
-  describe(testCases.input, () => {
+  describe(`input:${testCases.input}`, () => {
     test("calls", () => {
       const fn = vi.fn((ctrl, value) => `@${ctrl}:${value}`);
       const result = convertEscapeCharacters(
@@ -127,6 +127,13 @@ const testCases: TestCase[] = [
     usedValiableIds: [],
   },
   {
+    calls: [{ ctrl: "N", value: 2 }],
+    input: "My name is \\n[2]",
+    expected: "My name is Bob",
+    expected2: "My name is @N:2",
+    usedValiableIds: [],
+  },
+  {
     input: "price is \\V[124] gold",
     expected: "price is 248 gold",
     expected2: "price is 248 gold",
@@ -139,6 +146,20 @@ const testCases: TestCase[] = [
     expected2: "price is 642 gold",
     calls: [],
     usedValiableIds: [321],
+  },
+  {
+    input: "pos : X:\\V[1], Y:\\V[2]",
+    expected: "pos : X:2, Y:4",
+    expected2: "pos : X:2, Y:4",
+    calls: [],
+    usedValiableIds: [1, 2],
+  },
+  {
+    input: "My name is \\N[\\V[1]]",
+    expected: "My name is Bob",
+    expected2: "My name is @N:2",
+    calls: [{ ctrl: "N", value: 2 }],
+    usedValiableIds: [1],
   },
   {
     input: "\\v[\\v[1]]",
