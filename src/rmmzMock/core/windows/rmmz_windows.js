@@ -11,7 +11,7 @@ function Window_Base() {
   this.initialize(...arguments);
 }
 
-Window_Base.prototype = Object.create(Window.prototype);
+Window_Base.prototype = Object.create({});
 Window_Base.prototype.constructor = Window_Base;
 
 Window_Base.prototype.initialize = function (rect) {
