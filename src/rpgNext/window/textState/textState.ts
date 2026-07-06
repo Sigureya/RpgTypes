@@ -1,4 +1,3 @@
-/* eslint-disable @functional/no-loop-statements */
 import type {
   Rmmz_System,
   Rmmz_TextState,
@@ -56,28 +55,22 @@ const calcMaxFontSizeInLine = (
   lineText: string,
   fontSizeInfo: Rmts_FontSizeInfo,
 ): number => {
-  // eslint-disable-next-line @functional/no-let
-  let currentFontSize: number = fontSizeInfo.default;
-  for (const match of lineText.matchAll(/\x1b({|}|FS)(?:\[(\d+)])?/gi)) {
-    switch (match[1].toUpperCase()) {
-      case "{":
-        currentFontSize =
-          currentFontSize <= fontSizeInfo.max
+  return lineText
+    .matchAll(/\x1b({|}|FS)(?:\[(\d{1,6)])?/gi)
+    .reduce((currentFontSize, match: RegExpExecArray): number => {
+      const code = match[1].toUpperCase();
+      switch (code) {
+        case "{":
+          return currentFontSize <= fontSizeInfo.max
             ? currentFontSize + fontSizeInfo.step
             : currentFontSize;
-        break;
-      case "}":
-        currentFontSize =
-          currentFontSize >= fontSizeInfo.min
+        case "}":
+          return currentFontSize >= fontSizeInfo.min
             ? currentFontSize - fontSizeInfo.step
             : currentFontSize;
-        break;
-
-      case "FS":
-        currentFontSize = Number(match[2]);
-        break;
-    }
-  }
-
-  return currentFontSize;
+        case "FS":
+          return Number(match[2]);
+      }
+      return currentFontSize;
+    }, fontSizeInfo.default);
 };
