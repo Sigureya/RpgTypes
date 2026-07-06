@@ -219,6 +219,33 @@ const testCases: TestCase[] = [
     expected: "4",
     expected2: "4",
   },
+  {
+    input: "\\v[\\v[\\v[1]]]",
+    calls: [],
+    expected: "\\v[4]",
+    expected2: "\\v[4]",
+    usedValiableIds: [1, 2],
+  },
+  {
+    input: "\\P[1] is \\N[2]",
+    expected: "Bob is Bob",
+    expected2: "@P:1 is @N:2",
+    calls: [
+      { ctrl: "N", value: 2 },
+      { ctrl: "P", value: 1 },
+    ],
+    usedValiableIds: [],
+  },
+  {
+    input: "\\P[1] is \\N[\\V[1]]",
+    expected: "Bob is Bob",
+    expected2: "@P:1 is @N:2",
+    calls: [
+      { ctrl: "N", value: 2 },
+      { ctrl: "P", value: 1 },
+    ],
+    usedValiableIds: [1],
+  },
 ];
 
 describe("convertEscapeCharactersMzStyle", () => {
