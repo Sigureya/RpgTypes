@@ -17,11 +17,13 @@ export const convertEscapeCharactersMzStyle = (
     name(): string;
   }>,
   variables: Rmmz_Variables,
+  currncyUnit: string = "",
 ): string => {
   return convertEscapeCharacters(
     text,
     (value) => variables.value(value),
-    (ctrl, value) => rmmzObjectsHandling(ctrl, value, actors, variables, party),
+    (ctrl, value) =>
+      rmmzObjectsHandling(ctrl, value, actors, variables, party, currncyUnit),
   );
 };
 
@@ -31,6 +33,7 @@ const rmmzObjectsHandling = (
   actors: Rmmz_ActorsReadonly<HasName>,
   variables: Rmmz_Variables,
   party: Rmmz_Members<HasName>,
+  currncyUnit: string,
 ): string | undefined => {
   if (ctrl === "N") {
     const actor = actors.actor(value);
@@ -41,11 +44,29 @@ const rmmzObjectsHandling = (
     return variable !== undefined ? String(variable) : "";
   }
   if (ctrl === "P") {
-    const member = party.members()[value - 1];
-    return member ? member.name() : "";
+    return resolvePartyMemberName(value, party);
+  }
+  if (ctrl === "G") {
+    return currncyUnit;
   }
 
   return undefined;
+};
+
+const resolvePartyMemberName = (
+  value: number,
+  party: Rmmz_Members<HasName>,
+): string => {
+  const members = party.members();
+  const index = value - 1;
+  if (value <= 0) {
+    return "";
+  }
+  if (index >= members.length) {
+    return "";
+  }
+  const member = members[index];
+  return member.name();
 };
 
 export const convertEscapeCharacters = (
@@ -65,29 +86,24 @@ export const convertEscapeCharacters = (
 
 const replaceName = (
   text: string,
-  fn: (key: string, value: number) => string | undefined,
+  fn: (ctrl: string, value: number) => string | undefined,
 ): string => {
-  return text
-    .matchAll(/\x1b(?!V\b)([A-Z]{1,16})\[(\d+)\]/gi)
-    .reduce((acc, match): string => {
-      const p1 = parseInt(match[2], 10);
-      const vText = fn(match[1].toUpperCase(), p1);
-      if (vText === undefined) {
-        return acc;
-      }
-      return acc.replaceAll(match[0], vText);
-    }, text);
+  return text.replace(
+    /\x1b(?!V\b)([A-Z]{1,16})\[(\d+)\]/gi,
+    (match, ctrl: string, value: string) => {
+      const replaced = fn(ctrl.toUpperCase(), Number(value));
+      return replaced !== undefined ? replaced : match;
+    },
+  );
 };
 
 const replaceVariableTextOnce = (
   text: string,
   fn: (value: number) => string | number,
 ): string => {
-  return text.matchAll(/\x1bV\[(\d+)\]/gi).reduce((acc, match): string => {
-    const p1 = parseInt(match[1], 10);
-    const vText = fn(p1);
-    return acc.replaceAll(match[0], `${vText}`);
-  }, text);
+  return text.replace(/\x1bV\[(\d+)\]/gi, (_, value) => {
+    return String(fn(Number(value)));
+  });
 };
 
 const replaceVariableTextFixedTwice = (
