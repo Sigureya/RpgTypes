@@ -1,7 +1,7 @@
 import type { MockedObject } from "vitest";
 import { describe, expect, test, vi } from "vitest";
 import type { Rmmz_Bitmap, Rmmz_TextState } from "@RpgTypes/rmmzRuntime";
-import { flashTextState } from "@RpgTypes/rpgNext/window";
+import { flashTextState, nextTextState } from "@RpgTypes/rpgNext/window";
 import {
   BUFFER_INITIAL_TEXT_RTL_FALSE,
   BUFFER_INITIAL_TEXT_RTL_TURE,
@@ -14,9 +14,13 @@ interface MockWindowBase {
   createTextBuffer(rtl: boolean): string;
 }
 
+const measureTextWidth = (text: string): number => {
+  return text.length * 10;
+};
+
 const createMockBitmap = (): MockedObject<Rmmz_Bitmap> => {
   return {
-    measureTextWidth: vi.fn((text: string) => text.length * 10),
+    measureTextWidth: vi.fn(measureTextWidth),
     drawText: vi.fn(),
   };
 };
@@ -99,6 +103,11 @@ const runTestCase = (testCase: TestCase) => {
         const result = flashTextState(state, mockBitmap);
         expect(result).toEqual(testCase.expected);
         expect(state).toEqual(testCase.input);
+      });
+      test("newTextState", () => {
+        const width = measureTextWidth(testCase.input.buffer);
+        const result = nextTextState(testCase.input, width);
+        expect(result).toEqual(testCase.expected);
       });
     });
   });
