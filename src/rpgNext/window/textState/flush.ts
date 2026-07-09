@@ -5,15 +5,6 @@ export const flashTextState = (
   textState: Rmmz_TextState,
   bitmap: Rmmz_Bitmap,
 ): Rmmz_TextState => {
-  return textState.rtl
-    ? rtlTrue(textState, bitmap)
-    : rtlFalse(textState, bitmap);
-};
-
-const rtlFalse = (
-  textState: Rmmz_TextState,
-  bitmap: Rmmz_Bitmap,
-): Rmmz_TextState => {
   const width: number = bitmap.measureTextWidth(textState.buffer);
   if (textState.drawing) {
     bitmap.drawText(
@@ -24,6 +15,10 @@ const rtlFalse = (
       textState.height,
     );
   }
+  return textState.rtl ? rtlTrue(textState, width) : rtlFalse(textState, width);
+};
+
+const rtlFalse = (textState: Rmmz_TextState, width: number): Rmmz_TextState => {
   const newX: number = textState.x + width;
   const outputWidth: number = Math.abs(newX - textState.startX);
   return {
@@ -43,20 +38,7 @@ const rtlFalse = (
   };
 };
 
-const rtlTrue = (
-  textState: Rmmz_TextState,
-  bitmap: Rmmz_Bitmap,
-): Rmmz_TextState => {
-  const width: number = bitmap.measureTextWidth(textState.buffer);
-  if (textState.drawing) {
-    bitmap.drawText(
-      textState.buffer,
-      textState.x,
-      textState.y,
-      width,
-      textState.height,
-    );
-  }
+const rtlTrue = (textState: Rmmz_TextState, width: number): Rmmz_TextState => {
   const newX: number = textState.x - width;
   const outputWidth: number = Math.abs(newX - textState.startX);
 
