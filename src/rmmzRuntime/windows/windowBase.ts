@@ -15,6 +15,8 @@ export interface Rmmz_Window_Base extends Rmmz_Window_Base_ContrlolChar {
   obtainEscapeCode(textState: Rmmz_TextState): string;
   obtainEscapeParam(textState: Rmmz_TextState): number | "";
   processEscapeCharacter(code: string, textState: Rmmz_TextState): void;
+  flushTextState(textState: Rmmz_TextState): void;
+  textWidth(text: string): number;
 }
 
 export interface Rmmz_Contents {
