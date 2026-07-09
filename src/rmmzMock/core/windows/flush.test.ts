@@ -97,16 +97,19 @@ const runTestCase = (testCase: TestCase) => {
       });
       test("result", () => {
         const mockBitmap = createMockBitmap();
-        const state: Rmmz_TextState = {
+        const state = Object.freeze({
           ...testCase.input,
-        };
+        });
         const result = flashTextState(state, mockBitmap);
         expect(result).toEqual(testCase.expected);
         expect(state).toEqual(testCase.input);
       });
       test("newTextState", () => {
+        const state = Object.freeze({
+          ...testCase.input,
+        });
         const width = measureTextWidth(testCase.input.buffer);
-        const result = nextTextState(testCase.input, width);
+        const result = nextTextState(state, width);
         expect(result).toEqual(testCase.expected);
       });
     });
