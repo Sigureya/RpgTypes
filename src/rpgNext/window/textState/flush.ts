@@ -14,7 +14,7 @@ const rtlFalse = (
   textState: Rmmz_TextState,
   bitmap: Rmmz_Bitmap,
 ): Rmmz_TextState => {
-  const width = bitmap.measureTextWidth(textState.buffer);
+  const width: number = bitmap.measureTextWidth(textState.buffer);
   if (textState.drawing) {
     bitmap.drawText(
       textState.buffer,
@@ -24,11 +24,12 @@ const rtlFalse = (
       textState.height,
     );
   }
-  const outputWidth = Math.abs(textState.x - textState.startX);
+  const newX: number = textState.x + width;
+  const outputWidth: number = Math.abs(newX - textState.startX);
   return {
     text: textState.text,
     buffer: createTextBuffer(textState.rtl),
-    x: textState.x + width,
+    x: newX,
     y: textState.y,
     outputHeight: textState.y - textState.startY + textState.height,
     index: textState.index,
@@ -46,16 +47,22 @@ const rtlTrue = (
   textState: Rmmz_TextState,
   bitmap: Rmmz_Bitmap,
 ): Rmmz_TextState => {
-  const width = bitmap.measureTextWidth(textState.buffer);
-  const x = textState.x - width;
+  const width: number = bitmap.measureTextWidth(textState.buffer);
   if (textState.drawing) {
-    bitmap.drawText(textState.buffer, x, textState.y, width, textState.height);
+    bitmap.drawText(
+      textState.buffer,
+      textState.x,
+      textState.y,
+      width,
+      textState.height,
+    );
   }
-  const outputWidth = Math.abs(textState.x - textState.startX);
+  const newX: number = textState.x - width;
+  const outputWidth: number = Math.abs(newX - textState.startX);
 
   return {
     buffer: createTextBuffer(textState.rtl),
-    x: textState.x - width,
+    x: newX,
     y: textState.y,
     outputHeight: textState.y - textState.startY + textState.height,
     index: textState.index,
