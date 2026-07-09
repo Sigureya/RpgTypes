@@ -20,3 +20,14 @@ export interface Rmmz_Window_Base extends Rmmz_Window_Base_ContrlolChar {
 export interface Rmmz_Contents {
   fontSize: number;
 }
+
+export interface Rmmz_Bitmap {
+  measureTextWidth(text: string): number;
+  drawText(
+    text: string,
+    x: number,
+    y: number,
+    width: number,
+    height: number,
+  ): void;
+}
