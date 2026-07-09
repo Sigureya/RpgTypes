@@ -1,11 +1,12 @@
 import type { MockedObject } from "vitest";
 import { describe, expect, test, vi } from "vitest";
 import type { Rmmz_Bitmap, Rmmz_TextState } from "@RpgTypes/rmmzRuntime";
-import { flashTextState, nextTextState } from "@RpgTypes/rpgNext/window";
 import {
   BUFFER_INITIAL_TEXT_RTL_FALSE,
   BUFFER_INITIAL_TEXT_RTL_TURE,
-} from "@RpgTypes/rpgNext/window/textState/ctrl";
+  flashTextState,
+  nextTextState,
+} from "@RpgTypes/rpgNext/window";
 import { Window_Base } from "./rmmz_windows";
 
 interface MockWindowBase {
