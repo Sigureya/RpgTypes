@@ -15,31 +15,16 @@ export const flashTextState = (
       textState.height,
     );
   }
-  return textState.rtl ? rtlTrue(textState, width) : rtlFalse(textState, width);
+  return nextTextState(textState, width);
 };
 
-const rtlFalse = (textState: Rmmz_TextState, width: number): Rmmz_TextState => {
-  const newX: number = textState.x + width;
-  const outputWidth: number = Math.abs(newX - textState.startX);
-  return {
-    text: textState.text,
-    buffer: createTextBuffer(textState.rtl),
-    x: newX,
-    y: textState.y,
-    outputHeight: textState.y - textState.startY + textState.height,
-    index: textState.index,
-    drawing: textState.drawing,
-    rtl: textState.rtl,
-    startX: textState.startX,
-    startY: textState.startY,
-    height: textState.height,
-    width: textState.width,
-    outputWidth: Math.max(outputWidth, textState.outputWidth),
-  };
-};
-
-const rtlTrue = (textState: Rmmz_TextState, width: number): Rmmz_TextState => {
-  const newX: number = textState.x - width;
+export const nextTextState = (
+  textState: Rmmz_TextState,
+  width: number,
+): Rmmz_TextState => {
+  const newX: number = textState.rtl
+    ? textState.x - width
+    : textState.x + width;
   const outputWidth: number = Math.abs(newX - textState.startX);
 
   return {
