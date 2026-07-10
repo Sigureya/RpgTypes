@@ -52,13 +52,20 @@ interface TestCase {
 const runTestCase = (testCase: TestCase) => {
   describe(testCase.input.text, () => {
     describe("Window_Base", () => {
-      test("bigger or smaller", () => {
+      test("result", () => {
         const mockWindowBase = createMockWindowBase(testCase.input.fontSize);
         const reuslt = Window_Base.prototype.maxFontSizeInLine.call(
           mockWindowBase,
           testCase.input.text,
         );
         expect(reuslt).toBe(testCase.expected);
+      });
+      test("bigger or smaller", () => {
+        const mockWindowBase = createMockWindowBase(testCase.input.fontSize);
+        Window_Base.prototype.maxFontSizeInLine.call(
+          mockWindowBase,
+          testCase.input.text,
+        );
         expect(mockWindowBase.makeFontBigger).toHaveBeenCalledTimes(
           testCase.callBigger,
         );
@@ -96,6 +103,70 @@ const testCases: TestCase[] = [
     callSmaller: 0,
     expected: 32,
     setFontSize: [],
+  },
+  {
+    input: { text: "\x1b{", fontSize: 95 },
+    callBigger: 1,
+    callSmaller: 0,
+    expected: 95 + 12,
+    setFontSize: [],
+  },
+  {
+    input: { text: "\x1b{", fontSize: 96 },
+    callBigger: 1,
+    callSmaller: 0,
+    expected: 96 + 12,
+    setFontSize: [],
+  },
+  {
+    input: { text: "\x1b{", fontSize: 97 },
+    callBigger: 1,
+    callSmaller: 0,
+    expected: 97,
+    setFontSize: [],
+  },
+  {
+    input: { text: "\x1b{\x1b{", fontSize: 97 },
+    callBigger: 2,
+    callSmaller: 0,
+    expected: 97,
+    setFontSize: [],
+  },
+  // フォントの初期サイズを下限にする処理があるのでこうなる
+  {
+    input: { text: "\x1b}", fontSize: 25 },
+    callBigger: 0,
+    callSmaller: 1,
+    expected: 25,
+    setFontSize: [],
+  },
+  {
+    input: { text: "\x1b}", fontSize: 26 },
+    callBigger: 0,
+    callSmaller: 1,
+    expected: 26,
+    setFontSize: [],
+  },
+  {
+    input: { text: "\x1b}", fontSize: 30 },
+    callBigger: 0,
+    callSmaller: 1,
+    expected: 30,
+    setFontSize: [],
+  },
+  {
+    input: { text: "\x1b}", fontSize: 50 },
+    callBigger: 0,
+    callSmaller: 1,
+    expected: 50,
+    setFontSize: [],
+  },
+  {
+    input: { text: "\x1bFS[1234]", fontSize: 10 },
+    callBigger: 0,
+    callSmaller: 0,
+    expected: 1234,
+    setFontSize: [1234],
   },
 ];
 
