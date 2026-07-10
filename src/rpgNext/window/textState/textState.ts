@@ -5,28 +5,6 @@ import type {
 } from "@RpgTypes/rmmzRuntime";
 import type { Rmts_FontSizeInfo } from "./types";
 
-export const obtainEscapeParam = (textState: Rmmz_TextState): number | "" => {
-  const regExp = /^\[\d+\]/;
-  const arr = regExp.exec(textState.text.slice(textState.index));
-  if (arr) {
-    textState.index += arr[0].length;
-    return parseInt(arr[0].slice(1));
-  } else {
-    return "";
-  }
-};
-
-export const obtainEscapeCode = (textState: Rmmz_TextState): string => {
-  const regExp = /^[$.|^!><{}\\]|^[A-Z]+/i;
-  const arr = regExp.exec(textState.text.slice(textState.index));
-  if (arr) {
-    textState.index += arr[0].length;
-    return arr[0].toUpperCase();
-  } else {
-    return "";
-  }
-};
-
 export const calcTextHeightFromRuntimeObjects = (
   textState: Rmmz_TextState,
   sysmte: Rmmz_System,
@@ -84,13 +62,10 @@ const calcNextFontSize = (
   switch (match[1].toUpperCase()) {
     case "{":
       return current <= info.max ? current + info.step : current;
-
     case "}":
       return current >= info.min ? current - info.step : current;
-
     case "FS":
       return Number(match[2]);
-
     default:
       return current;
   }
