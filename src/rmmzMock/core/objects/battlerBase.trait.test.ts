@@ -1,5 +1,10 @@
 import { describe, expect, test, vi } from "vitest";
-import { TRAIT_ELEMENT_RATE, type Trait } from "@RpgTypes/rmmz/rpg";
+import {
+  TRAIT_DEBUFF_RATE,
+  TRAIT_ELEMENT_RATE,
+  TRAIT_STATE_RATE,
+  type Trait,
+} from "@RpgTypes/rmmz/rpg";
 import type { Rmmz_BattlerBase } from "@RpgTypes/rmmzRuntime";
 import { traitElementRate } from "@RpgTypes/rpgNext/trait/trait";
 import { Game_BattlerBase } from "./rmmz_objects";
@@ -13,6 +18,14 @@ const createMockedBattlerBase = (traits: Trait[]): Rmmz_BattlerBase => {
 interface TestCase {
   traits: Trait[];
   elmentRate: {
+    expected: number;
+    param: number;
+  }[];
+  debuffRate: {
+    expected: number;
+    param: number;
+  }[];
+  stateRate: {
     expected: number;
     param: number;
   }[];
@@ -34,15 +47,25 @@ const runTestCase = (testCase: TestCase) => {
       });
     });
   });
+  describe("DebuffRate", () => {
+    testCase.debuffRate.forEach((x) => {
+      describe(`paramId: ${x.param}`, () => {
+        test("BattlerBase", () => {
+          const battlerBase = createMockedBattlerBase(testCase.traits);
+          const result = battlerBase.debuffRate(x.param);
+          expect(result).toBe(x.expected);
+        });
+      });
+    });
+  });
 };
 
 const testCases: TestCase[] = [
   {
     traits: [],
-    elmentRate: [
-      { param: 1, expected: 1 },
-      { param: 10, expected: 1 },
-    ],
+    elmentRate: [{ param: 1, expected: 1 }],
+    debuffRate: [{ param: 1, expected: 1 }],
+    stateRate: [{ param: 1, expected: 1 }],
   },
   {
     traits: [
@@ -53,6 +76,8 @@ const testCases: TestCase[] = [
       { code: TRAIT_ELEMENT_RATE, dataId: 4, value: 0.7 },
       { code: TRAIT_ELEMENT_RATE, dataId: 5, value: 0.2 },
       { code: TRAIT_ELEMENT_RATE, dataId: 5, value: 0.3 },
+      { code: TRAIT_DEBUFF_RATE, dataId: 6, value: 7 },
+      { code: TRAIT_STATE_RATE, dataId: 12, value: 0.7 },
     ],
     elmentRate: [
       { param: 1, expected: 0.5 },
@@ -61,6 +86,8 @@ const testCases: TestCase[] = [
       { param: 4, expected: 0.7 },
       { param: 5, expected: 0.2 * 0.3 },
     ],
+    debuffRate: [{ param: 6, expected: 7 }],
+    stateRate: [{ param: 12, expected: 0.7 }],
   },
 ];
 
