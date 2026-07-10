@@ -1,12 +1,15 @@
 import { describe, expect, test, vi } from "vitest";
+import type { Trait } from "@RpgTypes/rmmz/rpg";
 import {
   TRAIT_DEBUFF_RATE,
   TRAIT_ELEMENT_RATE,
   TRAIT_STATE_RATE,
-  type Trait,
 } from "@RpgTypes/rmmz/rpg";
 import type { Rmmz_BattlerBase } from "@RpgTypes/rmmzRuntime";
-import { traitElementRate } from "@RpgTypes/rpgNext/trait/trait";
+import {
+  traitElementRate,
+  traitDebuffRate,
+} from "@RpgTypes/rpgNext/trait/trait";
 import { Game_BattlerBase } from "./rmmz_objects";
 
 const createMockedBattlerBase = (traits: Trait[]): Rmmz_BattlerBase => {
@@ -53,6 +56,10 @@ const runTestCase = (testCase: TestCase) => {
         test("BattlerBase", () => {
           const battlerBase = createMockedBattlerBase(testCase.traits);
           const result = battlerBase.debuffRate(x.param);
+          expect(result).toBe(x.expected);
+        });
+        test("function", () => {
+          const result = traitDebuffRate(testCase.traits, x.param);
           expect(result).toBe(x.expected);
         });
       });
