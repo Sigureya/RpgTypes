@@ -1,0 +1,69 @@
+import { describe, expect, test, vi } from "vitest";
+import { TRAIT_ELEMENT_RATE, type Trait } from "@RpgTypes/rmmz/rpg";
+import type { Rmmz_BattlerBase } from "@RpgTypes/rmmzRuntime";
+import { traitElementRate } from "@RpgTypes/rpgNext/trait/trait";
+import { Game_BattlerBase } from "./rmmz_objects";
+
+const createMockedBattlerBase = (traits: Trait[]): Rmmz_BattlerBase => {
+  const battlerBase = new Game_BattlerBase();
+  vi.spyOn(battlerBase, "allTraits").mockReturnValue(traits);
+  return battlerBase;
+};
+
+interface TestCase {
+  traits: Trait[];
+  elmentRate: {
+    expected: number;
+    param: number;
+  }[];
+}
+
+const runTestCase = (testCase: TestCase) => {
+  describe("ElementRate", () => {
+    testCase.elmentRate.forEach((x) => {
+      describe(`paramId: ${x.param}`, () => {
+        test("BattlerBase", () => {
+          const battlerBase = createMockedBattlerBase(testCase.traits);
+          const result = battlerBase.elementRate(x.param);
+          expect(result).toBe(x.expected);
+        });
+        test("function", () => {
+          const result = traitElementRate(testCase.traits, x.param);
+          expect(result).toBe(x.expected);
+        });
+      });
+    });
+  });
+};
+
+const testCases: TestCase[] = [
+  {
+    traits: [],
+    elmentRate: [
+      { param: 1, expected: 1 },
+      { param: 10, expected: 1 },
+    ],
+  },
+  {
+    traits: [
+      { code: TRAIT_ELEMENT_RATE, dataId: 1, value: 0.5 },
+      { code: TRAIT_ELEMENT_RATE, dataId: 2, value: 2 },
+      { code: TRAIT_ELEMENT_RATE, dataId: 3, value: 3 },
+      { code: TRAIT_ELEMENT_RATE, dataId: 3, value: 2 },
+      { code: TRAIT_ELEMENT_RATE, dataId: 4, value: 0.7 },
+      { code: TRAIT_ELEMENT_RATE, dataId: 5, value: 0.2 },
+      { code: TRAIT_ELEMENT_RATE, dataId: 5, value: 0.3 },
+    ],
+    elmentRate: [
+      { param: 1, expected: 0.5 },
+      { param: 2, expected: 2 },
+      { param: 3, expected: 6 },
+      { param: 4, expected: 0.7 },
+      { param: 5, expected: 0.2 * 0.3 },
+    ],
+  },
+];
+
+testCases.forEach((testCase) => {
+  runTestCase(testCase);
+});
