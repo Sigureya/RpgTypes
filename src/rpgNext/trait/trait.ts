@@ -28,7 +28,10 @@ export const traitDebuffRate = (
   return traitPi(traits, TRAIT_DEBUFF_RATE, paramId);
 };
 
-export const stateRate = (traits: ReadonlyArray<Trait>, stateId: number) => {
+export const traitStateRate = (
+  traits: ReadonlyArray<Trait>,
+  stateId: number,
+): number => {
   return traitPi(traits, TRAIT_STATE_RATE, stateId);
 };
 
