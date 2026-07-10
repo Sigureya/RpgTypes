@@ -1,5 +1,6 @@
 import type { MockedObject } from "vitest";
 import { describe, expect, test, vi } from "vitest";
+import { calcMaxFontSizeInLineMZ } from "@RpgTypes/rpgNext/window";
 import { Window_Base } from "./rmmz_windows";
 
 interface MockWindowBase {
@@ -50,7 +51,8 @@ interface TestCase {
 }
 
 const runTestCase = (testCase: TestCase) => {
-  describe(testCase.input.text, () => {
+  const title = testCase.input.text.replace(/\x1b/g, "");
+  describe(title, () => {
     describe("Window_Base", () => {
       test("result", () => {
         const mockWindowBase = createMockWindowBase(testCase.input.fontSize);
@@ -84,6 +86,17 @@ const runTestCase = (testCase: TestCase) => {
           const msg = `fontSize(${value}) should be set`;
           expect(set, msg).toContain(value);
         });
+      });
+    });
+    describe("function", () => {
+      test("calcMaxFontSizeInLine ", () => {
+        const result = calcMaxFontSizeInLineMZ(testCase.input.text, {
+          default: testCase.input.fontSize,
+          max: 96,
+          min: 24,
+          step: 12,
+        });
+        expect(result).toBe(testCase.expected);
       });
     });
   });
@@ -162,11 +175,46 @@ const testCases: TestCase[] = [
     setFontSize: [],
   },
   {
+    input: { text: "\x1b}\x1b{", fontSize: 40 },
+    callBigger: 1,
+    callSmaller: 1,
+    expected: 40,
+    setFontSize: [],
+  },
+  {
+    input: { text: "\x1b{\x1b}", fontSize: 40 },
+    callBigger: 1,
+    callSmaller: 1,
+    expected: 52,
+    setFontSize: [],
+  },
+  {
     input: { text: "\x1bFS[1234]", fontSize: 10 },
     callBigger: 0,
     callSmaller: 0,
     expected: 1234,
     setFontSize: [1234],
+  },
+  {
+    input: { text: "\x1bFS[8]", fontSize: 16 },
+    callBigger: 0,
+    callSmaller: 0,
+    expected: 16,
+    setFontSize: [8],
+  },
+  {
+    input: { text: "\x1bFS[8]\x1b}", fontSize: 16 },
+    callBigger: 0,
+    callSmaller: 1,
+    expected: 16,
+    setFontSize: [8],
+  },
+  {
+    input: { text: "\x1bFS[8]\x1b{", fontSize: 16 },
+    callBigger: 1,
+    callSmaller: 0,
+    expected: 20,
+    setFontSize: [8],
   },
 ];
 
