@@ -17,6 +17,7 @@ export interface Rmmz_Window_Base extends Rmmz_Window_Base_ContrlolChar {
   processEscapeCharacter(code: string, textState: Rmmz_TextState): void;
   flushTextState(textState: Rmmz_TextState): void;
   textWidth(text: string): number;
+  maxFontSizeInLine(line: string): number;
 }
 
 export interface Rmmz_Contents {
