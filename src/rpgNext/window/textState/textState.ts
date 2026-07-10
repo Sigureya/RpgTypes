@@ -48,29 +48,45 @@ export const calcTextHeight = (
   lineSpacing: number,
 ): number => {
   const lines = textState.text.slice(textState.index).split("\n");
-  return calcMaxFontSizeInLine(lines[0], info) + lineSpacing;
+  return calcMaxFontSizeInLineMZ(lines[0], info) + lineSpacing;
 };
 
-const calcMaxFontSizeInLine = (
+export const calcMaxFontSizeInLineMZ = (
   lineText: string,
   fontSizeInfo: Rmts_FontSizeInfo,
 ): number => {
-  return lineText
-    .matchAll(/\x1b({|}|FS)(?:\[(\d{1,6)])?/gi)
-    .reduce((currentFontSize, match: RegExpExecArray): number => {
-      const code = match[1].toUpperCase();
-      switch (code) {
-        case "{":
-          return currentFontSize <= fontSizeInfo.max
-            ? currentFontSize + fontSizeInfo.step
-            : currentFontSize;
-        case "}":
-          return currentFontSize >= fontSizeInfo.min
-            ? currentFontSize - fontSizeInfo.step
-            : currentFontSize;
-        case "FS":
-          return Number(match[2]);
-      }
-      return currentFontSize;
-    }, fontSizeInfo.default);
+  const state = [...lineText.matchAll(/\x1b({|}|FS)(?:\[(\d+)])?/gi)].reduce(
+    (state, match) => {
+      const current = calcNextFontSize(state.current, match, fontSizeInfo);
+      return {
+        current,
+        max: Math.max(state.max, current),
+      };
+    },
+    {
+      current: fontSizeInfo.default,
+      max: fontSizeInfo.default,
+    },
+  );
+  return state.max;
+};
+
+const calcNextFontSize = (
+  current: number,
+  match: RegExpExecArray,
+  info: Rmts_FontSizeInfo,
+): number => {
+  switch (match[1].toUpperCase()) {
+    case "{":
+      return current <= info.max ? current + info.step : current;
+
+    case "}":
+      return current >= info.min ? current - info.step : current;
+
+    case "FS":
+      return Number(match[2]);
+
+    default:
+      return current;
+  }
 };
