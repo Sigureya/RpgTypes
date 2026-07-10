@@ -9,6 +9,7 @@ import type { Rmmz_BattlerBase } from "@RpgTypes/rmmzRuntime";
 import {
   traitElementRate,
   traitDebuffRate,
+  traitStateRate,
 } from "@RpgTypes/rpgNext/trait/trait";
 import { Game_BattlerBase } from "./rmmz_objects";
 
@@ -65,6 +66,21 @@ const runTestCase = (testCase: TestCase) => {
       });
     });
   });
+  describe("StateRate", () => {
+    testCase.stateRate.forEach((x) => {
+      describe(`paramId: ${x.param}`, () => {
+        test("BattlerBase", () => {
+          const battlerBase = createMockedBattlerBase(testCase.traits);
+          const result = battlerBase.stateRate(x.param);
+          expect(result).toBe(x.expected);
+        });
+        test("function", () => {
+          const result = traitStateRate(testCase.traits, x.param);
+          expect(result).toBe(x.expected);
+        });
+      });
+    });
+  });
 };
 
 const testCases: TestCase[] = [
@@ -93,8 +109,14 @@ const testCases: TestCase[] = [
       { param: 4, expected: 0.7 },
       { param: 5, expected: 0.2 * 0.3 },
     ],
-    debuffRate: [{ param: 6, expected: 7 }],
-    stateRate: [{ param: 12, expected: 0.7 }],
+    debuffRate: [
+      { param: 99, expected: 1 },
+      { param: 6, expected: 7 },
+    ],
+    stateRate: [
+      { param: 99, expected: 1 },
+      { param: 12, expected: 0.7 },
+    ],
   },
 ];
 
