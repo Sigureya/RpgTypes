@@ -55,8 +55,13 @@ export const calcMaxFontSizeInLineMZ = (
   lineText: string,
   fontSizeInfo: Rmts_FontSizeInfo,
 ): number => {
-  const state = [...lineText.matchAll(/\x1b({|}|FS)(?:\[(\d+)])?/gi)].reduce(
-    (state, match) => {
+  interface State {
+    current: number;
+    max: number;
+  }
+
+  const state = lineText.matchAll(/\x1b({|}|FS)(?:\[(\d+)])?/gi).reduce(
+    (state: State, match): State => {
       const current = calcNextFontSize(state.current, match, fontSizeInfo);
       return {
         current,
