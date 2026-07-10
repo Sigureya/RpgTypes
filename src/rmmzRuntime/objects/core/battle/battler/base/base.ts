@@ -3,6 +3,7 @@ import type { Rmmz_Equipable } from "./equipable";
 import type { Rmmz_ItemUser } from "./itemUser";
 import type { Rmmz_StatusParams } from "./param";
 import type { Rmmz_Stateable } from "./state";
+import type { Rmmz_TraitContainer } from "./trait";
 import type { Rmmz_BattlerBase_Values } from "./values";
 
 export interface Rmmz_BattlerBase
@@ -12,6 +13,7 @@ export interface Rmmz_BattlerBase
     Rmmz_ItemUser,
     Rmmz_Stateable,
     Rmmz_StatusParams,
+    Rmmz_TraitContainer,
     Rmmz_BattlerBase_Values {
   get mhp(): number;
   get mmp(): number;
