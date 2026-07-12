@@ -14,6 +14,41 @@ interface CustomStruct<T> {
   getBoolean(data: T, battler: Rmmz_Battler, arg: unknown): boolean;
 }
 
+export interface ActionCost {}
+
+export interface BattleXX {}
+
+export interface BattleField {}
+export interface ActionTotalCost {}
+
+export interface ActionContext {
+  filed: BattleField;
+  action: Rmmz_Action;
+}
+
+export interface ActionHandlerContlol<T> {
+  getData(action: Rmmz_Action): T;
+}
+
+export interface ActionHandlers<T, ACC> {
+  canUse(data: T, context: ActionContext): boolean;
+  additionalEffects(data: T, context: ActionContext): ItemEffect[];
+  additionalCost(data: T, context: ActionContext): ActionCost[];
+  onActionStart(
+    context: ActionContext,
+    totalCost: ActionTotalCost,
+    subject: Rmmz_Battler,
+    targets: readonly Rmmz_Battler[],
+  ): ACC;
+  onDamage(
+    data: T,
+    context: ActionContext,
+    acc: ACC,
+    target: Rmmz_Battler,
+  ): ACC;
+  onActionEnd(data: T, context: ActionContext, acc: ACC): BattleXX | undefined;
+}
+
 export interface PropEx<T extends object> {
   query: CustomStructQuery;
   schema: PluginStructEx<T>;
