@@ -6,10 +6,10 @@ export type ParamArray = [
   mat: number,
   mdf: number,
   agi: number,
-  luk: number
+  luk: number,
 ];
 
-export type ParamID = keyof ParamArray;
+export type ParamID = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7;
 
 export interface StatusParamObject {
   mhp: number;
