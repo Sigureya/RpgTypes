@@ -27,4 +27,5 @@ export interface Rmmz_BattlerBase
   get mp(): number;
   get tp(): number;
   get tgr(): number;
+  get rec(): number;
 }
