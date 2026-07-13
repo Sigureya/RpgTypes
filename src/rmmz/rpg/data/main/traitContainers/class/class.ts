@@ -1,9 +1,31 @@
+import type { ParamID } from "../members";
 import type {
   ClassParamGlowing,
   ClassParamGlowTable,
   Data_Class,
   Data_ClassEx,
 } from "./types";
+
+export const currentGlowParam = (
+  table: ClassParamGlowTable,
+  level: number,
+  paramId: ParamID,
+): number => {
+  if (level < 0) {
+    return 0;
+  }
+  const array = table[paramId];
+  if (!array) {
+    return 0;
+  }
+  if (level < array.length) {
+    return array[level];
+  }
+  if (level >= array.length) {
+    return array[array.length - 1];
+  }
+  return 0;
+};
 
 export const makeClassData = (data: Partial<Data_Class> = {}): Data_Class => ({
   name: data.name ?? "",
