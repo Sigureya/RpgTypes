@@ -19,4 +19,5 @@ export interface Rmmz_Battler_Constructor {
 
 export interface Rmmz_BattlerBase_Constructor {
   new (): Rmmz_BattlerBase;
+  prototype: Rmmz_BattlerBase;
 }
