@@ -1,4 +1,8 @@
-import type { Data_AnyGoodsUnion } from "@RpgTypes/rmmz/rpg";
+import type {
+  Data_AnyGoodsUnion,
+  Data_Armor,
+  Data_Weapon,
+} from "@RpgTypes/rmmz/rpg";
 
 export interface Rmmz_UnitPlayer {
   steps(): number;
@@ -17,4 +21,7 @@ export interface Rmmz_UnitPlayer {
     amount: number,
     includeEquip?: boolean,
   ): void;
+  equipItems(): Data_AnyGoodsUnion[];
+  armors(): Data_Armor[];
+  weapons(): Data_Weapon[];
 }
