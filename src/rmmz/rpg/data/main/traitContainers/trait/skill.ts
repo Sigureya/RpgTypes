@@ -9,7 +9,7 @@ import type { Trait } from "./types";
 
 export const traitsAttackSkillId = (traits: ReadonlyArray<Trait>): number => {
   const set: number[] = traitSet(traits, TRAIT_ATTACK_SKILL);
-  return set.length > 0 ? Math.max(...set) : 0;
+  return set.length > 0 ? Math.max(...set) : 1;
 };
 
 export const traitsTddedSkillTypes = (
