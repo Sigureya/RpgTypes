@@ -1,3 +1,4 @@
+import type { TraitCode } from "./core";
 import {
   TRAIT_PARAM,
   TRAIT_ELEMENT_RATE,
@@ -84,4 +85,14 @@ export const traitSet = (
   return traits
     .filter((trait) => trait.code === code)
     .map((trait) => trait.dataId);
+};
+
+export const someTraitMatched = (
+  traits: ReadonlyArray<Trait>,
+  code: TraitCode,
+  etypeId: number,
+): boolean => {
+  return traits.some((trait) => {
+    return trait.code === code && trait.dataId === etypeId;
+  });
 };
