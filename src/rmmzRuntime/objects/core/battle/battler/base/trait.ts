@@ -12,4 +12,6 @@ export interface Rmmz_TraitContainer {
   debuffRate(paramId: number): number;
   stateRate(stateId: number): number;
   addedSkills(): number[];
+  attackSkillId(): number;
+  isSkillTypeSealed(stypeId: number): boolean;
 }
