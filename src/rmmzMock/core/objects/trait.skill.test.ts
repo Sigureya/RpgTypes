@@ -1,7 +1,14 @@
 import type { MockedObject } from "vitest";
 import { describe, expect, test, vi } from "vitest";
 import type { Trait } from "@RpgTypes/rmmz/rpg";
-import { TRAIT_SKILL_ADD, traitAddedSkills } from "@RpgTypes/rmmz/rpg";
+import {
+  isSkillTypeSealed,
+  TRAIT_ATTACK_SKILL,
+  TRAIT_SKILL_ADD,
+  TRAIT_SKILL_TYPE_SEAL,
+  traitAddedSkills,
+  traitsAttackSkillId,
+} from "@RpgTypes/rmmz/rpg";
 import type { Rmmz_BattlerBase } from "@RpgTypes/rmmzRuntime";
 import { Game_BattlerBase } from "./rmmz_objects";
 
@@ -19,9 +26,7 @@ const createMockedBattlerBase = (
   traitItems: Trait[],
 ): MockedObject<BattlerBase> => {
   const allTraits = vi.fn((): Trait[] => {
-    return Game_BattlerBase.prototype.allTraits.call({
-      traitObjects: vi.fn().mockReturnValue(traitItems),
-    });
+    return traitItems;
   });
   const traits = vi.fn((code: number): Trait[] => {
     return Game_BattlerBase.prototype.traits.call(
@@ -70,6 +75,8 @@ interface TestCase {
   name: string;
   traits: Trait[];
   addedSkills: number[];
+  attackSkillId: number;
+  sealedSkillTypes: number[];
 }
 
 const runTestCase = (testCase: TestCase) => {
@@ -78,6 +85,16 @@ const runTestCase = (testCase: TestCase) => {
       test("traitAddedSkills", () => {
         const skills = traitAddedSkills(testCase.traits);
         expect(skills).toEqual(testCase.addedSkills);
+      });
+      test("traitAttackSkillId", () => {
+        const attack = traitsAttackSkillId(testCase.traits);
+        expect(attack).toEqual(testCase.attackSkillId);
+      });
+      test("isSkillTypeSealed", () => {
+        testCase.sealedSkillTypes.forEach((stypeId) => {
+          const result = isSkillTypeSealed(testCase.traits, stypeId);
+          expect(result, `stype:${stypeId}`).toBe(true);
+        });
       });
     });
     describe("Game_BattlerBase", () => {
@@ -88,8 +105,29 @@ const runTestCase = (testCase: TestCase) => {
         expect(battlerBase.allTraits).toHaveBeenCalledOnce();
         expect(battlerBase.traitsSet).toHaveBeenCalledWith(TRAIT_SKILL_ADD);
         expect(battlerBase.traitsSet).toHaveBeenCalledOnce();
-        expect(battlerBase.traits).toHaveBeenCalledWith(TRAIT_SKILL_ADD);
-        expect(battlerBase.traits).toHaveBeenCalledOnce();
+      });
+      test("attackSkillId", () => {
+        const battlerBase = createMockedBattlerBase(testCase.traits);
+        const attack =
+          Game_BattlerBase.prototype.attackSkillId.call(battlerBase);
+        expect(attack).toEqual(testCase.attackSkillId);
+        expect(battlerBase.allTraits).toHaveBeenCalledOnce();
+        expect(battlerBase.traitsSet).toHaveBeenCalledWith(TRAIT_ATTACK_SKILL);
+        expect(battlerBase.traitsSet).toHaveBeenCalledOnce();
+      });
+      test("isSkillTypeSealed", () => {
+        testCase.sealedSkillTypes.forEach((stypeId) => {
+          const battlerBase = createMockedBattlerBase(testCase.traits);
+          const result = Game_BattlerBase.prototype.isSkillTypeSealed.call(
+            battlerBase,
+            stypeId,
+          );
+          expect(result, `stype:${stypeId}`).toBe(true);
+          expect(battlerBase.traitsSet).toHaveBeenCalledWith(
+            TRAIT_SKILL_TYPE_SEAL,
+          );
+          expect(battlerBase.traitsSet).toHaveBeenCalledOnce();
+        });
       });
     });
   });
@@ -100,6 +138,30 @@ const testCases: TestCase[] = [
     name: "empty traits",
     traits: [],
     addedSkills: [],
+    attackSkillId: 1,
+    sealedSkillTypes: [],
+  },
+  {
+    name: "added skills",
+    traits: [
+      { code: TRAIT_SKILL_ADD, dataId: 113, value: 0 },
+      { code: TRAIT_SKILL_ADD, dataId: 211, value: 0 },
+      { code: TRAIT_SKILL_ADD, dataId: 231, value: 0 },
+    ],
+    addedSkills: [113, 211, 231],
+    attackSkillId: 1,
+    sealedSkillTypes: [],
+  },
+  {
+    name: "attack skill",
+    traits: [
+      { code: TRAIT_ATTACK_SKILL, dataId: 113, value: 0 },
+      { code: TRAIT_ATTACK_SKILL, dataId: 211, value: 0 },
+      { code: TRAIT_ATTACK_SKILL, dataId: 257, value: 0 },
+    ],
+    addedSkills: [],
+    attackSkillId: 257,
+    sealedSkillTypes: [],
   },
 ];
 
