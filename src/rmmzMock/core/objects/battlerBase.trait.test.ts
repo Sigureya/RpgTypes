@@ -4,13 +4,11 @@ import {
   TRAIT_DEBUFF_RATE,
   TRAIT_ELEMENT_RATE,
   TRAIT_STATE_RATE,
+  traitDebuffRate,
+  traitElementRate,
+  traitStateRate,
 } from "@RpgTypes/rmmz/rpg";
 import type { Rmmz_BattlerBase } from "@RpgTypes/rmmzRuntime";
-import {
-  traitElementRate,
-  traitDebuffRate,
-  traitStateRate,
-} from "@RpgTypes/rpgNext/trait/trait";
 import { Game_BattlerBase } from "./rmmz_objects";
 
 const createMockedBattlerBase = (traits: Trait[]): Rmmz_BattlerBase => {
