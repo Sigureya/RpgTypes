@@ -16,9 +16,12 @@ import {
   makeCommandVariableFromPartySteps,
   makeCommandVariableFromWeapon,
 } from "@RpgTypes/rmmz/eventCommand";
-import type { Rmmz_Interpreter, Rmmz_Variables } from "@RpgTypes/rmmzRuntime";
+import type {
+  Rmmz_Interpreter,
+  Rmmz_Party,
+  Rmmz_Variables,
+} from "@RpgTypes/rmmzRuntime";
 import type { FakeMap } from "./fakes/types";
-import type { Game_Party } from "./rmmz_objects";
 import { Game_Interpreter } from "./rmmz_objects";
 
 const MOCK_MAP_ID = 123456 as const;
@@ -38,7 +41,7 @@ const PARTY_FUNCTION_KEYS = [
   "loseGold",
   "numItems",
   "size",
-] as const satisfies (keyof Game_Party)[];
+] as const satisfies (keyof Rmmz_Party)[];
 
 const mockItems = [
   null,
@@ -64,7 +67,7 @@ const createMockedVariable = (): MockedObject<Rmmz_Variables> => ({
   onChange: vi.fn(),
 });
 
-type FakeParty = Pick<Game_Party, (typeof PARTY_FUNCTION_KEYS)[number]>;
+type FakeParty = Pick<Rmmz_Party, (typeof PARTY_FUNCTION_KEYS)[number]>;
 
 const createMockParty = (): MockedObject<FakeParty> => ({
   gainGold: vi.fn(),
