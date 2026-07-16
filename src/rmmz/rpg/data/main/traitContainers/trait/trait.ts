@@ -1,11 +1,11 @@
-import type { Trait } from "@RpgTypes/rmmz";
 import {
-  TRAIT_ATTACK_ELEMENT,
-  TRAIT_DEBUFF_RATE,
-  TRAIT_ELEMENT_RATE,
   TRAIT_PARAM,
+  TRAIT_ELEMENT_RATE,
+  TRAIT_DEBUFF_RATE,
   TRAIT_STATE_RATE,
-} from "@RpgTypes/rmmz";
+  TRAIT_ATTACK_ELEMENT,
+} from "./core";
+import type { Trait } from "./types";
 
 export const traitParamRate = (
   traits: ReadonlyArray<Trait>,
