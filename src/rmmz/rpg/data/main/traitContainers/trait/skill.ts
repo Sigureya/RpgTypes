@@ -7,12 +7,14 @@ import {
 import { someTraitMatched, traitSet } from "./trait";
 import type { Trait } from "./types";
 
-export const attackSkillId = (traits: ReadonlyArray<Trait>): number => {
+export const traitsAttackSkillId = (traits: ReadonlyArray<Trait>): number => {
   const set: number[] = traitSet(traits, TRAIT_ATTACK_SKILL);
   return set.length > 0 ? Math.max(...set) : 0;
 };
 
-export const addedSkillTypes = (traits: ReadonlyArray<Trait>): number[] => {
+export const traitsTddedSkillTypes = (
+  traits: ReadonlyArray<Trait>,
+): number[] => {
   return traitSet(traits, TRAIT_SKILL_TYPE_ADD);
 };
 
@@ -23,7 +25,7 @@ export const isSkillTypeSealed = (
   return someTraitMatched(traits, TRAIT_SKILL_TYPE_ADD, stypeId);
 };
 
-export const addedSkills = (traits: ReadonlyArray<Trait>): number[] => {
+export const traitAddedSkills = (traits: ReadonlyArray<Trait>): number[] => {
   return traitSet(traits, TRAIT_SKILL_ADD);
 };
 
