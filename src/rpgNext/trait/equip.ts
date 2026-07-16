@@ -30,6 +30,13 @@ const aax = (
   });
 };
 
+export const isEquipWeaponTypeOk = (
+  traits: ReadonlyArray<Trait>,
+  wtypeId: number,
+): boolean => {
+  return aax(traits, TRAIT_EQUIP_WEAPON_TYPE, wtypeId);
+};
+
 export const isEquipArmorTypeOk = (
   traits: ReadonlyArray<Trait>,
   etypeId: number,
