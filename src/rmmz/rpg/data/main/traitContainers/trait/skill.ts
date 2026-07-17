@@ -3,6 +3,7 @@ import {
   TRAIT_SKILL_ADD,
   TRAIT_SKILL_SEAL,
   TRAIT_SKILL_TYPE_ADD,
+  TRAIT_SKILL_TYPE_SEAL,
 } from "./core";
 import { someTraitMatched, traitSet } from "./trait";
 import type { Trait } from "./types";
@@ -22,7 +23,7 @@ export const isSkillTypeSealed = (
   traits: ReadonlyArray<Trait>,
   stypeId: number,
 ): boolean => {
-  return someTraitMatched(traits, TRAIT_SKILL_TYPE_ADD, stypeId);
+  return someTraitMatched(traits, TRAIT_SKILL_TYPE_SEAL, stypeId);
 };
 
 export const traitAddedSkills = (traits: ReadonlyArray<Trait>): number[] => {
