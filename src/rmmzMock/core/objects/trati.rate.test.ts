@@ -1,4 +1,5 @@
-import { describe, expect, test } from "vitest";
+import type { MockedObject } from "vitest";
+import { describe, expect, test, vi } from "vitest";
 import type { Trait } from "@RpgTypes/rmmz/rpg";
 import {
   TRAIT_DEBUFF_RATE,
@@ -13,6 +14,67 @@ import {
   traitStateRate,
   traitXparam,
 } from "@RpgTypes/rmmz/rpg";
+import type { Rmmz_BattlerBase } from "@RpgTypes/rmmzRuntime";
+import { Game_BattlerBase } from "./rmmz_objects";
+
+type BattlerBase = Pick<
+  Rmmz_BattlerBase,
+  | "traits"
+  | "allTraits"
+  | "traitsWithId"
+  | "traitsSum"
+  | "traitsPi"
+  | "traitsSet"
+>;
+
+const createMockedBattlerBase = (
+  traitItems: Trait[],
+): MockedObject<BattlerBase> => {
+  const allTraits = vi.fn((): Trait[] => {
+    return traitItems;
+  });
+  const traits = vi.fn((code: number): Trait[] => {
+    return Game_BattlerBase.prototype.traits.call(
+      { allTraits: allTraits },
+      code,
+    );
+  });
+  const traitsWithId = vi.fn((code: number, id: number): Trait[] => {
+    return Game_BattlerBase.prototype.traitsWithId.call(
+      { allTraits: allTraits },
+      code,
+      id,
+    );
+  });
+
+  const traitsPi = vi.fn((code: number, id: number): number => {
+    return Game_BattlerBase.prototype.traitsPi.call(
+      { traitsWithId: traitsWithId },
+      code,
+      id,
+    );
+  });
+
+  const traitsSum = vi.fn((code: number, id: number): number => {
+    return Game_BattlerBase.prototype.traitsSum.call(
+      { traits: traits },
+      code,
+      id,
+    );
+  });
+  const traitsSet = vi.fn((code: number): boolean => {
+    return Game_BattlerBase.prototype.traitsSet.call({ traits: traits }, code);
+  });
+
+  return {
+    allTraits,
+    traitsSet,
+    traits,
+    traitsWithId,
+    traitsPi,
+    traitsSum,
+  };
+};
 
 interface ValuePair {
   id: number;
@@ -29,6 +91,61 @@ interface TestCase {
   debuffRate: ValuePair;
   stateRate: ValuePair;
 }
+
+const runTestCase = (testCase: TestCase) => {
+  describe(testCase.name, () => {
+    describe("functions", () => {
+      test("traitParamRate", () => {
+        const result = traitParamRate(testCase.traits, testCase.paramRate.id);
+        expect(result).toBeCloseTo(testCase.paramRate.value);
+      });
+
+      test("traitXparam", () => {
+        const result = traitXparam(testCase.traits, testCase.xparam.id);
+        expect(result).toBeCloseTo(testCase.xparam.value);
+      });
+
+      test("traitSparam", () => {
+        const result = traitSparam(testCase.traits, testCase.sparam.id);
+        expect(result).toBeCloseTo(testCase.sparam.value);
+      });
+
+      test("traitElementRate", () => {
+        const result = traitElementRate(
+          testCase.traits,
+          testCase.elementRate.id,
+        );
+        expect(result).toBeCloseTo(testCase.elementRate.value);
+      });
+
+      test("traitDebuffRate", () => {
+        const result = traitDebuffRate(testCase.traits, testCase.debuffRate.id);
+        expect(result).toBeCloseTo(testCase.debuffRate.value);
+      });
+
+      test("traitStateRate", () => {
+        const result = traitStateRate(testCase.traits, testCase.stateRate.id);
+        expect(result).toBeCloseTo(testCase.stateRate.value);
+      });
+    });
+    describe("mocked battler base", () => {
+      test("paramRate", () => {
+        const mockedBattlerBase = createMockedBattlerBase(testCase.traits);
+        const result = Game_BattlerBase.prototype.paramRate.call(
+          mockedBattlerBase,
+          testCase.paramRate.id,
+        );
+        expect(result).toBeCloseTo(testCase.paramRate.value);
+        expect(mockedBattlerBase.traitsPi).toHaveBeenCalledWith(
+          TRAIT_PARAM,
+          testCase.paramRate.id,
+        );
+        expect(mockedBattlerBase.traitsPi).toHaveBeenCalledOnce();
+        expect(mockedBattlerBase.traitsSum).not.toHaveBeenCalled();
+      });
+    });
+  });
+};
 
 const testCases: TestCase[] = [
   {
@@ -71,45 +188,6 @@ const testCases: TestCase[] = [
     stateRate: { id: 7, value: 0.3 },
   },
 ];
-
-const runTestCase = (testCase: TestCase) => {
-  describe(testCase.name, () => {
-    describe("functions", () => {
-      test("traitParamRate", () => {
-        const result = traitParamRate(testCase.traits, testCase.paramRate.id);
-        expect(result).toBeCloseTo(testCase.paramRate.value);
-      });
-
-      test("traitXparam", () => {
-        const result = traitXparam(testCase.traits, testCase.xparam.id);
-        expect(result).toBeCloseTo(testCase.xparam.value);
-      });
-
-      test("traitSparam", () => {
-        const result = traitSparam(testCase.traits, testCase.sparam.id);
-        expect(result).toBeCloseTo(testCase.sparam.value);
-      });
-
-      test("traitElementRate", () => {
-        const result = traitElementRate(
-          testCase.traits,
-          testCase.elementRate.id,
-        );
-        expect(result).toBeCloseTo(testCase.elementRate.value);
-      });
-
-      test("traitDebuffRate", () => {
-        const result = traitDebuffRate(testCase.traits, testCase.debuffRate.id);
-        expect(result).toBeCloseTo(testCase.debuffRate.value);
-      });
-
-      test("traitStateRate", () => {
-        const result = traitStateRate(testCase.traits, testCase.stateRate.id);
-        expect(result).toBeCloseTo(testCase.stateRate.value);
-      });
-    });
-  });
-};
 
 describe("trait.parameters", () => {
   testCases.forEach(runTestCase);
