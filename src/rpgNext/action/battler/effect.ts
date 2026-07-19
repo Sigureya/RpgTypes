@@ -1,6 +1,15 @@
 import type { ItemEffect } from "@RpgTypes/rmmz";
 import type { ActionVariableSchema, VariableCodeTable } from "./types";
 
+export const createInitialVariables = (
+  schemas: readonly ActionVariableSchema[],
+): Record<string, number> => {
+  const entries = schemas.map(
+    (schema) => [schema.key, schema.initialValue] as const,
+  );
+  return Object.fromEntries<number>(entries);
+};
+
 export const changeActorVariable = <T extends Record<string, number>>(
   variables: T,
   { key, min, max }: ActionVariableSchema,
@@ -50,13 +59,4 @@ export const itemEffectChangeBattlerVariable = (
       (oldValue): number => oldValue * effect.value1,
     );
   }
-};
-
-export const createInitialVariables = (
-  schemas: readonly ActionVariableSchema[],
-): Record<string, number> => {
-  const entries = schemas.map(
-    (schema) => [schema.key, schema.initialValue] as const,
-  );
-  return Object.fromEntries<number>(entries);
 };
