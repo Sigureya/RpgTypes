@@ -1,3 +1,4 @@
+import type { Rmmz_Battler } from "@RpgTypes/rmmzRuntime";
 import type {
   BooleanParam,
   NumberParam,
@@ -11,7 +12,7 @@ import type { StateInstanceItemArg } from "./state/types";
 export interface StateInstanceItem extends StateInstanceItemArg {
   startTurn: number;
   stateId: number;
-  extendsTurn: number;
+  turnLimit: number;
   sourceBattlerId: number;
   variables: CustomVariables;
 }
@@ -32,8 +33,16 @@ export const createStateInstance = (
   return {
     stateId: arg.stateId,
     startTurn: arg.startTurn,
-    extendsTurn: arg.extendsTurn,
+    turnLimit: arg.turnLimit,
     sourceBattlerId: arg.sourceBattlerId,
     variables: createVariables(schema),
   };
+};
+
+export const isStateEnd = (
+  instance: StateInstanceItem,
+  battler: Rmmz_Battler,
+): boolean => {
+  const turn: number = battler.turnCount();
+  return turn > instance.startTurn + instance.turnLimit;
 };
