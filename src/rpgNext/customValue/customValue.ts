@@ -1,6 +1,7 @@
 import type { ItemEffect, Trait } from "@RpgTypes/rmmz";
 import type { Rmmz_Action, Rmmz_Battler } from "@RpgTypes/rmmzRuntime";
 import type { PluginParam, PluginStructEx } from "@sigureya/rmmz-plugin-schema";
+import type { EffectXX } from "../action/itemEffect";
 
 export interface CustomValue {
   format: string;
@@ -20,7 +21,10 @@ export interface ActionCost {
   dataId: number;
 }
 
-export interface BattleXX {}
+export interface BattleXX {
+  skillXX: unknown;
+  otherXX: EffectXX[];
+}
 
 export interface BattleField {}
 export interface ActionTotalCost {
