@@ -1,6 +1,20 @@
 import type { ItemEffect } from "@RpgTypes/rmmz";
 import type { ActionVariableSchema, VariableCodeTable } from "./types";
 
+export const getActorVariableValue = <T>(
+  variables: Record<string, T>,
+  dataId: number,
+  schemas: ReadonlyMap<number, ActionVariableSchema>,
+): T | undefined => {
+  const schema = schemas.get(dataId);
+  if (!schema) {
+    return;
+  }
+  if (schema.key in variables) {
+    return variables[schema.key];
+  }
+};
+
 export const createInitialVariables = (
   schemas: readonly ActionVariableSchema[],
 ): Record<string, number> => {
