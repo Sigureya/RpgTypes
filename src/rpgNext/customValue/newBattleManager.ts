@@ -1,6 +1,11 @@
 /* eslint-disable @functional/no-return-void */
 import type { Trait } from "@RpgTypes/rmmz";
-import type { Rmmz_Action, Rmmz_Battler } from "@RpgTypes/rmmzRuntime";
+import type {
+  Rmmz_Action,
+  Rmmz_Battler,
+  Rmmz_BattlerBase,
+} from "@RpgTypes/rmmzRuntime";
+import { calcTotalCost, canPayActionCost, canPayActionCost2 } from "./cost";
 import type {
   ActionContext,
   ActionCost,
@@ -8,38 +13,32 @@ import type {
   BattleField,
   BattleXX,
 } from "./customValue";
+import type { ActionBehavierRunner } from "./types";
 
-const canPay = (battler: Rmmz_Battler, cost: ActionCost[]) => {
-  return true;
+const canPay = (
+  battler: Rmmz_BattlerBase,
+  cost: readonly ActionCost[],
+): ActionCost[] => {
+  return cost.filter((c) => {
+    return !canPayActionCost(battler, c);
+  });
 };
 
 const calcCost = (
   battler: Rmmz_Battler,
   cost: ActionCost[],
 ): ActionTotalCost => {
-  return {};
+  return {
+    hp: 0,
+    mp: 0,
+    tp: 0,
+  };
 };
 
 interface Context2 {
   totalCost: ActionTotalCost;
   subject: Rmmz_Battler;
   targets: Rmmz_Battler[];
-}
-
-interface BattlerXXQuery {}
-
-interface Pair {
-  canUse(context: ActionContext): boolean;
-  onActionStart(context: ActionContext, context2: Context2): void;
-  onDamage(context: ActionContext, target: Rmmz_Battler): void;
-  onActionEnd(context: ActionContext): BattleXX | undefined;
-  additionalCost(context: ActionContext): ActionCost[];
-  aditionalTargetTraits(context: ActionContext, target: Rmmz_Battler): Trait[];
-  aditionalSubjectTraits(
-    context: ActionContext,
-    subject: Rmmz_Battler,
-  ): Trait[];
-  afterDamage(context: ActionContext, target: Rmmz_Battler): BattlerXXQuery[];
 }
 
 export interface ActionResultV2 {}
@@ -58,26 +57,46 @@ interface BattleRRR {
   createActionResult(context: DamageContext): ActionResultV2;
 }
 
+interface ActionReultEEE {
+  success: boolean;
+}
+
+interface ActionFailedHandler {
+  costFailed(
+    context: ActionContext,
+    totalCost: ActionTotalCost,
+  ): ActionReultEEE;
+  conditionFailed(context: ActionContext): ActionReultEEE;
+}
+
+const totalCostXX = (
+  handlers: ReadonlyArray<ActionBehavierRunner>,
+  context: ActionContext,
+): ActionTotalCost => {
+  const flat: ActionCost[] = handlers.flatMap((h) => {
+    return h.additionalCost(context);
+  });
+  return calcTotalCost(context.action.subject(), flat);
+};
+
 const battleXX2 = (
-  field: BattleField,
-  action: Rmmz_Action,
-  handlers: ReadonlyArray<Pair>,
+  context: ActionContext,
+  handlers: ReadonlyArray<ActionBehavierRunner>,
+  failedHandler: ActionFailedHandler,
 ) => {
-  const context: ActionContext = { filed: field, action };
   if (
     !handlers.some((h): boolean => {
       return h.canUse(context);
     })
   ) {
-    return undefined;
+    return failedHandler.conditionFailed(context);
   }
-  const subject = action.subject();
-  const cost: ActionCost[] = handlers.flatMap((h) => h.additionalCost(context));
-  if (!canPay(subject, cost)) {
-    return undefined;
+  const subject = context.action.subject();
+  const totalCost: ActionTotalCost = totalCostXX(handlers, context);
+  if (!canPayActionCost2(subject, totalCost)) {
+    return failedHandler.costFailed(context, totalCost);
   }
-  const totalCost = calcCost(subject, cost);
-  const targets = action.makeTargets();
+  const targets = context.action.makeTargets();
   const context2: Context2 = { totalCost, subject, targets };
   handlers.forEach((h) => {
     h.onActionStart(context, context2);
@@ -88,20 +107,20 @@ const battleXX2 = (
 
 const createActionResult = (
   context: ActionContext,
-  handlers: ReadonlyArray<Pair>,
+  handlers: ReadonlyArray<ActionBehavierRunner>,
 ) => {
   return {
     result: handlers
-      .map((h) => {
+      .map((h): BattleXX | undefined => {
         return h.onActionEnd(context);
       })
-      .filter((x): x is BattleXX => x !== undefined),
+      .filter((x) => x !== undefined),
   };
 };
 const executeDamage = (
   target: Rmmz_Battler,
   context: ActionContext,
-  handlers: ReadonlyArray<Pair>,
+  handlers: ReadonlyArray<ActionBehavierRunner>,
   damageFn: () => {},
 ) => {
   const subject = context.action.subject();
