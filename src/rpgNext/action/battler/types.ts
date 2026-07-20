@@ -13,3 +13,8 @@ export interface VariableCodeTable {
   multiply: number;
   set: number;
 }
+
+export interface ParamObject_GetEnemyVariable {
+  dataId: number;
+  fallbackValue: number;
+}
