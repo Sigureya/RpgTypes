@@ -6,7 +6,7 @@ export interface CustomValue {
   format: string;
 }
 
-interface CustomStruct<T> {
+export interface CustomStruct<T> {
   createInitValue(): T;
   createTraits(data: T, battler: Rmmz_Battler): Trait[];
   createItemEffects(data: T, action: Rmmz_Action): ItemEffect[];
@@ -14,27 +14,37 @@ interface CustomStruct<T> {
   getBoolean(data: T, battler: Rmmz_Battler, arg: unknown): boolean;
 }
 
-export interface ActionCost {}
+export interface ActionCost {
+  code: number;
+  value: number;
+  dataId: number;
+}
 
 export interface BattleXX {}
 
 export interface BattleField {}
-export interface ActionTotalCost {}
+export interface ActionTotalCost {
+  hp: number;
+  mp: number;
+  tp: number;
+}
 
 export interface ActionContext {
   filed: BattleField;
-  action: Rmmz_Action;
+  action: Rmmz_Action<Rmmz_Battler & ActionHandlerContlol<object>>;
 }
 
 export interface ActionHandlerContlol<T> {
-  getData(action: Rmmz_Action): T;
+  getData(key: string): T;
 }
 
 export interface ActionHandlers<T, ACC> {
+  isValidData(unknown: unknown): unknown is T;
   canUse(data: T, context: ActionContext): boolean;
   additionalEffects(data: T, context: ActionContext): ItemEffect[];
   additionalCost(data: T, context: ActionContext): ActionCost[];
   onActionStart(
+    data: T,
     context: ActionContext,
     totalCost: ActionTotalCost,
     subject: Rmmz_Battler,
