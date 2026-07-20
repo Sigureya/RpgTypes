@@ -1,10 +1,6 @@
 /* eslint-disable @functional/no-return-void */
 import type { Trait } from "@RpgTypes/rmmz";
-import type {
-  Rmmz_Action,
-  Rmmz_Battler,
-  Rmmz_BattlerBase,
-} from "@RpgTypes/rmmzRuntime";
+import type { Rmmz_Battler, Rmmz_BattlerBase } from "@RpgTypes/rmmzRuntime";
 import { calcTotalCost, canPayActionCost, canPayActionCost2 } from "./cost";
 import type {
   ActionContext,
