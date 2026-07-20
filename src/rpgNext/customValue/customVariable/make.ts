@@ -1,11 +1,11 @@
-import type { CustomVariableSchema } from "./types";
+import type { CustomVariables, CustomVariableSchema } from "./types";
 
 export const createVariables = (
   schema: ReadonlyArray<CustomVariableSchema>,
-) => {
+): CustomVariables => {
   return {
-    numbers: xxx(schema),
-    booleans: bbb(schema),
+    numbers: createNumberVariables(schema),
+    booleans: createBooleanVariables(schema),
   };
 };
 
@@ -14,7 +14,7 @@ interface GGG<T> {
   attr: { default: T };
 }
 
-const xxx = (
+const createNumberVariables = (
   schema: readonly CustomVariableSchema[],
 ): Record<string, Record<string, number>> => {
   const o = schema.map((s): [string, Record<string, number>] => {
@@ -24,7 +24,7 @@ const xxx = (
   return Object.fromEntries(o);
 };
 
-const bbb = (
+const createBooleanVariables = (
   shhema: readonly CustomVariableSchema[],
 ): Record<string, Record<string, boolean>> => {
   const o = shhema.map((s): [string, Record<string, boolean>] => {
