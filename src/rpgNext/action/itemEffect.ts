@@ -1,7 +1,7 @@
 import type { ItemEffect } from "@RpgTypes/rmmz";
 import type { Rmmz_Battler } from "@RpgTypes/rmmzRuntime";
 
-interface EffectXX {
+export interface EffectXX {
   code: number;
   value: number;
   success: boolean;
