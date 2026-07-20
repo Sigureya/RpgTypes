@@ -10,6 +10,17 @@ import {
   traitMagicEvasionRate,
   traitMagicReflectionRate,
   traitCounterAttackRate,
+  TRAIT_XPARAM,
+  XPARAM_HIT_RATE,
+  XPARAM_HRG_HP_REGEN_RATE,
+  XPARAM_EVA_RATE,
+  XPARAM_CNT_COUNTER_ATTACK_RATE,
+  XPARAM_MRG_MP_REGEN_RATE,
+  XPARAM_TRG_TP_REGEN_RATE,
+  XPARAM_CRI_CRITICAL_RATE,
+  XPARAM_CEV_CRITICAL_EVASION_RATE,
+  XPARAM_MCR_MAGIC_EVASION_RATE,
+  XPARAM_MRF_MAGIC_REFLECTION_RATE,
 } from "@RpgTypes/rmmz/rpg";
 import { Game_BattlerBase } from "./rmmz_objects";
 
@@ -29,6 +40,8 @@ interface TestCase {
   hpRegen: number;
   mpRegen: number;
   tpRegen: number;
+  magicEvasion: number;
+  magicReflection: number;
 }
 
 const runTestCase = (testCase: TestCase) => {
@@ -61,15 +74,11 @@ const runTestCase = (testCase: TestCase) => {
 
     test("traitMagicEvasionRate", () => {
       const result = traitMagicEvasionRate(testCase.traits);
-      expect(result).toBe(testCase.criEvasion);
+      expect(result).toBe(testCase.magicEvasion);
     });
     test("traitMagicReflectionRate", () => {
       const result = traitMagicReflectionRate(testCase.traits);
-      expect(result).toBe(testCase.criEvasion);
-    });
-    test("traitCounterAttackRate", () => {
-      const result = traitCounterAttackRate(testCase.traits);
-      expect(result).toBe(testCase.counterAttack);
+      expect(result).toBe(testCase.magicReflection);
     });
     test("traitCounterAttackRate", () => {
       const result = traitCounterAttackRate(testCase.traits);
@@ -116,7 +125,13 @@ const runTestCase = (testCase: TestCase) => {
     test("mev", () => {
       const battlerBase = craateBattlerBase(testCase.traits);
       const result = battlerBase.mev;
-      expect(result).toBe(testCase.criEvasion);
+      expect(result).toBe(testCase.magicEvasion);
+      expect(battlerBase.allTraits).toHaveBeenCalledOnce();
+    });
+    test("mrf", () => {
+      const battlerBase = craateBattlerBase(testCase.traits);
+      const result = battlerBase.mrf;
+      expect(result).toBe(testCase.magicReflection);
       expect(battlerBase.allTraits).toHaveBeenCalledOnce();
     });
     test("cnt", () => {
@@ -139,6 +154,218 @@ const testCases: TestCase[] = [
     hpRegen: 0,
     mpRegen: 0,
     tpRegen: 0,
+    magicEvasion: 0,
+    magicReflection: 0,
+  },
+  {
+    traits: [
+      {
+        code: TRAIT_XPARAM,
+        dataId: XPARAM_MCR_MAGIC_EVASION_RATE,
+        value: -151,
+      },
+      { code: TRAIT_XPARAM, dataId: XPARAM_CRI_CRITICAL_RATE, value: -485 },
+      {
+        code: TRAIT_XPARAM,
+        dataId: XPARAM_CEV_CRITICAL_EVASION_RATE,
+        value: -583,
+      },
+      { code: TRAIT_XPARAM, dataId: XPARAM_HIT_RATE, value: -189 },
+      { code: TRAIT_XPARAM, dataId: XPARAM_EVA_RATE, value: -63 },
+      {
+        code: TRAIT_XPARAM,
+        dataId: XPARAM_CNT_COUNTER_ATTACK_RATE,
+        value: -787,
+      },
+      { code: TRAIT_XPARAM, dataId: XPARAM_HRG_HP_REGEN_RATE, value: -24 },
+      { code: TRAIT_XPARAM, dataId: XPARAM_MRG_MP_REGEN_RATE, value: -81 },
+      { code: TRAIT_XPARAM, dataId: XPARAM_TRG_TP_REGEN_RATE, value: -510 },
+      {
+        code: TRAIT_XPARAM,
+        dataId: XPARAM_MRF_MAGIC_REFLECTION_RATE,
+        value: -681,
+      },
+    ],
+    hpRegen: -24,
+    mpRegen: -81,
+    tpRegen: -510,
+    counterAttack: -787,
+    hitRate: -189,
+    evaRate: -63,
+    criRate: -485,
+    criEvasion: -583,
+    magicEvasion: -151,
+    magicReflection: -681,
+  },
+  {
+    traits: [
+      {
+        code: TRAIT_XPARAM,
+        dataId: XPARAM_MCR_MAGIC_EVASION_RATE,
+        value: 100,
+      },
+      {
+        code: TRAIT_XPARAM,
+        dataId: XPARAM_CRI_CRITICAL_RATE,
+        value: 400,
+      },
+      {
+        code: TRAIT_XPARAM,
+        dataId: XPARAM_CEV_CRITICAL_EVASION_RATE,
+        value: 200,
+      },
+      { code: TRAIT_XPARAM, dataId: XPARAM_HIT_RATE, value: 2 },
+      { code: TRAIT_XPARAM, dataId: XPARAM_EVA_RATE, value: 4 },
+      {
+        code: TRAIT_XPARAM,
+        dataId: XPARAM_CNT_COUNTER_ATTACK_RATE,
+        value: 800,
+      },
+      {
+        code: TRAIT_XPARAM,
+        dataId: XPARAM_HRG_HP_REGEN_RATE,
+        value: 5,
+      },
+      {
+        code: TRAIT_XPARAM,
+        dataId: XPARAM_MRG_MP_REGEN_RATE,
+        value: 954,
+      },
+      {
+        code: TRAIT_XPARAM,
+        dataId: XPARAM_TRG_TP_REGEN_RATE,
+        value: 926,
+      },
+      {
+        code: TRAIT_XPARAM,
+        dataId: XPARAM_MRF_MAGIC_REFLECTION_RATE,
+        value: 7,
+      },
+    ],
+    hpRegen: 5,
+    mpRegen: 954,
+    tpRegen: 926,
+    counterAttack: 800,
+    hitRate: 2,
+    evaRate: 4,
+    criRate: 400,
+    criEvasion: 200,
+    magicEvasion: 100,
+    magicReflection: 7,
+  },
+  {
+    traits: [
+      {
+        code: TRAIT_XPARAM,
+        dataId: XPARAM_HRG_HP_REGEN_RATE,
+        value: 100,
+      },
+      {
+        code: TRAIT_XPARAM,
+        dataId: XPARAM_HRG_HP_REGEN_RATE,
+        value: -100,
+      },
+      {
+        code: TRAIT_XPARAM,
+        dataId: XPARAM_MRG_MP_REGEN_RATE,
+        value: 300,
+      },
+      {
+        code: TRAIT_XPARAM,
+        dataId: XPARAM_MRG_MP_REGEN_RATE,
+        value: -300,
+      },
+      {
+        code: TRAIT_XPARAM,
+        dataId: XPARAM_TRG_TP_REGEN_RATE,
+        value: 500,
+      },
+      {
+        code: TRAIT_XPARAM,
+        dataId: XPARAM_TRG_TP_REGEN_RATE,
+        value: -500,
+      },
+      {
+        code: TRAIT_XPARAM,
+        dataId: XPARAM_CNT_COUNTER_ATTACK_RATE,
+        value: 700,
+      },
+      {
+        code: TRAIT_XPARAM,
+        dataId: XPARAM_CNT_COUNTER_ATTACK_RATE,
+        value: -700,
+      },
+      {
+        code: TRAIT_XPARAM,
+        dataId: XPARAM_HIT_RATE,
+        value: 400,
+      },
+      {
+        code: TRAIT_XPARAM,
+        dataId: XPARAM_HIT_RATE,
+        value: -400,
+      },
+      {
+        code: TRAIT_XPARAM,
+        dataId: XPARAM_EVA_RATE,
+        value: 200,
+      },
+      {
+        code: TRAIT_XPARAM,
+        dataId: XPARAM_EVA_RATE,
+        value: -200,
+      },
+      {
+        code: TRAIT_XPARAM,
+        dataId: XPARAM_CRI_CRITICAL_RATE,
+        value: 925,
+      },
+      {
+        code: TRAIT_XPARAM,
+        dataId: XPARAM_CRI_CRITICAL_RATE,
+        value: -925,
+      },
+      {
+        code: TRAIT_XPARAM,
+        dataId: XPARAM_CEV_CRITICAL_EVASION_RATE,
+        value: 3,
+      },
+      {
+        code: TRAIT_XPARAM,
+        dataId: XPARAM_CEV_CRITICAL_EVASION_RATE,
+        value: -3,
+      },
+      {
+        code: TRAIT_XPARAM,
+        dataId: XPARAM_MCR_MAGIC_EVASION_RATE,
+        value: 2,
+      },
+      {
+        code: TRAIT_XPARAM,
+        dataId: XPARAM_MCR_MAGIC_EVASION_RATE,
+        value: -2,
+      },
+      {
+        code: TRAIT_XPARAM,
+        dataId: XPARAM_MRF_MAGIC_REFLECTION_RATE,
+        value: 4,
+      },
+      {
+        code: TRAIT_XPARAM,
+        dataId: XPARAM_MRF_MAGIC_REFLECTION_RATE,
+        value: -4,
+      },
+    ],
+    hitRate: 0,
+    evaRate: 0,
+    criRate: 0,
+    criEvasion: 0,
+    counterAttack: 0,
+    hpRegen: 0,
+    mpRegen: 0,
+    tpRegen: 0,
+    magicEvasion: 0,
+    magicReflection: 0,
   },
 ];
 
