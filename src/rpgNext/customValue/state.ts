@@ -6,6 +6,7 @@ import type {
 } from "@sigureya/rmmz-plugin-schema";
 import { createVariables } from "./customVariable/make";
 import type { CustomVariables } from "./customVariable/types";
+import type { StateInstanceItemArg } from "./state/types";
 
 export interface StateInstanceItem extends StateInstanceItemArg {
   startTurn: number;
@@ -13,13 +14,6 @@ export interface StateInstanceItem extends StateInstanceItemArg {
   extendsTurn: number;
   sourceBattlerId: number;
   variables: CustomVariables;
-}
-
-export interface StateInstanceItemArg {
-  startTurn: number;
-  stateId: number;
-  extendsTurn: number;
-  sourceBattlerId: number;
 }
 
 export interface StateSchema {
