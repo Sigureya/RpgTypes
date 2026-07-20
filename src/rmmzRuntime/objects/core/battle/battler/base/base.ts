@@ -39,4 +39,5 @@ export interface Rmmz_BattlerBase
   get mrg(): number;
   get trg(): number;
   get grd(): number;
+  get mrf(): number;
 }
