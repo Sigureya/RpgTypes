@@ -1,6 +1,6 @@
 export interface StateInstanceItemArg {
   startTurn: number;
   stateId: number;
-  extendsTurn: number;
+  turnLimit: number;
   sourceBattlerId: number;
 }
