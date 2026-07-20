@@ -29,4 +29,15 @@ export interface Rmmz_BattlerBase
   get tgr(): number;
   get rec(): number;
   get mcr(): number;
+  get hit(): number;
+  get eva(): number;
+  get cri(): number;
+  get cev(): number;
+  get mev(): number;
+  get cnt(): number;
+  get hrg(): number;
+  get mrg(): number;
+  get trg(): number;
+  get grd(): number;
+  get mrf(): number;
 }

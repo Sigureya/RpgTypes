@@ -14,7 +14,7 @@ import {
 import { traitSum } from "./trait";
 import type { Trait } from "./types";
 
-export const triatHitRate = (traits: ReadonlyArray<Trait>): number => {
+export const traitHitRate = (traits: ReadonlyArray<Trait>): number => {
   return traitSum(traits, TRAIT_XPARAM, XPARAM_HIT_RATE);
 };
 
