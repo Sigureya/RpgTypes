@@ -14,5 +14,6 @@ export interface Rmmz_TraitContainer {
   addedSkills(): number[];
   attackSkillId(): number;
   isSkillTypeSealed(stypeId: number): boolean;
+  isSkillSealed(skillId: number): boolean;
   paramRate(paramId: number): number;
 }
