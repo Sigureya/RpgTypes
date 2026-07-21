@@ -1,0 +1,10 @@
+export const SPARAM_TGR_TARGET_RATE = 0 as const;
+export const SPARAM_GRD_GUARD_EFFECT_RATE = 1 as const;
+export const SPARAM_REC_RECOVERY_EFFECT_RATE = 2 as const;
+export const SPARAM_PHA_PHARMACOLOGY_RATE = 3 as const;
+export const SPARAM_MCR_MAGIC_COST_RATE = 4 as const;
+export const SPARAM_TCR_TP_CHARGE_RATE = 5 as const;
+export const SPARAM_PDR_PHYSICAL_DAMAGE_RATE = 6 as const;
+export const SPARAM_MDR_MAGIC_DAMAGE_RATE = 7 as const;
+export const SPARAM_FDR_FLOOR_DAMAGE_RATE = 8 as const;
+export const SPARAM_EXR_EXPERIENCE_RATE = 9 as const;
