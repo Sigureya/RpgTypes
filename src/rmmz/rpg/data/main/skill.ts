@@ -1,6 +1,7 @@
 import type { Data_Weapon, Trait } from "./traitContainers";
 import {
   SPARAM_MCR_MAGIC_COST_RATE,
+  TRAIT_SPARAM,
   TRAIT_SKILL_SEAL,
   TRAIT_SKILL_TYPE_SEAL,
 } from "./traitContainers";
@@ -36,6 +37,9 @@ export const isSkillRequiredWeaponTypeOk = (
   if (skill.requiredWtypeId1 === 0 && skill.requiredWtypeId2 === 0) {
     return true;
   }
+  if (weapons.length === 0) {
+    return false;
+  }
   return weapons.some((w): boolean => {
     return (
       w.wtypeId === skill.requiredWtypeId1 ||
@@ -70,7 +74,7 @@ const isSkillConditionTrait = (trait: Trait): boolean => {
   return (
     trait.code === TRAIT_SKILL_SEAL ||
     trait.code === TRAIT_SKILL_TYPE_SEAL ||
-    trait.code === SPARAM_MCR_MAGIC_COST_RATE
+    (trait.code === TRAIT_SPARAM && trait.dataId === SPARAM_MCR_MAGIC_COST_RATE)
   );
 };
 
@@ -97,7 +101,7 @@ export const filterUsableSkills = (
   const skillCondtionTraits: Trait[] = filterSkillConditionTraits(traits);
   const mcr: number = traitMpCostRate(skillCondtionTraits);
   return skills.filter((skill): boolean => {
-    const mpCost = skill.mpCost * mcr;
+    const mpCost = Math.floor(skill.mpCost * mcr);
     if (battler.mp < mpCost) {
       return false;
     }
