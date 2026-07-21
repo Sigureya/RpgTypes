@@ -1,6 +1,5 @@
 import type { Data_Weapon, Trait } from "./traitContainers";
 import {
-  someTraitMatched,
   SPARAM_MCR_MAGIC_COST_RATE,
   TRAIT_SKILL_SEAL,
   TRAIT_SKILL_TYPE_SEAL,
@@ -45,20 +44,6 @@ export const isSkillRequiredWeaponTypeOk = (
   });
 };
 
-export const isSkillIdSealed = (
-  traits: ReadonlyArray<Trait>,
-  skill: Data_Skill,
-): boolean => {
-  return someTraitMatched(traits, TRAIT_SKILL_SEAL, skill.id);
-};
-
-export const isSkillTypeSealed = (
-  traits: ReadonlyArray<Trait>,
-  skill: Data_Skill,
-): boolean => {
-  return someTraitMatched(traits, TRAIT_SKILL_TYPE_SEAL, skill.stypeId);
-};
-
 export const isSkillSealed = (
   traits: ReadonlyArray<Trait>,
   skill: Data_Skill,
@@ -77,19 +62,21 @@ export const isSkillSealed = (
   });
 };
 
-export const filterSkillCondtionTraits = (
+export const filterSkillConditionTraits = (
   traits: ReadonlyArray<Trait>,
 ): Trait[] => {
-  return traits.filter((trait): boolean => {
-    return (
-      trait.code === TRAIT_SKILL_SEAL ||
-      trait.code === TRAIT_SKILL_TYPE_SEAL ||
-      trait.code === SPARAM_MCR_MAGIC_COST_RATE
-    );
-  });
+  return traits.filter(isSkillConditionTrait);
 };
 
-export const filterUsableSkillsW = (
+const isSkillConditionTrait = (trait: Trait): boolean => {
+  return (
+    trait.code === TRAIT_SKILL_SEAL ||
+    trait.code === TRAIT_SKILL_TYPE_SEAL ||
+    trait.code === SPARAM_MCR_MAGIC_COST_RATE
+  );
+};
+
+export const filterUsableSkillsWithWeapon = (
   skills: ReadonlyArray<Data_Skill>,
   traits: ReadonlyArray<Trait>,
   weapons: ReadonlyArray<Data_Weapon>,
@@ -101,9 +88,17 @@ export const filterUsableSkillsW = (
   if (w.length === 0) {
     return [];
   }
-  const skillCondtionTraits: Trait[] = filterSkillCondtionTraits(traits);
+  return filterUsableSkills(w, traits, battler);
+};
+
+export const filterUsableSkills = (
+  skills: ReadonlyArray<Data_Skill>,
+  traits: ReadonlyArray<Trait>,
+  battler: Battler_SkillUser,
+): Data_Skill[] => {
+  const skillCondtionTraits: Trait[] = filterSkillConditionTraits(traits);
   const mcr: number = traitMpCostRate(skillCondtionTraits);
-  return w.filter((skill): boolean => {
+  return skills.filter((skill): boolean => {
     const mpCost = skill.mpCost * mcr;
     if (battler.mp < mpCost) {
       return false;
