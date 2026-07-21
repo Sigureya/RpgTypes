@@ -1,6 +1,7 @@
 import type { Data_Weapon, Trait } from "./traitContainers";
 import {
   SPARAM_MCR_MAGIC_COST_RATE,
+  TRAIT_SPARAM,
   TRAIT_SKILL_SEAL,
   TRAIT_SKILL_TYPE_SEAL,
 } from "./traitContainers";
@@ -17,7 +18,7 @@ export const skillMpCost = (
   skill: Data_Skill,
 ): number => {
   const mcr: number = traitMpCostRate(traits);
-  return skill.mpCost * mcr;
+  return Math.floor(skill.mpCost * mcr);
 };
 
 export const canPaySkillCostBasic = (
@@ -25,7 +26,8 @@ export const canPaySkillCostBasic = (
   traits: ReadonlyArray<Trait>,
   skill: Data_Skill,
 ): boolean => {
-  const mpCost: number = skillMpCost(traits, skill);
+  const mcr: number = traitMpCostRate(traits);
+  const mpCost: number = skill.mpCost * mcr;
   return battler.mp >= mpCost && battler.tp >= skill.tpCost;
 };
 
@@ -35,6 +37,9 @@ export const isSkillRequiredWeaponTypeOk = (
 ): boolean => {
   if (skill.requiredWtypeId1 === 0 && skill.requiredWtypeId2 === 0) {
     return true;
+  }
+  if (weapons.length === 0) {
+    return false;
   }
   return weapons.some((w): boolean => {
     return (
@@ -62,9 +67,7 @@ export const isSkillSealed = (
   });
 };
 
-export const filterSkillConditionTraits = (
-  traits: ReadonlyArray<Trait>,
-): Trait[] => {
+const filterSkillConditionTraits = (traits: ReadonlyArray<Trait>): Trait[] => {
   return traits.filter(isSkillConditionTrait);
 };
 
@@ -72,7 +75,7 @@ const isSkillConditionTrait = (trait: Trait): boolean => {
   return (
     trait.code === TRAIT_SKILL_SEAL ||
     trait.code === TRAIT_SKILL_TYPE_SEAL ||
-    trait.code === SPARAM_MCR_MAGIC_COST_RATE
+    (trait.code === TRAIT_SPARAM && trait.dataId === SPARAM_MCR_MAGIC_COST_RATE)
   );
 };
 
@@ -99,7 +102,10 @@ export const filterUsableSkills = (
   const skillCondtionTraits: Trait[] = filterSkillConditionTraits(traits);
   const mcr: number = traitMpCostRate(skillCondtionTraits);
   return skills.filter((skill): boolean => {
-    const mpCost = skill.mpCost * mcr;
+    if (battler.tp < skill.tpCost) {
+      return false;
+    }
+    const mpCost = Math.floor(skill.mpCost * mcr);
     if (battler.mp < mpCost) {
       return false;
     }
