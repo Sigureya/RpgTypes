@@ -335,7 +335,7 @@ const testCases: TestCase[] = [
     weapons: [],
     expected: {
       mpCost: 50,
-      canPaySkillCostBasic: false,
+      canPaySkillCostBasic: true,
       isSkillRequiredWeaponTypeOk: true,
       isSkillSealed: false,
       canUse: true,
