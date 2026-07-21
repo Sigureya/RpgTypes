@@ -2,6 +2,7 @@ export * from "./anyGoodsUnion";
 export * from "./dataLabels";
 export * from "./defaultDataLabels";
 export * from "./entitys";
+export * from "./equip";
 export * from "./makeTestData";
 export * from "./members";
 export * from "./skill";
