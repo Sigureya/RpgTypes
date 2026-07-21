@@ -102,11 +102,11 @@ export const filterUsableSkills = (
   const skillCondtionTraits: Trait[] = filterSkillConditionTraits(traits);
   const mcr: number = traitMpCostRate(skillCondtionTraits);
   return skills.filter((skill): boolean => {
-    const mpCost = Math.floor(skill.mpCost * mcr);
-    if (battler.mp < mpCost) {
+    if (battler.tp < skill.tpCost) {
       return false;
     }
-    if (battler.tp < skill.tpCost) {
+    const mpCost = Math.floor(skill.mpCost * mcr);
+    if (battler.mp < mpCost) {
       return false;
     }
     return !isSkillSealed(skillCondtionTraits, skill);
