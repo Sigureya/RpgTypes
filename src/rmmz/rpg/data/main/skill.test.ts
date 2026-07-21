@@ -151,7 +151,7 @@ const testCases: TestCase[] = [
       isSkillRequiredWeaponTypeOk: true,
       isSkillSealed: false,
       canUse: false,
-      canUseWithWeapon: true,
+      canUseWithWeapon: false,
     },
   },
 
@@ -160,19 +160,19 @@ const testCases: TestCase[] = [
     battler: { mp: 100, tp: 49 },
     traits: [],
     skill: makeSkillData({
-      mpCost: 100,
+      mpCost: 0,
       tpCost: 50,
       requiredWtypeId1: 0,
       requiredWtypeId2: 0,
     }),
     weapons: [],
     expected: {
-      mpCost: 100,
+      mpCost: 0,
       canPaySkillCostBasic: false,
       isSkillRequiredWeaponTypeOk: true,
       isSkillSealed: false,
-      canUse: true,
-      canUseWithWeapon: true,
+      canUse: false,
+      canUseWithWeapon: false,
     },
   },
 
@@ -245,7 +245,7 @@ const testCases: TestCase[] = [
       isSkillRequiredWeaponTypeOk: true,
       isSkillSealed: true,
       canUse: false,
-      canUseWithWeapon: true,
+      canUseWithWeapon: false,
     },
   },
 
@@ -271,7 +271,7 @@ const testCases: TestCase[] = [
       isSkillRequiredWeaponTypeOk: true,
       isSkillSealed: true,
       canUse: false,
-      canUseWithWeapon: true,
+      canUseWithWeapon: false,
     },
   },
 
