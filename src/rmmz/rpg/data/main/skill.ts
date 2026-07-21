@@ -1,13 +1,14 @@
 import type { Data_Weapon, Trait } from "./traitContainers";
 import {
   someTraitMatched,
+  SPARAM_MCR_MAGIC_COST_RATE,
   TRAIT_SKILL_SEAL,
   TRAIT_SKILL_TYPE_SEAL,
 } from "./traitContainers";
 import { traitMpCostRate } from "./traitContainers/trait/sparam";
 import type { Data_Skill } from "./usableItems";
 
-export interface BattleerXXCost {
+export interface Battler_SkillUser {
   mp: number;
   tp: number;
 }
@@ -16,16 +17,16 @@ export const skillMpCost = (
   traits: ReadonlyArray<Trait>,
   skill: Data_Skill,
 ): number => {
-  const mcr = traitMpCostRate(traits);
+  const mcr: number = traitMpCostRate(traits);
   return skill.mpCost * mcr;
 };
 
 export const canPaySkillCostBasic = (
-  battler: BattleerXXCost,
+  battler: Battler_SkillUser,
   traits: ReadonlyArray<Trait>,
   skill: Data_Skill,
 ): boolean => {
-  const mpCost = skillMpCost(traits, skill);
+  const mpCost: number = skillMpCost(traits, skill);
   return battler.mp >= mpCost && battler.tp >= skill.tpCost;
 };
 
@@ -36,7 +37,7 @@ export const isSkillRequiredWeaponTypeOk = (
   if (skill.requiredWtypeId1 === 0 && skill.requiredWtypeId2 === 0) {
     return true;
   }
-  return weapons.some((w) => {
+  return weapons.some((w): boolean => {
     return (
       w.wtypeId === skill.requiredWtypeId1 ||
       w.wtypeId === skill.requiredWtypeId2
@@ -73,5 +74,40 @@ export const isSkillSealed = (
       return true;
     }
     return false;
+  });
+};
+
+export const filterSkillCondtionTraits = (
+  traits: ReadonlyArray<Trait>,
+): Trait[] => {
+  return traits.filter((trait): boolean => {
+    return (
+      trait.code === TRAIT_SKILL_SEAL ||
+      trait.code === TRAIT_SKILL_TYPE_SEAL ||
+      trait.code === SPARAM_MCR_MAGIC_COST_RATE
+    );
+  });
+};
+
+export const filterUsableSkillsW = (
+  skills: ReadonlyArray<Data_Skill>,
+  traits: ReadonlyArray<Trait>,
+  weapons: ReadonlyArray<Data_Weapon>,
+  battler: Battler_SkillUser,
+): Data_Skill[] => {
+  const w = skills.filter((skill): boolean => {
+    return isSkillRequiredWeaponTypeOk(weapons, skill);
+  });
+  if (w.length === 0) {
+    return [];
+  }
+  const skillCondtionTraits: Trait[] = filterSkillCondtionTraits(traits);
+  const mcr: number = traitMpCostRate(skillCondtionTraits);
+  return w.filter((skill): boolean => {
+    const mpCost = skill.mpCost * mcr;
+    if (battler.mp < mpCost) {
+      return false;
+    }
+    return !isSkillSealed(skillCondtionTraits, skill);
   });
 };
