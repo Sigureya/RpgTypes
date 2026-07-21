@@ -32,7 +32,7 @@ export const traitPharmacologyRate = (traits: ReadonlyArray<Trait>): number => {
   return traitPi(traits, TRAIT_SPARAM, SPARAM_PHA_PHARMACOLOGY_RATE);
 };
 
-export const traitMagicCostRate = (traits: ReadonlyArray<Trait>): number => {
+export const traitMpCostRate = (traits: ReadonlyArray<Trait>): number => {
   return traitPi(traits, TRAIT_SPARAM, SPARAM_MCR_MAGIC_COST_RATE);
 };
 
