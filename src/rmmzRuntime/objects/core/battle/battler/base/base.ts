@@ -1,3 +1,4 @@
+import type { Data_Skill } from "@RpgTypes/rmmz/rpg";
 import type { Rmmz_BattlerBuffs } from "./buff";
 import type { Rmmz_Equipable } from "./equipable";
 import type { Rmmz_ItemUser } from "./itemUser";
@@ -40,4 +41,12 @@ export interface Rmmz_BattlerBase
   get trg(): number;
   get grd(): number;
   get mrf(): number;
+  skillMpCost(skill: Data_Skill): number;
+  skillTpCost(skill: Data_Skill): number;
+  canPaySkillCost(skill: Data_Skill): boolean;
+  setMp(value: number): void;
+  setTp(value: number): void;
+  addParam(paramId: number, value: number): void;
+  _tp: number;
+  _mp: number;
 }
