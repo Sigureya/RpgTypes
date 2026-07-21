@@ -2,7 +2,7 @@ import type { MockedObject } from "vitest";
 import { describe, expect, test, vi } from "vitest";
 import type { Trait } from "@RpgTypes/rmmz/rpg";
 import {
-  isSkillSealed,
+  isSkillIdSealed,
   isSkillTypeSealed,
   TRAIT_ATTACK_SKILL,
   TRAIT_SKILL_ADD,
@@ -111,13 +111,13 @@ const runTestCase = (testCase: TestCase) => {
       describe("isSkillSealed", () => {
         test("true", () => {
           testCase.sealedSkills.truery.forEach((stypeId) => {
-            const result = isSkillSealed(testCase.traits, stypeId);
+            const result = isSkillIdSealed(testCase.traits, stypeId);
             expect(result, `stype:${stypeId}`).toBe(true);
           });
         });
         test("false", () => {
           testCase.sealedSkills.falsey.forEach((stypeId) => {
-            const result = isSkillSealed(testCase.traits, stypeId);
+            const result = isSkillIdSealed(testCase.traits, stypeId);
             expect(result, `stype:${stypeId}`).toBe(false);
           });
         });

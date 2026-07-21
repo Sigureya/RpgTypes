@@ -30,7 +30,7 @@ export const traitAddedSkills = (traits: ReadonlyArray<Trait>): number[] => {
   return traitSet(traits, TRAIT_SKILL_ADD);
 };
 
-export const isSkillSealed = (
+export const isSkillIdSealed = (
   traits: ReadonlyArray<Trait>,
   skillId: number,
 ): boolean => {
