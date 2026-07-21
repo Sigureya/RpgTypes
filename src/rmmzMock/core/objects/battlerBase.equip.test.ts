@@ -6,6 +6,7 @@ import {
   makeArmorData,
   makeWeaponData,
   TRAIT_EQUIP_ARMOR_TYPE,
+  TRAIT_EQUIP_SEAL,
   TRAIT_EQUIP_WEAPON_TYPE,
 } from "@RpgTypes/rmmz/rpg";
 import { Game_BattlerBase } from "./rmmz_objects";
@@ -107,8 +108,98 @@ const testCases: TestCase[] = [
       expected: true,
     },
   },
+  {
+    name: "matching weapon type with unrelated seal",
+    traits: [
+      { code: TRAIT_EQUIP_WEAPON_TYPE, dataId: 7, value: 0 },
+      { code: TRAIT_EQUIP_SEAL, dataId: 999, value: 0 },
+    ],
+    weapon: {
+      data: mockWeapon,
+      expected: true,
+    },
+    armor: {
+      data: mockArmor,
+      expected: false,
+    },
+  },
+  {
+    name: "matching armor type with unrelated seal",
+    traits: [
+      { code: TRAIT_EQUIP_ARMOR_TYPE, dataId: 3, value: 0 },
+      { code: TRAIT_EQUIP_SEAL, dataId: 999, value: 0 },
+    ],
+    weapon: {
+      data: mockWeapon,
+      expected: false,
+    },
+    armor: {
+      data: mockArmor,
+      expected: true,
+    },
+  },
+  {
+    name: "weapon type matched but equipment sealed",
+    traits: [
+      { code: TRAIT_EQUIP_WEAPON_TYPE, dataId: 7, value: 0 },
+      { code: TRAIT_EQUIP_SEAL, dataId: 5, value: 0 },
+    ],
+    weapon: {
+      data: mockWeapon,
+      expected: false,
+    },
+    armor: {
+      data: mockArmor,
+      expected: false,
+    },
+  },
+  {
+    name: "armor type matched but equipment sealed",
+    traits: [
+      { code: TRAIT_EQUIP_ARMOR_TYPE, dataId: 3, value: 0 },
+      { code: TRAIT_EQUIP_SEAL, dataId: 6, value: 0 },
+    ],
+    weapon: {
+      data: mockWeapon,
+      expected: false,
+    },
+    armor: {
+      data: mockArmor,
+      expected: false,
+    },
+  },
+  {
+    name: "multiple equipment types",
+    traits: [
+      { code: TRAIT_EQUIP_WEAPON_TYPE, dataId: 7, value: 0 },
+      { code: TRAIT_EQUIP_WEAPON_TYPE, dataId: 8, value: 0 },
+      { code: TRAIT_EQUIP_ARMOR_TYPE, dataId: 3, value: 0 },
+    ],
+    weapon: {
+      data: mockWeapon,
+      expected: true,
+    },
+    armor: {
+      data: mockArmor,
+      expected: true,
+    },
+  },
+  {
+    name: "wrong equipment type",
+    traits: [
+      { code: TRAIT_EQUIP_WEAPON_TYPE, dataId: 99, value: 0 },
+      { code: TRAIT_EQUIP_ARMOR_TYPE, dataId: 99, value: 0 },
+    ],
+    weapon: {
+      data: mockWeapon,
+      expected: false,
+    },
+    armor: {
+      data: mockArmor,
+      expected: false,
+    },
+  },
 ];
-
 describe("battlerBase.equip", () => {
   testCases.forEach(runTestCase);
 });
