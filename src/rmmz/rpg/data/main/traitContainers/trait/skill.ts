@@ -13,7 +13,7 @@ export const traitsAttackSkillId = (traits: ReadonlyArray<Trait>): number => {
   return set.length > 0 ? Math.max(...set) : 1;
 };
 
-export const traitsTddedSkillTypes = (
+export const traitsAddedSkillTypes = (
   traits: ReadonlyArray<Trait>,
 ): number[] => {
   return traitSet(traits, TRAIT_SKILL_TYPE_ADD);
