@@ -18,7 +18,7 @@ export const skillMpCost = (
   skill: Data_Skill,
 ): number => {
   const mcr: number = traitMpCostRate(traits);
-  return skill.mpCost * mcr;
+  return Math.floor(skill.mpCost * mcr);
 };
 
 export const canPaySkillCostBasic = (
@@ -26,7 +26,8 @@ export const canPaySkillCostBasic = (
   traits: ReadonlyArray<Trait>,
   skill: Data_Skill,
 ): boolean => {
-  const mpCost: number = skillMpCost(traits, skill);
+  const mcr: number = traitMpCostRate(traits);
+  const mpCost: number = skill.mpCost * mcr;
   return battler.mp >= mpCost && battler.tp >= skill.tpCost;
 };
 
