@@ -14,10 +14,10 @@ export const canEquipWeapon = (
   weapon: Data_Weapon,
   traits: ReadonlyArray<Trait>,
 ): boolean => {
-  return eeex(weapon, traits, ewx);
+  return isEquipmentEquipable(weapon, traits, matchesWeaponTypeTrait);
 };
 
-const ewx = (weapon: Data_Weapon, trait: Trait): boolean => {
+const matchesWeaponTypeTrait = (weapon: Data_Weapon, trait: Trait): boolean => {
   return (
     trait.code === TRAIT_EQUIP_WEAPON_TYPE && trait.dataId === weapon.wtypeId
   );
@@ -27,16 +27,16 @@ export const canEquipArmor = (
   armor: Data_Armor,
   traits: ReadonlyArray<Trait>,
 ): boolean => {
-  return eeex(armor, traits, eax);
+  return isEquipmentEquipable(armor, traits, matchesArmorTypeTrait);
 };
 
-const eax = (armor: Data_Armor, trait: Trait): boolean => {
+const matchesArmorTypeTrait = (armor: Data_Armor, trait: Trait): boolean => {
   return (
     trait.code === TRAIT_EQUIP_ARMOR_TYPE && trait.dataId === armor.atypeId
   );
 };
 
-const eeex = <T extends Data_Equipment>(
+const isEquipmentEquipable = <T extends Data_Equipment>(
   equipment: T,
   traits: ReadonlyArray<Trait>,
   fn: (e: T, trait: Trait) => boolean,
