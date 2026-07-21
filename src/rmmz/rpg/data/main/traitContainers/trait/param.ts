@@ -1,10 +1,9 @@
-import type { ParamArray } from "@RpgTypes/rmmz";
-import type { Rmmz_BattlerBase } from "@RpgTypes/rmmzRuntime";
+import type { Trait } from "@RpgTypes/rmmz";
+import { TRAIT_PARAM, traitPi } from "@RpgTypes/rmmz";
 
-interface BattlerValues {
-  paramPlus: ParamArray;
-}
-
-const battlerLuk = (battler: Rmmz_BattlerBase) => {
-  const traits = battler.allTraits();
+export const traitParamRate = (
+  traits: ReadonlyArray<Trait>,
+  paramId: number,
+): number => {
+  return traitPi(traits, TRAIT_PARAM, paramId);
 };
