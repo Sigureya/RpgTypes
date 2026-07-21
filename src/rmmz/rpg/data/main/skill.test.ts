@@ -9,7 +9,13 @@ import {
   filterUsableSkillsWithWeapon,
 } from "./skill";
 import type { Data_Weapon, Trait } from "./traitContainers";
-import { SPARAM_MCR_MAGIC_COST_RATE, TRAIT_SPARAM } from "./traitContainers";
+import {
+  makeWeaponData,
+  SPARAM_MCR_MAGIC_COST_RATE,
+  TRAIT_SKILL_SEAL,
+  TRAIT_SKILL_TYPE_SEAL,
+  TRAIT_SPARAM,
+} from "./traitContainers";
 import type { Data_Skill } from "./usableItems";
 import { makeSkillData } from "./usableItems";
 
@@ -63,7 +69,7 @@ const runTestCase = (testCase: TestCase) => {
       const expected = testCase.expected.canUse ? [testCase.skill] : [];
       expect(result).toEqual(expected);
     });
-    test.skip("filterUsableSkillsWithWeapon", () => {
+    test("filterUsableSkillsWithWeapon", () => {
       const result: Data_Skill[] = filterUsableSkillsWithWeapon(
         [testCase.skill],
         testCase.traits,
@@ -121,8 +127,179 @@ const testCases: TestCase[] = [
       canUseWithWeapon: true,
     },
   },
-];
 
+  {
+    name: "not enough mp",
+    battler: { mp: 49, tp: 100 },
+    traits: [
+      {
+        code: TRAIT_SPARAM,
+        dataId: SPARAM_MCR_MAGIC_COST_RATE,
+        value: 0.5,
+      },
+    ],
+    skill: makeSkillData({
+      mpCost: 100,
+      tpCost: 0,
+      requiredWtypeId1: 0,
+      requiredWtypeId2: 0,
+    }),
+    weapons: [],
+    expected: {
+      mpCost: 50,
+      canPaySkillCostBasic: false,
+      isSkillRequiredWeaponTypeOk: true,
+      isSkillSealed: false,
+      canUse: false,
+      canUseWithWeapon: true,
+    },
+  },
+
+  {
+    name: "not enough tp",
+    battler: { mp: 100, tp: 49 },
+    traits: [],
+    skill: makeSkillData({
+      mpCost: 100,
+      tpCost: 50,
+      requiredWtypeId1: 0,
+      requiredWtypeId2: 0,
+    }),
+    weapons: [],
+    expected: {
+      mpCost: 100,
+      canPaySkillCostBasic: false,
+      isSkillRequiredWeaponTypeOk: true,
+      isSkillSealed: false,
+      canUse: true,
+      canUseWithWeapon: true,
+    },
+  },
+
+  {
+    name: "weapon required but no weapon",
+    battler: { mp: 100, tp: 100 },
+    traits: [],
+    skill: makeSkillData({
+      mpCost: 0,
+      tpCost: 0,
+      requiredWtypeId1: 5,
+      requiredWtypeId2: 0,
+    }),
+    weapons: [],
+    expected: {
+      mpCost: 0,
+      canPaySkillCostBasic: true,
+      isSkillRequiredWeaponTypeOk: false,
+      isSkillSealed: false,
+      canUse: true,
+      canUseWithWeapon: false,
+    },
+  },
+
+  {
+    name: "weapon type matched",
+    battler: { mp: 100, tp: 100 },
+    traits: [],
+    skill: makeSkillData({
+      mpCost: 0,
+      tpCost: 0,
+      requiredWtypeId1: 5,
+      requiredWtypeId2: 7,
+    }),
+    weapons: [
+      makeWeaponData({
+        id: 1,
+        wtypeId: 7,
+      }),
+    ],
+    expected: {
+      mpCost: 0,
+      canPaySkillCostBasic: true,
+      isSkillRequiredWeaponTypeOk: true,
+      isSkillSealed: false,
+      canUse: true,
+      canUseWithWeapon: true,
+    },
+  },
+
+  {
+    name: "skill sealed",
+    battler: { mp: 100, tp: 100 },
+    traits: [
+      {
+        code: TRAIT_SKILL_SEAL,
+        dataId: 1,
+        value: 0,
+      },
+    ],
+    skill: makeSkillData({
+      id: 1,
+      mpCost: 0,
+      tpCost: 0,
+    }),
+    weapons: [],
+    expected: {
+      mpCost: 0,
+      canPaySkillCostBasic: true,
+      isSkillRequiredWeaponTypeOk: true,
+      isSkillSealed: true,
+      canUse: false,
+      canUseWithWeapon: true,
+    },
+  },
+
+  {
+    name: "skill type sealed",
+    battler: { mp: 100, tp: 100 },
+    traits: [
+      {
+        code: TRAIT_SKILL_TYPE_SEAL,
+        dataId: 3,
+        value: 0,
+      },
+    ],
+    skill: makeSkillData({
+      stypeId: 3,
+      mpCost: 0,
+      tpCost: 0,
+    }),
+    weapons: [],
+    expected: {
+      mpCost: 0,
+      canPaySkillCostBasic: true,
+      isSkillRequiredWeaponTypeOk: true,
+      isSkillSealed: true,
+      canUse: false,
+      canUseWithWeapon: true,
+    },
+  },
+
+  {
+    name: "fractional mp cost",
+    battler: { mp: 50, tp: 0 },
+    traits: [
+      {
+        code: TRAIT_SPARAM,
+        dataId: SPARAM_MCR_MAGIC_COST_RATE,
+        value: 0.5,
+      },
+    ],
+    skill: makeSkillData({
+      mpCost: 101,
+      tpCost: 0,
+    }),
+    weapons: [],
+    expected: {
+      mpCost: 50,
+      canPaySkillCostBasic: false,
+      isSkillRequiredWeaponTypeOk: true,
+      isSkillSealed: false,
+      canUse: true,
+      canUseWithWeapon: true,
+    },
+  },
+];
 describe("skill functions", () => {
   testCases.forEach(runTestCase);
 });
