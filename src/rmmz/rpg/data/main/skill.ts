@@ -62,9 +62,7 @@ export const isSkillSealed = (
   });
 };
 
-export const filterSkillConditionTraits = (
-  traits: ReadonlyArray<Trait>,
-): Trait[] => {
+const filterSkillConditionTraits = (traits: ReadonlyArray<Trait>): Trait[] => {
   return traits.filter(isSkillConditionTrait);
 };
 
