@@ -106,6 +106,9 @@ export const filterUsableSkills = (
     if (battler.mp < mpCost) {
       return false;
     }
+    if (battler.tp < skill.tpCost) {
+      return false;
+    }
     return !isSkillSealed(skillCondtionTraits, skill);
   });
 };
