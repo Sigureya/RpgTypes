@@ -13,6 +13,7 @@ describe("canEquipWeapon", () => {
     name: "Test Weapon",
     description: "A test weapon",
     wtypeId: 5,
+    etypeId: 8,
   });
   describe("true", () => {
     test("weapon type matched", () => {
@@ -39,7 +40,7 @@ describe("canEquipWeapon", () => {
     test("sealed", () => {
       const result = canEquipWeapon(weapon, [
         { code: TRAIT_EQUIP_WEAPON_TYPE, value: 0, dataId: 5 },
-        { code: TRAIT_EQUIP_SEAL, value: 0, dataId: 123 },
+        { code: TRAIT_EQUIP_SEAL, value: 0, dataId: 8 },
       ]);
       expect(result).toBe(false);
     });
