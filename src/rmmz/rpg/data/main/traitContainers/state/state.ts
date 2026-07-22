@@ -1,5 +1,11 @@
 import type { Data_State } from "./types";
 
+export const stateIcons = (states: ReadonlyArray<Data_State>): number[] => {
+  return states
+    .filter((state) => state.iconIndex > 0)
+    .map((state): number => state.iconIndex);
+};
+
 export const makeStateData = (data: Partial<Data_State> = {}): Data_State => ({
   name: data.name ?? "",
   id: data.id ?? 0,
