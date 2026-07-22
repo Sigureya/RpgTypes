@@ -4,28 +4,28 @@ import type { ParamArray } from "./members";
 import type { Trait } from "./trait";
 import { traitParamRate } from "./trait";
 
-export interface ParamCalcOptions {
-  buffStep: number;
-  buffXX: number;
+export interface ParamCalculationOptions {
+  buffRateStep: number;
+  baseBuffRate: number;
 }
 
-export const calcParamFromClass = (
+export const calculateClassDataParam = (
   paramId: number,
   class_: Data_Class,
   level: number,
   traits: ReadonlyArray<Trait>,
   paramPlus: ParamArray,
   buffs: ParamArray,
-  option: ParamCalcOptions,
+  option: ParamCalculationOptions,
 ): number => {
-  const baseValue = classBaseValue(paramId, class_, level);
+  const baseValue = classParamBase(paramId, class_, level);
   const paramPlusValue = paramPlus[paramId];
   const paramRate = traitParamRate(traits, paramId);
   const buffRate = paramBuffRate(paramId, buffs, option);
   return (baseValue + paramPlusValue) * paramRate * buffRate;
 };
 
-export const classBaseValue = (
+export const classParamBase = (
   paramId: number,
   class_: Data_Class,
   level: number,
@@ -38,13 +38,13 @@ export const classBaseValue = (
   return baseParamarray[clampedLevel];
 };
 
-export const calcParamFromEnemyData = (
+export const calculateEnemyDataParam = (
   paramId: number,
   enemy: Data_Enemy,
   traits: ReadonlyArray<Trait>,
   paramPlus: ParamArray,
   buffs: ParamArray,
-  option: ParamCalcOptions,
+  option: ParamCalculationOptions,
 ): number => {
   const basePlus = enemyParamBasePlus(paramId, enemy, paramPlus);
   const paramRate = traitParamRate(traits, paramId);
@@ -62,8 +62,8 @@ const enemyParamBasePlus = (
 
 const paramBuffRate = (
   paramId: number,
-  buffs: ParamArray,
-  opt: ParamCalcOptions,
+  buffRate: ParamArray,
+  options: ParamCalculationOptions,
 ): number => {
-  return buffs[paramId] * opt.buffStep + opt.buffXX;
+  return buffRate[paramId] * options.buffRateStep + options.baseBuffRate;
 };
