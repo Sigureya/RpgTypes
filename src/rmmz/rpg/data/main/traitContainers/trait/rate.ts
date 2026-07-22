@@ -5,7 +5,7 @@ import {
   TRAIT_SPARAM,
   TRAIT_STATE_RATE,
 } from "./core";
-import { traitPi, traitSum } from "./trait";
+import { traitPi } from "./trait";
 import type { Trait } from "./types";
 
 export const traitParamRate = (
@@ -13,13 +13,6 @@ export const traitParamRate = (
   paramId: number,
 ): number => {
   return traitPi(traits, TRAIT_PARAM, paramId);
-};
-
-export const traitXparam = (
-  traits: ReadonlyArray<Trait>,
-  xparamId: number,
-): number => {
-  return traitSum(traits, TRAIT_PARAM, xparamId);
 };
 
 export const traitSparam = (
