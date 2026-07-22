@@ -1,4 +1,44 @@
+import {
+  STATE_RESTRICTION_CONFUSION_RANDOM_FRIEND,
+  STATE_RESTRICTION_CONFUSION_RANDOM_OPPONENT,
+  STATE_RESTRICTION_NOT_MOVE,
+} from "./constants";
 import type { Data_State } from "./types";
+
+export const stateIcons = (states: ReadonlyArray<Data_State>): number[] => {
+  return states
+    .filter((state) => state.iconIndex > 0)
+    .map((state): number => state.iconIndex);
+};
+
+export const canMoveStates = (state: ReadonlyArray<Data_State>): boolean => {
+  return state.every(isMoveableState);
+};
+
+export const isMoveableState = (state: Data_State): boolean => {
+  return state.restriction < STATE_RESTRICTION_NOT_MOVE;
+};
+
+export const isConfusedState = (state: Data_State): boolean => {
+  return (
+    STATE_RESTRICTION_CONFUSION_RANDOM_OPPONENT >= state.restriction &&
+    state.restriction <= STATE_RESTRICTION_CONFUSION_RANDOM_FRIEND
+  );
+};
+
+export const hasConfusedState = (
+  states: ReadonlyArray<Data_State>,
+): boolean => {
+  return states.some(isConfusedState);
+};
+
+export const confusionLevel = (states: ReadonlyArray<Data_State>): number => {
+  return states.reduce(confusionLevelAcc, 0);
+};
+
+const confusionLevelAcc = (level: number, state: Data_State): number => {
+  return isConfusedState(state) ? Math.max(level, state.restriction) : level;
+};
 
 export const makeStateData = (data: Partial<Data_State> = {}): Data_State => ({
   name: data.name ?? "",
