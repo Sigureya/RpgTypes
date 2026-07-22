@@ -41,7 +41,7 @@ const isEquipmentEquipable = <T extends Data_Equipment>(
   traits: ReadonlyArray<Trait>,
   fn: (e: T, trait: Trait) => boolean,
 ): boolean => {
-  const wtypeOrSeal = traits.find((trait): boolean => {
+  const matchedTrait = traits.find((trait): boolean => {
     if (trait.code === TRAIT_EQUIP_SEAL) {
       return trait.dataId === equipment.etypeId;
     }
@@ -50,10 +50,10 @@ const isEquipmentEquipable = <T extends Data_Equipment>(
     }
     return false;
   });
-  if (!wtypeOrSeal) {
+  if (!matchedTrait) {
     return false;
   }
-  if (wtypeOrSeal.code === TRAIT_EQUIP_SEAL) {
+  if (matchedTrait.code === TRAIT_EQUIP_SEAL) {
     return false;
   }
   return traits.every((trait) => {
