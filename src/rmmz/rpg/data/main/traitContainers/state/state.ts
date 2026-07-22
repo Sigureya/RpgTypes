@@ -1,3 +1,8 @@
+import {
+  STATE_RESTRICTION_CONFUSION_RANDOM_FRIEND,
+  STATE_RESTRICTION_CONFUSION_RANDOM_OPPONENT,
+  STATE_RESTRICTION_NOT_MOVE,
+} from "./constants";
 import type { Data_State } from "./types";
 
 export const stateIcons = (states: ReadonlyArray<Data_State>): number[] => {
@@ -6,8 +11,19 @@ export const stateIcons = (states: ReadonlyArray<Data_State>): number[] => {
     .map((state): number => state.iconIndex);
 };
 
+export const canMoveStates = (state: ReadonlyArray<Data_State>): boolean => {
+  return state.every(isMoveableState);
+};
+
+export const isMoveableState = (state: Data_State): boolean => {
+  return state.restriction < STATE_RESTRICTION_NOT_MOVE;
+};
+
 export const isConfusedState = (state: Data_State): boolean => {
-  return 1 >= state.restriction && state.restriction <= 3;
+  return (
+    STATE_RESTRICTION_CONFUSION_RANDOM_OPPONENT >= state.restriction &&
+    state.restriction <= STATE_RESTRICTION_CONFUSION_RANDOM_FRIEND
+  );
 };
 
 export const hasConfusedState = (
