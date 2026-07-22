@@ -1,3 +1,4 @@
+import type { Data_Class } from "@RpgTypes/rmmz/rpg";
 import type { Rmmz_ActorTexts } from "./actorBase/text";
 import type { Rmmz_Level } from "./base/level";
 import type { Rmmz_Battler } from "./battler";
@@ -15,4 +16,5 @@ export interface Rmmz_Actor extends Rmmz_Battler, Rmmz_Level, Rmmz_ActorTexts {
   addParam(paramId: number, value: number): void;
   learnSkill(skillId: number): void;
   forgetSkill(skillId: number): void;
+  currentClass(): Data_Class | null | undefined;
 }

@@ -15,7 +15,7 @@ export const makeParamArray = ({
 };
 
 export const paramArrayToObject = (
-  paramArray: ParamArray
+  paramArray: ParamArray,
 ): StatusParamObject => {
   const [mhp, mmp, atk, def, mat, mdf, agi, luk] = paramArray;
   return {
@@ -27,5 +27,20 @@ export const paramArrayToObject = (
     mdf,
     agi,
     luk,
+  };
+};
+
+export const makeEmeptyStatusParamObject = (
+  value: number = 0,
+): StatusParamObject => {
+  return {
+    mhp: value,
+    mmp: value,
+    atk: value,
+    def: value,
+    mat: value,
+    mdf: value,
+    agi: value,
+    luk: value,
   };
 };

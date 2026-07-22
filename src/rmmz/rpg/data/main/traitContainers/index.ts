@@ -1,5 +1,6 @@
 export * from "./actor";
 export * from "./armor";
+export * from "./battlerParam";
 export * from "./class";
 export * from "./enemy";
 export * from "./equipment";
