@@ -63,35 +63,3 @@ const isEquipmentEquipable = <T extends Data_Equipment>(
     return true;
   });
 };
-
-export const filterEquipableWeapons = (
-  weapons: ReadonlyArray<Data_Weapon>,
-  traits: ReadonlyArray<Trait>,
-): Data_Weapon[] => {
-  const equipTraits = filterEquipConditionTraits(traits);
-  return weapons.filter((weapon) => {
-    return canEquipWeapon(weapon, equipTraits);
-  });
-};
-
-export const filterEquipableArmors = (
-  armors: ReadonlyArray<Data_Armor>,
-  traits: ReadonlyArray<Trait>,
-): Data_Armor[] => {
-  const equipTraits = filterEquipConditionTraits(traits);
-  return armors.filter((armor) => {
-    return canEquipArmor(armor, equipTraits);
-  });
-};
-
-const filterEquipConditionTraits = (traits: ReadonlyArray<Trait>): Trait[] => {
-  return traits.filter(isEquipConditionTrait);
-};
-
-const isEquipConditionTrait = (trait: Trait): boolean => {
-  return (
-    trait.code === TRAIT_EQUIP_WEAPON_TYPE ||
-    trait.code === TRAIT_EQUIP_ARMOR_TYPE ||
-    trait.code === TRAIT_EQUIP_SEAL
-  );
-};
