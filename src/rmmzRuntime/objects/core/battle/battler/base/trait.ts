@@ -16,4 +16,6 @@ export interface Rmmz_TraitContainer {
   isSkillTypeSealed(stypeId: number): boolean;
   isSkillSealed(skillId: number): boolean;
   paramRate(paramId: number): number;
+  xparam(paramId: number): number;
+  sparam(paramId: number): number;
 }
