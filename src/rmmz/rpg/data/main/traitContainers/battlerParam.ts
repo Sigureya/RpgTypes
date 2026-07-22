@@ -1,13 +1,72 @@
 import type { Data_Class } from "./class";
 import type { Data_Enemy } from "./enemy";
-import type { ParamArray } from "./members";
+import type { StatusParamObject, ParamArray } from "./members";
+import {
+  makeEmeptyStatusParamObject,
+  PARAM_MAX_HP,
+  PARAM_MAX_MP,
+  PARAM_ATK,
+  PARAM_DEF,
+  PARAM_MAT,
+  PARAM_MDF,
+  PARAM_AGI,
+  PARAM_LUK,
+} from "./members";
 import type { Trait } from "./trait";
-import { traitParamRate } from "./trait";
+import { TRAIT_PARAM, traitParamRate } from "./trait";
 
 export interface ParamCalculationOptions {
   buffRateStep: number;
   baseBuffRate: number;
 }
+
+export const calculateParamRate = (
+  traits: ReadonlyArray<Trait>,
+): StatusParamObject => {
+  return traits.reduce(accParamRate, makeEmeptyStatusParamObject(1));
+};
+
+const accParamRate = (
+  acc: StatusParamObject,
+  trait: Trait,
+): StatusParamObject => {
+  if (trait.code !== TRAIT_PARAM) {
+    return acc;
+  }
+  if (trait.dataId === PARAM_MAX_HP) {
+    acc.mhp *= trait.value;
+    return acc;
+  }
+  if (trait.dataId === PARAM_MAX_MP) {
+    acc.mmp *= trait.value;
+    return acc;
+  }
+  if (trait.dataId === PARAM_ATK) {
+    acc.atk *= trait.value;
+    return acc;
+  }
+  if (trait.dataId === PARAM_DEF) {
+    acc.def *= trait.value;
+    return acc;
+  }
+  if (trait.dataId === PARAM_MAT) {
+    acc.mat *= trait.value;
+    return acc;
+  }
+  if (trait.dataId === PARAM_MDF) {
+    acc.mdf *= trait.value;
+    return acc;
+  }
+  if (trait.dataId === PARAM_AGI) {
+    acc.agi *= trait.value;
+    return acc;
+  }
+  if (trait.dataId === PARAM_LUK) {
+    acc.luk *= trait.value;
+    return acc;
+  }
+  return acc;
+};
 
 export const calculateClassDataParam = (
   paramId: number,
