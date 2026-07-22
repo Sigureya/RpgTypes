@@ -1,10 +1,5 @@
 import type { TraitCode } from "./core";
-import { TRAIT_ATTACK_ELEMENT } from "./core";
 import type { Trait } from "./types";
-
-export const traitAttackElements = (traits: ReadonlyArray<Trait>): number[] => {
-  return traitSet(traits, TRAIT_ATTACK_ELEMENT);
-};
 
 export const traitPi = (
   traits: ReadonlyArray<Trait>,

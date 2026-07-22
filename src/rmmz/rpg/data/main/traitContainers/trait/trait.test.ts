@@ -1,7 +1,5 @@
 import { describe, expect, test } from "vitest";
-import { TRAIT_ATTACK_ELEMENT } from "./core";
 import {
-  traitAttackElements,
   traitPi,
   traitSum,
   traitSumAll,
@@ -108,27 +106,6 @@ describe("trait functions", () => {
       const result = traitSet(traits, 999);
 
       expect(result).toEqual([]);
-    });
-  });
-
-  describe("traitAttackElements", () => {
-    test("returns attack elements", () => {
-      const traits: Trait[] = [
-        {
-          code: TRAIT_ATTACK_ELEMENT,
-          dataId: 3,
-          value: 0,
-        },
-        {
-          code: TRAIT_ATTACK_ELEMENT,
-          dataId: 5,
-          value: 0,
-        },
-      ];
-
-      const result = traitAttackElements(traits);
-
-      expect(result).toEqual([3, 5]);
     });
   });
 
