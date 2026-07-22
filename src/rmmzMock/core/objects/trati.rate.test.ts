@@ -7,6 +7,7 @@ import {
   TRAIT_PARAM,
   TRAIT_SPARAM,
   TRAIT_STATE_RATE,
+  TRAIT_XPARAM,
   traitDebuffRate,
   traitElementRate,
   traitParamRate,
@@ -57,7 +58,7 @@ const createMockedBattlerBase = (
 
   const traitsSum = vi.fn((code: number, id: number): number => {
     return Game_BattlerBase.prototype.traitsSum.call(
-      { traits: traits },
+      { traits: traits, traitsWithId: traitsWithId },
       code,
       id,
     );
@@ -143,6 +144,46 @@ const runTestCase = (testCase: TestCase) => {
         expect(mockedBattlerBase.traitsPi).toHaveBeenCalledOnce();
         expect(mockedBattlerBase.traitsSum).not.toHaveBeenCalled();
       });
+      test("xparam", () => {
+        const mockedBattlerBase = createMockedBattlerBase(testCase.traits);
+        const result = Game_BattlerBase.prototype.xparam.call(
+          mockedBattlerBase,
+          testCase.xparam.id,
+        );
+        expect(result).toBeCloseTo(testCase.xparam.value);
+      });
+      test("sparam", () => {
+        const mockedBattlerBase = createMockedBattlerBase(testCase.traits);
+        const result = Game_BattlerBase.prototype.sparam.call(
+          mockedBattlerBase,
+          testCase.sparam.id,
+        );
+        expect(result).toBeCloseTo(testCase.sparam.value);
+      });
+      test("elementRate", () => {
+        const mockedBattlerBase = createMockedBattlerBase(testCase.traits);
+        const result = Game_BattlerBase.prototype.elementRate.call(
+          mockedBattlerBase,
+          testCase.elementRate.id,
+        );
+        expect(result).toBeCloseTo(testCase.elementRate.value);
+      });
+      test("debuffRate", () => {
+        const mockedBattlerBase = createMockedBattlerBase(testCase.traits);
+        const result = Game_BattlerBase.prototype.debuffRate.call(
+          mockedBattlerBase,
+          testCase.debuffRate.id,
+        );
+        expect(result).toBeCloseTo(testCase.debuffRate.value);
+      });
+      test("stateRate", () => {
+        const mockedBattlerBase = createMockedBattlerBase(testCase.traits);
+        const result = Game_BattlerBase.prototype.stateRate.call(
+          mockedBattlerBase,
+          testCase.stateRate.id,
+        );
+        expect(result).toBeCloseTo(testCase.stateRate.value);
+      });
     });
   });
 };
@@ -164,8 +205,8 @@ const testCases: TestCase[] = [
       { code: TRAIT_PARAM, dataId: 2, value: 1.2 },
       { code: TRAIT_PARAM, dataId: 2, value: 0.5 },
 
-      { code: TRAIT_PARAM, dataId: 3, value: 0.15 },
-      { code: TRAIT_PARAM, dataId: 3, value: 0.35 },
+      { code: TRAIT_XPARAM, dataId: 3, value: 0.5 },
+      { code: TRAIT_XPARAM, dataId: 3, value: 1.8 },
 
       { code: TRAIT_SPARAM, dataId: 4, value: 1.5 },
       { code: TRAIT_SPARAM, dataId: 4, value: 0.8 },
@@ -180,8 +221,8 @@ const testCases: TestCase[] = [
       { code: TRAIT_STATE_RATE, dataId: 7, value: 0.5 },
     ],
 
-    paramRate: { id: 2, value: 0.6 },
-    xparam: { id: 3, value: 0.5 },
+    paramRate: { id: 2, value: 1.2 * 0.5 },
+    xparam: { id: 3, value: 0.5 + 1.8 },
     sparam: { id: 4, value: 1.2 },
     elementRate: { id: 5, value: 0.2 },
     debuffRate: { id: 6, value: 0.4 },
