@@ -1,16 +1,21 @@
 import type { Data_Weapon, Trait } from "./traitContainers";
 import {
   SPARAM_MCR_MAGIC_COST_RATE,
-  TRAIT_SPARAM,
   TRAIT_SKILL_SEAL,
   TRAIT_SKILL_TYPE_SEAL,
+  TRAIT_SPARAM,
+  traitMpCostRate,
 } from "./traitContainers";
-import { traitMpCostRate } from "./traitContainers/trait/sparam";
 import type { Data_Skill } from "./usableItems";
 
 export interface Battler_SkillUser {
   mp: number;
   tp: number;
+}
+
+export interface UsableSkillInfo {
+  skill: Data_Skill;
+  usable: boolean;
 }
 
 export const skillMpCost = (
@@ -53,29 +58,51 @@ export const isSkillSealed = (
   skill: Data_Skill,
 ): boolean => {
   return traits.some((trait): boolean => {
-    if (trait.code === TRAIT_SKILL_SEAL && trait.dataId === skill.id) {
-      return true;
-    }
     if (
       trait.code === TRAIT_SKILL_TYPE_SEAL &&
       trait.dataId === skill.stypeId
     ) {
+      // 出現頻度が高そうな条件を先にチェック
       return true;
     }
+    if (trait.code === TRAIT_SKILL_SEAL && trait.dataId === skill.id) {
+      return true;
+    }
+    // 後で条件を書き足しやすいようにこの書き方
     return false;
   });
 };
 
 const filterSkillConditionTraits = (traits: ReadonlyArray<Trait>): Trait[] => {
+  // スキルの使用条件判定に関わる特徴だけに絞り込む
   return traits.filter(isSkillConditionTrait);
 };
 
 const isSkillConditionTrait = (trait: Trait): boolean => {
+  // 出現頻度が高そうな種類を先にチェック
   return (
-    trait.code === TRAIT_SKILL_SEAL ||
     trait.code === TRAIT_SKILL_TYPE_SEAL ||
-    (trait.code === TRAIT_SPARAM && trait.dataId === SPARAM_MCR_MAGIC_COST_RATE)
+    (trait.code === TRAIT_SPARAM &&
+      trait.dataId === SPARAM_MCR_MAGIC_COST_RATE) ||
+    trait.code === TRAIT_SKILL_SEAL
   );
+};
+
+const isSkillUsable = (
+  mcr: number,
+  battler: Battler_SkillUser,
+  skill: Data_Skill,
+  traits: ReadonlyArray<Trait>,
+): boolean => {
+  // 計算コストが軽いものを先にチェック
+  if (battler.tp < skill.tpCost) {
+    return false;
+  }
+  const mpCost = Math.floor(skill.mpCost * mcr);
+  if (battler.mp < mpCost) {
+    return false;
+  }
+  return !isSkillSealed(traits, skill);
 };
 
 export const filterUsableSkillsWithWeapon = (
@@ -98,16 +125,24 @@ export const filterUsableSkills = (
   traits: ReadonlyArray<Trait>,
   battler: Battler_SkillUser,
 ): Data_Skill[] => {
-  const skillCondtionTraits: Trait[] = filterSkillConditionTraits(traits);
-  const mcr: number = traitMpCostRate(skillCondtionTraits);
+  const skillConditionTraits: Trait[] = filterSkillConditionTraits(traits);
+  const mcr: number = traitMpCostRate(skillConditionTraits);
   return skills.filter((skill): boolean => {
-    if (battler.tp < skill.tpCost) {
-      return false;
-    }
-    const mpCost = Math.floor(skill.mpCost * mcr);
-    if (battler.mp < mpCost) {
-      return false;
-    }
-    return !isSkillSealed(skillCondtionTraits, skill);
+    return isSkillUsable(mcr, battler, skill, skillConditionTraits);
   });
+};
+
+export const mapUsableSkills = (
+  skills: ReadonlyArray<Data_Skill>,
+  traits: ReadonlyArray<Trait>,
+  battler: Battler_SkillUser,
+): UsableSkillInfo[] => {
+  const skillConditionTraits: Trait[] = filterSkillConditionTraits(traits);
+  const mcr: number = traitMpCostRate(skillConditionTraits);
+  return skills.map(
+    (skill): UsableSkillInfo => ({
+      skill: skill,
+      usable: isSkillUsable(mcr, battler, skill, skillConditionTraits),
+    }),
+  );
 };
