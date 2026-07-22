@@ -6,6 +6,24 @@ export const stateIcons = (states: ReadonlyArray<Data_State>): number[] => {
     .map((state): number => state.iconIndex);
 };
 
+export const isConfusedState = (state: Data_State): boolean => {
+  return 1 >= state.restriction && state.restriction <= 3;
+};
+
+export const hasConfusedState = (
+  states: ReadonlyArray<Data_State>,
+): boolean => {
+  return states.some(isConfusedState);
+};
+
+export const confusionLevel = (states: ReadonlyArray<Data_State>): number => {
+  return states.reduce(confusionLevelAcc, 0);
+};
+
+const confusionLevelAcc = (level: number, state: Data_State): number => {
+  return isConfusedState(state) ? Math.max(level, state.restriction) : level;
+};
+
 export const makeStateData = (data: Partial<Data_State> = {}): Data_State => ({
   name: data.name ?? "",
   id: data.id ?? 0,
