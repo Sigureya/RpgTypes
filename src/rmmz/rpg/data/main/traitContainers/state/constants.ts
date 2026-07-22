@@ -1,0 +1,5 @@
+export const STATE_RESTRICTION_NORMAL = 0 as const;
+export const STATE_RESTRICTION_CONFUSION_RANDOM_OPPONENT = 1 as const;
+export const STATE_RESTRICTION_CONFUSION_RANDOM_ALL = 2 as const;
+export const STATE_RESTRICTION_CONFUSION_RANDOM_FRIEND = 3 as const;
+export const STATE_RESTRICTION_NOT_MOVE = 4 as const;
