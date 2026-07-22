@@ -117,18 +117,32 @@ const armorCases: EquipmentTestCase[] = [
 
 describe("canEquipWeapon", () => {
   weaponCases.forEach((testCase) => {
-    test(testCase.name, () => {
-      const result = canEquipWeapon(weapon, testCase.traits);
-      expect(result).toBe(testCase.expected);
+    describe(testCase.name, () => {
+      test("normal", () => {
+        const result = canEquipWeapon(weapon, testCase.traits);
+        expect(result).toBe(testCase.expected);
+      });
+      test("reversed", () => {
+        const traits = testCase.traits.toReversed();
+        const result = canEquipWeapon(weapon, traits);
+        expect(result).toBe(testCase.expected);
+      });
     });
   });
 });
 
 describe("canEquipArmor", () => {
   armorCases.forEach((testCase) => {
-    test(testCase.name, () => {
-      const result = canEquipArmor(armor, testCase.traits);
-      expect(result).toBe(testCase.expected);
+    describe(testCase.name, () => {
+      test("normal", () => {
+        const result = canEquipArmor(armor, testCase.traits);
+        expect(result).toBe(testCase.expected);
+      });
+      test("reversed", () => {
+        const traits = testCase.traits.toReversed();
+        const result = canEquipArmor(armor, traits);
+        expect(result).toBe(testCase.expected);
+      });
     });
   });
 });
