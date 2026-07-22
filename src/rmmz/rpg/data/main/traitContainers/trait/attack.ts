@@ -12,6 +12,10 @@ export const traitAttackElements = (traits: ReadonlyArray<Trait>): number[] => {
   return traitSet(traits, TRAIT_ATTACK_ELEMENT);
 };
 
+export const traitAttackStates = (traits: ReadonlyArray<Trait>): number[] => {
+  return traitSet(traits, TRAIT_ATTACK_STATE);
+};
+
 export const traitAttackStateRate = (
   traits: ReadonlyArray<Trait>,
   stateId: number,
