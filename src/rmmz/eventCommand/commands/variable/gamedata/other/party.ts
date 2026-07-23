@@ -1,10 +1,29 @@
 import { CONTROL_VARIABLES } from "@RpgTypes/libs";
-import type { Command_ControlVariables_FromParty } from "./partySize";
 import type {
+  ParamObject_VariableFromPartyAt,
+  Command_ControlVariables_FromPartyAt,
+  ParamObject_VariableFromOther,
   Command_ControlVariables_FromOthre,
   ParamArray_VariableFromOther,
-  ParamObject_VariableFromOther,
 } from "./types";
+
+export const makeCommandVariablePartyAt = (
+  params: ParamObject_VariableFromPartyAt,
+  indent: number = 0,
+): Command_ControlVariables_FromPartyAt => {
+  return {
+    code: CONTROL_VARIABLES,
+    indent,
+    parameters: [
+      params.startId,
+      params.endId ?? params.startId,
+      0,
+      3,
+      6,
+      params.memberIndex,
+    ],
+  };
+};
 
 export const makeCommandVariableFromMapId = (
   params: ParamObject_VariableFromOther,
@@ -20,7 +39,7 @@ export const makeCommandVariableFromMapId = (
 export const makeCommandVariableFromPartySize = (
   params: ParamObject_VariableFromOther,
   indent: number = 0,
-): Command_ControlVariables_FromParty => {
+): Command_ControlVariables_FromOthre => {
   return {
     code: CONTROL_VARIABLES,
     indent,
@@ -29,7 +48,7 @@ export const makeCommandVariableFromPartySize = (
       params.endId ?? params.startId,
       params.operation ?? 0,
       3,
-      6,
+      7,
       1,
     ],
   };
