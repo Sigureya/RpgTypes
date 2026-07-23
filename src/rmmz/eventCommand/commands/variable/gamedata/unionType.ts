@@ -24,7 +24,7 @@ import type {
   Command_ControlVariables_FromOthre,
   Command_ControlVariables_FromPartyAt,
   ParamArray_VariableFromOther,
-  ParamArray_VariableFromParty,
+  ParamArray_VariableFromPartyAt,
 } from "./other";
 import type {
   Command_ControlVariables_FromLastData,
@@ -35,7 +35,7 @@ export type ParamArray_Variable_FromGameData =
   | ParamArray_VariableFromActorStatus
   | ParamArray_VariableFromEnemyStatus
   | ParamArray_VariableFromMapCharactor
-  | ParamArray_VariableFromParty
+  | ParamArray_VariableFromPartyAt
   | ParamArray_VariableFromOther
   | ParamArray_VariableFromLastData
   | ParamArray_VariableFromItem
