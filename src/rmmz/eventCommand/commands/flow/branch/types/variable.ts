@@ -3,7 +3,7 @@ import type { BranchCodeTable } from "./branch";
 export type BranchVariableComparison = 0 | 1 | 2 | 3 | 4 | 5;
 
 export type BranchParam_Variable =
-  | ParamArray_BranchVariableWithOperandVariable
+  | BranchParam_VariableWithOperandVariable
   | BranchParam_VariableWithOperandConstant;
 
 export interface ParamObject_BranchVariableWithOperandVariable {
@@ -18,7 +18,7 @@ export type ParamObject_BranchVariableWithOperandConstant = {
   comparison: BranchVariableComparison;
 };
 
-export type ParamArray_BranchVariableWithOperandVariable = [
+export type BranchParam_VariableWithOperandVariable = [
   branchCode: BranchCodeTable["VARIABLE"],
   variableId: number,
   operand: 1,

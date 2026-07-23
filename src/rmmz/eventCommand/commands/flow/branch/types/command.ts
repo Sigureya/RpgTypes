@@ -10,11 +10,11 @@ import type {
   BranchParam_Item,
   BranchParam_Script,
   BranchParam_SelfSwitch,
-  BranchParam_Variable,
   BranchParam_Vehicle,
   BranchParam_Timer,
   BranchParam_Weapon,
 } from "./branchParams";
+import type { BranchParam_Variable } from "./variable";
 
 export type CommnandUnion_Branch =
   | Command_BranchBySwitch
