@@ -11,6 +11,7 @@ export interface Rmmz_VariableSourceProvider {
   dataItem(itemId: number): Data_Item | null | undefined;
   dataWeapon(weaponId: number): Data_Weapon | null | undefined;
   dataArmor(armorId: number): Data_Armor | null | undefined;
+  random(min: number, max: number): number;
 }
 
 export type Rmmz_VariabeSourceParty = Pick<
