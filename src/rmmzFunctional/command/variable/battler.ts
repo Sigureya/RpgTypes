@@ -3,12 +3,12 @@ import type {
   Command_ControlVariables_FromEnemy,
   Command_ControlVariables_FromMapCharactor,
 } from "@RpgTypes/rmmz/eventCommand";
-import type { Provider } from "./types";
+import type { Rmmz_VariableSourceProvider } from "./types";
 
 export const variableFromActor = (
   command: Command_ControlVariables_FromActor,
   fallback: number,
-  provider: Provider,
+  provider: Rmmz_VariableSourceProvider,
 ): number => {
   const actor = provider.gameActor(command.parameters[5]);
   if (!actor) {
@@ -40,7 +40,7 @@ export const variableFromActor = (
 export const variableFromEnemy = (
   command: Command_ControlVariables_FromEnemy,
   fallback: number,
-  provider: Provider,
+  provider: Rmmz_VariableSourceProvider,
 ): number => {
   const enemy = provider.gameEnemy(command.parameters[5]);
   if (!enemy) {
@@ -65,7 +65,7 @@ export const variableFromEnemy = (
 export const variableFromMapCharactor = (
   command: Command_ControlVariables_FromMapCharactor,
   fallback: number,
-  provider: Provider,
+  provider: Rmmz_VariableSourceProvider,
 ): number => {
   const character = provider.character(command.parameters[5]);
   if (!character) {

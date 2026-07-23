@@ -5,7 +5,7 @@ import type {
   Rmmz_Character,
 } from "@RpgTypes/rmmzRuntime";
 
-export interface Provider {
+export interface Rmmz_VariableSourceProvider {
   gameActor(actorId: number): Rmmz_Actor | null | undefined;
   gameEnemy(enemyIndex: number): Rmmz_Enemy | null | undefined;
   character(characterId: number): Rmmz_Character | null | undefined;

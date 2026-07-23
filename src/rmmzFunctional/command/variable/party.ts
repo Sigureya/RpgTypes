@@ -5,7 +5,7 @@ import type {
   Command_ControlVariables_FromArmor,
 } from "@RpgTypes/rmmz/eventCommand";
 import type { Rmmz_Party, Rmmz_UnitPlayer } from "@RpgTypes/rmmzRuntime";
-import type { Provider } from "./types";
+import type { Rmmz_VariableSourceProvider } from "./types";
 
 export const variableFromParty = (
   command: Command_ControlVariables_FromParty,
@@ -18,7 +18,7 @@ export const variableFromParty = (
 export const variableFromItem = (
   command: Command_ControlVariables_FromItem,
   party: Rmmz_UnitPlayer,
-  provider: Provider,
+  provider: Rmmz_VariableSourceProvider,
 ): number => {
   const item = provider.dataItem(command.parameters[5]);
   if (!item) {
@@ -30,7 +30,7 @@ export const variableFromItem = (
 export const variableFromWeapon = (
   command: Command_ControlVariables_FromWeapon,
   party: Rmmz_UnitPlayer,
-  provider: Provider,
+  provider: Rmmz_VariableSourceProvider,
 ): number => {
   const weapon = provider.dataWeapon(command.parameters[5]);
   if (!weapon) {
@@ -42,7 +42,7 @@ export const variableFromWeapon = (
 export const variableFromArmor = (
   command: Command_ControlVariables_FromArmor,
   party: Rmmz_UnitPlayer,
-  provider: Provider,
+  provider: Rmmz_VariableSourceProvider,
 ): number => {
   const armor = provider.dataArmor(command.parameters[5]);
   if (!armor) {
