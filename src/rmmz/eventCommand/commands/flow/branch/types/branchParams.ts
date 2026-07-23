@@ -52,11 +52,13 @@ export type BranchParam_Item = [
 export type BranchParam_Weapon = [
   branchCode: BranchCodeTable["WEAPON"],
   weaponId: number,
+  includeEquip: boolean,
 ];
 
 export type BranchParam_Armor = [
   branchCode: BranchCodeTable["ARMOR"],
   armorId: number,
+  includeEquip: boolean,
 ];
 
 export type BranchParam_Button = [
