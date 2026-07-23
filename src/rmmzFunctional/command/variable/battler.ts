@@ -1,23 +1,8 @@
 import type {
   Command_ControlVariables_FromActor,
-  Command_ControlVariables_FromArmor,
   Command_ControlVariables_FromEnemy,
-  Command_ControlVariables_FromItem,
   Command_ControlVariables_FromMapCharactor,
-  Command_ControlVariables_FromParty,
-  Command_ControlVariables_FromSystem,
-  Command_ControlVariables_FromWeapon,
 } from "@RpgTypes/rmmz/eventCommand";
-import type { Data_Armor, Data_Item, Data_Weapon } from "@RpgTypes/rmmz/rpg";
-import type {
-  Rmmz_Actor,
-  Rmmz_Character,
-  Rmmz_Enemy,
-  Rmmz_Map,
-  Rmmz_Party,
-  Rmmz_System,
-  Rmmz_UnitPlayer,
-} from "@RpgTypes/rmmzRuntime";
 import type { Provider } from "./types";
 
 export const variableFromActor = (
@@ -101,53 +86,4 @@ export const variableFromMapCharactor = (
   }
 
   return fallback;
-};
-
-// export const variableFromLast = (
-//   command: Command_ControlVariables_FromLastData,
-//   temp: Rmmz_Temp,
-// ): number => {
-//   return temp.lastActionData(command.parameters[5]);
-// };
-
-export const variableFromOther = (
-  command: Command_ControlVariables_FromSystem,
-  map: Rmmz_Map,
-  party: Rmmz_Party,
-  system: Rmmz_System,
-  //  timer: Rmmz_Timer,
-): number => {
-  switch (command.parameters[5]) {
-    case 0:
-      return map.mapId();
-
-    case 1:
-      return party.size();
-
-    case 2:
-      return party.gold();
-
-    case 3:
-      return party.steps();
-
-    case 4:
-      return system.playtime();
-
-    // case 5:
-    //   return timer.seconds();
-
-    case 6:
-      return system.saveCount();
-
-    case 7:
-      return system.battleCount();
-
-    case 8:
-      return system.winCount();
-
-    case 9:
-      return system.escapeCount();
-  }
-
-  return 0;
 };
