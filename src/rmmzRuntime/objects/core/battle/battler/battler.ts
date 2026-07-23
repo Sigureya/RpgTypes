@@ -11,6 +11,6 @@ export interface Rmmz_Battler extends Rmmz_BattlerBase {
   performCollapse(): void;
   clearResult(): void;
   recoverAll(): void;
-  param(paramId: ParamID): number;
+  param<P extends number = ParamID>(paramId: P): number;
   turnCount(): number;
 }
