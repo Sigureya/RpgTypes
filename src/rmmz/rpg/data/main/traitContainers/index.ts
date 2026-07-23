@@ -3,7 +3,6 @@ export * from "./armor";
 export * from "./battlerParam";
 export * from "./class";
 export * from "./enemy";
-export * from "./enemyAction";
 export * from "./equipment";
 export * from "./members";
 export * from "./state";
