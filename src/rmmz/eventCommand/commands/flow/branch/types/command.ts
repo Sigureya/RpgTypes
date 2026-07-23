@@ -1,8 +1,7 @@
 import type { CONDITIONAL_BRANCH, EventCommandLike } from "@RpgTypes/libs";
-import type { BranchByActorName } from "./actor";
+import type { BranchByActorName, BranchParam_Actor } from "./actor";
 import type {
   BranchParam_Switch,
-  BranchParam_Actor,
   BranchParam_Armor,
   BranchParam_Button,
   BranchParam_Character,
