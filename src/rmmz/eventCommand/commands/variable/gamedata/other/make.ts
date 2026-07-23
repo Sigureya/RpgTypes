@@ -27,28 +27,6 @@ export const makeCommandVariableFromSystemPartyMemberCount = (
   };
 };
 
-export const makeCommandVariableFromSystemGold = (
-  params: ParamObject_VariableFromOther,
-  indent: number = 0,
-): Command_ControlVariables_FromOthre => {
-  return {
-    code: CONTROL_VARIABLES,
-    indent,
-    parameters: paramToArray(params, 2),
-  };
-};
-
-export const makeCommandVariableFromSystemSteps = (
-  params: ParamObject_VariableFromOther,
-  indent: number = 0,
-): Command_ControlVariables_FromOthre => {
-  return {
-    code: CONTROL_VARIABLES,
-    indent,
-    parameters: paramToArray(params, 3),
-  };
-};
-
 export const makeCommandVariableFromSystemPlayTime = (
   params: ParamObject_VariableFromOther,
   indent: number = 0,
