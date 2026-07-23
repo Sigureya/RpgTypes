@@ -2,18 +2,12 @@ import type { ValueOf } from "@RpgTypes/libs/templates/valueOf";
 import type { Toggle, Operation_PlusMinus } from "@RpgTypes/rmmz/utils";
 import type { BranchParam_Actor } from "./actor";
 import type { BranchCodeTable } from "./branch";
+import type { BranchParam_Variable } from "./variable";
 
 export type BranchParam_Switch = [
   branchCode: BranchCodeTable["SWITCH"],
   switchId: number,
   switchValue: ValueOf<Toggle>,
-];
-
-export type BranchParam_Variable = [
-  branchCode: BranchCodeTable["VARIABLE"],
-  variableId: number,
-  operand: number,
-  value: number,
 ];
 
 export type BranchParam_SelfSwitch = [
