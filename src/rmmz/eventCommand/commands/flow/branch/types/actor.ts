@@ -29,6 +29,14 @@ export interface ParamObject_BranchActorByState {
   stateId: number;
 }
 
+export type BranchParam_Actor =
+  | BranchByActorInParty
+  | BranchByActorName
+  | BranchByActorClass
+  | BranchByActorSkill
+  | BranchByActorWeapon
+  | BranchByActorArmor
+  | BranchByActorState;
 export type BranchByActorInParty = [
   branchCode: BranchCodeTable["ACTOR"],
   actorId: number,
