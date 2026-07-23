@@ -1,4 +1,4 @@
-import type { Data_Class } from "@RpgTypes/rmmz/rpg";
+import type { Data_Armor, Data_Class, Data_Weapon } from "@RpgTypes/rmmz/rpg";
 import type { Rmmz_ActorTexts } from "./actorBase/text";
 import type { Rmmz_Level } from "./base/level";
 import type { Rmmz_Battler } from "./battler";
@@ -17,4 +17,8 @@ export interface Rmmz_Actor extends Rmmz_Battler, Rmmz_Level, Rmmz_ActorTexts {
   learnSkill(skillId: number): void;
   forgetSkill(skillId: number): void;
   currentClass(): Data_Class | null | undefined;
+  isClass(gameClass: { id: number } | null | undefined): boolean;
+  hasArmor(armor: Data_Armor | null | undefined): boolean;
+  hasWeapon(weapon: Data_Weapon | null | undefined): boolean;
+  hasSkill(skillId: number): boolean;
 }
