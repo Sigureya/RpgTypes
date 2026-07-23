@@ -3,4 +3,4 @@ export * from "./enemy";
 export * from "./mapCharactor";
 export * from "./other";
 export * from "./party";
-export * from "./templLastData";
+export * from "./tempLastData";
