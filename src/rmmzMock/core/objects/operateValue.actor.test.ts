@@ -25,7 +25,7 @@ import {
   makeCommandVariableFromActorMaxMp,
   makeCommandVariableFromActorMdf,
 } from "@RpgTypes/rmmz/eventCommand";
-import { ACTOR_STATUS } from "@RpgTypes/rmmz/eventCommand/commands/variable/actor/dataSource";
+import { ACTOR_STATUS } from "@RpgTypes/rmmz/eventCommand/commands/variable/gamedata/actor/dataSource";
 import type { Rmmz_Actor } from "@RpgTypes/rmmzRuntime";
 import type { Rmmz_Variables } from "@RpgTypes/rmmzRuntime";
 import type { FakeMap } from "./fakes/types";
