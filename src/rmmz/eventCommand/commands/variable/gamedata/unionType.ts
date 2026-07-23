@@ -14,6 +14,7 @@ import type {
   ParamArray_VariableFromWeapon,
   Command_ControlVariables_FromArmor,
   Command_ControlVariables_FromItem,
+  Command_ControlVariables_FromWeapon,
 } from "./goods";
 import type {
   Command_ControlVariables_FromMapCharactor,
@@ -26,7 +27,7 @@ import type {
 import type {
   Command_ControlVariables_FromParty,
   ParamArray_VariableFromParty,
-} from "./party";
+} from "./other/partySize";
 import type {
   Command_ControlVariables_FromLastData,
   ParamArray_VariableFromLastData,
@@ -53,4 +54,5 @@ export type Command_ControlVariables_FromGameData =
   | Command_ControlVariables_FromMapCharactor
   | Command_ControlVariables_FromParty
   | Command_ControlVariables_FromArmor
-  | Command_ControlVariables_FromItem;
+  | Command_ControlVariables_FromItem
+  | Command_ControlVariables_FromWeapon;
