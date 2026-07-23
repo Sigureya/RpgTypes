@@ -1,7 +1,8 @@
+import type { Rmmz_MapCharacter } from "./character";
 import type { Rmmz_Followers } from "./followers";
 import type { Rmmz_Vehicle } from "./vehicle";
 
-export interface Rmmz_PlayerCharactor {
+export interface Rmmz_PlayerCharactor extends Rmmz_MapCharacter {
   // プロパティ
   //   _vehicleType: string;
   //   _vehicleGettingOn: boolean;

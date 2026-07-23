@@ -4,7 +4,11 @@ import type { Direction8 } from "@RpgTypes/rmmz/utils";
 import type { Rmmz_Event } from "./event";
 import type { Rmmz_Vehicle } from "./vehicle";
 
-export interface Rmmz_Map {
+export interface Rmmz_MapId {
+  mapId(): number;
+}
+
+export interface Rmmz_Map extends Rmmz_MapId {
   initialize(): void;
   setup(mapId: number): void;
   isEventRunning(): boolean;
