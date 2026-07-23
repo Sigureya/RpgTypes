@@ -1,6 +1,6 @@
 import type {
   Command_ControlVariables_FromLastData,
-  Command_ControlVariables_FromSystem,
+  Command_ControlVariables_FromOthre,
 } from "@RpgTypes/rmmz/eventCommand";
 import type {
   Rmmz_MapId,
@@ -18,7 +18,7 @@ export const variableFromLastData = (
 };
 
 export const variableFromOther = (
-  command: Command_ControlVariables_FromSystem,
+  command: Command_ControlVariables_FromOthre,
   map: Rmmz_MapId,
   party: Rmmz_Party,
   system: Rmmz_SystemCounter,

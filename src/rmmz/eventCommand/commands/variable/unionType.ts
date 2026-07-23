@@ -10,11 +10,11 @@ import type { Command_ControlVariables_FromConstant } from "./literal";
 import type { Command_ControlVariables_FromMapCharactor } from "./mapCharactor";
 import type { Command_ControlVariables_FromParty } from "./party";
 import type { Command_ControlVariables_FromRandom } from "./random";
-import type { Command_ControlVariables_FromSystem } from "./system";
+import type { Command_ControlVariables_FromOthre } from "./system";
 import type { Command_ControlVariables_FromLastData } from "./templLastData";
 
 export type Command_ControlVariables =
-  | Command_ControlVariables_FromSystem
+  | Command_ControlVariables_FromOthre
   | Command_ControlVariables_FromEnemy
   | Command_ControlVariables_FromConstant
   | Command_ControlVariables_FromActor
