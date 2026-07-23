@@ -1,8 +1,8 @@
 import type {
-  Command_ControlVariables_FromWeapon,
   ParamArray_VariableFromParty,
   ParamArray_VariableFromItem,
   ParamArray_VariableFromArmor,
+  ParamArray_VariableFromWeapon,
 } from "@RpgTypes/rmmz/eventCommand";
 import type { Rmmz_Actor } from "@RpgTypes/rmmzRuntime";
 import type {
@@ -33,11 +33,11 @@ export const variableFromItem = (
 };
 
 export const variableFromWeapon = (
-  params: Command_ControlVariables_FromWeapon,
+  params: ParamArray_VariableFromWeapon,
   party: Rmmz_VariabeSourceParty,
   provider: Rmmz_VariableSourceProvider,
 ): number => {
-  const weapon = provider.dataWeapon(params.parameters[5]);
+  const weapon = provider.dataWeapon(params[5]);
   if (!weapon) {
     return 0;
   }
