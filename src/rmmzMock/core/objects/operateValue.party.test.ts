@@ -4,6 +4,7 @@ import type { Data_NamedItem } from "@RpgTypes/libs";
 import type {
   Command_ControlVariables_FromArmor,
   Command_ControlVariables_FromItem,
+  Command_ControlVariables_FromOthre,
   Command_ControlVariables_FromParty,
   Command_ControlVariables_FromWeapon,
   EventCommand,
@@ -111,7 +112,8 @@ type Command_GoodsUnion =
   | Command_ControlVariables_FromItem
   | Command_ControlVariables_FromWeapon
   | Command_ControlVariables_FromArmor
-  | Command_ControlVariables_FromParty;
+  | Command_ControlVariables_FromParty
+  | Command_ControlVariables_FromOthre;
 
 interface TestCase {
   testName: string;
