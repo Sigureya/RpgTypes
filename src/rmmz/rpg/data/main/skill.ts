@@ -136,6 +136,8 @@ export const filterUsableSkillsEx = <T>(
   const skillConditionTraits: Trait[] = filterSkillConditionTraits(traits);
   const mcr: number = traitMpCostRate(skillConditionTraits);
   return skills.filter((skill): boolean => {
+    // 関数呼び出しと追加の分岐で重いため、exと通常版は別実装になっている
+    // 同値性はテストで担保している
     const s = fn(skill);
     if (!s) {
       return false;
