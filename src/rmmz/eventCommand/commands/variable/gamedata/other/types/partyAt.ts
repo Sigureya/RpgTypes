@@ -9,20 +9,20 @@ export interface Command_ControlVariables_FromPartyAt extends EventCommandLike<
 > {
   code: typeof CONTROL_VARIABLES;
   indent: number;
-  parameters: ParamArray_VariableFromParty;
+  parameters: ParamArray_VariableFromPartyAt;
 }
 
-export interface ParamObject_VariableFromParty {
+export interface ParamObject_VariableFromPartyAt {
   startId: number;
   endId?: number;
-  operation?: VariableOperation;
+  memberIndex: number;
 }
 
-export type ParamArray_VariableFromParty = [
+export type ParamArray_VariableFromPartyAt = [
   rangeStartId: number,
   rangeEndId: number,
   operation: VariableOperation,
   operandGameData: 3,
   typeParty: 6,
-  param: number,
+  memberIndex: number,
 ];
