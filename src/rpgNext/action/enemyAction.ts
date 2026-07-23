@@ -1,4 +1,4 @@
-import type { Data_Skill, Data_State, Enemy_Action } from "@RpgTypes/rmmz";
+import type { Data_Skill, Enemy_Action } from "@RpgTypes/rmmz";
 import {
   ENEMY_ACTION_CONDITION_HP_RATE,
   ENEMY_ACTION_CONDITION_MP_RATE,
@@ -14,10 +14,14 @@ import type {
   Rmmz_Switches,
 } from "@RpgTypes/rmmzRuntime";
 
+// TS上でのテスト簡単にするための型指定
+// C#移植の際は通常のPartyのままで良い。仮想関数オーバーヘッドを避ける
+type Rmmz_Party_highestLevel = Pick<Rmmz_Party, "highestLevel">;
+
 export const filterUsableEnemyActions = (
   actions: ReadonlyArray<Enemy_Action>,
   battler: Rmmz_Enemy,
-  party: Rmmz_Party,
+  party: Rmmz_Party_highestLevel,
   switches: Rmmz_Switches,
   skillFn: (action: Enemy_Action) => Data_Skill | null | undefined,
 ): Enemy_Action[] => {
@@ -45,13 +49,15 @@ export const filterEnemyActionByRating = (
 };
 
 const findMaxRating = (actions: ReadonlyArray<Enemy_Action>): number => {
+  // C#実装はforループの方が速いはず。
+  // このライブラリはforやletを禁止しているのでreduceしている
   return actions.reduce((max, action) => Math.max(max, action.rating), 0);
 };
 
 export const enemyActionMeetsCondition = (
   action: Enemy_Action,
   enemy: Rmmz_Enemy,
-  party: Rmmz_Party,
+  party: Rmmz_Party_highestLevel,
   switches: Rmmz_Switches,
 ): boolean => {
   switch (action.conditionType) {
@@ -64,7 +70,7 @@ export const enemyActionMeetsCondition = (
     case ENEMY_ACTION_CONDITION_PARTY_LEVEL:
       return enemyActionMeetsConditionHighestLevel(action, party);
     case ENEMY_ACTION_CONDITION_STATE:
-      return enemyActionMeetsConditionState(action, enemy.states());
+      return enemy.isStateAffected(action.conditionParam1);
     case ENEMY_ACTION_CONDITION_SWITCH:
       return enemyActionMeetsConditionSwitch(action, switches);
   }
@@ -73,7 +79,7 @@ export const enemyActionMeetsCondition = (
 
 const enemyActionMeetsConditionHighestLevel = (
   action: Enemy_Action,
-  party: Rmmz_Party,
+  party: Rmmz_Party_highestLevel,
 ): boolean => {
   return party.highestLevel() >= action.conditionParam1;
 };
@@ -91,25 +97,18 @@ const enemyActionMeetsConditionTurn = (
 ): boolean => {
   if (param2 === 0) {
     return turnCount === param1;
-  } else {
-    return (
-      turnCount > 0 &&
-      turnCount >= param1 &&
-      turnCount % param2 === param1 % param2
-    );
   }
+  return (
+    turnCount > 0 &&
+    turnCount >= param1 &&
+    turnCount % param2 === param1 % param2
+  );
 };
+
 // 1つの関数の引数は可能な限り異なる型にする方針による実装
 const enemyActionMeetsConditionPointRate = (
   action: Enemy_Action,
   point: number,
 ): boolean => {
   return point >= action.conditionParam1 && point <= action.conditionParam2;
-};
-
-const enemyActionMeetsConditionState = (
-  action: Enemy_Action,
-  states: ReadonlyArray<Data_State>,
-): boolean => {
-  return states.some((state) => state.id === action.conditionParam1);
 };
