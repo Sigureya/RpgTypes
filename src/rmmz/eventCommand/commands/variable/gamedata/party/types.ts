@@ -23,6 +23,6 @@ export type ParamArray_VariableFromParty = [
   rangeEndId: number,
   operation: VariableOperation,
   operandGameData: 3,
-  typeSystem: 7,
+  typeParty: 6,
   param: number,
 ];

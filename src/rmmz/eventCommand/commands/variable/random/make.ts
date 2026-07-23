@@ -5,6 +5,13 @@ import type {
   ParamObject_VariableFromRandom,
 } from "./types";
 
+export const variableFromRandom = (
+  params: ParamArray_VariableFromRandom,
+  randomFn: (min: number, max: number) => number,
+): number => {
+  return randomFn(params[4], params[5]);
+};
+
 export const makeCommandVariableFromRandom = (
   params: ParamObject_VariableFromRandom,
   indent: number = 0,

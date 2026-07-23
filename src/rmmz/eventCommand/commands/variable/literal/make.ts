@@ -5,6 +5,12 @@ import type {
   ParamObject_VariableFromConstant,
 } from "./types";
 
+export const variableFromLiteral = (
+  params: ParamArray_VariableFromConstant,
+): number => {
+  return params[4];
+};
+
 export const makeCommandVariableFromConstant = (
   params: ParamObject_VariableFromConstant,
   indent: number = 0,
