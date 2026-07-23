@@ -1,4 +1,8 @@
-import type { Command_ControlVariables } from "@RpgTypes/rmmz/eventCommand";
+import type {
+  Command_ControlVariables,
+  ParamArray_Variable_FromGameData,
+} from "@RpgTypes/rmmz/eventCommand";
+import { variableFromLiteral } from "@RpgTypes/rmmz/eventCommand";
 import type {
   Rmmz_MapId,
   Rmmz_SystemCounter,
@@ -22,7 +26,32 @@ import type {
 } from "./types";
 
 export const variableFromCommand = (
-  command: Command_ControlVariables,
+  { parameters }: Command_ControlVariables,
+  provider: Rmmz_VariableSourceProvider,
+  temp: Rmmz_Temp,
+  map: Rmmz_MapId,
+  party: Rmmz_VariabeSourceParty,
+  system: Rmmz_SystemCounter,
+  timer: Rmmz_Timer,
+) => {
+  if (parameters[3] === 0) {
+    return variableFromLiteral(parameters);
+  }
+  if (parameters[3] === 3) {
+    return variableFromGameData(
+      parameters,
+      provider,
+      temp,
+      map,
+      party,
+      system,
+      timer,
+    );
+  }
+};
+
+export const variableFromGameData = (
+  params: ParamArray_Variable_FromGameData,
   provider: Rmmz_VariableSourceProvider,
   temp: Rmmz_Temp,
   map: Rmmz_MapId,
@@ -31,7 +60,6 @@ export const variableFromCommand = (
   timer: Rmmz_Timer,
   fallback: number = 0,
 ): number => {
-  const params = command.parameters;
   if (params[3] === 3) {
     if (params[4] === 3) {
       return variableFromActor(params, fallback, provider);
