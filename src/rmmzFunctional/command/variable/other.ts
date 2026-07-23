@@ -4,11 +4,11 @@ import type {
 } from "@RpgTypes/rmmz/eventCommand";
 import type {
   Rmmz_MapId,
-  Rmmz_Party,
   Rmmz_SystemCounter,
   Rmmz_Temp,
   Rmmz_Timer,
 } from "@RpgTypes/rmmzRuntime";
+import type { Rmmz_VariabeSourceParty } from "./types";
 
 export const variableFromLastData = (
   command: Command_ControlVariables_FromLastData,
@@ -20,7 +20,7 @@ export const variableFromLastData = (
 export const variableFromOther = (
   command: Command_ControlVariables_FromOthre,
   map: Rmmz_MapId,
-  party: Rmmz_Party,
+  party: Rmmz_VariabeSourceParty,
   system: Rmmz_SystemCounter,
   timer: Rmmz_Timer,
   fallback: number = 0,

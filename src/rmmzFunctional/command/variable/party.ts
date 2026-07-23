@@ -4,12 +4,14 @@ import type {
   Command_ControlVariables_FromWeapon,
   Command_ControlVariables_FromArmor,
 } from "@RpgTypes/rmmz/eventCommand";
-import type { Rmmz_Party, Rmmz_UnitPlayer } from "@RpgTypes/rmmzRuntime";
-import type { Rmmz_VariableSourceProvider } from "./types";
+import type {
+  Rmmz_VariabeSourceParty,
+  Rmmz_VariableSourceProvider,
+} from "./types";
 
 export const variableFromParty = (
   command: Command_ControlVariables_FromParty,
-  party: Rmmz_Party,
+  party: Rmmz_VariabeSourceParty,
 ): number => {
   const actor = party.members()[command.parameters[5]];
   return actor ? actor.actorId() : 0;
@@ -17,7 +19,7 @@ export const variableFromParty = (
 
 export const variableFromItem = (
   command: Command_ControlVariables_FromItem,
-  party: Rmmz_UnitPlayer,
+  party: Rmmz_VariabeSourceParty,
   provider: Rmmz_VariableSourceProvider,
 ): number => {
   const item = provider.dataItem(command.parameters[5]);
@@ -29,7 +31,7 @@ export const variableFromItem = (
 
 export const variableFromWeapon = (
   command: Command_ControlVariables_FromWeapon,
-  party: Rmmz_UnitPlayer,
+  party: Rmmz_VariabeSourceParty,
   provider: Rmmz_VariableSourceProvider,
 ): number => {
   const weapon = provider.dataWeapon(command.parameters[5]);
@@ -41,7 +43,7 @@ export const variableFromWeapon = (
 
 export const variableFromArmor = (
   command: Command_ControlVariables_FromArmor,
-  party: Rmmz_UnitPlayer,
+  party: Rmmz_VariabeSourceParty,
   provider: Rmmz_VariableSourceProvider,
 ): number => {
   const armor = provider.dataArmor(command.parameters[5]);
