@@ -1,14 +1,14 @@
 import { CONTROL_VARIABLES } from "@RpgTypes/libs";
 import type {
-  Command_ControlVariables_FromParty,
-  ParamArray_VariableFromParty,
-  ParamObject_VariableFromParty,
+  Command_ControlVariables_FromOthre,
+  ParamArray_VariableFromOther,
+  ParamObject_VariableFromOther,
 } from "./types";
 
 export const makeCommandVariableFromMapId = (
-  params: ParamObject_VariableFromParty,
+  params: ParamObject_VariableFromOther,
   indent: number = 0,
-): Command_ControlVariables_FromParty => {
+): Command_ControlVariables_FromOthre => {
   return {
     code: CONTROL_VARIABLES,
     indent,
@@ -17,9 +17,9 @@ export const makeCommandVariableFromMapId = (
 };
 
 export const makeCommandVariableFromPartySize = (
-  params: ParamObject_VariableFromParty,
+  params: ParamObject_VariableFromOther,
   indent: number = 0,
-): Command_ControlVariables_FromParty => {
+): Command_ControlVariables_FromOthre => {
   return {
     code: CONTROL_VARIABLES,
     indent,
@@ -28,9 +28,9 @@ export const makeCommandVariableFromPartySize = (
 };
 
 export const makeCommandVariableFromPartyGold = (
-  params: ParamObject_VariableFromParty,
+  params: ParamObject_VariableFromOther,
   indent: number = 0,
-): Command_ControlVariables_FromParty => {
+): Command_ControlVariables_FromOthre => {
   return {
     code: CONTROL_VARIABLES,
     indent,
@@ -39,9 +39,9 @@ export const makeCommandVariableFromPartyGold = (
 };
 
 export const makeCommandVariableFromPartySteps = (
-  params: ParamObject_VariableFromParty,
+  params: ParamObject_VariableFromOther,
   indent: number = 0,
-): Command_ControlVariables_FromParty => {
+): Command_ControlVariables_FromOthre => {
   return {
     code: CONTROL_VARIABLES,
     indent,
@@ -50,9 +50,9 @@ export const makeCommandVariableFromPartySteps = (
 };
 
 const paramToArray = (
-  params: ParamObject_VariableFromParty,
+  params: ParamObject_VariableFromOther,
   param: number,
-): ParamArray_VariableFromParty => [
+): ParamArray_VariableFromOther => [
   params.startId,
   params.endId ?? params.startId,
   params.operation ?? 0,

@@ -23,6 +23,6 @@ export type ParamArray_VariableFromOther = [
   rangeEndId: number,
   operation: VariableOperation,
   operandGameData: 3,
-  typeSystem: 7,
+  typeOther: 7,
   param: number,
 ];
