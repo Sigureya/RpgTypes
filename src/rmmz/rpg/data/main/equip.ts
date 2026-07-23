@@ -8,6 +8,7 @@ import {
   TRAIT_EQUIP_ARMOR_TYPE,
   TRAIT_EQUIP_SEAL,
   TRAIT_EQUIP_WEAPON_TYPE,
+  traitSet,
 } from "./traitContainers";
 
 export const canEquipWeapon = (
@@ -61,5 +62,31 @@ const isEquipmentEquipable = <T extends Data_Equipment>(
       return trait.dataId !== equipment.etypeId;
     }
     return true;
+  });
+};
+
+export const filterEquipableWeapons = (
+  traits: ReadonlyArray<Trait>,
+  equip: ReadonlyArray<Data_Weapon>,
+): Data_Weapon[] => {
+  const wtypes: ReadonlySet<number> = new Set(
+    traitSet(traits, TRAIT_EQUIP_WEAPON_TYPE),
+  );
+  const seald = new Set(traitSet(traits, TRAIT_EQUIP_SEAL));
+  return equip.filter((item) => {
+    return wtypes.has(item.wtypeId) && !seald.has(item.etypeId);
+  });
+};
+
+export const filterEquipableArmors = (
+  traits: ReadonlyArray<Trait>,
+  equip: ReadonlyArray<Data_Armor>,
+): Data_Armor[] => {
+  const atypes: ReadonlySet<number> = new Set(
+    traitSet(traits, TRAIT_EQUIP_ARMOR_TYPE),
+  );
+  const seald = new Set(traitSet(traits, TRAIT_EQUIP_SEAL));
+  return equip.filter((item) => {
+    return atypes.has(item.atypeId) && !seald.has(item.etypeId);
   });
 };
