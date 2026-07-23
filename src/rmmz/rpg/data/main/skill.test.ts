@@ -7,6 +7,7 @@ import {
   skillMpCost,
   filterUsableSkills,
   filterUsableSkillsWithWeapon,
+  filterUsableSkillsEx,
 } from "./skill";
 import type { Data_Weapon, Trait } from "./traitContainers";
 import {
@@ -69,6 +70,17 @@ const runTestCase = (testCase: TestCase) => {
       const expected = testCase.expected.canUse ? [testCase.skill] : [];
       expect(result).toEqual(expected);
     });
+    test("filterUsableSkillsEx", () => {
+      const result: Data_Skill[] = filterUsableSkillsEx(
+        [testCase.skill],
+        testCase.traits,
+        testCase.battler,
+        (skill: Data_Skill) => skill,
+      );
+      const expected = testCase.expected.canUse ? [testCase.skill] : [];
+      expect(result).toEqual(expected);
+    });
+
     test("filterUsableSkillsWithWeapon", () => {
       const result: Data_Skill[] = filterUsableSkillsWithWeapon(
         [testCase.skill],

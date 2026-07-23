@@ -8,6 +8,11 @@ import {
 } from "./traitContainers";
 import type { Data_Skill } from "./usableItems";
 
+// 移植向けの指示:C#への変換時、この型を扱う箇所は以下のように展開すること
+// これはインターフェースによるオーバーヘッドを避けるため。
+// tsではtpとmpを逆に指定する事故を避けるために型にしている
+// ts const fn(battler: Battler_SkillUser) :Result =>{...}
+// public Result fn(int mp,int tp){...}
 export interface Battler_SkillUser {
   mp: number;
   tp: number;
@@ -73,7 +78,9 @@ export const isSkillSealed = (
   });
 };
 
-const filterSkillConditionTraits = (traits: ReadonlyArray<Trait>): Trait[] => {
+export const filterSkillConditionTraits = (
+  traits: ReadonlyArray<Trait>,
+): Trait[] => {
   // スキルの使用条件判定に関わる特徴だけに絞り込む
   return traits.filter(isSkillConditionTrait);
 };
@@ -118,6 +125,23 @@ export const filterUsableSkillsWithWeapon = (
     return [];
   }
   return filterUsableSkills(w, traits, battler);
+};
+
+export const filterUsableSkillsEx = <T>(
+  skills: ReadonlyArray<T>,
+  traits: ReadonlyArray<Trait>,
+  battler: Battler_SkillUser,
+  fn: (skill: T) => Data_Skill | null | undefined,
+): T[] => {
+  const skillConditionTraits: Trait[] = filterSkillConditionTraits(traits);
+  const mcr: number = traitMpCostRate(skillConditionTraits);
+  return skills.filter((skill): boolean => {
+    const s = fn(skill);
+    if (!s) {
+      return false;
+    }
+    return isSkillUsable(mcr, battler, s, skillConditionTraits);
+  });
 };
 
 export const filterUsableSkills = (
