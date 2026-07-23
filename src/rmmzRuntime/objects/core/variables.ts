@@ -12,5 +12,6 @@ export interface Rmmz_Switches {
 
 export interface Rmmz_SelfSwitches {
   value(key: string): boolean;
+  value(key: [mapId: number, eventId: number, name: string]): boolean;
   setValue(key: string, value: boolean): void;
 }
