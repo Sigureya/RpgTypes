@@ -1,8 +1,6 @@
 import type { ParamArray, StatusParamObject } from "./members";
 import { makeParamArray } from "./members";
 import type { Data_TraitContainer, Trait } from "./trait";
-import { TRAIT_EQUIP_SEAL, TRAIT_EQUIP_WEAPON_TYPE, traitSet } from "./trait";
-import type { Data_Weapon } from "./weapon";
 
 export interface Data_Equipment extends Data_TraitContainer {
   name: string;
@@ -40,17 +38,4 @@ export const calcEquipParamsObject = (
     },
     { mhp: 0, mmp: 0, atk: 0, def: 0, mat: 0, mdf: 0, agi: 0, luk: 0 },
   );
-};
-
-export const filterEquipableWeapons = (
-  traits: ReadonlyArray<Trait>,
-  equip: ReadonlyArray<Data_Weapon>,
-): Data_Weapon[] => {
-  const wtypes: ReadonlySet<number> = new Set(
-    traitSet(traits, TRAIT_EQUIP_WEAPON_TYPE),
-  );
-  const seald = new Set(traitSet(traits, TRAIT_EQUIP_SEAL));
-  return equip.filter((item) => {
-    return wtypes.has(item.wtypeId) && !seald.has(item.wtypeId);
-  });
 };
