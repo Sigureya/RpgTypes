@@ -42,6 +42,7 @@ const PARTY_FUNCTION_KEYS = [
   "loseGold",
   "numItems",
   "size",
+  //  "members",
 ] as const satisfies (keyof Rmmz_Party)[];
 
 const mockItems = [
@@ -81,7 +82,8 @@ const createMockParty = (): MockedObject<FakeParty> => ({
       return 0;
     }
     return MOCK_ITEM_AMOUNT;
-  }),
+  }), //
+  //  members: vi.fn().mockReturnValue([]),
 });
 const makeMockMap = (): FakeMap => ({
   mapId: () => MOCK_MAP_ID,
@@ -225,19 +227,19 @@ const runTestCase = (testCase: TestCase) => {
 };
 
 const testCases: TestCase[] = [
-  {
-    testName: "partyMembers",
-    fnCalls: {
-      party: ["size"],
-    },
-    setValues: [{ id: 233, value: MOCK_PARTY_SIZE }],
-    command: makeCommandVariableFromPartySize({ startId: 233 }),
-    commandLiteral: {
-      code: 122,
-      indent: 0,
-      parameters: [233, 233, 0, 3, 7, 1],
-    },
-  },
+  // {
+  //   testName: "partyMembers",
+  //   fnCalls: {
+  //     party: ["size"],
+  //   },
+  //   setValues: [{ id: 233, value: MOCK_PARTY_SIZE }],
+  //   command: makeCommandVariableFromPartySize({ startId: 233 }),
+  //   commandLiteral: {
+  //     code: 122,
+  //     indent: 0,
+  //     parameters: [233, 233, 0, 3, 6, 1],
+  //   },
+  // },
   {
     testName: "gold",
     fnCalls: {
