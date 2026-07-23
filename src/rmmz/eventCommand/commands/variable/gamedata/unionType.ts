@@ -22,12 +22,10 @@ import type {
 } from "./mapCharactor";
 import type {
   Command_ControlVariables_FromOthre,
+  Command_ControlVariables_FromPartyAt,
   ParamArray_VariableFromOther,
-} from "./other";
-import type {
-  Command_ControlVariables_FromParty,
   ParamArray_VariableFromParty,
-} from "./other/partySize";
+} from "./other";
 import type {
   Command_ControlVariables_FromLastData,
   ParamArray_VariableFromLastData,
@@ -52,7 +50,7 @@ export type Command_ControlVariables_FromGameData =
   | Command_ControlVariables_FromVariable
   | Command_ControlVariables_FromRandom
   | Command_ControlVariables_FromMapCharactor
-  | Command_ControlVariables_FromParty
+  | Command_ControlVariables_FromPartyAt
   | Command_ControlVariables_FromArmor
   | Command_ControlVariables_FromItem
   | Command_ControlVariables_FromWeapon;

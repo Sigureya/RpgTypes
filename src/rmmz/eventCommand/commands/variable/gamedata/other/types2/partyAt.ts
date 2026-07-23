@@ -4,7 +4,7 @@ import type {
   VariableOperation,
 } from "@RpgTypes/libs";
 
-export interface Command_ControlVariables_FromParty extends EventCommandLike<
+export interface Command_ControlVariables_FromPartyAt extends EventCommandLike<
   typeof CONTROL_VARIABLES
 > {
   code: typeof CONTROL_VARIABLES;
