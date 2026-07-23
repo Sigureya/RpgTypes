@@ -1,4 +1,5 @@
 import { CONTROL_VARIABLES } from "@RpgTypes/libs";
+import type { Command_ControlVariables_FromParty } from "./partySize";
 import type {
   Command_ControlVariables_FromOthre,
   ParamArray_VariableFromOther,
@@ -19,11 +20,18 @@ export const makeCommandVariableFromMapId = (
 export const makeCommandVariableFromPartySize = (
   params: ParamObject_VariableFromOther,
   indent: number = 0,
-): Command_ControlVariables_FromOthre => {
+): Command_ControlVariables_FromParty => {
   return {
     code: CONTROL_VARIABLES,
     indent,
-    parameters: paramToArray(params, 1),
+    parameters: [
+      params.startId,
+      params.endId ?? params.startId,
+      params.operation ?? 0,
+      3,
+      6,
+      1,
+    ],
   };
 };
 
