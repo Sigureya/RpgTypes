@@ -1,5 +1,5 @@
 import type {
-  ParamArray_VariableFromParty,
+  ParamArray_VariableFromPartyAt,
   ParamArray_VariableFromItem,
   ParamArray_VariableFromArmor,
   ParamArray_VariableFromWeapon,
@@ -11,7 +11,7 @@ import type {
 } from "./types";
 
 export const variableFromParty = (
-  params: ParamArray_VariableFromParty,
+  params: ParamArray_VariableFromPartyAt,
   party: Rmmz_VariabeSourceParty,
 ): number => {
   const members: Rmmz_Actor[] = party.members();
