@@ -17,7 +17,7 @@ export const makeCommandBranchByActorInParty = (
   return {
     code: 111,
     indent: indent,
-    parameters: [4, actorId, 0, 0],
+    parameters: [4, actorId, 0],
   };
 };
 
