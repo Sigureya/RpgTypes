@@ -17,6 +17,7 @@ export interface Rmmz_Party extends Rmmz_Unit<Rmmz_Actor>, Rmmz_UnitPlayer {
   canInput(): boolean;
   _actors: number[];
   size(): number;
+  highestLevel(): number;
 }
 
 export interface Rmmz_Troop

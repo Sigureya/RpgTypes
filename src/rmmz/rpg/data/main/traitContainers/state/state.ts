@@ -21,7 +21,7 @@ export const isMoveableState = (state: Data_State): boolean => {
 
 export const isConfusedState = (state: Data_State): boolean => {
   return (
-    STATE_RESTRICTION_CONFUSION_RANDOM_OPPONENT >= state.restriction &&
+    STATE_RESTRICTION_CONFUSION_RANDOM_OPPONENT <= state.restriction &&
     state.restriction <= STATE_RESTRICTION_CONFUSION_RANDOM_FRIEND
   );
 };
