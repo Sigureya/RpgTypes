@@ -8,7 +8,9 @@ import type {
 } from "./types/actor";
 import type { Command_BranchByActor } from "./types/command";
 
-export const makeCommand_BranchByActorInParty = (
+//　内部のマジックナンバーを隠蔽するために似た関数を複数作っている
+
+export const makeCommandBranchByActorInParty = (
   actorId: number,
   indent: number = 0,
 ): Command_BranchByActor => {
@@ -19,7 +21,7 @@ export const makeCommand_BranchByActorInParty = (
   };
 };
 
-export const makeCommand_BranchByActorName = (
+export const makeCommandBranchByActorName = (
   { actorId, name }: ParamObject_BranchActorByName,
   indent: number = 0,
 ): Command_BranchByActor => {
@@ -30,7 +32,7 @@ export const makeCommand_BranchByActorName = (
   };
 };
 
-export const makeCommand_BranchByActorClass = (
+export const makeCommandBranchByActorClass = (
   { actorId, classId }: ParamObject_BranchActorByClass,
   indent: number = 0,
 ): Command_BranchByActor => {
@@ -41,7 +43,7 @@ export const makeCommand_BranchByActorClass = (
   };
 };
 
-export const makeCommand_BranchByActorSkill = (
+export const makeCommandBranchByActorSkill = (
   { actorId, skillId }: ParamObject_BranchActorBySkill,
   indent: number = 0,
 ): Command_BranchByActor => {
@@ -52,7 +54,7 @@ export const makeCommand_BranchByActorSkill = (
   };
 };
 
-export const makeCommand_BranchByActorWeapon = (
+export const makeCommandBranchByActorWeapon = (
   { actorId, weaponId }: ParamObject_BranchActorByWeapon,
   indent: number = 0,
 ): Command_BranchByActor => {
@@ -63,7 +65,7 @@ export const makeCommand_BranchByActorWeapon = (
   };
 };
 
-export const makeCommand_BranchByActorArmor = (
+export const makeCommandBranchByActorArmor = (
   { actorId, armorId }: ParamObject_BranchActorByArmor,
   indent: number = 0,
 ): Command_BranchByActor => {
@@ -74,7 +76,7 @@ export const makeCommand_BranchByActorArmor = (
   };
 };
 
-export const makeCommand_BranchByActorState = (
+export const makeCommandBranchByActorState = (
   { actorId, stateId }: ParamObject_BranchActorByState,
   indent: number = 0,
 ): Command_BranchByActor => {
