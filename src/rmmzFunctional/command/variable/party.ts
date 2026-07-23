@@ -1,26 +1,31 @@
 import type {
-  Command_ControlVariables_FromParty,
-  Command_ControlVariables_FromItem,
-  Command_ControlVariables_FromWeapon,
-  Command_ControlVariables_FromArmor,
+  ParamArray_VariableFromParty,
+  ParamArray_VariableFromItem,
+  ParamArray_VariableFromArmor,
+  ParamArray_VariableFromWeapon,
 } from "@RpgTypes/rmmz/eventCommand";
-import type { Rmmz_Party, Rmmz_UnitPlayer } from "@RpgTypes/rmmzRuntime";
-import type { Provider } from "./types";
+import type { Rmmz_Actor } from "@RpgTypes/rmmzRuntime";
+import type {
+  Rmmz_VariabeSourceParty,
+  Rmmz_VariableSourceProvider,
+} from "./types";
 
 export const variableFromParty = (
-  command: Command_ControlVariables_FromParty,
-  party: Rmmz_Party,
+  params: ParamArray_VariableFromParty,
+  party: Rmmz_VariabeSourceParty,
 ): number => {
-  const actor = party.members()[command.parameters[5]];
+  const members: Rmmz_Actor[] = party.members();
+  const index = params[5];
+  const actor = members[index];
   return actor ? actor.actorId() : 0;
 };
 
 export const variableFromItem = (
-  command: Command_ControlVariables_FromItem,
-  party: Rmmz_UnitPlayer,
-  provider: Provider,
+  params: ParamArray_VariableFromItem,
+  party: Rmmz_VariabeSourceParty,
+  provider: Rmmz_VariableSourceProvider,
 ): number => {
-  const item = provider.dataItem(command.parameters[5]);
+  const item = provider.dataItem(params[5]);
   if (!item) {
     return 0;
   }
@@ -28,11 +33,11 @@ export const variableFromItem = (
 };
 
 export const variableFromWeapon = (
-  command: Command_ControlVariables_FromWeapon,
-  party: Rmmz_UnitPlayer,
-  provider: Provider,
+  params: ParamArray_VariableFromWeapon,
+  party: Rmmz_VariabeSourceParty,
+  provider: Rmmz_VariableSourceProvider,
 ): number => {
-  const weapon = provider.dataWeapon(command.parameters[5]);
+  const weapon = provider.dataWeapon(params[5]);
   if (!weapon) {
     return 0;
   }
@@ -40,11 +45,11 @@ export const variableFromWeapon = (
 };
 
 export const variableFromArmor = (
-  command: Command_ControlVariables_FromArmor,
-  party: Rmmz_UnitPlayer,
-  provider: Provider,
+  params: ParamArray_VariableFromArmor,
+  party: Rmmz_VariabeSourceParty,
+  provider: Rmmz_VariableSourceProvider,
 ): number => {
-  const armor = provider.dataArmor(command.parameters[5]);
+  const armor = provider.dataArmor(params[5]);
   if (!armor) {
     return 0;
   }

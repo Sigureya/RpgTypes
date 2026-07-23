@@ -1,14 +1,14 @@
 import { CONTROL_VARIABLES } from "@RpgTypes/libs";
 import type {
-  Command_ControlVariables_FromSystem,
-  ParamArray_VariableFromSystem,
-  ParamObject_VariableFromSystem,
+  Command_ControlVariables_FromOthre,
+  ParamArray_VariableFromOther,
+  ParamObject_VariableFromOther,
 } from "./types";
 
 export const makeCommandVariableFromSystemMapId = (
-  params: ParamObject_VariableFromSystem,
+  params: ParamObject_VariableFromOther,
   indent: number = 0,
-): Command_ControlVariables_FromSystem => {
+): Command_ControlVariables_FromOthre => {
   return {
     code: CONTROL_VARIABLES,
     indent,
@@ -17,9 +17,9 @@ export const makeCommandVariableFromSystemMapId = (
 };
 
 export const makeCommandVariableFromSystemPartyMemberCount = (
-  params: ParamObject_VariableFromSystem,
+  params: ParamObject_VariableFromOther,
   indent: number = 0,
-): Command_ControlVariables_FromSystem => {
+): Command_ControlVariables_FromOthre => {
   return {
     code: CONTROL_VARIABLES,
     indent,
@@ -28,9 +28,9 @@ export const makeCommandVariableFromSystemPartyMemberCount = (
 };
 
 export const makeCommandVariableFromSystemGold = (
-  params: ParamObject_VariableFromSystem,
+  params: ParamObject_VariableFromOther,
   indent: number = 0,
-): Command_ControlVariables_FromSystem => {
+): Command_ControlVariables_FromOthre => {
   return {
     code: CONTROL_VARIABLES,
     indent,
@@ -39,9 +39,9 @@ export const makeCommandVariableFromSystemGold = (
 };
 
 export const makeCommandVariableFromSystemSteps = (
-  params: ParamObject_VariableFromSystem,
+  params: ParamObject_VariableFromOther,
   indent: number = 0,
-): Command_ControlVariables_FromSystem => {
+): Command_ControlVariables_FromOthre => {
   return {
     code: CONTROL_VARIABLES,
     indent,
@@ -50,9 +50,9 @@ export const makeCommandVariableFromSystemSteps = (
 };
 
 export const makeCommandVariableFromSystemPlayTime = (
-  params: ParamObject_VariableFromSystem,
+  params: ParamObject_VariableFromOther,
   indent: number = 0,
-): Command_ControlVariables_FromSystem => {
+): Command_ControlVariables_FromOthre => {
   return {
     code: CONTROL_VARIABLES,
     indent,
@@ -61,9 +61,9 @@ export const makeCommandVariableFromSystemPlayTime = (
 };
 
 export const makeCommandVariableFromSystemTimer = (
-  params: ParamObject_VariableFromSystem,
+  params: ParamObject_VariableFromOther,
   indent: number = 0,
-): Command_ControlVariables_FromSystem => {
+): Command_ControlVariables_FromOthre => {
   return {
     code: CONTROL_VARIABLES,
     indent,
@@ -72,9 +72,9 @@ export const makeCommandVariableFromSystemTimer = (
 };
 
 export const makeCommandVariableFromSystemSaveCount = (
-  params: ParamObject_VariableFromSystem,
+  params: ParamObject_VariableFromOther,
   indent: number = 0,
-): Command_ControlVariables_FromSystem => {
+): Command_ControlVariables_FromOthre => {
   return {
     code: CONTROL_VARIABLES,
     indent,
@@ -83,9 +83,9 @@ export const makeCommandVariableFromSystemSaveCount = (
 };
 
 export const makeCommandVariableFromSystemBattleCount = (
-  params: ParamObject_VariableFromSystem,
+  params: ParamObject_VariableFromOther,
   indent: number = 0,
-): Command_ControlVariables_FromSystem => {
+): Command_ControlVariables_FromOthre => {
   return {
     code: CONTROL_VARIABLES,
     indent,
@@ -94,9 +94,9 @@ export const makeCommandVariableFromSystemBattleCount = (
 };
 
 export const makeCommandVariableFromSystemWinCount = (
-  params: ParamObject_VariableFromSystem,
+  params: ParamObject_VariableFromOther,
   indent: number = 0,
-): Command_ControlVariables_FromSystem => {
+): Command_ControlVariables_FromOthre => {
   return {
     code: CONTROL_VARIABLES,
     indent,
@@ -105,9 +105,9 @@ export const makeCommandVariableFromSystemWinCount = (
 };
 
 export const makeCommandVariableFromSystemEscapeCount = (
-  params: ParamObject_VariableFromSystem,
+  params: ParamObject_VariableFromOther,
   indent: number = 0,
-): Command_ControlVariables_FromSystem => {
+): Command_ControlVariables_FromOthre => {
   return {
     code: CONTROL_VARIABLES,
     indent,
@@ -116,9 +116,9 @@ export const makeCommandVariableFromSystemEscapeCount = (
 };
 
 const paramToArray = (
-  params: ParamObject_VariableFromSystem,
+  params: ParamObject_VariableFromOther,
   param: number,
-): ParamArray_VariableFromSystem => [
+): ParamArray_VariableFromOther => [
   params.startId,
   params.endId ?? params.startId,
   params.operation ?? 0,

@@ -1,31 +1,31 @@
 import type {
-  Command_ControlVariables_FromLastData,
-  Command_ControlVariables_FromSystem,
+  ParamArray_VariableFromLastData,
+  ParamArray_VariableFromOther,
 } from "@RpgTypes/rmmz/eventCommand";
 import type {
   Rmmz_MapId,
-  Rmmz_Party,
   Rmmz_SystemCounter,
   Rmmz_Temp,
   Rmmz_Timer,
 } from "@RpgTypes/rmmzRuntime";
+import type { Rmmz_VariabeSourceParty } from "./types";
 
 export const variableFromLastData = (
-  command: Command_ControlVariables_FromLastData,
+  params: ParamArray_VariableFromLastData,
   temp: Rmmz_Temp,
 ): number => {
-  return temp.lastActionData(command.parameters[5]);
+  return temp.lastActionData(params[5]);
 };
 
 export const variableFromOther = (
-  command: Command_ControlVariables_FromSystem,
+  params: ParamArray_VariableFromOther,
   map: Rmmz_MapId,
-  party: Rmmz_Party,
+  party: Rmmz_VariabeSourceParty,
   system: Rmmz_SystemCounter,
   timer: Rmmz_Timer,
   fallback: number = 0,
 ): number => {
-  switch (command.parameters[5]) {
+  switch (params[5]) {
     case 0:
       return map.mapId();
 

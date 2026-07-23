@@ -4,21 +4,21 @@ import type {
   VariableOperation,
 } from "@RpgTypes/libs";
 
-export interface Command_ControlVariables_FromSystem extends EventCommandLike<
+export interface Command_ControlVariables_FromOthre extends EventCommandLike<
   typeof CONTROL_VARIABLES
 > {
   code: typeof CONTROL_VARIABLES;
   indent: number;
-  parameters: ParamArray_VariableFromSystem;
+  parameters: ParamArray_VariableFromOther;
 }
 
-export interface ParamObject_VariableFromSystem {
+export interface ParamObject_VariableFromOther {
   startId: number;
   endId?: number;
   operation?: VariableOperation;
 }
 
-export type ParamArray_VariableFromSystem = [
+export type ParamArray_VariableFromOther = [
   rangeStartId: number,
   rangeEndId: number,
   operation: VariableOperation,

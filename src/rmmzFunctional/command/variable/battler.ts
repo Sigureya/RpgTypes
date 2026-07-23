@@ -1,21 +1,21 @@
 import type {
-  Command_ControlVariables_FromActor,
-  Command_ControlVariables_FromEnemy,
-  Command_ControlVariables_FromMapCharactor,
+  ParamArray_VariableFromActorStatus,
+  ParamArray_VariableFromEnemyStatus,
+  ParamArray_VariableFromMapCharactor,
 } from "@RpgTypes/rmmz/eventCommand";
-import type { Provider } from "./types";
+import type { Rmmz_VariableSourceProvider } from "./types";
 
 export const variableFromActor = (
-  command: Command_ControlVariables_FromActor,
+  params: ParamArray_VariableFromActorStatus,
   fallback: number,
-  provider: Provider,
+  provider: Rmmz_VariableSourceProvider,
 ): number => {
-  const actor = provider.gameActor(command.parameters[5]);
+  const actor = provider.gameActor(params[5]);
   if (!actor) {
     return fallback;
   }
 
-  const kind: number = command.parameters[6];
+  const kind: number = params[6];
   if (kind >= 4 && kind <= 11) {
     const paramId: number = kind - 4;
     return actor.param(paramId);
@@ -38,15 +38,15 @@ export const variableFromActor = (
 };
 
 export const variableFromEnemy = (
-  command: Command_ControlVariables_FromEnemy,
+  params: ParamArray_VariableFromEnemyStatus,
   fallback: number,
-  provider: Provider,
+  provider: Rmmz_VariableSourceProvider,
 ): number => {
-  const enemy = provider.gameEnemy(command.parameters[5]);
+  const enemy = provider.gameEnemy(params[5]);
   if (!enemy) {
     return fallback;
   }
-  const kind: number = command.parameters[6];
+  const kind: number = params[6];
   if (kind >= 2 && kind <= 9) {
     const paramId: number = kind - 2;
     return enemy.param(paramId);
@@ -63,15 +63,15 @@ export const variableFromEnemy = (
 };
 
 export const variableFromMapCharactor = (
-  command: Command_ControlVariables_FromMapCharactor,
+  params: ParamArray_VariableFromMapCharactor,
   fallback: number,
-  provider: Provider,
+  provider: Rmmz_VariableSourceProvider,
 ): number => {
-  const character = provider.character(command.parameters[5]);
+  const character = provider.character(params[5]);
   if (!character) {
     return fallback;
   }
-  const kind: number = command.parameters[6];
+  const kind: number = params[6];
   switch (kind) {
     case 0:
       return character.x;
