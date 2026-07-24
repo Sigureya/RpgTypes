@@ -4,7 +4,19 @@ import type {
   Data_Weapon,
 } from "@RpgTypes/rmmz/rpg";
 
-export interface Rmmz_UnitPlayer {
+export interface Rmmz_VariableSourceParty<
+  Battler extends { actorId(): number },
+> {
+  numItems(item: Data_AnyGoodsUnion, includeEquip?: boolean): number;
+  gold(): number;
+  steps(): number;
+  members(): Battler[];
+  size(): number;
+}
+
+export interface Rmmz_UnitPlayer<
+  Battler extends { actorId(): number },
+> extends Rmmz_VariableSourceParty<Battler> {
   steps(): number;
   gold(): number;
   gainGold(amount: number): void;
