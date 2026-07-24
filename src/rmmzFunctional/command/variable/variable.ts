@@ -23,7 +23,7 @@ import {
   variableFromItem,
   variableFromArmor,
   variableFromWeapon,
-  variableFromParty,
+  variableFromPartyAt,
 } from "./party";
 import type {
   Rmmz_VariabeSourceParty,
@@ -91,7 +91,7 @@ export const variableFromGameData = (
     case 5:
       return variableFromMapCharactor(params, fallback, provider);
     case 6:
-      return variableFromParty(params, party);
+      return variableFromPartyAt(params, party);
     case 7:
       return variableFromOther(params, map, party, system, timer, fallback);
     case 8:

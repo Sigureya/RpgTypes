@@ -5,9 +5,8 @@ import type {
   Command_ControlVariables_FromArmor,
   Command_ControlVariables_FromItem,
   Command_ControlVariables_FromOthre,
-  Command_ControlVariables_FromParty,
+  Command_ControlVariables_FromPartyAt,
   Command_ControlVariables_FromWeapon,
-  EventCommand,
 } from "@RpgTypes/rmmz/eventCommand";
 import {
   makeCommandVariableFromArmor,
@@ -17,6 +16,7 @@ import {
   makeCommandVariableFromPartySteps,
   makeCommandVariableFromWeapon,
 } from "@RpgTypes/rmmz/eventCommand";
+import type { Rmmz_VariabeSourceParty } from "@RpgTypes/rmmzFunctional/command/variable/types";
 import type {
   Rmmz_Interpreter,
   Rmmz_Party,
@@ -38,12 +38,10 @@ const MOCK_ITEM_AMOUNT = 99;
 const PARTY_FUNCTION_KEYS = [
   "gold",
   "steps",
-  "gainGold",
-  "loseGold",
   "numItems",
   "size",
-  //  "members",
-] as const satisfies (keyof Rmmz_Party)[];
+  "members",
+] as const satisfies (keyof Rmmz_VariabeSourceParty)[];
 
 const mockItems = [
   null,
@@ -72,8 +70,6 @@ const createMockedVariable = (): MockedObject<Rmmz_Variables> => ({
 type FakeParty = Pick<Rmmz_Party, (typeof PARTY_FUNCTION_KEYS)[number]>;
 
 const createMockParty = (): MockedObject<FakeParty> => ({
-  gainGold: vi.fn(),
-  loseGold: vi.fn(),
   size: vi.fn().mockReturnValue(MOCK_PARTY_SIZE),
   gold: vi.fn().mockReturnValue(MOCK_GOLD),
   steps: vi.fn().mockReturnValue(MOCK_STEPS),
@@ -83,7 +79,7 @@ const createMockParty = (): MockedObject<FakeParty> => ({
     }
     return MOCK_ITEM_AMOUNT;
   }), //
-  //  members: vi.fn().mockReturnValue([]),
+  members: vi.fn().mockReturnValue([]),
 });
 const makeMockMap = (): FakeMap => ({
   mapId: () => MOCK_MAP_ID,
@@ -114,7 +110,7 @@ type Command_GoodsUnion =
   | Command_ControlVariables_FromItem
   | Command_ControlVariables_FromWeapon
   | Command_ControlVariables_FromArmor
-  | Command_ControlVariables_FromParty
+  | Command_ControlVariables_FromPartyAt
   | Command_ControlVariables_FromOthre;
 
 interface TestCase {
@@ -160,7 +156,7 @@ const itemTest = (testCase: TestCase, item: Data_NamedItem | null) => {
     stubGlobal(mocks);
 
     const interpreter = createMockedInterpreter();
-    interpreter.setup([testCase.command as EventCommand], 0);
+    interpreter.setup([testCase.command], 0);
     interpreter.executeCommand();
     expect(mocks.mockParty.numItems).toHaveBeenCalledWith(item);
   });
@@ -227,19 +223,19 @@ const runTestCase = (testCase: TestCase) => {
 };
 
 const testCases: TestCase[] = [
-  // {
-  //   testName: "partyMembers",
-  //   fnCalls: {
-  //     party: ["size"],
-  //   },
-  //   setValues: [{ id: 233, value: MOCK_PARTY_SIZE }],
-  //   command: makeCommandVariableFromPartySize({ startId: 233 }),
-  //   commandLiteral: {
-  //     code: 122,
-  //     indent: 0,
-  //     parameters: [233, 233, 0, 3, 6, 1],
-  //   },
-  // },
+  {
+    testName: "partyMembers",
+    fnCalls: {
+      party: ["size"],
+    },
+    setValues: [{ id: 233, value: MOCK_PARTY_SIZE }],
+    command: makeCommandVariableFromPartySize({ startId: 233 }),
+    commandLiteral: {
+      code: 122,
+      indent: 0,
+      parameters: [233, 233, 0, 3, 7, 1],
+    },
+  },
   {
     testName: "gold",
     fnCalls: {
