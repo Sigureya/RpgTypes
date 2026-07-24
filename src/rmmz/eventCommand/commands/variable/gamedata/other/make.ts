@@ -97,8 +97,8 @@ const paramToArray = (
   params: ParamObject_VariableFromOther,
   param: number,
 ): ParamArray_VariableFromOther => [
-  params.variableId,
-  params.endId ?? params.variableId,
+  params.startId,
+  params.endId ?? params.startId,
   params.operation ?? 0,
   3,
   7,

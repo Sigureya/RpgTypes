@@ -13,7 +13,7 @@ export interface Command_ControlVariables_FromOthre extends EventCommandLike<
 }
 
 export interface ParamObject_VariableFromOther {
-  variableId: number;
+  startId: number;
   endId?: number;
   operation?: VariableOperation;
 }
