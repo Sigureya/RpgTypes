@@ -7,8 +7,8 @@ import type {
   Rmmz_SystemCounter,
   Rmmz_Temp,
   Rmmz_Timer,
+  Rmmz_VariableSourceParty,
 } from "@RpgTypes/rmmzRuntime";
-import type { Rmmz_VariabeSourceParty } from "./types";
 
 export const variableFromLastData = (
   params: ParamArray_VariableFromLastData,
@@ -20,7 +20,7 @@ export const variableFromLastData = (
 export const variableFromOther = (
   params: ParamArray_VariableFromOther,
   map: Rmmz_MapId,
-  party: Rmmz_VariabeSourceParty,
+  party: Rmmz_VariableSourceParty,
   system: Rmmz_SystemCounter,
   timer: Rmmz_Timer,
   fallback: number = 0,
