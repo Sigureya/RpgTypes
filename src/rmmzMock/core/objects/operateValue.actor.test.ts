@@ -26,7 +26,11 @@ import {
   makeCommandVariableFromActorMdf,
 } from "@RpgTypes/rmmz/eventCommand";
 import { ACTOR_STATUS } from "@RpgTypes/rmmz/eventCommand/commands/variable/gamedata/actor/dataSource";
-import type { Rmmz_Actor } from "@RpgTypes/rmmzRuntime";
+import { variableFromActor } from "@RpgTypes/rmmzFunctional/command/variable/battler";
+import type {
+  Rmmz_VariableSourceActor,
+  Rmmz_VariableSourceProvider,
+} from "@RpgTypes/rmmzFunctional/command/variable/types";
 import type { Rmmz_Variables } from "@RpgTypes/rmmzRuntime";
 import type { FakeMap } from "./fakes/types";
 import { Game_Interpreter } from "./rmmz_objects";
@@ -43,25 +47,20 @@ const MOCK_ACTOR_PARAM_VALUE = 30;
 
 const MOCK_OLD_VALUE = 24;
 
-type FakeActor = Pick<
-  Rmmz_Actor,
-  "currentExp" | "param" | "level" | "hp" | "mp" | "tp"
->;
-
 interface FakeActors {
-  actor(actorId: number): FakeActor | null;
+  actor(actorId: number): Rmmz_VariableSourceActor | null;
 }
 
 const createFakeMap = (): FakeMap => ({
   mapId: () => 1,
 });
 const createMockedActors = (
-  actor: FakeActor | null,
+  actor: Rmmz_VariableSourceActor | null,
 ): MockedObject<FakeActors> => ({
   actor: vi.fn().mockReturnValue(actor),
 });
 
-const createMockedActor = (): MockedObject<FakeActor> => ({
+const createMockedActor = (): MockedObject<Rmmz_VariableSourceActor> => ({
   hp: MOCK_ACTOR_HP,
   mp: MOCK_ACTOR_MP,
   tp: MOCK_ACTOR_TP,
@@ -77,6 +76,18 @@ const createMockedVariable = (): MockedObject<Rmmz_Variables> => ({
   onChange: vi.fn(),
 });
 
+const createMockProvider = (
+  actor: Rmmz_VariableSourceActor | null,
+): MockedObject<Rmmz_VariableSourceProvider> => ({
+  character: vi.fn().mockThrow(new Error("character not implemented")),
+  gameActor: vi.fn().mockReturnValue(actor),
+  gameEnemy: vi.fn().mockThrow(new Error("gameEnemy not implemented")),
+  dataItem: vi.fn().mockThrow(new Error("dataItem not implemented")),
+  dataWeapon: vi.fn().mockThrow(new Error("dataWeapon not implemented")),
+  dataArmor: vi.fn().mockThrow(new Error("dataArmor not implemented")),
+  random: vi.fn().mockThrow(new Error("random not implemented")),
+});
+
 interface TestCase {
   actorId: number;
   description: string;
@@ -85,6 +96,7 @@ interface TestCase {
   command: Command_ControlVariables_FromActor;
   commandLiteral: Command_ControlVariables_FromActor;
   setValues: { id: number; value: number }[];
+  expectedResult: number;
 }
 
 const runTestCase = (testCase: TestCase) => {
@@ -92,7 +104,18 @@ const runTestCase = (testCase: TestCase) => {
     test("literal equality", () => {
       expect(testCase.command).toEqual(testCase.commandLiteral);
     });
-
+    test("execute command", () => {
+      const actor = createMockedActor();
+      const provider = createMockProvider(actor);
+      const result = variableFromActor(
+        testCase.commandLiteral.parameters,
+        MOCK_OLD_VALUE,
+        provider,
+      );
+      expect(result).toBe(testCase.expectedResult);
+      expect(provider.gameActor).toHaveBeenCalledOnce();
+      expect(provider.gameActor).toHaveBeenCalledWith(testCase.actorId);
+    });
     test("actor null", () => {
       const mockedActors = createMockedActors(null);
       const mockedVariables = createMockedVariable();
@@ -131,7 +154,7 @@ const runTestCase = (testCase: TestCase) => {
       Math.randomInt = randomInt;
 
       const interpreter = new Game_Interpreter();
-      interpreter.setup([testCase.commandLiteral as EventCommand], 0);
+      interpreter.setup([testCase.commandLiteral], 0);
       interpreter.executeCommand();
       expect(mockedActors.actor).toHaveBeenCalledWith(testCase.actorId);
       if (testCase.paramIndex === undefined) {
@@ -154,7 +177,7 @@ const runTestCase = (testCase: TestCase) => {
       Math.randomInt = randomInt;
 
       const interpreter = new Game_Interpreter();
-      interpreter.setup([testCase.commandLiteral as EventCommand], 0);
+      interpreter.setup([testCase.commandLiteral], 0);
       interpreter.executeCommand();
 
       testCase.setValues.forEach((entry) => {
@@ -183,6 +206,8 @@ const testCases: TestCase[] = [
       actorId: ACTOR_ID,
       startId: VAR_ID,
     }),
+
+    expectedResult: MOCK_ACTOR_LEVEL,
     setValues: [{ id: VAR_ID, value: MOCK_ACTOR_LEVEL }],
     commandLiteral: {
       code: 122,
@@ -219,6 +244,7 @@ const testCases: TestCase[] = [
         ACTOR_STATUS.EXP,
       ],
     },
+    expectedResult: MOCK_ACTOR_EXP,
     setValues: [{ id: VAR_ID, value: MOCK_ACTOR_EXP + MOCK_OLD_VALUE }],
     whenActorNullValue: 0 + MOCK_OLD_VALUE,
   },
@@ -243,6 +269,7 @@ const testCases: TestCase[] = [
         ACTOR_STATUS.HP,
       ],
     },
+    expectedResult: MOCK_ACTOR_HP,
     setValues: [{ id: VAR_ID, value: MOCK_OLD_VALUE - MOCK_ACTOR_HP }],
     whenActorNullValue: MOCK_OLD_VALUE - 0,
   },
@@ -267,6 +294,7 @@ const testCases: TestCase[] = [
         ACTOR_STATUS.MP,
       ],
     },
+    expectedResult: MOCK_ACTOR_MP,
     setValues: [{ id: VAR_ID, value: MOCK_OLD_VALUE * MOCK_ACTOR_MP }],
     whenActorNullValue: MOCK_OLD_VALUE * 0,
   },
@@ -282,6 +310,7 @@ const testCases: TestCase[] = [
       indent: 0,
       parameters: [VAR_ID, VAR_ID, 0, 3, 3, ACTOR_ID, ACTOR_STATUS.TP],
     },
+    expectedResult: MOCK_ACTOR_TP,
     setValues: [{ id: VAR_ID, value: MOCK_ACTOR_TP }],
     whenActorNullValue: 0,
   },
@@ -298,6 +327,7 @@ const testCases: TestCase[] = [
       indent: 0,
       parameters: [VAR_ID, VAR_ID, 0, 3, 3, ACTOR_ID, ACTOR_STATUS.MAX_HP],
     },
+    expectedResult: MOCK_ACTOR_PARAM_VALUE,
     setValues: [{ id: VAR_ID, value: MOCK_ACTOR_PARAM_VALUE }],
     whenActorNullValue: 0,
   },
@@ -314,6 +344,7 @@ const testCases: TestCase[] = [
       indent: 0,
       parameters: [VAR_ID, VAR_ID, 0, 3, 3, ACTOR_ID, ACTOR_STATUS.MAX_MP],
     },
+    expectedResult: MOCK_ACTOR_PARAM_VALUE,
     setValues: [{ id: VAR_ID, value: MOCK_ACTOR_PARAM_VALUE }],
     whenActorNullValue: 0,
   },
@@ -330,6 +361,7 @@ const testCases: TestCase[] = [
       indent: 0,
       parameters: [VAR_ID, VAR_ID, 0, 3, 3, ACTOR_ID, ACTOR_STATUS.ATK],
     },
+    expectedResult: MOCK_ACTOR_PARAM_VALUE,
     setValues: [{ id: VAR_ID, value: MOCK_ACTOR_PARAM_VALUE }],
     whenActorNullValue: 0,
   },
@@ -346,6 +378,7 @@ const testCases: TestCase[] = [
       indent: 0,
       parameters: [VAR_ID, VAR_ID, 0, 3, 3, ACTOR_ID, ACTOR_STATUS.DEF],
     },
+    expectedResult: MOCK_ACTOR_PARAM_VALUE,
     setValues: [{ id: VAR_ID, value: MOCK_ACTOR_PARAM_VALUE }],
     whenActorNullValue: 0,
   },
@@ -362,6 +395,8 @@ const testCases: TestCase[] = [
       indent: 0,
       parameters: [VAR_ID, VAR_ID, 0, 3, 3, ACTOR_ID, ACTOR_STATUS.MAT],
     },
+
+    expectedResult: MOCK_ACTOR_PARAM_VALUE,
     setValues: [{ id: VAR_ID, value: MOCK_ACTOR_PARAM_VALUE }],
     whenActorNullValue: 0,
   },
@@ -378,6 +413,7 @@ const testCases: TestCase[] = [
       indent: 0,
       parameters: [VAR_ID, VAR_ID, 0, 3, 3, ACTOR_ID, ACTOR_STATUS.MDF],
     },
+    expectedResult: MOCK_ACTOR_PARAM_VALUE,
     setValues: [{ id: VAR_ID, value: MOCK_ACTOR_PARAM_VALUE }],
     whenActorNullValue: 0,
   },
@@ -394,6 +430,7 @@ const testCases: TestCase[] = [
       indent: 0,
       parameters: [VAR_ID, VAR_ID, 0, 3, 3, ACTOR_ID, ACTOR_STATUS.AGI],
     },
+    expectedResult: MOCK_ACTOR_PARAM_VALUE,
     setValues: [{ id: VAR_ID, value: MOCK_ACTOR_PARAM_VALUE }],
     whenActorNullValue: 0,
   },
@@ -410,6 +447,7 @@ const testCases: TestCase[] = [
       indent: 0,
       parameters: [VAR_ID, VAR_ID, 0, 3, 3, ACTOR_ID, ACTOR_STATUS.LUK],
     },
+    expectedResult: MOCK_ACTOR_PARAM_VALUE,
     setValues: [{ id: VAR_ID, value: MOCK_ACTOR_PARAM_VALUE }],
     whenActorNullValue: 0,
   },

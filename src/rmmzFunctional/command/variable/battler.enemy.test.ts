@@ -27,8 +27,6 @@ import type {
 } from "@RpgTypes/rmmzRuntime";
 import { variableFromEnemy } from "./battler";
 import type {
-  Rmmz_VariableSourceActor,
-  Rmmz_VariableSourceCharacter,
   Rmmz_VariableSourceEnemy,
   Rmmz_VariableSourceProvider,
 } from "./types";
@@ -42,17 +40,6 @@ const MOCK_FALLBACK = 777;
 const MOCK_START_ID = 91;
 const MOCK_ENEMY_INDEX = 2;
 
-const createMockActor = (): MockedObject<Rmmz_VariableSourceActor> => {
-  return {
-    level: 1,
-    currentExp: vi.fn(() => 0),
-    hp: 1,
-    mp: 1,
-    tp: 0,
-    param: vi.fn(() => 0),
-  };
-};
-
 const createMockEnemy = (): MockedObject<Rmmz_VariableSourceEnemy> => {
   return {
     hp: MOCK_ENEMY_HP,
@@ -62,25 +49,15 @@ const createMockEnemy = (): MockedObject<Rmmz_VariableSourceEnemy> => {
   };
 };
 
-const createMockCharacter = (): MockedObject<Rmmz_VariableSourceCharacter> => {
-  return {
-    x: 0,
-    y: 0,
-    direction: vi.fn(() => 2),
-    screenX: vi.fn(() => 0),
-    screenY: vi.fn(() => 0),
-  };
-};
-
 const createMockProvider = (
-  enemy: Rmmz_VariableSourceEnemy | null = createMockEnemy(),
+  enemy: Rmmz_VariableSourceEnemy | null,
 ): MockedObject<Rmmz_VariableSourceProvider> => {
   return {
-    character: vi.fn(() => createMockCharacter()),
+    character: vi.fn(() => null),
     dataArmor: vi.fn(() => null),
     dataItem: vi.fn(() => null),
     dataWeapon: vi.fn(() => null),
-    gameActor: vi.fn(() => createMockActor()),
+    gameActor: vi.fn(() => null),
     gameEnemy: vi.fn(() => enemy),
     random: vi.fn(() => 0),
   };
@@ -154,10 +131,6 @@ interface TestCase {
   params: ParamArray_VariableFromEnemyStatus;
   expected: number;
   command: Command_ControlVariables_FromEnemy;
-  setup: () => {
-    provider: MockedObject<Rmmz_VariableSourceProvider>;
-    enemy: MockedObject<Rmmz_VariableSourceEnemy> | null;
-  };
   call: Array<(ctx: TestContext) => void>;
 }
 
@@ -201,7 +174,8 @@ const expectNonEnemyObjectsUnused = (ctx: TestContext) => {
 };
 
 const runDirect = (testCase: TestCase): TestContext => {
-  const { provider, enemy } = testCase.setup();
+  const enemy = createMockEnemy();
+  const provider = createMockProvider(enemy);
   return {
     result: variableFromEnemy(testCase.params, MOCK_FALLBACK, provider),
     provider,
@@ -216,7 +190,8 @@ const runDirect = (testCase: TestCase): TestContext => {
 };
 
 const runFromCommand = (testCase: TestCase): TestContext => {
-  const { provider, enemy } = testCase.setup();
+  const enemy = createMockEnemy();
+  const provider = createMockProvider(enemy);
   const variables = createMockVariebles();
   const temp = createMockTemp();
   const map = createMockMap();
@@ -249,34 +224,6 @@ const runFromCommand = (testCase: TestCase): TestContext => {
   };
 };
 
-const enemyParamCase = (
-  name: string,
-  kind: number,
-  command: Command_ControlVariables_FromEnemy,
-): TestCase => ({
-  name,
-  params: [MOCK_START_ID, MOCK_START_ID, 0, 3, 4, MOCK_ENEMY_INDEX, kind],
-  expected: MOCK_ENEMY_PARAM_BASE + (kind - 2),
-  command,
-  setup: () => {
-    const enemy = createMockEnemy();
-    return {
-      enemy,
-      provider: createMockProvider(enemy),
-    };
-  },
-  call: [
-    ({ provider, enemy }) => {
-      expect(provider.gameEnemy).toHaveBeenCalledOnce();
-      expect(provider.gameEnemy).toHaveBeenCalledWith(MOCK_ENEMY_INDEX);
-      expect(enemy).not.toBeNull();
-      expect(enemy?.param).toHaveBeenCalledOnce();
-      expect(enemy?.param).toHaveBeenCalledWith(kind - 2);
-      expectProviderNotCalledForOtherDomains(provider);
-    },
-  ],
-});
-
 const testCases: TestCase[] = [
   {
     name: "hp",
@@ -286,16 +233,10 @@ const testCases: TestCase[] = [
       startId: MOCK_START_ID,
       enemyIndex: MOCK_ENEMY_INDEX,
     }),
-    setup: () => {
-      const enemy = createMockEnemy();
-      return {
-        enemy,
-        provider: createMockProvider(enemy),
-      };
-    },
     call: [
       ({ provider, enemy }) => {
         expect(provider.gameEnemy).toHaveBeenCalledOnce();
+        expect(provider.gameEnemy).toHaveBeenCalledWith(MOCK_ENEMY_INDEX);
         expect(enemy?.param).not.toHaveBeenCalled();
         expectProviderNotCalledForOtherDomains(provider);
       },
@@ -309,16 +250,10 @@ const testCases: TestCase[] = [
       startId: MOCK_START_ID,
       enemyIndex: MOCK_ENEMY_INDEX,
     }),
-    setup: () => {
-      const enemy = createMockEnemy();
-      return {
-        enemy,
-        provider: createMockProvider(enemy),
-      };
-    },
     call: [
       ({ provider, enemy }) => {
         expect(provider.gameEnemy).toHaveBeenCalledOnce();
+        expect(provider.gameEnemy).toHaveBeenCalledWith(MOCK_ENEMY_INDEX);
         expect(enemy?.param).not.toHaveBeenCalled();
         expectProviderNotCalledForOtherDomains(provider);
       },
@@ -332,101 +267,163 @@ const testCases: TestCase[] = [
       startId: MOCK_START_ID,
       enemyIndex: MOCK_ENEMY_INDEX,
     }),
-    setup: () => {
-      const enemy = createMockEnemy();
-      return {
-        enemy,
-        provider: createMockProvider(enemy),
-      };
-    },
     call: [
       ({ provider, enemy }) => {
         expect(provider.gameEnemy).toHaveBeenCalledOnce();
+        expect(provider.gameEnemy).toHaveBeenCalledWith(MOCK_ENEMY_INDEX);
         expect(enemy?.param).not.toHaveBeenCalled();
         expectProviderNotCalledForOtherDomains(provider);
       },
     ],
   },
-  enemyParamCase(
-    "param maxHp",
-    2,
-    makeCommandVariableFromEnemyMaxHp({
-      startId: MOCK_START_ID,
-      enemyIndex: MOCK_ENEMY_INDEX,
-    }),
-  ),
-  enemyParamCase(
-    "param maxMp",
-    3,
-    makeCommandVariableFromEnemyMaxMp({
-      startId: MOCK_START_ID,
-      enemyIndex: MOCK_ENEMY_INDEX,
-    }),
-  ),
-  enemyParamCase(
-    "param atk",
-    4,
-    makeCommandVariableFromEnemyAtk({
-      startId: MOCK_START_ID,
-      enemyIndex: MOCK_ENEMY_INDEX,
-    }),
-  ),
-  enemyParamCase(
-    "param def",
-    5,
-    makeCommandVariableFromEnemyDef({
-      startId: MOCK_START_ID,
-      enemyIndex: MOCK_ENEMY_INDEX,
-    }),
-  ),
-  enemyParamCase(
-    "param mat",
-    6,
-    makeCommandVariableFromEnemyMat({
-      startId: MOCK_START_ID,
-      enemyIndex: MOCK_ENEMY_INDEX,
-    }),
-  ),
-  enemyParamCase(
-    "param mdf",
-    7,
-    makeCommandVariableFromEnemyMdf({
-      startId: MOCK_START_ID,
-      enemyIndex: MOCK_ENEMY_INDEX,
-    }),
-  ),
-  enemyParamCase(
-    "param agi",
-    8,
-    makeCommandVariableFromEnemyAgi({
-      startId: MOCK_START_ID,
-      enemyIndex: MOCK_ENEMY_INDEX,
-    }),
-  ),
-  enemyParamCase(
-    "param luk",
-    9,
-    makeCommandVariableFromEnemyLuk({
-      startId: MOCK_START_ID,
-      enemyIndex: MOCK_ENEMY_INDEX,
-    }),
-  ),
   {
-    name: "enemy missing",
-    params: [MOCK_START_ID, MOCK_START_ID, 0, 3, 4, MOCK_ENEMY_INDEX, 0],
-    expected: MOCK_FALLBACK,
-    command: makeCommandVariableFromEnemyCurrentHp({
+    name: "param maxHp",
+    params: [MOCK_START_ID, MOCK_START_ID, 0, 3, 4, MOCK_ENEMY_INDEX, 2],
+    expected: MOCK_ENEMY_PARAM_BASE,
+    command: makeCommandVariableFromEnemyMaxHp({
       startId: MOCK_START_ID,
       enemyIndex: MOCK_ENEMY_INDEX,
-    }),
-    setup: () => ({
-      enemy: null,
-      provider: createMockProvider(null),
     }),
     call: [
-      ({ provider }) => {
+      ({ provider, enemy }) => {
         expect(provider.gameEnemy).toHaveBeenCalledOnce();
         expect(provider.gameEnemy).toHaveBeenCalledWith(MOCK_ENEMY_INDEX);
+        expect(enemy).not.toBeNull();
+        expect(enemy?.param).toHaveBeenCalledOnce();
+        expect(enemy?.param).toHaveBeenCalledWith(0);
+        expectProviderNotCalledForOtherDomains(provider);
+      },
+    ],
+  },
+  {
+    name: "param maxMp",
+    params: [MOCK_START_ID, MOCK_START_ID, 0, 3, 4, MOCK_ENEMY_INDEX, 3],
+    expected: MOCK_ENEMY_PARAM_BASE + 1,
+    command: makeCommandVariableFromEnemyMaxMp({
+      startId: MOCK_START_ID,
+      enemyIndex: MOCK_ENEMY_INDEX,
+    }),
+    call: [
+      ({ provider, enemy }) => {
+        expect(provider.gameEnemy).toHaveBeenCalledOnce();
+        expect(provider.gameEnemy).toHaveBeenCalledWith(MOCK_ENEMY_INDEX);
+        expect(enemy).not.toBeNull();
+        expect(enemy?.param).toHaveBeenCalledOnce();
+        expect(enemy?.param).toHaveBeenCalledWith(1);
+        expectProviderNotCalledForOtherDomains(provider);
+      },
+    ],
+  },
+  {
+    name: "param atk",
+    params: [MOCK_START_ID, MOCK_START_ID, 0, 3, 4, MOCK_ENEMY_INDEX, 4],
+    expected: MOCK_ENEMY_PARAM_BASE + 2,
+    command: makeCommandVariableFromEnemyAtk({
+      startId: MOCK_START_ID,
+      enemyIndex: MOCK_ENEMY_INDEX,
+    }),
+    call: [
+      ({ provider, enemy }) => {
+        expect(provider.gameEnemy).toHaveBeenCalledOnce();
+        expect(provider.gameEnemy).toHaveBeenCalledWith(MOCK_ENEMY_INDEX);
+        expect(enemy).not.toBeNull();
+        expect(enemy?.param).toHaveBeenCalledOnce();
+        expect(enemy?.param).toHaveBeenCalledWith(2);
+        expectProviderNotCalledForOtherDomains(provider);
+      },
+    ],
+  },
+  {
+    name: "param def",
+    params: [MOCK_START_ID, MOCK_START_ID, 0, 3, 4, MOCK_ENEMY_INDEX, 5],
+    expected: MOCK_ENEMY_PARAM_BASE + 3,
+    command: makeCommandVariableFromEnemyDef({
+      startId: MOCK_START_ID,
+      enemyIndex: MOCK_ENEMY_INDEX,
+    }),
+    call: [
+      ({ provider, enemy }) => {
+        expect(provider.gameEnemy).toHaveBeenCalledOnce();
+        expect(provider.gameEnemy).toHaveBeenCalledWith(MOCK_ENEMY_INDEX);
+        expect(enemy).not.toBeNull();
+        expect(enemy?.param).toHaveBeenCalledOnce();
+        expect(enemy?.param).toHaveBeenCalledWith(3);
+        expectProviderNotCalledForOtherDomains(provider);
+      },
+    ],
+  },
+  {
+    name: "param mat",
+    params: [MOCK_START_ID, MOCK_START_ID, 0, 3, 4, MOCK_ENEMY_INDEX, 6],
+    expected: MOCK_ENEMY_PARAM_BASE + 4,
+    command: makeCommandVariableFromEnemyMat({
+      startId: MOCK_START_ID,
+      enemyIndex: MOCK_ENEMY_INDEX,
+    }),
+    call: [
+      ({ provider, enemy }) => {
+        expect(provider.gameEnemy).toHaveBeenCalledOnce();
+        expect(provider.gameEnemy).toHaveBeenCalledWith(MOCK_ENEMY_INDEX);
+        expect(enemy).not.toBeNull();
+        expect(enemy?.param).toHaveBeenCalledOnce();
+        expect(enemy?.param).toHaveBeenCalledWith(4);
+        expectProviderNotCalledForOtherDomains(provider);
+      },
+    ],
+  },
+  {
+    name: "param mdf",
+    params: [MOCK_START_ID, MOCK_START_ID, 0, 3, 4, MOCK_ENEMY_INDEX, 7],
+    expected: MOCK_ENEMY_PARAM_BASE + 5,
+    command: makeCommandVariableFromEnemyMdf({
+      startId: MOCK_START_ID,
+      enemyIndex: MOCK_ENEMY_INDEX,
+    }),
+    call: [
+      ({ provider, enemy }) => {
+        expect(provider.gameEnemy).toHaveBeenCalledOnce();
+        expect(provider.gameEnemy).toHaveBeenCalledWith(MOCK_ENEMY_INDEX);
+        expect(enemy).not.toBeNull();
+        expect(enemy?.param).toHaveBeenCalledOnce();
+        expect(enemy?.param).toHaveBeenCalledWith(5);
+        expectProviderNotCalledForOtherDomains(provider);
+      },
+    ],
+  },
+  {
+    name: "param agi",
+    params: [MOCK_START_ID, MOCK_START_ID, 0, 3, 4, MOCK_ENEMY_INDEX, 8],
+    expected: MOCK_ENEMY_PARAM_BASE + 6,
+    command: makeCommandVariableFromEnemyAgi({
+      startId: MOCK_START_ID,
+      enemyIndex: MOCK_ENEMY_INDEX,
+    }),
+    call: [
+      ({ provider, enemy }) => {
+        expect(provider.gameEnemy).toHaveBeenCalledOnce();
+        expect(provider.gameEnemy).toHaveBeenCalledWith(MOCK_ENEMY_INDEX);
+        expect(enemy).not.toBeNull();
+        expect(enemy?.param).toHaveBeenCalledOnce();
+        expect(enemy?.param).toHaveBeenCalledWith(6);
+        expectProviderNotCalledForOtherDomains(provider);
+      },
+    ],
+  },
+  {
+    name: "param luk",
+    params: [MOCK_START_ID, MOCK_START_ID, 0, 3, 4, MOCK_ENEMY_INDEX, 9],
+    expected: MOCK_ENEMY_PARAM_BASE + 7,
+    command: makeCommandVariableFromEnemyLuk({
+      startId: MOCK_START_ID,
+      enemyIndex: MOCK_ENEMY_INDEX,
+    }),
+    call: [
+      ({ provider, enemy }) => {
+        expect(provider.gameEnemy).toHaveBeenCalledOnce();
+        expect(provider.gameEnemy).toHaveBeenCalledWith(MOCK_ENEMY_INDEX);
+        expect(enemy).not.toBeNull();
+        expect(enemy?.param).toHaveBeenCalledOnce();
+        expect(enemy?.param).toHaveBeenCalledWith(7);
         expectProviderNotCalledForOtherDomains(provider);
       },
     ],
@@ -440,16 +437,10 @@ const testCases: TestCase[] = [
       indent: 0,
       parameters: [MOCK_START_ID, MOCK_START_ID, 0, 3, 4, MOCK_ENEMY_INDEX, 99],
     },
-    setup: () => {
-      const enemy = createMockEnemy();
-      return {
-        enemy,
-        provider: createMockProvider(enemy),
-      };
-    },
     call: [
       ({ provider, enemy }) => {
         expect(provider.gameEnemy).toHaveBeenCalledOnce();
+        expect(provider.gameEnemy).toHaveBeenCalledWith(MOCK_ENEMY_INDEX);
         expect(enemy?.param).not.toHaveBeenCalled();
         expectProviderNotCalledForOtherDomains(provider);
       },
@@ -459,18 +450,31 @@ const testCases: TestCase[] = [
 
 const runTestCase = (testCase: TestCase) => {
   describe(testCase.name, () => {
-    test("makeCommand", () => {
-      expect(testCase.command.parameters).toEqual(testCase.params);
-    });
+    describe("variableFromEnemy", () => {
+      test("makeCommand", () => {
+        expect(testCase.command.parameters).toEqual(testCase.params);
+      });
 
-    test("normal", () => {
-      const context = runDirect(testCase);
-      expect(context.result).toBe(testCase.expected);
-    });
+      test("normal", () => {
+        const context = runDirect(testCase);
+        expect(context.result).toBe(testCase.expected);
+      });
 
-    test("call", () => {
-      const context = runDirect(testCase);
-      testCase.call.forEach((f) => f(context));
+      test("call", () => {
+        const context = runDirect(testCase);
+        testCase.call.forEach((f) => f(context));
+      });
+
+      test("null", () => {
+        const provider = createMockProvider(null);
+        const result = variableFromEnemy(
+          testCase.params,
+          MOCK_FALLBACK,
+          provider,
+        );
+        expect(result).toBe(MOCK_FALLBACK);
+        expect(provider.gameEnemy).toHaveBeenCalledOnce();
+      });
     });
 
     describe("variableFromCommand", () => {

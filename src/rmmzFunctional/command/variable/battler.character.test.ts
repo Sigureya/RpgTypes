@@ -188,41 +188,6 @@ const expectCharacterExists = ({ character }: TestContext) => {
   expect(character).not.toBeNull();
 };
 
-const expectCharacterNotCalledWithDirectionScreen = [
-  expectDirectionNotCalled,
-  expectScreenXNotCalled,
-  expectScreenYNotCalled,
-] as const;
-
-const expectCharacterCalledWithDirectionOnly = [
-  expectDirectionCalled,
-  expectScreenXNotCalled,
-  expectScreenYNotCalled,
-] as const;
-
-const expectCharacterCalledWithScreenXOnly = [
-  expectDirectionNotCalled,
-  expectScreenXCalled,
-  expectScreenYNotCalled,
-] as const;
-
-const expectCharacterCalledWithScreenYOnly = [
-  expectDirectionNotCalled,
-  expectScreenXNotCalled,
-  expectScreenYCalled,
-] as const;
-
-const characterKindCalls: Record<
-  0 | 1 | 2 | 3 | 4,
-  Array<(ctx: TestContext) => void>
-> = {
-  0: [...expectCharacterNotCalledWithDirectionScreen],
-  1: [...expectCharacterNotCalledWithDirectionScreen],
-  2: [...expectCharacterCalledWithDirectionOnly],
-  3: [...expectCharacterCalledWithScreenXOnly],
-  4: [...expectCharacterCalledWithScreenYOnly],
-};
-
 const expectNonCharacterObjectsUnused = (ctx: TestContext) => {
   expect(ctx.variables.value).not.toHaveBeenCalled();
   expect(ctx.variables.setValue).not.toHaveBeenCalled();
@@ -365,7 +330,9 @@ const testCases: TestCase[] = [
     call: [
       expectProviderCalledWithCharacterId(MOCK_CHARACTOR_ID),
       expectCharacterExists,
-      ...characterKindCalls[KIND_X],
+      expectDirectionNotCalled,
+      expectScreenXNotCalled,
+      expectScreenYNotCalled,
       ({ provider }) => {
         expectProviderNotCalledForOtherDomains(provider);
       },
@@ -382,7 +349,9 @@ const testCases: TestCase[] = [
     call: [
       expectProviderCalledWithCharacterId(MOCK_CHARACTOR_ID),
       expectCharacterExists,
-      ...characterKindCalls[KIND_Y],
+      expectDirectionNotCalled,
+      expectScreenXNotCalled,
+      expectScreenYNotCalled,
       ({ provider }) => {
         expectProviderNotCalledForOtherDomains(provider);
       },
@@ -407,7 +376,9 @@ const testCases: TestCase[] = [
     call: [
       expectProviderCalledWithCharacterId(MOCK_CHARACTOR_ID),
       expectCharacterExists,
-      ...characterKindCalls[KIND_DIRECTION],
+      expectDirectionCalled,
+      expectScreenXNotCalled,
+      expectScreenYNotCalled,
       ({ provider }) => {
         expectProviderNotCalledForOtherDomains(provider);
       },
@@ -432,7 +403,9 @@ const testCases: TestCase[] = [
     call: [
       expectProviderCalledWithCharacterId(MOCK_CHARACTOR_ID),
       expectCharacterExists,
-      ...characterKindCalls[KIND_SCREEN_X],
+      expectDirectionNotCalled,
+      expectScreenXCalled,
+      expectScreenYNotCalled,
       ({ provider }) => {
         expectProviderNotCalledForOtherDomains(provider);
       },
@@ -457,7 +430,9 @@ const testCases: TestCase[] = [
     call: [
       expectProviderCalledWithCharacterId(MOCK_CHARACTOR_ID),
       expectCharacterExists,
-      ...characterKindCalls[KIND_SCREEN_Y],
+      expectDirectionNotCalled,
+      expectScreenXNotCalled,
+      expectScreenYCalled,
       ({ provider }) => {
         expectProviderNotCalledForOtherDomains(provider);
       },
@@ -471,7 +446,9 @@ const testCases: TestCase[] = [
     call: [
       expectProviderCalledWithCharacterId(-1),
       expectCharacterExists,
-      ...characterKindCalls[KIND_X],
+      expectDirectionNotCalled,
+      expectScreenXNotCalled,
+      expectScreenYNotCalled,
       ({ provider }) => {
         expectProviderNotCalledForOtherDomains(provider);
       },
@@ -485,7 +462,9 @@ const testCases: TestCase[] = [
     call: [
       expectProviderCalledWithCharacterId(-1),
       expectCharacterExists,
-      ...characterKindCalls[KIND_Y],
+      expectDirectionNotCalled,
+      expectScreenXNotCalled,
+      expectScreenYNotCalled,
       ({ provider }) => {
         expectProviderNotCalledForOtherDomains(provider);
       },
@@ -501,7 +480,9 @@ const testCases: TestCase[] = [
     call: [
       expectProviderCalledWithCharacterId(-1),
       expectCharacterExists,
-      ...characterKindCalls[KIND_DIRECTION],
+      expectDirectionCalled,
+      expectScreenXNotCalled,
+      expectScreenYNotCalled,
       ({ provider }) => {
         expectProviderNotCalledForOtherDomains(provider);
       },
@@ -517,7 +498,9 @@ const testCases: TestCase[] = [
     call: [
       expectProviderCalledWithCharacterId(-1),
       expectCharacterExists,
-      ...characterKindCalls[KIND_SCREEN_X],
+      expectDirectionNotCalled,
+      expectScreenXCalled,
+      expectScreenYNotCalled,
       ({ provider }) => {
         expectProviderNotCalledForOtherDomains(provider);
       },
@@ -533,7 +516,9 @@ const testCases: TestCase[] = [
     call: [
       expectProviderCalledWithCharacterId(-1),
       expectCharacterExists,
-      ...characterKindCalls[KIND_SCREEN_Y],
+      expectDirectionNotCalled,
+      expectScreenXNotCalled,
+      expectScreenYCalled,
       ({ provider }) => {
         expectProviderNotCalledForOtherDomains(provider);
       },
@@ -566,7 +551,9 @@ const testCases: TestCase[] = [
     },
     call: [
       expectProviderCalledWithCharacterId(MOCK_CHARACTOR_ID),
-      ...expectCharacterNotCalledWithDirectionScreen,
+      expectDirectionNotCalled,
+      expectScreenXNotCalled,
+      expectScreenYNotCalled,
       ({ provider }) => {
         expectProviderNotCalledForOtherDomains(provider);
       },
