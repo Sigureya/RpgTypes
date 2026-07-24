@@ -28,28 +28,24 @@ export const evaluateActorBranch = (
     return false;
   }
   // TSの都合でif文の連続になっている。C#移植の場合はイベントコマンドの構造自体が変わるので、この関数は使わない
-  if (parameters[2] === 0) {
-    return party.members().includes(actor);
+  switch (parameters[2]) {
+    case 0:
+      return party.members().includes(actor);
+    case 1:
+      return branchByActorName(parameters, actor);
+    case 2:
+      return branchByActorClass(parameters, actor, provider);
+    case 3:
+      return branchByActorSkill(parameters, actor);
+    case 4:
+      return branchByActorWeapon(parameters, actor, provider);
+    case 5:
+      return branchByActorArmor(parameters, actor, provider);
+    case 6:
+      return actor.isStateAffected(parameters[3]);
+    default:
+      return false;
   }
-  if (parameters[2] === 1) {
-    return branchByActorName(parameters, actor);
-  }
-  if (parameters[2] === 2) {
-    return branchByActorClass(parameters, actor, provider);
-  }
-  if (parameters[2] === 3) {
-    return branchByActorSkill(parameters, actor);
-  }
-  if (parameters[2] === 4) {
-    return branchByActorWeapon(parameters, actor, provider);
-  }
-  if (parameters[2] === 5) {
-    return branchByActorArmor(parameters, actor, provider);
-  }
-  if (parameters[2] === 6) {
-    return actor.isStateAffected(parameters[3]);
-  }
-  return false;
 };
 
 const branchByActorName = (
