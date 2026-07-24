@@ -30,8 +30,6 @@ import type {
 import { variableFromActor } from "./battler";
 import type {
   Rmmz_VariableSourceActor,
-  Rmmz_VariableSourceCharacter,
-  Rmmz_VariableSourceEnemy,
   Rmmz_VariableSourceProvider,
 } from "./types";
 import { variableFromCommand } from "./variable";
@@ -57,35 +55,16 @@ const createMockActor = (): MockedObject<Rmmz_VariableSourceActor> => {
   };
 };
 
-const createMockEnemy = (): MockedObject<Rmmz_VariableSourceEnemy> => {
-  return {
-    hp: 1,
-    mp: 1,
-    tp: 0,
-    param: vi.fn(() => 0),
-  };
-};
-
-const createMockCharacter = (): MockedObject<Rmmz_VariableSourceCharacter> => {
-  return {
-    x: 0,
-    y: 0,
-    direction: vi.fn(() => 2),
-    screenX: vi.fn(() => 0),
-    screenY: vi.fn(() => 0),
-  };
-};
-
 const createMockProvider = (
-  actor: Rmmz_VariableSourceActor | null = createMockActor(),
+  actor: Rmmz_VariableSourceActor | null,
 ): MockedObject<Rmmz_VariableSourceProvider> => {
   return {
-    character: vi.fn(() => createMockCharacter()),
+    character: vi.fn(() => null),
     dataArmor: vi.fn(() => null),
     dataItem: vi.fn(() => null),
     dataWeapon: vi.fn(() => null),
     gameActor: vi.fn(() => actor),
-    gameEnemy: vi.fn(() => createMockEnemy()),
+    gameEnemy: vi.fn(() => null),
     random: vi.fn(() => 0),
   };
 };
@@ -158,10 +137,6 @@ interface TestCase {
   params: ParamArray_VariableFromActorStatus;
   expected: number;
   command: Command_ControlVariables_FromActor;
-  setup: () => {
-    provider: MockedObject<Rmmz_VariableSourceProvider>;
-    actor: MockedObject<Rmmz_VariableSourceActor> | null;
-  };
   call: Array<(ctx: TestContext) => void>;
 }
 
@@ -205,7 +180,8 @@ const expectNonActorObjectsUnused = (ctx: TestContext) => {
 };
 
 const runDirect = (testCase: TestCase): TestContext => {
-  const { provider, actor } = testCase.setup();
+  const actor = createMockActor();
+  const provider = createMockProvider(actor);
   return {
     result: variableFromActor(testCase.params, MOCK_FALLBACK, provider),
     provider,
@@ -220,7 +196,8 @@ const runDirect = (testCase: TestCase): TestContext => {
 };
 
 const runFromCommand = (testCase: TestCase): TestContext => {
-  const { provider, actor } = testCase.setup();
+  const actor = createMockActor();
+  const provider = createMockProvider(actor);
   const variables = createMockVariebles();
   const temp = createMockTemp();
   const map = createMockMap();
@@ -253,49 +230,33 @@ const runFromCommand = (testCase: TestCase): TestContext => {
   };
 };
 
-const actorParamCase = (
-  name: string,
-  kind: number,
-  command: Command_ControlVariables_FromActor,
-): TestCase => ({
-  name,
-  params: [MOCK_START_ID, MOCK_START_ID, 0, 3, 3, MOCK_ACTOR_ID, kind as any],
-  expected: MOCK_ACTOR_PARAM_BASE + (kind - 4),
-  command,
-  setup: () => {
-    const actor = createMockActor();
-    return {
-      actor,
-      provider: createMockProvider(actor),
-    };
-  },
-  call: [
-    ({ provider, actor }) => {
-      expect(provider.gameActor).toHaveBeenCalledOnce();
-      expect(provider.gameActor).toHaveBeenCalledWith(MOCK_ACTOR_ID);
-      expect(actor).not.toBeNull();
-      expect(actor?.param).toHaveBeenCalledOnce();
-      expect(actor?.param).toHaveBeenCalledWith(kind - 4);
-      expect(actor?.currentExp).not.toHaveBeenCalled();
-      expectProviderNotCalledForOtherDomains(provider);
-    },
-  ],
-});
-
 const runTestCase = (testCase: TestCase) => {
   describe(testCase.name, () => {
-    test("makeCommand", () => {
-      expect(testCase.command.parameters).toEqual(testCase.params);
-    });
+    describe("variableFromActor", () => {
+      test("makeCommand", () => {
+        expect(testCase.command.parameters).toEqual(testCase.params);
+      });
 
-    test("normal", () => {
-      const context = runDirect(testCase);
-      expect(context.result).toBe(testCase.expected);
-    });
+      test("normal", () => {
+        const context = runDirect(testCase);
+        expect(context.result).toBe(testCase.expected);
+      });
 
-    test("call", () => {
-      const context = runDirect(testCase);
-      testCase.call.forEach((f) => f(context));
+      test("call", () => {
+        const context = runDirect(testCase);
+        testCase.call.forEach((f) => f(context));
+      });
+
+      test("null", () => {
+        const provider = createMockProvider(null);
+        const result = variableFromActor(
+          testCase.params,
+          MOCK_FALLBACK,
+          provider,
+        );
+        expect(result).toBe(MOCK_FALLBACK);
+        expect(provider.gameActor).toHaveBeenCalledOnce();
+      });
     });
 
     describe("variableFromCommand", () => {
@@ -326,13 +287,6 @@ const testCases: TestCase[] = [
       startId: MOCK_START_ID,
       actorId: MOCK_ACTOR_ID,
     }),
-    setup: () => {
-      const actor = createMockActor();
-      return {
-        actor,
-        provider: createMockProvider(actor),
-      };
-    },
     call: [
       ({ provider, actor }) => {
         expect(provider.gameActor).toHaveBeenCalledOnce();
@@ -351,16 +305,10 @@ const testCases: TestCase[] = [
       startId: MOCK_START_ID,
       actorId: MOCK_ACTOR_ID,
     }),
-    setup: () => {
-      const actor = createMockActor();
-      return {
-        actor,
-        provider: createMockProvider(actor),
-      };
-    },
     call: [
       ({ provider, actor }) => {
         expect(provider.gameActor).toHaveBeenCalledOnce();
+        expect(provider.gameActor).toHaveBeenCalledWith(MOCK_ACTOR_ID);
         expect(actor?.currentExp).toHaveBeenCalledOnce();
         expect(actor?.param).not.toHaveBeenCalled();
         expectProviderNotCalledForOtherDomains(provider);
@@ -375,16 +323,10 @@ const testCases: TestCase[] = [
       startId: MOCK_START_ID,
       actorId: MOCK_ACTOR_ID,
     }),
-    setup: () => {
-      const actor = createMockActor();
-      return {
-        actor,
-        provider: createMockProvider(actor),
-      };
-    },
     call: [
       ({ provider, actor }) => {
         expect(provider.gameActor).toHaveBeenCalledOnce();
+        expect(provider.gameActor).toHaveBeenCalledWith(MOCK_ACTOR_ID);
         expect(actor?.currentExp).not.toHaveBeenCalled();
         expect(actor?.param).not.toHaveBeenCalled();
         expectProviderNotCalledForOtherDomains(provider);
@@ -399,16 +341,10 @@ const testCases: TestCase[] = [
       startId: MOCK_START_ID,
       actorId: MOCK_ACTOR_ID,
     }),
-    setup: () => {
-      const actor = createMockActor();
-      return {
-        actor,
-        provider: createMockProvider(actor),
-      };
-    },
     call: [
       ({ provider, actor }) => {
         expect(provider.gameActor).toHaveBeenCalledOnce();
+        expect(provider.gameActor).toHaveBeenCalledWith(MOCK_ACTOR_ID);
         expect(actor?.currentExp).not.toHaveBeenCalled();
         expect(actor?.param).not.toHaveBeenCalled();
         expectProviderNotCalledForOtherDomains(provider);
@@ -423,102 +359,172 @@ const testCases: TestCase[] = [
       startId: MOCK_START_ID,
       actorId: MOCK_ACTOR_ID,
     }),
-    setup: () => {
-      const actor = createMockActor();
-      return {
-        actor,
-        provider: createMockProvider(actor),
-      };
-    },
     call: [
       ({ provider, actor }) => {
         expect(provider.gameActor).toHaveBeenCalledOnce();
+        expect(provider.gameActor).toHaveBeenCalledWith(MOCK_ACTOR_ID);
         expect(actor?.currentExp).not.toHaveBeenCalled();
         expect(actor?.param).not.toHaveBeenCalled();
         expectProviderNotCalledForOtherDomains(provider);
       },
     ],
   },
-  actorParamCase(
-    "param maxHp",
-    4,
-    makeCommandVariableFromActorMaxHp({
-      startId: MOCK_START_ID,
-      actorId: MOCK_ACTOR_ID,
-    }),
-  ),
-  actorParamCase(
-    "param maxMp",
-    5,
-    makeCommandVariableFromActorMaxMp({
-      startId: MOCK_START_ID,
-      actorId: MOCK_ACTOR_ID,
-    }),
-  ),
-  actorParamCase(
-    "param atk",
-    6,
-    makeCommandVariableFromActorAtk({
-      startId: MOCK_START_ID,
-      actorId: MOCK_ACTOR_ID,
-    }),
-  ),
-  actorParamCase(
-    "param def",
-    7,
-    makeCommandVariableFromActorDef({
-      startId: MOCK_START_ID,
-      actorId: MOCK_ACTOR_ID,
-    }),
-  ),
-  actorParamCase(
-    "param mat",
-    8,
-    makeCommandVariableFromActorMat({
-      startId: MOCK_START_ID,
-      actorId: MOCK_ACTOR_ID,
-    }),
-  ),
-  actorParamCase(
-    "param mdf",
-    9,
-    makeCommandVariableFromActorMdf({
-      startId: MOCK_START_ID,
-      actorId: MOCK_ACTOR_ID,
-    }),
-  ),
-  actorParamCase(
-    "param agi",
-    10,
-    makeCommandVariableFromActorAgi({
-      startId: MOCK_START_ID,
-      actorId: MOCK_ACTOR_ID,
-    }),
-  ),
-  actorParamCase(
-    "param luk",
-    11,
-    makeCommandVariableFromActorLuk({
-      startId: MOCK_START_ID,
-      actorId: MOCK_ACTOR_ID,
-    }),
-  ),
   {
-    name: "actor missing",
-    params: [MOCK_START_ID, MOCK_START_ID, 0, 3, 3, MOCK_ACTOR_ID, 0],
-    expected: MOCK_FALLBACK,
-    command: makeCommandVariableFromActorCurrentLevel({
+    name: "param maxHp",
+    params: [MOCK_START_ID, MOCK_START_ID, 0, 3, 3, MOCK_ACTOR_ID, 4 as any],
+    expected: MOCK_ACTOR_PARAM_BASE,
+    command: makeCommandVariableFromActorMaxHp({
       startId: MOCK_START_ID,
       actorId: MOCK_ACTOR_ID,
-    }),
-    setup: () => ({
-      actor: null,
-      provider: createMockProvider(null),
     }),
     call: [
-      ({ provider }) => {
+      ({ provider, actor }) => {
         expect(provider.gameActor).toHaveBeenCalledOnce();
         expect(provider.gameActor).toHaveBeenCalledWith(MOCK_ACTOR_ID);
+        expect(actor).not.toBeNull();
+        expect(actor?.param).toHaveBeenCalledOnce();
+        expect(actor?.param).toHaveBeenCalledWith(0);
+        expect(actor?.currentExp).not.toHaveBeenCalled();
+        expectProviderNotCalledForOtherDomains(provider);
+      },
+    ],
+  },
+  {
+    name: "param maxMp",
+    params: [MOCK_START_ID, MOCK_START_ID, 0, 3, 3, MOCK_ACTOR_ID, 5 as any],
+    expected: MOCK_ACTOR_PARAM_BASE + 1,
+    command: makeCommandVariableFromActorMaxMp({
+      startId: MOCK_START_ID,
+      actorId: MOCK_ACTOR_ID,
+    }),
+    call: [
+      ({ provider, actor }) => {
+        expect(provider.gameActor).toHaveBeenCalledOnce();
+        expect(provider.gameActor).toHaveBeenCalledWith(MOCK_ACTOR_ID);
+        expect(actor).not.toBeNull();
+        expect(actor?.param).toHaveBeenCalledOnce();
+        expect(actor?.param).toHaveBeenCalledWith(1);
+        expect(actor?.currentExp).not.toHaveBeenCalled();
+        expectProviderNotCalledForOtherDomains(provider);
+      },
+    ],
+  },
+  {
+    name: "param atk",
+    params: [MOCK_START_ID, MOCK_START_ID, 0, 3, 3, MOCK_ACTOR_ID, 6 as any],
+    expected: MOCK_ACTOR_PARAM_BASE + 2,
+    command: makeCommandVariableFromActorAtk({
+      startId: MOCK_START_ID,
+      actorId: MOCK_ACTOR_ID,
+    }),
+    call: [
+      ({ provider, actor }) => {
+        expect(provider.gameActor).toHaveBeenCalledOnce();
+        expect(provider.gameActor).toHaveBeenCalledWith(MOCK_ACTOR_ID);
+        expect(actor).not.toBeNull();
+        expect(actor?.param).toHaveBeenCalledOnce();
+        expect(actor?.param).toHaveBeenCalledWith(2);
+        expect(actor?.currentExp).not.toHaveBeenCalled();
+        expectProviderNotCalledForOtherDomains(provider);
+      },
+    ],
+  },
+  {
+    name: "param def",
+    params: [MOCK_START_ID, MOCK_START_ID, 0, 3, 3, MOCK_ACTOR_ID, 7 as any],
+    expected: MOCK_ACTOR_PARAM_BASE + 3,
+    command: makeCommandVariableFromActorDef({
+      startId: MOCK_START_ID,
+      actorId: MOCK_ACTOR_ID,
+    }),
+    call: [
+      ({ provider, actor }) => {
+        expect(provider.gameActor).toHaveBeenCalledOnce();
+        expect(provider.gameActor).toHaveBeenCalledWith(MOCK_ACTOR_ID);
+        expect(actor).not.toBeNull();
+        expect(actor?.param).toHaveBeenCalledOnce();
+        expect(actor?.param).toHaveBeenCalledWith(3);
+        expect(actor?.currentExp).not.toHaveBeenCalled();
+        expectProviderNotCalledForOtherDomains(provider);
+      },
+    ],
+  },
+  {
+    name: "param mat",
+    params: [MOCK_START_ID, MOCK_START_ID, 0, 3, 3, MOCK_ACTOR_ID, 8 as any],
+    expected: MOCK_ACTOR_PARAM_BASE + 4,
+    command: makeCommandVariableFromActorMat({
+      startId: MOCK_START_ID,
+      actorId: MOCK_ACTOR_ID,
+    }),
+    call: [
+      ({ provider, actor }) => {
+        expect(provider.gameActor).toHaveBeenCalledOnce();
+        expect(provider.gameActor).toHaveBeenCalledWith(MOCK_ACTOR_ID);
+        expect(actor).not.toBeNull();
+        expect(actor?.param).toHaveBeenCalledOnce();
+        expect(actor?.param).toHaveBeenCalledWith(4);
+        expect(actor?.currentExp).not.toHaveBeenCalled();
+        expectProviderNotCalledForOtherDomains(provider);
+      },
+    ],
+  },
+  {
+    name: "param mdf",
+    params: [MOCK_START_ID, MOCK_START_ID, 0, 3, 3, MOCK_ACTOR_ID, 9 as any],
+    expected: MOCK_ACTOR_PARAM_BASE + 5,
+    command: makeCommandVariableFromActorMdf({
+      startId: MOCK_START_ID,
+      actorId: MOCK_ACTOR_ID,
+    }),
+    call: [
+      ({ provider, actor }) => {
+        expect(provider.gameActor).toHaveBeenCalledOnce();
+        expect(provider.gameActor).toHaveBeenCalledWith(MOCK_ACTOR_ID);
+        expect(actor).not.toBeNull();
+        expect(actor?.param).toHaveBeenCalledOnce();
+        expect(actor?.param).toHaveBeenCalledWith(5);
+        expect(actor?.currentExp).not.toHaveBeenCalled();
+        expectProviderNotCalledForOtherDomains(provider);
+      },
+    ],
+  },
+  {
+    name: "param agi",
+    params: [MOCK_START_ID, MOCK_START_ID, 0, 3, 3, MOCK_ACTOR_ID, 10 as any],
+    expected: MOCK_ACTOR_PARAM_BASE + 6,
+    command: makeCommandVariableFromActorAgi({
+      startId: MOCK_START_ID,
+      actorId: MOCK_ACTOR_ID,
+    }),
+    call: [
+      ({ provider, actor }) => {
+        expect(provider.gameActor).toHaveBeenCalledOnce();
+        expect(provider.gameActor).toHaveBeenCalledWith(MOCK_ACTOR_ID);
+        expect(actor).not.toBeNull();
+        expect(actor?.param).toHaveBeenCalledOnce();
+        expect(actor?.param).toHaveBeenCalledWith(6);
+        expect(actor?.currentExp).not.toHaveBeenCalled();
+        expectProviderNotCalledForOtherDomains(provider);
+      },
+    ],
+  },
+  {
+    name: "param luk",
+    params: [MOCK_START_ID, MOCK_START_ID, 0, 3, 3, MOCK_ACTOR_ID, 11 as any],
+    expected: MOCK_ACTOR_PARAM_BASE + 7,
+    command: makeCommandVariableFromActorLuk({
+      startId: MOCK_START_ID,
+      actorId: MOCK_ACTOR_ID,
+    }),
+    call: [
+      ({ provider, actor }) => {
+        expect(provider.gameActor).toHaveBeenCalledOnce();
+        expect(provider.gameActor).toHaveBeenCalledWith(MOCK_ACTOR_ID);
+        expect(actor).not.toBeNull();
+        expect(actor?.param).toHaveBeenCalledOnce();
+        expect(actor?.param).toHaveBeenCalledWith(7);
+        expect(actor?.currentExp).not.toHaveBeenCalled();
         expectProviderNotCalledForOtherDomains(provider);
       },
     ],
@@ -540,16 +546,10 @@ const testCases: TestCase[] = [
         99 as any,
       ],
     },
-    setup: () => {
-      const actor = createMockActor();
-      return {
-        actor,
-        provider: createMockProvider(actor),
-      };
-    },
     call: [
       ({ provider, actor }) => {
         expect(provider.gameActor).toHaveBeenCalledOnce();
+        expect(provider.gameActor).toHaveBeenCalledWith(MOCK_ACTOR_ID);
         expect(actor?.currentExp).not.toHaveBeenCalled();
         expect(actor?.param).not.toHaveBeenCalled();
         expectProviderNotCalledForOtherDomains(provider);
