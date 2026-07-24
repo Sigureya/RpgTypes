@@ -16,17 +16,6 @@ export const makeCommandVariableFromSystemMapId = (
   };
 };
 
-export const makeCommandVariableFromSystemPartyMemberCount = (
-  params: ParamObject_VariableFromOther,
-  indent: number = 0,
-): Command_ControlVariables_FromOthre => {
-  return {
-    code: CONTROL_VARIABLES,
-    indent,
-    parameters: paramToArray(params, 1),
-  };
-};
-
 export const makeCommandVariableFromSystemPlayTime = (
   params: ParamObject_VariableFromOther,
   indent: number = 0,
