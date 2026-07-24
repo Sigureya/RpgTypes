@@ -44,8 +44,8 @@ export const makeCommandVariableFromPartySize = (
     code: CONTROL_VARIABLES,
     indent,
     parameters: [
-      params.startId,
-      params.endId ?? params.startId,
+      params.variableId,
+      params.variableId,
       params.operation ?? 0,
       3,
       7,
@@ -80,8 +80,8 @@ const paramToArray = (
   params: ParamObject_VariableFromOther,
   param: number,
 ): ParamArray_VariableFromOther => [
-  params.startId,
-  params.endId ?? params.startId,
+  params.variableId,
+  params.variableId,
   params.operation ?? 0,
   3,
   7,
