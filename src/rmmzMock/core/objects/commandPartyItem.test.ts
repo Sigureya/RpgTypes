@@ -24,7 +24,7 @@ import {
   makeItemData,
   makeWeaponData,
 } from "@RpgTypes/rmmz/rpg";
-import type { Rmmz_UnitPlayer, Rmmz_Variables } from "@RpgTypes/rmmzRuntime";
+import type { Rmmz_Party, Rmmz_Variables } from "@RpgTypes/rmmzRuntime";
 import type { FakeMap } from "./fakes/types";
 import { Game_Interpreter } from "./rmmz_objects";
 
@@ -33,7 +33,7 @@ import { Game_Interpreter } from "./rmmz_objects";
  * ------------------------------------- */
 
 type FakeParty = Pick<
-  Rmmz_UnitPlayer,
+  Rmmz_Party,
   "gold" | "gainGold" | "loseGold" | "gainItem" | "loseItem"
 >;
 const MOCK_OLD_VALUE = 60;
