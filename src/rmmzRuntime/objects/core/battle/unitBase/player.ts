@@ -5,7 +5,7 @@ import type {
 } from "@RpgTypes/rmmz/rpg";
 
 export interface Rmmz_VariableSourceParty<
-  Battler extends { actorId(): number },
+  Battler extends { actorId(): number } = { actorId(): number },
 > {
   numItems(item: Data_AnyGoodsUnion, includeEquip?: boolean): number;
   gold(): number;
