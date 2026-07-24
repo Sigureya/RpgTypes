@@ -282,6 +282,41 @@ const actorParamCase = (
   ],
 });
 
+const runTestCase = (testCase: TestCase) => {
+  describe(testCase.name, () => {
+    test("makeCommand", () => {
+      expect(testCase.command.parameters).toEqual(testCase.params);
+    });
+
+    test("normal", () => {
+      const context = runDirect(testCase);
+      expect(context.result).toBe(testCase.expected);
+    });
+
+    test("call", () => {
+      const context = runDirect(testCase);
+      testCase.call.forEach((f) => f(context));
+    });
+
+    describe("variableFromCommand", () => {
+      test("result", () => {
+        const context = runFromCommand(testCase);
+        expect(context.result).toBe(testCase.expected);
+      });
+
+      test("not call", () => {
+        const context = runFromCommand(testCase);
+        expectNonActorObjectsUnused(context);
+      });
+
+      test("call", () => {
+        const context = runFromCommand(testCase);
+        testCase.call.forEach((f) => f(context));
+      });
+    });
+  });
+};
+
 const testCases: TestCase[] = [
   {
     name: "level",
@@ -522,41 +557,6 @@ const testCases: TestCase[] = [
     ],
   },
 ];
-
-const runTestCase = (testCase: TestCase) => {
-  describe(testCase.name, () => {
-    test("makeCommand", () => {
-      expect(testCase.command.parameters).toEqual(testCase.params);
-    });
-
-    test("normal", () => {
-      const context = runDirect(testCase);
-      expect(context.result).toBe(testCase.expected);
-    });
-
-    test("call", () => {
-      const context = runDirect(testCase);
-      testCase.call.forEach((f) => f(context));
-    });
-
-    describe("variableFromCommand", () => {
-      test("result", () => {
-        const context = runFromCommand(testCase);
-        expect(context.result).toBe(testCase.expected);
-      });
-
-      test("not call", () => {
-        const context = runFromCommand(testCase);
-        expectNonActorObjectsUnused(context);
-      });
-
-      test("call", () => {
-        const context = runFromCommand(testCase);
-        testCase.call.forEach((f) => f(context));
-      });
-    });
-  });
-};
 
 describe("variableFromActor", () => {
   testCases.forEach((testCase) => {
