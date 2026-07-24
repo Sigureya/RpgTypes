@@ -6,7 +6,17 @@ import type {
 } from "@RpgTypes/rmmz/eventCommand";
 import {
   makeCommandVariableFromMapId,
+  makeCommandVariableFromPartyGold,
   makeCommandVariableFromPartySize,
+  makeCommandVariableFromPartySteps,
+  makeCommandVariableFromPartyAt,
+  makeCommandVariableFromSystemPartyMemberCount,
+  makeCommandVariableFromSystemPlayTime,
+  makeCommandVariableFromSystemTimer,
+  makeCommandVariableFromSystemSaveCount,
+  makeCommandVariableFromSystemBattleCount,
+  makeCommandVariableFromSystemWinCount,
+  makeCommandVariableFromSystemEscapeCount,
 } from "@RpgTypes/rmmz/eventCommand";
 import type {
   Rmmz_MapId,
@@ -256,7 +266,14 @@ const runTestCase = (testCase: TestCase) => {
 const testCases: TestCase[] = [
   {
     name: "mapId",
-    call: [expectPartyUnused, expectSystemUnused, expectTimerUnused],
+    call: [
+      expectPartyUnused,
+      expectSystemUnused,
+      expectTimerUnused,
+      ({ map }) => {
+        expect(map.mapId).toHaveBeenCalledOnce();
+      },
+    ],
     params: [22, 22, 0, 3, 7, 0],
     expected: MOCK_MAP_ID,
     command: makeCommandVariableFromMapId({
@@ -265,11 +282,82 @@ const testCases: TestCase[] = [
   },
   {
     name: "party size",
-    call: [expectMapUnused, expectSystemUnused, expectTimerUnused],
+    call: [
+      expectMapUnused,
+      expectSystemUnused,
+      expectTimerUnused,
+      ({ party }) => {
+        expect(party.size).toHaveBeenCalledOnce();
+        expect(party.gold).not.toHaveBeenCalled();
+        expect(party.steps).not.toHaveBeenCalled();
+        expect(party.members).not.toHaveBeenCalled();
+        expect(party.numItems).not.toHaveBeenCalled();
+      },
+    ],
     params: [123, 123, 0, 3, 7, 1],
     expected: MOCK_PARTY_SIZE,
     command: makeCommandVariableFromPartySize({
       startId: 123,
+    }),
+  },
+  {
+    name: "party gold",
+    call: [
+      expectMapUnused,
+      expectSystemUnused,
+      expectTimerUnused,
+      ({ party }) => {
+        expect(party.gold).toHaveBeenCalledOnce();
+        expect(party.steps).not.toHaveBeenCalled();
+        expect(party.size).not.toHaveBeenCalled();
+        expect(party.members).not.toHaveBeenCalled();
+        expect(party.numItems).not.toHaveBeenCalled();
+      },
+    ],
+    params: [64, 64, 0, 3, 7, 2],
+    expected: MOCK_PARTY_GOLD,
+    command: makeCommandVariableFromPartyGold({
+      startId: 64,
+    }),
+  },
+  {
+    name: "party steps",
+    call: [
+      expectMapUnused,
+      expectSystemUnused,
+      expectTimerUnused,
+      ({ party }) => {
+        expect(party.steps).toHaveBeenCalledOnce();
+        expect(party.gold).not.toHaveBeenCalled();
+        expect(party.size).not.toHaveBeenCalled();
+        expect(party.members).not.toHaveBeenCalled();
+        expect(party.numItems).not.toHaveBeenCalled();
+      },
+    ],
+    params: [88, 88, 0, 3, 7, 3],
+    expected: MOCK_PARTY_STEPS,
+    command: makeCommandVariableFromPartySteps({
+      startId: 88,
+    }),
+  },
+  {
+    name: "system playtime",
+    call: [
+      expectMapUnused,
+      expectPartyUnused,
+      expectTimerUnused,
+      ({ system }) => {
+        expect(system.playtime).toHaveBeenCalledOnce();
+        expect(system.saveCount).not.toHaveBeenCalled();
+        expect(system.battleCount).not.toHaveBeenCalled();
+        expect(system.winCount).not.toHaveBeenCalled();
+        expect(system.escapeCount).not.toHaveBeenCalled();
+      },
+    ],
+    params: [99, 99, 0, 3, 7, 4],
+    expected: MOCK_PLAYTIME,
+    command: makeCommandVariableFromSystemPlayTime({
+      startId: 99,
     }),
   },
 ];
