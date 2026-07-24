@@ -12,6 +12,7 @@ import type {
   Rmmz_Temp,
   Rmmz_Timer,
   Rmmz_Variables,
+  Rmmz_VariableSourceParty,
 } from "@RpgTypes/rmmzRuntime";
 import {
   variableFromActor,
@@ -25,10 +26,7 @@ import {
   variableFromWeapon,
   variableFromPartyAt,
 } from "./party";
-import type {
-  Rmmz_VariabeSourceParty,
-  Rmmz_VariableSourceProvider,
-} from "./types";
+import type { Rmmz_VariableSourceProvider } from "./types";
 
 export const variableFromCommand = (
   { parameters }: Command_ControlVariables,
@@ -36,7 +34,7 @@ export const variableFromCommand = (
   variables: Rmmz_Variables,
   temp: Rmmz_Temp,
   map: Rmmz_MapId,
-  party: Rmmz_VariabeSourceParty,
+  party: Rmmz_VariableSourceParty,
   system: Rmmz_SystemCounter,
   timer: Rmmz_Timer,
   fallback: number = 0,
@@ -72,7 +70,7 @@ export const variableFromGameData = (
   provider: Rmmz_VariableSourceProvider,
   temp: Rmmz_Temp,
   map: Rmmz_MapId,
-  party: Rmmz_VariabeSourceParty,
+  party: Rmmz_VariableSourceParty,
   system: Rmmz_SystemCounter,
   timer: Rmmz_Timer,
   fallback: number = 0,

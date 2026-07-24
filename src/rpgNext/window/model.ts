@@ -9,6 +9,6 @@ export interface WindowModelXX<T, Arg> {
   makeItemList(arg: Arg): T[];
 }
 
-const xxx = (party: Rmmz_UnitPlayer, actor: Rmmz_ActorEquiper) => {
-  const weapons = party.weapons();
-};
+// const xxx = (party: Rmmz_UnitPlayer, actor: Rmmz_ActorEquiper) => {
+//   const weapons = party.weapons();
+// };

@@ -16,11 +16,11 @@ import {
   makeCommandVariableFromPartySteps,
   makeCommandVariableFromWeapon,
 } from "@RpgTypes/rmmz/eventCommand";
-import type { Rmmz_VariabeSourceParty } from "@RpgTypes/rmmzFunctional/command/variable/types";
 import type {
   Rmmz_Interpreter,
   Rmmz_Party,
   Rmmz_Variables,
+  Rmmz_VariableSourceParty,
 } from "@RpgTypes/rmmzRuntime";
 import type { FakeMap } from "./fakes/types";
 import { Game_Interpreter } from "./rmmz_objects";
@@ -41,7 +41,7 @@ const PARTY_FUNCTION_KEYS = [
   "numItems",
   "size",
   "members",
-] as const satisfies (keyof Rmmz_VariabeSourceParty)[];
+] as const satisfies (keyof Rmmz_VariableSourceParty)[];
 
 const mockItems = [
   null,
@@ -266,7 +266,7 @@ const testCases: TestCase[] = [
     testName: "get item amount :item[0]->null",
     fnCalls: { party: ["numItems"] },
     setValues: [{ id: 150, value: 0 }],
-    command: makeCommandVariableFromItemData({ startId: 150, itemId: 0 }),
+    command: makeCommandVariableFromItemData({ variableId: 150, itemId: 0 }),
     commandLiteral: {
       code: 122,
       indent: 0,
@@ -278,7 +278,7 @@ const testCases: TestCase[] = [
     testName: "get item amount :item[1]->Food",
     fnCalls: { party: ["numItems"] },
     setValues: [{ id: 150, value: MOCK_ITEM_AMOUNT }],
-    command: makeCommandVariableFromItemData({ startId: 150, itemId: 1 }, 2),
+    command: makeCommandVariableFromItemData({ variableId: 150, itemId: 1 }, 2),
     commandLiteral: {
       code: 122,
       indent: 2,
@@ -290,7 +290,7 @@ const testCases: TestCase[] = [
     testName: "get item amount : item[2]->Treasure",
     fnCalls: { party: ["numItems"] },
     setValues: [{ id: 150, value: MOCK_ITEM_AMOUNT }],
-    command: makeCommandVariableFromItemData({ startId: 150, itemId: 2 }),
+    command: makeCommandVariableFromItemData({ variableId: 150, itemId: 2 }),
     commandLiteral: {
       code: 122,
       indent: 0,

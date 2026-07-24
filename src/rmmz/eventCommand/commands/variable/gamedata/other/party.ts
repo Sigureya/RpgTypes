@@ -7,7 +7,7 @@ import type {
   ParamArray_VariableFromOther,
 } from "./types";
 
-export const makeCommandVariablePartyAt = (
+export const makeCommandVariableFromPartyAt = (
   params: ParamObject_VariableFromPartyAt,
   indent: number = 0,
 ): Command_ControlVariables_FromPartyAt => {
@@ -45,7 +45,7 @@ export const makeCommandVariableFromPartySize = (
     indent,
     parameters: [
       params.startId,
-      params.endId ?? params.startId,
+      params.startId,
       params.operation ?? 0,
       3,
       7,
@@ -81,7 +81,7 @@ const paramToArray = (
   param: number,
 ): ParamArray_VariableFromOther => [
   params.startId,
-  params.endId ?? params.startId,
+  params.startId,
   params.operation ?? 0,
   3,
   7,

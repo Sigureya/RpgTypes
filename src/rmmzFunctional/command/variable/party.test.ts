@@ -10,7 +10,7 @@ import {
   makeCommandVariableFromItemData,
   makeCommandVariableFromWeapon,
   makeCommandVariableFromArmor,
-  makeCommandVariablePartyAt,
+  makeCommandVariableFromPartyAt,
 } from "@RpgTypes/rmmz/eventCommand";
 import type { Data_Armor, Data_Item, Data_Weapon } from "@RpgTypes/rmmz/rpg";
 import {
@@ -88,7 +88,7 @@ describe("variableFromPartyAt", () => {
     0, // memberIndex
   ];
   test("makeCommand", () => {
-    const command = makeCommandVariablePartyAt({
+    const command = makeCommandVariableFromPartyAt({
       variableId: 22,
       memberIndex: 0,
     });
@@ -105,7 +105,7 @@ describe("variableFromPartyAt", () => {
     expect(party.size).not.toHaveBeenCalled();
   });
   test("out of range", () => {
-    const command = makeCommandVariablePartyAt({
+    const command = makeCommandVariableFromPartyAt({
       variableId: 22,
       memberIndex: 10,
     });
