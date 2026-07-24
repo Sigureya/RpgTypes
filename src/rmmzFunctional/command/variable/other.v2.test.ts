@@ -9,8 +9,6 @@ import {
   makeCommandVariableFromPartyGold,
   makeCommandVariableFromPartySize,
   makeCommandVariableFromPartySteps,
-  makeCommandVariableFromPartyAt,
-  makeCommandVariableFromSystemPartyMemberCount,
   makeCommandVariableFromSystemPlayTime,
   makeCommandVariableFromSystemTimer,
   makeCommandVariableFromSystemSaveCount,
@@ -358,6 +356,106 @@ const testCases: TestCase[] = [
     expected: MOCK_PLAYTIME,
     command: makeCommandVariableFromSystemPlayTime({
       startId: 99,
+    }),
+  },
+  {
+    name: "system timer",
+    call: [
+      expectMapUnused,
+      expectPartyUnused,
+      expectSystemUnused,
+      ({ timer }) => {
+        expect(timer.seconds).toHaveBeenCalledOnce();
+        expect(timer.start).not.toHaveBeenCalled();
+        expect(timer.stop).not.toHaveBeenCalled();
+        expect(timer.isWorking).not.toHaveBeenCalled();
+        expect(timer.frames).not.toHaveBeenCalled();
+      },
+    ],
+    params: [100, 100, 0, 3, 7, 5],
+    expected: MOCK_TIMER_SECONDS,
+    command: makeCommandVariableFromSystemTimer({
+      startId: 100,
+    }),
+  },
+  {
+    name: "system save count",
+    call: [
+      expectMapUnused,
+      expectPartyUnused,
+      expectTimerUnused,
+      ({ system }) => {
+        expect(system.saveCount).toHaveBeenCalledOnce();
+        expect(system.playtime).not.toHaveBeenCalled();
+        expect(system.battleCount).not.toHaveBeenCalled();
+        expect(system.winCount).not.toHaveBeenCalled();
+        expect(system.escapeCount).not.toHaveBeenCalled();
+      },
+    ],
+    params: [101, 101, 0, 3, 7, 6],
+    expected: MOCK_SAVE_COUNT,
+    command: makeCommandVariableFromSystemSaveCount({
+      startId: 101,
+    }),
+  },
+  {
+    name: "system battle count",
+    call: [
+      expectMapUnused,
+      expectPartyUnused,
+      expectTimerUnused,
+      ({ system }) => {
+        expect(system.battleCount).toHaveBeenCalledOnce();
+        expect(system.playtime).not.toHaveBeenCalled();
+        expect(system.saveCount).not.toHaveBeenCalled();
+        expect(system.winCount).not.toHaveBeenCalled();
+        expect(system.escapeCount).not.toHaveBeenCalled();
+      },
+    ],
+    params: [102, 102, 0, 3, 7, 7],
+    expected: MOCK_BATTLE_COUNT,
+    command: makeCommandVariableFromSystemBattleCount({
+      startId: 102,
+    }),
+  },
+  {
+    name: "system win count",
+    call: [
+      expectMapUnused,
+      expectPartyUnused,
+      expectTimerUnused,
+      ({ system }) => {
+        expect(system.winCount).toHaveBeenCalledOnce();
+        expect(system.playtime).not.toHaveBeenCalled();
+        expect(system.saveCount).not.toHaveBeenCalled();
+        expect(system.battleCount).not.toHaveBeenCalled();
+        expect(system.escapeCount).not.toHaveBeenCalled();
+      },
+    ],
+    params: [103, 103, 0, 3, 7, 8],
+    expected: MOCK_WIN_COUNT,
+    command: makeCommandVariableFromSystemWinCount({
+      startId: 103,
+    }),
+  },
+  {
+    name: "system escape count",
+    call: [
+      expectMapUnused,
+      expectPartyUnused,
+      expectTimerUnused,
+      ({ system }) => {
+        expect(system.escapeCount).toHaveBeenCalledOnce();
+        expect(system.playtime).not.toHaveBeenCalled();
+        expect(system.saveCount).not.toHaveBeenCalled();
+        expect(system.battleCount).not.toHaveBeenCalled();
+        expect(system.winCount).not.toHaveBeenCalled();
+      },
+    ],
+    params: [104, 104, 0, 3, 7, 9],
+    expected: MOCK_ESCAPE_COUNT,
+    command: makeCommandVariableFromSystemEscapeCount({
+      startId: 104,
     }),
   },
 ];
