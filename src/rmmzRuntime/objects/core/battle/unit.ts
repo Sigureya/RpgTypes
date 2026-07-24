@@ -13,7 +13,8 @@ import type {
 export interface Rmmz_Unit<Battler = Rmmz_Battler>
   extends Rmmz_UnitTpb, Rmmz_BattlerContainer<Battler> {}
 
-export interface Rmmz_Party extends Rmmz_Unit<Rmmz_Actor>, Rmmz_UnitPlayer {
+export interface Rmmz_Party
+  extends Rmmz_Unit<Rmmz_Actor>, Rmmz_UnitPlayer<Rmmz_Actor> {
   canInput(): boolean;
   _actors: number[];
   size(): number;
