@@ -10,7 +10,7 @@ import type {
   Rmmz_VariableSourceProvider,
 } from "./types";
 
-export const variableFromParty = (
+export const variableFromPartyAt = (
   params: ParamArray_VariableFromPartyAt,
   party: Rmmz_VariabeSourceParty,
 ): number => {
