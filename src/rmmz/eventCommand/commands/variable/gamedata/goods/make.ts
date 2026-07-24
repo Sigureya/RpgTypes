@@ -47,8 +47,8 @@ export const makeCommandVariableFromArmor = (
 const itemParamToArray = (
   params: ParamObject_VariableFromItem,
 ): ParamArray_VariableFromItem => [
-  params.startId,
-  params.endId ?? params.startId,
+  params.variableId,
+  params.variableId,
   params.operation ?? 0,
   3,
   0,
