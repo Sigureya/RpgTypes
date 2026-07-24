@@ -458,6 +458,22 @@ const testCases: TestCase[] = [
       startId: 104,
     }),
   },
+  {
+    name: "fallback",
+    call: [
+      expectMapUnused,
+      expectPartyUnused,
+      expectSystemUnused,
+      expectTimerUnused,
+    ],
+    params: [105, 105, 0, 3, 7, 99],
+    expected: MOCK_FALLBACK,
+    command: {
+      code: 122,
+      indent: 0,
+      parameters: [105, 105, 0, 3, 7, 99],
+    },
+  },
 ];
 
 describe("variableFromOther", () => {
