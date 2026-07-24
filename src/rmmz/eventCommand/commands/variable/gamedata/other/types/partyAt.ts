@@ -13,8 +13,7 @@ export interface Command_ControlVariables_FromPartyAt extends EventCommandLike<
 }
 
 export interface ParamObject_VariableFromPartyAt {
-  startId: number;
-  endId?: number;
+  variableId: number;
   memberIndex: number;
 }
 

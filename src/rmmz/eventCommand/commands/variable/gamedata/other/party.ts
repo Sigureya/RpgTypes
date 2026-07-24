@@ -15,8 +15,8 @@ export const makeCommandVariablePartyAt = (
     code: CONTROL_VARIABLES,
     indent,
     parameters: [
-      params.startId,
-      params.endId ?? params.startId,
+      params.variableId,
+      params.variableId,
       0,
       3,
       6,
