@@ -7,7 +7,7 @@ import type {
   ParamArray_VariableFromOther,
 } from "./types";
 
-export const makeCommandVariablePartyAt = (
+export const makeCommandVariableFromPartyAt = (
   params: ParamObject_VariableFromPartyAt,
   indent: number = 0,
 ): Command_ControlVariables_FromPartyAt => {
