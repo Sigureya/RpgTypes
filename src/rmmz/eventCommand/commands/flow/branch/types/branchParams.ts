@@ -2,6 +2,9 @@ import type { ValueOf } from "@RpgTypes/libs/templates/valueOf";
 import type { Toggle, Operation_PlusMinus } from "@RpgTypes/rmmz/utils";
 import type { BranchParam_Actor } from "./actor";
 import type { BranchCodeTable } from "./branch";
+import type { BranchParam_Button } from "./button";
+import type { BranchParam_Character } from "./character";
+import type { BranchParam_Enemy } from "./enemy";
 import type { BranchParam_Variable } from "./variable";
 
 export type BranchParam_Switch = [
@@ -20,16 +23,6 @@ export type BranchParam_Timer = [
   branchCode: BranchCodeTable["TIMER"],
   time: number,
   operation: ValueOf<Operation_PlusMinus>,
-];
-
-export type BranchParam_Enemy = [
-  branchCode: BranchCodeTable["ENEMY"],
-  enemyId: number,
-];
-
-export type BranchParam_Character = [
-  branchCode: BranchCodeTable["CHARACTER"],
-  characterId: number,
 ];
 
 export type BranchParam_Gold = [
@@ -53,11 +46,6 @@ export type BranchParam_Armor = [
   branchCode: BranchCodeTable["ARMOR"],
   armorId: number,
   includeEquip: boolean,
-];
-
-export type BranchParam_Button = [
-  branchCode: BranchCodeTable["BUTTON"],
-  buttonId: number,
 ];
 
 export type BranchParam_Script = [
