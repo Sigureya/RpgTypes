@@ -1,33 +1,26 @@
 import type {
-  Command_BranchByActor,
   BranchByActorClass,
   BranchByActorName,
   BranchByActorSkill,
   BranchByActorWeapon,
   BranchByActorArmor,
-  Data_Class,
-  Data_Armor,
-  Data_Weapon,
+  BranchParam_Actor,
 } from "@RpgTypes/rmmz";
-import type { Rmmz_Actor, Rmmz_Party } from "@RpgTypes/rmmzRuntime";
-
-export interface BranchDataProvider {
-  gameActor(actorId: number): Rmmz_Actor | null | undefined;
-  classData(classId: number): Data_Class | null | undefined;
-  armorData(armorId: number): Data_Armor | null | undefined;
-  weaponData(weaponId: number): Data_Weapon | null | undefined;
-}
+import type { Rmmz_Members } from "@RpgTypes/rmmzRuntime";
+import type {
+  Rmmz_BranchSourceActor,
+  Rmmz_BranchSourceProvider,
+} from "./types";
 
 export const evaluateActorBranch = (
-  { parameters }: Command_BranchByActor,
-  party: Rmmz_Party,
-  provider: BranchDataProvider,
+  parameters: BranchParam_Actor,
+  party: Rmmz_Members<Rmmz_BranchSourceActor>,
+  provider: Rmmz_BranchSourceProvider,
 ): boolean => {
   const actor = provider.gameActor(parameters[1]);
   if (!actor) {
     return false;
   }
-  // TSの都合でif文の連続になっている。C#移植の場合はイベントコマンドの構造自体が変わるので、この関数は使わない
   switch (parameters[2]) {
     case 0:
       return party.members().includes(actor);
@@ -50,7 +43,7 @@ export const evaluateActorBranch = (
 
 const branchByActorName = (
   params: BranchByActorName,
-  actor: Rmmz_Actor,
+  actor: Rmmz_BranchSourceActor,
 ): boolean => {
   // C#移植メモ ここの実装は大変問題があるため、C#向けの実装は全然違うものを用意する
   const name: string = params[3];
@@ -59,8 +52,8 @@ const branchByActorName = (
 
 const branchByActorClass = (
   params: BranchByActorClass,
-  actor: Rmmz_Actor,
-  provider: BranchDataProvider,
+  actor: Rmmz_BranchSourceActor,
+  provider: Rmmz_BranchSourceProvider,
 ): boolean => {
   // この実装は大変非効率だが、ツクールMZ本体と同じにする必要がある
   const classObj = provider.classData(params[3]);
@@ -69,15 +62,15 @@ const branchByActorClass = (
 
 const branchByActorSkill = (
   params: BranchByActorSkill,
-  actor: Rmmz_Actor,
+  actor: Rmmz_BranchSourceActor,
 ): boolean => {
   return actor.hasSkill(params[3]);
 };
 
 const branchByActorWeapon = (
   params: BranchByActorWeapon,
-  actor: Rmmz_Actor,
-  provider: BranchDataProvider,
+  actor: Rmmz_BranchSourceActor,
+  provider: Rmmz_BranchSourceProvider,
 ): boolean => {
   const weaponObj = provider.weaponData(params[3]);
   return actor.hasWeapon(weaponObj);
@@ -85,8 +78,8 @@ const branchByActorWeapon = (
 
 const branchByActorArmor = (
   params: BranchByActorArmor,
-  actor: Rmmz_Actor,
-  provider: BranchDataProvider,
+  actor: Rmmz_BranchSourceActor,
+  provider: Rmmz_BranchSourceProvider,
 ): boolean => {
   return actor.hasArmor(provider.armorData(params[3]));
 };

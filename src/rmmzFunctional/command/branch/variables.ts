@@ -1,17 +1,20 @@
-import type { Command_BranchByVariable } from "@RpgTypes/rmmz/eventCommand";
+import type {
+  BranchParam_VariableWithOperandConstant,
+  BranchParam_VariableWithOperandVariable,
+} from "@RpgTypes/rmmz/eventCommand";
 import type { Rmmz_Variables } from "@RpgTypes/rmmzRuntime";
 
 export const evaluteBranchByVariable = (
-  command: Command_BranchByVariable,
+  parameters:
+    | BranchParam_VariableWithOperandConstant
+    | BranchParam_VariableWithOperandVariable,
   variables: Rmmz_Variables,
 ): boolean => {
-  const leftValue = variables.value(command.parameters[1]);
+  const leftValue = variables.value(parameters[1]);
   const rightValue =
-    command.parameters[2] === 0
-      ? command.parameters[3]
-      : variables.value(command.parameters[3]);
+    parameters[2] === 0 ? parameters[3] : variables.value(parameters[3]);
 
-  switch (command.parameters[4]) {
+  switch (parameters[4]) {
     case 0:
       return leftValue === rightValue;
     case 1:

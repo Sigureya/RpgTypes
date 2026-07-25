@@ -3,9 +3,6 @@ import type { BranchByActorName, BranchParam_Actor } from "./actor";
 import type {
   BranchParam_Switch,
   BranchParam_Armor,
-  BranchParam_Button,
-  BranchParam_Character,
-  BranchParam_Enemy,
   BranchParam_Gold,
   BranchParam_Item,
   BranchParam_Script,
@@ -14,6 +11,9 @@ import type {
   BranchParam_Timer,
   BranchParam_Weapon,
 } from "./branchParams";
+import type { BranchParam_Button } from "./button";
+import type { BranchParam_Character } from "./character";
+import type { BranchParam_Enemy } from "./enemy";
 import type { BranchParam_Variable } from "./variable";
 
 export type CommnandUnion_Branch =

@@ -1,8 +1,8 @@
 import type {
-  Command_BranchByItem,
-  Command_BranchByWeapon,
-  Command_BranchByArmor,
-  Command_BranchByGold,
+  BranchParam_Gold,
+  BranchParam_Item,
+  BranchParam_Weapon,
+  BranchParam_Armor,
 } from "@RpgTypes/rmmz/eventCommand";
 import type { Data_Item, Data_Weapon, Data_Armor } from "@RpgTypes/rmmz/rpg";
 import type { Rmmz_Party } from "@RpgTypes/rmmzRuntime";
@@ -11,12 +11,12 @@ import type { Rmmz_Party } from "@RpgTypes/rmmzRuntime";
 type Rmmz_PartyHasItem = Pick<Rmmz_Party, "hasItem" | "gold">;
 
 export const evaluteBranchByGold = (
-  command: Command_BranchByGold,
+  parameters: BranchParam_Gold,
   party: Rmmz_PartyHasItem,
 ): boolean => {
   const gold = party.gold();
-  const targetGold: number = command.parameters[1];
-  switch (command.parameters[2]) {
+  const targetGold: number = parameters[1];
+  switch (parameters[2]) {
     case 0:
       return gold >= targetGold;
     case 1:
@@ -27,11 +27,11 @@ export const evaluteBranchByGold = (
 };
 
 export const evaluteBranchByItem = (
-  command: Command_BranchByItem,
+  parameters: BranchParam_Item,
   party: Rmmz_PartyHasItem,
   fn: (itemId: number) => Data_Item | null | undefined,
 ): boolean => {
-  const item = fn(command.parameters[1]);
+  const item = fn(parameters[1]);
   if (!item) {
     return false;
   }
@@ -39,25 +39,25 @@ export const evaluteBranchByItem = (
 };
 
 export const evaluteBranchByWeapon = (
-  command: Command_BranchByWeapon,
+  parameters: BranchParam_Weapon,
   party: Rmmz_PartyHasItem,
   fn: (weaponId: number) => Data_Weapon | null | undefined,
 ): boolean => {
-  const weapon = fn(command.parameters[1]);
+  const weapon = fn(parameters[1]);
   if (!weapon) {
     return false;
   }
-  return party.hasItem(weapon, command.parameters[2]);
+  return party.hasItem(weapon, parameters[2]);
 };
 
 export const evaluteBranchByArmor = (
-  command: Command_BranchByArmor,
+  parameters: BranchParam_Armor,
   party: Rmmz_PartyHasItem,
   fn: (armorId: number) => Data_Armor | null | undefined,
 ): boolean => {
-  const armor = fn(command.parameters[1]);
+  const armor = fn(parameters[1]);
   if (!armor) {
     return false;
   }
-  return party.hasItem(armor, command.parameters[2]);
+  return party.hasItem(armor, parameters[2]);
 };
