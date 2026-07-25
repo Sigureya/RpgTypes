@@ -1,27 +1,23 @@
 import type {
-  Command_BranchBySelfSwitch,
-  Command_BranchBySwitch,
+  BranchParam_SelfSwitch,
+  BranchParam_Switch,
 } from "@RpgTypes/rmmz/eventCommand";
 import type { Rmmz_SelfSwitches, Rmmz_Switches } from "@RpgTypes/rmmzRuntime";
 
 export const evaluteSwitchBranch = (
-  command: Command_BranchBySwitch,
+  parameters: BranchParam_Switch,
   switches: Rmmz_Switches,
 ): boolean => {
-  const value = switches.value(command.parameters[1]);
-  return value === (command.parameters[2] === 0);
+  const value = switches.value(parameters[1]);
+  return value === (parameters[2] === 0);
 };
 
-export const evaluteSetSwitchBranch = (
-  command: Command_BranchBySelfSwitch,
+export const evaluteSelfSwitchBranch = (
+  parameters: BranchParam_SelfSwitch,
   switches: Rmmz_SelfSwitches,
   eventId: number,
 ): boolean => {
-  const key: [number, number, string] = [
-    eventId,
-    eventId,
-    command.parameters[1],
-  ];
+  const key: [number, number, string] = [eventId, eventId, parameters[1]];
   const value: boolean = switches.value(key);
-  return value === (command.parameters[2] === 0);
+  return value === (parameters[2] === 0);
 };
