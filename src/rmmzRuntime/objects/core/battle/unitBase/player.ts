@@ -14,9 +14,14 @@ export interface Rmmz_VariableSourceParty<
   size(): number;
 }
 
-export interface Rmmz_UnitPlayer<
-  Battler extends { actorId(): number },
-> extends Rmmz_VariableSourceParty<Battler> {
+export interface Rmmz_BranchSourceParty<Battler> {
+  members(): Battler[];
+  hasItem(item: Data_AnyGoodsUnion, includeEquip?: boolean): boolean;
+  gold(): number;
+}
+
+export interface Rmmz_UnitPlayer<Battler extends { actorId(): number }>
+  extends Rmmz_VariableSourceParty<Battler>, Rmmz_BranchSourceParty<Battler> {
   steps(): number;
   gold(): number;
   gainGold(amount: number): void;
