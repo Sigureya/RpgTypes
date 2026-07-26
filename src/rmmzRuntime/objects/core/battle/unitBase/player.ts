@@ -20,7 +20,9 @@ export interface Rmmz_BranchSourceParty<Battler> {
   gold(): number;
 }
 
-export interface Rmmz_UnitPlayer<Battler extends { actorId(): number }>
+export interface Rmmz_UnitPlayer<
+  Battler extends { actorId(): number } = { actorId(): number },
+>
   extends Rmmz_VariableSourceParty<Battler>, Rmmz_BranchSourceParty<Battler> {
   steps(): number;
   gold(): number;
