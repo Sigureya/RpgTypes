@@ -13,7 +13,7 @@ export interface Command_ChangeGold extends EventCommandLike<
 
 export type ParamArray_ChangeGold = [
   operation: ValueOf<Operation_PlusMinus>,
-  operandType: number,
+  operandType: 0 | 1,
   operand: number,
 ];
 
