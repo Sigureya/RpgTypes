@@ -1,6 +1,6 @@
 import type { Encounter } from "./types";
 
-const mmm = (
+export const selectEncounters = (
   encounterList: readonly Encounter[],
   fn: (e: Encounter) => boolean,
   random: (max: number) => number,
@@ -9,19 +9,19 @@ const mmm = (
   if (ee.length === 0) {
     return null;
   }
-  const totalWeight: number = ee.reduce(xxx, 0);
+  const totalWeight: number = ee.reduce(calcWeightTotal, 0);
   if (totalWeight <= 0) {
     return null;
   }
   const vv = random(totalWeight);
-  return ggg(vv, ee);
+  return selectByWeight(vv, ee);
 };
 
-const xxx = (acc: number, e: Encounter): number => {
+const calcWeightTotal = (acc: number, e: Encounter): number => {
   return acc + e.weight;
 };
 
-const ggg = (
+const selectByWeight = (
   w: number,
   encounterList: readonly Encounter[],
 ): Encounter | null => {
