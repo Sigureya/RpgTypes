@@ -6,5 +6,5 @@ export * from "./message";
 export type * from "./system/system";
 export type * from "./temp";
 export type * from "./types";
-export type * from "./variables";
+export * from "./variables";
 export type { Rmmz_Timer } from "./timer";
