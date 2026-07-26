@@ -2,10 +2,14 @@ import type { Encounter } from "./types";
 
 export const selectEncounters = (
   encounterList: readonly Encounter[],
-  fn: (e: Encounter) => boolean,
+  isEncounterValid: (
+    e: Encounter,
+    index: number,
+    list: ReadonlyArray<Encounter>,
+  ) => boolean,
   random: (max: number) => number,
 ): Encounter | null => {
-  const ee = encounterList.filter(fn);
+  const ee = encounterList.filter(isEncounterValid);
   if (ee.length === 0) {
     return null;
   }
